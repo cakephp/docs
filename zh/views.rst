@@ -727,5 +727,5 @@ element 方法来输出::
     views/helpers
 
 .. meta::
-    :title lang=zh_CN: Views
-    :keywords lang=zh_CN: view logic,csv file,response elements,code elements,default extension,json,flash object,remote application,twig,subclass,ajax,reply,soap,functionality,cakephp,audience,xml,mvc
+    :title lang=zh: Views
+    :keywords lang=zh: view logic,csv file,response elements,code elements,default extension,json,flash object,remote application,twig,subclass,ajax,reply,soap,functionality,cakephp,audience,xml,mvc

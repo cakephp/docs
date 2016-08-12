@@ -12,9 +12,10 @@
 错误配置
 ========
 
-错误配置在应用程序的 ``app/Config/core.php`` 文件中，可以定义一个当每次程序遇到错误被触发的回调函数。
-异常配置部分见 :doc:`/development/exceptions` ，回调函数可以是任何PHP调用的函数，也可以是匿名函数。
-默认的错误处理配置可以是这样::
+错误配置在应用程序的 ``app/Config/core.php`` 文件中。可以定义一个回调函数，每次当
+应用程序触发任何 PHP 错误时就会调用。:doc:`/development/exceptions` 的处理是
+分开的。回调函数可以是任何 PHP 的回调函数，包括匿名函数。默认的错误处理配置可以是
+这样的::
 
     Configure::write('Error', array(
         'handler' => 'ErrorHandler::handleError',
@@ -101,5 +102,5 @@
 若要保持默认的致命错误行为，可以自定义处理中调用 ``ErrorHandler::handleFatalError()``。
 
 .. meta::
-    :title lang=zh_CN: Error Handling
-    :keywords lang=zh_CN: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks,fatal error
+    :title lang=zh: Error Handling
+    :keywords lang=zh: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks,fatal error

@@ -71,7 +71,8 @@ username和password列，CakePHP能够自动配置好实现用户登录的大部
         }
 
         public function view($id = null) {
-            if (!$this->User->exists($id)) {
+            $this->User->id = $id;
+            if (!$this->User->exists()) {
                 throw new NotFoundException(__('Invalid user'));
             }
             $this->set('user', $this->User->findById($id));
@@ -110,7 +111,7 @@ username和password列，CakePHP能够自动配置好实现用户登录的大部
         }
 
         public function delete($id = null) {
-            // Prior to 2.5 use
+            // 在 2.5 版本之前，请使用
             // $this->request->onlyAllow('post');
 
             $this->request->allowMethod('post');
@@ -403,5 +404,5 @@ AppController 控制器中添加更普遍的规则。
 
 
 .. meta::
-    :title lang=zh_CN: Simple Authentication and Authorization Application
-    :keywords lang=zh_CN: auto increment,authorization application,model user,array,conventions,authentication,urls,cakephp,delete,doc,columns
+    :title lang=zh: Simple Authentication and Authorization Application
+    :keywords lang=zh: auto increment,authorization application,model user,array,conventions,authentication,urls,cakephp,delete,doc,columns

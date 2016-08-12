@@ -1,7 +1,7 @@
 测试
 ####
 
-CakePHP 内置带有全面的测试支持。CakePHP 自带有与 `PHPUnit <http://phpunit.de>`_ 
+CakePHP 内置带有全面的测试支持。CakePHP 自带有与 `PHPUnit <http://phpunit.de>`_
 的集成。除了 PHPUnit 提供的特性，CakePHP 提供了一些额外的功能，使得测试更为容易。
 本节将介绍 PHPUnit 的安装，开始进行单元测试，以及如何使用 CakePHP 提供的扩展。
 
@@ -34,20 +34,20 @@ CakePHP 使用 PHPUnit 作为其底层测试框架。PHPUnit 是 PHP 单元测�
 
     根据你系统的配置，你可能需要用 ``sudo`` 运行上面的命令。
 
-一旦用 PEAR 安装程序安装了 PHPUnit，应当确认 PHPUnit 库在 PHP 的 
-``include_path`` 中。为此你可以检查 php.ini 文件，确保 PHPUnit 的文件在 
-``include_path`` 的其中一个目录中。
+.. note::
+    在 CakePHP 2.5.7 及其后版本，可以把 phar 文件直接放在 vendors 或者
+    App/Vendor 目录。
 
 .. tip::
 
-    当使用 PHPUnit 3.6+ 时，所有的输出都会被吞没。如果使用 CLI，可以添加 
-    ``--debug`` 修饰符；如果使用 web 运行器来显示输出，可以添加 ``&debug=1`` 
+    当使用 PHPUnit 3.6+ 时，所有的输出都会被吞没。如果使用 CLI，可以添加
+    ``--debug`` 修饰符；如果使用 web 运行器来显示输出，可以添加 ``&debug=1``
     到网址中。
 
 测试数据库的设置
 ================
 
-记得在运行任何测试之前，在 ``app/Config/core.php`` 文件中的调试(debug)级别至少是 
+记得在运行任何测试之前，在 ``app/Config/core.php`` 文件中的调试(debug)级别至少是
 1。当调试级别是 0 时，无法通过 web 运行器访问测试。在运行任何测试之前，应当确保
 添加 ``$test`` 数据库配置。该配置被 CakePHP 用于测试夹具(*fixture*)的表和数据::
 
@@ -83,7 +83,7 @@ CakePHP 使用 PHPUnit 作为其底层测试框架。PHPUnit 是 PHP 单元测�
 
 #. 包含测试的 PHP 文件应当位于 ``app/Test/Case/[Type]`` 目录。
 #. 这些文件的文件名应当以 ``Test.php`` 结尾，而不能仅仅是.php。
-#. 含有测试的类应当扩展 ``CakeTestCase``，``ControllerTestCase`` 或 
+#. 含有测试的类应当扩展 ``CakeTestCase``，``ControllerTestCase`` 或
    ``PHPUnit_Framework_TestCase``。
 #. 象其它类名，测试用例类名应当与文件名匹配。文件 ``RouterTest.php`` 应当包含
    ``class RouterTest extends CakeTestCase``。
@@ -199,7 +199,7 @@ CakePHP 提供了 web 界面来运行测试，这样，如果你觉得这样的�
 |Code Coverage|
 
 内嵌的代码覆盖使用绿色行来表示运行过的行。如果把鼠标悬停在一个绿色的行上，会有
-提示说明哪些测试覆盖了该行。红色的行没有运行，即没有被测试检验。灰色的行被 
+提示说明哪些测试覆盖了该行。红色的行没有运行，即没有被测试检验。灰色的行被
 Xdebug 认为是无法运行的代码。
 
 .. _run-tests-from-command-line:
@@ -256,7 +256,7 @@ core 和插件的测试。它也接受通常 PHPUnit 命令行期望的的所有
 
     ./Console/cake test app Model/Article --coverage-html webroot/coverage
 
-这会把覆盖结果放在应用程序的 webroot 目录中。你应当能够在 
+这会把覆盖结果放在应用程序的 webroot 目录中。你应当能够在
 ``http://localhost/your_app/coverage`` 看到结果。
 
 运行使用会话的测试
@@ -303,7 +303,7 @@ CakePHP 使用 ``app/Config/database.php`` 配置文件中的名为 ``$test`` �
 --------
 
 在创建夹具时，主要定义两件事情：如何创建表(表里有哪些字段)，哪些记录要首先填充到
-表中。让我们来创建第一个夹具，用于测试 Article 模型。在 ``app/Test/Fixture`` 
+表中。让我们来创建第一个夹具，用于测试 Article 模型。在 ``app/Test/Fixture``
 目录中创建以下内容的文件 ``ArticleFixture.php``::
 
     class ArticleFixture extends CakeTestFixture {
@@ -356,7 +356,7 @@ CakePHP 使用 ``app/Config/database.php`` 配置文件中的名为 ``$test`` �
      }
 
 ``$useDbConfig`` 属性定义夹具要使用的数据源。如果应用程序使用多个数据源，你应当
-使夹具匹配模型的数据源，但是要加上 ``test_`` 前缀。例如，如果模型使用 ``mydb`` 
+使夹具匹配模型的数据源，但是要加上 ``test_`` 前缀。例如，如果模型使用 ``mydb``
 数据源，夹具就应当使用 ``test_mydb`` 数据源。如果 ``test_mydb`` 连接不存在，模型
 就会使用默认的 ``test`` 数据源。夹具数据源必须前缀以 ``test`` 来降低运行测试时
 意外清除应用程序的所有数据的可能性。
@@ -368,13 +368,16 @@ CakePHP 使用 ``app/Config/database.php`` 配置文件中的名为 ``$test`` �
     CakePHP 内部的数据类型。当前支持：
         - ``string``: 映射为 ``VARCHAR``
         - ``text``: 映射为 ``TEXT``
+        - ``biginteger``: 映射为 ``BIGINT``
         - ``integer``: 映射为 ``INT``
         - ``float``: 映射为 ``FLOAT``
+        - ``decimal``: 映射为 ``DECIMAL``
         - ``datetime``: 映射为 ``DATETIME``
         - ``timestamp``: 映射为 ``TIMESTAMP``
         - ``time``: 映射为 ``TIME``
         - ``date``: 映射为 ``DATE``
         - ``binary``: 映射为 ``BLOB``
+        - ``boolean``: 映射为 ``TINYINT``
 ``key``
     设置为 ``primary`` 来使该字段 AUTO\_INCREMENT，并作为表的主键。
 ``length``
@@ -386,7 +389,7 @@ CakePHP 使用 ``app/Config/database.php`` 配置文件中的名为 ``$test`` �
 
 我们可以定义一组记录，在夹具的表创建之后填充到表里。其格式是相当简单的，
 ``$records`` 为记录数组。``$records`` 中的每项为一行。在每行中，应当是该行的列和
-值的关联数组。只是要记住 $records 数组中的每条记须有 ``$fields`` 数组中指定的 
+值的关联数组。只是要记住 $records 数组中的每条记须有 ``$fields`` 数组中指定的
 **每个** 字段都必须有一个键。如果某条记录的一个字段需要有 ``null`` 值，只需指定
 该键的值为 ``null``。
 
@@ -394,7 +397,7 @@ CakePHP 使用 ``app/Config/database.php`` 配置文件中的名为 ``$test`` �
 --------------
 
 既然夹具的记录声明为类属性，就无法轻易使用函数或者其它动态数据来定义夹具。为了
-解决这个问题，可以在夹具的 init() 方法中定义 ``$records``。例如，如果要所有 
+解决这个问题，可以在夹具的 init() 方法中定义 ``$records``。例如，如果要所有
 created 和 updated 时间标签反应今天的日期，可以这样做::
 
     class ArticleFixture extends CakeTestFixture {
@@ -425,6 +428,9 @@ created 和 updated 时间标签反应今天的日期，可以这样做::
 
 当重载 ``init()`` 方法时，只需记得一定要调用 ``parent::init()``。
 
+.. note::
+
+    请记得在 2.x 版本中，夹具不会处理外键约束。
 
 导入表信息和记录
 ----------------
@@ -433,7 +439,7 @@ created 和 updated 时间标签反应今天的日期，可以这样做::
 测试应用程序。这样再在夹具中定义表和/或记录就是重复的事情了。幸好，有办法从现有
 的模型或表来定义(夹具的)表和/或记录。
 
-让我们从一个例子开始。假定在应用程序中有一个叫做 Article 的模型(映射到名为 
+让我们从一个例子开始。假定在应用程序中有一个叫做 Article 的模型(映射到名为
 articles 的表)，修改前一节的夹具例子(``app/Test/Fixture/ArticleFixture.php``)为::
 
     class ArticleFixture extends CakeTestFixture {
@@ -566,7 +572,7 @@ CakePHP 核心或插件中加载夹具::
         }
     }
 
-现在要建立使用这个模型的测试，但是要通过夹具，来测试模型中的一些功能。CakePHP 
+现在要建立使用这个模型的测试，但是要通过夹具，来测试模型中的一些功能。CakePHP
 测试套件只加载最少的一组文件(来保持测试独立)，这样我们必须由加载模型开始 — 在
 这里就是我们已经定义了的 Article 模型。
 
@@ -589,7 +595,7 @@ CakePHP 核心或插件中加载夹具::
 创建测试方法
 ------------
 
-现在让我们添加一个方法来测试 Article 模型中的函数 published()。编辑文件 
+现在让我们添加一个方法来测试 Article 模型中的函数 published()。编辑文件
 ``app/Test/Case/Model/ArticleTest.php``，让它象这样::
 
     App::uses('Article', 'Model');
@@ -614,10 +620,10 @@ CakePHP 核心或插件中加载夹具::
         }
     }
 
-你可以看到我们添加了方法 ``testPublished()``。我们开始先创建一个 ``Article`` 
+你可以看到我们添加了方法 ``testPublished()``。我们开始先创建一个 ``Article``
 模型的实例，然后运行 ``published()`` 方法。在变量 ``$expected`` 中设置我们期望的
 正确结果(我们知道是因为我们定义了开始要填充到文章(*artilce*)表中的记录。)我们
-使用 ``assertEquals`` 方法测试结果等于我们的期望。欲知如何运行测试用例，请参考 
+使用 ``assertEquals`` 方法测试结果等于我们的期望。欲知如何运行测试用例，请参考
 :ref:`running-tests` 一节。
 
 .. note::
@@ -649,13 +655,13 @@ CakePHP 核心或插件中加载夹具::
 虽然你可以用和助件(*Helper*)、模型(*Model*)和组件(*Component*)相同的方式测试
 控制器类，CakePHP 提供了特别的 ``ControllerTestCase`` 类。用该类作为控制器测试
 用例的基类，让你可以使用 ``testAction()`` 方法，使测试用例更简单。
-``ControllerTestCase`` 让你容易地模拟组件和模型，以及象 
+``ControllerTestCase`` 让你容易地模拟组件和模型，以及象
 :php:meth:`~Controller::redirect()` 这样可能更难测试的方法。
 
 假设你有一个典型的 Articles 控制器和相应的模型。控制器代码是这样的::
 
     App::uses('AppController', 'Controller');
-    
+
     class ArticlesController extends AppController {
         public $helpers = array('Form', 'Html');
 
@@ -678,7 +684,7 @@ CakePHP 核心或插件中加载夹具::
         }
     }
 
-在 ``app/Test/Case/Controller`` 目录中创建一个名为 
+在 ``app/Test/Case/Controller`` 目录中创建一个名为
 ``ArticlesControllerTest.php`` 的文件，放入以下代码::
 
     class ArticlesControllerTest extends ControllerTestCase {
@@ -737,7 +743,7 @@ CakePHP 核心或插件中加载夹具::
 状态是存在的。它不会使代码退出，而是继续运行重定向之后的代码。例如::
 
     App::uses('AppController', 'Controller');
-    
+
     class ArticlesController extends AppController {
         public function add() {
             if ($this->request->is('post')) {
@@ -753,7 +759,7 @@ CakePHP 核心或插件中加载夹具::
 这样写代码::
 
     App::uses('AppController', 'Controller');
-    
+
     class ArticlesController extends AppController {
         public function add() {
             if ($this->request->is('post')) {
@@ -772,7 +778,7 @@ CakePHP 核心或插件中加载夹具::
 
 正如上面 ``testIndexPostData()`` 的例子中看到的，可以用 ``testAction()`` 方法来
 测试 POST 动作，也可以测试 GET 动作。只要提供了 ``data`` 键，提交给控制器的请求
-就会是 POST。默认情况下，所有的请求都是 POST 请求。可以设置 method 键来模拟 GET 
+就会是 POST。默认情况下，所有的请求都是 POST 请求。可以设置 method 键来模拟 GET
 请求::
 
     public function testAdding() {
@@ -834,10 +840,10 @@ CakePHP 核心或插件中加载夹具::
 附带的 Post 模型会有 ``save()`` 方法，而附带的组件会有相应的方法。可以选择不传递
 方法来模拟整个类，就像上面例子中的 Session。
 
-生成的控制器自动作为测试控制器，用于测试。要启用自动生成，设置测试用例的 
+生成的控制器自动作为测试控制器，用于测试。要启用自动生成，设置测试用例的
 ``autoMock`` 变量为 true。如果 ``autoMock`` 为 false，测试就会使用原来的控制器。
 
-生成的控制器中的 response 对象总是被一个不发送头部信息的模拟对象所取代。在使用了 
+生成的控制器中的 response 对象总是被一个不发送头部信息的模拟对象所取代。在使用了
 ``generate()`` 或 ``testAction()`` 方法之后，可以用 ``$this->controller`` 来访问
 控制器对象。
 
@@ -845,7 +851,7 @@ CakePHP 核心或插件中加载夹具::
 ------------
 
 作为最简单的形式，``testAction()`` 方法会在测试控制器(或者自动生成的控制器)包括
-所有模拟的模型和组件之上运行 ``PostsController::index()``。测试的结果保存在 
+所有模拟的模型和组件之上运行 ``PostsController::index()``。测试的结果保存在
 ``vars`` 、 ``contents`` 、 ``view`` 和 ``return`` 属性中。还有 headers 属性供你
 访问已经发送的 ``headers``，让你可以查看重定向::
 
@@ -883,11 +889,11 @@ CakePHP 核心或插件中加载夹具::
 
 
 这个例子展示 ``testAction()`` 和 ``generate()`` 方法稍微复杂一点儿的用法。首先，
-生成测试控制器，模拟 :php:class:`SessionComponent` 组件。现在模拟了 
-SessionComponent 组件，我们就能够在它上面运行测试方法。假设 
+生成测试控制器，模拟 :php:class:`SessionComponent` 组件。现在模拟了
+SessionComponent 组件，我们就能够在它上面运行测试方法。假设
 ``PostsController::add()`` 方法重定向用户到 index，发送一封邮件，设置闪动提示
 消息，测试就会通过。添加了第二个测试对获取 add 表单时进行基本的健全测试。我们
-检查整个渲染的内容，看布局(*layout*)是否加载，并检查视图(*view*)是否有 form 
+检查整个渲染的内容，看布局(*layout*)是否加载，并检查视图(*view*)是否有 form
 标签。如你所见，这些改动极大地增加了你的自由，来测试控制器和容易地模拟控制器类。
 
 在用使用静态方法的模拟对象来测试控制器时，你不得不用另外一种方法来表明对模拟对象
@@ -941,8 +947,8 @@ SessionComponent 组件，我们就能够在它上面运行测试方法。假设
 
 通常大部分应用程序不会直接测试它们的 HTML 代码。这么做经常会导致脆弱、难以维护的
 测试套件，容易遭到破坏。在使用 :php:class:`ControllerTestCase` 编写功能性测试时，
-可以设置 ``return`` 选项为 'view' 来检视渲染的视图内容。虽然有可能使用 
-ControllerTestCase 测试视图内容，更健壮、易于维护的集成/视图测试可以使用象 
+可以设置 ``return`` 选项为 'view' 来检视渲染的视图内容。虽然有可能使用
+ControllerTestCase 测试视图内容，更健壮、易于维护的集成/视图测试可以使用象
 `Selenium webdriver <http://seleniumhq.org>`_ 这样的工具来实现。
 
 
@@ -950,7 +956,7 @@ ControllerTestCase 测试视图内容，更健壮、易于维护的集成/视图
 ========
 
 假设在应用程序中有一个名为 PagematronComponent 的组件。该组件帮我们设置使用它的
-控制器的分页限制。下面是位于 
+控制器的分页限制。下面是位于
 ``app/Controller/Component/PagematronComponent.php`` 的组件例子::
 
     class PagematronComponent extends Component {
@@ -1046,7 +1052,7 @@ ControllerTestCase 测试视图内容，更健壮、易于维护的集成/视图
         }
     }
 
-我们设置小数点为 2 位，小数点分隔符为点，千位分隔符为逗号，在格式化的数字前缀以 
+我们设置小数点为 2 位，小数点分隔符为点，千位分隔符为逗号，在格式化的数字前缀以
 'USD' 字符串。
 
 现在来创建测试::
@@ -1139,8 +1145,8 @@ ControllerTestCase 测试视图内容，更健壮、易于维护的集成/视图
                     /Fixture
 
 插件的测试象普通的测试一样，但要记得在导入类时要使用插件的命名约定。这是本手册
-插件一章中 ``BlogPost`` 模型的测试用例的例子。与其它测试的区别在第一行，导入了 
-'Blog.BlogPost' 模型。也需要对插件夹具(*fixture*)使用前缀 
+插件一章中 ``BlogPost`` 模型的测试用例的例子。与其它测试的区别在第一行，导入了
+'Blog.BlogPost' 模型。也需要对插件夹具(*fixture*)使用前缀
 ``plugin.blog.blog_post``::
 
     App::uses('BlogPost', 'Blog.Model');
@@ -1160,7 +1166,7 @@ ControllerTestCase 测试视图内容，更健壮、易于维护的集成/视图
         }
     }
 
-如果想要在 app 的测试中使用插件夹具，可以在 ``$fixtures`` 数组中使用 
+如果想要在 app 的测试中使用插件夹具，可以在 ``$fixtures`` 数组中使用
 ``plugin.pluginName.fixtureName`` 语法来引用它们。
 
 与 Jenkins 集成
@@ -1171,7 +1177,7 @@ ControllerTestCase 测试视图内容，更健壮、易于维护的集成/视图
 
 CakePHP 应用程序与 Jenkins 的集成是相当直截了当的。下面假设你已经在 \*nix 系统上
 安装好了 Jenkins，并且可以管理它。你也知道如何创建作业(*job*)，运行构建。如果你
-对这些有任何不确定，请参考 `Jenkins 文档 <http://jenkins-ci.org/>`_ 
+对这些有任何不确定，请参考 `Jenkins 文档 <http://jenkins-ci.org/>`_
 
 创建作业
 --------
@@ -1202,7 +1208,7 @@ CakePHP 应用程序与 Jenkins 的集成是相当直截了当的。下面假设
 
 这确保你总有 Jenkins 要求的正确数据库配置。对任何其它需要的配置文件做同样处理。
 经常，更好的做法是，在每次构建之前也要删除再重新创建数据库。这样隔绝了串联的失败，
-即一个失败的构建引起其它构建失败。在构建中加入另一个 *外壳脚本步骤(shell script 
+即一个失败的构建引起其它构建失败。在构建中加入另一个 *外壳脚本步骤(shell script
 step)*，包含如下代码::
 
     mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
@@ -1229,5 +1235,5 @@ step)*，包含如下代码::
 
 
 .. meta::
-    :title lang=zh_CN: Testing
-    :keywords lang=zh_CN: web runner,phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration
+    :title lang=zh: Testing
+    :keywords lang=zh: web runner,phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration

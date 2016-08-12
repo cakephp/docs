@@ -43,6 +43,28 @@ CakePHP 开发人员将使用下面的编码规范。
         }
     }
 
+如果你用到多行的函数调用，请使用下面的原则：
+In cases where you're using a multi-line function call use the following guidelines:
+
+*  多行函数调用的开始括号必须是位于该行结尾。
+*  多行函数调用中，每行只允许有一个参数。
+*  多行函数调用的结束括号必须位于单独的一行。
+
+例如，不要使用下面的写法::
+
+    $matches = array_intersect_key($this->_listeners,
+                    array_flip(preg_grep($matchPattern,
+                        array_keys($this->_listeners), 0)));
+
+而是要这样写::
+
+    $matches = array_intersect_key(
+        $this->_listeners,
+        array_flip(
+            preg_grep($matchPattern, array_keys($this->_listeners), 0)
+        )
+    );
+
 行的长度
 ===========
 
@@ -118,7 +140,7 @@ CakePHP 开发人员将使用下面的编码规范。
 --------
 
 在视图文件(.ctp files)中，开发人员使用关键词控制结构。关键词控制结构在复杂的视图
-文件中更容易阅读。控制结构可以放在一段大的 PHP 代码段落中，也可以放在单独的 PHP 
+文件中更容易阅读。控制结构可以放在一段大的 PHP 代码段落中，也可以放在单独的 PHP
 标签中::
 
     <?php
@@ -131,6 +153,7 @@ CakePHP 开发人员将使用下面的编码规范。
         <p>You are the admin user.</p>
     <?php endif; ?>
 
+我们允许 .ctp 文件结尾的 PHP 结束标签（``?>``）。
 
 比较
 ==========
@@ -287,7 +310,7 @@ CakePHP 开发人员将使用下面的编码规范。
 类文档代码块可以包含如下 `phpDocumentor <http://phpdoc.org>`_ 标签：
 
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
-   使用 ``@version <vector> <description>`` 格式，其中 ``version`` 和 
+   使用 ``@version <vector> <description>`` 格式，其中 ``version`` 和
    ``description`` 是必须的。
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
 *  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
@@ -313,7 +336,7 @@ CakePHP 开发人员将使用下面的编码规范。
 属性文档代码块可以包含如下 `phpDocumentor <http://phpdoc.org>`_ 标签：
 
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
-   使用 ``@version <vector> <description>`` 格式，其中 ``version`` 和 
+   使用 ``@version <vector> <description>`` 格式，其中 ``version`` 和
    ``description`` 是必须的。
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
 *  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
@@ -347,7 +370,7 @@ CakePHP 开发人员将使用下面的编码规范。
 方法和函数文档代码块可以包含如下 `phpDocumentor <http://phpdoc.org>`_ 标签：
 
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
-   使用 ``@version <vector> <description>`` 格式，其中 ``version`` 和 
+   使用 ``@version <vector> <description>`` 格式，其中 ``version`` 和
    ``description`` 是必须的。
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
 *  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
@@ -538,5 +561,5 @@ PHP 标签
 
 
 .. meta::
-    :title lang=zh_CN: Coding Standards
-    :keywords lang=zh_CN: curly brackets,indentation level,logical errors,control structures,control structure,expr,coding standards,parenthesis,foreach,readability,moose,new features,repository,developers
+    :title lang=zh: Coding Standards
+    :keywords lang=zh: curly brackets,indentation level,logical errors,control structures,control structure,expr,coding standards,parenthesis,foreach,readability,moose,new features,repository,developers

@@ -57,5 +57,5 @@ invalidFields 方法也把这个属性作为结果返回::
 
 
 .. meta::
-    :title lang=zh_CN: Validating Data from the Controller
-    :keywords lang=zh_CN: password rules,validations,subset,array,logs,logic,email,first name last name,models,options,data model
+    :title lang=zh: Validating Data from the Controller
+    :keywords lang=zh: password rules,validations,subset,array,logs,logic,email,first name last name,models,options,data model

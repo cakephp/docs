@@ -265,5 +265,5 @@ Callbacks
     在完成渲染布局之后调用。接收布局文件名作为参数。
 
 .. meta::
-    :title lang=zh_CN: Helpers
-    :keywords lang=zh_CN: php class,time function,presentation layer,processing power,ajax,markup,array,functionality,logic,syntax,elements,cakephp,plugins
+    :title lang=zh: Helpers
+    :keywords lang=zh: php class,time function,presentation layer,processing power,ajax,markup,array,functionality,logic,syntax,elements,cakephp,plugins

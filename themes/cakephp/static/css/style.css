@@ -39,6 +39,7 @@ hr {
     width: 100%;
 }
 h1, h2, h3, h4, h5, h6 {
+    font-family: Raleway, sans-serif;
     font-weight: 300;
     margin: 0;
     color: #363637;
@@ -251,13 +252,6 @@ iframe {
 .pl60 { padding-left: 60px !important;}
 
 .no-border { border:none !important; }
-
-
-.bg-main { background-color:rgb(181,67,33) !important; }
-.bg-dark { background-color: #444648 !important; }
-.bg-darker { background-color: #303234 !important; }
-.bg-dark-gray { background-color: #778888 !important; }
-.bg-light-gray { background-color: #aaabac !important; }
 
 
 /* Helper classes for mobile */
@@ -540,7 +534,6 @@ iframe {
         background-color: #D33C44;
         color: #dadde2;
     }
-    .logo { background-image: url("../images/logo-cake.png") !important; }
 
     .menu.xs-toggle {
         position:relative;
@@ -650,28 +643,6 @@ iframe {
 
 /* *********************    Headers     ********************* */
 
-.logo {
-    display: block;
-    background-image: url("../images/logo-cake.png");
-    background-position: left center;
-    background-repeat: no-repeat;
-    text-indent: -9999999px;
-    margin-top: 5px;
-    background-size: 250px;
-    padding: 23px 0;
-    margin: 0;
-}
-
-/* Header Dark */
-.header-dark {
-    background-color: #292c31;
-    color: #dadde2;
-}
-.header-dark .menu > li > a { color: #dadde2; }
-.header-dark .logo,
-.topbar.dark .logo { background-image:url("../images/logo-light.png"); }
-.topbar.dark .logo { height:50px; background-position: left center; }
-
 @media (min-width:768px) {
     .header-wrapper .navbar-right { margin-right: 0 !important; }
 }
@@ -685,8 +656,6 @@ iframe {
 .section-gray { background-color: #eaeaea; }
 .section-dark { background-color:#303236; }
 .section-white { background-color: #f5f5f5; }
-
-
 
 
 /* Column paddings */
@@ -812,8 +781,6 @@ iframe {
         line-height:46px;
     }
 }
-
-
 
 
 /* *********************    Elements    ********************* */
@@ -1198,7 +1165,6 @@ input[type="email"].big-dog::webkit-input-placeholder {
 .blockquote-2 {
     border-left:3px solid #ddd;
 }
-
 
 
 /* Lists */

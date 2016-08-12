@@ -173,7 +173,7 @@ Debug Kit
 
 DebugKit 是一个插件，提供了一些很好的调试工具。它主要在渲染的 HTML 中提供了一个
 工具栏，用来显示应用程序和当前请求的大量信息。你可以从 Github 下载
-`DebugKit <https://github.com/cakephp/debug_kit>`_ 。
+`DebugKit <https://github.com/cakephp/debug_kit/tree/2.2>`_ 。
 
 Xdebug
 ======
@@ -183,6 +183,6 @@ Xdebug
 
 
 .. meta::
-    :title lang=zh_CN: Debugging
-    :description lang=zh_CN: Debugging CakePHP with the Debugger class, logging, basic debugging and using the DebugKit plugin.
-    :keywords lang=zh_CN: code excerpt,stack trace,default output,error link,default error,web requests,error report,debugger,arrays,different ways,excerpt from,cakephp,ide,options
+    :title lang=zh: Debugging
+    :description lang=zh: Debugging CakePHP with the Debugger class, logging, basic debugging and using the DebugKit plugin.
+    :keywords lang=zh: code excerpt,stack trace,default output,error link,default error,web requests,error report,debugger,arrays,different ways,excerpt from,cakephp,ide,options

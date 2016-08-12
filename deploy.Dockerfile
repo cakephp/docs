@@ -13,8 +13,8 @@ RUN apt-get update && apt-get install -y \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install -y \
-    nginx curl php5 php5-curl \
+RUN apt-get update \
+  && apt-get install -y nginx curl php5 php5-curl \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -30,7 +30,8 @@ RUN make website
 
 RUN rm -rf /var/www/html/* \
   && mkdir -p /var/www/html/2.0/ \
-  && cp -a /data/website/. /var/www/html/2.0/
+  && cp -a /data/website/. /var/www/html/2.0/ \
+  && mv /data/nginx.conf /etc/nginx/sites-enabled/default
 
 # forward request and error logs to docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \

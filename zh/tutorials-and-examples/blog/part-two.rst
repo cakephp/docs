@@ -634,5 +634,5 @@ CakePHP 的路由设置在 ``/app/Config/routes.php`` 文件中。你应当注�
 
 
 .. meta::
-    :title lang=zh_CN: Blog Tutorial Adding a Layer
-    :keywords lang=zh_CN: doc models,validation check,controller actions,model post,php class,model class,model object,business logic,database table,naming convention,bread and butter,callbacks,prefixes,nutshell,interaction,array,cakephp,interface,applications,delete
+    :title lang=zh: Blog Tutorial Adding a Layer
+    :keywords lang=zh: doc models,validation check,controller actions,model post,php class,model class,model object,business logic,database table,naming convention,bread and butter,callbacks,prefixes,nutshell,interaction,array,cakephp,interface,applications,delete

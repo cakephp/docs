@@ -292,6 +292,6 @@ Sqlserver 数据源依赖于微软的名为 pdo_sqlsrv 的 PHP 扩展。该扩�
 Client。
 
 .. meta::
-    :title lang=zh_CN: DataSources
-    :keywords lang=zh_CN: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,microsoft sql server,aggregates,apis,repository,signatures
+    :title lang=zh: DataSources
+    :keywords lang=zh: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,microsoft sql server,aggregates,apis,repository,signatures
 

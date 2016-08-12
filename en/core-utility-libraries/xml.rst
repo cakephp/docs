@@ -3,22 +3,23 @@ Xml
 
 .. php:class:: Xml
 
-The Xml class was all refactored. As PHP 5 has
+The Xml class was all refactored. PHP 5 implements a
 `SimpleXML <http://php.net/simplexml>`_ and
-`DOMDocument <http://php.net/domdocument>`_, CakePHP doesn't need to
-re-implement an XML parser. The new XML class will transform an array
-into SimpleXMLElement or DOMDocument objects, and vice versa.
+`DOMDocument <http://php.net/domdocument>`_, so that CakePHP doesn't need to
+re-implement an XML parser. The new XML class will transform an array into a
+SimpleXMLElement or DOMDocument objects, and vice versa.
 
 Importing data to Xml class
 ===========================
 
-In CakePHP 1.3 you can pass array, XML as string, URL or file path to the
-constructor of the Xml class to import data. In CakePHP 2.0 you can do it using
-:php:meth:`Xml::build()`. Unless the return is an Xml object, it will return a
-SimpleXMLElement or DOMDocument object (depending of your options parameter -
-default is SimpleXMLElement). Below the samples how to import data from URL::
+In CakePHP 1.3 you can pass an array, XML as string, URL or file path to the
+constructor of the Xml class in order to import data. In CakePHP 2.0 you can do
+it by using :php:meth:`Xml::build()`. Unless the return value is a Xml object,
+it will return a SimpleXMLElement or DOMDocument object (depending of your
+options parameter - default is SimpleXMLElement). Below you get some samples on
+how to import data from URL::
 
-    //First Load the Utility Class
+    // First Load the Utility Class
     App::uses('Xml', 'Utility');
 
     // Old method:
@@ -28,7 +29,7 @@ default is SimpleXMLElement). Below the samples how to import data from URL::
     $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
     // $xml now is a instance of SimpleXMLElement
 
-    //or
+    // or
     $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'simplexml'));
     // $xml now is a instance of SimpleXMLElement
 
@@ -36,8 +37,8 @@ default is SimpleXMLElement). Below the samples how to import data from URL::
     $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'domdocument'));
     // $xml now is a instance of DOMDocument
 
-You can use :php:meth:`Xml::build()` to build XML objects from a variety of sources. You
-can use XML to build objects from string data::
+You can use :php:meth:`Xml::build()` to build XML objects from a variety of
+sources. You can use XML to build objects from string data::
 
     $text = '<?xml version="1.0" encoding="utf-8"?>
     <post>
@@ -97,7 +98,7 @@ default you'll get a SimpleXml object back::
     $xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
     $xmlArray = Xml::toArray(Xml::build($xmlString));
 
-If your XML is invalid it will throw a Exception.
+If your XML is invalid it will throw an Exception.
 
 Transforming an array into a string of XML
 ==========================================
@@ -115,7 +116,7 @@ Transforming an array into a string of XML
     $xmlString = $xmlObject->asXML();
 
 Your array must have only one element in the "top level" and it can not be
-numeric. If the array is not in this format, Xml will throw a Exception.
+numeric. If the array is not in this format, Xml will throw an Exception.
 Examples of invalid arrays::
 
     // Top level with numeric key
@@ -132,7 +133,7 @@ Examples of invalid arrays::
 .. warning::
 
     The default format option was changed from `attributes` to `tags`. This was
-    done to make the Xml that the Xml class generates more compatible with XML
+    done to make the Xml, that the Xml class generates, more compatible with XML
     in the wild. Be careful if you depend of this. In the new version you can
     create a mixed array with tags, attributes and value, just use format as
     tags (or do not say anything, because it is the default value) and prefix
@@ -158,8 +159,8 @@ The content of ``$xmlString`` will be::
 
 .. note::
 
-    The structure of array was changed. Now the child must have in a sub-tree
-    and not in the same tree. Moreover, the strings not will be changed by
+    The structure of array was changed. Now the child must be in a sub-tree
+    and not in the same tree. Moreover, the strings will not be changed by
     :php:class:`Inflector`. See the sample below:
 
 ::
@@ -192,7 +193,7 @@ The content of ``$xmlString`` will be::
         )
     );
 
-The both will result the below XML::
+Both will result the XML below::
 
     <?xml version="1.0"?>
     <projects>
@@ -217,9 +218,9 @@ The both will result the below XML::
 Using Namespaces
 ----------------
 
-To use XML Namespaces, in your array you must create a key with name ``xmlns:`` to
-generic namespace or input the prefix ``xmlns:`` in a custom namespace. See the
-samples::
+To use XML Namespaces in your array, you must create a key with name ``xmlns:``
+to generic namespace or input the prefix ``xmlns:`` in a custom namespace. See
+the samples::
 
     $xmlArray = array(
         'root' => array(
@@ -255,8 +256,8 @@ Creating a child
 ----------------
 
 The Xml class of CakePHP 2.0 doesn't provide the manipulation of content, this
-must be made using SimpleXMLElement or DOMDocument. But, how CakePHP is so
-sweet, below has the steps to do for create a child node::
+must be done using SimpleXMLElement or DOMDocument. But CakePHP has you covered.
+Below you see the steps for creating a child node with CakePHP::
 
     // CakePHP 1.3
     $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
@@ -276,8 +277,8 @@ sweet, below has the steps to do for create a child node::
 
 .. tip::
 
-    After manipulate your XML using SimpleXMLElement or DomDocument you can use
-    :php:meth:`Xml::toArray()` without problem.
+    After manipulating your XML using SimpleXMLElement or DomDocument you can
+    use :php:meth:`Xml::toArray()` without problem.
 
 
 Xml API
@@ -325,7 +326,8 @@ from a number of sources including strings, arrays and remote URLs.
         );
         $xml = Xml::build($value);
 
-    When building XML from an array ensure that there is only one top level element.
+    When building XML from an array ensure that there is only one top level
+    element.
 
 .. php:staticmethod:: toArray($obj)
 

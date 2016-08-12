@@ -52,5 +52,5 @@
 开启它。
 
 .. meta::
-    :title lang=zh_CN: Transactions
-    :keywords lang=zh_CN: transaction methods,datasource,rollback,data source,begin,commit,nested transaction
+    :title lang=zh: Transactions
+    :keywords lang=zh: transaction methods,datasource,rollback,data source,begin,commit,nested transaction

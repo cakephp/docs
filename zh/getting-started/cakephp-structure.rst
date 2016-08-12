@@ -84,5 +84,5 @@ AppHelper (位于 ``/app/View/Helper/AppHelper.php``)和 AppModel (位于
 
 
 .. meta::
-    :title lang=zh_CN: CakePHP Structure
-    :keywords lang=zh_CN: user management system,controller actions,application extensions,default behavior,maps,logic,snap,definitions,aids,models,route map,blog,plugins,fit
+    :title lang=zh: CakePHP Structure
+    :keywords lang=zh: user management system,controller actions,application extensions,default behavior,maps,logic,snap,definitions,aids,models,route map,blog,plugins,fit

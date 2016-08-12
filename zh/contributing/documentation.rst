@@ -237,15 +237,13 @@ ReST (Re Structured Text)是与 markdown 或者 textile 类似的纯文本标记
     之后的标题。你也可以使用 ``:ref:`链接文字 <标签名称>``` 的方式来提供自定义的
     链接文字。
 
-Prevent Sphinx to Output Warnings
+防止 Sphinx 输出警告
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sphinx will output warnings if a file is not referenced in a toc-tree. It's
-a great way to ensure that all files have a link directed to them, but
-sometimes, you don't need to insert a link for a file, eg. for our
-`epub-contents` and `pdf-contents` files. In those cases, you can add
-``:orphan:`` at the top of the file, to suppress warnings that the file is not
-in the toc-tree.
+如果一个文件没有在某个 toc-tree 中引用，Sphinx 就会输出警告。这可以很好地保证所有
+文件都有一个指向到它们的链接，但是，有时候，你并不需要插入对一个文件的链接，
+例如，对我们的 `epub-contents` 和 `pdf-contents` 文件。在这样的情况下，可以在文
+件开头增加 ``:orphan:``，就可以防止文件不在某个 toc-tree 中的警告。
 
 描述类和它们的内容
 ------------------
@@ -322,16 +320,16 @@ CakePHP 文档使用
 
    描述一个类的属性(*property/attribute*)。
 
+防止 Sphinx 输出警告
 Prevent Sphinx to Output Warnings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sphinx will output warnings if a function is referenced in multiple files. It's
-a great way to ensure that you did not add a function two times, but
-sometimes, you actually want to write a function in two or more files, eg.
-`debug object` is referenced in `/development/debugging` and in
-`/core-libraries/global-constants-and-functions`. In this case, you can add
-``:noindex:`` under the function debug to suppress warnings. Keep only
-one reference **without** ``:no-index:`` to still have the function referenced::
+如果一个函数在多个文件中引用，Sphinx 就会输出警告。这可以很好地保证不会多次加入
+一个函数，但是，有时候，你实际上就是要在两个或者多个文件中写同一个函数，例如
+`debug object` 在 `/development/debugging`，也在
+`/core-libraries/global-constants-and-functions` 中引用。在这种情况下，可以在
+debug 函数之下增加 ``:noindex:`` 来防止警告。保证有一个引用 **没有**
+``:no-index:``，这样就还可以使该函数被引用::
 
     .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
         :noindex:
@@ -438,5 +436,5 @@ one reference **without** ``:no-index:`` to still have the function referenced::
 
 
 .. meta::
-    :title lang=zh_CN: Documentation
-    :keywords lang=zh_CN: partial translations,translation efforts,html entities,text markup,asfd,asdf,structured text,english content,markdown,formatted text,dot org,repo,consistency,translator,freenode,textile,improvements,syntax,cakephp,submission
+    :title lang=zh: Documentation
+    :keywords lang=zh: partial translations,translation efforts,html entities,text markup,asfd,asdf,structured text,english content,markdown,formatted text,dot org,repo,consistency,translator,freenode,textile,improvements,syntax,cakephp,submission

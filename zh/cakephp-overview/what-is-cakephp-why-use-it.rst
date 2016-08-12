@@ -49,5 +49,5 @@ CakePHP 有积极的 `开发团队 <https://github.com/cakephp?tab=members>`_ �
 
 
 .. meta::
-    :title lang=zh_CN: What is CakePHP? Why Use it?
-    :keywords lang=zh_CN: custom urls,php syntax,cookie security,database interaction,security session,rapid manner,developer team,free open source,javascript html,apache configuration,web site directory,html forms,code generation,development framework,monotony,rapid development,scaffolding,dispatcher,friendly community,crud
+    :title lang=zh: What is CakePHP? Why Use it?
+    :keywords lang=zh: custom urls,php syntax,cookie security,database interaction,security session,rapid manner,developer team,free open source,javascript html,apache configuration,web site directory,html forms,code generation,development framework,monotony,rapid development,scaffolding,dispatcher,friendly community,crud

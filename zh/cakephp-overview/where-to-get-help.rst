@@ -14,8 +14,8 @@ Cookbook
 `http://book.cakephp.org <http://book.cakephp.org>`_
 
 本手册应该是你寻找答案的第一个地方。像其他许多其他开源项目一样，我们总会有新的使
-用者。先尽力自己去回答你的问题。答案可能来得慢，但会记忆更深刻——这样你也可以减轻
-我们的支持的工作量。手册和 API 文档都是在线的。
+用者。先尽力自己去回答你的问题。得到答案可能慢一些，但会记忆更加深刻——这样你也
+可以减轻我们的支持的工作量。手册和 API 文档都是在线的。
 
 Bakery
 ======
@@ -48,43 +48,86 @@ IRC 频道
 
 **IRC Channels on irc.freenode.net:**
 
--  `#cakephp <irc://irc.freenode.net/cakephp>`_ —— 一般讨论   
+-  `#cakephp <irc://irc.freenode.net/cakephp>`_ —— 一般讨论
 -  `#cakephp-docs <irc://irc.freenode.net/cakephp-docs>`_ —— 文档
 -  `#cakephp-bakery <irc://irc.freenode.net/cakephp-bakery>`_ —— Bakery
 
-如果你被难住了，就到 CakePHP 的 IRC 通道求助吧。通常都有 
+如果你被难住了，就到 CakePHP 的 IRC 频道求助吧。通常都有
 `开发团队 <https://github.com/cakephp?tab=members>`_ 的成员在那里，尤其是在南北
 美洲用户的白天时间。我们很乐意听到你的反馈，你需要什么帮助，或者想在你所在的地区
 寻找使用者，或者想捐赠你崭新的跑车。
 
 .. _cakephp-official-communities:
 
-Official CakePHP Forum
+CakePHP 的官方论坛
 ======================
 
-`CakePHP Official Forum <http://discourse.cakephp.org>`_
+`CakePHP 的官方论坛 <http://discourse.cakephp.org>`_
 
-Our official forum where you can ask for help, suggest ideas and have a talk
-about CakePHP. It's a perfect place for quickly finding answers and help others.
-Join the CakePHP family by signing up.
+在我们的官方论坛，你可以寻求帮助，提出新的想法，讨论 CakePHP 相关的事情。这里是
+快速找到答案和互相帮助的理想地方。注册一个用户，假如 CakePHP 的大家庭吧。
 
 Stackoverflow
 =============
 
 `http://stackoverflow.com/ <http://stackoverflow.com/questions/tagged/cakephp/>`_
 
-用 ``cakephp`` 和你使用的版本来标记你的问题，让其他的 stackoverflow 用户能够找到
+用 ``cakephp`` 和你使用的版本来标记你的问题，让其他的 stackoverflow 用户能够看到
 你的问题。
 
 获取本地化的帮助
 ================
 
+巴西葡萄牙语
+--------------
+
+- `巴西 CakePHP 社区 <http://cakephp-br.org>`_
+
+丹麦语
+----------
+
+- `丹麦 CakePHP Slack 频道 <https://cakesf.slack.com/messages/denmark/>`_
+
 法语
-------
+----------
+
 - `法语 CakePHP 社区 <http://cakephp-fr.org>`_
+
+德语
+----------
+
+- `德语 CakePHP Slack 频道 <https://cakesf.slack.com/messages/german/>`_
+- `德语 CakePHP Facebook 群 <https://www.facebook.com/groups/146324018754907/>`_
+
+意大利语
+----------
+
+- `意大利 CakePHP 社区 <http://cakephp.ir>`_
+
+荷兰语
+----------
+
+- `荷兰 CakePHP Slack 频道 <https://cakesf.slack.com/messages/netherlands/>`_
+
+日语
+----------
+
+- `CakePHP 日本 Facebook 群 <https://www.facebook.com/groups/304490963004377/>`_
+
+葡萄牙语
+----------
+
+- `葡萄牙 CakePHP Google 群 <http://groups.google.com/group/cakephp-pt>`_
+
+西班牙语
+----------
+
+- `西班牙 CakePHP Slack 频道 <https://cakesf.slack.com/messages/spanish/>`_
+- `西班牙 CakePHP IRC 频道 <irc://irc.freenode.net/cakephp-es>`_
+- `西班牙 CakePHP 谷歌群 <http://groups.google.com/group/cakephp-esp>`_
 
 
 .. meta::
-    :title lang=zh_CN: Where to Get Help
-    :description lang=zh_CN: Where to get help with CakePHP: The official CakePHP website, The Cookbook, The Bakery, The API, in the test cases, the IRC channel, The CakePHP Google Group or CakePHP Questions.
-    :keywords lang=zh_CN: cakephp,cakephp help,help with cakephp,where to get help,cakephp irc,cakephp questions,cakephp api,cakephp test cases,open source projects,channel irc,code reference,irc channel,developer tools,test case,bakery
+    :title lang=zh: Where to Get Help
+    :description lang=zh: Where to get help with CakePHP: The official CakePHP website, The Cookbook, The Bakery, The API, in the test cases, the IRC channel, The CakePHP Google Group or CakePHP Questions.
+    :keywords lang=zh: cakephp,cakephp help,help with cakephp,where to get help,cakephp irc,cakephp questions,cakephp api,cakephp test cases,open source projects,channel irc,code reference,irc channel,developer tools,test case,bakery

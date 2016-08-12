@@ -209,5 +209,5 @@ CakePHP 中，:php:class:`RequestHandlerComponent` 有助于实现这一点。�
 
 
 .. meta::
-    :title lang=zh_CN: REST
-    :keywords lang=zh_CN: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,easy access,config,soap,recipes,logic,audience,cakephp,running,api
+    :title lang=zh: REST
+    :keywords lang=zh: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,easy access,config,soap,recipes,logic,audience,cakephp,running,api

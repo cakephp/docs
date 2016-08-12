@@ -1139,5 +1139,5 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
 
 .. meta::
-    :title lang=zh_CN: Data Validation
-    :keywords lang=zh_CN: validation rules,validation data,validation errors,data validation,credit card numbers,core libraries,password email,model fields,login field,model definition,php class,many different aspects,eight characters,letters and numbers,business rules,validation process,date validation,error messages,array,formatting
+    :title lang=zh: Data Validation
+    :keywords lang=zh: validation rules,validation data,validation errors,data validation,credit card numbers,core libraries,password email,model fields,login field,model definition,php class,many different aspects,eight characters,letters and numbers,business rules,validation process,date validation,error messages,array,formatting

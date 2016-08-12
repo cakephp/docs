@@ -9,7 +9,7 @@ controllers et actions dans Acl. Cependant, nous détestons tous faire des
 choses répétitives comme faire ce qui pourrait être des centaines d'actions
 dans une grande application.
 
-Pour cela, il existe un plugin disponible très branché sur github, appelé
+Pour cela, il existe un plugin disponible très branché sur GitHub, appelé
 `AclExtras <https://github.com/markstory/acl_extras/>`_ qui peut être
 téléchargé sur
 `La page de Téléchargements de Github <https://github.com/markstory/acl_extras/zipball/master>`_.

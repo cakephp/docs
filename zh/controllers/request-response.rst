@@ -4,7 +4,7 @@
 请求与响应对象是在 CakePHP 2.0 新增的。在之前的版本中，这两个对象由数组表示，相关
 的方法是分散在 :php:class:`RequestHandlerComponent`、:php:class:`Router`、
 :php:class:`Dispatcher` 和 :php:class:`Controller` 中。之前并没有专门的对象负责请
-求的相关信息。在 2.0 版本中，:php:class:`CakeRequest` 和 
+求的相关信息。在 2.0 版本中，:php:class:`CakeRequest` 和
 :php:class:`CakeResponse` 用于这个目的。
 
 .. index:: $this->request
@@ -38,7 +38,7 @@ CakeRequest
 上面这些都可以得到相同的值。提供多种获取参数的方式是为了便于现有应用程序的移植。
 所有的 :ref:`路由元素 <route-elements>` 都可以通过这些方式得到。
 
-除了 :ref:`路由元素 <route-elements>`，也经常需要获取 
+除了 :ref:`路由元素 <route-elements>`，也经常需要获取
 :ref:`传入参数 <passed-arguments>` 和 :ref:`命名参数 <named-parameters>`。这些也
 可以通过请求对象获得::
 
@@ -78,7 +78,7 @@ CakeRequest
     // 注意：向后兼容访问器，在以后的版本中会被废弃
     $this->request['url']['page'];
 
-可以直接访问 :php:attr:`~CakeRequest::$query` 属性，或者可以用 
+可以直接访问 :php:attr:`~CakeRequest::$query` 属性，或者可以用
 :php:meth:`CakeRequest::query()` 以不会报错的方式读取网址查询数组。任何不存在的键
 都会返回 ``null``::
 
@@ -88,13 +88,13 @@ CakeRequest
 获取 POST 数据
 ==============
 
-所有的 POST 数据都可以用 :php:attr:`CakeRequest::$data` 得到。任何包含 ``data`` 
+所有的 POST 数据都可以用 :php:attr:`CakeRequest::$data` 得到。任何包含 ``data``
 前缀的表单数据，都会把 data 前缀去掉。例如::
 
     // 一项 name 属性为 'data[MyModel][title]' 的表单数据，可用下面的方式获得
     $this->request->data['MyModel']['title'];
 
-也可以直接访问 :php:attr:`~CakeRequest::$data` 属性，或者使用 
+也可以直接访问 :php:attr:`~CakeRequest::$data` 属性，或者使用
 :php:meth:`CakeRequest::data()` 以不会报错的方式来读取 data 数组。任何不存在的键
 都会返回 ``null``::
 
@@ -107,7 +107,7 @@ CakeRequest
 .. versionadded:: 2.2
 
 当构建 REST 服务时，会经常接受以 ``PUT`` 和 ``DELETE`` 请求方式提交的数据。自从
-2.2 版本开始，对 ``PUT`` 和 ``DELETE`` 请求，任何 
+2.2 版本开始，对 ``PUT`` 和 ``DELETE`` 请求，任何
 ``application/x-www-form-urlencoded`` 请求体(*request body*)中的数据会被自动解析
 并设置为 ``$this->data``。如果接受的是 JSON 或 XML 数据，下面会解释如何访问这些
 请求体(*request body*)。
@@ -115,14 +115,14 @@ CakeRequest
 访问 XML 或 JSON 数据
 =====================
 
-采用 :doc:`/development/rest` 的应用程序经常以非网址编码(non-URL-encoded)的 
-post 文件体(*body*)的方式交换数据。这时可以用 :php:meth:`CakeRequest::input()` 
+采用 :doc:`/development/rest` 的应用程序经常以非网址编码(non-URL-encoded)的
+post 文件体(*body*)的方式交换数据。这时可以用 :php:meth:`CakeRequest::input()`
 读取任何格式的输入数据。通过提供一个解码函数，得到反序列化之后的内容::
 
     // 获得提交给 PUT/POST 动作以 JSON 编码的数据
     $data = $this->request->input('json_decode');
 
-鉴于某些反序列化方法在调用的时候要求额外的参数，例如 ``json_decode`` 方法的 
+鉴于某些反序列化方法在调用的时候要求额外的参数，例如 ``json_decode`` 方法的
 'as array' 参数。如果要把 XML 转换成 DOMDocument 对象，
 :php:meth:`CakeRequest::input()` 也支持传入额外的参数::
 
@@ -148,7 +148,7 @@ post 文件体(*body*)的方式交换数据。这时可以用 :php:meth:`CakeReq
     $this->request->is('post');
     $this->request->isPost(); // 已废弃
 
-两种方法调用都会返回相同的值。暂时这些方法仍然在 
+两种方法调用都会返回相同的值。暂时这些方法仍然在
 :php:class:`RequestHandlerComponent` 中可以使用，但已经被废弃，并会在3.0.0版本中
 被去掉。通过使用 :php:meth:`CakeRequest::addDetector()` 创建新的检测器
 (*detectors*)，可以很容易地扩展现有的请求检测。可以创建四种不同种类的检测器:
@@ -210,7 +210,7 @@ post 文件体(*body*)的方式交换数据。这时可以用 :php:meth:`CakeReq
 CakeRequest 和 RequestHandlerComponent
 ======================================
 
-由于 :php:class:`CakeRequest` 提供的许多特性以前是 
+由于 :php:class:`CakeRequest` 提供的许多特性以前是
 :php:class:`RequestHandlerComponent` 的职责，需要重新思考才能明白它(后者)如何才
 能继续融洽地存在于整个架构中。对 2.0 版本来说，
 :php:class:`RequestHandlerComponent` 在 :php:class:`CakeRequest` 提供的工具之上
@@ -316,12 +316,12 @@ CakeRequest API
 
 .. php:method:: is($type)
 
-    检查请求是否符合某种条件。使用内置检测规则，以及任何用 
+    检查请求是否符合某种条件。使用内置检测规则，以及任何用
     :php:meth:`CakeRequest::addDetector()` 方法定义的其它规则。
 
 .. php:method:: addDetector($name, $options)
 
-    添加检测器，供 :php:meth:`CakeRequest::is()` 方法使用。欲知详情请见 
+    添加检测器，供 :php:meth:`CakeRequest::is()` 方法使用。欲知详情请见
     :ref:`check-the-request`。
 
 .. php:method:: accepts($type = null)
@@ -351,7 +351,7 @@ CakeRequest API
 
 .. php:method:: param($name)
 
-    安全地读取 ``$request->params`` 中的值。这免去了在使用参数值之前要调用 
+    安全地读取 ``$request->params`` 中的值。这免去了在使用参数值之前要调用
     ``isset()`` 或 ``empty()`` 的麻烦。
 
     .. versionadded:: 2.4
@@ -389,10 +389,10 @@ CakeResponse
 
 :php:class:`CakeResponse` 是 CakePHP 的默认响应类。它封装了一系列特性和功能，来
 为应用程序生成 HTTP 响应。它也可以有助于测试，鉴于它能被模拟/替换
-(*mocked/stubbed*)，从而让你可以检查要发送的头部信息(*header*)。如同 
+(*mocked/stubbed*)，从而让你可以检查要发送的头部信息(*header*)。如同
 :php:class:`CakeRequest`，:php:class:`CakeResponse` 合并了一些之前在
-:php:class:`Controller`、:php:class:`RequestHandlerComponent` 和 
-:php:class:`Dispatcher` 中的方法。这些旧方法已经废弃，请使用 
+:php:class:`Controller`、:php:class:`RequestHandlerComponent` 和
+:php:class:`Dispatcher` 中的方法。这些旧方法已经废弃，请使用
 :php:class:`CakeResponse`。
 
 :php:class:`CakeResponse` 提供了一个接口，封装了与响应有关的常见任务，比如:
@@ -406,7 +406,7 @@ CakeResponse
 ==========
 
 CakePHP 默认使用 :php:class:`CakeResponse`。:php:class:`CakeResponse` 是灵活透明
-的类。如果需要用应用程序中特定的类来重载它，可以在 ``app/webroot/index.php`` 替换 
+的类。如果需要用应用程序中特定的类来重载它，可以在 ``app/webroot/index.php`` 替换
 :php:class:`CakeResponse`。这会使应用程序中的所有控制器都使用 ``CustomResponse``，
 而不是 :php:class:`CakeResponse`。也可以在控制器中设置 ``$this->response`` 来替
 换响应实例。在测试中替换响应对象是很方便的，因为这样可以禁止与 ``header()`` 交互
@@ -434,7 +434,7 @@ CakePHP 默认使用 :php:class:`CakeResponse`。:php:class:`CakeResponse` 是�
 发送文件
 ========
 
-有时候需要发送文件作为对请求的响应。在 2.3 版本之前，可以用 
+有时候需要发送文件作为对请求的响应。在 2.3 版本之前，可以用
 :php:class:`MediaView` 来实现。在 2.3 版本中，:php:class:`MediaView` 已被废弃，
 不过可以用 :php:meth:`CakeResponse::file()` 来发送文件作为响应::
 
@@ -445,7 +445,7 @@ CakePHP 默认使用 :php:class:`CakeResponse`。:php:class:`CakeResponse` 是�
         return $this->response;
     }
 
-如上面的例子所示，必须为该方法提供文件路径。如果是 
+如上面的例子所示，必须为该方法提供文件路径。如果是
 :php:attr:`CakeResponse::$_mimeTypes` 中列出的已知文件类型，CakePHP 就会发送正确
 的内容类型头部信息。可以在调用 :php:meth:`CakeResponse::file()` 之前用
 :php:meth:`CakeResponse::type()` 方法添加新类型。
@@ -544,7 +544,7 @@ Cache-Control 的 ``public`` 指令也会被设置。
 你不必编写缓存的逻辑，以及一旦数据更改就使之无效(从而刷新)它。HTTP 使用两种模式，
 过期和有效性验证，通常使用起来要更加简单。
 
-除了使用 :php:meth:`CakeResponse::cache()`，也可以使用许多其它方法，来微调 HTTP 
+除了使用 :php:meth:`CakeResponse::cache()`，也可以使用许多其它方法，来微调 HTTP
 缓存头部信息，从而利用浏览器或反向代理的缓存。
 
 缓存控制(*Cache Control*)头部信息
@@ -558,7 +558,7 @@ Cache-Control 的 ``public`` 指令也会被设置。
     Cache-Control: private, max-age=3600, must-revalidate
 
 :php:class:`CakeResponse` 类有一些工具方法来帮助你设置这个头部信息，并最终生成一
-条合法的 ``Cache-Control`` 头部信息。它们中的第一个是 
+条合法的 ``Cache-Control`` 头部信息。它们中的第一个是
 :php:meth:`CakeResponse::sharable()` 方法，指示一个响应是否被不同的用户或客户端
 共享。这个方法实际控制这个头部信息公有(``public``)或者私有(``private``)的部分。
 设置响应为私有，表示它的全部或者部分只适用于单一用户。要利用共享缓存，就必须设置
@@ -609,8 +609,8 @@ Etag 头部信息
 :php:meth:`~CakeResponse::etag()` 方法(叫做实体标签(*entity tag*))是一个字符串，
 用来唯一标识被请求的资源，就象文件校验码的作用，从而知道是否与缓存的资源匹配。
 
-要利用这条头部信息，你必须或者手动调用 
-:php:meth:`CakeResponse::checkNotModified()` 方法，或者在控制器中引入 
+要利用这条头部信息，你必须或者手动调用
+:php:meth:`CakeResponse::checkNotModified()` 方法，或者在控制器中引入
 :php:class:`RequestHandlerComponent`::
 
     public function index() {
@@ -631,8 +631,8 @@ Last Modified 头部信息
 后改变的日期和时间。设置这个头部信息可以帮助 CakePHP 回答缓存客户端，基于客户端
 的缓存，响应是否有变化。
 
-要利用这条头部信息，你必须或者手动调用 
-:php:meth:`CakeResponse::checkNotModified()` 方法，或者在控制器中引入 
+要利用这条头部信息，你必须或者手动调用
+:php:meth:`CakeResponse::checkNotModified()` 方法，或者在控制器中引入
 :php:class:`RequestHandlerComponent`::
 
     public function view() {
@@ -660,7 +660,7 @@ CakeResponse 和测试
 ===================
 
 也许 :php:class:`CakeResponse` 最大的好处在于，它使得测试控制器和组件更容易了。
-与其把方法散布于多个对象之中，现在控制器和组件只调用(*delegate*) 
+与其把方法散布于多个对象之中，现在控制器和组件只调用(*delegate*)
 :php:class:`CakeResponse`，只需要模拟一个对象就可以了。这让你更加接近于单元测试，
 也使得测试控制器更容易了::
 
@@ -765,7 +765,7 @@ CakeResponse API
 .. php:method:: send()
 
     一旦完成了响应的创建，调用 :php:meth:`~CakeResponse::send()` 会发送所有设置
-    的头部信息和文件体(*body*)。这是在每次请求的最后由 :php:class:`Dispatcher` 
+    的头部信息和文件体(*body*)。这是在每次请求的最后由 :php:class:`Dispatcher`
     自动执行的。
 
 .. php:method:: file($path, $options = array())
@@ -775,5 +775,5 @@ CakeResponse API
     .. versionadded:: 2.3
 
 .. meta::
-    :title lang=zh_CN: Request and Response objects
-    :keywords lang=zh_CN: request controller,request parameters,array indexes,purpose index,response objects,domain information,request object,request data,interrogating,params,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp
+    :title lang=zh: Request and Response objects
+    :keywords lang=zh: request controller,request parameters,array indexes,purpose index,response objects,domain information,request object,request data,interrogating,params,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp

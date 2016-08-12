@@ -6,6 +6,10 @@
 Welcome
 #######
 
+.. warning::
+    この文書のバージョンは CakePHP 2.x 用です。
+    `CakePHP 3.x の文書はここにあります <http://book.cakephp.org/3.0/>`_ 。
+
 CakePHP クックブックは、オープンに開発されている、コミュニティで編集可能なドキュメントのプロジェクトです。
 ドキュメンテーションの品質、正当性、正確性の高さを維持することを期待しています。
 右上の "Improve this Doc" (この文書を改善する)  ボタンに注目してください。
@@ -14,12 +18,12 @@ CakePHP クックブックは、オープンに開発されている、コミュ
 
 .. container:: offline-download
 
-    **cookbookをどこででも**
+    **クックブックがどこででも読めます**
 
     .. image:: /_static/img/read-the-book.jpg
        :alt: Read the Book - CakePHP
 
-    どこでも CakePHP クックブックをお楽しみ頂けます。 PDF と EPUB をご用意しましたので、\
+    どこでも CakePHP クックブックをお楽しみ頂けます。 PDF と EPUB をご用意しましたので、
     多くのデバイス上でオフラインでドキュメントを読むことができます。
 
     - `PDF(英語) <../_downloads/en/CakePHPCookbook.pdf>`_
@@ -33,12 +37,12 @@ CakePHP クックブックは、オープンに開発されている、コミュ
 ------------
 
 :doc:`ブログチュートリアル</tutorials-and-examples/blog/blog>` を使用した入門。
-基本的なブログの構築の過程を通して、CakePHPの基本を学びます。
+基本的なブログの構築の過程を通して、CakePHP の基本を学びます。
 
 規約
 ----
 
-CakePHPの動力となっている、典型的な :doc:`CakePHPのリクエスト
+CakePHP の動力となっている、典型的な :doc:`CakePHP のリクエスト
 </getting-started/a-typical-cakephp-request>`
 と、 :doc:`規約
 </getting-started/cakephp-conventions>`
@@ -53,7 +57,7 @@ CakePHPの動力となっている、典型的な :doc:`CakePHPのリクエス�
 ビュー
 ------
 
-ビューはCakePHPのプレゼンテーション層です。
+ビューは CakePHP のプレゼンテーション層です。
 これはモデルから取得したデータをクライアントがリクエストした出力フォーマットに変換します。
 詳細は :doc:`/views` を見てください。
 
@@ -64,10 +68,10 @@ CakePHPの動力となっている、典型的な :doc:`CakePHPのリクエス�
 これはバリデーション、ストレージ、データの検索を取り扱います。
 詳細は :doc:`/models` を見てください。
 
-助けの求め方
-============
+助けを得るには
+==============
 
-もし何か困っていたら、 :doc:`いくつもの助けを求められる場所
+もし何か困っていたら、 :doc:`いくつもの助けを得られる場所
 </cakephp-overview/where-to-get-help>`
 があります。
 

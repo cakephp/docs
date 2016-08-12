@@ -1,4 +1,4 @@
-# Global configuration information used across all the 
+# Global configuration information used across all the
 # translations of documentation.
 #
 
@@ -30,7 +30,7 @@ master_doc = 'contents'
 
 # General information about the project.
 project = u'CakePHP Cookbook'
-copyright = u'2014, Cake Software Foundation, Inc'
+copyright = u'2016, Cake Software Foundation, Inc'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -244,7 +244,7 @@ man_pages = [
 epub_title = u'CakePHP Cookbook'
 epub_author = u'Cake Software Foundation, Inc.'
 epub_publisher = u'Cake Software Foundation, Inc.'
-epub_copyright = u'2013, Cake Software Foundation, Inc.'
+epub_copyright = u'2016, Cake Software Foundation, Inc.'
 
 epub_theme = 'cakephp-epub'
 
@@ -291,7 +291,7 @@ epub_tocdup = False
 epub_use_index = False
 
 # Languages available.
-languages = ['en', 'pt', 'es', 'ja', 'fr', 'zh_CN']
+languages = ['en', 'pt', 'es', 'ja', 'fr', 'zh']
 
 # The GitHub branch name for this version of the docs
 branch = 'master'

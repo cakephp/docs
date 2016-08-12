@@ -1,34 +1,31 @@
 Constantes globales et Fonctions
 ################################
 
-Alors que la plupart de vos activités quotidiennes avec CakePHP
-sera d'initialiser des classes du noyau, CakePHP dispose d'un
-certain nombre de fonctions globales de confort qui peuvent
-arriver à point nommé. La plupart de ses fonctions sont à
-utiliser avec les classes cakePHP (classes de chargement ou de
-component), mais beaucoup d'autres rendent le travail avec les
-tableaux ou les chaînes de caractères un peu plus simple.
+Alors que la plupart de vos activités quotidiennes avec CakePHP sera
+d'initialiser des classes du noyau, CakePHP dispose d'un certain nombre de
+fonctions globales de confort qui peuvent arriver à point nommé. La plupart de
+ses fonctions sont à utiliser avec les classes cakePHP (classes de chargement ou
+de component), mais beaucoup d'autres rendent le travail avec les tableaux ou
+les chaînes de caractères un peu plus simple.
 
-Nous allons aussi couvrir une partie des constantes disponibles
-dans les applications CakePHP. L'utilisation des constantes
-disponibles vous aidera à faire des mises à jour plus lisses,
-mais sont aussi des moyens pratiques pour pointer certains
-fichiers ou répertoires dans vos applications CakePHP.
+Nous allons aussi couvrir une partie des constantes disponibles dans les
+applications CakePHP. L'utilisation des constantes disponibles vous aidera à
+faire des mises à jour plus lisses, mais sont aussi des moyens pratiques pour
+pointer certains fichiers ou répertoires dans vos applications CakePHP.
 
 Fonctions Globales
 ==================
 
-Voici les fonctions disponibles dans le monde CakePHP. La plupart
-sont juste des emballages pratiques pour d'autres fonctionnalités
-CakePHP, comme le débogage et la traduction de contenu.
+Voici les fonctions disponibles dans le monde CakePHP. La plupart sont juste des
+emballages pratiques pour d'autres fonctionnalités CakePHP, comme le débogage et
+la traduction de contenu.
 
 .. php:function:: \_\_(string $string_id, [$formatArgs])
 
-    Cette fonction gère la localisation dans les applications
-    CakePHP. ``$string_id`` identifie l'ID de la traduction.
-    Les chaînes utilisées pour la traduction sont traitées
-    comme chaîne formatées pour ``sprintf()``. Vous pouvez fournir
-    des arguments supplémentaires pour remplacer les espaces
+    Cette fonction gère la localisation dans les applications CakePHP.
+    ``$string_id`` identifie l'ID de la traduction. Les chaînes utilisées pour
+    la traduction sont traitées comme chaîne formatées pour ``sprintf()``. Vous
+    pouvez fournir des arguments supplémentaires pour remplacer les espaces
     réservés dans votre chaîne::
 
         __('You have %s unread messages', h($number));
@@ -247,7 +244,7 @@ dans votre application.
 
     .. deprecated:: 2.4
         Cette constante est dépréciée, vous devriez utiliser
-        :php:meth:`Router::fullbaseUrl()` à la place.
+        :php:meth:`Router::fullBaseUrl()` à la place.
 
 .. php:const:: IMAGES
 

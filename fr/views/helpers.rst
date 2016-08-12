@@ -154,7 +154,7 @@ et :doc:`/core-libraries/collections` pour plus d'informations.
 Créer des Helpers
 =================
 
-Si un helper du coeur (ou l'un présenté sur github ou dans la Boulangerie)
+Si un helper du coeur (ou l'un présenté sur GitHub ou dans la Boulangerie)
 ne correspond pas à vos besoins, les helpers sont faciles à créer.
 
 Mettons que nous voulions créer un helper, qui pourra être utilisé pour

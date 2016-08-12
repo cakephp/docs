@@ -6,15 +6,15 @@ HtmlHelper
 HtmlHelper助件在CakePHP中的作用是使与HTML相关的工作更容易、更快，更能够适应变化。
 使用这个助件会让你的应用程序本身更轻巧，在所处领域中相对于核心功能更灵活。
 
-许多HtmlHelper助件的方法包括一个 ``$htmlAttributes`` 参数，这让你可以在
-标签上添加任何额外的属性。下面是一些如何使用 $htmlAttributes 参数的例子:
+许多HtmlHelper助件的方法包括一个 ``$options`` 参数，这让你可以在
+标签上添加任何额外的属性。下面是一些如何使用 $options 参数的例子:
 
 .. code-block:: html
 
-    需要的属性: <tag class="someClass" />      
+    需要的属性: <tag class="someClass" />
     数组参数: array('class' => 'someClass')
-     
-    需要的属性: <tag name="foo" value="bar" />  
+
+    需要的属性: <tag name="foo" value="bar" />
     数组参数: array('name' => 'foo', 'value' => 'bar')
 
 
@@ -32,7 +32,7 @@ HtmlHelper助件完成的最重要的任务是创建完好格式的（HTML）标
 HtmlHelper助件的一些方法及如何使用它们。
 
 .. php:method:: charset($charset=null)
- 
+
     :param string $charset: 想要的字符集。如果是null，就会使用 ``App.encoding``
         的值。
 
@@ -191,8 +191,8 @@ HtmlHelper助件的一些方法及如何使用它们。
         // 输出
         <meta name="description" content="在这里输入任意meta描述" />
 
-    如果你要添加自定义的meta标签，那么第一个参数应当设置为数组。要输出robots 
-    noindex标签（译注：防止漫游器将网页编入索引，可参考 `noindex 
+    如果你要添加自定义的meta标签，那么第一个参数应当设置为数组。要输出robots
+    noindex标签（译注：防止漫游器将网页编入索引，可参考 `noindex
     <http://baike.baidu.com/link?url=wZMV3V5BOO9BrKxVaSp2jEUO2ICTI-cFhFOkcOkQ5FzxcTa0_1s9yQFib06vigYuC1RHYETpkwLHPnVS4qqd5_>`_
     ），可以使用下面的代码::
 
@@ -538,7 +538,7 @@ HtmlHelper助件的一些方法及如何使用它们。
 
     .. note::
 
-        默认情况下文字没有转义，但你可以用 ``$htmlOptions['escape'] = true`` 来
+        默认情况下文字没有转义，但你可以用 ``$options['escape'] = true`` 来
         转义文字。这代替了之前版本里的第四个参数 ``boolean $escape = false``。
 
 .. php:method:: div(string $class, string $text, array $options)
@@ -1054,6 +1054,6 @@ HtmlHelper助件的一些方法及如何使用它们。
 
 
 .. meta::
-    :title lang=zh_CN: HtmlHelper
-    :description lang=zh_CN: The role of the HtmlHelper in CakePHP is to make HTML-related options easier, faster, and more resilient to change.
-    :keywords lang=zh_CN: html helper,cakephp css,cakephp script,content type,html image,html link,html tag,script block,script start,html url,cakephp style,cakephp crumbs
+    :title lang=zh: HtmlHelper
+    :description lang=zh: The role of the HtmlHelper in CakePHP is to make HTML-related options easier, faster, and more resilient to change.
+    :keywords lang=zh: html helper,cakephp css,cakephp script,content type,html image,html link,html tag,script block,script start,html url,cakephp style,cakephp crumbs

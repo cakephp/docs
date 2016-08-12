@@ -18,7 +18,7 @@ CakePHP 的最强大的特性之一就是由模型提供的连接关系的映射
 关系类型
 --------
 
-CakePHP 的四种关联类型是：hasOne、hasMany、belongsTo 和 hasAndBelongsToMany 
+CakePHP 的四种关联类型是：hasOne、hasMany、belongsTo 和 hasAndBelongsToMany
 (HABTM)。
 
 ============= ===================== =======================================
@@ -156,7 +156,7 @@ Doctor hasOne Mentor (博士有一位导师)    mentors.doctor\_id
     盖任何外键的使用。虽然如此，遵守规则仍将减少代码的重复，使其更易于阅读和维护。
 
 User 模型文件会保存为 /app/Model/User.php。为了定义 'User hasOne Profile (用户有
-一份个人资料)' 的关联，为模型类添加 $hasOne 属性。记得要在 
+一份个人资料)' 的关联，为模型类添加 $hasOne 属性。记得要在
 /app/Model/Profile.php 文件中定义 Profile 模型，否则关联将无法工作::
 
     class User extends AppModel {
@@ -222,8 +222,8 @@ hasOne 关联数组可以包含的键有:
 belongsTo
 ---------
 
-现在我们可以从 User 模型访问 Profile 的数据，让我们在 Profile 模型中定义 
-belongsTo 关联以获取相关的 User 数据。belongsTo 关联是 hasOne 和 hasMany 
+现在我们可以从 User 模型访问 Profile 的数据，让我们在 Profile 模型中定义
+belongsTo 关联以获取相关的 User 数据。belongsTo 关联是 hasOne 和 hasMany
 关联的自然补充：它让我们可以从另一个方向查看数据。
 
 在为 belongsTo 关系定义数据库表的键时，请遵循如下约定：
@@ -272,7 +272,7 @@ belongsTo 关联数组可以包含的键有:
 -  **conditions**: 兼容 find() 的条件数组或者 SQL 字符串，例如
    ``array('User.active' => true)``。
 -  **type**: SQL 查询使用的 join 类型。默认为 'LEFT'，这也许不能在所有情况下都符
-   合你的需要。在你想要获取主模型和关联模型的所有记录、或者什么都不要时，'INNER' 
+   合你的需要。在你想要获取主模型和关联模型的所有记录、或者什么都不要时，'INNER'
    (当和某些条件一起使用时)也许会有帮助。
 -  **fields**: 在读取关联模型数据时，需要读取的字段的列表。默认返回所有的字段。
 -  **order**: 兼容 find() 的排序子句或者 SQL 字符串，例如
@@ -280,7 +280,7 @@ belongsTo 关联数组可以包含的键有:
 -  **counterCache**: 如果此键的值设置为 true，当你在做 ``save()`` 或者
    ``delete()`` 操作时，关联模型将自动递增或递减外键关联的表的 "[以下划线分隔的
    单数模型名称]\_count" 列的值。如果它是一个字符串，那这就是要使用的列名。计数
-   器列的值表示关联记录的行数。也可以通过使用数组指定多个计数器缓存，详见 
+   器列的值表示关联记录的行数。也可以通过使用数组指定多个计数器缓存，详见
    :ref:`multiple-counterCache`。
 -  **counterScope**: 可选的用于更新计数器缓存字段的条件数组。
 
@@ -316,7 +316,7 @@ belongsTo 关联数组可以包含的键有:
 
     my_model_count
 
-比方说有一个叫 ``ImageComment`` 的模型和一个叫 ``Image`` 的模型，你就要在 
+比方说有一个叫 ``ImageComment`` 的模型和一个叫 ``Image`` 的模型，你就要在
 ``images`` 表中添加一个新的整数字段，并命名为 ``image_comment_count``。
 
 下面是更多的示例：
@@ -331,7 +331,7 @@ Image      ImageComment            images.image\_comment\_count
 BlogEntry  BlogEntryComment        blog\_entries.blog\_entry\_comment\_count
 ========== ======================= =========================================
 
-一旦添加了计数器字段，就可以使用它了。要启用计数器缓存，在关联中添加 
+一旦添加了计数器字段，就可以使用它了。要启用计数器缓存，在关联中添加
 ``counterCache`` 键并将其值设置为 ``true``::
 
     class ImageComment extends AppModel {
@@ -499,7 +499,7 @@ hasMany 关联数组可以包含的键有:
     )
 
 要记住的一点是，还需要互补的 Comment belongsTo User (评论属于用户)关联，才能从两
-个方向获取数据。本节涵盖的内容让你能够从 User 模型获取 Comment 数据。在 Comment 
+个方向获取数据。本节涵盖的内容让你能够从 User 模型获取 Comment 数据。在 Comment
 模型中添加 Comment belongsTo User 关联，使你能够从 Comment 模型中获取 User 数据，
 这样才构成完整的连接，允许信息以任一模型的视角流动。
 
@@ -512,7 +512,7 @@ hasAndBelongsToMany (HABTM)
 现在我们来解决最后一种关系类型：hasAndBelongsToMany，或 HABTM。这种关联用于两个
 模型需要以不同方式多次重复连接的场合。
 
-hasMany 与 HABTM 主要不同点在于，HABTM 中对象间的连接不是排他的。例如，以 HABTM 
+hasMany 与 HABTM 主要不同点在于，HABTM 中对象间的连接不是排他的。例如，以 HABTM
 方式连接 Recipe 模型和 Ingredient 模型。用西红柿作为我奶奶的意大利面菜谱(Recipe)
 的原料(Ingredient)，并不会"用光"这种原料。我也可以把它用于色拉菜谱(Recipe)。
 
@@ -636,7 +636,7 @@ HABTM 关联数组可以包含的键有：
             )
     )
 
-如果要想在使用 Ingredient 模型时获取 Recipe 数据，记得在 Ingredient 模型中定义 
+如果要想在使用 Ingredient 模型时获取 Recipe 数据，记得在 Ingredient 模型中定义
 HABTM 关联。
 
 .. note::
@@ -760,14 +760,14 @@ CakePHP 让使用它非常容易。
         // 注：unbindModel 方法只影响紧随其后的 find 方法。再往后调用 find 方法
         // 时仍将使用配置的关联信息。
 
-        // 我们已经在 unbindModel() 之后调用了 find('all')，所以这次又会获取 
+        // 我们已经在 unbindModel() 之后调用了 find('all')，所以这次又会获取
         // Leaders 及相关的 Followers……
         $this->Leader->find('all');
     }
 
 .. note::
 
-    使用 bindModel() 和 unbindModel() 方法来添加和删除关联，仅在 *紧随其后* 的 
+    使用 bindModel() 和 unbindModel() 方法来添加和删除关联，仅在 *紧随其后* 的
     find 操作中有效，除非第二个参数设置为 false。如果第二个参数被设置为 *false*，
     在请求的余下阶段仍将保持这种(动态绑定的)效果。
 
@@ -778,7 +778,7 @@ CakePHP 让使用它非常容易。
     );
 
 现在我们成功地动态删除了一个关联。让我们来添加一个。我们至今尚没有 Principle 的
-Leader 模型需要一些关联的 Principle。我们的 Principle 模型文件几乎是空的，只有 
+Leader 模型需要一些关联的 Principle。我们的 Principle 模型文件几乎是空的，只有
 public $name 声明语句。让我们动态给我们的 Leader 关联一些 Principle (但记得，这
 仅在紧随其后的 find 操作中有效)。在 LeadersController 控制器中有如下函数::
 
@@ -795,6 +795,18 @@ public $name 声明语句。让我们动态给我们的 Leader 关联一些 Prin
                     )
                 )
             )
+        );
+
+        // 如果我们在模型重置后要保持这样的关联，我们可以这样传入第二个 boolean
+        // 参数：
+        $this->Leader->bindModel(
+            array('hasMany' => array(
+                    'Principle' => array(
+                        'className' => 'Principle'
+                    )
+                )
+            ),
+            false
         );
 
         // 现在我们已经正确地设置了关联，我们可以调用一次 find 函数来获取 Leader
@@ -896,7 +908,7 @@ Recipient 是 User 模型的别名。现在来瞧瞧 User 模型是什么样的:
     谨记，你需要将递归(*recursion*)设置为 -1，才能正常工作：
     $this->Channel->recursive = -1;
 
-在表间强制进行连接(*join*)时，需要使用 Model::find() 的"现代"语法，在 $options 
+在表间强制进行连接(*join*)时，需要使用 Model::find() 的"现代"语法，在 $options
 数组中添加 'joins' 键。例如::
 
     $options['joins'] = array(
@@ -946,7 +958,7 @@ Recipient 是 User 模型的别名。现在来瞧瞧 User 模型是什么样的:
 
 可以根据需要在 hasAndBelongsToMany 关联中运行若干个连接(*join*)：
 
-假设有 Book hasAndBelongsToMany Tag (书籍有且属于多个标签)的关联。该关系使用 
+假设有 Book hasAndBelongsToMany Tag (书籍有且属于多个标签)的关联。该关系使用
 books\_tags 表作为连接表，所以需要把 books 表连接(*join*)到 books\_tags 表，再把
 它与 tags 表连接(*join*)::
 
@@ -981,5 +993,5 @@ books\_tags 表作为连接表，所以需要把 books 表连接(*join*)到 book
 
 
 .. meta::
-    :title lang=zh_CN: Associations: Linking Models Together
-    :keywords lang=zh_CN: relationship types,relational mapping,recipe database,relational database,this section covers,web applications,recipes,models,cakephp,storage
+    :title lang=zh: Associations: Linking Models Together
+    :keywords lang=zh: relationship types,relational mapping,recipe database,relational database,this section covers,web applications,recipes,models,cakephp,storage

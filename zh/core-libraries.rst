@@ -69,5 +69,5 @@ CakePHP 自带丰富的内置函数和类。这些类和函数尽力涵盖网络
 
 
 .. meta::
-    :title lang=zh_CN: Core Libraries
-    :keywords lang=zh_CN: core libraries,global constants,cookie,access control lists,number,text,time,security component,core components,general purpose,web applications,markup,authentication,api,cakephp,functionality,sessions,collections,events
+    :title lang=zh: Core Libraries
+    :keywords lang=zh: core libraries,global constants,cookie,access control lists,number,text,time,security component,core components,general purpose,web applications,markup,authentication,api,cakephp,functionality,sessions,collections,events

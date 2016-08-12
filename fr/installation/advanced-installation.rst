@@ -22,9 +22,22 @@ vous devriez pouvoir utiliser la commande ``cake`` pour créer une nouvelle
 application. Puisque CakePHP sera localisé dans l'``include_path`` de PHP,
 vous n'aurez pas besoin de faire d'autres changements.
 
-
 Installer CakePHP avec Composer
 ===============================
+
+Avant de commencer, vous devez vous assurer que vous avez une version de PHP
+mise à jour:
+
+.. code-block:: bash
+
+    php -v
+
+Vous devez avoir au moins PHP 5.3.0 (CLI) ou supérieur. La version de PHP du
+serveur web doit être la version 5.3.0 ou supérieur, et doit être la même
+version que la version de PHP de votre ligne de commande (CLI).
+
+Installer Composer
+------------------
 
 Composer est un outil de gestion de dépendances pour PHP 5.3+. Il règle
 plusieurs problèmes que l'installateur PEAR a, et simplifie la gestion de
@@ -32,6 +45,27 @@ plusieurs versions de librairies. `Packagist <https://packagist.org/>`_ est le
 dépôt principal des packages installables avec Composer. Puisque CakePHP publie
 aussi les versions dans Packagist, vous pouvez installer CakePHP en utilisant
 `Composer <http://getcomposer.org>`_.
+
+- Installer Composer sur Linux et Mac OS X
+
+  #. Exécutez le script d'installation comme décrit dans la
+     `documentation officielle de Composer <https://getcomposer.org/download/>`_
+     et suivez les instructions pour installer Composer.
+  #. Exécutez la commande suivante pour déplacer composer.phar vers un
+     répertoire qui est dans votre path::
+
+         mv composer.phar /usr/local/bin/composer
+
+- Installer Composer sur Windows
+
+  Pour les systèmes Windows, vous pouvez télécharger l'installeur Windows de
+  Composer `ici <https://github.com/composer/windows-setup/releases/>`__.
+  D'autres instructions pour l'installeur Windows de Composer se trouvent dans
+  le `README <https://github.com/composer/windows-setup>`__.
+
+Créer un Projet CakePHP
+-----------------------
+
 Avant d'installer CakePHP, vous devrez configurer un fichier ``composer.json``.
 Un fichier composer.json pour une application CakePHP ressemblerait à ce qui
 suit::

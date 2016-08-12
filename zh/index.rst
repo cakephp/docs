@@ -6,6 +6,10 @@
 欢迎
 #######
 
+.. warning::
+    此版本的文档是针对 CakePHP 2.x 版本的。`这里是 CakePHP 3.x 的文档
+    <http://book.cakephp.org/3.0/>`_.
+
 CakePHP CookBook 是一个公开地开发和社区可以编辑的文档项目。我们希望把文档的质量、有效性和准确性都保持在一个较高的水平。请注意在右上角的“改善本
 文档”按钮; 它会引导您进入当前页面的 GitHub 在线编辑器，让您可以轻松地为文档贡献任何添加、删除或更正。
 
@@ -18,7 +22,7 @@ CakePHP CookBook 是一个公开地开发和社区可以编辑的文档项目。
 
     您几乎可以在任何地方阅读本书，当前提供的格式有 PDF 和 EPUB，您可以在更多设备上阅读它，也可以(把它下载下来)离线阅读。
 
-    - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
+    - `PDF（英语） <../_downloads/en/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/zh/CakePHPCookbook.epub>`_
     - `原文出处 <http://github.com/cakephp/docs>`_
 
@@ -60,5 +64,5 @@ CakePHP CookBook 是一个公开地开发和社区可以编辑的文档项目。
 
 
 .. meta::
-    :title lang=zh_CN: .. CakePHP Cookbook documentation master file, created by
-    :keywords lang=zh_CN: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope
+    :title lang=zh: .. CakePHP Cookbook documentation master file, created by
+    :keywords lang=zh: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope

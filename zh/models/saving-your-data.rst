@@ -1,7 +1,7 @@
 保存数据
 ########
 
-CakePHP 使保存模型数据易如反掌。准备保存的数据应当以下面的基本格式传递给模型的 
+CakePHP 使保存模型数据易如反掌。准备保存的数据应当以下面的基本格式传递给模型的
 ``save()`` 方法::
 
     Array
@@ -13,8 +13,8 @@ CakePHP 使保存模型数据易如反掌。准备保存的数据应当以下面
         )
     )
 
-大多数时候你根本无需担心这种格式：CakePHP 的 :php:class:`FormHelper` 和模型的 
-find 方法都会将数据包装成这种格式。如果使用 :php:class:`FormHelper`，数据也在 
+大多数时候你根本无需担心这种格式：CakePHP 的 :php:class:`FormHelper` 和模型的
+find 方法都会将数据包装成这种格式。如果使用 :php:class:`FormHelper`，数据也在
 ``$this->request->data`` 方便地可供立即使用。
 
 下面是控制器动作使用 CakePHP 模型向数据库表存入数据的简单示例::
@@ -36,7 +36,7 @@ find 方法都会将数据包装成这种格式。如果使用 :php:class:`FormH
 
 当调用 save 方法时，在第一个参数中传入的数据会使用 CakePHP 的验证机制进行验证(欲
 知详情，请参见 :doc:`/models/data-validation` 一章)。如果因为某些原因，数据没有
-保存，一定要检查是否是某些验证规则没有通过。这种情况下，可以通过输出 
+保存，一定要检查是否是某些验证规则没有通过。这种情况下，可以通过输出
 :php:attr:`Model::$validationErrors` 来进行调试::
 
     if ($this->Recipe->save($this->request->data)) {
@@ -48,7 +48,7 @@ find 方法都会将数据包装成这种格式。如果使用 :php:class:`FormH
 
 :php:meth:`Model::set($one, $two = null)`
 =========================================
- 
+
 ``Model::set()`` 可以用于将一个或多个字段的数据设置到模型的 data 数组中。这可用
 于把模型和模型提供的 ActiveRecord 特性一起使用::
 
@@ -56,7 +56,7 @@ find 方法都会将数据包装成这种格式。如果使用 :php:class:`FormH
     $this->Post->set('title', 'New title for the article');
     $this->Post->save();
 
-此例展示了如何以 ActiveRecord 的方式，使用 ``set()`` 方法更新单个列。也可以使用 
+此例展示了如何以 ActiveRecord 的方式，使用 ``set()`` 方法更新单个列。也可以使用
 ``set()`` 给多个字段赋予新值::
 
     $this->Post->read(null, 1);
@@ -106,7 +106,7 @@ save 方法还有另外一种语法::
 
 .. tip::
 
-    如果你不希望保存某些数据时自动更新 ``modified`` 字段，在 $data 数组中添加 
+    如果你不希望保存某些数据时自动更新 ``modified`` 字段，在 $data 数组中添加
     ``'modified' => false``。
 
 一旦保存完成，可以使用模型对象的 ``$id`` 属性获得对象的 ID —— 在创建新对象时可能
@@ -142,7 +142,7 @@ save 方法还有另外一种语法::
 :php:meth:`Model::create(array $data = array())`
 ================================================
 
-这个方法为保存新数据重置模型的状态。实际上它并不在数据库中创建新记录，而是清除 
+这个方法为保存新数据重置模型的状态。实际上它并不在数据库中创建新记录，而是清除
 Model::$id，并按照数据库字段的默认值设置 Model::$data。如果没有定义数据库字段的
 默认值，Model::$data 会被设置空数组。
 
@@ -163,7 +163,7 @@ Model::$id，并按照数据库字段的默认值设置 Model::$data。如果没
 ``$this->ModelName->id = $id``)。在使用该方法时，``$fieldName`` 应当只包含字段名，
 而不是模型名和字段名。
 
-例如，更新一篇博客文章(*blog post*)的标题(*title*)，在控制器中调用 ``saveField`` 
+例如，更新一篇博客文章(*blog post*)的标题(*title*)，在控制器中调用 ``saveField``
 方法可以象下面这样::
 
     $this->Post->saveField('title', 'A New Title for a New Day');
@@ -237,7 +237,7 @@ saveField 方法也有另一种语法::
 * ``atomic``: 如果为 true (默认值)，将试图用单个事务保存所有记录。如果数据库/表
   不支持事务，则应当设置为 false。
 * ``fieldList``: 同 Model::save() 方法的 $fieldList 参数
-* ``deep``: (从 2.1 版开始) 如果设置为 true，关联数据也被保存；也可参见 
+* ``deep``: (从 2.1 版开始) 如果设置为 true，关联数据也被保存；也可参见
   saveAssociated 方法。
 * ``callbacks`` 设置为 false 将关闭回调。使用 'before' 或 'after' 将仅开启指定的
   回调。
@@ -352,18 +352,10 @@ saveField 方法也有另一种语法::
 
 .. note::
 
-    如果保存成功，主模型的外键将被存储在相关模型的 id 字段中，即 
+    如果保存成功，主模型的外键将被存储在相关模型的 id 字段中，即
     ``$this->RelatedModel->id``。
 
-.. warning::
-
-    在检查 atomic 选项设置为 false 的 saveAssociated 方法的调用时，要小心。它返
-    回的是一个数组，而不是布尔值。
-
-.. versionchanged:: 2.1
-    现在你可以设置 ``$options['deep'] = true;`` 来保存深层关联的数据。
-
-为了同时保存一条记录及与其有 hasMany 关联的相关记录、以及深层关联的 Comment 
+为了同时保存一条记录及与其有 hasMany 关联的相关记录、以及深层关联的 Comment
 belongsTo User 数据，data 数组应当象这样::
 
     $data = array(
@@ -381,8 +373,10 @@ belongsTo User 数据，data 数组应当象这样::
 
     $Article->saveAssociated($data, array('deep' => true));
 
-.. versionchanged:: 2.1
-    ``Model::saveAll()`` 和类似方法现在支持传入多个模型的 `fieldList` 选项。
+.. warning::
+
+    当 atomic 选项设置为 false 时，在检查 saveAssociated 的调用（返回值）时要
+    当心，它返回数组，而不是布尔值。
 
 传入多个模型的 ``fieldList`` 的例子::
 
@@ -396,11 +390,16 @@ belongsTo User 数据，data 数组应当象这样::
 (这里的) fieldList 是一个以模型别名为键，以字段数组为值的数组。模型名不同于在要
 保存的数据中那样，不能嵌套。
 
+.. versionchanged:: 2.1
+    ``Model::saveAll()`` 和类似方法现在支持传入多个模型的 `fieldList` 选项。
+
+    现在你也可以设置 ``$options['deep'] = true;`` 来保存深层关联的数据。
+
 :php:meth:`Model::saveAll(array $data = null, array $options = array())`
 ========================================================================
 
 ``saveAll`` 函数只是 ``saveMany`` 方法和 ``saveAssociated`` 方法的包装。它会检查
-数据并且决定应当执行哪种类型的保存。如果数据是数字索引数组的格式，就会调用 
+数据并且决定应当执行哪种类型的保存。如果数据是数字索引数组的格式，就会调用
 ``saveMany`` 方法，否则调用 ``saveAssociated`` 方法。
 
 此方法接受与前面的两个方法相同的选项，基本上只是个向后兼容方法。建议(不要使用该
@@ -410,14 +409,14 @@ belongsTo User 数据，data 数组应当象这样::
 保存相关模型的数据(hasOne, hasMany, belongsTo)
 ==============================================
 
-在与关联模型一起使用时，重要的是要意识到，保存模型数据应当总是由相应的 CakePHP 
-模型来完成。如果保存一条新的 Post 和它关联的 Comment，就要在保存操作的过程中使用 
+在与关联模型一起使用时，重要的是要意识到，保存模型数据应当总是由相应的 CakePHP
+模型来完成。如果保存一条新的 Post 和它关联的 Comment，就要在保存操作的过程中使用
 Post 和 Comment 模型。
 
-如果在系统中关联模型双方的记录都还不存在(例如，想要同时保存新的 User 及相关的 
+如果在系统中关联模型双方的记录都还不存在(例如，想要同时保存新的 User 及相关的
 Profile 记录)，就需要先保存主模型或者父模型。
 
-为了了解这是如何进行的，想像一下在 UsersController 控制器中有一个动作，处理新 
+为了了解这是如何进行的，想像一下在 UsersController 控制器中有一个动作，处理新
 User 和相关 Profile 的保存。下面的示例动作假设已经(使用 FormHelper)提交(POSTed)
 了足够的数据，来创建单个 User 和单个 Profile::
 
@@ -442,11 +441,11 @@ User 和相关 Profile 的保存。下面的示例动作假设已经(使用 Form
     }
 
 规则是，当使用 hasOne、hasMany 和 belongsTo 关联时，重要的是如何设置键。基本思路
-是从一个模型中获取键，并将其放入另一个模型的外键字段中。有时这可能需要在调用 
+是从一个模型中获取键，并将其放入另一个模型的外键字段中。有时这可能需要在调用
 ``save()`` 方法之后使用模型类的 ``$id`` 属性，不过其它情况下可能只需要从刚提交(
 *POSTed*)给控制器动作的表单中的隐藏输入项(*hidden input*)获得 ID。
 
-为了补充上面使用的基本方法，CakePHP 还提供了一个非常方便的方法 
+为了补充上面使用的基本方法，CakePHP 还提供了一个非常方便的方法
 ``saveAssociated()``，这让你可以一次验证和保存多个模型的数据。而且，
 ``saveAssociated()`` 方法还提供了事务支持以确保数据库中的数据完整性(例如，如果一
 个模型保存失败，其它模型也不会保存)。
@@ -472,7 +471,7 @@ User 和相关 Profile 的保存。下面的示例动作假设已经(使用 Form
     echo $this->Form->end('Add');
 
 注意看一下命名 Acount 模型的表单字段的方式。如果 Company 是主模型，
-``saveAssociated()`` 方法期望相关模型(Account)的数据以特定的格式提供，而 
+``saveAssociated()`` 方法期望相关模型(Account)的数据以特定的格式提供，而
 ``Account.0.fieldName`` 恰恰是我们需要的。
 
 .. note::
@@ -496,7 +495,7 @@ User 和相关 Profile 的保存。下面的示例动作假设已经(使用 Form
 保存通过(连接模型)的 hasMany 数据
 =================================
 
-让我们来看看如何保存两个模型的连接(*join*)表中的数据。就像 
+让我们来看看如何保存两个模型的连接(*join*)表中的数据。就像
 :ref:`hasMany-through` 一节展示的那样，连接表用 `hasMany` 类型的关系关联到各个模
 型。在我们的例子中，Cake 学校的负责人要求我们写一个应用程序，让他可以记录一个学
 生在某门课上的出勤天数和分数。查看下面的代码。 ::
@@ -643,7 +642,7 @@ User 和相关 Profile 的保存。下面的示例动作假设已经(使用 Form
         )
     )
 
-利用 `saveAssociated` 方法，CakePHP 仍然可以很容易地把 Student id 和 Course id 
+利用 `saveAssociated` 方法，CakePHP 仍然可以很容易地把 Student id 和 Course id
 放入 CourseMembership 中。
 
 .. _saving-habtm:
@@ -651,7 +650,7 @@ User 和相关 Profile 的保存。下面的示例动作假设已经(使用 Form
 保存相关模型数据 (HABTM)
 ------------------------
 
-保存通过 hasOne、belongsTo 和 hasMany 关联的模型非常简单：只需要将关联模型的 ID 
+保存通过 hasOne、belongsTo 和 hasMany 关联的模型非常简单：只需要将关联模型的 ID
 填入外键字段。 一旦完成，只要调用模型的 ``save()`` 方法，所有数据就被正确地连接
 起来了。下面的示例是传递给 Tag 模型的 ``save()`` 方法的数据数组的格式::
 
@@ -721,7 +720,7 @@ User 和相关 Profile 的保存。下面的示例动作假设已经(使用 Form
 将上面的数组传递给 ``saveAll()`` 方法将创建所包含的标签(*tag*)，各自与它们相应的
 菜单(*recipe*)关联。
 
-另一个有用的例子是，当需要保存多个标签(*Tag*)到文章(*Post*)中。这需要用以下的 
+另一个有用的例子是，当需要保存多个标签(*Tag*)到文章(*Post*)中。这需要用以下的
 HABTM 数组格式传入关联的 HABTM 数据。注意，只需要传入关联的 HABTM 模型的 id，不
 论需要再怎样嵌套::
 
@@ -789,7 +788,7 @@ HABTM 数组格式传入关联的 HABTM 数据。注意，只需要传入关联�
         <?php echo $this->Form->input('Tag.name'); ?>
     <?php echo $this->Form->end('Add Tag'); ?>
 
-在这个例子中，你可以看到 ``Recipe.id`` 隐藏字段的值被设置为 tag 要连接的 recipe 
+在这个例子中，你可以看到 ``Recipe.id`` 隐藏字段的值被设置为 tag 要连接的 recipe
 的 ID。
 
 当在控制器中调用 ``save()`` 方法时，它将自动将 HABTM 数据保存到数据库::
@@ -801,10 +800,10 @@ HABTM 数组格式传入关联的 HABTM 数据。注意，只需要传入关联�
         }
     }
 
-调用上面这段代码，将创建新的 Tag 并与 Recipe 相关联，其 ID 为 
+调用上面这段代码，将创建新的 Tag 并与 Recipe 相关联，其 ID 为
 ``$this->request->data['Recipe']['id']``。
 
-其它我们可能希望呈现关联数据的方式，可以包括下拉列表。数据可以使用 
+其它我们可能希望呈现关联数据的方式，可以包括下拉列表。数据可以使用
 ``find('list')`` 方法从模型中取出，并且赋给用模型名命名的视图变量。同名的输入项(
 *input*)会自动把该数据放入 ``<select>`` 元素中::
 
@@ -884,17 +883,17 @@ HABTM 关系更可能的情形会包含一个允许多选的 ``<select>`` 元素
 
 .. tip::
 
-    当连接表包含两个外键以外的额外字段时，通过将数组的键 ``'unique'`` 设置为 
-    ``'keepExisting'``，能够防止丢失额外字段的值。你可以认为这与设置 
+    当连接表包含两个外键以外的额外字段时，通过将数组的键 ``'unique'`` 设置为
+    ``'keepExisting'``，能够防止丢失额外字段的值。你可以认为这与设置
     'unique' => true 类似，但在保存操作过程中不会丢失额外字段的数据。另外，如果
-    你使用 bake 来创建模型，自动会设置成这样。参见 
+    你使用 bake 来创建模型，自动会设置成这样。参见
     :ref:`HABTM 关联数组 <ref-habtm-arrays>`。
 
-不过，在大多数情况下，象上面的例子那样为连接表建立模型，设置 hasMany、belongsTo 
+不过，在大多数情况下，象上面的例子那样为连接表建立模型，设置 hasMany、belongsTo
 关联，比使用 HABTM 关联更简单。
 
-数据表
-======
+数据库表
+==========
 
 虽然 CakePHP 可以有非数据库驱动的数据源，但大多数时候是数据库驱动的。CakePHP 被
 设计成与(数据库)无关，可以使用 MySQL、Microsoft SQL Server、PostgreSQL 和其它数据库。你可以象平
@@ -907,17 +906,17 @@ CakePHP 会检视表来决定每个字段的数据类型，并使用这些信息
 使用 created 和 modified 列
 ---------------------------
 
-如果在数据库表中定义 ``created`` 和/或 ``modified`` 字段为 datetime 字段(缺省值 
+如果在数据库表中定义 ``created`` 和/或 ``modified`` 字段为 datetime 字段(缺省值
 null)，CakePHP 能够识别这些字段，每当创建或保存一条记录到数据库时，自动填入这两
 个字段(除非要保存的数据中已经包含了这两个字段的值)。
 
 在最初添加记录时，``created`` 和 ``modified`` 字段会被设置为当前日期和时间。每当
 保存现有记录时，modified 字段会被更新为当前日期和时间。
 
-如果在调用 Model::save() 之前 ，$this->data 中包含了 ``created`` 或 ``modified`` 
-字段的数据(例如来自 Model::read 或者 Model::set 方法)，那么这些值将从 
-$this->data 中获取，而不会自动魔法更新。如果不希望那样，可以用 
-``unset($this->data['Model']['modified'])`` 等。另一种方法，可以重载 
+如果在调用 Model::save() 之前 ，$this->data 中包含了 ``created`` 或 ``modified``
+字段的数据(例如来自 Model::read 或者 Model::set 方法)，那么这些值将从
+$this->data 中获取，而不会自动魔法更新。如果不希望那样，可以用
+``unset($this->data['Model']['modified'])`` 等。另一种方法，可以重载
 Model::save() 方法来帮你总是这么做::
 
     class AppModel extends Model {
@@ -933,7 +932,11 @@ Model::save() 方法来帮你总是这么做::
 
     }
 
+如果你保存数据时设置了 ``fieldList``，并且 ``created`` 和 ``modified`` 不在允许
+保存的字段列表中，这两个字段还是会自动设置。当 ``created`` 和 ``modified`` 包括在
+``fieldList`` 中时，它们就和任何别的字段一样处理（即，不会自动设置）。
+
 .. meta::
-    :title lang=zh_CN: Saving Your Data
-    :keywords lang=zh_CN: doc models,validation rules,data validation,flash message,null model,table php,request data,php class,model data,database table,array,recipes,success,reason,snap,data model
+    :title lang=zh: Saving Your Data
+    :keywords lang=zh: doc models,validation rules,data validation,flash message,null model,table php,request data,php class,model data,database table,array,recipes,success,reason,snap,data model
 

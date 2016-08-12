@@ -82,5 +82,5 @@
 
 
 .. meta::
-    :title lang=zh_CN: Media Views
-    :keywords lang=zh_CN: array php,true extension,zip name,document path,mimetype,boolean value,binary files,webroot,file extension,mime type,default view,file server,authentication,parameters
+    :title lang=zh: Media Views
+    :keywords lang=zh: array php,true extension,zip name,document path,mimetype,boolean value,binary files,webroot,file extension,mime type,default view,file server,authentication,parameters

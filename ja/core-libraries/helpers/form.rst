@@ -896,11 +896,12 @@ select, checkbox, radio に関するオプション
     date や datetime フィールドのために、 empty にキー・バリューペアの配列を指定できます。 ::
 
         echo $this->Form->dateTime('Contact.date', 'DMY', '12',
-	        array(
-	            'empty' => array(
-                    'day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR',
-                    'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false
-                )
+        	array(
+        		'empty' => array(
+        			'day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR',
+        			'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false
+        		)
+        	)
             )
         );
 

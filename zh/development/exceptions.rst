@@ -395,5 +395,5 @@ RESTful 响应。
 
 
 .. meta::
-    :title lang=zh_CN: Exceptions
-    :keywords lang=zh_CN: uncaught exceptions,stack traces,logic errors,anonymous functions,renderer,html page,error messages,flexibility,lib,array,cakephp,php
+    :title lang=zh: Exceptions
+    :keywords lang=zh: uncaught exceptions,stack traces,logic errors,anonymous functions,renderer,html page,error messages,flexibility,lib,array,cakephp,php

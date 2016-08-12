@@ -1,10 +1,10 @@
 高级安装
 #####################
 
-通过 PEAR 安装器安装 CakePHP
+通过 PEAR 安装程序安装 CakePHP
 ======================================
 
-CakePHP 发行 PEAR 的安装包，故可以通过 PEAR 安装器安装。用 PEAR 安装，可以简化在
+CakePHP 发行 PEAR 的安装包，故可以通过 PEAR 安装程序安装。用 PEAR 安装，可以简化在
 多个应用程序间共享 CakePHP 类库的工作。要通过 PEAR 安装 CakePHP，需要执行下面的命
 令::
 
@@ -23,10 +23,43 @@ CakePHP 发行 PEAR 的安装包，故可以通过 PEAR 安装器安装。用 PE
 通过 Composer 安装 CakePHP
 ================================
 
-Composer 是一个适用于 PHP 5.3+ 的依赖管理工具，解决了通过 PEAR 安装的很多问题，并
-且简化了对类库的多个版本的管理。由于 CakePHP 有 PEAR 发行包，故而可以使用
-`Composer <http://getcomposer.org>`_ 安装 CakePHP。在安装 CakePHP 之前需要建立
-``composer.json`` 文件。CakePHP 应用程序的 composer.json 可以象下面这样::
+在开始之前你应当确保你的 PHP 版本是更新了的：
+
+.. code-block:: bash
+
+    php -v
+
+你最低也应当安装了 PHP 5.3.0 (CLI) 或更高版本。你的 web 服务器的 PHP 版本必须也是
+5.3.0 或更高版本，并且应当最好和命令行（CLI）的 PHP 版本相同。
+
+安装 Composer
+-------------------
+
+Composer 是一个适用于 PHP 5.3+ 的依赖管理工具，解决了 PEAR 安装程序的很多问题，
+并且简化了对类库的多个版本的管理。`Packagist <https://packagist.org/>`_ 是
+Composer 安装包的主要仓库。由于 CakePHP 也发布版本到 Packagist，故而可以使用
+`Composer <http://getcomposer.org>`_ 安装 CakePHP。
+
+- 在 Linux 和 Mac OS X 上安装 Composer
+
+  #. 按照 `official Composer documentation <https://getcomposer.org/download/>`_
+     描述的那样运行安装脚本，并遵照指示安装 Composer。
+  #. 运行下面的命令，把 composer.phar 文件移动到 path 环境变量中的一个目录中::
+
+         mv composer.phar /usr/local/bin/composer
+
+- 在 Windows 上安装 Composer
+
+  对于 Windows 系统，你可以从 `这里
+  <https://github.com/composer/windows-setup/releases/>`__ 下载 Composer 的
+  Windows 安装程序。 Composer 的 Windows 安装程序更多的指示可以参阅 `这里
+  <https://github.com/composer/windows-setup>`__ 的 README。
+
+创建 CakePHP 项目
+------------------------
+
+在安装 CakePHP 之前需要建立 ``composer.json`` 文件。CakePHP 应用程序的
+composer.json 可以象下面这样::
 
     {
         "name": "example-app",
@@ -72,8 +105,8 @@ composer.phar 文件下载到项目中。在 ``composer.json`` 所在的目录�
     如果你计划为应用程序创建单元测试，你也需要对 ``webroot/test.php`` 做上面的修
     改。
 
-如果使用 Composer 安装其他任何类库，则需要设置自动加载(*autoloader*)，并绕过
-(*work around*) Composer 自动加载的一个问题。在 ``Config/bootstrap.php`` 文件中添
+如果使用 Composer 安装其他任何类库，则需要设置自动加载（*autoloader*）并绕过
+（*work around*）Composer 自动加载的一个问题。在 ``Config/bootstrap.php`` 文件中添
 加如下代码::
 
     // 加载 Composer 的自动加载。
@@ -85,8 +118,7 @@ composer.phar 文件下载到项目中。在 ``composer.json`` 所在的目录�
     spl_autoload_register(array('App', 'load'), true, true);
 
 现在这个用 Composer 安装的 CakePHP 应用程序应该可以运行了。注意确保 composer.json
-和 composer.lock 文件与其它源代码在一起。(译注：比如一起添加到 Git 这样的源码控制
-仓库中。)
+和 composer.lock 文件与其它源代码一起（添加到源码控制中）。
 
 在多个应用程序间共享 CakePHP 类库
 ====================================================
@@ -152,5 +184,5 @@ Apache 和 mod\_rewrite (以及 .htaccess)
 
 
 .. meta::
-    :title lang=zh_CN: Advanced Installation
-    :keywords lang=zh_CN: libraries folder,core libraries,application code,different places,filesystem,constants,webroot,restriction,apps,web server,lib,cakephp,directories,path
+    :title lang=zh: Advanced Installation
+    :keywords lang=zh: libraries folder,core libraries,application code,different places,filesystem,constants,webroot,restriction,apps,web server,lib,cakephp,directories,path
