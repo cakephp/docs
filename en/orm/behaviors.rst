@@ -242,12 +242,12 @@ rename/remove finder methods when adding a behavior to a table. For example::
         ]
     ]);
 
-Defining Custom Marshalling Behavior Logic
-==========================================
+Transforming Request Data into Entity Properties
+================================================
 
-Behaviors can participate in defining how the custom fields they provide are
+Behaviors can define logic for how the custom fields they provide are
 marshalled by implementing the ``Cake\ORM\PropertyMarshalInterface``. This
-interface requires a single method be implemented::
+interface requires a single method to be implemented::
 
     public function buildMarhshalMap($marshaller, $map, $options)
     {
