@@ -328,7 +328,7 @@ Rendering A View Element Inside Your Helper
 -------------------------------------------
 
 If you would like to render an Element inside your Helper you can use
-**$this->_View->element()** like::
+``$this->_View->element()`` like::
 
     class AwesomeHelper extends Helper
     {
