@@ -13,7 +13,7 @@ Deprecations
   ``$routes->redirect()`` instead.
 * ``Router::parseNamedParams()`` is deprecated. Named parameter backwards
   compatibility will be removed in 4.0.0
-* ``Cake\Http\Response`` has had the following methods deprecated because they
+* ``Cake\Http\Client\Response`` has had the following methods deprecated because they
   overlap with PSR7 interface methods:
 
   * ``statusCode()`` use ``getStatusCode()`` instead.
