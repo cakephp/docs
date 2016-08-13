@@ -13,8 +13,8 @@ Deprecations
   ``$routes->redirect()`` à la place.
 * ``Router::parseNamedParams()`` est dépréciée. La rétro-compatibilité des
   paramètres nommés sera retirée dans la version 4.0.0.
-* ``Cake\Http\Response`` a vu ses méthodes suivantes dépréciées car elles se
-  chevauchent avec les méthodes de l'interface PSR7:
+* ``Cake\Http\Client\Response`` a vu ses méthodes suivantes dépréciées car
+  elles se chevauchent avec les méthodes de l'interface PSR7:
 
   * ``statusCode()`` utilisez ``getStatusCode()`` à la place.
   * ``encoding()`` utilisez ``getEncoding()`` à la place.
@@ -104,6 +104,8 @@ Améliorations de l'ORM
   entity.
 * L'option ``allowNullableNulls`` a été ajoutée à la règle ``existsIn``. Cette
   option permet aux règles de passer quand des colonnes sont nulles.
+* Sauvegarder des enregistrements traduits est maintenant plus simple. Consultez
+  la section :ref:`saving-multiple-translations` pour plus d'informations.
 
 Support pour la Pagination Multiple Ajouté
 ==========================================

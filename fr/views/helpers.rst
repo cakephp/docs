@@ -343,6 +343,24 @@ accédant à l'attribut de vue correspondant::
     ``HelperRegistry`` va tenter de charger automatiquement les helpers qui ne
     sont pas spécifiquement identifiés dans votre ``Controller``.
 
+Rendre un Element de Vue dans votre Helper
+------------------------------------------
+
+Si vous souhaiter rendre un Element dans votre Helper, vous pouvez utiliser
+**$this->_View->element()** comme ceci::
+
+    class AwesomeHelper extends Helper
+    {
+        public someFunction()
+        {
+            // Affiche directement dans votre helper
+            echo $this->_View->element('/path/to/element',['foo'=>'bar','bar'=>'foo']);
+
+            // ou le retourne dans votre vue
+            return $this->_View->element('/path/to/element',['foo'=>'bar','bar'=>'foo']);
+        }
+    }
+
 .. _helper-api:
 
 Classe Helper

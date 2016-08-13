@@ -170,7 +170,7 @@ translation for entities that are loaded::
 
     // Load I18n core functions at the beginning of your Controller:
     use Cake\I18n\I18n;
-    
+
     // Then you can change the language in your action:
     I18n::locale('es');
     $this->loadModel('Articles');
@@ -448,8 +448,8 @@ Validating Translated Entities
 ------------------------------
 
 When attaching ``TranslateBehavior`` to a model, you can define the validator
-that should be used when translation records are created/modified by the behavior
-during ``newEntity()`` or ``patchEntity()``::
+that should be used when translation records are created/modified by the
+behavior during ``newEntity()`` or ``patchEntity()``::
 
     class ArticlesTable extends Table
     {

@@ -109,7 +109,7 @@ Il pourrait être invoqué de la façon suivante::
     $slug = $articles->slug('My article name');
 
 Limiter ou renommer les Méthodes Mixin Exposed
-----------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Lors de la création de behaviors, il peut y avoir des situations où vous ne
 voulez pas montrer les méthodes public en méthodes mixin. Dans ces cas, vous
@@ -218,7 +218,7 @@ Une fois que notre behavior a la méthode ci-dessus, nous pouvons l'appeler::
     $article = $articles->find('slug', ['slug' => $value])->first();
 
 Limiter ou renommer les Méthodes de Finder Exposed
---------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Lors de la création de behaviors, il peut y avoir des situations où vous ne
 voulez pas montrer les méthodes find, ou vous avez besoin de renommer les
@@ -248,6 +248,31 @@ table. Par exemple::
             'slugged' => 'findSlug',
         ]
     ]);
+
+Transformer les Données de la Requête en Propriétés de l'Entity
+===============================================================
+
+Les Behaviors peuvent définir de la logique sur la façon dont les champs
+personnalisés qu'ils fournissent sont marshalled en implémentant
+``Cake\ORM\PropertyMarshalInterface``. Cette interface nécessite une méthode
+unique à implémenter::
+
+    public function buildMarhshalMap($marshaller, $map, $options)
+    {
+        return [
+            'custom_behavior_field' => function ($value, $entity) {
+                // Transform the value as necessary
+                return $value . '123';
+            }
+        ];
+    }
+
+``TranslateBehavior`` a une implémentation non banal de cette interface que vous
+pouvez aller consulter.
+
+.. versionadded:: 3.3.0
+    La possibilité pour les behaviors de participer au marshalling a été ajoutée
+    dans la version 3.3.0
 
 Retirer les Behaviors Chargés
 =============================

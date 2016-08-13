@@ -316,6 +316,12 @@ de la méthode de mutation ``_getFullName()`` de l'entity Author::
         }
     ]);
 
+Vous pouvez aussi récupérer le nom complet directement dans la liste en
+utilisant. ::
+
+    $this->displayField('full_name');
+    $query = $authors->find('list');
+
 Trouver des Données Threaded
 ============================
 

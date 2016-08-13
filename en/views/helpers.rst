@@ -327,7 +327,8 @@ matching view property::
 Rendering A View Element Inside Your Helper
 -------------------------------------------
 
-If you would like to render an Element inside your Helper you can use **$this->_View->element()** like::
+If you would like to render an Element inside your Helper you can use
+**$this->_View->element()** like::
 
     class AwesomeHelper extends Helper
     {

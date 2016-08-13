@@ -201,7 +201,7 @@ nécessaire. Notre écouteur ``UserStatistics`` pourrait commencer comme ceci::
             ];
         }
 
-        public function updateBuyStatistic($event)
+        public function updateBuyStatistic($event, $order)
         {
             // Code to update statistics
         }

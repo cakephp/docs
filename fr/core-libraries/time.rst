@@ -186,6 +186,12 @@ Les types de calendrier suivants sont supportés:
 .. versionadded:: 3.1
     Le support des calendriers non-grégoriens a été ajouté dans 3.1
 
+.. note::
+    Pour les chaînes constantes, par exemple pour IntlDateFormatter::FULL, Intl
+    utilise la librairie ICU qui alimente ses données à partir de CLDR
+    (http://cldr.unicode.org/) dont la version peut varier selon l'installation
+    PHP et donner des résultats différents.
+
 .. php:method:: nice()
 
 Affiche un format prédéfini 'nice'::
