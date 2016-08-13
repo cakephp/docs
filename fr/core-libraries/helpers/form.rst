@@ -908,17 +908,17 @@ Les options pour  select, checkbox et inputs radio
     Si vous avez besoin de définir la valeur par défaut d'un champ password à
     vide, utilisez 'value'=> '' (deux fois simple cote) à la place.
 
-    Une liste de paire de clé-valeur peut être fournie pour un champ de type
-    date ou datetime::
+  Une liste de paire de clé-valeur peut être fournie pour un champ de type
+  date ou datetime::
 
-        echo $this->Form->dateTime('Contact.date', 'DMY', '12',
-	        array(
-	            'empty' => array(
-                    'day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR',
-                    'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false
-                )
+    echo $this->Form->dateTime('Contact.date', 'DMY', '12',
+        array(
+            'empty' => array(
+                'day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR',
+                'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false
             )
-        );
+        )
+    );
 
   Affiche:
 
