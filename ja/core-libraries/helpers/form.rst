@@ -893,17 +893,17 @@ select, checkbox, radio に関するオプション
     パスワードフィールドのデフォルト値を空値にしたい場合は、
     'value' => '' の方を使ってください。
 
-    date や datetime フィールドのために、 empty にキー・バリューペアの配列を指定できます。 ::
+  date や datetime フィールドのために、 empty にキー・バリューペアの配列を指定できます。 ::
 
-        echo $this->Form->dateTime('Contact.date', 'DMY', '12',
-        	array(
-        		'empty' => array(
-        			'day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR',
-        			'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false
-        		)
-        	)
+
+    echo $this->Form->dateTime('Contact.date', 'DMY', '12',
+        array(
+            'empty' => array(
+                'day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR',
+                'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false
             )
-        );
+        )
+    );
 
   出力結果:
 
@@ -1615,7 +1615,7 @@ file タイプの入力フィールドを生成::
     ブラウザで JavaScript を有効にする場合はこれが必要です。
 
     このメソッドは ``<form>`` 要素を作成します。もし、このメソッドを、既存のフォームの中で
-    使用したい場合、 新しいフォームがそのフォームの外に作成されるようにするために ``inline``
+    使用したい場合、 新しいフォームが既存のフォームの外に作成されるようにするために ``inline``
     や ``block`` オプションを使用しなければなりません。
 
     もし、あなたのフォームを投稿するボタンを探しているなら、代わりに
