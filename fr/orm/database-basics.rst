@@ -514,7 +514,7 @@ PHP::
         public static function parse($value)
         {
             // Parse the data from MySQL.
-            return new static($part[0], $part[1]);
+            return new static($value[0], $value[1]);
         }
 
         public function __construct($lat, $long)
