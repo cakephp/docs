@@ -186,7 +186,7 @@ Ex.: ``create_products``.
 
 .. versionadded:: cakephp/migrations 1.5.2
 
-    A partir da versão 1.5.2 do `plugin migrations<https://github.com/cakephp/migrations/>`_,
+    A partir da versão 1.5.2 do `plugin migrations <https://github.com/cakephp/migrations/>`_,
     o nome dos arquivos de migrações são colocados automaticamente no padrão
     **camel case**.
     Esta versão do plugin está disponível apenas a partir da versão 3.1 do
@@ -556,16 +556,18 @@ como migradas::
 
     $ bin/cake migrations mark_migrated all
 
-``seed`` : Seeding your database
---------------------------------
+``seed`` : Populando seu banco de dados
+---------------------------------------
 
-As of 1.5.5, you can use the ``migrations`` shell to seed your database. This
-leverages the `Phinx library seed feature <http://docs.phinx.org/en/latest/seeding.html>`_.
-By default, seed files will be looked for in the ``config/Seeds`` directory of
-your application. Please make sure you follow
-`Phinx instructions to build your seed files <http://docs.phinx.org/en/latest/seeding.html#creating-a-new-seed-class>`_.
+A partir da versão 1.5.5, você pode usar a **shell** de ``migrations`` para
+popular seu banco de dados. Essa função é oferecida graças ao
+`recurso de seed da biblioteca Phinx <http://docs.phinx.org/en/latest/seeding.html>`_.
+Por padrão, arquivos **seed** ficarão no diretório ``config/Seeds`` de sua
+aplicação. Por favor, tenha certeza de seguir as
+`instruções do Phinx para construir seus arquivos de seed <http://docs.phinx.org/en/latest/seeding.html#creating-a-new-seed-class>`_.
 
-As for migrations, a ``bake`` interface is provided for seed files::
+Assim como nos **migrations**, uma interface do ```bake`` é oferecida para gerar
+arquivos de **seed**::
 
     # This will create a ArticlesSeed.php file in the directory config/Seeds of your application
     # By default, the table the seed will try to alter is the "tableized" version of the seed filename
@@ -580,7 +582,7 @@ As for migrations, a ``bake`` interface is provided for seed files::
     # You can specify an alternative connection when generating a seeder.
     $ bin/cake bake seed Articles --connection connection
 
-To seed your database, you can use the ``seed`` subcommand::
+Para popular seu banco de dados, você pode usar o subcomando ``seed``::
 
     # Without parameters, the seed subcommand will run all available seeders
     # in the target directory, in alphabetical order.
@@ -598,32 +600,35 @@ To seed your database, you can use the ``seed`` subcommand::
     # You can run seeders from a specific connection
     $ bin/cake migrations seed --connection connection
 
-Be aware that, as opposed to migrations, seeders are not tracked, which means
-that the same seeder can be applied multiple times.
+Esteja ciente que, ao oposto das **migrations**, **seeders** não são
+versionados, o que significa que o mesmo **seeder** pode ser aplicado diversas
+vezes.
 
-Using Migrations In Plugins
-===========================
+Usando migrations em plugins
+============================
 
-Plugins can also provide migration files. This makes plugins that are intended
-to be distributed much more portable and easy to install. All commands in the
-Migrations plugin support the ``--plugin`` or ``-p`` option that will scope the
-execution to the migrations relative to that plugin::
+**Plugins** também podem oferecer **migrations**. Isso faz com que **plugins**
+que são planejados para serem distribuídos tornem-se muito mais práticos e
+fáceis de instalar. Todos os comandos do plugin **Migrations** suportam a opção
+``--plugin`` ou ``-p``, que por sua vez vai delegar a execução da tarefa ao
+escopo relativo a um determinado **plugin**::
 
     $ bin/cake migrations status -p PluginName
 
     $ bin/cake migrations migrate -p PluginName
 
-Running Migrations in a non-shell environment
-=============================================
+Executando migrations em ambientes fora da linha de comando
+===========================================================
 
 .. versionadded:: cakephp/migrations 1.2.0
 
-Since the release of version 1.2 of the migrations plugin, you can run
-migrations from a non-shell environment, directly from an app, by using the new
-``Migrations`` class. This can be handy in case you are developing a plugin
-installer for a CMS for instance.
-The ``Migrations`` class allows you to run the following commands from the
-migrations shell:
+Desde o lançamento da versão 1.2 do plugin, você pode executar **migrations**
+fora da linha de comando, diretamente de uma aplicação, ao usar a nova classe
+``Migrations``. Isso pode ser muito útil caso você esteja desenvolvendo um
+instalador de **plugins** para um CMS, para exemplificar.
+
+A classe ``Migrations`` permite que você execute os seguintes comandos
+disponíveis na **shell**:
 
 * migrate
 * rollback
@@ -631,77 +636,77 @@ migrations shell:
 * status
 * seed
 
-Each of these commands has a method defined in the ``Migrations`` class.
+Cada um desses comandos tem um método definido na classe ``Migrations``.
 
-Here is how to use it::
+Veja como usá-la::
 
     use Migrations\Migrations;
 
     $migrations = new Migrations();
 
-    // Will return an array of all migrations and their status
+    // Retornará um array de todos migrations e seus status
     $status = $migrations->status();
 
-    // Will return true if success. If an error occurred, an exception will be thrown
+    // Retornará true se bem sucedido. Se um erro ocorrer, uma exceção será lançada
     $migrate = $migrations->migrate();
 
-    // Will return true if success. If an error occurred, an exception will be thrown
+    // Retornará true se bem sucedido. Se um erro ocorrer, uma exceção será lançada
     $rollback = $migrations->rollback();
 
-    // Will return true if success. If an error occurred, an exception will be thrown
+    // Retornará true se bem sucedido. Se um erro ocorrer, uma exceção será lançada
     $markMigrated = $migrations->markMigrated(20150804222900);
 
-    // Will return true if success. If an error occurred, an exception will be thrown
+    // Retornará true se bem sucedido. Se um erro ocorrer, uma exceção será lançada
     $seeded = $migrations->seed();
 
-The methods can accept an array of parameters that should match options from
-the commands::
+Os métodos aceitam um **array** de parâmetros que devem combinar com as opções
+dos comandos::
 
     use Migrations\Migrations;
 
     $migrations = new Migrations();
 
-    // Will return an array of all migrations and their status
+    // Retornará um array de todos migrations e seus status
     $status = $migrations->status(['connection' => 'custom', 'source' => 'MyMigrationsFolder']);
 
-You can pass any options the shell commands would take.
-The only exception is the ``markMigrated`` command which is expecting the
-version number of the migrations to mark as migrated as first argument. Pass
-the array of parameters as the second argument for this method.
+Você pode passar qualquer opção que esteja disponível pelos comandos **shell**.
+A única exceção é o comando ``markMigrated`` que espera um número de versão a
+ser marcado como migrado, como primeiro argumento. Passe o **array** de
+parâmetros como segundo argumento nesse caso.
 
-Optionally, you can pass these parameters in the constructor of the class.
-They will be used as default and this will prevent you from having to pass
-them on each method call::
+Opcionalmente, você pode passar esses parâmetros pelo construtor da classe.
+Eles serão usados como padrão evitando que você tenha que passá-los em cada
+chamada do método::
 
     use Migrations\Migrations;
 
     $migrations = new Migrations(['connection' => 'custom', 'source' => 'MyMigrationsFolder']);
 
-    // All the following calls will be done with the parameters passed to the Migrations class constructor
+    // Todas as chamadas de métodos serão executadas usando os parâmetros passados pelo construtor da classe
     $status = $migrations->status();
     $migrate = $migrations->migrate();
 
-If you need to override one or more default parameters for one call, you can
-pass them to the method::
+Se você precisar sobrescrever um ou mais parâmetros definidos previamente, você
+pode passá-los para um método::
 
     use Migrations\Migrations;
 
     $migrations = new Migrations(['connection' => 'custom', 'source' => 'MyMigrationsFolder']);
 
-    // This call will be made with the "custom" connection
+    // Essa chamada será feita com a conexão "custom"
     $status = $migrations->status();
-    // This one with the "default" connection
+    // Essa chamada será feita com a conexão "default"
     $migrate = $migrations->migrate(['connection' => 'default']);
 
-Tips and tricks
+Dicas e truques
 ===============
 
-Creating Custom Primary Keys
-----------------------------
+Criando chaves primárias customizadas
+-------------------------------------
 
-If you need to avoid the automatic creation of the ``id`` primary key when
-adding new tables to the database, you can use the second argument of the
-``table()`` method::
+Se você precisa evitar a criação automática da chave primária ``id`` ao
+adicioanr novas tabelas ao banco de dados, é possível usar o segundo argumento
+do método ``table()``::
 
     <?php
     use Migrations\AbstractMigration;
@@ -719,23 +724,25 @@ adding new tables to the database, you can use the second argument of the
         }
     }
 
-The above will create a ``CHAR(36)`` ``id`` column that is also the primary key.
+O código acima vai criar uma coluna ``CHAR(36)`` ``id`` que também é a chave
+primária.
 
 .. note::
 
-    When specifying a custom primary key on the command line, you must note
-    it as the primary key in the id field, otherwise you may get an error
-    regarding duplicate id fields, i.e.::
+    Ao especificar chaves primárias customizadas pela linha de comando, você
+    deve apontá-las como chave primária no campo id, caso contrário você pode
+    receber um erro apontando campos diplicados, i.e.::
 
         $ bin/cake bake migration CreateProducts id:uuid:primary name:string description:text created modified
 
-Additionally, since Migrations 1.3, a new way to deal with primary key was
-introduced. To do so, your migration class should extend the new
-``Migrations\AbstractMigration`` class.
-You can specify a ``autoId`` property in the Migration class and set it to
-``false``, which will turn off the automatic ``id`` column creation. You will
-need to manually create the column that will be used as a primary key and add
-it to the table declaration::
+Adicionalmente, desde a versão 1.3, uma novo meio de lidar com chaves primárias
+foi introduzido. Para tal, sua classe de migração deve estender a nova classe
+``Migrations\AbstractMigration``.
+
+Você pode especificar uma propriedade ``autoId`` na sua classe e defini-la como
+``false``, o quê desabilitará a geração automática da coluna ``id``. Você
+vai precisar criar manualmente a coluna que será usada como chave primária e
+adicioná-la à declaração da tabela::
 
     <?php
     use Migrations\AbstractMigration;
@@ -760,22 +767,25 @@ it to the table declaration::
         }
     }
 
-Compared to the previous way of dealing with primary key, this method gives you
-the ability to have more control over the primary key column definition:
-unsigned or not, limit, comment, etc.
+Comparado ao método apresentado anteriormente de lidar com chaves primárias,
+nesse método, temos a possibilidade de ter maior controle sobre as definições
+da coluna da chave primária:
+unsigned, limit, comentários, etc.
 
-All baked migrations and snapshot will use this new way when necessary.
+Todas as migrations e snapshots criadas pelo bake vão usar essa nova forma
+quando necessário.
 
 .. warning::
 
-    Dealing with primary key can only be done on table creation operations.
-    This is due to limitations for some database servers the plugin supports.
+    Lidar com chaves primárias só é possível no momento de criação de tabelas.
+    Isso é devido a algumas limitações de alguns servidores de banco de dados
+    que o plugin suporta.
 
-Collations
-----------
+Colações
+--------
 
-If you need to create a table with a different collation than the database
-default one, you can define it with the ``table()`` method, as an option::
+Se você precisar criar uma tabela com colação diferente do padrão do banco de
+dados, você pode defini-la pelo método ``table()``, como uma opção::
 
     <?php
     use Migrations\AbstractMigration;
@@ -797,32 +807,31 @@ default one, you can define it with the ``table()`` method, as an option::
         }
     }
 
-Note however this can only be done on table creation : there is currently
-no way of adding a column to an existing table with a different collation than
-the table or the database.
-Only ``MySQL`` and ``SqlServer`` supports this configuration key for the time
-being.
+Note que isso só pode ser feito na criação da tabela : não há atualmente uma
+forma de adicionar uma coluna a uma tabela existente com uma colação diferente
+do padrão da tabela, ou mesmo do banco de dados.
+Apenas ``MySQL`` e ``SqlServer`` suportam essa chave de configuração.
 
-Updating columns name and using Table objects
----------------------------------------------
+Atualizando nome de colunas e usando objetos de tabela
+------------------------------------------------------
 
-If you use a CakePHP ORM Table object to manipulate values from your database
-along with renaming or removing a column, make sure you create a new instance of
-your Table object after the ``update()`` call. The Table object registry is
-cleared after an ``update()`` call in order to refresh the schema that is
-reflected and stored in the Table object upon instantiation.
+Se você usa um objeto ORM Table do CakePHP para manipular valores do seu banco
+de dados, renomeando ou removendo uma coluna, certifique-se de criar uma nova
+instância do seu objeto depois da chamada do ``update()``. O registro do objeto
+é limpo depois da chamada do ``update()`` para atualizar o **schema** que é
+refletido e armazenado no objeto ``Table`` paralelo à instanciação.
 
-Migrations and Deployment
--------------------------
+Migrations e Deployment
+-----------------------
 
-If you use the plugin when deploying your application, be sure to clear the ORM
-cache so it renews the column metadata of your tables.
-Otherwise, you might end up having errors about columns not existing when
-performing operations on those new columns.
-The CakePHP Core includes a :doc:`ORM Cache Shell <console-and-shells/orm-cache>`
-that you can use to perform this operation::
+Se você usa o plugin ao fazer o **deploy** de sua aplicação, garanta que o cache
+ORM seja limpo para renovar os metadados das colunas de suas tabelas.
+Caso contrário, você pode acabar recebendo erros relativos a colunas
+inexistentes ao criar operações nessas mesmas colunas.
+O **core** do CakePHP possui uma :doc:`ORM Cache Shell <console-and-shells/orm-cache>`
+que você pode usar para realizar essas operação::
 
     $ bin/cake orm_cache clear
 
-Be sure to read the :doc:`ORM Cache Shell <console-and-shells/orm-cache>`
-section of the cookbook if you want to know more about this shell.
+Leia a seção :doc:`ORM Cache Shell <console-and-shells/orm-cache>` do cookbook
+se você quiser conhecer mais sobre essa **shell**.
