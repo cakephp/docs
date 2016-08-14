@@ -89,7 +89,7 @@ Aqui segue um exemplo de migração::
     }
 
 Essa migração irá adicionar uma tabela chamada ``products`` ao banco de dados
-com as seguintes colunas::
+com as seguintes colunas:
 
 - ``id`` coluna do tipo ``integer`` como chave primária
 - ``name`` coluna do tipo ``string``
@@ -125,7 +125,7 @@ Criando migrations
 Arquivos de migração são armazeados no diretório **config/Migrations** da 
 sua aplicação. O nome dos arquivos de migração têm como prefixo a data 
 em que foram criados, no formato **YYYYMMDDHHMMSS_MigrationName.php**. Aqui
-estão exemplos de arquivos de migração::
+estão exemplos de arquivos de migração:
 
 * 20160121163850_CreateProducts.php
 * 20160210133047_AddRatingToProducts.php
