@@ -465,7 +465,7 @@ JSON データを変換してクエリを作成します。
         public static function parse($value)
         {
             // MySQL からのデータをパース
-            return new static($part[0], $part[1]);
+            return new static($value[0], $value[1]);
         }
 
         public function __construct($lat, $long)
