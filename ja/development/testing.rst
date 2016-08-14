@@ -194,7 +194,7 @@ CakePHP におけるほとんどのことがそうであるように、テスト
 
 テストケースを使うことにより、 既知の入力セットと期待される出力結果との関係を 簡単に記述することが
 できます。これにより、あなたの書いたコードが期待した動作を満たしているかどうか 簡単に確かめることが
-できます。あなたはより自信を持ってコードを書くことができるようになる 手助けをしてくれます。 
+できます。あなたはより自信を持ってコードを書くことができるようになる 手助けをしてくれます。
 また、テストはコードなので、あなたが変更を加えるたびに再実行するのは簡単です。
 これは新たなバグの発生を防ぐ手助けをしてくれるでしょう。
 
@@ -305,7 +305,7 @@ PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを�
 
 * ``setUp`` は、テストメソッドの前に毎回呼び出されます。
   テストされるオブジェクトの生成や、テストのためのデータの初期化に使われます。
-  ``parent::setUp()`` を呼び出すことを忘れないでください。 
+  ``parent::setUp()`` を呼び出すことを忘れないでください。
 * ``tearDown`` は、テストメソッドの後に毎回呼び出されます。
   テストが完了した後のクリーンアップに使われます。
   ``parent::tearDown()`` を呼び出すことを忘れないでください。
@@ -513,7 +513,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesFixture extends TestFixture
     {
-        public $import = ['table' => 'articles']
+        public $import = ['table' => 'articles'];
     }
 
 異なる接続の使用を使用したい場合::
@@ -659,7 +659,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
         public $fixtures = ['app.articles'];
     }
 
-このテストケースの ``$fixtures`` 変数に使用する予定のフィクスチャを設定します。 
+このテストケースの ``$fixtures`` 変数に使用する予定のフィクスチャを設定します。
 クエリを実行するにあたり、必要なフィクスチャをすべてインクルードすることを覚えておいてください。
 
 テストメソッドの作成
@@ -743,7 +743,7 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
 コンポーネント、モデルそしてヘルパーを実行します。これはあなたのアプリケーションとその動作する部品の
 全てにより高いレベルのテストを提供します。
 
-あなたは典型的な Articles コントローラ、およびそれに対応するモデルを持っているとします。
+あなたは典型的な ArticlesController、およびそれに対応するモデルを持っているとします。
 コントローラのコードは次のようになります。 ::
 
     namespace App\Controller;
@@ -903,6 +903,48 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
         // その他のアサーション
     }
 
+ステートレス認証と API のテスト
+-------------------------------
+
+Basic 認証のようなステートレス認証を使用する API をテストするために、実際の認証の
+リクエストヘッダーをシミュレートする環境変数やヘッダを注入するためにリクエストを設定できます。
+
+Basic または Digest 認証をテストする際、自動的に
+`PHP が作成する <http://php.net/manual/ja/features.http-auth.php>`_
+環境変数を追加できます。これらの環境変数は、 :ref:`basic-authentication` に概説されている
+認証アダプター内で使用されます。 ::
+
+    public function testBasicAuthentication()
+    {
+        $this->configRequest([
+            'environment' => [
+                'PHP_AUTH_USER' => 'username',
+                'PHP_AUTH_PW' => 'password',
+            ]
+        ]);
+
+        $this->get('/api/posts');
+        $this->assertResponseOk();
+    }
+
+OAuth2 のようなその他の認証方法をテストしている場合、Authorization ヘッダーを
+直接セットできます。 ::
+
+    public function testOauthToken()
+    {
+        $this->configRequest([
+            'headers' => [
+                'authorization' => 'Bearer: oauth-token'
+            ]
+        ]);
+
+        $this->get('/api/posts');
+        $this->assertResponseOk();
+    }
+
+``configRequest()`` 内の headers キーは、アクションに必要な追加の HTTP ヘッダーを
+設定するために使用されます。
+
 CsrfComponent や SecurityComponent で保護されたアクションのテスト
 -----------------------------------------------------------------
 
@@ -916,9 +958,49 @@ SecurityComponent または CsrfComponent のいずれかで保護されたア�
         $this->post('/posts/add', ['title' => 'Exciting news!']);
     }
 
+また、トークンを使用するテストで debug を有効にすることは重要です。SecurityComponent が
+「デバッグ用トークンがデバッグ以外の環境で使われている」と考えてしまうのを防ぐためです。
+``requireSecure()`` のような他のメソッドでテストした時は、適切な環境変数をセットするために
+``configRequest()`` を利用できます。 ::
+
+    // SSL 接続を装います。
+    $this->configRequest([
+        'environment' => ['HTTPS' => 'on']
+    ]);
+
 .. versionadded:: 3.1.2
     ``enableCsrfToken()`` と ``enableSecurityToken()`` メソッドは 3.1.2 で追加されました。
 
+PSR7 ミドルウェアの統合テスト
+-----------------------------
+
+統合テストは、あなたの PSR7 アプリケーション全体や :doc:`/controllers/middleware` を
+テストするために利用されます。デフォルトで ``IntegrationTestCase`` は、
+``App\Application`` クラスの存在を自動検知し、あなたのアプリケーションの統合テストを
+自動的に有効にします。 ``useHttpServer()`` メソッドでこの振舞いを切り替えられます。 ::
+
+    public function setUp()
+    {
+        // PSR7 統合テストの有効化
+        $this->useHttpServer(true);
+
+        // PSR7 統合テストの無効化
+        $this->useHttpServer(false);
+    }
+
+``configApplication()`` メソッドを使うことによって、使用するアプリケーションクラス名と
+コンストラクタの引数をカスタマイズすることができます。 ::
+
+    public function setUp()
+    {
+        $this->configApplication('App\App', [CONFIG]);
+    }
+
+PSR7 モードを有効にして、アプリケーションクラスの設定を可能にした後でも、
+``IntegrationTestCase`` に存在する機能は、通常と同様に利用できます。
+
+.. versionadded:: 3.3.0
+    PSR7 ミドルウェアと ``useHttpServer()`` メソッドは、3.3.0 で追加されました。
 
 アサーションメソッド
 --------------------
@@ -1057,7 +1139,7 @@ SecurityComponent または CsrfComponent のいずれかで保護されたア�
     // このアクションは、クッキーを変更するものとします。
     $this->get('/bookmarks/index');
 
-    $this->assertCookieEncrypted('my_cookie', 'An updated value');
+    $this->assertCookieEncrypted('An updated value', 'my_cookie');
 
 .. versionadded: 3.1.7
     ``assertCookieEncrypted`` とは ``cookieEncrypted`` は 3.1.7 で追加されました。
@@ -1297,6 +1379,106 @@ PagematronComponent というコンポーネントがアプリケーションに
 
 他のヘルパーを使用するヘルパーをテストしている時、View クラスの ``loadHelpers`` メソッドを
 モックにしてください。
+
+.. _testing-events:
+
+イベントのテスト
+================
+
+:doc:`/core-libraries/events` は、アプリケーションコードを分離する素晴らしい方法ですが、
+テストの際、これらのイベントを実行するテストケース内のイベントの結果をテストすることになりがちです。
+これは、 ``assertEventFired`` や ``assertEventFiredWith`` を代わりに使うことで削除ができる、
+余分な結合の一種です。
+
+Orders を例に詳しく説明します。以下のテーブルを持っているとします。 ::
+
+    class OrdersTable extends Table
+    {
+
+        public function place($order)
+        {
+            if ($this->save($order)) {
+                // CartsTable へ移されたカートの移動
+                $event = new Event('Model.Order.afterPlace', $this, [
+                    'order' => $order
+                ]);
+                $this->eventManager()->dispatch($event);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    class CartsTable extends Table
+    {
+
+        public function implementedEvents()
+        {
+            return [
+                'Model.Order.afterPlace' => 'removeFromCart'
+            ];
+        }
+
+        public function removeFromCart(Event $event)
+        {
+            $order = $event->data('order');
+            $this->delete($order->cart_id);
+        }
+    }
+
+.. note::
+    イベントの発生をアサートするために、イベントマネージャ上で最初に :ref:`tracking-events`
+    を有効にしなければなりません。
+
+上記の ``OrdersTable`` をテストするために、``setUp()`` 内でトラッキングを有効にした後、
+イベントが発生することをアサートし、そして ``$order`` エンティティがイベントデータに
+渡されることをアサートします。 ::
+
+    namespace App\Test\TestCase\Model\Table;
+
+    use App\Model\Table\OrdersTable;
+    use Cake\Event\EventList;
+    use Cake\ORM\TableRegistry;
+    use Cake\TestSuite\TestCase;
+
+    class OrdersTableTest extends TestCase
+    {
+
+        public $fixtures = ['app.orders'];
+
+        public function setUp()
+        {
+            parent::setUp();
+            $this->Orders = TableRegistry::get('Orders');
+            // イベントトラッキングの有効化
+            $this->Orders->eventManager()->setEventList(new EventList());
+        }
+
+        public function testPlace()
+        {
+            $order = new Order([
+                'user_id' => 1,
+                'item' => 'Cake',
+                'quantity' => 42,
+            ]);
+
+            $this->assertTrue($this->Orders->place($order));
+
+            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->eventManager());
+            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->eventManager());
+        }
+    }
+
+デフォルトでは、アサーションのためにグローバルな ``EventManager`` が利用されるため、
+グローバルイベントのテストは、イベントマネージャに渡す必要はありません。 ::
+
+    $this->assertEventFired('My.Global.Event');
+    $this->assertEventFiredWith('My.Global.Event', 'user', 1);
+
+.. versionadded:: 3.2.11
+
+    イベントトラッキングと ``assertEventFired()`` と ``assertEventFiredWith`` は
+    追加されました。
 
 テストスイートの作成
 ====================

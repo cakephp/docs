@@ -1,224 +1,431 @@
-{% extends 'default/layout.html' -%}
-{%- block doctype %}
+{%- macro script(script_files) %}
+    {%- for scriptfile in script_files %}
+    <script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script>
+    {%- endfor %}
+{%- endmacro %}
+
+{%- macro css(css_files) %}
+    {%- for cssfile in css_files %}
+    <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
+    {%- endfor %}
+{%- endmacro %}
+
+{# The files that make these builds are defined in Makefile #}
+{%- set css_files = ['_static/css/app.css'] -%}
+{%- set script_files = ['_static/app.js'] -%}
+
 <!DOCTYPE html>
-{% endblock -%}
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset={{ encoding }}" />
+    {{ metatags }}
+    <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
+    <link href="{{ pathto('_static/favicon.png', 1) }}" type="image/png" rel="icon" />
 
-{% block extrahead %}
-<link href="{{ pathto('_static/favicon.ico', 1) }}" type="image/x-icon" rel="icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {{ css(css_files) }}
+    {{ script(script_files) }}
 
-{% for lang in languages %}
-	{%- if lang != language -%}
-		{%- if has_lang(lang, pagename) -%}
-		<link rel="alternate" hreflang="{{ lang }}" href="{{ lang_link(lang, pagename) }}" />
-		{%- endif -%}
-	{%- endif -%}
-{% endfor %}
+    {% for lang in languages %}
+        {%- if lang != language -%}
+            {%- if has_lang(lang, pagename) -%}
+            <link rel="alternate" hreflang="{{ lang }}" href="{{ lang_link(lang, pagename) }}" />
+            {%- endif -%}
+        {%- endif -%}
+    {% endfor %}
 
-<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 3.x Search" href="{{ pathto('_static/opensearchdescription-book-3-x.xml', 1) }}">
-<script type="text/javascript">
-window.lang = "{{ language }}";
-</script>
-{% endblock %}
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within {{ docstitle }}" href="{{ pathto('_static/opensearchdescription-book-3-x.xml', 1) }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-{%- set script_files = [
-	"_static/jquery.js",
-	"_static/underscore.js",
-	"_static/doctools.js",
-	"_static/app.js",
-	"_static/search.js",
-	"_static/typeahead.js",
-	"_static/modernizr.foundation.js",
-	"_static/foundation.js"
-] -%}
+{%- block linktags %}
+    {%- if hasdoc('about') %}
+    <link rel="author" title="{{ _('About these documents') }}" href="{{ pathto('about') }}" />
+    {%- endif %}
+    {%- if hasdoc('genindex') %}
+    <link rel="index" title="{{ _('Index') }}" href="{{ pathto('genindex') }}" />
+    {%- endif %}
+    {%- if hasdoc('search') %}
+    <link rel="search" title="{{ _('Search') }}" href="{{ pathto('search') }}" />
+    {%- endif %}
+    {%- if hasdoc('copyright') %}
+    <link rel="copyright" title="{{ _('Copyright') }}" href="{{ pathto('copyright') }}" />
+    {%- endif %}
+    <link rel="top" title="{{ docstitle|e }}" href="{{ pathto('index') }}" />
+    {%- if parents %}
+    <link rel="up" title="{{ parents[-1].title|striptags|e }}" href="{{ parents[-1].link|e }}" />
+    {%- endif %}
+    {%- if next %}
+    <link rel="next" title="{{ next.title|striptags|e }}" href="{{ next.link|e }}" />
+    {%- endif %}
+    {%- if prev %}
+    <link rel="prev" title="{{ prev.title|striptags|e }}" href="{{ prev.link|e }}" />
+    {%- endif %}
+{%- endblock %}
 
-{# Use the header block to insert the CSF navbar #}
+    <script type="text/javascript">
+    window.lang = "{{ language }}";
+    </script>
+  </head>
+  <body>
+
 {%- block header %}
 {# Outer wrapper for pushing the footer to the bottom #}
 <div id="container">
+	{# Red Mega Menu #}
+	<header class="nav-down">
+		<div class="container-fluid hidden-xs hidden-sm">
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="{{ pathto('_static/logo-cake.png', 1) }}" alt="CakePHP" />
+					</a>
+				</div>
 
-<div id="cakephp-global-navigation">
-	<ul>
-		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
-		<li class="primary"><a href="#" class="empty">Downloads</a>
-			<ul class="second-level">
-				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
-				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="#" class="empty">Documentation</a>
-			<ul class="second-level">
-				<li><a href="http://api.cakephp.org">API</a></li>
-				<li><a href="http://book.cakephp.org">Book</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://community.cakephp.org">Community</a>
-			<ul class="second-level">
-				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
-				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
-				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
-				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
-				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
-				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
-				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
-				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
-				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
-				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
-				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
-				<li><a href="http://cakefest.org">CakeFest</a></li>
-				<li><a href="http://cakephp.org/logos">Logo</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://cakephp.org/services">Services</a>
-			<ul class="second-level">
-				<li><a href="http://certification.cakephp.org">Certification</a></li>
-				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
-				<li><a href="http://cakephp.org/services/support">Support</a></li>
-				<li><a href="http://training.cakephp.org">Training</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
-{% endblock -%}
+				<div class="col-sm-9 col-md-9">
+					<nav class="navbar-right">
+						<ul class="menu">
+							<li class="first">
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
+								<ul class="submenu">
+									{% include 'menu/documentation.html' %}
+								</ul>
+							</li>
 
+							<li><a href="http://cakephp.org/business-solutions">Business Solutions</a></li>
+							<li><a href="http://cakephp.org/showcase">Showcase</a></li>
 
-{%- block relbar1 %}
-<div class="masthead">
-	<div class="header-backing-trap">
-		<div class="header-backing"></div>
-	</div>
-	<div class="searchbar row">
-		<div class="columns three phone-one">
-			<a class="logo" href="{{ pathto(master_doc) }}">
-			<img src="{{ pathto('_static/cake-logo.png', 1) }}" alt="CakePHP" width="70" />
-			</a>
-		</div>
-		{% include 'searchbox.html' %}
-	</div>
-</div>
-
-<div class="breadcrumb-header">
-	<div class="related row">
-		<div class="columns three root-link">
-			<a href="{{ pathto(master_doc) }}">{{ shorttitle|e }}</a>
-		</div>
-		<div class="columns nine">
-			<ul class="inline breadcrumb">
-			{%- for parent in parents %}
-			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %} itemprop="url"><span itemprop="title">{{ parent.title }}</span></a>
-			</li>
-			{%- endfor %}
-			</ul>
-			<div class="versions dropdown">
-				<a href="#">3.x Book</a>
-				<ul>
-					<a href="http://book.cakephp.org/3.0/{{ language }}">3.0 Book</a>
-					<li><a href="http://book.cakephp.org/2.0/{{ language }}">2.x Book</a></li>
-					<li><a href="http://book.cakephp.org/1.3/{{ language }}/">1.3 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.2/{{ language }}/">1.2 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-				</ul>
-			</div>
-
-			<div class="languages dropdown">
-				{% for lang in languages %}
-					{%- if lang == language -%}
-						<a href="#">{{ lang }}</a>
-					{%- endif -%}
-				{% endfor %}
-
-				<ul>
-				{% for lang in languages %}
-					<li>
-						{%- if lang == language -%}
-						{# Do nothing, we print the active one above #}
-						{%- elif has_lang(lang, pagename) -%}
-						<a href="{{ lang_link(lang, pagename) }}">{{ lang }}</a>
-						{%- else -%}
-						<span class="disabled">{{ lang }}</span>
-						{%- endif -%}
-					</li>
-				{% endfor %}
-				</ul>
+							<li>
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
+								<div class="megamenu full">
+									<div class="row">
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												{% include 'menu/community.html' %}
+											</ul>
+										</div>
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												{% include 'menu/help.html' %}
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
-{% endblock -%}
 
+		{# Mobile responsive header #}
+		<div class="container-fluid hidden-md hidden-lg">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="{{ pathto('_static/logo-cake.png', 1) }}" alt="CakePHP" />
+					</a>
+				</div>
+
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+						<button id="btn-menu" class="btn-menu" data-toggle="modal" data-target="#modal">
+							<i class="fa fa-bars toggle-modal"></i>
+						</button>
+					</div>
+					<div id="wrap">
+						<form class="search" action="{{ pathto('search') }}" method="get">
+							<input name="q" type="search" placeholder="What are you looking for?">
+							<input id="search_submit" value="{{ _('Search') }}" type="submit">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{# Grey site bar #}
+		<section id="nav-cook" class="hidden-xs hidden-sm">
+			<div class="container-fluid ">
+				<div class="row ">
+					<div class="col-md-12 back-book">
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
+							<h2>
+								<a href="{{ pathto(master_doc) }}">
+									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+									CakePHP 3.3 Red Velvet <strong>Cookbook</strong>
+								</a>
+							</h2>
+						</div>
+
+						<div class="col-md-4 hidden-sm">
+							<form class="search" action="{{ pathto('search') }}" method="get">
+								<input type="hidden" name="check_keywords" value="yes" />
+								<input type="hidden" name="area" value="default" />
+
+								<div class="col-md-10 p0">
+									<input class="form-control form-cook" autocomplete="off" type="search" name="q" size="18" placeholder='Cookbook Search' />
+								</div>
+								<div class="col-md-2 p0 search-cook">
+									<button type="submit">
+										<span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+									</button>
+								</div>
+							</form>
+						</div>
+
+						{# Language and version pickers #}
+						<div class="col-md-3">
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Language:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											{% for lang in languages %}
+												{%- if lang == language -%}
+												<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
+													role="button" aria-haspopup="true" aria-expanded="false" href="#">
+														{{ lang }}
+														<i class="fa fa-menu-en fa-chevron-down"></i>
+													</a>
+												{%- endif -%}
+											{% endfor %}
+											<ul class="dropdown-menu">
+											{% for lang in languages %}
+												<li>
+													{%- if lang == language -%}
+													{# Do nothing, we print the active one above #}
+													{%- elif has_lang(lang, pagename) -%}
+													<a href="{{ lang_link(lang, pagename) }}">{{ lang }}</a>
+													{%- else -%}
+													<span class="disabled">{{ lang }}</span>
+													{%- endif -%}
+												</li>
+											{% endfor %}
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Version:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">3.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
+											<ul class="dropdown-menu">
+												<li><a href="http://book.cakephp.org/3.0/{{ language }}">3.x Book</a></li>
+												<li><a href="http://book.cakephp.org/2.0/{{ language }}">2.x Book</a></li>
+												<li><a href="http://book.cakephp.org/1.3/{{ language }}/">1.3 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.2/{{ language }}/">1.2 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</header>
+
+	{# Responsive grey bar navigation. This is outside of header so it scrolls with the page. #}
+	<section class="nav-btn visible-sm visible-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-nav" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Nav</strong></button>
+				</div>
+
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-toc" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Table of Contents</strong></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	{# modal used in mobile responsive views #}
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-header">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title-cookbook" id="modal-header">{# header text injected via js #}</h4>
+				</div>
+				<div class="modal-body">{# body is injected via js #}</div>
+			</div>
+		</div>
+	</div>
+{% endblock -%}
 
 {%- block content %}
-<div class="content row">
-	<div class="document columns nine push-three">
-		<div class="body">
-			{%- if pagename != 'search' -%}
-				<a class="button pale improve" href="https://github.com/cakephp/docs/edit/{{ branch }}/{{ language }}/{{ pagename }}.rst" target="_blank">Improve this Doc</a>
-			{%- endif -%}
-			{%- if pagename != 'search' and pagename != 'contents' and pagename != 'index' -%}
-			<div id="page-contents" class="page-contents">
+<div class="container page-container">
+
+	{%- if pagename != 'search' -%}
+	<div id="improve-slideout">
+		<i class="fa fa-pencil icon-improve"></i>
+		<a href="https://github.com/cakephp/docs/edit/{{ branch }}/{{ language }}/{{ pagename }}.rst" target="_blank">
+			<div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
+		</a>
+	</div>
+	{%- endif -%}
+	<a id="back-to-contents" href="#page-contents"><i class="fa fa-arrow-circle-up icon-improve" title="Back to Contents"></i></a>
+
+	{# Document body #}
+	<div class="row">
+		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off">
+			{%- if pagename != 'search' and pagename not in ('contents', 'index', '404') -%}
+			<div class="page-contents col-sm-5">
 				<h3>{{ _('Page Contents') }}</h3>
 				{{ toc }}
 			</div>
 			{%- endif -%}
+
+			<div class="document-body">
 			{% block body %} {% endblock %}
+			</div>
+		</div>
+
+		{# TOC sidebar #}
+		<div class="col-md-3 col-md-pull-9 pull-off hidden-xs hidden-sm" lang="{{ language }}">
+			{%- for sidebartemplate in sidebars %}
+			<aside class="sidebar">
+				<div class="mb30 row">
+					{%- include sidebartemplate %}
+				</div>
+			</aside>
+			{%- endfor %}
 		</div>
 	</div>
-
-	<div class="sidebar columns three pull-nine" lang="{{ language }}">
-		{%- for sidebartemplate in sidebars %}
-		{%- include sidebartemplate %}
-		{%- endfor %}
-	</div>
-
 </div>
-
-
-	<div class="footer-push"> </div>
-</div>
-{# End of div[id=wrapper] #}
 {% endblock -%}
 
-{%- block relbar2 %}
-{# Empty so links aren't duplicated #}
-{% endblock %}
-
 {%- block footer %}
-{# Push the footer down to the bottom of the page #}
+<section id="socials" class="back-3">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-5  social text-center">
+				<div class="col-sm-3 col-xs-3">
+					<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<div id="fb-root-face" class="fb-like" data-href="https://www.facebook.com/CakePHP/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+				</div>
 
-<div class="footer">
-	<div class="row">
-		<div class="columns six offset-by-three contribute">
-			<strong>Found an issue?</strong>
-			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
-			<a href="http://book.cakephp.org/3.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=fork&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<a href="https://twitter.com/CakePHP" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @CakePHP</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-7 social-footer text-center ">
+				<a href="https://twitter.com/cakephp" data-toggle="tooltip" title="Twitter"><i class="fa icon-social fa-twitter"></i>
+				<a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
+				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
+				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
+				<a href="https://github.com/cakephp" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
+				<a href="http://cakesf.herokuapp.com/" target="_blank" title="Slack" data-toggle="tooltip"><i class="fa fa-slack icon-social"></i></a>
+				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
+				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
+			</div>
 		</div>
 	</div>
+</section>
 
-	<div class="row">
-		<div class="columns nine offset-by-three copyright">
-			{%- if show_copyright %}
-				{%- if hasdoc('copyright') %}
-					{% trans path=pathto('copyright'), copyright=copyright|e %}&copy; <a href="{{ path }}">Copyright</a> {{ copyright }}.{% endtrans %}
-				{%- else %}
-					{% trans copyright=copyright|e %}&copy; Copyright {{ copyright }}.{% endtrans %}
-				{%- endif %}
-			{%- endif %}
-			{%- if last_updated %}
-				{% trans last_updated=last_updated|e %}Last updated on {{ last_updated }}.{% endtrans %}
-			{%- endif %}
-			{%- if show_sphinx %}
-				{% trans sphinx_version=sphinx_version|e %}Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> {{ sphinx_version }}.{% endtrans %}
-			{%- endif %}
+<footer id="footer" class="footer-wrapper">
+	<div class="container">
+
+		<div class="row col-p30">
+			<div class="col-sm-12 col-md-3">
+				<div class="footer-widget t-footer">
+					<div class="col-md-12">
+						<a href="https://www.openhub.net/p/cakephp">
+							<img src="{{ pathto('_static/open-hub.png', 1) }}">
+						</a>
+						<div class="mt10">
+							<a href="https://www.rackspace.com/">
+								<img src="{{ pathto('_static/rackspace.png', 1) }}">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-9">
+				<div class="col-md-3 col-sm-6 business-solution">
+					<ul class="footer-menu">
+						{% include 'menu/business-solutions.html' %}
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						{% include 'menu/footer-documentation.html' %}
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						{% include 'menu/community.html' %}
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						{% include 'menu/help.html' %}
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 text-center mt30">
+				<p class="copyright">
+					{%- if show_copyright %}
+						{%- if hasdoc('copyright') %}
+							{% trans path=pathto('copyright'), copyright=copyright|e %}&copy; <a href="{{ path }}">Copyright</a> {{ copyright }}.{% endtrans %}
+						{%- else %}
+							{% trans copyright=copyright|e %}&copy; Copyright {{ copyright }}.{% endtrans %}
+						{%- endif %}
+					{%- endif %}
+					{%- if last_updated %}
+						{% trans last_updated=last_updated|e %}Last updated on {{ last_updated }}.{% endtrans %}
+					{%- endif %}
+					{%- if show_sphinx %}
+						{% trans sphinx_version=sphinx_version|e %}Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> {{ sphinx_version }}.{% endtrans %}
+					{%- endif %}
+				</p>
+			</div>
 		</div>
 	</div>
+</footer>
+
+<div id="inline-search-results"></div>
+
+{# End of div[id=wrapper] #}
 </div>
 
-<div id="nav-modal" class="reveal-modal"> </div>
-<div id="inline-search-results"></div>
 <script type="text/javascript">
 	var _gaq = _gaq || [];
 	_gaq.push(['_setAccount', 'UA-743287-3']);
@@ -230,4 +437,5 @@ window.lang = "{{ language }}";
 	})();
 </script>
 {%- endblock %}
-
+  </body>
+</html>

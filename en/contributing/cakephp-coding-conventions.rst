@@ -42,9 +42,11 @@ Or::
         }
     }
 
-In cases where you're using a multi-line function call use the following guidelines:
+In cases where you're using a multi-line function call use the following
+guidelines:
 
-*  Opening parenthesis of a multi-line function call must be the last content on the line.
+*  Opening parenthesis of a multi-line function call must be the last content on
+   the line.
 *  Only one argument is allowed per line in a multi-line function call.
 *  Closing parenthesis of a multi-line function call must be on a line by itself.
 
@@ -297,7 +299,8 @@ tags:
 *  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
 *  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
-   Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
+   Using the ``@version <vector> <description>`` format, where ``version``
+   and ``description`` are mandatory.
 *  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
 *  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
@@ -410,7 +413,7 @@ When including files with classes or libraries, use only and always the
 PHP Tags
 ========
 
-Always use long tags (``<?php ?>``) Instead of short tags (``<? ?>``). The short
+Always use long tags (``<?php ?>``) instead of short tags (``<? ?>``). The short
 echo should be used in template files (**.ctp**) where appropriate.
 
 Short Echo
@@ -544,6 +547,72 @@ underscore character, for example::
 
     define('LONG_NAMED_CONSTANT', 2);
 
+Careful when using empty()/isset()
+==================================
+
+While ``empty()`` is an easy to use function, it can mask errors and cause
+unintended effects when ``'0'`` and ``0`` are given. When variables or
+properties are already defined, the usage of ``empty()`` is not recommended.
+When working with variables, it is better to rely on type-coercion to boolean
+instead of ``empty()``::
+
+    function manipulate($var)
+    {
+        // Not recommended, $var is already defined in the scope
+        if (empty($var)) {
+            // ...
+        }
+
+        // Use boolean type coercion
+        if (!$var) {
+            // ...
+        }
+        if ($var) {
+            // ...
+        }
+    }
+
+When dealing with defined properties you should favour ``null`` checks over
+``empty()``/``isset()`` checks::
+
+    class Thing
+    {
+        private $property; // Defined
+
+        public function readProperty()
+        {
+            // Not recommended as the property is defined in the class
+            if (!isset($this->property)) {
+                // ...
+            }
+            // Recommended
+            if ($this->property === null) {
+
+            }
+        }
+    }
+
+When working with arrays, it is better to merge in defaults over using
+``empty()`` checks. By merging in defaults, you can ensure that required keys
+are defined::
+
+    function doWork(array $array)
+    {
+        // Merge defaults to remove need for empty checks.
+        $array += [
+            'key' => null,
+        ];
+
+        // Not recommended, the key is already set
+        if (isset($array['key'])) {
+            // ...
+        }
+
+        // Recommended
+        if ($array['key'] !== null) {
+            // ...
+        }
+    }
 
 .. meta::
     :title lang=en: Coding Standards

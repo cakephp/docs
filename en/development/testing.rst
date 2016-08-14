@@ -13,8 +13,8 @@ Installing PHPUnit
 CakePHP uses PHPUnit as its underlying test framework. PHPUnit is the de-facto
 standard for unit testing in PHP. It offers a deep and powerful set of features
 for making sure your code does what you think it does. PHPUnit can be installed
-through using either a `PHAR package <http://phpunit.de/#download>`__ or `Composer
-<http://getcomposer.org>`_.
+through using either a `PHAR package <http://phpunit.de/#download>`__ or
+`Composer <http://getcomposer.org>`_.
 
 Install PHPUnit with Composer
 -----------------------------
@@ -23,7 +23,8 @@ To install PHPUnit with Composer::
 
     $ php composer.phar require --dev phpunit/phpunit
 
-This will add the dependency to the ``require-dev`` section of your ``composer.json``, and then install PHPUnit along with any dependencies.
+This will add the dependency to the ``require-dev`` section of your
+``composer.json``, and then install PHPUnit along with any dependencies.
 
 You can now run PHPUnit using::
 
@@ -179,8 +180,9 @@ following::
     }
 
 Calling the parent method is important in test cases, as ``TestCase::setUp()``
-does a number things like backing up the values in :php:class:`~Cake\\Core\\Configure` and,
-storing the paths in :php:class:`~Cake\\Core\\App`.
+does a number things like backing up the values in
+:php:class:`~Cake\\Core\\Configure` and, storing the paths in
+:php:class:`~Cake\\Core\\App`.
 
 Next, we'll fill out the test method. We'll use some assertions to ensure that
 our code creates the output we expect::
@@ -261,8 +263,8 @@ CLI runner you can use an option to filter test methods::
 
     $ phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
 
-The filter parameter is used as a case-sensitive regular expression for filtering
-which test methods to run.
+The filter parameter is used as a case-sensitive regular expression for
+filtering which test methods to run.
 
 Generating Code Coverage
 ------------------------
@@ -284,7 +286,8 @@ Combining Test Suites for Plugins
 Often times your application will be composed of several plugins. In these
 situations it can be pretty tedious to run tests for each plugin. You can make
 running tests for each of the plugins that compose your application by adding
-additional ``<testsuite>`` sections to your application's **phpunit.xml.dist** file::
+additional ``<testsuite>`` sections to your application's **phpunit.xml.dist**
+file::
 
     <testsuites>
         <testsuite name="App Test Suite">
@@ -430,9 +433,9 @@ your models will use the default ``test`` datasource. Fixture datasources must
 be prefixed with ``test`` to reduce the possibility of accidentally truncating
 all your application's data when running tests.
 
-We use ``$fields`` to specify which fields will be part of this table,
-and how they are defined. The format used to define these fields is
-the same used with :php:class:`Cake\\Database\\Schema\\Table`. The keys available for table
+We use ``$fields`` to specify which fields will be part of this table, and how
+they are defined. The format used to define these fields is the same used with
+:php:class:`Cake\\Database\\Schema\\Table`. The keys available for table
 definition are:
 
 type
@@ -467,17 +470,17 @@ created. The format is fairly straight forward, ``$records`` is an array of
 records. Each item in ``$records`` should be a single row. Inside each row,
 should be an associative array of the columns and values for the row. Just keep
 in mind that each record in the $records array must have a key for **every**
-field specified in the ``$fields`` array. If a field for a particular record needs
-to have a ``null`` value, just specify the value of that key as ``null``.
+field specified in the ``$fields`` array. If a field for a particular record
+needs to have a ``null`` value, just specify the value of that key as ``null``.
 
 Dynamic Data and Fixtures
 -------------------------
 
-Since records for a fixture are declared as a class property, you cannot
-use functions or other dynamic data to define fixtures. To solve this problem,
-you can define ``$records`` in the ``init()`` function of your fixture. For
-example if you wanted all the created and modified timestamps to reflect today's
-date you could do the following::
+Since records for a fixture are declared as a class property, you cannot use
+functions or other dynamic data to define fixtures. To solve this problem, you
+can define ``$records`` in the ``init()`` function of your fixture. For example
+if you wanted all the created and modified timestamps to reflect today's date
+you could do the following::
 
     namespace App\Test\Fixture;
 
@@ -532,7 +535,7 @@ in your application, change the example fixture given in the previous section
 
     class ArticlesFixture extends TestFixture
     {
-        public $import = ['table' => 'articles']
+        public $import = ['table' => 'articles'];
     }
 
 If you want to use a different connection use::
@@ -554,9 +557,9 @@ use that to retrieve the table name::
 
 Since this uses ``TableRegistry::get()``, it also supports plugin syntax.
 
-You can naturally import your table definition from an existing
-model/table, but have your records defined directly on the fixture
-as it was shown on previous section. For example::
+You can naturally import your table definition from an existing model/table, but
+have your records defined directly on the fixture as it was shown on previous
+section. For example::
 
     class ArticlesFixture extends TestFixture
     {
@@ -616,8 +619,8 @@ Using the ``core`` prefix will load fixtures from CakePHP, and using a plugin
 name as the prefix, will load the fixture from the named plugin.
 
 You can control when your fixtures are loaded by setting
-:php:attr:`Cake\\TestSuite\\TestCase::$autoFixtures` to ``false`` and later load them using
-:php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
+:php:attr:`Cake\\TestSuite\\TestCase::$autoFixtures` to ``false`` and later load
+them using :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
 
     class ArticlesTest extends TestCase
     {
@@ -630,10 +633,10 @@ You can control when your fixtures are loaded by setting
         }
     }
 
-You can load fixtures in subdirectories. Using multiple directories
-can make it easier to organize your fixtures if you have a larger application.
-To load fixtures in subdirectories, simply include the subdirectory name in the
-fixture name::
+You can load fixtures in subdirectories. Using multiple directories can make it
+easier to organize your fixtures if you have a larger application. To load
+fixtures in subdirectories, simply include the subdirectory name in the fixture
+name::
 
     class ArticlesTest extends CakeTestCase
     {
@@ -735,9 +738,9 @@ section for more information on how to run your test case.
 Mocking Model Methods
 ---------------------
 
-There will be times you'll want to mock methods on models when testing them. You should
-use ``getMockForModel`` to create testing mocks of table classes. It avoids issues
-with reflected properties that normal mocks have::
+There will be times you'll want to mock methods on models when testing them. You
+should use ``getMockForModel`` to create testing mocks of table classes. It
+avoids issues with reflected properties that normal mocks have::
 
     public function testSendingEmails()
     {
@@ -770,8 +773,8 @@ For example, testing your controller will also exercise any components, models
 and helpers that would be involved in handling a given request. This gives you a
 more high level test of your application and all its working parts.
 
-Say you have a typical Articles controller, and its corresponding
-model. The controller code looks like::
+Say you have a typical ArticlesController, and its corresponding model. The
+controller code looks like::
 
     namespace App\Controller;
 
@@ -932,6 +935,49 @@ required authentication, you could write the following tests::
         // Other assertions.
     }
 
+Testing Stateless Authentication and APIs
+-----------------------------------------
+
+To test APIs that use stateless authentication, such as Basic authentication,
+you can configure the request to inject environment conditions or headers that
+simulate actual authentication request headers.
+
+When testing Basic or Digest Authentication, you can add the environment
+variables that `PHP creates <http://php.net/manual/en/features.http-auth.php>`_
+automatically. These environment variables used in the authentication adapter
+outlined in :ref:`basic-authentication`::
+
+    public function testBasicAuthentication()
+    {
+        $this->configRequest([
+            'environment' => [
+                'PHP_AUTH_USER' => 'username',
+                'PHP_AUTH_PW' => 'password',
+            ]
+        ]);
+
+        $this->get('/api/posts');
+        $this->assertResponseOk();
+    }
+
+If you are testing other forms of authentication, such as OAuth2, you can set
+the Authorization header directly::
+
+    public function testOauthToken()
+    {
+        $this->configRequest([
+            'headers' => [
+                'authorization' => 'Bearer: oauth-token'
+            ]
+        ]);
+
+        $this->get('/api/posts');
+        $this->assertResponseOk();
+    }
+
+The headers key in ``configRequest()`` can be used to configure any additional
+HTTP headers needed for an action.
+
 Testing Actions Protected by CsrfComponent or SecurityComponent
 ---------------------------------------------------------------
 
@@ -945,16 +991,52 @@ token mismatches::
         $this->enableSecurityToken();
         $this->post('/posts/add', ['title' => 'Exciting news!']);
     }
-    
+
 It is also important to enable debug in tests that use tokens to prevent the
 SecurityComponent from thinking the debug token is being used in a non-debug
-environment.
+environment. When testing with other methods like ``requireSecure()`` you
+can use ``configRequest()`` to set the correct environment variables::
+
+    // Fake out SSL connections.
+    $this->configRequest([
+        'environment' => ['HTTPS' => 'on']
+    ]);
 
 .. versionadded:: 3.1.2
     The ``enableCsrfToken()`` and ``enableSecurityToken()`` methods were added
     in 3.1.2
 
+Integration Testing PSR7 Middleware
+-----------------------------------
 
+Integration testing can also be used to test your entire PSR7 application and
+:doc:`/controllers/middleware`. By default ``IntegrationTestCase`` will
+auto-detect the presence of an ``App\Application`` class and automatically
+enable integration testing of your Application. You can toggle this behavior
+with the ``useHttpServer()`` method::
+
+    public function setUp()
+    {
+        // Enable PSR7 integration testing.
+        $this->useHttpServer(true);
+
+        // Disable PSR7 integration testing.
+        $this->useHttpServer(false);
+    }
+
+You can customize the application class name used, and the constructor
+arguments, by using the ``configApplication()`` method::
+
+    public function setUp()
+    {
+        $this->configApplication('App\App', [CONFIG]);
+    }
+
+After enabling the PSR7 mode, and possibly configuring your application class,
+you can use the remaining ``IntegrationTestCase`` features as normal.
+
+.. versionadded:: 3.3.0
+    PSR7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
 
 Assertion methods
 -----------------
@@ -1095,7 +1177,7 @@ helper methods for interacting with encrypted cookies in your test cases::
     // Assume this action modifies the cookie.
     $this->get('/bookmarks/index');
 
-    $this->assertCookieEncrypted('my_cookie', 'An updated value');
+    $this->assertCookieEncrypted('An updated value', 'my_cookie');
 
 .. versionadded: 3.1.7
     ``assertCookieEncrypted`` and ``cookieEncrypted`` were added in 3.1.7.
@@ -1206,8 +1288,8 @@ controllers that use it. Here is our example component located in
         }
     }
 
-Now we can write tests to ensure our paginate ``limit`` parameter is being
-set correctly by the ``adjust()`` method in our component. We create the file
+Now we can write tests to ensure our paginate ``limit`` parameter is being set
+correctly by the ``adjust()`` method in our component. We create the file
 **tests/TestCase/Controller/Component/PagematronComponentTest.php**::
 
     namespace App\Test\TestCase\Controller\Component;
@@ -1336,6 +1418,107 @@ indicating 1 pass and 4 assertions.
 When you are testing a Helper which uses other helpers, be sure to mock the
 View clases ``loadHelpers`` method.
 
+.. _testing-events:
+
+Testing Events
+==============
+
+The :doc:`/core-libraries/events` is a great way to decouple your application
+code, but sometimes when testing, you tend to test the results of events in the
+test cases that execute those events. This is an additional form of coupling
+that can be removed by using ``assertEventFired`` and ``assertEventFiredWith``
+instead.
+
+Expanding on the Orders example, say we have the following tables::
+
+    class OrdersTable extends Table
+    {
+
+        public function place($order)
+        {
+            if ($this->save($order)) {
+                // moved cart removal to CartsTable
+                $event = new Event('Model.Order.afterPlace', $this, [
+                    'order' => $order
+                ]);
+                $this->eventManager()->dispatch($event);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    class CartsTable extends Table
+    {
+
+        public function implementedEvents()
+        {
+            return [
+                'Model.Order.afterPlace' => 'removeFromCart'
+            ];
+        }
+
+        public function removeFromCart(Event $event)
+        {
+            $order = $event->data('order');
+            $this->delete($order->cart_id);
+        }
+    }
+
+.. note::
+    To assert that events are fired, you must first enable
+    :ref:`tracking-events` on the event manager you wish to assert against.
+
+To test the ``OrdersTable`` above, we enable tracking in ``setUp()`` then assert
+that the event was fired, and assert that the ``$order`` entity was passed in
+the event data::
+
+    namespace App\Test\TestCase\Model\Table;
+
+    use App\Model\Table\OrdersTable;
+    use Cake\Event\EventList;
+    use Cake\ORM\TableRegistry;
+    use Cake\TestSuite\TestCase;
+
+    class OrdersTableTest extends TestCase
+    {
+
+        public $fixtures = ['app.orders'];
+
+        public function setUp()
+        {
+            parent::setUp();
+            $this->Orders = TableRegistry::get('Orders');
+            // enable event tracking
+            $this->Orders->eventManager()->setEventList(new EventList());
+        }
+
+        public function testPlace()
+        {
+            $order = new Order([
+                'user_id' => 1,
+                'item' => 'Cake',
+                'quantity' => 42,
+            ]);
+
+            $this->assertTrue($this->Orders->place($order));
+
+            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->eventManager());
+            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->eventManager());
+        }
+    }
+
+By default, the global ``EventManager`` is used for assertions, so testing
+global events does not require passing the event manager::
+
+    $this->assertEventFired('My.Global.Event');
+    $this->assertEventFiredWith('My.Global.Event', 'user', 1);
+
+.. versionadded:: 3.2.11
+
+    Event tracking, ``assertEventFired()``, and ``assertEventFiredWith`` were
+    added.
+
 Creating Test Suites
 ====================
 
@@ -1370,21 +1553,19 @@ would create **tests/TestCase/AllModelTest.php**. Put the following in it::
         }
     }
 
-The code above will group all test cases found in the
-**tests/TestCase/Model/** folder. To add an individual file, use
-``$suite->addTestFile($filename);``. You can recursively add a directory
-for all tests using::
+The code above will group all test cases found in the **tests/TestCase/Model/**
+folder. To add an individual file, use ``$suite->addTestFile($filename);``. You
+can recursively add a directory for all tests using::
 
     $suite->addTestDirectoryRecursive(TESTS . 'TestCase');
 
-Would recursively add all test cases in the **tests/TestCase/**
-directory.
+Would recursively add all test cases in the **tests/TestCase/** directory.
 
 Creating Tests for Plugins
 ==========================
 
-Tests for plugins are created in their own directory inside the
-plugins folder. ::
+Tests for plugins are created in their own directory inside the plugins
+folder. ::
 
     /src
         /plugins
@@ -1393,12 +1574,11 @@ plugins folder. ::
                     /TestCase
                     /Fixture
 
-They work just like normal tests but you have to remember to use
-the naming conventions for plugins when importing classes. This is
-an example of a testcase for the ``BlogPost`` model from the plugins
-chapter of this manual. A difference from other tests is in the
-first line where 'Blog.BlogPost' is imported. You also need to
-prefix your plugin fixtures with ``plugin.blog.blog_posts``::
+They work just like normal tests but you have to remember to use the naming
+conventions for plugins when importing classes. This is an example of a testcase
+for the ``BlogPost`` model from the plugins chapter of this manual. A difference
+from other tests is in the first line where 'Blog.BlogPost' is imported. You
+also need to prefix your plugin fixtures with ``plugin.blog.blog_posts``::
 
     namespace Blog\Test\TestCase\Model\Table;
 
@@ -1551,7 +1731,8 @@ of your testing results:
     vendor/bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
 
 If you use clover coverage, or the junit results, make sure to configure those
-in Jenkins as well. Failing to configure those steps will mean you won't see the results.
+in Jenkins as well. Failing to configure those steps will mean you won't see the
+results.
 
 Run a Build
 -----------

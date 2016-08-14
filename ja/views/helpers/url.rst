@@ -31,17 +31,6 @@ URL の生成
 
 さらにいつかの使用例は、こちら:
 
-名前付きパラメータの URL::
-
-    echo $this->Url->build([
-        "controller" => "Posts",
-        "action" => "view",
-        "foo" => "bar"
-    ]);
-
-    // 出力結果
-    /posts/view/foo:bar
-
 拡張子つきの URL::
 
     echo $this->Url->build([
@@ -60,7 +49,7 @@ URL の生成
     // 出力結果
     http://somedomain.com/posts
 
-GET パラメータと名前付きアンカーの URL::
+GET パラメータとフラグメントアンカーの URL::
 
     echo $this->Url->build([
         "controller" => "Posts",
@@ -71,6 +60,10 @@ GET パラメータと名前付きアンカーの URL::
 
     // 出力結果
     /posts/search?foo=bar#first
+
+上記の例で使用している ``?`` キーは、あなたが使用しているクエリ文字列パラメータを
+明示したい場合やクエリ文字列パラメータをあなたのルートプレースホルダーの一つと名前を
+共有したい場合に便利です。
 
 名前付きルートの URL::
 

@@ -170,7 +170,7 @@ translation for entities that are loaded::
 
     // Load I18n core functions at the beginning of your Controller:
     use Cake\I18n\I18n;
-    
+
     // Then you can change the language in your action:
     I18n::locale('es');
     $this->loadModel('Articles');
@@ -386,6 +386,8 @@ Setting the language directly in the table is useful when you need to both
 retrieve and save entities for the same language or when you need to save
 multiple entities at once.
 
+.. _saving-multiple-translations:
+
 Saving Multiple Translations
 ============================
 
@@ -413,3 +415,56 @@ Now, You can populate translations before saving them::
     }
 
     $this->Articles->save($article);
+
+As of 3.3.0, working with multiple translations has been streamlined. You can
+create form inputs for your translated fields::
+
+    // In a view template.
+    <?= $this->Form->create($article); ?>
+    <fieldset>
+        <legend>French</legend>
+        <?= $this->Form->input('_translations.fr.title'); ?>
+        <?= $this->Form->input('_translations.fr.body'); ?>
+    </fieldset>
+    <fieldset>
+        <legend>Spanish</legend>
+        <?= $this->Form->input('_translations.es.title'); ?>
+        <?= $this->Form->input('_translations.es.body'); ?>
+    </fieldset>
+
+In your controller, you can marshal the data as normal, but with the
+``translations`` option enabled::
+
+    $article = $this->Articles->newEntity($this->request->data, [
+        'translations' => true
+    ]);
+    $this->Articles->save($article);
+
+This will result in your article, the french and spanish translations all being
+persisted. You'll need to remember to add ``_translations`` into the
+``$_accessible`` fields of your entity as well.
+
+Validating Translated Entities
+------------------------------
+
+When attaching ``TranslateBehavior`` to a model, you can define the validator
+that should be used when translation records are created/modified by the
+behavior during ``newEntity()`` or ``patchEntity()``::
+
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
+            $this->addBehavior('Translate', [
+                'fields' => ['title']
+                'validator' => 'translated'
+            ]);
+        }
+    }
+
+The above will use the validator created by ``validationTranslated`` to
+validated translated entities.
+
+.. versionadded:: 3.3.0
+    Validating translated entities, and streamlined translation saving was added
+    in 3.3.0

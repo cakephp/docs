@@ -13,11 +13,10 @@ ont été utilisés ? Quelles sortes d'erreurs ont été vues par mes utilisateu
 A quelle fréquence est exécutée une requête particulière ?
 
 La journalisation des données dans CakePHP est facile - la fonction log()
-est fourni par ``LogTrait``, qui est l'ancêtre commun de la plupart
-des classes CakePHP. Si le contexte est une classe CakePHP (Model, Controller,
-Component... n'importe quoi d'autre), vous pouvez loguer (journaliser) vos
-données. Vous pouvez aussi utiliser ``Log::write()`` directement.
-voir :ref:`writing-to-logs`
+est fourni par ``LogTrait``, qui est l'ancêtre commun de beaucoup de classes
+CakePHP. Si le contexte est une classe CakePHP (Controller, Component, View...),
+vous pouvez loguer (journaliser) vos données. Vous pouvez aussi utiliser
+``Log::write()`` directement. Consultez :ref:`writing-to-logs`.
 
 .. _log-configuration:
 
@@ -121,6 +120,7 @@ un tableau::
     {
         public function __construct($options = [])
         {
+            parent::__construct($options);
             // ...
         }
 

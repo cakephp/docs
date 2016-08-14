@@ -377,6 +377,45 @@ can help provide a nicer user experience. Because of this CakePHP includes an
 The fields to check existence against in the related table must be part of the
 primary key.
 
+You can enforce ``existsIn`` to pass when nullable parts of your composite foreign key
+are null::
+
+    // Example: A composite primary key within NodesTable is (id, site_id).
+    // A Node may reference a parent Node but does not need to. In latter case, parent_id is null.
+    // Allow this rule to pass, even if fields that are nullable, like parent_id, are null:
+    $rules->add($rules->existsIn(
+        ['parent_id', 'site_id'], // Schema: parent_id NULL, site_id NOT NULL
+        'ParentNodes',
+        ['allowNullableNulls' => true] 
+    );
+
+    // A Node however should in addition also always reference a Site.
+    $rules->add($rules->existsIn(['site_id'], 'Sites'));
+
+.. versionadded:: 3.3.0
+    The ``allowNullableNulls`` option was added.
+
+Association Count Rules
+-----------------------
+
+If you need to validate that a property or association contains the correct
+number of values, you can use the ``validCount()`` rule::
+
+    // No more than 5 tags on an article.
+    $rules->add($rules->validCount('tags', 5, '<=', 'You can only have 5 tags'));
+
+When defining count based rules, the third parameter lets you define the
+comparison operator to use. ``==``, ``>=``, ``<=``, ``>``, ``<``, and ``!=``
+are the accepted operators. To ensure a property's count is within a range, use
+two rules::
+
+    // Between 3 and 5 tags
+    $rules->add($rules->validCount('tags', 3, '>=', 'You must have at least 3 tags'));
+    $rules->add($rules->validCount('tags', 5, '<=', 'You must have at most 5 tags'));
+
+.. versionadded:: 3.3.0
+    The ``validCount()`` method was added in 3.3.0.
+
 Using Entity Methods as Rules
 -----------------------------
 
@@ -386,7 +425,25 @@ You may want to use entity methods as domain rules::
         return $entity->isOkLooking();
     }, 'ruleName');
 
-Creating Custom Rule objects
+Creating Custom re-usable Rules
+-------------------------------
+
+You may want to re-use custom domain rules. You can do so by creating your own invokable rule::
+
+    use App\ORM\Rule\IsUniqueWithNulls;
+    // ...
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add(new IsUniqueWithNulls(['parent_id', 'instance_id', 'name']), 'uniqueNamePerParent', [
+            'errorField' => 'name',
+            'message' => 'Name must be unique per parent.'
+        ]);
+        return $rules;
+    }
+
+See the core rules for examples on how to create such rules.
+
+Creating Custom Rule Objects
 ----------------------------
 
 If your application has rules that are commonly reused, it is helpful to package
@@ -427,13 +484,31 @@ Validation vs. Application Rules
 ================================
 
 The CakePHP ORM is unique in that it uses a two-layered approach to validation.
+
+The first layer is validation. Validation rules are intended to operate in
+a stateless way. They are best leveraged to ensure that the shape, data types
+and format of data is correct.
+
+The second layer is application rules. Application rules are best leveraged to
+check stateful properties of your entities. For example, validation rules could
+ensure that an email address is valid, while an application rule could ensure
+that the email address is unique.
+
 As you already discovered, the first layer is done through the ``Validator``
 objects when calling ``newEntity()`` or ``patchEntity()``::
 
-    $validatedEntity = $articlesTable->newEntity($unsafeData);
-    $validatedEntity = $articlesTable->patchEntity($entity, $unsafeData);
+    $validatedEntity = $articlesTable->newEntity(
+        $unsafeData,
+        ['validate' => 'customName']
+    );
+    $validatedEntity = $articlesTable->patchEntity(
+        $entity,
+        $unsafeData,
+        ['validate' => 'customName']
+    );
 
-Validation is defined using the ``validationCustomName()`` methods::
+In the above example, we'll use a 'custom' validator, which is defined using the
+``validationCustomName()`` method::
 
     public function validationCustom($validator)
     {
@@ -441,10 +516,8 @@ Validation is defined using the ``validationCustomName()`` methods::
         return $validator;
     }
 
-Validation is meant for forms and request data. This means that validation rule
-sets can assume things about the structure of a form and validate fields not in
-the schema of the database. Validation assumes strings or array are passed
-since that is what is received from any request::
+Validation assumes strings or array are passed since that is what is received
+from any request::
 
     // In src/Model/Table/UsersTable.php
     public function validatePasswords($validator)
@@ -539,7 +612,7 @@ come up when running a CLI script that directly sets properties on entities::
         return $rules;
     }
 
-When executed the save will fail thanks to the new application rule that 
+When executed the save will fail thanks to the new application rule that
 was added::
 
     $userEntity->email = 'not an email!!!';

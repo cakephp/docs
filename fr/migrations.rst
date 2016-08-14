@@ -207,14 +207,18 @@ Définition de Colonnes
 Quand vous définissez des colonnes avec la ligne de commande, il peut être
 pratique de se souvenir qu'elles suivent le modèle suivant::
 
-    fieldName:fieldType[length]:indexType:indexName
+    fieldName:fieldType?[length]:indexType:indexName
 
 Par exemple, les façons suivantes sont toutes des façons valides pour spécifier
 un champ d'email:
 
+* ``email:string?``
 * ``email:string:unique``
 * ``email:string:unique:EMAIL_INDEX``
 * ``email:string[120]:unique:EMAIL_INDEX``
+
+Le point d'interrogation qui suit le type du champ entrainera que la colonne
+peut être null.
 
 Le paramètre ``length`` pour ``fieldType`` est optionnel et doit toujours être
 écrit entre crochets.
@@ -446,6 +450,51 @@ ajoutées au snapshot de votre plugin.
 Notez que quand vous créez un snapshot, il est automatiquement marqué dans la
 table de log de phinx comme migré.
 
+Générer un diff entre deux états de base de données
+===================================================
+
+.. versionadded:: cakephp/migrations 1.6.0
+
+Vous pouvez générer un fichier de migrations qui regroupera toutes les
+différences entre deux états de base de données en utilisant le template bake
+``migration_diff``. Pour cela, vous pouvez utiliser la commande suivante::
+
+    $ bin/cake bake migration_diff NameOfTheMigrations
+
+Pour avoir un point de comparaison avec l'état actuel de votre base de données,
+le shell migrations va générer, après chaque appel de ``migrate`` ou
+``rollback`` un fichier "dump". Ce fichier dump est un fichier qui contient
+l'ensemble de l'état de votre base de données à un point précis dans le temps.
+
+Quand un fichier dump a été généré, toutes les modifications que vous ferez
+directement dans votre SGBD seront ajoutées au fichier de migration qui sera
+généré quand vous appelerez la commande ``bake migration_diff``.
+
+Par défaut, le diff sera fait en se connectant à la base de données définie
+dans votre configuration de Connection ``default``.
+Si vous avez besoin de faire un diff depuis une source différente, vous pouvez
+utiliser l'option ``--connection``::
+
+    $ bin/cake bake migration_diff NameOfTheMigrations --connection my_other_connection
+
+Si vous souhaitez utiliser la fonctionnalité de diff sur une application qui
+possède déjà un historique de migrations, vous allez avoir besoin de créer le
+fichier dump manuellement pour qu'il puisse être utilisé comme point de
+comparaison::
+
+    $ bin/cake migrations dump
+
+L'état de votre base de données devra être le même que si vous aviez migré tous
+vos fichiers de migrations avant de créer le fichier dump.
+Une fois que le fichier dump est créé, vous pouvez opérer des changements dans
+votre base de données et utiliser la commande ``bake migration_diff`` quand
+vous voulez
+
+.. note::
+
+    Veuillez noter que le système n'est pas capable de détecter les colonnes
+    renommées.
+
 Les Commandes
 =============
 
@@ -621,6 +670,59 @@ sous-commande ``seed``::
 
 Notez que, à l'opposé des migrations, les seeders ne sont pas suivies, ce qui
 signifie que le même seeder peut être appliqué plusieurs fois.
+
+Appeler un Seeder depuis un autre Seeder
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: cakephp/migrations 1.6.2
+
+Généralement, quand vous remplissez votre base de données avec des *seeders*,
+l'ordre dans lequel vous faites les insertions est important pour éviter de
+rencontrer des erreurs dûes à des *constraints violations*.
+Puisque les *seeders* sont exécutés dans l'ordre alphabétique par défaut, vous
+pouvez utiliser la méthode ``\Migrations\AbstractSeed::call()`` pour définir
+votre propre séquence d'exécution de *seeders*::
+
+    use Migrations\AbstractSeed;
+
+    class DatabaseSeed extends AbstractSeed
+    {
+        public function run()
+        {
+            $this->call('AnotherSeed');
+            $this->call('YetAnotherSeed');
+
+            // Vous pouvez utiliser la syntaxe "plugin" pour appeler un seeder
+            // d'un autre plugin
+            $this->call('PluginName.FromPluginSeed');
+        }
+    }
+
+.. note::
+
+    Assurez vous d'*extend* la classe du plugin Migrations ``AbstractSeed`` si
+    vous voulez pouvoir utiliser la méthode ``call()``. Cette classe a été
+    ajoutée dans la version 1.6.2.
+
+``dump`` : Générer un fichier dump pour la fonctionnalité de diff
+-----------------------------------------------------------------
+
+La commande Dump crée un fichier qui sera utilisé avec le template bake
+``migration_diff``::
+
+    $ bin/cake migrations dump
+
+Chaque fichier dump généré est spécifique à la _Connection_ par laquelle il a
+été générée (le nom du fichier est suffixé par ce nom). Cela permet à la
+commande ``bake migration_diff`` de calculer le diff correctement dans le cas
+où votre application gérerait plusieurs bases de données (qui pourraient être
+basées sur plusieurs SGDB.
+
+Les fichiers de dump sont créés dans le même dossier que vos fichiers de
+migrations.
+
+Vous pouvez aussi utiliser les options ``--source``, ``--connection`` et
+``--plugin`` comme pour la commande ``migrate``.
 
 Utiliser Migrations dans les Plugins
 ====================================
@@ -848,10 +950,25 @@ vider le cache de l'ORM pour qu'il renouvelle les _metadata_ des colonnes de vos
 tables.
 Autrement, vous pourrez rencontrer des erreurs de colonnes inexistantes quand
 vous effectuerez des opérations sur vos nouvelles colonnes.
-Le Core de CakePHP inclut un :doc:`Shell de Cache de l'ORM <console-and-shells/orm-cache>`
-que vous pouvez utilisez pour vider le cache::
+Le Core de CakePHP inclut un
+:doc:`Shell de Cache de l'ORM <console-and-shells/orm-cache>` que vous pouvez
+utilisez pour vider le cache::
 
     $ bin/cake orm_cache clear
 
-Veuillez vous référer à la section du cookbook à propos du :doc:`Shell du Cache de l’ORM <console-and-shells/orm-cache>`
-si vous voulez plus de détails à propos de ce shell.
+Veuillez vous référer à la section du cookbook à propos du
+:doc:`Shell du Cache de l’ORM <console-and-shells/orm-cache>` si vous voulez
+plus de détails à propos de ce shell.
+
+Renommer une table
+------------------
+
+Le plugin vous donne la possibilité de renommer une table en utilisant la
+méthode ``rename()``.
+Dans votre fichier de migration, vous pouvez utiliser la syntaxe suivante::
+
+    public function up()
+    {
+        $this->table('old_table_name')
+            ->rename('new_table_name');
+    }

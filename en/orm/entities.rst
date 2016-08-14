@@ -248,7 +248,7 @@ While setting properties to entities in bulk is simple and convenient, it can
 create significant security issues. Bulk assigning user data from the request
 into an entity allows the user to modify any and all columns. When using
 anonymous entity classes or creating the entity class with the :doc:`/bake`
-CakePHP does not protect against mass-assignment. 
+CakePHP does not protect against mass-assignment.
 
 The ``_accessible`` property allows you to provide a map of properties and
 whether or not they can be mass-assigned. The values ``true`` and ``false``
@@ -398,7 +398,8 @@ could be provided by a trait::
 
     namespace SoftDelete\Model\Entity;
 
-    trait SoftDeleteTrait {
+    trait SoftDeleteTrait
+    {
 
         public function softDelete()
         {
@@ -427,13 +428,15 @@ When building APIs, you may often need to convert entities into arrays or JSON
 data. CakePHP makes this simple::
 
     // Get an array.
+    // Associations will be converted with toArray() as well.
     $array = $user->toArray();
 
     // Convert to JSON
+    // Associations will be converted with jsonSerialize hook as well.
     $json = json_encode($user);
 
-When converting an entity to an array/JSON the virtual & hidden field lists are
-applied. Entities are converted recursively as well. This means that if you
+When converting an entity to an JSON the virtual & hidden field lists are
+applied. Entities are recursively converted to JSON as well. This means that if you
 eager loaded entities and their associations CakePHP will correctly handle
 converting the associated data into the correct format.
 

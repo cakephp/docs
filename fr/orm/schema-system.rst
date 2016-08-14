@@ -238,4 +238,4 @@ habituelle de la classe ressemble à::
     $tables = $collection->listTables();
 
     // Récupère une table unique (instance de Schema\Table)
-    $table = $collection->describe('posts')
+    $table = $collection->describe('posts');

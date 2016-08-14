@@ -1,24 +1,22 @@
 Bienvenue
 #########
 
-.. warning::
-    Cette version de documentation concerne CakePHP 3.0. Rendez vous
-    `ici pour la documentation sur CakePHP 2.x <http://book.cakephp.org/2.0/fr>`_.
-
 CakePHP 3 est un framework pour le développement web qui fonctionne avec
 **PHP 7** (min. PHP 5.5.9).
 Vous pouvez lire :doc:`CakePHP en un coup d'oeil </intro>` pour avoir une
 introduction aux fondamentaux de CakePHP 3.
 
 Le livre de cuisine CakePHP est un projet libre et communautaire d'édition de
-la documentation. Remarquez le bouton "Improve this Doc" dans le coin en haut
-à droite; il vous redirigera vers l'éditeur en ligne de GitHub pour la page
-active, vous permettant de contribuer, d'ajouter, de supprimer ou corriger la
-documentation.
+la documentation. Remarquez le bouton icone en forme de crayon fixé dans le coin
+en haut à droite; il vous redirigera vers l'éditeur en ligne de GitHub pour la
+page active, vous permettant de contribuer, d'ajouter, de supprimer ou corriger
+la documentation.
 
 .. container:: offline-download
 
     **Lire le Livre partout**
+
+    .. image:: /_static/img/read-the-book.jpg
 
     Profitez du cookbook de CakePHP presque partout. Disponible, en PDF et en
     EPUB, vous pouvez maintenant lire les docs sur plus d'appareils et

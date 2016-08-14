@@ -4,14 +4,14 @@ Code Generation with Bake
 La consola de CAKE se ejecuta usando PHP CLI (command line interface).
 Si tiene problemas para ejecutar el script, asegurese de:
 
-1. Tener instalado el PHP CLI y que este dispone de los modulos correspondientes
+1. Tener instalado el PHP CLI y que estén los módulos correspondientes
    habilitados (ej: MySQL y intl).
 2. Si el host de base de datos es 'localhost', intente realizar la conexión con
    el ip '127.0.0.1'. En algunos casos PHP CLI tiene problemas al referenciar
    por nombre de host (localhost).
 3. Dependiendo de como su computadora este configurada, la ejecución del comando
    CAKE BAKE (cake bash script) puede requerir que permisos de ejecución al
-   lanzar 'bin/cake bake'.
+   lanzar ``bin/cake bake``.
 
 Antes de comenzar la  ejecución, asegurese de disponer al menos una conexion
 a una base de datos configurada.  Ver sección :ref:`database configuration
@@ -106,7 +106,7 @@ y sus opciones usando el parametro '--help' option::
 Temas Bake / Templates
 ======================
 
-La opción theme is genérica para todos los comandos bake y permite cambiar los
+La opción ``theme`` es genérica para todos los comandos bake y permite cambiar los
 templates de bake utilizados para generar los archivos finales. Para crear sus
 propios templates, ver :ref:`bake theme creation documentation
 <creating-a-bake-theme>`.

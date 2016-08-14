@@ -1,0 +1,7 @@
+:orphan: True
+
+Página não encontrada
+#####################
+
+A página que você está procurando não foi encontrada. Tente usar o campo de
+busca para localizar o que você procura.

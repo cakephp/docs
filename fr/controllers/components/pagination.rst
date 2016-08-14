@@ -13,16 +13,15 @@ sont incapables de faire face a l'affichage de centaines ou de milliers
 d'enregistrements. Réécrire prend du temps, et les performances et la
 satisfaction des utilisateurs peut en pâtir.
 
-Afficher un nombre raisonnable d'enregistrements par page a toujours été
-une partie critique dans toutes les applications et cause régulièrement
-de nombreux maux de tête aux développeurs. CakePHP allège le fardeau
-des développeurs en fournissant un moyen rapide et facile pour paginer
-les données.
+Afficher un nombre raisonnable d'enregistrements par page a toujours été une
+partie critique dans toutes les applications et cause régulièrement de nombreux
+maux de tête aux développeurs. CakePHP allège le fardeau des développeurs en
+fournissant un moyen rapide et facile pour paginer les données.
 
-La pagination dans CakePHP se fait par un Component dans le controller,
-pour faciliter la création des requêtes de pagination.
-Dans la Vue, :php:class:`~Cake\\View\\Helper\\PaginatorHelper` est utilisé pour
-faciliter la génération de la pagination, des liens et des boutons.
+La pagination dans CakePHP se fait par un Component dans le controller, pour
+faciliter la création des requêtes de pagination. Dans la Vue,
+:php:class:`~Cake\\View\\Helper\\PaginatorHelper` est utilisé pour faciliter la
+génération de la pagination, des liens et des boutons.
 
 Utiliser Controller::paginate()
 ===============================
@@ -193,6 +192,31 @@ dans un controller. Quand on pagine un objet ``Query``, l'option ``finder``
 sera ignorée. Il faut que vous passiez la query que vous souhaitez voir
 paginée.
 
+.. _paginating-multiple-queries:
+
+Requêtes de Paginating Multiple
+===============================
+
+Vous pouvez paginer plusieurs models dans une unique action de controller en
+utilisant l'option ``scope``::
+
+    // Dans une action de controller
+    $articles = $this->paginate($this->Articles, ['scope' => 'article']);
+    $tags = $this->paginate($this->Tags, ['scope' => 'tag']);
+    $this->set(compact('articles', 'tags'));
+
+L'option ``scope`` va faire que ``PaginatorComponent`` va regarder les
+paramètres de query string scopés. Par exemple, l'URL suivante pourrait être
+utilisée pour paginer les tags et les articles en même temps::
+
+    /dashboard?article[page]=1&tag[page]=3
+
+Consulter la section :ref:`paginator-helper-multiple` pour savoir comment
+générer les elements HTML scopés et les URLS pour la pagination.
+
+.. versionadded:: 3.3.0
+    Pagination multiple a été ajoutée dans la version 3.3.0
+
 Contrôle les Champs Utilisés pour le Tri
 ========================================
 
@@ -249,12 +273,12 @@ utilisant le paramètre ``contain``::
 Requêtes de Page Out of Range
 =============================
 
-PaginatorComponent va lancer une ``NotFoundException`` quand on essaie
-d'accéder une page non existante, par ex le nombre de page demandé est supérieur
-au total du nombre de page.
+PaginatorComponent va lancer une ``NotFoundException`` quand on essaie d'accéder
+une page non existante, par ex le nombre de page demandé est supérieur au total
+du nombre de page.
 
-Ainsi vous pouvez soit laisser s'afficher la page d'erreur normale, soit utiliser
-un bloc try catch et faire des actions appropriées quand une
+Ainsi vous pouvez soit laisser s'afficher la page d'erreur normale, soit
+utiliser un bloc try catch et faire des actions appropriées quand une
 ``NotFoundException`` est attrapée::
 
     use Cake\Network\Exception\NotFoundException;

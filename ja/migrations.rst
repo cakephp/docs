@@ -194,14 +194,16 @@ Migrations
 コマンドラインでカラムを使用する場合には、次のようなパターンに従っている事を
 覚えておくと便利です。 ::
 
-    fieldName:fieldType[length]:indexType:indexName
+    fieldName:fieldType?[length]:indexType:indexName
 
 例えば、以下はメールアドレスのカラムを指定する方法です。
 
+* ``email:string?``
 * ``email:string:unique``
 * ``email:string:unique:EMAIL_INDEX``
 * ``email:string[120]:unique:EMAIL_INDEX``
 
+fieldType の後のクエスチョンマークは、ヌルを許可するカラムを作成します。
 
 ``fieldType`` のための ``length`` パラメータは任意です。カッコの中に記述します。
 
@@ -420,6 +422,43 @@ Migrations
 
 スナップショットを bake した時、phinx のログテーブルに自動的に追加されることに注意してください。
 
+２つのデータベース間の状態の差分を生成する
+=============================================
+
+.. versionadded:: cakephp/migrations 1.6.0
+
+``migration_diff`` の bake テンプレートを使用して２つのデータベースの状態の
+すべての差分をまとめたマイグレーションファイルを生成することができます。
+そのためには、以下のコマンドを使用します。 ::
+
+    $ bin/cake bake migration_diff NameOfTheMigrations
+
+現在のデータベースの状態からの比較のポイントを保持するために、migrations シェルは、
+``migrate`` もしくは ``rollback`` が呼ばれた後に "dump" ファイルを生成します。
+ダンプファイルは、取得した時点でのあなたのデータベースの全スキーマの状態を含むファイルです。
+
+一度ダンプファイルが生成されると、あなたのデータベース管理システムに直接行ったすべての変更は、
+``bake migration_diff`` コマンドが呼ばれた時に生成されたマイグレーションファイルに追加されます。
+
+デフォルトでは、 ``default`` 接続設定に定義されたデータベースに接続することによって
+差分が作成されます。もし、あなたが異なるデータソースから差分を bake する必要がある場合、
+``--connection`` オプションを使用できます。 ::
+
+    $ bin/cake bake migration_diff NameOfTheMigrations --connection my_other_connection
+
+もし、すでにマイグレーションの履歴を持つアプリケーション上で diff 機能を使用したい場合、
+マニュアルで比較に使用するダンプファイルを作成する必要があります。 ::
+
+    $ bin/cake migrations dump
+
+データベースの状態は、あなたがダンプファイルを作成する前にマイグレーションを全て実行した状態と
+同じでなければなりません。一度ダンプファイルが生成されると、あなたのデータベースの変更を始めて、
+都合の良い時に ``bake migration_diff`` コマンドを使用することができます。
+
+.. note::
+
+    migrations シェルは、カラム名の変更は検知できません。
+
 コマンド
 ========
 
@@ -579,6 +618,50 @@ JSON 形式の文字列として結果を出力できます。 ::
 
 マイグレーションとは対照的にシーダーは追跡されないことに注意してください。
 それは、同じシーダーは、複数回適用することができることを意味します。
+
+シーダーから別のシーダーの呼び出し
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: cakephp/migrations 1.6.2
+
+たいてい初期データ投入時は、データの挿入する順番は、規約違反しないように遵守しなければなりません。
+デフォルトでは、アルファベット順でシーダーが実行されますが、独自にシーダーの実行順を定義するために
+``\Migrations\AbstractSeed::call()`` メソッドが利用できます。 ::
+
+    use Migrations\AbstractSeed;
+
+    class DatabaseSeed extends AbstractSeed
+    {
+        public function run()
+        {
+            $this->call('AnotherSeed');
+            $this->call('YetAnotherSeed');
+
+            // プラグインからシーダーを呼ぶためにプラグインドット記法が使えます
+            $this->call('PluginName.FromPluginSeed');
+        }
+    }
+
+.. note::
+
+    もし、 ``call()`` メソッドを使いたい場合、Maigrations プラグインの ``AbstractSeed``
+    クラスを継承していることを確認してください。このクラスは、リリース 1.6.2 で追加されました。
+
+``dump`` : 差分を bake する機能のためのダンプファイルの生成
+-------------------------------------------------------------
+
+dump コマンドは、 ``migration_diff`` の bake テンプレートで使用するファイルを作成します。 ::
+
+    $ bin/cake migrations dump
+
+各生成されたダンプファイルは、生成元の接続固有のものです（そして、そのようにサフィックスされます）。
+これは、アプリケーションが、異なるデータベースベンダーの複数のデータベースを扱う場合、
+``bake migration_diff`` コマンドで正しく差分を算出することができます。
+
+ダンプファイルは、マイグレーションファイルと同じディレクトリに作成されます。
+
+``migrate`` コマンドのように ``--source`` 、 ``--connection`` そして ``--plugin``
+オプションが使用できます。
 
 プラグイン内のマイグレーションファイルを使う
 ============================================
@@ -797,3 +880,15 @@ CakePHP コアは、この操作を行うために使用できる :doc:`ORM キ�
 このシェルについてもっと知りたい場合、クックブックの
 :doc:`ORM キャッシュシェル <console-and-shells/orm-cache>`
 セクションをご覧ください。
+
+テーブルのリネーム
+------------------
+
+プラグインは、 ``rename()`` メソッドを使用することでテーブルのリネームができます。
+あなたのマイグレーションファイルの中で、以下のように記述できます。 ::
+
+    public function up()
+    {
+        $this->table('old_table_name')
+            ->rename('new_table_name');
+    }

@@ -316,6 +316,12 @@ de la méthode de mutation ``_getFullName()`` de l'entity Author::
         }
     ]);
 
+Vous pouvez aussi récupérer le nom complet directement dans la liste en
+utilisant. ::
+
+    $this->displayField('full_name');
+    $query = $authors->find('list');
+
 Trouver des Données Threaded
 ============================
 
@@ -615,7 +621,7 @@ vous souhaitez aussi charger les champs enlevés des associations avec contain,
 vous pouvez passer l'objet association à ``select()``::
 
     // Sélectionne id & title de articles, mais tous les champs enlevés pour Users.
-    $articlesTable
+    $query = $articles->find()
         ->select(['id', 'title'])
         ->select($articlesTable->Users)
         ->contain(['Users']);

@@ -46,10 +46,15 @@ the following in it::
 We can then use this new helper in one of our shell commands by calling it::
 
     // With ### on either side
-    $this->helper('Heading')->output('It works!');
+    $this->helper('Heading')->output(['It works!']);
 
     // With ~~~~ on either side
-    $this->helper('Heading')->output('It works!', '~', 4);
+    $this->helper('Heading')->output(['It works!', '~', 4]);
+
+
+Helpers generally implement the ``output()`` method which takes an array of
+parameters. However, because Console Helpers are vanilla classes they can
+implement additional methods that take any form of arguments.
 
 Built-In Helpers
 ================
@@ -81,10 +86,11 @@ Progress Helper
 The ProgressHelper can be used in two different ways. The simple mode lets you
 provide a callback that is invoked until the progress is complete::
 
-    $this->helper('Progress')->output(function ($progress) {
+    $this->helper('Progress')->output(['callback' => function ($progress) {
         // Do work here.
         $progress->increment(20);
-    });
+        $progress->draw();
+    }]);
 
 You can control the progress bar more by providing additional options:
 
@@ -101,6 +107,7 @@ An example of all the options in use would be::
         'width' => 20,
         'callback' => function ($progress) {
             $progress->increment(2);
+            $progress->draw();
         }
     ]);
 

@@ -130,17 +130,26 @@ como um cíclo de requisição funciona no CakePHP:
    :align: center
    :alt: Diagrama de fluxo exibindo uma típica requisição CakePHP
 
-O cíclo de requisição típico do CakePHP começa com um usuário solicitando uma
-página ou recurso na sua aplicação. Em alto nível cada requisição vai através
-dos seguintes passos:
+O cíclo de requisição do CakePHP começa com a solicitação de uma página ou
+recurso da sua aplicação, seguindo a cadência abaixo:
 
-#. A requisição é primeiramente processada pela suas rotas.
-#. Depois da requisição ter sido roteada, o despachante irá selecionar
-   o objeto de controller correto para manipulá-la.
-#. A action do controller é chamada e o controller interage com os
-   models e components requisitados.
-#. O controller delega a criação de resposta à view para gerar os dados de saída
-   resultantes dos dados do model.
+#. As regras de reescrita do servidor encaminham a requisição para
+   **webroot/index.php**.
+#. Sua aplicação é carregada e vinculada a um ``HttpServer``.
+#. O *middleware* da sua aplicação é inicializado.
+#. A requisição e a resposta são processados através do *PSR-7 Middleware* que
+   sua aplicação utiliza. Normalmente isso inclui captura de erros e
+   roteamento.
+#. Se nenhuma resposta for retornada do *middleware* e a requisição contiver
+   informações de rota, um *Controller* e uma *action* são acionados.
+#. A *action* do *Controller* é chamada e o mesmo interage com os *Models* e
+   *Components* requisitados.
+#. O *controller* delega a responsabilidade de criar respostas à *view*, para
+   assim gerar a saída de dados resultante do *Model*.
+#. A *View* utiliza *Helpers* e *Cells* para gerar o corpo e cabeçalho das
+   respostas.
+#. A resposta é enviada de volta através do :doc:`/controllers/middleware`.
+#. O ``HttpServer`` emite a resposta para o servidor web.
 
 Apenas o Começo
 ===============

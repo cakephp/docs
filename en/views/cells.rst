@@ -2,8 +2,7 @@ View Cells
 ##########
 
 View cells are small mini-controllers that can invoke view logic and render out
-templates. They provide a light-weight modular replacement to
-``requestAction()``. The idea of cells is borrowed from `cells in Ruby
+templates. The idea of cells is borrowed from `cells in Ruby
 <https://github.com/apotonick/cells>`_, where they fulfill a similar role and
 purpose.
 
@@ -12,9 +11,7 @@ When to use Cells
 
 Cells are ideal for building reusable page components that require interaction
 with models, view logic, and rendering logic. A simple example would be the
-cart in an online store, or a data-driven navigation menu in a CMS. Because
-cells do not dispatch sub-requests, they sidestep all of the overhead associated
-with ``requestAction()``.
+cart in an online store, or a data-driven navigation menu in a CMS.
 
 Creating a Cell
 ===============
@@ -158,6 +155,13 @@ our action name, e.g. **display.ctp**.
 
 Because cells use ``View`` to render templates, you can load additional cells
 within a cell template if required.
+
+.. note::
+
+    Echoing a cell uses the PHP ``__toString()`` magic method which prevents PHP
+    from showing the filename and line number for any fatal errors raised. To
+    obtain a meanful error message, it is recommended to use the
+    ``Cell::render()`` method, for example ``<?= $cell->render() ?>``.
 
 Rendering Alternate Templates
 -----------------------------

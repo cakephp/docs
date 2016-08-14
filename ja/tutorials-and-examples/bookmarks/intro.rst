@@ -18,9 +18,9 @@
 
     php -v
 
-最低でも PHP 5.5.9 (cli) 以上をインストールしてください。
+最低でも PHP 5.5.9 (CLI) 以上をインストールしてください。
 あなたのウェブサーバーの PHP バージョンもまた、5.5.9 以上でなければなりません。そして、
-コマンドラインインターフェース (cli) の PHP バージョンと同じバージョンがベストです。
+コマンドラインインターフェース (CLI) の PHP バージョンと同じバージョンがベストです。
 完全なアプリケーションを確認したい場合、 `cakephp/bookmarker
 <https://github.com/cakephp/bookmarker-tutorial>`__ をチェックアウトしてください。
 さあ、はじめましょう!
@@ -93,7 +93,7 @@ CakePHP のディレクトリ構造がどのように働くかを学ぶのにい
     Windows では、このコマンドは ``bin\cake server`` (バックスラッシュ) です。.
 
 これで、 8765 ポートで PHP のビルドインウェブサーバーが起動します。ウェルカムページを見るために
-**http://localhost::8765** をウェブブラウザーで開いてください。CakePHP がデータベース接続が
+**http://localhost:8765** をウェブブラウザーで開いてください。CakePHP がデータベース接続が
 可能かどうか以外は、すべての確認事項がチェック済みになるべきです。そうでなければ、PHP 拡張の
 追加のインストールやディレクトリのパーミッション設定が必要かもしれません。
 
@@ -214,6 +214,7 @@ Scaffold コードの生成
 パスワードハッシュを追加
 ========================
 
+(**http://localhost:8765/users** にアクセスして)
 ユーザーを作成した時、パスワードが平文で保存されることにおそらく気づくでしょう。
 これはセキュリティの観点から、とても良くありませんので修正しましょう。
 
@@ -231,13 +232,13 @@ Scaffold コードの生成
 
     namespace App\Model\Entity;
 
-    use Cake\Auth\DefaultPasswordHasher;
+    use Cake\Auth\DefaultPasswordHasher; // この行を追加してください
     use Cake\ORM\Entity;
 
     class User extends Entity
     {
 
-        // Code from bake.
+        // bake で生成されたコード
 
         protected function _setPassword($value)
         {

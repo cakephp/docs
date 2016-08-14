@@ -148,31 +148,6 @@ Se por alguma razão você quiser pular o comportamento padrão, você pode reto
 um objeto :php:class:`Cake\\Network\\Response` a partir da action com a resposta
 definida.
 
-Quando você usa métodos do controller com
-:php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()`
-você irá tipicamente retornar uma instância ``Response``. Se você tem métodos
-de controller que são usados para requisições web normais + requestAction, você
-deve checar o tipo de requisição antes de retornar::
-
-    // src/Controller/RecipesController.php
-
-    class RecipesController extends AppController
-    {
-        public function popular()
-        {
-            $popular = $this->Recipes->find('popular');
-            if ($this->request->is('requested')) {
-                $this->response->body(json_encode($popular));
-                return $this->response;
-            }
-            $this->set('popular', $popular);
-        }
-    }
-
-A action do controller acima é um exemplo de como um método pode ser usado com
-:php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()` e requisições
-normais.
-
 Para que você possa utilizar um controller de forma eficiente em sua própria
 aplicação, nós iremos cobrir alguns dos atributos e métodos oferecidos pelo
 controller do core do CakePHP.

@@ -437,15 +437,27 @@ données spécifiques basées sur une condition.
 Si vous vouliez savoir combien d'articles sont publiés dans notre base de
 données, vous auriez besoin de générer le SQL suivant::
 
-    SELECT SUM(CASE published = 'Y' THEN 1 ELSE 0) AS number_published, SUM(CASE published = 'N' THEN 1 ELSE 0) AS number_unpublished
+    SELECT
+    SUM(CASE published = 'Y' THEN 1 ELSE 0) AS number_published,
+    SUM(CASE published = 'N' THEN 1 ELSE 0) AS number_unpublished
     FROM articles GROUP BY published
 
 Pour faire ceci avec le générateur de requêtes, vous utiliseriez le code
 suivant::
 
     $query = $articles->find();
-    $publishedCase = $query->newExpr()->addCase($query->newExpr()->add(['published' => 'Y']), 1, 'integer');
-    $notPublishedCase = $query->newExpr()->addCase($query->newExpr()->add(['published' => 'N']), 1, 'integer');
+    $publishedCase = $query->newExpr()
+        ->addCase(
+            $query->newExpr()->add(['published' => 'Y']),
+            1,
+            'integer'
+        );
+    $notPublishedCase = $query->newExpr()
+        ->addCase(
+            $query->newExpr()->add(['published' => 'N']),
+            1,
+            'integer'
+        );
 
     $query->select([
         'number_published' => $query->func()->sum($publishedCase),
@@ -516,6 +528,62 @@ chose comme ceci::
         ['id' => 2, 'title' => 'Second Article', 'body' => 'Article 2 body' ...],
         ...
     ]
+
+.. _format-results:
+
+Ajouter des Champs Calculés
+===========================
+
+Après vos requêtes, vous aurez peut-être besoin de faire des traitements
+postérieurs. Si vous voulez ajouter quelques champs calculés ou des données
+dérivées, vous pouvez utiliser la méthode ``formatResults()``. C'est une
+façon légère de mapper les ensembles de résultats. Si vous avez besoin de plus de
+contrôle sur le processus, ou que vous souhaitez réduire les résultats, vous
+devriez utiliser la fonctionnalité de :ref:`Map/Reduce <map-reduce>` à la
+place. Si vous faîtes une requête d'une liste de personnes, vous pourriez
+calculer leur âge avec le formateur de résultats::
+
+    // En supposant que nous avons construit les champs, les conditions et les contain.
+    $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results) {
+        return $results->map(function ($row) {
+            $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
+            return $row;
+        });
+    });
+
+Comme vous pouvez le voir dans l'exemple ci-dessus, les callbacks de formatage
+récupéreront un ``ResultSetDecorator`` en premier argument. Le second argument
+sera l'instance Query sur laquelle le formateur a été attaché. L'argument
+``$results`` peut être traversé et modifié autant que nécessaire.
+
+Les formateurs de résultat sont nécessaires pour retourner un objet itérateur,
+qui sera utilisé comme valeur retournée pour la requête. Les fonctions de
+formateurs sont appliquées après que toutes les routines
+Map/Reduce soient exécutées. Les formateurs de résultat peuvent aussi être
+appliqués dans les associations ``contain``. CakePHP va s'assurer que vos
+formateurs sont bien scopés. Par exemple, faire ce qui suit fonctionnera
+comme vous pouvez vous y attendre::
+
+    // Dans une méthode dans la table Articles
+    $query->contain(['Authors' => function ($q) {
+        return $q->formatResults(function ($authors) {
+            return $authors->map(function ($author) {
+                $author['age'] = $author['birth_date']->diff(new \DateTime)->y;
+                return $author;
+            });
+        });
+    });
+
+    // Récupère les résultats
+    $results = $query->all();
+
+    // Affiche 29
+    echo $results->first()->author->age;
+
+Comme vu précédemment, les formateurs attachés aux constructeurs de requête
+associées sont limités pour agir seulement sur les données dans l'association.
+CakePHP va s'assurer que les valeurs calculées soient insérées dans la bonne
+entity.
 
 .. _advanced-query-conditions:
 
@@ -813,6 +881,36 @@ suivantes pour créer des conditions:
             return $exp->between('population', 999, 5000000);
         });
     # WHERE population BETWEEN 999 AND 5000000,
+
+- ``exists()`` Crée une condition en utilisant ``EXISTS``::
+
+    $subquery = $cities->find()
+		->select(['id'])
+        ->where(function ($exp, $q) {
+			return $exp->equalFields('countries.id', 'cities.country_id');
+        })
+		->andWhere(['population >', 5000000]);
+
+    $query = $countries->find()
+        ->where(function ($exp, $q) use ($subquery) {
+            return $exp->exists($subquery);
+        });
+    # WHERE EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
+
+- ``notExists()`` Crée une condition négative en utilisant ``EXISTS``::
+
+    $subquery = $cities->find()
+		->select(['id'])
+        ->where(function ($exp, $q) {
+			return $exp->equalFields('countries.id', 'cities.country_id');
+        })
+		->andWhere(['population >', 5000000]);
+
+    $query = $countries->find()
+        ->where(function ($exp, $q) use ($subquery) {
+            return $exp->notExists($subquery);
+        });
+    # WHERE NOT EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
 
 Dans les cas où vous ne pouvez ou ne voulez pas utiliser les méthodes du
 constructeur pour créer les conditions que vous voulez, vous pouvez utiliser du
@@ -1315,6 +1413,18 @@ les requêtes ensemble, vous pouvez faire des sous-requêtes::
 Les sous-requêtes sont acceptées partout où une expression query peut être
 utilisée. Par exemple, dans les méthodes ``select()`` et ``join()``.
 
+Adding Locking Statements
+-------------------------
+
+Most relational database vendors support taking out locks when doing select
+operations. You can use the ``epilog()`` method for this::
+
+    // In MySQL
+    $query->epilog('FOR UPDATE');
+
+The ``epilog()`` method allows you to append raw SQL to the end of queries. You
+should never put raw user data into ``epilog()``.
+
 Exécuter des Requêtes Complexes
 -------------------------------
 
@@ -1326,59 +1436,3 @@ directe du SQL souhaité <running-select-statements>`.
 Exécuter directement le SQL vous permet d'affiner la requête qui sera utilisée.
 Cependant, cela vous empêchera d'utiliser ``contain`` ou toute autre
 fonctionnalité de plus haut niveau de l'ORM.
-
-.. _format-results:
-
-Ajouter des Champs Calculés
-===========================
-
-Après vos requêtes, vous aurez peut-être besoin de faire des traitements
-postérieurs. Si vous voulez ajouter quelques champs calculés ou des données
-dérivées, vous pouvez utiliser la méthode ``formatResults()``. C'est une
-façon légère de mapper les ensembles de résultats. Si vous avez besoin de plus de
-contrôle sur le processus, ou que vous souhaitez réduire les résultats, vous
-devriez utiliser la fonctionnalité de :ref:`Map/Reduce <map-reduce>` à la
-place. Si vous faîtes une requête d'une liste de personnes, vous pourriez
-calculer leur âge avec le formateur de résultats::
-
-    // En supposant que nous avons construit les champs, les conditions et les contain.
-    $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results) {
-        return $results->map(function ($row) {
-            $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
-            return $row;
-        });
-    });
-
-Comme vous pouvez le voir dans l'exemple ci-dessus, les callbacks de formatage
-récupéreront un ``ResultSetDecorator`` en premier argument. Le second argument
-sera l'instance Query sur laquelle le formateur a été attaché. L'argument
-``$results`` peut être traversé et modifié autant que nécessaire.
-
-Les formateurs de résultat sont nécessaires pour retourner un objet itérateur,
-qui sera utilisé comme valeur retournée pour la requête. Les fonctions de
-formateurs sont appliquées après que toutes les routines
-Map/Reduce soient exécutées. Les formateurs de résultat peuvent aussi être
-appliqués dans les associations ``contain``. CakePHP va s'assurer que vos
-formateurs sont bien scopés. Par exemple, faire ce qui suit fonctionnera
-comme vous pouvez vous y attendre::
-
-    // Dans une méthode dans la table Articles
-    $query->contain(['Authors' => function ($q) {
-        return $q->formatResults(function ($authors) {
-            return $authors->map(function ($author) {
-                $author['age'] = $author['birth_date']->diff(new \DateTime)->y;
-                return $author;
-            });
-        });
-    });
-
-    // Récupère les résultats
-    $results = $query->all();
-
-    // Affiche 29
-    echo $results->first()->author->age;
-
-Comme vu précédemment, les formateurs attachés aux constructeurs de requête
-associées sont limités pour agir seulement sur les données dans l'association.
-CakePHP va s'assurer que les valeurs calculées soient insérées dans la bonne
-entity.

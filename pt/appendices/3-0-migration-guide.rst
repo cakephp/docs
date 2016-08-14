@@ -24,7 +24,7 @@ Ferramenta de atualização
 Enquanto este documento cobre todas as alterações e melhorias feitas no
 CakePHP 3.0, nós também criamos uma aplicação de console para ajudar você
 a completar mais facilmente algumas das alterações mecânicas que consomem tempo.
-Você pode `pegar a ferramenta de atualização no github <https://github
+Você pode `pegar a ferramenta de atualização no GitHub <https://github
 .com/cakephp/upgrade>`_.
 
 Layout do diretório da aplicação
@@ -1335,4 +1335,5 @@ Xml
 
 - O :php:meth:`Xml::build()` agora exige que o ``$options`` seja um array.
 - O ``Xml::build()`` não aceita mais uma URL. Se você precisar criar um documento XML
-  a partir de uma URL, use o 
+  a partir de uma URL, use :ref:`Http\\Client <http-client-xml-json>`.
+  

@@ -130,16 +130,19 @@ resource in your application. At a high level each request goes through the
 following steps:
 
 #. The webserver rewrite rules direct the request to **webroot/index.php**.
-#. Your application's autoloader and bootstrap files are executed.
-#. Any :doc:`dispatch filters </development/dispatch-filters>` that are
-   configured can handle the request, and optionally generate a response.
-#. The dispatcher selects the appropriate controller & action based on routing rules.
+#. Your Application is loaded and bound to an ``HttpServer``.
+#. Your application's middleware is initialized.
+#. A request and response is dispatched through the PSR-7 Middleware that your
+   application uses. Typically this includes error trapping and routing.
+#. If no response is returned from the middleware and the request contains
+   routing information, a controller & action are selected.
 #. The controller's action is called and the controller interacts with the
    required Models and Components.
 #. The controller delegates response creation to the View to generate the output
    resulting from the model data.
 #. The view uses Helpers and Cells to generate the response body and headers.
-#. The response is sent back to the client.
+#. The response is sent back out through the :doc:`/controllers/middleware`.
+#. The ``HttpServer`` emits the response to the webserver.
 
 Just the Start
 ==============

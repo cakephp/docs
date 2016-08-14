@@ -121,6 +121,28 @@ object along. The listeners will handle all the extra logic around the
 possibly in separate objects and even delegating it to offline tasks if you have
 the need.
 
+.. _tracking-events:
+
+Tracking Events
+---------------
+
+To keep a list of events that are fired on a particular ``EventManager``, you
+can enable event tracking. To do so, simply attach an
+:php:class:`Cake\\Event\\EventList` to the manager::
+
+    EventManager::instance()->setEventList(new EventList());
+
+After firing an event on the manager, you can retrieve it from the event list::
+
+    $eventsFired = EventManager::instance()->getEventList();
+    $firstEvent = $eventsFired[0];
+
+Tracking can be disabled by removing the event list or calling
+:php:meth:`Cake\\Event\\EventList::trackEvents(false)`.
+
+.. versionadded:: 3.2.11
+    Event tracking and :php:class:`Cake\\Event\\EventList` were added.
+
 Core Events
 ===========
 
@@ -159,7 +181,7 @@ as necessary. Our ``UserStatistics`` listener might start out like::
             ];
         }
 
-        public function updateBuyStatistic($event)
+        public function updateBuyStatistic($event, $order)
         {
             // Code to update statistics
         }
@@ -512,6 +534,7 @@ Additional Reading
 * :doc:`/orm/behaviors`
 * :doc:`/controllers/components`
 * :doc:`/views/helpers`
+* :ref:`testing-events`
 
 
 .. meta::

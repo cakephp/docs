@@ -2,8 +2,8 @@
 ###################
 
 CakePHP データベースアクセス層は、リレーショナルデータベースを扱うほとんどの面を
-抽象化して、サーバコネクションの保持、クエリーの生成、SQL インジェクションの防止、
-スキーマチェックと変更、デバッグとデータベースに送信したクエリーのプロファイリング
+抽象化して、サーバコネクションの保持、クエリの生成、SQL インジェクションの防止、
+スキーマチェックと変更、デバッグとデータベースに送信したクエリのプロファイリング
 などの支援を提供します。
 
 クイック ツアー
@@ -25,7 +25,7 @@ CakePHP データベースアクセス層は、リレーショナルデータベ
     $connection = ConnectionManager::get('default');
 
 サポートしているデータベース
-------------------------------
+----------------------------
 
 CakePHP は下記のリレーショナルデータベースをサポートしています。
 
@@ -45,9 +45,9 @@ Oracle データベースは、
 .. _running-select-statements:
 
 Select 文の実行
--------------------------
+---------------
 
-生の SQL クエリーを実行するのは非常に簡単です。 ::
+生の SQL クエリを実行するのは非常に簡単です。 ::
 
     use Cake\Datasource\ConnectionManager;
 
@@ -70,7 +70,7 @@ Select 文の実行
         )
         ->fetchAll('assoc');
 
-SQL 文を手で書く代わりに、クエリービルダーを使うこともできます。 ::
+SQL 文を手で書く代わりに、クエリビルダーを使うこともできます。 ::
 
     $results = $connection
         ->newQuery()
@@ -82,7 +82,7 @@ SQL 文を手で書く代わりに、クエリービルダーを使うことも�
         ->fetchAll('assoc');
 
 Insert 文の実行
--------------------------
+---------------
 
 データベースに行を追加するのは、通常は数行の話しです。 ::
 
@@ -95,7 +95,7 @@ Insert 文の実行
     ], ['created' => 'datetime']);
 
 Update 文の実行
--------------------------
+---------------
 
 データベースの行の更新も同様に直感的に可能で、下記の例では article の **id** が 10 の
 データを更新しています。 ::
@@ -105,7 +105,7 @@ Update 文の実行
     $connection->update('articles', ['title' => 'New title'], ['id' => 10]);
 
 Delete 文の実行
--------------------------
+---------------
 
 同様に ``delete()`` メソッドはデータベースから行を削除するために使われ、
 下記の例では article の **id** が 10 の行を削除しています。 ::
@@ -117,7 +117,7 @@ Delete 文の実行
 .. _database-configuration:
 
 設定
-=============
+====
 
 慣例として、データベース接続は **config/app.php** に設定します。
 このファイルに定義された接続情報は、アプリケーションが使用する接続構成を生成する
@@ -167,7 +167,7 @@ Delete 文の実行
         'url' => 'mysql://my_app:sekret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
     ]);
 
-DSN 文字列を使用するときには、クエリー文字列引数として追加のパラメータやオプションを
+DSN 文字列を使用するときには、クエリ文字列引数として追加のパラメータやオプションを
 定義することができます。
 
 デフォルトでは、すべてのテーブルオブジェクトは ``default`` の接続を使用します。
@@ -193,7 +193,9 @@ username
 password
     アカウントのパスワード。
 database
-    接続するデータベース名。
+    接続するデータベース名。データベース名に ``.`` の使用は避けてください。
+    識別子を引用符で囲むことが難しくするため、CakePHP は、データベース名の
+    ``.`` をサポートしません。
 port (*optional*)
     サーバに接続する際に使用する TCP ポート または Unix ソケット。
 encoding
@@ -202,7 +204,7 @@ encoding
     デフォルト設定されます。
     もし MySQL で UTF-8 で接続したいのなら、ハイフンなしで 'utf8' と指定してください。
 timezone
-    サーバーのタイムゾーンがセットされます。
+    サーバのタイムゾーンがセットされます。
 schema
     PostgreSQL データベースで特定のスキーマを使う時に設定します。
 unix_socket
@@ -216,15 +218,15 @@ ssl_cert
 ssl_ca
     SSL 証明書の認証局へのファイルパス。 （MySQL のみでサポートされています）。
 init
-    接続が作成されたときに、データベースサーバに送信されるクエリーのリスト。
+    接続が作成されたときに、データベースサーバに送信されるクエリのリスト。
 log
-    クエリーログを有効にするには ``true`` をセットします。
-    有効なクエリーで ``debug`` レベルの時に、 ``queriesLog`` スコープでログ出力されます。
+    クエリログを有効にするには ``true`` をセットします。
+    有効なクエリで ``debug`` レベルの時に、 ``queriesLog`` スコープでログ出力されます。
 quoteIdentifiers
     あなたがテーブルやカラム名に予約語や特殊文字を使用している場合は ``true`` に設定します。
     この設定を有効にすると、SQL を生成する際に :doc:`/orm/query-builder`
-    によって引用符で囲まれたクエリーが生成されます。
-    これはクエリーを実行する前に横断的に処理を行う必要があるため、パフォーマンスを
+    によって引用符で囲まれたクエリが生成されます。
+    これはクエリを実行する前に横断的に処理を行う必要があるため、パフォーマンスを
     低下させることに注意してください。
 flags
     ベースになる PDO のインスタンスに引き継がれる、 PDO 定数の連想配列。
@@ -248,7 +250,7 @@ BigBoxesTable と、コントローラ BigBoxesController は、全て自動的�
 .. php:namespace:: Cake\Datasource
 
 コネクションの管理
-====================
+==================
 
 .. php:class:: ConnectionManager
 
@@ -257,7 +259,7 @@ BigBoxesTable と、コントローラ BigBoxesController は、全て自動的�
 これは他のオブジェクトが既存のコネクションへの参照を取得するための場所を提供します。
 
 コネクションへのアクセス
------------------------------
+------------------------
 
 .. php:staticmethod:: get($name)
 
@@ -273,7 +275,7 @@ BigBoxesTable と、コントローラ BigBoxesController は、全て自動的�
 存在しない接続をロードしようとしたら、例外を throw します。
 
 実行時にコネクションを生成する
--------------------------------
+------------------------------
 
 ``config()`` や ``get()`` を使用して、実行時に設定ファイルに定義されていない
 コネクションを生成することができます。 ::
@@ -288,7 +290,7 @@ BigBoxesTable と、コントローラ BigBoxesController は、全て自動的�
 .. php:namespace:: Cake\Database
 
 データの型
-==============
+==========
 
 .. php:class:: Type
 
@@ -305,9 +307,10 @@ text
 uuid
     データベースがサポートするなら UUID 型に、さもなければ CHAR(36) に変換します。
 integer
-    データベースがサポートするなら INTEGER 型に変換します。
+    データベースがサポートする INTEGER 型に変換します。現時点では、
+    BIT はサポートしていません。
 biginteger
-    データベースがサポートするなら BIGINT 型に変換します。
+    データベースがサポートする BIGINT 型に変換します。
 float
     データベースに応じて DOUBLE 型か FLOAT 型に変換されます。
     精度（小数点以下桁数）を指定するために ``precision`` オプションを使うことができます。
@@ -315,7 +318,8 @@ decimal
     DECIMAL 型に変換されます。 ``length`` と ``precision`` オプションをサポート
     します。
 boolean
-    BOOLEAN に変換します。（ MySQL の場合は TINYINT(1) になります。）
+    BOOLEAN に変換します。MySQL の場合は TINYINT(1) になります。現時点では、
+    BIT(1) はサポートしていません。
 binary
     データベースに応じて BLOB または BYTEA 型に変換します。
 date
@@ -331,12 +335,15 @@ timestamp
     TIMESTAMP 型に変換します。
 time
     全てのデータベースで TIME 型に変換します。
+json
+    可能であれば、JSON 型に変換し、そうでなければ TEXT 型に変換します。
+    'json' 型は 3.3.0 で追加されました。
 
 これらの型は、テストフィクスチャを使用している時に、CakePHP が提供する
 スキーマリフレクション機能とスキーマ生成機能の両方で使用されます。
 
 また、各型は PHP と SQL の表現の変換を行う機能も提供します。
-これらのメソッドはクエリー実行時に型のヒントに基づいて呼び出されます。
+これらのメソッドはクエリ実行時に型のヒントに基づいて呼び出されます。
 例えば、 'datetime' という名前の項目なら、入力パラメータを自動的に ``DateTime`` から
 timestamp か 整形した日付文字列に変換します。
 同様に 'binary' という名前の項目ならファイルハンドラを受け入れ、データを読み込むときには
@@ -345,7 +352,7 @@ timestamp か 整形した日付文字列に変換します。
 .. _adding-custom-database-types:
 
 独自の型を作成する
--------------------
+------------------
 
 .. php:staticmethod:: map($name, $class)
 
@@ -362,7 +369,7 @@ Type クラスは次のメソッドを実装することが期待されます。
 拡張することです。例えば、もしあなたが JSON 型を追加したいなら、下記のような型クラスを
 作成します。 ::
 
-    // in src/Database/Type/JsonType.php
+    // src/Database/Type/JsonType.php の中で
 
     namespace App\Database\Type;
 
@@ -413,7 +420,7 @@ Type クラスは次のメソッドを実装することが期待されます。
     Type::map('json', 'App\Database\Type\JsonType');
 
 こうすればスキーマ情報は新しい型で上書きされ、CakePHP のデータベース層は自動的に
-JSON データを変換してクエリーを作成します。
+JSON データを変換してクエリを作成します。
 あなたは Table の :ref:`_initializeSchema() メソッド <saving-complex-types>` で、
 新たに作った型のマッピングをすることができます。 ::
 
@@ -429,6 +436,109 @@ JSON データを変換してクエリーを作成します。
         }
 
     }
+
+.. _mapping-custom-datatypes-to-sql-expressions:
+
+独自データ型から SQL 表現への変換
+--------------------------------------------
+
+.. versionadded:: 3.3.0
+    独自データ型から SQL 表現への変換のサポートは 3.3.0 で追加されました。
+
+前の例は、SQL 文の文字列として表現しやすい 'json' カラム型のための独自データ型に変換します。
+複雑な SQL データ型は、SQL クエリの文字列や整数として表現することはできません。
+これらのデータ型を動作させる際、あなたの Type クラスは、
+``Cake\Database\Type\ExpressionTypeInterface`` インスタンスを実装する必要があります。
+例として、MySQL の ``POINT`` 型データのためのシンプルな Type クラスを作成します。
+最初に、PHP の ``POINT`` データを表現するために使用する「値」オブジェクトを定義します。 ::
+
+    // src/Database/Point.php の中で
+    namespace App\Database;
+
+    // 値オブジェクトはイミュータブルです。
+    class Point
+    {
+        protected $_lat;
+        protected $_long;
+
+        // ファクトリメソッド
+        public static function parse($value)
+        {
+            // MySQL からのデータをパース
+            return new static($value[0], $value[1]);
+        }
+
+        public function __construct($lat, $long)
+        {
+            $this->_lat = $lat;
+            $this->_long = $long;
+        }
+
+        public function lat()
+        {
+            return $this->_lat;
+        }
+
+        public function long()
+        {
+            return $this->_long;
+        }
+    }
+
+値オブジェクトを作成することで、この値オブジェクトや SQL 表現にデータを変換する
+Type クラスが必要になります。 ::
+
+    namespace App\Database\Type;
+
+    use App\Database\Point;
+    use Cake\Database\Expression\FunctionExpression;
+    use Cake\Database\Type as BaseType;
+    use Cake\Database\Type\ExpressionTypeInterface;
+
+    class PointType extends BaseType implements ExpressionTypeInterface
+    {
+        public function toPHP($value, Driver $d)
+        {
+            return Point::parse($value);
+        }
+
+        public function marshall($value)
+        {
+            if (is_string($value)) {
+                $value = extract(',', $value);
+            }
+            if (is_array($value)) {
+                return new Point($value[0], $value[1]);
+            }
+            return null;
+        }
+
+        public function toExpression($value)
+        {
+            if ($value instanceof Point) {
+                return new FunctionExpression(
+                    'POINT',
+                    $value->lat(),
+                    $value->long()
+                );
+            }
+            if (is_array($value)) {
+                return new FunctionExpression('POINT', $value[0], $value[1]);
+            }
+            // その他のケースを処理
+        }
+    }
+
+上記のクラスは、いくつかの興味深い特徴があります。
+
+* ``toPHP`` メソッドは、SQL クエリの結果を値オブジェクトにパースします。
+* ``marchall`` メソッドは、例えばリクエストデータで与えられたデータから値オブジェクトへ
+  変換します。 ``'10.24,12.34`` のような文字列や配列を受け取れるようにしています。
+* ``toExpression`` メソッドは、値オブジェクトから同等の SQL 表現へ変換します。
+  例えば、結果の SQL は、 ``POINT(10.24, 12.34)`` のようになります。
+
+一度独自の型を作成したら、 :ref:`独自の型をテーブルクラスと関連づける <saving-complex-types>`
+必要があります。
 
 .. _immutable-datetime-mapping:
 
@@ -450,30 +560,30 @@ Date/Time オブジェクトは容易に変更されてしまうため、CakePHP
     新しいアプリケーションは、デフォルトでイミュータブルオブジェクトが有効になります。
 
 Connection クラス
-==================
+=================
 
 .. php:class:: Connection
 
 Connection クラスは、一貫性のある方法でデータベースコネクションと対話するための
 シンプルなインタフェースを提供します。
-これはドライバ層への基底インタフェースであり、クエリーの実行、クエリーのロギング、
+これはドライバ層への基底インタフェースであり、クエリの実行、クエリのロギング、
 トランザクション処理といった機能を提供するためのものです。
 
 .. _database-queries:
 
-クエリーの実行
------------------
+クエリの実行
+------------
 
 .. php:method:: query($sql)
 
-あなたがコネクションオブジェクトを取得したら、恐らく何らかのクエリーを発行したくなるでしょう。
+あなたがコネクションオブジェクトを取得したら、恐らく何らかのクエリを発行したくなるでしょう。
 CakePHP のデータベース抽象化レイヤは、PDO とネイティブドライバ上にラッパー機能を提供します。
 これらのラッパーは PDO と似たようなインタフェースを提供します。
-クエリーを実行する方法は、あなたが実行したいクエリーと取得したい結果の種類に応じて
+クエリを実行する方法は、あなたが実行したいクエリと取得したい結果の種類に応じて
 いくつかあります。
-もっとも基本的な方法は、完全な SQL クエリーの実行を可能にする ``query()`` です。 ::
+もっとも基本的な方法は、完全な SQL クエリの実行を可能にする ``query()`` です。 ::
 
-    $stmt = $conn->query('UPDATE posts SET published = 1 WHERE id = 2');
+    $stmt = $conn->query('UPDATE articles SET published = 1 WHERE id = 2');
 
 .. php:method:: execute($sql, $params, $types)
 
@@ -481,16 +591,16 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 プレースホルダを使用可能な ``execute()`` メソッドを使用します。 ::
 
     $stmt = $conn->execute(
-        'UPDATE posts SET published = ? WHERE id = ?',
+        'UPDATE articles SET published = ? WHERE id = ?',
         [1, 2]
     );
 
 型に関する情報がない場合は、 ``execute`` は全てのプレースホルダを文字列とみなします。
-もし特定の型にバインドする必要があるなら、クエリーを生成する時に型名を指定することが
+もし特定の型にバインドする必要があるなら、クエリを生成する時に型名を指定することが
 できます。 ::
 
     $stmt = $conn->execute(
-        'UPDATE posts SET published_date = ? WHERE id = ?',
+        'UPDATE articles SET published_date = ? WHERE id = ?',
         [new DateTime('now'), 2],
         ['date', 'integer']
     );
@@ -498,24 +608,24 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 .. php:method:: newQuery()
 
 これはあなたのアプリケーションで豊富なデータ型を使用し、適切に SQL 文に変換することができます。
-クエリーを作成する最後の、そして最も柔軟な方法は、  :doc:`/orm/query-builder` を
+クエリを作成する最後の、そして最も柔軟な方法は、  :doc:`/orm/query-builder` を
 使用することです。
-この方法では、プラットフォーム固有の SQL を使用することなく、複雑で表現力豊かなクエリーを
+この方法では、プラットフォーム固有の SQL を使用することなく、複雑で表現力豊かなクエリを
 構築することができます。 ::
 
     $query = $conn->newQuery();
-    $query->update('posts')
+    $query->update('articles')
         ->set(['published' => true])
         ->where(['id' => 2]);
     $stmt = $query->execute();
 
-クエリービルダを使用する場合は、 ``execute()`` メソッドを呼ぶまではサーバーに SQL は
+クエリビルダを使用する場合は、 ``execute()`` メソッドを呼ぶまではサーバに SQL は
 送信されず、メソッド呼び出し後に順次処理されます。
 最初に送信してから、順次結果セットを作成します。 ::
 
     $query = $conn->newQuery();
     $query->select('*')
-        ->from('posts')
+        ->from('articles')
         ->where(['published' => true]);
 
     foreach ($query as $row) {
@@ -525,10 +635,10 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 .. note::
 
     もし :php:class:`Cake\\ORM\\Query` のインスタンスを生成しているのなら、
-    SELECT クエリーの結果セットを取得するのに ``all()`` を使用できます。
+    SELECT クエリの結果セットを取得するのに ``all()`` を使用できます。
 
 トランザクションを使う
---------------------------
+----------------------
 
 コネクションオブジェクトは、データベーストランザクションを行うためのいくつかの簡単な
 方法を提供します。
@@ -536,8 +646,8 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 ``commit()`` , ``rollback()`` を使用するものです。 ::
 
     $conn->begin();
-    $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
-    $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
+    $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
+    $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
     $conn->commit();
 
 .. php:method:: transactional(callable $callback)
@@ -546,12 +656,12 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 簡単にハンドリングする ``transactional()`` メソッドが提供されています。 ::
 
     $conn->transactional(function ($conn) {
-        $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
-        $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
+        $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
+        $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
     });
 
-基本的なクエリーに加えて、 :doc:`/orm/query-builder` または :doc:`/orm/table-objects` の
-いずれかを使用してより複雑なクエリーを実行することができます。
+基本的なクエリに加えて、 :doc:`/orm/query-builder` または :doc:`/orm/table-objects` の
+いずれかを使用してより複雑なクエリを実行することができます。
 トランザクションメソッドは下記のことを実行します。
 
 - ``begin`` を呼び出します。
@@ -561,19 +671,19 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 - クロージャーが正常終了したら、トランザクションをコミットします。
 
 ステートメントとの対話
-===========================
+======================
 
 基底レベルのデータベース API を使用していると、ステートメントオブジェクトが
 よく出てきます。
 これらのオブジェクトで、ドライバから基になるプリペアドステートメントを操作できるように
 なります。
-クエリーオブジェクトを生成し実行するか ``execute()`` を実行した後、あなたは
+クエリオブジェクトを生成し実行するか ``execute()`` を実行した後、あなたは
 ``StatementDecorator`` インスタンスを持つ事になります。
 これはベースとなる基本的なステートメントオブジェクトをラップして、追加の機能を
 提供します。
 
 ステートメントを準備する
-------------------------------
+------------------------
 
 あなたは ``execute()`` か ``prepare()`` でステートメントオブジェクトを生成できます。
 ``execute()`` メソッドは引き継いだ値をバインドしたステートメントを返します。
@@ -592,7 +702,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 SQL 文を準備したら、あなたは追加のデータをバインドし、それを実行することができます。
 
 値をバインドする
---------------------
+----------------
 
 プリペアドステートメントを作成したら、追加のデータをバインドする必要があります。
 あなたは ``bind()`` メソッドを使って一度に複数の値をバインドする事も、
@@ -634,7 +744,7 @@ SQL 文を準備したら、あなたは追加のデータをバインドし、�
     同じステートメント内で、項目の通し番号と項目名のキーを混在させることはできません。
 
 実行と結果行の取得
--------------------------
+------------------
 
 プリペアドステートメントを作成してデータをバインドしたら、実行して行フェッチすることが
 できます。
@@ -661,7 +771,7 @@ SQL 文を準備したら、あなたは追加のデータをバインドし、�
 
 
 行数を取得する
-------------------
+--------------
 
 ステートメントを実行したら、下記のように対象行数を取得することができます。 ::
 
@@ -672,7 +782,7 @@ SQL 文を準備したら、あなたは追加のデータをバインドし、�
 エラーコードをチェックする
 ---------------------------
 
-あなたのクエリーが成功しなかった場合は、エラー関連情報を ``errorCode()`` と ``errorInfo()``
+あなたのクエリが成功しなかった場合は、エラー関連情報を ``errorCode()`` と ``errorInfo()``
 メソッドによって取得することができます。
 このメソッドは PDO で提供されているものと同じように動作します。 ::
 
@@ -684,21 +794,21 @@ SQL 文を準備したら、あなたは追加のデータをバインドし、�
 
 .. _database-query-logging:
 
-クエリーロギング
-================
+クエリロギング
+==============
 
 あなたのコネクションを設定する時に、 ``log`` オプションに ``true`` をセットすると
-クエリーのログを有効にすることができます。
-また、 ``logQueries`` を使って実行中にクエリーログを切り替えることができます。 ::
+クエリのログを有効にすることができます。
+また、 ``logQueries`` を使って実行中にクエリログを切り替えることができます。 ::
 
-    // クエリーログを有効
+    // クエリログを有効
     $conn->logQueries(true);
 
-    // クエリーログを停止
+    // クエリログを停止
     $conn->logQueries(false);
 
-クエリーログを有効にしていると、 'debug' レベルで 'queriesLog' スコープで
-:php:class:`Cake\\Log\\Log` にクエリーをログ出力します。
+クエリログを有効にしていると、 'debug' レベルで 'queriesLog' スコープで
+:php:class:`Cake\\Log\\Log` にクエリをログ出力します。
 あなたはこのレベル・スコープを出力するようにログ設定をする必要があります。
 ``stderr`` にログ出力するのはユニットテストの時に便利で、files/syslog に出力するのは
 Web リクエストの時に便利です。 ::
@@ -722,14 +832,14 @@ Web リクエストの時に便利です。 ::
 
 .. note::
 
-    クエリーログは、デバッグまたは開発用途での利用を想定しています。
+    クエリログは、デバッグまたは開発用途での利用を想定しています。
     アプリケーションのパフォーマンスに悪影響を及ぼしますので、公開サイトでは
     利用すべきではありません。
 
 .. _identifier-quoting:
 
 引用識別子
-==================
+==========
 
 デフォルトの CakePHP では、生成される SQL 文は引用符で囲まれて **いません** 。
 その理由は、引用識別子はいくつかの問題があるためです。
@@ -754,7 +864,7 @@ Web リクエストの時に便利です。 ::
 .. _database-metadata-cache:
 
 メタデータ・キャッシング
-============================
+========================
 
 CakePHP の ORM は、あなたのアプリケーションのスキーマ、インデックス、外部キーを
 決定するために、データベースリフレクションを使用します。
@@ -794,7 +904,7 @@ CakePHP にはメタデータキャッシュを管理するための CLI ツー�
 
     $dsn = 'mysql://root:password@localhost/';
 
-これでデータベースの作成や変更のクエリーを実行するためにコネクションオブジェクトが使えます。 ::
+これでデータベースの作成や変更のクエリを実行するためにコネクションオブジェクトが使えます。 ::
 
     $connection->query("CREATE DATABASE IF NOT EXISTS my_database");
 

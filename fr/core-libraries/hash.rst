@@ -233,6 +233,14 @@ Les Types d'Attribut Correspondants
             ]
         */
 
+        $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data.user');
+        /* $result ressemble maintenant à:
+            [
+                [2] => 'mariano.iglesias'
+                [14] => 'phpnut'
+            ]
+        */
+
         $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data');
         /* $result ressemble maintenant à:
             [
@@ -446,7 +454,7 @@ Les Types d'Attribut Correspondants
         ];
         $res = Hash::filter($data);
 
-        /* $data ressemble maintenant à:
+        /* $res ressemble maintenant à:
             [
                 [0] => 0
                 [2] => true
@@ -644,7 +652,20 @@ Les Types d'Attribut Correspondants
 
     Appliquer un callback à un ensemble de valeurs extraites en utilisant
     ``$function``. La fonction va récupérer les valeurs extraites en premier
-    argument.
+    argument::
+
+        $data = [
+            ['date' => '01-01-2016', 'booked' => true],
+            ['date' => '01-01-2016', 'booked' => false],
+            ['date' => '02-01-2016', 'booked' => true]
+        ];
+        $result = Hash::apply($data, '{n}[booked=true].date', 'array_count_values');
+        /* $result ressemble maintenant à:
+            [
+                '01-01-2016' => 1,
+                '02-01-2016' => 1,
+            ]
+        */
 
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
 

@@ -235,7 +235,7 @@ données sur notre post. Notre vue pourrait ressembler à ceci:
     <?php
     echo $this->Html->link('edit', [
         'action' => 'edit',
-        $post->id'
+        $post->id
     ]); ?>
     </li>
     <?php $this->end(); ?>
@@ -768,7 +768,7 @@ CakePHP, les classes de vue ont quelques conventions:
 * Les classes de View doivent être suffixées avec ``View``. Par exemple
   ``PdfView``.
 * Quand vous référencez les noms de classe de vue, vous devez omettre le
-  suffixe ``View``. Par exemple ``$builder->viewClass('Pdf');``.
+  suffixe ``View``. Par exemple ``$this->viewBuilder()->className('Pdf');``.
 
 Vous voudrez aussi étendre ``View`` pour vous assurer que les choses
 fonctionnent correctement::

@@ -4,13 +4,28 @@ Deployment
 Once your application is complete, or even before that you'll want to deploy it.
 There are a few things you should do when deploying a CakePHP application.
 
-Update config/app.php
+Moving files
+============
+
+You are encouraged to create a git commit and pull or clone that commit or
+repository on your server and run ``composer install``.
+While this requires some knowledge about git and an existing install of ``git``
+and ``composer`` this process will take care about library dependencies and file
+and folder permissions.
+
+Be aware that when deploying via FTP you will at least have to fix file and
+folder permissions.
+
+You can also use this deployment technique to setup a staging- or demo-server
+(pre-production) and keep it in sync with your dev box.
+
+Adjust config/app.php
 =====================
 
-Updating app.php, specifically the value of ``debug`` is extremely important.
-Turning debug = ``false`` disables a number of development features that should never be
-exposed to the Internet at large. Disabling debug changes the following types of
-things:
+Adjusting app.php, specifically the value of ``debug`` is extremely important.
+Turning debug = ``false`` disables a number of development features that should
+never be exposed to the Internet at large. Disabling debug changes the following
+types of things:
 
 * Debug messages, created with :php:func:`pr()` and :php:func:`debug()` are
   disabled.
@@ -24,9 +39,9 @@ In addition to the above, many plugins and application extensions use ``debug``
 to modify their behavior.
 
 You can check against an environment variable to set the debug level dynamically
-between environments. This will avoid deploying an application with debug ``true`` and
-also save yourself from having to change the debug level each time before deploying
-to a production environment.
+between environments. This will avoid deploying an application with debug
+``true`` and also save yourself from having to change the debug level each time
+before deploying to a production environment.
 
 For example, you can set an environment variable in your Apache configuration::
 
@@ -85,18 +100,25 @@ your production server once the application is deployed::
 
 Since handling static assets, such as images, JavaScript and CSS files of
 plugins, through the ``Dispatcher`` is incredibly inefficient, it is strongly
-recommended to symlink them for production. This can be done by using 
+recommended to symlink them for production. This can be done by using
 the ``plugin`` shell::
 
     bin/cake plugin assets symlink
-    
-The above command will symlink the ``webroot`` directory of all loaded plugins to
-appropriate path in the app's ``webroot`` directory.
 
-If your filesystem doesn't allow creating symlinks the directories will be copied
-instead of being symlinked. You can also explicitly copy the directories using::
+The above command will symlink the ``webroot`` directory of all loaded plugins
+to appropriate path in the app's ``webroot`` directory.
+
+If your filesystem doesn't allow creating symlinks the directories will be
+copied instead of being symlinked. You can also explicitly copy the directories
+using::
 
     bin/cake plugin assets copy
+
+Deploying an update
+===================
+
+After deployment of an update you might also want to run ``bin/cake orm_cache
+clear``, part of the :doc:`/console-and-shells/orm-cache` shell.
 
 .. meta::
     :title lang=en: Deployment

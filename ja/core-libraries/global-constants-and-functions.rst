@@ -82,17 +82,39 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 
 .. php:function:: collection(mixed $items)
 
-    渡された引数をラップする、新しい :php:class:`Cake\Collection\Collection`
+    渡された引数をラップする、新しい :php:class:`Cake\\Collection\\Collection`
     オブジェクトをインスタンス化するための簡易ラッパー。 ``$items`` パラメータは
     ``Traversable`` オブジェクトまたは配列のいずれかを取ります。
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
+
+    .. versionchanged:: 3.3.0
+	このメソッドを呼ぶと、渡された ``$var`` を返します。例えば、return 文に
+	このメソッドを置くことができます。
 
     コア ``$debug`` 変数が ``true`` であれば、 ``$var`` がプリントアウトされる。
     ``$showHTML`` が ``true`` あるいは ``null`` のままであればデータはブラウザ表示に
     相応しいように描画されます。 ``$showFrom`` が ``false`` にセットされない場合、
     それがコールされた行の情報を伴ってデバグ情報の出力が始まります。
     :doc:`/development/debugging` もご覧ください。
+
+.. php:function:: pr(mixed $var)
+
+    .. versionchanged:: 3.3.0
+	このメソッドを呼ぶと、渡された ``$var`` を返します。例えば、return 文に
+	このメソッドを置くことができます。
+
+    出力を ``<pre>`` タグで周りを囲む機能を追加した ``print_r()`` の便利なラッパー。
+
+.. php:function:: pj(mixed $var)
+
+    .. versionchanged:: 3.3.0
+	このメソッドを呼ぶと、渡された ``$var`` を返します。例えば、return 文に
+	このメソッドを置くことができます。
+
+    出力を ``<pre>`` タグで周りを囲む機能を追加した JSON 整形表示の便利な関数。
+
+    それは、オブジェクトと配列のJSON 表現をデバッグために意図されています。
 
 .. php:function:: env(string $key, string $default = null)
 
@@ -124,16 +146,6 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 
     一般に ``list($namespace, $className) = namespaceSplit('Cake\Core\App');``
     のように使われます。
-
-.. php:function:: pr(mixed $var)
-
-    出力を ``<pre>`` タグで周りを囲む機能を追加した ``print_r()`` の便利なラッパー。
-
-.. php:function:: pj(mixed $var)
-
-    出力を ``<pre>`` タグで周りを囲む機能を追加した JSON 整形表示の便利な関数。
-
-    それは、オブジェクトと配列のJSON 表現をデバッグために意図されています。
 
 コア定義定数
 ============

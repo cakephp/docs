@@ -49,10 +49,15 @@ Nous pouvons ensuite utiliser ce nouvel helper dans une de nos commandes shell
 en l'appelant::
 
     // Avec ### de chaque côté
-    $this->helper('Heading')->output('It works!');
+    $this->helper('Heading')->output(['It works!']);
 
     // Avec ~~~~ de chaque côté
-    $this->helper('Heading')->output('It works!', '~', 4);
+    $this->helper('Heading')->output(['It works!', '~', 4]);
+
+Les helpers implémentent généralement la méthode ``output()`` qui prend un
+tableau de paramètres. Cependant, comme les helpers de Console sont des classes
+vanilla elles peuvent implémenter des méthodes supplémentaires qui prennent
+n'importe quelle forme d'argument.
 
 Helpers Fournis
 ===============
@@ -85,10 +90,11 @@ Le ProgessHelper peut être utilisé de deux manières différentes. Le mode sim
 vous permet de fournir une méthode de rappel qui est invoquée jusqu'à ce que
 l'avancement soit complété::
 
-    $this->helper('Progress')->output(function ($progress) {
+    $this->helper('Progress')->output(['callback' => function ($progress) {
         // Fait quelque chose ici.
         $progress->increment(20);
-    });
+        $progress->draw();
+    }]);
 
 Vous pouvez mieux contrôler la barre d'avancement en fournissant des options
 supplémentaires:
@@ -105,6 +111,7 @@ Un exemple d'utilisation de toutes les options serait::
         'width' => 20,
         'callback' => function ($progress) {
             $progress->increment(2);
+            $progress->draw();
         }
     ]);
 

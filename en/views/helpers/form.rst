@@ -492,7 +492,8 @@ common options shared by all input methods are as follows:
 
 * ``$options['default']`` Used to set a default value for the input field. The
   value is used if the data passed to the form does not contain a value for the
-  field (or if no data is passed at all).
+  field (or if no data is passed at all). An explicit default value will
+  override any default values defined in the schema.
 
   Example usage::
 
@@ -510,9 +511,6 @@ common options shared by all input methods are as follows:
     set the value in ``$this->request->data`` in your controller,
     or set the input option ``checked`` to ``true``.
 
-    Date and datetime fields' default values can be set by using the
-    'selected' key.
-
     Beware of using ``false`` to assign a default value. A ``false`` value is
     used to disable/exclude options of an input field, so ``'default' => false``
     would not set any value at all. Instead use ``'default' => 0``.
@@ -520,6 +518,11 @@ common options shared by all input methods are as follows:
 In addition to the above options, you can mixin any HTML attribute you wish to
 use. Any non-special option name will be treated as an HTML attribute, and
 applied to the generated HTML input element.
+
+.. versionchanged:: 3.3.0
+    As of 3.3.0, FormHelper will automatically use any default values defined
+    in your database schema. You can disable this behavior by setting
+    the ``schemaDefault`` option to ``false``.
 
 Options for Select, Checkbox and Radio Inputs
 ---------------------------------------------
@@ -1562,6 +1565,10 @@ Creating Standalone Buttons and POST links
     If all you are looking for is a button to submit your form, then you should
     use :php:meth:`Cake\\View\\Helper\\FormHelper::button()` or
     :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` instead.
+
+    .. note::
+        Be careful to not put a postLink inside an open form. Instead use the
+        ``block`` option to buffer the form into a :ref:`view-blocks`
 
 
 Customizing the Templates FormHelper Uses

@@ -33,6 +33,18 @@ Collection serait::
         return $value > 1;
     });
 
+Vous pouvez aussi utiliser la fonction ``collection()`` à la place de
+Collection()``::
+
+    $items = ['a' => 1, 'b' => 2, 'c' => 3];
+
+    // Les deux créent une instance de Collection.
+    $collectionA = new Collection($items);
+    $collectionB = collection($items);
+
+Le bénéfice de cette méthode est qu'il est plus facile de chaîner par rapport à
+``(new Collection($items))``.
+
 Le :php:trait:`~Cake\\Collection\\CollectionTrait` vous permet également
 d'intégrer des fonctionnalités semblables aux Collections pour tout objet
 ``Traversable`` de votre application.
@@ -43,25 +55,27 @@ Liste des Méthodes
 .. table::
     :class: docutils internal-toc
 
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`append`   | :php:meth:`buffered`   | :php:meth:`combine`  | :php:meth:`compile` |
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`contains` | :php:meth:`countBy`    | :php:meth:`chunk`    | :php:meth:`each`    |
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`every`    | :php:meth:`extract`    | :php:meth:`filter`   | :php:meth:`first`   |
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`groupBy`  | :php:meth:`indexBy`    | :php:meth:`insert`   | :php:meth:`isEmpty` |
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`last`     | :php:meth:`listNested` | :php:meth:`map`      | :php:meth:`match`   |
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`max`      | :php:meth:`min`        | :php:meth:`nest`     | :php:meth:`reduce`  |
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`reject`   | :php:meth:`sample`     | :php:meth:`shuffle`  | :php:meth:`skip`    |
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`some`     | :php:meth:`sortBy`     | :php:meth:`stopWhen` | :php:meth:`sumOf`   |
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`take`     | :php:meth:`through`    | :php:meth:`unfold`   | :php:meth:`zip`     |
-    +----------------------+------------------------+----------------------+---------------------+
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`append`    | :php:meth:`buffered`   | :php:meth:`combine`  | :php:meth:`compile` |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`contains`  | :php:meth:`countBy`    | :php:meth:`chunk`    | :php:meth:`each`    |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`every`     | :php:meth:`extract`    | :php:meth:`filter`   | :php:meth:`first`   |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`groupBy`   | :php:meth:`indexBy`    | :php:meth:`insert`   | :php:meth:`isEmpty` |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`last`      | :php:meth:`listNested` | :php:meth:`map`      | :php:meth:`match`   |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`max`       | :php:meth:`min`        | :php:meth:`nest`     | :php:meth:`reduce`  |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`reject`    | :php:meth:`sample`     | :php:meth:`shuffle`  | :php:meth:`skip`    |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`some`      | :php:meth:`sortBy`     | :php:meth:`stopWhen` | :php:meth:`sumOf`   |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`take`      | :php:meth:`through`    | :php:meth:`unfold`   | :php:meth:`zip`     |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`transpose` |                        |                      |                     |
+    +-----------------------+------------------------+----------------------+---------------------+
 
 Faire une Itération
 ===================
@@ -280,15 +294,16 @@ une collection en plusieurs tableaux d'une certaine taille, vous pouvez utiliser
 la fonction ``chunk()``::
 
     $items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-    $chunked = collection($items)->chunk(2);
+    $collection = new Collection($items);
+    $chunked = $collection->chunk(2);
     $chunked->toList(); // [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11]]
 
 La fonction ``chunk`` est particulièrement utile quand vous faîtes des
 opérations en lots, par exemple avec les résultats d'une base de données::
 
-    collection($articles)
-        ->map(function ($article) {
-            // Change une propriété dans l'article
+    $collection = new Collection($articles);
+    $collection->map(function ($article) {
+            // Change une propriété de l'article
             $article->property = 'changed';
         })
         ->chunk(20)
@@ -700,15 +715,15 @@ dans la collection.
 Considérons la collection imbriquée intégrée dans l'exemple précédent, nous
 pouvons l'aplatir::
 
-    $nested->listNested()->toArray();
+    $nested->listNested()->toList();
 
     // Retourne
     [
-        ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
+        ['id' => 1, 'parent_id' => null, 'name' => 'Birds', 'children' => [...]],
         ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
         ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
         ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
-        ['id' => 6, 'parent_id' => null, 'name' => 'Fish'],
+        ['id' => 6, 'parent_id' => null, 'name' => 'Fish', 'children' => [...]],
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
     ]
 
@@ -786,6 +801,30 @@ dans une position au hasard, utilisez ``shuffle``::
 
     // Ceci pourrait retourner [2, 3, 1]
     $collection->shuffle()->toArray();
+
+.. php:method:: transpose()
+
+Quand vous transposez une collection, vous récupérez une nouvelle collection
+contenant une colonne avec chacune des colonnes originales::
+
+     $items = [
+        ['Products', '2012', '2013', '2014'],
+        ['Product A', '200', '100', '50'],
+        ['Product B', '300', '200', '100'],
+        ['Product C', '400', '300', '200'],
+     ]
+     $transpose = (new Collection($items))->transpose()->toList();
+
+     // Returns
+     [
+         ['Products', 'Product A', 'Product B', 'Product C'],
+         ['2012', '200', '300', '400'],
+         ['2013', '100', '200', '300'],
+         ['2014', '50', '100', '200'],
+     ]
+
+.. versionadded:: 3.3.0
+    ``Collection::transpose()`` a été ajoutée dans la version 3.3.0.
 
 Retrait d'Eléments
 ------------------

@@ -21,9 +21,9 @@ version:
 
     php -v
 
-You should at least have got installed PHP 5.5.9 (cli) or higher.
+You should at least have got installed PHP 5.5.9 (CLI) or higher.
 Your webserver's PHP version must also be of 5.5.9 or higher, and should best be
-the same version your command line interface (cli) PHP version is of.
+the same version your command line interface (CLI) PHP version is of.
 If you'd like to see the completed application, checkout `cakephp/bookmarker
 <https://github.com/cakephp/bookmarker-tutorial>`__. Let's get started!
 
@@ -223,9 +223,10 @@ users, bookmarks, and tags.
 Adding Password Hashing
 =======================
 
-When you created your users, you probably noticed that the passwords were stored
-in plain text. This is pretty bad from a security point of view, so let's get
-that fixed.
+When you created your users (by visiting
+**http://localhost:8765/users**), you probably noticed that the
+passwords were stored in plain text. This is pretty bad from a security point of
+view, so let's get that fixed.
 
 This is also a good time to talk about the model layer in CakePHP. In CakePHP,
 we separate the methods that operate on a collection of objects, and a single
@@ -242,7 +243,7 @@ add the following::
 
     namespace App\Model\Entity;
 
-    use Cake\Auth\DefaultPasswordHasher;
+    use Cake\Auth\DefaultPasswordHasher; //include this line
     use Cake\ORM\Entity;
 
     class User extends Entity
@@ -411,7 +412,7 @@ template files. The convention is to have the template use the lower case and
 underscored version of the controller action name.
 
 You may notice that we were able to use the ``$tags`` and ``$bookmarks``
-variables in our view. When we use the ``set()`` method in our controller's we
+variables in our view. When we use the ``set()`` method in our controller, we
 set specific variables to be sent to the view. The view will make all passed
 variables available in the templates as local variables.
 

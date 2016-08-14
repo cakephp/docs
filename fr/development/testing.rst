@@ -1,6 +1,17 @@
 Testing
 #######
 
+.. note::
+    The documentation is not currently supported in French language for this
+    page.
+
+    Please feel free to send us a pull request on
+    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
+    button to directly propose your changes.
+
+    You can refer to the English version in the select top menu to have
+    information about this page's topic.
+
 CakePHP fournit un support de test intégré compréhensible. CakePHP permet
 l'intégration de `PHPUnit <http://phpunit.de>`_. En plus de toutes les
 fonctionnalités offertes par PHPUnit, CakePHP offre quelques fonctionnalités
@@ -271,7 +282,7 @@ Filtrer les Cas de Test (TestCase)
 
 Quand vous avez des cas de test plus larges, vous pouvez lancer un
 sous-ensemble de méthodes de test quand vous essayez de travailler sur un
-cas unique d'échec. Avec l'exécuteur cli vous pouvez utiliser une option pour
+cas unique d'échec. Avec l'exécuteur CLI vous pouvez utiliser une option pour
 filtrer les méthodes de test::
 
     $ phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
@@ -565,7 +576,7 @@ articles), on changerait la fixture donnée dans la section précédente
 
     class ArticlesFixture extends TestFixture
     {
-        public $import = ['table' => 'articles']
+        public $import = ['table' => 'articles'];
     }
 
 Si vous voulez utiliser une autre connexion, utilisez::
@@ -820,7 +831,7 @@ les Models, Components et Helpers qui auraient été invoqués suite à une requ
 HTTP. Cela vous permet d'écrire des tests au plus haut niveau de votre
 application en ayant un impact sur chacun de ses travaux.
 
-Disons que vous avez un controller typique Articles, et son model
+Disons que vous avez un controller typique ArticlesController, et son model
 correspondant. Le code du controller ressemble à ceci::
 
     namespace App\Controller;
@@ -985,6 +996,49 @@ authentification, vous pourriez écrire les tests suivants::
         // Autres assertions.
     }
 
+Testing Stateless Authentication and APIs
+-----------------------------------------
+
+To test APIs that use stateless authentication, such as Basic authentication,
+you can configure the request to inject environment conditions or headers that
+simulate actual authentication request headers.
+
+When testing Basic or Digest Authentication, you can add the environment
+variables that `PHP creates <http://php.net/manual/en/features.http-auth.php>`_
+automatically. These environment variables used in the authentication adapter
+outlined in :ref:`basic-authentication`::
+
+    public function testBasicAuthentication()
+    {
+        $this->configRequest([
+            'environment' => [
+                'PHP_AUTH_USER' => 'username',
+                'PHP_AUTH_PW' => 'password',
+            ]
+        ]);
+
+        $this->get('/api/posts');
+        $this->assertResponseOk();
+    }
+
+If you are testing other forms of authentication, such as OAuth2, you can set
+the Authorization header directly::
+
+    public function testOauthToken()
+    {
+        $this->configRequest([
+            'headers' => [
+                'authorization' => 'Bearer: oauth-token'
+            ]
+        ]);
+
+        $this->get('/api/posts');
+        $this->assertResponseOk();
+    }
+
+The headers key in ``configRequest()`` can be used to configure any additional
+HTTP headers needed for an action.
+
 Tester les Actions Protégées par CsrfComponent ou SecurityComponent
 -------------------------------------------------------------------
 
@@ -1001,12 +1055,50 @@ tests ne vont pas être en échec à cause d'un token non présent::
 
 Il est aussi important d'activer debug dans les tests qui utilisent les tokens
 pour éviter que le SecurityComponent pense que le token debug est utilisé dans
-un environnement non-debug.
+un environnement non-debug. Quand vous testez avec d'autres méthodes comme
+``requireSecure()``, vous pouvez utiliser ``configRequest()`` pour définir les
+bonnes variables d'environnement::
+
+    // Fake out SSL connections.
+    $this->configRequest([
+        'environment' => ['HTTPS' => 'on']
+    ]);
 
 .. versionadded:: 3.1.2
     Les méthodes ``enableCsrfToken()`` et ``enableSecurityToken()`` ont été
     ajoutées dans la version 3.1.2.
 
+Integration Testing PSR7 Middleware
+-----------------------------------
+
+Integration testing can also be used to test your entire PSR7 application and
+:doc:`/controllers/middleware`. By default ``IntegrationTestCase`` will
+auto-detect the presence of an ``App\Application`` class and automatically
+enable integration testing of your Application. You can toggle this behavior
+with the ``useHttpServer()`` method::
+
+    public function setUp()
+    {
+        // Enable PSR7 integration testing.
+        $this->useHttpServer(true);
+
+        // Disable PSR7 integration testing.
+        $this->useHttpServer(false);
+    }
+
+You can customize the application class name used, and the constructor
+arguments, by using the ``configApplication()`` method::
+
+    public function setUp()
+    {
+        $this->configApplication('App\App', [CONFIG]);
+    }
+
+After enabling the PSR7 mode, and possibly configuring your application class,
+you can use the remaining ``IntegrationTestCase`` features as normal.
+
+.. versionadded:: 3.3.0
+    PSR7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
 
 Méthodes d'Assertion
 --------------------
@@ -1150,7 +1242,7 @@ test::
     // En supposant que cette action modifie le cookie.
     $this->get('/bookmarks/index');
 
-    $this->assertCookieEncrypted('my_cookie', 'Une valeur mise à jour');
+    $this->assertCookieEncrypted('Une valeur mise à jour', 'my_cookie');
 
 .. versionadded: 3.1.7
     ``assertCookieEncrypted`` et ``cookieEncrypted`` ont été ajoutées dans la
@@ -1396,6 +1488,110 @@ un message indiquant 1 passé et 4 assertions.
 
 Lorsque vous testez un Helper qui utilise d'autres Helpers, assurez-vous de
 créer un mock de la méthode ``loadHelpers`` de la classe View.
+
+.. _testing-events:
+
+Tester les Events
+=================
+
+Les :doc:`/core-libraries/events` sont un bon moyen pour découpler le code de
+votre application, mais parfois quand nous les testons, nous avons tendance à
+tester les événements dans les cas de test qui éxecutent ces événements. C'est
+une forme supplémentaire de couplage qui peut être évitée en utilisant
+à la place ``assertEventFired`` et ``assertEventFiredWith``.
+
+En poursuivant l'exemple sur les Orders, disons que nous avons les tables
+suivantes::
+
+    class OrdersTable extends Table
+    {
+
+        public function place($order)
+        {
+            if ($this->save($order)) {
+                // moved cart removal to CartsTable
+                $event = new Event('Model.Order.afterPlace', $this, [
+                    'order' => $order
+                ]);
+                $this->eventManager()->dispatch($event);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    class CartsTable extends Table
+    {
+
+        public function implementedEvents()
+        {
+            return [
+                'Model.Order.afterPlace' => 'removeFromCart'
+            ];
+        }
+
+        public function removeFromCart(Event $event)
+        {
+            $order = $event->data('order');
+            $this->delete($order->cart_id);
+        }
+    }
+
+.. note::
+    Pour faire des assertions sur le fait que des événements sont déclenchés,
+    vous devez d'abord activer :ref:`tracking-events` sur le gestionnaire
+    d'événements pour lequel vous souhaitez faire des asserts.
+
+Pour tester le ``OrdersTable`` du dessus, vous devez activer le tracking dans la
+méthode ``setUp()`` puis vérifier par exemple que l'événement a été déclenché,
+puis que l'entity ``$order`` a été passée dans les données de l'événement::
+
+    namespace App\Test\TestCase\Model\Table;
+
+    use App\Model\Table\OrdersTable;
+    use Cake\Event\EventList;
+    use Cake\ORM\TableRegistry;
+    use Cake\TestSuite\TestCase;
+
+    class OrdersTableTest extends TestCase
+    {
+
+        public $fixtures = ['app.orders'];
+
+        public function setUp()
+        {
+            parent::setUp();
+            $this->Orders = TableRegistry::get('Orders');
+            // enable event tracking
+            $this->Orders->eventManager()->setEventList(new EventList());
+        }
+
+        public function testPlace()
+        {
+            $order = new Order([
+                'user_id' => 1,
+                'item' => 'Cake',
+                'quantity' => 42,
+            ]);
+
+            $this->assertTrue($this->Orders->place($order));
+
+            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->eventManager());
+            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->eventManager());
+        }
+    }
+
+Par défaut, l'``EventManager`` global est utilisé pour les assertions, donc
+tester les événements globaux ne nécessitent pas de passer le gestionnaire
+d'événements::
+
+    $this->assertEventFired('My.Global.Event');
+    $this->assertEventFiredWith('My.Global.Event', 'user', 1);
+
+.. versionadded:: 3.2.11
+
+    Le tracking d'événement, ``assertEventFired()``, et ``assertEventFiredWith``
+    ont été ajoutés.
 
 Créer des Suites de Test (Test Suites)
 ======================================

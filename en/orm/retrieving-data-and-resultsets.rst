@@ -296,6 +296,11 @@ the Author entity. ::
         }
     ]);
 
+You can also fetch the full name in the list directly using. ::
+
+    $this->displayField('full_name');
+    $query = $authors->find('list');
+
 Finding Threaded Data
 =====================
 
@@ -577,7 +582,7 @@ load fields off of contained associations, you can pass the association object
 to ``select()``::
 
     // Select id & title from articles, but all fields off of Users.
-    $articlesTable
+    $query = $articles->find()
         ->select(['id', 'title'])
         ->select($articlesTable->Users)
         ->contain(['Users']);

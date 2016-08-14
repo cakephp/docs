@@ -559,6 +559,73 @@ caractère underscore, par exemple::
 
     define('NOM_LONG_DE_CONSTANTE', 2);
 
+Attention quand vous utilisez empty()/isset()
+=============================================
+
+While ``empty()`` is an easy to use function, it can mask errors and cause
+unintended effects when ``'0'`` and ``0`` are given. When variables or properties
+are already defined, the usage of ``empty()`` is not recommended. When working
+with variables, it is better to rely on type-coercion to boolean instead of
+``empty()``::
+
+    function manipulate($var)
+    {
+        // Not recommended, $var is already defined in the scope
+        if (empty($var)) {
+            // ...
+        }
+
+        // Use boolean type coercion
+        if (!$var) {
+            // ...
+        }
+        if ($var) {
+            // ...
+        }
+    }
+
+When dealing with defined properties you should favour ``null`` checks over
+``empty()``/``isset()`` checks::
+
+    class Thing
+    {
+        private $property; // Defined
+
+        public function readProperty()
+        {
+            // Not recommended as the property is defined in the class
+            if (!isset($this->property)) {
+                // ...
+            }
+            // Recommended
+            if ($this->property === null) {
+
+            }
+        }
+    }
+
+When working with arrays, it is better to merge in defaults over using
+``empty()`` checks. By merging in defaults, you can ensure that required keys
+are defined::
+
+    function doWork(array $array)
+    {
+        // Merge defaults to remove need for empty checks.
+        $array += [
+            'key' => null,
+        ];
+
+        // Not recommended, the key is already set
+        if (isset($array['key'])) {
+            // ...
+        }
+
+        // Recommended
+        if ($array['key'] !== null) {
+            // ...
+        }
+    }
+
 .. meta::
     :title lang=fr: Normes de code
     :keywords lang=fr: accolades,niveau d'indentation,erreurs logiques,structures de contrôle,structure de contrôle,expr,normes de code,parenthèses,foreach,Lecture possible,moose,nouvelles fonctionnalités,dépôt,developpeurs

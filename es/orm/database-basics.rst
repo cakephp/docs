@@ -13,6 +13,3 @@ Database Basics
     para obtener información sobre el tema de esta página.
 
 .. _database-configuration:
-
-Configuration
-=============

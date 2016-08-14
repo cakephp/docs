@@ -313,6 +313,8 @@ The above is how you could implement getUser method for HTTP basic
 authentication. The ``_findUser()`` method is part of ``BaseAuthenticate``
 and identifies a user based on a username and password.
 
+.. _basic-authentication:
+
 Using Basic Authentication
 --------------------------
 
@@ -1057,7 +1059,7 @@ storage
     Storage class to use for persisting user record. When using stateless
     authenticator you should set this to ``Memory``. Defaults to ``Session``.
     You can pass config options to storage class using array format. For e.g. to
-    use a custom session key you can set ``storage`` to ``['className' => 'Storage', 'key' => 'Auth.Admin']``.
+    use a custom session key you can set ``storage`` to ``['className' => 'Session', 'key' => 'Auth.Admin']``.
 checkAuthIn
     Name of the event in which initial auth checks should be done. Defaults
     to ``Controller.startup``. You can set it to ``Controller.initialize``

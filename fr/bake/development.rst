@@ -136,7 +136,7 @@ template déjà présent dans le dossier **tmp/bake** de votre application.
 
 Ainsi, par exemple, pour créer avec bake un shell comme ceci:
 
-.. code-block:: shell
+.. code-block:: bash
 
     bin/cake bake shell Foo
 

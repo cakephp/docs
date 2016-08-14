@@ -11,7 +11,7 @@ Shells, Tasks & Console Tools
     `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
     button to directly propose your changes.
 
-    You can referer to the english version in the select top menu to have
+    You can refer to the English version in the select top menu to have
     information about this page's topic.
 
 .. toctree::
@@ -26,6 +26,7 @@ Shells, Tasks & Console Tools
     console-and-shells/routes-shell
     console-and-shells/upgrade-shell
     console-and-shells/server-shell
+    console-and-shells/cache
 
 .. meta::
     :title lang=zh: Shells, Tasks & Console Tools

@@ -275,13 +275,16 @@ You can also access tasks directly from the command line::
     **must** be included in the shell class' $tasks property.
 
 
-Also, the task name must be added as a sub command to the Shell's OptionParser::
+Also, the task name must be added as a sub-command to the Shell's OptionParser::
 
     public function getOptionParser()
     {
         $parser = parent::getOptionParser();
         $parser->addSubcommand('sound', [
-            'help' => 'Execute The Sound Task.'
+            // Provide help text for the command list
+            'help' => 'Execute The Sound Task.',
+            // Link the option parsers together.
+            'parser' => $this->Sound->getOptionParser(),
         ]);
         return $parser;
     }
@@ -1158,6 +1161,7 @@ More Topics
     console-and-shells/routes-shell
     console-and-shells/upgrade-shell
     console-and-shells/server-shell
+    console-and-shells/cache
 
 .. meta::
     :title lang=en: Shells, Tasks & Console Tools

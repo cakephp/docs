@@ -51,26 +51,32 @@ CakePHP のインストール
 
     php -v
     
-少なくとも PHP 5.5.9 (cli) 以上がインストールされていなければなりません。
+少なくとも PHP 5.5.9 (CLI) 以上がインストールされていなければなりません。
 ウェブサーバー版の PHP もまた 5.5.9 以上でなければりませんし、
-コマンドラインインターフェース (cli) 版の PHP と同じバージョンがベストです。
+コマンドラインインターフェース (CLI) 版の PHP と同じバージョンがベストです。
+
+Composer のインストール
+-----------------------
 
 CakePHP の公式のインストール方法として、依存性管理ツール
 `Composer <http://getcomposer.org>`_ を使用します。
 
-もしまだなら、最初に Composer をダウンロードしてインストールしなければなりません。
-あなたが cURL をインストールしているのであれば、下記の通り簡単に実行できます。
+- Linux や Mac OS X に Composer をインストール
 
-.. code-block:: bash
+  #. `公式の Composer ドキュメント <https://getcomposer.org/download/>`_ に書かれた
+     インストーラスクリプトを実行し、Composer をインストールするために指示に従ってください。
+  #. composer.phar を指定したパスのディレクトリに移すために以下のコマンドを実行してください。 ::
 
-    curl -s https://getcomposer.org/installer | php
+       mv composer.phar /usr/local/bin/composer
 
-もしくは `Composer のウェブサイト <https://getcomposer.org/download/>`_ から
-``composer.phar`` をダウンロードすることもできます。
+- Windows に Composer をインストール
 
-Windows 環境なら、 `こちら <https://github.com/composer/windows-setup/releases/>`__ から
-Windows インストーラをダウンロードできます。Composer の Windows  インストーラについての詳細は、
-`README <https://github.com/composer/windows-setup>`__ をご覧ください。
+  Windows 環境なら、 `こちら <https://github.com/composer/windows-setup/releases/>`__ から
+  Windows インストーラをダウンロードできます。Composer の Windows インストーラについての詳細は、
+  `README <https://github.com/composer/windows-setup>`__ をご覧ください。
+
+CakePHP プロジェクトを作成
+--------------------------
 
 以上で、Composer をダウンロードとインストールしました。my_app_name フォルダに CakePHP
 の新しいアプリケーションを作りたいなら、下記の composer コマンドを実行して作成します。
@@ -104,7 +110,7 @@ composer によるインストールが推奨されますが、
 CakePHPの変更に合わせて最新の状態に保つ
 ---------------------------------------
 
-デフォルトではあなたのアプリケーションの **composer.json** は下記のようになっています::
+デフォルトではあなたのアプリケーションの **composer.json** は下記のようになっています。 ::
 
     "require": {
         "cakephp/cakephp": "~3.2"
@@ -115,7 +121,7 @@ CakePHPの変更に合わせて最新の状態に保つ
 アップデート時には、3.x 系のバグ修正とマイナーバージョンアップだけが適用されます。
 
 もし CakePHP をリリース前の最新状態で維持したいのなら、あなたのアプリケーションの
-**composer.json** を下記のように変更します::
+**composer.json** にパッケージバージョンとして **dev-master** を指定してください。 ::
 
     "require": {
         "cakephp/cakephp": "dev-master"
@@ -205,7 +211,7 @@ Apache ウェブサーバでこの方法を使う場合は、 ``DocumentRoot`` �
 
 これまでに紹介したいずれかの方法で、あなたが指定したディレクトリ（ここでは
 「/cake_install」を指定したとしましょう）にアプリケーションをインストールしたら、
-あなたのファイルシステムには下記のような環境ができているでしょう。::
+あなたのファイルシステムには下記のような環境ができているでしょう。 ::
 
     /cake_install/
         bin/
@@ -515,7 +521,7 @@ IIS に htaccess のルールをインポートすることもできます。
     </configuration>
 
 一旦 IIS で利用可能な書き換えルールを含む web.config ファイルができたら、
-CakePHP のリンク、CSS、JS、再ルーティング(rerouting)は正しく動作するでしょう。
+CakePHP のリンク、CSS、JavaScript、再ルーティング (rerouting) は正しく動作するでしょう。
 
 URL リライティングを使わない場合
 --------------------------------
@@ -541,5 +547,5 @@ www.example.com/index.php/controllername/actionname/param という書式にな�
 .. _Composer: http://getcomposer.org
 
 .. meta::
-    :title lang=ja: Installation
+    :title lang=ja: インストール
     :keywords lang=ja: apache mod rewrite,microsoft sql server,tar bz2,tmp directory,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighthttpd,repository,enhancements,source code,cakephp,incorporate

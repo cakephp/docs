@@ -124,6 +124,9 @@ d'``Entity`` de la table de jointure::
     $article = $articlesTable->get(1, ['contain' => ['Tags']]);
     $article->tags[0]->_joinData->tagComment = 'Fresh comment.'
 
+    // Nécessaire car nous changeons une propriété directement
+    $article->dirty('tags', true);
+
     $articlesTable->save($article, ['associated' => ['Tags']]);
 
 Vous pouvez aussi créer/mettre à jour les informations de la table jointe quand
@@ -470,17 +473,17 @@ associations à fusionner ou fusionner des niveaux de plus en plus profonds, vou
 pouvez utiliser le troisième paramètre de la méthode::
 
     // Dans un controller.
-    $article = $articles->get(1);
+    $associated = ['Tags', 'Comments.Users'];
+    $article = $articles->get(1, ['contain' => $associated]);
     $articles->patchEntity($article, $this->request->data(), [
-        'associated' => ['Tags', 'Comments.Users']
+        'associated' => $associated
     ]);
     $articles->save($article);
 
 Les associations sont fusionnées en faisant correspondre le champ de clé
 primaire dans la source entities avec les champs correspondants dans le tableau
-de données. Pour des associations belongsTo et hasOne, les nouvelles entities
-seront construites si aucune entity précédente n'est trouvé pour la propriété
-cible.
+de données. Les associations vont construire de nouvelles entities si aucune
+entity précédente n'est trouvé pour la propriété cible.
 
 Pa exemple, prenons les données requêtées comme ce qui suit::
 
@@ -499,13 +502,12 @@ créer une nouvelle entity user::
     echo $entity->user->username; // Echoes 'mark'
 
 La même chose peut être dite pour les associations hasMany et belongsToMany,
-mais une note importante doit être faîte.
+mais avec une mise en garde importante.
 
 .. note::
 
     Pour les associations belongsToMany, vérifiez que les entities associées
     sont bien présentes dans la propriété ``$_accessible``
-
 
 Si Product belongsToMany Tag::
 
@@ -525,7 +527,7 @@ Si Product belongsToMany Tag::
     Rappelez-vous que l'utilisation de ``patchEntity()`` ou de
     ``patchEntities()`` ne fait pas persister les données, il modifie juste
     (ou créé) les entities données. Afin de sauvegarder l'entity, vous devrez
-    appeler la méthode ``save()``.
+    appeler la méthode ``save()`` de la table.
 
 Par exemple, considérons le cas suivant::
 
@@ -571,9 +573,8 @@ résultat suivant::
     ];
 
 Comme vous l'avez vu, le commentaire avec l'id 2 n'est plus ici, puisqu'il ne
-correspondait à rien dans le tableau ``$newData``. Ceci est fait ainsi pour
-mieux capturer l'intention du post des données requêtées. Les données envoyées
-reflètent le nouvel état que l'entity doit avoir.
+correspondait à rien dans le tableau ``$newData``. Ceci arrive car CakePHP
+reflète le nouvel état décrit dans les données requêtées.
 
 Des avantages supplémentaires à cette approche sont qu'elle réduit le nombre
 d'opérations à exécuter quand on fait persister l'entity à nouveau.
@@ -631,6 +632,10 @@ converties en entities, vous pouvez utiliser l'event ``Model.beforeMarshal``.
 Cet event vous laisse manipuler les données requêtées juste avant que les
 entities ne soient créées::
 
+    // Mettez des use en haut de votre fichier.
+    use Cake\Event\Event;
+    use ArrayObject;
+
     // Dans une classe table ou behavior
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
@@ -653,7 +658,11 @@ règles de validation et les options d'enregistrement, telle que la whitelist
 des champs. La validation est lancée juste après que cet événement soit
 terminé. Un exemple commun de modification des données avant qu'elles soient
 validées est la suppression des espaces superflus d'un champ avant
-l'enregistrement ::
+l'enregistrement::
+
+    // Mettez des use en haut de votre fichier.
+    use Cake\Event\Event;
+    use ArrayObject;
 
     // Dans une table ou un behavior
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
@@ -1039,7 +1048,7 @@ l'association avec ``link()``, par exemple::
     $article = $this->Articles->get($articleId);
     $user = $this->Users->get($userId);
 
-    $user->_joinData = new Entity(['vote_type' => $voteType, ['markNew' => true]]);
+    $user->_joinData = new Entity(['vote_type' => $voteType], ['markNew' => true]);
     $this->Articles->Users->link($article, [$user]);
 
 Sauvegarder des Données Supplémentaires à la Table de Jointure
@@ -1146,6 +1155,36 @@ données que vous recevez de l'utilisateur final sont valides. Ne pas gérer
 correctement les données complexes va permettre à des utilisateurs mal
 intentionnés d'être capable de stocker des données qu'ils ne pourraient pas
 stocker normalement.
+
+Sauvegarder Plusieurs Entities
+==============================
+
+.. php:method:: saveMany($entities, $options = [])
+
+
+En utilisant cette méthode, vous pouvez sauvegarder plusieurs entities de façon
+atomique. ``$entites`` peuvent être un tableau d'entities créé avec
+``newEntities()`` / ``patchEntities()``. ``$options`` peut avoir les mêmes
+options que celles acceptées par ``save()``::
+
+    $data = [
+        [
+            'title' => 'First post',
+            'published' => 1
+        ],
+        [
+            'title' => 'Second post',
+            'published' => 1
+        ],
+    ];
+    $articles = TableRegistry::get('Articles');
+    $entities = $articles->newEntities($data);
+    $result = $articles->saveMany($entities);
+
+Le résultat sera la mise à jour des entities en cas de succès ou ``false`` en
+cas d'échec.
+
+.. versionadded:: 3.2.8
 
 Mises à Jour en Masse
 =====================

@@ -14,16 +14,15 @@ the best bug report possible:
 * **Do**: Please `search <https://github.com/cakephp/cakephp/search?q=it+is+broken&ref=cmdform&type=Issues>`_
   for a similar existing ticket, and ensure someone hasn't already reported your
   issue, or that it hasn't already been fixed in the repository.
-* **Do**: Please include detailed instructions on **how to reproduce the bug**. This
-  could be in the form of a test-case or a snippet of code that demonstrates the
-  issue. Not having a way to reproduce an issue means it's less likely to get
-  fixed.
-* **Do**: Please give as many details as possible about your environment: (OS, PHP
-  version, CakePHP version).
-* **Don't**: Please don't use the ticket system to ask support questions. The #cakephp IRC channel
-  on `Freenode <https://webchat.freenode.net>`__ has many developers available to help answer
-  your questions. Additional options are CakePHP's
-  `Google Group <http://groups.google.com/group/cake-php>`__ and the always popular
+* **Do**: Please include detailed instructions on **how to reproduce the bug**.
+  This could be in the form of a test-case or a snippet of code that
+  demonstrates the issue. Not having a way to reproduce an issue means it's less
+  likely to get fixed.
+* **Do**: Please give as many details as possible about your environment: (OS,
+  PHP version, CakePHP version).
+* **Don't**: Please don't use the ticket system to ask support questions. The
+  #cakephp IRC channel on `Freenode <https://webchat.freenode.net>`__ has many
+  developers available to help answer your questions. Also have a look at
   `Stack Overflow <https://stackoverflow.com/questions/tagged/cakephp>`__.
 
 Reporting Security Issues

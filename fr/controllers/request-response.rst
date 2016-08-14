@@ -65,11 +65,6 @@ trouver dans les paramètres de la requête:
 * ``action`` L'action gérant la requête courante.
 * ``prefix`` Le préfixe pour l'action courante. Voir :ref:`prefix-routing` pour
   plus d'informations.
-* ``bare`` Présent quand la requête vient de
-  :php:meth:`~Cake\\Controller\\Controller::requestAction()` et inclut l'option
-  bare. Les requêtes bare n'ont pas de layout de rendu.
-* ``requested`` Présent et mis à ``true`` quand l'action vient de
-  :php:meth:`~Cake\\Controller\\Controller::requestAction()`.
 
 Accéder aux Paramètres Querystring
 ----------------------------------
@@ -193,7 +188,7 @@ sous-dossier. Les différentes propriétés que vous pouvez utiliser sont::
 Vérifier les Conditions de la Requête
 -------------------------------------
 
-.. php:method:: is($type)
+.. php:method:: is($type, $args...)
 
 L'objet ``Request`` fournit une façon d'inspecter différentes conditions de la
 requête utilisée. En utilisant la méthode ``is()``, vous pouvez vérifier un
@@ -248,6 +243,14 @@ Quelques exemples seraient::
         }
     );
 
+    // Ajouter un détecteur qui utilise des arguments supplémentaires. Depuis la version 3.3.0
+    $this->request->addDetector(
+        'controller',
+        function ($request, $name) {
+            return $request->param('controller') === $name;
+        }
+    );
+
 ``Request`` inclut aussi des méthodes comme
 :php:meth:`Cake\\Network\\Request::domain()`,
 :php:meth:`Cake\\Network\\Request::subdomains()`
@@ -273,6 +276,10 @@ Il y a plusieurs détecteurs intégrés que vous pouvez utiliser :
   accepte le mimetype 'application/json'.
 * ``is('xml')`` Vérifie si la requête a l'extension 'xml' ajoutée et si elle
   accepte le mimetype 'application/xml' ou 'text/xml'.
+
+.. versionadded:: 3.3.0
+    Les détecteurs peuvent prendre des paramètres supplémentaires depuis la
+    version 3.3.0.
 
 Données de Session
 ------------------
@@ -332,7 +339,14 @@ Vous permet d'accéder à tout en-tête ``HTTP_*`` utilisé pour la requête::
 
     $this->request->header('User-Agent');
 
-Retourne le user agent utilisé pour la requête.
+Retourne le user agent utilisé pour la requête. Certains serveurs ne remplissent
+pas ``$_SERVER['HTTP_AUTHORIZATION']`` quand l'en-tête ``Authorization`` est
+définie. Si vous utilisez Apache, vous pouvez ajouter ce qui suit dans votre
+``.htaccess`` pour vous permettre d'accéder à l'en-tête ``Authorization``:: 
+
+    RewriteEngine On
+    RewriteCond %{HTTP:Authorization} ^(.*)
+    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 
 .. php:method:: referer($local = false)
 
@@ -731,6 +745,12 @@ soit appeler manuellement la méthode
         // ...
     }
 
+.. note::
+
+    La plupart des utilisateurs proxy devront probablement penser à utiliser
+    l'en-tête Last Modified plutôt que Etags pour des raisons de performance et
+    de compatibilité.
+
 L'En-tête Last-Modified
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -781,7 +801,7 @@ la réponse et determine s'il peut toujours être considéré comme récent. Si 
 il supprime le contenu de la réponse et envoie l'en-tête `304 Not Modified`::
 
     // Dans une action de controller.
-    if ($this->response->checkNotModfied($this->request)) {
+    if ($this->response->checkNotModified($this->request)) {
         return $this->response;
     }
 

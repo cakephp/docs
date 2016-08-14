@@ -1,22 +1,21 @@
 Welcome
 #######
 
-.. warning::
-    この文書のバージョンは CakePHP 3.x 用です。
-    `CakePHP 2.x の文書はここにあります <http://book.cakephp.org/2.0/ja>`_ 。
-
 CakePHP 3 は、 **PHP 7** (最小は PHP 5.5.9) 上で動作するウェブ開発フレームワークです。
 CakePHP 3 の基礎に入門するには :doc:`CakePHP 概要 </intro>` を読んでください。
 
 CakePHP クックブックは、オープンに開発されている、コミュニティで編集可能なドキュメントのプロジェクトです。
 ドキュメンテーションの品質、正当性、正確性の高さを維持することを期待しています。
-右上の "Improve this Doc" (この文書を改善する)  ボタンに注目してください。
+右端に固定された鉛筆アイコンボタンに注目してください。
 このボタンは、あなたがドキュメンテーションの追加・削除・修正などの貢献が簡単にできるように、
 該当ページの GitHub のオンラインエディタへ誘導します。
 
 .. container:: offline-download
 
     **クックブックがどこででも読める**
+
+    .. image:: /_static/img/read-the-book.jpg
+       :alt: Read the Book - CakePHP
 
     どこでも CakePHP のレシピをお楽しみ頂けます。PDF と EPUB をご用意しましたので、
     多くのデバイス上でオフラインでドキュメントを読むことができます。

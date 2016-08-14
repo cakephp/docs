@@ -308,6 +308,11 @@ Garbage collects entries in the cache configuration. This is primarily
 used by FileEngine. It should be implemented by any Cache engine
 that requires manual eviction of cached data.
 
+.. note::
+
+    Because APC and Wincache use isolated caches for webserver and CLI they
+    have to be cleared separately (CLI cannot clear webserver and vice versa).
+
 Using Cache to Store Counters
 =============================
 

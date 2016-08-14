@@ -1,10 +1,10 @@
 Internationalisation & Localisation
 ###################################
 
-L'une des meilleures façons pour que votre application ait une audience plus
-large est de gérer plusieurs langues. Cela peut souvent se révéler être une
-tâche gigantesque, mais les fonctionnalités d'internationalisation et de
-localisation dans CakePHP rendront cela plus facile.
+L'une des meilleures façons pour qu'une application ait une audience plus large
+est de gérer plusieurs langues. Cela peut souvent se révéler être une tâche
+gigantesque, mais les fonctionnalités d'internationalisation et de localisation
+dans CakePHP rendront cela plus facile.
 
 D'abord il est important de comprendre quelques terminologies.
 *Internationalisation* se réfère à la possibilité qu'a une application d'être
@@ -60,7 +60,7 @@ contenir au minimum le fichier ``default.po`` (cf. ci-dessus). Un domaine se
 réfère à un regroupement arbitraire de messages de traduction. Si aucun groupe
 n'est utilisé, le groupe par défaut est sélectionné.
 
-Les messages du coeur extraits de la libairie cakephp peuvent être stockés
+Les messages du coeur extraits de la libairie CakePHP peuvent être stockés
 séparément dans un fichier **cake.po** dans **src/Locale/**.
 La `librairie localized de CakePHP <https://github.com/cakephp/localized>`_
 contient des traductions des chaînes de caractère du coeur (du domaine cake)
@@ -98,17 +98,16 @@ Un fichier de traduction pourrait ressembler à ceci :
 Extraire les Fichiers Pot avec le Shell I18n
 --------------------------------------------
 
-Pour créer les fichiers pot à partir de `__()` et des autres types de
-messages internationalisés qui se trouvent dans votre code, vous pouvez
-utiliser le shell i18n. Vous pouvez consulter le
-:doc:`chapitre suivant </console-and-shells/i18n-shell>` pour en savoir
-plus.
+Pour créer les fichiers pot à partir de `__()` et des autres types de messages
+internationalisés qui se trouvent dans votre code, vous pouvez utiliser le shell
+i18n. Vous pouvez consulter le
+:doc:`chapitre suivant </console-and-shells/i18n-shell>` pour en savoir plus.
 
 Définir la Locale par Défaut
 ----------------------------
 
-La ``locale`` par défaut se détermine dans le fichier **config/app.php**
-en définissant ``App.defaultLocale``::
+La ``locale`` par défaut se détermine dans le fichier **config/app.php** en
+définissant ``App.defaultLocale``::
 
     'App' => [
         ...
@@ -117,15 +116,15 @@ en définissant ``App.defaultLocale``::
     ]
 
 Cela permet de contrôler plusieurs aspects de votre application, incluant la
-langue de traduction par défaut, le format des dates, des nombres, et devises
-à chaque fois qu'un de ces éléments s'affiche, en utilisant les bibliothèques
-de localisation fournies par CakePHP.
+langue de traduction par défaut, le format des dates, des nombres, et devises à
+chaque fois qu'un de ces éléments s'affiche, en utilisant les bibliothèques de
+localisation fournies par CakePHP.
 
 Modifier la Locale pendant l'Exécution
 --------------------------------------
 
-Pour changer la langue des chaines de caractères traduites, vous pouvez
-appeler cette méthode::
+Pour changer la langue des chaines de caractères traduites, vous pouvez appeler
+cette méthode::
 
     use Cake\I18n\I18n;
 
@@ -202,8 +201,8 @@ Ces fonctions profitent des avantages du `MessageFormatter ICU
 traduire des messages, des dates, des nombres et des devises en même temps::
 
     echo __(
-        'Hi {0,string}, your balance on the {1,date} is {2,number,currency}',
-        ['Charles', '2014-01-13 11:12:00', 1354.37]
+        'Hi {0}, your balance on the {1,date} is {2,number,currency}',
+        ['Charles', new FrozenTime('2014-01-13 11:12:00'), 1354.37]
     );
 
     // Retourne
@@ -213,14 +212,14 @@ Les nombres dans les placeholders peuvent également être formatés avec un
 contrôle fin et précis sur la sortie::
 
     echo __(
-        'You have traveled {0,number,decimal} kilometers in {1,number,integer} weeks',
+        'You have traveled {0,number} kilometers in {1,number,integer} weeks',
         [5423.344, 5.1]
     );
 
     // Retourne
     You have traveled 5,423.34 kilometers in 5 weeks
 
-    echo __('There are {0,number,#,###} people on earth', 6.1 * pow(10, 8));
+    echo __('There are {0,number,#,###} people on earth', 6.1 * pow(10, 9));
 
     // Retourne
     There are 6,100,000,000 people on earth
@@ -229,20 +228,19 @@ Voici la liste des balises spécifiques que vous pouvez mettre après le mot
 ``number``:
 
 * ``integer``: Supprime la partie décimale
-* ``decimal``: Formate le nombre en décimal
 * ``currency``: Ajoute le symbole de la devise locale et arrondit les décimales
 * ``percent``: Formate le nombre en pourcentage
 
-Les dates peuvent également être formatées en utilisant le mot ``date`` après
-le nombre placeholder. Les options supplémentaires sont les suivantes:
+Les dates peuvent également être formatées en utilisant le mot ``date`` après le
+nombre placeholder. Les options supplémentaires sont les suivantes:
 
 * ``short``
 * ``medium``
 * ``long``
 * ``full``
 
-Le mot ``time`` après le nombre placeholder est également accepté et
-il comprend les mêmes options que ``date``.
+Le mot ``time`` après le nombre placeholder est également accepté et il comprend
+les mêmes options que ``date``.
 
 .. note::
 
@@ -348,14 +346,18 @@ Utiliser la Sélection Plurielle Gettext
 Le second format de sélection plurielle accepté est d'utiliser les
 fonctionnalités intégrées de Gettext. Dans ce cas, les pluriels seront
 enregistrés dans le fichier ``.po`` en créant une ligne de traduction séparée
-pour chaque forme plurielle.
+pour chaque forme plurielle:
 
 .. code-block:: pot
 
-    msgid "One file removed" # Un identificateur de message pour le singulier
-    msgid_plural "{0} files removed" # Une autre pour le pluriel
-    msgstr[0] "Un fichero eliminado" # Traduction au singulier
-    msgstr[1] "{0} ficheros eliminados" # Traduction au pluriel
+    # Un identificateur de message pour le singulier
+    msgid "One file removed"
+    # Une autre pour le pluriel
+    msgid_plural "{0} files removed"
+    # Traduction au singulier
+    msgstr[0] "Un fichero eliminado"
+    # Traduction au pluriel
+    msgstr[1] "{0} ficheros eliminados"
 
 Lorsque vous utilisez cet autre format, vous devez utiliser une autre fonction
 de traduction::

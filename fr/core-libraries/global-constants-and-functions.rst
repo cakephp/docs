@@ -16,17 +16,16 @@ pointer certains fichiers ou répertoires dans vos applications CakePHP.
 Fonctions Globales
 ==================
 
-Voici les fonctions disponibles dans le monde CakePHP. La plupart
-sont juste des emballages pratiques pour d'autres fonctionnalités
-CakePHP, comme le débogage et la traduction de contenu.
+Voici les fonctions disponibles dans le monde CakePHP. La plupart sont juste des
+emballages pratiques pour d'autres fonctionnalités CakePHP, comme le débogage et
+la traduction de contenu.
 
 .. php:function:: \_\_(string $string_id, [$formatArgs])
 
-    Cette fonction gère la localisation dans les applications
-    CakePHP. ``$string_id`` identifie l'ID de la traduction.
-    Les chaînes utilisées pour la traduction sont traitées
-    comme chaîne formatées pour ``sprintf()``. Vous pouvez fournir
-    des arguments supplémentaires pour remplacer les espaces
+    Cette fonction gère la localisation dans les applications CakePHP.
+    ``$string_id`` identifie l'ID de la traduction. Les chaînes utilisées pour
+    la traduction sont traitées comme chaîne formatées pour ``sprintf()``. Vous
+    pouvez fournir des arguments supplémentaires pour remplacer les espaces
     réservés dans votre chaîne::
 
         __('You have {0} unread messages', $number);
@@ -34,8 +33,8 @@ CakePHP, comme le débogage et la traduction de contenu.
     .. note::
 
         Regardez la section
-        :doc:`/core-libraries/internationalization-and-localization`
-        pour plus d'information.
+        :doc:`/core-libraries/internationalization-and-localization` pour plus
+        d'information.
 
 .. php:function:: __d(string $domain, string $msg, mixed $args = null)
 
@@ -99,13 +98,13 @@ CakePHP, comme le débogage et la traduction de contenu.
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
-    Si la variable ``$debug`` du cœur est à ``true``, $var est
-    affiché. Si ``$showHTML`` est ``true`` ou laissé null, la donnée est
-    formatée pour être visualisée facilement dans un navigateur.
+    Si la variable ``$debug`` du cœur est à ``true``, $var est affiché. Si
+    ``$showHTML`` est ``true`` ou laissé null, la donnée est formatée pour être
+    visualisée facilement dans un navigateur.
 
-    Si ``$showFrom`` n'est pas défini à ``false``, debug retournera en sortie
-    la ligne depuis laquelle il a été appelé.
-    Voir aussi  :doc:`/development/debugging`
+    Si ``$showFrom`` n'est pas défini à ``false``, debug retournera en sortie la
+    ligne depuis laquelle il a été appelé. Voir aussi
+    :doc:`/development/debugging`
 
 .. php:function:: env(string $key, string $default = null)
 
@@ -115,11 +114,11 @@ CakePHP, comme le débogage et la traduction de contenu.
     Récupère une variable d'environnement depuis les sources disponibles.
     Utilisé en secours si ``$_SERVER`` ou ``$_ENV`` sont désactivés.
 
-    Cette fonction émule également ``PHP_SELF`` et ``DOCUMENT_ROOT`` sur
-    les serveurs ne les supportant pas. En fait, c'est une bonne idée
-    de toujours utiliser ``env()`` plutôt que ``$_SERVER`` ou ``getenv()``
-    (notamment si vous prévoyez de distribuer le code), puisque
-    c'est un wrapper d'émulation totale.
+    Cette fonction émule également ``PHP_SELF`` et ``DOCUMENT_ROOT`` sur les
+    serveurs ne les supportant pas. En fait, c'est une bonne idée de toujours
+    utiliser ``env()`` plutôt que ``$_SERVER`` ou ``getenv()`` (notamment si
+    vous prévoyez de distribuer le code), puisque c'est un wrapper d'émulation
+    totale.
 
 .. php:function:: h(string $text, boolean $double = true, string $charset = null)
 
@@ -148,8 +147,8 @@ CakePHP, comme le débogage et la traduction de contenu.
 
 .. php:function:: pj(mixed $var)
 
-    JSON pretty print convenience function, with the addition of
-    wrapping ``<pre>`` tags around the output.
+    JSON pretty print convenience function, with the addition of wrapping
+    ``<pre>`` tags around the output.
 
     Il a pour objectif de debugger la représentation JSON des objets et
     tableaux.
@@ -170,8 +169,8 @@ application.
 
 .. php:const:: CACHE
 
-    Chemin vers le répertoire de cache. il peut être partagé entre les
-    hôtes dans une configuration multi-serveurs.
+    Chemin vers le répertoire de cache. il peut être partagé entre les hôtes
+    dans une configuration multi-serveurs.
 
 .. php:const:: CAKE
 

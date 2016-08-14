@@ -519,7 +519,8 @@ répétitions, les options communes partagées par toutes les méthodes input so
 * ``$options['default']`` Utilisé pour définir une valeur par défaut au champ
   input. La valeur est utilisée si les données passées au formulaire ne
   contiennent pas de valeur pour le champ (ou si aucune donnée n'est
-  transmise)
+  transmise). Une valeur par défaut explicite va surcharger toute valeur définie
+  par défaut dans le schéma.
 
   Exemple d'utilisation::
 
@@ -537,9 +538,6 @@ répétitions, les options communes partagées par toutes les méthodes input so
     vous devez plutôt définir cette valeur dans ``$this->request->data`` dans
     votre controller, ou définir l'option ``checked`` de l'input à ``true``.
 
-    La valeur par défaut des champs Date et datetime peut être définie en
-    utilisant la clé 'selected'.
-
     Attention à l'utilisation de ``false`` pour assigner une valeur par défaut.
     Une valeur ``false`` est utilisée pour désactiver/exclure les options d'un
     champ, ainsi ``'default' => false`` ne définirait aucune valeur. A la place,
@@ -550,6 +548,12 @@ que vous souhaitez utiliser. Tout nom d'option non-special sera
 traité comme un attribut HTML, et appliqué à l'élément HTML input généré.
 NdT. celui qui capte cette phrase gagne un giroTermoOnduleur à double
 convection.
+
+.. versionchanged:: 3.3.0
+    Depuis la version 3.3.0, FormHelper va automatiquement utiliser les valeurs
+    par défaut définies dans le schéma de votre base de données. Vous pouvez
+    désactiver ce comportement en définissant l'option ``schemaDefault`` à
+    ``false``.
 
 Les Options pour Select, Checkbox et Inputs Radio
 -------------------------------------------------
@@ -1451,8 +1455,6 @@ Options:
 -  'escape' booléen s'il faut ou non que le HTML échappe le contenu de
    l'erreur.
 
-.. TODO:: Add examples.
-
 .. php:method:: isFieldError(string $fieldName)
 
 Retourne ``true`` si le champ $fieldName fourni a une erreur de validation en
@@ -1608,6 +1610,11 @@ Créer des Boutons Indépendants et des liens POST
     Si vous cherchez un bouton pour soumettre votre formulaire, alors vous
     devriez plutôt utiliser :php:meth:`Cake\\View\\Helper\\FormHelper::button()`
     ou :php:meth:`Cake\\View\\Helper\\FormHelper::submit()`.
+
+    .. note::
+        Attention à ne pas mettre un postLink à l'intérieur d'un formulaire
+        ouvert. À la place, utilisez l'option ``block`` pour mettre en mémoire
+        tampon le formulaire dans des :ref:`view-blocks`
 
 Personnaliser les Templates que FormHelper Utilise
 ==================================================
