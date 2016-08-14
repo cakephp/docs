@@ -422,11 +422,11 @@ você tenha definido models correspendentes, utilizando a flag
 
 Quando utilizar a flag ``--require-table``, o shell irá olhar através das
 classes do diretório ``Table`` da sua aplicação e apenas irá adicionar no
-snapshot as tabelas lá definidas::
+snapshot as tabelas lá definidas.
 
 A mesma lógica será aplicada implicitamente se você quiser fazer o bake de um
-snapshot para um plugin. Para fazer isso, você precisar usar a opção
-``--plugin``::
+snapshot para um plugin. Para fazer isso, você precisa usar a opção
+``--plugin``, veja a seguir::
 
     $ bin/cake bake migration_snapshot Initial --plugin MyPlugin
 
