@@ -550,6 +550,8 @@ Você também pode utilizar as opções ``--source``, ``--connection`` e
 
 Este comando espera um número de versão de migração como argumento::
 
+    $ bin/cake migrations mark_migrated
+
 Se você deseja marcar todas as migrações como migradas, você pode utilizar
 o valor especial ``all``. Se você o utilizar, ele irá marcar todas as migrações
 como migradas::
