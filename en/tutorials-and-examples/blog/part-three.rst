@@ -138,7 +138,7 @@ With our tables set up, we can now focus on categorizing our articles.
 We suppose you already have the files (Tables, Controllers and Templates of
 Articles) from part 2. So we'll just add the references to categories.
 
-We need to associated the Articles and Categories tables together. Open
+We need to associate the Articles and Categories tables together. Open
 the **src/Model/Table/ArticlesTable.php** file and add the following::
 
     // src/Model/Table/ArticlesTable.php
