@@ -13,7 +13,7 @@ CakePHP 3.3 は、3.2 の API の完全上位互換です。
   ``$routes->redirect()`` を代わりに使用してください。
 * ``Router::parseNamedParams()`` は非推奨になりました。
   名前付きパラメータの後方互換性は 4.0.0 で削除されます。
-* ``Cake\Http\Response`` の以下のメソッドは PSR7 インターフェースメソッドと
+* ``Cake\Http\Client\Response`` の以下のメソッドは PSR7 インターフェースメソッドと
   重複しているため非推奨になりました。
 
   * ``statusCode()`` の代わりに ``getStatusCode()`` を使用してください。
@@ -103,6 +103,8 @@ ORM の改善
 * ``existsIn`` ルールに ``allowNullableNulls`` オプションが追加されました。
   このオプションは、いくつかのカラムが null である場合にルールを
   通過することができます。
+* 翻訳されたレコードの保存がシンプルになりました。詳しくは、
+  :ref:`saving-multiple-translations` をご覧ください。
 
 マルチページネーションのサポート追加
 ====================================
@@ -135,8 +137,6 @@ FormHelper
 Validation
 ==========
 
-* ``Validator::requirePresence()`` は、フィールドのリストを受け付けます。
-  これで、より簡潔に必要なフィールドを定義することができます。
 * ``Validator::requirePresence()``, ``Validator::allowEmpty()``
   そして ``Validator::notEmpty()`` フィールドのリストを受け入れます。
   これで、より簡潔に必要なフィールドを定義することができます。
