@@ -69,7 +69,7 @@ POST リクエストの中の、 *\_method* の値を使う方法は、ブラウ
             $recipes = $this->Recipe->find('all');
             $this->set(array(
                 'recipes' => $recipes,
-                '_serialize' => array('recipe')
+                '_serialize' => array('recipes')
             ));
         }
 
