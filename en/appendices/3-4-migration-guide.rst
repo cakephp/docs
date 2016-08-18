@@ -10,3 +10,9 @@ I18n
 
 * You can now customize the behavior of the fallback message loader. See
   :ref:`creating-generic-translators` for more information.
+
+PaginatorHelper
+==============
+
+* ``PaginatorHelper::numbers()`` now uses an HTML elipsis instead of '...' in
+  the default templates.
