@@ -17,7 +17,7 @@ Doing Requests
 
 Doing requests is simple and straight forward.  Doing a GET request looks like::
 
-    use Cake\Http\Client;
+    use Cake\Network\Http\Client;
 
     $http = new Client();
 
@@ -91,7 +91,7 @@ There may be times when you need to build a request body in a very specific way.
 In these situations you can often use ``Cake\Network\Http\FormData`` to craft
 the specific multipart HTTP request you want::
 
-    use Cake\Http\Client\FormData;
+    use Cake\Network\Http\FormData;
 
     $data = new FormData();
 

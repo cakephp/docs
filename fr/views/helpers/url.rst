@@ -32,17 +32,6 @@ elle génère le lien utilisant le controller et l'action. Si ``full`` vaut
 
 D'autres exemples d'utilisation:
 
-URL avec des paramètres nommés::
-
-    echo $this->Url->build([
-        'controller' => 'Posts',
-        'action' => 'view',
-        'foo' => 'bar'
-    ]);
-
-    // Affiche
-    /posts/view/foo:bar
-
 URL avec une extension::
 
     echo $this->Url->build([
@@ -61,7 +50,7 @@ URL (commençant par '/') avec le chemin complet::
     // Affiche
     http://somedomain.com/posts
 
-URL avec des paramètres GET et des paramètres nommés (Ancre)::
+URL avec des paramètres GET et des ancres::
 
     echo $this->Url->build([
         'controller' => 'Posts',
@@ -72,6 +61,10 @@ URL avec des paramètres GET et des paramètres nommés (Ancre)::
 
     // Affiche
     /posts/search?foo=bar#first
+
+L'exemple du dessus utilise la clé ``?`` qui est utile quand vous voulez être
+explicite sur les paramètres query string que vous utilisez ou si vous voulez
+un query string qui partage un nom avec un de vos placeholders de route.
 
 URL utilisant une route labellisée::
 

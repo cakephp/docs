@@ -339,7 +339,14 @@ Vous permet d'accéder à tout en-tête ``HTTP_*`` utilisé pour la requête::
 
     $this->request->header('User-Agent');
 
-Retourne le user agent utilisé pour la requête.
+Retourne le user agent utilisé pour la requête. Certains serveurs ne remplissent
+pas ``$_SERVER['HTTP_AUTHORIZATION']`` quand l'en-tête ``Authorization`` est
+définie. Si vous utilisez Apache, vous pouvez ajouter ce qui suit dans votre
+``.htaccess`` pour vous permettre d'accéder à l'en-tête ``Authorization``:: 
+
+    RewriteEngine On
+    RewriteCond %{HTTP:Authorization} ^(.*)
+    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 
 .. php:method:: referer($local = false)
 

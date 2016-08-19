@@ -172,6 +172,10 @@
     color: #2f85ae;
 }
 
+.sidebar a.current {
+    color: #d33c44;
+}
+
 #sidebar-navigation > ul {
     padding-left: 0;
 }

@@ -180,6 +180,11 @@ The following calendar types are supported:
 
 .. versionadded:: 3.1
     Non-gregorian calendar support was added in 3.1
+    
+.. note::
+    For constant strings i.e. IntlDateFormatter::FULL Intl uses ICU library 
+    that feeds its data from CLDR (http://cldr.unicode.org/) which version 
+    may vary depending on PHP installation and give different results.
 
 .. php:method:: nice()
 

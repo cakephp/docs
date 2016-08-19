@@ -13,9 +13,9 @@ of errors are my users being shown? How often is a particular query
 being executed?
 
 Logging data in CakePHP is easy - the log() function is provided by the
-``LogTrait``, which is the common ancestor for almost all CakePHP classes. If
-the context is a CakePHP class (Model, Controller, Component... almost
-anything), you can log your data.  You can also use ``Log::write()`` directly.
+``LogTrait``, which is the common ancestor for many CakePHP classes. If
+the context is a CakePHP class (Controller, Component, View,...),
+you can log your data.  You can also use ``Log::write()`` directly.
 See :ref:`writing-to-logs`.
 
 .. _log-configuration:

@@ -31,17 +31,6 @@ generates the URL for the controller and action combo. If ``full`` is
 
 Here are a few more usage examples:
 
-URL with named parameters::
-
-    echo $this->Url->build([
-        "controller" => "Posts",
-        "action" => "view",
-        "foo" => "bar"
-    ]);
-
-    // Output
-    /posts/view/foo:bar
-
 URL with extension::
 
     echo $this->Url->build([
@@ -60,7 +49,7 @@ URL (starting with '/') with the full base URL prepended::
     // Output
     http://somedomain.com/posts
 
-URL with GET params and named anchor::
+URL with GET params and fragment anchor::
 
     echo $this->Url->build([
         "controller" => "Posts",
@@ -71,6 +60,10 @@ URL with GET params and named anchor::
 
     // Output
     /posts/search?foo=bar#first
+
+The above example uses the ``?`` key which is useful when you want to be
+explicit about the query string parameters you are using, or if you want a query
+string parameter that shares a name with one of your route placeholders.
 
 URL for named route::
 

@@ -396,6 +396,8 @@ Configurer la langue directement dans la table est utile quand vous avez besoin
 à la fois de récupérer et de sauvegarder les entities pour la même langue
 ou quand vous avez besoin de sauvegarder plusieurs entities en une fois.
 
+.. _saving-multiple-translations:
+
 Sauvegarder Plusieurs Traductions
 =================================
 
@@ -423,3 +425,56 @@ Maintenant vous pouvez ajouter les translations avant de les sauvegarder::
     }
 
     $this->Articles->save($article);
+
+Depuis la version 3.3.0, le travail avec plusieurs traductions a été amélioré.
+Vous pouvez créer des inputs de formulaire pour vos champs traduits::
+
+    // Dans un template de vue.
+    <?= $this->Form->create($article); ?>
+    <fieldset>
+        <legend>French</legend>
+        <?= $this->Form->input('_translations.fr.title'); ?>
+        <?= $this->Form->input('_translations.fr.body'); ?>
+    </fieldset>
+    <fieldset>
+        <legend>Spanish</legend>
+        <?= $this->Form->input('_translations.es.title'); ?>
+        <?= $this->Form->input('_translations.es.body'); ?>
+    </fieldset>
+
+Dans votre controller, vous pouvez marshal les données comme d'habitude, mais
+avec l'option ``translations`` activée::
+
+    $article = $this->Articles->newEntity($this->request->data, [
+        'translations' => true
+    ]);
+    $this->Articles->save($article);
+
+Ceci va faire que votre article, les traductions françaises et espagnoles vont
+tous persister. Vous devrez aussi vous souvenir d'ajouter ``_translations``
+dans les champs accessibles ``$_accessible`` de votre entity.
+
+Valider les Entities Traduites
+------------------------------
+
+Quand vous attachez ``TranslateBehavior`` à un model, vous pouvez définir le
+validateur qui doit être utilisé quand les enregistrements de traduction sont
+créés/mis à jours par le behavior pendant ``newEntity()`` ou ``patchEntity()``::
+
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
+            $this->addBehavior('Translate', [
+                'fields' => ['title']
+                'validator' => 'translated'
+            ]);
+        }
+    }
+
+Ce qui est au-dessus va utiliser le validateur créé par les entities traduites
+validées ``validationTranslated``.
+
+.. versionadded:: 3.3.0
+    La validation des entities traduites et l'amélioration de la sauvegarde des
+    traductions ont été ajoutées dans la version 3.3.0

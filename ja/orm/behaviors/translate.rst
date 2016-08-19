@@ -15,3 +15,8 @@ Translate
 
     You can refer to the English version in the select top menu to have
     information about this page's topic.
+
+.. _saving-multiple-translations:
+
+Saving Multiple Translations
+============================

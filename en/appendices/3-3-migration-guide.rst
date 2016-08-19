@@ -13,7 +13,7 @@ Deprecations
   ``$routes->redirect()`` instead.
 * ``Router::parseNamedParams()`` is deprecated. Named parameter backwards
   compatibility will be removed in 4.0.0
-* ``Cake\Http\Response`` has had the following methods deprecated because they
+* ``Cake\Http\Client\Response`` has had the following methods deprecated because they
   overlap with PSR7 interface methods:
 
   * ``statusCode()`` use ``getStatusCode()`` instead.
@@ -96,6 +96,8 @@ ORM Improvements
   rules to the number of associated records an entity has.
 * The ``allowNullableNulls`` option was added to the ``existsIn`` rule. This
   option allows rules to pass when some columns are null.
+* Saving translated records is now simpler. See the
+  :ref:`saving-multiple-translations` for more information.
 
 Multiple Pagination Support Added
 =================================
@@ -126,8 +128,6 @@ FormHelper
 Validation
 ==========
 
-* ``Validator::requirePresence()`` now accepts a list of fields. This allows you
-  to more concisely define the fields that are required.
 * ``Validator::requirePresence()``, ``Validator::allowEmpty()`` and
   ``Validator::notEmpty()`` now accept a list of fields. This allows you
   to more concisely define the fields that are required.

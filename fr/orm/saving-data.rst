@@ -632,6 +632,10 @@ converties en entities, vous pouvez utiliser l'event ``Model.beforeMarshal``.
 Cet event vous laisse manipuler les données requêtées juste avant que les
 entities ne soient créées::
 
+    // Mettez des use en haut de votre fichier.
+    use Cake\Event\Event;
+    use ArrayObject;
+
     // Dans une classe table ou behavior
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
@@ -654,7 +658,11 @@ règles de validation et les options d'enregistrement, telle que la whitelist
 des champs. La validation est lancée juste après que cet événement soit
 terminé. Un exemple commun de modification des données avant qu'elles soient
 validées est la suppression des espaces superflus d'un champ avant
-l'enregistrement ::
+l'enregistrement::
+
+    // Mettez des use en haut de votre fichier.
+    use Cake\Event\Event;
+    use ArrayObject;
 
     // Dans une table ou un behavior
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
