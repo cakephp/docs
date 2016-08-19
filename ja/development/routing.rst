@@ -902,7 +902,7 @@ HTTP  302　ステータスを出しながらリダイレクトさせます。
 .. php:staticmethod:: url($url = null, $full = false)
 
     :param mixed $url:  "/products/edit/92" や "/presidents/elect/4" や :term:`ルーティング配列`
-        のようにCakeに関連するURLor
+        のようにCakeに関連するURL
     :param mixed $full: (boolean) true になっていたら、URLフルパスが出力されます。
 		これは以下のキーを受け付けます。
 
