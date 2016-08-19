@@ -421,7 +421,7 @@ Inflection の設定
 ..
     See the :ref:`inflection-configuration` docs for more information.
 
- :ref:`inflection-configuration` を参照してください。
+:ref:`inflection-configuration` を参照してください。
 
 ..
     Configure Class
@@ -446,7 +446,7 @@ Configure クラス
 CakePHP の Configure クラスはアプリケーションもしくは実行時の特定の値の保存と取り出しで利用されます。
 このクラスは何でも保存でき、その後他のどのような箇所でも利用できるため、確実に CakePHP の MVC デザインパターンを破壊する誘惑に気をつけてください。
 Configure クラスの主なゴールは、中央集権化された変数を維持し、たくさんのオブジェクト間で共有できることです。
-"構成よりも規約" であることを努めるように、そして MVC の構造を破壊しないように記憶しておいてください。
+"設定より規約" であることを努めるように、そして MVC の構造を破壊しないように記憶しておいてください。
 
 ..
     You can access ``Configure`` from anywhere in your application
@@ -457,59 +457,100 @@ Configure クラスの主なゴールは、中央集権化された変数を維�
 
     Configure::read('debug');
 
-Writing Configuration data
+..
+    Writing Configuration data
+
+Configuration データの書き込み
 --------------------------
 
 .. php:staticmethod:: write($key, $value)
 
-Use ``write()`` to store data in the application's configuration::
+..
+    Use ``write()`` to store data in the application's configuration::
+
+``write()`` を利用してアプリケーションの設定にデータを保存します。
+
+::
 
     Configure::write('Company.name','Pizza, Inc.');
     Configure::write('Company.slogan','Pizza for your body and soul');
 
-.. note::
+..
+    .. note::
 
     The :term:`dot notation` used in the ``$key`` parameter can be used to
     organize your configuration settings into logical groups.
 
-The above example could also be written in a single call::
+.. note::
+
+    ``$key`` 変数に :term:`ドット記法` を使用すると、 論理的なグループに設定を整理できます。
+
+..
+    The above example could also be written in a single call::
+
+上記例は一度の呼び出しで記述できます。
+
+::
 
     Configure::write('Company', [
         'name' => 'Pizza, Inc.',
         'slogan' => 'Pizza for your body and soul'
     ]);
 
-You can use ``Configure::write('debug', $bool)`` to switch between debug and
-production modes on the fly. This is especially handy for JSON interactions
-where debugging information can cause parsing problems.
+..
+    You can use ``Configure::write('debug', $bool)`` to switch between debug and
+    production modes on the fly. This is especially handy for JSON interactions
+    where debugging information can cause parsing problems.
 
-Reading Configuration Data
+``Configure::write('debug', $bool)`` を利用してデバッグと本番モードをオンザフライ方式で変更できます。
+これはとりわけ JSON のやりとりで使いやすく、デバッグ情報がパースの問題を引き起こす際です。
+
+..
+    Reading Configuration Data
+
+Configuration データの読み込み
 ---------------------------
 
 .. php:staticmethod:: read($key = null)
 
-Used to read configuration data from the application. Defaults to
-CakePHP's important debug value. If a key is supplied, the data is
-returned. Using our examples from write() above, we can read that
-data back::
+..
+    Used to read configuration data from the application. Defaults to
+    CakePHP's important debug value. If a key is supplied, the data is
+    returned. Using our examples from write() above, we can read that
+    data back::
+
+よくアプリケーションから設定データを読み込みます。
+CakePHP の重要なデバッグ値を初期化します。
+もしキーが渡されれば、そのデータが返却されます。
+上記 write() の例を取り上げると、以下のようにデータを読み込みます。
+
+::
 
     Configure::read('Company.name');    // Yields: 'Pizza, Inc.'
-    Configure::read('Company.slogan');  // Yields: 'Pizza for your body
-                                        // and soul'
+    Configure::read('Company.slogan');  // Yields: 'Pizza for your body and soul'
 
     Configure::read('Company');
 
     // Yields:
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 
-If $key is left null, all values in Configure will be returned.
+..
+    If $key is left null, all values in Configure will be returned.
 
+もし $key が null のままだと、すべての設定値が返却されます。
 
 .. php:staticmethod:: readOrFail($key)
 
-Reads configuration data just like :php:meth:`Cake\\Core\\Configure::read`
-but expects to find a key/value pair. In case the requested pair does not
-exist, a :php:class:`RuntimeException` will be thrown::
+..
+    Reads configuration data just like :php:meth:`Cake\\Core\\Configure::read`
+    but expects to find a key/value pair. In case the requested pair does not
+    exist, a :php:class:`RuntimeException` will be thrown::
+
+設定データを単に :php:meth:`Cake\\Core\\Configure::read` で読み込みますが、
+一方で key/value ペアを検索することを期待します。
+リクエストされたペアが存在しない場合、 :php:class:`RuntimeException` が投げられます。
+
+::
 
     Configure::readOrFail('Company.name');    // Yields: 'Pizza, Inc.'
     Configure::readOrFail('Company.geolocation');  // Will throw an exception
@@ -521,14 +562,25 @@ exist, a :php:class:`RuntimeException` will be thrown::
 
 .. versionadded:: 3.1.7
 
-``Configure::readOrFail()`` was added in 3.1.7
+..
+    ``Configure::readOrFail()`` was added in 3.1.7
 
-Checking to see if Configuration Data is Defined
+``Configure::readOrFail()`` は 3.1.7 で追加されました。
+
+..
+    Checking to see if Configuration Data is Defined
+
+定義されている設定データのチェック
 ------------------------------------------------
 
 .. php:staticmethod:: check($key)
 
-Used to check if a key/path exists and has non-null value::
+..
+    Used to check if a key/path exists and has non-null value::
+
+キー / パス が存在しているか、値が null でないかチェックする場合に利用します。
+
+::
 
     $exists = Configure::check('Company.name');
 
