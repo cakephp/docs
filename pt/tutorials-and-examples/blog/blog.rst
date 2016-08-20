@@ -11,7 +11,7 @@ Aqui está o que você vai precisar:
    o Apache, embora as instruções para outros servidores sejam bem similares.
    Talvez seja preciso alterar um pouco a configuração do servidor, mas a
    maioria das pessoas pode ter o CakePHP instalado e funcionando sem qualquer
-   trabalho extra. Certifique-se de que você tem o PHP 5.5.9 ou superior,
+   trabalho extra. Certifique-se de que você tem o PHP 5.6.0 ou superior,
    e que as extensões *mbstring* e *intl* estejam habilitadas no PHP.
    Caso não saiba a versão do PHP que está instalada, utilize a função
    ``phpinfo()`` ou digite ``php -v`` no seu terminal de comando.

@@ -20,8 +20,8 @@ Avant de commencer, vous devez vous assurer que votre version de PHP est à jour
 
     php -v
 
-Vous devez avoir installé au moins la version 5.5.9 (CLI) de PHP ou supérieure.
-La version de PHP de votre serveur web doit aussi être 5.5.9 ou supérieure, et
+Vous devez avoir installé au moins la version 5.6.0 (CLI) de PHP ou supérieure.
+La version de PHP de votre serveur web doit aussi être 5.6.0 ou supérieure, et
 doit être préférablement la même version que celle de votre interface en ligne
 de commande (CLI).
 Si vous souhaitez voir ce que donne l'application au final, regardez

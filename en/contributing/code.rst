@@ -12,7 +12,7 @@ Before working on patches for CakePHP, it's a good idea to get your environment
 setup. You'll need the following software:
 
 * Git
-* PHP 5.5.9 or greater
+* PHP 5.6.0 or greater
 * PHPUnit 3.7.0 or greater
 
 Set up your user information with your name/handle and working email address::

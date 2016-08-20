@@ -12,7 +12,7 @@ Gereksinimler
 
 - HTTP sunucusu. Örneğin: Apache. mod\_rewrite özelliğinin açık
   olması tercih edilir ama zorunlu değildir.
-- PHP 5.5.9 veya daha yüksek.
+- PHP 5.6.0 veya daha yüksek.
 - mbstring eklentisi
 - intl eklentisi
 

@@ -16,7 +16,7 @@ Esto es lo que necesitarás:
 #. Servidor web funcionando. Asumiremos que estás usando Apache, aunque las
    instrucciones para otros servidores son similares. Igual tendremos que ajustar
    un poco la configuración inicial, pero la mayoría pueden poner en marcha
-   CakePHP sin configuración alguna. Asegúrate de tener PHP 5.5.9 o superior
+   CakePHP sin configuración alguna. Asegúrate de tener PHP 5.6.0 o superior
    así como tener las extensiones ``mbstring``, ``intl`` y ``mcrypt`` activadas
    en PHP.
 #. Servidor de base de datos. Usaremos MySQL en este tutorial. Necesitarás saber

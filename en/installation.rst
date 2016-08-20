@@ -11,7 +11,7 @@ Requirements
 
 - HTTP Server. For example: Apache. Having mod\_rewrite is preferred, but
   by no means required.
-- PHP 5.5.9 or greater (including PHP 7).
+- PHP 5.6.0 or greater (including PHP 7).
 - mbstring PHP extension
 - intl PHP extension
 
@@ -53,8 +53,8 @@ version:
 
     php -v
 
-You should at least have got installed PHP 5.5.9 (CLI) or higher.
-Your webserver's PHP version must also be of 5.5.9 or higher, and should best be
+You should at least have got installed PHP 5.6.0 (CLI) or higher.
+Your webserver's PHP version must also be of 5.6.0 or higher, and should best be
 the same version your command line interface (CLI) PHP version is of.
 
 Installing Composer
