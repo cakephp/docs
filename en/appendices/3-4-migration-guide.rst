@@ -12,7 +12,7 @@ I18n
   :ref:`creating-generic-translators` for more information.
 
 PaginatorHelper
-==============
+===============
 
 * ``PaginatorHelper::numbers()`` now uses an HTML elipsis instead of '...' in
   the default templates.

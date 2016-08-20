@@ -13,7 +13,7 @@ I18n
   d'information.
 
 PaginatorHelper
-==============
+===============
 
 * ``PaginatorHelper::numbers()`` utilise maintenant une ellipse HTML au lieu de
   '...' dans les templates par défaut.
