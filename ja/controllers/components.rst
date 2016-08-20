@@ -3,7 +3,7 @@
 
 コンポーネントはコントローラ間で共有されるロジックのパッケージです。
 CakePHP には、様々な共通のタスクを支援するための素晴らしいコアコンポーネントが用意されています。
-あなた独自のコンポーネントも作成できます。もしコントローラ間でコピーアンドペーストしたい箇所が
+あなた独自のコンポーネントも作成できます。もしコントローラ間でコピー＆ペーストしたい箇所が
 あった場合、その機能を含むコンポーネントの作成を検討しましょう。コンポーネントを作成することで、
 コントローラのコードを綺麗に保ち、プロジェクト間のコードの再利用につながります。
 
@@ -17,9 +17,10 @@ CakePHP には、様々な共通のタスクを支援するための素晴らし
 ====================
 
 コアコンポーネントの多くは設定を必要としています。コンポーネントが設定を必要としている例は、
-:doc:`/core-libraries/components/authentication` や :doc:`/core-libraries/components/cookie` などにあります。
+:doc:`/core-libraries/components/authentication` や
+:doc:`/core-libraries/components/cookie` などにあります。
 これらのコンポーネントと普通のコンポーネントの設定は大抵の場合、
-``$components`` 配列かコントローラの ``beforeFilter()`` メソッドで行われます。::
+``$components`` 配列かコントローラの ``beforeFilter()`` メソッドで行われます。 ::
 
     class PostsController extends AppController {
         public $components = array(
@@ -37,7 +38,7 @@ CakePHP には、様々な共通のタスクを支援するための素晴らし
 すべてのコアコンポーネントはこの方法で設定することができます。
 さらに、コントローラの ``beforeFilter()`` メソッドで設定することもできます。
 これは関数の結果をコンポーネントのプロパティに設定する時に役に立ちます。
-上記の例は次のように書き換えられます。::
+上記は、次のように表現することもできます。 ::
 
     public function beforeFilter() {
         $this->Auth->authorize = array('controller');
@@ -52,7 +53,7 @@ CakePHP には、様々な共通のタスクを支援するための素晴らし
 しかし、コンポーネントのオプションをコントローラの ``beforeFilter()`` が
 実行される前に設定することが可能な場合もあります。
 つまり、コンポーネントの中には ``$components`` 配列にオプションを設定することが
-できるものがあります。::
+できるものがあります。 ::
 
     public $components = array(
         'DebugKit.Toolbar' => array('panels' => array('history', 'session'))
@@ -62,7 +63,7 @@ CakePHP には、様々な共通のタスクを支援するための素晴らし
 
 共通設定の一つに ``className`` オプションがあります。このオプションを使うとコンポーネントに
 別名をつけられます。この機能は ``$this->Auth`` や他のコンポーネントの参照を独自実装に
-置き換えたい時に便利です。::
+置き換えたい時に便利です。 ::
 
     // app/Controller/PostsController.php
     class PostsController extends AppController {
@@ -92,7 +93,7 @@ CakePHP には、様々な共通のタスクを支援するための素晴らし
 一旦、コンポーネントをコントローラに読込んでしまえば、使うのは非常に簡単です。
 使用中の各コンポーネントはコントローラのプロパティのように見えます。
 もし、 :php:class:`SessionComponent` と :php:class:`CookieComponent` を
-コントローラに読込んだ場合、以下のようにアクセスすることができます。::
+コントローラに読込んだ場合、以下のようにアクセスすることができます。 ::
 
     class PostsController extends AppController {
         public $components = array('Session', 'Cookie');
@@ -107,21 +108,21 @@ CakePHP には、様々な共通のタスクを支援するための素晴らし
 .. note::
 
     モデルとコンポーネントの両方がコントローラにプロパティとして追加されるので、それらは同じ
-    '名前空間' を共有します。コンポーネントとモデルに同じ名前をつけないように注意して下さい。
+    「名前空間」を共有します。コンポーネントとモデルに同じ名前をつけないように注意して下さい。
 
-コンポーネントの動的読込み
+コンポーネントの動的ロード
 --------------------------
 
 すべてのコントローラアクションで全コンポーネントを使えるようにする必要はないかもしれません。
 このような状況では、実行時に :doc:`コンポーネントコレクション </core-libraries/collections>` を
-使ってコンポーネントを読込むことができます。コントローラ内部から以下のようにできます。::
+使ってコンポーネントを読込むことができます。コントローラ内部から以下のようにできます。 ::
 
     $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
 
 .. note::
 
-    コンポーネントを動的に読込みした場合、初期化メソッドが実行されないことを覚えておいて下さい。
+    コンポーネントを動的にロードした場合、初期化メソッドが実行されないことを覚えておいて下さい。
     このメソッドで読込んだ場合、ロード後に手動で実行する必要があります。
 
 
@@ -142,7 +143,7 @@ CakePHP には、様々な共通のタスクを支援するための素晴らし
 
 はじめに、新しいコンポーネントファイルとクラスを作成します。
 ``/app/Controller/Component/MathComponent.php`` にファイルを作成して下さい。
-コンポーネントの基本構造は以下のようになります。::
+コンポーネントの基本構造は以下のようになります。 ::
 
     App::uses('Component', 'Controller');
     class MathComponent extends Component {
@@ -154,15 +155,15 @@ CakePHP には、様々な共通のタスクを支援するための素晴らし
 .. note::
 
     すべてのコンポーネントは :php:class:`Component` を継承しなければなりません。
-    継承されていない場合、例外が発生するでしょう。
+    継承されていない場合、例外が発生します。
 
 コントローラの中にコンポーネントを読み込む
 ------------------------------------------
 
 一旦コンポーネントが完成してしまえば、コントローラの ``$components`` 配列にあるコンポーネント名
 (Component の部分を削除する) を置き換えることで使えるようになります。
-コントローラはそのコンポーネントに由来する新しいプロパティを自動的に与えられるでしょう。
-そのプロパティを通してインスタンスにアクセスできます。::
+コントローラはそのコンポーネントに由来する新しいプロパティを自動的に与えられ、
+そのプロパティを通してコンポーネントのインスタンスにアクセスできます。 ::
 
     /* 標準の $this->Session と同様に新しいコンポーネントを
        $this->Math で利用できるようにします。*/
@@ -172,7 +173,7 @@ CakePHP には、様々な共通のタスクを支援するための素晴らし
 マージされます。同じコンポーネントを二度宣言する必要はありません。
 
 コントローラの中でコンポーネントを読み込む時、コンポーネントのコンストラクタに渡すバラメータを
-宣言することもできます。このパラメータはコンポーネントによってハンドリングされます。::
+宣言することもできます。このパラメータはコンポーネントによって処理することができます。 ::
 
     public $components = array(
         'Math' => array(
@@ -191,7 +192,7 @@ CakePHP には、様々な共通のタスクを支援するための素晴らし
 
 作成しているコンポーネントから他のコンポーネントを使いたい時がたまにあります。その場合、
 作成中のコンポーネントから他のコンポーネントを読み込むことができ、その方法はコントローラから
-``$components`` 変数を使って読み込む場合と同じです。::
+``$components`` 変数を使って読み込む場合と同じです。 ::
 
     // app/Controller/Component/CustomComponent.php
     App::uses('Component', 'Controller');
@@ -251,7 +252,7 @@ CakePHP には、様々な共通のタスクを支援するための素晴らし
 
 .. php:method:: beforeRender(Controller $controller)
 
-    コントローラが要求されたアクションのロジックを実行した後、
+    コントローラがリクエストされたアクションのロジックを実行した後、
     ビューとレイアウトが描画される前に呼び出されます。
 
 .. php:method:: shutdown(Controller $controller)
@@ -268,5 +269,5 @@ CakePHP には、様々な共通のタスクを支援するための素晴らし
 
 
 .. meta::
-    :title lang=ja: Components
+    :title lang=ja: コンポーネント
     :keywords lang=ja: array controller,core libraries,authentication request,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc

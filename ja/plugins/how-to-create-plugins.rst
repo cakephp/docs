@@ -163,8 +163,6 @@ ContactManager プラグインでは、ContactsController::index()
     プラグインからのエレメントの使い方に関する情報は、 :ref:`view-elements`
     を参照してください。
 
-.. Overriding Plugin Views From Inside Your Application
-
 アプリケーション内でのプラグインビューのオーバーライド
 ------------------------------------------------------
 
@@ -232,16 +230,16 @@ ContactManager プラグインでは、ContactsController::index()
 すばらしい方法にもなり得ます。
 
 このようなコンポーネントを作る事は、実際、通常のアプリケーションとして作る事と同じであり、 
-特別な名前をつける必要はありません。
+特別な命名規則もありません。
 
 プラグインの内部や外部からコンポーネントを参照する方法は、
 コンポーネント名の前にプラグイン名を付けるだけです。 例えば、 ::
 
-    // Component defined in 'ContactManager' plugin
+    // 'ContactManager' プラグインのコンポーネントとして定義
     class ExampleComponent extends Component {
     }
 
-    // within your controllers:
+    // あなたのコントローラで下記のように呼び出す
     public $components = array('ContactManager.Example');
 
 同じテクニックはヘルパーとビヘイビアにも使えます。

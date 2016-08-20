@@ -3,7 +3,7 @@
 
 .. php:class:: PaginatorComponent(ComponentCollection $collection, array $settings = array())
 
-柔軟で、かつユーザーにやさしいWebアプリを作ろうとすると、
+柔軟で、かつユーザーにやさしいウェブアプリを作ろうとすると、
 まず障害となるのが直感的なユーザーインターフェースのデザインです。
 多くのアプリケーションは、そのサイズと複雑さが加速度的に増加してきており、
 デザイナーとプログラマーは何十万ものレコードをどうやって表示すればいいか、
@@ -31,7 +31,7 @@ CakePHP におけるページ制御機構は、
 ここで指定した条件は、あなたのページ制御機能の基本部分になります。
 それらに対して、さらにソートやレコードの取得件数の制限、
 URL から受け取ったページパラメータなどを追加していきます。なお order キーを、
-以下の要領で配列として定義しておく必要があるので注意してください::
+以下の要領で配列として定義しておく必要があるので注意してください。 ::
 
     class PostsController extends AppController {
 
@@ -46,7 +46,7 @@ URL から受け取ったページパラメータなどを追加していきま�
     }
 
 ``fields`` のような、上記以外の :php:meth:`~Model::find()` のオプションを
-入れることもできます::
+入れることもできます。 ::
 
     class PostsController extends AppController {
 
@@ -66,7 +66,7 @@ URL から受け取ったページパラメータなどを追加していきま�
 ``fields``, ``order``, ``limit``, ``page``, ``contain``, ``joins``, 
 ``recursive`` 。前述のキーに加えて、追加したキーがそのままモデルの
 find() メソッドに渡されます。これにより、ページ制御に対してとても簡単に
-:php:class:`ContainableBehavior` のようなビヘイビアを使えます::
+:php:class:`ContainableBehavior` のようなビヘイビアを使えます。 ::
 
     class RecipesController extends AppController {
 
@@ -80,7 +80,7 @@ find() メソッドに渡されます。これにより、ページ制御に対�
 
 標準的なページ制御用の値を定義する以外にも、
 コントローラーの中でひとつ以上のページ制御用のデフォルト値を定義できます。
-単に設定したいモデルの後で、配列のキーに名前をつけるだけです::
+単に設定したいモデルの後で、配列のキーに名前をつけるだけです。 ::
 
     class PostsController extends AppController {
 
@@ -102,7 +102,7 @@ find() メソッドに渡されます。これにより、ページ制御に対�
 これを使って :php:class:`PaginatorHelper` がリンクを生成します。
 さらに :php:meth:`PaginatorComponent::paginate()` は、
 あなたのコントローラーの中のヘルパーのリストに :php:class:`PaginatorHelper` 
-がまだ入っていなければ追加します::
+がまだ入っていなければ追加します。 ::
 
     public function list_recipes() {
         $this->Paginator->settings = $this->paginate;
@@ -113,7 +113,7 @@ find() メソッドに渡されます。これにより、ページ制御に対�
     }
 
 ``paginate()`` 関数の第二パラメータとして検索条件を渡すことにより、
-結果をフィルターできます::
+結果をフィルターできます。 ::
 
     $data = $this->Paginator->paginate(
         'Recipe',
@@ -121,7 +121,7 @@ find() メソッドに渡されます。これにより、ページ制御に対�
     );
 
 あなたのアクションの中に、 ``conditions``
-を始めとするページ制御用設定の配列をセットすることもできます::
+を始めとするページ制御用設定の配列をセットすることもできます。 ::
 
     public function list_recipes() {
         $this->Paginator->settings = array(
@@ -143,7 +143,7 @@ find() メソッドに渡されます。これにより、ページ制御に対�
 あなたのモデルに接続されるビヘイビアの中でそれらをインクルードしたりできます。
 ``paginate`` や ``paginateCount`` を実装するビヘイビアは、
 後述するメソッドのシグネチャーを、
-通常の追加の先頭パラメータである ``$model`` を使って実装しなければなりません::
+通常の追加の先頭パラメータである ``$model`` を使って実装しなければなりません。 ::
 
     // ビヘイビア上に実装された paginate と paginateCount
     public function paginate(Model $model, $conditions, $fields, $order, $limit,
@@ -161,14 +161,14 @@ paginate() と paginateCount() を自前で実装しなければならないよ�
 コアのモデルのメソッドやカスタムファインダーを使うだけでは、
 どうしても目指すゴールに辿りつけないのかどうかを確認してください。
 カスタム find タイプでページ制御する場合、 ``0`` 番目の要素をセットするか、
-もしくは CakePHP 2.3 であれば ``findType`` キーを設定してください::
+もしくは CakePHP 2.3 であれば ``findType`` キーを設定してください。 ::
 
     public $paginate = array(
         'popular'
     );
 
 0 番目のインデックスを管理するのは難しいため、2.3 では ``findType``
-オプションが追加されました::
+オプションが追加されました。 ::
 
     public $paginate = array(
         'findType' => 'popular'
@@ -177,7 +177,7 @@ paginate() と paginateCount() を自前で実装しなければならないよ�
 ``paginate()`` メソッドでは、
 以下のメソッドシグネチャーを実装しなければなりません。
 データを取得したいモデルの中で、
-あなたのメソッドやロジックでこれをオーバーライドします。::
+あなたのメソッドやロジックでこれをオーバーライドします。 ::
 
 
     /**
@@ -198,7 +198,7 @@ paginate() と paginateCount() を自前で実装しなければならないよ�
 さらに、コアの ``paginateCount()`` をオーバーライドする必要があります。
 このメソッドは ``Model::find('count')`` と同じ引数を期待しています。
 以下の例では PostgreSQL 固有の機能を利用していますので、
-お使いのデータベースに従って調整してください。::
+お使いのデータベースに従って調整してください。 ::
 
     /**
      * オーバーライドされた paginateCount メソッド
@@ -220,7 +220,7 @@ paginate() と paginateCount() を自前で実装しなければならないよ�
 観察力の鋭い方なら気付くと思いますが、私たちが定義している paginate
 メソッドは、実際には必要なものではありませんでした。
 単にコントローラーの ``$paginate`` クラス変数に、
-そのキーワードを追加してやるだけでOKです。::
+そのキーワードを追加してやるだけで OK です。 ::
 
     /**
      * GROUP BY 句を追加します
@@ -257,7 +257,7 @@ CakePHP 2.0 では、グループ句を使う場合でも、もはや ``paginate
 計算コストの高い仮想フィールドでもソートキーにできるので、
 必ずしも望ましい状態ではないかもしれません。そういった場合、
 ``PaginatorComponent::paginate()`` の第三パラメータを使って、
-ソート可能な列を制限することができます。::
+ソート可能な列を制限することができます。 ::
 
     $this->Paginator->paginate('Post', array(), array('title', 'slug'));
 
@@ -272,7 +272,7 @@ CakePHP 2.0 では、グループ句を使う場合でも、もはや ``paginate
 一般的にはあまり好ましくありません。CakePHP のデフォルトでは、
 一度に取り出せる行数を 100 に制限しています。
 このデフォルト値があなたのアプリケーションで適切ではない場合、
-ページ制御のオプションの一部としてこの値を調整できます。::
+ページ制御のオプションの一部としてこの値を調整できます。 ::
 
     public $paginate = array(
         // ここに他のキーもあります。
@@ -281,7 +281,6 @@ CakePHP 2.0 では、グループ句を使う場合でも、もはや ``paginate
 
 リスクストの limit パラメータがこの値より大きい場合、
 ``maxLimit`` の値に制限されます。
-
 
 .. _pagination-with-get:
 
@@ -296,14 +295,14 @@ CakePHP の過去のバージョンでは、ページ制御用リンクの生成
 クエリー文字列と名前付きパラメータのどちらを使うかを選べます。
 入ってくるリクエストは選択されたタイプとしてのみ受け付けられ、
 :php:class:`PaginatorHelper`
-が選択されたパラメータタイプでリンクを生成します。::
+が選択されたパラメータタイプでリンクを生成します。 ::
 
     public $paginate = array(
         'paramType' => 'querystring'
     );
 
 上記の例ではクエリー文字列によるパースとリンク生成を有効にします。
-PaginatorComponent の ``$settings`` プロパティで変更することもできます。::
+PaginatorComponent の ``$settings`` プロパティで変更することもできます。 ::
 
     $this->Paginator->settings['paramType'] = 'querystring';
 
@@ -312,20 +311,19 @@ PaginatorComponent の ``$settings`` プロパティで変更することもで�
 .. note::
 
     存在しないプロパティへの値の代入により、
-    例外が発生するような状況になる場合があります::
+    例外が発生するような状況になる場合があります。 ::
 
         $this->paginate['limit'] = 10;
     
     とやると、 "Notice: Indirect modification of overloaded property $paginate has no effect."
-    という例外が発生します。プロパティに対して初期値を代入しておくことで、
-    この問題を防げます。::
+    という例外が発生します。プロパティに対して初期値を代入しておくことで、この問題を防げます。 ::
 
         $this->paginate = array();
         $this->paginate['limit'] = 10;
         //  または
         $this->paginate = array('limit' => 10);
 
-    もしくは、単にコントローラークラスでプロパティを宣言するのでもOKです::
+    もしくは、単にコントローラークラスでプロパティを宣言するのでもOKです。 ::
 
         class PostsController {
             public $paginate = array();
@@ -336,6 +334,7 @@ PaginatorComponent の ``$settings`` プロパティで変更することもで�
 
     PaginatorComponent の ``$settings`` プロパティを変更したい場合は、
     必ず $components 配列に Paginator コンポーネントを追加しておいてください。
+
     これらのいずれかにより、notice エラーの発生を防げます。
 
 範囲外のページへのアクセス
@@ -347,7 +346,7 @@ PaginatorComponent が `NotFoundException` を投げます。
 
 その場合、通常のエラーページを生成することもできますが、
 try ～ catch ブロックで `NotFoundException` を捕捉して、
-適切なアクションを起こさせることも可能です::
+適切なアクションを起こさせることも可能です。 ::
 
     public function index() {
         try {

@@ -112,8 +112,8 @@ CakePHP のモデルに対応するテーブル名は、複数形でアンダー
 二個以上の単語で構成されるフィールドの名前は、 first\_name のようにアンダースコア記法になります。
 
 hasMany, blongsTo, hasOne 中の外部キーは、デフォルトで関連するモデルの (単数形の) 名前に
-\_id を付けたものとして認識されます。ケーキ職人 (Backer) がケーキ (Cake) を複数持っている
-(hasMany) としたら、cakes テーブルは、baker\_id を外部キーとして bakers テーブルのデータを
+\_id を付けたものとして認識されます。ケーキ職人がケーキを複数持っている (**Bakers hasMany Cakes**)
+としたら、cakes テーブルは、baker\_id を外部キーとして bakers テーブルのデータを
 参照します。categoly\_types のような複数の単語のテーブルでは、外部キーは
 categoty\_type\_id のようになるでしょう。
 
