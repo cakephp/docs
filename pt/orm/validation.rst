@@ -10,3 +10,13 @@ Validando dados
 
     Você pode consultar a versão em inglês deste tópico através do seletor de
     idiomas localizado ao lado direito do campo de buscas da documentação.
+
+.. _validating-request-data:
+
+Validando dados antes de construir entidades
+============================================
+
+.. _application-rules:
+
+Aplicando regras da aplicação
+=============================
