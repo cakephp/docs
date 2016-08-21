@@ -98,8 +98,8 @@ The ``$options`` array is where most of the form configuration
 happens. This special array can contain a number of different
 key-value pairs that affect the way the form tag is generated.
 
-Setting a value sources for Forms
----------------------------------
+Setting values sources for Forms
+--------------------------------
 
 .. versionadded:: 3.3.2
 
