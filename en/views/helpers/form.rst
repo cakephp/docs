@@ -107,7 +107,7 @@ A FormHelper's values sources sets where its rendered elements, such as input-ta
 form is being rendered.
 
 The default values source for a FormHelper is `context`. Thus the values will be fetched from the Form's context.
-The default contexts, such as `EntityContext` or `NullContext` will fetch the values from `$request->data`,
+The default contexts, such as `EntityContext` or `NullContext`, will fetch its values from `$request->data`,
 which is being autofilled with POST/PUT/PATCH body data. If there is no such data for a given field, but an Entity is
 given, the value will be fetched from the Entity instead.
 
