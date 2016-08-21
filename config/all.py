@@ -305,3 +305,7 @@ from sphinx.highlighting import lexers
 from pygments.lexers.web import PhpLexer
 
 lexers['phpinline'] = PhpLexer(startinline=True)
+
+rst_epilog = """
+.. |minphpversion| replace:: 5.6.0
+"""

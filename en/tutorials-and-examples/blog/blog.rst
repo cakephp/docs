@@ -11,7 +11,7 @@ Here's what you'll need:
    though the instructions for using other servers should be very
    similar. We might have to play a little with the server
    configuration, but most folks can get CakePHP up and running without
-   any configuration at all. Make sure you have PHP 5.6.0 or greater, and
+   any configuration at all. Make sure you have PHP |minphpversion| or greater, and
    that the ``mbstring`` and ``intl`` extensions are enabled in PHP.
 #. A database server. We're going to be using MySQL server in this
    tutorial. You'll need to know enough about SQL in order to create a

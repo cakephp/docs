@@ -12,7 +12,7 @@ Conditions requises
 
 - HTTP Server. Par exemple: Apache. mod\_rewrite est préférable, mais en
   aucun cas nécessaire
-- PHP 5.6.0 ou plus (y compris PHP 7)
+- PHP |minphpversion| ou plus (y compris PHP 7)
 - extension PHP mbstring
 - extension PHP intl
 
@@ -55,8 +55,8 @@ mise à jour:
 
     php -v
 
-Vous devez avoir installé au moins avoir PHP 5.6.0 (CLI) ou supérieur. La
-version de PHP du serveur web doit être la version 5.6.0 ou supérieur, et doit
+Vous devez avoir installé au moins avoir PHP |minphpversion| (CLI) ou supérieur. La
+version de PHP du serveur web doit être la version |minphpversion| ou supérieur, et doit
 être la même version que la version de PHP de votre ligne de commande (CLI).
 
 Installer Composer
