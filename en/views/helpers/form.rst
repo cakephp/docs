@@ -130,7 +130,7 @@ By setting custom value sources you can easily create `HTTP GET` based forms, su
 
 .. code-block:: php
 
-    echo $this->Form->create(null, ['type' => 'get', 'sourcesValues' => 'query']);
+    echo $this->Form->create(null, ['type' => 'get', 'valuesSources' => 'query']);
     // ...
     echo $this->Form->input('name');
     // ...
