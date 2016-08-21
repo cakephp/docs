@@ -119,13 +119,20 @@ order set. Examples:
 
 .. code-block:: php
 
-    echo $this->Form->create($articles, ['valuesSources' => ['query, context']]);
-    // or:
-    echo $this->Form->setValuesSources(['query, context'])->create($articles); // prioritize query over context
-    // or:
-    echo $this->Form->setValuesSources('query)->create($articles);
+    // Prioritize query over context:
+    echo $this->Form->create($article, ['valuesSources' => ['query, context']]);
+    // Same effect:
+    echo $this->Form
+        ->setValuesSources(['query, context'])
+        ->create($articles); 
 
-By setting custom value sources you can easily create ``HTTP GET`` based forms, such as filter forms. Example:
+    // Specify to use query instead of context:
+    echo $this->Form->create($article);
+    $this->Form->setValuesSources('query');
+    // Same effect:
+    echo $this->Form->create($article, ['valuesSources' => 'query']);
+
+By setting custom values sources you can easily create ``HTTP GET`` based forms, such as filter forms. Example:
 
 .. code-block:: php
 
