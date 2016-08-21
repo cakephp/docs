@@ -143,7 +143,7 @@ By setting custom values sources you can easily create ``HTTP GET`` based forms,
     echo $this->Form->submit();
     echo $this->Form->end();
 
-Once you run ``Form::end()`` the sourcesValue will be reset to its default, e.g. ``['context']``.
+Once you run ``Form::end()`` the values sources will be reset to its default, e.g. ``['context']``.
 
 Changing the HTTP Method for a Form
 -----------------------------------
