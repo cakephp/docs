@@ -166,7 +166,7 @@ Automatically decoding request data
         $this->RequestHandler->addInputType('json', array('json_decode', true));
 
     The above will make ``$this->request->data`` an array of the JSON input data,
-    without the additional ``true`` you'd get a set of ``StdClass`` objects.
+    without the additional ``true`` you'd get a set of ``stdClass`` objects.
 
 Responding To Requests
 ======================
