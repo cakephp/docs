@@ -479,6 +479,8 @@ Enfin, configurez le loader de traduction pour le domaine et la locale::
         new Loader('animals', 'fr_FR', 'yaml')
     );
 
+.. _creating-generic-translators:
+
 Créer des Traducteurs Génériques
 --------------------------------
 
@@ -508,6 +510,17 @@ défaut et pour chaque langue depuis un service externe::
 Le code ci-dessus appelle un service externe exemple pour charger un fichier
 JSON avec les traductions puis construit uniquement un objet ``Package``
 pour chaque locale nécessaire dans l'application.
+
+If you'd like to change how packages are loaded for all packages, that don't
+have specific loaders set you can replace the fallback package loader by using
+the ``_fallback`` package::
+
+    I18n::config('_fallback', function ($domain, $locale) {
+        // Custom code that yields a package here.
+    });
+
+.. versionadded:: 3.4.0
+    Replacing the ``_fallback`` loader was added in 3.4.0
 
 Pluriels et Contexte dans les Traducteurs Personnalisés
 -------------------------------------------------------
