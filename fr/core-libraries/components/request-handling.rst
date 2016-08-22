@@ -169,7 +169,7 @@ Décoder automatiquement les données de la requête
 
     Le contenu ci-dessus créera ``$this->request->data`` un tableau des données
     d'entrées JSON, sans le ``true`` supplémentaire vous obtiendrez un jeu
-    d'objets ``StdClass``.
+    d'objets ``stdClass``.
 
 Répondre Aux Requêtes
 =====================
