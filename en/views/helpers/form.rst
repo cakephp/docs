@@ -101,7 +101,7 @@ key-value pairs that affect the way the form tag is generated.
 Setting values sources for Forms
 --------------------------------
 
-.. versionadded:: 3.3.2
+.. versionadded:: 3.3.3
 
 A FormHelper's values sources define where its rendered elements, such as input-tags, receive their values from.
 
