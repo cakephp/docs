@@ -156,7 +156,7 @@ RequestHandler はクライアントやリクエストについての情報を�
         $this->RequestHandler->addInputType('json', array('json_decode', true));
 
     上記の例は、 JSON によるデータを ``$this->request->data`` の配列にします。
-    ``StdClass`` オブジェクトで取得したい場合は、引数の ``true`` なしになります。
+    ``stdClass`` オブジェクトで取得したい場合は、引数の ``true`` なしになります。
 
 リクエストへの応答
 ==================
