@@ -249,7 +249,7 @@ Behaviors can define logic for how the custom fields they provide are
 marshalled by implementing the ``Cake\ORM\PropertyMarshalInterface``. This
 interface requires a single method to be implemented::
 
-    public function buildMarhshalMap($marshaller, $map, $options)
+    public function buildMarshalMap($marshaller, $map, $options)
     {
         return [
             'custom_behavior_field' => function ($value, $entity) {
