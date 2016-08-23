@@ -1,0 +1,1 @@
+create a folder skeleton for the arabic language translations
