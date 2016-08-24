@@ -257,7 +257,7 @@ personnalisés qu'ils fournissent sont marshalled en implémentant
 ``Cake\ORM\PropertyMarshalInterface``. Cette interface nécessite une méthode
 unique à implémenter::
 
-    public function buildMarhshalMap($marshaller, $map, $options)
+    public function buildMarshalMap($marshaller, $map, $options)
     {
         return [
             'custom_behavior_field' => function ($value, $entity) {
