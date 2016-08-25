@@ -515,6 +515,16 @@ common options shared by all input methods are as follows:
     used to disable/exclude options of an input field, so ``'default' => false``
     would not set any value at all. Instead use ``'default' => 0``.
 
+* ``$options['value']`` Used to set a specific value for the input field. This
+  will override any value that may else be injected from the context, such as
+  Form, Entity or ``request->data`` etc.
+
+  .. note::
+  
+  If you want to set a field to not render its value fetched from
+  context or valuesSource you will need to set ``$options['value']`` to ``''``
+  (instead of setting it to ``null``).
+
 In addition to the above options, you can mixin any HTML attribute you wish to
 use. Any non-special option name will be treated as an HTML attribute, and
 applied to the generated HTML input element.
@@ -527,8 +537,8 @@ applied to the generated HTML input element.
 Options for Select, Checkbox and Radio Inputs
 ---------------------------------------------
 
-* ``$options['value']`` Used in combination with a select-type input (i.e.
-  For types select, date, time, datetime). Set 'value' to the value of the
+* ``$options['value']`` Can also be used in combination with a select-type input
+  (i.e. For types select, date, time, datetime). Set 'value' to the value of the
   item you wish to be selected by default when the input is rendered::
 
     echo $this->Form->time('close_time', [
