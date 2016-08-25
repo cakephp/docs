@@ -521,9 +521,9 @@ common options shared by all input methods are as follows:
 
   .. note::
   
-  If you want to set a field to not render its value fetched from
-  context or valuesSource you will need to set ``$options['value']`` to ``''``
-  (instead of setting it to ``null``).
+    If you want to set a field to not render its value fetched from
+    context or valuesSource you will need to set ``$options['value']`` to ``''``
+    (instead of setting it to ``null``).
 
 In addition to the above options, you can mixin any HTML attribute you wish to
 use. Any non-special option name will be treated as an HTML attribute, and
