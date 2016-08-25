@@ -214,7 +214,7 @@ their own response. We can see both options in our simple middleware::
 
     class TrackingCookieMiddleware
     {
-        function __invoke($request, $response, $next)
+        public function __invoke($request, $response, $next)
         {
             // Calling $next() delegates control to the *next* middleware
             // In your application's queue.
