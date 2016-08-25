@@ -34,13 +34,14 @@ hook method will be called early in the request process, you can use the
     namespace App;
 
     use Cake\Http\BaseApplication;
+    use Cake\Error\Middleware\ErrorHandlerMiddleware;
 
     class Application extends BaseApplication
     {
         public function middleware($middleware)
         {
-            $error = new \Cake\Error\Middleware\ErrorHandlerMiddleware();
-            $middleware->add($error);
+            // Bind the error handler into the middleware queue.
+            $middleware->add(new ErrorHandlerMiddleware());
             return $middleware;
         }
     }
@@ -199,11 +200,8 @@ classes in CakePHP have a few conventions:
   ``LinkMiddleware``.
 * Middleware are expected to implement the middleware protocol.
 
-Middleware Protocol
--------------------
-
 While not a formal interface (yet), Middleware do have a soft-interface or
-protocol. The protocol is as follows:
+'protocol'. The protocol is as follows:
 
 #. Middleware must implement ``__invoke($request, $response, $next)``.
 #. Middleware must return an object implementing the PSR7 ``ResponseInterface``.
@@ -211,29 +209,27 @@ protocol. The protocol is as follows:
 Middleware can return a response either by calling ``$next`` or by creating
 their own response. We can see both options in our simple middleware::
 
-    // In src/Middleware/SimpleMiddleware.php
+    // In src/Middleware/TrackingCookieMiddleware.php
     namespace App\Middleware;
 
-    class SimpleMiddleware
+    class TrackingCookieMiddleware
     {
         function __invoke($request, $response, $next)
         {
-            // If we find /simple/ in the URL return a simple response.
-            if (strpos($request->getUri()->getPath(), '/simple/') !== false) {
-                $body = $response->getBody();
-                $body->write('Thanks!');
-                return $response->withStatus(202)
-                    ->withHeader('Content-Type', 'text/plain')
-                    ->withBody($body);
-            }
-
-            // Calling $next() delegates control to then *next* middleware
+            // Calling $next() delegates control to the *next* middleware
             // In your application's queue.
             $response = $next($request, $response);
 
-            // We could further modify the response before returning it.
+            // When modifying the response, you should do it
+            // *after* calling next.
+            if (!$request->cookie('landing_page')) {
+                $response->cookie([
+                    'name' => 'landing_page',
+                    'value' => $request->here(),
+                    'expire' => '+ 1 year',
+                ]);
+            }
             return $response;
-        }
     }
 
 Now that we've made a very simple middleware, let's attach it to our
@@ -242,14 +238,14 @@ application::
     // In src/Application.php
     namespace App;
 
-    use App\Middleware\SimpleMiddleware;
+    use App\Middleware\TrackingCookieMiddleware;
 
     class Application
     {
         public function middleware($middleware)
         {
             // Add your simple middleware onto the queue
-            $middleware->add(new SimpleMiddleware());
+            $middleware->add(new TrackingCookieMiddleware());
 
             // Add some more middleware onto the queue
 
