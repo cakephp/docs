@@ -537,7 +537,7 @@ applied to the generated HTML input element.
 Options for Select, Checkbox and Radio Inputs
 ---------------------------------------------
 
-* ``$options['value']`` Can also be used in combination with a select-type input
+* ``$options['value']`` may also be used in combination with a select-type input
   (i.e. For types select, date, time, datetime). Set 'value' to the value of the
   item you wish to be selected by default when the input is rendered::
 
