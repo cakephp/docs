@@ -35,8 +35,8 @@ to implement your own caching systems. The built-in caching engines are:
 * ``MemcachedEngine`` Uses the `Memcached <http://php.net/memcached>`_
   extension. It also interfaces with memcache but provides better performance.
 * ``RedisEngine`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
-  extension. Redis provides a fast and persistent cache system similar to
-  memcached, also provides atomic operations.
+  extension (2.2.3 minimum). Redis provides a fast and persistent cache system
+  similar to memcached, also provides atomic operations.
 
 .. versionchanged:: 2.3
     FileEngine is always the default cache engine. In the past a number of people
