@@ -181,8 +181,8 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
 キーを挿入することを忘れないこと。 ::
 
     // テーブルプロバイダーからのルールを使用する
-    $validator->add('title', 'unique', [
-        'rule' => 'uniqueTitle',
+    $validator->add('title', 'custom', [
+        'rule' => 'customTableMethod',
         'provider' => 'table'
     ]);
 
@@ -250,8 +250,8 @@ Localized プラグインは、バリデーションのための国の２文字�
     ]);
 
     // カスタムプロバイダーからのルールを利用する
-    $validator->add('title', 'unique', [
-        'rule' => 'uniqueTitle',
+    $validator->add('title', 'custom', [
+        'rule' => 'customRule',
         'provider' => 'custom',
         'message' => 'タイトルが十分にユニークではありません'
     ]);
