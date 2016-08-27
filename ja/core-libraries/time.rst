@@ -129,7 +129,10 @@ PHP のビルトインの ``DateTime`` クラスで提供されているメソ�
 このメソッドは、オブジェクトを json 形式に変換するときに使われる
 デフォルトのフォーマットをセットします。 ::
 
-    Time::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');
+    Time::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // 可変の DataTime 用
+    FrozenTime::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // 不変の DateTime 用
+    Date::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // 可変の Date 用
+    FrozenDate::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // 不変の Date 用
 
 .. note::
     このメソッドは静的に呼び出されなくてはなりません。
@@ -219,22 +222,28 @@ http://www.icu-project.org/apiref/icu4c/classSimpleDateFormat.html#details.
 `intl.default_locale <http://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale>`_ の指令です。
 しかしながら、このデフォルト値は実行時にも変更できます。 ::
 
-    // Date, FrozenDate, FrozenTime にも同じメソッドがあります。
-    Time::setDefaultLocale('es-ES');
+    Time::setDefaultLocale('es-ES'); // 可変の DateTime 用
+    FrozenTime::setDefaultLocale('es-ES'); // 不変の DateTime 用
+    Date::setDefaultLocale('es-ES'); // 可変の Date 用
+    FrozenDate::setDefaultLocale('es-ES'); // 不変の Date 用
 
 フォーマットメソッドの中で直接異なるローケルが指示されていない限り、今後、
 日時はスペインのフォーマットで表示されます。
 
 同様に、 ``i18nFormat`` を利用することでデフォルトのフォーマット文字列を変更できます。 ::
 
-    // Date, FrozenDate, FrozenTime にも同じメソッドがあります。
-    Time::setToStringFormat(\IntlDateFormatter::SHORT);
+    Time::setToStringFormat(\IntlDateFormatter::SHORT); // 可変の DateTime 用
+    FrozenTime::setToStringFormat(\IntlDateFormatter::SHORT); // 不変の DateTime 用
+    Date::setToStringFormat(\IntlDateFormatter::SHORT); // 可変の Date 用
+    FrozenDate::setToStringFormat(\IntlDateFormatter::SHORT); // 不変の Date 用
 
+    // Date, FrozenDate, FrozenTime にも同じメソッドがあります。
     Time::setToStringFormat([
         \IntlDateFormatter::FULL,
         \IntlDateFormatter::SHORT
     ]);
 
+    // Date, FrozenDate, FrozenTime にも同じメソッドがあります。
     Time::setToStringFormat('yyyy-MM-dd HH:mm:ss');
 
 日付のフォーマット文字列を直接渡すよりも、定数を常に利用することが推奨されています。
