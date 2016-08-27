@@ -9,7 +9,7 @@ indexes easier.
 Installation
 ============
 
-To install the elasticsearch plugin, you can use ``composer``. From your
+To install the ElasticSearch plugin, you can use ``composer``. From your
 application's ROOT directory (where composer.json file is located) run the
 following::
 
@@ -38,7 +38,7 @@ your **config/app.php** file. An example configuration would be::
 Overview
 ========
 
-The elasticsearch plugin makes it easier to interact with an elasticsearch index
+The ElasticSearch plugin makes it easier to interact with an elasticsearch index
 and provides an interface similar to the :doc:`/orm`. To get started you should
 create a ``Type`` object. ``Type`` objects are the "Repository" or table-like
 class in elasticsearch::
@@ -107,7 +107,7 @@ Searching Indexed Documents
 ===========================
 
 After you've indexed some documents you will want to search through them. The
-elasticsearch plugin provides a query builder that allows you to build search
+ElasticSearch plugin provides a query builder that allows you to build search
 queries::
 
     $query = $this->Articles->find()
@@ -243,7 +243,7 @@ will return objects with the correct embedded document classes::
 Getting Type Instances
 ======================
 
-Like the ORM, the elasticsearch plugin provides a factory/registry for getting
+Like the ORM, the ElasticSearch plugin provides a factory/registry for getting
 ``Type`` instances::
 
     use Cake\ElasticSearch\TypeRegistry;
@@ -261,7 +261,7 @@ when you are using mock objects, or modifying a type's dependencies::
 Test Fixtures
 =============
 
-The elasticsearch plugin provides seamless test suite integration. Just like
+The ElasticSearch plugin provides seamless test suite integration. Just like
 database fixtures, you can create test fixtures for elasticsearch. We could
 define a test fixture for our Articles type with the following::
 

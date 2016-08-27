@@ -197,8 +197,8 @@ un provider autre que 'default', assurez-vous de définir la clé ``provider()``
 dans votre règle::
 
     // Utilise une règle à partir du provider de la table
-    $validator->add('title', 'unique', [
-        'rule' => 'validateUnique',
+    $validator->add('title', 'custom', [
+        'rule' => 'customTableMethod',
         'provider' => 'table'
     ]);
 
@@ -267,8 +267,8 @@ validation::
     ]);
 
     // Utilisez une règle à partir d'un provider personnalisé
-    $validator->add('title', 'unique', [
-        'rule' => 'uniqueTitle',
+    $validator->add('title', 'custom', [
+        'rule' => 'customRule',
         'provider' => 'custom',
         'message' => 'The title is not unique enough'
     ]);

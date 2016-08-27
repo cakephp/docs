@@ -127,7 +127,10 @@ Formatting
 
 This method sets the default format used when converting an object to json::
 
-    Time::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');
+    Time::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // For any mutable DateTime
+    FrozenTime::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // For any immutable DateTime
+    Date::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // For any mutable Date
+    FrozenDate::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // For any immutable Date
 
 .. note::
     This method must be called statically.
@@ -219,8 +222,10 @@ The default locale in which dates are displayed when using ``nice``
 `intl.default_locale <http://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale>`_.
 You can, however, modify this default at runtime::
 
-    // The same method exists on Date, FrozenDate, and FrozenTime
-    Time::setDefaultLocale('es-ES');
+    Time::setDefaultLocale('es-ES'); // For any mutable DateTime
+    FrozenTime::setDefaultLocale('es-ES'); // For any immutable DateTime
+    Date::setDefaultLocale('es-ES'); // For any mutable Date
+    FrozenDate::setDefaultLocale('es-ES'); // For any immutable Date
 
 From now on, datetimes will be displayed in the Spanish preferred format unless
 a different locale is specified directly in the formatting method.
@@ -228,14 +233,18 @@ a different locale is specified directly in the formatting method.
 Likewise, it is possible to alter the default formatting string to be used for
 ``i18nFormat``::
 
-    // The same method exists on Date, FrozenDate and FrozenTime
-    Time::setToStringFormat(\IntlDateFormatter::SHORT);
+    Time::setToStringFormat(\IntlDateFormatter::SHORT); // For any mutable DateTime
+    FrozenTime::setToStringFormat(\IntlDateFormatter::SHORT); // For any immutable DateTime
+    Date::setToStringFormat(\IntlDateFormatter::SHORT); // For any mutable Date
+    FrozenDate::setToStringFormat(\IntlDateFormatter::SHORT); // For any immutable Date
 
+    // The same method exists on Date, FrozenDate and FrozenTime
     Time::setToStringFormat([
         \IntlDateFormatter::FULL,
         \IntlDateFormatter::SHORT
     ]);
 
+    // The same method exists on Date, FrozenDate and FrozenTime
     Time::setToStringFormat('yyyy-MM-dd HH:mm:ss');
 
 It is recommended to always use the constants instead of directly passing a date

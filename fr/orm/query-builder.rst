@@ -146,11 +146,14 @@ Récupérer une Liste de Valeurs à Partir d'une Colonne
 Vous pouvez aussi récupérer une liste de clé-valeur à partir d'un résultat d'une
 requête::
 
-    $list = $articles->find('list')->select(['id', 'title']);
+    $list = $articles->find('list');
 
     foreach ($list as $id => $title) {
         echo "$id : $title"
     }
+
+Pour plus d'informations sur la façon de personnaliser les champs utilisés pour
+remplir la liste, consultez la section :ref:`table-find-list`.
 
 Les Requêtes sont des Objets Collection
 ---------------------------------------

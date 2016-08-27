@@ -184,8 +184,8 @@ methods must be static. To use a provider other than 'default', be sure to set
 the ``provider`` key in your rule::
 
     // Use a rule from the table provider
-    $validator->add('title', 'unique', [
-        'rule' => 'validateUnique',
+    $validator->add('title', 'custom', [
+        'rule' => 'customTableMethod',
         'provider' => 'table'
     ]);
 
@@ -253,8 +253,8 @@ callable, including anonymous functions, as validation rules::
     ]);
 
     // Use a rule from a custom provider
-    $validator->add('title', 'unique', [
-        'rule' => 'uniqueTitle',
+    $validator->add('title', 'custom', [
+        'rule' => 'customRule',
         'provider' => 'custom',
         'message' => 'The title is not unique enough'
     ]);
