@@ -33,9 +33,9 @@ CakePHP のキャッシュは、主に :php:class:`Cache` クラスを使用し�
   アトミックな操作を提供します。
 * ``MemcachedEngine`` `Memcached <http://php.net/memcached>`_ 拡張を使用します。
   これも memcache のインターフェースですが、より高いパフォーマンスが得られます。
-* ``RedisEngine`` `phpredis <https://github.com/nicolasff/phpredis>`_ 拡張を
-  使用します。Redis は、memcache と同様に高速で永続化したキャッシュシステムを提供し、
-  アトミックな操作を提供します。
+* ``RedisEngine`` `phpredis <https://github.com/nicolasff/phpredis>`_ 拡張
+  (2.2.3 以上) を使用します。Redis は、memcache と同様に高速で永続化した
+  キャッシュシステムを提供し、アトミックな操作を提供します。
 
 .. versionchanged:: 2.3
 
