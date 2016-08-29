@@ -48,8 +48,8 @@ If the get operation does not find any results a
 either catch this exception yourself, or allow CakePHP to convert it into a 404
 error.
 
-Like ``find()`` get has caching integrated. You can use the ``cache`` option
-when calling ``get()`` to perform read-through caching::
+Like ``find()``, ``get()`` also has caching integrated. You can use the ``cache``
+option when calling ``get()`` to perform read-through caching::
 
     // In a controller or table method.
 
