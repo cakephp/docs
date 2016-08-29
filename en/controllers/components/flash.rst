@@ -85,10 +85,21 @@ The code above will use the warning.ctp element under **plugins/PluginName/src/T
 for rendering the flash message.
 
 .. note::
+By default, CakePHP escapes the content in flash messages for security reasons. If you
+    are using any request or user data in your flash messages those are escaped and therefore safe to be printed.
+    If you want to output HTML, you need to pass in an `escape` param and also adjust the templates to allow disabling escaping when such a param is passed.
 
-    By default, CakePHP does not escape the HTML in flash messages. If you
-    are using any request or user data in your flash messages, you should
-    escape it with :php:func:`h` when formatting your messages.
+HTML in Flash Messages
+======================
+
+.. versionadded:: 3.3.3
+
+It is possible to output HTML in flash messages by using the `'escape'` option key::
+
+    $this->Flash->info('<b>' . h($highlight) . '</b> ' . h($message), ['escape' => false]);
+
+Make sure that you escape the input manually, then. In the above example `$highlight` and `$message` are non-HTML input and therefore escaped.
+
 
 For more information about rendering your flash messages, please refer to the
 :doc:`FlashHelper </views/helpers/flash>` section.
