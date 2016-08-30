@@ -17,7 +17,7 @@ Setting Flash Messages
 FlashComponent provides two ways to set flash messages: its ``__call()`` magic
 method and its ``set()`` method.  To furnish your application with verbosity,
 FlashComponent's ``__call()`` magic method allows you use a method name that
-maps to an element located under the **src/Template/Element/Flash** directory.
+maps to an element located under the ``src/Template/Element/Flash`` directory.
 By convention, camelcased methods will map to the lowercased and underscored
 element name::
 
@@ -81,7 +81,7 @@ set the ``plugin`` parameter. For example::
     // In your Controller
     $this->Flash->warning('My message', ['plugin' => 'PluginName']);
 
-The code above will use the warning.ctp element under ``plugins/PluginName/src/Template/Element/Flash``
+The code above will use the ``warning.ctp`` element under ``plugins/PluginName/src/Template/Element/Flash``
 for rendering the flash message.
 
 .. note::
