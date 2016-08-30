@@ -99,7 +99,7 @@ HTML in Flash Messages
 It is possible to output HTML in flash messages by using the ``'escape'`` option
 key::
 
-    $this->Flash->info(sprintf('<b>%s</b> %s, h($highlight), h($message)), ['escape' => false]);
+    $this->Flash->info(sprintf('<b>%s</b> %s', h($highlight), h($message)), ['escape' => false]);
 
 Make sure that you escape the input manually, then. In the above example
 ``$highlight`` and ``$message`` are non-HTML input and therefore escaped.
