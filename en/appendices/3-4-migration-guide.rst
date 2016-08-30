@@ -16,3 +16,10 @@ PaginatorHelper
 
 * ``PaginatorHelper::numbers()`` now uses an HTML elipsis instead of '...' in
   the default templates.
+
+FormHelper
+==========
+
+* You can now configure the sources which FormHelper reads from. This makes
+  creating GET forms simpler. See :ref:`form-values-from-query-string` for more
+  information.
