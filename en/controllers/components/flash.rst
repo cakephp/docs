@@ -43,9 +43,9 @@ use the ``set()`` method::
 FlashComponent's ``__call()`` and ``set()`` methods optionally take a second
 parameter, an array of options:
 
-* ``key`` Defaults to 'flash'. The array key found under the 'Flash' key in
+* ``key`` Defaults to 'flash'. The array key found under the ``Flash`` key in
   the session.
-* ``element`` Defaults to null, but will automatically be set when using the
+* ``element`` Defaults to ``null``, but will automatically be set when using the
   ``__call()`` magic method. The element name to use for rendering.
 * ``params`` An optional array of keys/values to make available as variables
   within an element.
@@ -81,7 +81,7 @@ set the ``plugin`` parameter. For example::
     // In your Controller
     $this->Flash->warning('My message', ['plugin' => 'PluginName']);
 
-The code above will use the warning.ctp element under **plugins/PluginName/src/Template/Element/Flash**
+The code above will use the warning.ctp element under ``plugins/PluginName/src/Template/Element/Flash``
 for rendering the flash message.
 
 .. note::
@@ -99,10 +99,10 @@ HTML in Flash Messages
 It is possible to output HTML in flash messages by using the ``'escape'`` option
 key::
 
-    $this->Flash->info('<b>' . h($highlight) . '</b> ' . h($message), ['escape' => false]);
+    $this->Flash->info(sprintf('<b>%s</b> %s, h($highlight), h($message)), ['escape' => false]);
 
 Make sure that you escape the input manually, then. In the above example
-`$highlight` and `$message` are non-HTML input and therefore escaped.
+``$highlight`` and ``$message`` are non-HTML input and therefore escaped.
 
 
 For more information about rendering your flash messages, please refer to the
