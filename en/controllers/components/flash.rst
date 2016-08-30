@@ -96,7 +96,7 @@ HTML in Flash Messages
 
 .. versionadded:: 3.3.3
 
-It is possible to output HTML in flash messages by using the `'escape'` option
+It is possible to output HTML in flash messages by using the ``'escape'`` option
 key::
 
     $this->Flash->info('<b>' . h($highlight) . '</b> ' . h($message), ['escape' => false]);
