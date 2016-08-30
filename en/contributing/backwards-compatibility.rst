@@ -38,7 +38,8 @@ Interfaces
 ----------
 
 Outside of major releases, interfaces provided by CakePHP will **not** have any
-existing methods changed and new methods will **not** be added to any existing interfaces.
+existing methods changed and new methods will **not** be added to any existing
+interfaces.
 
 Classes
 -------
@@ -53,11 +54,11 @@ compatibility is ensured.
     classes are **not** stable and do not have any backwards compatibility
     promises.
 
-In minor releases, new methods may be added to classes, and existing methods may
-have new arguments added. Any new arguments will have default values, but if
-you've overidden methods with a differing signature you may see fatal errors.
-Methods that have new arguments added will be documented in the migration guide
-for that release.
+In minor releases (3.x.0), new methods may be added to classes, and existing
+methods may have new arguments added. Any new arguments will have default
+values, but if you've overidden methods with a differing signature you may see
+errors. Methods that have new arguments added will be documented in the
+migration guide for that release.
 
 The following table outlines several use cases and what compatibility you can
 expect from CakePHP:
@@ -77,15 +78,19 @@ expect from CakePHP:
 +-------------------------------+--------------------------+
 | **Extend a class and...**                                |
 +-------------------------------+--------------------------+
-| Override a public property    | Yes                      |
-+-------------------------------+--------------------------+
-| Access a protected property   | No [1]_                  |
+| Call a protected method       | No [1]_                  |
 +-------------------------------+--------------------------+
 | Override a protected property | No [1]_                  |
 +-------------------------------+--------------------------+
 | Override a protected method   | No [1]_                  |
 +-------------------------------+--------------------------+
-| Call a protected method       | No [1]_                  |
+| Access a protected property   | No [1]_                  |
++-------------------------------+--------------------------+
+| Call a public method          | Yes                      |
++-------------------------------+--------------------------+
+| Override a public method      | Yes [1]_                 |
++-------------------------------+--------------------------+
+| Override a public property    | Yes                      |
 +-------------------------------+--------------------------+
 | Add a public property         | No                       |
 +-------------------------------+--------------------------+
@@ -141,13 +146,16 @@ In a minor release you can:
 +-------------------------------+--------------------------+
 | Add a protected method        | Yes                      |
 +-------------------------------+--------------------------+
-| Move to parent class          | Yes                      |
+| Move member to parent class   | Yes                      |
 +-------------------------------+--------------------------+
 | Remove a protected method     | Yes [3]_                 |
 +-------------------------------+--------------------------+
 | Reduce visibility             | No                       |
 +-------------------------------+--------------------------+
 | Change method name            | Yes [2]_                 |
++-------------------------------+--------------------------+
+| Add default value to          | No                       |
+| existing argument             |                          |
 +-------------------------------+--------------------------+
 | Add argument with             | Yes                      |
 | default value                 |                          |
