@@ -85,7 +85,7 @@ The code above will use the warning.ctp element under **plugins/PluginName/src/T
 for rendering the flash message.
 
 .. note::
-By default, CakePHP escapes the content in flash messages for security
+    By default, CakePHP escapes the content in flash messages for security
     reasons. If you are using any request or user data in your flash messages
     those are escaped and therefore safe to be printed. If you want to output
     HTML, you need to pass in an `escape` param and also adjust the templates to
