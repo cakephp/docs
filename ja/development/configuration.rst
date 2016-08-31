@@ -460,7 +460,7 @@ Configure クラスの主なゴールは、中央集権化された変数を維�
 ..
     Writing Configuration data
 
-Configuration データの書き込み
+設定データの書き込み
 --------------------------
 
 .. php:staticmethod:: write($key, $value)
@@ -508,7 +508,7 @@ Configuration データの書き込み
 ..
     Reading Configuration Data
 
-Configuration データの読み込み
+設定データの読み込み
 ---------------------------
 
 .. php:staticmethod:: read($key = null)
@@ -519,8 +519,8 @@ Configuration データの読み込み
     returned. Using our examples from write() above, we can read that
     data back::
 
-よくアプリケーションから設定データを読み込みます。
-CakePHP の重要なデバッグ値を初期化します。
+アプリケーションから設定データを読み込むために利用されます。
+引数のデフォルト値はCakePHPにおいて重要なデバッグ用の値です。
 もしキーが渡されれば、そのデータが返却されます。
 上記 write() の例を取り上げると、以下のようにデータを読み込みます。
 
@@ -584,37 +584,62 @@ CakePHP の重要なデバッグ値を初期化します。
 
     $exists = Configure::check('Company.name');
 
-Deleting Configuration Data
+..
+    Deleting Configuration Data
+
+設定データの削除
 ---------------------------
 
 .. php:staticmethod:: delete($key)
 
-Used to delete information from the application's configuration::
+..
+    Used to delete information from the application's configuration::
+
+アプリケーションの設定から情報を削除するために利用されます。
+::
 
     Configure::delete('Company.name');
 
-Reading & Deleting Configuration Data
+..
+    Reading & Deleting Configuration Data
+
+設定データの読み書き
 -------------------------------------
 
 .. php:staticmethod:: consume($key)
 
-Read and delete a key from Configure. This is useful when you want to
-combine reading and deleting values in a single operation.
+..
+    Read and delete a key from Configure. This is useful when you want to
+    combine reading and deleting values in a single operation.
 
+設定からキーの読み込みと削除を行います。
+もしあなたが値の読み込みと削除を単一の動作で組み合わせたい時に便利です。
 
+..
+    Reading and writing configuration files
 
-Reading and writing configuration files
+設定ファイルの読み書き
 =======================================
 
 .. php:staticmethod:: config($name, $engine)
 
-CakePHP comes with two built-in configuration file engines.
-:php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` is able to read PHP config
-files, in the same format that Configure has historically read.
-:php:class:`Cake\\Core\\Configure\\Engine\\IniConfig` is able to read ini config
-files.  See the `PHP documentation <http://php.net/parse_ini_file>`_ for more
-information on the specifics of ini files.  To use a core config engine, you'll
-need to attach it to Configure using :php:meth:`Configure::config()`::
+..
+    CakePHP comes with two built-in configuration file engines.
+    :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` is able to read PHP config
+    files, in the same format that Configure has historically read.
+    :php:class:`Cake\\Core\\Configure\\Engine\\IniConfig` is able to read ini config
+    files.  See the `PHP documentation <http://php.net/parse_ini_file>`_ for more
+    information on the specifics of ini files.  To use a core config engine, you'll
+    need to attach it to Configure using :php:meth:`Configure::config()`::
+
+CakePHP は 2 つの組み込まれた設定ファイルエンジンを搭載しています。
+:php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` は PHP の設定ファイルを読み込むことができ、
+同じフォーマット下にて設定は歴史的に読み込まれてきました。
+:php:class:`Cake\\Core\\Configure\\Engine\\IniConfig` は ini 設定ファイルを読み込めます。
+により多くの特別な ini ファイルの情報は `PHP documentation <http://php.net/parse_ini_file>` を参照してください。
+コアの設定エンジンを利用するにあたり、  :php:meth:`Configure::config()`:: を利用する必要があります。
+
+::
 
     use Cake\Core\Configure\Engine\PhpConfig;
 
