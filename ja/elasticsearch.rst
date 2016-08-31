@@ -8,7 +8,7 @@ ElasticSearch プラグインは、`elasticsearch <https://www.elastic.co/produc
 インストール
 ============
 
-elasticsearch プラグインをインストールするには、 ``composer`` が利用できます。(composer.json
+ElasticSearch プラグインをインストールするには、 ``composer`` が利用できます。(composer.json
 ファイルが置かれている) アプリケーションの ROOT ディレクトリから次のコマンドを実行します。 ::
 
     php composer.phar require cakephp/elastic-search "@stable"
@@ -20,9 +20,9 @@ elasticsearch プラグインをインストールするには、 ``composer`` �
 追加で 'elastic' のデータソースの接続を **config/app.php** ファイルに設定する必要があります。
 設定例は以下のようになります。 ::
 
-    // in config/app.php
+    // config/app.php の中で
     'Datasources' => [
-        // other datasources
+        // 他のデータソース
         'elastic' => [
             'className' => 'Cake\ElasticSearch\Datasource\Connection',
             'driver' => 'Cake\ElasticSearch\Datasource\Connection',
@@ -35,12 +35,12 @@ elasticsearch プラグインをインストールするには、 ``composer`` �
 概要
 ====
 
-elasticsearch プラグインは elasticsearch インデックスと作用することを簡単にし、
+ElasticSearch プラグインは elasticsearch インデックスと作用することを簡単にし、
 :doc:`/orm` に似たインタフェースを提供します。まず最初に ``Type`` オブジェクトを
 作成しなければいけません。 ``Type`` オブジェクトは elasticsearch 内では "Repository"
 もしくは Table のようなクラスです。 ::
 
-    // in src/Model/Type/ArticlesType.php
+    // src/Model/Type/ArticlesType.php の中で
     namespace App\Model\Type;
 
     use Cake\ElasticSearch\Type;
@@ -72,7 +72,7 @@ elasticsearch プラグインは elasticsearch インデックスと作用する
 
 インデックスされた articles の基本的なビューを作成する必要があります。 ::
 
-    // in src/Template/Articles/add.ctp
+    // src/Template/Articles/add.ctp の中で
     <?= $this->Form->create($article) ?>
     <?= $this->Form->input('title') ?>
     <?= $this->Form->input('body') ?>
@@ -84,7 +84,7 @@ elasticsearch プラグインは elasticsearch インデックスと作用する
 Document オブジェクト
 =====================
 
-ORMと同様に、Elasticsearch ODM は :doc:`/orm/entities` のようなクラスを使用しています。
+ORM と同様に、Elasticsearch ODM は :doc:`/orm/entities` のようなクラスを使用しています。
 継承しなければならない基底クラスは ``Cake\ElasticSearch\Document`` です。
 Document クラスは、アプリケーションやプラグイン内の ``Model\Document`` 名前空間に配置します。 ::
 
@@ -102,7 +102,7 @@ elasticsearch からのデータで Document を動作させるコンストラ�
 ==================================
 
 いくつかのドキュメントをインデックスに登録した後、あなたはそれらを検索したいと思うでしょう。
-elasticsearch プラグインを使用すると、検索クエリを構築するためのクエリビルダーを提供します。 ::
+ElasticSearch プラグインを使用すると、検索クエリを構築するためのクエリビルダーを提供します。 ::
 
     $query = $this->Articles->find()
         ->where([
@@ -221,7 +221,7 @@ elasticsearch にいくつかのデータをインデックスする準備がで
 プロパティ名と一致していないクラス名を使用する埋め込みコメントを得るためには、カスタムクラス名を
 設定するための ``entityClass`` オプションを使用することができます。
 
-埋め込みドキュメントをセットアップしたら、``find()`` と ``get`` の結果は
+埋め込みドキュメントをセットアップしたら、 ``find()`` と ``get`` の結果は
 正しい埋め込みドキュメントクラスのオブジェクトを返します。 ::
 
     $article = $this->Articles->get($id);
@@ -234,7 +234,7 @@ elasticsearch にいくつかのデータをインデックスする準備がで
 Type インスタンスの取得
 =======================
 
-ORM と同様に、elasticsearch プラグインは ``Type`` のインスタンスを取得するための
+ORM と同様に、ElasticSearch プラグインは ``Type`` のインスタンスを取得するための
 ファクトリ/レジストリを提供します。 ::
 
     use Cake\ElasticSearch\TypeRegistry;
@@ -252,9 +252,9 @@ ORM と同様に、elasticsearch プラグインは ``Type`` のインスタン�
 テストフィクスチャ
 ==================
 
-elasticsearch プラグインは、シームレスなテストスイートの統合を提供します。ちょうどデータベースの
+ElasticSearch プラグインは、シームレスなテストスイートの統合を提供します。ちょうどデータベースの
 フィクスチャのように、elasticsearch のためのテストフィクスチャを作成することができます。
-次のように Articles タイプのテストフィクスチャを定義することができます。::
+次のように Articles タイプのテストフィクスチャを定義することができます。 ::
 
     namespace App\Test\Fixture;
 
@@ -302,7 +302,7 @@ elasticsearch プラグインは、シームレスなテストスイートの統
 
 ``schema`` プロパティは `ネイティブ elasticsearch マッピングフォーマット
 <https://www.elastic.co/guide/en/elasticsearch/reference/1.5/mapping.html>`_ を使用します。
-安全にタイプ名およびトップレベルの `` properties``キーを省略することができます。
+安全にタイプ名およびトップレベルの ``properties`` キーを省略することができます。
 フィクスチャが作成されたら、あなたのテストの ``fixtures`` プロパティに含めることによって、
 あなたのテストケースで使用することができます。 ::
 

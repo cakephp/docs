@@ -140,11 +140,14 @@ Getting A List Of Values From A Column
 
 You can also get a key-value list out of a query result::
 
-    $list = $articles->find('list')->select(['id', 'title']);
+    $list = $articles->find('list');
 
     foreach ($list as $id => $title) {
         echo "$id : $title"
     }
+
+For more information on how to customize the fields used for populating the list
+refer to :ref:`table-find-list` section.
 
 Queries Are Collection Objects
 ------------------------------

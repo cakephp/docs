@@ -137,11 +137,14 @@ SQL が出力されます。 ::
 
 クエリの結果から key-value リストを得ることもできます。 ::
 
-    $list = $articles->find('list')->select(['id', 'title']);
+    $list = $articles->find('list');
 
     foreach ($list as $id => $title) {
         echo "$id : $title"
     }
+
+リストを生成するために使用するフィールドのカスタマイズの方法の詳しい情報は、
+:ref:`table-find-list` セクションを参照してください。
 
 クエリは Collection オブジェクトである
 ----------------------------------------

@@ -543,6 +543,17 @@ répétitions, les options communes partagées par toutes les méthodes input so
     champ, ainsi ``'default' => false`` ne définirait aucune valeur. A la place,
     utilisez ``'default' => 0``.
 
+* ``$options['value']`` Utilisée pour définir une valeur spécifique pour le
+  champ d'input. Ceci va surcharger toute valeur qui aurait pu être injectée à
+  partir du contexte, comme Form, Entity or ``request->data`` etc.
+
+  .. note::
+
+    Si vous souhaitez définir un champ pour qu'il ne rende pas sa valeur
+    récupérée à partir du contexte ou de la source de valeurs, vous devrez
+    définir ``$options['value']`` en ``''`` (au lieu de le définir avec
+    ``null``).
+
 En plus des options ci-dessus, vous pouvez mixer n'importe quel attribut HTML
 que vous souhaitez utiliser. Tout nom d'option non-special sera
 traité comme un attribut HTML, et appliqué à l'élément HTML input généré.
@@ -558,10 +569,10 @@ convection.
 Les Options pour Select, Checkbox et Inputs Radio
 -------------------------------------------------
 
-* ``$options['value']`` Utilisé en combinaison avec un input de type
-  select (ex. Pour les types select, date, heure, datetime). Définissez
-  'selected' pour définir l'élément que vous souhaiteriez définir par défaut
-  au rendu de l'input::
+* ``$options['value']`` Peut aussi être utilisée en combinaison avec un input
+  de type select (ex. Pour les types select, date, heure, datetime). Définissez
+  'selected' pour définir l'élément que vous souhaiteriez définir par défaut au
+  rendu de l'input::
 
     echo $this->Form->time('close_time', [
         'value' => '13:30:00'

@@ -1,21 +1,20 @@
 Debug Kit
 #########
 
-DebugKit é um plugin suportado pelo time principal que oferece uma barra de
-ferramentas para ajudar a fazer a depuração de aplicações do CakePHP mais
-facilmente.
+DebugKit é um plugin suportado pelo time principal do CakePHP que oferece uma
+barra de ferramentas para auxiliar na depuração de aplicações do CakePHP.
 
 Instalação
 ==========
 
-Por padrão o DebugKit é instalado com com o esqueleto padrão da aplicação. Se
-você o removeu e gostaria de reinstalá-lo, você pode fazê-lo ao executar o
-seguinte comando a partir do diretório raiz da aplicação (onde o arquivo
-composer.json está localizado)::
+Por padrão o DebugKit é instalado com o esqueleto padrão da aplicação. Se
+você o removeu e gostaria de reinstalá-lo, você pode executar o seguinte comando
+a partir do diretório raiz da aplicação
+(onde o arquivo composer.json está localizado)::
 
     php composer.phar require --dev cakephp/debug_kit "~3.0"
 
-Then, you need to enable the plugin by executing the following line::
+Então, você precisará habilitar o plugin ao executar o seguinte comando::
 
     bin/cake plugin load DebugKit
 
@@ -23,29 +22,48 @@ Armazenamento do DebugKit
 =========================
 
 Por padrão, o DebugKit usa um pequeno banco de dados SQLite no diretório
-``/tmp`` de sua aplicação para armazenar os dados do painel. Se você quizesse
-que o DebugKit armazenasse seus dados em outro lugar, você deve definir uma
-conexão ``debug_kit``.
+``/tmp`` de sua aplicação para armazenar os dados referentes ao painel
+de informações. Se você quiser que o DebugKit armazene seus dados em outro
+lugar, é necessário configurar uma nova conexão com o nome ``debug_kit`` .
 
-Configuração doe banco de dados
--------------------------------
+Configuração do banco de dados
+------------------------------
 
-Por padrão, o DebugKit armazenará os dados do painel em um banco de dados SQLite
-no diretório ``/tmp`` de sua aplicação. Se você não puder instalar a extensão
-do PHP pdo_sqlite, você pode configurar o DebugKit para usar um banco de dados
-diferente ao definir uma conexão ``debug_kit`` em seu arquivo
-**config/app.php**.
+Como informado anteriormente, por padrão, o DebugKit armazenará os dados do
+painel em um banco de dados SQLite no diretório ``/tmp`` de sua aplicação. Se
+você não puder instalar a extensão pdo_sqlite do PHP, você pode configurar o
+DebugKit para usar um banco de dados diferente ao definir uma conexão
+``debug_kit`` em seu arquivo **config/app.php**. Por exemplo::
+
+        /**
+         * A conexão debug_kit armazena meta-dados do DebugKit.
+         */
+        'debug_kit' => [
+            'className' => 'Cake\Database\Connection',
+            'driver' => 'Cake\Database\Driver\Mysql',
+            'persistent' => false,
+            'host' => 'localhost',
+            //'port' => 'nonstandard_port_number',
+            'username' => 'dbusername',    // Your DB username here
+            'password' => 'dbpassword',    // Your DB password here
+            'database' => 'debug_kit',
+            'encoding' => 'utf8',
+            'timezone' => 'UTC',
+            'cacheMetadata' => true,
+            'quoteIdentifiers' => false,
+            //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
+        ],
 
 Uso da barra de ferramentas
 ===========================
 
-A Barra de Ferramentas DebugKit é composta por vários painéis, que são mostrados
-ao clicar no ícone do CakePHP no canto inferior direito da janela do seu
-navegador. Uma vez que a barra de ferramentas é aberta, você deve ver uma série
-de botões. Cada um desses botões expande-se em um painel de informações
+A barra de ferramentas do DebugKit é composta por vários painéis, que são
+exibidos ao clicar no ícone do CakePHP no canto inferior direito da janela do
+seu navegador. Uma vez que a barra de ferramentas é aberta, você deverá ver uma
+série de botões. Cada um desses botões se expande em um painel de informações
 relacionadas.
 
-Cada painel permite que você olhar para um aspecto diferente da sua aplicação:
+Cada painel permite a você observar aspectos diferentes da sua aplicação:
 
 * **Cache** Exibe o uso de cache durante uma solicitação e limpa caches.
 * **Environment** Exibe variáveis de ambiente relacionadas com PHP + CakePHP.
@@ -65,24 +83,24 @@ Cada painel permite que você olhar para um aspecto diferente da sua aplicação
 
 Tipicamente, um painel manipula a recolha e apresentação de um único tipo
 de informações como logs ou informações de requisições. Você pode optar por
-visualizar painéis padrão da barra de ferramentas ou adicionar seus próprios
+visualizar os painéis padrões da barra de ferramentas ou adicionar seus próprios
 painéis personalizados.
 
 Usando o painel History
 =======================
 
-O painel History é uma das mais frequentemente confundidas características do
-DebugKit. Ele oferece uma forma de visualizar os dados da barra de ferramentas
-de requisições anteriores, incluindo erros e redirecionamentos.
+O painel History é uma das características mais frequentemente confundidas do
+DebugKit. Ele oferece uma forma de visualizar os dados de requisições
+anteriores na barra de ferramentas, incluindo erros e redirecionamentos.
 
 .. figure:: /_static/img/debug-kit/history-panel.png
     :alt: Screenshot do painel History no DebugKit.
 
 Como você pode ver, o painel contém uma lista de requisições. Na esquerda você
-pode ver um ponto marcando a requisição ativa. Clicar em quaisquer dados de
-requisição vai carregar os dados do painel para aquela requisição. Quando os
-dados são carregados, os títulos do painel vão sofrer uma transição para indicar
-que dados alternativos foram carregados.
+pode ver um ponto marcando a requisição ativa. Clicar em qualquer requisição vai
+carregar os dados referentes a mesma no painel. Quando os dados são carregados,
+os títulos do painel vão sofrer uma transição para indicar que informações
+alternativos foram carregados.
 
 .. only:: html or epub
 
@@ -92,7 +110,7 @@ que dados alternativos foram carregados.
 Desenvolvendo seus próprios painéis
 ===================================
 
-Você pode criar seus próprios painéis customizados para o DebugKit para ajudar
+Você pode criar seus próprios painéis customizados do DebugKit para ajudar
 na depuração de suas aplicações.
 
 Criando uma Panel Class
@@ -100,7 +118,7 @@ Criando uma Panel Class
 
 Panel Classes precisam ser colocadas no diretório **src/Panel**. O
 nome do arquivo deve combinar com o nome da classe, então a classe
-``MyCustomPanel`` deveria ter o nome de arquivo
+``MyCustomPanel`` deveria remeter ao nome de arquivo
 **src/Panel/MyCustomPanel.php**::
 
     namespace App\Panel;
@@ -125,7 +143,7 @@ Por padrão objetos do painel possuem dois callbacks, permitindo-lhes acoplar-se
 na requisição atual. Painéis inscrevem-se aos eventos ``Controller.initialize``
 e ``Controller.shutdown``. Se o seu painel precisa inscrever-se a eventos
 adicionais, você pode usar o método ``implementedEvents`` para definir todos os
-eventos que o seu painel possa estar interessado.
+eventos aos quais o seu painel possa precisar estar inscrito.
 
 Você deveria estudar os painéis nativos para absorver alguns exemplos de como
 construir painéis.
@@ -135,14 +153,15 @@ Elementos do painel
 
 Cada painel deve ter um elemento view que renderiza o conteúdo do mesmo.
 O nome do elemento deve ser sublinhado e flexionado a partir do nome da classe.
-Por exemplo ``SessionPanel`` possui um elemento nomeado **session_panel.ctp**, e
-SqllogPanel possui um elemento nomeado **sqllog_panel.ctp**. Estes elementos
-devem estar localizados na raiz do seu diretório **src/Template/Element**.
+Por exemplo ``SessionPanel`` deve possuir um elemento nomeado
+**session_panel.ctp**, e SqllogPanel deve possuir um elemento nomeado
+**sqllog_panel.ctp**. Estes elementos devem estar localizados na raiz do seu
+diretório **src/Template/Element**.
 
 Títulos personalizados e Elementos
 ----------------------------------
 
-Os painéis devem pegar o seu título e nome do elemento por convenção. No
+Os painéis devem relacionar o seu título e o nome do elemento por convenção. No
 entanto, se você precisa escolher um nome de elemento personalizado ou título,
 você pode definir métodos para customizar o comportamento do seu painel:
 
@@ -150,12 +169,28 @@ você pode definir métodos para customizar o comportamento do seu painel:
 - ``elementName()`` - Configure qual elemento deve ser utilizada para um
   determinado painel.
 
+Métodos de captura
+------------------
+
+Você também pode implementar os seguintes métodos para customizar como o seu
+painel se comporta e se aparenta:
+
+* ``shutdown(Event $event)`` Esse método coleta e prepara os dados para o
+  painel. Os dados são geralmente armazenados em ``$this->_data``.
+* ``summary()`` Este método retorna uma *string* de dados resumidos para serem
+  exibidos na *toolbar*, mesmo quando um painel está minimizado. Frequentemente,
+  é um contador ou um pequeno resumo de informações.
+* ``data()`` Este método retorna os dados do painel que serão usados como
+  contexto para o elemento. Você pode manipular os dados coletados no método
+  ``shutdown()``. Esse método **deve** retornar dados que podem ser
+  serializados.
+
 Painéis em outros plugins
 -------------------------
 
-Painéis disponibilizados por :doc:`/plugins` funcionam quase que totalmente
-como outros plugins, com uma pequena diferença: Você deve definir
-``public $plugin`` para ser o nome do diretório do plugin, com isso os elementos
+Painéis disponibilizados por :doc:`/plugins` funcionam quase que totalmente como
+outros plugins, com uma pequena diferença: Você deve definir ``public $plugin``
+como o nome do diretório do plugin, com isso os elementos
 do painel poderão ser encontrados no momento de renderização::
 
     namespace MyPlugin\Panel;
