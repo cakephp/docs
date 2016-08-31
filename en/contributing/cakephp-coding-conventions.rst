@@ -18,6 +18,13 @@ Adding New Features
 No new features should be added, without having their own tests – which
 should be passed before committing them to the repository.
 
+
+IDE Setup
+=========
+
+Please make sure your IDE is set up to "trim right" on whitespaces.
+There should be no trailing spaces per line.
+
 Indentation
 ===========
 
