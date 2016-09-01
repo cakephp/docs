@@ -41,9 +41,6 @@ expliquent la stabilité que vous attendez.
 Interfaces
 ----------
 
-Outside of major releases, interfaces provided by CakePHP will **not** have any
-existing methods changed and new methods will **not** be added to any existing interfaces.
-
 En-dehors des versions majeures, les interfaces fournies par CakePHP **ne**
 vont **pas** avoir de méthodes existantes changées et les nouvelles méthodes
 **ne** seront pas ajoutées aux interfaces existantes.
@@ -58,21 +55,22 @@ versions majeures, la compatibilité rétroactive est assurée.
 .. note::
 
     Certaines classes dans CakePHP sont marquées avec la balise de doc
-    ``@internal`` de l'API. Ces classes **ne** sont **pas** stables et ne
+    ``@internal`` de l'API. Ces classes **ne** sont **pas** stables et
     n'assurent pas forcément de compatibilité rétroactive.
 
-Dans les versions mineures, les nouvelles méthodes peuvent être ajoutées aux
-classes, et les méthodes existantes peuvent avoir de nouveaux arguments
-ajoutés. Tout argument nouveau aura des valeurs par défaut, mais si vous
-surchargez des méthodes avec une signature différente, vous verrez peut-être
-des erreurs fatales. Les méthodes qui ont des nouveaux arguments ajoutés seront
-documentés dans le guide de migration pour cette version.
+Dans les versions mineures (3.x.0), les nouvelles méthodes peuvent être
+ajoutées aux classes, et les méthodes existantes peuvent avoir de nouveaux
+arguments ajoutés. Tout argument nouveau aura des valeurs par défaut, mais si
+vous surchargez des méthodes avec une signature différente, vous verrez
+peut-être des erreurs fatales. Les méthodes qui ont des nouveaux arguments
+ajoutés seront documentés dans le guide de migration pour cette version.
 
 La table suivante souligne plusieurs cas d'utilisations et la compatibilité
 que vous pouvez attendre de CakePHP:
 
 +-------------------------------+--------------------------+
-| Si vous...                    | Backwards compatibility? |
+| Si vous...                    | Compatibilité            |
+|                               | rétroactive?             |
 +===============================+==========================+
 | Typehint sur une classe       | Oui                      |
 +-------------------------------+--------------------------+
@@ -80,35 +78,40 @@ que vous pouvez attendre de CakePHP:
 +-------------------------------+--------------------------+
 | Etendre la classe             | Oui                      |
 +-------------------------------+--------------------------+
-| Access a public property      | Oui                      |
+| Accès à une propriété publique| Oui                      |
 +-------------------------------+--------------------------+
 | Appel d'une méthode publique  | Oui                      |
 +-------------------------------+--------------------------+
 | **Etendre une classe et...**                             |
 +-------------------------------+--------------------------+
+| Appel d'une méthode protégée  | Non [1]_                  |
++-------------------------------+--------------------------+
+| Surcharger une propriété      | Non [1]_                  |
+| protégée                      |                          |
++-------------------------------+--------------------------+
+| Surcharger une méthode        | Non [1]_                  |
+| protégée                      |                          |
++-------------------------------+--------------------------+
+| Accéder à une propriété       | Non [1]_                  |
+| protégée                      |                          |
++-------------------------------+--------------------------+
+| Appel d'une méthode publique  | Oui                      |
++-------------------------------+--------------------------+
+| Surcharger une méthode        | Oui [1]_                 |
+| publique                      |                          |
++-------------------------------+--------------------------+
 | Surcharger une propriété      | Oui                      |
 | publique                      |                          |
 +-------------------------------+--------------------------+
-| Accéder à une propriété       | Non [1]_                 |
-| protégée                      |                          |
+| Ajouter une propriété publique| Non                       |
 +-------------------------------+--------------------------+
-| Surcharger une propriété      | Non [1]_                 |
-| protégée                      |                          |
+| Ajouter une méthode publique  | Non                       |
 +-------------------------------+--------------------------+
-| Surcharger une méthode        | Non [1]_                 |
-| protégée                      |                          |
-+-------------------------------+--------------------------+
-| Apple d'une méthode protégée  | Non [1]_                 |
-+-------------------------------+--------------------------+
-| Ajouter une propriété publique| Non                      |
-+-------------------------------+--------------------------+
-| Ajouter une méthode publique  | Non                      |
-+-------------------------------+--------------------------+
-| Ajouter un argument           | Non [1]_                 |
-| pour une méthode qui surcharge|                          |
+| Ajouter un argument à une     | Non [1]_                  |
+| méthode surchargée            |                          |
 +-------------------------------+--------------------------+
 | Ajouter un argument par défaut| Oui                      |
-| pour une méthode existante    |                          |
+| à une méthode existante       |                          |
 +-------------------------------+--------------------------+
 
 Travailler avec CakePHP
@@ -154,13 +157,17 @@ Dans une version mineure, vous pouvez:
 +-------------------------------+--------------------------+
 | Ajouter une méthode protégée  | Oui                      |
 +-------------------------------+--------------------------+
-| Déplacer une classe parente   | Oui                      |
+| Déplacer un membre vers la    | Oui                      |
+| classe parente                |                          |
 +-------------------------------+--------------------------+
 | Retirer une méthode protégée  | Oui [3]_                 |
 +-------------------------------+--------------------------+
 | Réduire la visibilité         | Non                      |
 +-------------------------------+--------------------------+
 | Changer le nom de méthode     | Oui [2]_                 |
++-------------------------------+--------------------------+
+| Ajouter une valeur par défaut | Non                      |
+| à un argument existant        |                          |
 +-------------------------------+--------------------------+
 | Ajouter un argument avec la   | Oui                      |
 | valeur par défaut             |                          |

@@ -6,14 +6,15 @@ to us. That's why we only break compatibility at major release milestones.
 You might be familiar with `semantic versioning <http://semver.org/>`_, which is
 the general guideline we use on all CakePHP projects. In short, semantic
 versioning means that only major releases (such as 2.0, 3.0, 4.0) can break
-backwards compatibility. Minor releases (such as 2.1, 3.1, 3.2) may introduce new
-features, but are not allowed to break compatibility. Bug fix releases (such as 2.1.2,
-3.0.1) do not add new features, but fix bugs or enhance performance only.
+backwards compatibility. Minor releases (such as 2.1, 3.1, 3.2) may introduce
+new features, but are not allowed to break compatibility. Bug fix releases
+(such as 2.1.2, 3.0.1) do not add new features, but fix bugs or enhance
+performance only.
 
 .. note::
 
-    CakePHP started following semantic versioning in 2.0.0. These
-    rules do not apply to 1.x.
+    CakePHP started following semantic versioning in 2.0.0. These rules do not
+    apply to 1.x.
 
 To clarify what changes you can expect in each release tier we have more
 detailed information for developers using CakePHP, and for developers working on
@@ -107,7 +108,7 @@ Working on CakePHP
 ==================
 
 If you are helping make CakePHP even better please keep the following guidelines
-in mind when adding/changing functionality: 
+in mind when adding/changing functionality:
 
 In a minor release you can:
 
