@@ -330,13 +330,14 @@ Then create the ContactManager plugin routes. Put the following into
 **plugins/ContactManager/config/routes.php**::
 
     <?php
+    use Cake\Routing\Route\DashedRoute;
     use Cake\Routing\Router;
 
     Router::plugin(
         'ContactManager',
         ['path' => '/contact-manager'],
         function ($routes) {
-            $routes->fallbacks('DashedRoute');
+            $routes->fallbacks(DashedRoute::class);
         }
     );
 
