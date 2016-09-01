@@ -103,6 +103,9 @@
     margin-bottom: 5px;
     text-align: center;
 }
+.offline-download ul {
+    margin-left: 0;
+}
 .offline-download li {
     display: inline-block;
     list-style: none;
