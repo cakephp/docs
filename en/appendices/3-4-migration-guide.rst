@@ -4,6 +4,20 @@
 CakePHP 3.4 is an API compatible upgrade from 3.3. This page outlines the
 changes and improvements made in 3.4.
 
+Deprecations
+============
+
+* The public properties on ``Cake\Event\Event`` are deprecated, new methods have
+  been added to read/write the relevant properties.
+
+Event
+=====
+
+* ``Event::data()`` was added.
+* ``Event::setData()`` was added.
+* ``Event::result()`` was added.
+* ``Event::setResult()`` was added.
+
 
 I18n
 ====
