@@ -24,8 +24,8 @@ IDE Setup
 Please make sure your IDE is set up to "trim right" on whitespaces.
 There should be no trailing spaces per line.
 
-Most modern IDEs also support an ``.editorconfig`` file. The CakePHP app skeleton ships
-with it by default. It already contains best practise defaults.
+Most modern IDEs also support an ``.editorconfig`` file. The CakePHP app
+skeleton ships with it by default. It already contains best practise defaults.
 
 Indentation
 ===========

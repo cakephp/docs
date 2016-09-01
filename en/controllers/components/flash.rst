@@ -81,15 +81,17 @@ set the ``plugin`` parameter. For example::
     // In your Controller
     $this->Flash->warning('My message', ['plugin' => 'PluginName']);
 
-The code above will use the ``warning.ctp`` element under ``plugins/PluginName/src/Template/Element/Flash``
-for rendering the flash message.
+The code above will use the ``warning.ctp`` element under
+``plugins/PluginName/src/Template/Element/Flash`` for rendering the flash
+message.
 
 .. note::
+
     By default, CakePHP escapes the content in flash messages for security
     reasons. If you are using any request or user data in your flash messages
     those are escaped and therefore safe to be printed. If you want to output
-    HTML, you need to pass in an ``escape`` param and also adjust the templates to
-    allow disabling escaping when such a param is passed.
+    HTML, you need to pass in an ``escape`` param and also adjust the templates
+    to allow disabling escaping when such a param is passed.
 
 HTML in Flash Messages
 ======================
@@ -103,7 +105,6 @@ key::
 
 Make sure that you escape the input manually, then. In the above example
 ``$highlight`` and ``$message`` are non-HTML input and therefore escaped.
-
 
 For more information about rendering your flash messages, please refer to the
 :doc:`FlashHelper </views/helpers/flash>` section.

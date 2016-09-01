@@ -18,6 +18,16 @@ Ajout de Nouvelles Fonctionnalités
 Aucune nouvelle fonctionnalité ne devrait être ajoutée, sans avoir fait ses
 propres tests - qui doivent être validés avant de les committer au dépôt.
 
+Configuration de l'IDE
+======================
+
+Merci de vous assurer que votre IDE est configuré avec "trim right" pour les
+espaces vides. Il ne doit pas y a voir d'espaces à la fin des lignes.
+
+La plupart des IDE modernes supporte aussi un fichier ``.editorconfig``. Le
+squelette d'application CakePHP est fourni avec par défaut. Il contient déjà
+les meilleurs pratiques par défaut.
+
 Indentation
 ===========
 
