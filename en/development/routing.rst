@@ -119,8 +119,10 @@ routes. This method defaults to the ``/`` scope. To create a scope and connect
 some routes we'll use the ``scope()`` method::
 
     // In config/routes.php
+    use Cake\Routing\Route\DashedRoute;
+    
     Router::scope('/', function ($routes) {
-        $routes->fallbacks('DashedRoute');
+        $routes->fallbacks(DashedRoute::class);
     });
 
 The ``connect()`` method takes up to three parameters: the URL template you wish
@@ -241,10 +243,12 @@ CakePHP does not automatically produce lowercased and dashed URLs when using the
 ``:controller`` parameter. If you need this, the above example could be
 rewritten like so::
 
+    use Cake\Routing\Route\DashedRoute;
+
     $routes->connect(
         '/:controller/:id',
         ['action' => 'view'],
-        ['id' => '[0-9]+', 'routeClass' => 'DashedRoute']
+        ['id' => '[0-9]+', 'routeClass' => DashedRoute::class]
     );
 
 The ``DashedRoute`` class will make sure that the ``:controller`` and
@@ -469,10 +473,12 @@ privileged users can make changes. This is often done through a
 special URL such as ``/admin/users/edit/5``. In CakePHP, prefix routing
 can be enabled by using the ``prefix`` scope method::
 
+    use Cake\Routing\Route\DashedRoute;
+
     Router::prefix('admin', function ($routes) {
         // All routes here will be prefixed with `/admin`
         // And have the prefix => admin route element added.
-        $routes->fallbacks('DashedRoute');
+        $routes->fallbacks(DashedRoute::class);
     });
 
 Prefixes are mapped to sub-namespaces in your application's ``Controller``
@@ -615,8 +621,10 @@ For example, if we had a ``ToDo`` plugin, with a ``TodoItems`` controller, and a
 ``showItems()`` action, it could be accessed at ``/to-do/todo-items/show-items``
 with the following router connection::
 
+    use Cake\Routing\Route\DashedRoute;
+
     Router::plugin('ToDo', ['path' => 'to-do'], function ($routes) {
-        $routes->fallbacks('DashedRoute');
+        $routes->fallbacks(DashedRoute::class);
     });
 
 .. index:: file extensions
@@ -1069,7 +1077,9 @@ default ``Route``, you can do so by calling ``Router::defaultRouteClass()``
 before setting up any routes and avoid having to specify the ``routeClass``
 option for each route. For example using::
 
-    Router::defaultRouteClass('InflectedRoute');
+    use Cake\Routing\Route\InflectedRoute;
+
+    Router::defaultRouteClass(InflectedRoute::class);
 
 will cause all routes connected after this to use the ``InflectedRoute`` route class.
 Calling the method without an argument will return current default route class.
@@ -1085,12 +1095,16 @@ provided the class returned by ``Router::defaultRouteClass()`` is used.
 
 Calling fallbacks like so::
 
-    $routes->fallbacks('DashedRoute');
+    use Cake\Routing\Route\DashedRoute;
+
+    $routes->fallbacks(DashedRoute::class);
 
 Is equivalent to the following explicit calls::
 
-    $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'DashedRoute']);
-    $routes->connect('/:controller/:action/*', [], ['routeClass' => 'DashedRoute']);
+    use Cake\Routing\Route\DashedRoute;
+
+    $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => DashedRoute:class]);
+    $routes->connect('/:controller/:action/*', [], ['routeClass' => DashedRoute:class]);
 
 .. note::
 
