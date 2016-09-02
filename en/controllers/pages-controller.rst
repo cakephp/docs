@@ -1,8 +1,8 @@
 The Pages Controller
 ####################
 
-CakePHP ships with a default controller **PagesController.php**. This is a
-simple and optional controller for serving up static content. The home page
+CakePHP's official skeleton app ships with a default controller **PagesController.php**.
+This is a simple and optional controller for serving up static content. The home page
 you see after installation is generated using this controller and the view 
 file **src/Template/Pages/home.ctp**. If you make the view file
 **src/Template/Pages/about_us.ctp** you can access it using the URL
