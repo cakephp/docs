@@ -458,7 +458,7 @@ directly or returning the value in the callback itself::
     public function doSomething($event)
     {
         // ...
-        $alteredData = $event->data['order'] + $moreData;
+        $alteredData = $event->data('order') + $moreData;
         return $alteredData;
     }
 
@@ -466,7 +466,7 @@ directly or returning the value in the callback itself::
     public function doSomethingElse($event)
     {
         // ...
-        $event->result['order'] = $alteredData;
+        $event->setResult(['order' => $alteredData] + $this->result());
     }
 
     // Using the event result
@@ -474,8 +474,8 @@ directly or returning the value in the callback itself::
     {
         $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
         $this->eventManager()->dispatch($event);
-        if (!empty($event->result['order'])) {
-            $order = $event->result['order'];
+        if (!empty($event->result()['order'])) {
+            $order = $event->result()['order'];
         }
         if ($this->Orders->save($order)) {
             // ...
