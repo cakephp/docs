@@ -44,6 +44,9 @@ behavior that may effect your application:
 * The default ``ErrorController`` no longer disables ``Auth`` and ``Security``
   components, as it does not extend ``AppController``. If you are enabling these
   components through events, you will need to update your code.
+* ``Entity::clean`` now cleans original values, clearing them on save. This
+  behavior was a bug, as the entity's original state should not persist a
+  save but instead reflect the new state of the entity.
 
 PSR7 Middleware Support Added
 =============================
