@@ -84,15 +84,15 @@ que vous pouvez attendre de CakePHP:
 +-------------------------------+--------------------------+
 | **Etendre une classe et...**                             |
 +-------------------------------+--------------------------+
-| Appel d'une méthode protégée  | Non [1]_                  |
+| Appel d'une méthode protégée  | Non [1]_                 |
 +-------------------------------+--------------------------+
-| Surcharger une propriété      | Non [1]_                  |
+| Surcharger une propriété      | Non [1]_                 |
 | protégée                      |                          |
 +-------------------------------+--------------------------+
-| Surcharger une méthode        | Non [1]_                  |
+| Surcharger une méthode        | Non [1]_                 |
 | protégée                      |                          |
 +-------------------------------+--------------------------+
-| Accéder à une propriété       | Non [1]_                  |
+| Accéder à une propriété       | Non [1]_                 |
 | protégée                      |                          |
 +-------------------------------+--------------------------+
 | Appel d'une méthode publique  | Oui                      |
@@ -103,11 +103,11 @@ que vous pouvez attendre de CakePHP:
 | Surcharger une propriété      | Oui                      |
 | publique                      |                          |
 +-------------------------------+--------------------------+
-| Ajouter une propriété publique| Non                       |
+| Ajouter une propriété publique| Non                      |
 +-------------------------------+--------------------------+
-| Ajouter une méthode publique  | Non                       |
+| Ajouter une méthode publique  | Non                      |
 +-------------------------------+--------------------------+
-| Ajouter un argument à une     | Non [1]_                  |
+| Ajouter un argument à une     | Non [1]_                 |
 | méthode surchargée            |                          |
 +-------------------------------+--------------------------+
 | Ajouter un argument par défaut| Oui                      |
