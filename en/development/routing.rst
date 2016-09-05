@@ -120,7 +120,7 @@ some routes we'll use the ``scope()`` method::
 
     // In config/routes.php
     use Cake\Routing\Route\DashedRoute;
-    
+
     Router::scope('/', function ($routes) {
         $routes->fallbacks(DashedRoute::class);
     });

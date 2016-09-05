@@ -1,12 +1,12 @@
 Plugins
 #######
 
-CakePHP vous permet de mettre en place une combinaison de controllers,
-models et vues et de les distribuer comme un plugin d'application
-packagé que d'autres peuvent utiliser dans leurs applications CakePHP.
-Vous avez un module de gestion des utilisateurs sympa, un simple blog,
-ou un module de service web dans une de vos applications ? Packagez le
-en plugin CakePHP afin de pouvoir la mettre dans d'autres applications.
+CakePHP vous permet de mettre en place une combinaison de controllers, models
+et vues et de les distribuer comme un plugin d'application packagé que d'autres
+peuvent utiliser dans leurs applications CakePHP. Vous avez un module de
+gestion des utilisateurs sympa, un simple blog, ou un module de service web
+dans une de vos applications ? Packagez le en plugin CakePHP afin de pouvoir la
+mettre dans d'autres applications.
 
 Le principal lien entre un plugin et l'application dans laquelle il a été
 installé, est la configuration de l'application (connexion à la base de
@@ -27,16 +27,16 @@ feriez ce qui suit::
 
     php composer.phar require cakephp/debug_kit
 
-Ceci installe la dernière version de DebugKit et met à jour vos
-fichiers **composer.json**, **composer.lock**, met à jour
-**vendor/cakephp-plugins.php** et met à jour votre autoloader.
+Ceci installe la dernière version de DebugKit et met à jour vos fichiers
+**composer.json**, **composer.lock**, met à jour **vendor/cakephp-plugins.php**
+et met à jour votre autoloader.
 
-Si le plugin que vous voulez installer n'est pas disponible sur
-packagist.org. Vous pouvez cloner ou copier le code du plugin dans votre
-répertoire ``plugins``. En supposant que vous voulez installer un plugin
-appelé ``ContactManager``, vous auriez un dossier dans ``plugins``
-appelé ``ContactManager``. Dans ce répertoire se trouvent les View, Model,
-Controller, webroot, et tous les autres répertoires du plugin.
+Si le plugin que vous voulez installer n'est pas disponible sur packagist.org.
+Vous pouvez cloner ou copier le code du plugin dans votre répertoire
+``plugins``. En supposant que vous voulez installer un plugin appelé
+``ContactManager``, vous auriez un dossier dans ``plugins`` appelé
+``ContactManager``. Dans ce répertoire se trouvent les View, Model, Controller,
+webroot, et tous les autres répertoires du plugin.
 
 .. index:: vendor/cakephp-plugins.php
 
@@ -71,8 +71,8 @@ méthode unique::
     Plugin::loadAll();
 
 ``loadAll()`` charge tous les plugins disponibles, vous permettant de définir
-certaines configurations pour des plugins spécifiques. ``load()`` fonctionne
-de la même manière, mais charge seulement les plugins que vous avez spécifié
+certaines configurations pour des plugins spécifiques. ``load()`` fonctionne de
+la même manière, mais charge seulement les plugins que vous avez spécifié
 explicitement.
 
 .. note::
@@ -344,13 +344,14 @@ Ensuite créez les routes du plugin ContactManager. Mettez ce qui suit dans
 **plugins/ContactManager/config/routes.php**::
 
     <?php
+    use Cake\Routing\Route\DashedRoute;
     use Cake\Routing\Router;
 
     Router::plugin(
         'ContactManager',
         ['path' => '/contact-manager'],
         function ($routes) {
-            $routes->fallbacks('DashedRoute');
+            $routes->fallbacks(DashedRoute::class);
         }
     );
 
