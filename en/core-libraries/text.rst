@@ -369,7 +369,7 @@ Output::
 Converting an Array to Sentence Form
 ====================================
 
-.. php:method:: toList(array $list, $and='and', $separator = ', ')
+.. php:method:: toList(array $list, $and='and', $separator=', ')
 
 Creates a comma-separated list where the last two items are joined with 'and'::
 
