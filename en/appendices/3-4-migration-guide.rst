@@ -10,6 +10,16 @@ Deprecations
 * The public properties on ``Cake\Event\Event`` are deprecated, new methods have
   been added to read/write the relevant properties.
 
+Behavior Changes
+================
+
+While these changes are API compatible, they represent minor variances in
+behavior that may effect your application:
+
+* ORM\Query results will not typecast aliased columns based on the original
+  columns type. For example if you alias ``created`` to ``created_time`` you
+  will now get a ``Time`` object back instead of a string.
+
 Event
 =====
 
