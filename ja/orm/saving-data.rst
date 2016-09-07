@@ -154,7 +154,7 @@ CakePHP は挿入または更新のいずれの処理を行うかを ``isNew()``
     $articlesTable->Tags->unlink($article, $tags);
 
 プロパティを直接設定または変更してレコードを更新した時は、データ検証は行われませんので、
-フォームデータを受け取る時にはこれは問題になります。次の節では、
+フォームデータを受け取る時にはこれは問題になります。次のセクションでは、
 データが検証されて保存されるように、効果的にエンティティに変換するための方法を例示します。
 
 .. _converting-request-data:
@@ -190,7 +190,7 @@ Table クラスは、リクエストデータを一つまたは複数のエン�
         ]
     ];
 
-既定では、 :ref:`validating-request-data` の節で説明している通り、 ``newEntity()``
+既定では、 :ref:`validating-request-data` のセクションで説明している通り、 ``newEntity()``
 メソッドは渡されたデータを検証します。もし、検証を回避したければ ``'validate' => false``
 オプションを渡してください。 ::
 
@@ -420,7 +420,7 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
 ~~~~~~~~~~~~~~~~~~
 
 ``newEntity()`` と同じように、 ``patchEntity`` メソッドは、データがエンティティにコピーされる前に
-検証を行います。このメカニズムは :ref:`validating-request-data` の節で説明されています。
+検証を行います。このメカニズムは :ref:`validating-request-data` のセクションで説明されています。
 エンティティにパッチを当てる際に検証を無効にしたいのであれば、 ``validate``
 オプションを渡してください。 ::
 
@@ -440,9 +440,9 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
 HasMany と BelongsToMany へのパッチ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-前の節で説明したように、リクエストデータはあなたのエンティティの構造に従っていなければなりません。
-``patchEntity()`` メソッドはアソシエーションをマージする能力も同じく持っていて、既定では
-アソシエーションの一階層目のみがマージされますが、マージされるアソシエーションを制御したい、
+前のセクションで説明したように、リクエストデータはあなたのエンティティの構造に従っていなければ
+なりません。 ``patchEntity()`` メソッドはアソシエーションをマージする能力も同じく持っていて、
+既定ではアソシエーションの一階層目のみがマージされますが、マージされるアソシエーションを制御したい、
 または深い深い階層についてマージしたい場合、メソッドの第三引数を使うことができます。 ::
 
     // コントローラの中で。
@@ -460,7 +460,7 @@ HasMany と BelongsToMany へのパッチ
 例えば、次のような何らかのリクエストデータを与えます。 ::
 
     $data = [
-        'title' => 'My title',
+        'title' => '私のタイトル',
         'user' => [
             'username' => 'mark'
         ]
@@ -617,7 +617,7 @@ hasMany と belongsToMany アソシエーションに対してのパッチのた
     use Cake\Event\Event;
     use ArrayObject;
 
-    // In a table or behavior class
+    // テーブルまたはビヘイビアクラスの中で
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
         foreach ($data as $key => $value) {
@@ -723,11 +723,11 @@ ORM は、挿入か更新のいずれが実行されるべきかを決定する�
 データベーストンザクションの保存操作を巻き取ります。また、変更のあったプロパティのみを更新します。
 上記の ``save()`` の呼び出しは、こんな SQL を生成します。 ::
 
-    UPDATE articles SET title = 'My new title' WHERE id = 2;
+    UPDATE articles SET title = '私の新しいタイトル' WHERE id = 2;
 
 もし新しいエンティティであれば、こんな SQL が生成されます。 ::
 
-    INSERT INTO articles (title) VALUES ('My new title');
+    INSERT INTO articles (title) VALUES ('私の新しいタイトル');
 
 エンティティが保存されると、いくつかのことが起こります。
 
@@ -754,7 +754,7 @@ ORM は、挿入か更新のいずれが実行されるべきかを決定する�
    :align: left
    :alt: Flow diagram showing the save process.
 
-作成および更新のルールについてのより詳しい情報は :ref:`application-rules` の節を
+作成および更新のルールについてのより詳しい情報は :ref:`application-rules` のセクションを
 参照してください。
 
 .. warning::
@@ -918,7 +918,7 @@ belongsToMany アソシエーションを保存する時は、 ORM はエンテ�
 
 ``_ids`` キーの使用は、belongs to many アソシエーション用に、フォームコントロール上の
 セレクトボックスやチェックボックスを構築するのを簡単にします。詳しくは
-:ref:`converting-request-data` の節を参照してください。
+:ref:`converting-request-data` のセクションを参照してください。
 
 belongsToMany アソシエーションを保存する時は、二つの保存方法の選択肢があります。
 
@@ -1017,7 +1017,7 @@ belongsToMany アソシエーションのそれぞれのエンティティは、
 拡張することができ、こうしたデータをデータベースに保存できるような単純な型にシリアライズします。
 
 この機能は、カスタム型システムを使って行われます。カスタムカラム型をどう構築するかについては
-:ref:`adding-custom-database-types` の節を参照してください。 ::
+:ref:`adding-custom-database-types` のセクションを参照してください。 ::
 
     // config/bootstrap.php の中で
     use Cake\Database\Type;
@@ -1116,7 +1116,7 @@ belongsToMany アソシエーションのそれぞれのエンティティは、
 
 .. warning::
 
-    updateAll は beforeSave/afterSave イベントを引き起こしま*せん*。もしこれらが必要であれば、
+    updateAll は beforeSave/afterSave イベントを *引き起こしません* 。もしこれらが必要であれば、
     まずレコードのコレクションを読み出して、そして、それらを更新してください。
 
 
