@@ -1,7 +1,6 @@
 :orphan: True
 
-Not Found
-#########
+ページが見つかりません。
+################################
 
-The page you're looking for cannot be found. Try using the search bar to find
-what you're looking for.
+お探しのページが見つかりません。お探しのページを見つけるために検索バーをお試しください。
