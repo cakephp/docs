@@ -4,7 +4,7 @@ Request Handling
 .. php:class:: RequestHandlerComponent(ComponentCollection $collection, array $config = [])
 
 The Request Handler component is used in CakePHP to obtain additional
-information about the HTTP requests that are made to your applications. You can
+information about the HTTP requests that are made to your application. You can
 use it to see what content types clients prefer, automatcally parse request
 input, define how content types map to view classes or template paths.
 
