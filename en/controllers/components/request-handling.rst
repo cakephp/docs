@@ -3,28 +3,24 @@ Request Handling
 
 .. php:class:: RequestHandlerComponent(ComponentCollection $collection, array $config = [])
 
-The Request Handler component is used in CakePHP to obtain
-additional information about the HTTP requests that are made to
-your applications. You can use it to inform your controllers about
-AJAX as well as gain additional insight into content types that the
-client accepts and automatically changes to the appropriate layout
-when file extensions are enabled.
+The Request Handler component is used in CakePHP to obtain additional
+information about the HTTP requests that are made to your applications. You can
+use it to see what content types clients prefer, automatcally parse request
+input, define how content types map to view classes or template paths.
 
-By default RequestHandler will automatically detect AJAX requests
-based on the HTTP-X-Requested-With header that many JavaScript
-libraries use. When used in conjunction with
-:php:meth:`Cake\\Routing\\Router::extensions()`, RequestHandler will
-automatically switch the layout and template files to those that match the requested
-type. Furthermore, if a helper with the same name as the requested
-extension exists, it will be added to the Controllers Helper array.
-Lastly, if XML/JSON data is POST'ed to your Controllers, it will be
-parsed into an array which is assigned to ``$this->request->data``,
-and can then be saved as model data. In order to make use of
+By default RequestHandler will automatically detect AJAX requests based on the
+``X-Requested-With`` HTTP header that many JavaScript libraries use. When used
+in conjunction with :php:meth:`Cake\\Routing\\Router::extensions()`,
+RequestHandler will automatically switch the layout and template files to those
+that match non-HTML media types. Furthermore, if a helper with the same name as
+the requested extension exists, it will be added to the Controllers Helper
+array.  Lastly, if XML/JSON data is POST'ed to your Controllers, it will be
+parsed into an array which is assigned to ``$this->request->data``, and can then
+be accessed as you would standard POST data. In order to make use of
 RequestHandler it must be included in your ``initialize()`` method::
 
     class WidgetsController extends AppController
     {
-
         public function initialize()
         {
             parent::initialize();
@@ -255,7 +251,7 @@ setting to ``false``::
         ]);
     }
 
-Using custom ViewClasses
+Using Custom ViewClasses
 ========================
 
 When using JsonView/XmlView you might want to override the default serialization
