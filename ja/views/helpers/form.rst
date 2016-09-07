@@ -16,6 +16,11 @@ FormHelper
     You can refer to the English version in the select top menu to have
     information about this page's topic.
 
+.. _associated-form-inputs:
+
+Creating Inputs for Associated Data
+===================================
+
 .. meta::
     :title lang=ja: FormHelper
     :description lang=ja: The FormHelper focuses on creating forms quickly, in a way that will streamline validation, re-population and layout.
