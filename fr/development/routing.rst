@@ -126,8 +126,10 @@ scope et connecter certaines routes, nous allons utiliser la méthode
 ``scope()``::
 
     // Dans config/routes.php
+    use Cake\Routing\Route\DashedRoute;
+
     Router::scope('/', function ($routes) {
-        $routes->fallbacks('DashedRoute');
+        $routes->fallbacks(DashedRoute::class);
     });
 
 La méthode ``connect()`` prend trois paramètres: l'URL que vous souhaitez faire
@@ -254,10 +256,12 @@ CakePHP ne produit pas automatiquement d'urls en minuscule avec des tirets quand
 vous utilisez le paramètre ``:controller``. Si vous avez besoin de ceci,
 l'exemple ci-dessus peut être réécrit en::
 
+    use Cake\Routing\Route\DashedRoute;
+
     $routes->connect(
         '/:controller/:id',
         ['action' => 'view'],
-        ['id' => '[0-9]+', 'routeClass' => 'DashedRoute']
+        ['id' => '[0-9]+', 'routeClass' => DashedRoute::class]
     );
 
 La classe spéciale ``DashedRoute`` va s'assurer que les paramètres
@@ -493,10 +497,12 @@ préfixes avec Routing.prefixes. Les préfixes peuvent être soit activés en
 utilisant la valeur de configuration ``Routing.prefixes``, soit en définissant
 la clé ``prefix`` avec un appel de ``Router::connect()``::
 
+    use Cake\Routing\Route\DashedRoute;
+
     Router::prefix('admin', function ($routes) {
         // Toutes les routes ici seront préfixées avec `/admin` et auront
         // l'élément de route prefix => admin ajouté.
-        $routes->fallbacks('DashedRoute');
+        $routes->fallbacks(DashedRoute::class);
     });
 
 Les préfixes sont mappés aux sous-espaces de noms dans l'espace de nom
@@ -645,8 +651,10 @@ Par exemple, si nous avons un plugin ``ToDo`` avec un controller ``TodoItems``
 et une action ``showItems()``, la route générée sera
 ``/to-do/todo-items/show-items`` avec le code qui suit::
 
+    use Cake\Routing\Route\DashedRoute;
+
     Router::plugin('ToDo', ['path' => 'to-do'], function ($routes) {
-        $routes->fallbacks('DashedRoute');
+        $routes->fallbacks(DashedRoute::class);
     });
 
 .. index:: file extensions
@@ -1122,7 +1130,9 @@ en plus de la ``Route`` par défaut, vous pouvez faire ceci en appelant
 de spécifier l'option ``routeClass`` pour chaque route. Par exemple en
 utilisant::
 
-    Router::defaultRouteClass('InflectedRoute');
+    use Cake\Routing\Route\InflectedRoute;
+
+    Router::defaultRouteClass(InflectedRoute::class);
 
 Cela provoquera l'utilisation de la classe ``InflectedRoute`` pour toutes les
 routes suivantes.
@@ -1141,12 +1151,16 @@ définies ou, si aucune classe n'est passée, la classe retournée par
 
 Appelez fallbacks comme ceci::
 
-    $routes->fallbacks('DashedRoute');
+    use Cake\Routing\Route\DashedRoute;
+
+    $routes->fallbacks(DashedRoute::class);
 
 Est équivalent à ces appels explicites::
 
-    $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'DashedRoute']);
-    $routes->connect('/:controller/:action/*', [], ['routeClass' => 'DashedRoute']);
+    use Cake\Routing\Route\DashedRoute;
+
+    $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => DashedRoute:class]);
+    $routes->connect('/:controller/:action/*', [], ['routeClass' => DashedRoute:class]);
 
 .. note::
 

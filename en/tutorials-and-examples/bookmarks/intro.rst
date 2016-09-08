@@ -280,9 +280,10 @@ can implement this, we'll add a new route. Your **config/routes.php** should
 look like::
 
     <?php
+    use Cake\Routing\Route\DashedRoute;
     use Cake\Routing\Router;
 
-    Router::defaultRouteClass('Route');
+    Router::defaultRouteClass(DashedRoute::class);
 
     // New route we're adding for our tagged action.
     // The trailing `*` tells CakePHP that this action has
@@ -307,7 +308,7 @@ look like::
         ]);
 
         // Connect the conventions based default routes.
-        $routes->fallbacks('InflectedRoute');
+        $routes->fallbacks();
     });
 
 The above defines a new 'route' which connects the **/bookmarks/tagged/** path,
