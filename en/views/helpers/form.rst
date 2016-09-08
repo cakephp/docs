@@ -1697,7 +1697,7 @@ specify the generated fields by including them::
 
     echo $this->Form->inputs([
         'name',
-        'email
+        'email'
     ]);
 
 You can customize the legend text using an option::
