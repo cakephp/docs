@@ -377,7 +377,7 @@ CakePHP のセッション操作の設定は :ref:`セッションの設定 <ses
     Plugin, View Template and Locale Paths
 
 プラグイン、ビュー、テンプレート、ロケールのパス
---------------------------------------
+----------------------------------------------------------------------------
 
 ..
     Since plugins, view templates and locales are not classes, they cannot have an
@@ -427,7 +427,7 @@ Inflection の設定
     Configure Class
 
 Configure クラス
-===============
+====================
 
 .. php:namespace:: Cake\Core
 
@@ -636,35 +636,50 @@ CakePHP は 2 つの組み込まれた設定ファイルエンジンを搭載し
 :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` は PHP の設定ファイルを読み込むことができ、
 同じフォーマット下にて設定は歴史的に読み込まれてきました。
 :php:class:`Cake\\Core\\Configure\\Engine\\IniConfig` は ini 設定ファイルを読み込めます。
-により多くの特別な ini ファイルの情報は `PHP documentation <http://php.net/parse_ini_file>` を参照してください。
+により多くの特別な ini ファイルの情報は `PHP マニュアル <http://php.net/parse_ini_file>`_ を参照してください。
 コアの設定エンジンを利用するにあたり、  :php:meth:`Configure::config()`:: を利用する必要があります。
 
 ::
 
     use Cake\Core\Configure\Engine\PhpConfig;
 
-    // Read config files from config
+    // config から config ファイルを読み込む
     Configure::config('default', new PhpConfig());
 
-    // Read config files from another path.
+    // 他のパスから config ファイルを読み込む
     Configure::config('default', new PhpConfig('/path/to/your/config/files/'));
 
-You can have multiple engines attached to Configure, each reading different
-kinds or sources of configuration files. You can interact with attached engines
-using a few other methods on Configure. To check which engine aliases are
-attached you can use :php:meth:`Configure::configured()`::
+..
+    You can have multiple engines attached to Configure, each reading different
+    kinds or sources of configuration files. You can interact with attached engines
+    using a few other methods on Configure. To check which engine aliases are
+    attached you can use :php:meth:`Configure::configured()`::
 
-    // Get the array of aliases for attached engines.
+複数のエンジンが配置された Configure を利用することができ、
+それぞれ異なった種類の設定ファイルの情報源を読み込みます。
+Configure のわずかなメソッドを利用して配置されたエンジンの情報をやり取りできます。
+どのエンジンのエイリアスが配置されているかチェックするには、 :php:meth:`Configure::configured()` が利用できます。
+
+::
+
+    // 配置されたエンジンのエイリアスの配列を取得する
     Configure::configured();
 
-    // Check if a specific engine is attached
+    // 特定のエンジンが配置されているかチェックする
     Configure::configured('default');
 
 .. php:staticmethod:: drop($name)
 
-You can also remove attached engines. ``Configure::drop('default')``
-would remove the default engine alias. Any future attempts to load configuration
-files with that engine would fail::
+..
+    You can also remove attached engines. ``Configure::drop('default')``
+    would remove the default engine alias. Any future attempts to load configuration
+    files with that engine would fail::
+
+配置されたエンジンを取り除くことができます。
+``Configure::drop('default')`` は default のエンジンエイリアスを取り除きます。
+この先、そのエンジンを使って設定ファイルを読み込もうとする試みは失敗します。
+
+::
 
     Configure::drop('default');
 
