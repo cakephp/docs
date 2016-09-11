@@ -975,9 +975,7 @@ with usage examples.
 .. php:staticmethod:: maxLength(string $check, integer $max)
 
     This rule ensures that the data stays within a maximum length
-    requirement.
-
-    ::
+    requirement::
 
         public $validate = array(
             'login' => array(
@@ -986,9 +984,8 @@ with usage examples.
             )
         );
 
-    The length here is "the number of bytes in the string
-    representation of the data". Be careful that it may be larger than
-    the number of characters when handling non-ASCII characters.
+    This will ensure that the 'login' field is less than or equal to 15
+    characters, not 15 bytes.
 
 .. php:staticmethod:: mimeType(mixed $check, array|string $mimeTypes)
 
