@@ -56,23 +56,23 @@ CakePHP には多くのバリデーションルールが用意されており、
         public $validate = array(
             'login' => array(
                 'alphaNumeric' => array(
-                    'rule'     => 'alphaNumeric',
+                    'rule' => 'alphaNumeric',
                     'required' => true,
-                    'message'  => 'Letters and numbers only'
+                    'message' => '文字と数字のみです'
                 ),
                 'between' => array(
-                    'rule' => array('between', 5, 15),
-                    'message' => 'Between 5 to 15 characters'
+                    'rule' => array('lengthBetween', 5, 15),
+                    'message' => '5～15文字です'
                 )
             ),
             'password' => array(
                 'rule' => array('minLength', '8'),
-                'message' => 'Minimum 8 characters long'
+                'message' => '最低8文字です'
             ),
             'email' => 'email',
             'born' => array(
-                'rule'       => 'date',
-                'message'    => 'Enter a valid date',
+                'rule' => 'date',
+                'message' => '正しい値を入れてください',
                 'allowEmpty' => true
             )
         );
@@ -129,7 +129,7 @@ CakePHP が使うエラーメッセージを自由に定義できます。
             'allowEmpty' => false,
             // or: 'update'
             'on'         => 'create',
-            'message'    => 'Your Error Message'
+            'message'    => 'エラーメッセージ'
         )
     );
 
@@ -193,7 +193,7 @@ required
 いなければなりません。そうでなければバリデーションは失敗します。
 このキーのデフォルト値はブールの「偽」です。
 
-``required => true`` はバリデーションルールの ``notEmpty()``
+``required => true`` はバリデーションルールの ``notBlank()``
 と同じではありません。 ``required => true`` は配列の「キー」が
 含まれていなければならないという意味であり、
 それが値を持たなければならないということではありません。
@@ -450,7 +450,7 @@ last
 
 .. note::
 
-    独自のバリデーションメソッドは、スコープが ``public``でなければ
+    独自のバリデーションメソッドは、スコープが ``public`` でなければ
     なりません。 ``protected`` や ``private`` なバリデーション
     メソッドはサポートされていません。
 
@@ -485,34 +485,34 @@ last
 
     // Inside a model class
     $this->validator()->add('password', 'required', array(
-        'rule' => 'notEmpty',
+        'rule' => 'notBlank',
         'required' => 'create'
     ));
 
-これはモデルの 'password' 項目に対して単一のルールを追加します。
+これはモデルの ``password`` 項目に対して単一のルールを追加します。
 add に対してさらに他の add への呼び出しを、好きなだけ繋げられます::
 
     // Inside a model class
     $this->validator()
         ->add('password', 'required', array(
-            'rule' => 'notEmpty',
+            'rule' => 'notBlank',
             'required' => 'create'
         ))
         ->add('password', 'size', array(
-            'rule' => array('between', 8, 20),
-            'message' => 'パスワードは最低文字です。'
+            'rule' => array('lengthBetween', 8, 20),
+            'message' => 'パスワードは最低8文字です。'
         ));
 
 一つの項目に対して一度に複数のルールを追加することもできます::
 
     $this->validator()->add('password', array(
         'required' => array(
-            'rule' => 'notEmpty',
+            'rule' => 'notBlank',
             'required' => 'create'
         ),
         'size' => array(
-            'rule' => array('between', 8, 20),
-            'message' => 'Password should be at least 8 chars long'
+            'rule' => array('lengthBetween', 8, 20),
+            'message' => 'パスワードは最低8文字です。'
         )
     ));
 
@@ -627,20 +627,19 @@ CakePHP のバリデーションクラスには多くのバリデーションル
             )
         );
 
-.. php:staticmethod:: between(string $check, integer $min, integer $max)
+.. php:staticmethod:: lengthBetween(string $check, integer $min, integer $max)
 
     この項目のデータ長は指定された数値の範囲に収まっていなければ
     なりません。最小値と最大値の両方を指定する必要があります::
 
         public $validate = array(
             'password' => array(
-                'rule' => array('between', 5, 15),
+                'rule'    => array('lengthBetween', 5, 15),
                 'message' => 'パスワードは5～15文字でなければなりません。'
             )
         );
 
-    データ長は『文字列表現データのバイト数』です。非アスキー文字の場合は
-    文字数より大きくなる場合があるので注意してください。
+    データは文字数でチェックされます。バイト数ではありません。
 
 .. php:staticmethod:: blank(mixed $check)
 
@@ -969,9 +968,8 @@ CakePHP のバリデーションクラスには多くのバリデーションル
             )
         );
 
-    ここでいうところの長さは『データの文字列表現のバイト数』です。
-    非 ASCII 文字を扱う場合、この数値は文字数より長くなる場合があるので
-    注意してください。
+    これは 'login' フィールドが15文字以内になることを保証します。
+    15バイトではありません。
 
 .. php:staticmethod:: mimeType(mixed $check, array|string $mimeTypes)
 
@@ -1006,13 +1004,11 @@ CakePHP のバリデーションクラスには多くのバリデーションル
         public $validate = array(
             'login' => array(
                 'rule' => array('minLength', 8),
-                'message' => 'Usernames must be at least 8 characters long.'
+                'message' => 'ユーザー名は最低8文字以上にしてください。'
             )
         );
 
-    ここでいうところの長さは『データの文字列表現のバイト数』です。
-    非 ASCII 文字を扱う場合、この数値は文字数より長くなる場合があるので
-    注意してください。
+    ここでいうところの長さとは文字数のことです。バイト数ではありません。
 
 .. php:staticmethod:: money(string $check, string $symbolPosition = 'left')
 
@@ -1051,11 +1047,19 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
 .. php:staticmethod:: notEmpty(mixed $check)
 
+    .. deprecated:: 2.7
+
+    代わりに ``notBlank`` を使用してください。
+
+.. php:staticmethod:: notBlank(mixed $check)
+
+    .. versionadded:: 2.7
+
     その項目が空でないことをチェックする、基本的なルールです。::
 
         public $validate = array(
             'title' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'この項目は必須入力です。'
             )
         );
