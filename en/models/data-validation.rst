@@ -485,7 +485,7 @@ set. The first one is using the ``add`` method::
         'required' => 'create'
     ));
 
-This will add a single rule to the `password` field in the model. You can chain
+This will add a single rule to the ``password`` field in the model. You can chain
 multiple calls to add to create as many rules as you like::
 
     // Inside a model class
@@ -634,10 +634,7 @@ with usage examples.
             )
         );
 
-    The length of data is "the number of bytes in the string
-    representation of the data". Be careful that it may be larger than
-    the number of characters when handling non-ASCII characters.
-
+    The data is checked by number of characters, not number of bytes.
 
 .. php:staticmethod:: blank(mixed $check)
 
@@ -1013,9 +1010,7 @@ with usage examples.
 .. php:staticmethod:: minLength(string $check, integer $min)
 
     This rule ensures that the data meets a minimum length
-    requirement.
-
-    ::
+    requirement::
 
         public $validate = array(
             'login' => array(
@@ -1024,10 +1019,7 @@ with usage examples.
             )
         );
 
-    The length here is "the number of bytes in the string
-    representation of the data". Be careful that it may be larger than
-    the number of characters when handling non-ASCII characters.
-
+    The length here is number of characters, not the number of bytes.
 
 .. php:staticmethod:: money(string $check, string $symbolPosition = 'left')
 
