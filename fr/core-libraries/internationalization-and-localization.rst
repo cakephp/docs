@@ -95,7 +95,7 @@ d'une solution différente. Par ex::
     // Code du fichier App Controller.
     public function beforeFilter() {
         $locale = Configure::read('Config.language');
-        if ($locale && file_exists(APP . 'View' . DS . $locale . DS . $this->viewPath)) {
+        if ($locale && file_exists(APP . 'View' . DS . $locale . DS . $this->viewPath . DS . $this->view . $this->ext)) {
             // utilise /app/views/fra/pages/tos.ctp au lieu de /app/views/pages/tos.ctp
             $this->viewPath = $locale . DS . $this->viewPath;
         }

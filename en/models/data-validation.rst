@@ -485,8 +485,8 @@ set. The first one is using the ``add`` method::
         'required' => 'create'
     ));
 
-This will add a single rule to the ``password`` field in the model. You can chain
-multiple calls to add to create as many rules as you like::
+This will add a single rule to the ``password`` field in the model. You can
+chain multiple calls to add to create as many rules as you like::
 
     // Inside a model class
     $this->validator()
