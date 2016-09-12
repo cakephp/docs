@@ -241,6 +241,7 @@ their own response. We can see both options in our simple middleware::
                 ]);
             }
             return $response;
+        }
     }
 
 Now that we've made a very simple middleware, let's attach it to our
