@@ -491,7 +491,7 @@ callback elle-même::
     public function doSomething($event)
     {
         // ...
-        $alteredData = $event->data['order'] + $moreData;
+        $alteredData = $event->data('order') + $moreData;
         return $alteredData;
     }
 
@@ -499,7 +499,7 @@ callback elle-même::
     public function doSomethingElse($event)
     {
         // ...
-        $event->result['order'] = $alteredData;
+        $event->setResult(['order' => $alteredData] + $this->result());
     }
 
     // Utiliser les résultats d'event
@@ -507,8 +507,8 @@ callback elle-même::
     {
         $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
         $this->eventManager()->dispatch($event);
-        if (!empty($event->result['order'])) {
-            $order = $event->result['order'];
+        if (!empty($event->result()['order'])) {
+            $order = $event->result()['order'];
         }
         if ($this->Order->save($order)) {
             // ...
