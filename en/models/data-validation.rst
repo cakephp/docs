@@ -635,6 +635,8 @@ with usage examples.
         );
 
     The data is checked by number of characters, not number of bytes.
+    If you want to validate against pure ASCII input instead of UTF-8 compatible, 
+    you will have to write your own custom validators.
 
 .. php:staticmethod:: blank(mixed $check)
 
@@ -1020,6 +1022,8 @@ with usage examples.
         );
 
     The length here is number of characters, not the number of bytes.
+    If you want to validate against pure ASCII input instead of UTF-8 compatible, 
+    you will have to write your own custom validators.
 
 .. php:staticmethod:: money(string $check, string $symbolPosition = 'left')
 
