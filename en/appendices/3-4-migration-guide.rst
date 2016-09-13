@@ -7,8 +7,29 @@ changes and improvements made in 3.4.
 Deprecations
 ============
 
+The following is a list of deprecated methods, properties and behaviors. These
+elements will continue to function until 4.0.0 after which they will be removed.
+
 * The public properties on ``Cake\Event\Event`` are deprecated, new methods have
   been added to read/write the relevant properties.
+* Several properties on ``Cake\Network\Request`` have been deprecated:
+
+  * ``Request::$params`` is deprecated. Use ``Request::param()`` instead.
+  * ``Request::$data`` is deprecated. Use ``Request::data()`` instead.
+  * ``Request::$query`` is deprecated. Use ``Request::query()`` instead.
+  * ``Request::$cookies`` is deprecated. Use ``Request::cookie()`` instead.
+  * ``Request::$base`` is deprecated. Use ``Request::getAttribute('base')`` instead.
+  * ``Request::$webroot`` is deprecated. Use ``Request::getAttribute('webroot')`` instead.
+  * ``Request::$here`` is deprecated. Use ``Request::here()`` instead.
+  * ``Request::$_session`` was renamed to ``Request::$session``.
+
+* A number of methods on ``Cake\Network\Request`` have been deprecated:
+
+  * The setter modes for ``query()``, ``data()`` and ``param()`` are deprecated.
+  * ``__get()`` & ``__isset()`` methods are deprecated. Use ``param()`` instead.
+  * ``method()`` is deprecated. Use ``getMethod()`` instead.
+  * ``setInput()`` is deprecated. Use ``withBody()`` instead.
+  * The ``ArrayAccess`` methods have all been deprecated.
 
 Behavior Changes
 ================
