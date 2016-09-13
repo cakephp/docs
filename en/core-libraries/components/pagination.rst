@@ -15,7 +15,7 @@ a critical part of every application and used to cause many
 headaches for developers. CakePHP eases the burden on the developer
 by providing a quick, easy way to paginate data.
 
-Pagination in CakePHP is offered by a Component in the controller, to make
+Pagination in CakePHP is offered by a component in the controller, to make
 building paginated queries easier. In the View :php:class:`PaginatorHelper` is
 used to make the generation of pagination links & buttons simple.
 
@@ -26,7 +26,7 @@ In the controller, we start by defining the query conditions pagination will use
 by default in the ``$paginate`` controller variable. These conditions, serve as
 the basis of your pagination queries. They are augmented by the ``sort``, ``direction``,
 ``limit``, and ``page`` parameters passed in from the URL. It is important to note
-here that the order key must be defined in an array structure like below::
+here that the ``order`` key must be defined in an array structure like below::
 
     class PostsController extends AppController {
 
