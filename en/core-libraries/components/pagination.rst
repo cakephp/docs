@@ -24,8 +24,8 @@ Query Setup
 
 In the controller, we start by defining the query conditions pagination will use
 by default in the ``$paginate`` controller variable. These conditions, serve as
-the basis of your pagination queries. They are augmented by the sort, direction,
-limit, and page parameters passed in from the URL. It is important to note
+the basis of your pagination queries. They are augmented by the ``sort``, ``direction``,
+``limit``, and ``page`` parameters passed in from the URL. It is important to note
 here that the order key must be defined in an array structure like below::
 
     class PostsController extends AppController {
@@ -251,14 +251,15 @@ done on::
 This would allow sorting on the title and slug columns only. A user that sets
 sort to any other value will be ignored.
 
-Limit the maximum number of rows that can be fetched
-====================================================
+Limit the maximum number of rows per page
+=========================================
 
-The number of results that are fetched is exposed to the user as the
+The number of results that are fetched per page is exposed to the user as the
 ``limit`` parameter. It is generally undesirable to allow users to fetch all
-rows in a paginated set. By default CakePHP limits the maximum number of rows
+rows in a paginated set. The ``maxLimit`` option asserts that no one can set
+this limit too high from the outside. By default CakePHP limits the maximum number of rows
 that can be fetched to 100. If this default is not appropriate for your
-application, you can adjust it as part of the pagination options::
+application, you can adjust it as part of the pagination options, for example reducing it to ``10``::
 
     public $paginate = array(
         // other keys here.
