@@ -129,6 +129,9 @@ You can have as many validation sets as necessary. See the :doc:`validation
 chapter </core-libraries/validation>` for more information on building
 validation rule-sets.
 
+
+.. _using-different-validators-per-association:
+
 Using A Different Validation Set For Associations
 -------------------------------------------------
 
