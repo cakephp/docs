@@ -242,8 +242,9 @@ change the validation set to be used per association::
             'Comments.Users' => ['validate' => 'signup']
         ]
     ]);
-    
-Read more about using different validators: http://book.cakephp.org/3.0/en/orm/validation.html#using-a-different-validation-set-for-associations
+
+The :ref:`using-different-validators-per-association chapter has more information on how to
+use different validators for associated marshalling.
 
 The following diagram gives an overview of what happens inside the
 ``newEntity()`` or ``patchEntity()`` method:
