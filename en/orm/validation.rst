@@ -271,7 +271,7 @@ While basic data validation is done when :ref:`request data is converted into
 entities <validating-request-data>`, many applications also have more complex
 validation that should only be applied after basic validation has completed.
 
-Where validation makes sure the form or syntax of your data is correct, rules
+Where validation ensures the form or syntax of your data is correct, rules
 focus on comparing data against the existing state of your application and/or
 network.
 
