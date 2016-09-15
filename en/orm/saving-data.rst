@@ -211,6 +211,12 @@ associations should be marshalled::
         ]
     ]);
 
+You may also disable marshalling of possible nested associations like so:
+
+    $entity = $articles->newEntity($data, ['associated' => []]);
+    // or...
+    $entity = $articles->patchEntity($entity, $data, ['associated' => []]);
+
 The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
 should be marshalled. Alternatively, you can use dot notation for brevity::
 
@@ -236,6 +242,8 @@ change the validation set to be used per association::
             'Comments.Users' => ['validate' => 'signup']
         ]
     ]);
+    
+Read more about using different validators: http://book.cakephp.org/3.0/en/orm/validation.html#using-a-different-validation-set-for-associations
 
 The following diagram gives an overview of what happens inside the
 ``newEntity()`` or ``patchEntity()`` method:
