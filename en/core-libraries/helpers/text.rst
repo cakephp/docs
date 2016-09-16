@@ -80,7 +80,7 @@ truncating long stretches of text.
     Output::
 
         <p>For more information<br />
-        regarding our world-famous pastries and desserts.<p>
+        regarding our world-famous pastries and desserts.</p>
         <p>contact info@example.com</p>
 
     .. versionadded:: 2.4
