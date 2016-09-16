@@ -211,7 +211,7 @@ associations should be marshalled::
         ]
     ]);
 
-You may also disable marshalling of possible nested associations like so:
+You may also disable marshalling of possible nested associations like so::
 
     $entity = $articles->newEntity($data, ['associated' => []]);
     // or...
@@ -243,7 +243,7 @@ change the validation set to be used per association::
         ]
     ]);
 
-The :ref:`using-different-validators-per-association chapter has more information on how to
+The :ref:`using-different-validators-per-association` chapter has more information on how to
 use different validators for associated marshalling.
 
 The following diagram gives an overview of what happens inside the
