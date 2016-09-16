@@ -534,7 +534,7 @@ tableau::
         public function initialize(array $config)
         {
             $this->belongsToMany('Tags', [
-                'joinTable' => 'article_tag',
+                'joinTable' => 'articles_tags',
             ]);
         }
     }

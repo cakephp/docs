@@ -25,17 +25,14 @@ CakePHP CookBook 是一个公开地开发和社区可以编辑的文档项目。
 
 如果你遇到困难，有一些地方 :doc:`你可以获取帮助 </intro/where-to-get-help>`。
 
-First Steps
+第一步
 ===========
 
-Learning a new framework can be intimidating and exciting at the same time. To
-help you along, we have created a cookbook packed with examples and recipes to
-get the common tasks completed. If you are new, you should start off with the
-:doc:`/quickstart` as it will give you a quick tour of what
-CakePHP has to offer and how it works.
+学习一个新的框架即富有挑战又令人兴奋.为了能够长期的帮助你,我们创建了包含很多例子
+和配方的食谱(cookbook for cake),去完成一些普通的任务.如果你是一个新手，你可以从
+:doc:`/quickstart` 开始,它会告诉你cakephp 会为你提供什么和它是怎么做到的.
 
-After you've finished the Bookmarker Tutorial, you can brush up on the key
-elements in a CakePHP application:
+当你完成了Bookmarker的训练之后,你可以重点去关注cakephp 应用的以下几个重要部分。
 
 * The :ref:`CakePHP request cycle <request-cycle>`
 * The :doc:`conventions <intro/conventions>` that CakePHP

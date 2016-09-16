@@ -16,7 +16,7 @@ part of every application and used to cause many headaches for developers.
 CakePHP eases the burden on the developer by providing a quick, easy way to
 paginate data.
 
-Pagination in CakePHP is offered by a Component in the controller, to make
+Pagination in CakePHP is offered by a component in the controller, to make
 building paginated queries easier. In the View
 :php:class:`~Cake\\View\\Helper\\PaginatorHelper` is used to make the generation
 of pagination links & buttons simple.
@@ -26,9 +26,9 @@ Using Controller::paginate()
 
 In the controller, we start by defining the default query conditions pagination
 will use in the ``$paginate`` controller variable. These conditions, serve as
-the basis for your pagination queries. They are augmented by the sort, direction
-limit, and page parameters passed in from the URL. It is important to note
-that the order key must be defined in an array structure like below::
+the basis for your pagination queries. They are augmented by the ``sort``, ``direction``
+``limit``, and ``page`` parameters passed in from the URL. It is important to note
+that the ``order`` key must be defined in an array structure like below::
 
     class ArticlesController extends AppController
     {
@@ -227,14 +227,15 @@ pagination query::
 Any requests that attempt to sort on fields not in the whitelist will be
 ignored.
 
-Limit the Maximum Number of Rows that can be Fetched
-====================================================
+Limit the Maximum Number of Rows per Page
+=========================================
 
-The number of results that are fetched is exposed to the user as the
+The number of results that are fetched per page is exposed to the user as the
 ``limit`` parameter. It is generally undesirable to allow users to fetch all
-rows in a paginated set. By default CakePHP limits the maximum number of rows
+rows in a paginated set. The ``maxLimit`` option asserts that no one can set
+this limit too high from the outside. By default CakePHP limits the maximum number of rows
 that can be fetched to 100. If this default is not appropriate for your
-application, you can adjust it as part of the pagination options::
+application, you can adjust it as part of the pagination options, for example reducing it to ``10``::
 
     public $paginate = [
         // Other keys here.
