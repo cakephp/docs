@@ -167,7 +167,7 @@ folder. For our ContactManager plugin, we'll need a view for our
 ContactsController::index() action, so let's include that as
 well::
 
-    // /app/Plugin/ContactManager/View/Contacts/index.ctp:
+    <!-- /app/Plugin/ContactManager/View/Contacts/index.ctp: -->
     <h1>Contacts</h1>
     <p>Following is a sortable list of your contacts</p>
     <!-- A sortable list of contacts would go here....-->
