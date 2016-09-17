@@ -38,13 +38,15 @@ application can, such as Config, Console, Lib, webroot, etc.
 
 ::
 
-    // /app/Plugin/ContactManager/Controller/ContactManagerAppController.php:
+    // In /app/Plugin/ContactManager/Controller/ContactManagerAppController.php
+
     class ContactManagerAppController extends AppController {
     }
 
 ::
 
-    // /app/Plugin/ContactManager/Model/ContactManagerAppModel.php:
+    // In /app/Plugin/ContactManager/Model/ContactManagerAppModel.php
+
     class ContactManagerAppModel extends AppModel {
     }
 
@@ -89,12 +91,13 @@ this plugin.
 So, we place our new ContactsController in
 /app/Plugin/ContactManager/Controller and it looks like so::
 
-    // app/Plugin/ContactManager/Controller/ContactsController.php
+    // In app/Plugin/ContactManager/Controller/ContactsController.php
+
     class ContactsController extends ContactManagerAppController {
         public $uses = array('ContactManager.Contact');
 
         public function index() {
-            //...
+            // ...
         }
     }
 
@@ -126,7 +129,8 @@ Models for the plugin are stored in /app/Plugin/ContactManager/Model.
 We've already defined a ContactsController for this plugin, so let's
 create the model for that controller, called Contact::
 
-    // /app/Plugin/ContactManager/Model/Contact.php:
+    // In /app/Plugin/ContactManager/Model/Contact.php
+
     class Contact extends ContactManagerAppModel {
     }
 
@@ -141,7 +145,8 @@ Let's create that next.
 
 For example::
 
-    // /app/Plugin/ContactManager/Model/Contact.php:
+    // In /app/Plugin/ContactManager/Model/Contact.php
+    
     class Contact extends ContactManagerAppModel {
         public $hasMany = array('ContactManager.AltName');
     }
@@ -149,7 +154,8 @@ For example::
 If you would prefer that the array keys for the association not
 have the plugin prefix on them, use the alternative syntax::
 
-    // /app/Plugin/ContactManager/Model/Contact.php:
+    // In /app/Plugin/ContactManager/Model/Contact.php
+
     class Contact extends ContactManagerAppModel {
         public $hasMany = array(
             'AltName' => array(
@@ -256,10 +262,12 @@ requires only that you prefix the plugin name before the name of the
 component. For example::
 
     // Component defined in 'ContactManager' plugin
+
     class ExampleComponent extends Component {
     }
 
-    // within your controllers:
+    // Within your controllers:
+
     public $components = array('ContactManager.Example');
 
 The same technique applies to Helpers and Behaviors.
@@ -270,6 +278,7 @@ The same technique applies to Helpers and Behaviors.
     available. You should declare the resources you need with Uses::
 
         // Declare use of AppHelper for your Plugin's Helper
+
         App::uses('AppHelper', 'View/Helper');
 
 Expand Your Plugin
