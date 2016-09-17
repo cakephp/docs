@@ -36,13 +36,15 @@
 
 ::
 
-    // /app/Plugin/ContactManager/Controller/ContactManagerAppController.php:
+    // /app/Plugin/ContactManager/Controller/ContactManagerAppController.php の中で
+
     class ContactManagerAppController extends AppController {
     }
 
 ::
 
-    // /app/Plugin/ContactManager/Model/ContactManagerAppModel.php:
+    // /app/Plugin/ContactManager/Model/ContactManagerAppModel.php の中で
+
     class ContactManagerAppModel extends AppModel {
     }
 
@@ -81,12 +83,13 @@ contacts の管理ですので、このプラグインには ContactsController 
 そこで ContactsController を /app/Plugin/ContactManager/Controller に設置し、
 このように書きます。 ::
 
-    // app/Plugin/ContactManager/Controller/ContactsController.php
+    // app/Plugin/ContactManager/Controller/ContactsController.php の中で
+
     class ContactsController extends ContactManagerAppController {
         public $uses = array('ContactManager.Contact');
 
         public function index() {
-            //...
+            // ...
         }
     }
 
@@ -115,7 +118,8 @@ contacts の管理ですので、このプラグインには ContactsController 
 プラグインのモデルは /app/Plugin/ContactManager/Model に設置されます。
 プラグインの ContactsController は既に定義してあるので、そのモデルを作成します。 ::
 
-    // /app/Plugin/ContactManager/Model/Contact.php:
+    // /app/Plugin/ContactManager/Model/Contact.php の中で
+
     class Contact extends ContactManagerAppModel {
     }
 
@@ -129,14 +133,16 @@ contacts の管理ですので、このプラグインには ContactsController 
 
 例えば::
 
-    // /app/Plugin/ContactManager/Model/Contact.php:
+    // /app/Plugin/ContactManager/Model/Contact.php の中で
+
     class Contact extends ContactManagerAppModel {
         public $hasMany = array('ContactManager.AltName');
     }
 
 プラグインの接頭語との連携の無い配列キーを参照したいなら、代わりのシンタックスを使います。 ::
 
-    // /app/Plugin/ContactManager/Model/Contact.php:
+    // /app/Plugin/ContactManager/Model/Contact.php の中で
+
     class Contact extends ContactManagerAppModel {
         public $hasMany = array(
             'AltName' => array(
@@ -153,7 +159,7 @@ contacts の管理ですので、このプラグインには ContactsController 
 ContactManager プラグインでは、ContactsController::index()
 アクションのビューが必要になるので、 このような内容になります。 ::
 
-    // /app/Plugin/ContactManager/View/Contacts/index.ctp:
+    <!-- /app/Plugin/ContactManager/View/Contacts/index.ctp: -->
     <h1>Contacts</h1>
     <p>Following is a sortable list of your contacts</p>
     <!-- A sortable list of contacts would go here....-->
@@ -236,10 +242,12 @@ ContactManager プラグインでは、ContactsController::index()
 コンポーネント名の前にプラグイン名を付けるだけです。 例えば、 ::
 
     // 'ContactManager' プラグインのコンポーネントとして定義
+
     class ExampleComponent extends Component {
     }
 
     // あなたのコントローラで下記のように呼び出す
+
     public $components = array('ContactManager.Example');
 
 同じテクニックはヘルパーとビヘイビアにも使えます。
@@ -250,6 +258,7 @@ ContactManager プラグインでは、ContactsController::index()
     Uses に定義する必要があります。::
 
         // Declare use of AppHelper for your Plugin's Helper
+
         App::uses('AppHelper', 'View/Helper');
 
 プラグインの拡張
