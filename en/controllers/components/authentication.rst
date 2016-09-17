@@ -252,11 +252,12 @@ to upon logging in.
 If no parameter is passed, it gets the authentication redirect URL. The URL
 returned is as per following rules:
 
-- Returns the normalized URL from session Auth.redirect value if it is
-  present and for the same domain the current app is running on.
-- If there is no session value and there is a config ``loginRedirect``, the
-  ``loginRedirect`` value is returned.
-- If there is no session and no ``loginRedirect``, / is returned.
+- Returns the normalized URL from the ``redirect`` query string value if it is
+  present and for the same domain the current app is running on. Before 3.4.0,
+  the ``Auth.redirect`` session value was used.
+- If there is no query string/session value and there is a config
+  ``loginRedirect``, the ``loginRedirect`` value is returned.
+- If there is no redirect value and no ``loginRedirect``, / is returned.
 
 
 Creating Stateless Authentication Systems
