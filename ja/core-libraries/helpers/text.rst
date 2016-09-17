@@ -75,7 +75,7 @@ TextHelper は、ビューの中でテキストを作成する際に便利で使
     出力結果::
 
         <p>For more information<br />
-        regarding our world-famous pastries and desserts.<p>
+        regarding our world-famous pastries and desserts.</p>
         <p>contact info@example.com</p>
 
     .. versionadded:: 2.4
