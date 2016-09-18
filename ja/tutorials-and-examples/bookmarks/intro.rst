@@ -267,9 +267,10 @@ Scaffold コードの生成
 新しいルートを追加します。 **config/routes.php** を以下のようにしてください。 ::
 
     <?php
+    use Cake\Routing\Route\DashedRoute;
     use Cake\Routing\Router;
 
-    Router::defaultRouteClass('Route');
+    Router::defaultRouteClass(DashedRoute::class);
 
     // 新しいルートを　tagged アクションのために追加します。
     // 末尾の `*` は、渡された引数を持っていることを
@@ -294,7 +295,7 @@ Scaffold コードの生成
         ]);
 
         // デフォルトのルートへ接続
-        $routes->fallbacks('InflectedRoute');
+        $routes->fallbacks();
     });
 
 上記は、 **/bookmarks/tagged/** パスを ``BookmarksController::tags()`` に接続する
