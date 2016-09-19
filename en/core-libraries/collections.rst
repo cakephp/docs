@@ -21,7 +21,7 @@ interact with collections every time you interact with the ORM in CakePHP.
 A simple use of a Collection would be::
 
     use Cake\Collection\Collection;
-
+e
     $items = ['a' => 1, 'b' => 2, 'c' => 3];
     $collection = new Collection($items);
 
@@ -624,7 +624,7 @@ By default, ``SORT_NUMERIC`` is used::
 
 .. warning::
 
-    If is often expensive to iterate sorted collections more than once. If you
+    It is often expensive to iterate sorted collections more than once. If you
     plan to do so, consider converting the collection to an array or simply use
     the ``compile()`` method on it.
 
