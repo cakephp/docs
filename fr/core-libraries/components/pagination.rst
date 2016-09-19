@@ -27,11 +27,11 @@ Paramétrage des requêtes
 
 Dans le controller, nous commençons par définir les conditions de la requête de
 pagination qui seront utilisées par défaut dans la variable ``$paginate`` du
-controller. 
+controller.
 Ces conditions, vont servir de base à vos requêtes de pagination. Elles sont
-complétées par le tri, la direction, la limitation et les paramètres de page
-passés depuis l'URL. Ici, il est important de noter que l'ordre des clés
-doit être défini dans une structure en tableau comme ci-dessous::
+complétées par les paramètres ``sort``, ``direction``, ``limit`` et ``page``
+passés dans l'URL. Ici, il est important de noter que la clé ``order`` doit
+être définie dans une structure en tableau comme ci-dessous::
 
     class PostsController extends AppController {
 
@@ -61,12 +61,12 @@ comme ``fields``::
         );
     }
 
-D'autres clés qui peuvent être introduites dans le tableau ``$paginate``
-sont similaires aux paramètres de la méthode ``Model->find('all')``,
-qui sont: ``conditions``, ``fields``, ``order``, ``limit``, ``page``,
+D'autres clés qui peuvent être introduites dans le tableau ``$paginate`` sont
+similaires aux paramètres de la méthode ``Model->find('all')``, qui sont:
+``conditions``, ``fields``, ``order``, ``limit``, ``page``,
 ``contain``,``joins``, et ``recursive``. En plus des touches mentionnées
-ci dessus, chacune des clés peut aussi être passé à la méthode find du
-model. Ça devient alors très simple d'utiliser les component comme
+ci-dessus, chacune des clés peut aussi être passé à la méthode find du model.
+Ça devient alors très simple d'utiliser les component comme
 :php:class:`ContainableBehavior` avec la pagination::
 
     class RecipesController extends AppController {
@@ -80,8 +80,8 @@ model. Ça devient alors très simple d'utiliser les component comme
     }
 
 En plus de définir des valeurs de pagination générales, vous pouvez définir
-plus d'un jeu de pagination par défaut dans votre controller, vous avez juste
-à nommer les clés du tableau d'après le model que vous souhaitez configurer::
+plus d'un jeu de pagination par défaut dans votre controller, vous avez juste à
+nommer les clés du tableau d'après le model que vous souhaitez configurer::
 
     class PostsController extends AppController {
 
@@ -211,10 +211,9 @@ utilisez::
         return count($results);
     }
 
-Le lecteur attentif aura noté que la méthode paginate que nous avons
-définie n'était pas réellement nécessaire - Tout ce que vous avez à
-faire est d'ajouter le mot clé dans la variable de classe
-``$paginate`` du controller::
+Le lecteur attentif aura noté que la méthode paginate que nous avons définie
+n'était pas réellement nécessaire - Tout ce que vous avez à faire est
+d'ajouter le mot clé dans la variable de classe ``$paginate`` du controller::
 
     /**
      * Ajout d'une clause GROUP BY
@@ -227,7 +226,7 @@ faire est d'ajouter le mot clé dans la variable de classe
         )
     );
     /**
-     * Ou à la volée depuis l'intérieur de l'action 
+     * Ou à la volée depuis l'intérieur de l'action
      */
     public function index() {
         $this->Paginator->settings = array(
@@ -258,38 +257,39 @@ en faisant ceci::
 Ceci permettrait le tri uniquement sur les colonnes title et slug.
 Un utilisateur qui paramètre le tri à d'autres valeurs sera ignoré.
 
-Limitation du nombre maximum de lignes qui peuvent être recherchées
-===================================================================
+Limitation du nombre maximum de lignes par page
+===============================================
 
-Le nombre de résultats qui sont retournés à l'utilisateur est représenté
-par le paramètre ``limit``. Il est généralement indésirable de permettre
-à l'utilisateur de retourner toutes les lignes dans un ensemble paginé.
-Par défaut CAKEPHP limite le nombre de lignes retournées à 100. Si cette
-valeur par défaut n'est pas appropriée pour votre application, vous pouvez
-l'ajuster dans une partie des options de pagination::
-
+Le nombre de résultats qui sont retournés par page à l'utilisateur est
+représenté par le paramètre ``limit``. Il est généralement indésirable de
+permettre à l'utilisateur de retourner toutes les lignes dans un ensemble
+paginé. L'option ``maxLimit`` permet à ce que personne ne puisse définir cette
+limite trop haute de l'extérieur. Par défaut CAKEPHP limite le nombre de lignes
+retournées à 100. Si cette valeur par défaut n'est pas appropriée pour votre
+application, vous pouvez l'ajuster dans une partie des options de pagination,
+par exemple en le réduisant à ``10``::
 
     public $paginate = array(
         // d'autre clés ici.
         'maxLimit' => 10
     );
 
-Si le paramètre de limitation de la requête est supérieur à cette valeur,
-il sera réduit à la valeur de ``maxLimit``.
+Si le paramètre de limitation de la requête est supérieur à cette valeur, il
+sera réduit à la valeur de ``maxLimit``.
 
 .. _pagination-with-get:
 
 Pagination avec des paramètres GET
 ==================================
 
-Dans les versions précédentes de CAKEPHP vous ne pouviez générer des liens
-de pagination qu'en utilisant des paramètres nommés. Mais si les pages étaient
-recherchées avec des paramètres GET elle continueraient à fonctionner.
-Pour la version 2.0, nous avons décidés de rendre la façon de générer les
-paramètres de pagination plus contrôlable et plus cohérente. Vous pouvez
-choisir d'utiliser une chaîne de requête ou bien des paramètre nommés dans le
-component. Les requêtes entrantes devront accepter le type choisi, et
-:php:class:`PaginatorHelper` générera les liens avec les paramètres choisis:: 
+Dans les versions précédentes de CAKEPHP vous ne pouviez générer des liens de
+pagination qu'en utilisant des paramètres nommés. Mais si les pages étaient
+recherchées avec des paramètres GET elle continueraient à fonctionner. Pour la
+version 2.0, nous avons décidés de rendre la façon de générer les paramètres de
+pagination plus contrôlable et plus cohérente. Vous pouvez choisir d'utiliser
+une chaîne de requête ou bien des paramètre nommés dans le component. Les
+requêtes entrantes devront accepter le type choisi, et
+:php:class:`PaginatorHelper` générera les liens avec les paramètres choisis::
 
     public $paginate = array(
         'paramType' => 'querystring'
@@ -309,10 +309,10 @@ arguments GET.
 
     Vous pouvez rentrer dans une situation où assigner une valeur dans une
     propriété inexistante retournera des erreurs::
-    
+
         $this->paginate['limit'] = 10;
 
-    Retournera l'erreur "Notice: Indirect modification of overloaded property 
+    Retournera l'erreur "Notice: Indirect modification of overloaded property
     $paginate has no effect." ("Notice: Une modification indirect d'une surcharge de
     la propriété $paginate n'a aucun effet."). En assignant une valeur initiale à la
     propriété, cela résout le problème::
@@ -329,10 +329,10 @@ arguments GET.
         }
 
     Ou en utilisant ``$this->Paginator->setting = array('limit' => 10);``
-    
+
     Assurez-vous d'avoir ajouté le component Paginator dans votre tableau
     $components si vous voulez modifier la propriété ``$settings`` du
-    Component Paginator. 
+    Component Paginator.
 
     L'une ou l'autre de ces approches résoudra les erreurs rencontrés.
 
@@ -356,7 +356,7 @@ quand une exception `NotFoundException` est attrapée::
         }
     }
 
-Pagination AJAX 
+Pagination AJAX
 ===============
 
 C'est très simple d'incorporer les fonctionnalités AJAX dans la pagination.
