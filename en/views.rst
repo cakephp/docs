@@ -658,7 +658,7 @@ following::
     echo $this->element('Contacts.sidebar/helpbox');
 
 
-Requesting Elements from the app
+Requesting Elements from the App
 --------------------------------
 
 If you are within a plugin's template file and want to render
