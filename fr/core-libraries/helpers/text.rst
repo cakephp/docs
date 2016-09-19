@@ -6,7 +6,7 @@ TextHelper
 TextHelper possède des méthodes pour rendre le texte plus utilisable et sympa
 dans vos vues. Il aide à activer les liens, à formater les URLs, à créer
 des extraits de texte autour des mots ou des phrases choisies, mettant en
-évidence des mots clés dans des blocs de texte et tronquer élégamment de 
+évidence des mots clés dans des blocs de texte et tronquer élégamment de
 longues étendues de texte.
 
 .. versionchanged:: 2.1
@@ -83,7 +83,7 @@ longues étendues de texte.
     Output::
 
         <p>Pour plus d\'information<br />
-        selon nos célèbres pâtes et desserts.<p>
+        selon nos célèbres pâtes et desserts.</p>
         <p>contact info@example.com</p>
 
     .. versionadded:: 2.4
