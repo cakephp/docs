@@ -94,7 +94,7 @@ Example::
 By placing the above code in your ``app/Config/bootstrap.php`` you will
 have two additional Cache configurations. The name of these
 configurations 'short' or 'long' is used as the ``$config``
-parameter for :php:func:`Cache::write()` and :php:func:`Cache::read()`, e.g. ``Cache.short``.
+parameter for :php:func:`Cache::write()` and :php:func:`Cache::read()`, e.g. ``Cache::read('my_data', 'short')``.
 
 .. note::
 
