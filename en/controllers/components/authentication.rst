@@ -257,7 +257,7 @@ returned is as per following rules:
   the ``Auth.redirect`` session value was used.
 - If there is no query string/session value and there is a config
   ``loginRedirect``, the ``loginRedirect`` value is returned.
-- If there is no redirect value and no ``loginRedirect``, / is returned.
+- If there is no redirect value and no ``loginRedirect``, ``/`` is returned.
 
 
 Creating Stateless Authentication Systems
