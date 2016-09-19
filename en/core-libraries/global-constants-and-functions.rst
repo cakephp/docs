@@ -21,11 +21,14 @@ translating content.
 .. php:function:: \_\_(string $string_id, [$formatArgs])
 
     This function handles localization in CakePHP applications. The
-    ``$string_id`` identifies the ID for a translation. Strings used for
-    translations are treated as format strings for ``sprintf()``. You can supply
+    ``$string_id`` identifies the ID for a translation. You can supply
     additional arguments to replace placeholders in your string::
 
         __('You have {0} unread messages', $number);
+
+    You can also provide a name-indexed array of replacements::
+
+        __('You have {unread} unread messages', ['unread' => $number]);
 
     .. note::
 
@@ -252,4 +255,4 @@ Timing Definition Constants
 
 .. meta::
     :title lang=en: Global Constants and Functions
-    :keywords lang=en: internationalization and localization,global constants,example config,array php,convenience functions,core libraries,component classes,optional number,global functions,string string,core classes,format strings,unread messages,placeholders,useful functions,sprintf,arrays,parameters,existence,translations
+    :keywords lang=en: internationalization and localization,global constants,example config,array php,convenience functions,core libraries,component classes,optional number,global functions,string string,core classes,format strings,unread messages,placeholders,useful functions,arrays,parameters,existence,translations
