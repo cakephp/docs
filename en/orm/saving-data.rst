@@ -243,8 +243,8 @@ change the validation set to be used per association::
         ]
     ]);
 
-The :ref:`using-different-validators-per-association` chapter has more information on how to
-use different validators for associated marshalling.
+The :ref:`using-different-validators-per-association` chapter has more
+information on how to use different validators for associated marshalling.
 
 The following diagram gives an overview of what happens inside the
 ``newEntity()`` or ``patchEntity()`` method:

@@ -73,7 +73,7 @@ simple ligne retourne, sont trouvés::
 Output::
 
     <p>Pour plus d\'information<br />
-    selon nos célèbres pâtes et desserts.<p>
+    selon nos célèbres pâtes et desserts.</p>
     <p>contact info@example.com</p>
 
 .. include:: /core-libraries/text.rst

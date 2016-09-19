@@ -29,9 +29,9 @@ Utiliser Controller::paginate()
 Dans le controller, nous commençons par définir les conditions de la requête de
 pagination qui seront utilisées par défaut dans la variable ``$paginate`` du
 controller. Ces conditions, vont servir de base à vos requêtes de pagination.
-Elles sont complétées par le tri, la direction, la limitation et les paramètres
-de page passés depuis l'URL. Ici, il est important de noter que l'ordre des clés
-doit être défini dans une structure en tableau comme ci-dessous::
+Elles sont complétées par les paramètres ``sort``, ``direction``, ``limit`` et
+``page`` passés dans l'URL. Ici, il est important de noter que la clé ``order``
+doit être définie dans une structure en tableau comme ci-dessous::
 
     class ArticlesController extends AppController
     {
@@ -237,15 +237,17 @@ la query de pagination::
 Toute requête qui tente de trier les champs qui ne sont pas dans la liste
 blanche sera ignorée.
 
-Limiter le Nombre Maximum de Lignes qui peuvent être Récupérées
-===============================================================
+Limiter le Nombre Maximum de Lignes par Page
+============================================
 
 Le nombre de résultat qui sont récupérés est montré à l'utilisateur dans le
 paramètre ``limit``. Il est généralement non souhaité de permettre aux
-utilisateurs de récupérer toutes les lignes d'un ensemble paginé. Par défaut,
-CakePHP limite le nombre maximum de lignes qui peuvent être récupérées à
-100. Si par défaut ce n'est pas approprié pour votre application, vous pouvez
-l'ajuster dans les options de pagination::
+utilisateurs de récupérer toutes les lignes d'un ensemble paginé. L'option
+``maxLimit`` permet à ce que personne ne puisse définir cette limite trop haute
+de l'extérieur. Par défaut, CakePHP limite le nombre maximum de lignes qui
+peuvent être récupérées à 100. Si par défaut ce n'est pas approprié pour votre
+application, vous pouvez l'ajuster dans les options de pagination, par exemple
+en le réduisant à ``10``::
 
     public $paginate = [
         // Autres clés ici.
@@ -253,7 +255,7 @@ l'ajuster dans les options de pagination::
     ];
 
 Si le paramètre de limite de la requête est plus grand que cette valeur, elle
-sera réduit à la valeur ``maxLimit``.
+sera réduite à la valeur ``maxLimit``.
 
 Faire des Jointures d'Associations Supplémentaires
 ==================================================
