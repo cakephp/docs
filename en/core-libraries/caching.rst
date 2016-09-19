@@ -75,6 +75,7 @@ also lets you incrementally change the storage as needed.
 
 Example::
 
+    // Cache configuration for data that can be cached for a short time only.
     Cache::config('short', array(
         'engine' => 'File',
         'duration' => '+1 hours',
@@ -82,7 +83,7 @@ Example::
         'prefix' => 'cake_short_'
     ));
 
-    // long
+    // Cache configuration for data that can be cached for a long time.
     Cache::config('long', array(
         'engine' => 'File',
         'duration' => '+1 week',
@@ -93,7 +94,7 @@ Example::
 By placing the above code in your ``app/Config/bootstrap.php`` you will
 have two additional Cache configurations. The name of these
 configurations 'short' or 'long' is used as the ``$config``
-parameter for :php:func:`Cache::write()` and :php:func:`Cache::read()`.
+parameter for :php:func:`Cache::write()` and :php:func:`Cache::read()`, e.g. ``Cache.short``.
 
 .. note::
 
