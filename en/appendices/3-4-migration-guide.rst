@@ -31,6 +31,8 @@ elements will continue to function until 4.0.0 after which they will be removed.
   * ``setInput()`` is deprecated. Use ``withBody()`` instead.
   * The ``ArrayAccess`` methods have all been deprecated.
 
+* The ``Auth.redirect`` session variable is no longer used.
+
 Behavior Changes
 ================
 
@@ -40,6 +42,10 @@ behavior that may effect your application:
 * ORM\Query results will not typecast aliased columns based on the original
   columns type. For example if you alias ``created`` to ``created_time`` you
   will now get a ``Time`` object back instead of a string.
+* ``AuthComponent`` now uses a query string to store the redirect URL when an
+  unauthenticated user is redirected to the login page. Previously, this redirect
+  was stored in the session. Using the query string allows for better
+  multi-browser experience.
 
 Event
 =====
