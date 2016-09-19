@@ -43,7 +43,7 @@ behavior that may effect your application:
   columns type. For example if you alias ``created`` to ``created_time`` you
   will now get a ``Time`` object back instead of a string.
 * ``AuthComponent`` now uses a query string to store the redirect URL when an
-  unauthenticated user is redirected to the login page. Previously this redirect
+  unauthenticated user is redirected to the login page. Previously, this redirect
   was stored in the session. Using the query string allows for better
   multi-browser experience.
 
