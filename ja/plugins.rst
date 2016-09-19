@@ -315,13 +315,14 @@ contacts の管理ですので、このプラグインには ContactsController 
 **plugins/ContactManager/config/routes.php** に下記のように追加してください。 ::
 
     <?php
+    use Cake\Routing\Route\DashedRoute;
     use Cake\Routing\Router;
 
     Router::plugin(
         'ContactManager',
         ['path' => '/contact-manager'],
         function ($routes) {
-            $routes->fallbacks('DashedRoute');
+            $routes->fallbacks(DashedRoute::class);
         }
     );
 

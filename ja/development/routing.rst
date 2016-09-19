@@ -115,8 +115,10 @@ CakePHP の Router はリバースルーティングできます。それは、U
 接続するために、 ``scope()`` メソッドを使います。 ::
 
     // config/routes.php 内で、
+    use Cake\Routing\Route\DashedRoute;
+
     Router::scope('/', function ($routes) {
-        $routes->fallbacks('DashedRoute');
+        $routes->fallbacks(DashedRoute::class);
     });
 
 ``connect()`` メソッドは３つの引数を持ちます。あなたが一致させたい URL テンプレート、
@@ -223,10 +225,12 @@ connect() の第三引数の中で正規表現でより明確にされなけれ�
 CakePHP は小文字とダッシュによって表された URL を ``:controller`` を使った時には出力しません。
 これを出力したかったら、上の例を下のように書きなおしてください。 ::
 
+    use Cake\Routing\Route\DashedRoute;
+
     $routes->connect(
         '/:controller/:id',
         ['action' => 'view'],
-        ['id' => '[0-9]+', 'routeClass' => 'DashedRoute']
+        ['id' => '[0-9]+', 'routeClass' => DashedRoute::class]
     );
 
 ``DashedRoute`` クラス ``:controller`` を確認し、
@@ -441,10 +445,12 @@ CakePHP はそれぞれのスコープのプレフィックス名を定義する
 CakePHP では、プレフィックスルーティングは,  ``prefix`` スコープメソッドによって
 有効化されます。 ::
 
+    use Cake\Routing\Route\DashedRoute;
+
     Router::prefix('admin', function ($routes) {
         // この全てのルートは `/admin` によってプレフィックスされｍす。
         // そのために、 prefix => admin をルート要素として追加します。
-        $routes->fallbacks('DashedRoute');
+        $routes->fallbacks(DashedRoute::class);
     });
 
 プレフィックスは ``Controller`` 名前空間に属するようにマップされます。コントローラーと
@@ -1013,7 +1019,9 @@ URL を文字列で生成します。URL パラメーターがルートに一尉
 セットアップする前に、それぞれのルートのための特定の ``routeClass`` オプションを持つことを
 避けます。例えば、下記を使います。 ::
 
-    Router::defaultRouteClass('InflectedRoute');
+    use Cake\Routing\Route\InflectedRoute;
+
+    Router::defaultRouteClass(InflectedRoute::class);
 
 これは、 ``DashedRoute`` ルートクラスを使うために、この後すべてのルーティング接続がされます。
 引数なしにこのメソッドを呼ぶと、現在のデフォルトルートクラスが帰ってきます。
@@ -1029,12 +1037,16 @@ URL を文字列で生成します。URL パラメーターがルートに一尉
 
 フォールバックを呼ぶには、こうします。 ::
 
-    $routes->fallbacks('DashedRoute');
+    use Cake\Routing\Route\DashedRoute;
+
+    $routes->fallbacks(DashedRoute::class);
 
 これは正規の呼び出しに従うのと同じです。 ::
 
-    $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'DashedRoute']);
-    $routes->connect('/:controller/:action/*', [], ['routeClass' => 'DashedRoute']);
+    use Cake\Routing\Route\DashedRoute;
+
+    $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => DashedRoute:class]);
+    $routes->connect('/:controller/:action/*', [], ['routeClass' => DashedRoute:class]);
 
 .. note::
 
