@@ -175,7 +175,7 @@ au callback, c'est très utile pour les callbacks comme ``json_decode``::
 
 Le contenu ci-dessus créera ``$this->request->data`` un tableau des données
 d'entrées JSON, sans le ``true`` supplémentaire vous obtiendrez un jeu
-d'objets ``StdClass``.
+d'objets ``stdClass``.
 
 .. deprecated:: 3.1.0
     Depuis 3.1.0 la méthode ``addInputType()`` est dépréciée. Vous devez

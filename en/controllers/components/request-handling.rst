@@ -170,7 +170,7 @@ callbacks like ``json_decode``::
     $this->RequestHandler->config('inputTypeMap.json', ['json_decode', true]);
 
 The above will make ``$this->request->data`` an array of the JSON input data,
-without the additional ``true`` you'd get a set of ``StdClass`` objects.
+without the additional ``true`` you'd get a set of ``stdClass`` objects.
 
 .. deprecated:: 3.1.0
     As of 3.1.0 the ``addInputType()`` method is deprecated. You should use
