@@ -373,12 +373,17 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
 
     class RemovePriceFromProducts extends AbstractMigration
     {
-        public function change()
+        public function up()
         {
             $table = $this->table('products');
             $table->removeColumn('price');
         }
     }
+
+.. note::
+
+    `removeColumn` は不可逆ですので、 `up` メソッドの中で呼び出してください。
+    それに対する `addColumn` の呼び出しは、 `down` メソッドに追加してください。
 
 既存のデータベースからマイグレーションファイルを作成する
 --------------------------------------------------------
