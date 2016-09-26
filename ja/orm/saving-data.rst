@@ -209,6 +209,12 @@ Table クラスは、リクエストデータを一つまたは複数のエン�
         ]
     ]);
 
+入れ子になったアソシエーションの変換を無効にする時は、次のようになります。 ::
+
+    $entity = $articles->newEntity($data, ['associated' => []]);
+    // または...
+    $entity = $articles->patchEntity($entity, $data, ['associated' => []]);
+
 上記は 'Tags' 、 'Comments' そして Comments 用の 'Users' が変換されるべきであること
 を示しています。代わりに、簡潔にするためにドット記法を使うことができます。 ::
 
@@ -234,6 +240,9 @@ Table クラスは、リクエストデータを一つまたは複数のエン�
             'Comments.Users' => ['validate' => 'signup']
         ]
     ]);
+
+関連付けられた変換のために、異なる検証を使用する方法に関する詳しい情報は、
+:ref:`using-different-validators-per-association` の章をご覧ください。
 
 以下の図表は ``newEntity()`` または ``patchEntity()`` メソッドの内部で
 どんなことが起きるのかの概要を示しています。
