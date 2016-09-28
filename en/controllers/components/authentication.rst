@@ -169,7 +169,7 @@ the following keys:
     The password check is done in PHP. This is necessary because hashing
     algorithms like bcrypt (which is used by default) generate a new hash
     each time, even for same string and you can't just do simple string
-    comparision in SQL to check if password matches.
+    comparison in SQL to check if password matches.
 
 Customizing Find Query
 ----------------------
