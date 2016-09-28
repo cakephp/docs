@@ -167,7 +167,7 @@ the following keys:
 .. note::
     To find the user record, the database is queried only using username.
     The password check is done in PHP. This is necessary because hashing
-    algorightms like bcrypt (which is used by default) generate a new hash
+    algorithms like bcrypt (which is used by default) generate a new hash
     each time, even for same string and you can't just do simple string
     comparision in SQL to check if password matches.
 
