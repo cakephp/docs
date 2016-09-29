@@ -396,12 +396,19 @@ créé le fichier::
 
     class RemovePriceFromProducts extends AbstractMigration
     {
-        public function change()
+        public function up()
         {
             $table = $this->table('products');
-            $table->removeColumn('price');
+            $table->removeColumn('price')
+                  ->save();
         }
     }
+
+.. note::
+
+    La commande `removeColumn` n'est pas réversible, donc elle doit être appelée
+    dans la méthode `up`. Un appel correspondant au `addColumn` doit être
+    ajouté à la méthode `down`.
 
 Générer une Migration à partir d'une Base de Données Existante
 ==============================================================

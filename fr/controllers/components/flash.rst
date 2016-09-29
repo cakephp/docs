@@ -91,10 +91,26 @@ flash.
 
 .. note::
 
-    Par défaut, CakePHP n'échappe pas le HTML dans les messages flash. Si vous
-    utilisez une requête ou des données d'utilisateur dans vos messages flash,
-    vous devrez les échapper avec :php:func:`h` lors du formatage de vos
-    messages flash.
+    Par défaut, CakePHP échappe le contenu dans les messages flash pour des
+    raisons de sécurité. Si vous utilisez une requête ou des données
+    d'utilisateur dans vos messages flash, ceux-ci sont échappés et donc
+    sécurisés pour l'affichage. Si vous souhaitez afficher le HTML, vous devez
+    passer un paramètre ``escape`` et aussi ajuster les templates pour permettre
+    la désactivation de l'échappement quand un tel paramètre est passé.
+
+HTML dans des Messages Flash
+============================
+
+.. versionadded:: 3.3.3
+
+Il est possible d'afficher le HTML dans des messages flash en utilisant la clé
+d'option ``'escape'``::
+
+    $this->Flash->info(sprintf('<b>%s</b> %s', h($highlight), h($message)), ['escape' => false]);
+
+Assure-vous de bien échapper l'input manuellement, ensuite. Dans l'exemple
+ci-dessus, ``$highlight`` et ``$message`` sont des inputs non-HTML et donc sont
+échappés.
 
 Pour plus d'informations sur le rendu de vos messages flash, consultez la
 section :doc:`FlashHelper </views/helpers/flash>`.

@@ -264,7 +264,7 @@ PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを�
     $ phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 
 これで、アプリケーションの webroot ディレクトリ内のカバレッジ結果を配置します。
-``http://localhost/your_app/cverage`` にアクセスすると、結果を表示することができるはずです。
+``http://localhost/your_app/coverage`` にアクセスすると、結果を表示することができるはずです。
 
 プラグインのテストスイートを組合わせ
 ------------------------------------

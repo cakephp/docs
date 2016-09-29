@@ -129,6 +129,9 @@ You can have as many validation sets as necessary. See the :doc:`validation
 chapter </core-libraries/validation>` for more information on building
 validation rule-sets.
 
+
+.. _using-different-validators-per-association:
+
 Using A Different Validation Set For Associations
 -------------------------------------------------
 
@@ -270,6 +273,10 @@ Applying Application Rules
 While basic data validation is done when :ref:`request data is converted into
 entities <validating-request-data>`, many applications also have more complex
 validation that should only be applied after basic validation has completed.
+
+Where validation ensures the form or syntax of your data is correct, rules
+focus on comparing data against the existing state of your application and/or
+network.
 
 These types of rules are often referred to as 'domain rules' or 'application
 rules'. CakePHP exposes this concept through 'RulesCheckers' which are applied

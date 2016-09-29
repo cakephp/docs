@@ -221,7 +221,7 @@ written between bracket.
 Fields named ``created`` and ``modified`` will automatically be set to the type
 ``datetime``.
 
-Field types a those generically made available by the ``Phinx`` library. Those
+Field types are those generically made available by the ``Phinx`` library. Those
 can be:
 
 * string
@@ -387,12 +387,19 @@ creates the file::
 
     class RemovePriceFromProducts extends AbstractMigration
     {
-        public function change()
+        public function up()
         {
             $table = $this->table('products');
-            $table->removeColumn('price');
+            $table->removeColumn('price')
+                  ->save();
         }
     }
+
+.. note::
+
+    The `removeColumn` command is not reversible, so must be called in the
+    `up` method. A corresponding `addColumn` call should be added to the
+    `down` method.
 
 Generating migrations from an existing database
 ===============================================

@@ -51,11 +51,11 @@ Vous pouvez faire ceci en utilisant ``get()``::
     ]);
 
 Si l'opération get ne trouve aucun résultat, une
-``Cake\Datasource\Exception\RecordNotFoundException`` sera levée. Vous pouvez soit
-attraper cette exception vous-même, ou permettre à CakePHP de la convertir en
-une erreur 404.
+``Cake\Datasource\Exception\RecordNotFoundException`` sera levée. Vous pouvez
+soit attraper cette exception vous-même, ou permettre à CakePHP de la convertir
+en une erreur 404.
 
-Comme ``find()``, get a un cache intégré. Vous pouvez utiliser l'option
+Comme ``find()``, ``get()`` a un cache intégré. Vous pouvez utiliser l'option
 ``cache`` quand vous appelez ``get()`` pour appliquer la mise en cache::
 
     // Dans un controller ou dans une méthode table.

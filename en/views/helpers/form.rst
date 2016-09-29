@@ -1737,7 +1737,8 @@ Generates a set of inputs for the given context wrapped in a fieldset. You can
 specify the generated fields by including them::
 
     echo $this->Form->inputs([
-        'name' => ['label' => 'custom label']
+        'name',
+        'email'
     ]);
 
 You can customize the legend text using an option::

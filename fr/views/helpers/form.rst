@@ -1789,7 +1789,8 @@ Génère un ensemble d'inputs pour un contexte donné. Vous pouvez spécifier le
 champs générés en les incluant::
 
     echo $this->Form->inputs([
-        'name' => ['label' => 'custom label']
+        'name',
+        'email'
     ]);
 
 Vous pouvez personnaliser le texte de légende en utilisant une option::

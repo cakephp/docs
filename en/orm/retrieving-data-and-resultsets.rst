@@ -48,8 +48,8 @@ If the get operation does not find any results a
 either catch this exception yourself, or allow CakePHP to convert it into a 404
 error.
 
-Like ``find()`` get has caching integrated. You can use the ``cache`` option
-when calling ``get()`` to perform read-through caching::
+Like ``find()``, ``get()`` also has caching integrated. You can use the
+``cache`` option when calling ``get()`` to perform read-through caching::
 
     // In a controller or table method.
 
@@ -900,9 +900,7 @@ Turning buffering off has a few caveats:
 #. You will also not be able to iterate & cache the results.
 #. Buffering cannot be disabled for queries that eager load hasMany or
    belongsToMany associations, as these association types require eagerly
-   loading all results so that dependent queries can be generated. This
-   limitation is not present when using the ``subquery`` strategy for those
-   associations.
+   loading all results so that dependent queries can be generated.
 
 .. warning::
 

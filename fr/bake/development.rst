@@ -260,7 +260,7 @@ va trouver votre nouvelle tâche et l'inclure comme faisant partie de bake.
 En exemple, nous allons faire une tâche qui créé une classe arbitraire foo.
 D'abord créez le fichier de tâche **src/Shell/Task/FooTask.php**. Nous
 étendrons le ``SimpleBakeTask`` pour l'instant puisque notre tâche shell sera
-simple. ``SimpleBakeTask`` est abstraite et nous impose de définir 4 méthodes
+simple. ``SimpleBakeTask`` est abstraite et nous impose de définir 3 méthodes
 qui disent à bake comment la tâche est appelée, l'endroit où devront se trouver
 les fichiers qu'il va générer, et le template à utiliser. Notre fichier
 FooTask.php devra ressembler à ceci::

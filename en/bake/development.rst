@@ -248,7 +248,7 @@ part of bake.
 As an example, we'll make a task that creates an arbitrary foo class. First,
 create the task file **src/Shell/Task/FooTask.php**. We'll extend the
 ``SimpleBakeTask`` for now as our shell task will be simple. ``SimpleBakeTask``
-is abstract and requires us to define 4 methods that tell bake what the task is
+is abstract and requires us to define 3 methods that tell bake what the task is
 called, where the files it generates should go, and what template to use. Our
 FooTask.php file should look like::
 

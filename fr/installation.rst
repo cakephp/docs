@@ -123,7 +123,7 @@ Rester à jour avec les Derniers Changements de CakePHP
 Par défaut c'est ce à quoi le **composer.json** de votre application ressemble::
 
     "require": {
-        "cakephp/cakephp": "~3.2"
+        "cakephp/cakephp": "3.3.*"
     }
 
 A chaque fois que vous lancez ``php composer.phar update``, vous allez

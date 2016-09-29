@@ -515,7 +515,7 @@ value object and into SQL expressions::
         public function marshall($value)
         {
             if (is_string($value)) {
-                $value = extract(',', $value);
+                $value = explode(',', $value);
             }
             if (is_array($value)) {
                 return new Point($value[0], $value[1]);

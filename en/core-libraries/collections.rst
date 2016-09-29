@@ -624,7 +624,7 @@ By default, ``SORT_NUMERIC`` is used::
 
 .. warning::
 
-    If is often expensive to iterate sorted collections more than once. If you
+    It is often expensive to iterate sorted collections more than once. If you
     plan to do so, consider converting the collection to an array or simply use
     the ``compile()`` method on it.
 

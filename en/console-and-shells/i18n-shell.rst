@@ -34,6 +34,18 @@ You can generate a POT file for a specific plugin using::
 
 This will generate the required POT files used in the plugins.
 
+Extracting from multiple folders at once
+----------------------------------------
+
+Sometimes, you might need to extract strings from more than one directory of
+your application. For instance, if you are defining some strings in the
+``config`` directory of your application, you probably want to extract strings
+from this directory as well as from the ``src`` directory. You can do it by
+using the ``--paths`` option. It takes a comma-separated list of absolute paths
+to extract::
+
+    bin/cake i18n extract --paths /var/www/app/config,/var/www/app/src
+
 Excluding Folders
 -----------------
 

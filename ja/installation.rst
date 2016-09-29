@@ -113,7 +113,7 @@ CakePHPの変更に合わせて最新の状態に保つ
 デフォルトではあなたのアプリケーションの **composer.json** は下記のようになっています。 ::
 
     "require": {
-        "cakephp/cakephp": "~3.2"
+        "cakephp/cakephp": "3.3.*"
     }
 
 あなたが ``php composer.phar update`` と実行するたびに、デフォルトのバージョン制約

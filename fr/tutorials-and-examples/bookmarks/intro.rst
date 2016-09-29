@@ -299,9 +299,10 @@ pouvoir intégrer ceci, nous allons ajouter une nouvelle route. Votre fichier
 **config/routes.php** doit ressembler à ceci::
 
     <?php
+    use Cake\Routing\Route\DashedRoute;
     use Cake\Routing\Router;
 
-    Router::defaultRouteClass('Route');
+    Router::defaultRouteClass(DashedRoute::class);
 
     // Nouvelle route ajoutée pour notre action "tagged".
     // Le caractère `*` en fin de chaîne indique à CakePHP que cette action a
@@ -326,7 +327,7 @@ pouvoir intégrer ceci, nous allons ajouter une nouvelle route. Votre fichier
         ]);
 
         // Connecte les routes basées sur les conventions par défaut.
-        $routes->fallbacks('InflectedRoute');
+        $routes->fallbacks();
     });
 
 Ce qui est au-dessus définit une nouvelle 'route' qui connecte le chemin
