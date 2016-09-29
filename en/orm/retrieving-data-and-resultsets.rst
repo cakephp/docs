@@ -610,7 +610,7 @@ option to sort the data in those associations::
 
     $query->contain([
         'Comments' => [
-            'sort' => ['Comment.created' => 'DESC']
+            'sort' => ['Comments.created' => 'DESC']
         ]
     ]);
 
