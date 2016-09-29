@@ -7,39 +7,47 @@ complète. Cette page souligne les changements et améliorations faits dans 3.4.
 Deprecations
 ============
 
-The following is a list of deprecated methods, properties and behaviors. These
-elements will continue to function until 4.0.0 after which they will be removed.
+La liste qui suit regroupe les méthodes, les propriétés et les comportements
+dépréciés. Ces différents éléments continueront de fonctionner jusqu'à la
+version 4.0.0 à partir de laquelle ils seront supprimés.
 
-* The public properties on ``Cake\Event\Event`` are deprecated, new methods have
-  been added to read/write the relevant properties.
-* Several properties on ``Cake\Network\Request`` have been deprecated:
+* Les propriétés _public_ de ``Cake\Event\Event`` sont dépréciés, de nouvelles
+  méthodes ont été ajoutées pour lire et écrire ces propriétés.
+* Plusieurs propriétés de ``Cake\Network\Request`` ont été dépréciées :
 
-  * ``Request::$params`` is deprecated. Use ``Request::param()`` instead.
-  * ``Request::$data`` is deprecated. Use ``Request::data()`` instead.
-  * ``Request::$query`` is deprecated. Use ``Request::query()`` instead.
-  * ``Request::$cookies`` is deprecated. Use ``Request::cookie()`` instead.
-  * ``Request::$base`` is deprecated. Use ``Request::getAttribute('base')`` instead.
-  * ``Request::$webroot`` is deprecated. Use ``Request::getAttribute('webroot')`` instead.
-  * ``Request::$here`` is deprecated. Use ``Request::here()`` instead.
-  * ``Request::$_session`` was renamed to ``Request::$session``.
+  * ``Request::$params`` est dépréciée. Utilisez ``Request::param()`` à la place.
+  * ``Request::$data`` est dépréciée. Utilisez ``Request::data()`` à la place.
+  * ``Request::$query`` est dépréciée. Utilisez ``Request::query()`` à la place.
+  * ``Request::$cookies`` est dépréciée. Utilisez ``Request::cookie()`` à la place.
+  * ``Request::$base`` est dépréciée. Utilisez ``Request::getAttribute('base')`` à la place.
+  * ``Request::$webroot`` est dépréciée. Utilisez ``Request::getAttribute('webroot')`` à la place.
+  * ``Request::$here`` est dépréciée. Utilisez ``Request::here()`` à la place.
+  * ``Request::$_session`` a été renommée ``Request::$session``.
 
-* A number of methods on ``Cake\Network\Request`` have been deprecated:
+* Certaines méthodes de ``Cake\Network\Request`` ont été dépréciées :
 
-  * The setter modes for ``query()``, ``data()`` and ``param()`` are deprecated.
-  * ``__get()`` & ``__isset()`` methods are deprecated. Use ``param()`` instead.
-  * ``method()`` is deprecated. Use ``getMethod()`` instead.
-  * ``setInput()`` is deprecated. Use ``withBody()`` instead.
-  * The ``ArrayAccess`` methods have all been deprecated.
+  * Les méthodes ``query()``, ``data()`` et ``param()`` ne peuvent plus _setter_ les valeurs des propriétés
+    correspondantes.
+  * Les méthodes ``__get()`` & ``__isset()`` sont dépréciées. Utilisez ``param()`` à la place.
+  * ``method()`` est dépréciée. Utilisez ``getMethod()`` plutôt.
+  * ``setInput()`` est dépréciée. Utilisez ``withBody()`` plutôt.
+  * Les méthodes ``ArrayAccess`` ont toutes été dépréciées.
 
-Behavior Changes
-================
+Changement de comportements
+===========================
 
-While these changes are API compatible, they represent minor variances in
-behavior that may effect your application:
+Bien que ces changements garde la compatibilité API, ce sont tout de même des
+variations mineures qui pourraient avoir un impact sur votre application :
 
-* ORM\Query results will not typecast aliased columns based on the original
-  columns type. For example if you alias ``created`` to ``created_time`` you
-  will now get a ``Time`` object back instead of a string.
+* Les résultats de ``ORM\Query`` ne feront plus de typecast sur les alias de
+  colonnes basé sur le type de colonne original. Par exemple, si vous faites
+  un alias de ``created`` en ``created_time``, vous obtiendrez maintenant une
+  instance de ``Time`` plutôt qu'une chaîne de caractères.
+* Le ``AuthComponent`` utilise maintenant un paramètre URL pour stocker
+  l'adresse de redirection quand un utilisateur non identifié est redirigé sur
+  la page de connexion. Auparavant, l'URL de redirection était stockée en
+  session. Utiliser un paramètre d'URL permet une meilleure compatibilité avec
+  les différents navigateurs.
 
 Event
 =====
