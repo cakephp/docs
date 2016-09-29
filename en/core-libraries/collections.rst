@@ -53,27 +53,27 @@ List of Methods
 .. table::
     :class: docutils internal-toc
 
-    +-----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`append`    | :php:meth:`buffered`   | :php:meth:`combine`  | :php:meth:`compile` |
-    +-----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`contains`  | :php:meth:`countBy`    | :php:meth:`chunk`    | :php:meth:`each`    |
-    +-----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`every`     | :php:meth:`extract`    | :php:meth:`filter`   | :php:meth:`first`   |
-    +-----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`groupBy`   | :php:meth:`indexBy`    | :php:meth:`insert`   | :php:meth:`isEmpty` |
-    +-----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`last`      | :php:meth:`listNested` | :php:meth:`map`      | :php:meth:`match`   |
-    +-----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`max`       | :php:meth:`min`        | :php:meth:`nest`     | :php:meth:`reduce`  |
-    +-----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`reject`    | :php:meth:`sample`     | :php:meth:`shuffle`  | :php:meth:`skip`    |
-    +-----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`some`      | :php:meth:`sortBy`     | :php:meth:`stopWhen` | :php:meth:`sumOf`   |
-    +-----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`take`      | :php:meth:`through`    | :php:meth:`unfold`   | :php:meth:`zip`     |
-    +-----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`transpose` |                        |                      |                     |
-    +-----------------------+------------------------+----------------------+---------------------+
+    +-----------------------+---------------------------+----------------------+---------------------+
+    | :php:meth:`append`    | :php:meth:`buffered`      | :php:meth:`combine`  | :php:meth:`compile` |
+    +-----------------------+---------------------------+----------------------+---------------------+
+    | :php:meth:`contains`  | :php:meth:`countBy`       | :php:meth:`chunk`    | :php:meth:`each`    |
+    +-----------------------+---------------------------+----------------------+---------------------+
+    | :php:meth:`every`     | :php:meth:`extract`       | :php:meth:`filter`   | :php:meth:`first`   |
+    +-----------------------+---------------------------+----------------------+---------------------+
+    | :php:meth:`groupBy`   | :php:meth:`indexBy`       | :php:meth:`insert`   | :php:meth:`isEmpty` |
+    +-----------------------+---------------------------+----------------------+---------------------+
+    | :php:meth:`last`      | :php:meth:`listNested     | :php:meth:`map`      | :php:meth:`match`   |
+    +-----------------------+---------------------------+----------------------+---------------------+
+    | :php:meth:`max`       | :php:meth:`min`           | :php:meth:`nest`     | :php:meth:`reduce`  |
+    +-----------------------+---------------------------+----------------------+---------------------+
+    | :php:meth:`reject`    | :php:meth:`sample`        | :php:meth:`shuffle`  | :php:meth:`skip`    |
+    +-----------------------+---------------------------+----------------------+---------------------+
+    | :php:meth:`some`      | :php:meth:`sortBy`        | :php:meth:`stopWhen` | :php:meth:`sumOf`   |
+    +-----------------------+---------------------------+----------------------+---------------------+
+    | :php:meth:`take`      | :php:meth:`through`       | :php:meth:`unfold`   | :php:meth:`zip`     |
+    +-----------------------+---------------------------+----------------------+---------------------+
+    | :php:meth:`transpose` | :php:meth:`chunkWithKeys` |                      |                     |
+    +-----------------------+---------------------------+----------------------+---------------------+
 
 Iterating
 =========
@@ -282,7 +282,7 @@ to return as many elements for each item in the collection as you may need::
 
 .. php:method:: chunk($chunkSize)
 
-When dealing with big amounts of items in a collection, it may make sense to
+When dealing with large amounts of items in a collection, it may make sense to
 process the elements in batches instead of one by one. For splitting
 a collection into multiple arrays of a certain size, you can use the ``chunk()``
 function::
@@ -304,6 +304,28 @@ example with a database result::
         ->each(function ($batch) {
             myBulkSave($batch); // This function will be called for each batch
         });
+
+.. php:method:: chunkWithKeys($chunkSize)
+
+Much like :php:meth:`chunk()` ``chunkWithKeys()`` allows you to slice up
+a collection into smaller batches but with keys preserved. This is useful when
+chunking associative arrays::
+
+    $collection = new Collection([
+        'a' => 1,
+        'b' => 2,
+        'c' => 3,
+        'd' => [4, 5]
+    ]);
+    $chunked = $collection->chunkWithKeys(2)->toList();
+    // Creates
+    [
+        ['a' => 1, 'b' => 2],
+        ['c' => 3, 'd' => [4, 5]]
+    ]
+
+.. versionadded:: 3.4.0
+    ``chunkWithKeys()`` was added in 3.4.0
 
 Filtering
 =========

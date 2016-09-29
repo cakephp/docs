@@ -47,6 +47,13 @@ behavior that may effect your application:
   was stored in the session. Using the query string allows for better
   multi-browser experience.
 
+Collection
+==========
+
+* ``CollectionInterface::chunkWithKeys()`` was added. User land implementations
+  of the ``CollectionInterface`` will need to implement this method now.
+* ``Collection::chunkWithKeys()`` was added.
+
 Event
 =====
 
