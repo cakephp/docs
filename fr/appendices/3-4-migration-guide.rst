@@ -41,6 +41,14 @@ behavior that may effect your application:
   columns type. For example if you alias ``created`` to ``created_time`` you
   will now get a ``Time`` object back instead of a string.
 
+Collection
+==========
+
+* ``CollectionInterface::chunkWithKeys()`` a été ajoutée. Les implémentations
+  de ``CollectionInterface`` des utilisateurs devront maintenant implémenter
+  cette méthode.
+* ``Collection::chunkWithKeys()`` a été ajoutée.
+
 Event
 =====
 

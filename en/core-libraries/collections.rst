@@ -307,7 +307,7 @@ example with a database result::
 
 .. php:method:: chunkWithKeys($chunkSize)
 
-Much like :php:meth:`chunk()` ``chunkWithKeys()`` allows you to slice up
+Much like :php:meth:`chunk()`, ``chunkWithKeys()`` allows you to slice up
 a collection into smaller batches but with keys preserved. This is useful when
 chunking associative arrays::
 
