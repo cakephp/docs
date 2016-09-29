@@ -165,11 +165,11 @@ the following keys:
   to ``md5($config['realm'])``.
 
 .. note::
-    To find the user record, the database is queried only using username.
+    To find the user record, the database is queried only using the username.
     The password check is done in PHP. This is necessary because hashing
     algorithms like bcrypt (which is used by default) generate a new hash
-    each time, even for same string and you can't just do simple string
-    comparison in SQL to check if password matches.
+    each time, even for the same string and you can't just do simple string
+    comparison in SQL to check if the password matches.
 
 Customizing Find Query
 ----------------------
