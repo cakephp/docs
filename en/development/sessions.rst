@@ -33,7 +33,7 @@ options are:
 * ``Session.cookie`` - The name of the cookie to use. Defaults to 'CAKEPHP'.
 
 * ``Session.cookiePath`` - The url path for which session cookie is set. Maps to
-  the ``session.cookie_path``` php.ini config. Defaults to base path of app.
+  the ``session.cookie_path`` php.ini config. Defaults to base path of app.
 
 CakePHP's defaults ``session.cookie_secure`` to ``true``, when your application
 is on an SSL protocol. If your application serves from both SSL and non-SSL
