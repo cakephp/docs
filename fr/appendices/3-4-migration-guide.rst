@@ -49,6 +49,14 @@ variations mineures qui pourraient avoir un impact sur votre application :
   session. Utiliser un paramètre d'URL permet une meilleure compatibilité avec
   les différents navigateurs.
 
+Collection
+==========
+
+* ``CollectionInterface::chunkWithKeys()`` a été ajoutée. Les implémentations
+  de ``CollectionInterface`` des utilisateurs devront maintenant implémenter
+  cette méthode.
+* ``Collection::chunkWithKeys()`` a été ajoutée.
+
 Event
 =====
 
