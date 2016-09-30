@@ -367,7 +367,7 @@ Génère::
 Converting an Array to Sentence Form
 ====================================
 
-.. php:method:: toList(array $list, $and='and')
+.. php:method:: toList(array $list, $and='and', $separator=', ')
 
 Crée une liste séparée avec des virgules, où les deux derniers items sont joins
 avec 'and'::
