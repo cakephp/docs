@@ -955,9 +955,7 @@ Stopper la mise en mémoire tampon nécessite quelques mises en garde:
 #. La mise en mémoire tampon ne peut pas être désactivé pour les requêtes qui
    chargent en eager les associations hasMany ou belongsToMany, puisque ces
    types d'association nécessitent le chargement en eager de tous les résultats
-   pour que les requêtes dépendantes puissent être générées. Cette
-   limitation n'est pas présente lorsque l'on utilise la stratégie ``subquery``
-   pour ces associations.
+   pour que les requêtes dépendantes puissent être générées.
 
 .. warning::
 
