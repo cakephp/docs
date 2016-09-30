@@ -82,6 +82,16 @@ URL for named route::
     // );
     /products/i-m-slug
 
+.. versionadded:: 3.3.5
+The ``url()`` method now allows an array as second argument defining options::
+
+    $this->Url->build('/posts', [
+        'escape' => false.
+        'fullBase' => true
+    ]);
+
+This allows for disabling espacing the URL now, for example.
+
 If you are generating URLs for CSS, Javascript or image files there are helper
 methods for each of these asset types::
 
