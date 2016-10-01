@@ -273,12 +273,15 @@ laquelle l'utilisateur doit être redirigé après s'être connecté.
 Si aucun paramètre n'est passé, elle obtient l'URL de redirection
 d'authentification. L'URL retournée correspond aux règles suivantes:
 
-- Retourne l'URL normalisée de valeur ``Auth.redirect`` si elle est présente en
-  session et pour le même domaine que celui sur lequel application est exécuté.
-- S'il n'y a pas de valeur en session et qu'il y a une configuration
-  ``loginRedirect``, la valeur de ``loginRedirect`` est retournée.
-- S'il n'y a pas de valeur en session et pas de ``loginRedirect``, ``/``
-  est retournée.
+- Retourne l'URL normalisée du paramètre URL ``redirect`` si elle est présente
+  et pour le même domaine que celui sur lequel application est exécuté. Avant
+  3.4.0, la valeur de la clé ``Auth.redirect`` stockée en session était
+  utilisée.
+- S'il n'y a pas de valeur en session ou en paramètres URL et que la clé
+  ``loginRedirect`` faisait partie de la configuration de ``AuthComponent``,
+  la valeur de ``loginRedirect`` est retournée.
+- S'il n'y a pas de valeur de redirection et que la clé ``loginRedirect`` n'a
+  pas été configurée, ``/`` est retournée.
 
 Création de Systèmes d'Authentification Stateless
 -------------------------------------------------
