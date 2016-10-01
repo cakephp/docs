@@ -74,7 +74,7 @@ underscore メソッドは、 キャメルケース形式の単語のみ変換�
 コードの生成や CakePHP の規約を使用する時、テーブル名やクラス名に加工するために
 必要になります。 ::
 
-    // UserProfileSettings
+    // UserProfileSetting
     Inflector::classify('user_profile_settings');
 
     // user-profile-setting
