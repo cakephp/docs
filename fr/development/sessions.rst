@@ -14,8 +14,8 @@ la place l'utilisation des classes de Session est préférable.
 Configuration de Session
 ========================
 
-La configuration de Session est stockée dans ``Configure`` dans la clé de haut
-niveau ``Session``, et un certain nombre d'options sont disponibles:
+La configuration de Session est généralement définie dans ``/config/app.php``.
+Les options suivantes sont disponibles:
 
 * ``Session.timeout`` - Le nombre de *minutes* avant que le gestionnaire de
   session de CakePHP ne fasse expirer la session.
@@ -33,6 +33,12 @@ niveau ``Session``, et un certain nombre d'options sont disponibles:
   supplémentaire pour votre config. Ceci combiné avec ``Session.handler``
   remplace les fonctionnalités de gestionnaire de session personnalisé
   des versions précédentes.
+
+* ``Session.cookie`` - Le nom du cookie à utiliser. Le défaut est 'CAKEPHP'.
+
+* ``Session.cookiePath`` - Le chemin URL pour lequel le cookie de session est
+  défini. Correspond à la configuration ``session.cookie_path`` du php.ini.
+  Le défaut est le chemin de base de l'application.
 
 CakePHP met par défaut la configuration de ``session.cookie_secure`` à ``true``,
 quand votre application est sur un protocole SSL. Si votre application utilise
@@ -121,13 +127,6 @@ configuration de session 'php'. Les configurations intégrées sont:
   Regardez ci-dessous pour plus d'informations.
 * ``cache`` - Utilise les sessions de cache intégrées. Regardez
   ci-dessous pour plus d'informations.
-
-Les valeurs acceptées sont:
-
-* defaults - Soit 'php', 'database', 'cache' ou 'cake' comme expliqué ci-dessus.
-* handler - Un tableau contenant la configuration du gestionnaire.
-* ini - Une liste de directives de php.ini à définir avant le démarrage de la session.
-* timeout - La durée en minute durant laquelle la session doit rester active.
 
 Gestionnaires de Session
 ------------------------
