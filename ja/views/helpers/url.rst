@@ -13,7 +13,7 @@ UrlHelper は他のヘルパーから URL を生成することが容易にな�
 URL の生成
 ==========
 
-.. php:method:: build(mixed $url = null, boolean $full = false)
+.. php:method:: build(mixed $url = null, boolean|array $full = false)
 
 コントローラーとアクションの組み合わせを指定することで URL を生成して返します。
 ``$url`` が空の場合、 ``REQUEST\_URI`` を返します。そうでない場合、
@@ -81,6 +81,17 @@ GET パラメータとフラグメントアンカーの URL::
     //     ]
     // );
     /products/i-m-slug
+
+第２パラメータは、HTML エスケープやベースパスを追加するかどうかを制御するオプションを
+定義できます。 ::
+
+    $this->Url->build('/posts', [
+        'escape' => false,
+        'fullBase' => true
+    ]);
+
+.. versionadded:: 3.3.5
+    ``build()`` は、3.3.5 より第２引数として配列を受け取ります。
 
 CSS や JavaScript、または画像ファイルの URL を生成する場合、
 これらのアセットタイプのためのヘルパーメソッドがあります。 ::
