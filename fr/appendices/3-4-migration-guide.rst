@@ -33,6 +33,8 @@ version 4.0.0 à partir de laquelle ils seront supprimés.
   * ``setInput()`` est dépréciée. Utilisez ``withBody()`` plutôt.
   * Les méthodes ``ArrayAccess`` ont toutes été dépréciées.
 
+* La valeur de ``Auth.redirect`` stockée en session n'est plus utilisée.
+
 Changement de comportements
 ===========================
 
