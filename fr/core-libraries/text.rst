@@ -43,40 +43,49 @@ Convertion des Chaînes de Caractères en ASCII
 
 .. php:staticmethod:: transliterate($string, $transliteratorId = null)
 
-Transliterate by default converts all characters in provided string into
-equivalent ASCII characters. The method expects UTF-8 encoding. The character
-conversion can be controlled using transliteration identifiers which you can
-pass using the ``$transliteratorId`` argument or change the default identifier
-string using ``Text::setTransliteratorId()``. ICU transliteration identifiers
-are basically of form ``<source script>:<target script>`` and you can specify
-multiple conversion pairs separated by ``;``. You can find more info about
-transliterator identifiers
-`here <http://userguide.icu-project.org/transforms/general#TOC-Transliterator-Identifiers>`_::
+La méthode ``translisterate`` convertit par défaut tous les caractères dans la
+chaîne soumises dans son équivalent en caractères ASCII. La méthode s'attend à
+avoir une chaîne encodée en UTF-8 en entrée. La conversion des caractères peut
+être controllée en utilisant des identifiants de translitération que vous
+passez via l'argument ``$transliteratorId`` de la méthode ou en changeant
+l'identifiant par défaut à l'aide de ``Text::setTransliteratorId()``.
+Les identifiants de translitération d'ICU sont généralement sous la forme
+``<source script>:<target script>`` et vous pouvez spécifier plusieurs couples
+ de conversion en les séparant par des ``;``. Vous trouverez plus
+d'informations sur les identifiants de transliterateurs
+`ici <http://userguide.icu-project.org/transforms/general#TOC-Transliterator-Identifiers>`_::
 
-    // apple puree
+    // apple purée
     Text::transliterate('apple purée');
 
-    // Ubermensch (only latin characters are transliterated)
+    // Ubermensch (seuls les caractères latin seront translitérés)
     Text::transliterate('Übérmensch', 'Latin-ASCII;');
 
-Creating URL Safe Strings
-=========================
+Créer des chaînes saines pour les URL
+=====================================
 
 .. php:staticmethod:: slug($string, $options = [])
 
-Slug transliterates all characters into ASCII versions and converting unmatched
-characters and spaces to dashes. The slug method expects UTF-8 encoding.
+La méthode ``slug`` va translitérer tous les caractères en leurs équivalents
+ASCII et convertir tous les caractères non reconnus ainsi que les espaces en
+trait d'union (``-``). Elle s'attend à recevoir une chaîne encodée en UTF-8 en
+entrée.
 
-You can provide an array of options that controls slug. ``$options`` can also be
-a string in which case it will be used as replacement string. The supported
-options are:
+Vous pouvez lui passer un tableau d'options pour avoir plus de contrôle sur le
+slug retourné. Le paramètre ``$options`` peut aussi être une chaîne de
+caractères, auquel cas il sera utilisé comme caractère de remplacement. Les
+options supporté sont :
 
-* ``replacement`` Replacement string, defaults to '-'.
-* ``transliteratorId`` A valid tranliterator id string.
-   If default ```null`` ``Text::$_defaultTransliteratorId`` to be used.
-   If `false` no transliteration will be done, only non words will be removed.
-* ``preserve`` Specific non-word character to preserve. Defaults to ```null``.
-   For e.g. this option can be set to '.' to generate clean file names::
+* ``replacement`` La chaîne de remplacement, le défaut étant '-'.
+* ``transliteratorId`` Un identifiant translitérateur valide.
+   S'il vaut ``null`` (valeur par défaut), ``Text::$_defaultTransliteratorId``
+   sera utilisé.
+   S'il vaut ``false``, aucune translitération ne sera faite. Seul les
+   sous-chaînes qui ne sont pas des lettres/chiffres seront supprimées.
+* ``preserve`` Les caractères qui ne sont pas des lettres ou des chiffres à
+   préserver. Vaut ``null`` par défaut.
+   Par exemple, cette option peut être définie à '.' pour générer des noms de
+   fichiers propres::
 
     // apple-puree
     Text::slug('apple purée');
@@ -98,8 +107,8 @@ Générer des UUIDs
 
         Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
-Simple String Parsing
-=====================
+Parseur de chaînes simples
+==========================
 
 .. php:staticmethod:: tokenize($data, $separator = ',', $leftBound = '(', $rightBound = ')')
 
@@ -121,8 +130,8 @@ par un humain en un nombre entier de bytes::
 
     $int = Text::parseFileSize('2GB');
 
-Formatting Strings
-==================
+Formater une chaîne
+===================
 
 .. php:staticmethod:: insert($string, $data, $options = [])
 
@@ -151,14 +160,14 @@ Vous pouvez utiliser les options suivantes dans le tableau options::
         'after' => ''
     ];
 
-Wrapping Text
-=============
+Fixer la largeur d'un texte
+===========================
 
 .. php:staticmethod:: wrap($text, $options = [])
 
 Entoure un block de texte pour un ensemble de largeur, et indente aussi les
-blocks. Peut entourer intelligemment le texte ainsi les mots ne sont pas sliced
-across lines::
+blocks. Peut entourer intelligemment le texte ainsi les mots ne sont pas couper
+d'une ligne à l'autre::
 
     $text = 'Ceci est la chanson qui ne stoppe jamais.';
     $result = Text::wrap($text, 22);
@@ -293,8 +302,8 @@ Sortie::
 
     The killer crept...
 
-Truncating the Tail of a String
-===============================
+Tronquer une chaîne par la fin
+==============================
 
 .. php:method:: tail(string $text, int $length = 100, array $options)
 
@@ -364,13 +373,15 @@ Génère::
     ...$radius,et préfixé/suffixé avec $ellipsis. Cette méthode est spécialement
     pratique pour les résultats de r...
 
-Converting an Array to Sentence Form
-====================================
+Convertir un tableau sous la forme d'une phrase
+===============================================
 
 .. php:method:: toList(array $list, $and='and', $separator=', ')
 
 Crée une liste séparée avec des virgules, où les deux derniers items sont joins
 avec 'and'::
+
+    $colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
 
     // appelé avec TextHelper
     echo $this->Text->toList($colors);

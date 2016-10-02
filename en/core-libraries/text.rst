@@ -74,9 +74,9 @@ options are:
 
 * ``replacement`` Replacement string, defaults to '-'.
 * ``transliteratorId`` A valid tranliterator id string.
-   If default ```null`` ``Text::$_defaultTransliteratorId`` to be used.
-   If `false` no transliteration will be done, only non words will be removed.
-* ``preserve`` Specific non-word character to preserve. Defaults to ```null``.
+   If default ``null`` ``Text::$_defaultTransliteratorId`` to be used.
+   If ``false`` no transliteration will be done, only non words will be removed.
+* ``preserve`` Specific non-word character to preserve. Defaults to ``null``.
    For e.g. this option can be set to '.' to generate clean file names::
 
     // apple-puree
@@ -372,6 +372,8 @@ Converting an Array to Sentence Form
 .. php:method:: toList(array $list, $and='and', $separator=', ')
 
 Creates a comma-separated list where the last two items are joined with 'and'::
+
+    $colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
 
     // Called as TextHelper
     echo $this->Text->toList($colors);
