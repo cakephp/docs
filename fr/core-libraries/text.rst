@@ -44,14 +44,14 @@ Convertion des Chaînes de Caractères en ASCII
 .. php:staticmethod:: transliterate($string, $transliteratorId = null)
 
 La méthode ``translisterate`` convertit par défaut tous les caractères dans la
-chaîne soumises dans son équivalent en caractères ASCII. La méthode s'attend à
+chaîne soumise dans son équivalent en caractères ASCII. La méthode s'attend à
 avoir une chaîne encodée en UTF-8 en entrée. La conversion des caractères peut
 être controllée en utilisant des identifiants de translitération que vous
 passez via l'argument ``$transliteratorId`` de la méthode ou en changeant
 l'identifiant par défaut à l'aide de ``Text::setTransliteratorId()``.
 Les identifiants de translitération d'ICU sont généralement sous la forme
 ``<source script>:<target script>`` et vous pouvez spécifier plusieurs couples
- de conversion en les séparant par des ``;``. Vous trouverez plus
+de conversion en les séparant par des ``;``. Vous trouverez plus
 d'informations sur les identifiants de transliterateurs
 `ici <http://userguide.icu-project.org/transforms/general#TOC-Transliterator-Identifiers>`_::
 
@@ -166,7 +166,7 @@ Fixer la largeur d'un texte
 .. php:staticmethod:: wrap($text, $options = [])
 
 Entoure un block de texte pour un ensemble de largeur, et indente aussi les
-blocks. Peut entourer intelligemment le texte ainsi les mots ne sont pas couper
+blocks. Peut entourer intelligemment le texte ainsi les mots ne sont pas coupés
 d'une ligne à l'autre::
 
     $text = 'Ceci est la chanson qui ne stoppe jamais.';
