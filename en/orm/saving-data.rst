@@ -175,11 +175,17 @@ one or many entities from request data. You can convert a single entity using::
     // Validate and convert to an Entity object
     $entity = $articles->newEntity($this->request->data());
 
+.. note::
+
+    If you are using newEntity() and the resulting entities are missing some or
+    all of the data they were passed, double check that the columns you want to
+    set are listed in the ``$_accessible`` property of your entity. See :ref:`entities-mass-assignment`.
+
 The request data should follow the structure of your entities. For example if
 you have an article, which belonged to a user, and had many comments, your
 request data should resemble::
 
-    $data = [
+    $this->request->data = [
         'title' => 'CakePHP For the Win',
         'body' => 'Baking with CakePHP makes web development fun!',
         'user_id' => 1,
@@ -412,7 +418,7 @@ concerned entity.
 
     If you are using newEntity() and the resulting entities are missing some or
     all of the data they were passed, double check that the columns you want to
-    set are listed in the ``$_accessible`` property of your entity.
+    set are listed in the ``$_accessible`` property of your entity. See :ref:`entities-mass-assignment`.
 
 Merging Request Data Into Entities
 ----------------------------------
