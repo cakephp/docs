@@ -185,7 +185,7 @@ The request data should follow the structure of your entities. For example if
 you have an article, which belonged to a user, and had many comments, your
 request data should resemble::
 
-    $this->request->data = [
+    $data = [
         'title' => 'CakePHP For the Win',
         'body' => 'Baking with CakePHP makes web development fun!',
         'user_id' => 1,
