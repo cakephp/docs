@@ -70,7 +70,7 @@ composer.json file for a CakePHP application would look like the following::
     {
         "name": "example-app",
         "require": {
-            "cakephp/cakephp": "2.8.*"
+            "cakephp/cakephp": "2.9.*"
         },
         "config": {
             "vendor-dir": "Vendor/"
