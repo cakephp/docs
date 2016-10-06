@@ -127,25 +127,32 @@
 
 /* -- Page Contents -- */
 .page-contents {
-    background: #eaeae7;
+    background: #fff;
     float: right;
     padding: 2em;
     margin-left: 2em;
     margin-bottom: 1em;
     position: relative;
     z-index: 1;
+    border: 1px solid #ddd;
+    font-family: "Open Sans", sans-serif;
+    letter-spacing: 0
 }
 .page-contents h3 {
-    font-size: 1em;
+    font-size: 14px;
     line-height: 1.2em;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 1.5em;
 }
 .page-contents li {
     font-size: 13px;
 }
 .page-contents a {
-    color: #363637;
+    color: #d33c44;
+}
+.page-contents a:hover,
+.page-contents a:focus {
+    color: #ba232b;
 }
 .page-contents ul {
     list-style: none;
@@ -158,6 +165,9 @@
 
 
 /* -- Sidebar -- */
+.sidebar {
+    font-family: "Open Sans", sans-serif;
+}
 .sidebar li {
     list-style: none;
     text-transform: capitalize;
@@ -172,7 +182,7 @@
     display: block;
 }
 .sidebar a:hover {
-    color: #2f85ae;
+    color: #ba232b;
 }
 
 .sidebar a.current {
