@@ -100,7 +100,6 @@ CSS_FILES = themes/cakephp/static/css/bootstrap.min.css \
   themes/cakephp/static/css/font-awesome.min.css \
   themes/cakephp/static/css/style.css \
   themes/cakephp/static/css/default.css \
-  themes/cakephp/static/css/default.css \
   themes/cakephp/static/css/pygments.css \
   themes/cakephp/static/css/responsive.css
 
