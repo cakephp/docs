@@ -463,7 +463,7 @@ articles テーブルの ``buidRules()`` メソッドの例は、以下の通り
     use Cake\ORM\Table;
     use Cake\ORM\RulesChecker;
 
-    class Articles extends Table
+    class ArticlesTable extends Table
     {
         public function buildRules(RulesChecker $rules)
         {
