@@ -128,14 +128,14 @@ persisted. You can customize how properties get set by defining a mutator::
     namespace App\Model\Entity;
 
     use Cake\ORM\Entity;
-    use Cake\Utility\Inflector;
+    use Cake\Utility\Text;
 
     class Article extends Entity
     {
 
         protected function _setTitle($title)
         {
-            $this->set('slug', Inflector::slug($title));
+            $this->set('slug', Text::slug($title));
             return $title;
         }
 
