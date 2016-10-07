@@ -396,7 +396,7 @@ field. Internally ``input()`` delegates to other methods in FormHelper.
     And in the view a multiple select can be created with this simple
     code::
 
-        echo $this->Form->input('Group');
+        echo $this->Form->input('Group',array('multiple' => true));
 
     If you want to create a select field while using a belongsTo - or
     hasOne - Relation, you can add the following to your Users-controller
