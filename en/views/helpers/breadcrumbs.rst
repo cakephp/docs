@@ -172,3 +172,8 @@ attributes::
     <li class="products-crumb" data-foo="bar">
         <a href="/products/index" class="inner-products-crumb" id="the-products-crumb">Products</a>
     </li>
+
+.. meta::
+    :title lang=en: BreadcrumbsHelper
+    :description lang=en: The role of the BreadcrumbsHelper in CakePHP is provide a way to easily manage breadcrumbs.
+    :keywords lang=en: breadcrumbs helper,cakephp crumbs
