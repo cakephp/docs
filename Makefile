@@ -87,10 +87,10 @@ clean-website:
 build/html/%/_static:
 	mkdir -p build/html/$*/_static
 
-CSS_FILES = themes/cakephp/static/css/bootstrap.min.css \
+CSS_FILES = themes/cakephp/static/css/fonts.css \
+  themes/cakephp/static/css/bootstrap.min.css \
   themes/cakephp/static/css/font-awesome.min.css \
   themes/cakephp/static/css/style.css \
-  themes/cakephp/static/css/default.css \
   themes/cakephp/static/css/default.css \
   themes/cakephp/static/css/pygments.css \
   themes/cakephp/static/css/responsive.css
