@@ -345,7 +345,6 @@ CakePHP のセッション操作の設定は :ref:`セッションの設定 <ses
 
 追加のクラスパスはあなたのアプリケーションで利用されるオートローダーを通じてセットアップされます。
 ``Composer`` を利用してオートローダーを作成する際、以下のように記述してコントローラーの fallback パスを提供します。
-
 ::
 
     "autoload": {
@@ -364,7 +363,6 @@ CakePHP のセッション操作の設定は :ref:`セッションの設定 <ses
 上記は ``App`` と ``App\Controller`` 両方の名前空間のセットアップパスです。
 一つ目のキーが検索され、もしパスがその class/file に含まれなければ二つ目のキーが検索されます。
 一つの名前空間に複数のディレクトリをマップでき、以下のように記述します。
-
 ::
 
     "autoload": {
@@ -386,7 +384,6 @@ CakePHP のセッション操作の設定は :ref:`セッションの設定 <ses
 
 プラグイン、ビューテンプレート、そしてロケールはクラスではないので、オートローダーの構成はありません。
 CakePHP はこれらのリソースの追加パスのセットアップに 3 つの設定変数を提供します。
-
 ::
 
     return [
@@ -452,7 +449,6 @@ Configure クラスの主なゴールは、中央集権化された変数を維�
     You can access ``Configure`` from anywhere in your application
 
  ``Configure`` はどこからでもアクセスできます。
-
 ::
 
     Configure::read('debug');
@@ -469,7 +465,6 @@ Configure クラスの主なゴールは、中央集権化された変数を維�
     Use ``write()`` to store data in the application's configuration::
 
 ``write()`` を利用してアプリケーションの設定にデータを保存します。
-
 ::
 
     Configure::write('Company.name','Pizza, Inc.');
@@ -489,7 +484,6 @@ Configure クラスの主なゴールは、中央集権化された変数を維�
     The above example could also be written in a single call::
 
 上記例は一度の呼び出しで記述できます。
-
 ::
 
     Configure::write('Company', [
@@ -523,7 +517,6 @@ Configure クラスの主なゴールは、中央集権化された変数を維�
 引数のデフォルト値はCakePHPにおいて重要なデバッグ用の値です。
 もしキーが渡されれば、そのデータが返却されます。
 上記 write() の例を取り上げると、以下のようにデータを読み込みます。
-
 ::
 
     Configure::read('Company.name');    // Yields: 'Pizza, Inc.'
@@ -549,7 +542,6 @@ Configure クラスの主なゴールは、中央集権化された変数を維�
 設定データを単に :php:meth:`Cake\\Core\\Configure::read` で読み込みますが、
 一方で key/value ペアを検索することを期待します。
 リクエストされたペアが存在しない場合、 :php:class:`RuntimeException` が投げられます。
-
 ::
 
     Configure::readOrFail('Company.name');    // Yields: 'Pizza, Inc.'
@@ -579,7 +571,6 @@ Configure クラスの主なゴールは、中央集権化された変数を維�
     Used to check if a key/path exists and has non-null value::
 
 キー / パス が存在しているか、値が null でないかチェックする場合に利用します。
-
 ::
 
     $exists = Configure::check('Company.name');
@@ -638,7 +629,6 @@ CakePHP は 2 つの組み込まれた設定ファイルエンジンを搭載し
 :php:class:`Cake\\Core\\Configure\\Engine\\IniConfig` は ini 設定ファイルを読み込めます。
 により多くの特別な ini ファイルの情報は `PHP マニュアル <http://php.net/parse_ini_file>`_ を参照してください。
 コアの設定エンジンを利用するにあたり、  :php:meth:`Configure::config()`:: を利用する必要があります。
-
 ::
 
     use Cake\Core\Configure\Engine\PhpConfig;
@@ -659,7 +649,6 @@ CakePHP は 2 つの組み込まれた設定ファイルエンジンを搭載し
 それぞれ異なった種類の設定ファイルの情報源を読み込みます。
 Configure のわずかなメソッドを利用して配置されたエンジンの情報をやり取りできます。
 どのエンジンのエイリアスが配置されているかチェックするには、 :php:meth:`Configure::configured()` が利用できます。
-
 ::
 
     // 配置されたエンジンのエイリアスの配列を取得する
@@ -678,55 +667,89 @@ Configure のわずかなメソッドを利用して配置されたエンジン�
 配置されたエンジンを取り除くことができます。
 ``Configure::drop('default')`` は default のエンジンエイリアスを取り除きます。
 この先、そのエンジンを使って設定ファイルを読み込もうとする試みは失敗します。
-
 ::
 
     Configure::drop('default');
 
 .. _loading-configuration-files:
 
-Loading Configuration Files
+..
+    Loading Configuration Files
+
+設定ファイルの読み込み
 ---------------------------
 
 .. php:staticmethod:: load($key, $config = 'default', $merge = true)
 
-Once you've attached a config engine to Configure you can load configuration
-files::
+..
+    Once you've attached a config engine to Configure you can load configuration
+    files::
 
-    // Load my_file.php using the 'default' engine object.
+一旦設定エンジンに Configure を設定すると、設定ファイルを読み込むことができます。
+::
+
+    // 'default' エンジンオブジェクトを使用して my_file.php を読み込む
     Configure::load('my_file', 'default');
 
-Loaded configuration files merge their data with the existing runtime
-configuration in Configure. This allows you to overwrite and add new values into
-the existing runtime configuration. By setting ``$merge`` to ``true``, values
-will not ever overwrite the existing configuration.
+..
+    Loaded configuration files merge their data with the existing runtime
+    configuration in Configure. This allows you to overwrite and add new values into
+    the existing runtime configuration. By setting ``$merge`` to ``true``, values
+    will not ever overwrite the existing configuration.
 
-Creating or Modifying Configuration Files
+読み込まれた設定ファイルは、自身のデータを Configure 内に存在しているランタイムの設定とマージします。
+これは存在しているランタイムの設定へ値の上書きや新規追加を可能とします。
+``$merge`` を ``true`` にセットすることで、存在している設定の値を上書きしなくなります。
+
+..
+    Creating or Modifying Configuration Files
+
+設定ファイルの作成や編集
 -----------------------------------------
 
 .. php:staticmethod:: dump($key, $config = 'default', $keys = [])
 
-Dumps all or some of the data in Configure into a file or storage system
-supported by a config engine. The serialization format is decided by the config
-engine attached as $config. For example, if the 'default' engine is
-a :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig`, the generated file will be
-a PHP configuration file loadable by the
-:php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig`
+..
+    Dumps all or some of the data in Configure into a file or storage system
+    supported by a config engine. The serialization format is decided by the config
+    engine attached as $config. For example, if the 'default' engine is
+    a :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig`, the generated file will be
+    a PHP configuration file loadable by the
+    :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig`
 
-Given that the 'default' engine is an instance of PhpConfig.
-Save all data in Configure to the file `my_config.php`::
+全て、もしくはいくつかの設定にあるデータをファイルや設定エンジンがサポートしているストレージシステムにダンプします。
+シリアライズのフォーマットは、$config で配置された設定エンジンから決定されます。
+例えば、もし 'default' エンジンが :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` ならば、
+生成されたファイルは :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` によって読み込み可能な PHP の設定ファイルになるでしょう。
+
+..
+    Given that the 'default' engine is an instance of PhpConfig.
+    Save all data in Configure to the file `my_config.php`::
+
+'default' エンジンは PhpConfig のインスタンスとして考えられます。設定にある全てのデータを `my_config.php` に保存します。
+::
 
     Configure::dump('my_config', 'default');
 
-Save only the error handling configuration::
+..
+    Save only the error handling configuration::
+
+エラーハンドリング設定のみ保存します。
+::
 
     Configure::dump('error', 'default', ['Error', 'Exception']);
 
-``Configure::dump()`` can be used to either modify or overwrite
-configuration files that are readable with :php:meth:`Configure::load()`
+..
+    ``Configure::dump()`` can be used to either modify or overwrite
+    configuration files that are readable with :php:meth:`Configure::load()`
 
+``Configure::dump()`` は設定ファイルの編集もしくは上書きに利用でき、
+それは :php:meth:`Configure::load()` によって読み込み可能なファイルです。
 
-Storing Runtime Configuration
+..
+    Storing Runtime Configuration
+
+ランタイムの設定の保存
 -----------------------------
 
 .. php:staticmethod:: store($name, $cacheConfig = 'default', $data = null)
