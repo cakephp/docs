@@ -94,7 +94,8 @@ Generating UUIDs
 .. php:staticmethod:: uuid()
 
 The UUID method is used to generate unique identifiers as per :rfc:`4122`. The
-UUID is a 128-bit string in the format of ``485fc381-e790-47a3-9794-1337c0a8fe68``. ::
+UUID is a 128-bit string in the format of
+``485fc381-e790-47a3-9794-1337c0a8fe68``. ::
 
     Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
