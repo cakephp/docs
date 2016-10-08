@@ -4,6 +4,14 @@ Apêndices
 Os apêndices contêm informações sobre os novos recursos
 introduzidos na versão 2.0 e o guia de migração da versão 1.3 para a versão 2.0.
 
+Guia de Migração para a Versão 2.9
+==================================
+
+.. toctree::
+    :maxdepth: 1
+
+    appendices/2-9-migration-guide
+
 Guia de Migração para a Versão 2.8
 ==================================
 
