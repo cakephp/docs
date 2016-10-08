@@ -448,8 +448,7 @@ Configure クラスの主なゴールは、中央集権化された変数を維�
 ..
     You can access ``Configure`` from anywhere in your application
 
- ``Configure`` はどこからでもアクセスできます。
-::
+ ``Configure`` はどこからでもアクセスできます。::
 
     Configure::read('debug');
 
