@@ -74,7 +74,7 @@ single-line returns are found. ::
 Output::
 
     <p>For more information<br />
-    regarding our world-famous pastries and desserts.<p>
+    regarding our world-famous pastries and desserts.</p>
     <p>contact info@example.com</p>
 
 .. include:: /core-libraries/text.rst

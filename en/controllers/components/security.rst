@@ -34,8 +34,7 @@ components in your ``initialize()`` method.
     :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`).  Dynamically altering
     the fields that are submitted in a POST request (e.g.  disabling, deleting
     or creating new fields via JavaScript) is likely to cause the request to be
-    send to the blackhole callback. See the ``$validatePost`` or
-    ``$disabledFields`` configuration parameters.
+    send to the blackhole callback.
 
     You should always verify the HTTP method being used before executing
     side-effects. You should :ref:`check the HTTP method <check-the-request>` or
@@ -96,14 +95,11 @@ Restrict Actions to SSL
 Restricting Cross Controller Communication
 ==========================================
 
-.. php:attr:: allowedControllers
-
+allowedControllers
     A list of controllers which can send requests
     to this controller.
     This can be used to control cross controller requests.
-
-.. php:attr:: allowedActions
-
+allowedActions
     A list of actions which are allowed to send requests
     to this controller's actions.
     This can be used to control cross controller requests.
@@ -132,18 +128,18 @@ structure and compare the hash.
     The SecurityComponent will **not** prevent select options from being
     added/changed. Nor will it prevent radio options from being added/changed.
 
-.. php:attr:: unlockedFields
-
+unlockedFields
     Set to a list of form fields to exclude from POST validation. Fields can be
     unlocked either in the Component, or with
     :php:meth:`FormHelper::unlockField()`. Fields that have been unlocked are
     not required to be part of the POST and hidden unlocked fields do not have
     their values checked.
 
-.. php:attr:: validatePost
-
+validatePost
     Set to ``false`` to completely skip the validation of POST
     requests, essentially turning off form validation.
+
+The above configuration options can be set with ``config()``.
 
 Usage
 =====

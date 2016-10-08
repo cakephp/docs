@@ -143,9 +143,12 @@
 }
 .page-contents li {
     font-size: 13px;
+    line-height: 18px;
 }
 .page-contents a {
     color: #363637;
+    display: block;
+    margin-bottom: 8px;
 }
 .page-contents ul {
     list-style: none;

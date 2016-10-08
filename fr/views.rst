@@ -23,8 +23,8 @@ de rendu les plus communs:
 
 .. _app-view:
 
-The App View
-============
+La View App
+===========
 
 ``AppView`` est la classe View par défaut de votre application. ``AppView``
 étend elle-même la classe ``Cake\View\View`` de CakePHP et est définie dans
@@ -696,6 +696,18 @@ Pour les elements dans le sous-dossier d'un plugin
 (e.g., **plugins/Contacts/sidebar/helpbox.ctp**), utilisez ce qui suit::
 
     echo $this->element('Contacts.sidebar/helpbox');
+
+
+Elements Requêtés à partir de App
+---------------------------------
+
+Si vous êtes dans un fichier de template d'un plugin et que vous souhaitez
+rendre un element résidant dans votre application principale plutôt que dans
+ce plugin ou un element d'un autre plugin, utilisez ce qui suit::
+
+    echo $this->element('some_global_element', [], ['plugin' => false]);
+    // ou...
+    echo $this->element('some_global_element', ['localVar' => $someData], ['plugin' => false]);
 
 Préfix de Routing et Elements
 -----------------------------

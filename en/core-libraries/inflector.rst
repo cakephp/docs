@@ -78,7 +78,7 @@ Creating Table and Class Name Forms
 When generating code, or using CakePHP's conventions you may need to inflect
 table names or class names::
 
-    // UserProfileSettings
+    // UserProfileSetting
     Inflector::classify('user_profile_settings');
 
     // user-profile-setting

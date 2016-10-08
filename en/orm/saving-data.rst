@@ -175,6 +175,12 @@ one or many entities from request data. You can convert a single entity using::
     // Validate and convert to an Entity object
     $entity = $articles->newEntity($this->request->data());
 
+.. note::
+
+    If you are using newEntity() and the resulting entities are missing some or
+    all of the data they were passed, double check that the columns you want to
+    set are listed in the ``$_accessible`` property of your entity. See :ref:`entities-mass-assignment`.
+
 The request data should follow the structure of your entities. For example if
 you have an article, which belonged to a user, and had many comments, your
 request data should resemble::
@@ -211,6 +217,12 @@ associations should be marshalled::
         ]
     ]);
 
+You may also disable marshalling of possible nested associations like so::
+
+    $entity = $articles->newEntity($data, ['associated' => []]);
+    // or...
+    $entity = $articles->patchEntity($entity, $data, ['associated' => []]);
+
 The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
 should be marshalled. Alternatively, you can use dot notation for brevity::
 
@@ -236,6 +248,9 @@ change the validation set to be used per association::
             'Comments.Users' => ['validate' => 'signup']
         ]
     ]);
+
+The :ref:`using-different-validators-per-association` chapter has more
+information on how to use different validators for associated marshalling.
 
 The following diagram gives an overview of what happens inside the
 ``newEntity()`` or ``patchEntity()`` method:
@@ -403,7 +418,7 @@ concerned entity.
 
     If you are using newEntity() and the resulting entities are missing some or
     all of the data they were passed, double check that the columns you want to
-    set are listed in the ``$_accessible`` property of your entity.
+    set are listed in the ``$_accessible`` property of your entity. See :ref:`entities-mass-assignment`.
 
 Merging Request Data Into Entities
 ----------------------------------

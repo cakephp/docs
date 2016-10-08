@@ -11,16 +11,18 @@ contenu que le client accepte et modifie automatiquement dans le layout
 approprié, quand les extensions de fichier sont disponibles.
 
 Par défaut, le RequestHandler détectera automatiquement les requêtes AJAX
-basées sur le header HTTP-X-Requested-With, qui est utilisé par de nombreuses
+en se basant sur le header ``X-Requested-With``, qui est utilisé par de nombreuses
 librairies JavaScript. Quand il est utilisé conjointement avec
 :php:meth:`Router::parseExtensions()`, RequestHandler changera automatiquement
-le layout et les fichiers de template par ceux qui correspondent au type demandé.
+le layout et les fichiers de template par ceux qui correspondent à des types
+de média non-HTML.
 En outre, s'il existe un helper avec le même nom que l'extension demandée,
 il sera ajouté au tableau des helpers des Controllers. Enfin, si une donnée
 XML/JSON est POST'ée vers vos Controllers, elle sera décomposée dans un
 tableau qui est assigné à ``$this->request->data``, et pourra alors être
-sauvegardée comme une donnée de model. Afin d'utiliser le Request Handler, il
-doit être inclus dans votre tableau méthode ``initialize()``::
+accessible comme vous le feriez pour n'importe quelle donnée POST.
+Afin d'utiliser le Request Handler, il doit être chargé depuis la méthode
+``initialize()``::
 
     class WidgetController extends AppController
     {
@@ -175,7 +177,7 @@ au callback, c'est très utile pour les callbacks comme ``json_decode``::
 
 Le contenu ci-dessus créera ``$this->request->data`` un tableau des données
 d'entrées JSON, sans le ``true`` supplémentaire vous obtiendrez un jeu
-d'objets ``StdClass``.
+d'objets ``stdClass``.
 
 .. deprecated:: 3.1.0
     Depuis 3.1.0 la méthode ``addInputType()`` est dépréciée. Vous devez

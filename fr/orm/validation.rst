@@ -136,6 +136,8 @@ Consultez le :doc:`chapitre sur la validation </core-libraries/validation>`
 pour plus d'informations sur la construction des ensembles de règle de
 validation.
 
+.. _using-different-validators-per-association:
+
 Utiliser un Ensemble de Validation Différent pour les Associations
 ------------------------------------------------------------------
 
@@ -285,6 +287,10 @@ requêtées sont converties en entities <validating-request-data>`, de
 nombreuses applications ont aussi d'autres validations plus complexes qui
 doivent être appliquées seulement après qu'une validation basique a été
 terminée.
+
+Alors que la validation s'assure que le formulaire ou la syntaxe de vos données
+sont corrects, les règles s'attellent à comparer les données avec un état
+existant de votre application et/ou de votre réseau.
 
 Ces types de règles sont souvent appelées 'règles de domaine' ou
 'règles de l'application'. CakePHP utilise ce concept avec les 'RulesCheckers'

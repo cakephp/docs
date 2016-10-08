@@ -9,8 +9,8 @@ Les Objets Table
 Les objets Table fournissent un accès à la collection des entities stockées
 dans une table spécifique. Chaque table dans votre application devra avoir une
 classe Table associée qui est utilisée pour interagir avec une table donnée. Si
-vous n'avez pas besoin de personnaliser le behavior d'une table donnée, CakePHP
-va générer une instance Table à utiliser pour vous.
+vous n'avez pas besoin de personnaliser le comportement d'une table donnée,
+CakePHP va générer une instance Table à utiliser pour vous.
 
 Avant d'essayer d'utiliser les objets Table et l'ORM, vous devriez vous assurer
 que vous avez configuré votre
@@ -35,7 +35,7 @@ ressembler à ceci::
     }
 
 Notez que nous ne disons pas à l'ORM quelle table utiliser pour notre classe.
-Par convention, les objets table vont utiliser une table avec la notation en
+Par convention, les objets Table vont utiliser une table avec la notation en
 minuscule et avec des underscores pour le nom de la classe. Dans l'exemple du
 dessus, la table ``articles`` va être utilisée. Si notre classe table était
 nommée ``BlogPosts``, votre table serait nommée ``blog_posts``. Vous pouvez

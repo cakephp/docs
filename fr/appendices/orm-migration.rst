@@ -521,7 +521,7 @@ articles pourrait être::
     use Cake\ORM\Table;
     use Cake\ORM\RulesChecker;
 
-    class Articles extends Table
+    class ArticlesTable extends Table
     {
         public function buildRules(RulesChecker $rules)
         {

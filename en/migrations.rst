@@ -221,7 +221,7 @@ written between bracket.
 Fields named ``created`` and ``modified`` will automatically be set to the type
 ``datetime``.
 
-Field types a those generically made available by the ``Phinx`` library. Those
+Field types are those generically made available by the ``Phinx`` library. Those
 can be:
 
 * string

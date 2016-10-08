@@ -610,7 +610,7 @@ option to sort the data in those associations::
 
     $query->contain([
         'Comments' => [
-            'sort' => ['Comment.created' => 'DESC']
+            'sort' => ['Comments.created' => 'DESC']
         ]
     ]);
 
@@ -900,9 +900,7 @@ Turning buffering off has a few caveats:
 #. You will also not be able to iterate & cache the results.
 #. Buffering cannot be disabled for queries that eager load hasMany or
    belongsToMany associations, as these association types require eagerly
-   loading all results so that dependent queries can be generated. This
-   limitation is not present when using the ``subquery`` strategy for those
-   associations.
+   loading all results so that dependent queries can be generated.
 
 .. warning::
 

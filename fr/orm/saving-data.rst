@@ -222,6 +222,13 @@ compte::
         ]
     ]);
 
+Vous pouvez aussi désactiver le marshalling d'associations imbriquées comme
+ceci::
+
+    $entity = $articles->newEntity($data, ['associated' => []]);
+    // ou...
+    $entity = $articles->patchEntity($entity, $data, ['associated' => []]);
+
 Ce qui est au-dessus indique que les 'Tags', 'Comments' et 'Users' pour les
 Comments doivent être prises en compte. D'une autre façon, vous pouvez utiliser
 la notation par point pour être plus bref::
@@ -251,8 +258,12 @@ de validation utilisé par association::
         ]
     ]);
 
-Le diagramme suivant donne un aperçu de ce qui se passe à l'intérieur
-de la méthode ``newEntity()`` ou ``patchEntity()``:
+Le chapitre :ref:`using-different-validators-per-association` a plus
+d'informations sur la façon d'utiliser les différents validateurs pour des
+marshalling associés.
+
+Le diagramme suivant donne un aperçu de ce qui se passe à l'intérieur de la
+méthode ``newEntity()`` ou ``patchEntity()``:
 
 .. figure:: /_static/img/validation-cycle.png
    :align: left
@@ -266,8 +277,8 @@ Convertir des Données BelongsToMany
 -----------------------------------
 
 Si vous sauvegardez des associations belongsToMany, vous pouvez soit utiliser
-une liste de données d'entity ou une liste d'ids. Quand vous utilisez une
-liste de données d'entity, vos données requêtées devraient ressembler à ceci::
+une liste de données d'entity ou une liste d'ids. Quand vous utilisez une liste
+de données d'entity, vos données requêtées devraient ressembler à ceci::
 
     $data = [
         'title' => 'My title',

@@ -38,6 +38,18 @@ Vous pouvez générer un fichier POT pour un plugin spécifique en faisant::
 
 Cela générera les fichiers POT requis utilisés dans les plugins.
 
+Extraire de plusieurs dossiers à la fois
+----------------------------------------
+
+Vous pouvez parfois avoir besoin d'extraire des chaînes depuis plus d'un
+dossier de votre application. Par exemple, si vous définissez des chaînes à
+traduire dans le dossier ``config`` de votre application, vous voudrez
+probablement extraire les chaînes de ce dossier en plus de celles du dossier
+``src``. Vous pouvez le faire en utilisant l'option ``--paths``. Elle accepte
+une liste de chemins absolus séparés par une virgule::
+
+    bin/cake i18n extract --paths /var/www/app/config,/var/www/app/src
+
 Exclure les fichiers
 --------------------
 
