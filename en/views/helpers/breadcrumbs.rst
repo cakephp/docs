@@ -17,10 +17,11 @@ You can add a crumb to the list using the ``add()`` method. It takes three
 arguments:
 
 - **title** The string to be displayed as a the title of the crumb
-- **url** A string or an array of parameters that will be given to the :doc:`/views/helpers/url`
-- **options** An array of attributes for the ``item`` and
-  ``itemWithoutLink`` templates. See the section about :ref:`defining attributes for the item <defining_attributes_item>`
-  for more informations.
+- **url** A string or an array of parameters that will be given to the
+  :doc:`/views/helpers/url`
+- **options** An array of attributes for the ``item`` and ``itemWithoutLink``
+  templates. See the section about :ref:`defining attributes for the item
+  <defining_attributes_item>` for more informations.
 
 In addition to adding to the end of the trail, you can do a variety of operations::
 
@@ -62,20 +63,16 @@ In addition to adding to the end of the trail, you can do a variety of operation
         ['controller' => 'products', 'action' => 'index']
     );
 
-Using these methods give you the ability to go around CakePHP's way of
-rendering the view. Since templates and layouts are rendered from the inside
-out (meaning, included elements are rendered first), this allows you to define
-precisely where you want to add a crumb.
+Using these methods gives you the ability to work with CakePHP's 2-step
+rendering process. Since templates and layouts are rendered from the inside out
+(meaning, included elements are rendered first), this allows you to define
+precisely where you want to add a breadcrumb.
 
 Rendering the Breadcrumbs Trail
 ===============================
 
-Basic Rendering
----------------
-
 After adding crumbs to the trail, you can easily render it using the
-``render()`` method.
-This method accepts two array arguments:
+``render()`` method. This method accepts two array arguments:
 
 - ``$attributes`` : An array of attributes that will applied to the ``wrapper``
   template. This gives you the ability to add attributes to the HTML tag. It
@@ -104,9 +101,6 @@ Here is an example of how to render a trail::
 Customizing the Output
 ----------------------
 
-Customizing the Templates
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
 The BreadcrumbsHelper internally uses the ``StringTemplateTrait``, which gives
 the ability to easily customize output of various HTML strings.
 It includes four templates, with the following default declaration::
@@ -125,8 +119,8 @@ You can easily customize them using the ``templates()`` method from the
         'wrapper' => '<nav class="breadcrumbs"><ul{{attrs}}>{{content}}</ul></nav>',
     ]);
 
-Since your templates will be rendered supporting the ``templateVars`` option,
-you can add your own templates variables in the various templates::
+Since your templates will be rendered, the ``templateVars`` option
+allows you to add your own template variables in the various templates::
 
     $this->Breadcrumbs->templates([
         'item' => '<li{{attrs}}>{{icon}}<a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}'
@@ -148,14 +142,13 @@ crumb to the trail::
 .. _defining_attributes_item:
 
 Defining Attributes for the Item
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------
 
 If you want to apply specific HTML attributes to both the item and its sub-item
 , you can leverage the ``innerAttrs`` key, which the ``$options`` argument
-provides you.
-Everything except ``innerAttrs`` and ``templateVars`` will be rendered as HTML
-attributes::
-    
+provides. Everything except ``innerAttrs`` and ``templateVars`` will be
+rendered as HTML attributes::
+
     $this->Breadcrumbs->add(
         'Products',
         ['controller' => 'products', 'action' => 'index'],
