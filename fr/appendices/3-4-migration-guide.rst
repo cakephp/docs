@@ -34,6 +34,13 @@ version 4.0.0 à partir de laquelle ils seront supprimés.
   * Les méthodes ``ArrayAccess`` ont toutes été dépréciées.
 
 * La valeur de ``Auth.redirect`` stockée en session n'est plus utilisée.
+* L'option ``ajaxLogin`` du ``AuthComponent`` est dépréciée. Vous devez maintenant
+  utiliser le code de statut HTTP ``403`` pour déclencher le bon comportement côté
+  client.
+* La méthode ``beforeRedirect`` du ``RequestHandlerComponent`` est dépréciée.
+* Le code de statut HTTP ``306`` de ``Cake\Network\Response`` est dépréciée. Sa
+  phrase de statut est maintenant 'Unused' car ce code de statut n'est pas
+  standard.
 
 Changement de comportements
 ===========================
