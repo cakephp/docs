@@ -36,6 +36,8 @@ elements will continue to function until 4.0.0 after which they will be removed.
   403 status code to trigger the correct behavior in clientside code now.
 * The ``beforeRedirect`` method of ``RequestHandlerComponent`` is now
   deprecated.
+* The ``306`` status code in ``Cake\Network\Response`` is now deprecated and has
+  its status phrase changed to 'Unused' as this status code is non-standard.
 
 Behavior Changes
 ================
