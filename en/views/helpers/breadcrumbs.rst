@@ -10,7 +10,7 @@ Breadcrumbs
 BreadcrumbsHelper provides a way to easily deal with the creation and rendering
 of a breadcrumbs trail for your app.
 
-Creating a breadcrumbs trail
+Creating a Breadcrumbs Trail
 ============================
 
 You can add a crumb to the list using the ``add()`` method. It takes three
@@ -67,15 +67,15 @@ rendering the view. Since templates and layouts are rendered from the inside
 out (meaning, included elements are rendered first), this allows you to define
 precisely where you want to add a crumb.
 
-Rendering the breadcrumbs trail
+Rendering the Breadcrumbs Trail
 ===============================
 
-Basic rendering
+Basic Rendering
 ---------------
 
 After adding crumbs to the trail, you can easily render it using the
-``render()`` methods.
-This method accepts two arguments, both of them arrays:
+``render()`` method.
+This method accepts two array arguments:
 
 - ``$attributes`` : An array of attributes that will applied to the ``wrapper``
   template. This gives you the ability to add attributes to the HTML tag. It
@@ -101,13 +101,13 @@ Here is an example of how to render a trail::
         ['separator' => '<i class="fa fa-angle-right"></i>']
     );
 
-Customizing the output
+Customizing the Output
 ----------------------
 
-Customizing the templates
+Customizing the Templates
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The BreadcrumbsHelper internally uses the ``StringTemplateTrait`` which gives
+The BreadcrumbsHelper internally uses the ``StringTemplateTrait``, which gives
 the ability to easily customize output of various HTML strings.
 It includes four templates, with the following default declaration::
 
@@ -126,7 +126,7 @@ You can easily customize them using the ``templates()`` method from the
     ]);
 
 Since your templates will be rendered supporting the ``templateVars``, you can
-add your own templates var in the various templates::
+add your own templates variables in the various templates::
 
     $this->Breadcrumbs->templates([
         'item' => '<li{{attrs}}>{{icon}}<a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}'
@@ -147,11 +147,12 @@ crumb to the trail::
 
 .. _defining_attributes_item:
 
-Defining attributes for the item
+Defining Attributes for the Item
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you want to apply specific HTML attributes to both the item and its sub-item
-, you can leverage the ``innerAttrs`` key the ``$options`` argument gives you.
+, you can leverage the ``innerAttrs`` key, which the ``$options`` argument
+provides you.
 Everything except ``innerAttrs`` and ``templateVars`` will be rendered as HTML
 attributes::
     
