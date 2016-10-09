@@ -30,7 +30,7 @@ In addition to adding to the end of the trail, you can do a variety of operation
         ['controller' => 'products', 'action' => 'index']
     );
 
-    // Prepended middleware will be put at the top of the list
+    // Prepended crumbs will be put at the top of the list
     $this->Breadcrumbs->prepend(
         'Products',
         ['controller' => 'products', 'action' => 'index']
@@ -125,8 +125,8 @@ You can easily customize them using the ``templates()`` method from the
         'wrapper' => '<nav class="breadcrumbs"><ul{{attrs}}>{{content}}</ul></nav>',
     ]);
 
-Since your templates will be rendered supporting the ``templateVars``, you can
-add your own templates variables in the various templates::
+Since your templates will be rendered supporting the ``templateVars`` option,
+you can add your own templates variables in the various templates::
 
     $this->Breadcrumbs->templates([
         'item' => '<li{{attrs}}>{{icon}}<a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}'
