@@ -32,8 +32,8 @@ elements will continue to function until 4.0.0 after which they will be removed.
   * The ``ArrayAccess`` methods have all been deprecated.
 
 * The ``Auth.redirect`` session variable is no longer used.
-* The ``ajaxLogin`` option for AuthComponent is deprecated. You should use the
-  403 status code to trigger the correct behavior in clientside code now.
+* The ``ajaxLogin`` option for ``AuthComponent`` is deprecated. You should use the
+  ``403`` status code to trigger the correct behavior in clientside code now.
 * The ``beforeRedirect`` method of ``RequestHandlerComponent`` is now
   deprecated.
 * The ``306`` status code in ``Cake\Network\Response`` is now deprecated and has
