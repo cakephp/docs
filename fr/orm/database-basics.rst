@@ -551,7 +551,7 @@ value object and into SQL expressions::
             return Point::parse($value);
         }
 
-        public function marshall($value)
+        public function marshal($value)
         {
             if (is_string($value)) {
                 $value = explode(',', $value);
@@ -582,7 +582,7 @@ The above class does a few interesting things:
 
 * The ``toPHP`` method handles parsing the SQL query results into a value
   object.
-* The ``marshall`` method handles converting, data such as given request data, into our value object.
+* The ``marshal`` method handles converting, data such as given request data, into our value object.
   We're going to accept string values like ``'10.24,12.34`` and arrays for now.
 * The ``toExpression`` method handles converting our value object into the
   equivalent SQL expressions. In our example the resulting SQL would be

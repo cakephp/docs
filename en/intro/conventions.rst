@@ -28,8 +28,8 @@ path. For example, ``UsersController`` (which would be defined in the file name
 
 While you can route multiple word controllers in any way you like, the
 convention is that your URLs are lowercase and dashed using the ``DashedRoute``
-class, therefore ``/article-categories/view-all`` is the correct form to access the
-``ArticleCategoriesController::viewAll()`` action.
+class, therefore ``/article-categories/view-all`` is the correct form to access
+the ``ArticleCategoriesController::viewAll()`` action.
 
 When you create links using ``this->Html->link()``, you can use the following
 conventions for the url array::
@@ -76,8 +76,8 @@ folder.
 Model and Database Conventions
 ==============================
 
-Table class names are plural and CamelCased. 'Users', 'ArticleCategories', and
-'UserFavoritePages' are all examples of conventional model names.
+Table class names are plural and CamelCased. ``Users``, ``ArticleCategories``,
+and ``UserFavoritePages`` are all examples of conventional model names.
 
 Table names corresponding to CakePHP models are plural and underscored. The
 underlying tables for the above mentioned models would be ``users``,
@@ -96,9 +96,10 @@ Field names with two or more words are underscored: ``first_name``.
 
 Foreign keys in hasMany, belongsTo/hasOne relationships are recognized by
 default as the (singular) name of the related table followed by ``_id``. So if
-Users hasMany Articles, the articles table will refer to the users table via a
-``user_id`` foreign key. For a table like ``article_categories`` whose name contains
-multiple words, the foreign key would be ``article_category_id``.
+Users hasMany Articles, the ``articles`` table will refer to the ``users``
+table via a ``user_id`` foreign key. For a table like ``article_categories``
+whose name contains multiple words, the foreign key would be
+``article_category_id``.
 
 Join tables, used in BelongsToMany relationships between models, should be named
 after the model tables they will join, arranged in alphabetical order
@@ -144,4 +145,4 @@ together.
 
 .. meta::
     :title lang=en: CakePHP Conventions
-    :keywords lang=en: web development experience,maintenance nightmare,index method,legacy systems,method names,php class,uniform system,config files,tenets,apples,conventions,conventional controller,best practices,maps,visibility,news articles,functionality,logic,cakephp,developers
+    :keywords lang=en: web development experience,maintenance nightmare,index method,legacy systems,method names,php class,uniform system,config files,tenets,articles,conventions,conventional controller,best practices,maps,visibility,news articles,functionality,logic,cakephp,developers
