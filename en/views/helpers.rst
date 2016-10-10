@@ -323,6 +323,23 @@ matching view property::
     The ``HelperRegistry`` will attempt to lazy load any helpers not
     specifically identified in your ``Controller``.
 
+Accessing View Variables Inside Your Helper
+--------------------------------------------
+If you would like to access a View variable inside helper, you can use ``$this->_View->viewVars`` like::
+
+    class AwesomeHelper extends Helper
+    {
+    
+        public $helpers = ['Html'];
+        
+        public someFunction()
+        {
+            // set meta description
+            echo $this->Html->meta(
+                'description', $this->_View->viewVars['metaDescription'], ['block' =>'meta']
+            );
+        }
+    }
 
 Rendering A View Element Inside Your Helper
 -------------------------------------------
