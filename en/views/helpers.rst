@@ -325,7 +325,7 @@ matching view property::
 
 Accessing View Variables Inside Your Helper
 --------------------------------------------
-If you would like to access a View variable inside helper, you can use ``$this->_View->viewVars`` like::
+If you would like to access a View variable inside a helper, you can use ``$this->_View->viewVars`` like::
 
     class AwesomeHelper extends Helper
     {
