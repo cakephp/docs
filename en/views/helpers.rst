@@ -332,7 +332,7 @@ If you would like to access a View variable inside helper, you can use ``$this->
     
         public $helpers = ['Html'];
         
-        public someFunction()
+        public someMethod()
         {
             // set meta description
             echo $this->Html->meta(
