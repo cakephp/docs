@@ -398,7 +398,7 @@ FormHelper でフォームの input 要素を作る方法はいくつかあり�
     そしてビューの中では、以下のシンプルなコードで複数の select が
     生成できます::
 
-        echo $this->Form->input('Group');
+        echo $this->Form->input('Group', array('multiple' => true));
 
     belongsTo や hasOne 関係を使うケースで select 項目を生成したい場合、
     Users コントローラーに以下のコードを追加します（User は Group に
