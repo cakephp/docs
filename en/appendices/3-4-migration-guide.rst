@@ -45,9 +45,12 @@ Behavior Changes
 While these changes are API compatible, they represent minor variances in
 behavior that may effect your application:
 
-* ORM\Query results will not typecast aliased columns based on the original
+* ``ORM\Query`` results will not typecast aliased columns based on the original
   columns type. For example if you alias ``created`` to ``created_time`` you
   will now get a ``Time`` object back instead of a string.
+* Internal ORM traits used to build Association classes have been removed and
+  replaced with new internal APIs. This shouldn't impact your applications, but
+  may if you have created custom association types.
 * ``AuthComponent`` now uses a query string to store the redirect URL when an
   unauthenticated user is redirected to the login page. Previously, this redirect
   was stored in the session. Using the query string allows for better
