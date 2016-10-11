@@ -52,6 +52,9 @@ behavior that may effect your application:
   unauthenticated user is redirected to the login page. Previously, this redirect
   was stored in the session. Using the query string allows for better
   multi-browser experience.
+* Database Schema reflection now treats unknown column types as ``string`` and
+  not ``text``. A visible impact of this is that FormHelper will generate text
+  inputs instead of textarea elements for unknown column types.
 
 Collection
 ==========
