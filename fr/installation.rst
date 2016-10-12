@@ -55,9 +55,9 @@ mise à jour:
 
     php -v
 
-Vous devez avoir installé au moins avoir PHP 5.5.9 (CLI) ou supérieur. La
-version de PHP du serveur web doit être la version 5.5.9 ou supérieur, et doit
-être la même version que la version de PHP de votre ligne de commande (CLI).
+Vous devez avoir installé au moins PHP 5.5.9 (CLI) ou supérieur. La version
+de PHP du serveur web doit être la version 5.5.9 ou supérieur, et doit être
+la même version que la version de PHP de votre ligne de commande (CLI).
 
 Installer Composer
 ------------------
@@ -128,8 +128,8 @@ Par défaut c'est ce à quoi le **composer.json** de votre application ressemble
 
 A chaque fois que vous lancez ``php composer.phar update``, vous allez
 recevoir la dernière version stable quand vous utilisez la contrainte de
-version par défaut ``~3.2``. Seuls les corrections de bug et les versions
-mineures de 3.x seront utilisés lors de la mise à jour.
+version par défaut ``~3.2``. Seules les corrections de bug et les versions
+mineures de 3.x seront utilisées lors de la mise à jour.
 
 Si vous voulez rester à jour avec les derniers changements de CakePHP non
 stables, vous pouvez changer le **composer.json** de votre application::
@@ -153,7 +153,7 @@ Le répertoire **logs** est utilisé pour écrire les fichiers de log par le
 moteur par défaut ``FileLog``.
 
 De même, assurez-vous que les répertoires **logs**, **tmp** et tous ses
-sous-répertoires dans votre installation Cake sont accessible en écriture pour
+sous-répertoires dans votre installation Cake sont accessibles en écriture pour
 l'utilisateur du serveur web. Le processus d'installation avec Composer va
 rendre **tmp** et ses sous-dossiers accessibles en écriture pour récupérer et
 lancer rapidement, mais vous pouvez mettre à jour les permissions pour une
@@ -161,7 +161,7 @@ meilleur sécurité et les garder en écriture seulement pour l'utilisateur du
 serveur web.
 
 Un problème habituel est que les répertoires **logs** et **tmp** et les
-sous-répertoires doivent être accessible en écriture à la fois pour le serveur
+sous-répertoires doivent être accessibles en écriture à la fois pour le serveur
 web et pour l'utilisateur des lignes de commande. Sur un système UNIX, si
 votre serveur web est différent à partir de l'utilisateur en ligne de commande,
 vous pouvez lancer les commandes suivantes juste une fois dans votre projet
@@ -282,7 +282,7 @@ Apache
 
 Alors que CakePHP est construit pour travailler avec mod\_rewrite –et
 habituellement il l'est– nous avons remarqué que certains utilisateurs
-se battent pour obtenir un bon fonctionnement sur leurs systèmes.
+n'arrivent pas à obtenir un bon fonctionnement sur leurs systèmes.
 
 Ici il y a quelques trucs que vous pourriez essayer pour que cela
 fonctionne correctement. Premièrement, regardez votre fichier
