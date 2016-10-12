@@ -469,7 +469,7 @@ addition to www.example.com consult the nginx link above):
         error_log /var/www/example.com/log/error.log;
 
         location / {
-            try_files $uri /index.php?$args;
+            try_files $uri /index.php?$uri&$args;
         }
 
         location ~ \.php$ {
