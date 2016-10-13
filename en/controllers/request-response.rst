@@ -33,29 +33,29 @@ reference. Some of the duties ``Request`` performs include:
 * Providing access to request parameters both as array indexes and object
   properties.
 
+As of 3.4.0, CakePHP's request object implements the `PSR-7
+ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ making it easier to
+use libraries from outside of CakePHP.
+
 Request Parameters
 ------------------
 
-Request exposes several interfaces for accessing request parameters::
+The request exposes the routing parameters through the ``param()`` method::
 
-    $this->request->params['controller'];
     $this->request->param('controller');
 
-All of the above will access the same value. All :ref:`route-elements` are
-accessed through this interface.
+All :ref:`route-elements` are accessed through this interface.
 
 In addition to :ref:`route-elements`, you also often need access to
 :ref:`passed-arguments`. These are both available on the request object as
 well::
 
     // Passed arguments
-    $this->request->pass;
-    $this->request['pass'];
-    $this->request->params['pass'];
+    $this->request->param('pass');
 
 Will all provide you access to the passed arguments. There
 are several important/useful parameters that CakePHP uses internally, these
-are also all found in the request parameters:
+are also all found in the routing parameters:
 
 * ``plugin`` The plugin handling the request. Will be null when there is no
   plugin.
@@ -82,6 +82,14 @@ Any keys that do not exist will return ``null``::
     $foo = $this->request->query('value_that_does_not_exist');
     // $foo === null
 
+If you want to access all the query parameters you can use
+``getQueryParams()``::
+
+    $query = $this->request->getQueryParams();
+
+.. versionadded:: 3.4.0
+    ``getQueryParams()`` was added in 3.4.0
+
 Request Body Data
 -----------------
 
@@ -98,11 +106,6 @@ Any keys that do not exist will return ``null``::
 
     $foo = $this->request->data('Value.that.does.not.exist');
     // $foo == null
-
-You can also access the array of data, as an array::
-
-    $this->request->data['title'];
-    $this->request->data['comments'][1]['author'];
 
 PUT, PATCH or DELETE Data
 -------------------------
@@ -137,6 +140,13 @@ a getter/setter for enviromnent variables without having to modify globals
     // Set a value. Generally helpful in testing.
     $this->request->env('REQUEST_METHOD', 'POST');
 
+To access all the environment variables in a request use ``getServerParams()``::
+
+    $env = $this->request->getServerParams();
+
+.. versionadded:: 3.4.0
+    ``getServerParams()`` was added in 3.4.0
+
 XML or JSON Data
 -----------------
 
@@ -160,20 +170,24 @@ Path Information
 ----------------
 
 The request object also provides useful information about the paths in your
-application. ``$request->base`` and ``$request->webroot`` are useful for
+application. The ``base`` and ``webroot`` attributes are useful for
 generating URLs, and determining whether or not your application is in a
-subdirectory. The various properties you can use are::
+subdirectory. The attributes you can use are::
 
     // Assume the current request URL is /subdir/articles/edit/1?page=1
 
     // Holds /subdir/articles/edit/1?page=1
-    $request->here;
+    $request->here();
 
     // Holds /subdir
-    $request->base;
+    $request->getAttribute('base');
 
     // Holds /subdir/
+    $request->getAttribute('base');
+
+    // Prior to 3.4.0
     $request->webroot;
+    $request->base;
 
 .. _check-the-request:
 
@@ -229,7 +243,7 @@ Some examples would be::
     $this->request->addDetector(
         'awesome',
         function ($request) {
-            return isset($request->awesome);
+            return $request->param('awesome');
         }
     );
 
@@ -305,36 +319,54 @@ Returns the host your application is on::
     // Prints 'my.dev.example.org'
     echo $request->host();
 
-Working With HTTP Methods & Headers
------------------------------------
+Reading the HTTP Method
+-----------------------
 
-.. php:method:: method()
+.. php:method:: getMethod()
 
 Returns the HTTP method the request was made with::
 
     // Output POST
+    echo $request->getMethod();
+
+    // Prior to 3.4.0
     echo $request->method();
+
+Restricting Which HTTP method an Action Accepts
+-----------------------------------------------
 
 .. php:method:: allowMethod($methods)
 
-Set allowed HTTP methods. If not matched, will throw MethodNotAllowedException.
-The 405 response will include the required ``Allow`` header with the passed methods
+Set allowed HTTP methods. If not matched, will throw ``MethodNotAllowedException``
+The 405 response will include the required ``Allow`` header with the passed methods::
 
-.. php:method:: header($name)
+    public function delete()
+    {
+        // Only accept POST and DELETE requests
+        $this->request->allowMethod(['post', 'delete']);
+        ...
+    }
+
+Reading HTTP Headers
+--------------------
 
 Allows you to access any of the ``HTTP_*`` headers that were used
 for the request. For example::
 
+    // Get the header as a string
+    $this->request->getHeaderLine('User-Agent');
+
+    // Get an array of all values.
+    $this->request->getHeader('Accept');
+
+    // Check if a header exists
+    $this->request->hasHeader('Accept');
+
+    // Prior to 3.4.0
     $this->request->header('User-Agent');
 
-would return the user agent used for the request. Some servers don't populate
-``$_SERVER['HTTP_AUTHORIZATION']`` when the ``Authorization`` header is set.  If
-you are using Apache you can add the following to your ``.htaccess`` to allow
-you to access the ``Authorization`` header::
-
-    RewriteEngine On
-    RewriteCond %{HTTP:Authorization} ^(.*)
-    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+While some apache installs don't make the ``Authorization`` header accesisble,
+CakePHP will make it available through apache specific methods as required.
 
 .. php:method:: referer($local = false)
 
@@ -356,7 +388,7 @@ have the request object use these headers set the ``trustProxy`` property to
 
     $this->request->trustProxy = true;
 
-    // These methods will not use the proxied headers.
+    // These methods will now use the proxied headers.
     $this->request->port();
     $this->request->host();
     $this->request->scheme();
