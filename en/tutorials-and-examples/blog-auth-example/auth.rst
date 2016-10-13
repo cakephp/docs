@@ -87,7 +87,7 @@ with CakePHP::
         {
             $user = $this->Users->newEntity();
             if ($this->request->is('post')) {
-                $user = $this->Users->patchEntity($user, $this->request->data);
+                $user = $this->Users->patchEntity($user, $this->request->data());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
                     return $this->redirect(['action' => 'add']);
@@ -309,7 +309,7 @@ currently logged in user as a reference for the created article::
     {
         $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
-            $article = $this->Articles->patchEntity($article, $this->request->data);
+            $article = $this->Articles->patchEntity($article, $this->request->data());
             // Added this line
             $article->user_id = $this->Auth->user('id');
             // You could also do the following
@@ -386,13 +386,13 @@ own.  Add the following content to your **ArticlesController.php**::
     public function isAuthorized($user)
     {
         // All registered users can add articles
-        if ($this->request->action === 'add') {
+        if ($this->request->param('action') === 'add') {
             return true;
         }
 
         // The owner of an article can edit and delete it
-        if (in_array($this->request->action, ['edit', 'delete'])) {
-            $articleId = (int)$this->request->params['pass'][0];
+        if (in_array($this->request->param('action'), ['edit', 'delete'])) {
+            $articleId = (int)$this->request->param('pass.0');
             if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
                 return true;
             }

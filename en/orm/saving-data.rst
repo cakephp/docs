@@ -667,7 +667,7 @@ sending an array in the request containing the ``user_id`` an attacker could
 change the owner of an article, causing undesirable effects::
 
     // Contains ['user_id' => 100, 'title' => 'Hacked!'];
-    $data = $this->request->data;
+    $data = $this->request->data();
     $entity = $this->patchEntity($entity, $data);
     $this->save($entity);
 
@@ -679,7 +679,7 @@ The second way is by using the ``fieldList`` option when creating or merging
 data into an entity::
 
     // Contains ['user_id' => 100, 'title' => 'Hacked!'];
-    $data = $this->request->data;
+    $data = $this->request->data();
 
     // Only allow title to be changed
     $entity = $this->patchEntity($entity, $data, [
@@ -716,7 +716,7 @@ using ``newEntity()`` for passing into ``save()``. For example::
 
   // In a controller
   $articles = TableRegistry::get('Articles');
-  $article = $articles->newEntity($this->request->data);
+  $article = $articles->newEntity($this->request->data());
   if ($articles->save($article)) {
       // ...
   }

@@ -435,7 +435,7 @@ create form inputs for your translated fields::
 In your controller, you can marshal the data as normal, but with the
 ``translations`` option enabled::
 
-    $article = $this->Articles->newEntity($this->request->data, [
+    $article = $this->Articles->newEntity($this->request->data(), [
         'translations' => true
     ]);
     $this->Articles->save($article);

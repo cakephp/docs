@@ -32,8 +32,8 @@ features that all applications are likely to need. The built-in filters are:
         DispatcherFactory::add('Asset', ['cacheTime' => '+24 hours']);
 
 * ``RoutingFilter`` applies application routing rules to the request URL.
-  Populates ``$request->params`` with the results of routing.
-* ``ControllerFactory`` uses ``$request->params`` to locate the controller that
+  Populates ``$request->param()`` with the results of routing.
+* ``ControllerFactory`` uses ``$request->param()`` to locate the controller that
   will handle the current request.
 * ``LocaleSelector`` enables automatic language switching from the ``Accept-Language``
   header sent by the browser.

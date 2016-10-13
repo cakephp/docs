@@ -185,19 +185,19 @@ sense. First, we'll add the authorization logic for bookmarks. In your
 
     public function isAuthorized($user)
     {
-        $action = $this->request->params['action'];
+        $action = $this->request->param('action');
 
         // The add and index actions are always allowed.
         if (in_array($action, ['index', 'add', 'tags'])) {
             return true;
         }
         // All other actions require an id.
-        if (empty($this->request->params['pass'][0])) {
+        if (!$this->request->params('pass.0')) {
             return false;
         }
 
         // Check that the bookmark belongs to the current user.
-        $id = $this->request->params['pass'][0];
+        $id = $this->request->param('pass.0');
         $bookmark = $this->Bookmarks->get($id);
         if ($bookmark->user_id == $user['id']) {
             return true;
@@ -234,7 +234,7 @@ like::
     {
         $bookmark = $this->Bookmarks->newEntity();
         if ($this->request->is('post')) {
-            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data());
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('The bookmark has been saved.');
@@ -258,7 +258,7 @@ edit form and action. Your ``edit()`` action from
             'contain' => ['Tags']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data());
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('The bookmark has been saved.');
