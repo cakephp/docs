@@ -343,6 +343,26 @@ accédant à l'attribut de vue correspondant::
     ``HelperRegistry`` va tenter de charger automatiquement les helpers qui ne
     sont pas spécifiquement identifiés dans votre ``Controller``.
 
+Accéder aux variables de la View dans votre Helper
+--------------------------------------------------
+
+Si vous voulez accéder à une variable de la View dans votre helper, vous pouvez
+utiliser ``$this->_View->viewVars``, comme illustré ci-dessous::
+
+    class AwesomeHelper extends Helper
+    {
+
+        public $helpers = ['Html'];
+
+        public someMethod()
+        {
+            // Définit la meta description
+            echo $this->Html->meta(
+                'description', $this->_View->viewVars['metaDescription'], ['block' => 'meta']
+            );
+        }
+    }
+
 Rendre un Element de Vue dans votre Helper
 ------------------------------------------
 

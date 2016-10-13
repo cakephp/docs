@@ -324,7 +324,7 @@ matching view property::
     specifically identified in your ``Controller``.
 
 Accessing View Variables Inside Your Helper
---------------------------------------------
+-------------------------------------------
 
 If you would like to access a View variable inside a helper, you can use
 ``$this->_View->get()`` like::
@@ -338,7 +338,7 @@ If you would like to access a View variable inside a helper, you can use
         {
             // set meta description
             echo $this->Html->meta(
-                'description', $this->_View->get('metaDescription'), ['block' =>'meta']
+                'description', $this->_View->get('metaDescription'), ['block' => 'meta']
             );
         }
     }
