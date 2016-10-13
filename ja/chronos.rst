@@ -27,7 +27,7 @@ Chronos は ``DateInterval`` の拡張機能および、ミュータブル（変
 
 * ``Cake\Chronos\Chronos`` はイミュータブルな *日付と時刻* オブジェクト。
 * ``Cake\Chronos\Date`` はイミュータブルな *日付* オブジェクト。
-* ``Cake\Chronos\MutableTime`` はミュータブルな *日付と時刻* オブジェクト。
+* ``Cake\Chronos\MutableDateTime`` はミュータブルな *日付と時刻* オブジェクト。
 * ``Cake\Chronos\MutableDate`` はミュータブルな *日付* オブジェクト。
 * ``Cake\Chronos\ChronosInterval`` は ``DateInterval`` の拡張機能。
 
