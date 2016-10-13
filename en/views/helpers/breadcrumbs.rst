@@ -31,14 +31,26 @@ In addition to adding to the end of the trail, you can do a variety of operation
         ['controller' => 'products', 'action' => 'index']
     );
 
+    // Add multiple crumbs at the end of the trail
+    $this->Breadcrumbs->add([
+        ['title' => 'Products', 'url' => ['controller' => 'products', 'action' => 'index']],
+        ['title' => 'Product name', 'url' => ['controller' => 'products', 'action' => 'view', 1234]]
+    ]);
+
     // Prepended crumbs will be put at the top of the list
     $this->Breadcrumbs->prepend(
         'Products',
         ['controller' => 'products', 'action' => 'index']
     );
 
+    // Prepend multiple crumbs at the top of the trail, in the order given
+    $this->Breadcrumbs->prepend([
+        ['title' => 'Products', 'url' => ['controller' => 'products', 'action' => 'index']],
+        ['title' => 'Product name', 'url' => ['controller' => 'products', 'action' => 'view', 1234]]
+    ]);
+
     // Insert in a specific slot. If the slot is out of
-    // bounds, it will be added to the end.
+    // bounds, an exception will be raised.
     $this->Breadcrumbs->insertAt(
         2,
         'Products',

@@ -31,14 +31,26 @@ diverses opérations::
         ['controller' => 'products', 'action' => 'index']
     );
 
+    // Ajoute plusieurs éléments à la fin de la liste
+    $this->Breadcrumbs->add([
+        ['title' => 'Produits', 'url' => ['controller' => 'products', 'action' => 'index']],
+        ['title' => 'Nom du produit', 'url' => ['controller' => 'products', 'action' => 'view', 1234]]
+    ]);
+
     // Ajoute l'élément en premier dans la liste
     $this->Breadcrumbs->prepend(
         'Produits',
         ['controller' => 'products', 'action' => 'index']
     );
 
+    // Ajoute plusieurs éléments en premier dans la liste
+    $this->Breadcrumbs->prepend([
+        ['title' => 'Produits', 'url' => ['controller' => 'products', 'action' => 'index']],
+        ['title' => 'Nom du produit', 'url' => ['controller' => 'products', 'action' => 'view', 1234]]
+    ]);
+
     // Insert l'élément à un index spécifique. Si l'index n'existe pas
-    // l'élément sera ajouté à la fin.
+    // une exception sera levée.
     $this->Breadcrumbs->insertAt(
         2,
         'Produits',
