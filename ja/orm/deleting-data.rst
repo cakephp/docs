@@ -8,66 +8,31 @@
 
 .. php:method:: delete(Entity $entity, $options = [])
 
-Once you've loaded an entity you can delete it by calling the originating
-table's delete method::
+読み込んだエンティティは、テーブル本来の削除メソッドを呼びだすことによって削除することが出来ます::
 
-一度読み込んだエンティティは、テーブル本来の削除メソッドを呼びだすことによって削除することが出来ます::
-
-    // In a controller.
     // コントローラーの中
     $entity = $this->Articles->get(2);
     $result = $this->Articles->delete($entity);
 
-When deleting entities a few things happen:
-
 エンティティ削除時には、いくつかのことが起こります:
 
-1. The :ref:`delete rules <application-rules>` will be applied. If the rules
-   fail, deletion will be prevented.
-
 1. :ref:`削除ルール <application-rules>` が適用されます。 ルールのチェックに失敗した場合、削除は中止されます。
-
-2. The ``Model.beforeDelete`` event is triggered. If this event is stopped, the
-   delete will be aborted and the event's result will be returned.
-
 2. ``Model.beforeDelete`` イベントが起動されます。このイベントが停止した場合、削除は失敗し、イベントの戻り値が返されます。
-
-3. The entity will be deleted.
-
 3. エンティティが削除されます。
-
-4. All dependent associations will be deleted. If associations are being deleted
-   as entities, additional events will be dispatched.
-
-4. 全ての依存関係が削除されます。依存関係にあるエンティティが削除されるとき、追加のイベントが送信されます。
-
-5. Any junction table records for BelongsToMany associations will be removed.
-
-5. BelongsToManyアソシエーションにより、任意の結合テーブルのレコードは削除されます。
-
-6. The ``Model.afterDelete`` event will be triggered.
-
+4. 全ての依存関係先が削除されます。依存関係先がエンティティとして削除されるとき、追加のイベントが起動されます。
+5. BelongsToMany により、全ての結合テーブルのレコードは削除されます。
 6. ``Model.afterDelete`` イベントが起動されます。
 
-By default all deletes happen within a transaction. You can disable the
-transaction with the atomic option::
-
-デフォルトでは、一回のトランザクションの中で全ての削除が行われますが、atomic オプションで無効化することも出来ます。
+デフォルトでは、一回のトランザクションの中で全ての削除が行われますが、atomic オプションで無効化することも出来ます::
 
     $result = $this->Articles->delete($entity, ['atomic' => false]);
 
 連鎖削除
---------
+-----------------
 
-When deleting entities, associated data can also be deleted. If your HasOne and
-HasMany associations are configured as ``dependent``, delete operations will
-'cascade' to those entities as well. By default entities in associated tables
-are removed using :php:meth:`Cake\\ORM\\Table::deleteAll()`. You can elect to
-have the ORM load related entities, and delete them individually by setting the
-``cascadeCallbacks`` option to ``true``. A sample HasMany association with both
-these options enabled would be::
+エンティティを削除するとき関連データも同時に削除されます。HasOne、HasMany が ``dependent`` として設定されている場合、削除処理はそれらのエンティティにも連鎖適応されます。デフォルトでは、関連テーブル内のエンティティは :php:meth:`Cake\\ORM\\Table::deleteAll()` を使うことで削除されます。その際に、関連するエンティティを逐次読み込み、削除イベントを個別に起動させるには ``cascadecallbacks`` オプションを ``true`` にセットします。上記２つのオプションを有効にした HasMany のサンプルは、このようになります::
 
-    // In a Table's initialize method.
+    // テーブル内の初期化メソッド
     $this->hasMany('Comments', [
         'dependent' => true,
         'cascadeCallbacks' => true,
@@ -75,28 +40,24 @@ these options enabled would be::
 
 .. note::
 
-    Setting ``cascadeCallbacks`` to ``true``, results in considerably slower deletes
-    when compared to bulk deletes. The cascadeCallbacks option should only be
-    enabled when your application has important work handled by event listeners.
+    ``cascadeCallbacks`` が ``true`` の時、一括削除に比較して削除処理はだいぶ遅くなります。cascadeCallbacks オプションは、あなたのアプリケーションで event listerner によるエベント処理が重要な働きを持つ場合のみ有効にされるべきです。
 
-Bulk Deletes
-------------
+
+一括削除
+-----------------
 
 .. php:method:: deleteAll($conditions)
 
-There may be times when deleting rows one by one is not efficient or useful.
-In these cases it is more performant to use a bulk-delete to remove many rows at
-once::
+一行づつ削除することが効率的でなかったり有用ではない時があります。そういったケースでは、一回で複数行を削除するために、bulk-delete を使うことが効率的です::
 
-    // Delete all the spam
+    // 全てのスパムを削除する
     function destroySpam()
     {
         return $this->deleteAll(['is_spam' => true]);
     }
 
-A bulk-delete will be considered successful if 1 or more rows are deleted.
+bulk-delete では、１つ以上の行が削除されると成功したとみなされます。
 
 .. warning::
 
-    deleteAll will *not* trigger beforeDelete/afterDelete events. If you need those
-    first load a collection of records and delete them.
+    deleteAll は、beforeDelete/afterDelete イベントを *呼び出しません* 。それらのイベントを呼び出したい場合、それぞれのレコードを読み込んで削除する必要があります。
