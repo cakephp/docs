@@ -5,7 +5,7 @@ HttpSocket
 
 CakePHP includes an HttpSocket class which can be used easily for
 making requests. It is a great way to communicate with external webservices, or
-remote apis.
+remote APIs.
 
 Making a request
 ================
