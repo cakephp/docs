@@ -63,7 +63,7 @@ Routing Prefix and Flash Messages
 If you have a Routing prefix configured, you can now have your Flash elements
 stored in **src/Template/{Prefix}/Element/Flash**. This way, you can have
 specific messages layouts for each part of your application (for instance, have
-different layouts for you front-end and your admin side).
+different layouts for your front-end and your admin side).
 
 Flash Messages and Themes
 =========================
