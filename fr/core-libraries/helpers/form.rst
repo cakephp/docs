@@ -1849,14 +1849,14 @@ les méthodes du Helper Form, en réduisant le nombre d'arguments,
 et réduit les duplications que ``$selected`` crée.
 Les méthodes sont:
 
-    * FormHelper::select()
-    * FormHelper::dateTime()
-    * FormHelper::year()
-    * FormHelper::month()
-    * FormHelper::day()
-    * FormHelper::hour()
-    * FormHelper::minute()
-    * FormHelper::meridian()
+* FormHelper::select()
+* FormHelper::dateTime()
+* FormHelper::year()
+* FormHelper::month()
+* FormHelper::day()
+* FormHelper::hour()
+* FormHelper::minute()
+* FormHelper::meridian()
 
 **L'URL par défaut des formulaires est l'action courante**
 

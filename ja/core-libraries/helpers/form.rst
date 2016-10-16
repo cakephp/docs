@@ -1845,14 +1845,14 @@ FormHelper のいくつかのメソッドから ``$selected`` パラメータが
 ``$selected`` が生成する重複を減らします。影響を受けるメソッドは
 以下の通りです:
 
-    * FormHelper::select()
-    * FormHelper::dateTime()
-    * FormHelper::year()
-    * FormHelper::month()
-    * FormHelper::day()
-    * FormHelper::hour()
-    * FormHelper::minute()
-    * FormHelper::meridian()
+* FormHelper::select()
+* FormHelper::dateTime()
+* FormHelper::year()
+* FormHelper::month()
+* FormHelper::day()
+* FormHelper::hour()
+* FormHelper::minute()
+* FormHelper::meridian()
 
 **フォーム上のデフォルトの URL は、現在のアクションです**
 

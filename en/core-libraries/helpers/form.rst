@@ -1841,14 +1841,14 @@ simplifies the FormHelper methods, reducing the number of
 arguments, and reduces the duplication that ``$selected`` created.
 The effected methods are:
 
-    * FormHelper::select()
-    * FormHelper::dateTime()
-    * FormHelper::year()
-    * FormHelper::month()
-    * FormHelper::day()
-    * FormHelper::hour()
-    * FormHelper::minute()
-    * FormHelper::meridian()
+* FormHelper::select()
+* FormHelper::dateTime()
+* FormHelper::year()
+* FormHelper::month()
+* FormHelper::day()
+* FormHelper::hour()
+* FormHelper::minute()
+* FormHelper::meridian()
 
 **Default URLs on forms is the current action**
 
