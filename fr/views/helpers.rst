@@ -75,7 +75,7 @@ conditionnellement des helpers::
         public function initialize()
         {
             parent::initialize();
-            if ($this->request->action === 'index') {
+            if ($this->request->param('action') === 'index') {
                 $this->loadHelper('ListPage');
             }
         }

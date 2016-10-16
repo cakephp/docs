@@ -319,7 +319,7 @@ olan metodu da sistemimize entegre edelim.
     {
         // 'pass' CakePHP tarafından tüm sorguda ki
         // url yolunu kapsar.
-        $tags = $this->request->params['pass'];
+        $tags = $this->request->param('pass');
 
         // BookmarksTable 'ı kullanarak taglı yerimlerini bulabilirsiniz.
         $bookmarks = $this->Bookmarks->find('tagged', [

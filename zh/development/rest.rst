@@ -46,7 +46,7 @@ REST可以帮你有效地向他人提供在你的应用中已创建的逻辑（�
 
         public function add()
         {
-            $recipe = $this->Recipes->newEntity($this->request->data);
+            $recipe = $this->Recipes->newEntity($this->request->data());
             if ($this->Recipes->save($recipe)) {
                 $message = 'Saved';
             } else {
@@ -63,7 +63,7 @@ REST可以帮你有效地向他人提供在你的应用中已创建的逻辑（�
         {
             $recipe = $this->Recipes->get($id);
             if ($this->request->is(['post', 'put'])) {
-                $recipe = $this->Recipes->patchEntity($recipe, $this->request->data);
+                $recipe = $this->Recipes->patchEntity($recipe, $this->request->data());
                 if ($this->Recipes->save($recipe)) {
                     $message = 'Saved';
                 } else {
@@ -134,16 +134,16 @@ index方法的REST视图的简单的代码::
 由于你提供的API输出的是XML，自然来说你的第一选择是接收XML格式的数据。
 不需要担心的是，由于有了:php:class:`Cake\\Controller\\Component\\RequestHandler` 和
 :php:class:`Cake\\Routing\\Router` 可以让事情更简单。
-如果一个POST/PUT请求发送了XML格式的数据，那么数据会经过CakePHP的:php:class:`Xml` 类的处理，所有数据都会合并到``$this->request->data`` 中
+如果一个POST/PUT请求发送了XML格式的数据，那么数据会经过CakePHP的:php:class:`Xml` 类的处理，所有数据都会合并到``$this->request->data()`` 中
 因为这些特性，处理和发送XML数据是毫无阻碍的，你完全不必去修改控制器或者模型的任何代码。
-所有你需要的都会合并到``$this->request->data`` 中。
+所有你需要的都会合并到``$this->request->data()`` 中。
 
 接收其他格式的数据
 ==================
 
 典型的REST应用不仅可以输出不同格式的数据，同时也可以接收不同格式的数据
 在CakePHP中:php:class:`RequestHandlerComponent` 帮助我们实现了这个目标。
-一般来说，它会解码通过POST/PUT请求所接收到的JSON/XML的任何数据并且在``$this->request->data`` 中告诉你数据的格式。
+一般来说，它会解码通过POST/PUT请求所接收到的JSON/XML的任何数据并且在``$this->request->data()`` 中告诉你数据的格式。
 当然如果你需要的话，你也可以自定义其他的反序列化方法以此丰富你的数据接收/发送格式（通过:php:meth:`RequestHandler::addInputType()` 来添加）。
 
 具有REST特性的路由

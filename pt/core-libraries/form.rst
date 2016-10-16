@@ -82,7 +82,7 @@ e validar os dados::
         {
             $contact = new ContactForm();
             if ($this->request->is('post')) {
-                if ($contact->execute($this->request->data)) {
+                if ($contact->execute($this->request->data())) {
                     $this->Flash->success('We will get back to you soon.');
                 } else {
                     $this->Flash->error('There was a problem submitting your form.');
@@ -97,14 +97,14 @@ No exemplo acima, usamos o método ``execute()`` para chamar o nosso método
 adequadas. Poderíamos também ter usado o método ``validate()`` apenas para validar
 a requisição de dados::
 
-    $isValid = $form->validate($this->request->data);
+    $isValid = $form->validate($this->request->data());
     
 
 Definindo os Valores do Formulário
 ==================================
 
 Na sequência para definir os valores para os campos do formulário sem modelo, basta apenas definir
-os valores usando ``$this->request->data``, como em todos os outros formulários criados pelo FormHelper::
+os valores usando ``$this->request->data()``, como em todos os outros formulários criados pelo FormHelper::
 
     // Em um controller
     namespace App\Controller;
@@ -118,7 +118,7 @@ os valores usando ``$this->request->data``, como em todos os outros formulários
         {
             $contact = new ContactForm();
             if ($this->request->is('post')) {
-                if ($contact->execute($this->request->data)) {
+                if ($contact->execute($this->request->data())) {
                     $this->Flash->success('Retornaremos o contato em breve.');
                 } else {
                     $this->Flash->error('Houve um problema ao enviar seu formulário.');
@@ -127,8 +127,8 @@ os valores usando ``$this->request->data``, como em todos os outros formulários
             
             if ($this->request->is('get')) {
                 //Values from the User Model e.g.
-                $this->request->data['name'] = 'John Doe';
-                $this->request->data['email'] = 'john.doe@example.com';
+                $this->request->data('name', 'John Doe');
+                $this->request->data('email','john.doe@example.com');
             }
             
             $this->set('contact', $contact);

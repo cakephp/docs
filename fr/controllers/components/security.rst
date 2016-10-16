@@ -175,7 +175,7 @@ de sécurité que vous voulez et le component Security les forcera au démarrage
 
         public function beforeFilter(Event $event)
         {
-            if (isset($this->request->params['admin'])) {
+            if ($this->request->param('admin')) {
                 $this->Security->requireSecure();
             }
         }
@@ -207,7 +207,7 @@ Cette exemple forcera toutes les actions qui proviennent de la "route" Admin à
 
         public function forceSSL()
         {
-            return $this->redirect('https://' . env('SERVER_NAME') . $this->request->here);
+            return $this->redirect('https://' . env('SERVER_NAME') . $this->request->here());
         }
     }
 

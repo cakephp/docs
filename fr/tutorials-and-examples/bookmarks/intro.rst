@@ -342,7 +342,7 @@ suit::
     {
         // La clé 'pass' est fournie par CakePHP et contient tous les segments
         // d'URL de la "request" (instance de \Cake\Network\Request)
-        $tags = $this->request->params['pass'];
+        $tags = $this->request->param('pass');
 
         // On utilise l'objet "Bookmarks" (une instance de
         // \App\Model\Table\BookmarksTable) pour récupérer les bookmarks avec

@@ -310,7 +310,7 @@ Premièrement, commençons par créer une action ``add()`` dans le
         {
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
-                $article = $this->Articles->patchEntity($article, $this->request->data);
+                $article = $this->Articles->patchEntity($article, $this->request->data());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Votre article a été sauvegardé.'));
                     return $this->redirect(['action' => 'index']);
@@ -341,7 +341,7 @@ application. Dans ce cas, nous utilisons la méthode
 type POST.
 
 Lorsqu'un utilisateur utilise un formulaire pour poster des données dans votre
-application, ces informations sont disponibles dans ``$this->request->data``.
+application, ces informations sont disponibles dans ``$this->request->data()``.
 Vous pouvez utiliser les fonctions :php:func:`pr()` ou :php:func:`debug()` pour
 les afficher si vous voulez voir à quoi cela ressemble.
 
@@ -483,7 +483,7 @@ devrait ressembler::
     {
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
-            $this->Articles->patchEntity($article, $this->request->data);
+            $this->Articles->patchEntity($article, $this->request->data());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Votre article a été mis à jour.'));
                 return $this->redirect(['action' => 'index']);

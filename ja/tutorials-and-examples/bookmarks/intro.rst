@@ -310,7 +310,7 @@ Scaffold コードの生成
     {
         // CakePHP によって提供された 'pass' キーは全ての
         // リクエストにある渡された URL のパスセグメントです。
-        $tags = $this->request->params['pass'];
+        $tags = $this->request->param('pass');
 
         // タグ付きのブックマークを探すために BookmarksTable を使用
         $bookmarks = $this->Bookmarks->find('tagged', [

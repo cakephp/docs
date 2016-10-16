@@ -62,7 +62,7 @@ ElasticSearch プラグインは elasticsearch インデックスと作用する
     {
         $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
-            $article = $this->Articles->patchEntity($article, $this->request->data);
+            $article = $this->Articles->patchEntity($article, $this->request->data());
                 if ($this->Articles->save($article)) {
                 $this->Flash->success('It saved');
             }

@@ -707,7 +707,7 @@ CakePHP の検証機能をどう使うかについてより詳しい情報があ
 
   // コントローラのの中で
   $articles = TableRegistry::get('Articles');
-  $article = $articles->newEntity($this->request->data);
+  $article = $articles->newEntity($this->request->data());
   if ($articles->save($article)) {
       // ...
   }

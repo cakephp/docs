@@ -272,7 +272,7 @@ Articlesテーブルに対して ``get()`` を用いるとき、存在するレ�
         {
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
-                $article = $this->Articles->patchEntity($article, $this->request->data);
+                $article = $this->Articles->patchEntity($article, $this->request->data());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
                     return $this->redirect(['action' => 'index']);
@@ -299,7 +299,7 @@ POST なら、Articles モデルを使ってデータの保存を試みます。
 リクエストが HTTP POST かどうかの確認に :php:meth:`Cake\\Network\\Request::is()` メソッドを
 使用しています。
 
-ユーザがフォームを使ってデータを POST した場合、その情報は、 ``$this->request->data``
+ユーザがフォームを使ってデータを POST した場合、その情報は、 ``$this->request->data()``
 の中に入ってきます。 :php:func:`pr()` や :php:func:`debug()` を使うと、
 内容を画面に表示させて、確認することができます。
 
@@ -425,7 +425,7 @@ Article モデルを見直して、幾つか修正してみましょう。 ::
     {
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
-            $this->Articles->patchEntity($article, $this->request->data);
+            $this->Articles->patchEntity($article, $this->request->data());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));
                 return $this->redirect(['action' => 'index']);
