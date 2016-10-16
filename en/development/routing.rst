@@ -218,7 +218,7 @@ Route Elements
 You can specify your own route elements and doing so gives you the
 power to define places in the URL where parameters for controller
 actions should lie. When a request is made, the values for these
-route elements are found in ``$this->request->params`` in the controller.
+route elements are found in ``$this->request->param()`` in the controller.
 When you define a custom route element, you can optionally specify a regular
 expression - this tells CakePHP how to know if the URL is correctly formed or
 not. If you choose to not provide a regular expression, any non ``/`` character
@@ -264,7 +264,7 @@ If you need lowercased and underscored URLs while migrating from a CakePHP
 
 Once this route has been defined, requesting ``/apples/5`` would call the view()
 method of the ApplesController. Inside the view() method, you would need to
-access the passed ID at ``$this->request->params['id']``.
+access the passed ID at ``$this->request->param('id')``.
 
 If you have a single controller in your application and you do not want the
 controller name to appear in the URL, you can map all URLs to actions in your
@@ -310,7 +310,7 @@ alternates, as above, but not grouped with parenthesis.
 Once defined, this route will match ``/articles/2007/02/01``,
 ``/articles/2004/11/16``, handing the requests to
 the index() actions of their respective controllers, with the date
-parameters in ``$this->request->params``.
+parameters in ``$this->request->param()``.
 
 There are several route elements that have special meaning in
 CakePHP, and should not be used unless you want the special meaning
@@ -533,7 +533,7 @@ The connected route would have the ``prefix`` route element set to
 ``manager/admin``.
 
 The current prefix will be available from the controller methods through
-``$this->request->params['prefix']``
+``$this->request->param('prefix')``
 
 When using prefix routes it's important to set the prefix option. Here's how to
 build this link using the HTML helper::
@@ -890,7 +890,7 @@ to your controller methods. ::
 In the above example, both ``recent`` and ``mark`` are passed arguments to
 ``CalendarsController::view()``. Passed arguments are given to your controllers
 in three ways. First as arguments to the action method called, and secondly they
-are available in ``$this->request->params['pass']`` as a numerically indexed
+are available in ``$this->request->param('pass')`` as a numerically indexed
 array. When using custom routes you can force particular parameters to go into
 the passed arguments as well.
 
@@ -913,12 +913,11 @@ You would get the following output::
         [1] => mark
     )
 
-This same data is also available at ``$this->request->params['pass']``
-and ``$this->passedArgs`` in your controllers, views, and helpers.
-The values in the pass array are numerically indexed based on the
-order they appear in the called URL::
+This same data is also available at ``$this->request->param('pass')`` in your
+controllers, views, and helpers.  The values in the pass array are numerically
+indexed based on the order they appear in the called URL::
 
-    debug($this->request->params['pass']);
+    debug($this->request->param('pass'));
 
 Either of the above would output::
 
@@ -1129,8 +1128,8 @@ The URL filter function should *always* return the params even if unmodified.
 URL filters allow you to implement features like persistent parameters::
 
     Router::addUrlFilter(function ($params, $request) {
-        if (isset($request->params['lang']) && !isset($params['lang'])) {
-            $params['lang'] = $request->params['lang'];
+        if ($request->param('lang') && !isset($params['lang'])) {
+            $params['lang'] = $request->param('lang');
         }
         return $params;
     });
@@ -1178,7 +1177,7 @@ arguments::
         Router::parseNamedParams($this->request);
     }
 
-This will populate ``$this->request->params['named']`` with any named parameters
+This will populate ``$this->request->param('named')`` with any named parameters
 found in the passed arguments.  Any passed argument that was interpreted as a
 named parameter, will be removed from the list of passed arguments.
 

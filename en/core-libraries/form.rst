@@ -82,7 +82,7 @@ and validate request data::
         {
             $contact = new ContactForm();
             if ($this->request->is('post')) {
-                if ($contact->execute($this->request->data)) {
+                if ($contact->execute($this->request->data())) {
                     $this->Flash->success('We will get back to you soon.');
                 } else {
                     $this->Flash->error('There was a problem submitting your form.');
@@ -97,13 +97,13 @@ In the above example, we use the ``execute()`` method to run our form's
 accordingly. We could have also used the ``validate()`` method to only validate
 the request data::
 
-    $isValid = $form->validate($this->request->data);
+    $isValid = $form->validate($this->request->data());
     
 Setting Form Values
 ===================
 
 In order to set the values for the fields of a modelless form, one can define
-the values using ``$this->request->data``, like in all other forms created by the FormHelper::
+the values using ``$this->request->data()``, like in all other forms created by the FormHelper::
 
     // In a controller
     namespace App\Controller;
@@ -117,23 +117,23 @@ the values using ``$this->request->data``, like in all other forms created by th
         {
             $contact = new ContactForm();
             if ($this->request->is('post')) {
-                if ($contact->execute($this->request->data)) {
+                if ($contact->execute($this->request->data())) {
                     $this->Flash->success('We will get back to you soon.');
                 } else {
                     $this->Flash->error('There was a problem submitting your form.');
                 }
             }
-            
+
             if ($this->request->is('get')) {
-                //Values from the User Model e.g.
-                $this->request->data['name'] = 'John Doe';
-                $this->request->data['email'] = 'john.doe@example.com';
+                // Values from the User Model e.g.
+                $this->request->data('name', 'John Doe');
+                $this->request->data('email','john.doe@example.com');
             }
-            
+
             $this->set('contact', $contact);
         }
     }
-    
+
 Values should only be defined if the request method is GET, otherwise
 you will overwrite your previous POST Data which might have been incorrect
 and not been saved.
