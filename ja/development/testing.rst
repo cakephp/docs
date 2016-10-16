@@ -757,7 +757,7 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
         public function index($short = null)
         {
             if ($this->request->is('post')) {
-                $article = $this->Articles->newEntity($this->request->data);
+                $article = $this->Articles->newEntity($this->request->data());
                 if ($this->Articles->save($article)) {
                     // Redirect as per PRG pattern
                     return $this->redirect(['action' => 'index']);

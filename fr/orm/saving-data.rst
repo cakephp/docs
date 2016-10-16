@@ -174,7 +174,7 @@ Convertir les Données Requêtées en Entities
 
 Avant de modifier et sauvegarder à nouveau les données dans la base de données,
 vous devrez convertir les données requêtées (qui se trouvent dans
-$this->request->data) à partir du format de tableau
+$this->request->data()) à partir du format de tableau
 qui se trouvent dans la requête, et les entities que l'ORM utilise. La classe
 Table facilite la conversion d'une ou de plusieurs entities à partir des
 données requêtées. Vous pouvez convertir une entity unique en utilisant::
@@ -759,7 +759,7 @@ passer dans ``save()``. Pare exemple::
 
   // Dans un controller
   $articles = TableRegistry::get('Articles');
-  $article = $articles->newEntity($this->request->data);
+  $article = $articles->newEntity($this->request->data());
   if ($articles->save($article)) {
       // ...
   }

@@ -34,30 +34,30 @@ des tâches incluses que ``Request`` permet sont les suivantes :
 * Fournit un accès aux paramètres de la requête à la fois en tableaux indicés
   et en propriétés d'un objet.
 
+Depuis la version 3.4.0, l'objet Request de CakePHP implémente `l'interface
+PSR-7 ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ facilitant
+l'utilisation des librairies en-dehors de CakePHP.
+
 Paramètres de la Requête
 ------------------------
 
-``Request`` propose plusieurs interfaces pour accéder aux paramètres de la
-requête::
+``Request`` propose les paramètres de routing avec la méthode ``param()``::
 
-    $this->request->params['controller'];
     $this->request->param('controller');
 
-Tout ce qui est au-dessus retournera la même valeur. Tous les éléments de route
-:ref:`route-elements` sont accessibles à travers cette interface.
+Tous les éléments de route :ref:`route-elements` sont accessibles à travers
+cette interface.
 
 En plus des éléments de routes :ref:`route-elements`, vous avez souvent besoin
 d'accéder aux arguments passés :ref:`passed-arguments`. Ceux-ci sont aussi tous
 les deux disponibles dans l'objet ``request``::
 
     // Arguments passés
-    $this->request->pass;
-    $this->request['pass'];
-    $this->request->params['pass'];
+    $this->request->param('pass');
 
 Tous vous fournissent un accès aux arguments passés. Il y a de nombreux
 paramètres importants et utiles que CakePHP utilise en interne qu'on peut aussi
-trouver dans les paramètres de la requête:
+trouver dans les paramètres de routing:
 
 * ``plugin`` Le plugin gérant la requête aura une valeur nulle quand il n'y a
   pas de plugins.
@@ -84,6 +84,14 @@ n'existe pas va retourner ``null``::
     $foo = $this->request->query('valeur_qui_n_existe_pas');
     // $foo === null
 
+Si vous souhaitez accéder à tous les paramètres de requête, vous pouvez utiliser
+``getQueryParams()``::
+
+    $query = $this->request->getQueryParams();
+
+.. versionadded:: 3.4.0
+    ``getQueryParams()`` a été ajoutée dans la version 3.4.0
+
 Données du Corps de la Requête
 ------------------------------
 
@@ -100,11 +108,6 @@ Toute clé qui n'existe pas va retourner ``null``::
 
     $foo = $this->request->data('Valeur.qui.n.existe.pas');
     // $foo == null
-
-Vous pouvez aussi accéder au tableau de données, comme un tableau::
-
-    $this->request->data['title'];
-    $this->request->data['comments'][1]['author'];
 
 Accéder aux Données PUT, PATCH ou DELETE
 ----------------------------------------
@@ -141,7 +144,13 @@ les variables globales ``$_SERVER`` et ``$_ENV``::
     // Définir une valeur. Généralement utile pour les tests.
     $this->request->env('REQUEST_METHOD', 'POST');
 
-.. _xml-datas:
+Pour accéder à toutes les variables d'environnement dans une requête, utilisez
+``getServerParams()``::
+
+    $env = $this->request->getServerParams();
+
+.. versionadded:: 3.4.0
+    ``getServerParams()`` a été ajoutée dans la version 3.4.0
 
 Données XML ou JSON
 -------------------
@@ -168,20 +177,24 @@ Informations du Chemin
 ----------------------
 
 L'objet ``Request`` fournit aussi des informations utiles sur les chemins dans
-votre application. ``$request->base`` et ``$request->webroot`` sont utiles pour
+votre application. Les attributs ``base`` et ``webroot`` sont utiles pour
 générer des URLs et déterminer si votre application est ou n'est pas dans un
-sous-dossier. Les différentes propriétés que vous pouvez utiliser sont::
+sous-dossier. Les attributs que vous pouvez utiliser sont::
 
     // Suppose que la requête URL courante est /subdir/articles/edit/1?page=1
 
     // Contient /subdir/articles/edit/1?page=1
-    $request->here;
+    $request->here();
 
     // Contient /subdir
-    $request->base;
+    $request->getAttribute('base');
 
     // Contient /subdir/
+    $request->getAttribute('base');
+
+    // Avant la version 3.4.0
     $request->webroot;
+    $request->base;
 
 .. _check-the-request:
 
@@ -239,7 +252,7 @@ Quelques exemples seraient::
     $this->request->addDetector(
         'awesome',
         function ($request) {
-            return isset($request->awesome);
+            return $request->param('awesome');
         }
     );
 
@@ -316,37 +329,57 @@ Retourne l'hôte sur lequel votre application tourne::
     // Affiche 'my.dev.example.org'
     echo $request->host();
 
-Travailler avec les Méthodes & Headers de HTTP
-----------------------------------------------
+Lire la Méthode HTTP
+--------------------
 
-.. php:method:: method()
+.. php:method:: getMethod()
 
 Retourne la méthode HTTP où la requête a été faite::
 
     // Affiche POST
+    echo $request->getMethod();
+
+    // Avant la version 3.4.0
     echo $request->method();
+
+Restreindre les Méthodes HTTP qu'une Action Accepte
+---------------------------------------------------
 
 .. php:method:: allowMethod($methods)
 
 Définit les méthodes HTTP autorisées. Si elles ne correspondent pas, elle
-va lancer une MethodNotAllowedException.
-La réponse 405 va inclure l'en-tête ``Allow`` nécessaire avec les méthodes
-passées.
+va lancer une ``MethodNotAllowedException``. La réponse 405 va inclure
+l'en-tête ``Allow`` nécessaire avec les méthodes passées.
+
+    public function delete()
+    {
+        // Only accept POST and DELETE requests
+        $this->request->allowMethod(['post', 'delete']);
+        ...
+    }
+
+Lire les Headers HTTP
+---------------------
 
 .. php:method:: header($name)
 
 Vous permet d'accéder à tout en-tête ``HTTP_*`` utilisé pour la requête::
 
+    // Récupère l'en-tête en chaîne de caractères.
+    $this->request->getHeaderLine('User-Agent');
+
+    // Récupère un tableau de toutes les valeurs.
+    $this->request->getHeader('Accept');
+
+    // Vérifie si un en-tête existe
+    $this->request->hasHeader('Accept');
+
+    // Avant la version 3.4.0
     $this->request->header('User-Agent');
 
-Retourne le user agent utilisé pour la requête. Certains serveurs ne remplissent
-pas ``$_SERVER['HTTP_AUTHORIZATION']`` quand l'en-tête ``Authorization`` est
-définie. Si vous utilisez Apache, vous pouvez ajouter ce qui suit dans votre
-``.htaccess`` pour vous permettre d'accéder à l'en-tête ``Authorization``:: 
-
-    RewriteEngine On
-    RewriteCond %{HTTP:Authorization} ^(.*)
-    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+Alors que certaines installations d'apache ne rendent pas accessible l'en-tête
+``Authorization``, CakePHP va le rendre accessible avec les méthodes spécifiques
+d'apache comme c'est requis.
 
 .. php:method:: referer($local = false)
 
@@ -369,7 +402,7 @@ request utilise les en-têtes, définissez la propriété ``trustProxy`` à
 
     $this->request->trustProxy = true;
 
-    // Ces méthodes n'utiliseront pas les en-têtes du proxy.
+    // Ces méthodes utiliseront maintenant les en-têtes du proxy.
     $this->request->port();
     $this->request->host();
     $this->request->scheme();

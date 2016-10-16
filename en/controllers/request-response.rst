@@ -27,9 +27,8 @@ reference. Some of the duties ``Request`` performs include:
 * Processing the GET, POST, and FILES arrays into the data structures you are
   familiar with.
 * Providing environment introspection pertaining to the request. Information
-  like the
-  headers sent, the client's IP address, and the subdomain/domain names the
-  server your application is running on.
+  like the headers sent, the client's IP address, and the subdomain/domain
+  names the server your application is running on.
 * Providing access to request parameters both as array indexes and object
   properties.
 
@@ -337,8 +336,9 @@ Restricting Which HTTP method an Action Accepts
 
 .. php:method:: allowMethod($methods)
 
-Set allowed HTTP methods. If not matched, will throw ``MethodNotAllowedException``
-The 405 response will include the required ``Allow`` header with the passed methods::
+Set allowed HTTP methods. If not matched, will throw
+``MethodNotAllowedException``. The 405 response will include the required
+``Allow`` header with the passed methods::
 
     public function delete()
     {
@@ -365,7 +365,7 @@ for the request. For example::
     // Prior to 3.4.0
     $this->request->header('User-Agent');
 
-While some apache installs don't make the ``Authorization`` header accesisble,
+While some apache installs don't make the ``Authorization`` header accessible,
 CakePHP will make it available through apache specific methods as required.
 
 .. php:method:: referer($local = false)

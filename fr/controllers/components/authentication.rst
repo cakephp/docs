@@ -811,7 +811,7 @@ utilisateur que vous voulez pour la 'connexion'::
 
     public function register()
     {
-        $user = $this->Users->newEntity($this->request->data);
+        $user = $this->Users->newEntity($this->request->data());
         if ($this->Users->save($user)) {
             $this->Auth->setUser($user->toArray());
             return $this->redirect([
@@ -1089,12 +1089,12 @@ il peut donc être vérifié::
         public function isAuthorized($user = null)
         {
             // Chacun des utilisateurs enregistrés peut accéder aux fonctions publiques
-            if (empty($this->request->params['prefix'])) {
+            if (!$this->request->param('prefix')) {
                 return true;
             }
 
             // Seulement les administrateurs peuvent accéder aux fonctions d'administration
-            if ($this->request->params['prefix'] === 'admin') {
+            if ($this->request->param('prefix') === 'admin') {
                 return (bool)($user['role'] === 'admin');
             }
 

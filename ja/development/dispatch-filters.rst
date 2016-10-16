@@ -28,8 +28,8 @@ CakePHP はきれいなディスパッチサイクルに使う強固なフィル
         DispatcherFactory::add('Asset', ['cacheTime' => '+24 hours']);
 
 * ``RoutingFilter`` はリクエストされたURLに対してルーティング規則適用します。
-  ``$request->params`` でルーティングの結果が読めます。
-* ``ControllerFactory`` は ``$request->params`` を現在のリクエストを扱うための
+  ``$request->param()`` でルーティングの結果が読めます。
+* ``ControllerFactory`` は ``$request->param()`` を現在のリクエストを扱うための
   コントローラーを設置するために使います。
 * ``LocaleSelector`` はブラウザによって送られる ``Accept-Language`` ヘッダーによって
   自動的に言語を切り替えます。

@@ -192,7 +192,7 @@ sense. First, we'll add the authorization logic for bookmarks. In your
             return true;
         }
         // All other actions require an id.
-        if (!$this->request->params('pass.0')) {
+        if (!$this->request->param('pass.0')) {
             return false;
         }
 

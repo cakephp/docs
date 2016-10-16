@@ -55,7 +55,7 @@ dans nos actions de controller. Un controller basique pourrait ressembler
 
         public function add()
         {
-            $recipe = $this->Recipes->newEntity($this->request->data);
+            $recipe = $this->Recipes->newEntity($this->request->data());
             if ($this->Recipes->save($recipe)) {
                 $message = 'Saved';
             } else {
@@ -72,7 +72,7 @@ dans nos actions de controller. Un controller basique pourrait ressembler
         {
             $recipe = $this->Recipes->get($id);
             if ($this->request->is(['post', 'put'])) {
-                $recipe = $this->Recipes->patchEntity($recipe, $this->request->data);
+                $recipe = $this->Recipes->patchEntity($recipe, $this->request->data());
                 if ($this->Recipes->save($recipe)) {
                     $message = 'Saved';
                 } else {
@@ -156,7 +156,7 @@ classe :php:class:`Xml` de CakePHP, et la representation en tableau des données
 est assigné à `$this->request->data`. Avec cette fonctionnalité, la gestion
 de XML et les données POST en parallèle est seamless: aucun changement n'est
 nécessaire pour le code du controller ou du model.
-Tout ce dont vous avez besoin devrait se trouver dans ``$this->request->data``.
+Tout ce dont vous avez besoin devrait se trouver dans ``$this->request->data()``.
 
 Accepter l'Input dans d'Autres Formats
 ======================================

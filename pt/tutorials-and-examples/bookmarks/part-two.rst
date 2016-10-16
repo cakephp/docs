@@ -191,12 +191,12 @@ para os bookmarks. Em seu ``BookmarksController`` adicione o seguinte::
             return true;
         }
         // Todas as outras ações requerem um id.
-        if (empty($this->request->params['pass'][0])) {
+        if (!$this->request->param('pass.0')) {
             return false;
         }
 
         // Checa se o bookmark pertence ao user atual.
-        $id = $this->request->params['pass'][0];
+        $id = $this->request->param('pass.0');
         $bookmark = $this->Bookmarks->get($id);
         if ($bookmark->user_id == $user['id']) {
             return true;
@@ -233,7 +233,7 @@ Com isso removido, nós também vamos atualizar o método add::
     {
         $bookmark = $this->Bookmarks->newEntity();
         if ($this->request->is('post')) {
-            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data());
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('The bookmark has been saved.');
@@ -256,7 +256,7 @@ ação edit deve ficar assim::
             'contain' => ['Tags']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data());
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('The bookmark has been saved.');
