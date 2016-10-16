@@ -115,12 +115,11 @@ Accéder aux Données PUT, PATCH ou DELETE
 .. php:method:: input($callback, [$options])
 
 Quand vous construisez des services REST, vous acceptez souvent des données
-requêtées sur des requêtes ``PUT`` et ``DELETE``. Toute donnée
-de corps de requête ``application/x-www-form-urlencoded``
-va automatiquement être parsée et définie dans ``$this->data`` pour les
-requêtes ``PUT`` et ``DELETE``. Si vous acceptez les données JSON ou XML,
-regardez la section :ref:`xml-datas` pour voir comment vous pouvez accéder
-aux corps de ces requêtes.
+requêtées sur des requêtes ``PUT`` et ``DELETE``. Toute donnée de corps de
+requête ``application/x-www-form-urlencoded`` va automatiquement être parsée et
+définie dans ``$this->data`` pour les requêtes ``PUT`` et ``DELETE``. Si vous
+acceptez les données JSON ou XML, regardez la section ci-dessous pour voir
+comment vous pouvez accéder aux corps de ces requêtes.
 
 Lorsque vous accédez aux données d'entrée, vous pouvez les décoder avec une
 fonction optionnelle. Cela peut être utile quand vous devez interagir avec du
