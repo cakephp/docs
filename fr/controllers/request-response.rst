@@ -349,7 +349,7 @@ Restreindre les Méthodes HTTP qu'une Action Accepte
 
 Définit les méthodes HTTP autorisées. Si elles ne correspondent pas, elle
 va lancer une ``MethodNotAllowedException``. La réponse 405 va inclure
-l'en-tête ``Allow`` nécessaire avec les méthodes passées.
+l'en-tête ``Allow`` nécessaire avec les méthodes passées::
 
     public function delete()
     {
