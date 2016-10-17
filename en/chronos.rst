@@ -189,7 +189,7 @@ Generating Differences
 ----------------------
 
 In addition to comparing datetimes, calculating differences or deltas between
-to values is a common task::
+two values is a common task::
 
     // Get a DateInterval representing the difference
     $first->diff($second);
