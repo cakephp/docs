@@ -398,7 +398,7 @@ FormHelper でフォームの input 要素を作る方法はいくつかあり�
     そしてビューの中では、以下のシンプルなコードで複数の select が
     生成できます::
 
-        echo $this->Form->input('Group');
+        echo $this->Form->input('Group', array('multiple' => true));
 
     belongsTo や hasOne 関係を使うケースで select 項目を生成したい場合、
     Users コントローラーに以下のコードを追加します（User は Group に
@@ -1845,14 +1845,14 @@ FormHelper のいくつかのメソッドから ``$selected`` パラメータが
 ``$selected`` が生成する重複を減らします。影響を受けるメソッドは
 以下の通りです:
 
-    * FormHelper::select()
-    * FormHelper::dateTime()
-    * FormHelper::year()
-    * FormHelper::month()
-    * FormHelper::day()
-    * FormHelper::hour()
-    * FormHelper::minute()
-    * FormHelper::meridian()
+* FormHelper::select()
+* FormHelper::dateTime()
+* FormHelper::year()
+* FormHelper::month()
+* FormHelper::day()
+* FormHelper::hour()
+* FormHelper::minute()
+* FormHelper::meridian()
 
 **フォーム上のデフォルトの URL は、現在のアクションです**
 

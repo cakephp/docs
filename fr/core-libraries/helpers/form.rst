@@ -412,7 +412,7 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
 
     Et dans la vue une sélection multiple peut être crée avec ce simple code::
 
-        echo $this->Form->input('Group');
+        echo $this->Form->input('Group', array('multiple' => true));
 
     Si vous voulez un champ de sélection utilisant une relation belongsTo
     ou hasOne, vous pouvez ajouter ceci dans votre controller Users
@@ -1849,14 +1849,14 @@ les méthodes du Helper Form, en réduisant le nombre d'arguments,
 et réduit les duplications que ``$selected`` crée.
 Les méthodes sont:
 
-    * FormHelper::select()
-    * FormHelper::dateTime()
-    * FormHelper::year()
-    * FormHelper::month()
-    * FormHelper::day()
-    * FormHelper::hour()
-    * FormHelper::minute()
-    * FormHelper::meridian()
+* FormHelper::select()
+* FormHelper::dateTime()
+* FormHelper::year()
+* FormHelper::month()
+* FormHelper::day()
+* FormHelper::hour()
+* FormHelper::minute()
+* FormHelper::meridian()
 
 **L'URL par défaut des formulaires est l'action courante**
 

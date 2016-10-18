@@ -4,8 +4,13 @@ Security
 .. php:class:: Security
 
 La `librairie security <http://api.cakephp.org/2.4/class-Security.html>`_
-gère les mesures basiques de sécurité telles que les méthodes fournies pour
-le hashage et les données chiffrées.
+gère les mesures basiques de sécurité comme fournir des méthodes pour
+créer des hashs et chiffrer les données.
+
+.. warning::
+    Les fonctionnalités d'encryption fournies par la classe Security reposent
+    sur l'extension dépréciée ``mcrypt``. Si vous utilisez PHP>=7.1, vous devez
+    installer ``mcrypt`` via PECL.
 
 L'API de Security
 =================
@@ -100,18 +105,6 @@ L'API de Security
 
     .. versionadded:: 2.5
 
-.. php:staticmethod:: generateAuthKey( )
-
-    :rtype: string
-
-    Génère un hash d'autorisation.
-
-.. php:staticmethod:: getInstance( )
-
-    :rtype: object
-
-    L'implémentation Singleton pour obtenir l'instance de l'objet.
-
 .. php:staticmethod:: hash( $string, $type = NULL, $salt = false )
 
     :rtype: string
@@ -159,17 +152,6 @@ L'API de Security
 
     Définit la méthode de hash par défaut pour l'objet Security.
     Cela affecte tous les objets en utilisant Security::hash().
-
-.. php:staticmethod:: validateAuthKey( $authKey )
-
-    :rtype: boolean
-
-    Valide les hash d'autorisation.
-
-
-.. todo::
-
-    Ajoutez plus d'exemples :|
 
 .. meta::
     :title lang=fr: Security
