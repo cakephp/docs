@@ -65,7 +65,7 @@ Installer Composer
 CakePHP utilise `Composer <http://getcomposer.org>`_, un outil de gestion de
 dépendances comme méthode officielle supportée pour l'installation.
 
-- Installer Composer sur Linux et Mac OS X
+- Installer Composer sur Linux et macOS
 
   #. Exécutez le script d'installation comme décrit dans la
      `documentation officielle de Composer <https://getcomposer.org/download/>`_
@@ -379,7 +379,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
            Allow from all
        </Directory>
 
-   Si vous êtes sur Mac OSX, une autre solution est d'utiliser l'outil
+   Si vous êtes sur macOS, une autre solution est d'utiliser l'outil
    `virtualhostx <http://clickontyler.com/virtualhostx/>`_ pour faire un Hôte
    Virtuel pour pointer vers votre dossier.
 

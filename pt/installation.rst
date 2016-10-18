@@ -306,7 +306,7 @@ para maiores informações.
            Allow from all
        </Directory>
 
-   No Mac OSX, outra solução é usar a ferramenta
+   No macOS, outra solução é usar a ferramenta
    `virtualhostx <http://clickontyler.com/virtualhostx/>`_
    para fazer um Virtual Host apontar para o seu diretório.
 
