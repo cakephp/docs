@@ -788,7 +788,7 @@ scenario because when hasAndBelongsToMany associations are saved,
 the association is deleted first. You would lose the extra data in
 the columns as it is not replaced in the new insert.
 
-    .. versionchanged:: 2.1
+.. versionchanged:: 2.1
 
     You can set the ``unique`` setting to ``keepExisting`` to circumvent
     losing extra data during the save operation. See ``unique``

@@ -815,7 +815,7 @@ scénario parce que quand les associations hasAndBelongsToMany sont sauvegardée
 l'association est d'abord supprimée. Vous perdriez les données supplémentaires
 dans les colonnes qui ne seraient pas remplacées dans le nouvel ajout.
 
-    .. versionchanged:: 2.1
+.. versionchanged:: 2.1
 
     Vous pouvez définir la configuration de ``unique`` à ``keepExisting``,
     contournant la perte de données supplémentaires pendant l'opération de

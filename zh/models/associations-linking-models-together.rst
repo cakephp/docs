@@ -674,7 +674,7 @@ HABTM 关联。
 问题是，hasAndBelongsToMany 不支持这类情况，因为 hasAndBelongsToMany 关联保存时，
 先要删除这个关联。这些列中的额外数据会丢失，因为新插入的数据中没有这些数据。
 
-    .. versionchanged:: 2.1
+.. versionchanged:: 2.1
 
     你可以将 ``unique`` 设置为 ``keepExisting`` 来防止在保存操作中丢失额外的数据。
     请参阅 :ref:`HABTM association arrays <ref-habtm-arrays>`。
