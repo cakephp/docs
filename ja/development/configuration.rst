@@ -214,7 +214,7 @@ App.jsBaseUrl
         of paths for plugins, view templates and locale files respectively.
 
 App.paths
-    class ベースでないリソースのパスを構成します。
+    Configure の class ベースでないリソースのパスです。
     ``plugins`` 、 ``templates`` 、 ``locales`` などのサブキーをサポートし、
     それぞれプラグイン、view テンプレート、locale ファイルのパスを指定できます。
  
@@ -383,7 +383,7 @@ CakePHP のセッション操作の設定は :ref:`セッションの設定 <ses
     paths for these resources. In your **config/app.php** you can set these variables::
 
 プラグイン、ビューテンプレート、そしてロケールはクラスではないので、オートローダーの構成はありません。
-CakePHP はこれらのリソースの追加パスのセットアップに 3 つの設定変数を提供します。
+CakePHP はこれらのリソースの追加パスのセットアップに 3 つの Configure 変数を提供します。
 ::
 
     return [
@@ -529,7 +529,7 @@ Configure クラスの主なゴールは、中央集権化された変数を維�
 ..
     If $key is left null, all values in Configure will be returned.
 
-もし $key が null のままだと、すべての設定値が返却されます。
+もし $key が null のままだと、Configure のすべての値が返却されます。
 
 .. php:staticmethod:: readOrFail($key)
 
@@ -602,7 +602,7 @@ Configure クラスの主なゴールは、中央集権化された変数を維�
     Read and delete a key from Configure. This is useful when you want to
     combine reading and deleting values in a single operation.
 
-設定からキーの読み込みと削除を行います。
+Configure からキーの読み込みと削除を行います。
 もしあなたが値の読み込みと削除を単一の動作で組み合わせたい時に便利です。
 
 ..
@@ -622,20 +622,19 @@ Configure クラスの主なゴールは、中央集権化された変数を維�
     information on the specifics of ini files.  To use a core config engine, you'll
     need to attach it to Configure using :php:meth:`Configure::config()`::
 
-CakePHP は 2 つの組み込まれた設定ファイルエンジンを搭載しています。
-:php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` は PHP の設定ファイルを読み込むことができ、
-同じフォーマット下にて設定は歴史的に読み込まれてきました。
-:php:class:`Cake\\Core\\Configure\\Engine\\IniConfig` は ini 設定ファイルを読み込めます。
-により多くの特別な ini ファイルの情報は `PHP マニュアル <http://php.net/parse_ini_file>`_ を参照してください。
-コアの設定エンジンを利用するにあたり、  :php:meth:`Configure::config()`:: を利用する必要があります。
+CakePHP は 2 つの組み込み設定ファイルエンジンを搭載しています。
+:php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` は Configure が昔から読んできた同じフォーマットで PHP の設定ファイル形式を読み込むことができます。
+:php:class:`Cake\\Core\\Configure\\Engine\\IniConfig` は ini 設定ファイル形式を読み込めます。
+詳細な ini ファイルの仕様は `PHP マニュアル <http://php.net/parse_ini_file>`_ を参照してください。
+コアの設定エンジンを利用するにあたり、Configure に :php:meth:`Configure::config()`:: を設定する必要があります。
 ::
 
     use Cake\Core\Configure\Engine\PhpConfig;
 
-    // config から config ファイルを読み込む
+    // Read config files from config
     Configure::config('default', new PhpConfig());
 
-    // 他のパスから config ファイルを読み込む
+    // Read config files from another path.
     Configure::config('default', new PhpConfig('/path/to/your/config/files/'));
 
 ..
@@ -644,10 +643,9 @@ CakePHP は 2 つの組み込まれた設定ファイルエンジンを搭載し
     using a few other methods on Configure. To check which engine aliases are
     attached you can use :php:meth:`Configure::configured()`::
 
-複数のエンジンが配置された Configure を利用することができ、
-それぞれ異なった種類の設定ファイルの情報源を読み込みます。
-Configure のわずかなメソッドを利用して配置されたエンジンの情報をやり取りできます。
-どのエンジンのエイリアスが配置されているかチェックするには、 :php:meth:`Configure::configured()` が利用できます。
+複数のエンジンを Configure に設定することができ、それぞれ異なった種類もしくはパスの設定ファイルを読み込みます。
+Configure のいくつかのメソッドを利用して設定されたエンジンとやり取りできます。
+どのエンジンのエイリアスが設定されているかチェックするには、 :php:meth:`Configure::configured()` が利用できます。
 ::
 
     // 配置されたエンジンのエイリアスの配列を取得する
@@ -716,7 +714,7 @@ Configure のわずかなメソッドを利用して配置されたエンジン�
     a PHP configuration file loadable by the
     :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig`
 
-全て、もしくはいくつかの設定にあるデータをファイルや設定エンジンがサポートしているストレージシステムにダンプします。
+全て、もしくはいくつかの Configure にあるデータを、ファイルや設定エンジンがサポートしているストレージシステムにダンプします。
 シリアライズのフォーマットは、$config で配置された設定エンジンから決定されます。
 例えば、もし 'default' エンジンが :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` ならば、
 生成されたファイルは :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` によって読み込み可能な PHP の設定ファイルになるでしょう。
@@ -725,7 +723,7 @@ Configure のわずかなメソッドを利用して配置されたエンジン�
     Given that the 'default' engine is an instance of PhpConfig.
     Save all data in Configure to the file `my_config.php`::
 
-'default' エンジンは PhpConfig のインスタンスとして考えられます。設定にある全てのデータを `my_config.php` に保存します。
+'default' エンジンは PhpConfig のインスタンスとして考えられます。Configure の全てのデータを `my_config.php` に保存します。
 ::
 
     Configure::dump('my_config', 'default');
@@ -753,16 +751,28 @@ Configure のわずかなメソッドを利用して配置されたエンジン�
 
 .. php:staticmethod:: store($name, $cacheConfig = 'default', $data = null)
 
-You can also store runtime configuration values for use in a future request.
-Since configure only remembers values for the current request, you will
-need to store any modified configuration information if you want to
-use it in subsequent requests::
+..
+    You can also store runtime configuration values for use in a future request.
+    Since configure only remembers values for the current request, you will
+    need to store any modified configuration information if you want to
+    use it in subsequent requests::
+    
+    //Store the current configuration in the 'user_1234' key in the 'default' cache.
+    Configure::store('user_1234', 'default');
 
-    // Store the current configuration in the 'user_1234' key in the 'default' cache.
+将来のリクエストのために、ランタイムの設定もまた保存することができます。
+設定は現在のリクエストのみ値を記憶するので、
+もしその後のリクエストで編集された設定情報を利用したければ、それを保存する必要があります。
+::
+
+    //現在の設定を 'user_1234' キーに 'default' キャッシュとして保存
     Configure::store('user_1234', 'default');
 
 Stored configuration data is persisted in the named cache configuration. See the
 :doc:`/core-libraries/caching` documentation for more information on caching.
+
+保存された設定データはその名前のキャッシュ設定で存続します。
+キャッシュに関するより詳しい情報は :doc:`/core-libraries/caching` を参照してください。
 
 Restoring Runtime Configuration
 -------------------------------
