@@ -26,6 +26,11 @@ Request Method Options
 Creating Scoped Clients
 =======================
 
+.. _httpclient-response-objects:
+
+Response Objects
+================
+
 .. _http-client-xml-json:
 
 Reading JSON and XML Response Bodies
