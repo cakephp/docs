@@ -28,7 +28,7 @@ immutables de date/time et les extensions de ``DateInterval``.
 
 * ``Cake\Chronos\Chronos`` est un objet de *date et time* immutable.
 * ``Cake\Chronos\Date`` est un objet de *date* immutable.
-* ``Cake\Chronos\MutableTime`` est un objet de *date et time* mutable.
+* ``Cake\Chronos\MutableDateTime`` est un objet de *date et time* mutable.
 * ``Cake\Chronos\MutableDate`` est un objet de *date* mutable.
 * ``Cake\Chronos\ChronosInterval`` est une extension pour l'objet
   ``DateInterval``.

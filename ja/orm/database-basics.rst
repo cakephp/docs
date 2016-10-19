@@ -502,7 +502,7 @@ Type クラスが必要になります。 ::
             return Point::parse($value);
         }
 
-        public function marshall($value)
+        public function marshal($value)
         {
             if (is_string($value)) {
                 $value = explode(',', $value);
@@ -532,7 +532,7 @@ Type クラスが必要になります。 ::
 上記のクラスは、いくつかの興味深い特徴があります。
 
 * ``toPHP`` メソッドは、SQL クエリの結果を値オブジェクトにパースします。
-* ``marchall`` メソッドは、例えばリクエストデータで与えられたデータから値オブジェクトへ
+* ``marchal`` メソッドは、例えばリクエストデータで与えられたデータから値オブジェクトへ
   変換します。 ``'10.24,12.34`` のような文字列や配列を受け取れるようにしています。
 * ``toExpression`` メソッドは、値オブジェクトから同等の SQL 表現へ変換します。
   例えば、結果の SQL は、 ``POINT(10.24, 12.34)`` のようになります。

@@ -7,39 +7,28 @@ CakePHP の規約を習得するには少し時間がかかりますが、長い
 開放されます。 規約によって開発が統一感を持つため、開発者が加わってすぐに手伝うということがやりやすく
 なります。
 
-CakePHP の規約は長年のウェブ開発経験とベストプラクティスを精錬したものです。CakePHP での開発には
-これらの規約の利用をお勧めしますが、特に既存システムと作業しなければいけない場合などのために、条項の
-大部分は独自設定できる、という点も述べておきましょう。
-
 コントローラの規約
 ==================
 
 コントローラのクラス名は複数形でキャメル記法で、最後に ``Controller`` が付きます。
-``PeopleController`` 、 ``LatestArticlesController`` は規約に合ったコントローラ名の例となります。
+``UsersController`` 、 ``ArticleCategoriesController`` は規約に合ったコントローラ名の例
+となります。
 
 コントローラーにある public メソッドは、アクションとしてブラウザからアクセス可能になります。
-例えば、 ``/articles/view`` は  ``ArticlesController`` の ``view()`` メソッドにアクセスします。
+例えば、 ``/users/view`` は  ``UsersController`` の ``view()`` メソッドにアクセスします。
 protected メソッドや private メソッドはルーティングしてアクセスすることはできません。
 
 コントローラ名と URL
 ~~~~~~~~~~~~~~~~~~~~
 
 前節の通り、ひとつの単語からなる名前のコントローラは、簡単に小文字の URL パスにマップできます。
-例えば、 ``ApplesController`` （ファイル名は 'ApplesController.php'）には、
-http://example.com/apples としてアクセスできます。
+例えば、 ``UsersController`` （ファイル名は 'UsersController.php'）には、
+http://example.com/users としてアクセスできます。
 
-複数の単語からなる名前のコントローラは、コントローラ名と等価になるようなさまざまな形式が
-*考えられます* 。つまり:
-
--  /redApples
--  /RedApples
--  /Red_apples
--  /red_apples
-
-は全て、 RedApples コントローラの index アクションとして解決されます。
-しかしながら、 ``DashedRoute`` クラスを使用すると URL は小文字とダッシュを用いる規約であり、
-``RedApplesController::goPick()`` アクションにアクセスするための正しい形式は
-``/red-apples/go-pick`` となります。
+複数語のコントローラをあなたの好きなようにルーティングできますが、
+``DashedRoute`` クラスを使用すると URL は小文字とダッシュを用いる規約であり、
+``ArticleCategoriesController::viewAll()`` アクションにアクセスするための正しい形式は
+``/article-categories/view-all`` となります。
 
 ``this->Html->link`` を使用してリンクを作成した時、URL 配列に以下の規約を使用できます。 ::
 
@@ -58,22 +47,22 @@ CakePHP の URL とパラメータの取り扱いに関するより詳細な情�
 ファイルとクラス名の規約
 ========================
 
-通常、ファイル名はクラス名と一致し、オートローディングのために PRS-0 や PSR-4 標準に準拠してください。
-以下に、クラスメイトファイル名の例を挙げます。
+通常、ファイル名はクラス名と一致し、オートローディングのために PRS-0 や PSR-4
+標準に準拠してください。以下に、クラスメイトファイル名の例を挙げます。
 
--  **KissesAndHugsController** というコントローラクラスは、
-   **KissesAndHugsController.php** というファイル名にします。
--  **MyHandyComponent** というコンポーネントクラスは、
+-  ``LatestArticlesController`` というコントローラクラスは、
+   **LatestArticlesController.php** というファイル名にします。
+-  ``MyHandyComponent`` というコンポーネントクラスは、
    **MyHandyComponent.php** というファイル名にします。
--  **OptionValuesTable** という Table クラスは、
+-  ``OptionValuesTable`` という Table クラスは、
    **OptionValuesTable.php** というファイル名にします。
--  **OptionValue** という Entity クラスは、
+-  ``OptionValue`` という Entity クラスは、
    **OptionValue.php** というファイル名にします。
--  **EspeciallyFunkableBehavior** というビヘイビアクラスは、
+-  ``EspeciallyFunkableBehavior`` というビヘイビアクラスは、
    **EspeciallyFunkableBehavior.php** というファイル名にします。
--  **SuperSimpleView** というビュークラスは、
+-  ``SuperSimpleView`` というビュークラスは、
    **SuperSimpleView.php** というファイル名にします。
--  **BestEverHelper** というヘルパークラスは、
+-  ``BestEverHelper`` というヘルパークラスは、
    **BestEverHelper.php** というファイル名にします。
 
 各ファイルは、 app フォルダ内の適切なフォルダ・名前空間の中に配置します。
@@ -83,11 +72,11 @@ CakePHP の URL とパラメータの取り扱いに関するより詳細な情�
 モデルとデータベースの規約
 ==========================
 
-Table クラスの名前は複数形でキャメル記法です。People, BigPeople, ReallyBigPeople
-などは規約に合ったモデル名です。
+Table クラスの名前は複数形でキャメル記法です。 ``Users``, ``ArticleCategories``,
+``UserFavoritePages`` などは規約に合ったモデル名です。
 
 CakePHP のモデルに対応するテーブル名は、複数形でアンダースコア記法です。上記の例で言えば、
-テーブル名はそれぞれ、 ``people`` 、 ``big_people`` 、 ``really_big_people``
+テーブル名はそれぞれ、 ``users`` 、 ``article_categories`` 、 ``user_favorite_pages``
 になります。
 
 規約は、テーブルやカラム名のための英語単語を使用するためのものです。もし、別の言語の単語を
@@ -98,43 +87,44 @@ CakePHP のモデルに対応するテーブル名は、複数形でアンダー
 単語のための独自構文を解釈することを確認できます。より詳しい情報は、
 :doc:`/core-libraries/inflector` をご覧ください。
 
-二個以上の単語で構成されるフィールドの名前は、 first\_name のようにアンダースコア記法になります。
+二個以上の単語で構成されるフィールドの名前は、 ``first_name`` のようにアンダースコア記法になります。
 
 hasMany, blongsTo, hasOne 中の外部キーは、デフォルトで関連するモデルの(単数形の)名前に
-\_id を付けたものとして認識されます。ケーキ職人がケーキを複数持っている (*Bakers hasMany Cakes*)
-としたら、cakes テーブルは、baker\_id を外部キーとして bakers テーブルのデータを参照します。
-category\_types のような複数の単語のテーブルでは、外部キーは category\_type\_id のようになるでしょう。
+``_id`` を付けたものとして認識されます。ユーザーが記事を複数持っている (*Users hasMany Articles*)
+としたら、 ``articles`` テーブルは、 ``user_id`` を外部キーとして ``users`` テーブルのデータを
+参照します。 ``article_categories`` のような複数の単語のテーブルでは、外部キーは
+``article_category_id`` のようになるでしょう。
 
 モデル間の BelongsToMany の関係で使用される join テーブルは、結合するテーブルに合わせて、
-アルファベット順に（zebras\_apples ではなく、apples\_zebras）並べた名前にしてください。
+アルファベット順に (``tags_articles`` ではなく、 ``articles_tags``) 並べた名前にしてください。
 
-また、主キーをオートインクリメントとしてではなく、char(36) として使用しても構いません。
-そうすると、 ``Table::save()`` メソッドを使って新規レコードを保存するとき、CakePHP はユニークな
-36 文字の UUID (Text::uuid) を用いようとします。
+主キーとしてオートインクリメントキーを使用することに加えて UUID カラムも使用できます。
+``Table::save()`` メソッドを使って新規レコードを保存するとき、CakePHP はユニークな
+36 文字の UUID (:php:meth:`Cake\\Utilitiy\\Text::uuid`) を用いようとします。
 
 ビューの規約
 ============
 
 ビューのテンプレートファイルは、それを表示するコントローラの関数に合わせた、
 アンダースコア記法で命名されます。
-PeopleController クラスの getReady() 関数は、ビューテンプレートとして、
-**src/Template/People/get_ready.ctp** を探すことになります。
+``ArticlesController`` クラスの ``viewAll()`` 関数は、ビューテンプレートとして、
+**src/Template/Articles/view_all.ctp** を探すことになります。
 
-基本パターンは、 **src/Template/コントローラ名/アンダースコア記法\_関数名.ctp** です。
+基本パターンは、 **src/Template/コントローラ名/アンダースコア記法_関数名.ctp** です。
 
 各部分を CakePHP の規約に合わせて命名しておくことで、混乱を招く面倒な設定をしなくても
 機能的に動作するようになります。以下が最後の規約に合った命名の例です。
 
--  データベースのテーブル: "people"
--  Table クラス: "PeopleTable" の場所は **src/Model/Table/PeopleTable.php**
--  Entity クラス: "Person" の場所は **src/Model/Entity/Person.php**
--  Controller クラス: "PeapleController" は
-   **src/Controller/PeopleController.php**
--  ビューテンプレートの場所は **src/Template/People/index.ctp**
+-  データベースのテーブル: "articles"
+-  Table クラス: ``ArticlesTable`` の場所は **src/Model/Table/ArticlesTable.php**
+-  Entity クラス: ``Article`` の場所は **src/Model/Entity/Article.php**
+-  Controller クラス: ``ArticlesController`` は
+   **src/Controller/ArticlesController.php**
+-  ビューテンプレートの場所は **src/Template/Articles/index.ctp**
 
-これらの規約により、CakePHP は、http://example.com/people/ へのリクエストを、
-PeopleController の ``index()`` 関数にマップします。そして、Person モデルが自動的に使える
-（データベースの 'people' テーブルに自動的に接続される）ようになり、表示されることになります。
+これらの規約により、CakePHP は、 http://example.com/articles/ へのリクエストを、
+ArticlesController の ``index()`` 関数にマップします。そして、Articles モデルが自動的に使える
+（データベースの 'articles' テーブルに自動的に接続される）ようになり、表示されることになります。
 必要なクラスとファイルを作成しただけでこれらの関係が設定されています。
 
 さて、これで CakePHP の基本について一通り理解できました。物事がどう組み合わせられるかを確かめるために、
@@ -143,5 +133,4 @@ PeopleController の ``index()`` 関数にマップします。そして、Perso
 
 .. meta::
     :title lang=ja: CakePHP Conventions
-    :keywords lang=ja: web development experience,maintenance nightmare,index method,legacy systems,method names,php class,uniform system,config files,tenets,apples,conventions,conventional controller,best practices,maps,visibility,news articles,functionality,logic,cakephp,developers
-
+    :keywords lang=ja: web development experience,maintenance nightmare,index method,legacy systems,method names,php class,uniform system,config files,tenets,articles,conventions,conventional controller,best practices,maps,visibility,news articles,functionality,logic,cakephp,developers

@@ -61,7 +61,7 @@ Composer のインストール
 CakePHP の公式のインストール方法として、依存性管理ツール
 `Composer <http://getcomposer.org>`_ を使用します。
 
-- Linux や Mac OS X に Composer をインストール
+- Linux や macOS に Composer をインストール
 
   #. `公式の Composer ドキュメント <https://getcomposer.org/download/>`_ に書かれた
      インストーラスクリプトを実行し、Composer をインストールするために指示に従ってください。
@@ -350,7 +350,7 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
            Allow from all
        </Directory>
 
-   Mac OSX上での別解は、仮想ホストをフォルダに向けさせるのに、
+   macOS上での別解は、仮想ホストをフォルダに向けさせるのに、
    `virtualhostx <http://clickontyler.com/virtualhostx/>`_
    ツールを使うことが挙げられます。
 
