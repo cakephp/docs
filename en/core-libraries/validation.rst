@@ -325,9 +325,9 @@ sometimes allowed to be empty::
 Likewise, a field can be required to be populated when certain conditions are
 met::
 
-    $validator->notEmpty('email_frequency', 'This field is required', function ($context) {
+    $validator->notEmpty('email_frequency', function ($context) {
         return !empty($context['data']['wants_newsletter']);
-    });
+    }, 'This field is required');
 
 In the above example, the ``email_frequency`` field cannot be left empty if the
 the user wants to receive the newsletter.
