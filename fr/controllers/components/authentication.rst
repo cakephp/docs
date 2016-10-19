@@ -576,7 +576,10 @@ Pour afficher les messages d'erreur de session que Auth génère, vous devez
 ajouter les lignes de code suivante dans votre layout. Ajoutez les deux lignes
 suivantes au fichier **src/Template/Layouts/default.ctp** dans la section body::
 
+    // Seule cette ligne est nécessaire à partir de 3.4.0.
     echo $this->Flash->render();
+
+    // Avant 3.4.0, cette ligne sera également nécessaire.
     echo $this->Flash->render('auth');
 
 Vous pouvez personnaliser les messages d'erreur et les réglages que le
@@ -584,8 +587,9 @@ component Auth ``AuthComponent`` utilise. En utilisant ``flash``,
 vous pouvez configurer les paramètres que le component Auth utilise pour
 envoyer des messages flash. Les clés disponibles sont
 
-- ``key`` - La clé à utiliser, 'auth' par défaut.
-- ``params`` - Le tableau des paramètres supplémentaires à utiliser, [] par
+- ``key`` - La clé à utiliser, 'default' par défaut. Avant 3.4.0, la clé par
+  défaut était 'auth'.
+- ``params`` - Le tableau des paramètres supplémentaires à utiliser, ``[]`` par
   défaut.
 
 En plus des paramètres de message flash, vous pouvez personnaliser les autres

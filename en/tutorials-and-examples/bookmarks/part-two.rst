@@ -208,7 +208,7 @@ sense. First, we'll add the authorization logic for bookmarks. In your
 
 Now if you try to view, edit or delete a bookmark that does not belong to you,
 you should be redirected back to the page you came from. If no error message is
-displayed add the following to your layout::
+displayed, add the following to your layout::
 
     // In src/Template/Layout/default.ctp
     <?= $this->Flash->render() ?>

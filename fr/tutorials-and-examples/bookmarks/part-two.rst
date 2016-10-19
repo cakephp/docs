@@ -218,11 +218,10 @@ les bookmarks. Dans notre ``BookmarksController``, ajoutez ce qui suit::
 
 Maintenant, si vous essayez de voir, de modifier ou de supprimer un bookmark qui
 ne vous appartient pas, vous devriez être redirigé vers la page d'où vous venez.
-Cependant, il n'y a pas de message affiché, donc ensuite, rectifions cela::
+Si aucun message ne s'affiche, ajoutez la ligne suivante dans votre layout::
 
     // Dans src/Template/Layout/default.ctp
-    // Sous le message flash existant.
-    <?= $this->Flash->render('auth') ?>
+    <?= $this->Flash->render() ?>
 
 Vous devriez maintenant voir les messages d'erreur d'autorisation.
 

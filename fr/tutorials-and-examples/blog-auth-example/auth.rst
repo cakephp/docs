@@ -262,7 +262,7 @@ votre fichier **src/Template/Users/login.ctp** et ajoutez les lignes suivantes:
     <!-- src/Template/Users/login.ctp -->
 
     <div class="users form">
-    <?= $this->Flash->render('auth') ?>
+    <?= $this->Flash->render() ?>
     <?= $this->Form->create() ?>
         <fieldset>
             <legend><?= __("Merci de rentrer vos nom d'utilisateur et mot de passe") ?></legend>
