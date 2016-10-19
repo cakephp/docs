@@ -207,12 +207,11 @@ sense. First, we'll add the authorization logic for bookmarks. In your
 
 
 Now if you try to view, edit or delete a bookmark that does not belong to you,
-you should be redirected back to the page you came from. However, there is no
-error message being displayed, so let's rectify that next::
+you should be redirected back to the page you came from. If no error message is
+displayed add the following to your layout::
 
     // In src/Template/Layout/default.ctp
-    // Under the existing flash message.
-    <?= $this->Flash->render('auth') ?>
+    <?= $this->Flash->render() ?>
 
 You should now see the authorization error messages.
 
