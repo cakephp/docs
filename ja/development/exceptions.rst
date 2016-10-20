@@ -59,7 +59,7 @@ HTTP 方式の例外がいくつか存在します。
 
     400 Bad Request エラーを発生させるために使います。
 
-.. php:exception::UnauthorizedException
+.. php:exception:: UnauthorizedException
 
     401 Unauthorized エラーを発生させるために使います。
 
