@@ -61,7 +61,7 @@ HTTP 方式の例外がいくつか存在します。
 
 .. php:exception::UnauthorizedException
 
-    401 Not found エラーを発生させるために使います。
+    401 Unauthorized エラーを発生させるために使います。
 
 .. php:exception:: ForbiddenException
 
