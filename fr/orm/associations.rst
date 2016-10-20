@@ -513,9 +513,10 @@ Patient belongsToMany Doctor doctors_patients.id, doctors_patients.doctor_id,
                              doctors_patients.patient_id.
 ============================ ================================================================
 
-Nous pouvons définir l'association belongsToMany dans notre model Articles comme
+Nous pouvons définir l'association belongsToMany dans nos deux models comme
 suit::
 
+    // Dans src/Model/Table/ArticlesTable.php
     class ArticlesTable extends Table
     {
 
@@ -525,15 +526,38 @@ suit::
         }
     }
 
+    // Dans src/Model/Table/TagsTable.php
+    class TagsTable extends Table
+    {
+
+        public function initialize(array $config)
+        {
+            $this->belongsToMany('Articles');
+        }
+    }
+
 Nous pouvons aussi définir une relation plus spécifique en utilisant un
 tableau::
 
+    // Dans src/Model/Table/ArticlesTable.php
     class ArticlesTable extends Table
     {
 
         public function initialize(array $config)
         {
             $this->belongsToMany('Tags', [
+                'joinTable' => 'articles_tags',
+            ]);
+        }
+    }
+
+    // Dans src/Model/Table/TagsTable.php
+    class TagsTable extends Table
+    {
+
+        public function initialize(array $config)
+        {
+            $this->belongsToMany('Articles', [
                 'joinTable' => 'articles_tags',
             ]);
         }
