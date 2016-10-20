@@ -33,7 +33,8 @@ version 4.0.0 à partir de laquelle ils seront supprimés.
   * ``setInput()`` est dépréciée. Utilisez ``withBody()`` plutôt.
   * Les méthodes ``ArrayAccess`` ont toutes été dépréciées.
 
-* La valeur de ``Auth.redirect`` stockée en session n'est plus utilisée.
+* La valeur de ``Auth.redirect`` stockée en session n'est plus utilisée. Un
+  paramètre d'URL est maintenant utilisé pour stocker l'URL de redirection.
 * L'option ``ajaxLogin`` du ``AuthComponent`` est dépréciée. Vous devez maintenant
   utiliser le code de statut HTTP ``403`` pour déclencher le bon comportement côté
   client.
@@ -57,6 +58,13 @@ variations mineures qui pourraient avoir un impact sur votre application :
   la page de connexion. Auparavant, l'URL de redirection était stockée en
   session. Utiliser un paramètre d'URL permet une meilleure compatibilité avec
   les différents navigateurs.
+* Le système de *reflection* de base de données traite maintenant les types de
+  colonnes inconnus comme ``string`` et non plus comme ``text``. L'impact de ce
+  changement est notamment visible sur le ``FormHelper`` qui va générer des
+  inputs à la place de textarea pour les types de colonnes inconnus.
+* ``AuthComponent`` ne va plus stocker ses messages Flash via la clé 'auth'.
+  Ils seront maintenant rendu avec le template 'error' et sous la clé flash
+  'default'. Ceci a été fait dans le but de simplifier ``AuthComponent``.
 
 Collection
 ==========

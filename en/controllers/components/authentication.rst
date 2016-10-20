@@ -537,15 +537,19 @@ In order to display the session error messages that Auth generates, you
 need to add the following code to your layout. Add the following two
 lines to the **src/Template/Layout/default.ctp** file in the body section::
 
+    // Only this is necessary after 3.4.0
     echo $this->Flash->render();
+
+    // Prior to 3.4.0 this will be required as well.
     echo $this->Flash->render('auth');
 
 You can customize the error messages and flash settings AuthComponent
 uses. Using ``flash`` config you can configure the parameters
 AuthComponent uses for setting flash messages. The available keys are
 
-- ``key`` - The key to use, defaults to 'auth'.
-- ``params`` - The array of additional params to use, defaults to [].
+- ``key`` - The key to use, defaults to 'default'. Prior to 3.4.0, the key
+  defaulted to 'auth'.
+- ``params`` - The array of additional params to use, defaults to ``[]``.
 
 In addition to the flash message settings you can customize other error
 messages AuthComponent uses. In your controller's beforeFilter, or

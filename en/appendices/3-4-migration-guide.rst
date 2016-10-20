@@ -31,7 +31,8 @@ elements will continue to function until 4.0.0 after which they will be removed.
   * ``setInput()`` is deprecated. Use ``withBody()`` instead.
   * The ``ArrayAccess`` methods have all been deprecated.
 
-* The ``Auth.redirect`` session variable is no longer used.
+* The ``Auth.redirect`` session variable is no longer used. Instead a query
+  string parameter is used to store the redirect URL.
 * The ``ajaxLogin`` option for ``AuthComponent`` is deprecated. You should use the
   ``403`` status code to trigger the correct behavior in clientside code now.
 * The ``beforeRedirect`` method of ``RequestHandlerComponent`` is now
@@ -56,8 +57,11 @@ behavior that may effect your application:
   was stored in the session. Using the query string allows for better
   multi-browser experience.
 * Database Schema reflection now treats unknown column types as ``string`` and
-  not ``text``. A visible impact of this is that FormHelper will generate text
-  inputs instead of textarea elements for unknown column types.
+  not ``text``. A visible impact of this is that ``FormHelper`` will generate
+  text inputs instead of textarea elements for unknown column types.
+* ``AuthComponent`` no longer stores the flash messages it creates under the
+  'auth' key. They are now rendered with the 'error' template under the
+  'default' flash message key. This simplifies using ``AuthComponent``.
 
 Collection
 ==========
