@@ -446,7 +446,7 @@ vous pouvez utiliser tout controller que vous souhaitez::
 
     class AppExceptionRenderer extends ExceptionRenderer {
         protected function _getController($exception) {
-            App::uses('SuperCustomError', 'Controller');
+            App::uses('SuperCustomErrorController', 'Controller');
             return new SuperCustomErrorController();
         }
     }
