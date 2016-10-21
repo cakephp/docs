@@ -632,10 +632,10 @@ Par exemple::
         ];
     }
 
-Vous ne pouvez pas charger/créer tout type de schéma dans une fixture. Ceci est
-utile si vous aviez déjà une configuration de base de données de test, avec
-toutes les tables vides créés. En ne définissant ni ``$fields`` ni ``$import``,
-une fixture va seulement insérer ces enregistrements et tronquer les
+Vous pouvez ne pas charger/créer schéma dans une fixture. Ceci est utile si
+vous aviez déjà une configuration de base de données de test, avec toutes
+les tables vides créées. En ne définissant ni ``$fields`` ni ``$import``, une
+fixture va seulement insérer les enregistrements et tronquer les
 enregistrements sur chaque méthode de test.
 
 Charger les Fixtures dans vos Tests (TestCase)
