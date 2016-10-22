@@ -6,6 +6,10 @@ Security
 `Security ライブラリ <http://api.cakephp.org/2.8/class-Security.html>`_ は、
 データのハッシュ化や暗号化などのメソッドなどの基本的なセキュリティ分野を取り扱います。
 
+.. warning::
+    Security によって提供される暗号化機能は、非推奨な ``mcrypt`` 拡張に依存します。もし
+    PHP=>7.1 を使用している場合、PECL 経由で ``mcrypt`` をインストールする必要があります。
+
 Security API
 ============
 
@@ -88,18 +92,6 @@ Security API
 
     .. versionadded:: 2.5
 
-.. php:staticmethod:: generateAuthKey( )
-
-    :rtype: string
-
-        認可用のハッシュを生成します。
-
-.. php:staticmethod:: getInstance( )
-
-    :rtype: object
-
-    オブジェクトのインスタンスを返す、シングルトン実装です。
-
 .. php:staticmethod:: hash( $string, $type = NULL, $salt = false )
 
     :rtype: string
@@ -144,16 +136,6 @@ Security API
 
     Security オブジェクトがデフォルトで利用するハッシュ化メソッドを設定します。
     この操作は、 Security::hash() を利用する全てのオブジェクトへ影響します。
-
-.. php:staticmethod:: validateAuthKey( $authKey )
-
-    :rtype: boolean
-
-    認可用ハッシュを検証します。
-
-.. todo::
-
-    もっと例を追加してください :|
 
 .. meta::
     :title lang=ja: セキュリティ
