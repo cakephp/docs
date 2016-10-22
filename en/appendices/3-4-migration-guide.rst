@@ -34,7 +34,7 @@ elements will continue to function until 4.0.0 after which they will be removed.
 * The ``Auth.redirect`` session variable is no longer used. Instead a query
   string parameter is used to store the redirect URL.
 * ``AuthComponent`` no longer stores redirect URLs when the unauthorized URL is
-  a ``POST`` action.
+  not a ``GET`` action.
 * The ``ajaxLogin`` option for ``AuthComponent`` is deprecated. You should use the
   ``403`` status code to trigger the correct behavior in clientside code now.
 * The ``beforeRedirect`` method of ``RequestHandlerComponent`` is now
