@@ -92,6 +92,11 @@ PaginatorHelper
 
 * ``PaginatorHelper::numbers()`` now uses an HTML elipsis instead of '...' in
   the default templates.
+* ``PaginatorHelper::total()`` was added to enable reading the total number of
+  pages for the currently paginated results.
+* ``PaginatorHelper::generateUrlParams()`` was added as a lower level URL
+  building method.
+* ``PaginatorHelper::meta()`` can now create links for 'first', 'last' now.
 
 FormHelper
 ==========
