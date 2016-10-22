@@ -104,3 +104,8 @@ FormHelper
 * You can now configure the sources which FormHelper reads from. This makes
   creating GET forms simpler. See :ref:`form-values-from-query-string` for more
   information.
+
+Validation
+==========
+
+* ``Validation::falsey()`` and ``Validation::truthy()`` were added.
