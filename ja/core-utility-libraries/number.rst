@@ -308,11 +308,11 @@ CakeNumber
 
     $options パラメータは、 :php:meth:`CakeNumber::format()` と同じキーを持ちます。
 
-       -  places (integer): 小数点以下の桁数
-       -  before (string): 数値の前に表示する文字列
-       -  escape (boolean): エスケープするかどうか
-       -  decimals (string): 少数の区切りとして利用する文字列
-       -  thousands (string): 千、100万、... の区切りとして利用する文字列
+    -  places (integer): 小数点以下の桁数
+    -  before (string): 数値の前に表示する文字列
+    -  escape (boolean): エスケープするかどうか
+    -  decimals (string): 少数の区切りとして利用する文字列
+    -  thousands (string): 千、100万、... の区切りとして利用する文字列
 
     例::
 

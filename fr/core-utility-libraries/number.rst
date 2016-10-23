@@ -353,13 +353,13 @@ automatiqement la sortie dans la vue.
     Le paramètre $options prend les mêmes clés que
     :php:meth:`CakeNumber::format()` lui-même:
 
-       -  places (integer): le montant de precision souhaité.
-       -  before (string): à mettre avant le nombre sorti.
-       -  after (string): à mettre après le nombre sorti.
-       -  decimals (string): utilisé pour délimiter les places de la décimal
-          dans un nombre.
-       -  thousands (string): utilisé pour marquer les places des centaines,
-          millions, …
+    -  places (integer): le montant de precision souhaité.
+    -  before (string): à mettre avant le nombre sorti.
+    -  after (string): à mettre après le nombre sorti.
+    -  decimals (string): utilisé pour délimiter les places de la décimal
+       dans un nombre.
+    -  thousands (string): utilisé pour marquer les places des centaines,
+       millions, …
 
     Exemple::
 
