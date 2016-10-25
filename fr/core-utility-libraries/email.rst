@@ -305,7 +305,7 @@ client:
 
 1. Chaîne de caractères: ``$Email->attachments('/full/file/path/file.png')`` va
    attacher ce fichier avec le nom file.png.
-2. Tableau: ``$Email->attachments(array('/full/file/path/file.png')`` aura le
+2. Tableau: ``$Email->attachments(array('/full/file/path/file.png'))`` aura le
    même comportement qu'en utilisant une chaîne de caractères.
 3. Tableau avec clé:
    ``$Email->attachments(array('photo.png' => '/full/some_hash.png'))`` va
