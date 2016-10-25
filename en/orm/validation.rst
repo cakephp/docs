@@ -394,7 +394,7 @@ are null::
         ['parent_id', 'site_id'], // Schema: parent_id NULL, site_id NOT NULL
         'ParentNodes',
         ['allowNullableNulls' => true] 
-    );
+    ));
 
     // A Node however should in addition also always reference a Site.
     $rules->add($rules->existsIn(['site_id'], 'Sites'));
