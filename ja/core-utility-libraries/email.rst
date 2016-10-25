@@ -285,7 +285,7 @@ CakeEmail に伝えることによって行います。 ::
 
 1. 文字列: ``$Email->attachments('/full/file/path/file.png')`` は、
    file.png というファイル名でこのファイルを添付します。
-2. 配列: ``$Email->attachments(array('/full/file/path/file.png')`` は、
+2. 配列: ``$Email->attachments(array('/full/file/path/file.png'))`` は、
    文字列の場合と同じ振る舞いをします。
 3. キー付き配列:
    ``$Email->attachments(array('photo.png' => '/full/some_hash.png'))`` は、
