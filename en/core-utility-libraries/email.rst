@@ -290,7 +290,7 @@ you want the filenames to appear in the recipient's mail client:
 
 1. String: ``$Email->attachments('/full/file/path/file.png')`` will attach this
    file with the name file.png.
-2. Array: ``$Email->attachments(array('/full/file/path/file.png')`` will have
+2. Array: ``$Email->attachments(array('/full/file/path/file.png'))`` will have
    the same behavior as using a string.
 3. Array with key:
    ``$Email->attachments(array('photo.png' => '/full/some_hash.png'))`` will
