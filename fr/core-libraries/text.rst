@@ -261,7 +261,7 @@ Tronquer le Texte
 .. php:method:: truncate(string $text, int $length = 100, array $options)
 
 Si ``$text`` est plus long que ``$length``, cette méthode le tronque à la
-longueur ``$length`` et ajoute un prefix ``'ellipsis'``, si défini. Si
+longueur ``$length`` et ajoute un suffixe ``'ellipsis'``, si défini. Si
 ``'exact'`` est passé à ``false``, le truchement va se faire au premier espace
 après le point où ``$length`` a dépassé. Si ``'html'`` est passé à ``true``, les
 balises html seront respectés et ne seront pas coupés.
@@ -308,7 +308,7 @@ Tronquer une chaîne par la fin
 .. php:method:: tail(string $text, int $length = 100, array $options)
 
 Si ``$text`` est plus long que ``$length``, cette méthode retire une sous-chaîne
-initiale avec la longueur de la différence et ajoute un suffixe ``'ellipsis'``,
+initiale avec la longueur de la différence et ajoute un préfixe ``'ellipsis'``,
 s'il est défini. Si ``'exact'`` est passé à ``false``, le truchement va se faire
 au premier espace avant le moment où le truchement aurait été fait.
 
