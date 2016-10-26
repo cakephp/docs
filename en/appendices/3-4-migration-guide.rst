@@ -96,7 +96,7 @@ PaginatorHelper
   pages for the currently paginated results.
 * ``PaginatorHelper::generateUrlParams()`` was added as a lower level URL
   building method.
-* ``PaginatorHelper::meta()`` can now create links for 'first', 'last' now.
+* ``PaginatorHelper::meta()`` can now create links for 'first', 'last'.
 
 FormHelper
 ==========
