@@ -33,6 +33,8 @@ elements will continue to function until 4.0.0 after which they will be removed.
 
 * The ``Auth.redirect`` session variable is no longer used. Instead a query
   string parameter is used to store the redirect URL.
+* ``AuthComponent`` no longer stores redirect URLs when the unauthorized URL is
+  not a ``GET`` action.
 * The ``ajaxLogin`` option for ``AuthComponent`` is deprecated. You should use the
   ``403`` status code to trigger the correct behavior in clientside code now.
 * The ``beforeRedirect`` method of ``RequestHandlerComponent`` is now
@@ -90,6 +92,11 @@ PaginatorHelper
 
 * ``PaginatorHelper::numbers()`` now uses an HTML elipsis instead of '...' in
   the default templates.
+* ``PaginatorHelper::total()`` was added to enable reading the total number of
+  pages for the currently paginated results.
+* ``PaginatorHelper::generateUrlParams()`` was added as a lower level URL
+  building method.
+* ``PaginatorHelper::meta()`` can now create links for 'first', 'last' now.
 
 FormHelper
 ==========
@@ -97,3 +104,8 @@ FormHelper
 * You can now configure the sources which FormHelper reads from. This makes
   creating GET forms simpler. See :ref:`form-values-from-query-string` for more
   information.
+
+Validation
+==========
+
+* ``Validation::falsey()`` and ``Validation::truthy()`` were added.
