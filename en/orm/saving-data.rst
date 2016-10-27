@@ -1061,10 +1061,10 @@ column Types::
     class UsersTable extends Table
     {
 
-        protected function _initializeSchema(Schema $schema)
+        protected function _initializeSchema(\Cake\Database\Schema\Table $table)
         {
-            $schema->columnType('preferences', 'json');
-            return $schema;
+            $table->columnType('preferences', 'json');
+            return $table;
         }
 
     }
