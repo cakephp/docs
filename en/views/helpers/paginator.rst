@@ -319,6 +319,7 @@ PaginatorHelper can be used to create pagination link tags in your page
     echo $this->Paginator->meta(['first' => true, 'last' => true]);
 
 .. versionadded:: 3.4.0
+
     The ``first`` and ``last`` options were added in 3.4.0
 
 Checking the Pagination State

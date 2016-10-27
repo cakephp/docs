@@ -4,8 +4,8 @@
 CakePHP 3.4 est une mise à jour de CakePHP 3.3 dont la compatibilité API est
 complète. Cette page souligne les changements et améliorations faits dans 3.4.
 
-Deprecations
-============
+Dépréciations
+=============
 
 La liste qui suit regroupe les méthodes, les propriétés et les comportements
 dépréciés. Ces différents éléments continueront de fonctionner jusqu'à la
@@ -35,6 +35,8 @@ version 4.0.0 à partir de laquelle ils seront supprimés.
 
 * La valeur de ``Auth.redirect`` stockée en session n'est plus utilisée. Un
   paramètre d'URL est maintenant utilisé pour stocker l'URL de redirection.
+* ``AuthComponent`` ne stocke plus les URLs de redirection quand l'URL non
+  autorisée n'est pas une action ``GET``.
 * L'option ``ajaxLogin`` du ``AuthComponent`` est dépréciée. Vous devez maintenant
   utiliser le code de statut HTTP ``403`` pour déclencher le bon comportement côté
   client.
@@ -94,9 +96,20 @@ PaginatorHelper
 
 * ``PaginatorHelper::numbers()`` utilise maintenant une ellipse HTML au lieu de
   '...' dans les templates par défaut.
+* ``PaginatorHelper::total()`` a été ajoutée et permet de lire le nombre total
+  de pages pour le résultat de requête actuellement paginé.
+* ``PaginatorHelper::generateUrlParams()`` a été ajoutée et est utilisée comme
+  méthode de construction d'URL "bas niveau".
+* ``PaginatorHelper::meta()`` peut maintenant créer des liens pour 'first' et
+  'last'.
 
 FormHelper
 ==========
 
 * Vous pouvez maintenant configurer les sources à partir desquelles FormHelper
   lit. Ceci simplifie la création des formulaires GET. Consultez :ref:`form-values-from-query-string` pour plus d'informations.
+
+Validation
+==========
+
+* ``Validation::falsey()`` et ``Validation::truthy()`` ont été ajoutées.
