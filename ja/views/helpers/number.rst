@@ -20,3 +20,4 @@ NumberHelper は、ビューの中で一般的なフォーマットを使用し�
     :title lang=ja: NumberHelper
     :description lang=ja: NumberHelper は、ビューの中で一般的なフォーマットを使用して数値の表示を可能にする、便利なメソッドで構成されています。
     :keywords lang=ja: 数値ヘルパー,通貨,数値フォーマット,数値精度,ファイルサイズのフォーマット,数値のフォーマット
+    :keywords lang=en: number helper,currency,number format,number precision,format file size,format numbers
