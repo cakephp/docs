@@ -23,7 +23,7 @@ générer les balises. Vous pouvez modifier ces templates pour personnaliser le
 HTML généré par PaginatorHelper.
 
 Templates utilise des placeholders de style ``{{var}}``. Il est important de ne
-pas ajouter d'espaces autour du `{{}}` ou les remplacements ne fonctionneront
+pas ajouter d'espaces autour du ``{{}}`` ou les remplacements ne fonctionneront
 pas.
 
 Charger les Templates à partir d'un Fichier
