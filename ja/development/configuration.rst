@@ -448,7 +448,8 @@ Configure クラスの主なゴールは、中央集権化された変数を維�
 ..
     You can access ``Configure`` from anywhere in your application
 
- ``Configure`` はどこからでもアクセスできます。::
+ ``Configure`` はどこからでもアクセスできます。
+ ::
 
     Configure::read('debug');
 
@@ -774,30 +775,52 @@ Stored configuration data is persisted in the named cache configuration. See the
 保存された設定データはその名前のキャッシュ設定で存続します。
 キャッシュに関するより詳しい情報は :doc:`/core-libraries/caching` を参照してください。
 
-Restoring Runtime Configuration
+..
+    Restoring Runtime Configuration
+
+ランタイム設定を復元する
 -------------------------------
 
 .. php:staticmethod:: restore($name, $cacheConfig = 'default')
 
-Once you've stored runtime configuration, you'll probably need to restore it
-so you can access it again. ``Configure::restore()`` does exactly that::
+..
+    Once you've stored runtime configuration, you'll probably need to restore it
+    so you can access it again. ``Configure::restore()`` does exactly that::
 
-    // Restore runtime configuration from the cache.
+ひとたびランタイムの設定を保存すると、おそらく復元する必要があり、そして再びそれにアクセスできます。
+``Configure::restore()`` がちょうどそれに該当します。
+::
+
+    // キャッシュからランタイム設定を復元する
     Configure::restore('user_1234', 'default');
 
-When restoring configuration information it's important to restore it with
-the same key, and cache configuration as was used to store it. Restored
-information is merged on top of the existing runtime configuration.
+..
+    When restoring configuration information it's important to restore it with
+    the same key, and cache configuration as was used to store it. Restored
+    information is merged on top of the existing runtime configuration.
 
-Creating your Own Configuration Engines
+設定情報を復元した際、同じキーで復元することが重要で、
+そしてキャッシュ設定は保存されていたように利用されます。
+復元情報は存在しているランタイム設定の上位にマージされます。
+
+..
+    Creating your Own Configuration Engines
+
+自分の設定エンジンを作成する
 =======================================
 
-Since configuration engines are an extensible part of CakePHP, you can create
-configuration engines in your application and plugins.  Configuration engines
-need to implement the
-:php:interface:`Cake\\Core\\Configure\\ConfigEngineInterface`.  This interface
-defines a read method, as the only required method.  If you like XML
-files, you could create a simple Xml config engine for you application::
+..
+    Since configuration engines are an extensible part of CakePHP, you can create
+    configuration engines in your application and plugins.  Configuration engines
+    need to implement the
+    :php:interface:`Cake\\Core\\Configure\\ConfigEngineInterface`.  This interface
+    defines a read method, as the only required method.  If you like XML
+    files, you could create a simple Xml config engine for you application::
+
+設定エンジンは CakePHP の一つの拡張であり、設定エンジンをアプリケーションやプラグインに作成できます。
+設定エンジンは :php:interface:`Cake\\Core\\Configure\\ConfigEngineInterface` を継承する必要があります。
+このインタフェース
+::
 
     // In src/Configure/Engine/XmlConfig.php
     namespace App\Configure\Engine;
