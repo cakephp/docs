@@ -5,8 +5,8 @@ Number
 
 .. php:class:: NumberHelper(View $view, array $config = [])
 
-NumberHelper は、あなたのビューの中で数字を一般的なフォーマットで表示することを可能にする便利なメソッドで構成されています。
-これらのメソッドは、通貨、パーセンテージ、データサイズなどをフォーマットしたり、数字を特定精度へフォーマットする方法を含み、そして数字をフォーマットするさらに柔軟な方法も提供します。
+NumberHelper は、ビューの中で一般的なフォーマットを使用して数値の表示を可能にする、便利なメソッドで構成されています。
+これらのメソッドは、通貨、パーセンテージ、データサイズを整形したり、数値を特定精度へ整形する方法と、そして数値を整形するさらなる柔軟性も提供します。
 
 .. include:: /core-libraries/number.rst
     :start-after: start-cakenumber
@@ -17,6 +17,6 @@ NumberHelper は、あなたのビューの中で数字を一般的なフォー�
     全てのシンボルは UTF-8 です。
 
 .. meta::
-    :title lang=en: NumberHelper
-    :description lang=en: The Number Helper contains convenience methods that enable display numbers in common formats in your views.
-    :keywords lang=en: number helper,currency,number format,number precision,format file size,format numbers
+    :title lang=ja: NumberHelper
+    :description lang=ja: NumberHelper は、ビューの中で一般的なフォーマットを使用して数値の表示を可能にする、便利なメソッドで構成されています。
+    :keywords lang=ja: 数値ヘルパー,通貨,数値フォーマット,数値精度,ファイルサイズのフォーマット,数値のフォーマット
