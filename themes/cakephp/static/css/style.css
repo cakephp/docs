@@ -1880,6 +1880,10 @@ header {
     transition: all .0s ease-out;
 }
 
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
 .navbar-nav > li > .dropdown-menu {
     margin-top: 0;
     border-top-left-radius: 2px;
