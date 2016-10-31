@@ -466,7 +466,7 @@ créés/mis à jours par le behavior pendant ``newEntity()`` ou ``patchEntity()`
         public function initialize(array $config)
         {
             $this->addBehavior('Translate', [
-                'fields' => ['title']
+                'fields' => ['title'],
                 'validator' => 'translated'
             ]);
         }
