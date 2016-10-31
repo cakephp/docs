@@ -180,6 +180,57 @@ name will be the lower case and underscored version of the method::
 
 Do bear in mind that virtual fields cannot be used in finds.
 
+Storing explicit NULL values
+----------------------------
+
+By default CakePHP will store null values such as empty strings as they come in.
+E.g. `''` will be stored as SQL value `''` rather than SQL value `NULL`.
+
+You can utilize mutators to define how entities are being saved.
+
+Example returning `NULL` if given parent id is not a valid integer::
+
+    namespace App\Model\Entity;
+
+    use Cake\ORM\Entity;
+    use Cake\Utility\Text;
+
+    class Article extends Entity
+    {
+
+        protected function _setParentId($parentId)
+        {
+            if (is_int($parentId) {
+                return $parentId;
+            }
+            if (is_string($parentId) && (string)intval($parentId) === $parentId) {
+                return (string)intval($parentId);
+            }
+            return null;
+        }
+
+    }
+
+Example returning NULL for non-true boolean-like value::
+
+    namespace App\Model\Entity;
+
+    use Cake\ORM\Entity;
+    use Cake\Utility\Text;
+
+    class Article extends Entity
+    {
+
+        protected function _setIsDefault($isDefault)
+        {
+            if ($isDefault === true || $isDefault === 1 || trim($isDefault) === '1') {
+                return true;
+            } else {
+                return null;
+            }
+        }
+
+    }
 
 Checking if an Entity Has Been Modified
 ========================================
