@@ -204,7 +204,7 @@ Example returning `NULL` if given parent id is not a valid integer::
                 return $parentId;
             }
             if (is_string($parentId) && (string)intval($parentId) === $parentId) {
-                return (string)intval($parentId);
+                return (int)$parentId;
             }
             return null;
         }
