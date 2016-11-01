@@ -11,7 +11,7 @@ Components
   tampering or CSRF protection fails in debug mode. This feature was backported
   from 3.x
 * ``FlashComponent`` now stacks messages of the same type. This is a feature
-  backport from 3.x. To disable this behavior add ``'clear' => true`` to the
+  backport from 3.x. To disable this behavior, add ``'clear' => true`` to the
   configuration for FlashComponent.
 
 Helpers
