@@ -23,6 +23,13 @@ method::
 
     $this->Flash->set('This is a message');
 
+.. versionadded:: 2.10.0
+
+    Flash messages now stack. Successive calls to ``set()`` or ``__call()`` with
+    the same key will append the messages in the ``$_SESSION``. If you want to
+    keep the old behavior (one message even after consecutive calls), set the
+    ``clear`` option to true when setting messages.
+
 To create custom Flash elements, FlashComponent's ``__call`` magic
 method allows you use a method name that maps to an element located under
 the ``app/View/Elements/Flash`` directory. By convention, camelcased
@@ -43,6 +50,8 @@ parameter, an array of options:
   ``__call()`` magic method. The element name to use for rendering.
 * ``params`` An optional array of keys/values to make available as variables
   within an element.
+* ``clear`` Set to ``true`` to remove any existing flash messages of the given
+  key/element. (Added in 2.10.0).
 
 An example of using these options::
 
