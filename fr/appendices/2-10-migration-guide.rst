@@ -11,6 +11,9 @@ Components
   tampering ou la protection CSRF échoue en mode debug. Cette fonctionnalité
   a été backportée de la version 3.x.
   from 3.x
+* ``FlashComponent`` empile maintenant les messages de même type. Il s'agit
+  d'une fonctionnalité importée de 3.X. Pour désactiver ce comportement,
+  ajoutez ``'clear' => true`` à la configuration du ``FlashComponent``.
 
 Helpers
 =======

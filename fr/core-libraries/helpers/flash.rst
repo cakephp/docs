@@ -48,5 +48,12 @@ FlashComponent::
     vous devez les échapper avec :php:func:`h` lors du formatage de vos
     messages.
 
+.. versionadded:: 2.10.0
+
+    Le :doc:`FlashComponent </core-libraries/components/flash>` empile maintenant
+    les messages. Si vous définissez plusieurs messages, lors d'un appel à
+    ``render()``, chaque message sera rendu dans son élément, dans l'ordre
+    dans lequel les messages ont été définis.
+
 Pour plus d'informations sur le tableau d'options disponibles, consultez la
 section :doc:`FlashComponent </core-libraries/components/flash>`.

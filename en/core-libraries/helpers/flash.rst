@@ -48,6 +48,7 @@ You can also override any of the options that were set in FlashComponent::
     with :php:func:`h` when formatting your messages.
 
 .. versionadded:: 2.10.0
+
     :doc:`/core-libraries/components/flash` stacks messages as of 2.10.0. If you set
     multiple flash messages, when you call ``render()``, each message will be
     rendered in its own element, in the order the messages were set.
