@@ -589,9 +589,9 @@ section. For example::
         ];
     }
 
-Finally, you can not load/create any schema in a fixture. This is useful if you
+Finally, it's possible to not load/create any schema in a fixture. This is useful if you
 already have a test database setup with all the empty tables created. By
-defining neither ``$fields`` or ``$import`` a fixture will only insert its
+defining neither ``$fields`` nor ``$import``, a fixture will only insert its
 records and truncate the records on each test method.
 
 Loading Fixtures in your Test Cases

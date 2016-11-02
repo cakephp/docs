@@ -361,7 +361,10 @@ allows you to define unique field sets::
     $rules->add($rules->isUnique(['email']));
 
     // A list of fields
-    $rules->add($rules->isUnique(['username', 'account_id']));
+    $rules->add($rules->isUnique(
+        ['username', 'account_id'],
+        'This username & account_id combination has already been used.'
+    ));
 
 When setting rules on foreign key fields it is important to remember, that
 only the fields listed are used in the rule. This means that setting
@@ -394,7 +397,7 @@ are null::
         ['parent_id', 'site_id'], // Schema: parent_id NULL, site_id NOT NULL
         'ParentNodes',
         ['allowNullableNulls' => true] 
-    );
+    ));
 
     // A Node however should in addition also always reference a Site.
     $rules->add($rules->existsIn(['site_id'], 'Sites'));
