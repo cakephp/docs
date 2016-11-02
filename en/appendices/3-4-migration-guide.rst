@@ -41,6 +41,9 @@ elements will continue to function until 4.0.0 after which they will be removed.
   deprecated.
 * The ``306`` status code in ``Cake\Network\Response`` is now deprecated and has
   its status phrase changed to 'Unused' as this status code is non-standard.
+* ``Cake\Database\Schema\Table`` has been renamed to
+  ``Cake\Database\Schema\Schema``. The previous name was confusing to a number
+  of users.
 
 Behavior Changes
 ================
