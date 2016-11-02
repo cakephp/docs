@@ -216,6 +216,7 @@ Example of a method definition::
         if (expr) {
             statement;
         }
+        
         return $var;
     }
 
@@ -234,6 +235,7 @@ it can be determined whether the function call was successful::
         if (!($dnsInfo) || !($dnsInfo['phpType'])) {
             return $this->addError();
         }
+        
         return true;
     }
 
