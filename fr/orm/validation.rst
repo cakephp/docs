@@ -378,7 +378,10 @@ de Règle simple qui vous permet de définir des ensembles de champ unique::
     $rules->add($rules->isUnique(['email']));
 
     // Une liste de champs
-    $rules->add($rules->isUnique(['username', 'account_id']));
+    $rules->add($rules->isUnique(
+        ['username', 'account_id'],
+        'Cette combinaison `username` & `account_id` est déjà utilisée.'
+    ));
 
 Quand vous définissez des règles sur des champs de clé étrangère, il est
 important de se rappeler que seuls les champs listés sont utilisés dans la
