@@ -64,6 +64,9 @@ behavior that may effect your application:
 * ``AuthComponent`` no longer stores the flash messages it creates under the
   'auth' key. They are now rendered with the 'error' template under the
   'default' flash message key. This simplifies using ``AuthComponent``.
+* ``Mailer\Email`` will now autodetect attachement content types using
+  ``mime_content_type`` if a content-type is not provided. Previously
+  attachments would have defaulted to 'application/octet-stream'.
 
 Collection
 ==========
