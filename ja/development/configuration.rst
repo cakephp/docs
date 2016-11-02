@@ -819,7 +819,8 @@ Stored configuration data is persisted in the named cache configuration. See the
 
 設定エンジンは CakePHP の一つの拡張であり、設定エンジンをアプリケーションやプラグインに作成できます。
 設定エンジンは :php:interface:`Cake\\Core\\Configure\\ConfigEngineInterface` を継承する必要があります。
-このインタフェース
+このインタフェースは単一の必須メソッドとして読み込みメソッドを決定します。
+もしあなたが XML ファイルを好むなら、シンプルな Xml 設定エンジンを作成できるでしょう。
 ::
 
     // In src/Configure/Engine/XmlConfig.php
@@ -851,7 +852,11 @@ Stored configuration data is persisted in the named cache configuration. See the
         }
     }
 
-In your **config/bootstrap.php** you could attach this engine and use it::
+..
+    In your **config/bootstrap.php** you could attach this engine and use it::
+
+**config/bootstrap.php** 内にこのエンジンを配置してそれを利用できます。
+::
 
     use App\Configure\Engine\XmlConfig;
 
@@ -860,18 +865,28 @@ In your **config/bootstrap.php** you could attach this engine and use it::
 
     Configure::load('my_xml', 'xml');
 
-The ``read()`` method of a config engine, must return an array of the
-configuration information that the resource named ``$key`` contains.
+..
+    The ``read()`` method of a config engine, must return an array of the
+    configuration information that the resource named ``$key`` contains.
+
+``read()`` メソッドは、 ``$key`` を含んだ名前のリソースで配列形式の設定情報を返却しなければいけません。
 
 .. php:namespace:: Cake\Core\Configure
 
 .. php:interface:: ConfigEngineInterface
 
+    クラス形式でインターフェースを定義づけ、設定の読み込みと保存を :php:class:`Configure` にて行います。
+..
     Defines the interface used by classes that read configuration data and
     store it in :php:class:`Configure`
 
 .. php:method:: read($key)
 
+    :param string $key: キー名や読み込みの識別子
+
+    このメソッドは ``$key`` で識別された設定データの読み込みやパースを行い、ファイルにある配列データを返却するでしょう。
+
+..
     :param string $key: The key name or identifier to load.
 
     This method should load/parse the configuration data identified by ``$key``
@@ -879,17 +894,29 @@ configuration information that the resource named ``$key`` contains.
 
 .. php:method:: dump($key)
 
+    :param string $key: 書き出しの識別子
+    :param array $data: ダンプデータ
+
+    このメソッドは ``$key`` で識別されている設定データのダンプや保存を行うでしょう。
+
+..
     :param string $key: The identifier to write to.
         :param array $data: The data to dump.
 
         This method should dump/store the provided configuration data to a key identified by ``$key``.
 
-Built-in Configuration Engines
+..
+    Built-in Configuration Engines
+
+組み込みの設定エンジン
 ==============================
 
 .. php:namespace:: Cake\Core\Configure\Engine
 
-PHP Configuration Files
+..
+    PHP Configuration Files
+
+PHP の設定ファイル
 -----------------------
 
 .. php:class:: PhpConfig
