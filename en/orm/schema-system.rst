@@ -151,7 +151,7 @@ Reading Indexes and Constraints
 -------------------------------
 
 Indexes and constraints can be read out of a table object using accessor
-methods. Assuming that ``$schema`` is a populated Table instance you could do the
+methods. Assuming that ``$schema`` is a populated TableSchema instance you could do the
 following::
 
     // Get contraints. Will return the
