@@ -25,6 +25,14 @@ la méthode ``set()``::
 
     $this->Flash->set('Ceci est un message');
 
+.. versionadded:: 2.10.0
+
+    Les messages Flash peuvent maintenant s'empiler. Des appels
+    successifs à ``set()`` et ``__call()`` avec la même clé ajouteront les messages à
+    ``$_SESSION``. Si vous souhaitez conserver l'ancien comportement (un message malgré
+    plusieurs appels successifs), définissez le paramètre ``clear`` à ``true`` quand
+    vous configurez le Component.
+
 Pour créer des elements Flash personnalisés, la méthode magique ``__call``
 de FlashComponent vous permet d'utiliser un nom de méthode qui est lié à un
 element qui se trouve dans le répertoire ``app/View/Elements/Flash``. Par
@@ -47,6 +55,8 @@ optionnelle un deuxième paramètre, un tableau d'options:
   pour le rendu.
 * ``params`` Un tableau en option de clés/valeurs pour rendre disponible des
   variables dans un element.
+* ``clear`` Définissez à ``true`` pour supprimer les messages flashs existants
+  pour la clé / l'élément spécifié. (Ajoutée dans la version 2.10.0).
 
 Un exemple de l'utilisation de ces options::
 
