@@ -224,6 +224,7 @@ Exemple d'une définition de méthode::
         if (expr) {
             statement;
         }
+
         return $var;
     }
 
@@ -243,6 +244,7 @@ déterminer si l'appel de la fonction est un succès::
         if (!($dnsInfo) || !($dnsInfo['phpType'])) {
             return $this->addError();
         }
+
         return true;
     }
 
