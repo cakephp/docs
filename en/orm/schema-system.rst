@@ -17,10 +17,11 @@ can also be used in your application if required.
 Schema\\TableSchema Objects
 ===========================
 
-.. php:class:: Table
+.. php:class:: TableSchema
 
-The schema subsystem provides a simple Table object to hold data about a table
-in a database. This object is returned by the schema reflection features::
+The schema subsystem provides a simple TableSchema object to hold data about a
+table in a database. This object is returned by the schema reflection
+features::
 
     use Cake\Database\Schema\TableSchema;
 
