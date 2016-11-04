@@ -96,7 +96,7 @@ properties and methods (if any) of the supplied variable::
     }
 
 Masking Data
------------
+------------
 
 When dumping data with ``Debugger`` or rendering error pages, you may want to
 hide sensitive keys like passwords or API keys. In your ``config/bootstrap.php``
