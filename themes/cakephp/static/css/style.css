@@ -1881,20 +1881,22 @@ header {
     transition: all .0s ease-out;
 }
 
-.dropdown > .dropdown-menu {
-    display: block;
-    visibility: hidden;
-    opacity: 0;
-    -webkit-transition: all 0s ease .5s;
-    transition: all 0s ease .5s;
-}
+@media (min-width:992px) {
+    .dropdown > .dropdown-menu {
+        display: block;
+        visibility: hidden;
+        opacity: 0;
+        -webkit-transition: all 0s ease .5s;
+        transition: all 0s ease .5s;
+    }
 
-.dropdown:hover > .dropdown-menu {
-    display: block;
-    visibility: visible;
-    opacity: 1;
-    -webkit-transition: all 0s ease 0s;
-    transition: all 0s ease 0s;
+    .dropdown:hover > .dropdown-menu {
+        display: block;
+        visibility: visible;
+        opacity: 1;
+        -webkit-transition: all 0s ease 0s;
+        transition: all 0s ease 0s;
+    }
 }
 
 .navbar-nav > li > .dropdown-menu {
