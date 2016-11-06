@@ -76,6 +76,14 @@ Collection
   cette méthode.
 * ``Collection::chunkWithKeys()`` a été ajoutée.
 
+Erreur
+======
+
+* ``Debugger::setOutputMask()`` et ``Debugger::outputMask()`` ont été ajoutées.
+  Ces méthodes vous permettent de configurer des propriétés / clés de tableau
+  qui devraient être masquées lors d'affichages générés par le ``Debugger``
+  (lors d'un appel à ``debug()`` par exemple).
+
 Event
 =====
 

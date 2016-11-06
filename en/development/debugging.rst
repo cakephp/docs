@@ -108,6 +108,7 @@ you can mask specific keys::
     ]);
 
 .. versionadded:: 3.4.0
+
     Output masking was added in 3.4.0
 
 Logging With Stack Traces
