@@ -22,6 +22,14 @@ aussi la ligne et le fichier dont ils sont originaires par défaut.
 La sortie de cette fonction est seulement montrée si la variable de ``$debug``
 du cœur a été définie à ``true``.
 
+.. versionadded:: 3.3.0
+
+    Utiliser cette méthode retournera la valeur de la variable ``$var`` passée
+    en paramètre, vous permettant ainsi, par exemple, de l'utiliser sur un
+    ``return``::
+
+        return debug($data); // Retournera $data dans tous les cas
+
 .. php:function:: stackTrace()
 
 La fonction ``stackTrace()`` est globalement disponible, et vous permet
