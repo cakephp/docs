@@ -241,7 +241,7 @@ false を、関数呼び出しが成功したかどうかを判定できるよ�
      * @param \Cake\ORM\Table $table 使用するテーブルクラス
      * @param array $array 配列。
      * @param callable $callback コールバック。
-     * @param boolean $boolean 真偽値。
+     * @param bool $boolean 真偽値。
      */
     public function foo(Table $table, array $array, callable $callback, $boolean)
     {

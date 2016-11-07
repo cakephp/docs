@@ -251,7 +251,7 @@ Nós apenas declaramos métodos públicos, porém, o uso da declaração por tip
      * @param \Cake\ORM\Table $table A classe Table a ser usada.
      * @param array $array Algum valor em formato array.
      * @param callable $callback Algum callback.
-     * @param boolean $boolean Algum valor booleano.
+     * @param bool $boolean Algum valor booleano.
      */
     public function foo(Table $table, array $array, callable $callback, $boolean)
     {
