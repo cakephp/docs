@@ -156,11 +156,12 @@ would return something like this::
 
 If we want to group TotalHours into our Timelog array we should specify a
 virtual field for our aggregate column. We can add this new virtual field on
-the fly rather than permanently declaring it in the model. We will provide a
-default value of ``0`` in case another query attempts to use this virtual field.
-If that were to occur, ``0`` would be returned in the TotalHours column::
+the fly rather than permanently declaring it in the model. We need to set
+the position of the virtual field in the select list in case another query 
+attempts to use this virtual field.
+In our query, the virtual field is the second field, so its positon is ``2``::
 
-    $this->Timelog->virtualFields['TotalHours'] = 0;
+    $this->Timelog->virtualFields['TotalHours'] = 2;
 
 In addition to adding the virtual field we also need to alias our column using
 the form of ``MyModel__MyField`` like this::
