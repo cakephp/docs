@@ -253,7 +253,7 @@ We only typehint public methods, though, as typehinting is not cost-free::
      * @param \Cake\ORM\Table $table The table class to use.
      * @param array $array Some array value.
      * @param callable $callback Some callback.
-     * @param boolean $boolean Some boolean value.
+     * @param bool $boolean Some boolean value.
      */
     public function foo(Table $table, array $array, callable $callback, $boolean)
     {
