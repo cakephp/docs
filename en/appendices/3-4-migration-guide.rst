@@ -100,6 +100,12 @@ I18n
 * You can now customize the behavior of the fallback message loader. See
   :ref:`creating-generic-translators` for more information.
 
+Routing
+=======
+
+* ``RouteBuilder::prefix()`` now accepts an array of defaults to add to each
+  connected route.
+
 PaginatorHelper
 ===============
 
