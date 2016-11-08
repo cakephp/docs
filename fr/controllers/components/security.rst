@@ -39,8 +39,7 @@ avant ces components dans la méthode ``initialize()``.
     dynamique des champs qui lui sont soumis dans une requête POST (ex.
     désactiver, effacer, créer des nouveaux champs via Javascript) est
     susceptible de déclencher un black-holing (envoi dans le trou noir) de la
-    requête. Voir les paramètres de configuration de ``$validatePost`` ou
-    ``$disabledFields``.
+    requête.
 
     Vous devez toujours vérifier les méthodes HTTP utilisées avant d'exécuter
     d'autre code. Vous devez :ref:`vérifier la méthode HTTP <check-the-request>`
@@ -102,13 +101,13 @@ Restreindre les actions aux actions SSL
 Restreindre les Demandes croisées de Controller
 ===============================================
 
-.. php:attr:: allowedControllers
+allowedControllers
 
     Une liste de controllers qui peuvent envoyer des requêtes vers ce
     controller. Ceci peut être utilisé pour contrôler les demandes croisées de
     controller.
 
-.. php:attr:: allowedActions
+allowedActions
 
     Une liste des actions qui peuvent envoyer des requêtes vers les actions de
     ce controller. Ceci peut être utilisé pour contrôler les demandes croisées
@@ -139,7 +138,7 @@ hash.
     d'être ajoutées/changées. Ni ne va empêcher les options radio d'être
     ajoutées/changées.
 
-.. php:attr:: unlockedFields
+unlockedFields
 
     Définit une liste de champs de formulaire à exclure de la validation POST.
     Les champs peuvent être déverrouillés dans le component ou avec
@@ -147,10 +146,13 @@ hash.
     ne sont pas requis faisant parti du POST et les champs cachés déverrouillés
     n'ont pas leur valeur vérifiée.
 
-.. php:attr:: validatePost
+validatePost
 
     Défini à ``false`` pour complètement éviter la validation des requêtes POST,
     essentiellement éteindre la validation de formulaire.
+
+Les options de configuration ci-dessus peuvent être _set_ via la méthode
+``config()``
 
 Utilisation
 ===========

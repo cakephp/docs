@@ -23,12 +23,15 @@ la traduction de contenu.
 .. php:function:: \_\_(string $string_id, [$formatArgs])
 
     Cette fonction gère la localisation dans les applications CakePHP.
-    ``$string_id`` identifie l'ID de la traduction. Les chaînes utilisées pour
-    la traduction sont traitées comme chaîne formatées pour ``sprintf()``. Vous
-    pouvez fournir des arguments supplémentaires pour remplacer les espaces
-    réservés dans votre chaîne::
+    ``$string_id`` identifie l'ID de la traduction. Vous pouvez fournir des
+    arguments supplémentaires pour remplacer les espaces réservés dans votre
+    chaîne::
 
-        __('You have {0} unread messages', $number);
+        __('Vous avez {0} messages non-lus', $number);
+
+    Vous pouvez également fournir un tableau associatif de remplacements::
+
+        __('Vous avez {unread} messages non-lus', ['unread' => $number]);
 
     .. note::
 
@@ -251,4 +254,4 @@ Définition de Constantes de Temps
 
 .. meta::
     :title lang=fr: Constantes Globales et Fonctions
-    :keywords lang=fr: internationalization et localization,constantes globales,exemple config,tableau php,convenience functions,core libraries,classes component,optional number,fonctions globales,string string,core classes,format strings,messages non lus,placeholders,fonctions utiles,sprintf,tableaux,paramètres,existence,traductions
+    :keywords lang=fr: internationalization et localization,constantes globales,exemple config,tableau php,convenience functions,core libraries,classes component,optional number,fonctions globales,string string,core classes,format strings,messages non lus,placeholders,fonctions utiles,tableaux,paramètres,existence,traductions

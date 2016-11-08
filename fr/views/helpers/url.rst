@@ -13,7 +13,7 @@ Regardez la section :ref:`aliasing-helpers` pour voir comment faire.
 Générer des URLs
 ================
 
-.. php:method:: build(mixed $url = null, boolean $full = false)
+.. php:method:: build(mixed $url = null, boolean|array $full = false)
 
 Cette méthode retourne une URL pointant vers la combinaison du controller
 et de l'action.
@@ -82,6 +82,18 @@ URL utilisant une route labellisée::
     //     ]
     // );
     /produits/i-m-slug
+
+Le deuxième paramètre vous permet de définir l'option qui contrôle
+l'échappement du HTML et si vous souhaitez ou non que le chemin de base soit
+ajouté::
+
+    $this->Url->build('/posts', [
+        'escape' => false,
+        'fullBase' => true
+    ]);
+
+.. versionadded:: 3.3.5
+    ``build()`` accepte un tableau comme 2ème argument à partir de3.3.5
 
 Si vous générez des URLs pour du CSS, du Javascript ou des fichiers image, il
 existe des méthodes d'helper pour chacun de ces types d'assets::

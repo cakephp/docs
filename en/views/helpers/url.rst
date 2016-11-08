@@ -13,7 +13,7 @@ overriding the core helper with an application one. See the
 Generating URLs
 ===============
 
-.. php:method:: build(mixed $url = null, boolean $full = false)
+.. php:method:: build(mixed $url = null, boolean|array $full = false)
 
 Returns a URL pointing to a combination of controller and action.
 If ``$url`` is empty, it returns the ``REQUEST\_URI``, otherwise it
@@ -81,6 +81,17 @@ URL for named route::
     //     ]
     // );
     /products/i-m-slug
+
+The 2nd parameter allows you to define options controlling HTML escaping, and
+whether or not the base path should be added::
+
+    $this->Url->build('/posts', [
+        'escape' => false,
+        'fullBase' => true
+    ]);
+
+.. versionadded:: 3.3.5
+    ``build()`` accepts an array as the 2nd argument as of 3.3.5
 
 If you are generating URLs for CSS, Javascript or image files there are helper
 methods for each of these asset types::

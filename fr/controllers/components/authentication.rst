@@ -179,6 +179,15 @@ les clés suivantes:
 - ``opaque`` Une chaîne qui doit être retournée à l'identique par les clients.
   Par Défaut à ``md5($config['realm'])``.
 
+.. note::
+    Pour récupérer l'enregistrement utilisateur, la requête à la base de
+    données est faite seulement sur le champ "username".
+    La vérification du mot de passe est faite via PHP. Ceci est nécessaire
+    car les algorithmes de hash comme bcrypt (qui est utilisé par défaut)
+    génèrent un nouveau hash à chaque fois, et ce, pour la même chaîne de
+    caractères. Ceci entraîne l'impossibilité de faire une simple comparaison
+    de chaînes via SQL pour vérifier si le mots de passe correspond.
+
 Personnaliser la Requête de Recherche
 -------------------------------------
 

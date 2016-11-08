@@ -222,7 +222,7 @@ compte::
         ]
     ]);
 
-Vous pouvez aussi désactive le marshalling d'associations imbriquées comme
+Vous pouvez aussi désactiver le marshalling d'associations imbriquées comme
 ceci::
 
     $entity = $articles->newEntity($data, ['associated' => []]);

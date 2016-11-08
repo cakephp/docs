@@ -74,9 +74,9 @@ options are:
 
 * ``replacement`` Replacement string, defaults to '-'.
 * ``transliteratorId`` A valid tranliterator id string.
-   If default ```null`` ``Text::$_defaultTransliteratorId`` to be used.
-   If `false` no transliteration will be done, only non words will be removed.
-* ``preserve`` Specific non-word character to preserve. Defaults to ```null``.
+   If default ``null`` ``Text::$_defaultTransliteratorId`` to be used.
+   If ``false`` no transliteration will be done, only non words will be removed.
+* ``preserve`` Specific non-word character to preserve. Defaults to ``null``.
    For e.g. this option can be set to '.' to generate clean file names::
 
     // apple-puree
@@ -94,7 +94,8 @@ Generating UUIDs
 .. php:staticmethod:: uuid()
 
 The UUID method is used to generate unique identifiers as per :rfc:`4122`. The
-UUID is a 128-bit string in the format of ``485fc381-e790-47a3-9794-1337c0a8fe68``. ::
+UUID is a 128-bit string in the format of
+``485fc381-e790-47a3-9794-1337c0a8fe68``. ::
 
     Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
@@ -372,6 +373,8 @@ Converting an Array to Sentence Form
 .. php:method:: toList(array $list, $and='and', $separator=', ')
 
 Creates a comma-separated list where the last two items are joined with 'and'::
+
+    $colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
 
     // Called as TextHelper
     echo $this->Text->toList($colors);

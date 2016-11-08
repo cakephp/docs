@@ -14,7 +14,7 @@ in conjunction with :php:meth:`Cake\\Routing\\Router::extensions()`,
 RequestHandler will automatically switch the layout and template files to those
 that match non-HTML media types. Furthermore, if a helper with the same name as
 the requested extension exists, it will be added to the Controllers Helper
-array.  Lastly, if XML/JSON data is POST'ed to your Controllers, it will be
+array. Lastly, if XML/JSON data is POST'ed to your Controllers, it will be
 parsed into an array which is assigned to ``$this->request->data()``, and can then
 be accessed as you would standard POST data. In order to make use of
 RequestHandler it must be included in your ``initialize()`` method::

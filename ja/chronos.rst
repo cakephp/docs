@@ -225,8 +225,16 @@ Chronos は、出力した日時オブジェクトを表示するための多く
     echo $time->toRssString();       // Thu, 25 Dec 1975 14:15:16 -0500
     echo $time->toW3cString();       // 1975-12-25T14:15:16-05:00
 
-    // クォーターを取得
+    // クォーター/週数を取得
     echo $time->toQuarter();         // 4;
+    echo $time->toWeek();            // 52
+
+    // 一般的なフォーマット
+    echo $time->toTimeString();           // 14:15:16
+    echo $time->toDateString();           // 1975-12-25
+    echo $time->toDateTimeString();       // 1975-12-25 14:15:16
+    echo $time->toFormattedDateString();  // Dec 25, 1975
+    echo $time->toDayDateTimeString();    // Thu, Dec 25, 1975 2:15 PM
 
 日付要素の抽出
 --------------

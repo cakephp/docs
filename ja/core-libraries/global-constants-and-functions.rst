@@ -1,5 +1,5 @@
-グローバル定数およびグローバル関数
-##################################
+定数および関数
+##############
 
 CakePHP を使った皆さんの日常のほとんどの業務ではコアクラスやメソッドを用いることになるでしょうが、
 ちょっとした役に立つ便利なグローバル関数も CakePHP にはたくさんあります。この関数のほとんどは
@@ -19,11 +19,14 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 .. php:function:: \_\_(string $string_id, [$formatArgs])
 
     この関数は CakePHP のアプリケーションでのローカライズを担います。
-    ``$string_id`` で翻訳時の ID を定めます。翻訳のために指定される文字列は、
-    ``sprintf()`` 関数でのフォーマット文字列としてあつかわれます。
+    ``$string_id`` で翻訳時の ID を定めます。
     その文字列内のプレースホルダーを置き換えるための、追加の引数を供給できます。 ::
 
         __('You have {0} unread messages', $number);
+
+    また、置換する名前インデックス配列を指定できます。 ::
+
+        __('You have {unread} unread messages', ['unread' => $number]);
 
     .. note::
 
@@ -245,4 +248,4 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 
 .. meta::
     :title lang=ja: Global Constants and Functions
-    :keywords lang=ja: internationalization and localization,global constants,example config,array php,convenience functions,core libraries,component classes,optional number,global functions,string string,core classes,format strings,unread messages,placeholders,useful functions,sprintf,arrays,parameters,existence,translations
+    :keywords lang=ja: internationalization and localization,global constants,example config,array php,convenience functions,core libraries,component classes,optional number,global functions,string string,core classes,format strings,unread messages,placeholders,useful functions,arrays,parameters,existence,translations

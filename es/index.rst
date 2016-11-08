@@ -1,10 +1,6 @@
 Bienvenido
 ##########
 
-.. warning::
-    This version of the documentation is for CakePHP 3.0. Go `here for the
-    CakePHP 2.x documentation <http://book.cakephp.org/2.0/es>`_.
-
 El manual de CakePHP es un proyecto de documentación abierto, editable y
 mantenido por la comunidad. Toma en cuenta el botón de "Improve this doc"
 en la parte superior derecha; te llevará al editor online de Github de la

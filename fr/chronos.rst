@@ -239,6 +239,15 @@ datetime::
 
     // Récupère le trimestre
     echo $time->toQuarter();         // 4;
+    // Récupère la semaine
+    echo $time->toWeek();            // 52;
+
+    // Formatage générique
+    echo $time->toTimeString();           // 14:15:16
+    echo $time->toDateString();           // 1975-12-25
+    echo $time->toDateTimeString();       // 1975-12-25 14:15:16
+    echo $time->toFormattedDateString();  // Dec 25, 1975
+    echo $time->toDayDateTimeString();    // Thu, Dec 25, 1975 2:15 PM
 
 Extraire des Fragments de Date
 ------------------------------

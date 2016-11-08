@@ -1,10 +1,6 @@
 Hoşgeldiniz
 ###########
 
-.. warning::
-    This version of the documentation is for CakePHP 3.0. Go `here for the
-    CakePHP 2.x documentation <http://book.cakephp.org/2.0/tr>`_.
-
 CakePHP Yemekkitabı açık kaynaklı geliştirilen ve toplulukça düzenlenebilen
 dokümantasyon projesidir. Sağ üst köşede gördüğünüz
 "Improve this Doc" butonu sizi aktif sayfa üzerinde, eklemeler, silmeler ve
