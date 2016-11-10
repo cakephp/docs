@@ -1314,7 +1314,6 @@ correctly by the ``adjust()`` method in our component. We create the file
             // Setup our component and fake test controller
             $request = new Request();
             $response = new Response();
-
             $this->controller = $this->getMockBuilder('Cake\Controller\Controller')
                 ->setConstructorArgs([$request, $response])
                 ->setMethods(null)
