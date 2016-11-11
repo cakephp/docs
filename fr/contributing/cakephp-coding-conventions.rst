@@ -224,6 +224,7 @@ Exemple d'une définition de méthode::
         if (expr) {
             statement;
         }
+
         return $var;
     }
 
@@ -243,6 +244,7 @@ déterminer si l'appel de la fonction est un succès::
         if (!($dnsInfo) || !($dnsInfo['phpType'])) {
             return $this->addError();
         }
+
         return true;
     }
 
@@ -261,7 +263,7 @@ publiques car le typage prend du temps::
      * @param \Cake\ORM\Table $table The table class to use.
      * @param array $array Some array value.
      * @param callable $callback Some callback.
-     * @param boolean $boolean Some boolean value.
+     * @param bool $boolean Some boolean value.
      */
     public function foo(Table $table, array $array, callable $callback, $boolean)
     {

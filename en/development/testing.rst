@@ -1297,6 +1297,7 @@ correctly by the ``adjust()`` method in our component. We create the file
     use App\Controller\Component\PagematronComponent;
     use Cake\Controller\Controller;
     use Cake\Controller\ComponentRegistry;
+    use Cake\Event\Event;
     use Cake\Network\Request;
     use Cake\Network\Response;
     use Cake\TestSuite\TestCase;
@@ -1313,13 +1314,14 @@ correctly by the ``adjust()`` method in our component. We create the file
             // Setup our component and fake test controller
             $request = new Request();
             $response = new Response();
-            $this->controller = $this->getMock(
-                'Cake\Controller\Controller',
-                null,
-                [$request, $response]
-            );
+            $this->controller = $this->getMockBuilder('Cake\Controller\Controller')
+                ->setConstructorArgs([$request, $response])
+                ->setMethods(null)
+                ->getMock();
             $registry = new ComponentRegistry($this->controller);
             $this->component = new PagematronComponent($registry);
+            $event = new Event('Controller.startup', $this->controller);
+            $this->component->startup($event);
         }
 
         public function testAdjust()
