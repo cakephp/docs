@@ -392,7 +392,7 @@ CakePHP は、エンティティが保存される前に適用される「ルー
         ['parent_id', 'site_id'], // Schema: parent_id NULL, site_id NOT NULL
         'ParentNodes',
         ['allowNullableNulls' => true]
-    );
+    ));
 
     // それに加えて Node は、常に Site を参照してください。
     $rules->add($rules->existsIn(['site_id'], 'Sites'));

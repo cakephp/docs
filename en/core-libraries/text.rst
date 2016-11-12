@@ -252,7 +252,7 @@ Truncating Text
 .. php:method:: truncate(string $text, int $length = 100, array $options)
 
 If ``$text`` is longer than ``$length``, this method truncates it at ``$length``
-and adds a prefix consisting of ``'ellipsis'``, if defined. If ``'exact'`` is
+and adds a suffix consisting of ``'ellipsis'``, if defined. If ``'exact'`` is
 passed as ``false``, the truncation will occur at the first whitespace after the
 point at which ``$length`` is exceeded. If ``'html'`` is passed as ``true``,
 HTML tags will be respected and will not be cut off.
@@ -300,7 +300,7 @@ Truncating the Tail of a String
 .. php:method:: tail(string $text, int $length = 100, array $options)
 
 If ``$text`` is longer than ``$length``, this method removes an initial
-substring with length consisting of the difference and prepends a suffix
+substring with length consisting of the difference and prepends a prefix
 consisting of ``'ellipsis'``, if defined. If ``'exact'`` is passed as ``false``,
 the truncation will occur at the first whitespace prior to the point at which
 truncation would otherwise take place.

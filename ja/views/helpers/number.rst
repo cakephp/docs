@@ -1,22 +1,23 @@
-NumberHelper
-############
+Number
+######
 
 .. php:namespace:: Cake\View\Helper
 
 .. php:class:: NumberHelper(View $view, array $config = [])
 
-.. note::
-    The documentation is not currently supported in Japanese language for this
-    page.
+NumberHelper は、ビューの中で一般的なフォーマットを使用して数値の表示を可能にする、便利なメソッドで構成されています。
+これらのメソッドは、通貨、パーセンテージ、データサイズを整形したり、数値を特定精度へ整形する方法と、そして数値を整形するさらなる柔軟性も提供します。
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+.. include:: /core-libraries/number.rst
+    :start-after: start-cakenumber
+    :end-before: end-cakenumber
 
-    You can refer to the English version in the select top menu to have
-    information about this page's topic.
+.. warning::
+
+    全てのシンボルは UTF-8 です。
 
 .. meta::
     :title lang=ja: NumberHelper
-    :description lang=ja: The Number Helper contains convenience methods that enable display numbers in common formats in your views.
-    :keywords lang=ja: number helper,currency,number format,number precision,format file size,format numbers
+    :description lang=ja: NumberHelper は、ビューの中で一般的なフォーマットを使用して数値の表示を可能にする、便利なメソッドで構成されています。
+    :keywords lang=ja: 数値ヘルパー,通貨,数値フォーマット,数値精度,ファイルサイズのフォーマット,数値のフォーマット
+    :keywords lang=en: number helper,currency,number format,number precision,format file size,format numbers

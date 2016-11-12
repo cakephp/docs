@@ -456,7 +456,7 @@ behavior during ``newEntity()`` or ``patchEntity()``::
         public function initialize(array $config)
         {
             $this->addBehavior('Translate', [
-                'fields' => ['title']
+                'fields' => ['title'],
                 'validator' => 'translated'
             ]);
         }

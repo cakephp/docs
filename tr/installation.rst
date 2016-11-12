@@ -283,7 +283,7 @@ further information.
            Allow from all
        </Directory>
 
-   On Mac OSX, another solution is to use the tool
+   On macOS, another solution is to use the tool
    `virtualhostx <http://clickontyler.com/virtualhostx/>`_
    to make a Virtual Host to point to your folder.
 

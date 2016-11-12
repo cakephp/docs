@@ -331,7 +331,7 @@ obtener información.
            Allow from all
        </Directory>
 
-   En Mac OSX, otra solución es usar la herramienta
+   En macOS, otra solución es usar la herramienta
    `virtualhostx <http://clickontyler.com/virtualhostx/>`_
    para crear servidores virtuales y apuntarlos a tu carpeta.
 

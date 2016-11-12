@@ -42,7 +42,10 @@ AuthComponent dans notre AppController::
                 'loginAction' => [
                     'controller' => 'Users',
                     'action' => 'login'
-                ]
+                ],
+                // Si l'utilisateur arrive sur une page non-autorisée, on le
+                // redirige sur la page précédente.
+                'unauthorizedRedirect' => $this->referer()
             ]);
 
             // Autorise l'action display pour que notre controller de pages

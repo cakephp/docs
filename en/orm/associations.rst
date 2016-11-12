@@ -486,8 +486,9 @@ Patient belongsToMany Doctor doctors_patients.id, doctors_patients.doctor_id,
                              doctors_patients.patient_id.
 ============================ ================================================================
 
-We can define the belongsToMany association in our Articles model as follows::
+We can define the belongsToMany association in both our models as follows::
 
+    // In src/Model/Table/ArticlesTable.php
     class ArticlesTable extends Table
     {
 
@@ -497,15 +498,38 @@ We can define the belongsToMany association in our Articles model as follows::
         }
     }
 
+    // In src/Model/Table/TagsTable.php
+    class TagsTable extends Table
+    {
+
+        public function initialize(array $config)
+        {
+            $this->belongsToMany('Articles');
+        }
+    }
+
 We can also define a more specific relationship using array
 syntax::
 
+    // In src/Model/Table/ArticlesTable.php
     class ArticlesTable extends Table
     {
 
         public function initialize(array $config)
         {
             $this->belongsToMany('Tags', [
+                'joinTable' => 'articles_tags',
+            ]);
+        }
+    }
+
+    // In src/Model/Table/TagsTable.php
+    class TagsTable extends Table
+    {
+
+        public function initialize(array $config)
+        {
+            $this->belongsToMany('Articles', [
                 'joinTable' => 'articles_tags',
             ]);
         }
