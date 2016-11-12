@@ -6,9 +6,9 @@ def final BUILD_STEPS = '''\
 # Rebuild the index.
 make populate-index ES_HOST=http://ci.cakephp.org:9200
 
-rm -rf /tmp/book-{VERSION}-$GIT_COMMIT
-git clone . /tmp/book-{VERSION}-$GIT_COMMIT
-cd /tmp/book-{VERSION}-$GIT_COMMIT
+rm -rf /tmp/book-VERSION-$GIT_COMMIT
+git clone . /tmp/book-VERSION-$GIT_COMMIT
+cd /tmp/book-VERSION-$GIT_COMMIT
 
 sed -i.bak 's#html populate-index#html#' Makefile
 git add Makefile && git commit -m "Add deploy requirements"
@@ -17,9 +17,9 @@ git remote rm origin
 git branch -D master || true
 git checkout -b master
 
-git remote | grep dokku || git remote add dokku dokku@104.239.163.8:book-{VERSION}
+git remote | grep dokku || git remote add dokku dokku@104.239.163.8:book-VERSION
 git push -fv dokku master
-rm -rf /tmp/book-{VERSION}-$GIT_COMMIT
+rm -rf /tmp/book-VERSION-$GIT_COMMIT
 '''
 
 job('Book - Deploy 3.x') {
@@ -34,7 +34,7 @@ job('Book - Deploy 3.x') {
     daysToKeep(30)
   }
   steps {
-    shell(BUILD_STEPS.replaceAll('{VERSION}', '3'))
+    shell(BUILD_STEPS.replaceAll('VERSION', '3'))
   }
 }
 
@@ -50,7 +50,7 @@ job('Book - Deploy 2.x') {
     daysToKeep(30)
   }
   steps {
-    shell(BUILD_STEPS.replaceAll('{VERSION}', '2'))
+    shell(BUILD_STEPS.replaceAll('VERSION', '2'))
   }
 }
 
@@ -66,7 +66,7 @@ job('Book - Deploy 1.3') {
     daysToKeep(30)
   }
   steps {
-    shell(BUILD_STEPS.replaceAll('{VERSION}', '13'))
+    shell(BUILD_STEPS.replaceAll('VERSION', '13'))
   }
 }
 
@@ -82,7 +82,7 @@ job('Book - Deploy 1.2') {
     daysToKeep(30)
   }
   steps {
-    shell(BUILD_STEPS.replaceAll('{VERSION}', '12'))
+    shell(BUILD_STEPS.replaceAll('VERSION', '12'))
   }
 }
 
@@ -98,7 +98,7 @@ job('Book - Deploy 1.1') {
     daysToKeep(30)
   }
   steps {
-    shell(BUILD_STEPS.replaceAll('{VERSION}', '11'))
+    shell(BUILD_STEPS.replaceAll('VERSION', '11'))
   }
 }
 
