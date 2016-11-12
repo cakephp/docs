@@ -59,17 +59,19 @@ templates file should look something like::
 Changing Templates at Run-time
 ------------------------------
 
-.. php:method:: templates($templates = null)
+.. php:method:: setTemplates($templates)
 
 This method allows you to change the templates used by PaginatorHelper at
 runtime. This can be useful when you want to customize templates for a
 particular method call::
 
     // Read the current template value.
+    $result = $this->Paginator->setTemplates('number');
+    // Prior to 3.4
     $result = $this->Paginator->templates('number');
 
     // Change a template
-    $this->Paginator->templates([
+    $this->Paginator->setTemplates([
         'number' => '<em><a href="{{url}}">{{text}}</a></em>'
     ]);
 

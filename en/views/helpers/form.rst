@@ -1647,11 +1647,13 @@ contain an array of templates indexed by name::
 
 Any templates you define will replace the default ones included in the helper.
 Templates that are not replaced, will continue to use the default values.
-You can also change the templates at runtime using the ``templates()`` method::
+You can also change the templates at runtime using the ``setTemplates()`` method::
 
     $myTemplates = [
         'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
+    $this->Form->setTemplates($myTemplates);
+    // Prior to 3.4
     $this->Form->templates($myTemplates);
 
 .. warning::
@@ -1675,7 +1677,7 @@ If that container is missing the ``inputContainer`` template will be used. For
 example::
 
     // Add custom radio wrapping HTML
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'radioContainer' => '<div class="form-radio">{{content}}</div>'
     ]);
 
@@ -1689,7 +1691,7 @@ used if it is present. If that template is missing by default each set of label
 & input is rendered using the ``formGroup`` template. For example::
 
     // Add custom radio form group
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'radioFormGroup' => '<div class="radio">{{label}}{{input}}</div>'
     ]);
 
@@ -1700,7 +1702,7 @@ You can add additional template placeholders in custom templates, and populate
 those placeholders when generating inputs::
 
     // Add a template with the help placeholder.
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'inputContainer' => '<div class="input {{type}}{{required}}">
             {{content}} <span class="help">{{help}}</span></div>'
     ]);
@@ -1721,7 +1723,7 @@ This helps make it easier to integrate popular CSS frameworks. If you need to
 place checkbox/radio inputs outside of the label you can do so by modifying the
 templates::
 
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'nestingLabel' => '{{input}}<label{{attrs}}>{{text}}</label>',
         'formGroup' => '{{input}}{{label}}',
     ]);

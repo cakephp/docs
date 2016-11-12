@@ -45,6 +45,26 @@ elements will continue to function until 4.0.0 after which they will be removed.
   ``Cake\Database\Schema\TableSchema``. The previous name was confusing to a number
   of users.
 
+Deprecated Combined Get/Set Methods
+-----------------------------------
+
+In the past CakePHP has leveraged 'modal' methods that operate as provide both
+a get/set mode. These methods are complicate IDE autocompletion and our ability
+to add stricter return types in the future. For these reasons, combined get/set
+methods are being split into separate get and set methods.
+
+The following is a list of methods that are deprecated and replaced with
+``getX`` and ``setX`` methods:
+
+Cake\Console\ConsoleOptionParse
+    * ``command()``
+    * ``description()``
+    * ``epliog()``
+Cake\Validation\Validator
+    * ``provider()``
+Cake\View\StringTemplateTrait
+    * ``templates()``
+
 Behavior Changes
 ================
 
