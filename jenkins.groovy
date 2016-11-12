@@ -111,7 +111,7 @@ job('Book - Rebuild 2.x search index') {
     daysToKeep(30)
   }
   steps {
-    shell('make rebuild-index ES_HOST=http://ci.cakephp.org:9200')
+    shell('make rebuild-index ES_HOST="$ELASTICSEARCH_URL"')
   }
 }
 
@@ -124,6 +124,6 @@ job('Book - Rebuild 3.x search index') {
     daysToKeep(30)
   }
   steps {
-    shell('make rebuild-index ES_HOST=http://ci.cakephp.org:9200')
+    shell('make rebuild-index ES_HOST="$ELASTICSEARCH_URL"')
   }
 }
