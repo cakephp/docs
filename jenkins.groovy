@@ -17,7 +17,6 @@ git remote rm origin
 git branch -D master || true
 git checkout -b master
 
-ssh-keyscan -t rsa 104.239.163.8 >> ~/.ssh/known_hosts
 git remote | grep dokku || git remote add dokku dokku@104.239.163.8:book-{VERSION}
 git push -fv dokku master
 rm -rf /tmp/book-{VERSION}-$GIT_COMMIT
