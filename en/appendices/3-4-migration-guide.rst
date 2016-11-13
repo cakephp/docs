@@ -44,6 +44,9 @@ elements will continue to function until 4.0.0 after which they will be removed.
 * ``Cake\Database\Schema\Table`` has been renamed to
   ``Cake\Database\Schema\TableSchema``. The previous name was confusing to a number
   of users.
+* The ``fieldList`` option for  ``Cake\ORM\Table::newEntity()`` and
+  ``patchEntity()`` has been renamed to ``fields`` to be more consistent with
+  other parts of the ORM.
 
 Deprecated Combined Get/Set Methods
 -----------------------------------
