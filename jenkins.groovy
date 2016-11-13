@@ -4,7 +4,7 @@ def final REPO_NAME = 'cakephp/docs'
 // job definition use a string 'template' to save duplication
 def final BUILD_STEPS = '''\
 # Rebuild the index.
-make populate-index ES_HOST=http://ci.cakephp.org:9200
+make populate-index ES_HOST="$ELASTICSEARCH_URL"
 
 rm -rf /tmp/book-VERSION-$GIT_COMMIT
 git clone . /tmp/book-VERSION-$GIT_COMMIT
@@ -17,7 +17,7 @@ git remote rm origin
 git branch -D master || true
 git checkout -b master
 
-git remote | grep dokku || git remote add dokku dokku@104.239.163.8:book-VERSION
+git remote | grep dokku || git remote add dokku dokku@new.cakephp.org:book-VERSION
 git push -fv dokku master
 rm -rf /tmp/book-VERSION-$GIT_COMMIT
 '''
