@@ -72,14 +72,17 @@ Query string parameters can be read using
 :php:attr:`~Cake\\Network\\Request::$query`::
 
     // URL is /posts/index?page=1&sort=title
-    $this->request->query('page');
+    $this->request->getQuery('page');
 
 You can either directly access the query property, or you can use
 ``query()`` method to read the URL query array in an error-free manner.
 Any keys that do not exist will return ``null``::
 
-    $foo = $this->request->query('value_that_does_not_exist');
+    $foo = $this->request->getQuery('value_that_does_not_exist');
     // $foo === null
+
+    // You can also provide default values
+    $foo = $this->request->getQuery('does_not_exist', 'default val');
 
 If you want to access all the query parameters you can use
 ``getQueryParams()``::

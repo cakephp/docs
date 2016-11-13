@@ -75,13 +75,13 @@ Les paramètres Querystring peuvent être lus en utilisant
 :php:attr:`~Cake\\Network\\Request::$query`::
 
     // l'URL est /posts/index?page=1&sort=title
-    $this->request->query('page');
+    $this->request->getQuery('page');
 
 Vous pouvez soit directement accéder à la propriété demandée, soit vous pouvez
 utiliser ``query()`` pour lire l'URL requêtée sans erreur. Toute clé qui
 n'existe pas va retourner ``null``::
 
-    $foo = $this->request->query('valeur_qui_n_existe_pas');
+    $foo = $this->request->getQuery('valeur_qui_n_existe_pas');
     // $foo === null
 
 Si vous souhaitez accéder à tous les paramètres de requête, vous pouvez utiliser
