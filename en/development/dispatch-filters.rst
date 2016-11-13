@@ -119,7 +119,7 @@ page. First, create the file. Its contents should look like::
         {
             $request = $event->data['request'];
             $response = $event->data['response'];
-            if (!$request->cookie('landing_page')) {
+            if (!$request->getCookie('landing_page')) {
                 $response->cookie([
                     'name' => 'landing_page',
                     'value' => $request->here(),

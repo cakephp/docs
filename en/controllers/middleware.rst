@@ -222,7 +222,7 @@ their own response. We can see both options in our simple middleware::
 
             // When modifying the response, you should do it
             // *after* calling next.
-            if (!$request->cookie('landing_page')) {
+            if (!$request->getCookie('landing_page')) {
                 $response->cookie([
                     'name' => 'landing_page',
                     'value' => $request->here(),

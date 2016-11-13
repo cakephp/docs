@@ -217,7 +217,7 @@ PSR7 リクエストとレスポンス
 
             // レスポンスを変更する時には、 next を呼んだ *後に*
             // それを行うべきです。
-            if (!$request->cookie('landing_page')) {
+            if (!$request->getCookie('landing_page')) {
                 $response->cookie([
                     'name' => 'landing_page',
                     'value' => $request->here(),
