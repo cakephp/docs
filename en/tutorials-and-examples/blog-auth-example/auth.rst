@@ -386,13 +386,13 @@ own.  Add the following content to your **ArticlesController.php**::
     public function isAuthorized($user)
     {
         // All registered users can add articles
-        if ($this->request->param('action') === 'add') {
+        if ($this->request->getParam('action') === 'add') {
             return true;
         }
 
         // The owner of an article can edit and delete it
-        if (in_array($this->request->param('action'), ['edit', 'delete'])) {
-            $articleId = (int)$this->request->param('pass.0');
+        if (in_array($this->request->getParam('action'), ['edit', 'delete'])) {
+            $articleId = (int)$this->request->getParam('pass.0');
             if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
                 return true;
             }

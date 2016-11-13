@@ -1102,12 +1102,12 @@ il peut donc être vérifié::
         public function isAuthorized($user = null)
         {
             // Chacun des utilisateurs enregistrés peut accéder aux fonctions publiques
-            if (!$this->request->param('prefix')) {
+            if (!$this->request->getParam('prefix')) {
                 return true;
             }
 
             // Seulement les administrateurs peuvent accéder aux fonctions d'administration
-            if ($this->request->param('prefix') === 'admin') {
+            if ($this->request->getParam('prefix') === 'admin') {
                 return (bool)($user['role'] === 'admin');
             }
 

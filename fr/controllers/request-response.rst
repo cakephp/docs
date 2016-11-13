@@ -41,9 +41,9 @@ l'utilisation des librairies en-dehors de CakePHP.
 Paramètres de la Requête
 ------------------------
 
-``Request`` propose les paramètres de routing avec la méthode ``param()``::
+``Request`` propose les paramètres de routing avec la méthode ``getParam()``::
 
-    $this->request->param('controller');
+    $this->request->getParam('controller');
 
 Tous les éléments de route :ref:`route-elements` sont accessibles à travers
 cette interface.
@@ -53,7 +53,7 @@ d'accéder aux arguments passés :ref:`passed-arguments`. Ceux-ci sont aussi tou
 les deux disponibles dans l'objet ``request``::
 
     // Arguments passés
-    $this->request->param('pass');
+    $this->request->getParam('pass');
 
 Tous vous fournissent un accès aux arguments passés. Il y a de nombreux
 paramètres importants et utiles que CakePHP utilise en interne qu'on peut aussi
@@ -251,7 +251,7 @@ Quelques exemples seraient::
     $this->request->addDetector(
         'awesome',
         function ($request) {
-            return $request->param('awesome');
+            return $request->getParam('awesome');
         }
     );
 
@@ -259,7 +259,7 @@ Quelques exemples seraient::
     $this->request->addDetector(
         'controller',
         function ($request, $name) {
-            return $request->param('controller') === $name;
+            return $request->getParam('controller') === $name;
         }
     );
 

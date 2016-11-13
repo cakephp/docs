@@ -57,7 +57,7 @@ Les options de configuration disponibles sont les suivants:
 Lorsqu'il est activé, vous pouvez accéder au jeton CSRF actuel sur l'objet
 request::
 
-    $token = $this->request->param('_csrfToken');
+    $token = $this->request->getParam('_csrfToken');
 
 Intégration avec le FormHelper
 ==============================

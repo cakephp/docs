@@ -94,7 +94,7 @@ personnalisée dans la propriété paginate::
         // trouve les articles selon les tags
         public function tags()
         {
-            $tags = $this->request->param('pass');
+            $tags = $this->request->getParam('pass');
 
             $customFinderOptions = [
                 'tags' => $tags
@@ -138,7 +138,7 @@ créer les données paginées et ajouter le ``PaginatorHelper`` s'il n'a pas dé
 été ajouté. La méthode paginate du controller va retourner l'ensemble des
 résultats de la requête paginée, et définir les meta-données de pagination de
 la requête. Vous pouvez accéder aux meta-données de pagination avec
-``$this->request->param('paging')``. un exemple plus complet de l'utilisation
+``$this->request->getParam('paging')``. un exemple plus complet de l'utilisation
 de ``paginate()`` serait::
 
     class ArticlesController extends AppController
@@ -291,7 +291,7 @@ utiliser un bloc try catch et faire des actions appropriées quand une
             $this->paginate();
         } catch (NotFoundException $e) {
             // Faire quelque chose ici comme rediriger vers la première ou dernière page.
-            // $this->request->param('paging') vous donnera les infos demandées.
+            // $this->request->getParam('paging') vous donnera les infos demandées.
         }
     }
 

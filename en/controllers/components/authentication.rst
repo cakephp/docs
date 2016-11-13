@@ -998,12 +998,12 @@ checked::
         public function isAuthorized($user = null)
         {
             // Any registered user can access public functions
-            if (!$this->request->param('prefix')) {
+            if (!$this->request->getParam('prefix')) {
                 return true;
             }
 
             // Only admins can access admin functions
-            if ($this->request->param('prefix') === 'admin') {
+            if ($this->request->getParam('prefix') === 'admin') {
                 return (bool)($user['role'] === 'admin');
             }
 

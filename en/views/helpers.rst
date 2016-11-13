@@ -71,7 +71,7 @@ You can use the current action name to conditionally load helpers::
         public function initialize()
         {
             parent::initialize();
-            if ($this->request->param('action') === 'index') {
+            if ($this->request->getParam('action') === 'index') {
                 $this->loadHelper('ListPage');
             }
         }

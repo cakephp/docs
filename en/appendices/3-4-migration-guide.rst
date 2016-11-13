@@ -14,10 +14,10 @@ elements will continue to function until 4.0.0 after which they will be removed.
   been added to read/write the relevant properties.
 * Several properties on ``Cake\Network\Request`` have been deprecated:
 
-  * ``Request::$params`` is deprecated. Use ``Request::param()`` instead.
-  * ``Request::$data`` is deprecated. Use ``Request::data()`` instead.
-  * ``Request::$query`` is deprecated. Use ``Request::query()`` instead.
-  * ``Request::$cookies`` is deprecated. Use ``Request::cookie()`` instead.
+  * ``Request::$params`` is deprecated. Use ``Request::getParam()`` instead.
+  * ``Request::$data`` is deprecated. Use ``Request::getData()`` instead.
+  * ``Request::$query`` is deprecated. Use ``Request::getQuery()`` instead.
+  * ``Request::$cookies`` is deprecated. Use ``Request::getCookie()`` instead.
   * ``Request::$base`` is deprecated. Use ``Request::getAttribute('base')`` instead.
   * ``Request::$webroot`` is deprecated. Use ``Request::getAttribute('webroot')`` instead.
   * ``Request::$here`` is deprecated. Use ``Request::here()`` instead.
@@ -25,11 +25,14 @@ elements will continue to function until 4.0.0 after which they will be removed.
 
 * A number of methods on ``Cake\Network\Request`` have been deprecated:
 
-  * The setter modes for ``query()``, ``data()`` and ``param()`` are deprecated.
-  * ``__get()`` & ``__isset()`` methods are deprecated. Use ``param()`` instead.
+  * ``__get()`` & ``__isset()`` methods are deprecated. Use ``getParam()`` instead.
   * ``method()`` is deprecated. Use ``getMethod()`` instead.
   * ``setInput()`` is deprecated. Use ``withBody()`` instead.
   * The ``ArrayAccess`` methods have all been deprecated.
+  * ``Request::param()`` is deprecated. Use ``Request::getParam()`` instead.
+  * ``Request::data()`` is deprecated. Use ``Request::getData()`` instead.
+  * ``Request::query()`` is deprecated. Use ``Request::getQuery()`` instead.
+  * ``Request::cookie()`` is deprecated. Use ``Request::getCookie()`` instead.
 
 * The ``Auth.redirect`` session variable is no longer used. Instead a query
   string parameter is used to store the redirect URL.

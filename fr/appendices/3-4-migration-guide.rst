@@ -15,10 +15,10 @@ version 4.0.0 à partir de laquelle ils seront supprimés.
   méthodes ont été ajoutées pour lire et écrire ces propriétés.
 * Plusieurs propriétés de ``Cake\Network\Request`` ont été dépréciées :
 
-  * ``Request::$params`` est dépréciée. Utilisez ``Request::param()`` à la place.
-  * ``Request::$data`` est dépréciée. Utilisez ``Request::data()`` à la place.
-  * ``Request::$query`` est dépréciée. Utilisez ``Request::query()`` à la place.
-  * ``Request::$cookies`` est dépréciée. Utilisez ``Request::cookie()`` à la place.
+  * ``Request::$params`` est dépréciée. Utilisez ``Request::getParam()`` à la place.
+  * ``Request::$data`` est dépréciée. Utilisez ``Request::getData()`` à la place.
+  * ``Request::$query`` est dépréciée. Utilisez ``Request::getQuery()`` à la place.
+  * ``Request::$cookies`` est dépréciée. Utilisez ``Request::getCookie()`` à la place.
   * ``Request::$base`` est dépréciée. Utilisez ``Request::getAttribute('base')`` à la place.
   * ``Request::$webroot`` est dépréciée. Utilisez ``Request::getAttribute('webroot')`` à la place.
   * ``Request::$here`` est dépréciée. Utilisez ``Request::here()`` à la place.
@@ -26,9 +26,8 @@ version 4.0.0 à partir de laquelle ils seront supprimés.
 
 * Certaines méthodes de ``Cake\Network\Request`` ont été dépréciées :
 
-  * Les méthodes ``query()``, ``data()`` et ``param()`` ne peuvent plus _setter_ les valeurs des propriétés
-    correspondantes.
-  * Les méthodes ``__get()`` & ``__isset()`` sont dépréciées. Utilisez ``param()`` à la place.
+  * Les méthodes ``__get()`` & ``__isset()`` sont dépréciées. Utilisez
+    ``getParam()`` à la place.
   * ``method()`` est dépréciée. Utilisez ``getMethod()`` plutôt.
   * ``setInput()`` est dépréciée. Utilisez ``withBody()`` plutôt.
   * Les méthodes ``ArrayAccess`` ont toutes été dépréciées.

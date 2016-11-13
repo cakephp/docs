@@ -39,9 +39,9 @@ use libraries from outside of CakePHP.
 Request Parameters
 ------------------
 
-The request exposes the routing parameters through the ``param()`` method::
+The request exposes the routing parameters through the ``getParam()`` method::
 
-    $this->request->param('controller');
+    $this->request->getParam('controller');
 
 All :ref:`route-elements` are accessed through this interface.
 
@@ -50,7 +50,7 @@ In addition to :ref:`route-elements`, you also often need access to
 well::
 
     // Passed arguments
-    $this->request->param('pass');
+    $this->request->getParam('pass');
 
 Will all provide you access to the passed arguments. There
 are several important/useful parameters that CakePHP uses internally, these
@@ -242,7 +242,7 @@ Some examples would be::
     $this->request->addDetector(
         'awesome',
         function ($request) {
-            return $request->param('awesome');
+            return $request->getParam('awesome');
         }
     );
 
@@ -250,7 +250,7 @@ Some examples would be::
     $this->request->addDetector(
         'controller',
         function ($request, $name) {
-            return $request->param('controller') === $name;
+            return $request->getParam('controller') === $name;
         }
     );
 

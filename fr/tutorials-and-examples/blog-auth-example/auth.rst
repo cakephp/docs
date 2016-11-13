@@ -395,13 +395,13 @@ Ajoutez le contenu suivant à votre ``ArticlesController.php``::
     public function isAuthorized($user)
     {
         // Tous les utilisateurs enregistrés peuvent ajouter des articles
-        if ($this->request->param('action') === 'add') {
+        if ($this->request->getParam('action') === 'add') {
             return true;
         }
 
         // Le propriétaire d'un article peut l'éditer et le supprimer
-        if (in_array($this->request->param('action'), ['edit', 'delete'])) {
-            $articleId = (int)$this->request->param('pass.0');
+        if (in_array($this->request->getParam('action'), ['edit', 'delete'])) {
+            $articleId = (int)$this->request->getParam('pass.0');
             if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
                 return true;
             }

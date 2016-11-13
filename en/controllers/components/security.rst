@@ -164,7 +164,7 @@ want and the Security Component will enforce them on its startup::
 
         public function beforeFilter(Event $event)
         {
-            if ($this->request->param('admin')) {
+            if ($this->request->getParam('admin')) {
                 $this->Security->requireSecure();
             }
         }

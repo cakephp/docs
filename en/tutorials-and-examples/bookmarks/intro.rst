@@ -323,7 +323,7 @@ add the following::
     {
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
-        $tags = $this->request->param('pass');
+        $tags = $this->request->getParam('pass');
 
         // Use the BookmarksTable to find tagged bookmarks.
         $bookmarks = $this->Bookmarks->find('tagged', [

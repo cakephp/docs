@@ -191,12 +191,12 @@ para os bookmarks. Em seu ``BookmarksController`` adicione o seguinte::
             return true;
         }
         // Todas as outras ações requerem um id.
-        if (!$this->request->param('pass.0')) {
+        if (!$this->request->getParam('pass.0')) {
             return false;
         }
 
         // Checa se o bookmark pertence ao user atual.
-        $id = $this->request->param('pass.0');
+        $id = $this->request->getParam('pass.0');
         $bookmark = $this->Bookmarks->get($id);
         if ($bookmark->user_id == $user['id']) {
             return true;
