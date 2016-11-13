@@ -425,7 +425,7 @@ Localized プラグインは、バリデーションのための国の２文字�
         ->requirePresence('comment')
         ->notEmpty('comment', 'You need to give a comment.');
 
-    $errors = $validator->errors($this->request->data());
+    $errors = $validator->errors($this->request->getData());
     if (empty($errors)) {
         // email を送る。
     }
@@ -442,7 +442,7 @@ Localized プラグインは、バリデーションのための国の２文字�
 適用されますが、 'update' を実行する際のルールを適用したい場合は、
 以下のことが可能となります。 ::
 
-    $errors = $validator->errors($this->request->data(), false);
+    $errors = $validator->errors($this->request->getData(), false);
     if (empty($errors)) {
         // email を送る。
     }
@@ -466,7 +466,7 @@ Localized プラグインは、バリデーションのための国の２文字�
 保存前のエンティティのバリデーションは自動的に実行されます。 ::
 
     // ArticlesController クラスにおいて
-    $article = $this->Articles->newEntity($this->request->data());
+    $article = $this->Articles->newEntity($this->request->getData());
     if ($article->errors()) {
         // エラーメッセージが表示されるためのコードを書く
 
@@ -476,7 +476,7 @@ Localized プラグインは、バリデーションのための国の２文字�
 ``newEntities()`` メソッドを用いることができます。 ::
 
     // ArticlesControllerクラスにおいて
-    $entities = $this->Articles->newEntities($this->request->data());
+    $entities = $this->Articles->newEntities($this->request->getData());
     foreach ($entities as $entity) {
         if (!$entity->errors()) {
                 $this->Articles->save($entity);

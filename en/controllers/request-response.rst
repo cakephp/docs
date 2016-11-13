@@ -99,11 +99,11 @@ Any form data that contains a ``data`` prefix will have that data prefix
 removed. For example::
 
     // An input with a name attribute equal to 'MyModel[title]' is accessible at
-    $this->request->data('MyModel.title');
+    $this->request->getData('MyModel.title');
 
 Any keys that do not exist will return ``null``::
 
-    $foo = $this->request->data('Value.that.does.not.exist');
+    $foo = $this->request->getData('Value.that.does.not.exist');
     // $foo == null
 
 PUT, PATCH or DELETE Data

@@ -229,7 +229,7 @@ AppController に追加しましょう。 ::
     {
         $bookmark = $this->Bookmarks->newEntity();
         if ($this->request->is('post')) {
-            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data());
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->getData());
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('ブックマークを保存しました。');
@@ -252,7 +252,7 @@ AppController に追加しましょう。 ::
             'contain' => ['Tags']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data());
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->getData());
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('ブックマークを保存しました。');

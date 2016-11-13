@@ -77,7 +77,7 @@ version future. Avant que cela n'arrive, les données d'utilisateur passées
 au Client Http devront être nettoyées comme suit::
 
     $response = $http->post('http://example.com/api', [
-        'search' => ltrim($this->request->data('search'), '@'),
+        'search' => ltrim($this->request->getData('search'), '@'),
     ]);
 
 S'il est nécessaire de garder les caractères du début ``@`` dans les chaînes
@@ -85,7 +85,7 @@ de la requête, vous pouvez passer une chaîne de requête pré-encodée avec
 ``http_build_query()``::
 
     $response = $http->post('http://example.com/api', http_build_query([
-        'search' => $this->request->data('search'),
+        'search' => $this->request->getData('search'),
     ]));
 
 Construire des Corps de Requête Multipart à la Main

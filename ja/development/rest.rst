@@ -52,7 +52,7 @@ REST を動かすための手っ取り早い方法は、 config/routes.php フ�
 
         public function add()
         {
-            $recipe = $this->Recipes->newEntity($this->request->data());
+            $recipe = $this->Recipes->newEntity($this->request->getData());
             if ($this->Recipes->save($recipe)) {
                 $message = 'Saved';
             } else {
@@ -69,7 +69,7 @@ REST を動かすための手っ取り早い方法は、 config/routes.php フ�
         {
             $recipe = $this->Recipes->get($id);
             if ($this->request->is(['post', 'put'])) {
-                $recipe = $this->Recipes->patchEntity($recipe, $this->request->data());
+                $recipe = $this->Recipes->patchEntity($recipe, $this->request->getData());
                 if ($this->Recipes->save($recipe)) {
                     $message = 'Saved';
                 } else {
@@ -145,9 +145,9 @@ edit アクションのロジックを作るのは少しだけトリッキーで
 :php:class:`Cake\\Controller\\Component\\RequestHandler` と
 :php:class:`Cake\\Routing\\Router` クラスが取り計らってくれます。
 POST もしくは PUT リクエストのコンテンツタイプが XML であれば、入力データは CakePHP の
-:php:class:`Xml` クラスに渡され、配列に変換され、 ``$this->request->data()`` に入ります。
+:php:class:`Xml` クラスに渡され、配列に変換され、 ``$this->request->getData()`` に入ります。
 この機能によって、XML と POST データの処理はシームレスになるのです。コントローラもモデルも
-XML の入力を気にせずに、 ``$this->request->data()`` のみを扱えば良いのです。
+XML の入力を気にせずに、 ``$this->request->getData()`` のみを扱えば良いのです。
 
 他のフォーマットのインプットデータ
 ============================================
@@ -155,7 +155,7 @@ XML の入力を気にせずに、 ``$this->request->data()`` のみを扱えば
 REST アプリケーションの場合、様々なフォーマットのデータを扱います。
 CakePHP では、 :php:class:`RequestHandlerComponent` クラスが助けてくれます。
 デフォルトでは、POST や PUT で送られてくる JSON/XML の入力データはデコードされ、
-配列に変換されてから ``$this->request->data()`` に格納されます。独自のデコード処理も
+配列に変換されてから ``$this->request->getData()`` に格納されます。独自のデコード処理も
 :php:meth:`RequestHandler::addInputType()` を利用すれば追加可能です。
 
 

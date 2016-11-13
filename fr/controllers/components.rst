@@ -150,7 +150,7 @@ vous pouvez y accéder comme ceci::
 
         public function delete()
         {
-            if ($this->Post->delete($this->request->data('Post.id')) {
+            if ($this->Post->delete($this->request->getData('Post.id')) {
                 $this->Flash->success('Post deleted.');
                 return $this->redirect(['action' => 'index']);
             }

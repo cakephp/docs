@@ -24,7 +24,7 @@ Si aucune règle de validation n'échoue, l'entity retournée va contenir les
 erreurs. Les champs avec des erreurs ne seront pas présents dans l'entity
 retournée::
 
-    $article = $articles->newEntity($this->request->data());
+    $article = $articles->newEntity($this->request->getData());
     if ($article->errors()) {
         // validation de l'entity a échouée.
     }

@@ -21,7 +21,7 @@ will be validated before it is converted into entities.
 If any validation rules fail, the returned entity will contain errors. The
 fields with errors will not be present in the returned entity::
 
-    $article = $articles->newEntity($this->request->data());
+    $article = $articles->newEntity($this->request->getData());
     if ($article->errors()) {
         // Entity failed validation.
     }
@@ -42,7 +42,7 @@ If you'd like to disable validation when converting request data, set the
 ``validate`` option to false::
 
     $article = $articles->newEntity(
-        $this->request->data(),
+        $this->request->getData(),
         ['validate' => false]
     );
 
@@ -100,7 +100,7 @@ In addition to disabling validation you can choose which validation rule set you
 want applied::
 
     $article = $articles->newEntity(
-        $this->request->data(),
+        $this->request->getData(),
         ['validate' => 'update']
     );
 

@@ -102,11 +102,11 @@ Toutes les données POST sont accessibles en utilisant
 contient un préfix ``data`` aura ce préfixe supprimé. Par exemple::
 
     // Un input avec un attribut de nom égal à 'MyModel[title]' est accessible
-    dans $this->request->data('MyModel.title');
+    dans $this->request->getData('MyModel.title');
 
 Toute clé qui n'existe pas va retourner ``null``::
 
-    $foo = $this->request->data('Valeur.qui.n.existe.pas');
+    $foo = $this->request->getData('Valeur.qui.n.existe.pas');
     // $foo == null
 
 Accéder aux Données PUT, PATCH ou DELETE

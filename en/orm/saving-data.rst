@@ -173,7 +173,7 @@ one or many entities from request data. You can convert a single entity using::
     $articles = TableRegistry::get('Articles');
 
     // Validate and convert to an Entity object
-    $entity = $articles->newEntity($this->request->data());
+    $entity = $articles->newEntity($this->request->getData());
 
 .. note::
 
@@ -211,7 +211,7 @@ associations should be marshalled::
     $articles = TableRegistry::get('Articles');
 
     // New entity with nested associations
-    $entity = $articles->newEntity($this->request->data(), [
+    $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags', 'Comments' => ['associated' => ['Users']]
         ]
@@ -230,7 +230,7 @@ should be marshalled. Alternatively, you can use dot notation for brevity::
     $articles = TableRegistry::get('Articles');
 
     // New entity with nested associations using dot notation
-    $entity = $articles->newEntity($this->request->data(), [
+    $entity = $articles->newEntity($this->request->getData(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
 
@@ -242,7 +242,7 @@ change the validation set to be used per association::
 
     // Bypass validation on Tags association and
     // Designate 'signup' validation set for Comments.Users
-    $entity = $articles->newEntity($this->request->data(), [
+    $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags' => ['validate' => false],
             'Comments.Users' => ['validate' => 'signup']
@@ -348,7 +348,7 @@ When creating forms that create/update multiple records at once you can use
 
     // In a controller.
     $articles = TableRegistry::get('Articles');
-    $entities = $articles->newEntities($this->request->data());
+    $entities = $articles->newEntities($this->request->getData());
 
 In this situation, the request data for multiple articles should look like::
 
@@ -399,7 +399,7 @@ ids of associated entities::
 
     // In a controller
     $articles = TableRegistry::get('Articles');
-    $entity = $articles->newEntity($this->request->data(), [
+    $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags', 'Comments' => [
                 'associated' => [
@@ -432,7 +432,7 @@ persisted. You can merge an array of raw data into an existing entity using the
     // In a controller.
     $articles = TableRegistry::get('Articles');
     $article = $articles->get(1);
-    $articles->patchEntity($article, $this->request->data());
+    $articles->patchEntity($article, $this->request->getData());
     $articles->save($article);
 
 
@@ -452,7 +452,7 @@ patching an entity, pass the ``validate`` option as follows::
 You may also change the validation set used for the entity or any of the
 associations::
 
-    $articles->patchEntity($article, $this->request->data(), [
+    $articles->patchEntity($article, $this->request->getData(), [
         'validate' => 'custom',
         'associated' => ['Tags', 'Comments.Users' => ['validate' => 'signup']]
     ]);
@@ -469,7 +469,7 @@ merge deeper to deeper levels, you can use the third parameter of the method::
     // In a controller.
     $associated = ['Tags', 'Comments.Users'];
     $article = $articles->get(1, ['contain' => $associated]);
-    $articles->patchEntity($article, $this->request->data(), [
+    $articles->patchEntity($article, $this->request->getData(), [
         'associated' => $associated
     ]);
     $articles->save($article);
@@ -585,7 +585,7 @@ the original entities array will be removed and not present in the result::
     // In a controller.
     $articles = TableRegistry::get('Articles');
     $list = $articles->find('popular')->toArray();
-    $patched = $articles->patchEntities($list, $this->request->data());
+    $patched = $articles->patchEntities($list, $this->request->getData());
     foreach ($patched as $entity) {
         $articles->save($entity);
     }
@@ -597,7 +597,7 @@ array::
     // In a controller.
     $patched = $articles->patchEntities(
         $list,
-        $this->request->data(),
+        $this->request->getData(),
         ['associated' => ['Tags', 'Comments.Users']]
     );
 
@@ -673,7 +673,7 @@ sending an array in the request containing the ``user_id`` an attacker could
 change the owner of an article, causing undesirable effects::
 
     // Contains ['user_id' => 100, 'title' => 'Hacked!'];
-    $data = $this->request->data();
+    $data = $this->request->getData();
     $entity = $this->patchEntity($entity, $data);
     $this->save($entity);
 
@@ -685,7 +685,7 @@ The second way is by using the ``fieldList`` option when creating or merging
 data into an entity::
 
     // Contains ['user_id' => 100, 'title' => 'Hacked!'];
-    $data = $this->request->data();
+    $data = $this->request->getData();
 
     // Only allow title to be changed
     $entity = $this->patchEntity($entity, $data, [
@@ -722,7 +722,7 @@ using ``newEntity()`` for passing into ``save()``. For example::
 
   // In a controller
   $articles = TableRegistry::get('Articles');
-  $article = $articles->newEntity($this->request->data());
+  $article = $articles->newEntity($this->request->getData());
   if ($articles->save($article)) {
       // ...
   }

@@ -89,7 +89,7 @@ classe obtenue grâce à l'utilitaire de génération de code fournis par CakePH
         {
             $user = $this->Users->newEntity();
             if ($this->request->is('post')) {
-                $user = $this->Users->patchEntity($user, $this->request->data());
+                $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__("L'utilisateur a été sauvegardé."));
                     return $this->redirect(['action' => 'index']);
@@ -316,7 +316,7 @@ l'utilisateur connecté courant en référence pour l'article créé::
     {
         $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
-            $article = $this->Articles->patchEntity($article, $this->request->data());
+            $article = $this->Articles->patchEntity($article, $this->request->getData());
             // Ajout de cette ligne
             $article->user_id = $this->Auth->user('id');
             // Vous pourriez aussi faire ce qui suit

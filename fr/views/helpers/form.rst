@@ -577,7 +577,7 @@ répétitions, les options communes partagées par toutes les méthodes input so
   .. note::
 
     Vous ne pouvez pas utiliser ``default`` pour sélectionner une chekbox -
-    vous devez plutôt définir cette valeur dans ``$this->request->data()`` dans
+    vous devez plutôt définir cette valeur dans ``$this->request->getData()`` dans
     votre controller, ou définir l'option ``checked`` de l'input à ``true``.
 
     Attention à l'utilisation de ``false`` pour assigner une valeur par défaut.
@@ -838,7 +838,7 @@ Affichera:
 
     <textarea name="notes"></textarea>
 
-Si le form est édité (ainsi, le tableau ``$this->request->data()`` va contenir
+Si le form est édité (ainsi, le tableau ``$this->request->getData()`` va contenir
 les informations sauvegardées pour le model ``User``), la valeur
 correspondant au champs ``notes`` sera automatiquement ajoutée au HTML
 généré. Exemple:
@@ -1225,7 +1225,7 @@ un certain nombre d'options:
 * ``round`` - Mettre à ``up`` ou ``down`` pour forcer l'arrondi
   dans une direction. Par défaut à null.
 * ``default`` Le valeur par défaut à utiliser par l'input. Une valeur dans
-  ``$this->request->data()`` correspondante au nom du l'input écrasera cette
+  ``$this->request->getData()`` correspondante au nom du l'input écrasera cette
   valeur. Si aucune valeur par défaut n'est définie, ``time()`` sera utilisé.
 * ``timeFormat`` Le format d'heure à utiliser, soit 12 soit 24.
 * ``second`` Mettre à ``true`` to activer l'affichage des secondes.
@@ -1279,7 +1279,7 @@ n'inclura pas une option vide:
 * ``empty`` - Si ``true``, l'option select vide est montrée. Si c'est une
   chaîne, cette chaîne sera affichée en tant qu'élément vide.
 * ``default`` | ``value`` La valeur par défaut à utiliser pour l'input. Une
-  valeur dans ``$this->request->data()`` qui correspond au nom du champ va écraser
+  valeur dans ``$this->request->getData()`` qui correspond au nom du champ va écraser
   cette valeur.
   Si aucune valeur par défaut n'est fournie, ``time()`` sera utilisée.
 * ``timeFormat`` Le format de time à utiliser, soit 12 soit 24. Par défaut à 24.
@@ -1894,7 +1894,7 @@ créer les inputs suivantes::
 Le code ci-dessus pourrait ensuite être converti en un graph d'entity en
 utilisant le code suivant dans votre controller::
 
-    $article = $this->Articles->patchEntity($article, $this->request->data(), [
+    $article = $this->Articles->patchEntity($article, $this->request->getData(), [
         'associated' => [
             'Authors',
             'Authors.Profiles',
