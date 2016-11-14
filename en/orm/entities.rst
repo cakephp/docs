@@ -139,10 +139,11 @@ You can customize how properties get set by defining a mutator::
 Mutator methods should always return the value that should be stored in the
 property. As you can see above, you can also use mutators to set other
 calculated properties. When doing this, be careful to not introduce any loops,
-as CakePHP will not prevent infinitely looping mutator methods. Mutators allow
-you to convert properties as they are set, or create calculated data.
+as CakePHP will not prevent infinitely looping mutator methods.
+
+Mutators allow you to convert properties as they are set, or create calculated data.
 Mutators and accessors are applied when properties are read using object
-notation, or using get() and set(). For example:
+notation, or using ``get()`` and ``set()``. For example:
 
     namespace App\Model\Entity;
 
