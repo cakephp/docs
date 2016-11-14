@@ -126,6 +126,11 @@ persisted. For example::
             return ucwords($title);
         }
     }
+    
+The accessor would be run when getting the property through any of these two ways::
+
+    echo $user->title;
+    echo $user->get('title');
 
 You can customize how properties get set by defining a mutator::
 
@@ -154,6 +159,11 @@ notation, or using get() and set(). For example:
         }
 
     }
+
+The mutator would be run when setting the property through any of these two ways::
+
+    $user->title = 'foo'; // slug is set as well
+    $user->set('title', 'foo); // slug is set as well
 
 .. _entities-virtual-properties:
 
