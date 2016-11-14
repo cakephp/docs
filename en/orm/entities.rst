@@ -108,7 +108,7 @@ are read or set.
 Accessors use the convention of ``_get`` followed by the CamelCased version of
 the field name.
 
-.. php:method:: set($field = null, $value = null)
+.. php:method:: get($field = null)
 
 They receive the basic value stored in the ``_properties`` array
 as their only argument. Accessors will be used when saving entities, so be
