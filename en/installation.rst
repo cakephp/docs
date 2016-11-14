@@ -166,6 +166,20 @@ project to ensure that permissions will be setup properly:
     setfacl -R -m u:${HTTPDUSER}:rwx logs
     setfacl -R -d -m u:${HTTPDUSER}:rwx logs
 
+In order to use the CakePHP console tools, you also need to ensure that the ``bin/cake`` (or ``bin/cake.php``) file is executable. On *nix or macOS, you can simply execute (On windows, the **.bat** file should be executable already):
+
+.. code-block:: bash
+
+    chmod +x bin/cake
+    
+If you are using a Vagrant, or any other virtualized environment, any shared directories need to be shared with execute permissions (Please refer to your virtualized environment's documentation on how to do this).
+
+If, for whatever reason, you cannot change the permissions of the ``bin/cake`` file, you can run the CakePHP console with:
+
+.. code-block:: bash
+
+    php bin/cake.php
+
 Development Server
 ==================
 
@@ -179,7 +193,7 @@ directory, execute:
     bin/cake server
 
 By default, without any arguments provided, this will serve your application at
-**http://localhost:8765/**.
+`**http://localhost:8765/**.
 
 If you have something conflicting with **localhost** or port 8765, you can tell
 the CakePHP console to run the web server on a specific host and/or port
