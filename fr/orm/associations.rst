@@ -213,8 +213,8 @@ Les clés possibles pour une association hasOne sont:
   un nom en underscore et singulier de l'association, donc ``address`` dans
   notre exemple.
 - **strategy**: Définit la stratégie de requête à utiliser. Par défaut à
-  'join'. L'autre valeur valide est 'select', qui utilise les sous-requêtes à la
-  place.
+  'join'. L'autre valeur valide est 'select', qui utilise une requête distincte
+  à la place.
 - **finder**: La méthode finder à utiliser lors du chargement des
   enregistrements associés.
 
@@ -306,6 +306,9 @@ Les clés possibles pour les tableaux d'association belongsTo sont:
   données de la table associée dans les résultats de la table source. Par défaut
   il s'agit du nom singulier avec des underscores de l'association donc
   ``user`` dans notre exemple.
+- **strategy**: Définit la stratégie de requête à utiliser. Par défaut à
+  'join'. L'autre valeur valide est 'select', qui utilise une requête distincte
+  à la place.
 - **finder**: La méthode finder à utiliser lors du chargement des
   enregistrements associés.
 
