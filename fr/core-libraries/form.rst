@@ -111,7 +111,7 @@ Définir des Valeurs pour le Formulaire
 ======================================
 
 Pour définir les valeurs d'un formulaire sans model, vous pouvez utiliser
-``$this->request->getData()`` comme dans tous formulaires créés par le FormHelper::
+``$this->request->data()`` comme dans tous formulaires créés par le FormHelper::
 
     // Dans uncontroller
     namespace App\Controller;
@@ -134,8 +134,8 @@ Pour définir les valeurs d'un formulaire sans model, vous pouvez utiliser
 
             if ($this->request->is('get')) {
                 //Values from the User Model e.g.
-                $this->request->getData('name', 'John Doe');
-                $this->request->getData('email','john.doe@example.com');
+                $this->request->data('name', 'John Doe');
+                $this->request->data('email','john.doe@example.com');
             }
 
             $this->set('contact', $contact);

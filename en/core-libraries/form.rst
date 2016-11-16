@@ -98,12 +98,13 @@ accordingly. We could have also used the ``validate()`` method to only validate
 the request data::
 
     $isValid = $form->validate($this->request->getData());
-    
+
 Setting Form Values
 ===================
 
 In order to set the values for the fields of a modelless form, one can define
-the values using ``$this->request->getData()``, like in all other forms created by the FormHelper::
+the values using ``$this->request->data()``, like in all other forms created by
+the FormHelper::
 
     // In a controller
     namespace App\Controller;
@@ -126,8 +127,8 @@ the values using ``$this->request->getData()``, like in all other forms created 
 
             if ($this->request->is('get')) {
                 // Values from the User Model e.g.
-                $this->request->getData('name', 'John Doe');
-                $this->request->getData('email','john.doe@example.com');
+                $this->request->data('name', 'John Doe');
+                $this->request->data('email','john.doe@example.com');
             }
 
             $this->set('contact', $contact);

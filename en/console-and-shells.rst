@@ -659,8 +659,7 @@ Set the Description
 .. php:method:: setDescription($text)
 
 The description displays above the argument and option information. By passing
-in either an array or a string, you can set the value of the description.
-Calling with no arguments will return the current value::
+in either an array or a string, you can set the value of the description::
 
     // Set multiple lines at once
     $parser->setDescription(['line one', 'line two']);

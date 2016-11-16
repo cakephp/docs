@@ -98,7 +98,7 @@
 
 モデルのないフォームのフィールドに値を設定するために、
 FormHelperによって作成される他のすべてのフォームのように
-``$this->request->getData()`` を使って値を定義することができます::
+``$this->request->data()`` を使って値を定義することができます::
 
     // 何らかのコントローラ中で
     namespace App\Controller;
@@ -121,8 +121,8 @@ FormHelperによって作成される他のすべてのフォームのように
             
             if ($this->request->is('get')) {
                 // たとえばユーザーモデルの値
-                $this->request->getData('name', 'John Doe');
-                $this->request->getData('email','john.doe@example.com');
+                $this->request->data('name', 'John Doe');
+                $this->request->data('email','john.doe@example.com');
             }
             
             $this->set('contact', $contact);
