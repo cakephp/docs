@@ -220,7 +220,10 @@ Les clés possibles pour les tableaux d'association incluent:
    besoin de définir des relations hasOne multiples. La valeur par
    défaut de cette clé est le nom du model actuel (avec des underscores)
    suffixé avec ‘\_id’. Dans l'exemple ci-dessus la valeur par défaut aurait
-   été 'user\_id’.
+   été 'user\_id’. Si l'autre model utilise un autre nom que 'id' pour la clé
+   primaire, pensez à le préciser en utilisant la propriété ``$primaryKey`` de
+   la classe de Model (dans l'exemple ci-dessus, dans la classe 'Profile').
+   Sinon, les suppressions en cascade ne fonctionneront pas.
 -  **conditions**: un tableau des conditions compatibles avec find() ou un
    fragment de code SQL tel que array('Profile.approved' => true).
 -  **fields**: une liste des champs à récupérer lorsque les données du model
