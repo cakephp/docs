@@ -217,10 +217,10 @@ Possible keys for hasOne association arrays include:
    hasOne relationships. The default value for this key is the
    underscored, singular name of the current model, suffixed with
    '\_id'. In the example above, it would default to 'user\_id'. 
-   If the other model does not have 'id' as primary key and 
-   if would default to 'user\_id', then make sure you specify 
-   it in the other model, e.g. in 'Profile' model set primaryKey 
-   to  'user\_id'. Otherwise cascade deletes do not work.
+   If the other model uses another name than 'id' for the primary key,
+   then make sure to specify it using the ``$primaryKey`` property of your
+   Model class (in the example above, in the 'Profile' Model class). Otherwise
+   cascade deletes will not work.
 -  **conditions**: an array of find()-compatible conditions or SQL
    strings such as array('Profile.approved' => true)
 -  **fields**: A list of fields to be retrieved when the associated
