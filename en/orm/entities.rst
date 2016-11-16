@@ -101,11 +101,19 @@ When using ``set()`` you can update multiple properties at once using an array::
 Accessors & Mutators
 ====================
 
-.. php:method:: set($field = null, $value = null)
-
 In addition to the simple get/set interface, entities allow you to provide
 accessors and mutator methods. These methods let you customize how properties
-are read or set. For example::
+are read or set.
+
+Accessors use the convention of ``_get`` followed by the CamelCased version of
+the field name.
+
+.. php:method:: get($field)
+
+They receive the basic value stored in the ``_properties`` array
+as their only argument. Accessors will be used when saving entities, so be
+careful when defining methods that format data, as the formatted data will be
+persisted. For example::
 
     namespace App\Model\Entity;
 
@@ -118,12 +126,24 @@ are read or set. For example::
             return ucwords($title);
         }
     }
+    
+The accessor would be run when getting the property through any of these two ways::
 
-Accessors use the convention of ``_get`` followed by the CamelCased version of
-the field name. They receive the basic value stored in the ``_properties`` array
-as their only argument. Accessors will be used when saving entities, so be
-careful when defining methods that format data, as the formatted data will be
-persisted. You can customize how properties get set by defining a mutator::
+    echo $user->title;
+    echo $user->get('title');
+
+You can customize how properties get set by defining a mutator::
+
+.. php:method:: set($field = null, $value = null)
+
+Mutator methods should always return the value that should be stored in the
+property. As you can see above, you can also use mutators to set other
+calculated properties. When doing this, be careful to not introduce any loops,
+as CakePHP will not prevent infinitely looping mutator methods.
+
+Mutators allow you to convert properties as they are set, or create calculated data.
+Mutators and accessors are applied when properties are read using object
+notation, or using ``get()`` and ``set()``. For example:
 
     namespace App\Model\Entity;
 
@@ -141,13 +161,10 @@ persisted. You can customize how properties get set by defining a mutator::
 
     }
 
-Mutator methods should always return the value that should be stored in the
-property. As you can see above, you can also use mutators to set other
-calculated properties. When doing this, be careful to not introduce any loops,
-as CakePHP will not prevent infinitely looping mutator methods. Mutators allow
-you to convert properties as they are set, or create calculated data.
-Mutators and accessors are applied when properties are read using object
-notation, or using get() and set().
+The mutator would be run when setting the property through any of these two ways::
+
+    $user->title = 'foo'; // slug is set as well
+    $user->set('title', 'foo); // slug is set as well
 
 .. _entities-virtual-properties:
 
