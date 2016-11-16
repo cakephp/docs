@@ -901,7 +901,7 @@ Stored configuration data is persisted in the named cache configuration. See the
 
 ..
     :param string $key: The identifier to write to.
-        :param array $data: The data to dump.
+    :param array $data: The data to dump.
 
         This method should dump/store the provided configuration data to a key identified by ``$key``.
 
@@ -921,10 +921,17 @@ PHP の設定ファイル
 
 .. php:class:: PhpConfig
 
-Allows you to read configuration files that are stored as plain PHP files.
-You can read either files from your app's config or from plugin configs
-directories by using :term:`plugin syntax`. Files *must* return an array.
-An example configuration file would look like::
+..
+    Allows you to read configuration files that are stored as plain PHP files.
+    You can read either files from your app's config or from plugin configs
+    directories by using :term:`plugin syntax`. Files *must* return an array.
+    An example configuration file would look like::
+
+素の PHP として保存された設定ファイルを読み込むことができます。
+あなたのアプリの設定ファイル、もしくは :term:`plugin syntax` を使用してプラグインの設定ディレクトリから読み込むことができます。
+ファイルは *必ず* 配列を返却しなければいけません。
+設定ファイルの一例はこのようになります。
+::
 
     return [
         'debug' => 0,
@@ -936,24 +943,42 @@ An example configuration file would look like::
         ]
     ];
 
-Load your custom configuration file by inserting the following in
-**config/bootstrap.php**::
+..
+    Load your custom configuration file by inserting the following in **config/bootstrap.php**::
+
+カスタム設定ファイルは、以下のように **config/bootstrap.php** 内に記述して挿入してください。
+::
 
     Configure::load('customConfig');
 
-Ini Configuration Files
+..
+    Ini Configuration Files
+
+Ini設定ファイル
 -----------------------
 
 .. php:class:: IniConfig
 
-Allows you to read configuration files that are stored as plain .ini files.
-The ini files must be compatible with php's ``parse_ini_file()`` function, and
-benefit from the following improvements
+..
+    Allows you to read configuration files that are stored as plain .ini files.
+    The ini files must be compatible with php's ``parse_ini_file()`` function, and
+    benefit from the following improvements
 
-* dot separated values are expanded into arrays.
-* boolean-ish values like 'on' and 'off' are converted to booleans.
+素の .ini ファイルとして保存された設定ファイルを読み込むことができます。
+ini ファイルは php の ``parse_ini_file()`` と互換性がある必要があり、以下の改善事項の恩恵を受けます。
 
-An example ini file would look like::
+..
+    * dot separated values are expanded into arrays.
+    * boolean-ish values like 'on' and 'off' are converted to booleans.
+
+* ドット記法の値は配列に展開される
+* 'on' や 'off' のような真偽値じみた値は真偽値に変換される
+
+..
+    An example ini file would look like::
+
+ini ファイルの一例です。
+::
 
     debug = 0
 
@@ -963,21 +988,35 @@ An example ini file would look like::
     [App]
     namespace = App
 
-The above ini file, would result in the same end configuration data
-as the PHP example above. Array structures can be created either
-through dot separated values, or sections. Sections can contain
-dot separated keys for deeper nesting.
+..
+    The above ini file, would result in the same end configuration data
+    as the PHP example above. Array structures can be created either
+    through dot separated values, or sections. Sections can contain
+    dot separated keys for deeper nesting.
 
+上記 ini ファイルでは、先述した PHP の設定データと同じ結果になるでしょう。
+配列構造はドット記法の値もしくはセクションを通じて作成されます。
+セクションはドットで分割されたキーを深いネストに含むことができます。
 
-Json Configuration Files
+..
+    Json Configuration Files
+
+Json 設定ファイル
 ------------------------
 
 .. php:class:: JsonConfig
 
-Allows you to read / dump configuration files that are stored as JSON encoded
-strings in .json files.
+..
+    Allows you to read / dump configuration files that are stored as JSON encoded
+    strings in .json files.
 
-An example JSON file would look like::
+JSON 形式でエンコードされた .json 設定ファイルを読み込んだりダンプしたりできます。
+
+..
+    An example JSON file would look like::
+
+以下、JSON ファイルの一例です。
+::
 
     {
         "debug": false,
