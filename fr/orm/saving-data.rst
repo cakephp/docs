@@ -333,6 +333,21 @@ pour utiliser uniquement la clé ``_ids`` et ignorer toutes les autres données.
 Convertir des Données HasMany
 -----------------------------
 
+Si vous souhaitez mettre à jour les associations hasMany existantes et mettre à
+jour leurs propriétés, vous devriez d'abord vous assurer que votre entity est
+chargée avec l'association hasMany remplie. Vous pouvez ensuite utiliser les
+données de la requête de la façon suivante::
+
+    $data = [
+        'title' => 'Mon titre',
+        'body' => 'Le texte',
+        'comments' => [
+            ['id' => 1, 'comment' => 'Mettre à jour le premier commentaire'],
+            ['id' => 2, 'comment' => 'Mettre à jour le deuxième commentaire'],
+            ['comment' => 'Créer un nouveau commentaire'],
+        ]
+    ];
+
 Si vous sauvegardez des associations hasMany et voulez lier des enregistrements
 existants à un nouveau parent, vous pouvez utiliser le format ``_ids``::
 
