@@ -143,7 +143,7 @@ as CakePHP will not prevent infinitely looping mutator methods.
 
 Mutators allow you to convert properties as they are set, or create calculated data.
 Mutators and accessors are applied when properties are read using object
-notation, or using ``get()`` and ``set()``. For example:
+notation, or using ``get()`` and ``set()``. For example::
 
     namespace App\Model\Entity;
 
@@ -164,7 +164,7 @@ notation, or using ``get()`` and ``set()``. For example:
 The mutator would be run when setting the property through any of these two ways::
 
     $user->title = 'foo'; // slug is set as well
-    $user->set('title', 'foo); // slug is set as well
+    $user->set('title', 'foo'); // slug is set as well
 
 .. _entities-virtual-properties:
 
