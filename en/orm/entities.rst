@@ -126,7 +126,7 @@ persisted. For example::
             return ucwords($title);
         }
     }
-    
+
 The accessor would be run when getting the property through any of these two ways::
 
     echo $user->title;
@@ -141,8 +141,8 @@ property. As you can see above, you can also use mutators to set other
 calculated properties. When doing this, be careful to not introduce any loops,
 as CakePHP will not prevent infinitely looping mutator methods.
 
-Mutators allow you to convert properties as they are set, or create calculated data.
-Mutators and accessors are applied when properties are read using object
+Mutators allow you to convert properties as they are set, or create calculated
+data. Mutators and accessors are applied when properties are read using object
 notation, or using ``get()`` and ``set()``. For example::
 
     namespace App\Model\Entity;
@@ -161,7 +161,8 @@ notation, or using ``get()`` and ``set()``. For example::
 
     }
 
-The mutator would be run when setting the property through any of these two ways::
+The mutator would be run when setting the property through any of these two
+ways::
 
     $user->title = 'foo'; // slug is set as well
     $user->set('title', 'foo'); // slug is set as well
@@ -204,8 +205,8 @@ Checking if an Entity Has Been Modified
 .. php:method:: dirty($field = null, $dirty = null)
 
 You may want to make code conditional based on whether or not properties have
-changed in an entity. For example, you may only want to validate fields when they
-change::
+changed in an entity. For example, you may only want to validate fields when
+they change::
 
     // See if the title has been modified.
     $article->dirty('title');
@@ -217,9 +218,9 @@ array properties::
     $article->comments[] = $newComment;
     $article->dirty('comments', true);
 
-In addition you can also base your conditional code on the original property values
-by using the ``getOriginal()`` method. This method will either return the original
-value of the property if it has been modified or its actual value.
+In addition you can also base your conditional code on the original property
+values by using the ``getOriginal()`` method. This method will either return
+the original value of the property if it has been modified or its actual value.
 
 You can also check for changes to any property in the entity::
 
@@ -340,8 +341,8 @@ fields::
 
     $article->set($properties, ['guard' => false]);
 
-By setting the ``guard`` option to ``false``, you can ignore the accessible field
-list for a single call to ``set()``.
+By setting the ``guard`` option to ``false``, you can ignore the accessible
+field list for a single call to ``set()``.
 
 
 Checking if an Entity was Persisted
