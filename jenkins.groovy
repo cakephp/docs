@@ -28,7 +28,7 @@ job('Book - Deploy 3.x') {
     github(REPO_NAME, '3.0')
   }
   triggers {
-    githubPush()
+    scm('H/5 * * * *')
   }
   logRotator {
     daysToKeep(30)
@@ -44,7 +44,7 @@ job('Book - Deploy 2.x') {
     github(REPO_NAME, 'master')
   }
   triggers {
-    githubPush()
+    scm('H/5 * * * *')
   }
   logRotator {
     daysToKeep(30)
@@ -60,7 +60,7 @@ job('Book - Deploy 1.3') {
     github(REPO_NAME, '1.3')
   }
   triggers {
-    githubPush()
+    scm('H/5 * * * *')
   }
   logRotator {
     daysToKeep(30)
@@ -76,7 +76,7 @@ job('Book - Deploy 1.2') {
     github(REPO_NAME, '1.2')
   }
   triggers {
-    githubPush()
+    scm('H/5 * * * *')
   }
   logRotator {
     daysToKeep(30)
@@ -92,7 +92,7 @@ job('Book - Deploy 1.1') {
     github(REPO_NAME, '1.1')
   }
   triggers {
-    githubPush()
+    scm('H/5 * * * *')
   }
   logRotator {
     daysToKeep(30)
