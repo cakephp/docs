@@ -551,6 +551,8 @@ Possible keys for belongsToMany association arrays include:
   This is especially handy if you need to define multiple
   belongsToMany relationships. The default value for this key is the
   underscored, singular name of the current model, suffixed with '\_id'.
+- **bindingKey**: The name of the column in the current table, that will be used
+  for matching the ``foreignKey``. Default is the primary key.
 - **targetForeignKey**: the name of the foreign key found in the target
   model or list in case of composite foreign keys.
   The default value for this key is the underscored, singular name of
