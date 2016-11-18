@@ -584,7 +584,7 @@ to ``select()``::
     // Select id & title from articles, but all fields off of Users.
     $query = $articles->find()
         ->select(['id', 'title'])
-        ->select($articlesTable->Users)
+        ->select($articles->Users)
         ->contain(['Users']);
 
 Alternatively, if you have multiple associations, you can use ``autoFields()``::
