@@ -114,7 +114,7 @@ execute until you start fetching rows, convert it to an array, or when the
     $data = $results->toArray();
 
     // Converting the query to an array will execute it.
-    $results = $query->toArray();
+    $data = $query->toArray();
 
 .. note::
 
