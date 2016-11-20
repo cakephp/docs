@@ -161,6 +161,23 @@ UNIX システム上で ウェブサーバユーザとコマンドラインユ�
     setfacl -R -m u:${HTTPDUSER}:rwx logs
     setfacl -R -d -m u:${HTTPDUSER}:rwx logs
 
+CakePHP コンソールツールを使用するためには、 ``bin/cake`` ファイルが
+実行可能である必要があります。 \*nix または macOS 上では、以下を実行します。
+
+.. code-block:: bash
+
+    chmod +x bin/cake
+
+Windows 上では、 **.bat** ファイルが実行可能である必要があります。もし、Vagrant または、
+そのほかの仮想化環境を使用している場合、共有ディレクトリが実行可能なパーミッションで
+共有される必要があります。 (設定方法は仮想化環境のドキュメントを参照してください。)
+
+もし、なんらかの理由で、 ``bin/cake`` ファイルのパーミッションを変更できない場合、
+CakePHP コンソールは、以下のように実行できます。
+
+.. code-block:: bash
+
+    php bin/cake.php
 
 開発サーバ
 ==========
