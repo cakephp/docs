@@ -132,7 +132,7 @@ The accessor would be run when getting the property through any of these two way
     echo $user->title;
     echo $user->get('title');
 
-You can customize how properties get set by defining a mutator::
+You can customize how properties get set by defining a mutator:
 
 .. php:method:: set($field = null, $value = null)
 
