@@ -142,7 +142,7 @@ ces deux manières::
     echo $user->get('title');
 
 Vous pouvez personnaliser la façon dont les propriétés sont récupérées/définies
-en définissant un mutateur::
+en définissant un mutateur:
 
 .. php:method:: set($field = null, $value = null)
 
