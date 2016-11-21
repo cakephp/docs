@@ -80,7 +80,7 @@ suit::
         }
     }
 
-Sauvegardez ce JSON dans ``composer.json`` dans le répetoire APP de votre
+Sauvegardez ce JSON dans ``composer.json`` dans le répertoire APP de votre
 projet. Ensuite, téléchargez le fichier composer.phar dans votre projet. Après
 avoir téléchargé composer, installez CakePHP. Dans le même répertoire que votre
 fichier ``composer.json``, lancez ce qui suit::
