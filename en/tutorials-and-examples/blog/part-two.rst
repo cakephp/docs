@@ -436,6 +436,12 @@ Since we've used the :php:meth:`FormHelper::input()` method of the
 FormHelper to create our form elements, our validation error
 messages will be shown automatically.
 
+Lastly, you want to consider other forms of form security before
+you finally deploy your app. Not checking fields, or making sure
+the request came from within your site can cause problems. However,
+fortunately the :doc:`/components/security-component` is designed
+to make life easy in these regards. Check it out!
+
 Editing Posts
 =============
 
