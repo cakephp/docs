@@ -504,7 +504,7 @@ the Post example::
         // ...
         public function index() {
             $posts = $this->paginate();
-            if ($this->request->is('requested')) {
+            if ($this->request->requested) {
                 return $posts;
             }
             $this->set('posts', $posts);
