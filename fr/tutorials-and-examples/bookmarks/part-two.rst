@@ -205,12 +205,12 @@ les bookmarks. Dans notre ``BookmarksController``, ajoutez ce qui suit::
             return true;
         }
         // Tout autre action nécessite un id.
-        if (!$this->request->param('pass.0')) {
+        if (!$this->request->getParam('pass.0')) {
             return false;
         }
 
         // Vérifie que le bookmark appartient à l'utilisateur courant.
-        $id = $this->request->param('pass.0');
+        $id = $this->request->getParam('pass.0');
         $bookmark = $this->Bookmarks->get($id);
         if ($bookmark->user_id == $user['id']) {
             return true;
@@ -247,7 +247,7 @@ ressembler à ceci::
     {
         $bookmark = $this->Bookmarks->newEntity();
         if ($this->request->is('post')) {
-            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data());
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->getData());
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('Le bookmark a été sauvegardé.');
@@ -272,7 +272,7 @@ ceci::
             'contain' => ['Tags']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data());
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->getData());
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('Le bookmark a été sauvegardé.');

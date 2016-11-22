@@ -78,7 +78,7 @@
         {
             $contact = new ContactForm();
             if ($this->request->is('post')) {
-                if ($contact->execute($this->request->data())) {
+                if ($contact->execute($this->request->getData())) {
                     $this->Flash->success('すぐにご連絡いたします。');
                 } else {
                     $this->Flash->error('フォーム送信に問題がありました。');
@@ -91,7 +91,7 @@
 上の例では、データが有効な時にのみフォームの ``_execute()`` を走らせるために ``execute()`` メソッドを実行し、それに応じたフラッシュメッセージを設定しています。
 データ検証のみ行うために ``validate()`` を使うこともできます::
 
-    $isValid = $form->validate($this->request->data());
+    $isValid = $form->validate($this->request->getData());
     
 フォーム値の設定
 ================
@@ -112,7 +112,7 @@ FormHelperによって作成される他のすべてのフォームのように
         {
             $contact = new ContactForm();
             if ($this->request->is('post')) {
-                if ($contact->execute($this->request->data())) {
+                if ($contact->execute($this->request->getData())) {
                     $this->Flash->success('すぐにご連絡いたします。');
                 } else {
                     $this->Flash->error('フォーム送信に問題がありました。');

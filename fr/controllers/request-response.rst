@@ -41,9 +41,9 @@ l'utilisation des librairies en-dehors de CakePHP.
 Paramètres de la Requête
 ------------------------
 
-``Request`` propose les paramètres de routing avec la méthode ``param()``::
+``Request`` propose les paramètres de routing avec la méthode ``getParam()``::
 
-    $this->request->param('controller');
+    $this->request->getParam('controller');
 
 Tous les éléments de route :ref:`route-elements` sont accessibles à travers
 cette interface.
@@ -53,7 +53,7 @@ d'accéder aux arguments passés :ref:`passed-arguments`. Ceux-ci sont aussi tou
 les deux disponibles dans l'objet ``request``::
 
     // Arguments passés
-    $this->request->param('pass');
+    $this->request->getParam('pass');
 
 Tous vous fournissent un accès aux arguments passés. Il y a de nombreux
 paramètres importants et utiles que CakePHP utilise en interne qu'on peut aussi
@@ -75,13 +75,13 @@ Les paramètres Querystring peuvent être lus en utilisant
 :php:attr:`~Cake\\Network\\Request::$query`::
 
     // l'URL est /posts/index?page=1&sort=title
-    $this->request->query('page');
+    $this->request->getQuery('page');
 
 Vous pouvez soit directement accéder à la propriété demandée, soit vous pouvez
 utiliser ``query()`` pour lire l'URL requêtée sans erreur. Toute clé qui
 n'existe pas va retourner ``null``::
 
-    $foo = $this->request->query('valeur_qui_n_existe_pas');
+    $foo = $this->request->getQuery('valeur_qui_n_existe_pas');
     // $foo === null
 
 Si vous souhaitez accéder à tous les paramètres de requête, vous pouvez utiliser
@@ -102,11 +102,11 @@ Toutes les données POST sont accessibles en utilisant
 contient un préfix ``data`` aura ce préfixe supprimé. Par exemple::
 
     // Un input avec un attribut de nom égal à 'MyModel[title]' est accessible
-    dans $this->request->data('MyModel.title');
+    dans $this->request->getData('MyModel.title');
 
 Toute clé qui n'existe pas va retourner ``null``::
 
-    $foo = $this->request->data('Valeur.qui.n.existe.pas');
+    $foo = $this->request->getData('Valeur.qui.n.existe.pas');
     // $foo == null
 
 Accéder aux Données PUT, PATCH ou DELETE
@@ -251,7 +251,7 @@ Quelques exemples seraient::
     $this->request->addDetector(
         'awesome',
         function ($request) {
-            return $request->param('awesome');
+            return $request->getParam('awesome');
         }
     );
 
@@ -259,7 +259,7 @@ Quelques exemples seraient::
     $this->request->addDetector(
         'controller',
         function ($request, $name) {
-            return $request->param('controller') === $name;
+            return $request->getParam('controller') === $name;
         }
     );
 

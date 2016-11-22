@@ -89,7 +89,7 @@ votre controller pour traiter et valider les données de la requête::
         {
             $contact = new ContactForm();
             if ($this->request->is('post')) {
-                if ($contact->execute($this->request->data())) {
+                if ($contact->execute($this->request->getData())) {
                     $this->Flash->success('Nous reviendrons vers vous rapidement.');
                 } else {
                     $this->Flash->error('Il y a eu un problème lors de la soumission de votre formulaire.');
@@ -105,7 +105,7 @@ sont valides, et définissons un message flash en conséquence. Nous aurions
 aussi pu utiliser la méthode ``validate()`` pour valider uniquement les données
 de requête::
 
-    $isValid = $form->validate($this->request->data());
+    $isValid = $form->validate($this->request->getData());
 
 Définir des Valeurs pour le Formulaire
 ======================================
@@ -125,7 +125,7 @@ Pour définir les valeurs d'un formulaire sans model, vous pouvez utiliser
         {
             $contact = new ContactForm();
             if ($this->request->is('post')) {
-                if ($contact->execute($this->request->data())) {
+                if ($contact->execute($this->request->getData())) {
                     $this->Flash->success('Nous reviendrons vers vous rapidement.');
                 } else {
                     $this->Flash->error('Il y a eu un problème lors de la soumission de votre formulaire.');

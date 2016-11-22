@@ -177,7 +177,7 @@ de sécurité que vous voulez et le component Security les forcera au démarrage
 
         public function beforeFilter(Event $event)
         {
-            if ($this->request->param('admin')) {
+            if ($this->request->getParam('admin')) {
                 $this->Security->requireSecure();
             }
         }

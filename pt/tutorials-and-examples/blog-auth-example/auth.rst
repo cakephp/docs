@@ -88,7 +88,7 @@ geração de código ``bake`` fornecido com CakePHP::
         {
             $user = $this->Users->newEntity();
             if ($this->request->is('post')) {
-                $user = $this->Users->patchEntity($user, $this->request->data());
+                $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('O usuário foi salvo.'));
                     return $this->redirect(['action' => 'add']);
@@ -304,7 +304,7 @@ criado::
     {
         $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
-            $article = $this->Articles->patchEntity($article, $this->request->data());
+            $article = $this->Articles->patchEntity($article, $this->request->getData());
             // Adicione esta linha
             $article->user_id = $this->Auth->user('id');
             // Você também pode fazer o seguinte
@@ -377,13 +377,13 @@ o seguinte conteúdo::
     public function isAuthorized($user)
     {
         // Todos os usuários registrados podem adicionar artigos
-        if ($this->request->param('action') === 'add') {
+        if ($this->request->getParam('action') === 'add') {
             return true;
         }
 
         // Apenas o proprietário do artigo pode editar e excluí
-        if (in_array($this->request->param('action'), ['edit', 'delete'])) {
-            $articleId = (int)$this->request->param('pass.0');
+        if (in_array($this->request->getParam('action'), ['edit', 'delete'])) {
+            $articleId = (int)$this->request->getParam('pass.0');
             if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
                 return true;
             }

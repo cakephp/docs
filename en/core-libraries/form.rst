@@ -82,7 +82,7 @@ and validate request data::
         {
             $contact = new ContactForm();
             if ($this->request->is('post')) {
-                if ($contact->execute($this->request->data())) {
+                if ($contact->execute($this->request->getData())) {
                     $this->Flash->success('We will get back to you soon.');
                 } else {
                     $this->Flash->error('There was a problem submitting your form.');
@@ -97,13 +97,14 @@ In the above example, we use the ``execute()`` method to run our form's
 accordingly. We could have also used the ``validate()`` method to only validate
 the request data::
 
-    $isValid = $form->validate($this->request->data());
-    
+    $isValid = $form->validate($this->request->getData());
+
 Setting Form Values
 ===================
 
 In order to set the values for the fields of a modelless form, one can define
-the values using ``$this->request->data()``, like in all other forms created by the FormHelper::
+the values using ``$this->request->data()``, like in all other forms created by
+the FormHelper::
 
     // In a controller
     namespace App\Controller;
@@ -117,7 +118,7 @@ the values using ``$this->request->data()``, like in all other forms created by 
         {
             $contact = new ContactForm();
             if ($this->request->is('post')) {
-                if ($contact->execute($this->request->data())) {
+                if ($contact->execute($this->request->getData())) {
                     $this->Flash->success('We will get back to you soon.');
                 } else {
                     $this->Flash->error('There was a problem submitting your form.');

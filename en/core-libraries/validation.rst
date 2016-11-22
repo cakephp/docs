@@ -431,7 +431,7 @@ sending an email you could do the following::
         ->requirePresence('comment')
         ->notEmpty('comment', 'You need to give a comment.');
 
-    $errors = $validator->errors($this->request->data());
+    $errors = $validator->errors($this->request->getData());
     if (empty($errors)) {
         // Send an email.
     }
@@ -448,7 +448,7 @@ be returned per field. By default the ``errors()`` method applies rules for
 the 'create' mode. If you'd like to apply 'update' rules you can do the
 following::
 
-    $errors = $validator->errors($this->request->data(), false);
+    $errors = $validator->errors($this->request->getData(), false);
     if (empty($errors)) {
         // Send an email.
     }
@@ -471,7 +471,7 @@ saving is done automatically when using the ``newEntity()``, ``newEntities()``,
 ``patchEntity()`` or ``patchEntities()``::
 
     // In the ArticlesController class
-    $article = $this->Articles->newEntity($this->request->data());
+    $article = $this->Articles->newEntity($this->request->getData());
     if ($article->errors()) {
         // Do work to show error messages.
     }
@@ -480,7 +480,7 @@ Similarly, when you need to pre-validate multiple entities at a time, you can
 use the ``newEntities()`` method::
 
     // In the ArticlesController class
-    $entities = $this->Articles->newEntities($this->request->data());
+    $entities = $this->Articles->newEntities($this->request->getData());
     foreach ($entities as $entity) {
         if (!$entity->errors()) {
                 $this->Articles->save($entity);

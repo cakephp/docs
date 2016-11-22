@@ -113,7 +113,7 @@ serait::
     {
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->data());
+            $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user, ['validate' => 'registration'])) {
                 $this->Flash->success(__('Vous êtes maintenant enregistré.'));
             } else {

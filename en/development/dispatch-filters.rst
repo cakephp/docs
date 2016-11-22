@@ -32,8 +32,8 @@ features that all applications are likely to need. The built-in filters are:
         DispatcherFactory::add('Asset', ['cacheTime' => '+24 hours']);
 
 * ``RoutingFilter`` applies application routing rules to the request URL.
-  Populates ``$request->param()`` with the results of routing.
-* ``ControllerFactory`` uses ``$request->param()`` to locate the controller that
+  Populates ``$request->getParam()`` with the results of routing.
+* ``ControllerFactory`` uses ``$request->getParam()`` to locate the controller that
   will handle the current request.
 * ``LocaleSelector`` enables automatic language switching from the ``Accept-Language``
   header sent by the browser.
@@ -119,7 +119,7 @@ page. First, create the file. Its contents should look like::
         {
             $request = $event->data['request'];
             $response = $event->data['response'];
-            if (!$request->cookie('landing_page')) {
+            if (!$request->getCookie('landing_page')) {
                 $response->cookie([
                     'name' => 'landing_page',
                     'value' => $request->here(),

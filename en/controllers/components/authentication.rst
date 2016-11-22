@@ -703,7 +703,7 @@ function accordingly::
                 $this->Auth->setUser($user);
                 if ($this->Auth->authenticationProvider()->needsPasswordRehash()) {
                     $user = $this->Users->get($this->Auth->user('id'));
-                    $user->password = $this->request->data('password');
+                    $user->password = $this->request->getData('password');
                     $this->Users->save($user);
                 }
                 return $this->redirect($this->Auth->redirectUrl());
@@ -727,7 +727,7 @@ calling ``$this->Auth->setUser()`` with the user data you want to 'login'::
 
     public function register()
     {
-        $user = $this->Users->newEntity($this->request->data());
+        $user = $this->Users->newEntity($this->request->getData());
         if ($this->Users->save($user)) {
             $this->Auth->setUser($user->toArray());
             return $this->redirect([
@@ -998,12 +998,12 @@ checked::
         public function isAuthorized($user = null)
         {
             // Any registered user can access public functions
-            if (!$this->request->param('prefix')) {
+            if (!$this->request->getParam('prefix')) {
                 return true;
             }
 
             // Only admins can access admin functions
-            if ($this->request->param('prefix') === 'admin') {
+            if ($this->request->getParam('prefix') === 'admin') {
                 return (bool)($user['role'] === 'admin');
             }
 

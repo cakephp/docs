@@ -269,7 +269,7 @@ ArticlesController::
         {
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
-                $article = $this->Articles->patchEntity($article, $this->request->data());
+                $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
                     return $this->redirect(['action' => 'index']);
@@ -298,7 +298,7 @@ de nuestra aplicación. En este caso, utilizamos el método
 petición HTTP POST.
 
 Cuando un usuario utiliza un formulario y efectúa un POST a la aplicación, esta
-información está disponible en ``$this->request->data()``. Puedes usar la función
+información está disponible en ``$this->request->getData()``. Puedes usar la función
 :php:func:`pr()` o :php:func:`debug()` para mostrar el contenido de esa variable
 y ver la pinta que tiene.
 
@@ -424,7 +424,7 @@ ser la acción ``edit()`` del controlador ``ArticlesController``::
     {
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
-            $this->Articles->patchEntity($article, $this->request->data());
+            $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Tu artículo ha sido actualizado.'));
                 return $this->redirect(['action' => 'index']);

@@ -39,9 +39,9 @@ use libraries from outside of CakePHP.
 Request Parameters
 ------------------
 
-The request exposes the routing parameters through the ``param()`` method::
+The request exposes the routing parameters through the ``getParam()`` method::
 
-    $this->request->param('controller');
+    $this->request->getParam('controller');
 
 All :ref:`route-elements` are accessed through this interface.
 
@@ -50,7 +50,7 @@ In addition to :ref:`route-elements`, you also often need access to
 well::
 
     // Passed arguments
-    $this->request->param('pass');
+    $this->request->getParam('pass');
 
 Will all provide you access to the passed arguments. There
 are several important/useful parameters that CakePHP uses internally, these
@@ -72,14 +72,17 @@ Query string parameters can be read using
 :php:attr:`~Cake\\Network\\Request::$query`::
 
     // URL is /posts/index?page=1&sort=title
-    $this->request->query('page');
+    $this->request->getQuery('page');
 
 You can either directly access the query property, or you can use
 ``query()`` method to read the URL query array in an error-free manner.
 Any keys that do not exist will return ``null``::
 
-    $foo = $this->request->query('value_that_does_not_exist');
+    $foo = $this->request->getQuery('value_that_does_not_exist');
     // $foo === null
+
+    // You can also provide default values
+    $foo = $this->request->getQuery('does_not_exist', 'default val');
 
 If you want to access all the query parameters you can use
 ``getQueryParams()``::
@@ -99,11 +102,11 @@ Any form data that contains a ``data`` prefix will have that data prefix
 removed. For example::
 
     // An input with a name attribute equal to 'MyModel[title]' is accessible at
-    $this->request->data('MyModel.title');
+    $this->request->getData('MyModel.title');
 
 Any keys that do not exist will return ``null``::
 
-    $foo = $this->request->data('Value.that.does.not.exist');
+    $foo = $this->request->getData('Value.that.does.not.exist');
     // $foo == null
 
 PUT, PATCH or DELETE Data
@@ -242,7 +245,7 @@ Some examples would be::
     $this->request->addDetector(
         'awesome',
         function ($request) {
-            return $request->param('awesome');
+            return $request->getParam('awesome');
         }
     );
 
@@ -250,7 +253,7 @@ Some examples would be::
     $this->request->addDetector(
         'controller',
         function ($request, $name) {
-            return $request->param('controller') === $name;
+            return $request->getParam('controller') === $name;
         }
     );
 

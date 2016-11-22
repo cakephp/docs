@@ -110,7 +110,7 @@ input-tags, receive their values from.
 
 By default FormHelper draws its values from the 'context'.  The default
 contexts, such as ``EntityContext``, will fetch data from the current entity, or
-from ``$request->data()``.
+from ``$request->getData()``.
 
 If however, you are building a form that needs to read from the query string,
 you can use ``valueSource()`` to change where ``FormHelper`` reads data input
@@ -549,7 +549,7 @@ common options shared by all input methods are as follows:
   .. note::
 
     You cannot use ``default`` to check a checkbox - instead you might
-    set the value in ``$this->request->data()`` in your controller,
+    set the value in ``$this->request->getData()`` in your controller,
     or set the input option ``checked`` to ``true``.
 
     Beware of using ``false`` to assign a default value. A ``false`` value is
@@ -558,7 +558,7 @@ common options shared by all input methods are as follows:
 
 * ``$options['value']`` Used to set a specific value for the input field. This
   will override any value that may else be injected from the context, such as
-  Form, Entity or ``request->data()`` etc.
+  Form, Entity or ``request->getData()`` etc.
 
   .. note::
 
@@ -629,7 +629,7 @@ Options for Select, Checkbox and Radio Inputs
   Options can also supplied as key-value pairs.
 
 * ``$options['hiddenField']`` For certain input types (checkboxes, radios) a
-  hidden input is created so that the key in ``$this->request->data()`` will exist
+  hidden input is created so that the key in ``$this->request->getData()`` will exist
   even without a value specified:
 
   .. code-block:: html
@@ -798,7 +798,7 @@ Will output:
 
     <textarea name="notes"></textarea>
 
-If the form is edited (that is, the array ``$this->request->data()`` will
+If the form is edited (that is, the array ``$this->request->getData()`` will
 contain the information saved for the ``User`` model), the value
 corresponding to ``notes`` field will automatically be added to the HTML
 generated. Example:
@@ -1178,7 +1178,7 @@ of options:
 * ``round`` - Set to ``up`` or ``down`` if you want to force rounding in either
   direction. Defaults to null.
 * ``default`` The default value to be used by the input. A value in
-  ``$this->request->data()`` matching the field name will override this value. If
+  ``$this->request->getData()`` matching the field name will override this value. If
   no default is provided ``time()`` will be used.
 * ``timeFormat`` The time format to use, either 12 or 24.
 * ``second`` Set to ``true`` to enable seconds drop down.
@@ -1232,7 +1232,7 @@ empty option:
 * ``empty`` - If ``true``, the empty select option is shown. If a string,
   that string is displayed as the empty element.
 * ``default`` | ``value`` The default value to be used by the input. A value in
-  ``$this->request->data()`` matching the field name will override this value.
+  ``$this->request->getData()`` matching the field name will override this value.
   If no default is provided ``time()`` will be used.
 * ``timeFormat`` The time format to use, either 12 or 24. Defaults to 24.
 * ``second`` Set to ``true`` to enable seconds drop down.
@@ -1647,11 +1647,13 @@ contain an array of templates indexed by name::
 
 Any templates you define will replace the default ones included in the helper.
 Templates that are not replaced, will continue to use the default values.
-You can also change the templates at runtime using the ``templates()`` method::
+You can also change the templates at runtime using the ``setTemplates()`` method::
 
     $myTemplates = [
         'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
+    $this->Form->setTemplates($myTemplates);
+    // Prior to 3.4
     $this->Form->templates($myTemplates);
 
 .. warning::
@@ -1675,7 +1677,7 @@ If that container is missing the ``inputContainer`` template will be used. For
 example::
 
     // Add custom radio wrapping HTML
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'radioContainer' => '<div class="form-radio">{{content}}</div>'
     ]);
 
@@ -1689,7 +1691,7 @@ used if it is present. If that template is missing by default each set of label
 & input is rendered using the ``formGroup`` template. For example::
 
     // Add custom radio form group
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'radioFormGroup' => '<div class="radio">{{label}}{{input}}</div>'
     ]);
 
@@ -1700,7 +1702,7 @@ You can add additional template placeholders in custom templates, and populate
 those placeholders when generating inputs::
 
     // Add a template with the help placeholder.
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'inputContainer' => '<div class="input {{type}}{{required}}">
             {{content}} <span class="help">{{help}}</span></div>'
     ]);
@@ -1721,7 +1723,7 @@ This helps make it easier to integrate popular CSS frameworks. If you need to
 place checkbox/radio inputs outside of the label you can do so by modifying the
 templates::
 
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'nestingLabel' => '{{input}}<label{{attrs}}>{{text}}</label>',
         'formGroup' => '{{input}}{{label}}',
     ]);
@@ -1839,7 +1841,7 @@ create the following inputs::
 The above inputs could then be marshalled into a completed entity graph using
 the following code in your controller::
 
-    $article = $this->Articles->patchEntity($article, $this->request->data(), [
+    $article = $this->Articles->patchEntity($article, $this->request->getData(), [
         'associated' => [
             'Authors',
             'Authors.Profiles',

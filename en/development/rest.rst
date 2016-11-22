@@ -51,7 +51,7 @@ controller might look something like this::
 
         public function add()
         {
-            $recipe = $this->Recipes->newEntity($this->request->data());
+            $recipe = $this->Recipes->newEntity($this->request->getData());
             if ($this->Recipes->save($recipe)) {
                 $message = 'Saved';
             } else {
@@ -68,7 +68,7 @@ controller might look something like this::
         {
             $recipe = $this->Recipes->get($id);
             if ($this->request->is(['post', 'put'])) {
-                $recipe = $this->Recipes->patchEntity($recipe, $this->request->data());
+                $recipe = $this->Recipes->patchEntity($recipe, $this->request->getData());
                 if ($this->Recipes->save($recipe)) {
                     $message = 'Saved';
                 } else {
@@ -148,9 +148,9 @@ as input. Not to worry, the
 :php:class:`Cake\\Routing\\Router` classes make things much easier. If a POST or
 PUT request has an XML content-type, then the input is run through  CakePHP's
 :php:class:`Xml` class, and the array representation of the data is assigned to
-``$this->request->data()``.  Because of this feature, handling XML and POST data in
+``$this->request->getData()``.  Because of this feature, handling XML and POST data in
 parallel is seamless: no changes are required to the controller or model code.
-Everything you need should end up in ``$this->request->data()``.
+Everything you need should end up in ``$this->request->getData()``.
 
 Accepting Input in Other Formats
 ================================
@@ -159,7 +159,7 @@ Typically REST applications not only output content in alternate data formats,
 but also accept data in different formats. In CakePHP, the
 :php:class:`RequestHandlerComponent` helps facilitate this. By default,
 it will decode any incoming JSON/XML input data for POST/PUT requests
-and supply the array version of that data in ``$this->request->data()``.
+and supply the array version of that data in ``$this->request->getData()``.
 You can also wire in additional deserializers for alternate formats if you
 need them, using :php:meth:`RequestHandler::addInputType()`.
 

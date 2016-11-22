@@ -22,7 +22,7 @@ CakePHP ではデータの検証には二つの段階があります:
 返されたエンティティはエラーを含んだ状態になります。
 エラーのあるフィールドは返されたエンティティには含まれません。 ::
 
-    $article = $articles->newEntity($this->request->data());
+    $article = $articles->newEntity($this->request->getData());
     if ($article->errors()) {
         // エンティティ検証失敗。
     }

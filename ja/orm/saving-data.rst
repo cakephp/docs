@@ -171,7 +171,7 @@ Table クラスは、リクエストデータを一つまたは複数のエン�
     $articles = TableRegistry::get('Articles');
 
     // 検証して Entity オブジェクトに変換します。
-    $entity = $articles->newEntity($this->request->data());
+    $entity = $articles->newEntity($this->request->getData());
 
 .. note::
 
@@ -210,7 +210,7 @@ Table クラスは、リクエストデータを一つまたは複数のエン�
     $articles = TableRegistry::get('Articles');
 
     // 入れ子になったアソシエーション付きの新しいエンティティ
-    $entity = $articles->newEntity($this->request->data(), [
+    $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags', 'Comments' => ['associated' => ['Users']]
         ]
@@ -229,7 +229,7 @@ Table クラスは、リクエストデータを一つまたは複数のエン�
     $articles = TableRegistry::get('Articles');
 
     // ドット記法を用いた、入れ子になったアソシエーション付きの新しいエンティティ
-    $entity = $articles->newEntity($this->request->data(), [
+    $entity = $articles->newEntity($this->request->getData(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
 
@@ -241,7 +241,7 @@ Table クラスは、リクエストデータを一つまたは複数のエン�
 
     // Tags アソシエーションの検証を回避して
     // Comments.Users 用に 'signup' の検証セットを指定します
-    $entity = $articles->newEntity($this->request->data(), [
+    $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags' => ['validate' => false],
             'Comments.Users' => ['validate' => 'signup']
@@ -346,7 +346,7 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
 
     // コントローラの中で。
     $articles = TableRegistry::get('Articles');
-    $entities = $articles->newEntities($this->request->data());
+    $entities = $articles->newEntities($this->request->getData());
 
 この場合には、複数の記事用のリクエストデータはこうなるべきです。 ::
 
@@ -396,7 +396,7 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
 
     // コントローラの中で
     $articles = TableRegistry::get('Articles');
-    $entity = $articles->newEntity($this->request->data(), [
+    $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags', 'Comments' => [
                 'associated' => [
@@ -429,7 +429,7 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
     // コントローラの中で。
     $articles = TableRegistry::get('Articles');
     $article = $articles->get(1);
-    $articles->patchEntity($article, $this->request->data());
+    $articles->patchEntity($article, $this->request->getData());
     $articles->save($article);
 
 
@@ -449,7 +449,7 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
 当該のエンティティ、または何らかのアソシエーションに対して使われる検証セットを
 変更することもできます。 ::
 
-    $articles->patchEntity($article, $this->request->data(), [
+    $articles->patchEntity($article, $this->request->getData(), [
         'validate' => 'custom',
         'associated' => ['Tags', 'Comments.Users' => ['validate' => 'signup']]
     ]);
@@ -465,7 +465,7 @@ HasMany と BelongsToMany へのパッチ
     // コントローラの中で。
     $associated = ['Tags', 'Comments.Users'];
     $article = $articles->get(1, ['contain' => $associated]);
-    $articles->patchEntity($article, $this->request->data(), [
+    $articles->patchEntity($article, $this->request->getData(), [
         'associated' => $associated
     ]);
     $articles->save($article);
@@ -581,7 +581,7 @@ hasMany と belongsToMany アソシエーションに対してのパッチのた
     // コントローラの中で。
     $articles = TableRegistry::get('Articles');
     $list = $articles->find('popular')->toArray();
-    $patched = $articles->patchEntities($list, $this->request->data());
+    $patched = $articles->patchEntities($list, $this->request->getData());
     foreach ($patched as $entity) {
         $articles->save($entity);
     }
@@ -592,7 +592,7 @@ hasMany と belongsToMany アソシエーションに対してのパッチのた
     // コントローラの中で。
     $patched = $articles->patchEntities(
         $list,
-        $this->request->data(),
+        $this->request->getData(),
         ['associated' => ['Tags', 'Comments.Users']]
     );
 
@@ -715,7 +715,7 @@ CakePHP の検証機能をどう使うかについてより詳しい情報があ
 
   // コントローラのの中で
   $articles = TableRegistry::get('Articles');
-  $article = $articles->newEntity($this->request->data());
+  $article = $articles->newEntity($this->request->getData());
   if ($articles->save($article)) {
       // ...
   }

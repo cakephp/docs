@@ -274,7 +274,7 @@ informativa do CakePHP. Vamos implementar esse método ausente agora. Em
 
     public function tags()
     {
-        $tags = $this->request->param('pass');
+        $tags = $this->request->getParam('pass');
         $bookmarks = $this->Bookmarks->find('tagged', [
             'tags' => $tags
         ]);

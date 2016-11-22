@@ -35,8 +35,8 @@ Les filtres intégrés sont:
         DispatcherFactory::add('Asset', ['cacheTime' => '+24 hours']);
 
 * ``RoutingFilter`` applique les règles de routing de l'application pour l'URL
-  de la requête. Remplit ``$request->param()`` avec les résultats de routing.
-* ``ControllerFactory`` utilise ``$request->param()`` pour localiser le
+  de la requête. Remplit ``$request->getParam()`` avec les résultats de routing.
+* ``ControllerFactory`` utilise ``$request->getParam()`` pour localiser le
   controller qui gère la requête courante.
 * ``LocaleSelector`` active le langage automatiquement en changeant le header
   ``Accept-Language`` envoyé par le navigateur.
@@ -128,7 +128,7 @@ la page d'accueil. Premièrement, créez le fichier. Son contenu doit ressembler
         {
             $request = $event->data['request'];
             $response = $event->data['response'];
-            if (!$request->cookie('landing_page')) {
+            if (!$request->getCookie('landing_page')) {
                 $response->cookie([
                     'name' => 'landing_page',
                     'value' => $request->here(),
