@@ -191,12 +191,14 @@ actually exist. For example if your users table has ``first_name`` and
 
     }
 
-You can access virtual fields as if they existed on the entity. The property
+You can access virtual properties as if they existed on the entity. The property
 name will be the lower case and underscored version of the method::
 
     echo $user->full_name;
 
-Do bear in mind that virtual fields cannot be used in finds.
+Do bear in mind that virtual properties cannot be used in finds. If you want
+virtual properties to be part of JSON or array representations of your entities,
+see :ref:`exposing-virtual-properties`.
 
 
 Checking if an Entity Has Been Modified
@@ -457,6 +459,8 @@ When converting an entity to an JSON the virtual & hidden field lists are
 applied. Entities are recursively converted to JSON as well. This means that if you
 eager loaded entities and their associations CakePHP will correctly handle
 converting the associated data into the correct format.
+
+.. _exposing-virtual-properties:
 
 Exposing Virtual Properties
 ---------------------------
