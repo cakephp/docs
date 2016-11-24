@@ -378,7 +378,7 @@ transport). To start off your file should look like::
     {
         public function send(Email $email)
         {
-            // Magic inside!
+            // Do something.
         }
     }
 

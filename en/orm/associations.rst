@@ -204,7 +204,7 @@ Possible keys for hasOne association arrays include:
   associated table into the source table results. By default this is the
   underscored & singular name of the association so ``address`` in our example.
 - **strategy**: Defines the query strategy to use. Defaults to 'join'. The other
-  valid value is 'select', which utilizes sub-queries instead.
+  valid value is 'select', which utilizes a separate query instead.
 - **finder**: The finder method to use when loading associated records.
 
 Once this association has been defined, find operations on the Users table can
@@ -291,6 +291,8 @@ Possible keys for belongsTo association arrays include:
 - **propertyName**: The property name that should be filled with data from the
   associated table into the source table results. By default this is the
   underscored & singular name of the association so ``user`` in our example.
+- **strategy**: Defines the query strategy to use. Defaults to 'join'. The other
+  valid value is 'select', which utilizes a separate query instead.
 - **finder**: The finder method to use when loading associated records.
 
 Once this association has been defined, find operations on the User table can
@@ -549,6 +551,8 @@ Possible keys for belongsToMany association arrays include:
   This is especially handy if you need to define multiple
   belongsToMany relationships. The default value for this key is the
   underscored, singular name of the current model, suffixed with '\_id'.
+- **bindingKey**: The name of the column in the current table, that will be used
+  for matching the ``foreignKey``. Default is the primary key.
 - **targetForeignKey**: the name of the foreign key found in the target
   model or list in case of composite foreign keys.
   The default value for this key is the underscored, singular name of

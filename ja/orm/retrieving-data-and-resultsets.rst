@@ -109,7 +109,7 @@ Query オブジェクトは怠惰に評価され、行のフェッチ、配列�
     $data = $results->toArray();
 
     // クエリから配列への変換はクエリを実行する
-    $results = $query->toArray();
+    $data = $query->toArray();
 
 .. note::
 
@@ -555,7 +555,7 @@ contain に条件を渡す
     // Articles から id と title を、 Users から全列を select する
     $query = $articles->find()
         ->select(['id', 'title'])
-        ->select($articlesTable->Users)
+        ->select($articles->Users)
         ->contain(['Users']);
 
 別の方法として、複数の関連がある場合には、 ``autoFields()`` を使うことができます。 ::

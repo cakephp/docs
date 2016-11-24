@@ -126,13 +126,13 @@ persisted. For example::
             return ucwords($title);
         }
     }
-    
+
 The accessor would be run when getting the property through any of these two ways::
 
     echo $user->title;
     echo $user->get('title');
 
-You can customize how properties get set by defining a mutator::
+You can customize how properties get set by defining a mutator:
 
 .. php:method:: set($field = null, $value = null)
 
@@ -141,9 +141,9 @@ property. As you can see above, you can also use mutators to set other
 calculated properties. When doing this, be careful to not introduce any loops,
 as CakePHP will not prevent infinitely looping mutator methods.
 
-Mutators allow you to convert properties as they are set, or create calculated data.
-Mutators and accessors are applied when properties are read using object
-notation, or using ``get()`` and ``set()``. For example:
+Mutators allow you to convert properties as they are set, or create calculated
+data. Mutators and accessors are applied when properties are read using object
+notation, or using ``get()`` and ``set()``. For example::
 
     namespace App\Model\Entity;
 
@@ -161,15 +161,16 @@ notation, or using ``get()`` and ``set()``. For example:
 
     }
 
-The mutator would be run when setting the property through any of these two ways::
+The mutator would be run when setting the property through any of these two
+ways::
 
     $user->title = 'foo'; // slug is set as well
-    $user->set('title', 'foo); // slug is set as well
+    $user->set('title', 'foo'); // slug is set as well
 
 .. _entities-virtual-properties:
 
-Creating Virtual Fields
------------------------
+Creating Virtual Properties
+---------------------------
 
 By defining accessors you can provide access to fields/properties that do not
 actually exist. For example if your users table has ``first_name`` and
@@ -190,12 +191,14 @@ actually exist. For example if your users table has ``first_name`` and
 
     }
 
-You can access virtual fields as if they existed on the entity. The property
+You can access virtual properties as if they existed on the entity. The property
 name will be the lower case and underscored version of the method::
 
     echo $user->full_name;
 
-Do bear in mind that virtual fields cannot be used in finds.
+Do bear in mind that virtual properties cannot be used in finds. If you want
+virtual properties to be part of JSON or array representations of your entities,
+see :ref:`exposing-virtual-properties`.
 
 
 Checking if an Entity Has Been Modified
@@ -204,8 +207,8 @@ Checking if an Entity Has Been Modified
 .. php:method:: dirty($field = null, $dirty = null)
 
 You may want to make code conditional based on whether or not properties have
-changed in an entity. For example, you may only want to validate fields when they
-change::
+changed in an entity. For example, you may only want to validate fields when
+they change::
 
     // See if the title has been modified.
     $article->dirty('title');
@@ -217,9 +220,9 @@ array properties::
     $article->comments[] = $newComment;
     $article->dirty('comments', true);
 
-In addition you can also base your conditional code on the original property values
-by using the ``getOriginal()`` method. This method will either return the original
-value of the property if it has been modified or its actual value.
+In addition you can also base your conditional code on the original property
+values by using the ``getOriginal()`` method. This method will either return
+the original value of the property if it has been modified or its actual value.
 
 You can also check for changes to any property in the entity::
 
@@ -340,8 +343,8 @@ fields::
 
     $article->set($properties, ['guard' => false]);
 
-By setting the ``guard`` option to ``false``, you can ignore the accessible field
-list for a single call to ``set()``.
+By setting the ``guard`` option to ``false``, you can ignore the accessible
+field list for a single call to ``set()``.
 
 
 Checking if an Entity was Persisted
@@ -457,10 +460,12 @@ applied. Entities are recursively converted to JSON as well. This means that if 
 eager loaded entities and their associations CakePHP will correctly handle
 converting the associated data into the correct format.
 
+.. _exposing-virtual-properties:
+
 Exposing Virtual Properties
 ---------------------------
 
-By default virtual properties are not exported when converting entities to
+By default virtual fields are not exported when converting entities to
 arrays or JSON. In order to expose virtual properties you need to make them
 visible. When defining your entity class you can provide a list of virtual
 properties that should be exposed::

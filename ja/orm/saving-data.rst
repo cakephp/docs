@@ -319,6 +319,20 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
 HasMany データの変換
 --------------------
 
+もし、既存の hasMeny アソシエーションを更新したり、それらのプロパティを更新したい場合、
+エンティティに hasMany アソシエーションが設定されていることを最初に確認する必要があります。
+そのとき、以下のようなリクエストデータが使えます。 ::
+
+    $data = [
+        'title' => 'My Title',
+        'body' => 'The text',
+        'comments' => [
+            ['id' => 1, 'comment' => 'Update the first comment'],
+            ['id' => 2, 'comment' => 'Update the second comment'],
+            ['comment' => 'Create a new comment'],
+        ]
+    ];
+
 もし hasMany アソシエーションを保存しようとしている場合で、既存のレコードを
 新しい親レコードに紐付けたいのであれば、 ``_ids`` 形式を使うことができます。 ::
 
@@ -508,8 +522,8 @@ hasMany の belongsToMany アソシエーションについても同じことが
 
 .. note::
 
-    hasMany と belongsToMany アソシエーションでは、もしデータ配列中のどのレコードにも
-    マッチしないエンティティがあった場合、それらのレコードは結果のエンティティから
+    hasMany と belongsToMany アソシエーションでは、もしデータ配列中のレコードと
+    主キーがマッチしないエンティティがあった場合、それらのレコードは結果のエンティティから
     除かれてしまいます。
 
     ``patchEntity()`` も ``patchEntities()`` もデータを保存するわけではないことを

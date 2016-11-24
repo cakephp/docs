@@ -207,6 +207,7 @@ IDE が空白の "trim right" の設定がされているかどうかを確か�
         if (expr) {
             statement;
         }
+
         return $var;
     }
 
@@ -224,6 +225,7 @@ false を、関数呼び出しが成功したかどうかを判定できるよ�
         if (!($dnsInfo) || !($dnsInfo['phpType'])) {
             return $this->addError();
         }
+
         return true;
     }
 
