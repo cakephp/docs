@@ -53,8 +53,8 @@ outputting :php:attr:`Model::$validationErrors`::
 There are a few other save-related methods in the model that you'll
 find useful:
 
-:php:meth:`Model::set($one, $two = null)`
-=========================================
+`Model::set($one, $two = null)`
+===============================
 
 ``Model::set()`` can be used to set one or many fields of data to the
 data array inside a model. This is useful when using models with
@@ -78,8 +78,8 @@ single fields, in an ActiveRecord approach. You can also use
 The above would update the title and published fields and save the
 record to the database.
 
-:php:meth:`Model::clear()`
-==========================
+`Model::clear()`
+================
 
 This method can be used to reset model state and clear out any unsaved data and
 validation errors.
@@ -87,8 +87,8 @@ validation errors.
 .. versionadded:: 2.4
 
 
-:php:meth:`Model::save(array $data = null, boolean $validate = true, array $fieldList = array())`
-=================================================================================================
+`Model::save(array $data = null, boolean $validate = true, array $fieldList = array())`
+=======================================================================================
 
 Featured above, this method saves array-formatted data. The second
 parameter allows you to sidestep validation, and the third allows
@@ -159,8 +159,8 @@ you are passing the primary key field into the data array::
     // This will update Recipe with id 10
     $this->Recipe->save($data);
 
-:php:meth:`Model::create(array $data = array())`
-================================================
+`Model::create(array $data = array())`
+======================================
 
 This method resets the model state for saving new information.
 It does not actually create a record in the database but clears
@@ -177,8 +177,8 @@ If ``false`` or ``null`` are passed for the ``$data`` parameter, Model::$data wi
     If you want to insert a new row instead of updating an existing one you should always call create() first.
     This avoids conflicts with possible prior save calls in callbacks or other places.
 
-:php:meth:`Model::saveField(string $fieldName, string $fieldValue, $validate = false)`
-======================================================================================
+`Model::saveField(string $fieldName, string $fieldValue, $validate = false)`
+============================================================================
 
 Used to save a single field value. Set the ID of the model
 (``$this->ModelName->id = $id``) just before calling
@@ -208,8 +208,8 @@ as keys:
   will enable only those callbacks.
 * ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
 
-:php:meth:`Model::updateAll(array $fields, mixed $conditions)`
-==============================================================
+`Model::updateAll(array $fields, mixed $conditions)`
+====================================================
 
 Updates one or more records in a single call. Fields to be updated,
 along with their values, are identified by the ``$fields`` array.
@@ -257,8 +257,8 @@ By default, updateAll() will automatically join any belongsTo
 association for databases that support joins. To prevent this,
 temporarily unbind the associations.
 
-:php:meth:`Model::saveMany(array $data = null, array $options = array())`
-=========================================================================
+`Model::saveMany(array $data = null, array $options = array())`
+===============================================================
 
 Method used to save multiple rows of the same model at once. The following
 options may be used:
@@ -326,8 +326,8 @@ one you just need to add the primary key index to the data row::
 
 .. _Model-saveAssociated:
 
-:php:meth:`Model::saveAssociated(array $data = null, array $options = array())`
-===============================================================================
+`Model::saveAssociated(array $data = null, array $options = array())`
+=====================================================================
 
 Method used to save multiple model associations at once. The following
 options may be used:
@@ -436,8 +436,8 @@ as values. The model names are not nested like in the data to be saved.
     You can now save deeper associated data as well with setting ``$options['deep'] = true;``
 
 
-:php:meth:`Model::saveAll(array $data = null, array $options = array())`
-========================================================================
+`Model::saveAll(array $data = null, array $options = array())`
+==============================================================
 
 The ``saveAll`` function is just a wrapper around the ``saveMany`` and ``saveAssociated``
 methods. it will inspect the data and determine what type of save it should perform. If
