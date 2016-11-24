@@ -169,8 +169,8 @@ ways::
 
 .. _entities-virtual-properties:
 
-Creating Virtual Fields
------------------------
+Creating Virtual Properties
+---------------------------
 
 By defining accessors you can provide access to fields/properties that do not
 actually exist. For example if your users table has ``first_name`` and
@@ -191,12 +191,14 @@ actually exist. For example if your users table has ``first_name`` and
 
     }
 
-You can access virtual fields as if they existed on the entity. The property
+You can access virtual properties as if they existed on the entity. The property
 name will be the lower case and underscored version of the method::
 
     echo $user->full_name;
 
-Do bear in mind that virtual fields cannot be used in finds.
+Do bear in mind that virtual properties cannot be used in finds. If you want
+virtual properties to be part of JSON or array representations of your entities,
+see :ref:`exposing-virtual-properties`.
 
 
 Checking if an Entity Has Been Modified
@@ -458,10 +460,12 @@ applied. Entities are recursively converted to JSON as well. This means that if 
 eager loaded entities and their associations CakePHP will correctly handle
 converting the associated data into the correct format.
 
+.. _exposing-virtual-properties:
+
 Exposing Virtual Properties
 ---------------------------
 
-By default virtual properties are not exported when converting entities to
+By default virtual fields are not exported when converting entities to
 arrays or JSON. In order to expose virtual properties you need to make them
 visible. When defining your entity class you can provide a list of virtual
 properties that should be exposed::
