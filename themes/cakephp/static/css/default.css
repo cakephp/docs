@@ -430,6 +430,7 @@ h6:hover .headerlink {
 
 
 /* inline code */
+code,
 tt {
     font-family: "Roboto Mono", "Consolas", "Monaco", monospace;
     font-size: 105%;
@@ -437,9 +438,11 @@ tt {
     padding: 0px 2px;
     color: #363637;
 }
+a code,
 a tt {
     color: #428bca;
 }
+dl code,
 dl tt {
     border-bottom: none;
 }
@@ -636,6 +639,7 @@ dl.const em.property {
     font-size: 14px;
     margin-bottom: 5px;
 }
+dt code,
 dt tt {
     background: none;
 }
