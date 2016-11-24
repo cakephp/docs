@@ -46,8 +46,8 @@ find 方法都会将数据包装成这种格式。如果使用 :php:class:`FormH
 
 模型中还有其它一些与保存相关的方法会对你有用：
 
-:php:meth:`Model::set($one, $two = null)`
-=========================================
+`Model::set($one, $two = null)`
+===============================
 
 ``Model::set()`` 可以用于将一个或多个字段的数据设置到模型的 data 数组中。这可用
 于把模型和模型提供的 ActiveRecord 特性一起使用::
@@ -68,16 +68,16 @@ find 方法都会将数据包装成这种格式。如果使用 :php:class:`FormH
 
 上例会更新 title 和 published 字段，并把记录保存到数据库中。
 
-:php:meth:`Model::clear()`
-==========================
+`Model::clear()`
+================
 
 该方法可用于重置模型状态，并清除任何未保存数据及验证错误。
 
 .. versionadded:: 2.4
 
 
-:php:meth:`Model::save(array $data = null, boolean $validate = true, array $fieldList = array())`
-=================================================================================================
+`Model::save(array $data = null, boolean $validate = true, array $fieldList = array())`
+=======================================================================================
 
 如前所示，这个方法保存数组格式的数据。第二个参数让你可以跳过验证，第三个参数让你
 可以提供要保存的模型字段列表。为了增强安全性，可以使用 ``$fieldList`` 限制要保存
@@ -139,8 +139,8 @@ save 方法还有另外一种语法::
     // 会更新 id 为 10 的 Recipe 记录
     $this->Recipe->save($data);
 
-:php:meth:`Model::create(array $data = array())`
-================================================
+`Model::create(array $data = array())`
+======================================
 
 这个方法为保存新数据重置模型的状态。实际上它并不在数据库中创建新记录，而是清除
 Model::$id，并按照数据库字段的默认值设置 Model::$data。如果没有定义数据库字段的
@@ -156,8 +156,8 @@ Model::$id，并按照数据库字段的默认值设置 Model::$data。如果没
     如果要插入一新行而不是更新已存在的一行，应当总是先调用 create()。这样能够在
     回调函数或者其它地方避免与之前的 save 调用发生冲突。
 
-:php:meth:`Model::saveField(string $fieldName, string $fieldValue, $validate = false)`
-======================================================================================
+`Model::saveField(string $fieldName, string $fieldValue, $validate = false)`
+============================================================================
 
 用于保存单个字段的值。在将要调用 ``saveField()`` 之前要设置模型的 ID (
 ``$this->ModelName->id = $id``)。在使用该方法时，``$fieldName`` 应当只包含字段名，
@@ -183,8 +183,8 @@ saveField 方法也有另一种语法::
   回调。
 * ``counterCache`` (从 2.4 版本开始)控制计数器缓存(如果有的话)更新的布尔值
 
-:php:meth:`Model::updateAll(array $fields, mixed $conditions)`
-==============================================================
+`Model::updateAll(array $fields, mixed $conditions)`
+====================================================
 
 用一次调用更新一条或多条记录。要更新的字段和它们的值，由 ``$fields`` 数组确定。
 要更新的记录由 ``$conditions`` 数组确定。如果 ``$conditions`` 参数未提供或设置为
@@ -226,8 +226,8 @@ saveField 方法也有另一种语法::
 默认情况下，updateAll() 对支持 join 的数据库会自动连接任何 belongsTo 关联。要阻
 止这种连接，临时解除绑定(*unbind*)该关联。
 
-:php:meth:`Model::saveMany(array $data = null, array $options = array())`
-=========================================================================
+`Model::saveMany(array $data = null, array $options = array())`
+===============================================================
 
 此方法用于同时保存同一模型的多行。可以使用如下选项：
 
@@ -292,8 +292,8 @@ saveField 方法也有另一种语法::
 
 .. _Model-saveAssociated:
 
-:php:meth:`Model::saveAssociated(array $data = null, array $options = array())`
-===============================================================================
+`Model::saveAssociated(array $data = null, array $options = array())`
+=====================================================================
 
 此方法用于同时保存多个模型关联。可以使用如下选项：
 
@@ -395,8 +395,8 @@ belongsTo User 数据，data 数组应当象这样::
 
     现在你也可以设置 ``$options['deep'] = true;`` 来保存深层关联的数据。
 
-:php:meth:`Model::saveAll(array $data = null, array $options = array())`
-========================================================================
+`Model::saveAll(array $data = null, array $options = array())`
+==============================================================
 
 ``saveAll`` 函数只是 ``saveMany`` 方法和 ``saveAssociated`` 方法的包装。它会检查
 数据并且决定应当执行哪种类型的保存。如果数据是数字索引数组的格式，就会调用

@@ -53,8 +53,8 @@ situation en affichant :php:attr:`Model::$validationErrors`::
 Il y a quelques autres méthodes du model liées à la sauvegarde que vous
 trouverez utiles :
 
-:php:meth:`Model::set($one, $two = null)`
-=========================================
+`Model::set($one, $two = null)`
+===============================
 
 ``Model::set()`` peut être utilisé pour définir un ou plusieurs champs de
 données du tableau de donnés à l'intérieur d'un Model. C'est utile pour
@@ -79,8 +79,8 @@ pour assigner de nouvelles valeurs aux champs multiples::
 Ce qui est au-dessus met à jour les champs title et published et sauvegarde
 l'enregistrement dans le base de données.
 
-:php:meth:`Model::clear()`
-==========================
+`Model::clear()`
+================
 
 Cette méthode peut être utilisée pour réinitialiser l'état du model et effacer
 toutes les données non sauvegardées et les erreurs de validation.
@@ -88,8 +88,8 @@ toutes les données non sauvegardées et les erreurs de validation.
 .. versionadded:: 2.4
 
 
-:php:meth:`Model::save(array $data = null, boolean $validate = true, array $fieldList = array())`
-=================================================================================================
+`Model::save(array $data = null, boolean $validate = true, array $fieldList = array())`
+=======================================================================================
 
 La méthode ci-dessus sauvegarde des données formatées sous forme tabulaire.
 Le second paramètre vous permet de mettre de côté la validation, et le
@@ -164,8 +164,8 @@ que vous avez passé le champ de la clé primaire  dans le tableau data::
     // Cela mettra à jour la Recipe avec un id 10
     $this->Recipe->save($data);
 
-:php:meth:`Model::create(array $data = array())`
-================================================
+`Model::create(array $data = array())`
+======================================
 
 Cette méthode initialise la classe du model pour sauvegarder de nouvelles
 informations.
@@ -189,8 +189,8 @@ sera défini comme un tableau vide.
     Cela évite les conflits avec d'éventuels appels à save en amont dans les
     callbacks ou à tout autre endroit.
 
-:php:meth:`Model::saveField(string $fieldName, string $fieldValue, $validate = false)`
-======================================================================================
+`Model::saveField(string $fieldName, string $fieldValue, $validate = false)`
+============================================================================
 
 Utilisée pour sauvegarder la valeur d'un seul champ. Fixez l'ID du model
 (``$this->ModelName->id = $id``) juste avant d'appeler ``saveField()``. Lors de
@@ -221,8 +221,8 @@ suivantes:
   counter caches (si il y en a).
 
 
-:php:meth:`Model::updateAll(array $fields, mixed $conditions)`
-==============================================================
+`Model::updateAll(array $fields, mixed $conditions)`
+====================================================
 
 Met à jour plusieurs enregistrements en un seul appel. Les enregistrements à
 mettre à jour, ainsi qu'avec leurs valeurs, sont identifiés par le tableau
@@ -271,8 +271,8 @@ Par défaut, updateAll() joindra automatiquement toute association belongsTo
 pour les bases de données qui suportent la jointure. Pour éviter cela,
 délier les associations temporairement.
 
-:php:meth:`Model::saveMany(array $data = null, array $options = array())`
-=========================================================================
+`Model::saveMany(array $data = null, array $options = array())`
+===============================================================
 
 La méthode utilisée pour sauvegarder les lignes multiples du même model en
 une fois. Les options suivantes peuvent être utilisées:
@@ -343,8 +343,8 @@ ligne de donnée::
     )
 
 
-:php:meth:`Model::saveAssociated(array $data = null, array $options = array())`
-===============================================================================
+`Model::saveAssociated(array $data = null, array $options = array())`
+=====================================================================
 
 Méthode utilisée pour sauvegarder des associations de model en une seule fois.
 Les options suivantes peuvent être utilisées:
@@ -461,8 +461,8 @@ La fieldList sera un tableau d'alias de model en clé et de tableaux avec les
 champs en valeur. Les noms de model ne sont pas imbriqués comme dans les
 données à sauvegarder.
 
-:php:meth:`Model::saveAll(array $data = null, array $options = array())`
-========================================================================
+`Model::saveAll(array $data = null, array $options = array())`
+==============================================================
 
 La fonction ``saveAll`` est juste un wrapper autour des méthodes ``saveMany``
 et ``saveAssociated``. Elle va inspecter les données et déterminer quel type
