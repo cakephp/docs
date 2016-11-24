@@ -1029,26 +1029,49 @@ JSON 形式でエンコードされた .json 設定ファイルを読み込ん�
     }
 
 
-Bootstrapping CakePHP
+..
+    Bootstrapping CakePHP
+
+CakePHP のブート処理
 =====================
 
-If you have any additional configuration needs, you should add them to your
-application's **config/bootstrap.php** file. This file is included before each
-request, and CLI command.
+..
+    If you have any additional configuration needs, you should add them to your
+    application's **config/bootstrap.php** file. This file is included before each
+    request, and CLI command.
 
-This file is ideal for a number of common bootstrapping tasks:
+もし何か追加の設定が必要であれば、 **config/bootstrap.php** ファイルに加えます。
+このファイルは各リクエストや CLI コマンドの前に読み込まれます。
 
-- Defining convenience functions.
-- Declaring constants.
-- Creating cache configurations.
-- Configuring inflections.
-- Loading configuration files.
+..
+    This file is ideal for a number of common bootstrapping tasks:
 
-Be careful to maintain the MVC software design pattern when you add things to
-the bootstrap file: it might be tempting to place formatting functions there in
-order to use them in your controllers. As you'll see in the :doc:`/controllers`
-and :doc:`/views` sections there are better ways you add custom logic to your
-application.
+このファイルは多数の共通ブート処理タスクに理想的です。
+
+..
+    - Defining convenience functions.
+    - Declaring constants.
+    - Creating cache configurations.
+    - Configuring inflections.
+    - Loading configuration files.
+
+- 便利な関数の定義
+- 定数の宣言
+- キャッシュの設定
+- 語尾変化の設定
+- 設定ファイルの読み込み
+
+
+..
+    Be careful to maintain the MVC software design pattern when you add things to
+    the bootstrap file: it might be tempting to place formatting functions there in
+    order to use them in your controllers. As you'll see in the :doc:`/controllers`
+    and :doc:`/views` sections there are better ways you add custom logic to your
+    application.
+
+何かを bootstrap ファイルに追加する場合は、MVC ソフトウェアのデザインパターンを保つように注意が必要です。
+コントローラーで使うための独自フォーマット関数を配置したくなる欲望にかられる恐れがあります。
+カスタムロジックをアプリケーションに加える良い方法は :doc:`/controllers` や :doc:`/views` のセクションを参照してください。
 
 Environment Variables
 =====================
