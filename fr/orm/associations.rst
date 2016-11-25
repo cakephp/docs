@@ -582,6 +582,9 @@ sont:
   particulièrement pratique si vous avez besoin de définir plusieurs relations
   belongsToMany. La valeur par défaut de cette clé est le nom du model actuel
   (avec des underscores) avec le suffixe '\_id'.
+- **bindingKey**: le nom de la colonne dans l'autre table, qui sera utilisée
+  pour correspondre à la ``foreignKey``. S'il n'est pas spécifié, la clé
+  primaire (par exemple la colonne id de la table ``Users``) sera utilisée.
 - **targetForeignKey**: le nom de la clé étrangère qui se trouve dans le model
   cible ou la liste en cas de clés étrangères composites. La valeur par défaut
   pour cette clé est le model cible, au singulier et en underscore, avec le
