@@ -295,8 +295,8 @@ Possible keys for belongsTo association arrays include:
   valid value is 'select', which utilizes a separate query instead.
 - **finder**: The finder method to use when loading associated records.
 
-Once this association has been defined, find operations on the User table can
-contain the Address record if it exists::
+Once this association has been defined, find operations on the Addresses table can
+contain the User record if it exists::
 
     // In a controller or table method.
     $query = $addresses->find('all')->contain(['Users']);

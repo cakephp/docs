@@ -225,7 +225,7 @@ Users peuvent contenir l'enregistrement Address, s'il existe::
     $query = $users->find('all')->contain(['Addresses']);
     foreach ($query as $user) {
         echo $user->address->street;
-   }
+    }
 
 Ce qui est au-dessus génèrera une commande SQL similaire à::
 
@@ -313,7 +313,7 @@ Les clés possibles pour les tableaux d'association belongsTo sont:
   enregistrements associés.
 
 Une fois que cette association a été définie, les opérations find sur la table
-User peuvent contenir l'enregistrement Address s'il existe::
+Addresses peuvent contenir l'enregistrement User s'il existe::
 
     // Dans un controller ou dans une méthode table.
     $query = $addresses->find('all')->contain(['Users']);
