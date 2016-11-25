@@ -443,6 +443,7 @@ tt {
     line-height: normal;
     padding: 0px 2px;
     color: #363637;
+    background-color: transparent;
 }
 a code,
 a tt {
