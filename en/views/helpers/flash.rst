@@ -41,9 +41,8 @@ You can also override any of the options that were set in FlashComponent::
 
 .. note::
 
-    By default, CakePHP does not escape the HTML in flash messages. If you are
-    using any request or user data in your flash messages, you should escape it
-    with :php:func:`h` when formatting your messages.
+    When building custom flash message templates, be sure to properly HTML
+    encode any user data. CakePHP won't escape flash message parameters for you.
 
 .. versionadded:: 3.1
 
