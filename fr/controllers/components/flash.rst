@@ -94,7 +94,7 @@ flash.
     Par défaut, CakePHP échappe le contenu dans les messages flash pour des
     raisons de sécurité. Si vous utilisez une requête ou des données
     d'utilisateur dans vos messages flash, ceux-ci sont échappés et donc
-    sécurisés pour l'affichage. Si vous souhaitez afficher le HTML, vous devez
+    sécurisés pour l'affichage. Si vous souhaitez afficher du HTML, vous devez
     passer un paramètre ``escape`` et aussi ajuster les templates pour permettre
     la désactivation de l'échappement quand un tel paramètre est passé.
 

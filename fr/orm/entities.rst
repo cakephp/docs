@@ -180,8 +180,8 @@ ces deux manières::
 
 .. _entities-virtual-properties:
 
-Créer des Champs Virtuels
--------------------------
+Créer des Propriétés Virtuelles
+-------------------------------
 
 En définissant des accesseurs, vous pouvez fournir un accès aux
 champs/propriétés qui n'existent pas réellement. Par exemple si votre table
@@ -203,13 +203,16 @@ nom complet::
 
     }
 
-Vous pouvez accéder aux champs virtuels puisqu'ils existent sur l'entity. Le nom
-de la propriété sera la version en minuscule et en underscore de la méthode::
+Vous pouvez accéder aux propriétés virtuelles puisqu'elles existent sur
+l'entity. Le nom de la propriété sera la version en minuscule et en underscore
+de la méthode::
 
     echo $user->full_name;
 
-Souvenez-vous que les champs virtuels ne peuvent pas être utilisées dans les
-finds.
+Souvenez-vous que les propriétés virtuelles ne peuvent pas être utilisées dans
+les finds. Si vous voulez que les propriétés virtuelles fassent parties des
+données affichées lorsque vous affichez les représentations JSON ou en tableau
+de vos entités, reportez-vous à la section :ref:`exposing-virtual-properties`.
 
 Vérifier si une Entity a été Modifiée
 =====================================
@@ -481,6 +484,8 @@ sont utilisées. Les entities sont converties aussi de façon récursive en JSON
 Cela signifie que si les entities et leurs associations sont chargées en eager
 loading, CakePHP va correctement gérer la conversion des données associées dans
 le bon format.
+
+.. _exposing-virtual-properties:
 
 Montrer les Propriétés Virtuelles
 ---------------------------------
