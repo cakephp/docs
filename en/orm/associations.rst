@@ -226,7 +226,7 @@ BelongsTo Associations
 Now that we have Address data access from the User table, let's define a
 belongsTo association in the Addresses table in order to get access to related
 User data. The belongsTo association is a natural complement to the hasOne and
-hasMany associations.
+hasMany associations: it allows us to see the data from the other direction.
 
 When keying your database tables for a belongsTo relationship, follow this
 convention:
@@ -402,7 +402,7 @@ Possible keys for hasMany association arrays include:
   example the id column of the ``Articles`` table) will be used.
 - **conditions**: an array of find() compatible conditions or SQL
   strings such as ``['Comments.visible' => true]``
-- **sort**  an array of find() compatible order clauses or SQL
+- **sort**: an array of find() compatible order clauses or SQL
   strings such as ``['Comments.created' => 'ASC']``
 - **dependent**: When dependent is set to ``true``, recursive model
   deletion is possible. In this example, Comment records will be
@@ -546,24 +546,24 @@ Possible keys for belongsToMany association arrays include:
   association (if the current table doesn't adhere to the naming
   convention for belongsToMany join tables). By default this table
   name will be used to load the Table instance for the join/pivot table.
-- **foreignKey**: the name of the foreign key found in the current
-  model or list in case of composite foreign keys.
+- **foreignKey**: The name of the foreign key that references the current model
+  found on the join model, or list in case of composite foreign keys.
   This is especially handy if you need to define multiple
   belongsToMany relationships. The default value for this key is the
   underscored, singular name of the current model, suffixed with '\_id'.
 - **bindingKey**: The name of the column in the current table, that will be used
   for matching the ``foreignKey``. Default is the primary key.
-- **targetForeignKey**: the name of the foreign key found in the target
-  model or list in case of composite foreign keys.
+- **targetForeignKey**: The name of the foreign key that references the target
+  model found on the join model, or list in case of composite foreign keys.
   The default value for this key is the underscored, singular name of
   the target model, suffixed with '\_id'.
 - **conditions**: an array of find() compatible conditions.  If you have
   conditions on an associated table, you should use a 'through' model, and
   define the necessary belongsTo associations on it.
-- **sort** an array of find() compatible order clauses.
+- **sort**: an array of find() compatible order clauses.
 - **dependent**: When the dependent key is set to ``false``, and an entity is
   deleted, the data of the join table will not be deleted.
-- **through** Allows you to provide a either the name of the Table instance you
+- **through**: Allows you to provide a either the name of the Table instance you
   want used on the join table, or the instance itself. This makes customizing
   the join table keys possible, and allows you to customize the behavior of the
   pivot table.
