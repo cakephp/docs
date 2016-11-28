@@ -28,9 +28,13 @@ version 4.0.0 à partir de laquelle ils seront supprimés.
 
   * Les méthodes ``__get()`` & ``__isset()`` sont dépréciées. Utilisez
     ``getParam()`` à la place.
-  * ``method()`` est dépréciée. Utilisez ``getMethod()`` plutôt.
-  * ``setInput()`` est dépréciée. Utilisez ``withBody()`` plutôt.
+  * ``method()`` est dépréciée. Utilisez plutôt ``getMethod()``.
+  * ``setInput()`` est dépréciée. Utilisez plutôt ``withBody()``.
   * Les méthodes ``ArrayAccess`` ont toutes été dépréciées.
+  * ``Request::param()`` est dépréciée. Utilisez plutôt ``Request::getParam()`` .
+  * ``Request::data()`` est dépréciée. Utilisez plutôt ``Request::getData()``.
+  * ``Request::query()`` est dépréciée. Utilisez plutôt ``Request::getQuery()``.
+  * ``Request::cookie()`` est dépréciée. Utilisez plutôt ``Request::getCookie()``.
 
 * La valeur de ``Auth.redirect`` stockée en session n'est plus utilisée. Un
   paramètre d'URL est maintenant utilisé pour stocker l'URL de redirection.
@@ -43,6 +47,33 @@ version 4.0.0 à partir de laquelle ils seront supprimés.
 * Le code de statut HTTP ``306`` de ``Cake\Network\Response`` est dépréciée. Sa
   phrase de statut est maintenant 'Unused' car ce code de statut n'est pas
   standard.
+* ``Cake\Database\Schema\Table`` a été renommée en
+  ``Cake\Database\Schema\TableSchema``. Le nom précédent portait à confusion
+  pour de nombreux utilisateurs.
+* L'option ``fieldList`` pour ``Cake\ORM\Table::newEntity()`` et
+  ``patchEntity()`` a été renommée en ``fields`` pour être plus cohérent avec
+  les autres parties de l'ORM.
+
+Dépréciation des getters / setters combinés
+--------------------------------------------
+
+Par le passé, CakePHP a exposé des méthodes combinées qui opéraient à la fois
+comme getter et comme setter. Ces méthodes compliquaient l'auto-complétion de
+certains IDE et auraient compliqué la mise en place de typage strictes sur les
+retours des méthodes dans le futur. Pour ces raisons, les getters / setters
+combinés sont maintenant séparés dans différentes méthodes.
+
+La liste qui suit regroupe les méthodes qui sont dépréciées et remplacées par
+des méthodes ``getX`` et ``setX`` :
+
+Cake\Console\ConsoleOptionParse
+    * ``command()``
+    * ``description()``
+    * ``epliog()``
+Cake\Validation\Validator
+    * ``provider()``
+Cake\View\StringTemplateTrait
+    * ``templates()``
 
 Changement de comportements
 ===========================

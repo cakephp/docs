@@ -647,9 +647,7 @@ The methods that allow chaining are:
 - addOptions()
 - addSubcommand()
 - addSubcommands()
-- command()
 - setCommand()
-- description()
 - setDescription()
 - setEpilog()
 
