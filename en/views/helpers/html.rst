@@ -758,7 +758,7 @@ Output:
 Changing the Tags Output by HtmlHelper
 ======================================
 
-.. php:method:: templates($templates)
+.. php:method:: setTemplates($templates)
 
 The ``$templates`` parameter can be either a string file path to the PHP
 file containing the tags you want to load, or an array of templates to

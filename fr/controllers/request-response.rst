@@ -84,6 +84,9 @@ n'existe pas va retourner ``null``::
     $foo = $this->request->getQuery('valeur_qui_n_existe_pas');
     // $foo === null
 
+    // Vous pouvez également définir des valeurs par défaut
+    $foo = $this->request->getQuery('n_existe_pas', 'valeur par défaut');
+
 Si vous souhaitez accéder à tous les paramètres de requête, vous pouvez utiliser
 ``getQueryParams()``::
 

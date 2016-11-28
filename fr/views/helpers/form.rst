@@ -1696,11 +1696,13 @@ contenir un tableau des templates indexés par leur nom::
 Tous les templates que vous définissez vont remplacer ceux par défaut dans
 le helper. Les Templates qui ne sont pas remplacés vont continuer à être
 utilisés avec les valeurs par défaut. Vous pouvez aussi changer les templates
-à la volée en utilisant la méthode ``templates()``::
+à la volée en utilisant la méthode ``setTemplates()``::
 
     $myTemplates = [
         'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
+    $this->Form->setTemplates($myTemplates);
+    // Avant 3.4
     $this->Form->templates($myTemplates);
 
 .. warning::
@@ -1724,7 +1726,7 @@ Si le conteneur n'est pas présent, le template ``inputContainer`` sera utilisé
 Par exemple::
 
     // Ajoute du HTML personnalisé autour d'un input radio
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'radioContainer' => '<div class="form-radio">{{content}}</div>'
     ]);
 
@@ -1740,7 +1742,7 @@ par défaut chaque ensemble label & input sera généré en utilisant le templat
 ``formGroup``::
 
     // Ajoute un groupe de formulaire pour radio personnalisé
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'radioFormGroup' => '<div class="radio">{{label}}{{input}}</div>'
     ]);
 
@@ -1752,7 +1754,7 @@ templates personnalisés et remplir ces placeholders lors de la génération des
 inputs::
 
     // Ajoute un template avec le placeholder help.
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'inputContainer' => '<div class="input {{type}}{{required}}">
             {{content}} <span class="help">{{help}}</span></div>'
     ]);
@@ -1773,7 +1775,7 @@ Par défaut, CakePHP incorpore les cases à cocher et des boutons radio dans des
 populaires. Si vous avez besoin de placer ces inputs à l'extérieur de la balise
 label, vous pouvez le faire en modifiant les templates::
 
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'nestingLabel' => '{{input}}<label{{attrs}}>{{text}}</label>',
         'formGroup' => '{{input}}{{label}}',
     ]);
