@@ -66,7 +66,7 @@ CakePHP は Composer でのインストールが必要
 ====
 
 CakePHP 3.0 の設定は、以前のバージョンに比べて大幅に異なっています。
-3.0 でどのように設定するかは:doc:`/development/configuration` のドキュメントを
+3.0 でどのように設定するかは :doc:`/development/configuration` のドキュメントを
 ご覧ください。
 
 もはやクラスパスの追加設定に ``App::build()`` は使用しません。
