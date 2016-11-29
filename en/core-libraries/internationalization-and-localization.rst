@@ -142,6 +142,13 @@ domain::
 
     echo __d('my_plugin', 'Trending right now');
 
+.. note::
+
+    If you want to translate your plugins and they're namespaced, you must name
+    your domain string `Namespace/PluginName`. But the related language file
+    will become `plugins/Namespace/PluginName/src/Locale/plugin_name.po`
+    inside your plugin folder.
+
 Sometimes translations strings can be ambiguous for people translating them.
 This can happen if two strings are identical but refer to different things. For
 example, 'letter' has multiple meanings in English. To solve that problem, you
