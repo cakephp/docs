@@ -404,7 +404,7 @@ L'API de File
 
     Prépare une chaîne de caractères ascii pour l'écriture. Convertit les lignes
     de fin en un terminator correct pour la plateforme courante. Si c'est
-    Windows "\r\n" sera utilisé, toutes les autres plateformes utiliseront "\n".
+    Windows "\\r\\n" sera utilisé, toutes les autres plateformes utiliseront "\\n".
 
 .. php:method:: pwd()
 
