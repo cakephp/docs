@@ -655,6 +655,35 @@ fichiers de seed::
     # seeder.
     $ bin/cake bake seed Articles --connection connection
 
+.. versionadded:: cakephp/migrations 1.6.4
+
+    Les options ``--data``, ``--limit`` and ``--fields`` ont été ajoutées pour
+    permettre d'exporter des données extraites depuis votre base de données.
+
+A partir de 1.6.4, la commande ``bake seed`` vous permet de créer des fichiers
+de seed avec des lignes exportées de votre base de données en utilisant
+l'option ``--data``::
+
+    $ bin/cake bake seed --data Articles
+
+Par défaut, cela exportera toutes les lignes trouvées dans la table. Vous
+pouvez limiter le nombre de lignes exportées avec l'option ``--limit``::
+
+    # N'exportera que les 10 premières lignes trouvées
+    $ bin/cake bake seed --data --limit 10 Articles
+
+Si vous ne souhaitez inclure qu'une sélection des champs de la table dans votre
+fichier de seed, vous pouvez utiliser l'option ``--fields``. Elle prend la
+liste des champs séparés par une virgule comme argument::
+
+    # N'exportera que les champs `id`, `title` et `excerpt`
+    $ bin/cake bake seed --data --fields id,title,excerpt Articles
+
+.. tip::
+
+    Vous pouvez bien sûr utiliser les options ``--limit`` et ``--fields``
+    ensemble dans le même appel.
+
 Pour faire un seed de votre base de données, vous pouvez utiliser la
 sous-commande ``seed``::
 
