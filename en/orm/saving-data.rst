@@ -854,7 +854,7 @@ Saving BelongsTo Associations
 -----------------------------
 
 When saving belongsTo associations, the ORM expects a single nested entity named with
-the singular, lowercase version of the association name. For example::
+the singular, :ref:`underscored <inflector-methods-summary>` version of the association name. For example::
 
     // In a controller.
     $data = [
@@ -875,7 +875,7 @@ Saving HasOne Associations
 --------------------------
 
 When saving hasOne associations, the ORM expects a single nested entity named with the
-singular, lowercase version of the association name. For example::
+singular, :ref:`underscored <inflector-methods-summary>` version of the association name. For example::
 
     // In a controller.
     $data = [
@@ -895,7 +895,7 @@ Saving HasMany Associations
 ---------------------------
 
 When saving hasMany associations, the ORM expects an array of entities named with the
-plural, lowercase version of the association name. For example::
+plural, :ref:`underscored <inflector-methods-summary>` version of the association name. For example::
 
     // In a controller.
     $data = [
@@ -937,7 +937,7 @@ Saving BelongsToMany Associations
 ---------------------------------
 
 When saving belongsToMany associations, the ORM expects an array of entities named with
-the plural, lowercase version of the association name. For example::
+the plural, :ref:`underscored <inflector-methods-summary>` version of the association name. For example::
 
     // In a controller.
     $data = [
