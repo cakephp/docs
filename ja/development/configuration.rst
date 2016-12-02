@@ -928,7 +928,7 @@ PHP の設定ファイル
     An example configuration file would look like::
 
 素の PHP として保存された設定ファイルを読み込むことができます。
-あなたのアプリの設定ファイル、もしくは :term:`plugin syntax` を使用してプラグインの設定ディレクトリから読み込むことができます。
+あなたのアプリの設定ファイル、もしくは :term:`プラグイン記法` を使用してプラグインの設定ディレクトリから読み込むことができます。
 ファイルは *必ず* 配列を返却しなければいけません。
 設定ファイルの一例はこのようになります。
 ::
@@ -1073,19 +1073,33 @@ CakePHP のブート処理
 コントローラーで使うための独自フォーマット関数を配置したくなる欲望にかられる恐れがあります。
 カスタムロジックをアプリケーションに加える良い方法は :doc:`/controllers` や :doc:`/views` のセクションを参照してください。
 
-Environment Variables
+..
+    Environment Variables
+
+環境変数
 =====================
 
-Some of the modern cloud providers, like Heroku, let you define environment
-variables. By defining environment variables, you can configure your CakePHP
-app as an 12factor app. Following the
-`12factor app instructions <http://12factor.net/>`_ is a good way to create a
-stateless app, and to ease the deployment of your app.
-This means for example, that if you need to change your database, you'll just
-need to modify a DATABASE_URL variable on your host configuration without the
-need to change it in your source code.
+..
+    Some of the modern cloud providers, like Heroku, let you define environment
+    variables. By defining environment variables, you can configure your CakePHP
+    app as an 12factor app. Following the
+    `12factor app instructions <http://12factor.net/>`_ is a good way to create a
+    stateless app, and to ease the deployment of your app.
+    This means for example, that if you need to change your database, you'll just
+    need to modify a DATABASE_URL variable on your host configuration without the
+    need to change it in your source code.
 
-As you can see in your **app.php**, the following variables are concerned:
+例えば Heroku のように、いくつかの現代的なクラウド事業者では、環境変数を定義できます。
+環境変数の定義にあたり、あなたの CakePHP アプリケーションを 12factor app のように設定できます。
+`12factor app instructions <http://12factor.net/>` はステートレスアプリを作成するのに良い方法で、
+そしてデプロイを簡単ににします。
+例えばこれの意味するところは、もしあなたがデータベースの変更が必要な場合、
+ソースコードの変更を必要とせず、ホストの設定にある DATABASE_URL 変数を編集するのみです。
+
+..
+    As you can see in your **app.php**, the following variables are concerned:
+
+**app.php** を参照の通り、以下の変数が影響されます。
 
 - ``DEBUG`` (``0`` or ``1``)
 - ``APP_ENCODING`` (ie UTF-8)
@@ -1100,15 +1114,24 @@ As you can see in your **app.php**, the following variables are concerned:
 - ``LOG_DEBUG_URL`` (ie ``file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=../logs/``)
 - ``LOG_ERROR_URL`` (ie ``file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=../logs/``)
 
-As you can see in the examples, we define some options configuration as
-:term:`DSN` strings. This is the case for databases, logs, email transport and
-cache configurations.
+..
+    As you can see in the examples, we define some options configuration as
+    :term:`DSN` strings. This is the case for databases, logs, email transport and
+    cache configurations.
 
-If the environment variables are not defined in your environment, CakePHP will
-use the values that are defined in the **app.php**. You can use
-`php-dotenv library <https://github.com/josegonzalez/php-dotenv>`_ to use
-environment variables in a local development. See the Readme instructions of the
-library for more information.
+例をご覧のように、いくつかの設定オプションを :term:`DSN` 文字列として定義します。
+これはデータベースやログ、メール送信やキャッシュ設定のケースが挙げられます。
+
+..
+    If the environment variables are not defined in your environment, CakePHP will
+    use the values that are defined in the **app.php**. You can use
+    `php-dotenv library <https://github.com/josegonzalez/php-dotenv>`_ to use
+    environment variables in a local development. See the Readme instructions of the
+    library for more information.
+
+もし環境変数があなたの環境に定義されていなければ、CakePHP は **app.php** に定義されいてる変数を利用します。
+`php-dotenv library <https://github.com/josegonzalez/php-dotenv>` を利用して環境変数をローカルの開発に使えます。
+ライブラリの Readme により多くの情報を参照してください。
 
 .. meta::
     :title lang=ja: Configuration
