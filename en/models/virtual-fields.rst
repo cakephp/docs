@@ -99,7 +99,7 @@ Pagination and virtual fields
 -----------------------------
 
 Since virtual fields behave much like regular fields when doing
-find's, ``Controller::paginate()`` will be able to sort by virtual fields too.
+finds, ``Controller::paginate()`` will be able to sort by virtual fields too.
 
 Virtual fields and model aliases
 ================================
