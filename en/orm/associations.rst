@@ -223,10 +223,11 @@ The above would emit SQL that is similar to::
 BelongsTo Associations
 ======================
 
-Now that we have Address data access from the User table, let's define a
-belongsTo association in the Addresses table in order to get access to related
+Now that we have Address data access from the User table, let's define
+a belongsTo association in the Addresses table in order to get access to related
 User data. The belongsTo association is a natural complement to the hasOne and
-hasMany associations.
+hasMany associations - it allows us to see related data from the other
+direction.
 
 When keying your database tables for a belongsTo relationship, follow this
 convention:
@@ -295,8 +296,8 @@ Possible keys for belongsTo association arrays include:
   valid value is 'select', which utilizes a separate query instead.
 - **finder**: The finder method to use when loading associated records.
 
-Once this association has been defined, find operations on the User table can
-contain the Address record if it exists::
+Once this association has been defined, find operations on the Addresses table can
+contain the User record if it exists::
 
     // In a controller or table method.
     $query = $addresses->find('all')->contain(['Users']);
@@ -402,7 +403,7 @@ Possible keys for hasMany association arrays include:
   example the id column of the ``Articles`` table) will be used.
 - **conditions**: an array of find() compatible conditions or SQL
   strings such as ``['Comments.visible' => true]``
-- **sort**  an array of find() compatible order clauses or SQL
+- **sort**: an array of find() compatible order clauses or SQL
   strings such as ``['Comments.created' => 'ASC']``
 - **dependent**: When dependent is set to ``true``, recursive model
   deletion is possible. In this example, Comment records will be
@@ -480,7 +481,7 @@ table consists of ``article_id`` and ``tag_id``.
 names.
 
 ============================ ================================================================
-Relationship                 Pivot Table Fields
+Relationship                 Join Table Fields
 ============================ ================================================================
 Article belongsToMany Tag    articles_tags.id, articles_tags.tag_id, articles_tags.article_id
 ---------------------------- ----------------------------------------------------------------
@@ -545,25 +546,25 @@ Possible keys for belongsToMany association arrays include:
 - **joinTable**: The name of the join table used in this
   association (if the current table doesn't adhere to the naming
   convention for belongsToMany join tables). By default this table
-  name will be used to load the Table instance for the join/pivot table.
-- **foreignKey**: the name of the foreign key found in the current
-  model or list in case of composite foreign keys.
+  name will be used to load the Table instance for the join table.
+- **foreignKey**: The name of the foreign key that references the current model
+  found on the join table, or list in case of composite foreign keys.
   This is especially handy if you need to define multiple
   belongsToMany relationships. The default value for this key is the
   underscored, singular name of the current model, suffixed with '\_id'.
 - **bindingKey**: The name of the column in the current table, that will be used
-  for matching the ``foreignKey``. Default is the primary key.
-- **targetForeignKey**: the name of the foreign key found in the target
-  model or list in case of composite foreign keys.
+  for matching the ``foreignKey``. Defaults to the primary key.
+- **targetForeignKey**: The name of the foreign key that references the target
+  model found on the join model, or list in case of composite foreign keys.
   The default value for this key is the underscored, singular name of
   the target model, suffixed with '\_id'.
-- **conditions**: an array of find() compatible conditions.  If you have
+- **conditions**: an array of ``find()`` compatible conditions.  If you have
   conditions on an associated table, you should use a 'through' model, and
   define the necessary belongsTo associations on it.
-- **sort** an array of find() compatible order clauses.
+- **sort**: an array of find() compatible order clauses.
 - **dependent**: When the dependent key is set to ``false``, and an entity is
   deleted, the data of the join table will not be deleted.
-- **through** Allows you to provide a either the name of the Table instance you
+- **through**: Allows you to provide a either the name of the Table instance you
   want used on the join table, or the instance itself. This makes customizing
   the join table keys possible, and allows you to customize the behavior of the
   pivot table.

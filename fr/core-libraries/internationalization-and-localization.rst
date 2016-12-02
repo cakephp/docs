@@ -149,6 +149,13 @@ pour récupérer les messages d'un autre domaine::
 
     echo __d('my_plugin', 'Trending right now');
 
+.. note::
+
+    Si vous souhaitez traduire vos plugins et qu'ils ont un "préfixe" de
+    namespace, vous devez nommer votre chaîne de domaine ``Namespace/PluginName``.
+    Cependant, notez que le chemin du fichier de langage sera, dans votre dossier de
+    plugin, ``plugins/Namespace/PluginName/src/Locale/plugin_name.po``.
+
 Parfois les chaines de traduction peuvent être ambigües pour les personnes
 les traduisant. Cela se produit lorsque deux chaines sont identiques mais
 se réfèrent à des choses différentes. Par exemple 'lettre' a plusieurs

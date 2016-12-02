@@ -397,8 +397,8 @@ File API
 .. php:staticmethod:: prepare(string $data, boolean $forceWindows = false)
 
     Prepares a ascii string for writing. Converts line endings to the
-    correct terminator for the current platform. For Windows "\r\n"
-    will be used, "\n" for all other platforms.
+    correct terminator for the current platform. For Windows "\\r\\n"
+    will be used, "\\n" for all other platforms.
 
 .. php:method:: pwd()
 

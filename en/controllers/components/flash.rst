@@ -87,11 +87,11 @@ message.
 
 .. note::
 
-    By default, CakePHP escapes the content in flash messages for security
-    reasons. If you are using any request or user data in your flash messages
-    those are escaped and therefore safe to be printed. If you want to output
-    HTML, you need to pass in an ``escape`` param and also adjust the templates
-    to allow disabling escaping when such a param is passed.
+    By default, CakePHP escapes the content in flash messages to prevent cross
+    site scripting. User data in your flash messages will be HTML encoded and
+    safe to be printed. If you want to include HTML in your flash messages, you
+    need to pass the ``escape`` option and adjust your flash message templates
+    to allow disabling escaping when the escape option is passed.
 
 HTML in Flash Messages
 ======================

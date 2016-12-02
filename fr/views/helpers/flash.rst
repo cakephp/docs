@@ -43,10 +43,9 @@ FlashComponent::
 
 .. note::
 
-    Par défaut, CakePHP n'échappe pas le HTML dans les messages flash. Si vous
-    utilisez une requête ou des données d'utilisateur dans vos messages flash,
-    vous devez les échapper avec :php:func:`h` lors du formatage de vos
-    messages.
+    Quand vous construisez vos propres templates de messages flash, assurez-
+    vous de correctement encoder les données utilisateurs. CakePHP n'échappera
+    pas les paramètres passés aux templates des messages flash pour vous.
 
 .. versionadded:: 3.1
 
@@ -66,8 +65,8 @@ Préfixe de Routage et Messages Flash
 Si vous avez configuré un préfixe de Routage, vous pouvez maintenant stocker vos
 elements de messages Flash dans **src/Template/{Prefix}/Element/Flash**. De
 cette manière, vous pouvez avoir des layouts de messages spécifiques en
-fonction des différentes parties de votre application (par exemple, avoir des
-layouts différents pour votre front-end et votre administration).
+fonction des différentes parties de votre application : par exemple, avoir des
+layouts différents pour votre front-end et votre administration.
 
 Les Messages Flash et les Themes
 ================================
