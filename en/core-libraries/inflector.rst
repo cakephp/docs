@@ -13,6 +13,8 @@ statically. Example:
 You can try out the inflections online at `inflector.cakephp.org
 <http://inflector.cakephp.org/>`_.
 
+.. _inflector-methods-summary:
+
 Summary of Inflector Methods and Their Output
 ===================================================
 
