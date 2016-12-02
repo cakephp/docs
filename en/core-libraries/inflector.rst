@@ -65,7 +65,6 @@ when provided a multi-word argument:
 |                   | BigApples     | BigApples     |
 +-------------------+---------------+---------------+
 
-
 Creating Plural & Singular Forms
 ================================
 
