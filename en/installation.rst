@@ -11,8 +11,9 @@ Requirements
 
 -  HTTP Server. For example: Apache. mod\_rewrite is preferred, but by no means
    required.
--  PHP 5.3.0 or greater (CakePHP version 2.6 and below support PHP 5.2.8 and
-   above).
+-  PHP 5.3.0 or greater (CakePHP version 2.6 and below support PHP >= 5.2.8. 
+   CakePHP version 2.8 and above support PHP 7. To use PHP >= 7.1 you have
+   to install mcrypt via PECL - see (Security)[http://book.cakephp.org/2.0/en/core-utility-libraries/security.html]).
 
 Technically a database engine isn't required, but we imagine that most
 applications will utilize one. CakePHP supports a variety of database storage
