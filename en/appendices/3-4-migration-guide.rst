@@ -154,3 +154,9 @@ Validation
 ==========
 
 * ``Validation::falsey()`` and ``Validation::truthy()`` were added.
+
+PluginShell
+===========
+
+* ``cake plugin load`` and ``cake plugin unload`` now support a ``--cli``
+  option, which updates the ``bootstrap_cli.php`` instead.
