@@ -148,7 +148,7 @@ sluggable behaviorを作成してみます。 **src/Model/Behavior/SluggableBeha
 - ビヘイビアでは、:ref:`table-callbacks` に従うメソッドを定義することで、コールバックメソッドを定義できる。
 - ビヘイビアでは、デフォルトのコンフィグレーションプロパティを定義できる。ビヘイビアがテーブルに追加されている場合、このプロパティはオーバーライドとマージされる。
 
-継続して保存されないようにするには、コールバック内のイベント伝播を停止するだけです。 ::
+保存が続行しないようにするには、コールバック内のイベント伝播を停止するだけです。 ::
 
     public function beforeSave(Event $event, EntityInterface $entity)
     {
