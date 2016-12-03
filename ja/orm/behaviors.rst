@@ -50,7 +50,7 @@ sluggable behaviorを作成してみます。 **src/Model/Behavior/SluggableBeha
 
     public function initialize(array $config)
     {
-        // Some initialization code here
+        // 何らかの初期化処理
     }
 
 
@@ -100,7 +100,7 @@ sluggable behaviorを作成してみます。 **src/Model/Behavior/SluggableBeha
 
 公開されたメソッドは設定によって決まるので、テーブルにビヘイビアを追加するときに、ミックスインメソッドの名前を変更/削除することもできます。例えば以下のようにします。 ::
 
-    // In a table's initialize() method.
+    // テーブルのinitialize()メソッド内で
     $this->addBehavior('Sluggable', [
         'implementedMethods' => [
             'superSlug' => 'slug',
@@ -188,7 +188,7 @@ slug値を持つ記事を保存できるようになったので、slugで記事
 
 公開されたメソッドは設定によって決まるので、ビヘイビアをテーブルに追加するときに、ファインダメソッドの名前を変更/削除することもできます。例えば以下のようにします。 ::
 
-    // In a table's initialize() method.
+    // テーブルのinitialize()メソッド内で
     $this->addBehavior('Sluggable', [
         'implementedFinders' => [
             'slugged' => 'findSlug',
@@ -204,7 +204,7 @@ slug値を持つ記事を保存できるようになったので、slugで記事
     {
         return [
             'custom_behavior_field' => function ($value, $entity) {
-                // Transform the value as necessary
+                // 必要であれば値を変換
                 return $value . '123';
             }
         ];
@@ -220,7 +220,7 @@ slug値を持つ記事を保存できるようになったので、slugで記事
 
 テーブルからビヘイビアを削除するには、 ``removeBehavior()`` メソッドを呼び出します。 ::
 
-    // Remove the loaded behavior
+    // 読み込まれたビヘイビアを削除
     $this->removeBehavior('Sluggable');
 
 ロードされたビヘイビアへのアクセス
@@ -228,15 +228,15 @@ slug値を持つ記事を保存できるようになったので、slugで記事
 
 ビヘイビアをテーブルインスタンスに追加したら、読み込まれたビヘイビアをイントロスペクトしたり、 ``BehaviorRegistry`` を使用して特定のビヘイビアにアクセスしたりできます。 ::
 
-    // See which behaviors are loaded
+    // どのビヘイビアが読み込まれたかを調べる
     $table->behaviors()->loaded();
 
-    // Check if a specific behavior is loaded.
-    // Remember to omit plugin prefixes.
+    // 特定のビヘイビアが読み込まれたかどうかを調べる
+    // プラグインプレフィックスを含めないことに注意
     $table->behaviors()->has('CounterCache');
 
-    // Get a loaded behavior
-    // Remember to omit plugin prefixes
+    // 読み込まれたビヘイビアを取得する
+    // プラグインプレフィックスを含めないことに注意
     $table->behaviors()->get('CounterCache');
 
 ロードされたビヘイビアの再構成
@@ -256,8 +256,7 @@ slug値を持つ記事を保存できるようになったので、slugで記事
         {
             parent::initialize($options);
 
-            // e.g. if our parent calls $this->addBehavior('Timestamp');
-            // and we want to add an additional event
+            // 例：親クラスが$this->addBehavior('Timestamp');を呼び出していて、さらにイベントを追加したい場合
             if ($this->behaviors()->has('Timestamp') {
                 $this->behaviors()->get('Timestamp')->config([
                     'events' => [
