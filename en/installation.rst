@@ -9,11 +9,12 @@ run on a variety of web servers such as lighttpd or Microsoft IIS.
 Requirements
 ============
 
--  HTTP Server. For example: Apache. mod\_rewrite is preferred, but by no means
-   required.
--  PHP 5.3.0 or greater (CakePHP version 2.6 and below support PHP >= 5.2.8. 
-   CakePHP version 2.8 and above support PHP 7. To use PHP >= 7.1 you have
-   to install mcrypt via PECL - see (Security)[http://book.cakephp.org/2.0/en/core-utility-libraries/security.html]).
+- HTTP Server. For example: Apache. mod\_rewrite is preferred, but by no means
+  required.
+- PHP 5.3.0 or greater (CakePHP version 2.6 and below support PHP 5.2.8 and
+  above). CakePHP version 2.8.0 and above support PHP 7. To use PHP above 7.1
+  you may need to install mcrypt via PECL. See
+  :doc:`/core-utility-libraries/security` for more information.
 
 Technically a database engine isn't required, but we imagine that most
 applications will utilize one. CakePHP supports a variety of database storage
