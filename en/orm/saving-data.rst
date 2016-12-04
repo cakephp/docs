@@ -853,8 +853,8 @@ you will have to mark the association property as modified with ``dirty()``::
 Saving BelongsTo Associations
 -----------------------------
 
-When saving belongsTo associations, the ORM expects a single nested entity at
-the singular, underscored version of the association name. For example::
+When saving belongsTo associations, the ORM expects a single nested entity named with
+the singular, :ref:`underscored <inflector-methods-summary>` version of the association name. For example::
 
     // In a controller.
     $data = [
@@ -874,8 +874,8 @@ the singular, underscored version of the association name. For example::
 Saving HasOne Associations
 --------------------------
 
-When saving hasOne associations, the ORM expects a single nested entity at the
-singular, underscored version of the association name. For example::
+When saving hasOne associations, the ORM expects a single nested entity named with the
+singular, :ref:`underscored <inflector-methods-summary>` version of the association name. For example::
 
     // In a controller.
     $data = [
@@ -894,8 +894,8 @@ singular, underscored version of the association name. For example::
 Saving HasMany Associations
 ---------------------------
 
-When saving hasMany associations, the ORM expects an array of entities at the
-plural, underscored version of the association name. For example::
+When saving hasMany associations, the ORM expects an array of entities named with the
+plural, :ref:`underscored <inflector-methods-summary>` version of the association name. For example::
 
     // In a controller.
     $data = [
@@ -936,8 +936,8 @@ Without the call to ``dirty()`` the updated comments will not be saved.
 Saving BelongsToMany Associations
 ---------------------------------
 
-When saving belongsToMany associations, the ORM expects an array of entities at
-the plural, underscored version of the association name. For example::
+When saving belongsToMany associations, the ORM expects an array of entities named with
+the plural, :ref:`underscored <inflector-methods-summary>` version of the association name. For example::
 
     // In a controller.
     $data = [
