@@ -1,6 +1,3 @@
-..
-  Caching
-
 キャッシュ
 ##########
 
@@ -8,51 +5,16 @@
 
 .. php:class:: Cache
 
-..
-  Caching is frequently used to reduce the time it takes to create or read from
-  other resources. Caching is often used to make reading from expensive
-  resources less expensive. You can store the results of expensive queries,
-  or remote webservice access that doesn't frequently change in a cache. Once
-  in the cache, re-reading the stored resource from the cache is much cheaper
-  than accessing the remote resource.
-
 キャッシュは、外部のリソースからの読み込みや作成にかかる時間を短縮するために、頻繁に使用されます。
 また、大きいリソースから少ないコストで読み込むためにもよく使用されます。
 頻繁に変更されない大きなクエリの結果や、リモートWebサービスへのアクセスの結果をキャッシュに保存することができます。
 一旦キャッシュに保存されると、保存されたリソースのキャッシュからの再読み込みは、
 リモートリソースへのアクセスよりとてもコストが少なく済みます。
 
-..
-  Caching in CakePHP is primarily facilitated by the ``Cache`` class.
-  This class provides a set of static methods that provide a uniform API to
-  dealing with all different types of Caching implementations. CakePHP
-  comes with several cache engines built-in, and provides an easy system
-  to implement your own caching systems. The built-in caching engines are:
-
 CakePHPのキャッシュは、主に ``Chache`` クラスを使用します。
 このクラスは、すべての異なる型のキャッシュの実装を扱うための、統一されたAPIを提供する、静的なメソッドを持ちます。
 CakePHPにはいくつかの組み込みのキャッシュエンジンが用意されていて、独自のキャッシュシステムを実装するための簡単な仕組みを提供します。
 以下が、組み込みのキャッシュエンジンです:
-
-..
-  * ``FileCache`` File cache is a simple cache that uses local files. It
-    is the slowest cache engine, and doesn't provide as many features for
-    atomic operations. However, since disk storage is often quite cheap,
-    storing large objects, or elements that are infrequently written
-    work well in files.
-  * ``ApcCache`` APC cache uses the PHP `APCu <http://php.net/apcu>`_ extension.
-    This extension uses shared memory on the webserver to store objects.
-    This makes it very fast, and able to provide atomic read/write features.
-  * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
-    extension. Wincache is similar to APC in features and performance, but
-    optimized for Windows and IIS.
-  * ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_
-    is a PHP extension that provides similar features to APC.
-  * ``MemcachedEngine`` Uses the `Memcached <http://php.net/memcached>`_
-    extension.
-  * ``RedisEngine`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
-    extension. Redis provides a fast and persistent cache system similar to
-    Memcached, also provides atomic operations.
 
 * ``FileCache`` ファイルキャッシュはローカルファイルを使用するシンプルなキャッシュです。
   最も遅いキャッシュエンジンで、アトミックな操作のための多くの機能を持ちません。
@@ -68,37 +30,16 @@ CakePHPにはいくつかの組み込みのキャッシュエンジンが用意�
 * ``RedisEngine`` `phpredis <https://github.com/nicolasff/phpredis>`_ 拡張を使います。
   Redisは高速で、Memcachedと同様の永続キャッシュシステム、アトミックな操作を提供します。
 
-..
-  Regardless of the CacheEngine you choose to use, your application interacts with
-  :php:class:`Cake\\Cache\\Cache` in a consistent manner. You can swap cache
-  engines as your application grows.
-
 あなたが選択したキャッシュエンジンに関わらず、
 アプリケーションは一貫した方法で :php:class:`Cake\\Cache\\Cache` とやり取りします。
 あなたはアプリケーションが大きくなるにつれてキャッシュエンジンを交換することができます。
 
 .. _cache-configuration:
 
-..
-  Configuring Cache Class
-
 Cacheクラスの設定
 =================
 
 .. php:staticmethod:: config($key, $config = null)
-
-..
-  Configuring the Cache class can be done anywhere, but generally you will want to
-  configure Cache during bootstrapping.  The **config/app.php** file is the
-  conventional location to do this.  You can configure as many cache
-  configurations as you need, and use any mixture of cache engines.  CakePHP uses
-  two cache configurations internally.  ``_cake_core_`` is used for storing file
-  maps, and parsed results of
-  :doc:`/core-libraries/internationalization-and-localization` files.
-  ``_cake_model_``, is used to store schema descriptions for your applications
-  models. If you are using APC or Memcached you should make sure to set unique keys
-  for the core caches.  This will prevent multiple applications from overwriting
-  each other's cached data.
 
 キャッシュクラスの設定はどこでもできますが、一般的には、boot処理の間に設定を行ないます。
 **config/app.php** ファイルで行なうのが従来からの慣習です。
@@ -108,10 +49,6 @@ CakePHP は、２つの内部的なキャッシュの設定を使用します。
 ``_cake_model_`` は、アプリケーション上のモデルに対するスキーマの説明を保存するために使用されます。
 もし、 APC や Memcache を使用している場合、 コアのキャッシュにはユニークなキーをセットしておくべきです。
 これは、複数アプリケーションで 別のアプリケーションのキャッシュデータを上書きしてしまうのを避けてくれます。
-
-..
-  Using multiple configurations also lets you incrementally change the storage as
-  needed. For example in your **config/app.php** you could put the following::
 
 複数の設定を使用することで、必要なだけストレージを変更できます。
 例えば、以下のように **config/app.php** に設定できます::
@@ -134,28 +71,12 @@ CakePHP は、２つの内部的なキャッシュの設定を使用します。
     ]
     // ...
 
-..
-  Configuration options can also be provided as a :term:`DSN` string. This is
-  useful when working with environment variables or :term:`PaaS` providers::
-
 オプション設定は :term:`DSN` を指定することもできます。
 これは環境変数や :term:`PaaS` プロバイダーと一緒に動作するときに便利です。::
 
     Cache::config('short', [
         'url' => 'memcached://user:password@cache-host/?timeout=3600&prefix=myapp_',
     ]);
-
-..
-  When using a DSN string you can define any additional parameters/options as
-  query string arguments.
-
-..
-  You can also configure Cache engines at runtime
-
-..
-    // Using a short name
-    // Using a fully namespaced name.
-    // Using a constructed object.
 
 DSNを使用するとき、追加のクエリストリング要素としてパラメーターやオプションが定義できます。
 
@@ -181,12 +102,6 @@ DSNを使用するとき、追加のクエリストリング要素としてパ�
     $object = new FileEngine($config);
     Cache::config('other', $object);
 
-..
-  The name of these configurations 'short' or 'long' is used as the ``$config``
-  parameter for :php:meth:`Cake\\Cache\\Cache::write()` and
-  :php:meth:`Cake\\Cache\\Cache::read()`. When configuring Cache engines you can
-  refer to the class name using the following syntaxes:
-
 'short' や 'long' という設定名は :php:meth:`Cake\\Cache\\Cache::write()` と :php:meth:`Cake\\Cache\\Cache::read()` の ``$config`` パラメータとして使われます。
 キャッシュエンジンを設定する場合は、次の構文を使用してクラス名を参照することができます。:
 
@@ -196,16 +111,9 @@ DSNを使用するとき、追加のクエリストリング要素としてパ�
 * 完全に修飾された名前空間つきのクラス名は、従来の場所の外に位置するクラスの使用を可能にします。
 * ``CacheEngine`` クラスを継承したオブジェクト。
 
-..
-      When using the FileEngine you might need to use the ``mask`` option to
-      ensure cache files are made with the correct permissions.
-
 .. note::
 
     FileEndine 使用時に、正しいパーミッションでのキャッシュファイルを指定して作成するには、 ``mask`` オプションの設定が必要です。
-
-..
-  Removing Configured Cache Engines
 
 設定されたキャッシュエンジンを削除する
 --------------------------------------
