@@ -213,8 +213,8 @@ slug値を持つ記事を保存できるようになったので、slugで記事
 ``TranslateBehavior`` には、参照される可能性のあるこのインターフェースの重要な実装があります。
 
 .. versionadded:: 3.3.0
-    The ability for behaviors to participate in marshalling was added in 3.3.0
-    
+    ビヘイビアによるプロパティの変換は、3.3.0で追加されました。
+
 ロードされたビヘイビアの削除
 =============================
 
