@@ -42,7 +42,7 @@ when provided a multi-word argument:
 +-------------------+---------------+---------------+
 | ``humanize()``    | big_apples    | Big Apples    |
 +                   +---------------+---------------+
-|                   | bigApple     | BigApple       |
+|                   | bigApple      | BigApple      |
 +-------------------+---------------+---------------+
 | ``classify()``    | big_apples    | BigApple      | 
 +                   +---------------+---------------+
