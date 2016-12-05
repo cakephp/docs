@@ -187,9 +187,10 @@ rules that only apply when an account is being registered::
         'context' => ['validator' => 'register']
     ]);
 
-The above will use the ``register`` validator for the ``$user`` and all related
-associations. If you are creating a form for associated entities, you can define
-validation rules for each association by using an array::
+The above will use the rules defined in the ``register`` validator, which are
+defined by ``UsersTable::validationRegister()``, for the ``$user`` and all
+related associations. If you are creating a form for associated entities, you
+can define validation rules for each association by using an array::
 
     echo $this->Form->create($user, [
         'context' => [
