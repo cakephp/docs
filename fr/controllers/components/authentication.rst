@@ -270,7 +270,7 @@ message flash est défini.
     postées. Elle ne va pas réellement vérifier les certificats avec une classe
     d'authentification.
 
-Rediriger les Utilisateurs Après Connection
+Rediriger les Utilisateurs Après Connexion
 -------------------------------------------
 
 .. php:method:: redirectUrl
