@@ -208,8 +208,8 @@ CakePHP の Configure クラスはアプリケーションもしくは実行時�
 Configure クラスの主なゴールは、中央集権化された変数を維持し、たくさんのオブジェクト間で共有できることです。
 "設定より規約" であることを努めるように、そして MVC の構造を破壊しないように記憶しておいてください。
 
- ``Configure`` はどこからでもアクセスできます。
- ::
+``Configure`` はどこからでもアクセスできます。
+::
 
     Configure::read('debug');
 
@@ -592,7 +592,7 @@ CakePHP のブート処理
 
 例えば Heroku のように、いくつかの現代的なクラウド事業者では、環境変数を定義できます。
 環境変数の定義にあたり、あなたの CakePHP アプリケーションを 12factor app のように設定できます。
-`12factor app instructions <http://12factor.net/>` はステートレスアプリを作成するのに良い方法で、
+`12factor app instructions <http://12factor.net/>`_ はステートレスアプリを作成するのに良い方法で、
 そしてデプロイを簡単ににします。
 例えばこれの意味するところは、もしあなたがデータベースの変更が必要な場合、
 ソースコードの変更を必要とせず、ホストの設定にある DATABASE_URL 変数を編集するのみです。
@@ -616,7 +616,7 @@ CakePHP のブート処理
 これはデータベースやログ、メール送信やキャッシュ設定のケースが挙げられます。
 
 もし環境変数があなたの環境に定義されていなければ、CakePHP は **app.php** に定義されいてる変数を利用します。
-`php-dotenv library <https://github.com/josegonzalez/php-dotenv>` を利用して環境変数をローカルの開発に使えます。
+`php-dotenv library <https://github.com/josegonzalez/php-dotenv>`_ を利用して環境変数をローカルの開発に使えます。
 ライブラリの Readme により多くの情報を参照してください。
 
 .. meta::
