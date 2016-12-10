@@ -32,14 +32,18 @@ package <http://phpunit.de/#download>`__ ou avec
 Installer PHPUnit avec Composer
 -------------------------------
 
-Pour installer PHPUnit avec Composer::
+Pour installer PHPUnit avec Composer:
+
+.. code-block:: bash
 
     $ php composer.phar require --dev phpunit/phpunit
 
 Ceci va ajouter la dépendance à la section ``require-dev`` de votre
 ``composer.json``, et ensuite installer PHPUnit avec vos autres dépendances.
 
-Vous pouvez maintenant lancer PHPUnit en utilisant::
+Vous pouvez maintenant lancer PHPUnit en utilisant:
+
+.. code-block:: bash
 
     $ vendor/bin/phpunit
 
@@ -47,18 +51,22 @@ Utiliser le fichier PHAR
 ------------------------
 
 Après avoir téléchargé le fichier **phpunit.phar**, vous pouvez l'utiliser pour
-lancer vos tests::
+lancer vos tests:
+
+.. code-block:: bash
 
     php phpunit.phar
 
 .. tip::
 
     Par souci de commodité vous pouvez rendre phpunit.phar disponible
-    globalement sur Unix ou Linux via les commandes suivantes::
+    globalement sur Unix ou Linux via les commandes suivantes:
 
-      chmod +x phpunit.phar
-      sudo mv phpunit.phar /usr/local/bin/phpunit
-      phpunit --version
+    .. code-block:: shell
+
+          chmod +x phpunit.phar
+          sudo mv phpunit.phar /usr/local/bin/phpunit
+          phpunit --version
 
     Référez vous à la documentation de PHPUnit pour les instructions concernant
     `l'installation globale du PHAR PHPUnit sur Windows <http://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`__.
@@ -94,7 +102,9 @@ Vérifier la Configuration Test
 
 Après avoir installé PHPUnit et configuré le ``test`` de la configuration de la
 base de données, vous pouvez vous assurer que vous êtes prêt à écrire et lancer
-vos propres tests en lançant un de ceux présents dans le cœur::
+vos propres tests en lançant un de ceux présents dans le cœur:
+
+.. code-block:: bash
 
     // Pour phpunit.phar
     $ php phpunit.phar
@@ -105,7 +115,9 @@ vos propres tests en lançant un de ceux présents dans le cœur::
 Ce qui est au-dessus va lancer tous les tests que vous avez, ou vous indiquer
 qu'aucun test n'a été lancé. Pour lancer un test spécifique, vous pouvez fournir
 le chemin au test en paramètre de PHPUnit. Par exemple, si vous aviez un cas
-de test pour la classe ArticlesTable, vous pourriez le lancer avec::
+de test pour la classe ArticlesTable, vous pourriez le lancer avec:
+
+.. code-block:: bash
 
     $ vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -241,7 +253,9 @@ bonne idée de lancer les tests avant de committer tout changement pour aider
 à s'assurer que vous n'avez rien cassé.
 
 En utilisant ``phpunit``, vous pouvez lancer les tests de votre application.
-Pour lancer vos tests d'application, vous pouvez simplement lancer::
+Pour lancer vos tests d'application, vous pouvez simplement lancer:
+
+.. code-block:: bash
 
     // avec l'installation de composer
     $ vendor/bin/phpunit
@@ -252,14 +266,18 @@ Pour lancer vos tests d'application, vous pouvez simplement lancer::
 Si vous avez cloné la `source de CakePHP à partir de GitHub <https://github.com/cakephp/cakephp>`__
 et que vous souhaitez exécuter les tests unitaires de CakePHP, n'oubliez pas
 d'exécuter la commande suivante de ``Composer`` avant de lancer ``phpunit`` pour
-que toutes les dépendances soient installées::
+que toutes les dépendances soient installées:
+
+.. code-block:: bash
 
     $ composer install --dev
 
 À partir du répertoire racine de votre application. Pour lancer les tests pour
 un plugin qui fait parti de la source de votre application, d'abord faîtes la
 commande ``cd`` vers le répertoire du plugin, ensuite utilisez la commande
-``phpunit`` qui correspond à la façon dont vous avez installé phpunit::
+``phpunit`` qui correspond à la façon dont vous avez installé phpunit:
+
+.. code-block:: bash
 
     cd plugins
 
@@ -270,7 +288,9 @@ commande ``cd`` vers le répertoire du plugin, ensuite utilisez la commande
     php ../phpunit.phar
 
 Pour lancer les tests sur un plugin séparé, vous devez d'abord installer le
-projet dans un répertoire séparé et installer ses dépendances::
+projet dans un répertoire séparé et installer ses dépendances:
+
+.. code-block:: bash
 
     git clone git://github.com/cakephp/debug_kit.git
     cd debug_kit
@@ -283,7 +303,9 @@ Filtrer les Cas de Test (TestCase)
 Quand vous avez des cas de test plus larges, vous pouvez lancer un
 sous-ensemble de méthodes de test quand vous essayez de travailler sur un
 cas unique d'échec. Avec l'exécuteur CLI vous pouvez utiliser une option pour
-filtrer les méthodes de test::
+filtrer les méthodes de test:
+
+.. code-block:: bash
 
     $ phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -297,7 +319,9 @@ Vous pouvez générer un rapport de couverture de code en une ligne de
 commande en utilisant les outils de couverture de code intégrés à PHPUnit.
 PHPUnit va générer un ensemble de fichiers en HTML statique contenant les
 résultats de la couverture. Vous pouvez générer une couverture pour un cas de
-test en faisant ce qui suit::
+test en faisant ce qui suit:
+
+.. code-block:: bash
 
     $ phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -312,7 +336,9 @@ Souvent, votre application sera composé de plusieurs plugins. Dans ces
 situations, il peut être assez fastidieux d'effectuer des tests pour chaque
 plugin. Vous pouvez faire des tests pour chaque plugin qui compose votre
 application en ajoutant une section ``<testsuite>`` supplémentaire au fichier
-``phpunit.xml.dist`` de votre application::
+``phpunit.xml.dist`` de votre application:
+
+.. code-block:: xml
 
     <testsuites>
         <testsuite name="App Test Suite">
@@ -1601,10 +1627,9 @@ Créer des Suites de Test (Test Suites)
 Si vous voulez que plusieurs de vos tests s'exécutent en même temps, vous pouvez
 créer une suite de tests. Une suite de test est composée de plusieurs cas de
 test. Vous pouvez créer des suites de tests dans le fichier ``phpunit.xml`` de
-votre application, ou par la création de classes en utilisant ``CakeTestSuite``.
-Utiliser ``phpunit.xml`` est bien quand vous avez seulement besoin
-d'inclure/d'exclure de simples règles pour définir votre suite de tests. Un
-exemple simple serait::
+votre application. Un exemple simple serait:
+
+.. code-block:: xml
 
     <testsuites>
       <testsuite name="Models">
@@ -1613,31 +1638,6 @@ exemple simple serait::
         <exclude>src/Model/Cloud/ImagesTest.php</exclude>
       </testsuite>
     </testsuites>
-
-``CakeTestSuite`` propose plusieurs méthodes pour créer des suites de tests basé
-sur le système de fichiers. Il vous permet d'exécuter n'importe quel code que
-vous voulez pour préparer votre suite de test. Si nous voulions créer une suite
-de tests pour tous nos tests de models, nous pourrions créer le fichier
-**tests/TestCase/AllModelTest.php**, et mettre le code suivant::
-
-    class AllModelTest extends TestSuite
-    {
-        public static function suite() {
-            $suite = new CakeTestSuite('All model tests');
-            $suite->addTestDirectory(TESTS . 'Case/Model');
-            return $suite;
-        }
-    }
-
-Le code ci-dessus va grouper tous les cas de test trouvés dans le dossier
-**tests/TestCase/Model/**. Pour ajouter un fichier individuel, utilisez
-``$suite->addTestFile($filename);``. Vous pouvez ajouter de façon récursive
-un répertoire pour tous les tests en utilisant::
-
-    $suite->addTestDirectoryRecursive(TESTS . 'TestCase');
-
-Ajouterait de façon récursive tous les cas de test dans le répertoire
-**tests/TestCase/Model**.
 
 Créer des Tests pour les Plugins
 ================================
@@ -1686,13 +1686,13 @@ contienne un listener (écouteur) pour les fixtures::
 
     <!-- Configure un listener pour les fixtures -->
     <listeners>
-            <listener
-            class="\Cake\TestSuite\Fixture\FixtureInjector"
-            file="./vendor/cakephp/cakephp/src/TestSuite/Fixture/FixtureInjector.php">
-                    <arguments>
-                            <object class="\Cake\TestSuite\Fixture\FixtureManager" />
-                    </arguments>
-            </listener>
+        <listener
+        class="\Cake\TestSuite\Fixture\FixtureInjector"
+        file="./vendor/cakephp/cakephp/src/TestSuite/Fixture/FixtureInjector.php">
+            <arguments>
+                <object class="\Cake\TestSuite\Fixture\FixtureManager" />
+            </arguments>
+        </listener>
     </listeners>
 
 Vous devez également vous assurer que vos fixtures sont chargeables.
@@ -1797,7 +1797,9 @@ avez besoin sur Jenkins.
 Il est souvent une bonne idée de supprimer et re-créer la base de données avant
 chaque build aussi. Cela vous évite des echecs de chaînes, où un build cassé
 entraîne l'echec des autres. Ajoutez une autre *étape de script shell* au build
-qui contient ce qui suit::
+qui contient ce qui suit:
+
+.. code-block:: bash
 
     mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
 
@@ -1812,7 +1814,7 @@ graphique sympa des résultats de votre test:
 .. code-block:: bash
 
     # Télécharger Composer s'il est manquant.
-    test -f 'composer.phar' || curl -sS https://getcomposer.org/installer| php
+    test -f 'composer.phar' || curl -sS https://getcomposer.org/installer | php
     # Installer les dépendances.
     php composer.phar install
     vendor/bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
