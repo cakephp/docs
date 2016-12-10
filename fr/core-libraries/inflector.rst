@@ -18,8 +18,8 @@ Vous pouvez essayer les inflexions en ligne sur
 Résumé des Méthodes d'Inflector et de leurs Sorties
 ===================================================
 
-Petit résumé des méthodes intégrées à l'Inflector et les résultats qu'ils
-sortent quand vous on lui fournit un argument à plusieurs mots:
+Petit résumé des méthodes intégrées à l'Inflector et des résultats produits
+lorsque vous passez plusieurs mots en argument:
 
 +-------------------+---------------+---------------+
 | Method            | Argument      | Output        |
