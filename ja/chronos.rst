@@ -136,8 +136,10 @@ Chronos オブジェクトは細やかに値を変更できるメソッドを提
 
     $time = Chronos::create();
     $time->startOfDay();
+    $time->endOfDay();
     $time->startOfMonth();
     $time->endOfMonth();
+    $time->startOfYear();
     $time->endOfYear();
     $time->startOfWeek();
     $time->endOfWeek();

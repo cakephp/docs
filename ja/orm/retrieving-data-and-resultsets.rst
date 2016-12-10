@@ -280,8 +280,8 @@ join でつながっている関連テーブルからリストのデータを生
 
     $query = $articles->find('list', [
         'keyField' => 'id',
-        'valueField' => function ($e) {
-            return $e->author->get('full_name');
+        'valueField' => function ($article) {
+            return $article->author->get('full_name');
         }
     ]);
 
