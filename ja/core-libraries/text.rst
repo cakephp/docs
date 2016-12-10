@@ -95,7 +95,8 @@ UUIDの生成
 
 .. php:staticmethod:: uuid()
 
-UUIDメソッドは :rfc:`4122` 準拠のユニークな識別子を生成するのに使います::
+UUIDメソッドは :rfc:`4122` 準拠のユニークな識別子を生成するのに使います。
+UUID は ``485fc381-e790-47a3-9794-1337c0a8fe68`` というフォーマットの 128 ビットの文字列です。 ::
 
     Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
@@ -138,7 +139,7 @@ insert メソッドは文字列テンプレートを作り、key/value で置き
 
 ``$options`` 内の 'clean' キーに従って、 ``Text::insert`` でフォーマットされた文字列を掃除します。
 デフォルトで method に使われるのは text ですが html も使えます。
-この機能の目的は、``Text::insert`` で置き換えられなかった、プレイホルダ周辺のすべての空白と不要なマークアップを置き換えることにあります。
+この機能の目的は、``Text::insert`` で置き換えられなかった、プレースホルダ周辺のすべての空白と不要なマークアップを置き換えることにあります。
 
 options 配列内で下記のオプションを使うことができます::
 
@@ -214,7 +215,7 @@ options 配列内で下記のオプションを使うことができます::
     // TextHelper として呼ぶ
     echo $this->Text->highlight(
         $lastSentence,
-        'using',
+        '使って',
         ['format' => '<span class="highlight">\1</span>']
     );
 
@@ -223,7 +224,7 @@ options 配列内で下記のオプションを使うことができます::
 
     echo Text::highlight(
         $lastSentence,
-        'using',
+        '使って',
         ['format' => '<span class="highlight">\1</span>']
     );
 
@@ -368,10 +369,12 @@ options 配列内で下記のオプションを使うことができます::
 
 最後の２要素が 'and' で繋がっている、カンマ区切りのリストを生成します::
 
-    // Called as TextHelper
+    $colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+
+    // TextHelper として呼ぶ
     echo $this->Text->toList($colors);
 
-    // Called as Text
+    // Text として呼ぶ
     use Cake\Utility\Text;
 
     echo Text::toList($colors);
