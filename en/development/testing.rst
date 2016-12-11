@@ -91,10 +91,10 @@ application's tests:
 
 .. code-block:: bash
 
-    // For phpunit.phar
+    # For phpunit.phar
     $ php phpunit.phar
 
-    // For Composer installed phpunit
+    # For Composer installed phpunit
     $ vendor/bin/phpunit
 
 The above should run any tests you have, or let you know that no tests were run.
@@ -236,10 +236,10 @@ application's tests you can simply run:
 
 .. code-block:: bash
 
-    // composer installs
+    # composer installs
     $ vendor/bin/phpunit
 
-    // phar file
+    # phar file
     php phpunit.phar
 
 If you have cloned the `CakePHP source from GitHub <https://github.com/cakephp/cakephp>`__
@@ -258,10 +258,10 @@ of your application source, first ``cd`` into the plugin directory, then use
 
     cd plugins
 
-    // Using composer installed phpunit
+    # Using composer installed phpunit
     ../vendor/bin/phpunit
 
-    // Using phar file
+    # Using phar file
     php ../phpunit.phar
 
 To run tests on a standalone plugin, you should first install the project in
