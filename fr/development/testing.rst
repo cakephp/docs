@@ -106,10 +106,10 @@ vos propres tests en lançant un de ceux présents dans le cœur:
 
 .. code-block:: bash
 
-    // Pour phpunit.phar
+    # Pour phpunit.phar
     $ php phpunit.phar
 
-    // Pour un PHPUnit installé avec Composer
+    # Pour un PHPUnit installé avec Composer
     $ vendor/bin/phpunit
 
 Ce qui est au-dessus va lancer tous les tests que vous avez, ou vous indiquer
@@ -257,10 +257,10 @@ Pour lancer vos tests d'application, vous pouvez simplement lancer:
 
 .. code-block:: bash
 
-    // avec l'installation de composer
+    # avec l'installation de composer
     $ vendor/bin/phpunit
 
-    // avec le fichier phar
+    # avec le fichier phar
     php phpunit.phar
 
 Si vous avez cloné la `source de CakePHP à partir de GitHub <https://github.com/cakephp/cakephp>`__
@@ -281,10 +281,10 @@ commande ``cd`` vers le répertoire du plugin, ensuite utilisez la commande
 
     cd plugins
 
-    // En utilisant phpunit installé avec composer
+    # En utilisant phpunit installé avec composer
     ../vendor/bin/phpunit
 
-    // En utilisant le fichier phar
+    # En utilisant le fichier phar
     php ../phpunit.phar
 
 Pour lancer les tests sur un plugin séparé, vous devez d'abord installer le
