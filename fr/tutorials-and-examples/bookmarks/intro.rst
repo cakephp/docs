@@ -282,6 +282,10 @@ passe avec
 Vous pouvez aussi utiliser sha1 ou md5 si vous travaillez avec une base de
 données existante.
 
+.. note::
+
+    Si le mot de passe n'est pas haché, assurez-vous que vous avez suivi le même cas pour le mot de passe membre de la classe tout en nommant la fonction mutateur/setter
+
 Récupérer les Bookmarks avec un Tag Spécifique
 ==============================================
 
