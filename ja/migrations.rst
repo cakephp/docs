@@ -603,6 +603,34 @@ JSON 形式の文字列として結果を出力できます。 ::
     # シーダーの生成時に別の接続を指定できます。
     $ bin/cake bake seed Articles --connection connection
 
+.. versionadded:: cakephp/migrations 1.6.4
+
+    オプションの ``--data``, ``--limit`` そして ``--fields`` は、
+    データベースからデータをエクスポートするために追加されました。
+
+1.6.4 から、 ``bake seed`` コマンドは、 ``--data`` フラグを使用することによって、
+データベースからエクスポートされたデータを元に seed ファイルを作成することができます。 ::
+
+    $ bin/cake bake seed --data Articles
+
+デフォルトでは、テーブル内にある行を全てエクスポートします。 ``--limit`` オプションを
+使用することによって、エクスポートされる行の数を制限できます。 ::
+
+    # 10 行のみエクスポート
+    $ bin/cake bake seed --data --limit 10 Articles
+
+もし、seed ファイルの中にテーブルから選択したフィールドのみを含めたい場合、
+``--fields`` オプションが使用できます。そのオプションは、
+フィールドのリストをカンマ区切りの値の文字列として含めます。 ::
+
+    # `id`, `title` そして `excerpt` フィールドのみをエクスポート
+    $ bin/cake bake seed --data --fields id,title,excerpt Articles
+
+.. tip::
+
+    もちろん、同じコマンド呼び出し中に ``--limit`` と ``--fields``
+    オプションの両方が利用できます。
+
 データベースの初期データ投入のために、 ``seed`` サブコマンドが使用できます。 ::
 
     # パラメータなしの seed サブコマンドは、対象のディレクトリのアルファベット順で、
