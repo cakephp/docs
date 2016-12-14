@@ -10,30 +10,82 @@ Deprecations
 The following is a list of deprecated methods, properties and behaviors. These
 elements will continue to function until 4.0.0 after which they will be removed.
 
+Request & Response Deprecations
+-------------------------------
+
+The bulk of deprecations for 3.4 are in the ``Request`` and ``Response``
+objects. The existing methods that modify objects in-place are now deprecated,
+and superseded by methods that follow the immutable object patterns described in
+the PSR7 standard.
+
+Several properties on ``Cake\Network\Request`` have been deprecated:
+
+* ``Request::$params`` is deprecated. Use ``Request::getParam()`` instead.
+* ``Request::$data`` is deprecated. Use ``Request::getData()`` instead.
+* ``Request::$query`` is deprecated. Use ``Request::getQuery()`` instead.
+* ``Request::$cookies`` is deprecated. Use ``Request::getCookie()`` instead.
+* ``Request::$base`` is deprecated. Use ``Request::getAttribute('base')`` instead.
+* ``Request::$webroot`` is deprecated. Use ``Request::getAttribute('webroot')`` instead.
+* ``Request::$here`` is deprecated. Use ``Request::here()`` instead.
+* ``Request::$_session`` was renamed to ``Request::$session``.
+
+A number of methods on ``Cake\Network\Request`` have been deprecated:
+
+* ``__get()`` & ``__isset()`` methods are deprecated. Use ``getParam()`` instead.
+* ``method()`` is deprecated. Use ``getMethod()`` instead.
+* ``setInput()`` is deprecated. Use ``withBody()`` instead.
+* The ``ArrayAccess`` methods have all been deprecated.
+* ``Request::param()`` is deprecated. Use ``Request::getParam()`` instead.
+* ``Request::data()`` is deprecated. Use ``Request::getData()`` instead.
+* ``Request::query()`` is deprecated. Use ``Request::getQuery()`` instead.
+* ``Request::cookie()`` is deprecated. Use ``Request::getCookie()`` instead.
+
+Several methods on ``Cake\Network\Response`` have been deprecated because they
+either overlap the PSR7 methods, or are obsoleted by the PSR7 stack:
+
+* ``Response::header()`` is deprecated. Use ``getHeaderLine()``, ``hasHeader()`` or
+  ``Response::getHeader()`` instead.
+* ``Response::body()`` is deprecated. Use ``Response::withBody()`` instead.
+* ``Response::statusCode()`` is deprecated. Use ``Response::getStatusCode()`` instead.
+* ``Response::httpCodes()`` This method should no longer be used. CakePHP now supports all
+  standards recommended status codes.
+* ``Response::protocol()`` is deprecated. Use ``Response::getProtocolVersion()`` instead.
+* ``send()``, ``sendHeaders()``, ``_sendHeader()``, ``_sendContent()``,
+  ``_setCookies()``, ``_setContentType()``, and ``stop()`` are deprecated and
+  obsoleted by the PSR7 HTTP stack.
+
+With responses heading towards immutable object patterns as recommended by the
+PSR7 standards, a number of 'helper' methods in ``Response`` have been
+deprecated and immutable variants are now recommended:
+
+* ``Response::location()`` would become ``Response::withLocation()``
+* ``Response::disableCache()`` would become ``Response::withDisabledCache()``
+* ``Response::type()`` would become ``Response::withType()``
+* ``Response::charset()`` would become ``Response::withCharset()``
+* ``Response::cache()`` would become ``Response::withCache()``
+* ``Response::modified()`` would become ``Response::withModified()``
+* ``Response::expires()`` would become ``Response::withExpires()``
+* ``Response::sharable()`` would become ``Response::withSharable()``
+* ``Response::maxAge()`` would become ``Response::withMaxAge()``
+* ``Response::vary()`` would become ``Response::withVary()``
+* ``Response::etag()`` would become ``Response::withEtag()``
+* ``Response::compress()`` would become ``Response::withCompression()``
+* ``Response::length()`` would become ``Response::withLength()``
+* ``Response::mustRevalidate()`` would become ``Response::withMustRevalidate()``
+* ``Response::notModified()`` would become ``Response::withNotModified()``
+* ``Response::cookie()`` would become ``Response::withCookie()``
+* ``Response::file()`` would become ``Response::withFile()``
+* ``Response::download()`` would become ``Response::withDownload()``
+
+Please see the :ref:`adopting-immutable-responses` section for more information
+before updating your code as using responses throug the immutable methods will
+require additional changes.
+
+Other Deprecations
+------------------
+
 * The public properties on ``Cake\Event\Event`` are deprecated, new methods have
   been added to read/write the relevant properties.
-* Several properties on ``Cake\Network\Request`` have been deprecated:
-
-  * ``Request::$params`` is deprecated. Use ``Request::getParam()`` instead.
-  * ``Request::$data`` is deprecated. Use ``Request::getData()`` instead.
-  * ``Request::$query`` is deprecated. Use ``Request::getQuery()`` instead.
-  * ``Request::$cookies`` is deprecated. Use ``Request::getCookie()`` instead.
-  * ``Request::$base`` is deprecated. Use ``Request::getAttribute('base')`` instead.
-  * ``Request::$webroot`` is deprecated. Use ``Request::getAttribute('webroot')`` instead.
-  * ``Request::$here`` is deprecated. Use ``Request::here()`` instead.
-  * ``Request::$_session`` was renamed to ``Request::$session``.
-
-* A number of methods on ``Cake\Network\Request`` have been deprecated:
-
-  * ``__get()`` & ``__isset()`` methods are deprecated. Use ``getParam()`` instead.
-  * ``method()`` is deprecated. Use ``getMethod()`` instead.
-  * ``setInput()`` is deprecated. Use ``withBody()`` instead.
-  * The ``ArrayAccess`` methods have all been deprecated.
-  * ``Request::param()`` is deprecated. Use ``Request::getParam()`` instead.
-  * ``Request::data()`` is deprecated. Use ``Request::getData()`` instead.
-  * ``Request::query()`` is deprecated. Use ``Request::getQuery()`` instead.
-  * ``Request::cookie()`` is deprecated. Use ``Request::getCookie()`` instead.
-
 * The ``Auth.redirect`` session variable is no longer used. Instead a query
   string parameter is used to store the redirect URL.
 * ``AuthComponent`` no longer stores redirect URLs when the unauthorized URL is
@@ -70,6 +122,15 @@ Cake\Validation\Validator
     * ``provider()``
 Cake\View\StringTemplateTrait
     * ``templates()``
+
+.. _adopting-immutable-responses:
+
+Adopting Immutable Responses
+============================
+
+* describe how immutable objects should be handled
+* gotchas around components retaining state.
+* always reassign $controller->response
 
 Behavior Changes
 ================
