@@ -25,12 +25,16 @@ Chronos provides a number of extensions to the DateTime objects provided by PHP.
 Chronos provides 5 classes that cover mutable and immutable date/time variants
 and extensions to ``DateInterval``.
 
-* ``Cake\Chronos\Chronos`` is an immutable *date and time* object.
+* ``Cake\Chronos\DateTime`` is an immutable *date and time* object.
 * ``Cake\Chronos\Date`` is a immutable *date* object.
 * ``Cake\Chronos\MutableDateTime`` is a mutable *date and time* object.
 * ``Cake\Chronos\MutableDate`` is a mutable *date* object.
 * ``Cake\Chronos\ChronosInterval`` is an extension to the ``DateInterval``
   object.
+
+Instead of ``Cake\Chronos\DateTime`` you can also use the alias ``Cake\Chronos\Chronos``.
+This aims to provide a collision-free version in case you are also handling
+core PHP ``DateTime`` in the same file.
 
 Lastly, if you want to typehint against Chronos-provided date/time objects you
 should use ``Cake\Chronos\ChronosInterface``. All of the date and time objects
@@ -42,25 +46,25 @@ Creating Instances
 There are many ways to get an instance of Chronos or Date. There are a number of
 factory methods that work with different argument sets::
 
-    use Cake\Chronos\Chronos;
+    use Cake\Chronos\DateTime;
 
-    $now = Chronos::now();
-    $today = Chronos::today();
-    $yesterday = Chronos::yesterday();
-    $tomorrow = Chronos::tomorrow();
+    $now = DateTime::now();
+    $today = DateTime::today();
+    $yesterday = DateTime::yesterday();
+    $tomorrow = DateTime::tomorrow();
 
     // Parse relative expressions
-    $date = Chronos::parse('+2 days, +3 hours');
+    $date = DateTime::parse('+2 days, +3 hours');
 
     // Date and time integer values.
-    $date = Chronos::create(2015, 12, 25, 4, 32, 58);
+    $date = DateTime::create(2015, 12, 25, 4, 32, 58);
 
     // Date or time integer values.
-    $date = Chronos::createFromDate(2015, 12, 25);
-    $date = Chronos::createFromTime(11, 45, 10);
+    $date = DateTime::createFromDate(2015, 12, 25);
+    $date = DateTime::createFromTime(11, 45, 10);
 
     // Parse formatted values.
-    $date = Chronos::createFromFormat('m/d/Y', '06/15/2015');
+    $date = DateTime::createFromFormat('m/d/Y', '06/15/2015');
 
 Working with Immutable Objects
 ------------------------------
@@ -117,6 +121,8 @@ Modifier Methods
 Chronos objects provide modifier methods that let you modify the value in
 a granular way::
 
+    use Cake\Chronos\Date;
+
     // Set components of the datetime value.
     $halloween = Date::create()
         ->year(2015)
@@ -136,7 +142,9 @@ You can also modify parts of a date relatively::
 
 It is also possible to make big jumps to defined points in time::
 
-    $time = Chronos::create();
+    use Cake\Chronos\DateTime;
+
+    $time = DateTime::create();
     $time->startOfDay();
     $time->endOfDay();
     $time->startOfMonth();
@@ -249,7 +257,9 @@ Extracting Date Components
 
 Getting parts of a date object can be done by directly accessing properties::
 
-    $time = new Chronos('2015-12-31 23:59:58');
+    use Cake\Chronos\DateTime;
+
+    $time = new DateTime('2015-12-31 23:59:58');
     $time->year;    // 2015
     $time->month;   // 12
     $time->day;     // 31
@@ -276,19 +286,28 @@ When writing unit tests, it is helpful to fixate the current time. Chronos lets
 you fix the current time for each class. As part of your test suite's bootstrap
 process you can include the following::
 
-    Chronos::setTestNow(Chronos::now());
+    use Cake\Chronos\Date;
+    use Cake\Chronos\DateTime;
+    use Cake\Chronos\MutableDate;
+    use Cake\Chronos\MutableDateTime;
+
+
+    DateTime::setTestNow(DateTime::now());
     MutableDateTime::setTestNow(MutableDateTime::now());
+
     Date::setTestNow(Date::now());
     MutableDate::setTestNow(MutableDate::now());
 
 This will fix the current time of all objects to be the point at which the test
 suite started.
 
-For example, if you fixate the ``Chronos`` to some moment in the past, any new
-instance of ``Chronos`` created with ``now`` or a relative time string, will be
+For example, if you fixate ``DateTime`` to some moment in the past, any new
+instance of ``DateTime`` created with ``now`` or a relative time string, will be
 returned relative to the fixated time::
 
-    Chronos::setTestNow(new Chronos('1975-12-25 00:00:00'));
+    use Cake\Chronos\DateTime;
 
-    $time = new Chronos(); // 1975-12-25 00:00:00
-    $time = new Chronos('1 hour ago'); // 1975-12-24 23:00:00
+    DateTime::setTestNow(new DateTime('1975-12-25 00:00:00'));
+
+    $time = new DateTime(); // 1975-12-25 00:00:00
+    $time = new DateTime('1 hour ago'); // 1975-12-24 23:00:00
