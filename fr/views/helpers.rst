@@ -17,6 +17,7 @@ les helpers inclus dans CakePHP, regardez le chapitre pour chaque helper:
 .. toctree::
     :maxdepth: 1
 
+    /views/helpers/breadcrumbs
     /views/helpers/flash
     /views/helpers/form
     /views/helpers/html

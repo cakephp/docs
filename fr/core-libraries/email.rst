@@ -407,7 +407,7 @@ ressembler à cela::
     {
         public function send(Email $email)
         {
-            // Magie à l'intérieur !
+            // Logique d'exécution
         }
     }
 

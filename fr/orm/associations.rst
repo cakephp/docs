@@ -213,8 +213,8 @@ Les clés possibles pour une association hasOne sont:
   un nom en underscore et singulier de l'association, donc ``address`` dans
   notre exemple.
 - **strategy**: Définit la stratégie de requête à utiliser. Par défaut à
-  'join'. L'autre valeur valide est 'select', qui utilise les sous-requêtes à la
-  place.
+  'join'. L'autre valeur valide est 'select', qui utilise une requête distincte
+  à la place.
 - **finder**: La méthode finder à utiliser lors du chargement des
   enregistrements associés.
 
@@ -225,7 +225,7 @@ Users peuvent contenir l'enregistrement Address, s'il existe::
     $query = $users->find('all')->contain(['Addresses']);
     foreach ($query as $user) {
         echo $user->address->street;
-   }
+    }
 
 Ce qui est au-dessus génèrera une commande SQL similaire à::
 
@@ -237,7 +237,8 @@ Associations BelongsTo
 Maintenant que nous avons un accès des données Address à partir de la table
 User, définissons une association belongsTo dans la table Addresses afin
 d'avoir un accès aux données liées de l'User. L'association belongsTo est un
-complément naturel aux associations hasOne et hasMany.
+complément naturel aux associations hasOne et hasMany, permettant de voir les
+données associées dans l'autre sens.
 
 Lorsque vous remplissez les clés des tables de votre base de données pour une
 relation belongsTo, suivez cette convention:
@@ -306,11 +307,14 @@ Les clés possibles pour les tableaux d'association belongsTo sont:
   données de la table associée dans les résultats de la table source. Par défaut
   il s'agit du nom singulier avec des underscores de l'association donc
   ``user`` dans notre exemple.
+- **strategy**: Définit la stratégie de requête à utiliser. Par défaut à
+  'join'. L'autre valeur valide est 'select', qui utilise une requête distincte
+  à la place.
 - **finder**: La méthode finder à utiliser lors du chargement des
   enregistrements associés.
 
 Une fois que cette association a été définie, les opérations find sur la table
-User peuvent contenir l'enregistrement Address s'il existe::
+Addresses peuvent contenir l'enregistrement User s'il existe::
 
     // Dans un controller ou dans une méthode table.
     $query = $addresses->find('all')->contain(['Users']);
@@ -420,7 +424,7 @@ Les clés possibles pour les tableaux d'association hasMany sont:
   primaire (par exemple la colonne id de la table ``Users``) sera utilisée.
 - **conditions**: un tableau de conditions compatibles avec find() ou des
   chaînes SQL comme ``['Comments.visible' => true]``.
-- **sort**  un tableau compatible avec les clauses order de find() ou les
+- **sort**: un tableau compatible avec les clauses order de find() ou les
   chaînes SQL comme ``['Comments.created' => 'ASC']``.
 - **dependent**: Lorsque dependent vaut ``true``, une suppression récursive du
   model est possible. Dans cet exemple, les enregistrements Comment seront
@@ -505,7 +509,7 @@ underscore par convention. Dans sa forme la plus simple, cette table se résume
 de *model*.
 
 ============================ ================================================================
-Relationship                 Pivot Table Fields
+Relation                     Champs de la table de jointure
 ============================ ================================================================
 Article belongsToMany Tag    articles_tags.id, articles_tags.tag_id, articles_tags.article_id
 ---------------------------- ----------------------------------------------------------------
@@ -574,23 +578,26 @@ sont:
   (si la table ne colle pas à la convention de nommage des tables de jointure
   belongsToMany). Par défaut, le nom de la table sera utilisé pour charger
   l'instance Table pour la table de jointure/pivot.
-- **foreignKey**: le nom de la clé étrangère que l'on trouve dans le model
-  actuel ou la liste en cas de clés étrangères composites. Ceci est
-  particulièrement pratique si vous avez besoin de définir plusieurs relations
-  belongsToMany. La valeur par défaut de cette clé est le nom du model actuel
-  (avec des underscores) avec le suffixe '\_id'.
-- **targetForeignKey**: le nom de la clé étrangère qui se trouve dans le model
-  cible ou la liste en cas de clés étrangères composites. La valeur par défaut
-  pour cette clé est le model cible, au singulier et en underscore, avec le
-  suffixe '\_id'.
-- **conditions**: un tableau de conditions compatibles avec find(). Si vous avez
-  des conditions sur une table associée, vous devriez utiliser un model
+- **foreignKey**: le nom de la clé étrangère dans la table de jointure et qui
+  fait référence au model actuel ou la liste en cas de clés étrangères
+  composites. Ceci est particulièrement pratique si vous avez besoin de définir
+  plusieurs relations belongsToMany. La valeur par défaut de cette clé est le
+  nom du model actuel (avec des underscores) avec le suffixe '\_id'.
+- **bindingKey**: le nom de la colonne dans l'autre table, qui sera utilisée
+  pour correspondre à la ``foreignKey``. S'il n'est pas spécifié, la clé
+  primaire (par exemple la colonne id de la table ``Users``) sera utilisée.
+- **targetForeignKey**: le nom de la clé étrangère dans la table de jointure
+  pour le model cible ou la liste en cas de clés étrangères composites. La
+  valeur par défaut pour cette clé est le model cible, au singulier et en
+  underscore, avec le suffixe '\_id'.
+- **conditions**: un tableau de conditions compatibles avec ``find()``. Si vous
+  avez des conditions sur une table associée, vous devriez utiliser un model
   'through' et lui définir les associations belongsTo nécessaires.
-- **sort** un tableau de clauses order compatible avec find().
+- **sort**: un tableau de clauses order compatible avec find().
 - **dependent**: Quand la clé dependent est définie à ``false`` et qu'une entity
   est supprimée, les enregistrements de la table de jointure ne seront pas
   supprimés.
-- **through** Vous permet de fournir soit le nom de l'instance de la Table
+- **through**: Vous permet de fournir soit le nom de l'instance de la Table
   que vous voulez utiliser, soit l'instance elle-même. Cela rend possible la
   personnalisation des clés de la table de jointure, et vous permet de
   personnaliser le comportement de la table pivot.

@@ -108,11 +108,20 @@ en une fois en utilisant un tableau::
 Accesseurs & Mutateurs
 ======================
 
-.. php:method:: set($field = null, $value = null)
-
 En plus de l'interface simple get/set, les entities vous permettent de fournir
 des méthodes accesseurs et mutateurs. Ces méthodes vous laissent personnaliser
-la façon dont les propriétés sont lues ou définies. Par exemple::
+la façon dont les propriétés sont lues ou définies.
+
+Les accesseurs utilisent la convention ``_get`` suivi par la version en camel
+case du nom du champ.
+
+.. php:method:: get($field)
+
+Ils reçoivent la valeur basique stockée dans le tableau ``_properties`` pour
+seul argument.
+Les accesseurs seront utilisés lors de la sauvegarde des entities. Faites donc
+attention lorsque vous définissez des méthodes qui formatent les données car ce
+sont ces données formatées qui seront sauvegardées. Par example::
 
     namespace App\Model\Entity;
 
@@ -126,14 +135,26 @@ la façon dont les propriétés sont lues ou définies. Par exemple::
         }
     }
 
-Les accesseurs utilisent la convention ``_get`` suivi par la version en camel
-case du nom du champ. Ils reçoivent la valeur basique stockée dans le tableau
-``_properties`` pour seul argument.
-Les accesseurs seront utilisés lors de la sauvegarde des entities.
-Faites donc attention lorsque vous définissez des méthodes qui formatent les
-données car ce sont ces données formatées qui seront sauvegardées. Vous
-pouvez personnaliser la façon dont les propriétés sont récupérées/définies
-en définissant un mutateur::
+Les accesseurs seront utilisés quand vous récupérerez la propriété via une de
+ces deux manières::
+
+    echo $user->title;
+    echo $user->get('title');
+
+Vous pouvez personnaliser la façon dont les propriétés sont récupérées/définies
+en définissant un mutateur:
+
+.. php:method:: set($field = null, $value = null)
+
+Les méthodes mutateurs doivent toujours retourner la valeur qui doit être
+stockée dans la propriété. Comme vous pouvez le voir au-dessus, vous pouvez
+aussi utiliser les mutateurs pour définir d'autres propriétés calculées. En
+faisant cela, attention à ne pas introduire de boucles, puisque CakePHP
+n'empêchera pas les méthodes mutateur de faire des boucles infinies. Les
+mutateurs vous permettent de convertir les propriétés lorsqu'elles sont définies
+ou de créer des données calculées. Les mutateurs et accesseurs sont appliqués
+quand les propriétés sont lues en utilisant la notation objet ou en utilisant
+get() et set(). Par exemple::
 
     namespace App\Model\Entity;
 
@@ -151,20 +172,16 @@ en définissant un mutateur::
 
     }
 
-Les méthodes mutateurs doivent toujours retourner la valeur qui doit être
-stockée dans la propriété. Comme vous pouvez le voir au-dessus, vous pouvez
-aussi utiliser les mutateurs pour définir d'autres propriétés calculées. En
-faisant cela, attention à ne pas introduire de boucles, puisque CakePHP
-n'empêchera pas les méthodes mutateur de faire des boucles infinies. Les
-mutateurs vous permettent de convertir les propriétés lorsqu'elles sont définies
-ou de créer des données calculées. Les mutateurs et accesseurs sont appliqués
-quand les propriétés sont lues en utilisant la notation objet ou en utilisant
-get() et set().
+Les mutateurs seront utilisés lorsque vous définirez une propriété via une de
+ces deux manières::
+
+    $user->title = 'foo' // slug sera aussi défini
+    $user->set('title', 'foo'); // slug sera aussi défini
 
 .. _entities-virtual-properties:
 
-Créer des Champs Virtuels
--------------------------
+Créer des Propriétés Virtuelles
+-------------------------------
 
 En définissant des accesseurs, vous pouvez fournir un accès aux
 champs/propriétés qui n'existent pas réellement. Par exemple si votre table
@@ -186,13 +203,16 @@ nom complet::
 
     }
 
-Vous pouvez accéder aux champs virtuels puisqu'ils existent sur l'entity. Le nom
-de la propriété sera la version en minuscule et en underscore de la méthode::
+Vous pouvez accéder aux propriétés virtuelles puisqu'elles existent sur
+l'entity. Le nom de la propriété sera la version en minuscule et en underscore
+de la méthode::
 
     echo $user->full_name;
 
-Souvenez-vous que les champs virtuels ne peuvent pas être utilisées dans les
-finds.
+Souvenez-vous que les propriétés virtuelles ne peuvent pas être utilisées dans
+les finds. Si vous voulez que les propriétés virtuelles fassent parties des
+données affichées lorsque vous affichez les représentations JSON ou en tableau
+de vos entités, reportez-vous à la section :ref:`exposing-virtual-properties`.
 
 Vérifier si une Entity a été Modifiée
 =====================================
@@ -464,6 +484,8 @@ sont utilisées. Les entities sont converties aussi de façon récursive en JSON
 Cela signifie que si les entities et leurs associations sont chargées en eager
 loading, CakePHP va correctement gérer la conversion des données associées dans
 le bon format.
+
+.. _exposing-virtual-properties:
 
 Montrer les Propriétés Virtuelles
 ---------------------------------

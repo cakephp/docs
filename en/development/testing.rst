@@ -19,14 +19,18 @@ through using either a `PHAR package <http://phpunit.de/#download>`__ or
 Install PHPUnit with Composer
 -----------------------------
 
-To install PHPUnit with Composer::
+To install PHPUnit with Composer:
+
+.. code-block:: bash
 
     $ php composer.phar require --dev phpunit/phpunit
 
 This will add the dependency to the ``require-dev`` section of your
 ``composer.json``, and then install PHPUnit along with any dependencies.
 
-You can now run PHPUnit using::
+You can now run PHPUnit using:
+
+.. code-block:: bash
 
     $ vendor/bin/phpunit
 
@@ -34,18 +38,22 @@ Using the PHAR File
 -------------------
 
 After you have downloaded the **phpunit.phar** file, you can use it to run your
-tests::
+tests:
+
+.. code-block:: bash
 
     php phpunit.phar
 
 .. tip::
 
     As a convenience you can make phpunit.phar available globally
-    on Unix or Linux with the following::
+    on Unix or Linux with the following:
 
-      chmod +x phpunit.phar
-      sudo mv phpunit.phar /usr/local/bin/phpunit
-      phpunit --version
+    .. code-block:: shell
+
+          chmod +x phpunit.phar
+          sudo mv phpunit.phar /usr/local/bin/phpunit
+          phpunit --version
 
     Please refer to the PHPUnit documentation for instructions regarding
     `Globally installing the PHPUnit PHAR on Windows <http://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`__.
@@ -79,18 +87,22 @@ Checking the Test Setup
 
 After installing PHPUnit and setting up your ``test`` datasource configuration
 you can make sure you're ready to write and run your own tests by running your
-application's tests::
+application's tests:
 
-    // For phpunit.phar
+.. code-block:: bash
+
+    # For phpunit.phar
     $ php phpunit.phar
 
-    // For Composer installed phpunit
+    # For Composer installed phpunit
     $ vendor/bin/phpunit
 
 The above should run any tests you have, or let you know that no tests were run.
 To run a specific test you can supply the path to the test as a parameter to
 PHPUnit. For example, if you had a test case for ArticlesTable class you could
-run it with::
+run it with:
+
+.. code-block:: bash
 
     $ vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -220,34 +232,42 @@ the test cases very frequently. It's a good idea to run tests before committing
 any changes to help ensure you haven't broken anything.
 
 By using ``phpunit`` you can run your application tests. To run your
-application's tests you can simply run::
+application's tests you can simply run:
 
-    // composer installs
+.. code-block:: bash
+
+    # composer installs
     $ vendor/bin/phpunit
 
-    // phar file
+    # phar file
     php phpunit.phar
 
 If you have cloned the `CakePHP source from GitHub <https://github.com/cakephp/cakephp>`__
 and wish to run CakePHP's unit-tests don't forget to execute the following ``Composer``
-command prior to running ``phpunit`` so that any dependencies are installed::
+command prior to running ``phpunit`` so that any dependencies are installed:
+
+.. code-block:: bash
 
     $ composer install --dev
 
 From your application's root directory. To run tests for a plugin that is part
 of your application source, first ``cd`` into the plugin directory, then use
-``phpunit`` command that matches how you installed phpunit::
+``phpunit`` command that matches how you installed phpunit:
+
+.. code-block:: bash
 
     cd plugins
 
-    // Using composer installed phpunit
+    # Using composer installed phpunit
     ../vendor/bin/phpunit
 
-    // Using phar file
+    # Using phar file
     php ../phpunit.phar
 
 To run tests on a standalone plugin, you should first install the project in
-a separate directory and install its dependencies::
+a separate directory and install its dependencies:
+
+.. code-block:: bash
 
     git clone git://github.com/cakephp/debug_kit.git
     cd debug_kit
@@ -259,7 +279,9 @@ Filtering Test Cases
 
 When you have larger test cases, you will often want to run a subset of the test
 methods when you are trying to work on a single failing case. With the
-CLI runner you can use an option to filter test methods::
+CLI runner you can use an option to filter test methods:
+
+.. code-block:: bash
 
     $ phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -272,7 +294,9 @@ Generating Code Coverage
 You can generate code coverage reports from the command line using PHPUnit's
 built-in code coverage tools. PHPUnit will generate a set of static HTML files
 containing the coverage results. You can generate coverage for a test case by
-doing the following::
+doing the following:
+
+.. code-block:: bash
 
     $ phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -287,7 +311,9 @@ Often times your application will be composed of several plugins. In these
 situations it can be pretty tedious to run tests for each plugin. You can make
 running tests for each of the plugins that compose your application by adding
 additional ``<testsuite>`` sections to your application's **phpunit.xml.dist**
-file::
+file:
+
+.. code-block:: xml
 
     <testsuites>
         <testsuite name="App Test Suite">
@@ -531,7 +557,6 @@ definition to create the table definition used in the test suite.
 Let's start with an example. Assuming you have a table named articles available
 in your application, change the example fixture given in the previous section
 (**tests/Fixture/ArticlesFixture.php**) to::
-
 
     class ArticlesFixture extends TestFixture
     {
@@ -1526,10 +1551,8 @@ Creating Test Suites
 
 If you want several of your tests to run at the same time, you can create a test
 suite. A test suite is composed of several test cases.  You can either create
-test suites in your application's **phpunit.xml** file, or by creating suite
-classes using ``CakeTestSuite``. Using **phpunit.xml** is good when you only
-need simple include/exclude rules to define your test suite. A simple example
-would be
+test suites in your application's **phpunit.xml** file. A simple example
+would be:
 
 .. code-block:: xml
 
@@ -1540,28 +1563,6 @@ would be
         <exclude>src/Model/Cloud/ImagesTest.php</exclude>
       </testsuite>
     </testsuites>
-
-``CakeTestSuite`` offers several methods for creating test suites based
-on the file system. It allows you to run any code you want to prepare your test
-suite. If we wanted to create a test suite for all our model tests we could
-would create **tests/TestCase/AllModelTest.php**. Put the following in it::
-
-    class AllModelTest extends TestSuite
-    {
-        public static function suite() {
-            $suite = new CakeTestSuite('All model tests');
-            $suite->addTestDirectory(TESTS . 'Case/Model');
-            return $suite;
-        }
-    }
-
-The code above will group all test cases found in the **tests/TestCase/Model/**
-folder. To add an individual file, use ``$suite->addTestFile($filename);``. You
-can recursively add a directory for all tests using::
-
-    $suite->addTestDirectoryRecursive(TESTS . 'TestCase');
-
-Would recursively add all test cases in the **tests/TestCase/** directory.
 
 Creating Tests for Plugins
 ==========================
@@ -1608,13 +1609,13 @@ contains the fixture listener::
 
     <!-- Setup a listener for fixtures -->
     <listeners>
-            <listener
-            class="\Cake\TestSuite\Fixture\FixtureInjector"
-            file="./vendor/cakephp/cakephp/src/TestSuite/Fixture/FixtureInjector.php">
-                    <arguments>
-                            <object class="\Cake\TestSuite\Fixture\FixtureManager" />
-                    </arguments>
-            </listener>
+        <listener
+        class="\Cake\TestSuite\Fixture\FixtureInjector"
+        file="./vendor/cakephp/cakephp/src/TestSuite/Fixture/FixtureInjector.php">
+            <arguments>
+                <object class="\Cake\TestSuite\Fixture\FixtureManager" />
+            </arguments>
+        </listener>
     </listeners>
 
 You should also ensure that your fixtures are loadable. Ensure the following is
@@ -1712,7 +1713,10 @@ override any other configuration files you need on Jenkins.
 It's often a good idea to drop and re-create the database before each build as
 well. This insulates you from chained failures, where one broken build causes
 others to fail. Add another *shell script step* to the build that contains the
-following::
+following:
+
+
+.. code-block:: bash
 
     mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
 
@@ -1727,7 +1731,7 @@ of your testing results:
 .. code-block:: bash
 
     # Download Composer if it is missing.
-    test -f 'composer.phar' || curl -sS https://getcomposer.org/installer| php
+    test -f 'composer.phar' || curl -sS https://getcomposer.org/installer | php
     # Install dependencies
     php composer.phar install
     vendor/bin/phpunit --log-junit junit.xml --coverage-clover clover.xml

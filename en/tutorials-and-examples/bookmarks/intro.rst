@@ -264,6 +264,10 @@ view pages. CakePHP hashes passwords with `bcrypt
 <http://codahale.com/how-to-safely-store-a-password/>`_ by default. You can also
 use sha1 or md5 if you're working with an existing database.
 
+.. note::
+
+      If the password doesn't get hashed, make sure you followed the same case for the password member of the class while naming the setter function
+
 Getting Bookmarks with a Specific Tag
 =====================================
 

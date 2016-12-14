@@ -124,7 +124,7 @@ des lignes, les convertissez en tableau, ou quand la méthode
     $data = $results->toArray();
 
     // Convertir la requête en tableau va l'exécuter.
-    $results = $query->toArray();
+    $data = $query->toArray();
 
 .. note::
 
@@ -311,8 +311,8 @@ de la méthode de mutation ``_getFullName()`` de l'entity Author::
 
     $query = $articles->find('list', [
         'keyField' => 'id',
-        'valueField' => function ($e) {
-            return $e->author->get('full_name');
+        'valueField' => function ($article) {
+            return $article->author->get('full_name');
         }
     ]);
 
@@ -623,7 +623,7 @@ vous pouvez passer l'objet association à ``select()``::
     // Sélectionne id & title de articles, mais tous les champs enlevés pour Users.
     $query = $articles->find()
         ->select(['id', 'title'])
-        ->select($articlesTable->Users)
+        ->select($articles->Users)
         ->contain(['Users']);
 
 D'une autre façon, si vous pouvez faire des associations multiples, vous

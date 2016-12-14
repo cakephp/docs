@@ -333,6 +333,21 @@ pour utiliser uniquement la clé ``_ids`` et ignorer toutes les autres données.
 Convertir des Données HasMany
 -----------------------------
 
+Si vous souhaitez mettre à jour les associations hasMany existantes et mettre à
+jour leurs propriétés, vous devriez d'abord vous assurer que votre entity est
+chargée avec l'association hasMany remplie. Vous pouvez ensuite utiliser les
+données de la requête de la façon suivante::
+
+    $data = [
+        'title' => 'Mon titre',
+        'body' => 'Le texte',
+        'comments' => [
+            ['id' => 1, 'comment' => 'Mettre à jour le premier commentaire'],
+            ['id' => 2, 'comment' => 'Mettre à jour le deuxième commentaire'],
+            ['comment' => 'Créer un nouveau commentaire'],
+        ]
+    ];
+
 Si vous sauvegardez des associations hasMany et voulez lier des enregistrements
 existants à un nouveau parent, vous pouvez utiliser le format ``_ids``::
 
@@ -899,7 +914,8 @@ Sauvegarder les Associations BelongsTo
 --------------------------------------
 
 Lors de la sauvegarde des associations belongsTo, l'ORM s'attend à une entity
-imbriquée unique avec le nom de l'association au singulier, en underscore.
+imbriquée unique avec le nom de l'association au singulier et
+:ref:`en underscore <inflector-methods-summary>`.
 Par exemple::
 
     // Dans un controller.
@@ -921,7 +937,8 @@ Sauvegarder les Associations HasOne
 -----------------------------------
 
 Lors de la sauvegarde d'associations hasOne, l'ORM s'attend à une entity
-imbriquée unique avec le nom de l'association au singulier et en underscore.
+imbriquée unique avec le nom de l'association au singulier et
+:ref:`en underscore <inflector-methods-summary>`.
 Par exemple::
 
     // Dans un controller.
@@ -942,7 +959,8 @@ Sauvegarder les Associations HasMany
 ------------------------------------
 
 Lors de la sauvegarde d'associations hasMany, l'ORM s'attend à une entity
-imbriquée unique avec le nom de l'association au pluriel et en underscore.
+imbriquée unique avec le nom de l'association au pluriel et
+:ref:`en underscore <inflector-methods-summary>`.
 Par exemple::
 
     // Dans un controller.
@@ -989,7 +1007,8 @@ Sauvegarder les Associations BelongsToMany
 ------------------------------------------
 
 Lors de la sauvegarde d'associations hasMany, l'ORM s'attend à une entity
-imbriquée unique avec le nom de l'association au pluriel et en underscore.
+imbriquée unique avec le nom de l'association au pluriel et
+:ref:`en underscore <inflector-methods-summary>`.
 Par exemple::
 
     // Dans un controller.

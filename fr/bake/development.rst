@@ -155,11 +155,11 @@ ressemble à ceci::
     class <%= $name %>Shell extends Shell
     {
 
-    /**
-     * main() method.
-     *
-     * @return bool|int Success or error code.
-     */
+        /**
+         * main() method.
+         *
+         * @return bool|int Success or error code.
+         */
         public function main()
         {
         }

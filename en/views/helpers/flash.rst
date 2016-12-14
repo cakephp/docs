@@ -41,9 +41,8 @@ You can also override any of the options that were set in FlashComponent::
 
 .. note::
 
-    By default, CakePHP does not escape the HTML in flash messages. If you are
-    using any request or user data in your flash messages, you should escape it
-    with :php:func:`h` when formatting your messages.
+    When building custom flash message templates, be sure to properly HTML
+    encode any user data. CakePHP won't escape flash message parameters for you.
 
 .. versionadded:: 3.1
 
@@ -62,8 +61,8 @@ Routing Prefix and Flash Messages
 
 If you have a Routing prefix configured, you can now have your Flash elements
 stored in **src/Template/{Prefix}/Element/Flash**. This way, you can have
-specific messages layouts for each part of your application (for instance, have
-different layouts for your front-end and your admin side).
+specific messages layouts for each part of your application. For instance, using
+different layouts for your front-end and admin section.
 
 Flash Messages and Themes
 =========================

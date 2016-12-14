@@ -361,7 +361,10 @@ CakePHP は、エンティティが保存される前に適用される「ルー
     $rules->add($rules->isUnique(['email']));
 
     // フィールドのリスト
-    $rules->add($rules->isUnique(['username', 'account_id']));
+    $rules->add($rules->isUnique(
+        ['username', 'account_id'],
+        'この username と account_id の組み合わせはすでに使用されています。'
+    ));
 
 外部キーフィールドのルールを設定する時には、
 ルールでは列挙したフィールドのみが使われるのを覚えておくことが重要です。

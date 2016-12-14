@@ -243,10 +243,11 @@ spécifiques qui s'appliquent uniquement quand un compte est enregistré::
         'context' => ['validator' => 'register']
     ]);
 
-L'exemple précédent utilise le validateur ``register`` pour l'``$user`` et
-toutes les associations liées. Si vous créez un formulaire pour les entities
-associées, vous pouvez définir les règles de validation pour chaque association
-en utilisant un tableau::
+L'exemple précédent va utiliser les règles de validation définies dans le
+validateur ``register``, définies par ``UsersTable::validationRegister()``,
+pour le ``$user`` et toutes les associations liées. Si vous créez un
+formulaire pour les entities associées, vous pouvez définir les règles de
+validation pour chaque association en utilisant un tableau::
 
     echo $this->Form->create($user, [
         'context' => [

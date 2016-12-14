@@ -321,6 +321,20 @@ marshalling to only use the ``_ids`` key and ignore all other data.
 Converting HasMany Data
 -----------------------
 
+If you want to update existing hasMany associations and update their
+properties, you should first ensure your entity is loaded with the hasMany
+association populated. You can then use request data similar to::
+
+    $data = [
+        'title' => 'My Title',
+        'body' => 'The text',
+        'comments' => [
+            ['id' => 1, 'comment' => 'Update the first comment'],
+            ['id' => 2, 'comment' => 'Update the second comment'],
+            ['comment' => 'Create a new comment'],
+        ]
+    ];
+
 If you are saving hasMany associations and want to link existing records to a
 new parent record you can use the ``_ids`` format::
 
@@ -513,7 +527,7 @@ If a Product belongsToMany Tag::
 .. note::
 
     For hasMany and belongsToMany associations, if there were any entities that
-    could not be matched by primary key to any record in the data array, then
+    could not be matched by primary key to a record in the data array, then
     those records will be discarded from the resulting entity.
 
     Remember that using either ``patchEntity()`` or ``patchEntities()`` does not
@@ -839,8 +853,8 @@ you will have to mark the association property as modified with ``dirty()``::
 Saving BelongsTo Associations
 -----------------------------
 
-When saving belongsTo associations, the ORM expects a single nested entity at
-the singular, underscored version of the association name. For example::
+When saving belongsTo associations, the ORM expects a single nested entity named with
+the singular, :ref:`underscored <inflector-methods-summary>` version of the association name. For example::
 
     // In a controller.
     $data = [
@@ -860,8 +874,8 @@ the singular, underscored version of the association name. For example::
 Saving HasOne Associations
 --------------------------
 
-When saving hasOne associations, the ORM expects a single nested entity at the
-singular, underscored version of the association name. For example::
+When saving hasOne associations, the ORM expects a single nested entity named with the
+singular, :ref:`underscored <inflector-methods-summary>` version of the association name. For example::
 
     // In a controller.
     $data = [
@@ -880,8 +894,8 @@ singular, underscored version of the association name. For example::
 Saving HasMany Associations
 ---------------------------
 
-When saving hasMany associations, the ORM expects an array of entities at the
-plural, underscored version of the association name. For example::
+When saving hasMany associations, the ORM expects an array of entities named with the
+plural, :ref:`underscored <inflector-methods-summary>` version of the association name. For example::
 
     // In a controller.
     $data = [
@@ -922,8 +936,8 @@ Without the call to ``dirty()`` the updated comments will not be saved.
 Saving BelongsToMany Associations
 ---------------------------------
 
-When saving belongsToMany associations, the ORM expects an array of entities at
-the plural, underscored version of the association name. For example::
+When saving belongsToMany associations, the ORM expects an array of entities named with
+the plural, :ref:`underscored <inflector-methods-summary>` version of the association name. For example::
 
     // In a controller.
     $data = [

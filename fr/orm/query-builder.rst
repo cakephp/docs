@@ -1282,6 +1282,21 @@ en utilisant ``query()``::
         ])
         ->execute();
 
+Pour insérer plusieurs lignes en une seule requête, vous pouvez chaîner la
+méthode ``values()`` autant de fois que nécessaire::
+
+    $query = $articles->query();
+    $query->insert(['title', 'body'])
+        ->values([
+            'title' => 'First post',
+            'body' => 'Some body text'
+        ])
+        ->values([
+            'title' => 'Second post',
+            'body' => 'Another body text'
+        ])
+        ->execute();
+
 Généralement, il est plus facile d'insérer des données en utilisant les
 entities et :php:meth:`~Cake\\ORM\\Table::save()`. En composant des requêtes
 ``SELECT`` et ``INSERT`` ensemble, vous pouvez créer des requêtes de style

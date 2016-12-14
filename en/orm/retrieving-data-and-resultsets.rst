@@ -114,7 +114,7 @@ execute until you start fetching rows, convert it to an array, or when the
     $data = $results->toArray();
 
     // Converting the query to an array will execute it.
-    $results = $query->toArray();
+    $data = $query->toArray();
 
 .. note::
 
@@ -291,8 +291,8 @@ the Author entity. ::
 
     $query = $articles->find('list', [
         'keyField' => 'id',
-        'valueField' => function ($e) {
-            return $e->author->get('full_name');
+        'valueField' => function ($article) {
+            return $article->author->get('full_name');
         }
     ]);
 
@@ -584,7 +584,7 @@ to ``select()``::
     // Select id & title from articles, but all fields off of Users.
     $query = $articles->find()
         ->select(['id', 'title'])
-        ->select($articlesTable->Users)
+        ->select($articles->Users)
         ->contain(['Users']);
 
 Alternatively, if you have multiple associations, you can use ``autoFields()``::

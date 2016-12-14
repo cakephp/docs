@@ -1223,6 +1223,21 @@ Instead, create a new ``Query`` object using ``query()``::
         ])
         ->execute();
 
+To insert multiple rows with only one query, you can chain the ``values()``
+method as many times as you need::
+
+    $query = $articles->query();
+    $query->insert(['title', 'body'])
+        ->values([
+            'title' => 'First post',
+            'body' => 'Some body text'
+        ])
+        ->values([
+            'title' => 'Second post',
+            'body' => 'Another body text'
+        ])
+        ->execute();
+
 Generally, it is easier to insert data using entities and
 :php:meth:`~Cake\\ORM\\Table::save()`. By composing a ``SELECT`` and
 ``INSERT`` query together, you can create ``INSERT INTO ... SELECT`` style

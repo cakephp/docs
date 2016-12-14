@@ -1190,6 +1190,21 @@ join を作成する際には ``join()`` だけでなく、``rightJoin()``、 ``
         ])
         ->execute();
 
+１つのクエリで複数の行を insert するために ``values()`` メソッドを、必要な回数分
+つなげることができます。 ::
+
+    $query = $articles->query();
+    $query->insert(['title', 'body'])
+        ->values([
+            'title' => 'First post',
+            'body' => 'Some body text'
+        ])
+        ->values([
+            'title' => 'Second post',
+            'body' => 'Another body text'
+        ])
+        ->execute();
+
 通常は、エンティティを使い、 :php:meth:`~Cake\\ORM\\Table::save()` でデータを
 insert するほうが簡単です。また、``SELECT`` と ``INSERT`` を一緒に構築すれば、
 ``INSERT INTO ... SELECT`` スタイルのクエリを作成することができます。 ::

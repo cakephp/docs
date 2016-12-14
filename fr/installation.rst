@@ -175,6 +175,28 @@ pour vous assurer que les permissions sont bien configurées:
    setfacl -R -m u:${HTTPDUSER}:rwx logs
    setfacl -R -d -m u:${HTTPDUSER}:rwx logs
 
+Si vous souhaitez utiliser les outils de la console CakePHP, vous devez vous
+assurer que le fichier ``bin/cake`` (ou ``bin/cake.php``) est exécutable. Sur
+\*nix ou macOS, vous pouvez simplement exécuter la commande suivante (sur
+windows, le fichier **.bat** devrait déjà être exécutable) :
+
+.. code-block:: bash
+
+    chmod +x bin/cake
+
+Si vous utilisez Vagrant ou un autre environnement de développement virtualisé,
+tous les dossiers partagés devront être partagés avec des permissions
+d'exécutions. (Veuillez vous référer à la documentation de votre environnement
+de virtualisation pour savoir comment procéder).
+
+Si, pour une quelconque raison, vous ne pouvez pas changer les permissions du
+fichier ``bin/cake``, vous pouvez lancer la console CakePHP avec la commande
+suivante :
+
+.. code-block:: bash
+
+    php bin/cake.php
+
 Serveur de Développement
 ========================
 
