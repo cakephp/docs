@@ -367,7 +367,7 @@ de réponse.
 
 .. versionchanged:: 3.3.0
     Depuis la version 3.3.0 ``Cake\Http\Client\Response`` implémente
-    `PSR7 ResponseInterface
+    `PSR-7 ResponseInterface
     <http://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface>`__.
 
 

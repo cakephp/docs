@@ -15,9 +15,9 @@ Middleware
 Les objets Middleware vous donnent la possibilité de 'wrapper' votre application
 en des couches compatibles et réutilisables de gestion de Requête, ou de la
 logique de construction de réponse. Middleware sont une partie du nouveau HTTP
-stack dans qui tire parti des interfaces PSR7 request et response. En tirant
-parti du standard PSR7, vous pouvez utilisez tout middleware compatible avec
-PSR7 qui se trouve sur `Packagist <https://packagist.org>`__.
+stack dans qui tire parti des interfaces PSR-7 request et response. En tirant
+parti du standard PSR-7, vous pouvez utilisez tout middleware compatible avec
+PSR-7 qui se trouve sur `Packagist <https://packagist.org>`__.
 
 CakePHP fournit plusieurs middlewares:
 
@@ -106,10 +106,10 @@ scripts, that add middleware::
             $middleware->add(new ContactPluginMiddleware());
         });
 
-Requêtes et Réponses PSR7
-=========================
+Requêtes et Réponses PSR-7
+==========================
 
-Middleware and the new HTTP stack are built on top of the `PSR7 Request
+Middleware and the new HTTP stack are built on top of the `PSR-7 Request
 & Response Interfaces <http://www.php-fig.org/psr/psr-7/>`__. While all
 middleware will be exposed to these interfaces, your controllers, components,
 and views will *not*.
@@ -215,7 +215,7 @@ While not a formal interface (yet), Middleware do have a soft-interface or
 'protocol'. The protocol is as follows:
 
 #. Middleware must implement ``__invoke($request, $response, $next)``.
-#. Middleware must return an object implementing the PSR7 ``ResponseInterface``.
+#. Middleware must return an object implementing the PSR-7 ``ResponseInterface``.
 
 Middleware can return a response either by calling ``$next`` or by creating
 their own response. We can see both options in our simple middleware::
@@ -284,4 +284,4 @@ application/plugin dispatch filters as HTTP middleware.
 
 .. meta::
     :title lang=fr: Http Middleware
-    :keywords lang=fr: http, middleware, psr7, request, response, wsgi, application, baseapplication
+    :keywords lang=fr: http, middleware, psr-7, request, response, wsgi, application, baseapplication

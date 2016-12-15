@@ -16,7 +16,7 @@ Request & Response Deprecations
 The bulk of deprecations for 3.4 are in the ``Request`` and ``Response``
 objects. The existing methods that modify objects in-place are now deprecated,
 and superseded by methods that follow the immutable object patterns described in
-the PSR7 standard.
+the PSR-7 standard.
 
 Several properties on ``Cake\Network\Request`` have been deprecated:
 
@@ -41,7 +41,7 @@ A number of methods on ``Cake\Network\Request`` have been deprecated:
 * ``Request::cookie()`` is deprecated. Use ``Request::getCookie()`` instead.
 
 Several methods on ``Cake\Network\Response`` have been deprecated because they
-either overlap the PSR7 methods, or are obsoleted by the PSR7 stack:
+either overlap the PSR-7 methods, or are obsoleted by the PSR-7 stack:
 
 * ``Response::header()`` is deprecated. Use ``getHeaderLine()``, ``hasHeader()`` or
   ``Response::getHeader()`` instead.
@@ -52,10 +52,10 @@ either overlap the PSR7 methods, or are obsoleted by the PSR7 stack:
 * ``Response::protocol()`` is deprecated. Use ``Response::getProtocolVersion()`` instead.
 * ``send()``, ``sendHeaders()``, ``_sendHeader()``, ``_sendContent()``,
   ``_setCookies()``, ``_setContentType()``, and ``stop()`` are deprecated and
-  obsoleted by the PSR7 HTTP stack.
+  obsoleted by the PSR-7 HTTP stack.
 
 With responses heading towards immutable object patterns as recommended by the
-PSR7 standards, a number of 'helper' methods in ``Response`` have been
+PSR-7 standards, a number of 'helper' methods in ``Response`` have been
 deprecated and immutable variants are now recommended:
 
 * ``Response::location()`` would become ``Response::withLocation()``

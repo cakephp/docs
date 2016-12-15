@@ -351,7 +351,7 @@ Response Objects
 Response objects have a number of methods for inspecting the response data.
 
 .. versionchanged:: 3.3.0
-    As of 3.3.0 ``Cake\Http\Client\Response`` implements the `PSR7
+    As of 3.3.0 ``Cake\Http\Client\Response`` implements the `PSR-7
     ResponseInterface
     <http://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface>`__.
 
