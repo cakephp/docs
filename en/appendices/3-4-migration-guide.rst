@@ -128,9 +128,58 @@ Cake\View\StringTemplateTrait
 Adopting Immutable Responses
 ============================
 
-* describe how immutable objects should be handled
-* gotchas around components retaining state.
-* always reassign $controller->response
+Before you migrate your code to use the new response methods you should be aware
+of the semantic changes the new methods create. The immutable methods are
+generally indicated using a ``with`` prefix. For example, ``withLocation()``.
+Because these methods operate in an immutable context, they return *new*
+instances which you need to assign to variables or properties. If you had
+controller code that looked like::
+
+    $response = $this->response;
+    $response->location('/login')
+    $response->header('X-something', 'a value');
+
+If you were to simply find & replace method names your code would break. Instead
+you must now use code that looks like::
+
+    $this->response = $this->response
+        ->withLocation('/login')
+        ->withHeader('X-something', 'a value');
+
+There are a few key differences:
+
+#. The result of your changes is re-assigned to ``$this->response``. This is
+   critical to preserving the intent of the above code.
+#. The setter methods can all be chained together. This allows you to skip
+   storing all the intermediate objects.
+
+Component Migration Tips
+------------------------
+
+In previous versions of CakePHP, Components often held onto references to both
+the request and response, in order to make changes later. Before you adopt the
+immutable methods you should use the response attached to the Controller::
+
+    // In a component method (not a callback)
+    $this->response->header('X-Rate-Limit', $this->remaining);
+
+    // Should become
+    $controller = $this->getController();
+    $controller->response = $response->withHeader('X-Rate-Limit', $this->remaining);
+
+In component callbacks you can use the event object to access the
+response/controller::
+
+    public function beforeRender($event)
+    {
+        $controller = $event->subject();
+        $controller->response = $controller->response->withHeader('X-Teapot', 1);
+    }
+
+.. tip::
+    Instead of holding onto references of Responses, always get the current
+    response from the controller, and re-assign the response property when you
+    are done.
 
 Behavior Changes
 ================
