@@ -895,11 +895,11 @@ Creating Select Pickers
 
 Creates a select element, populated with the items in ``$options``,
 with the option specified by ``$attributes['value']`` shown as selected by
-default. Set the 'empty' key in the ``$attributes`` variable to ``false`` to
-turn off the default empty option::
+default. Set the 'empty' key in the ``$attributes`` variable to ``true`` (the default value is ``false``) to
+add a blank option with an empty value on the top of your dropdown list::
 
     $options = ['M' => 'Male', 'F' => 'Female'];
-    echo $this->Form->select('gender', $options);
+    echo $this->Form->select('gender', $options, ['empty' => true]);
 
 Will output:
 
