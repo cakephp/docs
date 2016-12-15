@@ -576,12 +576,12 @@ process::
 Status and Error Codes
 ----------------------
 
-Command-line tools should return 0 to indicate success, or a non-zero value
-indicate an error condition. To help bridge from usual PHP function semantics to
-these exit codes, the Cake Shell dispatch function converts ``null`` and ``true``
-return values to 0, and all other values to 1.
+Command-line tools should return 0 to indicate success, or a non-zero value to
+indicate an error condition. Since PHP methods usually return ``true`` or ``false``,
+the Cake Shell ``dispatch`` function helps to bridge these semantics by converting
+your ``null`` and ``true`` return values to 0, and all other values to 1.
 
-The Cake Shell dispatch function also catches the ``StopException`` and uses its
+The Cake Shell ``dispatch`` function also catches the ``StopException`` and uses its
 exception code value as the shell's exit code. As described above, you can use the
 ``abort()`` method to print a message and exit with a specific code, or raise the
 ``StopException`` directly as shown in the example::
