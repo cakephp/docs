@@ -495,17 +495,19 @@ form layouts.
 
 .. _general-input-options:
 
-Common Options
---------------
+Common Options For Specific Inputs
+----------------------------------
 
-Many of the various input element methods support a common set of options. All
-of these options are also supported by ``input()``. To reduce repetition the
-common options shared by all input methods are as follows:
+Many of the various input element methods support a common set of options which,
+depending on the form method used, must be provided inside the ``$options`` or
+in the ``$attributes`` array. All of these options are also supported by the ``input()`` method.
+To reduce repetition, the common options shared by all input methods are described
+in this subsection:
 
-* ``$options['id']`` Set this key to force the value of the DOM id for the input.
+* ``['id']`` - Set this key to force the value of the DOM id for the input.
   This will override the idPrefix that may be set.
 
-* ``$options['default']`` Used to set a default value for the input field. The
+* ``['default']`` - Used to set a default value for the input field. The
   value is used if the data passed to the form does not contain a value for the
   field (or if no data is passed at all). An explicit default value will
   override any default values defined in the schema.
@@ -514,7 +516,7 @@ common options shared by all input methods are as follows:
 
     echo $this->Form->text('ingredient', ['default' => 'Sugar']);
 
-  Example with select field (Size "Medium" will be selected as
+  Example with ``select`` field (size "Medium" will be selected as
   default)::
 
     $sizes = ['s' => 'Small', 'm' => 'Medium', 'l' => 'Large'];
@@ -530,14 +532,14 @@ common options shared by all input methods are as follows:
     used to disable/exclude options of an input field, so ``'default' => false``
     would not set any value at all. Instead use ``'default' => 0``.
 
-* ``$options['value']`` Used to set a specific value for the input field. This
+* ``['value']`` - Used to set a specific value for the input field. This
   will override any value that may else be injected from the context, such as
   Form, Entity or ``request->data`` etc.
 
   .. note::
   
     If you want to set a field to not render its value fetched from
-    context or valuesSource you will need to set ``$options['value']`` to ``''``
+    context or valuesSource you will need to set ``'value'`` to ``''``
     (instead of setting it to ``null``).
 
 In addition to the above options, you can mixin any HTML attribute you wish to
@@ -552,8 +554,8 @@ applied to the generated HTML input element.
 Options for Select, Checkbox and Radio Inputs
 ---------------------------------------------
 
-* ``$options['value']`` may also be used in combination with a select-type input
-  (i.e. For types select, date, time, datetime). Set 'value' to the value of the
+* ``['value']`` - may also be used in combination with a select-type input
+  (i.e. for types ``select``, ``date``, ``time``, ``datetime``). Set ``'value'`` to the value of the
   item you wish to be selected by default when the input is rendered::
 
     echo $this->Form->time('close_time', [
@@ -565,7 +567,7 @@ Options for Select, Checkbox and Radio Inputs
     The value key for date and datetime inputs may also be a UNIX
     timestamp, or a DateTime object.
 
-  For select input where you set the ``multiple`` attribute to true,
+  For a ``select`` input where you set the ``multiple`` attribute to ``true``,
   you can use an array of the values you want to select by default::
 
     echo $this->Form->select('rooms', [
@@ -574,12 +576,12 @@ Options for Select, Checkbox and Radio Inputs
         'default' => [1, 3]
     ]);
 
-* ``$options['empty']`` If set to ``true``, forces the input to remain empty.
+* ``['empty']`` - If set to ``true``, forces the input to remain empty.
 
-  When passed to a select list, this creates a blank option with an
-  empty value in your drop down list. If you want to have a empty
-  value with text displayed instead of just a blank option, pass in a
-  string to empty::
+  When passed to a ``select`` method, this creates a blank HTML ``option``
+  element with an empty value in your drop down list. If you want to have an empty
+  value with text displayed instead of just a blank ``option``, pass in a
+  string to ``'empty'``::
 
       echo $this->Form->select(
           'field',
@@ -600,10 +602,10 @@ Options for Select, Checkbox and Radio Inputs
           <option value="4">5</option>
       </select>
 
-  Options can also supplied as key-value pairs.
+  Options can also be upplied as key-value pairs.
 
-* ``$options['hiddenField']`` For certain input types (checkboxes, radios) a
-  hidden input is created so that the key in $this->request->data will exist
+* ``['hiddenField']`` - For certain input types (checkboxes, radios) a
+  hidden input is created so that the key in ``$this->request->data`` will exist
   even without a value specified:
 
   .. code-block:: html
@@ -611,7 +613,7 @@ Options for Select, Checkbox and Radio Inputs
     <input type="hidden" name="published" value="0" />
     <input type="checkbox" name="published" value="1" />
 
-  This can be disabled by setting the ``$options['hiddenField'] = false``::
+  This can be disabled by setting ``'hiddenField'`` to ``false``::
 
     echo $this->Form->checkbox('published', ['hiddenField' => false]);
 
@@ -622,9 +624,9 @@ Options for Select, Checkbox and Radio Inputs
     <input type="checkbox" name="published" value="1">
 
   If you want to create multiple blocks of inputs on a form that are
-  all grouped together, you should use this parameter on all inputs
+  all grouped together, you should set this parameter to ``false`` on all inputs
   except the first. If the hidden input is on the page in multiple
-  places, only the last group of input's values will be saved
+  places, only the last group of input's values will be saved.
 
   In this example, only the tertiary colors would be passed, and the
   primary colors would be overridden:
@@ -663,10 +665,10 @@ Options for Select, Checkbox and Radio Inputs
         Orange
     </label>
 
-  Disabling the ``'hiddenField'`` on the second input group would
+  Disabling ``'hiddenField'`` on the second input group would
   prevent this behavior.
 
-  You can set a different hidden field value other than 0 such as 'N'::
+  You can set a hidden field to value other than 0, such as 'N'::
 
       echo $this->Form->checkbox('published', [
           'value' => 'Y',
@@ -676,34 +678,34 @@ Options for Select, Checkbox and Radio Inputs
 Datetime Options
 ----------------
 
-* ``$options['timeFormat']`` Used to specify the format of the select inputs for
+* ``['timeFormat']`` - Used to specify the format of the ``select`` inputs for
   a time-related set of inputs. Valid values include ``12``, ``24``, and ``null``.
 
-* ``$options['minYear'], $options['maxYear']`` Used in combination with a
+* ``['minYear'], ['maxYear']`` - Used in combination with a
   date/datetime input. Defines the lower and/or upper end of values shown in the
-  years select field.
+  years ``select`` field.
 
-* ``$options['orderYear']`` Used in combination with a date/datetime input.
+* ``['orderYear']`` - Used in combination with a date/datetime input.
   Defines the order in which the year values will be set. Valid values include
-  'asc', 'desc'. The default value is 'desc'.
+  ``'asc'``, ``'desc'``. The default value is ``'desc'``.
 
-* ``$options['interval']`` This option specifies the number of minutes between
-  each option in the minutes select box::
+* ``['interval']`` - This option specifies the number of minutes between
+  what is displayed in each ``option`` element in the minutes ``select`` box::
 
     echo $this->Form->input('time', [
         'type' => 'time',
         'interval' => 15
     ]);
 
-  Would create 4 options in the minute select. One for each 15
-  minutes.
+  Would create 4 ``option`` HTML elements in the minute ``select`` element.
+  One for each 15 minutes.
 
-* ``$options['round']`` Can be set to `up` or `down` to force rounding in either
-  direction. Defaults to null which rounds half up according to `interval`.
+* ``['round']`` - Can be set to ``'up'`` or ``'down'`` to force rounding in either
+  direction. Defaults to ``null`` which rounds half up according to ``'interval'``.
 
-* ``$options['monthNames']`` If ``false``, 2 digit numbers will be used instead
-  of text. If it is given an array like ``['01' => 'Jan', '02' => 'Feb', ...]``
-  then the given array will be used.
+* ``['monthNames']`` - If ``false``, 2 digit numbers will be used instead
+  of text names of the months. If it is given an array like
+   ``['01' => 'Jan', '02' => 'Feb', ...]`` then the given array will be used.
 
 Creating Input Elements
 =======================
