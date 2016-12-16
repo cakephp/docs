@@ -244,7 +244,7 @@ your controller or you can define it directly in the model.
 
         public function add() {
             if (!empty($this->request->data)) {
-                // we are going to save the german version
+                // we are going to save the German version
                 $this->Post->locale = 'de_de';
                 $this->Post->create();
                 if ($this->Post->save($this->request->data)) {
