@@ -610,11 +610,11 @@ exception code value as the shell's exit code. As described above, you can use t
     
 The example above will return the following exit codes when executed on a command-line::
 
-    user@ubuntu:~/cakeblog$ cake erroneousshell ; echo $?
+    user@ubuntu:~/cakeblog$ bin/cake erroneousshell ; echo $?
     0
-    user@ubuntu:~/cakeblog$ cake erroneousshell itFails ; echo $?
+    user@ubuntu:~/cakeblog$ bin/cake erroneousshell itFails ; echo $?
     1
-    user@ubuntu:~/cakeblog$ cake erroneousshell itFailsSpecifically ; echo $?
+    user@ubuntu:~/cakeblog$ bin/cake erroneousshell itFailsSpecifically ; echo $?
     2
     
 .. tip::
