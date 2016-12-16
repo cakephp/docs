@@ -112,7 +112,7 @@ Output:
 
     <form method="get" action="/articles/edit/5">
 
-Specifying 'file' changes the form submission method to 'post', and includes an
+Specifying a ``'file'`` value for ``type`` changes the form submission method to 'post', and includes an
 enctype of "multipart/form-data" on the form tag. This is to be used if there
 are any file elements inside the form. The absence of the proper enctype
 attribute will cause the file uploads not to function::
@@ -125,7 +125,7 @@ Output:
 
    <form enctype="multipart/form-data" method="post" action="/articles/add">
 
-When using 'put', 'patch' or 'delete', your form will be functionally equivalent
+When using ``'put'``, ``'patch'`` or ``'delete'`` as ``type`` values, your form will be functionally equivalent
 to a 'post' form, but when submitted, the HTTP request method will be overridden
 with 'PUT', 'PATCH' or 'DELETE', respectively.  This allows CakePHP to emulate
 proper REST support in web browsers.
@@ -160,7 +160,7 @@ Output:
 
     <form method="post" action="/articles/publish">
 
-or can point to an external domain::
+Or you can point to an external domain::
 
     echo $this->Form->create(null, [
         'url' => 'http://www.google.com/search',
@@ -238,6 +238,15 @@ inputs will include a wrapping div, label, input widget, and validation error if
 necessary. By using the metadata in the form context, this method will choose an
 appropriate input type for each field. Internally ``input()`` uses the other
 methods of FormHelper.
+
+By default the ``input()`` method will employ the following widget templates::
+
+'inputContainer' => '<div class="input {{type}}{{required}}">{{content}}</div>
+'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}/>'
+
+In case of validation errors it will also use::
+
+'inputContainerError' => '<div class="input {{type}}{{required}} error">{{content}}{{error}}</div>'
 
 The type of input created depends on the column datatype:
 
