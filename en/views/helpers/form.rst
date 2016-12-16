@@ -284,12 +284,16 @@ you need to::
 
     echo $this->Form->input('published', ['type' => 'checkbox']);
 
+.. note::
+As a small subtelty, generating specific types of input via the ``input()`` form method by providing a specific input ``type`` option (e.g. ``'type' => 'checkbox'`` as in the example above) will always also generate the wrapping ``div``, by default. Generating the same type of input element via one of the specific form methods (e.g. ``$this->Form->checkbox('published');``) in most cases won't generate the wrapping ``div``. Depending on your need you can use one or another when both are available.
+
+
 .. _html5-required:
 
 The wrapping div will have a ``required`` class name appended if the
 validation rules for the model's field indicate that it is required and not
-allowed to be empty. You can disable automatic required flagging using the
-required option::
+allowed to be empty. You can disable automatic ``required`` flagging using the
+``'required'`` option::
 
     echo $this->Form->input('title', ['required' => false]);
 
@@ -298,19 +302,19 @@ To skip browser validation triggering for the whole form you can set option
 :php:meth:`~Cake\\View\\Helper\\FormHelper::submit()` or set ``'novalidate' =>
 true`` in options for :php:meth:`~Cake\\View\\Helper\\FormHelper::create()`.
 
-For example, let's assume that your User model includes fields for a
-username (varchar), password (varchar), approved (datetime) and
-quote (text). You can use the input() method of the FormHelper to
+For example, let's assume that your Users model includes fields for a
+*username* (varchar), *password* (varchar), *approved* (datetime) and
+*quote* (text). You can use the ``input()`` method of the FormHelper to
 create appropriate inputs for all of these form fields::
 
     echo $this->Form->create($user);
-    // Text
+    // The following generates a Text input
     echo $this->Form->input('username');
-    // Password
+    // The following generates a Password input
     echo $this->Form->input('password');
-    // Day, month, year, hour, minute, meridian
+    // The following generates Day, Month, Year, Hour, Minute, Meridian
     echo $this->Form->input('approved');
-    // Textarea
+    // The following generates a Textarea input
     echo $this->Form->input('quote');
 
     echo $this->Form->button('Add');
@@ -324,12 +328,12 @@ A more extensive example showing some options for a date field::
         'maxYear' => date('Y') - 18,
     ]);
 
-Besides the specific options for ``input()`` found below, you can specify
-any option for the input type & any HTML attribute (for instance ``onfocus``).
+Besides the specific :ref:`options <input-specific-options>` for ``input()`` found below, you also can specify
+any option for the chosen (or inferred by Cake) input type and any HTML attribute (for instance ``onfocus``).
 
-If you want to create a select field while using a belongsTo - or
-hasOne - Relation, you can add the following to your Users-controller
-(assuming your User belongsTo Group)::
+If you want to create a ``select`` form field while using a *belongsTo* (or
+*hasOne*) relation, you can add the following to your UsersController
+(assuming your User *belongsTo* Group)::
 
     $this->set('groups', $this->Users->Groups->find('list'));
 
@@ -337,7 +341,7 @@ Afterwards, add the following to your view template::
 
     echo $this->Form->input('group_id', ['options' => $groups]);
 
-To make a select box for a belongsToMany Groups association you can add the
+To make a ``select`` box for a User *belongsToMany* Groups association you can add the
 following to your UsersController::
 
     $this->set('groups', $this->Users->Groups->find('list'));
@@ -346,9 +350,9 @@ Afterwards, add the following to your view template::
 
     echo $this->Form->input('groups._ids', ['options' => $groups]);
 
-If your model name consists of two or more words, e.g.,
-"UserGroup", when passing the data using set() you should name your
-data in a pluralised and camelCased format as follows::
+If your model name consists of two or more words (e.g.
+"UserGroup"), when passing the data using ``set()`` you should name your
+data in a pluralised and `lower camelCased <https://en.wikipedia.org/wiki/Camel_case#Variations_and_synonyms>` format as follows::
 
     $this->set('userGroups', $this->UserGroups->find('list'));
 
@@ -362,7 +366,7 @@ Field Naming Conventions
 
 When creating input widgets you should name your fields after the matching
 attributes in the form's entity. For example, if you created a form for an
-``$article``, you would create fields named after the properities. E.g
+``$article`` entity, you would create fields named after the properities. E.g.
 ``title``, ``body`` and ``published``.
 
 You can create inputs for associated models, or arbitrary models by passing in
@@ -381,19 +385,20 @@ You may notice additional fields named ``year``, ``month``, ``day``, ``hour``,
 ``minute``, or ``meridian`` being added. These fields will be automatically
 converted into ``DateTime`` objects when entities are marshalled.
 
+.. _input-specific-options:
 
 Options
 -------
 
 ``FormHelper::input()`` supports a large number of options. In addition to its
-own options ``input()`` accepts options for the generated input types, as well as
-HTML attributes. The following will cover the options specific to
+own options ``input()`` accepts options for the inferred/chosen input types (e.g. for ``checkbox`` or ``textarea``), as well as
+HTML attributes. This subsection will cover the options specific to
 ``FormHelper::input()``.
 
-* ``$options['type']`` You can force the type of an input, overriding model
-  introspection, by specifying a type. In addition to the field types found in
-  the :ref:`automagic-form-elements`, you can also create 'file', 'password',
-  and any type supported by HTML5::
+* ``$options['type']`` - You can force the type of an input, overriding model
+  introspection, by specifying a ``type``. In addition to the field types found in
+  the :ref:`automagic-form-elements`, you can also create ``'file'``, ``'password'``,
+  and any other type supported by HTML5::
 
     echo $this->Form->input('field', ['type' => 'file']);
     echo $this->Form->input('email', ['type' => 'email']);
@@ -411,7 +416,7 @@ HTML attributes. The following will cover the options specific to
         <input type="email" name="email" value="" id="email" />
     </div>
 
-* ``$options['label']`` Set this key to the string you would like to be
+* ``$options['label']`` - Set this key to the string you would like to be
   displayed within the label that usually accompanies the input::
 
     echo $this->Form->input('name', [
@@ -427,8 +432,8 @@ HTML attributes. The following will cover the options specific to
         <input name="name" type="text" value="" id="name" />
     </div>
 
-  Alternatively, set this key to ``false`` to disable the output of the
-  label::
+  Alternatively, set this key to ``false`` to disable the generation of the
+  ``label`` element::
 
     echo $this->Form->input('name', ['label' => false]);
 
@@ -460,10 +465,10 @@ HTML attributes. The following will cover the options specific to
         <input name="name" type="text" value="" id="name" />
     </div>
 
-* ``$options['error']`` Using this key allows you to override the default model
+* ``$options['error']`` - Using this key allows you to override the default model
   error messages and can be used, for example, to set i18n messages.
 
-  To disable error message output & field classes set the error key to ``false``::
+  To disable error message output & field classes set the ``error`` key to ``false``::
 
     echo $this->Form->input('name', ['error' => false]);
 
