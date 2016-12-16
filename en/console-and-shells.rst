@@ -573,6 +573,62 @@ process::
     The abort() method was added in 3.2. In prior versions you can use
     ``error()`` to output a message and stop execution.
 
+Status and Error Codes
+----------------------
+
+Command-line tools should return 0 to indicate success, or a non-zero value to
+indicate an error condition. Since PHP methods usually return ``true`` or ``false``,
+the Cake Shell ``dispatch`` function helps to bridge these semantics by converting
+your ``null`` and ``true`` return values to 0, and all other values to 1.
+
+The Cake Shell ``dispatch`` function also catches the ``StopException`` and uses its
+exception code value as the shell's exit code. As described above, you can use the
+``abort()`` method to print a message and exit with a specific code, or raise the
+``StopException`` directly as shown in the example::
+    
+    namespace App\Shell\Task;
+
+    use Cake\Console\Shell;
+
+    class ErroneousShell extends Shell
+    {
+        public function main()
+        {
+            return true;
+        }
+        
+        public function itFails()
+        {
+            return false;
+        }
+        
+        public function itFailsSpecifically()
+        {
+            throw new StopException("", 2);
+        }
+    }
+    
+The example above will return the following exit codes when executed on a command-line::
+
+    user@ubuntu:~/cakeblog$ bin/cake erroneousshell ; echo $?
+    0
+    user@ubuntu:~/cakeblog$ bin/cake erroneousshell itFails ; echo $?
+    1
+    user@ubuntu:~/cakeblog$ bin/cake erroneousshell itFailsSpecifically ; echo $?
+    2
+    
+.. tip::
+
+    Avoid exit codes 64 - 78, as they have specific meanings described by ``sysexits.h``.
+    Avoid exit codes above 127, as these are used to indicate process exit
+    by signal, such as SIGKILL or SIGSEGV.
+
+.. note::
+
+    You can read more about conventional exit codes in the sysexit manual page
+    on most Unix systems (``man sysexits``), or the ``System Error Codes`` help
+    page in Windows.
+    
 Hook Methods
 ============
 
