@@ -8,7 +8,7 @@ Deprecations
 ============
 
 The following is a list of deprecated methods, properties and behaviors. These
-elements will continue to function until 4.0.0 after which they will be removed.
+features will continue to function until 4.0.0 after which they will be removed.
 
 Request & Response Deprecations
 -------------------------------
@@ -41,7 +41,7 @@ A number of methods on ``Cake\Network\Request`` have been deprecated:
 * ``Request::cookie()`` is deprecated. Use ``Request::getCookie()`` instead.
 
 Several methods on ``Cake\Network\Response`` have been deprecated because they
-either overlap the PSR-7 methods, or are obsoleted by the PSR-7 stack:
+either overlap the PSR-7 methods, or are made obsolete by the PSR-7 stack:
 
 * ``Response::header()`` is deprecated. Use ``getHeaderLine()``, ``hasHeader()`` or
   ``Response::getHeader()`` instead.
@@ -52,7 +52,7 @@ either overlap the PSR-7 methods, or are obsoleted by the PSR-7 stack:
 * ``Response::protocol()`` is deprecated. Use ``Response::getProtocolVersion()`` instead.
 * ``send()``, ``sendHeaders()``, ``_sendHeader()``, ``_sendContent()``,
   ``_setCookies()``, ``_setContentType()``, and ``stop()`` are deprecated and
-  obsoleted by the PSR-7 HTTP stack.
+  made obsolete by the PSR-7 HTTP stack.
 
 With responses heading towards immutable object patterns as recommended by the
 PSR-7 standards, a number of 'helper' methods in ``Response`` have been
@@ -129,7 +129,7 @@ Adopting Immutable Responses
 ============================
 
 Before you migrate your code to use the new response methods you should be aware
-of the semantic changes the new methods create. The immutable methods are
+of the conceptual differences the new methods have. The immutable methods are
 generally indicated using a ``with`` prefix. For example, ``withLocation()``.
 Because these methods operate in an immutable context, they return *new*
 instances which you need to assign to variables or properties. If you had
