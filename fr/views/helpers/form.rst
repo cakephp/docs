@@ -933,11 +933,12 @@ Créer des Pickers Select
 
 Crée un menu de sélection, rempli des éléments compris dans ``$options``,
 avec l'option spécifiée par ``$attributes['value']`` sera montré comme
-sélectionné par défaut. Définir à ``false`` la clé 'empty' dans la variable
-``$attributes`` pour empêcher l'option empty par défaut::
+sélectionné par défaut. Définir à ``true`` (la valeur par défaut est ``false``)
+pour ajouter une option vide avec une valeur vide en haut de votre liste 
+déroulante::
 
     $options = ['M' => 'Male', 'F' => 'Female'];
-    echo $this->Form->select('gender', $options);
+    echo $this->Form->select('gender', $options, ['empty' => true]);
 
 Affichera:
 

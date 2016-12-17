@@ -521,7 +521,7 @@ common options shared by all input methods are as follows:
   Form, Entity or ``request->data`` etc.
 
   .. note::
-  
+
     If you want to set a field to not render its value fetched from
     context or valuesSource you will need to set ``$options['value']`` to ``''``
     (instead of setting it to ``null``).
@@ -895,8 +895,9 @@ Creating Select Pickers
 
 Creates a select element, populated with the items in ``$options``,
 with the option specified by ``$attributes['value']`` shown as selected by
-default. Set the 'empty' key in the ``$attributes`` variable to ``true`` (the default value is ``false``) to
-add a blank option with an empty value on the top of your dropdown list::
+default. Set the 'empty' key in the ``$attributes`` variable to ``true`` (the
+default value is ``false``) to add a blank option with an empty value on the
+top of your dropdown list::
 
     $options = ['M' => 'Male', 'F' => 'Female'];
     echo $this->Form->select('gender', $options, ['empty' => true]);
