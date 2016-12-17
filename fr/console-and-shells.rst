@@ -605,6 +605,66 @@ l'exécution s'arrête, vous pouvez utiliser ``abort()`` pour lancer une
     précédentes, vous pouvez utiliser ``error()`` pour afficher un message et
     arrêter l'exécution.
 
+Statuts et Codes d'Erreur
+-------------------------
+
+Les outils en ligne de commande devraient retourner 0 en cas de succès, ou une
+valeur différente de zéro en cas d'erreur. Puisque les méthodes PHP retournent
+généralement ``true`` ou ``false``, la fonction ``dispatch`` du shell Cake
+permet de régler cela en convertissant vos valeurs de retour ``null`` et
+``true`` en 0, et toutes les autres valeurs en 1.
+
+La fonction ``dispatch`` du shell de Cake attrape aussi les ``StopException``
+et utilise la valeur de son code d'exception en code de sortie de l'exception.
+Comme décrit ci-dessus, vous pouvez utiliser la méthode ``abort()`` pour
+afficher un message et sortir avec un code spécifique, ou lancer la
+``StopException`` directement comme montré dans l'exemple::
+
+    namespace App\Shell\Task;
+
+    use Cake\Console\Shell;
+
+    class ErroneousShell extends Shell
+    {
+        public function main()
+        {
+            return true;
+        }
+
+        public function itFails()
+        {
+            return false;
+        }
+
+        public function itFailsSpecifically()
+        {
+            throw new StopException("", 2);
+        }
+    }
+
+L'exemple ci-dessus va retourner les codes de sortie suivants lorsqu'il est
+exécuté en ligne de commande::
+
+    user@ubuntu:~/cakeblog$ bin/cake erroneousshell ; echo $?
+    0
+    user@ubuntu:~/cakeblog$ bin/cake erroneousshell itFails ; echo $?
+    1
+    user@ubuntu:~/cakeblog$ bin/cake erroneousshell itFailsSpecifically ; echo $?
+    2
+
+.. tip::
+
+    Éviter les codes de sortie 64 - 78, car ils ont une signification spécifique
+    décrite par ``sysexits.h``.
+    Éviter les codes de sortie au-dessus de 127, car ils sont utilisés pour
+    indiquer un processus de sortie par signal, tel que SIGKILL ou SIGSEGV.
+
+.. note::
+
+    Vous pouvez en lire plus sur les conventions des codes de sorties dans la
+    page du manuel sysexit sur la plupart des systèmes Unix (``man sysexits``),
+    ou la page d'aide ``System Error Codes`` dans Windows.
+
 Méthodes Hook
 =============
 
