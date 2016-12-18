@@ -3,8 +3,8 @@ Middleware
 
 Middleware objects give you the ability to 'wrap' your application in re-usable,
 composable layers of Request handling, or response building logic. Middleware
-are part of the new HTTP stack in CakePHP that leverages the PSR7 request and
-response interfaces. By leveraging the PSR7 standard you can use any PSR7
+are part of the new HTTP stack in CakePHP that leverages the PSR-7 request and
+response interfaces. By leveraging the PSR-7 standard you can use any PSR-7
 compatible middleware available on `The Packagist <https://packagist.org>`__.
 
 CakePHP provides several middleware out of the box:
@@ -94,10 +94,10 @@ scripts, that add middleware::
             $middleware->add(new ContactPluginMiddleware());
         });
 
-PSR7 Requests and Responses
-===========================
+PSR-7 Requests and Responses
+============================
 
-Middleware and the new HTTP stack are built on top of the `PSR7 Request
+Middleware and the new HTTP stack are built on top of the `PSR-7 Request
 & Response Interfaces <http://www.php-fig.org/psr/psr-7/>`__. While all
 middleware will be exposed to these interfaces, your controllers, components,
 and views will *not*.
@@ -204,7 +204,7 @@ While not a formal interface (yet), Middleware do have a soft-interface or
 'protocol'. The protocol is as follows:
 
 #. Middleware must implement ``__invoke($request, $response, $next)``.
-#. Middleware must return an object implementing the PSR7 ``ResponseInterface``.
+#. Middleware must return an object implementing the PSR-7 ``ResponseInterface``.
 
 Middleware can return a response either by calling ``$next`` or by creating
 their own response. We can see both options in our simple middleware::
@@ -273,4 +273,4 @@ application/plugin dispatch filters as HTTP middleware.
 
 .. meta::
     :title lang=en: Http Middleware
-    :keywords lang=en: http, middleware, psr7, request, response, wsgi, application, baseapplication
+    :keywords lang=en: http, middleware, psr-7, request, response, wsgi, application, baseapplication

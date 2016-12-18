@@ -14,7 +14,7 @@ Deprecations
 * ``Router::parseNamedParams()`` is deprecated. Named parameter backwards
   compatibility will be removed in 4.0.0
 * ``Cake\Http\Client\Response`` has had the following methods deprecated because they
-  overlap with PSR7 interface methods:
+  overlap with PSR-7 interface methods:
 
   * ``statusCode()`` use ``getStatusCode()`` instead.
   * ``encoding()`` use ``getEncoding()`` instead.
@@ -48,10 +48,10 @@ behavior that may effect your application:
   behavior was a bug as the entity's original state should not be retained after
   a save, but instead reflect the new state of the entity.
 
-PSR7 Middleware Support Added
-=============================
+PSR-7 Middleware Support Added
+==============================
 
-In tandem with the deprecation of Dispatcher Filters, support for PSR7
+In tandem with the deprecation of Dispatcher Filters, support for PSR-7
 middleware has been added. Middleware is part of the new HTTP stack that is an
 opt-in component of CakePHP 3.3.0. By using the new HTTP stack, you can take
 advantage of features like:
@@ -66,12 +66,12 @@ See the :doc:`/controllers/middleware` chapter and :ref:`adding-http-stack`
 sections for more information and how to add the new HTTP stack to an existing
 application.
 
-Http Client is now PSR7 Compatible
-==================================
+Http Client is now PSR-7 Compatible
+===================================
 
 ``Cake\Network\Http\Client`` has been moved to ``Cake\Http\Client``. Its request
 and response objects now implement the
-`PSR7 interfaces <http://www.php-fig.org/psr/psr-7/>`__. Several methods on
+`PSR-7 interfaces <http://www.php-fig.org/psr/psr-7/>`__. Several methods on
 ``Cake\Http\Client\Response`` are now deprecated, see above for more
 information.
 
@@ -154,7 +154,7 @@ Routing
 
 * ``Router::parse()``, ``RouteCollection::parse()`` and ``Route::parse()`` had
   a ``$method`` argument added. It defaults to 'GET'. This new parameter reduces
-  reliance on global state, and necessary for the PSR7 work integration to be
+  reliance on global state, and necessary for the PSR-7 work integration to be
   done.
 * When building resource routes, you can now define a prefix. This is useful
   when defining nested resources as you can create specialized controllers for

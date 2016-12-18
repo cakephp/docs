@@ -8,32 +8,84 @@ Deprecations
 ============
 
 The following is a list of deprecated methods, properties and behaviors. These
-elements will continue to function until 4.0.0 after which they will be removed.
+features will continue to function until 4.0.0 after which they will be removed.
+
+Request & Response Deprecations
+-------------------------------
+
+The bulk of deprecations for 3.4 are in the ``Request`` and ``Response``
+objects. The existing methods that modify objects in-place are now deprecated,
+and superseded by methods that follow the immutable object patterns described in
+the PSR-7 standard.
+
+Several properties on ``Cake\Network\Request`` have been deprecated:
+
+* ``Request::$params`` is deprecated. Use ``Request::getParam()`` instead.
+* ``Request::$data`` is deprecated. Use ``Request::getData()`` instead.
+* ``Request::$query`` is deprecated. Use ``Request::getQuery()`` instead.
+* ``Request::$cookies`` is deprecated. Use ``Request::getCookie()`` instead.
+* ``Request::$base`` is deprecated. Use ``Request::getAttribute('base')`` instead.
+* ``Request::$webroot`` is deprecated. Use ``Request::getAttribute('webroot')`` instead.
+* ``Request::$here`` is deprecated. Use ``Request::here()`` instead.
+* ``Request::$_session`` was renamed to ``Request::$session``.
+
+A number of methods on ``Cake\Network\Request`` have been deprecated:
+
+* ``__get()`` & ``__isset()`` methods are deprecated. Use ``getParam()`` instead.
+* ``method()`` is deprecated. Use ``getMethod()`` instead.
+* ``setInput()`` is deprecated. Use ``withBody()`` instead.
+* The ``ArrayAccess`` methods have all been deprecated.
+* ``Request::param()`` is deprecated. Use ``Request::getParam()`` instead.
+* ``Request::data()`` is deprecated. Use ``Request::getData()`` instead.
+* ``Request::query()`` is deprecated. Use ``Request::getQuery()`` instead.
+* ``Request::cookie()`` is deprecated. Use ``Request::getCookie()`` instead.
+
+Several methods on ``Cake\Network\Response`` have been deprecated because they
+either overlap the PSR-7 methods, or are made obsolete by the PSR-7 stack:
+
+* ``Response::header()`` is deprecated. Use ``getHeaderLine()``, ``hasHeader()`` or
+  ``Response::getHeader()`` instead.
+* ``Response::body()`` is deprecated. Use ``Response::withBody()`` instead.
+* ``Response::statusCode()`` is deprecated. Use ``Response::getStatusCode()`` instead.
+* ``Response::httpCodes()`` This method should no longer be used. CakePHP now supports all
+  standards recommended status codes.
+* ``Response::protocol()`` is deprecated. Use ``Response::getProtocolVersion()`` instead.
+* ``send()``, ``sendHeaders()``, ``_sendHeader()``, ``_sendContent()``,
+  ``_setCookies()``, ``_setContentType()``, and ``stop()`` are deprecated and
+  made obsolete by the PSR-7 HTTP stack.
+
+With responses heading towards immutable object patterns as recommended by the
+PSR-7 standards, a number of 'helper' methods in ``Response`` have been
+deprecated and immutable variants are now recommended:
+
+* ``Response::location()`` would become ``Response::withLocation()``
+* ``Response::disableCache()`` would become ``Response::withDisabledCache()``
+* ``Response::type()`` would become ``Response::withType()``
+* ``Response::charset()`` would become ``Response::withCharset()``
+* ``Response::cache()`` would become ``Response::withCache()``
+* ``Response::modified()`` would become ``Response::withModified()``
+* ``Response::expires()`` would become ``Response::withExpires()``
+* ``Response::sharable()`` would become ``Response::withSharable()``
+* ``Response::maxAge()`` would become ``Response::withMaxAge()``
+* ``Response::vary()`` would become ``Response::withVary()``
+* ``Response::etag()`` would become ``Response::withEtag()``
+* ``Response::compress()`` would become ``Response::withCompression()``
+* ``Response::length()`` would become ``Response::withLength()``
+* ``Response::mustRevalidate()`` would become ``Response::withMustRevalidate()``
+* ``Response::notModified()`` would become ``Response::withNotModified()``
+* ``Response::cookie()`` would become ``Response::withCookie()``
+* ``Response::file()`` would become ``Response::withFile()``
+* ``Response::download()`` would become ``Response::withDownload()``
+
+Please see the :ref:`adopting-immutable-responses` section for more information
+before updating your code as using responses throug the immutable methods will
+require additional changes.
+
+Other Deprecations
+------------------
 
 * The public properties on ``Cake\Event\Event`` are deprecated, new methods have
   been added to read/write the relevant properties.
-* Several properties on ``Cake\Network\Request`` have been deprecated:
-
-  * ``Request::$params`` is deprecated. Use ``Request::getParam()`` instead.
-  * ``Request::$data`` is deprecated. Use ``Request::getData()`` instead.
-  * ``Request::$query`` is deprecated. Use ``Request::getQuery()`` instead.
-  * ``Request::$cookies`` is deprecated. Use ``Request::getCookie()`` instead.
-  * ``Request::$base`` is deprecated. Use ``Request::getAttribute('base')`` instead.
-  * ``Request::$webroot`` is deprecated. Use ``Request::getAttribute('webroot')`` instead.
-  * ``Request::$here`` is deprecated. Use ``Request::here()`` instead.
-  * ``Request::$_session`` was renamed to ``Request::$session``.
-
-* A number of methods on ``Cake\Network\Request`` have been deprecated:
-
-  * ``__get()`` & ``__isset()`` methods are deprecated. Use ``getParam()`` instead.
-  * ``method()`` is deprecated. Use ``getMethod()`` instead.
-  * ``setInput()`` is deprecated. Use ``withBody()`` instead.
-  * The ``ArrayAccess`` methods have all been deprecated.
-  * ``Request::param()`` is deprecated. Use ``Request::getParam()`` instead.
-  * ``Request::data()`` is deprecated. Use ``Request::getData()`` instead.
-  * ``Request::query()`` is deprecated. Use ``Request::getQuery()`` instead.
-  * ``Request::cookie()`` is deprecated. Use ``Request::getCookie()`` instead.
-
 * The ``Auth.redirect`` session variable is no longer used. Instead a query
   string parameter is used to store the redirect URL.
 * ``AuthComponent`` no longer stores redirect URLs when the unauthorized URL is
@@ -70,6 +122,64 @@ Cake\Validation\Validator
     * ``provider()``
 Cake\View\StringTemplateTrait
     * ``templates()``
+
+.. _adopting-immutable-responses:
+
+Adopting Immutable Responses
+============================
+
+Before you migrate your code to use the new response methods you should be aware
+of the conceptual differences the new methods have. The immutable methods are
+generally indicated using a ``with`` prefix. For example, ``withLocation()``.
+Because these methods operate in an immutable context, they return *new*
+instances which you need to assign to variables or properties. If you had
+controller code that looked like::
+
+    $response = $this->response;
+    $response->location('/login')
+    $response->header('X-something', 'a value');
+
+If you were to simply find & replace method names your code would break. Instead
+you must now use code that looks like::
+
+    $this->response = $this->response
+        ->withLocation('/login')
+        ->withHeader('X-something', 'a value');
+
+There are a few key differences:
+
+#. The result of your changes is re-assigned to ``$this->response``. This is
+   critical to preserving the intent of the above code.
+#. The setter methods can all be chained together. This allows you to skip
+   storing all the intermediate objects.
+
+Component Migration Tips
+------------------------
+
+In previous versions of CakePHP, Components often held onto references to both
+the request and response, in order to make changes later. Before you adopt the
+immutable methods you should use the response attached to the Controller::
+
+    // In a component method (not a callback)
+    $this->response->header('X-Rate-Limit', $this->remaining);
+
+    // Should become
+    $controller = $this->getController();
+    $controller->response = $response->withHeader('X-Rate-Limit', $this->remaining);
+
+In component callbacks you can use the event object to access the
+response/controller::
+
+    public function beforeRender($event)
+    {
+        $controller = $event->subject();
+        $controller->response = $controller->response->withHeader('X-Teapot', 1);
+    }
+
+.. tip::
+    Instead of holding onto references of Responses, always get the current
+    response from the controller, and re-assign the response property when you
+    are done.
 
 Behavior Changes
 ================

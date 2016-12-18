@@ -14,7 +14,7 @@ Deprecations
 * ``Router::parseNamedParams()`` est dépréciée. La rétro-compatibilité des
   paramètres nommés sera retirée dans la version 4.0.0.
 * ``Cake\Http\Client\Response`` a vu ses méthodes suivantes dépréciées car
-  elles se chevauchent avec les méthodes de l'interface PSR7:
+  elles se chevauchent avec les méthodes de l'interface PSR-7:
 
   * ``statusCode()`` utilisez ``getStatusCode()`` à la place.
   * ``encoding()`` utilisez ``getEncoding()`` à la place.
@@ -49,11 +49,11 @@ variations mineures qui peuvent avoir des effets sur votre application:
   behavior was a bug as the entity's original state should not be retained after
   a save, but instead reflect the new state of the entity.
 
-Support du Middleware PSR7 Ajouté
-=================================
+Support du Middleware PSR-7 Ajouté
+==================================
 
 En même temps qu'avec la dépréciation des Filters du Dispatcher, le support pour
-le middleware PSR7 a été ajouté. Middleware est une partie de la nouvelle stack
+le middleware PSR-7 a été ajouté. Middleware est une partie de la nouvelle stack
 HTTP qui est un component au choix de CakePHP 3.3.0. En utilisant la nouvelle
 stack HTTP, vous pouvez tirer profit des fonctionnalités comme:
 
@@ -69,12 +69,12 @@ Consultez le chapitre :doc:`/controllers/middleware` et les sections
 :ref:`adding-http-stack` pour plus d'informations sur la façon d'ajouter la
 nouvelle stack HTTP à une application existante.
 
-Http Client est maintenant compatible avec PSR7
-===============================================
+Http Client est maintenant compatible avec PSR-7
+================================================
 
 ``Cake\Network\Http\Client`` a été déplacée vers ``Cake\Http\Client``. Ses
 objet request et response implémentent maintenant les
-`interfaces PSR7 <http://www.php-fig.org/psr/psr-7/>`__. Plusieurs méthodes de
+`interfaces PSR-7 <http://www.php-fig.org/psr/psr-7/>`__. Plusieurs méthodes de
 ``Cake\Http\Client\Response`` sont maintenant dépréciées, regardez plus haut
 pour plus d'informations.
 
@@ -167,7 +167,7 @@ Routing
 * ``Router::parse()``, ``RouteCollection::parse()`` et ``Route::parse()`` ont
   un nouvel argument ``$method``. Il est par défaut à 'GET'. Ce nouveau
   paramètre réduit le recours à l'état global, et est nécessaire pour le travail
-  d'intégration de la norme PSR7.
+  d'intégration de la norme PSR-7.
 * Quand vous construisez vos resource routes, vous pouvez maintenant définir un
   préfixe. C'est utile quand vous définissez des ressources imbriquées car vous
   pouvez créer des controllers spécialisés pour les ressources imbriquées.
