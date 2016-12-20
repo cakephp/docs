@@ -898,7 +898,7 @@ Creating Radio Buttons
 
 * ``$fieldName`` - A field name from the model.
 * ``$options`` - An optional array containing the labels for the radio buttons.
-  When this array is missing the method will either generate only 
+  When this array is missing, the method will either generate only 
   the hidden input (if ``hiddenField`` is ``true``) or no element at all 
   (if ``hiddenField`` is ``false``).
 * ``$attributes`` - An optional array icluding any of the :ref:`general-input-options`,
@@ -931,10 +931,10 @@ will output:
         Neuter
     </label>
 
-**Radio Buttons Attributes**
+**Attributes for Radio Buttons**
 
 * ``value`` - Indicates the value when this radio button is checked. By default
-  starts a 0 and auto-increments by one unit for each extra button.
+  starts at 0 and auto-increments by one unit for each extra button.
 * ``label`` - Boolean to indicate whether or not labels for widgets should be
   displayed. Defaults to ``true``.
 * ``hiddenField`` - Boolean to indicate if you want the results of ``radio()`` to
@@ -942,13 +942,12 @@ will output:
   sets that are non-continuous. Defaults to ``true``.
 * ``disabled`` - Set to ``true`` or ``disabled`` to disable all the radio
   buttons. Defaults to ``false``.
-* ``empty`` - Set to ``true`` to create an input with the value ``''`` as the first
-  option. When ``true`` the radio label will be 'empty'. Set this option to
-  a string to control the label value. Defaults to ``false``.
+* ``empty`` - Set it to ``true`` to create an extra button with the value ``''`` as the first
+  option. When ``true``, the radio label will be the string: 'empty'. Set this option to
+  a string to control the label value. The attribute defaults to ``false``.
 
-Generally ``$options`` is a simple ``key => value`` pair. However, if you need to
-put custom attributes on your radio buttons you can use an expanded format. 
-E.g. ::
+Generally ``$options`` contain simple ``key => value`` pairs. However, if you need to
+put custom attributes on your radio buttons you can use an expanded format::
 
     echo $this->Form->radio(
         'favorite_color',
@@ -983,18 +982,19 @@ Creating Select Pickers
 .. php:method:: select(string $fieldName, array $options, array $attributes)
 
 * ``$fieldName`` - A field name from the model.
-* ``$options`` - An optional array containing the items for the select picker.
-  When this array is missing the method will generate only the 
+* ``$options`` - An optional array containing the list items for the select picker.
+  When this array is missing, the method will generate only the 
   empty ``select`` element without any ``option`` elements inside it.
 * ``$attributes`` - An optional array icluding any of the :ref:`general-input-options`,
   as well as any valid HTML attributes.
 
 Creates a ``select`` element, populated with the items from the ``$options`` array,
-with the ``option`` item specified by ``$attributes['value']`` shown as selected by
+with the ``option`` element specified by ``$attributes['value']`` shown as selected by
 default. Set the ``'empty'`` key in the ``$attributes`` variable to ``true`` 
 (the default value is ``false``) to add a blank option with an empty value 
-on the top of your dropdown list. By default it uses the following
-widget template::
+on the top of your dropdown list. 
+
+By default ``select`` uses the following widget template::
 
     'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>
 
@@ -1013,17 +1013,18 @@ Will output:
         <option value="F">Female</option>
     </select>
 
-The ``select`` input type allows for a special ``$attributes``
-option called ``'escape'`` which accepts a boolean and determines
+The ``select`` method allows for a special ``$attributes``
+option called ``'escape'`` which accepts a boolean value and determines
 whether to HTML entity encode the contents of the ``select option``
 elements.
 Defaults to ``true``::
 
+    // This will prevent HTML-encoding the contents of each option element
     $options = ['M' => 'Male', 'F' => 'Female'];
     echo $this->Form->select('gender', $options, ['escape' => false]);
 
-* ``$options`` - This argument allows you to manually specify options for
-  a select input::
+* ``$options`` - This argument also allows you to manually specify 
+  option element contents for a select input::
   
     echo $this->Form->select('field', [1,2,3,4,5]);
   
@@ -1059,7 +1060,7 @@ Defaults to ``true``::
 
   If you would like to generate a ``select`` with optgroups, just pass
   data in hierarchical format. This works on multiple checkboxes and radio
-  buttons too, but instead of optgroups it wraps elements in ``fieldsets``::
+  buttons too, but instead of optgroups it wraps the elements in ``fieldsets``::
 
     $options = [
        'Group 1' => [
@@ -1106,11 +1107,11 @@ Defaults to ``true``::
     </select>
 
 * ``$attributes['multiple']`` - If ``'multiple'`` has been set to ``true``, 
-  the ``select`` will allow multiple selections::
+  the ``select`` field will allow multiple selections::
 
     echo $this->Form->select('field', $options, ['multiple' => true]);
 
-  Alternatively set ``'multiple'`` to ``'checkbox'`` to output a list of
+  Alternatively, set ``'multiple'`` to ``'checkbox'`` to output a list of
   related checkboxes::
 
     $options = [
@@ -1236,7 +1237,7 @@ script receiving the form data.
 For the example above, the values in the submitted data array would
 be organized as follows, if CakePHP was installed on a Windows
 server. The key ``'tmp\_name'`` will contain a different path 
-in a Unix environment::
+in a Unix environment. ::
 
     $this->request->data['submittedfile'] === [
         'name' => 'conference_schedule.pdf',
@@ -1273,7 +1274,7 @@ a number of options:
 * ``minYear`` - The lowest year to use in the year select picker.
 * ``maxYear`` - The maximum year to use in the year select picker.
 * ``interval`` - The interval for the minutes select picker. Defaults to 1.
-* ``empty`` - If ``true``, the empty select option is shown. If a string,
+* ``empty`` - If ``true`` an extra, empty, select option is shown. If a string,
   that string is displayed as the empty element.
 * ``round`` - Set to ``up`` or ``down`` if you want to force rounding in either
   direction. Defaults to ``null``.
@@ -1290,7 +1291,7 @@ is::
     {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
 
 To create datetime inputs with custom classes/attributes on a specific select
-box, you can use the options in each component::
+box, you can provide options in each component::
 
     echo $this->Form->datetime('released', [
         'year' => [
@@ -1330,10 +1331,10 @@ Creating Time Inputs
 Creates two ``select`` elements populated with 24 hours and 60 minutes for ``hour``
 and ``minute``, respectively.
 Additionally, HTML attributes may be supplied in ``$options`` for each specific
-``type``. If ``$options['empty']`` is ``false``, the select picker will not include an
+component. If ``$options['empty']`` is ``false``, the select picker will not include an
 empty option:
 
-* ``empty`` - If ``true``, the empty select option is shown. If a string,
+* ``empty`` - If ``true`` an extra, empty, select option is shown. If a string,
   that string is displayed as the empty element.
 * ``default`` | ``value`` - The default value to be used by the input. A value in
   ``$this->request->data`` matching the field name will override this value.
@@ -1567,7 +1568,7 @@ Output:
     <label for="user-name">Name</label>
     <label for="user-name">Your username</label>
 
-``$options`` can either be an array of HTML attributes, or a string that
+``$options`` - Can either be an array of HTML attributes, or a string that
 will be used as a class name::
 
     echo $this->Form->label('User.name', null, ['id' => 'user-label']);
@@ -1648,10 +1649,32 @@ error. ::
 Creating Buttons and Submit Elements
 ====================================
 
+Creating Submit Elements
+------------------------
+
 .. php:method:: submit(string $caption, array $options)
 
+* ``$caption`` - An optional string providing the button's text or a path to
+  an image to use as caption. Defaults to ``'Submit'``.
+* ``$options`` - An optional array icluding any of the :ref:`general-input-options`,
+  or specific options (see below) as well as any valid HTML attributes.
+
 Creates a submit input with ``$caption`` as the text. If the supplied
-``$caption`` is a URL to an image, an image submit button will be generated.
+``$caption`` is a URL pointing to an image, an image submit button 
+will be generated.
+
+By default it will use the following widget template::
+
+    'inputSubmit' => '<input type="{{type}}"{{attrs}}/>'
+    'submitContainer' => '<div class="submit">{{content}}</div>'
+
+**Options for Submit**
+
+* ``type`` - Set this option to ``'reset'`` in order to generate reset buttons.
+  It defaults to ``'submit'``.
+* ``'templateVars'`` - Set this array to provide additional template variables for
+  the input element and its container.
+
 The following::
 
     echo $this->Form->submit();
@@ -1663,7 +1686,7 @@ Will output:
     <div class="submit"><input value="Submit" type="submit"></div>
 
 You can pass a relative or absolute URL to an image for the
-caption parameter instead of caption text::
+caption parameter instead of the caption text::
 
     echo $this->Form->submit('ok.png');
 
@@ -1681,16 +1704,28 @@ Creating Button Elements
 
 .. php:method:: button(string $title, array $options = [])
 
+* ``$title`` - Mandatory string providing the button's text caption.
+* ``$options`` - An optional array icluding any of the :ref:`general-input-options`,
+  or specific options (see below) as well as any valid HTML attributes.
+
 Creates an HTML button with the specified title and a default type
-of "button". Setting ``$options['type']`` will output one of the
-three possible button types:
+of ``'button'``. 
 
-#. submit: Same as the ``$this->Form->submit`` method - (the
-   default).
-#. reset: Creates a form reset button.
-#. button: Creates a standard push button.
+**Options for Button**
 
-::
+* ``$options['type']`` - You can set this to one of the following three 
+  possible values:
+
+    #. ``'submit'`` - Similar to ``$this->Form->submit()`` method it will 
+        create a submit button. However this won't generate a wrapping ``div`` 
+        as ``submit()`` does. This is the default.
+    #. ``'reset'`` - Creates a form reset button.
+    #. ``'button'`` - Creates a standard push button.
+
+* ``$options['escape']`` - Boolean. If set to ``true`` it will HTML encode 
+  the value provided inside ``$title``. Defaults to ``false``.
+  
+Example::
 
     echo $this->Form->button('A Button');
     echo $this->Form->button('Another Button', ['type' => 'button']);
@@ -1706,9 +1741,7 @@ Will output:
     <button type="reset">Reset the Form</button>
     <button type="submit">Submit Form</button>
 
-The ``button`` input type supports the ``escape`` option, which accepts
-a boolean and defaults to ``false``. It determines whether to HTML encode the
-``$title`` of the button::
+Example of use of the ``'escape'`` option::
 
     // Will render escaped HTML.
     echo $this->Form->button('<em>Submit Form</em>', [
@@ -1720,6 +1753,10 @@ Closing the Form
 ================
 
 .. php:method:: end($secureAttributes = [])
+
+* ``$secureAttributes`` - Optional. Allow you to provide secure attributes 
+  which will be passed as HTML attributes into the hidden input elements 
+  generated for the Security Component.
 
 The ``end()`` method closes and completes a form. Often, ``end()`` will only
 output a closing form tag, but using ``end()`` is a good practice as it
@@ -1734,10 +1771,8 @@ enables FormHelper to insert hidden form elements that
 
     <?= $this->Form->end(); ?>
 
-The ``$secureAttributes`` parameter allows you to pass additional HTML
-attributes to the hidden inputs that are generated when your application is
-using ``SecurityComponent``. If you need to add additional attributes to the
-generated hidden inputs you can use the ``$secureAttributes`` argument::
+If you need to add additional attributes to the generated hidden inputs 
+you can use the ``$secureAttributes`` argument, like this::
 
     echo $this->Form->end(['data-type' => 'hidden']);
 
@@ -1761,35 +1796,95 @@ Will output:
 Creating Standalone Buttons and POST links
 ==========================================
 
+Creating POST Buttons
+---------------------
+
 .. php:method:: postButton(string $title, mixed $url, array $options = [])
 
-    Create a ``<button>`` tag with a surrounding ``<form>`` that submits via
-    POST.
+* ``$title`` - Mandatory string providing the button's text caption. By default
+  not HTML encoded.
+* ``$url`` - String or array which contains the URL of the form.
+* ``$options`` - An optional array icluding any of the :ref:`general-input-options`,
+  or specific options (see below) as well as any valid HTML attributes.
 
-    This method creates a ``<form>`` element. So do not use this method in some
-    opened form. Instead use
-    :php:meth:`Cake\\View\\Helper\\FormHelper::submit()`
-    or :php:meth:`Cake\\View\\Helper\\FormHelper::button()` to create buttons
-    inside opened forms.
+Creates a ``<button>`` tag and a surrounding ``<form>`` element that submits via
+POST, by default along. By default it also generates hidden input fields for the 
+Security Component.
+
+**Options for POST Button**
+
+* ``'data'`` - Array with key/value to pass in hidden input.
+* ``'method'`` - Request method to use. Set to ``'delete'`` (or other) to simulate 
+  HTTP/1.1 DELETE request (or others). Defaults to ``'post'``.
+* ``'form'`` - Array with any option that ``FormHelper::create()`` can take.
+* Also, the ``postButton`` method wil accept the options which are valid for 
+  the ``button()`` method.
+
+ Example::
+
+    // In Templates/Tickets/index.ctp
+    <?= $this->Form->postButton('Delete Record', ['controller' => 'Tickets', 'action' => 'delete', 5]) ?>
+
+Will output HTML similar to:
+
+.. code-block:: html
+
+    <form method="post" accept-charset="utf-8" action="/Qtools/tickets/delete/5">
+        <div style="display:none;">
+            <input name="_method" value="POST" type="hidden">
+        </div>
+        <button type="submit">Delete Record</button>
+        <div style="display:none;">
+            <input name="_Token[fields]" value="ccb3a444683eb6a66b2b1319bbd4b713200a2437%3A" type="hidden">
+            <input name="_Token[unlocked]" value="" type="hidden">
+            <input name="_Token[debug]" value="%5B%22%5C%2FQtools%5C%2Fmtbttickets%5C%2Fedit%5C%2F5%22%2C%5B%5D%2C%5B%5D%5D" type="hidden">
+        </div>
+    </form>
+
+Since this method generates a ``form`` element, do not use this method in an already
+opened form. Instead use
+:php:meth:`Cake\\View\\Helper\\FormHelper::submit()`
+or :php:meth:`Cake\\View\\Helper\\FormHelper::button()` to create buttons
+inside opened forms.
+
+Creating POST Links
+-------------------
 
 .. php:method:: postLink(string $title, mixed $url = null, array $options = [])
 
-    Creates an HTML link, but accesses the URL using method POST. Requires
-    JavaScript to be enabled in browser.
+* ``$title`` - Mandatory string providing the text to be wrapped in ``<a>`` tags. 
+  By default not HTML encoded.
+* ``$url`` - Optional. String or array which contains the URL 
+  of the form (Cake-relative or external URL starting with ``http://``).
+* ``$options`` - An optional array icluding any of the :ref:`general-input-options`,
+  or specific options (see below) as well as any valid HTML attributes.
 
-    This method creates a ``<form>`` element. If you want to use this method
-    inside of an existing form, you must use the ``block`` option so that the
-    new form is being set to a :ref:`view block <view-blocks>` that can be
-    rendered outside of the main form.
+Creates an HTML link, but accesses the URL using the method you specify 
+(defaults to POST). Requires JavaScript to be enabled in browser.
 
-    If all you are looking for is a button to submit your form, then you should
-    use :php:meth:`Cake\\View\\Helper\\FormHelper::button()` or
-    :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` instead.
+**Options for POST Link**
 
-    .. note::
-        Be careful to not put a postLink inside an open form. Instead use the
-        ``block`` option to buffer the form into a :ref:`view-blocks`
+* ``'data'`` - Array with key/value to pass in hidden input.
+* ``'method'`` - Request method to use. Set to ``'delete'`` (or other) to simulate 
+  HTTP/1.1 DELETE request (or others). Defaults to ``'post'``.
+* ``'confirm'`` - The confirmation message to display on click.
+* ``'block'`` - Set this option to ``true`` to append the form to view block 
+  ``'postLink'`` or provide a custom block name. Defaults to ``null``.
+* Also, the ``postLink`` method wil accept the options which are valid for 
+  the ``link()`` method.
 
+This method creates a ``<form>`` element. If you want to use this method
+inside of an existing form, you must use the ``block`` option so that the
+new form is being set to a :ref:`view block <view-blocks>` that can be
+rendered outside of the main form.
+
+If all you are looking for is a button to submit your form, then you should
+use :php:meth:`Cake\\View\\Helper\\FormHelper::button()` or
+:php:meth:`Cake\\View\\Helper\\FormHelper::submit()` instead.
+
+.. note::
+    Be careful to not put a postLink inside an open form. Instead use the
+    ``block`` option to buffer the form into a :ref:`view block <view-blocks>`
 
 Customizing the Templates FormHelper Uses
 =========================================
@@ -1798,7 +1893,7 @@ Like many helpers in CakePHP, FormHelper uses string templates to format the
 HTML it creates. While the default templates are intended to be a reasonable set
 of defaults. You may need to customize the templates to suit your application.
 
-To change the templates when the helper is loaded you can set the ``templates``
+To change the templates when the helper is loaded you can set the ``'templates'``
 option when including the helper in your controller::
 
     // In a View class
@@ -1807,7 +1902,7 @@ option when including the helper in your controller::
     ]);
 
 This would load the tags in **config/app_form.php**. This file should
-contain an array of templates indexed by name::
+contain an array of templates *indexed by name*::
 
     // in config/app_form.php
     return [
@@ -1828,7 +1923,7 @@ You can also change the templates at runtime using the ``templates()`` method::
     Template strings containing a percentage sign (``%``) need special attention,
     you should prefix this character with another percentage so it looks like
     ``%%``. The reason is that internally templates are compiled to be used with
-    ``sprintf()``. Example: '<div style="width:{{size}}%%">{{content}}</div>'
+    ``sprintf()``. Example: ``<div style="width:{{size}}%%">{{content}}</div>``
 
 List of Templates
 -----------------
@@ -1837,6 +1932,8 @@ The list of default templates, their default format and the variables they
 expect can be found at the
 `FormHelper API documentation <http://api.cakephp.org/3.2/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
 
+Using Distinct Custom Input Containers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 In addition to these templates, the ``input()`` method will attempt to use
 distinct templates for each input container. For example, when creating
 a datetime input the ``datetimeContainer`` will be used if it is present.
@@ -1849,13 +1946,19 @@ example::
     ]);
 
     // Create a radio set with our custom wrapping div.
-    echo $this->Form->radio('User.email_notifications', ['y', 'n']);
+    echo $this->Form->input('User.email_notifications', [
+        'options' => ['y', 'n'], 
+        'type' => 'radio'
+    ]);
+
+Using Distinct Custom Form Groups
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Similar to input containers, the ``input()`` method will also attempt to use
 distinct templates for each form group. A form group is a combo of label and
 input. For example, when creating a radio input the ``radioFormGroup`` will be
 used if it is present. If that template is missing by default each set of label
-& input is rendered using the ``formGroup`` template. For example::
+& input is rendered using the default ``formGroup`` template. For example::
 
     // Add custom radio form group
     $this->Form->templates([
@@ -1878,6 +1981,18 @@ those placeholders when generating inputs::
     echo $this->Form->input('password', [
         'templateVars' => ['help' => 'At least 8 characters long.']
     ]);
+
+Will output::
+
+    .. code-block:: html
+    
+    <div class="input password">
+        <label for="password">
+            Password
+        </label>
+        <input name="password" id="password" type="password"> 
+        <span class="help">At least 8 characters long.</span>
+    </div>
 
 .. versionadded:: 3.1
     The templateVars option was added in 3.1.0
@@ -1902,8 +2017,17 @@ Generating Entire Forms
 
 .. php:method:: inputs(array $fields = [], $options = [])
 
-Generates a set of inputs for the given context wrapped in a fieldset. You can
-specify the generated fields by including them::
+* ``$fields`` - Optional. An array of fields to generate. Allows setting 
+  custom types, labels and other options for each specified field.
+* ``$options`` - Optional. An array of options. Valid keys are:
+    #. ``'fieldset'`` - Can also be an array of parameters to be applied as HTMl 
+       attributes to the ``fieldset`` tag. Set this to ``false`` to disable the 
+       fieldset. If empty the fieldset will be enabled.
+    #. ``legend`` - String used to customize the ``legend`` text. Set this to 
+       ``false`` to disable the legend for the generated input set. 
+
+Generates a set of ``input`` elements for the given context wrapped in a ``fieldset``. 
+You can specify the generated fields by including them::
 
     echo $this->Form->inputs([
         'name',
@@ -1924,13 +2048,9 @@ You can customize the generated inputs by defining additional options in the
 When customizing, ``fields``, you can use the ``$options`` parameter to
 control the generated legend/fieldset.
 
-- ``fieldset`` Set to ``false`` to disable the fieldset. You can also pass an
-  array of parameters to be applied as HTML attributes to the fieldset tag. If
-  you pass an empty array, the fieldset will be displayed without attributes.
-- ``legend`` Set to ``false`` to disable the legend for the generated input set.
-  Or supply a string to customize the legend text.
-
-For example::
+For example pass an array of parameters to be applied as HTML attributes 
+to the ``fieldset`` tag. Also supply a string into ``legend`` to customize 
+the legend text::
 
     echo $this->Form->allInputs(
         [
