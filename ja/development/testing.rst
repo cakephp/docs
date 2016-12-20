@@ -443,7 +443,7 @@ CakePHP はフィクスチャに基づいたテストケースを実行するに
 のプレフィックスが必ず付きます。
 
 ``$fields`` ではテーブルを構成するフィールドと、その定義を記述します。フィールドの定義には
-:php:class:`Cake\\Database\\Schema\\Table`` と同じ書式を使います。
+:php:class:`Cake\\Database\\Schema\\Table` と同じ書式を使います。
 テーブル定義のための利用可能なキーは以下のとおりです。
 
 type
