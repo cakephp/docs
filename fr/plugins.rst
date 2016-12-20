@@ -492,10 +492,10 @@ votre app en utilisant des chemins spéciaux. Si vous avez un plugin appelé
 'ContactManager', vous pouvez redéfinir les fichiers de template du plugin avec
 une logique de vue de l'application plus spécifique, en créant des fichiers en
 utilisant le template suivant
-**src/Template/plugins/[Plugin]/[Controller]/[view].ctp**. Pour le controller
+**src/Template/Plugin/[Plugin]/[Controller]/[view].ctp**. Pour le controller
 Contacts, vous pouvez faire le fichier suivant::
 
-    src/Template/plugins/src/ContactManager/Contacts/index.ctp
+    src/Template/Plugin/ContactManager/Contacts/index.ctp
 
 Créer ce fichier vous permettra de redéfinir
 **plugins/ContactManager/src/Template/Contacts/index.ctp**.
