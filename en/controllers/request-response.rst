@@ -41,7 +41,7 @@ Request Parameters
 
 The request exposes the routing parameters through the ``getParam()`` method::
 
-    $this->request->getParam('controller');
+    $controllerName = $this->request->getParam('controller');
 
 All :ref:`route-elements` are accessed through this interface.
 
@@ -50,7 +50,7 @@ In addition to :ref:`route-elements`, you also often need access to
 well::
 
     // Passed arguments
-    $this->request->getParam('pass');
+    $passedArgs = $this->request->getParam('pass');
 
 Will all provide you access to the passed arguments. There
 are several important/useful parameters that CakePHP uses internally, these
@@ -71,10 +71,10 @@ Query String Parameters
 Query string parameters can be read using the ``getQuery()`` method::
 
     // URL is /posts/index?page=1&sort=title
-    $this->request->getQuery('page');
+    $page = $this->request->getQuery('page');
 
     // Prior to 3.4.0 
-    $this->request->query('page');
+    $page = $this->request->query('page');
 
 You can either directly access the query property, or you can use
 ``query()`` method to read the URL query array in an error-free manner.
@@ -104,7 +104,7 @@ All POST data can be accessed using
 contains a ``data`` prefix will have that data prefix removed. For example::
 
     // An input with a name attribute equal to 'MyModel[title]' is accessible at
-    $this->request->getData('MyModel.title');
+    $title = $this->request->getData('MyModel.title');
 
 Any keys that do not exist will return ``null``::
 
@@ -127,7 +127,7 @@ This is useful when interacting with XML or JSON request body content.
 Additional parameters for the decoding function can be passed as arguments to
 ``input()``::
 
-    $this->request->input('json_decode');
+    $jsonData = $this->request->input('json_decode');
 
 Environment Variables (from $_SERVER and $_ENV)
 -----------------------------------------------
@@ -138,10 +138,10 @@ Environment Variables (from $_SERVER and $_ENV)
 a getter/setter for enviromnent variables without having to modify globals
 ``$_SERVER`` and ``$_ENV``::
 
-    // Get a value
-    $value = $this->request->env('HTTP_HOST');
+    // Get the host
+    $host = $this->request->env('HTTP_HOST');
 
-    // Set a value. Generally helpful in testing.
+    // Set a value, generally helpful in testing.
     $this->request->env('REQUEST_METHOD', 'POST');
 
 To access all the environment variables in a request use ``getServerParams()``::
@@ -152,7 +152,7 @@ To access all the environment variables in a request use ``getServerParams()``::
     ``getServerParams()`` was added in 3.4.0
 
 XML or JSON Data
------------------
+----------------
 
 Applications employing :doc:`/development/rest` often exchange data in
 non-URL-encoded post bodies. You can read input data in any format using
@@ -160,14 +160,14 @@ non-URL-encoded post bodies. You can read input data in any format using
 you can receive the content in a deserialized format::
 
     // Get JSON encoded data submitted to a PUT/POST action
-    $data = $this->request->input('json_decode');
+    $jsonData = $this->request->input('json_decode');
 
 Some deserializing methods require additional parameters when called, such as
 the 'as array' parameter on ``json_decode``. If you want XML converted into a
 DOMDocument object, :php:meth:`~Cake\\Network\\ServerRequest::input()` supports
 passing in additional parameters as well::
 
-    // Get Xml encoded data submitted to a PUT/POST action
+    // Get XML encoded data submitted to a PUT/POST action
     $data = $this->request->input('Cake\Utility\Xml::build', ['return' => 'domdocument']);
 
 Path Information
@@ -181,17 +181,17 @@ subdirectory. The attributes you can use are::
     // Assume the current request URL is /subdir/articles/edit/1?page=1
 
     // Holds /subdir/articles/edit/1?page=1
-    $request->here();
+    $here = $request->here();
 
     // Holds /subdir
-    $request->getAttribute('base');
+    $base = $request->getAttribute('base');
 
     // Holds /subdir/
-    $request->getAttribute('base');
+    $base = $request->getAttribute('base');
 
     // Prior to 3.4.0
-    $request->webroot;
-    $request->base;
+    $webroot = $request->webroot;
+    $base = $request->base;
 
 .. _check-the-request:
 
@@ -204,7 +204,7 @@ The request object provides an easy way to inspect certain conditions in a given
 request. By using the ``is()`` method you can check a number of common
 conditions, as well as inspect other application specific request criteria::
 
-    $this->request->is('post');
+    $isPost = $this->request->is('post');
 
 You can also extend the request detectors that are available, by using
 :php:meth:`Cake\\Http\\ServerRequest::addDetector()` to create new kinds of
@@ -294,7 +294,7 @@ Session Data
 
 To access the session for a given request use the ``session()`` method::
 
-    $this->request->session()->read('Auth.User.name');
+    $userName = $this->request->session()->read('Auth.User.name');
 
 For more information, see the :doc:`/development/sessions` documentation for how
 to use the session object.
@@ -314,7 +314,7 @@ Returns the domain name your application is running on::
 Returns the subdomains your application is running on as an array::
 
     // Returns ['my', 'dev'] for 'my.dev.example.org'
-    $request->subdomains();
+    $subdomains = $request->subdomains();
 
 .. php:method:: host()
 
@@ -359,16 +359,16 @@ Allows you to access any of the ``HTTP_*`` headers that were used
 for the request. For example::
 
     // Get the header as a string
-    $this->request->getHeaderLine('User-Agent');
+    $userAgent = $this->request->getHeaderLine('User-Agent');
 
     // Get an array of all values.
-    $this->request->getHeader('Accept');
+    $acceptHeader = $this->request->getHeader('Accept');
 
     // Check if a header exists
-    $this->request->hasHeader('Accept');
+    $hasAcceptHeader = $this->request->hasHeader('Accept');
 
     // Prior to 3.4.0
-    $this->request->header('User-Agent');
+    $userAgent = $this->request->header('User-Agent');
 
 While some apache installs don't make the ``Authorization`` header accessible,
 CakePHP will make it available through apache specific methods as required.
@@ -394,10 +394,10 @@ have the request object use these headers set the ``trustProxy`` property to
     $this->request->trustProxy = true;
 
     // These methods will now use the proxied headers.
-    $this->request->port();
-    $this->request->host();
-    $this->request->scheme();
-    $this->request->clientIp();
+    $port = $this->request->port();
+    $host = $$this->request->host();
+    $scheme = $this->request->scheme();
+    $clientIp = $this->request->clientIp();
 
 Checking Accept Headers
 -----------------------
@@ -409,11 +409,11 @@ particular type of content.
 
 Get all types::
 
-    $this->request->accepts();
+    $accepts = $this->request->accepts();
 
 Check for a single type::
 
-    $this->request->accepts('application/json');
+    $acceptsJson = $this->request->accepts('application/json');
 
 .. php:method:: acceptLanguage($language = null)
 
@@ -422,11 +422,11 @@ or check whether a specific language is accepted.
 
 Get the list of accepted languages::
 
-    $this->request->acceptLanguage();
+    $acceptsLanguages = $this->request->acceptLanguage();
 
 Check whether a specific language is accepted::
 
-    $this->request->acceptLanguage('es-es');
+    $acceptsSpanish = $this->request->acceptLanguage('es-es');
 
 .. index:: $this->response
 
