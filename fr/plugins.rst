@@ -500,6 +500,14 @@ Contacts, vous pouvez faire le fichier suivant::
 Créer ce fichier vous permettra de redéfinir
 **plugins/ContactManager/src/Template/Contacts/index.ctp**.
 
+Si votre plugin est dans une dépendence de Composer (ex: 'LeVendor/LePlugin), le
+chemin vers la vue 'index' du controlleur Custom sera
+
+    src/Template/Plugin/LeVendor/LePlugin/Custom/index.ctp
+
+Créer ce fichier vous permettra de redéfinir
+**vendor/levendor/leplugin/src/Template/Custom/index.ctp**.
+
 .. _plugin-assets:
 
 
