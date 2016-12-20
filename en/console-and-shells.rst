@@ -612,11 +612,11 @@ code, or raise the ``StopException`` directly as shown in the example::
 The example above will return the following exit codes when executed on a
 command-line::
 
-    user@ubuntu:~/cakeblog$ bin/cake erroneousshell ; echo $?
+    $ bin/cake erroneousshell ; echo $?
     0
-    user@ubuntu:~/cakeblog$ bin/cake erroneousshell itFails ; echo $?
+    $ bin/cake erroneousshell itFails ; echo $?
     1
-    user@ubuntu:~/cakeblog$ bin/cake erroneousshell itFailsSpecifically ; echo $?
+    $ bin/cake erroneousshell itFailsSpecifically ; echo $?
     2
 
 .. tip::
@@ -748,7 +748,7 @@ method in action::
 The console's ``description`` output can be seen by executing the following
 command::
 
-    user@ubuntu:~/cakeblog$ bin/cake console --help
+    $ bin/cake console --help
 
     Welcome to CakePHP v3.0.13 Console
     ---------------------------------------------------------------
@@ -810,7 +810,7 @@ To illustrate the ``epilog()`` method in action lets add a call to the
 The text added with the ``epilog()`` method can be seen in the output from
 the following console command::
 
-    user@ubuntu:~/cakeblog$ bin/cake console --help
+    $ bin/cake console --help
 
     Welcome to CakePHP v3.0.13 Console
     ---------------------------------------------------------------

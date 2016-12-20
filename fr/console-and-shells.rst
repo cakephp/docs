@@ -645,11 +645,11 @@ afficher un message et sortir avec un code spécifique, ou lancer la
 L'exemple ci-dessus va retourner les codes de sortie suivants lorsqu'il est
 exécuté en ligne de commande::
 
-    user@ubuntu:~/cakeblog$ bin/cake erroneousshell ; echo $?
+    $ bin/cake erroneousshell ; echo $?
     0
-    user@ubuntu:~/cakeblog$ bin/cake erroneousshell itFails ; echo $?
+    $ bin/cake erroneousshell itFails ; echo $?
     1
-    user@ubuntu:~/cakeblog$ bin/cake erroneousshell itFailsSpecifically ; echo $?
+    $ bin/cake erroneousshell itFailsSpecifically ; echo $?
     2
 
 .. tip::
@@ -784,7 +784,7 @@ Appeler sans arguments va retourner la valeur actuelle::
 La sortie ``description`` de la console peut être vue en exécutant la commande
 suivante::
 
-    user@ubuntu:~/cakeblog$ bin/cake console --help
+    $ bin/cake console --help
 
     Welcome to CakePHP v3.0.13 Console
     ---------------------------------------------------------------
@@ -846,7 +846,7 @@ Pour illustrer la méthode ``epilog()``, ajoutons un appel à la méthode
 Le texte ajouté avec la méthode ``epilog()`` peut être vue dans la sortie
 avec la commande de console suivante::
 
-    user@ubuntu:~/cakeblog$ bin/cake console --help
+    $ bin/cake console --help
 
     Welcome to CakePHP v3.0.13 Console
     ---------------------------------------------------------------
