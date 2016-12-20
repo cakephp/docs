@@ -480,6 +480,14 @@ Contacts controller you could make the following file::
 Creating this file would allow you to override
 **plugins/ContactManager/src/Template/Contacts/index.ctp**.
 
+If your plugin is in a composer dependency (ie: 'TheVendor/ThePlugin'), the path to
+the 'index' view of the Custom controller will be
+
+    src/Template/Plugin/TheVendor/ThePlugin/Custom/index.ctp
+
+Creating this file would allow you to override
+**vendor/thevendor/theplugin/src/Template/Custom/index.ctp**.
+
 .. _plugin-assets:
 
 
