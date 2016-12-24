@@ -466,6 +466,14 @@ Contacts コントローラなら、以下のようなファイルを作成し�
 このファイルを作成すると、 **plugins/ContactManager/src/Template/Contacts/index.ctp** を
 オーバーライドします。
 
+もし、あなたのプラグインが composer の依存関係の中にある場合 (例えば 'TheVendor/ThePlugin')、
+Custom コントローラの 'index' ビューへのパスは、以下の通りです。 ::
+
+    src/Template/Plugin/TheVendor/ThePlugin/Custom/index.ctp
+
+このファイルを作成すると、 **vendor/thevendor/theplugin/src/Template/Custom/index.ctp** を
+オーバーライドします。
+
 .. _plugin-assets:
 
 プラグインアセット
