@@ -122,6 +122,18 @@ Cake\Validation\Validator
     * ``provider()``
 Cake\View\StringTemplateTrait
     * ``templates()``
+Cake\View\ViewBuilder
+    * ``templatePath()``
+    * ``layoutPath()``
+    * ``plugin()``
+    * ``helpers()``
+    * ``theme()``
+    * ``template()``
+    * ``layout()``
+    * ``options()``
+    * ``name()``
+    * ``className()``
+    * ``autoLayout()`` (now ``enableAutoLayout()``/``isAutoLayoutEnabled()``)
 
 .. _adopting-immutable-responses:
 
