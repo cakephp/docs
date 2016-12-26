@@ -118,7 +118,7 @@ to add stricter return types in the future. For these reasons, combined get/set
 methods are being split into separate get and set methods.
 
 The following is a list of methods that are deprecated and replaced with
-``getX`` and ``setX`` methods:
+``getX()`` and ``setX()`` methods:
 
 Cake\Core\InstanceConfigTrait
     * ``config()``
