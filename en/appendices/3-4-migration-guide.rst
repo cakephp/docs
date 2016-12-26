@@ -125,7 +125,6 @@ Cake\View\StringTemplateTrait
 Cake\View\ViewBuilder
     * ``templatePath()``
     * ``layoutPath()``
-    * ``autoLayout()``
     * ``plugin()``
     * ``helpers()``
     * ``theme()``
@@ -134,6 +133,7 @@ Cake\View\ViewBuilder
     * ``options()``
     * ``name()``
     * ``className()``
+    * ``autoLayout()`` (now ``enableAutoLayout()``/``isAutoLayoutEnabled()``)
 
 .. _adopting-immutable-responses:
 
