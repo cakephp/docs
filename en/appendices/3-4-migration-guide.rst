@@ -120,7 +120,12 @@ methods are being split into separate get and set methods.
 The following is a list of methods that are deprecated and replaced with
 ``getX`` and ``setX`` methods:
 
-``Cake\Console\ConsoleOptionParser``
+Cake\Core\InstanceConfigTrait
+    * ``config()``
+Cake\Core\StaticConfigTrait
+    * ``config()``
+    * ``dsnClassMap()``
+Cake\Console\ConsoleOptionParser
     * ``command()``
     * ``description()``
     * ``epilog()``
