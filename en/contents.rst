@@ -57,13 +57,14 @@ Contents
     core-libraries/time
     core-libraries/xml
 
+    access-control-list
+    appendices
     core-libraries/global-constants-and-functions
     chronos
     debug-kit
-    migrations
     elasticsearch
+    migrations
     upgrade-tool
-    appendices
 
 .. todolist::
 
