@@ -105,7 +105,7 @@ After adding crumbs to the trail, you can easily render it using the
 
 Here is an example of how to render a trail::
 
-    echo $this->BreadcrumbsHelper->render(
+    echo $this->Breadcrumbs->render(
         ['class' => 'breadcrumbs-trail'],
         ['separator' => '<i class="fa fa-angle-right"></i>']
     );
