@@ -9,12 +9,17 @@
 
 .. toctree::
     :maxdepth: 3
+    :caption: はじめに
 
     intro
     quickstart
     appendices/3-x-migration-guide
     tutorials-and-examples
     contributing
+
+.. toctree::
+    :maxdepth: 3
+    :caption: 入門
 
     installation
     development/configuration
@@ -24,6 +29,10 @@
     controllers
     views
     orm
+
+.. toctree::
+    :maxdepth: 3
+    :caption: 一般的なトピック
 
     controllers/components/authentication
     bake
@@ -45,6 +54,10 @@
     development/testing
     core-libraries/validation
 
+.. toctree::
+    :maxdepth: 3
+    :caption: ユーティリティ
+
     core-libraries/app
     core-libraries/collections
     core-libraries/file-folder
@@ -57,12 +70,21 @@
     core-libraries/time
     core-libraries/xml
 
-    core-libraries/global-constants-and-functions
+.. toctree::
+    :maxdepth: 3
+    :caption: プラグイン
+
     chronos
     debug-kit
     migrations
     elasticsearch
     upgrade-tool
+
+.. toctree::
+    :maxdepth: 3
+    :caption: その他
+
+    core-libraries/global-constants-and-functions
     appendices
 
 .. todolist::
