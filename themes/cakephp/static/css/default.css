@@ -202,15 +202,6 @@
 }
 
 
-#sidebar-navigation > ul > li:lang(fr):nth-of-type(1):before {
-    content: "Préface";
-}
-#sidebar-navigation > ul > li:lang(es):nth-of-type(1):before {
-    content: "Preface";
-}
-#sidebar-navigation > ul > li:lang(pt):nth-of-type(1):before {
-    content: "Prefácio";
-}
 #sidebar-navigation > ul > li:lang(ja):nth-of-type(1):before {
     content: "はじめに";
 }
@@ -221,15 +212,6 @@
     content: "Preface";
 }
 
-#sidebar-navigation > ul > li:lang(fr):nth-of-type(6):before {
-    content: "Pour Commencer";
-}
-#sidebar-navigation > ul > li:lang(es):nth-of-type(6):before {
-    content: "Getting Started";
-}
-#sidebar-navigation > ul > li:lang(pt):nth-of-type(6):before {
-    content: "Começando";
-}
 #sidebar-navigation > ul > li:lang(ja):nth-of-type(6):before {
     content: "入門";
 }
@@ -240,15 +222,6 @@
     content: "Getting Started";
 }
 
-#sidebar-navigation > ul > li:lang(fr):nth-of-type(14):before {
-    content: "Généralités";
-}
-#sidebar-navigation > ul > li:lang(es):nth-of-type(14):before {
-    content: "General Topics";
-}
-#sidebar-navigation > ul > li:lang(pt):nth-of-type(14):before {
-    content: "Tópicos Gerais";
-}
 #sidebar-navigation > ul > li:lang(ja):nth-of-type(14):before {
     content: "一般的なトピック";
 }
@@ -259,15 +232,6 @@
     content: "General Topics";
 }
 
-#sidebar-navigation > ul > li:lang(fr):nth-of-type(33):before {
-    content: "Utilitaires";
-}
-#sidebar-navigation > ul > li:lang(es):nth-of-type(33):before {
-    content: "Utility Classes";
-}
-#sidebar-navigation > ul > li:lang(pt):nth-of-type(33):before {
-    content: "Classes utilitárias";
-}
 #sidebar-navigation > ul > li:lang(ja):nth-of-type(33):before {
     content: "ユーティリティ";
 }
@@ -278,15 +242,6 @@
     content: "Utility Classes";
 }
 
-#sidebar-navigation > ul > li:lang(fr):nth-of-type(44):before {
-    content: "Divers";
-}
-#sidebar-navigation > ul > li:lang(es):nth-of-type(44):before {
-    content: "Other";
-}
-#sidebar-navigation > ul > li:lang(pt):nth-of-type(44):before {
-    content: "Diversos";
-}
 #sidebar-navigation > ul > li:lang(ja):nth-of-type(44):before {
     content: "その他";
 }
