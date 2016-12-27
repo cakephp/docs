@@ -59,6 +59,8 @@ the plugin. You can load plugins one by one, or all of them with a single
 method::
 
     // In config/bootstrap.php
+    // Or in Application::bootstrap()
+
     // Loads a single plugin
     Plugin::load('ContactManager');
 
@@ -130,7 +132,8 @@ The ``load()`` and ``loadAll()`` methods can assist with plugin configuration
 and routing. Perhaps you want to load all plugins automatically while specifying
 custom routes and bootstrap files for certain plugins::
 
-    // in config/bootstrap.php
+    // In config/bootstrap.php,
+    // or in Application::bootstrap()
 
     // Using loadAll()
     Plugin::loadAll([
