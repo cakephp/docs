@@ -219,6 +219,15 @@ behavior that may effect your application:
   ``mime_content_type`` if a content-type is not provided. Previously
   attachments would have defaulted to 'application/octet-stream'.
 
+Visibility Changes
+==================
+
+* ``MailerAwareTrait::getMailer()`` will now become protected.
+* ``CellTrait::cell()`` will now become protected.
+
+If traits are used in controllers, their public methods become actions. These
+changes will make your application secure if you are using them in your controllers.
+
 Collection
 ==========
 
