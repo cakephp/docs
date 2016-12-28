@@ -518,7 +518,7 @@ aux utilisateurs. Pour créer votre ``UserMailer``, créez un fichier
         {
             $this
                 ->to($user->email)
-                ->subject(sprintf('Welcome %s', $user->name))
+                ->subject(__('Welcome %s', $user->name))
                 ->template('welcome_mail') // Par défaut le template avec le même nom que le nom de la méthode est utilisé.
                 ->layout('custom');
         }

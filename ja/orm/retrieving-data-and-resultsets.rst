@@ -1008,7 +1008,7 @@ status ごとに ``$reducer`` 関数が呼ばれ、追加の処理を何でも�
         ->mapReduce($mapper, $reducer);
 
     foreach ($articlesByStatus as $status => $articles) {
-        echo sprintf("%d 件の %s の article が存在します", count($articles), $status);
+        echo __("%d 件の %s の article が存在します", count($articles), $status);
     }
 
 上記は下記のように出力されます。 ::

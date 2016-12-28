@@ -1135,7 +1135,7 @@ groupement::
         ->mapReduce($mapper, $reducer);
 
     foreach ($articlesByStatus as $status => $articles) {
-        echo sprintf("The are %d %s articles", count($articles), $status);
+        echo __("The are %d %s articles", count($articles), $status);
     }
 
 Ce qui est au-dessus va afficher les lignes suivantes::
