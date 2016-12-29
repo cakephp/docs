@@ -93,11 +93,11 @@ After adding crumbs to the trail, you can easily render it using the
 - ``$separator`` : An array of attributes for the ``separator`` template.
   Possible properties are:
 
-    - **separator** The string to be displayed as a separator
-    - **innerAttrs** To provide attributes in case your separator is divided
-      in two elements
-    - **templateVars** Allows the insertion of custom template variable in the
-      template
+  - **separator** The string to be displayed as a separator
+  - **innerAttrs** To provide attributes in case your separator is divided
+    in two elements
+  - **templateVars** Allows the insertion of custom template variable in the
+    template
 
   All other properties will be converted as HTML attributes and will replace
   the **attrs** key in the template. If you use the default for this option
