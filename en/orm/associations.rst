@@ -262,7 +262,7 @@ syntax::
         {
             $this->belongsTo('Users')
                 ->setForeignKey('user_id')
-                ->setJoinType('INNER',);
+                ->setJoinType('INNER');
         }
     }
 
@@ -344,8 +344,7 @@ We can also define a more specific relationship using array syntax::
         {
             $this->hasMany('Comments')
                 ->setForeignKey('article_id')
-                ->setDependent(true,
-            ]);
+                ->setDependent(true);
         }
     }
 
