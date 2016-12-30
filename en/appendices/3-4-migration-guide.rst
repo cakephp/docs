@@ -102,6 +102,9 @@ Other Deprecations
 * The ``fieldList`` option for  ``Cake\ORM\Table::newEntity()`` and
   ``patchEntity()`` has been renamed to ``fields`` to be more consistent with
   other parts of the ORM.
+* ``FormHelper::input()`` is deprecated. Use ``FormHelper::control()`` instead.
+* ``FormHelper::inputs()`` is deprecated. Use ``FormHelper::controls()`` instead.
+* ``FormHelper::allInputs()`` is deprecated. Use ``FormHelper::allControls()`` instead.
 
 Deprecated Combined Get/Set Methods
 -----------------------------------

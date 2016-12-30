@@ -44,7 +44,7 @@ section. The built-in providers map to the following values of ``$model``:
 All contexts classes also have access to the request data, making it simpler to
 build forms.
 
-Once a form has been created with a context, all inputs you create will use the
+Once a form has been created with a context, all controls you create will use the
 active context. In the case of an ORM backed form, FormHelper can access
 associated data, validation errors and schema metadata. You can close the active
 context using the ``end()`` method, or by calling ``create()`` again. To create
@@ -269,18 +269,18 @@ return an object. If there is no match return null.
 
 .. _automagic-form-elements:
 
-Creating Form Inputs
+Creating Form Controls
 ====================
 
-.. php:method:: input(string $fieldName, array $options = [])
+.. php:method:: control(string $fieldName, array $options = [])
 
-The ``input()`` method lets you to generate complete form inputs. These
-inputs will include a wrapping div, label, input widget, and validation error if
+The ``control()`` method lets you to generate complete form controls. These
+controls will include a wrapping div, label, control widget, and validation error if
 necessary. By using the metadata in the form context, this method will choose an
-appropriate input type for each field. Internally ``input()`` uses the other
+appropriate control type for each field. Internally ``control()`` uses the other
 methods of FormHelper.
 
-The type of input created depends on the column datatype:
+The type of control created depends on the column datatype:
 
 Column Type
     Resulting Form Field
@@ -311,10 +311,10 @@ time
 binary
     file
 
-The ``$options`` parameter allows you to choose a specific input type if
+The ``$options`` parameter allows you to choose a specific control type if
 you need to::
 
-    echo $this->Form->input('published', ['type' => 'checkbox']);
+    echo $this->Form->control('published', ['type' => 'checkbox']);
 
 .. _html5-required:
 
@@ -323,7 +323,7 @@ validation rules for the model's field indicate that it is required and not
 allowed to be empty. You can disable automatic required flagging using the
 required option::
 
-    echo $this->Form->input('title', ['required' => false]);
+    echo $this->Form->control('title', ['required' => false]);
 
 To skip browser validation triggering for the whole form you can set option
 ``'formnovalidate' => true`` for the input button you generate using
@@ -332,32 +332,32 @@ true`` in options for :php:meth:`~Cake\\View\\Helper\\FormHelper::create()`.
 
 For example, let's assume that your User model includes fields for a
 username (varchar), password (varchar), approved (datetime) and
-quote (text). You can use the input() method of the FormHelper to
-create appropriate inputs for all of these form fields::
+quote (text). You can use the control() method of the FormHelper to
+create appropriate controls for all of these form fields::
 
     echo $this->Form->create($user);
     // Text
-    echo $this->Form->input('username');
+    echo $this->Form->control('username');
     // Password
-    echo $this->Form->input('password');
+    echo $this->Form->control('password');
     // Day, month, year, hour, minute, meridian
-    echo $this->Form->input('approved');
+    echo $this->Form->control('approved');
     // Textarea
-    echo $this->Form->input('quote');
+    echo $this->Form->control('quote');
 
     echo $this->Form->button('Add');
     echo $this->Form->end();
 
 A more extensive example showing some options for a date field::
 
-    echo $this->Form->input('birth_dt', [
+    echo $this->Form->control('birth_dt', [
         'label' => 'Date of birth',
         'minYear' => date('Y') - 70,
         'maxYear' => date('Y') - 18,
     ]);
 
-Besides the specific options for ``input()`` found below, you can specify
-any option for the input type & any HTML attribute (for instance ``onfocus``).
+Besides the specific options for ``control()`` found below, you can specify
+any option for the control type & any HTML attribute (for instance ``onfocus``).
 
 If you want to create a select field while using a belongsTo - or
 hasOne - Relation, you can add the following to your Users-controller
@@ -367,7 +367,7 @@ hasOne - Relation, you can add the following to your Users-controller
 
 Afterwards, add the following to your view template::
 
-    echo $this->Form->input('group_id', ['options' => $groups]);
+    echo $this->Form->control('group_id', ['options' => $groups]);
 
 To make a select box for a belongsToMany Groups association you can add the
 following to your UsersController::
@@ -376,7 +376,7 @@ following to your UsersController::
 
 Afterwards, add the following to your view template::
 
-    echo $this->Form->input('groups._ids', ['options' => $groups]);
+    echo $this->Form->control('groups._ids', ['options' => $groups]);
 
 If your model name consists of two or more words, e.g.,
 "UserGroup", when passing the data using set() you should name your
@@ -386,21 +386,21 @@ data in a pluralised and camelCased format as follows::
 
 .. note::
 
-    You should not use ``FormHelper::input()`` to generate submit buttons. Use
+    You should not use ``FormHelper::control()`` to generate submit buttons. Use
     :php:meth:`~Cake\\View\\Helper\\FormHelper::submit()` instead.
 
 Field Naming Conventions
 ------------------------
 
-When creating input widgets you should name your fields after the matching
+When creating control widgets you should name your fields after the matching
 attributes in the form's entity. For example, if you created a form for an
 ``$article``, you would create fields named after the properities. E.g
 ``title``, ``body`` and ``published``.
 
-You can create inputs for associated models, or arbitrary models by passing in
+You can create controls for associated models, or arbitrary models by passing in
 ``association.fieldname`` as the first parameter::
 
-    echo $this->Form->input('association.fieldname');
+    echo $this->Form->control('association.fieldname');
 
 Any dots in your field names will be converted into nested request data. For
 example, if you created a field with a name ``0.comments.body`` you would get
@@ -408,7 +408,7 @@ a name attribute that looks like ``0[comments][body]``. This convention makes it
 easy to save data with the ORM. Details for the various association types can
 be found in the :ref:`associated-form-inputs` section.
 
-When creating datetime related inputs, FormHelper will append a field-suffix.
+When creating datetime related controls, FormHelper will append a field-suffix.
 You may notice additional fields named ``year``, ``month``, ``day``, ``hour``,
 ``minute``, or ``meridian`` being added. These fields will be automatically
 converted into ``DateTime`` objects when entities are marshalled.
@@ -417,18 +417,18 @@ converted into ``DateTime`` objects when entities are marshalled.
 Options
 -------
 
-``FormHelper::input()`` supports a large number of options. In addition to its
-own options ``input()`` accepts options for the generated input types, as well as
+``FormHelper::control()`` supports a large number of options. In addition to its
+own options ``control()`` accepts options for the generated control types, as well as
 HTML attributes. The following will cover the options specific to
-``FormHelper::input()``.
+``FormHelper::control()``.
 
-* ``$options['type']`` You can force the type of an input, overriding model
+* ``$options['type']`` You can force the type of an control, overriding model
   introspection, by specifying a type. In addition to the field types found in
   the :ref:`automagic-form-elements`, you can also create 'file', 'password',
   and any type supported by HTML5::
 
-    echo $this->Form->input('field', ['type' => 'file']);
-    echo $this->Form->input('email', ['type' => 'email']);
+    echo $this->Form->control('field', ['type' => 'file']);
+    echo $this->Form->control('email', ['type' => 'email']);
 
   Output:
 
@@ -444,9 +444,9 @@ HTML attributes. The following will cover the options specific to
     </div>
 
 * ``$options['label']`` Set this key to the string you would like to be
-  displayed within the label that usually accompanies the input::
+  displayed within the label that usually accompanies the control::
 
-    echo $this->Form->input('name', [
+    echo $this->Form->control('name', [
         'label' => 'The User Alias'
     ]);
 
@@ -462,7 +462,7 @@ HTML attributes. The following will cover the options specific to
   Alternatively, set this key to ``false`` to disable the output of the
   label::
 
-    echo $this->Form->input('name', ['label' => false]);
+    echo $this->Form->control('name', ['label' => false]);
 
   Output:
 
@@ -476,7 +476,7 @@ HTML attributes. The following will cover the options specific to
   ``label`` element. If you do this, you can use a ``text`` key in
   the array to customize the label text::
 
-    echo $this->Form->input('name', [
+    echo $this->Form->control('name', [
         'label' => [
             'class' => 'thingy',
             'text' => 'The User Alias'
@@ -497,12 +497,12 @@ HTML attributes. The following will cover the options specific to
 
   To disable error message output & field classes set the error key to ``false``::
 
-    echo $this->Form->input('name', ['error' => false]);
+    echo $this->Form->control('name', ['error' => false]);
 
   To override the model error messages use an array with
   the keys matching the original validation error messages::
 
-    $this->Form->input('name', [
+    $this->Form->control('name', [
         'error' => ['Not long enough' => __('This is not long enough')]
     ]);
 
@@ -513,9 +513,9 @@ HTML attributes. The following will cover the options specific to
 Generating Specific Types of Inputs
 ===================================
 
-In addition to the generic ``input()`` method, ``FormHelper`` has specific
-methods for generating a number of different types of inputs. These can be used
-to generate just the input widget itself, and combined with other methods like
+In addition to the generic ``control()`` method, ``FormHelper`` has specific
+methods for generating a number of different types of controls. These can be used
+to generate just the control widget itself, and combined with other methods like
 :php:meth:`~Cake\\View\\Helper\\FormHelper::label()` and
 :php:meth:`~Cake\\View\\Helper\\FormHelper::error()` to generate fully custom
 form layouts.
@@ -525,14 +525,14 @@ form layouts.
 Common Options
 --------------
 
-Many of the various input element methods support a common set of options. All
-of these options are also supported by ``input()``. To reduce repetition the
-common options shared by all input methods are as follows:
+Many of the various control element methods support a common set of options. All
+of these options are also supported by ``control()``. To reduce repetition the
+common options shared by all control methods are as follows:
 
-* ``$options['id']`` Set this key to force the value of the DOM id for the input.
+* ``$options['id']`` Set this key to force the value of the DOM id for the control.
   This will override the idPrefix that may be set.
 
-* ``$options['default']`` Used to set a default value for the input field. The
+* ``$options['default']`` Used to set a default value for the control field. The
   value is used if the data passed to the form does not contain a value for the
   field (or if no data is passed at all). An explicit default value will
   override any default values defined in the schema.
@@ -551,13 +551,13 @@ common options shared by all input methods are as follows:
 
     You cannot use ``default`` to check a checkbox - instead you might
     set the value in ``$this->request->getData()`` in your controller,
-    or set the input option ``checked`` to ``true``.
+    or set the control option ``checked`` to ``true``.
 
     Beware of using ``false`` to assign a default value. A ``false`` value is
-    used to disable/exclude options of an input field, so ``'default' => false``
+    used to disable/exclude options of an control field, so ``'default' => false``
     would not set any value at all. Instead use ``'default' => 0``.
 
-* ``$options['value']`` Used to set a specific value for the input field. This
+* ``$options['value']`` Used to set a specific value for the control field. This
   will override any value that may else be injected from the context, such as
   Form, Entity or ``request->getData()`` etc.
 
@@ -569,7 +569,7 @@ common options shared by all input methods are as follows:
 
 In addition to the above options, you can mixin any HTML attribute you wish to
 use. Any non-special option name will be treated as an HTML attribute, and
-applied to the generated HTML input element.
+applied to the generated HTML control element.
 
 .. versionchanged:: 3.3.0
     As of 3.3.0, FormHelper will automatically use any default values defined
@@ -579,9 +579,9 @@ applied to the generated HTML input element.
 Options for Select, Checkbox and Radio Inputs
 ---------------------------------------------
 
-* ``$options['value']`` may also be used in combination with a select-type input
+* ``$options['value']`` may also be used in combination with a select-type control
   (i.e. For types select, date, time, datetime). Set 'value' to the value of the
-  item you wish to be selected by default when the input is rendered::
+  item you wish to be selected by default when the control is rendered::
 
     echo $this->Form->time('close_time', [
         'value' => '13:30:00'
@@ -589,10 +589,10 @@ Options for Select, Checkbox and Radio Inputs
 
   .. note::
 
-    The value key for date and datetime inputs may also be a UNIX
+    The value key for date and datetime controls may also be a UNIX
     timestamp, or a DateTime object.
 
-  For select input where you set the ``multiple`` attribute to true,
+  For select control where you set the ``multiple`` attribute to true,
   you can use an array of the values you want to select by default::
 
     echo $this->Form->select('rooms', [
@@ -601,7 +601,7 @@ Options for Select, Checkbox and Radio Inputs
         'default' => [1, 3]
     ]);
 
-* ``$options['empty']`` If set to ``true``, forces the input to remain empty.
+* ``$options['empty']`` If set to ``true``, forces the control to remain empty.
 
   When passed to a select list, this creates a blank option with an
   empty value in your drop down list. If you want to have a empty
@@ -629,7 +629,7 @@ Options for Select, Checkbox and Radio Inputs
 
   Options can also supplied as key-value pairs.
 
-* ``$options['hiddenField']`` For certain input types (checkboxes, radios) a
+* ``$options['hiddenField']`` For certain control types (checkboxes, radios) a
   hidden input is created so that the key in ``$this->request->getData()`` will exist
   even without a value specified:
 
@@ -648,8 +648,8 @@ Options for Select, Checkbox and Radio Inputs
 
     <input type="checkbox" name="published" value="1">
 
-  If you want to create multiple blocks of inputs on a form that are
-  all grouped together, you should use this parameter on all inputs
+  If you want to create multiple blocks of controls on a form that are
+  all grouped together, you should use this parameter on all controls
   except the first. If the hidden input is on the page in multiple
   places, only the last group of input's values will be saved
 
@@ -703,21 +703,21 @@ Options for Select, Checkbox and Radio Inputs
 Datetime Options
 ----------------
 
-* ``$options['timeFormat']`` Used to specify the format of the select inputs for
-  a time-related set of inputs. Valid values include ``12``, ``24``, and ``null``.
+* ``$options['timeFormat']`` Used to specify the format of the select controls for
+  a time-related set of controls. Valid values include ``12``, ``24``, and ``null``.
 
 * ``$options['minYear'], $options['maxYear']`` Used in combination with a
-  date/datetime input. Defines the lower and/or upper end of values shown in the
+  date/datetime control. Defines the lower and/or upper end of values shown in the
   years select field.
 
-* ``$options['orderYear']`` Used in combination with a date/datetime input.
+* ``$options['orderYear']`` Used in combination with a date/datetime control.
   Defines the order in which the year values will be set. Valid values include
   'asc', 'desc'. The default value is 'desc'.
 
 * ``$options['interval']`` This option specifies the number of minutes between
   each option in the minutes select box::
 
-    echo $this->Form->input('time', [
+    echo $this->Form->control('time', [
         'type' => 'time',
         'interval' => 15
     ]);
@@ -789,7 +789,7 @@ Creating Textareas
 
 .. php:method:: textarea(string $fieldName, array $options)
 
-Creates a textarea input field. ::
+Creates a textarea control field. ::
 
     echo $this->Form->textarea('notes');
 
@@ -812,7 +812,7 @@ generated. Example:
 
 .. note::
 
-    The ``textarea`` input type allows for the ``$options`` attribute
+    The ``textarea`` control type allows for the ``$options`` attribute
     of ``'escape'`` which determines whether or not the contents of the
     textarea should be escaped. Defaults to ``true``.
 
@@ -820,7 +820,7 @@ generated. Example:
 
     echo $this->Form->textarea('notes', ['escape' => false]);
     // OR....
-    echo $this->Form->input('notes', ['type' => 'textarea', 'escape' => false]);
+    echo $this->Form->control('notes', ['type' => 'textarea', 'escape' => false]);
 
 
 **Options**
@@ -952,7 +952,7 @@ Will output:
     <option value="F">Female</option>
     </select>
 
-The ``select`` input type allows for a special ``$option``
+The ``select`` control type allows for a special ``$option``
 attribute called ``'escape'`` which accepts a bool and determines
 whether to HTML entity encode the contents of the select options.
 Defaults to ``true``::
@@ -961,8 +961,8 @@ Defaults to ``true``::
     echo $this->Form->select('gender', $options, ['escape' => false]);
 
 * ``$attributes['options']`` This key allows you to manually specify options for
-  a select input, or for a radio group. Unless the 'type' is specified as
-  'radio', the FormHelper will assume that the target output is a select input::
+  a select control, or for a radio group. Unless the 'type' is specified as
+  'radio', the FormHelper will assume that the target output is a select control::
 
     echo $this->Form->select('field', [1,2,3,4,5]);
 
@@ -1045,7 +1045,7 @@ Output:
     </select>
 
 * ``$attributes['multiple']`` If 'multiple' has been set to ``true`` for an
-  input that outputs a select, the select will allow multiple selections::
+  control that outputs a select, the select will allow multiple selections::
 
     echo $this->Form->select('field', $options, ['multiple' => true]);
 
@@ -1124,7 +1124,7 @@ a create function such as the following::
 
 Next add either of the two lines to your form view file::
 
-    echo $this->Form->input('submittedfile', [
+    echo $this->Form->control('submittedfile', [
         'type' => 'file'
     ]);
 
@@ -1166,7 +1166,7 @@ Creating DateTime Inputs
 
 .. php:method:: dateTime($fieldName, $options = [])
 
-Creates a set of select inputs for date and time. This method accepts a number
+Creates a set of select controls for date and time. This method accepts a number
 of options:
 
 * ``monthNames`` If ``false``, 2 digit numbers will be used instead of text.
@@ -1178,19 +1178,19 @@ of options:
   that string is displayed as the empty element.
 * ``round`` - Set to ``up`` or ``down`` if you want to force rounding in either
   direction. Defaults to null.
-* ``default`` The default value to be used by the input. A value in
+* ``default`` The default value to be used by the control. A value in
   ``$this->request->getData()`` matching the field name will override this value. If
   no default is provided ``time()`` will be used.
 * ``timeFormat`` The time format to use, either 12 or 24.
 * ``second`` Set to ``true`` to enable seconds drop down.
 
-To control the order of inputs, and any elements/content between the inputs you
+To control the order of controls, and any elements/content between the controls you
 can override the ``dateWidget`` template. By default the ``dateWidget`` template
 is::
 
     {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
 
-To create a datetime inputs with custom classes/attributes on a specific select
+To create a datetime controls with custom classes/attributes on a specific select
 box, you can use the options in each component::
 
     echo $this->Form->datetime('released', [
@@ -1232,7 +1232,7 @@ empty option:
 
 * ``empty`` - If ``true``, the empty select option is shown. If a string,
   that string is displayed as the empty element.
-* ``default`` | ``value`` The default value to be used by the input. A value in
+* ``default`` | ``value`` The default value to be used by the control. A value in
   ``$this->request->getData()`` matching the field name will override this value.
   If no default is provided ``time()`` will be used.
 * ``timeFormat`` The time format to use, either 12 or 24. Defaults to 24.
@@ -1287,7 +1287,7 @@ empty option:
   that string is displayed as the empty element.
 * ``orderYear`` - Ordering of year values in select options.
   Possible values 'asc', 'desc'. Default 'desc'
-* ``value`` The selected value of the input.
+* ``value`` The selected value of the control.
 * ``maxYear`` The max year to appear in the select element.
 * ``minYear`` The min year to appear in the select element.
 
@@ -1474,7 +1474,7 @@ error. ::
 
 .. note::
 
-    When using :php:meth:`~Cake\\View\\Helper\\FormHelper::input()`, errors are
+    When using :php:meth:`~Cake\\View\\Helper\\FormHelper::control()`, errors are
     rendered by default.
 
 Creating Buttons and Submit Elements
@@ -1538,7 +1538,7 @@ Will output:
     <button type="reset">Reset the Form</button>
     <button type="submit">Submit Form</button>
 
-The ``button`` input type supports the ``escape`` option, which accepts
+The ``button`` control type supports the ``escape`` option, which accepts
 a boolean and defaults to ``false``. It determines whether to HTML encode the
 ``$title`` of the button::
 
@@ -1671,9 +1671,9 @@ The list of default templates, their default format and the variables they
 expect can be found at the
 `FormHelper API documentation <http://api.cakephp.org/3.2/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
 
-In addition to these templates, the ``input()`` method will attempt to use
-distinct templates for each input container. For example, when creating
-a datetime input the ``datetimeContainer`` will be used if it is present.
+In addition to these templates, the ``control()`` method will attempt to use
+distinct templates for each control container. For example, when creating
+a datetime control the ``datetimeContainer`` will be used if it is present.
 If that container is missing the ``inputContainer`` template will be used. For
 example::
 
@@ -1685,9 +1685,9 @@ example::
     // Create a radio set with our custom wrapping div.
     echo $this->Form->radio('User.email_notifications', ['y', 'n']);
 
-Similar to input containers, the ``input()`` method will also attempt to use
+Similar to inpcontrolut containers, the ``control()`` method will also attempt to use
 distinct templates for each form group. A form group is a combo of label and
-input. For example, when creating a radio input the ``radioFormGroup`` will be
+control. For example, when creating a radio input the ``radioFormGroup`` will be
 used if it is present. If that template is missing by default each set of label
 & input is rendered using the ``formGroup`` template. For example::
 
@@ -1700,7 +1700,7 @@ Adding Additional Template Variables to Templates
 -------------------------------------------------
 
 You can add additional template placeholders in custom templates, and populate
-those placeholders when generating inputs::
+those placeholders when generating controls::
 
     // Add a template with the help placeholder.
     $this->Form->setTemplates([
@@ -1709,7 +1709,7 @@ those placeholders when generating inputs::
     ]);
 
     // Generate an input and populate the help variable
-    echo $this->Form->input('password', [
+    echo $this->Form->control('password', [
         'templateVars' => ['help' => 'At least 8 characters long.']
     ]);
 
@@ -1734,24 +1734,24 @@ This will make radio buttons and checkboxes render outside of their labels.
 Generating Entire Forms
 =======================
 
-.. php:method:: inputs(array $fields = [], $options = [])
+.. php:method:: controls(array $fields = [], $options = [])
 
-Generates a set of inputs for the given context wrapped in a fieldset. You can
+Generates a set of controls for the given context wrapped in a fieldset. You can
 specify the generated fields by including them::
 
-    echo $this->Form->inputs([
+    echo $this->Form->controls([
         'name',
         'email'
     ]);
 
 You can customize the legend text using an option::
 
-    echo $this->Form->inputs($fields, ['legend' => 'Update news post']);
+    echo $this->Form->controls($fields, ['legend' => 'Update news post']);
 
-You can customize the generated inputs by defining additional options in the
+You can customize the generated controls by defining additional options in the
 ``$fields`` parameter::
 
-    echo $this->Form->inputs([
+    echo $this->Form->controls([
         'name' => ['label' => 'custom label']
     ]);
 
@@ -1761,7 +1761,7 @@ control the generated legend/fieldset.
 - ``fieldset`` Set to ``false`` to disable the fieldset. You can also pass an
   array of parameters to be applied as HTML attributes to the fieldset tag. If
   you pass an empty array, the fieldset will be displayed without attributes.
-- ``legend`` Set to ``false`` to disable the legend for the generated input set.
+- ``legend`` Set to ``false`` to disable the legend for the generated control set.
   Or supply a string to customize the legend text.
 
 For example::
@@ -1776,11 +1776,11 @@ For example::
 
 If you disable the fieldset, the legend will not print.
 
-.. php:method:: allInputs(array $fields, $options = [])
+.. php:method:: allControls(array $fields, $options = [])
 
-This method is closely related to ``inputs()``, however the ``$fields`` argument
+This method is closely related to ``controls()``, however the ``$fields`` argument
 is defaulted to *all* fields in the current top-level entity. To exclude
-specific fields from the generated inputs, set them to ``false`` in the fields
+specific fields from the generated controls, set them to ``false`` in the fields
 parameter::
 
     echo $this->Form->allInputs(['password' => false]);
@@ -1800,46 +1800,46 @@ the paths in your entity's data. Assuming the following table relations:
 * Articles BelongsToMany Tags
 
 If we were editing an article with its associations loaded we could
-create the following inputs::
+create the following controls::
 
     $this->Form->create($article);
 
-    // Article inputs.
-    echo $this->Form->input('title');
+    // Article controls.
+    echo $this->Form->control('title');
 
-    // Author inputs (belongsTo)
-    echo $this->Form->input('author.id');
-    echo $this->Form->input('author.first_name');
-    echo $this->Form->input('author.last_name');
+    // Author controls (belongsTo)
+    echo $this->Form->control('author.id');
+    echo $this->Form->control('author.first_name');
+    echo $this->Form->control('author.last_name');
 
     // Author profile (belongsTo + hasOne)
-    echo $this->Form->input('author.profile.id');
-    echo $this->Form->input('author.profile.username');
+    echo $this->Form->control('author.profile.id');
+    echo $this->Form->control('author.profile.username');
 
-    // Tags inputs (belongsToMany)
-    echo $this->Form->input('tags.0.id');
-    echo $this->Form->input('tags.0.name');
-    echo $this->Form->input('tags.1.id');
-    echo $this->Form->input('tags.1.name');
+    // Tags controls (belongsToMany)
+    echo $this->Form->control('tags.0.id');
+    echo $this->Form->control('tags.0.name');
+    echo $this->Form->control('tags.1.id');
+    echo $this->Form->control('tags.1.name');
 
     // Multiple select element for belongsToMany
-    echo $this->Form->input('tags._ids', [
+    echo $this->Form->control('tags._ids', [
         'type' => 'select',
         'multiple' => true,
         'options' => $tagList,
     ]);
 
     // Inputs for the joint table (articles_tags)
-    echo $this->Form->input('tags.0._joinData.starred');
-    echo $this->Form->input('tags.1._joinData.starred');
+    echo $this->Form->control('tags.0._joinData.starred');
+    echo $this->Form->control('tags.1._joinData.starred');
 
-    // Comments inputs (hasMany)
-    echo $this->Form->input('comments.0.id');
-    echo $this->Form->input('comments.0.comment');
-    echo $this->Form->input('comments.1.id');
-    echo $this->Form->input('comments.1.comment');
+    // Comments controls (hasMany)
+    echo $this->Form->control('comments.0.id');
+    echo $this->Form->control('comments.0.comment');
+    echo $this->Form->control('comments.1.id');
+    echo $this->Form->control('comments.1.comment');
 
-The above inputs could then be marshalled into a completed entity graph using
+The above controls could then be marshalled into a completed entity graph using
 the following code in your controller::
 
     $article = $this->Articles->patchEntity($article, $this->request->getData(), [
@@ -1854,8 +1854,8 @@ the following code in your controller::
 Adding Custom Widgets
 =====================
 
-CakePHP makes it easy to add custom input widgets in your application, and use
-them like any other input type. All of the core input types are implemented as
+CakePHP makes it easy to add custom control widgets in your application, and use
+them like any other control type. All of the core control types are implemented as
 widgets, which means you can override any core widget with your own
 implemenation as well.
 
@@ -1956,12 +1956,12 @@ widgets using the ``addWidget()`` method would look like::
     );
     $this->Form->addWidget('autocomplete', $autocomplete);
 
-Once added/replaced, widgets can be used as the input 'type'::
+Once added/replaced, widgets can be used as the control 'type'::
 
-    echo $this->Form->input('search', ['type' => 'autocomplete']);
+    echo $this->Form->control('search', ['type' => 'autocomplete']);
 
 This will create the custom widget with a label and wrapping div just like
-``input()`` always does. Alternatively, you can create just the input widget
+``control()`` always does. Alternatively, you can create just the control widget
 using the magic method::
 
     echo $this->Form->autocomplete('search', $options);
