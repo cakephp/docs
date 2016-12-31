@@ -270,7 +270,7 @@ return an object. If there is no match return null.
 .. _automagic-form-elements:
 
 Creating Form Controls
-====================
+======================
 
 .. php:method:: control(string $fieldName, array $options = [])
 
