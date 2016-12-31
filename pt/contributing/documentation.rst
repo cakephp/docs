@@ -32,7 +32,7 @@ Algumas dicas:
 - Não envie traduções parciais.
 - Não edite um seção com alterações pendentes.
 - Não utilize
-  `html entities <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
+  `html entities <https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
   para caracteres acentuados, o livro usa UTF-8.
 - Não faça alterações significativas em marcações HTML e não adicione novos
   conteúdos.

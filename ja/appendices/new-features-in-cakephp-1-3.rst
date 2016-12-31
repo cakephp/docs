@@ -99,14 +99,14 @@ highlight() はハイライトするための単語の配列を受け入れる�
 **FormHelper**
 
 フォームヘルパーは数多くの改良と、APIの更新があります。更なる情報は
-`Form ヘルパーの改良点 <http://book.cakephp.org/1.3/en/The-Manual/Core-Helpers/Form.html#improvements>`_
+`Form ヘルパーの改良点 <https://book.cakephp.org/1.3/en/The-Manual/Core-Helpers/Form.html#improvements>`_
 を見てください。
 
 ログ
 ~~~~
 
 ログとCakeLogは機能と柔軟性において共にかなりの進歩を見せました。
-更なる情報は `新しいログの機能 <http://book.cakephp.org/1.3/en/The-Manual/Common-Tasks-With-CakePHP/Logging.html>`_ を見てください。
+更なる情報は `新しいログの機能 <https://book.cakephp.org/1.3/en/The-Manual/Common-Tasks-With-CakePHP/Logging.html>`_ を見てください。
 
 キャッシュ
 ~~~~~~~~~~
@@ -250,7 +250,7 @@ Console
 **Bake**
 
 Bake は数多くの重大な変更があります。これらの変更は
-`Bake の変更点セクション <http://book.cakephp.org/1.3/en/The-Manual/Core-Console-Applications/Code-Generation-with-Bake.html#bake-improvements-in-1-3>`_
+`Bake の変更点セクション <https://book.cakephp.org/1.3/en/The-Manual/Core-Console-Applications/Code-Generation-with-Bake.html#bake-improvements-in-1-3>`_
 を見てください。
 
 **サブクラス化**

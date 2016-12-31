@@ -19,20 +19,20 @@ to implement your own caching systems. The built-in caching engines are:
   atomic operations. However, since disk storage is often quite cheap,
   storing large objects, or elements that are infrequently written
   work well in files. This is the default Cache engine for 2.3+
-* ``ApcCache`` APC cache uses the `APC <http://php.net/apc>`_ or `APCu
-  <http://php.net/apcu>`_ extension. These extensions use shared memory on the
+* ``ApcCache`` APC cache uses the `APC <https://secure.php.net/apc>`_ or `APCu
+  <https://secure.php.net/apcu>`_ extension. These extensions use shared memory on the
   webserver to store objects. This makes it very fast, and able to provide
   atomic read/write features. By default CakePHP in 2.0-2.2 will use this cache
   engine, if it's available.
-* ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
+* ``Wincache`` Wincache uses the `Wincache <https://secure.php.net/wincache>`_
   extension. Wincache is similar to APC in features and performance, but
   optimized for Windows and Microsoft IIS.
 * ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_
   is a PHP extension that provides similar features to APC.
-* ``MemcacheEngine`` Uses the `Memcache <http://php.net/memcache>`_
+* ``MemcacheEngine`` Uses the `Memcache <https://secure.php.net/memcache>`_
   extension. Memcache provides a very fast cache system that can be
   distributed across many servers, and provides atomic operations.
-* ``MemcachedEngine`` Uses the `Memcached <http://php.net/memcached>`_
+* ``MemcachedEngine`` Uses the `Memcached <https://secure.php.net/memcached>`_
   extension. It also interfaces with memcache but provides better performance.
 * ``RedisEngine`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
   extension (2.2.3 minimum). Redis provides a fast and persistent cache system

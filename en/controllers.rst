@@ -197,7 +197,7 @@ Controller Methods
 ==================
 
 For a complete list of controller methods and their descriptions
-visit the `CakePHP API <http://api.cakephp.org/2.8/class-Controller.html>`_.
+visit the `CakePHP API <https://api.cakephp.org/2.8/class-Controller.html>`_.
 
 Interacting with Views
 ----------------------
@@ -678,7 +678,7 @@ Controller Attributes
 =====================
 
 For a complete list of controller attributes and their descriptions
-visit the `CakePHP API <http://api.cakephp.org/2.8/class-Controller.html>`_.
+visit the `CakePHP API <https://api.cakephp.org/2.8/class-Controller.html>`_.
 
 .. php:attr:: name
 
@@ -765,7 +765,7 @@ Other Attributes
 ----------------
 
 While you can check out the details for all controller attributes
-in the `API <http://api.cakephp.org>`_, there are other controller attributes that merit their
+in the `API <https://api.cakephp.org>`_, there are other controller attributes that merit their
 own sections in the manual.
 
 .. php:attr:: cacheAction

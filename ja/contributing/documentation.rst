@@ -8,8 +8,8 @@
 オンラインエディタを使って直接ドキュメントを編集することもできます。
 
 CakePHP のドキュメントは、
-`継続的に統合 <http://en.wikipedia.org/wiki/Continuous_integration>`_
-されます。また、 Jenkins サーバ上で、いつでも `様々なビルド  <http://ci.cakephp.org>`_ の
+`継続的に統合 <https://en.wikipedia.org/wiki/Continuous_integration>`_
+されます。また、 Jenkins サーバ上で、いつでも `様々なビルド  <https://ci.cakephp.org>`_ の
 ステータスを確認できます。
 
 翻訳
@@ -80,7 +80,7 @@ CakePHP のドキュメントは、
 - 翻訳する言語のページで閲覧・編集してください。
   そうしないと、どこが既に翻訳されているかわからないでしょう。
 - この本の中に読みたい言語を見つけたら、どうぞ遠慮なくご覧ください。
-- `フレンドリーな文体 <http://en.wikipedia.org/wiki/Register_(linguistics)>`_ を使ってください。
+- `フレンドリーな文体 <https://en.wikipedia.org/wiki/Register_(linguistics)>`_ を使ってください。
 - タイトルと内容を同時に翻訳してください。
 - 修正を投稿する前に、英語版との比較を行うようにしてください。
   どこかを修正しても、以前の変更が統合されていなかったら、投稿したものが受け付けられないことがあります。
@@ -89,7 +89,7 @@ CakePHP のドキュメントは、
 - 一部だけ翻訳して投稿しないでください。
 - 保留されている項目があるセクションは編集しないでください。
 - アクセント文字のために
-  `HTML エンティティ <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
+  `HTML エンティティ <https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
   を使用しないでください。
   この本は UTF-8 を使っています。
 - 記述 (HTML) の変更や新しいコンテンツを、一度にたくさん加えないでください。
@@ -99,7 +99,7 @@ CakePHP のドキュメントは、
 ================================
 
 新しい CakePHP のドキュメントは
-`ReST フォーマットテキスト <http://en.wikipedia.org/wiki/ReStructuredText>`_
+`ReST フォーマットテキスト <https://en.wikipedia.org/wiki/ReStructuredText>`_
 で書かれています。
 ReST (Re Structured Text) は markdown や textile と同様のプレーンテキストの
 マークアップ記法です。一貫性を保持するために、CakePHP ドキュメントに追加をする場合、

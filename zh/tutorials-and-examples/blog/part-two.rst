@@ -287,7 +287,7 @@ ErrorHandler 来处理。我们也作了同样的检查来确保用户访问的�
 :php:func:`FlashHelper::render()` 方法来显示这条信息并清空相应的会话变量。控制器的
 :php:meth:`Controller::redirect` 方法重定向页面到另一个网址。参数
 ``array('action' => 'index')`` 就是网址 /posts (即 posts 控制器的 index 动作)。你
-可以参阅在 `API <http://api.cakephp.org>`_ 中的 :php:func:`Router::url()` 方法，
+可以参阅在 `API <https://api.cakephp.org>`_ 中的 :php:func:`Router::url()` 方法，
 来了解可用来为 CakePHP 函数指定网址的各种格式。
 
 调用 ``save()`` 方法将会检查错误验证，如果有任何错误即中断保存。我们将会在接下来
@@ -616,7 +616,7 @@ CakePHP 的路由设置在 ``/app/Config/routes.php`` 文件中。你应当注�
 
 既然你已经创建了一个基本的 CakePHP 应用程序，那么你已经可以开始真的做点儿东西了。
 启动你自己的项目吧，别忘记阅读 :doc:`Cookbook </index>` 的其余部分，以及
-`API <http://api.cakephp.org>`_ 。
+`API <https://api.cakephp.org>`_ 。
 
 如果需要，有很多方法可以获得你需要的帮助——请查看
 :doc:`/cakephp-overview/where-to-get-help` 页面。欢迎加入 CakePHP！

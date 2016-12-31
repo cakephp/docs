@@ -15,7 +15,7 @@ classe Sanitize, vous devriez plutôt le faire avec
 application accepte. En rejetant les entrées invalides, vous pouvez souvent
 retirer le besoin de modifier destructivement les données utilisateur. Vous
 pouvez aussi avoir envie de regarder à l'
-`extension de filtre PHP <http://php.net/filter>`_ dans les situations où vous
+`extension de filtre PHP <https://secure.php.net/filter>`_ dans les situations où vous
 aurez besoin de modifier les entrées utilisateur.
 
 Accepter le HTML soumis par l'utilisateur

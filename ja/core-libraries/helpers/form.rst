@@ -180,7 +180,7 @@ create() には多くのオプションがあります:
   もしくは、外部ドメインも指定可能です::
 
     echo $this->Form->create(false, array(
-        'url' => 'http://www.google.com/search',
+        'url' => 'https://www.google.com/search',
         'type' => 'get'
     ));
 
@@ -188,7 +188,7 @@ create() には多くのオプションがあります:
 
   .. code-block:: html
 
-    <form method="get" action="http://www.google.com/search">
+    <form method="get" action="https://www.google.com/search">
 
   さらにいろいろなタイプの URL を指定する例は、:php:meth:`HtmlHelper::url()`
   メソッドを参照してみてください。
@@ -277,7 +277,7 @@ create() には多くのオプションがあります:
         </div>
 
     詳細は
-    `Form Helper API <http://api.cakephp.org/2.8/class-FormHelper.html>`_
+    `Form Helper API <https://api.cakephp.org/2.8/class-FormHelper.html>`_
     を参照してください。
 
     .. note::
@@ -1496,7 +1496,7 @@ select, checkbox, radio に関するオプション
     この配列は PHP 自体によって生成されます。PHP が file フィールドを
     通してデータをどう処理しているのかについては、PHP マニュアルの
     ファイルアップロードのセクション
-    `<http://php.net/features.file-upload>`_ を読んでみてください。
+    `<https://secure.php.net/features.file-upload>`_ を読んでみてください。
 
 アップロードの検証
 ------------------

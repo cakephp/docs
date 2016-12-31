@@ -29,11 +29,11 @@
 これ以上何もしなければ、上記の２つのコードの例は、機能的に同じです。それらは、
 両方ともブラウザに同じ内容を送信します。 :php:func:`__()` 関数は、
 与えられた文字列を翻訳がある場合は翻訳し、そうでなければ何も変更せずに返します。
-これは、他の `Gettext <http://en.wikipedia.org/wiki/Gettext>`_ 実装と同様に動作します。
+これは、他の `Gettext <https://en.wikipedia.org/wiki/Gettext>`_ 実装と同様に動作します。
 (他の翻訳用の関数 :php:func:`__d()` や :php:func:`__n()` とその他も同様です。)
 
 あなたのコードの複数言語の用意ができたら、次のステップは、
-`pot ファイル <http://en.wikipedia.org/wiki/Gettext>`_ の作成です。
+`pot ファイル <https://en.wikipedia.org/wiki/Gettext>`_ の作成です。
 これは、あなたのアプリケーション内の全ての翻訳可能文字列のテンプレートです。
 pot ファイルを生成するためにしなければならないことは、
 :doc:`i18n コンソールタスク </console-and-shells/i18n-shell>` の実行です。
@@ -41,7 +41,7 @@ pot ファイルを生成するためにしなければならないことは、
 あなたのコードの翻訳が変更があった時にこのコンソールタスクを再実行してください。
 
 pot ファイル自身は、 CakePHP では使用しません。それらのファイルは、翻訳を含む
-`po ファイル <http://en.wikipedia.org/wiki/Gettext>`_ を作成したり更新するための
+`po ファイル <https://en.wikipedia.org/wiki/Gettext>`_ を作成したり更新するための
 テンプレートです。CakePHP は、以下の場所にある po ファイルを参照します。 ::
 
     /app/Locale/<locale>/LC_MESSAGES/<domain>.po
@@ -188,10 +188,10 @@ CakePHP は、自動的に ``$validate`` 配列中のすべてのモデルのバ
 
 翻訳関数を使用することでカバーできないアプリケーションの地域化の側面があります。
 それは、日付やお金のフォーマットです。CakePHP は PHP であることを忘れないでください。
-これらのためのフォーマットを設定するには、 `setlocale <http://www.php.net/setlocale>`_
+これらのためのフォーマットを設定するには、 `setlocale <https://secure.php.net/setlocale>`_
 を使用する必要があります。
 
-もし、コンピュータに存在しないロケールを `setlocale <http://www.php.net/setlocale>`_
+もし、コンピュータに存在しないロケールを `setlocale <https://secure.php.net/setlocale>`_
 に指定した場合、何も影響しません。ターミナル上で、 ``locale -a`` コマンドを実行することで、
 利用可能な一覧を取得できます。
 

@@ -9,7 +9,7 @@ en Camel et est normalement accessible statiquement. Exemple:
 ``Inflector::pluralize('example')`` retourne "examples".
 
 Vous pouvez essayer les inflections enligne sur
-`inflector.cakephp.org <http://inflector.cakephp.org/>`_.
+`inflector.cakephp.org <https://inflector.cakephp.org/>`_.
 
 .. php:staticmethod:: pluralize($singular)
 

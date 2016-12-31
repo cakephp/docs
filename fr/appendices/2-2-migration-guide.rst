@@ -146,7 +146,7 @@ CookieComponent
 
 - Vous pouvez maintenant crypter les valeurs de cookie avec le rijndael
   cipher. Ceci nécessite l'installation de l'extension
-  `mcrypt <http://php.net/mcrypt>`_. Utiliser rijndael donne aux valeurs
+  `mcrypt <https://secure.php.net/mcrypt>`_. Utiliser rijndael donne aux valeurs
   du cookie le cryptage réel, et est recommandé à la place de XOR cipher
   disponible dans les versions précédentes. Le XOR cipher est toujours le
   schéma par défaut de cipher pour maintenir la compatibilité avec les

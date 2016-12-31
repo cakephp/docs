@@ -442,7 +442,7 @@ PaginatorHelper を設定して JavaScript ヘルパーを使う
 機能を制限されているわけではありません。
 
 詳細は API の中の
-`PaginatorHelper <http://api.cakephp.org/2.8/class-PaginatorHelper.html>`_
+`PaginatorHelper <https://api.cakephp.org/2.8/class-PaginatorHelper.html>`_
 を参照してください。なお前述のように PaginatorHelper ではソート機能を提供
 してますので、これをテーブルの見出しの中に簡単に組み込めるようになっています。
 

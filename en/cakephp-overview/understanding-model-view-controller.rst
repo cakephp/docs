@@ -2,7 +2,7 @@ Understanding Model-View-Controller
 ###################################
 
 CakePHP follows the
-`MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_
+`MVC <https://en.wikipedia.org/wiki/Model-view-controller>`_
 software design pattern. Programming using MVC separates your
 application into three main parts:
 
@@ -88,7 +88,7 @@ feet. New features are easily added, and new faces on old features
 are a snap. The modular and separate design also allows developers
 and designers to work simultaneously, including the ability to
 rapidly
-`prototype <http://en.wikipedia.org/wiki/Software_prototyping>`_.
+`prototype <https://en.wikipedia.org/wiki/Software_prototyping>`_.
 Separation also allows developers to make changes in one part of
 the application without affecting the others.
 

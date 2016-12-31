@@ -141,19 +141,19 @@ Comentando o Código
 Todos os comentários devem ser escritos em Inglês 
 e deve haver uma clara maneira de identificar o bloco de código comentado.
 
-Comentários podem conter as seguintes tags do `phpDocumentor <http://phpdoc.org>`:
+Comentários podem conter as seguintes tags do `phpDocumentor <https://phpdoc.org>`:
 
-*  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
-*  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
-*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+*  `@author <https://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
+*  `@copyright <https://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
+*  `@deprecated <https://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
-*  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
-*  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
-*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
-*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
-*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
+*  `@example <https://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
+*  `@ignore <https://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
+*  `@internal <https://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@see <https://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@version <https://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
 
 As tags PhpDoc são bem parecidas com as tags JavaDoc em Java. As tags 
 só são processadas se elas forem a primeira coisa a aparecer numa linha 
@@ -189,7 +189,7 @@ Includindo Arquivos
 ===================
 
 Se for precisar incluir arquivos com classes ou bibliotecas, 
-utilize sempre a função `require\_once <http://php.net/require_once>`_.
+utilize sempre a função `require\_once <https://secure.php.net/require_once>`_.
 
 Tags PHP
 ========

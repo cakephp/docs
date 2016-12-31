@@ -12,16 +12,16 @@ CakePHP 中的缓存主要是由 :php:class:`Cache` 类来帮助（处理）的�
 * ``FileCache`` 文件缓存是使用本地文件的简单缓存。这是最慢的缓存引擎，且没有为
   原子化操作提供那么多功能。不过，既然硬盘存储通常都相当便宜，使用文件存储大的
   对象、或者不经常写的元素，很管用。这是2.3+版本的默认缓存引擎。
-* ``ApcCache`` APC 缓存使用 PHP 的 `APC <http://php.net/apc>`_ 扩展。这个扩展用
+* ``ApcCache`` APC 缓存使用 PHP 的 `APC <https://secure.php.net/apc>`_ 扩展。这个扩展用
   网站服务器上的共享内存来保存对象。这使它非常快，而且能够提供原子化的读/写功能。
   默认情况下 CakePHP 2.0-2.2 会使用该缓存引擎，如果可用的话。
-* ``Wincache`` Wincache 使用 `Wincache <http://php.net/wincache>`_ 扩展。
+* ``Wincache`` Wincache 使用 `Wincache <https://secure.php.net/wincache>`_ 扩展。
   Wincache 在功能和性能上类似于 APC，但针对 Windows 和 微软的IIS 做了优化。
 * ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_ 是一个 PHP 扩展，提供
   类似 APC 的功能。
-* ``MemcacheEngine`` 使用 `Memcache <http://php.net/memcache>`_ 扩展。Memcache
+* ``MemcacheEngine`` 使用 `Memcache <https://secure.php.net/memcache>`_ 扩展。Memcache
   提供了非常快速的缓存系统，可以分布于很多台服务器，而且提供原子化操作。
-* ``MemcachedEngine`` 使用 `Memcached <http://php.net/memcached>`_ 扩展。它也与
+* ``MemcachedEngine`` 使用 `Memcached <https://secure.php.net/memcached>`_ 扩展。它也与
   memcache 接口，但提供更好的性能。
 * ``RedisEngine`` 使用 `phpredis <https://github.com/nicolasff/phpredis>`_ 扩展。
   Redis 类似于 memcached，提供了快速和可持久化的缓存系统，也提供原子化操作。

@@ -4,14 +4,14 @@
 CakePHP 官方网站
 ================
 
-`http://www.cakephp.org <http://www.cakephp.org>`_
+`https://cakephp.org <https://cakephp.org>`_
 
 CakePHP 官方网站总是个值得访问的好地方。它设有常用的开发工具、截屏、捐赠以及下载。
 
 Cookbook
 ========
 
-`http://book.cakephp.org <http://book.cakephp.org>`_
+`https://book.cakephp.org <https://book.cakephp.org>`_
 
 本手册应该是你寻找答案的第一个地方。像其他许多其他开源项目一样，我们总会有新的使
 用者。先尽力自己去回答你的问题。得到答案可能慢一些，但会记忆更加深刻——这样你也
@@ -20,7 +20,7 @@ Cookbook
 Bakery
 ======
 
-`http://bakery.cakephp.org <http://bakery.cakephp.org>`_
+`https://bakery.cakephp.org <https://bakery.cakephp.org>`_
 
 CakePHP Bakery 是一个信息交换中心，可以了解有关 CakePHP 的一切，从这里可以获取教
 程，案例分析和代码示例。一旦你熟悉了 CakePHP，登录并分享你的知识到社区中来，从而
@@ -29,7 +29,7 @@ CakePHP Bakery 是一个信息交换中心，可以了解有关 CakePHP 的一�
 应用程序编程接口 (*API*)
 ========================
 
-`http://api.cakephp.org/ <http://api.cakephp.org/>`_
+`https://api.cakephp.org/ <https://api.cakephp.org/>`_
 
 开门见山，并且直接来自核心开发人员，CakePHP 的 API(应用程序编程接口)是最全面的文
 档，囊括框架内部运作的所有细节。参考代码直截了当，所以你一定要努力跟上才行。
@@ -70,7 +70,7 @@ CakePHP 的官方论坛
 Stackoverflow
 =============
 
-`http://stackoverflow.com/ <http://stackoverflow.com/questions/tagged/cakephp/>`_
+`https://stackoverflow.com/ <https://stackoverflow.com/questions/tagged/cakephp/>`_
 
 用 ``cakephp`` 和你使用的版本来标记你的问题，让其他的 stackoverflow 用户能够看到
 你的问题。

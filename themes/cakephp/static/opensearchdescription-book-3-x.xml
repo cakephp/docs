@@ -2,7 +2,7 @@
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
   <ShortName>CakePHP Book 3.x</ShortName>
   <Description>The CakePHP cookbook, is an openly developed community editable documentation project.</Description>
-	<Image height="16" width="16" type="image/x-icon">http://book.cakephp.org/favicon.ico</Image>  
+    <Image height="16" width="16" type="image/x-icon">https://book.cakephp.org/favicon.ico</Image>  
   
   <Url type="text/html"
        method="get"

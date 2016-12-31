@@ -3,7 +3,7 @@ Security
 
 .. php:class:: Security
 
-The `security library <http://api.cakephp.org/2.8/class-Security.html>`_
+The `security library <https://api.cakephp.org/2.8/class-Security.html>`_
 handles basic security measures such as providing methods for
 hashing and encrypting data.
 
@@ -40,7 +40,7 @@ Security API
     :param string $mode: The mode to use, either 'encrypt' or 'decrypt'
 
     Encrypts/Decrypts text using the rijndael-256 cipher. This requires the
-    `mcrypt extension <http://php.net/mcrypt>`_ to be installed::
+    `mcrypt extension <https://secure.php.net/mcrypt>`_ to be installed::
 
         // Encrypt some data.
         $encrypted = Security::rijndael('a secret', Configure::read('Security.key'), 'encrypt');

@@ -14,7 +14,7 @@ y precisión de la documentación.
 
     - `formato PDF <../_downloads/es/CakePHPCookbook.pdf>`_
     - `formato ePub <../_downloads/es/CakePHPCookbook.epub>`_
-    - `fuente original (archivos de texto) <http://github.com/cakephp/docs>`_
+    - `fuente original (archivos de texto) <https://github.com/cakephp/docs>`_
 
 
 Iniciando con CakePHP

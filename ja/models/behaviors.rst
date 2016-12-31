@@ -19,7 +19,7 @@
 
 CakePHP には既に、ツリー構造、コンテンツ翻訳、アクセス制御リスト用のビヘイビアが付属しています。
 言うまでもありませんが、コミュニティの貢献によるビヘイビアが最早 CakePHP Bakery
-(`http://bakery.cakephp.org <http://bakery.cakephp.org>`_) で入手できます。
+(`https://bakery.cakephp.org <https://bakery.cakephp.org>`_) で入手できます。
 このセクションでは、モデルへのビヘイビア、CakePHP の組み込みのビヘイビアの使い方、独自のビヘイビアの
 作成方法といった基本的な使用方法のパターンを紹介します。
 

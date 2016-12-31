@@ -27,8 +27,8 @@ Set up your user information with your name/handle and working email address::
 
 Get a clone of the CakePHP source code from GitHub:
 
-* If you don't have a `GitHub <http://github.com>`_ account, create one.
-* Fork the `CakePHP repository <http://github.com/cakephp/cakephp>`_ by clicking
+* If you don't have a `GitHub <https://github.com>`_ account, create one.
+* Fork the `CakePHP repository <https://github.com/cakephp/cakephp>`_ by clicking
   the **Fork** button.
 
 After your fork is made, clone your fork to your local machine::

@@ -133,7 +133,7 @@ CookieComponent
 ---------------
 
 - You can now encrypt cookie values with the rijndael cipher. This requires
-  the `mcrypt <http://php.net/mcrypt>`_ extension to be installed. Using
+  the `mcrypt <https://secure.php.net/mcrypt>`_ extension to be installed. Using
   rijndael gives cookie values actual encryption, and is recommended in place of
   the XOR cipher available in previous releases. The XOR cipher is still the
   default cipher scheme to maintain compatibility with previous releases. You

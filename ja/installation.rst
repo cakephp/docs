@@ -39,10 +39,10 @@ CakePHPのダウンロード
 CakePHP の最新版を手に入れるには、主に二つの方法があります。
 ウェブサイトからアーカイブ(zip/tar.gz/tar.bz2)としてダウンロードする、あるいは git リポジトリからコードをチェックアウトする方法のいずれかにより取得できます。
 
-最新のアーカイブをダウンロードするには、 `http://cakephp.org <http://cakephp.org>`_ のウェブサイトに行き、
+最新のアーカイブをダウンロードするには、 `https://cakephp.org <https://cakephp.org>`_ のウェブサイトに行き、
 "Download" というリンクに従って進みます。
 
-CakePHP の最新のリリースは `GitHub <http://github.com/cakephp/cakephp>`_ でホスティングされています。
+CakePHP の最新のリリースは `GitHub <https://github.com/cakephp/cakephp>`_ でホスティングされています。
 GitHubにはCakePHP自身、また多くのCakePHPプラグインが含まれています。
 CakePHPのリリースは `GitHub tags <https://github.com/cakephp/cakephp/tags>`_ で入手できます。
 

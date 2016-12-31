@@ -59,7 +59,7 @@ CakePHP にはデフォルトで２つのフィルタークラスが備わって
         )
     ));
 
-これに示されるように、PHP で有効な `callback <http://php.net/callback>`_
+これに示されるように、PHP で有効な `callback <https://secure.php.net/callback>`_
 であれば、何でも渡すことができます。覚えていると思いますが、 `callback`
 は PHP が ``call_user_func`` で実行することのできるものすべでです。
 ただ小さな例外があります。もし文字列が渡されると、それは関数名としては

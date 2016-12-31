@@ -523,7 +523,7 @@ CakePHP には２つのビルトインの設定ファイル用リーダーが備
 Configure も歴史的にこれと同じフォーマットのファイルを読めるように
 なっています。 :php:class:`IniReader` は ini 形式の設定ファイルを
 読むことができます。ini ファイルの仕様については
-`PHP documentation <http://php.net/parse_ini_file>`_ を参照してください。
+`PHP documentation <https://secure.php.net/parse_ini_file>`_ を参照してください。
 コアの設定ファイルリーダーを使うには、そのファイルを
 :php:meth:`Configure::config()` で Configure に接続してください。::
 

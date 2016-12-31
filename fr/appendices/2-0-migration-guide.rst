@@ -141,7 +141,7 @@ Cela remplace toutes les méthodes de traduction raccourcies::
     __c()
 
 A côté de cela, si vous passez des paramètres supplémentaires, la traduction
-appelera `sprintf <http://php.net/manual/en/function.sprintf.php>`_  avec
+appelera `sprintf <https://secure.php.net/manual/en/function.sprintf.php>`_  avec
 ces paramètres retournés précédemment avant de retourner. Par exemple::
 
     // Retournera quelque chose comme "Appelé: MaClasse:maMethode"
@@ -150,7 +150,7 @@ ces paramètres retournés précédemment avant de retourner. Par exemple::
 Elle est valide pour toutes les méthodes raccourcies de traduction.
 
 Plus d'informations sur les spécificités de la fonction:
-`sprintf <http://php.net/manual/en/function.sprintf.php>`_.
+`sprintf <https://secure.php.net/manual/en/function.sprintf.php>`_.
 
 
 Emplacement de la Classe et constantes changées

@@ -36,8 +36,8 @@ Baixando o Cake
 Primeiro, vamos baixar uma cópia recente do CakePHP.
 
 Para fazer o download de uma cópia recente, visite o projeto do CakePHP no
-github: `http://github.com/cakephp/cakephp/downloads
-<http://github.com/cakephp/cakephp/downloads>`_
+github: `https://github.com/cakephp/cakephp/downloads
+<https://github.com/cakephp/cakephp/downloads>`_
 e faça o download da última versão 2.0.
 
 Você também pode clonar o repositório usando o `git <http://git-scm.com/>`_.

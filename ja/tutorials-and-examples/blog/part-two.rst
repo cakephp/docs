@@ -315,7 +315,7 @@ FlashComponent の :php:meth:`FlashComponent::success()` メソッドを使っ�
 関数は別の URL にリダイレクトを行います。 ``array('action' => 'index')`` パラメータは
 /posts、つまり posts コントローラの index アクションを表す URL に解釈されます。
 多くの CakePHP の関数で指定できるURLのフォーマットについては、
-`API <http://api.cakephp.org>`_ の :php:func:`Router::url()`
+`API <https://api.cakephp.org>`_ の :php:func:`Router::url()`
 関数を参考にすることができます。
 
 ``save()`` メソッドを呼ぶと、バリデーションエラーがチェックされ、もしエラーがある場合には
@@ -664,7 +664,7 @@ CakePHP には、もっともっと *多くの* 機能があります。シン�
 
 基本的なアプリケーションの作成が終わったので、現実世界のアプリを作る準備が整いました。
 自分のプロジェクトを始めて、 :doc:`Cookbook </index>` の残りと
-`API <http://api.cakephp.org>`_ を使いましょう。
+`API <https://api.cakephp.org>`_ を使いましょう。
 
 もし困ったときは、いろんな方法で助けを得ることができます。
 :doc:`/cakephp-overview/where-to-get-help` を見てみてください。

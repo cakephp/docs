@@ -9,7 +9,7 @@ normally accessed statically. Example:
 ``Inflector::pluralize('example')`` returns "examples".
 
 You can try out the inflections online at
-`inflector.cakephp.org <http://inflector.cakephp.org/>`_.
+`inflector.cakephp.org <https://inflector.cakephp.org/>`_.
 
 .. php:staticmethod:: pluralize($singular)
 

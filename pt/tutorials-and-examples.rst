@@ -5,8 +5,8 @@ Nesta seção, você poderá caminhar ao longo de típicas aplicações CakePHP 
 ver como todas as peças se encaixam.
 
 Como alternativa, você pode preferir visitar o repositório não oficial de
-plugins para o CakePHP `CakePackages <http://plugins.cakephp.org/>`_ ou a
-`Padaria <http://bakery.cakephp.org/>`_ para conhecer aplicações e componentes
+plugins para o CakePHP `CakePackages <https://plugins.cakephp.org/>`_ ou a
+`Padaria <https://bakery.cakephp.org/>`_ para conhecer aplicações e componentes
 existentes.
 
 .. toctree::

@@ -2,7 +2,7 @@ Comprendre le système M-V-C (Model-View-Controller)
 ###################################################
 
 CakePHP suit le motif de conception logicielle
-`MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_.
+`MVC <https://en.wikipedia.org/wiki/Model-view-controller>`_.
 Programmer en utilisant MVC sépare votre application en 3 couches principales :
 
 La couche Model
@@ -94,7 +94,7 @@ fonctionnalités sont ajoutées facilement, et les améliorations sur les vieill
 fonctionnalités se font en un clin d'œil. La conception modulable et séparée
 permet aussi aux développeurs et designeurs de travailler simultanément, avec
 la possibilité de
-`prototyper <http://en.wikipedia.org/wiki/Software_prototyping>`_ rapidement :
+`prototyper <https://en.wikipedia.org/wiki/Software_prototyping>`_ rapidement :
 La séparation permet aussi aux développeurs de faire des changements dans une
 seule partie de l'application sans affecter les autres.
 

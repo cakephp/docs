@@ -16,7 +16,7 @@ envoyer des newsletters::
     # │    \──────────────────── hour (0 - 23)
     # \───────────────────────── min (0 - 59)
 
-Vous pouvez avoir plus d'infos ici: http://en.wikipedia.org/wiki/Cron
+Vous pouvez avoir plus d'infos ici: https://en.wikipedia.org/wiki/Cron
 
 .. meta::
     :title lang=fr: Lancer des Shells en tant que cronjobs

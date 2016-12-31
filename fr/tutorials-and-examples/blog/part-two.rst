@@ -345,7 +345,7 @@ d'afficher et de nettoyer la variable correspondante. La méthode
 autre URL. Le paramètre ``array('action' => 'index')`` sera traduit vers l'URL
 /posts (dans notre cas l'action "index" du controller "Posts").
 Vous pouvez vous référer à la fonction :php:func:`Router::url()` dans
-`l'API <http://api.cakephp.org>`_ pour voir les différents formats d'URL
+`l'API <https://api.cakephp.org>`_ pour voir les différents formats d'URL
 acceptés dans les différentes fonctions de CakePHP.
 
 L'appel de la méthode ``save()`` vérifiera les erreurs de validation et
@@ -718,7 +718,7 @@ riches en fonctionnalités.
 
 Maintenant que vous avez créé une application CakePHP basique, vous êtes prêt
 pour les choses sérieuses. Commencez votre propre projet et lisez le reste du
-:doc:`Cookbook </index>` et l'`API <http://api.cakephp.org>`_.
+:doc:`Cookbook </index>` et l'`API <https://api.cakephp.org>`_.
 
 Si vous avez besoin d'aide, il y a plusieurs façons d'obtenir de l'aide -
 merci de regarder la page :doc:`/cakephp-overview/where-to-get-help`

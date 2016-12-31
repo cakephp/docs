@@ -705,7 +705,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     Le paramètre 'deep' devrait être défini comme une valeur booléenne. S'il
     est défini à true, la validation vérifiera l'algorithme Luhn de la carte
     de crédit
-    (`http://en.wikipedia.org/wiki/Luhn\_algorithm <http://en.wikipedia.org/wiki/Luhn_algorithm>`_).
+    (`https://en.wikipedia.org/wiki/Luhn\_algorithm <https://en.wikipedia.org/wiki/Luhn_algorithm>`_).
     Par défaut, elle est à false.
 
     Le paramètre 'regex' vous permet de passer votre propre expression
@@ -976,7 +976,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     L'algorithme Luhn: Une formule de vérification de somme pour valider
     un ensemble de nombres d'identification. Regardez
-    http://en.wikipedia.org/wiki/Luhn_algorithm pour plus d'informations.
+    https://en.wikipedia.org/wiki/Luhn_algorithm pour plus d'informations.
 
 .. php:staticmethod:: maxLength(string $check, integer $max)
 

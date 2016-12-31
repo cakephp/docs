@@ -6,7 +6,7 @@ CakePHP que te ayudarán a comprender el framework y ver cómo se relacionan tod
 las piezas.
 
 También puedes ver otros ejemplos en: `CakePackages
-<http://plugins.cakephp.org/>`_ y en `Bakery <http://bakery.cakephp.org/>`_
+<https://plugins.cakephp.org/>`_ y en `Bakery <https://bakery.cakephp.org/>`_
 encontrarás también componentes listos para usar. 
 
 .. toctree::

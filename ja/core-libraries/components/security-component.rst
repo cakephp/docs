@@ -17,7 +17,7 @@ Security コンポーネントを使うと、アプリケーションにさら�
 プロパティと同じ名前のセッターメソッドで設定できます。
 
 Security コンポーネントを使用することで、自動的に `CSRF
-<http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ とフォーム改ざんを
+<https://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ とフォーム改ざんを
 防止します。Security コンポーネントによって、hidden トークンフィールドがフォームに追加され、
 チェックされます。他には、 ``csrfExpires`` で設定した、無効になる期間を過ぎると
 フォームの投稿を拒否します。
@@ -270,7 +270,7 @@ CSRF 防御の恩恵を受けられます。デフォルトでは CSRF トーク
     }
 
 csrfExpires プロパティは、
-`strtotime() <http://php.net/manual/en/function.strtotime.php>`_
+`strtotime() <https://secure.php.net/manual/en/function.strtotime.php>`_
 互換の値を設定できます。このコンポーネントが有効になると、全てのフォームの
 :php:class:`FormHelper` に CSRF トークンを含む ``data[_Token][key]`` が追加されます。
 

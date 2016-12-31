@@ -4,8 +4,8 @@ XML
 .. php:class:: Xml
 
 Xml クラスはすべてリファクタリングされました。 PHP 5 には
-`SimpleXML <http://php.net/simplexml>`_ と
-`DOMDocument <http://php.net/domdocument>`_ があり、
+`SimpleXML <https://secure.php.net/simplexml>`_ と
+`DOMDocument <https://secure.php.net/domdocument>`_ があり、
 CakePHP で XML パーサーを再実装する必要がないからです。
 新しい Xml クラスは配列から SimpleXMLElement や DOMDocument
 または逆方向への基本的な変換を行います。
@@ -25,18 +25,18 @@ Xml オブジェクトが返るまでの間、 SimpleXMLElement または DOMDoc
     App::uses('Xml', 'Utility');
 
     // 今までの方法:
-    $xml = new Xml('http://bakery.cakephp.org/articles.rss');
+    $xml = new Xml('https://bakery.cakephp.org/articles.rss');
 
     // SimpleXML を使った新しい方法:
-    $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
+    $xml = Xml::build('https://bakery.cakephp.org/articles.rss');
     // このとき、 $xml は SimpleXMLElement のインスタンスです。
 
     // もしくは
-    $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'simplexml'));
+    $xml = Xml::build('https://bakery.cakephp.org/articles.rss', array('return' => 'simplexml'));
     // このときも、 $xml は SimpleXMLElement のインスタンスです。
 
     // DOMDocument を使った新しい方法:
-    $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'domdocument'));
+    $xml = Xml::build('https://bakery.cakephp.org/articles.rss', array('return' => 'domdocument'));
     // このとき、 $xml は DOMDocument のインスタンスです。
 
 :php:meth:`Xml::build()` を使うことで、多様なソースから XML オブジェクトを
@@ -57,7 +57,7 @@ Xml オブジェクトが返るまでの間、 SimpleXMLElement または DOMDoc
     $xml = Xml::build('/home/awesome/unicorns.xml');
 
     // リモートにあるファイル
-    $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
+    $xml = Xml::build('https://bakery.cakephp.org/articles.rss');
 
 配列を使っても Xml オブジェクトを作成できます。 ::
 
@@ -81,8 +81,8 @@ Xml オブジェクトが返るまでの間、 SimpleXMLElement または DOMDoc
 
 .. note::
 
-    `DOMDocument <http://php.net/domdocument>`_ と
-    `SimpleXML <http://php.net/simplexml>`_ は異なる API を実装しています。
+    `DOMDocument <https://secure.php.net/domdocument>`_ と
+    `SimpleXML <https://secure.php.net/simplexml>`_ は異なる API を実装しています。
     必ずXmlから要求されたオブジェクトの正しいメソッドを使用してください。
 
 XML 文字列から配列への変換
@@ -229,7 +229,7 @@ Xml クラスは例外をスローします。以下は正しくない例です�
 
     $xmlArray = array(
         'root' => array(
-            'xmlns:' => 'http://cakephp.org',
+            'xmlns:' => 'https://cakephp.org',
             'child' => 'value'
         )
     );
@@ -238,7 +238,7 @@ Xml クラスは例外をスローします。以下は正しくない例です�
     $xmlArray(
         'root' => array(
             'tag' => array(
-                'xmlns:pref' => 'http://cakephp.org',
+                'xmlns:pref' => 'https://cakephp.org',
                 'pref:item' => array(
                     'item 1',
                     'item 2'
@@ -251,11 +251,11 @@ Xml クラスは例外をスローします。以下は正しくない例です�
 ``$xml1`` と ``$xml2`` の値は、それぞれ次のようになるでしょう。 ::
 
     <?xml version="1.0"?>
-    <root xmlns="http://cakephp.org"><child>value</child>
+    <root xmlns="https://cakephp.org"><child>value</child>
 
 
     <?xml version="1.0"?>
-    <root><tag xmlns:pref="http://cakephp.org"><pref:item>item 1</pref:item><pref:item>item 2</pref:item></tag></root>
+    <root><tag xmlns:pref="https://cakephp.org"><pref:item>item 1</pref:item><pref:item>item 2</pref:item></tag></root>
 
 子要素の作成
 ------------

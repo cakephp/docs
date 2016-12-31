@@ -100,7 +100,7 @@ controllers faz com que sua aplicação fique leve. Novas funcionalidades são
 facilmente adicionadas e pode-se dar nova cara nas características antigas num
 piscar de olhos. O design modular e separado também permite aos desenvolvedores
 e designers trabalharem simultaneamente, incluindo a capacidade de se construir
-um `protótipo <http://en.wikipedia.org/wiki/Software_prototyping>`_ muito
+um `protótipo <https://en.wikipedia.org/wiki/Software_prototyping>`_ muito
 rapidamente. A separação também permite que os desenvolvedores alterem uma parte
 da aplicação sem afetar outras.
 

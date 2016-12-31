@@ -1,7 +1,7 @@
 理解模型-视图-控制器(MVC)
 #########################
 
-CakePHP 遵循 `MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_ 软件设
+CakePHP 遵循 `MVC <https://en.wikipedia.org/wiki/Model-view-controller>`_ 软件设
 计模式。使用 MVC 编程将应用程序分为三个部分:
 
 模型层
@@ -66,7 +66,7 @@ CakePHP 有关的细节，所以，在下面的进程中，请记住这一基本
 模块化、快速开发的软件包。将应用程序的任务分割为独立的模型、视图和控制器，使应用
 程序很灵活。添加新功能很容易，更新已有的功能也易如反掌。模块化和独立的设计也允许
 开发人员和设计人员同时工作，包括快速 
-`制作原型 <http://en.wikipedia.org/wiki/Software_prototyping>`_ 的能力。这种分离
+`制作原型 <https://en.wikipedia.org/wiki/Software_prototyping>`_ 的能力。这种分离
 还允许开发人员改动应用程序的一部分，而不会影响其它的部分。
 
 如果你从来没有这样创建过一个应用程序，你会需要一些时间适应，但我们相信，一旦你用

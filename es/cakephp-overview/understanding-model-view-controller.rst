@@ -2,7 +2,7 @@ Entendiendo el Modelo - Vista - Controlador
 ###########################################
 
 CakePHP sigue el patrón diseño de software llamado
-`MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_.
+`MVC <https://en.wikipedia.org/wiki/Model-view-controller>`_.
 Programar usando MVC separa tu aplicación en tres partes principalmente:
 
 La capa del Modelo
@@ -90,7 +90,7 @@ además muy ligeras de entender. Las nuevas características se añaden fácilme
 y agregar cosas nuevas a código viejo se hace muy sencillo. El diseño modular
 también permite a los desarrolladores y los diseñadores trabajar simultáneamente,
 incluyendo la capacidad de hacer
-`prototipos rápidos <http://en.wikipedia.org/wiki/Software_prototyping>`_.
+`prototipos rápidos <https://en.wikipedia.org/wiki/Software_prototyping>`_.
 
 La separación también permite a los desarrolladores hacer cambios en una parte del
 la aplicación sin afectar a los demás.
