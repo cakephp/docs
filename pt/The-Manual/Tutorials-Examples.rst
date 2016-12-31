@@ -5,7 +5,7 @@ Nesta seção, você pode caminhar através de algumas aplicações típicas do
 CakePHP, para ver como todas as peças se juntam.
 
 Em alternativa, você pode visitar o `CakeForge <http://cakeforge.org/>`_
-e o `Bakery <http://bakery.cakephp.org/>`_ para aplicações e componentes
+e o `Bakery <https://bakery.cakephp.org/>`_ para aplicações e componentes
 existentes.
 
 

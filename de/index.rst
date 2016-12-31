@@ -20,7 +20,7 @@ Wie es funktioniert:
    daß etwas unvollständig ist, daß etwas noch überhaupt nicht erklärt
    wird oder es einfach nicht so vorliegt, wie ihr es gerne hättet.
 #. Logt euch in das "Kochbuch" mit Hilfe eures
-   `"Bakery" <http://bakery.cakephp.org/>`_ Zuganges ein.
+   `"Bakery" <https://bakery.cakephp.org/>`_ Zuganges ein.
 #. Editiert Abschnitte mit Hilfe einfachen HTMLs
 #. Schaut in den nächsten Tagen vorbei um eure Änderungen zu sehen
 

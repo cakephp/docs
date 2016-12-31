@@ -16,7 +16,7 @@ the controller. Keep in mind that black holes from all of the Security
 Component's methods will be run through this callback method.
 
 By using the Security Component you automatically get
-`CSRF <http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ and
+`CSRF <https://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ and
 form tampering protection. Hidden token fields will automatically be
 inserted into forms and checked by the Security component. Among other
 things, a form submission will not be accepted after a certain period of
@@ -229,7 +229,7 @@ Basic HTTP Authentication
 The SecurityComponent has some very powerful authentication features.
 Sometimes you may need to protect some functionality inside your
 application using `HTTP Basic
-Authentication <http://en.wikipedia.org/wiki/Basic_access_authentication>`_.
+Authentication <https://en.wikipedia.org/wiki/Basic_access_authentication>`_.
 One common usage for HTTP Auth is protecting a REST or SOAP API.
 
 This type of authentication is called basic for a reason. Unless you're

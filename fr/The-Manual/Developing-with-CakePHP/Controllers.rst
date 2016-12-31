@@ -138,7 +138,7 @@ Attributs des Contrôleurs
 
 Pour une liste complète des attributs des contrôleurs avec leurs
 descriptions, consultez l'API CakePHP :
-`http://api.cakephp.org/class/controller <http://api13.cakephp.org/class/controller>`_.
+`https://api.cakephp.org/class/controller <http://api13.cakephp.org/class/controller>`_.
 
 $name
 -----
@@ -219,8 +219,8 @@ modèle correspondant.
 
 Il n'est pas conseillé d'ajouter tous les modèles systématiquement à
 votre contrôleur via le tableau ``$uses``. Allez regarder
-`ici <http://book.cakephp.org/fr/view/1040/Relationship-Types>`_
-`et ici <http://book.cakephp.org/fr/view/922/loadModel>`_ pour voir comment
+`ici <https://book.cakephp.org/fr/view/1040/Relationship-Types>`_
+`et ici <https://book.cakephp.org/fr/view/922/loadModel>`_ pour voir comment
 accéder proprement aux modèles respectivement associés ou pas.
 
 Les attributs en relation avec la page : $layout
@@ -433,7 +433,7 @@ Méthodes des Contrôleurs
 
 Pour une liste complète des méthodes de contrôleur avec leurs
 descriptions, consultez l'API CakePHP :
-`http://api.cakephp.org/class/controller <http://api13.cakephp.org/class/controller>`_.
+`https://api.cakephp.org/class/controller <http://api13.cakephp.org/class/controller>`_.
 
 Interaction avec les Vues
 -------------------------

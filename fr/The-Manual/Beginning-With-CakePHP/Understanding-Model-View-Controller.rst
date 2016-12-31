@@ -33,8 +33,8 @@ d’accueil de votre application.
 -  Le contrôleur utilise aussi les modèles pour obtenir l’accès aux
    données de l’application. Le plus souvent, les modèles représentent
    une table de la base de données, mais ils peuvent aussi représenter
-   des entrées `LDAP <http://en.wikipedia.org/wiki/Ldap>`_, des flux
-   `RSS <http://en.wikipedia.org/wiki/Rss>`_ ou des fichiers sur
+   des entrées `LDAP <https://en.wikipedia.org/wiki/Ldap>`_, des flux
+   `RSS <https://en.wikipedia.org/wiki/Rss>`_ ou des fichiers sur
    l’ordinateur. Dans cet exemple, le contrôleur utilise un modèle qui
    récupère, dans la base de données, les derniers achats de Ricardo.
 -  Une fois que le contrôleur a effectué ses traitements « magiques »
@@ -66,7 +66,7 @@ ajoutées facilement et modifier les anciennes est un jeu d'enfant !
 L'architecture modulaire et séparée offre également aux développeurs et
 designers, la possibilité de travailler en parallèle, avec la capacité
 de créer rapidement un
-`prototype <http://en.wikipedia.org/wiki/Software_prototyping>`_. La
+`prototype <https://en.wikipedia.org/wiki/Software_prototyping>`_. La
 séparation permet aussi aux développeurs de faire des modifications sur
 une partie de l'application sans affecter les autres.
 

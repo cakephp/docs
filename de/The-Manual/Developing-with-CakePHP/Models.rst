@@ -3431,7 +3431,7 @@ strict ACL behaviors).
 **Fetching a nested array of associated records:**
 
 If your table has ``parent_id`` field you can also use
-```find('threaded')`` <http://book.cakephp.org/view/1023/find-threaded>`_
+```find('threaded')`` <https://book.cakephp.org/view/1023/find-threaded>`_
 to fetch nested array of records using a single query without setting up
 any associations.
 
@@ -3740,7 +3740,7 @@ default model behavior.
 
 For a complete list of model attributes and their descriptions visit the
 CakePHP API. Check out
-`http://api.cakephp.org/class/model <http://api.cakephp.org/class/model>`_.
+`https://api.cakephp.org/class/model <https://api.cakephp.org/class/model>`_.
 
 useDbConfig
 -----------

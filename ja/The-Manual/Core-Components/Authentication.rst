@@ -690,7 +690,7 @@ Ajax あるいは Javascript
 
 CakePHP の他の項目と同じく、 AuthComponent についてのより詳しい情報は
 `AuthComponent
-class(英文) <http://api.cakephp.org/class/auth-component>`_
+class(英文) <https://api.cakephp.org/class/auth-component>`_
 を参照してください。
 
 authenticate

@@ -497,7 +497,7 @@ drag & drop
 
 Makes a Draggable element out of the DOM element specified by $id. For
 more information on the parameters accepted in $options see
-`http://github.com/madrobby/scriptaculous/wikis/draggable <http://github.com/madrobby/scriptaculous/wikis/draggable>`_.
+`https://github.com/madrobby/scriptaculous/wikis/draggable <https://github.com/madrobby/scriptaculous/wikis/draggable>`_.
 
 Common options might include:
 
@@ -516,7 +516,7 @@ Common options might include:
 Makes the DOM element specified by $id able to accept dropped elements.
 Additional parameters can be specified with $options. For more
 information see
-`http://github.com/madrobby/scriptaculous/wikis/droppables <http://github.com/madrobby/scriptaculous/wikis/droppables>`_.
+`https://github.com/madrobby/scriptaculous/wikis/droppables <https://github.com/madrobby/scriptaculous/wikis/droppables>`_.
 
 Common options might include:
 
@@ -595,7 +595,7 @@ editor
 Creates an in-place editor at DOM id. The supplied ``$url`` should be an
 action that is responsible for saving element data. For more information
 and demos see
-`http://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor <http://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor>`_.
+`https://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor <https://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor>`_.
 
 Common options might include:
 
@@ -608,7 +608,7 @@ Description
 Activate the 'collection' mode of in-place editing.
 $options['collection'] takes an array which is turned into options for
 the select. To learn more about collection see
-`http://github.com/madrobby/scriptaculous/wikis/ajax-inplacecollectioneditor <http://github.com/madrobby/scriptaculous/wikis/ajax-inplacecollectioneditor>`_.
+`https://github.com/madrobby/scriptaculous/wikis/ajax-inplacecollectioneditor <https://github.com/madrobby/scriptaculous/wikis/ajax-inplacecollectioneditor>`_.
 
 ``$options['callback']``
 

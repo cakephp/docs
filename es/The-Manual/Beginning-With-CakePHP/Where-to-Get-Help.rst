@@ -6,7 +6,7 @@ Dónde obtener ayuda
 El sitio oficial CakePHP
 ========================
 
-`http://www.cakephp.org <http://www.cakephp.org>`_
+`https://cakephp.org <https://cakephp.org>`_
 
 El sitio web oficial de CakePHP es siempre un gran lugar para visitar.
 Cuenta con enlaces a herramientas de desarrollo frecuentemente
@@ -15,7 +15,7 @@ utilizadas, videos, oportunidades de donar, y descargas.
 El Cookbook
 ===========
 
-`http://book.cakephp.org </es/>`_
+`https://book.cakephp.org </es/>`_
 
 Has comenzado en el lugar correcto. Este manual (y la API) es
 probablemente el primer lugar al que tienes que dirigirte para obtener
@@ -30,7 +30,7 @@ línea.
 El Bakery
 =========
 
-`http://bakery.cakephp.org <http://bakery.cakephp.org>`_
+`https://bakery.cakephp.org <https://bakery.cakephp.org>`_
 
 La Panadería de CakePHP (CakePHP Bakery) es un almacén de cosas
 relacionadas con CakePHP. Consúltalo si estás buscando tutoriales, casos
@@ -40,7 +40,7 @@ accede a él y comparte tus conocimientos con la comunidad.
 El API
 ======
 
-`http://api.cakephp.org/ <http://api.cakephp.org/>`_
+`https://api.cakephp.org/ <https://api.cakephp.org/>`_
 
 Directo al grano y directamente de los desarrolladores de CakePHP, la
 API (Interfaz de Programación de Aplicaciones) CakePHP es la
@@ -61,7 +61,7 @@ recomendable, echa un vistazo a CakeForge.
 Los Casos de Prueba
 ===================
 
-`http://api.cakephp.org/tests <http://api.cakephp.org/tests>`_
+`https://api.cakephp.org/tests <https://api.cakephp.org/tests>`_
 
 Si alguna vez te ha parecido que la información proporcionada por la API
 no es suficiente echa un vistazo al codigo de los casos de prueba

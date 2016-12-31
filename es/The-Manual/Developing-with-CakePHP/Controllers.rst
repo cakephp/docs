@@ -125,7 +125,7 @@ Atributos del Controlador
 
 Para ver la lista completa de atributos visite la API de CakePHP en la
 sección
-`Controller <http://api.cakephp.org/class/controller>`_.
+`Controller <https://api.cakephp.org/class/controller>`_.
 
 $name
 -----
@@ -416,7 +416,7 @@ Métodos del Controlador
 
 Para una lista completa de los métodos del controlador y sus
 descripciones visita el API de CakePHP. Echa un vistazo a
-`http://api.cakephp.org/class/controller <http://api.cakephp.org/1.2/class_controller.html>`_.
+`https://api.cakephp.org/class/controller <https://api.cakephp.org/1.2/class_controller.html>`_.
 
 Interactuando con Vistas
 ------------------------
@@ -652,7 +652,7 @@ referer
 ~~~~~~~
 
 Devuelve la URL remitente de la petición actual. Ver
-*`referer <http://en.wikipedia.org/wiki/Referer>`_* en la wikipedia para
+*`referer <https://en.wikipedia.org/wiki/Referer>`_* en la wikipedia para
 más información.
 
 disableCache

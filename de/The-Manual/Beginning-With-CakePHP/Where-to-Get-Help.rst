@@ -6,7 +6,7 @@ Wo finde ich Hilfe?
 Die offizielle CakePHP Webseite
 ===============================
 
-`http://www.cakephp.org <http://www.cakephp.org>`_
+`https://cakephp.org <https://cakephp.org>`_
 
 Die offizielle CakePHP Webseite ist immer einen Besuch Wert. Sie bietet
 Links zu oft genutzten Entwicklerwerkzeugen, *Screencasts*, der
@@ -15,7 +15,7 @@ Möglichkeit zu spenden und Downloads.
 Das Cookbook
 ============
 
-`http://book.cakephp.org </de/>`_
+`https://book.cakephp.org </de/>`_
 
 Das Cookbook sollte wahrscheinlich die erste Anlaufstelle sein um
 Antworten zu erhalten. Wie bei vielen anderen open source Projekten,
@@ -28,7 +28,7 @@ Online-Komponente.
 Die Bakery
 ==========
 
-`http://bakery.cakephp.org <http://bakery.cakephp.org>`_
+`https://bakery.cakephp.org <https://bakery.cakephp.org>`_
 
 Die CakePHP Bakery ist eine Clearingstelle für Alles was CakePHP
 betrifft. Zieh Dir die Tutorials, Fallstudien und den Beispielkode rein.
@@ -38,7 +38,7 @@ Erfahrung mit der Gemeinschaft und erlange sofortigen Ruhm und Reichtum.
 Die API
 =======
 
-`http://api.cakephp.org/ <http://api.cakephp.org/>`_
+`https://api.cakephp.org/ <https://api.cakephp.org/>`_
 
 Genau auf den Punkt und direkt von den Kern-Entwicklern ist die CakePHP
 API (Anwendungsprogrammierschnittstelle) die zuverlässigste verfügbare
@@ -59,7 +59,7 @@ veröffentlichen willst, dann wirf einen Blick auf CakeForge an.
 Die Test-Fälle
 ==============
 
-`http://api.cakephp.org/tests <http://api.cakephp.org/tests>`_
+`https://api.cakephp.org/tests <https://api.cakephp.org/tests>`_
 
 Wenn Du jemals das Gefühl hast, dass die Informationen, die in der API
 zur Verfügung gestellt werden, nicht ausreichend sind, nutze den

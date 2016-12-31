@@ -109,7 +109,7 @@ URL でそれにアクセスできます。
 ==================
 
 コントローラの属性の完全な一覧とその説明は、CakePHP API
-を参照してください。\ `http://api.cakephp.org/class/controller <http://api13.cakephp.org/class/controller>`_
+を参照してください。\ `https://api.cakephp.org/class/controller <http://api13.cakephp.org/class/controller>`_
 にあります。
 
 $name
@@ -166,7 +166,7 @@ controller で宣言したものを、もう一度宣言する必要はありま
 
 コントローラでモデルを使いたくないのならば、\ ``var $uses = array()``\ としてください。これでコントローラに一致するモデルファイルを必要としないコントローラを使うことができるようになります。
 
-単純に全てのモデルをコントローラの\ ``$uses``\ 配列に入れるのはバッドプラクティスです。適切に関連付けられたモデルや関連付けされていないモデルにアクセスする方法を見るには、\ `ここ <http://book.cakephp.org/ja/view/1040/Relationship-Types>`_\ と\ `ここ <http://book.cakephp.org/ja/view/992/loadModel#>`_\ をチェックしてください。
+単純に全てのモデルをコントローラの\ ``$uses``\ 配列に入れるのはバッドプラクティスです。適切に関連付けられたモデルや関連付けされていないモデルにアクセスする方法を見るには、\ `ここ <https://book.cakephp.org/ja/view/1040/Relationship-Types>`_\ と\ `ここ <https://book.cakephp.org/ja/view/992/loadModel#>`_\ をチェックしてください。
 
 ページに関連した属性：$layoutと$pageTitle
 -----------------------------------------

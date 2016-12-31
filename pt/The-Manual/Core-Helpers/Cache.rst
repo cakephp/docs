@@ -53,7 +53,7 @@ opcionais, mas funciona bem com os valores padrão.
 APC
 
 O mecanismo APC implementa o `Alternative PHP
-Cache <http://php.net/apc>`_ em opcode. Como o XCache, este mecanismo
+Cache <https://secure.php.net/apc>`_ em opcode. Como o XCache, este mecanismo
 faz cache do código opcode de PHP compilado.
 
 XCache

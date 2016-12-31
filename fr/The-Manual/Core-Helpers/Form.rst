@@ -948,7 +948,7 @@ environnement Unix.
 Ce tableau est généré par PHP lui-même, donc pour plus de détail sur la
 façon dont PHP gère les données passées dans les champ de fichier, lisez
 la `section sur l'upload de fichier du manuel
-PHP <http://php.net/features.file-upload>`_.
+PHP <https://secure.php.net/features.file-upload>`_.
 
 Valider un upload de fichier
 ----------------------------
@@ -958,7 +958,7 @@ votre modèle, afin de vérifier qu'un fichier a été uploadé avec succès.
 
 ::
 
-    // Basé sur le commentaire 8 de : http://bakery.cakephp.org/articles/view/improved-advance-validation-with-parameters
+    // Basé sur le commentaire 8 de : https://bakery.cakephp.org/articles/view/improved-advance-validation-with-parameters
 
     function isUploadedFile($params){
         $val = array_shift($params);

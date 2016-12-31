@@ -975,7 +975,7 @@ CakePHP.
 
 Esse array é gerado automaticamente pelo próprio PHP. Para mais detalhes
 sobre os dados de arquivo passados pelo PHP `leia a documentação no site
-oficial do PHP <http://php.net/manual/pt_BR/features.file-upload.php>`_.
+oficial do PHP <https://secure.php.net/manual/pt_BR/features.file-upload.php>`_.
 
 Validando Uploads
 -----------------
@@ -985,7 +985,7 @@ model para validar se um arquivo foi enviado com sucesso.
 
 ::
 
-    // Baseado no comentário 8 de: http://bakery.cakephp.org/articles/view/improved-advance-validation-with-parameters
+    // Baseado no comentário 8 de: https://bakery.cakephp.org/articles/view/improved-advance-validation-with-parameters
 
     function isUploadedFile($params){
         $val = array_shift($params);

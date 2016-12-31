@@ -49,7 +49,7 @@ works well with the defaults.
 APC
 
 The APC engine implements the `Alternative PHP
-Cache <http://php.net/apc>`_ opcode Cacher. Like XCache, this engine
+Cache <https://secure.php.net/apc>`_ opcode Cacher. Like XCache, this engine
 caches the compiled PHP opcode.
 
 XCache

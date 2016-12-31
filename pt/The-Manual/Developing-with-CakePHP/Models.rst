@@ -3739,7 +3739,7 @@ substituir o comportamento padrão do modelo.
 
 Para uma lista completa dos atributos de modelo e suas descriçoes visite
 a API do CakePHP. Confira
-`http://api.cakephp.org/class/model <http://api.cakephp.org/class/model>`_.
+`https://api.cakephp.org/class/model <https://api.cakephp.org/class/model>`_.
 
 useDbConfig
 -----------

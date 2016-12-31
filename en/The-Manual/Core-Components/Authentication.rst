@@ -27,7 +27,7 @@ components in your controller:
         var $components = array('Auth');
 
 Or add it to your
-`AppController <http://book.cakephp.org/view/957/The-App-Controller>`_
+`AppController <https://book.cakephp.org/view/957/The-App-Controller>`_
 so all of your controllers will use it:
 
 ::
@@ -808,7 +808,7 @@ AclComponent::check(). An isAuthorized function is not needed.
 
 By using crud, Auth will make use of ACL and check with
 AclComponent::check(). Actions should be mapped to CRUD (see
-`mapActions <http://book.cakephp.org/view/1260/mapActions>`_).
+`mapActions <https://book.cakephp.org/view/1260/mapActions>`_).
 
 sessionKey
 ----------
@@ -834,7 +834,7 @@ you would like to be rendered and returned when you have an invalid or
 expired session.
 
 As with any part of CakePHP, be sure to take a look at `AuthComponent
-class <http://api.cakephp.org/class/auth-component>`_ for a more
+class <https://api.cakephp.org/class/auth-component>`_ for a more
 in-depth look at the AuthComponent.
 
 authenticate

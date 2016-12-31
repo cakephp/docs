@@ -43,7 +43,7 @@ ce que vous ayez une table appelée 'users' avec des champs nommées
 Dans certaines situations, les bases de données ne vous laissent pas
 utiliser 'password' comme nom de colonne. Voyez `Définir les variables
 du composant
-Auth <http://book.cakephp.org/fr/view/1251/Setting-Auth-Component-Variables>`_,
+Auth <https://book.cakephp.org/fr/view/1251/Setting-Auth-Component-Variables>`_,
 pour trouver un exemple sur la façon de changer le nom par défaut des
 champs afin de travailler avec votre propre environnement.
 
@@ -783,7 +783,7 @@ AclComponent::check(). Une fonction isAuthorized n'est pas nésessaire.
 
 En utilisant crud, Auth utilisera l'ACL et vérifiera avec
 AclComponent::check(). Les actions devraient correspondre aux CRUD (voir
-`mapActions <http://book.cakephp.org/fr/view/813/mapActions>`_).
+`mapActions <https://book.cakephp.org/fr/view/813/mapActions>`_).
 
 sessionKey
 ----------
@@ -810,7 +810,7 @@ session invalide ou expirée.
 
 Comme dans toute partie de CakePHP, soyez certains d'avoir jeté une œil
 à `la classe
-AuthComponent <http://api.cakephp.org/class/auth-component>`_ dans
+AuthComponent <https://api.cakephp.org/class/auth-component>`_ dans
 l'API, pour avoir une vision plus approfondie du composant Auth.
 
 authenticate

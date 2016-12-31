@@ -52,7 +52,7 @@ possède des options mais fonctionne bien avec les options par défaut.
 APC
 
 Le moteur de cache APC implémente l'alternative APC : `Alternative PHP
-Cache <http://php.net/apc>`_, le cache d'opcode libre et ouvert pour
+Cache <https://secure.php.net/apc>`_, le cache d'opcode libre et ouvert pour
 PHP. Comme XCache, ce moteur met en cache le code intermédiaire PHP.
 
 XCache

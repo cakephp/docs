@@ -590,7 +590,7 @@ zu einer anderen URL weiter. Der Parameter ``array('action'=>'index)``
 wird dabei in den URL /posts übersetzt, was der index-Methode des
 PostsController entspricht. Nähere Informationen zu den möglichen
 Formaten für URLs in verschiedenen Cake Funktionen finden sich unter
-`Router::url <http://api.cakephp.org/class/router#method-Routerurl>`_.
+`Router::url <https://api.cakephp.org/class/router#method-Routerurl>`_.
 
 Der Aufruf der
 ``save()-Methode prüft zunächst auf Validierungsfehler und bricht das Speichern ab, falls einer oder mehrere dieser Fehler vorliegt. Wir werden uns diese Fehler und ihre Behandlung im folgenden Abschnitt näher ansehen.``
@@ -902,7 +902,7 @@ als Guide für das Erstellen umfangreicherer Anwendungen.
 Jetzt, wo du eine erste Cake-Anwendung geschrieben hast, bist du bereit
 für echte Anwendungen. Beginne ein eigenes Projekt, lies den Rest des
 `Handbuchs </de/>`_ und studiere die
-`API <http://api.cakephp.org>`_-Referenz.
+`API <https://api.cakephp.org>`_-Referenz.
 
 Falls du Hilfe benötigst, besuche uns in #cakephp. Willkommen bei
 CakePHP!
@@ -913,16 +913,16 @@ Suggested Follow-up Reading
 These are common tasks people learning CakePHP usually want to study
 next:
 
-#. `Layouts: <http://book.cakephp.org/view/1080/Layouts>`_ Customizing
+#. `Layouts: <https://book.cakephp.org/view/1080/Layouts>`_ Customizing
    your website layout
-#. `Elements: <http://book.cakephp.org/view/1081/Elements>`_ Including
+#. `Elements: <https://book.cakephp.org/view/1081/Elements>`_ Including
    and reusing view snippets
-#. `Scaffolding: <http://book.cakephp.org/view/1103/Scaffolding>`_
+#. `Scaffolding: <https://book.cakephp.org/view/1103/Scaffolding>`_
    Prototyping before creating code
-#. `Baking: <http://book.cakephp.org/view/1522/Code-Generation-with-Bake>`_
+#. `Baking: <https://book.cakephp.org/view/1522/Code-Generation-with-Bake>`_
    Generating basic
-   `CRUD <http://en.wikipedia.org/wiki/Create%2C_read%2C_update_and_delete>`_
+   `CRUD <https://en.wikipedia.org/wiki/Create%2C_read%2C_update_and_delete>`_
    code
-#. `Authentication: <http://book.cakephp.org/view/1250/Authentication>`_
+#. `Authentication: <https://book.cakephp.org/view/1250/Authentication>`_
    User registration and login
 

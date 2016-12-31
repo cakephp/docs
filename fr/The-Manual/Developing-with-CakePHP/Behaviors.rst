@@ -32,7 +32,7 @@ CakePHP contient déjà des comportements pour les structures en arbre,
 les contenus traduits, les interactions par liste de contrôle d'accès,
 sans oublier les comportements des contributeurs de la communauté déjà
 disponibles dans la Boulangerie (*Bakery*) CakePHP
-(http://bakery.cakephp.org). Dans cette section nous couvrirons le
+(https://bakery.cakephp.org). Dans cette section nous couvrirons le
 schéma d'usage classique pour ajouter des comportements aux modèles,
 l'utilisation des comportements intégrés à CakePHP et la manière de
 créer nos propres comportements.

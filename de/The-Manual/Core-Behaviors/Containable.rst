@@ -632,7 +632,7 @@ will apply to both the find('count') and the find('all') done on the
 model
 
 See the section `Using
-Containable <http://book.cakephp.org/view/1324/Using-Containable>`_ for
+Containable <https://book.cakephp.org/view/1324/Using-Containable>`_ for
 further details.
 
 Here's an example of how to contain associations when paginating.

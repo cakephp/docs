@@ -482,7 +482,7 @@ nombre.
 Al especificar el campo ``title`` (título) o ``name`` (nombre), CakePHP
 automáticamente utilizará esta etiqueta en varias circunstancias:
 
--  `Scaffolding <http://en.wikipedia.org/wiki/Scaffold_(programming)>`_
+-  `Scaffolding <https://en.wikipedia.org/wiki/Scaffold_(programming)>`_
    — títulos de páginas, etiquetas de *fieldset*
 -  Listas - normalmente utilizado para los desplegables ``<select>``
 -  TreeBehavior — reordenación, vistas de árbol
@@ -515,7 +515,7 @@ Las claves primarias son normalmente definidas como campos ``INT``. La
 base de datos incrementará automáticamente el campo, comenzando en 1,
 para cada nuevo registro que se añade. Alternativamente, si especificas
 tu clave primaria como ``CHAR(36)``, CakePHP generará automáticamente
-*`UUIDs <http://en.wikipedia.org/wiki/UUID>`_* (Identificadores Únicos
+*`UUIDs <https://en.wikipedia.org/wiki/UUID>`_* (Identificadores Únicos
 Universales) cuando son creados nuevos registros.
 
 Un UUID es una cadena de 32 bytes separada por guiones, con un total de
@@ -3277,7 +3277,7 @@ redefinir el comportamiento por defecto del modelo.
 
 Para una lista completa de los atributos del modelo y sus respectivas
 descripciones, visita la API del CakePHP. Echa un vistazo a
-`http://api.cakephp.org/1.2/class\_model.html <http://api.cakephp.org/1.2/class_model.html>`_.
+`https://api.cakephp.org/1.2/class\_model.html <https://api.cakephp.org/1.2/class_model.html>`_.
 
 useDbConfig
 -----------

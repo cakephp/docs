@@ -7,6 +7,6 @@ converter url arrays (ex:
 array('controller'=>'posts','action'=>'index')) em string urls.
 
 Leia mais informações sobre configurações de router aqui:
-`http://book.cakephp.org/view/945/Routes-Configuration <http://book.cakephp.org/view/945/Routes-Configuration>`_
+`https://book.cakephp.org/view/945/Routes-Configuration <https://book.cakephp.org/view/945/Routes-Configuration>`_
 
 Router também incluem outros métodos úteis para lidar com urls.

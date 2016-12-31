@@ -127,7 +127,7 @@ Atributos
 
 Para uma lista completa de atributos do controller e suas descrições
 visite a API do CakePHP. Dê uma olhada <a
-href="http://api.cakephp.org/class/controller">http://api.cakephp.org/class/controller</a>.
+href="https://api.cakephp.org/class/controller">https://api.cakephp.org/class/controller</a>.
 
 $name
 -----
@@ -428,7 +428,7 @@ Métodos
 
 Para uma lista completa de métodos do controller e suas descrições
 visite a API CakePHP. Dê uma olhada
-`http://api.cakephp.org/class/controller <http://api.cakephp.org/class/controller>`_.
+`https://api.cakephp.org/class/controller <https://api.cakephp.org/class/controller>`_.
 
 Interagindo com as views
 ------------------------

@@ -23,17 +23,17 @@ git
 リポジトリからコードをチェックアウトする方法のいずれかにより取得できます。
 
 最新のアーカイブをダウンロードするには、
-`http://www.cakephp.org <http://www.cakephp.org>`_
+`https://cakephp.org <https://cakephp.org>`_
 のウェブサイトに行き、"Download Now!"
 という大きなリンクに従って進みます。
 
 CakePHP
-の最新のリリースは\ `Github <http://github.com/cakephp>`_\ でホスティングされています。GithubにはCakePHP自身、また多くのCakePHPプラグインが含まれています。CakePHPのリリースは\ `Github
-downloads <http://github.com/cakephp/cakephp1x/downloads>`_\ で入手できます。
+の最新のリリースは\ `Github <https://github.com/cakephp>`_\ でホスティングされています。GithubにはCakePHP自身、また多くのCakePHPプラグインが含まれています。CakePHPのリリースは\ `Github
+downloads <https://github.com/cakephp/cakephp1x/downloads>`_\ で入手できます。
 
 他の手段を用いて、バグ修正や日ごとに行われる細かな機能追加が含まれた、できたてホヤホヤのコードを手に入れることができます。これらは
 github
-からレポジトリを複製することでアクセスすることができます。\ `CakePHP Repository <http://github.com/cakephp/cakephp>`_\ 。
+からレポジトリを複製することでアクセスすることができます。\ `CakePHP Repository <https://github.com/cakephp/cakephp>`_\ 。
 
 パーミッションの設定
 ====================

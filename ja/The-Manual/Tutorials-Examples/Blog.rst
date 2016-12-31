@@ -23,7 +23,7 @@ Cakeをダウンロード
 まずは、最新のCakeのコードをダウンロードしてきましょう。
 
 最新のCakeをダウンロードするには、githubにあるCakePHPプロジェクトを見てみましょう。
-`http://github.com/cakephp/cakephp/downloads/ <http://github.com/cakephp/downloads/>`_
+`https://github.com/cakephp/cakephp/downloads/ <https://github.com/cakephp/downloads/>`_
 そして、1.3の最新リリースをダウンロードします。
 
 または、\ `git <http://git-scm.com/>`_\ を使ってレポジトリをcloneすることもできます。
@@ -618,7 +618,7 @@ Cakeのルーティングは、
 
 このアプリケーションの作り方はとても素晴らしいので、平和、賞賛、女性、お金までもが、あなたの想像以上の仕方で手に入ることでしょう。シンプルですよね。ですが、気をつけてほしいのは、このチュートリアルは、非常に基本的な点しか扱っていない、ということです。CakePHPには、\ *もっともっと*\ 多くの機能があります。シンプルなチュートリアルにするために、それらはここでは扱いませんでした。マニュアルの残りの部分をガイドとして使い、もっと機能豊かなアプリケーションを作成してください。
 
-基本的なアプリケーションの作成が終わったので、現実世界のアプリを作る準備が整いました。自分のプロジェクトを始めて、\ `マニュアル </ja/>`_\ の残りと\ `APIマニュアル <http://api.cakephp.org>`_\ を使いましょう。
+基本的なアプリケーションの作成が終わったので、現実世界のアプリを作る準備が整いました。自分のプロジェクトを始めて、\ `マニュアル </ja/>`_\ の残りと\ `APIマニュアル <https://api.cakephp.org>`_\ を使いましょう。
 
 助けが必要なら、#cakephpに来てください。（ただし英語。日本語なら、cakephp.jpへどうぞ。）CakePHPにようこそ。
 
@@ -628,16 +628,16 @@ Suggested Follow-up Reading
 These are common tasks people learning CakePHP usually want to study
 next:
 
-#. `Layouts: <http://book.cakephp.org/view/1080/Layouts>`_ Customizing
+#. `Layouts: <https://book.cakephp.org/view/1080/Layouts>`_ Customizing
    your website layout
-#. `Elements: <http://book.cakephp.org/view/1081/Elements>`_ Including
+#. `Elements: <https://book.cakephp.org/view/1081/Elements>`_ Including
    and reusing view snippets
-#. `Scaffolding: <http://book.cakephp.org/view/1103/Scaffolding>`_
+#. `Scaffolding: <https://book.cakephp.org/view/1103/Scaffolding>`_
    Prototyping before creating code
-#. `Baking: <http://book.cakephp.org/view/1522/Code-Generation-with-Bake>`_
+#. `Baking: <https://book.cakephp.org/view/1522/Code-Generation-with-Bake>`_
    Generating basic
-   `CRUD <http://en.wikipedia.org/wiki/Create%2C_read%2C_update_and_delete>`_
+   `CRUD <https://en.wikipedia.org/wiki/Create%2C_read%2C_update_and_delete>`_
    code
-#. `Authentication: <http://book.cakephp.org/view/1250/Authentication>`_
+#. `Authentication: <https://book.cakephp.org/view/1250/Authentication>`_
    User registration and login
 

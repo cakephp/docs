@@ -153,7 +153,7 @@ Association des types de données par Base de données
 ----------------------------------------------------
 
 Chaque
-`RDMS <http://en.wikipedia.org/wiki/Relational_database_management_system>`_
+`RDMS <https://en.wikipedia.org/wiki/Relational_database_management_system>`_
 (*Relational Database Management System*, en français SGBD : Système de
 gestion de bases de données relationnelles) définit les types de données
 de manières un peu différentes. Avec une classe "datasource" pour chaque
@@ -504,7 +504,7 @@ Les clés primaires sont normalement définies par un champ INT. La base
 de donnée autoincrémente le champ, en commençant par 1, pour chaque
 nouvel enregistrement ajouté. De façon alternative, si vous spécifiez
 votre clé primaire comme CHAR(36) ou BINARY(36), CakePHP génèrera
-automatiquement des `UUIDs <http://en.wikipedia.org/wiki/UUID>`_ lorsque
+automatiquement des `UUIDs <https://en.wikipedia.org/wiki/UUID>`_ lorsque
 de nouveaux enregistrements sont créés.
 
 Un UUID est une chaine de 32 bytes séparés par quatre tirets, pour un
@@ -3721,7 +3721,7 @@ peuvent modifier son comportement par défaut.
 
 Pour une liste complète des attributs du modèle et leurs descriptions,
 visitez l'API CakePHP :
-`http://api.cakephp.org/class/model <http://api.cakephp.org/class/model>`_.
+`https://api.cakephp.org/class/model <https://api.cakephp.org/class/model>`_.
 
 useDbConfig
 -----------

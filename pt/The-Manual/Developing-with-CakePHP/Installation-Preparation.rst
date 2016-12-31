@@ -21,7 +21,7 @@ baixar o arquivo (zip/tar.gz/tar.bz2) ou você pode baixar o código do
 repositório GIT.
 
 Para pegar a cópia estável, visite o site
-`http://www.cakephp.org <http://www.cakephp.org>`_. Lá haverá um link
+`https://cakephp.org <https://cakephp.org>`_. Lá haverá um link
 chamado “Download Now!” para baixar.
 
 Todas as versões do CakePHP também são armazenados no CakeForge, a casa
@@ -33,7 +33,7 @@ CakePHP estão disponíveis em
 Uma alternativa são as compilações do tipo nighlyt, que incluem
 correções de bugs e melhorias do último minuto (bem, do último dia).
 Elas podem ser acessadas a partir do índice de download aqui:
-`http://cakephp.org/downloads/index/nightly <http://cakephp.org/downloads/index/nightly>`_.
+`https://cakephp.org/downloads/index/nightly <https://cakephp.org/downloads/index/nightly>`_.
 Para atualizações verdadeiramente do último minuto, você pode buscá-las
 diretamente do branch de desenvolvimento no repositório GIT aqui:
 `http://code.cakephp.org/source <http://code.cakephp.org/source>`_.

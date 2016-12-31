@@ -7,8 +7,8 @@ have read the :doc:`/The-Manual/Tutorials-Examples/Blog` tutorial, and you are f
 with :doc:`/The-Manual/Core-Console-Applications/Code-Generation-with-Bake`. You should have
 some experience with CakePHP, and be familiar with MVC concepts. This
 tutorial is a brief introduction to the
-```AuthComponent`` <http://api.cakephp.org/class/auth-component>`_ and
-```AclComponent`` <http://api.cakephp.org/class/acl-component>`_.
+```AuthComponent`` <https://api.cakephp.org/class/auth-component>`_ and
+```AclComponent`` <https://api.cakephp.org/class/acl-component>`_.
 
 What you will need
 
@@ -29,7 +29,7 @@ Preparing our Application
 First, let's get a copy of fresh Cake code.
 
 To get a fresh download, visit the CakePHP project at Cakeforge:
-http://github.com/cakephp/cakephp/downloads and download the stable
+https://github.com/cakephp/cakephp/downloads and download the stable
 release. For this tutorial you need the latest 1.3 release.
 
 You can also checkout/export a fresh copy of our trunk code at:

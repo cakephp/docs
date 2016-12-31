@@ -362,7 +362,7 @@ cc
 「deep」キーにはブール値(boolean)をセットします。 true
 にセットした場合、バリデーションはクレジットカードのルーン・アルゴリズム(Luhn
 algorithm,
-`http://en.wikipedia.org/wiki/Luhn\_algorithm <http://en.wikipedia.org/wiki/Luhn_algorithm>`_)を用いてチェックします。この項目のデフォルトは
+`https://en.wikipedia.org/wiki/Luhn\_algorithm <https://en.wikipedia.org/wiki/Luhn_algorithm>`_)を用いてチェックします。この項目のデフォルトは
 false です。
 
 「regex」キーにはクレジットカード番号であるかを検証するための、独自の正規表現を設定します。

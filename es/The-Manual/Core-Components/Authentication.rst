@@ -301,11 +301,11 @@ action
 ``action (string $action = ':controller/:action')``
 
 Si estas usando
-`ACOs <http://book.cakephp.org/es/view/465/Understanding-How-ACL-Works>`_
+`ACOs <https://book.cakephp.org/es/view/465/Understanding-How-ACL-Works>`_
 como parte de tu estructura
-`ACL <http://book.cakephp.org/es/view/465/Understanding-How-ACL-Works>`_,
+`ACL <https://book.cakephp.org/es/view/465/Understanding-How-ACL-Works>`_,
 puedes obtener la ruta al nodo del
-`ACO <http://book.cakephp.org/es/view/465/Understanding-How-ACL-Works>`_
+`ACO <https://book.cakephp.org/es/view/465/Understanding-How-ACL-Works>`_
 que está enlazado a un par controlador/acción particular.
 
 ::
@@ -822,7 +822,7 @@ AclComponent::check(). An isAuthorized function is not needed.
 
 By using crud, Auth will make use of ACL and check with
 AclComponent::check(). Actions should be mapped to CRUD (see
-`mapActions <http://book.cakephp.org/view/1260/mapActions>`_).
+`mapActions <https://book.cakephp.org/view/1260/mapActions>`_).
 
 sessionKey
 ----------
@@ -848,7 +848,7 @@ vista que deseas mostrar y retornar cuando la sesión es inválida o ha
 expirado.
 
 Como con cualquier parte de CakePHP, asegúrate de revisar la `clase
-AuthComponent <http://api.cakephp.org/class/auth-component>`_ para
+AuthComponent <https://api.cakephp.org/class/auth-component>`_ para
 mayores detalles.
 
 authenticate

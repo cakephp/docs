@@ -36,7 +36,7 @@ File
 
 APC
 
-APC エンジンは `Alternative PHP Cache <http://php.net/apc>`_
+APC エンジンは `Alternative PHP Cache <https://secure.php.net/apc>`_
 オペコードキャッシュの実装です。XCache
 と同様にこのエンジンはコンパイルされた PHP
 オペコードをキャッシュします。

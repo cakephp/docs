@@ -21,7 +21,7 @@ pouvez aider :
 
 #. Cliquez sur le lien Editer de la section que vous souhaitez modifier.
 #. Connectez-vous au Cookbook si nécessaire, avec votre compte
-   `Bakery <http://bakery.cakephp.org/>`_. Tout le monde peut obtenir un
+   `Bakery <https://bakery.cakephp.org/>`_. Tout le monde peut obtenir un
    compte Bakery !
 #. Relisez s'il vous plaît `les directives à
    respecter </fr/view/482/contributing-to-the-cookbook>`_ lors du dépôt
@@ -58,7 +58,7 @@ Astuces pour les traducteurs :
 -  Utilisez le menu *todo* (tout en haut à droite) pour voir quel partie
    réclame une attention particulière dans votre langue.
 -  Utilisez `les Formes
-   informelles <http://en.wikipedia.org/wiki/Register_%28linguistics%29>`_.
+   informelles <https://en.wikipedia.org/wiki/Register_%28linguistics%29>`_.
 -  Traduisez en même temps le contenu et le titre d'une section.
 -  Traduisez également les liens des références croisées pour qu'elles
    pointent vers des sections traduites (ou à traduire).
@@ -69,7 +69,7 @@ Astuces pour les traducteurs :
    'remontée' de la modification, votre soumission ne sera pas
    acceptée).
 -  N'utilisez pas `les entités
-   HTML <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
+   HTML <https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
    pour les caractères accentués, le manuel utilise l'UTF-8.
 -  Si vous avez besoin d'écrire un terme anglais, entourez-le avec des
    balises <em>. Par exemple : "abcd abcd *Controller* abcd..." or "abcd

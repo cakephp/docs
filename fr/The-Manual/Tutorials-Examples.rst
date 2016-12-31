@@ -6,7 +6,7 @@ typiques pour voir comment toutes les pièces s'assemblent.
 
 Sinon, vous pouvez vous référer à la `Forge de
 CakePHP <http://cakeforge.org/>`_ et à la
-`Boulangerie <http://bakery.cakephp.org/>`_ pour des applications et
+`Boulangerie <https://bakery.cakephp.org/>`_ pour des applications et
 composants existants. N'oubliez pas que vous pouvez également voir `le
 code source de ce "livre de cuisine" <http://thechaw.com/cakebook/>`_.
 

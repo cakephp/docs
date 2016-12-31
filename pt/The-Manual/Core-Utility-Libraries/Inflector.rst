@@ -88,6 +88,6 @@ homem/homens).
 
 As regras de pluralização são definidas no arquivo
 app/config/inflections.php. O plugin
-`cake\_ptbr <http://github.com/jrbasso/cake_ptbr/tree/master>`_ adiciona
+`cake\_ptbr <https://github.com/jrbasso/cake_ptbr/tree/master>`_ adiciona
 (entre outras coisas) várias regras de pluralização para português do
 Brasil.

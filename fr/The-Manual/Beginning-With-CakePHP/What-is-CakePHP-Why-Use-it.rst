@@ -1,13 +1,13 @@
 Qu'est-ce que CakePHP ? Pourquoi l'utiliser ?
 #############################################
 
-`CakePHP <http://www.cakephp.org/>`_ est un
-`framework <http://en.wikipedia.org/wiki/Application_framework>`_ de
+`CakePHP <https://cakephp.org/>`_ est un
+`framework <https://en.wikipedia.org/wiki/Application_framework>`_ de
 `développement
-rapide <http://en.wikipedia.org/wiki/Rapid_application_development>`_
+rapide <https://en.wikipedia.org/wiki/Rapid_application_development>`_
 pour `PHP <http://www.php.net/>`_,
-`gratuit <http://en.wikipedia.org/wiki/MIT_License>`_ et
-`open-source <http://en.wikipedia.org/wiki/Open_source>`_. C’est un
+`gratuit <https://en.wikipedia.org/wiki/MIT_License>`_ et
+`open-source <https://en.wikipedia.org/wiki/Open_source>`_. C’est un
 ensemble de briques élémentaires pour les programmeurs qui créent des
 applications web. Notre objectif principal est de vous permettre de
 travailler de manière rapide et structurée, sans toutefois perdre en
@@ -23,7 +23,7 @@ entrailles » de votre application.
 
 CakePHP dispose d’une `équipe de
 développement <http://cakephp.lighthouseapp.com/contributors>`_ et d’une
-`communauté <http://cakephp.org/feeds>`_ actives, qui donnent au projet
+`communauté <https://cakephp.org/feeds>`_ actives, qui donnent au projet
 une forte valeur ajoutée.
 
 En plus de vous éviter la ré-invention de la roue, l’utilisation de
@@ -33,35 +33,35 @@ qu’il peut être constamment amélioré.
 Voici un aperçu rapide des caractéristiques que vous apprécierez en
 utilisant CakePHP :
 
--  `Communauté <http://cakephp.org/feeds>`_ active et sympathique
--  Système de `license <http://en.wikipedia.org/wiki/MIT_License>`_
+-  `Communauté <https://cakephp.org/feeds>`_ active et sympathique
+-  Système de `license <https://en.wikipedia.org/wiki/MIT_License>`_
    souple
 -  Compatible avec les versions 4 et 5 de `PHP <http://www.php.net/>`_
 -  Fonctions
-   `CRUD <http://en.wikipedia.org/wiki/Create%2C_read%2C_update_and_delete>`_
+   `CRUD <https://en.wikipedia.org/wiki/Create%2C_read%2C_update_and_delete>`_
    (create, read, update, delete) intégrées pour les interactions avec
    la base de données
--  `Scaffolding <http://en.wikipedia.org/wiki/Scaffold_%28programming%29>`_
+-  `Scaffolding <https://en.wikipedia.org/wiki/Scaffold_%28programming%29>`_
    (maquettage rapide) d’application
 -  Génération de code
 -  Architecture
-   `MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_
+   `MVC <https://en.wikipedia.org/wiki/Model-view-controller>`_
 -  Dispatcheur de requêtes avec des URLs propres et personnalisables
    grâce un système de routes
--  `Validation <http://en.wikipedia.org/wiki/Data_validation>`_ intégrée
+-  `Validation <https://en.wikipedia.org/wiki/Data_validation>`_ intégrée
    des données
 -  Système de
-   `template <http://en.wikipedia.org/wiki/Web_template_system>`_ rapide
+   `template <https://en.wikipedia.org/wiki/Web_template_system>`_ rapide
    et souple (syntaxe PHP avec des Helpers)
 -  Helpers (assistants) de vue pour
-   `AJAX <http://en.wikipedia.org/wiki/Ajax_%28programming%29>`_,
+   `AJAX <https://en.wikipedia.org/wiki/Ajax_%28programming%29>`_,
    JavaScript, formulaires HTML...
 -  Components (composants) intégrés : Email, Cookie, Security, Session
    et Request Handling
 -  Système de contrôle d’accès
-   `ACL <http://en.wikipedia.org/wiki/Access_control_list>`_ flexible
+   `ACL <https://en.wikipedia.org/wiki/Access_control_list>`_ flexible
 -  Nettoyage des données
--  Système de `cache <http://en.wikipedia.org/wiki/Web_cache>`_ souple
+-  Système de `cache <https://en.wikipedia.org/wiki/Web_cache>`_ souple
 -  Localisation et internationalisation
 -  Fonctionne sur n’importe quelle arborescence de site web, avec un
    zest de configuration `Apache <http://httpd.apache.org/>`_ pas très

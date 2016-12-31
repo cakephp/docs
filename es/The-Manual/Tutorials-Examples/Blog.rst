@@ -563,7 +563,7 @@ borra la variable de sesión correspondiente. La función
 dirección URL. El parámetro ``array('action'=>'index)`` se traduce en la
 URL /posts es decir, la acción index del controlador posts. Puede
 referirse a
-`Router::url <http://api.cakephp.org/class/router#method-Routerurl>`_ en
+`Router::url <https://api.cakephp.org/class/router#method-Routerurl>`_ en
 función de la API para ver los formatos en los que se puede especificar
 una dirección URL para diversas funciones de cake.
 
@@ -876,7 +876,7 @@ guía para la construcción de aplicaciones con más ricas-características.
 
 Ahora que ha creado la base de una aplicación Cake está listo para algo
 real. Comience su propio proyecto, lea el resto del `Manual </es/>`_ y
-`API <http://api.cakephp.org>`_.
+`API <https://api.cakephp.org>`_.
 
 Si necesita ayuda, vengan a vernos en el #cakephp. Bienvenido a CakePHP!
 
@@ -886,16 +886,16 @@ Suggested Follow-up Reading
 These are common tasks people learning CakePHP usually want to study
 next:
 
-#. `Layouts: <http://book.cakephp.org/view/1080/Layouts>`_ Customizing
+#. `Layouts: <https://book.cakephp.org/view/1080/Layouts>`_ Customizing
    your website layout
-#. `Elements: <http://book.cakephp.org/view/1081/Elements>`_ Including
+#. `Elements: <https://book.cakephp.org/view/1081/Elements>`_ Including
    and reusing view snippets
-#. `Scaffolding: <http://book.cakephp.org/view/1103/Scaffolding>`_
+#. `Scaffolding: <https://book.cakephp.org/view/1103/Scaffolding>`_
    Prototyping before creating code
-#. `Baking: <http://book.cakephp.org/view/1522/Code-Generation-with-Bake>`_
+#. `Baking: <https://book.cakephp.org/view/1522/Code-Generation-with-Bake>`_
    Generating basic
-   `CRUD <http://en.wikipedia.org/wiki/Create%2C_read%2C_update_and_delete>`_
+   `CRUD <https://en.wikipedia.org/wiki/Create%2C_read%2C_update_and_delete>`_
    code
-#. `Authentication: <http://book.cakephp.org/view/1250/Authentication>`_
+#. `Authentication: <https://book.cakephp.org/view/1250/Authentication>`_
    User registration and login
 

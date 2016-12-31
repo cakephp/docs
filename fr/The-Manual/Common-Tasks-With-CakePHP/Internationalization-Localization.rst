@@ -23,7 +23,7 @@ Localiser votre Application
 Il n'y a que quelques étapes à franchir pour passer d'une application
 uni-langue à une application multi-langue, dont la première est
 d'utiliser la fonction
-```__()`` <http://api.cakephp.org/file/basics.php#function-__>`_ dans
+```__()`` <https://api.cakephp.org/file/basics.php#function-__>`_ dans
 votre code. Ci-dessous, un exemple de code pour une application
 uni-langue :
 
@@ -33,7 +33,7 @@ uni-langue :
 
 Pour localiser votre code, tout ce que vous devez faire est d'inclure
 vos chaînes de caractères dans `la fonction de
-traduction <http://api.cakephp.org/file/basics.php#function-__>`_ comme
+traduction <https://api.cakephp.org/file/basics.php#function-__>`_ comme
 suit :
 
 ::
@@ -43,12 +43,12 @@ suit :
 Si vous ne faites rien de plus, ces deux bouts de codes donneront un
 résultat identique - ils renverront le même contenu au navigateur. La
 fonction
-```__()`` <http://api.cakephp.org/file/basics.php#function-__>`_
+```__()`` <https://api.cakephp.org/file/basics.php#function-__>`_
 traduira la chaîne passée si une traduction est disponible, sinon elle
 la renverra non modifiée. Cela fonctionne exactement comme les autres
-implémentations `Gettext <http://en.wikipedia.org/wiki/Gettext>`_ (comme
+implémentations `Gettext <https://en.wikipedia.org/wiki/Gettext>`_ (comme
 les autres fonctions de traductions, comme
-```__d()`` <http://api.cakephp.org/file/basics.php#function-__d>`_,\ ```__n()`` <http://api.cakephp.org/file/basics.php#function__n>`_
+```__d()`` <https://api.cakephp.org/file/basics.php#function-__d>`_,\ ```__n()`` <https://api.cakephp.org/file/basics.php#function__n>`_
 etc)
 
 Après avoir préparé votre code pour le multi-langue, l'étape suivante
@@ -57,7 +57,7 @@ pot <http://fr.wikipedia.org/wiki/Gettext>`_, qui est le template pour
 toutes les chaînes traduisibles de votre application. Pour générer votre
 (vos) fichier(s) pot, tout ce que vous avez à faire est de lancer `la
 tâche i18n de la console
-Cake <http://book.cakephp.org/fr/view/620/Core-Console-Applications>`_,
+Cake <https://book.cakephp.org/fr/view/620/Core-Console-Applications>`_,
 qui va chercher partout dans votre code où vous avez utilisé une
 fonction de traduction, et générer le(s) fichier(s) pot pour vous. Vous
 pouvez (et devez) relancer cette tâche console à chaque fois que vous

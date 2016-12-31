@@ -757,7 +757,7 @@ uma inválida ou sessão expirada.
 
 Como qualquer parte do CakePHP, As with any part of CakePHP,
 certifique-se de dar uma olhada na `classe do
-AuthComponent <http://api.cakephp.org/class/auth-component>`_ para mais
+AuthComponent <https://api.cakephp.org/class/auth-component>`_ para mais
 informações sobre este componente.
 
 authenticate

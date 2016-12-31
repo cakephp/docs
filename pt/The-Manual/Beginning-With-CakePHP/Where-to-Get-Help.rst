@@ -4,7 +4,7 @@ Onde obter ajuda?
 Site oficial do CakePHP
 =======================
 
-`http://www.cakephp.org <http://www.cakephp.org>`_
+`https://cakephp.org <https://cakephp.org>`_
 
 O site oficial do CakePHP é sempre o melhor lugar para visitar. Há links
 para sites de desenvolvedores, *screencasts*, oportunidades de doações e
@@ -13,7 +13,7 @@ para sites de desenvolvedores, *screencasts*, oportunidades de doações e
 O Cookbook
 ==========
 
-`http://book.cakephp.org </pt/>`_
+`https://book.cakephp.org </pt/>`_
 
 Este manual deverá ser provavelmente o primeiro lugar que você vá para
 obter respostas. Tal como acontece com muitos outros projetos de código
@@ -25,7 +25,7 @@ ajuda relâmpago. Tanto o manual e a API tem uma componente online.
 The Bakery
 ==========
 
-`http://bakery.cakephp.org <http://bakery.cakephp.org>`_
+`https://bakery.cakephp.org <https://bakery.cakephp.org>`_
 
 O CakePHP Bakery é uma câmara de compensação para todas as coisas de
 CakePHP. Locais para tutoriais, estudos de casos, exemplos e código. Uma
@@ -36,7 +36,7 @@ instantaneamente.
 A API
 =====
 
-`http://api.cakephp.org/ <http://api.cakephp.org/>`_
+`https://api.cakephp.org/ <https://api.cakephp.org/>`_
 
 Direto ao ponto e linha reta dos *Code Developers*, o CakePHP API
 (Application Programming Interface) é a mais completa documentação
@@ -56,7 +56,7 @@ louvável plug-in, verifique o CakeForge.
 Os Test Cases
 =============
 
-`http://api.cakephp.org/tests <http://api.cakephp.org/tests>`_
+`https://api.cakephp.org/tests <https://api.cakephp.org/tests>`_
 
 Se você alguma vez já sentiu que a informação fornecida na API não é
 suficiente, verifique o código de casos de teste fornecido com CakePHP

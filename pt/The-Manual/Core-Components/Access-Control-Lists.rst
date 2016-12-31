@@ -470,7 +470,7 @@ formato de árvore. O componente ACL usa o `Behavior
 Tree </pt/view/91/tree-behavior>`_ do Cake para gerenciar as heranças
 das árvores. Os arquivos de modelo de classes para ACL estão todos
 compilados em um único arquivo
-`db\_acl.php <http://api.cakephp.org/1.2/cake_2libs_2model_2db__acl_8php-source.html>`_.
+`db\_acl.php <https://api.cakephp.org/1.2/cake_2libs_2model_2db__acl_8php-source.html>`_.
 
 Agora que você está sabendo tudo, vamos começar a trabalhar criando
 algumas árvores ARO e ACO.

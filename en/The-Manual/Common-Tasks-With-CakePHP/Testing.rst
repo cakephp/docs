@@ -55,7 +55,7 @@ Running Core test cases
 
 After installing Simpletest, you can run the core test cases. They are
 part of every packaged release and can also be found in the `git
-repository <http://github.com/cakephp/cakephp>`_.
+repository <https://github.com/cakephp/cakephp>`_.
 
 The tests can then be accessed by browsing to
 http://your.cake.domain/test.php

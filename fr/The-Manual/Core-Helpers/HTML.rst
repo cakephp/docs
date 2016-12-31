@@ -371,7 +371,7 @@ Affichera :
     </a>
 
 Vous pouvez aussi vérifier la méthode
-`HtmlHelper::url <http://book.cakephp.org/fr/view/1448/url>`_ pour avoir
+`HtmlHelper::url <https://book.cakephp.org/fr/view/1448/url>`_ pour avoir
 différents exemples sur les types d'url.
 
 tag
@@ -604,7 +604,7 @@ for specific <td>-attributes.
     <tr class="darker"><td>Yellow</td><td>Banana</td></tr>
 
 `View more details about the tableCells function in the
-API <http://api.cakephp.org/class/html-helper#method-HtmlHelpertableCells>`_
+API <https://api.cakephp.org/class/html-helper#method-HtmlHelpertableCells>`_
 
 url
 ---
@@ -678,7 +678,7 @@ URL with GET params and named anchor
     /posts/search?foo=bar#first
 
 For further information check
-`Router::url <http://api.cakephp.org/class/router#method-Routerurl>`_ in
+`Router::url <https://api.cakephp.org/class/router#method-Routerurl>`_ in
 the API.
 
 Changing the tags output by HtmlHelper

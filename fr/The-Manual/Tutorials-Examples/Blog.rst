@@ -878,7 +878,7 @@ applications plus riches en fonctionnalités.
 
 Maintenant que vous avez créé une application Cake basique, vous êtes
 prêt pour les choses sérieuses. Lancez votre propre projet, lisez le
-reste du `Manuel </fr/fr>`_ et `l'API <http://api.cakephp.org>`_.
+reste du `Manuel </fr/fr>`_ et `l'API <https://api.cakephp.org>`_.
 
 Si vous avez besoin d'aide, venez nous voir sur le canal irc #cakephp.
 Bienvenue sur CakePHP !
@@ -889,16 +889,16 @@ Prochaines lectures suggérrées
 Voici les prochains sujets sur lesquels se penchent le plus souvent les
 apprentis cuisiniers :
 
-#. `Gabarits : <http://book.cakephp.org/fr/view/1080/Gabarits-layouts>`_
+#. `Gabarits : <https://book.cakephp.org/fr/view/1080/Gabarits-layouts>`_
    Personnaliser les Gabarits (Layouts) de votre application
-#. `Eléments : <http://book.cakephp.org/fr/view/1081/Elements>`_ Inclure
+#. `Eléments : <https://book.cakephp.org/fr/view/1081/Elements>`_ Inclure
    et ré-utiliser les portions de vues
-#. `Scaffolding : <http://book.cakephp.org/fr/view/1103/Scaffolding>`_
+#. `Scaffolding : <https://book.cakephp.org/fr/view/1103/Scaffolding>`_
    Construire une ébauche d'application sans avoir à coder
 #. `Utiliser Bake
-   : <http://book.cakephp.org/fr/view/1522/Generation-de-code-avec-Bake>`_
+   : <https://book.cakephp.org/fr/view/1522/Generation-de-code-avec-Bake>`_
    Générer un code `CRUD <http://fr.wikipedia.org/wiki/CRUD>`_ basique
 #. `Authentification
-   : <http://book.cakephp.org/fr/view/1250/Authentification>`_
+   : <https://book.cakephp.org/fr/view/1250/Authentification>`_
    Enregistrement et connexion d'utilisateurs
 

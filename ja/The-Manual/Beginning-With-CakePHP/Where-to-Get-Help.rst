@@ -4,7 +4,7 @@
 公式 CakePHP ウェブサイト
 =========================
 
-`http://www.cakephp.org <http://www.cakephp.org>`_
+`https://cakephp.org <https://cakephp.org>`_
 
 公式 CakePHP
 ウェブサイトは、いつでも見に行く価値のある素敵な場所です。よく使う開発ツール、スクリーンキャスト、寄付の方法、ダウンロードなどへのリンクがあります。
@@ -12,14 +12,14 @@
 The Cookbook
 ============
 
-`http://book.cakephp.org </ja/>`_
+`https://book.cakephp.org </ja/>`_
 
 このマニュアルは、疑問の解決のための最初の場所になるはずです。他のさまざまなオープンソースプロジェクトと同じように、常に新しい仲間が入ってきます。疑問の答えをこの場所で探してみてください。時間がかかるかもしれませんが、貴重な知識を多く身につけることができるでしょう。また、どんなサポートがあるのかについても見えてくるはずです。マニュアルとAPIの両方の情報がオンラインで入手可能です。
 
 The Bakery
 ==========
 
-`http://bakery.cakephp.org <http://bakery.cakephp.org>`_
+`https://bakery.cakephp.org <https://bakery.cakephp.org>`_
 
 CakePHPのBakeryは、CakePHPに関する情報中継所（clearing
 house）です。チュートリアル、事例研究、コード例などについて情報が得られます。CakePHPに関する理解が深まったらログインして知識をコミュニティと共有し、名声と富を手に入れましょう。
@@ -27,7 +27,7 @@ house）です。チュートリアル、事例研究、コード例などにつ
 The API
 =======
 
-`http://api.cakephp.org/ <http://api.cakephp.org/>`_
+`https://api.cakephp.org/ <https://api.cakephp.org/>`_
 
 直接的な答えがコア開発者から直接得られるので、CakePHP API (Application
 Programming
@@ -46,7 +46,7 @@ CakeForgeは、CakePHPプロジェクトを他の人に公開できる、もう�
 The Test Cases
 ==============
 
-`http://api.cakephp.org/tests <http://api.cakephp.org/tests>`_
+`https://api.cakephp.org/tests <https://api.cakephp.org/tests>`_
 
 API で提供される情報が十分ではないと感じる場合、CakePHP 1.3
 で提供されるテストケースのコードをチェックしてください。関数の実践的な例やクラスのメンバーの使用法として使用できます。コアのテストケースを取得するには、gitリポジトリから1.3ブランチをダウンロードするかチェックアウトする必要があります。テストケースは以下の場所に配置されているでしょう。

@@ -128,7 +128,7 @@ can point to an external domain.
     //Output:
     <form method="get" action="http://www.google.com/search">
 
-Also check `HtmlHelper::url <http://book.cakephp.org/view/1448/url>`_
+Also check `HtmlHelper::url <https://book.cakephp.org/view/1448/url>`_
 method for more examples of different types of urls.
 
 $options[‘default’]
@@ -926,7 +926,7 @@ aussehen.
 Dieses Array wird von PHP selbst erzeugt. Für weitere Informationen, wie
 PHP mit der Verarbeitung von File-Feldern umgeht, lohnt sich `ein Blick
 auf das File-Upload-Kapitel der
-PHP-Dokumentation <http://php.net/features.file-upload>`_.
+PHP-Dokumentation <https://secure.php.net/features.file-upload>`_.
 
 Validating Uploads
 ------------------
@@ -936,7 +936,7 @@ validate whether a file has been successfully uploaded.
 
 ::
 
-    // Based on comment 8 from: http://bakery.cakephp.org/articles/view/improved-advance-validation-with-parameters
+    // Based on comment 8 from: https://bakery.cakephp.org/articles/view/improved-advance-validation-with-parameters
 
     function isUploadedFile($params){
         $val = array_shift($params);

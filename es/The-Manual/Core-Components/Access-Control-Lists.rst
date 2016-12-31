@@ -466,7 +466,7 @@ componente ACL utiliza el `Comportamiento de
 Árbol </es/view/91/tree-behavior>`_ para gestionar la herencia dentro
 del árbol. Las clases pertenecientes a los modelos de ACL están
 contenidas en un único archivo
-`db\_acl.php <http://api.cakephp.org/1.2/cake_2libs_2model_2db__acl_8php-source.html>`_.
+`db\_acl.php <https://api.cakephp.org/1.2/cake_2libs_2model_2db__acl_8php-source.html>`_.
 
 Ahora que ya hemos configurado todo, creemos algunos árboles de AROs y
 ACOs

@@ -140,7 +140,7 @@ Controller Attributes
 
 For a complete list of controller attributes and their descriptions
 visit the CakePHP API. Check out
-`http://api.cakephp.org/class/controller <http://api13.cakephp.org/class/controller>`_.
+`https://api.cakephp.org/class/controller <http://api13.cakephp.org/class/controller>`_.
 
 $name
 -----

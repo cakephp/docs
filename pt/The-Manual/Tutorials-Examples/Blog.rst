@@ -42,7 +42,7 @@ Download do CakePHP
 Primeiro, vamos fazer o download do CakePHP.
 
 Para fazer o download, acesse o projeto CakePHP no github:
-`http://github.com/cakephp/cakephp/downloads <http://github.com/cakephp/cakephp/downloads>`_
+`https://github.com/cakephp/cakephp/downloads <https://github.com/cakephp/cakephp/downloads>`_
 e faça o download da última versão estável do 1.3.
 
 Você também pode clonar o repositório usando o
@@ -580,7 +580,7 @@ exibe a mensagem e limpa a variável de sessão correspondente. O método
 outra URL. O parâmetro ``array('action'=>'index)`` é convertido para a
 URL /posts, i.e., a action index do controller posts. Você pode conferir
 a função
-`Router::url <http://api.cakephp.org/class/router#method-Routerurl>`_ na
+`Router::url <https://api.cakephp.org/class/router#method-Routerurl>`_ na
 API para ver os formatos que você pode usar ao especificar uma URL para
 várias funções do CakePHP.
 
@@ -893,7 +893,7 @@ deste manual como guia para construir mais aplicações ricas em recursos.
 
 Agora que você criou uma aplicação básica em Cake, você está pronto para
 a coisa real. Comece seu próprio projeto, leia o restante do
-`Manual </pt/>`_ e da `API <http://api.cakephp.org>`_.
+`Manual </pt/>`_ e da `API <https://api.cakephp.org>`_.
 
 E se você precisar de ajuda, nos vemos no canal #cakephp (e no
 #cakephp-pt). Seja bem-vindo ao CakePHP!
@@ -904,16 +904,16 @@ Suggested Follow-up Reading
 These are common tasks people learning CakePHP usually want to study
 next:
 
-#. `Layouts: <http://book.cakephp.org/view/1080/Layouts>`_ Customizing
+#. `Layouts: <https://book.cakephp.org/view/1080/Layouts>`_ Customizing
    your website layout
-#. `Elements: <http://book.cakephp.org/view/1081/Elements>`_ Including
+#. `Elements: <https://book.cakephp.org/view/1081/Elements>`_ Including
    and reusing view snippets
-#. `Scaffolding: <http://book.cakephp.org/view/1103/Scaffolding>`_
+#. `Scaffolding: <https://book.cakephp.org/view/1103/Scaffolding>`_
    Prototyping before creating code
-#. `Baking: <http://book.cakephp.org/view/1522/Code-Generation-with-Bake>`_
+#. `Baking: <https://book.cakephp.org/view/1522/Code-Generation-with-Bake>`_
    Generating basic
-   `CRUD <http://en.wikipedia.org/wiki/Create%2C_read%2C_update_and_delete>`_
+   `CRUD <https://en.wikipedia.org/wiki/Create%2C_read%2C_update_and_delete>`_
    code
-#. `Authentication: <http://book.cakephp.org/view/1250/Authentication>`_
+#. `Authentication: <https://book.cakephp.org/view/1250/Authentication>`_
    User registration and login
 

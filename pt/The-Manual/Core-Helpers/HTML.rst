@@ -390,7 +390,7 @@ Will output:
         <img src="/img/recipes/6.jpg" alt="Brownies" />
     </a>
 
-Also check `HtmlHelper::url <http://book.cakephp.org/view/1448/url>`_
+Also check `HtmlHelper::url <https://book.cakephp.org/view/1448/url>`_
 method for more examples of different types of urls.
 
 tag
@@ -633,7 +633,7 @@ for specific <td>-attributes.
     <tr class="darker"><td>Yellow</td><td>Banana</td></tr>
 
 `View more details about the tableCells function in the
-API <http://api.cakephp.org/class/html-helper#method-HtmlHelpertableCells>`_
+API <https://api.cakephp.org/class/html-helper#method-HtmlHelpertableCells>`_
 
 url
 ---
@@ -707,7 +707,7 @@ URL with GET params and named anchor
     /posts/search?foo=bar#first
 
 For further information check
-`Router::url <http://api.cakephp.org/class/router#method-Routerurl>`_ in
+`Router::url <https://api.cakephp.org/class/router#method-Routerurl>`_ in
 the API.
 
 Alterando a saída de tags pelo HtmlHelper

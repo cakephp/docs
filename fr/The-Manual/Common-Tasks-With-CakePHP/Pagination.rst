@@ -129,7 +129,7 @@ de pagination disponible dans les vues n'a pas toujours besoin d'être
 construit de cette façon.
 
 Voyez les détails dans la section
-`PaginatorHelper <http://api.cakephp.org/class/paginator-helper>`_ de
+`PaginatorHelper <https://api.cakephp.org/class/paginator-helper>`_ de
 l'API.
 
 Comme mentionné précédemment, l'assistant de pagination offre

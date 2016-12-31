@@ -481,7 +481,7 @@ tables, read up on modified database tree traversal. The ACL component
 uses CakePHP's `Tree Behavior </de/view/91/tree-behavior>`_ to manage
 the trees' inheritances. The model class files for ACL are all compiled
 in a single file
-`db\_acl.php <http://api.cakephp.org/file/cake/libs/model/db_acl.php>`_.
+`db\_acl.php <https://api.cakephp.org/file/cake/libs/model/db_acl.php>`_.
 
 Now that we're all set up, let's work on creating some ARO and ACO
 trees.

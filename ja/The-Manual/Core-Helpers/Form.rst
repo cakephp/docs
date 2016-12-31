@@ -765,7 +765,7 @@ select タイプ、すなわち select, date, time, datetime
 
 ::
 
-    // http://bakery.cakephp.org/articles/view/improved-advance-validation-with-parameters のコメント 8 に基づきます
+    // https://bakery.cakephp.org/articles/view/improved-advance-validation-with-parameters のコメント 8 に基づきます
 
     function isUploadedFile($params){
         $val = array_shift($params);

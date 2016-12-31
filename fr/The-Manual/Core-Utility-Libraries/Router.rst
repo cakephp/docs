@@ -7,6 +7,6 @@ arrays (eg. array('controller'=>'posts', 'action'=>'index')) to string
 urls.
 
 Read more about ways to configure the Router here:
-`http://book.cakephp.org/1.3/fr/The-Manual/Developing-with-CakePHP/Configuration.html#configuration-des-routes <http://book.cakephp.org/1.3/fr/The-Manual/Developing-with-CakePHP/Configuration.html#configuration-des-routes>`_
+`https://book.cakephp.org/1.3/fr/The-Manual/Developing-with-CakePHP/Configuration.html#configuration-des-routes <https://book.cakephp.org/1.3/fr/The-Manual/Developing-with-CakePHP/Configuration.html#configuration-des-routes>`_
 
 Router also include other utility methods for dealing with urls.
