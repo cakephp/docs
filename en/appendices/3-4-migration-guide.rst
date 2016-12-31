@@ -118,6 +118,53 @@ Cake\Console\ConsoleOptionParse
     * ``command()``
     * ``description()``
     * ``epliog()``
+Cake\Database\Connection
+    * ``driver()``
+    * ``schemaCollection()``
+    * ``useSavePoints()`` (now ``enableSavePoints()``/``isSavePointsEnabled()``)
+Cake\Database\Driver
+    * ``autoQuoting`` (now ``enableAutoQuoting()``/``isAutoQuotingEnabled()``)
+Cake\Database\Expression\FunctionExpression
+    * ``name()``
+Cake\Database\Expression\QueryExpression
+    * ``tieWith()`` (now ``setConjunction()``/``getConjunction()``)
+Cake\Database\Expression\ValuesExpression
+    * ``columns()``
+    * ``query()``
+Cake\Database\Query
+    * ``connection()``
+    * ``selectTypeMap()``
+    * ``bufferResults()`` (now ``enableBufferedResults()``/``isBufferedResultsEnabled()``)
+Cake\Database\Schema\CachedCollection
+    * ``cacheMetadata()``
+Cake\Database\Schema\TableSchema
+    * ``options()``
+    * ``temporary()`` (now ``setTemporary()``/``isTemporary()``)
+Cake\Database\TypeMap
+    * ``defaults()``
+    * ``types()``
+Cake\Database\TypeMapTrait
+    * ``typeMap()``
+    * ``defaultTypes()``
+Cake\ORM\EagerLoadable
+    * ``config()``
+    * setter part of ``canBeJoined()`` (now ``setCanBeJoined()``)
+Cake\ORM\EagerLoader
+    * ``matching()``
+    * ``autoFields()`` (now ``enableAutoFields()``/``isAutoFieldsEnabled()``)
+Cake\ORM\Locator\TableLocator
+    * ``config()``
+Cake\ORM\Query
+    * ``eagerLoader()``
+Cake\ORM\Table
+    * ``table()``
+    * ``alias()``
+    * ``registryAlias()``
+    * ``connection()``
+    * ``schema()``
+    * ``primaryKey()``
+    * ``displayField()``
+    * ``entityClass()``
 Cake\Validation\Validator
     * ``provider()``
 Cake\View\StringTemplateTrait
