@@ -5,11 +5,11 @@ CakePHP Documentation
 [![Build Status](https://img.shields.io/travis/cakephp/docs/3.0.svg?style=flat-square)](https://travis-ci.org/cakephp/docs)
 
 This is the official documentation for the CakePHP project. It is available
-online in HTML, PDF and EPUB formats at http://book.cakephp.org.
+online in HTML, PDF and EPUB formats at https://book.cakephp.org.
 
 Contributing to the documentation is pretty simple. Please read the
 documentation on contributing to the documentation over on [the
-cookbook](http://book.cakephp.org/3.0/en/contributing/documentation.html) for
+cookbook](https://book.cakephp.org/3.0/en/contributing/documentation.html) for
 help. You can read all of the documentation within as its just in plain text
 files, marked up with ReST text formatting.
 
@@ -21,7 +21,7 @@ Build the Documentation with Docker
 
 Docker will let you create a container with all packages needed to build the
 docs. You need to have docker installed, see the [official docs of
-docker](http://docs.docker.com/mac/started/) for more information.
+docker](https://docs.docker.com/mac/started/) for more information.
 
 ### Use the image on DockerHub ###
 
@@ -181,7 +181,7 @@ Contributing translations requires that you make a new directory using the two
 letter name for your language. As content is translated, directories mirroring
 the English content should be created with localized content. For more info,
 please,
-[click here](http://book.cakephp.org/3.0/en/contributing/documentation.html#new-translation-language).
+[click here](https://book.cakephp.org/3.0/en/contributing/documentation.html#new-translation-language).
 
 Making Search Work Locally
 --------------------------

@@ -321,7 +321,7 @@ de sessão. A função do controller
 outra URL. O parâmetro ``['action' => 'index']`` corresponde a URL /articles,
 isto é, a action ``index()`` do ``ArticlesController``. Você pode consultar a
 função
-:php:func:`Cake\\Routing\\Router::url()` na `API <http://api.cakephp.org>`_ e
+:php:func:`Cake\\Routing\\Router::url()` na `API <https://api.cakephp.org>`_ e
 checar os formatos a partir dos quais você pode montar uma URL.
 
 Chamar o método ``save()`` vai checar erros de validação e abortar o processo
@@ -646,7 +646,7 @@ mais ricas.
 Agora que você criou uma aplicação básica no CakePHP, você pode continuar no
 :doc:`/tutorials-and-examples/blog/part-three`, ou começar seu próprio projeto.
 Você também pode folhear os :doc:`/topics` ou a
-`API <http://api.cakephp.org/3.0>` para aprender mais sobre o CakePHP.
+`API <https://api.cakephp.org/3.0>` para aprender mais sobre o CakePHP.
 
 Se você precisar de ajuda, há muitas formas de conseguir, por favor, visite a
 página :doc:`/intro/where-to-get-help` e bem-vindo(a) ao CakePHP!

@@ -595,7 +595,7 @@ Publish Your Plugin
 ===================
 
 Make sure you add your plugin to
-`plugins.cakephp.org <http://plugins.cakephp.org>`_. This way other people can
+`plugins.cakephp.org <https://plugins.cakephp.org>`_. This way other people can
 use it as composer dependency.
 You can also propose your plugin to the
 `awesome-cakephp list <https://github.com/FriendsOfCake/awesome-cakephp>`_.

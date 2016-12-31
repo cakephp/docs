@@ -7,7 +7,7 @@ Le package de validation dans CakePHP fournit des fonctionnalités pour
 construire des validators qui peuvent valider des tableaux arbitraires de
 données avec simplicité. Vous pouvez trouver une `liste des règles de validation
 dans l'API
-<http://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`__.
+<https://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`__.
 
 .. _creating-validators:
 
@@ -544,7 +544,7 @@ CakePHP fournit une suite basique de méthodes de validation dans la classe
 fournissent des validators pour plusieurs situations de validation habituelles.
 
 La `documentation de l'API
-<http://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`_ pour la
+<https://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`_ pour la
 classe ``Validation`` fournit une bonne liste de règles de validation qui sont
 disponibles, et leur utilisation basique.
 

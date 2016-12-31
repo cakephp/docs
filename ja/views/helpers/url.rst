@@ -109,7 +109,7 @@ CSS や JavaScript、または画像ファイルの URL を生成する場合、
     アセットヘルパーメソッドは 3.2.4 で追加されました。
 
 詳細は API の
-`Router::url <http://api.cakephp.org/3.0/class-Cake.Routing.Router.html#_url>`_
+`Router::url <https://api.cakephp.org/3.0/class-Cake.Routing.Router.html#_url>`_
 を確認してください。
 
 .. meta::
