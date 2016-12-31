@@ -1133,7 +1133,7 @@ make testing responses much simpler. Some examples are::
 
 In addition to the above assertion methods, you can also use all of the
 assertions in `TestSuite
-<http://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ and those
+<https://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ and those
 found in `PHPUnit
 <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
 

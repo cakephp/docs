@@ -1092,7 +1092,7 @@ PSR7 モードを有効にして、アプリケーションクラスの設定を
     $this->assertContentType('application/json');
 
 上記のアサーションメソッドに加えて、
-`TestSuite <http://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ と
+`TestSuite <https://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ と
 `PHPUnit <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__ の
 中にある全てのアサーションを使用することができます。
 

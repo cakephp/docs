@@ -11,7 +11,7 @@ estaticamente. Exemplo:
 ``Inflector::pluralize('example')`` retorna "examples".
 
 Você pode testar as inflexões em `inflector.cakephp.org
-<http://inflector.cakephp.org/>`_.
+<https://inflector.cakephp.org/>`_.
 
 Criando as formas singulares e plurais
 ======================================

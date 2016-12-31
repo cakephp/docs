@@ -226,7 +226,7 @@ Alors que les classes de contexte intégrées essaient de couvrir les cas
 habituels que vous pouvez rencontrer, vous pouvez avoir besoin de construire
 une nouvelle classe de contexte si vous utilisez un ORM différent. Dans ces
 situations, vous devrez intégrer `Cake\\View\\Form\\ContextInterface
-<http://api.cakephp.org/3.0/class-Cake.View.Form.ContextInterface.html>`_ . Une
+<https://api.cakephp.org/3.0/class-Cake.View.Form.ContextInterface.html>`_ . Une
 fois que vous avez intégré cette interface, vous pouvez connecter votre nouveau
 contexte dans le FormHelper. Il est souvent mieux de faire ceci dans un
 event listener ``View.beforeRender``, ou dans une classe de vue de
@@ -1675,7 +1675,7 @@ Liste des Templates
 -------------------
 
 La liste des templates par défaut, leur format par défaut et les variables
-qu'ils attendent se trouvent dans la `documentation API du FormHelper <http://api.cakephp.org/3.2/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
+qu'ils attendent se trouvent dans la `documentation API du FormHelper <https://api.cakephp.org/3.2/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
 
 En plus de ces templates, la méthode ``input()`` va essayer d'utiliser les
 templates pour chaque conteneur d'input. Par exemple, lors de la création

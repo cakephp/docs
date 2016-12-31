@@ -128,7 +128,7 @@ avec le nom ``xmlns:`` vers un namespace générique ou avec le préfixe
 
     $xmlArray = [
         'root' => [
-            'xmlns:' => 'http://cakephp.org',
+            'xmlns:' => 'https://cakephp.org',
             'child' => 'value'
         ]
     ];
@@ -137,7 +137,7 @@ avec le nom ``xmlns:`` vers un namespace générique ou avec le préfixe
     $xmlArray(
         'root' => [
             'tag' => [
-                'xmlns:pref' => 'http://cakephp.org',
+                'xmlns:pref' => 'https://cakephp.org',
                 'pref:item' => [
                     'item 1',
                     'item 2'
@@ -150,11 +150,11 @@ avec le nom ``xmlns:`` vers un namespace générique ou avec le préfixe
 La valeur de ``$xml1`` et ``$xml2`` sera, respectivement::
 
     <?xml version="1.0"?>
-    <root xmlns="http://cakephp.org"><child>value</child>
+    <root xmlns="https://cakephp.org"><child>value</child>
 
 
     <?xml version="1.0"?>
-    <root><tag xmlns:pref="http://cakephp.org"><pref:item>item 1</pref:item><pref:item>item 2</pref:item></tag></root>
+    <root><tag xmlns:pref="https://cakephp.org"><pref:item>item 1</pref:item><pref:item>item 2</pref:item></tag></root>
 
 Créer un enfant
 ---------------

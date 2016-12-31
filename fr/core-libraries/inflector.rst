@@ -11,7 +11,7 @@ est normalement accessible statiquement. Exemple:
 ``Inflector::pluralize('example')`` retourne "examples".
 
 Vous pouvez essayer les inflexions en ligne sur
-`inflector.cakephp.org <http://inflector.cakephp.org/>`_.
+`inflector.cakephp.org <https://inflector.cakephp.org/>`_.
 
 .. _inflector-methods-summary:
 

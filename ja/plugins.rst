@@ -575,7 +575,7 @@ ContactManager の例だと、ContactsController 内に add/remove/edit/delete
 プラグインの公開
 ===================
 
-あなたのプラグインを `plugins.cakephp.org <http://plugins.cakephp.org>`_ に追加できます。
+あなたのプラグインを `plugins.cakephp.org <https://plugins.cakephp.org>`_ に追加できます。
 こちらでは、他の人々は composer の依存関係として使用することができます。
 `awesome-cakephp list <https://github.com/FriendsOfCake/awesome-cakephp>`_
 に申し込みできます。

@@ -619,7 +619,7 @@ Publiez votre Plugin
 ====================
 
 Vous pouvez ajouter votre plugin sur
-`plugins.cakephp.org <http://plugins.cakephp.org>`_. De cette façon, il peut
+`plugins.cakephp.org <https://plugins.cakephp.org>`_. De cette façon, il peut
 être facilement utilisé avec Composer.
 Vous pouvez aussi proposer votre plugin à la liste `awesome-cakephp <https://github.com/FriendsOfCake/awesome-cakephp>`_
 

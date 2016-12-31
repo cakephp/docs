@@ -38,7 +38,7 @@ avec ``Chronos`` et ``DateTime``, vous pouvez le faire avec ``Time`` et ``Date``
     <https://github.com/briannesbitt/Carbon>`__.
 
 Pour plus d'informations sur Chronos, rendez-vous sur
-`la documentation de l'API <http://api.cakephp.org/chronos/1.0/>`_.
+`la documentation de l'API <https://api.cakephp.org/chronos/1.0/>`_.
 
 .. start-time
 

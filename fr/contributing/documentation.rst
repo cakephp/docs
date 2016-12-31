@@ -12,7 +12,7 @@ correspondante.
 La documentation de CakePHP est `intégrée de façon continue
 <http://en.wikipedia.org/wiki/Continuous_integration>`_,
 donc vous pouvez vérifier le statut des
-`différents builds <http://ci.cakephp.org>`_
+`différents builds <https://ci.cakephp.org>`_
 sur le serveur Jenkins à tout moment.
 
 Traductions

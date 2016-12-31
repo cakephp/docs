@@ -7,7 +7,7 @@ Inflector は文字列の複数形やキャメルケースへの変換を取り�
 Inflector のメソッドは通常では静的にアクセスします。
 例: ``Inflector::pluralize('example')`` は "examples" を返します。
 
-`inflector.cakephp.org <http://inflector.cakephp.org/>`_
+`inflector.cakephp.org <https://inflector.cakephp.org/>`_
 にてオンライン上で変換を試すことができます。
 
 .. _inflector-methods-summary:
