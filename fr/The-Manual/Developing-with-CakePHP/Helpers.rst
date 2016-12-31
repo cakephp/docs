@@ -190,12 +190,12 @@ bien formaté (dont les formulaires), vous aident à formater du texte,
 des heures et des nombres, et peuvent même accélérer les fonctionnalités
 Ajax. Voici un résumé de assistants livrés de base. Pour plus
 d'informations, rendez-vous sur `Assistants
-intégrés <http://book.cakephp.org/fr/view/181/Core-Helpers>`_.
+intégrés <https://book.cakephp.org/fr/view/181/Core-Helpers>`_.
 
 +------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Assistant CakePHP                                    | Description                                                                                                                                                                                                                           |
 +======================================================+=======================================================================================================================================================================================================================================+
-| `Ajax <http://book.cakephp.org/fr/view/208/AJAX>`_   | Utilisé en tandem avec la librairie javascript Prototype pour créer des fonctionnalités Ajax dans les vues. Il contient des méthodes de raccourci pour le drag&drop, les formulaires et liens Ajax, les observateurs, et bien plus.   |
+| `Ajax <https://book.cakephp.org/fr/view/208/AJAX>`_   | Utilisé en tandem avec la librairie javascript Prototype pour créer des fonctionnalités Ajax dans les vues. Il contient des méthodes de raccourci pour le drag&drop, les formulaires et liens Ajax, les observateurs, et bien plus.   |
 +------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `Cache </fr/view/213/Cache>`_                        | Utilisé par le cœur pour mettre en cache le contenu des vues.                                                                                                                                                                         |
 +------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

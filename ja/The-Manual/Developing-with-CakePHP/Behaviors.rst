@@ -13,7 +13,7 @@ Tree
 
 CakePHP
 は既にツリー構造、内容翻訳、アクセス制御リスト用のビヘイビアが付属しています。いうまでもありませんが、コミュニティの貢献であるビヘイビアがすでに
-CakePHP Bakery (http://bakery.cakephp.org)
+CakePHP Bakery (https://bakery.cakephp.org)
 で入手できます。この章では、基本的な使用方法のパターンを紹介します。モデルへのビヘイビアの追加、CakePHP
 の組み込みビヘイビアの使用法、独自ビヘイビアの作り方です。
 

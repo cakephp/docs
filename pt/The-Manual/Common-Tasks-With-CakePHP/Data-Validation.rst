@@ -465,7 +465,7 @@ queira validar.
 
 À chave 'deep' deve se dar um valor *booleano*. Se for setada como true,
 a validação checará o cartão de crédito com o algoritmo Luhn
-(`http://en.wikipedia.org/wiki/Luhn\_algorithm <http://en.wikipedia.org/wiki/Luhn_algorithm>`_).
+(`https://en.wikipedia.org/wiki/Luhn\_algorithm <https://en.wikipedia.org/wiki/Luhn_algorithm>`_).
 O padrão é *false*.
 
 A chave 'regex' lhe permite inserir sua própria expressão regular que

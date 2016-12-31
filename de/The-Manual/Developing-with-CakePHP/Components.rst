@@ -32,9 +32,9 @@ Konfiguration von Komponenten
 
 Viele der Kern-Komponenten müssen konfiguriert werden. Beispiele für
 Komponenten die konfiguriert werden müssen sind
-`Auth <http://book.cakephp.org/view/172/Authentication>`_,
-`Cookie <http://book.cakephp.org/view/177/Cookies>`_ und
-`Email <http://book.cakephp.org/view/176/Email>`_. Die Konfiguration
+`Auth <https://book.cakephp.org/view/172/Authentication>`_,
+`Cookie <https://book.cakephp.org/view/177/Cookies>`_ und
+`Email <https://book.cakephp.org/view/176/Email>`_. Die Konfiguration
 dieser und anderer Komponenten erfolgt meist in der ``beforeFilter()``
 Methode deiner Kontrollklasse (*Controller*).
 

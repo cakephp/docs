@@ -15,5 +15,5 @@ method. But, with the import method, you can accomplish a lot.
     App::import('Vendor', 'WellNamed', array('file' => 'services'.DS.'well.named.php'));
 
 You can read more about it in `the
-book <http://book.cakephp.org/view/529/Using-App-import>`_ or `the API
+book <https://book.cakephp.org/view/529/Using-App-import>`_ or `the API
 documentation <http://api12.cakephp.org/class/app#method-Appimport>`_

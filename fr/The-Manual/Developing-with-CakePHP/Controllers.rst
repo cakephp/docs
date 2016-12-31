@@ -219,8 +219,8 @@ modèle correspondant.
 
 Il n'est pas conseillé d'ajouter tous les modèles systématiquement à
 votre contrôleur via le tableau ``$uses``. Allez regarder
-`ici <http://book.cakephp.org/fr/view/79/Relationship-Types>`_ et
-`la <http://book.cakephp.org/fr/view/845/loadModel>`_ pour voir comment
+`ici <https://book.cakephp.org/fr/view/79/Relationship-Types>`_ et
+`la <https://book.cakephp.org/fr/view/845/loadModel>`_ pour voir comment
 accéder proprement aux modèles respectivement associés ou pas.
 
 Les attributs en relation avec la page : $layout et $pageTitle
@@ -464,7 +464,7 @@ Méthodes des Contrôleurs
 
 Pour une liste complète des méthodes de contrôleur avec leurs
 descriptions, consultez l'API CakePHP :
-`http://api.cakephp.org/class/controller <http://api.cakephp.org/class/controller>`_.
+`https://api.cakephp.org/class/controller <https://api.cakephp.org/class/controller>`_.
 
 Interaction avec les Vues
 -------------------------

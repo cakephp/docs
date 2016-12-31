@@ -274,7 +274,7 @@ Un exemple plus complet montrant quelques options pour un champ de date
 En plus des options d'entrée spécifiques trouvées ci-dessous, vous
 pouvez spécifiez n'importe quel attribut html (par exemple onfocus).
 Pour plus d'information sur $options et $htmlAttributes voir `HTML
-Helper <http://book.cakephp.org/fr/view/205/HTML>`_.
+Helper <https://book.cakephp.org/fr/view/205/HTML>`_.
 
 Et pour finir, voici un exemple pour la création d'une sélection
 hasAndBelongsToMany. Supposons que Utilisateur hasAndBelongsToMany
@@ -897,7 +897,7 @@ votre modèle, afin de vérifier qu'un fichier a été uploadé avec succès.
 
 ::
 
-    // Basé sur le commentaire 8 de : http://bakery.cakephp.org/articles/view/improved-advance-validation-with-parameters
+    // Basé sur le commentaire 8 de : https://bakery.cakephp.org/articles/view/improved-advance-validation-with-parameters
 
     function isUploadedFile($params){
         $val = array_shift($params);

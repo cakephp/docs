@@ -36,7 +36,7 @@ Getting Cake
 First, let's get a copy of fresh Cake code.
 
 To get a fresh download, visit the CakePHP project on github:
-http://github.com/cakephp/cakephp/downloads and download the latest
+https://github.com/cakephp/cakephp/downloads and download the latest
 *1.2.x.x* release.
 
 You can also use git to clone the repository, and checkout the 1.2
@@ -308,7 +308,7 @@ PostsController, users can now access the logic there by requesting
 www.example.com/posts/index. Similarly, if we were to define a function
 called ``foobar()``, users would be able to access that at
 www.example.com/posts/foobar. Remember if you are set up with `pretty
-URLs <http://book.cakephp.org/view/333/A-Note-on-mod_rewrite>`_, you'll
+URLs <https://book.cakephp.org/view/333/A-Note-on-mod_rewrite>`_, you'll
 need to request www.example.com/index.php/posts/index instead.
 
 You may be tempted to name your controllers and actions a certain way to
@@ -538,7 +538,7 @@ the message and clears the corresponding session variable. The
 controller's ```redirect`:doc:`/The-Manual/Developing-with-CakePHP/Controllers` function redirects to
 another URL. The param ``array('action'=>'index)`` translates to URL
 /posts i.e the index action of posts controller. You can refer to
-`Router::url <http://api.cakephp.org/class/router#method-Routerurl>`_
+`Router::url <https://api.cakephp.org/class/router#method-Routerurl>`_
 function on the api to see the formats in which you can specify a URL
 for various cake functions.
 
@@ -835,6 +835,6 @@ more feature-rich applications.
 
 Now that you've created a basic Cake application you're ready for the
 real thing. Start your own project, read the rest of the `Manual </>`_
-and `API <http://api.cakephp.org>`_.
+and `API <https://api.cakephp.org>`_.
 
 If you need help, come see us in #cakephp. Welcome to CakePHP!

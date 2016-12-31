@@ -126,7 +126,7 @@ tabular layout, but the PaginatorHelper available in views doesn't
 always need to be restricted as such.
 
 See the details on
-`PaginatorHelper <http://api.cakephp.org/class/paginator-helper>`_ in
+`PaginatorHelper <https://api.cakephp.org/class/paginator-helper>`_ in
 the API.
 
 As mentioned, the PaginatorHelper also offers sorting features which can

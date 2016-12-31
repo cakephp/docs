@@ -155,7 +155,7 @@ Data Type Associations by Database
 ----------------------------------
 
 Every
-`RDBMS <http://en.wikipedia.org/wiki/Relational_database_management_system>`_
+`RDBMS <https://en.wikipedia.org/wiki/Relational_database_management_system>`_
 defines data types in slightly different ways. Within the datasource
 class for each database system, CakePHP maps those types to something it
 recognizes and creates a unified interface, no matter which database
@@ -535,7 +535,7 @@ Primary keys are normally defined as INT fields. The database will
 automatically increment the field, starting at 1, for each new record
 that gets added. Alternatively, if you specify your primary key as a
 CHAR(36) or BINARY(36), CakePHP will automatically generate
-`UUIDs <http://en.wikipedia.org/wiki/UUID>`_ when new records are
+`UUIDs <https://en.wikipedia.org/wiki/UUID>`_ when new records are
 created.
 
 A UUID is a 32 byte string separated by four hyphens, for a total of 36
@@ -3355,7 +3355,7 @@ default model behavior.
 
 For a complete list of model attributes and their descriptions visit the
 CakePHP API. Check out
-`http://api.cakephp.org/class/model <http://api.cakephp.org/class/model>`_.
+`https://api.cakephp.org/class/model <https://api.cakephp.org/class/model>`_.
 
 useDbConfig
 -----------

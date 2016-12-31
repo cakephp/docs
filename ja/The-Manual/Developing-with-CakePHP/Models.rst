@@ -517,7 +517,7 @@ created と modified
 フィールドとして定義されます。データベースは、新しいレコードが追加されるたびに自動的にフィールドをインクリメントし、１から始まります。あるいは、CHAR(36)
 または BINARY(36)としてプライマリーキーを指定した場合、CakePHP
 は、新しいレコードが作製されたときに、自動的に
-`UUIDs <http://en.wikipedia.org/wiki/UUID>`_ を生成します。
+`UUIDs <https://en.wikipedia.org/wiki/UUID>`_ を生成します。
 
 UUID は４つのハイフンで区切られた 32 バイトの文字列で、トータル 36
 文字になります。たとえば次のようなものです:
@@ -562,7 +562,7 @@ findはモデルのデータを検索するための多くの機能を持った�
 
 また、いくつかのタイプのfind、ビヘイビアで使われる他のパラメータも指定することができます。もちろん独自のモデルメソッドにおいても可能です。
 
-有効なモデルのコールバックに関する詳細は、\ `こちら <http://book.cakephp.org/ja/view/76/コールバックメソッド>`_
+有効なモデルのコールバックに関する詳細は、\ `こちら <https://book.cakephp.org/ja/view/76/コールバックメソッド>`_
 を参照してください。
 
 find('first')
@@ -1397,7 +1397,7 @@ save メソッドには他の構文もあります:
         'callbacks' => true //other possible values are false, 'before', 'after'
     )
 
-有効なモデルのコールバックに関する詳細は、\ `こちら <http://book.cakephp.org/ja/view/76/コールバックメソッド>`_
+有効なモデルのコールバックに関する詳細は、\ `こちら <https://book.cakephp.org/ja/view/76/コールバックメソッド>`_
 を参照してください。
 
 一度保存が完了してしまうと、オブジェクトの ID をモデルオブジェクトの
@@ -3089,7 +3089,7 @@ Model の属性
 モデルの属性を使用してプロパティを設定することで、デフォルトのモデルの振る舞いを上書きすることができます。
 
 モデルの属性とその説明の完全な一覧は CakePHP の API
-にあります。\ `http://api.cakephp.org/1.2/class\_model.html <http://api.cakephp.org/1.2/class_model.html>`_
+にあります。\ `https://api.cakephp.org/1.2/class\_model.html <https://api.cakephp.org/1.2/class_model.html>`_
 をチェックしてください。
 
 useDbConfig

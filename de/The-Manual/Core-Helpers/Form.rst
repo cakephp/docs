@@ -128,7 +128,7 @@ Installation, oder eine externe URL möglich.
     //Output:
     <form method="get" action="http://www.google.com/search">
 
-Also check `HtmlHelper::url <http://book.cakephp.org/view/842/url>`_
+Also check `HtmlHelper::url <https://book.cakephp.org/view/842/url>`_
 method for more examples of different types of urls.
 
 $options[‘default’]
@@ -834,7 +834,7 @@ validate whether a file has been successfully uploaded.
 
 ::
 
-    // Based on comment 8 from: http://bakery.cakephp.org/articles/view/improved-advance-validation-with-parameters
+    // Based on comment 8 from: https://bakery.cakephp.org/articles/view/improved-advance-validation-with-parameters
 
     function isUploadedFile($params){
         $val = array_shift($params);

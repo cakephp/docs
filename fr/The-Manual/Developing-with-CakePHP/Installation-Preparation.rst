@@ -23,24 +23,24 @@ depuis le site web principal, soit faire une extraction depuis le dépôt
 GIT.
 
 Pour obtenir la dernière version majeure de CakePHP, visitez le site web
-principal `http://www.cakephp.org <http://www.cakephp.org>`_ et suivez
+principal `https://cakephp.org <https://cakephp.org>`_ et suivez
 le lien "Download Now".
 
 Toutes les versions courantes de CakePHP sont hébergées sur CakeForge,
 la "résidence" de CakePHP. Ce site contient aussi des liens vers de
 nombreux autres projets CakePHP, y compris les plugins et applications.
 Les versions de CakePHP sont disponibles sur
-`http://github.com/cakephp/cakephp/downloads <http://github.com/cakephp/cakephp/downloads>`_.
+`https://github.com/cakephp/cakephp/downloads <https://github.com/cakephp/cakephp/downloads>`_.
 
 Sinon des constructions nocturnes (*nightly builds*) sont produites,
 lesquelles incluent les corrections de bug et les améliorations de
 chaque minute (enfin... de chaque jour). Celles-ci sont accessibles
 depuis le sommaire de téléchargement ici :
-`http://cakephp.org/downloads/index/nightly <http://cakephp.org/downloads/index/nightly>`_.
+`https://cakephp.org/downloads/index/nightly <https://cakephp.org/downloads/index/nightly>`_.
 Pour cibler les mises à jour de dernière minute, vous pouvez faire une
 extraction directement depuis la branche de développement du dépôt GIT
 ici :
-`http://github.com/cakephp/cakephp <http://github.com/cakephp/cakephp>`_
+`https://github.com/cakephp/cakephp <https://github.com/cakephp/cakephp>`_
 
 Droits fichiers
 ===============

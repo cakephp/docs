@@ -416,7 +416,7 @@ Afficheront tous deux :
     </a>
 
 Voyez également la méthode
-`HtmlHelper::url <http://book.cakephp.org/fr/view/842/url>`_ pour
+`HtmlHelper::url <https://book.cakephp.org/fr/view/842/url>`_ pour
 davantage d'exemples des différents types d'urls.
 
 tag
@@ -628,7 +628,7 @@ URL avec des paramètrges GET et une ancre nommée
     /posts/cherche?foo=bar#premier
 
 Pour davantage d'information voyez
-`Router::url <http://api.cakephp.org/class/router#method-Routerurl>`_
+`Router::url <https://api.cakephp.org/class/router#method-Routerurl>`_
 dans l'API.
 
 Modifier les balises avec HtmlHelper

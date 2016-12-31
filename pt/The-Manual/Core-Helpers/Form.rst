@@ -872,7 +872,7 @@ model para validar se um arquivo foi enviado com sucesso.
 
 ::
 
-    // Baseado no comentário 8 de: http://bakery.cakephp.org/articles/view/improved-advance-validation-with-parameters
+    // Baseado no comentário 8 de: https://bakery.cakephp.org/articles/view/improved-advance-validation-with-parameters
 
     function isUploadedFile($params){
         $val = array_shift($params);

@@ -196,7 +196,7 @@ Basic HTTP Authentication
 The SecurityComponent has some very powerful authentication features.
 Sometimes you may need to protect some functionality inside your
 application using `HTTP Basic
-Authentication <http://en.wikipedia.org/wiki/Basic_access_authentication>`_.
+Authentication <https://en.wikipedia.org/wiki/Basic_access_authentication>`_.
 One common usage for HTTP Auth is protecting a REST or SOAP API.
 
 This type of authentication is called basic for a reason. Unless you're

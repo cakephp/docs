@@ -57,7 +57,7 @@ Os pacotes do CakePHP 1.2 não vêm com casos de testes principais do
 núcleo do framework. Para obter estes testes você precisa fazer o
 download do pacote do CakePHP disponibilizado diariamente (nightly)
 disponível em
-`http://cakephp.org/downloads/nightly/1.2.x.x <http://cakephp.org/downloads/nightly/1.2.x.x>`_
+`https://cakephp.org/downloads/nightly/1.2.x.x <https://cakephp.org/downloads/nightly/1.2.x.x>`_
 ou obtê-los dos fontes do Subversion, fazendo checkout do ramo 1.2.x.x
 do repositório. (Para mais detalhes sobre como obter o CakePHP, veja
 `/view/30/Getting-CakePHP <view/30/Getting-CakePHP>`_

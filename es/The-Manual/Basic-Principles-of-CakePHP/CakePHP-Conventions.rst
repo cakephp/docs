@@ -68,7 +68,7 @@ dicta que se añada una clave primaria de un solo campo a la tabla.
 
 CakePHP no soporta claves primarias compuestas. Si deseas manipular
 directamente los datos de tu tabla de unión, usa llamadas directas a
-`query <http://book.cakephp.org/es/view/456/query>`_ o añade una clave
+`query <https://book.cakephp.org/es/view/456/query>`_ o añade una clave
 primaria para que actue como un modelo normal. Por ejemplo:
 
 ::

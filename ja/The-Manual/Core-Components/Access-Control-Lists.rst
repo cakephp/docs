@@ -452,7 +452,7 @@ CakePHP
 ACL コンポーネントは木構造の継承を管理するために CakePHP
 の\ `ツリービヘイビア </ja/view/91/ツリー>`_\ を利用します。 また、 ACL
 に関するすべてのモデルクラスは、
-`db\_acl.php <http://api.cakephp.org/1.2/cake_2libs_2model_2db__acl_8php-source.html>`_
+`db\_acl.php <https://api.cakephp.org/1.2/cake_2libs_2model_2db__acl_8php-source.html>`_
 に集められています。
 
 これで、ARO と ACO ツリーが作成できるようになったはずです。

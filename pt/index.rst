@@ -44,7 +44,7 @@ Dicas de tradução:
 -  Use a *todo list* (acima à direita) para saber onde sua atenção pode
    ser mais necessária.
 -  Use `linguagem
-   informal <http://en.wikipedia.org/wiki/Register_%28linguistics%29>`_.
+   informal <https://en.wikipedia.org/wiki/Register_%28linguistics%29>`_.
 -  Traduza o título e o conteúdo ao mesmo tempo.
 -  Atualize *links* internos para páginas (a serem) traduzidas.
 -  Compare com a versão em inglês antes de submeter sua atualização (se
@@ -56,7 +56,7 @@ Dicas de tradução:
 -  Não submeta traduções parciais.
 -  Não edite uma seção com revisão pendente.
 -  Não use `html
-   entities <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
+   entities <https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
    para caracteres acentuados, este livro usa UTF-8;
 -  Não faça alterações significativas na marcação HTML ou adicione novos
    comentários. Se você acha que está faltando algo no conteúdo

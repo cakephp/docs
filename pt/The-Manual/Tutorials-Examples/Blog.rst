@@ -565,7 +565,7 @@ exibe a mensagem e limpa a variável de sessão correspondente. O método
 outra URL. O parâmetro ``array('action'=>'index)`` é convertido para a
 URL /posts, i.e., a action index do controller posts. Você pode conferir
 a função
-`Router::url <http://api.cakephp.org/class/router#method-Routerurl>`_ na
+`Router::url <https://api.cakephp.org/class/router#method-Routerurl>`_ na
 API para ver os formatos que você pode usar ao especificar uma URL para
 várias funções do CakePHP.
 
@@ -878,7 +878,7 @@ deste manual como guia para construir mais aplicações ricas em recursos.
 
 Agora que você criou uma aplicação básica em Cake, você está pronto para
 a coisa real. Comece seu próprio projeto, leia o restante do
-`Manual </pt/>`_ e da `API <http://api.cakephp.org>`_.
+`Manual </pt/>`_ e da `API <https://api.cakephp.org>`_.
 
 E se você precisar de ajuda, nos vemos no canal #cakephp (e no
 #cakephp-pt). Seja bem-vindo ao CakePHP!

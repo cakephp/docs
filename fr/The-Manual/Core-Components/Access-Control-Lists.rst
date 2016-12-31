@@ -487,7 +487,7 @@ Si vous êtes intéressé par la façon de stocker de Cake dans ces tables,
 parcourez les tables. Le composant ACL utilise `le comportement en
 arbre </fr/view/91/tree-behavior>`_ pour gérer les héritages. Le
 fichiers de modèle de classe pour ACL sont compilés dans un seul fichier
-`db\_acl.php <http://api.cakephp.org/1.2/cake_2libs_2model_2db__acl_8php-source.html>`_.
+`db\_acl.php <https://api.cakephp.org/1.2/cake_2libs_2model_2db__acl_8php-source.html>`_.
 
 Maintenant que nous avons tout configuré, attelons nous à la création
 d'arbres ARO et ACO.

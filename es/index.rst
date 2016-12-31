@@ -20,7 +20,7 @@ gusto, aquí te explicamos cómo puedes ayudar:
 
 #. Haz click en el link *Editar* de la sección que deseas cambiar.
 #. Inicia sesión en el Cookbook utilizando tu cuenta de
-   `Bakery <http://bakery.cakephp.org>`_. ¡Cualquiera puede conseguir
+   `Bakery <https://bakery.cakephp.org>`_. ¡Cualquiera puede conseguir
    una cuenta!
 #. Por favor revisa `las indicaciones para contribuir en el
    Cookbook </es/view/482/contributing-to-the-cookbook>`_ para asegurar
@@ -60,7 +60,7 @@ Pautas para la traducción:
 -  No edites una sección con cambios pendientes (ver información
    "Historia").
 -  No uses `entidades
-   html <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
+   html <https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
    para caracteres acentuados, el cookbook utiliza UTF-8.
 -  No cambies significativamente el etiquetado (HTML) o añadas nuevo
    contenido - Si al contenido original le falta información, edítalo

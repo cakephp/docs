@@ -563,7 +563,7 @@ borra la variable de sesión correspondiente. La función
 dirección URL. El parámetro ``array('action'=>'index)`` se traduce en la
 URL /posts es decir, la acción index del controlador posts. Puede
 referirse a
-`Router::url <http://api.cakephp.org/class/router#method-Routerurl>`_ en
+`Router::url <https://api.cakephp.org/class/router#method-Routerurl>`_ en
 función de la API para ver los formatos en los que se puede especificar
 una dirección URL para diversas funciones de cake.
 
@@ -876,6 +876,6 @@ guía para la construcción de aplicaciones con más ricas-características.
 
 Ahora que ha creado la base de una aplicación Cake está listo para algo
 real. Comience su propio proyecto, lea el resto del `Manual </es/>`_ y
-`API <http://api.cakephp.org>`_.
+`API <https://api.cakephp.org>`_.
 
 Si necesita ayuda, vengan a vernos en el #cakephp. Bienvenido a CakePHP!

@@ -464,7 +464,7 @@ satisfacer.
 
 El índice ‘deep’ debería dejarse con un valor booleano. Si es verdadero,
 la validación usará el algoritmo de Luhn para tarjetas de crédito
-(`http://en.wikipedia.org/wiki/Luhn\_algorithm <http://en.wikipedia.org/wiki/Luhn_algorithm>`_).
+(`https://en.wikipedia.org/wiki/Luhn\_algorithm <https://en.wikipedia.org/wiki/Luhn_algorithm>`_).
 Por defecto el valor se asume como falso.
 
 El índice ‘regex’ permite indicar una expersión regular propia que será

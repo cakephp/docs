@@ -32,9 +32,9 @@ Configurando Components
 
 Muitos dos componentes núcleo precisam ser configurados. Alguns exemplos
 desses tipos de componentes são
-`Auth <http://book.cakephp.org/pt/view/172/Authentication>`_,
-`Cookie <http://book.cakephp.org/pt/view/177/Cookies>`_ e
-`Email <http://book.cakephp.org/pt/view/176/Email>`_. Toda configuração
+`Auth <https://book.cakephp.org/pt/view/172/Authentication>`_,
+`Cookie <https://book.cakephp.org/pt/view/177/Cookies>`_ e
+`Email <https://book.cakephp.org/pt/view/176/Email>`_. Toda configuração
 desses componentes, e de outros componentes em geral, é feita no método
 ``beforeFilter()`` do seu controlador.
 

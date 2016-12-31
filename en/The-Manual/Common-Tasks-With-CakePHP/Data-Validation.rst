@@ -467,7 +467,7 @@ types you wish to match.
 
 The ‘deep’ key should be set to a boolean value. If it is set to true,
 the validation will check the Luhn algorithm of the credit card
-(`http://en.wikipedia.org/wiki/Luhn\_algorithm <http://en.wikipedia.org/wiki/Luhn_algorithm>`_).
+(`https://en.wikipedia.org/wiki/Luhn\_algorithm <https://en.wikipedia.org/wiki/Luhn_algorithm>`_).
 It defaults to false.
 
 The ‘regex’ key allows you to supply your own regular expression that
@@ -696,7 +696,7 @@ Second parameter defines where symbol is located (left/right).
     );
 
 `View this section in 1.3
-cookbook <http://book.cakephp.org/view/1169/money>`_
+cookbook <https://book.cakephp.org/view/1169/money>`_
 
 multiple
 --------

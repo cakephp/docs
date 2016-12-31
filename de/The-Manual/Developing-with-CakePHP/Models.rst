@@ -511,7 +511,7 @@ Primary keys are normally defined as INT fields. The database will
 automatically increment the field, starting at 1, for each new record
 that gets added. Alternatively, if you specify your primary key as a
 CHAR(36) or BINARY(36), CakePHP will automatically generate
-`UUIDs <http://en.wikipedia.org/wiki/UUID>`_ when new records are
+`UUIDs <https://en.wikipedia.org/wiki/UUID>`_ when new records are
 created.
 
 A UUID is a 32 byte string separated by four hyphens, for a total of 36
@@ -3320,7 +3320,7 @@ Standard Verhalten des Models überschreiben.
 
 Eine komplette Liste der Model-Eigenschaften und ihre Beschreibung
 findet sich im CakePHP API. Besuchen Sie
-`http://api.cakephp.org/class/model <http://api.cakephp.org/class/model>`_.
+`https://api.cakephp.org/class/model <https://api.cakephp.org/class/model>`_.
 
 useDbConfig
 -----------

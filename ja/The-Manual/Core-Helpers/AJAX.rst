@@ -470,7 +470,7 @@ drag & drop
 
 $id で指定された DOM 要素からドラッグ可能な要素を作成します。$options
 で指定できるパラメータの詳細は
-`http://github.com/madrobby/scriptaculous/wikis/draggable <http://github.com/madrobby/scriptaculous/wikis/draggable>`_
+`https://github.com/madrobby/scriptaculous/wikis/draggable <https://github.com/madrobby/scriptaculous/wikis/draggable>`_
 を見てください。
 
 一般的なオプションは次です:
@@ -489,7 +489,7 @@ $id で指定された DOM 要素からドラッグ可能な要素を作成し�
 
 $id で指定された DOM 要素を作成し、ドロップ可能な要素にします。$options
 でパラメータを指定できます。詳細は
-`http://github.com/madrobby/scriptaculous/wikis/droppables <http://github.com/madrobby/scriptaculous/wikis/droppables>`_
+`https://github.com/madrobby/scriptaculous/wikis/droppables <https://github.com/madrobby/scriptaculous/wikis/droppables>`_
 を見てください。
 
 一般的なオプションは次です:
@@ -570,7 +570,7 @@ editor
 指定した DOM ID に in-place(その場で編集する) エディタを作成します。
 ``$url``
 には要素のデータを保存する役目を担うアクションを指定します。詳細とデモは、
-`http://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor <http://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor>`_
+`https://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor <https://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor>`_
 を参照してください。
 
 一般的なオプションは次の通りです:
@@ -584,7 +584,7 @@ $options keys
 in-place エディタの 'collection'
 モードを起動します。$options['collection'] は select
 のオプションに変換する配列を受け取ります。collection についての詳細は、
-`http://github.com/madrobby/scriptaculous/wikis/ajax-inplacecollectioneditor <http://github.com/madrobby/scriptaculous/wikis/ajax-inplacecollectioneditor>`_
+`https://github.com/madrobby/scriptaculous/wikis/ajax-inplacecollectioneditor <https://github.com/madrobby/scriptaculous/wikis/ajax-inplacecollectioneditor>`_
 を参照してください。
 
 ``$options['callback']``

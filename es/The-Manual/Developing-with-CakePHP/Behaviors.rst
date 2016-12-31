@@ -29,7 +29,7 @@ subyacente.
 CakePHP ya incluye comportamientos para estructuras de árbol, contenido
 traducido, interacción con listas de control de acceso, sin comentar los
 comportamientos aportados por la comunidad disponibles en `CakePHP
-Bakery <http://bakery.cakephp.org>`_. En esta sección cubriremos el
+Bakery <https://bakery.cakephp.org>`_. En esta sección cubriremos el
 patrón básico de uso para añadir comportamientos a modelos, cómo
 utilizar los comportamientos de CakePHP incorporados y cómo crear uno
 nosotros mismos.

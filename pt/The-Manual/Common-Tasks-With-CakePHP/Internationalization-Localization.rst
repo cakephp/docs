@@ -21,7 +21,7 @@ Internacionalizando Sua Aplicação
 Há alguns poucos passos a serem executados para transformar uma
 aplicação mono-idioma para uma aplicação multi-idioma, sendo que o
 primeiro passo é usar a função
-`<code>\_\_() <http://api.cakephp.org/file/basics.php#function-__>`_ em
+`<code>\_\_() <https://api.cakephp.org/file/basics.php#function-__>`_ em
 seu código. Abaixo segue um exemplo de algum código para uma aplicação
 mono-idioma:
 
@@ -31,7 +31,7 @@ mono-idioma:
 
 Para internacionalizar seu código, tudo o que você precisa é demarcar as
 strings com `a função de
-tradução <http://api.cakephp.org/file/basics.php#function-__>`_ como
+tradução <https://api.cakephp.org/file/basics.php#function-__>`_ como
 assim:
 
 ::
@@ -41,20 +41,20 @@ assim:
 Se você não fizer mais nada, esses dois trechos de código são
 funcionalmente idênticos - ambos irão enviar o mesmo conteúdo para o
 navegador web. A `função
-``__()`` <http://api.cakephp.org/file/basics.php#function-__>`_ vai
+``__()`` <https://api.cakephp.org/file/basics.php#function-__>`_ vai
 traduzir a string passada se houver uma tradução disponível, ou então
 apenas retorná-la inalterada em caso contrário. Funciona de forma
 semelhante a qualquer outra implementação de
-`Gettext <http://en.wikipedia.org/wiki/Gettext>`_ (tal como outras
+`Gettext <https://en.wikipedia.org/wiki/Gettext>`_ (tal como outras
 funções de tradução,
-como\ ```__d()`` <http://api.cakephp.org/file/basics.php#function-__d>`_,
-```__n()`` <http://api.cakephp.org/file/basics.php#function-__n>`_ etc).
+como\ ```__d()`` <https://api.cakephp.org/file/basics.php#function-__d>`_,
+```__n()`` <https://api.cakephp.org/file/basics.php#function-__n>`_ etc).
 
 Com seu código pronto para se tornar multi-idioma, o próximo passo é
-criar seu `arquivo pot <http://en.wikipedia.org/wiki/Gettext>`_, que é o
+criar seu `arquivo pot <https://en.wikipedia.org/wiki/Gettext>`_, que é o
 modelo para todas as strings traduzíveis de sua aplicação. Para gerar
 seu(s) arquivo(s) pot, apenas execute a tarefa `i18n
-console <http://book.cakephp.org/view/620/Core-Console-Applications>`_,
+console <https://book.cakephp.org/view/620/Core-Console-Applications>`_,
 que irá vasculhar todos os locais em que você utilizou a função de
 traduçãoo em seu código e gerar o(s) arquivo(s) pot para você. Você
 também pode re-executar esta tarefa de console a qualquer momento para
@@ -62,7 +62,7 @@ modificar as traduções em seu código.
 
 O(s) arquivo(s) pot em si não são usados pelo CakePHP, eles são modelos
 usados para criar ou atualizar seus `arquivos
-po <http://en.wikipedia.org/wiki/Gettext>`_, que contém efetivamente as
+po <https://en.wikipedia.org/wiki/Gettext>`_, que contém efetivamente as
 traduções. O Cake irá procurar por seus arquivos po dados no seguinte
 local:
 

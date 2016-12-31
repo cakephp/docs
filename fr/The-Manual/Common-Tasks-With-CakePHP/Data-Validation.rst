@@ -502,7 +502,7 @@ vérifiera tous les types de cartes de crédits. Vous pouvez aussi définir
 Le paramètre 'deep' devrait être défini comme une valeur booléenne. S'il
 est défini à *true*, la validation vérifiera l'algorithme Luhn de la
 carte de crédit
-(`http://en.wikipedia.org/wiki/Luhn\_algorithm <http://en.wikipedia.org/wiki/Luhn_algorithm>`_).
+(`https://en.wikipedia.org/wiki/Luhn\_algorithm <https://en.wikipedia.org/wiki/Luhn_algorithm>`_).
 Par défaut, elle est à *false*.
 
 Le paramètre 'regex' vous permet de passer votre propre expression

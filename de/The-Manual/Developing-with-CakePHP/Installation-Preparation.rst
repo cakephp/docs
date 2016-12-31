@@ -11,7 +11,7 @@ LightHTTPD oder Microsoft IIS konigurieren.
 Die Installationsvorbereitung besteht aus folgenden Schritten:
 
 -  Download einer aktuellen Version von CakePHP (`Hier zu
-   finden <http://cakephp.org/downloads>`_)
+   finden <https://cakephp.org/downloads>`_)
 -  Den Webserver für die Ausführung von PHP konfigurieren
 -  Benutzerrechte auf dem Server checken
 
@@ -23,7 +23,7 @@ kannst Du Dir ein Archiv herunterladen (zip/tar.gz/tar.bz2), oder Du
 kannst den Code aus unserem Repository auschecken (SVN).
 
 Um ein frisches Archiv zu erhalten, besuche unsere Website unter
-`http://www.cakephp.org <http://www.cakephp.org>`_. Folge dem großen
+`https://cakephp.org <https://cakephp.org>`_. Folge dem großen
 “Download Now!” link zum Paradies. CakePHP Downloads werden bei
 CakeForge gehosted, Du kannst aber auch unsere Projektwebsite besuchen,
 unter
@@ -31,7 +31,7 @@ unter
 
 Wenn Du immer das Neueste haben willst, checke unsere nightly downloads
 aus unter
-`http://cakephp.org/downloads/index/nightly <http://cakephp.org/downloads/index/nightly>`_.
+`https://cakephp.org/downloads/index/nightly <https://cakephp.org/downloads/index/nightly>`_.
 CakePHP nightlies sind stabil, und beinhalten Korrekturen bis zum
 nächsten Release.
 

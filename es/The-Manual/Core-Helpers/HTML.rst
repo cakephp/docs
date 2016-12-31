@@ -385,7 +385,7 @@ Ambos arrojarán como resulado lo siguiente:
     </a>
 
 Consulte también la documentación del método
-`HtmlHelper::url <http://book.cakephp.org/view/842/url>`_ para más
+`HtmlHelper::url <https://book.cakephp.org/view/842/url>`_ para más
 ejemplos de diferentes tipos de urls.
 
 tag
@@ -594,7 +594,7 @@ URL con parámetros GET y ancla nombrada (named anchor)
     /posts/buscar?foo=bar#primero
 
 Por mas info ver `el
-Router::url <http://api.cakephp.org/class/router#method-Routerurl>`_ en
+Router::url <https://api.cakephp.org/class/router#method-Routerurl>`_ en
 el API.
 
 Changing the tags output by HtmlHelper

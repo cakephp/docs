@@ -32,9 +32,9 @@ Configuración de componentes.
 
 Muchos de los componentes básicos requieren ser configurados. Algunos
 ejemplos de componentes que requieren ser configurados son:
-`Auth <http://book.cakephp.org/view/172/Authentication>`_,
-`Cookie <http://book.cakephp.org/view/177/Cookies>`_ e
-`Email <http://book.cakephp.org/view/176/Email>`_. Toda la configuración
+`Auth <https://book.cakephp.org/view/172/Authentication>`_,
+`Cookie <https://book.cakephp.org/view/177/Cookies>`_ e
+`Email <https://book.cakephp.org/view/176/Email>`_. Toda la configuración
 de estos componentes y los componentes en general se hacen en el método
 del controlador ``beforeFilter()``.
 

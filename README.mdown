@@ -24,20 +24,20 @@ Building the documentation
 
 After installing the required packages, you can build the documentation using `Make`.
 
-	# Create all the HTML docs. Including all the languages.
-	make html
+    # Create all the HTML docs. Including all the languages.
+    make html
 
-	# Create just the english HTML docs.
-	make html-en
+    # Create just the english HTML docs.
+    make html-en
 
-	# Create all the EPUB (e-book) docs.
-	make epub
+    # Create all the EPUB (e-book) docs.
+    make epub
 
-	# Create just the engish EPUB docs.
-	make epub-en
+    # Create just the engish EPUB docs.
+    make epub-en
 
-	# Populate the search index
-	make populate-index
+    # Populate the search index
+    make populate-index
 
 This will generate all the documentation in an html form.  Other output such as 'pdf' and 'htmlhelp' are not fully complete at this time.
 
@@ -47,11 +47,11 @@ After making changes to the documentation, you can build the html version of the
 Contributing
 ------------
 
-Contributing to the documentation is pretty simple. Please read the documentation on contributing to the documentation over on [the cookbook](http://book.cakephp.org/2.0/en/contributing/documentation.html) for help.
+Contributing to the documentation is pretty simple. Please read the documentation on contributing to the documentation over on [the cookbook](https://book.cakephp.org/2.0/en/contributing/documentation.html) for help.
 
 There are currently a number of outstanding issues that need to be addressed.  We've tried to flag these with `.. todo::` where possible.  To see all the outstanding todo's add the following to your `config/all.py`
 
-	todo_include_todos = True
+    todo_include_todos = True
 
 After rebuilding the html content, you should see a list of existing todo items at the bottom of the table of contents.
 

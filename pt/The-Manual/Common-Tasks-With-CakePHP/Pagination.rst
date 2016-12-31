@@ -115,7 +115,7 @@ disponível nas views não se restringe em absoluto a nenhum formato de
 exibição.
 
 Veja os detalhes sobre o
-`PaginatorHelper <http://api.cakephp.org/class/paginator-helper>`_ na
+`PaginatorHelper <https://api.cakephp.org/class/paginator-helper>`_ na
 API.
 
 Como mencionado, o PaginatorHelper também fornece recursos de ordenação

@@ -161,7 +161,7 @@ Ansonsten kann es zu Problemen bei Updates von CakePHP kommen.
 Controller-Attribute
 ====================
 
-Eine komplette Liste der Controller-Attribute, inklusive deren Beschreibung, findest Du in der CakePHP API, unter `http://api.cakephp.org/1.2/class\_controller.html <http://api.cakephp.org/1.2/class_controller.html>`_.
+Eine komplette Liste der Controller-Attribute, inklusive deren Beschreibung, findest Du in der CakePHP API, unter `https://api.cakephp.org/1.2/class\_controller.html <https://api.cakephp.org/1.2/class_controller.html>`_.
 ==========================================================================================================================================================================================================================
 
 $name
@@ -470,7 +470,7 @@ Controller Methoden
 
 Eine vollständige Liste aller Controller-Methoden und deren Beschreibung
 gibts in der CakePHP-Api. Gehe zu
-`http://api.cakephp.org/1.2/class\_controller.html <http://api.cakephp.org/1.2/class_controller.html>`_.
+`https://api.cakephp.org/1.2/class\_controller.html <https://api.cakephp.org/1.2/class_controller.html>`_.
 
 Interagieren mit Views
 ----------------------

@@ -12,7 +12,7 @@ fato, o Bake é um passo natural a seguir uma vez que foi feito o
 *scaffold* da aplicação.
 
 Aqueles que são novos no Bake (especialmente usuários de Windows) podem
-achar o `Bake screencast <http://cakephp.org/screencasts/view/6>`_ útil
+achar o `Bake screencast <https://cakephp.org/screencasts/view/6>`_ útil
 para esclarecer as coisas antes de continuar.
 
 Dependendo da configuração da sua instalação, você terá que setar os

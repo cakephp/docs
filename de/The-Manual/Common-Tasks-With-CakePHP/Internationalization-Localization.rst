@@ -22,7 +22,7 @@ Internationalizing Your Application
 
 There are only a few steps to go from a single-language application to a
 multi-lingual application, the first of which is to make use of the
-```__()`` <http://api.cakephp.org/file/cake/basics.php#function-__>`_
+```__()`` <https://api.cakephp.org/file/cake/basics.php#function-__>`_
 function in your code. Below is an example of some code for a
 single-language application:
 
@@ -32,7 +32,7 @@ single-language application:
 
 To internationalize your code, all you need to do is to wrap strings in
 `the translate
-function <http://api.cakephp.org/file/cake/basics.php#function-__>`_
+function <https://api.cakephp.org/file/cake/basics.php#function-__>`_
 like so:
 
 ::
@@ -42,27 +42,27 @@ like so:
 If you do nothing further, these two code examples are functionally
 identical - they will both send the same content to the browser. The
 ```__()``
-function <http://api.cakephp.org/file/cake/basics.php#function-__>`_
+function <https://api.cakephp.org/file/cake/basics.php#function-__>`_
 will translate the passed string if a translation is available, or
 return it unmodified. It works similar to other
-`Gettext <http://en.wikipedia.org/wiki/Gettext>`_ implementations (as do
+`Gettext <https://en.wikipedia.org/wiki/Gettext>`_ implementations (as do
 the other translate functions, such as
-```__d()`` <http://api.cakephp.org/file/cake/basics.php#function-__d>`_,
-```__n()`` <http://api.cakephp.org/file/cake/basics.php#function-__n>`_
+```__d()`` <https://api.cakephp.org/file/cake/basics.php#function-__d>`_,
+```__n()`` <https://api.cakephp.org/file/cake/basics.php#function-__n>`_
 etc)
 
 With your code ready to be multilingual, the next step is to create your
-`pot file <http://en.wikipedia.org/wiki/Gettext>`_, which is the
+`pot file <https://en.wikipedia.org/wiki/Gettext>`_, which is the
 template for all translatable strings in your application. To generate
 your pot file(s), all you need to do is run the `i18n console
-task <http://book.cakephp.org/view/620/Core-Console-Applications>`_,
+task <https://book.cakephp.org/view/620/Core-Console-Applications>`_,
 which will look for where you've used a translate function in your code
 and generate your pot file(s) for you. You can and should re-run this
 console task any time you change the translations in your code.
 
 The pot file(s) themselves are not used by CakePHP, they are the
 templates used to create or update your `po
-files <http://en.wikipedia.org/wiki/Gettext>`_, which contain the
+files <https://en.wikipedia.org/wiki/Gettext>`_, which contain the
 translations. Cake will look for your po files in the following
 location:
 

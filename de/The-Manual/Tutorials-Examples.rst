@@ -6,7 +6,7 @@ zeigen wie einzelne Komponenten von CakePHP zur einer Anwendung
 zusammenfinden.
 
 Alternativ dazu kannst du auch bei `CakeForge <http://cakeforge.org/>`_
-und der `Bakery <http://bakery.cakephp.org/>`_ nach Projekten auf Basis
+und der `Bakery <https://bakery.cakephp.org/>`_ nach Projekten auf Basis
 von CakePHP suchen.
 
 

@@ -590,7 +590,7 @@ zu einer anderen URL weiter. Der Parameter ``array('action'=>'index)``
 wird dabei in den URL /posts übersetzt, was der index-Methode des
 PostsController entspricht. Nähere Informationen zu den möglichen
 Formaten für URLs in verschiedenen Cake Funktionen finden sich unter
-`Router::url <http://api.cakephp.org/class/router#method-Routerurl>`_.
+`Router::url <https://api.cakephp.org/class/router#method-Routerurl>`_.
 
 Der Aufruf der
 ``save()-Methode prüft zunächst auf Validierungsfehler und bricht das Speichern ab, falls einer oder mehrere dieser Fehler vorliegt. Wir werden uns diese Fehler und ihre Behandlung im folgenden Abschnitt näher ansehen.``
@@ -901,7 +901,7 @@ als Guide für das Erstellen umfangreicherer Anwendungen.
 Jetzt, wo du eine erste Cake-Anwendung geschrieben hast, bist du bereit
 für echte Anwendungen. Beginne ein eigenes Projekt, lies den Rest des
 `Handbuchs </de/>`_ und studiere die
-`API <http://api.cakephp.org>`_-Referenz.
+`API <https://api.cakephp.org>`_-Referenz.
 
 Falls du Hilfe benötigst, besuche uns in #cakephp. Willkommen bei
 CakePHP!

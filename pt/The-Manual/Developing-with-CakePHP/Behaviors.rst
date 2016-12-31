@@ -29,7 +29,7 @@ em questão.
 O CakePHP já inclui comportamentos para estruturas em árvore, para
 conteúdos em diversos idiomas, para interação com listas de controle de
 acesso, e isso sem mencionar os behaviors desenvolvidos pela comunidade
-e que estão disponíveis no CakePHP Bakery (http://bakery.cakephp.org).
+e que estão disponíveis no CakePHP Bakery (https://bakery.cakephp.org).
 Nesta seção iremos cobrir o padrão básico de utilização para adicionar
 comportamentos aos models, como usar os behaviors que já disponíveis por
 padrão no CakePHP e como criar os nossos próprios behaviors.

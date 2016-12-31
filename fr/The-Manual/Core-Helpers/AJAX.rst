@@ -528,7 +528,7 @@ drag & drop
 Rend un élément déplaçable à l'extérieur de l'élément DOM spécifié par
 $id. Pour plus d'informations sur les paramètres acceptés dans $options,
 voir
-`http://github.com/madrobby/scriptaculous/wikis/draggable <http://github.com/madrobby/scriptaculous/wikis/draggable>`_.
+`https://github.com/madrobby/scriptaculous/wikis/draggable <https://github.com/madrobby/scriptaculous/wikis/draggable>`_.
 
 Des options courantes peuvent être incluses :
 
@@ -547,7 +547,7 @@ Des options courantes peuvent être incluses :
 Rend l'élément DOM spécifié par $id, capable de recevoir des éléments
 déplacés. Des paramètres additionnels peuvent être spécifiés avec
 $options. Pour plus d'informations, voir
-`http://github.com/madrobby/scriptaculous/wikis/droppables <http://github.com/madrobby/scriptaculous/wikis/droppables>`_.
+`https://github.com/madrobby/scriptaculous/wikis/droppables <https://github.com/madrobby/scriptaculous/wikis/droppables>`_.
 
 Des options courantes peuvent être incluses :
 
@@ -629,7 +629,7 @@ editor
 Crée un éditeur local au niveau de l'id DOM $id. L'``$url`` fournie
 devrait être une action en charge de sauvegarder des données. Pour plus
 d'informations et des démos, voir
-`http://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor <http://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor>`_.
+`https://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor <https://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor>`_.
 
 Des options courantes peuvent être incluses :
 
@@ -642,7 +642,7 @@ Description
 Active le mode 'collection' de l'édition locale. $options['collection']
 prend un tableau qui se transforme en options pour le select. Pour en
 apprendre plus sur 'collection', voir
-`http://github.com/madrobby/scriptaculous/wikis/ajax-inplacecollectioneditor <http://github.com/madrobby/scriptaculous/wikis/ajax-inplacecollectioneditor>`_.
+`https://github.com/madrobby/scriptaculous/wikis/ajax-inplacecollectioneditor <https://github.com/madrobby/scriptaculous/wikis/ajax-inplacecollectioneditor>`_.
 
 ``$options['callback']``
 

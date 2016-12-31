@@ -23,7 +23,7 @@ git
 リポジトリからコードをチェックアウトする方法のいずれかにより取得できます。
 
 最新のアーカイブをダウンロードするには、
-`http://www.cakephp.org <http://www.cakephp.org>`_
+`https://cakephp.org <https://cakephp.org>`_
 のウェブサイトに行き、"Download Now!"
 という大きなリンクに従って進みます。
 
@@ -31,13 +31,13 @@ CakePHP の最新のリリースは CakePHP のホームである CakeForge
 でホストされています。このサイトは CakePHP
 の他のプロジェクトへのリンクがあり、それには CakePHP
 のプラグインやアプリケーションが含まれています。 CakePHP のリリースは
-`http://github.com/cakephp/cakephp/downloads <http://github.com/cakephp/cakephp/downloads>`_
+`https://github.com/cakephp/cakephp/downloads <https://github.com/cakephp/cakephp/downloads>`_
 で入手できます。
 
 これらの代わりに、バグ修正や日ごとに行われる細かな機能追加が含まれたナイトリービルドを取得することもできます。これらは、
-`http://cakephp.org/downloads/index/nightly <http://cakephp.org/downloads/index/nightly>`_
+`https://cakephp.org/downloads/index/nightly <https://cakephp.org/downloads/index/nightly>`_
 のダウンロードインデックスからアクセスできます。アップデート内容の詳細を得るには、
-`http://github.com/cakephp/cakephp <http://github.com/cakephp/cakephp>`_
+`https://github.com/cakephp/cakephp <https://github.com/cakephp/cakephp>`_
 の git リポジトリの開発ブランチを直接チェックアウトしてください。
 
 パーミッションの設定

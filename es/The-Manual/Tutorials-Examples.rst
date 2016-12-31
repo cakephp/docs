@@ -5,7 +5,7 @@ En esta sección podrás ver cómo se unen todas las piezas en una
 aplicación de CakePHP típica.
 
 Alternativamente, puedes visitar `CakeForge <http://cakeforge.org/>`_ y
-`The Bakery <http://bakery.cakephp.org/>`_ para encontrar aplicaciones
+`The Bakery <https://bakery.cakephp.org/>`_ para encontrar aplicaciones
 existentes y otros componentes.
 
 

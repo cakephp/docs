@@ -23,7 +23,7 @@ liking, here's how you can help:
 
 #. Click the edit link for the section you want to change.
 #. Log in to Cookbook if prompted using your
-   `Bakery <http://bakery.cakephp.org>`_ account. Anyone can get a
+   `Bakery <https://bakery.cakephp.org>`_ account. Anyone can get a
    bakery account!
 #. Please review `the guidelines for submitting to the
    Cookbook </view/482/contributing-to-the-cookbook>`_ to ensure
@@ -48,7 +48,7 @@ Translator tips:
 -  Use the to do list (top right) to see where attention is needed for
    your language.
 -  Use `Informal
-   Form <http://en.wikipedia.org/wiki/Register_%28linguistics%29>`_.
+   Form <https://en.wikipedia.org/wiki/Register_%28linguistics%29>`_.
 -  Translate both the content and the title at the same time.
 -  Do compare to the English content before submitting a correction (if
    you correct something, but don't integrate an 'upstream' change your
@@ -59,7 +59,7 @@ Translator tips:
 -  Do not submit partial translations.
 -  Do not edit a section with a pending change.
 -  Do not use `html
-   entities <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
+   entities <https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
    for accented characters, the book uses UTF-8.
 -  Do not significantly change the markup (HTML) or add new content - If
    the original content is missing some info, submit an edit for that

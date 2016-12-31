@@ -29,8 +29,8 @@ geklickt.
 #. Der Controller benutzt die Models um Zugang zu den Anwendungsdaten zu
    bekommen. In den meisten Fällen präsentieren Models die verschiedenen
    Tabellen einer Datenbank, aber es könnten genau so gut
-   `LDAP <http://en.wikipedia.org/wiki/Ldap"%20title=>`_ Einträge,
-   `RSS <http://en.wikipedia.org/wiki/Rss>`_ Feeds oder Dateien sein. In
+   `LDAP <https://en.wikipedia.org/wiki/Ldap"%20title=>`_ Einträge,
+   `RSS <https://en.wikipedia.org/wiki/Rss>`_ Feeds oder Dateien sein. In
    unserem Beispiel wird das Model benutzt um Ricardo's letzte Einkäufe
    aus der Datenbank auszulesen.
 #. Sobald der Controller die Daten verarbeitet hat, werden diese an die

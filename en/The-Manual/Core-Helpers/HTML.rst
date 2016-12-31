@@ -406,7 +406,7 @@ Both will output:
         <img src="/img/recipes/6.jpg" alt="Brownies" />
     </a>
 
-Also check `HtmlHelper::url <http://book.cakephp.org/view/842/url>`_
+Also check `HtmlHelper::url <https://book.cakephp.org/view/842/url>`_
 method for more examples of different types of urls.
 
 tag
@@ -612,7 +612,7 @@ URL with GET params and named anchor
     /posts/search?foo=bar#first
 
 For further information check
-`Router::url <http://api.cakephp.org/class/router#method-Routerurl>`_ in
+`Router::url <https://api.cakephp.org/class/router#method-Routerurl>`_ in
 the API.
 
 Changing the tags output by HtmlHelper

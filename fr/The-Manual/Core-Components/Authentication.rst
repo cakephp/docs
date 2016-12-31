@@ -768,7 +768,7 @@ AclComponent::check(). Une fonction isAuthorized n'est pas nésessaire.
 
 En utilisant crud, Auth utilisera l'ACL et vérifiera avec
 AclComponent::check(). Les actions devraient correspondre aux CRUD (voir
-`mapActions <http://book.cakephp.org/fr/view/813/mapActions>`_).
+`mapActions <https://book.cakephp.org/fr/view/813/mapActions>`_).
 
 sessionKey
 ----------
@@ -795,7 +795,7 @@ session invalide ou expirée.
 
 Comme dans toute partie de CakePHP, soyez certains d'avoir jeté une œil
 à `la classe
-AuthComponent <http://api.cakephp.org/class/auth-component>`_ dans
+AuthComponent <https://api.cakephp.org/class/auth-component>`_ dans
 l'API, pour avoir une vision plus approfondie du composant Auth.
 
 authenticate

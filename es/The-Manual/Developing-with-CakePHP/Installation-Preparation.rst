@@ -20,7 +20,7 @@ Puedes descargar una copia comprimida (zip/tar.gz/tar.bz2) de la página
 web principal, o puedes obtener el código desde el repositorio git.
 
 Para descargar la última *release* principal de CakePHP, dirígete a la
-página web `http://www.cakephp.org <http://www.cakephp.org>`_ y haz clic
+página web `https://cakephp.org <https://cakephp.org>`_ y haz clic
 en el enlace “Download Now”.
 
 Todas las *releases* actuales están alojadas en CakeForge. Este *site*
@@ -32,7 +32,7 @@ disponibles en
 Se crean *nightly builds* alternativas que incluyen parches y mejoras al
 minuto (bueno, al día). Estas pueden ser accedidas desde la página
 principal de descargas aquí:
-`http://cakephp.org/downloads/index/nightly <http://cakephp.org/downloads/index/nightly>`_.
+`https://cakephp.org/downloads/index/nightly <https://cakephp.org/downloads/index/nightly>`_.
 Para actualizaciones realmente al minuto, puedes obtener el código
 directamente de la rama de desarrollo del repositorio git aquí:
 `http://code.cakephp.org/source <http://code.cakephp.org/source>`_.

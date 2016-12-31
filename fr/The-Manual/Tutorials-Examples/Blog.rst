@@ -881,7 +881,7 @@ applications plus riches en fonctionnalités.
 
 Maintenant que vous avez créé une application Cake basique, vous êtes
 prêt pour les choses sérieuses. Lancez votre propre projet, lisez le
-reste du `Manuel </fr/fr>`_ et `l'API <http://api.cakephp.org>`_.
+reste du `Manuel </fr/fr>`_ et `l'API <https://api.cakephp.org>`_.
 
 Si vous avez besoin d'aide, venez nous voir sur le canal irc #cakephp.
 Bienvenue sur CakePHP !

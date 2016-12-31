@@ -205,8 +205,8 @@ a need for a corresponding Model file.
 
 It's bad practice to just add all the models your controller uses to the
 ``$uses`` array. Check
-`here <http://book.cakephp.org/view/79/Relationship-Types>`_ and
-`there <http://book.cakephp.org/view/845/loadModel>`_ to see how to
+`here <https://book.cakephp.org/view/79/Relationship-Types>`_ and
+`there <https://book.cakephp.org/view/845/loadModel>`_ to see how to
 properly access associated and unassociated models respectively.
 
 Page-related Attributes: $layout and $pageTitle
@@ -441,7 +441,7 @@ Controller Methods
 
 For a complete list of controller methods and their descriptions visit
 the CakePHP API. Check out
-`http://api.cakephp.org/class/controller <http://api.cakephp.org/class/controller>`_.
+`https://api.cakephp.org/class/controller <https://api.cakephp.org/class/controller>`_.
 
 Interacting with Views
 ----------------------

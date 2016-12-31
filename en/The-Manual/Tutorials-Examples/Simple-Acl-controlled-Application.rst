@@ -7,8 +7,8 @@ read the :doc:`/The-Manual/Tutorials-Examples/Blog` tutorial, and you are famili
 :doc:`/The-Manual/Core-Console-Applications/Code-Generation-with-Bake`. You should have some
 experience with CakePHP, and be familiar with MVC concepts. This
 tutorial is a brief introduction to the
-```AuthComponent`` <http://api.cakephp.org/class/auth-component>`_ and
-```AclComponent`` <http://api.cakephp.org/class/acl-component>`_.
+```AuthComponent`` <https://api.cakephp.org/class/auth-component>`_ and
+```AclComponent`` <https://api.cakephp.org/class/acl-component>`_.
 
 What you will need
 

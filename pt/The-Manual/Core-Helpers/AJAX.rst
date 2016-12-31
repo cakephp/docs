@@ -498,7 +498,7 @@ drag & drop
 Torna arrastável (do inglês, *drag*) o elemento cujo id DOM é
 especificado por $id. Para mais informações sobre os parâmetros aceitos
 por $options, veja
-`http://github.com/madrobby/scriptaculous/wikis/draggable <http://github.com/madrobby/scriptaculous/wikis/draggable>`_.
+`https://github.com/madrobby/scriptaculous/wikis/draggable <https://github.com/madrobby/scriptaculous/wikis/draggable>`_.
 
 Opções comuns podem incluir:
 
@@ -518,7 +518,7 @@ Faz com que o elemento, cujo id DOM é especificado por $id, aceite
 elementos soltos (do inglês, *drop*) depois de se arrastar. Parâmetros
 adicionais podem ser especificados em $options. Para mais informações,
 veja
-`http://github.com/madrobby/scriptaculous/wikis/droppables <http://github.com/madrobby/scriptaculous/wikis/droppables>`_.
+`https://github.com/madrobby/scriptaculous/wikis/droppables <https://github.com/madrobby/scriptaculous/wikis/droppables>`_.
 
 Opções comuns incluem:
 
@@ -601,7 +601,7 @@ editor
 Cria um editor de texto no elemento com id DOM especificado. O parâmetro
 ``$url`` deve ser uma action que seja responsável por salvar os dados do
 elemento. Para mais informações e demonstrações, veja
-`http://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor <http://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor>`_.
+`https://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor <https://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor>`_.
 
 Opções comuns incluem:
 
@@ -614,7 +614,7 @@ Descrição
 Ativa o modo 'collection' de edição. $options['collection'] leva um
 array que é convertido em opções para o select. Para aprender mais sobre
 collection veja
-`http://github.com/madrobby/scriptaculous/wikis/ajax-inplacecollectioneditor <http://github.com/madrobby/scriptaculous/wikis/ajax-inplacecollectioneditor>`_.
+`https://github.com/madrobby/scriptaculous/wikis/ajax-inplacecollectioneditor <https://github.com/madrobby/scriptaculous/wikis/ajax-inplacecollectioneditor>`_.
 
 ``$options['callback']``
 
