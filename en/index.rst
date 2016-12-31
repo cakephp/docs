@@ -263,13 +263,13 @@ statements into your database::
 The choices on table and column names are not arbitrary. If you follow
 Cake's database naming conventions, and Cake's class naming conventions
 (both outlined in `Appendix "Cake
-Conventions" <http://manual.cakephp.org/appendix/conventions>`_), you'll
+Conventions" <https://book.cakephp.org/appendix/conventions>`_), you'll
 be able to take advantage of a lot of free functionality and avoid
 configuration. Cake is flexible enough to accomodate even the worst
 legacy database schema, but adhering to convention will save you time.
 
 Check out `Appendix "Cake
-Conventions" <http://manual.cakephp.org/appendix/conventions>`_ for more
+Conventions" <https://book.cakephp.org/appendix/conventions>`_ for more
 information, but suffice it to say that naming our table 'posts'
 automatically hooks it to our Post model, and having fields called
 'modified' and 'created' will be automagically managed by Cake.

@@ -108,7 +108,7 @@ Making your components public
 -----------------------------
 
 If you think your component can be helpful to others, add it to `the
-Bakery <http://bakery.cakephp.org/>`_. A component that becomes
+Bakery <https://bakery.cakephp.org/>`_. A component that becomes
 increasingly useful for the community may some day be included in the
 core distribution.
 

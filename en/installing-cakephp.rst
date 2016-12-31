@@ -48,7 +48,7 @@ CakePHP project at CakeForge by going to
 `http://cakeforge.org/projects/cakephp/ <http://cakeforge.org/projects/cakephp/>`_.
 
 To grab a nightly, download one from
-`http://cakephp.org/downloads/index/nightly <http://cakephp.org/downloads/index/nightly>`_.
+`https://cakephp.org/downloads/index/nightly <https://cakephp.org/downloads/index/nightly>`_.
 These nightly releases are stable, and often include the bug fixes
 between stable releases.
 

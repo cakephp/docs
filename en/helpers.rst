@@ -15,7 +15,7 @@ monotonous and more rapid. The HTML helper has two main goals: to aid in
 the insertion of often-repeated sections of HTML code, and to aid in the
 quick-and-easy creation of web forms. The following sections will walk
 you through the most important functions in the helper, but remember
-http://api.cakephp.org should always be used as a final reference.
+https://api.cakephp.org should always be used as a final reference.
 
 Many of the functions in the HTML helper make use of a HTML tag
 definition file called **tags.ini.php**. Cake's core configuration

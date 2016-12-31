@@ -215,7 +215,7 @@ set to 'php', 'file', or 'database'.
 
 #. database: Cake's database session handling is used (see `Chapter "The
    Cake Session
-   Component" <http://book.cakephp.org/view/322/the-cake-session-component>`_
+   Component" <https://book.cakephp.org/view/322/the-cake-session-component>`_
    for more details).
 
 CAKE\_SESSION\_STRING

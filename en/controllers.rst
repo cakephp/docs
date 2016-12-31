@@ -66,7 +66,7 @@ Controller Functions
 
 While this section will treat most of the often-used functions in Cake's
 Controller, it's important to remember to use
-`http://api.cakephp.org <http://api.cakephp.org>`_ for a full reference.
+`https://api.cakephp.org <https://api.cakephp.org>`_ for a full reference.
 
 Interacting with your Views
 ---------------------------

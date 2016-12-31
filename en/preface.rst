@@ -27,7 +27,7 @@ you want. CakePHP is developed under the `MIT
 License <http://www.opensource.org/licenses/mit-license.php>`_. CakePHP
 is an Open Source project, this means you have full access to the source
 code. The best place to get the most recent version is at the CakePHP
-web site (`http://www.cakephp.org <http://www.cakephp.org>`_). You can
+web site (`https://cakephp.org <https://cakephp.org>`_). You can
 also browse the latest and greatest code there.
 
 Community
@@ -37,7 +37,7 @@ CakePHP is developed by a hard working community of people. They come
 from different countries all over the world and joined together to
 create the CakePHP framework for the benefit of the widest audience
 possible. For more information about Cake's active developer and user
-communities, visit `http://www.cakephp.org <http://www.cakephp.org>`_.
+communities, visit `https://cakephp.org <https://cakephp.org>`_.
 
 Our IRC channel is always filled with knowledgable, friendly Bakers. If
 you're stuck on a bit of code, need a listening ear, or want to start an
