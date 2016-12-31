@@ -312,7 +312,7 @@ Flashメッセージはリダイレクト後のページに表示されます。
 関数は別の URL にリダイレクトを行います。 ``['action' => 'index']`` パラメータは
 /articles、つまり articles コントローラの index アクションを表す URL に解釈されます。
 多くの CakePHP の関数で指定できるURLのフォーマットについては、
-`API <http://api.cakephp.org>`_ の :php:func:`Cake\\Routing\\Router::url()`
+`API <https://api.cakephp.org>`_ の :php:func:`Cake\\Routing\\Router::url()`
 関数を参考にすることができます。
 
 ``save()`` メソッドを呼ぶと、バリデーションエラーがチェックされ、もしエラーがある場合には
@@ -634,7 +634,7 @@ CakePHP には、もっともっと *多くの* 機能があります。シン�
 
 基本的なアプリケーションの作成が終わったので
 :doc:`/tutorials-and-examples/blog/part-three` に進むか、自分のプロジェクトを始めてください。
-CakePHPについてさらに学ぶために :doc:`/topics` や `API <http://api.cakephp.org/3.0>` を使いましょう。
+CakePHPについてさらに学ぶために :doc:`/topics` や `API <https://api.cakephp.org/3.0>` を使いましょう。
 
 もし困ったときは、いろんな方法で助けを得ることができます。
 :doc:`/intro/where-to-get-help` を見てみてください。

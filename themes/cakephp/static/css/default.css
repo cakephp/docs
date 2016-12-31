@@ -187,131 +187,22 @@
 
 #sidebar-navigation > ul {
     padding-left: 0;
+    margin: 0;
 }
-#sidebar-navigation > ul > li:before {
+#sidebar-navigation .caption {
     color: #363637;
     font-family: 'Raleway', sans-serif;
     display: block;
     font-weight: bold;
     font-size: 13px;
+    line-height: 1;
     padding-bottom: 0.4em;
     padding-top: 1.3em;
+    margin: 0;
 }
-#sidebar-navigation > ul > li:nth-of-type(5):last-child:after,
-#sidebar-navigation > ul > li:nth-of-type(14):last-child:after,
-#sidebar-navigation > ul > li:nth-of-type(33):last-child:after,
-#sidebar-navigation > ul > li:nth-of-type(44):last-child:after {
-    content: " ";
-    display: block;
-    margin-bottom: 1em;
-}
-#sidebar-navigation > ul > li:nth-of-type(1):before {
-    content: "Preface";
+#sidebar-navigation .caption:first-child {
     padding-top: 0;
 }
-#sidebar-navigation > ul > li:lang(fr):nth-of-type(1):before {
-    content: "Préface";
-}
-#sidebar-navigation > ul > li:lang(es):nth-of-type(1):before {
-    content: "Preface";
-}
-#sidebar-navigation > ul > li:lang(pt):nth-of-type(1):before {
-    content: "Prefácio";
-}
-#sidebar-navigation > ul > li:lang(ja):nth-of-type(1):before {
-    content: "はじめに";
-}
-#sidebar-navigation > ul > li:lang(zh):nth-of-type(1):before {
-    content: "Preface";
-}
-#sidebar-navigation > ul > li:lang(tr):nth-of-type(1):before {
-    content: "Preface";
-}
-#sidebar-navigation > ul > li:nth-of-type(6):before {
-    content: "Getting Started";
-}
-#sidebar-navigation > ul > li:lang(fr):nth-of-type(6):before {
-    content: "Pour Commencer";
-}
-#sidebar-navigation > ul > li:lang(es):nth-of-type(6):before {
-    content: "Getting Started";
-}
-#sidebar-navigation > ul > li:lang(pt):nth-of-type(6):before {
-    content: "Começando";
-}
-#sidebar-navigation > ul > li:lang(ja):nth-of-type(6):before {
-    content: "入門";
-}
-#sidebar-navigation > ul > li:lang(zh):nth-of-type(6):before {
-    content: "Getting Started";
-}
-#sidebar-navigation > ul > li:lang(tr):nth-of-type(6):before {
-    content: "Getting Started";
-}
-#sidebar-navigation > ul > li:nth-of-type(14):before {
-    content: "General Topics";
-}
-#sidebar-navigation > ul > li:lang(fr):nth-of-type(14):before {
-    content: "Généralités";
-}
-#sidebar-navigation > ul > li:lang(es):nth-of-type(14):before {
-    content: "General Topics";
-}
-#sidebar-navigation > ul > li:lang(pt):nth-of-type(14):before {
-    content: "Tópicos Gerais";
-}
-#sidebar-navigation > ul > li:lang(ja):nth-of-type(14):before {
-    content: "一般的なトピック";
-}
-#sidebar-navigation > ul > li:lang(zh):nth-of-type(14):before {
-    content: "General Topics";
-}
-#sidebar-navigation > ul > li:lang(tr):nth-of-type(14):before {
-    content: "General Topics";
-}
-#sidebar-navigation > ul > li:nth-of-type(33):before {
-    content: "Utility Classes";
-}
-#sidebar-navigation > ul > li:lang(fr):nth-of-type(33):before {
-    content: "Utilitaires";
-}
-#sidebar-navigation > ul > li:lang(es):nth-of-type(33):before {
-    content: "Utility Classes";
-}
-#sidebar-navigation > ul > li:lang(pt):nth-of-type(33):before {
-    content: "Classes utilitárias";
-}
-#sidebar-navigation > ul > li:lang(ja):nth-of-type(33):before {
-    content: "ユーティリティ";
-}
-#sidebar-navigation > ul > li:lang(zh):nth-of-type(33):before {
-    content: "Utility Classes";
-}
-#sidebar-navigation > ul > li:lang(tr):nth-of-type(33):before {
-    content: "Utility Classes";
-}
-#sidebar-navigation > ul > li:nth-of-type(44):before {
-    content: "Other";
-}
-#sidebar-navigation > ul > li:lang(fr):nth-of-type(44):before {
-    content: "Divers";
-}
-#sidebar-navigation > ul > li:lang(es):nth-of-type(44):before {
-    content: "Other";
-}
-#sidebar-navigation > ul > li:lang(pt):nth-of-type(44):before {
-    content: "Diversos";
-}
-#sidebar-navigation > ul > li:lang(ja):nth-of-type(44):before {
-    content: "その他";
-}
-#sidebar-navigation > ul > li:lang(zh):nth-of-type(44):before {
-    content: "Other";
-}
-#sidebar-navigation > ul > li:lang(tr):nth-of-type(44):before {
-    content: "Other";
-}
-
 
 
 /* def list */

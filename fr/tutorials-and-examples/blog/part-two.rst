@@ -356,7 +356,7 @@ permet d'afficher et d'effacer la variable correspondante. La méthode
 rediriger vers une autre URL. Le paramètre ``['action' => 'index']`` sera
 traduit vers l'URL /articles, c'est à dire l'action "index" du controller
 Articles (ArticlesController). Vous pouvez vous référer à l'
-`API <http://api.cakephp.org>`_ de la fonction
+`API <https://api.cakephp.org>`_ de la fonction
 :php:func:`Cake\\Routing\\Router::url()` pour voir les différents formats
 d'URL acceptés dans les différentes fonctions de CakePHP.
 
@@ -712,7 +712,7 @@ riches en fonctionnalités.
 Maintenant que vous avez créé une application CakePHP basique, vous pouvez soit
 continuer vers :doc:`/tutorials-and-examples/blog/part-three`, ou commencer
 votre propre projet. Vous pouvez aussi lire attentivement les
-:doc:`/topics` ou l'`API <http://api.cakephp.org/3.0>` pour en
+:doc:`/topics` ou l'`API <https://api.cakephp.org/3.0>` pour en
 apprendre plus sur CakePHP.
 
 Si vous avez besoin d'aide, il y a plusieurs façons d'obtenir de l'aide -

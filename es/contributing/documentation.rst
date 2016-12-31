@@ -12,7 +12,7 @@ comiences a colaborar.
 
 La documentación de CakePHP cuenta con
 `integración continua <https://es.wikipedia.org/wiki/Integraci%C3%B3n_continua>`_,
-así que puedes er el status de `varias ejecuciones <http://ci.cakephp.org>`_
+así que puedes er el status de `varias ejecuciones <https://ci.cakephp.org>`_
 en el servidor de Jenkins cuando quieras.
 
 .. note::

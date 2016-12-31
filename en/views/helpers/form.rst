@@ -252,7 +252,7 @@ While the built-in context classes are intended to cover the basic cases you'll
 encounter you may need to build a new context class if you are using a different
 ORM. In these situations you need to implement the
 `Cake\\View\\Form\\ContextInterface
-<http://api.cakephp.org/3.0/class-Cake.View.Form.ContextInterface.html>`_ . Once
+<https://api.cakephp.org/3.0/class-Cake.View.Form.ContextInterface.html>`_ . Once
 you have implemented this interface you can wire your new context into the
 FormHelper. It is often best to do this in a ``View.beforeRender`` event
 listener, or in an application view class::
@@ -936,11 +936,12 @@ Creating Select Pickers
 
 Creates a select element, populated with the items in ``$options``,
 with the option specified by ``$attributes['value']`` shown as selected by
-default. Set the 'empty' key in the ``$attributes`` variable to ``false`` to
-turn off the default empty option::
+default. Set the 'empty' key in the ``$attributes`` variable to ``true`` (the
+default value is ``false``) to add a blank option with an empty value on the
+top of your dropdown list::
 
     $options = ['M' => 'Male', 'F' => 'Female'];
-    echo $this->Form->select('gender', $options);
+    echo $this->Form->select('gender', $options, ['empty' => true]);
 
 Will output:
 
@@ -1669,7 +1670,7 @@ List of Templates
 
 The list of default templates, their default format and the variables they
 expect can be found at the
-`FormHelper API documentation <http://api.cakephp.org/3.2/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
+`FormHelper API documentation <https://api.cakephp.org/3.2/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
 
 In addition to these templates, the ``control()`` method will attempt to use
 distinct templates for each control container. For example, when creating
