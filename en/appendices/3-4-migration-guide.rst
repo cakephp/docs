@@ -227,7 +227,7 @@ immutable methods you should use the response attached to the Controller::
 
     // Should become
     $controller = $this->getController();
-    $controller->response = $response->withHeader('X-Rate-Limit', $this->remaining);
+    $controller->response = $controller->response->withHeader('X-Rate-Limit', $this->remaining);
 
 In component callbacks you can use the event object to access the
 response/controller::
