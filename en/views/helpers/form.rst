@@ -290,7 +290,13 @@ you need to::
     echo $this->Form->input('published', ['type' => 'checkbox']);
 
 .. note::
-As a small subtelty, generating specific types of input via the ``input()`` form method by providing a specific input ``type`` option (e.g. ``'type' => 'checkbox'`` as in the example above) will always also generate the wrapping ``div``, by default. Generating the same type of input element via one of the specific form methods (e.g. ``$this->Form->checkbox('published');``) in most cases won't generate the wrapping ``div``. Depending on your need you can use one or another when both are available.
+As a small subtelty, generating specific types of input via the ``input()`` 
+form method by providing a specific input ``type`` option (e.g. 
+``'type' => 'checkbox'`` as in the example above) will always also generate
+the wrapping ``div``, by default. Generating the same type of input element
+via one of the specific form methods (e.g. ``$this->Form->checkbox('published');``)
+in most cases won't generate the wrapping ``div``.
+Depending on your need you can use one or another when both are available.
 
 
 .. _html5-required:
