@@ -9,12 +9,17 @@ Contenu
 
 .. toctree::
     :maxdepth: 3
+    :caption: Préface
 
     intro
     quickstart
     appendices/3-x-migration-guide
     tutorials-and-examples
     contributing
+
+.. toctree::
+    :maxdepth: 3
+    :caption: Pour Commencer
 
     installation
     development/configuration
@@ -24,6 +29,11 @@ Contenu
     controllers
     views
     orm
+
+
+.. toctree::
+    :maxdepth: 3
+    :caption: Généralités
 
     controllers/components/authentication
     bake
@@ -45,6 +55,10 @@ Contenu
     development/testing
     core-libraries/validation
 
+.. toctree::
+    :maxdepth: 3
+    :caption: Utilitaires
+
     core-libraries/app
     core-libraries/collections
     core-libraries/file-folder
@@ -56,6 +70,11 @@ Contenu
     core-libraries/text
     core-libraries/time
     core-libraries/xml
+
+
+.. toctree::
+    :maxdepth: 3
+    :caption: Divers
 
     core-libraries/global-constants-and-functions
     chronos

@@ -122,9 +122,9 @@ By default this is what your application **composer.json** looks like::
         "cakephp/cakephp": "3.3.*"
     }
 
-Each time you run ``php composer.phar update`` you will receive the latest
-stable releases when using the default version constraint ``~3.2``. Only bugfix
-and minor version releases of 3.x will be used when updating.
+Each time you run ``php composer.phar update`` you will receive bugfix
+releases for this minor version. You can instead change this to ``~3.3`` to
+also receive the latest stable releases of the ``3.x`` branch.
 
 If you want to keep current with the latest unreleased changes in CakePHP
 designate **dev-master** as the package version in your application's

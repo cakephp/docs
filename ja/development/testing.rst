@@ -17,31 +17,39 @@ CakePHP のテストフレームワークは、PHPUnit を基礎としていま�
 Composer による PHPUnit のインストール
 --------------------------------------
 
-Composer で PHPUnit をインストールするには::
+Composer で PHPUnit をインストールするには:
+
+.. code-block:: bash
 
     $ php composer.phar require --dev phpunit/phpunit
 
 これで ``composer.json`` の ``require-dev`` セクションに依存関係を追加し、すべての依存関係と
 一緒に PHPUnit をインストールします。
 
-これで、PHPUnit を以下のように実行することができます。 ::
+これで、PHPUnit を以下のように実行することができます。
+
+.. code-block:: bash
 
     $ vendor/bin/phpunit
 
 PHAR ファイルの使用
 -------------------
 
-**phpunit.phar** ファイルをダウンロードすると、テストを実行するために使用することができます。 ::
+**phpunit.phar** ファイルをダウンロードすると、テストを実行するために使用することができます。
+
+.. code-block:: bash
 
     php phpunit.phar
 
 .. tip::
 
-    次のようにすると、都合よく phpunit.phar をグローバルに Unix や Linux で利用できます。 ::
+    次のようにすると、都合よく phpunit.phar をグローバルに Unix や Linux で利用できます。
 
-      chmod +x phpunit.phar
-      sudo mv phpunit.phar /usr/local/bin/phpunit
-      phpunit --version
+    .. code-block:: shell
+
+          chmod +x phpunit.phar
+          sudo mv phpunit.phar /usr/local/bin/phpunit
+          phpunit --version
 
     `Windows 上で PHPUnit の PHAR をグローバルにインストールする方法 <http://phpunit.de/manual/current/ja/installation.html#installation.phar.windows>`__
     に関する手順については、PHPUnit のドキュメントを参照してください。
@@ -74,17 +82,21 @@ PHAR ファイルの使用
 ==========================
 
 PHPUnit をインストールして ``test`` データソースを設定した後、 独自のテストを作成し
-実行する準備ができていることを、アプリケーションのテストを実行することにより確認できます。 ::
+実行する準備ができていることを、アプリケーションのテストを実行することにより確認できます。
 
-    // phpunit.phar について
+.. code-block:: bash
+
+    # phpunit.phar について
     $ php phpunit.phar
 
-    // Composer でインストールされた phpunit
+    # Composer でインストールされた phpunit
     $ vendor/bin/phpunit
 
 上記は、あなたが用意した任意のテストを実行するか、もしくはテストが実行されなかったことが分かります。
 特定のテストを実行するためには PHPUnit にパラメータとしてテストのパスを指定します。
-例えば、ArticlesTable クラスのテストケースがある場合、次のように実行します。 ::
+例えば、ArticlesTable クラスのテストケースがある場合、次のように実行します。
+
+.. code-block:: bash
 
     $ vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -208,34 +220,42 @@ PHPUnit をインストールし、テストケースをいくつか書いたら
 お勧めします。
 
 ``phpunit`` を使うことで、あなたはアプリケーションのテストを実行できます。
-アプリケーションのテストを実行するには、シンプルに実行することができます。 ::
+アプリケーションのテストを実行するには、シンプルに実行することができます。
 
-    // composer のインストール
+.. code-block:: bash
+
+    # composer のインストール
     $ vendor/bin/phpunit
 
-    // phar 形式のファイル
+    # phar 形式のファイル
     php phpunit.phar
 
 `GitHub から CakePHP ソース <https://github.com/cakephp/cakephp>`__ をクローンして
 CakePHP のユニットテストを実行したい場合、 ``phpunit`` を実行する前に、すべての依存関係が
-インストールされているように、以下の ``Composer`` コマンドを実行することを忘れないでください。 ::
+インストールされているように、以下の ``Composer`` コマンドを実行することを忘れないでください。
+
+.. code-block:: bash
 
     $ composer install --dev
 
 アプリケーションのルートディレクトリから以下を行います。アプリケーションのソースの一部である
 プラグインのテストを実行するには、まず ``cd`` でプラグインディレクトリに移動し、その後、
-PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを使用してください。 ::
+PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを使用してください。
+
+.. code-block:: bash
 
     cd plugins
 
-    // composer でインストールされた phpunit を使用
+    # composer でインストールされた phpunit を使用
     ../vendor/bin/phpunit
 
-    // phar 形式のファイルを使用
+    # phar 形式のファイルを使用
     php ../phpunit.phar
 
 スタンドアロンのプラグインのテストを実行するには、最初に別のディレクトリにプロジェクトを
-インストールして、その依存関係をインストールする必要があります。 ::
+インストールして、その依存関係をインストールする必要があります。
+
+.. code-block:: bash
 
     git clone git://github.com/cakephp/debug_kit.git
     cd debug_kit
@@ -247,7 +267,9 @@ PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを�
 
 たくさんのテストケースがあると、その中からサブセットだけをテストしたいときや、失敗したテストだけを
 実行したいときがあると思います。コマンドラインからテストメソッドをフィルタリングするときはオプションを
-使用します。 ::
+使用します。
+
+.. code-block:: bash
 
     $ phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -259,7 +281,9 @@ PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを�
 
 コマンドラインから PHPUnit に組み込まれたコードカバレッジツールを用いて、コードカバレッジのレポートを
 生成することができます。PHPUnit はカバレッジの結果を含む静的な HTML ファイルをいくつか生成します。
-テストケースのカバレッジを生成するには以下のようにします。 ::
+テストケースのカバレッジを生成するには以下のようにします。
+
+.. code-block:: bash
 
     $ phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -272,7 +296,9 @@ PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを�
 しばしば、あなたのアプリケーションは、いくつかのプラグインで構成されます。これらの状況では、
 各プラグインのテストを実行することは、かなり面倒です。アプリケーションの **phpunit.xml** ファイルに
 ``<testsuite>`` セクションを追加して、アプリケーションを構成するプラグインのそれぞれのテストを
-実行することができます。 ::
+実行することができます。
+
+.. code-block:: xml
 
     <testsuites>
         <testsuite name="App Test Suite">
@@ -417,7 +443,7 @@ CakePHP はフィクスチャに基づいたテストケースを実行するに
 のプレフィックスが必ず付きます。
 
 ``$fields`` ではテーブルを構成するフィールドと、その定義を記述します。フィールドの定義には
-:php:class:`Cake\\Database\\Schema\\Table`` と同じ書式を使います。
+:php:class:`Cake\\Database\\Schema\\Table` と同じ書式を使います。
 テーブル定義のための利用可能なキーは以下のとおりです。
 
 type
@@ -509,7 +535,6 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 例を見てみましょう。アプリケーションで利用可能な articles という名前のテーブルがあると仮定すると、
 前のセクションで作成した 例のフィクスチャ (**tests/Fixture/ArticlesFixture.php**) を、
 次のように書き換えてください。 ::
-
 
     class ArticlesFixture extends TestFixture
     {
@@ -1067,7 +1092,7 @@ PSR7 モードを有効にして、アプリケーションクラスの設定を
     $this->assertContentType('application/json');
 
 上記のアサーションメソッドに加えて、
-`TestSuite <http://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ と
+`TestSuite <https://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ と
 `PHPUnit <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__ の
 中にある全てのアサーションを使用することができます。
 
@@ -1487,9 +1512,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
 いくつかのテストを同時に実行したいときはテストスイートを作成することができます。
 テストスイートは、いくつかの テストケースから構成されています。アプリケーションの **phpunit.xml**
-ファイルにテストスイートを作成するか、または ``CakeTestSuite`` を使用して、スイートクラスを
-作成することによって実行することができます。テストスイートを定義するためにシンプルに含む/含まないの
-ルールが必要なだけなら、 **phpunit.xml** を使用すると良いです。簡単な例は次のようになります。
+ファイルにテストスイートを作成することによって実行することができます。簡単な例は次のようになります。
 
 .. code-block:: xml
 
@@ -1500,28 +1523,6 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
         <exclude>src/Model/Cloud/ImagesTest.php</exclude>
       </testsuite>
     </testsuites>
-
-``CakeTestSuite`` は、ファイルシステムに基づいて、テストスイートを作成するための
-いくつかのメソッドを提供しています。それはあなたがテストスイートを用意したい任意のコードを
-実行することができます。すべてのモデルのテストのためのテストスイートを作成したい場合は、
-**tests/TestCase/AllModelTest.php** を作成することになります。次のように記述してください。 ::
-
-    class AllModelTest extends TestSuite
-    {
-        public static function suite() {
-            $suite = new CakeTestSuite('All model tests');
-            $suite->addTestDirectory(TESTS . 'Case/Model');
-            return $suite;
-        }
-    }
-
-上記のコードは **tests/TestCase/Model/** フォルダで見つかったすべてのテストケースを
-グループ化します。個々のファイルを追加するには、 ``$suite->addTestFile($filename);``
-を使用します。以下のように、すべてのテストのディレクトリを再帰的に追加することができます。 ::
-
-    $suite->addTestDirectoryRecursive(TESTS . 'TestCase');
-
-再帰的に **tests/TestCase/** ディレクトリ内のすべてのテストケースを追加します。
 
 プラグインのテスト作成
 ======================
@@ -1566,13 +1567,13 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
     <!-- フィクスチャのためのリスナーのセットアップ -->
     <listeners>
-            <listener
-            class="\Cake\TestSuite\Fixture\FixtureInjector"
-            file="./vendor/cakephp/cakephp/src/TestSuite/Fixture/FixtureInjector.php">
-                    <arguments>
-                            <object class="\Cake\TestSuite\Fixture\FixtureManager" />
-                    </arguments>
-            </listener>
+        <listener
+        class="\Cake\TestSuite\Fixture\FixtureInjector"
+        file="./vendor/cakephp/cakephp/src/TestSuite/Fixture/FixtureInjector.php">
+            <arguments>
+                <object class="\Cake\TestSuite\Fixture\FixtureManager" />
+            </arguments>
+        </listener>
     </listeners>
 
 また、フィクスチャがロード可能であることを確認する必要があります。次のように **composer.json**
@@ -1666,7 +1667,10 @@ Jenkins のために別のデータベースを用意するのは、初歩的な
 
 各ビルドの前に、データベースのドロップと再作成することをお勧めします。
 一度のビルドの失敗によって、立て続けに起きるであろう失敗の連鎖を断ち切ってくれるはずです。
-以下のような *シェルスクリプトのステップ* をビルドに加えてください。 ::
+以下のような *シェルスクリプトのステップ* をビルドに加えてください。
+
+
+.. code-block:: bash
 
     mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
 
@@ -1680,7 +1684,7 @@ Jenkins のために別のデータベースを用意するのは、初歩的な
 .. code-block:: bash
 
     # もしなければ、Composer をダウンロード
-    test -f 'composer.phar' || curl -sS https://getcomposer.org/installer| php
+    test -f 'composer.phar' || curl -sS https://getcomposer.org/installer | php
     # 依存関係をインストール
     php composer.phar install
     vendor/bin/phpunit --log-junit junit.xml --coverage-clover clover.xml

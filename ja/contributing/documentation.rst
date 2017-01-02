@@ -13,7 +13,7 @@ GitHub 上にあるそのページのオンラインエディタに飛ぶこと�
 CakePHP ドキュメンテーションは
 `継続的インテグレーション <https://ja.wikipedia.org/wiki/%E7%B6%99%E7%B6%9A%E7%9A%84%E3%82%A4%E3%83%B3%E3%83%86%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3>`_
 で行われているので、Jenkins サーバ上でいつでも
-`various builds <http://ci.cakephp.org>`_
+`various builds <https://ci.cakephp.org>`_
 のステータスをチェックすることができます。
 
 翻訳

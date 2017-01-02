@@ -481,26 +481,7 @@ Example::
 Member Visibility
 -----------------
 
-Use PHP5's private and protected keywords for methods and variables.
-Additionally, non-public method or variable names start with a single underscore
-(``_``). Example::
-
-    class A
-    {
-        protected $_iAmAProtectedVariable;
-
-        protected function _iAmAProtectedMethod()
-        {
-           /* ... */
-        }
-
-        private $_iAmAPrivateVariable;
-
-        private function _iAmAPrivateMethod()
-        {
-            /* ... */
-        }
-    }
+Use PHP's ``public``, ``protected`` and ``private`` keywords for methods and variables.
 
 Example Addresses
 -----------------

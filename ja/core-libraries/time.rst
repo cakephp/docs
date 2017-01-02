@@ -40,7 +40,7 @@
     が使われていました。
 
 Chronos についてより詳しく知りたい場合は `API ドキュメント
-<http://api.cakephp.org/chronos/1.0/>`_ をご覧ください。
+<https://api.cakephp.org/chronos/1.0/>`_ をご覧ください。
 
 .. start-time
 

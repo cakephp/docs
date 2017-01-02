@@ -260,7 +260,7 @@ ApiShell Retiré
 ---------------
 
 ApiShell a été retiré puisqu'il ne fournit aucun bénéfice sur le fichier
-source lui-même et sur la documentation/`l'API <http://api.cakephp.org/>`_
+source lui-même et sur la documentation/`l'API <https://api.cakephp.org/>`_
 en-ligne.
 
 SchemaShell Removed

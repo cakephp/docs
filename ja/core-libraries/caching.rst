@@ -360,7 +360,7 @@ Cache クラスは簡単な方法でカウンタ値をインクリメント/デ�
 削除するように Cache エンジンに指示できます。 ::
 
     // src/Model/Table/ArticlesTable.php
-    public function afterSave($entity, $options = [])
+    public function afterSave($event, $entity, $options = [])
     {
         if ($entity->isNew()) {
             Cache::clearGroup('article', 'site_home');
@@ -378,7 +378,7 @@ Cache クラスは簡単な方法でカウンタ値をインクリメント/デ�
      * すべてのキャッシュ設定をクリアする前述の例のバリエーション
      * 同じグループを持つ
      */
-    public function afterSave($entity, $options = [])
+    public function afterSave($event, $entity, $options = [])
     {
         if ($entity->isNew()) {
             $configs = Cache::groupConfigs('article');

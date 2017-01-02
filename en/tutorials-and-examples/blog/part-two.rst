@@ -338,7 +338,7 @@ corresponding session variable. The controller's
 URL. The param ``['action' => 'index']`` translates to URL /articles i.e the
 index action of the ``ArticlesController``. You can refer to
 :php:func:`Cake\\Routing\\Router::url()` function on the `API
-<http://api.cakephp.org>`_ to see the formats in which you can specify a URL for
+<https://api.cakephp.org>`_ to see the formats in which you can specify a URL for
 various CakePHP functions.
 
 Calling the ``save()`` method will check for validation errors and
@@ -679,7 +679,7 @@ for building more feature-rich applications.
 
 Now that you've created a basic CakePHP application, you can either continue to
 :doc:`/tutorials-and-examples/blog/part-three`, or start your own project. You
-can also peruse the :doc:`/topics` or `API <http://api.cakephp.org/3.0>` to
+can also peruse the :doc:`/topics` or `API <https://api.cakephp.org/3.0>` to
 learn more about CakePHP.
 
 If you need help, there are many ways to get the help you need - please see the

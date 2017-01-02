@@ -255,7 +255,7 @@ ApiShell Removido
 -----------------
 
 O ApiShell foi removido pois ele não fornecia nenhum beneficio além do
-próprio arquivo fonte e da documentação/`API <http://api.cakephp.org/>`_ online.
+próprio arquivo fonte e da documentação/`API <https://api.cakephp.org/>`_ online.
 
 SchemaShell Removido
 --------------------
