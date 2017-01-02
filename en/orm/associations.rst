@@ -122,6 +122,8 @@ Each association type accepts multiple associations where the keys are the
 aliases, and the values are association config data. If numeric keys are used
 the values will be treated as association aliases.
 
+.. _has-one-associations:
+
 HasOne Associations
 ===================
 
@@ -220,6 +222,8 @@ The above would emit SQL that is similar to::
 
     SELECT * FROM users INNER JOIN addresses ON addresses.user_id = users.id;
 
+.. _belongs-to-associations:
+
 BelongsTo Associations
 ======================
 
@@ -309,6 +313,7 @@ The above would emit SQL that is similar to::
 
     SELECT * FROM addresses LEFT JOIN users ON addresses.user_id = users.id;
 
+.. _has-many-associations:
 
 HasMany Associations
 ====================
@@ -455,6 +460,8 @@ You should make sure that your database tables do not contain columns that match
 association property names. If for example you have counter fields that conflict
 with association properties, you must either rename the association property, or
 the column name.
+
+.. _belongs-to-many-associations:
 
 BelongsToMany Associations
 ==========================
