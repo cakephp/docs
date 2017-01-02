@@ -923,7 +923,7 @@ replace
     from the database. Only provided records will remain (or be inserted).
 
 By default the ``append`` saving strategy is used.
-See :ref:`has-many-associations` for details on defining the `saveStategy`.
+See :ref:`has-many-associations` for details on defining the ``saveStategy``.
 
 Whenever you add new records into an existing association you should always mark
 the association property as 'dirty'. This lets the ORM know that the association
@@ -973,7 +973,7 @@ replace
     the entities intended to be saved, those links will be updated, not deleted
     and then re-saved.
     
-See :ref:`belongs-to-many-associations` for details on defining the `saveStategy`.
+See :ref:`belongs-to-many-associations` for details on defining the ``saveStategy``.
 
 By default the ``replace`` strategy is used. Whenever you add new records into
 an existing association you should always mark the association property as
