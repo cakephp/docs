@@ -149,29 +149,29 @@ We can check what our category tree data looks like by visiting
 
 -  My Categories
 
-    -  Fun
+   -  Fun
 
-        -  Sport
+      -  Sport
 
-            -  Surfing
-            -  Extreme knitting
+         -  Surfing
+         -  Extreme knitting
 
-        -  Friends
+      -  Friends
 
-            -  Gerald
-            -  Gwendolyn
+         -  Gerald
+         -  Gwendolyn
 
-    -  Work
+   -  Work
 
-        -  Reports
+      -  Reports
 
-            -  Annual
-            -  Status
+         -  Annual
+         -  Status
 
-        -  Trips
+      -  Trips
 
-            -  National
-            -  International
+         -  National
+         -  International
 
 Adding data
 -----------
@@ -199,34 +199,34 @@ to the tree making your new addition a new top level entry::
 Running the above two code snippets would alter your tree as
 follows:
 
-- My Categories
+-  My Categories
 
-    - Fun
+   -  Fun
 
-        - Sport
+      -  Sport
 
-            - Surfing
-            - Extreme knitting
-            - Skating **New**
+         -  Surfing
+         -  Extreme knitting
+         -  Skating **New**
 
-        - Friends
+      -  Friends
 
-            - Gerald
-            - Gwendolyn
+         -  Gerald
+         -  Gwendolyn
 
-    - Work
+   -  Work
 
-        - Reports
+      -  Reports
 
-            - Annual
-            - Status
+         -  Annual
+         -  Status
 
-        - Trips
+      -  Trips
 
-            - National
-            - International
+         -  National
+         -  International
 
-- Other People's Categories **New**
+-  Other People's Categories **New**
 
 Modifying data
 --------------
@@ -244,34 +244,34 @@ parent\_id is included in the data that is passed to save if the
 value doesn't change, neither does the data structure. Therefore
 the tree of data would now look like:
 
-- My Categories
+-  My Categories
 
-    - Fun
+   -  Fun
 
-        - Sport
+      -  Sport
 
-            - Surfing
-            - Extreme fishing **Updated**
-            - Skating
+         -  Surfing
+         -  Extreme fishing **Updated**
+         -  Skating
 
-        - Friends
+      -  Friends
 
-            - Gerald
-            - Gwendolyn
+         -  Gerald
+         -  Gwendolyn
 
-    - Work
+   -  Work
 
-        - Reports
+      -  Reports
 
-            - Annual
-            - Status
+         -  Annual
+         -  Status
 
-        - Trips
+      -  Trips
 
-            - National
-            - International
+         -  National
+         -  International
 
-- Other People's Categories
+-  Other People's Categories
 
 Moving data around in your tree is also a simple affair. Let's say
 that Extreme fishing does not belong under Sport, but instead
@@ -288,35 +288,35 @@ following code::
 
 As would be expected the structure would be modified to:
 
-- My Categories
+-  My Categories
 
-    - Fun
+   -  Fun
 
-        - Sport
+      -  Sport
 
-            - Surfing
-            - Skating
+         -  Surfing
+         -  Skating
 
-        - Friends
+      -  Friends
 
-            - Gerald
-            - Gwendolyn
+         -  Gerald
+         -  Gwendolyn
 
-    - Work
+   -  Work
 
-        - Reports
+      -  Reports
 
-            - Annual
-            - Status
+         -  Annual
+         -  Status
 
-        - Trips
+      -  Trips
 
-            - National
-            - International
+         -  National
+         -  International
 
-- Other People's Categories
+-  Other People's Categories
 
-    -  Extreme fishing **Moved**
+   -  Extreme fishing **Moved**
 
 Deleting data
 -------------
@@ -333,30 +333,30 @@ any model. For example with the following code::
 
 The category tree would be modified as follows:
 
-- My Categories
+-  My Categories
 
-    - Fun
+   -  Fun
 
-        - Sport
+      -  Sport
 
-            - Surfing
-            - Skating
+         -  Surfing
+         -  Skating
 
-        - Friends
+      -  Friends
 
-            - Gerald
-            - Gwendolyn
+         -  Gerald
+         -  Gwendolyn
 
-    - Work
+   -  Work
 
-        - Trips
+      -  Trips
 
-            - National
-            - International
+         -  National
+         -  International
 
-- Other People's Categories
+-  Other People's Categories
 
-    - Extreme fishing
+   -  Extreme fishing
 
 Querying and using your data
 ----------------------------
@@ -495,12 +495,12 @@ are a few more tree-orientated permutations at your disposal.
 
     -  My Categories
 
-        - ...
-        - Work
-        - Trips
+       -  ...
+       -  Work
+       -  Trips
 
-            - ...
-            - International
+          -  ...
+          -  International
 
     Using the id of "International" getPath will return each of the
     parents in turn (starting from the top). ::
@@ -608,13 +608,13 @@ Taking the following tree as a starting point:
 
 -  My Categories
 
-    -  Fun
+   -  Fun
 
-        -  Sport
+      -  Sport
 
-            -  Surfing
-            -  Extreme knitting
-            -  Skating
+         -  Surfing
+         -  Extreme knitting
+         -  Skating
 
 Running the following code with the id for 'Sport'::
 
@@ -624,11 +624,11 @@ The Sport node will be become a top level node:
 
 -  My Categories
 
-    -  Fun
+   -  Fun
 
-        -  Surfing
-        -  Extreme knitting
-        -  Skating
+      -  Surfing
+      -  Extreme knitting
+      -  Skating
 
 -  Sport **Moved**
 
@@ -644,11 +644,11 @@ The tree would become
 
 -  My Categories
 
-    -  Fun
+   -  Fun
 
-        -  Surfing
-        -  Extreme knitting
-        -  Skating
+      -  Surfing
+      -  Extreme knitting
+      -  Skating
 
 This demonstrates the alternate use for ``removeFromTree``, the
 children have been reparented and 'Sport' has been deleted.

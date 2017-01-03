@@ -196,7 +196,7 @@ con el título como primer parámetro y la URL como segundo parámetro.
 Cuando crees URLs en CakePHP te recomendamos emplear el formato de array. Se
 explica con detenimiento en la sección de *Routes*. Si utilizas estas rutas,
 podrás aprovecharte de las potentes funcionalidades de generación inversa de
-rutas de CakePHP en el futuro. Además puedes especificar ritas relativas a la
+rutas de CakePHP en el futuro. Además puedes especificar rutas relativas a la
 base de tu aplicación de la forma '/controlador/accion/param1/param2'.
 
 Llegados a este punto, deberías poder ver esta página si escribes la ruta a tu

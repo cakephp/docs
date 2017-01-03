@@ -83,6 +83,7 @@ implementation::
 
     // app/Controller/Component/MyAuthComponent.php
     App::uses('AuthComponent', 'Controller/Component');
+    
     class MyAuthComponent extends AuthComponent {
         // Add your code to override the core AuthComponent
     }
@@ -160,6 +161,7 @@ the file in ``app/Controller/Component/MathComponent.php``. The basic
 structure for the component would look something like this::
 
     App::uses('Component', 'Controller');
+    
     class MathComponent extends Component {
         public function doComplexOperation($amount1, $amount2) {
             return $amount1 + $amount2;
@@ -216,6 +218,7 @@ way you include them in controllers - using the ``$components`` var::
 
     // app/Controller/Component/CustomComponent.php
     App::uses('Component', 'Controller');
+    
     class CustomComponent extends Component {
         // the other component your component uses
         public $components = array('Existing');
@@ -231,6 +234,7 @@ way you include them in controllers - using the ``$components`` var::
 
     // app/Controller/Component/ExistingComponent.php
     App::uses('Component', 'Controller');
+    
     class ExistingComponent extends Component {
 
         public function foo() {

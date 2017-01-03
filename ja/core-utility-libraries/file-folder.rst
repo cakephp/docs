@@ -45,7 +45,7 @@ Folder API
 
 .. php:attr:: path
 
-    フォルダの現在のパス。 :php:meth:`Folder::pwd()` でも同じ情報を返します。
+    フォルダの現在のパス。 :php:meth:`Folder::pwd()` は同じ情報を返します。
 
 
 .. php:attr:: sort
@@ -73,7 +73,7 @@ Folder API
 
     :rtype: string
 
-    カレントディレクトリを $path へ移動します。失敗時には false が返ります ::
+    ディレクトリを $path へ移動します。失敗時には false が返ります。 ::
 
         $folder = new Folder('/foo');
         echo $folder->path; // /foo が表示されます
@@ -131,18 +131,18 @@ Folder API
     :rtype: string
 
     $path に与えるべき適切なスラッシュを返します。
-    （Windows 環境では '\\' で、その他の環境では '/'）
+    （Windows のパスは '\\' で、その他のパスは '/'）
 
 .. php:method:: create(string $pathname, integer $mode = false)
 
     :rtype: boolean
 
-    ディレクトリを作成します。
+    再帰的にディレクトリ構造を作成します。
     `/foo/bar/baz/shoe/horn` のような深い階層の作成も可能です。 ::
 
         $folder = new Folder();
         if ($folder->create('foo' . DS . 'bar' . DS . 'baz' . DS . 'shoe' . DS . 'horn')) {
-            // フォルダ作成に成功した場合の処理
+            // 入れ子になっているフォルダの作成に成功
         }
 
 .. php:method:: delete(string $path = null)
@@ -153,14 +153,14 @@ Folder API
 
         $folder = new Folder('foo');
         if ($folder->delete()) {
-            // フォルダの削除が成功した場合の処理
+            // foo とその入れ子になっているフォルダの削除に成功
         }
 
 .. php:method:: dirsize()
 
     :rtype: integer
 
-    フォルダとその中身のサイズを返します。
+    フォルダとその内容のサイズをバイト数で返します。
 
 .. php:method:: errors()
 
@@ -172,7 +172,7 @@ Folder API
 
     :rtype: array
 
-    現在のディレクトリで指定のパターンにマッチしたファイルを配列で返します。 ::
+    現在のディレクトリでマッチしたファイルを配列で返します。 ::
 
         // app/webroot/img/ フォルダ内の .png を検索し、ソートして返す
         $dir = new Folder(WWW_ROOT . 'img');
@@ -190,7 +190,7 @@ Folder API
 
 .. note::
 
-    find メソッドと findRecursive メソッドは、ファイルのみを検索します。
+    フォルダの find メソッドと findRecursive メソッドは、ファイルのみを検索します。
     フォルダとファイルを取得したい場合は、 :php:meth:`Folder::read()` もしくは
     :php:meth:`Folder::tree()` 参照してください。
 
@@ -198,7 +198,7 @@ Folder API
 
     :rtype: array
 
-    パターンにマッチした全てのファイルをカレントディレクトリを付けて返します。 ::
+    カレントディレクトリ内とそれ以下のすべての一致するファイルの配列を返します。 ::
 
         // test もしくは index で始まるファイルを再帰的に検索する
         $dir = new Folder(WWW_ROOT);
@@ -220,13 +220,13 @@ Folder API
 
     :rtype: boolean
 
-    ファイルが CakePath の中に存在すれば true を返します。
+    ファイルが与えられた CakePath の中に存在すれば true を返します。
 
 .. php:method:: inPath(string $path = '', boolean $reverse = false)
 
     :rtype: boolean
 
-    指定されたファイルが与えられたパスの中に存在すれば true を返します。 ::
+    ファイルが与えられたパスの中に存在すれば true を返します。 ::
 
        $Folder = new Folder(WWW_ROOT);
        $result = $Folder->inPath(APP);
@@ -240,13 +240,13 @@ Folder API
 
     :rtype: boolean
 
-    引数の $path が絶対パスであれば true を返します。
+    与えられた $path が絶対パスであれば true を返します。
 
 .. php:staticmethod:: isSlashTerm(string $path)
 
     :rtype: boolean
 
-    引数の $path がスラッシュで終了していれば true を返します。（つまり、 slash-terminated） ::
+    与えられた $path がスラッシュで終了していれば true を返します。（つまり、 slash-terminated） ::
 
         $result = Folder::isSlashTerm('/my/test/path');
         // $result = false
@@ -257,7 +257,7 @@ Folder API
 
     :rtype: boolean
 
-    引数の $path が Windows のパスであれば true を返します。
+    与えられた $path が Windows のパスであれば true を返します。
 
 .. php:method:: messages()
 
@@ -275,8 +275,8 @@ Folder API
 
     :rtype: string
 
-    引数の $path を適切なスラッシュに調整して返します。
-    （Windows 環境では '\\' で、その他の環境では '/'）
+    与えられた $path を適切なスラッシュに調整して返します。
+    （Windows のパスは '\\' で、その他のパスは '/'）
 
 .. php:method:: pwd()
 
@@ -322,20 +322,19 @@ Folder API
 
     :rtype: string
 
-    引数のパス内にある ".." の名前を解決したパスを返します。
+    本当のパスを取得します（".." などを考慮して）
 
 .. php:staticmethod:: slashTerm(string $path)
 
     :rtype: string
 
-    引数の $path に終端のスラッシュを付けたパスを返します。
-    (corrected for Windows or other OS)
+    引数の $path に (Windows や、その他の OS で正しい)  終端のスラッシュを付けたパスを返します。
 
 .. php:method:: tree(null|string $path = null, array|boolean $exceptions = true, null|string $type = null)
 
     :rtype: mixed
 
-    ディレクトリ一覧とその中のファイル一覧を返します。
+    入れ子になったディレクトリと各ディレクトリ中のファイルの配列を返します。
 
 
 File API
@@ -354,12 +353,12 @@ File API
 
 .. php:attr:: name
 
-    拡張子付きのファイル名。 似たような動作をする :php:meth:`File::name()` では、
-    拡張子無しのファイル名を返します。
+    拡張子付きのファイル名。
+    拡張子なしのファイル名を返す :php:meth:`File::name()` とは異なります。
 
 .. php:attr:: info
 
-    ファイル情報の配列。このプロパティよりも :php:meth:`File::info()` を使ってください。
+    ファイル情報の配列。代わりに :php:meth:`File::info()` を使用してください。
 
 .. php:attr:: handle
 
@@ -377,13 +376,13 @@ File API
 
     :rtype: boolean
 
-    引数の文字列をファイルへ追記します。
+    与えられたデータ文字列を現在のファイルに追記します。
 
 .. php:method:: close()
 
     :rtype: boolean
 
-    ファイルがオープンされていた場合、そのファイルをクローズします
+    ファイルがオープンされていた場合、そのファイルをクローズします。
 
 .. php:method:: copy(string $dest, boolean $overwrite = true)
 
@@ -407,13 +406,13 @@ File API
 
     :rtype: boolean
 
-    ファイルに実行権限が付いていた場合に true を返します。
+    ファイルが実行可能な場合に true を返します。
 
 .. php:method:: exists()
 
     :rtype: boolean
 
-    ファイルが存在した場合に true を返します。
+    ファイルが存在する場合に true を返します。
 
 .. php:method:: ext()
 
@@ -431,7 +430,7 @@ File API
 
     :rtype: integer
 
-    ファイルのグループを返します。
+    ファイルのグループを返します。エラーの場合は false を返します。
 
 .. php:method:: info()
 
@@ -447,20 +446,20 @@ File API
 
     :rtype: integer
 
-    最新のアクセス時間を返します。
+    最終アクセス時刻を返します。エラーの場合は false を返します。
 
 .. php:method:: lastChange()
 
     :rtype: integer
 
-    最新の更新時間を返します。
+    最終更新時刻を返します。エラーの場合は false を返します。
 
 .. php:method:: md5(integer|boolean $maxsize = 5)
 
     :rtype: string
 
-    ファイルサイズを事前にチェックした上で、ファイルの md5 チェックサムを返します。
-    (訳注：$maxsize の単位は MB)
+    ファイルサイズを事前にチェックした上で、ファイルの md5 チェックサムを取得します。
+    エラーの場合は false を取得します。
 
 .. php:method:: name()
 
@@ -478,7 +477,7 @@ File API
 
     :rtype: boolean
 
-    現在のファイルを引数の $mode でオープンします。
+    現在のファイルを与えられた $mode でオープンします。
 
 .. php:method:: owner()
 
@@ -490,8 +489,7 @@ File API
 
     :rtype: string
 
-    Returns the "chmod" (permissions) of the file.
-    ファイルのパーミッションを返します。
+    ファイルの "chmod" (パーミッション) を返します。
 
 .. php:staticmethod:: prepare(string $data, boolean $forceWindows = false)
 
@@ -511,7 +509,7 @@ File API
 
     :rtype: mixed
 
-    ファイルの内容を文字列で返します。失敗時は false を返します。
+    現在のファイルの内容を文字列で返します。失敗時は false を返します。
 
 .. php:method:: readable()
 
@@ -523,8 +521,7 @@ File API
 
     :rtype: string
 
-    安全にセーブするために、ファイル名を変換します。
-    (訳注：ホワイトスペース、ドット、ハイフンをアンダーバーへ変換)
+    保存するファイル名を安全にします。
 
 .. php:method:: size()
 
@@ -542,7 +539,7 @@ File API
 
     :rtype: boolean
 
-    引数のデータをファイルへ書き込みます。
+    与えられたデータを現在のファイルへ書き込みます。
 
 .. versionadded:: 2.1 ``File::mime()``
 
@@ -550,7 +547,7 @@ File API
 
     :rtype: mixed
 
-    ファイルの MIME タイプを返します。失敗時には false を返します。
+    ファイルの MIME タイプを取得します。失敗時は false を取得します。
 
 .. php:method:: replaceText( $search, $replace )
 
@@ -567,5 +564,5 @@ File API
 
 .. meta::
     :title lang=ja: Folder & File
-    :description lang=ja: The Folder and File utilities are convenience classes to help you read, write, and append to files; list files within a folder and other common directory related tasks.
+    :description lang=ja: Folder と File ユーティリティは、ファイルの読み書きや追記、フォルダ内のファイル名一覧の取得、その他ディレクトリに関連するタスクにおいて便利なクラスです。
     :keywords lang=ja: file,folder,cakephp utility,read file,write file,append file,recursively copy,copy options,folder path,class folder,file php,php files,change directory,file utilities,new folder,directory structure,delete file

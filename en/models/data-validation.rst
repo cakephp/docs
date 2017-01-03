@@ -629,7 +629,7 @@ with usage examples.
 
         public $validate = array(
             'password' => array(
-                'rule'    => array('lengthBetween', 5, 15),
+                'rule' => array('lengthBetween', 5, 15),
                 'message' => 'Passwords must be between 5 and 15 characters long.'
             )
         );
