@@ -38,7 +38,7 @@ section. The built-in providers map to the following values of ``$model``:
 * An array containing the ``schema`` key, maps to ``ArrayContext`` which allows
   you to create simple data structures to build forms against.
 * ``null`` and ``false`` map to the ``NullContext``, this context class simply
-  satisifies the interface FormHelper requires. This context is useful if you
+  satisfies the interface FormHelper requires. This context is useful if you
   want to build a short form that doesn't require ORM persistence.
 
 All contexts classes also have access to the request data, making it simpler to
@@ -112,10 +112,10 @@ Output:
 
     <form method="get" action="/articles/edit/5">
 
-Specifying a ``'file'`` value for ``type`` changes the form submission method to 'post', and includes an
-enctype of "multipart/form-data" on the form tag. This is to be used if there
-are any file elements inside the form. The absence of the proper enctype
-attribute will cause the file uploads not to function::
+Specifying a ``'file'`` value for ``type`` changes the form submission method to
+'post', and includes an enctype of "multipart/form-data" on the form tag. This
+is to be used if there are any file elements inside the form. The absence of
+the proper enctype attribute will cause the file uploads not to function::
 
     echo $this->Form->create($article, ['type' => 'file']);
 
@@ -125,10 +125,10 @@ Output:
 
    <form enctype="multipart/form-data" method="post" action="/articles/add">
 
-When using ``'put'``, ``'patch'`` or ``'delete'`` as ``type`` values, your form will be functionally equivalent
-to a 'post' form, but when submitted, the HTTP request method will be overridden
-with 'PUT', 'PATCH' or 'DELETE', respectively.  This allows CakePHP to emulate
-proper REST support in web browsers.
+When using ``'put'``, ``'patch'`` or ``'delete'`` as ``type`` values, your form
+will be functionally equivalent to a 'post' form, but when submitted, the HTTP
+request method will be overridden with 'PUT', 'PATCH' or 'DELETE', respectively.
+  This allows CakePHP to emulate proper REST support in web browsers.
 
 Setting a URL for the Form
 --------------------------
@@ -234,9 +234,9 @@ Creating Form Inputs
 .. php:method:: input(string $fieldName, array $options = [])
 
 * ``$fieldName`` - A field name from the model;
-* ``$options`` - An optional array of options that can include ``input``-specific options,
-options for the other methods (which ``input()`` employs internally to generate 
-various HTML elements) as well as any valid HTML attributes.
+* ``$options`` - An optional array of options that can include ``input``-specific
+ options, options for the other methods (which ``input()`` employs internally to
+  generate various HTML elements) as well as any valid HTML attributes.
 
 The ``input()`` method lets you to generate complete form inputs. These
 inputs will include a wrapping div, label, input widget, and validation error if
@@ -290,14 +290,14 @@ you need to::
     echo $this->Form->input('published', ['type' => 'checkbox']);
 
 .. note::
-As a small subtelty, generating specific types of input via the ``input()`` 
-form method by providing a specific input ``type`` option (e.g. 
+
+As a small subtlety, generating specific types of input via the ``input()``
+form method by providing a specific input ``type`` option (e.g.
 ``'type' => 'checkbox'`` as in the example above) will always also generate
 the wrapping ``div``, by default. Generating the same type of input element
 via one of the specific form methods (e.g. ``$this->Form->checkbox('published');``)
 in most cases won't generate the wrapping ``div``.
 Depending on your need you can use one or another when both are available.
-
 
 .. _html5-required:
 
@@ -339,8 +339,9 @@ A more extensive example showing some options for a date field::
         'maxYear' => date('Y') - 18,
     ]);
 
-Besides the specific :ref:`options <input-specific-options>` for ``input()`` found below, you also can specify
-any option for the chosen (or inferred by Cake) input type and any HTML attribute (for instance ``onfocus``).
+Besides the specific :ref:`options <input-specific-options>` for ``input()``,
+ found below, you also can specify any option for the chosen (or inferred by
+ Cake) input type and any HTML attribute (for instance ``onfocus``).
 
 If you want to create a ``select`` form field while using a *belongsTo* (or
 *hasOne*) relation, you can add the following to your UsersController
@@ -352,8 +353,8 @@ Afterwards, add the following to your view template::
 
     echo $this->Form->input('group_id', ['options' => $groups]);
 
-To make a ``select`` box for a User *belongsToMany* Groups association you can add the
-following to your UsersController::
+To make a ``select`` box for a User *belongsToMany* Groups association you can
+add the following to your UsersController::
 
     $this->set('groups', $this->Users->Groups->find('list'));
 
@@ -363,7 +364,8 @@ Afterwards, add the following to your view template::
 
 If your model name consists of two or more words (e.g.
 "UserGroup"), when passing the data using ``set()`` you should name your
-data in a pluralised and `lower camelCased <https://en.wikipedia.org/wiki/Camel_case#Variations_and_synonyms>` format as follows::
+data in a pluralised and `lower camelCased <https://en.wikipedia.org/wiki/Camel_case#Variations_and_synonyms>`
+format as follows::
 
     $this->set('userGroups', $this->UserGroups->find('list'));
 
@@ -377,7 +379,7 @@ Field Naming Conventions
 
 When creating input widgets you should name your fields after the matching
 attributes in the form's entity. For example, if you created a form for an
-``$article`` entity, you would create fields named after the properities. E.g.
+``$article`` entity, you would create fields named after the properties. E.g.
 ``title``, ``body`` and ``published``.
 
 You can create inputs for associated models, or arbitrary models by passing in
@@ -402,14 +404,14 @@ Options
 -------
 
 ``FormHelper::input()`` supports a large number of options. In addition to its
-own options ``input()`` accepts options for the inferred/chosen input types (e.g. for ``checkbox`` or ``textarea``), as well as
-HTML attributes. This subsection will cover the options specific to
-``FormHelper::input()``.
+own options ``input()`` accepts options for the inferred/chosen input types
+(e.g. for ``checkbox`` or ``textarea``), as well as HTML attributes.
+This subsection will cover the options specific to ``FormHelper::input()``.
 
 * ``$options['type']`` - You can force the type of an input, overriding model
-  introspection, by specifying a ``type``. In addition to the field types found in
-  the :ref:`automagic-form-elements`, you can also create ``'file'``, ``'password'``,
-  and any other type supported by HTML5::
+  introspection, by specifying a ``type``. In addition to the field types found
+   in the :ref:`automagic-form-elements`, you can also create ``'file'``,
+   ``'password'``, and any other type supported by HTML5::
 
     echo $this->Form->input('field', ['type' => 'file']);
     echo $this->Form->input('email', ['type' => 'email']);
@@ -479,7 +481,8 @@ HTML attributes. This subsection will cover the options specific to
 * ``$options['error']`` - Using this key allows you to override the default model
   error messages and can be used, for example, to set i18n messages.
 
-  To disable error message output & field classes set the ``error`` key to ``false``::
+  To disable error message output & field classes set the ``error`` key to
+  ``false``::
 
     echo $this->Form->input('name', ['error' => false]);
 
@@ -511,9 +514,10 @@ Common Options For Specific Inputs
 
 Many of the various input element methods support a common set of options which,
 depending on the form method used, must be provided inside the ``$options`` or
-in the ``$attributes`` array argument. All of these options are also supported by the ``input()`` method.
-To reduce repetition, the common options shared by all input methods are described
-in this subsection:
+in the ``$attributes`` array argument. All of these options are also supported
+ by the ``input()`` method.
+To reduce repetition, the common options shared by all input methods are
+described in this subsection:
 
 * ``['id']`` - Set this key to force the value of the DOM id for the input.
   This will override the idPrefix that may be set.
@@ -537,7 +541,7 @@ in this subsection:
 
     You cannot use ``default`` to check a checkbox - instead you might
     set the value in ``$this->request->data`` in your controller,
-    or set the input option ``checked`` to ``true``.
+    or set the input option ``'checked'`` to ``true``.
 
     Beware of using ``false`` to assign a default value. A ``false`` value is
     used to disable/exclude options of an input field, so ``'default' => false``
@@ -548,7 +552,7 @@ in this subsection:
   Form, Entity or ``request->data`` etc.
 
   .. note::
-  
+
     If you want to set a field to not render its value fetched from
     context or valuesSource you will need to set ``'value'`` to ``''``
     (instead of setting it to ``null``).
@@ -566,8 +570,9 @@ Options for Select, Checkbox and Radio Inputs
 ---------------------------------------------
 
 * ``['value']`` - may also be used in combination with a select-type input
-  (i.e. for types ``select``, ``date``, ``time``, ``datetime``). Set ``'value'`` to the value of the
-  item you wish to be selected by default when the input is rendered::
+  (i.e. for types ``select``, ``date``, ``time``, ``datetime``). Set ``'value'``
+   to the value of the item you wish to be selected by default when the input is
+    rendered::
 
     echo $this->Form->time('close_time', [
         'value' => '13:30:00'
@@ -590,8 +595,8 @@ Options for Select, Checkbox and Radio Inputs
 * ``['empty']`` - If set to ``true``, forces the input to remain empty.
 
   When passed to a ``select`` method, this creates a blank HTML ``option``
-  element with an empty value in your drop down list. If you want to have an empty
-  value with text displayed instead of just a blank ``option``, pass in a
+  element with an empty value in your drop down list. If you want to have an
+  empty value with text displayed instead of just a blank ``option``, pass a
   string to ``'empty'``::
 
       echo $this->Form->select(
@@ -613,7 +618,7 @@ Options for Select, Checkbox and Radio Inputs
           <option value="4">5</option>
       </select>
 
-  Options can also be upplied as key-value pairs.
+  Options can also be applied as key-value pairs.
 
 * ``['hiddenField']`` - For certain input types (checkboxes, radios) a
   hidden input is created so that the key in ``$this->request->data`` will exist
@@ -643,7 +648,7 @@ Options for Select, Checkbox and Radio Inputs
   primary colors would be overridden:
 
   .. code-block:: html
-  
+
     <h2>Primary Colors</h2>
     <input type="hidden" name="color" value="0" />
     <label for="color-red">
@@ -711,8 +716,9 @@ Datetime Options
   Would create 4 ``option`` HTML elements in the minute ``select`` element.
   One for each 15 minutes.
 
-* ``['round']`` - Can be set to ``'up'`` or ``'down'`` to force rounding in either
-  direction. Defaults to ``null`` which rounds half up according to ``'interval'``.
+* ``['round']`` - Can be set to ``'up'`` or ``'down'`` to force rounding in
+  either direction. Defaults to ``null`` which rounds half up according to
+  ``'interval'``.
 
 * ``['monthNames']`` - If ``false``, 2 digit numbers will be used instead
   of text names of the months. If it is given an array like
@@ -723,9 +729,9 @@ Creating Input Elements
 
 The rest of the methods available in the FormHelper are for
 creating specific form elements. Many of these methods also make
-use of a special ``$options`` or ``$attributes`` parameter. In this case, however,
-this parameter is used primarily to specify HTML tag attributes (such as
-the value or DOM id of an element in the form).
+use of a special ``$options`` or ``$attributes`` parameter. In this case,
+however, this parameter is used primarily to specify HTML tag attributes
+(such as the value or DOM id of an element in the form).
 
 Creating Text Inputs
 --------------------
@@ -733,8 +739,8 @@ Creating Text Inputs
 .. php:method:: text(string $name, array $options)
 
 * ``$name`` - A field name from the model.
-* ``$options`` - An optional array icluding any of the common :ref:`general-input-options` 
-  as well as any valid HTML attributes.
+* ``$options`` - An optional array including any of the common
+  :ref:`general-input-options` as well as any valid HTML attributes.
 
 Creates a simple ``input`` HTML element of ``text`` type. ::
 
@@ -752,8 +758,8 @@ Creating Password Inputs
 .. php:method:: password(string $fieldName, array $options)
 
 * ``$fieldName`` - A field name from the model.
-* ``$options`` - An optional array icluding any of the :ref:`general-input-options`
-  as well as any valid HTML attributes.
+* ``$options`` - An optional array including any of the
+  :ref:`general-input-options` as well as any valid HTML attributes.
 
 Creates a simple ``input`` element of ``password`` type. ::
 
@@ -771,8 +777,8 @@ Creating Hidden Inputs
 .. php:method:: hidden(string $fieldName, array $options)
 
 * ``$fieldName`` - A field name from the model.
-* ``$options`` - An optional array icluding any of the :ref:`general-input-options`
-  as well as any valid HTML attributes.
+* ``$options`` - An optional array including any of the
+  :ref:`general-input-options` as well as any valid HTML attributes.
 
 Creates a hidden form input. Example::
 
@@ -790,8 +796,9 @@ Creating Textareas
 .. php:method:: textarea(string $fieldName, array $options)
 
 * ``$fieldName`` - A field name from the model.
-* ``$options`` - An optional array icluding any of the :ref:`general-input-options`, 
-  the specific textarea options (see below) as well as any valid HTML attributes.
+* ``$options`` - An optional array including any of the
+  :ref:`general-input-options`, the specific textarea options (see below)
+  as well as any valid HTML attributes.
 
 Creates a textarea input field.
 The default widget template used is::
@@ -842,7 +849,7 @@ specific options:
     echo $this->Form->textarea('comment', ['rows' => '5', 'cols' => '5']);
 
   Output:
-  
+
   .. code-block:: html
 
     <textarea name="comment" cols="5" rows="5">
@@ -854,15 +861,15 @@ Creating Checkboxes
 .. php:method:: checkbox(string $fieldName, array $options)
 
 * ``$fieldName`` - A field name from the model.
-* ``$options`` - An optional array icluding any of the :ref:`general-input-options` 
-  as well as any valid HTML attributes.
+* ``$options`` - An optional array including any of the
+  :ref:`general-input-options` as well as any valid HTML attributes.
 
 Creates a ``checkbox`` form element. By default it uses the following
 widget template::
 
 'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>'
 
-This method also generates an associated hidden 
+This method also generates an associated hidden
 form ``input`` element to force the submission of data for
 the specified field::
 
@@ -904,14 +911,15 @@ Creating Radio Buttons
 
 * ``$fieldName`` - A field name from the model.
 * ``$options`` - An optional array containing the labels for the radio buttons.
-  When this array is missing, the method will either generate only 
-  the hidden input (if ``hiddenField`` is ``true``) or no element at all 
-  (if ``hiddenField`` is ``false``).
-* ``$attributes`` - An optional array icluding any of the :ref:`general-input-options`,
-  the specific radio attributes (see below) as well as any valid HTML attributes.
+  When this array is missing, the method will either generate only
+  the hidden input (if ``'hiddenField'`` is ``true``) or no element at all
+  (if ``'hiddenField'`` is ``false``).
+* ``$attributes`` - An optional array including any of the
+  :ref:`general-input-options`, the specific radio attributes (see below)
+  as well as any valid HTML attributes.
 
-Creates a set of radio button inputs. The defaultwidget template used is: ::
-    
+Creates a set of radio button inputs. The default widget template used is::
+
     'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>'
     'radioWrapper' => '{{label}}'
 
@@ -943,17 +951,19 @@ will output:
   starts at 0 and auto-increments by one unit for each extra button.
 * ``label`` - Boolean to indicate whether or not labels for widgets should be
   displayed. Defaults to ``true``.
-* ``hiddenField`` - Boolean to indicate if you want the results of ``radio()`` to
-  include a hidden input with a value of ``''``. This is useful for creating radio
-  sets that are non-continuous. Defaults to ``true``.
-* ``disabled`` - Set to ``true`` or ``disabled`` to disable all the radio
+* ``hiddenField`` - Boolean to indicate if you want the results of ``radio()``
+  to include a hidden input with a value of ``''``. This is useful for creating
+  radio sets that are non-continuous. Defaults to ``true``.
+* ``disabled`` - Set to ``true`` or ``'disabled'`` to disable all the radio
   buttons. Defaults to ``false``.
-* ``empty`` - Set it to ``true`` to create an extra button with the value ``''`` as the first
-  option. When ``true``, the radio label will be the string: 'empty'. Set this option to
-  a string to control the label value. The attribute defaults to ``false``.
+* ``empty`` - Set it to ``true`` to create an extra button with the value ``''``
+  as the first option. When ``true``, the radio label will be the string:
+  'empty'. Set this option to a string to control the label value. The attribute
+  defaults to ``false``.
 
-Generally ``$options`` contain simple ``key => value`` pairs. However, if you need to
-put custom attributes on your radio buttons you can use an expanded format::
+Generally ``$options`` contains simple ``key => value`` pairs. However, if you
+need to put custom attributes on your radio buttons you can use an expanded
+format::
 
     echo $this->Form->radio(
         'favorite_color',
@@ -989,16 +999,16 @@ Creating Select Pickers
 
 * ``$fieldName`` - A field name from the model.
 * ``$options`` - An optional array containing the list items for the select picker.
-  When this array is missing, the method will generate only the 
-  empty ``select`` element without any ``option`` elements inside it.
-* ``$attributes`` - An optional array icluding any of the :ref:`general-input-options`,
-  as well as any valid HTML attributes.
+  When this array is missing, the method will generate only the
+  empty ``select`` HTML element without any ``option`` elements inside it.
+* ``$attributes`` - An optional array including any of the
+  :ref:`general-input-options`, as well as any valid HTML attributes.
 
-Creates a ``select`` element, populated with the items from the ``$options`` array,
-with the ``option`` element specified by ``$attributes['value']`` shown as selected by
-default. Set the ``'empty'`` key in the ``$attributes`` variable to ``true`` 
-(the default value is ``false``) to add a blank option with an empty value 
-on the top of your dropdown list. 
+Creates a ``select`` element, populated with the items from the ``$options``
+array, with the ``option`` element specified by ``$attributes['value']`` shown
+as selected by default. Set the ``'empty'`` key in the ``$attributes`` variable
+to ``true`` (the default value is ``false``) to add a blank option with an
+empty value at the top of your dropdown list.
 
 By default ``select`` uses the following widget template::
 
@@ -1029,15 +1039,15 @@ Defaults to ``true``::
     $options = ['M' => 'Male', 'F' => 'Female'];
     echo $this->Form->select('gender', $options, ['escape' => false]);
 
-* ``$options`` - This argument also allows you to manually specify 
+* ``$options`` - This argument also allows you to manually specify
   option element contents for a select input::
-  
+
     echo $this->Form->select('field', [1,2,3,4,5]);
-  
+
   Output:
-  
+
   .. code-block:: html
-  
+
     <select name="field">
         <option value="0">1</option>
         <option value="1">2</option>
@@ -1045,7 +1055,7 @@ Defaults to ``true``::
         <option value="3">4</option>
         <option value="4">5</option>
     </select>
-  
+
   Options can also be supplied as key-value pairs::
 
     echo $this->Form->select('field', [
@@ -1112,7 +1122,7 @@ Defaults to ``true``::
         <option value="value 3" other_attr_name="other_attr_value">Description 3</option>
     </select>
 
-* ``$attributes['multiple']`` - If ``'multiple'`` has been set to ``true``, 
+* ``$attributes['multiple']`` - If ``'multiple'`` has been set to ``true``,
   the ``select`` field will allow multiple selections::
 
     echo $this->Form->select('field', $options, ['multiple' => true]);
@@ -1127,7 +1137,7 @@ Defaults to ``true``::
     echo $this->Form->select('field', $options, [
         'multiple' => 'checkbox'
     ]);
-  
+
   Output:
 
   .. code-block:: html
@@ -1147,20 +1157,20 @@ Defaults to ``true``::
       </div>
 
 * ``$attributes['disabled']`` - This option can be set in order to
-  to disable all or some of the ``select option`` items. To disable all items 
-  set ``'disabled'`` to ``true``. To disable only certain items assign 
-  as value of ``'disabled'`` an array containing the values of the items to
+  to disable all or some of the ``select``'s ``option`` items. To disable all
+  items set ``'disabled'`` to ``true``. To disable only certain items assign
+  as value of ``'disabled'`` an array containing the keys of the items to
   be disabled::
-  
+
       $options = [
-            'M' => 'Masculine', 
-            'F' => 'Feminine', 
+            'M' => 'Masculine',
+            'F' => 'Feminine',
             'N' => 'Neuter'
       ];
       echo $this->Form->select('gender', $options, [
           'disabled' => ['M', 'N']
       ]);
-  
+
   Will output:
 
   .. code-block:: html
@@ -1170,9 +1180,9 @@ Defaults to ``true``::
           <option value="F">Feminine</option>
           <option value="N" disabled="disabled">Neuter</option>
       </select>
-  
+
   This option also works when ``'multiple'`` is set to ``'checkbox'``::
-  
+
     $options = [
         'Value 1' => 'Label 1',
         'Value 2' => 'Label 2'
@@ -1206,8 +1216,8 @@ Creating File Inputs
 .. php:method:: file(string $fieldName, array $options)
 
 * ``$fieldName`` - A field name from the model.
-* ``$options`` - An optional array icluding any of the :ref:`general-input-options` 
-  as well as any valid HTML attributes.
+* ``$options`` - An optional array including any of the
+  :ref:`general-input-options` as well as any valid HTML attributes.
 
 Creates a file upload field in the form. The widget template used by default is::
 
@@ -1215,13 +1225,13 @@ Creates a file upload field in the form. The widget template used by default is:
 
 To add a file upload field to a form, you must first make sure that
 the form enctype is set to ``'multipart/form-data'``, so start off with
-a create method such as the following::
+a ``create()`` method such as the following::
 
     echo $this->Form->create($document, ['enctype' => 'multipart/form-data']);
     // OR
     echo $this->Form->create($document, ['type' => 'file']);
 
-Next add a line that looks like either of the following two lines 
+Next add a line that looks like either of the following two lines
 to your form view template file::
 
     echo $this->Form->input('submittedfile', [
@@ -1242,7 +1252,7 @@ script receiving the form data.
 
 For the example above, the values in the submitted data array would
 be organized as follows, if CakePHP was installed on a Windows
-server. The key ``'tmp\_name'`` will contain a different path 
+server. The key ``'tmp\_name'`` will contain a different path
 in a Unix environment. ::
 
     $this->request->data['submittedfile'] === [
@@ -1269,10 +1279,11 @@ Creating DateTime Inputs
 .. php:method:: dateTime($fieldName, $options = [])
 
 * ``$fieldName`` - A field name from the model.
-* ``$options`` - An optional array icluding any of the :ref:`general-input-options`, 
-  of the specific options (see below), as well as any valid HTML attributes.
+* ``$options`` - An optional array including any of the
+  :ref:`general-input-options`, of the specific options (see below), as well as
+  any valid HTML attributes.
 
-Creates a set of ``select`` elements for date and time. This method accepts 
+Creates a set of ``select`` elements for date and time. This method accepts
 a number of options:
 
 * ``monthNames`` - If ``false``, 2 digit numbers will be used instead of text.
@@ -1331,21 +1342,23 @@ Creating Time Inputs
 .. php:method:: time($fieldName, $options = [])
 
 * ``$fieldName`` - A field name from the model.
-* ``$options`` - An optional array icluding any of the :ref:`general-input-options`, 
-  of the specific options (see below), as well as any valid HTML attributes.
+* ``$options`` - An optional array including any of the
+  :ref:`general-input-options`, of the specific options (see below), as well as
+  any valid HTML attributes.
 
-Creates two ``select`` elements populated with 24 hours and 60 minutes for ``hour``
-and ``minute``, respectively.
+Creates two ``select`` elements populated with 24 hours and 60 minutes for
+``hour``and ``minute``, respectively.
 Additionally, HTML attributes may be supplied in ``$options`` for each specific
-component. If ``$options['empty']`` is ``false``, the select picker will not include an
-empty option:
+component. If ``$options['empty']`` is ``false``, the select picker will not
+include an empty option:
 
 * ``empty`` - If ``true`` an extra, empty, select option is shown. If a string,
   that string is displayed as the empty element.
-* ``default`` | ``value`` - The default value to be used by the input. A value in
-  ``$this->request->data`` matching the field name will override this value.
+* ``default`` | ``value`` - The default value to be used by the input. A value
+  in ``$this->request->data`` matching the field name will override this value.
   If no default is provided ``time()`` will be used.
-* ``timeFormat`` - The time format to use; either ``12`` or ``24``. Defaults to ``24``.
+* ``timeFormat`` - The time format to use; either ``12`` or ``24``.
+  Defaults to ``24``.
 * ``second`` - Set to ``true`` to enable the seconds drop down.
 * ``interval`` - The interval for the minutes select picker. Defaults to 1.
 
@@ -1389,18 +1402,19 @@ Creating Year Inputs
 .. php:method:: year(string $fieldName, array $options = [])
 
 * ``$fieldName`` - A field name from the model.
-* ``$options`` - An optional array icluding any of the :ref:`general-input-options`, 
-  of the specific options (see below), as well as any valid HTML attributes.
+* ``$options`` - An optional array including any of the
+  :ref:`general-input-options`, of the specific options (see below), as well as
+  any valid HTML attributes.
 
 Creates a ``select`` element populated with the years from ``minYear``
-to ``maxYear``. Additionally, HTML attributes may be supplied in ``$options``. If
-``$options['empty']`` is ``false``, the select picker will not include an
+to ``maxYear``. Additionally, HTML attributes may be supplied in ``$options``.
+If ``$options['empty']`` is ``false``, the select picker will not include an
 empty ``option``:
 
 * ``empty`` - If ``true``, the empty ``select option`` is shown. If a string,
   that string is displayed as the empty element.
 * ``orderYear`` - Ordering of year values in ``select option`` elements.
-  Possible values ``'asc'``, ``'desc'``. Default ``'desc'``.
+  Possible values ``'asc'``, ``'desc'``. Default is ``'desc'``.
 * ``value`` - The value value selected by default in the field.
 * ``maxYear`` - The max year to appear in the ``select`` element.
 * ``minYear`` - The min year to appear in the ``select`` element.
@@ -1437,8 +1451,8 @@ Creating Month Inputs
 .. php:method:: month(string $fieldName, array $attributes)
 
 * ``$fieldName`` - A field name from the model.
-* ``$attributes`` - An optional array icluding any of the :ref:`general-input-options` 
-  as well as any valid HTML attributes.
+* ``$attributes`` - An optional array including any of the
+  :ref:`general-input-options` as well as any valid HTML attributes.
 
 Creates a ``select`` element populated with month names::
 
@@ -1477,14 +1491,14 @@ Creating Day Inputs
 .. php:method:: day(string $fieldName, array $attributes)
 
 * ``$fieldName`` - A field name from the model.
-* ``$attributes`` - An optional array icluding any of the :ref:`general-input-options` 
-  as well as any valid HTML attributes.
+* ``$attributes`` - An optional array including any of the
+  :ref:`general-input-options` as well as any valid HTML attributes.
 
 Creates a ``select`` element populated with the (numerical) days of the
 month.
 
-To create an empty ``option`` element with a prompt text of your choosing (e.g.
-the first option is 'Day'), you can supply the text as the ``'empty'``
+To create an empty ``option`` element with a prompt text of your choosing
+(e.g. the first option is 'Day'), you can supply the text in the ``'empty'``
 parameter as follows::
 
     echo $this->Form->day('created', ['empty' => 'Day']);
@@ -1508,8 +1522,8 @@ Creating Hour Inputs
 .. php:method:: hour(string $fieldName, array $attributes)
 
 * ``$fieldName`` - A field name from the model.
-* ``$attributes`` - An optional array icluding any of the :ref:`general-input-options` 
-  as well as any valid HTML attributes.
+* ``$attributes`` - An optional array including any of the
+  :ref:`general-input-options` as well as any valid HTML attributes.
 
 Creates a ``select`` element populated with the hours of the day. You can
 create either 12 or 24 hour pickers using the ``'format'`` option::
@@ -1527,13 +1541,13 @@ Creating Minute Inputs
 .. php:method:: minute(string $fieldName, array $attributes)
 
 * ``$fieldName`` - A field name from the model.
-* ``$attributes`` - An optional array icluding any of the :ref:`general-input-options` 
-  as well as any valid HTML attributes.
+* ``$attributes`` - An optional array including any of the
+  :ref:`general-input-options` as well as any valid HTML attributes.
 
 Creates a ``select`` element populated with the minutes of the hour. You
-can create a select picker that only contains specific values using the ``'interval'``
-option. For example, if you wanted 10 minute increments you would do the
-following::
+can create a select picker that only contains specific values using the
+``'interval'`` option. For example, if you wanted 10 minute increments you
+would do the following::
 
     echo $this->Form->minute('created', [
         'interval' => 10
@@ -1545,8 +1559,8 @@ Creating Meridian Inputs
 .. php:method:: meridian(string $fieldName, array $attributes)
 
 * ``$fieldName`` - A field name from the model.
-* ``$attributes`` - An optional array icluding any of the :ref:`general-input-options` 
-  as well as any valid HTML attributes.
+* ``$attributes`` - An optional array including any of the
+  :ref:`general-input-options` as well as any valid HTML attributes.
 
 Creates a ``select`` element populated with 'am' and 'pm'.
 
@@ -1557,11 +1571,11 @@ Creating Labels
 
 * ``$fieldName`` - A field name from the model.
 * ``$text`` - An optional string providing the label caption text.
-* ``$options`` - An optional array icluding any of the :ref:`general-input-options` 
-  as well as any valid HTML attributes or a string.
+* ``$options`` - An optional array including any of the
+  :ref:`general-input-options` as well as any valid HTML attributes or a string.
 
-Creates a ``label`` element. The argument ``$fieldName`` is used for 
-generating the DOM id. If ``$text`` is undefined, ``$fieldName`` will 
+Creates a ``label`` element. The argument ``$fieldName`` is used for
+generating the DOM id. If ``$text`` is undefined, ``$fieldName`` will
 be used to inflect the label's ``text`` attribute::
 
     echo $this->Form->label('User.name');
@@ -1595,7 +1609,7 @@ Displaying and Checking Errors
 * ``$fieldName`` - A field name from the model.
 * ``$text`` - An optional string providing the error message.
 * ``$options`` - An optional array.
-  
+
 Shows a validation error message, specified by ``$text``, for the given
 field, in the event that a validation error has occurred.
 
@@ -1607,10 +1621,10 @@ Uses the following template widgets::
 
 Options:
 
-* ``'escape'`` - Boolean that controls whether or not to HTML escape 
+* ``'escape'`` - Boolean that controls whether or not to HTML escape
   the contents of the error.
 
-.. TODO:: Add examples.
+.. TODO:: Add more examples maybe.
 
 Example::
 
@@ -1621,7 +1635,7 @@ Example::
             ->requirePresence('ticket', 'create')
             ->notEmpty('ticket');
     }
-    
+
     // And inside Templates/Tickets/add.ctp you have:
     $this->Form->input('ticket');
 
@@ -1662,11 +1676,12 @@ Creating Submit Elements
 
 * ``$caption`` - An optional string providing the button's text or a path to
   an image to use as caption. Defaults to ``'Submit'``.
-* ``$options`` - An optional array icluding any of the :ref:`general-input-options`,
-  or specific options (see below) as well as any valid HTML attributes.
+* ``$options`` - An optional array including any of the
+  :ref:`general-input-options`, or specific options (see below) as well as any
+  valid HTML attributes.
 
 Creates a submit input with ``$caption`` as the text. If the supplied
-``$caption`` is a URL pointing to an image, an image submit button 
+``$caption`` is a URL pointing to an image, an image submit button
 will be generated.
 
 By default it will use the following widget template::
@@ -1678,8 +1693,8 @@ By default it will use the following widget template::
 
 * ``type`` - Set this option to ``'reset'`` in order to generate reset buttons.
   It defaults to ``'submit'``.
-* ``'templateVars'`` - Set this array to provide additional template variables for
-  the input element and its container.
+* ``'templateVars'`` - Set this array to provide additional template variables
+  for the input element and its container.
 
 The following::
 
@@ -1711,26 +1726,27 @@ Creating Button Elements
 .. php:method:: button(string $title, array $options = [])
 
 * ``$title`` - Mandatory string providing the button's text caption.
-* ``$options`` - An optional array icluding any of the :ref:`general-input-options`,
-  or specific options (see below) as well as any valid HTML attributes.
+* ``$options`` - An optional array including any of the
+  :ref:`general-input-options`, or specific options (see below) as well as any
+  valid HTML attributes.
 
 Creates an HTML button with the specified title and a default type
-of ``'button'``. 
+of ``'button'``.
 
 **Options for Button**
 
-* ``$options['type']`` - You can set this to one of the following three 
+* ``$options['type']`` - You can set this to one of the following three
   possible values:
 
-    #. ``'submit'`` - Similar to ``$this->Form->submit()`` method it will 
-        create a submit button. However this won't generate a wrapping ``div`` 
+    #. ``'submit'`` - Similar to ``$this->Form->submit()`` method it will
+        create a submit button. However this won't generate a wrapping ``div``
         as ``submit()`` does. This is the default.
     #. ``'reset'`` - Creates a form reset button.
     #. ``'button'`` - Creates a standard push button.
 
-* ``$options['escape']`` - Boolean. If set to ``true`` it will HTML encode 
+* ``$options['escape']`` - Boolean. If set to ``true`` it will HTML encode
   the value provided inside ``$title``. Defaults to ``false``.
-  
+
 Example::
 
     echo $this->Form->button('A Button');
@@ -1760,8 +1776,8 @@ Closing the Form
 
 .. php:method:: end($secureAttributes = [])
 
-* ``$secureAttributes`` - Optional. Allow you to provide secure attributes 
-  which will be passed as HTML attributes into the hidden input elements 
+* ``$secureAttributes`` - Optional. Allows you to provide secure attributes
+  which will be passed as HTML attributes into the hidden input elements
   generated for the Security Component.
 
 The ``end()`` method closes and completes a form. Often, ``end()`` will only
@@ -1777,7 +1793,7 @@ enables FormHelper to insert hidden form elements that
 
     <?= $this->Form->end(); ?>
 
-If you need to add additional attributes to the generated hidden inputs 
+If you need to add additional attributes to the generated hidden inputs
 you can use the ``$secureAttributes`` argument, like this::
 
     echo $this->Form->end(['data-type' => 'hidden']);
@@ -1810,20 +1826,21 @@ Creating POST Buttons
 * ``$title`` - Mandatory string providing the button's text caption. By default
   not HTML encoded.
 * ``$url`` - String or array which contains the URL of the form.
-* ``$options`` - An optional array icluding any of the :ref:`general-input-options`,
-  or specific options (see below) as well as any valid HTML attributes.
+* ``$options`` - An optional array including any of the
+  :ref:`general-input-options`, or specific options (see below) as well as any
+  valid HTML attributes.
 
 Creates a ``<button>`` tag and a surrounding ``<form>`` element that submits via
-POST, by default along. By default it also generates hidden input fields for the 
+POST, by default along. By default it also generates hidden input fields for the
 Security Component.
 
 **Options for POST Button**
 
 * ``'data'`` - Array with key/value to pass in hidden input.
-* ``'method'`` - Request method to use. Set to ``'delete'`` (or other) to simulate 
-  HTTP/1.1 DELETE request (or others). Defaults to ``'post'``.
+* ``'method'`` - Request method to use. E.g. set to ``'delete'`` (or other) to
+  simulate HTTP/1.1 DELETE request (or others). Defaults to ``'post'``.
 * ``'form'`` - Array with any option that ``FormHelper::create()`` can take.
-* Also, the ``postButton`` method wil accept the options which are valid for 
+* Also, the ``postButton`` method will accept the options which are valid for
   the ``button()`` method.
 
  Example::
@@ -1847,8 +1864,8 @@ Will output HTML similar to:
         </div>
     </form>
 
-Since this method generates a ``form`` element, do not use this method in an already
-opened form. Instead use
+Since this method generates a ``form`` element, do not use this method in an
+already opened form. Instead use
 :php:meth:`Cake\\View\\Helper\\FormHelper::submit()`
 or :php:meth:`Cake\\View\\Helper\\FormHelper::button()` to create buttons
 inside opened forms.
@@ -1858,25 +1875,26 @@ Creating POST Links
 
 .. php:method:: postLink(string $title, mixed $url = null, array $options = [])
 
-* ``$title`` - Mandatory string providing the text to be wrapped in ``<a>`` tags. 
+* ``$title`` - Mandatory string providing the text to be wrapped in ``<a>`` tags.
   By default not HTML encoded.
-* ``$url`` - Optional. String or array which contains the URL 
+* ``$url`` - Optional. String or array which contains the URL
   of the form (Cake-relative or external URL starting with ``http://``).
-* ``$options`` - An optional array icluding any of the :ref:`general-input-options`,
-  or specific options (see below) as well as any valid HTML attributes.
+* ``$options`` - An optional array including any of the
+  :ref:`general-input-options`, or specific options (see below) as well as any
+  valid HTML attributes.
 
-Creates an HTML link, but accesses the URL using the method you specify 
+Creates an HTML link, but accesses the URL using the method you specify
 (defaults to POST). Requires JavaScript to be enabled in browser.
 
 **Options for POST Link**
 
 * ``'data'`` - Array with key/value to pass in hidden input.
-* ``'method'`` - Request method to use. Set to ``'delete'`` (or other) to simulate 
-  HTTP/1.1 DELETE request (or others). Defaults to ``'post'``.
+* ``'method'`` - Request method to use. E.g. set to ``'delete'`` (or other)
+  to simulate HTTP/1.1 DELETE request (or others). Defaults to ``'post'``.
 * ``'confirm'`` - The confirmation message to display on click.
-* ``'block'`` - Set this option to ``true`` to append the form to view block 
+* ``'block'`` - Set this option to ``true`` to append the form to view block
   ``'postLink'`` or provide a custom block name. Defaults to ``null``.
-* Also, the ``postLink`` method wil accept the options which are valid for 
+* Also, the ``postLink`` method will accept the options which are valid for
   the ``link()`` method.
 
 This method creates a ``<form>`` element. If you want to use this method
@@ -1926,7 +1944,7 @@ You can also change the templates at runtime using the ``templates()`` method::
 
 .. warning::
 
-    Template strings containing a percentage sign (``%``) need special attention,
+    Template strings containing a percentage sign (``%``) need special attention;
     you should prefix this character with another percentage so it looks like
     ``%%``. The reason is that internally templates are compiled to be used with
     ``sprintf()``. Example: ``<div style="width:{{size}}%%">{{content}}</div>``
@@ -1953,7 +1971,7 @@ example::
 
     // Create a radio set with our custom wrapping div.
     echo $this->Form->input('User.email_notifications', [
-        'options' => ['y', 'n'], 
+        'options' => ['y', 'n'],
         'type' => 'radio'
     ]);
 
@@ -1991,12 +2009,12 @@ those placeholders when generating inputs::
 Will output::
 
     .. code-block:: html
-    
+
     <div class="input password">
         <label for="password">
             Password
         </label>
-        <input name="password" id="password" type="password"> 
+        <input name="password" id="password" type="password">
         <span class="help">At least 8 characters long.</span>
     </div>
 
@@ -2023,17 +2041,17 @@ Generating Entire Forms
 
 .. php:method:: inputs(array $fields = [], $options = [])
 
-* ``$fields`` - Optional. An array of fields to generate. Allows setting 
+* ``$fields`` - Optional. An array of fields to generate. Allows setting
   custom types, labels and other options for each specified field.
 * ``$options`` - Optional. An array of options. Valid keys are:
-    #. ``'fieldset'`` - Can also be an array of parameters to be applied as HTMl 
-       attributes to the ``fieldset`` tag. Set this to ``false`` to disable the 
-       fieldset. If empty the fieldset will be enabled.
-    #. ``legend`` - String used to customize the ``legend`` text. Set this to 
-       ``false`` to disable the legend for the generated input set. 
+    #. ``'fieldset'`` - Set this to ``false`` to disable the fieldset.
+      If empty, the fieldset will be enabled. Can also be an array of parameters
+      to be applied as HTMl attributes to the ``fieldset`` tag.
+    #. ``legend`` - String used to customize the ``legend`` text. Set this to
+       ``false`` to disable the legend for the generated input set.
 
-Generates a set of ``input`` elements for the given context wrapped in a ``fieldset``. 
-You can specify the generated fields by including them::
+Generates a set of ``input`` elements for the given context wrapped in a
+``fieldset``. You can specify the generated fields by including them::
 
     echo $this->Form->inputs([
         'name',
@@ -2054,8 +2072,8 @@ You can customize the generated inputs by defining additional options in the
 When customizing, ``fields``, you can use the ``$options`` parameter to
 control the generated legend/fieldset.
 
-For example pass an array of parameters to be applied as HTML attributes 
-to the ``fieldset`` tag. Also supply a string into ``legend`` to customize 
+For example, pass an array of parameters to be applied as HTML attributes
+to the ``fieldset`` tag. Also supply a string into ``legend`` to customize
 the legend text::
 
     echo $this->Form->allInputs(
@@ -2066,14 +2084,24 @@ the legend text::
         ['legend' => 'Update your post']
     );
 
-If you disable the fieldset, the legend will not print.
+If you disable the ``fieldset``, the ``legend`` will not print.
 
 .. php:method:: allInputs(array $fields, $options = [])
 
+* ``$fields`` - Optional. An array of customizations for the fields that will
+  be generated to generate. Allows setting custom types, labels and other
+  options.
+* ``$options`` - Optional. An array of options. Valid keys are:
+    #. ``'fieldset'`` - Set this to ``false`` to disable the fieldset.
+       If empty, the fieldset will be enabled. Can also be an array of
+       parameters to be applied as HTMl attributes to the ``fieldset`` tag.
+    #. ``legend`` - String used to customize the ``legend`` text. Set this to
+       ``false`` to disable the legend for the generated input set.
+
 This method is closely related to ``inputs()``, however the ``$fields`` argument
 is defaulted to *all* fields in the current top-level entity. To exclude
-specific fields from the generated inputs, set them to ``false`` in the fields
-parameter::
+specific fields from the generated inputs, set them to ``false`` in the
+``$fields`` parameter::
 
     echo $this->Form->allInputs(['password' => false]);
 
@@ -2228,9 +2256,9 @@ dependencies by declaring them::
         ]
     ]);
 
-In the above example, the autocomplete widget would depend on the ``text`` and
+In the above example, the ``autocomplete`` widget would depend on the ``text`` and
 ``label`` widgets. If your widget needs access to the View, you should use the
-``_view`` 'widget'.  When the autocomplete widget is created, it will be passed
+``_view`` 'widget'.  When the ``autocomplete`` widget is created, it will be passed
 the widget objects that are related to the ``text`` and ``label`` names. To add
 widgets using the ``addWidget()`` method would look like::
 
@@ -2264,7 +2292,7 @@ Working with SecurityComponent
 :php:meth:`Cake\\Controller\\Component\\SecurityComponent` offers several
 features that make your forms safer and more secure. By simply including the
 ``SecurityComponent`` in your controller, you'll automatically benefit from
-form tampering features.
+form tampering-prevention features.
 
 As mentioned previously when using SecurityComponent, you should always close
 your forms using :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`. This will
@@ -2272,17 +2300,26 @@ ensure that the special ``_Token`` inputs are generated.
 
 .. php:method:: unlockField($name)
 
-    Unlocks a field making it exempt from the ``SecurityComponent`` field
-    hashing. This also allows the fields to be manipulated by JavaScript.
-    The ``$name`` parameter should be the entity property name for the input::
+* ``$name`` - Optional. The dot-separated name for the field.
 
-        $this->Form->unlockField('id');
+Unlocks a field making it exempt from the ``SecurityComponent`` field
+hashing. This also allows the fields to be manipulated by JavaScript.
+The ``$name`` parameter should be the entity property name for the input::
 
-.. php:method:: secure(array $fields = [])
+    $this->Form->unlockField('id');
 
-    Generates a hidden field with a security hash based on the fields used
-    in the form.
+.. php:method:: secure(array $fields = [], array $secureAttributes = [])
 
+* ``$fields`` - Optional. An array containing the list of fields to use when
+  generating the hash. If not provided, then ``$this->fields`` will be used.
+* ``$secureAttributes`` - Optional. An array of HTML attributes to be passed
+  into the generated hidden input elements.
+
+Generates a hidden ``input`` field with a security hash based on the fields used
+in the form or an empty string when secured forms are not in use.
+If ``$secureAttributes`` is set, these HTML attributes will be
+merged into the hidden input tags generated for the Security Component. This is
+especially useful to set HTML5 attributes like ``'form'``.
 
 .. meta::
     :title lang=en: FormHelper
