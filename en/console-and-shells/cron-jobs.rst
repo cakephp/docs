@@ -18,6 +18,10 @@ trivial to setup, for example::
 
 You can see more info here: http://en.wikipedia.org/wiki/Cron
 
+.. tip::
+
+    Use ``-q`` (or `--quiet`) to silence any output for cronjobs.
+
 .. meta::
     :title lang=en: Running Shells as cronjobs
     :keywords lang=en: cronjob,bash script,crontab
