@@ -78,7 +78,7 @@ deprecated and immutable variants are now recommended:
 * ``Response::download()`` would become ``Response::withDownload()``
 
 Please see the :ref:`adopting-immutable-responses` section for more information
-before updating your code as using responses throug the immutable methods will
+before updating your code as using responses through the immutable methods will
 require additional changes.
 
 Other Deprecations
