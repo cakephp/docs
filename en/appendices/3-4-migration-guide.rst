@@ -165,6 +165,31 @@ Cake\ORM\Table
     * ``primaryKey()``
     * ``displayField()``
     * ``entityClass()``
+Cake\Mailer\Email
+    * ``from()``
+    * ``sender()``
+    * ``replyTo()``
+    * ``readReceipt()``
+    * ``returnPath()``
+    * ``to()``
+    * ``cc()``
+    * ``bcc()``
+    * ``charset()``
+    * ``headerCharset()``
+    * ``emailPattern()``
+    * ``subject()``
+    * ``template()`` (now ``setTemplate()``/``getTemplate()`` and ``setLayout()``/``getLayout()``)
+    * ``viewRender()`` (now ``setViewRenderer()``/``getViewRenderer()``)
+    * ``viewVars()``
+    * ``theme()``
+    * ``helpers()``
+    * ``emailFormat()``
+    * ``transport()``
+    * ``messageId()``
+    * ``domain()``
+    * ``attachments()``
+    * ``configTransport()``
+    * ``profile()``
 Cake\Validation\Validator
     * ``provider()``
 Cake\View\StringTemplateTrait
@@ -262,7 +287,7 @@ behavior that may effect your application:
 * ``AuthComponent`` no longer stores the flash messages it creates under the
   'auth' key. They are now rendered with the 'error' template under the
   'default' flash message key. This simplifies using ``AuthComponent``.
-* ``Mailer\Email`` will now autodetect attachement content types using
+* ``Mailer\Email`` will now autodetect attachment content types using
   ``mime_content_type`` if a content-type is not provided. Previously
   attachments would have defaulted to 'application/octet-stream'.
 
