@@ -23,25 +23,25 @@ Premièrement, vous devez vous assurer que la classe est chargée::
 Après avoir chargé ``Email``, vous pouvez envoyer un email avec ce qui suit::
 
     $email = new Email('default');
-    $email->from(['me@example.com' => 'My Site'])
-        ->to('you@example.com')
-        ->subject('About')
+    $email->setFrom(['me@example.com' => 'My Site'])
+        ->setTo('you@example.com')
+        ->setSubject('About')
         ->send('My message');
 
 Puisque les méthodes de setter d'``Email`` retournent l'instance de la classe,
 vous pouvez définir ses propriétés avec le chaînage des méthodes.
 
-``Email`` comporte plusieurs méthodes pour définir les destinataires - ``to()``,
-``cc()``, ``bcc()``, ``addTo()``, ``addCc()`` et ``addBcc()``. La principale
+``Email`` comporte plusieurs méthodes pour définir les destinataires - ``setTo()``,
+``setCc()``, ``setBcc()``, ``addTo()``, ``addCc()`` et ``addBcc()``. La principale
 différence est que les trois premières méthodes vont réinitialiser ce qui était
 déjà défini et les suivantes vont ajouter plus de destinataires dans leur champs
 respectifs::
 
     $email = new Email();
-    $email->to('to@example.com', 'To Example');
+    $email->setTo('to@example.com', 'To Example');
     $email->addTo('to2@example.com', 'To2 Example');
     // Les destinaitres de l'email sont: to@example.com et to2@example.com
-    $email->to('test@example.com', 'ToTest Example');
+    $email->setTo('test@example.com', 'ToTest Example');
     // Le destinaitre de l'email est: test@example.com
 
 Choisir l'émetteur
@@ -49,10 +49,10 @@ Choisir l'émetteur
 
 Quand on envoie des emails de la part d'autre personne, c'est souvent une
 bonne idée de définir l'émetteur original en utilisant le header Sender.
-Vous pouvez faire ceci en utilisant ``sender()``::
+Vous pouvez faire ceci en utilisant ``setSender()``::
 
     $email = new Email();
-    $email->sender('app@example.com', 'MyApp emailer');
+    $email->setSender('app@example.com', 'MyApp emailer');
 
 .. note::
 
@@ -78,10 +78,10 @@ votre application sans données de configuration, et éviter de dupliquer, ce qu
 rend la maintenance et le déploiement moins compliqués.
 
 Pour charger une configuration prédéfinie, vous pouvez utiliser la méthode
-``profile()`` ou la passer au constructeur d'``Email``::
+``setProfile()`` ou la passer au constructeur d'``Email``::
 
     $email = new Email();
-    $email->profile('default');
+    $email->setProfile('default');
 
     //ou dans le constructeur::
     $email = new Email('default');
@@ -90,7 +90,7 @@ Plutôt que de passer une chaîne avec le bon nom de configuration prédéfini,
 vous pouvez aussi juste charger un tableau d'options::
 
     $email = new Email();
-    $email->profile(['from' => 'me@example.org', 'transport' => 'my_custom']);
+    $email->setProfile(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
     //or dans le constructeur::
     $email = new Email(['from' => 'me@example.org', 'transport' => 'my_custom']);
@@ -102,7 +102,7 @@ vous pouvez aussi juste charger un tableau d'options::
 Configurer les Transports
 -------------------------
 
-.. php:staticmethod:: configTransport($key, $config = null)
+.. php:staticmethod:: setConfigTransport($key, $config = null)
 
 Les messages d'Email sont délivrés par les transports. Différents transports
 vous permettent d'envoyer les messages par la fonction ``mail()`` de PHP,
@@ -115,12 +115,12 @@ exemple de configuration des transports ressemblerai à ceci::
     use Cake\Mailer\Email;
 
     // Exemple de configuration de Mail
-    Email::configTransport('default', [
+    Email::setConfigTransport('default', [
         'className' => 'Mail'
     ]);
 
-    // Exemple de configuration smtp.
-    Email::configTransport('gmail', [
+    // Exemple de configuration SMTP.
+    Email::setConfigTransport('gmail', [
         'host' => 'ssl://smtp.gmail.com',
         'port' => 465,
         'username' => 'my@gmail.com',
@@ -134,7 +134,7 @@ valeur. Vous pouvez aussi activer TLS SMTP en utilisant l'option ``tls``::
 
     use Cake\Mailer\Email;
 
-    Email::configTransport('gmail', [
+    Email::setConfigTransport('gmail', [
         'host' => 'smtp.gmail.com',
         'port' => 587,
         'username' => 'my@gmail.com',
@@ -161,7 +161,7 @@ Les options de configuration peuvent également être fournies en tant que chain
 :term:`DSN`. C'est utile lorsque vous travaillez avec des variables
 d'environnement ou des fournisseurs :term:`PaaS`::
 
-    Email::configTransport('default', [
+    Email::setConfigTransport('default', [
         'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:465?tls=true',
     ]);
 
@@ -184,46 +184,46 @@ habituelles d'email dans des profiles réutilisables. Votre application peut
 avoir autant de profiles que nécessaire. Les clés de configuration suivantes
 sont utilisées:
 
-- ``'from'``: Email ou un tableau d'emmeteur. Regardez ``Email::from()``.
+- ``'from'``: Email ou un tableau d'emmeteur. Regardez ``Email::setFrom()``.
 - ``'sender'``: Email ou un tableau d'émetteur réel. Regardez
-  ``Email::sender()``.
-- ``'to'``: Email ou un tableau de destination. Regardez ``Email::to()``.
-- ``'cc'``: Email ou un tableau de copy carbon. Regardez ``Email::cc()``.
+  ``Email::setSender()``.
+- ``'to'``: Email ou un tableau de destination. Regardez ``Email::setTo()``.
+- ``'cc'``: Email ou un tableau de copy carbon. Regardez ``Email::setCc()``.
 - ``'bcc'``: Email ou un tableau de copy carbon blind. Regardez
-  ``Email::bcc()``.
+  ``Email::setBcc()``.
 - ``'replyTo'``: Email ou un tableau de répondre à cet e-mail. Regardez
-  ``Email::replyTo()``.
+  ``Email::setReplyTo()``.
 - ``'readReceipt'``: Adresse Email ou un tableau d'adresses pour recevoir un
-  récepissé de lecture. Regardez ``Email::readReceipt()``.
+  récepissé de lecture. Regardez ``Email::setReadReceipt()``.
 - ``'returnPath'``: Adresse Email ou un tableau des adresses à retourner si
-  vous avez une erreur. Regardez ``Email::returnPath()``.
+  vous avez une erreur. Regardez ``Email::setReturnPath()``.
 - ``'messageId'``: ID du Message de l'e-mail. Regardez
-  ``Email::messageId()``.
-- ``'subject'``: Sujet du message. Regardez ``Email::subject()``.
+  ``Email::setMessageId()``.
+- ``'subject'``: Sujet du message. Regardez ``Email::setSubject()``.
 - ``'message'``: Contenu du message. Ne définissez pas ce champ si vous
   utilisez un contenu rendu.
 - ``'headers'``: Headers à inclure. Regardez ``Email::setHeaders()``.
 - ``'viewRender'``: Si vous utilisez un contenu rendu, définissez le nom de
-  classe de la vue. Regardez ``Email::viewRender()``.
+  classe de la vue. Regardez ``Email::setViewRenderer()``.
 - ``'template'``: Si vous utilisez un contenu rendu, définissez le nom du
-  template. Regardez ``Email::template()``.
+  template. Regardez ``Email::setTemplate()``.
 - ``'theme'``: Theme utilisé pour le rendu du template. Voir
-  ``Email::theme()``.
+  ``Email::setTheme()``.
 - ``'layout'``: Si vous utilisez un contenu rendu, définissez le layout à
   rendre. Si vous voulez rendre un template sans layout, définissez ce champ
-  à null. Regardez ``Email::template()``.
+  à null. Regardez ``Email::setLayout()``.
 - ``'viewVars'``: Si vous utilisez un contenu rendu, définissez le tableau avec
   les variables devant être rendus dans la vue. Regardez
-  ``Email::viewVars()``.
+  ``Email::setViewVars()``.
 - ``'attachments'``: Liste des fichiers à attacher. Regardez
-  ``Email::attachments()``.
+  ``Email::setAttachments()``.
 - ``'emailFormat'``: Format de l'email (html, text ou both). Regardez
-  ``Email::emailFormat()``.
+  ``Email::setEmailFormat()``.
 - ``'transport'``: Nom du Transport. Regardez
-  :php:meth:`~Cake\\Mailer\\Email::configTransport()`.
+  :php:meth:`~Cake\\Mailer\\Email::setConfigTransport()`.
 - ``'log'``: Niveau de Log pour connecter les headers de l'email headers et le
   message. ``true`` va utiliser LOG_DEBUG. Regardez aussi ``CakeLog::write()``.
-- ``'helpers'``: Tableau de helpers utilisés dans le template email.
+- ``'helpers'``: Tableau de helpers utilisés dans le template email. ``Email::setHelpers()``.
 
 Toutes ces configurations sont optionnelles, excepté ``'from'``.
 
@@ -232,7 +232,7 @@ Toutes ces configurations sont optionnelles, excepté ``'from'``.
     Les valeurs des clés ci-dessus utilisant Email ou un tableau, comme from,
     to, cc etc... seront passées en premier paramètre des méthodes
     correspondantes. L'equivalent pour
-    ``Email::from('my@example.com', 'My Site')`` sera défini comme
+    ``Email::setFrom('my@example.com', 'My Site')`` sera défini comme
     ``'from' => ['my@example.com' => 'My Site']`` dans votre config.
 
 Définir les Headers
@@ -257,10 +257,10 @@ des emails peuvent aussi utiliser les layouts et éléments tout comme les
 templates normales::
 
     $email = new Email();
-    $email->template('welcome', 'fancy')
-        ->emailFormat('html')
-        ->to('bob@example.com')
-        ->from('app@domain.com')
+    $email->setTemplate('welcome', 'fancy')
+        ->setEmailFormat('html')
+        ->setTo('bob@example.com')
+        ->setFrom('app@domain.com')
         ->send();
 
 Ce qui est au-dessus utilise **src/Template/Email/html/welcome.ctp** pour la
@@ -268,10 +268,10 @@ vue, et **src/Template/Layout/Email/html/fancy.ctp** pour le layout. Vous pouvez
 aussi envoyer des messages email templaté multipart::
 
     $email = new Email();
-    $email->template('welcome', 'fancy')
-        ->emailFormat('both')
-        ->to('bob@example.com')
-        ->from('app@domain.com')
+    $email->setTemplate('welcome', 'fancy')
+        ->setEmailFormat('both')
+        ->setTo('bob@example.com')
+        ->setFrom('app@domain.com')
         ->send();
 
 Ceci utiliserait les fichiers de template suivants:
@@ -287,7 +287,7 @@ Quand on envoie les emails templatés, vous avez la possibilité d'envoyer soit
 Vous pouvez définir des variables de vue avec ``Email::viewVars()``::
 
     $email = new Email('templated');
-    $email->viewVars(['value' => 12345]);
+    $email->setViewVars(['value' => 12345]);
 
 Dans votre email template, vous pouvez utiliser ceux-ci avec::
 
@@ -298,7 +298,7 @@ pouvez dans des fichiers de template normaux. Par défaut, seul
 :php:class:`HtmlHelper` est chargé. Vous pouvez chargez des helpers
 supplémentaires en utilisant la méthode ``helpers()``::
 
-    $email->helpers(['Html', 'Custom', 'Text']);
+    $email->setHelpers(['Html', 'Custom', 'Text']);
 
 Quand vous définissez les helpers, assurez vous d'inclure 'Html' ou il sera
 retiré des helpers chargés dans votre template d'email.
@@ -307,7 +307,8 @@ Si vous voulez envoyer un email en utilisant templates dans un plugin, vous
 pouvez utiliser la :term:`syntaxe de plugin` familière pour le faire::
 
     $email = new Email();
-    $email->template('Blog.new_comment', 'Blog.auto_message')
+    $email->setTemplate('Blog.new_comment');
+    $email->setLayout('Blog.auto_message');
 
 Ce qui est au-dessus utiliserait les templates à partir d'un plugin de Blog par
 exemple.
@@ -317,8 +318,9 @@ les plugins. Vous pouvez faire ceci en utilisant les themes en disant à Email
 d'utiliser le bon theme en utilisant la méthode ``Email::theme()``::
 
     $email = new Email();
-    $email->template('Blog.new_comment', 'Blog.auto_message');
-    $email->theme('TestTheme');
+    $email->setTemplate('Blog.new_comment');
+    $email->setLayout('Blog.auto_message');
+    $email->setTheme('TestTheme');
 
 Ceci vous permet de remplacer le template `new_comment` dans votre theme sans
 modifier le plugin Blog. Le fichier de template devra être créé dans le
@@ -328,24 +330,24 @@ chemin suivant:
 Envoyer les pièces jointes
 ==========================
 
-.. php:method:: attachments($attachments = null)
+.. php:method:: setAttachments($attachments = null)
 
 Vous pouvez aussi attacher des fichiers aux messages d'email. Il y a quelques
 formats différents qui dépendent de quel type de fichier vous avez, et comment
 vous voulez que les noms de fichier apparaissent dans le mail de réception du
 client:
 
-1. Chaîne de caractères: ``$email->attachments('/full/file/path/file.png')`` va
+1. Chaîne de caractères: ``$email->setAttachments('/full/file/path/file.png')`` va
    attacher ce fichier avec le nom file.png.
-2. Tableau: ``$email->attachments(['/full/file/path/file.png'])`` aura le
+2. Tableau: ``$email->setAttachments(['/full/file/path/file.png'])`` aura le
    même comportement qu'en utilisant une chaîne de caractères.
 3. Tableau avec clé:
-   ``$email->attachments(['photo.png' => '/full/some_hash.png'])`` va
+   ``$email->setAttachments(['photo.png' => '/full/some_hash.png'])`` va
    attacher some_hash.png avec le nom photo.png. Le récipiendaire va voir
    photo.png, pas some_hash.png.
 4. Tableaux imbriqués::
 
-    $email->attachments([
+    $email->setAttachments([
         'photo.png' => [
             'file' => '/full/some_hash.png',
             'mimetype' => 'image/png',
@@ -377,17 +379,17 @@ protocoles ou méthodes. CakePHP supporte les transports Mail (par défaut),
 Debug et SMTP.
 
 Pour configurer votre méthode, vous devez utiliser la méthode
-:php:meth:`Cake\\Mailer\\Email::transport()` ou avoir le transport dans
+:php:meth:`Cake\\Mailer\\Email::setTransport()` ou avoir le transport dans
 votre configuration::
 
     $email = new Email();
 
-    // Utilise un transport nommé déjà configuré en utilisant Email::configTransport()
-    $email->transport('gmail');
+    // Use a named transport already configured using Email::setConfigTransport()
+    $email->setTransport('gmail');
 
-    // Utilise un objet construit.
+    // Use a constructed object.
     $transport = new DebugTransport();
-    $email->transport($transport);
+    $email->setTransport($transport);
 
 Créer des Transports Personnalisés
 ----------------------------------
@@ -429,7 +431,7 @@ instance du transport. Exemple::
 Faciliter les Règles de Validation des Adresses
 -----------------------------------------------
 
-.. php:method:: emailPattern($pattern = null)
+.. php:method:: setEmailPattern($pattern = null)
 
 Si vous avez des problèmes de validation lors de l'envoi vers des adresses
 non conformes, vous pouvez faciliter le patron utilisé pour valider les
@@ -440,7 +442,7 @@ ISP Japonais::
 
     // Relax le patron d'email, ainsi vous pouvez envoyer
     // vers des adresses non conformes
-    $email->emailPattern($newPattern);
+    $email->setEmailPattern($newPattern);
 
 
 Envoyer des Messages Rapidement
@@ -486,7 +488,7 @@ vous devez définir manuellement le nom de domaine que Email doit utiliser.
 Il sera utilisé comme nom d'hôte pour l'id du message (puisque il n'y a pas
 de nom d'hôte dans un environnement CLI)::
 
-    $email->domain('www.example.org');
+    $email->setDomain('www.example.org');
     // Resulte en ids de message comme ``<UUID@www.example.org>`` (valid)
     // au lieu de `<UUID@>`` (invalid)
 
@@ -517,17 +519,17 @@ aux utilisateurs. Pour créer votre ``UserMailer``, créez un fichier
         public function welcome($user)
         {
             $this
-                ->to($user->email)
-                ->subject(sprintf('Welcome %s', $user->name))
-                ->template('welcome_mail') // Par défaut le template avec le même nom que le nom de la méthode est utilisé.
-                ->layout('custom');
+                ->setTo($user->email)
+                ->setSubject(sprintf('Welcome %s', $user->name))
+                ->setTemplate('welcome_mail') // Par défaut le template avec le même nom que le nom de la méthode est utilisé.
+                ->setLayout('custom');
         }
 
         public function resetPassword($user)
         {
             $this
-                ->to($user->email)
-                ->subject('Reset password')
+                ->setTo($user->email)
+                ->setSubject('Reset password')
                 ->set(['token' => $user->token]);
         }
     }

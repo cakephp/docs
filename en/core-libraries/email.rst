@@ -447,7 +447,7 @@ Check the list of :ref:`configurations <email-configurations>` to see all accept
 
 
 Sending Emails from CLI
-========================
+=======================
 
 When sending emails within a CLI script (Shells, Tasks, ...) you should manually
 set the domain name for CakeEmail to use. It will serve as the host name for the
