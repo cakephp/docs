@@ -395,7 +395,7 @@ have the request object use these headers set the ``trustProxy`` property to
 
     // These methods will now use the proxied headers.
     $port = $this->request->port();
-    $host = $$this->request->host();
+    $host = $this->request->host();
     $scheme = $this->request->scheme();
     $clientIp = $this->request->clientIp();
 
