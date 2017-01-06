@@ -19,10 +19,11 @@ Configurer votre Application
 La configuration est généralement stockée soit dans les fichiers PHP ou INI, et
 chargée pendant le bootstrap de l'application. CakePHP est fourni avec un
 fichier de configuration par défaut, mais si cela et nécessaire, vous pouvez
-ajouter des fichiers supplémentaires de configuration et les charger dans
-**config/bootstrap.php**. :php:class:`Cake\\Core\\Configure` est utilisée pour
-la configuration générale, et les classes d'adaptateur fournissent les méthodes
-``config()`` pour faciliter la configuration et la rendre plus transparente.
+ajouter des fichiers supplémentaires de configuration et les charger dans le
+bootstrap de votre application. :php:class:`Cake\\Core\\Configure` est utilisée
+pour la configuration globale, et les classes comme ``Cache`` fournissent les
+méthodes ``config()`` pour faciliter la configuration et la rendre plus
+transparente.
 
 Charger les Fichiers de Configuration Supplémentaires
 -----------------------------------------------------
@@ -633,14 +634,44 @@ courantes:
 - Définir des fonctions commodes.
 - Déclarer des constantes.
 - Créer des configurations de cache.
-- Configurer les inflections.
+- Définir la configuration des logs.
+- Configurer les inflections personnalisées.
 - Charger les fichiers de configuration.
 
-Faîtes attention de maintenir le model MVC du logiciel quand vous ajoutez des
-choses au fichier de bootstrap: il pourrait être tentant de placer des fonctions
-de formatage ici afin de les utiliser dans vos controllers. Comme vous le verrez
-dans les sections :doc:`/controllers` et :doc:`/views`, il y a de meilleurs
-moyens d'ajouter de la logique personnalisée à votre application.
+It might be tempting to place formatting functions there in order to use them in
+your controllers. As you'll see in the :doc:`/controllers` and :doc:`/views`
+sections there are better ways you add custom logic to your application.
+
+.. _application-bootstrap:
+
+Application::bootstrap()
+------------------------
+
+In addition to the **config/bootstrap.php** file which should be used to
+configure low-level concerns of your application, you can also use the
+``Application::bootstrap()`` hook method to load/initialize plugins, and attach
+global event listeners::
+
+    // in src/Application.php
+    namespace App;
+
+    use Cake\Core\Plugin;
+    use Cake\Http\BaseApplication;
+
+    class Application extends BaseApplication
+    {
+        public function bootstrap()
+        {
+            // Call the parent to `require_once` config/bootstrap.php
+            parent::bootstrap();
+
+            Plugin::load('MyPlugin', ['bootstrap' => true, 'routes' => true]);
+        }
+    }
+
+Loading plugins/events in ``Application::bootstrap()`` makes
+:ref:`integration-testing` easier as events and routes will be re-processed on
+each test method.
 
 Environment Variables
 =====================

@@ -60,7 +60,9 @@ Après avoir installé un plugin et mis à jour l'autoloader, vous devrez charge
 le plugin. Vous pouvez charger les plugins un par un, ou tous d'un coup avec une
 méthode unique::
 
-    // dans config/bootstrap.php
+    // Dans config/bootstrap.php
+    // Ou dans Application::bootstrap()
+
     // Charge un Plugin unique
     Plugin::load('ContactManager');
 
@@ -139,6 +141,7 @@ automatiquement, en spécifiant des routes et des fichiers de bootstrap pour
 certains plugins::
 
     // dans config/bootstrap.php
+    // Ou dans Application::bootstrap()
 
     // En utilisant loadAll()
     Plugin::loadAll([

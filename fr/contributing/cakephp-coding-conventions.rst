@@ -497,26 +497,8 @@ la classe d'où elles proviennent. Exemple::
 Visibilité des Membres
 ----------------------
 
-Utilisez les mots-clés private et protected de PHP5 pour les méthodes et
-variables. De plus les noms des méthodes et variables qui ne sont pas publics
-commencent par un underscore simple (``_``). Exemple::
-
-    class A
-    {
-        protected $_iAmAProtectedVariable;
-
-        protected function _iAmAProtectedMethod()
-        {
-           /* ... */
-        }
-
-        private $_iAmAPrivateVariable;
-
-        private function _iAmAPrivateMethod()
-        {
-            /* ... */
-        }
-    }
+Utilisez les mots clés ``public``, ``protected`` et ``private`` de PHP pour les
+méthodes et les variables.
 
 Exemple d'Adresses
 ------------------

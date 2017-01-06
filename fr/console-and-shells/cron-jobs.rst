@@ -18,6 +18,11 @@ envoyer des newsletters::
 
 Vous pouvez avoir plus d'infos ici: http://fr.wikipedia.org/wiki/Cron
 
+.. tip::
+
+    Utilisez ``-q`` (or `--quiet`) pour ne pas afficher de sortie pour les
+    cronjobs.
+
 .. meta::
     :title lang=fr: Lancer des Shells en tant que cronjobs
     :keywords lang=fr: tâche cron,cronjob,crontab
