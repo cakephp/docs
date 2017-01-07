@@ -55,7 +55,9 @@ Composer 経由でインストールすると、 ``vendor/cakephp-plugins.php`` 
 プラグインをインストールして設定した後、プラグインの読み込みが必要になるかもしれません。
 プラグインを１つずつまたは一括で読み込むメソッドがあります。 ::
 
-    // config/bootstrap.php に記述します。
+    // config/bootstrap.php
+    // または Application::bootstrap() に記述します。
+
     // 特定のプラグインを読み込みます。
     Plugin::load('ContactManager');
 
@@ -127,7 +129,8 @@ Composer 経由でインストールすると、 ``vendor/cakephp-plugins.php`` 
 特定のカスタムルートや特定プラグインの bootstrap ファイルは、
 おそらく自動で読み込みたいでしょう。 ::
 
-    // config/bootstrap.php の中で
+    // config/bootstrap.php の中、
+    // または Application::bootstrap() の中で
 
     // loadAll() を使用
     Plugin::loadAll([
