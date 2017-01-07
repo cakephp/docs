@@ -43,7 +43,7 @@ Paramètres de la Requête
 
 ``Request`` propose les paramètres de routing avec la méthode ``getParam()``::
 
-    $this->request->getParam('controller');
+    $controllerName = $this->request->getParam('controller');
 
 Tous les éléments de route :ref:`route-elements` sont accessibles à travers
 cette interface.
@@ -53,7 +53,7 @@ d'accéder aux arguments passés :ref:`passed-arguments`. Ceux-ci sont aussi tou
 les deux disponibles dans l'objet ``request``::
 
     // Arguments passés
-    $this->request->getParam('pass');
+    $passedArgs = $this->request->getParam('pass');
 
 Tous vous fournissent un accès aux arguments passés. Il y a de nombreux
 paramètres importants et utiles que CakePHP utilise en interne qu'on peut aussi
@@ -75,7 +75,10 @@ Les paramètres Querystring peuvent être lus en utilisant
 :php:attr:`~Cake\\Network\\Request::$query`::
 
     // l'URL est /posts/index?page=1&sort=title
-    $this->request->getQuery('page');
+    $page = $this->request->getQuery('page');
+
+    // Avant 3.4.0
+    $page = $this->request->query('page');
 
 Vous pouvez soit directement accéder à la propriété demandée, soit vous pouvez
 utiliser ``query()`` pour lire l'URL requêtée sans erreur. Toute clé qui
@@ -104,8 +107,8 @@ Toutes les données POST sont accessibles en utilisant
 :php:meth:`Cake\\Network\\Request::data()`. Toute donnée de formulaire qui
 contient un préfix ``data`` aura ce préfixe supprimé. Par exemple::
 
-    // Un input avec un attribut de nom égal à 'MyModel[title]' est accessible
-    dans $this->request->getData('MyModel.title');
+    // Un input avec un attribut de nom égal à 'MyModel[title]' est accessible via
+    $title = $this->request->getData('MyModel.title');
 
 Toute clé qui n'existe pas va retourner ``null``::
 
@@ -129,7 +132,7 @@ fonction optionnelle. Cela peut être utile quand vous devez interagir avec du
 contenu de requête XML ou JSON. Les paramètres supplémentaires pour la fonction
 de décodage peuvent être passés comme arguments à ``input()``::
 
-    $this->request->input('json_decode');
+    $jsonData = $this->request->input('json_decode');
 
 Variables d'Environnement (à partir de $_SERVER et $_ENV)
 ---------------------------------------------------------
@@ -140,10 +143,10 @@ Variables d'Environnement (à partir de $_SERVER et $_ENV)
 comme un getter/setter pour les variables d'environnement sans avoir à modifier
 les variables globales ``$_SERVER`` et ``$_ENV``::
 
-    // Obtenir une valeur
-    $value = $this->request->env('HTTP_HOST');
+    // Obtenir l'host
+    $host = $this->request->env('HTTP_HOST');
 
-    // Définir une valeur. Généralement utile pour les tests.
+    // Définir une valeur, généralement utile pour les tests.
     $this->request->env('REQUEST_METHOD', 'POST');
 
 Pour accéder à toutes les variables d'environnement dans une requête, utilisez
@@ -164,7 +167,7 @@ entrantes dans n'importe quel format en utilisant
 décodage, vous pouvez recevoir le contenu dans un format déserializé::
 
     // Obtenir les données encodées JSON soumises par une action PUT/POST
-    $data = $this->request->input('json_decode');
+    $jsonData = $this->request->input('json_decode');
 
 Quelques méthodes de desérialization requièrent des paramètres supplémentaires
 quand elles sont appelées, comme le paramètre de type tableau de
@@ -172,7 +175,7 @@ quand elles sont appelées, comme le paramètre de type tableau de
 :php:meth:`~Cake\\Network\\Request::input()` supporte aussi le passage de
 paramètres supplémentaires::
 
-    // Obtenir les données encodées en Xml soumises avec une action PUT/POST
+    // Obtenir les données encodées en XML soumises avec une action PUT/POST
     $data = $this->request->input('Cake\Utility\Xml::build', ['return' => 'domdocument']);
 
 Informations du Chemin
@@ -186,17 +189,17 @@ sous-dossier. Les attributs que vous pouvez utiliser sont::
     // Suppose que la requête URL courante est /subdir/articles/edit/1?page=1
 
     // Contient /subdir/articles/edit/1?page=1
-    $request->here();
+    $here = $request->here();
 
     // Contient /subdir
-    $request->getAttribute('base');
+    $base = $request->getAttribute('base');
 
     // Contient /subdir/
-    $request->getAttribute('base');
+    $base = $request->getAttribute('base');
 
     // Avant la version 3.4.0
-    $request->webroot;
-    $request->base;
+    $webroot = $request->webroot;
+    $base = $request->base;
 
 .. _check-the-request:
 
@@ -210,7 +213,7 @@ requête utilisée. En utilisant la méthode ``is()``, vous pouvez vérifier un
 certain nombre de conditions, ainsi qu'inspecter d'autres critères de la requête
 spécifique à l'application::
 
-    $this->request->is('post');
+    $isPost = $this->request->is('post');
 
 Vous pouvez aussi étendre les détecteurs de la requête qui sont disponibles, en
 utilisant :php:meth:`Cake\\Network\\Request::addDetector()` pour créer de
@@ -302,7 +305,7 @@ Données de Session
 Pour accéder à la session pour une requête donnée, utilisez la méthode
 ``session()``::
 
-    $this->request->session()->read('User.name');
+    $userName = $this->request->session()->read('Auth.User.name');
 
 Pour plus d'informations, consultez la documentation
 :doc:`/development/sessions` sur la façon d'utiliser l'objet ``Session``.
@@ -322,7 +325,7 @@ Retourne le nom de domaine sur lequel votre application tourne::
 Retourne un tableau avec les sous-domaines sur lequel votre application tourne::
 
     // Retourne ['my', 'dev'] pour 'my.dev.example.org'
-    $request->subdomains();
+    $subdomains = $request->subdomains();
 
 .. php:method:: host()
 
@@ -368,16 +371,16 @@ Lire les Headers HTTP
 Vous permet d'accéder à tout en-tête ``HTTP_*`` utilisé pour la requête::
 
     // Récupère l'en-tête en chaîne de caractères.
-    $this->request->getHeaderLine('User-Agent');
+    $userAgent = $this->request->getHeaderLine('User-Agent');
 
     // Récupère un tableau de toutes les valeurs.
-    $this->request->getHeader('Accept');
+    $acceptHeader = $this->request->getHeader('Accept');
 
     // Vérifie si un en-tête existe
-    $this->request->hasHeader('Accept');
+    $hasAcceptHeader = $this->request->hasHeader('Accept');
 
     // Avant la version 3.4.0
-    $this->request->header('User-Agent');
+    $userAgent = $this->request->header('User-Agent');
 
 Alors que certaines installations d'apache ne rendent pas accessible l'en-tête
 ``Authorization``, CakePHP va le rendre accessible avec les méthodes spécifiques
@@ -405,10 +408,10 @@ request utilise les en-têtes, définissez la propriété ``trustProxy`` à
     $this->request->trustProxy = true;
 
     // Ces méthodes utiliseront maintenant les en-têtes du proxy.
-    $this->request->port();
-    $this->request->host();
-    $this->request->scheme();
-    $this->request->clientIp();
+    $port = $this->request->port();
+    $host = $this->request->host();
+    $scheme = $this->request->scheme();
+    $clientIp = $this->request->clientIp();
 
 Vérifier les En-têtes Acceptés
 ------------------------------
@@ -420,11 +423,11 @@ type particulier de contenu.
 
 Récupère tous les types::
 
-    $this->request->accepts();
+    $accepts = $this->request->accepts();
 
 Vérifie pour un unique type::
 
-    $this->request->accepts('application/json');
+    $acceptsJson = $this->request->accepts('application/json');
 
 .. php:staticmethod:: acceptLanguage($language = null)
 
@@ -433,11 +436,11 @@ langue spécifique est acceptée.
 
 Obtenir la liste des langues acceptées::
 
-    $this->request->acceptLanguage();
+    $acceptsLanguages = $this->request->acceptLanguage();
 
 Vérifier si une langue spécifique est acceptée::
 
-    $this->request->acceptLanguage('fr-fr');
+    $acceptsFrench = $this->request->acceptLanguage('fr-fr');
 
 .. index:: $this->response
 
