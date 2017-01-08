@@ -66,7 +66,7 @@ are also all found in the routing parameters:
 Query String Parameters
 -----------------------
 
-.. php:method:: query($name)
+.. php:method:: getQuery($name)
 
 Query string parameters can be read using the ``getQuery()`` method::
 
@@ -100,7 +100,7 @@ Request Body Data
 .. php:method:: getData($name, $default = null)
 
 All POST data can be accessed using
-:php:meth:`Cake\\Network\\ServerRequest::getData()`.  Any form data that
+:php:meth:`Cake\\Http\\ServerRequest::getData()`.  Any form data that
 contains a ``data`` prefix will have that data prefix removed. For example::
 
     // An input with a name attribute equal to 'MyModel[title]' is accessible at
@@ -156,7 +156,7 @@ XML or JSON Data
 
 Applications employing :doc:`/development/rest` often exchange data in
 non-URL-encoded post bodies. You can read input data in any format using
-:php:meth:`~Cake\\Network\\ServerRequest::input()`. By providing a decoding function,
+:php:meth:`~Cake\\Http\\ServerRequest::input()`. By providing a decoding function,
 you can receive the content in a deserialized format::
 
     // Get JSON encoded data submitted to a PUT/POST action
@@ -164,7 +164,7 @@ you can receive the content in a deserialized format::
 
 Some deserializing methods require additional parameters when called, such as
 the 'as array' parameter on ``json_decode``. If you want XML converted into a
-DOMDocument object, :php:meth:`~Cake\\Network\\ServerRequest::input()` supports
+DOMDocument object, :php:meth:`~Cake\\Http\\ServerRequest::input()` supports
 passing in additional parameters as well::
 
     // Get XML encoded data submitted to a PUT/POST action
@@ -499,7 +499,7 @@ As shown in the above example, you must pass the file path to the method.
 CakePHP will send a proper content type header if it's a known file type listed
 in `Cake\\Http\\Reponse::$_mimeTypes`. You can add new types prior to calling
 :php:meth:`Cake\\Http\\Response::withFile()` by using the
-:php:meth:`Cake\\Http\\Response::type()` method.
+:php:meth:`Cake\\Http\\Response::withType()` method.
 
 If you want, you can also force a file to be downloaded instead of displayed in
 the browser by specifying the options::
