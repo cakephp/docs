@@ -89,7 +89,7 @@ méthodes.
 Autres dépréciations
 --------------------
 
-* Les propriétés _public_ de ``Cake\Event\Event`` sont dépréciés, de nouvelles
+* Les propriétés _public_ de ``Cake\Event\Event`` sont dépréciées, de nouvelles
   méthodes ont été ajoutées pour lire et écrire ces propriétés.
 * La valeur de ``Auth.redirect`` stockée en session n'est plus utilisée. Un
   paramètre d'URL est maintenant utilisé pour stocker l'URL de redirection.
@@ -224,7 +224,7 @@ Response, sachez que les nouvelles méthodes sont bâties sur un concept
 différent. Les objets immutables sont généralement indiquées par le préfixe
 ``with`` (par exemple : ``withLocation()``). Du fait que ces méthodes évoluent
 dans un contexte immutable, elles retournent de nouvelles instances que vous
-devez assignées à des variables ou des propriétés. Partons du principe que vous
+devez assigner à des variables ou des propriétés. Partons du principe que vous
 aviez du code de Controller similaire à celui-ci::
 
     $response = $this->response;
@@ -232,7 +232,7 @@ aviez du code de Controller similaire à celui-ci::
     $response->header('X-something', 'a value');
 
 Si vous faites un simple "rechercher / remplacer" pour changer le nom des
-méthodes, cela ne fonctionnerait pas. Vous devriez plutôt remplacer votre code
+méthodes, cela ne fonctionnera pas. Vous devriez plutôt remplacer votre code
 pour qu'il ressemble à ceci::
 
     $this->response = $this->response
@@ -272,7 +272,7 @@ accéder à la Response / au Controller::
 
 .. tip::
     Plutôt que conserver une référence aux Responses, récupérez plutôt la Response
-    actuelle stockée dans le Controller et modifier la propriété ``response``
+    actuelle stockée dans le Controller et modifiez la propriété ``response``
     quand vous avez terminé vos modifications.
 
 Changement de comportements
