@@ -186,7 +186,7 @@
     }
 
     .menu > li > a {
-            padding: 25px 25px;
+        padding: 25px 25px;
     }
 
     .logo-cake img {
@@ -241,7 +241,7 @@
 @media (min-width: 992px) and (max-width: 1199px) {
 /*CSS LIDO EM DISPOSITIVOS ATÉ 1199 PX DE LARGURA*/
     .menu > li > a {
-        padding: 25px 35px;
+        padding: 25px 20px;
     }
 
     .menu-fixed .menu > li > a {

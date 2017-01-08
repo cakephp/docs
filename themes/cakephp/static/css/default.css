@@ -214,6 +214,7 @@ dl.docutils {
 
 #sidebar-navigation > ul {
     padding-left: 0;
+    margin-left: 0;
 }
 #sidebar-navigation > ul > li:before {
     color: #363637;
