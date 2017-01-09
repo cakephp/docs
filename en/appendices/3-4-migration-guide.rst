@@ -102,6 +102,12 @@ Other Deprecations
 * The ``fieldList`` option for  ``Cake\ORM\Table::newEntity()`` and
   ``patchEntity()`` has been renamed to ``fields`` to be more consistent with
   other parts of the ORM.
+* ``Router::parse()`` is deprecated. ``Router::parseRequest()`` should be used
+  instead as it accepts a request and gives more control/flexibility in handling
+  incoming requests.
+* ``Route::parse()`` is deprecated. ``Route::parseRequest()`` should be used
+  instead as it accepts a request and gives more control/flexibility in handling
+  incoming requests.
 
 Deprecated Combined Get/Set Methods
 -----------------------------------
@@ -325,6 +331,7 @@ Routing
 
 * ``RouteBuilder::prefix()`` now accepts an array of defaults to add to each
   connected route.
+* Routes can now match only specific hosts through the ``_host`` option.
 
 PaginatorHelper
 ===============

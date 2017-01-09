@@ -627,6 +627,51 @@ with the following router connection::
         $routes->fallbacks(DashedRoute::class);
     });
 
+Matching Specific HTTP Methods
+------------------------------
+
+Routes can match specific HTTP methods using the ``_method`` routing key::
+
+    Router::scope('/', function($routes) {
+        // This route only matches on POST requests.
+        $routes->connect(
+            '/reviews/start',
+            ['controller' => 'Reviews', 'action' => 'start', '_method' => 'POST']
+        );
+    });
+
+You can match multiple HTTP methods by using an array. Because the ``_method``
+parameter is a routing key, it participates in both URL parsing and URL
+generation.
+
+Matching Specific Hostnames
+---------------------------
+
+Routes can use the ``_host`` option to only match specific hosts. You can use
+the ``*.`` wildcard to match any subdomain::
+
+    Router::scope('/', function($routes) {
+        // This route only matches on http://images.example.com
+        $routes->connect(
+            '/images/default-logo.png',
+            ['controller' => 'Images', 'action' => 'default'],
+            ['_host' => 'images.example.com']
+        );
+
+        // This route only matches on http://*.example.com
+        $routes->connect(
+            '/images/old-log.png',
+            ['controller' => 'Images', 'action' => 'oldLogo'],
+            ['_host' => '*.example.com']
+        );
+    });
+
+The ``_host`` option only effects parsing URLs from requests, and plays no part
+in URL generation.
+
+.. versionadded:: 3.4.0
+    The ``_host`` option was added in 3.4.0
+
 .. index:: file extensions
 .. _file-extensions:
 
