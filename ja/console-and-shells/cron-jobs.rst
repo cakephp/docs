@@ -19,6 +19,10 @@ cron ジョブとして実行します。
 
 詳しくはこちら: http://ja.wikipedia.org/wiki/Crontab
 
+.. tip::
+
+    cron ジョブで画面出力を非表示にするために ``-q`` (または `--quiet`) を使用してください。
+
 .. meta::
     :title lang=ja: cron ジョブに登録してシェルを実行する
     :keywords lang=ja: cron ジョブ,bash script,crontab

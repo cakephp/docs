@@ -33,7 +33,7 @@ Collection serait::
         return $value > 1;
     });
 
-Vous pouvez aussi utiliser la fonction ``collection()`` à la place de
+Vous pouvez aussi utiliser la fonction ``collection()`` à la place de ``new
 Collection()``::
 
     $items = ['a' => 1, 'b' => 2, 'c' => 3];
@@ -45,7 +45,7 @@ Collection()``::
 Le bénéfice de cette méthode est qu'il est plus facile de chaîner par rapport à
 ``(new Collection($items))``.
 
-Le :php:trait:`~Cake\\Collection\\CollectionTrait` vous permet également
+:php:trait:`~Cake\\Collection\\CollectionTrait` vous permet également
 d'intégrer des fonctionnalités semblables aux Collections pour tout objet
 ``Traversable`` de votre application.
 

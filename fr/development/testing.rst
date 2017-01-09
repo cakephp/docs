@@ -1123,6 +1123,10 @@ arguments, by using the ``configApplication()`` method::
 After enabling the PSR-7 mode, and possibly configuring your application class,
 you can use the remaining ``IntegrationTestCase`` features as normal.
 
+You should also take care to try and use :ref:`application-bootstrap` to load
+any plugins containing events/routes. Doing so will ensure that your
+events/routes are connected for each test case.
+
 .. versionadded:: 3.3.0
     PSR-7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
 

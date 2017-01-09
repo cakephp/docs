@@ -17,8 +17,8 @@ Configuring your Application
 Configuration is generally stored in either PHP or INI files, and loaded during
 the application bootstrap. CakePHP comes with one configuration file by default,
 but if required you can add additional configuration files and load them in
-your application's bootstrap code. :php:class:`Cake\\Core\\Configure` is used for
-global configuration, and classes like ``Cache`` provide ``config()``
+your application's bootstrap code. :php:class:`Cake\\Core\\Configure` is used
+for global configuration, and classes like ``Cache`` provide ``config()``
 methods to make configuration simple and transparent.
 
 Loading Additional Configuration Files
@@ -605,7 +605,7 @@ This file is ideal for a number of common bootstrapping tasks:
 - Defining convenience functions.
 - Declaring constants.
 - Defining cache configuration.
-- Defining logging configuation.
+- Defining logging configuration.
 - Loading custom inflections.
 - Loading configuration files.
 

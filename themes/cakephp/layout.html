@@ -91,7 +91,8 @@
                             </li>
 
                             <li><a href="https://cakephp.org/business-solutions">Business Solutions</a></li>
-                            <li><a href="https://cakephp.org/showcase">Showcase</a></li>
+                            <li><a href="https://cakephp.org/writers">Get Paid To Write</a></li>
+                            <li><a href="https://cakephp.org/pages/team">Team</a></li>
 
                             <li>
                                 <a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
@@ -141,19 +142,19 @@
             </div>
         </div>
 
-		{# Grey site bar #}
-		<section id="nav-cook" class="hidden-xs hidden-sm">
-			<div class="container-fluid ">
-				<div class="row ">
-					<div class="col-md-12 back-book">
-						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
-							<h2>
-								<a href="{{ pathto(master_doc) }}">
-									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
-									CakePHP {{ version }} Red Velvet <strong>Cookbook</strong>
-								</a>
-							</h2>
-						</div>
+        {# Grey site bar #}
+        <section id="nav-cook" class="hidden-xs hidden-sm">
+            <div class="container-fluid ">
+                <div class="row ">
+                    <div class="col-md-12 back-book">
+                        <div class="col-md-5 text-center t-cook-nav p0 hidden-sm hidden-xs">
+                            <h2>
+                                <a href="{{ pathto(master_doc) }}">
+                                    <span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+                                    CakePHP {{ version }} Red Velvet <strong>Cookbook</strong>
+                                </a>
+                            </h2>
+                        </div>
 
                         <div class="col-md-4 hidden-sm">
                             <form class="search" action="{{ pathto('search') }}" method="get">
@@ -228,19 +229,19 @@
                             </div>
                         </div>
 
-					</div>
-				</div>
-			</div>
-			{% if 'next' in version %}
-				<p class="edge-warning">
-					This document is for CakePHP's development version, which can be significantly different 
-					from previous releases.
-					<br>You may want to read
-					<a href="http://book.cakephp.org">current stable release doumentation</a> instead.
-				</p>
-			{% endif %}
-		</section>
-	</header>
+                    </div>
+                </div>
+            </div>
+            {% if 'next' in version %}
+                <p class="edge-warning">
+                    This document is for CakePHP's development version, which can be significantly different 
+                    from previous releases.
+                    <br>You may want to read
+                    <a href="http://book.cakephp.org">current stable release doumentation</a> instead.
+                </p>
+            {% endif %}
+        </section>
+    </header>
 
     {# Responsive grey bar navigation. This is outside of header so it scrolls with the page. #}
     <section class="nav-btn visible-sm visible-xs">
@@ -278,7 +279,6 @@
 
     {%- if pagename != 'search' -%}
     <div id="improve-slideout">
-        <i class="fa fa-pencil icon-improve"></i>
         <a href="https://github.com/cakephp/docs/edit/{{ branch }}/{{ language }}/{{ pagename }}.rst" target="_blank">
             <div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
         </a>

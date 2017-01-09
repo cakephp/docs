@@ -462,26 +462,8 @@ ini ディレクティブの ``short_open_tag`` にかかわらず有効とな�
 メンバのアクセス権(*visibility*)
 --------------------------------
 
-メソッドと変数には、PHP5 の private と protected キーワードを指定してください。
-加えて、非 public なメソッドまたは変数の名前は単一のアンダースコア (``_``) から始めます。
-例::
-
-    class A
-    {
-        protected $_iAmAProtectedVariable;
-
-        protected function _iAmAProtectedMethod()
-        {
-           /* ... */
-        }
-
-        private $_iAmAPrivateVariable;
-
-        private function _iAmAPrivateMethod()
-        {
-            /* ... */
-        }
-    }
+メソッドと変数には、PHP の ``public``, ``protected`` そして ``private``
+キーワードを指定してください。
 
 アドレスの例示
 --------------
