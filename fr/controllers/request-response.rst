@@ -587,7 +587,7 @@ Définir les En-têtes
 .. php:method:: withHeader($header, $value)
 
 Les définitions de headers se font avec la méthode :php:meth:`Cake\\Http\\Response::withHeader()`.
-Comme tous les méthodes de l'interface PSR-7, cette méthode retourne une
+Comme toutes les méthodes de l'interface PSR-7, cette méthode retourne une
 nouvelle instance avec le nouvel header::
 
     // Ajoute / remplace un header
@@ -836,7 +836,7 @@ il supprime le contenu de la réponse et envoie l'en-tête `304 Not Modified`::
 
 .. _cors-headers:
 
-Définir les En-têtes de Requête d'Origine Croisée (Cross Origin ServerRequest Headers = CORS)
+Définir les En-têtes de Requête d'Origine Croisée (Cross Origin Request Headers = CORS)
 =======================================================================================
 
 Depuis 3.2, vous pouvez utiliser la méthode ``cors()`` pour définir `le Contrôle
@@ -878,7 +878,7 @@ modifiée::
     $this->response->withHeader('X-CakePHP', 'yes!');
 
 Dans le code ci-dessus, la réponse ne contiendra pas le header ``X-CakePHP``
-car la valeur retournée par ``withHeader()`` n'a pas été persisté. Pour avoir
+car la valeur retournée par ``withHeader()`` n'a pas été persistée. Pour avoir
 un code fonctionnel, vous devrez écrire::
 
     $this->response = $this->response->withHeader('X-CakePHP', 'yes!');
