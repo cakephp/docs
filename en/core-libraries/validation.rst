@@ -103,9 +103,9 @@ allow a field to be empty. Both ``allowEmpty()`` and ``notEmpty()`` support a
 mode parameter that allows you to control when a field can or cannot be empty:
 
 * ``false`` The field is not allowed to be empty.
-* ``create`` The field is required when validating a **create**
+* ``create`` The field can be empty when validating a **create**
   operation.
-* ``update`` The field is required when validating an **update**
+* ``update`` The field can be empty when validating an **update**
   operation.
 
 The values ``''``, ``null`` and ``[]`` (empty array) will cause validation
@@ -116,8 +116,8 @@ accepted.
 An example of these methods in action is::
 
     $validator->allowEmpty('published')
-        ->notEmpty('title', 'A title is required')
-        ->notEmpty('body', 'A body is required', 'create')
+        ->notEmpty('title', 'Title cannot be empty')
+        ->notEmpty('body', 'Body cannot be empty', 'create')
         ->allowEmpty('header_image', 'update');
 
 Marking Rules as the Last to Run
