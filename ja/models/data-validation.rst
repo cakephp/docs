@@ -699,7 +699,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
     'deep' キーにはブール値を指定します。true が指定されると、その
     クレジットカードの Luhn アルゴリズムをチェックします
-    (`http://en.wikipedia.org/wiki/Luhn\_algorithm <http://en.wikipedia.org/wiki/Luhn_algorithm>`_).
+    (`https://en.wikipedia.org/wiki/Luhn\_algorithm <https://en.wikipedia.org/wiki/Luhn_algorithm>`_).
     デフォルトは false です。
 
     'regex' キーにはクレジットカード番号の妥当性チェックで使うための
@@ -957,7 +957,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 .. php:staticmethod:: luhn(string|array $check, boolean $deep = false)
 
     luhn アルゴリズム：さまざまな一意の番号を検証するためのチェックサム算出式。
-    詳細は http://en.wikipedia.org/wiki/Luhn_algorithm を参照してください。
+    詳細は https://en.wikipedia.org/wiki/Luhn_algorithm を参照してください。
 
 .. php:staticmethod:: maxLength(string $check, integer $max)
 

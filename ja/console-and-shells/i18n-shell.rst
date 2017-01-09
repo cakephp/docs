@@ -1,7 +1,7 @@
 I18N シェル
 #############
 
-CakePHP の国際化機能は、 `po files <http://en.wikipedia.org/wiki/GNU_gettext>`_
+CakePHP の国際化機能は、 `po files <https://en.wikipedia.org/wiki/GNU_gettext>`_
 を翻訳のソースとして使います。これにより `poedit <http://www.poedit.net/>`_ のようなツールや
 その他の一般的な翻訳ツールによる統合が容易になります。
 

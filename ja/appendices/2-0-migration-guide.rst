@@ -112,7 +112,7 @@ __() (二つのアンダースコアでのショートカット関数)
     __dcn()
     __c()
 
-これに併せて、オプションパラメータを渡しているなら、翻訳はパラメータを用いて `sprintf <http://php.net/manual/ja/function.sprintf.php>`_ を値を返す前に呼び出します。
+これに併せて、オプションパラメータを渡しているなら、翻訳はパラメータを用いて `sprintf <https://secure.php.net/manual/ja/function.sprintf.php>`_ を値を返す前に呼び出します。
 以下は一例です::
 
     // "Called: MyClass:myMethod" のようなものを返す
@@ -121,7 +121,7 @@ __() (二つのアンダースコアでのショートカット関数)
 これは全てのショートカット翻訳メソッドに関して同じことが言えます。
 
 
-指定子に関する更なる情報に関しては、 `sprintf <http://php.net/manual/ja/function.sprintf.php>`_ 関数を見てください。
+指定子に関する更なる情報に関しては、 `sprintf <https://secure.php.net/manual/ja/function.sprintf.php>`_ 関数を見てください。
 
 
 変更されたクラスの場所と定数

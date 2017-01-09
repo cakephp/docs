@@ -218,7 +218,7 @@ RESTful 响应。
 ==========================
 
 你可以使用任何内置的 
-`SPL exceptions <http://php.net/manual/en/spl.exceptions.php>`_ 、 ``Exception``
+`SPL exceptions <https://secure.php.net/manual/en/spl.exceptions.php>`_ 、 ``Exception``
 本身或 :php:exc:`CakeException` 来创建你自己的应用程序的异常。扩展 Exception 类
 或者 SPL 异常的应用程序异常在生产模式下会被当作 500 错误对待。
 :php:exc:`CakeException` 比较特别，所有 :php:exc:`CakeException`  对象会根据它们

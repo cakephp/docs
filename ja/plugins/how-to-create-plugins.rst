@@ -300,7 +300,7 @@ CakePHP アプリケーションで動作するプラグインの最後の tips 
 プラグインの公開
 ===================
 
-あなたのプラグインを `plugins.cakephp.org <http://plugins.cakephp.org>`_ に追加できますし、
+あなたのプラグインを `plugins.cakephp.org <https://plugins.cakephp.org>`_ に追加できますし、
 `awesome-cakephp list <https://github.com/FriendsOfCake/awesome-cakephp>`_
 に申し込みできます。
 

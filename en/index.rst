@@ -8,7 +8,7 @@ Welcome
 
 .. warning::
     This version of the documentation is for CakePHP 2.x. Go `here for the
-    CakePHP 3.x documentation <http://book.cakephp.org/3.0/>`_.
+    CakePHP 3.x documentation <https://book.cakephp.org/3.0/>`_.
 
 The CakePHP cookbook is an openly developed and community editable documentation
 project. We hope to maintain a high level of quality, validity and accuracy for
@@ -28,7 +28,7 @@ the documentation.
 
     - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/en/CakePHPCookbook.epub>`_
-    - `Original Source <http://github.com/cakephp/docs>`_
+    - `Original Source <https://github.com/cakephp/docs>`_
 
 Getting Started
 ===============

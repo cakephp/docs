@@ -23,13 +23,13 @@ interact with the underlying structure.
 
 CakePHP already includes behaviors for tree structures, translated content,
 access control list interaction, not to mention the community-contributed
-behaviors already available in the CakePHP Bakery (`http://bakery.cakephp.org
-<http://bakery.cakephp.org>`_). In this section, we'll cover the basic usage
+behaviors already available in the CakePHP Bakery (`https://bakery.cakephp.org
+<https://bakery.cakephp.org>`_). In this section, we'll cover the basic usage
 pattern for adding behaviors to models, how to use CakePHP's built-in behaviors,
 and how to create our own.
 
 In essence, Behaviors are
-`Mixins <http://en.wikipedia.org/wiki/Mixin>`_ with callbacks.
+`Mixins <https://en.wikipedia.org/wiki/Mixin>`_ with callbacks.
 
 There are a number of Behaviors included in CakePHP. To find out more about each
 one, reference the chapters below:

@@ -4,8 +4,8 @@
 在本章，您可以通过一个典型的 CakePHP 应用程序来了解各个部分是怎么组合在一起的。
 
 或者，对现有的应用程序和组件您可以参考非官方 CakePHP 插件代码库
-`CakePackages <http://plugins.cakephp.org/>`_ 和
-`Bakery <http://bakery.cakephp.org/>`_。
+`CakePackages <https://plugins.cakephp.org/>`_ 和
+`Bakery <https://bakery.cakephp.org/>`_。
 
 .. toctree::
     :glob:

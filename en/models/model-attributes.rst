@@ -5,7 +5,7 @@ Model attributes allow you to set properties that can override the
 default model behavior.
 
 For a complete list of model attributes and their descriptions
-visit the `CakePHP API <http://api.cakephp.org/2.8/class-Model.html>`_.
+visit the `CakePHP API <https://api.cakephp.org/2.8/class-Model.html>`_.
 
 useDbConfig
 ===========

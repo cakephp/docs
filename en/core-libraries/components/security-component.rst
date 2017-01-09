@@ -17,7 +17,7 @@ All of these properties can be set directly or through setter methods of the
 same name in your controller's beforeFilter.
 
 By using the Security Component you automatically get `CSRF
-<http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ and form tampering
+<https://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ and form tampering
 protection. Hidden token fields will automatically be inserted into forms and
 checked by the Security component. Among other things, a form submission will
 not be accepted after a certain period of inactivity, which is controlled by the
@@ -287,7 +287,7 @@ You can also set this property in your controller's ``beforeFilter``::
     }
 
 The csrfExpires property can be any value that is compatible with
-`strtotime() <http://php.net/manual/en/function.strtotime.php>`_. By default the
+`strtotime() <https://secure.php.net/manual/en/function.strtotime.php>`_. By default the
 :php:class:`FormHelper` will add a ``data[_Token][key]`` containing the CSRF
 token to every form when the component is enabled.
 

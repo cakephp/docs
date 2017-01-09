@@ -8,7 +8,7 @@ Bem Vindo
 
 .. warning::
     Esta é a documentação da versão 2.x do CakePHP.
-    `Clique aqui <http://book.cakephp.org/3.0/>`_ para visualizar a
+    `Clique aqui <https://book.cakephp.org/3.0/>`_ para visualizar a
     documentação do CakePHP 3.x.
 
 
@@ -32,7 +32,7 @@ documentação.
 
     - `PDF <../_downloads/pt/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/pt/CakePHPCookbook.epub>`_
-    - `Código-fonte Original <http://github.com/cakephp/docs>`_
+    - `Código-fonte Original <https://github.com/cakephp/docs>`_
 
 Introdução
 ==========

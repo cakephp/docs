@@ -2,7 +2,7 @@ Shell I18N
 ##########
 
 La fonctionnalité i18n de CakePHP utilise les
-`fichiers po <http://en.wikipedia.org/wiki/GNU_gettext>`_ comme source de
+`fichiers po <https://en.wikipedia.org/wiki/GNU_gettext>`_ comme source de
 traduction. Cela les rend faciles à intégrer avec des outils tels que
 `poedit <http://www.poedit.net/>`_ ou d'autres outils habituels de traduction.
 

@@ -161,7 +161,7 @@ Décoder automatiquement les données de la requête
         $this->RequestHandler->addInputType('csv', array($parser));
 
     L'exemple ci-dessus nécessite PHP 5.3, cependant vous pouvez utiliser
-    n'importe quel `callback <http://php.net/callback>`_ pour la fonction
+    n'importe quel `callback <https://secure.php.net/callback>`_ pour la fonction
     de gestion. Vous pouvez aussi passer des arguments supplémentaires
     au callback, c'est très utile pour les callbacks comme ``json_decode``::
 

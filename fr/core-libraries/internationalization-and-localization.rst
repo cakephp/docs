@@ -34,13 +34,13 @@ identique - ils renverront le même contenu au navigateur.
 La fonction :php:func:`__()` traduira la chaîne passée si une
 traduction est disponible, sinon elle la renverra non modifiée.
 Cela fonctionne exactement comme les autres implémentations Gettext
-`Gettext <http://en.wikipedia.org/wiki/Gettext>`_
+`Gettext <https://en.wikipedia.org/wiki/Gettext>`_
 (comme les autres fonctions de traductions, comme
 :php:func:`__d()` , :php:func:`__n()` etc).
 
 Après avoir préparé votre code pour le multi-langue, l'étape suivante
 est de créer votre fichier pot
-`pot file <http://en.wikipedia.org/wiki/Gettext>`_,
+`pot file <https://en.wikipedia.org/wiki/Gettext>`_,
 qui est le template pour toutes les chaînes traduisibles de votre application.
 Pour générer votre (vos) fichier(s) pot, tout ce que vous avez à faire est de
 lancer la tâche i18n :doc:`i18n console task </console-and-shells/i18n-shell>`
@@ -51,7 +51,7 @@ que vous changez les chaînes traduisibles dans votre code.
 
 Le(s) fichier(s) pot eux mêmes ne sont pas utilisés par CakePHP, ils sont les
 templates utilisés pour créer ou mettre à jour vos fichiers po,
-`po files <http://en.wikipedia.org/wiki/Gettext>`_ qui contiennent les
+`po files <https://en.wikipedia.org/wiki/Gettext>`_ qui contiennent les
 traductions. CakePHP cherchera vos fichiers po dans les dossiers suivants::
 
     /app/Locale/<locale>/LC_MESSAGES/<domain>.po
@@ -227,10 +227,10 @@ Il y a d'autres aspects de localisation de votre application qui
 ne sont pas couverts par l'utilisation des fonctions de traduction,
 ce sont les formats date/monnaie. N'oubliez pas que CakePHP est PHP :),
 donc pour définir les formats de ses éléments vous devez utiliser
-`setlocale <http://www.php.net/setlocale>`_.
+`setlocale <https://secure.php.net/setlocale>`_.
 
 Si vous passez une locale qui n'existe pas sur votre ordinateur
-`setlocale <http://www.php.net/setlocale>`_ cela n'aura aucun effet.
+`setlocale <https://secure.php.net/setlocale>`_ cela n'aura aucun effet.
 Vous pouvez trouver la liste des locales disponibles en exécutant
 la commande ``locale -a`` dans un terminal.
 

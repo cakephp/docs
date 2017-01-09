@@ -4,7 +4,7 @@ Onde obter ajuda
 Site oficial do CakePHP
 =======================
 
-`http://www.cakephp.org <http://www.cakephp.org>`_
+`https://cakephp.org <https://cakephp.org>`_
 
 O site oficial do CakePHP é sempre o melhor lugar para visitar. Possui links
 para ferramentas frequentemente utilizadas para desenvolvedores, screencasts,
@@ -13,7 +13,7 @@ oportunidades de doações e downloads.
 O Cookbook
 ==========
 
-`http://book.cakephp.org <http://book.cakephp.org>`_
+`https://book.cakephp.org <https://book.cakephp.org>`_
 
 Este manual deverá ser provavelmente o primeiro lugar que você vá para obter
 respostas. Como acontece com muitos outros projetos de código aberto, temos
@@ -25,7 +25,7 @@ Tanto o manual como a API podem ser consultadas online.
 O Bakery
 ========
 
-`http://bakery.cakephp.org <http://bakery.cakephp.org>`_
+`https://bakery.cakephp.org <https://bakery.cakephp.org>`_
 
 O CakePHP Bakery é um centro de intercâmbio para todas as coisas sobre o
 CakePHP. Locais para tutoriais, estudos de casos, exemplos de códigos. Uma vez
@@ -35,7 +35,7 @@ conhecimentos com a comunidade e ganhe fama e fortuna.
 A API
 =====
 
-`http://api.cakephp.org/2.8/ <http://api.cakephp.org/2.8/>`_
+`https://api.cakephp.org/2.8/ <https://api.cakephp.org/2.8/>`_
 
 Direto ao ponto e diretamente dos desenvolvedores do núcleo, a API
 (`Application Programming Interface`) do CakePHP é a mais completa documentação

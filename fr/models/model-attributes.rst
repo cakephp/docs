@@ -5,7 +5,7 @@ Les attributs de Model vous permettent de configurer les propriétés qui
 peuvent surcharger le behavior du model par défaut.
 
 Pour une liste complète d'attributs du model et ses descriptions, allez voir
-`l'API de CakePHP <http://api.cakephp.org/2.4/class-Model.html>`_.
+`l'API de CakePHP <https://api.cakephp.org/2.4/class-Model.html>`_.
 
 useDbConfig
 ===========

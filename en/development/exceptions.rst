@@ -236,7 +236,7 @@ Creating your own application exceptions
 ========================================
 
 You can create your own application exceptions using any of the built
-in `SPL exceptions <http://php.net/manual/en/spl.exceptions.php>`_, ``Exception``
+in `SPL exceptions <https://secure.php.net/manual/en/spl.exceptions.php>`_, ``Exception``
 itself, or :php:exc:`CakeException`. Application exceptions that extend
 Exception or the SPL exceptions will be treated as 500 error in production mode.
 :php:exc:`CakeException` is special in that all :php:exc:`CakeException` objects

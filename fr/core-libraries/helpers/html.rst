@@ -985,7 +985,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         /posts/search?foo=bar#first
 
     Pour plus d'information voir
-    `Router::url <http://api.cakephp.org/2.4/class-Router.html#_url>`_
+    `Router::url <https://api.cakephp.org/2.4/class-Router.html#_url>`_
     dans l' API.
 
 .. php:method:: useTag(string $tag)

@@ -33,12 +33,12 @@ If you do nothing further, these two code examples are functionally
 identical - they will both send the same content to the browser.
 The :php:func:`__()` function will translate the passed string
 if a translation is available, or return it unmodified. It works similar
-to other `Gettext <http://en.wikipedia.org/wiki/Gettext>`_ implementations
+to other `Gettext <https://en.wikipedia.org/wiki/Gettext>`_ implementations
 (as do the other translate functions, such as
 :php:func:`__d()` , :php:func:`__n()` etc)
 
 With your code ready to be multilingual, the next step is to create
-your `pot file <http://en.wikipedia.org/wiki/Gettext>`_, which is
+your `pot file <https://en.wikipedia.org/wiki/Gettext>`_, which is
 the template for all translatable strings in your application. To
 generate your pot file(s), all you need to do is run the
 :doc:`i18n console task </console-and-shells/i18n-shell>`,
@@ -49,7 +49,7 @@ your code.
 
 The pot file(s) themselves are not used by CakePHP, they are the
 templates used to create or update your
-`po files <http://en.wikipedia.org/wiki/Gettext>`_, which contain
+`po files <https://en.wikipedia.org/wiki/Gettext>`_, which contain
 the translations. CakePHP will look for your po files in the following
 location::
 
@@ -212,10 +212,10 @@ There's one other aspect of localizing your application which is
 not covered by the use of the translate functions, and that is
 date/money formats. Don't forget that CakePHP is PHP :), therefore
 to set the formats for these things you need to use
-`setlocale <http://www.php.net/setlocale>`_.
+`setlocale <https://secure.php.net/setlocale>`_.
 
 If you pass a locale that doesn't exist on your computer to
-`setlocale <http://www.php.net/setlocale>`_ it will have no
+`setlocale <https://secure.php.net/setlocale>`_ it will have no
 effect. You can find the list of available locales by running the
 command ``locale -a`` in a terminal.
 

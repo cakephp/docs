@@ -3,7 +3,7 @@ Security
 
 .. php:class:: Security
 
-`Security ライブラリ <http://api.cakephp.org/2.8/class-Security.html>`_ は、
+`Security ライブラリ <https://api.cakephp.org/2.8/class-Security.html>`_ は、
 データのハッシュ化や暗号化などのメソッドなどの基本的なセキュリティ分野を取り扱います。
 
 .. warning::
@@ -38,7 +38,7 @@ Security API
     :param string $mode: モード。'encrypt' もしくは 'decrypt'
 
     rijndael-256 暗号を使って、テキストを暗号化・復号します。
-    このメソッドを使うには `mcrypt extension <http://php.net/mcrypt>`_
+    このメソッドを使うには `mcrypt extension <https://secure.php.net/mcrypt>`_
     がインストールされている必要があります。 ::
 
         // データを暗号化

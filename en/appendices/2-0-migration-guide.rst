@@ -125,7 +125,7 @@ This change includes all shortcut translation methods::
     __c()
 
 Alongside this, if you pass additional parameters, the translation will call
-`sprintf <http://php.net/manual/en/function.sprintf.php>`_  with these
+`sprintf <https://secure.php.net/manual/en/function.sprintf.php>`_  with these
 parameters before returning. For example::
 
     // Will return something like "Called: MyClass:myMethod"
@@ -134,7 +134,7 @@ parameters before returning. For example::
 It is valid for all shortcut translation methods.
 
 More information about the specifiers, you can see in
-`sprintf <http://php.net/manual/en/function.sprintf.php>`_ function.
+`sprintf <https://secure.php.net/manual/en/function.sprintf.php>`_ function.
 
 
 Class location and constants changed

@@ -152,7 +152,7 @@ RequestHandler はクライアントやリクエストについての情報を�
         $this->RequestHandler->addInputType('csv', array($parser));
 
     上記の例は PHP 5.3 が必要です。しかしながら、ハンドラの関数としては、どの
-    `callable <http://php.net/callback>`_ も利用できます。コールバックには追加の
+    `callable <https://secure.php.net/callback>`_ も利用できます。コールバックには追加の
     引数を渡すこともでき、これは ``json_decode`` のようなコールバックのときに便利です。 ::
 
         $this->RequestHandler->addInputType('json', array('json_decode', true));

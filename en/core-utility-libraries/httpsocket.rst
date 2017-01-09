@@ -24,10 +24,10 @@ HTTP methods.
         $HttpSocket = new HttpSocket();
 
         // string query
-        $results = $HttpSocket->get('http://www.google.com/search', 'q=cakephp');
+        $results = $HttpSocket->get('https://www.google.com/search', 'q=cakephp');
 
         // array query
-        $results = $HttpSocket->get('http://www.google.com/search', array('q' => 'cakephp'));
+        $results = $HttpSocket->get('https://www.google.com/search', array('q' => 'cakephp'));
 
 .. php:method:: post($uri, $data, $request)
 
@@ -123,15 +123,15 @@ Handling the response
 Responses from requests made with ``HttpSocket`` are instances of
 ``HttpResponse``. This object gives you a few accessor methods to access the
 contents of an HTTP response. This class implements the
-`ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_ and
-`__toString() <http://www.php.net/manual/en/language.oop5.magic.php#language.oop5.magic.tostring>`_,
+`ArrayAccess <https://secure.php.net/manual/en/class.arrayaccess.php>`_ and
+`__toString() <https://secure.php.net/manual/en/language.oop5.magic.php#language.oop5.magic.tostring>`_,
 so you can continue using the ``$http->response`` as array and the return of
 request methods as string::
 
     App::uses('HttpSocket', 'Network/Http');
 
     $http = new HttpSocket();
-    $response = $http->get('http://www.cakephp.org');
+    $response = $http->get('https://cakephp.org');
 
     // Check the body for the presence of a title tag.
     $titlePos = strpos($response->body, '<title>');
@@ -282,7 +282,7 @@ with this method, the content will be written to this resource, using
     $http = new HttpSocket();
     $f = fopen(TMP . 'bakery.xml', 'w');
     $http->setContentResource($f);
-    $http->get('http://bakery.cakephp.org/comments.rss');
+    $http->get('https://bakery.cakephp.org/comments.rss');
     fclose($f);
 
 .. note::

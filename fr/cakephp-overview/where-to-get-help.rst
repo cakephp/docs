@@ -4,7 +4,7 @@ Où obtenir de l'aide
 Le site officiel de CakePHP
 ===========================
 
-`http://www.cakephp.org <http://www.cakephp.org>`_
+`https://cakephp.org <https://cakephp.org>`_
 
 Le site officiel de CakePHP est toujours un endroit épatant à visiter.
 Il propose des liens vers des outils fréquemment utilisés par le développeur,
@@ -13,7 +13,7 @@ des didacticiels vidéo, des possibilités de faire un don et des téléchargeme
 Le Cookbook
 ===========
 
-`http://book.cakephp.org <http://book.cakephp.org>`_
+`https://book.cakephp.org <https://book.cakephp.org>`_
 
 Ce manuel devrait probablement être le premier endroit où vous rendre pour
 obtenir des réponses. Comme pour beaucoup d'autres projets open source, nous
@@ -26,7 +26,7 @@ l'API ont tous deux une version en ligne.
 La Boulangerie
 ==============
 
-`http://bakery.cakephp.org <http://bakery.cakephp.org>`_
+`https://bakery.cakephp.org <https://bakery.cakephp.org>`_
 
 La Boulangerie (Bakery) est une chambre de compensation pour tout ce qui
 concerne CakePHP. Vous y trouverez des tutoriels, des études de cas et des
@@ -37,7 +37,7 @@ gloire et la fortune.
 L'API
 =====
 
-`http://api.cakephp.org/ <http://api.cakephp.org/>`_
+`https://api.cakephp.org/ <https://api.cakephp.org/>`_
 
 Allez droit au but et atteignez le graal des développeurs, l'API CakePHP
 (Application Programming Interface) est la documentation la plus complète sur
@@ -88,7 +88,7 @@ et aider les autres. Rejoignez la famille de CakePHP en vous y inscrivant.
 Stackoverflow
 =============
 
-`http://stackoverflow.com/ <http://stackoverflow.com/questions/tagged/cakephp/>`_
+`https://stackoverflow.com/ <https://stackoverflow.com/questions/tagged/cakephp/>`_
 
 Taggez vos questions avec ``cakephp`` et la version sépcifique que vous utilisez
 pour permettre aux utilisateurs existant de stackoverflow de trouver vos

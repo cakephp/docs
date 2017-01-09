@@ -164,7 +164,7 @@ CakePHP 控制器带有回调方法，用来在请求生命周期的各个阶段
 ==========
 
 欲知控制器方法的完整列表及其描述，请参看 
-`CakePHP API <http://api.cakephp.org/2.8/class-Controller.html>`_ 。
+`CakePHP API <https://api.cakephp.org/2.8/class-Controller.html>`_ 。
 
 与视图交互
 ----------
@@ -600,7 +600,7 @@ CakePHP 就不会试图再次渲染该视图了::
 ==========
 
 欲知控制器属性的完整列表及其描述，请参看 
-`CakePHP API <http://api.cakephp.org/2.8/class-Controller.html>`_ 。
+`CakePHP API <https://api.cakephp.org/2.8/class-Controller.html>`_ 。
 
 .. php:attr:: name
 
@@ -678,7 +678,7 @@ $components、$helpers 和 $uses
 其它属性
 --------
 
-虽然你可以在 `API <http://api.cakephp.org>`_ 中查看所有控制器属性的细节，不过还
+虽然你可以在 `API <https://api.cakephp.org>`_ 中查看所有控制器属性的细节，不过还
 有其它一些控制器属性值得我们在手册中花费章节单独介绍它们。
 
 .. php:attr:: cacheAction

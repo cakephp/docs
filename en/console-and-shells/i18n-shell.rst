@@ -1,7 +1,7 @@
 I18N shell
 ##########
 
-The i18n features of CakePHP use `po files <http://en.wikipedia.org/wiki/GNU_gettext>`_
+The i18n features of CakePHP use `po files <https://en.wikipedia.org/wiki/GNU_gettext>`_
 as their translation source. This makes them easily to integrate with tools
 like `poedit <http://www.poedit.net/>`_ and other common translation tools.
 

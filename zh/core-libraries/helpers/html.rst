@@ -956,7 +956,7 @@ HtmlHelper助件的一些方法及如何使用它们。
         /posts/search?foo=bar#first
 
     欲知详情，请查看API中的
-    `Router::url <http://api.cakephp.org/2.8/class-Router.html#_url>`_。
+    `Router::url <https://api.cakephp.org/2.8/class-Router.html#_url>`_。
 
 .. php:method:: useTag(string $tag)
 

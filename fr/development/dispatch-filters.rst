@@ -58,7 +58,7 @@ classes spéciales ``DispatcherFilter``::
     ));
 
 Comme montré ci-dessus, vous pouvez passer tout type de
-`callback <http://php.net/callback>`_ PHP valide, puisque vous vous en
+`callback <https://secure.php.net/callback>`_ PHP valide, puisque vous vous en
 souvenez peut-être, un `callback` est tout ce que PHP peut exécuter avec
 ``call_user_func``. Nous faisons une petite exception, si une chaîne est
 fournie, elle sera traitée comme un nom de classe, et pas comme un nom de

@@ -27,8 +27,8 @@ CakePHP の修正に取りかかる前に自分の環境を整えることをお
 
 CakePHP のソースコードの clone を GitHub から取得してください。
 
-* `GitHub <http://github.com>`_ アカウントを持っていないなら、作成してください。
-* `CakePHP リポジトリ <http://github.com/cakephp/cakephp>`_ の **Fork**
+* `GitHub <https://github.com>`_ アカウントを持っていないなら、作成してください。
+* `CakePHP リポジトリ <https://github.com/cakephp/cakephp>`_ の **Fork**
   ボタンをクリックして Fork してください。
 
 Fork できたら、Fork したものを自分のローカルマシンへと clone してください。 ::

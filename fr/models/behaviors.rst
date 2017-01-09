@@ -29,13 +29,13 @@ CakePHP contient déjà des behaviors pour les structures en arbre, les
 contenus traduits, les interactions par liste de contrôle d'accès, sans
 oublier les behaviors des contributeurs de la communauté déjà disponibles
 dans la Boulangerie (Bakery) CakePHP
-(`http://bakery.cakephp.org <http://bakery.cakephp.org>`_). Dans cette
+(`https://bakery.cakephp.org <https://bakery.cakephp.org>`_). Dans cette
 section nous couvrirons le schéma d'usage classique pour ajouter des
 behaviors aux models, l'utilisation des behaviors intégrés à
 CakePHP et la manière de créer nos propres behaviors.
 
 Au final, les Behaviors sont
-`Mixins <http://en.wikipedia.org/wiki/Mixin>`_ avec les callbacks.
+`Mixins <https://en.wikipedia.org/wiki/Mixin>`_ avec les callbacks.
 
 Il y a un certain nombre de Behaviors inclus dans CakePHP. Pour en savoir
 plus sur chacun, référencez-vous aux chapitres ci-dessous:

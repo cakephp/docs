@@ -43,7 +43,7 @@ CakePHP 为这些情况提供了清晰和可扩展的接口，在调度周期中
         )
     ));
 
-如上所述，你可以传入任何合法的 PHP `回调(*callback*) <http://php.net/callback>`_ 
+如上所述，你可以传入任何合法的 PHP `回调(*callback*) <https://secure.php.net/callback>`_ 
 类型，也许你还记得，`回调` 是任何 PHP 可以用 ``call_user_func`` 函数执行的东西。
 我们做了一点例外，如果提供了字符串，这将被作为类名对待，而不是可能的函数名。这当然让 
 PHP 5.3 的用户可以附加匿名函数作为过滤器::

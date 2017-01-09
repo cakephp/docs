@@ -333,7 +333,7 @@ Publiez votre Plugin
 ====================
 
 Vous pouvez ajouter votre plugin sur
-`plugins.cakephp.org <http://plugins.cakephp.org>`_ ou le proposer à la
+`plugins.cakephp.org <https://plugins.cakephp.org>`_ ou le proposer à la
 `liste awesome-cakephp <https://github.com/FriendsOfCake/awesome-cakephp>`_.
 
 Aussi, vous pouvez créer un fichier composer.json et publier votre plugin

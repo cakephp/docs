@@ -12,7 +12,7 @@ Instead of using the destructive input filtering features of Sanitize class you
 should instead apply more thorough :doc:`/models/data-validation` to the user
 data your application accepts. By rejecting invalid input you can often remove the
 need to destructively modify user data. You might also want to look at
-`PHP's filter extension <http://php.net/filter>`_ in situations you need to
+`PHP's filter extension <https://secure.php.net/filter>`_ in situations you need to
 modify user input.
 
 Accepting user submitted HTML

@@ -26,8 +26,8 @@ Configure suas informações pessoais com seu nome e e-mail::
 
 Faça o clone do código do CakePHP diretamente do GitHub:
 
-* Se você não tem uma conta no `github <http://github.com>`_, crie uma.
-* Faça um Fork do `repositório CakePHP <http://github.com/cakephp/cakephp>`_ clicando
+* Se você não tem uma conta no `github <https://github.com>`_, crie uma.
+* Faça um Fork do `repositório CakePHP <https://github.com/cakephp/cakephp>`_ clicando
   no botão **Fork**.
 
 Depois clone o fork feito para sua máquina local::

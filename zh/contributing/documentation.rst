@@ -7,8 +7,8 @@
 this Doc"按键将会引导你进入该页面的 GitHub 在线编辑器。
 
 CakePHP文档是
-`持续集成 <http://en.wikipedia.org/wiki/Continuous_integration>`_ 的，所以你可以
-在任何时候在Jenkins服务器上查看 `各种构建 <http://ci.cakephp.org>`_ 的状态。
+`持续集成 <https://en.wikipedia.org/wiki/Continuous_integration>`_ 的，所以你可以
+在任何时候在Jenkins服务器上查看 `各种构建 <https://ci.cakephp.org>`_ 的状态。
 
 翻译
 ====
@@ -76,7 +76,7 @@ CakePHP文档是
 
 - 用要翻译的语言来进行浏览、编辑 - 否则你将无法看到哪些已经翻译了。
 - 如果你选择的语言在本书中已经存在，请自行加入。
-- 请使用 `Informal Form <http://en.wikipedia.org/wiki/Register_(linguistics)>`_ 。
+- 请使用 `Informal Form <https://en.wikipedia.org/wiki/Register_(linguistics)>`_ 。
 - 请将内容和标题一起翻译。
 - 在提交一个更正之前，请先和英文版本的内容进行比较(如果你改正了一些东西，却没有
   整合“上游”(*upstream*)的改动，你提交的东西将不会被接受)。
@@ -86,7 +86,7 @@ CakePHP文档是
 - 请不要提交不完整的翻译。
 - 请不要编辑正在改动的部分。
 - 对于标以重音符号的字符，请不要使用
-  `html 字符实体 <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
+  `html 字符实体 <https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
   (*html entities*) 来表示，本书使用UTF-8。
 - 请不要显著改变标记(HTML)或增加新的内容。
 - 如果原始的内容遗漏了某些信息，请先提交(对原始内容的)更正。
@@ -95,7 +95,7 @@ CakePHP文档是
 ============
 
 这份新的 CakePHP 文档是以
-`ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_ 格式写的。
+`ReST formatted text <https://en.wikipedia.org/wiki/ReStructuredText>`_ 格式写的。
 ReST (Re Structured Text)是与 markdown 或者 textile 类似的纯文本标记语法。为保持
 一致性，建议在添加到CakePHP文档时，请遵循(下面)这些准则，来你格式化和组织你的文字。
 
