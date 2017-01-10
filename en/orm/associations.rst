@@ -159,7 +159,7 @@ the association with the following code::
         }
     }
 
-If you need more control, you can define your associations using array syntax.
+If you need more control, you can define your associations using the setters.
 For example, you might want to limit the association to include only certain
 records::
 
@@ -257,8 +257,7 @@ We can define the belongsTo association in our Addresses table as follows::
         }
     }
 
-We can also define a more specific relationship using array
-syntax::
+We can also define a more specific relationship using the setters::
 
     class AddressesTable extends Table
     {
@@ -343,7 +342,7 @@ We can define the hasMany association in our Articles model as follows::
         }
     }
 
-We can also define a more specific relationship using array syntax::
+We can also define a more specific relationship using the setters::
 
     class ArticlesTable extends Table
     {
@@ -510,8 +509,7 @@ We can define the belongsToMany association in both our models as follows::
         }
     }
 
-We can also define a more specific relationship using array
-syntax::
+We can also define a more specific relationship using the setters::
 
     // In src/Model/Table/ArticlesTable.php
     class ArticlesTable extends Table
@@ -642,7 +640,7 @@ student on the course and their final grade? The table we'd want would be::
 The way to implement our requirement is to use a **join model**, otherwise known
 as a **hasMany through** association. That is, the association is a model
 itself. So, we can create a new model CoursesMemberships. Take a look at the
-following models. ::
+following models::
 
     class StudentsTable extends Table
     {
