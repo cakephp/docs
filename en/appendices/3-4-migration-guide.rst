@@ -156,7 +156,8 @@ The following is a list of methods that are deprecated and replaced with
     * ``config()``
     * setter part of ``canBeJoined()`` (now ``setCanBeJoined()``)
 ``Cake\ORM\EagerLoader``
-    * ``matching()``
+    * ``matching()`` (``getMatching()`` will have to be call after ``setMatching()`` to
+      keep the old behavior)
     * ``autoFields()`` (now ``enableAutoFields()``/``isAutoFieldsEnabled()``)
 ``Cake\ORM\Locator\TableLocator``
     * ``config()``
