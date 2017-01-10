@@ -344,6 +344,15 @@ Routing
 * Les routes peuvent maintenant être "matché" sur des hosts spécifiques à
   l'aide de l'option ``_host``.
 
+HtmlHelper
+==========
+
+* ``HtmlHelper::scriptBlock()`` n'engloge plus le Javascript dans un tag
+  ``<![CDATA[ ]]`` par défaut. L'option ``safe`` qui contrôle ce comportement
+  a maintenant sa valeur par défaut à ``false``. Utiliser le tag ``<![CDATA[ ]]``
+  était seulement requis pour le XHTML qui n'est plus le doctype prédominant
+  pour les pages web actuellement.
+
 PaginatorHelper
 ===============
 
