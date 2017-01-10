@@ -282,6 +282,10 @@ application.
 Once those two steps are complete, you are ready to start re-implementing any
 application/plugin dispatch filters as HTTP middleware.
 
+Si vous exécutez des tests, vous aurez aussi besoin de mettre à jour votre
+fichier ``tests/bootstrap.php`` en récupérant le contenu du fichier du
+`squelette "app" <https://github.com/cakephp/app/tree/master/tests/bootstrap.php>`_.
+
 .. meta::
     :title lang=fr: Http Middleware
     :keywords lang=fr: http, middleware, psr7, request, response, wsgi, application, baseapplication
