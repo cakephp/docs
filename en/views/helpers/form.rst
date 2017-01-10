@@ -16,6 +16,11 @@ Starting a Form
 
 .. php:method:: create(mixed $model = null, array $options = [])
 
+* ``$model`` - The context for which the form is being defined. Can be an ORM
+  entity, ORM resultset, array of metadata or ``false/null`` (to make a
+  model-less form).
+* ``$options`` - An array of options and/or HTML attributes.
+
 The first method you'll need to use in order to take advantage of the FormHelper
 is ``create()``. This method outputs an opening form tag.
 
@@ -30,148 +35,210 @@ you would see something like the following output in the rendered view:
     <form method="post" action="/users/add">
 
 The ``$model`` argument is used as the form's 'context'. There are several
-built-in form contexts and you can add your own, which we'll cover in the next
-section. The built-in providers map to the following values of ``$model``:
+built-in form contexts and you can add your own, which we'll cover below, in
+a following section. The built-in providers map to the following values of
+``$model``:
 
-* An ``Entity`` instance or, an iterator map to the ``EntityContext``, this
-  context allows FormHelper to work with results from the built-in ORM.
-* An array containing the ``schema`` key, maps to ``ArrayContext`` which allows
-  you to create simple data structures to build forms against.
-* ``null`` and ``false`` map to the ``NullContext``, this context class simply
-  satisfies the interface FormHelper requires. This context is useful if you
-  want to build a short form that doesn't require ORM persistence.
+* An ``Entity`` instance or an iterator will map to
+  `EntityContext <https://api.cakephp.org/3.3/class-Cake.View.Form.EntityContext.html>`;
+  this context class allows FormHelper to work with results from the
+  built-in ORM.
 
-All contexts classes also have access to the request data, making it simpler to
+* An array containing the ``'schema'`` key, will map to
+  `ArrayContext <https://api.cakephp.org/3.3/class-Cake.View.Form.ArrayContext.html>`
+  which allows you to create simple data structures to build forms against.
+
+* ``null`` and ``false`` will map to
+  ``NullContext <https://api.cakephp.org/3.3/class-Cake.View.Form.NullContext.html>``;
+  this context class
+  simply satisfies the interface FormHelper requires. This context is useful if
+  you want to build a short form that doesn't require ORM persistence.
+
+All context classes also have access to the request data, making it simpler to
 build forms.
 
 Once a form has been created with a context, all inputs you create will use the
 active context. In the case of an ORM backed form, FormHelper can access
 associated data, validation errors and schema metadata. You can close the active
-context using the ``end()`` method, or by calling ``create()`` again. To create
-a form for an entity, do the following::
+context using the ``end()`` method, or by calling ``create()`` again.
 
-    // If you are on /articles/add
-    // $article should be an empty Article entity.
-    echo $this->Form->create($article);
+  To create a form for an entity, do the following::
 
-Output:
+      // If you are on /articles/add
+      // $article should be an empty Article entity.
+      echo $this->Form->create($article);
 
-.. code-block:: html
+  Output:
 
-    <form method="post" action="/articles/add">
+  .. code-block:: html
+
+      <form method="post" action="/articles/add">
 
 This will POST the form data to the ``add()`` action of ArticlesController.
 However, you can also use the same logic to create an edit form. The FormHelper
 uses the ``Entity`` object to automatically detect whether to
-create an add or edit form. If the provided entity is not 'new', the form will
-be created as an edit form.  For example, if we browse to
-**http://example.org/articles/edit/5**, we could do the following::
+create an *add* or *edit* form. If the provided entity is not 'new', the form will
+be created as an *edit* form.
 
-    // src/Controller/ArticlesController.php:
-    public function edit($id = null)
-    {
-        if (empty($id)) {
-            throw new NotFoundException;
-        }
-        $article = $this->Articles->get($id);
-        // Save logic goes here
-        $this->set('article', $article);
-    }
+  For example, if we browse to **http://example.org/articles/edit/5**, we could do the following::
 
-    // View/Articles/edit.ctp:
-    // Since $article->isNew() is false, we will get an edit form
-    <?= $this->Form->create($article) ?>
+      // src/Controller/ArticlesController.php:
+      public function edit($id = null)
+      {
+          if (empty($id)) {
+              throw new NotFoundException;
+          }
+          $article = $this->Articles->get($id);
+          // Save logic goes here
+          $this->set('article', $article);
+      }
 
-Output:
+      // View/Articles/edit.ctp:
+      // Since $article->isNew() is false, we will get an edit form
+      <?= $this->Form->create($article) ?>
 
-.. code-block:: html
+  Output:
 
-    <form method="post" action="/articles/edit/5">
-    <input type="hidden" name="_method" value="PUT" />
+  .. code-block:: html
+
+      <form method="post" action="/articles/edit/5">
+      <input type="hidden" name="_method" value="PUT" />
 
 .. note::
 
-    Since this is an edit form, a hidden input field is generated to
+    Since this is an *edit* form, a hidden ``input`` field is generated to
     override the default HTTP method.
+
+Options for Form
+----------------
 
 The ``$options`` array is where most of the form configuration
 happens. This special array can contain a number of different
 key-value pairs that affect the way the form tag is generated.
+Valid values:
 
+* ``'type'`` - Allows you to choose the type of form to create. If no type is
+  provided then it will be autodetected based on the form context.
+  Valid values:
+
+  #. ``'get'`` - Will set the form method to HTTP GET.
+  #. ``'file'`` - Will set the form method to POST and the ``'enctype'`` to
+     "multipart/form-data".
+  #. ``'post'`` - Will set the method to POST.
+  #. ``'put', 'delete', 'patch'`` - Will override the HTTP method with PUT, DELETE
+     or PATCH respectively, when the form is submitted.
+
+* ``'method'`` - Valid values are the same as above. Allows you to explicitly 
+  override the form's method.
+
+* ``'url'`` - Specify the URL the form will submit to. Can be a string or a URL
+  array.
+
+* ``'encoding'`` - Sets the ``accept-charset`` encoding for the form. Defaults to
+  ``Configure::read('App.encoding')``.
+
+* ``'enctype'`` - Allows you to set the form encoding explicitly.
+
+* ``'templates'`` - The templates you want to use for this form. Any templates
+  provided will be merged on top of the already loaded templates. Can be either
+  a filename from ``/config`` or an array of templates to use.
+
+* ``'context'`` - Additional options for the form context class. (For example
+  the ``EntityContext`` accepts a ``'table'`` option that allows you to set the
+  specific Table class the form should be based on.)
+
+* ``'idPrefix'`` - Prefix for generated ID attributes.
+
+* ``'templateVars'`` - Allows you to provide template variables for the
+  ``formStart`` template.
+
+.. tip::
+
+  Besides the above options you can provide, in the ``$options`` argument,
+  any valid HTML attributes that you want to pass to the created ``form``
+  element.
 
 Changing the HTTP Method for a Form
 -----------------------------------
 
-By using the ``type`` option you can change the HTTP method a form will use::
+By using the ``'type'`` option you can change the HTTP method a form will use.
 
-    echo $this->Form->create($article, ['type' => 'get']);
+  Ex. ::
 
-Output:
+      echo $this->Form->create($article, ['type' => 'get']);
 
-.. code-block:: html
+  Output:
 
-    <form method="get" action="/articles/edit/5">
+  .. code-block:: html
 
-Specifying a ``'file'`` value for ``type`` changes the form submission method to
-'post', and includes an enctype of "multipart/form-data" on the form tag. This
+      <form method="get" action="/articles/edit/5">
+
+Specifying a ``'file'`` value for ``type``, changes the form submission method to
+'post', and includes an ``enctype`` of "multipart/form-data" on the form tag. This
 is to be used if there are any file elements inside the form. The absence of
-the proper enctype attribute will cause the file uploads not to function::
+the proper ``enctype`` attribute will cause the file uploads not to function.
 
-    echo $this->Form->create($article, ['type' => 'file']);
+  Ex. ::
 
-Output:
+      echo $this->Form->create($article, ['type' => 'file']);
 
-.. code-block:: html
+  Output:
 
-   <form enctype="multipart/form-data" method="post" action="/articles/add">
+  .. code-block:: html
 
-When using ``'put'``, ``'patch'`` or ``'delete'`` as ``type`` values, your form
+     <form enctype="multipart/form-data" method="post" action="/articles/add">
+
+When using ``'put'``, ``'patch'`` or ``'delete'`` as ``'type'`` values, your form
 will be functionally equivalent to a 'post' form, but when submitted, the HTTP
 request method will be overridden with 'PUT', 'PATCH' or 'DELETE', respectively.
-  This allows CakePHP to emulate proper REST support in web browsers.
+This allows CakePHP to emulate proper REST support in web browsers.
 
 Setting a URL for the Form
 --------------------------
 
-Using the ``url`` option allows you to point the form to a specific action in
-your current controller or another controller in your application.  For example,
-if you'd like to point the form to the ``login()`` action of the current
-controller, you would supply an $options array like the following::
+Using the ``'url'`` option allows you to point the form to a specific action in
+your current controller or another controller in your application.
 
-    echo $this->Form->create($article, ['url' => ['action' => 'login']]);
+  For example,
+  if you'd like to point the form to the ``login()`` action of the current
+  controller, you would supply an ``$options`` array like the following::
 
-Output:
+      echo $this->Form->create($article, ['url' => ['action' => 'login']]);
 
-.. code-block:: html
+  Output:
 
-    <form method="post" action="/users/login">
+  .. code-block:: html
+
+      <form method="post" action="/users/login">
 
 If the desired form action isn't in the current controller, you can specify
 a complete URL for the form action. The supplied URL can be relative to your
-CakePHP application::
+CakePHP application.
 
-    echo $this->Form->create(null, [
-        'url' => ['controller' => 'Articles', 'action' => 'publish']
-    ]);
+  Ex. ::
 
-Output:
+      echo $this->Form->create(null, [
+          'url' => ['controller' => 'Articles', 'action' => 'publish']
+      ]);
 
-.. code-block:: html
+  Output:
 
-    <form method="post" action="/articles/publish">
+  .. code-block:: html
 
-Or you can point to an external domain::
+      <form method="post" action="/articles/publish">
 
-    echo $this->Form->create(null, [
-        'url' => 'http://www.google.com/search',
-        'type' => 'get'
-    ]);
+  Or you can point to an external domain::
 
-Output:
+      echo $this->Form->create(null, [
+          'url' => 'http://www.google.com/search',
+          'type' => 'get'
+      ]);
 
-.. code-block:: html
+  Output:
 
-    <form method="get" action="http://www.google.com/search">
+  .. code-block:: html
+
+      <form method="get" action="http://www.google.com/search">
 
 Use ``'url' => false`` if you don't want to output a URL as the form action.
 
@@ -188,7 +255,7 @@ rules that only apply when an account is being registered::
     ]);
 
 The above will use the rules defined in the ``register`` validator, which are
-defined by ``UsersTable::validationRegister()``, for the ``$user`` and all
+defined by ``UsersTable::validationRegister()``, for ``$user`` and all
 related associations. If you are creating a form for associated entities, you
 can define validation rules for each association by using an array::
 
@@ -245,9 +312,17 @@ necessary. By using the metadata in the form context, this method will choose an
 appropriate input type for each field. Internally ``input()`` uses the other
 methods of FormHelper.
 
+.. tip::
+
+    Plese note that while the fields generated by the ``input()`` method are 
+    called generically, "inputs", on this page, technically speaking the
+    ``input()`` method generates not only all of the HTML ``input`` type
+    elements, but also other HTML form element types (e.g. ``select``, 
+    ``button``, ``textarea``).
+
 By default the ``input()`` method will employ the following widget templates::
 
-'inputContainer' => '<div class="input {{type}}{{required}}">{{content}}</div>
+'inputContainer' => '<div class="input {{type}}{{required}}">{{content}}</div>'
 'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}/>'
 
 In case of validation errors it will also use::
@@ -292,10 +367,9 @@ you need to::
 
 .. tip::
 
-As a small subtlety, generating specific types of input via the ``input()``
-form method by providing a specific input ``type`` option (e.g.
-``'type' => 'checkbox'`` as in the example above) will always also generate
-the wrapping ``div``, by default. Generating the same type of input element
+As a small subtlety, generating specific elements via the ``input()``
+form method will always also generate
+the wrapping ``div``, by default. Generating the same type of element
 via one of the specific form methods (e.g. ``$this->Form->checkbox('published');``)
 in most cases won't generate the wrapping ``div``.
 Depending on your needs you can use one or another.
@@ -341,9 +415,10 @@ A more extensive example showing some options for a date field::
         'maxYear' => date('Y') - 18,
     ]);
 
-Besides the specific :ref:`options <input-specific-options>` for ``input()``,
-found below, you also can specify any option for the chosen (or inferred by
-Cake) input type and any HTML attribute (for instance ``onfocus``).
+Besides the specific :ref:`input-specific-options`,
+you also can specify any option accepted by corresponding specific method
+for the chosen (or inferred by Cake) 
+input type and any HTML attribute (for instance ``onfocus``).
 
 If you want to create a ``select`` form field while using a *belongsTo* (or
 *hasOne*) relation, you can add the following to your UsersController
@@ -411,11 +486,11 @@ inferred/chosen generated input types (e.g. for ``checkbox`` or ``textarea``),
 as well as HTML attributes. This subsection will cover the options specific to
 ``FormHelper::input()``.
 
-* ``$options['type']`` - A string that specifies the name of HTML input type
+* ``$options['type']`` - A string that specifies the HTML input type
   to be generated. In addition to the field types found in the
   :ref:`automagic-form-elements`, you can also create ``'file'``,
   ``'password'``, and any other type supported by HTML5. By specifying a
-  ``type`` you will force the type of the generated input, overriding model
+  ``'type'`` you will force the type of the generated input, overriding model
   introspection. Defaults to ``null``.
 
     Example::
@@ -508,8 +583,8 @@ as well as HTML attributes. This subsection will cover the options specific to
 
          echo $this->Form->input('name', ['error' => false]);
 
-  To override the model error messages use an array with the keys matching the
-  original validation error messages.
+  To override the model error messages use an array with 
+  the keys matching the original validation error messages.
 
     Example::
 
@@ -557,10 +632,10 @@ depending on the form method used, must be provided inside the ``$options`` or
 in the ``$attributes`` array argument. All of these options are also supported
  by the ``input()`` method.
 To reduce repetition, the common options shared by all input methods are
-described in this subsection:
+as follows:
 
 * ``'id'`` - Set this key to force the value of the DOM id for the input.
-  This will override the idPrefix that may be set.
+  This will override the ``'idPrefix'`` that may be set.
 
 * ``'default'`` - Used to set a default value for the input field. The
   value is used if the data passed to the form does not contain a value for the
@@ -763,7 +838,7 @@ are described in each method's own section.)
      * For checkboxes, it sets the HTML ``'value'`` attribute assigned
        to the ``input`` element to whatever you provide as value.
 
-     * For radio buttons or select pickers defines which element will be
+     * For radio buttons or select pickers it defines which element will be
        selected when the form is rendered (in this case ``'value'`` must be
        assigned a valid, existent element value). May also be used in
        combination with any select-type input
@@ -779,7 +854,7 @@ are described in each method's own section.)
 	    value a UNIX timestamp, or a DateTime object.
 
        For a ``select`` input where you set the ``'multiple'`` attribute to
-       ``true``, you can use an array with the values you want to select
+       ``true``, you can provide an array with the values you want to select
        by default::
 
 	    // HTML <option> elements with values 1 and 3 will be rendered preselected
@@ -844,7 +919,7 @@ are described in each method's own section.)
 
         <input type="checkbox" name="published" value="1">
 
-    If you want to create multiple blocks of inputs on a form that are
+    If you want to create multiple blocks of inputs on a form, that are
     all grouped together, you should set this parameter to ``false`` on all inputs
     except the first. If the hidden input is on the page in multiple
     places, only the last group of inputs' values will be saved.
@@ -986,12 +1061,12 @@ Creates a set of radio button inputs. The default widget template used is::
 
 **Attributes for Radio Buttons**
 
-* ``label`` - Boolean to indicate whether or not labels for widgets should be
+* ``'label'`` - Boolean to indicate whether or not labels for widgets should be
   displayed. Defaults to ``true``.
-* ``hiddenField`` - If set to ``true`` a hidden input with a value of ``''``
+* ``'hiddenField'`` - If set to ``true`` a hidden input with a value of ``''``
   will be included. This is useful for creating radio sets that are non-continuous.
   Defaults to ``true``.
-* ``disabled`` - Set to ``true`` or ``'disabled'`` to disable all the radio
+* ``'disabled'`` - Set to ``true`` or ``'disabled'`` to disable all the radio
   buttons. Defaults to ``false``.
 
 You must provide the label captions for the radio buttons via the ``$options``
@@ -1071,8 +1146,8 @@ Creating Select Pickers
 
 Creates a ``select`` element, populated with the items from the ``$options``
 array. If ``$attributes['value']`` is provided, then the ``option`` element(s)
-having the specified values will be shown as selected when rendering the
-input.
+having the specified value(s) will be shown as selected when rendering the
+select picker.
 
 By default ``select`` uses the following widget template::
 
@@ -1080,18 +1155,19 @@ By default ``select`` uses the following widget template::
 
 **Attributes for Select Pickers**
 
-* ``multiple`` - If set to ``true`` allows multiple selections in the select
+* ``'multiple'`` - If set to ``true`` allows multiple selections in the select
   picker. If set to ``'checkbox'``, multiple checkboxes will be created instead.
   Defaults to ``null``.
 
-* ``escape`` - Boolean. If ``true`` the contents of the ``option`` elements
+* ``'escape'`` - Boolean. If ``true`` the contents of the ``option`` elements
   inside the select picker will be HTML entity encoded. Defaults to ``true``.
 
-* ``val`` - Allows preselecting a value in the select picker.
+* ``'val'`` - Allows preselecting a value in the select picker.
 
-* ``disabled`` - Controls the disabled attribute. If set to ``true`` disables
-  the whole select picker. If set to an array it will disable only those
-  specific ``option`` elements whose values are provided in the array.
+* ``'disabled'`` - Controls the ``disabled`` attribute. If set to ``true`` 
+  disables the whole select picker. If set to an array it will disable 
+  only those specific ``option`` elements whose values are provided in 
+  the array.
 
 The ``$options`` argument allows you to manually specify
 the contents of the ``option`` elements of a ``select`` input.
@@ -1185,7 +1261,7 @@ the elements in ``fieldset`` elements.
 
 **Controlling Select Pickers via Attributes**
 
-By using specific options in the ``$attributes`` argument you can control
+By using specific options in the ``$attributes`` parameter you can control
 certain behaviors of the ``select()`` method.
 
 * ``'empty'`` - Set the ``'empty'`` key in the ``$attributes`` argument
@@ -1207,7 +1283,7 @@ certain behaviors of the ``select()`` method.
             <option value="F">Female</option>
         </select>
 
-* ``'escape'`` - The ``select()`` method allows for a special ``$attributes``
+* ``'escape'`` - The ``select()`` method allows for an
   option called ``'escape'`` which accepts a boolean value and determines
   whether to HTML entity encode the contents of the ``select``'s ``option``
   elements.
@@ -1399,10 +1475,10 @@ These options are common for the date and time related inputs:
   name will override this value. If no default is provided ``time()`` will
   be used.
 
-* ``'year', 'month', 'day', 'hour', 'minute', 'second', 'meridian'`` - These 
-  options allow you to control which input elements are generated or not. 
-  By setting any of these options to ``false`` you can disable the generation 
-  of that specific that select picker (if by default it would be rendered in 
+* ``'year', 'month', 'day', 'hour', 'minute', 'second', 'meridian'`` - These
+  options allow you to control which input elements are generated or not.
+  By setting any of these options to ``false`` you can disable the generation
+  of that specific that select picker (if by default it would be rendered in
   the used method). In addition each option allows you to pass HTML attributes
   to that specific ``select`` element.
 
@@ -1422,7 +1498,7 @@ These options are concerning the date-related methods - i.e.``year()``,
 
 * ``'maxYear'`` - The maximum value to use in the year select picker.
 
-* ``'orderYear'`` - The order of year values in the year select picker. 
+* ``'orderYear'`` - The order of year values in the year select picker.
   Possible values are ``'asc'`` and ``'desc'``. Defaults to ``'desc'``.
 
 .. _time-options:
@@ -1433,7 +1509,7 @@ Options for Time-Related Inputs
 These options are concerning the time-related methods - ``hour()``,
 ``minute()``, ``second()``:
 
-* ``'interval'`` - The interval in minutes between the values which are 
+* ``'interval'`` - The interval in minutes between the values which are
   displayed in the ``option`` elements of the minutes select picker. Defaults to 1.
 
 * ``'round'`` - Set to ``up`` or ``down`` if you want to force rounding minutes
@@ -1897,7 +1973,7 @@ When you set ``$options`` to a string it will be used as a class name:
 Displaying and Checking Errors
 ==============================
 
-FormHelper exposes a couple of methods that allow you to easily check for
+FormHelper exposes a couple of methods that allow us to easily check for
 field errors and when necessary display customized error messages.
 
 Displaying Errors
@@ -1919,10 +1995,10 @@ provided then the default validation error message for that field will be used.
 
 .. tip::
 
-If you use a certain model field in multiple places/forms and want the same
-validation error message used in each place, you will probably be better off
-defining a custom error message inside the respective
-:ref:`validator rules<create-validators>`.
+    If you use a certain model field in multiple places/forms and want the same
+    validation error message used in each place, you will probably be better off
+    defining a custom error message inside the respective
+    :ref:`validator rules<create-validators>`.
 
 Uses the following template widgets::
 
@@ -1960,9 +2036,9 @@ error messages per field.
 
 .. note::
 
-When using :php:meth:`~Cake\\View\\Helper\\FormHelper::input()`, errors are
-rendered by default, so you don't need to use ``isFieldError()`` or call
-``error()`` manually.
+    When using :php:meth:`~Cake\\View\\Helper\\FormHelper::input()`, errors are
+    rendered by default, so you don't need to use ``isFieldError()`` or call
+    ``error()`` manually.
 
 .. TODO:: Add examples.
 
@@ -2011,7 +2087,7 @@ By default it will use the following widget templates::
 
 **Options for Submit**
 
-* ``type`` - Set this option to ``'reset'`` in order to generate reset buttons.
+* ``'type'`` - Set this option to ``'reset'`` in order to generate reset buttons.
   It defaults to ``'submit'``.
 * ``'templateVars'`` - Set this array to provide additional template variables
   for the input element and its container.
@@ -2160,8 +2236,8 @@ Security Component.
 **Options for POST Button**
 
 * ``'data'`` - Array with key/value to pass in hidden input.
-* ``'method'`` - Request method to use. E.g. set to ``'delete'`` (or other) to
-  simulate HTTP/1.1 DELETE request (or others). Defaults to ``'post'``.
+* ``'method'`` - Request method to use. E.g. set to ``'delete'`` to
+  simulate a HTTP/1.1 DELETE request. Defaults to ``'post'``.
 * ``'form'`` - Array with any option that ``FormHelper::create()`` can take.
 * Also, the ``postButton`` method will accept the options which are valid for
   the ``button()`` method.
@@ -2212,8 +2288,8 @@ Creates an HTML link, but accesses the URL using the method you specify
 **Options for POST Link**
 
 * ``'data'`` - Array with key/value to pass in hidden input.
-* ``'method'`` - Request method to use. E.g. set to ``'delete'`` (or other)
-  to simulate HTTP/1.1 DELETE request (or others). Defaults to ``'post'``.
+* ``'method'`` - Request method to use. E.g. set to ``'delete'`` 
+  to simulate a HTTP/1.1 DELETE request. Defaults to ``'post'``.
 * ``'confirm'`` - The confirmation message to display on click. Defaults to
   ``null``.
 * ``'block'`` - Set this option to ``true`` to append the form to view block
