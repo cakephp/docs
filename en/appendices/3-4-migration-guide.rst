@@ -120,49 +120,49 @@ methods are being split into separate get and set methods.
 The following is a list of methods that are deprecated and replaced with
 ``getX`` and ``setX`` methods:
 
-Cake\Console\ConsoleOptionParse
+``Cake\Console\ConsoleOptionParser``
     * ``command()``
     * ``description()``
     * ``epliog()``
-Cake\Database\Connection
+``Cake\Database\Connection``
     * ``driver()``
     * ``schemaCollection()``
     * ``useSavePoints()`` (now ``enableSavePoints()``/``isSavePointsEnabled()``)
-Cake\Database\Driver
+``Cake\Database\Driver``
     * ``autoQuoting`` (now ``enableAutoQuoting()``/``isAutoQuotingEnabled()``)
-Cake\Database\Expression\FunctionExpression
+``Cake\Database\Expression\FunctionExpression``
     * ``name()``
-Cake\Database\Expression\QueryExpression
+``Cake\Database\Expression\QueryExpression``
     * ``tieWith()`` (now ``setConjunction()``/``getConjunction()``)
-Cake\Database\Expression\ValuesExpression
+``Cake\Database\Expression\ValuesExpression``
     * ``columns()``
     * ``query()``
-Cake\Database\Query
+``Cake\Database\Query``
     * ``connection()``
     * ``selectTypeMap()``
     * ``bufferResults()`` (now ``enableBufferedResults()``/``isBufferedResultsEnabled()``)
-Cake\Database\Schema\CachedCollection
+``Cake\Database\Schema\CachedCollection``
     * ``cacheMetadata()``
-Cake\Database\Schema\TableSchema
+``Cake\Database\Schema\TableSchema``
     * ``options()``
     * ``temporary()`` (now ``setTemporary()``/``isTemporary()``)
-Cake\Database\TypeMap
+``Cake\Database\TypeMap``
     * ``defaults()``
     * ``types()``
-Cake\Database\TypeMapTrait
+``Cake\Database\TypeMapTrait``
     * ``typeMap()``
     * ``defaultTypes()``
-Cake\ORM\EagerLoadable
+``Cake\ORM\EagerLoadable``
     * ``config()``
     * setter part of ``canBeJoined()`` (now ``setCanBeJoined()``)
-Cake\ORM\EagerLoader
+``Cake\ORM\EagerLoader``
     * ``matching()``
     * ``autoFields()`` (now ``enableAutoFields()``/``isAutoFieldsEnabled()``)
-Cake\ORM\Locator\TableLocator
+``Cake\ORM\Locator\TableLocator``
     * ``config()``
-Cake\ORM\Query
+``Cake\ORM\Query``
     * ``eagerLoader()``
-Cake\ORM\Table
+``Cake\ORM\Table``
     * ``table()``
     * ``alias()``
     * ``registryAlias()``
@@ -171,7 +171,7 @@ Cake\ORM\Table
     * ``primaryKey()``
     * ``displayField()``
     * ``entityClass()``
-Cake\Mailer\Email
+``Cake\Mailer\Email``
     * ``from()``
     * ``sender()``
     * ``replyTo()``
@@ -196,11 +196,11 @@ Cake\Mailer\Email
     * ``attachments()``
     * ``configTransport()``
     * ``profile()``
-Cake\Validation\Validator
+``Cake\Validation\Validator``
     * ``provider()``
-Cake\View\StringTemplateTrait
+``Cake\View\StringTemplateTrait``
     * ``templates()``
-Cake\View\ViewBuilder
+``Cake\View\ViewBuilder``
     * ``templatePath()``
     * ``layoutPath()``
     * ``plugin()``
