@@ -160,7 +160,8 @@ Cake\ORM\EagerLoadable
     * ``config()``
     * setter part of ``canBeJoined()`` (devenue ``setCanBeJoined()``)
 Cake\ORM\EagerLoader
-    * ``matching()``
+    * ``matching()`` (``getMatching()`` devra être appelé après ``setMatching()``
+      pour conserver l'ancien comportement)
     * ``autoFields()`` (devenue ``enableAutoFields()`` / ``isAutoFieldsEnabled()``)
 Cake\ORM\Locator\TableLocator
     * ``config()``
