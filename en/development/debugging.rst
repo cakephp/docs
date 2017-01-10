@@ -31,7 +31,7 @@ has been set to ``true``.
     
         return debug($data); // will return $data in any case.
 
-Also see ``pr()`` and ``pj()``.
+Also see ``dd()``, ``pr()`` and ``pj()``.
 
 .. php:function:: stackTrace()
 
