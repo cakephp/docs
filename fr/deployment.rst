@@ -28,7 +28,7 @@ important. Mettre debug = ``false`` désactive un certain nombre de
 fonctionnalités de développement qui ne devraient jamais être exposées sur
 internet. Désactiver le debug change les types de choses suivantes:
 
-* Les messages de Debug, créés avec :php:func:`pr()` et :php:func:`debug()`
+* Les messages de Debug, créés avec :php:func:`pr()`, :php:func:`debug()` et :php:func:`dd()`
   sont désactivés.
 * Les caches du Cœur de CakePHP sont flushés tous les ans (environ 365 jours),
   au lieu de toutes les 10 secondes en développement.
