@@ -336,7 +336,7 @@ Routing
 HtmlHelper
 ==========
 
-* ``HtmlHelper::scriptBlock()`` no longer wraps the javascript code in ``<![CDATA[ ]]``
+* ``HtmlHelper::scriptBlock()`` no longer wraps the Javascript code in ``<![CDATA[ ]]``
   tag by default. The ``safe`` option which controls this behavior now defaults
   to ``false``. Using ``<![CDATA[ ]]`` tag was only required for XHTML which is
   no longer the dominant doctype used for HTML pages.
