@@ -108,6 +108,9 @@ Autres dépréciations
 * L'option ``fieldList`` pour ``Cake\ORM\Table::newEntity()`` et
   ``patchEntity()`` a été renommée en ``fields`` pour être plus cohérent avec
   les autres parties de l'ORM.
+* ``Router::parse()`` est dépréciée. ``Router::parseRequest()`` est maintenant
+  la méthode recommandée car elle accepte une request en argument et donne plus
+  de contrôles et de flexibilité dans la manipulation des requêtes entrantes.
 
 Dépréciation des getters / setters combinés
 -------------------------------------------
@@ -338,6 +341,8 @@ Routing
 
 * ``RouteBuilder::prefix()`` accepte maintenant un tableau de paramètres par
   défaut à ajouter à chaque route "connectée".
+* Les routes peuvent maintenant être "matché" sur des hosts spécifiques à
+  l'aide de l'option ``_host``.
 
 PaginatorHelper
 ===============
