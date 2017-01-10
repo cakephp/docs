@@ -123,7 +123,7 @@ The following is a list of methods that are deprecated and replaced with
 ``Cake\Console\ConsoleOptionParser``
     * ``command()``
     * ``description()``
-    * ``epliog()``
+    * ``epilog()``
 ``Cake\Database\Connection``
     * ``driver()``
     * ``schemaCollection()``
