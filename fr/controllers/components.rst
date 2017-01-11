@@ -292,7 +292,7 @@ registre::
 Vous pouvez également accéder facilement au controller dans n'importe quel
 callback via l'objet event::
 
-    $controller = $event->subject();
+    $controller = $event->getSubject());
 
 Callbacks des Components
 ========================

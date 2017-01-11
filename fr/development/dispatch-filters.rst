@@ -126,8 +126,8 @@ la page d'accueil. Premièrement, créez le fichier. Son contenu doit ressembler
 
         public function beforeDispatch(Event $event)
         {
-            $request = $event->data['request'];
-            $response = $event->data['response'];
+            $request = $event->getData('request');
+            $response = $event->getData('response');
             if (!$request->getCookie('landing_page')) {
                 $response->cookie([
                     'name' => 'landing_page',
@@ -181,8 +181,8 @@ servi depuis le ``PagesController``::
 
         public function afterDispatch(Event $event)
         {
-            $request = $event->data['request'];
-            $response = $event->data['response'];
+            $request = $event->getData('request');
+            $response = $event->getData('response');
 
             if ($response->statusCode() === 200) {
                 $response->sharable(true);

@@ -202,7 +202,7 @@ Cette exemple forcera toutes les actions qui proviennent de la "route" Admin à
 
         public function beforeFilter(Event $event)
         {
-            if (isset($this->params['admin'])) {
+            if ($this->request->getParam('admin')) {
                 $this->Security->requireSecure();
             }
         }

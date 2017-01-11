@@ -402,7 +402,7 @@ de façon aléatoire ces tokens d'API en utilisant les libraries de CakePHP::
     {
         public function beforeSave(Event $event)
         {
-            $entity = $event->data['entity'];
+            $entity = $event->getData('entity');
 
             if ($entity->isNew()) {
                 $hasher = new DefaultPasswordHasher();
@@ -472,7 +472,7 @@ colonne séparée du mot de passe standard hashé::
     {
         public function beforeSave(Event $event)
         {
-            $entity = $event->data['entity'];
+            $entity = $event->getData('entity');
 
             // Make a password for digest auth.
             $entity->digest_hash = DigestAuthenticate::password(
