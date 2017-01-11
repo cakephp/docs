@@ -23,7 +23,7 @@ be used::
     use Cake\Event\EventManager;
 
     EventManager::instance()->on('Bake.initialize', function (Event $event) {
-        $view = $event->subject;
+        $view = $event->getSubject();
 
         // In my bake templates, allow the use of the MySpecial helper
         $view->loadHelper('MySpecial', ['some' => 'config']);
@@ -48,7 +48,7 @@ variables used in the bake templates::
     use Cake\Event\EventManager;
 
     EventManager::instance()->on('Bake.beforeRender', function (Event $event) {
-        $view = $event->subject;
+        $view = $event->getSubject();
 
         // Use $rows for the main data variable in indexes
         if ($view->get('pluralName')) {
@@ -83,7 +83,7 @@ you can use the following event::
     EventManager::instance()->on(
         'Bake.beforeRender.Controller.controller',
         function (Event $event) {
-            $view = $event->subject();
+            $view = $event->getSubject();
             if ($view->viewVars['name'] == 'Users') {
                 // add the login and logout actions to the Users controller
                 $view->viewVars['actions'] = [

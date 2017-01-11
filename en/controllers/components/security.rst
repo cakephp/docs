@@ -189,7 +189,7 @@ require secure SSL requests::
 
         public function beforeFilter(Event $event)
         {
-            if (isset($this->params['admin'])) {
+            if ($this->request->getParam('admin')) {
                 $this->Security->requireSecure();
             }
         }

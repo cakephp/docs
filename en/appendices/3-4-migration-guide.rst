@@ -263,7 +263,7 @@ response/controller::
 
     public function beforeRender($event)
     {
-        $controller = $event->subject();
+        $controller = $event->getSubject();
         $controller->response = $controller->response->withHeader('X-Teapot', 1);
     }
 
