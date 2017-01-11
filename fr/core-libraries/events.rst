@@ -230,7 +230,7 @@ pour le faire::
     $this->Orders->eventManager()->on('Model.Order.afterPlace', function ($event) {
         Log::write(
             'info',
-            'A new order was placed with id: ' . $event->subject()->id
+            'A new order was placed with id: ' . $event->getSubject()->id
         );
     });
 
@@ -267,8 +267,8 @@ et écouter seulement l'événement dont vous avez réellement besoin::
             // Par exemple nous pouvons envoyer un email à l'admin
             $email = new Email('default');
             $email->from('info@yoursite.com' => 'Your Site')
-                ->to('admin@yoursite.com')
-                ->subject('New Feedback - Your Site')
+                ->setTo('admin@yoursite.com')
+                ->setSubject('New Feedback - Your Site')
                 ->send('Body of message');
         });
 
@@ -491,7 +491,7 @@ callback elle-même::
     public function doSomething($event)
     {
         // ...
-        $alteredData = $event->data('order') + $moreData;
+        $alteredData = $event->getData('order') + $moreData;
         return $alteredData;
     }
 
@@ -507,8 +507,8 @@ callback elle-même::
     {
         $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
         $this->eventManager()->dispatch($event);
-        if (!empty($event->result()['order'])) {
-            $order = $event->result()['order'];
+        if (!empty($event->getResult()['order'])) {
+            $order = $event->getResult()['order'];
         }
         if ($this->Order->save($order)) {
             // ...
@@ -552,9 +552,6 @@ premiers paramètres que vous utilisiez pour l'attacher::
 
     // Détacher tous les callbacks intégrés par un listener
     $this->eventManager()->off($listener);
-
-Conclusion
-==========
 
 Les événements sont une bonne façon de séparer les préoccupations dans votre
 application et rend les classes à la fois cohérentes et découplées des autres,

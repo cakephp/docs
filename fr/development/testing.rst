@@ -1367,7 +1367,7 @@ les controllers qui l'utilisent. Voici notre exemple de component localisé dans
 
         public function startup(Event $event)
         {
-            $this->setController($event->subject());
+            $this->setController($event->getSubject());
         }
 
         public function adjust($length = 'short')
@@ -1564,7 +1564,7 @@ suivantes::
 
         public function removeFromCart(Event $event)
         {
-            $order = $event->data('order');
+            $order = $event->getData('order');
             $this->delete($order->cart_id);
         }
     }
