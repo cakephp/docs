@@ -111,6 +111,9 @@ Autres dépréciations
 * ``Router::parse()`` est dépréciée. ``Router::parseRequest()`` est maintenant
   la méthode recommandée car elle accepte une request en argument et donne plus
   de contrôle et de flexibilité dans la manipulation des requêtes entrantes.
+* ``Route::parse()`` est dépréciée. ``Route::parseRequest()`` est maintenant
+  la méthode recommandée car elle accepte une request en argument et donne plus
+  de contrôle et de flexibilité dans la manipulation des requêtes entrantes.
 
 Dépréciation des getters / setters combinés
 -------------------------------------------
