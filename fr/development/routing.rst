@@ -679,8 +679,8 @@ Matching de Noms de Domaine Spécifiques
 ---------------------------------------
 
 Les routes peuvent utiliser l'option ``_host`` pour "matcher" des noms de
-domaines spécifiques. Vous pouvez utiliser le passe-partout wildcard ``*.``
-pour "matcher" n'importe quelle sous-domaine::
+domaines spécifiques. Vous pouvez utiliser la wildcard ``*.`` pour "matcher"
+n'importe quelle sous-domaine::
 
     Router::scope('/', function($routes) {
         // Cette route ne va "matcher" que sur le domaine http://images.example.com

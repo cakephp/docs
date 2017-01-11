@@ -110,7 +110,7 @@ Autres dépréciations
   les autres parties de l'ORM.
 * ``Router::parse()`` est dépréciée. ``Router::parseRequest()`` est maintenant
   la méthode recommandée car elle accepte une request en argument et donne plus
-  de contrôles et de flexibilité dans la manipulation des requêtes entrantes.
+  de contrôle et de flexibilité dans la manipulation des requêtes entrantes.
 
 Dépréciation des getters / setters combinés
 -------------------------------------------
@@ -348,7 +348,7 @@ Routing
 HtmlHelper
 ==========
 
-* ``HtmlHelper::scriptBlock()`` n'engloge plus le Javascript dans un tag
+* ``HtmlHelper::scriptBlock()`` n'englobe plus le Javascript dans un tag
   ``<![CDATA[ ]]`` par défaut. L'option ``safe`` qui contrôle ce comportement
   a maintenant sa valeur par défaut à ``false``. Utiliser le tag ``<![CDATA[ ]]``
   était seulement requis pour le XHTML qui n'est plus le doctype prédominant
