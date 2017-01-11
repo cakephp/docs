@@ -117,8 +117,8 @@ page. First, create the file. Its contents should look like::
 
         public function beforeDispatch(Event $event)
         {
-            $request = $event->data['request'];
-            $response = $event->data['response'];
+            $request = $event->getData('request');
+            $response = $event->getData('response');
             if (!$request->getCookie('landing_page')) {
                 $response->cookie([
                     'name' => 'landing_page',
@@ -168,8 +168,8 @@ page, in our case it would be anything served from the ``PagesController``::
 
         public function afterDispatch(Event $event)
         {
-            $request = $event->data['request'];
-            $response = $event->data['response'];
+            $request = $event->getData('request');
+            $response = $event->getData('response');
 
             if ($response->statusCode() === 200) {
                 $response->sharable(true);

@@ -286,7 +286,7 @@ registry::
 You can access the controller in any callback method from the event
 object::
 
-    $controller = $event->subject();
+    $controller = $event->getSubject();
 
 Component Callbacks
 ===================

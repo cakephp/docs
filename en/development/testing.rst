@@ -1298,7 +1298,7 @@ controllers that use it. Here is our example component located in
 
         public function startup(Event $event)
         {
-            $this->setController($event->subject());
+            $this->setController($event->getSubject());
         }
 
         public function adjust($length = 'short')
@@ -1491,7 +1491,7 @@ Expanding on the Orders example, say we have the following tables::
 
         public function removeFromCart(Event $event)
         {
-            $order = $event->data('order');
+            $order = $event->getData('order');
             $this->delete($order->cart_id);
         }
     }

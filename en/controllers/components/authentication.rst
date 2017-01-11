@@ -368,7 +368,7 @@ generate these API tokens randomly using libraries from CakePHP::
     {
         public function beforeSave(Event $event)
         {
-            $entity = $event->data['entity'];
+            $entity = $event->getData('entity');
 
             if ($entity->isNew()) {
                 $hasher = new DefaultPasswordHasher();
@@ -436,7 +436,7 @@ from the normal password hash::
     {
         public function beforeSave(Event $event)
         {
-            $entity = $event->data['entity'];
+            $entity = $event->getData('entity');
 
             // Make a password for digest auth.
             $entity->digest_hash = DigestAuthenticate::password(
