@@ -183,3 +183,4 @@ Debugging Functions
 
 * The ``pr()``, ``debug()``, and ``pj()`` functions now return the value being
   dumped. This makes them easier to use when values are being returned.
+* :php:func:`dd()` has been added to completely halt execution.

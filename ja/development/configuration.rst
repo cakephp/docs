@@ -14,9 +14,9 @@
 アプリケーションの設定
 ======================
 
-設定は一般的に PHP か INI ファイルに保存され、アプリケーションの bootstrap で読み込まれます。
+設定は一般的に PHP か INI ファイルに保存され、アプリケーションのブート処理時に読み込まれます。
 CakePHP はデフォルトで一つの設定ファイルからなりますが、もし必要であれば追加の設定ファイルを加え、
-**config/bootstrap.php** で読み込むことができます。 :php:class:`Cake\\Core\\Configure`
+ブート処理コードで読み込むことができます。 :php:class:`Cake\\Core\\Configure`
 は一般的な設定に利用され、基底クラスのアダプターで提供されている ``config()`` メソッドは設定を
 シンプルで明快にします。
 
@@ -574,15 +574,43 @@ CakePHP のブート処理
 
 - 便利な関数の定義
 - 定数の宣言
-- キャッシュの設定
-- 語尾変化の設定
+- キャッシュ設定の定義
+- ロギング設定の定義
+- 独自語尾変化の読み込み
 - 設定ファイルの読み込み
 
-何かを bootstrap ファイルに追加する場合は、
-MVC ソフトウェアのデザインパターンを保つように注意が必要です。
 コントローラーで使うための独自フォーマット関数を配置したくなる欲望にかられる恐れがあります。
 カスタムロジックをアプリケーションに加える良い方法は :doc:`/controllers` や
 :doc:`/views` のセクションを参照してください。
+
+.. _application-bootstrap:
+
+Application::bootstrap()
+------------------------
+
+アプリケーションの低レベルな関心事を設定するために使用する **config/bootstrap.php**
+ファイルに加えて、 プラグインのロードや初期化、グローバルイベントリスナーの追加のために
+``Application::bootstrap()`` フックメソッドが利用できます。 ::
+
+    // src/Application.php の中で
+    namespace App;
+
+    use Cake\Core\Plugin;
+    use Cake\Http\BaseApplication;
+
+    class Application extends BaseApplication
+    {
+        public function bootstrap()
+        {
+            // config/bootstrap.php を `require_once`  するために parent を呼びます。
+            parent::bootstrap();
+
+            Plugin::load('MyPlugin', ['bootstrap' => true, 'routes' => true]);
+        }
+    }
+
+``Application::bootstrap()`` の中でプラグインやイベントを読み込むと、各テストメソッドで
+イベントやルートが再処理されるため :ref:`integration-testing` が簡単になります。
 
 環境変数
 ========
