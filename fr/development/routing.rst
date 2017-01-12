@@ -657,6 +657,53 @@ et une action ``showItems()``, la route générée sera
         $routes->fallbacks(DashedRoute::class);
     });
 
+Matching des Méthodes HTTP Spécifiques
+--------------------------------------
+
+Les routes peuvent "matcher" des méthodes HTTP spécifiques en utilisant
+l'option ``_method``::
+
+    Router::scope('/', function($routes) {
+        // Cette route ne sera "matcher" que sur les requêtes POST.
+        $routes->connect(
+            '/reviews/start',
+            ['controller' => 'Reviews', 'action' => 'start', '_method' => 'POST']
+        );
+    });
+
+Vous pouvez "matcher" plusieurs méthodes HTTP en fournissant un tableau.
+Puisque que l'option ``_method`` est une clé de routage, elle est utilisée à la
+fois dans le parsing des URL et la génération des URL.
+
+Matching de Noms de Domaine Spécifiques
+---------------------------------------
+
+Les routes peuvent utiliser l'option ``_host`` pour "matcher" des noms de
+domaines spécifiques. Vous pouvez utiliser la wildcard ``*.`` pour "matcher"
+n'importe quelle sous-domaine::
+
+    Router::scope('/', function($routes) {
+        // Cette route ne va "matcher" que sur le domaine http://images.example.com
+        $routes->connect(
+            '/images/default-logo.png',
+            ['controller' => 'Images', 'action' => 'default'],
+            ['_host' => 'images.example.com']
+        );
+
+        // Cette route matchera sur tous les sous-domaines http://*.example.com
+        $routes->connect(
+            '/images/old-log.png',
+            ['controller' => 'Images', 'action' => 'oldLogo'],
+            ['_host' => '*.example.com']
+        );
+    });
+
+L'option ``_host`` n'affecte que le parsing des URL depuis les requêtes et
+n'intervient jamais dans la génération d'URL.
+
+.. versionadded:: 3.4.0
+    L'option ``_host`` a été ajoutée dans la version 3.4.0
+
 .. index:: file extensions
 .. _file-extensions:
 

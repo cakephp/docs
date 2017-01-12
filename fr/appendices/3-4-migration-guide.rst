@@ -108,6 +108,12 @@ Autres dépréciations
 * L'option ``fieldList`` pour ``Cake\ORM\Table::newEntity()`` et
   ``patchEntity()`` a été renommée en ``fields`` pour être plus cohérent avec
   les autres parties de l'ORM.
+* ``Router::parse()`` est dépréciée. ``Router::parseRequest()`` est maintenant
+  la méthode recommandée car elle accepte une request en argument et donne plus
+  de contrôle et de flexibilité dans la manipulation des requêtes entrantes.
+* ``Route::parse()`` est dépréciée. ``Route::parseRequest()`` est maintenant
+  la méthode recommandée car elle accepte une request en argument et donne plus
+  de contrôle et de flexibilité dans la manipulation des requêtes entrantes.
 
 Dépréciation des getters / setters combinés
 -------------------------------------------
@@ -157,7 +163,8 @@ Cake\ORM\EagerLoadable
     * ``config()``
     * setter part of ``canBeJoined()`` (devenue ``setCanBeJoined()``)
 Cake\ORM\EagerLoader
-    * ``matching()``
+    * ``matching()`` (``getMatching()`` devra être appelée après ``setMatching()``
+      pour conserver l'ancien comportement)
     * ``autoFields()`` (devenue ``enableAutoFields()`` / ``isAutoFieldsEnabled()``)
 Cake\ORM\Locator\TableLocator
     * ``config()``
@@ -338,6 +345,17 @@ Routing
 
 * ``RouteBuilder::prefix()`` accepte maintenant un tableau de paramètres par
   défaut à ajouter à chaque route "connectée".
+* Les routes peuvent maintenant être "matché" sur des hosts spécifiques à
+  l'aide de l'option ``_host``.
+
+HtmlHelper
+==========
+
+* ``HtmlHelper::scriptBlock()`` n'englobe plus le Javascript dans un tag
+  ``<![CDATA[ ]]`` par défaut. L'option ``safe`` qui contrôle ce comportement
+  a maintenant sa valeur par défaut à ``false``. Utiliser le tag ``<![CDATA[ ]]``
+  était seulement requis pour le XHTML qui n'est plus le doctype prédominant
+  pour les pages web actuellement.
 
 PaginatorHelper
 ===============
