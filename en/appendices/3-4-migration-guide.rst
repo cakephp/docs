@@ -304,8 +304,18 @@ Visibility Changes
 * ``MailerAwareTrait::getMailer()`` will now become protected.
 * ``CellTrait::cell()`` will now become protected.
 
-If traits are used in controllers, their public methods become actions. These
-changes will make your application secure if you are using them in your controllers.
+If the above traits are used in controllers, their public methods could be
+accessed by default routing as actions. These changes help protect your
+controllers. If you need the methods to remain public you will need to update
+your ``use`` statement to look like::
+
+    use CellTrait {
+        cell as public;
+    }
+    use MailerAwareTrait {
+        getMailer as public;
+    }
+
 
 Collection
 ==========
