@@ -2458,7 +2458,7 @@ Moving Checkboxes & Radios Outside of a Label
 ---------------------------------------------
 
 By default CakePHP nests checkboxes created via ``input()`` and radio buttons
-within label elements.
+created by both ``input()`` and ``radio()`` within label elements.
 This helps make it easier to integrate popular CSS frameworks. If you need to
 place checkbox/radio inputs outside of the label you can do so by modifying the
 templates::
