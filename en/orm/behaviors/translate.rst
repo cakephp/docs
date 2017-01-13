@@ -317,6 +317,17 @@ to call locale on each table for example::
 This example also assumes that ``Categories`` has the TranslateBehavior attached
 to it.
 
+Querying Translated Fields 
+--------------------------
+
+TranslateBehavior does not substitute find conditions by default. You need to use
+``translationField()`` method to compose find conditions on translated fields::
+
+    $this->Articles->locale('es');
+    $data = $this->Articles->find()->where([
+        $this->Articles->translationField('title') => 'Otro Título'
+    ]);
+
 Saving in Another Language
 ==========================
 
