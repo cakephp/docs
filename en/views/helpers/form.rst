@@ -40,16 +40,16 @@ a following section. The built-in providers map to the following values of
 ``$model``:
 
 * An ``Entity`` instance or an iterator will map to
-  `EntityContext <https://api.cakephp.org/3.3/class-Cake.View.Form.EntityContext.html>`;
+  `EntityContext <https://api.cakephp.org/3.3/class-Cake.View.Form.EntityContext.html>`_;
   this context class allows FormHelper to work with results from the
   built-in ORM.
 
 * An array containing the ``'schema'`` key, will map to
-  `ArrayContext <https://api.cakephp.org/3.3/class-Cake.View.Form.ArrayContext.html>`
+  `ArrayContext <https://api.cakephp.org/3.3/class-Cake.View.Form.ArrayContext.html>`_
   which allows you to create simple data structures to build forms against.
 
 * ``null`` and ``false`` will map to
-  ``NullContext <https://api.cakephp.org/3.3/class-Cake.View.Form.NullContext.html>``;
+  `NullContext <https://api.cakephp.org/3.3/class-Cake.View.Form.NullContext.html>`_;
   this context class
   simply satisfies the interface FormHelper requires. This context is useful if
   you want to build a short form that doesn't require ORM persistence.
@@ -110,8 +110,8 @@ Output:
     Since this is an *edit* form, a hidden ``input`` field is generated to
     override the default HTTP method.
 
-Options for Form
-----------------
+Options for Form Creation
+-------------------------
 
 The ``$options`` array is where most of the form configuration
 happens. This special array can contain a number of different
@@ -162,7 +162,7 @@ Valid values:
 Changing the HTTP Method for a Form
 -----------------------------------
 
-By using the ``'type'`` option you can change the HTTP method a form will use::
+By using the ``type`` option you can change the HTTP method a form will use::
 
     echo $this->Form->create($article, ['type' => 'get']);
 
@@ -185,7 +185,7 @@ Output:
 
 .. code-block:: html
 
-   <form enctype="multipart/form-data" method="post" action="/articles/add">
+    <form enctype="multipart/form-data" method="post" action="/articles/add">
 
 When using ``'put'``, ``'patch'`` or ``'delete'`` as ``'type'`` values, your
 form will be functionally equivalent to a 'post' form, but when submitted, the
@@ -298,7 +298,7 @@ Creating Form Inputs
 
 .. php:method:: input(string $fieldName, array $options = [])
 
-* ``$fieldName`` - A field name in the form ``'modelname.fieldname'``.
+* ``$fieldName`` - A field name in the form ``'Modelname.fieldname'``.
 * ``$options`` - An optional array that can include both
   :ref:`input-specific-options`, and options of the other methods (which
   ``input()`` employs internally to generate various HTML elements) as
@@ -320,12 +320,12 @@ the other methods of FormHelper.
 
 By default the ``input()`` method will employ the following widget templates::
 
-'inputContainer' => '<div class="input {{type}}{{required}}">{{content}}</div>'
-'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}/>'
+    'inputContainer' => '<div class="input {{type}}{{required}}">{{content}}</div>'
+    'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}/>'
 
 In case of validation errors it will also use::
 
-'inputContainerError' => '<div class="input {{type}}{{required}} error">{{content}}{{error}}</div>'
+    'inputContainerError' => '<div class="input {{type}}{{required}} error">{{content}}{{error}}</div>'
 
 The type of input created (when we provide no additional options to specify the
 generated element type) is inferred via model introspection and
@@ -441,7 +441,7 @@ Afterwards, add the following to your view template::
 If your model name consists of two or more words (e.g.
 "UserGroups"), when passing the data using ``set()`` you should name your
 data in a pluralised and
-`lower camelCased <https://en.wikipedia.org/wiki/Camel_case#Variations_and_synonyms>`
+`lower camelCased <https://en.wikipedia.org/wiki/Camel_case#Variations_and_synonyms>`_
 format as follows::
 
     $this->set('userGroups', $this->UserGroups->find('list'));
@@ -493,80 +493,80 @@ as well as HTML attributes. This subsection will cover the options specific to
   ``'type'`` you will force the type of the generated input, overriding model
   introspection. Defaults to ``null``.
 
-    E.g. ::
+      E.g. ::
 
-        echo $this->Form->input('field', ['type' => 'file']);
-        echo $this->Form->input('email', ['type' => 'email']);
+          echo $this->Form->input('field', ['type' => 'file']);
+          echo $this->Form->input('email', ['type' => 'email']);
 
-    Output:
+      Output:
 
-    .. code-block:: html
+      .. code-block:: html
 
-        <div class="input file">
-            <label for="field">Field</label>
-            <input type="file" name="field" value="" id="field" />
-        </div>
-        <div class="input email">
-            <label for="email">Email</label>
-            <input type="email" name="email" value="" id="email" />
-        </div>
+          <div class="input file">
+              <label for="field">Field</label>
+              <input type="file" name="field" value="" id="field" />
+          </div>
+          <div class="input email">
+              <label for="email">Email</label>
+              <input type="email" name="email" value="" id="email" />
+          </div>
 
 * ``$options['label']`` - Either a string caption or an array of
   :ref:`options for the label<create-label>`. You can set this key to the
   string you would like to be displayed within the label that usually
   accompanies the input. Defaults to ``null``.
 
-    E.g. ::
+      E.g. ::
 
-        echo $this->Form->input('name', [
-            'label' => 'The User Alias'
-        ]);
+          echo $this->Form->input('name', [
+              'label' => 'The User Alias'
+          ]);
 
-    Output:
+      Output:
 
-    .. code-block:: html
+      .. code-block:: html
 
-        <div class="input">
-            <label for="name">The User Alias</label>
-            <input name="name" type="text" value="" id="name" />
-        </div>
+          <div class="input">
+              <label for="name">The User Alias</label>
+              <input name="name" type="text" value="" id="name" />
+          </div>
 
   Alternatively, set this key to ``false`` to disable the generation of the
   ``label`` element.
 
-    E.g. ::
+      E.g. ::
 
-        echo $this->Form->input('name', ['label' => false]);
+          echo $this->Form->input('name', ['label' => false]);
 
-    Output:
+      Output:
 
-    .. code-block:: html
+      .. code-block:: html
 
-        <div class="input">
-            <input name="name" type="text" value="" id="name" />
-        </div>
+          <div class="input">
+              <input name="name" type="text" value="" id="name" />
+          </div>
 
   Set this to an array to provide additional options for the
   ``label`` element. If you do this, you can use a ``'text'`` key in
   the array to customize the label text.
 
-    E.g. ::
+      E.g. ::
 
-        echo $this->Form->input('name', [
-            'label' => [
-                'class' => 'thingy',
-                'text' => 'The User Alias'
-            ]
-        ]);
+          echo $this->Form->input('name', [
+              'label' => [
+                  'class' => 'thingy',
+                  'text' => 'The User Alias'
+              ]
+          ]);
 
-    Output:
+      Output:
 
-    .. code-block:: html
+      .. code-block:: html
 
-        <div class="input">
-            <label for="name" class="thingy">The User Alias</label>
-            <input name="name" type="text" value="" id="name" />
-        </div>
+          <div class="input">
+              <label for="name" class="thingy">The User Alias</label>
+              <input name="name" type="text" value="" id="name" />
+          </div>
 
 * ``$options['options']`` - You can provide in here an array containing
   the elements to be generated for widgets such as ``radio`` or ``select``,
@@ -579,18 +579,18 @@ as well as HTML attributes. This subsection will cover the options specific to
   disable the error message output & field classes set the ``'error'`` key to
   ``false``. Defaults to ``null``.
 
-    E.g. ::
+      E.g. ::
 
-         echo $this->Form->input('name', ['error' => false]);
+          echo $this->Form->input('name', ['error' => false]);
 
   To override the model error messages use an array with
   the keys matching the original validation error messages.
 
-    E.g. ::
+      E.g. ::
 
-        $this->Form->input('name', [
-            'error' => ['Not long enough' => __('This is not long enough')]
-        ]);
+          $this->Form->input('name', [
+              'error' => ['Not long enough' => __('This is not long enough')]
+          ]);
 
   As seen above you can set the error message for each validation
   rule you have in your models. In addition you can provide i18n
@@ -642,15 +642,15 @@ as follows:
   field (or if no data is passed at all). An explicit default value will
   override any default values defined in the schema.
 
-    Example usage::
+      Example usage::
 
-        echo $this->Form->text('ingredient', ['default' => 'Sugar']);
+          echo $this->Form->text('ingredient', ['default' => 'Sugar']);
 
-    Example with ``select`` field (size "Medium" will be selected as
-    default)::
+      Example with ``select`` field (size "Medium" will be selected as
+      default)::
 
-        $sizes = ['s' => 'Small', 'm' => 'Medium', 'l' => 'Large'];
-        echo $this->Form->select('size', $sizes, ['default' => 'm']);
+          $sizes = ['s' => 'Small', 'm' => 'Medium', 'l' => 'Large'];
+          echo $this->Form->select('size', $sizes, ['default' => 'm']);
 
   .. note::
 
@@ -668,9 +668,9 @@ as follows:
 
   .. note::
 
-        If you want to set a field to not render its value fetched from
-        context or valuesSource you will need to set ``'value'`` to ``''``
-        (instead of setting it to ``null``).
+      If you want to set a field to not render its value fetched from
+      context or valuesSource you will need to set ``'value'`` to ``''``
+      (instead of setting it to ``null``).
 
 In addition to the above options, you can mixin any HTML attribute you wish to
 use. Any non-special option name will be treated as an HTML attribute, and
@@ -695,7 +695,7 @@ Creating Text Inputs
 
 .. php:method:: text(string $name, array $options)
 
-* ``$name`` - A field name in the form ``'modelname.fieldname'``.
+* ``$name`` - A field name in the form ``'Modelname.fieldname'``.
 * ``$options`` - An optional array including any of the
   :ref:`general-input-options` as well as any valid HTML attributes.
 
@@ -716,7 +716,7 @@ Creating Password Inputs
 
 .. php:method:: password(string $fieldName, array $options)
 
-* ``$fieldName`` - A field name in the form ``'modelname.fieldname'``.
+* ``$fieldName`` - A field name in the form ``'Modelname.fieldname'``.
 * ``$options`` - An optional array including any of the
   :ref:`general-input-options` as well as any valid HTML attributes.
 
@@ -737,7 +737,7 @@ Creating Hidden Inputs
 
 .. php:method:: hidden(string $fieldName, array $options)
 
-* ``$fieldName`` - A field name in the form ``'modelname.fieldname'``.
+* ``$fieldName`` - A field name in the form ``'Modelname.fieldname'``.
 * ``$options`` - An optional array including any of the
   :ref:`general-input-options` as well as any valid HTML attributes.
 
@@ -758,7 +758,7 @@ Creating Textareas
 
 .. php:method:: textarea(string $fieldName, array $options)
 
-* ``$fieldName`` - A field name in the form ``'modelname.fieldname'``.
+* ``$fieldName`` - A field name in the form ``'Modelname.fieldname'``.
 * ``$options`` - An optional array including any of the
   :ref:`general-input-options`, of the specific textarea options (see below)
   as well as any valid HTML attributes.
@@ -798,25 +798,25 @@ couple of specific options:
 * ``'escape'`` - Determines whether or not the contents of the textarea should
   be escaped. Defaults to ``true``.
 
-    E.g. ::
+      E.g. ::
 
-        echo $this->Form->textarea('notes', ['escape' => false]);
-        // OR....
-        echo $this->Form->input('notes', ['type' => 'textarea', 'escape' => false]);
+          echo $this->Form->textarea('notes', ['escape' => false]);
+          // OR....
+          echo $this->Form->input('notes', ['type' => 'textarea', 'escape' => false]);
 
 * ``'rows', 'cols'`` - You can use these two keys to set the HTML attributes
   which specify the number of rows and columns for the ``textarea`` field.
 
-    E.g. ::
+      E.g. ::
 
-      echo $this->Form->textarea('comment', ['rows' => '5', 'cols' => '5']);
+          echo $this->Form->textarea('comment', ['rows' => '5', 'cols' => '5']);
 
-    Output:
+      Output:
 
-    .. code-block:: html
+      .. code-block:: html
 
-      <textarea name="comment" cols="5" rows="5">
-      </textarea>
+          <textarea name="comment" cols="5" rows="5">
+          </textarea>
 
 Creating Select, Checkbox and Radio Inputs
 ------------------------------------------
@@ -844,11 +844,11 @@ methods are described in each method's own section.)
     combination with any select-type input,
     such as ``date()``, ``time()``, ``datetime()``:
 
-      ::
+        ::
 
-          echo $this->Form->time('close_time', [
-      	      'value' => '13:30:00'
-          ]);
+            echo $this->Form->time('close_time', [
+                'value' => '13:30:00'
+            ]);
 
   .. note::
 
@@ -859,13 +859,13 @@ methods are described in each method's own section.)
   ``true``, you can provide an array with the values you want to select
   by default:
 
-    ::
+      ::
 
-      // HTML <option> elements with values 1 and 3 will be rendered preselected
-      echo $this->Form->select('rooms', [
-          'multiple' => true,
-          'value' => [1, 3]
-      ]);
+          // HTML <option> elements with values 1 and 3 will be rendered preselected
+          echo $this->Form->select('rooms', [
+              'multiple' => true,
+              'value' => [1, 3]
+          ]);
 
 * ``'empty'`` - Applies to ``radio()`` and ``select()``. Defaults to ``false``.
 
@@ -879,26 +879,26 @@ methods are described in each method's own section.)
     empty value with text displayed instead of just a blank ``option``, pass a
     string to ``'empty'``:
 
-      ::
+        ::
 
-        echo $this->Form->select(
-            'field',
-            [1, 2, 3, 4, 5],
-            ['empty' => '(choose one)']
-        );
+            echo $this->Form->select(
+                'field',
+                [1, 2, 3, 4, 5],
+                ['empty' => '(choose one)']
+            );
 
-      Output:
+        Output:
 
-      .. code-block:: html
+        .. code-block:: html
 
-          <select name="field">
-              <option value="">(choose one)</option>
-              <option value="0">1</option>
-              <option value="1">2</option>
-              <option value="2">3</option>
-              <option value="3">4</option>
-              <option value="4">5</option>
-          </select>
+            <select name="field">
+                <option value="">(choose one)</option>
+                <option value="0">1</option>
+                <option value="1">2</option>
+                <option value="2">3</option>
+                <option value="3">4</option>
+                <option value="4">5</option>
+            </select>
 
 * ``'hiddenField'`` - For checkboxes and radio buttons, by default,
   a hidden ``input`` element is also created, along with the main
@@ -906,83 +906,83 @@ methods are described in each method's own section.)
   will exist even without a value specified. For checkboxes its value
   defaults to ``0`` and for radio buttons to ``''``.
 
-    Example of default output:
+      Example of default output:
 
-    .. code-block:: html
+      .. code-block:: html
 
-        <input type="hidden" name="published" value="0" />
-        <input type="checkbox" name="published" value="1" />
+          <input type="hidden" name="published" value="0" />
+          <input type="checkbox" name="published" value="1" />
 
   This can be disabled by setting ``'hiddenField'`` to ``false``.
 
-    E.g. ::
+      E.g. ::
 
-        echo $this->Form->checkbox('published', ['hiddenField' => false]);
+          echo $this->Form->checkbox('published', ['hiddenField' => false]);
 
-    Which outputs:
+      Which outputs:
 
-    .. code-block:: html
+      .. code-block:: html
 
-        <input type="checkbox" name="published" value="1">
+          <input type="checkbox" name="published" value="1">
 
   If you want to create multiple blocks of inputs on a form, that are
   all grouped together, you should set this parameter to ``false`` on all
   inputs except the first. If the hidden input is on the page in multiple
   places, only the last group of inputs' values will be saved.
 
-    In this example, only the tertiary colors would be passed, and the
-    primary colors would be overridden:
+      In this example, only the tertiary colors would be passed, and the
+      primary colors would be overridden:
 
-    .. code-block:: html
+      .. code-block:: html
 
-        <h2>Primary Colors</h2>
-        <input type="hidden" name="color" value="0" />
-        <label for="color-red">
-            <input type="checkbox" name="color[]" value="5" id="color-red" />
-            Red
-        </label>
+          <h2>Primary Colors</h2>
+          <input type="hidden" name="color" value="0" />
+          <label for="color-red">
+              <input type="checkbox" name="color[]" value="5" id="color-red" />
+              Red
+          </label>
 
-        <label for="color-blue">
-            <input type="checkbox" name="color[]" value="5" id="color-blue" />
-            Blue
-        </label>
+          <label for="color-blue">
+              <input type="checkbox" name="color[]" value="5" id="color-blue" />
+              Blue
+          </label>
 
-        <label for="color-yellow">
-            <input type="checkbox" name="color[]" value="5" id="color-yellow" />
-            Yellow
-        </label>
+          <label for="color-yellow">
+              <input type="checkbox" name="color[]" value="5" id="color-yellow" />
+              Yellow
+          </label>
 
-        <h2>Tertiary Colors</h2>
-        <input type="hidden" name="color" value="0" />
-        <label for="color-green">
-            <input type="checkbox" name="color[]" value="5" id="color-green" />
-            Green
-        </label>
-        <label for="color-purple">
-            <input type="checkbox" name="color[]" value="5" id="color-purple" />
-            Purple
-        </label>
-        <label for="color-orange">
-            <input type="checkbox" name="color[]" value="5" id="color-orange" />
-            Orange
-        </label>
+          <h2>Tertiary Colors</h2>
+          <input type="hidden" name="color" value="0" />
+          <label for="color-green">
+              <input type="checkbox" name="color[]" value="5" id="color-green" />
+              Green
+          </label>
+          <label for="color-purple">
+              <input type="checkbox" name="color[]" value="5" id="color-purple" />
+              Purple
+          </label>
+          <label for="color-orange">
+              <input type="checkbox" name="color[]" value="5" id="color-orange" />
+              Orange
+          </label>
 
   Disabling ``'hiddenField'`` on the second input group would
   prevent this behavior.
 
-    You can set a hidden field to a value other than 0, such as 'N'::
+      You can set a hidden field to a value other than 0, such as 'N'::
 
-        echo $this->Form->checkbox('published', [
-            'value' => 'Y',
-            'hiddenField' => 'N',
-        ]);
+          echo $this->Form->checkbox('published', [
+              'value' => 'Y',
+              'hiddenField' => 'N',
+          ]);
 
 Creating Checkboxes
 ~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: checkbox(string $fieldName, array $options)
 
-* ``$fieldName`` - A field name in the form ``'modelname.fieldname'``.
+* ``$fieldName`` - A field name in the form ``'Modelname.fieldname'``.
 * ``$options`` - An optional array including any of the
   :ref:`general-input-options`, or of the :ref:`checkbox-radio-select-options`
   above, of the checkbox-specific options (see below), as well as any valid
@@ -990,7 +990,7 @@ Creating Checkboxes
 
 Creates a ``checkbox`` form element. The widget template used is::
 
-'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>'
+    'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>'
 
 **Options for Checkboxes**
 
@@ -1005,41 +1005,41 @@ the specified field.
 
 E.g. ::
 
-  echo $this->Form->checkbox('done');
+    echo $this->Form->checkbox('done');
 
 Will output:
 
 .. code-block:: html
 
-  <input type="hidden" name="done" value="0">
-  <input type="checkbox" name="done" value="1">
+    <input type="hidden" name="done" value="0">
+    <input type="checkbox" name="done" value="1">
 
 It is possible to specify the value of the checkbox by using the
 ``$options`` array.
 
 E.g. ::
 
-  echo $this->Form->checkbox('done', ['value' => 555]);
+    echo $this->Form->checkbox('done', ['value' => 555]);
 
 Will output:
 
 .. code-block:: html
 
-  <input type="hidden" name="done" value="0">
-  <input type="checkbox" name="done" value="555">
+    <input type="hidden" name="done" value="0">
+    <input type="checkbox" name="done" value="555">
 
 If you don't want the Form helper to create a hidden input use
 ``'hiddenField'``.
 
 E.g. ::
 
-  echo $this->Form->checkbox('done', ['hiddenField' => false]);
+    echo $this->Form->checkbox('done', ['hiddenField' => false]);
 
 Will output:
 
 .. code-block:: html
 
-  <input type="checkbox" name="done" value="1">
+    <input type="checkbox" name="done" value="1">
 
 .. _create-radio-button:
 
@@ -1048,7 +1048,7 @@ Creating Radio Buttons
 
 .. php:method:: radio(string $fieldName, array $options, array $attributes)
 
-* ``$fieldName`` - A field name in the form ``'modelname.fieldname'``.
+* ``$fieldName`` - A field name in the form ``'Modelname.fieldname'``.
 * ``$options`` - An optional array containing at minimum the labels for the
   radio buttons. Can also contain values and HTML attributes.
   When this array is missing, the method will either generate only
@@ -1142,7 +1142,7 @@ Creating Select Pickers
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
 
-* ``$fieldName`` - A field name in the form ``'modelname.fieldname'``. This
+* ``$fieldName`` - A field name in the form ``'Modelname.fieldname'``. This
   will provide the ``name`` attribute of the ``select`` element.
 * ``$options`` - An optional array containing the list of items for the select
   picker. When this array is missing, the method will generate only the
@@ -1188,39 +1188,39 @@ the contents of the ``option`` elements of a ``select`` input.
 
 E.g. ::
 
-  echo $this->Form->select('field', [1, 2, 3, 4, 5]);
+    echo $this->Form->select('field', [1, 2, 3, 4, 5]);
 
 Output:
 
 .. code-block:: html
 
-  <select name="field">
-      <option value="0">1</option>
-      <option value="1">2</option>
-      <option value="2">3</option>
-      <option value="3">4</option>
-      <option value="4">5</option>
-  </select>
+    <select name="field">
+        <option value="0">1</option>
+        <option value="1">2</option>
+        <option value="2">3</option>
+        <option value="3">4</option>
+        <option value="4">5</option>
+    </select>
 
 The array for ``$options`` can also be supplied as key-value pairs.
 
 E.g. ::
 
-  echo $this->Form->select('field', [
-      'Value 1' => 'Label 1',
-      'Value 2' => 'Label 2',
-      'Value 3' => 'Label 3'
-  ]);
+    echo $this->Form->select('field', [
+        'Value 1' => 'Label 1',
+        'Value 2' => 'Label 2',
+        'Value 3' => 'Label 3'
+    ]);
 
 Output:
 
 .. code-block:: html
 
-  <select name="field">
-      <option value="Value 1">Label 1</option>
-      <option value="Value 2">Label 2</option>
-      <option value="Value 3">Label 3</option>
-  </select>
+    <select name="field">
+        <option value="Value 1">Label 1</option>
+        <option value="Value 2">Label 2</option>
+        <option value="Value 3">Label 3</option>
+    </select>
 
 If you would like to generate a ``select`` with optgroups, just pass
 data in hierarchical format (nested array). This works on multiple
@@ -1229,49 +1229,49 @@ the elements in ``fieldset`` elements.
 
 For example::
 
-  $options = [
-     'Group 1' => [
-        'Value 1' => 'Label 1',
-        'Value 2' => 'Label 2'
-     ],
-     'Group 2' => [
-        'Value 3' => 'Label 3'
-     ]
-  ];
-  echo $this->Form->select('field', $options);
+    $options = [
+        'Group 1' => [
+            'Value 1' => 'Label 1',
+            'Value 2' => 'Label 2'
+        ],
+        'Group 2' => [
+            'Value 3' => 'Label 3'
+        ]
+    ];
+    echo $this->Form->select('field', $options);
 
 Output:
 
 .. code-block:: html
 
-  <select name="field">
-      <optgroup label="Group 1">
-          <option value="Value 1">Label 1</option>
-          <option value="Value 2">Label 2</option>
-      </optgroup>
-      <optgroup label="Group 2">
-          <option value="Value 3">Label 3</option>
-      </optgroup>
-  </select>
+    <select name="field">
+        <optgroup label="Group 1">
+            <option value="Value 1">Label 1</option>
+            <option value="Value 2">Label 2</option>
+        </optgroup>
+        <optgroup label="Group 2">
+            <option value="Value 3">Label 3</option>
+        </optgroup>
+    </select>
 
 To generate HTML attributes within an ``option`` tag::
 
-      $options = [
-          ['text' => 'Description 1', 'value' => 'value 1', 'attr_name' => 'attr_value 1'],
-          ['text' => 'Description 2', 'value' => 'value 2', 'attr_name' => 'attr_value 2'],
-          ['text' => 'Description 3', 'value' => 'value 3', 'other_attr_name' => 'other_attr_value'],
-      ];
-      echo $this->Form->select('field', $options);
+    $options = [
+        ['text' => 'Description 1', 'value' => 'value 1', 'attr_name' => 'attr_value 1'],
+        ['text' => 'Description 2', 'value' => 'value 2', 'attr_name' => 'attr_value 2'],
+        ['text' => 'Description 3', 'value' => 'value 3', 'other_attr_name' => 'other_attr_value'],
+    ];
+    echo $this->Form->select('field', $options);
 
 Output:
 
 .. code-block:: html
 
-  <select name="field">
-      <option value="value 1" attr_name="attr_value 1">Description 1</option>
-      <option value="value 2" attr_name="attr_value 2">Description 2</option>
-      <option value="value 3" other_attr_name="other_attr_value">Description 3</option>
-  </select>
+    <select name="field">
+        <option value="value 1" attr_name="attr_value 1">Description 1</option>
+        <option value="value 2" attr_name="attr_value 2">Description 2</option>
+        <option value="value 3" other_attr_name="other_attr_value">Description 3</option>
+    </select>
 
 **Controlling Select Pickers via Attributes**
 
@@ -1282,130 +1282,130 @@ certain behaviors of the ``select()`` method.
   to ``true`` (the default value is ``false``) to add a blank option with an
   empty value at the top of your dropdown list.
 
-    For example::
+      For example::
 
-        $options = ['M' => 'Male', 'F' => 'Female'];
-        echo $this->Form->select('gender', $options, ['empty' => true]);
+          $options = ['M' => 'Male', 'F' => 'Female'];
+          echo $this->Form->select('gender', $options, ['empty' => true]);
 
-    Will output:
+      Will output:
 
-    .. code-block:: html
+      .. code-block:: html
 
-        <select name="gender">
-            <option value=""></option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-        </select>
+          <select name="gender">
+              <option value=""></option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+          </select>
 
 * ``'escape'`` - The ``select()`` method allows for an attribute
   called ``'escape'`` which accepts a boolean value and determines
   whether to HTML entity encode the contents of the ``select``'s ``option``
   elements.
 
-    E.g. ::
+      E.g. ::
 
-      // This will prevent HTML-encoding the contents of each option element
-      $options = ['M' => 'Male', 'F' => 'Female'];
-      echo $this->Form->select('gender', $options, ['escape' => false]);
+          // This will prevent HTML-encoding the contents of each option element
+          $options = ['M' => 'Male', 'F' => 'Female'];
+          echo $this->Form->select('gender', $options, ['escape' => false]);
 
 
 * ``'multiple'`` - If set to ``true``, the select picker will allow
   multiple selections.
 
-    E.g. ::
+      E.g. ::
 
-        echo $this->Form->select('field', $options, ['multiple' => true]);
+          echo $this->Form->select('field', $options, ['multiple' => true]);
 
-    Alternatively, set ``'multiple'`` to ``'checkbox'`` in order to output a
-    list of related checkboxes::
+      Alternatively, set ``'multiple'`` to ``'checkbox'`` in order to output a
+      list of related checkboxes::
 
-        $options = [
-            'Value 1' => 'Label 1',
-            'Value 2' => 'Label 2'
-        ];
-        echo $this->Form->select('field', $options, [
-            'multiple' => 'checkbox'
-        ]);
+          $options = [
+              'Value 1' => 'Label 1',
+              'Value 2' => 'Label 2'
+          ];
+          echo $this->Form->select('field', $options, [
+              'multiple' => 'checkbox'
+          ]);
 
-    Output:
+      Output:
 
-    .. code-block:: html
+      .. code-block:: html
 
-        <input name="field" value="" type="hidden">
-        <div class="checkbox">
-          <label for="field-1">
-           <input name="field[]" value="Value 1" id="field-1" type="checkbox">
-           Label 1
-           </label>
-        </div>
-        <div class="checkbox">
-           <label for="field-2">
-           <input name="field[]" value="Value 2" id="field-2" type="checkbox">
-           Label 2
-           </label>
-        </div>
+          <input name="field" value="" type="hidden">
+          <div class="checkbox">
+              <label for="field-1">
+                  <input name="field[]" value="Value 1" id="field-1" type="checkbox">
+                  Label 1
+              </label>
+          </div>
+          <div class="checkbox">
+              <label for="field-2">
+                  <input name="field[]" value="Value 2" id="field-2" type="checkbox">
+                  Label 2
+              </label>
+          </div>
 
 * ``'disabled'`` - This option can be set in order to disable all or some
   of the ``select``'s ``option`` items. To disable all items set ``'disabled'``
   to ``true``. To disable only certain items, assign to ``'disabled'``
   an array containing the keys of the items to be disabled.
 
-    E.g. ::
+      E.g. ::
 
-      $options = [
-            'M' => 'Masculine',
-            'F' => 'Feminine',
-            'N' => 'Neuter'
-      ];
-      echo $this->Form->select('gender', $options, [
-          'disabled' => ['M', 'N']
-      ]);
+          $options = [
+              'M' => 'Masculine',
+              'F' => 'Feminine',
+              'N' => 'Neuter'
+          ];
+          echo $this->Form->select('gender', $options, [
+              'disabled' => ['M', 'N']
+          ]);
 
-    Will output:
+      Will output:
 
-    .. code-block:: html
+      .. code-block:: html
 
-      <select name="gender">
-          <option value="M" disabled="disabled">Masculine</option>
-          <option value="F">Feminine</option>
-          <option value="N" disabled="disabled">Neuter</option>
-      </select>
+          <select name="gender">
+              <option value="M" disabled="disabled">Masculine</option>
+              <option value="F">Feminine</option>
+              <option value="N" disabled="disabled">Neuter</option>
+          </select>
 
-    This option also works when ``'multiple'`` is set to ``'checkbox'``::
+      This option also works when ``'multiple'`` is set to ``'checkbox'``::
 
-      $options = [
-          'Value 1' => 'Label 1',
-          'Value 2' => 'Label 2'
-      ];
-      echo $this->Form->select('field', $options, [
-          'multiple' => 'checkbox',
-          'disabled' => ['Value 1']
-      ]);
+          $options = [
+              'Value 1' => 'Label 1',
+              'Value 2' => 'Label 2'
+          ];
+          echo $this->Form->select('field', $options, [
+              'multiple' => 'checkbox',
+              'disabled' => ['Value 1']
+          ]);
 
-    Output:
+      Output:
 
-    .. code-block:: html
+      .. code-block:: html
 
-       <input name="field" value="" type="hidden">
-       <div class="checkbox">
-          <label for="field-1">
-          <input name="field[]" disabled="disabled" value="Value 1" type="checkbox">
-          Label 1
-          </label>
-       </div>
-       <div class="checkbox">
-          <label for="field-2">
-          <input name="field[]" value="Value 2" id="field-2" type="checkbox">
-          Label 2
-          </label>
-       </div>
+          <input name="field" value="" type="hidden">
+          <div class="checkbox">
+              <label for="field-1">
+                  <input name="field[]" disabled="disabled" value="Value 1" type="checkbox">
+                  Label 1
+              </label>
+          </div>
+          <div class="checkbox">
+              <label for="field-2">
+                  <input name="field[]" value="Value 2" id="field-2" type="checkbox">
+                  Label 2
+              </label>
+          </div>
 
 Creating File Inputs
 --------------------
 
 .. php:method:: file(string $fieldName, array $options)
 
-* ``$fieldName`` - A field name in the form ``'modelname.fieldname'``.
+* ``$fieldName`` - A field name in the form ``'Modelname.fieldname'``.
 * ``$options`` - An optional array including any of the
   :ref:`general-input-options` as well as any valid HTML attributes.
 
@@ -1419,19 +1419,19 @@ the form enctype is set to ``'multipart/form-data'``.
 
 So start off with a ``create()`` method such as the following::
 
-  echo $this->Form->create($document, ['enctype' => 'multipart/form-data']);
-  // OR
-  echo $this->Form->create($document, ['type' => 'file']);
+    echo $this->Form->create($document, ['enctype' => 'multipart/form-data']);
+    // OR
+    echo $this->Form->create($document, ['type' => 'file']);
 
 Next add a line that looks like either of the following two lines
 to your form's view template file::
 
-  echo $this->Form->input('submittedfile', [
-      'type' => 'file'
-  ]);
+    echo $this->Form->input('submittedfile', [
+        'type' => 'file'
+    ]);
 
-  // OR
-  echo $this->Form->file('submittedfile');
+    // OR
+    echo $this->Form->file('submittedfile');
 
 .. note::
 
@@ -1449,7 +1449,7 @@ in a Unix environment)::
 
     $this->request->data['submittedfile']
 
-    //would contain the following array:
+    // would contain the following array:
     [
         'name' => 'conference_schedule.pdf',
         'type' => 'application/pdf',
@@ -1571,42 +1571,42 @@ hour (num), minutes (num).
 
 For example ::
 
-  <?= $this->form->dateTime('registered') ?>
+    <?= $this->form->dateTime('registered') ?>
 
 Output:
 
 .. code-block:: html
 
-  <select name="registered[year]">
-      <option value="" selected="selected"></option>
-      <option value="2022">2022</option>
-      ...
-      <option value="2012">2012</option>
-  </select>
-  <select name="registered[month]">
-      <option value="" selected="selected"></option>
-      <option value="01">January</option>
-      ...
-      <option value="12">December</option>
-  </select>
-  <select name="registered[day]">
-      <option value="" selected="selected"></option>
-      <option value="01">1</option>
-      ...
-      <option value="31">31</option>
-  </select>
-  <select name="registered[hour]">
-      <option value="" selected="selected"></option>
-      <option value="00">0</option>
-      ...
-      <option value="23">23</option>
-  </select>
-  <select name="registered[minute]">
-    <option value="" selected="selected"></option>
-    <option value="00">00</option>
-    ...
-    <option value="59">59</option>
-  </select>
+    <select name="registered[year]">
+        <option value="" selected="selected"></option>
+        <option value="2022">2022</option>
+        ...
+        <option value="2012">2012</option>
+    </select>
+    <select name="registered[month]">
+        <option value="" selected="selected"></option>
+        <option value="01">January</option>
+        ...
+        <option value="12">December</option>
+    </select>
+    <select name="registered[day]">
+        <option value="" selected="selected"></option>
+        <option value="01">1</option>
+        ...
+        <option value="31">31</option>
+    </select>
+    <select name="registered[hour]">
+        <option value="" selected="selected"></option>
+        <option value="00">0</option>
+        ...
+        <option value="23">23</option>
+    </select>
+    <select name="registered[minute]">
+        <option value="" selected="selected"></option>
+        <option value="00">00</option>
+        ...
+        <option value="59">59</option>
+    </select>
 
 To create datetime inputs with custom classes/attributes on a specific select
 box, you can provide them as arrays of options for each component, within the
@@ -1614,31 +1614,31 @@ box, you can provide them as arrays of options for each component, within the
 
 For example ::
 
-  echo $this->Form->datetime('released', [
-      'year' => [
-          'class' => 'year-classname',
-      ],
-      'month' => [
-          'class' => 'month-class',
-          'data-type' => 'month',
-      ],
-  ]);
+    echo $this->Form->datetime('released', [
+        'year' => [
+            'class' => 'year-classname',
+        ],
+        'month' => [
+            'class' => 'month-class',
+            'data-type' => 'month',
+        ],
+    ]);
 
 Which would create the following two select pickers:
 
 .. code-block:: html
 
-  <select name="released[year]" class="year-class">
-      <option value="" selected="selected"></option>
-      <option value="00">0</option>
-      <option value="01">1</option>
-      <!-- .. snipped for brevity .. -->
-  </select>
-  <select name="released[month]" class="month-class" data-type="month">
-      <option value="" selected="selected"></option>
-      <option value="01">January</option>
-      <!-- .. snipped for brevity .. -->
-  </select>
+    <select name="released[year]" class="year-class">
+        <option value="" selected="selected"></option>
+        <option value="00">0</option>
+        <option value="01">1</option>
+        <!-- .. snipped for brevity .. -->
+    </select>
+    <select name="released[month]" class="month-class" data-type="month">
+        <option value="" selected="selected"></option>
+        <option value="01">January</option>
+        <!-- .. snipped for brevity .. -->
+    </select>
 
 Creating Date Inputs
 ~~~~~~~~~~~~~~~~~~~~
@@ -1658,41 +1658,41 @@ additional options.
 
 For example::
 
-  // Assuming current year is 2017; this disables day picker, removes empty
-  // option on year picker, limits lowest year, adds HTML attributes on year,
-  // adds a string 'empty' option on month, changes month to numeric
-  <?php
-      echo $this->Form->date('registered', [
-          'minYear' => 2018,
-          'monthNames' => false,
-          'empty' => [
-              'year' => false,
-              'month' => 'Choose month...'
-          ],
-          'day' => false,
-          'year' => [
-              'class' => 'cool-years',
-              'title' => 'Registration Year'
-          ]
-      ]);
-  ?>
+    // Assuming current year is 2017; this disables day picker, removes empty
+    // option on year picker, limits lowest year, adds HTML attributes on year,
+    // adds a string 'empty' option on month, changes month to numeric
+    <?php
+        echo $this->Form->date('registered', [
+            'minYear' => 2018,
+            'monthNames' => false,
+            'empty' => [
+                'year' => false,
+                'month' => 'Choose month...'
+            ],
+            'day' => false,
+            'year' => [
+                'class' => 'cool-years',
+                'title' => 'Registration Year'
+            ]
+        ]);
+    ?>
 
 Output:
 
 .. code-block:: html
 
-  <select class= "cool-years" name="registered[year]" title="Registration Year">
-      <option value="2022">2022</option>
-      <option value="2021">2021</option>
-      ...
-      <option value="2018">2018</option>
-  </select>
-  <select name="registered[month]">
-      <option value="" selected="selected">Choose month...</option>
-      <option value="01">1</option>
-      ...
-      <option value="12">12</option>
-  </select>
+    <select class= "cool-years" name="registered[year]" title="Registration Year">
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        ...
+        <option value="2018">2018</option>
+    </select>
+    <select name="registered[month]">
+        <option value="" selected="selected">Choose month...</option>
+        <option value="01">1</option>
+        ...
+        <option value="12">12</option>
+    </select>
 
 Creating Time Inputs
 ~~~~~~~~~~~~~~~~~~~~
@@ -1715,35 +1715,35 @@ For example, to create a time range with minutes selectable in 15 minute
 increments, and to apply classes to the select boxes, you could do the
 following::
 
-  echo $this->Form->time('released', [
-      'interval' => 15,
-      'hour' => [
-          'class' => 'foo-class',
-      ],
-      'minute' => [
-          'class' => 'bar-class',
-      ],
-  ]);
+    echo $this->Form->time('released', [
+        'interval' => 15,
+        'hour' => [
+            'class' => 'foo-class',
+        ],
+        'minute' => [
+            'class' => 'bar-class',
+        ],
+    ]);
 
 Which would create the following two select pickers:
 
 .. code-block:: html
 
-  <select name="released[hour]" class="foo-class">
-      <option value="" selected="selected"></option>
-      <option value="00">0</option>
-      <option value="01">1</option>
-      <!-- .. snipped for brevity .. -->
-      <option value="22">22</option>
-      <option value="23">23</option>
-  </select>
-  <select name="released[minute]" class="bar-class">
-      <option value="" selected="selected"></option>
-      <option value="00">00</option>
-      <option value="15">15</option>
-      <option value="30">30</option>
-      <option value="45">45</option>
-  </select>
+    <select name="released[hour]" class="foo-class">
+        <option value="" selected="selected"></option>
+        <option value="00">0</option>
+        <option value="01">1</option>
+        <!-- .. snipped for brevity .. -->
+        <option value="22">22</option>
+        <option value="23">23</option>
+    </select>
+    <select name="released[minute]" class="bar-class">
+        <option value="" selected="selected"></option>
+        <option value="00">00</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+    </select>
 
 Creating Year Inputs
 ~~~~~~~~~~~~~~~~~~~~
@@ -1766,28 +1766,28 @@ empty item in the list.
 For example, to create a year range from 2000 to the current year you
 would do the following::
 
-  echo $this->Form->year('purchased', [
-      'minYear' => 2000,
-      'maxYear' => date('Y')
-  ]);
+    echo $this->Form->year('purchased', [
+        'minYear' => 2000,
+        'maxYear' => date('Y')
+    ]);
 
 If it was 2009, you would get the following:
 
 .. code-block:: html
 
-  <select name="purchased[year]">
-      <option value=""></option>
-      <option value="2009">2009</option>
-      <option value="2008">2008</option>
-      <option value="2007">2007</option>
-      <option value="2006">2006</option>
-      <option value="2005">2005</option>
-      <option value="2004">2004</option>
-      <option value="2003">2003</option>
-      <option value="2002">2002</option>
-      <option value="2001">2001</option>
-      <option value="2000">2000</option>
-  </select>
+    <select name="purchased[year]">
+        <option value=""></option>
+        <option value="2009">2009</option>
+        <option value="2008">2008</option>
+        <option value="2007">2007</option>
+        <option value="2006">2006</option>
+        <option value="2005">2005</option>
+        <option value="2004">2004</option>
+        <option value="2003">2003</option>
+        <option value="2002">2002</option>
+        <option value="2001">2001</option>
+        <option value="2000">2000</option>
+    </select>
 
 Creating Month Inputs
 ~~~~~~~~~~~~~~~~~~~~~
@@ -1804,27 +1804,27 @@ Creates a ``select`` element populated with month names.
 
 For example::
 
-  echo $this->Form->month('mob');
+    echo $this->Form->month('mob');
 
 Will output:
 
 .. code-block:: html
 
-  <select name="mob[month]">
-      <option value=""></option>
-      <option value="01">January</option>
-      <option value="02">February</option>
-      <option value="03">March</option>
-      <option value="04">April</option>
-      <option value="05">May</option>
-      <option value="06">June</option>
-      <option value="07">July</option>
-      <option value="08">August</option>
-      <option value="09">September</option>
-      <option value="10">October</option>
-      <option value="11">November</option>
-      <option value="12">December</option>
-  </select>
+    <select name="mob[month]">
+        <option value=""></option>
+        <option value="01">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+    </select>
 
 You can pass in, your own array of months to be used by setting the
 ``'monthNames'`` attribute, or have months displayed as numbers by
@@ -1859,20 +1859,20 @@ parameter.
 
 For example::
 
-  echo $this->Form->day('created', ['empty' => 'Day']);
+    echo $this->Form->day('created', ['empty' => 'Day']);
 
 Will output:
 
 .. code-block:: html
 
-  <select name="created[day]">
-      <option value="" selected="selected">Day</option>
-      <option value="01">1</option>
-      <option value="02">2</option>
-      <option value="03">3</option>
-      ...
-      <option value="31">31</option>
-  </select>
+    <select name="created[day]">
+        <option value="" selected="selected">Day</option>
+        <option value="01">1</option>
+        <option value="02">2</option>
+        <option value="03">3</option>
+        ...
+        <option value="31">31</option>
+    </select>
 
 Creating Hour Inputs
 ~~~~~~~~~~~~~~~~~~~~
@@ -1889,12 +1889,12 @@ Creates a ``select`` element populated with the hours of the day.
 
 You can create either 12 or 24 hour pickers using the ``'format'`` option::
 
-  echo $this->Form->hour('created', [
-      'format' => 12
-  ]);
-  echo $this->Form->hour('created', [
-      'format' => 24
-  ]);
+    echo $this->Form->hour('created', [
+        'format' => 12
+    ]);
+    echo $this->Form->hour('created', [
+        'format' => 24
+    ]);
 
 Creating Minute Inputs
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1913,24 +1913,24 @@ You can create a select picker that only contains specific values by using the
 
 For example, if you wanted 10 minutes increments you would do the following::
 
-  // In your view template file
-  echo $this->Form->minute('arrival', [
-      'interval' => 10
-  ]);
+    // In your view template file
+    echo $this->Form->minute('arrival', [
+        'interval' => 10
+    ]);
 
 This would output:
 
 .. code-block:: html
 
-  <select name="arrival[minute]">
-      <option value="" selected="selected"></option>
-      <option value="00">00</option>
-      <option value="10">10</option>
-      <option value="20">20</option>
-      <option value="30">30</option>
-      <option value="40">40</option>
-      <option value="50">50</option>
-  </select>
+    <select name="arrival[minute]">
+        <option value="" selected="selected"></option>
+        <option value="00">00</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+    </select>
 
 Creating Meridian Inputs
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1953,7 +1953,7 @@ Creating Labels
 
 .. php:method:: label(string $fieldName, string $text, array $options)
 
-* ``$fieldName`` - A field name in the form ``'modelname.fieldname'``.
+* ``$fieldName`` - A field name in the form ``'Modelname.fieldname'``.
 * ``$text`` - An optional string providing the label caption text.
 * ``$options`` - Optional. String or an array containing any of the
   :ref:`general-input-options` as well as any valid HTML attributes.
@@ -1974,19 +1974,17 @@ Output:
     <label for="user-name">Name</label>
     <label for="user-name">Your username</label>
 
-When you set ``$options`` to a string it will be used as a class name:
+When you set ``$options`` to a string it will be used as a class name::
 
-::
-
-  echo $this->Form->label('User.name', null, ['id' => 'user-label']);
-  echo $this->Form->label('User.name', 'Your username', 'highlight');
+    echo $this->Form->label('User.name', null, ['id' => 'user-label']);
+    echo $this->Form->label('User.name', 'Your username', 'highlight');
 
 Output:
 
 .. code-block:: html
 
-  <label for="user-name" id="user-label">Name</label>
-  <label for="user-name" class="highlight">Your username</label>
+    <label for="user-name" id="user-label">Name</label>
+    <label for="user-name" class="highlight">Your username</label>
 
 Displaying and Checking Errors
 ==============================
@@ -1999,7 +1997,7 @@ Displaying Errors
 
 .. php:method:: error(string $fieldName, mixed $text, array $options)
 
-* ``$fieldName`` - A field name in the form ``'modelname.fieldname'``.
+* ``$fieldName`` - A field name in the form ``'Modelname.fieldname'``.
 * ``$text`` - Optional. A string or array providing the error message(s). If an
   array, then it should be a hash of key names => messages.  Defaults to
   ``null``.
@@ -2034,7 +2032,7 @@ Example::
     echo $this->Form->text('ticket');
 
     if ($this->Form->isFieldError('ticket')) {
-      echo $this->Form->error('ticket', 'Completely custom error message!');
+        echo $this->Form->error('ticket', 'Completely custom error message!');
     }
 
 If you would click the *Submit* button of your form without providing a value
@@ -2054,7 +2052,7 @@ for the *Ticket* field, your form would output:
 .. tip::
 
     If you use a certain model field to generate multiple form fields via
-    ``input()``, if you want the same validation error message displayed for
+    ``input()``, and you want the same validation error message displayed for
     each one, you will probably be better off defining a custom error message
     inside the respective :ref:`validator rules<create-validators>`.
 
@@ -2065,16 +2063,16 @@ Checking for Errors
 
 .. php:method:: isFieldError(string $fieldName)
 
-* ``$fieldName`` - A field name in the form ``'modelname.fieldname'``.
+* ``$fieldName`` - A field name in the form ``'Modelname.fieldname'``.
 
 Returns ``true`` if the supplied ``$fieldName`` has an active validation
 error, otherwise returns ``false``.
 
 Example ::
 
-  if ($this->Form->isFieldError('gender')) {
-      echo $this->Form->error('gender');
-  }
+    if ($this->Form->isFieldError('gender')) {
+        echo $this->Form->error('gender');
+    }
 
 Creating Buttons and Submit Elements
 ====================================
@@ -2267,24 +2265,24 @@ Security Component.
 
 For example::
 
-  // In Templates/Tickets/index.ctp
-  <?= $this->Form->postButton('Delete Record', ['controller' => 'Tickets', 'action' => 'delete', 5]) ?>
+    // In Templates/Tickets/index.ctp
+    <?= $this->Form->postButton('Delete Record', ['controller' => 'Tickets', 'action' => 'delete', 5]) ?>
 
 Will output HTML similar to:
 
 .. code-block:: html
 
-  <form method="post" accept-charset="utf-8" action="/Rtools/tickets/delete/5">
-      <div style="display:none;">
-          <input name="_method" value="POST" type="hidden">
-      </div>
-      <button type="submit">Delete Record</button>
-      <div style="display:none;">
-          <input name="_Token[fields]" value="186cfbfc6f519622e19d1e688633c4028229081f%3A" type="hidden">
-          <input name="_Token[unlocked]" value="" type="hidden">
-          <input name="_Token[debug]" value="%5B%22%5C%2FRtools%5C%2Ftickets%5C%2Fdelete%5C%2F1%22%2C%5B%5D%2C%5B%5D%5D" type="hidden">
-      </div>
-  </form>
+    <form method="post" accept-charset="utf-8" action="/Rtools/tickets/delete/5">
+        <div style="display:none;">
+            <input name="_method" value="POST" type="hidden">
+        </div>
+        <button type="submit">Delete Record</button>
+        <div style="display:none;">
+            <input name="_Token[fields]" value="186cfbfc6f519622e19d1e688633c4028229081f%3A" type="hidden">
+            <input name="_Token[unlocked]" value="" type="hidden">
+            <input name="_Token[debug]" value="%5B%22%5C%2FRtools%5C%2Ftickets%5C%2Fdelete%5C%2F1%22%2C%5B%5D%2C%5B%5D%5D" type="hidden">
+        </div>
+    </form>
 
 Since this method generates a ``form`` element, do not use this method in an
 already opened form. Instead use
@@ -2428,28 +2426,28 @@ those placeholders when generating inputs.
 
 E.g. ::
 
-  // Add a template with the help placeholder.
-  $this->Form->templates([
-      'inputContainer' => '<div class="input {{type}}{{required}}">
-          {{content}} <span class="help">{{help}}</span></div>'
-  ]);
+    // Add a template with the help placeholder.
+    $this->Form->templates([
+        'inputContainer' => '<div class="input {{type}}{{required}}">
+            {{content}} <span class="help">{{help}}</span></div>'
+    ]);
 
-  // Generate an input and populate the help variable
-  echo $this->Form->input('password', [
-      'templateVars' => ['help' => 'At least 8 characters long.']
-  ]);
+    // Generate an input and populate the help variable
+    echo $this->Form->input('password', [
+        'templateVars' => ['help' => 'At least 8 characters long.']
+    ]);
 
 Output:
 
 .. code-block:: html
 
-  <div class="input password">
-      <label for="password">
-          Password
-      </label>
-      <input name="password" id="password" type="password">
-      <span class="help">At least 8 characters long.</span>
-  </div>
+    <div class="input password">
+        <label for="password">
+            Password
+        </label>
+        <input name="password" id="password" type="password">
+        <span class="help">At least 8 characters long.</span>
+    </div>
 
 .. versionadded:: 3.1
     The templateVars option was added in 3.1.0
