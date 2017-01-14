@@ -1,5 +1,5 @@
-CakePHP Conventions
-###################
+Соглашения CakePHP
+##################
 
 .. note::
     The documentation is not currently supported in Russian language for this
@@ -14,8 +14,8 @@ CakePHP Conventions
 
 .. _model-and-database-conventions:
 
-Model and Database Conventions
-==============================
+Соглашения модели и базы данных
+===============================
 
 .. meta::
     :title lang=ru: CakePHP Conventions
