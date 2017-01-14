@@ -25,5 +25,5 @@ These are common tasks people learning CakePHP usually want to study next:
 
 
 .. meta::
-    :title lang=en: Blog Tutorial Adding a Layer
-    :keywords lang=en: doc models,validation check,controller actions,model post,php class,model class,model object,business logic,database table,naming convention,bread and butter,callbacks,prefixes,nutshell,interaction,array,cakephp,interface,applications,delete
+    :title lang=ru: Blog Tutorial Adding a Layer
+    :keywords lang=ru: doc models,validation check,controller actions,model post,php class,model class,model object,business logic,database table,naming convention,bread and butter,callbacks,prefixes,nutshell,interaction,array,cakephp,interface,applications,delete

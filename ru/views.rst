@@ -64,5 +64,5 @@ More About Views
 
 
 .. meta::
-    :title lang=en: Views
-    :keywords lang=en: view logic,csv file,response elements,code elements,default extension,json,flash object,remote application,twig,subclass,ajax,reply,soap,functionality,cakephp,audience,xml,mvc
+    :title lang=ru: Views
+    :keywords lang=ru: view logic,csv file,response elements,code elements,default extension,json,flash object,remote application,twig,subclass,ajax,reply,soap,functionality,cakephp,audience,xml,mvc

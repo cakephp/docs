@@ -24,5 +24,5 @@ Tutorials & Examples
 
 
 .. meta::
-    :title lang=en: Tutorials & Examples
-    :keywords lang=en: application tutorials,glob,bakery,repository,applications,blog,acl
+    :title lang=ru: Tutorials & Examples
+    :keywords lang=ru: application tutorials,glob,bakery,repository,applications,blog,acl

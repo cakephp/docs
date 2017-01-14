@@ -13,5 +13,5 @@ Plugins
     information about this page's topic.
 
 .. meta::
-    :title lang=en: Plugins
-    :keywords lang=en: plugin folder,plugins,controllers,models,views,package,application,database connection,little space
+    :title lang=ru: Plugins
+    :keywords lang=ru: plugin folder,plugins,controllers,models,views,package,application,database connection,little space

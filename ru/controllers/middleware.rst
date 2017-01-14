@@ -23,5 +23,5 @@ Adding the new HTTP Stack to an Existing Application
 ====================================================
 
 .. meta::
-    :title lang=en: Http Middleware
-    :keywords lang=en: http, middleware, psr7, request, response, wsgi, application, baseapplication
+    :title lang=ru: Http Middleware
+    :keywords lang=ru: http, middleware, psr7, request, response, wsgi, application, baseapplication

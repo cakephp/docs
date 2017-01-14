@@ -37,5 +37,5 @@ Exposing Virtual Properties
 ---------------------------
 
 .. meta::
-    :title lang=en: Entities
-    :keywords lang=en: entity, entities, single row, individual record
+    :title lang=ru: Entities
+    :keywords lang=ru: entity, entities, single row, individual record

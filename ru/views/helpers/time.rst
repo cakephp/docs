@@ -17,6 +17,6 @@ Time
     information about this page's topic.
 
 .. meta::
-    :title lang=en: TimeHelper
-    :description lang=en: The Time Helper will help you format time and test time.
-    :keywords lang=en: time helper,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt
+    :title lang=ru: TimeHelper
+    :description lang=ru: The Time Helper will help you format time and test time.
+    :keywords lang=ru: time helper,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt

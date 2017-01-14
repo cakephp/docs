@@ -18,5 +18,5 @@ Model and Database Conventions
 ==============================
 
 .. meta::
-    :title lang=en: CakePHP Conventions
-    :keywords lang=en: web development experience,maintenance nightmare,index method,legacy systems,method names,php class,uniform system,config files,tenets,articles,conventions,conventional controller,best practices,maps,visibility,news articles,functionality,logic,cakephp,developers
+    :title lang=ru: CakePHP Conventions
+    :keywords lang=ru: web development experience,maintenance nightmare,index method,legacy systems,method names,php class,uniform system,config files,tenets,articles,conventions,conventional controller,best practices,maps,visibility,news articles,functionality,logic,cakephp,developers

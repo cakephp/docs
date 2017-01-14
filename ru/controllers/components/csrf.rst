@@ -13,5 +13,5 @@ Cross Site Request Forgery
     information about this page's topic.
 
 .. meta::
-    :title lang=en: Csrf
-    :keywords lang=en: configurable parameters,security component,configuration parameters,invalid request,csrf,submission
+    :title lang=ru: Csrf
+    :keywords lang=ru: configurable parameters,security component,configuration parameters,invalid request,csrf,submission

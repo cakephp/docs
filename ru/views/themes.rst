@@ -13,5 +13,5 @@ Themes
     information about this page's topic.
 
 .. meta::
-    :title lang=en: Themes
-    :keywords lang=en: production environments,theme folder,layout files,development requests,callback functions,folder structure,default view,dispatcher,symlink,case basis,layouts,assets,cakephp,themes,advantage
+    :title lang=ru: Themes
+    :keywords lang=ru: production environments,theme folder,layout files,development requests,callback functions,folder structure,default view,dispatcher,symlink,case basis,layouts,assets,cakephp,themes,advantage

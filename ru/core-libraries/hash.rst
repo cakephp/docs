@@ -22,5 +22,5 @@ Hash Path Syntax
 ================
 
 .. meta::
-    :title lang=en: Hash
-    :keywords lang=en: array array,path array,array name,numeric key,regular expression,result set,person name,brackets,syntax,cakephp,elements,php,set path
+    :title lang=ru: Hash
+    :keywords lang=ru: array array,path array,array name,numeric key,regular expression,result set,person name,brackets,syntax,cakephp,elements,php,set path

@@ -37,6 +37,6 @@ Immutable Dates and Times
 .. php:class:: FrozenDate
 
 .. meta::
-    :title lang=en: Time
-    :description lang=en: Time class helps you format time and test time.
-    :keywords lang=en: time,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt
+    :title lang=ru: Time
+    :description lang=ru: Time class helps you format time and test time.
+    :keywords lang=ru: time,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt

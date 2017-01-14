@@ -13,5 +13,5 @@ Coding Standards
     information about this page's topic.
 
 .. meta::
-    :title lang=en: Coding Standards
-    :keywords lang=en: curly brackets,indentation level,logical errors,control structures,control structure,expr,coding standards,parenthesis,foreach,readability,moose,new features,repository,developers
+    :title lang=ru: Coding Standards
+    :keywords lang=ru: curly brackets,indentation level,logical errors,control structures,control structure,expr,coding standards,parenthesis,foreach,readability,moose,new features,repository,developers

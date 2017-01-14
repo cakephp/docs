@@ -19,6 +19,6 @@ Breadcrumbs
     information about this page's topic.
 
 .. meta::
-    :title lang=en: BreadcrumbsHelper
-    :description lang=en: The role of the BreadcrumbsHelper in CakePHP is provide a way to easily manage breadcrumbs.
-    :keywords lang=en: breadcrumbs helper,cakephp crumbs
+    :title lang=ru: BreadcrumbsHelper
+    :description lang=ru: The role of the BreadcrumbsHelper in CakePHP is provide a way to easily manage breadcrumbs.
+    :keywords lang=ru: breadcrumbs helper,cakephp crumbs

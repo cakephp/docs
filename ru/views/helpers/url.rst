@@ -17,6 +17,6 @@ Url
     information about this page's topic.
 
 .. meta::
-    :title lang=en: UrlHelper
-    :description lang=en: The role of the UrlHelper in CakePHP is to help build urls.
-    :keywords lang=en: url helper,url
+    :title lang=ru: UrlHelper
+    :description lang=ru: The role of the UrlHelper in CakePHP is to help build urls.
+    :keywords lang=ru: url helper,url

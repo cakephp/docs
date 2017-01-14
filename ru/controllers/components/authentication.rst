@@ -20,5 +20,5 @@ Suggested Reading Before Continuing
     information about this page's topic.
 
 .. meta::
-    :title lang=en: Authentication
-    :keywords lang=en: authentication handlers,array php,basic authentication,web application,different ways,credentials,exceptions,cakephp,logging
+    :title lang=ru: Authentication
+    :keywords lang=ru: authentication handlers,array php,basic authentication,web application,different ways,credentials,exceptions,cakephp,logging

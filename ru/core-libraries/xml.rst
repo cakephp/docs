@@ -17,5 +17,5 @@ Xml
     information about this page's topic.
 
 .. meta::
-    :title lang=en: Xml
-    :keywords lang=en: array php,xml class,xml objects,post xml,xml object,string url,string data,xml parser,php 5,bakery,constructor,php xml,cakephp,php file,unicorns,meth
+    :title lang=ru: Xml
+    :keywords lang=ru: array php,xml class,xml objects,post xml,xml object,string url,string data,xml parser,php 5,bakery,constructor,php xml,cakephp,php file,unicorns,meth

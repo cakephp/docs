@@ -13,5 +13,5 @@ Running Shells as Cron Jobs
     information about this page's topic.
 
 .. meta::
-    :title lang=en: Running Shells as cronjobs
-    :keywords lang=en: cronjob,bash script,crontab
+    :title lang=ru: Running Shells as cronjobs
+    :keywords lang=ru: cronjob,bash script,crontab

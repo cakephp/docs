@@ -13,5 +13,5 @@ The Pages Controller
     information about this page's topic.
 
 .. meta::
-    :title lang=en: The Pages Controller
-    :keywords lang=en: pages controller,default controller,cakephp,ships,php,file folder,home page
+    :title lang=ru: The Pages Controller
+    :keywords lang=ru: pages controller,default controller,cakephp,ships,php,file folder,home page

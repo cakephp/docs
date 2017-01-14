@@ -13,5 +13,5 @@ CakePHP Development Process
     information about this page's topic.
 
 .. meta::
-    :title lang=en: CakePHP Development Process
-    :keywords lang=en: maintenance branch,community interaction,community feature,necessary feature,stable release,ticket system,advanced feature,power users,feature set,chat irc,leading edge,router,new features,members,attempt,development branches,branch development
+    :title lang=ru: CakePHP Development Process
+    :keywords lang=ru: maintenance branch,community interaction,community feature,necessary feature,stable release,ticket system,advanced feature,power users,feature set,chat irc,leading edge,router,new features,members,attempt,development branches,branch development

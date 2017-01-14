@@ -13,5 +13,5 @@ Extending Bake
     information about this page's topic.
 
 .. meta::
-    :title lang=en: Extending Bake
-    :keywords lang=en: command line interface,development,bake view, bake template syntax,erb tags,asp tags,percent tags
+    :title lang=ru: Extending Bake
+    :keywords lang=ru: command line interface,development,bake view, bake template syntax,erb tags,asp tags,percent tags

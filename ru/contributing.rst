@@ -24,5 +24,5 @@ Contributing
 
 
 .. meta::
-    :title lang=en: Contributing
-    :keywords lang=en: coding conventions,documentation,maxdepth
+    :title lang=ru: Contributing
+    :keywords lang=ru: coding conventions,documentation,maxdepth

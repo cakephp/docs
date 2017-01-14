@@ -13,5 +13,5 @@ Blog Tutorial - Part 3
     information about this page's topic.
 
 .. meta::
-    :title lang=en: Blog Tutorial Migrations and Tree
-    :keywords lang=en: doc models,migrations,tree,controller actions,model article,php class,model class,model object,business logic,database table,naming convention,bread and butter,callbacks,prefixes,nutshell,interaction,array,cakephp,interface,applications,delete
+    :title lang=ru: Blog Tutorial Migrations and Tree
+    :keywords lang=ru: doc models,migrations,tree,controller actions,model article,php class,model class,model object,business logic,database table,naming convention,bread and butter,callbacks,prefixes,nutshell,interaction,array,cakephp,interface,applications,delete

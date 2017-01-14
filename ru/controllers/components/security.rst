@@ -19,5 +19,5 @@ CSRF Protection
     information about this page's topic.
 
 .. meta::
-    :title lang=en: Security
-    :keywords lang=en: configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class,disable security,unlockActions
+    :title lang=ru: Security
+    :keywords lang=ru: configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class,disable security,unlockActions

@@ -13,5 +13,5 @@ Internationalization & Localization
     information about this page's topic.
 
 .. meta::
-    :title lang=en: Internationalization & Localization
-    :keywords lang=en: internationalization localization,internationalization and localization,language application,gettext,l10n,pot,i18n,translation,languages
+    :title lang=ru: Internationalization & Localization
+    :keywords lang=ru: internationalization localization,internationalization and localization,language application,gettext,l10n,pot,i18n,translation,languages

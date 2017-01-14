@@ -19,5 +19,5 @@ Bake Console
     bake/development
 
 .. meta::
-    :title lang=en: Bake Console
-    :keywords lang=en: command line interface,development,bake view, bake template syntax,erb tags,asp tags,percent tags
+    :title lang=ru: Bake Console
+    :keywords lang=ru: command line interface,development,bake view, bake template syntax,erb tags,asp tags,percent tags

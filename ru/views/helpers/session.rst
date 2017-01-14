@@ -17,6 +17,6 @@ Session
     information about this page's topic.
 
 .. meta::
-    :title lang=en: SessionHelper
-    :description lang=en: The Session Helper replicates most of the functionality and making it available in your view.
-    :keywords lang=en: session helper,flash messages,session flash,session read,session check
+    :title lang=ru: SessionHelper
+    :description lang=ru: The Session Helper replicates most of the functionality and making it available in your view.
+    :keywords lang=ru: session helper,flash messages,session flash,session read,session check

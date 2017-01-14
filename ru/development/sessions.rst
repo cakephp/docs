@@ -29,5 +29,5 @@ To set and display flash messages you should use
 :doc:`/views/helpers/flash`
 
 .. meta::
-    :title lang=en: Sessions
-    :keywords lang=en: session defaults,session classes,utility features,session timeout,session ids,persistent data,session key,session cookie,session data,last session,core database,security level,useragent,security reasons,session id,attr,countdown,regeneration,sessions,config
+    :title lang=ru: Sessions
+    :keywords lang=ru: session defaults,session classes,utility features,session timeout,session ids,persistent data,session key,session cookie,session data,last session,core database,security level,useragent,security reasons,session id,attr,countdown,regeneration,sessions,config

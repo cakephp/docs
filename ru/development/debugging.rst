@@ -13,6 +13,6 @@ Debugging
     information about this page's topic.
 
 .. meta::
-    :title lang=en: Debugging
-    :description lang=en: Debugging CakePHP with the Debugger class, logging, basic debugging and using the DebugKit plugin.
-    :keywords lang=en: code excerpt,stack trace,default output,error link,default error,web requests,error report,debugger,arrays,different ways,excerpt from,cakephp,ide,options
+    :title lang=ru: Debugging
+    :description lang=ru: Debugging CakePHP with the Debugger class, logging, basic debugging and using the DebugKit plugin.
+    :keywords lang=ru: code excerpt,stack trace,default output,error link,default error,web requests,error report,debugger,arrays,different ways,excerpt from,cakephp,ide,options

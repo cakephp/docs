@@ -33,5 +33,5 @@ Configuring Helpers
 ===================
 
 .. meta::
-    :title lang=en: Helpers
-    :keywords lang=en: php class,time function,presentation layer,processing power,ajax,markup,array,functionality,logic,syntax,elements,cakephp,plugins
+    :title lang=ru: Helpers
+    :keywords lang=ru: php class,time function,presentation layer,processing power,ajax,markup,array,functionality,logic,syntax,elements,cakephp,plugins

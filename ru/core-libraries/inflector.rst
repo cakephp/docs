@@ -27,5 +27,5 @@ Inflection Configuration
 ========================
 
 .. meta::
-    :title lang=en: Inflector
-    :keywords lang=en: apple orange,word variations,apple pie,person man,latin versions,profile settings,php class,initial state,puree,slug,apples,oranges,user profile,underscore
+    :title lang=ru: Inflector
+    :keywords lang=ru: apple orange,word variations,apple pie,person man,latin versions,profile settings,php class,initial state,puree,slug,apples,oranges,user profile,underscore

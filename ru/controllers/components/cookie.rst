@@ -17,5 +17,5 @@ Cookie
     information about this page's topic.
 
 .. meta::
-    :title lang=en: Cookie
-    :keywords lang=en: array controller,php setcookie,cookie string,controller setup,string domain,default description,string name,session cookie,integers,variables,domain name,null
+    :title lang=ru: Cookie
+    :keywords lang=ru: array controller,php setcookie,cookie string,controller setup,string domain,default description,string name,session cookie,integers,variables,domain name,null

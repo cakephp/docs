@@ -31,5 +31,5 @@ General Information
 
 
 .. meta::
-    :title lang=en: Appendices
-    :keywords lang=en: migration guide,migration path,new features,glossary
+    :title lang=ru: Appendices
+    :keywords lang=ru: migration guide,migration path,new features,glossary

@@ -13,5 +13,5 @@ Registry Objects
     information about this page's topic.
 
 .. meta::
-    :title lang=en: Object Registry
-    :keywords lang=en: array name,loading components,several different kinds,unified api,loading objects,component names,special key,core components,callbacks,prg,callback,alias,fatal error,collections,memory,priority,priorities
+    :title lang=ru: Object Registry
+    :keywords lang=ru: array name,loading components,several different kinds,unified api,loading objects,component names,special key,core components,callbacks,prg,callback,alias,fatal error,collections,memory,priority,priorities

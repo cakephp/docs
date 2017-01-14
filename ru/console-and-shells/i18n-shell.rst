@@ -13,5 +13,5 @@ I18N Shell
     information about this page's topic.
 
 .. meta::
-    :title lang=en: I18N shell
-    :keywords lang=en: pot files,locale default,translation tools,message string,app locale,php class,validation,i18n,translations,shell,models
+    :title lang=ru: I18N shell
+    :keywords lang=ru: pot files,locale default,translation tools,message string,app locale,php class,validation,i18n,translations,shell,models

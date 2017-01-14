@@ -22,5 +22,5 @@ Configuring Cache Class
 =======================
 
 .. meta::
-    :title lang=en: Caching
-    :keywords lang=en: uniform api,xcache,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apc,memcache,queries,cakephp,elements,servers,memory
+    :title lang=ru: Caching
+    :keywords lang=ru: uniform api,xcache,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apc,memcache,queries,cakephp,elements,servers,memory

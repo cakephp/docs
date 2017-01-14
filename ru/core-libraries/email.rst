@@ -27,5 +27,5 @@ Configuration Profiles
 ----------------------
 
 .. meta::
-    :title lang=en: Email
-    :keywords lang=en: sending mail,email sender,envelope sender,php class,database configuration,sending emails,meth,shells,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models
+    :title lang=ru: Email
+    :keywords lang=ru: sending mail,email sender,envelope sender,php class,database configuration,sending emails,meth,shells,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models

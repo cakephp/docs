@@ -17,5 +17,5 @@ App Class
     information about this page's topic.
 
 .. meta::
-    :title lang=en: App Class
-    :keywords lang=en: compatible implementation,model behaviors,path management,loading files,php class,class loading,model behavior,class location,component model,management class,autoloader,classname,directory location,override,conventions,lib,textile,cakephp,php classes,loaded
+    :title lang=ru: App Class
+    :keywords lang=ru: compatible implementation,model behaviors,path management,loading files,php class,class loading,model behavior,class location,component model,management class,autoloader,classname,directory location,override,conventions,lib,textile,cakephp,php classes,loaded

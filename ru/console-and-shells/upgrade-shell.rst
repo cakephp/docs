@@ -15,5 +15,5 @@ Upgrade Shell
     information about this page's topic.
 
 .. meta::
-    :title lang=en: Upgrade Shell
-    :keywords lang=en: api docs,shell,upgrade
+    :title lang=ru: Upgrade Shell
+    :keywords lang=ru: api docs,shell,upgrade

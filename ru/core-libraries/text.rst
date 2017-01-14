@@ -24,5 +24,5 @@ Highlighting Substrings
 .. end-text
 
 .. meta::
-    :title lang=en: Text
-    :keywords lang=en: slug,transliterate,ascii,array php,array name,string options,data options,result string,class string,string data,string class,placeholders,default method,key value,markup,rfc,replacements,convenience,templates
+    :title lang=ru: Text
+    :keywords lang=ru: slug,transliterate,ascii,array php,array name,string options,data options,result string,class string,string data,string class,placeholders,default method,key value,markup,rfc,replacements,convenience,templates

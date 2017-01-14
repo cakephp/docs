@@ -15,5 +15,5 @@ Plugin Shell
     information about this page's topic.
 
 .. meta::
-    :title lang=en: Plugin Shell
-    :keywords lang=en: plugin,assets,shell,load,unload
+    :title lang=ru: Plugin Shell
+    :keywords lang=ru: plugin,assets,shell,load,unload

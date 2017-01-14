@@ -21,5 +21,5 @@ Security
 
 
 .. meta::
-    :title lang=en: Security
-    :keywords lang=en: security, csrf, cross site request forgery component
+    :title lang=ru: Security
+    :keywords lang=ru: security, csrf, cross site request forgery component

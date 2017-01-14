@@ -13,5 +13,5 @@ Constants & Functions
     information about this page's topic.
 
 .. meta::
-    :title lang=en: Global Constants and Functions
-    :keywords lang=en: internationalization and localization,global constants,example config,array php,convenience functions,core libraries,component classes,optional number,global functions,string string,core classes,format strings,unread messages,placeholders,useful functions,arrays,parameters,existence,translations
+    :title lang=ru: Global Constants and Functions
+    :keywords lang=ru: internationalization and localization,global constants,example config,array php,convenience functions,core libraries,component classes,optional number,global functions,string string,core classes,format strings,unread messages,placeholders,useful functions,arrays,parameters,existence,translations
