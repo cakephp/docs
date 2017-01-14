@@ -18,8 +18,8 @@
 
     .. image:: /_static/img/read-the-book.jpg
 
-    Enjoy the CakePHP cookbook almost anywhere. Available as both a PDF and
-    EPUB, you can now read it on more devices, as well as offline.
+    Наслаждайтесь книгой рецептов CakePHP почти везде. Она дступна как в формате PDF,
+    так и в EPUB, вы можете теперь читать ее на многих устройствах, даже офлайн.
 
     - `PDF <../_downloads/ru/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/ru/CakePHPCookbook.epub>`_
