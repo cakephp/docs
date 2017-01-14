@@ -1,5 +1,5 @@
-Installation
-############
+Установка
+#########
 
 .. note::
     The documentation is not currently supported in Russian language for this
