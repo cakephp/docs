@@ -1,4 +1,4 @@
-Appendices
+Приложения
 ##########
 
 .. note::
@@ -12,15 +12,15 @@ Appendices
     You can refer to the english version in the select top menu to have
     information about this page's topic.
 
-3.x Migration Guide
-===================
+Руководство по миграции 3.x
+===========================
 
 .. toctree::
     :maxdepth: 1
 
     appendices/3-x-migration-guide
 
-General Information
+Основная информация
 ===================
 
 .. toctree::
@@ -31,5 +31,5 @@ General Information
 
 
 .. meta::
-    :title lang=ru: Appendices
-    :keywords lang=ru: migration guide,migration path,new features,glossary
+    :title lang=ru: Приложения 
+    :keywords lang=ru: руководство по миграции,путь миграции,новые возможности,глоссарий
