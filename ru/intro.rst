@@ -1,5 +1,5 @@
-CakePHP at a Glance
-###################
+Первое знакомство с CakePHP
+###########################
 
 .. note::
     The documentation is not currently supported in Russian language for this
@@ -12,8 +12,8 @@ CakePHP at a Glance
     You can refer to the english version in the select top menu to have
     information about this page's topic.
 
-Additional Reading
-==================
+Рекомендуется к прочтению
+=========================
 
 .. toctree::
     :maxdepth: 1
