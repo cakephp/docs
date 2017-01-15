@@ -403,6 +403,11 @@ Validation
 
 * ``Validation::falsey()`` et ``Validation::truthy()`` ont été ajoutées.
 
+TranslateBehavior
+=================
+
+* ``TranslateBehavior::translationField()`` a été ajoutée.
+
 PluginShell
 ===========
 
