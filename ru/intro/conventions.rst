@@ -13,7 +13,7 @@
 ======================
 
 Имена классов контроллера обычно пишутся во множественном числе, c использованием
-ВерблюжьегоСинтаксиса и оканчиваются на слово ``Controller``. К примеру такие имена,
+ВерблюжьегоРегистра и оканчиваются на слово ``Controller``. К примеру такие имена,
 как ``UsersController`` и ``ArticleCategoriesController`` хорошо соответствуют
 соглашениям.
 
@@ -22,16 +22,59 @@
 по умолчанию соответствует методу ``view()`` контроллера ``UsersController``.
 Защищенные (protected) или закрытые (private) методы не доступны системе роутинга.
 
-.. note::
-    The documentation is not currently supported in Russian language for this
-    page.
+URL-адреса и имена котроллеров
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+Как Вы только что видели, контроллеры с названием из одного слова связываются с 
+соответствующим путем URL в нижнем регистре. К примеру ``UsersController`` 
+(объявленный в файле **UsersController.php**) доступен в виде следующего адреса
+http://example.com/users.
 
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+В то время как Вы можете маршрутизировать контроллеры из нескольких слов как
+Вам угодно, в соответствиии с соглашениями Ваши URL-адреса должны быть в нижнем
+регистре разделенные дефисами с использованием класса ``DashedRoute``, cледовательно
+``/article-categories/view-all`` это корректная форрма обращения к экшену
+``ArticleCategoriesController::viewAll()``.
+
+Когда Вы создаете ссылки с использованием  метода ``this->Html->link()``, Вы можете
+пользоваться следующими соглашениями для массива url::
+
+    $this->Html->link('текст-ссылки', [
+        'prefix' => 'MyPrefix' // ВерблюжийРегистр
+        'plugin' => 'MyPlugin', // ВерблюжийРегистр
+        'controller' => 'ControllerName', // ВерблюжийРегистр
+        'action' => 'actionName' // верблюжийРегистр
+    ]
+
+Для большей информации о URL-адресаах CakePHP и обработке параметров, смотрите
+:ref:`routes-configuration`.
+
+.. _file-and-classname-conventions:
+
+Соглашения об именах классов и файлов
+=====================================
+
+В общих чертах, имена файлов должны совпадать с именами классов, и следовать
+стандартам автозагрузки PSR-0 или PSR-4. Вот некоторые примеры имен классов и
+их файлов:
+
+-  Класс контроллера ``LatestArticlesController`` может быть найден в файле с
+   именем **LatestArticlesController.php**
+-  Класс компонента ``MyHandyComponent`` может быть найден в файле с
+   именем **MyHandyComponent.php**
+-  Класс таблицы ``OptionValuesTable`` может быть найден в файле с
+   именем **OptionValuesTable.php**.
+-  Класс объекта данных ``OptionValue`` может быть найден в файле с
+   именем **OptionValue.php**.
+-  Класс поведения ``EspeciallyFunkableBehavior`` может быть найден в файле с
+   именем **EspeciallyFunkableBehavior.php**
+-  Класс вида ``SuperSimpleView`` может быть найден в файле с
+   именем **SuperSimpleView.php**
+-  Класс хелпера ``BestEverHelper`` может быть найден в файле с
+   именем **BestEverHelper.php**
+
+Каждый файл может быть найден в соответствующей папке/пространстве имен в папке
+вашего приложения.
 
 .. _model-and-database-conventions:
 
@@ -39,5 +82,5 @@
 ===============================
 
 .. meta::
-    :title lang=ru: CakePHP Conventions
+    :title lang=ru: Соглашения CakePHP
     :keywords lang=ru: web development experience,maintenance nightmare,index method,legacy systems,method names,php class,uniform system,config files,tenets,articles,conventions,conventional controller,best practices,maps,visibility,news articles,functionality,logic,cakephp,developers
