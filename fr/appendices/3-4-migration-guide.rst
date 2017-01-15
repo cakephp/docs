@@ -309,6 +309,26 @@ variations mineures qui pourraient avoir un impact sur votre application :
   n'est pas spécifié. Auparavant, les pièces jointes étaient considérées comme
   'application/octet-stream' par défaut.
 
+Visibility Changes
+==================
+
+* ``MailerAwareTrait::getMailer()`` est maintenant ``protected``.
+* ``CellTrait::cell()`` est maintenant ``protected``.
+
+Si les traits ci-dessus sont utilisés dans vos controllers, leurs méthodes
+publiques pouvaient être appelées par les règles de routing par défaut en
+tant qu'actions. Ces changements permettent d'apporter une sécurité à vos
+controllers. Si vous avez besoin que ces méthodes conservent une visibilité
+``public``, vous aurez besoin de mettre à jour les instructions ``use`` comme
+ceci::
+
+    use CellTrait {
+        cell as public;
+    }
+    use MailerAwareTrait {
+        getMailer as public;
+    }
+
 Collection
 ==========
 
