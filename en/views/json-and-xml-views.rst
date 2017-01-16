@@ -168,46 +168,42 @@ values of this option.::
     class VideosController extends AppController
     {
     
-        //....
+        // ....
         
-        public function export($acction = '')
+        public function export($format = '')
         {
-            $acction = mb_convert_case($acction, MB_CASE_LOWER);
+            $format = mb_convert_case($format, MB_CASE_LOWER);
             
-            // Accion Out ..?
-            switch ($acction) {
+            // Format Out
+            $formats = [
+              'xml' => 'Xml',
+              'json' => 'Json',
+            ];
             
-                case 'json':
-                case 'xml':
-                    // Out file JSON ..?
-                    if($acction === 'json'){
-                        // Out json
-                        $this->viewBuilder()->className('Json');
-                    }else{
-                        // Out xml
-                        $this->viewBuilder()->className('Xml');
-                    }
-                    
-                    // Get data
-                    $videos = $this->get_data_videos();
-                    
-                    // Set Force Download
-                    $this->response->download('report-' . date('YmdHis') . '.'.$acction);
-                    
-                    // Set Data View
-                    $this->set(compact('videos'));
-                    $this->set('_serialize', ['videos']);
-                    
-                    break;
+            // Exists Format Out..?
+            if ( isset($formats[$format]) === true ) {
+            
+                // Set Out Format View
+                $this->viewBuilder()->className( $formats[$format] );
 
-                default:
-                    throw new NotFoundException(__('404 Upsss!!! File Not Found'));
-                    break;
-            }
+                // Set Force Download
+                $this->response->download('report-' . date('YmdHis') . '.'.$format);
                 
+                // Get data
+                $videos = $this->get_data_videos();
+
+                // Set Data View
+                $this->set(compact('videos'));
+                $this->set('_serialize', ['videos']);
+                
+            } else {
+                // use NotFoundException Exception
+                throw new NotFoundException(__('404 Upsss!!! File Not Found'));
+            }
+            
         }
         
-        //....
+        // ....
     }
 
 
