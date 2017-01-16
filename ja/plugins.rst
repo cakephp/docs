@@ -55,7 +55,9 @@ Composer 経由でインストールすると、 ``vendor/cakephp-plugins.php`` 
 プラグインをインストールして設定した後、プラグインの読み込みが必要になるかもしれません。
 プラグインを１つずつまたは一括で読み込むメソッドがあります。 ::
 
-    // config/bootstrap.php に記述します。
+    // config/bootstrap.php
+    // または Application::bootstrap() に記述します。
+
     // 特定のプラグインを読み込みます。
     Plugin::load('ContactManager');
 
@@ -127,7 +129,8 @@ Composer 経由でインストールすると、 ``vendor/cakephp-plugins.php`` 
 特定のカスタムルートや特定プラグインの bootstrap ファイルは、
 おそらく自動で読み込みたいでしょう。 ::
 
-    // config/bootstrap.php の中で
+    // config/bootstrap.php の中、
+    // または Application::bootstrap() の中で
 
     // loadAll() を使用
     Plugin::loadAll([
@@ -466,6 +469,14 @@ Contacts コントローラなら、以下のようなファイルを作成し�
 このファイルを作成すると、 **plugins/ContactManager/src/Template/Contacts/index.ctp** を
 オーバーライドします。
 
+もし、あなたのプラグインが composer の依存関係の中にある場合 (例えば 'TheVendor/ThePlugin')、
+Custom コントローラの 'index' ビューへのパスは、以下の通りです。 ::
+
+    src/Template/Plugin/TheVendor/ThePlugin/Custom/index.ctp
+
+このファイルを作成すると、 **vendor/thevendor/theplugin/src/Template/Custom/index.ctp** を
+オーバーライドします。
+
 .. _plugin-assets:
 
 プラグインアセット
@@ -567,7 +578,7 @@ ContactManager の例だと、ContactsController 内に add/remove/edit/delete
 プラグインの公開
 ===================
 
-あなたのプラグインを `plugins.cakephp.org <http://plugins.cakephp.org>`_ に追加できます。
+あなたのプラグインを `plugins.cakephp.org <https://plugins.cakephp.org>`_ に追加できます。
 こちらでは、他の人々は composer の依存関係として使用することができます。
 `awesome-cakephp list <https://github.com/FriendsOfCake/awesome-cakephp>`_
 に申し込みできます。

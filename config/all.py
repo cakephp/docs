@@ -264,7 +264,7 @@ epub_scheme = 'URL'
 
 # The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
-epub_identifier = 'http://cakephp.org'
+epub_identifier = 'https://cakephp.org'
 
 # A unique identification for the text.
 epub_uid = 'cakephpcookbook1393624653'

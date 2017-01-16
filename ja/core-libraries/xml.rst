@@ -126,7 +126,7 @@ XML の名前空間を利用するには、配列のキーに包括的な名前�
 
     $xmlArray = [
         'root' => [
-            'xmlns:' => 'http://cakephp.org',
+            'xmlns:' => 'https://cakephp.org',
             'child' => 'value'
         ]
     ];
@@ -135,7 +135,7 @@ XML の名前空間を利用するには、配列のキーに包括的な名前�
     $xmlArray(
         'root' => [
             'tag' => [
-                'xmlns:pref' => 'http://cakephp.org',
+                'xmlns:pref' => 'https://cakephp.org',
                 'pref:item' => [
                     'item 1',
                     'item 2'
@@ -148,11 +148,11 @@ XML の名前空間を利用するには、配列のキーに包括的な名前�
 ``$xml1`` と ``$xml2`` の値はそれぞれ以下になります。 ::
 
     <?xml version="1.0"?>
-    <root xmlns="http://cakephp.org"><child>value</child>
+    <root xmlns="https://cakephp.org"><child>value</child>
 
 
     <?xml version="1.0"?>
-    <root><tag xmlns:pref="http://cakephp.org"><pref:item>item 1</pref:item><pref:item>item 2</pref:item></tag></root>
+    <root><tag xmlns:pref="https://cakephp.org"><pref:item>item 1</pref:item><pref:item>item 2</pref:item></tag></root>
 
 子要素を作成
 -------------

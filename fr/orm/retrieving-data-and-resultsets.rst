@@ -507,7 +507,7 @@ en eager en utilisant la méthode 'contain'::
     // En option du find()
     $query = $articles->find('all', ['contain' => ['Authors', 'Comments']]);
 
-    // En méthode sut un objet query
+    // En méthode sur un objet query
     $query = $articles->find('all');
     $query->contain(['Authors', 'Comments']);
 

@@ -9,12 +9,17 @@ Conteúdo
 
 .. toctree::
     :maxdepth: 3
+    :caption: Prefácio
 
     intro
     quickstart
     appendices/3-x-migration-guide
     tutorials-and-examples
     contributing
+
+.. toctree::
+    :maxdepth: 3
+    :caption: Começando
 
     installation
     development/configuration
@@ -24,6 +29,10 @@ Conteúdo
     controllers
     views
     orm
+
+.. toctree::
+    :maxdepth: 3
+    :caption: Using CakePHP
 
     controllers/components/authentication
     bake
@@ -45,6 +54,10 @@ Conteúdo
     development/testing
     core-libraries/validation
 
+.. toctree::
+    :maxdepth: 3
+    :caption: Classes utilitárias
+
     core-libraries/app
     core-libraries/collections
     core-libraries/file-folder
@@ -57,12 +70,21 @@ Conteúdo
     core-libraries/time
     core-libraries/xml
 
-    core-libraries/global-constants-and-functions
+.. toctree::
+    :maxdepth: 3
+    :caption: Plugins
+
     chronos
     debug-kit
     migrations
     elasticsearch
     upgrade-tool
+
+.. toctree::
+    :maxdepth: 3
+    :caption: Diversos
+
+    core-libraries/global-constants-and-functions
     appendices
 
 .. todolist::

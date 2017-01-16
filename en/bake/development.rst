@@ -172,11 +172,11 @@ file actually rendered, looks like this::
     class <?= $name ?>Shell extends Shell
     {
 
-    /**
-     * main() method.
-     *
-     * @return bool|int Success or error code.
-     */
+        /**
+         * main() method.
+         *
+         * @return bool|int Success or error code.
+         */
         public function main()
         {
         }
@@ -196,11 +196,11 @@ And the resultant baked class (**src/Shell/FooShell.php**) looks like this::
     class FooShell extends Shell
     {
 
-    /**
-     * main() method.
-     *
-     * @return bool|int Success or error code.
-     */
+        /**
+         * main() method.
+         *
+         * @return bool|int Success or error code.
+         */
         public function main()
         {
         }

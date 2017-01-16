@@ -990,7 +990,9 @@ replace
     fournis sera supprimé de la base de données. Seuls les enregistrements
     fournis resteront (ou seront insérés).
 
-Par défaut, la stratégie ``append`` est utilisée.
+Par défaut, la stratégie de sauvegarde ``append`` est utilisée.
+Consultez :ref:`has-many-associations` pour plus de détails sur la définition
+de ``saveStrategy``.
 
 Peu importe le moment où vous ajoutez de nouveaux enregistrements dans une
 association existante, vous devez toujours marquer la propriété de l'association
@@ -1044,6 +1046,9 @@ replace
     liens seront créés dans la table de jointure. S'il y a des liens existants
     dans la base de données vers certaines entities que l'on souhaite
     sauvegarder, ces liens seront mis à jour, non supprimés et re-sauvegardés.
+
+Consultez :ref:`belongs-to-many-associations` pour plus de détails sur la
+définition de ``saveStrategy``.
 
 Par défaut la stratégie ``replace`` est utilisée. Quand vous avez de nouveaux
 enregistrements dans une association existante, vous devez toujours marquer

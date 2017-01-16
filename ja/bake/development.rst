@@ -147,11 +147,11 @@ bake テンプレートファイルを変更しようとする場合は特に、
     class <%= $name %>Shell extends Shell
     {
 
-    /**
-     * main() method.
-     *
-     * @return bool|int Success or error code.
-     */
+        /**
+         * main() method.
+         *
+         * @return bool|int Success or error code.
+         */
         public function main()
         {
         }
@@ -172,11 +172,11 @@ bake テンプレートファイルを変更しようとする場合は特に、
     class <?= $name ?>Shell extends Shell
     {
 
-    /**
-     * main() method.
-     *
-     * @return bool|int Success or error code.
-     */
+        /**
+         * main() method.
+         *
+         * @return bool|int Success or error code.
+         */
         public function main()
         {
         }
@@ -197,11 +197,11 @@ bake テンプレートファイルを変更しようとする場合は特に、
     class FooShell extends Shell
     {
 
-    /**
-     * main() method.
-     *
-     * @return bool|int Success or error code.
-     */
+        /**
+         * main() method.
+         *
+         * @return bool|int Success or error code.
+         */
         public function main()
         {
         }

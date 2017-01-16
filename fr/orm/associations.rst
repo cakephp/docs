@@ -125,6 +125,8 @@ Chaque type d'association accepte plusieurs associations où les clés sont les
 alias et les valeurs sont les données de configuration de l'association. Si
 une clé numérique est utilisée, la valeur sera traitée en tant qu'alias.
 
+.. _has-one-associations:
+
 Associations HasOne
 ===================
 
@@ -231,6 +233,8 @@ Ce qui est au-dessus génèrera une commande SQL similaire à::
 
     SELECT * FROM users INNER JOIN addresses ON addresses.user_id = users.id;
 
+.. _belongs-to-associations:
+
 Associations BelongsTo
 ======================
 
@@ -326,6 +330,7 @@ Ce qui est au-dessus génèrera une commande SQL similaire à::
 
     SELECT * FROM addresses LEFT JOIN users ON addresses.user_id = users.id;
 
+.. _has-many-associations:
 
 Associations HasMany
 ====================
@@ -482,6 +487,8 @@ Assurez-vous que vos tables de base de données ne contiennent pas de colonnes
 du même nom que les attributs d'association. Si par exemple vous avez un champs
 counter en collision avec une propriété d'association, vous devez soit renommer
 l'association ou le nom de la colonne.
+
+.. _belongs-to-many-associations:
 
 Associations BelongsToMany
 ==========================

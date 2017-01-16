@@ -11,7 +11,7 @@ direita em qualquer página vai direcioná-lo para o editor online do Github.
 A documentação do CakePHP é
 `continuamente integrada <http://en.wikipedia.org/wiki/Continuous_integration>`_,
 sendo assim, você pode checar o status de
-`várias builds <http://ci.cakephp.org>`_ no servidor Jenkins a qualquer momento.
+`várias builds <https://ci.cakephp.org>`_ no servidor Jenkins a qualquer momento.
 
 Traduções
 =========

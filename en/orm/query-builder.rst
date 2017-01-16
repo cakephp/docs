@@ -418,12 +418,12 @@ for implementing ``if ... then ... else`` logic inside your SQL. This can be use
 for reporting on data where you need to conditionally sum or count data, or where you
 need to specific data based on a condition.
 
-If we wished to know how many published articles are in our database, we'd need to generate the following SQL::
+If we wished to know how many published articles are in our database, we could use the following SQL::
 
     SELECT
-    SUM(CASE published = 'Y' THEN 1 ELSE 0) AS number_published,
-    SUM(CASE published = 'N' THEN 1 ELSE 0) AS number_unpublished
-    FROM articles GROUP BY published
+    COUNT(CASE WHEN published = 'Y' THEN 1 END) AS number_published,
+    COUNT(CASE WHEN published = 'N' THEN 1 END) AS number_unpublished
+    FROM articles
 
 To do this with the query builder, we'd use the following code::
 
@@ -434,7 +434,7 @@ To do this with the query builder, we'd use the following code::
             1,
             'integer'
         );
-    $notPublishedCase = $query->newExpr()
+    $unpublishedCase = $query->newExpr()
         ->addCase(
             $query->newExpr()->add(['published' => 'N']),
             1,
@@ -442,10 +442,9 @@ To do this with the query builder, we'd use the following code::
         );
 
     $query->select([
-        'number_published' => $query->func()->sum($publishedCase),
-        'number_unpublished' => $query->func()->sum($unpublishedCase)
-    ])
-    ->group('published');
+        'number_published' => $query->func()->count($publishedCase),
+        'number_unpublished' => $query->func()->count($unpublishedCase)
+    ]);
 
 The ``addCase`` function can also chain together multiple statements to create
 ``if .. then .. [elseif .. then .. ] [ .. else ]`` logic inside your SQL.

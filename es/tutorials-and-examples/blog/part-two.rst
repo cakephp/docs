@@ -310,7 +310,7 @@ muestra el mensaje y elimina la correspondiente variable de sesión. El método
 hacia otra URL. El parámetro ``['action' => 'index']`` se traduce a la URL
 /articles (p.e. la acción index del controlador de artículos). Puedes echar un
 ojo al método :php:func:`Cake\\Routing\\Router::url()` en la `API
-<http://api.cakephp.org>`_ para ver los formatos en que puedes especificar una
+<https://api.cakephp.org>`_ para ver los formatos en que puedes especificar una
 URL para varias funciones de CakePHP.
 
 Al llamar al método ``save()``, comprobará si hay errores de validación primero
@@ -635,7 +635,7 @@ aplicaciones.
 
 Ahora que ya has creado una aplicación CakePHP básica, estás listo para la vida
 real. Empieza tu nuevo proyecto y lee el resto del :doc:`Cookbook </index>` así
-como la `API <http://api.cakephp.org>`_.
+como la `API <https://api.cakephp.org>`_.
 
 Si necesitas ayuda, hay muchos modos de encontrar la ayuda que buscas - por
 favor, míralo en la página :doc:`/intro/where-to-get-help`.

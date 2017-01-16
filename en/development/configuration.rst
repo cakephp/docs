@@ -17,8 +17,8 @@ Configuring your Application
 Configuration is generally stored in either PHP or INI files, and loaded during
 the application bootstrap. CakePHP comes with one configuration file by default,
 but if required you can add additional configuration files and load them in
-**config/bootstrap.php**. :php:class:`Cake\\Core\\Configure` is used for
-general configuration, and the adapter based classes provide ``config()``
+your application's bootstrap code. :php:class:`Cake\\Core\\Configure` is used
+for global configuration, and classes like ``Cache`` provide ``config()``
 methods to make configuration simple and transparent.
 
 Loading Additional Configuration Files
@@ -604,15 +604,45 @@ This file is ideal for a number of common bootstrapping tasks:
 
 - Defining convenience functions.
 - Declaring constants.
-- Creating cache configurations.
-- Configuring inflections.
+- Defining cache configuration.
+- Defining logging configuration.
+- Loading custom inflections.
 - Loading configuration files.
 
-Be careful to maintain the MVC software design pattern when you add things to
-the bootstrap file: it might be tempting to place formatting functions there in
-order to use them in your controllers. As you'll see in the :doc:`/controllers`
-and :doc:`/views` sections there are better ways you add custom logic to your
-application.
+It might be tempting to place formatting functions there in order to use them in
+your controllers. As you'll see in the :doc:`/controllers` and :doc:`/views`
+sections there are better ways you add custom logic to your application.
+
+.. _application-bootstrap:
+
+Application::bootstrap()
+------------------------
+
+In addition to the **config/bootstrap.php** file which should be used to
+configure low-level concerns of your application, you can also use the
+``Application::bootstrap()`` hook method to load/initialize plugins, and attach
+global event listeners::
+
+    // in src/Application.php
+    namespace App;
+
+    use Cake\Core\Plugin;
+    use Cake\Http\BaseApplication;
+
+    class Application extends BaseApplication
+    {
+        public function bootstrap()
+        {
+            // Call the parent to `require_once` config/bootstrap.php
+            parent::bootstrap();
+
+            Plugin::load('MyPlugin', ['bootstrap' => true, 'routes' => true]);
+        }
+    }
+
+Loading plugins/events in ``Application::bootstrap()`` makes
+:ref:`integration-testing` easier as events and routes will be re-processed on
+each test method.
 
 Environment Variables
 =====================
