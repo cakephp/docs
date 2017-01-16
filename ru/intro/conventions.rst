@@ -103,8 +103,54 @@ http://example.com/users.
 
 Имена полей, состоящие из двух и более слов, разделяются подчеркиваниями.
 
+Внешние ключи в связях hasMany, belongsTo/hasOne распознаются по умолчанию как форма
+единственного числа имени связанной таблицы с последующим суффиксом ``_id``. Таким
+образом если таблица Users имеет связь hasMany с таблицей Articles, таблица ``articles``
+будет ссылаться на таблицу ``users`` по полю внешнего ключа ``user_id``. Для таких таблиц,
+как ``article_categories``, чьи названия состоят из нескольких слов, внешним ключом
+будет поле ``article_category_id``.
 
+Объединенные таблицы, получающиеся при использованием связи BelongsToMany между моделями,
+должны быть названы таким образом, чтобы имена составляющих их таблиц перечислялись
+в алфавитном порядке(``articles_tags`` но не ``tags_articles``).
+
+В дополнение к использованию в качестве первичого ключа обычного автоинкрементируемого
+поля, Вы также можете использовать в этих целях поля UUID. CakePHP создаст уникальный
+36-значный UUID (:php:meth:`Cake\\Utility\\Text::uuid()`), всякий раз когда Вы вызовете
+метод ``Table::save()``
+
+Соглашения вида
+===============
+
+Файлы шаблонов вида именуются в соответствии с названиями связанных с ними методов
+контроллера, если название метода состоит из нескольких слов, они разделяются
+подчеркиваниями. Методу ``viewAll()`` класса ``ArticlesController``будет соответствовать
+шаблон **src/Template/Articles/view_all.ctp**.
+
+Общий принцип именования шаблонов:
+**src/Template/Контроллер/имя_метода_.ctp**.
+
+Именуя части Вашего приложения в соответствии с соглашениями CakePHP Вы получаете
+готовую функциональность без проблем, связанных с необходимостью написания дополнительных
+параметров. Вот как должно выглядеть Ваше приложение в итоге:
+
+-  Таблица в базе данных: "articles"
+-  Класс таблицы: ``ArticlesTable``, находится в файле **src/Model/Table/ArticlesTable.php**
+-  Класс объекта данных: ``Article``, находится в файле **src/Model/Entity/Article.php**
+-  Класс контроллера: ``ArticlesController``, находится в файле
+   **src/Controller/ArticlesController.php**
+-  Шаблон вида, находится в файле **src/Template/Articles/index.ctp**
+
+Зная данные соглашения Вы будете знать наверняка, что маршрут
+http://example.com/articles/ вызывает метод ``index()`` контроллера ArticlesController,
+где автоматически доступна модель Articles(которая уже связана с таблицей articles в базе
+данных) и подключает соответствующий вид. Ни одна из этих связей не требует никаких параметров,
+а только создания соответствующей файловой структуры.
+
+Теперь, после того, как Вы познакомились с самыми базовыми вещами в фреймворке CakePHP,
+Вы можете ознакомиться с примером создания простого приложения -
+:doc:`/tutorials-and-examples/bookmarks/intro` и увидеть все выше описанное на практике
 
 .. meta::
     :title lang=ru: Соглашения CakePHP
-    :keywords lang=ru: web development experience,maintenance nightmare,index method,legacy systems,method names,php class,uniform system,config files,tenets,articles,conventions,conventional controller,best practices,maps,visibility,news articles,functionality,logic,cakephp,developers
+    :keywords lang=ru: опыт веб-разработки,maintenance nightmare,метод index,legacy systems,названия методов,класс php,uniform system,config files,tenets,articles,соглашения,conventional controller,лучшие практики,maps,visibility,news articles,functionality,logic,cakephp,developers
