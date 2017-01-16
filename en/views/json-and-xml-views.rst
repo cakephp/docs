@@ -162,7 +162,54 @@ Creating JSON Views
 The JsonView class supports the ``_jsonOptions`` variable that allows you to
 customize the bit-mask used to generate JSON. See the
 `json_encode <http://php.net/json_encode>`_ documentation for the valid
-values of this option.
+values of this option.::
+
+    // Controller code
+    class VideosController extends AppController
+    {
+    
+        //....
+        
+        public function export($acction = '')
+        {
+            $acction = mb_convert_case($acction, MB_CASE_LOWER);
+            
+            // Accion Out ..?
+            switch ($acction) {
+            
+                case 'json':
+                case 'xml':
+                    // Out file JSON ..?
+                    if($acction === 'json'){
+                        // Out json
+                        $this->viewBuilder()->className('Json');
+                    }else{
+                        // Out xml
+                        $this->viewBuilder()->className('Xml');
+                    }
+                    
+                    // Get data
+                    $videos = $this->get_data_videos();
+                    
+                    // Set Force Download
+                    $this->response->download('report-' . date('YmdHis') . '.'.$acction);
+                    
+                    // Set Data View
+                    $this->set(compact('videos'));
+                    $this->set('_serialize', ['videos']);
+                    
+                    break;
+
+                default:
+                    throw new NotFoundException(__('404 Upsss!!! File Not Found'));
+                    break;
+            }
+                
+        }
+        
+        //....
+    }
+
 
 JSONP Responses
 ---------------
