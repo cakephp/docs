@@ -88,7 +88,7 @@ champ d'être recalculé automatiquement si vous l'avez définit ``dirty`` avant
     $this->addBehavior('CounterCache', [
         'Articles' => [
             'comment_count' => [
-                ignoreDirty' => true
+                'ignoreDirty' => true
             ]
         ]
     ]);

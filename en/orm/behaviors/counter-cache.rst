@@ -85,7 +85,7 @@ before::
     $this->addBehavior('CounterCache', [
         'Articles' => [
             'comment_count' => [
-                ignoreDirty' => true
+                'ignoreDirty' => true
             ]
         ]
     ]);
