@@ -44,17 +44,32 @@
   В режиме отладки, CakePHP предупредит Вас, если с этими папками есть какие-то
   проблемы.
   
-.. note::
-    The documentation is not currently supported in Russian language for this
-    page.
+Папка src
+=========
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+Папка *src* это то место в котором по большей частибудет происходить
+разработка Вашего приложения. Давайте изучим поподробнее ее внутреннюю
+структуру.
 
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+Console
+    Содержит команды и задания консоли для Вашего приложения.
+    Подробнее смотрите :doc:`/console-and-shells`.
+Controller
+    Содержит контроллеры Вашего приложения и их компоненты.
+Locale
+    Хранит файлы интернационализации.
+Model
+    Содержит части приложения работающие с БД (таблицы, сущности, поведения).
+View
+    Внешний вид приложения: ячейки, хелперы, файлы шаблонов. В этой папке
+    хранится все то что связано с областью контента приложения (меняющаяся
+    часть шаблона)
+Template
+    Здесь хранится та часть шаблонов оформления, которая остается неизменной, при
+    переходе между различными страницами: элементы, страницы ошибок, лейауты
+    и шаблоны.
+ 
 
 .. meta::
     :title lang=ru: Структура папок CakePHP
-    :keywords lang=ru: internal libraries,конфигурация ядра,model descriptions,external vendors,connection details,folder structure,party libraries,personal commitment,database connection,internationalization,configuration files,folders,application development,readme,lib,configured,logs,config,third party,cakephp
+    :keywords lang=ru: внутренние библиотеки,конфигурация ядра,model descriptions,external vendors,connection details,folder structure,party libraries,personal commitment,database connection,internationalization,configuration files,folders,application development,readme,lib,configured,logs,config,third party,cakephp
