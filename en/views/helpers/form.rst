@@ -122,12 +122,12 @@ Valid values:
   provided then it will be autodetected based on the form context.
   Valid values:
 
-  #. ``'get'`` - Will set the form method to HTTP GET.
-  #. ``'file'`` - Will set the form method to POST and the ``'enctype'`` to
-     "multipart/form-data".
-  #. ``'post'`` - Will set the method to POST.
-  #. ``'put', 'delete', 'patch'`` - Will override the HTTP method with PUT,
-     DELETE or PATCH respectively, when the form is submitted.
+  * ``'get'`` - Will set the form method to HTTP GET.
+  * ``'file'`` - Will set the form method to POST and the ``'enctype'`` to
+    "multipart/form-data".
+  * ``'post'`` - Will set the method to POST.
+  * ``'put', 'delete', 'patch'`` - Will override the HTTP method with PUT,
+    DELETE or PATCH respectively, when the form is submitted.
 
 * ``'method'`` - Valid values are the same as above. Allows you to explicitly
   override the form's method.
@@ -2054,7 +2054,7 @@ for the *Ticket* field, your form would output:
     If you use a certain model field to generate multiple form fields via
     ``input()``, and you want the same validation error message displayed for
     each one, you will probably be better off defining a custom error message
-    inside the respective :ref:`validator rules<create-validators>`.
+    inside the respective :ref:`validator rules<creating-validators>`.
 
 .. TODO:: Add examples.
 
