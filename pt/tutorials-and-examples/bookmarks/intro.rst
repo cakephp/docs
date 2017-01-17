@@ -292,16 +292,20 @@ método ``findTagged`` não estar implementado ainda, então vamos fazer isso. E
 
     public function findTagged(Query $query, array $options)
     {
-        $fields = [
-            'Bookmarks.id',
-            'Bookmarks.title',
-            'Bookmarks.url',
-        ];
-        return $this->find()
-            ->distinct($fields)
-            ->matching('Tags', function ($q) use ($options) {
+        $bookmarks = $this->find()
+            ->select(['id', 'url', 'title', 'description']);
+
+        if (empty($options['tags'])) {
+            $bookmarks->leftJoinWith('Tags', function ($q) {
+                return $q->where(['Tags.title IS ' => null]);
+            });
+        } else {
+            $bookmarks->innerJoinWith('Tags', function ($q) use ($options) {
                 return $q->where(['Tags.title IN' => $options['tags']]);
             });
+        }
+
+        return $bookmarks->group(['Bookmarks.id']);
     }
 
 Nós implementamos um método

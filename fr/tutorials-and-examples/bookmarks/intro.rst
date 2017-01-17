@@ -379,14 +379,20 @@ Dans **src/Model/Table/BookmarksTable.php** ajoutez ce qui suit::
     // dans l'action de notre Controller
     public function findTagged(Query $query, array $options)
     {
-        return $this->find()
-            ->distinct(['Bookmarks.id'])
-            ->matching('Tags', function ($q) use ($options) {
-                if (empty($options['tags'])) {
-                    return $q->where(['Tags.title IS' => null]);
-                }
+        $bookmarks = $this->find()
+            ->select(['id', 'url', 'title', 'description']);
+
+        if (empty($options['tags'])) {
+            $bookmarks->leftJoinWith('Tags', function ($q) {
+                return $q->where(['Tags.title IS ' => null]);
+            });
+        } else {
+            $bookmarks->innerJoinWith('Tags', function ($q) use ($options) {
                 return $q->where(['Tags.title IN' => $options['tags']]);
             });
+        }
+
+        return $bookmarks->group(['Bookmarks.id']);
     }
 
 Nous intégrons juste :ref:`des finders personnalisés <custom-find-methods>`.
