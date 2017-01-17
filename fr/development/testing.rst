@@ -1123,6 +1123,10 @@ arguments, by using the ``configApplication()`` method::
 After enabling the PSR7 mode, and possibly configuring your application class,
 you can use the remaining ``IntegrationTestCase`` features as normal.
 
+You should also take care to try and use :ref:`application-bootstrap` to load
+any plugins containing events/routes. Doing so will ensure that your
+events/routes are connected for each test case.
+
 .. versionadded:: 3.3.0
     PSR7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
 
@@ -1192,7 +1196,7 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
 
 En plus des méthodes d'assertion ci-dessus, vous pouvez également utiliser
 toutes les assertions de `TestSuite
-<http://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ et celles
+<https://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ et celles
 de
 `PHPUnit <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
 

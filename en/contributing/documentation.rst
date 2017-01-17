@@ -10,8 +10,7 @@ GitHub's online editor for that page.
 
 CakePHP documentation is
 `continuously integrated <http://en.wikipedia.org/wiki/Continuous_integration>`_,
-so you can check the status of the `various builds <http://ci.cakephp.org>`_
-on the Jenkins server at any time.
+and deployed after each pull request is merged.
 
 Translations
 ============

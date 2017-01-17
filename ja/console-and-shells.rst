@@ -550,6 +550,63 @@ Windows では ``ANSICON`` 環境変数がセットされている場合を除�
     abort() メソッドは、3.2 で追加されました。以前のバージョンでは、
     ``error()`` メソッドを使用して、メッセージを出力し、実行を停止することができます。
 
+ステータスとエラーコード
+------------------------
+
+コマンドラインツールは、成功を示すために 0 を返し、エラー状態を示すために 0 以外を
+返すべきです。 PHP メソッドは、通常 ``true`` か ``false`` を返すため、
+Cake Shell の ``dispatch`` 関数は、 ``null`` と ``true`` の戻り値を 0 へ、
+それ以外の値は 1 へと変換することによって、これらのセマンティクスとの橋渡しに役立ちます。
+
+Cake Shell の ``dispatch`` 関数は、 ``StopException`` をキャッチし、
+その例外コードの値をシェルの終了コードとして使用します。上記のように、
+``abort()`` を使ってメッセージを出力して指定したコードで終了したり、
+例に示すように、直接 ``StopException`` を起こすことができます。 ::
+
+    namespace App\Shell\Task;
+
+    use Cake\Console\Shell;
+
+    class ErroneousShell extends Shell
+    {
+        public function main()
+        {
+            return true;
+        }
+
+        public function itFails()
+        {
+            return false;
+        }
+
+        public function itFailsSpecifically()
+        {
+            throw new StopException("", 2);
+        }
+    }
+
+上記の例では、コマンドライン上で実行された際、次の終了コードを返します。 ::
+
+    $ bin/cake erroneousshell ; echo $?
+    0
+    $ bin/cake erroneousshell itFails ; echo $?
+    1
+    $ bin/cake erroneousshell itFailsSpecifically ; echo $?
+    2
+
+.. tip::
+
+    終了コードの 64 から 78 は避けてください。それらは ``sysexits.h`` で記述された
+    特定の意味を持っています。
+    終了コードの 127 以上を避けてください。それらは、 SIGKILL や SIGSEGV のような
+    シグナルによるプロセスの終了を示すために使用されます。
+
+.. note::
+
+    従来の終了コードについての詳細は、ほとんどの Unix システムの sysexit マニュアルページ
+    (``man sysexits``) 、または Windows の ``System Error Codes`` ヘルプページを
+    参照してください。
+
 フックメソッド
 ==============
 
@@ -711,7 +768,7 @@ CakePHPのコンソールのフレームワークは ``$this->getOptionParser()`
             'This shell provides a REPL that you can use to interact ' .
             'with your application in an interactive fashion. You can use ' .
             'it to run adhoc queries with your models, or experiment ' .
-            'and explore the features of CakePHP and your application.'。
+            'and explore the features of CakePHP and your application.' .
             "\n\n" .
             'You will need to have psysh installed for this Shell to work.'
         );

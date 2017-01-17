@@ -901,7 +901,7 @@ methods to send a request:
 
 All of the methods except ``get()`` and ``delete()`` accept a second parameter
 that allows you to send a request body. After dispatching a request you can use
-the various assertions provided by ``IntegrationTestCase`` or by PHPUnit to
+the various assertions provided by ``IntegrationTestCase`` or PHPUnit to
 ensure your request had the correct side-effects.
 
 Setting up the Request
@@ -1060,6 +1060,10 @@ arguments, by using the ``configApplication()`` method::
 After enabling the PSR7 mode, and possibly configuring your application class,
 you can use the remaining ``IntegrationTestCase`` features as normal.
 
+You should also take care to try and use :ref:`application-bootstrap` to load
+any plugins containing events/routes. Doing so will ensure that your
+events/routes are connected for each test case.
+
 .. versionadded:: 3.3.0
     PSR7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
 
@@ -1129,7 +1133,7 @@ make testing responses much simpler. Some examples are::
 
 In addition to the above assertion methods, you can also use all of the
 assertions in `TestSuite
-<http://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ and those
+<https://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ and those
 found in `PHPUnit
 <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
 

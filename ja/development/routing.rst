@@ -316,7 +316,7 @@ CakePHP にコントローラー名が必要なことを伝えています。
 
 :ref:`route-elements` を使ってルーティングしている時に、ルート要素で
 引数を渡したい時があると思います。 ``pass`` オプションはルート要素が
-コントローラーの関数rに引数を渡せるようにするためのホワイトリスト ::
+コントローラーの関数に引数を渡せるようにするためのホワイトリストです。 ::
 
     // src/Controller/BlogsController.php
     public function view($articleId = null, $slug = null)

@@ -127,9 +127,10 @@ Par défaut c'est ce à quoi le **composer.json** de votre application ressemble
     }
 
 A chaque fois que vous lancez ``php composer.phar update``, vous allez
-recevoir la dernière version stable quand vous utilisez la contrainte de
-version par défaut ``~3.2``. Seules les corrections de bug et les versions
-mineures de 3.x seront utilisées lors de la mise à jour.
+recevoir la dernière version contenant les dernières corrections de bugs pour
+cette version mineure. Si vous souhaitez également recevoir les dernières
+versions stables de la branche ``3.x``, vous pouvez changer la contrainte de
+version par ``~3.3``.
 
 Si vous voulez rester à jour avec les derniers changements de CakePHP non
 stables, vous pouvez changer le **composer.json** de votre application::

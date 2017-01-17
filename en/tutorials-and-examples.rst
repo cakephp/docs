@@ -5,8 +5,8 @@ In this section, you can walk through typical CakePHP applications
 to see how all of the pieces come together.
 
 Alternatively, you can refer to the non-official CakePHP plugin repository
-`CakePackages <http://plugins.cakephp.org/>`_ and the
-`Bakery <http://bakery.cakephp.org/>`_ for existing applications
+`CakePackages <https://plugins.cakephp.org/>`_ and the
+`Bakery <https://bakery.cakephp.org/>`_ for existing applications
 and components.
 
 .. toctree::

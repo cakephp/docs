@@ -7,7 +7,7 @@ Le package de validation dans CakePHP fournit des fonctionnalités pour
 construire des validators qui peuvent valider des tableaux arbitraires de
 données avec simplicité. Vous pouvez trouver une `liste des règles de validation
 dans l'API
-<http://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`__.
+<https://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`__.
 
 .. _creating-validators:
 
@@ -110,10 +110,10 @@ de contrôler quand un champ peut ou ne peut pas être vide:
 
 * ``true`` Le champ peut être vide.
 * ``false`` Le champ ne peut pas être vide.
-* ``create`` Le champ est nécessaire lors de la validation d'une opération
-  **create**.
-* ``update`` Le champ est nécessaire lors de la validation d'une opération
-  **update**.
+* ``create`` La présence du champ est nécessaire mais il peut être vide lors
+  de la validation d'une opération **create**.
+* ``update`` La présence du champ est nécessaire mais il peut être vide lors
+  de la validation d'une opération **update**.
 
 Les valeurs ``''``, ``null`` et ``[]`` (tableau vide) vont entraîner des
 erreurs de validation quand les champs n'ont pas l'autorisation d'être vide.
@@ -123,8 +123,8 @@ Quand les champs ont l'autorisation d'être vide, les valeurs ``''``, ``null``,
 Un exemple de ces méthodes est le suivant::
 
     $validator->allowEmpty('published')
-        ->notEmpty('title', 'Un titre est nécessaire')
-        ->notEmpty('body', 'Un body est nécessaire', 'create')
+        ->notEmpty('title', 'Le titre ne peut être vide')
+        ->notEmpty('body', 'Le body ne peut être vide', 'create')
         ->allowEmpty('header_image', 'update');
 
 
@@ -544,7 +544,7 @@ CakePHP fournit une suite basique de méthodes de validation dans la classe
 fournissent des validators pour plusieurs situations de validation habituelles.
 
 La `documentation de l'API
-<http://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`_ pour la
+<https://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`_ pour la
 classe ``Validation`` fournit une bonne liste de règles de validation qui sont
 disponibles, et leur utilisation basique.
 

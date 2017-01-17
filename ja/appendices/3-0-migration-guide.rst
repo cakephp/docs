@@ -243,7 +243,7 @@ Shell / Task
 ApiShell を削除
 ----------------
 
-ファイルソース自身とオンラインドキュメント/`API <http://api.cakephp.org/>`_
+ファイルソース自身とオンラインドキュメント/`API <https://api.cakephp.org/>`_
 以上の何の利益も提供しなかったので ApiShell は削除されました。
 
 SchemaShell を削除

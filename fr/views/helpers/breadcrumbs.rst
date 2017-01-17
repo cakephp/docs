@@ -96,11 +96,11 @@ Cette méthode accepte deux tableaux comme arguments :
 - ``$separator`` : Un tableau d'attributs pour le template ``separator``.
   Voici les propriétés disponibles :
 
-    - **separator** La chaîne qui sera utilisée comme séparateur
-    - **innerAttrs** Pour fournir des attributs dans le cas où votre séparateur
-      est en deux éléments
-    - **templateVars** Vous permet de définir des variables de templates
-      personnalisées dans le template
+  - **separator** La chaîne qui sera utilisée comme séparateur
+  - **innerAttrs** Pour fournir des attributs dans le cas où votre séparateur
+    est en deux éléments
+  - **templateVars** Vous permet de définir des variables de templates
+    personnalisées dans le template
 
   Toutes les autres propriétés seront converties en attributs HTML et
   remplaceront la clé **attrs** dans le template. Si vous fournissez un tableau
@@ -108,7 +108,7 @@ Cette méthode accepte deux tableaux comme arguments :
 
 Voici un exemple d'affichage d'un fil d'Ariane::
 
-    echo $this->BreadcrumbsHelper->render(
+    echo $this->Breadcrumbs->render(
         ['class' => 'breadcrumbs-trail'],
         ['separator' => '<i class="fa fa-angle-right"></i>']
     );
@@ -167,7 +167,7 @@ Si vous voulez déclarez des attributs HTML à l'élément et ses sous-élément
 vous pouvez utiliser la clé ``innerAttrs`` supportée par l'argument ``$options``.
 Toutes les clés exceptées ``innerAttrs`` et ``templateVars`` seront affichés
 comme attributs HTML::
-    
+
     $this->Breadcrumbs->add(
         'Produits',
         ['controller' => 'products', 'action' => 'index'],

@@ -6,7 +6,7 @@ Validation
 The validation package in CakePHP provides features to build validators that can
 validate arbitrary arrays of data with ease. You can find a `list of available
 Validation rules in the API
-<http://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`__.
+<https://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`__.
 
 .. _creating-validators:
 
@@ -103,9 +103,9 @@ allow a field to be empty. Both ``allowEmpty()`` and ``notEmpty()`` support a
 mode parameter that allows you to control when a field can or cannot be empty:
 
 * ``false`` The field is not allowed to be empty.
-* ``create`` The field is required when validating a **create**
+* ``create`` The field can be empty when validating a **create**
   operation.
-* ``update`` The field is required when validating an **update**
+* ``update`` The field can be empty when validating an **update**
   operation.
 
 The values ``''``, ``null`` and ``[]`` (empty array) will cause validation
@@ -116,8 +116,8 @@ accepted.
 An example of these methods in action is::
 
     $validator->allowEmpty('published')
-        ->notEmpty('title', 'A title is required')
-        ->notEmpty('body', 'A body is required', 'create')
+        ->notEmpty('title', 'Title cannot be empty')
+        ->notEmpty('body', 'Body cannot be empty', 'create')
         ->allowEmpty('header_image', 'update');
 
 Marking Rules as the Last to Run
@@ -515,7 +515,7 @@ class. The Validation class contains a variety of static methods that provide
 validators for several common validation situations.
 
 The `API documentation
-<http://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`_ for the
+<https://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`_ for the
 ``Validation`` class provides a good list of the validation rules that are
 available, and their basic usage.
 

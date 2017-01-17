@@ -59,6 +59,8 @@ the plugin. You can load plugins one by one, or all of them with a single
 method::
 
     // In config/bootstrap.php
+    // Or in Application::bootstrap()
+
     // Loads a single plugin
     Plugin::load('ContactManager');
 
@@ -130,7 +132,8 @@ The ``load()`` and ``loadAll()`` methods can assist with plugin configuration
 and routing. Perhaps you want to load all plugins automatically while specifying
 custom routes and bootstrap files for certain plugins::
 
-    // in config/bootstrap.php
+    // In config/bootstrap.php,
+    // or in Application::bootstrap()
 
     // Using loadAll()
     Plugin::loadAll([
@@ -480,6 +483,14 @@ Contacts controller you could make the following file::
 Creating this file would allow you to override
 **plugins/ContactManager/src/Template/Contacts/index.ctp**.
 
+If your plugin is in a composer dependency (i.e. 'TheVendor/ThePlugin'), the
+path to the 'index' view of the Custom controller will be::
+
+    src/Template/Plugin/TheVendor/ThePlugin/Custom/index.ctp
+
+Creating this file would allow you to override
+**vendor/thevendor/theplugin/src/Template/Custom/index.ctp**.
+
 .. _plugin-assets:
 
 
@@ -584,7 +595,7 @@ Publish Your Plugin
 ===================
 
 Make sure you add your plugin to
-`plugins.cakephp.org <http://plugins.cakephp.org>`_. This way other people can
+`plugins.cakephp.org <https://plugins.cakephp.org>`_. This way other people can
 use it as composer dependency.
 You can also propose your plugin to the
 `awesome-cakephp list <https://github.com/FriendsOfCake/awesome-cakephp>`_.

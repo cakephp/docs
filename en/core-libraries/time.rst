@@ -39,7 +39,7 @@ to power its ``Time`` utility. Anything you can do with ``Chronos`` and
     <https://github.com/briannesbitt/Carbon>`__.
 
 For more details on Chronos please see `the API documentation
-<http://api.cakephp.org/chronos/1.0/>`_.
+<https://api.cakephp.org/chronos/1.0/>`_.
 
 .. start-time
 

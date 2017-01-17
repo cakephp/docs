@@ -12,6 +12,11 @@ Logging
     You can refer to the English version in the select top menu to have
     information about this page's topic.
 
+.. _log-configuration:
+
+Logging Configuration
+=====================
+
 .. meta::
     :title lang=ja: Logging
     :description lang=ja: Log CakePHP data to the disk to help debug your application over longer periods of time.
