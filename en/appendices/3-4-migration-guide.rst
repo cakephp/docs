@@ -276,7 +276,7 @@ Behavior Changes
 ================
 
 While these changes are API compatible, they represent minor variances in
-behavior that may effect your application:
+behavior that may affect your application:
 
 * ``ORM\Query`` results will not typecast aliased columns based on the original
   columns type. For example if you alias ``created`` to ``created_time`` you
