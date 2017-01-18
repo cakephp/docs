@@ -1016,7 +1016,7 @@ Ne pas générer le fichier ``schema.lock``
 .. versionadded:: cakephp/migrations 1.6.5
 
 Pour que la fonctionnalité de "diff" fonctionne, un fichier **.lock** est
-généré à chaque que vous faite un migrate, un rollback ou que vous générer un
+généré à chaque que vous faites un migrate, un rollback ou que vous générez un
 snapshot via bake pour permettre de suivre l'état de votre base de données à
 n'importe quel moment. Vous pouvez empêcher que ce fichier ne soit généré,
 comme par exemple lors d'un déploiement sur votre environnement de production,
