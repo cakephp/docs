@@ -279,7 +279,7 @@ While these changes are API compatible, they represent minor variances in
 behavior that may affect your application:
 
 * ``ORM\Query`` results will not typecast aliased columns based on the original
-  columns type. For example if you alias ``created`` to ``created_time`` you
+  column's type. For example if you alias ``created`` to ``created_time`` you
   will now get a ``Time`` object back instead of a string.
 * Internal ORM traits used to build Association classes have been removed and
   replaced with new internal APIs. This shouldn't impact your applications, but
