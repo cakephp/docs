@@ -493,80 +493,80 @@ as well as HTML attributes. This subsection will cover the options specific to
   ``'type'`` you will force the type of the generated input, overriding model
   introspection. Defaults to ``null``.
 
-      E.g. ::
+  E.g. ::
 
-          echo $this->Form->input('field', ['type' => 'file']);
-          echo $this->Form->input('email', ['type' => 'email']);
+      echo $this->Form->input('field', ['type' => 'file']);
+      echo $this->Form->input('email', ['type' => 'email']);
 
-      Output:
+  Output:
 
-      .. code-block:: html
+  .. code-block:: html
 
-          <div class="input file">
-              <label for="field">Field</label>
-              <input type="file" name="field" value="" id="field" />
-          </div>
-          <div class="input email">
-              <label for="email">Email</label>
-              <input type="email" name="email" value="" id="email" />
-          </div>
+      <div class="input file">
+          <label for="field">Field</label>
+          <input type="file" name="field" value="" id="field" />
+      </div>
+      <div class="input email">
+          <label for="email">Email</label>
+          <input type="email" name="email" value="" id="email" />
+      </div>
 
 * ``$options['label']`` - Either a string caption or an array of
   :ref:`options for the label<create-label>`. You can set this key to the
   string you would like to be displayed within the label that usually
   accompanies the input. Defaults to ``null``.
 
-      E.g. ::
+  E.g. ::
 
-          echo $this->Form->input('name', [
-              'label' => 'The User Alias'
-          ]);
+      echo $this->Form->input('name', [
+          'label' => 'The User Alias'
+      ]);
 
-      Output:
+  Output:
 
-      .. code-block:: html
+  .. code-block:: html
 
-          <div class="input">
-              <label for="name">The User Alias</label>
-              <input name="name" type="text" value="" id="name" />
-          </div>
+      <div class="input">
+          <label for="name">The User Alias</label>
+          <input name="name" type="text" value="" id="name" />
+      </div>
 
   Alternatively, set this key to ``false`` to disable the generation of the
   ``label`` element.
 
-      E.g. ::
+  E.g. ::
 
-          echo $this->Form->input('name', ['label' => false]);
+      echo $this->Form->input('name', ['label' => false]);
 
-      Output:
+  Output:
 
-      .. code-block:: html
+  .. code-block:: html
 
-          <div class="input">
-              <input name="name" type="text" value="" id="name" />
-          </div>
+      <div class="input">
+          <input name="name" type="text" value="" id="name" />
+      </div>
 
   Set this to an array to provide additional options for the
   ``label`` element. If you do this, you can use a ``'text'`` key in
   the array to customize the label text.
 
-      E.g. ::
+  E.g. ::
 
-          echo $this->Form->input('name', [
-              'label' => [
-                  'class' => 'thingy',
-                  'text' => 'The User Alias'
-              ]
-          ]);
+      echo $this->Form->input('name', [
+          'label' => [
+              'class' => 'thingy',
+              'text' => 'The User Alias'
+          ]
+      ]);
 
-      Output:
+  Output:
 
-      .. code-block:: html
+  .. code-block:: html
 
-          <div class="input">
-              <label for="name" class="thingy">The User Alias</label>
-              <input name="name" type="text" value="" id="name" />
-          </div>
+      <div class="input">
+          <label for="name" class="thingy">The User Alias</label>
+          <input name="name" type="text" value="" id="name" />
+      </div>
 
 * ``$options['options']`` - You can provide in here an array containing
   the elements to be generated for widgets such as ``radio`` or ``select``,
@@ -579,18 +579,18 @@ as well as HTML attributes. This subsection will cover the options specific to
   disable the error message output & field classes set the ``'error'`` key to
   ``false``. Defaults to ``null``.
 
-      E.g. ::
+  E.g. ::
 
-          echo $this->Form->input('name', ['error' => false]);
+      echo $this->Form->input('name', ['error' => false]);
 
   To override the model error messages use an array with
   the keys matching the original validation error messages.
 
-      E.g. ::
+  E.g. ::
 
-          $this->Form->input('name', [
-              'error' => ['Not long enough' => __('This is not long enough')]
-          ]);
+      $this->Form->input('name', [
+          'error' => ['Not long enough' => __('This is not long enough')]
+      ]);
 
   As seen above you can set the error message for each validation
   rule you have in your models. In addition you can provide i18n
@@ -642,15 +642,15 @@ as follows:
   field (or if no data is passed at all). An explicit default value will
   override any default values defined in the schema.
 
-      Example usage::
+  Example usage::
 
-          echo $this->Form->text('ingredient', ['default' => 'Sugar']);
+      echo $this->Form->text('ingredient', ['default' => 'Sugar']);
 
-      Example with ``select`` field (size "Medium" will be selected as
-      default)::
+  Example with ``select`` field (size "Medium" will be selected as
+  default)::
 
-          $sizes = ['s' => 'Small', 'm' => 'Medium', 'l' => 'Large'];
-          echo $this->Form->select('size', $sizes, ['default' => 'm']);
+      $sizes = ['s' => 'Small', 'm' => 'Medium', 'l' => 'Large'];
+      echo $this->Form->select('size', $sizes, ['default' => 'm']);
 
   .. note::
 
@@ -798,25 +798,25 @@ couple of specific options:
 * ``'escape'`` - Determines whether or not the contents of the textarea should
   be escaped. Defaults to ``true``.
 
-      E.g. ::
+  E.g. ::
 
-          echo $this->Form->textarea('notes', ['escape' => false]);
-          // OR....
-          echo $this->Form->input('notes', ['type' => 'textarea', 'escape' => false]);
+      echo $this->Form->textarea('notes', ['escape' => false]);
+      // OR....
+      echo $this->Form->input('notes', ['type' => 'textarea', 'escape' => false]);
 
 * ``'rows', 'cols'`` - You can use these two keys to set the HTML attributes
   which specify the number of rows and columns for the ``textarea`` field.
 
-      E.g. ::
+  E.g. ::
 
-          echo $this->Form->textarea('comment', ['rows' => '5', 'cols' => '5']);
+      echo $this->Form->textarea('comment', ['rows' => '5', 'cols' => '5']);
 
-      Output:
+  Output:
 
-      .. code-block:: html
+  .. code-block:: html
 
-          <textarea name="comment" cols="5" rows="5">
-          </textarea>
+      <textarea name="comment" cols="5" rows="5">
+      </textarea>
 
 Creating Select, Checkbox and Radio Inputs
 ------------------------------------------
@@ -842,13 +842,11 @@ methods are described in each method's own section.)
     selected when the form is rendered (in this case ``'value'`` must be
     assigned a valid, existent element value). May also be used in
     combination with any select-type input,
-    such as ``date()``, ``time()``, ``datetime()``:
+    such as ``date()``, ``time()``, ``datetime()``::
 
-        ::
-
-            echo $this->Form->time('close_time', [
-                'value' => '13:30:00'
-            ]);
+        echo $this->Form->time('close_time', [
+            'value' => '13:30:00'
+        ]);
 
   .. note::
 
@@ -857,15 +855,13 @@ methods are described in each method's own section.)
 
   For a ``select`` input where you set the ``'multiple'`` attribute to
   ``true``, you can provide an array with the values you want to select
-  by default:
+  by default::
 
-      ::
-
-          // HTML <option> elements with values 1 and 3 will be rendered preselected
-          echo $this->Form->select('rooms', [
-              'multiple' => true,
-              'value' => [1, 3]
-          ]);
+      // HTML <option> elements with values 1 and 3 will be rendered preselected
+      echo $this->Form->select('rooms', [
+          'multiple' => true,
+          'value' => [1, 3]
+      ]);
 
 * ``'empty'`` - Applies to ``radio()`` and ``select()``. Defaults to ``false``.
 
@@ -877,28 +873,26 @@ methods are described in each method's own section.)
   * When passed to a ``select`` method, this creates a blank HTML ``option``
     element with an empty value in your drop down list. If you want to have an
     empty value with text displayed instead of just a blank ``option``, pass a
-    string to ``'empty'``:
+    string to ``'empty'``::
 
-        ::
+        echo $this->Form->select(
+            'field',
+            [1, 2, 3, 4, 5],
+            ['empty' => '(choose one)']
+        );
 
-            echo $this->Form->select(
-                'field',
-                [1, 2, 3, 4, 5],
-                ['empty' => '(choose one)']
-            );
+    Output:
 
-        Output:
+    .. code-block:: html
 
-        .. code-block:: html
-
-            <select name="field">
-                <option value="">(choose one)</option>
-                <option value="0">1</option>
-                <option value="1">2</option>
-                <option value="2">3</option>
-                <option value="3">4</option>
-                <option value="4">5</option>
-            </select>
+        <select name="field">
+            <option value="">(choose one)</option>
+            <option value="0">1</option>
+            <option value="1">2</option>
+            <option value="2">3</option>
+            <option value="3">4</option>
+            <option value="4">5</option>
+        </select>
 
 * ``'hiddenField'`` - For checkboxes and radio buttons, by default,
   a hidden ``input`` element is also created, along with the main
@@ -906,76 +900,74 @@ methods are described in each method's own section.)
   will exist even without a value specified. For checkboxes its value
   defaults to ``0`` and for radio buttons to ``''``.
 
-      Example of default output:
+  Example of default output:
 
-      .. code-block:: html
+  .. code-block:: html
 
-          <input type="hidden" name="published" value="0" />
-          <input type="checkbox" name="published" value="1" />
+      <input type="hidden" name="published" value="0" />
+      <input type="checkbox" name="published" value="1" />
 
-  This can be disabled by setting ``'hiddenField'`` to ``false``.
+  This can be disabled by setting ``'hiddenField'`` to ``false``::
 
-      E.g. ::
+      echo $this->Form->checkbox('published', ['hiddenField' => false]);
 
-          echo $this->Form->checkbox('published', ['hiddenField' => false]);
+  Which outputs:
 
-      Which outputs:
+  .. code-block:: html
 
-      .. code-block:: html
-
-          <input type="checkbox" name="published" value="1">
+      <input type="checkbox" name="published" value="1">
 
   If you want to create multiple blocks of inputs on a form, that are
   all grouped together, you should set this parameter to ``false`` on all
   inputs except the first. If the hidden input is on the page in multiple
   places, only the last group of inputs' values will be saved.
 
-      In this example, only the tertiary colors would be passed, and the
-      primary colors would be overridden:
+  In this example, only the tertiary colors would be passed, and the
+  primary colors would be overridden:
 
-      .. code-block:: html
+  .. code-block:: html
 
-          <h2>Primary Colors</h2>
-          <input type="hidden" name="color" value="0" />
-          <label for="color-red">
-              <input type="checkbox" name="color[]" value="5" id="color-red" />
-              Red
-          </label>
+      <h2>Primary Colors</h2>
+      <input type="hidden" name="color" value="0" />
+      <label for="color-red">
+          <input type="checkbox" name="color[]" value="5" id="color-red" />
+          Red
+      </label>
 
-          <label for="color-blue">
-              <input type="checkbox" name="color[]" value="5" id="color-blue" />
-              Blue
-          </label>
+      <label for="color-blue">
+          <input type="checkbox" name="color[]" value="5" id="color-blue" />
+          Blue
+      </label>
 
-          <label for="color-yellow">
-              <input type="checkbox" name="color[]" value="5" id="color-yellow" />
-              Yellow
-          </label>
+      <label for="color-yellow">
+          <input type="checkbox" name="color[]" value="5" id="color-yellow" />
+          Yellow
+      </label>
 
-          <h2>Tertiary Colors</h2>
-          <input type="hidden" name="color" value="0" />
-          <label for="color-green">
-              <input type="checkbox" name="color[]" value="5" id="color-green" />
-              Green
-          </label>
-          <label for="color-purple">
-              <input type="checkbox" name="color[]" value="5" id="color-purple" />
-              Purple
-          </label>
-          <label for="color-orange">
-              <input type="checkbox" name="color[]" value="5" id="color-orange" />
-              Orange
-          </label>
+      <h2>Tertiary Colors</h2>
+      <input type="hidden" name="color" value="0" />
+      <label for="color-green">
+          <input type="checkbox" name="color[]" value="5" id="color-green" />
+          Green
+      </label>
+      <label for="color-purple">
+          <input type="checkbox" name="color[]" value="5" id="color-purple" />
+          Purple
+      </label>
+      <label for="color-orange">
+          <input type="checkbox" name="color[]" value="5" id="color-orange" />
+          Orange
+      </label>
 
   Disabling ``'hiddenField'`` on the second input group would
   prevent this behavior.
 
-      You can set a hidden field to a value other than 0, such as 'N'::
+  You can set a hidden field to a value other than 0, such as 'N'::
 
-          echo $this->Form->checkbox('published', [
-              'value' => 'Y',
-              'hiddenField' => 'N',
-          ]);
+      echo $this->Form->checkbox('published', [
+          'value' => 'Y',
+          'hiddenField' => 'N',
+      ]);
 
 Creating Checkboxes
 ~~~~~~~~~~~~~~~~~~~
@@ -1282,123 +1274,123 @@ certain behaviors of the ``select()`` method.
   to ``true`` (the default value is ``false``) to add a blank option with an
   empty value at the top of your dropdown list.
 
-      For example::
+  For example::
 
-          $options = ['M' => 'Male', 'F' => 'Female'];
-          echo $this->Form->select('gender', $options, ['empty' => true]);
+      $options = ['M' => 'Male', 'F' => 'Female'];
+      echo $this->Form->select('gender', $options, ['empty' => true]);
 
-      Will output:
+  Will output:
 
-      .. code-block:: html
+  .. code-block:: html
 
-          <select name="gender">
-              <option value=""></option>
-              <option value="M">Male</option>
-              <option value="F">Female</option>
-          </select>
+      <select name="gender">
+          <option value=""></option>
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+      </select>
 
 * ``'escape'`` - The ``select()`` method allows for an attribute
   called ``'escape'`` which accepts a boolean value and determines
   whether to HTML entity encode the contents of the ``select``'s ``option``
   elements.
 
-      E.g. ::
+  E.g. ::
 
-          // This will prevent HTML-encoding the contents of each option element
-          $options = ['M' => 'Male', 'F' => 'Female'];
-          echo $this->Form->select('gender', $options, ['escape' => false]);
+      // This will prevent HTML-encoding the contents of each option element
+      $options = ['M' => 'Male', 'F' => 'Female'];
+      echo $this->Form->select('gender', $options, ['escape' => false]);
 
 
 * ``'multiple'`` - If set to ``true``, the select picker will allow
   multiple selections.
 
-      E.g. ::
+  E.g. ::
 
-          echo $this->Form->select('field', $options, ['multiple' => true]);
+      echo $this->Form->select('field', $options, ['multiple' => true]);
 
-      Alternatively, set ``'multiple'`` to ``'checkbox'`` in order to output a
-      list of related checkboxes::
+  Alternatively, set ``'multiple'`` to ``'checkbox'`` in order to output a
+  list of related checkboxes::
 
-          $options = [
-              'Value 1' => 'Label 1',
-              'Value 2' => 'Label 2'
-          ];
-          echo $this->Form->select('field', $options, [
-              'multiple' => 'checkbox'
-          ]);
+      $options = [
+          'Value 1' => 'Label 1',
+          'Value 2' => 'Label 2'
+      ];
+      echo $this->Form->select('field', $options, [
+          'multiple' => 'checkbox'
+      ]);
 
-      Output:
+  Output:
 
-      .. code-block:: html
+  .. code-block:: html
 
-          <input name="field" value="" type="hidden">
-          <div class="checkbox">
-              <label for="field-1">
-                  <input name="field[]" value="Value 1" id="field-1" type="checkbox">
-                  Label 1
-              </label>
-          </div>
-          <div class="checkbox">
-              <label for="field-2">
-                  <input name="field[]" value="Value 2" id="field-2" type="checkbox">
-                  Label 2
-              </label>
-          </div>
+      <input name="field" value="" type="hidden">
+      <div class="checkbox">
+          <label for="field-1">
+              <input name="field[]" value="Value 1" id="field-1" type="checkbox">
+              Label 1
+          </label>
+      </div>
+      <div class="checkbox">
+          <label for="field-2">
+              <input name="field[]" value="Value 2" id="field-2" type="checkbox">
+              Label 2
+          </label>
+      </div>
 
 * ``'disabled'`` - This option can be set in order to disable all or some
   of the ``select``'s ``option`` items. To disable all items set ``'disabled'``
   to ``true``. To disable only certain items, assign to ``'disabled'``
   an array containing the keys of the items to be disabled.
 
-      E.g. ::
+  E.g. ::
 
-          $options = [
-              'M' => 'Masculine',
-              'F' => 'Feminine',
-              'N' => 'Neuter'
-          ];
-          echo $this->Form->select('gender', $options, [
-              'disabled' => ['M', 'N']
-          ]);
+      $options = [
+          'M' => 'Masculine',
+          'F' => 'Feminine',
+          'N' => 'Neuter'
+      ];
+      echo $this->Form->select('gender', $options, [
+          'disabled' => ['M', 'N']
+      ]);
 
-      Will output:
+  Will output:
 
-      .. code-block:: html
+  .. code-block:: html
 
-          <select name="gender">
-              <option value="M" disabled="disabled">Masculine</option>
-              <option value="F">Feminine</option>
-              <option value="N" disabled="disabled">Neuter</option>
-          </select>
+      <select name="gender">
+          <option value="M" disabled="disabled">Masculine</option>
+          <option value="F">Feminine</option>
+          <option value="N" disabled="disabled">Neuter</option>
+      </select>
 
-      This option also works when ``'multiple'`` is set to ``'checkbox'``::
+  This option also works when ``'multiple'`` is set to ``'checkbox'``::
 
-          $options = [
-              'Value 1' => 'Label 1',
-              'Value 2' => 'Label 2'
-          ];
-          echo $this->Form->select('field', $options, [
-              'multiple' => 'checkbox',
-              'disabled' => ['Value 1']
-          ]);
+      $options = [
+          'Value 1' => 'Label 1',
+          'Value 2' => 'Label 2'
+      ];
+      echo $this->Form->select('field', $options, [
+          'multiple' => 'checkbox',
+          'disabled' => ['Value 1']
+      ]);
 
-      Output:
+  Output:
 
-      .. code-block:: html
+  .. code-block:: html
 
-          <input name="field" value="" type="hidden">
-          <div class="checkbox">
-              <label for="field-1">
-                  <input name="field[]" disabled="disabled" value="Value 1" type="checkbox">
-                  Label 1
-              </label>
-          </div>
-          <div class="checkbox">
-              <label for="field-2">
-                  <input name="field[]" value="Value 2" id="field-2" type="checkbox">
-                  Label 2
-              </label>
-          </div>
+      <input name="field" value="" type="hidden">
+      <div class="checkbox">
+          <label for="field-1">
+              <input name="field[]" disabled="disabled" value="Value 1" type="checkbox">
+              Label 1
+          </label>
+      </div>
+      <div class="checkbox">
+          <label for="field-2">
+              <input name="field[]" value="Value 2" id="field-2" type="checkbox">
+              Label 2
+          </label>
+      </div>
 
 Creating File Inputs
 --------------------
