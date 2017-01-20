@@ -9,7 +9,7 @@ Session
     SessionHelperは3.xで非推奨になりました。代わりに、
     :doc:`FlashHelper </views/helpers/flash>` を使用するか、 :ref:`セッションオブジェクトへアクセス<accessing-session-object>` する必要があります。
 
-SessionヘルパーはSessionオブジェクトのほとんどの機能を複製し、それをあなたのビューで利用できるようにします。
+SessionヘルパーはSessionオブジェクトのほとんどの機能を複製し、それをビューで利用できるようにします。
 
 SessionヘルパーとSessionオブジェクトの主な違いは、
 ヘルパーがセッションに書き込む能力を *持たない* ことです。
@@ -21,7 +21,7 @@ Sessionオブジェクトと同様に、データは :term:`ドット記法` 配
     ]];
 
 上記の配列構造では、ノードは ``User.username`` によってアクセスされ、ドットはネストされた配列を示します。
-この記法は、 ``$key`` が使用されている場合でも、すべてのSessionヘルパーメソッドに使用されます。
+この記法は、 ``$key`` が使用されている、すべてのSessionヘルパーメソッドで使用されます。
 
 .. php:method:: read(string $key)
 
@@ -39,6 +39,6 @@ Sessionオブジェクトと同様に、データは :term:`ドット記法` 配
 
 .. meta::
     :title lang=ja: Sessionヘルパー
-    :description lang=ja: Sessionヘルパーはほとんどの機能を複製し、あなたのビューから利用できるようにします。
+    :description lang=ja: SessionヘルパーはSessionオブジェクトのほとんどの機能を複製し、それをビューから利用できるようにします。
     :keywords lang=ja: Sessionヘルパー,フラッシュメッセージ,セッションフラッシュ,セッションリード,セッションチェック
     :keywords lang=en: session helper,flash messages,session flash,session read,session check
