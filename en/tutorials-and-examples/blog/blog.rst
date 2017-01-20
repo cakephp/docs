@@ -36,7 +36,8 @@ Or, you can download ``composer.phar`` from the
 
 Then simply type the following line in your terminal from your
 installation directory to install the CakePHP application skeleton
-in the directory that you wish to use it with. For this example we will be using "blog" but feel free to change it to something else.  ::
+in the directory that you wish to use it with. For this example we will be using
+"blog" but feel free to change it to something else.::
 
     php composer.phar create-project --prefer-dist cakephp/app blog
 
