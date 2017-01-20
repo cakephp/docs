@@ -1,5 +1,5 @@
-Contents
-########
+Содержание
+##########
 
 .. toctree::
    :hidden:
@@ -90,5 +90,5 @@ Contents
 .. todolist::
 
 .. meta::
-    :title lang=ru: Contents
-    :keywords lang=ru: core libraries,ref search,shells,deployment,appendices,glossary,models
+    :title lang=ru: Содержание
+    :keywords lang=ru: библиотеки ядра,поиск ссылок,оболочки,развертывание,приложения,глоссарий,модели

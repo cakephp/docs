@@ -1,10 +1,10 @@
-Where to Get Help
-#################
+Где получить помощь
+###################
 
 .. _cakephp-official-communities:
 
-Official CakePHP Forum
-======================
+Официальный форум CakePHP
+=========================
 
 .. meta::
     :title lang=ru: Where to Get Help

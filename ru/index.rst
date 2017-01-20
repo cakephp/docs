@@ -1,5 +1,5 @@
-Welcome
-#######
+Добро пожаловать
+################
 
 .. note::
     The documentation is not currently supported in Russian language for this
@@ -14,15 +14,15 @@ Welcome
 
 .. container:: offline-download
 
-    **Read the Book Anywhere**
+    **Читайте руководство где угодно**
 
     .. image:: /_static/img/read-the-book.jpg
 
-    Enjoy the CakePHP cookbook almost anywhere. Available as both a PDF and
-    EPUB, you can now read it on more devices, as well as offline.
+    Наслаждайтесь книгой рецептов CakePHP почти везде. Она дступна как в формате PDF,
+    так и в EPUB, вы можете теперь читать ее на многих устройствах, даже офлайн.
 
-    - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
-    - `EPUB <../_downloads/en/CakePHPCookbook.epub>`_
+    - `PDF <../_downloads/ru/CakePHPCookbook.pdf>`_
+    - `EPUB <../_downloads/ru/CakePHPCookbook.epub>`_
     - `Original Source <http://github.com/cakephp/docs>`_
 
     .. note::

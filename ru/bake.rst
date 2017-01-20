@@ -1,4 +1,4 @@
-Bake Console
+Консоль Bake
 ############
 
 .. note::
@@ -19,5 +19,5 @@ Bake Console
     bake/development
 
 .. meta::
-    :title lang=ru: Bake Console
-    :keywords lang=ru: command line interface,development,bake view, bake template syntax,erb tags,asp tags,percent tags
+    :title lang=ru: Консоль Bake
+    :keywords lang=ru: интерфейс командной строки,разработка,bake view, bake template syntax,erb tags,asp tags,percent tags
