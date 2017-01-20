@@ -162,50 +162,7 @@ Creating JSON Views
 The JsonView class supports the ``_jsonOptions`` variable that allows you to
 customize the bit-mask used to generate JSON. See the
 `json_encode <http://php.net/json_encode>`_ documentation for the valid
-values of this option.::
-
-    // Controller code
-    class VideosController extends AppController
-    {
-    
-        // ....
-        
-        public function export($format = '')
-        {
-            $format = mb_convert_case($format, MB_CASE_LOWER);
-            
-            // Format Out
-            $formats = [
-              'xml' => 'Xml',
-              'json' => 'Json',
-            ];
-            
-            // Exists Format Out..?
-            if ( isset($formats[$format]) === true ) {
-            
-                // Set Out Format View
-                $this->viewBuilder()->className( $formats[$format] );
-
-                // Set Force Download
-                $this->response->download('report-' . date('YmdHis') . '.'.$format);
-                
-                // Get data
-                $videos = $this->get_data_videos();
-
-                // Set Data View
-                $this->set(compact('videos'));
-                $this->set('_serialize', ['videos']);
-                
-            } else {
-                // use NotFoundException Exception
-                throw new NotFoundException(__('404 Upsss!!! File Not Found'));
-            }
-            
-        }
-        
-        // ....
-    }
-
+values of this option.
 
 JSONP Responses
 ---------------
@@ -216,3 +173,49 @@ check if query string parameter named "callback" is set and if so wrap the json
 response in the function name provided. If you want to use a custom query string
 parameter name instead of "callback" set ``_jsonp`` to required name instead of
 ``true``.
+
+Example Usage
+=============
+
+While the :doc:`RequestHandlerComponent
+</controllers/components/request-handling>` can automatically set the view based
+on the request content-type or extension, you could also handle view
+mappings in your controller::
+
+    // src/Controller/VideosController.php
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use Cake\Network\Exception\NotFoundException;
+
+    class VideosController extends AppController
+    {
+        public function export($format = '')
+        {
+            $format = strtolower($format);
+
+            // Format to view mapping
+            $formats = [
+              'xml' => 'Xml',
+              'json' => 'Json',
+            ];
+
+            // Error on unknown type
+            if (!isset($formats[$format])) {
+                throw new NotFoundException(__('Unknown format.'));
+            }
+
+            // Set Out Format View
+            $this->viewBuilder()->className($formats[$format]);
+
+            // Set Force Download
+            $this->response->download('report-' . date('YmdHis') . '.' . $format);
+
+            // Get data
+            $videos = $this->Videos->find('latest');
+
+            // Set Data View
+            $this->set(compact('videos'));
+            $this->set('_serialize', ['videos']);
+        }
+    }
