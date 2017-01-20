@@ -14,7 +14,7 @@ SessionヘルパーはSessionオブジェクトのほとんどの機能を複製
 SessionヘルパーとSessionオブジェクトの主な違いは、
 ヘルパーがセッションに書き込む能力を *持たない* ことです。
 
-Sessionオブジェクトと同様に、データは :term:`dot notation` 配列構造を使用して読み取られます。::
+Sessionオブジェクトと同様に、データは :term:`ドット記法` 配列構造を使用して読み取られます。::
 
     ['User' => [
         'username' => 'super@example.com'
