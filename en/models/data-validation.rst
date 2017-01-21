@@ -635,7 +635,7 @@ with usage examples.
         );
 
     The data is checked by number of characters, not number of bytes.
-    If you want to validate against pure ASCII input instead of UTF-8 compatible, 
+    If you want to validate against pure ASCII input instead of UTF-8 compatible,
     you will have to write your own custom validators.
 
 .. php:staticmethod:: blank(mixed $check)
@@ -986,6 +986,20 @@ with usage examples.
     This will ensure that the 'login' field is less than or equal to 15
     characters, not 15 bytes.
 
+.. php:staticmethod:: maxLengthBytes(string $check, integer $max)
+
+    This rule ensures that the data stays within a maximum length
+    requirement::
+
+        public $validate = array(
+            'data' => array(
+                'rule' => array('maxLengthBytes', 2 ** 24 - 1),
+                'message' => 'Data can not be bigger than 16 MB.'
+            )
+        );
+
+    This will ensure that the 'data' field is less than or equal to 16777215 bytes.
+
 .. php:staticmethod:: mimeType(mixed $check, array|string $mimeTypes)
 
     .. versionadded:: 2.2
@@ -1022,8 +1036,22 @@ with usage examples.
         );
 
     The length here is number of characters, not the number of bytes.
-    If you want to validate against pure ASCII input instead of UTF-8 compatible, 
+    If you want to validate against pure ASCII input instead of UTF-8 compatible,
     you will have to write your own custom validators.
+
+.. php:staticmethod:: minLengthBytes(string $check, integer $min)
+
+    This rule ensures that the data meets a minimum length
+    requirement::
+
+        public $validate = array(
+            'login' => array(
+                'rule' => array('minLengthBytes', 2 ** 16 - 1),
+                'message' => 'Data can not be smaller than 64KB.'
+            )
+        );
+
+    The length here is number of bytes.
 
 .. php:staticmethod:: money(string $check, string $symbolPosition = 'left')
 
