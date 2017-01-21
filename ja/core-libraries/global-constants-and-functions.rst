@@ -95,11 +95,18 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 	このメソッドを呼ぶと、渡された ``$var`` を返します。例えば、return 文に
 	このメソッドを置くことができます。
 
-    コア ``$debug`` 変数が ``true`` であれば、 ``$var`` がプリントアウトされる。
+    コア ``$debug`` 変数が ``true`` であれば、 ``$var`` が出力されます。
     ``$showHTML`` が ``true`` あるいは ``null`` のままであればデータはブラウザ表示に
     相応しいように描画されます。 ``$showFrom`` が ``false`` にセットされない場合、
     それがコールされた行の情報を伴ってデバグ情報の出力が始まります。
     :doc:`/development/debugging` もご覧ください。
+
+.. php:function:: dd(mixed $var, boolean $showHtml = null)
+
+    ``debug()`` のように動作しますが、実行を終了します。
+    コア ``$debug`` 変数が ``true`` であれば、 ``$var`` が出力されます。
+    ``$showHTML`` が ``true`` あるいは ``null`` のままであればデータはブラウザ表示に
+    相応しいように描画されます。 :doc:`/development/debugging` もご覧ください
 
 .. php:function:: pr(mixed $var)
 
