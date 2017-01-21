@@ -992,6 +992,19 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     Ceci va s'assurer que le champ 'login' est inférieur ou égal à 15
     caractères, et pas à 15 bytes.
 
+.. php:staticmethod:: maxLengthBytes(string $check, integer $max)
+
+    Cette règle s'assure que la donnée respecte la longueur maximale requise::
+
+        public $validate = array(
+            'data' => array(
+                'rule' => array('maxLengthBytes', 2 ** 24 - 1),
+                'message' => 'La donnée ne peut pas faire plus de 16 MB.'
+            )
+        );
+
+    Ceci va s'assurer que le champ "data" est inférieur ou égal à 16777215 bytes.
+
 .. php:staticmethod:: mimeType(mixed $check, array|string $mimeTypes)
 
     .. versionadded:: 2.2
@@ -1018,8 +1031,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
 .. php:staticmethod:: minLength(string $check, integer $min)
 
-    Cette règle s'assure que les données ont une obligation de longueur
-    minimum::
+    Cette règle s'assure que les données aient une longueur minimum::
 
         public $validate = array(
             'login' => array(
@@ -1029,6 +1041,19 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
         );
 
     La longueur ici est le nombre de caractères, et pas le nombre de bytes.
+
+.. php:staticmethod:: minLengthBytes(string $check, integer $min)
+
+    Cette règle s'assure que les données aient une longueur minimum::
+
+        public $validate = array(
+            'login' => array(
+                'rule' => array('minLengthBytes', 2 ** 16 - 1),
+                'message' => 'La donnée ne peut pas faire moins de 64KB.'
+            )
+        );
+
+    La longueur est ici un nombre de bytes.
 
 .. php:staticmethod:: money(string $check, string $symbolPosition = 'left')
 
