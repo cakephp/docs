@@ -348,9 +348,9 @@ Erreur
 Event
 =====
 
-* ``Event::data()`` a été ajoutée.
+* ``Event::getData()`` a été ajoutée.
 * ``Event::setData()`` a été ajoutée.
-* ``Event::result()`` a été ajoutée.
+* ``Event::getResult()`` a été ajoutée.
 * ``Event::setResult()`` a été ajoutée.
 
 I18n
