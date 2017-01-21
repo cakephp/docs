@@ -116,5 +116,5 @@ et re-rendre la barre de progression selon les besoins::
         'width' => 20,
     ));
 
-    $this->helper->increment(4);
-    $this->helper->draw();
+    $progress->increment(4);
+    $progress->helper->draw();
