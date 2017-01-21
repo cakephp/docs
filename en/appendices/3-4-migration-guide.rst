@@ -334,9 +334,9 @@ Error
 Event
 =====
 
-* ``Event::data()`` was added.
+* ``Event::getData()`` was added.
 * ``Event::setData()`` was added.
-* ``Event::result()`` was added.
+* ``Event::getResult()`` was added.
 * ``Event::setResult()`` was added.
 
 I18n
