@@ -1,8 +1,9 @@
 Guida rapida
 ************
 
-La miglior strada per acquisire esperienza e imparare CakePHP è sedersi e creare qualcosa.
-Per iniziare abbiamo costruito una semplice applicazione di bookmarking.
+La miglior strada per acquisire esperienza e imparare CakePHP è sedersi e creare
+qualcosa. Per iniziare abbiamo costruito una semplice applicazione di
+bookmarking.
 
 .. include:: /tutorials-and-examples/bookmarks/intro.rst
 .. include:: /tutorials-and-examples/bookmarks/part-two.rst
