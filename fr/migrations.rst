@@ -214,6 +214,7 @@ un champ d'email:
 
 * ``email:string?``
 * ``email:string:unique``
+* ``email:string?[50]``
 * ``email:string:unique:EMAIL_INDEX``
 * ``email:string[120]:unique:EMAIL_INDEX``
 
@@ -223,8 +224,8 @@ peut être null.
 Le paramètre ``length`` pour ``fieldType`` est optionnel et doit toujours être
 écrit entre crochets.
 
-Les champs nommés ``created`` et ``modified`` vont automatiquement être définis
-avec le type ``datetime``.
+Les champs nommés ``created`` et ``modified``, tout comme les champs ayant pour
+suffixe ``_at``, vont automatiquement être définis avec le type ``datetime``.
 
 Les types de champ sont ceux qui sont disponibles avec la librairie ``Phinx``.
 Ce sont les suivants:
@@ -1008,3 +1009,21 @@ Dans votre fichier de migration, vous pouvez utiliser la syntaxe suivante::
         $this->table('old_table_name')
             ->rename('new_table_name');
     }
+
+Ne pas générer le fichier ``schema.lock``
+-----------------------------------------
+
+.. versionadded:: cakephp/migrations 1.6.5
+
+Pour que la fonctionnalité de "diff" fonctionne, un fichier **.lock** est
+généré à chaque que vous faites un migrate, un rollback ou que vous générez un
+snapshot via bake pour permettre de suivre l'état de votre base de données à
+n'importe quel moment. Vous pouvez empêcher que ce fichier ne soit généré,
+comme par exemple lors d'un déploiement sur votre environnement de production,
+en utilisant l'option ``--no-lock`` sur les commandes mentionnées ci-dessus::
+
+    $ bin/cake migrations migrate --no-lock
+
+    $ bin/cake migrations rollback --no-lock
+
+    $ bin/cake bake migration_snapshot MyMigration --no-lock

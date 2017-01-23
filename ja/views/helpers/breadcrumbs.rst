@@ -171,5 +171,5 @@ BreadcrumbsHelper は内部で ``StringTemplateTrait`` を使用しています�
 
 .. meta::
     :title lang=ja: BreadcrumbsHelper
-    :description lang=ja: CakePHP の BreadcrumbsHelper の役割は、簡単にパンクスリストを管理する方法を提供することです。
+    :description lang=ja: CakePHP の BreadcrumbsHelper の役割は、簡単にパンくずリストを管理する方法を提供することです。
     :keywords lang=ja: breadcrumbs helper,cakephp crumbs

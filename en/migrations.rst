@@ -210,6 +210,7 @@ For instance, the following are all valid ways of specifying an email field:
 
 * ``email:string?``
 * ``email:string:unique``
+* ``email:string?[50]``
 * ``email:string:unique:EMAIL_INDEX``
 * ``email:string[120]:unique:EMAIL_INDEX``
 
@@ -218,8 +219,8 @@ The question mark following the fieldType will make the column nullable.
 The ``length`` parameter for the ``fieldType`` is optional and should always be
 written between bracket.
 
-Fields named ``created`` and ``modified`` will automatically be set to the type
-``datetime``.
+Fields named ``created`` and ``modified``, as well as any field with a ``_at``
+suffix, will automatically be set to the type ``datetime``.
 
 Field types are those generically made available by the ``Phinx`` library. Those
 can be:
@@ -962,3 +963,20 @@ In your migration file, you can do the following::
         $this->table('old_table_name')
             ->rename('new_table_name');
     }
+
+Skipping the ``schema.lock`` file generation
+--------------------------------------------
+
+.. versionadded:: cakephp/migrations 1.6.5
+
+In order for the diff feature to work, a **.lock** file is generated everytime
+you migrate, rollback or bake a snapshot, to keep track of the state of your
+database schema at any given point in time. You can skip this file generation,
+for instance when deploying on your production environment, by using the
+``--no-lock`` option for the aforementioned command::
+
+    $ bin/cake migrations migrate --no-lock
+
+    $ bin/cake migrations rollback --no-lock
+
+    $ bin/cake bake migration_snapshot MyMigration --no-lock

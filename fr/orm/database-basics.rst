@@ -606,6 +606,7 @@ fichier **config/bootstrap.php** ::
     Type::build('datetime')->useImmutable();
     Type::build('date')->useImmutable();
     Type::build('time')->useImmutable();
+    Type::build('timestamp')->useImmutable();
 
 .. note::
     Les nouvelles applications auront les objets immutables activés par défaut.

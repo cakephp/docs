@@ -36,13 +36,14 @@ Or, you can download ``composer.phar`` from the
 
 Then simply type the following line in your terminal from your
 installation directory to install the CakePHP application skeleton
-in the [app_name] directory. ::
+in the directory that you wish to use it with. For this example we will be using
+"blog" but feel free to change it to something else.::
 
-    php composer.phar create-project --prefer-dist cakephp/app [app_name]
+    php composer.phar create-project --prefer-dist cakephp/app blog
 
 In case you've already got composer installed globally, you may instead type::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app [app_name]
+    composer self-update && composer create-project --prefer-dist cakephp/app blog
 
 The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and

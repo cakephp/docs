@@ -784,7 +784,7 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
             if ($this->request->is('post')) {
                 $article = $this->Articles->newEntity($this->request->getData());
                 if ($this->Articles->save($article)) {
-                    // Redirect as per PRG pattern
+                    // PRG パターンのためリダイレクト
                     return $this->redirect(['action' => 'index']);
                 }
             }
@@ -1175,7 +1175,7 @@ PSR-7 モードを有効にして、アプリケーションクラスの設定�
 JSON を返すコントローラのテスト
 -------------------------------
 
-JSONは、ウェブサービスの構築において、とても馴染み深く、かつ基本的なフォーマットです。
+JSON は、ウェブサービスの構築において、とても馴染み深く、かつ基本的なフォーマットです。
 CakePHP を用いたウェブサービスのエンドポイントのテストはとてもシンプルです。
 JSON を返すコントローラーの簡単な例を示します。 ::
 
@@ -1702,5 +1702,5 @@ clover カバレッジや JUnit の結果を使用する場合は、Jenkins の�
 ビルドがパスするように必要な変更を加えてください。
 
 .. meta::
-    :title lang=ja: Testing
+    :title lang=ja: テスト
     :keywords lang=ja: phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration
