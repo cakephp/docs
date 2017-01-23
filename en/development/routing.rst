@@ -666,8 +666,24 @@ the ``*.`` wildcard to match any subdomain::
         );
     });
 
-The ``_host`` option only effects parsing URLs from requests, and plays no part
-in URL generation.
+The ``_host`` option is also used in URL generation. If your ``_host`` option
+specifies an exact domain, that domain will be included in the generated URL.
+However, if you use a wildcard, then you will need to provide the ``_host``
+parameter when generating URLs::
+
+    // If you have this route
+    $routes->connect(
+        '/images/old-log.png',
+        ['controller' => 'Images', 'action' => 'oldLogo'],
+        ['_host' => '*.example.com']
+    );
+
+    // You need this to generate a url
+    echo Router::url([
+        'controller' => 'Images',
+        'action' => 'oldLogo',
+        '_host' => 'images.example.com'
+    ]);
 
 .. versionadded:: 3.4.0
     The ``_host`` option was added in 3.4.0
