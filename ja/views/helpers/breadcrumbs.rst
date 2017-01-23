@@ -1,4 +1,4 @@
-Breadcrumbs
+パンくず (Breadcrumbs)
 ###########
 
 .. php:namespace:: Cake\View\Helper
