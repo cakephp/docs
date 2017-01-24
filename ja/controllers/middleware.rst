@@ -257,7 +257,7 @@ PSR7 リクエストとレスポンス
 既存のアプリケーションで HTTP ミドルウェアを使うには、アプリケーションにいくつかの
 変更を行わなければなりません。
 
-#. まず ``webroot/index.php`` を更新します。 `app スケルトン 
+#. まず **webroot/index.php** を更新します。 `app スケルトン 
    <https://github.com/cakephp/app/tree/master/webroot/index.php>`__ から
    ファイルの内容をコピーしてください。
 #. ``Application`` クラスを作成します。どのようにするかについては上の :ref:`using-middleware`
@@ -267,6 +267,10 @@ PSR7 リクエストとレスポンス
 
 これら二つの手順が完了すると、アプリケーション／プラグインのディスパッチフィルタを
 HTTP ミドルウェアとして再実装を始める準備が整います。
+
+もし、テストを実行する場合は、 `app スケルトン
+<https://github.com/cakephp/app/tree/master/tests/bootstrap.php>`_ から、
+ファイルの内容をコピーして **tests/bootstrap.php** を更新することも必要になります。
 
 .. meta::
     :title lang=ja: Http ミドルウェア
