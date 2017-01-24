@@ -118,7 +118,7 @@ branch, as you cannot edit it once the pull request is created.
   choose **2.x** as your merge target.
 * If your change is a **new feature** or an addition to the framework, then you
   should choose the ``2.next`` branch.
-* If your change is a breaks existing functionality, your patch is unlikely to
+* If your change breaks existing functionality, your patch is unlikely to
   be merged into 2.x. Instead you should target 4.0
 
 .. note::
