@@ -12,8 +12,11 @@ Before working on patches for CakePHP, it's a good idea to get your environment
 setup. You'll need the following software:
 
 * Git
-* PHP 5.2.8 or greater
-* PHPUnit 3.5.10 or greater (3.7.38 recommended)
+* PHP 5.3.0 or greater
+* ext/mcrypt
+* ext/mbstring
+* PHPUnit 3.7.0 or greater (3.7.38 recommended)
+* MySQL, SQLite, or Postgres
 
 Set up your user information with your name/handle and working email address::
 
@@ -112,16 +115,11 @@ branch, as you cannot edit it once the pull request is created.
 
 * If your change is a **bugfix** and doesn't introduce new functionality and only
   corrects existing behavior that is present in the current release. Then
-  choose **master** as your merge target.
+  choose **2.x** as your merge target.
 * If your change is a **new feature** or an addition to the framework, then you
-  should choose the branch with the next version number. For example if the
-  current stable release is ``2.2.2``, the branch accepting new features will be
-  ``2.3``
-* If your change is a breaks existing functionality, or API's then you'll have
-  to choose then next major release. For example, if the current release is
-  ``2.2.2`` then the next time existing behavior can be broken will be in
-  ``3.0`` so you should target that branch.
-
+  should choose the ``2.next`` branch.
+* If your change breaks existing functionality, your patch is unlikely to
+  be merged into 2.x. Instead you should target 4.0
 
 .. note::
 
