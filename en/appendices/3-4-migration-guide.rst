@@ -360,6 +360,12 @@ HtmlHelper
   to ``false``. Using ``<![CDATA[ ]]`` tag was only required for XHTML which is
   no longer the dominant doctype used for HTML pages.
 
+BreadcrumbsHelper
+=================
+
+* ``BreadcrumbsHelper::reset()`` was added. This method lets you clear out
+  existing crumbs.
+
 PaginatorHelper
 ===============
 
