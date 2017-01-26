@@ -706,22 +706,25 @@ The methods that allow chaining are:
 - addOptions()
 - addSubcommand()
 - addSubcommands()
-- command()
-- description()
-- epilog()
+- setCommand()
+- setDescription()
+- setEpilog()
 
-.. php:method:: description($text = null)
+Set the Description
+~~~~~~~~~~~~~~~~~~~
 
-Gets or sets the description for the option parser. The description displays
-above the argument and option information. By passing in either an array or a
-string, you can set the value of the description. Calling with no arguments will
-return the current value::
+.. php:method:: setDescription($text)
+
+The description displays above the argument and option information. By passing
+in either an array or a string, you can set the value of the description::
 
     // Set multiple lines at once
+    $parser->setDescription(['line one', 'line two']);
+    // Prior to 3.4
     $parser->description(['line one', 'line two']);
 
     // Read the current value
-    $parser->description();
+    $parser->getDescription();
 
 The **src/Shell/ConsoleShell.php** is a good example of the ``description()``
 method in action::
@@ -734,7 +737,7 @@ method in action::
     public function getOptionParser()
     {
         $parser = new ConsoleOptionParser('console');
-        $parser->description(
+        $parser->setDescription(
             'This shell provides a REPL that you can use to interact ' .
             'with your application in an interactive fashion. You can use ' .
             'it to run adhoc queries with your models, or experiment ' .
@@ -771,7 +774,10 @@ command::
     --verbose, -v  Enable verbose output.
     --quiet, -q    Enable quiet output.
 
-.. php:method:: epilog($text = null)
+Set the Epilog
+--------------
+
+.. php:method:: setEpilog($text)
 
 Gets or sets the epilog for the option parser. The epilog is displayed after the
 argument and option information. By passing in either an array or a string, you
@@ -779,10 +785,12 @@ can set the value of the epilog. Calling with no arguments will return the
 current value::
 
     // Set multiple lines at once
+    $parser->setEpilog(['line one', 'line two']);
+    // Prior to 3.4
     $parser->epilog(['line one', 'line two']);
 
     // Read the current value
-    $parser->epilog();
+    $parser->getEpilog();
 
 To illustrate the ``epilog()`` method in action lets add a call to the
 ``getOptionParser()`` method used above in the **src/Shell/ConsoleShell.php**::
@@ -795,7 +803,7 @@ To illustrate the ``epilog()`` method in action lets add a call to the
     public function getOptionParser()
     {
         $parser = new ConsoleOptionParser('console');
-        $parser->description(
+        $parser->setDescription(
             'This shell provides a REPL that you can use to interact ' .
             'with your application in an interactive fashion. You can use ' .
             'it to run adhoc queries with your models, or experiment ' .
@@ -803,11 +811,11 @@ To illustrate the ``epilog()`` method in action lets add a call to the
             "\n\n" .
             'You will need to have psysh installed for this Shell to work.'
         );
-        $parser->epilog('Thank you for baking with CakePHP!');
+        $parser->setEpilog('Thank you for baking with CakePHP!');
         return $parser;
     }
 
-The text added with the ``epilog()`` method can be seen in the output from
+The text added with the ``setEpilog()`` method can be seen in the output from
 the following console command::
 
     $ bin/cake console --help

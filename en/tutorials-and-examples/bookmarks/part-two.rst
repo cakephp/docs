@@ -186,19 +186,19 @@ sense. First, we'll add the authorization logic for bookmarks. In your
 
     public function isAuthorized($user)
     {
-        $action = $this->request->params['action'];
+        $action = $this->request->getParam('action');
 
         // The add and index actions are always allowed.
         if (in_array($action, ['index', 'add', 'tags'])) {
             return true;
         }
         // All other actions require an id.
-        if (empty($this->request->params['pass'][0])) {
+        if (!$this->request->getParam('pass.0')) {
             return false;
         }
 
         // Check that the bookmark belongs to the current user.
-        $id = $this->request->params['pass'][0];
+        $id = $this->request->getParam('pass.0');
         $bookmark = $this->Bookmarks->get($id);
         if ($bookmark->user_id == $user['id']) {
             return true;
@@ -208,12 +208,11 @@ sense. First, we'll add the authorization logic for bookmarks. In your
 
 
 Now if you try to view, edit or delete a bookmark that does not belong to you,
-you should be redirected back to the page you came from. However, there is no
-error message being displayed, so let's rectify that next::
+you should be redirected back to the page you came from. If no error message is
+displayed, add the following to your layout::
 
     // In src/Template/Layout/default.ctp
-    // Under the existing flash message.
-    <?= $this->Flash->render('auth') ?>
+    <?= $this->Flash->render() ?>
 
 You should now see the authorization error messages.
 
@@ -235,7 +234,7 @@ like::
     {
         $bookmark = $this->Bookmarks->newEntity();
         if ($this->request->is('post')) {
-            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->getData());
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('The bookmark has been saved.');
@@ -259,7 +258,7 @@ edit form and action. Your ``edit()`` action from
             'contain' => ['Tags']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->getData());
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('The bookmark has been saved.');

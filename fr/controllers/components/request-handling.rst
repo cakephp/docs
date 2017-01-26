@@ -19,7 +19,7 @@ de média non-HTML.
 En outre, s'il existe un helper avec le même nom que l'extension demandée,
 il sera ajouté au tableau des helpers des Controllers. Enfin, si une donnée
 XML/JSON est POST'ée vers vos Controllers, elle sera décomposée dans un
-tableau qui est assigné à ``$this->request->data``, et pourra alors être
+tableau qui est assigné à ``$this->request->getData()``, et pourra alors être
 accessible comme vous le feriez pour n'importe quelle donnée POST.
 Afin d'utiliser le Request Handler, il doit être chargé depuis la méthode
 ``initialize()``::
@@ -175,7 +175,7 @@ au callback, c'est très utile pour les callbacks comme ``json_decode``::
     // Depuis 3.1.0, vous devez utiliser
     $this->RequestHandler->config('inputTypeMap.json', ['json_decode', true]);
 
-Le contenu ci-dessus créera ``$this->request->data`` un tableau des données
+Le contenu ci-dessus créera ``$this->request->getData()`` un tableau des données
 d'entrées JSON, sans le ``true`` supplémentaire vous obtiendrez un jeu
 d'objets ``stdClass``.
 

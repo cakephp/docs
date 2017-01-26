@@ -782,7 +782,7 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
         public function index($short = null)
         {
             if ($this->request->is('post')) {
-                $article = $this->Articles->newEntity($this->request->data);
+                $article = $this->Articles->newEntity($this->request->getData());
                 if ($this->Articles->save($article)) {
                     // PRG パターンのためリダイレクト
                     return $this->redirect(['action' => 'index']);
@@ -996,20 +996,20 @@ SecurityComponent または CsrfComponent のいずれかで保護されたア�
 .. versionadded:: 3.1.2
     ``enableCsrfToken()`` と ``enableSecurityToken()`` メソッドは 3.1.2 で追加されました。
 
-PSR7 ミドルウェアの統合テスト
------------------------------
+PSR-7 ミドルウェアの統合テスト
+------------------------------
 
-統合テストは、あなたの PSR7 アプリケーション全体や :doc:`/controllers/middleware` を
+統合テストは、あなたの PSR-7 アプリケーション全体や :doc:`/controllers/middleware` を
 テストするために利用されます。デフォルトで ``IntegrationTestCase`` は、
 ``App\Application`` クラスの存在を自動検知し、あなたのアプリケーションの統合テストを
 自動的に有効にします。 ``useHttpServer()`` メソッドでこの振舞いを切り替えられます。 ::
 
     public function setUp()
     {
-        // PSR7 統合テストの有効化
+        // PSR-7 統合テストの有効化
         $this->useHttpServer(true);
 
-        // PSR7 統合テストの無効化
+        // PSR-7 統合テストの無効化
         $this->useHttpServer(false);
     }
 
@@ -1021,14 +1021,14 @@ PSR7 ミドルウェアの統合テスト
         $this->configApplication('App\App', [CONFIG]);
     }
 
-PSR7 モードを有効にして、アプリケーションクラスの設定を可能にした後でも、
+PSR-7 モードを有効にして、アプリケーションクラスの設定を可能にした後でも、
 ``IntegrationTestCase`` に存在する機能は、通常と同様に利用できます。
 
 イベントやルートを含むプラグインを読み込むために :ref:`application-bootstrap` を
 試してみてください。そうすることで、各テストケースごとにイベントやルートが確実に接続されます。
 
 .. versionadded:: 3.3.0
-    PSR7 ミドルウェアと ``useHttpServer()`` メソッドは、3.3.0 で追加されました。
+    PSR-7 ミドルウェアと ``useHttpServer()`` メソッドは、3.3.0 で追加されました。
 
 アサーションメソッド
 --------------------

@@ -33,6 +33,15 @@ valeurs ``bootstrap`` et ``routes`` du plugin::
     // Charge le routes.php du plugin
     Plugin::load('MyPlugin', ['routes' => true]);
 
+Si vous chargez un plugin qui ne fournit que des outils CLI - comme bake - vous
+pouvez mettre à jour votre fichier ``bootstrap_cli.php`` avec::
+
+    bin/cake plugin load --cli MyPlugin
+    bin/cake plugin unload --cli MyPlugin
+
+.. versionadded:: 3.4.0
+    A partir de 3.4.0, l'option ``--cli`` est supportée.
+
 Décharger les Plugins
 ---------------------
 
