@@ -14,7 +14,7 @@ RssHelper で RSS フィードを生成
 CakePHP で posts/index の xml/rss バージョンはすぐに作成できます。
 いくつかの簡単なステップの後、 ``posts/index`` に拡張子 (.rss)  を追加し、
 ``posts/index.rss`` という URL を作成します。このウェブサービスを
-後悔して実行する前にいくつか行う必要があります。最初に parseExtensions を
+公開して実行する前にいくつか行う必要があります。最初に parseExtensions を
 有効にします。これは ``app/Config/routes.php`` で行います。 ::
 
     Router::parseExtensions('rss');
