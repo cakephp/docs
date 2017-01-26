@@ -127,7 +127,7 @@ JSON response. This is a situation where a view file would be useful::
     }
 
     // View code - src/Template/Articles/json/index.ctp
-    foreach ($articles as &$$article) {
+    foreach ($articles as &$article) {
         unset($article->generated_html);
     }
     echo json_encode(compact('articles'));
