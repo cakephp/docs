@@ -21,5 +21,5 @@ formatting numbers.
 
 .. meta::
     :title lang=en: NumberHelper
-    :description lang=en: The Number Helper contains convenience methods that enable display numbers in common formats in your views.
+    :description lang=en: The NumberHelper contains convenience methods that enable display numbers in common formats in your views.
     :keywords lang=en: number helper,currency,number format,number precision,format file size,format numbers

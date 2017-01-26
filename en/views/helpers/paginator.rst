@@ -5,7 +5,7 @@ Paginator
 
 .. php:class:: PaginatorHelper(View $view, array $config = [])
 
-The Paginator helper is used to output pagination controls such as page numbers
+The PaginatorHelper is used to output pagination controls such as page numbers
 and next/previous links. It works in tandem with
 :php:class:`PaginatorComponent`.
 
@@ -377,7 +377,7 @@ Configuring Pagination Options
 
 .. php:method:: options($options = [])
 
-Sets all the options for the Paginator Helper. Supported options are:
+Sets all the options for the PaginatorHelper. Supported options are:
 
 * ``url`` The URL of the paginating action. 'url' has a few sub options as well:
 
@@ -515,5 +515,5 @@ By using the ``model`` option, ``PaginatorHelper`` will automatically use the
 
 .. meta::
     :title lang=en: PaginatorHelper
-    :description lang=en: The Pagination helper is used to output pagination controls such as page numbers and next/previous links.
+    :description lang=en: The PaginatorHelper is used to output pagination controls such as page numbers and next/previous links.
     :keywords lang=en: paginator helper,pagination,sort,page number links,pagination in views,prev link,next link,last link,first link,page counter
