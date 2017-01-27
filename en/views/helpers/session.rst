@@ -14,7 +14,7 @@ As a natural counterpart to the Session object, the Session
 Helper replicates most of the object's functionality and makes it
 available in your view.
 
-The major difference between the Session Helper and the Session
+The major difference between the SessionHelper and the Session
 object is that the helper does *not* have the ability to write
 to the session.
 
@@ -27,7 +27,7 @@ As with the session object, data is read by using
 
 Given the previous array structure, the node would be accessed by
 ``User.username``, with the dot indicating the nested array. This
-notation is used for all Session helper methods wherever a ``$key`` is
+notation is used for all SessionHelper methods wherever a ``$key`` is
 used.
 
 .. php:method:: read(string $key)
@@ -46,5 +46,5 @@ used.
 
 .. meta::
     :title lang=en: SessionHelper
-    :description lang=en: The Session Helper replicates most of the functionality and making it available in your view.
+    :description lang=en: The SessionHelper replicates most of the functionality and making it available in your view.
     :keywords lang=en: session helper,flash messages,session flash,session read,session check

@@ -401,13 +401,12 @@ ORM ではまた、 SQL の ``case`` 式も使えます。 ``case`` 式により
 状況や、条件に基いてデータを特定しなければならない状況で、データを出力するのに便利です。
 
 公開済みの記事（published articles）がデータベース内にいくつあるのか知りたい場合、次の
-SQL を生成する必要があります。 ::
-
+SQL を使用することができます。 ::
 
     SELECT
-    SUM(CASE published = 'Y' THEN 1 ELSE 0) AS number_published,
-    SUM(CASE published = 'N' THEN 1 ELSE 0) AS number_unpublished
-    FROM articles GROUP BY published
+    COUNT(CASE WHEN published = 'Y' THEN 1 END) AS number_published,
+    COUNT(CASE WHEN published = 'N' THEN 1 END) AS number_unpublished
+    FROM articles
 
 これはクエリビルダでは次のようなコードになります。 ::
 
@@ -418,7 +417,7 @@ SQL を生成する必要があります。 ::
             1,
             'integer'
         );
-    $notPublishedCase = $query->newExpr()
+    $unpublishedCase = $query->newExpr()
         ->addCase(
             $query->newExpr()->add(['published' => 'N']),
             1,
@@ -426,10 +425,9 @@ SQL を生成する必要があります。 ::
         );
 
     $query->select([
-        'number_published' => $query->func()->sum($publishedCase),
-        'number_unpublished' => $query->func()->sum($unpublishedCase)
-    ])
-    ->group('published');
+        'number_published' => $query->func()->count($publishedCase),
+        'number_unpublished' => $query->func()->count($unpublishedCase)
+    ]);
 
 ``addCase`` 関数は SQL 内で ``if .. then .. [elseif .. then .. ] [ .. else ]``
 ロジックを構築するために複数の文を一まとめに書くことができます。

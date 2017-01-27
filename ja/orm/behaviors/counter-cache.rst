@@ -72,6 +72,18 @@ CounterCache で複数のフィールドを更新する場合（条件付きカ�
         ]
     ]);
 
+独自の CounterCache フィールド値を計算する場合は、 ``ignoreDirty`` オプションを
+``true`` に設定します。
+これにより、前に dirty を設定した場合、フィールドが再計算されなくなります。 ::
+
+    $this->addBehavior('CounterCache', [
+        'Articles' => [
+            'comment_count' => [
+                'ignoreDirty' => true
+            ]
+        ]
+    ]);
+
 最後に、カスタムファインダと条件が適切でない場合は、コールバックメソッドを提供することができます。
 この呼び出し可能オブジェクトは、格納するカウント値を返さなければなりません。 ::
 

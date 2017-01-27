@@ -567,6 +567,7 @@ enable immutable value objects. This is best done in your application's
     Type::build('datetime')->useImmutable();
     Type::build('date')->useImmutable();
     Type::build('time')->useImmutable();
+    Type::build('timestamp')->useImmutable();
 
 .. note::
     New applications will have immutable objects enabled by default.
