@@ -123,16 +123,49 @@ CakePHP предоставляет базовую организационную
 Цикл обработки запросов CakePHP
 ===============================
 
-.. note::
-    The documentation is not currently supported in Russian language for this
-    page.
+Теперь когда Вы знакомы с различными частями CakePHP, давайте рассмотрим
+как протекает полный цикл обработки запросов в фреймворке:
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+.. figure:: /_static/img/typical-cake-request.png
+   :align: center
+   :alt: Схема последовательности операций в типичном запросе CakePHP
+   
+Типичный цикл обработки запроса CakePHP начинается с момента, когда пользователь
+запрашивает какую-нибудь страницу Вашего сайта. На высоком уровне каждый запрос
+проходит следующие шаги:
 
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+#. Веб-сервер перенаправляет запрос к **webroot/index.php**.
+#. Ваше приложение загружено и связано с ``HttpServer``.
+#. Промежуточное ПО Вашего приложения инициализировано.
+#. Запрос и ответ обработан через ромежуточное ПО PSR-7  используемое
+   Вашим приложением. Обычно это включает в себя перехват ошибок и 
+   маршрутизацию.
+#. Если промежуточное ПО не возвращает ответа и запрос содержит
+   информацию о маршруте, выбираются соответствующие контроллер и экшен.
+#. Экшен контроллера вызывается и контроллер взаимодействует с нужными
+   Моделями и Компонентами.
+#. Контроллер делегирует создание ответа Виду для вывода данных, полученных
+   от Модели.
+#. Вид используя Хелперы и Ячейки генерирует тело запроса и заголовки.
+#. Ответ посылается обратно через :doc:`/controllers/middleware`.
+#. ``HttpServer`` выбрасывает ответ веб-серверу.
+
+Только начало
+=============
+
+Надеемся этот краткий обзор пробудил в Вас интерес. Некоторые другие
+потрясающие возможности CakePHP:
+
+* Фреймворк :doc:`кэширования </core-libraries/caching>` взаимодействующий
+  с Memcached, Redis и другими платформами.
+* Мощные :doc:`инструменты генерирования кода
+  </bake/usage>` с которыми Вы можете быстро начать разработку.
+* :doc:`Встроенные инструменты тестирования </development/testing>`
+  с которыми Вы можете удостовериться в правильности работы Вашего кода.
+
+Следующие традиционные шаги это :doc:`скачать CakePHP </installation>`, прочитать
+:doc:`руководства и создать что-нибудь потрясающее
+</tutorials-and-examples/bookmarks/intro>`.
 
 Рекомендуется к прочтению
 =========================
@@ -145,5 +178,5 @@ CakePHP предоставляет базовую организационную
     /intro/cakephp-folder-structure
 
 .. meta::
-    :title lang=ru: Getting Started
-    :keywords lang=ru: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
+    :title lang=ru: Начало работы
+    :keywords lang=ru: структура папок,имена таблиц,initial request,таблица базы данных,organizational structure,rst,имена файлов,соглашения,mvc,веб-страница,sit
