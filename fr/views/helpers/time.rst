@@ -10,7 +10,7 @@ le traitement rapide des informations se rapportant au temps. Le Helper
 Time a deux tâches principales qu'il peut accomplir:
 
 #. Il peut formater les chaînes de temps.
-#. Il peut tester le temps (mais ne peut pas le courber, désolé).
+#. Il peut tester le temps.
 
 Utiliser le Helper
 ==================
