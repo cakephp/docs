@@ -202,7 +202,7 @@ application.
 .. php:const:: DS
 
     Raccourci pour la constante PHP ``DIRECTORY_SEPARATOR``, qui est égale à
-    ``/`` pour Linux et ``\\`` pour Windows.
+    ``/`` pour Linux et ``\`` pour Windows.
 
 .. php:const:: LOGS
 
