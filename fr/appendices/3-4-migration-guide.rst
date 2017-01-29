@@ -125,8 +125,13 @@ retours des méthodes dans le futur. Pour ces raisons, les getters / setters
 combinés sont maintenant séparés dans différentes méthodes.
 
 La liste qui suit regroupe les méthodes qui sont dépréciées et remplacées par
-des méthodes ``getX`` et ``setX`` :
+des méthodes ``getX()`` et ``setX()`` :
 
+``Cake\Core\InstanceConfigTrait``
+    * ``config()``
+``Cake\Core\StaticConfigTrait``
+    * ``config()``
+    * ``dsnClassMap()``
 Cake\Console\ConsoleOptionParse
     * ``command()``
     * ``description()``
@@ -376,6 +381,12 @@ HtmlHelper
   a maintenant sa valeur par défaut à ``false``. Utiliser le tag ``<![CDATA[ ]]``
   était seulement requis pour le XHTML qui n'est plus le doctype prédominant
   pour les pages web actuellement.
+
+BreadcrumbsHelper
+=================
+
+* ``BreadcrumbsHelper::reset()`` a été ajoutée. Cette méthode vous permet de
+  supprimer les éléments déjà présents.
 
 PaginatorHelper
 ===============
