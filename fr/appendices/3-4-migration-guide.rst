@@ -382,6 +382,12 @@ HtmlHelper
   était seulement requis pour le XHTML qui n'est plus le doctype prédominant
   pour les pages web actuellement.
 
+BreadcrumbsHelper
+=================
+
+* ``BreadcrumbsHelper::reset()`` a été ajoutée. Cette méthode vous permet de
+  supprimer les éléments déjà présents.
+
 PaginatorHelper
 ===============
 

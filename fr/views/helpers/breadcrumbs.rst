@@ -16,9 +16,9 @@ Créer un fil d'Ariane
 Vous pouvez ajouter un élément à la liste en utilisant la méthode ``add()``.
 Elle accepte trois arguments :
 
-- **title** La chaîne affichée comme titre de l'élément.
-- **url** Une chaîne ou un tableau de paramètres qui sera passé au :doc:`/views/helpers/url`
-- **options** Un tableau d'attribut pour les templates ``item`` et
+- ``title`` La chaîne affichée comme titre de l'élément.
+- ``url`` Une chaîne ou un tableau de paramètres qui sera passé au :doc:`/views/helpers/url`
+- ``options`` Un tableau d'attribut pour les templates ``item`` et
   ``itemWithoutLink``. Référez-vous à la section sur :ref:`la définition d'attributs pour un élément <defining_attributes_item>`
   pour plus d'informations.
 
@@ -96,14 +96,14 @@ Cette méthode accepte deux tableaux comme arguments :
 - ``$separator`` : Un tableau d'attributs pour le template ``separator``.
   Voici les propriétés disponibles :
 
-  - **separator** La chaîne qui sera utilisée comme séparateur
-  - **innerAttrs** Pour fournir des attributs dans le cas où votre séparateur
+  - ``separator`` La chaîne qui sera utilisée comme séparateur
+  - ``innerAttrs`` Pour fournir des attributs dans le cas où votre séparateur
     est en deux éléments
-  - **templateVars** Vous permet de définir des variables de templates
+  - ``templateVars`` Vous permet de définir des variables de templates
     personnalisées dans le template
 
   Toutes les autres propriétés seront converties en attributs HTML et
-  remplaceront la clé **attrs** dans le template. Si vous fournissez un tableau
+  remplaceront la clé ``attrs`` dans le template. Si vous fournissez un tableau
   vide (le défaut) pour cet argument, aucun séparateur ne sera affiché.
 
 Voici un exemple d'affichage d'un fil d'Ariane::
@@ -185,6 +185,24 @@ comme attributs HTML::
     <li class="products-crumb" data-foo="bar">
         <a href="/products/index" class="inner-products-crumb" id="the-products-crumb">Produits</a>
     </li>
+
+Réinitialiser la Liste d'éléments
+=================================
+
+Vous pouvez réinitialiser la liste d'éléments dans à l'aide de la méthode
+``reset()``. Ceci est particulièrement utile quand vous souhaitez modifier les
+éléments et complètement réinitialiser la liste::
+
+    $crumbs = $this->Breadcrumbs->getCrumbs();
+    $crumbs = collection($crumbs)->map(function ($crumb) {
+        $crumb['options']['class'] = 'breadcrumb-item';
+        return $crumb;
+    })->toArray();
+
+    $this->Breadcrumbs->reset()->add($crumbs);
+
+.. versionadded:: 3.4.0
+    La méthode ``reset()`` a été ajoutée dans la version 3.4.0
 
 .. meta::
     :title lang=fr: BreadcrumbsHelper
