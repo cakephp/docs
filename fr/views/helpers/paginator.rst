@@ -5,7 +5,7 @@ Paginator
 
 .. php:class:: PaginatorHelper(View $view, array $config = [])
 
-Le Helper Paginator est utilisé pour présenter des contrôles de pagination
+Le PaginatorHelper est utilisé pour présenter des contrôles de pagination
 comme les numéros de pages et les liens suivant/précédent. Il travaille en
 tamdem avec :php:class:`PaginatorComponent`.
 
@@ -400,7 +400,7 @@ Configurer les Options de Pagination
 
 .. php:method:: options($options = [])
 
-Définit toutes les options pour le Helper Paginator Helper. Les options
+Définit toutes les options pour le PaginatorHelper Helper. Les options
 supportées sont:
 
 * ``url`` L'URL de l'action de pagination. 'url' comporte quelques sous options
@@ -440,12 +440,12 @@ Exemple d'Utilisation
 
 C'est à vous de décider comment afficher les enregistrements à l'utilisateur,
 mais la plupart des fois, ce sera fait à l'intérieur des tables HTML. L'exemple
-ci-dessous suppose une présentation tabulaire, mais le Helper Paginator
+ci-dessous suppose une présentation tabulaire, mais le PaginatorHelper
 disponible dans les vues n'a pas toujours besoin d'être limité en tant que tel.
 
 Voir les détails sur
 `PaginatorHelper <https://api.cakephp.org/3.0/class-Cake.View.Helper.PaginatorHelper.html>`_
-dans l' API. Comme mentionné précédemment, le Helper Paginator offre également
+dans l' API. Comme mentionné précédemment, le PaginatorHelper offre également
 des fonctionnalités de tri qui peuvent être intégrées dans vos en-têtes de
 colonne de table:
 

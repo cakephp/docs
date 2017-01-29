@@ -5,7 +5,7 @@ Number
 
 .. php:class:: NumberHelper(View $view, array $config = [])
 
-Le helper Number contient des méthodes pratiques qui permettent
+Le NumberHelper contient des méthodes pratiques qui permettent
 l'affichage des nombres dans divers formats communs dans vos vues. Ces méthodes
 contiennent des moyens pour formater les devises, pourcentages, taille des
 données, le format des nombres avec précisions et aussi de vous donner

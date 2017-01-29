@@ -82,5 +82,5 @@ Output::
 
 .. meta::
     :title lang=fr: TextHelper
-    :description lang=fr: Le Helper Text contient les méthodes pour rendre le texte plus utilisable et de manière sympa dans vos vues.
+    :description lang=fr: Le TextHelper contient les méthodes pour rendre le texte plus utilisable et de manière sympa dans vos vues.
     :keywords lang=fr: text helper,autoLinkEmails,autoLinkUrls,autoLink,excerpt,highlight,stripLinks,truncate,string text
