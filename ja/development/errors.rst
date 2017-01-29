@@ -386,7 +386,7 @@ RFC2616 MethodNotAllowedExceptionは言っています::
 エラーページのビューは **src/Template/Error/** に配置されます。
 すべての4xxと5xxエラー用のテンプレートファイル **error400.ctp** と **error500.ctp** がそれぞれ使われます。
 必要に応じてそれらをカスタマイズすることができます。
-既定では **src/Template/Layout/default.ctp** もエラーページに使われます。
+既定では **src/Template/Layout/error.ctp** もエラーページに使われます。
 たとえばもしも、他のレイアウト **src/Template/Layout/my_error.ctp** をエラーページに使いたい場合、
 単純にエラー用ビューを編集して ``$this->layout = 'my_error';`` という文を
 **error400.ctp** と **error500.ctp** に追加してください。
