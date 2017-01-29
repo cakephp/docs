@@ -189,9 +189,9 @@ comme attributs HTML::
 Réinitialiser la Liste d'éléments
 =================================
 
-Vous pouvez réinitialiser la liste d'éléments dans à l'aide de la méthode
-``reset()``. Ceci est particulièrement utile quand vous souhaitez modifier les
-éléments et complètement réinitialiser la liste::
+Vous pouvez réinitialiser la liste d'éléments à l'aide de la méthode ``reset()``.
+Ceci est particulièrement utile quand vous souhaitez modifier les éléments et
+complètement réinitialiser la liste::
 
     $crumbs = $this->Breadcrumbs->getCrumbs();
     $crumbs = collection($crumbs)->map(function ($crumb) {
