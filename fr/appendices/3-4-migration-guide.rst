@@ -125,8 +125,13 @@ retours des méthodes dans le futur. Pour ces raisons, les getters / setters
 combinés sont maintenant séparés dans différentes méthodes.
 
 La liste qui suit regroupe les méthodes qui sont dépréciées et remplacées par
-des méthodes ``getX`` et ``setX`` :
+des méthodes ``getX()`` et ``setX()`` :
 
+``Cake\Core\InstanceConfigTrait``
+    * ``config()``
+``Cake\Core\StaticConfigTrait``
+    * ``config()``
+    * ``dsnClassMap()``
 Cake\Console\ConsoleOptionParse
     * ``command()``
     * ``description()``
