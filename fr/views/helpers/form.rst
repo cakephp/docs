@@ -18,7 +18,7 @@ Création de Formulaire
 
 .. php:method:: create(mixed $model = null, array $options = [])
 
-La première méthode dont vous aurez besoin d'utiliser pour tirer pleinement
+La première méthode que vous aurez besoin d'utiliser pour tirer pleinement
 profit du FormHelper est ``create()``. Cette méthode affichera une balise
 d'ouverture de formulaire.
 
