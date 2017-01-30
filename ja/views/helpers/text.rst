@@ -5,7 +5,7 @@ Text
 
 .. php:class:: TextHelper(View $view, array $config = [])
 
-TextHelperには、ビュー内のテキストをより使いやすく見やすくするためのメソッドが含まれています。
+TextHelper には、ビュー内のテキストをより使いやすく見やすくするためのメソッドが含まれています。
 リンクの有効化、URLのフォーマット、選択した単語やフレーズの範囲にテキストの抜粋を作成、
 テキストブロック内のキーワードのハイライト、 長いテキストの長さの切り詰めなどを支援します。
 
@@ -73,5 +73,5 @@ URLとメールアドレス両方のリンク化
 
 .. meta::
     :title lang=ja: TextHelper
-    :description lang=ja: The Text Helper contains methods to make text more usable and friendly in your views.
+    :description lang=ja: TextHelper には、ビュー内のテキストをより使いやすく見やすくするためのメソッドが含まれています。
     :keywords lang=ja: text helper,autoLinkEmails,autoLinkUrls,autoLink,excerpt,highlight,stripLinks,truncate,string text
