@@ -372,22 +372,21 @@ There are a number of options for ``counter()``. The supported ones are:
   :php:meth:`PaginatorHelper::defaultModel()`. This is used in
   conjunction with the custom string on 'format' option.
 
-Configuring Pagination Options
-==============================
+ページネーションオプションの設定
+================================
 
 .. php:method:: options($options = [])
 
-Sets all the options for the PaginatorHelper. Supported options are:
+PaginatorHelperのすべてのオプションを設定します。サポートされているオプションは以下の通りです。:
 
-* ``url`` The URL of the paginating action. 'url' has a few sub options as well:
+* ``url`` ページ制御アクションの URL 。 ‘url’ にはサブオプションがいくつかあります。:
 
-  -  ``sort`` The key that the records are sorted by.
-  -  ``direction`` The direction of the sorting. Defaults to 'ASC'.
-  -  ``page`` The page number to display.
+  -  ``sort`` レコードをソートする際のキー。
+  -  ``direction`` ソート順。デフォルトは ‘ASC’ です。
+  -  ``page`` 表示するページ番号。
 
-  The above mentioned options can be used to force particular pages/directions.
-  You can also append additional URL content into all URLs generated in the
-  helper::
+  上記の例で出てきたオプションは、特定のページやソート順を強制するのに使用できます。
+  このヘルパーで生成された URL に対して、追加的な URL コンテンツを追加できます。::
 
       $this->Paginator->options([
           'url' => [
@@ -398,16 +397,15 @@ Sets all the options for the PaginatorHelper. Supported options are:
           ]
       ]);
 
-  The above adds the ``en`` route parameter to all links the helper will
-  generate. It will also create links with specific sort, direction and page
-  values. By default PaginatorHelper will merge in all of the current passed
-  arguments and query string parameters.
+  上記の例では、ヘルパーが生成するリンク全てに経路パラメーター ``en`` を追加します。
+  また、指定されたソートキー、ソート順、ページ番号で リンクを生成します。
+  デフォルトでは、 PaginatorHelper は現在のパスとクエリパラメーターすべてをマージします。
 
-* ``escape`` Defines if the title field for links should be HTML escaped.
-  Defaults to ``true``.
+* ``escape`` リンクの title フィールドを HTML エスケープするかどうかを指定します。
+  デフォルトは ``true`` です。
 
-* ``model`` The name of the model being paginated, defaults to
-  :php:meth:`PaginatorHelper::defaultModel()`.
+* ``model`` ページ制御対象のモデル名。デフォルトは
+  :php:meth:`PaginatorHelper::defaultModel()` です。
 
 使用例
 ======
@@ -480,9 +478,7 @@ counter() メソッドによる文章出力は、特殊なマーカーを使用�
 
 .. php:method:: generateUrl(array $options = [], $model = null, $full = false)
 
-By default returns a full pagination URL string for use in non-standard contexts
-(i.e. JavaScript). ::
-デフォルトでは、非標準的なコンテキスト（JavaScriptなど）で使用する完全なページ制御URL文字列を返します。
+デフォルトでは、非標準的なコンテキスト（JavaScriptなど）で使用する完全なページ制御URL文字列を返します。::
 
     echo $this->Paginator->generateUrl(['sort' => 'title']);
 
