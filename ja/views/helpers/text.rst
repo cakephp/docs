@@ -6,15 +6,15 @@ Text
 .. php:class:: TextHelper(View $view, array $config = [])
 
 TextHelper には、ビュー内のテキストをより使いやすく見やすくするためのメソッドが含まれています。
-リンクの有効化、URLのフォーマット、選択した単語やフレーズの範囲にテキストの抜粋を作成、
-テキストブロック内のキーワードのハイライト、 長いテキストの長さの切り詰めなどを支援します。
+リンクの有効化、URLのフォーマット、選択した単語やフレーズの周囲のテキストの抜粋を作成、
+テキストブロック内のキーワードのハイライト、 長いテキストの綺麗な切り詰めなどを支援します。
 
 メールアドレスのリンク化
 =========================
 
 .. php:method:: autoLinkEmails(string $text, array $options = [])
 
-``$options`` に従い、 ``$text`` に整形されたメールアドレスのリンクを追加します。(
+``$options`` で定義されたオプションに従い、 ``$text`` に整形されたメールアドレスのリンクを追加します。(
 :php:meth:`HtmlHelper::link()` を参照) ::
 
     $myText = 'For more information regarding our world-famous ' .
@@ -33,7 +33,7 @@ URLのリンク化
 
 .. php:method:: autoLinkUrls(string $text, array $options = [])
 
-``autoLinkEmails()`` と同様に、https, http, ftp, nntp から始まる文字列を見つけ、適切にリンクします。
+``autoLinkEmails()`` と同様ですが、https, http, ftp, nntp から始まる文字列を見つけ、適切にリンクします。
 
 このメソッドは自動的に入力をエスケープします。これを無効にする必要がある場合には、 ``escape`` オプションを使用します。
 
@@ -43,7 +43,7 @@ URLとメールアドレス両方のリンク化
 .. php:method:: autoLink(string $text, array $options = [])
 
 与えられた ``$text`` に対して、 ``autoLinkUrls()`` と ``autoLinkEmails()`` 両方の機能を実行します。
-全てのURLとメールアドレスは与えられた ``$options`` に適切にリンクします。
+全てのURLとメールアドレスは与えられた ``$options`` を考慮して適切にリンクされます。
 
 このメソッドは自動的に入力をエスケープします。これを無効にする必要がある場合には、 ``escape`` オプションを使用します。
 
