@@ -510,5 +510,5 @@ By default returns a full pagination URL string for use in non-standard contexts
 
 .. meta::
     :title lang=ja: PaginatorHelper
-    :description lang=ja: The PaginatorHelper is used to output pagination controls such as page numbers and next/previous links.
+    :description lang=ja: PaginatorHelperは、ページ番号や次/前のリンクなどの改ページコントロールを出力するために使用されます。
     :keywords lang=ja: paginator helper,pagination,sort,page number links,pagination in views,prev link,next link,last link,first link,page counter
