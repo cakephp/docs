@@ -5,7 +5,7 @@ Rss
 
 .. php:class:: RssHelper(View $view, array $config = [])
 
-The RssHelper makes generating XML for `RSS feeds <https://en.wikipedia.org/wiki/RSS>`_ easy.
+RssHelper は  `RSS feeds <https://en.wikipedia.org/wiki/RSS>` である XML の作成が簡単にできます。
 
 Creating an RSS Feed with the RssHelper
 =======================================
@@ -22,11 +22,12 @@ things. First extensions parsing needs to be activated, this is done in
 
     Router::extensions('rss');
 
-In the call above we've activated the .rss extension. When using
-:php:meth:`Cake\\Routing\\Router::extensions()` you can pass a string or an
-array of extensions as first argument. This will activate each
-extension/content-type for use in your application. Now when the address
-``articles/index.rss`` is requested you will get an XML version of
+上記のように宣言すると、.rss 拡張子を利用できます。
+:php:meth:`Cake\\Routing\\Router::extensions()` を使用すると、
+文字列もしくは配列の拡張子を最初の引数として渡すことができます。
+これはあなたのアプリに各拡張子 / コンテンツタイプを有効化するでしょう。
+
+Now when the address ``articles/index.rss`` is requested you will get an XML version of
 your ``articles/index``. However, first we need to edit the controller to
 add in the rss-specific code.
 
@@ -195,5 +196,5 @@ site at http://validator.w3.org/feed/.
 
 .. meta::
     :title lang=ja: RssHelper
-    :description lang=ja: The RSS helper makes generating XML for RSS feeds easy.
+    :description lang=ja: The RssHelper makes generating XML for RSS feeds easy.
     :keywords lang=ja: rss helper,rss feed,isrss,rss item,channel data,document data,parse extensions,request handler
