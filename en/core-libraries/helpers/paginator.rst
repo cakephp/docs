@@ -163,7 +163,7 @@ In addition to generating links that go directly to specific page numbers,
 you'll often want links that go to the previous and next links, first and last
 pages in the paged data set.
 
-.. php:method:: prev($title = '<?= __('<< previous') ?>', $options = array(), $disabledTitle = null, $disabledOptions = array())
+.. php:method:: prev($title = '<< Previous', $options = array(), $disabledTitle = null, $disabledOptions = array())
 
     :param string $title: Title for the link.
     :param mixed $options: Options for pagination link.
@@ -184,7 +184,7 @@ pages in the paged data set.
     A simple example would be::
 
         echo $this->Paginator->prev(
-          ' << ' . __('previous'),
+          '<< ' . __('previous'),
           array(),
           null,
           array('class' => 'prev disabled')
@@ -196,7 +196,7 @@ pages in the paged data set.
 
         <span class="prev">
           <a rel="prev" href="/posts/index/page:1/sort:title/order:desc">
-            <?= __('<< previous') ?>
+            &lt;&lt; previous
           </a>
         </span>
 
@@ -204,7 +204,7 @@ pages in the paged data set.
 
     .. code-block:: html
 
-        <span class="prev disabled"><?= __('<< previous') ?></span>
+        <span class="prev disabled">&lt;&lt; previous</span>
 
     You can change the wrapping tag using the ``tag`` option::
 
@@ -244,7 +244,7 @@ pages in the paged data set.
 
 .. php:method:: next($title = 'Next >>', $options = array(), $disabledTitle = null, $disabledOptions = array())
 
-    This method is identical to :php:meth:`~PagintorHelper::prev()` with a few exceptions. It
+    This method is identical to :php:meth:`~PaginatorHelper::prev()` with a few exceptions. It
     creates links pointing to the next page instead of the previous one. It also
     uses ``next`` as the rel attribute value instead of ``prev``
 
