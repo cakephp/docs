@@ -1069,7 +1069,7 @@ Finally, we can put these two functions together to do the grouping::
         ->mapReduce($mapper, $reducer);
 
     foreach ($articlesByStatus as $status => $articles) {
-        echo sprintf("The are %d %s articles", count($articles), $status);
+        echo sprintf("There are %d %s articles", count($articles), $status);
     }
 
 The above will ouput the following lines::
