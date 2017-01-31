@@ -454,8 +454,8 @@ If you prefer to use join functions, you can look at
 
 .. _eager-loading-associations:
 
-Eager Loading Associations
-==========================
+Eager Loading Associations Via Contain
+======================================
 
 By default CakePHP does not load **any** associated data when using ``find()``.
 You need to 'contain' or eager-load each association you want loaded in your
@@ -618,8 +618,8 @@ option to sort the data in those associations::
 
 .. _filtering-by-associated-data:
 
-Filtering by Associated Data
-----------------------------
+Filtering by Associated Data Via Matching And Joins
+===================================================
 
 .. start-filtering
 
@@ -674,7 +674,7 @@ association, you can expect to get both the ``_matchingData`` and standard
 association properties in your results.
 
 Using innerJoinWith
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 Using the ``matching()`` function, as we saw already, will create an ``INNER
 JOIN`` with the specified association and will also load the fields into the
@@ -706,7 +706,7 @@ result set, and no ``_matchingData`` property will be set.
     Query::innerJoinWith() was added in 3.1
 
 Using notMatching
-~~~~~~~~~~~~~~~~~
+-----------------
 
 The opposite of ``matching()`` is ``notMatching()``. This function will change
 the query so that it filters results that have no relation to the specified
@@ -766,7 +766,7 @@ will not add any data to the ``_matchingData`` property in the results.
     Query::notMatching() was added in 3.1
 
 Using leftJoinWith
-~~~~~~~~~~~~~~~~~~
+------------------
 
 On certain occasions you may want to calculate a result based on an association,
 without having to load all the records for it. For example, if you wanted to
@@ -804,7 +804,7 @@ result set.
 .. end-filtering
 
 Changing Fetching Strategies
-----------------------------
+============================
 
 As you may know already, ``belongsTo`` and ``hasOne`` associations are loaded
 using a ``JOIN`` in the main finder query. While this improves query and
@@ -870,7 +870,7 @@ You can also make the strategy permanent for the association by doing::
     $articles->Comments->strategy('subquery');
 
 Lazy Loading Associations
--------------------------
+=========================
 
 While CakePHP makes it easy to eager load your associations, there may be cases
 where you need to lazy-load associations. You should refer to the
