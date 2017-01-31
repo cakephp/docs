@@ -55,14 +55,14 @@ json/xml に変換する前に独自のフォーマット処理が不要な場�
 
         public function index()
         {
-            // シリアライズされるためのビュー変数をセット
+            // シリアライズされるためのビュー変数をセットする
             $this->set('articles', $this->paginate());
-            // JsonView が、どのビュー変数をシリアライズするべきかを指定する
+            // JsonView がどのビュー変数をシリアライズするべきかを指定する
             $this->set('_serialize', ['articles']);
         }
     }
 
-``_serialize`` を、ビュー変数の配列として定義し、それを結合させることもできます::
+``_serialize`` をビュー変数の配列として定義し、それを結合させることもできます::
 
     namespace App\Controller;
 
@@ -78,34 +78,29 @@ json/xml に変換する前に独自のフォーマット処理が不要な場�
         {
             // $articles と $comments を生成する何某かのコード
 
-            // シリアライズされるためのビュー変数をセット
+            // シリアライズされるためのビュー変数をセットする
             $this->set(compact('articles', 'comments'));
 
-            // JsonView が、どのビュー変数をシリアライズするべきかを指定する
+            // JsonView がどのビュー変数をシリアライズするべきかを指定する
             $this->set('_serialize', ['articles', 'comments']);
         }
     }
 
-Defining ``_serialize`` as an array has the added benefit of automatically
-appending a top-level ``<response>`` element when using :php:class:`XmlView`.
-If you use a string value for ``_serialize`` and XmlView, make sure that your
-view variable has a single top-level element. Without a single top-level
-element the Xml will fail to generate.
+
+:php:class:`XmlView` を使用するケースでは、配列として ``_serialize`` を定義することは、最上位に ``<response>`` 要素が自動的に付与されるという利点があります。
+``_serialize`` と XmlView に文字列を使用する時は、ビュー変数は最上位要素を一つ持つことに注意してください。一つも最上位要素を持たない場合、XML の生成に失敗するでしょう。
 
 .. versionadded:: 3.1.0
+    全てのビュー変数をシリアライズしたい場合、それぞれをきちんと指定する代わりに ``_serialize`` に ``true`` をセットすることが出来ます。
 
-    You can also set ``_serialize`` to ``true`` to serialize all view variables
-    instead of explicitly specifying them.
+テンプレートファイルをデータビューで使用する
+============================================
 
-Using a Data View with Template Files
-=====================================
+最終的な出力の前にビュー変数に何かの処理を施したいケースでは、テンプレートファイルを使用する必要があります。
+例えば、生成されたHTMLを要素として持つ記事があり、JSON レスポンスからそれを取り除きたいとします。
+こういった状況ではビューファイルが役に立ちます::
 
-You should use template files if you need to do some manipulation of your view
-content before creating the final output. For example if we had articles, that had
-a field containing generated HTML, we would probably want to omit that from a
-JSON response. This is a situation where a view file would be useful::
-
-    // Controller code
+    // コントローラのコード
     class ArticlesController extends AppController
     {
         public function index()
@@ -115,61 +110,48 @@ JSON response. This is a situation where a view file would be useful::
         }
     }
 
-    // View code - src/Template/Articles/json/index.ctp
+    // ビューのコード - src/Template/Articles/json/index.ctp
     foreach ($articles as &$$article) {
         unset($article->generated_html);
     }
     echo json_encode(compact('articles'));
 
-You can do more complex manipulations, or use helpers to do formatting as well.
-The data view classes don't support layouts. They assume that the view file will
-output the serialized content.
+より複雑な操作を行ったり、ヘルパーを整形に使用することも出来ます。
+データビュークラスは、ビューファイルはシリアライズされたコンテンツを出力することを前提としているため、レイアウトをサポートしません。
 
 .. note::
-    As of 3.1.0 AppController, in the application skeleton automatically adds
-    ``'_serialize' => true`` to all XML/JSON requests. You will need to remove
-    this code from the beforeRender callback if you want to use view files.
+    3.1.0 の AppController では、全ての XML/JSON リクエストに対して、アプリケーションスケルトンのなかで '_serialize' に ``true`` がセットされます。そのためビューファイルを使用したい場合は、このコードを beforeRender コールバックから取り除く必要があります。
 
-
-Creating XML Views
-==================
+XML ビューの作成
+================
 
 .. php:class:: XmlView
 
-By default when using ``_serialize`` the XmlView will wrap your serialized
-view variables with a ``<response>`` node. You can set a custom name for
-this node using the ``_rootNode`` view variable.
+デフォルトでは ``_serialize`` を使用する時、XmlView は ``<response>`` ノードでシリアル化されるビュー変数をラップします。
+``_rootNode`` ビュー変数を使用することで、このノードに別の名前を設定することが出来ます。
 
-The XmlView class supports the ``_xmlOptions`` variable that allows you to
-customize the options used to generate XML, e.g. ``tags`` vs ``attributes``.
+XmlView クラスは、XML の生成に使用するオプション（例: ``tags`` vs ``attributes`` ）を変更するための ``_xmlOptions`` 変数をサポートしています。
 
-Creating JSON Views
-===================
+JSON ビューの作成
+=================
 
 .. php:class:: JsonView
 
-The JsonView class supports the ``_jsonOptions`` variable that allows you to
-customize the bit-mask used to generate JSON. See the
-`json_encode <http://php.net/json_encode>`_ documentation for the valid
-values of this option.
+JsonView クラスは、JSON の生成に使用するビットマスクを変更するためための ``_jsonOptions`` 変数をサポートします。このオプションの有効な値は `json_encode <http://php.net/json_encode>`_  を参照してください。
 
-JSONP Responses
----------------
+JSONP レスポンス
+----------------
 
-When using ``JsonView`` you can use the special view variable ``_jsonp`` to
-enable returning a JSONP response. Setting it to ``true`` makes the view class
-check if query string parameter named "callback" is set and if so wrap the json
-response in the function name provided. If you want to use a custom query string
-parameter name instead of "callback" set ``_jsonp`` to required name instead of
-``true``.
+``JsonView`` を使用する時は、特別なビュー変数 ``_jsonp`` を使用することで JSONP レスポンスの返すことが出来ます。
+これに ``true`` を設定することで、ビュークラスに "callback" という名前のクエリ文字列パラメータがセットされているかをチェックさせ、それ同時に提供された関数名で JSON レスポンスをラップさせることが出来ます。
+"callback" の代わりにカスタムクエリ文字列パラメータを使用したい場合は、 ``_jsonp`` に ``true`` の代わりの名前を指定してください。
 
-Example Usage
-=============
+使用例
+======
 
-While the :doc:`RequestHandlerComponent
-</controllers/components/request-handling>` can automatically set the view based
-on the request content-type or extension, you could also handle view
-mappings in your controller::
+リクエストのコンテンツタイプまたは拡張子によって、
+:doc:`RequestHandlerComponent </controllers/components/request-handling>`
+が自動的にビューをセットするのに対して、あなたはコントローラのなかでビューマッピングを操作することが出来ます::
 
     // src/Controller/VideosController.php
     namespace App\Controller;
@@ -183,27 +165,27 @@ mappings in your controller::
         {
             $format = strtolower($format);
 
-            // Format to view mapping
+            // ビューマッピングの設定する
             $formats = [
               'xml' => 'Xml',
               'json' => 'Json',
             ];
 
-            // Error on unknown type
+            // 未知の形式の時はエラー
             if (!isset($formats[$format])) {
                 throw new NotFoundException(__('Unknown format.'));
             }
 
-            // Set Out Format View
+            // ビューをセットする
             $this->viewBuilder()->className($formats[$format]);
 
-            // Set Force Download
+            // 強制ダウンロードを指定する
             $this->response->download('report-' . date('YmdHis') . '.' . $format);
 
-            // Get data
+            // データを習得する
             $videos = $this->Videos->find('latest');
 
-            // Set Data View
+            // データビューをセットする
             $this->set(compact('videos'));
             $this->set('_serialize', ['videos']);
         }
