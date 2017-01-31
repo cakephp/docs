@@ -498,6 +498,33 @@ You can eager load associations as deep as you like::
         'Shops.Cities.Countries',
         'Shops.Managers'
     ]);
+    
+You can select fields from all associations with multiple easy ``contain()`` statements
+
+    $query = $this->find()->select([
+        'Realestates.id',
+        'Realestates.title',
+        'Realestates.description'
+    ])
+    ->contain([
+        'RealestateAttributes' => [
+            'Attributes' => [
+                'fields' => [
+                    'Attributes.name'
+                ]
+            ]
+        ]
+    ])
+    ->contain([
+        'RealestateAttributes' => [
+            'fields' => [
+                'RealestateAttributes.realestate_id',
+                'RealestateAttributes.value'
+            ]
+        ]
+    ])
+    ->where($condition);
+    
 
 If you need to reset the containments on a query you can set the second argument
 to ``true``::
