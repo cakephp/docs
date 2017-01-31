@@ -454,8 +454,8 @@ If you prefer to use join functions, you can look at
 
 .. _eager-loading-associations:
 
-Eager Loading Associations
-==========================
+Eager Loading Associations Via Contain
+======================================
 
 By default CakePHP does not load **any** associated data when using ``find()``.
 You need to 'contain' or eager-load each association you want loaded in your
