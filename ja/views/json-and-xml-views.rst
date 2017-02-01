@@ -5,7 +5,7 @@ JSON と XML ビュー
 JSON と XML レスポンスを作成できるようになり、
 それらは :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent` と統合されます。
 
-あなたのアプリケーションで ``RequestHandlerComponent`` と、
+あなたのアプリケーションで ``RequestHandlerComponent`` を有効にして、
 ``json`` と ``xml`` またはいずれかの拡張子のサポートを有効にすることで、
 自動的に新しいビュークラスを使用することが出来るようになります。
 以降、このページでは ``JsonView`` と ``XmlView`` をデータビューと呼びます。
