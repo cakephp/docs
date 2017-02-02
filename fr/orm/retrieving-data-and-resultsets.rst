@@ -536,6 +536,35 @@ souhaitez::
         'Shops.Managers'
     ]);
 
+
+Vous pouvez sélectionner des champs de toutes les associations en utilisant
+plusieurs appels à ``contain()``::
+
+    $query = $this->find()->select([
+        'Realestates.id',
+        'Realestates.title',
+        'Realestates.description'
+    ])
+    ->contain([
+        'RealestateAttributes' => [
+            'Attributes' => [
+                'fields' => [
+                    'Attributes.name'
+                ]
+            ]
+        ]
+    ])
+    ->contain([
+        'RealestateAttributes' => [
+            'fields' => [
+                'RealestateAttributes.realestate_id',
+                'RealestateAttributes.value'
+            ]
+        ]
+    ])
+    ->where($condition);
+
+
 Si vous avez besoin de remettre les contain sur une requête, vous pouvez
 définir le second argument à ``true``::
 
