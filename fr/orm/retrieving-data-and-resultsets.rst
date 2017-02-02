@@ -487,8 +487,8 @@ Si vous préférez utiliser les fonctions de jointure, vous pouvez consulter
 
 .. _eager-loading-associations:
 
-Eager Loading des Associations
-==============================
+Eager Loading des Associations Via Contain
+==========================================
 
 Par défaut, CakePHP ne charge **aucune** donnée associée lors de l'utilisation
 de ``find()``. Vous devez faire un 'contain' ou charger en eager chaque
@@ -686,8 +686,8 @@ utiliser l'option ``sort`` pour ordonner les données dans ces associations::
 
 .. _filtering-by-associated-data:
 
-Filtrer par les Données Associées
----------------------------------
+Filtrer par les Données Associées Via Matching et Joins
+=======================================================
 
 .. start-filtering
 
@@ -747,7 +747,7 @@ match et contain sur la même association, vous pouvez vous attendre à recevoir
 dans vos résultats.
 
 Utiliser innerJoinWith
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 Utiliser la fonction ``matching()``, comme nous l'avons vu précédemment, va
 créer un ``INNER JOIN`` avec l'association spécifiée et va aussi charger les
@@ -780,7 +780,7 @@ définie.
     Query::innerJoinWith() a été ajoutée dans 3.1
 
 Utiliser notMatching
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 L'opposé de ``matching()`` est ``notMatching()``. Cette fonction va changer
 la requête pour qu'elle filtre les résultats qui n'ont pas de relation avec
@@ -841,7 +841,7 @@ Gardez à l'esprit que le contraire de la fonction ``matching()``,
     Query::notMatching() a été ajoutée dans 3.1
 
 Utiliser leftJoinWith
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 Dans certaines situations, vous aurez à calculer un résultat selon une
 association, sans avoir à charger tous les enregistrements. Par
@@ -880,7 +880,7 @@ l'ensemble de résultats.
 .. end-filtering
 
 Changer les Stratégies de Récupération
---------------------------------------
+======================================
 
 Comme vous le savez peut-être déjà, les associations ``belongsTo`` et ``hasOne``
 sont chargées en utilisant un ``JOIN`` dans la requête du finder principal.
@@ -951,7 +951,7 @@ faisant::
     $articles->Comments->strategy('subquery');
 
 Lazy loading des Associations
------------------------------
+=============================
 
 Bien que CakePHP facilite le chargement en eager de vos associations, il y a des
 cas où vous devrez charger en lazy les associations. Vous devez vous référer
