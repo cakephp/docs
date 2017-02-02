@@ -536,7 +536,6 @@ souhaitez::
         'Shops.Managers'
     ]);
 
-
 Vous pouvez sélectionner des champs de toutes les associations en utilisant
 plusieurs appels à ``contain()``::
 
