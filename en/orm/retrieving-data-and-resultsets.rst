@@ -498,9 +498,10 @@ You can eager load associations as deep as you like::
         'Shops.Cities.Countries',
         'Shops.Managers'
     ]);
-    
-You can select fields from all associations with multiple easy ``contain()`` statements 
-::
+
+You can select fields from all associations with multiple easy ``contain()``
+statements::
+
     $query = $this->find()->select([
         'Realestates.id',
         'Realestates.title',
