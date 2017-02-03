@@ -111,7 +111,7 @@ json/xml に変換する前に独自のフォーマット処理が不要な場�
     }
 
     // ビューのコード - src/Template/Articles/json/index.ctp
-    foreach ($articles as &$$article) {
+    foreach ($articles as &$article) {
         unset($article->generated_html);
     }
     echo json_encode(compact('articles'));
