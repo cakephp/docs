@@ -248,6 +248,82 @@ URL. Если пользователь запрашивает адрес ``/arti
 таблице, или id окажется не верным - метод ``get()`` выбросит исключение
 ``NotFoundException``.
 
+Теперь давайте создадим Вид для нашего нового экшена 'view' и поместим его в
+файл **src/Template/Articles/view.ctp**
+
+.. code-block:: php
+
+    <!-- File: src/Template/Articles/view.ctp -->
+
+    <h1><?= h($article->title) ?></h1>
+    <p><?= h($article->body) ?></p>
+    <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
+
+Проверьте теперь, что все работает попробовав перейти по ссылкам в
+``/articles/index`` или вручную запросив статью введя ``/articles/view/{id}``
+заменяя ``{id}`` на 'id' статьи.
+
+Добавление статьи
+=================
+
+Чтение из Базы данных и отображение статей это неплохое начало, но давайте
+добавим возможность создания новых статей.
+
+Во-первых создадим экшен ``add()`` в Контроллере ``ArticlesController``::
+
+    // src/Controller/ArticlesController.php
+
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+
+    class ArticlesController extends AppController
+    {
+
+        public function initialize()
+        {
+            parent::initialize();
+
+            $this->loadComponent('Flash'); // Include the FlashComponent
+        }
+
+        public function index()
+        {
+            $this->set('articles', $this->Articles->find('all'));
+        }
+
+        public function view($id)
+        {
+            $article = $this->Articles->get($id);
+            $this->set(compact('article'));
+        }
+
+        public function add()
+        {
+            $article = $this->Articles->newEntity();
+            if ($this->request->is('post')) {
+                $article = $this->Articles->patchEntity($article, $this->request->data);
+                if ($this->Articles->save($article)) {
+                    $this->Flash->success(__('Your article has been saved.'));
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('Unable to add your article.'));
+            }
+            $this->set('article', $article);
+        }
+    }
+    
+.. note::
+
+    Вам понадобится включить компонент :doc:`/controllers/components/flash` в любой
+    Контроллер, где Вы собираетесь воспользоваться им. Если это необходимо, включите
+    его в Ваш ``AppController``.
+    
+Вот что делает экшен ``add()``: если методом HTTP-запроса является POST, попытаться
+сохранить данные использовав Модель Articles. Если по какой-то причине данные не могут
+быть сохранены, просто передать Вид. Это дает нам возможность показать пользователю
+ошибки валидации и другие предупреждения.
+
 .. note::
     The documentation is not currently supported in Russian language for this
     page.
