@@ -12,6 +12,9 @@ CakePHP を lighttpd や Microsoft IIS のような様々なウェブサーバ�
 
 -  HTTPサーバー。例: Apache。mod\_rewriteが推奨されますが、必須ではありません。
 -  PHP 5.3.0 以上 (CakePHP バージョン 2.6 以下は、 PHP 5.2.8 以上をサポートします) 。
+   CakePHP バージョン 2.8.0 以上は PHP 7 をサポートします。 PHP 7.1 以上を使用するためには、
+   PECL 経由で mcrypt をインストールする必要があります。詳しくは、
+   :doc:`/core-utility-libraries/security` をご覧ください。
 
 技術的にはデータベースエンジンは必ずしも必要ではありませんが、ほとんどのアプリケーションはこれを活用することが想像できます。
 CakePHPは種々のデータベース・ストレージのエンジンをサポートしています：
