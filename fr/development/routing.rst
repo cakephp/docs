@@ -311,7 +311,7 @@ Un exemple de plus, et vous serez un pro du routing::
     );
 
 C'est assez complexe, mais montre comme les routes peuvent vraiment
-devenir puissantes. L'URL fourni a quatre éléments de route. Le premier
+devenir puissantes. L'URL fournie a quatre éléments de route. Le premier
 nous est familier: c'est une route par défaut qui dit à CakePHP d'attendre
 un nom de controller.
 
@@ -330,7 +330,7 @@ pour les actions index() de ses controllers respectifs, avec les paramètres de
 date dans ``$this->request->params``.
 
 Il y a plusieurs éléments de route qui ont une signification spéciale dans
-CakePHP, et ne devraient pas être utilisés à moins que vous souhaitiez
+CakePHP, et ne devraient pas être utilisés à moins que vous ne souhaitiez
 spécifiquement utiliser leur signification.
 
 * ``controller`` Utilisé pour nommer le controller pour une route.
@@ -830,7 +830,7 @@ utilisés lors de la connexion des routes. Par exemple, si votre action
 renommer vos actions::
 
     $routes->resources('Articles', [
-        'actions' => ['update' => 'put', 'create' => 'create']
+        'actions' => ['update' => 'put', 'add' => 'create']
     ]);
 
 Le code ci-dessus va utiliser ``put()`` pour l'action ``edit()``, et
