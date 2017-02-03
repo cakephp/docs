@@ -394,6 +394,11 @@ Routing
   connected route.
 * Routes can now match only specific hosts through the ``_host`` option.
 
+Email
+=====
+
+* ``Email::setPriority()``/``Email::getPriority()`` have been added.
+
 HtmlHelper
 ==========
 

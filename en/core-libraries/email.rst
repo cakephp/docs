@@ -187,6 +187,7 @@ following configuration keys are used:
 - ``'messageId'``: Message ID of e-mail. See ``Email::setMessageId()``.
 - ``'subject'``: Subject of the message. See ``Email::setSubject()``.
 - ``'message'``: Content of message. Do not set this field if you are using rendered content.
+- ``'priority'``: Priority of the email as numeric value (usually from 1 to 5 with 1 being the highest).
 - ``'headers'``: Headers to be included. See ``Email::setHeaders()``.
 - ``'viewRender'``: If you are using rendered content, set the view classname.
   See ``Email::setViewRenderer()``.
