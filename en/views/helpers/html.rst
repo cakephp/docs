@@ -212,8 +212,8 @@ Creating DOCTYPE
 
 .. php:method:: docType(string $type = 'html5')
 
-Returns a (X)HTML DOCTYPE(document type declaration). Supply the document type according to the
-following table:
+Returns a (X)HTML DOCTYPE (document type declaration). Supply the document
+type according to the following table:
 
 +--------------------------+----------------------------------+
 | type                     | translated value                 |
@@ -224,7 +224,7 @@ following table:
 +--------------------------+----------------------------------+
 | html4-frame              | HTML 4.01 Frameset               |
 +--------------------------+----------------------------------+
-| html5                    | HTML5                            |
+| html5 (default)          | HTML5                            |
 +--------------------------+----------------------------------+
 | xhtml-strict             | XHTML 1.0 Strict                 |
 +--------------------------+----------------------------------+

@@ -209,32 +209,32 @@ lien::
 Tout attribut fourni à meta() lorsqu'elle est appelée de cette façon, sera
 ajoutée à la balise de lien générée.
 
-Créer une Balise Doctype
-------------------------
+Créer le DOCTYPE
+----------------
 
 .. php:method:: docType(string $type = 'html5')
 
-Retourne une balise doctype (X)HTML. Fournissez votre doctype selon la table
-suivante:
+Retourne une déclaration DOCTYPE (*document type declaration*) (X)HTML.
+Spécifiez le DOCTYPE souhaité selon la table suivante:
 
 +--------------------------+----------------------------------+
-| type                     | valeur résultante                |
+| type                     | valeur finale                    |
 +==========================+==================================+
-| html4-strict             | HTML4 Strict                     |
+| html4-strict             | HTML 4.01 Strict                 |
 +--------------------------+----------------------------------+
-| html4-trans              | HTML4 Transitional               |
+| html4-trans              | HTML 4.01 Transitional           |
 +--------------------------+----------------------------------+
-| html4-frame              | HTML4 Frameset                   |
+| html4-frame              | HTML 4.01 Frameset               |
 +--------------------------+----------------------------------+
-| html5                    | HTML5                            |
+| html5 (défaut)           | HTML5                            |
 +--------------------------+----------------------------------+
-| xhtml-strict             | XHTML1 Strict                    |
+| xhtml-strict             | XHTML 1.0 Strict                 |
 +--------------------------+----------------------------------+
-| xhtml-trans              | XHTML1 Transitional              |
+| xhtml-trans              | XHTML 1.0 Transitional           |
 +--------------------------+----------------------------------+
-| xhtml-frame              | XHTML1 Frameset                  |
+| xhtml-frame              | XHTML 1.0 Frameset               |
 +--------------------------+----------------------------------+
-| xhtml11                  | XHTML1.1                         |
+| xhtml11                  | XHTML 1.1                        |
 +--------------------------+----------------------------------+
 
 ::
