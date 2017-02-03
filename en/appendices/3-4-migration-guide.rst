@@ -86,6 +86,10 @@ Other Deprecations
 
 * The public properties on ``Cake\Event\Event`` are deprecated, new methods have
   been added to read/write the relevant properties.
+* ``Event::name()`` is deprecated. Use ``Event::getName()`` instead.
+* ``Event::subject()`` is deprecated. Use ``Event::getSubject()`` instead.
+* ``Event::result()`` is deprecated. Use ``Event::getResult()`` instead.
+* ``Event::data()`` is deprecated. Use ``Event::getData()`` instead.
 * The ``Auth.redirect`` session variable is no longer used. Instead a query
   string parameter is used to store the redirect URL.
 * ``AuthComponent`` no longer stores redirect URLs when the unauthorized URL is
@@ -108,6 +112,11 @@ Other Deprecations
 * ``Route::parse()`` is deprecated. ``Route::parseRequest()`` should be used
   instead as it accepts a request and gives more control/flexibility in handling
   incoming requests.
+* ``FormHelper::input()`` is deprecated. Use ``FormHelper::control()`` instead.
+* ``FormHelper::inputs()`` is deprecated. Use ``FormHelper::controls()`` instead.
+* ``FormHelper::allInputs()`` is deprecated. Use ``FormHelper::allControls()`` instead.
+* ``Mailer::layout()`` is deprecated. Use ``Mailer::setLayout()`` provided by 
+  ``Mailer::__call()`` instead.
 
 Deprecated Combined Get/Set Methods
 -----------------------------------
@@ -141,6 +150,7 @@ The following is a list of methods that are deprecated and replaced with
     * ``tieWith()`` (now ``setConjunction()``/``getConjunction()``)
 ``Cake\Database\Expression\ValuesExpression``
     * ``columns()``
+    * ``values()``
     * ``query()``
 ``Cake\Database\Query``
     * ``connection()``
@@ -157,6 +167,29 @@ The following is a list of methods that are deprecated and replaced with
 ``Cake\Database\TypeMapTrait``
     * ``typeMap()``
     * ``defaultTypes()``
+``Cake\ORM\Association``
+    * ``name()``
+    * ``cascadeCallbacks()``
+    * ``source()``
+    * ``target()``
+    * ``conditions()``
+    * ``bindingKey()``
+    * ``foreignKey()``
+    * ``dependent()``
+    * ``joinType()``
+    * ``property()``
+    * ``strategy()``
+    * ``finder()``
+``Cake\ORM\Association\BelongsToMany``
+    * ``targetForeignKey()``
+    * ``saveStrategy()``
+    * ``conditions()``
+``Cake\ORM\Association\HasMany``
+    * ``saveStrategy()``
+    * ``foreignKey()``
+    * ``sort()``
+``Cake\ORM\Association\HasOne``
+    * ``foreignKey()``
 ``Cake\ORM\EagerLoadable``
     * ``config()``
     * setter part of ``canBeJoined()`` (now ``setCanBeJoined()``)
@@ -168,6 +201,8 @@ The following is a list of methods that are deprecated and replaced with
     * ``config()``
 ``Cake\ORM\Query``
     * ``eagerLoader()``
+    * ``hydrate()`` (now ``enableHydration()``/``isHydrationEnabled()``)
+    * ``autoFields()`` (now ``enableAutoFields()``/``isAutoFieldsEnabled()``)
 ``Cake\ORM\Table``
     * ``table()``
     * ``alias()``
@@ -339,6 +374,8 @@ Error
 Event
 =====
 
+* ``Event::getName()`` was added.
+* ``Event::getSubject()`` was added.
 * ``Event::getData()`` was added.
 * ``Event::setData()`` was added.
 * ``Event::getResult()`` was added.
@@ -388,9 +425,9 @@ FormHelper
 * You can now configure the sources which FormHelper reads from. This makes
   creating GET forms simpler. See :ref:`form-values-from-query-string` for more
   information.
-* ``FormHelper::input()`` is deprecated. Use ``FormHelper::control()`` instead.
-* ``FormHelper::inputs()`` is deprecated. Use ``FormHelper::controls()`` instead.
-* ``FormHelper::allInputs()`` is deprecated. Use ``FormHelper::allControls()`` instead.
+* ``FormHelper::control()`` was added.
+* ``FormHelper::controls()`` was added.
+* ``FormHelper::allControls()`` was added.
 
 Validation
 ==========
