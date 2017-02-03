@@ -5,10 +5,10 @@ Form
 
 .. php:class:: FormHelper(View $view, array $config = [])
 
-Le Helper Form prend en charge la plupart des opérations lourdes de la création
-de formulaire. Le Helper Form se concentre sur la possibilité de créer des
+Le FormHelper prend en charge la plupart des opérations lourdes de la création
+de formulaire. Le FormHelper se concentre sur la possibilité de créer des
 formulaires rapidement, d'une manière qui permettra de rationaliser la
-validation, la re-population et la mise en page (layout). Le Helper Form est
+validation, la re-population et la mise en page (layout). Le FormHelper est
 aussi flexible - Il va faire à peu près tout pour vous en utilisant les
 conventions, ou vous pouvez utiliser des méthodes spécifiques pour ne prendre
 uniquement que ce dont vous avez besoin.
@@ -19,8 +19,8 @@ Création de Formulaire
 .. php:method:: create(mixed $model = null, array $options = [])
 
 La première méthode que vous aurez besoin d'utiliser pour tirer pleinement
-profit du Helper Form (Helper Formulaire) est ``create()``. Cette méthode
-affichera une balise d'ouverture de formulaire.
+profit du FormHelper est ``create()``. Cette méthode affichera une balise
+d'ouverture de formulaire.
 
 Tous les paramètres sont optionnels. Si ``create()`` est appelée sans paramètre,
 CakePHP supposera que vous voulez créer un formulaire en rapport avec le
@@ -780,7 +780,7 @@ Créer des Inputs Text
 
 .. php:method:: text(string $name, array $options)
 
-  Les autres méthodes disponibles dans l'Helper Form permettent
+  Les autres méthodes disponibles dans le FormHelper permettent
   la création d'éléments spécifiques de formulaire. La plupart de ces
   méthodes utilisent également un paramètre spécial $options.
   Toutefois, dans ce cas, $options est utilisé avant tout pour spécifier
@@ -910,7 +910,7 @@ Affichera:
     <input type="hidden" name="done" value="0">
     <input type="checkbox" name="done" value="555">
 
-Si vous ne voulez pas que le Helper Form génère un input caché::
+Si vous ne voulez pas que le FormHelper génère un input caché::
 
     echo $this->Form->checkbox('done', ['hiddenField' => false]);
 
@@ -1004,7 +1004,7 @@ sélectionnées. Par défaut à ``true``::
 * ``$attributes['options']`` Cette clé vous permet de spécifier
   manuellement des options pour un input select (menu de sélection),
   ou pour un groupe radio. A moins que le 'type' soit spécifié à 'radio',
-  le Helper Form supposera que la cible est un input select (menu de
+  le FormHelper supposera que la cible est un input select (menu de
   sélection)::
 
     echo $this->Form->select('field', [1,2,3,4,5]);
@@ -2056,4 +2056,4 @@ inputs spéciales ``_Token`` soient générées.
 .. meta::
     :title lang=fr: FormHelper
     :description lang=fr: The FormHelper focuses on creating forms quickly, in a way that will streamline validation, re-population and layout.
-    :keywords lang=fr: html helper,cakephp html,form create,form input,form select,form file field,form label,form text,form password,form checkbox,form radio,form submit,form date time,form error,validate upload,unlock field,form security
+    :keywords lang=fr: form helper,cakephp form,form create,form input,form select,form file field,form label,form text,form password,form checkbox,form radio,form submit,form date time,form error,validate upload,unlock field,form security

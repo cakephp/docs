@@ -101,8 +101,8 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
 ともに、フィールドが空欄でも良いか否かについてを制御するためのパラメーターを提供します。
 
 *   ``false`` フィールドが空欄であることが認められません。
-*   ``create`` **create** 実行時にバリデーションを行う場合、フィールドが空欄でないことが求められます。
-*   ``update`` **update** 実行時にバリデーションを行う場合、フィールドが空欄でないことが求められます。
+*   ``create`` **create** 実行時にバリデーションを行う場合、フィールドは空欄にすることができます。
+*   ``update`` **update** 実行時にバリデーションを行う場合、フィールドは空欄にすることができます。
 
 ``''`` や、 ``null`` 、そして ``[]`` といった値（空の配列）は、フィールドが空欄であることが
 認められないときは、バリデーションエラーを引き起こします。一方、フィールドが空欄であることが
@@ -112,8 +112,8 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
 これらのメソッドの例は以下の通りです。 ::
 
     $validator->allowEmpty('published')
-        ->notEmpty('title', 'A title is required')
-        ->notEmpty('body', 'A body is required', 'create')
+        ->notEmpty('title', 'Title cannot be empty')
+        ->notEmpty('body', 'Body cannot be empty', 'create')
         ->allowEmpty('header_image', 'update');
 
 最後に適用されるルールとして設定する

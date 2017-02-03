@@ -383,7 +383,7 @@ içerikleri izleyiniz::
 
     <h1>
         Bookmarks tagged with
-        <?= $this->Text->toList($tags) ?>
+        <?= $this->Text->toList(h($tags)) ?>
     </h1>
 
     <section>
@@ -394,7 +394,7 @@ içerikleri izleyiniz::
             <small><?= h($bookmark->url) ?></small>
 
             <!-- TextHelper kullanarak text'in formatını ayarlayın-->
-            <?= $this->Text->autoParagraph($bookmark->description) ?>
+            <?= $this->Text->autoParagraph(h($bookmark->description)) ?>
         </article>
     <?php endforeach; ?>
     </section>

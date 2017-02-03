@@ -419,7 +419,7 @@ Construisons donc le fichier de vue pour notre action ``tags()``. Dans
 
     <h1>
         Bookmarks tagged with
-        <?= $this->Text->toList($tags) ?>
+        <?= $this->Text->toList(h($tags)) ?>
     </h1>
 
     <section>
@@ -430,7 +430,7 @@ Construisons donc le fichier de vue pour notre action ``tags()``. Dans
             <small><?= h($bookmark->url) ?></small>
 
             <!-- Utilise le TextHelper pour formater le texte -->
-            <?= $this->Text->autoParagraph($bookmark->description) ?>
+            <?= $this->Text->autoParagraph(h($bookmark->description)) ?>
         </article>
     <?php endforeach; ?>
     </section>

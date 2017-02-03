@@ -26,7 +26,7 @@ CakePHP はデバッグ作業やあなたのアプリケーション内部で何
     
         return debug($data); // 必ず $data を返します。
 
-``pr()`` や ``pj()`` もご確認ください。
+``dd()`` 、 ``pr()`` 及び ``pj()`` もご確認ください。
 
 .. php:function:: stackTrace()
 

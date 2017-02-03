@@ -200,7 +200,7 @@ Most of the following constants refer to paths in your application.
 
 .. php:const:: DS
 
-    Short for PHP's ``DIRECTORY_SEPARATOR``, which is ``/`` on Linux and ``\\``
+    Short for PHP's ``DIRECTORY_SEPARATOR``, which is ``/`` on Linux and ``\``
     on Windows.
 
 .. php:const:: LOGS

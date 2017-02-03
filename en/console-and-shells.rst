@@ -982,7 +982,7 @@ Using Boolean Options
 Options can be defined as boolean options, which are useful when you need to
 create some flag options. Like options with defaults, boolean options always
 include themselves into the parsed parameters. When the flags are present they
-are set to ``true``, when they are absent they are set ot ``false``::
+are set to ``true``, when they are absent they are set to ``false``::
 
     $parser->addOption('verbose', [
         'help' => 'Enable verbose output.',

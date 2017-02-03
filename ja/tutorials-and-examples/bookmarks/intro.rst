@@ -382,7 +382,7 @@ Finder メソッドは、常に :doc:`/orm/query-builder` オブジェクトと�
 
     <h1>
         Bookmarks tagged with
-        <?= $this->Text->toList($tags) ?>
+        <?= $this->Text->toList(h($tags)) ?>
     </h1>
 
     <section>
@@ -393,7 +393,7 @@ Finder メソッドは、常に :doc:`/orm/query-builder` オブジェクトと�
             <small><?= h($bookmark->url) ?></small>
 
             <!-- Use the TextHelper to format text -->
-            <?= $this->Text->autoParagraph($bookmark->description) ?>
+            <?= $this->Text->autoParagraph(h($bookmark->description)) ?>
         </article>
     <?php endforeach; ?>
     </section>

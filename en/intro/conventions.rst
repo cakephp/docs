@@ -107,8 +107,8 @@ after the model tables they will join, arranged in alphabetical order
 
 In addition to use an auto-increment key as the primary key, you may also use
 UUID columns. CakePHP will create a unique 36 character UUID
-(:php:meth:`Cake\\Utility\\Text::uuid()`) whenever you save a new record using the
-``Table::save()`` method.
+(:php:meth:`Cake\\Utility\\Text::uuid()`) whenever you save a new record using
+the ``Table::save()`` method.
 
 View Conventions
 ================

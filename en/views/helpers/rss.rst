@@ -5,7 +5,7 @@ Rss
 
 .. php:class:: RssHelper(View $view, array $config = [])
 
-The RSS helper makes generating XML for `RSS feeds <https://en.wikipedia.org/wiki/RSS>`_ easy.
+The RssHelper makes generating XML for `RSS feeds <https://en.wikipedia.org/wiki/RSS>`_ easy.
 
 Creating an RSS Feed with the RssHelper
 =======================================
@@ -195,5 +195,5 @@ site at http://validator.w3.org/feed/.
 
 .. meta::
     :title lang=en: RssHelper
-    :description lang=en: The RSS helper makes generating XML for RSS feeds easy.
+    :description lang=en: The RssHelper makes generating XML for RSS feeds easy.
     :keywords lang=en: rss helper,rss feed,isrss,rss item,channel data,document data,parse extensions,request handler

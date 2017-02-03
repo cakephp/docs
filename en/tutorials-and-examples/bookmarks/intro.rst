@@ -396,7 +396,7 @@ put the following content::
 
     <h1>
         Bookmarks tagged with
-        <?= $this->Text->toList($tags) ?>
+        <?= $this->Text->toList(h($tags)) ?>
     </h1>
 
     <section>
@@ -407,7 +407,7 @@ put the following content::
             <small><?= h($bookmark->url) ?></small>
 
             <!-- Use the TextHelper to format text -->
-            <?= $this->Text->autoParagraph($bookmark->description) ?>
+            <?= $this->Text->autoParagraph(h($bookmark->description)) ?>
         </article>
     <?php endforeach; ?>
     </section>
