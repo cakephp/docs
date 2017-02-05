@@ -114,13 +114,6 @@ log() 関数は ``LogTrait`` により提供されており、どれも多くの
         }
     }
 
-
-
-CakePHP requires that all logging adapters implement ``Psr\Log\LoggerInterface``.
-The class :php:class:`Cake\Log\Engine\BaseLog` is an easy way to satisfy the
-interface as it only requires you to implement the ``log()`` method.
-
-
 CakePHP では 全てのロギングアダプターにおいて ``Psr\Log\LoggerInterface`` を実装する必要があります。
 :php:class:`Cake\Log\Engine\BaseLog` クラスは、 ``log()`` メソッドを実装するだけで簡単にその要求を満たすことができます。
 
