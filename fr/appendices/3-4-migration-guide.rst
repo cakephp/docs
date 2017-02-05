@@ -91,6 +91,10 @@ Autres dépréciations
 
 * Les propriétés _public_ de ``Cake\Event\Event`` sont dépréciées, de nouvelles
   méthodes ont été ajoutées pour lire et écrire ces propriétés.
+* ``Event::name()`` est dépréciée. Utilisez ``Event::getName()`` à la place.
+* ``Event::subject()`` est dépréciée. Utilisez ``Event::getSubject()`` à la place.
+* ``Event::result()`` est dépréciée. Utilisez ``Event::getResult()`` à la place.
+* ``Event::data()`` est dépréciée. Utilisez ``Event::getData()`` à la place.
 * La valeur de ``Auth.redirect`` stockée en session n'est plus utilisée. Un
   paramètre d'URL est maintenant utilisé pour stocker l'URL de redirection.
 * ``AuthComponent`` ne stocke plus les URLs de redirection quand l'URL non
@@ -114,6 +118,11 @@ Autres dépréciations
 * ``Route::parse()`` est dépréciée. ``Route::parseRequest()`` est maintenant
   la méthode recommandée car elle accepte une request en argument et donne plus
   de contrôle et de flexibilité dans la manipulation des requêtes entrantes.
+* ``FormHelper::input()`` est dépréciée. Utilisez ``FormHelper::control()`` à la place.
+* ``FormHelper::inputs()`` est dépréciée. Utilisez ``FormHelper::controls()`` à la place.
+* ``FormHelper::allInputs()`` est dépréciée. Utilisez ``FormHelper::allControls()`` à la place.
+* ``Mailer::layout()`` est dépréciée. Utilisez ``Mailer::setLayout()`` exposée par
+  ``Mailer::__call()`` à la place.
 
 Dépréciation des getters / setters combinés
 -------------------------------------------
@@ -148,6 +157,7 @@ Cake\Database\Expression\QueryExpression
     * ``tieWith()`` (devenue ``setConjunction()`` / ``getConjunction()``)
 Cake\Database\Expression\ValuesExpression
     * ``columns()``
+    * ``values()``
     * ``query()``
 Cake\Database\Query
     * ``connection()``
@@ -164,6 +174,29 @@ Cake\Database\TypeMap
 Cake\Database\TypeMapTrait
     * ``typeMap()``
     * ``defaultTypes()``
+``Cake\ORM\Association``
+    * ``name()``
+    * ``cascadeCallbacks()``
+    * ``source()``
+    * ``target()``
+    * ``conditions()``
+    * ``bindingKey()``
+    * ``foreignKey()``
+    * ``dependent()``
+    * ``joinType()``
+    * ``property()``
+    * ``strategy()``
+    * ``finder()``
+``Cake\ORM\Association\BelongsToMany``
+    * ``targetForeignKey()``
+    * ``saveStrategy()``
+    * ``conditions()``
+``Cake\ORM\Association\HasMany``
+    * ``saveStrategy()``
+    * ``foreignKey()``
+    * ``sort()``
+``Cake\ORM\Association\HasOne``
+    * ``foreignKey()``
 Cake\ORM\EagerLoadable
     * ``config()``
     * setter part of ``canBeJoined()`` (devenue ``setCanBeJoined()``)
@@ -175,6 +208,8 @@ Cake\ORM\Locator\TableLocator
     * ``config()``
 Cake\ORM\Query
     * ``eagerLoader()``
+    * ``hydrate()`` (now ``enableHydration()``/``isHydrationEnabled()``)
+    * ``autoFields()`` (now ``enableAutoFields()``/``isAutoFieldsEnabled()``)
 Cake\ORM\Table
     * ``table()``
     * ``alias()``
@@ -353,6 +388,8 @@ Erreur
 Event
 =====
 
+* ``Event::getName()`` a été ajoutée.
+* ``Event::getSubject()`` a été ajoutée.
 * ``Event::getData()`` a été ajoutée.
 * ``Event::setData()`` a été ajoutée.
 * ``Event::getResult()`` a été ajoutée.
@@ -372,6 +409,11 @@ Routing
   défaut à ajouter à chaque route "connectée".
 * Les routes peuvent maintenant être "matché" sur des hosts spécifiques à
   l'aide de l'option ``_host``.
+
+Email
+=====
+
+* ``Email::setPriority()``/``Email::getPriority()`` ont été ajoutées.
 
 HtmlHelper
 ==========
@@ -405,9 +447,9 @@ FormHelper
 
 * Vous pouvez maintenant configurer les sources à partir desquelles FormHelper
   lit. Ceci simplifie la création des formulaires GET. Consultez :ref:`form-values-from-query-string` pour plus d'informations.
-* ``FormHelper::input()`` est dépréciée. Utilisez plutôt ``FormHelper::control()``.
-* ``FormHelper::inputs()`` est dépréciée. Utilisez plutôt ``FormHelper::controls()``.
-* ``FormHelper::allInputs()`` est dépréciée. Utilisez plutôt ``FormHelper::allControls()``.
+* ``FormHelper::control()`` a été ajoutée.
+* ``FormHelper::controls()`` a été ajoutée.
+* ``FormHelper::allControls()`` a été ajoutée.
 
 Validation
 ==========
