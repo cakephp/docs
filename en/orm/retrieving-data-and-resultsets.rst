@@ -291,11 +291,11 @@ Customize Key-Value Output
 Lastly it is possible to use closures to access entity accessor methods in your
 list finds. ::
 
-    // In your Article Entity create a virtual field to be used as the displayField:
+    // In your Authors Entity create a virtual field to be used as the displayField:
     function _getLabel()
     {
         return __('Name %s', $this->_properties['name'])
-          . ' / ' . __('Category ID %s', $this->_properties['category_id']);
+          . ' / ' . __('User ID %s', $this->_properties['category_id']);
     }
 
 This example shows using the ``_getLabel()`` accessor method from
@@ -311,8 +311,8 @@ the Author entity. ::
 
 You can also fetch the label in the list directly using. ::
 
-    // In ArticlesTable::initialize():
-    $this->displayField('label'); // Uses Article::_getLabel()
+    // In AuthorsTable::initialize():
+    $this->displayField('label'); // Uses Author::_getLabel()
     // In your finders/controller:
     $query = $authors->find('list');
 
