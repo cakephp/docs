@@ -292,10 +292,10 @@ Lastly it is possible to use closures to access entity accessor methods in your
 list finds. ::
 
     // In your Authors Entity create a virtual field to be used as the displayField:
-    function _getLabel()
+    protected function _getLabel()
     {
         return __('Name %s', $this->_properties['name'])
-          . ' / ' . __('User ID %s', $this->_properties['category_id']);
+          . ' / ' . __('User ID %s', $this->_properties['user_id']);
     }
 
 This example shows using the ``_getLabel()`` accessor method from
