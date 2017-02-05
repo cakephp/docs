@@ -289,18 +289,19 @@ Customize Key-Value Output
 --------------------------
 
 Lastly it is possible to use closures to access entity accessor methods in your
-list finds.
+list finds. ::
 
-    // Create a virtual field to be used for display
+    // In your Article Entity create a virtual field to be used as the displayField:
     function _getLabel()
     {
         return __('Name %s', $this->_properties['name'])
-          . ' / ' . __('User ID %s', $this->_properties['user_id']);
+          . ' / ' . __('Category ID %s', $this->_properties['category_id']);
     }
 
 This example shows using the ``_getLabel()`` accessor method from
 the Author entity. ::
 
+    // In your finders/controller:
     $query = $articles->find('list', [
         'keyField' => 'id',
         'valueField' => function ($article) {
@@ -310,7 +311,9 @@ the Author entity. ::
 
 You can also fetch the label in the list directly using. ::
 
-    $this->displayField('label');
+    // In ArticlesTable::initialize():
+    $this->displayField('label'); // Uses Article::_getLabel()
+    // In your finders/controller:
     $query = $authors->find('list');
 
 Finding Threaded Data
