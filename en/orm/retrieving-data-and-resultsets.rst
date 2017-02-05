@@ -312,7 +312,7 @@ the Author entity. ::
 You can also fetch the label in the list directly using. ::
 
     // In AuthorsTable::initialize():
-    $this->displayField('label'); // Uses Author::_getLabel()
+    $this->displayField('label'); // Will utilize Author::_getLabel()
     // In your finders/controller:
     $query = $authors->find('list');
 
