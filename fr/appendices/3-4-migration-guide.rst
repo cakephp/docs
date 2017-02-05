@@ -373,6 +373,11 @@ Routing
 * Les routes peuvent maintenant être "matché" sur des hosts spécifiques à
   l'aide de l'option ``_host``.
 
+Email
+=====
+
+* ``Email::setPriority()``/``Email::getPriority()`` ont été ajoutées.
+
 HtmlHelper
 ==========
 
