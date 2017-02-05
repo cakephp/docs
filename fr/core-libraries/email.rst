@@ -203,7 +203,7 @@ sont utilisées:
 - ``'message'``: Contenu du message. Ne définissez pas ce champ si vous
   utilisez un contenu rendu.
 - ``'priority'``: Priorité de l'email, exprimée avec un nombre (généralement de
-1 à 5, 1 étant la priorité la plus haute).
+  1 à 5, 1 étant la priorité la plus haute).
 - ``'headers'``: Headers à inclure. Regardez ``Email::setHeaders()``.
 - ``'viewRender'``: Si vous utilisez un contenu rendu, définissez le nom de
   classe de la vue. Regardez ``Email::setViewRenderer()``.
