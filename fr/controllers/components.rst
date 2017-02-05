@@ -85,6 +85,7 @@ une implémentation sur mesure::
 
     // app/Controller/Component/MyAuthComponent.php
     App::uses('AuthComponent', 'Controller/Component');
+
     class MyAuthComponent extends AuthComponent {
         // Ajouter votre code pour surcharger le AuthComponent du coeur
     }
@@ -129,7 +130,7 @@ Vous n'avez parfois pas besoin de rendre le component accessible sur chaque
 action. Dans ce cas là, vous pouvez charger à la volée en utilisant la
 :doc:`Component Collection </core-libraries/collections>`. A partir de
 l'intérieur d'un controller, vous pouvez faire comme ce qui suit::
-    
+
     $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
 
@@ -161,6 +162,8 @@ La première étape consiste à créer un nouveau fichier et une classe pour
 le component. Créez le fichier dans
 ``app/Controller/Component/MathComponent.php``. La structure de base pour
 le component ressemblerait à quelque chose comme cela::
+
+    App::uses('Component', 'Controller');
 
     class MathComponent extends Component {
         public function faireDesOperationsComplexes($montant1, $montant2) {
@@ -219,9 +222,11 @@ exactement de la même manière que dans vos controllers - en utilisant la
 variable ``$components``::
 
     // app/Controller/Component/CustomComponent.php
+    App::uses('Component', 'Controller');
+
     class CustomComponent extends Component {
         // l'autre component que votre component utilise
-        public $components = array('Existing'); 
+        public $components = array('Existing');
 
         public function initialize($controller) {
             $this->Existing->foo();
@@ -233,6 +238,8 @@ variable ``$components``::
     }
 
     // app/Controller/Component/ExistingComponent.php
+    App::uses('Component', 'Controller');
+
     class ExistingComponent extends Component {
 
         public function initialize($controller) {

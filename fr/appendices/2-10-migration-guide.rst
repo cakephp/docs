@@ -20,3 +20,5 @@ Helpers
 
 * ``HtmlHelper::image()`` supporte maintenant l'option ``base64``. Cette option
   va lire les fichiers image locaux et créer des URIs de données base64.
+* ``HtmlHelper::addCrumb()`` supporte maintenant l'option ``prepend``. Elle
+  vous permet de préfixer un breadcrumb plutôt que d'ajouter à la liste.
