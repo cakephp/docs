@@ -190,7 +190,8 @@ pages in the paged data set.
           array('class' => 'prev disabled')
         );
 
-    If you were currently on the second page of posts, you would get the following:
+    If you were currently on the second page of posts, you would get the
+    following:
 
     .. code-block:: html
 
@@ -235,18 +236,19 @@ pages in the paged data set.
 
 .. versionchanged:: 2.3
     For methods: :php:meth:`PaginatorHelper::prev()` and :php:meth:`PaginatorHelper::next()` it
-    is now possible to set the ``tag`` option to ``false`` to disable the wrapper.
-    New options ``disabledTag`` has been added.
+    is now possible to set the ``tag`` option to ``false`` to disable the
+    wrapper. New options ``disabledTag`` has been added.
 
-    If you leave the ``$disabledOptions`` empty the ``$options`` parameter will be
-    used. This can save some additional typing if both sets of options are the
-    same.
+    If you leave the ``$disabledOptions`` empty the ``$options`` parameter will
+    be used. This can save some additional typing if both sets of options are
+    the same.
 
 .. php:method:: next($title = 'Next >>', $options = array(), $disabledTitle = null, $disabledOptions = array())
 
-    This method is identical to :php:meth:`~PaginatorHelper::prev()` with a few exceptions. It
-    creates links pointing to the next page instead of the previous one. It also
-    uses ``next`` as the rel attribute value instead of ``prev``
+    This method is identical to :php:meth:`~PaginatorHelper::prev()` with a few
+    exceptions. It creates links pointing to the next page instead of the
+    previous one. It also uses ``next`` as the rel attribute value instead of
+    ``prev``
 
 .. php:method:: first($first = '<< first', $options = array())
 
