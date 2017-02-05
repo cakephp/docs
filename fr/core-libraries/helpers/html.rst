@@ -1063,8 +1063,19 @@ Création d'un chemin de navigation avec le Helper Html
         $this->Html->addCrumb('Users', '/users');
         $this->Html->addCrumb('Add User', array('controller' => 'users', 'action' => 'add'));
 
-    Ceci ajoutera la sortie "**Home > Users > Add User**" dans votre layout
-    où le fil d'Ariane a été ajouté.
+    Ceci ajoutera la sortie "**Users > Add User**" dans votre layout à
+    l'endroit où la fonction getCrumbs été ajoutée.
+
+Vous pouvez préfixer un crumb avec l'option ``prepend``::
+
+    $this->Html->addCrumb('Add User', array('controller' => 'users', 'action' => 'add'));
+    $this->Html->addCrumb('Users', '/users', array('prepend' => true));
+
+Ceci va ajouter la sortie "**Users > Add User**" dans votre layout à l'endroit
+où la fonction getCrumbs a été ajoutée.
+
+.. versionadded:: 2.10
+    L'option ``prepend`` a été ajoutée dans la version 2.10
 
 .. php:method:: getCrumbList(array $options = array(), mixed $startText)
 
