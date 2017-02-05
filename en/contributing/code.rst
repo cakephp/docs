@@ -113,19 +113,19 @@ Choosing where your changes will be merged into
 When making pull requests you should make sure you select the correct base
 branch, as you cannot edit it once the pull request is created.
 
-* If your change is a **bugfix** and doesn't introduce new functionality and only
-  corrects existing behavior that is present in the current release. Then
+* If your change is a **bugfix** and doesn't introduce new functionality and
+  only corrects existing behavior that is present in the current release. Then
   choose **2.x** as your merge target.
 * If your change is a **new feature** or an addition to the framework, then you
   should choose the ``2.next`` branch.
-* If your change breaks existing functionality, your patch is unlikely to
-  be merged into 2.x. Instead you should target 4.0
+* If your change breaks existing functionality, your patch is unlikely to be
+  merged into 2.x. Instead you should target 4.0
 
 .. note::
 
     Remember that all code you contribute to CakePHP will be licensed under the
     MIT License, and the `Cake Software Foundation <http://cakefoundation.org/>`_
-    will become the owner of any contributed code. Contributors should follow the 
+    will become the owner of any contributed code. Contributors should follow the
     `CakePHP Community Guidelines <http://community.cakephp.org/guidelines>`_.
 
 All bug fixes merged into a maintenance branch will also be merged into upcoming
