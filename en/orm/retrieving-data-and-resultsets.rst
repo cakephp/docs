@@ -294,7 +294,7 @@ list finds. ::
     // In your Authors Entity create a virtual field to be used as the displayField:
     protected function _getLabel()
     {
-        return __('Name %s', $this->_properties['name'])
+        return $this->_properties['first_name'] . ' ' . $this->_properties['last_name']
           . ' / ' . __('User ID %s', $this->_properties['user_id']);
     }
 
