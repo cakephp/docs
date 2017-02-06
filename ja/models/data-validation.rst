@@ -961,8 +961,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
 .. php:staticmethod:: maxLength(string $check, integer $max)
 
-    このルールはデータが最大長に収まっているかどうかを検証します。
-    ::
+    このルールはデータが最大長に収まっているかどうかを検証します。 ::
 
         public $validate = array(
             'login' => array(
@@ -973,6 +972,19 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
     これは 'login' フィールドが15文字以内になることを保証します。
     15バイトではありません。
+
+.. php:staticmethod:: maxLengthBytes(string $check, integer $max)
+
+    このルールはデータが最大長に収まっているかどうかを検証します。 ::
+
+        public $validate = array(
+            'data' => array(
+                'rule' => array('maxLengthBytes', 2 ** 24 - 1),
+                'message' => 'データは 16 MB より大きくできません。'
+            )
+        );
+
+    これは 'data' フィールドが 16777215 バイト以内になることを保証します。
 
 .. php:staticmethod:: mimeType(mixed $check, array|string $mimeTypes)
 
@@ -1000,9 +1012,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
 .. php:staticmethod:: minLength(string $check, integer $min)
 
-    このルールはデータが最小長を満たしているかどうかを検証します。
-
-    ::
+    このルールはデータが最小長を満たしているかどうかを検証します。 ::
 
         public $validate = array(
             'login' => array(
@@ -1014,6 +1024,19 @@ CakePHP のバリデーションクラスには多くのバリデーションル
     ここでいうところの長さとは文字数のことです。バイト数ではありません。
     もし、UTF-8 互換の代わりに、純粋な ASCII 入力に対して検証したい場合、
     カスタムバリデータを書く必要があります。
+
+.. php:staticmethod:: minLengthBytes(string $check, integer $min)
+
+    このルールはデータが最小長を満たしているかどうかを検証します。 ::
+
+        public $validate = array(
+            'login' => array(
+                'rule' => array('minLengthBytes', 2 ** 16 - 1),
+                'message' => 'Data can not be smaller than 64KB.'
+            )
+        );
+
+    ここでの長さはバイト数です。
 
 .. php:staticmethod:: money(string $check, string $symbolPosition = 'left')
 

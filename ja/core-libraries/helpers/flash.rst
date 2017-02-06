@@ -49,3 +49,8 @@ FlashComponent 内で設定したオプションを上書きすることがで�
 
 利用可能なオプション配列に関する詳しい情報は、
 :doc:`FlashComponent </core-libraries/components/flash>` セクションをご覧ください。
+
+.. meta::
+    :title lang=ja: FlashHelper
+    :description lang=ja: FlashHelper は、FlashComponent によって $_SESSION にセットされたフラッシュメッセージを表示するために使用します。
+    :keywords lang=ja: flash helper,message,cakephp,element,session
