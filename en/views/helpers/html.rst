@@ -297,7 +297,7 @@ You could use the following::
 
 If you want to include an image file which shares a name with a loaded
 plugin you can do the following. For example if you had a ``Blog`` plugin,
-and also wanted to include ``webroot/img/Blog.icon.png``, you would::
+and also wanted to include **webroot/img/Blog.icon.png**, you would::
 
     echo $this->Html->image('Blog.icon.png', ['plugin' => false]);
 
@@ -533,7 +533,7 @@ You could use the following::
 
 If you want to include a script file which shares a name with a loaded
 plugin you can do the following. For example if you had a ``Blog`` plugin,
-and also wanted to include ``webroot/js/Blog.plugins.js``, you would::
+and also wanted to include **webroot/js/Blog.plugins.js**, you would::
 
     echo $this->Html->script('Blog.plugins.js', ['plugin' => false]);
 

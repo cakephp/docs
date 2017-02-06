@@ -285,21 +285,36 @@ You can also create list data from associations that can be reached with joins::
         'valueField' => 'author.name'
     ])->contain(['Authors']);
 
-Lastly it is possible to use closures to access entity mutator methods in your
-list finds. This example shows using the ``_getFullName()`` mutator method from
+Customize Key-Value Output
+--------------------------
+
+Lastly it is possible to use closures to access entity accessor methods in your
+list finds. ::
+
+    // In your Authors Entity create a virtual field to be used as the displayField:
+    protected function _getLabel()
+    {
+        return $this->_properties['first_name'] . ' ' . $this->_properties['last_name']
+          . ' / ' . __('User ID %s', $this->_properties['user_id']);
+    }
+
+This example shows using the ``_getLabel()`` accessor method from
 the Author entity. ::
 
+    // In your finders/controller:
     $query = $articles->find('list', [
         'keyField' => 'id',
         'valueField' => function ($article) {
-            return $article->author->get('full_name');
+            return $article->author->get('label');
         }
     ]);
 
-You can also fetch the full name in the list directly using. ::
+You can also fetch the label in the list directly using. ::
 
-    $this->displayField('full_name');
-    $query = $authors->find('list');
+    // In AuthorsTable::initialize():
+    $this->displayField('label'); // Will utilize Author::_getLabel()
+    // In your finders/controller:
+    $query = $authors->find('list'); // Will utilize AuthorsTable::displayField()
 
 Finding Threaded Data
 =====================
