@@ -634,7 +634,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'password' => array(
-                'rule'    => array('lengthBetween', 5, 15),
+                'rule' => array('lengthBetween', 5, 15),
                 'message' => 'パスワードは5～15文字でなければなりません。'
             )
         );

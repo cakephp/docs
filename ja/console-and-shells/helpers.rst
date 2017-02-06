@@ -107,5 +107,5 @@ Progress ヘルパーは、必要であればプログレスバーの増加や�
         'width' => 20,
     ));
 
-    $this->helper->increment(4);
-    $this->helper->draw();
+    $progress->increment(4);
+    $progress->draw();
