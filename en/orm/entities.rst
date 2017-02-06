@@ -180,11 +180,12 @@ name will be the lower case and underscored version of the method::
 
 Do bear in mind that virtual fields cannot be used in finds.
 
-Storing Explicit NULL Values
-----------------------------
+Storing Explicit NULL Values instead of ''
+------------------------------------------
 
 By default CakePHP will store empty values such as empty strings as they come in.
-E.g. ``''`` will be stored as SQL value ``''`` rather than SQL value ``NULL``.
+E.g. ``''`` will be stored as SQL value ``''`` rather than SQL value ``NULL``,
+even if the schema allows NULLs.
 
 You can utilize Entity mutators to define how entities' empty values are being saved.
 
