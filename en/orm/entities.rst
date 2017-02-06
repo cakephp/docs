@@ -180,15 +180,15 @@ name will be the lower case and underscored version of the method::
 
 Do bear in mind that virtual fields cannot be used in finds.
 
-Storing explicit NULL values
+Storing Explicit NULL Values
 ----------------------------
 
 By default CakePHP will store empty values such as empty strings as they come in.
-E.g. `''` will be stored as SQL value `''` rather than SQL value `NULL`.
+E.g. ``''`` will be stored as SQL value ``''`` rather than SQL value ``NULL``.
 
 You can utilize Entity mutators to define how entities' empty values are being saved.
 
-Example saving `NULL` if given parent id is not a valid integer::
+Example saving `NULL`` if given parent id is not a valid integer ::
 
     namespace App\Model\Entity;
 
@@ -211,7 +211,7 @@ Example saving `NULL` if given parent id is not a valid integer::
 
     }
 
-Example returning NULL for non-true boolean-like value::
+Example returning ``NULL`` for non-true boolean or boolean-like value ::
 
     namespace App\Model\Entity;
 
@@ -223,11 +223,10 @@ Example returning NULL for non-true boolean-like value::
 
         protected function _setIsDefault($isDefault)
         {
-            if ($isDefault === true || $isDefault === 1 || trim($isDefault) === '1') {
+            if ($isDefault === true || $isDefault === 1 || $isDefault === '1') {
                 return true;
-            } else {
-                return null;
             }
+            return null;
         }
 
     }
