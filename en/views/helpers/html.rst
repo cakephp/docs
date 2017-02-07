@@ -207,32 +207,32 @@ In addition to making predefined meta tags, you can create link elements::
 Any attributes provided to meta() when called this way will be added to the
 generated link tag.
 
-Creating Doctype Tags
----------------------
+Creating DOCTYPE
+----------------
 
 .. php:method:: docType(string $type = 'html5')
 
-Returns a (X)HTML doctype tag. Supply the doctype according to the
-following table:
+Returns a (X)HTML DOCTYPE (document type declaration). Supply the document
+type according to the following table:
 
 +--------------------------+----------------------------------+
 | type                     | translated value                 |
 +==========================+==================================+
-| html4-strict             | HTML4 Strict                     |
+| html4-strict             | HTML 4.01 Strict                 |
 +--------------------------+----------------------------------+
-| html4-trans              | HTML4 Transitional               |
+| html4-trans              | HTML 4.01 Transitional           |
 +--------------------------+----------------------------------+
-| html4-frame              | HTML4 Frameset                   |
+| html4-frame              | HTML 4.01 Frameset               |
 +--------------------------+----------------------------------+
-| html5                    | HTML5                            |
+| html5 (default)          | HTML5                            |
 +--------------------------+----------------------------------+
-| xhtml-strict             | XHTML1 Strict                    |
+| xhtml-strict             | XHTML 1.0 Strict                 |
 +--------------------------+----------------------------------+
-| xhtml-trans              | XHTML1 Transitional              |
+| xhtml-trans              | XHTML 1.0 Transitional           |
 +--------------------------+----------------------------------+
-| xhtml-frame              | XHTML1 Frameset                  |
+| xhtml-frame              | XHTML 1.0 Frameset               |
 +--------------------------+----------------------------------+
-| xhtml11                  | XHTML1.1                         |
+| xhtml11                  | XHTML 1.1                        |
 +--------------------------+----------------------------------+
 
 ::
@@ -297,7 +297,7 @@ You could use the following::
 
 If you want to include an image file which shares a name with a loaded
 plugin you can do the following. For example if you had a ``Blog`` plugin,
-and also wanted to include ``webroot/img/Blog.icon.png``, you would::
+and also wanted to include **webroot/img/Blog.icon.png**, you would::
 
     echo $this->Html->image('Blog.icon.png', ['plugin' => false]);
 
@@ -533,7 +533,7 @@ You could use the following::
 
 If you want to include a script file which shares a name with a loaded
 plugin you can do the following. For example if you had a ``Blog`` plugin,
-and also wanted to include ``webroot/js/Blog.plugins.js``, you would::
+and also wanted to include **webroot/js/Blog.plugins.js**, you would::
 
     echo $this->Html->script('Blog.plugins.js', ['plugin' => false]);
 

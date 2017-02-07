@@ -175,7 +175,7 @@ A ferramenta bake criou todos os seus arquivos em um piscar de olhos. Você pode
 fazer uma leitura rápida se quiser familiarizar como o CakePHP funciona.
 
 .. note::
-    Se você estiver no Windows lembre-se de usar \ em vez de /.
+    Se você estiver no Windows lembre-se de usar \\ em vez de /.
 
 Você vai precisar editar o seguinte em **src/Template/Categories/add.ctp**
 e **src/Template/Categories/edit.ctp**::

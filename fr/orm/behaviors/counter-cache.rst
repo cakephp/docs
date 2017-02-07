@@ -81,6 +81,18 @@ vous pouvez ajouter ces champs dans le tableau::
         ]
     ]);
 
+Si vous souhaitez calculer la valeur du champ de ``CounterCache`` par vous-même,
+vous pouvez définir l'option ``ignoreDirty`` à ``true``. Cela empêchera le
+champ d'être recalculé automatiquement si vous l'avez définit ``dirty`` avant::
+
+    $this->addBehavior('CounterCache', [
+        'Articles' => [
+            'comment_count' => [
+                'ignoreDirty' => true
+            ]
+        ]
+    ]);
+
 Enfin, si un finder personnalisé et les conditions ne sont pas réunies, vous
 pouvez fournir une méthode de callback. Cette méthode retourne la valeur du
 compteur à stocker::

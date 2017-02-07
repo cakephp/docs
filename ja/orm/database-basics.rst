@@ -555,6 +555,7 @@ Date/Time オブジェクトは容易に変更されてしまうため、CakePHP
     Type::build('datetime')->useImmutable();
     Type::build('date')->useImmutable();
     Type::build('time')->useImmutable();
+    Type::build('timestamp')->useImmutable();
 
 .. note::
     新しいアプリケーションは、デフォルトでイミュータブルオブジェクトが有効になります。

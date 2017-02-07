@@ -52,8 +52,6 @@ CakePHP 3 это фреймворк для веб-разработки рабо�
   валидацию и основа логики вашего приложения.
 
 
-
-
 .. meta::
     :title lang=ru: .. Главный файл документации CakePHP, созданный
     :keywords lang=ru: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope
