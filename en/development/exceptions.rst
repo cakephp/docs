@@ -104,6 +104,11 @@ RESTful responses to client applications and users.
 In addition, the following framework layer exceptions are available, and will
 be thrown from a number of CakePHP core components:
 
+.. php:exception:: CakeException
+
+    Base exception class in CakePHP. All framework layer exceptions thrown by
+    CakePHP will extend this class.
+
 .. php:exception:: MissingViewException
 
     The chosen view file could not be found.
@@ -150,7 +155,6 @@ be thrown from a number of CakePHP core components:
     a new table to a datasource, the model cache (found in tmp/cache/models by default)
     must be removed.
 
-
 .. php:exception:: MissingActionException
 
     The requested controller action could not be found.
@@ -164,11 +168,6 @@ be thrown from a number of CakePHP core components:
     Private action access. Either accessing
     private/protected/_ prefixed actions, or trying
     to access prefixed routes incorrectly.
-
-.. php:exception:: CakeException
-
-    Base exception class in CakePHP. All framework layer exceptions thrown by
-    CakePHP will extend this class.
 
 These exception classes all extend :php:exc:`CakeException`.
 By extending CakeException, you can create your own 'framework' errors.
