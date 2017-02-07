@@ -29,10 +29,6 @@ CakePHP には、リクエストを簡単に行える HttpSocket クラスがあ
 
 .. php:method:: post($uri, $data, $request)
 
-    ..
-     The post method makes a simple HTTP POST request returning the
-     results.
-
     post メソッドは、シンプルな HTTP の POST リクエストの結果を返します。
 
     ``post`` メソッドのパラメータは、おおよそ get メソッドと同じです。 ``$url`` は、
