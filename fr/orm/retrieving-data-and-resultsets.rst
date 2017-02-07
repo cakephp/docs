@@ -305,22 +305,37 @@ peuvent être atteintes avec les jointures::
         'valueField' => 'author.name'
     ])->contain(['Authors']);
 
-Enfin il est possible d'utiliser les closures pour accéder aux méthodes de
-mutation des entities dans vos finds list. Cet exemple vous montre l'utilisation
-de la méthode de mutation ``_getFullName()`` de l'entity Author::
+Personnaliser la Sortie Clé-Valeur
+----------------------------------
 
+Enfin il est possible d'utiliser les closures pour accéder aux méthodes de
+mutation des entities dans vos finds list. ::
+
+    // Dasn votre Entity Authors, créez un champ virtuel à utiliser en tant que
+    champ à afficher:
+    protected function _getLabel()
+    {
+        return $this->_properties['first_name'] . ' ' . $this->_properties['last_name']
+          . ' / ' . __('User ID %s', $this->_properties['user_id']);
+    }
+
+Cet exemple montre l'utilisation de la méthode accesseur ``_getLabel()`` à
+partir de l'entity Author. ::
+
+    // Dans vos finders/controller:
     $query = $articles->find('list', [
         'keyField' => 'id',
         'valueField' => function ($article) {
-            return $article->author->get('full_name');
+            return $article->author->get('label');
         }
     ]);
 
-Vous pouvez aussi récupérer le nom complet directement dans la liste en
-utilisant. ::
+Vous pouvez aussi récupérer le label dans la liste directement en utilisant. ::
 
-    $this->displayField('full_name');
-    $query = $authors->find('list');
+    // Dans AuthorsTable::initialize():
+    $this->displayField('label'); // Va utiliser Author::_getLabel()
+    // Dans votre finders/controller:
+    $query = $authors->find('list'); // Va utiliser AuthorsTable::displayField()
 
 Trouver des Données Threaded
 ============================
