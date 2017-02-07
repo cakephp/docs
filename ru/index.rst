@@ -5,10 +5,23 @@ CakePHP 3 это фреймворк для веб-разработки рабо�
 Прочтите :doc:`Первое знакомство с CakePHP </intro>` чтобы получить представление об
 основах CakePHP 3.
 
-Книга рецептов CakePHP открыто разрабатываемый и редактируемый сообществом проект 
+Кулинарная Книга CakePHP открыто разрабатываемый и редактируемый сообществом проект 
 документации. Обратите внимание на значок карандаша зафиксированный с правой стороны; 
 он направит Вас к онлайн-редактору текущей страницы на GitHub, позволяя Вам вносить 
 собственные дополнения и корректировки в документацию.
+
+.. container:: offline-download
+
+    **Читайте руководство где угодно**
+
+    .. image:: /_static/img/read-the-book.jpg
+
+    Наслаждайтесь Кулинарная Книгой CakePHP почти везде. Она дступна как в формате PDF,
+    так и в EPUB, вы можете теперь читать ее на многих устройствах, даже офлайн.
+
+    - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
+    - `EPUB <../_downloads/en/CakePHPCookbook.epub>`_
+    - `Original Source <http://github.com/cakephp/docs>`_    
 
 Получение помощи
 ================
@@ -28,53 +41,19 @@ CakePHP 3 это фреймворк для веб-разработки рабо�
  После ознакомления с руководством по Менеджеру Закладок, вы можете освежить
  в памяти ключевые моменты по созданию приложений CakePHP:
  
-* The :ref:`Цикл обработки запросов CakePHP <request-cycle>`
-* The :doc:`conventions <intro/conventions>` that CakePHP
-  uses.
-* :doc:`Controllers </controllers>` handle requests and co-ordinate your models
-  and the responses your application creates.
-* :doc:`Views </views>` are the presentation layer in your application. They
-  give you powerful tools to create HTML, JSON and the other outputs your
-  application needs.
-* :doc:`Models </orm>` are the key ingredient in any application. They handle
-  validation, and domain logic within your application.
+* :ref:`Цикл обработки запросов CakePHP <request-cycle>`
+* :doc:`Соглашения <intro/conventions>` которые использует CakePHP
+* :doc:`Контроллеры </controllers>` обрабатываеют запросы и координируют
+  ваши Модели и ответы, создаваемые вашим приложением.
+* :doc:`Виды </views>` это слой представления в вашем приложении. Они
+  дают вам мощные инструменты для создания HTML-кода, JSON и других форматов
+  вывода данных, необходимых вашему приложению.
+* :doc:`Модели </orm>` Это ключевой ингредиент каждого приложения. Они осуществляют
+  валидацию и основа логики вашего приложения.
 
-.. note::
-    The documentation is not currently supported in Russian language for this
-    page.
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
-
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
-
-.. container:: offline-download
-
-    **Читайте руководство где угодно**
-
-    .. image:: /_static/img/read-the-book.jpg
-
-    Наслаждайтесь книгой рецептов CakePHP почти везде. Она дступна как в формате PDF,
-    так и в EPUB, вы можете теперь читать ее на многих устройствах, даже офлайн.
-
-    - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
-    - `EPUB <../_downloads/en/CakePHPCookbook.epub>`_
-    - `Original Source <http://github.com/cakephp/docs>`_
-
-    .. note::
-        The documentation is not currently supported in Russian language for this
-        page.
-
-        Please feel free to send us a pull request on
-        `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-        button to directly propose your changes.
-
-        You can refer to the english version in the select top menu to have
-        information about this page's topic.
 
 
 .. meta::
-    :title lang=ru: .. CakePHP Cookbook documentation master file, created by
+    :title lang=ru: .. Главный файл документации CakePHP, созданный
     :keywords lang=ru: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope
