@@ -19,7 +19,25 @@ CakePHP 3 это фреймворк для веб-разработки рабо�
  Первые шаги
  ===========
  
+ Изучение нового фреймворка может быть одновременно и пугающим и захватывающим
+ процессом. Чтобы помочь вам на всем его протяжении мы создали руководство,
+ полное примеров и рецептов, способных помочь вам в решении наиболее частых
+ задач. Если вы новичок - вам следует начать с :doc:`/quickstart`, так как
+ это быстро ознакомит вас с возможностями CakePHP и с тем как он работает.
  
+ После ознакомления с руководством по Менеджеру Закладок, вы можете освежить
+ в памяти ключевые моменты по созданию приложений CakePHP:
+ 
+* The :ref:`Цикл обработки запросов CakePHP <request-cycle>`
+* The :doc:`conventions <intro/conventions>` that CakePHP
+  uses.
+* :doc:`Controllers </controllers>` handle requests and co-ordinate your models
+  and the responses your application creates.
+* :doc:`Views </views>` are the presentation layer in your application. They
+  give you powerful tools to create HTML, JSON and the other outputs your
+  application needs.
+* :doc:`Models </orm>` are the key ingredient in any application. They handle
+  validation, and domain logic within your application.
 
 .. note::
     The documentation is not currently supported in Russian language for this
