@@ -186,19 +186,33 @@ Composer Вы с легкостью установите фреймворк че
 Дополнительные настройки
 ========================
 
+При желании можно настроить еще некоторые другие параметры. Многие разработчики
+возможно захотят их изменить, но для данного руководства это не является столь
+существенным. Например введение случайного набора символов для использования в
+хеш-кодах безопасности.
 
+Если вы использовали Composer при установке, то он позаботился и об этой
+проблеме за вас. В противном случае вам нужно будет поменять параметр salt в
+файле **config/app.php**. Не важно каким будет новое значение, но оно должно
+быть достаточно длинным, чтобы его нельзя было угадать::
 
-.. note::
-    The documentation is not currently supported in Russian language for this
-    page.
+    'Security' => [
+        'salt' => 'something long and containing lots of different values.',
+    ],
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+Замечание о mod\_rewrite
+========================
 
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+Иногда пользователи могут столкнуться с проблемами mod\_rewrite. К примеру
+если страница приветствия CakePHP выглядит странно (нет картинок или не
+подключились стили css). Вероятно это из-за того, что mod\_rewrite не работает
+в вашей системе. Пожалуйстf обратитесь к разделу :ref:`url-rewriting` для
+решения этой проблемы.
+
+Теперь вы можете продолжить перейдя во вторую часть руководства
+:doc:`/tutorials-and-examples/blog/part-two`, чтобы начать создавать ваше
+первое приложение CakePHP.
 
 .. meta::
     :title lang=ru: Пример создания блога
-    :keywords lang=ru: модель вид контроллер,объектно-ориентированное программирование,логика приложения,настройка каталогов,базовые знания,сервер баз данных,настройка сервера,reins,documentroot,readme,repository,веб-сервер,производительность,lib,sql,aim,cakephp,servers,apache,downloads
+    :keywords lang=ru: модель вид контроллер,объектно-ориентированное программирование,логика приложения,настройка каталогов,базовые знания,сервер баз данных,настройка сервера,reins,documentroot,readme,repository,веб-сервер,производительность,lib,sql,aim,cakephp,серверы,apache,downloads
