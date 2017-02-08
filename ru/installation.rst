@@ -75,6 +75,11 @@ CakePHP использует мендежер зависимостей PHP `Comp
 Создание проекта CakePHP
 ------------------------
 
+.. _url-rewriting:
+
+Переопределение URL
+===================
+
 .. _GitHub: http://github.com/cakephp/cakephp
 .. _Composer: http://getcomposer.org
 
