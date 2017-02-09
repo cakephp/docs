@@ -28,7 +28,7 @@ log() 関数は ``LogTrait`` により提供されており、どれも多くの
 
     use Cake\Log\Log;
 
-    // 短いクラス名場合
+    // 短いクラス名
     Log::config('debug', [
         'className' => 'File',
         'path' => LOGS,
