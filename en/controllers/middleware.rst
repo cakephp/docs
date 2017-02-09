@@ -216,10 +216,6 @@ their own response. We can see both options in our simple middleware::
     {
         public function __invoke($request, $response, $next)
         {
-            // Calling $next() delegates control to the *next* middleware
-            // In your application's queue.
-            $response = $next($request, $response);
-
             // When modifying the response, you should do it
             // *after* calling next.
             if (!$request->cookie('landing_page')) {
@@ -229,6 +225,8 @@ their own response. We can see both options in our simple middleware::
                     'expire' => '+ 1 year',
                 ]);
             }
+            
+            // Pass the modified instances to the next Middleware
             return $next($request, $response);
         }
     }
