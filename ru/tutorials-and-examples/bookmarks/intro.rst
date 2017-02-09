@@ -80,7 +80,143 @@ Composer Вы с легкостью установите фреймворк че
 приложения: проверьте раздел документации
 :doc:`/intro/cakephp-folder-structure`.
 
+Проверка нашей установки
+========================
 
+Мы можем быстро убедиться, что наша установка была выполнена корректно, проверив
+доступность домашней страницы по умолчанию::
+
+    bin/cake server
+    
+.. note::
+
+    Для Windows, команда должна быть ``bin\cake server`` (с обратным слешем).
+    
+Это запустит встроенный веб-сервер PHP на порте 8765. Откройте
+**http://localhost:8765** в вашем веб-браузере, чтобы увидеть страницу
+приветствия. Все проверки на странице должны быть пройдены, за исключением
+проверки подключения к базе данных. Если же это не так, возможно вам следует
+установить еще какие-то расширения PHP или установить права доступа к папкам.
+
+Создание Базы данных
+====================
+
+Следующим шагом давайте настроим необходимую базу данных для нашего
+Менеджера Закладок. Если вы еще этого не сделали - создайте пустую базу данных
+для работы вашего приложения, с любым удобным именем, например 
+``cake_bookmarks``. Вы можете выполнить следующий SQL-запрос, для создания
+необходимых таблиц::
+
+    CREATE TABLE users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        email VARCHAR(255) NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        created DATETIME,
+        modified DATETIME
+    );
+
+    CREATE TABLE bookmarks (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT NOT NULL,
+        title VARCHAR(50),
+        description TEXT,
+        url TEXT,
+        created DATETIME,
+        modified DATETIME,
+        FOREIGN KEY user_key (user_id) REFERENCES users(id)
+    );
+
+    CREATE TABLE tags (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(255),
+        created DATETIME,
+        modified DATETIME,
+        UNIQUE KEY (title)
+    );
+
+    CREATE TABLE bookmarks_tags (
+        bookmark_id INT NOT NULL,
+        tag_id INT NOT NULL,
+        PRIMARY KEY (bookmark_id, tag_id),
+        FOREIGN KEY tag_key(tag_id) REFERENCES tags(id),
+        FOREIGN KEY bookmark_key(bookmark_id) REFERENCES bookmarks(id)
+    );
+
+Вы возможно заметили, что таблица ``bookmarks_tags`` использует составной
+первичный ключ. CakePHP поддерживает составные первичные ключи почти везде,
+делая легче процесс создания мультиарендных приложений.
+
+Имена таблиц и полей, которые мы выбрали не были случайны. Пользуясь
+:doc:`соглашениями об именовании </intro/conventions>` CakePHP, мы можем
+более полно использовать возможности фреймворка и избежать необходимости
+задания дополнительных настроек. CakePHP достаточно гибок, чтобы
+адаптироваться даже к довольно к противоречивым схемам баз данных, но
+следование соглашениям сэкономит вам кучу времени.
+
+Конфигурация Базы данных
+========================
+
+Давайте теперь скажем CakePHP где расположена наша База данных и как с
+ней соединиться. Для многих это будет первый и последний раз когда они
+увидят файл настроек.
+
+Настройка должна показаться довольно легкой: просто замените значения
+в массиве  ``Datasources.default`` в файле **config/app.php** на нужные
+вам. В результате у вас должно получиться что-то вроде этого::
+
+    return [
+        // More configuration above.
+        'Datasources' => [
+            'default' => [
+                'className' => 'Cake\Database\Connection',
+                'driver' => 'Cake\Database\Driver\Mysql',
+                'persistent' => false,
+                'host' => 'localhost',
+                'username' => 'cake_blog',
+                'password' => 'AngelF00dC4k3~',
+                'database' => 'cake_bookmarks',
+                'encoding' => 'utf8',
+                'timezone' => 'UTC',
+                'cacheMetadata' => true,
+            ],
+        ],
+        // More configuration below.
+    ];
+    
+Как только вы сохраните ваш файл **config/app.php**, на
+приветственной странице CakePHP вы увидите сообщение, что
+База данных обнаружена и подключение к ней прошло успешно.
+
+.. note::
+
+    Копия файла с настройками по умолчанию может быть найдена в
+    **config/app.default.php**.
+    
+Генерирование шаблонного кода
+=============================
+
+Так как наша база данных следует соглашениям CakePHP, мы можем
+воспользоваться :doc:`консолью Bake </bake/usage>` для генерирования
+шаблонного кода. В вашей командной строке введите следующие команды::
+
+    // В Windows пишите bin\cake.
+    bin/cake bake all users
+    bin/cake bake all bookmarks
+    bin/cake bake all tags
+
+Это сгенерирует код Контроллеров, Моделей, Видов и т.д. для наших
+ресурсов ``users``, ``bookmarks``, ``tags``. Если вы остановили работу вашего
+веб-сервера, перезапустите его и перейдите по адресу
+**http://localhost:8765/bookmarks**.
+
+Вы должны увидеть простое но функциональное приложение, предоставляющее доступ
+к данным, хранящимся в Базе Данных. Как только вы окажетесь на странице списка
+закладок, добавьте несколько пользователей, закладок и тегов.
+
+.. note::
+
+    Если у вас отображается 404 ошибка, убедитесь, что модуль Apache
+    mod_rewrite загружен.
 
 .. note::
     The documentation is not currently supported in Russian language for this
