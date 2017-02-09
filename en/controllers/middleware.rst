@@ -229,7 +229,7 @@ their own response. We can see both options in our simple middleware::
                     'expire' => '+ 1 year',
                 ]);
             }
-            return $response;
+            return $next($request, $response);
         }
     }
 
