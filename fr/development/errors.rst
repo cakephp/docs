@@ -408,7 +408,7 @@ des pages d'erreur pour toutes les exceptions lancées par votre application.
 Les vues de la page d'erreur sont localisées dans **src/Template/Error/**. Pour
 toutes les erreurs 4xx et 5xx, les fichiers de template **error400.ctp** et
 **error500.ctp** sont utilisées respectivement. Vous pouvez les personnaliser
-selon vos besoins. Par défaut, votre **src/Template/Layout/default.ctp** est
+selon vos besoins. Par défaut, votre **src/Template/Layout/error.ctp** est
 également utilisé pour les pages d'erreur. Si par exemple, vous voulez utiliser
 un autre layout **src/Template/Layout/my_error.ctp** pour vos pages d'erreur,
 modifiez simplement les vues d'erreur et ajoutez la ligne

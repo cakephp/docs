@@ -75,11 +75,11 @@ An example would be::
     {
         public function _displayError($error, $debug)
         {
-            return 'There has been an error!';
+            echo 'There has been an error!';
         }
         public function _displayException($exception)
         {
-            return 'There has been an exception!';
+            echo 'There has been an exception!';
         }
     }
 
@@ -396,12 +396,12 @@ Exception Renderer
 .. php:class:: ExceptionRenderer(Exception $exception)
 
 The ExceptionRenderer class with the help of ``ErrorController`` takes care of
-rendering the error pages for all the exceptions thrown by you application.
+rendering the error pages for all the exceptions thrown by your application.
 
 The error page views are located at **src/Template/Error/**. For all 4xx and
 5xx errors the template files **error400.ctp** and **error500.ctp** are used
 respectively. You can customize them as per your needs. By default your
-**src/Template/Layout/default.ctp** is used for error pages too. If for
+**src/Template/Layout/error.ctp** is used for error pages too. If for
 example, you want to use another layout **src/Template/Layout/my_error.ctp**
 for your error pages, simply edit the error views and add the statement
 ``$this->layout = 'my_error';`` to the **error400.ctp** and **error500.ctp**.

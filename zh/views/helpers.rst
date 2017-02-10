@@ -12,6 +12,7 @@ CakePHP 中助件的更多信息，请查看。
 .. toctree::
     :maxdepth: 1
 
+    /views/helpers/breadcrumbs
     /views/helpers/flash
     /views/helpers/form
     /views/helpers/html

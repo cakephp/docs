@@ -32,14 +32,15 @@ cURL がインストールされていたら、以下のように実行するの
 もしくは `Composer のウェブサイト <https://getcomposer.org/download/>`_
 から ``composer.phar`` をダウンロードすることができます。
 
-そして、CakePHP アプリケーションのスケルトンを [app_name] ディレクトリにインストールするために、
-インストールディレクトリからターミナルに以下の行をシンプルにタイプしてください。 ::
+そして、CakePHP アプリケーションのスケルトンを使用したいディレクトリにインストールするために、
+インストールディレクトリからターミナルに以下の行をシンプルにタイプしてください。
+この例では、"blog" を使用しますが、他のものに自由に変更できます。 ::
 
-    php composer.phar create-project --prefer-dist cakephp/app [app_name]
+    php composer.phar create-project --prefer-dist cakephp/app blog
 
 Composer をグローバルにすでに設定している場合は、以下のようにタイプすることもできます。 ::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app [app_name]
+    composer self-update && composer create-project --prefer-dist cakephp/app blog
 
 Composer を使うメリットは、 正しいファイルパーミッションの設定や、 **config/app.php**
 ファイルの作成などのような、重要なセットアップを自動的に完全にしてくれることです。

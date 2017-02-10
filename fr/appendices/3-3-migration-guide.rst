@@ -196,3 +196,4 @@ Debugging Functions
 * Les fonctions ``pr()``, ``debug()`` et ``pj()`` retournent maintenant la
   valeur résultante. Cela facilite leur utilisation quand des valeurs sont
   retournées.
+* :php:func:`dd()` a été ajoutée pour complètement arrêter l'exécution.

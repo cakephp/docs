@@ -76,8 +76,8 @@ folder.
 Model and Database Conventions
 ==============================
 
-Table class names are plural and CamelCased. ``Users``, ``ArticleCategories``,
-and ``UserFavoritePages`` are all examples of conventional model names.
+Table class names are plural, CamelCased and end in ``Table``. ``UsersTable``, ``ArticleCategoriesTable``,
+and ``UserFavoritePagesTable`` are all examples of conventional model names.
 
 Table names corresponding to CakePHP models are plural and underscored. The
 underlying tables for the above mentioned models would be ``users``,
@@ -107,8 +107,8 @@ after the model tables they will join, arranged in alphabetical order
 
 In addition to use an auto-increment key as the primary key, you may also use
 UUID columns. CakePHP will create a unique 36 character UUID
-(:php:meth:`Cake\\Utility\\Text::uuid()`) whenever you save a new record using the
-``Table::save()`` method.
+(:php:meth:`Cake\\Utility\\Text::uuid()`) whenever you save a new record using
+the ``Table::save()`` method.
 
 View Conventions
 ================
