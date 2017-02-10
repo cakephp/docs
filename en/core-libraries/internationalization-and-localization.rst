@@ -223,7 +223,7 @@ Translating model validation errors
 ===================================
 
 CakePHP will automatically extract the validation error when you are using the
-:doc:`i18n console task </console-and-shells>`. By default, the default domain is used.
+:doc:`i18n console task </console-and-shells/i18n-shell>`. By default, the default domain is used.
 This can be overwritten by setting the ``$validationDomain`` property in your model::
 
     class User extends AppModel {
