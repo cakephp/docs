@@ -70,7 +70,7 @@ Each panel lets you look at a different aspect of your application:
 * **Log** Display any entries made to the log files this request.
 * **Packages** Display the list of packages depedencies with their actual
   version and allow you to check for outdated packages.
-* **Mail** Display all email sent during the request and allow to preview email
+* **Mail** Display all emails sent during the request and allow to preview emails
   during development without sending them.
 * **Request** Displays information about the current request, GET, POST, Cake
   Parameters, Current Route information and Cookies.
@@ -115,7 +115,7 @@ The mail panel allow you to track all emails sent during a request
   .. figure:: /_static/img/debug-kit/mail-panel.gif
     :alt: Video of Mail panel in action.
 
-The mailer preview allows you to easily preview email during development
+The mailer preview allows you to easily preview emails during development
 
 .. only:: html or epub
 
