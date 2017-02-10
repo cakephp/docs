@@ -70,9 +70,8 @@ Each panel lets you look at a different aspect of your application:
 * **Log** Display any entries made to the log files this request.
 * **Packages** Display the list of packages depedencies with their actual
   version and allow you to check for outdated packages.
-* **Mail** Display all email sent during the request and allow to preview them
-
-.
+* **Mail** Display all email sent during the request and allow to preview email
+  during development without sending them.
 * **Request** Displays information about the current request, GET, POST, Cake
   Parameters, Current Route information and Cookies.
 * **Session** Display the information currently in the Session.
