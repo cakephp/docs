@@ -1,62 +1,70 @@
-フラッシュ
-##########
+Flash
+#####
 
 .. php:namespace:: Cake\View\Helper
 
 .. php:class:: FlashHelper(View $view, array $config = [])
 
-FlashHelperは、 :doc:`FlashComponent </controllers/components/flash>` によって ``$_SESSION`` にセットされたフラッシュメッセージをレンダリングする方法を提供しています。
-:doc:`FlashComponent </controllers/components/flash>` および FlashHelperはフラッシュメッセージをレンダリングするために、まずエレメントを利用します。
+FlashHelperは、 :doc:`FlashComponent </controllers/components/flash>` によって
+``$_SESSION`` にセットされたフラッシュメッセージを描画する方法を提供しています。
+:doc:`FlashComponent </controllers/components/flash>` および
+FlashHelper はフラッシュメッセージを描画するためのエレメントを使用します。
 フラッシュエレメントは **src/Template/Element/Flash** ディレクトリ以下に存在します。
-CakePHPのアプリケーションテンプレートは2つのフラッシュエレメントから成ることに注意してください。 **success.ctp** と **error.ctp** です。
+CakePHP の App テンプレートには、 **success.ctp** と **error.ctp** の
+2つのフラッシュエレメントが付属しています。
 
-フラッシュメッセージをレンダリングする
-======================================
+フラッシュメッセージの描画
+==========================
 
-フラッシュメッセージをレンダリングするためには、単に ``render()`` メソッドを使用するだけで良いです。::
+フラッシュメッセージを描画するためには、FlashHelper の ``render()`` メソッドを使用します。 ::
 
     <?= $this->Flash->render() ?>
 
-デフォルトでは、CakePHPはセッション内部のフラッシュメッセージには "flash" キーを利用します。
-しかし、もし :doc:`FlashComponent </controllers/components/flash>` 内のフラッシュメッセージをセットするときに、キーを明示したい場合は、レンダリングするのはどのフラッシュキーかを明示できます。::
+デフォルトでは、CakePHP は、フラッシュメッセージのためにセッション中の "flash" キーを使用します。
+しかし、 :doc:`FlashComponent </controllers/components/flash>` の中でフラッシュメッセージを
+設定した時にキーを指定した場合、そのキーを指定して描画します。 ::
 
     <?= $this->Flash->render('other') ?>
 
-FlashComponentの中で設定したオプションをオーバーライドすることもできます。::
+FlashComponent の中で設定したオプションを上書きすることもできます。 ::
 
-    // In your Controller
+    // コントローラの中で
     $this->Flash->set('The user has been saved.', [
         'element' => 'success'
     ]);
 
-    // In your View: Will use great_success.ctp instead of succcess.ctp
+    // ビューの中で、 success.ctp の代わりに great_success.ctp を使用
     <?= $this->Flash->render('flash', [
         'element' => 'great_success'
     ]);
 
 .. note::
 
-    独自のフラッシュメッセージを作成するとき、全てのユーザデータを適切に HTML エンコードしてください。
-    CakePHP は、フラッシュメッセージのパラメータをエスケープしません。
+    フラッシュメッセージの独自テンプレートを作成する場合、全てのユーザデータを適切に
+    HTML エンコードしてください。CakePHP は、フラッシュメッセージのパラメータをエスケープしません。
 
 .. versionadded:: 3.1
 
     :doc:`FlashComponent </controllers/components/flash>` はメッセージをスタックしています。
-    複数のフラッシュメッセージをセットした場合、 ``render()`` を呼び出すと、それぞれのメッセージが設定された順番でそれぞれのエレメントの中でレンダリングされます。
+    複数のフラッシュメッセージをセットした場合、 ``render()`` を呼び出すと、それぞれのメッセージが
+    設定された順番でそれぞれのエレメントの中で描画されます。
 
-使用できる配列オプションについてもっと知りたい場合は、 :doc:`FlashComponent </controllers/components/flash>` セクションをご覧ください。
+使用できる配列オプションについてもっと知りたい場合は、
+:doc:`FlashComponent </controllers/components/flash>` セクションをご覧ください。
 
-ルーティングのプレフィックスとフラッシュメッセージについて
-==========================================================
+ルーティングのプレフィックスとフラッシュメッセージ
+==================================================
 
 .. versionadded:: 3.0.1
 
-設定したルーティングのプレフィックスがある場合、Flashエレメントを **src/Template/{Prefix}/Element/Flash** に置きます。
-このやり方では、アプリケーションのそれぞれの部分の特定のメッセージレイアウトを作成できます。
-例えば、フロントエンドと管理者の部分とで異なるレイアウトを使用する場合です。
+設定したルーティングのプレフィックスがある場合、フラッシュエレメントを
+**src/Template/{Prefix}/Element/Flash** に置きます。
+これにより、アプリケーションの各部分に特定のメッセージレイアウトを設定できます。
+例えば、フロントエンドと管理者のセクションで異なるレイアウトを使用する場合です。
 
-フラッシュメッセージとテーマについて
-====================================
+フラッシュメッセージとテーマ
+============================
 
-FlashHelperはメッセージをレンダリングする際、通常のエレメントを使用し、明示した場合はそのテーマに従います。
-テーマが **src/Template/Element/Flash/error.ctp** を持つ場合、ElementやViewと同様にそれを利用します。
+FlashHelper は、メッセージを描画するために標準のエレメントを使用し、指定したテーマに従います。
+そのため、テーマが **src/Template/Element/Flash/error.ctp** ファイルを持つ場合、
+エレメントやビューと同様に使用されます。

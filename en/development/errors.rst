@@ -75,11 +75,11 @@ An example would be::
     {
         public function _displayError($error, $debug)
         {
-            return 'There has been an error!';
+            echo 'There has been an error!';
         }
         public function _displayException($exception)
         {
-            return 'There has been an exception!';
+            echo 'There has been an exception!';
         }
     }
 
