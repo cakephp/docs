@@ -329,48 +329,48 @@ Checking the Pagination State
 
     Returns ``true`` if the given result set has the page number given by ``$page``.
 
-Creating a Page Counter
-=======================
+ページカウンターの生成
+======================
 
 .. php:method:: counter($options = [])
 
-Returns a counter string for the paged result set. Using a provided format
-string and a number of options you can create localized and application
-specific indicators of where a user is in the paged data set.
+ページ制御された結果セットのためのカウンター文字列を返します。
+与えられた書式文字列と多くのオプションを使って、ページ制御された 結果セットの中の位置を表す、
+ローカライズされたアプリケーション固有の文字列を生成することができます。
 
-There are a number of options for ``counter()``. The supported ones are:
+``counter()`` には多くのオプションがあります。 サポートされているのは以下のものです。:
 
-* ``format`` Format of the counter. Supported formats are 'range', 'pages'
-  and custom. Defaults to pages which would output like '1 of 10'. In the
-  custom mode the supplied string is parsed and tokens are replaced with
-  actual values. The available tokens are:
+* ``format`` カウンターの書式。サポートされている書式は 'range', 'pages' およびカスタムです。
+  pages のデフォルトは '1 of 10' のような出力です。
+  カスタムモードでは与えられた文字列がパースされ、トークンが実際の値に置き換えられます。
+  利用できるトークンは以下の通りです。:
 
-  -  ``{{page}}`` - the current page displayed.
-  -  ``{{pages}}`` - total number of pages.
-  -  ``{{current}}`` - current number of records being shown.
-  -  ``{{count}}`` - the total number of records in the result set.
-  -  ``{{start}}`` - number of the first record being displayed.
-  -  ``{{end}}`` - number of the last record being displayed.
-  -  ``{{model}}`` - The pluralized human form of the model name.
-     If your model was 'RecipePage', ``{{model}}`` would be 'recipe pages'.
+  -  ``{{page}}`` - 表示された現在のページ
+  -  ``{{pages}}`` - 総ページ数
+  -  ``{{current}}`` - 表示されようとしている現在のレコード数
+  -  ``{{count}}`` - 結果セットの中の全レコード数
+  -  ``{{start}}`` - 表示されようとしている先頭のレコード数
+  -  ``{{end}}`` - 表示されようとしている最終のレコード数
+  -  ``{{model}}`` - モデル名を複数系にして読みやすい書式にしたもの。
+     あなたのモデルが 'RecipePage' であれば、 ``{{model}}`` は 'recipe pages' になります。
 
-  You could also supply only a string to the counter method using the tokens
-  available. For example::
+  counter メソッドに対して利用できるトークンを使って、文字列だけを与えることもできます。
+  たとえば以下のようにできます。::
 
       echo $this->Paginator->counter(
-          'Page {{page}} of {{pages}}, showing {{current}} records out of
-           {{count}} total, starting on record {{start}}, ending on {{end}}'
+          '{{page}} / {{pages}} ページ, {{current}} 件目 / 全 {{count}} 件,
+          開始レコード番号 {{start}}, 終了レコード番号 {{end}}'
       );
 
-  Setting 'format' to range would output like '1 - 3 of 13'::
+  'format' を range に設定すると '1 - 3 of 13' のように出力します。::
 
       echo $this->Paginator->counter([
           'format' => 'range'
       ]);
 
-* ``model`` The name of the model being paginated, defaults to
-  :php:meth:`PaginatorHelper::defaultModel()`. This is used in
-  conjunction with the custom string on 'format' option.
+* ``model`` ページ制御する対象のモデル。デフォルトは
+  :php:meth:`PaginatorHelper::defaultModel()` 。
+  これは 'format' オプションのカスタム文字列と組み合わせて使われます。
 
 ページネーションオプションの設定
 ================================
