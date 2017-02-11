@@ -21,7 +21,7 @@ Composer で PHPUnit をインストールするには:
 
 .. code-block:: bash
 
-    $ php composer.phar require --dev phpunit/phpunit
+    $ php composer.phar require --dev phpunit/phpunit:"<6.0"
 
 これで ``composer.json`` の ``require-dev`` セクションに依存関係を追加し、すべての依存関係と
 一緒に PHPUnit をインストールします。
