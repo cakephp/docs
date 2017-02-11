@@ -226,33 +226,31 @@ include links to the first 2 and last 2 pages in the paged results::
 
     echo $this->Paginator->numbers(['first' => 2, 'last' => 2]);
 
-Creating jump links
-===================
+ジャンプ用リンクの作成
+======================
 
-In addition to generating links that go directly to specific page numbers,
-you'll often want links that go to the previous and next links, first and last
-pages in the paged data set.
+特定のページ番号に直接行けるリンクを作れるだけでなく、現在の直前や直後、
+および先頭や末尾へのリンクを作りたくなる場合もあるでしょう。
 
 .. php:method:: prev($title = '<< Previous', $options = [])
 
-    :param string $title: Title for the link.
-    :param mixed $options: Options for pagination link.
+    :param string $title: リンクのタイトル
+    :param mixed $options: ページ制御用リンクのオプション
 
-    Generates a link to the previous page in a set of paged records.
+    ページ制御されたレコードセットの中で、１つ前のページへのリンクを作ります。
 
-    ``$options`` supports the following keys:
+    ``$options`` 以下のキーをサポートしています。
 
-    * ``escape`` Whether you want the contents HTML entity encoded,
-      defaults to ``true``.
-    * ``model`` The model to use, defaults to :php:meth:`PaginatorHelper::defaultModel()`.
-    * ``disabledTitle`` The text to use when the link is disabled. Defaults to
-      the ``$title`` parameter.
+    * ``escape`` コンテンツの HTML エンティティをエンコードするかどうか。
+      デフォルトは ``true`` です。
+    * ``model`` 使用するモデル。デフォルトは :php:meth:`PaginatorHelper::defaultModel()` 。
+    * ``disabledTitle`` リンクが無効な場合に使う文字列。デフォルトは ``$title`` パラメータ。
 
-    A simple example would be::
+    単純な例を以下に示します。 ::
 
         echo $this->Paginator->prev(' << ' . __('previous'));
 
-    If you were currently on the second page of posts, you would get the following:
+    もし投稿の２ページ目にいる場合は、以下のような出力になります。
 
     .. code-block:: html
 
@@ -262,72 +260,74 @@ pages in the paged data set.
             </a>
         </li>
 
-    If there were no previous pages you would get:
+    これより前のページがない場合は、以下のようになります。
 
     .. code-block:: html
 
         <li class="prev disabled"><span>&lt;&lt; previous</span></li>
 
-    To change the templates used by this method see :ref:`paginator-templates`.
+    このメソッドで使用するテンプレートを変更するには、 :ref:`paginator-templates` を参照してください。
 
 .. php:method:: next($title = 'Next >>', $options = [])
 
-    This method is identical to :php:meth:`~PagintorHelper::prev()` with a few exceptions. It
-    creates links pointing to the next page instead of the previous one. It also
-    uses ``next`` as the rel attribute value instead of ``prev``
+    このメソッドは :php:meth:`~PagintorHelper::prev()` と全く同じですが、
+    いくつか例外があります。これは直前のページではなく直後のページヘの
+    リンクを作ります。また rel 属性には ``prev`` の代わりに ``next``
+    を使います。
 
 .. php:method:: first($first = '<< first', $options = [])
 
     Returns a first or set of numbers for the first pages. If a string is given,
     then only a link to the first page with the provided text will be created::
+    先頭ページまたは先頭ページまでの一連の数字を返します。文字列が渡されると、
+    その文字列をラベルとする先頭ページへのリンクのみが生成されます。 ::
 
         echo $this->Paginator->first('< first');
 
-    The above creates a single link for the first page. Will output nothing if you
-    are on the first page. You can also use an integer to indicate how many first
-    paging links you want generated::
+    上記の例は先頭ページヘの単一のリンクを作成します。最初のページにいる場合は
+    何も出力しません。先頭から何ページ分の並びを生成したいかを、
+    整数で指定することもできます。 ::
 
         echo $this->Paginator->first(3);
 
-    The above will create links for the first 3 pages, once you get to the third or
-    greater page. Prior to that nothing will be output.
+    上記の例では、３ページ目またはそれより先にいる場合、先頭から３ページ目までの
+    リンクを生成します。それ以降の分は生成されません。
 
-    The options parameter accepts the following:
+    options パラメーターには以下の設定が可能です。
 
-    - ``model`` The model to use defaults to :php:meth:`PaginatorHelper::defaultModel()`
-    - ``escape`` Whether or not the text should be escaped. Set to ``false`` if your
-      content contains HTML.
+    - ``model`` 使用するモデル。デフォルトは :php:meth:`PaginatorHelper::defaultModel()` 。
+    - ``escape`` テキストをエスケープするかどうか。
+    コンテンツにHTMLが含まれている場合は ``false`` に設定します。
 
 .. php:method:: last($last = 'last >>', $options = [])
 
-    This method works very much like the :php:meth:`~PaginatorHelper::first()`
-    method. It has a few differences though. It will not generate any links if you
-    are on the last page for a string values of ``$last``. For an integer value of
-    ``$last`` no links will be generated once the user is inside the range of last
-    pages.
+    このメソッドはちょうど :php:meth:`~PaginatorHelper::first()` メソッドのような
+    動きをしますが、少し異なるところがあります。もし ``$last`` の文字列値が表す
+    最終ページにいる場合は何も生成しません。 ``$last`` が整数値の場合、ユーザが
+    最後から last ページ以内に範囲内に入った場合はリンクを生成しません。
 
-Checking the Pagination State
-=============================
+ページネーション状態の確認
+==========================
 
 .. php:method:: current(string $model = null)
 
-    Gets the current page of the recordset for the given model::
+    与えられたモデルについて、レコードセットの現在ページを返します。 ::
 
-        // Our URL is: http://example.com/comments/view/page:3
+        // 現在の場所: http://example.com/comments/view/page:3
         echo $this->Paginator->current('Comment');
-        // Output is 3
+        // 出力は 3
 
 .. php:method:: hasNext(string $model = null)
 
-    Returns ``true`` if the given result set is not at the last page.
+    与えられた結果セットが最終ページでない場合に ``true`` を返します。
 
 .. php:method:: hasPrev(string $model = null)
 
-    Returns ``true`` if the given result set is not at the first page.
+    与えられた結果セットが先頭ページでない場合に ``true`` を返します。
 
 .. php:method:: hasPage(string $model = null, integer $page = 1)
 
-    Returns ``true`` if the given result set has the page number given by ``$page``.
+    与えられた結果セットが ``$page`` が示すページ番号を含む場合に ``true`` を返します。
 
 ページカウンターの生成
 ======================
