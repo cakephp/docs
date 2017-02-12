@@ -274,21 +274,36 @@ join でつながっている関連テーブルからリストのデータを生
         'valueField' => 'author.name'
     ])->contain(['Authors']);
 
-最後に、リストの find の中で、エンティティのミューテーターメソッドにアクセスするために
-クロージャを使用することができます。 この例は、Author エンティティの ``_getFullName()``
-ミューテーターメソッドを使うことを示しています。 ::
+キーと値の出力をカスタマイズ
+----------------------------
 
+最後に、リストの find の中で、エンティティのアクセッサーメソッドにアクセスするために
+クロージャを使用することができます。 ::
+
+    // Authors の中で、エンティティは displayFild として使用するために仮想フィールドを作成
+    protected function _getLabel()
+    {
+        return $this->_properties['first_name'] . ' ' . $this->_properties['last_name']
+          . ' / ' . __('User ID %s', $this->_properties['user_id']);
+    }
+
+この例は、Author エンティティの ``_getLabel()``
+アクセッサーメソッドを使うことを示しています。 ::
+
+    // ファインダーやコントローラの中で
     $query = $articles->find('list', [
         'keyField' => 'id',
         'valueField' => function ($article) {
-            return $article->author->get('full_name');
+            return $article->author->get('label');
         }
     ]);
 
-オプション指定なしで、氏名をフェッチすることもできます。 ::
+オプション指定なしで、ラベルを取得することもできます。 ::
 
-    $this->displayField('full_name');
-    $query = $authors->find('list');
+    // AuthorsTable::initialize() の中で
+    $this->displayField('label'); // Author::_getLabel() を利用します。
+    // ファインダーやコントローラの中で
+    $query = $authors->find('list'); // AuthorsTable::displayField() を利用します。
 
 スレッド状のデータを検索する
 ============================
