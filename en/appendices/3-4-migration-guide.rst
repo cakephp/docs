@@ -26,7 +26,7 @@ Several properties on ``Cake\Network\Request`` have been deprecated:
 * ``Request::$cookies`` is deprecated. Use ``Request::getCookie()`` instead.
 * ``Request::$base`` is deprecated. Use ``Request::getAttribute('base')`` instead.
 * ``Request::$webroot`` is deprecated. Use ``Request::getAttribute('webroot')`` instead.
-* ``Request::$here`` is deprecated. Use ``Request::here()`` instead.
+* ``Request::$here`` is deprecated. Use ``Request::getRequestTarget()`` instead.
 * ``Request::$_session`` was renamed to ``Request::$session``.
 
 A number of methods on ``Cake\Network\Request`` have been deprecated:
