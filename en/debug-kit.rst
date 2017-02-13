@@ -13,7 +13,7 @@ following from your application's ROOT directory (where composer.json file is
 located)::
 
     php composer.phar require --dev cakephp/debug_kit "~3.0"
-    
+
 Then, you need to enable the plugin by executing the following line::
 
     bin/cake plugin load DebugKit
@@ -68,10 +68,10 @@ Each panel lets you look at a different aspect of your application:
   and view toolbar data from previous requests.
 * **Include** View the included files grouped by type.
 * **Log** Display any entries made to the log files this request.
-* **Packages** Display the list of packages depedencies with their actual
+* **Packages** Display the list of packages dependencies with their actual
   version and allow you to check for outdated packages.
-* **Mail** Display all emails sent during the request and allow to preview emails
-  during development without sending them.
+* **Mail** Display all emails sent during the request and allow to preview
+  emails during development without sending them.
 * **Request** Displays information about the current request, GET, POST, Cake
   Parameters, Current Route information and Cookies.
 * **Session** Display the information currently in the Session.
@@ -108,14 +108,14 @@ transition to indicate that alternative data has been loaded.
 Using The Mail Panel
 ====================
 
-The mail panel allow you to track all emails sent during a request
+The mail panel allow you to track all emails sent during a request.
 
 .. only:: html or epub
 
   .. figure:: /_static/img/debug-kit/mail-panel.gif
     :alt: Video of Mail panel in action.
 
-The mailer preview allows you to easily preview emails during development
+The mailer preview allows you to easily preview emails during development.
 
 .. only:: html or epub
 
