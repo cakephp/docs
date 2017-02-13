@@ -23,7 +23,7 @@ générer les balises. Vous pouvez modifier ces templates pour personnaliser le
 HTML généré par PaginatorHelper.
 
 Templates utilise des placeholders de style ``{{var}}``. Il est important de ne
-pas ajouter d'espaces autour du `{{}}` ou les remplacements ne fonctionneront
+pas ajouter d'espaces autour du ``{{}}`` ou les remplacements ne fonctionneront
 pas.
 
 Charger les Templates à partir d'un Fichier
@@ -325,6 +325,23 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
     aucun lien ne sera généré une fois que l'utilisateur sera dans la zone
     des dernières pages.
 
+Créer des Liens de Header
+=========================
+
+PaginatorHelper peut être utilisé pour créer des liens de pagination pour la
+balise  ``<head>`` de votre page::
+
+    // Va créer des liens "précédent" / "suivant" pour le Model courant.
+    echo $this->Paginator->meta();
+
+    // Va créer des liens précédent / suivant et "premier" / "dernier"
+    // pour le Model courant.
+    echo $this->Paginator->meta(['first' => true, 'last' => true]);
+
+.. versionadded:: 3.4.0
+
+    Les options ``first`` et ``last`` ont été ajoutées dans la version 3.4.0
+
 Vérifier l'Etat de la Pagination
 ================================
 
@@ -348,6 +365,12 @@ Vérifier l'Etat de la Pagination
 
     Retourne ``true`` si l'ensemble de résultats fourni a le numéro de page
     fourni par ``$page``.
+
+.. php:method:: total(string $model = null)
+
+    Retourne le nombre total de pages pour le ``model`` passé en paramètre.
+
+    .. versionadded:: 3.4.0
 
 Création d'un compteur de page
 ==============================

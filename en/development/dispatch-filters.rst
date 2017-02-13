@@ -32,8 +32,8 @@ features that all applications are likely to need. The built-in filters are:
         DispatcherFactory::add('Asset', ['cacheTime' => '+24 hours']);
 
 * ``RoutingFilter`` applies application routing rules to the request URL.
-  Populates ``$request->params`` with the results of routing.
-* ``ControllerFactory`` uses ``$request->params`` to locate the controller that
+  Populates ``$request->getParam()`` with the results of routing.
+* ``ControllerFactory`` uses ``$request->getParam()`` to locate the controller that
   will handle the current request.
 * ``LocaleSelector`` enables automatic language switching from the ``Accept-Language``
   header sent by the browser.
@@ -117,9 +117,9 @@ page. First, create the file. Its contents should look like::
 
         public function beforeDispatch(Event $event)
         {
-            $request = $event->data['request'];
-            $response = $event->data['response'];
-            if (!$request->cookie('landing_page')) {
+            $request = $event->getData('request');
+            $response = $event->getData('response');
+            if (!$request->getCookie('landing_page')) {
                 $response->cookie([
                     'name' => 'landing_page',
                     'value' => $request->here(),
@@ -168,8 +168,8 @@ page, in our case it would be anything served from the ``PagesController``::
 
         public function afterDispatch(Event $event)
         {
-            $request = $event->data['request'];
-            $response = $event->data['response'];
+            $request = $event->getData('request');
+            $response = $event->getData('response');
 
             if ($response->statusCode() === 200) {
                 $response->sharable(true);

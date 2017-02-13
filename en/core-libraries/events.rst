@@ -208,7 +208,7 @@ function to do so::
     $this->Orders->eventManager()->on('Model.Order.afterPlace', function ($event) {
         Log::write(
             'info',
-            'A new order was placed with id: ' . $event->subject()->id
+            'A new order was placed with id: ' . $event->getSubject()->id
         );
     });
 
@@ -243,8 +243,8 @@ a more direct approach and only listen to the event you really need::
             // For example we can send an email to the admin
             $email = new Email('default');
             $email->from('info@yoursite.com' => 'Your Site')
-                ->to('admin@yoursite.com')
-                ->subject('New Feedback - Your Site')
+                ->setTo('admin@yoursite.com')
+                ->setSubject('New Feedback - Your Site')
                 ->send('Body of message');
         });
 
@@ -458,7 +458,7 @@ directly or returning the value in the callback itself::
     public function doSomething($event)
     {
         // ...
-        $alteredData = $event->data['order'] + $moreData;
+        $alteredData = $event->getData('order') + $moreData;
         return $alteredData;
     }
 
@@ -466,7 +466,7 @@ directly or returning the value in the callback itself::
     public function doSomethingElse($event)
     {
         // ...
-        $event->result['order'] = $alteredData;
+        $event->setResult(['order' => $alteredData] + $this->result());
     }
 
     // Using the event result
@@ -474,8 +474,8 @@ directly or returning the value in the callback itself::
     {
         $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
         $this->eventManager()->dispatch($event);
-        if (!empty($event->result['order'])) {
-            $order = $event->result['order'];
+        if (!empty($event->getResult()['order'])) {
+            $order = $event->getResult()['order'];
         }
         if ($this->Orders->save($order)) {
             // ...
@@ -517,9 +517,6 @@ arguments the first two params you used for attaching it::
 
     // Detaching all callbacks implemented by a listener
     $this->eventManager()->off($listener);
-
-Conclusion
-==========
 
 Events are a great way of separating concerns in your application and make
 classes both cohesive and decoupled from each other. Events can be utilized to

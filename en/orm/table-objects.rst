@@ -176,7 +176,7 @@ which implements ``EventListenerInterface``::
         }
         public function initializeEvent($event)
         {
-            $table = $event->subject();
+            $table = $event->getSubject();
             // do something here
         }
     }

@@ -39,10 +39,10 @@ copyright = u'%d, Cake Software Foundation, Inc' % datetime.datetime.now().year
 # built documents.
 #
 # The short X.Y version.
-version = '3.x'
+version = '3.4'
 
 # The full version, including alpha/beta/rc tags.
-release = '3.x'
+release = '3.4'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -305,3 +305,7 @@ from sphinx.highlighting import lexers
 from pygments.lexers.web import PhpLexer
 
 lexers['phpinline'] = PhpLexer(startinline=True)
+
+rst_epilog = """
+.. |minphpversion| replace:: 5.6.0
+"""

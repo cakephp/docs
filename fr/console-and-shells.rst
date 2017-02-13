@@ -730,7 +730,7 @@ parser en une unique série d'appel de méthodes::
         ])->addOption('method', [
             'short' => 'm',
             'help' => __('The specific method you want help on.')
-        ])->description(__('Lookup doc block comments for classes in CakePHP.'));
+        ])->setDescription(__('Lookup doc block comments for classes in CakePHP.'));
         return $parser;
     }
 
@@ -742,22 +742,26 @@ Les méthodes autorisant le chainage sont:
 - addOptions()
 - addSubcommand()
 - addSubcommands()
-- command()
-- description()
-- epilog()
+- setCommand()
+- setDescription()
+- setEpilog()
 
-.. php:method:: description($text = null)
+Définir la description
+~~~~~~~~~~~~~~~~~~~~~~
 
-Récupère ou définit la description pour le parser d'option. La description
-affiche en haut l'argument et l'information d'option. En passant soit un
-tableau, soit une chaîne, vous pouvez définir la valeur de la description.
-Appeler sans arguments va retourner la valeur actuelle::
+.. php:method:: setDescription($text)
+
+La description s'affiche au dessus des arguments et des options. En passant
+soit un tableau ou une chaîne de caractère, vous pouvez définir la valeur de
+la description::
 
     // Définit plusieurs lignes en une fois
+    $parser->setDescription(['line one', 'line two']);
+    // Avant 3.4
     $parser->description(['line one', 'line two']);
 
     // Lit la valeur actuelle
-    $parser->description()
+    $parser->getDescription()
 
 **src/Shell/ConsoleShell.php** est un bon exemple de la méthode
 ``description()``::
@@ -770,7 +774,7 @@ Appeler sans arguments va retourner la valeur actuelle::
     public function getOptionParser()
     {
         $parser = new ConsoleOptionParser('console');
-        $parser->description(
+        $parser->setDescription(
             'This shell provides a REPL that you can use to interact ' .
             'with your application in an interactive fashion. You can use ' .
             'it to run adhoc queries with your models, or experiment ' .
@@ -807,7 +811,10 @@ suivante::
     --verbose, -v  Enable verbose output.
     --quiet, -q    Enable quiet output.
 
-.. php:method:: epilog($text = null)
+Définir un "Epilog"
+~~~~~~~~~~~~~~~~~~~
+
+.. php:method:: setEpilog($text = null)
 
 Récupère ou définit l'epilog pour le parser d'option. L'epilog
 est affichée après l'argument et l'information d'option. En passant un tableau
@@ -815,10 +822,12 @@ ou une chaîne, vous pouvez définir la valeur de epilog.
 L'appeler avec aucun argument va retourner la valeur actuelle::
 
     // Définit plusieurs lignes en une fois
+    $parser->setEpilog(['line one', 'line two']);
+    // Avant 3.4
     $parser->epilog(['line one', 'line two']);
 
     // Lit la valeur actuelle
-    $parser->epilog()
+    $parser->getEpilog()
 
 Pour illustrer la méthode ``epilog()``, ajoutons un appel à la méthode
 ``getOptionParser()`` utilisée ci-dessus dans **src/Shell/ConsoleShell.php**::
@@ -831,7 +840,7 @@ Pour illustrer la méthode ``epilog()``, ajoutons un appel à la méthode
     public function getOptionParser()
     {
         $parser = new ConsoleOptionParser('console');
-        $parser->description(
+        $parser->setDescription(
             'This shell provides a REPL that you can use to interact ' .
             'with your application in an interactive fashion. You can use ' .
             'it to run adhoc queries with your models, or experiment ' .
@@ -839,11 +848,11 @@ Pour illustrer la méthode ``epilog()``, ajoutons un appel à la méthode
             "\n\n" .
             'You will need to have psysh installed for this Shell to work.'
         );
-        $parser->epilog('Thank you for baking with CakePHP!');
+        $parser->setEpilog('Thank you for baking with CakePHP!');
         return $parser;
     }
 
-Le texte ajouté avec la méthode ``epilog()`` peut être vue dans la sortie
+Le texte ajouté avec la méthode ``setEpilog()`` peut être vue dans la sortie
 avec la commande de console suivante::
 
     $ bin/cake console --help

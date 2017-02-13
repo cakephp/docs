@@ -151,7 +151,7 @@
                             <h2>
                                 <a href="{{ pathto(master_doc) }}">
                                     <span class="glyph_range icon-submenu icon-submenu-cook">B</span>
-                                    CakePHP 3.3 Red Velvet <strong>Cookbook</strong>
+                                    CakePHP {{ version }} Red Velvet <strong>Cookbook</strong>
                                 </a>
                             </h2>
                         </div>
@@ -232,6 +232,14 @@
                     </div>
                 </div>
             </div>
+            {% if 'next' in version %}
+                <p class="edge-warning">
+                    This document is for CakePHP's development version, which can be significantly different 
+                    from previous releases.
+                    <br>You may want to read
+                    <a href="http://book.cakephp.org">current stable release documentation</a> instead.
+                </p>
+            {% endif %}
         </section>
     </header>
 
@@ -267,11 +275,10 @@
 {% endblock -%}
 
 {%- block content %}
-<div class="container page-container">
+<div class="container page-container {% if 'next' in version %}is-next{% endif %}">
 
     {%- if pagename != 'search' -%}
     <div id="improve-slideout">
-        <i class="fa fa-pencil icon-improve"></i>
         <a href="https://github.com/cakephp/docs/edit/{{ branch }}/{{ language }}/{{ pagename }}.rst" target="_blank">
             <div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
         </a>
