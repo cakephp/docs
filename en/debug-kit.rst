@@ -115,7 +115,7 @@ The mail panel allow you to track all emails sent during a request.
   .. figure:: /_static/img/debug-kit/mail-panel.gif
     :alt: Video of Mail panel in action.
 
-The mailer preview allows you to easily preview emails during development.
+The mailer preview allows you to easily check emails during development.
 
 .. only:: html or epub
 
