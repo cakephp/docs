@@ -23,4 +23,5 @@ behavior that may affect your application:
 New Features
 ============
 
-.. Add new features here.
+* ``Cake\Event\EventManager::on()`` and ``off()`` methods are now chainable
+  making it simpler to set multiple events at once.
