@@ -18,8 +18,8 @@
 
     php -v
 
-最低でも PHP 5.5.9 (CLI) 以上をインストールしてください。
-あなたのウェブサーバーの PHP バージョンもまた、5.5.9 以上でなければなりません。そして、
+最低でも PHP |minphpversion| (CLI) 以上をインストールしてください。
+あなたのウェブサーバーの PHP バージョンもまた、|minphpversion| 以上でなければなりません。そして、
 コマンドラインインターフェース (CLI) の PHP バージョンと同じバージョンがベストです。
 完全なアプリケーションを確認したい場合、 `cakephp/bookmarker
 <https://github.com/cakephp/bookmarker-tutorial>`__ をチェックアウトしてください。
@@ -315,7 +315,7 @@ Scaffold コードの生成
     {
         // CakePHP によって提供された 'pass' キーは全ての
         // リクエストにある渡された URL のパスセグメントです。
-        $tags = $this->request->params['pass'];
+        $tags = $this->request->param('pass');
 
         // タグ付きのブックマークを探すために BookmarksTable を使用
         $bookmarks = $this->Bookmarks->find('tagged', [

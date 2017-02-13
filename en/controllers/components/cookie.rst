@@ -107,7 +107,7 @@ The CookieComponent offers a number of methods for working with Cookies.
         CookieComponent cannot interact with bare strings values that contain
         ``,``. The component will attempt to interpret these values as
         arrays, leading to incorrect results. Instead you should use
-        ``$request->cookie()``.
+        ``$request->getCookie()``.
 
 .. php:method:: check($key)
 

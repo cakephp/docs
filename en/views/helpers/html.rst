@@ -758,17 +758,17 @@ Output:
 Changing the Tags Output by HtmlHelper
 ======================================
 
-.. php:method:: templates($templates)
+.. php:method:: setTemplates($templates)
 
 The ``$templates`` parameter can be either a string file path to the PHP
 file containing the tags you want to load, or an array of templates to
 add/replace::
 
     // Load templates from config/my_html.php
-    $this->Html->templates('my_html.php');
+    $this->Html->setTemplates('my_html.php');
 
     // Load specific templates.
-    $this->Html->templates([
+    $this->Html->setTemplates([
         'javascriptlink' => '<script src="{{url}}" type="text/javascript"{{attrs}}></script>'
     ]);
 

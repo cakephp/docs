@@ -12,4 +12,4 @@ Middleware
 
 .. meta::
     :title lang=es: Http Middleware
-    :keywords lang=es: http, middleware, psr7, request, response, wsgi, application, baseapplication
+    :keywords lang=es: http, middleware, psr-7, request, response, wsgi, application, baseapplication

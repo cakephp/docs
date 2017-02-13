@@ -187,7 +187,7 @@ Pour répondre à l'event ``Model.initialize``, vous pouvez créer une classe
         }
         public function initializeEvent($event)
         {
-            $table = $event->subject();
+            $table = $event->getSubject();
             // faire quelque chose ici
         }
     }

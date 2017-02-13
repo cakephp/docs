@@ -20,8 +20,8 @@ Başlamadan önce PHP versiyonunun güncel olduğuna emin olunuz.
 
     php -v
 
-En azından PHP 5.5.9 (CLI) veya daha yüksek bir versiyonun yüklü olması gerekmektedir.
-Webserver PHP versiyonunun en azından 5.5.9 veya yükseği, ve aynı versiyonda
+En azından PHP |minphpversion| (CLI) veya daha yüksek bir versiyonun yüklü olması gerekmektedir.
+Webserver PHP versiyonunun en azından |minphpversion| veya yükseği, ve aynı versiyonda
 komut arayüzünün de olması gerekmektedir. Eğer tüm uygulamayı görmek
 istiyorsanız `cakephp/bookmarker <https://github.com/cakephp/bookmarker-tutorial>`__.
 kontrol edebilirsiniz. Başlayalım !
@@ -319,7 +319,7 @@ olan metodu da sistemimize entegre edelim.
     {
         // 'pass' CakePHP tarafından tüm sorguda ki
         // url yolunu kapsar.
-        $tags = $this->request->params['pass'];
+        $tags = $this->request->param('pass');
 
         // BookmarksTable 'ı kullanarak taglı yerimlerini bulabilirsiniz.
         $bookmarks = $this->Bookmarks->find('tagged', [

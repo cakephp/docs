@@ -317,6 +317,17 @@ to call locale on each table for example::
 This example also assumes that ``Categories`` has the TranslateBehavior attached
 to it.
 
+Querying Translated Fields 
+--------------------------
+
+TranslateBehavior does not substitute find conditions by default. You need to use
+``translationField()`` method to compose find conditions on translated fields::
+
+    $this->Articles->locale('es');
+    $data = $this->Articles->find()->where([
+        $this->Articles->translationField('title') => 'Otro Título'
+    ]);
+
 Saving in Another Language
 ==========================
 
@@ -435,7 +446,7 @@ create form inputs for your translated fields::
 In your controller, you can marshal the data as normal, but with the
 ``translations`` option enabled::
 
-    $article = $this->Articles->newEntity($this->request->data, [
+    $article = $this->Articles->newEntity($this->request->getData(), [
         'translations' => true
     ]);
     $this->Articles->save($article);
