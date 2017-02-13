@@ -292,16 +292,20 @@ método ``findTagged`` não estar implementado ainda, então vamos fazer isso. E
 
     public function findTagged(Query $query, array $options)
     {
-        $fields = [
-            'Bookmarks.id',
-            'Bookmarks.title',
-            'Bookmarks.url',
-        ];
-        return $this->find()
-            ->distinct($fields)
-            ->matching('Tags', function ($q) use ($options) {
+        $bookmarks = $this->find()
+            ->select(['id', 'url', 'title', 'description']);
+
+        if (empty($options['tags'])) {
+            $bookmarks->leftJoinWith('Tags', function ($q) {
+                return $q->where(['Tags.title IS ' => null]);
+            });
+        } else {
+            $bookmarks->innerJoinWith('Tags', function ($q) use ($options) {
                 return $q->where(['Tags.title IN' => $options['tags']]);
             });
+        }
+
+        return $bookmarks->group(['Bookmarks.id']);
     }
 
 Nós implementamos um método
@@ -320,7 +324,7 @@ vamos construir o arquivo view para a nossa ação ``tags``. Em
 
     <h1>
         Bookmarks tagged with
-        <?= $this->Text->toList($tags) ?>
+        <?= $this->Text->toList(h($tags)) ?>
     </h1>
 
     <section>
@@ -328,7 +332,7 @@ vamos construir o arquivo view para a nossa ação ``tags``. Em
         <article>
             <h4><?= $this->Html->link($bookmark->title, $bookmark->url) ?></h4>
             <small><?= h($bookmark->url) ?></small>
-            <?= $this->Text->autoParagraph($bookmark->description) ?>
+            <?= $this->Text->autoParagraph(h($bookmark->description)) ?>
         </article>
     <?php endforeach; ?>
     </section>

@@ -143,6 +143,14 @@ la traduction de contenu.
     Communément utilisé comme ceci
     ``list($namespace, $className) = namespaceSplit('Cake\Core\App');``
 
+.. php:function:: dd(mixed $var, boolean $showHtml = null)
+
+    Cette méthode fonctionne comme ``debug()`` sauf qu'elle arrêtera
+    l'exécution du script.
+    Si la variable "core" ``$debug`` vaut ``true``, ``$var`` sera affichée.
+    Si ``$showHTML`` vaut ``true`` ou est laissée à ``null``, les données seront
+    rendues dans un affichage *user-friendly*. Plus de détails : :doc:`/development/debugging`
+
 .. php:function:: pr(mixed $var)
 
     Raccourci pratique pour ``print_r()``, avec un ajout de balises ``<pre>``
@@ -194,7 +202,7 @@ application.
 .. php:const:: DS
 
     Raccourci pour la constante PHP ``DIRECTORY_SEPARATOR``, qui est égale à
-    ``/`` pour Linux et ``\\`` pour Windows.
+    ``/`` pour Linux et ``\`` pour Windows.
 
 .. php:const:: LOGS
 

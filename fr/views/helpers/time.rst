@@ -5,12 +5,12 @@ Time
 
 .. php:class:: TimeHelper(View $view, array $config = [])
 
-Le Helper Time vous permet, comme il l'indique de gagner du temps. Il permet
+Le TimeHelper vous permet, comme il l'indique de gagner du temps. Il permet
 le traitement rapide des informations se rapportant au temps. Le Helper
 Time a deux tâches principales qu'il peut accomplir:
 
 #. Il peut formater les chaînes de temps.
-#. Il peut tester le temps (mais ne peut pas le courber, désolé).
+#. Il peut tester le temps.
 
 Utiliser le Helper
 ==================
@@ -26,7 +26,7 @@ s'assurer que le time zone de votre application est défini à GMT+0.
 Ensuite, ajoutez un time zone à votre table users et faîtes les modifications
 nécessaires pour permettre à vos utilisateurs de définir leur time zone.
 Maintenant que nous connaissons le time zone de l'utilisateur connecté, nous
-pouvons corriger la date et le temps de nos posts en utilisant le Helper Time::
+pouvons corriger la date et le temps de nos posts en utilisant le TimeHelper::
 
     echo $this->Time->format(
       $post->created,
@@ -50,5 +50,5 @@ Par exemple, pour en apprendre plus sur les chaines de formatage, jetez un oeil
 
 .. meta::
     :title lang=fr: TimeHelper
-    :description lang=fr: Time Helper vous aide à formater le temps et à tester le temps.
+    :description lang=fr: TimeHelper vous aide à formater le temps et à tester le temps.
     :keywords lang=fr: time helper,temps,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt

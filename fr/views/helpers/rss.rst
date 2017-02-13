@@ -5,7 +5,7 @@ Rss
 
 .. php:class:: RssHelper(View $view, array $config = [])
 
-Le Helper RSS permet de générer facilement le XML pour les
+Le RssHelper permet de générer facilement le XML pour les
 `flux RSS <https://en.wikipedia.org/wiki/RSS>`_.
 
 Créer un flux RSS avec RssHelper
@@ -207,5 +207,5 @@ Le Validateur de flux ou le site de w3c à http://validator.w3.org/feed/.
 
 .. meta::
     :title lang=fr: RssHelper
-    :description lang=fr: RSSHelper permet de générer facilement les XML pour les flux RSS.
+    :description lang=fr: RssHelper permet de générer facilement les XML pour les flux RSS.
     :keywords lang=fr: rss helper,rss flux,isrss,rss item,canal data,document data,parse extensions,request handler

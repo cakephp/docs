@@ -305,22 +305,37 @@ peuvent être atteintes avec les jointures::
         'valueField' => 'author.name'
     ])->contain(['Authors']);
 
-Enfin il est possible d'utiliser les closures pour accéder aux méthodes de
-mutation des entities dans vos finds list. Cet exemple vous montre l'utilisation
-de la méthode de mutation ``_getFullName()`` de l'entity Author::
+Personnaliser la Sortie Clé-Valeur
+----------------------------------
 
+Enfin il est possible d'utiliser les closures pour accéder aux méthodes de
+mutation des entities dans vos finds list. ::
+
+    // Dasn votre Entity Authors, créez un champ virtuel à utiliser en tant que
+    champ à afficher:
+    protected function _getLabel()
+    {
+        return $this->_properties['first_name'] . ' ' . $this->_properties['last_name']
+          . ' / ' . __('User ID %s', $this->_properties['user_id']);
+    }
+
+Cet exemple montre l'utilisation de la méthode accesseur ``_getLabel()`` à
+partir de l'entity Author. ::
+
+    // Dans vos finders/controller:
     $query = $articles->find('list', [
         'keyField' => 'id',
         'valueField' => function ($article) {
-            return $article->author->get('full_name');
+            return $article->author->get('label');
         }
     ]);
 
-Vous pouvez aussi récupérer le nom complet directement dans la liste en
-utilisant. ::
+Vous pouvez aussi récupérer le label dans la liste directement en utilisant. ::
 
-    $this->displayField('full_name');
-    $query = $authors->find('list');
+    // Dans AuthorsTable::initialize():
+    $this->displayField('label'); // Va utiliser Author::_getLabel()
+    // Dans votre finders/controller:
+    $query = $authors->find('list'); // Va utiliser AuthorsTable::displayField()
 
 Trouver des Données Threaded
 ============================
@@ -487,8 +502,8 @@ Si vous préférez utiliser les fonctions de jointure, vous pouvez consulter
 
 .. _eager-loading-associations:
 
-Eager Loading des Associations
-==============================
+Eager Loading des Associations Via Contain
+==========================================
 
 Par défaut, CakePHP ne charge **aucune** donnée associée lors de l'utilisation
 de ``find()``. Vous devez faire un 'contain' ou charger en eager chaque
@@ -535,6 +550,34 @@ souhaitez::
         'Shops.Cities.Countries',
         'Shops.Managers'
     ]);
+
+Vous pouvez sélectionner des champs de toutes les associations en utilisant
+plusieurs appels à ``contain()``::
+
+    $query = $this->find()->select([
+        'Realestates.id',
+        'Realestates.title',
+        'Realestates.description'
+    ])
+    ->contain([
+        'RealestateAttributes' => [
+            'Attributes' => [
+                'fields' => [
+                    'Attributes.name'
+                ]
+            ]
+        ]
+    ])
+    ->contain([
+        'RealestateAttributes' => [
+            'fields' => [
+                'RealestateAttributes.realestate_id',
+                'RealestateAttributes.value'
+            ]
+        ]
+    ])
+    ->where($condition);
+
 
 Si vous avez besoin de remettre les contain sur une requête, vous pouvez
 définir le second argument à ``true``::
@@ -657,8 +700,8 @@ utiliser l'option ``sort`` pour ordonner les données dans ces associations::
 
 .. _filtering-by-associated-data:
 
-Filtrer par les Données Associées
----------------------------------
+Filtrer par les Données Associées Via Matching et Joins
+=======================================================
 
 .. start-filtering
 
@@ -718,7 +761,7 @@ match et contain sur la même association, vous pouvez vous attendre à recevoir
 dans vos résultats.
 
 Utiliser innerJoinWith
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 Utiliser la fonction ``matching()``, comme nous l'avons vu précédemment, va
 créer un ``INNER JOIN`` avec l'association spécifiée et va aussi charger les
@@ -751,7 +794,7 @@ définie.
     Query::innerJoinWith() a été ajoutée dans 3.1
 
 Utiliser notMatching
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 L'opposé de ``matching()`` est ``notMatching()``. Cette fonction va changer
 la requête pour qu'elle filtre les résultats qui n'ont pas de relation avec
@@ -812,7 +855,7 @@ Gardez à l'esprit que le contraire de la fonction ``matching()``,
     Query::notMatching() a été ajoutée dans 3.1
 
 Utiliser leftJoinWith
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 Dans certaines situations, vous aurez à calculer un résultat selon une
 association, sans avoir à charger tous les enregistrements. Par
@@ -851,7 +894,7 @@ l'ensemble de résultats.
 .. end-filtering
 
 Changer les Stratégies de Récupération
---------------------------------------
+======================================
 
 Comme vous le savez peut-être déjà, les associations ``belongsTo`` et ``hasOne``
 sont chargées en utilisant un ``JOIN`` dans la requête du finder principal.
@@ -922,7 +965,7 @@ faisant::
     $articles->Comments->strategy('subquery');
 
 Lazy loading des Associations
------------------------------
+=============================
 
 Bien que CakePHP facilite le chargement en eager de vos associations, il y a des
 cas où vous devrez charger en lazy les associations. Vous devez vous référer

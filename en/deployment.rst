@@ -27,7 +27,7 @@ Turning debug = ``false`` disables a number of development features that should
 never be exposed to the Internet at large. Disabling debug changes the following
 types of things:
 
-* Debug messages, created with :php:func:`pr()` and :php:func:`debug()` are
+* Debug messages, created with :php:func:`pr()`, :php:func:`debug()` and :php:func:`dd()` are
   disabled.
 * Core CakePHP caches are by default flushed every year (about 365 days), instead of every
   10 seconds as in development.

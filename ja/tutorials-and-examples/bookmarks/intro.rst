@@ -249,7 +249,7 @@ Scaffold コードの生成
 
 今から既存のユーザのパスワードを更新してくだい。パスワードを変更した際、一覧もしくは詳細ページで、
 入力した値の代わりにハッシュ化されたパスワードがあることを確認してください。CakePHP は、
-デフォルトで `bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_ 
+デフォルトで `bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_
 を使ってパスワードをハッシュ化します。既存のデータベースが動作している場合、 sha1 や md5 も
 使用できます。
 
@@ -345,14 +345,20 @@ CakePHP では、コントローラのアクションをスリムに保ち、ア
     // 'tag' オプションが含まれます。
     public function findTagged(Query $query, array $options)
     {
-        return $this->find()
-            ->distinct(['Bookmarks.id'])
-            ->matching('Tags', function ($q) use ($options) {
-               if (empty($options['tags'])) {
-                   return $q->where(['Tags.title IS' => null]);
-               }
-               return $q->where(['Tags.title IN' => $options['tags']]);
+        $bookmarks = $this->find()
+            ->select(['id', 'url', 'title', 'description']);
+
+        if (empty($options['tags'])) {
+            $bookmarks->leftJoinWith('Tags', function ($q) {
+                return $q->where(['Tags.title IS ' => null]);
             });
+        } else {
+            $bookmarks->innerJoinWith('Tags', function ($q) use ($options) {
+                return $q->where(['Tags.title IN' => $options['tags']]);
+            });
+        }
+
+        return $bookmarks->group(['Bookmarks.id']);
     }
 
 :ref:`カスタム Finder メソッド <custom-find-methods>` を実装しました。
@@ -376,7 +382,7 @@ Finder メソッドは、常に :doc:`/orm/query-builder` オブジェクトと�
 
     <h1>
         Bookmarks tagged with
-        <?= $this->Text->toList($tags) ?>
+        <?= $this->Text->toList(h($tags)) ?>
     </h1>
 
     <section>
@@ -387,7 +393,7 @@ Finder メソッドは、常に :doc:`/orm/query-builder` オブジェクトと�
             <small><?= h($bookmark->url) ?></small>
 
             <!-- Use the TextHelper to format text -->
-            <?= $this->Text->autoParagraph($bookmark->description) ?>
+            <?= $this->Text->autoParagraph(h($bookmark->description)) ?>
         </article>
     <?php endforeach; ?>
     </section>

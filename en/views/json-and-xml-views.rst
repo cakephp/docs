@@ -127,7 +127,7 @@ JSON response. This is a situation where a view file would be useful::
     }
 
     // View code - src/Template/Articles/json/index.ctp
-    foreach ($articles as &$$article) {
+    foreach ($articles as &$article) {
         unset($article->generated_html);
     }
     echo json_encode(compact('articles'));
@@ -173,3 +173,49 @@ check if query string parameter named "callback" is set and if so wrap the json
 response in the function name provided. If you want to use a custom query string
 parameter name instead of "callback" set ``_jsonp`` to required name instead of
 ``true``.
+
+Example Usage
+=============
+
+While the :doc:`RequestHandlerComponent
+</controllers/components/request-handling>` can automatically set the view based
+on the request content-type or extension, you could also handle view
+mappings in your controller::
+
+    // src/Controller/VideosController.php
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use Cake\Network\Exception\NotFoundException;
+
+    class VideosController extends AppController
+    {
+        public function export($format = '')
+        {
+            $format = strtolower($format);
+
+            // Format to view mapping
+            $formats = [
+              'xml' => 'Xml',
+              'json' => 'Json',
+            ];
+
+            // Error on unknown type
+            if (!isset($formats[$format])) {
+                throw new NotFoundException(__('Unknown format.'));
+            }
+
+            // Set Out Format View
+            $this->viewBuilder()->className($formats[$format]);
+
+            // Set Force Download
+            $this->response->download('report-' . date('YmdHis') . '.' . $format);
+
+            // Get data
+            $videos = $this->Videos->find('latest');
+
+            // Set Data View
+            $this->set(compact('videos'));
+            $this->set('_serialize', ['videos']);
+        }
+    }

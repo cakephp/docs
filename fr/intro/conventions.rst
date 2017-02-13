@@ -80,8 +80,9 @@ de votre application.
 Conventions pour les Models et les Bases de Données
 ===================================================
 
-Les noms de classe de model sont au pluriel et en CamelCase. ``Users``,
-``ArticleCategories`` et ``UserFavoritePages`` en sont des exemples.
+Les noms de classe de model sont au pluriel, en CamelCase et finissent par
+``Table``. ``UsersTable``, ``ArticleCategoriesTable`` et
+``UserFavoritePagesTable`` en sont des exemples.
 
 Les noms de tables correspondant aux models CakePHP sont au pluriel et utilisent
 le caractère souligné (underscore). Les tables correspondantes aux models

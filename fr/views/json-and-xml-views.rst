@@ -182,3 +182,49 @@ nommée "callback" est défini et si c'est le cas, permet d'envelopper la répon
 json dans le nom de la fonction fournie. Si vous voulez utiliser un nom
 personnalisé de paramètre de requête à la place de "callback", définissez
 ``_jsonp`` avec le nom requis à la place de ``true``.
+
+Exemple d'Utilisation
+=====================
+
+Alors que :doc:`RequestHandlerComponent
+</controllers/components/request-handling>` peut automatiquement définir la vue
+en fonction du content-type ou de l'extension de la requête, vous pouvez aussi
+gérer les mappings de vue dans votre controller::
+
+    // src/Controller/VideosController.php
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use Cake\Network\Exception\NotFoundException;
+
+    class VideosController extends AppController
+    {
+        public function export($format = '')
+        {
+            $format = strtolower($format);
+
+            // Format pour le view mapping
+            $formats = [
+              'xml' => 'Xml',
+              'json' => 'Json',
+            ];
+
+            // Erreur sur un type inconnu
+            if (!isset($formats[$format])) {
+                throw new NotFoundException(__('Unknown format.'));
+            }
+
+            // Définit le format de la Vue
+            $this->viewBuilder()->className($formats[$format]);
+
+            // Définit le téléchargement forcé
+            $this->response->download('report-' . date('YmdHis') . '.' . $format);
+
+            // Récupérer les données
+            $videos = $this->Videos->find('latest');
+
+            // Définir les Données de la Vue
+            $this->set(compact('videos'));
+            $this->set('_serialize', ['videos']);
+        }
+    }

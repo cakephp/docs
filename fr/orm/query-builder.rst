@@ -302,7 +302,7 @@ table à ``select()``::
     // Sélectionne seulement id et title de la table articles
     $query = $articlesTable->find();
     $query
-        ->select(['slug' => $query->func()->concat(['title', '-', 'id'])])
+        ->select(['slug' => $query->func()->concat(['title' => 'identifier', '-', 'id' => 'identifier'])])
         ->select($articlesTable); // Sélectionne tous les champs de articles
 
 .. _using-sql-functions:
@@ -438,12 +438,12 @@ d'additionner ou de compter conditionnellement, ou si vous avez besoin de
 données spécifiques basées sur une condition.
 
 Si vous vouliez savoir combien d'articles sont publiés dans notre base de
-données, vous auriez besoin de générer le SQL suivant::
+données, nous pourrions utiliser le SQL suivant::
 
     SELECT
-    SUM(CASE published = 'Y' THEN 1 ELSE 0) AS number_published,
-    SUM(CASE published = 'N' THEN 1 ELSE 0) AS number_unpublished
-    FROM articles GROUP BY published
+    COUNT(CASE WHEN published = 'Y' THEN 1 END) AS number_published,
+    COUNT(CASE WHEN published = 'N' THEN 1 END) AS number_unpublished
+    FROM articles
 
 Pour faire ceci avec le générateur de requêtes, vous utiliseriez le code
 suivant::
@@ -455,7 +455,7 @@ suivant::
             1,
             'integer'
         );
-    $notPublishedCase = $query->newExpr()
+    $unpublishedCase = $query->newExpr()
         ->addCase(
             $query->newExpr()->add(['published' => 'N']),
             1,
@@ -463,10 +463,9 @@ suivant::
         );
 
     $query->select([
-        'number_published' => $query->func()->sum($publishedCase),
-        'number_unpublished' => $query->func()->sum($unpublishedCase)
-    ])
-    ->group('published');
+        'number_published' => $query->func()->count($publishedCase),
+        'number_unpublished' => $query->func()->count($unpublishedCase)
+    ]);
 
 La fonction ``addCase`` peut aussi chaîner ensemble plusieurs instructions pour
 créer une logique ``if .. then .. [elseif .. then .. ] [ .. else ]`` dans

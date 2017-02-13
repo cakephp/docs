@@ -107,6 +107,13 @@ translating content.
     will start with the line from which it was called. Also see
     :doc:`/development/debugging`
 
+.. php:function:: dd(mixed $var, boolean $showHtml = null)
+
+    It behaves like ``debug()``, but execution is also halted.
+    If the core ``$debug`` variable is ``true``, ``$var`` is printed.
+    If ``$showHTML`` is ``true`` or left as ``null``, the data is rendered to be
+    browser-friendly. Also see :doc:`/development/debugging`
+
 .. php:function:: pr(mixed $var)
 
     .. versionchanged:: 3.3.0
@@ -193,7 +200,7 @@ Most of the following constants refer to paths in your application.
 
 .. php:const:: DS
 
-    Short for PHP's ``DIRECTORY_SEPARATOR``, which is ``/`` on Linux and ``\\``
+    Short for PHP's ``DIRECTORY_SEPARATOR``, which is ``/`` on Linux and ``\``
     on Windows.
 
 .. php:const:: LOGS

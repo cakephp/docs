@@ -77,6 +77,19 @@ conditional count and a basic count you can add these fields in the array::
         ]
     ]);
 
+If you want to calculate the CounterCache field value on your own, you can set
+the ``ignoreDirty`` option to ``true``.
+This will prevent the field from being recalculated if you've set it dirty
+before::
+
+    $this->addBehavior('CounterCache', [
+        'Articles' => [
+            'comment_count' => [
+                'ignoreDirty' => true
+            ]
+        ]
+    ]);
+
 Lastly, if a custom finder and conditions are not suitable you can provide
 a callback method. This callable must return the count value to be stored::
 
