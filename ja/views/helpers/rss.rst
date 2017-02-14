@@ -5,7 +5,7 @@ Rss
 
 .. php:class:: RssHelper(View $view, array $config = [])
 
-RssHelper は  `RSS feeds <https://en.wikipedia.org/wiki/RSS>` である XML の作成が簡単にできます。
+RssHelper は `RSS feeds <https://en.wikipedia.org/wiki/RSS>`_ である XML の作成が簡単にできます。
 
 Creating an RSS Feed with the RssHelper
 =======================================
@@ -27,15 +27,13 @@ things. First extensions parsing needs to be activated, this is done in
 文字列もしくは配列の拡張子を最初の引数として渡すことができます。
 これはあなたのアプリに各拡張子 / コンテンツタイプを有効化するでしょう。
 
-Now when the address ``articles/index.rss`` is requested you will get an XML version of
-your ``articles/index``. However, first we need to edit the controller to
-add in the rss-specific code.
+これで、 ``articles/index.rss`` がリクエストされたときに ``articles/index`` の XML バージョンが取得できるようになります。
+しかし、RSS 仕様のコードを追加するためには、まず最初にコントローラを編集する必要があります。
 
-Controller Code
----------------
-
-It is a good idea to add RequestHandler to your ArticlesController's
-``initialize()`` method. This will allow a lot of automagic to occur::
+コントローラのコード
+-----------------------------------
+ArticlesController の ``initialize()`` メソッドに RequestHandler を加えるのは 良いアイディアです。これで、多くのことが自動的に行われます。
+::
 
     public function initialize()
     {
@@ -43,19 +41,17 @@ It is a good idea to add RequestHandler to your ArticlesController's
         $this->loadComponent('RequestHandler');
     }
 
-Before we can make an RSS version of our ``articles/index`` we need to get a few
-things in order. It may be tempting to put the channel metadata in the
-controller action and pass it to your view using the
-:php:meth:`Cake\\Controller\\Controller::set()` method but this is
-inappropriate. That information can also go in the view. That will come later
-though, for now if you have a different set of logic for the data used to make
-the RSS feed and the data for the HTML view you can use the
-:php:meth:`Cake\\Controller\\Component\\RequestHandler::isRss()` method,
-otherwise your controller can stay the same::
+``articles/index`` の RSS バージョンが作れる前に、いくつかのことを順番に行う必要があります。
+コントローラのアクションで、 :php:meth:`Cake\\Controller\\Controller::set()` を使ってチャンネルメタデータをセットし、
+それをビューに渡したくなりますが、これは不適切です。
+その情報はビューの中でも処理できます。
 
-    // Modify the Posts Controller action that corresponds to
-    // the action which deliver the rss feed, which is the
-    // Index action in our example.
+後述しますが、もし RSS フィードを作成するためのデータと HTML ビュー用のデータがそれぞれ異なるロジックを用意しているのであれば、
+:php:meth:`Cake\\Controller\\Component\\RequestHandler::isRss()` メソッドが利用でき、そうでなければあなたのコントローラは手を加えずにすみます。
+::
+
+    // Articles コントローラで RSS フィードの配信を行うアクションを編集、
+    // この例は Index アクションです。
 
     public function index()
     {
@@ -66,8 +62,8 @@ otherwise your controller can stay the same::
                 ->order(['created' => 'desc']);
             $this->set(compact('articles'));
         } else {
-            // this is not an Rss request, so deliver
-            // data used by website's interface.
+            // これは RSS リクエストではありません。
+            // ウェブサイトインターフェースで使用されるデータを配信します。
             $this->paginate = [
                 'order' => ['created' => 'desc'],
                 'limit' => 10
