@@ -183,46 +183,41 @@ The lock option can be used to lock sorting into the specified direction::
 
     Gets the current key by which the recordset is sorted.
 
-Creating page number links
-==========================
+ページ番号リンクの作成
+======================
 
 .. php:method:: numbers($options = [])
 
-Returns a set of numbers for the paged result set. Uses a modulus to
-decide how many numbers to show on each side of the current page  By default
-8 links on either side of the current page will be created if those pages exist.
-Links will not be generated for pages that do not exist. The current page is
-also not a link.
+ページ番号の並びを返します。モジュールを使って、
+現在のページの前後 何ページまでを表示するのかを決めます。
+デフォルトでは、 現在のページのいずれかの側で最大８個までのリンクが作られます。
+ただし存在しないページは作られません。現在のページもリンクにはなりません。
 
-Supported options are:
+サポートされているオプションは以下の通りです。
 
-* ``before`` Content to be inserted before the numbers.
-* ``after`` Content to be inserted after the numbers.
-* ``model`` Model to create numbers for, defaults to
-  :php:meth:`PaginatorHelper::defaultModel()`.
-* ``modulus`` how many numbers to include on either side of the current page,
-  defaults to 8.
-* ``first`` Whether you want first links generated, set to an integer to
-  define the number of 'first' links to generate. Defaults to ``false``. If a
-  string is set a link to the first page will be generated with the value as the
-  title::
+* ``before`` 数字の前に挿入されるコンテンツ
+* ``after`` 数字の後に挿入されるコンテンツ
+* ``model`` その番号を作る元になるモデル。デフォルトは
+  :php:meth:`PaginatorHelper::defaultModel()`
+* ``modulus`` 現在のページの両側に含める数字の数。
+  デフォルトは 8。
+* ``first`` 先頭ページへのリンクを生成したい場合、先頭から何ページ分を生成するかを整数で指定します。
+  デフォルトは ``false`` です。文字列を指定すると、その文字列をタイトルの値として先頭ページへのリンクを生成します。::
 
       echo $this->Paginator->numbers(['first' => 'First page']);
 
-* ``last`` Whether you want last links generated, set to an integer to define
-  the number of 'last' links to generate. Defaults to ``false``. Follows the same
-  logic as the ``first`` option. There is a
-  :php:meth:`~PaginatorHelper::last()`` method to be used separately as well if
-  you wish.
+* ``last`` 最終ページヘのリンクを生成したい場合、最後から何ページ分を生成するかを整数で定義します。
+  デフォルトは ``false`` です。 ``first`` オプションと 同じロジックに従います。
+  :php:meth:`~PaginatorHelper::last()` メソッドを使って別々に定義することも可能です。
 
-While this method allows a lot of customization for its output. It is
-also ok to just call the method without any params. ::
+このメソッドを使えば出力の多くをカスタマイズできますが、
+一切パラメーターを指定せずにコールしても問題ありません。::
 
     echo $this->Paginator->numbers();
 
-Using the first and last options you can create links to the beginning
-and end of the page set. The following would create a set of page links that
-include links to the first 2 and last 2 pages in the paged results::
+first と last オプションを使って先頭ページと最終ページへのリンクを作れます。
+以下の例ではページ制御された結果セットの中の、
+先頭から２ページと末尾から２ページのリンクを含むページリンクの並びを生成します。::
 
     echo $this->Paginator->numbers(['first' => 2, 'last' => 2]);
 
