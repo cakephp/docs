@@ -190,12 +190,12 @@ AppController に追加しましょう。 ::
             return true;
         }
         // その他のすべてのアクションは、id を必要とします。
-        if (empty($this->request->params['pass'][0])) {
+        if (!$this->request->param('pass.0')) {
             return false;
         }
 
 	// ブックマークが現在のユーザに属するかどうかをチェック
-        $id = $this->request->params['pass'][0];
+        $id = $this->request->param('pass.0');
         $bookmark = $this->Bookmarks->get($id);
         if ($bookmark->user_id == $user['id']) {
             return true;
@@ -230,7 +230,7 @@ AppController に追加しましょう。 ::
     {
         $bookmark = $this->Bookmarks->newEntity();
         if ($this->request->is('post')) {
-            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->getData());
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('ブックマークを保存しました。');
@@ -253,7 +253,7 @@ AppController に追加しましょう。 ::
             'contain' => ['Tags']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->getData());
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('ブックマークを保存しました。');

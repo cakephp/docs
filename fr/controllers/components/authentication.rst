@@ -282,12 +282,14 @@ laquelle l'utilisateur doit être redirigé après s'être connecté.
 Si aucun paramètre n'est passé, elle obtient l'URL de redirection
 d'authentification. L'URL retournée correspond aux règles suivantes:
 
-- Retourne l'URL normalisée de valeur ``Auth.redirect`` si elle est présente en
-  session et pour le même domaine que celui sur lequel application est exécuté.
-- S'il n'y a pas de valeur en session et qu'il y a une configuration
-  ``loginRedirect``, la valeur de ``loginRedirect`` est retournée.
-- S'il n'y a pas de valeur en session et pas de ``loginRedirect``, ``/``
-  est retournée.
+- Retourne l'URL normalisée du paramètre URL redirect s'il est présent et qu'il
+  pointe sur le même domaine que celui de l'application. Avant 3.4.0, la valeur
+  de la clé ``Auth.redirect`` stockée en session était utilisée.
+- S'il n'y a pas de valeur en session ou en paramètres URL et que la clé
+  ``loginRedirect`` faisait partie de la configuration de ``AuthComponent``,
+  la valeur de ``loginRedirect`` est retournée.
+- S'il n'y a pas de valeur de redirection et que la clé ``loginRedirect`` n'a
+  pas été configurée, ``/`` est retournée.
 
 Création de Systèmes d'Authentification Stateless
 -------------------------------------------------
@@ -400,7 +402,7 @@ de façon aléatoire ces tokens d'API en utilisant les libraries de CakePHP::
     {
         public function beforeSave(Event $event)
         {
-            $entity = $event->data['entity'];
+            $entity = $event->getData('entity');
 
             if ($entity->isNew()) {
                 $hasher = new DefaultPasswordHasher();
@@ -470,7 +472,7 @@ colonne séparée du mot de passe standard hashé::
     {
         public function beforeSave(Event $event)
         {
-            $entity = $event->data['entity'];
+            $entity = $event->getData('entity');
 
             // Make a password for digest auth.
             $entity->digest_hash = DigestAuthenticate::password(
@@ -583,7 +585,10 @@ Pour afficher les messages d'erreur de session que Auth génère, vous devez
 ajouter les lignes de code suivante dans votre layout. Ajoutez les deux lignes
 suivantes au fichier **src/Template/Layouts/default.ctp** dans la section body::
 
+    // Seule cette ligne est nécessaire à partir de 3.4.0.
     echo $this->Flash->render();
+
+    // Avant 3.4.0, cette ligne sera également nécessaire.
     echo $this->Flash->render('auth');
 
 Vous pouvez personnaliser les messages d'erreur et les réglages que le
@@ -591,8 +596,9 @@ component Auth ``AuthComponent`` utilise. En utilisant ``flash``,
 vous pouvez configurer les paramètres que le component Auth utilise pour
 envoyer des messages flash. Les clés disponibles sont
 
-- ``key`` - La clé à utiliser, 'auth' par défaut.
-- ``params`` - Le tableau des paramètres supplémentaires à utiliser, [] par
+- ``key`` - La clé à utiliser, 'default' par défaut. Avant 3.4.0, la clé par
+  défaut était 'auth'.
+- ``params`` - Le tableau des paramètres supplémentaires à utiliser, ``[]`` par
   défaut.
 
 En plus des paramètres de message flash, vous pouvez personnaliser les autres
@@ -747,7 +753,7 @@ pouvez changer la fonction login selon::
                 $this->Auth->setUser($user);
                 if ($this->Auth->authenticationProvider()->needsPasswordRehash()) {
                     $user = $this->Users->get($this->Auth->user('id'));
-                    $user->password = $this->request->data('password');
+                    $user->password = $this->request->getData('password');
                     $this->Users->save($user);
                 }
                 return $this->redirect($this->Auth->redirectUrl());
@@ -818,7 +824,7 @@ utilisateur que vous voulez pour la 'connexion'::
 
     public function register()
     {
-        $user = $this->Users->newEntity($this->request->data);
+        $user = $this->Users->newEntity($this->request->getData());
         if ($this->Users->save($user)) {
             $this->Auth->setUser($user->toArray());
             return $this->redirect([
@@ -1096,12 +1102,12 @@ il peut donc être vérifié::
         public function isAuthorized($user = null)
         {
             // Chacun des utilisateurs enregistrés peut accéder aux fonctions publiques
-            if (empty($this->request->params['prefix'])) {
+            if (!$this->request->getParam('prefix')) {
                 return true;
             }
 
             // Seulement les administrateurs peuvent accéder aux fonctions d'administration
-            if ($this->request->params['prefix'] === 'admin') {
+            if ($this->request->getParam('prefix') === 'admin') {
                 return (bool)($user['role'] === 'admin');
             }
 

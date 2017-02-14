@@ -164,7 +164,7 @@ want and the Security Component will enforce them on its startup::
 
         public function beforeFilter(Event $event)
         {
-            if (isset($this->request->params['admin'])) {
+            if ($this->request->getParam('admin')) {
                 $this->Security->requireSecure();
             }
         }
@@ -189,14 +189,14 @@ require secure SSL requests::
 
         public function beforeFilter(Event $event)
         {
-            if (isset($this->params['admin'])) {
+            if ($this->request->getParam('admin')) {
                 $this->Security->requireSecure();
             }
         }
 
         public function forceSSL()
         {
-            return $this->redirect('https://' . env('SERVER_NAME') . $this->request->here);
+            return $this->redirect('https://' . env('SERVER_NAME') . $this->request->here());
         }
     }
 

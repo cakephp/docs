@@ -279,7 +279,7 @@ CakePHP ではこれらを簡単につくれます。フェッチする列を制
     // 計算された slug 列を含めて、 articles テーブルのすべての列を取得
     $query = $articlesTable->find();
     $query
-        ->select(['slug' => $query->func()->concat(['title', '-', 'id'])])
+        ->select(['slug' => $query->func()->concat(['title' => 'identifier', '-', 'id' => 'identifier'])])
         ->select($articlesTable); // articles のすべての列を select する
 
 .. versionadded:: 3.1

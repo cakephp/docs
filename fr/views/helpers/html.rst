@@ -763,17 +763,17 @@ Affichera:
 Changer l'affichage des balises avec le Helper Html
 ===================================================
 
-.. php:method:: templates($templates)
+.. php:method:: setTemplates($templates)
 
-Le paramètre ``$templates`` peut être soit un chemin de fichier en chaîne
+Le paramètre ``setTemplates`` peut être soit un chemin de fichier en chaîne
 de caractères vers le fichier PHP contenant les balises que vous
 souhaitez charger, soit avec un tableau des templates à ajouter/remplacer::
 
     // Charger les templates à partir de config/my_html.php
-    $this->Html->templates('my_html.php');
+    $this->Html->setTemplates('my_html.php');
 
     // Charger les templates spécifiques.
-    $this->Html->templates([
+    $this->Html->setTemplates([
         'javascriptlink' => '<script src="{{url}}" type="text/javascript"{{attrs}}></script>'
     ]);
 

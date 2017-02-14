@@ -53,6 +53,10 @@ Chaque panneau vous permet d'inspecter plusieurs aspects de votre application:
   charger et de voir les données de la toolbar des requêtes précédentes.
 * **Include** Voir les fichiers inclus groupés par type.
 * **Log** Affiche toute entrée faite dans les fichiers de log par cette requête.
+* **Packages** Affiche la liste des dépendances avec leur version courante et
+  vous permet de vérifier les packages qui ne sont pas à jour.
+* **Mail** Affiche tous les emails envoyés pendant la requête et permet de
+  prévisualiser les emails pendant le développement sans les envoyer.
 * **Request** Affiche les informations sur la requête courante, GET, POST, les
   paramètre de Cake, sur la Route Courante et les Cookies.
 * **Session** Affiche les informations actuellement dans la Session.
@@ -88,6 +92,25 @@ chargées.
 
   .. figure:: /_static/img/debug-kit/history-panel-use.gif
       :alt: Video du panneau historique en action.
+
+Utiliser le Panneau Mail
+========================
+
+Le panneau de mail vous permet de pister tous les emails envoyés pendant une
+requête.
+
+.. only:: html or epub
+
+  .. figure:: /_static/img/debug-kit/mail-panel.gif
+    :alt: Video du panneau Mail en action.
+
+La prévisualisation de mail vous permet de facilement vérifier les emails
+pendant le développement.
+
+.. only:: html or epub
+
+  .. figure:: /_static/img/debug-kit/mail-previewer.gif
+    :alt: Video du panneau Mail en action.
 
 Développer vos Propres Panneaux
 ===============================

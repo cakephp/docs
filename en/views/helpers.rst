@@ -72,7 +72,7 @@ You can use the current action name to conditionally load helpers::
         public function initialize()
         {
             parent::initialize();
-            if ($this->request->action === 'index') {
+            if ($this->request->getParam('action') === 'index') {
                 $this->loadHelper('ListPage');
             }
         }
@@ -324,6 +324,25 @@ matching view property::
     The ``HelperRegistry`` will attempt to lazy load any helpers not
     specifically identified in your ``Controller``.
 
+Accessing View Variables Inside Your Helper
+-------------------------------------------
+
+If you would like to access a View variable inside a helper, you can use
+``$this->_View->get()`` like::
+
+    class AwesomeHelper extends Helper
+    {
+
+        public $helpers = ['Html'];
+
+        public someMethod()
+        {
+            // set meta description
+            echo $this->Html->meta(
+                'description', $this->_View->get('metaDescription'), ['block' => 'meta']
+            );
+        }
+    }
 
 Rendering A View Element Inside Your Helper
 -------------------------------------------
@@ -336,10 +355,16 @@ If you would like to render an Element inside your Helper you can use
         public someFunction()
         {
             // output directly in your helper
-            echo $this->_View->element('/path/to/element',['foo'=>'bar','bar'=>'foo']);
+            echo $this->_View->element(
+                '/path/to/element',
+                ['foo'=>'bar','bar'=>'foo']
+            );
 
             // or return it to your view
-            return $this->_View->element('/path/to/element',['foo'=>'bar','bar'=>'foo']);
+            return $this->_View->element(
+                '/path/to/element',
+                ['foo'=>'bar','bar'=>'foo']
+            );
         }
     }
 

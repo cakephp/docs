@@ -259,11 +259,12 @@ to upon logging in.
 If no parameter is passed, it gets the authentication redirect URL. The URL
 returned is as per following rules:
 
-- Returns the normalized URL from session Auth.redirect value if it is
-  present and for the same domain the current app is running on.
-- If there is no session value and there is a config ``loginRedirect``, the
-  ``loginRedirect`` value is returned.
-- If there is no session and no ``loginRedirect``, / is returned.
+- Returns the normalized URL from the ``redirect`` query string value if it is
+  present and for the same domain the current app is running on. Before 3.4.0,
+  the ``Auth.redirect`` session value was used.
+- If there is no query string/session value and there is a config
+  ``loginRedirect``, the ``loginRedirect`` value is returned.
+- If there is no redirect value and no ``loginRedirect``, ``/`` is returned.
 
 
 Creating Stateless Authentication Systems
@@ -367,7 +368,7 @@ generate these API tokens randomly using libraries from CakePHP::
     {
         public function beforeSave(Event $event)
         {
-            $entity = $event->data['entity'];
+            $entity = $event->getData('entity');
 
             if ($entity->isNew()) {
                 $hasher = new DefaultPasswordHasher();
@@ -435,7 +436,7 @@ from the normal password hash::
     {
         public function beforeSave(Event $event)
         {
-            $entity = $event->data['entity'];
+            $entity = $event->getData('entity');
 
             // Make a password for digest auth.
             $entity->digest_hash = DigestAuthenticate::password(
@@ -543,15 +544,19 @@ In order to display the session error messages that Auth generates, you
 need to add the following code to your layout. Add the following two
 lines to the **src/Template/Layout/default.ctp** file in the body section::
 
+    // Only this is necessary after 3.4.0
     echo $this->Flash->render();
+
+    // Prior to 3.4.0 this will be required as well.
     echo $this->Flash->render('auth');
 
 You can customize the error messages and flash settings AuthComponent
 uses. Using ``flash`` config you can configure the parameters
 AuthComponent uses for setting flash messages. The available keys are
 
-- ``key`` - The key to use, defaults to 'auth'.
-- ``params`` - The array of additional params to use, defaults to [].
+- ``key`` - The key to use, defaults to 'default'. Prior to 3.4.0, the key
+  defaulted to 'auth'.
+- ``params`` - The array of additional params to use, defaults to ``[]``.
 
 In addition to the flash message settings you can customize other error
 messages AuthComponent uses. In your controller's beforeFilter, or
@@ -698,7 +703,7 @@ function accordingly::
                 $this->Auth->setUser($user);
                 if ($this->Auth->authenticationProvider()->needsPasswordRehash()) {
                     $user = $this->Users->get($this->Auth->user('id'));
-                    $user->password = $this->request->data('password');
+                    $user->password = $this->request->getData('password');
                     $this->Users->save($user);
                 }
                 return $this->redirect($this->Auth->redirectUrl());
@@ -722,7 +727,7 @@ calling ``$this->Auth->setUser()`` with the user data you want to 'login'::
 
     public function register()
     {
-        $user = $this->Users->newEntity($this->request->data);
+        $user = $this->Users->newEntity($this->request->getData());
         if ($this->Users->save($user)) {
             $this->Auth->setUser($user->toArray());
             return $this->redirect([
@@ -993,12 +998,12 @@ checked::
         public function isAuthorized($user = null)
         {
             // Any registered user can access public functions
-            if (empty($this->request->params['prefix'])) {
+            if (!$this->request->getParam('prefix')) {
                 return true;
             }
 
             // Only admins can access admin functions
-            if ($this->request->params['prefix'] === 'admin') {
+            if ($this->request->getParam('prefix') === 'admin') {
                 return (bool)($user['role'] === 'admin');
             }
 

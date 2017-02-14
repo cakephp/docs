@@ -661,7 +661,7 @@ CakePHP は、1つのアルゴリズムから別のユーザーのパスワー�
                 $this->Auth->setUser($user);
                 if ($this->Auth->authenticationProvider()->needsPasswordRehash()) {
                     $user = $this->Users->get($this->Auth->user('id'));
-                    $user->password = $this->request->data('password');
+                    $user->password = $this->request->getData('password');
                     $this->Users->save($user);
                 }
                 return $this->redirect($this->Auth->redirectUrl());
@@ -684,7 +684,7 @@ CakePHP は、1つのアルゴリズムから別のユーザーのパスワー�
 
     public function register()
     {
-        $user = $this->Users->newEntity($this->request->data);
+        $user = $this->Users->newEntity($this->request->getData());
         if ($this->Users->save($user)) {
             $this->Auth->setUser($user->toArray());
             return $this->redirect([
@@ -940,12 +940,12 @@ ControllerAuthorize では、コントローラのコールバックで認可チ
         public function isAuthorized($user = null)
         {
             // 登録済みユーザーなら誰でも公開機能にアクセス可能です。
-            if (empty($this->request->params['prefix'])) {
+            if (empty($this->request->param('prefix'))) {
                 return true;
             }
 
             // admin ユーザーだけが管理機能にアクセス可能です。
-            if ($this->request->params['prefix'] === 'admin') {
+            if ($this->request->param('prefix') === 'admin') {
                 return (bool)($user['role'] === 'admin');
             }
 
