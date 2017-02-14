@@ -111,7 +111,7 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
         CookieComponent ne peut pas intéragir avec les valeurs de chaînes vides
         qui contiennent ``,``. Le component va tenter d'interpreter ces valeurs
         en tableaux, ce qui conduit à des résultats incorrects. A la place, vous
-        devez utiliser ``$request->cookie()``.
+        devez utiliser ``$request->getCookie()``.
 
 .. php:method:: check($key)
 

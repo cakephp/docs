@@ -45,6 +45,9 @@
     padding-top: 160px;
     padding-bottom: 40px;
 }
+.is-next.page-container {
+    padding-top: 200px;
+}
 
 /* General button */
 .offline-download a,
@@ -665,4 +668,13 @@ dt tt {
 }
 .genindextable a {
     font-size: 14px;
+}
+
+.edge-warning {
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: center;
+    background-color: #ffe4e4;
+    padding: 0.4em;
+    margin: 0;
 }
