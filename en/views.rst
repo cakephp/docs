@@ -466,6 +466,9 @@ controller actions using the controller or view's ``$layout`` property::
     public function admin_view()
     {
         // Set the layout.
+        $this->viewBuilder()->setLayout('admin');
+
+        // Before 3.4
         $this->viewBuilder()->layout('admin');
 
         // Before 3.1
@@ -483,20 +486,21 @@ layout for all controllers' actions using something like::
 
     class UsersController extends AppController
     {
-        public function view_active()
+        public function viewActive()
         {
             $this->set('title', 'View Active Users');
+            $this->viewBuilder()->setLayout('default_small_ad');
+
+            // or the following before 3.4
             $this->viewBuilder()->layout('default_small_ad');
 
             // or the following before 3.1
             $this->layout = 'default_small_ad';
         }
 
-        public function view_image()
+        public function viewImage()
         {
-            $this->viewBuilder()->layout('image');
-            // or the following before 3.1
-            $this->layout = 'image';
+            $this->viewBuilder()->setLayout('image');
 
             // Output user image
         }

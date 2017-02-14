@@ -18,8 +18,8 @@
 
     php -v
 
-最低でも PHP 5.5.9 (CLI) 以上をインストールしてください。
-あなたのウェブサーバーの PHP バージョンもまた、5.5.9 以上でなければなりません。そして、
+最低でも PHP |minphpversion| (CLI) 以上をインストールしてください。
+あなたのウェブサーバーの PHP バージョンもまた、|minphpversion| 以上でなければなりません。そして、
 コマンドラインインターフェース (CLI) の PHP バージョンと同じバージョンがベストです。
 完全なアプリケーションを確認したい場合、 `cakephp/bookmarker
 <https://github.com/cakephp/bookmarker-tutorial>`__ をチェックアウトしてください。
@@ -315,7 +315,7 @@ Scaffold コードの生成
     {
         // CakePHP によって提供された 'pass' キーは全ての
         // リクエストにある渡された URL のパスセグメントです。
-        $tags = $this->request->params['pass'];
+        $tags = $this->request->param('pass');
 
         // タグ付きのブックマークを探すために BookmarksTable を使用
         $bookmarks = $this->Bookmarks->find('tagged', [
@@ -382,7 +382,7 @@ Finder メソッドは、常に :doc:`/orm/query-builder` オブジェクトと�
 
     <h1>
         Bookmarks tagged with
-        <?= $this->Text->toList($tags) ?>
+        <?= $this->Text->toList(h($tags)) ?>
     </h1>
 
     <section>
@@ -393,7 +393,7 @@ Finder メソッドは、常に :doc:`/orm/query-builder` オブジェクトと�
             <small><?= h($bookmark->url) ?></small>
 
             <!-- Use the TextHelper to format text -->
-            <?= $this->Text->autoParagraph($bookmark->description) ?>
+            <?= $this->Text->autoParagraph(h($bookmark->description)) ?>
         </article>
     <?php endforeach; ?>
     </section>

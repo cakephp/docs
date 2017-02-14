@@ -288,7 +288,7 @@ purpose::
     // a calculated slug field.
     $query = $articlesTable->find();
     $query
-        ->select(['slug' => $query->func()->concat(['title', '-', 'id'])])
+        ->select(['slug' => $query->func()->concat(['title' => 'identifier', '-', 'id' => 'identifier'])])
         ->select($articlesTable); // Select all fields from articles
 
 .. versionadded:: 3.1

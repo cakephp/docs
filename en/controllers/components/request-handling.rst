@@ -15,7 +15,7 @@ RequestHandler will automatically switch the layout and template files to those
 that match non-HTML media types. Furthermore, if a helper with the same name as
 the requested extension exists, it will be added to the Controllers Helper
 array. Lastly, if XML/JSON data is POST'ed to your Controllers, it will be
-parsed into an array which is assigned to ``$this->request->data``, and can then
+parsed into an array which is assigned to ``$this->request->getData()``, and can then
 be accessed as you would standard POST data. In order to make use of
 RequestHandler it must be included in your ``initialize()`` method::
 
@@ -169,7 +169,7 @@ callbacks like ``json_decode``::
     // After 3.1.0 you should use
     $this->RequestHandler->config('inputTypeMap.json', ['json_decode', true]);
 
-The above will make ``$this->request->data`` an array of the JSON input data,
+The above will make ``$this->request->getData()`` an array of the JSON input data,
 without the additional ``true`` you'd get a set of ``stdClass`` objects.
 
 .. deprecated:: 3.1.0

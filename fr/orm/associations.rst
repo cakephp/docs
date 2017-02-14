@@ -31,33 +31,37 @@ souhaitions définir une association belongsTo dans notre ArticlesTable::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->belongsTo('Authors');
         }
-
     }
 
 La forme la plus simple de toute configuration d'association prend l'alias de
 la table avec laquelle vous souhaitez l'associer. Par défaut, tous les détails
 d'une association vont utiliser les conventions de CakePHP. Si vous souhaitez
-personnaliser la façon dont sont gérées vos associations, vous pouvez le faire
-avec le deuxième paramètre::
+personnaliser la façon dont sont gérées vos associations, vous pouvez les
+modifier avec les setters::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
-            $this->belongsTo('Authors', [
-                'className' => 'Publishing.Authors',
-                'foreignKey' => 'authorid',
-                'propertyName' => 'person'
-            ]);
+            $this->belongsTo('Authors')
+                ->setName('Publishing.Authors')
+                ->setForeignKey('authorid')
+                ->setProperty('person');
         }
-
     }
+
+Vous pouvez également configurer votre association à l'aide d'un tableau de
+paramètres::
+
+    $this->belongsTo('Authors', [
+       'className' => 'Publishing.Authors',
+       'foreignKey' => 'authorid',
+       'propertyName' => 'person'
+    ]);
 
 La même table peut être utilisée plusieurs fois pour définir différents types
 d'associations. Par exemple considérons le cas où vous voulez séparer les
@@ -65,19 +69,16 @@ commentaires approuvés et ceux qui n'ont pas encore été modérés::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
-            $this->hasMany('Comments', [
-                'className' => 'Comments',
-                'conditions' => ['approved' => true]
-            ]);
+            $this->hasMany('Comments')
+                ->setName('Comments')
+                ->setConditions(['approved' => true]);
 
-            $this->hasMany('UnapprovedComments', [
-                'className' => 'Comments',
-                'conditions' => ['approved' => false],
-                'propertyName' => 'unapproved_comments'
-            ]);
+            $this->hasMany('UnapprovedComments')
+                ->setName('Comments')
+                ->setConditions(['approved' => false])
+                ->setProperty('unapproved_comments');
         }
     }
 
@@ -88,16 +89,13 @@ relations parent-enfant::
 
     class CategoriesTable extends Table
     {
-
         public function initialize(array $config)
         {
-            $this->hasMany('SubCategories', [
-                'className' => 'Categories',
-            ]);
+            $this->hasMany('SubCategories')
+                ->setName('Categories');
 
-            $this->belongsTo('ParentCategories', [
-                'className' => 'Categories',
-            ]);
+            $this->belongsTo('ParentCategories')
+                ->setName('Categories')
         }
     }
 
@@ -107,18 +105,16 @@ tableau contenant les noms de tables indexés par association::
 
     class PostsTable extends Table
     {
-
-      public function initialize(array $config)
-      {
-        $this->addAssociations([
-          'belongsTo' => [
-            'Users' => ['className' => 'App\Model\Table\UsersTable']
-          ],
-          'hasMany' => ['Comments'],
-          'belongsToMany' => ['Tags']
-        ]);
-      }
-
+        public function initialize(array $config)
+        {
+           $this->addAssociations([
+               'belongsTo' => [
+                   'Users' => ['className' => 'App\Model\Table\UsersTable']
+               ],
+               'hasMany' => ['Comments'],
+               'belongsToMany' => ['Tags']
+           ]);
+        }
     }
 
 Chaque type d'association accepte plusieurs associations où les clés sont les
@@ -168,18 +164,17 @@ pourrions faire l'association avec le code suivant::
     }
 
 Si vous avez besoin de plus de contrôle, vous pouvez définir vos associations
-en utilisant la syntaxe des tableaux. Par exemple, vous voudrez peut-être
-limiter l'association pour inclure seulement certains enregistrements::
+en utilisant les setters. Par exemple, vous voudrez peut-être limiter
+l'association pour inclure seulement certains enregistrements::
 
     class UsersTable extends Table
     {
         public function initialize(array $config)
         {
-            $this->hasOne('Addresses', [
-                'className' => 'Addresses',
-                'conditions' => ['Addresses.primary' => '1'],
-                'dependent' => true
-            ]);
+            $this->hasOne('Addresses')
+                ->setName('Addresses')
+                ->setConditions(['Addresses.primary' => '1'])
+                ->setDependent(true);
         }
     }
 
@@ -274,18 +269,17 @@ ce qui suit::
         }
     }
 
-Nous pouvons aussi définir une relation plus spécifique en utilisant une
-syntaxe de tableau::
+Nous pouvons aussi définir une relation plus spécifique en utilisant les
+setters::
 
     class AddressesTable extends Table
     {
 
         public function initialize(array $config)
         {
-            $this->belongsTo('Users', [
-                'foreignKey' => 'user_id',
-                'joinType' => 'INNER',
-            ]);
+            $this->belongsTo('Users')
+                ->setForeignKey('user_id')
+                ->setJoinType('INNER');
         }
     }
 
@@ -366,49 +360,45 @@ suit::
         }
     }
 
-Nous pouvons également définir une relation plus spécifique en utilisant un
-tableau::
+Nous pouvons également définir une relation plus spécifique en utilisant les
+setters::
 
     class ArticlesTable extends Table
     {
 
         public function initialize(array $config)
         {
-            $this->hasMany('Comments', [
-                'foreignKey' => 'article_id',
-                'dependent' => true,
-            ]);
+            $this->hasMany('Comments')
+                ->setForeignKey('article_id')
+                ->setDependent(true);
         }
     }
 
 Parfois vous voudrez configurer les clés composites dans vos associations::
 
     // Dans l'appel ArticlesTable::initialize()
-    $this->hasMany('Reviews', [
-        'foreignKey' => [
+    $this->hasMany('Reviews')
+        ->setForeignKey([
             'article_id',
             'article_hash'
-        ]
-    ]);
+        ]);
 
 En se référant à l'exemple du dessus, nous avons passé un tableau contenant les
-clés composites dans ``foreignKey``. Par défaut ``bindingKey`` serait
+clés composites dans ``setForeignKey()``. Par défaut ``bindingKey`` serait
 automatiquement défini respectivement avec ``id`` et ``hash``, mais imaginons
 que vous souhaitiez spécifier avec des champs de liaisons différents de ceux par
-défault, vous pouvez les configurer manuellement dans votre tableau
-``bindingKeys``::
+défault, vous pouvez les configurer manuellement via ``setForeignKey()``::
 
     // Dans un appel de ArticlesTable::initialize()
-    $this->hasMany('Reviews', [
-        'foreignKey' => [
+    $this->hasMany('Reviews')
+        ->setForeignKey([
             'article_id',
             'article_hash'
-        ],
-        'bindingKey' => [
+        ])
+        ->setBindingKey([
             'whatever_id',
             'whatever_hash'
-        ]
-    ]);
+        ]);
 
 Il est important de noter que les valeurs de ``foreignKey`` font référence à la
 table **reviews** et les valeurs de ``bindingKey`` font référence à la table
@@ -547,22 +537,21 @@ suit::
         }
     }
 
-Nous pouvons aussi définir une relation plus spécifique en utilisant un
-tableau::
+Nous pouvons aussi définir une relation plus spécifique en utilisant les
+setters::
 
-    // Dans src/Model/Table/ArticlesTable.php
+    // In src/Model/Table/ArticlesTable.php
     class ArticlesTable extends Table
     {
 
         public function initialize(array $config)
         {
-            $this->belongsToMany('Tags', [
-                'joinTable' => 'articles_tags',
-            ]);
+            $this->belongsToMany('Tags')
+                ->setJoinTable('articles_tags');
         }
     }
 
-    // Dans src/Model/Table/TagsTable.php
+    // In src/Model/Table/TagsTable.php
     class TagsTable extends Table
     {
 
@@ -695,9 +684,8 @@ Regardez les models suivants::
     {
         public function initialize(array $config)
         {
-            $this->belongsToMany('Courses', [
-                'through' => 'CourseMemberships',
-            ]);
+            $this->belongsToMany('Courses')
+                ->setThrough('CourseMemberships');
         }
     }
 
@@ -706,8 +694,7 @@ Regardez les models suivants::
         public function initialize(array $config)
         {
             $this->belongsToMany('Students', [
-                'through' => 'CourseMemberships',
-            ]);
+                ->setThrough('CourseMemberships');
         }
     }
 

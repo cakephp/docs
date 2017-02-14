@@ -277,7 +277,7 @@ Primeiro, comece criando a action ``add()`` no ``ArticlesController``::
         {
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
-                $article = $this->Articles->patchEntity($article, $this->request->data);
+                $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Seu artigo foi salvo.'));
                     return $this->redirect(['action' => 'index']);
@@ -307,7 +307,7 @@ caso, nós usamos o método :php:meth:`Cake\\Network\\Request::is()` para checar
 se a requisição é do tipo HTTP POST.
 
 Quando se usa um formulário para postar dados, essa informação fica disponível
-em ``$this->request->data``. Você pode usar as funções :php:func:`pr()` ou
+em ``$this->request->getData()``. Você pode usar as funções :php:func:`pr()` ou
 :php:func:`debug()` caso queira verificar esses dados.
 
 Usamos os métodos ``success()`` e ``error()`` do ``FlashComponent`` para definir
@@ -436,7 +436,7 @@ a action ``edit()`` que deverá ser inserida no ``ArticlesController``::
     {
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
-            $this->Articles->patchEntity($article, $this->request->data);
+            $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Seu artigo foi atualizado.'));
                 return $this->redirect(['action' => 'index']);

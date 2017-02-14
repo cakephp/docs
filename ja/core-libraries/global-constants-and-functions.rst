@@ -193,7 +193,7 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 
 .. php:const:: DS
 
-    PHP の ``DIRECTORY_SEPARATOR`` (Linux の場合は ``/`` Windows の場合は ``\\``) 
+    PHP の ``DIRECTORY_SEPARATOR`` (Linux の場合は ``/`` Windows の場合は ``\``) 
     のショートカット。
 
 .. php:const:: LOGS

@@ -218,7 +218,7 @@ Route Elements
 You can specify your own route elements and doing so gives you the
 power to define places in the URL where parameters for controller
 actions should lie. When a request is made, the values for these
-route elements are found in ``$this->request->params`` in the controller.
+route elements are found in ``$this->request->getParam()`` in the controller.
 When you define a custom route element, you can optionally specify a regular
 expression - this tells CakePHP how to know if the URL is correctly formed or
 not. If you choose to not provide a regular expression, any non ``/`` character
@@ -264,7 +264,7 @@ If you need lowercased and underscored URLs while migrating from a CakePHP
 
 Once this route has been defined, requesting ``/apples/5`` would call the view()
 method of the ApplesController. Inside the view() method, you would need to
-access the passed ID at ``$this->request->params['id']``.
+access the passed ID at ``$this->request->getParam('id')``.
 
 If you have a single controller in your application and you do not want the
 controller name to appear in the URL, you can map all URLs to actions in your
@@ -310,7 +310,7 @@ alternates, as above, but not grouped with parenthesis.
 Once defined, this route will match ``/articles/2007/02/01``,
 ``/articles/2004/11/16``, handing the requests to
 the index() actions of their respective controllers, with the date
-parameters in ``$this->request->params``.
+parameters in ``$this->request->getParam()``.
 
 There are several route elements that have special meaning in
 CakePHP, and should not be used unless you want the special meaning
@@ -533,7 +533,7 @@ The connected route would have the ``prefix`` route element set to
 ``manager/admin``.
 
 The current prefix will be available from the controller methods through
-``$this->request->params['prefix']``
+``$this->request->getParam('prefix')``
 
 When using prefix routes it's important to set the prefix option. Here's how to
 build this link using the HTML helper::
@@ -626,6 +626,67 @@ with the following router connection::
     Router::plugin('ToDo', ['path' => 'to-do'], function ($routes) {
         $routes->fallbacks(DashedRoute::class);
     });
+
+Matching Specific HTTP Methods
+------------------------------
+
+Routes can match specific HTTP methods using the ``_method`` routing key::
+
+    Router::scope('/', function($routes) {
+        // This route only matches on POST requests.
+        $routes->connect(
+            '/reviews/start',
+            ['controller' => 'Reviews', 'action' => 'start', '_method' => 'POST']
+        );
+    });
+
+You can match multiple HTTP methods by using an array. Because the ``_method``
+parameter is a routing key, it participates in both URL parsing and URL
+generation.
+
+Matching Specific Hostnames
+---------------------------
+
+Routes can use the ``_host`` option to only match specific hosts. You can use
+the ``*.`` wildcard to match any subdomain::
+
+    Router::scope('/', function($routes) {
+        // This route only matches on http://images.example.com
+        $routes->connect(
+            '/images/default-logo.png',
+            ['controller' => 'Images', 'action' => 'default'],
+            ['_host' => 'images.example.com']
+        );
+
+        // This route only matches on http://*.example.com
+        $routes->connect(
+            '/images/old-log.png',
+            ['controller' => 'Images', 'action' => 'oldLogo'],
+            ['_host' => '*.example.com']
+        );
+    });
+
+The ``_host`` option is also used in URL generation. If your ``_host`` option
+specifies an exact domain, that domain will be included in the generated URL.
+However, if you use a wildcard, then you will need to provide the ``_host``
+parameter when generating URLs::
+
+    // If you have this route
+    $routes->connect(
+        '/images/old-log.png',
+        ['controller' => 'Images', 'action' => 'oldLogo'],
+        ['_host' => '*.example.com']
+    );
+
+    // You need this to generate a url
+    echo Router::url([
+        'controller' => 'Images',
+        'action' => 'oldLogo',
+        '_host' => 'images.example.com'
+    ]);
+
+.. versionadded:: 3.4.0
+    The ``_host`` option was added in 3.4.0
 
 .. index:: file extensions
 .. _file-extensions:
@@ -749,7 +810,7 @@ comments routes will look like::
 
 You can get the ``article_id`` in ``CommentsController`` by::
 
-    $this->request->param('article_id');
+    $this->request->getParam('article_id');
 
 By default resource routes map to the same prefix as the containing scope. If
 you have both nested and non-nested resource controllers you can use a different
@@ -890,7 +951,7 @@ to your controller methods. ::
 In the above example, both ``recent`` and ``mark`` are passed arguments to
 ``CalendarsController::view()``. Passed arguments are given to your controllers
 in three ways. First as arguments to the action method called, and secondly they
-are available in ``$this->request->params['pass']`` as a numerically indexed
+are available in ``$this->request->getParam('pass')`` as a numerically indexed
 array. When using custom routes you can force particular parameters to go into
 the passed arguments as well.
 
@@ -913,12 +974,11 @@ You would get the following output::
         [1] => mark
     )
 
-This same data is also available at ``$this->request->params['pass']``
-and ``$this->passedArgs`` in your controllers, views, and helpers.
-The values in the pass array are numerically indexed based on the
-order they appear in the called URL::
+This same data is also available at ``$this->request->getParam('pass')`` in your
+controllers, views, and helpers.  The values in the pass array are numerically
+indexed based on the order they appear in the called URL::
 
-    debug($this->request->params['pass']);
+    debug($this->request->getParam('pass'));
 
 Either of the above would output::
 
@@ -1129,8 +1189,8 @@ The URL filter function should *always* return the params even if unmodified.
 URL filters allow you to implement features like persistent parameters::
 
     Router::addUrlFilter(function ($params, $request) {
-        if (isset($request->params['lang']) && !isset($params['lang'])) {
-            $params['lang'] = $request->params['lang'];
+        if ($request->getParam('lang') && !isset($params['lang'])) {
+            $params['lang'] = $request->getParam('lang');
         }
         return $params;
     });
@@ -1178,7 +1238,7 @@ arguments::
         Router::parseNamedParams($this->request);
     }
 
-This will populate ``$this->request->params['named']`` with any named parameters
+This will populate ``$this->request->getParam('named')`` with any named parameters
 found in the passed arguments.  Any passed argument that was interpreted as a
 named parameter, will be removed from the list of passed arguments.
 

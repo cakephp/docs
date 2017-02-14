@@ -30,32 +30,37 @@ association in our ArticlesTable::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->belongsTo('Authors');
         }
-
     }
 
 The simplest form of any association setup takes the table alias you want to
 associate with. By default all of the details of an association will use the
 CakePHP conventions. If you want to customize how your associations are handled
-you can do so with the second parameter::
+you can modify them with setters::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
-            $this->belongsTo('Authors', [
-                'className' => 'Publishing.Authors',
-                'foreignKey' => 'authorid',
-                'propertyName' => 'person'
-            ]);
+            $this->belongsTo('Authors')
+                ->setName('Publishing.Authors')
+                ->setForeignKey('authorid')
+                ->setProperty('person');
         }
-
     }
+
+You can also use arrays to customize your associations::
+
+   $this->belongsTo('Authors', [
+       'className' => 'Publishing.Authors',
+       'foreignKey' => 'authorid',
+       'propertyName' => 'person'
+   ]);
+
+Arrays however do not offer the typehinting and autocomplete benefit the fluent interface does.
 
 The same table can be used multiple times to define different types of
 associations. For example consider a case where you want to separate
@@ -63,19 +68,16 @@ approved comments and those that have not been moderated yet::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
-            $this->hasMany('Comments', [
-                'className' => 'Comments',
-                'conditions' => ['approved' => true]
-            ]);
+            $this->hasMany('Comments')
+                ->setName('Comments')
+                ->setConditions(['approved' => true]);
 
-            $this->hasMany('UnapprovedComments', [
-                'className' => 'Comments',
-                'conditions' => ['approved' => false],
-                'propertyName' => 'unapproved_comments'
-            ]);
+            $this->hasMany('UnapprovedComments')
+                ->setName('Comments')
+                ->setConditions(['approved' => false])
+                ->setProperty('unapproved_comments');
         }
     }
 
@@ -85,16 +87,13 @@ self-associated tables to create parent-child relationships::
 
     class CategoriesTable extends Table
     {
-
         public function initialize(array $config)
         {
-            $this->hasMany('SubCategories', [
-                'className' => 'Categories',
-            ]);
+            $this->hasMany('SubCategories')
+                ->setName('Categories');
 
-            $this->belongsTo('ParentCategories', [
-                'className' => 'Categories',
-            ]);
+            $this->belongsTo('ParentCategories')
+                ->setName('Categories')
         }
     }
 
@@ -104,18 +103,16 @@ table names indexed by association type as an argument::
 
     class PostsTable extends Table
     {
-
-      public function initialize(array $config)
-      {
-        $this->addAssociations([
-          'belongsTo' => [
-            'Users' => ['className' => 'App\Model\Table\UsersTable']
-          ],
-          'hasMany' => ['Comments'],
-          'belongsToMany' => ['Tags']
-        ]);
-      }
-
+        public function initialize(array $config)
+        {
+           $this->addAssociations([
+               'belongsTo' => [
+                   'Users' => ['className' => 'App\Model\Table\UsersTable']
+               ],
+               'hasMany' => ['Comments'],
+               'belongsToMany' => ['Tags']
+           ]);
+        }
     }
 
 Each association type accepts multiple associations where the keys are the
@@ -162,7 +159,7 @@ the association with the following code::
         }
     }
 
-If you need more control, you can define your associations using array syntax.
+If you need more control, you can define your associations using the setters.
 For example, you might want to limit the association to include only certain
 records::
 
@@ -170,11 +167,10 @@ records::
     {
         public function initialize(array $config)
         {
-            $this->hasOne('Addresses', [
-                'className' => 'Addresses',
-                'conditions' => ['Addresses.primary' => '1'],
-                'dependent' => true
-            ]);
+            $this->hasOne('Addresses')
+                ->setName('Addresses')
+                ->setConditions(['Addresses.primary' => '1'])
+                ->setDependent(true);
         }
     }
 
@@ -261,18 +257,16 @@ We can define the belongsTo association in our Addresses table as follows::
         }
     }
 
-We can also define a more specific relationship using array
-syntax::
+We can also define a more specific relationship using the setters::
 
     class AddressesTable extends Table
     {
 
         public function initialize(array $config)
         {
-            $this->belongsTo('Users', [
-                'foreignKey' => 'user_id',
-                'joinType' => 'INNER',
-            ]);
+            $this->belongsTo('Users')
+                ->setForeignKey('user_id')
+                ->setJoinType('INNER');
         }
     }
 
@@ -348,47 +342,44 @@ We can define the hasMany association in our Articles model as follows::
         }
     }
 
-We can also define a more specific relationship using array syntax::
+We can also define a more specific relationship using the setters::
 
     class ArticlesTable extends Table
     {
 
         public function initialize(array $config)
         {
-            $this->hasMany('Comments', [
-                'foreignKey' => 'article_id',
-                'dependent' => true,
-            ]);
+            $this->hasMany('Comments')
+                ->setForeignKey('article_id')
+                ->setDependent(true);
         }
     }
 
 Sometimes you may want to configure composite keys in your associations::
 
     // Within ArticlesTable::initialize() call
-    $this->hasMany('Reviews', [
-        'foreignKey' => [
+    $this->hasMany('Reviews')
+        ->setForeignKey([
             'article_id',
             'article_hash'
-        ]
-    ]);
+        ]);
 
 Relying on the example above, we have passed an array containing the desired
-composite keys to ``foreignKey``. By default the ``bindingKey`` would be
+composite keys to ``setForeignKey()``. By default the ``bindingKey`` would be
 automatically defined as ``id`` and ``hash`` respectively, but let's assume that
 you need to specify different binding fields than the defaults, you can setup it
-manually in your ``bindingKeys`` array::
+manually with ``setBindingKey()``::
 
     // Within ArticlesTable::initialize() call
-    $this->hasMany('Reviews', [
-        'foreignKey' => [
+    $this->hasMany('Reviews')
+        ->setForeignKey([
             'article_id',
             'article_hash'
-        ],
-        'bindingKey' => [
+        ])
+        ->setBindingKey([
             'whatever_id',
             'whatever_hash'
-        ]
-    ]);
+        ]);
 
 It is important to note that ``foreignKey`` values refers to the **reviews**
 table and ``bindingKey`` values refers to the **articles** table.
@@ -518,20 +509,7 @@ We can define the belongsToMany association in both our models as follows::
         }
     }
 
-We can also define a more specific relationship using array
-syntax::
-
-    // In src/Model/Table/ArticlesTable.php
-    class ArticlesTable extends Table
-    {
-
-        public function initialize(array $config)
-        {
-            $this->belongsToMany('Tags', [
-                'joinTable' => 'articles_tags',
-            ]);
-        }
-    }
+We can also define a more specific relationship using configuration::
 
     // In src/Model/Table/TagsTable.php
     class TagsTable extends Table
@@ -651,15 +629,14 @@ student on the course and their final grade? The table we'd want would be::
 The way to implement our requirement is to use a **join model**, otherwise known
 as a **hasMany through** association. That is, the association is a model
 itself. So, we can create a new model CoursesMemberships. Take a look at the
-following models. ::
+following models::
 
     class StudentsTable extends Table
     {
         public function initialize(array $config)
         {
-            $this->belongsToMany('Courses', [
-                'through' => 'CourseMemberships',
-            ]);
+            $this->belongsToMany('Courses')
+                ->setThrough('CourseMemberships');
         }
     }
 
@@ -668,8 +645,7 @@ following models. ::
         public function initialize(array $config)
         {
             $this->belongsToMany('Students', [
-                'through' => 'CourseMemberships',
-            ]);
+                ->setThrough('CourseMemberships');
         }
     }
 

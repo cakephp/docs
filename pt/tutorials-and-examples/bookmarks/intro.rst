@@ -274,7 +274,7 @@ informativa do CakePHP. Vamos implementar esse método ausente agora. Em
 
     public function tags()
     {
-        $tags = $this->request->params['pass'];
+        $tags = $this->request->getParam('pass');
         $bookmarks = $this->Bookmarks->find('tagged', [
             'tags' => $tags
         ]);
@@ -324,7 +324,7 @@ vamos construir o arquivo view para a nossa ação ``tags``. Em
 
     <h1>
         Bookmarks tagged with
-        <?= $this->Text->toList($tags) ?>
+        <?= $this->Text->toList(h($tags)) ?>
     </h1>
 
     <section>
@@ -332,7 +332,7 @@ vamos construir o arquivo view para a nossa ação ``tags``. Em
         <article>
             <h4><?= $this->Html->link($bookmark->title, $bookmark->url) ?></h4>
             <small><?= h($bookmark->url) ?></small>
-            <?= $this->Text->autoParagraph($bookmark->description) ?>
+            <?= $this->Text->autoParagraph(h($bookmark->description)) ?>
         </article>
     <?php endforeach; ?>
     </section>
