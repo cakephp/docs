@@ -1106,6 +1106,31 @@ receiving from the end user is the correct type. Failing to correctly handle
 complex data could result in malicious users being able to store data they
 would not normally be able to.
 
+Strict Saving
+=============
+
+.. php:method:: saveOrFail($entity, $options = [])
+
+
+Using this method will throw an :php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException`
+if the application rules checks failed, the entity contains errors or the save was aborted by a callback.
+Using this can be helpful when you performing complex database operations without human monitoring,
+for example, inside a Shell task.
+
+If you want to track down the entity that failed to save, you can use the
+:php:meth:`Cake\\ORM\Exception\\PersistenceFailedException::getEntity()` method::
+
+        try {
+            $table->saveOrFail($entity);
+        } catch (\Cake\ORM\Exception\PersistenceFailedException $e) {
+            echo $e->getEntity();
+        }
+
+As this internally perfoms a :php:meth:`Cake\\ORM\\Table::save()` call, all corresponding save events
+will be triggered.
+
+.. versionadded:: 3.4.1
+
 Saving Multiple Entities
 ========================
 
