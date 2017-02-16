@@ -632,9 +632,9 @@ request data just before entities are created::
     // In a table or behavior class
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
-       if (isset($data['username'])) {
-           $data['username'] = mb_strtolower($data['username']);
-       }
+        if (isset($data['username'])) {
+            $data['username'] = mb_strtolower($data['username']);
+        }
     }
 
 The ``$data`` parameter is an ``ArrayObject`` instance, so you don't have to
