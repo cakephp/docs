@@ -4,6 +4,11 @@
 CakePHP 3.4 is an API compatible upgrade from 3.3. This page outlines the
 changes and improvements made in 3.4.
 
+Minimum PHP 5.6 Required
+========================
+CakePHP 3.4 requires at least PHP 5.6.0 as PHP 5.5 is no longer supported and
+won't receive any security fixes anymore.
+
 Deprecations
 ============
 
@@ -449,3 +454,9 @@ PluginShell
 
 * ``cake plugin load`` and ``cake plugin unload`` now support a ``--cli``
   option, which updates the ``bootstrap_cli.php`` instead.
+
+TestSuite
+=========
+
+* Support to ``PHPUnit 6`` was added. With this framework version requiring PHP
+  5.6.0 as a minimum version, the supported version of PHPUnit are now ``^5.7|^6.0``
