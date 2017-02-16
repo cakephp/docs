@@ -5,7 +5,7 @@ if (/cakephp\.org/.test(document.domain)) {
 App = {};
 App.config = {
   url: 'https://search.cakephp.org/search',
-  version: '3-next'
+  version: '3-0'
 };
 
 App.Book = (function() {
