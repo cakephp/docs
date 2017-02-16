@@ -635,6 +635,7 @@ request data just before entities are created::
        if (isset($data['username'])) {
            $data['username'] = mb_strtolower($data['username']);
        }
+    }
 
 The ``$data`` parameter is an ``ArrayObject`` instance, so you don't have to
 return it to change the data used to create entities.
