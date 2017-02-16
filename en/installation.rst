@@ -119,11 +119,11 @@ Keeping Up To Date with the Latest CakePHP Changes
 By default this is what your application **composer.json** looks like::
 
     "require": {
-        "cakephp/cakephp": "3.3.*"
+        "cakephp/cakephp": "3.4.*"
     }
 
 Each time you run ``php composer.phar update`` you will receive bugfix
-releases for this minor version. You can instead change this to ``~3.3`` to
+releases for this minor version. You can instead change this to ``~3.4`` to
 also receive the latest stable releases of the ``3.x`` branch.
 
 If you want to keep current with the latest unreleased changes in CakePHP
