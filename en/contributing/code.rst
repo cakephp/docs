@@ -13,7 +13,7 @@ setup. You'll need the following software:
 
 * Git
 * PHP |minphpversion| or greater
-* PHPUnit 3.7.0 or greater
+* PHPUnit 5.7.0 or greater
 
 Set up your user information with your name/handle and working email address::
 
