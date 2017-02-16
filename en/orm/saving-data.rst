@@ -1117,6 +1117,11 @@ if the application rules checks failed, the entity contains errors or the save w
 Using this can be helpful when you performing complex database operations without human monitoring,
 for example, inside a Shell task.
 
+.. warning::
+
+    Do not use this method when the save was triggered by a user, for example,
+    within a controller action or if you want to give a user feedback within a form.
+
 If you want to track down the entity that failed to save, you can use the
 :php:meth:`Cake\\ORM\Exception\\PersistenceFailedException::getEntity()` method::
 
