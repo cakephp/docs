@@ -635,8 +635,9 @@ following models::
     {
         public function initialize(array $config)
         {
-            $this->belongsToMany('Courses')
-                ->setThrough('CourseMemberships');
+            $this->belongsToMany('Courses', [
+                'through' => 'CourseMemberships',
+            ]);
         }
     }
 
@@ -645,7 +646,8 @@ following models::
         public function initialize(array $config)
         {
             $this->belongsToMany('Students', [
-                ->setThrough('CourseMemberships');
+                'through' => 'CourseMemberships',
+            ]);
         }
     }
 
