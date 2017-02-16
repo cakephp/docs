@@ -4,6 +4,11 @@
 CakePHP 3.4 is an API compatible upgrade from 3.3. This page outlines the
 changes and improvements made in 3.4.
 
+Minimum PHP 5.6 Required
+========================
+CakePHP 3.4 requires at least PHP 5.6.0 as PHP 5.5 is no longer supported and
+won't receive any security fixes anymore.
+
 Deprecations
 ============
 
