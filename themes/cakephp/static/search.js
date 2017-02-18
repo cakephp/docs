@@ -40,6 +40,8 @@ App.Search = (function () {
       query.page = page;
     }
     var url = App.config.url + '?' + jQuery.param(query);
+
+    showPendingSearch();
     var xhr = $.ajax({
       url: url,
       dataType: 'json',
@@ -63,11 +65,19 @@ App.Search = (function () {
     }
   }());
 
+  function showPendingSearch() {
+    searchResults.empty().append('<ul><li>Searching...</li></ul>');
+  }
+
   /**
    * Generate the result HTML.
    */
   function createResults(results) {
       var ul = searchResults.find('ul');
+      if (results.length === 0) {
+        ul.append('<li>No matches found</li>');
+        return;
+      }
       $.each(results, function(index, item) {
         var li = $('<li></li>');
         var link = $('<a></a>');
@@ -116,12 +126,13 @@ App.Search = (function () {
       }, 200);
     });
 
-    // Handle clickin on pagintion links
+    // Handle clickin on pagination links
     paginationContainer.delegate('a', 'click', function (event) {
       var active = $(event.target);
       var page = active.attr('page');
       event.preventDefault();
 
+      $('html,body').animate({scrollTop: 0}, 200);
       executeSearch(searchInput.val(), page);
     });
 
