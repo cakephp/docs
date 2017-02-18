@@ -1113,15 +1113,16 @@ Strict Saving
 .. php:method:: saveOrFail($entity, $options = [])
 
 
-Using this method will throw an :php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException`
-if the application rules checks failed, the entity contains errors or the save was aborted by a callback.
-Using this can be helpful when you performing complex database operations without human monitoring,
-for example, inside a Shell task.
+Using this method will throw an
+:php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException` if the application
+rules checks failed, the entity contains errors or the save was aborted by
+a callback.  Using this can be helpful when you performing complex database
+operations without human monitoring, for example, inside a Shell task.
 
-.. warning::
+.. note::
 
-    Do not use this method when the save was triggered by a user, for example,
-    within a controller action or if you want to give a user feedback within a form.
+    If you use this method in a controller, be sure to catch the
+    ``PersistenceFailedException`` that could be raised.
 
 If you want to track down the entity that failed to save, you can use the
 :php:meth:`Cake\\ORM\Exception\\PersistenceFailedException::getEntity()` method::
@@ -1132,8 +1133,8 @@ If you want to track down the entity that failed to save, you can use the
             echo $e->getEntity();
         }
 
-As this internally perfoms a :php:meth:`Cake\\ORM\\Table::save()` call, all corresponding save events
-will be triggered.
+As this internally perfoms a :php:meth:`Cake\\ORM\\Table::save()` call, all
+corresponding save events will be triggered.
 
 .. versionadded:: 3.4.1
 
