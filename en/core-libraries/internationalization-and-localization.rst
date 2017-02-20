@@ -112,7 +112,7 @@ Just place LC_TIME file in its respective locale directory::
     /app/Locale/fra/LC_TIME (French)
     /app/Locale/por/LC_TIME (Portuguese)
 
-You can find these files for few popular languages from the official `Localized <https://github.com/cakephp/localized>`_
+You can find these files for few popular languages from the official `Localized <https://github.com/cakephp/localized/tree/2.x>`_
 repo.
 
 Internationalizing CakePHP Plugins
