@@ -382,7 +382,7 @@ colonnes sont par défaut:
 * biginteger: 20
 
 Retirer une Colonne d'une Table
-------------------------------
+-------------------------------
 
 De la même façon, vous pouvez générer une migration pour retirer une colonne
 en utilisant la ligne de commande, si le nom de la migration est de la forme
