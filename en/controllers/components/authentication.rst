@@ -1019,11 +1019,13 @@ The following settings can all be defined either in your controller's
 ``initialize()`` method or using ``$this->Auth->config()`` in your ``beforeFilter()``:
 
 ajaxLogin
-    The name of an optional view element to render when an AJAX request is made with an invalid or expired session.
+    The name of an optional view element to render when an AJAX request is made
+    with an invalid or expired session.
 allowedActions
     Controller actions for which user validation is not required.
 authenticate
-    Set to an array of Authentication objects you want to use when logging users in. There are several core authentication objects;
+    Set to an array of Authentication objects you want to use when
+    logging users in. There are several core authentication objects;
     see the section on :ref:`authentication-objects`.
 authError
     Error to display when user attempts to access an object or action to which
@@ -1044,9 +1046,12 @@ flash
     - ``params`` - The array of additional params to use; defaults to [].
 
 loginAction
-    A URL (defined as a string or array) to the controller action that handles logins. Defaults to ``/users/login``.
+    A URL (defined as a string or array) to the controller action that handles
+    logins. Defaults to ``/users/login``.
 loginRedirect
-    The URL (defined as a string or array) to the controller action users should be redirected to after logging in. This value will be ignored if the user has an ``Auth.redirect`` value in their session.
+    The URL (defined as a string or array) to the controller action users 
+    should be redirected to after logging in. This value will be ignored if the 
+    user has an ``Auth.redirect`` value in their session.
 logoutRedirect
     The default action to redirect to after the user is logged out. While
     AuthComponent does not handle post-logout redirection, a redirect URL will
@@ -1057,14 +1062,15 @@ unauthorizedRedirect
     redirected to the referrer URL or ``loginAction`` or '/'.
     If set to ``false``, a ForbiddenException exception is thrown instead of redirecting.
 storage
-    Storage class to use for persisting user record. When using stateless authenticator you should set this to ``Memory``. Defaults to ``Session``.
+    Storage class to use for persisting user record. When using stateless 
+    authenticator you should set this to ``Memory``. Defaults to ``Session``.
     You can pass config options to storage class using array format. For e.g. to
     use a custom session key you can set ``storage`` to ``['className' => 'Session', 'key' => 'Auth.Admin']``.
 checkAuthIn
     Name of the event in which initial auth checks should be done. Defaults
     to ``Controller.startup``. You can set it to ``Controller.initialize``
-    if you want the check to be done before controller's ``beforeFilter()``
-    the method is run.
+    if you want the check to be done before controller's ``beforeFilter()`` 
+    method is run.
 
 You can get current configuration values by calling ``$this->Auth->config()``::
 only the configuration option::
