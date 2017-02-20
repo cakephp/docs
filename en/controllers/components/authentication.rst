@@ -239,7 +239,7 @@ working with a login form could look like::
 
 The above code will attempt to first identify a user by using the POST data.
 If successful we set the user info to the session so that it persists across requests
-and then redirect to either the last page they were visiting or an URL specified in the
+and then redirect to either the last page they were visiting or a URL specified in the
 ``loginRedirect`` config. If the login is unsuccessful, a flash message is set.
 
 .. warning::
@@ -254,7 +254,7 @@ Redirecting Users After Login
 .. php:method:: redirectUrl
 
 After logging a user in, you'll generally want to redirect them back to where
-they came from. Pass an URL in to set the destination a user should be redirected
+they came from. Pass a URL in to set the destination a user should be redirected
 to upon logging in.
 
 If no parameter is passed, it gets the authentication redirect URL. The URL
@@ -858,7 +858,7 @@ In the above example, both the ``Actions`` and ``Controller`` will get the
 settings defined for the 'all' key. Any settings passed to a specific
 authorization object will override the matching key in the 'all' key.
 
-If an authenticated user tries to go to an URL he's not authorized to access,
+If an authenticated user tries to go to a URL he's not authorized to access,
 he's redirected back to the referrer. If you do not want such redirection
 (mostly needed when using stateless authentication adapter) you can set config
 option ``unauthorizedRedirect`` to ``false``. This causes AuthComponent
@@ -1044,7 +1044,7 @@ flash
     - ``params`` - The array of additional params to use; defaults to [].
 
 loginAction
-    An URL (defined as a string or array) to the controller action that handles logins. Defaults to ``/users/login``.
+    A URL (defined as a string or array) to the controller action that handles logins. Defaults to ``/users/login``.
 loginRedirect
     The URL (defined as a string or array) to the controller action users should be redirected to after logging in. This value will be ignored if the user has an ``Auth.redirect`` value in their session.
 logoutRedirect
