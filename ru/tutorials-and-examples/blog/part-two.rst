@@ -467,7 +467,7 @@ Articles, и внесем некоторые изменения::
     {
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
-            $this->Articles->patchEntity($article, $this->request->getData);
+            $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Ваша статья была обновлена.'));
                 return $this->redirect(['action' => 'index']);
