@@ -455,8 +455,9 @@ other password hashes, based on the RFC for digest authentication.
 .. note::
 
     The third parameter of DigestAuthenticate::password() must match the
-    'realm' config value defined when DigestAuthentication was configured in AuthComponent::$authenticate. This defaults to
-    ``env('SCRIPT_NAME')``. You may wish to use a static string if you want consistent hashes in multiple environments.
+    'realm' config value defined when DigestAuthentication was configured 
+    in AuthComponent::$authenticate. This defaults to ``env('SCRIPT_NAME')``. 
+    You may wish to use a static string if you want consistent hashes in multiple environments.
 
 
 Creating Custom Authentication Objects
@@ -518,7 +519,9 @@ by including them in AuthComponents authenticate array::
     ]);
 
 .. note::
-    Note that when using simple notation there's no 'Authenticate' word when initiating the authentication object. Instead, if using namespaces, you'll need to set the full namespace of the class, including the 'Authenticate' word.
+    Note that when using simple notation there's no 'Authenticate' word when 
+    initiating the authentication object. Instead, if using namespaces, you'll 
+    need to set the full namespace of the class, including the 'Authenticate' word.
 
 Handling Unauthenticated Requests
 ---------------------------------
@@ -805,7 +808,8 @@ authorization handlers and you can create custom ones for your
 application or as part of a plugin.
 
 - ``ControllerAuthorize`` Calls ``isAuthorized()`` on the active controller,
-  and uses the return of that to authorize a user. This is often the most simple way to authorize users.
+  and uses the return of that to authorize a user. This is often the most 
+  simple way to authorize users.
 
 .. note::
 
@@ -1031,7 +1035,8 @@ authError
     Error to display when user attempts to access an object or action to which
     they do not have access.
 
-    You can suppress authError message from being displayed by setting this value to boolean ``false``.
+    You can suppress authError message from being displayed by setting this 
+    value to boolean ``false``.
 authorize
     Set to an array of Authorization objects you want to use when
     authorizing users on each request; see the section on
@@ -1060,7 +1065,8 @@ logoutRedirect
 unauthorizedRedirect
     Controls handling of unauthorized access. By default unauthorized user is
     redirected to the referrer URL or ``loginAction`` or '/'.
-    If set to ``false``, a ForbiddenException exception is thrown instead of redirecting.
+    If set to ``false``, a ForbiddenException exception is thrown instead of 
+    redirecting.
 storage
     Storage class to use for persisting user record. When using stateless 
     authenticator you should set this to ``Memory``. Defaults to ``Session``.
