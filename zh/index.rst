@@ -30,16 +30,11 @@ CakePHP CookBook 是一个公开地开发和社区可以编辑的文档项目。
 
 当你完成了Bookmarker的训练之后,你可以重点去关注cakephp 应用的以下几个重要部分。
 
-* The :ref:`CakePHP request cycle <request-cycle>`
-* The :doc:`conventions <intro/conventions>` that CakePHP
-  uses.
-* :doc:`Controllers </controllers>` handle requests and co-ordinate your models
-  and the responses your application creates.
-* :doc:`Views </views>` are the presentation layer in your application. They
-  give you powerful tools to create HTML, JSON and the other outputs your
-  application needs.
-* :doc:`Models </orm>` are the key ingredient in any application. They handle
-  validation, and domain logic within your application.
+* The :ref:`CakePHP 请求处理周期 <request-cycle>`
+* The :doc:`CakePHP使用的一般约定 <intro/conventions>` .
+* :doc:`Controllers </controllers>` 处理请求、models协调、返回应用创建的响应输出.
+* :doc:`Views </views>` 应用的展示层. 提供了进行HTML, JSON以及应用所需其它格式要求的强大而丰富的工具.
+* :doc:`Models </orm>` 所有应用的核心组件. 控制了应用中所需的校验、域处理逻辑.
 
 .. meta::
     :title lang=zh: .. CakePHP Cookbook documentation master file, created by
