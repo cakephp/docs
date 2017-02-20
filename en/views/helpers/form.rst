@@ -1686,7 +1686,7 @@ example::
     // Create a radio set with our custom wrapping div.
     echo $this->Form->radio('User.email_notifications', ['y', 'n']);
 
-Similar to inpcontrolut containers, the ``control()`` method will also attempt to use
+Similar to control containers, the ``control()`` method will also attempt to use
 distinct templates for each form group. A form group is a combo of label and
 control. For example, when creating a radio input the ``radioFormGroup`` will be
 used if it is present. If that template is missing by default each set of label
