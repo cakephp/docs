@@ -61,6 +61,7 @@ App.InlineSearch = (function () {
         async: true,
         limit: 10,
         templates: {
+          pending: '<div class="loading-result">Searching...</div>',
           empty: '<div class="empty-result">No matches found</div>',
           suggestion: function(item) {
             var div = $('<div></div>');
