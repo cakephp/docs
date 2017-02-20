@@ -200,7 +200,7 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
     $this->Orders->eventManager()->on('Model.Order.afterPlace', function ($event) {
         Log::write(
             'info',
-            'A new order was placed with id: ' . $event->subject()->id
+            'A new order was placed with id: ' . $event->getSubject()->id
         );
     });
 
@@ -235,8 +235,8 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
             // 例えば、管理者のメールを送信することができます。
             $email = new Email('default');
             $email->from('info@yoursite.com' => 'Your Site')
-                ->to('admin@yoursite.com')
-                ->subject('New Feedback - Your Site')
+                ->setTo('admin@yoursite.com')
+                ->setSubject('New Feedback - Your Site')
                 ->send('Body of message');
         });
 
@@ -440,7 +440,7 @@ DOM イベントのように、追加のリスナーへ通知されることを�
     public function doSomething($event)
     {
         // ...
-        $alteredData = $event->data['order'] + $moreData;
+        $alteredData = $event->getData('order') + $moreData;
         return $alteredData;
     }
 
@@ -448,7 +448,7 @@ DOM イベントのように、追加のリスナーへ通知されることを�
     public function doSomethingElse($event)
     {
         // ...
-        $event->result['order'] = $alteredData;
+        $event->setResult(['order' => $alteredData] + $this->result());
     }
 
     // イベントの結果を使用
@@ -456,8 +456,8 @@ DOM イベントのように、追加のリスナーへ通知されることを�
     {
         $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
         $this->eventManager()->dispatch($event);
-        if (!empty($event->result['order'])) {
-            $order = $event->result['order'];
+        if (!empty($event->getResult()['order'])) {
+            $order = $event->getResult()['order'];
         }
         if ($this->Orders->save($order)) {
             // ...
@@ -500,9 +500,6 @@ DOM イベントのように、追加のリスナーへ通知されることを�
 
     // リスナーで実装された全てのコールバックを削除
     $this->eventManager()->off($listener);
-
-最後に
-======
 
 イベントはあなたのアプリケーション内の関心事を分離させる偉大な方法であり、
 クラスに凝集と疎結合の両方をもたらします。イベントは、アプリケーションコードの疎結合や
