@@ -19,7 +19,7 @@ URL の構造を全部のコードの書き直しをせずにリファクタリ�
 
 ここでは、 CakePHP の最も一般的なルーティングの方法について例を出して説明します。
 ランディングページのように見せたい時がよくあるでしょう。そのときは、 **routes.php**
-に以下を加えます。 ::
+ファイルに以下を加えます。 ::
 
     use Cake\Routing\Router;
 
@@ -593,6 +593,65 @@ SEO に親和性があるルーティング
         $routes->fallbacks('DashedRoute');
     });
 
+指定した HTTP メソッドとの照合
+------------------------------
+
+ルートは、 ``_method`` ルーティングキーを使用して指定した HTTP メソッドとマッチできます。 ::
+
+    Router::scope('/', function($routes) {
+        // このルートは POST リクエスト上でのみマッチします。
+        $routes->connect(
+            '/reviews/start',
+            ['controller' => 'Reviews', 'action' => 'start', '_method' => 'POST']
+        );
+    });
+
+配列を使うことで複数の HTTP メソッドとマッチできます。 ``_method`` パラメータは
+ルーティングキーなので、 URL の解析と URL の生成の両方に使われます。
+
+指定したホスト名との照合
+---------------------------
+
+ルートは、指定のホストのみとマッチするように ``_host`` オプションを使用できます。
+任意のサブドメインとマッチするために ``*.`` ワイルドカードを使用できます。 ::
+
+    Router::scope('/', function($routes) {
+        // このルートは http://images.example.com のみマッチします。
+        $routes->connect(
+            '/images/default-logo.png',
+            ['controller' => 'Images', 'action' => 'default'],
+            ['_host' => 'images.example.com']
+        );
+
+        // このルートは http://*.example.com のみマッチします。
+        $routes->connect(
+            '/images/old-log.png',
+            ['controller' => 'Images', 'action' => 'oldLogo'],
+            ['_host' => '*.example.com']
+        );
+    });
+
+``_host`` オプションは URL 生成でも使用されます。 ``_host`` オプションで正確なドメインを
+指定する場合、そのドメインは生成された URL に含まれます。しかし、もしワイルドカードを
+使用する場合、URL の生成時に ``_host`` パラメータを指定する必要があります。 ::
+
+    // このルートを持つ場合、
+    $routes->connect(
+        '/images/old-log.png',
+        ['controller' => 'Images', 'action' => 'oldLogo'],
+        ['_host' => '*.example.com']
+    );
+
+    // url を生成するために指定が必要です。
+    echo Router::url([
+        'controller' => 'Images',
+        'action' => 'oldLogo',
+        '_host' => 'images.example.com'
+    ]);
+
+.. versionadded:: 3.4.0
+    ``_host`` オプションは 3.4.0 で追加されました。
+
 .. index:: file extensions
 .. _file-extensions:
 
@@ -708,7 +767,7 @@ POST リクエストの中の、 *\_method* の値を使う方法は、ブラウ
 
 ``CommentsController`` の ``article_id`` を以下のように取得できます。 ::
 
-    $this->request->param('article_id');
+    $this->request->getParam('article_id');
 
 デフォルトでは、リソースルートは、スコープに含まれる同じプレフィックスにマップします。
 もし、ネストしたリソースのコントローラとそうでないリソースのコントローラ両方を持つ場合、
@@ -845,9 +904,8 @@ POST リクエストの中の、 *\_method* の値を使う方法は、ブラウ
 上記のたとえでは、両方の ``recent`` と ``mark`` が ``CalendarsController::view()``
 に引数として渡されます。渡された引数は３つの方法でコントローラーに渡されます。
 一番目は、引数としてアクションを呼ばれたときに渡し、２番目は、
-``$this->request->param('pass')`` で数字をインデックスとする配列で呼べるようになります。
-最後は、 ``$this->passedArgs`` で２番目と同じ方法で呼べます。カスタムルーティングを
-使用するときに、渡された引数を呼ぶために特定のパラメーターを強制することができます。
+``$this->request->getParam('pass')`` で数字をインデックスとする配列で呼べるようになります。
+カスタムルーティングを使用するときに、渡された引数を呼ぶために特定のパラメーターを強制することができます。
 
 前の URL にアクセスしたい場合は、コントローラーアクションでこのようにします。 ::
 
@@ -867,11 +925,11 @@ POST リクエストの中の、 *\_method* の値を使う方法は、ブラウ
         [1] => mark
     )
 
-コントローラーとビューとヘルパーで ``$this->request->param('pass')`` と
-``$this->passedArgs`` でこれと同じデータが利用可能です。pass 配列中の値は、
+コントローラーとビューとヘルパーで ``$this->request->getParam('pass')`` で
+これと同じデータが利用可能です。pass 配列中の値は、
 呼ばれた URL に現れる順番をもとにした数字のインデックスになります。 ::
 
-    debug($this->request->param('pass'));
+    debug($this->request->getParam('pass'));
 
 上記の出力は以下になります。 ::
 
@@ -1071,8 +1129,8 @@ URL フィルター関数は *常に* フィルターされていなくても、
 URL フィルターは永続的なパラメーターなどを簡単に扱う機能を提供します。 ::
 
     Router::addUrlFilter(function ($params, $request) {
-        if ($request->param('lang') && !isset($params['lang'])) {
-            $params['lang'] = $request->param('lang');
+        if ($request->getParam('lang') && !isset($params['lang'])) {
+            $params['lang'] = $request->getParam('lang');
         }
         return $params;
     });
@@ -1118,7 +1176,7 @@ CakePHP 3.0 から名前付きパラメーターが削除されたとしても�
         Router::parseNamedParams($this->request);
     }
 
-これは、 ``$this->request->param('named')`` にすべての渡された引数にある
+これは、 ``$this->request->getParam('named')`` にすべての渡された引数にある
 名前付きパラメーターを移します。すべての名前付きパラメーターとして変換された引数は
 渡された引数のリストから除去されます。
 

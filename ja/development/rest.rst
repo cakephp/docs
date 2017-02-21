@@ -21,7 +21,6 @@ REST を動かすための手っ取り早い方法は、 config/routes.php フ�
 そのコントローラのアクションのロジックの作成に移ることができます。
 基本的なコントローラのサンプルは下記のようになります。 ::
 
-
     // src/Controller/RecipesController.php
     class RecipesController extends AppController
     {
