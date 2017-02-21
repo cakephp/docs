@@ -10,6 +10,21 @@
 Вход пользователя
 =================
 
+В CakePHP аутентификация обрабатывается :doc:`/controllers/components`.
+Компоненты можно представить как повторно используемые куски кода Контроллера
+для реализации какой-либо функциональности. Компоненты также могут цепляться
+к жизненному циклу событий Контроллера и взаимодействовать с вашим 
+приложением таким способом. Для начала мы добавим :doc:`Компонент Auth
+</controllers/components/authentication>` в наше приложение.
+In CakePHP, authentication is handled by :doc:`/controllers/components`.
+Components can be thought of as ways to create reusable chunks of controller
+code related to a specific feature or concept. Components can also hook into the
+controller's event life-cycle and interact with your application that way. To
+get started, we'll add the :doc:`AuthComponent
+</controllers/components/authentication>` to our application. We'll pretty much
+want every method to require authentication, so we'll add AuthComponent in our
+AppController::
+
 .. note::
     The documentation is not currently supported in Russian language for this
     page.
