@@ -121,17 +121,22 @@ This will allow your virtualFields to work for any alias you give a
 model.
 
 Pagination and Virtual fields set in controller with JOINS
-=============================================================
-The following example allows to have a counter of a hasMany association and allows to use without problem
-``$this->Paginator->sort('ProductsItems.Total','Items Total');`` 
+==========================================================
 
-For example this::
+The following example allows you to have a counter of a hasMany association and
+enables you to use virtual fields. For example if you had the following sort
+link in your template::
+
+    // Create a sort link for a virtual field
+    $this->Paginator->sort('ProductsItems.Total','Items Total');
+
+You could then use the following pagination setup in your controller::
 
     $this->Products->recursive = -1;
-    
+
     // Products hasMany associations ProductsItems
     $this->Products->ProductsItems->virtualFields['Total'] = 'count(ProductsItems.products_id)';
-    
+
     // Where ORM
     $where = array(
         'fields' => array(
@@ -150,14 +155,12 @@ For example this::
         ),
         'group' => 'ProductsItems.products_id'
     );
-    
+
     // Set conditions Paginator
     $this->paginate = $where;
-    
+
     // Get data
-    $d = $this->Paginator->paginate();
-    // Out debug
-    exit(debug($d));
+    $data = $this->Paginator->paginate();
 
 would return something like this::
 
