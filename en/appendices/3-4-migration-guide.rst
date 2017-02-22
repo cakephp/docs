@@ -25,7 +25,7 @@ the PSR-7 standard.
 
 Several properties on ``Cake\Network\Request`` have been deprecated:
 
-* ``Request::$params`` is deprecated. Use ``Request::getParam()`` instead.
+* ``Request::$params`` is deprecated. Use ``Request::getAttribute('params')`` instead.
 * ``Request::$data`` is deprecated. Use ``Request::getData()`` instead.
 * ``Request::$query`` is deprecated. Use ``Request::getQueryParams()`` instead.
 * ``Request::$cookies`` is deprecated. Use ``Request::getCookie()`` instead.
