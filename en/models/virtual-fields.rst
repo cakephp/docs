@@ -120,6 +120,76 @@ best to define the virtualFields in your model's constructor::
 This will allow your virtualFields to work for any alias you give a
 model.
 
+Pagination and Virtual fields set in controller with JOINS
+=============================================================
+The following example allows to have a counter of a hasMany association and allows to use without problem
+``$this->Paginator->sort('ProductsItems.Total','Items Total');`` 
+
+For example this::
+
+    $this->Products->recursive = -1;
+    
+    // Products hasMany associations ProductsItems
+    $this->Products->ProductsItems->virtualFields['Total'] = 'count(ProductsItems.products_id)';
+    
+    // Where ORM
+    $where = array(
+        'fields' => array(
+            'Products.*',
+            'count(ProductsItems.products_id) AS ProductsItems__Total',
+        ),
+        'joins' => array(
+            array(
+                'table' => 'products_items',
+                'alias' => 'ProductsItems',
+                'type' => 'LEFT',
+                'conditions' => array(
+                    'ProductsItems.products_id = Products.id',
+                )
+            )
+        ),
+        'group' => 'ProductsItems.products_id'
+    );
+    
+    // Set conditions Paginator
+    $this->paginate = $where;
+    
+    // Get data
+    $d = $this->Paginator->paginate();
+    // Out debug
+    exit(debug($d));
+
+would return something like this::
+
+   Array
+   (
+       [0] => Array
+           (
+               [Products] => Array
+                   (
+                       [id] => 1234,
+                       [description] => 'Text bla bla...',
+                   )
+                [ProductsItems] => Array
+                    (
+                        [Total] => 25
+                    )
+           )
+        [1] => Array
+           (
+               [Products] => Array
+                   (
+                       [id] => 4321,
+                       [description] => 'Text 2 bla bla...',
+                   )
+                [ProductsItems] => Array
+                    (
+                        [Total] => 50
+                    )
+           )
+    )
+
+
 Virtual fields in SQL queries
 =============================
 
