@@ -1767,7 +1767,7 @@ control the generated legend/fieldset.
 
 For example::
 
-    echo $this->Form->allInputs(
+    echo $this->Form->allControls(
         [
             'name' => ['label' => 'custom label']
         ],
@@ -1784,7 +1784,7 @@ is defaulted to *all* fields in the current top-level entity. To exclude
 specific fields from the generated controls, set them to ``false`` in the fields
 parameter::
 
-    echo $this->Form->allInputs(['password' => false]);
+    echo $this->Form->allControls(['password' => false]);
 
 .. _associated-form-inputs:
 
