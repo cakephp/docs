@@ -571,7 +571,7 @@ Once you've attached a config reader to Configure you can load configuration fil
 
 Loaded configuration files merge their data with the existing runtime configuration
 in Configure. This allows you to overwrite and add new values
-into the existing runtime configuration. By setting ``$merge`` to true, values
+into the existing runtime configuration. By setting ``$merge`` to false, values
 will not ever overwrite the existing configuration.
 
 Creating or modifying configuration files
