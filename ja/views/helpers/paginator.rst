@@ -291,7 +291,7 @@ first と last オプションを使って先頭ページと最終ページへ�
 
     - ``model`` 使用するモデル。デフォルトは :php:meth:`PaginatorHelper::defaultModel()` 。
     - ``escape`` テキストをエスケープするかどうか。
-    コンテンツにHTMLが含まれている場合は ``false`` に設定します。
+      コンテンツに HTML が含まれている場合は ``false`` に設定します。
 
 .. php:method:: last($last = 'last >>', $options = [])
 
@@ -404,12 +404,12 @@ PaginatorHelperのすべてのオプションを設定します。サポート�
 使用例
 ======
 
-ユーザーに対してどのようにレコードを表示するのかは自由に決められますが、一般的には、HTMLテーブルにより行われます。
-以下の例ではテーブルレイアウトを前提としていますが、ビューの中で利用可能なPaginatorHelperが、
+ユーザーに対してどのようにレコードを表示するのかは自由に決められますが、一般的には、HTML テーブルにより行われます。
+以下の例ではテーブルレイアウトを前提としていますが、ビューの中で利用可能な PaginatorHelper が、
 そのように機能を制限されているわけではありません。
 
-詳細はAPIの中の `PaginatorHelper <https://api.cakephp.org/3.0/class-Cake.View.Helper.PaginatorHelper.html>`_
-を参照してください。なお、前述のように、PaginatorHelperには、テーブルの列ヘッダーに統合できるソート機能もあります。:
+詳細は API の中の `PaginatorHelper <https://api.cakephp.org/3.0/class-Cake.View.Helper.PaginatorHelper.html>`_
+を参照してください。なお、前述のように、PaginatorHelper には、テーブルの列ヘッダーに統合できるソート機能もあります。:
 
 .. code-block:: php
 
