@@ -1144,7 +1144,7 @@ Saving Multiple Entities
 .. php:method:: saveMany($entities, $options = [])
 
 
-Using this method you can save multiple entities atomically. ``$entites`` can
+Using this method you can save multiple entities atomically. ``$entities`` can
 be an array of entities created using ``newEntities()`` / ``patchEntities()``.
 ``$options`` can have the same options as accepted by ``save()``::
 
