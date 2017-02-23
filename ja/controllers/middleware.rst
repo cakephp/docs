@@ -37,11 +37,11 @@ CakePHP はいくつかのミドルウェアを既成で提供します。
 
     class Application extends BaseApplication
     {
-        public function middleware($middleware)
+        public function middleware($middlewareStack)
         {
             // ミドルウェアのキューにエラーハンドラを結びつけます。
-            $middleware->add(new ErrorHandlerMiddleware());
-            return $middleware;
+            $middlewareStack->add(new ErrorHandlerMiddleware());
+            return $middlewareStack;
         }
     }
 
@@ -50,19 +50,19 @@ CakePHP はいくつかのミドルウェアを既成で提供します。
         $layer = new \App\Middleware\CustomMiddleware;
 
         // 追加されたミドルウェアは行列の末尾になります。
-        $middleware->add($layer);
+        $middlewareStack->add($layer);
 
         // 追加されたミドルウェアは行列の先頭になります。
-        $middleware->prepend($layer);
+        $middlewareStack->prepend($layer);
 
         // 特定の位置に挿入します。もし位置が範囲外の場合、
         // 末尾に追加されます。
-        $middleware->insertAt(2, $layer);
+        $middlewareStack->insertAt(2, $layer);
 
         // 別のミドルウェアの前に挿入します。
         // もしその名前のクラスが見つからない場合、
         // 例外が発生します。
-        $middleware->insertBefore(
+        $middlewareStack->insertBefore(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
@@ -70,7 +70,7 @@ CakePHP はいくつかのミドルウェアを既成で提供します。
         // 別のミドルウェアの後に挿入します。
         // もしその名前のクラスが見つからない場合、
         // ミドルウェアは末尾に追加されます。
-        $middleware->insertAfter(
+        $middlewareStack->insertAfter(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
@@ -88,8 +88,8 @@ CakePHP はいくつかのミドルウェアを既成で提供します。
 
     EventManager::instance()->on(
         'Server.buildMiddleware',
-        function ($event, $middleware) {
-            $middleware->add(new ContactPluginMiddleware());
+        function ($event, $middlewareStack) {
+            $middlewareStack->add(new ContactPluginMiddleware());
         });
 
 PSR-7 リクエストとレスポンス
@@ -238,14 +238,14 @@ PSR-7 リクエストとレスポンス
 
     class Application
     {
-        public function middleware($middleware)
+        public function middleware($middlewareStack)
         {
             // 単純なミドルウェアをキューに追加します
-            $middleware->add(new TrackingCookieMiddleware());
+            $middlewareStack->add(new TrackingCookieMiddleware());
 
             // もう少しミドルウェアをキューに追加します
 
-            return $middleware;
+            return $middlewareStack;
         }
     }
 

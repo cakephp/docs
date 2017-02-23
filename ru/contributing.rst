@@ -1,16 +1,9 @@
-Contributing
-############
+Сотрудничество
+##############
 
-.. note::
-    The documentation is not currently supported in Russian language for this
-    page.
-
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
-
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+Существует множество способов для сотрудничества с CakePHP. В приведенных
+ниже разделах раскрываются различные способы, которыми вы можете
+поспособствовать развитию CakePHP:
 
 .. toctree::
     :maxdepth: 1
@@ -24,5 +17,5 @@ Contributing
 
 
 .. meta::
-    :title lang=ru: Contributing
-    :keywords lang=ru: coding conventions,documentation,maxdepth
+    :title lang=ru: Сотрудничество
+    :keywords lang=ru: соглашения написания кода,документация,maxdepth

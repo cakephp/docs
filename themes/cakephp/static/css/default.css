@@ -251,6 +251,7 @@ table.internal-toc {
 }
 
 .tt-menu .empty-result,
+.tt-menu .loading-result,
 .tt-menu .tt-suggestion {
     font-size: 12px;
     line-height: 1.4em;

@@ -442,6 +442,9 @@ You can use ``TableRegistry`` to load your plugin tables using the familiar
 
     $contacts = TableRegistry::get('ContactManager.Contacts');
 
+Alternatively, from a controller context, you can use::
+
+    $this->loadModel('ContactsMangager.Contacts');
 
 Plugin Views
 ============

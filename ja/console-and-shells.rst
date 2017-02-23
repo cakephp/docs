@@ -327,7 +327,7 @@ ProjectTask インスタンスをロードして返します。
 .. versionadded:: 3.1
 
 ディスパッチされたシェルへの（シェルの引数にない）追加パラメータを渡すことが有用な時がしばしばあります。
-これを行うために、``dispatchShell()`` に配列を渡すことができます。
+これを行うために、 ``dispatchShell()`` に配列を渡すことができます。
 配列は、 ``command`` キーと共に ``extra`` キーを持つことが期待されています。 ::
 
     // コマンド文字列を使用
@@ -421,7 +421,7 @@ CakePHP は指定されたパスにファイルを作成する簡単な方法を
     // 横棒線を描画
     $this->hr();
 
-最後に、``_io->overwrite()`` を使用して、画面上のテキストの現在の行を更新することができます。 ::
+最後に、 ``_io->overwrite()`` を使用して、画面上のテキストの現在の行を更新することができます。 ::
 
     $this->out('Counting down');
     $this->out('10', 0);
@@ -679,20 +679,25 @@ CakePHPのコンソールのフレームワークは ``$this->getOptionParser()`
 - addOptions()
 - addSubcommand()
 - addSubcommands()
-- command()
-- description()
-- epilog()
+- setCommand()
+- setDescription()
+- setEpilog()
 
-.. php:method:: description($text = null)
+説明文の設定
+~~~~~~~~~~~~
+
+.. php:method:: setDescription($text = null)
 
 オプションパーサの説明文を取得または設定します。説明文は引数やオプションの上に表示されます。
 配列または文字列を渡すことで説明文の値を設定できます。引数がない場合は現在の値を返します。 ::
 
-    // 一度に複数行を設定v
+    // 一度に複数行を設定
+    $parser->setDescription(['１行目', '２行目']);
+    // 3.4 より前
     $parser->description(['１行目', '２行目']);
 
     // 現在の値を取得する
-    $parser->description();
+    $parser->getDescription();
 
 **src/Shell/ConsoleShell.php** は、アクション中の ``description()`` メソッドの良い例です。 ::
 
@@ -704,7 +709,7 @@ CakePHPのコンソールのフレームワークは ``$this->getOptionParser()`
     public function getOptionParser()
     {
         $parser = new ConsoleOptionParser('console');
-        $parser->description(
+        $parser->setDescription(
             'This shell provides a REPL that you can use to interact ' .
             'with your application in an interactive fashion. You can use ' .
             'it to run adhoc queries with your models, or experiment ' .
@@ -717,7 +722,7 @@ CakePHPのコンソールのフレームワークは ``$this->getOptionParser()`
 
 コンソールの ``description`` 出力は、次のコマンドを実行して確認できます。 ::
 
-    user@ubuntu:~/cakeblog$ bin/cake console --help
+    $ bin/cake console --help
 
     Welcome to CakePHP v3.0.13 Console
     ---------------------------------------------------------------
@@ -740,7 +745,10 @@ CakePHPのコンソールのフレームワークは ``$this->getOptionParser()`
     --verbose, -v  Enable verbose output.
     --quiet, -q    Enable quiet output.
 
-.. php:method:: epilog($text = null)
+エピローグの設定
+----------------
+
+.. php:method:: setEpilog($text = null)
 
 オプションパーサのエピローグを取得または設定します。
 エピローグは、引数とオプションの情報の後に表示されます。
@@ -748,10 +756,12 @@ CakePHPのコンソールのフレームワークは ``$this->getOptionParser()`
 引数がない場合は現在の値を返します。 ::
 
     // 一度に複数行を設定
+    $parser->setEpilog(['１行目', '２行目']);
+    // 3.4 より前
     $parser->epilog(['１行目', '２行目']);
 
     // 現在の値を取得する
-    $parser->epilog();
+    $parser->getEpilog();
 
 アクション中の ``epilog()`` メソッドを説明するために、**src/Shell/ConsoleShell.php**
 の中で使用されている ``getOptionParser()`` メソッドの呼び出しを追加してみましょう。 ::
@@ -764,7 +774,7 @@ CakePHPのコンソールのフレームワークは ``$this->getOptionParser()`
     public function getOptionParser()
     {
         $parser = new ConsoleOptionParser('console');
-        $parser->description(
+        $parser->setDescription(
             'This shell provides a REPL that you can use to interact ' .
             'with your application in an interactive fashion. You can use ' .
             'it to run adhoc queries with your models, or experiment ' .
@@ -772,13 +782,13 @@ CakePHPのコンソールのフレームワークは ``$this->getOptionParser()`
             "\n\n" .
             'You will need to have psysh installed for this Shell to work.'
         );
-        $parser->epilog('Thank you for baking with CakePHP!');
+        $parser->setEpilog('Thank you for baking with CakePHP!');
         return $parser;
     }
 
-``epilog()`` メソッドで追加されたテキストは、次のコンソールコマンドの出力で確認できます。 ::
+``setEpilog()`` メソッドで追加されたテキストは、次のコンソールコマンドの出力で確認できます。 ::
 
-    user@ubuntu:~/cakeblog$ bin/cake console --help
+    $ bin/cake console --help
 
     Welcome to CakePHP v3.0.13 Console
     ---------------------------------------------------------------
@@ -1013,7 +1023,7 @@ Bake は多くの別々のタスクから構成されますが、各タスクは
 キーを定義できます。配列形式ビルダーの内部には ``subcommands`` は定義できません。
 引数とオプションの値は、 :php:func:`Cake\\Console\\ConsoleOptionParser::addArguments()` や
 :php:func:`Cake\\Console\\ConsoleOptionParser::addOptions()` が利用する書式に従ってください。
-buildFromArray を単独で使ってオプションパーサを構築することも可能です。 :: 
+buildFromArray を単独で使ってオプションパーサを構築することも可能です。 ::
 
     public function getOptionParser()
     {
@@ -1066,7 +1076,7 @@ ConsoleOptionParser を追加することにより、一貫性のある方法で
 
 自動ツールや開発ツールをビルドするのに CakePHP との対話処理を必要とする場合、
 ヘルプを機械がパースできる形式で取得できると便利です。
-ConsoleOptionParser に以下の引数を追加することで、ヘルプをxmlで出力できます。 ::
+ConsoleOptionParser に以下の引数を追加することで、ヘルプを xml で出力できます。 ::
 
     cake bake --help xml
     cake bake -h xml
