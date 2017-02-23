@@ -386,7 +386,7 @@ transport). To start off your file should look like::
     }
 
 You must implement the method ``send(Email $email)`` with your custom logic.
-Optionally, you can implement the ``config($config)`` method. ``config()`` is
+Optionally, you can implement the ``setConfig($config)`` method. ``setConfig()`` is
 called before send() and allows you to accept user configurations. By default,
 this method puts the configuration in protected attribute ``$_config``.
 
