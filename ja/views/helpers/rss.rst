@@ -73,13 +73,13 @@ ArticlesController の ``initialize()`` メソッドに RequestHandler を加え
         }
     }
 
-With all the View variables set we need to create an rss layout.
+すべてのビューの変数セットで RSS レイアウトを作成する必要があります。
 
-Layout
-------
+レイアウト
+-----------------------------------
 
-An Rss layout is very simple, put the following contents in
-**src/Template/Layout/rss/default.ctp**::
+RSS レイアウトはとてもシンプルです。 **src/Template/Layout/rss/default.ctp** 内に以下の内容を記述します。
+::
 
     if (!isset($documentData)) {
         $documentData = [];
@@ -93,11 +93,10 @@ An Rss layout is very simple, put the following contents in
     $channel = $this->Rss->channel([], $channelData, $this->fetch('content'));
     echo $this->Rss->document($documentData, $channel);
 
-It doesn't look like much but thanks to the power in the ``RssHelper``
-it's doing a lot of lifting for us. We haven't set ``$documentData`` or
-``$channelData`` in the controller, however in CakePHP your views
-can pass variables back to the layout. Which is where our ``$channelData``
-array will come from setting all of the meta data for our feed.
+そのようには見えませんが、 ``RssHelper`` のパワーのおかげで、私たちのために多くのことをしてくれています。
+``$documentData`` や ``$channelData`` はコントローラ内でセットしていませんが、CakePHP では、ビューからレイアウトに変数を渡すことができます。
+``$channelData`` 配列がどこにあるかは、フィードのメタデータ全てをセットしてから得られます。
+
 
 Next up is view file for my articles/index. Much like the layout file
 we created, we need to create a **src/Template/Posts/rss/** directory and
