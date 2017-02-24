@@ -287,7 +287,7 @@ CakePHP は、 :doc:`ビューレイヤー </views>` を使用してメールを
 
 これは、Blog プラグインを更新せずにあなたのテーマの ``new_comment`` テンプレートで上書きできます。
 テンプレートファイルは、以下のパスで作成する必要があります:
-**src/Template/Plugin/TestTheme/Blog/Email/text/new_comment.ctp**
+**src/Template/Plugin/TestTheme/Plugin/Blog/Email/text/new_comment.ctp**
 
 添付ファイルの送信
 ==================
