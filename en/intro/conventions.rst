@@ -145,7 +145,7 @@ together.
 Core Naming Conventions
 =======================
 
-When navigating the cakephp source code fields are often referred to as columns
+When navigating the CakePHP source code fields are often referred to as columns
 when dealing with the schema sometimes keys and are often refererred to as
 properties within entities.
 
