@@ -146,11 +146,11 @@ Core Naming Conventions
 =======================
 
 When navigating the CakePHP source code fields are often referred to as columns
-when dealing with the schema sometimes keys and are often referred to as
-properties within entities.
+when dealing with the schema and are often referred to as
+properties within entities. Keys usually reflect pimary or foreign key columns.
 
 When looking for schema columns, database fields and entity properties, make
-sure to check if they are referenced as field, property or column and
+sure to check if they are referenced by nomenclature field, property or column and
 vice versa as this can vary throughout the framework.
 
 .. meta::
