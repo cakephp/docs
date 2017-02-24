@@ -110,6 +110,9 @@ UUID columns. CakePHP will create a unique 36 character UUID
 (:php:meth:`Cake\\Utility\\Text::uuid()`) whenever you save a new record using
 the ``Table::save()`` method.
 
+When looking for schema columns, database fields and entity properties, make sure to check
+if they are referenced as field or property or column, and as this can vary throughout the framework.
+
 View Conventions
 ================
 
