@@ -110,9 +110,6 @@ UUID columns. CakePHP will create a unique 36 character UUID
 (:php:meth:`Cake\\Utility\\Text::uuid()`) whenever you save a new record using
 the ``Table::save()`` method.
 
-When looking for schema columns, database fields and entity properties, make sure to check
-if they are referenced as field or property or column, and as this can vary throughout the framework.
-
 View Conventions
 ================
 
@@ -145,6 +142,16 @@ Now that you've been introduced to CakePHP's fundamentals, you might try a run
 through the :doc:`/tutorials-and-examples/bookmarks/intro` to see how things fit
 together.
 
+Core Naming Conventions
+=======================
+
+When navigating the cakephp source code fields are often referred to as columns
+when dealing with the schema sometimes keys and are often refererred to as
+properties within entities.
+
+When looking for schema columns, database fields and entity properties, make
+sure to check if they are referenced as field, property or column and
+vice versa as this can vary throughout the framework.
 
 .. meta::
     :title lang=en: CakePHP Conventions
