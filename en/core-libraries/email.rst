@@ -302,7 +302,7 @@ You can do this using themes by telling Email to use appropriate theme using
 This allows you to override the ``new_comment`` template in your theme without
 modifying the Blog plugin. The template file needs to be created in the
 following path:
-**src/Template/Plugin/TestTheme/Blog/Email/text/new_comment.ctp**.
+**src/Template/Plugin/TestTheme/PLugin/Blog/Email/text/new_comment.ctp**.
 
 Sending Attachments
 ===================
