@@ -21,7 +21,7 @@ PaginatorHelper テンプレート
 マークアップを生成します。これらのテンプレートを変更して、PaginatorHelper
 によって生成された HTML をカスタマイズすることができます。
 
-テンプレートは ``{{var}}`` スタイルのプレースホルダを使います。`{{}}`
+テンプレートは ``{{var}}`` スタイルのプレースホルダを使います。``{{}}``
 のまわりに空白を入れないことが重要です。そうしないと置き換えが機能しません。
 
 ファイルからテンプレートをロードする
@@ -39,7 +39,7 @@ PaginatorHelper テンプレート
     }
 
 これは **config/paginator-templates.php** にあるファイルをロードします。
-ファイルの外観は以下の例を参照してください。 :term:`plugin syntax`
+ファイルの外観は以下の例を参照してください。 :term:`プラグイン記法`
 を使ってプラグインからテンプレートをロードすることもできます。::
 
     // AppView.php の中で
@@ -59,16 +59,18 @@ PaginatorHelper テンプレート
 実行時にテンプレートを変更する
 ------------------------------
 
-.. php:method:: templates($templates = null)
+.. php:method:: setTemplates($templates)
 
 このメソッドを使用すると、実行時に PaginatorHelper で使用されるテンプレートを変更できます。
 これは、特定のメソッド呼び出しのテンプレートをカスタマイズする場合に便利です::
 
     // 現在のテンプレート値を読み込みます
-    $result = $this->Paginator->templates('number');
+    $result = $this->Paginator->setTemplates('number');
+    // 3.4 より前
+    $result = $this->Paginator->templates('number');
 
     // テンプレートを変更します
-    $this->Paginator->templates([
+    $this->Paginator->setTemplates([
         'number' => '<em><a href="{{url}}">{{text}}</a></em>'
     ]);
 
@@ -271,8 +273,6 @@ first と last オプションを使って先頭ページと最終ページへ�
 
 .. php:method:: first($first = '<< first', $options = [])
 
-    Returns a first or set of numbers for the first pages. If a string is given,
-    then only a link to the first page with the provided text will be created::
     先頭ページまたは先頭ページまでの一連の数字を返します。文字列が渡されると、
     その文字列をラベルとする先頭ページへのリンクのみが生成されます。 ::
 
@@ -300,6 +300,21 @@ first と last オプションを使って先頭ページと最終ページへ�
     最終ページにいる場合は何も生成しません。 ``$last`` が整数値の場合、ユーザが
     最後から last ページ以内に範囲内に入った場合はリンクを生成しません。
 
+ヘッダーリンクタグの作成
+========================
+
+PaginatorHelper を使用すると、ページの ``<head>`` 要素に改行タグを作成できます::
+
+    // 現在のモデルの次ページと前ページのリンクを作成する。
+    echo $this->Paginator->meta();
+
+    // 現在のモデルの次ページと前ページ、先頭ページと最終ページのリンクを作成する。
+    echo $this->Paginator->meta(['first' => true, 'last' => true]);
+
+.. versionadded:: 3.4.0
+
+    ``first`` と ``last`` オプションは 3.4.0 で追加されました
+
 ページ制御状態の確認
 ====================
 
@@ -322,6 +337,12 @@ first と last オプションを使って先頭ページと最終ページへ�
 .. php:method:: hasPage(string $model = null, integer $page = 1)
 
     与えられた結果セットが ``$page`` が示すページ番号を含む場合に ``true`` を返します。
+
+.. php:method:: total(string $model = null)
+
+    与えられたモデルの総ページ数を返します。
+
+    .. versionadded:: 3.4.0
 
 ページカウンターの生成
 ======================
