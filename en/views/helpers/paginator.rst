@@ -110,8 +110,8 @@ Creating Sort Links
 .. php:method:: sort($key, $title = null, $options = [])
 
     :param string $key: The name of the column that the recordset should be sorted.
-    :param string $title: Title for the link. If $title is null $key will be
-        used for the title, converted to "Title Case" format and generated.
+    :param string $title: Title for the link. If $title is null, $key will be
+        used converted to "Title Case" format and used as the title.
     :param array $options: Options for sorting link.
 
 Generates a sorting link. Sets querystring parameters for the sort and
