@@ -36,7 +36,7 @@ Note that we did not tell the ORM which table to use for our class. By
 convention table objects will use a table that matches the lower cased and
 underscored version of the class name. In the above example the ``articles``
 table will be used. If our table class was named ``BlogPosts`` your table should
-be named ``blog_posts``. You can specify the table to using the ``table()``
+be named ``blog_posts``. You can specify the table to using the ``setTable()``
 method::
 
     namespace App\Model\Table;
@@ -48,14 +48,14 @@ method::
 
         public function initialize(array $config)
         {
-            $this->table('my_table');
+            $this->setTable('my_table');
         }
 
     }
 
 No inflection conventions will be applied when specifying a table. By convention
 the ORM also expects each table to have a primary key with the name of ``id``.
-If you need to modify this you can use the ``primaryKey()`` method::
+If you need to modify this you can use the ``setPrimaryKey()`` method::
 
     namespace App\Model\Table;
 
@@ -65,7 +65,7 @@ If you need to modify this you can use the ``primaryKey()`` method::
     {
         public function initialize(array $config)
         {
-            $this->primaryKey('my_id');
+            $this->setPrimaryKey('my_id');
         }
     }
 
@@ -76,13 +76,13 @@ By default table objects use an entity class based on naming conventions. For
 example if your table class is called ``ArticlesTable`` the entity would be
 ``Article``. If the table class was ``PurchaseOrdersTable`` the entity would be
 ``PurchaseOrder``. If however, you want to use an entity that doesn't follow the
-conventions you can use the ``entityClass()`` method to change things up::
+conventions you can use the ``setEntityClass()`` method to change things up::
 
     class PurchaseOrdersTable extends Table
     {
         public function initialize(array $config)
         {
-            $this->entityClass('App\Model\Entity\PO');
+            $this->setEntityClass('App\Model\Entity\PO');
         }
     }
 
