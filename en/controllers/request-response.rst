@@ -543,9 +543,31 @@ ics generated on the fly from a string::
 Streaming Resources
 -------------------
 
-You can use a callable with ``body()`` to convert resource streams into
-responses::
+You can stream responses from files using diactoros streams::
 
+    // To stream from a file
+    use Zend\Diactoros\Stream;
+
+    $stream = new Stream('/path/to/file', 'rb');
+    $response = $response->withStream($stream);
+
+You can also stream responses from a callback using the ``CallbackStream`` this
+is useful when you have resources like images, CSV files or PDFs you need to
+stream to the client::
+
+    // Streaming from a callback
+    use Cake\Http\CallbackStream;
+
+    // Create an image.
+    $img = imagecreate(100, 100);
+    // ...
+
+    $stream = new CallbackStream(function () use ($img) {
+        imagepng($img);
+    });
+    $response = $response->withStream($stream);
+
+    // Prior to 3.4.0 you can use the following to create streaming responses.
     $file = fopen('/some/file.png', 'r');
     $this->response->body(function () use ($file) {
         rewind($file);
