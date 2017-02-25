@@ -4,6 +4,11 @@
 CakePHP 3.4 is an API compatible upgrade from 3.3. This page outlines the
 changes and improvements made in 3.4.
 
+Minimum PHP 5.6 Required
+========================
+CakePHP 3.4 requires at least PHP 5.6.0 as PHP 5.5 is no longer supported and
+won't receive any security fixes anymore.
+
 Deprecations
 ============
 
@@ -20,13 +25,13 @@ the PSR-7 standard.
 
 Several properties on ``Cake\Network\Request`` have been deprecated:
 
-* ``Request::$params`` is deprecated. Use ``Request::getParam()`` instead.
+* ``Request::$params`` is deprecated. Use ``Request::getAttribute('params')`` instead.
 * ``Request::$data`` is deprecated. Use ``Request::getData()`` instead.
-* ``Request::$query`` is deprecated. Use ``Request::getQuery()`` instead.
+* ``Request::$query`` is deprecated. Use ``Request::getQueryParams()`` instead.
 * ``Request::$cookies`` is deprecated. Use ``Request::getCookie()`` instead.
 * ``Request::$base`` is deprecated. Use ``Request::getAttribute('base')`` instead.
 * ``Request::$webroot`` is deprecated. Use ``Request::getAttribute('webroot')`` instead.
-* ``Request::$here`` is deprecated. Use ``Request::here()`` instead.
+* ``Request::$here`` is deprecated. Use ``Request::getRequestTarget()`` instead.
 * ``Request::$_session`` was renamed to ``Request::$session``.
 
 A number of methods on ``Cake\Network\Request`` have been deprecated:
@@ -449,3 +454,9 @@ PluginShell
 
 * ``cake plugin load`` and ``cake plugin unload`` now support a ``--cli``
   option, which updates the ``bootstrap_cli.php`` instead.
+
+TestSuite
+=========
+
+* Support to ``PHPUnit 6`` was added. With this framework version requiring PHP
+  5.6.0 as a minimum version, the supported version of PHPUnit are now ``^5.7|^6.0``

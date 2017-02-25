@@ -173,7 +173,7 @@ Query オブジェクトを返すということです。これにはいくつ�
     // この例では、クエリを作成しませんでした！
     $results = $articles->find()
         ->order(['title' => 'DESC'])
-        ->formatResults(function ($results) {
+        ->formatResults(function (\Cake\Collection\CollectionInterface $results) {
             return $results->extract('title');
         });
 
@@ -249,7 +249,7 @@ find メソッドから Query オブジェクトを返すことはいくつか�
 
     public function findAll(Query $query, array $options)
     {
-        return $query->formatResults(function ($results) {
+        return $query->formatResults(function (\Cake\Collection\CollectionInterface $results) {
             return $results->map(function ($row) {
                 // あなたの afterfind ロジック
             });

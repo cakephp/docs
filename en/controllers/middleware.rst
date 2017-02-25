@@ -38,11 +38,11 @@ hook method will be called early in the request process, you can use the
 
     class Application extends BaseApplication
     {
-        public function middleware($middleware)
+        public function middleware($middlewareStack)
         {
             // Bind the error handler into the middleware queue.
-            $middleware->add(new ErrorHandlerMiddleware());
-            return $middleware;
+            $middlewareStack->add(new ErrorHandlerMiddleware());
+            return $middlewareStack;
         }
     }
 
@@ -52,19 +52,19 @@ a variety of operations::
         $layer = new \App\Middleware\CustomMiddleware;
 
         // Added middleware will be last in line.
-        $middleware->add($layer);
+        $middlewareStack->add($layer);
 
         // Prepended middleware will be first in line.
-        $middleware->prepend($layer);
+        $middlewareStack->prepend($layer);
 
         // Insert in a specific slot. If the slot is out of
         // bounds, it will be added to the end.
-        $middleware->insertAt(2, $layer);
+        $middlewareStack->insertAt(2, $layer);
 
         // Insert before another middleware.
         // If the named class cannot be found,
         // an exception will be raised.
-        $middleware->insertBefore(
+        $middlewareStack->insertBefore(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
@@ -72,7 +72,7 @@ a variety of operations::
         // Insert after another middleware.
         // If the named class cannot be found, the
         // middleware will added to the end.
-        $middleware->insertAfter(
+        $middlewareStack->insertAfter(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
@@ -90,8 +90,8 @@ scripts, that add middleware::
 
     EventManager::instance()->on(
         'Server.buildMiddleware',
-        function ($event, $middleware) {
-            $middleware->add(new ContactPluginMiddleware());
+        function ($event, $middlewareStack) {
+            $middlewareStack->add(new ContactPluginMiddleware());
         });
 
 PSR-7 Requests and Responses
@@ -243,14 +243,14 @@ application::
 
     class Application
     {
-        public function middleware($middleware)
+        public function middleware($middlewareStack)
         {
             // Add your simple middleware onto the queue
-            $middleware->add(new TrackingCookieMiddleware());
+            $middlewareStack->add(new TrackingCookieMiddleware());
 
             // Add some more middleware onto the queue
 
-            return $middleware;
+            return $middlewareStack;
         }
     }
 

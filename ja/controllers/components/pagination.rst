@@ -90,7 +90,7 @@ Paginate プロパティからほとんどの検索オプションを指定す�
         // タグごとに記事を検索する
         public function tags()
         {
-            $tags = $this->request->param('pass');
+            $tags = $this->request->getParam('pass');
 
             $customFinderOptions = [
                 'tags' => $tags
@@ -132,7 +132,7 @@ Paginate プロパティからほとんどの検索オプションを指定す�
 ``PaginatorHelper`` がまだ加えられていない場合は PaginatorHelper を加えます。
 Controller の paginate メソッドは、ページ分けされた検索結果を返し、
 ページネーションのメタデータを request にセットします。ページネーションのメタデータは、
-``$this->request->param('paging')`` でアクセスできます。
+``$this->request->getParam('paging')`` でアクセスできます。
 ``paginate()`` を使用するもっとまとまった例としては、 ::
 
     class ArticlesController extends AppController
@@ -276,7 +276,7 @@ try-catch 構文を活用して、適切な処理をすればよいです。 ::
             $this->paginate();
         } catch (NotFoundException $e) {
             // こちらで最初や最後のページにリダイレクトするような何かをします。
-            // $this->request->param('paging') に要求された情報が入ります。
+            // $this->request->getParam('paging') に要求された情報が入ります。
         }
     }
 

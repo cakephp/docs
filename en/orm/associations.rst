@@ -509,18 +509,7 @@ We can define the belongsToMany association in both our models as follows::
         }
     }
 
-We can also define a more specific relationship using the setters::
-
-    // In src/Model/Table/ArticlesTable.php
-    class ArticlesTable extends Table
-    {
-
-        public function initialize(array $config)
-        {
-            $this->belongsToMany('Tags')
-                ->setJoinTable('articles_tags');
-        }
-    }
+We can also define a more specific relationship using configuration::
 
     // In src/Model/Table/TagsTable.php
     class TagsTable extends Table
@@ -646,8 +635,9 @@ following models::
     {
         public function initialize(array $config)
         {
-            $this->belongsToMany('Courses')
-                ->setThrough('CourseMemberships');
+            $this->belongsToMany('Courses', [
+                'through' => 'CourseMemberships',
+            ]);
         }
     }
 
@@ -656,7 +646,8 @@ following models::
         public function initialize(array $config)
         {
             $this->belongsToMany('Students', [
-                ->setThrough('CourseMemberships');
+                'through' => 'CourseMemberships',
+            ]);
         }
     }
 

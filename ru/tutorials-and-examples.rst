@@ -1,16 +1,13 @@
-Tutorials & Examples
-####################
+Руководства и примеры
+#####################
 
-.. note::
-    The documentation is not currently supported in Russian language for this
-    page.
+В этом разделе вы можете пройтись по созданию типичных приложений
+CakePHP, чтобы увидеть как все части образуют вместе единое целое.
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
-
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+В качестве альтернативы вы можете обратиться к неофициальному репозиторию
+плагинов CakePHP `CakePackages <https://plugins.cakephp.org/>`_ и к
+`Пекарне <https://bakery.cakephp.org/>`_ для ознакомления с готовыми
+приложениями и компонентами.
 
 .. toctree::
     :maxdepth: 1
@@ -24,5 +21,5 @@ Tutorials & Examples
 
 
 .. meta::
-    :title lang=ru: Tutorials & Examples
-    :keywords lang=ru: application tutorials,glob,bakery,repository,applications,blog,acl
+    :title lang=ru: Руководства и примеры
+    :keywords lang=ru: application tutorials,glob,bakery,репозиторий,приложения,блог,acl

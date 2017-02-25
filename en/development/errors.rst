@@ -323,6 +323,13 @@ be thrown from a number of CakePHP core components:
 
     A model's behavior could not be found.
 
+.. php:exception:: PersistenceFailedException
+
+    An entity couldn't be saved/deleted while using :php:meth:`Cake\\ORM\\Table::saveOrFail()` or
+    :php:meth:`Cake\\ORM\\Table::deleteOrFail()`.
+
+    .. versionadded:: 3.4.1 PersistenceFailedException has been added.
+
 .. php:namespace:: Cake\Datasource\Exception
 
 .. php:exception:: RecordNotFoundException

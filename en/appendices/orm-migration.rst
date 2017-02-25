@@ -184,7 +184,7 @@ the results taken from the database is not actually required::
     // No queries made in this example!
     $results = $articles->find()
         ->order(['title' => 'DESC'])
-        ->formatResults(function ($results) {
+        ->formatResults(function (\Cake\Collection\CollectionInterface $results) {
             return $results->extract('title');
         });
 
@@ -263,7 +263,7 @@ In the 3rd case above your code would look like::
 
     public function findAll(Query $query, array $options)
     {
-        return $query->formatResults(function ($results) {
+        return $query->formatResults(function (\Cake\Collection\CollectionInterface $results) {
             return $results->map(function ($row) {
                 // Your afterfind logic
             });

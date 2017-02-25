@@ -23,7 +23,7 @@ Bake イベント
     use Cake\Event\EventManager;
 
     EventManager::instance()->on('Bake.initialize', function (Event $event) {
-        $view = $event->subject;
+        $view = $event->getSubject();
 
         // bake テンプレートの中で MySpecial ヘルパーの使用を可能にします
         $view->loadHelper('MySpecial', ['some' => 'config']);
@@ -48,7 +48,7 @@ Bake イベントは、既存のテンプレートに小さな変更を行うた
     use Cake\Event\EventManager;
 
     EventManager::instance()->on('Bake.beforeRender', function (Event $event) {
-        $view = $event->subject;
+        $view = $event->getSubject();
 
         // indexes の中のメインデータ変数に $rows を使用
         if ($view->get('pluralName')) {
@@ -83,7 +83,7 @@ Bake イベントは、既存のテンプレートに小さな変更を行うた
     EventManager::instance()->on(
         'Bake.beforeRender.Controller.controller',
         function (Event $event) {
-            $view = $event->subject();
+            $view = $event->getSubject();
             if ($view->viewVars['name'] == 'Users') {
                 // Users コントローラに login と logout を追加
                 $view->viewVars['actions'] = [
