@@ -43,7 +43,7 @@ CakePHP ではデータの検証には二つの段階があります:
 ``validate`` オプションに偽を指定してください。 ::
 
     $article = $articles->newEntity(
-        $this->request->data,
+        $this->request->getData(),
         ['validate' => false]
     );
 
@@ -101,7 +101,7 @@ CakePHP ではデータの検証には二つの段階があります:
 適用させたいバリデーションルールを選ぶこともできます。 ::
 
     $article = $articles->newEntity(
-        $this->request->data,
+        $this->request->getData(),
         ['validate' => 'update']
     );
 

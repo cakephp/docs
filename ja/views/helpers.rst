@@ -71,7 +71,7 @@ CakePHP やアプリケーションにあるヘルパーを明示的に読み込
         public function initialize()
         {
             parent::initialize();
-            if ($this->request->action === 'index') {
+            if ($this->request->getParam('action') === 'index') {
                 $this->loadHelper('ListPage');
             }
         }
@@ -315,6 +315,25 @@ CakePHP のコンポーネントと同様に、ヘルパークラスは、いく
     ``HelperRegistry`` は、 ``コントローラ`` で明示されていないヘルパーを
     遅延ロードしようとします。
 
+ヘルパー内部でビュー変数にアクセス
+-------------------------------------------
+
+ヘルパー内部でビュー変数にアクセスしたい場合は、次のように ``$this->_View->get()``
+を使用することができます。 ::
+
+    class AwesomeHelper extends Helper
+    {
+
+        public $helpers = ['Html'];
+
+        public someMethod()
+        {
+            // meta description の設定
+            echo $this->Html->meta(
+                'description', $this->_View->get('metaDescription'), ['block' => 'meta']
+            );
+        }
+    }
 
 ヘルパー内部でビューエレメントの描画
 ------------------------------------
@@ -327,10 +346,16 @@ CakePHP のコンポーネントと同様に、ヘルパークラスは、いく
         public someFunction()
         {
             // ヘルパー内で直接出力
-            echo $this->_View->element('/path/to/element',['foo'=>'bar','bar'=>'foo']);
+            echo $this->_View->element(
+                '/path/to/element',
+                ['foo'=>'bar','bar'=>'foo']
+            );
 
             // または、ビューに返す
-            return $this->_View->element('/path/to/element',['foo'=>'bar','bar'=>'foo']);
+            return $this->_View->element(
+                '/path/to/element',
+                ['foo'=>'bar','bar'=>'foo']
+            );
         }
     }
 

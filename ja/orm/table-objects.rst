@@ -170,8 +170,8 @@ initialize
         }
         public function initializeEvent($event)
         {
-            $table = $event->subject();
-            // do something here
+            $table = $event->getSubject();
+            // ここで何かする
         }
     }
 

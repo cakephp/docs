@@ -88,12 +88,12 @@ BreadcrumbsHelper は簡単にアプリのパンくずリストの作成と描�
 - ``$separator``: ``separator`` テンプレートの属性の配列。
   可能なプロパティは次の通りです。
 
-  - **separator** セパレーターとして表示する文字列。
-  - **innerAttrs** セパレーターが２つの要素に分割された場合に属性を提供します。
-  - **templateVars** テンプレートに独自のテンプレート変数の挿入を可能にします。
+  - ``separator`` セパレーターとして表示する文字列。
+  - ``innerAttrs`` セパレーターが２つの要素に分割された場合に属性を提供します。
+  - ``templateVars`` テンプレートに独自のテンプレート変数の挿入を可能にします。
 
   他のすべてのプロパティは、HTML 属性として変換されます。
-  そして、テンプレート内の **attrs** キーを置換します。
+  そして、テンプレート内の ``attrs`` キーを置換します。
   もし、デフォルト設定 (このオプションが空) を使用する場合、セパレータを描画しません。
 
 以下は、パンくずリストを描画する例です。 ::
@@ -168,6 +168,23 @@ BreadcrumbsHelper は内部で ``StringTemplateTrait`` を使用しています�
     <li class="products-crumb" data-foo="bar">
         <a href="/products/index" class="inner-products-crumb" id="the-products-crumb">Products</a>
     </li>
+
+パンくずの消去
+========================
+
+``reset()`` メソッドを使用してパンくずを消去することができます。
+これは、パンくずを変換してリストを上書きしたいときに便利です。 ::
+
+    $crumbs = $this->Breadcrumbs->getCrumbs();
+    $crumbs = collection($crumbs)->map(function ($crumb) {
+        $crumb['options']['class'] = 'breadcrumb-item';
+        return $crumb;
+    })->toArray();
+
+    $this->Breadcrumbs->reset()->add($crumbs);
+
+.. versionadded:: 3.4.0
+    ``reset()`` メソッドは 3.4.0 で追加されました。
 
 .. meta::
     :title lang=ja: BreadcrumbsHelper

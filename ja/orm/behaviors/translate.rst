@@ -304,6 +304,17 @@ I18n::locale を使用せずに一つの言語の取得
 
 この例では、 ``Categories`` も TranslateBehavior が追加されていることを前提としています。
 
+翻訳されたフィールドのクエリ
+-----------------------------
+
+TranslateBehavior は、デフォルトでは検索条件を置換しません。
+翻訳されたフィールドの検索条件を作成するには ``translationField()`` メソッドを使用します。 ::
+
+    $this->Articles->locale('es');
+    $data = $this->Articles->find()->where([
+        $this->Articles->translationField('title') => 'Otro Título'
+    ]);
+
 別の言語で保存
 ==============
 

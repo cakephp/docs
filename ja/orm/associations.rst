@@ -41,41 +41,45 @@ hasOne 、 hasMany 、 belongsTo 、そして belongsToMany です。
 
 アソシエーションの設定の最も単純な形式では、関連付けたいテーブルのエイリアスを受け取ります。
 既定ではアソシエーションの細目は CakePHP の規約に従います。
-もしアソシエーションの扱われ方をカスタマイズしたい場合には、第二パラメータで
-それを行うことができます。 ::
+もしアソシエーションの扱われ方をカスタマイズしたい場合には、セッターで
+それを変更することができます。 ::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
-            $this->belongsTo('Authors', [
-                'className' => 'Publishing.Authors',
-                'foreignKey' => 'authorid',
-                'propertyName' => 'person'
-            ]);
+            $this->belongsTo('Authors')
+                ->setName('Publishing.Authors')
+                ->setForeignKey('authorid')
+                ->setProperty('person');
         }
-
     }
+
+アソシエーションをカスタマイズするために配列も使用できます。 ::
+
+   $this->belongsTo('Authors', [
+       'className' => 'Publishing.Authors',
+       'foreignKey' => 'authorid',
+       'propertyName' => 'person'
+   ]);
+
+しかし、配列は、流れるようなインターフェイスから得られるタイプヒントや自動補完を提供しません。
 
 同一のテーブルを、異なるアソシエーションの種別を定義するために複数回使うこともできます。
 例えば、承認されたコメントとまだ検閲されていないものを分けたい場合を考えてみましょう。 ::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
-            $this->hasMany('Comments', [
-                'className' => 'Comments',
-                'conditions' => ['approved' => true]
-            ]);
+            $this->hasMany('Comments')
+                ->setName('Comments')
+                ->setConditions(['approved' => true]);
 
-            $this->hasMany('UnapprovedComments', [
-                'className' => 'Comments',
-                'conditions' => ['approved' => false],
-                'propertyName' => 'unapproved_comments'
-            ]);
+            $this->hasMany('UnapprovedComments')
+                ->setName('Comments')
+                ->setConditions(['approved' => false])
+                ->setProperty('unapproved_comments');
         }
     }
 
@@ -85,19 +89,15 @@ hasOne 、 hasMany 、 belongsTo 、そして belongsToMany です。
 
     class CategoriesTable extends Table
     {
-
         public function initialize(array $config)
         {
-            $this->hasMany('SubCategories', [
-                'className' => 'Categories',
-            ]);
+            $this->hasMany('SubCategories')
+                ->setName('Categories');
 
-            $this->belongsTo('ParentCategories', [
-                'className' => 'Categories',
-            ]);
+            $this->belongsTo('ParentCategories')
+                ->setName('Categories')
         }
     }
-
 
 アソシエーション種別で索引されたテーブル名のセットを含む配列を引数として受け取る
 ``Table::addAssociations()`` を一度呼ぶことで、まとめてアソシエーションを
@@ -162,21 +162,19 @@ Doctors hasOne Mentors mentors.doctor\_id
         }
     }
 
-もしさらなる制御が必要であれば、配列構文を使ってアソシエーションを定義することができます。
+もしさらなる制御が必要であれば、セッターを使ってアソシエーションを定義することができます。
 例えば、特定のレコードのみを含むようにアソシエーションを制限したい場合は次のようにします。 ::
 
     class UsersTable extends Table
     {
         public function initialize(array $config)
         {
-            $this->hasOne('Addresses', [
-                'className' => 'Addresses',
-                'conditions' => ['Addresses.primary' => '1'],
-                'dependent' => true
-            ]);
+            $this->hasOne('Addresses')
+                ->setName('Addresses')
+                ->setConditions(['Addresses.primary' => '1'])
+                ->setDependent(true);
         }
     }
-
 
 hasOne アソシエーションの配列で可能なキーは以下の通りです。
 
@@ -224,7 +222,7 @@ hasOne アソシエーションの配列で可能なキーは以下の通りで�
 belongsTo アソシエーション
 ==========================
 
-ここまでで、 Users テーブルから Address データにアクセスできるようになりました。
+ここまでで、 User テーブルから Address データにアクセスできるようになりました。
 次は Address テーブルから関連する User データにアクセスできるように、
 belongsTo アソシエーションを定義しましょう。belongsTo アソシエーションは
 hasOne や hasMany の自然な補完です。つまり、他の方向からの関連データを見ることができます。
@@ -257,17 +255,16 @@ Mentors belongsTo Doctors mentors.doctor\_id
         }
     }
 
-配列構文を使って、より詳細な関係を定義することができます。 ::
+セッターを使って、より詳細な関係を定義することができます。 ::
 
     class AddressesTable extends Table
     {
 
         public function initialize(array $config)
         {
-            $this->belongsTo('Users', [
-                'foreignKey' => 'user_id',
-                'joinType' => 'INNER',
-            ]);
+            $this->belongsTo('Users')
+                ->setForeignKey('user_id')
+                ->setJoinType('INNER');
         }
     }
 
@@ -339,46 +336,43 @@ Articles モデルの中で、 hasMany アソシエーションを次のよう�
         }
     }
 
-配列構文を使って、より詳細な関係を定義することができます。 ::
+セッターを使って、より詳細な関係を定義することができます。 ::
 
     class ArticlesTable extends Table
     {
 
         public function initialize(array $config)
         {
-            $this->hasMany('Comments', [
-                'foreignKey' => 'article_id',
-                'dependent' => true,
-            ]);
+            $this->hasMany('Comments')
+                ->setForeignKey('article_id')
+                ->setDependent(true);
         }
     }
 
 時にはアソシエーションで複合キーを設定したいかもしれません。 ::
 
     // ArticlesTable::initialize() の呼び出しの中で
-    $this->hasMany('Reviews', [
-        'foreignKey' => [
+    $this->hasMany('Reviews')
+        ->setForeignKey([
             'article_id',
             'article_hash'
-        ]
-    ]);
+        ]);
 
-上記の例の通りに、必要な複合キーを含む配列を ``foreignKey`` に渡しました。
+上記の例の通りに、必要な複合キーを含む配列を ``setForeignKey()`` に渡しました。
 既定では、 ``bindingKey`` は ``id`` および ``hash`` としてそれぞれ自動的に定義されますが、
-既定とは異なる紐付けフィールドを指定する必要があれば、次のようにして ``bindingKeys``
-配列を手動で設定することができます。 ::
+既定とは異なる紐付けフィールドを指定する必要があれば、次のようにして ``setBindingKeys()``
+を手動で設定することができます。 ::
 
     // ArticlesTable::initialize() の呼び出しの中で
-    $this->hasMany('Reviews', [
-        'foreignKey' => [
+    $this->hasMany('Reviews')
+        ->setForeignKey([
             'article_id',
             'article_hash'
-        ],
-        'bindingKey' => [
+        ])
+        ->setBindingKey([
             'whatever_id',
             'whatever_hash'
-        ]
-    ]);
+        ]);
 
 ``foreignKey`` の値が **reviews** テーブルを参照し ``bindingKey`` の値が
 **articles** テーブルを参照することに注意することは大切です。
@@ -500,19 +494,7 @@ Patient belongsToMany Doctor doctors_patients.id, doctors_patients.doctor_id,
         }
     }
 
-配列構文を使って、より詳細な関係を定義することができます。 ::
-
-    // src/Model/Table/ArticlesTable.php の中で
-    class ArticlesTable extends Table
-    {
-
-        public function initialize(array $config)
-        {
-            $this->belongsToMany('Tags', [
-                'joinTable' => 'articles_tags',
-            ]);
-        }
-    }
+設定を使って、より詳細な関係を定義することができます。 ::
 
     // src/Model/Table/TagsTable.php の中で
     class TagsTable extends Table

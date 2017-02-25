@@ -183,19 +183,19 @@ AppController に追加しましょう。 ::
 
     public function isAuthorized($user)
     {
-        $action = $this->request->params['action'];
+        $action = $this->request->getParam('action');
 
         // add と index アクションは常に許可します。
         if (in_array($action, ['index', 'add', 'tags'])) {
             return true;
         }
         // その他のすべてのアクションは、id を必要とします。
-        if (!$this->request->param('pass.0')) {
+        if (!$this->request->getParam('pass.0')) {
             return false;
         }
 
 	// ブックマークが現在のユーザに属するかどうかをチェック
-        $id = $this->request->param('pass.0');
+        $id = $this->request->getParam('pass.0');
         $bookmark = $this->Bookmarks->get($id);
         if ($bookmark->user_id == $user['id']) {
             return true;
@@ -209,7 +209,7 @@ AppController に追加しましょう。 ::
 
     // src/Template/Layout/default.ctp の中の
     // 既存のフラッシュメッセージの下で
-    <?= $this->Flash->render('auth') ?>
+    <?= $this->Flash->render() ?>
 
 これで許可エラーメッセージが表示されるはずです。
 
