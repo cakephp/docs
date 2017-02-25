@@ -734,16 +734,16 @@ Javascript をバッファリングした後、
 HtmlHelper によるタグ出力の変更
 =================================
 
-.. php:method:: templates($templates)
+.. php:method:: setTemplates($templates)
 
 ``$templates`` パラメータは、読み込みたいタグを含む PHP ファイルへの文字列ファイルパスか、
 追加/置換するためのテンプレートの配列です。 ::
 
     // config/my_html.php からテンプレートを読み込む。
-    $this->Html->templates('my_html.php');
+    $this->Html->setTemplates('my_html.php');
 
     // 指定したテンプレートを読み込む。
-    $this->Html->templates([
+    $this->Html->setTemplates([
         'javascriptlink' => '<script src="{{url}}" type="text/javascript"{{attrs}}></script>'
     ]);
 

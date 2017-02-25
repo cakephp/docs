@@ -627,9 +627,10 @@ hasMany と belongsToMany アソシエーションに対してのパッチのた
     // テーブルまたはビヘイビアクラスの中で
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
-       if (isset($data['username'])) {
-           $data['username'] = mb_strtolower($data['username']);
-       }
+        if (isset($data['username'])) {
+            $data['username'] = mb_strtolower($data['username']);
+        }
+    }
 
 ``$data`` パラメータは ``ArrayObject`` のインスタンスですので、
 エンティティを作成するのに使われるデータを変更するために return する必要はありません。
@@ -1092,13 +1093,45 @@ belongsToMany アソシエーションのそれぞれのエンティティは、
 検証することは重要です。複雑なデータを正しく処理するのに失敗することは、
 悪意のあるユーザーが通常ではできないデータを保存できてしまう結果になります。
 
+厳密な保存
+=============
+
+.. php:method:: saveOrFail($entity, $options = [])
+
+
+このメソッドを使用すると、アプリケーションルールのチェックに失敗したり、
+エンティティにエラーが含まれていたり、保存がコールバックによって中断された場合、
+:php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException` を投げます。
+これを使用することで、例えば、Shell のタスクの中で複雑なデータベースの操作を
+実行する際に役に立ちます。
+
+.. note::
+
+    このメソッドをコントローラ内で使用する場合、発生する可能性がある
+    ``PersistenceFailedException`` を必ず捕まえてください。
+
+保存に失敗したエンティティを追跡する場合、
+:php:meth:`Cake\\ORM\Exception\\PersistenceFailedException::getEntity()` メソッドを
+使用できます。 ::
+
+        try {
+            $table->saveOrFail($entity);
+        } catch (\Cake\ORM\Exception\PersistenceFailedException $e) {
+            echo $e->getEntity();
+        }
+
+これは内部的に :php:meth:`Cake\\ORM\\Table::save()`
+コールを実行するので、対応するすべての保存イベントはトリガーされます。
+
+.. versionadded:: 3.4.1
+
 複数のエンティティの保存
 ========================
 
 .. php:method:: saveMany($entities, $options = [])
 
 
-このメソッドを使うと、複数のエンティティを自動で保存することができます。 ``$entites`` は
+このメソッドを使うと、複数のエンティティを自動で保存することができます。 ``$entities`` は
 ``newEntities()`` / ``patchEntities()`` で作成されたエンティティの配列です。
 ``$options`` は ``save()`` で受け入れるいくつかのオプションを持っています。 ::
 
