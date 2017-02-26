@@ -14,7 +14,7 @@ only what you need.
 Starting a Form
 ===============
 
-.. php:method:: create(mixed $model = null, array $options = [])
+.. php:method:: create(mixed $context = null, array $options = [])
 
 The first method you'll need to use in order to take advantage of the FormHelper
 is ``create()``. This method outputs an opening form tag.
@@ -29,9 +29,9 @@ would see something like the following output in the rendered view:
 
     <form method="post" action="/users/add">
 
-The ``$model`` argument is used as the form's 'context'. There are several
+The ``$context`` argument is used as the form's 'context'. There are several
 built-in form contexts and you can add your own, which we'll cover in the next
-section. The built-in providers map to the following values of ``$model``:
+section. The built-in providers map to the following values of ``$context``:
 
 * An ``Entity`` instance or, an iterator map to the ``EntityContext``, this
   context allows FormHelper to work with results from the built-in ORM.
