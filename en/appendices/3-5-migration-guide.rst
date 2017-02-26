@@ -25,3 +25,6 @@ New Features
 
 * ``Cake\Event\EventManager::on()`` and ``off()`` methods are now chainable
   making it simpler to set multiple events at once.
+
+* ``Cake\Validation\Validator::regex()`` was added for a more convenient way
+  to validate data against a regex pattern.
