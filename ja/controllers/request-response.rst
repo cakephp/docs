@@ -511,8 +511,31 @@ download
 ストリーミングリソース
 ----------------------
 
-リソースストリームをレスポンスに変換するために ``body()`` でコールバックを使用することができます。 ::
+Diactoros の Stream を使用してファイルのレスポンスをストリーム化できます。 ::
 
+    // ファイルからのストリーム化
+    use Zend\Diactoros\Stream;
+
+    $stream = new Stream('/path/to/file', 'rb');
+    $response = $response->withStream($stream);
+
+また、 ``CallbackStream`` を使用してコールバックをストリーム化できます。
+クライアントへストリーム化する必要のある画像、CSV ファイル もしくは PDF
+のようなリソースがある場合に便利です。 ::
+
+    // コールバックからのストリーム化
+    use Cake\Http\CallbackStream;
+
+    // 画像の作成
+    $img = imagecreate(100, 100);
+    // ...
+
+    $stream = new CallbackStream(function () use ($img) {
+        imagepng($img);
+    });
+    $response = $response->withStream($stream);
+
+    // 3.4.0 より前では、次のようにストリーミングレスポンスを作成することができます。
     $file = fopen('/some/file.png', 'r');
     $this->response->body(function () use ($file) {
         rewind($file);
