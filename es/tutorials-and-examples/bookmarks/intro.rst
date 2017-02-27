@@ -69,6 +69,7 @@ Ahora podría ser un buen momento para que aprendas un poco sobre como funciona 
 Comprobar la instalación
 =========================
 
+Podemos comprobar rápidamente que nuestra instalación ha sido correcta accediendo a la página principal que se crea por defecto. 
 
 Pero antes necesitarás inicializar el servidor de desarrollo::
 
@@ -78,6 +79,7 @@ Pero antes necesitarás inicializar el servidor de desarrollo::
 
     Para Windows introduce el comando ``bin\cake server`` (fíjate en la \\ ).
     
+Esto arrancará el servidor integrado en el puerto 8765. Accede a  **http://localhost:8765** a través de tu navegador para ver la página de bienvenida. Todos los items deberán estar marcados como correctos para que CakePHP pueda conectarse a tu base de datos. Si no, puede que necesites instalar extensiones adicionales de PHP, o dar permisos de directorio.
 
 Crear la base de datos
 =======================
