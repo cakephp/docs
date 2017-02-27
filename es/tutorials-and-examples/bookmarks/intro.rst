@@ -1,5 +1,5 @@
 Tutorial - Bookmarker (Favoritos)
-###################
+##################################
 
 Este tutorial te guiará en la creación de una aplicación sencilla para el guardado de favoritos (Bookmaker).
 
@@ -7,7 +7,7 @@ Para comenzar instalaremos CakePHP creando nuestra base de datos y utilizaremos 
 
 Esto es lo que necesitarás:
 
-#. Un servidor de base de datos. Nosotros utilizaremos MySQL en este tutorial. Necesitarás saber los suficiente de SQL para crear una base de datos; CakePHP tomará las riendas desde ahí. Al utilizar MySQL asegúrate de que tienes habilitado ``pdo_mysql`` en PHP.   
+#. Un servidor de base de datos. Nosotros utilizaremos MySQL en este tutorial. Necesitarás tener los conocimientos suficientes de SQL para crear una base de datos; CakePHP tomará las riendas desde ahí. Al utilizar MySQL asegúrate de que tienes habilitado ``pdo_mysql`` en PHP.   
 #. Conocimientos básicos de PHP.
 
 Antes de empezar deberías de asegurarte de que tienes actualizada la versión de PHP:
@@ -21,7 +21,7 @@ Deberías tener instalado PHP |minphpversion| (CLI) o superior. La versión PHP 
 Empecemos!
 
 Instalar CakePHP
-===============
+=================
 
 La forma más sencilla de instalar CakePHP es utilizando Composer, una manera sencilla de instalar CakePHP desde tu terminal o prompt de línea de comandos.
 
@@ -31,7 +31,7 @@ Primero necesitarás descargar e instalar Composer si aún no lo tienes. Si ya t
 
 O puedes descargar ``composer.phar`` desde la `Página web de Composer <https://getcomposer.org/download/>`_.
 
-Después sencillamente escribe la siguiente línea en tu terminal desde tu directorio de instalación para instalar el esqueleto de la apliación CakePHP en el directorio **bookmarker**::
+Después sencillamente escribe la siguiente línea en tu terminal desde tu directorio de instalación para instalar el esqueleto de la aplicación CakePHP en el directorio **bookmarker**::
 
     php composer.phar create-project --prefer-dist cakephp/app bookmarker
 
@@ -69,7 +69,6 @@ Ahora podría ser un buen momento para que aprendas un poco sobre como funciona 
 Comprobar la instalación
 =========================
 
-Podemos comprobar rápidamente que nuestra instalación fuese correctamente  accediendo a la página principal que se crea por defecto. 
 
 Pero antes necesitarás inicializar el servidor de desarrollo::
 
@@ -79,16 +78,15 @@ Pero antes necesitarás inicializar el servidor de desarrollo::
 
     Para Windows introduce el comando ``bin\cake server`` (fíjate en la \\ ).
     
-Estó arrancará el servidor integrado en el puerto 8765. Accede a  **http://localhost:8765** a través de tu navegador para ver la página de bienvenida. Todos los items deberán estár marcadados como correctos para que CakePHP pueda conectarse a tu base de datos. Si no puede que necesites instalar extensiones adicionales de PHP, o dar permisos de directorio.
 
 Crear la base de datos
-=====================
+=======================
 
 Continuamos, creemos ahora la base de datos para nuestra aplicación de favoritos.
 
 Si aún no lo has hecho, crea una base de datos vacía para usar en este tutorial con el nombre que tu quieras, e.g. ``cake_bookmarks``. 
 
-Puedes ejecutar la siguiente SQL para crear las tablas necesarias::
+Puedes ejecutar la siguiente sentencia SQL para crear las tablas necesarias::
 
     CREATE TABLE users (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -129,10 +127,10 @@ Puedes ver que la tabla ``bookmarks_tags`` utiliza una clave primaria compuesta.
 
 Los nombres de las tablas y columnas que hemos utilizado no son aleatorios. Utilizando las :doc:`convenciones de nombres </intro/conventions>` podemos hacer mejor uso de CakePHP y evitar tener que configurar el framework.
 
-CakePHP es lo suficiéntemente flexible para acomodarse incluso a esquemas inconsistentes de bases de datos heredados, pero siguiendo las convenciones ahorrarás tiempo.
+CakePHP es lo suficientemente flexible para acomodarse incluso a esquemas inconsistentes de bases de datos heredados, pero siguiendo las convenciones ahorrarás tiempo.
 
 Configuración de la base de datos
-======================
+==================================
 
 Siguiente, indiquémosle a CakePHP donde está nuestra base de datos y como conectarse a ella. Para la mayoría de las veces esta será la primera y última vez que necesitarás configurar algo.
 
@@ -162,10 +160,10 @@ able to connect to the database' tiene un chechmark de correcto.
 
 .. note::
 
-    Puedes encontrar una copia de la configuración por defecto de CakePHP's en **config/app.default.php**.
+    Puedes encontrar una copia de la configuración por defecto de CakePHP en **config/app.default.php**.
 
 Crear el esqueleto del código
-========================
+==============================
 
 Gracias a que nuestra base de datos sigue las convenciones de CakePHP podemos utilizar la :doc:`consola de bake </bake/usage>` de la aplicación para crear rápidamente una aplicación básica.
 
@@ -189,7 +187,7 @@ Una vez estés en la lista de bookmarks añade unos cuantos usuarios (users), fa
     Si ves una página de error Not Found (404) comprueba que el módulo de Apache mod_rewrite está cargado.
 
 Añadir encriptación (hashing) a la contraseña
-=======================
+==============================================
 
 Cuando creaste tus usuarios (visitando **http://localhost:8765/users**) probablemente te darías cuenta de que las contraseñas (password) se almacenaron en texto plano. Algo muy malo desde un punto de vista de seguridad, así que arreglémoslo.
 
@@ -235,7 +233,7 @@ CakePHP encripta contraseñas con `bcrypt
       Si la contraseña no se ha encriptado asegúrate de que has usado el mismo estilo de escritura que el del atributo password de la clase cuando nombraste la función setter.
 
 Obtener bookmarks con un tag específico
-=====================================
+========================================
 
 Ahora que estamos almacenando contraseñas con seguridad podemos añadir alguna funcionalidad interesante a nuestra aplicación.
 
@@ -283,7 +281,7 @@ Modifica tu **config/routes.php** para que se vea como ésto::
 
 Lo cual define una nueva 'ruta' que conecta el path **/bookmarks/tagged/** a ``BookmarksController::tags()``.
 
-Con la definición de rutas puedes separar como se ven tus URLs de como se implementan. Si visitamos **http://localhost:8765/bookmarks/tagged**, podremos ver una página de error bastante útil de CakePHP informando de que no existe la acción del controlador.
+Con la definición de rutas puedes separar como se ven tus URLs de como se implementan. Si visitamos **http://localhost:8765/bookmarks/tagged**, podremos ver una página de error bastante útil de CakePHP informando que no existe la acción del controlador.
 
 Implementemos ahora ese método.
 
@@ -310,7 +308,7 @@ En **src/Controller/BookmarksController.php** añade::
 Para acceder a otras partes del request consulta :ref:`cake-request`.
 
 Crear el método finder
---------------------------
+-----------------------
 
 En CakePHP nos gusta mantener las acciones de los controladores sencillas y poner la mayoría de la lógica de la aplicación en los modelos. Si visitas ahora la URL **/bookmarks/tagged** verás un error de que el método ``findTagged()`` no ha sido implementado todavía, asi que hagámoslo.
 
@@ -346,7 +344,7 @@ Los métodos finder siempre reciben un objeto :doc:`/orm/query-builder` y un arr
 En nuestro método finder sacamos provecho de los métodos ``distinct()`` y ``matching()`` que nos permiten encontrar distintos ('distincts') bookmarks que tienen un tag coincidente (matching). El método ``matching()`` acepta una  `función anónima <http://php.net/manual/es/functions.anonymous.php>`_ que recibe un generador de consultas. Dentro del callback usaremos este generador para definir las condiciones que filtrarán bookmarks que tienen las etiquetas (tags) especificadas.
 
 Crear la vista
------------------
+---------------
 
 Ahora si visitas la URL **/bookmarks/tagged**, CakePHP mostrará un error advirtiéndote de que no has creado un archivo de vista.
 
