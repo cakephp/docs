@@ -13,7 +13,7 @@ FormHelper は、柔軟でもあります。通常は規約に沿ってほとん
 フォームの開始
 ==============
 
-.. php:method:: create(mixed $model = null, array $options = [])
+.. php:method:: create(mixed $context = null, array $options = [])
 
 FormHelper を活用するために最初に使うメソッドは ``create()`` です。
 このメソッドは、フォームの開始タグを出力します。
@@ -27,9 +27,9 @@ FormHelper を活用するために最初に使うメソッドは ``create()`` �
 
     <form method="post" action="/users/add">
 
-``$model`` 引数は、フォームの「コンテキスト」として使用されます。
+``$context`` 引数は、フォームの「コンテキスト」として使用されます。
 いくつかの組み込みフォームのコンテキストがあり、独自に追加することができます。次のセクションで説明します。
-組み込みのプロバイダーは、 ``$model`` の次の値とマップします。
+組み込みのプロバイダーは、 ``$context`` の次の値とマップします。
 
 * ``Entity`` インスタンスまたはイテレータは、 ``EntityContext`` にマップされます。
   このコンテキストは、FormHelper が組み込みの ORM の結果を処理できるようにします。
