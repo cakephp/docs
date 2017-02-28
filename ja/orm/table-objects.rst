@@ -35,7 +35,7 @@
 テーブルオブジェクトは、クラス名を小文字とアンダースコア区切りにした名前のテーブルを使用します。
 上記の例では ``articles`` テーブルが使用されます。テーブルクラスが ``BlogPosts``
 という名前の場合、テーブルは ``blog_posts`` と名付けてください。
-あなたは、 ``table()`` メソッドを使用することでテーブルを指定できます。 ::
+あなたは、 ``setTable()`` メソッドを使用することでテーブルを指定できます。 ::
 
     namespace App\Model\Table;
 
@@ -46,6 +46,9 @@
 
         public function initialize(array $config)
         {
+            $this->setTable('my_table');
+
+            // 3.4 より前
             $this->table('my_table');
         }
 
@@ -53,7 +56,7 @@
 
 テーブルを指定した時は、命名規則は適用されません。規約により、ORM はそれぞれのテーブルが
 ``id`` という名前の主キーを持っていることを前提としています。もし主キーの名前を変更する
-必要がある場合、 ``primaryKey`` メソッドが使用できます。 ::
+必要がある場合、 ``setPrimaryKey()`` メソッドが使用できます。 ::
 
     namespace App\Model\Table;
 
@@ -63,6 +66,9 @@
     {
         public function initialize(array $config)
         {
+            $this->setPrimaryKey('my_id');
+
+            // 3.4 より前
             $this->primaryKey('my_id');
         }
     }
@@ -73,12 +79,15 @@
 デフォルトではテーブルオブジェクトは命名規則に従った Entity クラスを使います。
 たとえば、 ``ArticlesTable`` というテーブルクラスの名前だったらエンティティは ``Article``
 に、 ``PurchaseOrdersTable`` というテーブルクラスの名前だったらエンティティは ``PurchaseOrder``
-になります。もし命名規約に従わない場合は、 ``entityClass()`` メソッドで設定を変えられます。 ::
+になります。もし命名規約に従わない場合は、 ``setEntityClass()`` メソッドで設定を変えられます。 ::
 
     class PurchaseOrdersTable extends Table
     {
         public function initialize(array $config)
         {
+            $this->setEntityClass('App\Model\Entity\PO');
+
+            // 3.4 より前
             $this->entityClass('App\Model\Entity\PO');
         }
     }
