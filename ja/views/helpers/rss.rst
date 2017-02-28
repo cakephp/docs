@@ -97,21 +97,18 @@ RSS レイアウトはとてもシンプルです。 **src/Template/Layout/rss/d
 ``$documentData`` や ``$channelData`` はコントローラ内でセットしていませんが、CakePHP では、ビューからレイアウトに変数を渡すことができます。
 ``$channelData`` 配列がどこにあるかは、フィードのメタデータ全てをセットしてから得られます。
 
+次に articles/index のビューファイルを作成します。
+私たちが作成したレイアウトファイルのように **src/Template/Posts/rss/** ディレクトリを作成し、
+そのフォルダの中に **index.ctp** を作成する必要があります。ファイルの内容は以下の通りです。
 
-Next up is view file for my articles/index. Much like the layout file
-we created, we need to create a **src/Template/Posts/rss/** directory and
-create a new **index.ctp** inside that folder. The contents of the file
-are below.
+ビュー
+-----------------------------------
 
-View
-----
-
-Our view, located at **src/Template/Posts/rss/index.ctp**, begins by setting the
-``$documentData`` and ``$channelData`` variables for the layout, these contain
-all the metadata for our RSS feed. This is done by using the
-:php:meth:`Cake\\View\\View::set()` method which is analogous to the
-:php:meth:`Cake\\Controller\\Controller::set()` method. Here though we are
-passing the channel's metadata back to the layout::
+私たちのビューは **src/Template/Posts/rss/index.ctp** に置かれ、レイアウトのための ``$documentData`` と ``$channelData`` 変数を設定を始めます。
+これらの変数は、RSS フィードのためのすべてのメタデータを含みます。
+これは、 :php:meth:`Cake\\Controller\\Controller::set()` メソッドと同様の :php:meth:`Cake\\View\\View::set()` メソッドを使って行われます。
+ここでチャンネルのメタデータを渡すとレイアウトに戻ります。
+::
 
     $this->set('channelData', [
         'title' => __("Most Recent Posts"),
@@ -120,24 +117,19 @@ passing the channel's metadata back to the layout::
         'language' => 'en-us'
     ]);
 
-The second part of the view generates the elements for the actual records of
-the feed. This is accomplished by looping through the data that has been passed
-to the view ($items) and using the :php:meth:`RssHelper::item()` method. The
-other method you can use, :php:meth:`RssHelper::items()` which takes a callback
-and an array of items for the feed. The callback method is usually called
-``transformRss()``. There is one downfall to this method, which is that you
-cannot use any of the other helper classes to prepare your data inside the
-callback method because the scope inside the method does not include anything
-that is not passed inside, thus not giving access to the TimeHelper or any
-other helper that you may need. The :php:meth:`RssHelper::item()` transforms
-the associative array into an element for each key value pair.
+ビューの後半部分は、実際のフィードのレコードのための要素を生成します。
+これは、ビューの $items に渡されたデータをループし、 :php:meth:`RssHelper::item()` を使うことによって実現します。 
+その他のメソッドも使用できます。 :php:meth:`RssHelper::items()` はコールバックとフィードの items 配列を受け取とります。
+コールバックメソッドとしてよく ``transformRss()`` が使用されます。
+
+メソッドの中のスコープは、その中まで他のヘルパークラスを通すことができないため、
+コールバックメソッドの中でデータを用意するために他のヘルパークラスを利用できません。
+したがって、 TimeHelper や他の必要なヘルパーにアクセスすることができません。
+:php:meth:`RssHelper::item()` は、連想配列をキーと値のペアを持つ要素に変換します。
 
 .. note::
-
-    You will need to modify the $link variable as appropriate to
-    your application. You might also want to use a
-    :ref:`virtual property <entities-virtual-properties>` in your Entity.
-
+    アプリケーションに適切な $link 変数を修正する必要があります。
+    また、Entity 内で :ref:`virtual property <entities-virtual-properties>` を使いたいでしょう。
 ::
 
     foreach ($articles as $article) {
@@ -169,27 +161,21 @@ the associative array into an element for each key value pair.
         ]);
     }
 
-You can see above that we can use the loop to prepare the data to be transformed
-into XML elements. It is important to filter out any non-plain text characters
-out of the description, especially if you are using a rich text editor for the
-body of your blog. In the code above we used ``strip_tags()`` and
-:php:func:`h()` to remove/escape any XML special characters from the content,
-as they could cause validation errors. Once we have set up the data for the
-feed, we can then use the :php:meth:`RssHelper::item()` method to create the XML
-in RSS format. Once you have all this setup, you can test your RSS feed by going
-to your site ``/posts/index.rss`` and you will see your new feed. It is always
-important that you validate your RSS feed before making it live. This can be
-done by visiting sites that validate the XML such as Feed Validator or the w3c
-site at http://validator.w3.org/feed/.
+上記は、ループして XML 要素の中に変換するデータを用意しています。
+特にブログの本文のためのリッチテキストエディタを使用している場合には、 プレーンテキストではない文字を除外することは重要です。
+上記のコードでは、 ``strip_tags()`` と :php:func:`h()` を使って、バリデーションエラーを引き起こす XML 特殊文字を本文から削除・エスケープしています。
+ひとたびフィードのためのデータをセットアップしたら、RSS 形式の XML を作成するために :php:meth:`RssHelper::item()` メソッドを使用します。
+一旦このセットアップをすべて行ったら、あなたのサイトの ``/posts/index.rss`` へアクセスして RSS フィードをテストでき、新しいフィードを確認します。
+本番で作成する前に RSS フィードを検証することは重要です。
+Feed Validator や w3c サイトの http://validator.w3.org/feed/ など、XML を検証するサイトで確認することができます。
 
 .. note::
 
-    You may need to set the value of 'debug' in your core configuration
-    to ``false`` to get a valid feed, because of the various debug
-    information added automagically under higher debug settings that
-    break XML syntax or feed validation rules.
-
+    正しいフィードを取得するためにコア設定内で ‘debug’ の値を ``false`` にセットする必要があります。
+    because of the various debug information added automagically under higher debug settings that break XML syntax or feed validation rules.
+    高い debug の設定下では様々なデバッグ情報が自動的に追加され、それが XML 構文やフィードのバリデーションルールを壊すからです。
+        
 .. meta::
     :title lang=ja: RssHelper
-    :description lang=ja: The RssHelper makes generating XML for RSS feeds easy.
+    :description lang=ja: RssHelper は RSS フィード用の XML 構文を簡単に作成します。
     :keywords lang=ja: rss helper,rss feed,isrss,rss item,channel data,document data,parse extensions,request handler
