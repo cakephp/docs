@@ -155,7 +155,108 @@
     {
         return false;
     }
+
+Также добавьте следующее в настройки ``Auth`` в вашем ``AppController``::
+
+    'authorize' => 'Controller',
+
+Ваш метод ``initialize()`` должен выглядеть следующим образом::
+
+        public function initialize()
+        {
+            $this->loadComponent('Flash');
+            $this->loadComponent('Auth', [
+                'authorize'=> 'Controller',//добавили эту строку
+                'authenticate' => [
+                    'Form' => [
+                        'fields' => [
+                            'username' => 'email',
+                            'password' => 'password'
+                        ]
+                    ]
+                ],
+                'loginAction' => [
+                    'controller' => 'Users',
+                    'action' => 'login'
+                ],
+                'unauthorizedRedirect' => $this->referer()
+            ]);
+
+            // Разрешаем экшен display чтобы наш контроллер pages
+            // продолжал работать.
+            $this->Auth->allow(['display']);
+        }
+        
+По умолчанию доступ будет запрещен, а по мере необходимости мы будем открывать
+его там где это потребуется. Во-первых мы добавим логику авторизации для
+закладок. В вашем контроллере ``BookmarksController`` добавьте следующее::
+
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+
+        // Экшены add и index всегда разрешены.
+        if (in_array($action, ['index', 'add', 'tags'])) {
+            return true;
+        }
+        // Для всех остальных экшенов требуется id.
+        if (!$this->request->getParam('pass.0')) {
+            return false;
+        }
+
+        // Провекряем, что закладка принадлежит текущему пользователю.
+        $id = $this->request->getParam('pass.0');
+        $bookmark = $this->Bookmarks->get($id);
+        if ($bookmark->user_id == $user['id']) {
+            return true;
+        }
+        return parent::isAuthorized($user);
+    }
+
+
+Теперь если вы попытаетесь просмотреть, отредактировать или удалить закладки,
+которые вам не принадлежат, вы будете перенаправлены на ту страницу, откуда
+вы пришли. Если вы не увидели сообщения об ошибке, добавьте в ваш лейаут
+следующее::
+
+    // В src/Template/Layout/default.ctp
+    <?= $this->Flash->render() ?>
     
+Теперь вы должны видеть сообщения об ошибках авторизации.
+
+Доработка форм и Вида списка закладок
+=====================================
+
+В то время, как экшены view и delete работают, у экшенов edit, view и index
+имеются некоторыен проблемы:
+
+#. При добавлении закладки вы можете выбрать пользователя.
+#. При редактировании закладки вы можете выбрать пользователя.
+#. В списке выводятся закладки всех пользователей.
+
+Давайте для начала разберемся с формой для добавления закладок. Удалите
+``input('user_id')`` из шаблона **src/Template/Bookmarks/add.ctp**. Также
+нам нужно обновить экшен ``add()`` в **src/Controller/BookmarksController.php**,
+чтобы он принял следующий вид::
+
+    public function add()
+    {
+        $bookmark = $this->Bookmarks->newEntity();
+        if ($this->request->is('post')) {
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->getData());
+            $bookmark->user_id = $this->Auth->user('id');
+            if ($this->Bookmarks->save($bookmark)) {
+                $this->Flash->success('Закладка была сохранена.');
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error('Ошибка сохранения. Пожалуйста попробуйте еще раз.');
+        }
+        $tags = $this->Bookmarks->Tags->find('list');
+        $this->set(compact('bookmark', 'tags'));
+        $this->set('_serialize', ['bookmark']);
+    }
+    
+
 
 .. note::
     The documentation is not currently supported in Russian language for this
