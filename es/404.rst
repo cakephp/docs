@@ -1,7 +1,6 @@
 :orphan: True
 
-Not Found
-#########
+No encontrado
+#############
 
-The page you're looking for cannot be found. Try using the search bar to find
-what you're looking for.
+No se ha podido encontrar la página que estabas buscando. Prueba a utilizar la barra de búsqueda para encontar lo que estás buscando.
