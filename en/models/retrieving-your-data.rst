@@ -978,7 +978,7 @@ will return records where the post title is not null::
 
 To handle ``BETWEEN`` queries, you can use the following::
 
-    array('Post.read_count BETWEEN ? AND ?' => array(1,10))
+    array('Post.read_count BETWEEN ? AND ?' => array(1, 10))
 
 .. note::
 
