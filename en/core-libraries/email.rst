@@ -236,7 +236,9 @@ The templates for emails reside in a special folder in your application's
 and elements just like normal views::
 
     $email = new Email();
-    $email->setTemplate('welcome', 'fancy')
+    $email
+        ->setTemplate('welcome')
+        ->setLayout('fancy')
         ->setEmailFormat('html')
         ->setTo('bob@example.com')
         ->setFrom('app@domain.com')
@@ -247,7 +249,9 @@ and **src/Template/Layout/Email/html/fancy.ctp** for the layout. You can
 send multipart templated email messages as well::
 
     $email = new Email();
-    $email->setTemplate('welcome', 'fancy')
+    $email
+        ->setTemplate('welcome')
+        ->setLayout('fancy')
         ->setEmailFormat('both')
         ->setTo('bob@example.com')
         ->setFrom('app@domain.com')
