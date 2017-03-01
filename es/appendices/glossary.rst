@@ -3,14 +3,14 @@ Glosario
 
 .. glossary::
 
-    arreglo de rutas
-        Un arreglo de atributos que son pasados a :php:meth:`Router::url()`.
+    array de rutas
+        Un array de atributos que son pasados a :php:meth:`Router::url()`.
         Típicamente se ve algo así::
 
             ['controller' => 'Posts', 'action' => 'view', 5]
 
     Atributos HTML
-        Un arreglo con claves => valores que son colocados en los atributos HTML. Por ejemplo::
+        Un array con claves => valores que son colocados en los atributos HTML. Por ejemplo::
 
             // Dado
             ['class' => 'mi-clase', 'target' => '_blank']
@@ -37,12 +37,12 @@ Glosario
             'AcmeCorp/Tools.Toolbar'
 
     Notación de punto
-        La notación de punto define una arreglo de rutas, separando los niveles anidados con ``.``
+        La notación de punto define un array de rutas, separando los niveles anidados con ``.``
         Por ejemplo::
 
             Cache.default.engine
 
-        Apuntará a el siguiente valor::
+        Apuntará al siguiente valor::
 
             [
                 'Cache' => [
@@ -63,18 +63,18 @@ Glosario
 
     routes.php
         Un archivo en el directorio ``config`` que contiene las configuraciones de enrutamiento.
-        Este archivo es incluido antes que cada petición sea procesada.
+        Este archivo se incluye antes de que cada petición sea procesada.
         Se deben conectar todas las rutas que necesita tu aplicación para que cada petición sea enrutada
         correctamente al controlador + acción.
 
     DRY
         *Don't repeat yourself*. Es un principio de desarrollo de software orientado a
         reducir la repetición de la información de todo tipo. En CakePHP, DRY
-        se utiliza para que pueda escribir las cosas una vez y reutilizarlos
+        se utiliza para que se pueda escribir las cosas una vez y reutilizarlos
         a través de su aplicación.
 
     PaaS
-        *Platform as a Service*. Las Plataforma como proveedores de servicios
+        *Platform as a Service*. La plataforma como servicio
         proporcionará recursos de hosting, bases de datos y almacenamiento
         en caché basado en la nube. Algunos proveedores populares incluyen
         Heroku, EngineYard y PagodaBox.
