@@ -139,11 +139,11 @@ version is being released. Additionally composer does not cache development
 branches, so it slows down consecutive composer installs/updates.
 
 Installation using Oven
---------------------------------------------------
+-----------------------
 
 Another quick way to install CakePHP is `Oven <https://github.com/CakeDC/oven>`_. 
-It is a simple PHP script which checks the
-necessary system requirements, installs the CakePHP application skeleton and setup the development environment.
+It is a simple PHP script which checks the necessary system requirements,
+installs the CakePHP application skeleton and setup the development environment.
 
 * Upload the oven.php to your server directory.
 * Execute the oven.php via your browser and click on the big oven icon.
