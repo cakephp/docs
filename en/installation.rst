@@ -145,9 +145,6 @@ Another quick way to install CakePHP is `Oven <https://github.com/CakeDC/oven>`_
 It is a simple PHP script which checks the necessary system requirements,
 installs the CakePHP application skeleton and sets the development environment up.
 
-* Upload the oven.php to your server directory.
-* Execute the oven.php via your browser and click on the big oven icon.
-
 After the installation completes, your CakePHP application is ready to go!
 
 .. note::
