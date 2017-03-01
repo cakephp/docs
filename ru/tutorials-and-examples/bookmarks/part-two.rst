@@ -256,6 +256,52 @@
         $this->set('_serialize', ['bookmark']);
     }
     
+Устанавливая значение сущности (entity) из данных сессии, мы исключаем любую
+возможность изменения пользователем информации о том кому принадлежит закладка.
+Мы сделаем то же самое для формы и экшена edit. Ваш экшен ``edit()`` из
+**src/Controller/BookmarksController.php** должен выглядеть так::
+
+    public function edit($id = null)
+    {
+        $bookmark = $this->Bookmarks->get($id, [
+            'contain' => ['Tags']
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->getData());
+            $bookmark->user_id = $this->Auth->user('id');
+            if ($this->Bookmarks->save($bookmark)) {
+                $this->Flash->success('Закладка сохранена.');
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error('Закладка не может быть сохранена. Пожалуйста, попробуйте еще раз.');
+        }
+        $tags = $this->Bookmarks->Tags->find('list');
+        $this->set(compact('bookmark', 'tags'));
+        $this->set('_serialize', ['bookmark']);
+    }
+    
+Вид списка
+----------
+
+Теперь нам только осталось вывести список закладок текущего пользователя. Мы
+можем сделать это обновив вызов метода ``paginate()``. Измените ваш экшен
+``index()`` из **src/Controller/BookmarksController.php**::
+
+    public function index()
+    {
+        $this->paginate = [
+            'conditions' => [
+                'Bookmarks.user_id' => $this->Auth->user('id'),
+            ]
+        ];
+        $this->set('bookmarks', $this->paginate($this->Bookmarks));
+        $this->set('_serialize', ['bookmarks']);
+    }
+
+Мы также должны обновить экшен ``tags()`` и соответствующий поисковый метод, но
+мы оставим вам данную задачу в качестве тренировки для самостоятельного 
+решения.
+
 
 
 .. note::
