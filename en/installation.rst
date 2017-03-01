@@ -138,6 +138,22 @@ Be aware that is not recommended, as your application can break when the next ma
 version is being released. Additionally composer does not cache development
 branches, so it slows down consecutive composer installs/updates.
 
+Installation using Oven
+-----------------------
+
+Another quick way to install CakePHP is `Oven <https://github.com/CakeDC/oven>`_. 
+It is a simple PHP script which checks the necessary system requirements,
+installs the CakePHP application skeleton and sets the development environment up.
+
+After the installation completes, your CakePHP application is ready to go!
+
+.. note::
+
+    IMPORTANT: This is not a deployment script, it is aimed to help developers installing
+    CakePHP for the first time and get a working development environment up and running 
+    in seconds. Production environments should consider several other factors, like 
+    file permissions, virtualhost configuration, etc.
+
 Permissions
 ===========
 
