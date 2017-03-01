@@ -960,7 +960,7 @@ Query オブジェクトでは :doc:`Collection </core-libraries/collections>`
         return $row->id;
     });
 
-    $maxAge = $query->max(function ($row) {
+    $maxAge = $query->max(function ($max) {
         return $max->age;
     });
 

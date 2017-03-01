@@ -1032,7 +1032,7 @@ query pour traiter préalablement ou transformer les résultats::
         return $row->id;
     });
 
-    $maxAge = $query->max(function ($row) {
+    $maxAge = $query->max(function ($max) {
         return $max->age;
     });
 
