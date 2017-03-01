@@ -509,12 +509,6 @@ ORM とオブジェクトの結果セットは強力である一方で、エン�
             return $row;
         });
     });
-    $query->formatResults(function (\Cake\Collection\CollectionInterface $results) {
-        return $results->map(function ($row) {
-            $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
-            return $row;
-        });
-    });
 
 上記の例にあるように、フォーマッタ関数(フォーマットするコールバック)の第１引数に
 ``ResultSetDecorator`` が渡されています。第２引数にはフォーマッタ関数がセットされる
