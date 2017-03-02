@@ -129,7 +129,7 @@ Habilitar registros
 ===================
 
 Si no estás logueado e intentas acceder a **/users/add** eres reenviado a la 
-página de login. Deberíamos arreglar ésto si queremos permitir que la gente se 
+página de login. Deberíamos arreglar esto si queremos permitir que la gente se 
 pueda registrar en nuestra aplicación.
 
 En el controlador ``UsersController`` añade lo siguiente::
@@ -154,7 +154,7 @@ Restringiendo el acceso a favoritos
 ===================================
 
 Ahora que los usuarios pueden loguearse queremos restringir los favoritos que 
-uno puede ver a los que creó. Ésto lo haremos usando un adaptador de 
+uno puede ver a los que creó. Esto lo haremos usando un adaptador de 
 'authorization'.
 
 Ya que nuestro requisito es muy sencillo podremos escribir un código también muy 
@@ -317,9 +317,8 @@ Podemos hacer eso actualizando la llamada a ``paginate()``. Haz que tu método
         $this->set('_serialize', ['bookmarks']);
     }
 
-
-Deberíamos actualizar también el método	``tags()`` y el método finder 
-relacionaodo, pero lo dejaremos como un ejercico para que lo hagas por tu cuenta.
+Deberíamos actualizar también el método ``tags()`` y el método finder relacionado, 
+pero lo dejaremos como un ejercicio para que lo hagas por tu cuenta.
 
 Mejorar la experiencia de etiquetado
 ====================================
@@ -328,7 +327,7 @@ Ahora mismo añadir nuevos tags es un proceso complicado desde que
 ``TagsController`` desautorizó todos los accesos.
 
 En vez de permitirlos podemos mejorar la *UI* para la selección de tags 
-utilizando un campo de texto separado por comas. Ésto proporcionará una mejor 
+utilizando un campo de texto separado por comas. Esto proporcionará una mejor 
 experiencia para nuestros usuarios y usa algunas de las mejores características de *ORM*.
 
 Añadir un campo calculado
