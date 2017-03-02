@@ -189,7 +189,7 @@ even if the schema allows NULLs.
 
 You can utilize Entity mutators to define how entities' empty values are being saved.
 
-Example saving `NULL`` if given parent id is not a valid integer ::
+Example saving ``NULL`` if given parent id is not a valid integer ::
 
     namespace App\Model\Entity;
 
@@ -207,6 +207,7 @@ Example saving `NULL`` if given parent id is not a valid integer ::
             if (is_string($parentId) && (string)intval($parentId) === $parentId) {
                 return (int)$parentId;
             }
+
             return null;
         }
 
@@ -227,6 +228,7 @@ Example returning ``NULL`` for non-true boolean or boolean-like value ::
             if ($isDefault === true || $isDefault === 1 || $isDefault === '1') {
                 return true;
             }
+
             return null;
         }
 
