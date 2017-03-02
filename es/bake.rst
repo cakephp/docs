@@ -25,7 +25,7 @@ Bake está incluido como un plugin que puedes instalar con Composer::
 
 La instrucción anterior instalará bake como una dependencia de desarrollo. Esto
 significa que no será instalado cuando hagas despliegues en producción. Las
-siguientes secciones hablan de bake con más detalle::
+siguientes secciones hablan de bake con más detalle:
 
 .. toctree::
     :maxdepth: 1
