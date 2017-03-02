@@ -164,6 +164,13 @@ customize the bit-mask used to generate JSON. See the
 `json_encode <http://php.net/json_encode>`_ documentation for the valid
 values of this option.
 
+For example, to gain consistent validation errors from CakePHP to JSON Example::
+
+    // In your controller's action when saving failed
+    $this->set('errors', $articles->errors());
+    $this->set('_jsonOptions', JSON_FORCE_OBJECT);
+    $this->set('_serialize', ['errors']);
+
 JSONP Responses
 ---------------
 
