@@ -1774,6 +1774,15 @@ For example::
         null,
         ['legend' => 'Update your post']
     );
+    // Or prior to 3.4.0:
+    echo $this->Form->allInputs(
+        [
+            'name' => ['label' => 'custom label']
+        ],
+        null,
+        ['legend' => 'Update your post']
+    );
+
 
 If you disable the fieldset, the legend will not print.
 
@@ -1785,6 +1794,8 @@ specific fields from the generated controls, set them to ``false`` in the fields
 parameter::
 
     echo $this->Form->allControls(['password' => false]);
+    // Or prior to 3.4.0:
+    echo $this->Form->allInputs(['password' => false]);
 
 .. _associated-form-inputs:
 
