@@ -681,6 +681,27 @@ use the values that are defined in the **app.php**. You can use
 environment variables in a local development. See the Readme instructions of the
 library for more information.
 
+
+Disabling Auto-Tables
+=====================
+
+While auto-tables are really useful when quickly creating new applications and baking models, they can be hard to debug.
+
+You can see if any query was fired of auto-tables when you go to history tab, select a request and then go to the sql tab in DebugKit. 
+
+If that is not sufficient, you can throw an exeception if CakePHP is working on `Cake\ORM\Table`, aka with auto-tables instead of `App\ORM\OneOfYourTable` like so::
+
+    // In your bootstrap.php
+    use Cake\Event\EventManager;
+    use Cake\Network\Exception\InternalErrorException;
+    
+    // Disable Auto-Tables
+    EventManager::instance()->on('Model.initialize', function($event) {
+        if (get_class($event->getSubject()) === 'Cake\ORM\Table') {
+            throw new InternalErrorException(sprintf('Missing table class for database table %s.', $event->getSubject()->getTable()));
+        }
+    });
+
 .. meta::
     :title lang=en: Configuration
     :keywords lang=en: finished configuration,legacy database,database configuration,value pairs,default connection,optional configuration,example database,php class,configuration database,default database,configuration steps,index database,configuration details,class database,host localhost,inflections,key value,database connection,piece of cake,basic web
