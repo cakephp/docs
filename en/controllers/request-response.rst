@@ -588,7 +588,7 @@ To set a string as the response body, do the following::
 
     // If you want a json response
     $response = $response->withType('application/json')
-        ->withBody(json_encode(['Foo' => 'bar']));
+        ->withStringBody(json_encode(['Foo' => 'bar']));
 
 .. versionadded:: 3.4.3
     `withStringBody()` was added in 3.4.3
