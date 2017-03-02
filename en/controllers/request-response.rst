@@ -579,9 +579,23 @@ redirect location header.
 Setting the Body
 ----------------
 
+.. php:method:: withStringBody($string)
+
+To set a string as the response body, do the following::
+
+    // Set a string into the body
+    $response = $response->withStringBody('My Body');
+
+    // If you want a json response
+    $response = $response->withType('application/json')
+        ->withBody(json_encode(['Foo' => 'bar']));
+
+.. versionadded:: 3.4.3
+    `withStringBody()` was added in 3.4.3
+
 .. php:method:: withBody($body)
 
-To set the response body, use the `withBody()` method, which is provided by the
+To set the response body, use the ``withBody()`` method, which is provided by the
 :php:class:`Zend\\Diactoros\\MessageTrait`::
 
     $response = $response->withBody($stream);
@@ -592,21 +606,7 @@ To set the response body, use the `withBody()` method, which is provided by the
 Be sure that `$stream` is a :php:class:`Psr\\Http\\Message\\StreamInterface` object.
 See below on how to create a new stream.
 
-.. php:method:: withStringBody($string)
-
-In most use cases, it is simpler to set a string as the response body::
-
-    // Set a string into the body
-    $response = $response->withStringBody('My Body');
-
-    //If you want a json response
-    $response = $response->withType('application/json')
-        ->withBody(json_encode(['Foo' => 'bar']));
-
-.. versionadded:: 3.4.3
-    `withStringBody()` was added in 3.4.3
-
-You can also stream responses from files using diactoros streams::
+You can also stream responses from files using :php:class:`Zend\\Diactoros\\Stream` streams::
 
     // To stream from a file
     use Zend\Diactoros\Stream;
@@ -614,7 +614,7 @@ You can also stream responses from files using diactoros streams::
     $stream = new Stream('/path/to/file', 'rb');
     $response = $response->withBody($stream);
 
-You can also stream responses from a callback using the ``CallbackStream`` this
+You can also stream responses from a callback using the ``CallbackStream``. This
 is useful when you have resources like images, CSV files or PDFs you need to
 stream to the client::
 
