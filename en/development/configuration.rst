@@ -689,7 +689,7 @@ While auto-tables are really useful when quickly creating new applications and b
 
 You can see if any query was fired of auto-tables when you go to history tab, select a request and then go to the sql tab in DebugKit. 
 
-If that is not sufficient, you can throw an exeception if CakePHP is working on `Cake\ORM\Table`, aka with auto-tables instead of `App\ORM\OneOfYourTable` like so::
+If that is not sufficient, you can throw an exeception if CakePHP is working on ``Cake\ORM\Table``, aka with auto-tables instead of ``App\ORM\YourConcreteExampleTable`` class like so::
 
     // In your bootstrap.php
     use Cake\Event\EventManager;
