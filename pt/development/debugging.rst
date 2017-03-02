@@ -162,7 +162,7 @@ O código acima escreverá ``Cheguei aqui`` no arquivo de registros de depuraç�
 que contêm redirecionamentos e laços complicados. Você poderá usar também
 :php:meth:`Cake\\Log\\Log::write()` para escrever mensagens nos registros. Esse
 método pode ser chamado de forma estática em qualquer lugar da sua aplicação,
-pressupondo-se que CakeLog já esteja carregado::
+pressupondo-se que Log já esteja carregado::
 
     // No início do arquivo que deseja registrar.
     use Cake\Log\Log;
