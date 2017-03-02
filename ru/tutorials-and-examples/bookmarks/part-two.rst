@@ -303,7 +303,7 @@
 решения.
 
 Улучшение пользовательского опыта в тегах
-==========================================
+=========================================
 
 На данный момент добавление новых тегов это сложный процесс, так как
 ``TagsController`` запрещает любой доступ. Вместо того, чтобы просто открыть
@@ -312,14 +312,123 @@
 пользовательский опыт, и использовать некоторые более мощные возможности
 ORM.
 
+Добавление вычисляемого поля
+----------------------------
 
-.. note::
-    The documentation is not currently supported in Russian language for this
-    page.
+Так как нам хочется простого способа получения доступа к отформатированным
+тегам объекта(entity), мы можем добавить виртуальное/вычисляемое поле к
+нему. В **src/Model/Entity/Bookmark.php** добавьте следующее::
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+    use Cake\Collection\Collection;
 
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+    protected function _getTagString()
+    {
+        if (isset($this->_properties['tag_string'])) {
+            return $this->_properties['tag_string'];
+        }
+        if (empty($this->tags)) {
+            return '';
+        }
+        $tags = new Collection($this->tags);
+        $str = $tags->reduce(function ($string, $tag) {
+            return $string . $tag->title . ', ';
+        }, '');
+        return trim($str, ', ');
+    }
+
+Это позволит нам иметь доступ к вычисляемому свойству
+``$bookmark->tag_string``. Мы воспользуемся этим свойством позже в полях ввода.
+Не забудьте добавить свойство ``tag_string`` в список ``_accessible`` в вашем
+объекте, так как нам понадобится 'сохранять' его в дальнейшем.
+This will let us access the ``$bookmark->tag_string`` computed property. We'll
+use this property in inputs later on. Remember to add the ``tag_string``
+property to the ``_accessible`` list in your entity, as we'll want to 'save' it
+later on.
+
+В **src/Model/Entity/Bookmark.php** добавьте ``tag_string`` в ``$_accessible``
+таким образом::
+
+    protected $_accessible = [
+        'user_id' => true,
+        'title' => true,
+        'description' => true,
+        'url' => true,
+        'user' => true,
+        'tags' => true,
+        'tag_string' => true,
+    ];
+    
+Обновление Видов
+----------------
+
+Теперь после обновления объекта мы можем добавить новое поле ввода для наших
+тегов. В **src/Template/Bookmarks/add.ctp** и
+**src/Template/Bookmarks/edit.ctp** замените существующее поле ввода
+``tags._ids`` следующим::
+
+    echo $this->Form->input('tag_string', ['type' => 'text']);
+    
+Сохранение строки тегов
+-----------------------
+
+Теперь, когда мы можем видеть существующие теги в виде строки, нам бы хотелось
+также и сохранять эти данные. Так как мы обозначили в качестве доступного поля
+``tag_string``, ORM будет копировать эти данные из запроса в наш объект. Мы
+можем использовать хук ``beforeSave()`` для парсинга строки тегов и 
+находить/создавать соответствующие объекты. Добавьте следующее в
+**src/Model/Table/BookmarksTable.php**::
+
+
+    public function beforeSave($event, $entity, $options)
+    {
+        if ($entity->tag_string) {
+            $entity->tags = $this->_buildTags($entity->tag_string);
+        }
+    }
+
+    protected function _buildTags($tagString)
+    {
+        // Выделить из строки отдельные теги
+        $newTags = array_map('trim', explode(',', $tagString));
+        // Удалить все пустые теги
+        $newTags = array_filter($newTags);
+        // Устранить дбликаты уже существующих тегов
+        $newTags = array_unique($newTags);
+
+        $out = [];
+        $query = $this->Tags->find()
+            ->where(['Tags.title IN' => $newTags]);
+
+        // Удаление существующих тегов из списка новых тегов.
+        foreach ($query->extract('title') as $existing) {
+            $index = array_search($existing, $newTags);
+            if ($index !== false) {
+                unset($newTags[$index]);
+            }
+        }
+        // Добавить существующие теги.
+        foreach ($query as $tag) {
+            $out[] = $tag;
+        }
+        // Добавить новые теги.
+        foreach ($newTags as $tag) {
+            $out[] = $this->Tags->newEntity(['title' => $tag]);
+        }
+        return $out;
+    }
+
+В то время как этот код чуть более сложный, чем тот, что мы писали ранее,
+он помогает ощутить мощь ORM в CakePHP. Вы можете манипулировать результатами
+запроса, используя методы :doc:`/core-libraries/collections`, и реализуя
+сценарии, где вы создаете с легкостью объекты налету.
+
+Заключение
+==========
+
+Мы расширили наше приложение для закладок, реализовав сценарии аутентификации
+и базовой авторизации/контроля доступа. Мы также добавили некоторые милые
+улучения UX засчет использования хелпера FormHelper и возможностей ORM.
+
+Спасибо за то, что уделили время изучению CakePHP. В довершение вы можете
+изучить :doc:`/tutorials-and-examples/blog/blog`, узнать больше об :doc:`/orm`,
+или же можете пролистать :doc:`/topics`.
