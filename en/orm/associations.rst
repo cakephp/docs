@@ -45,8 +45,9 @@ you can modify them with setters::
     {
         public function initialize(array $config)
         {
-            $this->belongsTo('Authors')
-                ->setName('Publishing.Authors')
+            $this->belongsTo('Authors', [
+                    'className' => 'Publishing.Authors'
+                ])
                 ->setForeignKey('authorid')
                 ->setProperty('person');
         }
@@ -71,11 +72,11 @@ approved comments and those that have not been moderated yet::
         public function initialize(array $config)
         {
             $this->hasMany('Comments')
-                ->setName('Comments')
                 ->setConditions(['approved' => true]);
 
-            $this->hasMany('UnapprovedComments')
-                ->setName('Comments')
+            $this->hasMany('UnapprovedComments', [
+                    'className' => 'Comments'
+                ])
                 ->setConditions(['approved' => false])
                 ->setProperty('unapproved_comments');
         }
@@ -89,11 +90,13 @@ self-associated tables to create parent-child relationships::
     {
         public function initialize(array $config)
         {
-            $this->hasMany('SubCategories')
-                ->setName('Categories');
+            $this->hasMany('SubCategories', [
+                'className' => 'Categories'
+            ]);
 
-            $this->belongsTo('ParentCategories')
-                ->setName('Categories')
+            $this->belongsTo('ParentCategories', [
+                'className' => 'Categories'
+            ]);
         }
     }
 
