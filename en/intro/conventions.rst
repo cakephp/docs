@@ -142,8 +142,8 @@ Now that you've been introduced to CakePHP's fundamentals, you might try a run
 through the :doc:`/tutorials-and-examples/bookmarks/intro` to see how things fit
 together.
 
-Core Naming Conventions
-=======================
+ORM and FormHelper Naming Conventions
+=====================================
 
 While navigating the CakePHP source code, when dealing with the database schema,
 fields are often referred to as columns but when dealing with entities,
