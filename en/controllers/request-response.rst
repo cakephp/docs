@@ -591,7 +591,7 @@ To set a string as the response body, do the following::
         ->withStringBody(json_encode(['Foo' => 'bar']));
 
 .. versionadded:: 3.4.3
-    `withStringBody()` was added in 3.4.3
+    ``withStringBody()`` was added in 3.4.3
 
 .. php:method:: withBody($body)
 
@@ -603,7 +603,7 @@ To set the response body, use the ``withBody()`` method, which is provided by th
     // Prior to 3.4.0 - Set the body
     $this->response->body('My Body');
 
-Be sure that `$stream` is a :php:class:`Psr\\Http\\Message\\StreamInterface` object.
+Be sure that ``$stream`` is a :php:class:`Psr\\Http\\Message\\StreamInterface` object.
 See below on how to create a new stream.
 
 You can also stream responses from files using :php:class:`Zend\\Diactoros\\Stream` streams::
