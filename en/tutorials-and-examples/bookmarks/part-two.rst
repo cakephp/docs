@@ -78,6 +78,11 @@ And in **src/Template/Users/login.ctp** add the following::
     <?= $this->Form->button('Login') ?>
     <?= $this->Form->end() ?>
 
+.. note::
+
+   The ``control()`` is available since 3.4. For prior versions you can use
+   the ``input()`` instead.
+
 Now that we have a simple login form, we should be able to log in with one of
 the users that has a hashed password.
 
