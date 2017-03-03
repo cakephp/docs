@@ -699,7 +699,7 @@ If that is not sufficient, you can throw an exeception if CakePHP is working on 
     EventManager::instance()->on('Model.initialize', function($event) {
         if (get_class($event->getSubject()) === 'Cake\ORM\Table') {
             throw new InternalErrorException(sprintf(
-                'Missing table class for database table %s.', $event->getSubject()->getTable()));
+                'Missing table class or wrong alias when looking for table class for database table %s.', $event->getSubject()->getTable()));
         }
     });
 
