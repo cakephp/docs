@@ -4,8 +4,8 @@ Xml
 .. php:class:: Xml
 
 La classe Xml a été reconstruite. Comme PHP 5 a
-`SimpleXML <http://php.net/simplexml>`_ et
-`DOMDocument <http://php.net/domdocument>`_, CakePHP ne nécéssite pas de
+`SimpleXML <https://secure.php.net/simplexml>`_ et
+`DOMDocument <https://secure.php.net/domdocument>`_, CakePHP ne nécéssite pas de
 ré-implémenter un parser XML. La nouvelle classe XML va fondamentalement
 transformer un tableau en objets SimpleXMLElement ou DOMDocument, et vice
 versa.
@@ -25,18 +25,18 @@ façon d'importer des données depuis une URL::
     App::uses('Xml', 'Utility');
 
     // Vieille méthode:
-    $xml = new Xml('http://bakery.cakephp.org/articles.rss');
+    $xml = new Xml('https://bakery.cakephp.org/articles.rss');
 
     // Nouvelle méthode en utilisant SimpleXML
-    $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
+    $xml = Xml::build('https://bakery.cakephp.org/articles.rss');
     // $xml est maintenant une instance de SimpleXMLElement
 
     //ou
-    $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'simplexml'));
+    $xml = Xml::build('https://bakery.cakephp.org/articles.rss', array('return' => 'simplexml'));
     // $xml est maintenant une instance de SimpleXMLElement
 
     // Nouvelle méthode en utilisant DOMDocument
-    $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'domdocument'));
+    $xml = Xml::build('https://bakery.cakephp.org/articles.rss', array('return' => 'domdocument'));
     // $xml est maintenant une instance de DOMDocument
 
 Vous pouvez utiliser :php:meth:`Xml::build()` pour construire les objets XML
@@ -59,7 +59,7 @@ ou de fichiers distants. Les fichiers distants seront récupérés avec
     $xml = Xml::build('/home/awesome/unicorns.xml');
 
     // fichier distant
-    $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
+    $xml = Xml::build('https://bakery.cakephp.org/articles.rss');
 
 Vous pouvez aussi construire des objets Xml en utilisant un tableau::
 
@@ -83,8 +83,8 @@ Si votre entrée est invalide, la classe Xml enverra une Exception::
 
 .. note::
 
-    `DOMDocument <http://php.net/domdocument>`_ et
-    `SimpleXML <http://php.net/simplexml>`_ implement different API's.
+    `DOMDocument <https://secure.php.net/domdocument>`_ et
+    `SimpleXML <https://secure.php.net/simplexml>`_ implement different API's.
     Assurez vous d'utiliser les bonnes méthodes sur l'objet que vous
     requêtez à partir d'un Xml.
 
@@ -231,7 +231,7 @@ avec le nom ``xmlns:`` vers un namespace générique ou avec le préfixe
 
     $xmlArray = array(
         'root' => array(
-            'xmlns:' => 'http://cakephp.org',
+            'xmlns:' => 'https://cakephp.org',
             'child' => 'value'
         )
     );
@@ -240,7 +240,7 @@ avec le nom ``xmlns:`` vers un namespace générique ou avec le préfixe
     $xmlArray(
         'root' => array(
             'tag' => array(
-                'xmlns:pref' => 'http://cakephp.org',
+                'xmlns:pref' => 'https://cakephp.org',
                 'pref:item' => array(
                     'item 1',
                     'item 2'
@@ -253,11 +253,11 @@ avec le nom ``xmlns:`` vers un namespace générique ou avec le préfixe
 La valeur de ``$xml1`` et ``$xml2`` sera, respectivement::
 
     <?xml version="1.0"?>
-    <root xmlns="http://cakephp.org"><child>value</child>
+    <root xmlns="https://cakephp.org"><child>value</child>
 
 
     <?xml version="1.0"?>
-    <root><tag xmlns:pref="http://cakephp.org"><pref:item>item 1</pref:item><pref:item>item 2</pref:item></tag></root>
+    <root><tag xmlns:pref="https://cakephp.org"><pref:item>item 1</pref:item><pref:item>item 2</pref:item></tag></root>
 
 Créer un enfant
 ---------------

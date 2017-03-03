@@ -4,7 +4,7 @@ if (/cakephp\.org/.test(document.domain)) {
 
 App = {};
 App.config = {
-  url: 'http://search.cakephp.org/search',
+  url: 'https://search.cakephp.org/search',
   version: '2-2'
 };
 
@@ -61,6 +61,7 @@ App.InlineSearch = (function () {
         async: true,
         limit: 10,
         templates: {
+          pending: '<div class="loading-result">Searching...</div>',
           empty: '<div class="empty-result">No matches found</div>',
           suggestion: function(item) {
             var div = $('<div></div>');
@@ -149,7 +150,7 @@ App.ResponsiveMenus = (function () {
 }());
 
 
-// http://stackoverflow.com/questions/967096/using-jquery-to-test-if-an-input-has-focus
+// https://stackoverflow.com/questions/967096/using-jquery-to-test-if-an-input-has-focus
 jQuery.extend(jQuery.expr[':'], {
   focus: function(element) {
     return element == document.activeElement;

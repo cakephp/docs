@@ -16,7 +16,7 @@ trivial to setup, for example::
     # │    \──────────────────── hour (0 - 23)
     # \───────────────────────── min (0 - 59)
 
-You can see more info here: http://en.wikipedia.org/wiki/Cron
+You can see more info here: https://en.wikipedia.org/wiki/Cron
 
 
 .. meta::

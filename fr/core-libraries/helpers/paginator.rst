@@ -171,7 +171,7 @@ En plus de générer des liens qui vont directement sur des numéros de pages
 spécifiques, vous voudrez souvent des liens qui amènent vers le lien précédent
 ou suivant, première et dernière pages dans le jeu de données paginées.
 
-.. php:method:: prev($title = '<?= __('<< previous') ?>', $options = array(), $disabledTitle = null, $disabledOptions = array())
+.. php:method:: prev($title = '<< Previous', $options = array(), $disabledTitle = null, $disabledOptions = array())
 
     :param string $title: Titre du lien.
     :param mixed $options: Options pour le lien de pagination.
@@ -194,7 +194,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
     Un simple exemple serait::
 
         echo $this->Paginator->prev(
-          ' << ' . __('previous'),
+          '<< ' . __('previous'),
           array(),
           null,
           array('class' => 'prev disabled')
@@ -207,7 +207,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
         <span class="prev">
           <a rel="prev" href="/posts/index/page:1/sort:title/order:desc">
-            <?= __('<< previous') ?>
+            &lt;&lt; previous
           </a>
         </span>
 
@@ -215,7 +215,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
     .. code-block:: html
 
-        <span class="prev disabled"><?= __('<< previous') ?></span>
+        <span class="prev disabled">&lt;&lt; previous</span>
 
     Vous pouvez changer la balise enveloppante en utilisant l'option ``tag``::
 
@@ -256,7 +256,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
 .. php:method:: next($title = 'Next >>', $options = array(), $disabledTitle = null, $disabledOptions = array())
 
-    Cette méthode est identique a :php:meth:`~PagintorHelper::prev()` avec
+    Cette méthode est identique à :php:meth:`~PaginatorHelper::prev()` avec
     quelques exceptions. il créé le lien pointant vers la page suivante au
     lieu de la précédente. elle utilise aussi ``next`` comme valeur d'attribut
     rel au lieu de ``prev``.
@@ -468,7 +468,7 @@ tabulaire, mais le Helper Paginator disponible dans les vues
 N'a pas toujours besoin d'être limité en tant que tel.
 
 Voir les détails sur
-`PaginatorHelper <http://api.cakephp.org/2.4/class-PaginatorHelper.html>`_
+`PaginatorHelper <https://api.cakephp.org/2.4/class-PaginatorHelper.html>`_
 dans l' API. Comme mentionné précédemment, le Helper Paginator
 offre également des fonctionnalités de tri qui peuvent être facilement
 intégrés dans vos en-têtes de colonne de table:

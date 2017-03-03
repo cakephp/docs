@@ -155,8 +155,8 @@ Métodos dos Controllers
 =======================
 
 Para uma lista completa dos métodos e suas descrições, visite a API do CakePHP.
-Siga para `http://api.cakephp.org
-<http://api.cakephp.org/2.8/class-Controller.html>`__.
+Siga para `https://api.cakephp.org
+<https://api.cakephp.org/2.8/class-Controller.html>`__.
 
 Interagindo Com as Views
 ------------------------
@@ -289,7 +289,7 @@ Controle de Fluxo
 
         Você pode aprender mais sobre a importância de redirecionar o usuário após
         um formulário do tipo POST no artigo
-        `Post/Redirect/Get (en) <http://en.wikipedia.org/wiki/Post/Redirect/Get>`_.
+        `Post/Redirect/Get (en) <https://en.wikipedia.org/wiki/Post/Redirect/Get>`_.
 
     Você também pode usar uma URL relativa ou absoluta como argumento::
 
@@ -599,8 +599,8 @@ Atributos do Controller
 =======================
 
 Para uma completa lista dos atributos dos controllers e suas descrições, visite
-a API do CakePHP. Siga para `http://api.cakephp.org/2.8/class-Controller.html
-<http://api.cakephp.org/2.8/class-Controller.html>`_.
+a API do CakePHP. Siga para `https://api.cakephp.org/2.8/class-Controller.html
+<https://api.cakephp.org/2.8/class-Controller.html>`_.
 
 .. php:attr:: name
 

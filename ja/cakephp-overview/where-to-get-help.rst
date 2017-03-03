@@ -4,7 +4,7 @@
 公式 CakePHP ウェブサイト
 =========================
 
-`http://www.cakephp.org <http://www.cakephp.org>`_
+`https://cakephp.org <https://cakephp.org>`_
 
 公式 CakePHP ウェブサイトは、いつでも見に行く価値のある素敵な場所です。
 よく使う開発ツール、スクリーンキャスト、寄付の方法、ダウンロードなどへのリンクがあります。
@@ -12,7 +12,7 @@
 Cookbook
 ========
 
-`http://book.cakephp.org <http://book.cakephp.org>`_
+`https://book.cakephp.org <https://book.cakephp.org>`_
 
 このマニュアルは、疑問の解決のための最初の場所になるはずです。
 他のさまざまなオープンソースプロジェクトと同じように、常に新しい仲間が入ってきます。
@@ -24,7 +24,7 @@ Cookbook
 Bakery
 ======
 
-`http://bakery.cakephp.org <http://bakery.cakephp.org>`_
+`https://bakery.cakephp.org <https://bakery.cakephp.org>`_
 
 CakePHP の Bakery は、CakePHP に関する情報中継所 (*clearing house*) です。
 チュートリアル、事例研究、コード例などについて情報が得られます。
@@ -34,7 +34,7 @@ CakePHP に関する理解が深まったらログインして知識をコミュ
 API
 ===
 
-`http://api.cakephp.org/ <http://api.cakephp.org/>`_
+`https://api.cakephp.org/ <https://api.cakephp.org/>`_
 
 直接的な答えがコア開発者から直接得られるので、
 CakePHP API (*Application Programming Interface*) は、
@@ -82,7 +82,7 @@ IRC チャンネル
 Stackoverflow
 =============
 
-`http://stackoverflow.com/ <http://stackoverflow.com/questions/tagged/cakephp/>`_
+`https://stackoverflow.com/ <https://stackoverflow.com/questions/tagged/cakephp/>`_
 
 Stack Overflow の既存ユーザーが質問を見つけやすくするために、質問の際には
 ``cakephp`` タグと利用中のバージョンを明記して下さい。

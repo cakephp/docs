@@ -556,7 +556,7 @@ CakePHP est fourni avec deux fichiers readers de configuration intégrés.
 :php:class:`PhpReader` est capable de lire les fichiers de config de PHP, dans
 le même format dans lequel Configure a lu historiquement.
 :php:class:`IniReader` est capable de lire les fichiers de config ini du coeur.
-Regardez la `documentation PHP <http://php.net/parse_ini_file>`_
+Regardez la `documentation PHP <https://secure.php.net/parse_ini_file>`_
 pour plus d'informations sur les fichiers ini spécifiés. Pour utiliser un
 reader de config du coeur, vous aurez besoin de l'attacher à Configure
 en utilisant :php:meth:`Configure::config()`::
@@ -732,7 +732,7 @@ l'utiliser::
 
         Ce n'dest pas une bonne idée de nommer votre classe de configuration
         ``XmlReader`` car ce nom de classe est déjà utilisé en interne par PHP
-        `XMLReader <http://php.net/manual/fr/book.xmlreader.php>`_
+        `XMLReader <https://secure.php.net/manual/fr/book.xmlreader.php>`_
 
 La méthode ``read()`` du reader de config, doit retourner un tableau
 d'informations de configuration que la ressource nommé ``$key`` contient.

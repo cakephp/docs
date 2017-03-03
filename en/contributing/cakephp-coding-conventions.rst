@@ -287,7 +287,7 @@ which should look like this::
 
     <?php
     /**
-    * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+    * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
     * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
     *
     * Licensed under The MIT License
@@ -295,17 +295,17 @@ which should look like this::
     * Redistributions of files must retain the above copyright notice.
     *
     * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
-    * @link          http://cakephp.org CakePHP(tm) Project
+    * @link          https://cakephp.org CakePHP(tm) Project
     * @since         X.Y.Z
     * @license       http://www.opensource.org/licenses/mit-license.php MIT License
     */
 
-The included `phpDocumentor <http://phpdoc.org>`_ tags are:
+The included `phpDocumentor <https://phpdoc.org>`_ tags are:
 
-*  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
-*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@license <http://phpdoc.org/docs/latest/references/phpdoc/tags/license.html>`_
+*  `@copyright <https://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
+*  `@link <https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@license <https://phpdoc.org/docs/latest/references/phpdoc/tags/license.html>`_
 
 Class DocBlocks
 ---------------
@@ -320,22 +320,22 @@ Class DocBlocks should look like this::
      *
      * @deprecated 3.0.0 Deprecated in 2.6.0. Will be removed in 3.0.0. Use Bar instead.
      * @see Bar
-     * @link http://book.cakephp.org/2.0/en/foo.html
+     * @link https://book.cakephp.org/2.0/en/foo.html
      */
     class Foo {
 
     }
 
-Class DocBlocks may contain the following `phpDocumentor <http://phpdoc.org>`_ tags:
+Class DocBlocks may contain the following `phpDocumentor <https://phpdoc.org>`_ tags:
 
-*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+*  `@deprecated <https://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
-*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
-*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@property <http://phpdoc.org/docs/latest/references/phpdoc/tags/property.html>`_
-*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
-*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@uses <http://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html>`_
+*  `@internal <https://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@property <https://phpdoc.org/docs/latest/references/phpdoc/tags/property.html>`_
+*  `@see <https://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@uses <https://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html>`_
 
 Property DocBlocks
 ------------------
@@ -347,19 +347,19 @@ Property DocBlocks should look like this::
      *
      * @deprecated 3.0.0 Deprecated as of 2.5.0. Will be removed in 3.0.0. Use $_bla instead.
      * @see Bar::$_bla
-     * @link http://book.cakephp.org/2.0/en/foo.html#properties
+     * @link https://book.cakephp.org/2.0/en/foo.html#properties
      */
     protected $_bar = null;
 
-Property DocBlocks may contain the following `phpDocumentor <http://phpdoc.org>`_ tags:
+Property DocBlocks may contain the following `phpDocumentor <https://phpdoc.org>`_ tags:
 
-*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+*  `@deprecated <https://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
-*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
-*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
-*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@var <http://phpdoc.org/docs/latest/references/phpdoc/tags/var.html>`_
+*  `@internal <https://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@see <https://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@var <https://phpdoc.org/docs/latest/references/phpdoc/tags/var.html>`_
 
 Method/Function DocBlocks
 -------------------------
@@ -377,25 +377,25 @@ Method and functions DocBlocks should look like this::
      * @return array An array of cakes.
      * @throws Exception If something goes wrong.
      *
-     * @link http://book.cakephp.org/2.0/en/foo.html#bar
+     * @link https://book.cakephp.org/2.0/en/foo.html#bar
      * @deprecated 3.0.0 Deprecated as of 2.5.0. Will be removed in 3.0.0. Use Bar::baz instead.
      * @see Bar::baz
      */
      public function bar($param1, $param2 = null) {
      }
 
-Method and function DocBLocks may contain the following `phpDocumentor <http://phpdoc.org>`_ tags:
+Method and function DocBLocks may contain the following `phpDocumentor <https://phpdoc.org>`_ tags:
 
-*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+*  `@deprecated <https://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
-*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
-*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@param <http://phpdoc.org/docs/latest/references/phpdoc/tags/param.html>`_
-*  `@return <http://phpdoc.org/docs/latest/references/phpdoc/tags/return.html>`_
-*  `@throws <http://phpdoc.org/docs/latest/references/phpdoc/tags/throws.html>`_
-*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
-*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@uses <http://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html>`_
+*  `@internal <https://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@param <https://phpdoc.org/docs/latest/references/phpdoc/tags/param.html>`_
+*  `@return <https://phpdoc.org/docs/latest/references/phpdoc/tags/return.html>`_
+*  `@throws <https://phpdoc.org/docs/latest/references/phpdoc/tags/throws.html>`_
+*  `@see <https://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@uses <https://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html>`_
 
 Variable Types
 --------------
@@ -458,7 +458,7 @@ Including Files
     require_once $class;
 
 When including files with classes or libraries, use only and always the
-`require\_once <http://php.net/require_once>`_ function.
+`require\_once <https://secure.php.net/require_once>`_ function.
 
 PHP Tags
 ========

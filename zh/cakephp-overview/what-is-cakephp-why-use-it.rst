@@ -1,12 +1,12 @@
 CakePHP 是什么？为什么使用它？
 ##############################
 
-`CakePHP <http://www.cakephp.org/>`_ 是一个
-`免费 <http://en.wikipedia.org/wiki/MIT_License>`_ 、
-`开源 <http://en.wikipedia.org/wiki/Open_source>`_ 、
-`快速开发 <http://en.wikipedia.org/wiki/Rapid_application_development>`_ 的
-`PHP <http://www.php.net/>`_ 
-`框架 <http://en.wikipedia.org/wiki/Application_framework>`_ 。是程序员创建 
+`CakePHP <https://cakephp.org/>`_ 是一个
+`免费 <https://en.wikipedia.org/wiki/MIT_License>`_ 、
+`开源 <https://en.wikipedia.org/wiki/Open_source>`_ 、
+`快速开发 <https://en.wikipedia.org/wiki/Rapid_application_development>`_ 的
+`PHP <https://secure.php.net/>`_ 
+`框架 <https://en.wikipedia.org/wiki/Application_framework>`_ 。是程序员创建 
 web 应用程序的一个基础结构。我们的首要目标是使您能够进行结构化的和快速的开发，而
 又不丧失灵活性。
 
@@ -22,27 +22,27 @@ CakePHP 有积极的 `开发团队 <https://github.com/cakephp?tab=members>`_ �
 
 
 -  活跃友好的 :ref:`cakephp-official-communities`
--  灵活的 `许可证 <http://en.wikipedia.org/wiki/MIT_License>`_
+-  灵活的 `许可证 <https://en.wikipedia.org/wiki/MIT_License>`_
 -  与 PHP 5.2.8 及更高版本兼容
 -  整合了
-   `CRUD <http://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_ ，
+   `CRUD <https://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_ ，
    便于数据库操作
 -  应用程序的
-   `脚手架 <http://en.wikipedia.org/wiki/Scaffold_(programming)>`_
+   `脚手架 <https://en.wikipedia.org/wiki/Scaffold_(programming)>`_
 -  代码生成
--  `MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_ 架构
+-  `MVC <https://en.wikipedia.org/wiki/Model-view-controller>`_ 架构
 -  请求调度使用整洁、自定义的网址和路由
 -  内建的
-   `验证 <http://en.wikipedia.org/wiki/Data_validation>`_
+   `验证 <https://en.wikipedia.org/wiki/Data_validation>`_
 -  快速灵活的
-   `模板 <http://en.wikipedia.org/wiki/Web_template_system>`_
+   `模板 <https://en.wikipedia.org/wiki/Web_template_system>`_
    (PHP 语法，以及助件)
 -  用于AJAX, JavaScript, HTML 表单等的视图助件
 -  用于邮件、Cookie、安全、回话(*Session*)和请求处理的组件
 -  灵活的
-   `ACL <http://en.wikipedia.org/wiki/Access_control_list>`_
+   `ACL <https://en.wikipedia.org/wiki/Access_control_list>`_
 -  数据检查
--  灵活的 `缓存 <http://en.wikipedia.org/wiki/Web_cache>`_
+-  灵活的 `缓存 <https://en.wikipedia.org/wiki/Web_cache>`_
 -  本地化
 -  可在任何网站目录中运行，几乎不需要改动
    `Apache <http://httpd.apache.org/>`_ 配置

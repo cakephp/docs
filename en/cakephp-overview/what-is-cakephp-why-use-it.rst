@@ -1,12 +1,12 @@
 What is CakePHP? Why use it?
 ############################
 
-`CakePHP <http://www.cakephp.org/>`_ is a
-`free <http://en.wikipedia.org/wiki/MIT_License>`_,
-`open-source <http://en.wikipedia.org/wiki/Open_source>`_,
-`rapid development <http://en.wikipedia.org/wiki/Rapid_application_development>`_
-`framework <http://en.wikipedia.org/wiki/Application_framework>`_
-for `PHP <http://www.php.net/>`_. It's a foundational structure for
+`CakePHP <https://cakephp.org/>`_ is a
+`free <https://en.wikipedia.org/wiki/MIT_License>`_,
+`open-source <https://en.wikipedia.org/wiki/Open_source>`_,
+`rapid development <https://en.wikipedia.org/wiki/Rapid_application_development>`_
+`framework <https://en.wikipedia.org/wiki/Application_framework>`_
+for `PHP <https://secure.php.net/>`_. It's a foundational structure for
 programmers to create web applications. Our primary goal is to
 enable you to work in a structured and rapid manner–without loss of
 flexibility.
@@ -29,29 +29,29 @@ Here's a quick list of features you'll enjoy when using CakePHP:
 
 
 -  Active, friendly :ref:`cakephp-official-communities`
--  Flexible `licensing <http://en.wikipedia.org/wiki/MIT_License>`_
+-  Flexible `licensing <https://en.wikipedia.org/wiki/MIT_License>`_
 -  Compatible with versions PHP 5.2.8 and greater
 -  Integrated
-   `CRUD <http://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_
+   `CRUD <https://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_
    for database interaction
 -  Application
-   `scaffolding <http://en.wikipedia.org/wiki/Scaffold_(programming)>`_
+   `scaffolding <https://en.wikipedia.org/wiki/Scaffold_(programming)>`_
 -  Code generation
--  `MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_
+-  `MVC <https://en.wikipedia.org/wiki/Model-view-controller>`_
    architecture
 -  Request dispatcher with clean, custom URLs and routes
 -  Built-in
-   `validation <http://en.wikipedia.org/wiki/Data_validation>`_
+   `validation <https://en.wikipedia.org/wiki/Data_validation>`_
 -  Fast and flexible
-   `templating <http://en.wikipedia.org/wiki/Web_template_system>`_
+   `templating <https://en.wikipedia.org/wiki/Web_template_system>`_
    (PHP syntax, with helpers)
 -  View helpers for AJAX, JavaScript, HTML forms and more
 -  Email, cookie, security, session, and request handling
    Components
 -  Flexible
-   `ACL <http://en.wikipedia.org/wiki/Access_control_list>`_
+   `ACL <https://en.wikipedia.org/wiki/Access_control_list>`_
 -  Data sanitization
--  Flexible `caching <http://en.wikipedia.org/wiki/Web_cache>`_
+-  Flexible `caching <https://en.wikipedia.org/wiki/Web_cache>`_
 -  Localization
 -  Works from any web site directory, with little to no
    `Apache <http://httpd.apache.org/>`_ configuration involved

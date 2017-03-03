@@ -22,16 +22,12 @@ CakePHP には、リクエストを簡単に行える HttpSocket クラスがあ
         $HttpSocket = new HttpSocket();
 
         // 文字列クエリー
-        $results = $HttpSocket->get('http://www.google.com/search', 'q=cakephp');
+        $results = $HttpSocket->get('https://www.google.com/search', 'q=cakephp');
 
         // 配列クエリー
-        $results = $HttpSocket->get('http://www.google.com/search', array('q' => 'cakephp'));
+        $results = $HttpSocket->get('https://www.google.com/search', array('q' => 'cakephp'));
 
 .. php:method:: post($uri, $data, $request)
-
-    ..
-     The post method makes a simple HTTP POST request returning the
-     results.
 
     post メソッドは、シンプルな HTTP の POST リクエストの結果を返します。
 
@@ -119,15 +115,15 @@ CakePHP には、リクエストを簡単に行える HttpSocket クラスがあ
 
 ``HttpSocket`` を使ったリクエストからのレスポンスは、 ``HttpResponse`` のインスタンスです。
 このオブジェクトは、HTTP レスポンスの内容にアクセスするための、いくつかのアクセッサーメソッドを
-持っています。このクラスは `ArrayAccess <http://php.net/manual/ja/class.arrayaccess.php>`_ と
-`__toString() <http://www.php.net/manual/ja/language.oop5.magic.php#language.oop5.magic.tostring>`_
+持っています。このクラスは `ArrayAccess <https://secure.php.net/manual/ja/class.arrayaccess.php>`_ と
+`__toString() <https://secure.php.net/manual/ja/language.oop5.magic.php#language.oop5.magic.tostring>`_
 を実装していますので、 ``$http->response`` を配列として使用でき、リクエストメソッドの戻り値を
 文字列として使用できます。 ::
 
     App::uses('HttpSocket', 'Network/Http');
 
     $http = new HttpSocket();
-    $response = $http->get('http://www.cakephp.org');
+    $response = $http->get('https://cakephp.org');
 
     // タイトルタグの存在をチェック
     $titlePos = strpos($response->body, '<title>');
@@ -274,7 +270,7 @@ HttpSocket は、 `setContentResponse()` と呼ばれる新しいメソッドを
     $http = new HttpSocket();
     $f = fopen(TMP . 'bakery.xml', 'w');
     $http->setContentResource($f);
-    $http->get('http://bakery.cakephp.org/comments.rss');
+    $http->get('https://bakery.cakephp.org/comments.rss');
     fclose($f);
 
 .. note::

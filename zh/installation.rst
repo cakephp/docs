@@ -36,9 +36,9 @@ CakePHP 的许可是基于 MIT 许可协议的。这意味着在保持版权声�
 tar.bz2)，也可以从 git 库中获取代码。
 
 要下载 CakePHP 最新的主版本，请访问官方网站
-`http://cakephp.org <http://cakephp.org>`_ 并点击 "Download" 链接。
+`https://cakephp.org <https://cakephp.org>`_ 并点击 "Download" 链接。
 
-所有 CakePHP 的当前发行版本都托管在 `GitHub <http://github.com/cakephp/cakephp>`_
+所有 CakePHP 的当前发行版本都托管在 `GitHub <https://github.com/cakephp/cakephp>`_
 上。GitHub 同时托管了 CakePHP 自身和许多 CakePHP 的其它插件。CakePHP 的所有发行版
 本可从 `GitHub tags <https://github.com/cakephp/cakephp/tags>`_ 获得。
 

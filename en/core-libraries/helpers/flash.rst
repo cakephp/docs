@@ -55,3 +55,8 @@ You can also override any of the options that were set in FlashComponent::
 
 For more information about the available array options, please refer to the
 :doc:`FlashComponent </core-libraries/components/flash>` section.
+
+.. meta::
+    :title lang=en: FlashHelper
+    :description lang=en: FlashHelper provides a way to render flash messages that were set in $_SESSION by FlashComponent.
+    :keywords lang=en: flash helper,message,cakephp,element,session

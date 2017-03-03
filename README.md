@@ -5,14 +5,14 @@ CakePHP Documentation
 [![Build Status](https://img.shields.io/travis/cakephp/docs/master.svg?style=flat-square)](https://travis-ci.org/cakephp/docs)
 
 This is the official documentation for the CakePHP project. It is available
-online in HTML, PDF and EPUB formats at http://book.cakephp.org.
+online in HTML, PDF and EPUB formats at https://book.cakephp.org.
 
 This `master` branch is the documentation for **CakePHP 2.x**.
 For **CakePHP 3.x** please see the `3.0` branch.
 
 Contributing to the documentation is pretty simple. Please read the
 documentation on contributing to the documentation over on [the
-cookbook](http://book.cakephp.org/2.0/en/contributing/documentation.html) for
+cookbook](https://book.cakephp.org/2.0/en/contributing/documentation.html) for
 help. You can read all of the documentation within as its just in plain text
 files, marked up with ReST text formatting.
 
@@ -24,7 +24,7 @@ Build the Documentation with Docker
 
 Docker will let you create a container with all packages needed to build the
 docs. You need to have docker installed, see the [official docs of
-docker](http://docs.docker.com/mac/started/) for more information.
+docker](https://docs.docker.com/mac/started/) for more information.
 
 There is a Dockerfile included at the root of this repository. You can build
 an image using:

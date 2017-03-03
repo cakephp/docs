@@ -8,7 +8,7 @@ Welcome
 
 .. warning::
     この文書のバージョンは CakePHP 2.x 用です。
-    `CakePHP 3.x の文書はここにあります <http://book.cakephp.org/3.0/>`_ 。
+    `CakePHP 3.x の文書はここにあります <https://book.cakephp.org/3.0/>`_ 。
 
 CakePHP クックブックは、オープンに開発されている、コミュニティで編集可能なドキュメントのプロジェクトです。
 ドキュメンテーションの品質、正当性、正確性の高さを維持することを期待しています。
@@ -28,7 +28,7 @@ CakePHP クックブックは、オープンに開発されている、コミュ
 
     - `PDF(英語) <../_downloads/en/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/ja/CakePHPCookbook.epub>`_
-    - `オリジナルソース <http://github.com/cakephp/docs>`_
+    - `オリジナルソース <https://github.com/cakephp/docs>`_
 
 入門
 ====

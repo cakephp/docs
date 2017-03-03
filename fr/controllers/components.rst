@@ -111,7 +111,7 @@ controller, vous pouvez y accéder comme ceci::
         public $components = array('Session', 'Cookie');
 
         public function delete() {
-            if ($this->Post->delete($this->request->data('Post.id')) {
+            if ($this->Post->delete($this->request->data('Post.id'))) {
                 $this->Session->setFlash('Post deleted.');
                 return $this->redirect(array('action' => 'index'));
             }

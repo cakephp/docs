@@ -18,20 +18,20 @@ CakePHP のキャッシュは、主に :php:class:`Cache` クラスを使用し�
   しかしながら、ディスクストレージがとても安価なので、まれに書き込まれるような
   大きなオブジェクトや要素の登録にファイルがよく使われます。
   2.3 以降、デフォルトのキャッシュエンジンになりました。
-* ``ApcCache`` APC キャッシュは、PHP の `APC <http://php.net/apc>`_ または
-  `ACPu <http://php.net/apcu>`_ 拡張を使用します。
+* ``ApcCache`` APC キャッシュは、PHP の `APC <https://secure.php.net/apc>`_ または
+  `ACPu <https://secure.php.net/apcu>`_ 拡張を使用します。
   これらの拡張は、ウェブサーバー中の共有メモリーにオブジェクトを保存します。
   これはとても高速で、アトミックな読み書き機能を利用することができます。
   CakePHP 2.0 から 2.2 までは、(利用可能であれば) デフォルトのキャッシュになりました。
-* ``Wincache`` Wincache は、 `Wincache <http://php.net/wincache>`_ 拡張を使用します。
+* ``Wincache`` Wincache は、 `Wincache <https://secure.php.net/wincache>`_ 拡張を使用します。
   Wincache は APC と同等の機能やパフォーマンスですが、 Windows と Microsoft IIS に
   最適化しています。
 * ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_
   は、APC と同等の機能を持つ PHP 拡張です。
-* ``MemcacheEngine`` `Memcache <http://php.net/memcache>`_ 拡張を使用します。
+* ``MemcacheEngine`` `Memcache <https://secure.php.net/memcache>`_ 拡張を使用します。
   Memcache は、複数サーバに分散されたとても速いキャッシュシステムを提供し、
   アトミックな操作を提供します。
-* ``MemcachedEngine`` `Memcached <http://php.net/memcached>`_ 拡張を使用します。
+* ``MemcachedEngine`` `Memcached <https://secure.php.net/memcached>`_ 拡張を使用します。
   これも memcache のインターフェースですが、より高いパフォーマンスが得られます。
 * ``RedisEngine`` `phpredis <https://github.com/nicolasff/phpredis>`_ 拡張
   (2.2.3 以上) を使用します。Redis は、memcache と同様に高速で永続化した

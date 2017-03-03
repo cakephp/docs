@@ -55,7 +55,7 @@ attaching filters that do not involve the special ``DispatcherFilter`` classes::
         )
     ));
 
-As shown above, you can pass any valid PHP `callback <http://php.net/callback>`_
+As shown above, you can pass any valid PHP `callback <https://secure.php.net/callback>`_
 type, as you may remember, a `callback` is anything that PHP can execute with
 ``call_user_func``. We do make a little exception, if a string is provided it will
 be treated as a class name, not as a possible function name. This of course

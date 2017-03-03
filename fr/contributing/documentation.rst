@@ -10,9 +10,9 @@ les pages vous redirigera vers l'éditeur en ligne de Github pour la page
 correspondante.
 
 La documentation de CakePHP est `intégrée de façon continue
-<http://en.wikipedia.org/wiki/Continuous_integration>`_,
+<https://en.wikipedia.org/wiki/Continuous_integration>`_,
 donc vous pouvez vérifier le statut des
-`différents builds <http://ci.cakephp.org>`_
+`différents builds <https://ci.cakephp.org>`_
 sur le serveur Jenkins à tout moment.
 
 Traductions
@@ -92,7 +92,7 @@ Astuces de traducteurs
 - N'hésitez pas à plonger droit dans votre langue qui existe déjà dans le
   livre.
 - Utilisez une
-  `Forme Informelle <http://en.wikipedia.org/wiki/Register_(linguistics)>`_.
+  `Forme Informelle <https://en.wikipedia.org/wiki/Register_(linguistics)>`_.
 - Traduisez à la fois le contenu et le titre en même temps.
 - Comparez au contenu anglais avant de soumettre une correction
   (si vous corrigez quelque chose, mais n'intégrez pas un changement 'en amont',
@@ -103,7 +103,7 @@ Astuces de traducteurs
 - Ne soumettez pas de traductions partielles.
 - Ne modifier pas une section avec un changement en attente.
 - N'utilisez pas d'
-  `entités html <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
+  `entités html <https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
   pour les caractères accentués, le livre utilise UTF-8.
 - Ne changez pas les balises (HTML) de façon significative ou n'ajoutez pas
   de nouveau contenu.
@@ -114,7 +114,7 @@ Guide de mise en forme de la documentation
 ==========================================
 
 La documentation du nouveau CakePHP est écrit avec le
-`formatage du texte ReST <http://en.wikipedia.org/wiki/ReStructuredText>`_.
+`formatage du texte ReST <https://en.wikipedia.org/wiki/ReStructuredText>`_.
 ReST (Re Structured Text) est une syntaxe de texte de balisage similaire à
 markdown, ou textile. Pour maintenir la cohérence, il est recommandé quand
 vous ajoutez quelque chose à la documentation CakePHP que vous suiviez les

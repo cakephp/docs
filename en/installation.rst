@@ -46,10 +46,10 @@ an archived copy (zip/tar.gz/tar.bz2) from the main website, or check out the
 code from the git repository.
 
 To download the latest major release of CakePHP, visit the main website
-`http://cakephp.org <http://cakephp.org>`_ and follow the "Download" link.
+`https://cakephp.org <https://cakephp.org>`_ and follow the "Download" link.
 
 All current releases of CakePHP are hosted on
-`GitHub <http://github.com/cakephp/cakephp>`_. GitHub houses both CakePHP itself
+`GitHub <https://github.com/cakephp/cakephp>`_. GitHub houses both CakePHP itself
 as well as many other plugins for CakePHP. The CakePHP releases are available at
 `GitHub tags <https://github.com/cakephp/cakephp/tags>`_.
 

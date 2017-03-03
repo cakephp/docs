@@ -329,7 +329,7 @@ applications:
 Publish Your Plugin
 ===================
 
-You can add your plugin to `plugins.cakephp.org <http://plugins.cakephp.org>`_
+You can add your plugin to `plugins.cakephp.org <https://plugins.cakephp.org>`_
 or propose it to the
 `awesome-cakephp list <https://github.com/FriendsOfCake/awesome-cakephp>`_.
 

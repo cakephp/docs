@@ -3,7 +3,7 @@ Bienvenue
 
 .. warning:: 
     Cette version de documentation concerne CakePHP 2.x. Rendez vous 
-    `ici pour la documentation sur CakePHP 3.x <http://book.cakephp.org/3.0/fr>`_
+    `ici pour la documentation sur CakePHP 3.x <https://book.cakephp.org/3.0/fr>`_
 
 Le livre de cuisine CakePHP est un projet libre et communautaire d'édition de
 la documentation. Nous espérons maintenir une documentation pointue et de
@@ -24,7 +24,7 @@ la documentation.
 
     - `PDF <../_downloads/fr/CakePHPCookbook.pdf>`_.
     - `EPUB <../_downloads/fr/CakePHPCookbook.epub>`_.
-    - `Source originale <http://github.com/cakephp/docs>`_.
+    - `Source originale <https://github.com/cakephp/docs>`_.
 
 Mise en route
 =============

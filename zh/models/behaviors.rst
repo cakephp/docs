@@ -16,11 +16,11 @@
 
 CakePHP 已有的行为包括树结构(*tree structure*)，翻译内容(*translated content*)，
 权限控制列表(*access control list*)的交互，还有在 CakePHP Bakery (
-`http://bakery.cakephp.org <http://bakery.cakephp.org>`_) 上社区贡献的行为。本节
+`https://bakery.cakephp.org <https://bakery.cakephp.org>`_) 上社区贡献的行为。本节
 将介绍为模型添加行为的基本使用模式，如何使用 CakePHP 自带的行为，以及如何创建你
 自己的行为。
 
-从本质上讲，行为是带有回调的 `Mixins <http://en.wikipedia.org/wiki/Mixin>`_。
+从本质上讲，行为是带有回调的 `Mixins <https://en.wikipedia.org/wiki/Mixin>`_。
 
 CakePHP 自带了一些行为。欲知每个行为的更多信息，请参考下面各章：
 

@@ -230,7 +230,7 @@ ExceptionRenderer クラスは ``CakeErrorController`` を活用して、あな�
 独自のアプリケーション例外を作成する
 ====================================
 
-組み込みの `SPL 例外 <http://php.net/manual/ja/spl.exceptions.php>`_ 、 ``Exception``
+組み込みの `SPL 例外 <https://secure.php.net/manual/ja/spl.exceptions.php>`_ 、 ``Exception``
 そのもの、 :php:exc:`CakeException` のいずれかを使って独自のアプリケーション例外を作ることが
 できます。Exception や SPL 例外を継承したアプリケーション例外は本番モードでは 500 エラーとして
 扱われます。 :php:exc:`CakeException` は特別で、 :php:exc:`CakeException` のオブジェクトは

@@ -25,9 +25,9 @@
 
 从 GitHub 获得一份 CakePHP 源程序的克隆（*clone*）。
 
-* 如果你没有 `GitHub <http://github.com>`_ 的账号，创建一个。
+* 如果你没有 `GitHub <https://github.com>`_ 的账号，创建一个。
 * 点击**Fork**按键，复制（*fork*）一份
-  `CakePHP repository <http://github.com/cakephp/cakephp>`_ 的源码。
+  `CakePHP repository <https://github.com/cakephp/cakephp>`_ 的源码。
 
 你的复制完成后，从你的复制仓库（*repository*）克隆（*clone*）到你的本地机器::
 

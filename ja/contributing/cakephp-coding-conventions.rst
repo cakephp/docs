@@ -277,7 +277,7 @@ CakePHP の開発者は以下のコーディング規約を使います。
 
     <?php
     /**
-    * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+    * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
     * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
     *
     * Licensed under The MIT License
@@ -285,17 +285,17 @@ CakePHP の開発者は以下のコーディング規約を使います。
     * Redistributions of files must retain the above copyright notice.
     *
     * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
-    * @link          http://cakephp.org CakePHP(tm) Project
+    * @link          https://cakephp.org CakePHP(tm) Project
     * @since         X.Y.Z
     * @license       http://www.opensource.org/licenses/mit-license.php MIT License
     */
 
-コメントは以下の `phpDocumentor <http://phpdoc.org>`_ タグを含めることができます。
+コメントは以下の `phpDocumentor <https://phpdoc.org>`_ タグを含めることができます。
 
-*  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
-*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@license <http://phpdoc.org/docs/latest/references/phpdoc/tags/license.html>`_
+*  `@copyright <https://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
+*  `@link <https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@license <https://phpdoc.org/docs/latest/references/phpdoc/tags/license.html>`_
 
 クラスのドキュメントブロック
 ----------------------------
@@ -310,23 +310,23 @@ CakePHP の開発者は以下のコーディング規約を使います。
      *
      * @deprecated 3.0.0 Deprecated in 2.6.0. Will be removed in 3.0.0. Use Bar instead.
      * @see Bar
-     * @link http://book.cakephp.org/2.0/en/foo.html
+     * @link https://book.cakephp.org/2.0/en/foo.html
      */
     class Foo {
 
     }
 
-クラスのドキュメントブロックは、以下の `phpDocumentor <http://phpdoc.org>`_ タグを
+クラスのドキュメントブロックは、以下の `phpDocumentor <https://phpdoc.org>`_ タグを
 含めることができます。
 
-*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+*  `@deprecated <https://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    ``@version <vector> <description>`` 形式を使用して、 ``version`` と ``description`` は必須です。
-*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
-*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@property <http://phpdoc.org/docs/latest/references/phpdoc/tags/property.html>`_
-*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
-*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@uses <http://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html>`_
+*  `@internal <https://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@property <https://phpdoc.org/docs/latest/references/phpdoc/tags/property.html>`_
+*  `@see <https://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@uses <https://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html>`_
 
 プロパティのドキュメントブロック
 --------------------------------
@@ -338,20 +338,20 @@ CakePHP の開発者は以下のコーディング規約を使います。
      *
      * @deprecated 3.0.0 Deprecated as of 2.5.0. Will be removed in 3.0.0. Use $_bla instead.
      * @see Bar::$_bla
-     * @link http://book.cakephp.org/2.0/en/foo.html#properties
+     * @link https://book.cakephp.org/2.0/en/foo.html#properties
      */
     protected $_bar = null;
 
-プロパティのドキュメントブロックは、以下の `phpDocumentor <http://phpdoc.org>`_ タグを
+プロパティのドキュメントブロックは、以下の `phpDocumentor <https://phpdoc.org>`_ タグを
 含めることができます。
 
-*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+*  `@deprecated <https://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    ``@version <vector> <description>`` を使用して、 ``version`` と ``description`` は必須です。
-*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
-*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
-*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@var <http://phpdoc.org/docs/latest/references/phpdoc/tags/var.html>`_
+*  `@internal <https://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@see <https://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@var <https://phpdoc.org/docs/latest/references/phpdoc/tags/var.html>`_
 
 メソッド/関数のドキュメントブロック
 -----------------------------------
@@ -370,26 +370,26 @@ CakePHP の開発者は以下のコーディング規約を使います。
      * @return array An array of cakes.
      * @throws Exception If something goes wrong.
      *
-     * @link http://book.cakephp.org/2.0/en/foo.html#bar
+     * @link https://book.cakephp.org/2.0/en/foo.html#bar
      * @deprecated 3.0.0 Deprecated as of 2.5.0. Will be removed in 3.0.0. Use Bar::baz instead.
      * @see Bar::baz
      */
      public function bar($param1, $param2 = null) {
      }
 
-メソッドと関数のドキュメントブロックは、以下の `phpDocumentor <http://phpdoc.org>`_ タグを
+メソッドと関数のドキュメントブロックは、以下の `phpDocumentor <https://phpdoc.org>`_ タグを
 含めることができます。
 
-*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+*  `@deprecated <https://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    ``@version <vector> <description>`` 形式を使用して、 ``version`` と ``description`` は必須です。
-*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
-*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@param <http://phpdoc.org/docs/latest/references/phpdoc/tags/param.html>`_
-*  `@return <http://phpdoc.org/docs/latest/references/phpdoc/tags/return.html>`_
-*  `@throws <http://phpdoc.org/docs/latest/references/phpdoc/tags/throws.html>`_
-*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
-*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@uses <http://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html>`_
+*  `@internal <https://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@param <https://phpdoc.org/docs/latest/references/phpdoc/tags/param.html>`_
+*  `@return <https://phpdoc.org/docs/latest/references/phpdoc/tags/return.html>`_
+*  `@throws <https://phpdoc.org/docs/latest/references/phpdoc/tags/throws.html>`_
+*  `@see <https://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@uses <https://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html>`_
 
 変数の型
 ---------
@@ -452,7 +452,7 @@ callable
     require_once $class;
 
 クラスまたはライブラリを伴うファイルを読み込む場合、
-`require\_once <http://php.net/require_once>`_
+`require\_once <https://secure.php.net/require_once>`_
 関数のみを常に使用してください。
 
 PHP タグ

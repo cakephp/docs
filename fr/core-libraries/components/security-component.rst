@@ -19,7 +19,7 @@ Toutes ces propriétés peuvent être définies directement ou au travers de
 "méthodes setter" du même nom dans la partie beforeFilter de votre controller.
 
 En utilisant le Component Security vous obtenez automatiquement une protection
-`CSRF <http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_
+`CSRF <https://en.wikipedia.org/wiki/Cross-site_request_forgery>`_
 et une protection contre la falsification de formulaire.
 Des jetons de champs cachés seront automatiquement insérés dans les
 formulaires et vérifiés par le component Security. En outre, une
@@ -313,7 +313,7 @@ de votre controller. ::
 
 La valeur de la propriété csrfExpires peut être n'importe quelle valeur
 compatible à la propriété
-`strtotime() <http://php.net/manual/en/function.strtotime.php>`_.
+`strtotime() <https://secure.php.net/manual/en/function.strtotime.php>`_.
 Par défaut le Helper Form :php:class:`FormHelper` ajoutera une
 ``data[_Token][key]`` contenant le jeton CSRF pour tous les formulaires
 quand le component est activé.

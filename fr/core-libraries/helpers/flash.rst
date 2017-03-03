@@ -57,3 +57,8 @@ FlashComponent::
 
 Pour plus d'informations sur le tableau d'options disponibles, consultez la
 section :doc:`FlashComponent </core-libraries/components/flash>`.
+
+.. meta::
+    :title lang=fr: FlashHelper
+    :description lang=fr: FlashHelper fournit une façon de rendre les messages flash qui sont définis dans $_SESSION par FlashComponent.
+    :keywords lang=fr: flash helper,message,cakephp,element,session

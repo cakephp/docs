@@ -104,7 +104,7 @@ CakeTime
 
     :rtype: string
 
-    `PHP strftime() format パラメータ <http://www.php.net/manual/ja/function.strftime.php>`_
+    `PHP strftime() format パラメータ <https://secure.php.net/manual/ja/function.strftime.php>`_
     を使用して与えられた書式に文字列をフォーマットします。 ::
 
         // TimeHelper で実行

@@ -4,8 +4,8 @@ Xml
 .. php:class:: Xml
 
 The Xml class was all refactored. PHP 5 implements a
-`SimpleXML <http://php.net/simplexml>`_ and
-`DOMDocument <http://php.net/domdocument>`_, so that CakePHP doesn't need to
+`SimpleXML <https://secure.php.net/simplexml>`_ and
+`DOMDocument <https://secure.php.net/domdocument>`_, so that CakePHP doesn't need to
 re-implement an XML parser. The new XML class will transform an array into a
 SimpleXMLElement or DOMDocument objects, and vice versa.
 
@@ -23,18 +23,18 @@ how to import data from URL::
     App::uses('Xml', 'Utility');
 
     // Old method:
-    $xml = new Xml('http://bakery.cakephp.org/articles.rss');
+    $xml = new Xml('https://bakery.cakephp.org/articles.rss');
 
     // New method using SimpleXML
-    $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
+    $xml = Xml::build('https://bakery.cakephp.org/articles.rss');
     // $xml now is a instance of SimpleXMLElement
 
     // or
-    $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'simplexml'));
+    $xml = Xml::build('https://bakery.cakephp.org/articles.rss', array('return' => 'simplexml'));
     // $xml now is a instance of SimpleXMLElement
 
     // New method using DOMDocument
-    $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'domdocument'));
+    $xml = Xml::build('https://bakery.cakephp.org/articles.rss', array('return' => 'domdocument'));
     // $xml now is a instance of DOMDocument
 
 You can use :php:meth:`Xml::build()` to build XML objects from a variety of
@@ -55,7 +55,7 @@ files will be fetched with :php:class:`HttpSocket`::
     $xml = Xml::build('/home/awesome/unicorns.xml');
 
     // remote file
-    $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
+    $xml = Xml::build('https://bakery.cakephp.org/articles.rss');
 
 You can also build Xml objects using an array::
 
@@ -79,8 +79,8 @@ If your input is invalid the Xml class will throw a Exception::
 
 .. note::
 
-    `DOMDocument <http://php.net/domdocument>`_ and
-    `SimpleXML <http://php.net/simplexml>`_ implement different API's.
+    `DOMDocument <https://secure.php.net/domdocument>`_ and
+    `SimpleXML <https://secure.php.net/simplexml>`_ implement different API's.
     Be sure to use the correct methods on the object you request from Xml.
 
 Transforming a XML string in array
@@ -224,7 +224,7 @@ the samples::
 
     $xmlArray = array(
         'root' => array(
-            'xmlns:' => 'http://cakephp.org',
+            'xmlns:' => 'https://cakephp.org',
             'child' => 'value'
         )
     );
@@ -233,7 +233,7 @@ the samples::
     $xmlArray(
         'root' => array(
             'tag' => array(
-                'xmlns:pref' => 'http://cakephp.org',
+                'xmlns:pref' => 'https://cakephp.org',
                 'pref:item' => array(
                     'item 1',
                     'item 2'
@@ -246,11 +246,11 @@ the samples::
 The value of ``$xml1`` and ``$xml2`` will be, respectively::
 
     <?xml version="1.0"?>
-    <root xmlns="http://cakephp.org"><child>value</child>
+    <root xmlns="https://cakephp.org"><child>value</child>
 
 
     <?xml version="1.0"?>
-    <root><tag xmlns:pref="http://cakephp.org"><pref:item>item 1</pref:item><pref:item>item 2</pref:item></tag></root>
+    <root><tag xmlns:pref="https://cakephp.org"><pref:item>item 1</pref:item><pref:item>item 2</pref:item></tag></root>
 
 Creating a child
 ----------------

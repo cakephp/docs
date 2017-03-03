@@ -25,7 +25,7 @@ toutes les étapes possibles, lancez la commande::
     ./Console/cake upgrade --help
 
 Ou allez voir les
-`docs de l'API <http://api.cakephp.org/2.4/class-UpgradeShell.html>`_
+`docs de l'API <https://api.cakephp.org/2.4/class-UpgradeShell.html>`_
 pour plus d'informations:
 
 Mise à jour de votre App

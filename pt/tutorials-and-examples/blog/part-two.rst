@@ -615,7 +615,7 @@ mais aplicações ricas em recursos.
 
 Agora que você criou uma aplicação básica com o Cake, você está pronto para a
 coisa real. Comece seu próprio projeto, leia o restante do `Manual </>`_ e da
-`API <http://api.cakephp.org/2.8/>`_.
+`API <https://api.cakephp.org/2.8/>`_.
 
 E se você precisar de ajuda, nos vemos no canal #cakephp (e no #cakephp-pt).
 Seja bem-vindo ao CakePHP!

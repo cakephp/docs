@@ -161,7 +161,7 @@ first と last オプションを使って先頭ページと最終ページへ�
 特定のページ番号に直接行けるリンクを作れるだけでなく、現在の直前や直後、
 および先頭や末尾へのリンクを作りたくなる場合もあるでしょう。
 
-.. php:method:: prev($title = '<?= __('<< previous') ?>', $options = array(), $disabledTitle = null, $disabledOptions = array())
+.. php:method:: prev($title = '<< Previous', $options = array(), $disabledTitle = null, $disabledOptions = array())
 
     :param string $title: リンクのタイトル
     :param mixed $options: ページ制御用リンクのオプション
@@ -183,7 +183,7 @@ first と last オプションを使って先頭ページと最終ページへ�
     単純な例を以下に示します。 ::
 
         echo $this->Paginator->prev(
-          ' << ' . __('previous'),
+          '<< ' . __('previous'),
           array(),
           null,
           array('class' => 'prev disabled')
@@ -195,7 +195,7 @@ first と last オプションを使って先頭ページと最終ページへ�
 
         <span class="prev">
           <a rel="prev" href="/posts/index/page:1/sort:title/order:desc">
-            <?= __('<< previous') ?>
+            &lt;&lt; previous
           </a>
         </span>
 
@@ -203,7 +203,7 @@ first と last オプションを使って先頭ページと最終ページへ�
 
     .. code-block:: html
 
-        <span class="prev disabled"><?= __('<< previous') ?></span>
+        <span class="prev disabled">&lt;&lt; previous</span>
 
     ``tag`` オプションによりラッピング用のタグを変更できます。 ::
 
@@ -243,7 +243,7 @@ first と last オプションを使って先頭ページと最終ページへ�
 
 .. php:method:: next($title = 'Next >>', $options = array(), $disabledTitle = null, $disabledOptions = array())
 
-    このメソッドは :php:meth:`~PagintorHelper::prev()` と全く同じですが、
+    このメソッドは :php:meth:`~PaginatorHelper::prev()` と全く同じですが、
     いくつか例外があります。これは直前のページではなく直後のページヘの
     リンクを作ります。また rel 属性には ``prev`` の代わりに ``next``
     を使います。
@@ -442,7 +442,7 @@ PaginatorHelper を設定して JavaScript ヘルパーを使う
 機能を制限されているわけではありません。
 
 詳細は API の中の
-`PaginatorHelper <http://api.cakephp.org/2.8/class-PaginatorHelper.html>`_
+`PaginatorHelper <https://api.cakephp.org/2.8/class-PaginatorHelper.html>`_
 を参照してください。なお前述のように PaginatorHelper ではソート機能を提供
 してますので、これをテーブルの見出しの中に簡単に組み込めるようになっています。
 

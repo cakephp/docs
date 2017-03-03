@@ -461,7 +461,7 @@ CakePHP 的 Configure 类可以用来保存和读取应用程序或运行时相�
 CakePHP 附带两种内置的配置文件读取器。:php:class:`PhpReader` 能够读取 PHP 配置
 文件，与 Configure 类之前读取的格式相同。:php:class:`IniReader` 能够读取 ini
 配置文件。欲知 ini 文件的更多细节，请参见
-`PHP 文档 <http://php.net/parse_ini_file>`_。为了使用核心配置读取器，需要使用
+`PHP 文档 <https://secure.php.net/parse_ini_file>`_。为了使用核心配置读取器，需要使用
 :php:meth:`Configure::config()` 把它附加到 Configure 类上::
 
     App::uses('PhpReader', 'Configure');
@@ -611,7 +611,7 @@ read 方法为唯一必需的方法。如果你真的喜欢 XML 文件，你可�
 
         把自定义配置类叫做 ``XmlReader``，可不是个好主意，因为这个类名已经是 PHP
         内部的一个类了：
-        `XMLReader <http://php.net/manual/en/book.xmlreader.php>`_
+        `XMLReader <https://secure.php.net/manual/en/book.xmlreader.php>`_
 
 配置读取器的 ``read()`` 方法必需返回一个名为 ``$key`` 的资源包含的配置信息数组。
 

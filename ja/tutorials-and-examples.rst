@@ -5,8 +5,8 @@
 全てのピースがどう組み合わさっていくかを学ぶことができます。
 
 その他にも、既存のアプリケーションやコンポーネントについて、非公式の CakePHP プラグイン倉庫
-`CakePackages <http://plugins.cakephp.org/>`_ や、
-`Bakery <http://bakery.cakephp.org/>`_ を参考にすることもできます。
+`CakePackages <https://plugins.cakephp.org/>`_ や、
+`Bakery <https://bakery.cakephp.org/>`_ を参考にすることもできます。
 
 .. toctree::
     :glob:

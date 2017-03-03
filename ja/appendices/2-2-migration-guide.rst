@@ -117,7 +117,7 @@ Cookieコンポーネント
 --------------------
 
 - Rijndael暗号を使ってクッキーの暗号化が可能になりました。
-  この機能は、 `mcrypt <http://php.net/mcrypt>`_ のエクステンションが必要です。
+  この機能は、 `mcrypt <https://secure.php.net/mcrypt>`_ のエクステンションが必要です。
   以前は XOR暗号が使われていましたが、Rijndael暗号を推奨します。
   互換性維持のために、デフォルトではXOR暗号を利用するようになっています。
   詳細は、 :php:meth:`Security::rijndael()` ドキュメントを参照ください

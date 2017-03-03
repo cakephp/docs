@@ -601,7 +601,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
     组。
 
     'deep' 键应当设置为布尔值。如果设为 true，就会检查信用卡的 Luhn 算法(
-    `http://en.wikipedia.org/wiki/Luhn\_algorithm <http://en.wikipedia.org/wiki/Luhn_algorithm>`_ 
+    `https://en.wikipedia.org/wiki/Luhn\_algorithm <https://en.wikipedia.org/wiki/Luhn_algorithm>`_ 
     )。缺省值为 false。
 
     'regex' 键允许提供自定义正则表达式，用来验证信用卡号码::
@@ -837,7 +837,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 .. php:staticmethod:: luhn(string|array $check, boolean $deep = false)
 
     Luhn 算法：一个校验码公式，来验证各种识别号码。更多信息，请参见
-    `Luhn 算法 <http://en.wikipedia.org/wiki/Luhn_algorithm>`_。
+    `Luhn 算法 <https://en.wikipedia.org/wiki/Luhn_algorithm>`_。
 
 
 .. php:staticmethod:: maxLength(string $check, integer $max)

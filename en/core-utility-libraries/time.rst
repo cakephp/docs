@@ -103,7 +103,7 @@ Formatting
     :rtype: string
 
     Will return a string formatted to the given format using the
-    `PHP strftime() formatting options <http://www.php.net/manual/en/function.strftime.php>`_::
+    `PHP strftime() formatting options <https://secure.php.net/manual/en/function.strftime.php>`_::
 
         // called via TimeHelper
         echo $this->Time->format('2011-08-22 11:53:00', '%B %e, %Y %H:%M %p');

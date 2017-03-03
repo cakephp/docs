@@ -185,7 +185,7 @@ CakePHP のコントローラは、リクエストのライフサイクル周り
 ======================
 
 コントローラのメソッドとその説明については、
-`CakePHP API <http://api.cakephp.org/2.6/class-Controller.html>`_ を確認してください。
+`CakePHP API <https://api.cakephp.org/2.6/class-Controller.html>`_ を確認してください。
 
 ビューとの関係
 --------------
@@ -641,7 +641,7 @@ CakePHP は再度ビューを描画することはありません。 ::
 ================
 
 コントローラの変数とその説明については、
-`CakePHP API <http://api.cakephp.org/2.6/class-Controller.html>`_ を確認してください。
+`CakePHP API <https://api.cakephp.org/2.6/class-Controller.html>`_ を確認してください。
 
 .. php:attr:: name
 
@@ -721,7 +721,7 @@ $components と $helpers と $uses
 その他の変数
 ------------
 
-コントローラの変数の詳細については、 `API <http://api.cakephp.org>`_ ページで確認すれば、
+コントローラの変数の詳細については、 `API <https://api.cakephp.org>`_ ページで確認すれば、
 ここで説明した以外の他のコントローラ変数についてのセクションがあります。
 
 .. php:attr:: cacheAction

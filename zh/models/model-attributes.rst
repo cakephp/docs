@@ -4,7 +4,7 @@
 模型属性让你可以改变默认的模型行为。
 
 欲知完整的模型属性列表及描述请，请访问
-`CakePHP API <http://api.cakephp.org/2.8/class-Model.html>`_。
+`CakePHP API <https://api.cakephp.org/2.8/class-Model.html>`_。
 
 useDbConfig
 ===========

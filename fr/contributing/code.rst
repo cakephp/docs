@@ -13,8 +13,11 @@ récupérer la configuration de votre environnement.
 Vous aurez besoin du logiciel suivant:
 
 * Git
-* PHP 5.2.8 or greater
-* PHPUnit 3.5.10 or greater (3.7.38 recommended)
+* PHP 5.3.0 ou supérieur
+* ext/mcrypt
+* ext/mbstring
+* PHPUnit 3.7.0 ou supérieur (3.7.38 recommandé)
+* MySQL, SQLite, ou Postgres
 
 Mettez en place vos informations d'utilisateur avec votre nom / titre et
 adresse e-mail de travail::
@@ -29,8 +32,8 @@ adresse e-mail de travail::
 
 Récupérer un clone du code source de CakePHP sous GitHub.:
 
-* Si vous n'avez pas de compte `github <http://github.com>`_ , créez en un.
-* Forkez le `dépôt de CakePHP <http://github.com/cakephp/cakephp>`_ en cliquant
+* Si vous n'avez pas de compte `github <https://github.com>`_ , créez en un.
+* Forkez le `dépôt de CakePHP <https://github.com/cakephp/cakephp>`_ en cliquant
   sur le bouton **Fork**.
 
 Après que le fork est fait, clonez votre fork sur votre machine local::
@@ -120,17 +123,13 @@ la pull request est créée.
 
 * Si votre changement est un **bugfix** et n'introduit pas de nouvelles
   fonctionnalités et corrige seulement un comportement existant qui est présent
-  dans la version courante. Dans ce cas, choisissez **master** comme votre cible
+  dans la version courante. Dans ce cas, choisissez **2.x** comme votre cible
   de fusion.
 * Si votre changement est une **nouvelle fonctionnalité** ou un ajout
-  au framework, alors vous devez choisir la branche avec le nombre de la version
-  prochaine. Par exemple si la version stable courante est ``2.2.2``, la branche
-  acceptant les nouvelles fonctionnalités sera ``2.3``.
-* Si votre changement est une défailance d'une fonctionnalité existante, ou de
-  l'API, alors vous devrez choisir la prochaine version majeure. Par exemple,
-  si la version courante est ``2.2.2`` alors la prochaine fois qu'un
-  comportement peut être cassé sera dans ``3.0`` ainsi vous devez cibler
-  cette branche.
+  au framework, alors vous devez choisir la branche ``2.next``.
+* Si votre changement casse une fonctionnalité existante, votre patch ne sera
+  probablement pas fusionné dans 2.x. A la place, vous devrez cibler la
+  branche 4.0.
 
 .. note::
 

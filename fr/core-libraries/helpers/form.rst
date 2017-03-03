@@ -193,7 +193,7 @@ Il y plusieurs options pour create():
     ou pointer vers un domaine extérieur::
 
         echo $this->Form->create(false, array(
-            'url' => 'http://www.google.com/search',
+            'url' => 'https://www.google.com/search',
             'type' => 'get'
         ));
 
@@ -201,7 +201,7 @@ Il y plusieurs options pour create():
 
     .. code-block:: html
 
-        <form method="get" action="http://www.google.com/search">
+        <form method="get" action="https://www.google.com/search">
 
     Regardez aussi la méthode :php:meth:`HtmlHelper::url()` pour plus
     d'exemples sur les différents types d'URLs.
@@ -292,7 +292,7 @@ Fermer le Formulaire
         <div class="glass-pill"><input type="submit" value="Update!" name="Update"></div>
 
     Voir `l'API du Helper Form
-    <http://api.cakephp.org/2.4/class-FormHelper.html>`_ pour plus de détails.
+    <https://api.cakephp.org/2.4/class-FormHelper.html>`_ pour plus de détails.
 
     .. note::
 
@@ -1497,7 +1497,7 @@ Ex: name=data[User][username], id=UserUsername
     sur la façon dont PHP gère les données passées a travers
     les champs ``files``.
     `lire la section file uploads du manuel de PHP
-    <http://php.net/features.file-upload>`_.
+    <https://secure.php.net/features.file-upload>`_.
 
 Validation des Uploads
 ----------------------
