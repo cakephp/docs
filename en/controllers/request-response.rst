@@ -540,41 +540,6 @@ ics generated on the fly from a string::
         return $response;
     }
 
-Streaming Resources
--------------------
-
-You can stream responses from files using diactoros streams::
-
-    // To stream from a file
-    use Zend\Diactoros\Stream;
-
-    $stream = new Stream('/path/to/file', 'rb');
-    $response = $response->withStream($stream);
-
-You can also stream responses from a callback using the ``CallbackStream`` this
-is useful when you have resources like images, CSV files or PDFs you need to
-stream to the client::
-
-    // Streaming from a callback
-    use Cake\Http\CallbackStream;
-
-    // Create an image.
-    $img = imagecreate(100, 100);
-    // ...
-
-    $stream = new CallbackStream(function () use ($img) {
-        imagepng($img);
-    });
-    $response = $response->withStream($stream);
-
-    // Prior to 3.4.0 you can use the following to create streaming responses.
-    $file = fopen('/some/file.png', 'r');
-    $this->response->body(function () use ($file) {
-        rewind($file);
-        fpassthru($file);
-        fclose($file);
-    });
-
 Callbacks can also return the body as a string::
 
     $path = '/some/file.png';
@@ -610,6 +575,68 @@ emitted by ``Cake\Http\Server``.
 You can now use the convenience method
 :php:meth:`Cake\\Http\\Response::withLocation()` to directly set or get the
 redirect location header.
+
+Setting the Body
+----------------
+
+.. php:method:: withStringBody($string)
+
+To set a string as the response body, do the following::
+
+    // Set a string into the body
+    $response = $response->withStringBody('My Body');
+
+    // If you want a json response
+    $response = $response->withType('application/json')
+        ->withStringBody(json_encode(['Foo' => 'bar']));
+
+.. versionadded:: 3.4.3
+    ``withStringBody()`` was added in 3.4.3
+
+.. php:method:: withBody($body)
+
+To set the response body, use the ``withBody()`` method, which is provided by the
+:php:class:`Zend\\Diactoros\\MessageTrait`::
+
+    $response = $response->withBody($stream);
+
+    // Prior to 3.4.0 - Set the body
+    $this->response->body('My Body');
+
+Be sure that ``$stream`` is a :php:class:`Psr\\Http\\Message\\StreamInterface` object.
+See below on how to create a new stream.
+
+You can also stream responses from files using :php:class:`Zend\\Diactoros\\Stream` streams::
+
+    // To stream from a file
+    use Zend\Diactoros\Stream;
+
+    $stream = new Stream('/path/to/file', 'rb');
+    $response = $response->withBody($stream);
+
+You can also stream responses from a callback using the ``CallbackStream``. This
+is useful when you have resources like images, CSV files or PDFs you need to
+stream to the client::
+
+    // Streaming from a callback
+    use Cake\Http\CallbackStream;
+
+    // Create an image.
+    $img = imagecreate(100, 100);
+    // ...
+
+    $stream = new CallbackStream(function () use ($img) {
+        imagepng($img);
+    });
+    $response = $response->withBody($stream);
+
+    // Prior to 3.4.0 you can use the following to create streaming responses.
+    $file = fopen('/some/file.png', 'r');
+    $this->response->body(function () use ($file) {
+        rewind($file);
+        fpassthru($file);
+        fclose($file);
+    });
 
 Setting the Character Set
 -------------------------
