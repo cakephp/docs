@@ -11,7 +11,7 @@ Requirements
 
 - HTTP Server. For example: Apache. Having mod\_rewrite is preferred, but
   by no means required.
-- PHP |minphpversion| or greater (including PHP 7).
+- PHP |minphpversion| or greater (including PHP 7.1).
 - mbstring PHP extension
 - intl PHP extension
 
