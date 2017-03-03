@@ -5,7 +5,7 @@ CakePHP 2.10 is a fully API compatible upgrade from 2.9 This page outlines
 the changes and improvements made in 2.10.
 
 Model
------
+=====
 
 * ``Model::find()`` now supports ``having`` and ``lock`` options that enable you
   to add ``HAVING`` and ``FOR UPDATE`` locking clauses to your find operations.
@@ -27,3 +27,8 @@ Helpers
   read local image files and create base64 data URIs.
 * ``HtmlHelper::addCrumb()`` had the ``prepend`` option added. This lets you
   prepend a breadcrumb instead of appending to the list.
+
+Routing
+=======
+
+* ``Router::reverseToArray()`` was added.
