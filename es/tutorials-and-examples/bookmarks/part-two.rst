@@ -1,5 +1,5 @@
-Tutorial - Bookmarker (Favoritos) - Parte 2
-###########################################
+Tutorial Bookmarker (Favoritos) - Parte 2
+#########################################
 
 Tras realizar :doc:`la primera parte de este tutorial </tutorials-and-examples/bookmarks/intro>` 
 deberías tener una aplicación muy básica para guardar favoritos.
@@ -453,3 +453,6 @@ sacándole provecho a *FormHelper* y al potencial de *ORM*.
 Gracias por tomarte tu tiempo para explorar CakePHP. Ahora puedes realizar 
 el tutorial :doc:`/tutorials-and-examples/blog/blog`, aprender más sobre :doc:`/orm`, 
 o puedes leer detenidamente los :doc:`/topics`.
+
+.. meta::
+    :title lang=es: Tutorial Bookmarker (Favoritos) - Parte 2

@@ -1,5 +1,5 @@
-Tutorial de desarrollo del Blog
-###############################
+Tutorial Blog
+#############
 
 Bienvenido a CakePHP. Probablemente estás consultando este tutorial porque
 quieres aprender más sobre cómo funciona CakePHP. Nuestro objetivo es potenciar
@@ -259,3 +259,6 @@ url-rewriting
 
 Ahora continúa hacia :doc:`/tutorials-and-examples/blog/part-two` para empezar
 a construir tu primera aplicación en CakePHP.
+
+.. meta::
+    :title lang=es: Tutorial Blog
