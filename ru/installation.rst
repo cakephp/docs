@@ -7,7 +7,7 @@ CakePHP довольно прост и легок в установке. Мин�
 =====================
 
 - HTTP сервер. Например: Apache. Предпочтительно с mod\_rewrite, но необязательно.
-- PHP 5.5.9 или выше (включая PHP 7).
+- PHP 5.6.0 или выше (включая PHP 7.1).
 - Расширение mbstring для PHP 
 - Расширение intl для PHP 
 
@@ -39,7 +39,8 @@ CakePHP довольно прост и легок в установке. Мин�
 Установка CakePHP
 =================
 
-Прежде чем вы начнете установку убедитесь что у Вас установлена необходимая минимальная версия PHP (5.5.9):
+Прежде чем вы начнете установку убедитесь что у Вас установлена необходимая
+минимальная версия PHP (5.5.9):
 
 .. code-block:: bash
 
@@ -67,13 +68,32 @@ CakePHP использует мендежер зависимостей PHP `Comp
 
 - Установка Composer на Windows
 
-  Для  установки Composer на Windows, вы можете скачать установщик Composer для Windows
-  `здесь <https://github.com/composer/windows-setup/releases/>`__.  Более подробные
-  инструкции по установке Composer на Windows можно найти в README
+  Для  установки Composer на Windows, вы можете скачать установщик Composer для
+  Windows `здесь <https://github.com/composer/windows-setup/releases/>`__.  Более
+  подробные инструкции по установке Composer на Windows можно найти в README
   `здесь <https://github.com/composer/windows-setup>`__.
 
 Создание проекта CakePHP
 ------------------------
+
+Теперь, когда вы скачали и установили Composer, предположим вы хотите создать
+новое приложение CakePHP в папке my_app_name. Для этого просто выполните
+следующую команду composer:
+
+.. code-block:: bash
+
+    php composer.phar create-project --prefer-dist cakephp/app my_app_name
+
+Или если Composer установлен глобально:
+
+.. code-block:: bash
+
+    composer self-update && composer create-project --prefer-dist cakephp/app my_app_name
+    
+Как только Composer закончит скачивание каркаса приложения и библиотеки ядра
+CakePHP, у вас должно появиться полностью работоспособное приложение CakePHP.
+Убедитесь в том, чтобы в папке вашего приложения всегда были файлы
+composer.json и composer.lock.
 
 .. _url-rewriting:
 
@@ -85,4 +105,4 @@ CakePHP использует мендежер зависимостей PHP `Comp
 
 .. meta::
     :title lang=ru: Установка
-    :keywords lang=ru: apache mod rewrite,microsoft sql server,tar bz2,tmp directory,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighthttpd,repository,enhancements,source code,cakephp,incorporate
+    :keywords lang=ru: apache mod rewrite,microsoft sql server,tar bz2,папка tmp,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighthttpd,repository,enhancements,source code,cakephp,incorporate
