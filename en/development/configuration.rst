@@ -690,7 +690,7 @@ creating new applications and baking models is useful, generic table class make
 debugging more difficult at the same time.
 
 You can check if any query was fired off from a generic table class via DebugKit
-by select the history tab, select an http request and then selecting the SQL tab
+by select the history tab, select an HTTP request and then selecting the SQL tab
 in DebugKit.
 
 If that is not sufficient, you can throw an exeception if CakePHP is implicitly
