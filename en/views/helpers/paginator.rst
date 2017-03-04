@@ -66,7 +66,7 @@ runtime. This can be useful when you want to customize templates for a
 particular method call::
 
     // Read the current template value.
-    $result = $this->Paginator->setTemplates('number');
+    $result = $this->Paginator->getTemplates('number');
     // Prior to 3.4
     $result = $this->Paginator->templates('number');
 
