@@ -1,5 +1,5 @@
-Tutorial - Bookmarker (Favoritos)
-##################################
+Tutorial Bookmarker (Favoritos)
+###############################
 
 Este tutorial te guiará en la creación de una aplicación sencilla para el guardado de favoritos (Bookmaker).
 
@@ -387,3 +387,6 @@ Ahora deberías poder visitar la URL **/bookmarks/tagged/funny** y ver todos los
 Hasta aquí hemos creado una aplicación básica para manejar favoritos (bookmarks), etiquetas (tags) y usuarios (users). Sin embargo todo el mundo puede ver las etiquetas de los demás. En el siguiente capítulo implementaremos autenticación y restringiremos el uso de etiquetas únicamente a aquellas que pertenezcan al usuario actual.
 
 Ahora ve a :doc:`/tutorials-and-examples/bookmarks/part-two` para continuar construyendo tu apliación o :doc:`sumérgete en la documentación </topics>` para aprender más sobre que puede hacer CakePHP por ti.
+
+.. meta::
+    :title lang=es: Tutorial Bookmarker (Favoritos)
