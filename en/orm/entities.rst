@@ -183,12 +183,11 @@ Do bear in mind that virtual fields cannot be used in finds.
 Storing Explicit NULL Values instead of ''
 ------------------------------------------
 
-By default CakePHP will store empty values such as empty strings as they come in.
+By default CakePHP will store empty strings as they come in.
 E.g. ``''`` will be stored as SQL value ``''`` rather than SQL value ``NULL``,
 even if the schema allows NULLs.
 
 You can utilize Entity mutators to define how entities' empty values are being saved.
-
 Example saving ``NULL`` if given parent id is not a valid integer ::
 
     namespace App\Model\Entity;
@@ -210,7 +209,6 @@ Example saving ``NULL`` if given parent id is not a valid integer ::
 
             return null;
         }
-
     }
 
 Example returning ``NULL`` for non-true boolean or boolean-like value ::
@@ -231,7 +229,6 @@ Example returning ``NULL`` for non-true boolean or boolean-like value ::
 
             return null;
         }
-
     }
 
 Checking if an Entity Has Been Modified
