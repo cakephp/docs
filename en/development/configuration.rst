@@ -689,9 +689,9 @@ While utilizing generic table classes - also called auto-tables - when quickly
 creating new applications and baking models is useful, generic table class make
 debugging more difficult at the same time.
 
-You can see if any query was fired off from a generic table class via DebugKit
+You can check if any query was fired off from a generic table class via DebugKit
 by select the history tab, select an http request and then selecting the SQL tab
-in DebugKit. 
+in DebugKit.
 
 If that is not sufficient, you can throw an exeception if CakePHP is implicitly
 working off a generic ``Cake\ORM\Table`` instead of your ``App\ORM\ConcreteTable``
