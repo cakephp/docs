@@ -65,7 +65,7 @@ PaginatorHelper テンプレート
 これは、特定のメソッド呼び出しのテンプレートをカスタマイズする場合に便利です::
 
     // 現在のテンプレート値を読み込みます
-    $result = $this->Paginator->setTemplates('number');
+    $result = $this->Paginator->getTemplates('number');
     // 3.4 より前
     $result = $this->Paginator->templates('number');
 
