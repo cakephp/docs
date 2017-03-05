@@ -145,7 +145,7 @@ RSS レイアウトはとてもシンプルです。 **src/Template/Layout/rss/d
             'slug' => $article->slug
         ];
 
-        // Remove & escape any HTML to make sure the feed content will validate.
+        // フィードの内容を確かにバリデートするため、HTML を取り除いたりエスケープします。
         $body = h(strip_tags($article->body));
         $body = $this->Text->truncate($body, 400, [
             'ending' => '...',
