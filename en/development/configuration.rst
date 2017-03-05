@@ -686,21 +686,19 @@ Disabling Generic Tables
 ========================
 
 While utilizing generic table classes - also called auto-tables - when quickly
-creating new applications and baking models is useful, generic table class make
-debugging more difficult at the same time.
+creating new applications and baking models is useful, generic table class can
+make debugging more difficult in some scenarios.
 
-You can check if any query was fired off from a generic table class via DebugKit
-by select the history tab, select an HTTP request and then selecting the SQL tab
-in DebugKit.
-
-If that is not sufficient, you can throw an exeception if CakePHP is implicitly
-working off a generic ``Cake\ORM\Table`` instead of your ``App\ORM\ConcreteTable``
+You can check if any query was emitted from a generic table class via DebugKit
+via the SQL panel in DebugKit. If you're still having trouble diagnosing an
+issue that could be caused by auto-tables, you can throw an exeception when
+CakePHP implicitly uses a generic ``Cake\ORM\Table`` instead of your concrete
 class like so::
 
     // In your bootstrap.php
     use Cake\Event\EventManager;
     use Cake\Network\Exception\InternalErrorException;
-    
+
     EventManager::instance()->on('Model.initialize', function($event) {
         $subject = $event->getSubject();
         if (get_class($subject === 'Cake\ORM\Table') {
