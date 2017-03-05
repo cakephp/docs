@@ -18,7 +18,9 @@ Behavior Changes
 While these changes are API compatible, they represent minor variances in
 behavior that may affect your application:
 
-.. Add behavior changes here.
+* ``BehaviorRegistry``, ``HelperRegistry`` and ``ComponentRegistry`` will now
+  raise exceptions when ``unload()`` is called with an unknown object name. This
+  change should help find errors easier by making possible typos more visible.
 
 New Features
 ============
