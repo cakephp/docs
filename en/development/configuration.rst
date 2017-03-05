@@ -699,15 +699,18 @@ class like so::
     use Cake\Event\EventManager;
     use Cake\Network\Exception\InternalErrorException;
 
-    EventManager::instance()->on('Model.initialize', function($event) {
-        $subject = $event->getSubject();
-        if (get_class($subject === 'Cake\ORM\Table') {
-            $msg = sprintf(
-                'Missing table class or incorrect alias when registering table class for database table %s.',
-                $subject->getTable());
-            throw new InternalErrorException($msg);
-        }
-    });
+    $isCakeBakeShellRunning = (PHP_SAPI === 'cli' && isset($argv[1]) && $argv[1] === 'bake');
+    if (!$isCakeBakeShellRunning) {
+        EventManager::instance()->on('Model.initialize', function($event) {
+            $subject = $event->getSubject();
+            if (get_class($subject === 'Cake\ORM\Table') {
+                $msg = sprintf(
+                    'Missing table class or incorrect alias when registering table class for database table %s.',
+                    $subject->getTable());
+                throw new InternalErrorException($msg);
+            }
+        });
+    }
 
 .. meta::
     :title lang=en: Configuration
