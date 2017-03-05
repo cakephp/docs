@@ -74,10 +74,15 @@ AppController に追加しましょう。 ::
 
     <h1>Login</h1>
     <?= $this->Form->create() ?>
-    <?= $this->Form->input('email') ?>
-    <?= $this->Form->input('password') ?>
+    <?= $this->Form->control('email') ?>
+    <?= $this->Form->control('password') ?>
     <?= $this->Form->button('Login') ?>
     <?= $this->Form->end() ?>
+
+.. note::
+
+   ``control()`` は 3.4 以降で使用可能です。それより前のバージョンでは、代わりに
+   ``input()`` を使用してください。
 
 これでシンプルなログインフォームができました。ハッシュ化されたパスワードを持つユーザーで
 ログインすることができるはずです。
@@ -223,7 +228,7 @@ AppController に追加しましょう。 ::
 #. 一覧ページに他のユーザーのブックマークが表示される
 
 まず追加のフォームから取り組みましょう。はじめに **src/Template/Bookmarks/add.ctp** から
-``input('user_id')`` を削除します。 削除したら、 **src/Controller/BookmarksController.php**
+``control('user_id')`` を削除します。 削除したら、 **src/Controller/BookmarksController.php**
 の ``add()`` アクションを以下のように修正します。 ::
 
     public function add()
@@ -343,7 +348,7 @@ AppController に追加しましょう。 ::
 **src/Template/Bookmarks/add.ctp** と **src/Template/Bookmarks/edit.ctp** の
 すでにある ``tags._ids`` のインプットを以下と置き換えます。 ::
 
-    echo $this->Form->input('tag_string', ['type' => 'text']);
+    echo $this->Form->control('tag_string', ['type' => 'text']);
 
 タグ文字列を保存する
 --------------------

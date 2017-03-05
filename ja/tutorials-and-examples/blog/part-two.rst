@@ -345,8 +345,8 @@ add のビューは次のようなものになります:
     <h1>Add Article</h1>
     <?php
         echo $this->Form->create($article);
-        echo $this->Form->input('title');
-        echo $this->Form->input('body', ['rows' => '3']);
+        echo $this->Form->control('title');
+        echo $this->Form->control('body', ['rows' => '3']);
         echo $this->Form->button(__('Save Article'));
         echo $this->Form->end();
     ?>
@@ -362,12 +362,12 @@ add のビューは次のようなものになります:
 (または ``id`` がフォームデータに含まれる場合 ``edit()`` アクション) に、
 POST で送るフォームを構築している、と解釈されます。
 
-``$this->Form->input()`` メソッドは、同名のフォーム要素を作成するのに使われています。
+``$this->Form->control()`` メソッドは、同名のフォーム要素を作成するのに使われています。
 最初のパラメータは、どのフィールドに対応しているのかを CakePHP に教えます。
 ２番目のパラメータは、様々なオプションの配列を指定することができます。
 - この例では、textarea の列の数を指定しています。
 ここではちょっとした内観的で自動的な手法が使われています。
-``input()`` は、指定されたモデルのフィールドに基づいて、異なるフォーム要素を出力します。
+``control()`` は、指定されたモデルのフィールドに基づいて、異なるフォーム要素を出力します。
 
 ``$this->Form->end()`` の呼び出しで、フォームの終了部分が出力されます。
 hiddenのinput要素の出力においては、CSRF/フォーム改ざん防止が有効です。
@@ -416,7 +416,7 @@ CakePHP のバリデーションエンジンは強力で、
 :doc:`/core-libraries/validation` を参照してください。
 
 バリデーションルールを書き込んだので、アプリケーションを動作させて、タイトルと本文を
-空にしたまま、記事を投稿してみてください。 :php:meth:`Cake\\View\\Helper\\FormHelper::input()`
+空にしたまま、記事を投稿してみてください。 :php:meth:`Cake\\View\\Helper\\FormHelper::control()`
 メソッドを使ってフォーム要素を作成したので、バリデーションエラーのメッセージが自動的に表示されます。
 
 投稿記事の編集
@@ -462,8 +462,8 @@ edit ビューは以下のようになるでしょう:
     <h1>Edit Article</h1>
     <?php
         echo $this->Form->create($article);
-        echo $this->Form->input('title');
-        echo $this->Form->input('body', ['rows' => '3']);
+        echo $this->Form->control('title');
+        echo $this->Form->control('body', ['rows' => '3']);
         echo $this->Form->button(__('Save Article'));
         echo $this->Form->end();
     ?>
@@ -643,7 +643,7 @@ CakePHP には、もっともっと *多くの* 機能があります。シン�
 
 基本的なアプリケーションの作成が終わったので :doc:`/tutorials-and-examples/blog/part-three`
 に進むか、自分のプロジェクトを始めてください。CakePHP についてさらに学ぶために
-:doc:`/topics` や `API <https://api.cakephp.org/3.0>` を使いましょう。
+:doc:`/topics` や `API <https://api.cakephp.org>`_ を使いましょう。
 
 もし困ったときは、いろんな方法で助けを得ることができます。
 :doc:`/intro/where-to-get-help` を見てみてください。
