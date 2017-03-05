@@ -7,18 +7,18 @@ Rss
 
 RssHelper は `RSS feeds <https://en.wikipedia.org/wiki/RSS>`_ である XML の作成が簡単にできます。
 
-Creating an RSS Feed with the RssHelper
+RssHelper で RSS フィードを生成
 =======================================
 
-This example assumes you have a Articles Controller, Articles Table and an
-Article Entity already created and want to make an alternative view for RSS.
+この例では、Articles コントローラと Articles テーブル、Article エンティティがすでに作成されていて、
+これに RSS 用のビューを作成すると仮定します。
 
-Creating an XML/RSS version of ``articles/index`` is a snap with CakePHP.
-After a few simple steps you can simply append the desired extension .rss to
-``articles/index`` making your URL ``articles/index.rss``. Before we jump too
-far ahead trying to get our webservice up and running we need to do a few
-things. First extensions parsing needs to be activated, this is done in
-**config/routes.php**::
+CakePHP で ``articles/index`` の XML/RSS バージョンがすぐに作成できます。
+いくつかの簡単なステップの後、 ``articles/index`` に拡張子 (.rss) を追加し、
+``articles/index.rss`` という URL を作成します。
+このウェブサービスを公開して実行する前にいくつか行う必要があります。
+最初に拡張子パースを有効にします。これは **config/routes.php** で行います。
+::
 
     Router::extensions('rss');
 
@@ -130,6 +130,7 @@ RSS レイアウトはとてもシンプルです。 **src/Template/Layout/rss/d
 .. note::
     アプリケーションに適切な $link 変数を修正する必要があります。
     また、Entity 内で :ref:`virtual property <entities-virtual-properties>` を使いたいでしょう。
+
 ::
 
     foreach ($articles as $article) {
@@ -172,7 +173,6 @@ Feed Validator や w3c サイトの http://validator.w3.org/feed/ など、XML �
 .. note::
 
     正しいフィードを取得するためにコア設定内で ‘debug’ の値を ``false`` にセットする必要があります。
-    because of the various debug information added automagically under higher debug settings that break XML syntax or feed validation rules.
     高い debug の設定下では様々なデバッグ情報が自動的に追加され、それが XML 構文やフィードのバリデーションルールを壊すからです。
         
 .. meta::
