@@ -90,7 +90,7 @@ display a list, in an HTML select for example, it is better to use the
     $list = $categories->find('treeList');
 
     // In a CakePHP template file:
-    echo $this->Form->input('categories', ['options' => $list]);
+    echo $this->Form->control('categories', ['options' => $list]);
 
     // Or you can output it in plain text, for example in a CLI script
     foreach ($list as $categoryName) {
