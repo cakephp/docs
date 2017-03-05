@@ -259,7 +259,9 @@ des emails peuvent aussi utiliser les layouts et éléments tout comme les
 templates normales::
 
     $email = new Email();
-    $email->setTemplate('welcome', 'fancy')
+    $email
+        ->setTemplate('welcome')
+        ->setLayout('fancy')
         ->setEmailFormat('html')
         ->setTo('bob@example.com')
         ->setFrom('app@domain.com')
@@ -270,7 +272,9 @@ vue, et **src/Template/Layout/Email/html/fancy.ctp** pour le layout. Vous pouvez
 aussi envoyer des messages email templaté multipart::
 
     $email = new Email();
-    $email->setTemplate('welcome', 'fancy')
+    $email
+        ->setTemplate('welcome')
+        ->setLayout('fancy')
         ->setEmailFormat('both')
         ->setTo('bob@example.com')
         ->setFrom('app@domain.com')

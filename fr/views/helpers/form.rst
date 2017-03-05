@@ -16,7 +16,7 @@ uniquement que ce dont vous avez besoin.
 Création de Formulaire
 ======================
 
-.. php:method:: create(mixed $model = null, array $options = [])
+.. php:method:: create(mixed $context = null, array $options = [])
 
 La première méthode que vous aurez besoin d'utiliser pour tirer pleinement
 profit du FormHelper est ``create()``. Cette méthode affichera une balise
@@ -32,10 +32,10 @@ UsersController::add(), vous verrez la sortie suivante dans la vue:
 
     <form method="post" action="/users/add">
 
-L'argument ``$model`` est utilisé comme 'context' du formulaire. Il y a
+L'argument ``$context`` est utilisé comme 'context' du formulaire. Il y a
 plusieurs contextes de formulaires intégrés et vous pouvez ajouter les vôtres,
 ce que nous allons voir dans la prochaine section. Ceux intégrés correspondent
-aux valeurs suivantes de ``$model``:
+aux valeurs suivantes de ``$context``:
 
 * Une instance ``Entity`` ou un iterateur qui mappe vers ``EntityContext``, ce
   contexte permet au FormHelper de fonctionner avec les résultats à partir de

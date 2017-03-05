@@ -503,13 +503,7 @@ ORM とオブジェクトの結果セットは強力である一方で、エン�
 人々のリストを問い合わせる際に、formatResults を使って年齢 (age) を算出するなら次のようになります。 ::
 
     // フィールド、条件、関連が構築済であると仮定します。
-    $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results) {
-        return $results->map(function ($row) {
-            $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
-            return $row;
-        });
-    });
-    $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results) {
+    $query->formatResults(function (\Cake\Collection\CollectionInterface $results) {
         return $results->map(function ($row) {
             $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
             return $row;
@@ -529,7 +523,7 @@ CakePHP はフォーマッタ関数が適切なスコープになるよう保証
 
     // Articles テーブル内のメソッドで
     $query->contain(['Authors' => function ($q) {
-        return $q->formatResults(function ($authors) {
+        return $q->formatResults(function (\Cake\Collection\CollectionInterface authors) {
             return $authors->map(function ($author) {
                 $author['age'] = $author['birth_date']->diff(new \DateTime)->y;
                 return $author;
@@ -960,7 +954,7 @@ Query オブジェクトでは :doc:`Collection </core-libraries/collections>`
         return $row->id;
     });
 
-    $maxAge = $query->max(function ($row) {
+    $maxAge = $query->max(function ($max) {
         return $max->age;
     });
 

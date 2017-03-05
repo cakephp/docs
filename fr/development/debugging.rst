@@ -188,7 +188,7 @@ utiliser les logs (log entries) pour faciliter le debug des méthodes qui
 impliquent des redirections ou des boucles compliquées. Vous pouvez aussi
 utiliser :php:meth:`Cake\\Log\\Log::write()`` pour écrire les messages de log.
 Cette méthode peut être appelée statiquement partout dans votre application où
-CakeLog a été chargée::
+Log a été chargée::
 
     // Au début du fichier dans lequel vous voulez logger.
     use Cake\Log\Log;

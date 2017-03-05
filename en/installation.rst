@@ -11,7 +11,7 @@ Requirements
 
 - HTTP Server. For example: Apache. Having mod\_rewrite is preferred, but
   by no means required.
-- PHP |minphpversion| or greater (including PHP 7).
+- PHP |minphpversion| or greater (including PHP 7.1).
 - mbstring PHP extension
 - intl PHP extension
 
@@ -119,11 +119,11 @@ Keeping Up To Date with the Latest CakePHP Changes
 By default this is what your application **composer.json** looks like::
 
     "require": {
-        "cakephp/cakephp": "3.3.*"
+        "cakephp/cakephp": "3.4.*"
     }
 
 Each time you run ``php composer.phar update`` you will receive bugfix
-releases for this minor version. You can instead change this to ``~3.3`` to
+releases for this minor version. You can instead change this to ``~3.4`` to
 also receive the latest stable releases of the ``3.x`` branch.
 
 If you want to keep current with the latest unreleased changes in CakePHP
@@ -137,6 +137,22 @@ designate **dev-master** as the package version in your application's
 Be aware that is not recommended, as your application can break when the next major
 version is being released. Additionally composer does not cache development
 branches, so it slows down consecutive composer installs/updates.
+
+Installation using Oven
+-----------------------
+
+Another quick way to install CakePHP is `Oven <https://github.com/CakeDC/oven>`_. 
+It is a simple PHP script which checks the necessary system requirements,
+installs the CakePHP application skeleton and sets the development environment up.
+
+After the installation completes, your CakePHP application is ready to go!
+
+.. note::
+
+    IMPORTANT: This is not a deployment script, it is aimed to help developers installing
+    CakePHP for the first time and get a working development environment up and running 
+    in seconds. Production environments should consider several other factors, like 
+    file permissions, virtualhost configuration, etc.
 
 Permissions
 ===========

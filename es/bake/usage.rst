@@ -1,5 +1,5 @@
-Code Generation with Bake
-#########################
+Crear código con Bake
+#####################
 
 La consola de CAKE se ejecuta usando PHP CLI (command line interface).
 Si tiene problemas para ejecutar el script, asegurese de:
@@ -9,20 +9,20 @@ Si tiene problemas para ejecutar el script, asegurese de:
 2. Si el host de base de datos es 'localhost', intente realizar la conexión con
    el ip '127.0.0.1'. En algunos casos PHP CLI tiene problemas al referenciar
    por nombre de host (localhost).
-3. Dependiendo de como su computadora este configurada, la ejecución del comando
-   CAKE BAKE (cake bash script) puede requerir que permisos de ejecución al
+3. Dependiendo de como esté configurado su equipo, la ejecución del comando
+   CAKE BAKE (cake bash script) puede requerir permisos de ejecución al
    lanzar ``bin/cake bake``.
 
-Antes de comenzar la  ejecución, asegurese de disponer al menos una conexion
-a una base de datos configurada.  Ver sección :ref:`database configuration
-<database-configuration>` para mas información.
+Antes de comenzar la ejecución, asegúrese de disponer al menos de una conexión
+a una base de datos configurada.  Ver sección :ref:`configuración de base de datos
+<database-configuration>` para más información.
 
-A fin de comenzar con la ejecución del comando, debe abrir la consola de windows
+Para comenzar con la ejecución del comando debe abrir la consola de windows
 y ejecutar "Cake Bake"
 
 1. Ir a Inicio (Start) > Ejecutar (Run)
 2. Escribir "cmd" y presionar 'Enter'
-3. Navegar hasta llegar a la carpeta de instalación del cake
+3. Navegar hasta llegar a la carpeta de instalación de cake
 4. Acceder a la carpeta 'bin'
 5. Escribir 'Cake bake' lo cual deberá devolver un listado con todas las
    tareas/actividades disponibles.
@@ -112,5 +112,5 @@ propios templates, ver :ref:`bake theme creation documentation
 <creating-a-bake-theme>`.
 
 .. meta::
-    :title lang=en: Code Generation with Bake
-    :keywords lang=en: command line interface,functional application,database,database configuration,bash script,basic ingredients,project,model,path path,code generation,scaffolding,windows users,configuration file,few minutes,config,iew,shell,models,running,mysql
+    :title lang=es: Crear código con Bake
+    :keywords lang=es: interfaz de línea de comando, aplicación funcional, base de datos, configuración de base de datos, bash script, ingredientes básicos, proyecto, modelo, path, crear código, generación de código, scaffolding, usuarios windows, archivo de configuración, pocos minutos, configurar, iew, shell, modelos, running, mysql

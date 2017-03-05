@@ -14,7 +14,7 @@ RequestHandler は初期状態で、多くの JavaScript ライブラリが使�
 RequestHandler は、自動的に HTML 以外のメディアタイプに対応したレイアウトとテンプレートファイルを
 切り替えます。さらに、リクエストの拡張子と同じ名前のヘルパーが存在する場合、コントローラのヘルパーの
 設定をする配列に加えます。最後に、 XML/JSON データをコントローラへ POST した場合、自動的に解析され
-``$this->request->data`` 配列に割り当てられ、モデルデータとして保存可能です。
+``$this->request->getData()`` 配列に割り当てられ、モデルデータとして保存可能です。
 RequestHandler を利用するためには ``initialize()`` メソッドに含めてください。 ::
 
     class WidgetsController extends AppController
@@ -164,7 +164,7 @@ RequestHandler はクライアントやリクエストについての情報を�
     // 3.1.0 以降では、以下を使用してください
     $this->RequestHandler->config('inputTypeMap.json', ['json_decode', true]);
 
-上記の例は、 JSON によるデータを ``$this->request->data`` の配列にします。
+上記の例は、 JSON によるデータを ``$this->request->getData()`` の配列にします。
 ``stdClass`` オブジェクトで取得したい場合は、引数の ``true`` なしになります。
 
 .. deprecated:: 3.1.0

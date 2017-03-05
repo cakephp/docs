@@ -519,7 +519,7 @@ the :ref:`Map/Reduce <map-reduce>` feature instead. If you were querying a list
 of people, you could calculate their age with a result formatter::
 
     // Assuming we have built the fields, conditions and containments.
-    $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results) {
+    $query->formatResults(function (\Cake\Collection\CollectionInterface $results) {
         return $results->map(function ($row) {
             $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
             return $row;
@@ -540,7 +540,7 @@ expect::
 
     // In a method in the Articles table
     $query->contain(['Authors' => function ($q) {
-        return $q->formatResults(function ($authors) {
+        return $q->formatResults(function (\Cake\Collection\CollectionInterface $authors) {
             return $authors->map(function ($author) {
                 $author['age'] = $author['birth_date']->diff(new \DateTime)->y;
                 return $author;
@@ -986,7 +986,7 @@ on your query objects to pre-process or transform the results::
         return $row->id;
     });
 
-    $maxAge = $query->max(function ($row) {
+    $maxAge = $query->max(function ($max) {
         return $max->age;
     });
 

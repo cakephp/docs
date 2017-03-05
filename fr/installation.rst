@@ -12,7 +12,7 @@ Conditions requises
 
 - HTTP Server. Par exemple: Apache. mod\_rewrite est préférable, mais en
   aucun cas nécessaire
-- PHP |minphpversion| ou plus (y compris PHP 7)
+- PHP |minphpversion| ou plus (y compris PHP 7.1)
 - extension PHP mbstring
 - extension PHP intl
 

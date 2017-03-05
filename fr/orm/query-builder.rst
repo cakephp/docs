@@ -546,7 +546,7 @@ place. Si vous faîtes une requête d'une liste de personnes, vous pourriez
 calculer leur âge avec le formateur de résultats::
 
     // En supposant que nous avons construit les champs, les conditions et les contain.
-    $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results) {
+    $query->formatResults(function (\Cake\Collection\CollectionInterface  $results) {
         return $results->map(function ($row) {
             $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
             return $row;
@@ -568,7 +568,7 @@ comme vous pouvez vous y attendre::
 
     // Dans une méthode dans la table Articles
     $query->contain(['Authors' => function ($q) {
-        return $q->formatResults(function ($authors) {
+        return $q->formatResults(function (\Cake\Collection\CollectionInterface $authors) {
             return $authors->map(function ($author) {
                 $author['age'] = $author['birth_date']->diff(new \DateTime)->y;
                 return $author;
@@ -1032,7 +1032,7 @@ query pour traiter préalablement ou transformer les résultats::
         return $row->id;
     });
 
-    $maxAge = $query->max(function ($row) {
+    $maxAge = $query->max(function ($max) {
         return $max->age;
     });
 

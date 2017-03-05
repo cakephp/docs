@@ -311,6 +311,14 @@ HTTP エラー用の例外を使うことで、あなたのコードを綺麗に
 
     モデルのビヘイビアが見つかりません。
 
+.. php:exception:: PersistenceFailedException
+
+    :php:meth:`Cake\\ORM\\Table::saveOrFail()` や
+    :php:meth:`Cake\\ORM\\Table::deleteOrFail()` を使用しましたが、
+    エンティティは、保存/削除されませんでした。
+
+    .. versionadded:: 3.4.1 PersistenceFailedException は追加されました。
+
 .. php:namespace:: Cake\Datasource\Exception
 
 .. php:exception:: RecordNotFoundException

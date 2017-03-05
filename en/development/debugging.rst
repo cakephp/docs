@@ -188,7 +188,7 @@ to log messages::
 The above would write ``Got here`` into the debug log. You can use log entries
 to help debug methods that involve redirects or complicated loops. You can also
 use :php:meth:`Cake\\Log\\Log::write()` to write log messages. This method can be called
-statically anywhere in your application one CakeLog has been loaded::
+statically anywhere in your application one Log has been loaded::
 
     // At the top of the file you want to log in.
     use Cake\Log\Log;

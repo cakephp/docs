@@ -14,7 +14,7 @@ only what you need.
 Starting a Form
 ===============
 
-.. php:method:: create(mixed $model = null, array $options = [])
+.. php:method:: create(mixed $context = null, array $options = [])
 
 The first method you'll need to use in order to take advantage of the FormHelper
 is ``create()``. This method outputs an opening form tag.
@@ -29,9 +29,9 @@ would see something like the following output in the rendered view:
 
     <form method="post" action="/users/add">
 
-The ``$model`` argument is used as the form's 'context'. There are several
+The ``$context`` argument is used as the form's 'context'. There are several
 built-in form contexts and you can add your own, which we'll cover in the next
-section. The built-in providers map to the following values of ``$model``:
+section. The built-in providers map to the following values of ``$context``:
 
 * An ``Entity`` instance or, an iterator map to the ``EntityContext``, this
   context allows FormHelper to work with results from the built-in ORM.
@@ -1686,7 +1686,7 @@ example::
     // Create a radio set with our custom wrapping div.
     echo $this->Form->radio('User.email_notifications', ['y', 'n']);
 
-Similar to inpcontrolut containers, the ``control()`` method will also attempt to use
+Similar to controlling containers, the ``control()`` method will also attempt to use
 distinct templates for each form group. A form group is a combo of label and
 control. For example, when creating a radio input the ``radioFormGroup`` will be
 used if it is present. If that template is missing by default each set of label
@@ -1767,6 +1767,14 @@ control the generated legend/fieldset.
 
 For example::
 
+    echo $this->Form->allControls(
+        [
+            'name' => ['label' => 'custom label']
+        ],
+        null,
+        ['legend' => 'Update your post']
+    );
+    // Or prior to 3.4.0:
     echo $this->Form->allInputs(
         [
             'name' => ['label' => 'custom label']
@@ -1774,6 +1782,7 @@ For example::
         null,
         ['legend' => 'Update your post']
     );
+
 
 If you disable the fieldset, the legend will not print.
 
@@ -1784,6 +1793,8 @@ is defaulted to *all* fields in the current top-level entity. To exclude
 specific fields from the generated controls, set them to ``false`` in the fields
 parameter::
 
+    echo $this->Form->allControls(['password' => false]);
+    // Or prior to 3.4.0:
     echo $this->Form->allInputs(['password' => false]);
 
 .. _associated-form-inputs:
