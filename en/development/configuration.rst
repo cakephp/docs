@@ -681,6 +681,36 @@ use the values that are defined in the **app.php**. You can use
 environment variables in a local development. See the Readme instructions of the
 library for more information.
 
+
+Disabling Generic Tables
+========================
+
+While utilizing generic table classes - also called auto-tables - when quickly
+creating new applications and baking models is useful, generic table class make
+debugging more difficult at the same time.
+
+You can check if any query was fired off from a generic table class via DebugKit
+by select the history tab, select an HTTP request and then selecting the SQL tab
+in DebugKit.
+
+If that is not sufficient, you can throw an exeception if CakePHP is implicitly
+working off a generic ``Cake\ORM\Table`` instead of your ``App\ORM\ConcreteTable``
+class like so::
+
+    // In your bootstrap.php
+    use Cake\Event\EventManager;
+    use Cake\Network\Exception\InternalErrorException;
+    
+    EventManager::instance()->on('Model.initialize', function($event) {
+        $subject = $event->getSubject();
+        if (get_class($subject === 'Cake\ORM\Table') {
+            $msg = sprintf(
+                'Missing table class or incorrect alias when registering table class for database table %s.',
+                $subject->getTable());
+            throw new InternalErrorException($msg);
+        }
+    });
+
 .. meta::
     :title lang=en: Configuration
-    :keywords lang=en: finished configuration,legacy database,database configuration,value pairs,default connection,optional configuration,example database,php class,configuration database,default database,configuration steps,index database,configuration details,class database,host localhost,inflections,key value,database connection,piece of cake,basic web
+    :keywords lang=en: finished configuration,legacy database,database configuration,value pairs,default connection,optional configuration,example database,php class,configuration database,default database,configuration steps,index database,configuration details,class database,host localhost,inflections,key value,database connection,piece of cake,basic web,auto tables,auto-tables,generic table,class
