@@ -181,7 +181,7 @@ bakeツールによって、すぐにすべてのファイルが作成されま�
 ``src/Template/Categories/add.ctp`` および ``src/Template/Categories/edit.ctp``
 を以下のように修正してください。 ::
 
-    echo $this->Form->input('parent_id', [
+    echo $this->Form->control('parent_id', [
         'options' => $parentCategories,
         'empty' => 'No parent category'
     ]);
@@ -205,10 +205,10 @@ bake は ``lft`` 列と ``rght`` 列が存在するあらゆるテーブルに�
 紐づけられた TreeBehavior によって、カテゴリの順を並べ直すような機能にアクセスすることが可能になります。
 すぐにわかるでしょう。
 
-しかし今は、カテゴリの中にある add と edit のテンプレートファイル内の次の input を削除てください。 ::
+しかし今は、カテゴリの中にある add と edit のテンプレートファイル内の次の control を削除てください。 ::
 
-    echo $this->Form->input('lft');
-    echo $this->Form->input('rght');
+    echo $this->Form->control('lft');
+    echo $this->Form->control('rght');
 
 さらに、Categories テーブルモデルの ``lft`` 列と ``rght`` 列のバリデーターの中の
 requirePresense を無効にするか削除してください。 ::
@@ -354,8 +354,7 @@ Articles コントローラを編集する
             }
             $this->set('article', $article);
 
-            // Just added the categories list to be able to choose
-            // one category for an article
+            // 記事のカテゴリを１つ選択するためにカテゴリの一覧を追加
             $categories = $this->Articles->Categories->find('treeList');
             $this->set(compact('categories'));
         }
@@ -374,10 +373,10 @@ Articles テンプレートを編集する
     <h1>Add Article</h1>
     <?php
     echo $this->Form->create($article);
-    // just added the categories input
-    echo $this->Form->input('category_id');
-    echo $this->Form->input('title');
-    echo $this->Form->input('body', ['rows' => '3']);
+    // ここにカテゴリのコントロールを追加
+    echo $this->Form->control('category_id');
+    echo $this->Form->control('title');
+    echo $this->Form->control('body', ['rows' => '3']);
     echo $this->Form->button(__('Save Article'));
     echo $this->Form->end();
 
