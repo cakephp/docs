@@ -13,3 +13,8 @@ Retrieving Data & Results Sets
 
     Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
     para obtener información sobre el tema de esta página.
+
+.. _custom-find-methods:
+
+Custom Finder Methods
+=====================

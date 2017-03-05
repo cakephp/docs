@@ -204,7 +204,7 @@ following configuration keys are used:
 - ``'transport'``: Transport configuration name. See
   :php:meth:`~Cake\\Mailer\\Email::setConfigTransport()`.
 - ``'log'``: Log level to log the email headers and message. ``true`` will use
-  LOG_DEBUG. See also ``CakeLog::write()``
+  LOG_DEBUG. See also :ref:`logging-levels`.
 - ``'helpers'``: Array of helpers used in the email template. ``Email::setHelpers()``.
 
 All these configurations are optional, except ``'from'``.
@@ -236,7 +236,9 @@ The templates for emails reside in a special folder in your application's
 and elements just like normal views::
 
     $email = new Email();
-    $email->setTemplate('welcome', 'fancy')
+    $email
+        ->setTemplate('welcome')
+        ->setLayout('fancy')
         ->setEmailFormat('html')
         ->setTo('bob@example.com')
         ->setFrom('app@domain.com')
@@ -247,7 +249,9 @@ and **src/Template/Layout/Email/html/fancy.ctp** for the layout. You can
 send multipart templated email messages as well::
 
     $email = new Email();
-    $email->setTemplate('welcome', 'fancy')
+    $email
+        ->setTemplate('welcome')
+        ->setLayout('fancy')
         ->setEmailFormat('both')
         ->setTo('bob@example.com')
         ->setFrom('app@domain.com')
@@ -451,7 +455,7 @@ Sending Emails from CLI
 =======================
 
 When sending emails within a CLI script (Shells, Tasks, ...) you should manually
-set the domain name for CakeEmail to use. It will serve as the host name for the
+set the domain name for Email to use. It will serve as the host name for the
 message id (since there is no host name in a CLI environment)::
 
     $email->setDomain('www.example.org');

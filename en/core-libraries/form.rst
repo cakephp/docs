@@ -186,9 +186,9 @@ Once you've created a Form class, you'll likely want to create an HTML form for
 it. FormHelper understands Form objects just like ORM entities::
 
     echo $this->Form->create($contact);
-    echo $this->Form->input('name');
-    echo $this->Form->input('email');
-    echo $this->Form->input('body');
+    echo $this->Form->control('name');
+    echo $this->Form->control('email');
+    echo $this->Form->control('body');
     echo $this->Form->button('Submit');
     echo $this->Form->end();
 

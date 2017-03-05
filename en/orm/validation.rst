@@ -411,6 +411,7 @@ Association Count Rules
 If you need to validate that a property or association contains the correct
 number of values, you can use the ``validCount()`` rule::
 
+    // In the ArticlesTable.php file
     // No more than 5 tags on an article.
     $rules->add($rules->validCount('tags', 5, '<=', 'You can only have 5 tags'));
 
@@ -419,6 +420,7 @@ comparison operator to use. ``==``, ``>=``, ``<=``, ``>``, ``<``, and ``!=``
 are the accepted operators. To ensure a property's count is within a range, use
 two rules::
 
+    // In the ArticlesTable.php file
     // Between 3 and 5 tags
     $rules->add($rules->validCount('tags', 3, '>=', 'You must have at least 3 tags'));
     $rules->add($rules->validCount('tags', 5, '<=', 'You must have at most 5 tags'));

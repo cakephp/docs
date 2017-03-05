@@ -43,7 +43,7 @@ CakePHP ではデータの検証には二つの段階があります:
 ``validate`` オプションに偽を指定してください。 ::
 
     $article = $articles->newEntity(
-        $this->request->data,
+        $this->request->getData(),
         ['validate' => false]
     );
 
@@ -101,7 +101,7 @@ CakePHP ではデータの検証には二つの段階があります:
 適用させたいバリデーションルールを選ぶこともできます。 ::
 
     $article = $articles->newEntity(
-        $this->request->data,
+        $this->request->getData(),
         ['validate' => 'update']
     );
 
@@ -409,6 +409,7 @@ CakePHP は、エンティティが保存される前に適用される「ルー
 プロパティやアソシエーションが正しい件数かどうかの検証が必要な場合、
 ``validCount()`` ルールが利用できます。 ::
 
+    // ArticlesTable.php ファイルの中で
     // 記事にタグは５つ以内。
     $rules->add($rules->validCount('tags', 5, '<=', 'You can only have 5 tags'));
 
@@ -416,6 +417,7 @@ CakePHP は、エンティティが保存される前に適用される「ルー
 比較には ``==``, ``>=``, ``<=``, ``>``, ``<``, そして ``!=`` が使えます。
 プロパティの件数が範囲内であることを保証するために、２つのルールを使用してください。 ::
 
+    // ArticlesTable.php ファイルの中で
     // タグは３つ以上、５つ以内
     $rules->add($rules->validCount('tags', 3, '>=', 'タグは 3 つ以上必要です'));
     $rules->add($rules->validCount('tags', 5, '<=', 'タグは 5 つ以下です'));

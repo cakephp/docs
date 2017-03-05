@@ -508,34 +508,14 @@ download
         return $response;
     }
 
-ストリーミングリソース
-----------------------
-
-リソースストリームをレスポンスに変換するために ``body()`` でコールバックを使用することができます。 ::
-
-    $file = fopen('/some/file.png', 'r');
-    $this->response->body(function () use ($file) {
-        rewind($file);
-        fpassthru($file);
-        fclose($file);
-    });
-
-コールバックはまた、文字列としてボディを返すことができます。 ::
-
-    $path = '/some/file.png';
-    $this->response->body(function () use ($path) {
-        return file_get_contents($path);
-    });
-
-
 ヘッダの設定
 ------------
 
 .. php:method:: withHeader($header, $value)
 
 ヘッダーの設定は :php:meth:`Cake\\Http\\Response::withHeader()` メソッドで行われます。
-このメソッドは少し違ったパラメータ設定と一緒に呼ばれます。すべての PSR-7 インターフェイスの
-メソッドと同様に、このメソッドは新しいヘッダーを含む *新しい* インスタンスを返します。 ::
+すべての PSR-7 インターフェイスのメソッドと同様に、このメソッドは新しいヘッダーを含む
+*新しい* インスタンスを返します。 ::
 
     // 一つのヘッダーを追加/置換
     $response = $response->withHeader('X-Extra', 'My header');
@@ -555,6 +535,69 @@ download
 
 便利なメソッド :php:meth:`Cake\\Http\\Response::withLocation()` を使うと
 直接リダイレクトヘッダの設定や取得ができます。
+
+ボディの設定
+------------
+
+.. php:method:: withStringBody($string)
+
+レスポンスボディとして文字列を設定するには、次のようにします。 ::
+
+    // ボディの中に文字列をセット
+    $response = $response->withStringBody('My Body');
+
+    // json レスポンスにしたい場合
+    $response = $response->withType('application/json')
+        ->withStringBody(json_encode(['Foo' => 'bar']));
+
+.. versionadded:: 3.4.3
+    ``withStringBody()`` は 3.4.3 で追加されました。
+
+.. php:method:: withBody($body)
+
+``withBody()`` を使って、 :php:class:`Zend\\Diactoros\\MessageTrait` によって提供される
+レスポンスボディを設定するには、 ::
+
+    $response = $response->withBody($stream);
+
+    // 3.4.0 より前でボディを設定
+    $this->response->body('My Body');
+
+``$stream`` が :php:class:`Psr\\Http\\Message\\StreamInterface`
+オブジェクトであることを確認してください。新しいストリームを作成する方法は、以下をご覧ください。
+
+:php:class:`Zend\\Diactoros\\Stream` ストリームを使用して、
+ファイルからレスポンスをストリーム化することもできます。 ::
+
+    // ファイルからのストリーム化
+    use Zend\Diactoros\Stream;
+
+    $stream = new Stream('/path/to/file', 'rb');
+    $response = $response->withBody($stream);
+
+また、 ``CallbackStream`` を使用してコールバックをストリーム化できます。
+クライアントへストリーム化する必要のある画像、CSV ファイル もしくは PDF
+のようなリソースがある場合に便利です。 ::
+
+    // コールバックからのストリーム化
+    use Cake\Http\CallbackStream;
+
+    // 画像の作成
+    $img = imagecreate(100, 100);
+    // ...
+
+    $stream = new CallbackStream(function () use ($img) {
+        imagepng($img);
+    });
+    $response = $response->withBody($stream);
+
+    // 3.4.0 より前では、次のようにストリーミングレスポンスを作成することができます。
+    $file = fopen('/some/file.png', 'r');
+    $this->response->body(function () use ($file) {
+        rewind($file);
+        fpassthru($file);
+        fclose($file);
+    });
 
 文字コードの設定
 ----------------

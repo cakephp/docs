@@ -21,6 +21,9 @@ Composer で PHPUnit をインストールするには:
 
 .. code-block:: bash
 
+    $ php composer.phar require --dev phpunit/phpunit:"^5.7|^6.0"
+
+    // CakePHP 3.4.1 より前
     $ php composer.phar require --dev phpunit/phpunit:"<6.0"
 
 これで ``composer.json`` の ``require-dev`` セクションに依存関係を追加し、すべての依存関係と
@@ -115,7 +118,7 @@ CakePHP におけるほとんどのことがそうであるように、テスト
 #. テストを含むPHPファイルは、 ``tests/TestCase/[Type]`` ディレクトリに置きます。
 #. ファイル名の最後は必ずただ .php とだけ書くのではなく **Test.php** とします。
 #. テストを含むクラスは ``Cake\TestSuite\TestCase`` 、
-   ``Cake\TestSuite\IntegrationTestCase`` または ``\PHPUnit_Framework_TestCase``
+   ``Cake\TestSuite\IntegrationTestCase`` または ``\PHPUnit\Framework\TestCase``
    を継承する必要があります。
 #. 他のクラス名と同様に、テストケースのクラス名はファイル名と一致する必要があります。
    **RouterTest.php** は、 ``class RouterTest extends TestCase`` が含まれている
@@ -123,6 +126,11 @@ CakePHP におけるほとんどのことがそうであるように、テスト
 #. テストを含むメソッド (つまり、アサーションを含むメソッド) の名前は ``testPublished()``
    のように ``test`` で始める必要があります。 ``@test`` というアノテーションをメソッドに
    マークすることでテストメソッドとすることもできます。
+
+.. versionadded:: 3.4.1
+    PHPUnit6 のサポートが追加されました。5.7.0 より低いバージョンの PHPUnit を
+    使用する場合、テストケースは Cake のクラスまたは ``PHPUnit_Framework_TestCase`` を
+    継承してください。
 
 最初のテストケース作成
 ======================
@@ -294,9 +302,9 @@ PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを�
 ------------------------------------
 
 しばしば、あなたのアプリケーションは、いくつかのプラグインで構成されます。これらの状況では、
-各プラグインのテストを実行することは、かなり面倒です。アプリケーションの **phpunit.xml** ファイルに
-``<testsuite>`` セクションを追加して、アプリケーションを構成するプラグインのそれぞれのテストを
-実行することができます。
+各プラグインのテストを実行することは、かなり面倒です。アプリケーションの **phpunit.xml.dist**
+ファイルに ``<testsuite>`` セクションを追加して、アプリケーションを構成するプラグインの
+それぞれのテストを実行することができます。
 
 .. code-block:: xml
 
@@ -1259,7 +1267,7 @@ PagematronComponent というコンポーネントがアプリケーションに
 
         public function startup(Event $event)
         {
-            $this->setController($event->subject());
+            $this->setController($event->getSubject());
         }
 
         public function adjust($length = 'short')
@@ -1451,7 +1459,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
         public function removeFromCart(Event $event)
         {
-            $order = $event->data('order');
+            $order = $event->getData('order');
             $this->delete($order->cart_id);
         }
     }

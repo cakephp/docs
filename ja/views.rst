@@ -453,6 +453,9 @@ CakePHP の既定のレイアウトは **src/Template/Layout/default.ctp** に�
     public function admin_view()
     {
         // レイアウトの設定
+        $this->viewBuilder()->setLayout('admin');
+
+        // 3.4 以前
         $this->viewBuilder()->layout('admin');
 
         // 3.1 以前
@@ -469,20 +472,21 @@ CakePHP の既定のレイアウトは **src/Template/Layout/default.ctp** に�
 
     class UsersController extends AppController
     {
-        public function view_active()
+        public function viewActive()
         {
             $this->set('title', 'アクティブユーザー表示');
+            $this->viewBuilder()->setLayout('default_small_ad');
+
+            // あるいは 3.4 以前では以下
             $this->viewBuilder()->layout('default_small_ad');
 
             // あるいは 3.1 以前では以下
             $this->layout = 'default_small_ad';
         }
 
-        public function view_image()
+        public function viewImage()
         {
-            $this->viewBuilder()->layout('image');
-            // あるいは 3.1 以前では以下
-            $this->layout = 'image';
+            $this->viewBuilder()->setLayout('image');
 
             // ユーザー画像の出力
         }
@@ -643,6 +647,15 @@ CakePHP は element() に何も渡されなかった場合、この設定を使�
 
     echo $this->element('Contacts.sidebar/helpbox');
 
+App のエレメントの要求
+--------------------------------
+
+もしプラグインのテンプレートファイル内で、このプラグインや他のプラグインではなく、
+メインのアプリケーションに存在するエレメントを描画したい場合、次のようにします。 ::
+
+  echo $this->element('some_global_element', [], ['plugin' => false]);
+  // または...
+  echo $this->element('some_global_element', ['localVar' => $someData], ['plugin' => false]);
 
 ルーティングプレフィクスとエレメント
 ------------------------------------

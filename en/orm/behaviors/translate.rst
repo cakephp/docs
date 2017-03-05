@@ -428,19 +428,19 @@ Now, You can populate translations before saving them::
     $this->Articles->save($article);
 
 As of 3.3.0, working with multiple translations has been streamlined. You can
-create form inputs for your translated fields::
+create form controls for your translated fields::
 
     // In a view template.
     <?= $this->Form->create($article); ?>
     <fieldset>
         <legend>French</legend>
-        <?= $this->Form->input('_translations.fr.title'); ?>
-        <?= $this->Form->input('_translations.fr.body'); ?>
+        <?= $this->Form->control('_translations.fr.title'); ?>
+        <?= $this->Form->control('_translations.fr.body'); ?>
     </fieldset>
     <fieldset>
         <legend>Spanish</legend>
-        <?= $this->Form->input('_translations.es.title'); ?>
-        <?= $this->Form->input('_translations.es.body'); ?>
+        <?= $this->Form->control('_translations.es.title'); ?>
+        <?= $this->Form->control('_translations.es.body'); ?>
     </fieldset>
 
 In your controller, you can marshal the data as normal, but with the

@@ -28,8 +28,8 @@ CakePHP はきれいなディスパッチサイクルに使う強固なフィル
         DispatcherFactory::add('Asset', ['cacheTime' => '+24 hours']);
 
 * ``RoutingFilter`` はリクエストされたURLに対してルーティング規則適用します。
-  ``$request->param()`` でルーティングの結果が読めます。
-* ``ControllerFactory`` は ``$request->param()`` を現在のリクエストを扱うための
+  ``$request->getParam()`` でルーティングの結果が読めます。
+* ``ControllerFactory`` は ``$request->getParam()`` を現在のリクエストを扱うための
   コントローラーを設置するために使います。
 * ``LocaleSelector`` はブラウザによって送られる ``Accept-Language`` ヘッダーによって
   自動的に言語を切り替えます。
@@ -111,8 +111,8 @@ CakePHP はきれいなディスパッチサイクルに使う強固なフィル
 
         public function beforeDispatch(Event $event)
         {
-            $request = $event->data['request'];
-            $response = $event->data['response'];
+            $request = $event->getData('request');
+            $response = $event->getData('response');
             if (!$request->getCookie('landing_page')) {
                 $response->cookie([
                     'name' => 'landing_page',
@@ -162,8 +162,8 @@ CakePHP はきれいなディスパッチサイクルに使う強固なフィル
 
         public function afterDispatch(Event $event)
         {
-            $request = $event->data['request'];
-            $response = $event->data['response'];
+            $request = $event->getData('request');
+            $response = $event->getData('response');
 
             if ($response->statusCode() === 200) {
                 $response->sharable(true);
