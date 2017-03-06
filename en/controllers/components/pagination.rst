@@ -191,6 +191,7 @@ Paginating Multiple Queries
 You can paginate multiple models in a single controller action, using the
 ``scope`` option both in the controller's ``$paginate`` property and in the 
 call to the ``paginate()`` method::
+
     // Paginate property
     public $paginate = [
         'Articles' => ['scope' => 'article'],
