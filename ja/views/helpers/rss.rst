@@ -23,7 +23,7 @@ CakePHP で ``articles/index`` の XML/RSS バージョンがすぐに作成で�
     Router::extensions('rss');
 
 上記のように宣言すると、.rss 拡張子を利用できます。
-:php:meth:`Cake\\Routing\\Router::extensions()` を使用すると、
+:php:meth:`Cake\\Routing\\Router::extensions()` を使用する時、
 文字列もしくは配列の拡張子を最初の引数として渡すことができます。
 これはあなたのアプリに各拡張子 / コンテンツタイプを有効化するでしょう。
 
