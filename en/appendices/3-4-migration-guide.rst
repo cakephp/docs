@@ -114,9 +114,6 @@ Other Deprecations
 * ``Router::parse()`` is deprecated. ``Router::parseRequest()`` should be used
   instead as it accepts a request and gives more control/flexibility in handling
   incoming requests.
-* ``Route::parse()`` is deprecated. ``Route::parseRequest()`` should be used
-  instead as it accepts a request and gives more control/flexibility in handling
-  incoming requests.
 * ``FormHelper::input()`` is deprecated. Use ``FormHelper::control()`` instead.
 * ``FormHelper::inputs()`` is deprecated. Use ``FormHelper::controls()`` instead.
 * ``FormHelper::allInputs()`` is deprecated. Use ``FormHelper::allControls()`` instead.
