@@ -74,10 +74,15 @@ AppController に追加しましょう。 ::
 
     <h1>Login</h1>
     <?= $this->Form->create() ?>
-    <?= $this->Form->input('email') ?>
-    <?= $this->Form->input('password') ?>
+    <?= $this->Form->control('email') ?>
+    <?= $this->Form->control('password') ?>
     <?= $this->Form->button('Login') ?>
     <?= $this->Form->end() ?>
+
+.. note::
+
+   ``control()`` は 3.4 以降で使用可能です。それより前のバージョンでは、代わりに
+   ``input()`` を使用してください。
 
 これでシンプルなログインフォームができました。ハッシュ化されたパスワードを持つユーザーで
 ログインすることができるはずです。
@@ -183,19 +188,19 @@ AppController に追加しましょう。 ::
 
     public function isAuthorized($user)
     {
-        $action = $this->request->params['action'];
+        $action = $this->request->getParam('action');
 
         // add と index アクションは常に許可します。
         if (in_array($action, ['index', 'add', 'tags'])) {
             return true;
         }
         // その他のすべてのアクションは、id を必要とします。
-        if (empty($this->request->params['pass'][0])) {
+        if (!$this->request->getParam('pass.0')) {
             return false;
         }
 
 	// ブックマークが現在のユーザに属するかどうかをチェック
-        $id = $this->request->params['pass'][0];
+        $id = $this->request->getParam('pass.0');
         $bookmark = $this->Bookmarks->get($id);
         if ($bookmark->user_id == $user['id']) {
             return true;
@@ -209,7 +214,7 @@ AppController に追加しましょう。 ::
 
     // src/Template/Layout/default.ctp の中の
     // 既存のフラッシュメッセージの下で
-    <?= $this->Flash->render('auth') ?>
+    <?= $this->Flash->render() ?>
 
 これで許可エラーメッセージが表示されるはずです。
 
@@ -223,14 +228,14 @@ AppController に追加しましょう。 ::
 #. 一覧ページに他のユーザーのブックマークが表示される
 
 まず追加のフォームから取り組みましょう。はじめに **src/Template/Bookmarks/add.ctp** から
-``input('user_id')`` を削除します。 削除したら、 **src/Controller/BookmarksController.php**
+``control('user_id')`` を削除します。 削除したら、 **src/Controller/BookmarksController.php**
 の ``add()`` アクションを以下のように修正します。 ::
 
     public function add()
     {
         $bookmark = $this->Bookmarks->newEntity();
         if ($this->request->is('post')) {
-            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->getData());
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('ブックマークを保存しました。');
@@ -253,7 +258,7 @@ AppController に追加しましょう。 ::
             'contain' => ['Tags']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->getData());
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('ブックマークを保存しました。');
@@ -343,7 +348,7 @@ AppController に追加しましょう。 ::
 **src/Template/Bookmarks/add.ctp** と **src/Template/Bookmarks/edit.ctp** の
 すでにある ``tags._ids`` のインプットを以下と置き換えます。 ::
 
-    echo $this->Form->input('tag_string', ['type' => 'text']);
+    echo $this->Form->control('tag_string', ['type' => 'text']);
 
 タグ文字列を保存する
 --------------------

@@ -1,5 +1,5 @@
-Tutorial de aplicación Blog - Autenticación y Autorización
-##########################################################
+Tutorial Blog - Autenticación y Autorización
+############################################
 
 Siguiendo con nuestro ejemplo de aplicacion :doc:`/tutorials-and-examples/blog/blog`, imaginá que necesitamos proteger ciertas URLs, dependiendo del usuario logeado. También tenemos otro requisito, permitir que nuestro blog tenga varios autores, cada uno habilitado para crear sus posts, editar y borrarlos a voluntad, evitando que otros autores puedan cambiarlos.
 
@@ -82,7 +82,7 @@ También vamos a crear UsersController; el siguiente contenido fue generado usan
         {
             $user = $this->Users->newEntity();
             if ($this->request->is('post')) {
-                $user = $this->Users->patchEntity($user, $this->request->data);
+                $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
                     return $this->redirect(['action' => 'add']);
@@ -259,7 +259,7 @@ También, un pequeño cambio en ArticlesController es necesario para guardar el 
     {
         $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
-            $article = $this->Articles->patchEntity($article, $this->request->data);
+            $article = $this->Articles->patchEntity($article, $this->request->getData());
             // Added this line
             $article->user_id = $this->Auth->user('id');
             // You could also do the following
@@ -317,13 +317,13 @@ Esto no es exactamente lo que queriamos, por lo que tendremos que agregar mas re
     public function isAuthorized($user)
     {
         // All registered users can add articles
-        if ($this->request->action === 'add') {
+        if ($this->request->getParam('action') === 'add') {
             return true;
         }
 
         // The owner of an article can edit and delete it
-        if (in_array($this->request->action, ['edit', 'delete'])) {
-            $articleId = (int)$this->request->params['pass'][0];
+        if (in_array($this->request->getParam('action'), ['edit', 'delete'])) {
+            $articleId = (int)$this->request->getParam('pass.0');
             if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
                 return true;
             }
@@ -353,5 +353,5 @@ Lectura sugerida
 #. :doc:`/controllers/components/authentication`: Registro y login de usuarios
 
 .. meta::
-    :title lang=es: Tutorial de aplicación Blog - Autenticación y Autorización
+    :title lang=es: Tutorial Blog - Autenticación y Autorización
     :keywords lang=es: auto increment,aplicacion con autorizacion,model user,array,convenciones,autenticacion,urls,cakephp,delete,doc,columns

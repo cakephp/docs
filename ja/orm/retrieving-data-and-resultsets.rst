@@ -274,21 +274,36 @@ join でつながっている関連テーブルからリストのデータを生
         'valueField' => 'author.name'
     ])->contain(['Authors']);
 
-最後に、リストの find の中で、エンティティのミューテーターメソッドにアクセスするために
-クロージャを使用することができます。 この例は、Author エンティティの ``_getFullName()``
-ミューテーターメソッドを使うことを示しています。 ::
+キーと値の出力をカスタマイズ
+----------------------------
 
+最後に、リストの find の中で、エンティティのアクセッサーメソッドにアクセスするために
+クロージャを使用することができます。 ::
+
+    // Authors の中で、エンティティは displayFild として使用するために仮想フィールドを作成
+    protected function _getLabel()
+    {
+        return $this->_properties['first_name'] . ' ' . $this->_properties['last_name']
+          . ' / ' . __('User ID %s', $this->_properties['user_id']);
+    }
+
+この例は、Author エンティティの ``_getLabel()``
+アクセッサーメソッドを使うことを示しています。 ::
+
+    // ファインダーやコントローラの中で
     $query = $articles->find('list', [
         'keyField' => 'id',
         'valueField' => function ($article) {
-            return $article->author->get('full_name');
+            return $article->author->get('label');
         }
     ]);
 
-オプション指定なしで、氏名をフェッチすることもできます。 ::
+オプション指定なしで、ラベルを取得することもできます。 ::
 
-    $this->displayField('full_name');
-    $query = $authors->find('list');
+    // AuthorsTable::initialize() の中で
+    $this->displayField('label'); // Author::_getLabel() を利用します。
+    // ファインダーやコントローラの中で
+    $query = $authors->find('list'); // AuthorsTable::displayField() を利用します。
 
 スレッド状のデータを検索する
 ============================
@@ -432,8 +447,8 @@ join 関数を使いたい場合の詳細は :ref:`adding-joins` を参照して
 
 .. _eager-loading-associations:
 
-関連データをイーガーロード(eager load)する
-==========================================
+contain を用いた関連データのイーガーロード
+============================================
 
 CakePHP は ``find()`` を使う際、デフォルトでは関連データを **いずれも** ロードしません。
 結果の中にロードしたい各関連データは 'contain' で指定するか、イーガーロード (eager load)
@@ -475,6 +490,33 @@ CakePHP では 'contain' メソッドを使って関連データのイーガー�
         'Shops.Cities.Countries',
         'Shops.Managers'
     ]);
+
+複数の簡単な ``contain()`` 文を使って全ての関連データからフィールドを選択できます。 ::
+
+    $query = $this->find()->select([
+        'Realestates.id',
+        'Realestates.title',
+        'Realestates.description'
+    ])
+    ->contain([
+        'RealestateAttributes' => [
+            'Attributes' => [
+                'fields' => [
+                    'Attributes.name'
+                ]
+            ]
+        ]
+    ])
+    ->contain([
+        'RealestateAttributes' => [
+            'fields' => [
+                'RealestateAttributes.realestate_id',
+                'RealestateAttributes.value'
+            ]
+        ]
+    ])
+    ->where($condition);
+
 
 クエリ上の contain を再設定する必要があるなら、第２引数に ``true`` を指定することができます。 ::
 
@@ -587,8 +629,8 @@ contain に条件を渡す
 
 .. _filtering-by-associated-data:
 
-関連データによるフィルタリング
-------------------------------
+matching と joins を用いた関連データによるフィルタリング
+--------------------------------------------------------
 
 .. start-filtering
 
@@ -639,7 +681,7 @@ CakePHP タグ (Tag) を持つ記事 (Article) を探したいはずです。
 ``_matchingData`` プロパティと標準の関連系のプロパティの両方があることになります。
 
 innerJoinWith を使う
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 ``matching()`` 関数を使うことで、すでに見てきたように、特定の関連との ``INNER JOIN`` が作成され、
 結果セットにもフィールドがロードされます。
@@ -667,7 +709,7 @@ innerJoinWith を使う
     Query::innerJoinWith() は 3.1 で追加されました。
 
 notMatching を使う
-~~~~~~~~~~~~~~~~~~
+------------------
 
 ``matching()`` の対義語となるのが ``notMatching()`` です。この関数は結果を、
 特定の関連に繋がっていないものだけにフィルタするようにクエリを変更します。 ::
@@ -724,7 +766,7 @@ notMatching を使う
     Query::notMatching() は 3.1 で追加されました。
 
 leftJoinWith を使う
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 時には、すべての関連レコードをロードしたくはないが、関連に基いて結果を計算したいということが
 あるかもしれません。たとえば、記事 (Article) の全データと一緒に、記事ごとのコメント (Comment)
@@ -759,7 +801,7 @@ leftJoinWith を使う
 .. end-filtering
 
 フェッチの戦略の変更する
-------------------------
+========================
 
 すでにご存知の通り、 ``belongsTo`` と ``hasOne`` の関連はメインとなる Finder クエリの中で
 ``JOIN`` を使ってロードされます。これにより、データ取得の際には、クエリとフェッチ速度が改善され、
@@ -819,7 +861,7 @@ leftJoinWith を使う
     $articles->Comments->strategy('subquery');
 
 関連をレイジーロード(Lazy Load)する
-------------------------------------
+====================================
 
 CakePHP は簡単に関連付くデータをイーガーロード (Eager Load) できますが、レイジーロード (Lazy Load)
 したいという場合もありえるでしょう。その場合は :ref:`lazy-load-associations` と

@@ -274,7 +274,7 @@ AuthComponent がユーザーレコードの格納にセッションを使用し
 
     期待通りに認証が動作しない場合、クエリが全く実行されていないかどうかをチェックしてください
     (``BaseAuthenticate::_query($username)`` をご覧ください)。クエリが実行されない場合、
-    ``$ _SERVER [ 'PHP_AUTH_USER']`` と ``$_SERVER [ 'PHP_AUTH_PW']`` がウェブサーバによって
+    ``$_SERVER['PHP_AUTH_USER']`` と ``$_SERVER['PHP_AUTH_PW']`` がウェブサーバによって
     読み込まれたかどうかをチェックしてください。もし Apache で FastCGI-PHP を使用している場合は、
     webroot 内の **.htaccess** ファイルに次の行を追加する必要があるかもしれません。 ::
 
@@ -346,7 +346,7 @@ CakePHP のライブラリを使用してランダムにこれらの API トー�
     {
         public function beforeSave(Event $event)
         {
-            $entity = $event->data['entity'];
+            $entity = $event->getData('entity');
 
             if ($entity->isNew()) {
                 $hasher = new DefaultPasswordHasher();
@@ -410,7 +410,7 @@ CakePHP のライブラリを使用してランダムにこれらの API トー�
     {
         public function beforeSave(Event $event)
         {
-            $entity = $event->data['entity'];
+            $entity = $event->getData('entity');
 
             // ダイジェスト認証のためのパスワードを作成。
             $entity->digest_hash = DigestAuthenticate::password(
@@ -513,15 +513,18 @@ Auth が生成するセッションエラーメッセージを表示するため
 加えなければなりません。 **src/Template/Layout/default.ctp** の body 部に次の2行を
 追加してください。 ::
 
+    // 3.4.0 以降は、これだけが必要です。
     echo $this->Flash->render();
+
+    // 3.4.0 より前は、これも同様に必要です。
     echo $this->Flash->render('auth');
 
 AuthComponent の flash 設定を使うことでエラーメッセージをカスタマイズすることができます。
 ``flash`` 設定を使うことで、AuthComponent がフラッシュメッセージのために使うパラメータを
 設定することができます。利用可能なキーは次のとおりです。
 
-- ``key`` - 使用されるキー。デフォルトは 'auth' 。
-- ``params`` - 使用される追加の params 配列。デフォルトは [] 。
+- ``key`` - 使用されるキー。デフォルトは 'default'。 3.4.0 より前の key のデフォルトは 'auth'。
+- ``params`` - 使用される追加の params 配列。デフォルトは ``[]`` 。
 
 フラッシュメッセージの設定だけでなく、AuthComponent が使用する他のエラーメッセージを
 カスタマイズすることもできます。コントローラの beforeFilter の中や component の設定で、
@@ -661,7 +664,7 @@ CakePHP は、1つのアルゴリズムから別のユーザーのパスワー�
                 $this->Auth->setUser($user);
                 if ($this->Auth->authenticationProvider()->needsPasswordRehash()) {
                     $user = $this->Users->get($this->Auth->user('id'));
-                    $user->password = $this->request->data('password');
+                    $user->password = $this->request->getData('password');
                     $this->Users->save($user);
                 }
                 return $this->redirect($this->Auth->redirectUrl());
@@ -684,7 +687,7 @@ CakePHP は、1つのアルゴリズムから別のユーザーのパスワー�
 
     public function register()
     {
-        $user = $this->Users->newEntity($this->request->data);
+        $user = $this->Users->newEntity($this->request->getData());
         if ($this->Users->save($user)) {
             $this->Auth->setUser($user->toArray());
             return $this->redirect([
@@ -940,12 +943,12 @@ ControllerAuthorize では、コントローラのコールバックで認可チ
         public function isAuthorized($user = null)
         {
             // 登録済みユーザーなら誰でも公開機能にアクセス可能です。
-            if (empty($this->request->params['prefix'])) {
+            if (!$this->request->getParam('prefix')) {
                 return true;
             }
 
             // admin ユーザーだけが管理機能にアクセス可能です。
-            if ($this->request->params['prefix'] === 'admin') {
+            if ($this->request->getParam('prefix') === 'admin') {
                 return (bool)($user['role'] === 'admin');
             }
 

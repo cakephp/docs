@@ -279,7 +279,7 @@ CakePHP ではこれらを簡単につくれます。フェッチする列を制
     // 計算された slug 列を含めて、 articles テーブルのすべての列を取得
     $query = $articlesTable->find();
     $query
-        ->select(['slug' => $query->func()->concat(['title', '-', 'id'])])
+        ->select(['slug' => $query->func()->concat(['title' => 'identifier', '-', 'id' => 'identifier'])])
         ->select($articlesTable); // articles のすべての列を select する
 
 .. versionadded:: 3.1
@@ -307,11 +307,11 @@ CakePHP の ORM では抽象化された馴染み深い SQL 関数をいくつ�
 - ``max()`` カラムの最大値を算出します。引数はリテラル値として扱われます。
 - ``count()`` 件数を算出します。引数はリテラル値として扱われます。
 - ``concat()`` ２つの値を結合します。引数はリテラルだとマークされない限り、
-  バインドパラメータをして扱われます。
+  バインドパラメータとして扱われます。
 - ``coalesce()`` Coalesce を算出します。引数はリテラルだとマークされない限り、
-  バインドパラメータをして扱われます。
+  バインドパラメータとして扱われます。
 - ``dateDiff()`` ２つの日にち/時間の差を取得します。引数はリテラルだとマークされない限り、
-  バインドパラメータをして扱われます。
+  バインドパラメータとして扱われます。
 - ``now()`` 'time' もしくは 'date' を取得します。引数で現在の時刻もしくは日付のどちらを
   取得するのかを指定できます。
 - ``extract()`` SQL 式から特定の日付部分(年など)を返します。
@@ -503,13 +503,7 @@ ORM とオブジェクトの結果セットは強力である一方で、エン�
 人々のリストを問い合わせる際に、formatResults を使って年齢 (age) を算出するなら次のようになります。 ::
 
     // フィールド、条件、関連が構築済であると仮定します。
-    $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results) {
-        return $results->map(function ($row) {
-            $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
-            return $row;
-        });
-    });
-    $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results) {
+    $query->formatResults(function (\Cake\Collection\CollectionInterface $results) {
         return $results->map(function ($row) {
             $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
             return $row;
@@ -529,7 +523,7 @@ CakePHP はフォーマッタ関数が適切なスコープになるよう保証
 
     // Articles テーブル内のメソッドで
     $query->contain(['Authors' => function ($q) {
-        return $q->formatResults(function ($authors) {
+        return $q->formatResults(function (\Cake\Collection\CollectionInterface authors) {
             return $authors->map(function ($author) {
                 $author['age'] = $author['birth_date']->diff(new \DateTime)->y;
                 return $author;
@@ -960,7 +954,7 @@ Query オブジェクトでは :doc:`Collection </core-libraries/collections>`
         return $row->id;
     });
 
-    $maxAge = $query->max(function ($row) {
+    $maxAge = $query->max(function ($max) {
         return $max->age;
     });
 

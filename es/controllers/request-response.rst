@@ -10,6 +10,11 @@ Request & Response Objects
     Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
     para obtener información sobre el tema de esta página.
 
+.. _cake-request:
+
+Request
+=======
+
 .. meta::
     :title lang=es: Request and Response objects
     :keywords lang=es: request controller,request parameters,array indexes,purpose index,response objects,domain information,request object,request data,interrogating,params,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp

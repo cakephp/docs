@@ -93,14 +93,14 @@ After adding crumbs to the trail, you can easily render it using the
 - ``$separator`` : An array of attributes for the ``separator`` template.
   Possible properties are:
 
-  - **separator** The string to be displayed as a separator
-  - **innerAttrs** To provide attributes in case your separator is divided
+  - ``separator`` The string to be displayed as a separator
+  - ``innerAttrs`` To provide attributes in case your separator is divided
     in two elements
-  - **templateVars** Allows the insertion of custom template variable in the
+  - ``templateVars`` Allows the insertion of custom template variable in the
     template
 
   All other properties will be converted as HTML attributes and will replace
-  the **attrs** key in the template. If you use the default for this option
+  the ``attrs`` key in the template. If you use the default for this option
   (empty), it will not render a separator.
 
 Here is an example of how to render a trail::
@@ -178,6 +178,23 @@ rendered as HTML attributes::
     <li class="products-crumb" data-foo="bar">
         <a href="/products/index" class="inner-products-crumb" id="the-products-crumb">Products</a>
     </li>
+
+Clearing the Breadcrumbs
+========================
+
+You can clear the bread crumbs using the ``reset()`` method. This can be useful
+when you want to transform the crumbs and overwrite the list::
+
+    $crumbs = $this->Breadcrumbs->getCrumbs();
+    $crumbs = collection($crumbs)->map(function ($crumb) {
+        $crumb['options']['class'] = 'breadcrumb-item';
+        return $crumb;
+    })->toArray();
+
+    $this->Breadcrumbs->reset()->add($crumbs);
+
+.. versionadded:: 3.4.0
+    The ``reset()`` method was added in 3.4.0
 
 .. meta::
     :title lang=en: BreadcrumbsHelper

@@ -13,7 +13,7 @@ définir la configuration de votre environnement. Vous aurez besoin des logiciel
 suivants:
 
 * Git
-* PHP 5.5.9 ou supérieur
+* PHP |minphpversion| ou supérieur
 * PHPUnit 3.7.0 ou supérieur
 
 Mettez en place vos informations d'utilisateur avec votre nom/titre et adresse

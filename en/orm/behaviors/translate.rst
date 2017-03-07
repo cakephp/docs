@@ -317,6 +317,17 @@ to call locale on each table for example::
 This example also assumes that ``Categories`` has the TranslateBehavior attached
 to it.
 
+Querying Translated Fields 
+--------------------------
+
+TranslateBehavior does not substitute find conditions by default. You need to use
+``translationField()`` method to compose find conditions on translated fields::
+
+    $this->Articles->locale('es');
+    $data = $this->Articles->find()->where([
+        $this->Articles->translationField('title') => 'Otro Título'
+    ]);
+
 Saving in Another Language
 ==========================
 
@@ -417,25 +428,25 @@ Now, You can populate translations before saving them::
     $this->Articles->save($article);
 
 As of 3.3.0, working with multiple translations has been streamlined. You can
-create form inputs for your translated fields::
+create form controls for your translated fields::
 
     // In a view template.
     <?= $this->Form->create($article); ?>
     <fieldset>
         <legend>French</legend>
-        <?= $this->Form->input('_translations.fr.title'); ?>
-        <?= $this->Form->input('_translations.fr.body'); ?>
+        <?= $this->Form->control('_translations.fr.title'); ?>
+        <?= $this->Form->control('_translations.fr.body'); ?>
     </fieldset>
     <fieldset>
         <legend>Spanish</legend>
-        <?= $this->Form->input('_translations.es.title'); ?>
-        <?= $this->Form->input('_translations.es.body'); ?>
+        <?= $this->Form->control('_translations.es.title'); ?>
+        <?= $this->Form->control('_translations.es.body'); ?>
     </fieldset>
 
 In your controller, you can marshal the data as normal, but with the
 ``translations`` option enabled::
 
-    $article = $this->Articles->newEntity($this->request->data, [
+    $article = $this->Articles->newEntity($this->request->getData(), [
         'translations' => true
     ]);
     $this->Articles->save($article);

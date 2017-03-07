@@ -1,5 +1,5 @@
-Tutorial de desarrollo de Blog - Parte 3
-########################################
+Tutorial Blog - Parte 3
+#######################
 
 Crear categorias en Arbol
 =========================
@@ -244,7 +244,7 @@ Esto nos permitirá elegir una categoría para un Article al momento de crearlo 
         {
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
-                $article = $this->Articles->patchEntity($article, $this->request->data);
+                $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
                     return $this->redirect(['action' => 'index']);
@@ -283,5 +283,5 @@ El template add de Article debería verse similar a esto::
 Ingresando a `/yoursite/articles/add` deberías ver una lista de categorías para elegir.
 
 .. meta::
-    :title lang=es: Tutorial de aplicación Blog - Migración y Arbol
+    :title lang=es: Tutorial Blog - Parte 3
     :keywords lang=en: doc models,migracion,arbol,controller actions,model article,php class,model class,model object,business logic,database table,naming convention,bread and butter,callbacks,prefixes,nutshell,interaction,array,cakephp,interface,applications,delete

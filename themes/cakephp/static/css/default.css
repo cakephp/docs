@@ -45,6 +45,9 @@
     padding-top: 160px;
     padding-bottom: 40px;
 }
+.is-next.page-container {
+    padding-top: 200px;
+}
 
 /* General button */
 .offline-download a,
@@ -248,6 +251,7 @@ table.internal-toc {
 }
 
 .tt-menu .empty-result,
+.tt-menu .loading-result,
 .tt-menu .tt-suggestion {
     font-size: 12px;
     line-height: 1.4em;
@@ -665,4 +669,13 @@ dt tt {
 }
 .genindextable a {
     font-size: 14px;
+}
+
+.edge-warning {
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: center;
+    background-color: #ffe4e4;
+    padding: 0.4em;
+    margin: 0;
 }

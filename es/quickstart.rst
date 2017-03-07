@@ -1,18 +1,13 @@
-Quick Start Guide
-*****************
+Guía de inicio rápido
+*********************
 
-.. note::
-    La documentación no es compatible actualmente con el idioma español en esta página.
+La mejor forma de experimentar y aprender CakePHP es sentarse y construir algo.
 
-    Por favor, siéntase libre de enviarnos un pull request en
-    `Github <https://github.com/cakephp/docs>`_ o utilizar el botón **Improve this Doc** para proponer directamente los cambios.
-
-    Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
-    para obtener información sobre el tema de esta página.
+Para empezar crearemos una sencilla aplicación para guardar favoritos.
 
 .. include:: /tutorials-and-examples/bookmarks/intro.rst
 .. include:: /tutorials-and-examples/bookmarks/part-two.rst
 
 .. meta::
-    :title lang=es: Getting Started
-    :keywords lang=es: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
+    :title lang=es: Primeros pasos
+    :keywords lang=es: estructura de archivos, tabla de nombres, petición inicial, tabla base de datos, estructura organizativa, rst, nomes de archivos, convenciones, mvc, página web, sit

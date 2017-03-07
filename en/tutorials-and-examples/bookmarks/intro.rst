@@ -21,8 +21,8 @@ version:
 
     php -v
 
-You should at least have got installed PHP 5.5.9 (CLI) or higher.
-Your webserver's PHP version must also be of 5.5.9 or higher, and should best be
+You should at least have got installed PHP |minphpversion| (CLI) or higher.
+Your webserver's PHP version must also be of |minphpversion| or higher, and should best be
 the same version your command line interface (CLI) PHP version is of.
 If you'd like to see the completed application, checkout `cakephp/bookmarker
 <https://github.com/cakephp/bookmarker-tutorial>`__. Let's get started!
@@ -327,7 +327,7 @@ add the following::
     {
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
-        $tags = $this->request->params['pass'];
+        $tags = $this->request->getParam('pass');
 
         // Use the BookmarksTable to find tagged bookmarks.
         $bookmarks = $this->Bookmarks->find('tagged', [
@@ -396,7 +396,7 @@ put the following content::
 
     <h1>
         Bookmarks tagged with
-        <?= $this->Text->toList($tags) ?>
+        <?= $this->Text->toList(h($tags)) ?>
     </h1>
 
     <section>
@@ -407,7 +407,7 @@ put the following content::
             <small><?= h($bookmark->url) ?></small>
 
             <!-- Use the TextHelper to format text -->
-            <?= $this->Text->autoParagraph($bookmark->description) ?>
+            <?= $this->Text->autoParagraph(h($bookmark->description)) ?>
         </article>
     <?php endforeach; ?>
     </section>

@@ -28,7 +28,7 @@ has been set to ``true``.
 
     Calling this method will return passed ``$var``, so that you can, for instance,
     place it in return statements, for example::
-    
+
         return debug($data); // will return $data in any case.
 
 Also see ``dd()``, ``pr()`` and ``pj()``.
@@ -94,6 +94,22 @@ properties and methods (if any) of the supplied variable::
         model => 'Camry'
         mileage => (int)15000
     }
+
+Masking Data
+------------
+
+When dumping data with ``Debugger`` or rendering error pages, you may want to
+hide sensitive keys like passwords or API keys. In your ``config/bootstrap.php``
+you can mask specific keys::
+
+    Debugger::setOutputMask([
+        'password' => 'xxxxx',
+        'awsKey' => 'yyyyy',
+    ]);
+
+.. versionadded:: 3.4.0
+
+    Output masking was added in 3.4.0
 
 Logging With Stack Traces
 =========================
@@ -172,7 +188,7 @@ to log messages::
 The above would write ``Got here`` into the debug log. You can use log entries
 to help debug methods that involve redirects or complicated loops. You can also
 use :php:meth:`Cake\\Log\\Log::write()` to write log messages. This method can be called
-statically anywhere in your application one CakeLog has been loaded::
+statically anywhere in your application one Log has been loaded::
 
     // At the top of the file you want to log in.
     use Cake\Log\Log;

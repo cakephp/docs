@@ -20,8 +20,8 @@ Avant de commencer, vous devez vous assurer que votre version de PHP est à jour
 
     php -v
 
-Vous devez avoir installé au moins la version 5.5.9 (CLI) de PHP ou supérieure.
-La version de PHP de votre serveur web doit aussi être 5.5.9 ou supérieure, et
+Vous devez avoir installé au moins la version |minphpversion| (CLI) de PHP ou supérieure.
+La version de PHP de votre serveur web doit aussi être |minphpversion| ou supérieure, et
 doit être préférablement la même version que celle de votre interface en ligne
 de commande (CLI).
 Si vous souhaitez voir ce que donne l'application au final, regardez
@@ -346,7 +346,7 @@ suit::
     {
         // La clé 'pass' est fournie par CakePHP et contient tous les segments
         // d'URL de la "request" (instance de \Cake\Network\Request)
-        $tags = $this->request->params['pass'];
+        $tags = $this->request->getParam('pass');
 
         // On utilise l'objet "Bookmarks" (une instance de
         // \App\Model\Table\BookmarksTable) pour récupérer les bookmarks avec
@@ -419,7 +419,7 @@ Construisons donc le fichier de vue pour notre action ``tags()``. Dans
 
     <h1>
         Bookmarks tagged with
-        <?= $this->Text->toList($tags) ?>
+        <?= $this->Text->toList(h($tags)) ?>
     </h1>
 
     <section>
@@ -430,7 +430,7 @@ Construisons donc le fichier de vue pour notre action ``tags()``. Dans
             <small><?= h($bookmark->url) ?></small>
 
             <!-- Utilise le TextHelper pour formater le texte -->
-            <?= $this->Text->autoParagraph($bookmark->description) ?>
+            <?= $this->Text->autoParagraph(h($bookmark->description)) ?>
         </article>
     <?php endforeach; ?>
     </section>

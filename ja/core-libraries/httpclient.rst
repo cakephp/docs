@@ -72,14 +72,14 @@ POST や PUT のリクエストを実行することは、同様に簡単です�
 それまでは、HTTP クライアントに渡されるユーザデータは、次のようにサニタイズする必要があります。 ::
 
     $response = $http->post('http://example.com/api', [
-        'search' => ltrim($this->request->data('search'), '@'),
+        'search' => ltrim($this->request->getData('search'), '@'),
     ]);
 
 クエリ文字列の先頭の ``@`` 文字を維持する必要がある場合は、
 ``http_build_query()`` で予めエンコードされたクエリ文字列を渡すことができます。 ::
 
     $response = $http->post('http://example.com/api', http_build_query([
-        'search' => $this->request->data('search'),
+        'search' => $this->request->getData('search'),
     ]));
 
 手動でマルチパートリクエストのボディを構築
@@ -344,7 +344,7 @@ Client インスタンスに格納されているクッキーは、それ以後�
 Response オブジェクトは、レスポンスデータを検査するための多くのメソッドを持ちます。
 
 .. versionchanged:: 3.3.0
-    3.3.0 では、 ``Cake\Http\Client\Response`` は `PSR7 ResponseInterface
+    3.3.0 では、 ``Cake\Http\Client\Response`` は `PSR-7 ResponseInterface
     <http://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface>`__
     を実装します。
 

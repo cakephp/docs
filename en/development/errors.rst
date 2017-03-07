@@ -75,11 +75,11 @@ An example would be::
     {
         public function _displayError($error, $debug)
         {
-            return 'There has been an error!';
+            echo 'There has been an error!';
         }
         public function _displayException($exception)
         {
-            return 'There has been an exception!';
+            echo 'There has been an exception!';
         }
     }
 
@@ -322,6 +322,13 @@ be thrown from a number of CakePHP core components:
 .. php:exception:: MissingBehaviorException
 
     A model's behavior could not be found.
+
+.. php:exception:: PersistenceFailedException
+
+    An entity couldn't be saved/deleted while using :php:meth:`Cake\\ORM\\Table::saveOrFail()` or
+    :php:meth:`Cake\\ORM\\Table::deleteOrFail()`.
+
+    .. versionadded:: 3.4.1 PersistenceFailedException has been added.
 
 .. php:namespace:: Cake\Datasource\Exception
 

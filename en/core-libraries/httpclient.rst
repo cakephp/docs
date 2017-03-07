@@ -74,14 +74,14 @@ and will be removed in a future version. Until that happens, user data being pas
 to the Http Client must be sanitized as follows::
 
     $response = $http->post('http://example.com/api', [
-        'search' => ltrim($this->request->data('search'), '@'),
+        'search' => ltrim($this->request->getData('search'), '@'),
     ]);
 
 If it is necessary to preserve leading ``@`` characters in query strings, you can pass
 a pre-encoded query string from ``http_build_query()``::
 
     $response = $http->post('http://example.com/api', http_build_query([
-        'search' => $this->request->data('search'),
+        'search' => $this->request->getData('search'),
     ]));
 
 Building Multipart Request Bodies by Hand
@@ -351,7 +351,7 @@ Response Objects
 Response objects have a number of methods for inspecting the response data.
 
 .. versionchanged:: 3.3.0
-    As of 3.3.0 ``Cake\Http\Client\Response`` implements the `PSR7
+    As of 3.3.0 ``Cake\Http\Client\Response`` implements the `PSR-7
     ResponseInterface
     <http://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface>`__.
 

@@ -5,10 +5,10 @@ Form
 
 .. php:class:: FormHelper(View $view, array $config = [])
 
-Le Helper Form prend en charge la plupart des opérations lourdes de la création
-de formulaire. Le Helper Form se concentre sur la possibilité de créer des
+Le FormHelper prend en charge la plupart des opérations lourdes de la création
+de formulaire. Le FormHelper se concentre sur la possibilité de créer des
 formulaires rapidement, d'une manière qui permettra de rationaliser la
-validation, la re-population et la mise en page (layout). Le Helper Form est
+validation, la re-population et la mise en page (layout). Le FormHelper est
 aussi flexible - Il va faire à peu près tout pour vous en utilisant les
 conventions, ou vous pouvez utiliser des méthodes spécifiques pour ne prendre
 uniquement que ce dont vous avez besoin.
@@ -16,11 +16,11 @@ uniquement que ce dont vous avez besoin.
 Création de Formulaire
 ======================
 
-.. php:method:: create(mixed $model = null, array $options = [])
+.. php:method:: create(mixed $context = null, array $options = [])
 
 La première méthode que vous aurez besoin d'utiliser pour tirer pleinement
-profit du Helper Form (Helper Formulaire) est ``create()``. Cette méthode
-affichera une balise d'ouverture de formulaire.
+profit du FormHelper est ``create()``. Cette méthode affichera une balise
+d'ouverture de formulaire.
 
 Tous les paramètres sont optionnels. Si ``create()`` est appelée sans paramètre,
 CakePHP supposera que vous voulez créer un formulaire en rapport avec le
@@ -32,10 +32,10 @@ UsersController::add(), vous verrez la sortie suivante dans la vue:
 
     <form method="post" action="/users/add">
 
-L'argument ``$model`` est utilisé comme 'context' du formulaire. Il y a
+L'argument ``$context`` est utilisé comme 'context' du formulaire. Il y a
 plusieurs contextes de formulaires intégrés et vous pouvez ajouter les vôtres,
 ce que nous allons voir dans la prochaine section. Ceux intégrés correspondent
-aux valeurs suivantes de ``$model``:
+aux valeurs suivantes de ``$context``:
 
 * Une instance ``Entity`` ou un iterateur qui mappe vers ``EntityContext``, ce
   contexte permet au FormHelper de fonctionner avec les résultats à partir de
@@ -108,6 +108,49 @@ Le tableau ``$options`` est là où la configuration du formulaire se passe. Ce
 tableau spécial peut contenir un certain nombre de paires de clé-valeur
 différentes qui affectent la façon dont la balise form est générée.
 
+.. _form-values-from-query-string:
+
+Récupérer les valeurs du formulaire depuis la query string
+----------------------------------------------------------
+
+.. versionadded:: 3.4.0
+
+Les sources de valeurs du FormHelper définissent d'où les éléments du
+formulaire reçoivent leurs valeurs.
+
+Par défaut, Formhelper récupère ses valeurs depuis le "context". Les contextes
+par défaut, comme le ``EntityContext``, récupèrera ses valeurs depuis l'entité
+qui lui est attribuée ou dans ``$request->data``.
+
+Cependant, si vous construisez un formulaire qui a besoin d'aller récupérer ses
+valeurs dans la query string, vous pouvez utiliser ``valueSource()`` pour
+définir où le ``FormHelper`` doit aller récupérer les valeurs de ses champs::
+
+    // Donner la priorité à la query string plutôt qu'au contexte
+    echo $this->Form->create($article, [
+        'valueSources' => ['query', 'context']
+    ]);
+
+    // Même effet :
+    echo $this->Form
+        ->setValueSources(['query', 'context'])
+        ->create($articles);
+
+    // Lecture des valeurs seulement dans la query string
+    echo $this->Form->create($article);
+    $this->Form->setValueSources('query');
+
+    // Même effet :
+    echo $this->Form->create($article, ['valueSources' => 'query']);
+
+Les sources supportées sont ``context``, ``data`` et ``query``. Vous pouvez
+utiliser une ou plusieurs sources. Tous les widgets générés par le ``FormHelper``
+iront récupérer leurs valeurs dans les sources spécifiées, dans l'ordre dans
+lequel vous les avez définies.
+
+Les sources définies seront réinitialisées à leur valeur par défaut
+(``['context']``) quand ``end()`` sera appelée.
+
 Changer la méthode HTTP pour un Formulaire
 ------------------------------------------
 
@@ -143,7 +186,7 @@ PATCH' ou 'DELETE'. Cela permettra à CakePHP de créer son propre support REST
 dans les navigateurs web.
 
 Définir l'URL pour le Formulaire
--------------------------------------------------
+--------------------------------
 
 Utiliser l'option ``url`` vous permet de diriger le formulaire vers une
 action spécifique dans votre controller courant ou dans toute votre application.
@@ -248,13 +291,13 @@ objet. Si n'y a pas de correspondance, retourne null.
 Création d'éléments de Formulaire
 =================================
 
-.. php:method:: input(string $fieldName, array $options = [])
+.. php:method:: control(string $fieldName, array $options = [])
 
-La méthode ``input()`` vous laisse générer des inputs de formulaire. Ces inputs
+La méthode ``control()`` vous laisse générer des inputs de formulaire. Ces inputs
 incluent une div enveloppante, un label, un widget d'input, et une erreur de
 validation si besoin. En utilisant les metadonnées dans le contexte du
 formulaire, cette méthode va choisir un type d'input approprié pour chaque
-champ. En interne, ``input()`` utilise les autres méthodes de FormHelper.
+champ. En interne, ``control()`` utilise les autres méthodes de FormHelper.
 
 Le type d'input créé dépend de la colonne datatype:
 
@@ -290,7 +333,7 @@ binary
 Le paramètre ``$options`` vous permet de choisir un type d'input spécifique si
 vous avez besoin::
 
-    echo $this->Form->input('published', ['type' => 'checkbox']);
+    echo $this->Form->control('published', ['type' => 'checkbox']);
 
 .. _html5-required:
 
@@ -299,7 +342,7 @@ validation pour le champ du model indiquent qu'il est requis et ne peut pas êtr
 vide. Vous pouvez désactiver les require automatiques en utilisant l'option
 required::
 
-    echo $this->Form->input('title', ['required' => false]);
+    echo $this->Form->control('title', ['required' => false]);
 
 Pour empêcher la validation faite par le navigateur pour l'ensemble du
 formulaire, vous pouvez définir l'option ``'formnovalidate' => true`` pour le
@@ -310,31 +353,31 @@ bouton input que vous générez en utilisant
 
 Par exemple, supposons que votre model User intègre les champs pour un
 username (varchar), password (varchar), approved (datetime) and
-quote (text). Vous pouvez utiliser la méthode input() du FormHelper pour
+quote (text). Vous pouvez utiliser la méthode control() du FormHelper pour
 créer les bons inputs pour tous ces champs de formulaire::
 
     echo $this->Form->create($user);
     // Text
-    echo $this->Form->input('username');
+    echo $this->Form->control('username');
     // Password
-    echo $this->Form->input('password');
+    echo $this->Form->control('password');
     // Jour, mois, année, heure, minute, méridien
-    echo $this->Form->input('approved');
+    echo $this->Form->control('approved');
     // Textarea
-    echo $this->Form->input('quote');
+    echo $this->Form->control('quote');
 
     echo $this->Form->button('Ajouter');
     echo $this->Form->end();
 
 Un exemple plus complet montrant quelques options pour le champ de date::
 
-    echo $this->Form->input('birth_dt', [
+    echo $this->Form->control('birth_dt', [
         'label' => 'Date de naissance',
         'minYear' => date('Y') - 70,
         'maxYear' => date('Y') - 18,
     ]);
 
-Outre les options spécifiques pour ``input()`` vu ci-dessus, vous pouvez
+Outre les options spécifiques pour ``control()`` vu ci-dessus, vous pouvez
 spécifier n'importe quelle option pour le type d'input et n'importe quel
 attribut HTML (par exemple ``onfocus``).
 
@@ -346,7 +389,7 @@ ou hasOne, vous pouvez ajouter ceci dans votre controller Users
 
 Ensuite, ajouter les lignes suivantes à votre template de vue de formulaire::
 
-    echo $this->Form->input('group_id', ['options' => $groups]);
+    echo $this->Form->control('group_id', ['options' => $groups]);
 
 Pour créer un select pour l'association belongsToMany Groups, vous pouvez
 ajouter ce qui suit dans votre UsersController::
@@ -355,7 +398,7 @@ ajouter ce qui suit dans votre UsersController::
 
 Ensuite, ajouter les lignes suivantes à votre template de vue::
 
-    echo $this->Form->input('groups._ids', ['options' => $groups]);
+    echo $this->Form->control('groups._ids', ['options' => $groups]);
 
 Si votre nom de model est composé de deux mots ou plus,
 ex. "UserGroup", quand vous passez les données en utilisant set()
@@ -366,7 +409,7 @@ vous devrez nommer vos données dans un format CamelCase
 
 .. note::
 
-    N'utilisez pas ``FormHelper::input()`` pour générer
+    N'utilisez pas ``FormHelper::control()`` pour générer
     les boutons submit. Utilisez plutôt
     :php:meth:`~Cake\\View\\Helper\\FormHelper::submit()`.
 
@@ -382,7 +425,7 @@ les propriétés. Par exemple
 Vous pouvez créer des inputs pour les models associés, ou pour les models
 arbitraires en le passant dans ``association.fieldname`` en premier paramètre::
 
-    echo $this->Form->input('association.fieldname');
+    echo $this->Form->control('association.fieldname');
 
 Tout point dans vos noms de champs sera converti dans des données de requête
 imbriquées. Par exemple, si vous créez un champ avec un nom
@@ -400,18 +443,18 @@ ont été ajoutés. Ces champs seront automatiquement convertis en objets
 Options
 -------
 
-``FormHelper::input()`` supporte un nombre important d'options. En plus de ses
-propres options, ``input()`` accepte des options pour les champs input générés,
+``FormHelper::control()`` supporte un nombre important d'options. En plus de ses
+propres options, ``control()`` accepte des options pour les champs input générés,
 comme les attributs html. Ce qui suit va couvrir les options spécifiques de
-``FormHelper::input()``.
+``FormHelper::control()``.
 
 * ``$options['type']`` Vous pouvez forcer le type d'un input, remplaçant
   l'introspection du model, en spécifiant un type. En plus des types de
   champs vus dans :ref:`automagic-form-elements`, vous pouvez aussi créer
   des 'fichiers', 'password' et divers types supportés par HTML5::
 
-    echo $this->Form->input('field', ['type' => 'file']);
-    echo $this->Form->input('email', ['type' => 'email']);
+    echo $this->Form->control('field', ['type' => 'file']);
+    echo $this->Form->control('email', ['type' => 'email']);
 
   Affichera:
 
@@ -429,7 +472,7 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
 * ``$options['label']`` Définissez cette clé à la chaîne que vous voulez
   afficher dans le label qui accompagne l'input::
 
-    echo $this->Form->input('name', [
+    echo $this->Form->control('name', [
         'label' => 'The User Alias'
     ]);
 
@@ -445,7 +488,7 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
   D'une autre façon, définissez cette clé à ``false`` pour désactiver
   l'affichage de ce label::
 
-    echo $this->Form->input('name', ['label' => false]);
+    echo $this->Form->control('name', ['label' => false]);
 
   Affiche:
 
@@ -459,7 +502,7 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
   l'element ``label``. Si vous le faîtes, vous pouvez utiliser une clé ``text``
   dans le tableau pour personnaliser le texte du label::
 
-    echo $this->Form->input('name', [
+    echo $this->Form->control('name', [
         'label' => [
             'class' => 'thingy',
             'text' => 'The User Alias'
@@ -482,12 +525,12 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
   Pour désactiver le rendu des messages d'erreurs définissez la clé error
   ``false``::
 
-    echo $this->Form->input('name', ['error' => false]);
+    echo $this->Form->control('name', ['error' => false]);
 
   Pour surcharger les messages d'erreurs du model utilisez un tableau
   avec les clés respectant les messages d'erreurs de validation originaux::
 
-    $this->Form->input('name', [
+    $this->Form->control('name', [
         'error' => ['Not long enough' => __('This is not long enough')]
     ]);
 
@@ -498,7 +541,7 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
 Générer des Types d'Inputs Spécifiques
 ======================================
 
-En plus de la méthode générique ``input()``, le ``FormHelper`` à des
+En plus de la méthode générique ``control()``, le ``FormHelper`` à des
 méthodes spécifiques pour générer différents types d'inputs. Ceci peut
 être utilisé pour générer juste un extrait de code input, et combiné avec
 d'autres méthodes comme :php:meth:`~Cake\\View\\Helper\\FormHelper::label()` et
@@ -511,7 +554,7 @@ Options Communes
 ----------------
 
 Beaucoup des différentes méthodes d'input supportent un jeu d'options communes.
-Toutes ses options sont aussi supportées par ``input()``. Pour réduire les
+Toutes ses options sont aussi supportées par ``control()``. Pour réduire les
 répétitions, les options communes partagées par toutes les méthodes input sont :
 
 * ``$options['id']`` Définir cette clé pour forcer la valeur du DOM id pour cet
@@ -536,7 +579,7 @@ répétitions, les options communes partagées par toutes les méthodes input so
   .. note::
 
     Vous ne pouvez pas utiliser ``default`` pour sélectionner une chekbox -
-    vous devez plutôt définir cette valeur dans ``$this->request->data`` dans
+    vous devez plutôt définir cette valeur dans ``$this->request->getData()`` dans
     votre controller, ou définir l'option ``checked`` de l'input à ``true``.
 
     Attention à l'utilisation de ``false`` pour assigner une valeur par défaut.
@@ -714,7 +757,7 @@ Les Options de Datetime
 * ``$options['interval']`` Cette option spécifie l'écart de minutes
   entre chaque option dans la select box minute::
 
-    echo $this->Form->input('time', [
+    echo $this->Form->control('time', [
         'type' => 'time',
         'interval' => 15
     ]);
@@ -737,7 +780,7 @@ Créer des Inputs Text
 
 .. php:method:: text(string $name, array $options)
 
-  Les autres méthodes disponibles dans l'Helper Form permettent
+  Les autres méthodes disponibles dans le FormHelper permettent
   la création d'éléments spécifiques de formulaire. La plupart de ces
   méthodes utilisent également un paramètre spécial $options.
   Toutefois, dans ce cas, $options est utilisé avant tout pour spécifier
@@ -797,7 +840,7 @@ Affichera:
 
     <textarea name="notes"></textarea>
 
-Si le form est édité (ainsi, le tableau ``$this->request->data`` va contenir
+Si le form est édité (ainsi, le tableau ``$this->request->getData()`` va contenir
 les informations sauvegardées pour le model ``User``), la valeur
 correspondant au champs ``notes`` sera automatiquement ajoutée au HTML
 généré. Exemple:
@@ -818,7 +861,7 @@ généré. Exemple:
 
     echo $this->Form->textarea('notes', ['escape' => false]);
     // OU....
-    echo $this->Form->input('notes', ['type' => 'textarea', 'escape' => false]);
+    echo $this->Form->control('notes', ['type' => 'textarea', 'escape' => false]);
 
 **Options**
 
@@ -867,7 +910,7 @@ Affichera:
     <input type="hidden" name="done" value="0">
     <input type="checkbox" name="done" value="555">
 
-Si vous ne voulez pas que le Helper Form génère un input caché::
+Si vous ne voulez pas que le FormHelper génère un input caché::
 
     echo $this->Form->checkbox('done', ['hiddenField' => false]);
 
@@ -961,7 +1004,7 @@ sélectionnées. Par défaut à ``true``::
 * ``$attributes['options']`` Cette clé vous permet de spécifier
   manuellement des options pour un input select (menu de sélection),
   ou pour un groupe radio. A moins que le 'type' soit spécifié à 'radio',
-  le Helper Form supposera que la cible est un input select (menu de
+  le FormHelper supposera que la cible est un input select (menu de
   sélection)::
 
     echo $this->Form->select('field', [1,2,3,4,5]);
@@ -1126,7 +1169,7 @@ avec une fonction create comme ci-dessous::
 
 Ensuite ajoutez l'une des deux lignes dans votre formulaire::
 
-    echo $this->Form->input('submittedfile', [
+    echo $this->Form->control('submittedfile', [
         'type' => 'file'
     ]);
 
@@ -1185,7 +1228,7 @@ un certain nombre d'options:
 * ``round`` - Mettre à ``up`` ou ``down`` pour forcer l'arrondi
   dans une direction. Par défaut à null.
 * ``default`` Le valeur par défaut à utiliser par l'input. Une valeur dans
-  ``$this->request->data`` correspondante au nom du l'input écrasera cette
+  ``$this->request->getData()`` correspondante au nom du l'input écrasera cette
   valeur. Si aucune valeur par défaut n'est définie, ``time()`` sera utilisé.
 * ``timeFormat`` Le format d'heure à utiliser, soit 12 soit 24.
 * ``second`` Mettre à ``true`` to activer l'affichage des secondes.
@@ -1239,7 +1282,7 @@ n'inclura pas une option vide:
 * ``empty`` - Si ``true``, l'option select vide est montrée. Si c'est une
   chaîne, cette chaîne sera affichée en tant qu'élément vide.
 * ``default`` | ``value`` La valeur par défaut à utiliser pour l'input. Une
-  valeur dans ``$this->request->data`` qui correspond au nom du champ va écraser
+  valeur dans ``$this->request->getData()`` qui correspond au nom du champ va écraser
   cette valeur.
   Si aucune valeur par défaut n'est fournie, ``time()`` sera utilisée.
 * ``timeFormat`` Le format de time à utiliser, soit 12 soit 24. Par défaut à 24.
@@ -1479,7 +1522,7 @@ cours::
 
 .. note::
 
-    En utilisant :php:meth:`~Cake\\View\\Helper\\FormHelper::input()`, les
+    En utilisant :php:meth:`~Cake\\View\\Helper\\FormHelper::control()`, les
     erreurs sont retournées par défaut.
 
 Création des boutons et des éléments submit
@@ -1656,11 +1699,13 @@ contenir un tableau des templates indexés par leur nom::
 Tous les templates que vous définissez vont remplacer ceux par défaut dans
 le helper. Les Templates qui ne sont pas remplacés vont continuer à être
 utilisés avec les valeurs par défaut. Vous pouvez aussi changer les templates
-à la volée en utilisant la méthode ``templates()``::
+à la volée en utilisant la méthode ``setTemplates()``::
 
     $myTemplates = [
         'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
+    $this->Form->setTemplates($myTemplates);
+    // Avant 3.4
     $this->Form->templates($myTemplates);
 
 .. warning::
@@ -1677,14 +1722,14 @@ Liste des Templates
 La liste des templates par défaut, leur format par défaut et les variables
 qu'ils attendent se trouvent dans la `documentation API du FormHelper <https://api.cakephp.org/3.2/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
 
-En plus de ces templates, la méthode ``input()`` va essayer d'utiliser les
+En plus de ces templates, la méthode ``control()`` va essayer d'utiliser les
 templates pour chaque conteneur d'input. Par exemple, lors de la création
 d'un input datetime, ``datetimeContainer`` va être utilisé s'il est présent.
 Si le conteneur n'est pas présent, le template ``inputContainer`` sera utilisé.
 Par exemple::
 
     // Ajoute du HTML personnalisé autour d'un input radio
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'radioContainer' => '<div class="form-radio">{{content}}</div>'
     ]);
 
@@ -1700,7 +1745,7 @@ par défaut chaque ensemble label & input sera généré en utilisant le templat
 ``formGroup``::
 
     // Ajoute un groupe de formulaire pour radio personnalisé
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'radioFormGroup' => '<div class="radio">{{label}}{{input}}</div>'
     ]);
 
@@ -1712,13 +1757,13 @@ templates personnalisés et remplir ces placeholders lors de la génération des
 inputs::
 
     // Ajoute un template avec le placeholder help.
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'inputContainer' => '<div class="input {{type}}{{required}}">
             {{content}} <span class="help">{{help}}</span></div>'
     ]);
 
     // Génère un input et remplit la variable help
-    echo $this->Form->input('password', [
+    echo $this->Form->control('password', [
         'templateVars' => ['help' => 'Au moins 8 caractères.']
     ]);
 
@@ -1733,7 +1778,7 @@ Par défaut, CakePHP incorpore les cases à cocher et des boutons radio dans des
 populaires. Si vous avez besoin de placer ces inputs à l'extérieur de la balise
 label, vous pouvez le faire en modifiant les templates::
 
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'nestingLabel' => '{{input}}<label{{attrs}}>{{text}}</label>',
         'formGroup' => '{{input}}{{label}}',
     ]);
@@ -1817,44 +1862,44 @@ créer les inputs suivantes::
     $this->Form->create($article);
 
     // Inputs article
-    echo $this->Form->input('title');
+    echo $this->Form->control('title');
 
     // Inputs auteur (belongsTo)
-    echo $this->Form->input('author.id');
-    echo $this->Form->input('author.first_name');
-    echo $this->Form->input('author.last_name');
+    echo $this->Form->control('author.id');
+    echo $this->Form->control('author.first_name');
+    echo $this->Form->control('author.last_name');
 
     // Profile de l'auteur (belongsTo + hasOne)
-    echo $this->Form->input('author.profile.id');
-    echo $this->Form->input('author.profile.username');
+    echo $this->Form->control('author.profile.id');
+    echo $this->Form->control('author.profile.username');
 
     // Tags inputs (belongsToMany)
-    echo $this->Form->input('tags.0.id');
-    echo $this->Form->input('tags.0.name');
-    echo $this->Form->input('tags.1.id');
-    echo $this->Form->input('tags.1.name');
+    echo $this->Form->control('tags.0.id');
+    echo $this->Form->control('tags.0.name');
+    echo $this->Form->control('tags.1.id');
+    echo $this->Form->control('tags.1.name');
 
     // Select multiple pour belongsToMany
-    echo $this->Form->input('tags._ids', [
+    echo $this->Form->control('tags._ids', [
         'type' => 'select',
         'multiple' => true,
         'options' => $tagList,
     ]);
 
     // Inputs pour la table de jointure (articles_tags)
-    echo $this->Form->input('tags.0._joinData.starred');
-    echo $this->Form->input('tags.1._joinData.starred');
+    echo $this->Form->control('tags.0._joinData.starred');
+    echo $this->Form->control('tags.1._joinData.starred');
 
     // Inputs commentaires (hasMany)
-    echo $this->Form->input('comments.0.id');
-    echo $this->Form->input('comments.0.comment');
-    echo $this->Form->input('comments.1.id');
-    echo $this->Form->input('comments.1.comment');
+    echo $this->Form->control('comments.0.id');
+    echo $this->Form->control('comments.0.comment');
+    echo $this->Form->control('comments.1.id');
+    echo $this->Form->control('comments.1.comment');
 
 Le code ci-dessus pourrait ensuite être converti en un graph d'entity en
 utilisant le code suivant dans votre controller::
 
-    $article = $this->Articles->patchEntity($article, $this->request->data, [
+    $article = $this->Articles->patchEntity($article, $this->request->getData(), [
         'associated' => [
             'Authors',
             'Authors.Profiles',
@@ -1972,10 +2017,10 @@ widgets en utilisant la méthode ``addWidget`` resemble à ceci::
 Une fois ajoutés/remplacés, les widgets peuvent être utilisés en tant que
 'type' de l'input::
 
-    echo $this->Form->input('search', ['type' => 'autocomplete']);
+    echo $this->Form->control('search', ['type' => 'autocomplete']);
 
 Cela créera un widget personnalisé avec un label et une div enveloppante
-tout comme ``input()`` le fait toujours. Sinon vous pouvez juste créer un widget
+tout comme ``control()`` le fait toujours. Sinon vous pouvez juste créer un widget
 input en utilisant la méthode magique::
 
     echo $this->Form->autocomplete('search', $options);
@@ -2011,4 +2056,4 @@ inputs spéciales ``_Token`` soient générées.
 .. meta::
     :title lang=fr: FormHelper
     :description lang=fr: The FormHelper focuses on creating forms quickly, in a way that will streamline validation, re-population and layout.
-    :keywords lang=fr: html helper,cakephp html,form create,form input,form select,form file field,form label,form text,form password,form checkbox,form radio,form submit,form date time,form error,validate upload,unlock field,form security
+    :keywords lang=fr: form helper,cakephp form,form create,form input,form select,form file field,form label,form text,form password,form checkbox,form radio,form submit,form date time,form error,validate upload,unlock field,form security

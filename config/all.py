@@ -39,10 +39,10 @@ copyright = u'%d, Cake Software Foundation, Inc' % datetime.datetime.now().year
 # built documents.
 #
 # The short X.Y version.
-version = '3.x'
+version = '3.4'
 
 # The full version, including alpha/beta/rc tags.
-release = '3.x'
+release = '3.4'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -165,11 +165,23 @@ htmlhelp_basename = 'CakePHPCookbookdoc'
 
 # -- Options for LaTeX output ------------------------------------------------
 
-# The paper size ('letter' or 'a4').
-#latex_paper_size = 'letter'
+latex_elements = {
+    # The paper size ('letterpaper' or 'a4paper').
+    #
+    'papersize': 'letterpaper',
 
-# The font size ('10pt', '11pt' or '12pt').
-latex_font_size = '11pt'
+    # The font size ('10pt', '11pt' or '12pt').
+    #
+    'pointsize': '11pt',
+
+    # Additional stuff for the LaTeX preamble.
+    #
+    # 'preamble': '',
+
+    # Latex figure (float) alignment
+    #
+    # 'figure_align': 'htbp',
+}
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author,
@@ -305,3 +317,7 @@ from sphinx.highlighting import lexers
 from pygments.lexers.web import PhpLexer
 
 lexers['phpinline'] = PhpLexer(startinline=True)
+
+rst_epilog = """
+.. |minphpversion| replace:: 5.6.0
+"""

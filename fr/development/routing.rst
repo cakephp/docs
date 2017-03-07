@@ -230,7 +230,7 @@ Vous pouvez spécifier vos propres éléments de route et ce faisant
 cela vous donne le pouvoir de définir des places dans l'URL où les
 paramètres pour les actions du controller doivent se trouver. Quand
 une requête est faite, les valeurs pour ces éléments de route se
-trouvent dans ``$this->request->params`` dans le controller. Quand vous
+trouvent dans ``$this->request->getParam()`` dans le controller. Quand vous
 définissez un élément de route personnalisé, vous pouvez spécifier en option
 une expression régulière - ceci dit à CakePHP comment savoir si l'URL est
 correctement formée ou non. Si vous choisissez de ne pas fournir une expression
@@ -279,7 +279,7 @@ d'une application CakePHP 2.x, vous pouvez utiliser à la place la classe
 Une fois que cette route a été définie, la requête ``/apples/5`` est la même
 que celle requêtant ``/apples/view/5``. Les deux appelleraient la méthode view()
 de ApplesController. A l'intérieur de la méthode view(), vous aurez besoin
-d'accéder à l'ID passé à ``$this->request->params['id']``.
+d'accéder à l'ID passé à ``$this->request->getParam('id')``.
 
 Si vous avez un unique controller dans votre application et que vous ne
 voulez pas que le nom du controller apparaisse dans l'URL, vous pouvez mapper
@@ -327,7 +327,7 @@ dessus, mais ne pas grouper avec les parenthèses.
 Une fois définie, cette route va matcher ``/articles/2007/02/01``,
 ``/posts/2004/11/16``, gérant les requêtes
 pour les actions index() de ses controllers respectifs, avec les paramètres de
-date dans ``$this->request->params``.
+date dans ``$this->request->getParam()``.
 
 Il y a plusieurs éléments de route qui ont une signification spéciale dans
 CakePHP, et ne devraient pas être utilisés à moins que vous souhaitiez
@@ -559,7 +559,7 @@ Ce qui est au-dessus va créer un template de route de type
 route ``prefix`` défini à ``manager/admin``.
 
 Le préfixe actuel sera disponible à partir des méthodes du controller avec
-``$this->request->params['prefix']``
+``$this->request->getParam('prefix')``
 
 Quand vous utilisez les routes préfixées, il est important de définir l'option
 prefix. Voici comment construire ce lien en utilisant le helper HTML::
@@ -656,6 +656,53 @@ et une action ``showItems()``, la route générée sera
     Router::plugin('ToDo', ['path' => 'to-do'], function ($routes) {
         $routes->fallbacks(DashedRoute::class);
     });
+
+Matching des Méthodes HTTP Spécifiques
+--------------------------------------
+
+Les routes peuvent "matcher" des méthodes HTTP spécifiques en utilisant
+l'option ``_method``::
+
+    Router::scope('/', function($routes) {
+        // Cette route ne sera "matcher" que sur les requêtes POST.
+        $routes->connect(
+            '/reviews/start',
+            ['controller' => 'Reviews', 'action' => 'start', '_method' => 'POST']
+        );
+    });
+
+Vous pouvez "matcher" plusieurs méthodes HTTP en fournissant un tableau.
+Puisque que l'option ``_method`` est une clé de routage, elle est utilisée à la
+fois dans le parsing des URL et la génération des URL.
+
+Matching de Noms de Domaine Spécifiques
+---------------------------------------
+
+Les routes peuvent utiliser l'option ``_host`` pour "matcher" des noms de
+domaines spécifiques. Vous pouvez utiliser la wildcard ``*.`` pour "matcher"
+n'importe quelle sous-domaine::
+
+    Router::scope('/', function($routes) {
+        // Cette route ne va "matcher" que sur le domaine http://images.example.com
+        $routes->connect(
+            '/images/default-logo.png',
+            ['controller' => 'Images', 'action' => 'default'],
+            ['_host' => 'images.example.com']
+        );
+
+        // Cette route matchera sur tous les sous-domaines http://*.example.com
+        $routes->connect(
+            '/images/old-log.png',
+            ['controller' => 'Images', 'action' => 'oldLogo'],
+            ['_host' => '*.example.com']
+        );
+    });
+
+L'option ``_host`` n'affecte que le parsing des URL depuis les requêtes et
+n'intervient jamais dans la génération d'URL.
+
+.. versionadded:: 3.4.0
+    L'option ``_host`` a été ajoutée dans la version 3.4.0
 
 .. index:: file extensions
 .. _file-extensions:
@@ -781,7 +828,7 @@ Le code ci-dessus va générer une ressource de routes pour ``articles`` et
 
 You can get the ``article_id`` in ``CommentsController`` by::
 
-    $this->request->param('article_id');
+    $this->request->getParam('article_id');
 
 By default resource routes map to the same prefix as the containing scope. If
 you have both nested and non-nested resource controllers you can use a different
@@ -929,9 +976,9 @@ Dans l'exemple ci-dessus, ``recent`` et ``mark`` sont tous deux des arguments
 passés à ``CalendarsController::view()``. Les arguments passés sont transmis aux
 contrôleurs de trois manières. D'abord comme arguments de la méthode de
 l'action appelée, deuxièmement en étant accessibles dans
-``$this->request->params['pass']`` sous la forme d'un tableau indexé
+``$this->request->getParam('pass')`` sous la forme d'un tableau indexé
 numériquement. Enfin, il y a ``$this->passedArgs`` disponible de la même
-façon que par ``$this->request->params['pass']``. Lorsque vous utilisez des
+façon que par ``$this->request->getParam('pass')``. Lorsque vous utilisez des
 routes personnalisées il est possible de forcer des paramètres particuliers
 comme étant des paramètres passés également.
 
@@ -954,13 +1001,12 @@ Vous auriez le résultat suivant::
         [1] => mark
     )
 
-La même donnée est aussi disponible dans ``$this->request->params['pass']``
-et dans ``$this->passedArgs`` dans vos controllers, vues, et helpers.
-Les valeurs dans le tableau pass sont indicées numériquement basé sur l'ordre
-dans lequel elles apparaissent dans l'URL appelé::
+La même donnée est aussi disponible dans ``$this->request->getParam('pass')`` dans
+vos controllers, vues, et helpers. Les valeurs dans le tableau pass sont
+indicées numériquement basé sur l'ordre dans lequel elles apparaissent dans
+l'URL appelé::
 
-    debug($this->request->params['pass']);
-    debug($this->passedArgs);
+    debug($this->request->getParam('pass'));
 
 Le résultat des 2 debug() du dessus serait::
 
@@ -1189,8 +1235,8 @@ Les filtres d'URL vous permettent d'implémenter des fonctionnalités telles que
 l'utilisation de paramètres d'URL persistants::
 
     Router::addUrlFilter(function ($params, $request) {
-        if (isset($request->params['lang']) && !isset($params['lang'])) {
-            $params['lang'] = $request->params['lang'];
+        if ($request->getParam('lang') && !isset($params['lang'])) {
+            $params['lang'] = $request->getParam('lang');
         }
         return $params;
     });
@@ -1231,7 +1277,7 @@ passés::
         Router::parseNamedParams($this->request);
     }
 
-Ceci va remplir ``$this->request->params['named']`` avec tout paramètre nommé
+Ceci va remplir ``$this->request->getParam('named')`` avec tout paramètre nommé
 trouvé dans les arguments passés. Tout argument passé qui a été interprété comme
 un paramètre nommé, sera retiré de la liste des arguments passés.
 

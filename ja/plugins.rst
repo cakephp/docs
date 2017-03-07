@@ -427,6 +427,10 @@ bake で作っていないプラグインなら、クラスを自動的に読み
 
     $contacts = TableRegistry::get('ContactManager.Contacts');
 
+あるいは、コントローラの処理の中で以下のように使用できます。 ::
+
+    $this->loadModel('ContactsMangager.Contacts');
+
 プラグインビュー
 =================
 

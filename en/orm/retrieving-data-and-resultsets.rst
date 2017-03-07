@@ -285,21 +285,36 @@ You can also create list data from associations that can be reached with joins::
         'valueField' => 'author.name'
     ])->contain(['Authors']);
 
-Lastly it is possible to use closures to access entity mutator methods in your
-list finds. This example shows using the ``_getFullName()`` mutator method from
+Customize Key-Value Output
+--------------------------
+
+Lastly it is possible to use closures to access entity accessor methods in your
+list finds. ::
+
+    // In your Authors Entity create a virtual field to be used as the displayField:
+    protected function _getLabel()
+    {
+        return $this->_properties['first_name'] . ' ' . $this->_properties['last_name']
+          . ' / ' . __('User ID %s', $this->_properties['user_id']);
+    }
+
+This example shows using the ``_getLabel()`` accessor method from
 the Author entity. ::
 
+    // In your finders/controller:
     $query = $articles->find('list', [
         'keyField' => 'id',
         'valueField' => function ($article) {
-            return $article->author->get('full_name');
+            return $article->author->get('label');
         }
     ]);
 
-You can also fetch the full name in the list directly using. ::
+You can also fetch the label in the list directly using. ::
 
-    $this->displayField('full_name');
-    $query = $authors->find('list');
+    // In AuthorsTable::initialize():
+    $this->displayField('label'); // Will utilize Author::_getLabel()
+    // In your finders/controller:
+    $query = $authors->find('list'); // Will utilize AuthorsTable::displayField()
 
 Finding Threaded Data
 =====================
@@ -454,8 +469,8 @@ If you prefer to use join functions, you can look at
 
 .. _eager-loading-associations:
 
-Eager Loading Associations
-==========================
+Eager Loading Associations Via Contain
+======================================
 
 By default CakePHP does not load **any** associated data when using ``find()``.
 You need to 'contain' or eager-load each association you want loaded in your
@@ -498,6 +513,34 @@ You can eager load associations as deep as you like::
         'Shops.Cities.Countries',
         'Shops.Managers'
     ]);
+
+You can select fields from all associations with multiple easy ``contain()``
+statements::
+
+    $query = $this->find()->select([
+        'Realestates.id',
+        'Realestates.title',
+        'Realestates.description'
+    ])
+    ->contain([
+        'RealestateAttributes' => [
+            'Attributes' => [
+                'fields' => [
+                    'Attributes.name'
+                ]
+            ]
+        ]
+    ])
+    ->contain([
+        'RealestateAttributes' => [
+            'fields' => [
+                'RealestateAttributes.realestate_id',
+                'RealestateAttributes.value'
+            ]
+        ]
+    ])
+    ->where($condition);
+
 
 If you need to reset the containments on a query you can set the second argument
 to ``true``::
@@ -618,8 +661,8 @@ option to sort the data in those associations::
 
 .. _filtering-by-associated-data:
 
-Filtering by Associated Data
-----------------------------
+Filtering by Associated Data Via Matching And Joins
+===================================================
 
 .. start-filtering
 
@@ -674,7 +717,7 @@ association, you can expect to get both the ``_matchingData`` and standard
 association properties in your results.
 
 Using innerJoinWith
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 Using the ``matching()`` function, as we saw already, will create an ``INNER
 JOIN`` with the specified association and will also load the fields into the
@@ -706,7 +749,7 @@ result set, and no ``_matchingData`` property will be set.
     Query::innerJoinWith() was added in 3.1
 
 Using notMatching
-~~~~~~~~~~~~~~~~~
+-----------------
 
 The opposite of ``matching()`` is ``notMatching()``. This function will change
 the query so that it filters results that have no relation to the specified
@@ -766,7 +809,7 @@ will not add any data to the ``_matchingData`` property in the results.
     Query::notMatching() was added in 3.1
 
 Using leftJoinWith
-~~~~~~~~~~~~~~~~~~
+------------------
 
 On certain occasions you may want to calculate a result based on an association,
 without having to load all the records for it. For example, if you wanted to
@@ -804,7 +847,7 @@ result set.
 .. end-filtering
 
 Changing Fetching Strategies
-----------------------------
+============================
 
 As you may know already, ``belongsTo`` and ``hasOne`` associations are loaded
 using a ``JOIN`` in the main finder query. While this improves query and
@@ -870,7 +913,7 @@ You can also make the strategy permanent for the association by doing::
     $articles->Comments->strategy('subquery');
 
 Lazy Loading Associations
--------------------------
+=========================
 
 While CakePHP makes it easy to eager load your associations, there may be cases
 where you need to lazy-load associations. You should refer to the
@@ -1069,7 +1112,7 @@ Finally, we can put these two functions together to do the grouping::
         ->mapReduce($mapper, $reducer);
 
     foreach ($articlesByStatus as $status => $articles) {
-        echo sprintf("The are %d %s articles", count($articles), $status);
+        echo sprintf("There are %d %s articles", count($articles), $status);
     }
 
 The above will ouput the following lines::

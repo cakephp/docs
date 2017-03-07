@@ -38,6 +38,22 @@ job('Book - Deploy 3.x') {
   }
 }
 
+job('Book - Deploy 3.next') {
+  description('Deploy the 3.next book when changes are pushed.')
+  scm {
+    github(REPO_NAME, '3.next')
+  }
+  triggers {
+    scm('H/5 * * * *')
+  }
+  logRotator {
+    daysToKeep(30)
+  }
+  steps {
+    shell(BUILD_STEPS.replaceAll('VERSION', '3next'))
+  }
+}
+
 job('Book - Deploy 2.x') {
   description('Deploy the 2.x book when changes are pushed.')
   scm {

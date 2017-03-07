@@ -296,7 +296,7 @@ First, start by creating an ``add()`` action in the
         {
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
-                $article = $this->Articles->patchEntity($article, $this->request->data);
+                $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
                     return $this->redirect(['action' => 'index']);
@@ -324,7 +324,7 @@ application.  In this case, we use the :php:meth:`Cake\\Network\\Request::is()`
 method to check that the request is a HTTP POST request.
 
 When a user uses a form to POST data to your application, that
-information is available in ``$this->request->data``. You can use the
+information is available in ``$this->request->getData()``. You can use the
 :php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to
 see what it looks like.
 
@@ -366,8 +366,8 @@ Here's our add view:
     <h1>Add Article</h1>
     <?php
         echo $this->Form->create($article);
-        echo $this->Form->input('title');
-        echo $this->Form->input('body', ['rows' => '3']);
+        echo $this->Form->control('title');
+        echo $this->Form->control('body', ['rows' => '3']);
         echo $this->Form->button(__('Save Article'));
         echo $this->Form->end();
     ?>
@@ -384,12 +384,12 @@ you are building a form that submits via POST to the current controller's
 ``add()`` action (or ``edit()`` action when ``id`` is included in
 the form data).
 
-The ``$this->Form->input()`` method is used to create form elements
+The ``$this->Form->control()`` method is used to create form elements
 of the same name. The first parameter tells CakePHP which field
 they correspond to, and the second parameter allows you to specify
 a wide array of options - in this case, the number of rows for the
 textarea. There's a bit of introspection and automagic here:
-``input()`` will output different form elements based on the model
+``control()`` will output different form elements based on the model
 field specified.
 
 The ``$this->Form->end()`` call ends the form. Outputting hidden inputs if
@@ -441,7 +441,7 @@ setup, check the :doc:`/core-libraries/validation` documentation.
 
 Now that your validation rules are in place, use the app to try to add
 an article with an empty title or body to see how it works.  Since we've used the
-:php:meth:`Cake\\View\\Helper\\FormHelper::input()` method of the FormHelper to
+:php:meth:`Cake\\View\\Helper\\FormHelper::control()` method of the FormHelper to
 create our form elements, our validation error messages will be shown
 automatically.
 
@@ -459,7 +459,7 @@ like::
     {
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
-            $this->Articles->patchEntity($article, $this->request->data);
+            $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));
                 return $this->redirect(['action' => 'index']);
@@ -489,8 +489,8 @@ The edit view might look something like this:
     <h1>Edit Article</h1>
     <?php
         echo $this->Form->create($article);
-        echo $this->Form->input('title');
-        echo $this->Form->input('body', ['rows' => '3']);
+        echo $this->Form->control('title');
+        echo $this->Form->control('body', ['rows' => '3']);
         echo $this->Form->button(__('Save Article'));
         echo $this->Form->end();
     ?>
@@ -679,7 +679,7 @@ for building more feature-rich applications.
 
 Now that you've created a basic CakePHP application, you can either continue to
 :doc:`/tutorials-and-examples/blog/part-three`, or start your own project. You
-can also peruse the :doc:`/topics` or `API <https://api.cakephp.org/3.0>` to
+can also peruse the :doc:`/topics` or `API <https://api.cakephp.org>`_ to
 learn more about CakePHP.
 
 If you need help, there are many ways to get the help you need - please see the
