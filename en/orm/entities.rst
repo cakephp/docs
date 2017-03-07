@@ -239,6 +239,13 @@ by passing an extra option::
 
     $article = new Article(['title' => 'New Article'], ['markClean' => true]);
 
+.. versionadded:: 3.4.3
+
+To get a list of all dirty properties of an Entity you may call::
+
+    $dirtyFields = $entity->getDirty();
+
+
 Validation Errors
 =================
 
