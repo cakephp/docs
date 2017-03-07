@@ -241,7 +241,7 @@ by passing an extra option::
 
 .. versionadded:: 3.4.3
 
-To get a list of all dirty properties of an Entity you may call::
+To get a list of all dirty properties of an ``Entity`` you may call::
 
     $dirtyFields = $entity->getDirty();
 
