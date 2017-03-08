@@ -245,6 +245,9 @@ To get a list of all dirty properties of an ``Entity`` you may call::
 
 .. versionadded:: 3.4.3
 
+    ``getDirty()`` has been added.
+
+
 Validation Errors
 =================
 
