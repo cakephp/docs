@@ -192,6 +192,8 @@ the ``provider`` key in your rule::
 If you wish to add a ``provider`` to all ``Validator`` objects this can be done
 using ``addDefaultProvider()`` method as follows::
 
+    use Cake\Validation\Validator;
+
     // Use an object instance.
     Validator::addDefaultProvider('custom', $myObject);
 
@@ -201,8 +203,7 @@ using ``addDefaultProvider()`` method as follows::
 .. note::
 
     DefaultProviders must be added before the ``Validator`` object is created
-    therefore **config/bootstrap.php** or :php:meth:`~Cake\\ORM\\Table::buildValidator()`
-    callback is the best place
+    therefore **config/bootstrap.php** is the best place
 
 .. versionadded:: 3.4.3
 
