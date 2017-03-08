@@ -673,7 +673,7 @@ form layouts.
 .. _general-control-options:
 
 Common Options For Specific Controls
-----------------------------------
+------------------------------------
 
 Many of the various control element methods support a common set of options which,
 depending on the form method used, must be provided inside the ``$options`` or
