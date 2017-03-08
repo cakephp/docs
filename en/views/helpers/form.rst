@@ -2424,7 +2424,7 @@ expect can be found at the
 `FormHelper API documentation <https://api.cakephp.org/3.2/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
 
 Using Distinct Custom Control Containers
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 In addition to these templates, the ``control()`` method will attempt to use
 distinct templates for each control container. For example, when creating
 a datetime control the ``datetimeContainer`` will be used if it is present.
@@ -2561,7 +2561,7 @@ For example::
 If you disable the ``fieldset``, the ``legend`` will not print.
 
 Creating Controls for a Whole Entity
-----------------------------------
+------------------------------------
 
 .. php:method:: allControls(array $fields, $options = [])
 
