@@ -130,7 +130,18 @@ ArticlesController の ``index()`` 関数にマップします。そして、Art
 さて、これで CakePHP の基本について一通り理解できました。物事がどう組み合わせられるかを確かめるために、
 :doc:`/tutorials-and-examples/bookmarks/intro` を体験することができるでしょう。
 
+ORM と FormHelper の命名規則
+============================
+
+CakePHP のソースコードをナビゲートしていると、データベースキーマを扱う時は、
+フィールドはしばしばカラムと呼ばれますが、エンティティを扱う時は、プロパティと呼ばれます。
+
+キーとして記述されたフィールドやカラムは、一般に主キーや外部キーのカラムを表します。
+
+スキーマのカラム、データベースのフィールド、エンティティのプロパティを検索する時、
+それらがフレームワークを通して変化する可能性があるため、命名規則のフィールド、
+プロパティまたはカラムによって参照されているかどうかを確認してください。
 
 .. meta::
-    :title lang=ja: CakePHP Conventions
+    :title lang=ja: CakePHP の規約
     :keywords lang=ja: web development experience,maintenance nightmare,index method,legacy systems,method names,php class,uniform system,config files,tenets,articles,conventions,conventional controller,best practices,maps,visibility,news articles,functionality,logic,cakephp,developers
