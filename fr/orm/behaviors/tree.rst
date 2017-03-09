@@ -118,8 +118,7 @@ Le finder ``treeList`` accepte un certain nombre d'options:
 * ``keyPath``: Le chemin séparé par des points pour récupérer le champ à
   utiliser en clé de tableau, ou une closure qui retourne la clé de la ligne
   fournie.
-* ``valuePath``:
-* ``keyPath``: Le chemin séparé par des points pour récupérer le champ à
+* ``valuePath``: Le chemin séparé par des points pour récupérer le champ à
   utiliser en valeur de tableau, ou une closure qui retourne la valeur de la
   ligne fournie.
 * ``spacer``: Une chaîne de caractères utilisée en tant que préfixe pour
