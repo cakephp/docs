@@ -272,7 +272,7 @@ Apache.
         phpunit.xml.dist
         README.md
 
-Разработчики, использующие Apache, должны установить директиву ``DocumentRoot`
+Разработчики, использующие Apache, должны установить директиву ``DocumentRoot``
 для домена в следующее значение:
 
 .. code-block:: apacheconf
