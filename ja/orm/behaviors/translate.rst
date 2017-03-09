@@ -410,19 +410,19 @@ TranslateBehavior の背後にある哲学は、デフォルトの言語を表�
     $this->Articles->save($article);
 
 3.3.0 では、複数の翻訳での動作は簡素化されました。
-翻訳されたフィールドの入力フォームを作成することができます。 ::
+翻訳されたフィールドのフォームコントロールを作成することができます。 ::
 
     // ビューテンプレートの中で
     <?= $this->Form->create($article); ?>
     <fieldset>
         <legend>French</legend>
-        <?= $this->Form->input('_translations.fr.title'); ?>
-        <?= $this->Form->input('_translations.fr.body'); ?>
+        <?= $this->Form->control('_translations.fr.title'); ?>
+        <?= $this->Form->control('_translations.fr.body'); ?>
     </fieldset>
     <fieldset>
         <legend>Spanish</legend>
-        <?= $this->Form->input('_translations.es.title'); ?>
-        <?= $this->Form->input('_translations.es.body'); ?>
+        <?= $this->Form->control('_translations.es.title'); ?>
+        <?= $this->Form->control('_translations.es.body'); ?>
     </fieldset>
 
 コントローラの中では、通常通りにデータをマーシャリングできますが、
