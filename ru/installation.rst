@@ -302,7 +302,153 @@ http://example.com/, либо http://localhost:8765/. На данный моме
 Apache
 ------
 
+Хотя CakePHP создан для работы с mod\_rewrite "из коробки" - и обычно
+это так и есть - мы заметили, что некоторые пользователи пытаются получить
+все для хорошей работы в их системах.
 
+Вот несколько вещей, которые вы можете попробовать сделать, чтобы он работал
+правильно. Первый взгляд на ваш httpd.conf. (Убедитесь, что вы редактируете
+системный httpd.conf,а не пользовательский или определенный на сайте
+httpd.conf.)
+
+Эти файлы могут различаться в разных дистрибутивах и версиях Apache. Вы
+Может также посмотреть http://wiki.apache.org/httpd/DistrosDefaultLayout для
+более подробной информации.
+
+#. Убедитесь, что переопределение .htaccess разрешено и, что AllowOverride 
+   установлен в значении All для корректного DocumentRoot. Вы должны наблюдать
+   нечто похожее на:
+
+   .. code-block:: apacheconf
+
+       # Каждая папка, к которой Apache имеет доступ, может быть настроена
+       # в отношении того, какие сервисы и возможности разрешены и/или запрещены в той
+       # папке (и ее подпапках).
+       #
+       # Для начала, мы настроим параметры "по умолчанию" довольно ограниченными
+       # возможностями.
+       <Directory />
+           Options FollowSymLinks
+           AllowOverride All
+       #    Order deny,allow
+       #    Deny from all
+       </Directory>
+
+#. Убедитесь, что вы загружаете mod\_rewrite корректно. Вы должны видеть нечто
+   подобное:
+
+   .. code-block:: apacheconf
+
+       LoadModule rewrite_module libexec/apache2/mod_rewrite.so
+
+   Во многих системах эти настройки по умолчанию закоментированы, так что
+   вы просто должны их раскомментировать, удалив символы # перед строками.
+
+   После внесения правок перезапустите Apache, чтобы настройки вступили в силу.
+
+   Убедитесь, что ваши файлы .htaccess находятся в правильных папках. Некоторые
+   операционные системы скрывают файлы, имена которых начинаются с '.' и
+   таким образом не позволяют копировать их.
+
+#. Убедитесь, что ваша копия CakePHP получена из нашего Git-репозитория, и 
+   корректно распакована, проврив файлы .htaccess.
+   
+   Папка app CakePHP (будет скопирована в корневую папку вашего приложения
+   консолью bake):
+
+   .. code-block:: apacheconf
+
+       <IfModule mod_rewrite.c>
+          RewriteEngine on
+          RewriteRule    ^$    webroot/    [L]
+          RewriteRule    (.*) webroot/$1    [L]
+       </IfModule>
+
+    Папка webroot CakePHP (будет скопирована в корневую папку вашего приложения
+    консолью bake):
+
+   .. code-block:: apacheconf
+
+       <IfModule mod_rewrite.c>
+           RewriteEngine On
+           RewriteCond %{REQUEST_FILENAME} !-f
+           RewriteRule ^ index.php [L]
+       </IfModule>
+
+   Если у вашего сайта CakePHP все еще есть проблемы с mod\_rewrite, попробуйте
+   изменить настройки Virtual Hosts. На Ubuntu, отредактируйте файл
+   **/etc/apache2/доступные-сайты/default** (расположение зависит от дистрибутива).
+   В этом файле убедиесь, что опция ``AllowOverride None`` изменена на
+   ``AllowOverride All``:
+
+   .. code-block:: apacheconf
+
+       <Directory />
+           Options FollowSymLinks
+           AllowOverride All
+       </Directory>
+       <Directory /var/www>
+           Options Indexes FollowSymLinks MultiViews
+           AllowOverride All
+           Order Allow,Deny
+           Allow from all
+       </Directory>
+
+   На macOS, другое решение - это использовать инструмент
+   `virtualhostx <http://clickontyler.com/virtualhostx/>`_, чтобы заставить Virtual
+   Host ссылаться на вашу папку.
+
+   Для многих хостингов (GoDaddy, 1and1) ваш веб-сервер изначально обслуживается
+   из папки пользователя, которая изначально использует mod\_rewrite. Если вы
+   устанавливаете CakePHP в папку пользователя
+   (http://example.com/~username/cakephp/), или любой другой URL, уже использующий
+   mod\_rewrite, вам понадобится добавить блоки RewriteBase в файлы .htaccess,
+   используемые CakePHP (.htaccess, webroot/.htaccess).
+
+   Это может быть добавлено в ту же секцию, что и директива RewriteEngine.
+   Так, к примеру ваш файл .htaccess папки webroot может выглядеть так:
+
+   .. code-block:: apacheconf
+
+       <IfModule mod_rewrite.c>
+           RewriteEngine On
+           RewriteBase /путь/к/app
+           RewriteCond %{REQUEST_FILENAME} !-f
+           RewriteRule ^ index.php [L]
+       </IfModule>
+
+   Более детальный разбор необходимых изменений будет зависеть от вашей
+   конкретной установки, и может потребоваться указание параметров, не связанных
+   непосредственно с CakePHP. Для более подробной информации пожалуйста ознакомьтесь
+   с онлайн-документацией Apache.
+
+#. (Опционально) Чтобы улучшить настройки продакшена, вы должны предотвращать
+   обработку фреймворком CakePHP несуществующих ресурсов. Измените файл
+   .htaccess папки webroot например вот так:
+
+   .. code-block:: apacheconf
+
+       <IfModule mod_rewrite.c>
+           RewriteEngine On
+           RewriteBase /путь/к/app/
+           RewriteCond %{REQUEST_FILENAME} !-f
+           RewriteCond %{REQUEST_URI} !^/(webroot/)?(img|css|js)/(.*)$
+           RewriteRule ^ index.php [L]
+       </IfModule>
+
+   Данные настройки предотвратят передачу некорректных параметров файлу index.php
+   и в случае необходимости вернут 404 ошибку.
+   
+   В дополнение к этому вы можете создать шаблон страницы для 404 ошибки, или же
+   можете использовать встроенный в CakePHP шаблон, добавив директиву
+   ``ErrorDocument``:
+
+   .. code-block:: apacheconf
+
+       ErrorDocument 404 /404-not-found
+       
+nginx
+-----
 
 .. _GitHub: http://github.com/cakephp/cakephp
 .. _Composer: http://getcomposer.org
