@@ -450,6 +450,149 @@ httpd.conf.)
 nginx
 -----
 
+nginx не использует файлы .htaccess как Apache, так что необходимо создавать
+эти переопределенные URL в конфигурации сайта. Обычно все это находится в
+``/etc/nginx/доступные-сайты/файл_конфигурации_вашего_виртуального_хоста``.
+В зависимости от ваших настроек, вам возможно придется внести некоторые правки
+в данные параметры, но как правило небольшие, вам понадобится PHP на FastCGI:
+
+.. code-block:: nginx
+
+    server {
+        listen   80;
+        server_name www.example.com;
+        rewrite ^(.*) http://example.com$1 permanent;
+    }
+
+    server {
+        listen   80;
+        server_name example.com;
+
+        # директива root должна быть глобальной
+        root   /var/www/example.com/public/webroot/;
+        index  index.php;
+
+        access_log /var/www/example.com/log/access.log;
+        error_log /var/www/example.com/log/error.log;
+
+        location / {
+            try_files $uri $uri/ /index.php?$args;
+        }
+
+        location ~ \.php$ {
+            try_files $uri =404;
+            include /etc/nginx/fastcgi_params;
+            fastcgi_pass    127.0.0.1:9000;
+            fastcgi_index   index.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        }
+    }
+    
+На некоторых серверах (таких как Ubuntu 14.04) приведенная выше конфигурация
+не будет работать "из коробки", и документация nginx рекомендует иной подход
+(http://nginx.org/en/docs/http/converting_rewrite_rules.html). Попробуйте
+нижеприведенные настройки (вы можете заметить, что в данном случае
+используется всего один блок server {}, а не два, как бы там ни было, если
+вы хотите иметь доступ к вашему приложению CakePHP еще и с адреса example.com
+помимо www.example.com, ознакомьтесь с документацией по ссылке выше):
+
+.. code-block:: nginx
+
+    server {
+        listen   80;
+        server_name www.example.com;
+        rewrite 301 http://www.example.com$request_uri permanent;
+
+        # root directive should be global
+        root   /var/www/example.com/public/webroot/;
+        index  index.php;
+
+        access_log /var/www/example.com/log/access.log;
+        error_log /var/www/example.com/log/error.log;
+
+        location / {
+            try_files $uri /index.php?$args;
+        }
+
+        location ~ \.php$ {
+            try_files $uri =404;
+            include /etc/nginx/fastcgi_params;
+            fastcgi_pass    127.0.0.1:9000;
+            fastcgi_index   index.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        }
+    }
+
+IIS7 (Windows хостинги)
+-----------------------
+
+IIS7 изначально не поддерживает файлы .htaccess. В то время, когда существуют
+дополнения, добавляющие эту поддержку, вы можете также импортировать правила
+htaccess в IIS для использования встроенных в CakePHP переопределений. Чтобы
+сделать это, выполните следующие шаги:
+
+#. Используйте `Microsoft Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_
+   для установки URL `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
+   или скачайте его (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
+   `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
+#. Создайте новый файл  web.config в вашей корневой папке CakePHP.
+#. Используя Блокнот или любой XML-safe редактор, скопируйте следующий
+   код в ваш новый файл web.config:
+
+.. code-block:: xml
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <configuration>
+        <system.webServer>
+            <rewrite>
+                <rules>
+                    <rule name="Exclude direct access to webroot/*"
+                      stopProcessing="true">
+                        <match url="^webroot/(.*)$" ignoreCase="false" />
+                        <action type="None" />
+                    </rule>
+                    <rule name="Rewrite routed access to assets(img, css, files, js, favicon)"
+                      stopProcessing="true">
+                        <match url="^(img|css|files|js|favicon.ico)(.*)$" />
+                        <action type="Rewrite" url="webroot/{R:1}{R:2}"
+                          appendQueryString="false" />
+                    </rule>
+                    <rule name="Rewrite requested file/folder to index.php"
+                      stopProcessing="true">
+                        <match url="^(.*)$" ignoreCase="false" />
+                        <action type="Rewrite" url="index.php"
+                          appendQueryString="true" />
+                    </rule>
+                </rules>
+            </rewrite>
+        </system.webServer>
+    </configuration>
+
+Как только файл web.config будет создан с корректными правилами переопределения,
+все ссылки на CSS-стили, JavaScript и перенаправление маршрутов CakePHP должны
+работать корректно.
+
+Я не могу использовать переопределение URL
+------------------------------------------
+
+Если вы не хотите или не можете активировать модуль mod\_rewrite (или модуль
+совместимый с ним) на вашем сервере, вы можете использовать встроенные
+возможности CakePHP. В файле **config/app.php** раскомментируйте строку::
+
+    'App' => [
+        // ...
+        // 'baseUrl' => env('SCRIPT_NAME'),
+    ]
+
+И удалите эти файлы .htaccess::
+
+    /.htaccess
+    webroot/.htaccess
+    
+Это заставит ваши URL выглядеть как
+www.example.com/index.php/controllername/actionname/param вместо
+www.example.com/controllername/actionname/param.
+
 .. _GitHub: http://github.com/cakephp/cakephp
 .. _Composer: http://getcomposer.org
 
