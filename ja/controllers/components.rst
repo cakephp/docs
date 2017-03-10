@@ -77,7 +77,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 
 共通設定の一つに ``className`` オプションがあります。このオプションを使うと
 コンポーネントに別名をつけられます。この機能は ``$this->Auth`` や
-他のコンポーネントの参照を独自実装に置き換えたい時に便利です。::
+他のコンポーネントの参照を独自実装に置き換えたい時に便利です。 ::
 
     // src/Controller/PostsController.php
     class PostsController extends AppController
@@ -129,9 +129,8 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 
 一旦、コンポーネントをコントローラに読込んでしまえば、使うのは非常に簡単です。
 使用中の各コンポーネントはコントローラのプロパティのように見えます。
-もし、 :php:class:`Cake\\Controller\\Component\\FlashComponent` と
-:php:class:`Cake\\Controller\\Component\\CookieComponent` を
-コントローラに読込んだ場合、以下のようにアクセスすることができます。::
+もし、 :php:class:`Cake\\Controller\\Component\\FlashComponent` を
+コントローラに読込んだ場合、以下のようにアクセスすることができます。 ::
 
     class PostsController extends AppController
     {
@@ -139,7 +138,6 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
         {
             parent::initialize();
             $this->loadComponent('Flash');
-            $this->loadComponent('Cookie');
         }
 
         public function delete()
@@ -229,7 +227,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 
 作成しているコンポーネントから他のコンポーネントを使いたい時がたまにあります。
 その場合、作成中のコンポーネントから他のコンポーネントを読み込むことができ、
-その方法はコントローラから ``$components`` 変数を使って読み込む場合と同じです。::
+その方法はコントローラから ``$components`` 変数を使って読み込む場合と同じです。 ::
 
     // src/Controller/Component/CustomComponent.php
     namespace App\Controller\Component;
