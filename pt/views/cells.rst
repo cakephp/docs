@@ -50,7 +50,7 @@ Vocẽ pode gerar este esboço de código rapidamente usando o ``bake``::
 Gera o cdigo que digitamos acima.
 
 Implementando a *Cell*
----------------------
+----------------------
 
 Assumindo que nós estamos trabalhando em uma aplicação que permite que usuários enviem mensagens
 um para o outro. Nós temos o modelo ``Messages``, e nós queremos mostrar a quantidade de mensagens
