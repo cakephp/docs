@@ -100,6 +100,32 @@ HTTP エラー用の例外を使うことで、あなたのコードを奇麗に
 また、次に挙げるフレームワーク層の例外を使うこともできます。これらは CakePHP コアコンポーネントの
 多くから投げられているものです。
 
+.. php:exception:: CakeException
+
+    CakePHP での例外の基底クラスです。CakePHP によって投げられるフレームワーク層のすべての
+    例外はこのクラスを継承しています。
+
+これらの例外クラスはすべて :php:exc:`CakeException` を継承しています。
+CakeException を継承することで、独自の 'フレームワーク' エラーを作ることができます。
+CakePHP が投げる標準的な例外もすべて、CakeException を継承しています。
+
+.. versionadded:: 2.3
+    CakeBaseException が追加されました。
+
+.. php:exception:: CakeBaseException
+
+    CakePHP での例外の基底クラスです。
+    前述の CakeExceptions と HttpExceptions はすべて、このクラスを継承しています。
+
+.. php:method:: responseHeader($header = null, $value = null)
+
+    :php:func:`CakeResponse::header()` を参照してください。
+
+HTTP 例外と CakePHP 例外はすべて、CakeBaseException クラスを継承しており、このクラスはレスポンスに
+ヘッダーを加えるメソッドを持っています。405 MethodNotAllowedException を投げる場合について例を
+挙げると、RFC2616 ではこう言っています：
+「レスポンスは、要求されたリソースへの正しいメソッドのリストを含む Allow ヘッダーを含有していなければ【なりません】。」
+
 .. php:exception:: MissingViewException
 
     選ばれた view ファイルが見つかりません。
@@ -158,32 +184,6 @@ HTTP エラー用の例外を使うことで、あなたのコードを奇麗に
 
     private なアクションにアクセスしています。 private や protected、_ で始まるアクションに
     アクセスしているか、prefix されたルートに誤ってアクセスしようとしています。
-
-.. php:exception:: CakeException
-
-    CakePHP での例外の基底クラスです。CakePHP によって投げられるフレームワーク層のすべての
-    例外はこのクラスを継承しています。
-
-これらの例外クラスはすべて :php:exc:`CakeException` を継承しています。
-CakeException を継承することで、独自の 'フレームワーク' エラーを作ることができます。
-CakePHP が投げる標準的な例外もすべて、CakeException を継承しています。
-
-.. versionadded:: 2.3
-    CakeBaseException が追加されました。
-
-.. php:exception:: CakeBaseException
-
-    CakePHP での例外の基底クラスです。
-    前述の CakeExceptions と HttpExceptions はすべて、このクラスを継承しています。
-
-.. php:method:: responseHeader($header = null, $value = null)
-
-    :php:func:`CakeResponse::header()` を参照してください。
-
-HTTP 例外と Cake 例外はすべて、CakeBaseException クラスを継承しており、このクラスはレスポンスに
-ヘッダーを加えるメソッドを持っています。405 MethodNotAllowedException を投げる場合について例を
-挙げると、RFC2616 ではこう言っています：
-「レスポンスは、要求されたリソースへの正しいメソッドのリストを含む Allow ヘッダーを含有していなければ【なりません】。」
 
 コントローラでの HTTP 例外の使用
 ================================
