@@ -6,7 +6,7 @@ e renderizar templates. A ideia de *cells* é emprestada das `cells do Ruby
 <https://github.com/apotonick/cells>`_, onde desempenham papel e finalidade semelhantes.
 
 Quando usar *Cells*
-=================
+===================
 
 *Cells* são ideais para construir componentes de páginas reutilizáveis que requerem
 interação com modelos, lógica de visualização, e lógica de renderizaço. Um exemplo simples
@@ -90,7 +90,7 @@ como faríamos em um *controller*. Em nosso arquivo de *template*, adicione o se
     feita ou blocos definidos no *template* / layout da *action* e vice-versa.
     
 Carregando *Cells*
-=============
+==================
 
 *Cells* podem ser carregadas nas *views* usando o método ``cell()`` e funciona da mesma
 forma em ambos os contextos::
@@ -159,7 +159,7 @@ dentro do template da *cell* se necessário.
     por exemplo ``<?= $cell->render() ?>``.
     
 Renderizando template alternativos
------------------------------
+----------------------------------
 
 Por convenção *cells* renderizam *templates* que correspondem a *action* que está sendo executada.
 Se você precisar renderizar um *template* de visualizaço diferente, você pode especificar o *template* 
