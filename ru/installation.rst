@@ -1,10 +1,10 @@
 Установка
-############
+#########
 
 CakePHP довольно прост и легок в установке. Минимальные требования - веб-сервер и копия CakePHP, это все что Вам нужно! Этот раздел сосредоточен на установке CakePHP на Apache (поскольку он прост в установке и настройке), но CakePHP может также работать и с другими веб-серверами, как Nginx, LightHTTP или Microsoft IIS.
 
-Требования к устаноке
-=====================
+Требования к установке
+======================
 
 - HTTP сервер. Например: Apache. Предпочтительно с mod\_rewrite, но необязательно.
 - PHP 5.6.0 или выше (включая PHP 7.1).
@@ -341,7 +341,7 @@ httpd.conf.)
 
        LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 
-   Во многих системах эти настройки по умолчанию закоментированы, так что
+   Во многих системах эти настройки по умолчанию закомментированы, так что
    вы просто должны их раскомментировать, удалив символы # перед строками.
 
    После внесения правок перезапустите Apache, чтобы настройки вступили в силу.
@@ -359,9 +359,9 @@ httpd.conf.)
    .. code-block:: apacheconf
 
        <IfModule mod_rewrite.c>
-          RewriteEngine on
-          RewriteRule    ^$    webroot/    [L]
-          RewriteRule    (.*) webroot/$1    [L]
+           RewriteEngine on
+           RewriteRule    ^$    webroot/    [L]
+           RewriteRule    (.*) webroot/$1    [L]
        </IfModule>
 
    Папка webroot CakePHP (будет скопирована в корневую папку вашего приложения
@@ -370,9 +370,9 @@ httpd.conf.)
    .. code-block:: apacheconf
 
        <IfModule mod_rewrite.c>
-          RewriteEngine On
-          RewriteCond %{REQUEST_FILENAME} !-f
-          RewriteRule ^ index.php [L]
+           RewriteEngine On
+           RewriteCond %{REQUEST_FILENAME} !-f
+           RewriteRule ^ index.php [L]
        </IfModule>
 
    Если у вашего сайта CakePHP все еще есть проблемы с mod\_rewrite, попробуйте
