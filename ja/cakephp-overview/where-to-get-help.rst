@@ -34,7 +34,7 @@ CakePHP に関する理解が深まったらログインして知識をコミュ
 API
 ===
 
-`https://api.cakephp.org/ <https://api.cakephp.org/>`_
+`https://api.cakephp.org/2.x/ <https://api.cakephp.org/2.x/>`_
 
 直接的な答えがコア開発者から直接得られるので、
 CakePHP API (*Application Programming Interface*) は、

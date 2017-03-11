@@ -992,7 +992,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
         /posts/search?foo=bar#first
 
     より詳しい情報は、API 集の
-    `Router::url <https://api.cakephp.org/2.8/class-Router.html#_url>`_
+    `Router::url <https://api.cakephp.org/2.x/class-Router.html#_url>`_
     を確認してください。
 
 .. php:method:: useTag(string $tag)

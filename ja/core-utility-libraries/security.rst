@@ -3,7 +3,7 @@ Security
 
 .. php:class:: Security
 
-`Security ライブラリ <https://api.cakephp.org/2.8/class-Security.html>`_ は、
+`Security ライブラリ <https://api.cakephp.org/2.x/class-Security.html>`_ は、
 データのハッシュ化や暗号化などのメソッドなどの基本的なセキュリティ分野を取り扱います。
 
 .. warning::

@@ -22,7 +22,7 @@ upgrade シェルは、 CakePHP アプリケーションを 1.3 から 2.0 へ�
 
     ./Console/cake upgrade --help
 
-詳しくは `API ドキュメント <https://api.cakephp.org/2.6/class-UpgradeShell.html>`_
+詳しくは `API ドキュメント <https://api.cakephp.org/2.x/class-UpgradeShell.html>`_
 を参照してください。
 
 アプリのアップグレード

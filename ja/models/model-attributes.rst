@@ -5,7 +5,7 @@
 設定することができます。
 
 モデルの属性の完全なリストと説明については、
-`CakePHP API <https://api.cakephp.org/2.8/class-Model.html>`_ をご覧ください。
+`CakePHP API <https://api.cakephp.org/2.x/class-Model.html>`_ をご覧ください。
 
 useDbConfig
 ===========
