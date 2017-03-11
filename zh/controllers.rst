@@ -164,7 +164,7 @@ CakePHP 控制器带有回调方法，用来在请求生命周期的各个阶段
 ==========
 
 欲知控制器方法的完整列表及其描述，请参看 
-`CakePHP API <https://api.cakephp.org/2.8/class-Controller.html>`_ 。
+`CakePHP API <https://api.cakephp.org/2.x/class-Controller.html>`_ 。
 
 与视图交互
 ----------
@@ -600,7 +600,7 @@ CakePHP 就不会试图再次渲染该视图了::
 ==========
 
 欲知控制器属性的完整列表及其描述，请参看 
-`CakePHP API <https://api.cakephp.org/2.8/class-Controller.html>`_ 。
+`CakePHP API <https://api.cakephp.org/2.x/class-Controller.html>`_ 。
 
 .. php:attr:: name
 

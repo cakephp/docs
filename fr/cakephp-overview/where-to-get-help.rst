@@ -37,7 +37,7 @@ gloire et la fortune.
 L'API
 =====
 
-`https://api.cakephp.org/ <https://api.cakephp.org/>`_
+`https://api.cakephp.org/2.x/ <https://api.cakephp.org/2.x/>`_
 
 Allez droit au but et atteignez le graal des développeurs, l'API CakePHP
 (Application Programming Interface) est la documentation la plus complète sur

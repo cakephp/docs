@@ -468,7 +468,7 @@ tabulaire, mais le Helper Paginator disponible dans les vues
 N'a pas toujours besoin d'être limité en tant que tel.
 
 Voir les détails sur
-`PaginatorHelper <https://api.cakephp.org/2.4/class-PaginatorHelper.html>`_
+`PaginatorHelper <https://api.cakephp.org/2.x/class-PaginatorHelper.html>`_
 dans l' API. Comme mentionné précédemment, le Helper Paginator
 offre également des fonctionnalités de tri qui peuvent être facilement
 intégrés dans vos en-têtes de colonne de table:
