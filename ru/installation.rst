@@ -356,24 +356,24 @@ httpd.conf.)
    Папка app CakePHP (будет скопирована в корневую папку вашего приложения
    консолью bake):
 
-       .. code-block:: apacheconf
+   .. code-block:: apacheconf
 
-           <IfModule mod_rewrite.c>
-              RewriteEngine on
-              RewriteRule    ^$    webroot/    [L]
-              RewriteRule    (.*) webroot/$1    [L]
-           </IfModule>
+       <IfModule mod_rewrite.c>
+          RewriteEngine on
+          RewriteRule    ^$    webroot/    [L]
+          RewriteRule    (.*) webroot/$1    [L]
+       </IfModule>
 
    Папка webroot CakePHP (будет скопирована в корневую папку вашего приложения
    консолью bake):
 
-        .. code-block:: apacheconf
+   .. code-block:: apacheconf
 
-           <IfModule mod_rewrite.c>
-               RewriteEngine On
-               RewriteCond %{REQUEST_FILENAME} !-f
-               RewriteRule ^ index.php [L]
-           </IfModule>
+       <IfModule mod_rewrite.c>
+          RewriteEngine On
+          RewriteCond %{REQUEST_FILENAME} !-f
+          RewriteRule ^ index.php [L]
+       </IfModule>
 
    Если у вашего сайта CakePHP все еще есть проблемы с mod\_rewrite, попробуйте
    изменить настройки Virtual Hosts. На Ubuntu, отредактируйте файл
