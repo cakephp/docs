@@ -111,7 +111,7 @@ existe des méthodes d'helper pour chacun de ces types d'assets::
     Les méthodes de helper d'asset ont été ajoutées dans la version 3.2.4.
 
 Pour de plus amples informations, voir
-`Router::url <https://api.cakephp.org/3.0/class-Cake.Routing.Router.html#_url>`_
+`Router::url <https://api.cakephp.org/3.x/class-Cake.Routing.Router.html#_url>`_
 dans l'API.
 
 .. meta::

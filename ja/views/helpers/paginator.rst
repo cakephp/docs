@@ -429,7 +429,7 @@ PaginatorHelperのすべてのオプションを設定します。サポート�
 以下の例ではテーブルレイアウトを前提としていますが、ビューの中で利用可能な PaginatorHelper が、
 そのように機能を制限されているわけではありません。
 
-詳細は API の中の `PaginatorHelper <https://api.cakephp.org/3.0/class-Cake.View.Helper.PaginatorHelper.html>`_
+詳細は API の中の `PaginatorHelper <https://api.cakephp.org/3.x/class-Cake.View.Helper.PaginatorHelper.html>`_
 を参照してください。なお、前述のように、PaginatorHelper には、テーブルの列ヘッダーに統合できるソート機能もあります。:
 
 .. code-block:: php
