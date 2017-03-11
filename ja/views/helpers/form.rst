@@ -239,7 +239,7 @@ FormHelper の値ソースは、input タグなどの描画される要素がど
 組み込みのコンテキストクラスは基本的なケースをカバーすることを目的としていますが、
 異なる ORM を使用している場合は新しいコンテキストクラスを作成する必要があります。
 このような状況では、 `Cake\\View\\Form\\ContextInterface
-<https://api.cakephp.org/3.0/class-Cake.View.Form.ContextInterface.html>`_
+<https://api.cakephp.org/3.x/class-Cake.View.Form.ContextInterface.html>`_
 を実装する必要があります。
 このインターフェイスを実装すると、新しいコンテキストを FormHelper に追加することができます。
 ``View.beforeRender`` イベントリスナーやアプリケーションビュークラスで行うのが最善の方法です。 ::
@@ -1616,7 +1616,7 @@ CakePHP の多くのヘルパーと同じように、FormHelper は、
 
 デフォルトのテンプレートのリスト、それらのデフォルトのフォーマット、そして期待される変数は
 `FormHelper API ドキュメント
-<https://api.cakephp.org/3.2/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_
+<https://api.cakephp.org/3.x/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_
 で見つけることができます。
 
 これらのテンプレートに加えて、 ``control()`` メソッドはコントロールコンテナごとに異なるテンプレートを

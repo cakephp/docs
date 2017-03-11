@@ -44,7 +44,7 @@ TimeHelper のほとんどの機能は、古いバージョンの CakePHP から
 :php:class:`Cake\\I18n\\Time` インスタンスを返すので、そのメソッドを使用して
 ほとんどのタスクを実行できるからです。例えば、受け入れられた書式指定文字列について
 読むには、 `Cake\\I18n\\Time::i18nFormat()
-<https://api.cakephp.org/3.0/class-Cake.I18n.Time.html#_i18nFormat>`_
+<https://api.cakephp.org/3.x/class-Cake.I18n.Time.html#_i18nFormat>`_
 メソッドを見てください。
 
 .. meta::
