@@ -8,9 +8,8 @@ before_install:
 
 script:
     - docker run -it --rm -v $(pwd):/data cakephpfr/docs:light make html SPHINXOPTS='-W'
-    - docker run -it --rm -v $(pwd):/data cakephpfr/docs make epub
-    - docker run -it --rm -v $(pwd):/data cakephpfr/docs make latex
-    - docker run -it --rm -v $(pwd):/data cakephpfr/docs make pdf
+    - docker run -it --rm -v $(pwd):/data cakephpfr/docs make epub SPHINXOPTS='-W'
+    - docker run -it --rm -v $(pwd):/data cakephpfr/docs make latex SPHINXOPTS='-W'
 
 notifications:
     email: false
