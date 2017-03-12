@@ -415,6 +415,9 @@ they are defined. The format used to define these fields is the same used with
         - ``string``: maps to ``VARCHAR``
         - ``text``: maps to ``TEXT``
         - ``biginteger``: maps to ``BIGINT``
+        - ``smallinteger``: maps to ``SMALLINT``
+        - ``tinyinteger``: maps to ``TINYINT`` or ``SMALLINT`` depending on the
+          database platform.
         - ``integer``: maps to ``INT``
         - ``float``: maps to ``FLOAT``
         - ``decimal``: maps to ``DECIMAL``

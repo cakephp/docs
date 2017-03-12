@@ -180,12 +180,16 @@ text
 uuid
     Maps to the UUID type if a database provides one, otherwise this will
     generate a CHAR(36) field.
+tinyinteger
+    Maps to the TINYINT or SMALLINT type provided by the database.
+smallinteger
+    Maps to the SMALLINT type provided by the database.
 integer
-    Maps to the INTEGER, SMALLINT types provided by the database.
+    Maps to the INTEGER types provided by the database.
 biginteger
     Maps to the BIGINT type provided by the database.
 decimal
-    Maps to the DECIMAL, NUMERIC types.
+    Maps to the DECIMAL or NUMERIC types.
 float
     Maps to the REAL, DOUBLE PRECISION types.
 boolean
@@ -224,6 +228,9 @@ Example Usage::
         ),
         'message' => array('type' => 'text')
     );
+
+.. versionchanged:: 2.10.0
+    The smallinteger and tinyinteger types were added in 2.10.0
 
 validate
 ========

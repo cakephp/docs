@@ -7,6 +7,9 @@ the changes and improvements made in 2.10.
 Model
 =====
 
+* New abstract types were added for ``smallinteger`` and ``tinyinteger``.
+  Existing ``SMALLINT`` and ``TINYINT`` columns will now be reflected as these
+  new abstract types.
 * ``Model::find()`` now supports ``having`` and ``lock`` options that enable you
   to add ``HAVING`` and ``FOR UPDATE`` locking clauses to your find operations.
 
@@ -27,6 +30,8 @@ Helpers
   read local image files and create base64 data URIs.
 * ``HtmlHelper::addCrumb()`` had the ``prepend`` option added. This lets you
   prepend a breadcrumb instead of appending to the list.
+* ``FormHelper`` creates 'numeric' inputs for ``smallinteger`` and
+  ``tinyinteger`` types.
 
 Routing
 =======
