@@ -211,7 +211,7 @@ Les Méthodes du Controller
 
 Pour une liste complète des méthodes de controller avec leurs descriptions,
 consultez
-`l'API de CakePHP <https://api.cakephp.org/2.4/class-Controller.html>`_.
+`l'API de CakePHP <https://api.cakephp.org/2.x/class-Controller.html>`_.
 
 Interactions avec les vues
 --------------------------
@@ -714,7 +714,7 @@ Les attributs du Controller
 ===========================
 
 Pour une liste complète des attributs du controller et ses descriptions,
-regardez `l'API de CakePHP <https://api.cakephp.org/2.4/class-Controller.html>`_.
+regardez `l'API de CakePHP <https://api.cakephp.org/2.x/class-Controller.html>`_.
 
 .. php:attr:: name
 

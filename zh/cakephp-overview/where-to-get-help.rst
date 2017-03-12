@@ -29,7 +29,7 @@ CakePHP Bakery 是一个信息交换中心，可以了解有关 CakePHP 的一�
 应用程序编程接口 (*API*)
 ========================
 
-`https://api.cakephp.org/ <https://api.cakephp.org/>`_
+`https://api.cakephp.org/2.x/ <https://api.cakephp.org/2.x/>`_
 
 开门见山，并且直接来自核心开发人员，CakePHP 的 API(应用程序编程接口)是最全面的文
 档，囊括框架内部运作的所有细节。参考代码直截了当，所以你一定要努力跟上才行。

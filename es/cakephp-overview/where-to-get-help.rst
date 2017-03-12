@@ -33,7 +33,7 @@ estudio de usuarios del framework.
 El API
 ======
 
-`https://api.cakephp.org/2.8/ <https://api.cakephp.org/2.8/>`_
+`https://api.cakephp.org/2.x/ <https://api.cakephp.org/2.x/>`_
 
 Directo al grano y directamente de los desarrolladores principales, el
 API (Application Programming Interface) de CakePHP  es el más

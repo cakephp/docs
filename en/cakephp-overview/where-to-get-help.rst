@@ -33,7 +33,7 @@ gain instant fame and fortune.
 The API
 =======
 
-`https://api.cakephp.org/ <https://api.cakephp.org/>`_
+`https://api.cakephp.org/2.x/ <https://api.cakephp.org/2.x/>`_
 
 Straight to the point and straight from the core developers, the CakePHP API
 (Application Programming Interface) is the most comprehensive documentation

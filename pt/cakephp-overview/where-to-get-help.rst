@@ -35,7 +35,7 @@ conhecimentos com a comunidade e ganhe fama e fortuna.
 A API
 =====
 
-`https://api.cakephp.org/2.8/ <https://api.cakephp.org/2.8/>`_
+`https://api.cakephp.org/2.x/ <https://api.cakephp.org/2.x/>`_
 
 Direto ao ponto e diretamente dos desenvolvedores do núcleo, a API
 (`Application Programming Interface`) do CakePHP é a mais completa documentação
