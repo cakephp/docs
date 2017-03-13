@@ -39,7 +39,15 @@
 CakePHP должен устанавливаться с помощью Composer
 =================================================
 
-Since CakePHP can no longer be installed via PEAR, or in a shared
-directory, those options are no longer supported. Instead you should use
-`Composer <http://getcomposer.org>`_ to install CakePHP into your application.
+С того момента, как CakePHP больше не может устанавливаться через PEAR или в
+общую папку, данные опции больше не поддерживаются. Вместо этого вы должны
+использовать `Composer <http://getcomposer.org>`_ для установки  CakePHP.
 
+Пространства имен
+=================
+
+Все классы ядра CakePHP сейчас используют пространства имен и следуют
+спецификациям автозагрузки PSR-4. К примеру **src/Cache/Cache.php** доступен
+как ``Cake\Cache\Cache``. Глобальные константы и методы-хелперы, такие как
+:php:meth:`__()` и :php:meth:`debug()` не используют пространства имен,
+чтобы ими было удобнее пользоваться.
