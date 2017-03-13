@@ -43,7 +43,7 @@ Controller's ``initialize()`` method or via the ``$components`` array::
                 'authorize' => 'Controller',
                 'loginAction' => ['controller' => 'Users', 'action' => 'login']
             ]);
-            $this->loadComponent('Cookie', ['expiry' => '1 day']);
+            $this->loadComponent('Cookie', ['expires' => '1 day']);
         }
 
     }
