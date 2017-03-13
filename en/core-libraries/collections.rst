@@ -624,7 +624,7 @@ different values in the collection::
 In order to specify in which direction the collection should be sorted, you need
 to provide either ``SORT_ASC`` or ``SORT_DESC`` as the second parameter for
 sorting in ascending or descending direction respectively. By default,
-collections are sorted in ascending direction::
+collections are sorted in descending direction::
 
     $collection = new Collection($people);
     $sorted = $collection->sortBy('age', SORT_ASC);
