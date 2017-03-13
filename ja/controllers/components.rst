@@ -42,7 +42,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
                 'authorize' => 'Controller',
                 'loginAction' => ['controller' => 'Users', 'action' => 'login']
             ]);
-            $this->loadComponent('Cookie', ['expiry' => '1 day']);
+            $this->loadComponent('Cookie', ['expires' => '1 day']);
         }
 
     }

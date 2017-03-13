@@ -1030,7 +1030,7 @@ sample を満たすためのコレクション内に十分な要素がない場�
 次の例を考えてみましょう。 ::
 
     $collection = new Collection($oneMillionItems);
-    $collection->map(function ($item) {
+    $collection = $collection->map(function ($item) {
         return $item * 2;
     });
     $itemsToShow = $collection->take(30);
