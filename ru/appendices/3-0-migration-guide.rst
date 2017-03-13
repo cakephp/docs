@@ -1,13 +1,45 @@
-3.0 Migration Guide
-###################
+Руководство по миграции 3.0
+###########################
 
-.. note::
-    The documentation is not currently supported in Russian language for this
-    page.
+Эта страница обобщает изменения относительно CakePHP 2.x, что поможет вам
+безболезненно перевести ваши проекты на версию 3.0, а также руководство по
+изменениям, внесенным в ядро в сравнении с веткой CakePHP 2.x. Убедительно
+просим прочитать остальные сраницы в этом руководстве для ознакомления со всеми
+нововведениями и изменениями в API.
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+Системные требования
+====================
 
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+- CakePHP 3.x поддерживает PHP версии 5.4.16 и выше.
+- CakePHP 3.x требует наличия расширения mbstring.
+- CakePHP 3.x требует наличия расширения intl.
+
+.. warning::
+
+    CakePHP 3.0 не будет работать если вышеприведенные условия не будут соблюдены.
+    
+Инструментарий обновления
+=========================
+
+В то время, как этот документ охватывает все радикальные изменения и улучшения
+сделанные в CakePHP 3.0, мы также создали консольное приложение для того,
+чтобы помочь вам совершить некоторые рутинные операции при обновлении.
+Вы можете `получить инструментарий обновления с github
+<https://github.com/cakephp/upgrade>`_.
+
+Структура папок приложения
+============================
+
+Структура папок приложения притерпела изменения и теперь соответствует
+стандарту `PSR-4 <http://www.php-fig.org/psr/psr-4/>`_. Вы должны использовать
+в качестве примера проект 
+`каркаса приложения <https://github.com/cakephp/app>`_ при обновлении вашего
+приложения.
+
+CakePHP должен устанавливаться с помощью Composer
+=================================================
+
+Since CakePHP can no longer be installed via PEAR, or in a shared
+directory, those options are no longer supported. Instead you should use
+`Composer <http://getcomposer.org>`_ to install CakePHP into your application.
+
