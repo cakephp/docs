@@ -134,6 +134,6 @@ Stackoverflow
 - `Spanish CakePHP Google Group <http://groups.google.com/group/cakephp-esp>`_
 
 .. meta::
-:title lang=ru: Где получить помощь
+    :title lang=ru: Где получить помощь
     :description lang=ru: Где получить помощь CakePHP: официальный сайт CakePHP, The Cookbook, The Bakery, The API, in the test cases, the IRC channel, The CakePHP Google Group or CakePHP Questions.
     :keywords lang=ru: cakephp,cakephp help,помошь cakephp,получить помощь,cakephp irc,cakephp вопрос,cakephp api,cakephp тестовые случаи,open source проекты,канал irc,code reference,irc channel,инструменты разработки,тестовый случай,пекарня
