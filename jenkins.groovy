@@ -38,7 +38,7 @@ job('Book - Deploy 3.x') {
   }
   publishers {
     slackNotifications {
-      projectChannel('dev')
+      projectChannel('#dev')
       notifyFailure()
       notifyRepeatedFailure()
     }
@@ -61,7 +61,7 @@ job('Book - Deploy 3.next') {
   }
   publishers {
     slackNotifications {
-      projectChannel('dev')
+      projectChannel('#dev')
       notifyFailure()
       notifyRepeatedFailure()
     }
@@ -84,7 +84,7 @@ job('Book - Deploy 2.x') {
   }
   publishers {
     slackNotifications {
-      projectChannel('dev')
+      projectChannel('#dev')
       notifyFailure()
       notifyRepeatedFailure()
     }
