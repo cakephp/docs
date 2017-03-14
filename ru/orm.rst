@@ -22,7 +22,7 @@ patterns. It aims to create a hybrid implementation that combines aspects of
 both patterns to create a fast, simple to use ORM.
 
 Before we get started exploring the ORM, make sure you :ref:`configure your
-    database connections <database-configuration>`.
+database connections <database-configuration>`.
 
 .. note::
 
