@@ -122,4 +122,28 @@ ORM значительно отличается от предшествующе�
   ``$object->settings`` теперь должен быть обновлен для использования метода
   ``$object->config()``.
   
-  
+Кеш
+===
+
+* Движок``Memcache`` был удален, используйте вместо него :php:class:`Cake\\Cache\\Cache\\Engine\\Memcached`.
+* Движки кеширования теперь загружаются при первом использовании с помощью ленивой загрузки.
+* Добавлен метод :php:meth:`Cake\\Cache\\Cache::engine()`.
+* Добавлен метод :php:meth:`Cake\\Cache\\Cache::enabled()`. Он заменил
+  опцию ``Cache.disable``.
+* Добавлен метод :php:meth:`Cake\\Cache\\Cache::enable()`.
+* Добавлен метод :php:meth:`Cake\\Cache\\Cache::disable()`.
+* Конфигурации кеша теперь неизменяемы. Если вам потребуется изменить их,
+  вы должны сначала уничожить конфигурацию, затем воссоздать ее. Это предотвращает
+  проблемы синхронизации  с опциями конфигурации.
+* Метод ``Cache::set()`` удален. Рекомендуется, чтобы вы создавали множество
+  конфигураций кеша to replace runtime configuration tweaks previously
+  possible with ``Cache::set()``.
+* All ``CacheEngine`` subclasses now implement a ``config()`` method.
+* :php:meth:`Cake\\Cache\\Cache::readMany()`, :php:meth:`Cake\\Cache\\Cache::deleteMany()`,
+  and :php:meth:`Cake\\Cache\\Cache::writeMany()` were added.
+
+All :php:class:`Cake\\Cache\\Cache\\CacheEngine` methods now honor/are responsible for handling the
+configured key prefix. The :php:meth:`Cake\\Cache\\CacheEngine::write()` no longer permits setting
+the duration on write - the duration is taken from the cache engine's runtime config. Calling a
+cache method with an empty key will now throw an :php:class:`InvalidArgumentException`, instead
+of returning ``false``.
