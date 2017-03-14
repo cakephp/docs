@@ -696,23 +696,37 @@ Routing File Extensions
 
 .. php:staticmethod:: extensions(string|array|null $extensions, $merge = true)
 
-To handle different file extensions with your routes, you can add the following
-to your routes file::
+To handle different file extensions with your routes, you can define extensions
+on a global, as well as on a scoped level. Defining global extensions can be
+achieved via the routers static :php:meth:`Router::extensions()` method::
+
+    Router::extensions(['json', 'xml']);
+    // ...
+
+This will affect **all** routes that are being connected **afterwards**, no matter
+their scope.
+
+In order to restrict extensions to specific scopes, you can define them using the
+:php:meth:`Cake\\Routing\\RouteBuilder::extensions()` method::
 
     Router::scope('/', function ($routes) {
         $routes->extensions(['json', 'xml']);
-        ...
+        // ...
     });
 
-This will enable the named extensions for all routes connected **after** the
-``extensions()`` call. Any routes connected prior to it will not inherit the
-extensions.
+This will enable the named extensions for all routes that are being connected in
+that scope **after** the ``extensions()`` call, including those that are being
+connected in nested scopes. Similar to the global :php:meth:`Router::extensions()`
+method, any routes connected prior to the call will not inherit the extensions.
 
 .. note::
 
     Setting the extensions should be the first thing you do in a scope, as the
     extensions will only be applied to routes connected **after** the extensions
     are set.
+
+    Also be aware that re-opened scopes will **not** inherit extensions defined in
+    previously opened scopes.
 
 By using extensions, you tell the router to remove any matching file extensions,
 and then parse what remains. If you want to create a URL such as

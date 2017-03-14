@@ -235,6 +235,9 @@ preamb = ur'''
 % background and border for code examples.
 \definecolor{VerbatimColor}{RGB}{242,242,242}
 \definecolor{VerbatimBorderColor}{RGB}{230,230,230}
+
+% Map specific problematic characters
+\DeclareUnicodeCharacter{1EBD}{\~e}
 '''
 
 latex_elements = {

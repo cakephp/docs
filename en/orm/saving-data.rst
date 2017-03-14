@@ -217,12 +217,6 @@ associations should be marshalled::
         ]
     ]);
 
-You may also disable marshalling of possible nested associations like so::
-
-    $entity = $articles->newEntity($data, ['associated' => []]);
-    // or...
-    $entity = $articles->patchEntity($entity, $data, ['associated' => []]);
-
 The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
 should be marshalled. Alternatively, you can use dot notation for brevity::
 
@@ -233,6 +227,12 @@ should be marshalled. Alternatively, you can use dot notation for brevity::
     $entity = $articles->newEntity($this->request->getData(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
+
+You may also disable marshalling of possible nested associations like so::
+
+    $entity = $articles->newEntity($data, ['associated' => []]);
+    // or...
+    $entity = $articles->patchEntity($entity, $data, ['associated' => []]);
 
 Associated data is also validated by default unless told otherwise. You may also
 change the validation set to be used per association::
