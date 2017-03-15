@@ -13,6 +13,7 @@
 {# The files that make these builds are defined in Makefile #}
 {%- set css_files = ['_static/css/app.css'] -%}
 {%- set script_files = ['_static/app.js'] -%}
+{%- set short_lang = '%.2s'|format(language) -%}
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -62,7 +63,7 @@
 {%- endblock %}
 
     <script type="text/javascript">
-    window.lang = "{{ '%.2s'|format(language) }}";
+    window.lang = "{{ short_lang }}";
     </script>
   </head>
   <body>
@@ -185,7 +186,7 @@
                                                 {%- if lang == language -%}
                                                 <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
                                                     role="button" aria-haspopup="true" aria-expanded="false" href="#">
-                                                        {{ '%.2s'|format(lang) }}
+                                                        {{ short_lang }}
                                                         <i class="fa fa-menu-en fa-chevron-down"></i>
                                                     </a>
                                                 {%- endif -%}
@@ -217,10 +218,10 @@
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">3.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="https://book.cakephp.org/3.0/{{ language }}">3.x Book</a></li>
-                                                <li><a href="https://book.cakephp.org/2.0/{{ language }}">2.x Book</a></li>
-                                                <li><a href="https://book.cakephp.org/1.3/{{ language }}/">1.3 Book</a></li>
-                                                <li><a href="https://book.cakephp.org/1.2/{{ language }}/">1.2 Book</a></li>
+                                                <li><a href="https://book.cakephp.org/3.0/{{ short_lang }}">3.x Book</a></li>
+                                                <li><a href="https://book.cakephp.org/2.0/{{ short_lang }}">2.x Book</a></li>
+                                                <li><a href="https://book.cakephp.org/1.3/{{ short_lang }}/">1.3 Book</a></li>
+                                                <li><a href="https://book.cakephp.org/1.2/{{ short_lang }}/">1.2 Book</a></li>
                                                 <li><a href="https://book.cakephp.org/1.1/en">1.1 Book</a></li>
                                             </ul>
                                         </li>
@@ -280,7 +281,7 @@
     {%- if pagename != 'search' -%}
     <div id="improve-slideout">
         <i class="fa fa-pencil icon-improve"></i>
-        <a href="https://github.com/cakephp/docs/edit/{{ branch }}/{{ language }}/{{ pagename }}.rst" target="_blank">
+        <a href="https://github.com/cakephp/docs/edit/{{ branch }}/{{ short_lang }}/{{ pagename }}.rst" target="_blank">
             <div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
         </a>
     </div>
@@ -303,7 +304,7 @@
         </div>
 
         {# TOC sidebar #}
-        <div class="col-md-3 col-md-pull-9 hidden-xs hidden-sm" lang="{{ language }}">
+        <div class="col-md-3 col-md-pull-9 hidden-xs hidden-sm" lang="{{ short_lang }}">
             {%- for sidebartemplate in sidebars %}
             <aside class="sidebar">
                 <div class="mb30 row">
