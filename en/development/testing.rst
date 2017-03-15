@@ -426,7 +426,7 @@ they are defined. The format used to define these fields is the same used with
         - ``time``: maps to ``TIME``
         - ``date``: maps to ``DATE``
         - ``binary``: maps to ``BLOB``
-        - ``boolean``: maps to ``TINYINT``
+        - ``boolean``: maps to ``BOOLEAN`` or ``TINYINT(1)`` on MySQL.
 ``key``
     Set to ``primary`` to make the field AUTO\_INCREMENT, and a PRIMARY KEY
     for the table.
