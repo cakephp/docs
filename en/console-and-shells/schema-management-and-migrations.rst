@@ -198,16 +198,21 @@ type
     One of the following types
 
     * integer
+    * smallinteger
+    * tinyinteger
+    * biginteger
     * date
     * time
     * datetime
     * timestamp
     * boolean
-    * biginteger
     * float
     * string
     * text
     * binary
+
+.. versionchanged:: 2.10.0
+    The smallinteger and tinyinteger types were added in 2.10.0
 
 
 Table key `indexes`
