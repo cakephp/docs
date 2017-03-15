@@ -62,7 +62,7 @@
 {%- endblock %}
 
     <script type="text/javascript">
-    window.lang = "{{ language }}";
+    window.lang = "{{ '%.2s'|format(language) }}";
     </script>
   </head>
   <body>
@@ -185,7 +185,7 @@
                                                 {%- if lang == language -%}
                                                 <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
                                                     role="button" aria-haspopup="true" aria-expanded="false" href="#">
-                                                        {{ lang }}
+                                                        {{ '%.2s'|format(lang) }}
                                                         <i class="fa fa-menu-en fa-chevron-down"></i>
                                                     </a>
                                                 {%- endif -%}
@@ -196,9 +196,9 @@
                                                     {%- if lang == language -%}
                                                     {# Do nothing, we print the active one above #}
                                                     {%- elif has_lang(lang, pagename) -%}
-                                                    <a href="{{ lang_link(lang, pagename) }}">{{ lang }}</a>
+                                                    <a href="{{ lang_link(lang, pagename) }}">{{ '%.2s'|format(lang) }}</a>
                                                     {%- else -%}
-                                                    <span class="disabled">{{ lang }}</span>
+                                                    <span class="disabled">{{ '%.2s'|format(lang) }}</span>
                                                     {%- endif -%}
                                                 </li>
                                             {% endfor %}
