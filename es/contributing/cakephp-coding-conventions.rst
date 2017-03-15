@@ -149,64 +149,68 @@ pueden utilizarse paréntesis entorno a las condiciones por claridad::
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
 
-Template Files
---------------
+Archivos de plantilla
+---------------------
 
-In template files (.ctp files) developers should use keyword control structures.
-Keyword control structures are easier to read in complex template files. Control
-structures can either be contained in a larger PHP block, or in separate PHP
-tags::
+En los archivos de plantilla (archivos .ctp) los desarrolladores deben utilizar
+estructuras de control ``keyword`` al ser más fáciles de leer en archivos de 
+plantilla complejos. Las estructuras de control pueden estar dentro de bloques
+de PHP o en etiquetas PHP separadas::
 
     <?php
-    if ($isAdmin):
-        echo '<p>You are the admin user.</p>';
+    if ($esAdmin):
+        echo '<p>Eres el usuario admin.</p>';
     endif;
     ?>
-    <p>The following is also acceptable:</p>
-    <?php if ($isAdmin): ?>
-        <p>You are the admin user.</p>
+    <p>Lo siguiente es aceptado también:</p>
+    <?php if ($esAdmin): ?>
+        <p>Eres el usuario admin.</p>
     <?php endif; ?>
 
 
-Comparison
-==========
+Comparación
+===========
 
-Always try to be as strict as possible. If a non-strict test is deliberate it
-might be wise to comment it as such to avoid confusing it for a mistake.
+Intenta ser siempre lo más estricto posible. Si una comparación es deliberadamente
+no estricta puede ser inteligente añadir un comentario para evitar confundirla 
+con un error.
 
-For testing if a variable is null, it is recommended to use a strict check::
+Para comprobar si una variables es ´´null´´ se recomienda utilizar comprobación
+estricta::
 
     if ($value === null) {
         // ...
     }
 
-The value to check against should be placed on the right side::
+El valor contra el que se va a realizar la comparación deberá ir en el lado derecho
+de ésta::
 
-    // not recommended
+    // no recomendado
     if (null === $this->foo()) {
         // ...
     }
 
-    // recommended
+    // recomendado
     if ($this->foo() === null) {
         // ...
     }
 
-Function Calls
-==============
+Llamadas de funciones
+=====================
 
-Functions should be called without space between function's name and starting
-parenthesis. There should be one space between every parameter of a function
-call::
+Las llamadas a funciones deben realizarse sin espacios entre el nombre de la
+función y el parentesis de apertura y entre cada parámetro de la llamada deberá
+haber un espacio::
 
     $var = foo($bar, $bar2, $bar3);
 
-As you can see above there should be one space on both sides of equals sign (=).
+Como puedes ver arriba también deberá haber un espacio a ambos lados de los
+signos de igual (=).
 
-Method Definition
-=================
+Definición de métodos
+=====================
 
-Example of a method definition::
+Ejemplo de definición de un método::
 
     public function someFunction($arg1, $arg2 = '')
     {
@@ -217,9 +221,10 @@ Example of a method definition::
         return $var;
     }
 
-Parameters with a default value, should be placed last in function definition.
-Try to make your functions return something, at least ``true`` or ``false``, so
-it can be determined whether the function call was successful::
+Parámetros con un valor por defecto deberán ir al final de las definiciones.
+Trata que tus funciones devuelvan siempre un resultado, al menos ``true`` o 
+``false``, para que se pueda determinar cuando la llamada a la función ha sido 
+correcta::
 
     public function connection($dns, $persistent = false)
     {
@@ -236,79 +241,79 @@ it can be determined whether the function call was successful::
         return true;
     }
 
-There are spaces on both side of the equals sign.
+Como puedes ver hay un espacio a ambos lados del signo de igual.
 
-Typehinting
------------
+Declaración de tipo
+-------------------
 
-Arguments that expect objects, arrays or callbacks (callable) can be typehinted.
-We only typehint public methods, though, as typehinting is not cost-free::
+Los argumentos que esperan objetos, arrays o ``callbacks`` pueden ser tipificados.
+Solo tipificamos métodos públicos, aunque la tipificación no está libre de costes::
 
     /**
-     * Some method description.
+     * Alguna descripción del método
      *
-     * @param \Cake\ORM\Table $table The table class to use.
-     * @param array $array Some array value.
-     * @param callable $callback Some callback.
-     * @param bool $boolean Some boolean value.
+     * @param \Cake\ORM\Table $table La clase table a utilizar.
+     * @param array $array Algún valor array.
+     * @param callable $callback Algún callback.
+     * @param bool $boolean Algún valor boolean.
      */
     public function foo(Table $table, array $array, callable $callback, $boolean)
     {
     }
 
-Here ``$table`` must be an instance of ``\Cake\ORM\Table``, ``$array`` must be
-an ``array`` and ``$callback`` must be of type ``callable`` (a valid callback).
+Aquí ``$table`` debe ser una instancia de ``\Cake\ORM\Table``, ``$array`` debe 
+ser un ``array`` y ``$callback`` debe ser de tipo ``callable``(un ``callback`` 
+válido).
 
-Note that if you want to allow ``$array`` to be also an instance of
-``\ArrayObject`` you should not typehint as ``array`` accepts only the primitive
-type::
+Fíjate en que si quieres permitir que ``$array`` sea también una instancia de
+``\ArrayObject`` no deberías tipificarlo ya que ``array`` acepta únicamente el
+tipo primitivo::
 
     /**
-     * Some method description.
+     * Alguna descripción del método.
      *
-     * @param array|\ArrayObject $array Some array value.
+     * @param array|\ArrayObject $array Algún valor array.
      */
     public function foo($array)
     {
     }
 
-Anonymous Functions (Closures)
+Funciones anónimas (``Closures``)
 ------------------------------
 
-Defining anonymous functions follows the `PSR-2
-<http://www.php-fig.org/psr/psr-2/>`_ coding style guide, where they are
-declared with a space after the `function` keyword, and a space before and after
-the `use` keyword::
+Para definir funciones anónimas sigue la guía de estilo de código 
+`PSR-2<http://www.php-fig.org/psr/psr-2/>`_, donde se declaran con un espacio
+después de la palabra ``function`` y antes y después de la palabra ``use``::
 
     $closure = function ($arg1, $arg2) use ($var1, $var2) {
-        // code
+        // código
     };
 
-Method Chaining
-===============
+Encadenación de métodos
+=======================
 
-Method chaining should have multiple methods spread across separate lines, and
-indented with four spaces::
+Las encadenaciones de métodos deberán distribuir éstos en líneas separadas y
+tabulados con cuatro espacios::
 
     $email->from('foo@example.com')
         ->to('bar@example.com')
         ->subject('A great message')
         ->send();
 
-Commenting Code
-===============
+Comentar el código
+==================
 
-All comments should be written in English, and should in a clear way describe
-the commented block of code.
+Todos los comentarios deberán ir escritos en inglés y describir de un modo claro
+el bloque de código comentado.
 
-Comments can include the following `phpDocumentor <http://phpdoc.org>`_
-tags:
+Los comentarios pueden incluir las siguientes etiquetas de 
+`phpDocumentor <http://phpdoc.org>`_:
 
 *  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
 *  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
-   Using the ``@version <vector> <description>`` format, where ``version``
-   and ``description`` are mandatory.
+   Usando el formato ``@version <vector> <description>``, donde ``version``
+   y ``description`` son obligatorios.
 *  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
 *  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
@@ -317,22 +322,22 @@ tags:
 *  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
 *  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
 
-PhpDoc tags are very much like JavaDoc tags in Java. Tags are only processed if
-they are the first thing in a DocBlock line, for example::
+Las etiquetas PhpDoc son muy similares a las etiquetas JavaDoc en Java. Las etiquetas
+solo son procesadas si son el primer elemento en una línea DocBlock, por ejemplo::
 
     /**
-     * Tag example.
+     * Ejemplo de etiqueta.
      *
-     * @author this tag is parsed, but this @version is ignored
-     * @version 1.0 this tag is also parsed
+     * @author esta etiqueta es parseada, pero esta @version es ignorada
+     * @version 1.0 esta etiqueta es parseada también
      */
 
 ::
 
     /**
-     * Example of inline phpDoc tags.
+     * Ejemplo de etiquetas phpDoc inline.
      *
-     * This function works hard with foo() to rule the world.
+     * Esta función trabaja duramente con foo() para manejar el mundo.
      *
      * @return void
      */
@@ -341,7 +346,7 @@ they are the first thing in a DocBlock line, for example::
     }
 
     /**
-     * Foo function.
+     * Función foo.
      *
      * @return void
      */
@@ -349,50 +354,50 @@ they are the first thing in a DocBlock line, for example::
     {
     }
 
-Comment blocks, with the exception of the first block in a file, should always
-be preceded by a newline.
+Los bloques de comentarios, con la excepción del primer bloque en un archivo, 
+deberán ir siempre precedidos por un salto de línea.
 
-Variable Types
---------------
+Tipos de variables
+------------------
 
-Variable types for use in DocBlocks:
+Tipos de variables para utilizar en DocBlocks:
 
-Type
-    Description
+Tipo
+    Descripción
 mixed
-    A variable with undefined (or multiple) type.
+    Una variable de tipo indefinido o múltiples tipos.
 int
-    Integer type variable (whole number).
+    Variable de tipo integer (números enteros).
 float
-    Float type (point number).
+    Tipo float (número de coma flotante).
 bool
-    Logical type (true or false).
+    Tipo booleano (true o false).
 string
-    String type (any value in " " or ' ').
+    Tipo string (cualquier valor entre " " o ' ').
 null
-    Null type. Usually used in conjunction with another type.
+    Tipo null. Normalmente usado conjuntamente con otro tipo.
 array
-    Array type.
+    Tipo arraqy.
 object
-    Object type. A specific class name should be used if possible.
+    Tipo object. Debe usarse un nombre de clase específico si es posible.
 resource
-    Resource type (returned by for example mysql\_connect()).
-    Remember that when you specify the type as mixed, you should indicate
-    whether it is unknown, or what the possible types are.
+    Tipo resource (devuelto por ejemplo por mysql\_connect()).
+    Recuerda que cuando especificas el tipo como mixed deberás indicar
+	si es desconocido o cuales son los tipos posibles.
 callable
-    Callable function.
+    Función Callable.
 
-You can also combine types using the pipe char::
+Puedes combinar tipos usando el caracter ``\``::
 
     int|bool
 
-For more than two types it is usually best to just use ``mixed``.
+Para más de dos tipos normalmente lo mejor es utilizar ``mixed``.
 
-When returning the object itself, e.g. for chaining, one should use ``$this``
-instead::
+Cuando se devuelva el propio objeto, p.ej. para encadenar, deberás utilizar 
+``$this`` en su lugar::
 
     /**
-     * Foo function.
+     * Función foo.
      *
      * @return $this
      */
@@ -401,44 +406,47 @@ instead::
         return $this;
     }
 
-Including Files
-===============
+Incluir archivos
+================
 
-``include``, ``require``, ``include_once`` and ``require_once`` do not have
-parentheses::
+``include``, ``require``, ``include_once`` y ``require_once`` no tienen paréntesis::
 
-    // wrong = parentheses
+    // mal = paréntesis
     require_once('ClassFileName.php');
     require_once ($class);
 
-    // good = no parentheses
+    // bien = sin paréntesis
     require_once 'ClassFileName.php';
     require_once $class;
 
-When including files with classes or libraries, use only and always the
-`require\_once <http://php.net/require_once>`_ function.
+Cuando se incluyan archivos con clases o librerías, usa siempre y únicamente la
+función `require\_once <http://php.net/require_once>`_.
 
-PHP Tags
-========
+Etiquetas PHP
+=============
 
-Always use long tags (``<?php ?>``) instead of short tags (``<? ?>``). The short
-echo should be used in template files (**.ctp**) where appropriate.
+Utiliza siempre las etiquetas ``<?php`` y ``?>``) en lugar de ``<?`` y ``?>``). 
+
+La sintaxis abreviada de ``echo`` (``Short echo``) deberá usarse en los archivos de plantilla
+(**.ctp**) donde proceda.
 
 Short Echo
 ----------
 
-The short echo should be used in template files in place of ``<?php echo``. It
-should be immediately followed by a single space, the variable or function value
-to ``echo``, a single space, and the php closing tag::
+La sintaxis abreviada de ``echo`` (``<?=``) deberá usarse en los archivos de 
+plantillas en lugar de ``<?php echo``. Deberá ir seguido inmediatamente por un 
+espacio, la variable o valor de la función a imprimir, un espacio y la etiqueta
+php de cierre::
 
-    // wrong = semicolon, no spaces
+    // mal = con punto y coma y sin espacios
     <td><?=$name;?></td>
 
-    // good = spaces, no semicolon
+    // bien = con espacios y sin punto y coma
     <td><?= $name ?></td>
 
-As of PHP 5.4 the short echo tag (``<?=``) is no longer to be consider a 'short
-tag' is always available regardless of the ``short_open_tag`` ini directive.
+A partir de la versión 5.4 de PHP la etiqueta (``<?=``) no es considerada un
+``short tag`` y está siempre disponible sin importar la directiva ``ini`` de
+``short_open_tag``.
 
 Naming Convention
 =================
