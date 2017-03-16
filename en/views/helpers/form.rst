@@ -2716,7 +2716,7 @@ template, such as::
         'autocomplete' => '<input type="autocomplete" name="{{name}}" {{attrs}} />'
     ]);
     
-For more information on string templates, see :ref:`customizing-templates`
+For more information on string templates, see :ref:`customizing-templates`.
 
 Using Widgets
 -------------
