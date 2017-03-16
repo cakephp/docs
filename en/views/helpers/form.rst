@@ -2374,6 +2374,8 @@ use :php:meth:`Cake\\View\\Helper\\FormHelper::button()` or
     Be careful to not put a postLink inside an open form. Instead use the
     ``block`` option to buffer the form into a :ref:`view block <view-blocks>`
 
+.. _customizing-templates:
+
 Customizing the Templates FormHelper Uses
 =========================================
 
@@ -2707,7 +2709,14 @@ could do the following::
     }
 
 Obviously, this is a very simple example, but it demonstrates how a custom
-widget could be built.
+widget could be built. This widget would render the "autocomplete" string
+template, such as::
+
+    $this->Form->setTemplates([
+        'autocomplete' => '<input type="autocomplete" name="{{name}}" {{attrs}} />'
+    ]);
+    
+For more information on string templates, see :ref:`customizing-templates`.
 
 Using Widgets
 -------------
