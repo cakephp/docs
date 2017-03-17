@@ -316,6 +316,11 @@ uuid
 integer
     Maps to the INTEGER type provided by the database. BIT is not yet supported
     at this moment.
+smallinteger
+    Maps to the SMALLINT type provided by the database.
+tinyinteger
+    Maps to the TINYINT or SMALLINT type provided by the database. In MySQL
+    ``TINYINT(1)`` is treated as a boolean.
 biginteger
     Maps to the BIGINT type provided by the database.
 float
@@ -355,6 +360,12 @@ doing queries. For example a column that is marked as 'datetime' will
 automatically convert input parameters from ``DateTime`` instances into a
 timestamp or formatted datestrings. Likewise, 'binary' columns will accept file
 handles, and generate file handles when reading data.
+
+.. versionchanged:: 3.3.0
+    The ``json`` type was added.
+
+.. versionchanged:: 3.5.0
+    The ``smallinteger`` and ``tinyinteger`` types were added.
 
 .. _adding-custom-database-types:
 
