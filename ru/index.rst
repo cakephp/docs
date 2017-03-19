@@ -21,7 +21,7 @@ CakePHP 3 это фреймворк для веб-разработки рабо�
 
     - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/en/CakePHPCookbook.epub>`_
-    - `Original Source <http://github.com/cakephp/docs>`_    
+    - `Оригинальный источник GitHub <http://github.com/cakephp/docs>`_
 
 
 Получение помощи

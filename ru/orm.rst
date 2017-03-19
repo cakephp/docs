@@ -1,42 +1,42 @@
 Доступ к Базе Данных и объектно-реляционное отображение ORM
 ###########################################################
 
-В CakePHP работа с данными из Базы Данных осуществляется с помощью двух основных
-типов объектов. Первый тип - **repositories** (репозитории) или по другому **table objects**
-(объекты таблицы). Эти объекты предоставляют доступ к наборам данных. Они позволяют сохранять
-новые записи, редактировать/удалять существующие, определять отношения между данными и
-выполнять различные массовые операции.
-Второй тип объектов - **entities** (сущности). Сущности представляют собой конкретные отдельные
-записи таблицы и позволяют работать со строкой таблицы как с объектом.
+В CakePHP работа с Базой Данных осуществляется с помощью двух основных
+типов объектов. Первый тип - **repositories** (репозитории) или по другому
+**table objects** (объекты таблицы). Эти объекты предоставляют доступ к наборам
+данных. Они позволяют сохранять новые записи, редактировать/удалять существующие,
+определять отношения между данными и выполнять различные массовые операции.
+Второй тип объектов - **entities** (сущности). Сущности представляют собой
+конкретные отдельные записи таблицы и позволяют работать со строкой таблицы как
+с объектом.
 
-Эти два класса несут ответсвенность почти за все, что связано с обработкой ваших данных, например
-валидация, взаимодействие с другими даными и управление информационными потоками данных в вашем
-веб-приложении.
+Эти два класса несут ответсвенность почти за все, что связано с обработкой ваших
+данных, например валидация, взаимодействие с другими даными и управление
+информационными потоками данных в вашем веб-приложении.
 
-CakePHP имеет встроенное объектно-реляционное отображение **ORM** позволяющее работать с
-реляционными Базами Данных, но, тем не менее, может быть раширено для поддержки альтернативных
-Баз Данных.
+CakePHP имеет встроенное объектно-реляционное отображение **ORM** позволяющее
+работать с реляционными Базами Данных, но, тем не менее, может быть раширен
+для поддержки альтернативных Баз Данных.
 
-The CakePHP ORM borrows ideas and concepts from both ActiveRecord and Datamapper
-patterns. It aims to create a hybrid implementation that combines aspects of
-both patterns to create a fast, simple to use ORM.
+Объектно-реляционное отображение заимствует идеи и концепции паттернов ActiveRecord
+и Datamapper. **ORM** реализует гибрид, который сочетает аспекты обоих паттернов,
+чтобы создать быстрое и легкое в использовании объектно-реляционное отображение.
 
-Before we get started exploring the ORM, make sure you :ref:`configure your
-database connections <database-configuration>`.
+Прежде чем начать изучать ORM, убедитесь что вы :ref:`настроили соединение с БД <database-configuration>`.
 
 .. note::
 
-    If you are familiar with previous versions of CakePHP, you should read the
-    :doc:`/appendices/orm-migration` for important differences between CakePHP 3.0
-    and older versions of CakePHP.
+    Если вы знакомы с предыдущими версиями CakePHP, вам следует прочитать
+    :doc:`/appendices/orm-migration` чтобы понимать различия между CakePHP 3.0
+    и более старыми версиями CakePHP.
 
-Quick Example
-=============
+Пример использования
+====================
 
-To get started you don't have to write any code. If you've followed the :ref:`CakePHP
-    conventions for your database tables <model-and-database-conventions>`
-    you can just start using the ORM. For example if we wanted to load some data from our ``articles``
-table we could do::
+Чтобы начать вам не нужно писать код. Если вы следуете :ref:`CakePHP соглашениям
+Модели и Базы данных <model-and-database-conventions>` то вы можете просто начать
+использовать ORM. Например если вы хотите получить данные из таблицы ``articles``
+вы можете сделать это так::
 
     use Cake\ORM\TableRegistry;
 
@@ -48,12 +48,13 @@ table we could do::
         echo $row->title;
     }
 
-Note that we didn't have to create any code or wire any configuration up.
-The conventions in CakePHP allow us to skip some boilerplate code and allow the
-framework to insert base classes when your application has not created
-a concrete class. If we wanted to customize our ArticlesTable class adding some
-associations or defining some additional methods we would add the following to
-**src/Model/Table/ArticlesTable.php** after the ``<?php`` opening tag::
+Обратите внимание, мы не писали код который конфигурирует таблицу ``articles``.
+Соглашения в CakePHP позволяют нам пропустить написание шаблонного кода и
+и фрэймворк использует базовые классы, если в вашем приложении еще не создан
+конкретный класс. Если вы хотите настроить класс ArticlesTable, отвечающий за
+таблицу ``articles`` добавив в него отношения с другими таблицами или определить
+дополнительные методы, то необходимо добавить в файл **src/Model/Table/ArticlesTable.php**
+после открывающего тега ``<?php`` следующий код::
 
     namespace App\Model\Table;
 
@@ -64,19 +65,20 @@ associations or defining some additional methods we would add the following to
 
     }
 
-Table classes use the CamelCased version of the table name with the ``Table``
-suffix as the class name. Once your class has been created you get a reference
-to it using the :php:class:`~Cake\\ORM\\TableRegistry` as before::
+Классы таблиц именуются в ВерблюжемРегистре с постфиксом ``Table`` после названия
+таблицы. После того, как класс таблицы создан вы можете ссылаться на него,
+используя :php:class:`~Cake\\ORM\\TableRegistry` как и ранее::
 
     use Cake\ORM\TableRegistry;
 
-    // Now $articles is an instance of our ArticlesTable class.
+    // Теперь $articles экземпляр класса ArticlesTable.
     $articles = TableRegistry::get('Articles');
 
-Now that we have a concrete table class, we'll probably want to use a concrete
-entity class. Entity classes let you define accessor and mutator methods, define
-custom logic for individual records and much more. We'll start off by adding the
-following to **src/Model/Entity/Article.php** after the ``<?php`` opening tag::
+Теперь, когда у нас есть конкретный класс таблицы, мы возможно захотим использовать
+конкретный класс одной записи таблицы (сущности). Класс сущности позволяют определить
+геттеры и сеттеры, настраиваемую логику для индивидуальных записей и многое другое.
+Начнем с создания класса **src/Model/Entity/Article.php** и добавления после тега
+``<?php`` следующего кода::
 
     namespace App\Model\Entity;
 
@@ -87,43 +89,44 @@ following to **src/Model/Entity/Article.php** after the ``<?php`` opening tag::
 
     }
 
-Entities use the singular CamelCase version of the table name as their class
-name by default. Now that we have created our entity class, when we
-load entities from the database we'll get instances of our new Article class::
+Сущности именуются в ВерблюжемРегистре и содержат в названии имя таблицы в единственном
+числе, но без постфикса Table. Ниже мы создали класс таблицы и загрузили сущности из таблицы.
+Теперь получим объекты сущностей таблицы Article::
 
     use Cake\ORM\TableRegistry;
 
-    // Now an instance of ArticlesTable.
+    // $articles объект класса ArticlesTable.
     $articles = TableRegistry::get('Articles');
     $query = $articles->find();
 
     foreach ($query as $row) {
-        // Each row is now an instance of our Article class.
+        // Каждая строка $row теперь объект класса сущности Article.
         echo $row->title;
     }
 
-CakePHP uses naming conventions to link the Table and Entity class together. If
-you need to customize which entity a table uses you can use the
-``entityClass()`` method to set a specific classname.
+CakePHP использует соглашения именования для того, чтобы чтобы соединить вместе
+классы таблицы и сущности. Если вым необходмимо настроить какая сущность использется
+классом таблиц вы можете использовать методы ``setEntityClass()`` или ``EntityClass()``
+для установки специфического имени класса.
 
-See the chapters on :doc:`/orm/table-objects` and :doc:`/orm/entities` for more
-information on how to use table objects and entities in your application.
+Смотрите главы :doc:`/orm/table-objects` и :doc:`/orm/entities` для получения более подробной
+информации по использованию объектов таблиц и сущностей в вашем приложении.
 
-More Information
+Больше инфорации
 ================
 
 .. toctree::
-:maxdepth: 2
+    :maxdepth: 2
 
-        orm/database-basics
-        orm/query-builder
-        orm/table-objects
-        orm/entities
-        orm/retrieving-data-and-resultsets
-        orm/validation
-        orm/saving-data
-        orm/deleting-data
-        orm/associations
-        orm/behaviors
-        orm/schema-system
-        console-and-shells/orm-cache
+    orm/database-basics
+    orm/query-builder
+    orm/table-objects
+    orm/entities
+    orm/retrieving-data-and-resultsets
+    orm/validation
+    orm/saving-data
+    orm/deleting-data
+    orm/associations
+    orm/behaviors
+    orm/schema-system
+    console-and-shells/orm-cache
