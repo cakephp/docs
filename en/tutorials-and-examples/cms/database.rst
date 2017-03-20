@@ -113,7 +113,6 @@ to **src/Model/Table/ArticlesTable.php**. The completed file should look like
 this::
 
     // src/Model/Table/ArticlesTable.php
-
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
