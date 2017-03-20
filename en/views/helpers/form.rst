@@ -437,14 +437,14 @@ create appropriate controls for all of these form fields::
 
     echo $this->Form->create($user);
     // The following generates a Text input
-    echo $this->Form->input('username');
+    echo $this->Form->control('username');
     // The following generates a Password input
-    echo $this->Form->input('password');
+    echo $this->Form->control('password');
     // Assuming 'approved' is a datetime or timestamp field the following
     //generates: Day, Month, Year, Hour, Minute
-    echo $this->Form->input('approved');
+    echo $this->Form->control('approved');
     // The following generates a Textarea element
-    echo $this->Form->input('quote');
+    echo $this->Form->control('quote');
 
     echo $this->Form->button('Add');
     echo $this->Form->end();
