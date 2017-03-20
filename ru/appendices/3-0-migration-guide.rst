@@ -136,14 +136,16 @@ ORM значительно отличается от предшествующе�
   вы должны сначала уничожить конфигурацию, затем воссоздать ее. Это предотвращает
   проблемы синхронизации  с опциями конфигурации.
 * Метод ``Cache::set()`` удален. Рекомендуется, чтобы вы создавали множество
-  конфигураций кеша to replace runtime configuration tweaks previously
-  possible with ``Cache::set()``.
-* All ``CacheEngine`` subclasses now implement a ``config()`` method.
-* :php:meth:`Cake\\Cache\\Cache::readMany()`, :php:meth:`Cake\\Cache\\Cache::deleteMany()`,
-  and :php:meth:`Cake\\Cache\\Cache::writeMany()` were added.
+  конфигураций кеша вместо хаков во время исполнения возможных ранее
+  при использовании ``Cache::set()``.
+* Все подклассы ``CacheEngine`` сейчас содержат метод ``config()``.
+* Были добавлены методы :php:meth:`Cake\\Cache\\Cache::readMany()`, :php:meth:`Cake\\Cache\\Cache::deleteMany()`,
+  и :php:meth:`Cake\\Cache\\Cache::writeMany()`.
 
-All :php:class:`Cake\\Cache\\Cache\\CacheEngine` methods now honor/are responsible for handling the
-configured key prefix. The :php:meth:`Cake\\Cache\\CacheEngine::write()` no longer permits setting
-the duration on write - the duration is taken from the cache engine's runtime config. Calling a
-cache method with an empty key will now throw an :php:class:`InvalidArgumentException`, instead
-of returning ``false``.
+Все методы :php:class:`Cake\\Cache\\Cache\\CacheEngine` теперь отвечают за
+обработку настроенного префикса ключа. Метод 
+:php:meth:`Cake\\Cache\\CacheEngine::write()` больше не позволяет устанавливать
+продолжительность при записи - продолжительность берется из параметров движков 
+кеширования, применяемых во время исполнения. Вызов метода кеширования с пустым
+ключом теперь выбросит исключение :php:class:`InvalidArgumentException`, вместо
+того, чтобы вернуть ``false``.
