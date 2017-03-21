@@ -101,7 +101,66 @@ able to connect to the database' section have a checkmark.
 Creating our First Model
 ========================
 
-* Create the Table
-* Create the Entity
+Models are the heart of a CakePHP applications. They enable us to read and
+modify our data. They allow us to build relations between our data, validate
+data, and apply application rules. Models build the foundations necessary to
+build our controller actions and templates.
 
-Next, we'll create our first :doc:`Controller and Template <articles-controller>`.
+CakePHP's models are composed of ``Table`` and ``Entity`` objects.  ``Table``
+objects provide access to the collection of entities stored in a specific table.
+They are stored in **src/Model/Table**. The file we'll be creating will be saved
+to **src/Model/Table/ArticlesTable.php**. The completed file should look like
+this::
+
+    // src/Model/Table/ArticlesTable.php
+    namespace App\Model\Table;
+
+    use Cake\ORM\Table;
+
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
+            $this->addBehavior('Timestamp');
+        }
+    }
+
+We've attached the :doc:`/orm/behaviors/timestamp` behavior which will
+automatically populate the ``created`` and ``modified`` columns of our table.
+By naming our Table object ``ArticlesTable``, CakePHP can use naming conventions
+to know that our model uses the ``articles`` table. CakePHP also uses
+conventions to know that the ``id`` column is our table's primary key.
+
+.. note::
+
+    CakePHP will dynamically create a model object for you if it
+    cannot find a corresponding file in **src/Model/Table**. This also means
+    that if you accidentally name your file wrong (i.e. articlestable.php or
+    ArticleTable.php), CakePHP will not recognize any of your settings and will
+    use the generated model instead.
+
+We'll also create an Entity class for our Articles. Entities represent a single
+record in the database, and provide row level behavior for our data. Our entity
+will be saved to **src/Model/Entity/Article.php**. The completed file should
+look like this::
+
+    // src/Model/Entity/Article.php
+    namespace App\Model\Entity;
+
+    use Cake\ORM\Entity;
+
+    class Article extends Entity
+    {
+        protected $_accessible = [
+            '*' => true,
+            'id' => false,
+        ];
+    }
+
+Our entity is quite slim right now, and we've only setup the ``_acessible``
+property which controls how properties can be modified by
+:ref:`entities-mass-assignment`.
+
+We can't do much with our models right now, so next we'll create our first
+:doc:`Controller and Template <articles-controller>` to allow us to interact
+with our model.
