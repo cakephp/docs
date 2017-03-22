@@ -215,7 +215,6 @@ pays, par exemple::
     {
         public function validationDefault(Validator $validator)
         {
-            $validator = new Validator();
             // Ajoute le provider au validator
             $validator->provider('fr', 'Localized\Validation\FrValidation');
             // utilise le provider dans une règle de validation de champ
