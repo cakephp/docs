@@ -830,7 +830,7 @@ utilisés lors de la connexion des routes. Par exemple, si votre action
 renommer vos actions::
 
     $routes->resources('Articles', [
-        'actions' => ['update' => 'put', 'add' => 'create']
+        'actions' => ['update' => 'put', 'create' => 'add']
     ]);
 
 Le code ci-dessus va utiliser ``put()`` pour l'action ``edit()``, et
