@@ -199,7 +199,6 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
     {
         public function validationDefault(Validator $validator)
         {
-            $validator = new Validator();
             // バリデータにプロバイダーを追加
             $validator->provider('fr', 'Localized\Validation\FrValidation');
             // フィールドのバリデーションルールの中にプロバイダーを利用

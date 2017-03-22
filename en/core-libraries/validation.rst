@@ -202,7 +202,6 @@ model fields, depending on a country, ie::
     {
         public function validationDefault(Validator $validator)
         {
-            $validator = new Validator();
             // add the provider to the validator
             $validator->provider('fr', 'Localized\Validation\FrValidation');
             // use the provider in a field validation rule
