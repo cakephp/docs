@@ -82,7 +82,7 @@ lectura del código y tratar de no pasarse de los 120.
 
 En resumen:
 
-* 100 caracteres es límite recomendado.
+* 100 caracteres es el límite recomendado.
 * 120 caracteres es el límite máximo.
 
 Estructuras de control
@@ -92,21 +92,21 @@ Las estructuras de control son por ejemplo "``if``", "``for``", "``foreach``",
 "``while``", "``switch``" etc. A continuación un ejemplo con "``if``"::
 
     if ((expr_1) || (expr_2)) {
-        // action_1;
+        // accion_1;
     } elseif (!(expr_3) && (expr_4)) {
-        // action_2;
+        // accion_2;
     } else {
-        // default_action;
+        // accion_por_defecto;
     }
 
 *  En las estructuras de control deberá haber un espacio antes del primer paréntesis
-   y otro entre el último parentesis y la llave de apertura.
-*  Utiliza siempre siempre las llaves en las estructuras de control incluso si 
+   y otro entre el último y la llave de apertura.
+*  Utiliza siempre las llaves en las estructuras de control incluso si 
    no son necesarias. Aumentan la legibilidad del código y te proporcionan menos
    errores lógicos.
 *  Las llaves de apertura deberán estar en la misma línea que la estructura de 
    control, las de cierre en líneas nuevas y el código dentro de las dos llaves 
-   en un nuevo nivel de indexación.
+   en un nuevo nivel de tabulación.
 *  No deberán usarse las asignaciones *inline* en las estructras de control.
 
 ::
@@ -140,7 +140,7 @@ Operador ternario
 Los operadores ternarios están permitidos cuando toda su declaración cabe en una
 sola línea. Operadores más largos deberán ir dentro dentro de una declaración
 ``if else``. Los operadores ternarios no deberían ir nunca anidados y opcionalmente
-pueden utilizarse paréntesis entorno a las condiciones por claridad::
+pueden utilizarse paréntesis entorno a las condiciones para dar claridad::
 
     // Correcto, sencillo y legible
     $variable = isset($options['variable']) ? $options['variable'] : true;
@@ -153,8 +153,7 @@ Archivos de plantilla
 ---------------------
 
 En los archivos de plantilla (archivos .ctp) los desarrolladores deben utilizar
-estructuras de control ``keyword`` al ser más fáciles de leer en archivos de 
-plantilla complejos. Las estructuras de control pueden estar dentro de bloques
+estructuras de control ``keyword`` al ser más fáciles de leer en archivos complejos. Las estructuras de control pueden estar dentro de bloques
 de PHP o en etiquetas PHP separadas::
 
     <?php
@@ -171,11 +170,11 @@ de PHP o en etiquetas PHP separadas::
 Comparación
 ===========
 
-Intenta ser siempre lo más estricto posible. Si una comparación es deliberadamente
-no estricta puede ser inteligente añadir un comentario para evitar confundirla 
-con un error.
+Intenta ser siempre lo más estricto posible. Si una comparación no es estricta 
+de forma deliberada, puede ser inteligente añadir un comentario para evitar
+confundirla con un error.
 
-Para comprobar si una variables es ´´null´´ se recomienda utilizar comprobación
+Para comprobar si una variables es ``null`` se recomienda utilizar comprobación
 estricta::
 
     if ($value === null) {
@@ -205,7 +204,7 @@ haber un espacio::
     $var = foo($bar, $bar2, $bar3);
 
 Como puedes ver arriba también deberá haber un espacio a ambos lados de los
-signos de igual (=).
+signos de igual.
 
 Definición de métodos
 =====================
@@ -262,7 +261,7 @@ Solo tipificamos métodos públicos, aunque la tipificación no está libre de c
     }
 
 Aquí ``$table`` debe ser una instancia de ``\Cake\ORM\Table``, ``$array`` debe 
-ser un ``array`` y ``$callback`` debe ser de tipo ``callable``(un ``callback`` 
+ser un ``array`` y ``$callback`` debe ser de tipo ``callable`` (un ``callback`` 
 válido).
 
 Fíjate en que si quieres permitir que ``$array`` sea también una instancia de
@@ -282,7 +281,7 @@ Funciones anónimas (``Closures``)
 ------------------------------
 
 Para definir funciones anónimas sigue la guía de estilo de código 
-`PSR-2<http://www.php-fig.org/psr/psr-2/>`_, donde se declaran con un espacio
+`PSR-2 <http://www.php-fig.org/psr/psr-2/>`_ , donde se declaran con un espacio
 después de la palabra ``function`` y antes y después de la palabra ``use``::
 
     $closure = function ($arg1, $arg2) use ($var1, $var2) {
@@ -377,17 +376,17 @@ string
 null
     Tipo null. Normalmente usado conjuntamente con otro tipo.
 array
-    Tipo arraqy.
+    Tipo array.
 object
     Tipo object. Debe usarse un nombre de clase específico si es posible.
 resource
     Tipo resource (devuelto por ejemplo por mysql\_connect()).
-    Recuerda que cuando especificas el tipo como mixed deberás indicar
+    Recuerda que cuando especificas el tipo como mixed deberás indicar 
 	si es desconocido o cuales son los tipos posibles.
 callable
     Función Callable.
 
-Puedes combinar tipos usando el caracter ``\``::
+Puedes combinar tipos usando el caracter ``|``::
 
     int|bool
 
@@ -419,19 +418,19 @@ Incluir archivos
     require_once 'ClassFileName.php';
     require_once $class;
 
-Cuando se incluyan archivos con clases o librerías, usa siempre y únicamente la
+Cuando se incluyan archivos con clases o librerías usa siempre y únicamente la
 función `require\_once <http://php.net/require_once>`_.
 
 Etiquetas PHP
 =============
 
-Utiliza siempre las etiquetas ``<?php`` y ``?>``) en lugar de ``<?`` y ``?>``). 
+Utiliza siempre las etiquetas ``<?php`` y ``?>`` en lugar de ``<?`` y ``?>``. 
 
-La sintaxis abreviada de ``echo`` (``Short echo``) deberá usarse en los archivos de plantilla
+La sintaxis abreviada de ``echo`` deberá usarse en los archivos de plantilla
 (**.ctp**) donde proceda.
 
-Short Echo
-----------
+Sintaxis abreviada de echo
+--------------------------
 
 La sintaxis abreviada de ``echo`` (``<?=``) deberá usarse en los archivos de 
 plantillas en lugar de ``<?php echo``. Deberá ir seguido inmediatamente por un 
@@ -448,119 +447,121 @@ A partir de la versión 5.4 de PHP la etiqueta (``<?=``) no es considerada un
 ``short tag`` y está siempre disponible sin importar la directiva ``ini`` de
 ``short_open_tag``.
 
-Naming Convention
-=================
+Convenciones de nomenclatura
+============================
 
-Functions
+Funciones
 ---------
 
-Write all functions in camelBack::
+Escribe todas las funciones en ``camelBack``::
 
-    function longFunctionName()
+    function nombreFuncionLargo()
     {
     }
 
-Classes
--------
+Clases
+------
 
-Class names should be written in CamelCase, for example::
+Los nombres de las clases deberán escribirse en ``CamelCase``, por ejemplo::
 
-    class ExampleClass
+    class ClaseEjemplo
     {
     }
 
 Variables
 ---------
 
-Variable names should be as descriptive as possible, but also as short as
-possible. All variables should start with a lowercase letter, and should be
-written in camelBack in case of multiple words. Variables referencing objects
-should in some way associate to the class the variable is an object of.
-Example::
+Los nombres de variables deberán ser todo los descriptibles que puedan pero
+también lo más corto posible. Se escribirán en minúscula salvo que estén compuestos
+por múltiples palabras, en cuyo caso irán en ``camelBack``. Los nombres de las 
+variables que referencien objetos deberán ir asociados de algún modo a la clase
+de la cual es objeto.
+Ejemplo::
 
-    $user = 'John';
-    $users = ['John', 'Hans', 'Arne'];
+    $usuario = 'John';
+    $usuarios = ['John', 'Hans', 'Arne'];
 
     $dispatcher = new Dispatcher();
 
-Member Visibility
------------------
+Visibilidad de miembros
+-----------------------
 
-Use PHP's ``public``, ``protected`` and ``private`` keywords for methods and variables.
+Usa las palabras clave ``public``, ``protected`` y ``private`` de PHP para métodos
+y variables.
 
-Example Addresses
------------------
+Direcciones de ejemplos
+-----------------------
 
-For all example URL and mail addresses use "example.com", "example.org" and
-"example.net", for example:
+Para los ejemplos de URL y correos electrónicos usa "example.com", "example.org"
+y "example.net", por ejemplo:
 
 *  Email: someone@example.com
 *  WWW: `http://www.example.com <http://www.example.com>`_
 *  FTP: `ftp://ftp.example.com <ftp://ftp.example.com>`_
 
-The "example.com" domain name has been reserved for this (see :rfc:`2606`) and
-is recommended for use in documentation or as examples.
+El nombre de dominio "example.com" está reservado para ello (ver :rfc:`2606`) 
+y está recomendado para usar en documentaciones o como ejemplos.
 
-Files
------
+Archivos
+--------
 
-File names which do not contain classes should be lowercased and underscored,
-for example::
+Los nombres de archivos que no contengan clases deberán ir en minúsculas y
+con guiones bajos, por ejemplo::
 
-    long_file_name.php
+    nombre_de_archivo_largo.php
 
-Casting
--------
+Hacer ``casts``
+---------------
 
-For casting we use:
+Para hacer ``casts`` usamos:
 
-Type
-    Description
+Tipo
+    Descripción
 (bool)
-    Cast to boolean.
+    Cast a boolean.
 (int)
-    Cast to integer.
+    Cast a integer.
 (float)
-    Cast to float.
+    Cast a float.
 (string)
-    Cast to string.
+    Cast a string.
 (array)
-    Cast to array.
+    Cast a array.
 (object)
-    Cast to object.
+    Cast a object.
 
-Please use ``(int)$var`` instead of ``intval($var)`` and ``(float)$var`` instead
-of ``floatval($var)`` when applicable.
+Por favor utiliza ``(int)$var`` en lugar de ``intval($var)`` y ``(float)$var`` 
+en lugar de ``floatval($var)`` cuando aplique.
 
-Constants
----------
+Constantes
+----------
 
-Constants should be defined in capital letters::
+Los nombres de constantes deberán ir en mayúsculas::
 
-    define('CONSTANT', 1);
+    define('CONSTANTE', 1);
 
-If a constant name consists of multiple words, they should be separated by an
-underscore character, for example::
+Si el nombre de una constante se compone de varias palabras deberán ir separadas
+por guiones bajos, por ejemplo::
 
-    define('LONG_NAMED_CONSTANT', 2);
+    define('NOMBRE_DE_CONSTANTE_LARGO', 2);
 
-Careful when using empty()/isset()
-==================================
+Cuidado al usar empty()/isset()
+===================================
 
-While ``empty()`` is an easy to use function, it can mask errors and cause
-unintended effects when ``'0'`` and ``0`` are given. When variables or
-properties are already defined, the usage of ``empty()`` is not recommended.
-When working with variables, it is better to rely on type-coercion to boolean
-instead of ``empty()``::
+Aunque ``empty()`` es una función sencilla de utilizar, puede enmascarar errores
+y causar efectos inintencionados cuando se presentan ``'0'`` y ``0``. Cuando
+las variables o propiedades están ya definidas el uso de ``empty()`` no es 
+recomendable. Al trabajar con variables es mejor utilizar la conversión a tipo
+booleano en lugar de ``empty()``::
 
     function manipulate($var)
     {
-        // Not recommended, $var is already defined in the scope
+        // No recomendado, $var está definido en el ámbito
         if (empty($var)) {
             // ...
         }
 
-        // Use boolean type coercion
+        // Utiliza la conversión a booleano
         if (!$var) {
             // ...
         }
@@ -569,48 +570,49 @@ instead of ``empty()``::
         }
     }
 
-When dealing with defined properties you should favour ``null`` checks over
-``empty()``/``isset()`` checks::
+Cuando trates con propiedades definidas deberías favorecer las comprobaciones
+sobre ``null`` en lugar de ``empty()``/``isset()``::
 
     class Thing
     {
-        private $property; // Defined
+        private $property; // Definido
 
         public function readProperty()
         {
-            // Not recommended as the property is defined in the class
+            // No recomendado al estar definida la propiedad en la clase
             if (!isset($this->property)) {
                 // ...
             }
-            // Recommended
+            // Recomendado
             if ($this->property === null) {
 
             }
         }
     }
 
-When working with arrays, it is better to merge in defaults over using
-``empty()`` checks. By merging in defaults, you can ensure that required keys
-are defined::
+Cuando se trabaja con arrays, es mejor hacer ``merge`` de valores por defecto
+en vez de hacer comprobaciones con ``empty()``. Haciendo ``merge`` de valores
+por defecto puedes asegurarte de que las claves necesarias están definidas::
 
     function doWork(array $array)
     {
-        // Merge defaults to remove need for empty checks.
+        // Hacer merge de valor por defecto para eliminar la necesidad
+		// de comprobaciones empty
         $array += [
             'key' => null,
         ];
 
-        // Not recommended, the key is already set
+        // No recomendado, la clave ya está seteada
         if (isset($array['key'])) {
             // ...
         }
 
-        // Recommended
+        // Recomendado
         if ($array['key'] !== null) {
             // ...
         }
     }
 
 .. meta::
-    :title lang=en: Coding Standards
-    :keywords lang=en: curly brackets,indentation level,logical errors,control structures,control structure,expr,coding standards,parenthesis,foreach,readability,moose,new features,repository,developers
+    :title lang=es: Estándares de codificación
+    :keywords lang=es: llaves, nivel de tabulación, errores logicos, estructuras de control,expr,estándares de codificación,paréntesis,foreach, legibilidad,moose,nuevas funcionalidades,repositorio,desarrolladores
