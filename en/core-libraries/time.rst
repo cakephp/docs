@@ -168,8 +168,6 @@ You can also format dates with non-gregorian calendars::
 
     // Outputs 'Friday, Aban 9, 1393 AP at 12:00:00 AM GMT'
     $result = $now->i18nFormat(\IntlDateFormatter::FULL, null, 'en-IR@calendar=persian');
-    // Outputs 'جمعه ۹ آبان ۱۳۹۳ ه‍.ش.، ساعت ۰:۰۰:۰۰ (GMT)'
-    $result = $now->i18nFormat(\IntlDateFormatter::FULL, null, 'fa-IR@calendar=persian');
 
 The following calendar types are supported:
 
