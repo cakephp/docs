@@ -1024,7 +1024,7 @@ If you create URLs using strings like::
     $this->Html->link('View', '/articles/view/' . $id);
 
 And then later decide that ``/articles`` should really be called
-'articles' instead, you would have to go through your entire
+'posts' instead, you would have to go through your entire
 application renaming URLs. However, if you defined your link like::
 
     $this->Html->link(
