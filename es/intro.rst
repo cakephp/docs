@@ -1,4 +1,4 @@
-CakePHP De Un Vistazo
+CakePHP de un vistazo
 #####################
 
 CakePHP está diseñado para hacer tareas habituales de desarrollo web simples y
@@ -12,51 +12,51 @@ Si estás deseando comenzar un proyecto, puedes :doc:`empezar con el tutorial
 </tutorials-and-examples/bookmarks/intro>`, o :doc:`profundizar en la documentación
 </topics>`.
 
-Convenciones Sobre Configuración
+Convenciones sobre configuración
 ================================
 
-CakePHP provides a basic organizational structure that covers class names,
-filenames, database table names, and other conventions. While the conventions
-take some time to learn, by following the conventions CakePHP provides you can
-avoid needless configuration and make a uniform application structure that makes
-working with various projects simple. The :doc:`conventions chapter
-</intro/conventions>` covers the various conventions that CakePHP uses.
+CakePHP proporciona una estructura organizativa básica que cubre los nombres de 
+las clases, archivos, tablas de base de datos y otras convenciones más. Aunque
+lleva algo de tiempo aprender las convenciones, siguiéndolas CakePHP evitará
+que tengas que hacer configuraciones innecesarias y hará que la estructura de la
+aplicación sea uniforme yq ue el trabajo con varios proyectos sea sencillo. El
+capítulo de :doc:`convenciones </intro/conventions>` muestra las que utiliza 
+CakePHP.
 
+La capa modelo
+==============
 
-The Model Layer
-===============
+La capa modelo representa la parte de tu aplicación que implementa la lógica de
+negocio. Es la responsable de obtener datos y convertirlos en los conceptos que
+utiliza tu aplicación. Esto incluye procesar, validar, asociar u otras tareas
+relacionadas con el manejo de datos.
 
-The Model layer represents the part of your application that implements the
-business logic. It is responsible for retrieving data and converting it into the
-primary meaningful concepts in your application. This includes processing,
-validating, associating or other tasks related to handling data.
-
-In the case of a social network, the Model layer would take care of
-tasks such as saving the user data, saving friends' associations, storing
-and retrieving user photos, finding suggestions for new friends, etc.
-The model objects can be thought of as "Friend", "User", "Comment", or
-"Photo". If we wanted to load some data from our ``users`` table we could do::
+En el caso de una red social la capa modelo se encargaría de tareas como guardar
+los datos del usuario, las asociaciones de amigos, almacenar y obtener fotos,
+buscar sugerencias de amistad, etc. Los objetos modelo serían "Amigo", 
+"Usuario", "Comentario" o "Foto". Si quisieramos obtener más datos de nuestra
+tabla ``usuarios`` podríamos hacer lo siguiente::
 
     use Cake\ORM\TableRegistry;
 
-    $users = TableRegistry::get('Users');
-    $query = $users->find();
+    $usuarios = TableRegistry::get('Usuarios');
+    $query = $usuarios->find();
     foreach ($query as $row) {
-        echo $row->username;
+        echo $row->nombreusuario;
     }
 
-You may notice that we didn't have to write any code before we could start
-working with our data. By using conventions, CakePHP will use standard classes
-for table and entity classes that have not yet been defined.
+Como te habrás dado cuenta no hemos necesitado escribir ningún código previo 
+para empezar a trabajar con nuestros datos. Al utilizar las convenciones CakePHP
+usará clases estándar para tablas y clases de entidad que no hayan sido definidas.
 
-If we wanted to make a new user and save it (with validation) we would do
-something like::
+Si queremos crear un nuevo usuario y guardarlo (con validaciones) podríamos hacer
+algo como::
 
     use Cake\ORM\TableRegistry;
 
-    $users = TableRegistry::get('Users');
-    $user = $users->newEntity(['email' => 'mark@example.com']);
-    $users->save($user);
+    $usuarios = TableRegistry::get('Usuarios');
+    $usuario = $usuarios->newEntity(['email' => 'mark@example.com']);
+    $usuarios->save($usuario);
 
 The View Layer
 ==============
