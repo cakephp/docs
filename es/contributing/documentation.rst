@@ -251,7 +251,6 @@ Enlaces a referencias cruzadas
 	El uso más habitual de etiquetas es encima de un título. Ejemplo::
 
         .. _nombre-etiqueta:
-
         Título sección
         --------------
 
