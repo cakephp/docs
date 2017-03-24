@@ -16,7 +16,7 @@ pasos que ayudan a crear el mejor reporte de error posible:
   o de que no haya sido arreglado en el repositorio.
 * **Correcto**: Por favor, incluye instrucciones detalladas de **cómo reproducir el error**. 
   Ésto podría estar escrito en el formato de caso de prueba o con un 
-  **snippet* de código que demuestre el problema. No tener una forma de 
+  **snippet** de código que demuestre el problema. No tener una forma de 
   reproducir el error significa menos probabilidades de poder arreglarlo.
 * **Correcto**: Por favor, danos todos los detalles posibles de tu entorno: sistema 
   operativo, versión de PHP, versión de CakePHP...
