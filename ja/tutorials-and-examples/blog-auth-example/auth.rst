@@ -107,9 +107,9 @@ CakePHP にバンドルされているコード生成ユーティリティを利
     <?= $this->Form->create($user) ?>
         <fieldset>
             <legend><?= __('Add User') ?></legend>
-            <?= $this->Form->input('username') ?>
-            <?= $this->Form->input('password') ?>
-            <?= $this->Form->input('role', [
+            <?= $this->Form->control('username') ?>
+            <?= $this->Form->control('password') ?>
+            <?= $this->Form->control('role', [
                 'options' => ['admin' => 'Admin', 'author' => 'Author']
             ]) ?>
        </fieldset>
@@ -254,8 +254,8 @@ CakePHP にバンドルされているコード生成ユーティリティを利
     <?= $this->Form->create() ?>
         <fieldset>
             <legend><?= __('Please enter your username and password') ?></legend>
-            <?= $this->Form->input('username') ?>
-            <?= $this->Form->input('password') ?>
+            <?= $this->Form->control('username') ?>
+            <?= $this->Form->control('password') ?>
         </fieldset>
     <?= $this->Form->button(__('Login')); ?>
     <?= $this->Form->end() ?>

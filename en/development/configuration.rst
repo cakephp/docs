@@ -681,6 +681,37 @@ use the values that are defined in the **app.php**. You can use
 environment variables in a local development. See the Readme instructions of the
 library for more information.
 
+
+Disabling Generic Tables
+========================
+
+While utilizing generic table classes - also called auto-tables - when quickly
+creating new applications and baking models is useful, generic table class can
+make debugging more difficult in some scenarios.
+
+You can check if any query was emitted from a generic table class via DebugKit
+via the SQL panel in DebugKit. If you're still having trouble diagnosing an
+issue that could be caused by auto-tables, you can throw an exeception when
+CakePHP implicitly uses a generic ``Cake\ORM\Table`` instead of your concrete
+class like so::
+
+    // In your bootstrap.php
+    use Cake\Event\EventManager;
+    use Cake\Network\Exception\InternalErrorException;
+
+    $isCakeBakeShellRunning = (PHP_SAPI === 'cli' && isset($argv[1]) && $argv[1] === 'bake');
+    if (!$isCakeBakeShellRunning) {
+        EventManager::instance()->on('Model.initialize', function($event) {
+            $subject = $event->getSubject();
+            if (get_class($subject === 'Cake\ORM\Table') {
+                $msg = sprintf(
+                    'Missing table class or incorrect alias when registering table class for database table %s.',
+                    $subject->getTable());
+                throw new InternalErrorException($msg);
+            }
+        });
+    }
+
 .. meta::
     :title lang=en: Configuration
-    :keywords lang=en: finished configuration,legacy database,database configuration,value pairs,default connection,optional configuration,example database,php class,configuration database,default database,configuration steps,index database,configuration details,class database,host localhost,inflections,key value,database connection,piece of cake,basic web
+    :keywords lang=en: finished configuration,legacy database,database configuration,value pairs,default connection,optional configuration,example database,php class,configuration database,default database,configuration steps,index database,configuration details,class database,host localhost,inflections,key value,database connection,piece of cake,basic web,auto tables,auto-tables,generic table,class

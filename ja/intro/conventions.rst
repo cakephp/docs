@@ -130,7 +130,6 @@ ArticlesController の ``index()`` 関数にマップします。そして、Art
 さて、これで CakePHP の基本について一通り理解できました。物事がどう組み合わせられるかを確かめるために、
 :doc:`/tutorials-and-examples/bookmarks/intro` を体験することができるでしょう。
 
-
 .. meta::
-    :title lang=ja: CakePHP Conventions
+    :title lang=ja: CakePHP の規約
     :keywords lang=ja: web development experience,maintenance nightmare,index method,legacy systems,method names,php class,uniform system,config files,tenets,articles,conventions,conventional controller,best practices,maps,visibility,news articles,functionality,logic,cakephp,developers

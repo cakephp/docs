@@ -1,5 +1,5 @@
-Tutorial de aplicación Blog - Autenticación y Autorización
-##########################################################
+Tutorial Blog - Autenticación y Autorización
+############################################
 
 Siguiendo con nuestro ejemplo de aplicacion :doc:`/tutorials-and-examples/blog/blog`, imaginá que necesitamos proteger ciertas URLs, dependiendo del usuario logeado. También tenemos otro requisito, permitir que nuestro blog tenga varios autores, cada uno habilitado para crear sus posts, editar y borrarlos a voluntad, evitando que otros autores puedan cambiarlos.
 
@@ -353,5 +353,5 @@ Lectura sugerida
 #. :doc:`/controllers/components/authentication`: Registro y login de usuarios
 
 .. meta::
-    :title lang=es: Tutorial de aplicación Blog - Autenticación y Autorización
+    :title lang=es: Tutorial Blog - Autenticación y Autorización
     :keywords lang=es: auto increment,aplicacion con autorizacion,model user,array,convenciones,autenticacion,urls,cakephp,delete,doc,columns

@@ -204,7 +204,7 @@ following configuration keys are used:
 - ``'transport'``: Transport configuration name. See
   :php:meth:`~Cake\\Mailer\\Email::setConfigTransport()`.
 - ``'log'``: Log level to log the email headers and message. ``true`` will use
-  LOG_DEBUG. See also ``CakeLog::write()``
+  LOG_DEBUG. See also :ref:`logging-levels`.
 - ``'helpers'``: Array of helpers used in the email template. ``Email::setHelpers()``.
 
 All these configurations are optional, except ``'from'``.
@@ -455,7 +455,7 @@ Sending Emails from CLI
 =======================
 
 When sending emails within a CLI script (Shells, Tasks, ...) you should manually
-set the domain name for CakeEmail to use. It will serve as the host name for the
+set the domain name for Email to use. It will serve as the host name for the
 message id (since there is no host name in a CLI environment)::
 
     $email->setDomain('www.example.org');

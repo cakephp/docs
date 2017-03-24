@@ -66,7 +66,7 @@ runtime. This can be useful when you want to customize templates for a
 particular method call::
 
     // Read the current template value.
-    $result = $this->Paginator->setTemplates('number');
+    $result = $this->Paginator->getTemplates('number');
     // Prior to 3.4
     $result = $this->Paginator->templates('number');
 
@@ -442,7 +442,7 @@ the PaginatorHelper available in views doesn't always need to be restricted as
 such.
 
 See the details on
-`PaginatorHelper <https://api.cakephp.org/3.0/class-Cake.View.Helper.PaginatorHelper.html>`_ in
+`PaginatorHelper <https://api.cakephp.org/3.x/class-Cake.View.Helper.PaginatorHelper.html>`_ in
 the API. As mentioned, the PaginatorHelper also offers sorting features which
 can be integrated into your table column headers:
 

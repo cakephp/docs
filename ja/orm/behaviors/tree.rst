@@ -86,7 +86,7 @@ CakePHP は内部構造を構築することができます。 ::
     $list = $categories->find('treeList');
 
     // CakePHP テンプレートファイルの中で
-    echo $this->Form->input('categories', ['options' => $list]);
+    echo $this->Form->control('categories', ['options' => $list]);
 
     // もしくは、CLI スクリプトなどでプレーンテキストで出力できます
     foreach ($list as $categoryName) {

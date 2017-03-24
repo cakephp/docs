@@ -1,5 +1,5 @@
-Tutorial de desarrollo del Blog - Añadiendo una capa
-####################################################
+Tutorial Blog - Parte 2
+#######################
 
 .. note::
     The documentation is currently partially supported in es language for this
@@ -651,3 +651,6 @@ aprender después:
 2. :ref:`view-elements` Incluír vistas y reutilizar trozos de código
 3. :doc:`/bake/usage`: Generación básica de CRUDs
 4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Tutorial de autenticación y permisos
+
+.. meta::
+    :title lang=es: Tutorial Blog - Parte 2

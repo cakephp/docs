@@ -47,8 +47,9 @@ modifier avec les setters::
     {
         public function initialize(array $config)
         {
-            $this->belongsTo('Authors')
-                ->setName('Publishing.Authors')
+            $this->belongsTo('Authors', [
+                    'className' => 'Publishing.Authors'
+                ])
                 ->setForeignKey('authorid')
                 ->setProperty('person');
         }
@@ -72,11 +73,11 @@ commentaires approuvés et ceux qui n'ont pas encore été modérés::
         public function initialize(array $config)
         {
             $this->hasMany('Comments')
-                ->setName('Comments')
                 ->setConditions(['approved' => true]);
 
-            $this->hasMany('UnapprovedComments')
-                ->setName('Comments')
+            $this->hasMany('UnapprovedComments', [
+                    'className' => 'Comments'
+                ])
                 ->setConditions(['approved' => false])
                 ->setProperty('unapproved_comments');
         }
@@ -91,11 +92,13 @@ relations parent-enfant::
     {
         public function initialize(array $config)
         {
-            $this->hasMany('SubCategories')
-                ->setName('Categories');
+            $this->hasMany('SubCategories', [
+                'className' => 'Categories'
+            ]);
 
-            $this->belongsTo('ParentCategories')
-                ->setName('Categories')
+            $this->belongsTo('ParentCategories', [
+                'className' => 'Categories'
+            ]);
         }
     }
 

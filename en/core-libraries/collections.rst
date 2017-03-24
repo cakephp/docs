@@ -624,7 +624,7 @@ different values in the collection::
 In order to specify in which direction the collection should be sorted, you need
 to provide either ``SORT_ASC`` or ``SORT_DESC`` as the second parameter for
 sorting in ascending or descending direction respectively. By default,
-collections are sorted in ascending direction::
+collections are sorted in descending direction::
 
     $collection = new Collection($people);
     $sorted = $collection->sortBy('age', SORT_ASC);
@@ -1076,7 +1076,7 @@ Additionally, lazy evaluation helps speed up some operations. Consider the
 following example::
 
     $collection = new Collection($oneMillionItems);
-    $collection->map(function ($item) {
+    $collection = $collection->map(function ($item) {
         return $item * 2;
     });
     $itemsToShow = $collection->take(30);
