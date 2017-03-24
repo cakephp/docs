@@ -3,7 +3,7 @@ Código
 
 Parches y *pull requests* son una manera genial de contribuir con código a CakePHP. 
 Los *Pull requests* pueden ser creados en Github, preferiblemente a los archivos de
-parches en comentarios de tickets.
+parches en los comentarios de tickets.
 
 Configuración inicial
 =====================
@@ -72,7 +72,7 @@ al no permitirte Github editar la rama destino::
 .. tip::
 
     Usa un nombre descriptivo para tu rama, referenciar el ticket o nombre de la
-	característica es una buena convención. P.ej. ticket-1234, neuva-funcionalidad
+	característica es una buena convención. P.ej. ticket-1234, nueva-funcionalidad
 
 Lo anterior creará una rama local basada en la rama *upstream* 2.x (CakePHP)
 
@@ -102,7 +102,7 @@ Esto buscará y hará *merge* de cualquier cambio que haya sucedido en CakePHP d
 empezaste. Entonces ejecutará *rebase* o replicará tus cambios en el *top* del
 actual código. 
 
-Puede que encuentres algún conflicto durante el *rebase*. Si éste finaliza 
+Puede que encuentres algún conflicto durante el *rebase*. Si este finaliza 
 precipitadamente puedes ver qué archivos son conflictivos/*un-merged* con 
 ``git status``.
 Resuelve cada conflicto y continúa con el *rebase*::
@@ -125,7 +125,7 @@ Seleccionar donde harán el *merge* tus cambios
 ----------------------------------------------
 
 Cuando hagas *pull requests* deberás asegurarte de seleccionar la rama correcta
-como base ya que no podrás editarla una vez sea creada.
+como base ya que no podrás editarla una vez creada.
 
 * Si tus cambios son un *bugfix* (corrección de error) y no introduce ninguna
   funcionalidad nueva entonces selecciona **master** como destino del merge.

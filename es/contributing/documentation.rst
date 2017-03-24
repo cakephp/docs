@@ -4,7 +4,7 @@ Documentación
 Contribuir con la documentación es fácil. Los archivos están hospedados
 en https://github.com/cakephp/docs. Siéntete libre de hacer un *fork* del
 repositorio, añadir tus cambios, mejoras, traducciones y comenzar a ayudar
-a través de un nuevo *pull request*. Puedes también editar los archivos de manera 
+a través de un nuevo *pull request*. También puedes editar los archivos de manera 
 online con GitHub sin la necesidad de descargarlos -- el botón *Improve this Doc* 
 que aparece en todas las páginas te llevará al editor online de GitHub de esa página.
 
@@ -122,7 +122,7 @@ Cabeceras y secciones
 ---------------------
 
 Las cabeceras de las secciones se crean subrayando el título con caracteres de 
-puntuación. El subrayado deberá de ser por lo menos tan largo como el texto.
+puntuación. El subrayado deberá ser por lo menos tan largo como el texto.
 
 - ``#`` Se utiliza para indicar los títulos de páginas.
 - ``=`` Se utiliza para los títulos de las secciones de una página.
@@ -137,7 +137,7 @@ Párrafos
 --------
 
 Párrafos son simplemente bloques de texto con todas las líneas al mismo nivel de
-indexación. Los párrafos deben de separarse por al menos una línea vacía.
+indexación. Los párrafos deben separarse por al menos una línea vacía.
 
 Marcado en línea
 ----------------
@@ -167,7 +167,7 @@ los delimitadores de marcado habrá que escaparlos con *\\*.
 Los marcadores en línea tienen algunas restricciones:
 
 * **No pueden** estar anidados.
-* El contenido no puede empezar o a cabar con espacios en blanco: ``* texto*`` 
+* El contenido no puede empezar o acabar con espacios en blanco: ``* texto*`` 
   está mal.
 * El contenido debe separarse del resto del texto por caracteres que no sean
   palabras. Utiliza *\\* para escapar un espacio y solucionarlo: ``onelong\ *bolded*\ word``.
@@ -178,7 +178,7 @@ Listas
 El etiquetado de listas es muy parecido a *Markdown*. Las listas no ordenadas se
 indican empezando una línea con un asterisco y un espacio.
 
-Las listas enumeradas pueden crearse con enumaraciones o ``#`` para auto enumaración::
+Las listas enumeradas pueden crearse con enumeraciones o ``#`` para auto enumeración::
 
     * Esto es una viñeta
 	* Esto también, pero esta línea
@@ -243,7 +243,7 @@ Enlaces a referencias cruzadas
 .. rst:role:: ref
 
     Puedes hacer referncia cruzada a cualquier título de cualquier documento 
-	usando la función ``:ref:``. Los enlaces a etiquetas de destino deben de ser 
+	usando la función ``:ref:``. Los enlaces a etiquetas de destino deben ser 
 	únicos a lo largo de toda la documentación. Cuando se crean etiquetas para 
 	métodos de clase lo mejor es usar ``clase-método`` como formato para tu 
 	etiqueta de destino.
@@ -257,7 +257,7 @@ Enlaces a referencias cruzadas
 
         Resto del contenido.
 
-    En otro sitió podrías enlazar a la sección de arriba usando ``:ref:`nombre-etiqueta```.
+    En otro sitio podrías enlazar a la sección de arriba usando ``:ref:`nombre-etiqueta```.
 	El texto del enlace será el título al que precede el enlace pero puedes
 	personalizarlo usando ``:ref:`Texto del enlace <nombre-etiqueta>```.
 
@@ -288,7 +288,7 @@ Cada directiva introduce el contenido del índice y/o índice del *namespace*.
 
 .. rst:directive:: .. php:global:: nombre
 
-   Esta directiva declara una nueva variable PHP glopabl.
+   Esta directiva declara una nueva variable PHP global.
 
 .. rst:directive:: .. php:function:: nombre(firma)
 
@@ -297,7 +297,7 @@ Cada directiva introduce el contenido del índice y/o índice del *namespace*.
 .. rst:directive:: .. php:const:: nombre
 
    Esta directiva declara una nueva constante PHP, puedes usarla también anidada
-   dentro de una directiva de clas para crear constantes de clase.
+   dentro de una directiva de clase para crear constantes de clase.
 
 .. rst:directive:: .. php:exception:: nombre
 
@@ -318,7 +318,7 @@ Cada directiva introduce el contenido del índice y/o índice del *namespace*.
            Descripción del método
 
 
-   Atributos, métodso y constantes no necesitan estar anidados, pueden seguir
+   Atributos, métodos y constantes no necesitan estar anidados, pueden seguir
    la siguiente declaración de clase::
 
         .. php:class:: MyClass
@@ -352,7 +352,7 @@ Cada directiva introduce el contenido del índice y/o índice del *namespace*.
 
 .. rst:directive:: .. php:attr:: nombre
 
-   Describe na propiedad/atributo en una clase.
+   Describe una propiedad/atributo en una clase.
 
 Evitar avisos de Sphinx
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -376,16 +376,16 @@ si se encuentra una directiva que coincida:
 
 .. rst:role:: php:func
 
-   Referencia a función PHP.
+   Referencia a una función PHP.
 
 .. rst:role:: php:global
 
-   Referencia a varaible global cuyo nombre tiene prefijo ``$``.
+   Referencia a una variable global cuyo nombre tiene prefijo ``$``.
 
 .. rst:role:: php:const
 
    Referencia tanto a una constante global como a una de clase. Las constantes
-   de clase deberán ir precedidas por la clase que las contengan::
+   de clase deberán ir precedidas por la clase que las contenga::
 
         DateTime tiene una constante :php:const:`DateTime::ATOM`.
 

@@ -8,9 +8,9 @@ versiones ``major``. Puedes familiarizarte con el `versionado semántico
 de CakePHP. Pero resumiendo, el versionado semántico significa que sólo las 
 liberaciones de versiones ``major`` (tales como 2.0, 3.0, 4.0) pueden romper la
 compatibilidad hacia atrás. Las liberaciones ``minor`` (tales como 2.1, 3.1, 3.2) 
-pueden introducir nuevas funcionalidade pero no pueden romper la compatibilidad.
+pueden introducir nuevas funcionalidades pero no pueden romper la compatibilidad.
 Los lanzamientos de correcciones de errores (tales como 3.0.1) no añaden nuevas
-funcionaliades, sólo correcciones de erroes o mejoras de rendimiento.
+funcionaliades, sólo correcciones de errores o mejoras de rendimiento.
 
 .. note::
 
@@ -34,20 +34,20 @@ la sección :doc:`/appendices` del ``cookbook``.
 Usar CakePHP
 ============
 
-Si estás desarrollando tu aplicación con CakePHP las siguientes líneas guía
+Si estás desarrollando tu aplicación con CakePHP las siguientes pautas
 explican la estabilidad que puedes esperar.
 
 Interfaces
 ----------
 
 Con excepción de las liberaciones ``major``, las interfaces que provee CakePHP 
-**no** tendrán ningún cambio en los métodos extintes. Podrán añadirse nuevos
+**no** tendrán ningún cambio en los métodos existentes. Podrán añadirse nuevos
 métodos pero no habrá cambios en los ya existentes.
 
 Clases
 ------
 
-Las clases que provee CakePHP pueden estar construidas y tener sus métodos y 
+Las clases que proporciona CakePHP pueden estar construidas y tener sus métodos y 
 propiedades públicos usados por el código de la aplicación y, a excepción
 de las liberaciones ``major``, la compatibilidad hacia atrás está garantizada.
 
@@ -106,7 +106,7 @@ Trabajando en CakePHP
 =====================
 
 Si estás ayudando a que CakePHP sea aún mejor, por favor, ten en mente las
-siguientes líneas guía cuando añadas/cambies funcionalidades:
+siguientes pautas cuando añadas/cambies funcionalidades:
 
 En una liberación ``minor`` puedes:
 
@@ -166,7 +166,7 @@ En una liberación ``minor`` puedes:
 
 .. [1] Tu código *puede* romperse en lanzamientos ``minor``. 
        Comprueba la guía de migración para más detalles.
-.. [2] Puedes cambiar el nombre de una clase/método siempre y cuando que el 
+.. [2] Puedes cambiar el nombre de una clase/método siempre y cuando el 
        antiguo nombre se mantenga disponible. Esto es evitado generalmente a 
 	   menos que el cambio de nombre sea significativamente beneficioso.
 .. [3] Evitarlo cuando sea posible. Cualquier borrado tendrá que ser documentado

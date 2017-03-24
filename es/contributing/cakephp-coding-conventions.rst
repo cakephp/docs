@@ -32,7 +32,7 @@ Tabulación
 
 Se utilizará cuatro espacios para la tabulación.
 
-Por lo que deberá de verse asi::
+Por lo que debería everse asi::
 
     // nivel base
         // nivel 1
@@ -54,10 +54,10 @@ O también::
 En los casos donde utilices llamadas de funciones que ocupen más de un línea
 usa las siguientes guías:
 
-*  El paréntesis de abertura de la llamada de la función deberá de ser lo
+*  El paréntesis de abertura de la llamada de la función deberá ser lo
    último que contenga la línea.
 *  Sólo se permite un argumento por línea.
-*  Los paréntesis de cierre deben de estar solos y en una línea por separado.
+*  Los paréntesis de cierre deben estar solos y en una línea por separado.
 
 Por ejemplo, en vez de utilizar el siguiente formato::
 
@@ -182,7 +182,7 @@ estricta::
     }
 
 El valor contra el que se va a realizar la comparación deberá ir en el lado derecho
-de ésta::
+de esta::
 
     // no recomendado
     if (null === $this->foo()) {
@@ -291,7 +291,7 @@ después de la palabra ``function`` y antes y después de la palabra ``use``::
 Encadenación de métodos
 =======================
 
-Las encadenaciones de métodos deberán distribuir éstos en líneas separadas y
+Las encadenaciones de métodos deberán distribuir estos en líneas separadas y
 tabulados con cuatro espacios::
 
     $email->from('foo@example.com')
@@ -471,7 +471,7 @@ Los nombres de las clases deberán escribirse en ``CamelCase``, por ejemplo::
 Variables
 ---------
 
-Los nombres de variables deberán ser todo los descriptibles que puedan pero
+Los nombres de variables deberán ser todo lo descriptibles que puedan pero
 también lo más corto posible. Se escribirán en minúscula salvo que estén compuestos
 por múltiples palabras, en cuyo caso irán en ``camelBack``. Los nombres de las 
 variables que referencien objetos deberán ir asociados de algún modo a la clase
@@ -549,7 +549,7 @@ Cuidado al usar empty()/isset()
 ===================================
 
 Aunque ``empty()`` es una función sencilla de utilizar, puede enmascarar errores
-y causar efectos inintencionados cuando se presentan ``'0'`` y ``0``. Cuando
+y causar efectos accidentales cuando se usa con ``'0'`` y ``0``. Cuando
 las variables o propiedades están ya definidas el uso de ``empty()`` no es 
 recomendable. Al trabajar con variables es mejor utilizar la conversión a tipo
 booleano en lugar de ``empty()``::
