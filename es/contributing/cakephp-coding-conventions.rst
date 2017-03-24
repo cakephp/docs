@@ -278,7 +278,7 @@ tipo primitivo::
     }
 
 Funciones anónimas (``Closures``)
-------------------------------
+-----------------------------------
 
 Para definir funciones anónimas sigue la guía de estilo de código 
 `PSR-2 <http://www.php-fig.org/psr/psr-2/>`_ , donde se declaran con un espacio
@@ -382,7 +382,7 @@ object
 resource
     Tipo resource (devuelto por ejemplo por mysql\_connect()).
     Recuerda que cuando especificas el tipo como mixed deberás indicar 
-	si es desconocido o cuales son los tipos posibles.
+    si es desconocido o cuales son los tipos posibles.
 callable
     Función Callable.
 
