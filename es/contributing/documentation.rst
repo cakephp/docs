@@ -231,11 +231,11 @@ Enlaces a otras páginas
 .. rst:role:: doc
 
     Puedes crear enlaces a otras páginas de la documentación usando la función
-	``::doc:``. Puedes enlazar a un archivo específico empleando rutas relativas
-	o absolutas omitiendo la extensión ``.rst``. Por ejemplo: si apareciese 
-	``:doc:`form``` en el documento ``core-helpers/html``, el enlace haría
-	referencia a ``core-helpers/form``. Si la referencia fuese ``:doc:`/core-helpers```
-	el enlace sería siempre a ``/core-helpers`` sin importar donde se utilice.
+    ``::doc:``. Puedes enlazar a un archivo específico empleando rutas relativas
+    o absolutas omitiendo la extensión ``.rst``. Por ejemplo: si apareciese 
+    ``:doc:`form``` en el documento ``core-helpers/html``, el enlace haría
+    referencia a ``core-helpers/form``. Si la referencia fuese ``:doc:`/core-helpers```
+    el enlace sería siempre a ``/core-helpers`` sin importar donde se utilice.
 
 Enlaces a referencias cruzadas
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -243,22 +243,23 @@ Enlaces a referencias cruzadas
 .. rst:role:: ref
 
     Puedes hacer referncia cruzada a cualquier título de cualquier documento 
-	usando la función ``:ref:``. Los enlaces a etiquetas de destino deben de ser 
-	únicos a lo largo de toda la documentación. Cuando se crean etiquetas para 
-	métodos de clase lo mejor es usar ``clase-método`` como formato para tu 
-	etiqueta de destino.
+    usando la función ``:ref:``. Los enlaces a etiquetas de destino deben de ser 
+    únicos a lo largo de toda la documentación. Cuando se crean etiquetas para 
+    métodos de clase lo mejor es usar ``clase-método`` como formato para tu 
+    etiqueta de destino.
+    
+    El uso más habitual de etiquetas es encima de un título. Ejemplo::
+    
+        .. _nombre-etiqueta:
 	
-	El uso más habitual de etiquetas es encima de un título. Ejemplo::
-
-        .. _nombre-etiqueta:
-        Título sección
-        --------------
-
-        Resto del contenido.
+	Título sección
+	--------------
+	
+	Resto del contenido.
 
     En otro sitió podrías enlazar a la sección de arriba usando ``:ref:`nombre-etiqueta```.
-	El texto del enlace será el título al que precede el enlace pero puedes
-	personalizarlo usando ``:ref:`Texto del enlace <nombre-etiqueta>```.
+    El texto del enlace será el título al que precede el enlace pero puedes
+    personalizarlo usando ``:ref:`Texto del enlace <nombre-etiqueta>```.
 
 
 Evitar alertas de Sphinx
