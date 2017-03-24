@@ -72,7 +72,7 @@ al no permitirte Github editar la rama destino::
 .. tip::
 
     Usa un nombre descriptivo para tu rama, referenciar el ticket o nombre de la
-	característica es una buena convención. P.ej. ticket-1234, neuva-funcionalidad
+    característica es una buena convención. P.ej. ticket-1234, neuva-funcionalidad
 
 Lo anterior creará una rama local basada en la rama *upstream* 2.x (CakePHP)
 
