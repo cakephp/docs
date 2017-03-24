@@ -14,9 +14,9 @@ pasos que ayudan a crear el mejor reporte de error posible:
 * **Correcto**: Por favor, `busca tickets <https://github.com/cakephp/cakephp/search?q=it+is+broken&ref=cmdform&type=Issues>`_
   similares que ya existan y asegúrate de que nadie haya reportado ya tu problema 
   o que no haya sido arreglado en el repositorio.
-* **Correcto**: Por favor, incluye instrucciones detalladas de **cómo reproducir el 
-  error**. Esto podría estar escrito en el formato de caso de prueba o con un 
-  **snippet* de código que demuestre el problema. No tener una forma de 
+* **Correcto**: Por favor, incluye instrucciones detalladas de **cómo reproducir el error**. 
+  Esto podría estar escrito en el formato de caso de prueba o con un 
+  **snippet** de código que demuestre el problema. No tener una forma de 
   reproducir el error significa menos probabilidades de poder arreglarlo.
 * **Correcto**: Por favor, danos todos los detalles posibles de tu entorno: sistema 
   operativo, versión de PHP, versión de CakePHP...
