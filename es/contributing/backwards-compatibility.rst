@@ -168,7 +168,7 @@ En una liberación ``minor`` puedes:
        Comprueba la guía de migración para más detalles.
 .. [2] Puedes cambiar el nombre de una clase/método siempre y cuando que el 
        antiguo nombre se mantenga disponible. Esto es evitado generalmente a 
-	   menos que el cambio de nombre sea significativamente beneficioso.
+       menos que el cambio de nombre sea significativamente beneficioso.
 .. [3] Evitarlo cuando sea posible. Cualquier borrado tendrá que ser documentado
        en la guía de migración.
 
