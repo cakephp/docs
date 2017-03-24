@@ -1,13 +1,18 @@
 Tree
 ####
+
 .. php:namespace:: Cake\ORM\Behavior
+
 .. php:class:: TreeBehavior
+
 Muchas veces nos encontramos frente a la necesidad de tener que almacenar datos jerarquizados en una base de datos. Podría tomar la forma de categorías sin límite de subcategorías, datos relacionados con un sistema de menú multinivel o una representación literal de la jerarquía como un departamento en una empresa.
+
 Las bases de datos relacionales no son verdaderamente apropiadas para almacenar y recobrar este tipo de datos, pero existen algunas técnicas para hacerlas eficientes y trabajar con una información multinivel.
+
 El TreeBehavior le ayuda a mantener una estructura de datos jerárquica en la base de datos que puede ser solicitada fácilmente y ayuda a reconstruir los datos bajo una forma de árbol que permite encontrar y visualizar los procesos.
 
 Prerrequisitos
-============
+==============
 Ese behavior  requiere que las siguientes columnas estén presentes en la tabla:
 
 - ``parent_id`` (nullable) La columna que contiene el ID del registro padre
@@ -21,7 +26,7 @@ Advertencia
 Por el momento, TreeBehavior no soporta las llaves primarias composites.
 
 Rápido vistazo
-============
+==============
 
 Active el Tree behavior agregándolo a la Tabla donde usted desea almacenar los datos jerarquizados en::
 
@@ -122,7 +127,7 @@ Los árboles construidos con TreeBehavior no pueden ser clasificados con otras c
     $categories->moveDown($node, true);
 
 Configuración
-===========
+=============
 Si los números de columna predeterminados empleados por ese behavior no corresponden a su esquema, usted puede ponerles alias::
 
     public function initialize(array $config)
@@ -135,7 +140,7 @@ Si los números de columna predeterminados empleados por ese behavior no corresp
     }
 
 Nivel de Nodos (profundidad) 
-========================
+============================
 Conocer la profundidad de una estructura en árbol puede ser útil cuando quiere recuperar los nodos solo hasta cierto nivel, por ejemplo para generar un menú. Puede utilizar la opción ``level`` para especificar los campos que guardarán el nivel de cada nodo::
 
     $this->addBehavior('Tree', [
@@ -145,7 +150,7 @@ Conocer la profundidad de una estructura en árbol puede ser útil cuando quiere
 Si usted no quiere copiar en caché el nivel utilizando un campo de la base de datos, puede utilizar el método ``TreeBehavior::getLevel()`` para conocer el nivel de un nodo.
 
 Alcance y árboles múltiples
-======================
+===========================
 Si usted desea tener más de una estructura de árbol en la misma tabla, puede hacerlo utilizando la configuración ‘scope’ (alcance). Por ejemplo, si en una tabla locations desea crear un árbol por país::
 
     class LocationsTable extends Table
@@ -160,7 +165,7 @@ Si usted desea tener más de una estructura de árbol en la misma tabla, puede h
 
 En el precedente ejemplo precedentela totalidad de las operaciones realizadas sobre el árbol solo se enfocarán en los registros que tienen la columna ``country_name`` que vale ‘Brazil’. Usted puede cambiar el scope al vuelo utilizando la función ‘config’::
 
-$this->behaviors()->Tree->config('scope', ['country_name' => 'France']);
+    $this->behaviors()->Tree->config('scope', ['country_name' => 'France']);
 
 Opcionalmente, puede ejercer un control más riguroso pasando una clausura como scope ::
 
@@ -170,7 +175,7 @@ Opcionalmente, puede ejercer un control más riguroso pasando una clausura como 
     });
 
 Recobro con campo de clasificación personalizada
-=========================================
+================================================
 
 .. versionadded:: 3.0.14
 
@@ -182,7 +187,7 @@ Si necesita una clasificación personalizada para la recuperación de datos, pue
     ]);
 
 Guardar los datos jerarquizados
-==========================
+===============================
 Generalmente cuando utiliza el Tree behavior, no tiene que preocuparse por la representación interna de la estructura jerarquizada.  Las posiciones donde los nodos están colocados en el árbol se deducen de la columna ‘parent_id’  en cada una de sus entities::
 
     $aCategory = $categoriesTable->get(10);
@@ -199,7 +204,7 @@ Puede hacer un nodo a la raíz del árbol asignándolenull a la columna ‘paren
 Los hijos para el nuevo nodo serán preservados.
 
 Suprimir Nodos
-===============
+==============
 Es fácil Suprimir un nodo, así como todo su sub-árbol (todos los hijos que puede tener a todo nivel del árbol)::
 
     $aCategory = $categoriesTable->get(10);
