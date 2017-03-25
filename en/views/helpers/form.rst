@@ -16,7 +16,7 @@ Starting a Form
 
 .. php:method:: create(mixed $context = null, array $options = [])
 
-* ``$model`` - The context for which the form is being defined. Can be an ORM
+* ``$context`` - The context for which the form is being defined. Can be an ORM
   entity, ORM resultset, array of metadata or ``false/null`` (to make a
   model-less form).
 * ``$options`` - An array of options and/or HTML attributes.
@@ -34,22 +34,22 @@ you would see something like the following output in the rendered view:
 
     <form method="post" action="/users/add">
 
-The ``$model`` argument is used as the form's 'context'. There are several
+The ``$context`` argument is used as the form's 'context'. There are several
 built-in form contexts and you can add your own, which we'll cover below, in
 a following section. The built-in providers map to the following values of
-``$model``:
+``$context``:
 
 * An ``Entity`` instance or an iterator will map to
-  `EntityContext <https://api.cakephp.org/3.3/class-Cake.View.Form.EntityContext.html>`_;
+  `EntityContext <https://api.cakephp.org/3.x/class-Cake.View.Form.EntityContext.html>`_;
   this context class allows FormHelper to work with results from the
   built-in ORM.
 
 * An array containing the ``'schema'`` key, will map to
-  `ArrayContext <https://api.cakephp.org/3.3/class-Cake.View.Form.ArrayContext.html>`_
+  `ArrayContext <https://api.cakephp.org/3.x/class-Cake.View.Form.ArrayContext.html>`_
   which allows you to create simple data structures to build forms against.
 
 * ``null`` and ``false`` will map to
-  `NullContext <https://api.cakephp.org/3.3/class-Cake.View.Form.NullContext.html>`_;
+  `NullContext <https://api.cakephp.org/3.x/class-Cake.View.Form.NullContext.html>`_;
   this context class
   simply satisfies the interface FormHelper requires. This context is useful if
   you want to build a short form that doesn't require ORM persistence.
@@ -339,7 +339,6 @@ Creating Form Controls
 ======================
 
 .. php:method:: control(string $fieldName, array $options = [])
-
 
 * ``$fieldName`` - A field name in the form ``'Modelname.fieldname'``.
 * ``$options`` - An optional array that can include both
