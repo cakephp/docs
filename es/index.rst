@@ -16,9 +16,9 @@ o corrección de la documentación.
     **Lee el libro donde sea**
 
     .. image:: /_static/img/read-the-book.jpg
-	
-	Disfruta del manual de CakePHP en cualquier sitio. Disponible tanto en PDF 
-	como en EPUB, puedes leerlo en más dispositivos y de manera offline.
+    
+    Disfruta del manual de CakePHP en cualquier sitio. Disponible tanto en PDF 
+    como en EPUB, puedes leerlo en más dispositivos y de manera offline.
 
     - `PDF <../_downloads/es/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/es/CakePHPCookbook.epub>`_
