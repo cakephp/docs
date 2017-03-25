@@ -2,7 +2,7 @@ Donde obtener ayuda
 ###################
 
 La página oficial de CakePHP
-=========================
+=============================
 
 `https://cakephp.org <https://cakephp.org>`_
 
