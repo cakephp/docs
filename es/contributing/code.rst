@@ -26,7 +26,7 @@ de trabajo::
 .. note::
 
     Si eres nuevo en Git, te recomendamos encarecidamente que leas el maravilloso
-	y gratuito libro `ProGit <http://git-scm.com/book/>`_
+    y gratuito libro `ProGit <http://git-scm.com/book/>`_
 
 Clona el código fuente de CakePHP desde GitHub:
 
@@ -72,7 +72,7 @@ al no permitirte Github editar la rama destino::
 .. tip::
 
     Usa un nombre descriptivo para tu rama, referenciar el ticket o nombre de la
-	característica es una buena convención. P.ej. ticket-1234, nueva-funcionalidad
+    característica es una buena convención. P.ej. ticket-1234, nueva-funcionalidad
 
 Lo anterior creará una rama local basada en la rama *upstream* 2.x (CakePHP)
 
