@@ -4,7 +4,7 @@ Guía de compatibilidad hacia atrás
 Asegurar que puedas actualizar tus aplicaciones fácilmente es importante para
 nosotros. Por ello sólo rompemos la compatibilidad en las liberaciones de 
 versiones ``major``. Puedes familiarizarte con el `versionado semántico 
-<http://http://semver.org/lang/es/>`_, el cual utilizamos en todos los proyectos
+<http://semver.org/lang/es/>`_, el cual utilizamos en todos los proyectos
 de CakePHP. Pero resumiendo, el versionado semántico significa que sólo las 
 liberaciones de versiones ``major`` (tales como 2.0, 3.0, 4.0) pueden romper la
 compatibilidad hacia atrás. Las liberaciones ``minor`` (tales como 2.1, 3.1, 3.2) 
