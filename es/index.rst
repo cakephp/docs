@@ -36,7 +36,7 @@ Primeros pasos
 Aprender un nuevo framework puede ser intimidante y excitante al mismo tiempo. 
 Para ayudarte hemos creado un libro de recetas lleno de ejemplos y recetas 
 para completar las tareas habituales. Si eres nuevo deberías comenzar con la 
-:doc:`/guía de inicio rápido` que te ofrecerá un tour por lo que ofrece CakePHP
+:doc:`/guía de inicio rápido </quickstart>` que te ofrecerá un tour por lo que ofrece CakePHP
 y como funciona.
 
 Después de finalizar el tutorial Bookmarker (Favoritos), puedes conocer mejor los 
