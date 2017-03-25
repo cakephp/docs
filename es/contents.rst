@@ -9,7 +9,7 @@ Contenidos
 
 .. toctree::
     :maxdepth: 3
-    :caption: Preface
+    :caption: Prólogo
 
     intro
     quickstart
@@ -19,7 +19,7 @@ Contenidos
 
 .. toctree::
     :maxdepth: 3
-    :caption: Getting Started
+    :caption: Comenzando
 
     installation
     development/configuration
@@ -32,7 +32,7 @@ Contenidos
 
 .. toctree::
     :maxdepth: 3
-    :caption: Using CakePHP
+    :caption: Usando CakePHP
 
     controllers/components/authentication
     bake
@@ -56,7 +56,7 @@ Contenidos
 
 .. toctree::
     :maxdepth: 3
-    :caption: Utility Classes
+    :caption: Clases de utilidad
 
     core-libraries/app
     core-libraries/collections
@@ -82,7 +82,7 @@ Contenidos
 
 .. toctree::
     :maxdepth: 3
-    :caption: Other
+    :caption: Otros
 
     core-libraries/global-constants-and-functions
     appendices

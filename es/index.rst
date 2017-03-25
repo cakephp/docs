@@ -1,54 +1,54 @@
 Bienvenido
 ##########
 
-El manual de CakePHP es un proyecto de documentación abierto, editable y
-mantenido por la comunidad. Toma en cuenta el botón de "Improve this doc"
-en la parte superior derecha; te llevará al editor online de Github de la
-página activa, esto te permitirá contribuir con correcciones y extensiones
-a la documentación actual.
+CakePHP 3 es un ``framework`` de desarrollo web que funciona con **PHP 7.1** 
+(min. PHP |minphpversion|). Puedes leer :doc:`CakePHP de un Vistazo </intro>`
+para introducirte en los fundamentos de CakePHP 3.
+
+El manual de CakePHP (``Cookbook``) es un proyecto de documentación abierto, 
+editable y mantenido por la comunidad. Fíjate en el icono del lápiz anclado en
+en el lado derecho de la página; te llevará al editor online de GitHub de la
+página en la que estés permitiéndote contribuir con cualquier añadido, borrado
+o corrección de la documentación.
 
 .. container:: offline-download
 
     **Lee el libro donde sea**
 
     .. image:: /_static/img/read-the-book.jpg
-
-    Disfruta el manual donde quieras. Disponible tanto en PDF como en
-    EPUB, puedes leerlo offline y en muchos dispositivos.
+    
+    Disfruta del manual de CakePHP en cualquier sitio. Disponible tanto en PDF 
+    como en EPUB, puedes leerlo en más dispositivos y de manera offline.
 
     - `PDF <../_downloads/es/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/es/CakePHPCookbook.epub>`_
-    - `Código Fuente <http://github.com/cakephp/docs>`_
+    - `Original Source <http://github.com/cakephp/docs>`_
 
+Obtener ayuda
+=============
 
-Empezando con CakePHP
-=====================
-
-Aprender un nuevo framework puede ser intimidante y divertido al mismo tiempo.
-Para ayudarte hemos creado un recetario lleno de ejemplos y recetas que te
-van a ayudar a realizar tareas básicas. Si eres nuevo, es recomendado que comiences
-con el :doc:`/tutorials-and-examples/blog/blog` porque te dará un tour inicial
-de CakePHP, cómo funciona y lo que puede hacer por ti.
-
-Después de terminar el Tutorial del Blog, puedes conocer mejor los elementos claves
-que conforman una aplicación de CakePHP:
-
-* The :ref:`CakePHP request cycle <request-cycle>`.
-* Las :doc:`Convenciones </intro/conventions>` utilizadas por CakePHP.
-* Los :doc:`Controladores </controllers>` que manejan los http requests, coordinan los modelos
-  y generan las respuestas que la aplicación necesita.
-* Las :doc:`Vistas </views>` son la capa de presentación de tu aplicación. Proveen
-  herramientas poderosas para generar HTML, JSON y cualquier otra salida que tu
-  aplicación necesite.
-* Los :doc:`Modelos </orm>` son el ingrediente clave de tu aplicación. Los modelos manejan
-  la validación y lógica interna de una aplicación.
-
-Getting Help
-============
-
-Si te atascas, hay muchos sitios en los que :doc:`puedes obtener ayuda
+Si estás atascado hay varios lugares de :doc:`donde obtener ayuda
 </intro/where-to-get-help>`.
+
+Primeros pasos
+==============
+
+Aprender un nuevo framework puede ser intimidante y excitante al mismo tiempo. 
+Para ayudarte hemos creado un libro de recetas lleno de ejemplos y recetas 
+para completar las tareas habituales. Si eres nuevo deberías comenzar con la 
+:doc:`/guía de inicio rápido` que te ofrecerá un tour por lo que ofrece CakePHP
+y como funciona.
+
+Después de finalizar el tutorial Bookmarker (Favoritos), puedes conocer mejor los 
+elementos claves en una aplicación de CakePHP:
+
+* El :ref:`ciclo de vida de una petición CakePHP <request-cycle>`
+* Las :doc:`convenciones <intro/conventions>` que utiliza CakePHP.
+* Los :doc:`controladores </controllers>` que manejan solicitudes y coordinan  tus modelos y las respuestas que tu aplicación crea.
+* Las :doc:`vistas </views>` de la capa de presentación de tu aplicación, que te dan herramientas poderosas para crear HTML, JSON y otras salidas que tu aplicación necesite.
+* Los :doc:`modelos </orm>`, que son el ingrediente clave en cualquier aplicación. Manejan la validación y la lógica de dominio dentro de tu aplicación.
 
 
 .. meta::
-    :title lang=es: .. fichero maestro del manual de CakePHP
+    :title lang=es: .. CakePHP Cookbook archivo de documentación, creado por
+    :keywords lang=es: documento modelos,master documentación,capa presentación,proyecto documentación,guia de inicio rápido,fuente original,sphinx,liking,cookbook,validez,convenciones,validación,cakephp,exactitud,almacenaje y recuperación,corazón,blog
