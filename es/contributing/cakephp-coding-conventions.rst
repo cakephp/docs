@@ -8,7 +8,7 @@ de codificación.
 Es recomendable que otos *CakeIngredients* que se desarrollen sigan los mismos
 estándares.
 
-Puedes utilizar el `*CakePHP Code Sniffer* <https://github.com/cakephp/cakephp-codesniffer>`_ 
+Puedes utilizar el `CakePHP Code Sniffer <https://github.com/cakephp/cakephp-codesniffer>`_ 
 para comprobar que tu código siga los estándares requeridos.
 
 Añadir nuevas funcionalidades
