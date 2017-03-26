@@ -46,16 +46,15 @@ utilize one. CakePHP supports a variety of database storage engines:
 Installing CakePHP
 ==================
 
-Before starting you should make sure that you have got an up to date PHP
-version:
+Before starting you should make sure that your PHP version is up to date:
 
 .. code-block:: bash
 
     php -v
 
-You should at least have got installed PHP |minphpversion| (CLI) or higher.
-Your webserver's PHP version must also be of |minphpversion| or higher, and should best be
-the same version your command line interface (CLI) PHP version is of.
+You should have PHP |minphpversion| (CLI) or higher.
+Your webserver's PHP version must also be of |minphpversion| or higher, and should be
+the same version your command line interface (CLI) uses.
 
 Installing Composer
 -------------------
@@ -83,8 +82,8 @@ as the officially supported method for installation.
 Create a CakePHP Project
 ------------------------
 
-Now that you've downloaded and installed Composer, let's say you want to create
-a new CakePHP application into my_app_name folder. For this just run the
+Now that you've downloaded and installed Composer, create a new
+CakePHP application into my_app_name folder. For this just run the
 following composer command:
 
 .. code-block:: bash
@@ -126,7 +125,7 @@ Each time you run ``php composer.phar update`` you will receive bugfix
 releases for this minor version. You can instead change this to ``~3.4`` to
 also receive the latest stable releases of the ``3.x`` branch.
 
-If you want to keep current with the latest unreleased changes in CakePHP
+If you want to stay up to date with the latest unreleased changes in CakePHP,
 designate **dev-master** as the package version in your application's
 **composer.json**::
 
@@ -134,31 +133,31 @@ designate **dev-master** as the package version in your application's
         "cakephp/cakephp": "dev-master"
     }
 
-Be aware that is not recommended, as your application can break when the next major
-version is being released. Additionally composer does not cache development
+Be aware that this is not recommended, as your application can break when the next major
+version is released. Additionally, composer does not cache development
 branches, so it slows down consecutive composer installs/updates.
 
 Installation using Oven
 -----------------------
 
-Another quick way to install CakePHP is `Oven <https://github.com/CakeDC/oven>`_. 
+Another quick way to install CakePHP is `Oven <https://github.com/CakeDC/oven>`_.
 It is a simple PHP script which checks the necessary system requirements,
-installs the CakePHP application skeleton and sets the development environment up.
+installs the CakePHP application skeleton, and sets up the development environment.
 
 After the installation completes, your CakePHP application is ready to go!
 
 .. note::
 
-    IMPORTANT: This is not a deployment script, it is aimed to help developers installing
-    CakePHP for the first time and get a working development environment up and running 
-    in seconds. Production environments should consider several other factors, like 
-    file permissions, virtualhost configuration, etc.
+    IMPORTANT: This is not a deployment script. It is aimed to help developers install
+    CakePHP for the first time and set up a development environment quickly. Production
+    environments should consider several other factors, like file permissions,
+    virtualhost configuration, etc.
 
 Permissions
 ===========
 
 CakePHP uses the **tmp** directory for a number of different operations.
-Model descriptions, cached views, and session information are just a few
+Model descriptions, cached views, and session information are a few
 examples. The **logs** directory is used to write log files by the default
 ``FileLog`` engine.
 
@@ -184,7 +183,7 @@ project to ensure that permissions will be setup properly:
 
 In order to use the CakePHP console tools, you need to ensure that
 ``bin/cake`` file is executable. On \*nix or macOS, you can
-execute: 
+execute:
 
 .. code-block:: bash
 
@@ -205,9 +204,9 @@ file, you can run the CakePHP console with:
 Development Server
 ==================
 
-A development installation is the fastest method to setup CakePHP. In this
-example, we will be using CakePHP's console to run PHP's built-in web server
-which will make your application available at **http://host:port**. From the app
+A development installation is the fastest way to setup CakePHP. In this
+example, we use CakePHP's console to run PHP's built-in web server which
+will make your application available at **http://host:port**. From the app
 directory, execute:
 
 .. code-block:: bash
@@ -217,7 +216,7 @@ directory, execute:
 By default, without any arguments provided, this will serve your application at
 **http://localhost:8765/**.
 
-If you have something conflicting with **localhost** or port 8765, you can tell
+If there is conflict with **localhost** or port 8765, you can tell
 the CakePHP console to run the web server on a specific host and/or port
 utilizing the following arguments:
 
@@ -395,7 +394,7 @@ further information.
    `virtualhostx <http://clickontyler.com/virtualhostx/>`_ to make a Virtual
    Host to point to your folder.
 
-   For many hosting services (GoDaddy, 1and1), your web server is actually being
+   For many hosting services (GoDaddy, 1and1), your web server is being
    served from a user directory that already uses mod\_rewrite. If you are
    installing CakePHP into a user directory
    (http://example.com/~username/cakephp/), or any other URL structure that
@@ -432,7 +431,7 @@ further information.
            RewriteRule ^ index.php [L]
        </IfModule>
 
-   The above will simply prevent incorrect assets from being sent to index.php
+   The above will prevent incorrect assets from being sent to index.php
    and instead display your web server's 404 page.
 
    Additionally you can create a matching HTML 404 page, or use the default
@@ -448,7 +447,7 @@ nginx
 nginx does not make use of .htaccess files like Apache, so it is necessary to
 create those rewritten URLs in the site-available configuration. This is usually
 found in ``/etc/nginx/sites-available/your_virtual_host_conf_file``. Depending
-upon your setup, you will have to modify this, but at the very least, you will
+on your setup, you will have to modify this, but at the very least, you will
 need PHP running as a FastCGI instance:
 
 .. code-block:: nginx
@@ -570,8 +569,8 @@ CakePHP's links, CSS, JavaScript, and rerouting should work correctly.
 I Can't Use URL Rewriting
 -------------------------
 
-If you don't want or can't get mod\_rewrite (or some other compatible module) up
-and running on your server, you'll need to use CakePHP's built in pretty URLs.
+If you don't want or can't get mod\_rewrite (or some other compatible module)
+running on your server, you will need to use CakePHP's built in pretty URLs.
 In **config/app.php**, uncomment the line that looks like::
 
     'App' => [
