@@ -2584,7 +2584,7 @@ specific fields from the generated controls, set them to ``false`` in the
 
     echo $this->Form->allControls(['password' => false]);
     // Or prior to 3.4.0:
-    echo $this->Form->allControls(['password' => false]);
+    echo $this->Form->allInputs(['password' => false]);
 
 .. _associated-form-inputs:
 
