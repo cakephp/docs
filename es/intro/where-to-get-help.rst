@@ -2,7 +2,7 @@ Donde obtener ayuda
 ###################
 
 La página oficial de CakePHP
-=============================
+============================
 
 `https://cakephp.org <https://cakephp.org>`_
 
@@ -118,12 +118,12 @@ Iraní
 - `Comunidad iraní de CakePHP <http://cakephp.ir>`_
 
 Holandés
------
+--------
 
 - `Canal holandés de CakePHP en Slack <https://cakesf.slack.com/messages/netherlands/>`_
 
 Japonés
---------
+-------
 
 - `Canal japonés de CakePHP en Slack <https://cakesf.slack.com/messages/japanese/>`_
 - `Grupo japonés de CakePHP en Facebook <https://www.facebook.com/groups/304490963004377/>`_
