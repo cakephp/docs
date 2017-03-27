@@ -203,3 +203,51 @@ Object
 :php:trait:`Cake\\Log\\LogTrait` для получения доступа к методу ``log()``.
 Трейт :php:trait:`Cake\\Routing\\RequestActionTrait` предоставляет
 ``requestAction()``.
+
+Консоль
+=======
+
+Исполняемый файл ``cake``был перемещен из папки **app/Console** в папку **bin**
+вместе со всей структурой приложения. Теперь вы можете вызывать консоль CakePHP
+как ``bin/cake``.
+
+Заменен класс TaskCollection
+----------------------------
+
+Этот класс был переименован в :php:class:`Cake\\Console\\TaskRegistry`.
+Смотрите раздел :doc:`/core-libraries/registry-objects` для получения
+более полной информации о возможностях данного класса. Вы можете использовать
+``cake upgrade rename_collections`` для помощи в обновлении вашего кода.
+This class has been renamed to :php:class:`Cake\\Console\\TaskRegistry`.
+Задачи больше не имеют доступа к функциям обратного вызова, поскольку никогда
+не было таких функций, которые могли бы вызываться подобным образом.
+
+Оболочка (Shell)
+----------------
+
+- ``Shell::__construct()`` изменен. Теперь он берет экземпляр класса
+  :php:class:`Cake\\Console\\ConsoleIo`.
+- Добавлен метод ``Shell::param()`` для более удобного доступа к параметрам.
+
+В дополнение к этому все методы оболочки преобразованы для удобства к 
+верблюжьему регистру при их вызове. Например, если у вас внутри оболочки был
+метод ``hello_world()`` и он вызывался как ``bin/cake my_shell hello_world``,
+вам будет нужно переименовать метод в ``helloWorld``. При вызове команд
+никаких изменений не потребуется.
+
+ConsoleOptionParser
+-------------------
+
+- Добавлен метод ``ConsoleOptionParser::merge()`` для объединения парсеров.
+
+ConsoleInputArgument
+--------------------
+
+- Добавлен метод ``ConsoleInputArgument::isEqualTo()`` для сравнения двух
+  аргументов.
+  
+Shell / Task
+============
+
+Оболочки и задачи перемещены из ``Console/Command`` и 
+``Console/Command/Task`` в ``Shell`` и ``Shell/Task``.
