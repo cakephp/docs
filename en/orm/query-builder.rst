@@ -1357,7 +1357,8 @@ Subqueries are a powerful feature in relational databases and building them in
 CakePHP is fairly intuitive. By composing queries together, you can make
 subqueries::
 
-    $matchingComment = $articles->association('Comments')->find()
+    $matchingComment = $articles->association()->get('Comments')
+        ->find()
         ->select(['article_id'])
         ->distinct()
         ->where(['comment LIKE' => '%CakePHP%']);
