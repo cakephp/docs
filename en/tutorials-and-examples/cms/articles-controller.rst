@@ -16,7 +16,7 @@ Here's what the basic controller should look like::
     }
 
 Now, let's add an action to our controller. Actions are controller methods that
-are have routes connected to them. For example, when a user requests
+have routes connected to them. For example, when a user requests
 www.example.com/articles/index (which is also the same as
 www.example.com/articles), CakePHP will call the ``index`` method of your
 ``ArticlesController``. This method should query the model layer, and prepare
@@ -64,10 +64,10 @@ view context, let's create a view template for our index action.
 
 CakePHP view templates are presentation-flavored PHP code that is inserted inside
 the application's layout. While we'll be creating HTML here, Views can also
-generated JSON, CSV or even binary files like PDFs.
+generate JSON, CSV or even binary files like PDFs.
 
 A layout is presentation code that is wrapped around a view. Layout files
-contain common site elements like headers, footers and navigation elements. You
+contain common site elements like headers, footers and navigation elements. Your
 application can have multiple layouts, and you can switch between them, but for
 now, let's just use the default.
 
@@ -107,7 +107,7 @@ local variables which we used in the above code.
 
 You might have noticed the use of an object called ``$this->Html``.  This is an
 instance of the CakePHP :doc:`HtmlHelper </views/helpers/html>`.  CakePHP comes
-with a set of view helpers that make tasks like creating links, form , and
+with a set of view helpers that make tasks like creating links, form, and
 pagination buttons easy. You can learn more about :doc:`/views/helpers` in their
 chapter, but what's important to note here is that the ``link()`` method will
 generate an HTML link with the given link text (the first parameter) and URL
