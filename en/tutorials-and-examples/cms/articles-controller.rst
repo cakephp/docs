@@ -69,7 +69,7 @@ generate JSON, CSV or even binary files like PDFs.
 A layout is presentation code that is wrapped around a view. Layout files
 contain common site elements like headers, footers and navigation elements. Your
 application can have multiple layouts, and you can switch between them, but for
-now, let's just use the default.
+now, let's just use the default layout.
 
 CakePHP's template files are stored in **src/Template** inside a folder
 named after the controller they correspond to (we'll have to create
