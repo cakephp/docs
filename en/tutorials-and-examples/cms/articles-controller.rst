@@ -20,8 +20,8 @@ have routes connected to them. For example, when a user requests
 **www.example.com/articles/index** (which is also the same as
 **www.example.com/articles**), CakePHP will call the ``index`` method of your
 ``ArticlesController``. This method should query the model layer, and prepare
-a response (via the View and Template). The code for that action would look like
-this::
+a response by rendering a Template in the View. The code for that action would
+look like this::
 
     // src/Controller/ArticlesController.php
 
@@ -38,22 +38,19 @@ this::
     }
 
 By defining function ``index()`` in our ``ArticlesController``, users can now
-access the logic there by requesting **www.example.com/articles/index**. Similarly,
-if we were to define a function called ``foobar()``, users would be able to
-access that at **www.example.com/articles/foobar**.
-
-.. warning::
-
-    You may be tempted to name your controllers and actions in a way that allows
-    you to obtain specific URLs. Resist that temptation. Instead, follow the
-    :doc:`/intro/conventions` creating readable, meaningful action names. You
-    can then use doc:`/development/routing` to connect the URLs you want to the
-    actions you've created.
+access the logic there by requesting **www.example.com/articles/index**.
+Similarly, if we were to define a function called ``foobar()``, users would be
+able to access that at **www.example.com/articles/foobar**. You may be tempted
+to name your controllers and actions in a way that allows you to obtain specific
+URLs. Resist that temptation. Instead, follow the :doc:`/intro/conventions`
+creating readable, meaningful action names. You can then use
+doc:`/development/routing` to connect the URLs you want to the actions you've
+created.
 
 Our controller action is very simple. It fetches all the articles from the
-database, using the model that is automatically loaded via naming conventions.
-It then uses ``set()`` to pass the articles into the view (which we'll create
-soon). CakePHP will automatically render the view after our controller action
+database, using the Model that is automatically loaded via naming conventions.
+It then uses ``set()`` to pass the articles into the View (which we'll create
+soon). CakePHP will automatically render the View after our controller action
 completes.
 
 Adding the Article List View Template
@@ -114,7 +111,7 @@ generate an HTML link with the given link text (the first parameter) and URL
 (the second parameter).
 
 When specifying URLs in CakePHP, it is recommended that you use arrays or
-:ref:`named routes <named-routes>`. Using these forms for URLs allows you to
+:ref:`named routes <named-routes>`. These syntaxes allow you to
 leverage the reverse routing features CakePHP offers.
 
 At this point, you should be able to point your browser to
