@@ -72,8 +72,8 @@ application can have multiple layouts, and you can switch between them, but for
 now, let's just use the default layout.
 
 CakePHP's template files are stored in **src/Template** inside a folder
-named after the controller they correspond to (we'll have to create
-a folder named 'Articles' in this case). Add the following code to your
+named after the controller they correspond to. So we'll have to create
+a folder named 'Articles' in this case. Add the following code to your
 application:
 
 .. code-block:: php
