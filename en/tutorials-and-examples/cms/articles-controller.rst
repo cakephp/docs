@@ -118,7 +118,7 @@ When specifying URLs in CakePHP, it is recommended that you use arrays or
 leverage the reverse routing features CakePHP offers.
 
 At this point, you should be able to point your browser to
-**http://localhost:8765/articles/index**. You should see your view,
+**http://localhost:8765/articles/index**. You should see your list view,
 correctly formatted with the title and table listing of the articles.
 
 Create the View Action
