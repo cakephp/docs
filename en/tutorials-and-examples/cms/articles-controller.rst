@@ -107,7 +107,7 @@ local variables which we used in the above code.
 
 You might have noticed the use of an object called ``$this->Html``.  This is an
 instance of the CakePHP :doc:`HtmlHelper </views/helpers/html>`.  CakePHP comes
-with a set of view helpers that make tasks like creating links, form, and
+with a set of view helpers that make tasks like creating links, forms, and
 pagination buttons easy. You can learn more about :doc:`/views/helpers` in their
 chapter, but what's important to note here is that the ``link()`` method will
 generate an HTML link with the given link text (the first parameter) and URL
