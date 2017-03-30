@@ -57,6 +57,10 @@ behavior that may affect your application:
   by passing an empty string. Previously this would have required custom
   marshalling logic, without that it would have only been possible to remove all
   but one record, as form data cannot be used to describe empty arrays.
+* ``Http\Client`` no longer uses the ``cookie()`` method results when building
+  requests. Instead the ``Cookie`` header and internal CookieCollection are
+  used. This should only effect applications that have a custom HTTP adapter in
+  their clients.
 
 New Features
 ============
