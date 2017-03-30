@@ -805,7 +805,7 @@ Knowing the depth of tree nodes can be useful when you want to retrieve nodes
 only upto a certain level for e.g. when generating menus. You can use the
 ``level`` option to specify the field that will save level of each node::
 
-    public $actAs = array('Tree' => array(
+    public $actsAs = array('Tree' => array(
         'level' => 'level', // Defaults to null, i.e. no level saving
     ));
 
