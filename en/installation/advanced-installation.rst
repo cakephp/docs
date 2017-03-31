@@ -113,6 +113,17 @@ changing ``CAKE_CORE_INCLUDE_PATH`` to be a relative path::
     If you are planning to create unit tests for your application you'll also
     need to make the above change to ``webroot/test.php``
 
+If you are planning to use ``cake`` CLI command, you’ll also need to change the
+``include_path`` in ``Console/cake.php``::
+
+    $root = dirname(dirname(dirname(__FILE__)));
+    ini_set(
+        'include_path',
+        $root . PATH_SEPARATOR .  $root . $ds
+        . 'Vendor' . $ds . 'cakephp' . $ds . 'cakephp' . $ds . 'lib'
+        . PATH_SEPARATOR . ini_get('include_path')
+    );
+
 If you're installing any other libraries with Composer, you'll need to setup
 the autoloader, and work around an issue in Composer's autoloader. In your
 ``Config/bootstrap.php`` file add the following::
