@@ -271,12 +271,12 @@ Utiliser les Middleware HTTP dans une application existante nécessite quelques
 modification dans celle-ci.
 
 #. Premièrement, mettez à jour votre **webroot/index.php**. Copiez le contenu
-du fichier depuis le `squelette d'application
-<https://github.com/cakephp/app/tree/master/webroot/index.php>`__.
+   du fichier depuis le `squelette d'application
+   <https://github.com/cakephp/app/tree/master/webroot/index.php>`__.
 #. Puis, créez une classe ``Application```. Reportez-vous à la section précédente
-:ref:`using-middleware` pour plus de précisions. Ou copiez l'exemple dans le
-`squelette d'application
-<https://github.com/cakephp/app/tree/master/src/Application.php>`__.
+   :ref:`using-middleware` pour plus de précisions. Ou copiez l'exemple dans le
+   `squelette d'application
+   <https://github.com/cakephp/app/tree/master/src/Application.php>`__.
 
 Lorsque ces deux étapes sont complétées, vous êtes prêts à réimplémenter tous
 les dispatch filters de votre application/plugins en tant que middleware HTTP.
