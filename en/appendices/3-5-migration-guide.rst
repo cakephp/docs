@@ -10,6 +10,9 @@ Deprecations
 The following is a list of deprecated methods, properties and behaviors. These
 features will continue to function until 4.0.0 after which they will be removed.
 
+* ``Cake\Http\Client\CookieCollection`` is deprecated. Use
+  ``Cake\Http\Cookie\CookieCollection`` instead.
+
 Deprecated Combined Get/Set Methods
 -----------------------------------
 
@@ -38,6 +41,7 @@ The following is a list of methods that are deprecated and replaced with
     * ``templatePath()``
     * ``layoutPath()``
     * ``autoLayout()`` (now ``isAutoLayoutEnabled()`` / ``enableAutoLayout()``)
+
 
 Behavior Changes
 ================
@@ -79,3 +83,6 @@ New Features
   Existing ``SMALLINT`` and ``TINYINT`` columns will now be reflected as these
   new abstract types. ``TINYINT(1)`` columns will continue to be treated as
   boolean columns in MySQL.
+* ``Http\Client\Response`` allow access to the response's cookie collection
+  through its ``getCookieCollection()`` method. Cookie collections provide an
+  object-oriented way to interact with HTTP cookies.
