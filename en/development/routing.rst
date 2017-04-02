@@ -149,7 +149,7 @@ tell CakePHP what to do with a request once it has been matched. The second
 parameter is an associative array. The keys of the array should be named after
 the route elements the URL template represents. The values in the array are the
 default values for those keys.  Let's look at some basic examples before we
-start using the third parameter of connect()::
+start using the third parameter of ``connect()``::
 
     $routes->connect(
         '/pages/*',
@@ -237,7 +237,7 @@ route elements: ``:controller`` and ``:id``. The ``:controller`` element
 is a CakePHP default route element, so the router knows how to match and
 identify controller names in URLs. The ``:id`` element is a custom
 route element, and must be further clarified by specifying a
-matching regular expression in the third parameter of connect().
+matching regular expression in the third parameter of ``connect()``.
 
 CakePHP does not automatically produce lowercased and dashed URLs when using the
 ``:controller`` parameter. If you need this, the above example could be
@@ -262,8 +262,8 @@ If you need lowercased and underscored URLs while migrating from a CakePHP
     Patterns used for route elements must not contain any capturing
     groups. If they do, Router will not function correctly.
 
-Once this route has been defined, requesting ``/apples/5`` would call the view()
-method of the ApplesController. Inside the view() method, you would need to
+Once this route has been defined, requesting ``/apples/5`` would call the ``view()``
+method of the ApplesController. Inside the ``view()`` method, you would need to
 access the passed ID at ``$this->request->getParam('id')``.
 
 If you have a single controller in your application and you do not want the
@@ -300,7 +300,7 @@ has four route elements. The first is familiar to us: it's a default route
 element that tells CakePHP to expect a controller name.
 
 Next, we specify some default values. Regardless of the controller,
-we want the index() action to be called.
+we want the ``index()`` action to be called.
 
 Finally, we specify some regular expressions that will match years,
 months and days in numerical form. Note that parenthesis (grouping)
@@ -309,7 +309,7 @@ alternates, as above, but not grouped with parenthesis.
 
 Once defined, this route will match ``/articles/2007/02/01``,
 ``/articles/2004/11/16``, handing the requests to
-the index() actions of their respective controllers, with the date
+the ``index()`` actions of their respective controllers, with the date
 parameters in ``$this->request->getParam()``.
 
 There are several route elements that have special meaning in

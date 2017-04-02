@@ -1,5 +1,5 @@
-Views
-#####
+Vistas
+######
 
 .. php:namespace:: Cake\View
 
@@ -14,12 +14,23 @@ Views
     Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
     para obtener información sobre el tema de esta página.
 
+.. _view-templates:
+
+Plantillas de vistas
+====================
+
 .. _view-layouts:
+
+Layouts
+=======
 
 .. _view-elements:
 
-More About Views
-================
+Elementos
+=========
+
+Más acerca de Vistas
+====================
 
 .. toctree::
     :maxdepth: 1

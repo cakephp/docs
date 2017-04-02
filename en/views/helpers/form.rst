@@ -702,7 +702,7 @@ as follows:
   .. note::
 
       You cannot use ``default`` to check a checkbox - instead you might
-      set the value in ``$this->request->data`` in your controller,
+      set the value in ``$this->request->getData()`` in your controller,
       or set the control option ``'checked'`` to ``true``.
 
       Beware of using ``false`` to assign a default value. A ``false`` value is
@@ -824,7 +824,7 @@ Will output:
 
     <textarea name="notes"></textarea>
 
-If the form is being edited (i.e. the array ``$this->request->data``
+If the form is being edited (i.e. the array ``$this->request->getData()``
 contains the information previously saved for the ``User`` entity), the value
 corresponding to ``notes`` field will automatically be added to the HTML
 generated.
@@ -943,7 +943,7 @@ methods are described in each method's own section.)
 
 * ``'hiddenField'`` - For checkboxes and radio buttons, by default,
   a hidden ``input`` element is also created, along with the main
-  element, so that the key in ``$this->request->data``
+  element, so that the key in ``$this->request->getData()``
   will exist even without a value specified. For checkboxes its value
   defaults to ``0`` and for radio buttons to ``''``.
 
@@ -1523,7 +1523,7 @@ These options are common for the date and time related controls:
   displayed as the empty element. Defaults to ``true``.
 
 * ``'default'`` | ``value`` - Use either of the two to set the default value to
-  be shown by the field. A value in ``$this->request->data`` matching the field
+  be shown by the field. A value in ``$this->request->getData()`` matching the field
   name will override this value. If no default is provided ``time()`` will
   be used.
 
@@ -2584,7 +2584,7 @@ specific fields from the generated controls, set them to ``false`` in the
 
     echo $this->Form->allControls(['password' => false]);
     // Or prior to 3.4.0:
-    echo $this->Form->allControls(['password' => false]);
+    echo $this->Form->allInputs(['password' => false]);
 
 .. _associated-form-inputs:
 

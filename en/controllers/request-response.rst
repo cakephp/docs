@@ -495,6 +495,13 @@ You can accomplish that by using :php:meth:`Cake\\Http\\Response::withFile()`::
         return $response;
     }
 
+    // Prior to 3.4.0
+    $file = $this->Attachments->getFile($id);
+    $this->response->file($file['path']);
+    // Return the response to prevent controller from trying to render
+    // a view.
+    return $this->response;
+
 As shown in the above example, you must pass the file path to the method.
 CakePHP will send a proper content type header if it's a known file type listed
 in `Cake\\Http\\Reponse::$_mimeTypes`. You can add new types prior to calling
@@ -505,6 +512,12 @@ If you want, you can also force a file to be downloaded instead of displayed in
 the browser by specifying the options::
 
     $response = $this->response->withFile(
+        $file['path'],
+        ['download' => true, 'name' => 'foo']
+    );
+
+    // Prior to 3.4.0
+    $this->response->file(
         $file['path'],
         ['download' => true, 'name' => 'foo']
     );

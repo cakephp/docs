@@ -1,47 +1,39 @@
 Middleware
 ##########
 
-.. note::
-    The documentation is not currently supported in French language for this
-    page.
+Les objets Middleware vous donnent la possibilité d'encapsuler votre application
+dans des couches modulables et réutilisables du gestionnaire de requête ou de
+logique de construction de réponses. Les Middleware font partie de la nouvelle
+pile HTTP qui influence la requête et les interfaces de réponse PSR-7. Ceci
+permet d'utiliser n'importe quel middleware compatible avec PSR-7 disponible
+sur `Packagist <https://packagist.org>`__.
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+CakePHP fournit nativement plusieurs middleware :
 
-    You can refer to the English version in the select top menu to have
-    information about this page's topic.
-
-Les objets Middleware vous donnent la possibilité de 'wrapper' votre application
-en des couches compatibles et réutilisables de gestion de Requête, ou de la
-logique de construction de réponse. Middleware sont une partie du nouveau HTTP
-stack dans qui tire parti des interfaces PSR-7 request et response. En tirant
-parti du standard PSR-7, vous pouvez utilisez tout middleware compatible avec
-PSR-7 qui se trouve sur `Packagist <https://packagist.org>`__.
-
-CakePHP fournit plusieurs middlewares:
-
-* ``Cake\Error\Middleware\ErrorHandlerMiddleware`` traps exceptions from the
-  wrapped middleware and renders an error page using the
-  :doc:`/development/errors` Exception handler.
-* ``Cake\Routing\AssetMiddleware`` checks whether the request is referring to a
-  theme or plugin asset file, such as a CSS, JavaScript or image file stored in
-  either a plugin's webroot folder or the corresponding one for a Theme.
-* ``Cake\Routing\Middleware\RoutingMiddleware`` uses the ``Router`` to parse the
-  incoming URL and assign routing parameters to the request.
-* ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` enables automatic language
-  switching from the ``Accept-Language`` header sent by the browser.
+* ``Cake\Error\Middleware\ErrorHandlerMiddleware`` capture les exceptions à
+  partir du middleware encapsulé et affiche un page d'erreur en utilisant le
+  gestionnaire d'exception :doc:`/development/errors`.
+* ``Cake\Routing\AssetMiddleware`` verifie si la requête fait référence à un
+  thème ou à un fichier ressource d'un plugin, tel que un fichier CSS,
+  JavaScript ou image enregistré soit dans le dossier racine du plugin ou celui
+  correspondant, pour un thème.
+* ``Cake\Routing\Middleware\RoutingMiddleware`` utilise le ``Router`` pour
+  analyser l'URL entrante et assigner les paramètres de routing à la requête.
+* ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` active le changement
+  automatique de langage à partir de l'en-tête ``Accept-Language`` envoyé par le
+  navigateur
 
 .. _using-middleware:
 
-Utilisation du Middleware
-=========================
+Utilisation des Middleware
+==========================
 
-You attach middleware in your ``App\Application`` class' ``middleware`` method.
-If you don't have an ``App\Application`` class, see the section on
-:ref:`adding-http-stack` for more information. Your application's ``middleware``
-hook method will be called early in the request process, you can use the
-``Middleware`` object to attach middleware::
+Les middleware sont ajoutés dans la méthode ``middleware`` dans la classe
+``App\Application``. Si la classe ``App\Application`` n'existe pas,
+reportez-vous à la section :ref:`adding-http-stack` pour plus d'informations.
+La méthode d'attache ``middleware`` de votre application sera appelée très tôt
+dans le processus de requête, vous pouvez utiliser les objets ``Middleware``
+pour en attacher ::
 
     namespace App;
 
@@ -50,189 +42,195 @@ hook method will be called early in the request process, you can use the
 
     class Application extends BaseApplication
     {
-        public function middleware($middleware)
+        public function middleware($middlewareStack)
         {
-            // Bind the error handler into the middleware queue.
-            $middleware->add(new ErrorHandlerMiddleware());
-            return $middleware;
+            // Attache le gestionnaire d'erreur dans la file du middleware
+            $middlewareStack->add(new ErrorHandlerMiddleware());
+            return $middlewareStack;
         }
     }
 
-In addition to adding to the end of the ``MiddlewareQueue`` you can do a variety
-of operations::
+En plus d'ajouter à la fin de la ``MiddlewareQueue`` vous pouvez effectuer
+différentes opérations ::
 
         $layer = new \App\Middleware\CustomMiddleware;
 
-        // Le middleware ajouté sera le dernier sur la ligne.
-        $middleware->add($layer);
+        // Le middleware sera ajouté à la fin de la file.
+        $middlewareStack->add($layer);
 
-        // Prepended middleware will be first in line.
-        $middleware->prepend($layer);
+        // Le middleware sera ajouté au début de la file
+        $middlewareStack->prepend($layer);
 
-        // Insert in a specific slot. If the slot is out of
-        // bounds, it will be added to the end.
-        $middleware->insertAt(2, $layer);
+        // Insère dans une place spécifique. Si cette dernière est
+        // hors des limites, il sera ajouté à la fin.
+        $middlewareStack->insertAt(2, $layer);
 
-        // Insert before another middleware.
-        // If the named class cannot be found,
-        // an exception will be raised.
-        $middleware->insertBefore(
+        // Insère avant un autre middleware.
+        // Si la classe nommée ne peut pas être trouvée,
+        // une exception sera renvoyée.
+        $middlewareStack->insertBefore(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
 
-        // Insert after another middleware.
-        // If the named class cannot be found, the
-        // middleware will added to the end.
-        $middleware->insertAfter(
+        // Insère après un autre middleware.
+        // Si la classe nommée ne peut pas être trouvée,
+        // le middleware sera ajouté à la fin.
+        $middlewareStack->insertAfter(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
 
-Ajouter un Middleware à partir des Plugins
-------------------------------------------
+Ajout de Middleware à partir de Plugins
+---------------------------------------
 
-After the middleware queue has been prepared by the application, the
-``Server.buildMiddleware`` event is triggered. This event can be useful to add
-middleware from plugins. Plugins can register listeners in their bootstrap
-scripts, that add middleware::
+Après que la file de middleware ait été préparée par l'application, l'évènement
+``Server.buildMiddleware`` est déclenché. Ce dernier peut être utile pour
+ajouter un middleware depuis un plugin. Les plugins peuvent enregistrer des
+écouteurs (listeners) dans leurs scripts bootstrap, qui ajoutent
+un middleware ::
 
-    // In ContactManager plugin bootstrap.php
+    // Dans le bootstrap.php du plugin ContactManager
     use Cake\Event\EventManager;
 
     EventManager::instance()->on(
         'Server.buildMiddleware',
-        function ($event, $middleware) {
-            $middleware->add(new ContactPluginMiddleware());
+        function ($event, $middlewareStack) {
+            $middlewareStack->add(new ContactPluginMiddleware());
         });
 
 Requêtes et Réponses PSR-7
 ==========================
 
-Middleware and the new HTTP stack are built on top of the `PSR-7 Request
-& Response Interfaces <http://www.php-fig.org/psr/psr-7/>`__. While all
-middleware will be exposed to these interfaces, your controllers, components,
-and views will *not*.
+Les Middleware et la nouvelle pile HTTP sont construits sur les `Interfaces
+de Requête et Réponse PSR-7 <http://www.php-fig.org/psr/psr-7/>`__. Alors
+que les middleware sont exposés à ces interfaces, vos controlleurs,
+composants, et vues *ne le seront pas*.
 
 Interagir avec les Requêtes
 ---------------------------
 
-The ``RequestInterface`` provides methods for interacting with the headers,
-method, URI, and body of a request. To interact with the headers, you can::
+``RequestInterface`` fournit des méthodes pour interagir avec les en-tête,
+méthodes, URI, et corps de la requête. Pour cela, vous pouvez::
 
-    // Read a header as text
+    // Lire l'en-tête en tant que texte
     $value = $request->getHeaderLine(‘Content-Type’);
 
-    // Read header as an array
+    // Lire l'en-tête en tant que tableau
     $value = $request->getHeader(‘Content-Type’);
 
-    // Read all the headers as an associative array.
+    // Lire l'ensemble des en-têtes en tant que tableau associatif.
     $headers = $request->getHeaders();
 
-Requests also give access to the cookies and uploaded files they contain::
+Les requêtes donnent aussi accès aux cookies et aux fichiers envoyés qu'elles
+contiennent ::
 
-    // Get an array of cookie values.
+    // Récupérer un tableau des valeurs des cookies.
     $cookies = $request->getCookieParams();
 
-    // Get a list of UploadedFile objects
+    // Récupérer une liste des objets UploadedFile.
     $files = $request->getUploadedFiles();
 
-    // Read the file data.
+    // Lire les données du fichier.
     $files[0]->getStream();
     $files[0]->getSize();
     $files[0]->getClientFileName();
 
-    // Move the file.
+    // Déplacer le fichier.
     $files[0]->moveTo($targetPath);
 
-Requests contain a URI object, which contains methods for interacting with the
-requested URI::
+Les requêtes contiennent un objet URI, qui contient des méthodes pour interagir
+avec l'URI demandé ::
 
-    // Get the URI
+    // Récupérer l'URI
     $uri = $request->getUri();
 
-    // Read data out of the URI.
+    // Lire les données de l'URI.
     $path = $uri->getPath();
     $query = $uri->getQuery();
     $host = $uri->getHost();
 
-Lastly, you can interact with a request's 'attributes'. CakePHP uses these
-attributes to carry framework specific request parameters. There are a few
-important attributes in any request handled by CakePHP:
+Enfin, vous pouvez interagir avec les 'attributs' d'une requête. CakePHP
+les attributs pour transporter des paramètres spécifiques de requête du
+framework. Il y a certains attributs important dans n'importe qu'elle requête
+gérée par CakePHP :
 
-* ``base`` contains the base directory for your application if there is one.
-* ``webroot`` contains the webroot directory for your application.
-* ``params`` contains the results of route matching once routing rules have been
-  processed.
-* ``session`` contains an instance of CakePHP's ``Session`` object. See
-  :ref:`accessing-session-object` for more information on how to use the session
-  object.
+* ``base`` contient le répertoire de base de votre application s'il existe.
+* ``webroot`` contient le répertoire webroot de votre application.
+* ``params`` contient les résultats de correspondance de route (route marching)
+  une fois que les règles de routing ont été exécutées.
+* ``session`` contient une instance de l'objet ``Session`` de CakePHP.
+  Reportez-vous à :ref:`accessing-session-object` pour plus d'information sur
+  l'utilisation de l'objet session.
+
 
 Interagir avec les Réponses
 ---------------------------
 
-The methods available to create a server response are the same as those
-available when interacting with :ref:`httpclient-response-objects`. While the
-interface is the same the usage scenarios are different.
+Les méthodes disponible pour créer une réponse du serveur sont les même que
+celles pour interagir avec :ref:`httpclient-response-objects`. Bien que
+l'interface soit la même, leurs contextes d'utilisation sont différents.
 
-When modifying the response, it is important to remember that responses are
-**immutable**. You must always remember to store the results of any setter
-method. For example::
+Quand vous modifier la réponse, il est important de soulever que les
+réponses sont **immuable**. Vous devez toujours penser à conserver les
+résultats de n'importe quelle methode setter. Par exemple ::
 
-    // This does *not* modify $response. The new object was not
-    // assigned to a variable.
+    // Ceci *ne modifie pas* $response. Le nouvel objet n'a pas été
+    // assigné à une variable.
     $response->withHeader('Content-Type', 'application/json');
 
-    // This works!
+    // Utilisation correcte :
     $newResponse = $response->withHeader('Content-Type', 'application/json');
 
-Most often you'll be setting headers and response bodies on requests::
+Le plus souvent vous assignerez les en-têtes et corps de reponse sur les
+requêtes ::
 
-    // Assign headers and a status code
+    // Assigne les en-têtes et un status code
     $response = $response->withHeader('Content-Type', 'application/json')
         ->withHeader('Pragma', 'no-cache')
         ->withStatus(422);
 
-    // Write to the body
+    // Modifier le corps
     $body = $response->getBody();
     $body->write(json_encode(['errno' => $errorCode]));
 
 Créer un Middleware
 ===================
 
-Middleware can either be implemented as anonymous functions (Closures), or as
-invokable classes. While Closures are suitable for smaller tasks they make
-testing harder, and can create a complicated ``Application`` class. Middleware
-classes in CakePHP have a few conventions:
+Un Middleware peut soit être implémenté en tant que fonctions anonymes
+(Closures), soit en tant que classes appelables. Tandis que les Closures sont
+adaptées pour les petites tâches elles rendent les tests plus complexes, et
+peuvent créer une classe ``Application`` complexe. Les classes Middleware dans
+CakePhp ont quelques conventions :
 
-* Middleware class files should be put in **src/Middleware**. For example:
-  **src/Middleware/CorsMiddleware.php**
-* Middleware classes should be suffixed with ``Middleware``. For example:
+* Les fichiers de classe Middleware doivent être placés dans
+  **src/Middleware**. Par exemple : **src/Middleware/CorsMiddleware.php**
+* Les classes Middleware doivent avoir ``Middleware`` en suffixe. Par exemple :
   ``LinkMiddleware``.
-* Middleware are expected to implement the middleware protocol.
+* Les Middleware requièrent l'implémentation du protocole middleware.
 
-While not a formal interface (yet), Middleware do have a soft-interface or
-'protocol'. The protocol is as follows:
+Bien que pas (encore) une interface formelle, Middleware a une soft-interface
+ou 'protocole'. Ce dernier est tel que : 
 
-#. Middleware must implement ``__invoke($request, $response, $next)``.
-#. Middleware must return an object implementing the PSR-7 ``ResponseInterface``.
+#. Middleware doit implémenter ``__invoke($request, $response, $next)``.
+#. Middleware doit rendre un objet implémentant la ``ResponseInterface`` PSR-7.
 
-Middleware can return a response either by calling ``$next`` or by creating
-their own response. We can see both options in our simple middleware::
+Middleware peut rendre une réponse soit en appelant ``$next`` ou en  créant
+sa propre réponse. Nous pouvons observer les deux options dans ce middleware ::
 
-    // In src/Middleware/TrackingCookieMiddleware.php
+    // Dans src/Middleware/TrackingCookieMiddleware.php
     namespace App\Middleware;
 
     class TrackingCookieMiddleware
     {
         public function __invoke($request, $response, $next)
         {
-            // Calling $next() delegates control to the *next* middleware
-            // In your application's queue.
+            // Appeler $next() délégue le controle au middleware *suivant*
+            // dans la file de l'application.
             $response = $next($request, $response);
 
-            // When modifying the response, you should do it
-            // *after* calling next.
+            // Lors d'une modification de la réponse, vous devriez le faire
+            // *après* avoir appeler next.
             if (!$request->getCookie('landing_page')) {
                 $response->cookie([
                     'name' => 'landing_page',
@@ -244,48 +242,51 @@ their own response. We can see both options in our simple middleware::
         }
     }
 
-Now that we've made a very simple middleware, let's attach it to our
-application::
+Après avoir créer le middleware, attachez-le à votre application ::
 
-    // In src/Application.php
+    // Dans src/Application.php
     namespace App;
 
     use App\Middleware\TrackingCookieMiddleware;
 
     class Application
     {
-        public function middleware($middleware)
+        public function middleware($middlewareStack)
         {
-            // Add your simple middleware onto the queue
-            $middleware->add(new TrackingCookieMiddleware());
+            // Ajoutez votre middleware dans la file
+            $middlewareStack->add(new TrackingCookieMiddleware());
 
-            // Add some more middleware onto the queue
+            // Ajoutez d'autres middleware dans la file
 
-            return $middleware;
+            return $middlewareStack;
         }
     }
 
 .. _adding-http-stack:
 
-Adding the new HTTP Stack to an Existing Application
-====================================================
+Ajout de la nouvelle pile HTTP à une application existante
+==========================================================
 
-Using HTTP Middleware in an existing application requires a few changes to your
-application.
+Utiliser les Middleware HTTP dans une application existante nécessite quelques
+modification dans celle-ci.
 
-#. First update your **webroot/index.php**. Copy the file contents from the `app
-   skeleton <https://github.com/cakephp/app/tree/master/webroot/index.php>`__.
-#. Create an ``Application`` class. See the :ref:`using-middleware` section
-   above for how to do that. Or copy the example in the `app skeleton
+#. Premièrement, mettez à jour votre **webroot/index.php**. Copiez le contenu
+   du fichier depuis le `squelette d'application
+   <https://github.com/cakephp/app/tree/master/webroot/index.php>`__.
+#. Puis, créez une classe ``Application```. Reportez-vous à la section précédente
+   :ref:`using-middleware` pour plus de précisions. Ou copiez l'exemple dans le
+   `squelette d'application
    <https://github.com/cakephp/app/tree/master/src/Application.php>`__.
 
-Once those two steps are complete, you are ready to start re-implementing any
-application/plugin dispatch filters as HTTP middleware.
+Lorsque ces deux étapes sont complétées, vous êtes prêts à réimplémenter tous
+les dispatch filters de votre application/plugins en tant que middleware HTTP.
 
-Si vous exécutez des tests, vous aurez aussi besoin de mettre à jour votre
-fichier **tests/bootstrap.php** en récupérant le contenu du fichier du
-`squelette "app" <https://github.com/cakephp/app/tree/master/tests/bootstrap.php>`_.
+Si vous exécutez des tests, vous aurez aussi besoin de mettre à jour
+**tests/bootstrap.php** en copiant le contenu du fichier depuis le
+`squelette d'application
+<https://github.com/cakephp/app/tree/master/tests/bootstrap.php>`_.
+
 
 .. meta::
-    :title lang=fr: Http Middleware
-    :keywords lang=fr: http, middleware, psr-7, request, response, wsgi, application, baseapplication
+    :title lang=fr: Middleware Http
+    :keywords lang=fr: http, middleware, psr-7, requête, réponse, wsgi, application, baseapplication

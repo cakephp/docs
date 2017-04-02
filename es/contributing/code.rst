@@ -141,9 +141,9 @@ como base ya que no podrás editarla una vez creada.
 .. note::
 
     Recuerda que todo código que contribuyas a CakePHP será licenciado bajo la
-	Licencia MIT, y la `Cake Software Foundation <http://cakefoundation.org/pages/about>`_ 
-	será la propietaria de cualquier código contribuido. Los contribuidores deberán seguir las 
-	`Guías de la comunidad CakePHP <http://community.cakephp.org/guidelines>`_.
+    Licencia MIT, y la `Cake Software Foundation <http://cakefoundation.org/pages/about>`_ 
+    será la propietaria de cualquier código contribuido. Los contribuidores deberán seguir las 
+    `Guías de la comunidad CakePHP <http://community.cakephp.org/guidelines>`_.
 
 Todos los *merge* de corrección de errores que se hagan a una rama de mantenimiento
 se harán también periódicamente sobre futuros lanzamientos por el equipo central.
