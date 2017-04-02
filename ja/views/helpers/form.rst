@@ -13,7 +13,7 @@ FormHelper は、柔軟でもあります。通常は規約に沿ってほとん
 フォームの開始
 ==============
 
-.. php:method:: create(mixed $model = null, array $options = [])
+.. php:method:: create(mixed $context = null, array $options = [])
 
 FormHelper を活用するために最初に使うメソッドは ``create()`` です。
 このメソッドは、フォームの開始タグを出力します。
@@ -27,9 +27,9 @@ FormHelper を活用するために最初に使うメソッドは ``create()`` �
 
     <form method="post" action="/users/add">
 
-``$model`` 引数は、フォームの「コンテキスト」として使用されます。
+``$context`` 引数は、フォームの「コンテキスト」として使用されます。
 いくつかの組み込みフォームのコンテキストがあり、独自に追加することができます。次のセクションで説明します。
-組み込みのプロバイダーは、 ``$model`` の次の値とマップします。
+組み込みのプロバイダーは、 ``$context`` の次の値とマップします。
 
 * ``Entity`` インスタンスまたはイテレータは、 ``EntityContext`` にマップされます。
   このコンテキストは、FormHelper が組み込みの ORM の結果を処理できるようにします。
@@ -41,7 +41,7 @@ FormHelper を活用するために最初に使うメソッドは ``create()`` �
 
 すべてのコンテキストクラスは、リクエストデータにアクセスできるため、フォームを簡単に作成できます。
 
-コンテキストを持ったフォームが作成されると、作成したすべての入力はアクティブなコンテキストを使用します。
+コンテキストを持ったフォームが作成されると、作成したすべてのコントロールはアクティブなコンテキストを使用します。
 ORM バックエンドフォームの場合、FormHelper は関連データ、検証エラー、およびスキーマメタデータに
 アクセスできます。 ``end()`` メソッドを使用したり、再度 ``create()`` を呼び出すことによって、
 アクティブなコンテキストを閉じることができます。エンティティのフォームを作成するには、
@@ -94,6 +94,44 @@ FormHelper は、追加または編集のフォームを作成するかどうか
 ``$options`` 配列は、ほとんどのフォーム設定が行われる場所です。
 この特殊配列には、form タグの生成方法に影響を与えるさまざまなキーと値のペアが含まれます。
 
+.. _form-values-from-query-string:
+
+クエリ文字列からフォームの値を取得
+--------------------------------------
+
+.. versionadded:: 3.4.0
+
+FormHelper の値ソースは、input タグなどの描画される要素がどこから値を受け取るかを定義します。
+
+デフォルトでは、FormHelper は、「コンテキスト」をもとにその値を描画します。
+``EntityContext`` などのデフォルトのコンテキストは、現在のエンティティや
+``$request->getData()`` からデータを取得します。
+
+しかし、クエリ文字列から読み込む必要があるフォームを構築している場合は、 ``FormHelper`` の
+``valueSource()`` を使って、どこから入力データを読み込むかを変更できます。 ::
+
+    // コンテキストでクエリ文字列の優先順位をつける
+    echo $this->Form->create($article, [
+        'valueSources' => ['query', 'context']
+    ]);
+
+    // 同じ効果:
+    echo $this->Form
+        ->setValueSources(['query', 'context'])
+        ->create($articles);
+
+    // クエリ文字列からのみのデータの読み取り
+    echo $this->Form->create($article);
+    $this->Form->setValueSources('query');
+
+    // 同じ効果:
+    echo $this->Form->create($article, ['valueSources' => 'query']);
+
+サポートするソースは、 ``context``, ``data`` そして ``query`` です。
+単一または複数のソースを使用できます。 ``FormHelper`` によって生成されたウィジェットは
+設定した順序でソースから値を集めます。
+
+``end()`` が呼ばれた時、値ソースはデフォルト (``['context']``) にリセットされます。
 
 フォームの HTTP メソッドを変更
 ------------------------------
@@ -201,7 +239,7 @@ FormHelper は、追加または編集のフォームを作成するかどうか
 組み込みのコンテキストクラスは基本的なケースをカバーすることを目的としていますが、
 異なる ORM を使用している場合は新しいコンテキストクラスを作成する必要があります。
 このような状況では、 `Cake\\View\\Form\\ContextInterface
-<http://api.cakephp.org/3.0/class-Cake.View.Form.ContextInterface.html>`_
+<https://api.cakephp.org/3.x/class-Cake.View.Form.ContextInterface.html>`_
 を実装する必要があります。
 このインターフェイスを実装すると、新しいコンテキストを FormHelper に追加することができます。
 ``View.beforeRender`` イベントリスナーやアプリケーションビュークラスで行うのが最善の方法です。 ::
@@ -218,17 +256,17 @@ FormHelper は、追加または編集のフォームを作成するかどうか
 
 .. _automagic-form-elements:
 
-フォーム入力の作成
-==================
+フォームコントロールの作成
+==========================
 
-.. php:method:: input(string $fieldName, array $options = [])
+.. php:method:: control(string $fieldName, array $options = [])
 
-``input()`` メソッドを使うと完全なフォーム入力を生成できます。
-これらの入力には、必要に応じて、囲い込む div、label、入力ウィジェット、および検証エラーが含まれます。
-フォームコンテキストでメタデータを使用することにより、このメソッドは各フィールドに適切な入力タイプを
-選択します。内部的に ``input()`` は FormHelper の他のメソッドを使います。
+``control()`` メソッドを使うと完全なフォームコントロールを生成できます。これらのコントロールには、
+必要に応じて、囲い込む div、label、コントロールウィジェット、および検証エラーが含まれます。
+フォームコンテキストでメタデータを使用することにより、このメソッドは各フィールドに適切な
+コントロールタイプを選択します。内部的に ``control()`` は FormHelper の他のメソッドを使います。
 
-作成される入力の型は、カラムのデータ型に依存します。
+作成されるコントロールの型は、カラムのデータ型に依存します。
 
 カラムの型
     得られたフォームのフィールド
@@ -259,9 +297,9 @@ time
 binary
     file
 
-``$options`` パラメータを使うと、必要な場合に特定の入力タイプを選択することができます。 ::
+``$options`` パラメータを使うと、必要な場合に特定のコントロールタイプを選択することができます。 ::
 
-    echo $this->Form->input('published', ['type' => 'checkbox']);
+    echo $this->Form->control('published', ['type' => 'checkbox']);
 
 .. _html5-required:
 
@@ -269,7 +307,7 @@ binary
 クラス名に ``required`` が追加されます。
 required オプションを使用して自動的に必須フラグを無効にすることができます。 ::
 
-    echo $this->Form->input('title', ['required' => false]);
+    echo $this->Form->control('title', ['required' => false]);
 
 フォーム全体のブラウザ検証トリガをスキップするには、
 :php:meth:`~Cake\\View\\Helper\\FormHelper::submit()` を使って生成する入力ボタンに対して
@@ -278,32 +316,32 @@ required オプションを使用して自動的に必須フラグを無効に�
 ``'novalidate' => true`` を設定できます。
 
 たとえば、User モデルに username (varchar), password (varchar), approved (datetime)
-および quote (text) のフィールドがあるとします。FormHelper の input() メソッドを使用すると、
-これらのフォームフィールドすべてに適切な入力を作成できます。 ::
+および quote (text) のフィールドがあるとします。FormHelper の control() メソッドを使用すると、
+これらのフォームフィールドすべてに適切なコントロールを作成できます。 ::
 
     echo $this->Form->create($user);
     // Text
-    echo $this->Form->input('username');
+    echo $this->Form->control('username');
     // Password
-    echo $this->Form->input('password');
+    echo $this->Form->control('password');
     // Day, month, year, hour, minute, meridian
-    echo $this->Form->input('approved');
+    echo $this->Form->control('approved');
     // Textarea
-    echo $this->Form->input('quote');
+    echo $this->Form->control('quote');
 
     echo $this->Form->button('Add');
     echo $this->Form->end();
 
 日付フィールドのいくつかのオプションを示すより広範な例::
 
-    echo $this->Form->input('birth_dt', [
+    echo $this->Form->control('birth_dt', [
         'label' => '生年月日',
         'minYear' => date('Y') - 70,
         'maxYear' => date('Y') - 18,
     ]);
 
-以下にある ``input()`` のための特定のオプションに加えて、
-入力タイプと HTML 属性のオプションを指定することができます（例えば ``onfocus`` など）。
+以下にある ``control()`` のための特定のオプションに加えて、
+コントロールタイプと HTML 属性のオプションを指定することができます（例えば ``onfocus`` など）。
 
 belongsTo または hasOne を使用していて select フィールドを作成する場合は、
 Users コントローラに次のものを追加できます（User belongsTo Group を前提とします）。 ::
@@ -312,7 +350,7 @@ Users コントローラに次のものを追加できます（User belongsTo Gr
 
 その後、ビューテンプレートに以下を追加します。 ::
 
-    echo $this->Form->input('group_id', ['options' => $groups]);
+    echo $this->Form->control('group_id', ['options' => $groups]);
 
 belongsToMany で関連付く Groups の選択ボックスを作成するには、
 UsersController に以下を追加します。 ::
@@ -321,7 +359,7 @@ UsersController に以下を追加します。 ::
 
 その後、ビューテンプレートに以下を追加します。 ::
 
-    echo $this->Form->input('groups._ids', ['options' => $groups]);
+    echo $this->Form->control('groups._ids', ['options' => $groups]);
 
 モデル名が2つ以上の単語、たとえば "UserGroup" で構成されている場合、
 set() を使用してデータを渡すときは、データを次のように複数形とキャメルケース形式で
@@ -331,20 +369,20 @@ set() を使用してデータを渡すときは、データを次のように�
 
 .. note::
 
-    送信ボタンを生成するために ``FormHelper::input()`` を使用しないでください。
+    送信ボタンを生成するために ``FormHelper::control()`` を使用しないでください。
     代わりに :php:meth:`~Cake\\View\\Helper\\FormHelper::submit()` を使用してください。
 
 フィールドの命名規則
 --------------------
 
-入力ウィジェットを作成するときは、フィールドの名前をフォームのエンティティに一致する属性の後に
+コントロールウィジェットを作成するときは、フィールドの名前をフォームのエンティティに一致する属性の後に
 指定する必要があります。たとえば、 ``$article`` のフォームを作成した場合、
 そのプロパティの名前を付けたフィールドを作成します。例えば ``title`` 、 ``body`` と ``published`` 。
 
-``association.fieldname`` を最初のパラメータとして渡すことで、関連するモデルや任意のモデルの入力を
-作成できます。 ::
+``association.fieldname`` を最初のパラメータとして渡すことで、関連するモデルや任意のモデルの
+コントロールを作成できます。 ::
 
-    echo $this->Form->input('association.fieldname');
+    echo $this->Form->control('association.fieldname');
 
 フィールド名のドットは、ネストされたリクエストデータに変換されます。
 たとえば、 ``0.comments.body`` という名前のフィールドを作成した場合、
@@ -352,7 +390,7 @@ set() を使用してデータを渡すときは、データを次のように�
 この規則により、ORM でデータを簡単に保存できます。
 さまざまなアソシエーションタイプの詳細は、 :ref:`associated-form-inputs` セクションにあります。
 
-datetime に関連する入力を作成する場合、FormHelper はフィールドのサフィックスを追加します。
+datetime に関連するコントロールを作成する場合、FormHelper はフィールドのサフィックスを追加します。
 ``year`` 、 ``month`` 、 ``day`` 、 ``hour`` 、 ``minute`` 、または ``meridian``
 というフィールドが追加されていることがあります。エンティティがマーシャリングされると、
 これらのフィールドは自動的に ``DateTime`` オブジェクトに変換されます。
@@ -361,17 +399,17 @@ datetime に関連する入力を作成する場合、FormHelper はフィール
 オプション
 ----------
 
-``FormHelper::input()`` は、多数のオプションをサポートしています。
-``input()`` 自身のオプションに加えて、生成された入力タイプに対するオプションと HTML 属性を受け付けます。
-以下は ``FormHelper::input()`` で特有のオプションについて説明します。
+``FormHelper::control()`` は、多数のオプションをサポートしています。
+``control()`` 自身のオプションに加えて、生成されたコントロールタイプに対するオプションと
+HTML 属性を受け付けます。以下は ``FormHelper::control()`` で特有のオプションについて説明します。
 
 * ``$options['type']`` type を指定することで、モデルの設定を上書きして、
-  入力のタイプを強制することができます。 :ref:`automagic-form-elements`
+  コントロールのタイプを強制することができます。 :ref:`automagic-form-elements`
   にあるフィールド型に加えて、 'file'、 'password'、および HTML5 で
   サポートされているすべてのタイプを作成することもできます。 ::
 
-    echo $this->Form->input('field', ['type' => 'file']);
-    echo $this->Form->input('email', ['type' => 'email']);
+    echo $this->Form->control('field', ['type' => 'file']);
+    echo $this->Form->control('email', ['type' => 'email']);
 
   出力結果:
 
@@ -386,9 +424,10 @@ datetime に関連する入力を作成する場合、FormHelper はフィール
         <input type="email" name="email" value="" id="email" />
     </div>
 
-* ``$options['label']`` 通常は入力に付随するラベル内に表示したい文字列をこのキーに設定します。 ::
+* ``$options['label']`` 通常はコントロールに付随するラベル内に表示したい文字列を
+  このキーに設定します。 ::
 
-    echo $this->Form->input('name', [
+    echo $this->Form->control('name', [
         'label' => 'The User Alias'
     ]);
 
@@ -403,7 +442,7 @@ datetime に関連する入力を作成する場合、FormHelper はフィール
 
   あるいは、ラベルの出力を無効にするには、このキーに ``false`` を設定します。 ::
 
-    echo $this->Form->input('name', ['label' => false]);
+    echo $this->Form->control('name', ['label' => false]);
 
   出力結果:
 
@@ -416,7 +455,7 @@ datetime に関連する入力を作成する場合、FormHelper はフィール
   これに配列を設定すると、 ``label`` 要素の追加オプションが提供されます。
   これを行う場合、配列中の ``text`` キーを使ってラベルテキストをカスタマイズすることができます。 ::
 
-    echo $this->Form->input('name', [
+    echo $this->Form->control('name', [
         'label' => [
             'class' => 'thingy',
             'text' => 'The User Alias'
@@ -439,12 +478,12 @@ datetime に関連する入力を作成する場合、FormHelper はフィール
   エラーメッセージの出力とフィールドクラスを無効にするには、
   error キーを ``false`` に設定してください。 ::
 
-    echo $this->Form->input('name', ['error' => false]);
+    echo $this->Form->control('name', ['error' => false]);
 
   モデルのエラーメッセージを上書きするには、
   元の検証エラーメッセージと一致するキーを持つ配列を使用します。 ::
 
-    $this->Form->input('name', [
+    $this->Form->control('name', [
         'error' => ['Not long enough' => __('This is not long enough')]
     ]);
 
@@ -454,9 +493,9 @@ datetime に関連する入力を作成する場合、FormHelper はフィール
 特定のタイプの入力を生成する
 ============================
 
-汎用的な ``input()`` メソッドに加えて、 ``FormHelper`` には様々な種類の
-入力タイプを生成するために個別のメソッドがあります。
-これらは、入力ウィジェットそのものを生成するのに使えますが、
+汎用的な ``control()`` メソッドに加えて、 ``FormHelper`` には様々な種類の
+コントロールタイプを生成するために個別のメソッドがあります。
+これらは、コントロールウィジェットそのものを生成するのに使えますが、
 完全に独自のフォームレイアウトを生成するために
 :php:meth:`~Cake\\View\\Helper\\FormHelper::label()` や
 :php:meth:`~Cake\\View\\Helper\\FormHelper::error()` といった
@@ -467,14 +506,14 @@ datetime に関連する入力を作成する場合、FormHelper はフィール
 共通オプション
 --------------
 
-さまざまな input 要素メソッドは、共通のオプションをサポートしています。
-これらのオプションはすべて、 ``input()`` でもサポートされています。
-繰り返しを減らすために、すべての入力メソッドで共有される共通オプションは次の通りです。
+さまざまなコントロール要素メソッドは、共通のオプションをサポートしています。
+これらのオプションはすべて、 ``control()`` でもサポートされています。
+繰り返しを減らすために、すべてのコントロールメソッドで共有される共通オプションは次の通りです。
 
-* ``$options['id']`` このキーを設定すると、input の DOM id の値が強制的に設定されます。
+* ``$options['id']`` このキーを設定すると、コントロールの DOM id の値が強制的に設定されます。
   これにより、設定可能な idPrefix が上書きされます。
 
-* ``$options['default']`` 入力フィールドのデフォルト値を設定します。
+* ``$options['default']`` コントロールフィールドのデフォルト値を設定します。
   この値は、フォームに渡されるデータにそのフィールドに関する値が含まれていない場合
   (または、一切データが渡されない場合) に使われます。
   明示的なデフォルト値は、スキーマで定義されたデフォルト値を上書きします。
@@ -490,17 +529,17 @@ datetime に関連する入力を作成する場合、FormHelper はフィール
 
   .. note::
 
-    checkbox をチェックする目的では ``default`` は使えません。その代わり、コントローラーで
-    ``$this->request->data`` の中の値をセットするか、または入力オプションの
+    checkbox をチェックする目的では ``default`` は使えません。その代わり、コントローラで
+    ``$this->request->getData()`` の中の値をセットするか、またはコントロールオプションの
     ``checked`` を ``true`` にします。
 
     デフォルト値への代入の際 ``false`` を使うのは注意が必要です。
-    ``false`` 値は入力フィールドのオプションを無効または除外するために使われます。
+    ``false`` 値はコントロールフィールドのオプションを無効または除外するために使われます。
     そのため ``'default' => false`` では値を全く設定しません。
     代わりに ``'default' => 0`` を使用してください。
 
-* ``$options['value']`` 入力フィールドに特定の値を設定するために使用します。
-  これは、Form、Entity、 ``request->data`` などのコンテキストから
+* ``$options['value']`` コントロールフィールドに特定の値を設定するために使用します。
+  これは、Form、Entity、 ``request->getData()`` などのコンテキストから
   注入される可能性のある値を上書きします。
 
   .. note::
@@ -509,7 +548,7 @@ datetime に関連する入力を作成する場合、FormHelper はフィール
     ``$options['value']`` を ``''`` に設定する必要があります (もしくは ``null`` に設定) 。
 
 上記のオプションに加えて、任意の HTML 属性を混在させることができます。
-特に規定のないオプション名は HTML 属性として扱われ、生成された HTML の input 要素に反映されます。
+特に規定のないオプション名は HTML 属性として扱われ、生成された HTML のコントロール要素に反映されます。
 
 .. versionchanged:: 3.3.0
     3.3.0 では、FormHelper は、自動的にデータベーススキーマで定義されたデフォルト値を使用します。
@@ -518,9 +557,9 @@ datetime に関連する入力を作成する場合、FormHelper はフィール
 select, checkbox, radio に関するオプション
 ------------------------------------------
 
-* ``$options['value']`` は、選択型入力 (すなわち型が select、date、time、datetime)
+* ``$options['value']`` は、選択型コントロール (すなわち型が select、date、time、datetime)
   と組み合わせて使用することもできます。
-  入力がレンダリングされたときにデフォルトで選択したい項目の値に 'value' を設定します。 ::
+  コントロールが描画されたときにデフォルトで選択したい項目の値に 'value' を設定します。 ::
 
     echo $this->Form->time('close_time', [
         'value' => '13:30:00'
@@ -528,10 +567,10 @@ select, checkbox, radio に関するオプション
 
   .. note::
 
-    date および datetime 入力の value キーには、UNIX タイムスタンプまたは
+    date および datetime コントロールの value キーには、UNIX タイムスタンプまたは
     DateTime オブジェクトを使用することもできます。
 
-  ``multiple`` 属性を true に設定した select 入力では、
+  ``multiple`` 属性を true に設定した select コントロールでは、
   デフォルトで選択したい値の配列を使うことができます。 ::
 
     echo $this->Form->select('rooms', [
@@ -540,7 +579,7 @@ select, checkbox, radio に関するオプション
         'default' => [1, 3]
     ]);
 
-* ``$options['empty']`` ``true`` に設定すると、入力を空のままにします。
+* ``$options['empty']`` ``true`` に設定すると、コントロールを空のままにします。
 
   選択リストに渡されると、ドロップダウンリストに空の値を持つ空白のオプションが作成されます。
   単なる空白の option の代わりにテキストを表示して空の value を使用する場合は、
@@ -567,8 +606,9 @@ select, checkbox, radio に関するオプション
 
   オプションは、キーと値のペアとして指定することもできます。
 
-* ``$options['hiddenField']`` 一部の入力タイプ (checkbox や radio) では、
-  hidden フィールドが作成されるため、 $this->request->data で値が指定されなくてもキーが存在します。
+* ``$options['hiddenField']`` 一部のコントロールタイプ (checkbox や radio) では、
+  hidden フィールドが作成されるため、 ``$this->request->getData()`` で値が指定されなくても
+  キーが存在します。
 
   .. code-block:: html
 
@@ -585,8 +625,8 @@ select, checkbox, radio に関するオプション
 
     <input type="checkbox" name="published" value="1">
 
-  フォーム上に複数の入力ブロックを作成してグループ化する場合は、
-  最初の入力を除くすべての入力でこのパラメータを使用する必要があります。
+  フォーム上に複数のコントロールブロックを作成してグループ化する場合は、
+  最初のコントロールを除くすべての入力でこのパラメータを使用する必要があります。
   hidden 入力がページ上の複数の場所にある場合は、入力値の最後のグループだけが保存されます。
 
   この例では Tertiary Colors だけが渡され、Primary Colors は上書きされます。
@@ -637,20 +677,20 @@ select, checkbox, radio に関するオプション
 日時関連オプション
 ------------------
 
-* ``$options['timeFormat']`` 時間関連の入力セットの選択入力のフォーマットを指定するために使用されます。
-  有効な値は ``12`` 、 ``24`` 、および ``null`` が含まれます。
+* ``$options['timeFormat']`` 時間関連のコントロールセットの select コントロールの書式を
+  指定するために使用されます。有効な値は ``12`` 、 ``24`` 、および ``null`` が含まれます。
 
-* ``$options['minYear'], $options['maxYear']`` date/datetime 入力と組み合わせて使用します。
+* ``$options['minYear'], $options['maxYear']`` date/datetime コントロールと組み合わせて使用します。
   年の select フィールドに表示される値の下限および上限を定義します。
 
-* ``$options['orderYear']`` date/datetime 入力と組み合わせて使用します。
+* ``$options['orderYear']`` date/datetime コントロールと組み合わせて使用します。
   年の値が設定される順序を定義します。
   有効な値は 'asc' と 'desc' です。
   デフォルト値は 'desc' です。
 
 * ``$options['interval']`` このオプションは、分の select ボックスの間隔を指定します。 ::
 
-    echo $this->Form->input('time', [
+    echo $this->Form->control('time', [
         'type' => 'time',
         'interval' => 15
     ]);
@@ -720,7 +760,7 @@ $options は主に (フォーム要素の DOM id の値のような) HTML タグ
 
 .. php:method:: textarea(string $fieldName, array $options)
 
-textarea 入力フィールドを作成します。 ::
+textarea コントロールフィールドを作成します。 ::
 
     echo $this->Form->textarea('notes');
 
@@ -730,7 +770,7 @@ textarea 入力フィールドを作成します。 ::
 
     <textarea name="notes"></textarea>
 
-フォームが編集されると（すなわち、配列 ``$this->request->data`` に
+フォームが編集されると（すなわち、配列 ``$this->request->getData()`` に
 ``User`` モデルに渡すために保存された情報が含まれている場合）、生成される HTML には
 ``notes`` フィールドに対応する値が自動的に含まれます。
 例:
@@ -743,14 +783,14 @@ textarea 入力フィールドを作成します。 ::
 
 .. note::
 
-    ``textarea`` 入力タイプでは ``$options`` 属性の ``'escape'`` キーにより、
+    ``textarea`` コントロールタイプでは ``$options`` 属性の ``'escape'`` キーにより、
     textarea の内容をエスケープするかどうかを指定できます。デフォルトは ``true`` です。
 
 ::
 
     echo $this->Form->textarea('notes', ['escape' => false]);
     // または....
-    echo $this->Form->input('notes', ['type' => 'textarea', 'escape' => false]);
+    echo $this->Form->control('notes', ['type' => 'textarea', 'escape' => false]);
 
 
 **オプション**
@@ -875,17 +915,17 @@ radio ボタン入力を作成します。
     <option value="F">Female</option>
     </select>
 
-``select`` 入力タイプでは、 ``'escape'`` という特別な ``$option`` 属性が使用でき、
+``select`` コントロールタイプでは、 ``'escape'`` という特別な ``$option`` 属性が使用でき、
 ブール値を受け取り、HTML エンティティに select オプションの内容をエンコードするかどうかを決定します。
 デフォルトは ``true`` です。 ::
 
     $options = ['M' => 'Male', 'F' => 'Female'];
     echo $this->Form->select('gender', $options, ['escape' => false]);
 
-* ``$attributes['options']`` このキーでは、select 入力または
+* ``$attributes['options']`` このキーでは、select コントロールまたは
   radio グループのオプションを手動で指定できます。
   'type' に 'radio' が指定されていない限り、FormHelper はターゲット出力が
-  select 入力であると仮定します。 ::
+  select コントロールであると仮定します。 ::
 
     echo $this->Form->select('field', [1,2,3,4,5]);
 
@@ -967,7 +1007,7 @@ option タグ内で属性を生成するには::
         <option value="value 3" other_attr_name="other_attr_value">Description 3</option>
     </select>
 
-* ``$attributes['multiple']`` select を出力する入力に対して
+* ``$attributes['multiple']`` select を出力するコントロールに対して
   'multiple' が ``true`` に設定されている場合、select は複数の選択を許可します。 ::
 
     echo $this->Form->select('field', $options, ['multiple' => true]);
@@ -1045,7 +1085,7 @@ option タグ内で属性を生成するには::
 
 次にフォームビューファイルに以下のいずれかを追加します。 ::
 
-    echo $this->Form->input('submittedfile', [
+    echo $this->Form->control('submittedfile', [
         'type' => 'file'
     ]);
 
@@ -1084,7 +1124,7 @@ Unix 環境では 'tmp\_name' が異なったパスになります。 ::
 
 .. php:method:: dateTime($fieldName, $options = [])
 
-日付と時刻の select 入力のセットを生成します。
+日付と時刻の select コントロールのセットを生成します。
 このメソッドには、いくつかのオプションがあります。
 
 * ``monthNames`` ``false`` の場合は、テキストの代わりに2桁の数字が使用されます。
@@ -1097,18 +1137,18 @@ Unix 環境では 'tmp\_name' が異なったパスになります。 ::
   文字列の場合、その文字列は空の要素として表示されます。
 * ``round`` - いずれかの方向に丸めたい場合は ``up`` または ``down`` に設定します。
   デフォルトは null です。
-* ``default`` 入力で使用されるデフォルト値。
-  フィールド名と一致する ``$this->request->data`` の値は、この値を上書きします。
+* ``default`` コントロールで使用されるデフォルト値。
+  フィールド名と一致する ``$this->request->getData()`` の値は、この値を上書きします。
   デフォルトが指定されていない場合、 ``time()`` が使用されます。
 * ``timeFormat`` 使用する時刻の形式、12 または 24 のいずれか。
 * ``second`` 秒を有効にするために ``true`` に設定します。
 
-入力の順序、および入力間の要素/内容を制御するには、 ``dateWidget`` テンプレートを上書きします。
-デフォルトで ``dateWidget`` テンプレートは::
+コントロールの順序、およびコントロール間の要素/内容を制御するには、 ``dateWidget``
+テンプレートを上書きします。デフォルトで ``dateWidget`` テンプレートは::
 
     {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
 
-特定の select ボックスにカスタムクラス/属性を含む datetime 入力を作成するには、
+特定の select ボックスにカスタムクラス/属性を含む datetime コントロールを作成するには、
 各コンポーネントのオプションを使用できます。 ::
 
     echo $this->Form->datetime('released', [
@@ -1148,8 +1188,8 @@ Unix 環境では 'tmp\_name' が異なったパスになります。 ::
 
 * ``empty`` - ``true`` の場合、空の select オプションが表示されます。
   文字列の場合、その文字列は空の要素として表示されます。
-* ``default`` | ``value`` 入力で使用されるデフォルト値。
-  フィールド名と一致する ``$this->request->data`` の値は、この値を上書きします。
+* ``default`` | ``value`` コントロールで使用されるデフォルト値。
+  フィールド名と一致する ``$this->request->getData()`` の値は、この値を上書きします。
   デフォルトが指定されていない場合、 ``time()`` が使用されます。
 * ``timeFormat`` 使用する時刻の形式、12 または 24 のいずれか。
   デフォルトは 24 です。
@@ -1203,7 +1243,7 @@ Unix 環境では 'tmp\_name' が異なったパスになります。 ::
   文字列の場合、その文字列は空の要素として表示されます。
 * ``orderYear`` - セレクトオプションの年の値の順序。
   利用可能な値は 'asc' と 'desc'。デフォルトは 'desc' です。
-* ``value`` 入力の選択された値。
+* ``value`` コントロールの選択された値。
 * ``maxYear`` select 要素で表示する最大の年。
 * ``minYear`` select 要素に表示する最小の年。
 
@@ -1383,7 +1423,7 @@ $text で指定された検証エラーメッセージを表示します。
 
 .. note::
 
-    :php:meth:`~Cake\\View\\Helper\\FormHelper::input()` を使用している場合、
+    :php:meth:`~Cake\\View\\Helper\\FormHelper::control()` を使用している場合、
     デフォルトでエラーは描画されます。
 
 ボタンと submit 要素の作成
@@ -1445,7 +1485,7 @@ submit 入力は、基本的なテキストやイメージが必要な場合に�
     <button type="reset">フォームのリセット</button>
     <button type="submit">フォームの送信</button>
 
-``button`` 入力タイプは ``escape`` オプションをサポートしています。
+``button`` コントロールタイプは ``escape`` オプションをサポートしています。
 これはブール値を受け付け、デフォルトは ``false`` です。
 これは、ボタンの ``$title`` を HTML エンコードするかどうかを決定します。 ::
 
@@ -1555,11 +1595,13 @@ CakePHP の多くのヘルパーと同じように、FormHelper は、
 
 定義したテンプレートは、ヘルパーに含まれるデフォルトのテンプレートを置き換えます。
 置き換えられていないテンプレートは引き続きデフォルト値を使用します。
-``templates()`` メソッドを使って実行時にテンプレートを変更することもできます。 ::
+``setTemplates()`` メソッドを使って実行時にテンプレートを変更することもできます。 ::
 
     $myTemplates = [
         'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
+    $this->Form->setTemplates($myTemplates);
+    // 3.4 より前
     $this->Form->templates($myTemplates);
 
 .. warning::
@@ -1574,11 +1616,11 @@ CakePHP の多くのヘルパーと同じように、FormHelper は、
 
 デフォルトのテンプレートのリスト、それらのデフォルトのフォーマット、そして期待される変数は
 `FormHelper API ドキュメント
-<http://api.cakephp.org/3.2/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_
+<https://api.cakephp.org/3.x/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_
 で見つけることができます。
 
-これらのテンプレートに加えて、 ``input()`` メソッドは入力コンテナごとに異なるテンプレートを
-使用しようとします。たとえば、datetime 入力を作成する場合、 ``datetimeContainer``
+これらのテンプレートに加えて、 ``control()`` メソッドはコントロールコンテナごとに異なるテンプレートを
+使用しようとします。たとえば、datetime コントロールを作成する場合、 ``datetimeContainer``
 が存在する場合にはそれが使用されます。
 そのコンテナがない場合、 ``inputContainer`` テンプレートが使用されます。
 例えば::
@@ -1591,15 +1633,15 @@ CakePHP の多くのヘルパーと同じように、FormHelper は、
     // 独自の div で囲まれた radio セットを作成
     echo $this->Form->radio('User.email_notifications', ['y', 'n']);
 
-入力コンテナと同様に、 ``input()`` メソッドはフォームグループごとに異なるテンプレートを
-使用しようとします。フォームグループは、ラベルと入力の組み合わせです。
+コンテナの制御と同様に、 ``control()`` メソッドはフォームグループごとに異なるテンプレートを
+使用しようとします。フォームグループは、ラベルとコントロールの組み合わせです。
 例えば、radio 入力を作成する時、 ``radioFormGroup`` が存在する場合、それが使用されます。
 そのテンプレートが存在しない場合、デフォルトでは、ラベル＆入力の各セットは、
 ``formGroup`` テンプレートを使用して描画されます。
 例えば::
 
     // 独自の radio フォームグループを追加
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'radioFormGroup' => '<div class="radio">{{label}}{{input}}</div>'
     ]);
 
@@ -1607,16 +1649,16 @@ CakePHP の多くのヘルパーと同じように、FormHelper は、
 ------------------------------------------
 
 独自のテンプレートにテンプレートプレースホルダを追加し、
-入力を生成するときにプレースホルダを設定することができます。 ::
+コントロールを生成するときにプレースホルダを設定することができます。 ::
 
     // help プレースホルダ付きでテンプレートを追加
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'inputContainer' => '<div class="input {{type}}{{required}}">
             {{content}} <span class="help">{{help}}</span></div>'
     ]);
 
     // help 変数を設定し入力を生成
-    echo $this->Form->input('password', [
+    echo $this->Form->control('password', [
         'templateVars' => ['help' => '少なくとも 8 文字の長さ。']
     ]);
 
@@ -1631,7 +1673,7 @@ CakePHP の多くのヘルパーと同じように、FormHelper は、
 ラベルの外に checkbox/radio 入力を配置する必要がある場合は、
 テンプレートを変更することで行うことができます。 ::
 
-    $this->Form->templates([
+    $this->Form->setTemplates([
         'nestingLabel' => '{{input}}<label{{attrs}}>{{text}}</label>',
         'formGroup' => '{{input}}{{label}}',
     ]);
@@ -1641,24 +1683,24 @@ CakePHP の多くのヘルパーと同じように、FormHelper は、
 フォーム全体の生成
 ==================
 
-.. php:method:: inputs(array $fields = [], $options = [])
+.. php:method:: controls(array $fields = [], $options = [])
 
-fieldset で囲まれた指定された一連の入力セットを生成します。
+fieldset で囲まれた指定された一連のコントロールセットを生成します。
 生成されたフィールドを含めることで指定できます。 ::
 
-    echo $this->Form->inputs([
+    echo $this->Form->controls([
         'name',
         'email'
     ]);
 
 オプションを使用して legend のテキストをカスタマイズすることができます。 ::
 
-    echo $this->Form->inputs($fields, ['legend' => 'Update news post']);
+    echo $this->Form->controls($fields, ['legend' => 'Update news post']);
 
 ``$fields`` パラメータで追加のオプションを定義することによって、
-生成された入力をカスタマイズすることができます。 ::
+生成されたコントロールをカスタマイズすることができます。 ::
 
-    echo $this->Form->inputs([
+    echo $this->Form->controls([
         'name' => ['label' => 'カスタムラベル']
     ]);
 
@@ -1668,11 +1710,19 @@ fieldset で囲まれた指定された一連の入力セットを生成しま�
 - ``fieldset`` filedset を無効にするために ``false`` を設定してください。
   HTML 属性として適用するパラメータの配列を fieldset タグに渡すこともできます。
   空の配列を渡すと、fieldset は属性なしで表示されます。
-- ``legend`` 生成された入力セットの legend を無効にするために ``false`` を設定してください。
+- ``legend`` 生成されたコントロールセットの legend を無効にするために ``false`` を設定してください。
   または、legend のテキストをカスタマイズするための文字列を指定します。
 
 例えば::
 
+    echo $this->Form->allControls(
+        [
+            'name' => ['label' => 'カスタムラベル']
+        ],
+        null,
+        ['legend' => 'Update your post']
+    );
+    // 3.4.0 より前の場合:
     echo $this->Form->allInputs(
         [
             'name' => ['label' => 'カスタムラベル']
@@ -1683,12 +1733,14 @@ fieldset で囲まれた指定された一連の入力セットを生成しま�
 
 fieldset を無効にすると、legend は出力されません。
 
-.. php:method:: allInputs(array $fields, $options = [])
+.. php:method:: allControls(array $fields, $options = [])
 
-このメソッドは ``inputs()`` と密接に関係していますが、
+このメソッドは ``controls()`` と密接に関係していますが、
 ``$fields`` 引数は現在のトップレベルエンティティの *全ての* フィールドにデフォルト設定されています。
-生成された入力から特定のフィールドを除外するには、fields パラメータで ``false`` を設定します。 ::
+生成されたコントロールから特定のフィールドを除外するには、fields パラメータで ``false`` を設定します。 ::
 
+    echo $this->Form->allControls(['password' => false]);
+    // 3.4.0 より前の場合:
     echo $this->Form->allInputs(['password' => false]);
 
 .. _associated-form-inputs:
@@ -1705,49 +1757,49 @@ fieldset を無効にすると、legend は出力されません。
 * Articles BelongsTo Authors
 * Articles BelongsToMany Tags
 
-アソシエーション付きで読み込まれた記事を編集していた場合、次の入力を作成できます。 ::
+アソシエーション付きで読み込まれた記事を編集していた場合、次のコントロールを作成できます。 ::
 
     $this->Form->create($article);
 
     // Article 入力
-    echo $this->Form->input('title');
+    echo $this->Form->control('title');
 
     // Author 入力 (belongsTo)
-    echo $this->Form->input('author.id');
-    echo $this->Form->input('author.first_name');
-    echo $this->Form->input('author.last_name');
+    echo $this->Form->control('author.id');
+    echo $this->Form->control('author.first_name');
+    echo $this->Form->control('author.last_name');
 
     // Author の profile (belongsTo + hasOne)
-    echo $this->Form->input('author.profile.id');
-    echo $this->Form->input('author.profile.username');
+    echo $this->Form->control('author.profile.id');
+    echo $this->Form->control('author.profile.username');
 
     // Tags 入力 (belongsToMany)
-    echo $this->Form->input('tags.0.id');
-    echo $this->Form->input('tags.0.name');
-    echo $this->Form->input('tags.1.id');
-    echo $this->Form->input('tags.1.name');
+    echo $this->Form->control('tags.0.id');
+    echo $this->Form->control('tags.0.name');
+    echo $this->Form->control('tags.1.id');
+    echo $this->Form->control('tags.1.name');
 
     // belongsToMany の複数選択要素
-    echo $this->Form->input('tags._ids', [
+    echo $this->Form->control('tags._ids', [
         'type' => 'select',
         'multiple' => true,
         'options' => $tagList,
     ]);
 
     // 結合テーブルの入力 (articles_tags)
-    echo $this->Form->input('tags.0._joinData.starred');
-    echo $this->Form->input('tags.1._joinData.starred');
+    echo $this->Form->control('tags.0._joinData.starred');
+    echo $this->Form->control('tags.1._joinData.starred');
 
     // Comments 入力 (hasMany)
-    echo $this->Form->input('comments.0.id');
-    echo $this->Form->input('comments.0.comment');
-    echo $this->Form->input('comments.1.id');
-    echo $this->Form->input('comments.1.comment');
+    echo $this->Form->control('comments.0.id');
+    echo $this->Form->control('comments.0.comment');
+    echo $this->Form->control('comments.1.id');
+    echo $this->Form->control('comments.1.comment');
 
-上記の入力は、コントローラ内の次のコードを使用して完成したエンティティグラフに
+上記のコントロールは、コントローラ内の次のコードを使用して完成したエンティティグラフに
 マーシャリングすることができます。 ::
 
-    $article = $this->Articles->patchEntity($article, $this->request->data, [
+    $article = $this->Articles->patchEntity($article, $this->request->getData(), [
         'associated' => [
             'Authors',
             'Authors.Profiles',
@@ -1759,9 +1811,9 @@ fieldset を無効にすると、legend は出力されません。
 独自ウィジェットの追加
 ======================
 
-CakePHP を使うと、アプリケーションに独自の入力ウィジェットを簡単に追加でき、
-他の入力タイプと同様に使用することができます。
-すべてのコア入力タイプはウィジェットとして実装されています。
+CakePHP を使うと、アプリケーションに独自のコントロールウィジェットを簡単に追加でき、
+他のコントロールタイプと同様に使用することができます。
+すべてのコアコントロールタイプはウィジェットとして実装されています。
 つまり、独自の実装でコアウィジェットを上書きすることができます。
 
 Widget クラスの構築
@@ -1860,12 +1912,12 @@ autocomplete ウィジェットが作成されると、 ``text`` と ``label``
     );
     $this->Form->addWidget('autocomplete', $autocomplete);
 
-追加/置換されると、ウィジェットは入力の 'type' として使用できます。 ::
+追加/置換されると、ウィジェットはコントロールの 'type' として使用できます。 ::
 
-    echo $this->Form->input('search', ['type' => 'autocomplete']);
+    echo $this->Form->control('search', ['type' => 'autocomplete']);
 
-これは、 ``input()`` とまったく同じように label と囲い込む div を持つ独自ウィジェットを作成します。
-あるいは、マジックメソッドを使用して入力ウィジェットだけを作成することもできます。 ::
+これは、 ``control()`` とまったく同じように label と囲い込む div を持つ独自ウィジェットを作成します。
+あるいは、マジックメソッドを使用してコントロールウィジェットだけを作成することもできます。 ::
 
     echo $this->Form->autocomplete('search', $options);
 
@@ -1897,3 +1949,4 @@ SecurityComponent を利用する際は、前述のようにフォームを閉�
     :title lang=ja: FormHelper
     :description lang=ja: FormHelper は、フォームの作成を迅速に行い、検証、再配置、レイアウトを効率化します。
     :keywords lang=ja: form helper,cakephp form,form create,form input,form select,form file field,form label,form text,form password,form checkbox,form radio,form submit,form date time,form error,validate upload,unlock field,form security
+

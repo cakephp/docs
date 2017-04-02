@@ -1,5 +1,5 @@
-Tutorial de desarrollo del Blog
-###############################
+Tutorial Blog
+#############
 
 Bienvenido a CakePHP. Probablemente estás consultando este tutorial porque
 quieres aprender más sobre cómo funciona CakePHP. Nuestro objetivo es potenciar
@@ -16,7 +16,7 @@ Esto es lo que necesitarás:
 #. Servidor web funcionando. Asumiremos que estás usando Apache, aunque las
    instrucciones para otros servidores son similares. Igual tendremos que ajustar
    un poco la configuración inicial, pero la mayoría pueden poner en marcha
-   CakePHP sin configuración alguna. Asegúrate de tener PHP 5.5.9 o superior
+   CakePHP sin configuración alguna. Asegúrate de tener PHP |minphpversion| o superior
    así como tener las extensiones ``mbstring``, ``intl`` y ``mcrypt`` activadas
    en PHP.
 #. Servidor de base de datos. Usaremos MySQL en este tutorial. Necesitarás saber
@@ -259,3 +259,6 @@ url-rewriting
 
 Ahora continúa hacia :doc:`/tutorials-and-examples/blog/part-two` para empezar
 a construir tu primera aplicación en CakePHP.
+
+.. meta::
+    :title lang=es: Tutorial Blog

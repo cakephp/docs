@@ -9,7 +9,7 @@
 
 .. toctree::
     :maxdepth: 3
-    :caption: Preface
+    :caption: Введение
 
     intro
     quickstart
@@ -19,7 +19,7 @@
 
 .. toctree::
     :maxdepth: 3
-    :caption: Getting Started
+    :caption: Начало работы
 
     installation
     development/configuration
@@ -32,7 +32,7 @@
 
 .. toctree::
     :maxdepth: 3
-    :caption: Using CakePHP
+    :caption: Использование CakePHP
 
     controllers/components/authentication
     bake
@@ -56,7 +56,7 @@
 
 .. toctree::
     :maxdepth: 3
-    :caption: Utility Classes
+    :caption: Вспомогательные классы
 
     core-libraries/app
     core-libraries/collections
@@ -72,7 +72,7 @@
 
 .. toctree::
     :maxdepth: 3
-    :caption: Plugins
+    :caption: Плагины
 
     chronos
     debug-kit
@@ -82,7 +82,7 @@
 
 .. toctree::
     :maxdepth: 3
-    :caption: Other
+    :caption: Прочее
 
     core-libraries/global-constants-and-functions
     appendices

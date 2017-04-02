@@ -871,7 +871,7 @@ correspondant. Le code du controller ressemble à ceci::
         public function index($short = null)
         {
             if ($this->request->is('post')) {
-                $article = $this->Articles->newEntity($this->request->data);
+                $article = $this->Articles->newEntity($this->request->getData());
                 if ($this->Articles->save($article)) {
                     // Redirige selon le pattern PRG
                     return $this->redirect(['action' => 'index']);
@@ -1094,10 +1094,10 @@ bonnes variables d'environnement::
     Les méthodes ``enableCsrfToken()`` et ``enableSecurityToken()`` ont été
     ajoutées dans la version 3.1.2.
 
-Integration Testing PSR7 Middleware
------------------------------------
+Integration Testing PSR-7 Middleware
+------------------------------------
 
-Integration testing can also be used to test your entire PSR7 application and
+Integration testing can also be used to test your entire PSR-7 application and
 :doc:`/controllers/middleware`. By default ``IntegrationTestCase`` will
 auto-detect the presence of an ``App\Application`` class and automatically
 enable integration testing of your Application. You can toggle this behavior
@@ -1105,10 +1105,10 @@ with the ``useHttpServer()`` method::
 
     public function setUp()
     {
-        // Enable PSR7 integration testing.
+        // Enable PSR-7 integration testing.
         $this->useHttpServer(true);
 
-        // Disable PSR7 integration testing.
+        // Disable PSR-7 integration testing.
         $this->useHttpServer(false);
     }
 
@@ -1120,7 +1120,7 @@ arguments, by using the ``configApplication()`` method::
         $this->configApplication('App\App', [CONFIG]);
     }
 
-After enabling the PSR7 mode, and possibly configuring your application class,
+After enabling the PSR-7 mode, and possibly configuring your application class,
 you can use the remaining ``IntegrationTestCase`` features as normal.
 
 You should also take care to try and use :ref:`application-bootstrap` to load
@@ -1128,7 +1128,7 @@ any plugins containing events/routes. Doing so will ensure that your
 events/routes are connected for each test case.
 
 .. versionadded:: 3.3.0
-    PSR7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
+    PSR-7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
 
 Méthodes d'Assertion
 --------------------
@@ -1196,7 +1196,7 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
 
 En plus des méthodes d'assertion ci-dessus, vous pouvez également utiliser
 toutes les assertions de `TestSuite
-<https://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ et celles
+<https://api.cakephp.org/3.x/class-Cake.TestSuite.TestCase.html>`_ et celles
 de
 `PHPUnit <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
 
@@ -1367,7 +1367,7 @@ les controllers qui l'utilisent. Voici notre exemple de component localisé dans
 
         public function startup(Event $event)
         {
-            $this->setController($event->subject());
+            $this->setController($event->getSubject());
         }
 
         public function adjust($length = 'short')
@@ -1564,7 +1564,7 @@ suivantes::
 
         public function removeFromCart(Event $event)
         {
-            $order = $event->data('order');
+            $order = $event->getData('order');
             $this->delete($order->cart_id);
         }
     }

@@ -62,7 +62,7 @@ ElasticSearch プラグインは elasticsearch インデックスと作用する
     {
         $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
-            $article = $this->Articles->patchEntity($article, $this->request->data);
+            $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                 $this->Flash->success('It saved');
             }
@@ -74,8 +74,8 @@ ElasticSearch プラグインは elasticsearch インデックスと作用する
 
     // src/Template/Articles/add.ctp の中で
     <?= $this->Form->create($article) ?>
-    <?= $this->Form->input('title') ?>
-    <?= $this->Form->input('body') ?>
+    <?= $this->Form->control('title') ?>
+    <?= $this->Form->control('body') ?>
     <?= $this->Form->button('Save') ?>
     <?= $this->Form->end() ?>
 

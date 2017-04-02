@@ -6,7 +6,7 @@
 .. php:class:: Security
 
 `security library
-<https://api.cakephp.org/3.0/class-Cake.Utility.Security.html>`_ は、
+<https://api.cakephp.org/3.x/class-Cake.Utility.Security.html>`_ は、
 データのハッシュ化や暗号化などのメソッドなどの基本的なセキュリティ分野を取り扱います。
 
 データの暗号化と復号

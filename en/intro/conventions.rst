@@ -76,8 +76,8 @@ folder.
 Model and Database Conventions
 ==============================
 
-Table class names are plural and CamelCased. ``Users``, ``ArticleCategories``,
-and ``UserFavoritePages`` are all examples of conventional model names.
+Table class names are plural, CamelCased and end in ``Table``. ``UsersTable``, ``ArticleCategoriesTable``,
+and ``UserFavoritePagesTable`` are all examples of conventional model names.
 
 Table names corresponding to CakePHP models are plural and underscored. The
 underlying tables for the above mentioned models would be ``users``,
@@ -141,7 +141,6 @@ by creating classes and files that you'd need to create anyway.
 Now that you've been introduced to CakePHP's fundamentals, you might try a run
 through the :doc:`/tutorials-and-examples/bookmarks/intro` to see how things fit
 together.
-
 
 .. meta::
     :title lang=en: CakePHP Conventions

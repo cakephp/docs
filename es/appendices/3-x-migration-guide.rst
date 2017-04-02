@@ -1,38 +1,45 @@
-3.x Migration Guide
-###################
+3.x Guía de migración
+#####################
 
 .. toctree::
    :hidden:
 
-Migration guides contain information regarding the new features introduced in
-each version and the migration path between versions.
+Las guías de migración contienen información relativa a las novedades introducidas en cada versión y los pasos a seguir para la migración entre versiones.
 
-3.3 Migration Guide
-===================
+3.4 Guía de migración
+=====================
+
+.. toctree::
+    :maxdepth: 1
+
+    3-4-migration-guide
+
+3.3 Guía de migración
+=====================
 
 .. toctree::
     :maxdepth: 1
 
     3-3-migration-guide
 
-3.2 Migration Guide
-===================
+3.2 Guía de migración
+=====================
 
 .. toctree::
     :maxdepth: 1
 
     3-2-migration-guide
 
-3.1 Migration Guide
-===================
+3.1 Guía de migración
+=====================
 
 .. toctree::
     :maxdepth: 1
 
     3-1-migration-guide
 
-3.0 Migration Guide
-===================
+3.0 Guía de migración
+=====================
 
 .. toctree::
     :maxdepth: 1

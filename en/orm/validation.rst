@@ -21,7 +21,7 @@ will be validated before it is converted into entities.
 If any validation rules fail, the returned entity will contain errors. The
 fields with errors will not be present in the returned entity::
 
-    $article = $articles->newEntity($this->request->data);
+    $article = $articles->newEntity($this->request->getData());
     if ($article->errors()) {
         // Entity failed validation.
     }
@@ -42,7 +42,7 @@ If you'd like to disable validation when converting request data, set the
 ``validate`` option to false::
 
     $article = $articles->newEntity(
-        $this->request->data,
+        $this->request->getData(),
         ['validate' => false]
     );
 
@@ -100,7 +100,7 @@ In addition to disabling validation you can choose which validation rule set you
 want applied::
 
     $article = $articles->newEntity(
-        $this->request->data,
+        $this->request->getData(),
         ['validate' => 'update']
     );
 
@@ -411,6 +411,7 @@ Association Count Rules
 If you need to validate that a property or association contains the correct
 number of values, you can use the ``validCount()`` rule::
 
+    // In the ArticlesTable.php file
     // No more than 5 tags on an article.
     $rules->add($rules->validCount('tags', 5, '<=', 'You can only have 5 tags'));
 
@@ -419,6 +420,7 @@ comparison operator to use. ``==``, ``>=``, ``<=``, ``>``, ``<``, and ``!=``
 are the accepted operators. To ensure a property's count is within a range, use
 two rules::
 
+    // In the ArticlesTable.php file
     // Between 3 and 5 tags
     $rules->add($rules->validCount('tags', 3, '>=', 'You must have at least 3 tags'));
     $rules->add($rules->validCount('tags', 5, '<=', 'You must have at most 5 tags'));

@@ -87,7 +87,7 @@ with CakePHP::
         {
             $user = $this->Users->newEntity();
             if ($this->request->is('post')) {
-                $user = $this->Users->patchEntity($user, $this->request->data);
+                $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
                     return $this->redirect(['action' => 'add']);
@@ -111,9 +111,9 @@ tutorial, we will show just the add.ctp:
     <?= $this->Form->create($user) ?>
         <fieldset>
             <legend><?= __('Add User') ?></legend>
-            <?= $this->Form->input('username') ?>
-            <?= $this->Form->input('password') ?>
-            <?= $this->Form->input('role', [
+            <?= $this->Form->control('username') ?>
+            <?= $this->Form->control('password') ?>
+            <?= $this->Form->control('role', [
                 'options' => ['admin' => 'Admin', 'author' => 'Author']
             ]) ?>
        </fieldset>
@@ -256,12 +256,12 @@ and add the following lines:
     <!-- File: src/Template/Users/login.ctp -->
 
     <div class="users form">
-    <?= $this->Flash->render('auth') ?>
+    <?= $this->Flash->render() ?>
     <?= $this->Form->create() ?>
         <fieldset>
             <legend><?= __('Please enter your username and password') ?></legend>
-            <?= $this->Form->input('username') ?>
-            <?= $this->Form->input('password') ?>
+            <?= $this->Form->control('username') ?>
+            <?= $this->Form->control('password') ?>
         </fieldset>
     <?= $this->Form->button(__('Login')); ?>
     <?= $this->Form->end() ?>
@@ -309,7 +309,7 @@ currently logged in user as a reference for the created article::
     {
         $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
-            $article = $this->Articles->patchEntity($article, $this->request->data);
+            $article = $this->Articles->patchEntity($article, $this->request->getData());
             // Added this line
             $article->user_id = $this->Auth->user('id');
             // You could also do the following
@@ -386,13 +386,13 @@ own.  Add the following content to your **ArticlesController.php**::
     public function isAuthorized($user)
     {
         // All registered users can add articles
-        if ($this->request->action === 'add') {
+        if ($this->request->getParam('action') === 'add') {
             return true;
         }
 
         // The owner of an article can edit and delete it
-        if (in_array($this->request->action, ['edit', 'delete'])) {
-            $articleId = (int)$this->request->params['pass'][0];
+        if (in_array($this->request->getParam('action'), ['edit', 'delete'])) {
+            $articleId = (int)$this->request->getParam('pass.0');
             if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
                 return true;
             }

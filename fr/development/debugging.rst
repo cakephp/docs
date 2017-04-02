@@ -93,6 +93,23 @@ et méthodes (s'il y en a) de la variable fournie:::
         mileage => (int)15000
     }
 
+Masquer des Données
+-------------------
+
+Lorsque vous affichez des données avec ``Debugger`` ou que des pages d'erreurs
+sont affichées, vous pouvez souhaiter masquer des données sensibles comme des
+mots de passes ou des clés d'API. Dans votre fichier ``config/bootstrap.php``,
+vous pouvez spécifier les clés à masquer::
+
+    Debugger::setOutputMask([
+        'password' => 'xxxxx',
+        'awsKey' => 'yyyyy',
+    ]);
+
+.. versionadded:: 3.4.0
+
+    Les masques d'affichage ont été ajoutés dans la version 3.4.0
+
 Logging With Stack Traces
 =========================
 
@@ -171,7 +188,7 @@ utiliser les logs (log entries) pour faciliter le debug des méthodes qui
 impliquent des redirections ou des boucles compliquées. Vous pouvez aussi
 utiliser :php:meth:`Cake\\Log\\Log::write()`` pour écrire les messages de log.
 Cette méthode peut être appelée statiquement partout dans votre application où
-CakeLog a été chargée::
+Log a été chargée::
 
     // Au début du fichier dans lequel vous voulez logger.
     use Cake\Log\Log;

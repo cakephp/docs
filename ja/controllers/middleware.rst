@@ -3,9 +3,9 @@
 
 ミドルウェアオブジェクトは、再利用可能で構成可能なリクエスト処理、あるいは
 レスポンス構築処理の層でアプリケーションを‘ラップ’する機能を提供します。
-ミドルウェアは CakePHP における新しい HTTP スタックの部分で、 PSR7 のリクエスト
-およびレスポンスのインターフェイスを活用しています。 PSR7 標準の活用によって、
-`Packagist <https://packagist.org>`__ で利用可能な、あらゆる PSR7 互換の
+ミドルウェアは CakePHP における新しい HTTP スタックの部分で、 PSR-7 のリクエスト
+およびレスポンスのインターフェイスを活用しています。 PSR-7 標準の活用によって、
+`Packagist <https://packagist.org>`__ で利用可能な、あらゆる PSR-7 互換の
 ミドルウェアを使うことができます。
 
 CakePHP はいくつかのミドルウェアを既成で提供します。
@@ -37,11 +37,11 @@ CakePHP はいくつかのミドルウェアを既成で提供します。
 
     class Application extends BaseApplication
     {
-        public function middleware($middleware)
+        public function middleware($middlewareStack)
         {
             // ミドルウェアのキューにエラーハンドラを結びつけます。
-            $middleware->add(new ErrorHandlerMiddleware());
-            return $middleware;
+            $middlewareStack->add(new ErrorHandlerMiddleware());
+            return $middlewareStack;
         }
     }
 
@@ -50,19 +50,19 @@ CakePHP はいくつかのミドルウェアを既成で提供します。
         $layer = new \App\Middleware\CustomMiddleware;
 
         // 追加されたミドルウェアは行列の末尾になります。
-        $middleware->add($layer);
+        $middlewareStack->add($layer);
 
         // 追加されたミドルウェアは行列の先頭になります。
-        $middleware->prepend($layer);
+        $middlewareStack->prepend($layer);
 
         // 特定の位置に挿入します。もし位置が範囲外の場合、
         // 末尾に追加されます。
-        $middleware->insertAt(2, $layer);
+        $middlewareStack->insertAt(2, $layer);
 
         // 別のミドルウェアの前に挿入します。
         // もしその名前のクラスが見つからない場合、
         // 例外が発生します。
-        $middleware->insertBefore(
+        $middlewareStack->insertBefore(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
@@ -70,7 +70,7 @@ CakePHP はいくつかのミドルウェアを既成で提供します。
         // 別のミドルウェアの後に挿入します。
         // もしその名前のクラスが見つからない場合、
         // ミドルウェアは末尾に追加されます。
-        $middleware->insertAfter(
+        $middlewareStack->insertAfter(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
@@ -88,14 +88,14 @@ CakePHP はいくつかのミドルウェアを既成で提供します。
 
     EventManager::instance()->on(
         'Server.buildMiddleware',
-        function ($event, $middleware) {
-            $middleware->add(new ContactPluginMiddleware());
+        function ($event, $middlewareStack) {
+            $middlewareStack->add(new ContactPluginMiddleware());
         });
 
-PSR7 リクエストとレスポンス
-===========================
+PSR-7 リクエストとレスポンス
+============================
 
-`PSR7 リクエストとレスポンスインターフェイス <http://www.php-fig.org/psr/psr-7/>`__ 
+`PSR-7 リクエストとレスポンスインターフェイス <http://www.php-fig.org/psr/psr-7/>`__
 の先頭でミドルウェアと新しい HTTP スタックは構築されます。すべてのミドルウェアは
 これらのインターフェイスに触れることになりますが、コントローラ、コンポーネント
 およびビューは *そうではありません* 。
@@ -199,7 +199,7 @@ PSR7 リクエストとレスポンス
 あるいは‘プロトコル’を持っています。そのプロトコルとは下記のようなものです。
 
 #. ミドルウェアは ``__invoke($request, $response, $next)`` を実装しなければなりません。
-#. ミドルウェアは PSR7 ``ResponseInterface`` を実装したオブジェクトを返さなければなりません。
+#. ミドルウェアは PSR-7 ``ResponseInterface`` を実装したオブジェクトを返さなければなりません。
 
 ミドルウェアは ``$next`` を呼ぶか、独自のレスポンスを作成することによって、レスポンスを
 返すことができます。我々の単純なミドルウェアで、両方のオプションを見ることができます。 ::
@@ -217,7 +217,7 @@ PSR7 リクエストとレスポンス
 
             // レスポンスを変更する時には、 next を呼んだ *後に*
             // それを行うべきです。
-            if (!$request->cookie('landing_page')) {
+            if (!$request->getCookie('landing_page')) {
                 $response->cookie([
                     'name' => 'landing_page',
                     'value' => $request->here(),
@@ -238,14 +238,14 @@ PSR7 リクエストとレスポンス
 
     class Application
     {
-        public function middleware($middleware)
+        public function middleware($middlewareStack)
         {
             // 単純なミドルウェアをキューに追加します
-            $middleware->add(new TrackingCookieMiddleware());
+            $middlewareStack->add(new TrackingCookieMiddleware());
 
             // もう少しミドルウェアをキューに追加します
 
-            return $middleware;
+            return $middlewareStack;
         }
     }
 
@@ -274,4 +274,4 @@ HTTP ミドルウェアとして再実装を始める準備が整います。
 
 .. meta::
     :title lang=ja: Http ミドルウェア
-    :keywords lang=ja: http, ミドルウェア, psr7, リクエスト, レスポンス, wsgi, アプリケーション, baseapplication
+    :keywords lang=ja: http, ミドルウェア, psr-7, リクエスト, レスポンス, wsgi, アプリケーション, baseapplication

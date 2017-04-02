@@ -1,8 +1,10 @@
 シンプルな認証と認可のアプリケーション
 ######################################
 
-:doc:`/tutorials-and-examples/blog/blog` の例で、ログインユーザに基づく特定のURLに対してセキュアなアクセスをしたい、という状況を想像してください。
-また、別の要求もあります。 複数の著者が自身の記事を作成、編集、削除できて、一方で他の著者が自身のものではない記事に変更を加えるのを許可しないようなブログにすることができます。
+:doc:`/tutorials-and-examples/blog/blog` の例で、ログインユーザに基づく特定の
+URL に対してセキュアなアクセスをしたい、という状況を想像してください。
+また、別の要求もあります。 複数の著者が自身の記事を作成、編集、削除できて、
+一方で他の著者が自身のものではない記事に変更を加えるのを許可しないようなブログにすることができます。
 
 ユーザに関連するコードを作成する
 ================================
@@ -18,10 +20,11 @@
         modified DATETIME DEFAULT NULL
     );
 
-テーブルの命名にはCakePHPの規則がありますが、別の規則も活用できます。
-username と password のカラムをユーザテーブルに使用すると、CakePHPはユーザログインの実装のときにほとんどのことを自動で定義します。
+テーブルの命名には CakePHP の規則がありますが、別の規則も活用できます。
+username と password のカラムをユーザテーブルに使用すると、
+CakePHP はユーザログインの実装のときにほとんどのことを自動で定義します。
 
-続いてのステップは、ユーザデータを見つけたり、保存したり、バリデートしたりする UserTable クラスを作成することです。 ::
+続いてのステップは、ユーザデータを検索、保存、検証する UsersTable クラスを作成することです。 ::
 
     // src/Model/Table/UsersTable.php
     namespace App\Model\Table;
@@ -46,7 +49,8 @@ username と password のカラムをユーザテーブルに使用すると、C
 
     }
 
-では UsersController も作成しましょう。以下の内容は基本的に bake されたUsersControllerの一部に対応するもので、
+では UsersController も作成しましょう。以下の内容は基本的に bake された
+UsersController の一部に対応するもので、
 CakePHP にバンドルされているコード生成ユーティリティを利用しています。 ::
 
     // src/Controller/UsersController.php
@@ -80,7 +84,7 @@ CakePHP にバンドルされているコード生成ユーティリティを利
         {
             $user = $this->Users->newEntity();
             if ($this->request->is('post')) {
-                $user = $this->Users->patchEntity($user, $this->request->data);
+                $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
                     return $this->redirect(['action' => 'add']);
@@ -103,9 +107,9 @@ CakePHP にバンドルされているコード生成ユーティリティを利
     <?= $this->Form->create($user) ?>
         <fieldset>
             <legend><?= __('Add User') ?></legend>
-            <?= $this->Form->input('username') ?>
-            <?= $this->Form->input('password') ?>
-            <?= $this->Form->input('role', [
+            <?= $this->Form->control('username') ?>
+            <?= $this->Form->control('password') ?>
+            <?= $this->Form->control('role', [
                 'options' => ['admin' => 'Admin', 'author' => 'Author']
             ]) ?>
        </fieldset>
@@ -116,10 +120,13 @@ CakePHP にバンドルされているコード生成ユーティリティを利
 認証(ログインとログアウト)
 ==========================
 
-認証レイヤを追加する準備が整いました。CakePHPにおいて、これは :php:class:`Cake\\Controller\\Component\\AuthComponent` で扱われており、
-このクラスはあるアクションのログインで必要となり、ユーザのログインとログアウトを扱い、そしてログインユーザがアクセスできるアクションの認証を行います。
+認証レイヤを追加する準備が整いました。CakePHP において、これは
+:php:class:`Cake\\Controller\\Component\\AuthComponent` で扱われており、
+このクラスはあるアクションのログインで必要となり、ユーザのログインとログアウトを扱い、
+そしてログインユーザがアクセスできるアクションの認証を行います。
 
-このコンポーネントをアプリケーションに追加するには、 **src/Controller/AppController.php** ファイルを開いて、以下の行を追加してください。 ::
+このコンポーネントをアプリケーションに追加するには、 **src/Controller/AppController.php**
+ファイルを開いて、以下の行を追加してください。 ::
 
     // src/Controller/AppController.php
 
@@ -159,12 +166,15 @@ CakePHP にバンドルされているコード生成ユーティリティを利
 ログインおよびログアウトアクションが実行された後に読み込まれるURLのセットアップをしました。
 今回の場合では ``/articles/`` および ``/`` をそれぞれ設定しました。
 
-``beforeFitler()`` 関数でしたことは、 AuthComponent にそれぞれのコントローラの ``index()`` と ``view()`` アクションではログインは不要であると伝えることです。
+``beforeFitler()`` 関数でしたことは、 AuthComponent にそれぞれのコントローラの
+``index()`` と ``view()`` アクションではログインは不要であると伝えることです。
 このサイトでは、登録なしでもエントリーを読んだり一覧したりさせたいのです。
 
 それでは、新しいユーザを登録できるようにする必要があります。ユーザネームとパスワードを保存し、
-そしてさらに重要なこととして、パスワードがデータベースないに平文で保存されないようにパスワードをハッシュしましょう。
-それでは、 AuthComponent に認証されていないユーザにはユーザ追加機能にアクセスさせるように設定して、ログインとログアウトのアクションを実装しましょう。 ::
+そしてさらに重要なこととして、パスワードがデータベースないに平文で保存されないようにパスワードを
+ハッシュ化しましょう。
+それでは、 AuthComponent に認証されていないユーザにはユーザ追加機能にアクセスさせるように設定して、
+ログインとログアウトのアクションを実装しましょう。 ::
 
     // src/Controller/UsersController.php
     namespace App\Controller;
@@ -174,7 +184,7 @@ CakePHP にバンドルされているコード生成ユーティリティを利
 
     class UsersController extends AppController
     {
-        // Other methods..
+        // その他のメソッド..
 
         public function beforeFilter(Event $event)
         {
@@ -203,8 +213,8 @@ CakePHP にバンドルされているコード生成ユーティリティを利
         }
     }
 
-パスワードのハッシュはまだ済んでいません。特別なロジックを扱うためには、UserのEntityクラスが必要です。
-**src/Model/Entity/User.php** にエンティティファイルを作成し、以下を追加します。 ::
+パスワードのハッシュ化はまだ済んでいません。特別なロジックを扱うためには、UserのEntity
+クラスが必要です。 **src/Model/Entity/User.php** にエンティティファイルを作成し、以下を追加します。 ::
 
     // src/Model/Entity/User.php
     namespace App\Model\Entity;
@@ -231,37 +241,48 @@ CakePHP にバンドルされているコード生成ユーティリティを利
         // ...
     }
 
-これで、パスワードのプロパティがユーザにアサインされるたびに、 ``DefaultPasswordHasher`` クラスを用いてパスワードがハッシュ化されます。
-ログイン機能のテンプレートビューファイルが足りていません。 **src/Template/Users/login.ctp** ファイルを開いて、以下を追加してください。
+これで、パスワードのプロパティがユーザにアサインされるたびに、 ``DefaultPasswordHasher``
+クラスを用いてパスワードがハッシュ化されます。ログイン機能のテンプレートビューファイルが足りていません。
+**src/Template/Users/login.ctp** ファイルを開いて、以下を追加してください。
 
 .. code-block:: php
 
     <!-- File: src/Template/Users/login.ctp -->
 
     <div class="users form">
-    <?= $this->Flash->render('auth') ?>
+    <?= $this->Flash->render() ?>
     <?= $this->Form->create() ?>
         <fieldset>
             <legend><?= __('Please enter your username and password') ?></legend>
-            <?= $this->Form->input('username') ?>
-            <?= $this->Form->input('password') ?>
+            <?= $this->Form->control('username') ?>
+            <?= $this->Form->control('password') ?>
         </fieldset>
     <?= $this->Form->button(__('Login')); ?>
     <?= $this->Form->end() ?>
     </div>
 
-``/users/add`` のURLにアクセスすると、新しいユーザを登録でき、 ``/users/login`` URLで新しく作られた認証情報を用いてログインできます。
-たとえば ``/articles/add`` のように、明確に許可されていない他のURLにもアクセスしてみてください。アプリケーションがログインページに自動的にリダイレクトするのがわかります。
+``/users/add`` の URL にアクセスすると、新しいユーザを登録でき、 ``/users/login`` URL
+で新しく作られた認証情報を用いてログインできます。たとえば ``/articles/add`` のように、
+明確に許可されていない他のURLにもアクセスしてみてください。アプリケーションがログインページに
+自動的にリダイレクトするのがわかります。
 
-そして、これで終わりです！ シンプルすぎるようですが、これで良いのです。何が起こったのかを少し戻って説明しましょう。
-AppController の ``beforeFilter()`` ですでに許可されている ``index()`` および ``view()`` アクションに加えて、 ``add()`` アクションんいもログインが不要であることを AuthComponent に ``beforeFilter()`` で伝えています。
+そして、これで終わりです！ シンプルすぎるようですが、これで良いのです。
+何が起こったのかを少し戻って説明しましょう。
+AppController の ``beforeFilter()`` ですでに許可されている ``index()`` および ``view()``
+アクションに加えて、 ``add()`` アクションもログインが不要であることを AuthComponent に
+``beforeFilter()`` で伝えています。
 
-``login()`` アクションは AuthComponent 内の ``$this->Auth->identify()`` 関数で呼び、特別な設定なしに動きます。
-なぜなら先に言及した通り、規約に従っているからです。Usersテーブルは username, password のカラムを持ち、ユーザデータをコントローラに送るフォームを利用します。
-この関数はログインがうまくいったかどうかを返します、そしてうまくいった場合は、アプリケーションの AuthComponent に追加したときに使用した、設定されたリダイレクトURLにリダイレクトします。
+``login()`` アクションは AuthComponent 内の ``$this->Auth->identify()`` 関数で呼び、
+特別な設定なしに動きます。
+なぜなら先に言及した通り、規約に従っているからです。Users テーブルは username,
+password のカラムを持ち、ユーザデータをコントローラに送るフォームを利用します。
+この関数はログインがうまくいったかどうかを返します、そしてうまくいった場合は、
+アプリケーションの AuthComponent に追加したときに使用した、
+設定されたリダイレクト URL にリダイレクトします。
 
-ログアウトはただ ``/users/logout`` URLにアクセスするだけで動作します。そして先に宣言し設定したログアウトURLにリダイレクトさせます。
-このURLは、 ``AuthComponent::logout()`` 関数がうまくいった場合の結果です。
+ログアウトはただ ``/users/logout`` URL にアクセスするだけで動作します。
+そして先に宣言し設定したログアウト URL にリダイレクトさせます。
+この URL は、 ``AuthComponent::logout()`` 関数がうまくいった場合の結果です。
 
 認可(誰が何にアクセスするのを許可するか)
 ========================================
@@ -271,7 +292,8 @@ AppController の ``beforeFilter()`` ですでに許可されている ``index()
 
     ALTER TABLE articles ADD COLUMN user_id INT(11);
 
-さらに、 ArticlesControllerに、記事を作成した現在のログインユーザの参照を追加するように少し変更する必要があります。 ::
+さらに、 ArticlesController に、記事を作成した現在のログインユーザの参照を追加するように
+少し変更する必要があります。 ::
 
     // src/Controller/ArticlesController.php
 
@@ -279,7 +301,7 @@ AppController の ``beforeFilter()`` ですでに許可されている ``index()
     {
         $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
-            $article = $this->Articles->patchEntity($article, $this->request->data);
+            $article = $this->Articles->patchEntity($article, $this->request->getData());
             // Added this line
             $article->user_id = $this->Auth->user('id');
             // You could also do the following
@@ -337,12 +359,15 @@ AppController の ``beforeFilter()`` ですでに許可されている ``index()
         return false;
     }
 
-シンプルな認可メカニズムを作成しました。 ``admin`` ロールのユーザはログインしていればサイト内のあらゆるURLにアクセスできます。
+シンプルな認可メカニズムを作成しました。 ``admin`` ロールのユーザはログインしていれば
+サイト内のあらゆる URL にアクセスできます。
 他のユーザ、 ``author`` ロールのユーザは、ログインしていないユーザと同じアクセス権を持ちます。
 
-これは、求めているものではありません。 ``isAuthorized()`` メソッドで、さらにルールを追加する必要があります。
-このことを AppConroller 内でやるかわりに、各個別のコントローラにさらなるルールを追加することにしましょう。
-追加しようとしているルールというのは、 ArticlesController によって、著者は記事を作成できるが、自分のものではない記事を編集できないようにする、というものです。
+これは、求めているものではありません。 ``isAuthorized()`` メソッドで、
+さらにルールを追加する必要があります。このことを AppConroller 内でやるかわりに、
+各個別のコントローラにさらなるルールを追加することにしましょう。
+追加しようとしているルールというのは、 ArticlesController によって、著者は記事を作成できるが、
+自分のものではない記事を編集できないようにする、というものです。
 以下の内容を **ArticlesController.php** に追加してください。 ::
 
     // src/Controller/ArticlesController.php
@@ -350,13 +375,13 @@ AppController の ``beforeFilter()`` ですでに許可されている ``index()
     public function isAuthorized($user)
     {
         // All registered users can add articles
-        if ($this->request->action === 'add') {
+        if ($this->request->getParam('action') === 'add') {
             return true;
         }
 
         // The owner of an article can edit and delete it
-        if (in_array($this->request->action, ['edit', 'delete'])) {
-            $articleId = (int)$this->request->params['pass'][0];
+        if (in_array($this->request->getParam('action'), ['edit', 'delete'])) {
+            $articleId = (int)$this->request->getParam('pass.0');
             if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
                 return true;
             }
@@ -365,10 +390,11 @@ AppController の ``beforeFilter()`` ですでに許可されている ``index()
         return parent::isAuthorized($user);
     }
 
-AppController の ``isAuthorized()`` を上書きして、内部的に親クラスをチェックすることによってすでにユーザを認可しています。
-そうでなければ、 add アクションへのアクセスだけを許可し、条件付きで edit や delete へアクセスできます。
-最後のひとつだけが実装されていません。記事を編集するためのユーザが認可されているかどうかを伝えるために、 Articlesテーブルの ``isOwnedBy()`` 関数を呼んでいます。
-それでは、この関数を実装しましょう。 ::
+AppController の ``isAuthorized()`` を上書きして、内部的に親クラスをチェックすることによって
+すでにユーザを認可しています。そうでなければ、 add アクションへのアクセスだけを許可し、条件付きで
+edit や delete へアクセスできます。最後のひとつだけが実装されていません。
+記事を編集するためのユーザが認可されているかどうかを伝えるために、 Articlesテーブルの
+``isOwnedBy()`` 関数を呼んでいます。それでは、この関数を実装しましょう。 ::
 
     // src/Model/Table/ArticlesTable.php
 
@@ -379,9 +405,11 @@ AppController の ``isAuthorized()`` を上書きして、内部的に親クラ�
 
 これでシンプルな認証と認可のチュートリアルが終わりです。
 UseresController を守るためには、 ArticlesController でやったのと同じテクニックを利用できます。
-もっとクリエイティブになって、あなた自身のルールに基づいて AppController の中でさらに一般的なものを実装することもできます。
+もっとクリエイティブになって、あなた自身のルールに基づいて AppController の中で
+さらに一般的なものを実装することもできます。
 
-もしより制御したいのなら、 :doc:`/controllers/components/authentication` セクションの Auth ガイドを通して読むことをお勧めします。
+もしより制御したいのなら、 :doc:`/controllers/components/authentication` セクションの
+Auth ガイドを通して読むことをお勧めします。
 コンポーネントの設定や、カスタム認証クラスの作成、そしてその他のことをさらに見つけることができるでしょう。
 
 より詳しく知りたい方のための読みもの

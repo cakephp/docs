@@ -36,6 +36,36 @@ job('Book - Deploy 3.x') {
   steps {
     shell(BUILD_STEPS.replaceAll('VERSION', '3'))
   }
+  publishers {
+    slackNotifications {
+      projectChannel('#dev')
+      notifyFailure()
+      notifyRepeatedFailure()
+    }
+  }
+}
+
+job('Book - Deploy 3.next') {
+  description('Deploy the 3.next book when changes are pushed.')
+  scm {
+    github(REPO_NAME, '3.next')
+  }
+  triggers {
+    scm('H/5 * * * *')
+  }
+  logRotator {
+    daysToKeep(30)
+  }
+  steps {
+    shell(BUILD_STEPS.replaceAll('VERSION', '3next'))
+  }
+  publishers {
+    slackNotifications {
+      projectChannel('#dev')
+      notifyFailure()
+      notifyRepeatedFailure()
+    }
+  }
 }
 
 job('Book - Deploy 2.x') {
@@ -51,6 +81,13 @@ job('Book - Deploy 2.x') {
   }
   steps {
     shell(BUILD_STEPS.replaceAll('VERSION', '2'))
+  }
+  publishers {
+    slackNotifications {
+      projectChannel('#dev')
+      notifyFailure()
+      notifyRepeatedFailure()
+    }
   }
 }
 

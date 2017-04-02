@@ -181,7 +181,7 @@ read if you want re-familiarize yourself with how CakePHP works.
 You'll need to edit the following in **src/Template/Categories/add.ctp**
 and **src/Template/Categories/edit.ctp**::
 
-    echo $this->Form->input('parent_id', [
+    echo $this->Form->control('parent_id', [
         'options' => $parentCategories,
         'empty' => 'No parent category'
     ]);
@@ -205,11 +205,11 @@ that the TreeBehavior has been attached to your CategoriesTable in the
 With the TreeBehavior attached you'll be able to access some features like
 reordering the categories.  We'll see that in a moment.
 
-But for now, you have to remove the following inputs in your Categories add and
+But for now, you have to remove the following controls in your Categories add and
 edit template files::
 
-    echo $this->Form->input('lft');
-    echo $this->Form->input('rght');
+    echo $this->Form->control('lft');
+    echo $this->Form->control('rght');
 
 In addition you should disable or remove the requirePresence from the validator
 for both the ``lft`` and ``rght`` columns in your CategoriesTable model::
@@ -350,7 +350,7 @@ it::
         {
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
-                $article = $this->Articles->patchEntity($article, $this->request->data);
+                $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
                     return $this->redirect(['action' => 'index']);
@@ -379,10 +379,10 @@ The article add file should look something like this:
     <h1>Add Article</h1>
     <?php
     echo $this->Form->create($article);
-    // just added the categories input
-    echo $this->Form->input('category_id');
-    echo $this->Form->input('title');
-    echo $this->Form->input('body', ['rows' => '3']);
+    // just added the categories control
+    echo $this->Form->control('category_id');
+    echo $this->Form->control('title');
+    echo $this->Form->control('body', ['rows' => '3']);
     echo $this->Form->button(__('Save Article'));
     echo $this->Form->end();
 

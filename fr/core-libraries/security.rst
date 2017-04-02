@@ -6,7 +6,7 @@ Security
 .. php:class:: Security
 
 La `librairie security
-<https://api.cakephp.org/3.0/class-Cake.Utility.Security.html>`_
+<https://api.cakephp.org/3.x/class-Cake.Utility.Security.html>`_
 gère les mesures basiques de sécurité telles que les méthodes fournies pour
 le hashage et les données chiffrées.
 

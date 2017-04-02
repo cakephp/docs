@@ -643,6 +643,37 @@ Application::bootstrap()
 `php-dotenv ライブラリ <https://github.com/josegonzalez/php-dotenv>`_
 を利用して環境変数をローカルの開発に使えます。詳しい情報はライブラリの Readme の説明を参照してください。
 
+
+汎用テーブルの無効化
+====================
+
+新しいアプリケーションを素早く作成したり、モデルを生成する時に便利な
+auto-tables とも呼ばれる汎用テーブルクラスを利用していますが、
+汎用テーブルクラスは、ある場面ではデバッグが困難になることがあります。
+
+DebugKit の SQL パネルから DebugKit 経由で汎用テーブルクラスから
+クエリが発行されたかどうかを確認できます。もし、なおも auto-tables によって
+引き起こされたかもしれない問題を診断するのに困っている場合、次のように、
+CakePHP が固有のクラスを使用する代わりに、暗黙的に汎用的な ``Cake\ORM\Table`` を
+使用する時に例外を投げることができます。 ::
+
+    // bootstrap.php の中で
+    use Cake\Event\EventManager;
+    use Cake\Network\Exception\InternalErrorException;
+
+    $isCakeBakeShellRunning = (PHP_SAPI === 'cli' && isset($argv[1]) && $argv[1] === 'bake');
+    if (!$isCakeBakeShellRunning) {
+        EventManager::instance()->on('Model.initialize', function($event) {
+            $subject = $event->getSubject();
+            if (get_class($subject === 'Cake\ORM\Table') {
+                $msg = sprintf(
+                    'データベーステーブル %s のテーブルクラスを登録する時、テーブルクラスが見つからないか、エイリアスが不正です。',
+                    $subject->getTable());
+                throw new InternalErrorException($msg);
+            }
+        });
+    }
+
 .. meta::
     :title lang=ja: 構成設定
-    :keywords lang=ja: finished configuration,legacy database,database configuration,value pairs,default connection,optional configuration,example database,php class,configuration database,default database,configuration steps,index database,configuration details,class database,host localhost,inflections,key value,database connection,piece of cake,basic web
+    :keywords lang=ja: finished configuration,legacy database,database configuration,value pairs,default connection,optional configuration,example database,php class,configuration database,default database,configuration steps,index database,configuration details,class database,host localhost,inflections,key value,database connection,piece of cake,basic web,auto tables,auto-tables,generic table,class

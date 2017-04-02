@@ -326,6 +326,19 @@ pour chaque table par exemple::
 
 Cet exemple suppose que ``Categories`` a le TranslateBehavior attaché.
 
+Faire une requête sur un champ traduit
+--------------------------------------
+
+Par défaut, le ``TranslateBehavior`` ne remplace rien dans les conditions des
+``find``.
+Vous devez utiliser la méthode ``translationField()`` pour composer des ``find``
+basés sur des champs traduits::
+
+    $this->Articles->locale('es');
+    $data = $this->Articles->find()->where([
+        $this->Articles->translationField('title') => 'Otro Título'
+    ]);
+
 Sauvegarder dans une Autre Langue
 =================================
 

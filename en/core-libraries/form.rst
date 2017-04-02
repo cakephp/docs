@@ -82,7 +82,7 @@ and validate request data::
         {
             $contact = new ContactForm();
             if ($this->request->is('post')) {
-                if ($contact->execute($this->request->data)) {
+                if ($contact->execute($this->request->getData())) {
                     $this->Flash->success('We will get back to you soon.');
                 } else {
                     $this->Flash->error('There was a problem submitting your form.');
@@ -97,13 +97,14 @@ In the above example, we use the ``execute()`` method to run our form's
 accordingly. We could have also used the ``validate()`` method to only validate
 the request data::
 
-    $isValid = $form->validate($this->request->data);
-    
+    $isValid = $form->validate($this->request->getData());
+
 Setting Form Values
 ===================
 
 In order to set the values for the fields of a modelless form, one can define
-the values using ``$this->request->data``, like in all other forms created by the FormHelper::
+the values using ``$this->request->data()``, like in all other forms created by
+the FormHelper::
 
     // In a controller
     namespace App\Controller;
@@ -117,23 +118,23 @@ the values using ``$this->request->data``, like in all other forms created by th
         {
             $contact = new ContactForm();
             if ($this->request->is('post')) {
-                if ($contact->execute($this->request->data)) {
+                if ($contact->execute($this->request->getData())) {
                     $this->Flash->success('We will get back to you soon.');
                 } else {
                     $this->Flash->error('There was a problem submitting your form.');
                 }
             }
-            
+
             if ($this->request->is('get')) {
-                //Values from the User Model e.g.
-                $this->request->data['name'] = 'John Doe';
-                $this->request->data['email'] = 'john.doe@example.com';
+                // Values from the User Model e.g.
+                $this->request->data('name', 'John Doe');
+                $this->request->data('email','john.doe@example.com');
             }
-            
+
             $this->set('contact', $contact);
         }
     }
-    
+
 Values should only be defined if the request method is GET, otherwise
 you will overwrite your previous POST Data which might have been incorrect
 and not been saved.
@@ -185,9 +186,9 @@ Once you've created a Form class, you'll likely want to create an HTML form for
 it. FormHelper understands Form objects just like ORM entities::
 
     echo $this->Form->create($contact);
-    echo $this->Form->input('name');
-    echo $this->Form->input('email');
-    echo $this->Form->input('body');
+    echo $this->Form->control('name');
+    echo $this->Form->control('email');
+    echo $this->Form->control('body');
     echo $this->Form->button('Submit');
     echo $this->Form->end();
 

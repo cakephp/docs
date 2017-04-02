@@ -7,7 +7,7 @@ Le package de validation dans CakePHP fournit des fonctionnalités pour
 construire des validators qui peuvent valider des tableaux arbitraires de
 données avec simplicité. Vous pouvez trouver une `liste des règles de validation
 dans l'API
-<https://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`__.
+<https://api.cakephp.org/3.x/class-Cake.Validation.Validation.html>`__.
 
 .. _creating-validators:
 
@@ -457,7 +457,7 @@ d'envoyer un email, vous pouvez faire ce qui suit::
         ->requirePresence('comment')
         ->allowEmpty('comment', false, 'You need to give a comment.');
 
-    $errors = $validator->errors($this->request->data());
+    $errors = $validator->errors($this->request->getData());
     if (empty($errors)) {
         // Envoi d'un email.
     }
@@ -474,7 +474,7 @@ d'erreur va être retourné par champ. Par défaut la méthode ``errors()`` appl
 les règles pour le mode 'create' mode. Si vous voulez appliquer les règles
 'update' vous pouvez faire ce qui suit::
 
-    $errors = $validator->errors($this->request->data(), false);
+    $errors = $validator->errors($this->request->getData(), false);
     if (empty($errors)) {
         // Envoi d'un email.
     }
@@ -499,7 +499,7 @@ on utilise ``newEntity()``, ``newEntities()``, ``patchEntity()`` ou
 ``patchEntities()``::
 
     // Dans la classe ArticlesController
-    $article = $this->Articles->newEntity($this->request->data());
+    $article = $this->Articles->newEntity($this->request->getData());
     if ($article->errors()) {
         // Afficher les messages d'erreur ici.
     }
@@ -508,7 +508,7 @@ De la même manière, quand vous avez besoin de pré-valider plusieurs entities
 en une fois, vous pouvez utiliser la méthode ``newEntities()``::
 
     // Dans la classe ArticlesController
-    $entities = $this->Articles->newEntities($this->request->data());
+    $entities = $this->Articles->newEntities($this->request->getData());
     foreach ($entities as $entity) {
         if (!$entity->errors()) {
                 $this->Articles->save($entity);
@@ -544,7 +544,7 @@ CakePHP fournit une suite basique de méthodes de validation dans la classe
 fournissent des validators pour plusieurs situations de validation habituelles.
 
 La `documentation de l'API
-<https://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`_ pour la
+<https://api.cakephp.org/3.x/class-Cake.Validation.Validation.html>`_ pour la
 classe ``Validation`` fournit une bonne liste de règles de validation qui sont
 disponibles, et leur utilisation basique.
 

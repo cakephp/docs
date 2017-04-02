@@ -24,7 +24,7 @@ un autre helper à la classe de vue bake, cet event peut être utilisé::
     use Cake\Event\EventManager;
 
     EventManager::instance()->on('Bake.initialize', function (Event $event) {
-        $view = $event->subject;
+        $view = $event->getSubject();
 
         // Dans mes templates de bake, permet l'utilisation du helper MySpecial
         $view->loadHelper('MySpecial', ['some' => 'config']);
@@ -51,7 +51,7 @@ variables utilisées dans les templates de bake::
     use Cake\Event\EventManager;
 
     EventManager::instance()->on('Bake.beforeRender', function (Event $event) {
-        $view = $event->subject;
+        $view = $event->getSubject();
 
         // Utilise $rows pour les principales variables de données dans les indexes
         if ($view->get('pluralName')) {

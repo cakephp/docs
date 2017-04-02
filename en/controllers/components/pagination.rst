@@ -90,7 +90,7 @@ options into a custom finder method within the paginate property::
         // find articles by tag
         public function tags()
         {
-            $tags = $this->request->params['pass'];
+            $tags = $this->request->getParam('pass');
 
             $customFinderOptions = [
                 'tags' => $tags
@@ -130,7 +130,7 @@ Once the ``$paginate`` property has been defined, we can use the
 pagination data, and add the ``PaginatorHelper`` if it hasn't already been
 added. The controller's paginate method will return the result set of the
 paginated query, and set pagination metadata to the request. You can access the
-pagination metadata at ``$this->request->params['paging']``. A more complete
+pagination metadata at ``$this->request->getParam('paging')``. A more complete
 example of using ``paginate()`` would be::
 
     class ArticlesController extends AppController
@@ -189,8 +189,15 @@ Paginating Multiple Queries
 ===========================
 
 You can paginate multiple models in a single controller action, using the
-``scope`` option::
+``scope`` option both in the controller's ``$paginate`` property and in the 
+call to the ``paginate()`` method::
 
+    // Paginate property
+    public $paginate = [
+        'Articles' => ['scope' => 'article'],
+        'Tags' => ['scope' => 'tag']
+    ];
+    
     // In a controller action
     $articles = $this->paginate($this->Articles, ['scope' => 'article']);
     $tags = $this->paginate($this->Tags, ['scope' => 'tag']);
@@ -278,7 +285,7 @@ block and take appropriate action when a ``NotFoundException`` is caught::
             $this->paginate();
         } catch (NotFoundException $e) {
             // Do something here like redirecting to first or last page.
-            // $this->request->params['paging'] will give you required info.
+            // $this->request->getParam('paging') will give you required info.
         }
     }
 

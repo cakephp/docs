@@ -46,7 +46,7 @@ versions anciennes de CakePHP. Comme l'ORM retourne des instances
 vous pouvez utiliser les méthodes ici pour faire la plupart des tâches.
 Par exemple, pour en apprendre plus sur les chaines de formatage, jetez un oeil
 à la méthode `Cake\\I18n\\Time::i18nFormat() 
-<https://api.cakephp.org/3.0/class-Cake.I18n.Time.html#_i18nFormat>`_.
+<https://api.cakephp.org/3.x/class-Cake.I18n.Time.html#_i18nFormat>`_.
 
 .. meta::
     :title lang=fr: TimeHelper

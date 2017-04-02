@@ -304,6 +304,17 @@ I18n::locale を使用せずに一つの言語の取得
 
 この例では、 ``Categories`` も TranslateBehavior が追加されていることを前提としています。
 
+翻訳されたフィールドのクエリ
+-----------------------------
+
+TranslateBehavior は、デフォルトでは検索条件を置換しません。
+翻訳されたフィールドの検索条件を作成するには ``translationField()`` メソッドを使用します。 ::
+
+    $this->Articles->locale('es');
+    $data = $this->Articles->find()->where([
+        $this->Articles->translationField('title') => 'Otro Título'
+    ]);
+
 別の言語で保存
 ==============
 
@@ -399,19 +410,19 @@ TranslateBehavior の背後にある哲学は、デフォルトの言語を表�
     $this->Articles->save($article);
 
 3.3.0 では、複数の翻訳での動作は簡素化されました。
-翻訳されたフィールドの入力フォームを作成することができます。 ::
+翻訳されたフィールドのフォームコントロールを作成することができます。 ::
 
     // ビューテンプレートの中で
     <?= $this->Form->create($article); ?>
     <fieldset>
         <legend>French</legend>
-        <?= $this->Form->input('_translations.fr.title'); ?>
-        <?= $this->Form->input('_translations.fr.body'); ?>
+        <?= $this->Form->control('_translations.fr.title'); ?>
+        <?= $this->Form->control('_translations.fr.body'); ?>
     </fieldset>
     <fieldset>
         <legend>Spanish</legend>
-        <?= $this->Form->input('_translations.es.title'); ?>
-        <?= $this->Form->input('_translations.es.body'); ?>
+        <?= $this->Form->control('_translations.es.title'); ?>
+        <?= $this->Form->control('_translations.es.body'); ?>
     </fieldset>
 
 コントローラの中では、通常通りにデータをマーシャリングできますが、

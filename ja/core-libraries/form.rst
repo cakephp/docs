@@ -78,7 +78,7 @@
         {
             $contact = new ContactForm();
             if ($this->request->is('post')) {
-                if ($contact->execute($this->request->data)) {
+                if ($contact->execute($this->request->getData())) {
                     $this->Flash->success('すぐにご連絡いたします。');
                 } else {
                     $this->Flash->error('フォーム送信に問題がありました。');
@@ -91,14 +91,14 @@
 上の例では、データが有効な時にのみフォームの ``_execute()`` を走らせるために ``execute()`` メソッドを実行し、それに応じたフラッシュメッセージを設定しています。
 データ検証のみ行うために ``validate()`` を使うこともできます::
 
-    $isValid = $form->validate($this->request->data);
+    $isValid = $form->validate($this->request->getData());
     
 フォーム値の設定
 ================
 
 モデルのないフォームのフィールドに値を設定するために、
 FormHelperによって作成される他のすべてのフォームのように
-``$this->request->data`` を使って値を定義することができます::
+``$this->request->data()`` を使って値を定義することができます::
 
     // 何らかのコントローラ中で
     namespace App\Controller;
@@ -112,7 +112,7 @@ FormHelperによって作成される他のすべてのフォームのように
         {
             $contact = new ContactForm();
             if ($this->request->is('post')) {
-                if ($contact->execute($this->request->data)) {
+                if ($contact->execute($this->request->getData())) {
                     $this->Flash->success('すぐにご連絡いたします。');
                 } else {
                     $this->Flash->error('フォーム送信に問題がありました。');
@@ -121,8 +121,8 @@ FormHelperによって作成される他のすべてのフォームのように
             
             if ($this->request->is('get')) {
                 // たとえばユーザーモデルの値
-                $this->request->data['name'] = 'John Doe';
-                $this->request->data['email'] = 'john.doe@example.com';
+                $this->request->data('name', 'John Doe');
+                $this->request->data('email','john.doe@example.com');
             }
             
             $this->set('contact', $contact);
@@ -180,9 +180,9 @@ Formクラスを作ったら、たぶんHTMLフォームを作成したいでし
 FormHelperはFormオブジェクトをORMエンティティとちょうど同じように理解します::
 
     echo $this->Form->create($contact);
-    echo $this->Form->input('name');
-    echo $this->Form->input('email');
-    echo $this->Form->input('body');
+    echo $this->Form->control('name');
+    echo $this->Form->control('email');
+    echo $this->Form->control('body');
     echo $this->Form->button('Submit');
     echo $this->Form->end();
 

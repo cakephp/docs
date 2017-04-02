@@ -33,6 +33,15 @@ Adding the ``-b`` or ``-r`` switch to the load task will enable loading of the p
     // Load the routes.php from the plugin
     Plugin::load('MyPlugin', ['routes' => true]);
 
+If you are loading a plugin that only provides CLI tools - like bake - you can
+update your ``bootstrap_cli.php`` with::
+
+    bin/cake plugin load --cli MyPlugin
+    bin/cake plugin unload --cli MyPlugin
+
+.. versionadded:: 3.4.0
+    As of 3.4.0 the ``--cli`` option is supported
+
 Unloading Plugins
 -----------------
 

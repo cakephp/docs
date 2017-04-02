@@ -72,8 +72,8 @@ CakePHP の URL とパラメータの取り扱いに関するより詳細な情�
 モデルとデータベースの規約
 ==========================
 
-Table クラスの名前は複数形でキャメル記法です。 ``Users``, ``ArticleCategories``,
-``UserFavoritePages`` などは規約に合ったモデル名です。
+Table クラスの名前は複数形でキャメル記法で、最後に ``Table`` が付きます。 ``UsersTable``,
+``ArticleCategoriesTable``, ``UserFavoritePagesTable`` などは規約に合ったモデル名です。
 
 CakePHP のモデルに対応するテーブル名は、複数形でアンダースコア記法です。上記の例で言えば、
 テーブル名はそれぞれ、 ``users`` 、 ``article_categories`` 、 ``user_favorite_pages``
@@ -130,7 +130,6 @@ ArticlesController の ``index()`` 関数にマップします。そして、Art
 さて、これで CakePHP の基本について一通り理解できました。物事がどう組み合わせられるかを確かめるために、
 :doc:`/tutorials-and-examples/bookmarks/intro` を体験することができるでしょう。
 
-
 .. meta::
-    :title lang=ja: CakePHP Conventions
+    :title lang=ja: CakePHP の規約
     :keywords lang=ja: web development experience,maintenance nightmare,index method,legacy systems,method names,php class,uniform system,config files,tenets,articles,conventions,conventional controller,best practices,maps,visibility,news articles,functionality,logic,cakephp,developers

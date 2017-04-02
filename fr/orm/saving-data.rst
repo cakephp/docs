@@ -174,7 +174,7 @@ Convertir les Données Requêtées en Entities
 
 Avant de modifier et sauvegarder à nouveau les données dans la base de données,
 vous devrez convertir les données requêtées (qui se trouvent dans
-$this->request->data) à partir du format de tableau
+$this->request->getData()) à partir du format de tableau
 qui se trouvent dans la requête, et les entities que l'ORM utilise. La classe
 Table facilite la conversion d'une ou de plusieurs entities à partir des
 données requêtées. Vous pouvez convertir une entity unique en utilisant::
@@ -182,7 +182,7 @@ données requêtées. Vous pouvez convertir une entity unique en utilisant::
     // Dans un controller.
     $articles = TableRegistry::get('Articles');
     // Valide et convertit en un objet Entity
-    $entity = $articles->newEntity($this->request->data());
+    $entity = $articles->newEntity($this->request->getData());
 
 Les données requêtées doivent suivre la structure de vos entities. Par
 exemple si vous avez un article qui appartient à un utilisateur, et si vous
@@ -216,7 +216,7 @@ compte::
     $articles = TableRegistry::get('Articles');
 
     // Nouvelle entity avec des associations imbriquées
-    $entity = $articles->newEntity($this->request->data(), [
+    $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags', 'Comments' => ['associated' => ['Users']]
         ]
@@ -238,7 +238,7 @@ la notation par point pour être plus bref::
 
     // Nouvelle entity avec des associations imbriquées en utilisant
     // la notation par point
-    $entity = $articles->newEntity($this->request->data(), [
+    $entity = $articles->newEntity($this->request->getData(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
 
@@ -251,7 +251,7 @@ de validation utilisé par association::
 
     // Ne fait pas la validation pour l'association Tags et
     // appelle l'ensemble de validation 'signup' pour Comments.Users
-    $entity = $articles->newEntity($this->request->data(), [
+    $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags' => ['validate' => false],
             'Comments.Users' => ['validate' => 'signup']
@@ -376,7 +376,7 @@ multiples en une seule opération vous pouvez utiliser ``newEntities()``::
 
     // Dans un controller.
     $articles = TableRegistry::get('Articles');
-    $entities = $articles->newEntities($this->request->data());
+    $entities = $articles->newEntities($this->request->getData());
 
 Dans cette situation, les données de requête pour plusieurs articles doivent
 ressembler à ceci::
@@ -428,7 +428,7 @@ associations existantes entre certaines entities::
 
     // Dans un controller.
     $articles = TableRegistry::get('Articles');
-    $entity = $articles->newEntity($this->request->data(), [
+    $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags', 'Comments' => [
                 'associated' => [
@@ -463,7 +463,7 @@ méthode ``patchEntity()``::
     // Dans un controller.
     $articles = TableRegistry::get('Articles');
     $article = $articles->get(1);
-    $articles->patchEntity($article, $this->request->data());
+    $articles->patchEntity($article, $this->request->getData());
     $articles->save($article);
 
 Validation et patchEntity
@@ -483,7 +483,7 @@ montré ci-dessous::
 Vous pouvez également changer l'ensemble de validation utilisé pour l'entity
 ou n'importe qu'elle association::
 
-    $articles->patchEntity($article, $this->request->data(), [
+    $articles->patchEntity($article, $this->request->getData(), [
         'validate' => 'custom',
         'associated' => ['Tags', 'Comments.Users' => ['validate' => 'signup']]
     ]);
@@ -501,7 +501,7 @@ pouvez utiliser le troisième paramètre de la méthode::
     // Dans un controller.
     $associated = ['Tags', 'Comments.Users'];
     $article = $articles->get(1, ['contain' => $associated]);
-    $articles->patchEntity($article, $this->request->data(), [
+    $articles->patchEntity($article, $this->request->getData(), [
         'associated' => $associated
     ]);
     $articles->save($article);
@@ -632,7 +632,7 @@ présentes dans les résultats::
     // Dans un controller.
     $articles = TableRegistry::get('Articles');
     $list = $articles->find('popular')->toArray();
-    $patched = $articles->patchEntities($list, $this->request->data());
+    $patched = $articles->patchEntities($list, $this->request->getData());
     foreach ($patched as $entity) {
         $articles->save($entity);
     }
@@ -644,7 +644,7 @@ fusionnées dans chacune des entities du tableau::
     // Dans un controller.
     $patched = $articles->patchEntities(
         $list,
-        $this->request->data(),
+        $this->request->getData(),
         ['associated' => ['Tags', 'Comments.Users']]
     );
 
@@ -774,7 +774,7 @@ passer dans ``save()``. Pare exemple::
 
   // Dans un controller
   $articles = TableRegistry::get('Articles');
-  $article = $articles->newEntity($this->request->data);
+  $article = $articles->newEntity($this->request->getData());
   if ($articles->save($article)) {
       // ...
   }

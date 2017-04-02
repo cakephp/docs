@@ -19,7 +19,7 @@ URL の構造を全部のコードの書き直しをせずにリファクタリ�
 
 ここでは、 CakePHP の最も一般的なルーティングの方法について例を出して説明します。
 ランディングページのように見せたい時がよくあるでしょう。そのときは、 **routes.php**
-に以下を加えます。 ::
+ファイルに以下を加えます。 ::
 
     use Cake\Routing\Router;
 
@@ -204,7 +204,7 @@ URL を生成するときにもルーティングは使われます。もし最�
 
 あなたは独自のルート要素を特定し、コントローラのアクションのパラメータを
 URL のどこに配置すべきなのかを定義することができます。リクエストされたとき、
-これらのルート要素の値は、コントローラーの ``$this->request->params`` から取得できます。
+これらのルート要素の値は、コントローラーの ``$this->request->param()`` から取得できます。
 カスタムルート要素を定義した場合、正規表現をオプションで指定できます。
 これは CakePHP にどんな URL が正しいフォーマットなのかを伝えます。
 正規表現を使用しなかった場合、 ``/`` 以外はすべて値の一部として扱われます。 ::
@@ -246,7 +246,7 @@ URL が必要であったら、 ``InflectedRoute`` クラスを代わりに使�
 
 一度、ルートが定義されたら、 ``/apples/5`` を呼ぶと
 ApplesController の view() メソッドを呼びます。  view() メソッドの中で、
-``$this->request->params['id']`` で渡された ID にアクセスする必要がある。
+``$this->request->param('id')`` で渡された ID にアクセスする必要がある。
 
 アプリの中で一つのコントローラーだけがあるとき、URL にコントローラー名が含まれている必要がない。
 そのときは、すべての URL がアクション名だけで一つのコントローラーに示すことができる。
@@ -285,7 +285,7 @@ CakePHP にコントローラー名が必要なことを伝えています。
 正規表現ではサポートされていません。ほかにも特定可能ですが上記のように括弧でくくりません。
 
 一回定義されたら、このル－ティングが ``/articles/2007/02/01`` , ``/articles/2004/11/16``
-に一致したら、index() へのリクエストをそれが属するコントローラーに ``$this->request->params``
+に一致したら、index() へのリクエストをそれが属するコントローラーに ``$this->request->param()``
 に *date* を格納して渡します。
 
 いくつかの特別な意味を持つルーティング要素があります。
@@ -448,7 +448,7 @@ CakePHP では、プレフィックスルーティングは,  ``prefix`` スコ�
     use Cake\Routing\Route\DashedRoute;
 
     Router::prefix('admin', function ($routes) {
-        // この全てのルートは `/admin` によってプレフィックスされｍす。
+        // この全てのルートは `/admin` によってプレフィックスされます。
         // そのために、 prefix => admin をルート要素として追加します。
         $routes->fallbacks(DashedRoute::class);
     });
@@ -502,7 +502,7 @@ CakePHP では、プレフィックスルーティングは,  ``prefix`` スコ�
 上記のコードは、 ``/manager/admin/:controller`` のようなルーティングテンプレートを生成します。
 接続されたルートは ``prefix`` というルート要素を ``manager/admin`` に設定します。
 
-現在のプレフィックスはコントローラーのメソッドから ``$this->request->params['prefix']``
+現在のプレフィックスはコントローラーのメソッドから ``$this->request->param('prefix')``
 を通して利用可能です。
 
 プレフィックスルーティングを使っているときは、prefix オプションを設定することが重要です。
@@ -592,6 +592,65 @@ SEO に親和性があるルーティング
     Router::plugin('ToDo', ['path' => 'to-do'], function ($routes) {
         $routes->fallbacks('DashedRoute');
     });
+
+指定した HTTP メソッドとの照合
+------------------------------
+
+ルートは、 ``_method`` ルーティングキーを使用して指定した HTTP メソッドとマッチできます。 ::
+
+    Router::scope('/', function($routes) {
+        // このルートは POST リクエスト上でのみマッチします。
+        $routes->connect(
+            '/reviews/start',
+            ['controller' => 'Reviews', 'action' => 'start', '_method' => 'POST']
+        );
+    });
+
+配列を使うことで複数の HTTP メソッドとマッチできます。 ``_method`` パラメータは
+ルーティングキーなので、 URL の解析と URL の生成の両方に使われます。
+
+指定したホスト名との照合
+---------------------------
+
+ルートは、指定のホストのみとマッチするように ``_host`` オプションを使用できます。
+任意のサブドメインとマッチするために ``*.`` ワイルドカードを使用できます。 ::
+
+    Router::scope('/', function($routes) {
+        // このルートは http://images.example.com のみマッチします。
+        $routes->connect(
+            '/images/default-logo.png',
+            ['controller' => 'Images', 'action' => 'default'],
+            ['_host' => 'images.example.com']
+        );
+
+        // このルートは http://*.example.com のみマッチします。
+        $routes->connect(
+            '/images/old-log.png',
+            ['controller' => 'Images', 'action' => 'oldLogo'],
+            ['_host' => '*.example.com']
+        );
+    });
+
+``_host`` オプションは URL 生成でも使用されます。 ``_host`` オプションで正確なドメインを
+指定する場合、そのドメインは生成された URL に含まれます。しかし、もしワイルドカードを
+使用する場合、URL の生成時に ``_host`` パラメータを指定する必要があります。 ::
+
+    // このルートを持つ場合、
+    $routes->connect(
+        '/images/old-log.png',
+        ['controller' => 'Images', 'action' => 'oldLogo'],
+        ['_host' => '*.example.com']
+    );
+
+    // url を生成するために指定が必要です。
+    echo Router::url([
+        'controller' => 'Images',
+        'action' => 'oldLogo',
+        '_host' => 'images.example.com'
+    ]);
+
+.. versionadded:: 3.4.0
+    ``_host`` オプションは 3.4.0 で追加されました。
 
 .. index:: file extensions
 .. _file-extensions:
@@ -708,7 +767,7 @@ POST リクエストの中の、 *\_method* の値を使う方法は、ブラウ
 
 ``CommentsController`` の ``article_id`` を以下のように取得できます。 ::
 
-    $this->request->param('article_id');
+    $this->request->getParam('article_id');
 
 デフォルトでは、リソースルートは、スコープに含まれる同じプレフィックスにマップします。
 もし、ネストしたリソースのコントローラとそうでないリソースのコントローラ両方を持つ場合、
@@ -845,9 +904,8 @@ POST リクエストの中の、 *\_method* の値を使う方法は、ブラウ
 上記のたとえでは、両方の ``recent`` と ``mark`` が ``CalendarsController::view()``
 に引数として渡されます。渡された引数は３つの方法でコントローラーに渡されます。
 一番目は、引数としてアクションを呼ばれたときに渡し、２番目は、
-``$this->request->params['pass']`` で数字をインデックスとする配列で呼べるようになります。
-最後は、 ``$this->passedArgs`` で２番目と同じ方法で呼べます。カスタムルーティングを
-使用するときに、渡された引数を呼ぶために特定のパラメーターを強制することができます。
+``$this->request->getParam('pass')`` で数字をインデックスとする配列で呼べるようになります。
+カスタムルーティングを使用するときに、渡された引数を呼ぶために特定のパラメーターを強制することができます。
 
 前の URL にアクセスしたい場合は、コントローラーアクションでこのようにします。 ::
 
@@ -867,11 +925,11 @@ POST リクエストの中の、 *\_method* の値を使う方法は、ブラウ
         [1] => mark
     )
 
-コントローラーとビューとヘルパーで ``$this->request->params['pass']`` と
-``$this->passedArgs`` でこれと同じデータが利用可能です。pass 配列中の値は、
+コントローラーとビューとヘルパーで ``$this->request->getParam('pass')`` で
+これと同じデータが利用可能です。pass 配列中の値は、
 呼ばれた URL に現れる順番をもとにした数字のインデックスになります。 ::
 
-    debug($this->request->params['pass']);
+    debug($this->request->getParam('pass'));
 
 上記の出力は以下になります。 ::
 
@@ -1071,8 +1129,8 @@ URL フィルター関数は *常に* フィルターされていなくても、
 URL フィルターは永続的なパラメーターなどを簡単に扱う機能を提供します。 ::
 
     Router::addUrlFilter(function ($params, $request) {
-        if (isset($request->params['lang']) && !isset($params['lang'])) {
-            $params['lang'] = $request->params['lang'];
+        if ($request->getParam('lang') && !isset($params['lang'])) {
+            $params['lang'] = $request->getParam('lang');
         }
         return $params;
     });
@@ -1118,7 +1176,7 @@ CakePHP 3.0 から名前付きパラメーターが削除されたとしても�
         Router::parseNamedParams($this->request);
     }
 
-これは、 ``$this->request->params['named']`` にすべての渡された引数にある
+これは、 ``$this->request->getParam('named')`` にすべての渡された引数にある
 名前付きパラメーターを移します。すべての名前付きパラメーターとして変換された引数は
 渡された引数のリストから除去されます。
 

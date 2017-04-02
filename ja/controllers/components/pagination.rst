@@ -46,7 +46,7 @@ Controller::paginate() の使用
         }
     }
 
-また ``fields`` のように、 :php:meth:`~Cake\\ORM\\Table::find()` 
+また ``fields`` のように、 :php:meth:`~Cake\\ORM\\Table::find()`
 によってサポートされたオプションのいずれも含めることができます。 ::
 
     class ArticlesController extends AppController
@@ -90,7 +90,7 @@ Paginate プロパティからほとんどの検索オプションを指定す�
         // タグごとに記事を検索する
         public function tags()
         {
-            $tags = $this->request->params['pass'];
+            $tags = $this->request->getParam('pass');
 
             $customFinderOptions = [
                 'tags' => $tags
@@ -132,7 +132,7 @@ Paginate プロパティからほとんどの検索オプションを指定す�
 ``PaginatorHelper`` がまだ加えられていない場合は PaginatorHelper を加えます。
 Controller の paginate メソッドは、ページ分けされた検索結果を返し、
 ページネーションのメタデータを request にセットします。ページネーションのメタデータは、
-``$this->request->params['paging']`` でアクセスできます。
+``$this->request->getParam('paging')`` でアクセスできます。
 ``paginate()`` を使用するもっとまとまった例としては、 ::
 
     class ArticlesController extends AppController
@@ -191,8 +191,15 @@ PaginatorComponent を直接使用するのがよいです。こちらは、
 複数クエリのページネーション
 ============================
 
+コントローラの ``$paginate`` プロパティの中や ``paginate()`` メソッドを呼ぶ際に
 ``scope`` オプションを使うことで、単一のコントローラアクションに複数モデルで
 paginate できます。 ::
+
+    // paginate プロパティ
+    public $paginate = [
+        'Articles' => ['scope' => 'article'],
+        'Tags' => ['scope' => 'tag']
+    ];
 
     // コントローラのアクションの中で
     $articles = $this->paginate($this->Articles, ['scope' => 'article']);
@@ -276,7 +283,7 @@ try-catch 構文を活用して、適切な処理をすればよいです。 ::
             $this->paginate();
         } catch (NotFoundException $e) {
             // こちらで最初や最後のページにリダイレクトするような何かをします。
-            // $this->request->params['paging'] に要求された情報が入ります。
+            // $this->request->getParam('paging') に要求された情報が入ります。
         }
     }
 

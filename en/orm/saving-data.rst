@@ -173,7 +173,7 @@ one or many entities from request data. You can convert a single entity using::
     $articles = TableRegistry::get('Articles');
 
     // Validate and convert to an Entity object
-    $entity = $articles->newEntity($this->request->data());
+    $entity = $articles->newEntity($this->request->getData());
 
 .. note::
 
@@ -211,17 +211,11 @@ associations should be marshalled::
     $articles = TableRegistry::get('Articles');
 
     // New entity with nested associations
-    $entity = $articles->newEntity($this->request->data(), [
+    $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags', 'Comments' => ['associated' => ['Users']]
         ]
     ]);
-
-You may also disable marshalling of possible nested associations like so::
-
-    $entity = $articles->newEntity($data, ['associated' => []]);
-    // or...
-    $entity = $articles->patchEntity($entity, $data, ['associated' => []]);
 
 The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
 should be marshalled. Alternatively, you can use dot notation for brevity::
@@ -230,9 +224,15 @@ should be marshalled. Alternatively, you can use dot notation for brevity::
     $articles = TableRegistry::get('Articles');
 
     // New entity with nested associations using dot notation
-    $entity = $articles->newEntity($this->request->data(), [
+    $entity = $articles->newEntity($this->request->getData(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
+
+You may also disable marshalling of possible nested associations like so::
+
+    $entity = $articles->newEntity($data, ['associated' => []]);
+    // or...
+    $entity = $articles->patchEntity($entity, $data, ['associated' => []]);
 
 Associated data is also validated by default unless told otherwise. You may also
 change the validation set to be used per association::
@@ -242,7 +242,7 @@ change the validation set to be used per association::
 
     // Bypass validation on Tags association and
     // Designate 'signup' validation set for Comments.Users
-    $entity = $articles->newEntity($this->request->data(), [
+    $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags' => ['validate' => false],
             'Comments.Users' => ['validate' => 'signup']
@@ -362,7 +362,7 @@ When creating forms that create/update multiple records at once you can use
 
     // In a controller.
     $articles = TableRegistry::get('Articles');
-    $entities = $articles->newEntities($this->request->data());
+    $entities = $articles->newEntities($this->request->getData());
 
 In this situation, the request data for multiple articles should look like::
 
@@ -413,7 +413,7 @@ ids of associated entities::
 
     // In a controller
     $articles = TableRegistry::get('Articles');
-    $entity = $articles->newEntity($this->request->data(), [
+    $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags', 'Comments' => [
                 'associated' => [
@@ -446,7 +446,7 @@ persisted. You can merge an array of raw data into an existing entity using the
     // In a controller.
     $articles = TableRegistry::get('Articles');
     $article = $articles->get(1);
-    $articles->patchEntity($article, $this->request->data());
+    $articles->patchEntity($article, $this->request->getData());
     $articles->save($article);
 
 
@@ -466,7 +466,7 @@ patching an entity, pass the ``validate`` option as follows::
 You may also change the validation set used for the entity or any of the
 associations::
 
-    $articles->patchEntity($article, $this->request->data(), [
+    $articles->patchEntity($article, $this->request->getData(), [
         'validate' => 'custom',
         'associated' => ['Tags', 'Comments.Users' => ['validate' => 'signup']]
     ]);
@@ -483,7 +483,7 @@ merge deeper to deeper levels, you can use the third parameter of the method::
     // In a controller.
     $associated = ['Tags', 'Comments.Users'];
     $article = $articles->get(1, ['contain' => $associated]);
-    $articles->patchEntity($article, $this->request->data(), [
+    $articles->patchEntity($article, $this->request->getData(), [
         'associated' => $associated
     ]);
     $articles->save($article);
@@ -599,7 +599,7 @@ the original entities array will be removed and not present in the result::
     // In a controller.
     $articles = TableRegistry::get('Articles');
     $list = $articles->find('popular')->toArray();
-    $patched = $articles->patchEntities($list, $this->request->data());
+    $patched = $articles->patchEntities($list, $this->request->getData());
     foreach ($patched as $entity) {
         $articles->save($entity);
     }
@@ -611,7 +611,7 @@ array::
     // In a controller.
     $patched = $articles->patchEntities(
         $list,
-        $this->request->data(),
+        $this->request->getData(),
         ['associated' => ['Tags', 'Comments.Users']]
     );
 
@@ -632,9 +632,10 @@ request data just before entities are created::
     // In a table or behavior class
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
-       if (isset($data['username'])) {
-           $data['username'] = mb_strtolower($data['username']);
-       }
+        if (isset($data['username'])) {
+            $data['username'] = mb_strtolower($data['username']);
+        }
+    }
 
 The ``$data`` parameter is an ``ArrayObject`` instance, so you don't have to
 return it to change the data used to create entities.
@@ -687,7 +688,7 @@ sending an array in the request containing the ``user_id`` an attacker could
 change the owner of an article, causing undesirable effects::
 
     // Contains ['user_id' => 100, 'title' => 'Hacked!'];
-    $data = $this->request->data;
+    $data = $this->request->getData();
     $entity = $this->patchEntity($entity, $data);
     $this->save($entity);
 
@@ -699,7 +700,7 @@ The second way is by using the ``fieldList`` option when creating or merging
 data into an entity::
 
     // Contains ['user_id' => 100, 'title' => 'Hacked!'];
-    $data = $this->request->data;
+    $data = $this->request->getData();
 
     // Only allow title to be changed
     $entity = $this->patchEntity($entity, $data, [
@@ -736,7 +737,7 @@ using ``newEntity()`` for passing into ``save()``. For example::
 
   // In a controller
   $articles = TableRegistry::get('Articles');
-  $article = $articles->newEntity($this->request->data);
+  $article = $articles->newEntity($this->request->getData());
   if ($articles->save($article)) {
       // ...
   }
@@ -1106,13 +1107,44 @@ receiving from the end user is the correct type. Failing to correctly handle
 complex data could result in malicious users being able to store data they
 would not normally be able to.
 
+Strict Saving
+=============
+
+.. php:method:: saveOrFail($entity, $options = [])
+
+
+Using this method will throw an
+:php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException` if the application
+rules checks failed, the entity contains errors or the save was aborted by
+a callback.  Using this can be helpful when you performing complex database
+operations without human monitoring, for example, inside a Shell task.
+
+.. note::
+
+    If you use this method in a controller, be sure to catch the
+    ``PersistenceFailedException`` that could be raised.
+
+If you want to track down the entity that failed to save, you can use the
+:php:meth:`Cake\\ORM\Exception\\PersistenceFailedException::getEntity()` method::
+
+        try {
+            $table->saveOrFail($entity);
+        } catch (\Cake\ORM\Exception\PersistenceFailedException $e) {
+            echo $e->getEntity();
+        }
+
+As this internally perfoms a :php:meth:`Cake\\ORM\\Table::save()` call, all
+corresponding save events will be triggered.
+
+.. versionadded:: 3.4.1
+
 Saving Multiple Entities
 ========================
 
 .. php:method:: saveMany($entities, $options = [])
 
 
-Using this method you can save multiple entities atomically. ``$entites`` can
+Using this method you can save multiple entities atomically. ``$entities`` can
 be an array of entities created using ``newEntities()`` / ``patchEntities()``.
 ``$options`` can have the same options as accepted by ``save()``::
 
