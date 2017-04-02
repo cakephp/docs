@@ -121,10 +121,132 @@ correctly formatted with the title and table listing of the articles.
 Create the View Action
 ======================
 
+If you were to click one of the 'view' links in our Articles list page, you'd
+see an error page saying that action hasn't been implemented. Lets fix that now::
+
+    // Add to existing src/Controller/ArticlesController.php file
+
+    public function view($id = null)
+    {
+        $article = $this->Articles->get($id);
+        $this->set(compact('article'));
+    }
+
+This is another very simple action, notice that our view action takes
+a parameter: the ID of the article we'd like to see. This parameter is handed to
+the action through the requested URL. If a user requests ``/articles/view/3``,
+then the value '3' is passed as ``$id``. We're using the
+``$this->Articles->get()`` method which will generate a ``404`` page if the
+article isn't found. This saves you having to do checking for missing records in
+your controller action, keeping your code simple and easy to read. If we were to
+reload our browser with our new action saved, we'd see another CakePHP error
+page telling use we're missing a view template; lets fix that.
+
 Create the View Template
 ========================
 
-* Add add action
+Let's create the view for our new 'view' action and place it in
+**src/Template/Articles/view.ctp**
+
+.. code-block:: php
+
+    <!-- File: src/Template/Articles/view.ctp -->
+
+    <h1><?= h($article->title) ?></h1>
+    <p><?= h($article->body) ?></p>
+    <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
+
+
+You can verify that this is working by trying the links at ``/articles/index`` or
+manually requesting an article by accessing URLs like ``/articles/view/1``.
+
+Adding Articles
+===============
+
+With the basic read views created, we need to make it possible for new articles
+to be created. Start by creating an ``add()`` action in the
+``ArticlesController``::
+
+    // src/Controller/ArticlesController.php
+
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+
+    class ArticlesController extends AppController
+    {
+
+        public function initialize()
+        {
+            parent::initialize();
+
+            $this->loadComponent('Flash'); // Include the FlashComponent
+        }
+
+        public function index()
+        {
+            $this->set('articles', $this->Articles->find('all'));
+        }
+
+        public function view($id)
+        {
+            $article = $this->Articles->get($id);
+            $this->set(compact('article'));
+        }
+
+        public function add()
+        {
+            $article = $this->Articles->newEntity();
+            if ($this->request->is('post')) {
+                $article = $this->Articles->patchEntity($article, $this->request->getData());
+                if ($this->Articles->save($article)) {
+                    $this->Flash->success(__('Your article has been saved.'));
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('Unable to add your article.'));
+            }
+            $this->set('article', $article);
+        }
+    }
+
+.. note::
+
+    You need to include the :doc:`/controllers/components/flash` component in
+    any controller where you will use it. Often it makes sense to include it in
+    your ``AppController``.
+
+Here's what the ``add()`` action does:
+
+* If the HTTP method of the request was POST, try to save the data using the Articles model.
+* If for some reason it doesn't save, just render the view. This gives us a
+  chance to show the user validation errors or other warnings.
+
+Every CakePHP request includes a request object which is accessible using
+``$this->request``. The request object contains information regarding the
+request that was just received. We use the
+:php:meth:`Cake\\Network\\ServerRequest::is()` method to check that the request
+is a HTTP POST request.
+
+Our POST data is available in ``$this->request->getData()``. You can use the
+:php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to
+see what it looks like. To save our data, we first 'marshal' the POST data into
+an Article Entity. The Entity is then persisted using the ArticlesTable we
+created earlier.
+
+After saving our new article we use FlashComponent's ``success()`` method to set
+a message into the session. The ``success`` method is provided using PHP's
+`magic method features
+<http://php.net/manual/en/language.oop5.overloading.php#object.call>`_.  Flash
+messages will be displayed on the page after redirection. In our layout we have
+``<?= $this->Flash->render() ?>`` which displays the message and clears the
+corresponding session variable. Finally, after saving is complete, we use
+:php:meth:`Cake\\Controller\\Controller::redirect` to send the user back to the
+articles list. The param ``['action' => 'index']`` translates to URL
+``/articles`` i.e the index action of the ``ArticlesController``. You can refer
+to :php:func:`Cake\\Routing\\Router::url()` function on the `API
+<https://api.cakephp.org>`_ to see the formats in which you can specify a URL
+for various CakePHP functions.
+
 * Add validation
 * Create add templates
 * Add edit action
