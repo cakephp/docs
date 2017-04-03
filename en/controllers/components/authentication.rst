@@ -253,10 +253,9 @@ Redirecting Users After Login
 
 After logging a user in, you'll generally want to redirect them back to where
 they came from. Pass a URL in to set the destination a user should be redirected
-to upon logging in.
+to after logging in.
 
-If no parameter is passed, it gets the authentication redirect URL. The URL
-returned is as per following rules:
+If no parameter is passed, the returned URL will use the following rules:
 
 - Returns the normalized URL from the ``redirect`` query string value if it is
   present and for the same domain the current app is running on. Before 3.4.0,
