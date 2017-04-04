@@ -9,7 +9,7 @@ Glossary
 
             array('controller' => 'posts', 'action' => 'view', 5)
             
-        Or a more complex example:
+        Or a more complex example::
 
             array(
                 'subdomain' => 'dev',
