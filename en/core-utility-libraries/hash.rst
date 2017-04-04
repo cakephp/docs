@@ -37,6 +37,8 @@ Expression Types
 |                                | string value including numeric string      |
 |                                | values.                                    |
 +--------------------------------+--------------------------------------------+
+| ``{*}``                        | Represents any value regardless of type.   |
++--------------------------------+--------------------------------------------+
 | ``Foo``                        | Matches keys with the exact same value.    |
 +--------------------------------+--------------------------------------------+
 
