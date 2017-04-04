@@ -8,6 +8,22 @@ Glossary
         They typically look like::
 
             array('controller' => 'posts', 'action' => 'view', 5)
+            
+        Or a more complex example:
+
+            array(
+                'subdomain' => 'dev',
+                'plugin' => 'account',
+                'prefix' => 'admin',
+                'controller' => 'profiles',
+                'action' => 'edit',
+                10257
+                '#' => 'email',
+                '?' => array(
+                    'reset' => true,
+                ),
+                'full_base' => true,
+            )
 
     HTML attributes
         An array of key => values that are composed into HTML attributes. For example::
