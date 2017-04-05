@@ -21,10 +21,15 @@ behavior that may affect your application:
 * ``BehaviorRegistry``, ``HelperRegistry`` and ``ComponentRegistry`` will now
   raise exceptions when ``unload()`` is called with an unknown object name. This
   change should help find errors easier by making possible typos more visible.
-* HasMany associations will now wipe all associated records when an empty
-  string/null/empty array are set to the association property, and the
-  association's save strategy is 'replace'. Previously all but the last record
-  would be removed.
+* ``HasMany`` associations now gracefully handle empty values set for the
+  association property, similar to ``BelongsToMany`` associations - that is they
+  treat ``false``, ``null``, and empty strings the same way as empty arrays. For
+  ``HasMany`` associations this now results in all associated records to be
+  deleted/unlinked in case the ``replace`` save strategy is being used.
+  Consequently this allows to use forms to delete/unlink all associated records
+  by passing an empty string. Previously this would have required custom
+  marshalling logic, without that it would have only been possible to remove all
+  but one record, as form data cannot be used to describe empty arrays.
 
 New Features
 ============
