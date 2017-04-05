@@ -21,6 +21,10 @@ behavior that may affect your application:
 * ``BehaviorRegistry``, ``HelperRegistry`` and ``ComponentRegistry`` will now
   raise exceptions when ``unload()`` is called with an unknown object name. This
   change should help find errors easier by making possible typos more visible.
+* HasMany associations will now wipe all associated records when an empty
+  string/null/empty array are set to the association property, and the
+  association's save strategy is 'replace'. Previously all but the last record
+  would be removed.
 
 New Features
 ============
