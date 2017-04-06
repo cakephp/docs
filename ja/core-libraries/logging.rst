@@ -293,7 +293,7 @@ Log API
     :param string $name: 接続されるロガーの名前で、後でロガーを削除するために使用されます。
     :param array $config: ロガーの設定情報とコンストラクタ引数の配列です。
 
-    ロガーのために、コンフィグを取得や設定します。詳細は :ref:`log-configuration` を参照してください。
+    ロガーの設定を取得したり、セットしたりします。詳細は :ref:`log-configuration` を参照してください。
 
 .. php:staticmethod:: configured()
 
