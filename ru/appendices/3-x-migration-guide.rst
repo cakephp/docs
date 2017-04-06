@@ -1,56 +1,40 @@
-3.x Migration Guide
-###################
+Руководство по миграции 3.x
+###########################
 
 .. toctree::
    :hidden:
 
-Migration guides contain information regarding the new features introduced in
-each version and the migration path between 2.x and 3.x. If you are currently
-using 1.x you should first upgrade to 2.x. See the 2.x documentation for the
-relevant upgrade guides.
+Руководства по миграции содержат информацию, касающуюся новых возможностей
+каждой из версий и путь перехода от версий 2.x к 3.x. Если вы используете
+версии 1.x, вы должны  сначала обновиться до версии 2.x. Смотрите документацию
+версии 2.x, чтобы узнать об этом больше.
 
-3.5 Migration Guide
-===================
-
-.. toctree::
-    :maxdepth: 1
-
-    3-5-migration-guide
-
-3.4 Migration Guide
-===================
-
-.. toctree::
-    :maxdepth: 1
-
-    3-4-migration-guide
-
-3.3 Migration Guide
-===================
+Руководство по миграции 3.3
+===========================
 
 .. toctree::
     :maxdepth: 1
 
     3-3-migration-guide
 
-3.2 Migration Guide
-===================
+Руководство по миграции 3.2
+===========================
 
 .. toctree::
     :maxdepth: 1
 
     3-2-migration-guide
 
-3.1 Migration Guide
-===================
+Руководство по миграции 3.1
+===========================
 
 .. toctree::
     :maxdepth: 1
 
     3-1-migration-guide
 
-3.0 Migration Guide
-===================
+Руководство по миграции 3.0
+===========================
 
 .. toctree::
     :maxdepth: 1

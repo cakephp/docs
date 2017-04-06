@@ -17,5 +17,6 @@ COPY requirements.txt /tmp/
 RUN pip install -r /tmp/requirements.txt
 
 WORKDIR /data
+VOLUME "/data"
 
 CMD ["/bin/bash"]

@@ -149,7 +149,7 @@ tell CakePHP what to do with a request once it has been matched. The second
 parameter is an associative array. The keys of the array should be named after
 the route elements the URL template represents. The values in the array are the
 default values for those keys.  Let's look at some basic examples before we
-start using the third parameter of connect()::
+start using the third parameter of ``connect()``::
 
     $routes->connect(
         '/pages/*',
@@ -237,7 +237,7 @@ route elements: ``:controller`` and ``:id``. The ``:controller`` element
 is a CakePHP default route element, so the router knows how to match and
 identify controller names in URLs. The ``:id`` element is a custom
 route element, and must be further clarified by specifying a
-matching regular expression in the third parameter of connect().
+matching regular expression in the third parameter of ``connect()``.
 
 CakePHP does not automatically produce lowercased and dashed URLs when using the
 ``:controller`` parameter. If you need this, the above example could be
@@ -262,8 +262,8 @@ If you need lowercased and underscored URLs while migrating from a CakePHP
     Patterns used for route elements must not contain any capturing
     groups. If they do, Router will not function correctly.
 
-Once this route has been defined, requesting ``/apples/5`` would call the view()
-method of the ApplesController. Inside the view() method, you would need to
+Once this route has been defined, requesting ``/apples/5`` would call the ``view()``
+method of the ApplesController. Inside the ``view()`` method, you would need to
 access the passed ID at ``$this->request->getParam('id')``.
 
 If you have a single controller in your application and you do not want the
@@ -300,7 +300,7 @@ has four route elements. The first is familiar to us: it's a default route
 element that tells CakePHP to expect a controller name.
 
 Next, we specify some default values. Regardless of the controller,
-we want the index() action to be called.
+we want the ``index()`` action to be called.
 
 Finally, we specify some regular expressions that will match years,
 months and days in numerical form. Note that parenthesis (grouping)
@@ -309,7 +309,7 @@ alternates, as above, but not grouped with parenthesis.
 
 Once defined, this route will match ``/articles/2007/02/01``,
 ``/articles/2004/11/16``, handing the requests to
-the index() actions of their respective controllers, with the date
+the ``index()`` actions of their respective controllers, with the date
 parameters in ``$this->request->getParam()``.
 
 There are several route elements that have special meaning in
@@ -696,23 +696,37 @@ Routing File Extensions
 
 .. php:staticmethod:: extensions(string|array|null $extensions, $merge = true)
 
-To handle different file extensions with your routes, you can add the following
-to your routes file::
+To handle different file extensions with your routes, you can define extensions
+on a global, as well as on a scoped level. Defining global extensions can be
+achieved via the routers static :php:meth:`Router::extensions()` method::
+
+    Router::extensions(['json', 'xml']);
+    // ...
+
+This will affect **all** routes that are being connected **afterwards**, no matter
+their scope.
+
+In order to restrict extensions to specific scopes, you can define them using the
+:php:meth:`Cake\\Routing\\RouteBuilder::extensions()` method::
 
     Router::scope('/', function ($routes) {
         $routes->extensions(['json', 'xml']);
-        ...
+        // ...
     });
 
-This will enable the named extensions for all routes connected **after** the
-``extensions()`` call. Any routes connected prior to it will not inherit the
-extensions.
+This will enable the named extensions for all routes that are being connected in
+that scope **after** the ``extensions()`` call, including those that are being
+connected in nested scopes. Similar to the global :php:meth:`Router::extensions()`
+method, any routes connected prior to the call will not inherit the extensions.
 
 .. note::
 
     Setting the extensions should be the first thing you do in a scope, as the
     extensions will only be applied to routes connected **after** the extensions
     are set.
+
+    Also be aware that re-opened scopes will **not** inherit extensions defined in
+    previously opened scopes.
 
 By using extensions, you tell the router to remove any matching file extensions,
 and then parse what remains. If you want to create a URL such as
@@ -856,11 +870,11 @@ routes. For example, if your ``edit()`` action is called ``put()`` you can
 use the ``actions`` key to rename the actions used::
 
     $routes->resources('Articles', [
-        'actions' => ['update' => 'put', 'create' => 'create']
+        'actions' => ['update' => 'put', 'create' => 'add']
     ]);
 
-The above would use ``put()`` for the ``edit()`` action, and ``create()``
-instead of ``add()``.
+The above would use ``put()`` for the ``edit()`` action, and ``add()``
+instead of ``create()``.
 
 Mapping Additional Resource Routes
 ----------------------------------
@@ -1010,7 +1024,7 @@ If you create URLs using strings like::
     $this->Html->link('View', '/articles/view/' . $id);
 
 And then later decide that ``/articles`` should really be called
-'articles' instead, you would have to go through your entire
+'posts' instead, you would have to go through your entire
 application renaming URLs. However, if you defined your link like::
 
     $this->Html->link(

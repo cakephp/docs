@@ -96,7 +96,9 @@ Other Deprecations
 * ``Event::result()`` is deprecated. Use ``Event::getResult()`` instead.
 * ``Event::data()`` is deprecated. Use ``Event::getData()`` instead.
 * The ``Auth.redirect`` session variable is no longer used. Instead a query
-  string parameter is used to store the redirect URL.
+  string parameter is used to store the redirect URL. This has the additional
+  effect of removing the ability to store a redirect URL in the session outside
+  of login scenarios.
 * ``AuthComponent`` no longer stores redirect URLs when the unauthorized URL is
   not a ``GET`` action.
 * The ``ajaxLogin`` option for ``AuthComponent`` is deprecated. You should use the

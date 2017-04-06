@@ -191,8 +191,15 @@ PaginatorComponent を直接使用するのがよいです。こちらは、
 複数クエリのページネーション
 ============================
 
+コントローラの ``$paginate`` プロパティの中や ``paginate()`` メソッドを呼ぶ際に
 ``scope`` オプションを使うことで、単一のコントローラアクションに複数モデルで
 paginate できます。 ::
+
+    // paginate プロパティ
+    public $paginate = [
+        'Articles' => ['scope' => 'article'],
+        'Tags' => ['scope' => 'tag']
+    ];
 
     // コントローラのアクションの中で
     $articles = $this->paginate($this->Articles, ['scope' => 'article']);

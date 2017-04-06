@@ -235,6 +235,9 @@ preamb = ur'''
 % background and border for code examples.
 \definecolor{VerbatimColor}{RGB}{242,242,242}
 \definecolor{VerbatimBorderColor}{RGB}{230,230,230}
+
+% Map specific problematic characters
+\DeclareUnicodeCharacter{1EBD}{\~e}
 '''
 
 latex_elements = {
@@ -307,7 +310,7 @@ epub_tocdup = False
 epub_use_index = False
 
 # Languages available.
-languages = ['en', 'pt', 'es', 'ja', 'fr', 'zh', 'tr', 'ru']
+languages = ['en', 'pt_BR', 'es', 'ja', 'fr', 'zh', 'tr', 'ru']
 
 # The GitHub branch name for this version of the docs
 branch = '3.0'

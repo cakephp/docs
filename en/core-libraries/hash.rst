@@ -37,6 +37,8 @@ Expression Types
 |                                | string value including numeric string      |
 |                                | values.                                    |
 +--------------------------------+--------------------------------------------+
+| ``{*}``                        | Matches any value.                         |
++--------------------------------+--------------------------------------------+
 | ``Foo``                        | Matches keys with the exact same value.    |
 +--------------------------------+--------------------------------------------+
 
@@ -74,7 +76,7 @@ Attribute Matching Types
 .. php:staticmethod:: get(array|\ArrayAccess $data, $path, $default = null)
 
     ``get()`` is a simplified version of ``extract()``, it only supports direct
-    path expressions. Paths with ``{n}``, ``{s}`` or matchers are not
+    path expressions. Paths with ``{n}``, ``{s}``, ``{*}`` or matchers are not
     supported. Use ``get()`` when you want exactly one value out of an array. If
     a matching path is not found the default value will be returned.
 
@@ -115,7 +117,7 @@ Attribute Matching Types
             ]
         ]
 
-    You can use paths using ``{n}`` and ``{s}`` to insert data into multiple
+    You can use paths using ``{n}``, ``{s}`` and ``{*}`` to insert data into multiple
     points::
 
         $users = Hash::insert($users, '{n}.new', 'value');
@@ -158,7 +160,7 @@ Attribute Matching Types
             ]
         */
 
-    Using ``{n}`` and ``{s}`` will allow you to remove multiple values at once.
+    Using ``{n}``, ``{s}`` and ``{*}`` will allow you to remove multiple values at once.
     You can also use attribute matchers with ``remove()``::
 
         $data = [

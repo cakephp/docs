@@ -1,7 +1,7 @@
 :orphan: True
 
-Not Found
-#########
+Не найдено
+##########
 
-The page you're looking for cannot be found. Try using the search bar to find
-what you're looking for.
+Страница, которую вы ищете, не может быть найдена. Пожалуйста воспользуйтесь
+поиском, чтобы найти интересующий вас материал.

@@ -6,7 +6,7 @@ Validation
 The validation package in CakePHP provides features to build validators that can
 validate arbitrary arrays of data with ease. You can find a `list of available
 Validation rules in the API
-<https://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`__.
+<https://api.cakephp.org/3.x/class-Cake.Validation.Validation.html>`__.
 
 .. _creating-validators:
 
@@ -168,16 +168,16 @@ Validator instances come with a 'default' provider setup automatically. The
 default provider is mapped to the :php:class:`~Cake\\Validation\\Validation`
 class. This makes it simple to use the methods on that class as validation
 rules. When using Validators and the ORM together, additional providers are
-configured for the table and entity objects. You can use the ``provider()``
+configured for the table and entity objects. You can use the ``setProvider()``
 method to add any additional providers your application needs::
 
     $validator = new Validator();
 
     // Use an object instance.
-    $validator->provider('custom', $myObject);
+    $validator->setProvider('custom', $myObject);
 
     // Use a class name. Methods must be static.
-    $validator->provider('custom', 'App\Model\Validation');
+    $validator->setProvider('custom', 'App\Model\Validation');
 
 Validation providers can be objects, or class names. If a class name is used the
 methods must be static. To use a provider other than 'default', be sure to set
@@ -202,9 +202,8 @@ model fields, depending on a country, ie::
     {
         public function validationDefault(Validator $validator)
         {
-            $validator = new Validator();
             // add the provider to the validator
-            $validator->provider('fr', 'Localized\Validation\FrValidation');
+            $validator->setProvider('fr', 'Localized\Validation\FrValidation');
             // use the provider in a field validation rule
             $validator->add('phoneField', 'myCustomRuleNameForPhone', [
                 'rule' => 'phone',
@@ -515,7 +514,7 @@ class. The Validation class contains a variety of static methods that provide
 validators for several common validation situations.
 
 The `API documentation
-<https://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`_ for the
+<https://api.cakephp.org/3.x/class-Cake.Validation.Validation.html>`_ for the
 ``Validation`` class provides a good list of the validation rules that are
 available, and their basic usage.
 

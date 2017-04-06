@@ -3,11 +3,50 @@ Glossary
 
 .. glossary::
 
-    routing array
-        An array of attributes that are passed to :php:meth:`Router::url()`.
-        They typically look like::
 
-            ['controller' => 'Posts', 'action' => 'view', 5]
+    CSRF
+        Cross Site Request Forgery. Prevents replay attacks, double
+        submissions and forged requests from other domains.
+
+    CDN
+        Content Delivery Network. A 3rd party vendor you can pay to help
+        distribute your content to data centers around the world. This helps
+        put your static assets closer to geographically distributed users.
+
+    columns
+        Used in the ORM when referring to the table columns in an database
+        table.
+
+    DSN
+        Data Source Name. A connection string format that is formed like a URI.
+        CakePHP supports DSN's for Cache, Database, Log and Email connections.
+
+    dot notation
+        Dot notation defines an array path, by separating nested levels with ``.``
+        For example::
+
+            Cache.default.engine
+
+        Would point to the following value::
+
+            [
+                'Cache' => [
+                    'default' => [
+                        'engine' => 'File'
+                    ]
+                ]
+            ]
+
+
+    DRY
+        Don't repeat yourself. Is a principle of software development aimed at
+        reducing repetition of information of all kinds. In CakePHP DRY is used
+        to allow you to code things once and re-use them across your
+        application.
+
+    fields
+        A generic term used to describe both entity properties, or database
+        columns. Often used in conjunction with the FormHelper.
 
     HTML attributes
         An array of key => values that are composed into HTML attributes. For example::
@@ -27,6 +66,15 @@ Glossary
             // Would generate
             checked="checked"
 
+
+    PaaS
+        Platform as a Service. Platform as a Service providers will provide
+        cloud based hosting, database and caching resources. Some popular
+        providers include Heroku, EngineYard and PagodaBox
+
+    properties
+        Used when referencing columns mapped onto an ORM entity.
+
     plugin syntax
         Plugin syntax refers to the dot separated class name indicating classes
         are part of a plugin::
@@ -37,30 +85,6 @@ Glossary
             // The plugin is "AcmeCorp/Tools", and the class name is "Toolbar".
             'AcmeCorp/Tools.Toolbar'
 
-    dot notation
-        Dot notation defines an array path, by separating nested levels with ``.``
-        For example::
-
-            Cache.default.engine
-
-        Would point to the following value::
-
-            [
-                'Cache' => [
-                    'default' => [
-                        'engine' => 'File'
-                    ]
-                ]
-            ]
-
-    CSRF
-        Cross Site Request Forgery. Prevents replay attacks, double
-        submissions and forged requests from other domains.
-
-    CDN
-        Content Delivery Network. A 3rd party vendor you can pay to help
-        distribute your content to data centers around the world. This helps
-        put your static assets closer to geographically distributed users.
 
     routes.php
         A file in ``config`` directory that contains routing configuration.
@@ -68,22 +92,13 @@ Glossary
         It should connect all the routes your application needs so
         requests can be routed to the correct controller + action.
 
-    DRY
-        Don't repeat yourself. Is a principle of software development aimed at
-        reducing repetition of information of all kinds. In CakePHP DRY is used
-        to allow you to code things once and re-use them across your
-        application.
+    routing array
+        An array of attributes that are passed to :php:meth:`Router::url()`.
+        They typically look like::
 
-    PaaS
-        Platform as a Service. Platform as a Service providers will provide
-        cloud based hosting, database and caching resources. Some popular
-        providers include Heroku, EngineYard and PagodaBox
-
-    DSN
-        Data Source Name. A connection string format that is formed like a URI.
-        CakePHP supports DSN's for Cache, Database, Log and Email connections.
+            ['controller' => 'Posts', 'action' => 'view', 5]
 
 
 .. meta::
     :title lang=en: Glossary
-    :keywords lang=en: html attributes,array class,array controller,glossary glossary,target blank,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions
+    :keywords lang=en: html attributes,array class,array controller,glossary glossary,target blank,fields,properties,columns,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions

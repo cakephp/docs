@@ -109,7 +109,7 @@ methods for each of these asset types::
     The asset helper methods were added in 3.2.4.
 
 For further information check
-`Router::url <https://api.cakephp.org/3.0/class-Cake.Routing.Router.html#_url>`_
+`Router::url <https://api.cakephp.org/3.x/class-Cake.Routing.Router.html#_url>`_
 in the API.
 
 .. meta::

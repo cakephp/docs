@@ -1196,7 +1196,7 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
 
 En plus des méthodes d'assertion ci-dessus, vous pouvez également utiliser
 toutes les assertions de `TestSuite
-<https://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ et celles
+<https://api.cakephp.org/3.x/class-Cake.TestSuite.TestCase.html>`_ et celles
 de
 `PHPUnit <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
 
