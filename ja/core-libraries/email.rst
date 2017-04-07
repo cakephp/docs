@@ -194,7 +194,7 @@ DSN 文字列を使用するときは、クエリ文字列引数として任意�
 - ``'emailFormat'``: メールの書式 (html, text または both) ``Email::setEmailFormat()`` を参照。
 - ``'transport'``: トランスポート名。 :php:meth:`~Cake\\Mailer\\Email::setConfigTransport()` を参照。
 - ``'log'``: メールヘッダとメッセージをログに記録するログレベル。
-  ``true`` なら LOG_DEBUG を使用します。 ``CakeLog::write()`` を参照。
+  ``true`` なら LOG_DEBUG を使用します。 :ref:`logging-levels` を参照。
 - ``'helpers'``: メールテンプレート内で使用するヘルパーの配列。 ``Email::setHelpers()`` 。
 
 これらの設定の全ては ``'from'`` を除いてオプションです。
@@ -433,7 +433,7 @@ SwiftMailer のような他のメールシステムを使うために独自の�
 CLI からのメール送信
 ====================
 
-シェルやタスクなどの CLI スクリプトでメールを送信するとき、CakeEmail に使用するドメイン名を
+シェルやタスクなどの CLI スクリプトでメールを送信するとき、Email に使用するドメイン名を
 セットしなければなりません。(ホスト名が CLI 環境にないとき) ドメイン名は、メッセージ ID
 のホスト名として使用されます。 ::
 
