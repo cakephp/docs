@@ -14,8 +14,7 @@ O CakePHP vem com a algumas Classes View construídas para manipular os cenário
 renderização mais comuns:
 
 - Para criar *webservices* XML ou JSON você pode usar a :doc:`views/json-and-xml-views`.
-- Para servir arquivos protegidos, ou arquivos gerados dinamicamente, você pode usar
-:ref:`cake-response-file`.
+- Para servir arquivos protegidos, ou arquivos gerados dinamicamente, você pode usar :ref:`cake-response-file`.
 - Para criar multiplas views com temas, você pode usar :doc:`views/themes`.
 
 .. _app-view:
@@ -92,8 +91,8 @@ Estruturas de controle, como ``if``, ``for``, ``foreach``, ``switch``, e ``while
 podem ser escritas em um formato simplificado. Observe que não há chaves. Ao invés disso, a
 chave de fim do``foreach`` é substituida por ``endforeach``. Cada uma das estruturas de
 controle listadas anteriormente tem uma sintaxe de fechamento similar: ``endif``,
-``endfor``, ``endforeach``, e ``endwhile``. Observe tambm que ao invés do uso 
-de ``ponto e virgula`` depois da estrutura do foreach (Exceto o ultimo), existem 
+``endfor``, ``endforeach``, e ``endwhile``. Observe também que ao invés do uso 
+de ``ponto e virgula`` depois da estrutura do foreach (Exceto o último), existem 
 ``dois pontos``.
 
 O bloco a seguir é um exempo do uso de ``foreach``:
@@ -131,7 +130,7 @@ A camada *view* do CakePHP pode ser constituida por um número diferente de part
 parte tem diferentes usos, e serão abordadas nesse capítulo:
 
 - **views**: Templates são a parte da página que é única para a ação sendo executada. 
-  Eles formam a carne da reposta da aplicação.
+  Eles formam o cerne da reposta da aplicação.
 - **elements**: pequenos, bits reúsaveis do código da *view*. *Elements* são usualmente 
   renderizados dentro das *views*.
 - **layouts**: Arquivos de modelo que contem código de apresentação que envolve interfaces 
