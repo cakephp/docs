@@ -20,7 +20,7 @@ renderização mais comuns:
 .. _app-view:
 
 A App *View*
-===========
+============
 
 ``AppView`` é sua Classe *View* default da aplicação. ``AppView`` extende a propria
 ``Cake\View\View``, classe incluída no CakePHP e é definida em
