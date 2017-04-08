@@ -16,3 +16,5 @@ Objetos de requisição e resposta
 
 Request
 =======
+
+.. _cake-response-file:
