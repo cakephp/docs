@@ -313,8 +313,8 @@ O método ``prepend()`` permite que você prefixe conteúdo para um *block* exis
 
 .. note::
 
-    Você deve evitar usar ``content`` como um nome de *block*. Isto é utilizado pelo CakePHP
-    Internamente para exibições estendidas e exibir conteúdo no layout.
+    Você deve evitar usar ``content`` como um nome de *block*. Isto é utilizado pelo CakePHP 
+    Internamente para exibições estendidas e exibir conteúdo no layout.
 
 
 Exibindo *Blocks*
