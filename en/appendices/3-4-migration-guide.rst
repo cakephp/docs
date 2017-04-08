@@ -344,6 +344,14 @@ behavior that may affect your application:
 * ``Mailer\Email`` will now autodetect attachment content types using
   ``mime_content_type`` if a content-type is not provided. Previously
   attachments would have defaulted to 'application/octet-stream'.
+* CakePHP now uses the ``...`` operator in place of ``call_user_func_array()``.
+  If you are passing associative arrays, you
+  should update your code to pass a numerically indexed array using
+  ``array_values()`` for the following methods:
+
+    * ``Cake\Mailer\Mailer::send()``
+    * ``Cake\Controller\Controller::setAction()``
+    * ``Cake\Http\ServerRequest::is()``
 
 Visibility Changes
 ==================
