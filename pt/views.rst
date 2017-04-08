@@ -253,6 +253,8 @@ Você pode resgatar a lista de todos os blocos populados usand o método ``block
 
     $list = $this->blocks();
     
+.. _view-blocks:
+    
 Usando View Blocks
 ==================
 
