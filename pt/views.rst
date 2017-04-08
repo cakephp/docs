@@ -246,7 +246,7 @@ o *block* ``content``.
 .. note::
 
     Você deve evitar usar ``content`` como um nome de bloco em seu aplicativo.
-    O CakePHP usa isso para conteúdo não capturado em exibições estendidas.
+    O CakePHP usa isso para conteúdo não capturado em exibições estendidas.
 
 
 Você pode resgatar a lista de todos os blocos populados usand o método ``blocks()``::
