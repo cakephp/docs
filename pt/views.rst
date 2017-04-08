@@ -248,6 +248,7 @@ o *block* ``content``.
     Você deve evitar usar ``content`` como um nome de bloco em seu aplicativo.
     O CakePHP usa isso para conteúdo não capturado em exibições estendidas.
 
+
 Você pode resgatar a lista de todos os blocos populados usand o método ``blocks()``::
 
     $list = $this->blocks();
@@ -314,7 +315,8 @@ O método ``prepend()`` permite que você prefixe conteúdo para um *block* exis
 
     Você deve evitar usar ``content`` como um nome de *block*. Isto é utilizado pelo CakePHP
     Internamente para exibições estendidas e exibir conteúdo no layout.
-    
+
+
 Exibindo *Blocks*
 -----------------
 
