@@ -53,7 +53,7 @@ invocado no final do construtor da *View* para este tipo de uso:
 
         public function initialize()
         {
-            // Always enable the MyUtils Helper
+            // Sempre habilita o *helper* MyUtils
             $this->loadHelper('MyUtils');
         }
 
@@ -70,7 +70,7 @@ responder uma aplicação remota via JSON, ou ter uma saída de um arquivo csv p
 
 Os arquivos de *template* CakePHP tem a extensão padrão **.ctp** (CakePHP Template) e utiliza a 
 `Sintaxe PHP alternativa <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
-para controlar estruturas e saída. Esses arquivos contem a lógica necessária para preparar os 
+para controlar estruturas e saídas. Esses arquivos contem a lógica necessária para preparar os 
 dados recebidos do *controller* para o formato de apresentação que estará pronto para o seu público.
 
 *Echos* Alternativos
@@ -121,8 +121,8 @@ Se você preferir usar uma linguagem de template como
 `Twig <http://twig.sensiolabs.org>`_, uma subclasse da *View* irá ligar
 sua linguagem de template e o CakePHP.
 
-Arquivos de template são armazenados em **src/Template/**, em uma pasta nomeada depois
-do *controller* que usa os arquivos, e nomeada com a ação a que correponde.
+Arquivos de template são armazenados em **src/Template/**, em uma pasta nomeada com o
+nome do *controller*, e com o nome da ação a que corresponde.
 Por exemplo, o arquivo da *View* da ação "view()" do controller *Products*, seria
 normalmente encontrada em **src/Template/Products/view.ctp**.
 
@@ -130,8 +130,8 @@ A camada *view* do CakePHP pode ser constituida por um número diferente de part
 parte tem diferentes usos, e serão abordadas nesse capítulo:
 
 - **views**: Templates são a parte da página que é única para a ação sendo executada. 
-  Eles formam o cerne da reposta da aplicação.
-- **elements**: pequenos, bits reúsaveis do código da *view*. *Elements* são usualmente 
+  Eles formam o cerne da resposta da aplicação.
+- **elements**: pequenos bits reúsaveis do código da *view*. *Elements* são usualmente 
   renderizados dentro das *views*.
 - **layouts**: Arquivos de modelo que contem código de apresentação que envolve interfaces 
   da sua aplicação. A maioria das *Views* são renderizadas em um layout.
@@ -147,8 +147,8 @@ Variáveis da *View*
 -------------------
 
 Quaisquer variáveis que você definir no seu controller com ``set()`` ficarão disponíveis 
-tanto na view quanto no layout que sua view renderiza. Além do mais, qualquer variável 
-definida também ficarão disponíveis em qualquer *element*. Se você precisa passar variáveis 
+tanto na view quanto no layout que sua view renderiza. Além do mais, quaisquer variáveis 
+definidas também ficarão disponíveis em qualquer *element*. Se você precisa passar variáveis 
 adicionais da *view* para o layout você pode chamar o ``set()`` no template da *view*,
 ou use os :ref:`view-blocks`.
 
@@ -163,7 +163,7 @@ Definindo Variáveis da View
 
 .. php:method:: set(string $var, mixed $value)
 
-*Views* tem um método ``set()`` que é análogo como o ``set()`` encontrado nos objetos
+*Views* tem um método ``set()`` que é análogo com o ``set()`` encontrado nos objetos
 *Controller*. Usando set() no arquivo da sua *view* irá adicionar as variáveis para o layout
 e *elements* que irão ser renderizadas mais tarde. Veja
 :ref:`setting-view_variables` para mais informações para usar o método ``set()``.
@@ -197,8 +197,8 @@ Você pode evitar repetir a marcação comum para sua barra lateral e apenas def
     </div>
     
 O arquivo *view* acima poderia ser usado como uma view pai. Espera-se que a view
-estendida irá definir os blocos ``sidebar`` e ``title``. O bloco ``content``
-é um bloco especial que o CakePHP cria. Irá conter todo o conteúdo não capturado 
+estendida irá definir os *blocks* ``sidebar`` e ``title``. O *block* ``content``
+é um *block* especial que o CakePHP cria. Irá conter todo o conteúdo não capturado 
 da view extendida. Assumindo que nosso arquivo da *view* tem a variável ``$post`` com
 os dados sobre nosso *post*, a view poderia se parecer com isso:
 
@@ -226,8 +226,8 @@ os dados sobre nosso *post*, a view poderia se parecer com isso:
     <?= h($post->body) ?>
 
 A *view* do post acima mostra como você pode estender uma view, e preencher 
-um conjunto de blocos. Qualquer elemento que ainda não esteja em um bloco 
-definido será capturado e colocado em um bloco especial chamado ``content``.
+um conjunto de *blocks*. Qualquer elemento que ainda não esteja em um *block* 
+definido será capturado e colocado em um *block* especial chamado ``content``.
 Quando uma *view* contém uma chamada ``extend()``, a execução continua até o final 
 do arquivo da *view* atual. Uma vez completado, a view estendida será renderizada.
 Chamando ``extend()`` mais de uma vez em um arquivo da *view* irá substituir 
@@ -241,7 +241,7 @@ para a view atual.
 
 Você pode aninhar as view estendidas quantas vezes achar necessário. Cada *view* pode extender
 outra *view* se necessário. Cada *view* pai irá pegar o conteúdo da *view* anterior com 
-o bloco ``content``.
+o *block* ``content``.
 
 .. note::
     Você deve evitar usar ``content`` como um nome de bloco em seu aplicativo.
@@ -296,8 +296,8 @@ O método ``reset()`` irá limpar ou sobrescrever um bloco em qualquer momento. 
 .. versionadded:: 3.2
     View::reset() foi adicionado na versão 3.2
 
-Atribuir um conteúdo de um bloco muitas vezes é usado qando você 
-quer converter uma varável da *view* em um bloco. Por exemplo, For example, você pode 
+Atribuir um conteúdo de um *block* muitas vezes é usado quando você 
+quer converter uma varável da *view* em um bloco. Por exemplo, você pode 
 querer usar um *block* para a página Título e às vezes atribuir o título como uma 
 variável da *view* no *controller*::
 
@@ -337,7 +337,7 @@ titulos ou outras marcações:
     <?php endif; ?>
 
 Você também pode fornecer um valor padrão para o bloco se ele não existir.
-Isso lhe permiti adicionar um conteúdo *placeholder* quando o bloco não existe.
+Isso lhe permiti adicionar um conteúdo *placeholder* quando o *block* não existe.
 Você pode definir um valor default usando o segundo argumento:
 
 .. code-block:: php
@@ -371,7 +371,7 @@ O ``HtmlHelper`` se baseia em *view blocks*, e os métodos ``script()``, ``css()
         </head>
         // Restante do seu layout abaixo
 
-O :php:meth:`Cake\\View\\Helper\\HtmlHelper` também lhe permite controlar qual bloco o css ou script irá::
+O :php:meth:`Cake\\View\\Helper\\HtmlHelper` também lhe permite controlar qual *block* o css ou script irá::
 
     // Na sua *view*
     $this->Html->script('carousel', ['block' => 'scriptBottom']);
@@ -443,8 +443,8 @@ Você pode definir o conteúdo do bloco ``title`` de dentro do seu arquivo da *v
 
     $this->assign('title', 'Visualizar Usuários Ativos');
 
-Você pode criar quando layouts você quiser: somente os coloque no diretório
-**src/Template/Layout**, a troque entre eles dentro das suas ações do *controller* 
+Você pode criar quantos layouts você quiser: somente os coloque no diretório
+**src/Template/Layout**, a troca entre eles dentro das suas ações do *controller* ocorre
 usando a propriedade do *controller* ou *view* ``$layout``::
 
     // Em um controller
@@ -463,7 +463,7 @@ usando a propriedade do *controller* ou *view* ``$layout``::
     // Em um arquivo de *view*
     $this->layout = 'loggedin';
     
-Por exemplo, se uma seço de meu site incluiu um pequeno espaço para um banner de propaganda, Eu devo
+Por exemplo, se uma seção de meu site inclui um pequeno espaço para um banner de propaganda, Eu devo
 criar um novo layout com o pequeno espaço de propaganda e especificá-lo para todas as ações dos *controllers*
 usando algo parecido com::
 
@@ -524,8 +524,8 @@ syntax`. Por exemplo, para usar o layout contact do plugin Contacts::
 
 .. php:method:: element(string $elementPath, array $data, array $options = [])
 
-Muitas aplicaçes tem pequenos blocos de código de apresentação que precisam ser repetidos página a página, 
-algumas vezes em diferentes lugares do layouts. O CakePHP
+Muitas aplicações tem pequenos blocos de código de apresentação que precisam ser repetidos página a página, 
+algumas vezes em diferentes lugares do layout. O CakePHP
 pode ajudar você repetir partes do seu website que precisam ser reusadas. Essas partes reusáveis são chamadas
 de Elements. Publicidade, Caixas de ajuda, controles de navegação, menus extras, formulários de login, e callouts
 são muitas vezes implementados em CakePHP como *elements*. Um elemento é basicamente uma mini-view que pode ser
@@ -553,7 +553,7 @@ funciona com arquivos de template). No exemplo a seguir, no arquivo
 **src/Template/Element/helpbox.ctp** pode usar a variável ``$helptext``::
 
     // Dentro do arquivo src/Template/Element/helpbox.ctp
-    echo $helptext; // Outputs "Ah, Esse texto  muito útil."
+    echo $helptext; // Resulta em "Ah, Esse texto  muito útil."
 
 O método ``View::element()`` também suporta opções para o elemento.
 As opções suportadas são 'cache' e 'callbacks'. Um exemplo::
@@ -563,7 +563,7 @@ As opções suportadas são 'cache' e 'callbacks'. Um exemplo::
             "foobar" => "Isso é passado para o *element* como $foobar",
         ],
         [
-            // Usa a "long_view" configuração de cache
+            // Usa a configuração de cache "long_view"
             "cache" => "long_view",
             // Define como true para ter before / afterRender chamado para o elemento
             "callbacks" => true
@@ -581,7 +581,7 @@ Para fazer cache de diferentes versões do mesmo *element* em uma aplicação, f
     );
 
 Se você precisa de mais lógica em seu *element*, como dados dinamicos de uma fonte de dados, 
-considere usar uma *View Cell* ao invés de um elemento. Encontre mais :doc:`sobre View
+considere usar uma *View Cell* ao invés de um *element*. Encontre mais :doc:`sobre View
 Cells </views/cells>`.
 
 Fazendo Cache de *Elements*
@@ -620,7 +620,7 @@ Requisitando *Elements* de um plugin
 ------------------------------------
 
 Se você está usando um plugin e deseja usar *elements* de dentro do plugin, simplesmente use
-o familiar :term:`plugin syntax`. Se a *view* está sendo renderizada de um 
+a familiar :term:`plugin syntax`. Se a *view* está sendo renderizada de um 
 controller/action de um plugin, o nome do plugin será automaticamente prefixado em todos os *elements*
 a não ser que outro nome de plugin esteja presente.
 Se o *element* não existe no plugin, irá buscar na pasta principal da aplicação::
@@ -670,8 +670,8 @@ Fazendo Cache de Seções da sua *View*
 
 .. php:method:: cache(callable $block, array $options = [])
 
-As vezes gerar uma seção do resultado da sua view pode ser caro porque foi renderizado :doc:`/views/cells` 
-ou operações de *helper's* caras. Para ajudar sua aplicação a rodar mais rapidamente o CakePHP fornece 
+As vezes gerar uma seção do resultado da sua view pode ser custoso porque foram renderizados :doc:`/views/cells` 
+ou operações de *helper's* custosas. Para ajudar sua aplicação a rodar mais rapidamente o CakePHP fornece 
 uma forma de fazer cache de seções de *view*::
 
     // Assumindo algumas variáveis locais
@@ -711,11 +711,9 @@ Talvez você precise criar classes *view* personalizadas para habilitar novos ti
 adicione uma lógica de exibição de visualização personalizada adicional à sua aplicação. Como a maioria dos
 Componentes do CakePHP, as classes view têm algumas convenções::
 
-* Arquivos das Classes View ser postos em **src/View**. Por exemplo:
-  **src/View/PdfView.php**
+* Arquivos das Classes View devem ser colocados em **src/View**. Por exemplo: **src/View/PdfView.php**
 * Classes View devem ter o sufixo ``View``. Por Exemplo: ``PdfView``.
-* Quando referenciar nome de Classes *view* você deve omitir o sufixo ``View``. Por 
-Exemplo: ``$this->viewBuilder()->className('Pdf');``.
+* Quando referenciar nome de Classes *view* você deve omitir o sufixo ``View``. Por Exemplo: ``$this->viewBuilder()->className('Pdf');``.
 
 Você também vai querer estender a Classe ``View`` para garantir que as coisas funcionem corretamente::
 
@@ -748,5 +746,5 @@ Mais sobre *Views*
 
 
 .. meta::
-    :title lang=en: Views
-    :keywords lang=en: view logic,csv file,response elements,code elements,default extension,json,flash object,remote application,twig,subclass,ajax,reply,soap,functionality,cakephp,audience,xml,mvc
+    :title lang=pt: Views
+    :keywords lang=pt: Lógica de visualização,arquivo csv,elementos de resposta,elementos de código,extensão padrão,json,objeto flash,aplicação remota,twig,subclasse,ajax,resposta,soap,funcionalidade,cakephp,público,xml,mvc
