@@ -939,7 +939,7 @@ You can specify an alternative inflection type using the ``inflect`` option::
     Router::scope('/', function ($routes) {
         $routes->resources('BlogPosts', [
             'inflect' => 'dasherize' // Will use ``Inflector::dasherize()``
-        ];
+        ]);
     });
 
 The above will generate URLs styled like: **/blog-posts/\***.
