@@ -501,7 +501,7 @@ Envoyer des fichiers
 .. php:method:: withFile($path, $options = [])
 
 Il y a des fois où vous voulez envoyer des fichiers en réponses de vos requêtes.
-Vous pouvez faire cela en utilisant
+Vous pouvez le faire en utilisant
 :php:meth:`Cake\\Http\\Response::withFile()`::
 
     public function sendFile($id)
@@ -653,7 +653,7 @@ des réponses. En utilisant :php:meth:`Cake\\Http\\Response::withCache()`::
         $this->response = $this->response->withCache('-1 minute', '+5 days');
     }
 
-Ce qui est au-dessus dira aux clients de mettre en cache la réponse résultante
+Ce qui est au-dessus indiquera aux clients de mettre en cache la réponse résultante
 pendant 5 jours, en espérant accélérer l'expérience de vos visiteurs.
 La méthode ``withCache()`` définit valeur ``Last-Modified`` en
 premier argument. L'entête ``Expires`` et ``max-age`` sont définis en se basant
@@ -664,9 +664,9 @@ sur le second paramètre. Le Cache-Control est défini aussi à ``public``.
 Réglage fin du Cache HTTP
 -------------------------
 
-Une des façons les meilleures et les plus simples de rendre votre application
+L'une des plus meilleures et plus simples méthodes pour rendre votre application
 plus rapide est d'utiliser le cache HTTP. Selon ce modèle de mise en cache,
-vous êtes tenu seulement d'aider les clients à décider s'ils doivent utiliser
+vous êtes seulement tenu d'aider les clients à décider s'ils doivent utiliser
 une copie de la réponse mise en cache en définissant quelques propriétés
 d'en-têtes comme la date de mise à jour et la balise entity de réponse.
 
@@ -676,7 +676,7 @@ modèles, l'expiration et la validation qui habituellement sont beaucoup plus
 simples que d'avoir à gérer le cache soi-même.
 
 En dehors de l'utilisation de :php:meth:`Cake\\Http\\Response::withCache()`, vous
-pouvez aussi utiliser plusieurs autres méthodes pour affiner le réglage des
+pouvez également utiliser d'autres méthodes pour affiner le réglage des
 en-têtes de cache HTTP pour tirer profit du navigateur ou à l'inverse du cache
 du proxy.
 
@@ -867,7 +867,7 @@ Erreurs Communes avec les Responses Immutables
 
 Depuis CakePHP 3.4.0, les objets responses offrent de nombreuses méthodes qui
 traitent les responses comme des objets immutables. Les objets immutables
-permettent de prévenir les effets de bord difficile à repérer.
+permettent de prévenir les effets de bord difficiles à repérer.
 Malgré leurs nombreux avantages, s'habituer aux objets immutables peut prendre
 un peu de temps. Toutes les méthodes qui commencent par ``with`` intéragiront
 avec la réponse à la manière immutable et retourneront **toujours** une
