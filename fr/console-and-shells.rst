@@ -869,7 +869,7 @@ Si vous générez des rapports ou envoyez des emails qui utilisent
 ``Router::url()``, ceux-ci vont contenir l'hôte par défaut
 ``http://localhost/``  et cela va entrainer des URLs invalides. Dans ce cas,
 vous devrez spécifier le domaine manuellement. Vous pouvez faire cela en
-utilisant la valeur de Configure ``App.fullBaseURL`` de votre bootstrap ou
+utilisant la valeur de Configure ``App.fullBaseUrl`` de votre bootstrap ou
 config, par exemple.
 
 Pour envoyer des emails, vous devrez fournir à la classe CakeEmail l'hôte avec
