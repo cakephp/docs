@@ -18,3 +18,6 @@ Request
 =======
 
 .. _cake-response-file:
+
+Sending Files
+-------------
