@@ -903,7 +903,7 @@ estão definidas.
 Se você gerar relatórios ou enviar e-mails que fazem uso de ``Router::url()``,
 estes conterão a máquina padrão ``http://localhost/`` e resultando assim em
 URLs inválidas. Neste caso, você precisa especificar o domínio manualmente.
-Você pode fazer isso usando o valor de configuração ``App.fullBaseURL`` no seu
+Você pode fazer isso usando o valor de configuração ``App.fullBaseUrl`` no seu
 bootstrap ou na sua configuração, por exemplo.
 
 Para enviar e-mails, você deve fornecer a classe CakeEmail com o host que você
