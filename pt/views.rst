@@ -506,8 +506,8 @@ A aplicação esqueleto também tem um layout padrão para ajudar a gerar RSS.
 Usando Layouts de Plugins
 -------------------------
 
-Se você quer usar um layout existente em um plugin, você pode usar :term:`plugin
-syntax`. Por exemplo, para usar o layout contact do plugin Contacts::
+Se você quer usar um layout existente em um plugin, você pode usar :term:`sintaxe plugin`. 
+Por exemplo, para usar o layout contact do plugin Contacts::
 
     namespace App\Controller;
 
@@ -625,7 +625,7 @@ Requisitando *Elements* de um plugin
 ------------------------------------
 
 Se você está usando um plugin e deseja usar *elements* de dentro do plugin, simplesmente use
-a familiar :term:`plugin syntax`. Se a *view* está sendo renderizada de um 
+a familiar :term:`sintaxe plugin`. Se a *view* está sendo renderizada de um 
 controller/action de um plugin, o nome do plugin será automaticamente prefixado em todos os *elements*
 a não ser que outro nome de plugin esteja presente.
 Se o *element* não existe no plugin, irá buscar na pasta principal da aplicação::
