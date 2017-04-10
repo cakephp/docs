@@ -42,7 +42,6 @@ The following is a list of methods that are deprecated and replaced with
     * ``layoutPath()``
     * ``autoLayout()`` (now ``isAutoLayoutEnabled()`` / ``enableAutoLayout()``)
 
-
 Behavior Changes
 ================
 
@@ -69,6 +68,11 @@ behavior that may affect your application:
 New Features
 ============
 
+* New Cookie & CookieCollection classes have been added. These classes allow you
+  to work with cookies in an object-orientated way, and are available on
+  ``Cake\Http\ServerRequest``, ``Cake\Http\Repsonse``, and
+  ``Cake\Http\Client\Response``. See the :ref:`request-cookies` and
+  :ref:`response-cookies` for more information.
 * ``Cake\Event\EventManager::on()`` and ``off()`` methods are now chainable
   making it simpler to set multiple events at once.
 * ``Cake\Validation\Validator::regex()`` was added for a more convenient way
@@ -83,6 +87,3 @@ New Features
   Existing ``SMALLINT`` and ``TINYINT`` columns will now be reflected as these
   new abstract types. ``TINYINT(1)`` columns will continue to be treated as
   boolean columns in MySQL.
-* ``Http\Client\Response`` allow access to the response's cookie collection
-  through its ``getCookieCollection()`` method. Cookie collections provide an
-  object-oriented way to interact with HTTP cookies.

@@ -428,6 +428,29 @@ Check whether a specific language is accepted::
 
     $acceptsSpanish = $this->request->acceptLanguage('es-es');
 
+
+.. _request-cookies:
+
+Cookies
+-------
+
+Request cookies can be read through a number of methods::
+
+    // Get the cookie value, or null if the cookie is missing.
+    $rememberMe = $this->request->getCookie('remember_me');
+
+    // Read the value, or get the default of 0
+    $rememberMe = $this->request->getCookie('remember_me', 0);
+
+    // Get all cookies as an hash
+    $cookies = $this->request->getCookieParams();
+
+    // Get a CookieCollection instance (after 3.5.0)
+    $cookies = $this->request->getCookieCollection()
+
+See the :php:class:`Cake\\Http\\Cookie\\CookieCollection` documentation for how
+to work with cookie collection.
+
 .. index:: $this->response
 
 Response
@@ -865,6 +888,13 @@ the response content, and sends the `304 Not Modified` header::
         return $this->response;
     }
 
+.. _response-cookies:
+
+Setting Cookies
+===============
+
+.. TODO:: Write this
+
 .. _cors-headers:
 
 Setting Cross Origin Request Headers (CORS)
@@ -911,6 +941,97 @@ return value of the ``withHeader()`` method was not retained. To correct the
 above code you would write::
 
     $this->response = $this->response->withHeader('X-CakePHP', 'yes!');
+
+.. php:namespace:: Cake\Http\Cookie
+
+Cookie Collections
+==================
+
+.. php:class:: CookieCollection
+
+CookieCollection objects are accessible from the request and response objects.
+They let you interact with groups of cookies using immutable patterns, which
+allow the immutability of the request and response to be preserved.
+
+Creating Cookies
+----------------
+
+Cookie objects can be defined through constructor objects, or by using the
+fluent interface that follows immutable patterns::
+
+    use Cake\Http\Cookie\Cookie;
+
+    // All arguments in the constructor
+    $cookie = new Cookie(
+        'remember_me', // name
+        1, // value
+        new DateTime('+1 year'), // expiration time, if applicable
+        '/', // path, if applicable
+        'example.com', // domain, if applicable
+        false, // secure only?
+        true // http only ?
+    );
+
+    // Using the builder methods
+    $cookie = (new Cookie('remember_me'))
+        ->withValue('1')
+        ->withExpiry(new DateTime('+1 year'))
+        ->withPath('/')
+        ->withDomain('example.com')
+        ->withSecure(false)
+        ->withHttpOnly(true);
+
+Once you have created a cookie, you can add it to a new or existing
+``CookieCollection``::
+
+    use Cake\Http\Cookie\CookieCollection;
+
+    // Create a new collection.
+    $cookies = new CookieCollection([$cookie]);
+
+    // Add to an existing collection
+    $cookies = $cookies->add($cookie);
+
+    // Remove a cookie by name
+    $cookies = $cookies->remove('remember_me');
+
+.. note::
+    Remember that collections are immutable and adding cookies into, or removing
+    cookies from a collection, creates a *new* collection object.
+
+When adding cookies to ``Response`` objects, you should use the ``withCookie()``
+method as it is simpler to use::
+
+    $response = $this->response->withCookie($cookie);
+
+Reading Cookies
+---------------
+
+Once you have a ``CookieCollection`` instance, you can access the cookies it
+contains::
+
+    // Check if a cookie exists
+    $cookies->has('remember_me');
+
+    // Get the number of cookies in the collection
+    count($cookies);
+
+    // Get a cookie instance
+    $cookie = $cookies->get('remember_me');
+
+Once you have a ``Cookie`` object you can interact with it's state and modify
+it. Keep in mind that cookies are immutable, so you'll need to update the
+collection if you modify a cookie::
+
+    // Get the value
+    $value = $cookie->getValue()
+
+    // Access data inside a JSON value
+    $id = $cookie->read('User.id');
+
+    // Check state
+    $cookie->isHttpOnly();
+    $cookie->isSecure();
 
 .. meta::
     :title lang=en: Request and Response objects
