@@ -916,7 +916,7 @@ diğer web tarayıcı bağımlı çevre değişkenleri tanımlı değillerdir.
 Eğer rapor üretiyorsanız veya varsayılan ana sunucu ``http://localhost/`` içeren ``Router::url()``
 metodlarını kullanan raporlar ve epostalar gönderiyorsanız, hatalı URL'lerle karşılaşabilirsiniz.
 Bu durumda, alanı (domain'i) el lie belirtmelisiniz.
-Örnek olarak bunu bootstrap veya config dosyalarından ``App.fullBaseURL`` Yapılandırma (Configure) değerlerini
+Örnek olarak bunu bootstrap veya config dosyalarından ``App.fullBaseUrl`` Yapılandırma (Configure) değerlerini
 kullanarak yapabilirsiniz.
 
 Eposta göndermek için Email sınıfını maili göndermek istediğiniz ana makine ile getirmelisiniz::
