@@ -942,13 +942,26 @@ You can specify an alternative inflection type using the ``inflect`` option::
         ]);
     });
 
-The above will generate URLs styled like: **/blog-posts/\***.
+The above will generate URLs styled like: **/blog-posts**.
 
 .. note::
 
     As of CakePHP 3.1 the official app skeleton uses ``DashedRoute`` as its
     default route class. Using the ``'inflect' => 'dasherize'`` option when
     connecting resource routes is recommended for URL consistency.
+
+Changing the Path Element
+-------------------------
+
+By default resource routes use an inflected form of the resource name for the
+URL segment. You can set a custom URL segment with the ``path`` option::
+
+    Router::scope('/', function ($routes) {
+        $routes->resources('BlogPosts', ['path' => 'posts']);
+    });
+
+.. versionadded:: 3.5.0
+    The ``path`` option was added in 3.5.0
 
 .. index:: passed arguments
 .. _passed-arguments:
