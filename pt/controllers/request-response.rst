@@ -14,5 +14,10 @@ Objetos de requisição e resposta
 .. index:: $this->request
 .. _cake-request:
 
-Request
-=======
+Requisição
+==========
+
+.. _cake-response-file:
+
+Enviando Arquivos
+-----------------
