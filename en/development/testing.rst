@@ -1583,11 +1583,11 @@ Tests for plugins are created in their own directory inside the plugins
 folder. ::
 
     /src
-        /plugins
-            /Blog
-                /tests
-                    /TestCase
-                    /Fixture
+    /plugins
+        /Blog
+            /tests
+                /TestCase
+                /Fixture
 
 They work just like normal tests but you have to remember to use the naming
 conventions for plugins when importing classes. This is an example of a testcase
