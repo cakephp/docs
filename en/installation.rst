@@ -486,16 +486,15 @@ A sample of the server directive is as follows:
         location ~ \.php$ {
             try_files $uri =404;
             include fastcgi_params;
-
             fastcgi_pass 127.0.0.1:9000;
-            # When using PHP-FPM, configure it as follows instead
-            # fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;
-
             fastcgi_index index.php;
             fastcgi_intercept_errors on;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         }
     }
+
+.. note::
+    Recent configuration of PHP-FPM is set to listen to php-fpm socket instead of TCP port 9000 on address 127.0.0.1. If you get 502 bad gateway error from above configuration, try replacing fastcgi_pass from TCP port to socket path (eg: fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;).
 
 IIS7 (Windows hosts)
 --------------------
