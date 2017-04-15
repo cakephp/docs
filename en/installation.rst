@@ -494,7 +494,11 @@ A sample of the server directive is as follows:
     }
 
 .. note::
-    Recent configuration of PHP-FPM is set to listen to php-fpm socket instead of TCP port 9000 on address 127.0.0.1. If you get 502 bad gateway error from above configuration, try replacing fastcgi_pass from TCP port to socket path (eg: fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;).
+    Recent configurations of PHP-FPM are set to listen to the unix php-fpm
+    socket instead of TCP port 9000 on address 127.0.0.1. If you get 502 bad
+    gateway errors from the above configuration, try update ``fastcgi_pass`` to
+    use the unix socket path (eg: fastcgi_pass
+    unix:/var/run/php/php7.1-fpm.sock;) instead of the TCP port.
 
 IIS7 (Windows hosts)
 --------------------
