@@ -10,7 +10,30 @@ Deprecations
 The following is a list of deprecated methods, properties and behaviors. These
 features will continue to function until 4.0.0 after which they will be removed.
 
-.. Add deprecations here.
+Deprecated Combined Get/Set Methods
+-----------------------------------
+
+In the past CakePHP has leveraged 'modal' methods that operate as provide both
+a get/set mode. These methods complicate IDE autocompletion and our ability
+to add stricter return types in the future. For these reasons, combined get/set
+methods are being split into separate get and set methods.
+
+The following is a list of methods that are deprecated and replaced with
+``getX()`` and ``setX()`` methods:
+
+``Cake\Utility\Security``
+    * ``salt()``
+``Cake\Console\Shell``
+    * ``io()``
+``Cake\Http\ServerRequest``
+    * ``env()`` (now ``getEnv()`` / ``withEnv()``)
+``Cake\View\View``
+    * ``template()``
+    * ``layout()``
+    * ``theme()``
+    * ``templatePath()``
+    * ``layoutPath()``
+    * ``autoLayout()`` (now ``isAutoLayoutEnabled()`` / ``enableAutoLayout()``)
 
 Behavior Changes
 ================
