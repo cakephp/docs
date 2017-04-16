@@ -64,6 +64,9 @@ New Features
 * ``Cake\Routing\Router::reverseToArray()`` was added. This method allow you to
   convert a request object into an array that can be used to generate URL
   strings.
+* ``Cake\Routing\RouteBuilder::resources()`` had the ``path`` option
+  added. This option lets you make the resource path and controller name not
+  match.
 * New abstract types were added for ``smallinteger`` and ``tinyinteger``.
   Existing ``SMALLINT`` and ``TINYINT`` columns will now be reflected as these
   new abstract types. ``TINYINT(1)`` columns will continue to be treated as
