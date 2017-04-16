@@ -9,7 +9,7 @@ introducidas en cada versión y los pasos a seguir para la migración entre
 versiones.
 
 3.5 Guía de migración
-===================
+=====================
 
 .. toctree::
     :maxdepth: 1
