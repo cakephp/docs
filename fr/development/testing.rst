@@ -1650,11 +1650,11 @@ Les Tests pour les plugins sont créés dans leur propre répertoire à
 l'intérieur du dossier des plugins::
 
     /src
-        /plugins
-            /Blog
-                /tests
-                    /TestCase
-                    /Fixture
+    /plugins
+        /Blog
+            /tests
+                /TestCase
+                /Fixture
 
 Ils fonctionnent comme des tests normaux mais vous devrez vous souvenir
 d'utiliser les conventions de nommage pour les plugins quand vous importez des
