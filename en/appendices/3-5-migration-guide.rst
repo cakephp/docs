@@ -21,12 +21,14 @@ methods are being split into separate get and set methods.
 The following is a list of methods that are deprecated and replaced with
 ``getX()`` and ``setX()`` methods:
 
-``Cake\Utility\Security``
-    * ``salt()``
 ``Cake\Console\Shell``
     * ``io()``
+``Cake\Datasource\QueryTrait``
+    * ``eagerLoaded()`` (now ``isEagerLoaded()``)
 ``Cake\Http\ServerRequest``
     * ``env()`` (now ``getEnv()`` / ``withEnv()``)
+``Cake\Utility\Security``
+    * ``salt()``
 ``Cake\View\View``
     * ``template()``
     * ``layout()``
