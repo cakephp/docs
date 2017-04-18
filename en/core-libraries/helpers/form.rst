@@ -1291,7 +1291,6 @@ Ex: name=data[User][username], id=UserUsername
     .. code-block:: html
 
         <select name="data[User][gender]" id="UserGender">
-        <option value=""></option>
         <option value="M">Male</option>
         <option value="F">Female</option>
         </select>
