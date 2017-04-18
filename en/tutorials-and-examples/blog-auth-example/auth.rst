@@ -354,7 +354,8 @@ config::
                 'controller' => 'Pages',
                 'action' => 'display',
                 'home'
-            ]
+            ],
+            'authorize' => ['Controller'],  
         ]);
     }
 
