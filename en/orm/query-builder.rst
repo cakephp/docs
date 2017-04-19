@@ -546,7 +546,7 @@ expect::
                 return $author;
             });
         });
-    });
+    }]);
 
     // Get results
     $results = $query->all();

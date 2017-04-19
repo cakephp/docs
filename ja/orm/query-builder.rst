@@ -529,7 +529,7 @@ CakePHP はフォーマッタ関数が適切なスコープになるよう保証
                 return $author;
             });
         });
-    });
+    }]);
 
     // 結果を取得する
     $results = $query->all();
