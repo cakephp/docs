@@ -679,7 +679,7 @@ that the same seeder can be applied multiple times.
 
 Calling a Seeder from another Seeder
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+## How is this possible? 1.6.1 is the most recent relase listed on https://github.com/cakephp/migrations/releases?
 .. versionadded:: cakephp/migrations 1.6.2
 
 Usually when seeding, the order in which to insert the data must be respected
