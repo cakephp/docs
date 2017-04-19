@@ -574,7 +574,7 @@ comme vous pouvez vous y attendre::
                 return $author;
             });
         });
-    });
+    }]);
 
     // Récupère les résultats
     $results = $query->all();
