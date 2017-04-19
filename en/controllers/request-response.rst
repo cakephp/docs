@@ -451,6 +451,9 @@ Request cookies can be read through a number of methods::
 See the :php:class:`Cake\\Http\\Cookie\\CookieCollection` documentation for how
 to work with cookie collection.
 
+.. versionadded:: 3.5.0
+    ``ServerRequest::getCookieCollection()`` was added in 3.5.0
+
 .. index:: $this->response
 
 Response
@@ -893,7 +896,28 @@ the response content, and sends the `304 Not Modified` header::
 Setting Cookies
 ===============
 
-.. TODO:: Write this
+Cookies can be added to response using either an array or a :php:class:`Cookie``
+object::
+
+    // Add a cookie as an array using the immutable API (3.4.0+)
+    $this->response = $this->response->withCookie('remember_me', [
+        'value' => 'yes',
+        'path' => '/',
+        'httpOnly' => true,
+        'secure' => false,
+        'expire' => strtotime('+1 year')
+    ]);
+
+    // Before 3.4.0
+    $this->response->cookie('remember', [
+        'value' => 'yes',
+        'path' => '/',
+        'httpOnly' => true,
+        'secure' => false,
+        'expire' => strtotime('+1 year')
+    ]);
+
+See the :ref:`creating-cookies` section for how to use the cookie object.
 
 .. _cors-headers:
 
@@ -952,6 +976,8 @@ Cookie Collections
 CookieCollection objects are accessible from the request and response objects.
 They let you interact with groups of cookies using immutable patterns, which
 allow the immutability of the request and response to be preserved.
+
+.. _creating-cookies:
 
 Creating Cookies
 ----------------
@@ -1032,6 +1058,9 @@ collection if you modify a cookie::
     // Check state
     $cookie->isHttpOnly();
     $cookie->isSecure();
+
+.. versionadded:: 3.5.0
+    ``CookieCollection`` and ``Cookie`` were added in 3.5.0.
 
 .. meta::
     :title lang=en: Request and Response objects
