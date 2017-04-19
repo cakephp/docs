@@ -73,6 +73,10 @@ New Features
   ``Cake\Http\ServerRequest``, ``Cake\Http\Repsonse``, and
   ``Cake\Http\Client\Response``. See the :ref:`request-cookies` and
   :ref:`response-cookies` for more information.
+* New middleware has been added to make applying security headers easier. See
+  :ref:`security-header-middleware` for more information.
+* New middleware has been added to transparently encrypt cookie data. See
+  :ref:`encrypted-cookie-middleware` for more information.
 * ``Cake\Event\EventManager::on()`` and ``off()`` methods are now chainable
   making it simpler to set multiple events at once.
 * ``Cake\Validation\Validator::regex()`` was added for a more convenient way

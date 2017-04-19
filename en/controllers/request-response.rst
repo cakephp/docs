@@ -1030,6 +1030,9 @@ method as it is simpler to use::
 
     $response = $this->response->withCookie($cookie);
 
+Cookies set to responses can be encrypted using the
+:ref:`encrypted-cookie-middleware`.
+
 Reading Cookies
 ---------------
 
