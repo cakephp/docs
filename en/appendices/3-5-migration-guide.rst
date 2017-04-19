@@ -13,8 +13,8 @@ features will continue to function until 4.0.0 after which they will be removed.
 Deprecated Combined Get/Set Methods
 -----------------------------------
 
-In the past CakePHP has leveraged 'modal' methods that operate as provide both
-a get/set mode. These methods complicate IDE autocompletion and our ability
+In the past CakePHP has leveraged 'modal' methods that provide both
+a get and set mode. These methods complicate IDE autocompletion and our ability
 to add stricter return types in the future. For these reasons, combined get/set
 methods are being split into separate get and set methods.
 
@@ -23,6 +23,8 @@ The following is a list of methods that are deprecated and replaced with
 
 ``Cake\Console\Shell``
     * ``io()``
+``Cake\Datasource\ModelAwareTrait``
+    * ``modelType()``
 ``Cake\Datasource\QueryTrait``
     * ``eagerLoaded()`` (now ``isEagerLoaded()``)
 ``Cake\Http\ServerRequest``
