@@ -313,8 +313,8 @@ Cookie data is encrypted with via OpenSSL using AES::
     $middleware->add($cookies);
 
 .. note::
-    It is recommended that the encryption key you use for cookie data, is *only*
-    used for cookie data.
+    It is recommended that the encryption key you use for cookie data, is used
+    *exclusively* for cookie data.
 
 The encryption algorithms and padding style used by the cookie middleware are
 backwards compatible with ``CookieComponent`` from earlier versions of CakePHP.

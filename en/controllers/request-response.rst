@@ -445,7 +445,7 @@ Request cookies can be read through a number of methods::
     // Get all cookies as an hash
     $cookies = $this->request->getCookieParams();
 
-    // Get a CookieCollection instance (after 3.5.0)
+    // Get a CookieCollection instance (starting with 3.5.0)
     $cookies = $this->request->getCookieCollection()
 
 See the :php:class:`Cake\\Http\\Cookie\\CookieCollection` documentation for how
@@ -1012,7 +1012,7 @@ Once you have created a cookie, you can add it to a new or existing
 
     use Cake\Http\Cookie\CookieCollection;
 
-    // Create a new collection.
+    // Create a new collection
     $cookies = new CookieCollection([$cookie]);
 
     // Add to an existing collection
@@ -1025,8 +1025,8 @@ Once you have created a cookie, you can add it to a new or existing
     Remember that collections are immutable and adding cookies into, or removing
     cookies from a collection, creates a *new* collection object.
 
-When adding cookies to ``Response`` objects, you should use the ``withCookie()``
-method as it is simpler to use::
+You should use the ``withCookie()`` method to add cookies to ``Response``
+objects as it is simpler to use::
 
     $response = $this->response->withCookie($cookie);
 
