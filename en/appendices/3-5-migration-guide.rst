@@ -26,6 +26,10 @@ The following is a list of methods that are deprecated and replaced with
 
 ``Cake\Console\Shell``
     * ``io()``
+``Cake\Console\ConsoleIo``
+    * ``outputAs()``
+``Cake\Console\ConsoleOutput``
+    * ``outputAs()``
 ``Cake\Datasource\ModelAwareTrait``
     * ``modelType()``
 ``Cake\Datasource\QueryTrait``
