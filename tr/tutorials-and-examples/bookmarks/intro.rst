@@ -349,14 +349,20 @@ de şunları ekleyiniz::
     // 'tags' seçeneğini içerir.
     public function findTagged(Query $query, array $options)
     {
-        return $this->find()
-            ->distinct(['Bookmarks.id'])
-            ->matching('Tags', function ($q) use ($options) {
-                if (empty($options['tags'])) {
-                    return $q->where(['Tags.title IS' => null]);
-                }
-                return $q->where(['Tags.title IN' => $options['tags']]);
-            });
+        $bookmarks = $this->find()
+            ->select(['id', 'url', 'title', 'description']);
+
+        if (empty($options['tags'])) {
+            $bookmarks
+                ->leftJoinWith('Tags')
+                ->where(['Tags.title IS' => null]);
+        } else {
+            $bookmarks
+                ->innerJoinWith('Tags')
+                ->where(['Tags.title IN ' => $options['tags']]);
+        }
+
+        return $bookmarks->group(['Bookmarks.id']);
     }
 
 Biz :ref:`özel bulucu metodu <custom-find-methods>` geliştirdik. Bu CakePHP nin
