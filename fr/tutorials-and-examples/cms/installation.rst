@@ -1,32 +1,36 @@
-Content Management Tutorial
-###########################
+Tutoriel de Gestion de Contenu
+##############################
 
-This tutorial will walk you through the creation of a simple :abbr:`CMS (Content
-Management System)` application. . To start with, we'll be installing CakePHP,
-creating our database, and building simple article management.
+Ce tutoriel vous accompagnera pour créer une application :abbr:`CMS (Content
+Management System, en français Système de Gestion de Contenu)` simple. Pour
+commencer, nous allons installer CakePHP, créer notre base de données et
+construire une gestion simple d'articles.
 
-Here's what you'll need:
+Voilà ce dont vous allez avoir besoin:
 
-#. A database server. We're going to be using MySQL server in this tutorial.
-   You'll need to know enough about SQL in order to create a database, and run
-   SQL snippets from the tutorial. CakePHP will handle building all the queries
-   your application needs. Since we're using MySQL, also make sure that you have
-   ``pdo_mysql`` enabled in PHP.
-#. Basic PHP knowledge.
+#. Un serveur de base de données. Nous allons utiliser un serveur MySQL dans ce
+tutoriel.
+   Vous devrez en savoir assez sur SQL pour créer une base de données et
+   exécuter des portions de code SQL du tutoriel. CakePHP va gérer la
+   construction de toutes les requêtes dont votre application aura besoin.
+   Puisque nous utilisons MySQL, assurez-vous que vous avez ``pdo_mysql``
+   activé dans PHP.
+#. Des connaissances basiques de PHP.
 
-Before starting you should make sure that you have got an up to date PHP
-version:
+Avant de commencer, vous devrez vous assurer que vous avez une version de PHP
+à jour:
 
 .. code-block:: bash
 
     php -v
 
-You should at least have got installed PHP |minphpversion| (CLI) or higher.
-Your webserver's PHP version must also be of |minphpversion| or higher, and
-should be the same version your command line interface (CLI) PHP is.
+Vous devrez avoir au moins la version |minphpversion| (CLI) de PHP. La version
+de votre serveur web PHP devra aussi être au moins la version |minphpversion|,
+et devra être la même version que celle de votre interface en ligne de commande
+PHP (CLI).
 
-Getting CakePHP
-===============
+Récpérer CakePHP
+================
 
 .. TODO::
     Should we use Oven instead?
