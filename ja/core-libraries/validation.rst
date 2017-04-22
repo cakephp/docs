@@ -165,15 +165,15 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
 このことが、このクラスにおけるメソッドをバリデーションルールとして使用することを容易にします。
 バリデータと ORM をともに用いる場合は、テーブル及びエンティティのオブジェクトのために
 追加のプロバーダーが設定されます。アプリケーションの用途に応じてプロバイダーを追加したい場合は、
-``provider()`` メソッドを用います。 ::
+``setProvider()`` メソッドを用います。 ::
 
     $validator = new Validator();
 
     // オブジェクトインスタンスを用いる。
-    $validator->provider('custom', $myObject);
+    $validator->setProvider('custom', $myObject);
 
     // クラス名を用いる。メソッドは静的なものでなければならない。
-    $validator->provider('custom', 'App\Model\Validation');
+    $validator->setProvider('custom', 'App\Model\Validation');
 
 バリデーションプロバイダーは、オブジェクトか、あるいはクラス名で設定されます。
 クラス名が使用されるのであれば、メソッドは静的でなければなりません。
@@ -200,7 +200,7 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
         public function validationDefault(Validator $validator)
         {
             // バリデータにプロバイダーを追加
-            $validator->provider('fr', 'Localized\Validation\FrValidation');
+            $validator->setProvider('fr', 'Localized\Validation\FrValidation');
             // フィールドのバリデーションルールの中にプロバイダーを利用
             $validator->add('phoneField', 'myCustomRuleNameForPhone', [
                 'rule' => 'phone',
