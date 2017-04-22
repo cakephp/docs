@@ -124,7 +124,7 @@ articles. First, update the ``add`` action to look like::
         // Other actions
     }
 
-The new lines load a list of tags as an associative array of ``id => title``.
+The added lines load a list of tags as an associative array of ``id => title``.
 This format will let us create a new tag input in our template.
 Add the following to **src/Template/Articles/add.ctp**::
 
@@ -213,7 +213,7 @@ Creating the Finder Method
 --------------------------
 
 In CakePHP we like to keep our controller actions slim, and put most of our
-application's logic in the models. If you were to visit the
+application's logic in the model layer. If you were to visit the
 **/articles/tagged** URL now you would see an error that the ``findTagged()``
 method has not been implemented yet, so let's do that. In
 **src/Model/Table/ArticlesTable.php** add the following::
@@ -223,21 +223,23 @@ method has not been implemented yet, so let's do that. In
     // to find('tagged') in our controller action.
     public function findTagged(Query $query, array $options)
     {
-        $articles = $this->find()
+        $query = $query
             ->select(['id', 'user_id', 'title', 'body', 'published', 'created'])
             ->distinct(['id', 'user_id', 'title', 'body', 'published', 'created']);
 
         if (empty($options['tags'])) {
-            $bookmarks->leftJoinWith('Tags', function ($q) {
-                return $q->where(['Tags.title IS ' => null]);
+            // If there are no tags provided, find articles that have no tags.
+            $query->leftJoinWith('Tags', function ($q) {
+                return $q->where(['Tags.title IS' => null]);
             });
         } else {
-            $articles->innerJoinWith('Tags', function ($q) use ($options) {
+            // Find articles that have one or more of the provided tags.
+            $query->innerJoinWith('Tags', function ($q) use ($options) {
                 return $q->where(['Tags.title IN' => $options['tags']]);
             });
         }
 
-        return $articles->group(['Articles.id']);
+        return $query->group(['Articles.id']);
     }
 
 We just implemented a :ref:`custom finder method <custom-find-methods>`. This is
@@ -255,7 +257,7 @@ conditions that will filter articles that have specific tags.
 Creating the View
 -----------------
 
-Now if you visit the **/articles/tagged** URL, CakePHP will show an error
+Now if you visit the **/articles/tagged** URL again, CakePHP will show a new error
 letting you know that you have not made a view file. Next, let's build the
 view file for our ``tags()`` action. In **src/Template/Articles/tags.ctp**
 put the following content::
@@ -281,17 +283,17 @@ put the following content::
 In the above code we use the :doc:`/views/helpers/html` and
 :doc:`/views/helpers/text` helpers to assist in generating our view output. We
 also use the :php:func:`h` shortcut function to HTML encode output. You should
-remember to always use ``h()`` when outputting user data to prevent HTML
-injection issues.
+remember to always use ``h()`` when outputting data to prevent HTML injection
+issues.
 
 The **tags.ctp** file we just created follows the CakePHP conventions for view
 template files. The convention is to have the template use the lower case and
 underscored version of the controller action name.
 
 You may notice that we were able to use the ``$tags`` and ``$articles``
-variables in our view. When we use the ``set()`` method in our controller, we
-set specific variables to be sent to the view. The view will make all passed
-variables available in the templates as local variables.
+variables in our view template. When we use the ``set()`` method in our
+controller, we set specific variables to be sent to the view. The View will make
+all passed variables available in the template scope as local variables.
 
 You should now be able to visit the **/articles/tagged/funny** URL and see all
 the articles tagged with 'funny'.
@@ -329,9 +331,7 @@ can add a virtual/computed field to the entity. In
     }
 
 This will let us access the ``$article->tag_string`` computed property. We'll
-use this property in controls later on. Remember to add the ``tag_string``
-property to the ``_accessible`` list in your entity, as we'll want to 'save' it
-later on.
+use this property in controls later on.
 
 Updating the Views
 ------------------
