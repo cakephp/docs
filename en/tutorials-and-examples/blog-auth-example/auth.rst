@@ -240,7 +240,9 @@ entity file and add the following::
 
         protected function _setPassword($password)
         {
-            return (new DefaultPasswordHasher)->hash($password);
+            if (strlen($password) > 0) {
+                return (new DefaultPasswordHasher)->hash($password);
+            }
         }
 
         // ...
