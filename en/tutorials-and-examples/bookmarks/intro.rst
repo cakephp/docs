@@ -362,13 +362,13 @@ method has not been implemented yet, so let's do that. In
             ->select(['id', 'url', 'title', 'description']);
 
         if (empty($options['tags'])) {
-            $bookmarks->leftJoinWith('Tags', function ($q) {
-                return $q->where(['Tags.title IS ' => null]);
-            });
+            $bookmarks
+                ->leftJoinWith('Tags')
+                ->where(['Tags.title IS' => null]);
         } else {
-            $bookmarks->innerJoinWith('Tags', function ($q) use ($options) {
-                return $q->where(['Tags.title IN' => $options['tags']]);
-            });
+            $bookmarks
+                ->innerJoinWith('Tags')
+                ->where(['Tags.title IN ' => $options['tags']]);
         }
 
         return $bookmarks->group(['Bookmarks.id']);
