@@ -229,14 +229,12 @@ method has not been implemented yet, so let's do that. In
 
         if (empty($options['tags'])) {
             // If there are no tags provided, find articles that have no tags.
-            $query->leftJoinWith('Tags', function ($q) {
-                return $q->where(['Tags.title IS' => null]);
-            });
+            $query->leftJoinWith('Tags')
+                ->where(['Tags.title IS' => null]);
         } else {
             // Find articles that have one or more of the provided tags.
-            $query->innerJoinWith('Tags', function ($q) use ($options) {
-                return $q->where(['Tags.title IN' => $options['tags']]);
-            });
+            $query->innerJoinWith('Tags')
+                ->where(['Tags.title IN' => $options['tags']]);
         }
 
         return $query->group(['Articles.id']);
@@ -248,11 +246,8 @@ queries. Finder methods always get a :doc:`/orm/query-builder` object and an
 array of options as parameters. Finders can manipulate the query and add any
 required conditions or criteria. When complete, finder methods must return
 a modified query object. In our finder we've leveraged the ``distinct()`` and
-``matching()`` methods which allow us to find distinct bookmarks that have
-a 'matching' tag. The ``matching()`` method accepts an `anonymous function
-<http://php.net/manual/en/functions.anonymous.php>`_ that receives a query
-builder as its argument. Inside the callback we use the query builder to define
-conditions that will filter articles that have specific tags.
+``leftJoin()`` methods which allow us to find distinct bookmarks that have
+a 'matching' tag.
 
 Creating the View
 -----------------
