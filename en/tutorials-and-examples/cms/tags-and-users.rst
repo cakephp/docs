@@ -60,8 +60,11 @@ add the following::
 
         protected function _setPassword($value)
         {
-            $hasher = new DefaultPasswordHasher();
-            return $hasher->hash($value);
+            if (strlen($value)) {
+                $hasher = new DefaultPasswordHasher();
+
+                return $hasher->hash($value);
+            }
         }
     }
 
