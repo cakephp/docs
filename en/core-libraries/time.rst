@@ -214,8 +214,8 @@ Finally, it is possible to use a different locale for displaying a date::
 
     echo $now->nice('Europe/Paris', 'fr-FR');
 
-Setting the Default Locale and Format String
---------------------------------------------
+Setting the Default Locale, Format String and Output Timezone
+-------------------------------------------------------------
 
 The default locale in which dates are displayed when using ``nice``
 ``i18nFormat`` is taken from the directive
@@ -249,6 +249,44 @@ Likewise, it is possible to alter the default formatting string to be used for
 
 It is recommended to always use the constants instead of directly passing a date
 format string.
+
+.. versionadded:: 3.2.11
+
+You can change the default timezone used for outputting ``Time``/``FrozenTime`` instances
+in your whole application in **app.php**::
+
+    'defaultOutputTimezone' => 'Europe/Berlin',
+
+... or overwrite fetching from application config in **bootstrap.php**::
+
+    $timezone = 'Europe/Berlin';
+    Time::setDefaultOutputTimezone($timezone);
+    FrozenTime::setDefaultOutputTimezone($timezone);
+
+At any point in your application, say in custom a ``FrontendAppController`` you may change the
+default output timezone by calling ``setDefaultOutputTimezone()`` like so::
+
+    use Cake\I18n\FrozenTime;
+    use Cake\I18n\Time;
+
+    // ...
+
+    public function initialize() {
+        parent::initialize();
+        $timezone = 'America/Vancouver';
+        Time::setDefaultOutputTimezone($timezone);
+        FrozenTime::setDefaultOutputTimezone($timezone);
+    }
+
+In a similar way you will be able to set a GeoIP, browser-based, profile or session based
+default output timezone. Example reading session based timezones::
+
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $timezone = $this->request->session->read('defaultUserTimezone');
+        Time::setDefaultOutputTimezone($timezone);
+        FrozenTime::setDefaultOutputTimezone($timezone);
+    }
 
 Formatting Relative Times
 -------------------------
