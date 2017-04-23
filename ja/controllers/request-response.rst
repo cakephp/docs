@@ -468,6 +468,12 @@ Accept ヘッダの確認
         return $response;
     }
 
+    // 3.4.0 より前
+    $file = $this->Attachments->getFile($id);
+    $this->response->file($file['path']);
+    // レスポンスオブジェクトを返すとコントローラがビューの描画を中止します
+    return $this->response;
+
 上記の例のようにメソッドにファイルのパスを渡す必要があります。CakePHP は、
 `Cake\\Http\\Reponse::$_mimeTypes` に登録された、よく知られるファイルタイプであれば
 正しいコンテンツタイプヘッダを送ります。 :php:meth:`Cake\\Http\\Response::withFile()` を呼ぶ前に
@@ -477,6 +483,12 @@ Accept ヘッダの確認
 ダウンロードさせることができます。 ::
 
     $response = $this->response->withFile(
+        $file['path'],
+        ['download' => true, 'name' => 'foo']
+    );
+
+    // 3.4.0 より前
+    $this->response->file(
         $file['path'],
         ['download' => true, 'name' => 'foo']
     );

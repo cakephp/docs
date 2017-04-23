@@ -575,6 +575,18 @@ ORM で返されるデフォルトの日付では結果は ``Cake\I18n\Time`` �
 ``LocaleSelectorFilter`` をアプリケーション内で使用すると、CakePHP は自動で現在のユーザに基づいた
 ロケールを設定します。 ::
 
+    // src/Application.php の中で
+    use Cake\I18n\Middleware\LocaleSelectorMiddleware;
+
+    // 新しいミドルウェアを追加するために middleware 関数を更新してください。
+    public function middleware($middleware)
+    {
+        // ミドルウェアの追加し、有効なロケールの設定
+        $middleware->add(new LocaleSelectorMiddleware(['en_US', 'fr_FR']));
+    }
+
+
+    // 3.3.0 より前は、 DispatchFilter を使用してください。
     // config/bootstrap.php 内で
     DispatcherFactory::add('LocaleSelector');
 

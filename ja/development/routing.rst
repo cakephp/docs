@@ -895,8 +895,8 @@ POST リクエストの中の、 \_method の値を使う方法は、ブラウ�
     Router::scope('/', function ($routes) {
         $routes->resources('BlogPosts', [
             'inflect' => 'dasherize' // ``Inflector::dasherize()`` を使用
-        ];
-    })
+        ]);
+    });
 
 上記は、 **/blog-posts/\*** スタイルの URL を生成します。
 
