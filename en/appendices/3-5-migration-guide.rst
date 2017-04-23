@@ -34,6 +34,8 @@ The following is a list of methods that are deprecated and replaced with
     * ``modelType()``
 ``Cake\Datasource\QueryTrait``
     * ``eagerLoaded()`` (now ``isEagerLoaded()``)
+``Cake\Error\Debugger``
+    * ``outputAs()``
 ``Cake\Http\ServerRequest``
     * ``env()`` (now ``getEnv()`` / ``withEnv()``)
 ``Cake\Utility\Security``
