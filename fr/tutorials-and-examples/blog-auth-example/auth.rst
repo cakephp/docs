@@ -246,7 +246,9 @@ fichier entity dans **src/Model/Entity/User.php** et ajoutons ce qui suit::
 
         protected function _setPassword($password)
         {
-            return (new DefaultPasswordHasher)->hash($password);
+            if (strlen($password) > 0) {
+                return (new DefaultPasswordHasher)->hash($password);
+            }
         }
 
         // ...
