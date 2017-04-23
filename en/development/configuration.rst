@@ -656,7 +656,24 @@ This means for example, that if you need to change your database, you'll just
 need to modify a DATABASE_URL variable on your host configuration without the
 need to change it in your source code.
 
-As you can see in your **app.php**, the following variables are concerned:
+Because CakePHP will automatically prefer a setting exposed as an environment
+variable over its peer setting in ``app.php`` enabling environment variables is
+as simple as:
+
+#. creating a ``config/.env`` file
+#. adding  one or more of the supported variables
+#. creating the corresponding environment variables on your local system
+
+An example ``.env`` file would look like::
+
+    export DEBUG=true
+    export APP_NAME=my.app
+    export APP_ENCODING=UTF-8
+    export APP_DEFAULT_LOCALE=en_US
+    export SECURITY_SALT="my-salt"
+    etc.
+
+As you can see in your **app.php**, the following variables are supported:
 
 - ``DEBUG`` (``0`` or ``1``)
 - ``APP_ENCODING`` (ie UTF-8)
@@ -675,11 +692,11 @@ As you can see in the examples, we define some options configuration as
 :term:`DSN` strings. This is the case for databases, logs, email transport and
 cache configurations.
 
-If the environment variables are not defined in your environment, CakePHP will
-use the values that are defined in the **app.php**. You can use
+Remember that CakePHP will use the values defined in **app.php** if the
+environment variables are not defined in your environment. You can use
 `php-dotenv library <https://github.com/josegonzalez/php-dotenv>`_ to use
-environment variables in a local development. See the Readme instructions of the
-library for more information.
+environment variables in a local development. See the Readme instructions of
+that library for more information.
 
 
 Disabling Generic Tables
