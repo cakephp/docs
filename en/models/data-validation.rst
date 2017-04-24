@@ -305,6 +305,11 @@ identified with an arbitrary name.
 When using multiple rules per field the 'required' and 'allowEmpty'
 keys need to be used only once in the first rule.
 
+.. tip::
+
+    When using multiple rules per field, listing rules that use the default value for 'required' or 'allowEmpty' before
+    rules that do not only helps avoid unintended validation, but can also reduce validation code by up to 50%
+
 last
 ----
 
