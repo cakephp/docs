@@ -163,6 +163,9 @@ have the plugin prefix on them, use the alternative syntax::
             )
         );
     }
+    
+.. note::
+    If you have __construct() method in your model don't forget to call parent::__construct() at the end. Failing to do so will create a lot of difficult to debug problems.
 
 Plugin Views
 ============
