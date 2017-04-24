@@ -507,6 +507,10 @@ table linked to the model called Article. You can use any model available in
 your application. The statement will only import the Article schema, and  does
 not import records. To import records you can do the following::
 
+.. versionchanged:: 2.7 
+    ``model`` has been replaced by ``table``
+    Now use: public $import => array('table' => 'articles');
+
     class ArticleFixture extends CakeTestFixture {
         public $import = array('model' => 'Article', 'records' => true);
     }
