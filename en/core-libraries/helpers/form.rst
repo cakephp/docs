@@ -864,15 +864,20 @@ Options for select, checkbox and  radio inputs
       echo $this->Form->input('field', array(
           'options' => array(1, 2, 3, 4, 5),
           'empty' => '(choose one)'
+          'label' => 'Options',
+          'class' => 'form-control',
+          'div' => array(
+              'class' => 'form-group'
+              )
       ));
 
   Output:
 
   .. code-block:: html
 
-      <div class="input">
-          <label for="UserField">Field</label>
-          <select name="data[User][field]" id="UserField">
+      <div class="form-group">
+          <label for="UserField">Options</label>
+          <select name="data[User][field]" class="form-control" id="UserField">
               <option value="">(choose one)</option>
               <option value="0">1</option>
               <option value="1">2</option>
