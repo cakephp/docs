@@ -1,7 +1,7 @@
 Blog Tutorial - Adding a layer
 ******************************
 
-Create a Post Model
+Create a Posts Model
 ===================
 
 The Model class is the bread and butter of CakePHP applications. By
@@ -10,10 +10,10 @@ we'll have the foundation in place needed to do our view, add,
 edit, and delete operations later.
 
 CakePHP's model class files go in ``/app/Model``, and the file
-we'll be creating will be saved to ``/app/Model/Post.php``. The
+we'll be creating will be saved to ``/app/Model/Posts.php``. The
 completed file should look like this::
 
-    class Post extends AppModel {
+    class Posts extends AppModel {
     }
 
 Naming conventions are very important in CakePHP. By naming our model
@@ -86,7 +86,7 @@ CakePHP's naming conventions.
 To learn more about CakePHP's controllers, check out the
 :doc:`/controllers` chapter.
 
-Creating Post Views
+Creating Posts Views
 ===================
 
 Now that we have our data flowing to our model, and our application
