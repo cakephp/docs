@@ -1242,7 +1242,7 @@ vous pouvez remplacer le template ``dateWidget``. Par défaut le template
 Pour créer un input datetime avec des classes/attributs personnalisés pour une
 select box spécifique, vous pouvez utiliser les options dans chaque component::
 
-    echo $this->Form->datetime('released', [
+    echo $this->Form->dateTime('released', [
         'year' => [
             'class' => 'year-classname',
         ],

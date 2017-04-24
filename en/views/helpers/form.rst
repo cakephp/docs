@@ -889,7 +889,7 @@ methods are described in each method's own section.)
     selected when the form is rendered (in this case ``'value'`` must be
     assigned a valid, existent element value). May also be used in
     combination with any select-type control,
-    such as ``date()``, ``time()``, ``datetime()``::
+    such as ``date()``, ``time()``, ``dateTime()``::
 
         echo $this->Form->time('close_time', [
             'value' => '13:30:00'
@@ -1651,7 +1651,7 @@ box, you can provide them as arrays of options for each component, within the
 
 For example::
 
-    echo $this->Form->datetime('released', [
+    echo $this->Form->dateTime('released', [
         'year' => [
             'class' => 'year-classname',
         ],
