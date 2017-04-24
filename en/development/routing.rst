@@ -37,7 +37,7 @@ this to your **routes.php** file::
 a backwards compatible interface, while the scoped builders offer more terse
 syntax when building multiple routes, and better performance.
 
-This will execute the index method in the ``ArticlesController`` when the
+The following will execute the index method in the ``ArticlesController`` when the
 homepage of your site is visited. Sometimes you need dynamic routes that will
 accept multiple parameters, this would be the case, for example of a route for
 viewing an article's content::
