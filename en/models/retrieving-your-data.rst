@@ -844,6 +844,9 @@ field.
     ``beforeSave``. Generally the ``find`` function provides a more robust and easy to work
     with API than the ``read`` method.
 
+    Also note, that in future versions this method will be deprecated and removed in favor of
+    the mentioned ``find`` function.
+
 Complex Find Conditions
 =======================
 
