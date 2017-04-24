@@ -255,9 +255,9 @@ you do other less critical logs.
 
 CakePHP exposes this concept as logging scopes. When log messages are written
 you can include a scope name. If there is a configured logger for that scope,
-the log messages will be directed to those loggers. If a log message is written
-to an unknown scope, loggers that handle that level of message will log the
-message. For example::
+the log messages will be directed to those loggers.
+If a log message is written to an unknown scope, no logger will log the message,
+even if it handles that level of message. For example::
 
     // Configure tmp/logs/shop.log to receive the two configured types (log levels), but only
     // those with `orders` and `payments` as scope
@@ -278,7 +278,7 @@ message. For example::
 
     CakeLog::warning('This gets written only to shops stream', 'orders');
     CakeLog::warning('This gets written to both shops and payments streams', 'payments');
-    CakeLog::warning('This gets written to both shops and payments streams', 'unknown');
+    CakeLog::warning('This gets written to neither of both streams', 'unknown');
 
 In order for scopes to work, you **must** do a few things:
 
