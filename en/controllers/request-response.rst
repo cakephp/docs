@@ -43,6 +43,9 @@ The request exposes the routing parameters through the ``getParam()`` method::
 
     $controllerName = $this->request->getParam('controller');
 
+    // Prior to 3.4.0
+    $controllerName = $this->request->param('controller');
+
 All :ref:`route-elements` are accessed through this interface.
 
 In addition to :ref:`route-elements`, you also often need access to
