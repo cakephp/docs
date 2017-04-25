@@ -32,6 +32,8 @@ The following is a list of methods that are deprecated and replaced with
     * ``outputAs()``
 ``Cake\Datasource\ModelAwareTrait``
     * ``modelType()``
+``Cake\Database\Query``
+    * ``valueBinder()`` is now ``getValueBinder()``
 ``Cake\Datasource\QueryTrait``
     * ``eagerLoaded()`` (now ``isEagerLoaded()``)
 ``Cake\Error\Debugger``
