@@ -36,6 +36,8 @@ The following is a list of methods that are deprecated and replaced with
     * ``valueBinder()`` is now ``getValueBinder()``
 ``Cake\Datasource\QueryTrait``
     * ``eagerLoaded()`` (now ``isEagerLoaded()``)
+``Cake\Event\EventDispatcherTrait``
+    * ``eventManager()``
 ``Cake\Error\Debugger``
     * ``outputAs()``
 ``Cake\Http\ServerRequest``
