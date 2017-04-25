@@ -84,6 +84,7 @@ to create free-form categories and labels for their content. Again, we'll use
 ``bake`` to quickly generate some skeleton code for our application:
 
 .. code-block:: bash
+
     # Generate all the code at once.
     bin/cake bake all tags
 
