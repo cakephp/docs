@@ -39,6 +39,9 @@ CakePHP のリクエストオブジェクトは、入ってきたリクエスト
 
     $controllerName = $this->request->getParam('controller');
 
+    // 3.4.0 より前
+    $controllerName = $this->request->param('controller');
+
 すべての :ref:`route-elements` は、このインタフェースを通してアクセスされます。
 
 :ref:`route-elements` に加えて :ref:`passed-arguments` へのアクセスがしばしば必要になります。
