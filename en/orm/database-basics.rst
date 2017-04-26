@@ -712,6 +712,8 @@ While ``prepare()`` returns an incomplete statement::
 
 Once you've prepared a statement you can bind additional data and execute it.
 
+.. _database-basics-binding-values:
+
 Binding Values
 --------------
 
