@@ -530,7 +530,7 @@ Possible keys for belongsToMany association arrays include:
 
 - **className**: the class name of the model being associated to
   the current model. If you're defining a 'Article belongsToMany Tag'
-  relationship, the className key should equal 'Tags.'
+  relationship, the className key should equal 'Tags'.
 - **joinTable**: The name of the join table used in this
   association (if the current table doesn't adhere to the naming
   convention for belongsToMany join tables). By default this table
