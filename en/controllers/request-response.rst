@@ -80,7 +80,7 @@ Query string parameters can be read using the ``getQuery()`` method::
     $page = $this->request->query('page');
 
 You can either directly access the query property, or you can use
-``query()`` method to read the URL query array in an error-free manner.
+``getQuery()`` method to read the URL query array in an error-free manner.
 Any keys that do not exist will return ``null``::
 
     $foo = $this->request->getQuery('value_that_does_not_exist');
