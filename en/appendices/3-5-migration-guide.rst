@@ -42,6 +42,8 @@ The following is a list of methods that are deprecated and replaced with
     * ``outputAs()``
 ``Cake\Http\ServerRequest``
     * ``env()`` (now ``getEnv()`` / ``withEnv()``)
+``Cake\ORM\LocatorAwareTrait``
+    * ``tableLocator()``
 ``Cake\Utility\Security``
     * ``salt()``
 ``Cake\View\View``
