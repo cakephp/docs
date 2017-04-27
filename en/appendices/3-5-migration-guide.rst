@@ -32,12 +32,18 @@ The following is a list of methods that are deprecated and replaced with
     * ``outputAs()``
 ``Cake\Datasource\ModelAwareTrait``
     * ``modelType()``
+``Cake\Database\Query``
+    * ``valueBinder()`` is now ``getValueBinder()``
 ``Cake\Datasource\QueryTrait``
     * ``eagerLoaded()`` (now ``isEagerLoaded()``)
+``Cake\Event\EventDispatcherTrait``
+    * ``eventManager()``
 ``Cake\Error\Debugger``
     * ``outputAs()``
 ``Cake\Http\ServerRequest``
     * ``env()`` (now ``getEnv()`` / ``withEnv()``)
+``Cake\ORM\LocatorAwareTrait``
+    * ``tableLocator()``
 ``Cake\Utility\Security``
     * ``salt()``
 ``Cake\View\View``
@@ -70,6 +76,11 @@ behavior that may affect your application:
   requests. Instead the ``Cookie`` header and internal CookieCollection are
   used. This should only effect applications that have a custom HTTP adapter in
   their clients.
+* Multi-word subcommand names previouly required camelBacked names to be used
+  when invoking shells. Now subcommands can be invoked with underscored_names.
+  For example: ``cake tool initMyDb`` can now be called with ``cake tool
+  init_my_db``. If your shells previously bound two subcommands with different
+  inflections, only the last bound command will function.
 
 New Features
 ============

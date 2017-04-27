@@ -1043,6 +1043,12 @@ When defining a subcommand you can use the following options:
 
 Adding subcommands can be done as part of a fluent method chain.
 
+
+.. versionchanged:: 3.5.0
+    When adding multi-word subcommands you can now invoke those commands using
+    ``snake_case`` in addition to the camelBacked form.
+
+
 Building a ConsoleOptionParser from an Array
 --------------------------------------------
 
