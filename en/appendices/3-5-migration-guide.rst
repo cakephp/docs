@@ -76,6 +76,11 @@ behavior that may affect your application:
   requests. Instead the ``Cookie`` header and internal CookieCollection are
   used. This should only effect applications that have a custom HTTP adapter in
   their clients.
+* Multi-word subcommand names previouly required camelBacked names to be used
+  when invoking shells. Now subcommands can be invoked with underscored_names.
+  For example: ``cake tool initMyDb`` can now be called with ``cake tool
+  init_my_db``. If your shells previously bound two subcommands with different
+  inflections, only the last bound command will function.
 
 New Features
 ============
