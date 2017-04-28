@@ -764,13 +764,13 @@ rows. Statements should be executed using the ``execute()`` method. Once
 executed, results can be fetched using ``fetch()``, ``fetchAll()`` or iterating
 the statement::
 
-    $stmt->execute();
+    $result_execute=$stmt->execute();
 
     // Read one row.
-    $row = $stmt->fetch('assoc');
+    $row = $result_execute->fetch('assoc');
 
     // Read all rows.
-    $rows = $stmt->fetchAll('assoc');
+    $rows = $result_execute->fetchAll('assoc');
 
     // Read rows through iteration.
     foreach ($rows as $row) {
@@ -789,7 +789,9 @@ Getting Row Counts
 After executing a statement, you can fetch the number of affected rows::
 
     $rowCount = count($stmt);
-    $rowCount = $stmt->rowCount();
+    //or
+    $rowCount = count($result_execute);
+    $rowCount = $result_execute->rowCount();
 
 
 Checking Error Codes
