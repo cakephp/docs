@@ -606,11 +606,14 @@ The above generates SQL similar to::
 
     SELECT *
     FROM articles
-    WHERE (promoted = true
-    OR (
-      (published = true AND view_count > 10)
-      AND (author_id = 2 OR author_id = 3)
-    ))
+    WHERE (
+        (
+            (author_id = 2 OR author_id = 3)
+            AND
+            (published = 1 AND view_count > 10)
+        )
+        OR promoted = 1
+    )
 
 By using functions as the parameters to ``orWhere()`` and ``andWhere()``,
 you can compose conditions together with the expression objects::
@@ -628,8 +631,11 @@ The above would create SQL like::
 
     SELECT *
     FROM articles
-    WHERE ((author_id = 2 OR is_highlighted = 1)
-    AND title LIKE '%First%')
+    WHERE (
+        title LIKE '%First%'
+        AND
+        (author_id = 2 OR is_highlighted = 1)
+    )
 
 The expression object that is passed into ``where()`` functions has two kinds of
 methods. The first type of methods are **combinators**. The ``and_()`` and

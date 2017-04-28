@@ -637,11 +637,14 @@ Ce qui précède générerait le code SQL::
 
     SELECT *
     FROM articles
-    WHERE (promoted = true
-    OR (
-      (published = true AND view_count > 10)
-      AND (author_id = 2 OR author_id = 3)
-    ))
+    WHERE (
+        (
+            (author_id = 2 OR author_id = 3)
+            AND
+            (published = 1 AND view_count > 10)
+        )
+        OR promoted = 1
+    )
 
 En utilisant les fonctions en paramètres pour ``orWhere()`` et ``andWhere()``,
 vous pouvez organiser ensemble les conditions avec les objets expression::
@@ -659,8 +662,11 @@ Ce qui précède générerait le code SQL::
 
     SELECT *
     FROM articles
-    WHERE ((author_id = 2 OR is_highlighted = 1)
-    AND title LIKE '%First%')
+    WHERE (
+        title LIKE '%First%'
+        AND
+        (author_id = 2 OR is_highlighted = 1)
+    )
 
 Les objets expression qui sont passés dans les fonctions ``where()`` ont deux
 types de méthodes. Les premiers types de méthode sont des **combinateurs**.

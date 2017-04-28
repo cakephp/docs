@@ -587,11 +587,14 @@ CakePHP は計算された値が正しい Entity にセットされることを�
 
     SELECT *
     FROM articles
-    WHERE (promoted = true
-    OR (
-      (published = true AND view_count > 10)
-      AND (author_id = 2 OR author_id = 3)
-    ))
+    WHERE (
+        (
+            (author_id = 2 OR author_id = 3)
+            AND
+            (published = 1 AND view_count > 10)
+        )
+        OR promoted = 1
+    )
 
 関数を引数にして ``orWhere()`` と ``andWhere()`` を使うことで、
 Expression オブジェクトを条件文に加えることができます。 ::
@@ -609,8 +612,11 @@ Expression オブジェクトを条件文に加えることができます。 ::
 
     SELECT *
     FROM articles
-    WHERE ((author_id = 2 OR is_highlighted = 1)
-    AND title LIKE '%First%')
+    WHERE (
+        title LIKE '%First%'
+        AND
+        (author_id = 2 OR is_highlighted = 1)
+    )
 
 ``where()`` 関数に渡される Expression オブジェクトには２種類のメソッドがあります。
 １種類目のメソッドは **結合子** (and や or) です。 ``and_()`` と ``or_()`` メソッドは条件が
