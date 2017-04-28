@@ -142,7 +142,7 @@ and not been saved.
 Getting Form Errors
 ===================
 
-Once a form has been validated you can retreive the errors from it::
+Once a form has been validated you can retrieve the errors from it::
 
     $errors = $form->errors();
     /* $errors contains
