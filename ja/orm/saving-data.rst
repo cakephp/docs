@@ -216,12 +216,6 @@ Table クラスは、リクエストデータを一つまたは複数のエン�
         ]
     ]);
 
-入れ子になったアソシエーションの変換を無効にする時は、次のようになります。 ::
-
-    $entity = $articles->newEntity($data, ['associated' => []]);
-    // または...
-    $entity = $articles->patchEntity($entity, $data, ['associated' => []]);
-
 上記は 'Tags' 、 'Comments' そして Comments 用の 'Users' が変換されるべきであること
 を示しています。代わりに、簡潔にするためにドット記法を使うことができます。 ::
 
@@ -232,6 +226,12 @@ Table クラスは、リクエストデータを一つまたは複数のエン�
     $entity = $articles->newEntity($this->request->getData(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
+
+入れ子になったアソシエーションの変換を無効にする時は、次のようになります。 ::
+
+    $entity = $articles->newEntity($data, ['associated' => []]);
+    // または...
+    $entity = $articles->patchEntity($entity, $data, ['associated' => []]);
 
 関連付けられたデータもまた、指定しない限り、既定では検証されます。
 アソシエーションごとに使われる検証セットを変更することもできます。 ::

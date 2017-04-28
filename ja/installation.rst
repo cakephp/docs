@@ -51,9 +51,9 @@ CakePHP のインストール
 
     php -v
     
-少なくとも PHP |minphpversion| (CLI) 以上がインストールされていなければなりません。
+PHP |minphpversion| (CLI) 以上がインストールされていなければなりません。
 ウェブサーバー版の PHP もまた |minphpversion| 以上でなければりませんし、
-コマンドラインインターフェース (CLI) 版の PHP と同じバージョンがベストです。
+コマンドラインインターフェース (CLI) 版と同じバージョンを使用してください。
 
 Composer のインストール
 -----------------------
@@ -78,8 +78,8 @@ CakePHP の公式のインストール方法として、依存性管理ツール
 CakePHP プロジェクトを作成
 --------------------------
 
-以上で、Composer をダウンロードとインストールしました。my_app_name フォルダに CakePHP
-の新しいアプリケーションを作りたいなら、下記の composer コマンドを実行して作成します。
+以上で、Composer をダウンロードとインストールしましたので、 my_app_name フォルダに
+CakePHP の新しいアプリケーションを作成してください。下記の composer コマンドを実行して作成します。
 
 .. code-block:: bash
 
@@ -107,8 +107,8 @@ composer によるインストールが推奨されますが、
 また、 ``composer.phar`` も入っていますので、あなたのさらなる使用のために必要なものは
 全てそろっているのです。
 
-CakePHPの変更に合わせて最新の状態に保つ
----------------------------------------
+CakePHP の変更に合わせて最新の状態に保つ
+----------------------------------------
 
 デフォルトではあなたのアプリケーションの **composer.json** は下記のようになっています。 ::
 
@@ -131,6 +131,21 @@ CakePHPの変更に合わせて最新の状態に保つ
 動かなくなる可能性がありますので、お奨めできない事に注意してください。
 さらに、composer は開発ブランチをキャッシュしませんので、composer による
 連続したインストール・アップデートには時間がかかります。
+
+Oven を使用したインストール
+---------------------------
+
+CakePHP を素早くインストールするための別の方法は、 `Oven <https://github.com/CakeDC/oven>`_ です。
+これは、必要なシステム要件をチェック、CakePHP アプリケーションのスケルトンをインストール、そして、
+開発環境をセットアップするシンプルな PHP スクリプトです。
+
+インストールが完了すれば、あなたの CakePHP アプリケーションはすぐに使えます！
+
+.. note::
+
+    重要: これはデプロイスクリプトではありません。はじめて CakePHP をインストールする開発者を助け、
+    開発環境を素早くセットアップすることが狙いです。本番環境では、ファイルのパーミッション、
+    バーチャルホストの設定など、いくつかの要因を考慮する必要があります。
 
 パーミッション
 ==============
@@ -371,7 +386,7 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
    `virtualhostx <http://clickontyler.com/virtualhostx/>`_
    ツールを使うことが挙げられます。
 
-   多くのホスティングサービス (GoDaddy、1and1) では、実際にウェブサーバーが
+   多くのホスティングサービス (GoDaddy、1and1) では、ウェブサーバーが
    既に mod\_rewrite を使っているユーザディレクトリから配信されます。
    CakePHP をユーザディレクトリ (http://example.com/~username/cakephp/) または
    既に mod\_rewrite を活用しているその他の URL 構造にインストールしているなら、
@@ -424,21 +439,31 @@ nginx は Apache のような .htaccess ファイルを利用しませんので�
 これは大抵  ``/etc/nginx/sites-available/your_virtual_host_conf_file`` に記載します。
 あなたの環境構成に応じて、このファイルを書き換えなければなりませんが、
 少なくとも PHP を FastCGI として稼働させる必要はあるでしょう。
+下記の設定は、リクエストを ``webroot/index.php`` にリダイレクトします。
+
+.. code-block:: nginx
+
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+server ディレクティブの例は、次の通りです。
 
 .. code-block:: nginx
 
     server {
         listen   80;
+        listen   [::]:80;
         server_name www.example.com;
-        rewrite ^(.*) http://example.com$1 permanent;
+        return 301 http://example.com$request_uri;
     }
 
     server {
         listen   80;
+        listen   [::]:80;
         server_name example.com;
 
-        # root directive should be global
-        root   /var/www/example.com/public/webroot/;
+        root   /var/www/example.com/public/webroot;
         index  index.php;
 
         access_log /var/www/example.com/log/access.log;
@@ -450,46 +475,19 @@ nginx は Apache のような .htaccess ファイルを利用しませんので�
 
         location ~ \.php$ {
             try_files $uri =404;
-            include /etc/nginx/fastcgi_params;
-            fastcgi_pass    127.0.0.1:9000;
-            fastcgi_index   index.php;
+            include fastcgi_params;
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_index index.php;
+            fastcgi_intercept_errors on;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         }
     }
 
-(Ubuntu 14.04 など) いくつかのサーバでは、上記のような設定は動かないでしょうから、 nginx の
-ドキュメントでは別の方法 (http://nginx.org/en/docs/http/converting_rewrite_rules.html)を
-推奨しています。
-下記の通り試してみてください。(server{}ブロックが2つではなく1つになっているのが
-お分かりでしょう。)
-
-.. code-block:: nginx
-
-    server {
-        listen   80;
-        server_name www.example.com;
-        rewrite 301 http://www.example.com$request_uri permanent;
-
-        # root directive should be global
-        root   /var/www/example.com/public/webroot/;
-        index  index.php;
-
-        access_log /var/www/example.com/log/access.log;
-        error_log /var/www/example.com/log/error.log;
-
-        location / {
-            try_files $uri /index.php?$args;
-        }
-
-        location ~ \.php$ {
-            try_files $uri =404;
-            include /etc/nginx/fastcgi_params;
-            fastcgi_pass    127.0.0.1:9000;
-            fastcgi_index   index.php;
-            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        }
-    }
-
+.. note::
+    最近の PHP-FPM の設定では、アドレス 127.0.0.1 の TCP 9000 ポートの代わりに unix php-fpm
+    ソケッットを待ち受けるように設定します。もし、上記の設定で 502 bad gateway エラーになった場合、
+    TCP ポートの代わりに unix ソケットパスを使用するために ``fastcgi_pass`` を更新してください
+    (例: fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;)。
 
 IIS7 (Windows hosts)
 --------------------

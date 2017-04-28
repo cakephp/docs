@@ -341,7 +341,7 @@ as an ``extra`` key::
 
     // Using a command string
     $this->dispatchShell([
-       'command' => 'schema create Blog --plugin Blog'
+       'command' => 'schema create Blog --plugin Blog',
        'extra' => [
             'foo' => 'bar'
         ]
@@ -349,7 +349,7 @@ as an ``extra`` key::
 
     // Using a command array
     $this->dispatchShell([
-       'command' => ['schema', 'create', 'Blog', '--plugin', 'Blog']
+       'command' => ['schema', 'create', 'Blog', '--plugin', 'Blog'],
        'extra' => [
             'foo' => 'bar'
         ]

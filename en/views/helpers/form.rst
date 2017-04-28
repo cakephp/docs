@@ -458,7 +458,7 @@ A more extensive example showing some options for a date field::
 
 Besides the specific :ref:`control-specific-options`,
 you also can specify any option accepted by corresponding specific method
-for the chosen (or inferred by Cake)
+for the chosen (or inferred by CakePHP)
 control type and any HTML attribute (for instance ``onfocus``).
 
 If you want to create a ``select`` form field while using a *belongsTo* (or
@@ -889,7 +889,7 @@ methods are described in each method's own section.)
     selected when the form is rendered (in this case ``'value'`` must be
     assigned a valid, existent element value). May also be used in
     combination with any select-type control,
-    such as ``date()``, ``time()``, ``datetime()``::
+    such as ``date()``, ``time()``, ``dateTime()``::
 
         echo $this->Form->time('close_time', [
             'value' => '13:30:00'
@@ -1067,7 +1067,7 @@ Will output:
     <input type="hidden" name="done" value="0">
     <input type="checkbox" name="done" value="555">
 
-If you don't want the Form helper to create a hidden input use
+If you don't want the FormHelper to create a hidden input use
 ``'hiddenField'``.
 
 E.g. ::
@@ -1197,7 +1197,7 @@ rendering the select picker.
 
 By default ``select`` uses the following widget templates::
 
-    'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>
+    'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>'
     'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>'
 
 May also use::
@@ -1649,9 +1649,9 @@ To create datetime controls with custom classes/attributes on a specific select
 box, you can provide them as arrays of options for each component, within the
 ``$options`` argument.
 
-For example ::
+For example::
 
-    echo $this->Form->datetime('released', [
+    echo $this->Form->dateTime('released', [
         'year' => [
             'class' => 'year-classname',
         ],
@@ -2105,7 +2105,7 @@ Checking for Errors
 Returns ``true`` if the supplied ``$fieldName`` has an active validation
 error, otherwise returns ``false``.
 
-Example ::
+Example::
 
     if ($this->Form->isFieldError('gender')) {
         echo $this->Form->error('gender');
@@ -2230,7 +2230,7 @@ Closing the Form
 
 * ``$secureAttributes`` - Optional. Allows you to provide secure attributes
   which will be passed as HTML attributes into the hidden input elements
-  generated for the Security Component.
+  generated for the SecurityComponent.
 
 The ``end()`` method closes and completes a form. Often, ``end()`` will only
 output a closing form tag, but using ``end()`` is a good practice as it
@@ -2286,7 +2286,7 @@ Creating POST Buttons
 
 Creates a ``<button>`` tag with a surrounding ``<form>`` element that submits
 via POST, by default. Also, by default, it generates hidden input fields for the
-Security Component.
+SecurityComponent.
 
 **Options for POST Button**
 
@@ -2806,7 +2806,7 @@ The ``$name`` parameter should be the entity property name for the field::
 Generates a hidden ``input`` field with a security hash based on the fields used
 in the form or an empty string when secured forms are not in use.
 If ``$secureAttributes`` is set, these HTML attributes will be
-merged into the hidden input tags generated for the Security Component. This is
+merged into the hidden input tags generated for the SecurityComponent. This is
 especially useful to set HTML5 attributes like ``'form'``.
 
 .. meta::

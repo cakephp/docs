@@ -383,13 +383,13 @@ Dans **src/Model/Table/BookmarksTable.php** ajoutez ce qui suit::
             ->select(['id', 'url', 'title', 'description']);
 
         if (empty($options['tags'])) {
-            $bookmarks->leftJoinWith('Tags', function ($q) {
-                return $q->where(['Tags.title IS ' => null]);
-            });
+            $bookmarks
+                ->leftJoinWith('Tags')
+                ->where(['Tags.title IS' => null]);
         } else {
-            $bookmarks->innerJoinWith('Tags', function ($q) use ($options) {
-                return $q->where(['Tags.title IN' => $options['tags']]);
-            });
+            $bookmarks
+                ->innerJoinWith('Tags')
+                ->where(['Tags.title IN ' => $options['tags']]);
         }
 
         return $bookmarks->group(['Bookmarks.id']);
@@ -401,13 +401,11 @@ réutilisable de vos requêtes. Les finders attendent toujours un objet
 :doc:`/orm/query-builder` et un tableau d'options en paramètre. Les finders
 peuvent manipuler les requêtes et ajouter n'importe quels conditions ou
 critères. Une fois qu'ils ont terminé, les finders doivent retourner l'objet
-Query modifié. Dans notre finder nous avons amené la méthode ``matching()`` qui
-nous permet de trouver les bookmarks qui ont un tag qui 'match'. La méthode
-``matching()`` accepte `une fonction anonyme
-<http://php.net/manual/fr/functions.anonymous.php>`_ qui reçoit un constructeur
-de requête comme argument. Dans le callback, nous utilisons le constructeur de
-requête pour définir de nouvelles conditions qui permettront de filtrer les
-bookmarks ayant les tags spécfiques.
+Query modifié. Dans notre finder nous avons amené les méthodes
+``innerJoinWith()``, ``where()`` et ``group()`` qui nous permet de trouver les
+bookmarks distinct qui ont un tag correspondante.  Lorsque aucune tag n'est
+fournie, nous utilisons un ``leftJoinWith()`` et modifions la condition
+'where', en trouvant des bookmarks sans tags.
 
 Créer la Vue
 ------------

@@ -362,13 +362,13 @@ method has not been implemented yet, so let's do that. In
             ->select(['id', 'url', 'title', 'description']);
 
         if (empty($options['tags'])) {
-            $bookmarks->leftJoinWith('Tags', function ($q) {
-                return $q->where(['Tags.title IS ' => null]);
-            });
+            $bookmarks
+                ->leftJoinWith('Tags')
+                ->where(['Tags.title IS' => null]);
         } else {
-            $bookmarks->innerJoinWith('Tags', function ($q) use ($options) {
-                return $q->where(['Tags.title IN' => $options['tags']]);
-            });
+            $bookmarks
+                ->innerJoinWith('Tags')
+                ->where(['Tags.title IN ' => $options['tags']]);
         }
 
         return $bookmarks->group(['Bookmarks.id']);
@@ -379,12 +379,11 @@ a very powerful concept in CakePHP that allows you to package up re-usable
 queries. Finder methods always get a :doc:`/orm/query-builder` object and an
 array of options as parameters. Finders can manipulate the query and add any
 required conditions or criteria. When complete, finder methods must return
-a modified query object. In our finder we've leveraged the ``distinct()`` and
-``matching()`` methods which allow us to find distinct bookmarks that have
-a 'matching' tag. The ``matching()`` method accepts an `anonymous function
-<http://php.net/manual/en/functions.anonymous.php>`_ that receives a query
-builder as its argument. Inside the callback we use the query builder to define
-conditions that will filter bookmarks that have specific tags.
+a modified query object. In our finder we've leveraged the ``innerJoinWith()``,
+``where()`` and ``group()`` methods which allow us to find distinct bookmarks
+that have a matching tag.  When no tags are provided we use a
+``leftJoinWith()`` and modify the 'where' condition, finding bookmarks without
+tags.
 
 Creating the View
 -----------------

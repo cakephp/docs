@@ -96,7 +96,9 @@ PSR-7 スタックによって廃止されているため、 非推奨になり�
 * ``Event::result()`` は非推奨です。代わりに ``Event::getResult()`` を使用してください。
 * ``Event::data()`` は非推奨です。代わりに ``Event::getData()`` を使用してください。
 * ``Auth.redirect`` セッション変数は使用されなくなりました。
-  代わりに、リダイレクト URL を格納するためにクエリ文字列パラメータが使用されます。
+  代わりに、リダイレクト URL を格納するためにクエリ文字列パラメーターが使用されます。
+  これには、ログインシナリオ外のセッションにリダイレクト URL を格納する機能を削除するという
+  追加の効果があります。
 * ``AuthComponent`` は、許可されていないURLが ``GET`` アクション以外の場合、
   リダイレクト URL を保存しません。
 * ``AuthComponent`` の ``ajaxLogin`` オプションは非推奨です。
@@ -332,6 +334,13 @@ CakePHP の以前のバージョンでは、コンポーネントは後で変更
 * ``Mailer\Email`` は、コンテンツタイプが提供されていない場合、 ``mime_content_type`` を使って
   添付ファイルタイプを自動検出します。これまでの添付ファイルはデフォルトで
   'application/octet-stream' になっていました。
+* CakePHP は、現在、 ``call_user_func_array()`` の代わりに ``...`` 演算子を使用します。
+  連想配列を渡す場合は、次のメソッドには ``array_values()`` を使って数値添字配列を渡すように
+  コードを更新する必要があります。
+
+    * ``Cake\Mailer\Mailer::send()``
+    * ``Cake\Controller\Controller::setAction()``
+    * ``Cake\Http\ServerRequest::is()``
 
 アクセス権の変更
 ================

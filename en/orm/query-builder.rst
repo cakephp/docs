@@ -546,7 +546,7 @@ expect::
                 return $author;
             });
         });
-    });
+    }]);
 
     // Get results
     $results = $query->all();
@@ -1298,6 +1298,22 @@ SQL Injection Prevention
 
 While the ORM and database abstraction layers prevent most SQL injections
 issues, it is still possible to leave yourself vulnerable through improper use.
+
+When using condition arrays, the key/left-hand side as well as single value
+entries must not contain user data::
+
+    $query->where([
+        // Data on the key/left-hand side is unsafe, as it will be
+        // inserted into the generated query as-is
+        $userData => $value,
+
+        // The same applies to single value entries, they are not
+        // safe to use with user data in any form
+        $userData,
+        "MATCH (comment) AGAINST ($userData)",
+        'created < NOW() - ' . $userData
+    ]);
+
 When using the expression builder, column names must not contain user data::
 
     $query->where(function ($exp) use ($userData, $values) {
@@ -1320,6 +1336,30 @@ Raw expressions are never safe::
     $expr = $query->newExpr()->add($userData);
     $query->select(['two' => $expr]);
 
+Binding values
+--------------
+
+It is possible to protect against many unsafe situations by using bindings.
+Similar to :ref:`binding values to prepared statements <database-basics-binding-values>`,
+values can be bound to queries using the :php:meth:`Cake\\Database\\Query::bind()`
+method.
+
+The following example would be a safe variant of the unsafe, SQL injection prone
+example given above::
+
+    $query
+        ->where([
+            'MATCH (comment) AGAINST (:userData)',
+            'created < NOW() - :moreUserData'
+        ])
+        ->bind(':userData', $userData, 'string')
+        ->bind(':moreUserData', $moreUserData, 'datetime');
+
+.. note::
+
+    Unlike :php:meth:`Cake\\Database\\StatementInterface::bindValue()`,
+    ``Query::bind()`` requires to pass the named placeholders including the
+    colon!
 
 More Complex Queries
 ====================

@@ -661,10 +661,10 @@ sur le second paramètre. Le Cache-Control est défini aussi à ``public``.
 
 .. _cake-response-caching:
 
-Réglage fin du Cache HTTP
--------------------------
+Configuration affinée du Cache HTTP
+-----------------------------------
 
-L'une des plus meilleures et plus simples méthodes pour rendre votre application
+L'une des meilleures méthodes et des plus simples pour rendre votre application
 plus rapide est d'utiliser le cache HTTP. Selon ce modèle de mise en cache,
 vous êtes seulement tenu d'aider les clients à décider s'ils doivent utiliser
 une copie de la réponse mise en cache en définissant quelques propriétés
@@ -672,13 +672,12 @@ d'en-têtes comme la date de mise à jour et la balise entity de réponse.
 
 Plutôt que d'avoir à coder la logique de mise en cache et de sa désactivation
 (rafraîchissement) une fois que les données ont changé, HTTP utilise deux
-modèles, l'expiration et la validation qui habituellement sont beaucoup plus
-simples que d'avoir à gérer le cache soi-même.
+modèles, l'expiration et la validation qui sont habituellement beaucoup plus
+simples à utiliser.
 
 En dehors de l'utilisation de :php:meth:`Cake\\Http\\Response::withCache()`, vous
-pouvez également utiliser d'autres méthodes pour affiner le réglage des
-en-têtes de cache HTTP pour tirer profit du navigateur ou à l'inverse du cache
-du proxy.
+pouvez également utiliser d'autres méthodes pour affiner les en-têtes de
+cache HTTP pour tirer profit du cache du navigateur ou du proxy inverse.
 
 L'En-tête de Contrôle du Cache
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
