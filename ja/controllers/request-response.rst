@@ -39,6 +39,9 @@ CakePHP のリクエストオブジェクトは、入ってきたリクエスト
 
     $controllerName = $this->request->getParam('controller');
 
+    // 3.4.0 より前
+    $controllerName = $this->request->param('controller');
+
 すべての :ref:`route-elements` は、このインタフェースを通してアクセスされます。
 
 :ref:`route-elements` に加えて :ref:`passed-arguments` へのアクセスがしばしば必要になります。
@@ -69,7 +72,7 @@ CakePHP のリクエストオブジェクトは、入ってきたリクエスト
     $this->request->query('page');
 
 query プロパティに直接アクセスするか、エラーが発生しない方法で URL クエリ配列を読むために
-``query()`` メソッドを使用することができます。キーが存在しない場合、 ``null`` が返ります。 ::
+``getQuery()`` メソッドを使用することができます。キーが存在しない場合、 ``null`` が返ります。 ::
 
     $foo = $this->request->getQuery('value_that_does_not_exist');
     // $foo === null
