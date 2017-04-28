@@ -764,7 +764,7 @@ rows. Statements should be executed using the ``execute()`` method. Once
 executed, results can be fetched using ``fetch()``, ``fetchAll()`` or iterating
 the statement::
 
-    $stmt->execute();
+    $stmt=$query->execute();
 
     // Read one row.
     $row = $stmt->fetch('assoc');
