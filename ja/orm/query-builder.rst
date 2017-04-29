@@ -1263,6 +1263,21 @@ SQL インジェクションを防止する
 
 ORM とデータベースの抽象層では、ほとんどの SQL インジェクション問題を防止してはいますが、
 不適切な用法により危険な値が入り込む余地も依然としてありえます。
+
+条件配列を使用している場合、キー/左辺および単一の値の入力は、ユーザーデータを含んではいけません。 ::
+
+    $query->where([
+        // キー/左辺のデータは、生成されたクエリーにそのまま挿入されるので、
+	// 安全ではありません
+        $userData => $value,
+
+	// 単一の値の入力にも同じことが言えますが、
+	// どの形式のユーザーデータでも安全に使用することはできません
+        $userData,
+        "MATCH (comment) AGAINST ($userData)",
+        'created < NOW() - ' . $userData
+    ]);
+
 Expression ビルダを使う際には、カラム名にユーザデータを含めてはいけません。 ::
 
     $query->where(function ($exp) use ($userData, $values) {
@@ -1282,6 +1297,29 @@ Expression ビルダを使う際には、カラム名にユーザデータを含
 
     $expr = $query->newExpr()->add($userData);
     $query->select(['two' => $expr]);
+
+値のバインディング
+-------------------
+
+バインディングを使用することにより、多くの安全でない状況から保護することが可能です。
+:ref:`プリペアドステートメントへの値のバインディング <database-basics-binding-values>`
+と同様に、 :php:meth:`Cake\\Database\\Query::bind()` メソッドを使用して、
+クエリーに値をバインドすることができます。
+
+次の例は、上記の安全ではない SQL インジェクションが発生しやすい例を安全に変更したものです。 ::
+
+    $query
+        ->where([
+            'MATCH (comment) AGAINST (:userData)',
+            'created < NOW() - :moreUserData'
+        ])
+        ->bind(':userData', $userData, 'string')
+        ->bind(':moreUserData', $moreUserData, 'datetime');
+
+.. note::
+
+    :php:meth:`Cake\\Database\\StatementInterface::bindValue()` と異なり、
+    ``Query::bind()`` は、コロンを含む名前付けされたプレースホルダーを渡す必要があります!
 
 より複雑なクエリ
 ===================
