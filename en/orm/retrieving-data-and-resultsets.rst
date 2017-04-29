@@ -526,7 +526,9 @@ statements::
         'RealestateAttributes' => [
             'Attributes' => [
                 'fields' => [
-                    'Attributes.name'
+                    // Aliased fields in contain() must include
+                    // the model prefix to be mapped correctly.
+                    'Attributes__name' => 'attr_name'
                 ]
             ]
         ]

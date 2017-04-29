@@ -563,7 +563,9 @@ plusieurs appels à ``contain()``::
         'RealestateAttributes' => [
             'Attributes' => [
                 'fields' => [
-                    'Attributes.name'
+                    // Les champs alias dans contain() doivent
+                    // inclure le préfixe du modèle à mapper correctement.
+                    'Attributes__name' => 'attr_name'
                 ]
             ]
         ]
