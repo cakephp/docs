@@ -39,7 +39,7 @@ The following is a list of methods that are deprecated and replaced with
 ``Cake\Event\EventDispatcherTrait``
     * ``eventManager()``
 ``Cake\Error\Debugger``
-    * ``outputAs()``
+    * ``outputAs()`` (now ``getOutputFormat()`` / ``setOutputFormat()``)
 ``Cake\Http\ServerRequest``
     * ``env()`` (now ``getEnv()`` / ``withEnv()``)
 ``Cake\ORM\LocatorAwareTrait``
