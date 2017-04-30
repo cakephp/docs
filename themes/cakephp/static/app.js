@@ -131,14 +131,14 @@ App.ResponsiveMenus = (function () {
       modal.find('.modal-title-cookbook').text(title);
 
       // Bind click events for sub menus.
-      modal.find('li').on('click', function() {
-        var el = $(this),
-          menu = el.find('.submenu, .megamenu');
+      modal.find('li > a').on('click', function() {
+        var el = $(this).parent(),
+          subMenu = el.find('.submenu, .megamenu');
         // No menu, bail
-        if (menu.length == 0) {
+        if (subMenu.length === 0) {
           return;
         }
-        menu.toggle();
+        subMenu.toggle();
         return false;
       });
     });
