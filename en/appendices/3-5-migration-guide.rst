@@ -108,3 +108,6 @@ New Features
   Existing ``SMALLINT`` and ``TINYINT`` columns will now be reflected as these
   new abstract types. ``TINYINT(1)`` columns will continue to be treated as
   boolean columns in MySQL.
+* ``Cake\Validation\Validator::addDefaultProvider()`` was added. This method
+  lets you inject validation providers into all the validators created in your
+  application.

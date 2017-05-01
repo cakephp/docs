@@ -189,8 +189,8 @@ the ``provider`` key in your rule::
         'provider' => 'table'
     ]);
 
-If you wish to add a ``provider`` to all ``Validator`` objects this can be done
-using ``addDefaultProvider()`` method as follows::
+If you wish to add a ``provider`` to all ``Validator`` objects that are created
+in the future, you can use the ``addDefaultProvider()`` method as follows::
 
     use Cake\Validation\Validator;
 
@@ -205,7 +205,7 @@ using ``addDefaultProvider()`` method as follows::
     DefaultProviders must be added before the ``Validator`` object is created
     therefore **config/bootstrap.php** is the best place
 
-.. versionadded:: 3.4.3
+.. versionadded:: 3.5.0
 
 You can use the `Localized plugin <https://github.com/cakephp/localized>`_ to
 get providers based on countries. With this plugin, you'll be able to validate
