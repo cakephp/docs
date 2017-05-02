@@ -396,6 +396,37 @@ There are a number of options for ``counter()``. The supported ones are:
   :php:meth:`PaginatorHelper::defaultModel()`. This is used in
   conjunction with the custom string on 'format' option.
 
+Generating Pagination URLs
+==========================
+
+.. php:method:: generateUrl(array $options = [], $model = null, $full = false)
+
+By default returns a full pagination URL string for use in non-standard contexts
+(i.e. JavaScript). ::
+
+    echo $this->Paginator->generateUrl(['sort' => 'title']);
+
+Creating a Limit Selectbox Control
+==================================
+
+.. php:method:: limitControl(array $limits = [], $default = null, array $options = [])
+
+Create a dropdown control that changes the ``limit`` query parameter::
+
+    // Use the defaults.
+    echo $this->Paginator->limitControl();
+
+    // Define which limit options you want.
+    echo $this->Paginator->limitControl([25 => 25, 50 => 50]);
+
+    // Custom limits and set the selected option
+    echo $this->Paginator->limitControl([25 => 25, 50 => 50], $user->perPage);
+
+The generated form and control will automatically submit on change.
+
+.. versionadded:: 3.5.0
+    The ``limitControl()`` method was added in 3.5.0
+
 Configuring Pagination Options
 ==============================
 
@@ -503,16 +534,6 @@ markers::
         'format' => 'Page {{page}} of {{pages}}, showing {{current}} records out of
                  {{count}} total, starting on record {{start}}, ending on {{end}}'
     ]) ?>
-
-Generating Pagination URLs
-==========================
-
-.. php:method:: generateUrl(array $options = [], $model = null, $full = false)
-
-By default returns a full pagination URL string for use in non-standard contexts
-(i.e. JavaScript). ::
-
-    echo $this->Paginator->generateUrl(['sort' => 'title']);
 
 .. _paginator-helper-multiple:
 
