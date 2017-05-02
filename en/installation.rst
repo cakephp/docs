@@ -129,7 +129,7 @@ accomplish this. Often the easiest is to use PHP's ``include_path``. To start
 off, clone CakePHP into a directory. For this example, we'll use
 ``/home/mark/projects``::
 
-    git clone git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
+    git clone -b 2.x git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
 
 This will clone CakePHP into your ``/home/mark/projects`` directory. If you
 don't want to use git, you can download a zipball and the remaining steps will

@@ -43,10 +43,10 @@ release. For this tutorial you need the latest 2.0 release.
 You can also clone the repository using
 `git <http://git-scm.com/>`_::
 
-    git clone git://github.com/cakephp/cakephp.git
+    git clone -b 2.x git://github.com/cakephp/cakephp.git
 
-Once you've got a fresh copy of CakePHP change your branch to the
-latest 2.0 release, setup your ``database.php`` config file, and change
+Once you've got a copy of CakePHP latest 2.0 release,
+setup your ``database.php`` config file, and change
 the value of Security.salt in your ``app/Config/core.php``.
 From there we will build a simple database schema to build our
 application on. Execute the following SQL statements into your database::
