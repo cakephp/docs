@@ -332,7 +332,7 @@ ProjectTask インスタンスをロードして返します。
 
     // コマンド文字列を使用
     $this->dispatchShell([
-       'command' => 'schema create Blog --plugin Blog'
+       'command' => 'schema create Blog --plugin Blog',
        'extra' => [
             'foo' => 'bar'
         ]
@@ -340,7 +340,7 @@ ProjectTask インスタンスをロードして返します。
 
     // コマンド配列を使用
     $this->dispatchShell([
-       'command' => ['schema', 'create', 'Blog', '--plugin', 'Blog']
+       'command' => ['schema', 'create', 'Blog', '--plugin', 'Blog'],
        'extra' => [
             'foo' => 'bar'
         ]
