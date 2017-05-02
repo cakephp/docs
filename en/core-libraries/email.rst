@@ -553,6 +553,10 @@ instructions. For example, we could add the following to our ``UserMailer``::
         }
     }
 
+The mailer object could now be registered as an event listener, and the
+``onRegistration()`` method would be invoked every time the ``Model.afterSave``
+event would be fired. For information on how to register event listener objects,
+please refer to the :ref:`registering-event-listeners` documentation.
 
 .. meta::
     :title lang=en: Email

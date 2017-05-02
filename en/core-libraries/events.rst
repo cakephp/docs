@@ -154,6 +154,8 @@ application.
 * :ref:`Controller events <controller-life-cycle>`
 * :ref:`View events <view-events>`
 
+.. _registering-event-listeners:
+
 Registering Listeners
 =====================
 
