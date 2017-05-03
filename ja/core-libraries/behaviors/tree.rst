@@ -776,7 +776,7 @@ Tree ビヘイビアはバックグラウンドだけで働くわけではあり
 ノードを検索したい時に役に立ちます。 ``level`` オプションを使うことで、各ノードの
 レベルを保存するフィールドを指定することができます。 ::
 
-    public $actAs = array('Tree' => array(
+    public $actsAs = array('Tree' => array(
         'level' => 'level', // デフォルトは null で、レベルは保存しません
     ));
 

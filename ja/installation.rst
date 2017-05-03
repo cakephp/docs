@@ -115,7 +115,7 @@ CakePHP のアーカイブを ``/var/www/html`` に展開してください。
 そのためにまずは、CakePHPを適当なディレクトリに複製します。この例では
 ``/home/mark/projects`` ディレクトリにします。 ::
 
-    git clone git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
+    git clone -b 2.x git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
 
 このコマンドを実行すると、CakePHP のファイルが ``/home/mark/projects`` ディレクトリの中に複製されます。\
 gitを使用したくない場合は、zip形式でのダウンロードも可能で、残りの手順も同じです。\
