@@ -12,6 +12,8 @@ features will continue to function until 4.0.0 after which they will be removed.
 
 * ``Cake\Http\Client\CookieCollection`` is deprecated. Use
   ``Cake\Http\Cookie\CookieCollection`` instead.
+* ``Cake\View\Helper\RssHelper`` is deprecated. Due to infrequent use the
+  RssHelper is deprecated.
 
 Deprecated Combined Get/Set Methods
 -----------------------------------
