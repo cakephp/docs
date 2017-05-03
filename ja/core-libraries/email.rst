@@ -531,6 +531,9 @@ Mailer は、アプリケーション全体で再利用可能なメールを作�
         }
     }
 
+Mailer オブジェクトは、イベントリスナーとして登録され、 ``onRegistration()`` メソッドは
+``Model.afterSave`` イベントが起こるたびに呼び出されます。イベントリスナーオブジェクトの
+登録方法に関する情報は、 :ref:`registering-event-listeners` のドキュメントを参照してください。
 
 .. meta::
     :title lang=ja: Email
