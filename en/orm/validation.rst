@@ -402,8 +402,21 @@ are null::
     // A Node however should in addition also always reference a Site.
     $rules->add($rules->existsIn(['site_id'], 'Sites'));
 
+In most SQL databases multi-column ``UNIQUE`` indexes allow multiple null values
+to exist as ``NULL`` is not equal to itself. While, allowing multiple null values is
+the default behavior of CakePHP, you can enable a more strict mode using
+``allowMultipleNulls``::
+
+    // Only only null value can exist in `parent_id` and `site_id`
+    $rules->add($rules->existsIn(
+        ['parent_id', 'site_id'],
+        'ParentNodes',
+        ['allowMultipleNulls' => false]
+    ));
+
+
 .. versionadded:: 3.3.0
-    The ``allowNullableNulls`` option was added.
+    The ``allowNullableNulls`` and ``allowMultipleNulls`` options were added.
 
 Association Count Rules
 -----------------------
