@@ -9,6 +9,22 @@
 
             array('controller' => 'posts', 'action' => 'view', 5)
 
+        また、より複雑な例は::
+
+            array(
+                'subdomain' => 'dev',
+                'plugin' => 'account',
+                'prefix' => 'admin',
+                'controller' => 'profiles',
+                'action' => 'edit',
+                10257
+                '#' => 'email',
+                '?' => array(
+                    'reset' => true,
+                ),
+                'full_base' => true,
+            )
+
     HTML属性
         HTMLの属性を構成するキー => 値の配列。例::
 
