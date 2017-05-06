@@ -349,9 +349,9 @@ behavior that may affect your application:
   should update your code to pass a numerically indexed array using
   ``array_values()`` for the following methods:
 
-    * ``Cake\Mailer\Mailer::send()``
-    * ``Cake\Controller\Controller::setAction()``
-    * ``Cake\Http\ServerRequest::is()``
+  * ``Cake\Mailer\Mailer::send()``
+  * ``Cake\Controller\Controller::setAction()``
+  * ``Cake\Http\ServerRequest::is()``
 
 Visibility Changes
 ==================
