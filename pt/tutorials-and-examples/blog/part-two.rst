@@ -496,7 +496,7 @@ A seguir, vamos criar uma maneira para os usuários excluírem posts. Comece com
 uma action ``delete()`` no PostsController::
 
     function delete($id) {
-        if (!$this->request->is('post')) {
+        if (!$this->request->is('get')) {
             throw new MethodNotAllowedException();
         }
         if ($this->Post->delete($id)) {
