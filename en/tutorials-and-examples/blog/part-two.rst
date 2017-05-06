@@ -317,7 +317,7 @@ request was POST, try to save the data using the Articles model. If for some
 reason it doesn't save, just render the view. This gives us a
 chance to show the user validation errors or other warnings.
 
-Every CakePHP request includes a ``Request`` object which is accessible using
+Every CakePHP request includes a ``ServerRequest`` object which is accessible using
 ``$this->request``. The request object contains useful information regarding the
 request that was just received, and can be used to control the flow of your
 application.  In this case, we use the :php:meth:`Cake\\Network\\ServerRequest::is()`
