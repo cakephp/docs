@@ -128,7 +128,7 @@ Other Deprecations
 Deprecated Combined Get/Set Methods
 -----------------------------------
 
-In the past CakePHP has leveraged 'modal' methods that operate as provide both
+In the past CakePHP has leveraged 'modal' methods that provide both
 a get/set mode. These methods complicate IDE autocompletion and our ability
 to add stricter return types in the future. For these reasons, combined get/set
 methods are being split into separate get and set methods.
