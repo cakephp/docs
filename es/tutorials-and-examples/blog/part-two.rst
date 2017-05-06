@@ -290,11 +290,11 @@ salvar un nuevo artículo utilizando el modelo Articles. Si no se guarda bien,
 muestra la vista correspondiente, así podremos mostrar los errores de validación
 u otras alertas.
 
-Cada petición de CakePHP incluye un objeto ``Request`` que es accesible
+Cada petición de CakePHP incluye un objeto ``ServerRequest`` que es accesible
 utilizando ``$this->request``. El objeto de petición contiene información útil
 acerca de la petición que se recibe y puede ser utilizado para controlar el flujo
 de nuestra aplicación. En este caso, utilizamos el método
-:php:meth:`Cake\\Network\\Request::is()` para verificar que la petición es una
+:php:meth:`Cake\\Network\\ServerRequest::is()` para verificar que la petición es una
 petición HTTP POST.
 
 Cuando un usuario utiliza un formulario y efectúa un POST a la aplicación, esta

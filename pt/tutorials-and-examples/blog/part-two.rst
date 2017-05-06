@@ -300,10 +300,10 @@ salvar os dados utilizando o model Articles. Se por alguma razão ele não salva
 apenas renderiza a view. Isto nos dá a chance de exibir erros de validação ou
 outros alertas.
 
-Cada requisição do CakePHP instancia um objeto ``Request`` que é acessível
+Cada requisição do CakePHP instancia um objeto ``ServerRequest`` que é acessível
 usando ``$this->request``. O objeto contém informações úteis sobre a requisição
 que foi recebida e pode ser usado para controlar o fluxo de sua aplicação. Nesse
-caso, nós usamos o método :php:meth:`Cake\\Network\\Request::is()` para checar
+caso, nós usamos o método :php:meth:`Cake\\Network\\ServerRequest::is()` para checar
 se a requisição é do tipo HTTP POST.
 
 Quando se usa um formulário para postar dados, essa informação fica disponível

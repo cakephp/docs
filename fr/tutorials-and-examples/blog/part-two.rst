@@ -333,11 +333,11 @@ raison quelconque, la sauvegarde a échouée, affichez simplement la vue. Cela
 nous donne une chance de voir les erreurs de validation de l'utilisateur et
 d'autres avertissements.
 
-Chaque requête de CakePHP contient un objet ``Request`` qui est accessible
+Chaque requête de CakePHP contient un objet ``ServerRequest`` qui est accessible
 en utilisant ``$this->request``. Cet objet contient des informations utiles
 sur la requête qui vient d'être reçue, et permet de contrôler les flux de votre
 application. Dans ce cas, nous utilisons la méthode
-:php:meth:`Cake\\Network\\Request::is()` pour vérifier que la requête est de
+:php:meth:`Cake\\Network\\ServerRequest::is()` pour vérifier que la requête est de
 type POST.
 
 Lorsqu'un utilisateur utilise un formulaire pour poster des données dans votre
