@@ -403,9 +403,9 @@ are null::
     $rules->add($rules->existsIn(['site_id'], 'Sites'));
 
 In most SQL databases multi-column ``UNIQUE`` indexes allow multiple null values
-to exist as ``NULL`` is not equal to itself. While, allowing multiple null values is
-the default behavior of CakePHP, you can enable a more strict mode using
-``allowMultipleNulls``::
+to exist as ``NULL`` is not equal to itself. While, allowing multiple null
+values is the default behavior of CakePHP, you can include null values in your
+unique checks using ``allowMultipleNulls``::
 
     // Only only null value can exist in `parent_id` and `site_id`
     $rules->add($rules->existsIn(
