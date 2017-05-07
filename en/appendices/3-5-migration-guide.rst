@@ -83,6 +83,9 @@ behavior that may affect your application:
   For example: ``cake tool initMyDb`` can now be called with ``cake tool
   init_my_db``. If your shells previously bound two subcommands with different
   inflections, only the last bound command will function.
+* ``SecurityComponent`` will blackhole post requests that have no request data
+  now. This change helps protect actions that create records using database
+  defaults alone.
 
 New Features
 ============
