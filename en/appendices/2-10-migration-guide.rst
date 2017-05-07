@@ -20,6 +20,9 @@ Components
 * ``SecurityComponent`` now emits more verbose error messages when form
   tampering or CSRF protection fails in debug mode. This feature was backported
   from 3.x
+* ``SecurityComponent`` will blackhole post requests that have no request data
+  now. This change helps protect actions that create records using database
+  defaults alone.
 * ``FlashComponent`` now stacks messages of the same type. This is a feature
   backport from 3.x. To disable this behavior, add ``'clear' => true`` to the
   configuration for FlashComponent.
