@@ -765,7 +765,7 @@ file containing the tags you want to load, or an array of templates to
 add/replace::
 
     // Load templates from config/my_html.php
-    $this->Html->setTemplates('my_html.php');
+    $this->Html->setTemplates('my_html');
 
     // Load specific templates.
     $this->Html->setTemplates([

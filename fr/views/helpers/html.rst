@@ -770,7 +770,7 @@ de caractères vers le fichier PHP contenant les balises que vous
 souhaitez charger, soit avec un tableau des templates à ajouter/remplacer::
 
     // Charger les templates à partir de config/my_html.php
-    $this->Html->setTemplates('my_html.php');
+    $this->Html->setTemplates('my_html');
 
     // Charger les templates spécifiques.
     $this->Html->setTemplates([
