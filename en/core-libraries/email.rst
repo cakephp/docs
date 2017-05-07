@@ -322,8 +322,7 @@ following path:
 **src/Template/Plugin/TestTheme/Plugin/Blog/Email/text/new_comment.ctp**.
 
 .. deprecated:: 3.4.0
-
-    * Use ``setTempalte()`` instead of ``template()``.
+    * Use ``setTemplate()`` instead of ``template()``.
     * Use ``setLayout()`` instead of ``layout()``.
     * Use ``setTheme()`` instead of ``theme()``.
 
