@@ -740,7 +740,7 @@ HtmlHelper によるタグ出力の変更
 追加/置換するためのテンプレートの配列です。 ::
 
     // config/my_html.php からテンプレートを読み込む。
-    $this->Html->setTemplates('my_html.php');
+    $this->Html->setTemplates('my_html');
 
     // 指定したテンプレートを読み込む。
     $this->Html->setTemplates([

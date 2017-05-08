@@ -142,7 +142,7 @@ Valid values:
 
 * ``'templates'`` - The templates you want to use for this form. Any templates
   provided will be merged on top of the already loaded templates. Can be either
-  a filename from ``/config`` or an array of templates to use.
+  a filename (without extension) from ``/config`` or an array of templates to use.
 
 * ``'context'`` - Additional options for the form context class. (For example
   the ``EntityContext`` accepts a ``'table'`` option that allows you to set the
@@ -652,11 +652,11 @@ as well as HTML attributes. This subsection will cover the options specific to
 
 * ``$options['templates']`` - The templates you want to use for this input. Any
   specified templates will be merged on top of the already loaded templates.
-  This option can be either a filename in ``/config`` that contains the
-  templates you want to load, or an array of templates to use.
-  
+  This option can be either a filename (without extension) in ``/config`` that
+  contains the templates you want to load, or an array of templates to use.
+
 * ``$options['labelOptions']`` - Set this to ``false`` to disable labels around
-  nestedWidgets or set it to an array of attributes to be provided to the 
+  nestedWidgets or set it to an array of attributes to be provided to the
   ``label`` tag.
 
 Generating Specific Types of Controls
@@ -2714,7 +2714,7 @@ template, such as::
     $this->Form->setTemplates([
         'autocomplete' => '<input type="autocomplete" name="{{name}}" {{attrs}} />'
     ]);
-    
+
 For more information on string templates, see :ref:`customizing-templates`.
 
 Using Widgets
