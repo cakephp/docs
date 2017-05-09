@@ -45,7 +45,7 @@ Abaixo está uma descrição das variáveis e como elas afetam seu aplicativo Ca
 
 debug
     Altera a saída de depuração do CakePHP. ``false`` = Modo Produção. Não é exibido nenhuma mensagem de erro e/ou aviso.
-``true`` = Modo de Desenvolvimento. É exibido todas as mensagens de erros e/ou avisos.
+    ``true`` = Modo de Desenvolvimento. É exibido todas as mensagens de erros e/ou avisos.
 App.namespace
     O namespace em que as classes do aplicativo estão.
     
@@ -200,3 +200,90 @@ Consulte :ref:`inflection-configuration` para obter mais informações sobre com
 
 Configurar classe
 =================
+
+.. php:namespace:: Cake\Core
+
+.. php:class:: Configure
+
+A classe de Configuração do CakePHP pode ser usada para armazenar e recuperar valores específicos do aplicativo ou do tempo
+de execução. Tenha cuidado, pois essa classe permite que você armazene qualquer coisa nela, para que em seguida, usá-la em
+qualquer outra parte do seu código: Dando ma certa tentação de quebrar o padrão MVC do CakePHP. O objetivo principal da
+classe Configurar é manter variáveis centralizadas que podem ser compartilhadas entre muitos objetos. Lembre-se de tentar
+viver por "convenção sobre a configuração" e você não vai acabar quebrando a estrutura MVC previamente definida.
+
+Você pode acessar o ``Configure`` de qualquer lugar de seu aplicativo::
+
+    Configure::read('debug');
+
+Escrevendo dados de configuração
+--------------------------------
+
+.. php:staticmethod:: write($key, $value)
+
+Use ``write()`` para armazenar dados na configuração do aplicativo::
+
+    Configure::write('Company.name', 'Pizza, Inc.');
+    Configure::write('Company.slogan','Pizza for your body and soul');
+    
+.. note::
+
+    O :term:`dot notation` usado no parâmetro ``$ key`` pode ser usado para organizar suas configurações em grupos lógicos.
+    
+O exemplo acima também pode ser escrito em uma única chamada::
+
+    Configure::write('Company', [
+        'name' => 'Pizza, Inc.',
+        'slogan' => 'Pizza for your body and soul'
+    ]);
+    
+Você pode usar ``Configure::write('debug', $bool)`` para alternar entre os modos de depuração e produção na mosca. Isso é
+especialmente útil para interações JSON onde informações de depuração podem causar problemas de análise.
+
+Leitura de dados de configuração
+--------------------------------
+
+.. php:staticmethod:: read($key = null)
+
+Usado para ler dados de configuração da aplicação. Por padrão o valor de depuração do CakePHP é importante. Se for fornecida
+uma chave, os dados são retornados. Usando nossos exemplos de write() acima, podemos ler os dados de volta::
+
+    Configure::read('Company.name');    // Yields: 'Pizza, Inc.'
+    Configure::read('Company.slogan');  // Yields: 'Pizza for your body
+                                        // and soul'
+
+    Configure::read('Company');
+
+    //Rendimentos:
+    ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
+    
+Se $key for deixada nula, todos os valores em Configure serão retornados.
+
+.. php:staticmethod:: readOrFail($key)
+
+Lê dados de configuração como :php:meth:`Cake\\Core\\Configure::read`, mas espera encontrar um par chave/valor. Caso o par
+solicitado não exista, a :php:class:`RuntimeException` será lançada::
+
+    Configure::readOrFail('Company.name');    // Rendimentos: 'Pizza, Inc.'
+    Configure::readOrFail('Company.geolocation');  // Vai lançar uma exceção
+
+    Configure::readOrFail('Company');
+
+    // Rendimentos:
+    ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
+
+.. versionadded:: 3.1.7
+    ``Configure::readOrFail()`` Foi adicionado na versão 3.1.7
+    
+Verificar se os dados de configuração estão definidos
+-----------------------------------------------------
+
+.. php:staticmethod:: check($key)
+
+Usado para verificar se uma chave/caminho existe e tem valor não nulo::
+
+    $exists = Configure::check('Company.name');
+    
+Excluindo Dados de Configuração
+---------------------------------
+
+.. php:staticmethod:: delete($key)
