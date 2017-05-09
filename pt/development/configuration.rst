@@ -227,7 +227,7 @@ Use ``write()`` para armazenar dados na configuração do aplicativo::
     
 .. note::
 
-    O :term:`dot notation` usado no parâmetro ``$ key`` pode ser usado para organizar suas configurações em grupos lógicos.
+    O :term:`dot notation` usado no parâmetro ``$key`` pode ser usado para organizar suas configurações em grupos lógicos.
     
 O exemplo acima também pode ser escrito em uma única chamada::
 
@@ -284,6 +284,63 @@ Usado para verificar se uma chave/caminho existe e tem valor não nulo::
     $exists = Configure::check('Company.name');
     
 Excluindo Dados de Configuração
----------------------------------
+-------------------------------
 
 .. php:staticmethod:: delete($key)
+
+Usado para excluir informações da configuração da aplicação::
+
+    Configure::delete('Company.name');
+    
+Leitura e exclusão de dados de configuração
+-------------------------------------------
+
+.. php:staticmethod:: consume($key)
+
+Ler e excluir uma chave do Configure. Isso é útil quando você deseja combinar leitura e exclusão de valores em uma única
+operação.
+
+
+
+Lendo e escreveendo arquivos de configuração
+============================================
+
+.. php:staticmethod:: config($name, $engine)
+
+O CakePHP vem com dois mecanismos de arquivos de configuração embutidos.
+:php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` é capaz de ler arquivos de configuração do PHP, no mesmo formato que o
+Configure tem lido historicamente.
+:php:class:`Cake\\Core\\Configure\\Engine\\IniConfig` é capaz de ler os arquivos de configuração no formato ini(.ini).
+Consulte a documentação do `PHP <http://php.net/parse_ini_file>`_ para obter mais informações sobre os detalhes dos arquivos
+ini. Para usar um mecanismo de configuração do núcleo, você precisará conectá-lo ao Configure usando
+:php:meth:`Configure::config()`::
+
+    use Cake\Core\Configure\Engine\PhpConfig;
+
+    // Ler os arquivos de configuração da configuração
+    Configure::config('default', new PhpConfig());
+
+    // Ler arquivos de configuração de outro diretório.
+    Configure::config('default', new PhpConfig('/path/to/your/config/files/'));
+    
+Você pode ter vários mecanismos anexados para Configure, cada um lendo diferentes tipos ou fontes de arquivos de
+configuração. Você pode interagir com os motores conectados usando alguns outros métodos em Configure. Para verificar quais
+aliases de motor estão conectados você pode usar :php:meth:`Configure::configured()`::
+
+     // Obter a matriz de aliases para os motores conectados.
+    Configure::configured();
+
+    // Verificar se um motor específico está ligado.
+    Configure::configured('default');
+
+.. php:staticmethod:: drop($name)
+
+Você também pode remover os motores conectados. ``Configure::drop('default')`` removeria o alias de mecanismo padrão.
+Quaisquer tentativas futuras de carregar arquivos de configuração com esse mecanismo falhariam::
+
+    Configure::drop('default');
+
+.. _loading-configuration-files:
+
+Carregando arquivos de configurações
+------------------------------------
