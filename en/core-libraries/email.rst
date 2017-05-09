@@ -206,7 +206,7 @@ following configuration keys are used:
 - ``'theme'``: Theme used when rendering template. See ``Email::theme()``.
 - ``'layout'``: If you are using rendered content, set the layout to render. If
   you want to render a template without layout, set this field to null. See
-  ``Email::layout()``.
+  ``Email::template()``.
 - ``'viewVars'``: If you are using rendered content, set the array with
   variables to be used in the view. See ``Email::viewVars()``.
 - ``'attachments'``: List of files to attach. See ``Email::attachments()``.
@@ -250,8 +250,7 @@ and elements just like normal views::
 
     $email = new Email();
     $email
-        ->template('welcome')
-        ->layout('fancy')
+        ->template('welcome', 'fancy')
         ->emailFormat('html')
         ->to('bob@example.com')
         ->from('app@domain.com')
@@ -263,8 +262,7 @@ send multipart templated email messages as well::
 
     $email = new Email();
     $email
-        ->template('welcome')
-        ->layout('fancy')
+        ->template('welcome', 'fancy')
         ->emailFormat('both')
         ->to('bob@example.com')
         ->from('app@domain.com')
@@ -302,8 +300,7 @@ If you want to send email using templates in a plugin you can use the familiar
 :term:`plugin syntax` to do so::
 
     $email = new Email();
-    $email->template('Blog.new_comment');
-    $email->layout('Blog.auto_message');
+    $email->template('Blog.new_comment', 'Blog.auto_message');
 
 The above would use template and layout from the Blog plugin as an example.
 
@@ -312,8 +309,7 @@ You can do this using themes by telling Email to use appropriate theme using
 ``Email::theme()`` method::
 
     $email = new Email();
-    $email->template('Blog.new_comment');
-    $email->layout('Blog.auto_message');
+    $email->template('Blog.new_comment', 'Blog.auto_message');
     $email->theme('TestTheme');
 
 This allows you to override the ``new_comment`` template in your theme without
@@ -323,7 +319,8 @@ following path:
 
 .. deprecated:: 3.4.0
     Use ``setTemplate()`` instead of ``template()``. Use ``setLayout()`` instead
-    of ``layout()``. Use ``setTheme()`` instead of ``theme()``.
+    of the layout argument of ``template()``. Use ``setTheme()`` instead of
+    ``theme()``.
 
 
 Sending Attachments
@@ -521,8 +518,7 @@ following::
             $this
                 ->to($user->email)
                 ->subject(sprintf('Welcome %s', $user->name))
-                ->template('welcome_mail') // By default template with same name as method name is used.
-                ->layout('custom');
+                ->template('welcome_mail', 'custom'); // By default template with same name as method name is used.
         }
 
         public function resetPassword($user)
