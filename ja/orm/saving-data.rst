@@ -1062,12 +1062,12 @@ belongsToMany アソシエーションのそれぞれのエンティティは、
     Type::map('json', 'App\Database\Type\JsonType');
 
     // src/Model/Table/UsersTable.php の中で
-    use Cake\Database\Schema\Table as Schema;
+    use Cake\Database\Schema\TableSchema;
 
     class UsersTable extends Table
     {
 
-        protected function _initializeSchema(Schema $schema)
+        protected function _initializeSchema(TableSchema $schema)
         {
             $schema->columnType('preferences', 'json');
             return $schema;

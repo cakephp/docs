@@ -424,12 +424,12 @@ JSON データを変換してクエリを作成します。
 あなたは Table の :ref:`_initializeSchema() メソッド <saving-complex-types>` で、
 新たに作った型のマッピングをすることができます。 ::
 
-    use Cake\Database\Schema\Table as Schema;
+    use Cake\Database\Schema\TableSchema;
 
     class WidgetsTable extends Table
     {
 
-        protected function _initializeSchema(Schema $schema)
+        protected function _initializeSchema(TableSchema $schema)
         {
             $schema->columnType('widget_prefs', 'json');
             return $schema;
