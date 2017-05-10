@@ -344,3 +344,69 @@ Quaisquer tentativas futuras de carregar arquivos de configuração com esse mec
 
 Carregando arquivos de configurações
 ------------------------------------
+
+.. php:staticmethod:: load($key, $config = 'default', $merge = true)
+
+Depois de ter anexado um motor de configuração para o Configure, ficará disponível para poder carregar ficheiros de
+configuração::
+
+    // Load my_file.php using the 'default' engine object.
+    Configure::load('my_file', 'default');
+    
+Os arquivos de configuração que foram carregados mesclam seus dados com a configuração de tempo de execução existente no
+Configure. Isso permite que você sobrescreva e adicione novos valores à configuração de tempo de execução existente. Ao
+definir ``$merge`` para ``true``, os valores nunca substituirão a configuração existente.
+
+Criando ou modificando arquivos de configuração
+-----------------------------------------------
+
+.. php:staticmethod:: dump($key, $config = 'default', $keys = [])
+
+Despeja todos ou alguns dos dados que estão no Configure em um sistema de arquivos ou armazenamento suportado por um motor
+de configuração. O formato de serialização é decidido pelo mecanismo de configuração anexado como $config. Por exemplo, se o
+mecanismo 'padrão' é :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig`, o arquivo gerado será um arquivo de configuração
+PHP carregável pelo :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig`
+
+Dado que o motor 'default' é uma instância do PhpConfig. Salve todos os dados em Configure no arquivo `my_config.php`::
+
+    Configure::dump('my_config', 'default');
+    
+Salvar somente a configuração de manipulação de erro::
+
+    Configure::dump('error', 'default', ['Error', 'Exception']);
+    
+``Configure::dump()`` pode ser usado para modificar ou substituir arquivos de configuração que são legíveis com
+:php:meth:`Configure::load()`
+
+
+Armazenando Configuração do Tempo de Execução
+---------------------------------------------
+
+.. php:staticmethod:: store($name, $cacheConfig = 'default', $data = null)
+
+Você também pode armazenar valores de configuração de tempo de execução para uso em uma solicitação futura. Como o configure
+só lembra valores para a solicitação atual, você precisará armazenar qualquer informação de configuração modificada se você
+quiser usá-la em solicitações futuras::
+
+    // Armazena a configuração atual na chave 'user_1234' no cache 'default'.
+    Configure::store('user_1234', 'default');
+    
+Os dados de configuração armazenados são mantidos na configuração de cache nomeada. Consulte a documentação 
+:doc:`/core-libraries/caching` para obter mais informações sobre o cache.
+
+Restaurando a Configuração do Tempo de Execução
+-----------------------------------------------
+
+.. php:staticmethod:: restore($name, $cacheConfig = 'default')
+
+Depois de ter armazenado a configuração de tempo de execução, você provavelmente precisará restaurá-la para que você possa
+acessá-la novamente. ``Configure::restore()``  faz exatamente isso::
+
+    // Restaura a configuração do tempo de execução do cache.
+    Configure::restore('user_1234', 'default');
+    
+Ao restaurar informações de configuração, é importante restaurá-lo com a mesma chave e configuração de cache usada para
+armazená-lo. As informações restauradas são mescladas em cima da configuração de tempo de execução existente.
+
+Criando seus próprios mecanismos de configuração
+================================================
