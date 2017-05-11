@@ -400,8 +400,20 @@ CakePHP は、エンティティが保存される前に適用される「ルー
     // それに加えて Node は、常に Site を参照してください。
     $rules->add($rules->existsIn(['site_id'], 'Sites'));
 
+大部分の SQL データベースでは、複数カラムの ``UNIQUE`` インデックスは、
+``NULL`` は、それ自身と等しくないため、複数の null 値が存在することを許可します。
+複数の null 値を許可することは、CakePHP のデフォルトの振る舞いですが、
+``allowMultipleNulls`` を使用することでユニークチェックに null 値を含むことができます。 ::
+
+    // null 値は `parent_id` と `site_id` の中に１つだけで存在できます。
+    $rules->add($rules->existsIn(
+        ['parent_id', 'site_id'],
+        'ParentNodes',
+        ['allowMultipleNulls' => false]
+    ));
+
 .. versionadded:: 3.3.0
-    ``allowNullableNulls`` オプションが追加されました。
+    ``allowNullableNulls`` と ``allowMultipleNulls`` オプションが追加されました。
 
 アソシエーションカウントルール
 ------------------------------

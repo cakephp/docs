@@ -172,6 +172,8 @@ peut écouter. Chaque couche de CakePHP émet des événements que vous pouvez
 * :ref:`Events du Controller<controller-life-cycle>`
 * :ref:`Events de View<view-events>`
 
+.. _registering-event-listeners:
+
 Enregistrer les Listeners
 =========================
 

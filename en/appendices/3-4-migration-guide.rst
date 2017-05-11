@@ -128,7 +128,7 @@ Other Deprecations
 Deprecated Combined Get/Set Methods
 -----------------------------------
 
-In the past CakePHP has leveraged 'modal' methods that operate as provide both
+In the past CakePHP has leveraged 'modal' methods that provide both
 a get/set mode. These methods complicate IDE autocompletion and our ability
 to add stricter return types in the future. For these reasons, combined get/set
 methods are being split into separate get and set methods.
@@ -349,9 +349,9 @@ behavior that may affect your application:
   should update your code to pass a numerically indexed array using
   ``array_values()`` for the following methods:
 
-    * ``Cake\Mailer\Mailer::send()``
-    * ``Cake\Controller\Controller::setAction()``
-    * ``Cake\Http\ServerRequest::is()``
+  * ``Cake\Mailer\Mailer::send()``
+  * ``Cake\Controller\Controller::setAction()``
+  * ``Cake\Http\ServerRequest::is()``
 
 Visibility Changes
 ==================

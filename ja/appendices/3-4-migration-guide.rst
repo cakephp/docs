@@ -123,7 +123,7 @@ PSR-7 スタックによって廃止されているため、 非推奨になり�
 非推奨の複合 get / set メソッド
 -------------------------------
 
-過去には、CakePHP は get / set モードの両方を提供するように動作する 'モーダル' メソッドを
+過去には、CakePHP は get / set モードの両方を提供する 'モーダル' メソッドを
 利用していました。これらのメソッドにより、IDE の自動補完や、将来的に厳格な戻り値の型を追加する機能が
 複雑になります。これらの理由から、複合 get / set メソッドは、
 個別の get および set メソッドに分割されています。
@@ -338,9 +338,9 @@ CakePHP の以前のバージョンでは、コンポーネントは後で変更
   連想配列を渡す場合は、次のメソッドには ``array_values()`` を使って数値添字配列を渡すように
   コードを更新する必要があります。
 
-    * ``Cake\Mailer\Mailer::send()``
-    * ``Cake\Controller\Controller::setAction()``
-    * ``Cake\Http\ServerRequest::is()``
+  * ``Cake\Mailer\Mailer::send()``
+  * ``Cake\Controller\Controller::setAction()``
+  * ``Cake\Http\ServerRequest::is()``
 
 アクセス権の変更
 ================
