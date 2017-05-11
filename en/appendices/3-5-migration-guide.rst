@@ -119,3 +119,5 @@ New Features
 * ``Cake\View\Helper\PaginatorHelper::limitControl()`` was added. This method
   lets you create a form with a select box for updating the limit value on
   a paginated result set.
+* ``Cake\Core\ObjectRegistry`` now implements the ``Countable`` and
+  ``IteratorAggregate`` interfaces.
