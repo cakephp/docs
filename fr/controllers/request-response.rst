@@ -72,7 +72,7 @@ Accéder aux Paramètres Querystring
 
 .. php:method:: getQuery($name)
 
-Les paramètres Querystring peuvent être lus en utilisant la méthode ``getQuery()``
+Les paramètres Querystring peuvent être lus en utilisant la méthode ``getQuery()``::
 
     // l'URL est /posts/index?page=1&sort=title
     $page = $this->request->getQuery('page');
