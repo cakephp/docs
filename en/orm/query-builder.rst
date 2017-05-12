@@ -1214,6 +1214,8 @@ defining your ``Connection``, join conditions between table fields should be set
 This ensures that all of your identifiers will be quoted across the Query, avoiding errors with
 some database Drivers (PostgreSQL notably)
 
+To be able to access the data from your joins, you will need to call the contain() function.
+
 Inserting Data
 ==============
 
