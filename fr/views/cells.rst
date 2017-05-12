@@ -19,7 +19,7 @@ Créer une Cell
 
 Pour créer une cell, vous définissez une classe dans **src/View/Cell**, et un
 template dans **src/Template/Cell/**. Dans cet exemple, nous ferons une cell
-pour afficher le nombre de messages dans la boite de message de notification de
+pour afficher le nombre de messages dans la boite de messages de notification de
 l'utilisateur. D'abord, créons le fichier de classe. Son contenu devrait
 ressembler à ceci::
 
@@ -106,7 +106,7 @@ Charger les Cells
 Les cells peuvent être chargées à partir des views en utilisant la méthode
 ``cell()`` et fonctionne de la même manière dans les deux contextes::
 
-    // Charge une celle d'une application
+    // Charge une cell d'une application
     $cell = $this->cell('Inbox');
 
     // Charge une cell d'un plugin
