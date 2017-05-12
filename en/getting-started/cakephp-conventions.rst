@@ -168,6 +168,7 @@ Rather than using an auto-increment key as the primary key, you may
 also use char(36). CakePHP will then use a unique 36 character UUID
 (String::uuid) whenever you save a new record using the Model::save
 method.
+CakePHP does not support other types than integers or char(36) as primary keys.
 
 View Conventions
 ================
