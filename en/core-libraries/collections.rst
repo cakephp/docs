@@ -21,7 +21,7 @@ interact with collections every time you interact with the ORM in CakePHP.
 A simple use of a Collection would be::
 
     use Cake\Collection\Collection;
-
+e
     $items = ['a' => 1, 'b' => 2, 'c' => 3];
     $collection = new Collection($items);
 
