@@ -167,6 +167,37 @@ ways::
     $user->title = 'foo'; // slug is set as well
     $user->set('title', 'foo'); // slug is set as well
 
+Direct Path Access
+------------------
+
+``get()`` and ``set()`` both support direct "dotted" path expressions. This
+allows you to traverse into Entities and arrays nested inside of your Entities
+and behaves similar to ``Hash::get()``. ::
+
+    $entity = new Entity([
+        'a' => new Entity([
+            'b' => 1
+        ])
+    ]);
+
+    echo $entity->get('a.b'); // 1
+    $entity->set('a.b', 2);
+    echo $entity->get('a.b'); // 2
+
+When a path does not exist, ``Entity::get()`` returns null just as
+``Hash::get()`` does. When a path does not already exist, ``Entity::set()``
+will attempt to create the entire path specified just as ``Hash::set()`` does.
+Set creates a new ``\Cake\ORM\Entity`` for each segment in the path where the
+property does not already exist in the parent.
+
+.. warning::
+
+    If you attempt to set a dotted path that already contains a scalar value
+    such as an int or string, an \InvalidArgumentException will be thrown::
+
+    $entity->x = 'just a string';
+    $entity->set('x.y', 'Will fail because `x` is a string, not an array or Entity.');
+
 .. _entities-virtual-properties:
 
 Creating Virtual Properties
