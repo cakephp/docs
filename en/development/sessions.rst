@@ -171,7 +171,7 @@ You can also use your own ``Table`` class to handle the saving of the sessions::
     'Session' => [
         'defaults' => 'database',
         'handler' => [
-            'engine' => 'Database',
+            'engine' => 'Cake\Network\Session\DatabaseSession',
             'model' => 'CustomSessions'
         ]
     ]
