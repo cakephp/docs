@@ -4,6 +4,12 @@
 CakePHP 2.10 is a fully API compatible upgrade from 2.9 This page outlines
 the changes and improvements made in 2.10.
 
+Core
+====
+
+* The ``CONFIG`` constant was added. This constant defaults to ``app/Config``,
+  and is intended to increase forwards compatibility with 3.x
+
 Model
 =====
 
