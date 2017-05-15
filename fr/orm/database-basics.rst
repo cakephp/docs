@@ -483,7 +483,7 @@ votre Table::
 
     }
 
-.. _Mappage de types de données personnalisés aux expressions SQL:
+.. _mapping-custom-datatypes-to-sql-expressions:
 
 Faire correspondre des types de données personnalisés aux expressions SQL
 -------------------------------------------------------------------------
