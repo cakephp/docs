@@ -144,7 +144,7 @@ pouvez ensuite lire ces valeurs à partir de votre gestionnaire::
 
     'Session' => [
         'handler' => [
-            'engine' => 'Database',
+            'engine' => 'DatabaseSession',
             'model' => 'CustomSessions'
         ]
     ]
@@ -188,7 +188,7 @@ sessions::
     'Session' => [
         'defaults' => 'database',
         'handler' => [
-            'engine' => 'Database',
+            'engine' => 'DatabaseSession',
             'model' => 'CustomSessions'
         ]
     ]

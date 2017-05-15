@@ -120,7 +120,7 @@ handler 配列内に配置されます。ハンドラー内からこれらの値
 
     'Session' => [
         'handler' => [
-            'engine' => 'Database',
+            'engine' => 'DatabaseSession',
             'model' => 'CustomSessions'
         ]
     ]
@@ -160,7 +160,7 @@ CakePHP は、 ``Network\Session`` 名前空間内にクラスがあることを
     'Session' => [
         'defaults' => 'database',
         'handler' => [
-            'engine' => 'Database',
+            'engine' => 'DatabaseSession',
             'model' => 'CustomSessions'
         ]
     ]
