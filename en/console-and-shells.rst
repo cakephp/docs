@@ -361,6 +361,19 @@ By default, a ``requested`` extra param is automatically added when a Shell
 is dispatched using ``dispatchShell()``. This ``requested`` parameter prevents
 the CakePHP console welcome message from being displayed on dispatched shells.
 
+Exit Status Codes
+-----------------
+It can sometimes be useful to return exit status codes. Simply use php's ``exit()`` statement.
+Lookup system exit codes of your web servers operation system. For POSIX-like systems, e.g. linux,
+```exit(0)``` means, the process executed successfully, while any other exit code, such as
+```exit(1)``` means the some error occured. Lookup sysexits.h for more information.
+
+If you want to chain multiple cake shell calls along each other you can do so by chaining them
+with ``&&`` or ``;``. If you chain with ``&&`` like ``bin/cake bake all posts && bin/cake all comments``
+the second call after the double-ampersand will only be executed if the first call returned exit 
+status code 0, while chaining with ``;`` will execute the second call even if the first did not execute
+successfully and thus returned a non-zero exit code like ``1``.
+
 Getting User Input
 ==================
 
