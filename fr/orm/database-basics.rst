@@ -485,8 +485,8 @@ votre Table::
 
 .. _Mappage de types de données personnalisés aux expressions SQL:
 
-Mapping Custom Datatypes to SQL Expressions
---------------------------------------------
+Faire correspondre des types de données personnalisés aux expressions SQL
+-------------------------------------------------------------------------
 
 .. versionadded:: 3.3.0
     Le support pour le mappage des types de données personnalisés aux expressions SQL a été ajouté dans la version 3.3.0.
