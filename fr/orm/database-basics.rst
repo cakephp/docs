@@ -483,23 +483,24 @@ votre Table::
 
     }
 
-.. _mapping-custom-datatypes-to-sql-expressions:
+.. _Mappage de types de données personnalisés aux expressions SQL:
 
 Mapping Custom Datatypes to SQL Expressions
 --------------------------------------------
 
 .. versionadded:: 3.3.0
-    Support for mapping custom data types to SQL expressions was added in 3.3.0.
+    Le support pour le mappage des types de données personnalisés aux expressions SQL a été ajouté dans la version 3.3.0.
 
-The previous example maps a custom datatype for a 'json' column type which is
-easily represented as a string in a SQL statement. Complex SQL data
-types cannot be represented as strings/integers in SQL queries. When working
-with these datatypes your Type class needs to implement the
-``Cake\Database\Type\ExpressionTypeInterface`` interface. This interface lets
-your custom type represent a value as a SQL expression. As an example, we'll
-build a simple Type class for handling ``POINT`` type data out of MySQL. First
-we'll define a 'value' object that we can use to represent ``POINT`` data in
-PHP::
+L'exemple précédent fait correspondre un type de données personnalisé pour une 
+colonne de type 'json' qui est facilement représenté sous la forme d'une chaîne 
+dans une instruction SQL. Les types de données complexes ne peuvent pas être 
+représentées sous la forme de chaînes/entiers dans des requêtes SQL. Quand vous 
+travaillez avec ces types de données, votre class Type doit implémenter l'interface 
+``Cake\Database\Type\ExpressionTypeInterface``. Cette interface permet de 
+représenter une valeur de votre type de données personnalisé comme une expression SQL.
+Comme exemple, nous allons construire une simple classe Type pour manipuler le type de
+données ``POINT`` de MysQL. Premièrement, nous allons définir un objet 'value' que nous 
+allons pouvoir utiliser pour représenter les données de ``POINT`` en PHP::
 
     // in src/Database/Point.php
     namespace App\Database;
@@ -534,8 +535,8 @@ PHP::
         }
     }
 
-With our value object created, we'll need a Type class to map data into this
-value object and into SQL expressions::
+Maintenant que notre objet 'value' créé, nous avons besoin d'une classe Type pour 
+faire correspondre les données dans cet objet et les expressions SQL::
 
     namespace App\Database\Type;
 
@@ -578,18 +579,16 @@ value object and into SQL expressions::
         }
     }
 
-The above class does a few interesting things:
+La classe ci-dessus fait quelques éléments intéressants :
 
-* The ``toPHP`` method handles parsing the SQL query results into a value
-  object.
-* The ``marshal`` method handles converting, data such as given request data, into our value object.
-  We're going to accept string values like ``'10.24,12.34`` and arrays for now.
-* The ``toExpression`` method handles converting our value object into the
-  equivalent SQL expressions. In our example the resulting SQL would be
-  something like ``POINT(10.24, 12.34)``.
+* La méthode ``toPHP`` se charge du parsing des résulats de la requête SQL dans un objet 'value'.
+* La méthode ``marshal`` se charge de convertir, comme celles données dans la requête, dans notre objet 'value'.
+  Nous allons accepter des chaînes comme ``'10.24,12.34`` ainsi que des tableaux.
+* La méthode ``toExpression`` se charge de convertir notre objet 'value' dans des expressions SQL équivalentes. 
+  Dans notre exemple, le SQL résultant devrait être quelque choise comme ``POINT(10.24, 12.34)``.
 
-Once we've built our custom type, we'll need to :ref:`connect our type
-to our table class <saving-complex-types>`.
+Une fois que nous avons construit notre type personnalisé, nous allons :ref:`connecter notre type à 
+notre class de table <saving-complex-types>`.
 
 .. _immutable-datetime-mapping:
 
