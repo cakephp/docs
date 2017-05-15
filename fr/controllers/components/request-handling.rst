@@ -142,7 +142,7 @@ Décoder Automatiquement les Données de la Requête
 =================================================
 
 Ajoute une requête de décodage de données. Le gestionnaire devrait contenir un
-callback, et tour autre argument supplémentaire pour le callback. Le callback
+callback, et tout autre argument supplémentaire pour le callback. Le callback
 devrait retourner un tableau de données contenues dans la requête. Par exemple,
 ajouter un gestionnaire de CSV pourrait ressembler à ceci::
 
