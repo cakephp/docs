@@ -41,8 +41,9 @@ To get a fresh download, visit the CakePHP project on GitHub:
 and download the latest release of 2.0
 
 You can also clone the repository using
-`git <http://git-scm.com/>`_.
-``git clone git://github.com/cakephp/cakephp.git``
+`git <http://git-scm.com/>`_::
+
+    git clone -b 2.x git://github.com/cakephp/cakephp.git
 
 Regardless of how you downloaded it, place the code inside of your
 DocumentRoot. Once finished, your directory setup should look

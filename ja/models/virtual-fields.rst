@@ -111,6 +111,78 @@ Model::find() とバーチャルフィールド
 
 これで、モデルにどんなエイリアスを与えても、バーチャルフィールドはうまく動くことでしょう。
 
+JOINS を使ったページ制御とバーチャルフィールドの設定
+==========================================================
+
+次の例は、hasMany アソシエーションのカウンターを持ち、バーチャルフィールドを有効にすることができます。
+例えば、もしテンプレートの中で次のようなソートリンクがある場合、 ::
+
+    // バーチャルフィールドのソートリンクを作成
+    $this->Paginator->sort('ProductsItems.Total','Items Total');
+
+コントローラの中で、次のようなページ制御の設定を行います。 ::
+
+    $this->Products->recursive = -1;
+
+    // Products hasMany ProductsItems アソシエーション
+    $this->Products->ProductsItems->virtualFields['Total'] = 'count(ProductsItems.products_id)';
+
+    // ORM の条件
+    $where = array(
+        'fields' => array(
+            'Products.*',
+            'count(ProductsItems.products_id) AS ProductsItems__Total',
+        ),
+        'joins' => array(
+            array(
+                'table' => 'products_items',
+                'alias' => 'ProductsItems',
+                'type' => 'LEFT',
+                'conditions' => array(
+                    'ProductsItems.products_id = Products.id',
+                )
+            )
+        ),
+        'group' => 'ProductsItems.products_id'
+    );
+
+    // Paginator に条件を設定
+    $this->paginate = $where;
+
+    // データの取得
+    $data = $this->Paginator->paginate();
+
+次のようなものを返すでしょう。 ::
+
+   Array
+   (
+       [0] => Array
+           (
+               [Products] => Array
+                   (
+                       [id] => 1234,
+                       [description] => 'テキストなどなど...',
+                   )
+                [ProductsItems] => Array
+                    (
+                        [Total] => 25
+                    )
+           )
+        [1] => Array
+           (
+               [Products] => Array
+                   (
+                       [id] => 4321,
+                       [description] => 'テキスト 2 などなど...',
+                   )
+                [ProductsItems] => Array
+                    (
+                        [Total] => 50
+                    )
+           )
+    )
+
+
 SQL クエリ内でのバーチャルフィールドの利用
 ==========================================
 

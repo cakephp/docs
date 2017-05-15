@@ -37,8 +37,9 @@ CakePHP のダウンロード
 `https://github.com/cakephp/cakephp/tags <https://github.com/cakephp/cakephp/tags>`_
 そして、2.0 の最新リリースをダウンロードします。
 
-または、 `git <http://git-scm.com/>`_ を使ってレポジトリを clone することもできます。
-``git clone git://github.com/cakephp/cakephp.git``
+または、 `git <http://git-scm.com/>`_ を使ってレポジトリを clone することもできます。 ::
+
+    git clone -b 2.x git://github.com/cakephp/cakephp.git
 
 どちらにしても、ダウンロードしたコードを DocumentRoot 内に配置してください。
 そうすると、ディレクトリは次のようになります::

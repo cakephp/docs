@@ -811,7 +811,7 @@ other webbrowser specific environment variables are not set.
 If you generate reports or send emails that make use of ``Router::url()`` those will contain
 the default host ``http://localhost/``  and thus resulting in invalid URLs. In this case you need to
 specify the domain manually.
-You can do that using the Configure value ``App.fullBaseURL`` from your bootstrap or config, for example.
+You can do that using the Configure value ``App.fullBaseUrl`` from your bootstrap or config, for example.
 
 For sending emails, you should provide CakeEmail class with the host you want to send the email with::
 
