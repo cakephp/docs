@@ -121,7 +121,7 @@ Ils reçoivent la valeur basique stockée dans le tableau ``_properties`` pour
 seul argument.
 Les accesseurs seront utilisés lors de la sauvegarde des entities. Faites donc
 attention lorsque vous définissez des méthodes qui formatent les données car ce
-sont ces données formatées qui seront sauvegardées. Par example::
+sont ces données formatées qui seront sauvegardées. Par exemple::
 
     namespace App\Model\Entity;
 
