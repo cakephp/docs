@@ -52,9 +52,9 @@ volée à vos models, et peut être quelques components aux controllers.
 A la place, vous pouvez utiliser les événements pour vous permettre de séparer
 clairement ce qui concerne votre code et permettre d'ajouter des besoins
 supplémentaires dans votre plugin en utilisant les événements. Par exemple dans
-votre plugin Cart, vous avez un model Order qui gère la création des commandes.
+votre plugin Cart, vous avez un model Orders qui gère la création des commandes.
 Vous voulez notifier au reste de l'application qu'une commande a été créée. Pour
-garder votre model Order propre, vous pouvez utiliser les événements::
+garder votre model Orders propre, vous pouvez utiliser les événements::
 
     // Cart/Model/Table/OrdersTable.php
     namespace Cart\Model\Table;
@@ -62,14 +62,14 @@ garder votre model Order propre, vous pouvez utiliser les événements::
     use Cake\Event\Event;
     use Cake\ORM\Table;
 
-    class Order extends Table
+    class OrdersTable extends Table
     {
 
         public function place($order)
         {
             if ($this->save($order)) {
                 $this->Cart->remove($order);
-                $event = new Event('Model.Order.afterPlace', $this, [
+                $event = new Event('Model.Orders.afterPlace', $this, [
                     'order' => $order
                 ]);
                 $this->eventManager()->dispatch($event);
@@ -199,7 +199,7 @@ nécessaire. Notre écouteur ``UserStatistics`` pourrait commencer comme ceci::
         public function implementedEvents()
         {
             return [
-                'Model.Order.afterPlace' => 'updateBuyStatistic',
+                'Model.Orders.afterPlace' => 'updateBuyStatistic',
             ];
         }
 
@@ -211,7 +211,7 @@ nécessaire. Notre écouteur ``UserStatistics`` pourrait commencer comme ceci::
 
     // Attache l'objet UserStatistic au gestionnaire globale d'événements de la Commande
     $statistics = new UserStatistic();
-    $this->Order->eventManager()->on($statistics);
+    $this->Orders->eventManager()->on($statistics);
 
 Comme vous pouvez le voir dans le code ci-dessus, la fonction ``on()`` va
 accepter les instances de l'interface ``EventListener``. En interne, le
@@ -229,7 +229,7 @@ pour le faire::
 
     use Cake\Log\Log;
 
-    $this->Orders->eventManager()->on('Model.Order.afterPlace', function ($event) {
+    $this->Orders->eventManager()->on('Model.Orders.afterPlace', function ($event) {
         Log::write(
             'info',
             'A new order was placed with id: ' . $event->getSubject()->id
@@ -244,7 +244,7 @@ que PHP supporte::
         'inventory' => [$this->InventoryManager, 'decrement'],
     ];
     foreach ($events as $callable) {
-        $eventManager->on('Model.Order.afterPlace', $callable);
+        $eventManager->on('Model.Orders.afterPlace', $callable);
     }
 
 Quand vous travaillez avec des plugins qui ne déclenchent pas d'événement
@@ -336,7 +336,7 @@ fonction ``implementedEvents()`` pour les listeners d'événement::
     // Définir la priorité pour un callback
     $callback = [$this, 'doSomething'];
     $this->eventManager()->on(
-        'Model.Order.afterPlace',
+        'Model.Orders.afterPlace',
         ['priority' => 2],
         $callback
     );
@@ -347,7 +347,7 @@ fonction ``implementedEvents()`` pour les listeners d'événement::
         public function implementedEvents()
         {
             return [
-                'Model.Order.afterPlace' => [
+                'Model.Orders.afterPlace' => [
                     'callable' => 'updateBuyStatistic',
                     'priority' => 100
                 ],
@@ -396,7 +396,7 @@ instance de la classe :php:class:`Cake\\Event\\Event`. Regardons le dispatch
 d'un événement::
 
     // Crée un nouvel événement et le dispatch.
-    $event = new Event('Model.Order.afterPlace', $this, [
+    $event = new Event('Model.Orders.afterPlace', $this, [
         'order' => $order
     ]);
     $this->eventManager()->dispatch($event);
@@ -462,12 +462,12 @@ Pour vérifier si un événement a été stoppé, vous appelez la méthode
 
     public function place($order)
     {
-        $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
+        $event = new Event('Model.Orders.beforePlace', $this, ['order' => $order]);
         $this->eventManager()->dispatch($event);
         if ($event->isStopped()) {
             return false;
         }
-        if ($this->Order->save($order)) {
+        if ($this->Orders->save($order)) {
             // ...
         }
         // ...
@@ -507,12 +507,12 @@ callback elle-même::
     // Utiliser les résultats d'event
     public function place($order)
     {
-        $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
+        $event = new Event('Model.Orders.beforePlace', $this, ['order' => $order]);
         $this->eventManager()->dispatch($event);
         if (!empty($event->getResult()['order'])) {
             $order = $event->getResult()['order'];
         }
-        if ($this->Order->save($order)) {
+        if ($this->Orders->save($order)) {
             // ...
         }
         // ...
