@@ -1082,7 +1082,7 @@ If you use the :php:class:`Cake\\Controller\\Component\\CookieComponent` in your
 controllers, your cookies are likely encrypted. As of 3.1.7, CakePHP provides
 helper methods for interacting with encrypted cookies in your test cases::
 
-    // Set a cookie using aes and the default key.
+    // Set a cookie using AES and the default key.
     $this->cookieEncrypted('my_cookie', 'Some secret values');
 
     // Assume this action modifies the cookie.
