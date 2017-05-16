@@ -410,3 +410,259 @@ armazená-lo. As informações restauradas são mescladas em cima da configuraç
 
 Criando seus próprios mecanismos de configuração
 ================================================
+
+Como os mecanismos de configuração são uma parte extensível do CakePHP, você pode criar mecanismos de configuração em seu
+aplicativo e plugins. Os motores de configuração precisam de uma
+:php:interface:`Cake\\Core\\Configure\\ConfigEngineInterface`. Esta interface define um método de leitura, como o único
+método necessário. Se você gosta de arquivos XML, você pode criar um motor de XML de configuração simples para sua
+aplicação::
+
+    // Em src/Configure/Engine/XmlConfig.php
+    namespace App\Configure\Engine;
+
+    use Cake\Core\Configure\ConfigEngineInterface;
+    use Cake\Utility\Xml;
+
+    class XmlConfig implements ConfigEngineInterface
+    {
+
+        public function __construct($path = null)
+        {
+            if (!$path) {
+                $path = CONFIG;
+            }
+            $this->_path = $path;
+        }
+
+        public function read($key)
+        {
+            $xml = Xml::build($this->_path . $key . '.xml');
+            return Xml::toArray($xml);
+        }
+
+        public function dump($key, array $data)
+        {
+            // Code to dump data to file
+        }
+    }
+    
+No seu **config/bootstrap.php** você poderia anexar este mecanismo e usá-lo::
+
+    use App\Configure\Engine\XmlConfig;
+
+    Configure::config('xml', new XmlConfig());
+    ...
+
+    Configure::load('my_xml', 'xml');
+    
+O método ``read()`` de um mecanismo de configuração, deve retornar uma matriz das informações de configuração que o recurso
+chamado ``$key`` contém.
+
+.. php:namespace:: Cake\Core\Configure
+
+.. php:interface:: ConfigEngineInterface
+
+    Define a interface usada pelas classes que lêem dados de configuração e armazenam-no em :php:class:`Configure`
+    
+.. php:method:: read($key)
+
+    :param string $key: O nome da chave ou identificador a carregar.
+    
+    Esse método deve carregar/analisar os dados de configuração identificados pelo ``$key`` e retornar uma matriz de dados
+    no arquivo.
+
+.. php:method:: dump($key)
+
+    :param string $key: O identificador para escrever.
+    :param array $data: Os dados para despejo.
+    
+    Esse método deve despejar/armazenar os dados de configuração fornecidos para uma chave identificada pelo ``$key``.
+
+Motores de Configuração Integrados
+==================================
+
+.. php:namespace:: Cake\Core\Configure\Engine
+
+Arquivos de configuração do PHP
+-------------------------------
+
+.. php:class:: PhpConfig
+
+Permite ler arquivos de configuração que são armazenados como arquivos simples do PHP. Você pode ler arquivos da
+configuração do aplicativo ou do plugin configs diretórios usando :term:`plugin syntax`. Arquivos *devem* retornar uma
+matriz. Um exemplo de arquivo de configuração seria semelhante a::
+
+    return [
+        'debug' => 0,
+        'Security' => [
+            'salt' => 'its-secret'
+        ],
+        'App' => [
+            'namespace' => 'App'
+        ]
+    ];
+
+Carregue seu arquivo de configuração personalizado inserindo o seguinte em **config/bootstrap.php**::
+
+    Configure::load('customConfig');
+
+Arquivos de configuração Ini
+----------------------------
+
+.. php:class:: IniConfig
+
+Permite ler arquivos de configuração armazenados como arquivos .ini simples. Os arquivos ini devem ser compatíveis com a
+função ``parse_ini_file()`` do php e beneficiar das seguintes melhorias.
+
+* Os valores separados por ponto são expandidos em arrays.
+* Valores booleanos como 'on' e 'off' são convertidos em booleanos.
+
+Um exemplo de arquivo ini seria semelhante a::
+
+    debug = 0
+
+    [Security]
+    salt = its-secret
+
+    [App]
+    namespace = App
+
+O arquivo ini acima, resultaria nos mesmos dados de configuração final do exemplo PHP acima. As estruturas de matriz podem
+ser criadas através de valores separados por pontos ou por seções. As seções podem conter chaves separadas por pontos para
+um assentamento mais profundo.
+
+Arquivos de configuração do Json
+--------------------------------
+
+.. php:class:: JsonConfig
+
+Permite ler/descarregar arquivos de configuração armazenados como cadeias codificadas JSON em arquivos .json.
+
+Um exemplo de arquivo JSON seria semelhante a::
+
+    {
+        "debug": false,
+        "App": {
+            "namespace": "MyApp"
+        },
+        "Security": {
+            "salt": "its-secret"
+        }
+    }
+
+
+Bootstrapping CakePHP
+=====================
+
+Se você tiver alguma necessidade de configuração adicional, adicione-a ao arquivo **config/bootstrap.php** do seu
+aplicativo. Este arquivo é incluído antes de cada solicitação, e o comando CLI.
+
+Este arquivo é ideal para várias tarefas de bootstrapping comuns:
+
+- Definir funções de conveniência.
+- Declaração de constantes.
+- Definição da configuração do cache.
+- Definição da configuração de log.
+- Carregando inflexões personalizadas.
+- Carregando arquivos de configuração.
+
+Pode ser tentador para colocar as funções de formatação lá, a fim de usá-los em seus controladores. Como você verá nas
+seções :doc:`/controllers` e :doc:`/views` há melhores maneiras de adicionar lógica personalizada à sua aplicação.
+
+.. _application-bootstrap:
+
+
+Application::bootstrap()
+------------------------
+
+Além do arquivo **config/bootstrap.php** que deve ser usado para configurar preocupações de baixo nível do seu aplicativo,
+você também pode usar o método ``Application::bootstrap()`` para carregar/inicializar plugins, E anexar ouvintes de
+eventos globais::
+
+    // Em src/Application.php
+    namespace App;
+
+    use Cake\Core\Plugin;
+    use Cake\Http\BaseApplication;
+
+    class Application extends BaseApplication
+    {
+        public function bootstrap()
+        {
+            // Chamar o pai para `require_once` config/bootstrap.php
+            parent::bootstrap();
+
+            Plugin::load('MyPlugin', ['bootstrap' => true, 'routes' => true]);
+        }
+    }
+
+Carregar plugins/eventos em ``Application::bootstrap()`` torna :ref:`integration-testing` mais fácil à medida que os
+eventos e rotas serão re-processados em cada método de teste.
+
+Variáveis de Ambiente
+=====================
+
+Alguns dos provedores modernos de nuvem, como o Heroku, permitem definir variáveis de ambiente. Ao definir variáveis de
+ambiente, você pode configurar seu aplicativo CakePHP como um aplicativo 12factor. Seguir as instruções do aplicativo
+`12factor app instructions <http://12factor.net/>`_ é uma boa maneira de criar um app sem estado e facilitar a implantação
+do seu plicativo. Isso significa, por exemplo, que, se você precisar alterar seu banco de dados, você precisará modificar
+uma ariável DATABASE_URL na sua configuração de host sem a necessidade de alterá-la em seu código-fonte.
+
+Como você pode ver no seu **app.php**, as seguintes variáveis estão em uso:
+
+- ``DEBUG`` (``0`` ou``1``)
+- ``APP_ENCODING`` (ie UTF-8)
+- ``APP_DEFAULT_LOCALE`` (ie ``en_US``)
+- ``SECURITY_SALT``
+- ``CACHE_DEFAULT_URL`` (ie ``File:///?prefix=myapp_&serialize=true&timeout=3600&path=../tmp/cache/``)
+- ``CACHE_CAKECORE_URL`` (ie ``File:///?prefix=myapp_cake_core_&serialize=true&timeout=3600&path=../tmp/cache/persistent/``)
+- ``CACHE_CAKEMODEL_URL`` (ie ``File:///?prefix=myapp_cake_model_&serialize=true&timeout=3600&path=../tmp/cache/models/``)
+- ``EMAIL_TRANSPORT_DEFAULT_URL`` (ie ``smtp://user:password@hostname:port?tls=null&client=null&timeout=30``)
+- ``DATABASE_URL`` (ie ``mysql://user:pass@db/my_app``)
+- ``DATABASE_TEST_URL`` (ie ``mysql://user:pass@db/test_my_app``)
+- ``LOG_DEBUG_URL`` (ie ``file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=../logs/``)
+- ``LOG_ERROR_URL`` (ie ``file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=../logs/``)
+
+Como você pode ver nos exemplos, definimos algumas opções de configuração como :term:`DSN`. Este é o caso de bancos de
+dados, logs, transporte de e-mail e configurações de cache.
+
+Se as variáveis de ambiente não estiverem definidas no seu ambiente, o CakePHP usará os valores definidos no **app.php**.
+Você pode usar a biblioteca `php-dotenv library <https://github.com/josegonzalez/php-dotenv>`_ para usar variáveis de
+ambiente em um desenvolvimento local. Consulte as instruções Leiame da biblioteca para obter mais informações.
+
+Desabilitando tabelas genéricas
+===============================
+
+Embora a utilização de classes de tabela genéricas - também chamadas auto-tables - quando a criação rápida de novos
+aplicativos e modelos de cozimento é útil, a classe de tabela genérica pode tornar a depuração mais difícil em alguns
+cenários.
+
+Você pode verificar se qualquer consulta foi emitida de uma classe de tabela genérica via DebugKit através do painel SQL no
+DebugKit. Se você ainda tiver problemas para diagnosticar um problema que pode ser causado por tabelas automáticas, você
+pode lançar uma exceção quando o CakePHP implícitamente usa um ``Cake\ORM\Table`` genérico em vez de sua classe concreta
+assim:
+
+    // No seu bootstrap.php
+    use Cake\Event\EventManager;
+    use Cake\Network\Exception\InternalErrorException;
+
+    $isCakeBakeShellRunning = (PHP_SAPI === 'cli' && isset($argv[1]) && $argv[1] === 'bake');
+    if (!$isCakeBakeShellRunning) {
+        EventManager::instance()->on('Model.initialize', function($event) {
+            $subject = $event->getSubject();
+            if (get_class($subject === 'Cake\ORM\Table') {
+                $msg = sprintf(
+                    'Missing table class or incorrect alias when registering table class for database table %s.',
+                    $subject->getTable());
+                throw new InternalErrorException($msg);
+            }
+        });
+    }
+
+.. meta::
+    :title lang=pt: Configuração
+    :keywords lang=en: finished configuration,legacy database,database configuration,value pairs,default connection,optional
+    configuration,example database,php class,configuration database,default database,configuration steps,index
+    database,configuration details,class database,host localhost,inflections,key value,database connection,piece of
+    cake,basic web,auto tables,auto-tables,generic table,class
+
