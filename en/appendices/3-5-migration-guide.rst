@@ -128,3 +128,6 @@ New Features
   a paginated result set.
 * ``Cake\Core\ObjectRegistry`` now implements the ``Countable`` and
   ``IteratorAggregate`` interfaces.
+* ``Cake\Console\ConsoleOptionParser::setHelpAlias()`` was added. This method
+  allows you to set the command name used when generating help output. Defaults
+  to ``cake``.
