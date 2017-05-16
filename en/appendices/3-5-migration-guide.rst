@@ -37,6 +37,8 @@ The following is a list of methods that are deprecated and replaced with
     * ``outputAs()``
 ``Cake\Database\Connection``
     * ``logger()``
+``Cake\Datasource\TypedResultTrait``
+    * ``returnType()``
 ``Cake\Database\Log\LoggingStatement``
     * ``logger()``
 ``Cake\Datasource\ModelAwareTrait``
