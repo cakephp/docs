@@ -1028,6 +1028,11 @@ following::
 By using ``staticExpects`` you will be able to mock and manipulate static
 methods on components and models.
 
+.. warning::
+    If you are using PHPUnit 4 or 5, ``staticExpects()`` does not exist anymore.
+    Instead, you should insert the necessary data into the session with
+    ``CakeSession::write('Auth.User', $user)`` before calling the action.
+
 Testing a JSON Responding Controller
 ------------------------------------
 
