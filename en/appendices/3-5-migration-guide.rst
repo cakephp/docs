@@ -93,6 +93,8 @@ behavior that may affect your application:
 * ``SecurityComponent`` will blackhole post requests that have no request data
   now. This change helps protect actions that create records using database
   defaults alone.
+* ``Cake\ORM\Table::addBehavior()`` and ``removeBehavior()`` now return
+  ``$this`` to assist in defining table objects in a fluent fashion.
 
 New Features
 ============
