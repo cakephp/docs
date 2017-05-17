@@ -8,6 +8,10 @@ Cookie
 The CookieComponent is a wrapper around the native PHP ``setcookie()`` method. It
 makes it easier to manipulate cookies, and automatically encrypt cookie data.
 
+.. deprecated:: 3.5.0
+    You should use :ref:`encrypted-cookie-middleware` instead of
+    ``CookieComponent``.
+
 Configuring Cookies
 ===================
 

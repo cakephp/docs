@@ -27,6 +27,10 @@ component will throw a
     :php:class:`Cake\\Network\\Exception\\ForbiddenException` to
     :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
 
+.. deprecated:: 3.5.0
+    You should use :ref:`csrf-middleware` instead of
+    ``CsrfComponent``.
+
 Using the CsrfComponent
 =======================
 
