@@ -155,8 +155,7 @@ notation, or using ``get()`` and ``set()``. For example::
 
         protected function _setTitle($title)
         {
-            $this->set('slug', Text::slug($title));
-            return $title;
+            return Text::slug($title);
         }
 
     }
