@@ -489,7 +489,7 @@ Arquivos de configuração do PHP
 .. php:class:: PhpConfig
 
 Permite ler arquivos de configuração que são armazenados como arquivos simples do PHP. Você pode ler arquivos da
-configuração do aplicativo ou do plugin configs diretórios usando :term:`plugin syntax`. Arquivos *devem* retornar uma
+configuração do aplicativo ou do plugin configs diretórios usando :term:`sintaxe plugin`. Arquivos *devem* retornar uma
 matriz. Um exemplo de arquivo de configuração seria semelhante a::
 
     return [
