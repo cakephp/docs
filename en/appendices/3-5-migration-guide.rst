@@ -26,12 +26,21 @@ methods are being split into separate get and set methods.
 The following is a list of methods that are deprecated and replaced with
 ``getX()`` and ``setX()`` methods:
 
+``Cake\Cache\Cache``
+    * ``config()``
+    * ``registry()``
 ``Cake\Console\Shell``
     * ``io()``
 ``Cake\Console\ConsoleIo``
     * ``outputAs()``
 ``Cake\Console\ConsoleOutput``
     * ``outputAs()``
+``Cake\Database\Connection``
+    * ``logger()``
+``Cake\Datasource\TypedResultTrait``
+    * ``returnType()``
+``Cake\Database\Log\LoggingStatement``
+    * ``logger()``
 ``Cake\Datasource\ModelAwareTrait``
     * ``modelType()``
 ``Cake\Database\Query``
@@ -86,6 +95,8 @@ behavior that may affect your application:
 * ``SecurityComponent`` will blackhole post requests that have no request data
   now. This change helps protect actions that create records using database
   defaults alone.
+* ``Cake\ORM\Table::addBehavior()`` and ``removeBehavior()`` now return
+  ``$this`` to assist in defining table objects in a fluent fashion.
 
 New Features
 ============
@@ -121,3 +132,6 @@ New Features
   a paginated result set.
 * ``Cake\Core\ObjectRegistry`` now implements the ``Countable`` and
   ``IteratorAggregate`` interfaces.
+* ``Cake\Console\ConsoleOptionParser::setHelpAlias()`` was added. This method
+  allows you to set the command name used when generating help output. Defaults
+  to ``cake``.
