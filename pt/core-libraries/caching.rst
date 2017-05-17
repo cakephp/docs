@@ -3,6 +3,9 @@ Caching
 
 .. _cache-configuration:
 
+Configuring Cache Class
+=======================
+
 .. note::
     Atualmente, a documentação desta página não é suportada em português.
 

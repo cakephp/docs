@@ -3,6 +3,9 @@ Sessions
 
 .. _session-configuration:
 
+Session Configuration
+=====================
+
 .. note::
     Atualmente, a documentação desta página não é suportada em português.
 
