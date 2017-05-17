@@ -327,7 +327,7 @@ Você pode ter vários mecanismos anexados para Configure, cada um lendo diferen
 configuração. Você pode interagir com os motores conectados usando alguns outros métodos em Configure. Para verificar quais
 aliases de motor estão conectados você pode usar :php:meth:`Configure::configured()`::
 
-     // Obter a matriz de aliases para os motores conectados.
+    // Obter a matriz de aliases para os motores conectados.
     Configure::configured();
 
     // Verificar se um motor específico está ligado.
@@ -640,7 +640,7 @@ cenários.
 Você pode verificar se qualquer consulta foi emitida de uma classe de tabela genérica via DebugKit através do painel SQL no
 DebugKit. Se você ainda tiver problemas para diagnosticar um problema que pode ser causado por tabelas automáticas, você
 pode lançar uma exceção quando o CakePHP implícitamente usa um ``Cake\ORM\Table`` genérico em vez de sua classe concreta
-assim:
+assim::
 
     // No seu bootstrap.php
     use Cake\Event\EventManager;
