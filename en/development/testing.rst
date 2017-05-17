@@ -24,7 +24,7 @@ following in the same directory as your composer.json::
     php composer.phar require --dev phpunit/phpunit:"3.7.38"
 
 As of CakePHP 2.10.0, basic support for PHPUnit 4.x and 5.x was added.
-To upgrade PHPUnit and its dependencies for your application, execute the following:
+To upgrade PHPUnit and its dependencies for your application, execute the following::
 
     php composer.phar require --dev phpunit/phpunit:"4.* || 5.*" --update-with-dependencies
 
