@@ -1,6 +1,8 @@
 Erros & Exceções
 ################
 
+.. _error-configuration:
+
 .. note::
     Atualmente, a documentação desta página não é suportada em português.
 

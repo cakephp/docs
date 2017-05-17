@@ -1,6 +1,8 @@
 Caching
 #######
 
+.. _cache-configuration:
+
 .. note::
     Atualmente, a documentação desta página não é suportada em português.
 
