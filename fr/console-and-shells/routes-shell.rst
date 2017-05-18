@@ -35,3 +35,4 @@ Vous pouvez regarder la façon dont un :term:`tableau de routing` va générer
 l'URL en utilisant la méthode ``generate``::
 
     bin/cake routes generate controller:Bookmarks action:edit 1
+

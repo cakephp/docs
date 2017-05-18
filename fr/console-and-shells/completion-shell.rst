@@ -181,3 +181,4 @@ Exemple de rendu pour l'autocomplétion des options d'une sous-commande::
     $ bin/cake bake -<tab>
     -c            --everything  --force       --help        --plugin      -q            -t            -v
     --connection  -f            -h            -p            --prefix      --quiet       --theme       --verbose
+

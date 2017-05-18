@@ -337,7 +337,7 @@ Accéder à l'Objet Session
 =========================
 
 Vous pouvez accéder aux données session à tous les endroits où vous avez accès
-à l'objet request. Cela signifie que la session est accessible via::
+à l'objet request. Cela signifie que la session est accessible via:
 
 * Controllers
 * Views

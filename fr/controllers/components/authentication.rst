@@ -271,7 +271,7 @@ message flash est défini.
     d'authentification.
 
 Rediriger les Utilisateurs Après Connexion
--------------------------------------------
+------------------------------------------
 
 .. php:method:: redirectUrl
 

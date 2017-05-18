@@ -90,3 +90,4 @@ quand vous sauvegardez une entity, vous pouvez marquer l'attribut avec 'dirty'::
     // Marquer la colonne modified avec dirty
     // la valeur actuelle à définir lors de la mise à jour.
     $order->dirty('modified', true);
+

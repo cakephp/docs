@@ -22,3 +22,4 @@ OrmCacheShell pour retirer les metadata mis en cache::
 
     # Nettoyer une table unique
     bin/cake orm_cache clear articles
+

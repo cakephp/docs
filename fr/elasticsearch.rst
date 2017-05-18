@@ -328,3 +328,4 @@ utiliser dans vos cas de test en les incluant dans vos propriétés de test
 ``fixtures``::
 
     public $fixtures = ['app.articles'];
+

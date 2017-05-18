@@ -1526,7 +1526,7 @@ cours::
     erreurs sont retournées par défaut.
 
 Création des boutons et des éléments submit
-============================================
+===========================================
 
 .. php:method:: submit(string $caption, array $options)
 

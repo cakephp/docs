@@ -157,7 +157,7 @@ controller. Vous pouvez aussi passer la requête résultante d'une méthode find
      {
         $query = $this->Articles->find('popular')->where(['author_id' => 1]);
         $this->set('articles', $this->paginate($query));
-    }
+     }
 
 Si vous voulez paginer un model différent, vous pouvez lui fournir une requête
 l'objet table lui-même, ou son nom::
