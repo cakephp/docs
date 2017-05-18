@@ -333,7 +333,10 @@ CSRF protection can be applied to your entire application, or to specific scopes
 by applying the ``CsrfProtectionMiddleware`` to your middleware stack::
 
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
-    $options = [ ... ];
+    
+    $options = [
+        // ...
+    ];
     $csrf = new CsrfProtectionMiddleware($options);
 
     $middleware->add($csrf);
