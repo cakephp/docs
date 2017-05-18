@@ -50,7 +50,7 @@ consultar :ref:`routes-configuration`.
 .. _file-and-classname-conventions:
 
 Convenciones de nombre de clase y archivo
-============================================
+=========================================
 
 En general los nombres de los archivos coinciden con los nombres de las clases
 y siguen los estándares PSR-0 o PSR-4 para cargarse automáticamente. Los 
