@@ -417,7 +417,7 @@ Type クラスは次のメソッドを実装することが期待されます。
 
     use Cake\Database\Type;
 
-    Type::map('json', 'App\Database\Type\JsonType');
+    Type::map('json', 'Cake\Database\Type\JsonType');
 
 こうすればスキーマ情報は新しい型で上書きされ、CakePHP のデータベース層は自動的に
 JSON データを変換してクエリを作成します。

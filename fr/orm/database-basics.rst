@@ -460,7 +460,7 @@ Pendant le bootstrap de notre application, nous devrions faire ce qui suit::
 
     use Cake\Database\Type;
 
-    Type::map('json', 'App\Database\Type\JsonType');
+    Type::map('json', 'Cake\Database\Type\JsonType');
 
 Nous pouvons ensuite surcharger les données de schema reflected pour utiliser
 notre nouveau type, et la couche de base de données de CakePHP va

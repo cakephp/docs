@@ -1058,8 +1058,10 @@ belongsToMany アソシエーションのそれぞれのエンティティは、
 :ref:`adding-custom-database-types` のセクションを参照してください。 ::
 
     // config/bootstrap.php の中で
+
     use Cake\Database\Type;
-    Type::map('json', 'App\Database\Type\JsonType');
+
+    Type::map('json', 'Cake\Database\Type\JsonType');
 
     // src/Model/Table/UsersTable.php の中で
     use Cake\Database\Schema\TableSchema;
