@@ -437,7 +437,7 @@ tt {
     font-family: "Roboto Mono", "Consolas", "Monaco", monospace;
     font-size: 105%;
     line-height: normal;
-    padding: 0px 2px;
+    padding: 0 2px;
     color: #363637;
     background-color: transparent;
 }
@@ -613,7 +613,7 @@ dl.staticmethod em.property,
 dl.const em.property {
     background: #ECECE9;
     font-size: 11px;
-    padding: 2px 0px 2px 8px;
+    padding: 2px 0 2px 8px;
     border-radius: 4px;
     margin-right: 5px;
 }
