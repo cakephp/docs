@@ -20,3 +20,4 @@ Ormキャッシュシェルは単純なアプリケーションのメタデー�
 
     # 一つのテーブルだけ消去
     bin/cake orm_cache clear articles
+

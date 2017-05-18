@@ -1210,3 +1210,4 @@ stack されたすべての MapReduce 操作をを取り除く
 を呼び出すことで達成できます。 ::
 
     $query->mapReduce(null, null, true);
+

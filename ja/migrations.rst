@@ -943,3 +943,4 @@ diff 機能を動作させるために、 **.lock** ファイルは、migrate、
     $ bin/cake migrations rollback --no-lock
 
     $ bin/cake bake migration_snapshot MyMigration --no-lock
+

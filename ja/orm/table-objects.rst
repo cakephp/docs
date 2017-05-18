@@ -458,3 +458,4 @@ ORM クラスを配置する名前空間の設定
 は、次のように設定されます。 ::
 
     Cake\Core\Configure::write('App.namespace', 'App\My\Namespace');
+

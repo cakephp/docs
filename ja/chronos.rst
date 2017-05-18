@@ -251,7 +251,7 @@ Chronos は、出力した日時オブジェクトを表示するための多く
     $time->minute   // 59
     $time->second   // 58
 
-以下のプロパティにもアクセスできます。 ::
+以下のプロパティにもアクセスできます。 :
 
 - timezone
 - timezoneName

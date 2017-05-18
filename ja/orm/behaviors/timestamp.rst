@@ -75,3 +75,4 @@ Entityを保存後、フィールドが更新されます。
 
     // modified カラムを dirty としてマークして、更新時に現在の値がセットされるようにします。
     $order->dirty('modified', true);
+

@@ -214,7 +214,7 @@ hasOne アソシエーションの配列で可能なキーは以下の通りで�
     $query = $users->find('all')->contain(['Addresses']);
     foreach ($query as $user) {
         echo $user->address->street;
-   }
+    }
 
 上記は次のような SQL を実行します。 ::
 
