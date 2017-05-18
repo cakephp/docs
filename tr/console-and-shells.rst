@@ -14,7 +14,7 @@ i18n gibi özelliklerini kullanabilmek için, bazıları da işlerinizi hızland
 kullanılırlar.
 
 CakePHP Konsolu
-================
+===============
 
 Bu bölüm, CakePHP'yi komut satırından kullanmaya giriş yapmaktadır. Konsol
 araçları, cron görevleri, veya web tarayıcı tarafından ulaşılmasına gerek
@@ -76,7 +76,7 @@ siteminin farklı yollarından çağırıyorsanız bu size yardımcı olacaktır
 .. php:class:: Shell
 
 Bir Kabuk Yaratmak
-===================
+==================
 
 Haydi Konsolda kullanmak için bir kabuk yaratalaım. Bu örnek
 için basit bir Merhaba Dünya kabuğu yaratacağız. Uygulamanızın
@@ -155,7 +155,7 @@ ancak bu konuya daha sonra değineceğiz.
 istiyorsanız, ``main`` dışında bir metod ismi kullanmalısınız.
 
 Kabuklarınızda Model Kullanmak
---------------------------------
+------------------------------
 
 Kabuk araçlarında sıklıkla uygulamanızın iş mantığına ulaşmaya ihtiyaç duyacaksınız ki;
 CakePHP bu işi acayip kolaylaştırıyor. Modelleri denetçilerde ``loadModel()`` metodu ile
@@ -189,7 +189,7 @@ Yukarıdaki kabuk, bir kullanıcıyı, kullanıcı adına göre getirecek ve ver
 depolanan bilgiyi gösterecektir.
 
 Kabuk Görevleri
-================
+===============
 
 Tekrar kullanılabilir sınıflarınızı diğer kabuklar arasında paylaşmak ve
 kullanmak isteyeceğiniz zamanlar olabilir. Görevler komutları
@@ -273,7 +273,7 @@ görevleri şunu kullanarak yükleyebilirsiniz::
 .. _invoking-other-shells-from-your-shell:
 
 Kabuğunuzdan Başka Kabukları Çağırmak
-======================================
+=====================================
 
 .. php:method:: dispatchShell($args)
 
@@ -402,7 +402,7 @@ kontrol edebilirsiniz. Bu seçenekler varsayılan olarak eklenmişlerdir ve Cake
 içinde çıktıyı uyumlu olarak kontrol etmenizi sağlarlar.
 
 Çıktıyı Şekillendirmek
------------------------
+----------------------
 
 Çıktıyı şekillendirme işi, - aynen HTML gibi - çıktılarda etiketler kullanılarak
 yapılır. ConsoleOutput bu etiketleri doğru ansi kodu sıralaması ile değiştirecek,
@@ -445,7 +445,7 @@ Bir şekillendirme eklendiğine, tüm ConsoleOutput örneklerinden erişilir olu
 bu sayede stdout ve stderr nesnelerinde yeniden tanımlanmaları gerekmez.
 
 Renklendirmeyi Kapatmak
-------------------------
+-----------------------
 
 Renklendirmeler çok güzel olsalar da, renklendirmeyi kapatmak veya hep açık tutmak
 isteyeceğiniz zamanlar olabilir::
@@ -467,7 +467,7 @@ Windows sitemlerde ise, düz metin çıktısı, ``ANSICON`` çevre değişkeni t
 varsayılan durumdadır.
 
 Kanca metodları
-================
+===============
 
 .. php:method:: initialize()
 
@@ -568,7 +568,7 @@ hali hazırdaki değeri döndürecektir::
     $parser->epilog();
 
 Argümanları Eklemek
---------------------
+-------------------
 
 .. php:method:: addArgument($name, $params = [])
 
@@ -718,7 +718,7 @@ Boole seçenekleri her zaman ``true`` veya ``false`` olacakları için, ek
 kontrol metodlarını ihmal etmeniz mümkündür.
 
 Altkomutları Eklemek
----------------------
+--------------------
 
 .. php:method:: addSubcommand($name, $options = [])
 
@@ -762,7 +762,7 @@ Bir altkomutu tanımlarken şu seçenekleri kullanabilirsiniz:
 Altkomut eklemek, akıcı metod zincirinin bir parçası olarak yapılabilir.
 
 Bir Diziden ConsoleOptionParser Oluşturmak
---------------------------------------------
+------------------------------------------
 
 .. php:method:: buildFromArray($spec)
 
@@ -812,7 +812,7 @@ yaratmak için buildFromArray metodunu tek başına da kullanabilirsiniz::
     }
 
 ConsoleOptionParsers (KonsolSeçenekAyrıştırıcıları) Birleştirmek
------------------------------------------------------------------
+----------------------------------------------------------------
 
 .. php:method:: merge($spec)
 

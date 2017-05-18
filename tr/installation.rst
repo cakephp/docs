@@ -1,5 +1,5 @@
 Kurulum
-########
+#######
 
 CakePHP basittir ve kurulum çok kolaydır. İhtiyacınız olan en basit şeyler
 bir web sunucusu ve CakePHP'nin bir kopyasıdır, o kadar! Bu bölüm Apache
@@ -31,7 +31,7 @@ düşünüyoruz. CakePHP bir çok veritabanını desteklemektedir.
     olduğundan emin olmalısınız.
 
 CakePHP'yi kurmak
-===================
+=================
 
 CakePHP resmi olarak desteklenen kurulum aracı olarak PHP 5.3+
 için bağımlılık yönetici aracı olan `Composer <http://getcomposer.org>`
@@ -68,7 +68,7 @@ emin olun.
 ışıklarını görün. (Tarayıcıyı açtığınızda anlayacaksınız.)
 
 Son CakePHP Değişiklikleri ile Güncel Kalmak
---------------------------------------------------
+--------------------------------------------
 
 Eğer son CakePHP değişiklikleri ile güncel kalmak istiyorsanız,
 uygulamanızın ``composer.json`` aşağıdaki kodu ekleyebilirsiniz::

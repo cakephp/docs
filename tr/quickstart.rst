@@ -1,5 +1,5 @@
 Hızlı Başlangıç Rehberi
-************************
+***********************
 
 CakePHP'yi tecrübe etmenin ve öğrenmenin en iyi yolu, oturup bişiler yapmaktır.
 Başlangıç için, basit bir yerimi uygulaması yapacağız.
