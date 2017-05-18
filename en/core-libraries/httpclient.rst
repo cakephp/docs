@@ -144,7 +144,7 @@ you can do the following::
 .. _http_client_request_options:
 
 Request Method Options
-=======================
+======================
 
 Each HTTP method takes an ``$options`` parameter which is used to provide
 addition request information.  The following keys can be used in ``$options``:

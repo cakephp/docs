@@ -19,3 +19,4 @@ Changing the Port and Document Root
 You can customize the port and document root using options::
 
     $ bin/cake server --port 8080 --document_root path/to/app
+

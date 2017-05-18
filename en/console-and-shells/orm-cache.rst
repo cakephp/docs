@@ -22,3 +22,4 @@ cached metadata as well::
 
     # Clear a single table
     bin/cake orm_cache clear articles
+

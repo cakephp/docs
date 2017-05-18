@@ -792,7 +792,7 @@ In your ``tearDown()`` method be sure to remove the mock with::
 .. _integration-testing:
 
 Controller Integration Testing
-===============================
+==============================
 
 While you can test controller classes in a similar fashion to Helpers, Models,
 and Components, CakePHP offers a specialized ``IntegrationTestCase`` class.

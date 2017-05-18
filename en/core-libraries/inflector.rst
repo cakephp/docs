@@ -16,7 +16,7 @@ You can try out the inflections online at `inflector.cakephp.org
 .. _inflector-methods-summary:
 
 Summary of Inflector Methods and Their Output
-===================================================
+=============================================
 
 Quick summary of the Inflector built-in methods and the results they output
 when provided a multi-word argument:

@@ -159,7 +159,7 @@ number of megabytes to increase the memory limit by when a fatal error is
 encountered. This allows breathing room to complete logging or error handling.
 
 Migration Steps
-================
+===============
 
 Updating setToStringFormat()
 ----------------------------

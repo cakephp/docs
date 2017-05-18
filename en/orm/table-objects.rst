@@ -228,7 +228,7 @@ In previous versions of CakePHP there was an ``afterFind`` callback, this has
 been replaced with the :ref:`map-reduce` features and entity constructors.
 
 buildValidator
----------------
+--------------
 
 .. php:method:: buildValidator(Event $event, Validator $validator, $name)
 
@@ -244,7 +244,7 @@ The ``Model.buildRules`` event is fired after a rules instance has been
 created and after the table's ``buildRules()`` method has been called.
 
 beforeRules
---------------
+-----------
 
 .. php:method:: beforeRules(Event $event, EntityInterface $entity, ArrayObject $options, $operation)
 
@@ -253,7 +253,7 @@ stopping this event, you can halt the rules checking and set the result
 of applying rules.
 
 afterRules
---------------
+----------
 
 .. php:method:: afterRules(Event $event, EntityInterface $entity, ArrayObject $options, $result, $operation)
 
@@ -470,3 +470,4 @@ set a namespace with the ``Cake\Core\Configure::write`` method. As an example::
 Would be configured with::
 
     Cake\Core\Configure::write('App.namespace', 'App\My\Namespace');
+

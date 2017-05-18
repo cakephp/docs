@@ -201,7 +201,7 @@ see :ref:`exposing-virtual-properties`.
 
 
 Checking if an Entity Has Been Modified
-========================================
+=======================================
 
 .. php:method:: dirty($field = null, $dirty = null)
 

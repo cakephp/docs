@@ -262,7 +262,7 @@ production modes on the fly. This is especially handy for JSON interactions
 where debugging information can cause parsing problems.
 
 Reading Configuration Data
----------------------------
+--------------------------
 
 .. php:staticmethod:: read($key = null)
 

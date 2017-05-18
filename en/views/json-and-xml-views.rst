@@ -226,3 +226,4 @@ mappings in your controller::
             $this->set('_serialize', ['videos']);
         }
     }
+

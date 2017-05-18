@@ -54,7 +54,7 @@ various features. The ``add()`` method allows you to add new rules to
 a validator. You can either add rules individually or in groups as seen above.
 
 Requiring Field Presence
--------------------------
+------------------------
 
 The ``requirePresence()`` method requires the field to be present in any
 validated array. If the field is absent, validation will fail. The

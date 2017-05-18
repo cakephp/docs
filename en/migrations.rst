@@ -980,3 +980,4 @@ for instance when deploying on your production environment, by using the
     $ bin/cake migrations rollback --no-lock
 
     $ bin/cake bake migration_snapshot MyMigration --no-lock
+
