@@ -325,3 +325,4 @@ que suas *fixtures* estejam criadas, você pode usá-las nos seus casos de teste
 ao incluí-las nas propriedades dos seus ``fixtures`` de testes::
 
     public $fixtures = ['app.articles'];
+

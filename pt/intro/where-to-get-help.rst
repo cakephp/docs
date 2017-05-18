@@ -11,7 +11,7 @@ provê links para ferramentas comunmente utilizadas por desenvolvedores,
 screencasts, oportunidades de doação e downloads.
 
 O Cookbook
-===========
+==========
 
 `https://book.cakephp.org <https://book.cakephp.org>`_
 
