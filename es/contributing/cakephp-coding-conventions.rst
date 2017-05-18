@@ -597,7 +597,7 @@ por defecto puedes asegurarte de que las claves necesarias están definidas::
     function doWork(array $array)
     {
         // Hacer merge de valor por defecto para eliminar la necesidad
-		// de comprobaciones empty
+        // de comprobaciones empty
         $array += [
             'key' => null,
         ];

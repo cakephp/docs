@@ -178,7 +178,7 @@ Listas
 El etiquetado de listas es muy parecido a *Markdown*. Las listas no ordenadas se
 indican empezando una línea con un asterisco y un espacio.
 
-Las listas enumeradas pueden crearse con enumeraciones o ``#`` para auto enumeración::
+Las listas enumeradas pueden crearse con enumeraciones o ``#`` para auto enumeración:
 
     * Esto es una viñeta
 	* Esto también, pero esta línea
@@ -460,7 +460,7 @@ Todas las admonestaciones se escriben igual::
     .. note::
 
         Anidado y precedido por una línea en blanco.
-		Igual que un párafo.
+    	Igual que un párafo.
 
     Este texto no es parte de la nota.
 
