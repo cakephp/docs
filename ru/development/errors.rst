@@ -15,7 +15,7 @@ Error & Exception Handling
 .. _error-configuration:
 
 Error & Exception Configuration
-================================
+===============================
 
 .. _built-in-exceptions:
 
