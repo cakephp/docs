@@ -531,7 +531,7 @@ empty()/isset() の使用に注意
 
     function manipulate($var)
     {
-    // 推奨しません。 $var はすでにスコープ内で定義されています。
+        // 推奨しません。 $var はすでにスコープ内で定義されています。
         if (empty($var)) {
             // ...
         }
@@ -570,12 +570,12 @@ empty()/isset() の使用に注意
 
     function doWork(array $array)
     {
-    // empty チェックを避けるためにデフォルト値をマージ
+        // empty チェックを避けるためにデフォルト値をマージ
         $array += [
             'key' => null,
         ];
 
-    // 推奨しません。キーはすでにセットされています。
+        // 推奨しません。キーはすでにセットされています。
         if (isset($array['key'])) {
             // ...
         }
