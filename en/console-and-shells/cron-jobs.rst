@@ -5,7 +5,7 @@ A common thing to do with a shell is making it run as a cronjob to
 clean up the database once in a while or send newsletters. This is
 trivial to setup, for example::
 
-    */5  *    *    *    *  cd /full/path/to/root && bin/cake myshell myparam
+      */5  *    *    *    *  cd /full/path/to/root && bin/cake myshell myparam
     # *    *    *    *    *  command to execute
     # │    │    │    │    │
     # │    │    │    │    │
