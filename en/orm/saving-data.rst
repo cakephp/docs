@@ -1071,7 +1071,7 @@ column Types::
 
     // In config/bootstrap.php
     use Cake\Database\Type;
-    Type::map('json', 'App\Database\Type\JsonType');
+    Type::map('json', 'Cake\Database\Type\JsonType');
 
     // In src/Model/Table/UsersTable.php
     use Cake\Database\Schema\TableSchema;
