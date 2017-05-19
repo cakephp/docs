@@ -228,3 +228,4 @@ gérer les mappings de vue dans votre controller::
             $this->set('_serialize', ['videos']);
         }
     }
+

@@ -316,3 +316,4 @@ fixtures are created you can use them in your test cases by including them in
 your test's ``fixtures`` properties::
 
     public $fixtures = ['app.articles'];
+

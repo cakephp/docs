@@ -645,3 +645,4 @@ CakePHP の ORM は検証に二層のアプローチを使う点がユニーク�
 
     $userEntity = $usersTable->newEntity(['email' => 'not an email!!']);
     $userEntity->errors('email'); // 無効なメールアドレスです
+

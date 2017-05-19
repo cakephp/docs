@@ -387,7 +387,7 @@ Por favor visite a `Launchpad languages page
 dos números de formulário de plurais para cada idioma.
 
 Criar seus próprios Tradutores
-================================
+==============================
 
 Se você precisar a divergir convenções do CakePHP sobre onde e como as mensagens
 de tradução são armazenadas, você pode criar seu próprio carregador de mensagem
@@ -436,3 +436,4 @@ pode usar **.po**, mas carregado de outro local::
         'fr_FR',
         new Loader('filename', 'folder/sub_folder', 'po')
     );
+

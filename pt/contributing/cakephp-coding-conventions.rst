@@ -449,7 +449,7 @@ Convenção de nomenclatura
 =========================
 
 Funções
----------
+-------
 
 Escreva todas as funções no padrão "camelBack", isto é, com a letra da primeira palavra
 minúscula e a primeira letra das demais palavras maiúsculas::

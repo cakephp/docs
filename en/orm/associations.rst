@@ -215,7 +215,7 @@ contain the Address record if it exists::
     $query = $users->find('all')->contain(['Addresses']);
     foreach ($query as $user) {
         echo $user->address->street;
-   }
+    }
 
 The above would emit SQL that is similar to::
 

@@ -66,8 +66,8 @@ PaginatorHelper テンプレート
 
     // 現在のテンプレート値を読み込みます
     $result = $this->Paginator->getTemplates('number');
-    // 3.4 より前
-    $result = $this->Paginator->templates('number');
+    // 3.4 より前
+    $result = $this->Paginator->templates('number');
 
     // テンプレートを変更します
     $this->Paginator->setTemplates([

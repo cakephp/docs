@@ -19,7 +19,7 @@ Http Client
 .. _http_client_request_options:
 
 Request Method Options
-=======================
+======================
 
 .. _http_client_scoped_client:
 

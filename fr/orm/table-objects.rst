@@ -234,7 +234,7 @@ ceci a été remplacé par les fonctionnalités de :ref:`map-reduce` et les
 constructeurs d'entity.
 
 buildValidator
----------------
+--------------
 
 .. php:method:: buildValidator(Event $event, Validator $validator, $name)
 
@@ -251,7 +251,7 @@ L'event ``Model.buildRules`` est déclenché après qu'une instance de règles a
 créée et après que la méthode ``buildRules()`` de la table a été appelée.
 
 beforeRules
---------------
+-----------
 
 .. php:method:: beforeRules(Event $event, EntityInterface $entity, ArrayObject $options, $operation)
 
@@ -260,7 +260,7 @@ appliquées à une entity. En stoppant cet event, vous pouvez retourner la valeu
 finale de l'opération de vérification des règles.
 
 afterRules
---------------
+----------
 
 .. php:method:: afterRules(Event $event, EntityInterface $entity, ArrayObject $options, $result, $operation)
 
@@ -490,3 +490,4 @@ Par exemple::
 Serait configuré avec::
 
     Cake\Core\Configure::write('App.namespace', 'App\My\Namespace');
+

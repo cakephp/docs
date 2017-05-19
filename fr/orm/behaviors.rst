@@ -21,7 +21,7 @@ Utiliser les Behaviors
     :end-before: end-behaviors
 
 Behaviors du Cœur
-==================
+=================
 
 .. toctree::
     :maxdepth: 1
@@ -336,3 +336,4 @@ lequel nous souhaitons que Timestamp réponde::
             }
         }
     }
+

@@ -48,7 +48,7 @@ Adding Custom Types
 .. _mapping-custom-datatypes-to-sql-expressions:
 
 Mapping Custom Datatypes to SQL Expressions
---------------------------------------------
+-------------------------------------------
 
 .. _immutable-datetime-mapping:
 

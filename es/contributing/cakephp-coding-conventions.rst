@@ -135,7 +135,7 @@ Las estructuras de control son por ejemplo "``if``", "``for``", "``foreach``",
     }
 
 Operador ternario
-------------------
+-----------------
 
 Los operadores ternarios están permitidos cuando toda su declaración cabe en una
 sola línea. Operadores más largos deberán ir dentro dentro de una declaración
@@ -278,7 +278,7 @@ tipo primitivo::
     }
 
 Funciones anónimas (``Closures``)
------------------------------------
+---------------------------------
 
 Para definir funciones anónimas sigue la guía de estilo de código 
 `PSR-2 <http://www.php-fig.org/psr/psr-2/>`_ , donde se declaran con un espacio
@@ -546,7 +546,7 @@ por guiones bajos, por ejemplo::
     define('NOMBRE_DE_CONSTANTE_LARGO', 2);
 
 Cuidado al usar empty()/isset()
-===================================
+===============================
 
 Aunque ``empty()`` es una función sencilla de utilizar, puede enmascarar errores
 y causar efectos accidentales cuando se usa con ``'0'`` y ``0``. Cuando
@@ -597,7 +597,7 @@ por defecto puedes asegurarte de que las claves necesarias están definidas::
     function doWork(array $array)
     {
         // Hacer merge de valor por defecto para eliminar la necesidad
-		// de comprobaciones empty
+        // de comprobaciones empty
         $array += [
             'key' => null,
         ];

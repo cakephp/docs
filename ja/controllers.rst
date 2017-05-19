@@ -265,7 +265,7 @@ AJAX 呼び出しではとても有用です。 ::
             $this->render('Users.UserDetails/custom_file');
         }
     }
-    
+
 これは **plugins/Users/src/Template/UserDetails/custom_file.ctp** を描画します。
 
 他のページへの転送

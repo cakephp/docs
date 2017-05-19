@@ -239,3 +239,4 @@ habituelle de la classe ressemble à::
 
     // Récupère une table unique (instance de Schema\TableSchema)
     $schemaable = $collection->describe('posts');
+

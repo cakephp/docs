@@ -522,7 +522,7 @@ votre sortie.
 ConsoleOutput remplacera ces tags avec la bonne séquence de code ansi, ou
 supprimera les tags si vous êtes sur une console qui ne supporte pas les
 codes ansi. Il y a plusieurs styles intégrés, et vous pouvez en créer plus.
-Ceux intégrés sont::
+Ceux intégrés sont:
 
 * ``error`` Messages d'Erreur. Texte rouge.
 * ``warning`` Messages d'avertissement. Texte jaune.

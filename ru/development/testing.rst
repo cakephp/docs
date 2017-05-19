@@ -9,7 +9,7 @@ Fixtures
 .. _integration-testing:
 
 Controller Integration Testing
-===============================
+==============================
 
 .. _testing-authentication:
 

@@ -296,7 +296,7 @@ Par exemple::
             $this->render('Users.UserDetails/custom_file');
         }
     }
-    
+
 Cela rendrait la vue **plugins/Users/src/Template/UserDetails/custom_file.ctp**
 
 Rediriger vers d'Autres Pages

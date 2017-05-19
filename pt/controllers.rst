@@ -273,7 +273,7 @@ Por exemplo::
             $this->render('Users.UserDetails/custom_file');
         }
     }
-    
+
 Isto renderizaria **plugins/Users/src/Template/UserDetails/custom_file.ctp**
 
 Redirecionando para outras páginas

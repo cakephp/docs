@@ -307,3 +307,4 @@ ElasticSearch プラグインは、シームレスなテストスイートの統
 あなたのテストケースで使用することができます。 ::
 
     public $fixtures = ['app.articles'];
+

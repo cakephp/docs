@@ -447,7 +447,7 @@ your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
 .. _mapping-custom-datatypes-to-sql-expressions:
 
 Mapping Custom Datatypes to SQL Expressions
---------------------------------------------
+-------------------------------------------
 
 .. versionadded:: 3.3.0
     Support for mapping custom data types to SQL expressions was added in 3.3.0.
@@ -651,7 +651,7 @@ will first execute it and then start iterating over the result set::
     ``all()`` to get the result set for SELECT queries.
 
 Using Transactions
--------------------
+------------------
 
 The connection objects provide you a few simple ways you do database
 transactions. The most basic way of doing transactions is through the ``begin()``,

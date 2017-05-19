@@ -19,3 +19,4 @@ Server Shell
 オプションを使用してポートおよびドキュメントルートをカスタマイズすることができます。 ::
 
     $ bin/cake server --port 8080 --document_root path/to/app
+

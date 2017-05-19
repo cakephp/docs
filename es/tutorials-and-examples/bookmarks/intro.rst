@@ -21,7 +21,7 @@ Deberías tener instalado PHP |minphpversion| (CLI) o superior. La versión PHP 
 Empecemos!
 
 Instalar CakePHP
-=================
+================
 
 La forma más sencilla de instalar CakePHP es utilizando Composer, una manera sencilla de instalar CakePHP desde tu terminal o prompt de línea de comandos.
 
@@ -67,7 +67,7 @@ Sin importar como hayas descargado e instalado CakePHP, una vez hayas finalizado
 Ahora podría ser un buen momento para que aprendas un poco sobre como funciona la estructura de directorios de CakePHP: :doc:`/intro/cakephp-folder-structure`.
 
 Comprobar la instalación
-=========================
+========================
 
 Podemos comprobar rápidamente que nuestra instalación ha sido correcta accediendo a la página principal que se crea por defecto. 
 
@@ -82,7 +82,7 @@ Pero antes necesitarás inicializar el servidor de desarrollo::
 Esto arrancará el servidor integrado en el puerto 8765. Accede a  **http://localhost:8765** a través de tu navegador para ver la página de bienvenida. Todos los items deberán estar marcados como correctos para que CakePHP pueda conectarse a tu base de datos. Si no, puede que necesites instalar extensiones adicionales de PHP, o dar permisos de directorio.
 
 Crear la base de datos
-=======================
+======================
 
 Continuamos, creemos ahora la base de datos para nuestra aplicación de favoritos.
 
@@ -132,7 +132,7 @@ Los nombres de las tablas y columnas que hemos utilizado no son aleatorios. Util
 CakePHP es lo suficientemente flexible para acomodarse incluso a esquemas inconsistentes de bases de datos heredados, pero siguiendo las convenciones ahorrarás tiempo.
 
 Configuración de la base de datos
-==================================
+=================================
 
 Siguiente, indiquémosle a CakePHP donde está nuestra base de datos y como conectarse a ella. Para la mayoría de las veces esta será la primera y última vez que necesitarás configurar algo.
 
@@ -310,7 +310,7 @@ En **src/Controller/BookmarksController.php** añade::
 Para acceder a otras partes del request consulta :ref:`cake-request`.
 
 Crear el método finder
------------------------
+----------------------
 
 En CakePHP nos gusta mantener las acciones de los controladores sencillas y poner la mayoría de la lógica de la aplicación en los modelos. Si visitas ahora la URL **/bookmarks/tagged** verás un error de que el método ``findTagged()`` no ha sido implementado todavía, asi que hagámoslo.
 
@@ -346,7 +346,7 @@ Los métodos finder siempre reciben un objeto :doc:`/orm/query-builder` y un arr
 En nuestro método finder sacamos provecho de los métodos ``distinct()`` y ``matching()`` que nos permiten encontrar distintos ('distincts') bookmarks que tienen un tag coincidente (matching). El método ``matching()`` acepta una  `función anónima <http://php.net/manual/es/functions.anonymous.php>`_ que recibe un generador de consultas. Dentro del callback usaremos este generador para definir las condiciones que filtrarán bookmarks que tienen las etiquetas (tags) especificadas.
 
 Crear la vista
----------------
+--------------
 
 Ahora si visitas la URL **/bookmarks/tagged**, CakePHP mostrará un error advirtiéndote de que no has creado un archivo de vista.
 

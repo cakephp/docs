@@ -649,3 +649,4 @@ The same result can be expected when using ``newEntity()`` or
 
     $userEntity = $usersTable->newEntity(['email' => 'not an email!!']);
     $userEntity->errors('email'); // Invalid email
+

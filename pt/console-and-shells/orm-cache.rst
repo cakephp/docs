@@ -19,3 +19,4 @@ Além de criar dados em cache, você pode usar o OrmCacheShell para remover meta
 
     # Limpar uma única tabela de metadados
     bin/cake orm_cache clear <<Nome>>
+

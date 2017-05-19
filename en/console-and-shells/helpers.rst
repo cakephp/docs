@@ -122,3 +122,4 @@ progress bar as necessary::
 
     $progress->increment(4);
     $progress->draw();
+

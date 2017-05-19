@@ -35,3 +35,4 @@ URL 生成のテスト
 生成するかを確認できます。 ::
 
     bin/cake routes generate controller:Bookmarks action:edit 1
+

@@ -245,7 +245,7 @@ Localized プラグインは、バリデーションのための国の２文字�
         'rule' => function ($value, $context) use ($extra) {
             // true/falseを返すカスタムロジックを記入
         },
-	'message' => 'タイトルが正しくありません'
+        'message' => 'タイトルが正しくありません'
     ]);
 
     // カスタムプロバイダーからのルールを利用する
