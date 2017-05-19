@@ -518,7 +518,7 @@ a connection::
             'password' => 'super_secret',
             'host' => 'localhost',
             'database' => 'cakephp',
-            'quoteIdentifiers' => true
+            'quoteIdentifiers' => true,
         ]
     ],
 
