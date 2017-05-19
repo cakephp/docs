@@ -378,3 +378,4 @@ configuração::
      // Usando um método Construtor
     $transport = new DebugTransport();
     $email->transport($transport);
+

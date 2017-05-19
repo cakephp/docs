@@ -131,7 +131,7 @@ You can then read those values out from inside your handler::
 
     'Session' => [
         'handler' => [
-            'engine' => 'Database',
+            'engine' => 'DatabaseSession',
             'model' => 'CustomSessions'
         ]
     ]
@@ -171,7 +171,7 @@ You can also use your own ``Table`` class to handle the saving of the sessions::
     'Session' => [
         'defaults' => 'database',
         'handler' => [
-            'engine' => 'Database',
+            'engine' => 'DatabaseSession',
             'model' => 'CustomSessions'
         ]
     ]

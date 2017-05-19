@@ -478,21 +478,21 @@ usando algo parecido com::
     {
         public function viewActive()
         {
-            $this->set('title', 'Visualizar Usuários Ativos');
+            $this->set('title', 'Visualizar Usuários Ativos');
             $this->viewBuilder()->setLayout('default_small_ad');
 
-            // Antes da versão 3.4
+            // Antes da versão 3.4
             $this->viewBuilder()->layout('default_small_ad');
 
-            // Antes da versão 3.1
-            $this->layout = 'default_small_ad';
+            // Antes da versão 3.1
+            $this->layout = 'default_small_ad';
         }
 
         public function viewImage()
         {
             $this->viewBuilder()->setLayout('image');
 
-            // Exibe a imagem do usuário
+            // Exibe a imagem do usuário
         }
     }
 
@@ -516,7 +516,7 @@ Por exemplo, para usar o layout contact do plugin Contacts::
         public function view_active()
         {
             $this->viewBuilder()->layout('Contacts.contact');
-            // ou o seguinte para a versão anterior a 3.1
+            // ou o seguinte para a versão anterior a 3.1
             $this->layout = 'Contacts.contact';
         }
     }
@@ -549,7 +549,7 @@ Passando variáveis para um *Element*
 Você pode passar dados para um *element* através do segundo parâmetro do método *element*::
 
     echo $this->element('helpbox', [
-        "helptext" => "Ah, Este texto é muito útil."
+        "helptext" => "Ah, Este texto é muito útil."
     ]);
 
 Dentro do arquivo do *element*, todas as variáveis estarão disponíveis como membros de um 
@@ -558,17 +558,17 @@ funciona com arquivos de template). No exemplo a seguir, no arquivo
 **src/Template/Element/helpbox.ctp** pode usar a variável ``$helptext``::
 
     // Dentro do arquivo src/Template/Element/helpbox.ctp
-    echo $helptext; // Resulta em "Ah, Esse texto  muito útil."
+    echo $helptext; // Resulta em "Ah, Esse texto  muito útil."
 
 O método ``View::element()`` também suporta opções para o elemento.
 As opções suportadas são 'cache' e 'callbacks'. Um exemplo::
 
     echo $this->element('helpbox', [
-            "helptext" => "Isso é passado para o *element* como $helptext",
+            "helptext" => "Isso é passado para o *element* como $helptext",
             "foobar" => "Isso é passado para o *element* como $foobar",
         ],
         [
-            // Usa a configuração de cache "long_view"
+            // Usa a configuração de cache "long_view"
             "cache" => "long_view",
             // Define como true para ter before / afterRender chamado para o elemento
             "callbacks" => true
@@ -714,7 +714,7 @@ Criando suas próprias Classes View
 
 Talvez você precise criar classes *view* personalizadas para habilitar novos tipos de visualizações de dados ou
 adicione uma lógica de exibição de visualização personalizada adicional à sua aplicação. Como a maioria dos
-Componentes do CakePHP, as classes view têm algumas convenções::
+Componentes do CakePHP, as classes view têm algumas convenções:
 
 * Arquivos das Classes View devem ser colocados em **src/View**. Por exemplo: **src/View/PdfView.php**
 * Classes View devem ter o sufixo ``View``. Por Exemplo: ``PdfView``.

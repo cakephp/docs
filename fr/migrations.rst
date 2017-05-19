@@ -1027,3 +1027,4 @@ en utilisant l'option ``--no-lock`` sur les commandes mentionnées ci-dessus::
     $ bin/cake migrations rollback --no-lock
 
     $ bin/cake bake migration_snapshot MyMigration --no-lock
+

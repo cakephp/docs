@@ -1,13 +1,14 @@
 Cache Shell
 ===========
 
-.. note::
-    A documentação não é atualmente suportada pela lingua portuguesa nesta
-    página.
+Para ajudá-lo a gerenciar melhor os dados armazenados em cache a partir de um ambiente CLI, um comando shell está disponível
+para limpar os dados em cache que seu aplicativo possui::
 
-    Por favor, sinta-se a vontade para nos enviar um pull request no
-    `Github <https://github.com/cakephp/docs>`_ ou use o botão
-    **Improve This Doc** para propor suas mudanças diretamente.
-
-    Você pode referenciar-se à versão inglesa no menu de seleção superior
-    para obter informações sobre o tópico desta página.
+    // Limpar uma configuração de cache
+    bin/cake cache clear <configname>
+    
+    // Limpar todas as configurações de cache
+    bin/cake cache clear_all
+    
+.. versionadded:: 3.3.0
+    Os comandos shell do cache foram adicionados na versão 3.3.0

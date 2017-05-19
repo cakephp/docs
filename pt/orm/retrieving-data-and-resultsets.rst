@@ -1233,3 +1233,4 @@ calling the method with both parameters as null and the third parameter
 (overwrite) as ``true``::
 
     $query->mapReduce(null, null, true);
+

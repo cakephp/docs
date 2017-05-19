@@ -893,11 +893,11 @@ suivantes pour créer des conditions:
 - ``exists()`` Crée une condition en utilisant ``EXISTS``::
 
     $subquery = $cities->find()
-		->select(['id'])
+    	->select(['id'])
         ->where(function ($exp, $q) {
-			return $exp->equalFields('countries.id', 'cities.country_id');
+    		return $exp->equalFields('countries.id', 'cities.country_id');
         })
-		->andWhere(['population >', 5000000]);
+    	->andWhere(['population >', 5000000]);
 
     $query = $countries->find()
         ->where(function ($exp, $q) use ($subquery) {
@@ -908,11 +908,11 @@ suivantes pour créer des conditions:
 - ``notExists()`` Crée une condition négative en utilisant ``EXISTS``::
 
     $subquery = $cities->find()
-		->select(['id'])
+    	->select(['id'])
         ->where(function ($exp, $q) {
-			return $exp->equalFields('countries.id', 'cities.country_id');
+    		return $exp->equalFields('countries.id', 'cities.country_id');
         })
-		->andWhere(['population >', 5000000]);
+    	->andWhere(['population >', 5000000]);
 
     $query = $countries->find()
         ->where(function ($exp, $q) use ($subquery) {

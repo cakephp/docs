@@ -301,3 +301,4 @@ retournée relativement à la date fixée::
 
     $time = new Chronos(); // 1975-12-25 00:00:00
     $time = new Chronos('1 hour ago'); // 1975-12-24 23:00:00
+

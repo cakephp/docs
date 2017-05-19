@@ -10,7 +10,7 @@ application.
 .. _error-configuration:
 
 Error & Exception Configuration
-================================
+===============================
 
 Error configuration is done inside your application's **config/app.php**
 file. By default CakePHP uses the ``ErrorHandler`` or ``ConsoleErrorHandler``

@@ -116,7 +116,6 @@
 .offline-download a {
     padding: 15px 30px;
     border-radius: 8px;
-    font-weight: 600;
     font-size: 15px;
     display: inline-block;
     text-align: center;
@@ -212,7 +211,6 @@ dl.docutils {
 }
 .docutils dt {
     font-weight: bold;
-    font-size: 14px;
     font-size: 1.4rem;
     margin-bottom: 0.5em;
 }
@@ -220,7 +218,6 @@ dl.docutils {
     border-left: 2px solid #ccc;
     margin: 0 0 1em 1em;
     padding: 0 0 .5em .5em;
-    font-size: 14px;
     font-size: 1.4rem;
 }
 .docutils.internal-toc td {
@@ -336,7 +333,7 @@ tt {
     font-family: "Roboto Mono", "Consolas", "Monaco", monospace;
     font-size: 105%;
     line-height: normal;
-    padding: 0px 2px;
+    padding: 0 2px;
     color: #363637;
     background-color: transparent;
 }
@@ -410,7 +407,7 @@ dl tt {
 .versionadded:before,
 .versionchanged:before {
     display: block;
-    font-family: 'cake_dingbatsregular';
+    font-family: 'cake_dingbatsregular', sans-serif;
     font-size: 35px;
     line-height: 35px;
     position: absolute;
@@ -513,7 +510,7 @@ dl.staticmethod em.property,
 dl.const em.property {
     background: #ECECE9;
     font-size: 11px;
-    padding: 2px 0px 2px 8px;
+    padding: 2px 0 2px 8px;
     border-radius: 4px;
     margin-right: 5px;
 }
@@ -607,16 +604,15 @@ dt tt {
 }
 .field-list .field-name,
 .field-list .field-body {
-    font-size: 15px;
     font-size: 1.5rem;
-    font-family: Raleway, Helvetica, Arial;
+    font-family: Raleway, Helvetica, Arial, sans-serif;
     padding: 3px 0.5em 0;
 }
 .field-list ul {
     list-style: none;
     margin-left: 0;
 }
-.field-list
+.field-list,
 .field-list strong {
     font-size: 110%;
     font-family: "Roboto Mono", "Consolas", "Monaco", monospace;
@@ -627,7 +623,7 @@ dt tt {
 /* -- glossary -- */
 .glossary dt {
     font-size: 16px;
-    font-family: Raleway, Helvetica, Arial;
+    font-family: Raleway, Helvetica, Arial, sans-serif;;
     color: #D33C44;
 }
 .glossary dd {

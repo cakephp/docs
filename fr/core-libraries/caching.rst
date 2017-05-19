@@ -211,7 +211,7 @@ connections réseau lors de l'utilisation de Memcached::
     ['article-first-post' => true, 'article-first-post-comments' => true]
 
 Lire un Cache Distribué
-------------------------
+-----------------------
 
 .. php:staticmethod:: remember($key, $callable, $config = 'default')
 

@@ -69,7 +69,7 @@ token.
     each of your forms.
 
 CSRF Protection and AJAX Requests
-==================================
+=================================
 
 In addition to request data parameters, CSRF tokens can be submitted through
 a special ``X-CSRF-Token`` header. Using a header often makes it easier to

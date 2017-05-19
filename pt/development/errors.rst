@@ -1,6 +1,11 @@
 Erros & Exceções
 ################
 
+.. _error-configuration:
+
+Error & Exception Configuration
+===============================
+
 .. note::
     Atualmente, a documentação desta página não é suportada em português.
 

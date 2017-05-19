@@ -1348,3 +1348,4 @@ que les opérations ``mapReduce`` ne soient pas exécutées du tout. Ceci peut
 paramètre (overwrite) à ``true``::
 
     $query->mapReduce(null, null, true);
+

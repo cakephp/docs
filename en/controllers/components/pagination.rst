@@ -149,7 +149,7 @@ a controller. You can also pass the resulting query of a find method::
      {
         $query = $this->Articles->find('popular')->where(['author_id' => 1]);
         $this->set('articles', $this->paginate($query));
-    }
+     }
 
 If you want to paginate a different model you can provide a query for it, the
 table object itself, or its name::

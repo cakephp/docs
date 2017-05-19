@@ -52,7 +52,7 @@ executar seus testes::
     <http://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`__.
 
 Configuração do banco de dados test
-=======================================
+===================================
 
 Lembre-se de ter o debug abilitado em seu arquivo **config/app.php** antes de
 executar qualquer teste.  Antes de executar quaisquer testes você deve adicionar
@@ -83,7 +83,7 @@ Fixtures
 .. _integration-testing:
 
 Controller Integration Testing
-===============================
+==============================
 
 .. _testing-authentication:
 

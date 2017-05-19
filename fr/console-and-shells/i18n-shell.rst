@@ -68,7 +68,7 @@ fichier POT existe déjà et va écraser par défaut::
     bin/cake i18n extract --overwrite
 
 Extraire les Messages des Librairies du Cœur de CakePHP
---------------------------------------------------------
+-------------------------------------------------------
 
 Par défaut le script de shell d'extraction va vous demander si vous souhaitez
 extraire les messages utilisés dans les librairies du cœur de CakePHP.

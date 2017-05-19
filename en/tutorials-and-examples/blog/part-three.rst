@@ -238,7 +238,7 @@ Using your web browser, add some new categories using the
 ``/yoursite/categories/add`` controller action.
 
 Reordering Categories with TreeBehavior
-========================================
+=======================================
 
 In your categories index template file, you can list the categories and re-order
 them.

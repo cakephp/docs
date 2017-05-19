@@ -509,7 +509,7 @@ La section :ref:`Configurer les erreurs <error-configuration>` comporte un
 exemple.
 
 Utiliser l'Option exceptionRenderer dans le Gestionnaire par Défaut
---------------------------------------------------------------------
+-------------------------------------------------------------------
 
 Si vous ne voulez pas prendre le contrôle sur le gestionnaire d'exception,
 mais que vous voulez changer la manière dont les exceptions sont rendues, vous

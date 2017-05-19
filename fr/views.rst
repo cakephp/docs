@@ -114,7 +114,7 @@ The following is an example using ``foreach``:
   <?php endforeach; ?>
   </ul>
 
-Another example, using if/elseif/else. Notice the colons:
+Un autre exemple utilisant if/elseif/else. Remarquez les doubles points:
 
 .. code-block:: php
 
@@ -126,9 +126,7 @@ Another example, using if/elseif/else. Notice the colons:
      <h3>Hi unknown user</h3>
   <?php endif; ?>
 
-If you'd prefer using a templating language like
-`Twig <http://twig.sensiolabs.org>`_, a subclass of View will bridge your
-templating language and CakePHP.
+Si vous préférez utiliser un langage de template comme `Twig <http://twig.sensiolabs.org>`_, une sous-classe de View va faire le pont entre le langage du template et CakePHP.
 
 Un fichier de template est stocké dans **src/Template/**, dans un sous-dossier
 portant le nom du controller qui utilise ce fichier. Il a un nom de fichier

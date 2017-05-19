@@ -231,3 +231,4 @@ You can use it to get the list of tables or reflect tables into
 
     // Get a single table (instance of Schema\TableSchema)
     $tableSchema = $collection->describe('posts');
+

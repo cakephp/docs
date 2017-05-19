@@ -111,7 +111,7 @@ App.Search = (function () {
       }
       paginationContainer.append(element);
     }
-  };
+  }
 
   var init = function () {
     searchInput = $('.standalone-search .search-input');

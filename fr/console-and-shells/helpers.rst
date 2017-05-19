@@ -126,3 +126,4 @@ et re-rendre la barre d'avancement si besoin::
 
     $progress->increment(4);
     $progress->draw();
+

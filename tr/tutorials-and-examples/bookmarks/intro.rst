@@ -1,5 +1,5 @@
 Yerimi Eğitimi
-###################
+##############
 
 Bu eğitim size basit bir yerimi uygulaması yapmanızı sağlayacak. 
 Başlangıçta, CakePHP 'yi kuracak, veritabanımızı oluşturacak, ve CakePHP 
@@ -336,7 +336,7 @@ olan metodu da sistemimize entegre edelim.
 Sorguda ki diğer değerlere erişebilmek için, :ref:`cake-request` bölümüne bakınız.
 
 Bulucu Metot Oluşturma
---------------------------
+----------------------
 
 CakePHP de Controller Fonksiyonlarını kısa tutmayı sever, uygulamamızın çoğu
 mantık işlevlerini modelde tutarız.  Eğer **/bookmarks/tagged** url 'ı ziyaret

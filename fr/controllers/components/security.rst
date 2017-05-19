@@ -102,13 +102,11 @@ Restreindre les Demandes croisées de Controller
 ===============================================
 
 allowedControllers
-
     Une liste de controllers qui peuvent envoyer des requêtes vers ce
     controller. Ceci peut être utilisé pour contrôler les demandes croisées de
     controller.
 
 allowedActions
-
     Une liste des actions qui peuvent envoyer des requêtes vers les actions de
     ce controller. Ceci peut être utilisé pour contrôler les demandes croisées
     de controller.
@@ -139,7 +137,6 @@ hash.
     ajoutées/changées.
 
 unlockedFields
-
     Définit une liste de champs de formulaire à exclure de la validation POST.
     Les champs peuvent être déverrouillés dans le component ou avec
     :php:meth:`FormHelper::unlockField()`. Les champs qui ont été déverrouillés
@@ -147,7 +144,6 @@ unlockedFields
     n'ont pas leur valeur vérifiée.
 
 validatePost
-
     Défini à ``false`` pour complètement éviter la validation des requêtes POST,
     essentiellement éteindre la validation de formulaire.
 

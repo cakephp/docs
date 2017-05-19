@@ -558,7 +558,7 @@ Les Types d'Attribut Correspondants
         $res = Hash::merge($array, $arrayB, $arrayC, $arrayD);
 
         /* $res ressemble maintenant à:
-       [
+        [
             [0] => [
                     [id] => 48c2570e-dfa8-4c32-a35e-0d71cbdd56cb
                     [name] => mysql raleigh-workshop-08 < 2008-09-05.sql
