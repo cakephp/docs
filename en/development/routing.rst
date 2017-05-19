@@ -42,14 +42,14 @@ homepage of your site is visited. Sometimes you need dynamic routes that will
 accept multiple parameters, this would be the case, for example of a route for
 viewing an article's content::
 
-    Router::connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
+    $routes->connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
 
 The above route will accept any URL looking like ``/articles/15`` and invoke the
 method ``view(15)`` in the ``ArticlesController``. This will not, though,
 prevent people from trying to access URLs looking like ``/articles/foobar``. If
 you wish, you can restring some parameters to conform to a regular expression::
 
-    Router::connect(
+    $routes->connect(
         '/articles/:id',
         ['controller' => 'Articles', 'action' => 'view'],
         ['id' => '\d+', 'pass' => ['id']]
@@ -75,13 +75,15 @@ Routes can also be labelled with a unique name, this allows you to quickly
 reference them when building links instead of specifying each of the routing
 parameters::
 
-    use Cake\Routing\Router;
 
-    Router::connect(
+    // In routes.php
+    $routes->connect(
         '/login',
         ['controller' => 'Users', 'action' => 'login'],
         ['_name' => 'login']
     );
+
+    use Cake\Routing\Router;
 
     echo Router::url(['_name' => 'login']);
     // Will output
@@ -110,12 +112,11 @@ added your own routes, you can remove the default routes if you don't need them.
 Connecting Routes
 =================
 
-.. php:staticmethod:: connect($route, $defaults = [], $options = [])
+.. php:method:: connect($route, $defaults = [], $options = [])
 
 To keep your code :term:`DRY` you should use 'routing scopes'. Routing
 scopes not only let you keep your code DRY, they also help Router optimize its
-operation. As seen above you can also use ``Router::connect()`` to connect
-routes. This method defaults to the ``/`` scope. To create a scope and connect
+operation. This method defaults to the ``/`` scope. To create a scope and connect
 some routes we'll use the ``scope()`` method::
 
     // In config/routes.php
