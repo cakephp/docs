@@ -14,6 +14,8 @@ features will continue to function until 4.0.0 after which they will be removed.
   ``Cake\Http\Cookie\CookieCollection`` instead.
 * ``Cake\View\Helper\RssHelper`` is deprecated. Due to infrequent use the
   RssHelper is deprecated.
+* ``Cake\Controller\Component\CsrfComponent`` is deprecated. Use
+  :ref:`csrf-middleware` instead.
 
 Deprecated Combined Get/Set Methods
 -----------------------------------
@@ -110,6 +112,8 @@ New Features
   :ref:`security-header-middleware` for more information.
 * New middleware has been added to transparently encrypt cookie data. See
   :ref:`encrypted-cookie-middleware` for more information.
+* New middleware has been added to make protecting against CSRF easier. See
+  :ref:`csrf-middleware` for more information.
 * ``Cake\Event\EventManager::on()`` and ``off()`` methods are now chainable
   making it simpler to set multiple events at once.
 * ``Cake\Validation\Validator::regex()`` was added for a more convenient way
