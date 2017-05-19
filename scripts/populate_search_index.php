@@ -3,6 +3,7 @@
 /**
  * Utility script to populate the elastic search indexes
  *
+ * Gets called by the Make file.
  */
 
 // Elastic search config
@@ -10,13 +11,21 @@ define('ES_DEFAULT_HOST', 'https://ci.cakephp.org:9200');
 define('ES_INDEX', 'documentation');
 define('CAKEPHP_VERSION', '3-next');
 
-
+/**
+ * The main function
+ *
+ * Populates the search index for the given language.
+ *
+ * @param array $argv The array of CLI arguments, 1: language, 2. Elastic search host.
+ * @return void
+ */
 function main($argv)
 {
     if (empty($argv[1])) {
         echo "A language to scan is required.\n";
         exit(1);
     }
+
     $lang = $argv[1];
     if (!empty($argv[2])) {
         define('ES_HOST', $argv[2]);
@@ -31,9 +40,17 @@ function main($argv)
     foreach ($matcher as $file) {
         updateIndex($lang, $file);
     }
+
     echo "\nIndex update complete\n";
 }
 
+/**
+ * Update the index for a given language
+ *
+ * @param string $lang The language to update, e.g. "en".
+ * @param RecursiveDirectoryIterator $file The file to load data from.
+ * @return void
+ */
 function updateIndex($lang, $file)
 {
     $fileData = readFileData($file);
@@ -83,11 +100,17 @@ function updateIndex($lang, $file)
     echo "Sent $file\n";
 }
 
+/**
+ * Read data from file
+ *
+ * @param string $file The file to read.
+ * @return array The read data.
+ */
 function readFileData($file)
 {
     $contents = file_get_contents($file);
 
-    // extract the title and guess that things underlined with # or == and first in the file
+    // Extract the title and guess that things underlined with # or == and first in the file
     // are the title.
     preg_match('/^(.*)\n[=#]+\n/', $contents, $matches);
     $title = $matches[1];
