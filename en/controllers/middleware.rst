@@ -356,6 +356,10 @@ When enabled, you can access the current CSRF token on the request object::
 
     $token = $this->request->getParam('_csrfToken');
 
+.. versionadded:: 3.5.0
+    The ``CsrfProtectionMiddleware`` was added in 3.5.0
+
+
 Integration with FormHelper
 ---------------------------
 
@@ -376,9 +380,6 @@ In addition to request data parameters, CSRF tokens can be submitted through
 a special ``X-CSRF-Token`` header. Using a header often makes it easier to
 integrate a CSRF token with JavaScript heavy applications, or XML/JSON based API
 endpoints.
-
-.. versionadded:: 3.5.0
-    The ``CsrfProtectionMiddleware`` was added in 3.5.0
 
 .. _adding-http-stack:
 
