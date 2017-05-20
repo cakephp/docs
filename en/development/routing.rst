@@ -754,6 +754,39 @@ Then to create links which map back to the routes simply use::
 File extensions are used by :doc:`/controllers/components/request-handling`
 to do automatic view switching based on content types.
 
+.. _connecting-scoped-middleware:
+
+Connecting Scoped Middleware
+----------------------------
+
+Middleware can be applied to your entire application, or to an individual
+routing scope. Before middleware can be applied to a scope, it needs to be
+registered::
+
+    use Cake\Http\Middleware\CsrfProtectionMiddleware;
+    use Cake\Http\Middleware\EncryptedCookieMiddleware;
+
+    Router::scope('/', function ($routes) {
+        $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
+        $routes->registerMiddleware('cookies', new EncryptedCookiesMiddleware());
+    });
+
+Once registered into the route builder, middleware can be applied to specific
+scopes::
+
+    $routes->scope('/cms', function ($routes) {
+        // Enable registered middleware for this scope.
+        $routes->applyMiddleware('csrf', 'cookies');
+    });
+
+In situations where you have nested scopes, all middleware applied in each scope
+will be applied starting from the top-most scope and ending with the nested
+scopes. By applying middleware in specific scopes you can omit complicated URL
+matching logic out of your middleware layers and let them focus on their task.
+
+.. versionadded:: 3.5.0
+    Scoped middleware support was added in 3.5.0
+
 .. _resource-routes:
 
 Creating RESTful Routes

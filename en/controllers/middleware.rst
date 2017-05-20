@@ -81,6 +81,9 @@ a variety of operations::
             $layer
         );
 
+In addition to applying middleware to your entire application, you can apply
+middleware to specific sets of routes using :ref:`connecting-scoped-middleware`.
+
 Adding Middleware from Plugins
 ------------------------------
 
