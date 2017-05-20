@@ -132,7 +132,7 @@ interface as it only requires you to implement the ``log()`` method.
 * ``size`` Used to implement basic log file rotation. If log file size
   reaches specified size the existing file is renamed by appending timestamp
   to filename and new log file is created. Can be integer bytes value or
-  human reabable string values like '10MB', '100KB' etc. Defaults to 10MB.
+  human readable string values like '10MB', '100KB' etc. Defaults to 10MB.
 * ``rotate`` Log files are rotated specified times before being removed.
   If value is 0, old versions are removed rather then rotated. Defaults to 10.
 * ``mask`` Set the file permissions for created files. If left empty the default
