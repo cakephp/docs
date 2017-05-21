@@ -1075,6 +1075,92 @@ events/routes are connected for each test case.
 .. versionadded:: 3.3.0
     PSR-7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
 
+Testing with Encrypted Cookies
+------------------------------
+
+If you use the :php:class:`Cake\\Controller\\Component\\CookieComponent` in your
+controllers, your cookies are likely encrypted. As of 3.1.7, CakePHP provides
+helper methods for interacting with encrypted cookies in your test cases::
+
+    // Set a cookie using AES and the default key.
+    $this->cookieEncrypted('my_cookie', 'Some secret values');
+
+    // Assume this action modifies the cookie.
+    $this->get('/bookmarks/index');
+
+    $this->assertCookieEncrypted('An updated value', 'my_cookie');
+
+.. versionadded: 3.1.7
+    ``assertCookieEncrypted`` and ``cookieEncrypted`` were added in 3.1.7.
+
+Testing Flash Messages
+----------------------
+
+If you want to assert the presence of flash messages in the session and not the
+rendered HTML, you can use ``enableRetainFlashMessages()`` in your tests to
+retain flash messages in the session so you can write assertions::
+
+    $this->enableRetainFlashMessages();
+    $this->get('/bookmarks/delete/9999');
+
+    $this->assertSession('That bookmark does not exist', 'Flash.flash.0.message');
+
+.. versionadded:: 3.4.7
+    ``enableRetainFlashMessages()`` was added in 3.4.7
+
+Testing a JSON Responding Controller
+------------------------------------
+
+JSON is a friendly and common format to use when building a web service.
+Testing the endpoints of your web service is very simple with CakePHP. Let us
+begin with a simple example controller that responds in JSON::
+
+    class MarkersController extends AppController
+    {
+        public function initialize()
+        {
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
+        }
+
+        public function view($id)
+        {
+            $marker = $this->Markers->get($id);
+            $this->set([
+                '_serialize' => ['marker'],
+                'marker' => $marker,
+            ]);
+        }
+    }
+
+Now we create the file **tests/TestCase/Controller/MarkersControllerTest.php**
+and make sure our web service is returning the proper response::
+
+    class MarkersControllerTest extends IntegrationTestCase
+    {
+
+        public function testGet()
+        {
+            $this->configRequest([
+                'headers' => ['Accept' => 'application/json']
+            ]);
+            $result = $this->get('/markers/view/1.json');
+
+            // Check that the response was a 200
+            $this->assertResponseOk();
+
+            $expected = [
+                ['id' => 1, 'lng' => 66, 'lat' => 45],
+            ];
+            $expected = json_encode($expected, JSON_PRETTY_PRINT);
+            $this->assertEquals($expected, $this->_response->body());
+        }
+    }
+
+We use the ``JSON_PRETTY_PRINT`` option as CakePHP's built in JsonView will use
+that option when ``debug`` is enabled.
+
+
 Assertion methods
 -----------------
 
@@ -1200,76 +1286,6 @@ comparison files as they are referenced:
     #   (use "git checkout -- <file>..." to discard changes in working directory)
     #
     #   modified:   tests/comparisons/example.php
-
-Testing with Encrypted Cookies
-------------------------------
-
-If you use the :php:class:`Cake\\Controller\\Component\\CookieComponent` in your
-controllers, your cookies are likely encrypted. As of 3.1.7, CakePHP provides
-helper methods for interacting with encrypted cookies in your test cases::
-
-    // Set a cookie using aes and the default key.
-    $this->cookieEncrypted('my_cookie', 'Some secret values');
-
-    // Assume this action modifies the cookie.
-    $this->get('/bookmarks/index');
-
-    $this->assertCookieEncrypted('An updated value', 'my_cookie');
-
-.. versionadded: 3.1.7
-    ``assertCookieEncrypted`` and ``cookieEncrypted`` were added in 3.1.7.
-
-Testing a JSON Responding Controller
-------------------------------------
-
-JSON is a friendly and common format to use when building a web service.
-Testing the endpoints of your web service is very simple with CakePHP. Let us
-begin with a simple example controller that responds in JSON::
-
-    class MarkersController extends AppController
-    {
-        public function initialize()
-        {
-            parent::initialize();
-            $this->loadComponent('RequestHandler');
-        }
-
-        public function view($id)
-        {
-            $marker = $this->Markers->get($id);
-            $this->set([
-                '_serialize' => ['marker'],
-                'marker' => $marker,
-            ]);
-        }
-    }
-
-Now we create the file **tests/TestCase/Controller/MarkersControllerTest.php**
-and make sure our web service is returning the proper response::
-
-    class MarkersControllerTest extends IntegrationTestCase
-    {
-
-        public function testGet()
-        {
-            $this->configRequest([
-                'headers' => ['Accept' => 'application/json']
-            ]);
-            $result = $this->get('/markers/view/1.json');
-
-            // Check that the response was a 200
-            $this->assertResponseOk();
-
-            $expected = [
-                ['id' => 1, 'lng' => 66, 'lat' => 45],
-            ];
-            $expected = json_encode($expected, JSON_PRETTY_PRINT);
-            $this->assertEquals($expected, $this->_response->body());
-        }
-    }
-
-We use the ``JSON_PRETTY_PRINT`` option as CakePHP's built in JsonView will use
-that option when ``debug`` is enabled.
 
 Testing Views
 =============
