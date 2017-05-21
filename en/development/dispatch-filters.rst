@@ -140,9 +140,9 @@ classes in CakePHP, dispatcher filters have a few conventions:
 ``DispatcherFilter`` exposes two methods that can be overridden in subclasses,
 they are ``beforeDispatch()`` and ``afterDispatch()``. These methods are
 executed before or after any controller is executed respectively. Both methods
-receive a :php:class:`Cake\\Event\\Event` object containing the ``Request`` and
-``Response`` objects (:php:class:`Cake\\Network\\Request` and
-:php:class:`Cake\\Network\\Response` instances) inside the ``$data`` property.
+receive a :php:class:`Cake\\Event\\Event` object containing the ``ServerRequest`` and
+``Response`` objects (:php:class:`Cake\\Http\\ServerRequest` and
+:php:class:`Cake\\Http\\Response` instances) inside the ``$data`` property.
 
 While our filter was pretty simple, there are a few other interesting things we
 can do in filter methods. By returning an ``Response`` object, you can

@@ -38,7 +38,7 @@ components in your ``initialize()`` method.
 
     You should always verify the HTTP method being used before executing
     side-effects. You should :ref:`check the HTTP method <check-the-request>` or
-    use :php:meth:`Cake\\Network\\Request::allowMethod()` to ensure the correct
+    use :php:meth:`Cake\\Http\\ServerRequest::allowMethod()` to ensure the correct
     HTTP method is used.
 
 Handling Blackhole Callbacks

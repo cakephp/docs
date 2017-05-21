@@ -1335,8 +1335,8 @@ correctly by the ``adjust()`` method in our component. We create the file
     use Cake\Controller\Controller;
     use Cake\Controller\ComponentRegistry;
     use Cake\Event\Event;
-    use Cake\Network\Request;
-    use Cake\Network\Response;
+    use Cake\Http\ServerRequest;
+    use Cake\Http\Response;
     use Cake\TestSuite\TestCase;
 
     class PagematronComponentTest extends TestCase
@@ -1349,7 +1349,7 @@ correctly by the ``adjust()`` method in our component. We create the file
         {
             parent::setUp();
             // Setup our component and fake test controller
-            $request = new Request();
+            $request = new ServerRequest();
             $response = new Response();
             $this->controller = $this->getMockBuilder('Cake\Controller\Controller')
                 ->setConstructorArgs([$request, $response])
