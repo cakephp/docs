@@ -763,6 +763,7 @@ Middleware can be applied to your entire application, or to an individual
 routing scope. Before middleware can be applied to a scope, it needs to be
 registered::
 
+    // in config/routes.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
     use Cake\Http\Middleware\EncryptedCookieMiddleware;
 
