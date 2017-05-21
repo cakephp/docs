@@ -320,7 +320,7 @@ chance to show the user validation errors or other warnings.
 Every CakePHP request includes a ``ServerRequest`` object which is accessible using
 ``$this->request``. The request object contains useful information regarding the
 request that was just received, and can be used to control the flow of your
-application.  In this case, we use the :php:meth:`Cake\\Network\\ServerRequest::is()`
+application.  In this case, we use the :php:meth:`Cake\\Http\\ServerRequest::is()`
 method to check that the request is a HTTP POST request.
 
 When a user uses a form to POST data to your application, that
