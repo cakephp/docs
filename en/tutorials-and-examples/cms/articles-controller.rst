@@ -313,6 +313,12 @@ typically a URL safe version of an article's title. We can use the
         if ($entity->isNew() && !$entity->slug) {
             $entity->slug = Text::slug($entity->title);
         }
+
+        // This is temporary, and will be removed later
+        // when we build authentication out.
+        if (!$entity->user_id) {
+            $entity->user_id = 1;
+        }
     }
 
 This code is simple, and doesn't take into account duplicate slugs. But we'll
@@ -410,6 +416,25 @@ articles:
 
 Update Validation Rules for Articles
 ====================================
+
+Up until this point our Articles had no validation on them. Lets fix that by
+using :ref:`a validator <validating-request-data>`::
+
+    // src/Model/Table/ArticlesTable.php
+
+    // Add the following method.
+    public function validationDefault(Validator $validator)
+    {
+        $validator
+            ->notEmpty('title')
+            ->minLength('title', 10)
+            ->maxLength('title', 255)
+
+            ->notEmpty('body')
+            ->minLength('body', 10);
+
+        return $validator;
+    }
 
 
 Add Delete Action
