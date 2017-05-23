@@ -224,7 +224,7 @@ Apache
 ------
 
 Apesar do CakePHP ser construído para trabalhar com mod\_rewrite fora da caixa,
-e normalmente o faz, nos atentamos que aluns usuários lutam para conseguir
+e normalmente o faz, nos atentamos que alguns usuários lutam para conseguir
 fazer tudo funcionar bem em seus sistemas.
 
 Aqui estão algumas coisas que você poderia tentar para conseguir tudo rodando
