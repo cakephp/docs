@@ -436,6 +436,19 @@ using :ref:`a validator <validating-request-data>`::
         return $validator;
     }
 
+The ``validationDefault()`` method tells CakePHP how to validate your data when
+the ``save()`` method is called. Here, we've specified that both the body and
+title fields must not be empty, and have certain length constraints.  CakePHP's
+validation engine is powerful and flexible. It provides a suite of frequently
+used rules for tasks like email addresses, IP addresses etc. and flexibility for
+adding your own validation rules. For more information on that setup, check the
+:doc:`/core-libraries/validation` documentation.
+
+Now that your validation rules are in place, use the app to try to add
+an article with an empty title or body to see how it works.  Since we've used the
+:php:meth:`Cake\\View\\Helper\\FormHelper::control()` method of the FormHelper to
+create our form elements, our validation error messages will be shown
+automatically.
 
 Add Delete Action
 =================
