@@ -336,7 +336,7 @@ méthodes d'authentification de l'objet ``authenticate()``, la méthode
 ``getuser()`` devrait retourner un tableau d'information utilisateur en cas de
 succès et ``false`` en cas d'échec::
 
-    public function getUser(Request $request)
+    public function getUser(ServerRequest $request)
     {
         $username = env('PHP_AUTH_USER');
         $pass = env('PHP_AUTH_PW');
@@ -508,12 +508,12 @@ Si par exemple vous vouliez créer un objet d'authentification OpenID, dans
     namespace App\Auth;
 
     use Cake\Auth\BaseAuthenticate;
-    use Cake\Network\Request;
-    use Cake\Network\Response;
+    use Cake\Http\ServerRequest;
+    use Cake\Http\Response;
 
     class OpenidAuthenticate extends BaseAuthenticate
     {
-        public function authenticate(Request $request, Response $response)
+        public function authenticate(ServerRequest $request, Response $response)
         {
             // Faire les trucs d'OpenID ici.
             // Retourne un tableau de l user si ils peuvent authentifier
@@ -982,11 +982,11 @@ vous pourriez mettre cela::
     namespace App\Auth;
 
     use Cake\Auth\BaseAuthorize;
-    use Cake\Network\Request;
+    use Cake\Http\ServerRequest;
 
     class LdapAuthorize extends BaseAuthorize
     {
-        public function authorize($user, Request $request)
+        public function authorize($user, ServerRequest $request)
         {
             // Faire des choses pour ldap ici.
         }

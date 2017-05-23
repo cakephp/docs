@@ -304,7 +304,7 @@ re-identify the user and ensure they are the valid user. As with authentication
 object's ``authenticate()`` method, the ``getUser()`` method should return
 an array of user information on the success or ``false`` on failure. ::
 
-    public function getUser(Request $request)
+    public function getUser(ServerRequest $request)
     {
         $username = env('PHP_AUTH_USER');
         $pass = env('PHP_AUTH_PW');
@@ -469,7 +469,7 @@ you wanted to create an OpenID authentication object. In
 
     use Cake\Auth\BaseAuthenticate;
     use Cake\Http\ServerRequest;
-    use Cake\Network\Response;
+    use Cake\Http\Response;
 
     class OpenidAuthenticate extends BaseAuthenticate
     {

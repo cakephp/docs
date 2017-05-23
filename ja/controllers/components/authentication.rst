@@ -284,7 +284,7 @@ AuthComponent がユーザーレコードの格納にセッションを使用し
 メソッドと同様に、 ``getUser()`` メソッドも成功ならユーザー情報の配列を、失敗なら ``false`` を
 返すようにしてください。 ::
 
-    public function getUser(Request $request)
+    public function getUser(ServerRequest $request)
     {
         $username = env('PHP_AUTH_USER');
         $pass = env('PHP_AUTH_PW');
@@ -441,12 +441,12 @@ CakePHP のライブラリを使用してランダムにこれらの API トー�
     namespace App\Auth;
 
     use Cake\Auth\BaseAuthenticate;
-    use Cake\Network\Request;
-    use Cake\Network\Response;
+    use Cake\Http\ServerRequest;
+    use Cake\Http\Response;
 
     class OpenidAuthenticate extends BaseAuthenticate
     {
-        public function authenticate(Request $request, Response $response)
+        public function authenticate(ServerRequest $request, Response $response)
         {
             // OpenID 用の処理をここに記述します。
             // ユーザー認証が通った場合は、user の配列を返します。
@@ -828,11 +828,11 @@ CakePHP は、1つのアルゴリズムから別のユーザーのパスワー�
     namespace App\Auth;
 
     use Cake\Auth\BaseAuthorize;
-    use Cake\Network\Request;
+    use Cake\Http\ServerRequest;
 
     class LdapAuthorize extends BaseAuthorize
     {
-        public function authorize($user, Request $request)
+        public function authorize($user, ServerRequest $request)
         {
             // ldap 用の処理をここに記述します。
         }
