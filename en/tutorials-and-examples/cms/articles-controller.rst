@@ -29,7 +29,6 @@ look like this::
 
     class ArticlesController extends AppController
     {
-
         public function index()
         {
             $articles = $this->Articles->find('all');
@@ -53,7 +52,7 @@ It then uses ``set()`` to pass the articles into the View (which we'll create
 soon). CakePHP will automatically render the View after our controller action
 completes.
 
-Adding the Article List View Template
+Create the Article List View Template
 =====================================
 
 Now that we have our controller pulling data from the model, and preparing our
@@ -155,7 +154,7 @@ Let's create the view for our new 'view' action and place it in
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
     <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
-
+    <p><?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?></p>
 
 You can verify that this is working by trying the links at ``/articles/index`` or
 manually requesting an article by accessing URLs like ``/articles/view/1``.
@@ -237,8 +236,8 @@ After saving our new article we use FlashComponent's ``success()`` method to set
 a message into the session. The ``success`` method is provided using PHP's
 `magic method features
 <http://php.net/manual/en/language.oop5.overloading.php#object.call>`_.  Flash
-messages will be displayed on the page after redirection. In our layout we have
-``<?= $this->Flash->render() ?>`` which displays the message and clears the
+messages will be displayed on the next page after redirecting. In our layout we have
+``<?= $this->Flash->render() ?>`` which displays the flash message and clears the
 corresponding session variable. Finally, after saving is complete, we use
 :php:meth:`Cake\\Controller\\Controller::redirect` to send the user back to the
 articles list. The param ``['action' => 'index']`` translates to URL
@@ -247,11 +246,173 @@ to :php:func:`Cake\\Routing\\Router::url()` function on the `API
 <https://api.cakephp.org>`_ to see the formats in which you can specify a URL
 for various CakePHP functions.
 
-* Add validation
-* Create add templates
-* Add edit action
-* Add edit view
-* Add delete action
+Create Add Template
+===================
 
-Next we'll be creating :doc:`basic actions for our Tags and Users tables
-<tags-and-users>`.
+Here's our add view template:
+
+.. code-block:: php
+
+    <!-- File: src/Template/Articles/add.ctp -->
+
+    <h1>Add Article</h1>
+    <?php
+        echo $this->Form->create($article);
+        echo $this->Form->control('title');
+        echo $this->Form->control('body', ['rows' => '3']);
+        echo $this->Form->button(__('Save Article'));
+        echo $this->Form->end();
+    ?>
+
+We use the FormHelper to generate the opening tag for an HTML
+form. Here's the HTML that ``$this->Form->create()`` generates:
+
+.. code-block:: html
+
+    <form method="post" action="/articles/add">
+
+Because we called ``create()`` without a URL option, ``FormHelper`` assumes we
+want the form to submit back to the current action.
+
+The ``$this->Form->control()`` method is used to create form elements
+of the same name. The first parameter tells CakePHP which field
+they correspond to, and the second parameter allows you to specify
+a wide array of options - in this case, the number of rows for the
+textarea. There's a bit of introspection and conventions used here. The
+``control()`` will output different form elements based on the model
+field specified, and use inflection to generate the label text. If you want to
+customize the label, input or any other aspect of the form controls you can.
+
+The ``$this->Form->end()`` closes the form. Outputting hidden inputs if
+CSRF/Form Tampering prevention is enabled.
+
+Now let's go back and update our **src/Template/Articles/index.ctp**
+view to include a new "Add Article" link. Before the ``<table>``, add
+the following line::
+
+    <?= $this->Html->link('Add Article', ['action' => 'add']) ?>
+
+Adding Simple Slug Generation
+=============================
+
+If we were to save an Article right now, saving would fail as we are not
+creating a slug attribute, and the column is ``NOT NULL``. Slug values are
+typically a URL safe version of an article's title. We can use the
+:ref:`beforeSave() callback <table-callbacks>` of the ORM to populate our slug::
+
+    // in src/Model/Table/ArticlesTable.php
+    use Cake\Utility\Text;
+
+    // Add the following method.
+
+    public function beforeSave($event, $entity, $options)
+    {
+        if ($entity->isNew() && !$entity->slug) {
+            $entity->slug = Text::slug($entity->title);
+        }
+    }
+
+This code is simple, and doesn't take into account duplicate slugs. But we'll
+fix that later on.
+
+Add Edit Action
+===============
+
+Our application can now save articles, but we can't edit them. Lets rectify that
+now. Add the following action to your ``ArticlesController``::
+
+    // in src/Controller/ArticlesController.php
+
+    // Add the following method.
+
+    public function edit($id = null)
+    {
+        $article = $this->Articles->get($id);
+        if ($this->request->is(['post', 'put'])) {
+            $this->Articles->patchEntity($article, $this->request->getData());
+            if ($this->Articles->save($article)) {
+                $this->Flash->success(__('Your article has been updated.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Unable to update your article.'));
+        }
+
+        $this->set('article', $article);
+    }
+
+This action first ensures that the user has tried to access an existing record.
+If they haven't passed in an ``$id`` parameter, or the article does not
+exist, we throw a ``NotFoundException`` for the CakePHP ErrorHandler to take
+care of.
+
+Next the action checks whether the request is either a POST or a PUT request. If
+it is, then we use the POST data to update our article entity by using the
+``patchEntity()`` method.  Finally, we call ``save()`` set the appropriate flash
+message and either redirect or display validation errors.
+
+
+Create Edit Template
+====================
+
+The edit template should look like this:
+
+.. code-block:: php
+
+    <!-- File: src/Template/Articles/edit.ctp -->
+
+    <h1>Edit Article</h1>
+    <?php
+        echo $this->Form->create($article);
+        echo $this->Form->control('title');
+        echo $this->Form->control('body', ['rows' => '3']);
+        echo $this->Form->button(__('Save Article'));
+        echo $this->Form->end();
+    ?>
+
+This template outputs the edit form (with the values populated), along
+with any necessary validation error messages.
+
+You can now update your index view with links to edit specific
+articles:
+
+.. code-block:: php
+
+    <!-- File: src/Template/Articles/index.ctp  (edit links added) -->
+
+    <h1>Articles</h1>
+    <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Created</th>
+            <th>Action</th>
+        </tr>
+
+    <!-- Here's where we iterate through our $articles query object, printing out article info -->
+
+    <?php foreach ($articles as $article): ?>
+        <tr>
+            <td>
+                <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
+            </td>
+            <td>
+                <?= $article->created->format(DATE_RFC850) ?>
+            </td>
+            <td>
+                <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+
+    </table>
+
+Update Validation Rules for Articles
+====================================
+
+
+Add Delete Action
+=================
+
+
+With a basic articles management setup, we'll create the  :doc:`basic actions
+for our Tags and Users tables <tags-and-users>`.
