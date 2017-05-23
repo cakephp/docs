@@ -49,7 +49,7 @@ created.
 Our controller action is very simple. It fetches a paginated set of articles
 from the database, using the Articles Model that is automatically loaded via naming
 conventions. It then uses ``set()`` to pass the articles into the View (which
-we'll create soon). CakePHP will automatically render the View after our
+we'll create soon). CakePHP will automatically render the template after our
 controller action completes.
 
 Create the Article List View Template
@@ -131,7 +131,7 @@ see an error page saying that action hasn't been implemented. Lets fix that now:
         $this->set(compact('article'));
     }
 
-While this is a simple aciton, we've used some powerful CakePHP features. We
+While this is a simple action, we've used some powerful CakePHP features. We
 start our action off by using ``findBySlug()`` which is
 a :ref:`dynamic-finders`. This method allows us to create a basic query that
 finds articles by slug. We then use ``firstOrFail()`` to either fetch the first
@@ -156,7 +156,7 @@ Let's create the view for our new 'view' action and place it in
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
     <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
-    <p><?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?></p>
+    <p><?= $this->Html->link('Edit', ['action' => 'edit', $article->slug]) ?></p>
 
 You can verify that this is working by trying the links at ``/articles/index`` or
 manually requesting an article by accessing URLs like ``/articles/view/1``.
@@ -286,7 +286,7 @@ textarea. There's a bit of introspection and conventions used here. The
 field specified, and use inflection to generate the label text. If you want to
 customize the label, input or any other aspect of the form controls you can.
 
-The ``$this->Form->end()`` closes the form. Outputting hidden inputs if
+The ``$this->Form->end()`` closes the form, outputting hidden inputs if
 CSRF/Form Tampering prevention is enabled.
 
 Now let's go back and update our **src/Template/Articles/index.ctp**
@@ -334,9 +334,9 @@ now. Add the following action to your ``ArticlesController``::
 
     // Add the following method.
 
-    public function edit($id = null)
+    public function edit($slug)
     {
-        $article = $this->Articles->get($id);
+        $article = $this->Articles->getBySlug($slug)->firstOrFail();
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
@@ -350,9 +350,9 @@ now. Add the following action to your ``ArticlesController``::
     }
 
 This action first ensures that the user has tried to access an existing record.
-If they haven't passed in an ``$id`` parameter, or the article does not
-exist, we throw a ``NotFoundException`` for the CakePHP ErrorHandler to take
-care of.
+If they haven't passed in an ``$slug`` parameter, or the article does not exist,
+a ``NotFoundException`` will be thrown, and the CakePHP ErrorHandler will render
+the appropriate error page.
 
 Next the action checks whether the request is either a POST or a PUT request. If
 it is, then we use the POST data to update our article entity by using the
@@ -407,7 +407,7 @@ articles:
                 <?= $article->created->format(DATE_RFC850) ?>
             </td>
             <td>
-                <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
+                <?= $this->Html->link('Edit', ['action' => 'edit', $article->slug]) ?>
             </td>
         </tr>
     <?php endforeach; ?>
@@ -485,7 +485,7 @@ HTTP errors your application might need to generate.
     ``allowMethod()`` in our controller.
 
 Because we're just executing some logic and redirecting, this action has no
-view. You might want to update your index view with links that allow users to
+template. You might want to update your index template with links that allow users to
 delete articles:
 
 .. code-block:: php
