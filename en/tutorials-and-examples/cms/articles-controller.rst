@@ -133,7 +133,7 @@ see an error page saying that action hasn't been implemented. Lets fix that now:
 
 While this is a simple aciton, we've used some powerful CakePHP features. We
 start our action off by using ``findBySlug()`` which is
-a :ref:`dynamic-finder`. This method allows us to create a basic query that
+a :ref:`dynamic-finders`. This method allows us to create a basic query that
 finds articles by slug. We then use ``firstOrFail()`` to either fetch the first
 record, or throw a ``NotFoundException``.
 
