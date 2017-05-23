@@ -31,7 +31,7 @@ look like this::
     {
         public function index()
         {
-            $articles = $this->Articles->find('all');
+            $articles = $this->Paginator->paginate($this->Articles->find());
             $this->set(compact('articles'));
         }
     }
@@ -46,11 +46,11 @@ creating readable, meaningful action names. You can then use
 doc:`/development/routing` to connect the URLs you want to the actions you've
 created.
 
-Our controller action is very simple. It fetches all the articles from the
-database, using the Model that is automatically loaded via naming conventions.
-It then uses ``set()`` to pass the articles into the View (which we'll create
-soon). CakePHP will automatically render the View after our controller action
-completes.
+Our controller action is very simple. It fetches a paginated set of articles
+from the database, using the Articles Model that is automatically loaded via naming
+conventions. It then uses ``set()`` to pass the articles into the View (which
+we'll create soon). CakePHP will automatically render the View after our
+controller action completes.
 
 Create the Article List View Template
 =====================================
@@ -88,7 +88,7 @@ application:
         <?php foreach ($articles as $article): ?>
         <tr>
             <td>
-                <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
+                <?= $this->Html->link($article->title, ['action' => 'view', $article->slug]) ?>
             </td>
             <td>
                 <?= $article->created->format(DATE_RFC850) ?>
@@ -125,19 +125,21 @@ see an error page saying that action hasn't been implemented. Lets fix that now:
 
     // Add to existing src/Controller/ArticlesController.php file
 
-    public function view($id = null)
+    public function view($slug = null)
     {
-        $article = $this->Articles->get($id);
+        $article = $this->Articles->findBySlug($slug)->firstOrFail();
         $this->set(compact('article'));
     }
 
-This is another very simple action, notice that our view action takes
-a parameter: the ID of the article we'd like to see. This parameter is handed to
-the action through the requested URL. If a user requests ``/articles/view/3``,
-then the value '3' is passed as ``$id``. We're using the
-``$this->Articles->get()`` method which will generate a ``404`` page if the
-article isn't found. This saves you having to do checking for missing records in
-your controller action, keeping your code simple and easy to read. If we were to
+While this is a simple aciton, we've used some powerful CakePHP features. We
+start our action off by using ``findBySlug()`` which is
+a :ref:`dynamic-finder`. This method allows us to create a basic query that
+finds articles by slug. We then use ``firstOrFail()`` to either fetch the first
+record, or throw a ``NotFoundException``.
+
+Our action takes a ``$slug`` parameter, but where does that parameter come from?
+If a user requests ``/articles/view/first-post``, then the value 'first-post' is
+passed as ``$slug`` by CakePHP's routing and dispatching layers.  If we were to
 reload our browser with our new action saved, we'd see another CakePHP error
 page telling use we're missing a view template; lets fix that.
 
@@ -184,12 +186,13 @@ to be created. Start by creating an ``add()`` action in the
 
         public function index()
         {
-            $this->set('articles', $this->Articles->find('all'));
+            $articles = $this->Paginator->paginate($this->Articles->find());
+            $this->set(compact('articles'));
         }
 
-        public function view($id)
+        public function view($slug)
         {
-            $article = $this->Articles->get($id);
+            $article = $this->Articles->findBySlug($slug)->firstOrFail();
             $this->set(compact('article'));
         }
 
@@ -350,7 +353,6 @@ it is, then we use the POST data to update our article entity by using the
 ``patchEntity()`` method.  Finally, we call ``save()`` set the appropriate flash
 message and either redirect or display validation errors.
 
-
 Create Edit Template
 ====================
 
@@ -393,7 +395,7 @@ articles:
     <?php foreach ($articles as $article): ?>
         <tr>
             <td>
-                <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
+                <?= $this->Html->link($article->title, ['action' => 'view', $article->slug]) ?>
             </td>
             <td>
                 <?= $article->created->format(DATE_RFC850) ?>
@@ -413,6 +415,85 @@ Update Validation Rules for Articles
 Add Delete Action
 =================
 
+Next, let's make a way for users to delete articles. Start with a
+``delete()`` action in the ``ArticlesController``::
+
+    // src/Controller/ArticlesController.php
+
+    public function delete($slug)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+
+        $article = $this->Articles->findBySlug($slug)->firstOrFail();
+        if ($this->Articles->delete($article)) {
+            $this->Flash->success(__('The {0} article has been deleted.', $article->title));
+            return $this->redirect(['action' => 'index']);
+        }
+    }
+
+This logic deletes the article specified by ``$slug``, and uses
+``$this->Flash->success()`` to show the user a confirmation
+message after redirecting them to ``/articles``. If the user attempts to
+delete an article using a GET request, ``allowMethod()`` will throw an Exception.
+Uncaught exceptions are captured by CakePHP's exception handler, and a nice
+error page is displayed. There are many built-in
+:doc:`Exceptions </development/errors>` that can be used to indicate the various
+HTTP errors your application might need to generate.
+
+.. warning::
+
+    Allowing content to be deleted using GET requests is dangerous, as web
+    crawlers could accidentally delete all your content. That is why we used
+    ``allowMethod()`` in our controller.
+
+Because we're just executing some logic and redirecting, this action has no
+view. You might want to update your index view with links that allow users to
+delete articles:
+
+.. code-block:: php
+
+    <!-- File: src/Template/Articles/index.ctp  (deleted links added) -->
+
+    <h1>Articles</h1>
+    <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Created</th>
+            <th>Action</th>
+        </tr>
+
+    <!-- Here's where we iterate through our $articles query object, printing out article info -->
+
+    <?php foreach ($articles as $article): ?>
+        <tr>
+            <td>
+                <?= $this->Html->link($article->title, ['action' => 'view', $article->slug]) ?>
+            </td>
+            <td>
+                <?= $article->created->format(DATE_RFC850) ?>
+            </td>
+            <td>
+                <?= $this->Html->link('Edit', ['action' => 'edit', $article->slug]) ?>
+                <?= $this->Form->postLink(
+                    'Delete',
+                    ['action' => 'delete', $article->slug],
+                    ['confirm' => 'Are you sure?'])
+                ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+
+    </table>
+
+Using :php:meth:`~Cake\\View\\Helper\\FormHelper::postLink()` will create a link
+that uses JavaScript to do a POST request deleting our article.
+
+.. note::
+
+    This view code also uses the ``FormHelper`` to prompt the user with a
+    JavaScript confirmation dialog before they attempt to delete an
+    article.
 
 With a basic articles management setup, we'll create the  :doc:`basic actions
 for our Tags and Users tables <tags-and-users>`.
