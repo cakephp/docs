@@ -52,8 +52,8 @@ conventions. It then uses ``set()`` to pass the articles into the View (which
 we'll create soon). CakePHP will automatically render the template after our
 controller action completes.
 
-Create the Article List View Template
-=====================================
+Create the Article List Template
+================================
 
 Now that we have our controller pulling data from the model, and preparing our
 view context, let's create a view template for our index action.
@@ -134,12 +134,12 @@ see an error page saying that action hasn't been implemented. Lets fix that now:
 While this is a simple action, we've used some powerful CakePHP features. We
 start our action off by using ``findBySlug()`` which is
 a :ref:`dynamic-finders`. This method allows us to create a basic query that
-finds articles by slug. We then use ``firstOrFail()`` to either fetch the first
-record, or throw a ``NotFoundException``.
+finds articles by a given slug. We then use ``firstOrFail()`` to either fetch
+the first record, or throw a ``NotFoundException``.
 
 Our action takes a ``$slug`` parameter, but where does that parameter come from?
 If a user requests ``/articles/view/first-post``, then the value 'first-post' is
-passed as ``$slug`` by CakePHP's routing and dispatching layers.  If we were to
+passed as ``$slug`` by CakePHP's routing and dispatching layers.  If we
 reload our browser with our new action saved, we'd see another CakePHP error
 page telling use we're missing a view template; lets fix that.
 
@@ -240,7 +240,7 @@ a message into the session. The ``success`` method is provided using PHP's
 `magic method features
 <http://php.net/manual/en/language.oop5.overloading.php#object.call>`_.  Flash
 messages will be displayed on the next page after redirecting. In our layout we have
-``<?= $this->Flash->render() ?>`` which displays the flash message and clears the
+``<?= $this->Flash->render() ?>`` which displays flash messages and clears the
 corresponding session variable. Finally, after saving is complete, we use
 :php:meth:`Cake\\Controller\\Controller::redirect` to send the user back to the
 articles list. The param ``['action' => 'index']`` translates to URL
@@ -283,11 +283,9 @@ they correspond to, and the second parameter allows you to specify
 a wide array of options - in this case, the number of rows for the
 textarea. There's a bit of introspection and conventions used here. The
 ``control()`` will output different form elements based on the model
-field specified, and use inflection to generate the label text. If you want to
-customize the label, input or any other aspect of the form controls you can.
-
-The ``$this->Form->end()`` closes the form, outputting hidden inputs if
-CSRF/Form Tampering prevention is enabled.
+field specified, and use inflection to generate the label text. You can
+customize the label, the input or any other aspect of the form controls using
+options. The ``$this->Form->end()`` call closes the form.
 
 Now let's go back and update our **src/Template/Articles/index.ctp**
 view to include a new "Add Article" link. Before the ``<table>``, add
@@ -300,7 +298,7 @@ Adding Simple Slug Generation
 
 If we were to save an Article right now, saving would fail as we are not
 creating a slug attribute, and the column is ``NOT NULL``. Slug values are
-typically a URL safe version of an article's title. We can use the
+typically a URL-safe version of an article's title. We can use the
 :ref:`beforeSave() callback <table-callbacks>` of the ORM to populate our slug::
 
     // in src/Model/Table/ArticlesTable.php
@@ -355,7 +353,7 @@ a ``NotFoundException`` will be thrown, and the CakePHP ErrorHandler will render
 the appropriate error page.
 
 Next the action checks whether the request is either a POST or a PUT request. If
-it is, then we use the POST data to update our article entity by using the
+it is, then we use the POST/PUT data to update our article entity by using the
 ``patchEntity()`` method.  Finally, we call ``save()`` set the appropriate flash
 message and either redirect or display validation errors.
 
@@ -417,7 +415,7 @@ articles:
 Update Validation Rules for Articles
 ====================================
 
-Up until this point our Articles had no validation on them. Lets fix that by
+Up until this point our Articles had no input validation done. Lets fix that by
 using :ref:`a validator <validating-request-data>`::
 
     // src/Model/Table/ArticlesTable.php
@@ -437,12 +435,13 @@ using :ref:`a validator <validating-request-data>`::
     }
 
 The ``validationDefault()`` method tells CakePHP how to validate your data when
-the ``save()`` method is called. Here, we've specified that both the body and
-title fields must not be empty, and have certain length constraints.  CakePHP's
-validation engine is powerful and flexible. It provides a suite of frequently
-used rules for tasks like email addresses, IP addresses etc. and flexibility for
-adding your own validation rules. For more information on that setup, check the
-:doc:`/core-libraries/validation` documentation.
+the ``save()`` method is called. Here, we've specified that both the title, and
+body fields must not be empty, and have certain length constraints.
+
+CakePHP's validation engine is powerful and flexible. It provides a suite of
+frequently used rules for tasks like email addresses, IP addresses etc. and the
+flexibility for adding your own validation rules. For more information on that
+setup, check the :doc:`/core-libraries/validation` documentation.
 
 Now that your validation rules are in place, use the app to try to add
 an article with an empty title or body to see how it works.  Since we've used the
@@ -472,7 +471,7 @@ Next, let's make a way for users to delete articles. Start with a
 This logic deletes the article specified by ``$slug``, and uses
 ``$this->Flash->success()`` to show the user a confirmation
 message after redirecting them to ``/articles``. If the user attempts to
-delete an article using a GET request, ``allowMethod()`` will throw an Exception.
+delete an article using a GET request, ``allowMethod()`` will throw an exception.
 Uncaught exceptions are captured by CakePHP's exception handler, and a nice
 error page is displayed. There are many built-in
 :doc:`Exceptions </development/errors>` that can be used to indicate the various
@@ -480,13 +479,13 @@ HTTP errors your application might need to generate.
 
 .. warning::
 
-    Allowing content to be deleted using GET requests is dangerous, as web
+    Allowing content to be deleted using GET requests is *very* dangerous, as web
     crawlers could accidentally delete all your content. That is why we used
     ``allowMethod()`` in our controller.
 
-Because we're just executing some logic and redirecting, this action has no
-template. You might want to update your index template with links that allow users to
-delete articles:
+Because we're only executing logic and redirecting to another action, this
+action has no template. You might want to update your index template with links
+that allow users to delete articles:
 
 .. code-block:: php
 
