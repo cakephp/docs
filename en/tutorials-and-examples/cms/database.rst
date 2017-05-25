@@ -154,6 +154,7 @@ look like this::
         protected $_accessible = [
             '*' => true,
             'id' => false,
+            'slug' => false,
         ];
     }
 

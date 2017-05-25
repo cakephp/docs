@@ -139,7 +139,7 @@ once a controller action has completed, CakePHP will handle rendering and
 delivering the View.
 
 If for some reason you'd like to skip the default behavior, you can return a
-:php:class:`Cake\\Network\\Response` object from the action with the fully
+:php:class:`Cake\\Http\\Response` object from the action with the fully
 created response.
 
 In order for you to use a controller effectively in your own application, we'll

@@ -1038,6 +1038,92 @@ PSR-7 モードを有効にして、アプリケーションクラスの設定�
 .. versionadded:: 3.3.0
     PSR-7 ミドルウェアと ``useHttpServer()`` メソッドは、3.3.0 で追加されました。
 
+暗号化されたクッキーを使用したテスト
+-------------------------------------
+
+コントローラーで :php:class:`Cake\\Controller\\Component\\CookieComponent` を使用している場合、
+あなたのクッキーは、おそらく暗号化されます。3.1.7 では、CakePHP はテストケース内の暗号化された
+クッキーと対話するためのヘルパーメソッドを提供します。 ::
+
+    // AES とデフォルトキーを使ってクッキーをセット
+    $this->cookieEncrypted('my_cookie', '何か秘密の値');
+
+    // このアクションは、クッキーを変更するものとします。
+    $this->get('/bookmarks/index');
+
+    $this->assertCookieEncrypted('更新された値', 'my_cookie');
+
+.. versionadded: 3.1.7
+    ``assertCookieEncrypted`` とは ``cookieEncrypted`` は 3.1.7 で追加されました。
+
+フラッシュメッセージのテスト
+----------------------------
+
+描画された HTML ではなく、セッション内にフラッシュメッセージが存在することをアサートする場合、
+テスト内で ``enableRetainFlashMessages()`` を使ってセッション内のフラッシュメッセージを保持し、
+アサーションを書くことができます。 ::
+
+    $this->enableRetainFlashMessages();
+    $this->get('/bookmarks/delete/9999');
+
+    $this->assertSession('ブックマークは存在しません', 'Flash.flash.0.message');
+
+.. versionadded:: 3.4.7
+    ``enableRetainFlashMessages()`` は 3.4.7 で追加されました。
+
+JSON を返すコントローラーのテスト
+---------------------------------
+
+JSON は、ウェブサービスの構築において、とても馴染み深く、かつ基本的なフォーマットです。
+CakePHP を用いたウェブサービスのエンドポイントのテストはとてもシンプルです。
+JSON を返すコントローラーの簡単な例を示します。 ::
+
+    class MarkersController extends AppController
+    {
+        public function initialize()
+        {
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
+        }
+
+        public function view($id)
+        {
+            $marker = $this->Markers->get($id);
+            $this->set([
+                '_serialize' => ['marker'],
+                'marker' => $marker,
+            ]);
+        }
+    }
+
+今、 **tests/TestCase/Controller/MarkersControllerTest.php** ファイルを作成し、
+ウェブサービスが適切な応答を返していることを確認してください。 ::
+
+    class MarkersControllerTest extends IntegrationTestCase
+    {
+
+        public function testGet()
+        {
+            $this->configRequest([
+                'headers' => ['Accept' => 'application/json']
+            ]);
+            $result = $this->get('/markers/view/1.json');
+
+            // レスポンスが 200 だったことを確認
+            $this->assertResponseOk();
+
+            $expected = [
+                ['id' => 1, 'lng' => 66, 'lat' => 45],
+            ];
+            $expected = json_encode($expected, JSON_PRETTY_PRINT);
+            $this->assertEquals($expected, $this->_response->body());
+        }
+    }
+
+CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合、 ``JSON_PRETTY_PRINT``
+オプションを使用します。
+
+
 アサーションメソッド
 --------------------
 
@@ -1161,76 +1247,6 @@ PSR-7 モードを有効にして、アプリケーションクラスの設定�
     #   (use "git checkout -- <file>..." to discard changes in working directory)
     #
     #   modified:   tests/comparisons/example.php
-
-暗号化されたクッキーを使用したテスト
--------------------------------------
-
-コントローラで :php:class:`Cake\\Controller\\Component\\CookieComponent` を使用している場合、
-あなたのクッキーは、おそらく暗号化されます。3.1.7 では、CakePHP はテストケース内の暗号化された
-クッキーと対話するためのヘルパーメソッドを提供します。 ::
-
-    // aes とデフォルトキーを使ってクッキーをセット
-    $this->cookieEncrypted('my_cookie', 'Some secret values');
-
-    // このアクションは、クッキーを変更するものとします。
-    $this->get('/bookmarks/index');
-
-    $this->assertCookieEncrypted('An updated value', 'my_cookie');
-
-.. versionadded: 3.1.7
-    ``assertCookieEncrypted`` とは ``cookieEncrypted`` は 3.1.7 で追加されました。
-
-JSON を返すコントローラのテスト
--------------------------------
-
-JSON は、ウェブサービスの構築において、とても馴染み深く、かつ基本的なフォーマットです。
-CakePHP を用いたウェブサービスのエンドポイントのテストはとてもシンプルです。
-JSON を返すコントローラーの簡単な例を示します。 ::
-
-    class MarkersController extends AppController
-    {
-        public function initialize()
-        {
-            parent::initialize();
-            $this->loadComponent('RequestHandler');
-        }
-
-        public function view($id)
-        {
-            $marker = $this->Markers->get($id);
-            $this->set([
-                '_serialize' => ['marker'],
-                'marker' => $marker,
-            ]);
-        }
-    }
-
-今、 **tests/TestCase/Controller/MarkersControllerTest.php** ファイルを作成し、
-ウェブサービスが適切な応答を返していることを確認してください。 ::
-
-    class MarkersControllerTest extends IntegrationTestCase
-    {
-
-        public function testGet()
-        {
-            $this->configRequest([
-                'headers' => ['Accept' => 'application/json']
-            ]);
-            $result = $this->get('/markers/view/1.json');
-
-            // レスポンスが 200 だったことを確認
-            $this->assertResponseOk();
-
-            $expected = [
-                ['id' => 1, 'lng' => 66, 'lat' => 45],
-            ];
-            $expected = json_encode($expected, JSON_PRETTY_PRINT);
-            $this->assertEquals($expected, $this->_response->body());
-        }
-    }
-
-CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合、 ``JSON_PRETTY_PRINT``
-オプションを使用します。
 
 ビューのテスト
 ==============

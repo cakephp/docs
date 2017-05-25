@@ -153,8 +153,7 @@ CakePHP の ORM を使うためにエンティティクラスを生成する必�
 
         protected function _setTitle($title)
         {
-            $this->set('slug', Text::slug($title));
-            return $title;
+            return Text::slug($title);
         }
 
     }
