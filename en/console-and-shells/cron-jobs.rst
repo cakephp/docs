@@ -22,13 +22,13 @@ You can see more info here: http://en.wikipedia.org/wiki/Cron
 
     Use ``-q`` (or `--quiet`) to silence any output for cronjobs.
     
-Cron-jobs on shared hosting
+Cron Jobs on Shared Hosting
 ---------------------------
 On some shared hostings ``cd /full/path/to/root && bin/cake myshell myparam`` might not work. Instead you can use ``php /full/path/to/root/bin/cake.php myshell myparam``
 
-.. note::    
-register_argc_argv has to be turned on by including ``register_argc_argv = 1`` in your php.ini. 
-If you cannot change register_argc_argv globally, you can tell the cron-job to use your own configuration file (php.ini) by specifying it with ``-c /full/path/to/root/php.ini``. Example: ``php -c /full/path/to/root/php.ini /full/path/to/root/bin/cake.php myshell myparam``
+.. note::
+     register_argc_argv has to be turned on by including ``register_argc_argv = 1`` in your php.ini.
+     If you cannot change register_argc_argv globally, you can tell the cron job to use your own configuration file (php.ini) by            specifying it with ``-c /full/path/to/root/php.ini``. Example: ``php -c /full/path/to/root/php.ini /full/path/to/root/bin/cake.php myshell myparam``
 
 .. meta::
     :title lang=en: Running Shells as cronjobs
