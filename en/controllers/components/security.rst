@@ -57,7 +57,7 @@ works::
 
     public function beforeFilter(Event $event)
     {
-        $this->Security->config('blackHoleCallback', 'blackhole');
+        $this->Security->setConfig('blackHoleCallback', 'blackhole');
     }
 
     public function blackhole($type)
@@ -105,7 +105,7 @@ allowedActions
     This can be used to control cross controller requests.
 
 These configuration options allow you to restrict cross controller
-communication. Set them with the ``config()`` method.
+communication. Set them with the ``setConfig()`` method.
 
 Form Tampering Prevention
 =========================
@@ -139,7 +139,7 @@ validatePost
     Set to ``false`` to completely skip the validation of POST
     requests, essentially turning off form validation.
 
-The above configuration options can be set with ``config()``.
+The above configuration options can be set with ``setConfig()``.
 
 Usage
 =====
@@ -241,7 +241,7 @@ There may be cases where you want to disable all security checks for an action
 
         public function beforeFilter(Event $event)
         {
-             $this->Security->config('unlockedActions', ['edit']);
+             $this->Security->setConfig('unlockedActions', ['edit']);
         }
     }
 
