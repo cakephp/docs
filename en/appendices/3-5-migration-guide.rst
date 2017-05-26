@@ -121,6 +121,10 @@ New Features
 * ``Cake\Routing\Router::reverseToArray()`` was added. This method allow you to
   convert a request object into an array that can be used to generate URL
   strings.
+* ``Cake\ORM\Query::contain()`` now allows you to call it without the wrapping
+  array when containing a single association. ``contain('Comments', function ()
+  { ... });`` will now work. This makes ``contain()`` consistent with other
+  eagerloading related methods like ``leftJoinWith()`` and ``matching()``.
 * ``Cake\Routing\RouteBuilder::resources()`` had the ``path`` option
   added. This option lets you make the resource path and controller name not
   match.
