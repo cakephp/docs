@@ -314,7 +314,7 @@ should be able to view the results by going to
 
 If you are using PHP 5.6.0 or greater, you can use `phpdbg <http://phpdbg.com/>`__ 
 to generate coverage instead of xdebug. ``phpdbg`` is generally faster at 
-generating coverage::
+generating coverage:
 
 .. code-block:: bash
 
