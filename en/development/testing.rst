@@ -312,6 +312,14 @@ This will put the coverage results in your application's webroot directory. You
 should be able to view the results by going to
 ``http://localhost/your_app/coverage``.
 
+If you are using PHP 5.6.0 or greater, you can use `phpdbg <http://phpdbg.com/>`__ 
+to generate coverage instead of xdebug. ``phpdbg`` is generally faster at 
+generating coverage::
+
+.. code-block:: bash
+
+    $ phpdbg -qrr phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
+
 Combining Test Suites for Plugins
 ---------------------------------
 
