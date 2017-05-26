@@ -1313,8 +1313,8 @@ PagematronComponent というコンポーネントがアプリケーションに
     use Cake\Controller\Controller;
     use Cake\Controller\ComponentRegistry;
     use Cake\Event\Event;
-    use Cake\Network\Request;
-    use Cake\Network\Response;
+    use Cake\Http\ServerRequest;
+    use Cake\Http\Response;
     use Cake\TestSuite\TestCase;
 
     class PagematronComponentTest extends TestCase
@@ -1327,7 +1327,7 @@ PagematronComponent というコンポーネントがアプリケーションに
         {
             parent::setUp();
             // コンポーネントと偽のテストコントローラのセットアップ
-            $request = new Request();
+            $request = new ServerRequest();
             $response = new Response();
             $this->controller = $this->getMockBuilder('Cake\Controller\Controller')
                 ->setConstructorArgs([$request, $response])

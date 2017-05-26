@@ -31,7 +31,7 @@ CakePHP はきれいなディスパッチサイクルに使う強固なフィル
   ``$request->getParam()`` でルーティングの結果が読めます。
 * ``ControllerFactory`` は ``$request->getParam()`` を現在のリクエストを扱うための
   コントローラーを設置するために使います。
-* ``LocaleSelector`` はブラウザによって送られる ``Accept-Language`` ヘッダーによって
+* ``LocaleSelector`` はブラウザーによって送られる ``Accept-Language`` ヘッダーによって
   自動的に言語を切り替えます。
 
 
@@ -133,14 +133,14 @@ CakePHP はきれいなディスパッチサイクルに使う強固なフィル
 ``DispatcherFilter`` サブクラスでオーバーライド可能な ``beforeDispatch()`` と
 ``afterDispatch()`` メソッドを提供します。それらのメソッドはそれぞれ個別に、
 コントローラーが実行された時にその前か後に実行されます。両方のメソッドは、
-``$data`` プロパティー内で ``Request`` と ``Response`` (
-:php:class:`Cake\\Network\\Request` と :php:class:`Cake\\Network\\Response`
+``$data`` プロパティー内で ``ServerRequest`` と ``Response`` (
+:php:class:`Cake\\Http\\ServerRequest` と :php:class:`Cake\\Http\\Response`
 インスタンス) オブジェクトを含む :php:class:`Cake\\Event\\Event` オブジェクトを
 受け取ります。
 
 フィルターがとてもシンプルであるにも関わらず、いくつかの興味深いことがフィルターメソッドで出来ます。
 ``Response`` オブジェクトを返すことで、ディスパッチプロセスをスキップし、呼ばれているフィルターと
-コントローラーの干渉を防ぐことが出来ます。レスポンスを返す時に、``$event->stopPropagation()``
+コントローラーの干渉を防ぐことが出来ます。レスポンスを返す時に、 ``$event->stopPropagation()``
 を他のフィルターを呼ばないために呼ぶことを覚えておいて下さい。
 
 .. note::
@@ -177,7 +177,7 @@ CakePHP はきれいなディスパッチサイクルに使う強固なフィル
     DispatcherFactory::add('HttpCache', ['for' => '/pages'])
 
 このフィルターは１日後に期限が切れるヘッダーをページコントローラーで送るレスポンスに付けて送ります。
-もちろんコントローラでも同じことが出来ます。 これはただのフィルターができることの例一部です。
+もちろんコントローラーでも同じことが出来ます。 これはただのフィルターができることの例一部です。
 実際は、レスポンスを操作する代わりに、 :php:class:`Cake\\Cache\\Cache` でキャッシュして、
 ``beforeDispatch()`` をコールバックしてレスポンスを制御できます。
 

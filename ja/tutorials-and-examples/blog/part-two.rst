@@ -303,7 +303,7 @@ POST なら、Articles モデルを使ってデータの保存を試みます。
 すべての CakePHP のリクエストは ``ServerRequest`` オブジェクトに格納されており、
 ``$this->request`` でアクセスできます。リクエストオブジェクトには、受信したリクエストに
 関するいろんな情報が含まれているので、アプリケーションのフローの制御に利用できます。今回は、
-リクエストが HTTP POST かどうかの確認に :php:meth:`Cake\\Network\\ServerRequest::is()` メソッドを
+リクエストが HTTP POST かどうかの確認に :php:meth:`Cake\\Http\\ServerRequest::is()` メソッドを
 使用しています。
 
 ユーザがフォームを使ってデータを POST した場合、その情報は、 ``$this->request->getData()``

@@ -18,7 +18,7 @@ hidden フィールドに CSRF トークンが追加されます。 ``Controller
 .. note::
     副作用が起こる前に、HTTP メソッドが使われているかをいつも確かめてください。
     正しい HTTP メソッドが使用されているかを確認するために、 :ref:`HTTP メソッドを確認する
-    <check-the-request>` または :php:meth:`Cake\\Network\\Request::allowMethod()`
+    <check-the-request>` または :php:meth:`Cake\\Http\\ServerRequest::allowMethod()`
     を使用してください。
 
 .. versionadded:: 3.1

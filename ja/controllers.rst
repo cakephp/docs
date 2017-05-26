@@ -78,7 +78,7 @@ AppController
 リクエストの流れ
 ================
 
-CakePHPアプリケーションへのリクエストが生じると、 CakePHP の :php:class:`Cake\\Routing\\Router`
+CakePHP アプリケーションへのリクエストが生じると、 CakePHP の :php:class:`Cake\\Routing\\Router`
 と :php:class:`Cake\\Routing\\Dispatcher` クラスは正しいコントローラを見つけて、
 インスタンスを作成するために :ref:`routes-configuration` を使用します。
 リクエストデータはリクエストオブジェトに中にカプセル化されています。
@@ -127,7 +127,7 @@ CakePHP の規約に従うと、手動でビューを描画したり生成した
 代わりに、コントローラのアクションが完了すると、CakePHP はビューの描画と送信をします。
 
 もし何らかの理由でデフォルトの動作をスキップさせたければ、完全にレスポンスを作成して、
-アクションから :php:class:`Cake\\Network\\Response` オブジェクトを返すこともできます。
+アクションから :php:class:`Cake\\Http\\Response` オブジェクトを返すこともできます。
 
 アプリケーションでコントローラを効率的に使うために、CakePHP のコントローラから提供される
 いくつかのコアな属性やメソッドを説明しましょう。

@@ -17,7 +17,7 @@ CakePHP には、リクエストの実行に使用できる基本的ながら強
 リクエストの実行は、シンプルで簡単です。
 GET リクエストは、次のようになります。 ::
 
-    use Cake\Network\Http\Client;
+    use Cake\Http\Client;
 
     $http = new Client();
 
@@ -87,9 +87,9 @@ POST や PUT のリクエストを実行することは、同様に簡単です�
 
 非常に特殊の方法でリクエストボディを構築しなければならない場合もあるかもしれません。
 このような状況では、多くの場合、あなたが望んだ特殊なマルチパートの HTTP リクエストを作るために
-``Cake\Network\Http\FormData`` を使用することができます。 ::
+``Cake\Http\Client\FormData`` を使用することができます。 ::
 
-    use Cake\Network\Http\FormData;
+    use Cake\Http\Client\FormData;
 
     $data = new FormData();
 
