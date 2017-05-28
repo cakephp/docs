@@ -193,7 +193,7 @@ Les Types d'Attribut Correspondants
             ]
         */
 
-.. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
+.. php:staticmethod:: combine(array $data, $keyPath, $valuePath = null, $groupPath = null)
 
     Crée un tableau associatif en utilisant ``$keyPath`` en clé pour le chemin
     à construire, et optionnellement ``$valuePath`` comme chemin pour récupérer
