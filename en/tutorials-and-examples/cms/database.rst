@@ -158,7 +158,7 @@ look like this::
         ];
     }
 
-Our entity is quite slim right now, and we've only setup the ``_acessible``
+Our entity is quite slim right now, and we've only setup the ``_accessible``
 property which controls how properties can be modified by
 :ref:`entities-mass-assignment`.
 
