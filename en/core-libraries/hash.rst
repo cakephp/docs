@@ -142,7 +142,7 @@ Attribute Matching Types
             ]
         */
 
-.. php:staticmethod:: remove(array $data, $path = null)
+.. php:staticmethod:: remove(array $data, $path)
 
     Removes all elements from an array that match ``$path``. ::
 

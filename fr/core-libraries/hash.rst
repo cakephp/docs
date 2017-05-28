@@ -153,7 +153,7 @@ Les Types d'Attribut Correspondants
             ]
         */
 
-.. php:staticmethod:: remove(array $data, $path = null)
+.. php:staticmethod:: remove(array $data, $path)
 
     Retire tous les éléments d'un tableau qui matche avec ``$path``::
 
