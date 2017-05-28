@@ -128,7 +128,7 @@ CakePHP におけるほとんどのことがそうであるように、テスト
    マークすることでテストメソッドとすることもできます。
 
 .. versionadded:: 3.4.1
-    PHPUnit6 のサポートが追加されました。5.7.0 より低いバージョンの PHPUnit を
+    PHPUnit 6 のサポートが追加されました。5.7.0 より低いバージョンの PHPUnit を
     使用する場合、テストケースは Cake のクラスまたは ``PHPUnit_Framework_TestCase`` を
     継承してください。
 
@@ -297,6 +297,14 @@ PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを�
 
 これで、アプリケーションの webroot ディレクトリ内のカバレッジ結果を配置します。
 ``http://localhost/your_app/coverage`` にアクセスすると、結果を表示することができるはずです。
+
+PHP 5.6.0 以上を利用している場合、カバレッジを生成するために xdebug の代わりに
+`phpdbg <http://phpdbg.com/>`__ を使用できます。一般的にカバレッジの生成は
+``phpdbg`` の方が速いです。
+
+.. code-block:: bash
+
+    $ phpdbg -qrr phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 
 プラグインのテストスイートを組合わせ
 ------------------------------------

@@ -23,6 +23,21 @@ cron ジョブとして実行します。
 
     cron ジョブで画面出力を非表示にするために ``-q`` (または `--quiet`) を使用してください。
 
+共有ホスティング上の cron ジョブ
+--------------------------------
+
+いくつかの共有ホスティング上で ``cd /full/path/to/root && bin/cake myshell myparam``
+は動作しません。代わりに ``php /full/path/to/root/bin/cake.php myshell myparam``
+が使用できます。
+
+.. note::
+     php.ini の中で ``register_argc_argv = 1`` を含めることによって、
+     register_argc_argv を有効にしなければなりません。グローバルに register_argc_argv
+     を変更できない場合、 ``-c /full/path/to/root/php.ini`` をつけることで、
+     cron ジョブに独自の設定ファイル (php.ini) を指定することができます。例: ``php -c
+     /full/path/to/root/php.ini /full/path/to/root/bin/cake.php myshell
+     myparam``
+
 .. meta::
     :title lang=ja: cron ジョブに登録してシェルを実行する
     :keywords lang=ja: cron ジョブ,bash script,crontab
