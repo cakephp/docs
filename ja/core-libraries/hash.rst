@@ -139,7 +139,7 @@ Hash パス構文
             ]
         */
 
-.. php:staticmethod:: remove(array $data, $path = null)
+.. php:staticmethod:: remove(array $data, $path)
 
     ``$path`` に合致するすべての要素を配列から削除します。 ::
 
