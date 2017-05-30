@@ -442,7 +442,7 @@ two rules::
 .. note::
 
    ``validCount`` returns ``false`` if the property is not countable or does not exist.
-   E.g. comparing via ``<``, ``<=`` or against ``0`` may unexpectedly return ``false``,
+   E.g. comparing via ``<``, ``<=`` or against ``0`` will return ``false``,
    if you do not supply at least an empty list of - say - subscriptions.
 
 .. versionadded:: 3.3.0
