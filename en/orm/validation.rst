@@ -438,6 +438,11 @@ two rules::
     $rules->add($rules->validCount('tags', 3, '>=', 'You must have at least 3 tags'));
     $rules->add($rules->validCount('tags', 5, '<=', 'You must have at most 5 tags'));
 
+.. note::
+
+   When comparing with the ``<`` or ``<=`` operators ``validCount()`` will return
+   false in case, say, you do not at least supply an empty list of tags.
+
 .. versionadded:: 3.3.0
     The ``validCount()`` method was added in 3.3.0.
 
