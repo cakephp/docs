@@ -440,7 +440,7 @@ two rules::
 
 .. note::
 
-   When comparing via the ``<`` or ``<=`` operators, ``validCount()`` will return
+   When comparing via the ``<``, ``<=`` or ``== 0`` operators, ``validCount()`` will return
    ``false`` if you do not supply at least an empty list of - say - tags.
 
 .. versionadded:: 3.3.0
