@@ -774,6 +774,23 @@ command::
     --verbose, -v  Enable verbose output.
     --quiet, -q    Enable quiet output.
 
+Set a help alias
+~~~~~~~~~~~~~~~~
+
+.. php:method:: setHelpAlias($alias)
+
+If you want to change the command name, you can use the ``setHelpAlias()`` method::
+
+    $parser->setHelpAlias('my-shell');
+
+This will change the usage output to ``my-shell`` instead of the default ``cake`` value::
+
+    Usage:
+    my-shell console [-h] [-v] [-q]
+
+.. versionadded:: 3.5
+    The help alias was added in 3.5.
+
 Set the Epilog
 --------------
 
