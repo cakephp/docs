@@ -213,6 +213,23 @@ add the following::
 To access other parts of the request data, consult the :ref:`cake-request`
 section.
 
+Since passed arguments are passed as method parameters, you could also write the
+action using PHP's variadic argument::
+
+    public function tags(...$tags)
+    {
+        // Use the ArticlesTable to find tagged articles.
+        $articles = $this->Articles->find('tagged', [
+            'tags' => $tags
+        ]);
+
+        // Pass variables into the view template context.
+        $this->set([
+            'articles' => $articles,
+            'tags' => $tags
+        ]);
+    }
+
 Creating the Finder Method
 --------------------------
 
