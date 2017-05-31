@@ -59,6 +59,8 @@ The following is a list of methods that are deprecated and replaced with
     * ``env()`` (now ``getEnv()`` / ``withEnv()``)
 ``Cake\ORM\LocatorAwareTrait``
     * ``tableLocator()``
+``Cake\ORM\Table``
+    * ``validator()``
 ``Cake\TestSuite\TestFixture``
     * ``schema()``
 ``Cake\Utility\Security``
@@ -148,3 +150,5 @@ New Features
   allows you to set the command name used when generating help output. Defaults
   to ``cake``.
 * ``Cake\Datasource\SchemaInterface`` was added.
+* ``Cake\Validation\ValidatorAwareInterface`` was added to define the methods
+  implemented by ``Cake\Validation\ValidatorAwareTrait``.
