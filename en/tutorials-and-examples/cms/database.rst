@@ -19,7 +19,7 @@ tables::
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT NOT NULL,
         title VARCHAR(255) NOT NULL,
-        slug VARCHAR(255) NOT NULL,
+        slug VARCHAR(191) NOT NULL,
         body TEXT,
         published BOOLEAN DEFAULT FALSE,
         created DATETIME,
@@ -30,7 +30,7 @@ tables::
 
     CREATE TABLE tags (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        title VARCHAR(255),
+        title VARCHAR(191),
         created DATETIME,
         modified DATETIME,
         UNIQUE KEY (title)
