@@ -16,6 +16,8 @@ features will continue to function until 4.0.0 after which they will be removed.
   RssHelper is deprecated.
 * ``Cake\Controller\Component\CsrfComponent`` is deprecated. Use
   :ref:`csrf-middleware` instead.
+* ``Cake\Datasource\TableSchemaInterface`` is deprecated. Use
+  ``Cake\Database\TableSchemaAwareInterface`` instead.
 
 Deprecated Combined Get/Set Methods
 -----------------------------------
@@ -57,6 +59,10 @@ The following is a list of methods that are deprecated and replaced with
     * ``env()`` (now ``getEnv()`` / ``withEnv()``)
 ``Cake\ORM\LocatorAwareTrait``
     * ``tableLocator()``
+``Cake\ORM\Table``
+    * ``validator()``
+``Cake\TestSuite\TestFixture``
+    * ``schema()``
 ``Cake\Utility\Security``
     * ``salt()``
 ``Cake\View\View``
@@ -143,3 +149,6 @@ New Features
 * ``Cake\Console\ConsoleOptionParser::setHelpAlias()`` was added. This method
   allows you to set the command name used when generating help output. Defaults
   to ``cake``.
+* ``Cake\Datasource\SchemaInterface`` was added.
+* ``Cake\Validation\ValidatorAwareInterface`` was added to define the methods
+  implemented by ``Cake\Validation\ValidatorAwareTrait``.
