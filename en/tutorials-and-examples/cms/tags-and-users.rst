@@ -279,7 +279,7 @@ put the following content::
 
     <h1>
         Articles tagged with
-        <?= $this->Text->toList(h($tags)) ?>
+        <?= $this->Text->toList(h($tags), 'or') ?>
     </h1>
 
     <section>
