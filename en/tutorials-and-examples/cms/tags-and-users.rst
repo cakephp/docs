@@ -59,6 +59,7 @@ add the following::
 
         // Code from bake.
 
+        // Add this method
         protected function _setPassword($value)
         {
             if (strlen($value)) {
@@ -69,7 +70,9 @@ add the following::
         }
     }
 
-Now update one of the users you created earlier, if you change their password,
+Now, point your browser to **http://localhost:8765/users** to see a list of users.
+You can edit the default user that was created during
+:doc:`Installation <installation>`. If you change that user's password,
 you should see a hashed password instead of the original value on the list or
 view pages. CakePHP hashes passwords with `bcrypt
 <http://codahale.com/how-to-safely-store-a-password/>`_ by default. You can also
@@ -208,6 +211,10 @@ from CakePHP informing you that the controller action does not exist. Let's
 implement that missing method now. In **src/Controller/ArticlesController.php**
 add the following::
 
+    // add this use statement right below the namespace declaration to import
+    // the Query class
+    use Cake\ORM\Query;
+
     public function tags()
     {
         // The 'pass' key is provided by CakePHP and contains all
@@ -328,6 +335,8 @@ Because we'll want a simple way to access the formatted tags for an entity, we
 can add a virtual/computed field to the entity. In
 **src/Model/Entity/Article.php** add the following::
 
+    // add this use statement right below the namespace declaration to import
+    // the Collection class
     use Cake\Collection\Collection;
 
     protected function _getTagString()
@@ -372,6 +381,8 @@ to **src/Model/Table/ArticlesTable.php**::
         if ($entity->tag_string) {
             $entity->tags = $this->_buildTags($entity->tag_string);
         }
+
+        // Other code
     }
 
     protected function _buildTags($tagString)

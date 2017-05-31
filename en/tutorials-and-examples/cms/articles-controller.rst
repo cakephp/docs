@@ -304,6 +304,9 @@ typically a URL-safe version of an article's title. We can use the
 :ref:`beforeSave() callback <table-callbacks>` of the ORM to populate our slug::
 
     // in src/Model/Table/ArticlesTable.php
+
+    // add this use statement right below the namespace declaration to import
+    // the Text class
     use Cake\Utility\Text;
 
     // Add the following method.
@@ -421,6 +424,10 @@ Up until this point our Articles had no input validation done. Lets fix that by
 using :ref:`a validator <validating-request-data>`::
 
     // src/Model/Table/ArticlesTable.php
+
+    // add this use statement right below the namespace declaration to import
+    // the Validator class
+    use Cake\Validation\Validator;
 
     // Add the following method.
     public function validationDefault(Validator $validator)

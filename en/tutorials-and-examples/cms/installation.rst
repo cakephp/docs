@@ -100,6 +100,8 @@ home page. Before you can do that, you'll need to start the development server:
 
 .. code-block:: bash
 
+    cd /path/to/our/app
+
     bin/cake server
 
 .. note::
