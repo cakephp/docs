@@ -9,7 +9,7 @@ La clase App se encarga de la localización de recursos y de la
 administración de rutas.
 
 Búsqueda de clases
-===============
+==================
 
 .. php:staticmethod:: classname($name, $type = '', $suffix = '')
 
@@ -72,7 +72,7 @@ devuelve la ruta completa al plugin DebugKit::
     $path = Plugin::path('DebugKit');
 
 Localización de temas (nota:'themes')
-=============================
+=====================================
 
 Dado que los temas (nota:'themes') son también plugins, 
 se localizan con el método anterior, "Plugin".
@@ -80,7 +80,7 @@ se localizan con el método anterior, "Plugin".
 para modificar el comportamiento del bake, generador de código.')
 
 Cargar archivos externos (nota: 'vendor')
-====================
+=========================================
 
 Lo ideal es que los archivos externos ('vendor') se carguen automáticamente
 usando ``Composer``, si necesita archivos externos que no se pueden cargar
