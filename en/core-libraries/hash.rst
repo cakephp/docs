@@ -142,7 +142,7 @@ Attribute Matching Types
             ]
         */
 
-.. php:staticmethod:: remove(array $data, $path = null)
+.. php:staticmethod:: remove(array $data, $path)
 
     Removes all elements from an array that match ``$path``. ::
 
@@ -181,7 +181,7 @@ Attribute Matching Types
             ]
         */
 
-.. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
+.. php:staticmethod:: combine(array $data, $keyPath, $valuePath = null, $groupPath = null)
 
     Creates an associative array using a ``$keyPath`` as the path to build its keys,
     and optionally ``$valuePath`` as path to get the values. If ``$valuePath`` is not

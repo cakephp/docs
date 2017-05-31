@@ -139,7 +139,7 @@ Hash パス構文
             ]
         */
 
-.. php:staticmethod:: remove(array $data, $path = null)
+.. php:staticmethod:: remove(array $data, $path)
 
     ``$path`` に合致するすべての要素を配列から削除します。 ::
 
@@ -178,7 +178,7 @@ Hash パス構文
             ]
         */
 
-.. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
+.. php:staticmethod:: combine(array $data, $keyPath, $valuePath = null, $groupPath = null)
 
     ``$keyPath`` のパスをキー、``$valuePath`` （省略可） のパスを値として使って連想配列を作ります。
     ``$valuePath`` が省略された場合や、``$valuePath`` に合致するものが無かった場合は、値は null で初期化されます。

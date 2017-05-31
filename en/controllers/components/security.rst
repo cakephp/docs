@@ -57,13 +57,15 @@ works::
 
     public function beforeFilter(Event $event)
     {
-        $this->Security->config('blackHoleCallback', 'blackhole');
+        $this->Security->setConfig('blackHoleCallback', 'blackhole');
     }
 
     public function blackhole($type)
     {
         // Handle errors.
     }
+
+Note: use ``$this->Security->config()`` for CakePHP versions prior to 3.4
 
 The ``$type`` parameter can have the following values:
 
@@ -105,7 +107,8 @@ allowedActions
     This can be used to control cross controller requests.
 
 These configuration options allow you to restrict cross controller
-communication. Set them with the ``config()`` method.
+communication. Set them with the ``setConfig()`` method, or
+``config()`` if you are using a CakePHP version below 3.4.
 
 Form Tampering Prevention
 =========================
@@ -139,7 +142,8 @@ validatePost
     Set to ``false`` to completely skip the validation of POST
     requests, essentially turning off form validation.
 
-The above configuration options can be set with ``config()``.
+The above configuration options can be set with ``setConfig()`` or
+``config()`` for CakePHP versions below 3.4.
 
 Usage
 =====
@@ -241,9 +245,11 @@ There may be cases where you want to disable all security checks for an action
 
         public function beforeFilter(Event $event)
         {
-             $this->Security->config('unlockedActions', ['edit']);
+             $this->Security->setConfig('unlockedActions', ['edit']);
         }
     }
+
+Note: use ``$this->Security->config()`` for CakePHP versions prior to 3.4
 
 This example would disable all security checks for the edit action.
 
