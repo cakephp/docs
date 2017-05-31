@@ -162,7 +162,7 @@ look like::
     // The trailing `*` tells CakePHP that this action has
     // passed parameters.
     Router::scope(
-        '/bookmarks',
+        '/articles',
         ['controller' => 'Articles'],
         function ($routes) {
             $routes->connect('/tagged/*', ['action' => 'tags']);
@@ -184,6 +184,8 @@ look like::
         $routes->fallbacks();
     });
 
+    Plugin::routes();
+
 The above defines a new 'route' which connects the **/articles/tagged/** path,
 to ``ArticlesController::tags()``. By defining routes, you can isolate how your
 URLs look, from how they are implemented. If we were to visit
@@ -198,8 +200,8 @@ add the following::
         // the passed URL path segments in the request.
         $tags = $this->request->getParam('pass');
 
-        // Use the ArticlesTable to find tagged bookmarks.
-        $bookmarks = $this->Articles->find('tagged', [
+        // Use the ArticlesTable to find tagged articles.
+        $articles = $this->Articles->find('tagged', [
             'tags' => $tags
         ]);
 
@@ -227,9 +229,15 @@ method has not been implemented yet, so let's do that. In
     // to find('tagged') in our controller action.
     public function findTagged(Query $query, array $options)
     {
+        $columns = [
+            'Articles.id', 'Articles.user_id', 'Articles.title',
+            'Articles.body', 'Articles.published', 'Articles.created',
+            'Articles.slug',
+        ];
+
         $query = $query
-            ->select(['id', 'user_id', 'title', 'body', 'published', 'created'])
-            ->distinct(['id', 'user_id', 'title', 'body', 'published', 'created']);
+            ->select($columns)
+            ->distinct($columns);
 
         if (empty($options['tags'])) {
             // If there are no tags provided, find articles that have no tags.
@@ -272,7 +280,7 @@ put the following content::
             <!-- Use the HtmlHelper to create a link -->
             <h4><?= $this->Html->link(
                 $article->title,
-                ['controller' => 'Articles', 'action' => 'view', $article->id]
+                ['controller' => 'Articles', 'action' => 'view', $article->slug]
             ) ?></h4>
             <span><?= h($article->created) ?>
         </article>

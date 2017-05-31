@@ -160,7 +160,7 @@ Let's create the view for our new 'view' action and place it in
     <p><?= $this->Html->link('Edit', ['action' => 'edit', $article->slug]) ?></p>
 
 You can verify that this is working by trying the links at ``/articles/index`` or
-manually requesting an article by accessing URLs like ``/articles/view/1``.
+manually requesting an article by accessing URLs like ``/articles/view/slug-name``.
 
 Adding Articles
 ===============
