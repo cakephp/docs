@@ -130,14 +130,44 @@ articles. First, update the ``add`` action to look like::
 
 The added lines load a list of tags as an associative array of ``id => title``.
 This format will let us create a new tag input in our template.
-Add the following to **src/Template/Articles/add.ctp**::
+Add the following to the PHP block of controls in **src/Template/Articles/add.ctp**::
 
-    <?= $this->Form->control('tags._ids', ['options' => $tags]) ?>
+    echo $this->Form->control('tags._ids', ['options' => $tags]);
 
 This will render a multiple select element that uses the ``$tags`` variable to
 generate the select box options. You should now create a couple new articles
 that have tags, as in the following section we'll be adding the ability to find
 articles by tags.
+
+You should also update the ``edit` method to allow adding or editing tags. The
+edit method should now look like::
+
+    public function edit($slug)
+    {
+        $article = $this->Articles
+            ->findBySlug($slug)
+            ->contain('Tags') // load associated Tags
+            ->firstOrFail();
+        if ($this->request->is(['post', 'put'])) {
+            $this->Articles->patchEntity($article, $this->request->getData());
+            if ($this->Articles->save($article)) {
+                $this->Flash->success(__('Your article has been updated.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Unable to update your article.'));
+        }
+
+        // Get a list of tags.
+        $tags = $this->Articles->Tags->find('list');
+
+        // Set tags to the view context
+        $this->set('tags', $tags);
+
+        $this->set('article', $article);
+    }
+
+Remember to add the new tags mutliple select control we added to the **add.ctp**
+template to the **src/Template/Articles/edit.ctp** template as well.
 
 Finding Articles By Tags
 ========================
