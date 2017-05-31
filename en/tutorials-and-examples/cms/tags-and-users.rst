@@ -48,6 +48,7 @@ call convention based setter methods any time a property is set in one of your
 entities. Let's add a setter for the password. In **src/Model/Entity/User.php**
 add the following::
 
+    <?php
     namespace App\Model\Entity;
 
     use Cake\Auth\DefaultPasswordHasher; // Add this line
@@ -91,12 +92,27 @@ to create free-form categories and labels for their content. Again, we'll use
 Once you have the scaffold code created, create a few sample tags by going to
 **http://localhost:8765/tags/add**.
 
+Now that we have a Tags table, we can create an association between Articles and
+Tags. We can do so by adding the following to the ``initialize`` method on the
+ArticlesTable::
+
+    public function initialize(array $config)
+    {
+        $this->addBehavior('Timestamp');
+        $this->belongsToMany('Tags'); // Add this line
+    }
+
+This association will work with this simple definition because we followed
+CakePHP conventions when creating our tables. For more information, read
+:doc:`/orm/associations`.
+
 Updating Articles to Enable Tagging
 ===================================
 
 Now that our application has tags, we need to enable users to tag their
 articles. First, update the ``add`` action to look like::
 
+    <?php
     // in src/Controller/ArticlesController.php
 
     namespace App\Controller;

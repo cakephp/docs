@@ -71,6 +71,7 @@ the values in the ``Datasources.default`` array in your **config/app.php** file
 with those that apply to your setup. A sample completed configuration array
 might look something like the following::
 
+    <?php
     return [
         // More configuration above.
         'Datasources' => [
@@ -112,6 +113,7 @@ They are stored in **src/Model/Table**. The file we'll be creating will be saved
 to **src/Model/Table/ArticlesTable.php**. The completed file should look like
 this::
 
+    <?php
     // src/Model/Table/ArticlesTable.php
     namespace App\Model\Table;
 
@@ -144,6 +146,7 @@ record in the database, and provide row level behavior for our data. Our entity
 will be saved to **src/Model/Entity/Article.php**. The completed file should
 look like this::
 
+    <?php
     // src/Model/Entity/Article.php
     namespace App\Model\Entity;
 

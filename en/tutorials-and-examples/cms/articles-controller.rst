@@ -7,6 +7,7 @@ methods, to prepare the response. We'll place this new controller in a file
 called **ArticlesController.php** inside the **src/Controller** directory.
 Here's what the basic controller should look like::
 
+    <?php
     // src/Controller/ArticlesController.php
 
     namespace App\Controller;
@@ -23,6 +24,7 @@ have routes connected to them. For example, when a user requests
 a response by rendering a Template in the View. The code for that action would
 look like this::
 
+    <?php
     // src/Controller/ArticlesController.php
 
     namespace App\Controller;
