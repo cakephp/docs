@@ -44,7 +44,7 @@ able to access that at **www.example.com/articles/foobar**. You may be tempted
 to name your controllers and actions in a way that allows you to obtain specific
 URLs. Resist that temptation. Instead, follow the :doc:`/intro/conventions`
 creating readable, meaningful action names. You can then use
-doc:`/development/routing` to connect the URLs you want to the actions you've
+:doc:`/development/routing` to connect the URLs you want to the actions you've
 created.
 
 Our controller action is very simple. It fetches a paginated set of articles
