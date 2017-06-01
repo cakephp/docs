@@ -149,14 +149,44 @@ articles. First, update the ``add`` action to look like::
 
 The added lines load a list of tags as an associative array of ``id => title``.
 This format will let us create a new tag input in our template.
-Add the following to **src/Template/Articles/add.ctp**::
+Add the following to the PHP block of controls in **src/Template/Articles/add.ctp**::
 
-    <?= $this->Form->control('tags._ids', ['options' => $tags]) ?>
+    echo $this->Form->control('tags._ids', ['options' => $tags]);
 
 This will render a multiple select element that uses the ``$tags`` variable to
 generate the select box options. You should now create a couple new articles
 that have tags, as in the following section we'll be adding the ability to find
 articles by tags.
+
+You should also update the ``edit`` method to allow adding or editing tags. The
+edit method should now look like::
+
+    public function edit($slug)
+    {
+        $article = $this->Articles
+            ->findBySlug($slug)
+            ->contain('Tags') // load associated Tags
+            ->firstOrFail();
+        if ($this->request->is(['post', 'put'])) {
+            $this->Articles->patchEntity($article, $this->request->getData());
+            if ($this->Articles->save($article)) {
+                $this->Flash->success(__('Your article has been updated.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Unable to update your article.'));
+        }
+
+        // Get a list of tags.
+        $tags = $this->Articles->Tags->find('list');
+
+        // Set tags to the view context
+        $this->set('tags', $tags);
+
+        $this->set('article', $article);
+    }
+
+Remember to add the new tags mutliple select control we added to the **add.ctp**
+template to the **src/Template/Articles/edit.ctp** template as well.
 
 Finding Articles By Tags
 ========================
@@ -181,7 +211,7 @@ look like::
     // The trailing `*` tells CakePHP that this action has
     // passed parameters.
     Router::scope(
-        '/bookmarks',
+        '/articles',
         ['controller' => 'Articles'],
         function ($routes) {
             $routes->connect('/tagged/*', ['action' => 'tags']);
@@ -203,6 +233,8 @@ look like::
         $routes->fallbacks();
     });
 
+    Plugin::routes();
+
 The above defines a new 'route' which connects the **/articles/tagged/** path,
 to ``ArticlesController::tags()``. By defining routes, you can isolate how your
 URLs look, from how they are implemented. If we were to visit
@@ -221,8 +253,8 @@ add the following::
         // the passed URL path segments in the request.
         $tags = $this->request->getParam('pass');
 
-        // Use the ArticlesTable to find tagged bookmarks.
-        $bookmarks = $this->Articles->find('tagged', [
+        // Use the ArticlesTable to find tagged articles.
+        $articles = $this->Articles->find('tagged', [
             'tags' => $tags
         ]);
 
@@ -267,9 +299,15 @@ method has not been implemented yet, so let's do that. In
     // to find('tagged') in our controller action.
     public function findTagged(Query $query, array $options)
     {
+        $columns = [
+            'Articles.id', 'Articles.user_id', 'Articles.title',
+            'Articles.body', 'Articles.published', 'Articles.created',
+            'Articles.slug',
+        ];
+
         $query = $query
-            ->select(['id', 'user_id', 'title', 'body', 'published', 'created'])
-            ->distinct(['id', 'user_id', 'title', 'body', 'published', 'created']);
+            ->select($columns)
+            ->distinct($columns);
 
         if (empty($options['tags'])) {
             // If there are no tags provided, find articles that have no tags.
@@ -312,7 +350,7 @@ put the following content::
             <!-- Use the HtmlHelper to create a link -->
             <h4><?= $this->Html->link(
                 $article->title,
-                ['controller' => 'Articles', 'action' => 'view', $article->id]
+                ['controller' => 'Articles', 'action' => 'view', $article->slug]
             ) ?></h4>
             <span><?= h($article->created) ?>
         </article>
