@@ -315,7 +315,9 @@ typically a URL-safe version of an article's title. We can use the
     public function beforeSave($event, $entity, $options)
     {
         if ($entity->isNew() && !$entity->slug) {
-            $entity->slug = Text::slug($entity->title);
+            $sluggedTitle = Text::slug($entity->title);
+            // trim slug to maximum length defined in schema
+            $entity->slug = substr($sluggedTitle, 0, 191)
         }
 
         // This is temporary, and will be removed later
