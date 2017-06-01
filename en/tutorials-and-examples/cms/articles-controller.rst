@@ -7,6 +7,7 @@ methods, to prepare the response. We'll place this new controller in a file
 called **ArticlesController.php** inside the **src/Controller** directory.
 Here's what the basic controller should look like::
 
+    <?php
     // src/Controller/ArticlesController.php
 
     namespace App\Controller;
@@ -23,6 +24,7 @@ have routes connected to them. For example, when a user requests
 a response by rendering a Template in the View. The code for that action would
 look like this::
 
+    <?php
     // src/Controller/ArticlesController.php
 
     namespace App\Controller;
@@ -48,7 +50,7 @@ created.
 
 Our controller action is very simple. It fetches a paginated set of articles
 from the database, using the Articles Model that is automatically loaded via naming
-conventions. It then uses ``set()`` to pass the articles into the View (which
+conventions. It then uses ``set()`` to pass the articles into the Template (which
 we'll create soon). CakePHP will automatically render the template after our
 controller action completes.
 
@@ -133,7 +135,7 @@ see an error page saying that action hasn't been implemented. Lets fix that now:
 
 While this is a simple action, we've used some powerful CakePHP features. We
 start our action off by using ``findBySlug()`` which is
-a :ref:`dynamic-finders`. This method allows us to create a basic query that
+a :ref:`Dynamic Finder <dynamic-finders>`. This method allows us to create a basic query that
 finds articles by a given slug. We then use ``firstOrFail()`` to either fetch
 the first record, or throw a ``NotFoundException``.
 
@@ -141,7 +143,7 @@ Our action takes a ``$slug`` parameter, but where does that parameter come from?
 If a user requests ``/articles/view/first-post``, then the value 'first-post' is
 passed as ``$slug`` by CakePHP's routing and dispatching layers.  If we
 reload our browser with our new action saved, we'd see another CakePHP error
-page telling use we're missing a view template; lets fix that.
+page telling use we're missing a view template; let's fix that.
 
 Create the View Template
 ========================
@@ -302,6 +304,9 @@ typically a URL-safe version of an article's title. We can use the
 :ref:`beforeSave() callback <table-callbacks>` of the ORM to populate our slug::
 
     // in src/Model/Table/ArticlesTable.php
+
+    // add this use statement right below the namespace declaration to import
+    // the Text class
     use Cake\Utility\Text;
 
     // Add the following method.
@@ -419,6 +424,10 @@ Up until this point our Articles had no input validation done. Lets fix that by
 using :ref:`a validator <validating-request-data>`::
 
     // src/Model/Table/ArticlesTable.php
+
+    // add this use statement right below the namespace declaration to import
+    // the Validator class
+    use Cake\Validation\Validator;
 
     // Add the following method.
     public function validationDefault(Validator $validator)
