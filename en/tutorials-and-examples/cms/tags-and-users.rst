@@ -139,7 +139,7 @@ generate the select box options. You should now create a couple new articles
 that have tags, as in the following section we'll be adding the ability to find
 articles by tags.
 
-You should also update the ``edit` method to allow adding or editing tags. The
+You should also update the ``edit`` method to allow adding or editing tags. The
 edit method should now look like::
 
     public function edit($slug)
