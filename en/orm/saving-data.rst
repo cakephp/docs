@@ -394,7 +394,7 @@ to process all the entities as a single transaction you can use
 ``transactional()``::
 
     // In a controller.
-    $articles->connection()->transactional(function () use ($articles, $entities) {
+    $articles->getConnection()->transactional(function () use ($articles, $entities) {
         foreach ($entities as $entity) {
             $articles->save($entity, ['atomic' => false]);
         }
