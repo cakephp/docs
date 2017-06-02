@@ -424,7 +424,7 @@ the type mapping. During our application bootstrap we should do the following::
 
     use Cake\Database\Type;
 
-    Type::map('json', 'Cake\Database\Type\JsonType');
+    Type::map('json', 'App\Database\Type\JsonType');
 
 We can then overload the reflected schema data to use our new type, and
 CakePHP's database layer will automatically convert our JSON data when creating
