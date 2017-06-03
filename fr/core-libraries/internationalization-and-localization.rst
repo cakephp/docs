@@ -128,7 +128,7 @@ cette méthode::
 
     use Cake\I18n\I18n;
 
-    I18n::locale('de_DE');
+    I18n::setLocale('de_DE');
 
 Cela changera également le formatage des nombres et des dates lorsque vous
 utilisez les outils de localisation.
@@ -425,7 +425,7 @@ fonction loader doit retourner un objet ``Aura\Intl\Package``. Une fois que le
 code est en place vous pouvez utiliser les fonctions de traduction comme
 d'habitude::
 
-    I18n::locale('fr_FR');
+    I18n::setLocale('fr_FR');
     __d('animals', 'Dog'); // Retourne "Chien"
 
 Comme vous pouvez le voir, les objets ``Package`` prennent les messages de
@@ -596,7 +596,7 @@ la locale et utiliser les bonnes classes::
     use Cake\I18n\Time;
     use Cake\I18n\Number;
 
-    I18n::locale('fr-FR');
+    I18n::setLocale('fr-FR');
 
     $date = new Time('2015-04-05 23:00:00');
 

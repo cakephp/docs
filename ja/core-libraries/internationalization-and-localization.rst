@@ -113,7 +113,7 @@ i18n シェルを利用できます。より知りたい場合は、 :doc:`次�
 
     use Cake\I18n\I18n;
 
-    I18n::locale('de_DE');
+    I18n::setLocale('de_DE');
 
 地域化のツールを使うと、これは数字や日付がどのようにフォーマットされているかについても変更します。
 
@@ -374,7 +374,7 @@ Gettext の複数形選択を使用する
 見つかります。翻訳機構を作成するのに最低限必要なのは、ローダー機能が ``Aura\Intl\Package``
 オブジェクトを返すことです。一旦コードを置けば、翻訳機能は以下のように利用できるでしょう。 ::
 
-    I18n::locale('fr_FR');
+    I18n::setLocale('fr_FR');
     __d('animals', 'Dog'); // "Chien" を返す
 
 見てお分かりの通り、 ``Package`` オブジェクトは配列として翻訳メッセージを受け取ります。
@@ -532,7 +532,7 @@ CakePHP が利用しているものと同じやり方を使い続けることも
     use Cake\I18n\Time;
     use Cake\I18n\Number;
 
-    I18n::locale('fr-FR');
+    I18n::setLocale('fr-FR');
 
     $date = new Time('2015-04-05 23:00:00');
 

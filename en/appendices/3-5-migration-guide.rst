@@ -57,6 +57,9 @@ The following is a list of methods that are deprecated and replaced with
     * ``outputAs()`` (now ``getOutputFormat()`` / ``setOutputFormat()``)
 ``Cake\Http\ServerRequest``
     * ``env()`` (now ``getEnv()`` / ``withEnv()``)
+``Cake\I18n\I18n``
+    * ``locale()``
+    * ``translator()``
 ``Cake\ORM\LocatorAwareTrait``
     * ``tableLocator()``
 ``Cake\ORM\Table``

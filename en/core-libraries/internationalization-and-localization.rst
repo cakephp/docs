@@ -121,7 +121,8 @@ To change the language for translated strings you can call this method::
 
     use Cake\I18n\I18n;
 
-    I18n::locale('de_DE');
+    // Prior to 3.5 use I18n::locale()
+    I18n::setLocale('de_DE');
 
 This will also change how numbers and dates are formatted when using one of the
 localization tools.
@@ -405,7 +406,8 @@ minimum that is required for creating a translator is that the loader function
 should return a ``Aura\Intl\Package`` object. Once the code is in place you can
 use the translation functions as usual::
 
-    I18n::locale('fr_FR');
+    // Prior to 3.5 use I18n::locale()
+    I18n::setLocale('fr_FR');
     __d('animals', 'Dog'); // Returns "Chien"
 
 As you see, ``Package`` objects take translation messages as an array. You can
@@ -569,7 +571,8 @@ the current locale setting and use the right classes::
     use Cake\I18n\Time;
     use Cake\I18n\Number;
 
-    I18n::locale('fr-FR');
+    // Prior to 3.5 use I18n::locale()
+    I18n::setLocale('fr-FR');
 
     $date = new Time('2015-04-05 23:00:00');
 
