@@ -355,7 +355,7 @@ Gettext の複数形選択を使用する
 
     use Aura\Intl\Package;
 
-    I18n::translator('animals', 'fr_FR', function () {
+    I18n::translator('animals', function () {
         $package = new Package(
             'default', // フォーマット戦略 (ICU)
             'default'  // フォールバックドメイン
@@ -368,7 +368,7 @@ Gettext の複数形選択を使用する
         ]);
 
         return $package;
-    });
+    }, 'fr_FR');
 
 上記のコードは **config/bootstrap.php** に追加してください。そうすれば翻訳の機能が使われる前に
 見つかります。翻訳機構を作成するのに最低限必要なのは、ローダー機能が ``Aura\Intl\Package``
@@ -387,10 +387,10 @@ Gettext の複数形選択を使用する
 
     // src/Locale/folder/sub_folder/filename.po からメッセージをロード
 
-    I18n::translator(
+    I18n::setTranslator(
         'animals',
+        new Loader('filename', 'folder/sub_folder', 'po'),
         'fr_FR',
-        new Loader('filename', 'folder/sub_folder', 'po')
     );
 
 のようになります。
@@ -426,10 +426,10 @@ CakePHP が利用しているものと同じやり方を使い続けることも
 
     use Cake\I18n\MessagesFileLoader as Loader;
 
-    I18n::translator(
+    I18n::setTranslator(
         'animals',
-        'fr_FR',
-        new Loader('animals', 'fr_FR', 'yaml')
+        new Loader('animals', 'fr_FR', 'yaml'),
+        'fr_FR'
     );
 
 .. _creating-generic-translators:

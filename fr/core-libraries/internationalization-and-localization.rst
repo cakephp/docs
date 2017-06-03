@@ -403,7 +403,7 @@ un seul domaine et une seule locale::
 
     use Aura\Intl\Package;
 
-    I18n::translator('animals', 'fr_FR', function () {
+    I18n::setTranslator('animals', function () {
         $package = new Package(
             'default', // The formatting strategy (ICU)
             'default' // The fallback domain
@@ -416,7 +416,7 @@ un seul domaine et une seule locale::
         ]);
 
         return $package;
-    });
+    }, 'fr_FR');
 
 Le code ci-dessus peut être ajouté à votre **config/bootstrap.php** pour
 que les traductions soient ajoutées avant qu'une fonction de traduction ne soit
@@ -441,10 +441,10 @@ depuis un autre endroit::
 
     // Charge les messages depuis src/Locale/folder/sub_folder/filename.po
 
-    I18n::translator(
+    I18n::setTranslator(
         'animals',
-        'fr_FR',
-        new Loader('filename', 'folder/sub_folder', 'po')
+        new Loader('filename', 'folder/sub_folder', 'po'),
+        'fr_FR'
     );
 
 Créer des Parsers de Messages
@@ -480,10 +480,10 @@ Enfin, configurez le loader de traduction pour le domaine et la locale::
 
     use Cake\I18n\MessagesFileLoader as Loader;
 
-    I18n::translator(
+    I18n::setTranslator(
         'animals',
-        'fr_FR',
-        new Loader('animals', 'fr_FR', 'yaml')
+        new Loader('animals', 'fr_FR', 'yaml'),
+        'fr_FR'
     );
 
 .. _creating-generic-translators:
@@ -491,7 +491,7 @@ Enfin, configurez le loader de traduction pour le domaine et la locale::
 Créer des Traducteurs Génériques
 --------------------------------
 
-Configurer des traducteurs en appelant ``I18n::translator()`` pour chaque
+Configurer des traducteurs en appelant ``I18n::setTranslator()`` pour chaque
 domaine et locale que vous devez supporter peut être fastidieux, spécialement
 si vous devez supporter plus que quelques locales. Pour éviter ce problème,
 CakePHP vous permet de définir des loaders de traduction génériques pour chaque
@@ -578,7 +578,7 @@ interpoler les variables::
 Il est possible de définir le formateur par défaut pour tous les traducteurs
 créés par CakePHP avant qu'ils soient utilisés pour la première fois. Cela
 n'inclut pas les traducteurs créés manuellement en utilisant les méthodes
-``translator()`` et ``config()``::
+``setTranslator()`` et ``config()``::
 
     I18n::defaultFormatter('sprintf');
 
