@@ -391,7 +391,7 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
 すべてのエンティティを処理したいのであれば、 ``transactional()`` を使うことができます。 ::
 
     // コントローラの中で。
-    $articles->connection()->transactional(function () use ($articles, $entities) {
+    $articles->getConnection()->transactional(function () use ($articles, $entities) {
         foreach ($entities as $entity) {
             $articles->save($entity, ['atomic' => false]);
         }
