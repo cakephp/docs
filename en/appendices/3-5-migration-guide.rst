@@ -152,3 +152,5 @@ New Features
 * ``Cake\Datasource\SchemaInterface`` was added.
 * ``Cake\Validation\ValidatorAwareInterface`` was added to define the methods
   implemented by ``Cake\Validation\ValidatorAwareTrait``.
+* ``Cake\Http\Client::addCookie()`` was added to make it easy to add cookies to
+  a client instance.
