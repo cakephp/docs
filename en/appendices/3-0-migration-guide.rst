@@ -1101,7 +1101,7 @@ the ``I18n`` class::
     Configure::write('Config.language', 'fr_FR');
 
     // Now
-    I18n::locale('en_US');
+    I18n::setLocale('en_US');
 
 - The methods below have been moved:
 

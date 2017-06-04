@@ -1129,7 +1129,7 @@ I18n
     Configure::write('Config.language', 'fr_FR');
 
     // Now
-    I18n::locale('en_US');
+    I18n::setLocale('en_US');
 
 - 以下のメソッドが移動されました：
 

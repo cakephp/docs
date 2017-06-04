@@ -1216,7 +1216,7 @@ pouvez utiliser la classe ``I18n``::
     Configure::write('Config.language', 'fr_FR');
 
     // Maintenant
-    I18n::locale('en_US');
+    I18n::setLocale('en_US');
 
 - Les méthodes ci-dessous ont été déplacées:
 

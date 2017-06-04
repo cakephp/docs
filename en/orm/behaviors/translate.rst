@@ -33,7 +33,7 @@ Now, select a language to be used for retrieving entities by changing
 the application language, which will affect all translations::
 
     // In a controller. Change the locale, e.g. to Spanish
-    I18n::locale('es');
+    I18n::setLocale('es');
     $this->loadModel('Articles');
 
 Then, get an existing entity::
@@ -172,7 +172,7 @@ translation for entities that are loaded::
     use Cake\I18n\I18n;
 
     // Then you can change the language in your action:
-    I18n::locale('es');
+    I18n::setLocale('es');
     $this->loadModel('Articles');
 
     // All entities in results will contain spanish translation
@@ -181,7 +181,7 @@ translation for entities that are loaded::
 This method works with any finder in your tables. For example, you can
 use TranslateBehavior with ``find('list')``::
 
-    I18n::locale('es');
+    I18n::setLocale('es');
     $data = $this->Articles->find('list')->toArray();
 
     // Data will contain
@@ -289,12 +289,12 @@ simply uses the query builder function for the ``contain`` clause to use the
 Retrieving one language without using I18n::locale
 --------------------------------------------------
 
-calling ``I18n::locale('es');`` changes the default locale for all translated
+calling ``I18n::setLocale('es');`` changes the default locale for all translated
 finds, there may be times you wish to retrieve translated content without
 modifying the application's state. For these scenarios use the behavior
-``locale()`` method::
+``setLocale()`` method::
 
-    I18n::locale('en'); // reset for illustration
+    I18n::setLocale('en'); // reset for illustration
 
     $this->loadModel('Articles');
     $this->Articles->locale('es'); // specific locale
@@ -306,7 +306,7 @@ Note that this only changes the locale of the Articles table, it would not
 affect the langauge of associated data. To affect associated data it's necessary
 to call locale on each table for example::
 
-    I18n::locale('en'); // reset for illustration
+    I18n::setLocale('en'); // reset for illustration
 
     $this->loadModel('Articles');
     $this->Articles->locale('es');
@@ -389,7 +389,7 @@ can be retrieved as usual::
 The second way to use for saving entities in another language is to set the
 default language directly to the table::
 
-    I18n::locale('es');
+    I18n::setLocale('es');
     $article->title = 'Mi Primer Artículo';
     $this->Articles->save($article);
 
