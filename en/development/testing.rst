@@ -1225,7 +1225,8 @@ make testing responses much simpler. Some examples are::
     $this->assertHeader('Content-Type', 'application/json');
 
     // Assert view variables
-    $this->assertEquals('jose', $this->viewVariable('user.username'));
+    $user =  $this->viewVariable('user');
+    $this->assertEquals('jose', $user->username);
 
     // Assert cookies in the response
     $this->assertCookie('1', 'thingid');
