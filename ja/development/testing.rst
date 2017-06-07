@@ -1188,7 +1188,8 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
     $this->assertHeader('Content-Type', 'application/json');
 
     // ビュー変数をアサート
-    $this->assertEquals('jose', $this->viewVariable('user.username'));
+    $user =  $this->viewVariable('user');
+    $this->assertEquals('jose', $user->username);
 
     // レスポンス内のクッキーをアサート
     $this->assertCookie('1', 'thingid');

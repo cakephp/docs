@@ -1186,7 +1186,8 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
     $this->assertHeader('Content-Type', 'application/json');
 
     // Vérifie le contenu d'une variable.
-    $this->assertEquals('jose', $this->viewVariable('user.username'));
+    $user =  $this->viewVariable('user');
+    $this->assertEquals('jose', $user->username);
 
     // Vérifie les cookies.
     $this->assertCookie('1', 'thingid');
