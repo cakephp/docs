@@ -251,7 +251,7 @@ method::
 When calling ``order()`` multiple times on a query multiple clauses will be appended.
 However, when using finders you may sometimes need to overwrite the ``ORDER BY``.
 Set the second parameter of ``order()`` (as well as ``orderAsc()`` or ``orderDesc()``) to
-``Query::OVERWRITE`` or to ``true``;
+``Query::OVERWRITE`` or to ``true``::
 
     $query = $articles->find()
         ->order(['title' => 'ASC']);
