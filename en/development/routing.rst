@@ -75,7 +75,6 @@ Routes can also be labelled with a unique name, this allows you to quickly
 reference them when building links instead of specifying each of the routing
 parameters::
 
-
     // In routes.php
     $routes->connect(
         '/login',
@@ -123,6 +122,7 @@ some routes we'll use the ``scope()`` method::
     use Cake\Routing\Route\DashedRoute;
 
     Router::scope('/', function ($routes) {
+        // Connect the generic fallback routes.
         $routes->fallbacks(DashedRoute::class);
     });
 
@@ -134,7 +134,7 @@ match elements in the URL.
 The basic format for a route definition is::
 
     $routes->connect(
-        'URL template',
+        '/url/template',
         ['default' => 'defaultValue'],
         ['option' => 'matchingRegex']
     );
@@ -188,28 +188,64 @@ define default parameters. If you built a site that features products for
 different categories of customers, you might consider creating a route. This
 allows you to link to ``/government`` rather than ``/pages/display/5``.
 
-Another common use for the Router is to define an "alias" for a
-controller. Let's say that instead of accessing our regular URL at
-``/users/some_action/5``, we'd like to be able to access it by
-``/cooks/some_action/5``. The following route takes care of
-that::
+A common use for routing is to create URL segments that don't match your
+controller or model names. Let's say that instead of accessing our regular URL
+at ``/users/some_action/5``, we'd like to be able to access it by
+``/cooks/some_action/5``. The following route takes care of that::
 
     $routes->connect(
         '/cooks/:action/*', ['controller' => 'Users']
     );
 
 This is telling the Router that any URL beginning with ``/cooks/`` should be
-sent to the users controller. The action called will depend on the value of the
-``:action`` parameter. By using :ref:`route-elements`, you can create variable
-routes, that accept user input or variables. The above route also uses the
-greedy star.  The greedy star indicates to ``Router`` that this route
-should accept any additional positional arguments given. These arguments will be
-made available in the :ref:`passed-arguments` array.
+sent to the ``UsersController``. The action called will depend on the value of
+the ``:action`` parameter. By using :ref:`route-elements`, you can create
+variable routes, that accept user input or variables. The above route also uses
+the greedy star.  The greedy star indicates that this route should accept any
+additional positional arguments given. These arguments will be made available in
+the :ref:`passed-arguments` array.
 
 When generating URLs, routes are used too. Using
 ``['controller' => 'Users', 'action' => 'some_action', 5]`` as
 a URL will output ``/cooks/some_action/5`` if the above route is the
 first match found.
+
+The routes we've connected so far will match any HTTP verb. If you are building
+a REST API you'll often want to map HTTP actions to different controller methods.
+The ``RouteBuilder`` provides helper methods that make defining routes for
+specific HTTP verbs simpler::
+
+    // Create a route that only responds to GET requests.
+    $routes->get(
+        '/cooks/:id',
+        ['controller' => 'Users', 'action' => 'view'],
+        'users:view'
+    );
+
+    // Create a route that only responds to PUT requests
+    $routes->put(
+        '/cooks/:id',
+        ['controller' => 'Users', 'action' => 'update'],
+        'users:update'
+    );
+
+The above routes map the same URL to different controller actions based on the
+HTTP verb used. GET requests will go to the 'view' action, while PUT requests
+will go to the 'update' action. There are HTTP helper methods for:
+
+* GET
+* POST
+* PUT
+* PATCH
+* DELETE
+* OPTIONS
+* HEAD
+
+All of these methods return the route instance allowing you to leverage the
+:ref:`fluent setters <route-fluent-methods>` to further configure your route.
+
+.. versionadded:: 3.5.0
+    The HTTP verb helper methods were added in 3.5.0
 
 .. _route-elements:
 
@@ -338,6 +374,44 @@ CakePHP, and should not be used unless you want the special meaning
 * ``_name`` Name of route. If you have setup named routes, you can use this key
   to specify it.
 
+.. _route-fluent-methods:
+
+Configuring Route Options
+-------------------------
+
+There are a number of route options that can be set on each route. After
+connecting a route you can use its fluent builder methods to further configure
+the route. These methods replace many of the keys in the ``$options`` parameter
+of ``connect()``::
+
+    $routes->connect(
+        '/:lang/articles/:slug',
+        ['controller' => 'Articles', 'action' => 'view'],
+    )
+    // Allow GET and POST requests.
+    ->setMethods(['GET', 'POST'])
+
+    // Only match on the blog subdomain.
+    ->setHost('blog.example.com')
+
+    // Set the route elements that should be converted to passed arguments
+    ->setPass(['slug'])
+
+    // Set the matching patterns for route elements
+    ->setPatterns([
+        'slug' => '[a-z0-9-_]+'
+        'lang' => 'en|fr|es'
+    ])
+
+    // Also allow JSON file extensions
+    ->setExtenions(['json'])
+
+    // Set lang to be a persistent parameter
+    ->setPersist(['lang']);
+
+.. versionadded:: 3.5.0
+    Fluent builder methods were added in 3.5.0
+
 Passing Parameters to Action
 ----------------------------
 
@@ -405,8 +479,15 @@ option can be used in reverse routing to identify the route you want to use::
         ['_name' => 'login']
     );
 
+    // Name a verb specific route (3.5.0+)
+    $routes->post(
+        '/logout',
+        ``['controller' => 'Users', 'action' => 'logout'],
+        'logout'
+    );
+
     // Generate a URL using a named route.
-    $url = Router::url(['_name' => 'login']);
+    $url = Router::url(['_name' => 'logout']);
 
     // Generate a URL using a named route,
     // with some query string args.
@@ -631,19 +712,36 @@ with the following router connection::
 Matching Specific HTTP Methods
 ------------------------------
 
-Routes can match specific HTTP methods using the ``_method`` routing key::
+Routes can match specific HTTP methods using the HTTP verb helper methods::
 
     Router::scope('/', function($routes) {
         // This route only matches on POST requests.
+        $routes->post(
+            '/reviews/start',
+            ['controller' => 'Reviews', 'action' => 'start']
+        );
+
+        // Match multiple verbs
         $routes->connect(
             '/reviews/start',
-            ['controller' => 'Reviews', 'action' => 'start', '_method' => 'POST']
+            [
+                'controller' => 'Reviews',
+                'action' => 'start',
+                '_method' => ['POST', 'PUT']
+            ]
         );
     });
 
 You can match multiple HTTP methods by using an array. Because the ``_method``
 parameter is a routing key, it participates in both URL parsing and URL
-generation.
+generation. To generate URLs for method specific routes you'll need to include
+the ``_method`` key when generating the URL::
+
+    $url = Router::url([
+        'controller' => 'Reviews',
+        'action' => 'start',
+        '_method' => 'POST'
+    ]);
 
 Matching Specific Hostnames
 ---------------------------
@@ -1111,6 +1209,7 @@ You can also use any of the special route elements when generating URLs:
   ``ftp``. Defaults to the current scheme.
 * ``_host`` Set the host to use for the link.  Defaults to the current host.
 * ``_port`` Set the port if you need to create links on non-standard ports.
+* ``_method`` Define the HTTP verb the URL is for.
 * ``_full``  If ``true`` the ``FULL_BASE_URL`` constant will be prepended to
   generated URLs.
 * ``_ssl`` Set to ``true`` to convert the generated URL to https or ``false``

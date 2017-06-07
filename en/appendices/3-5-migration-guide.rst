@@ -170,6 +170,9 @@ Routing
 * ``Cake\Routing\RouteBuilder::resources()`` had the ``path`` option
   added. This option lets you make the resource path and controller name not
   match.
+* ``Cake\Routing\RouteBuilder`` now has methods to create routes for
+  specific HTTP methods. e.g ``get()`` and ``post()``.
+* ``Cake\Routing\Route`` now has fluent methods for defining options.
 
 Validation
 ----------
