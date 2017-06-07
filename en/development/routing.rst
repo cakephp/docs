@@ -47,13 +47,21 @@ viewing an article's content::
 The above route will accept any URL looking like ``/articles/15`` and invoke the
 method ``view(15)`` in the ``ArticlesController``. This will not, though,
 prevent people from trying to access URLs looking like ``/articles/foobar``. If
-you wish, you can restring some parameters to conform to a regular expression::
+you wish, you can restrict some parameters to conform to a regular expression::
 
     $routes->connect(
         '/articles/:id',
         ['controller' => 'Articles', 'action' => 'view'],
+    )
+    ->setPatterns(['id' => '\d+'])
+    ->setPass(['id']);
+
+    // Prior to 3.5 use the options array
+    $routes->connect(
+        '/articles/:id',
+        ['controller' => 'Articles', 'action' => 'view'],
         ['id' => '\d+', 'pass' => ['id']]
-    );
+    )
 
 The previous example changed the star matcher by a new placeholder ``:id``.
 Using placeholders allows us to validate parts of the URL, in this case we used
@@ -263,6 +271,12 @@ will be treated as part of the parameter::
 
     $routes->connect(
         '/:controller/:id',
+        ['action' => 'view']
+    )->setPatterns(['id' => '[0-9]+']);
+
+    // Prior to 3.5 use the options array
+    $routes->connect(
+        '/:controller/:id',
         ['action' => 'view'],
         ['id' => '[0-9]+']
     );
@@ -282,11 +296,19 @@ rewritten like so::
 
     use Cake\Routing\Route\DashedRoute;
 
-    $routes->connect(
-        '/:controller/:id',
-        ['action' => 'view'],
-        ['id' => '[0-9]+', 'routeClass' => DashedRoute::class]
-    );
+    // Create a builder with a different route class.
+    $routes->scope('/', function ($routes) {
+        $routes->routeClass(DashedRoute::class);
+        $routes->connect('/:controller/:id', ['action' => 'view'])
+            ->setPatterns(['id' => '[0-9]+']);
+
+        // Prior to 3.5 use options array
+        $routes->connect(
+            '/:controller/:id',
+            ['action' => 'view'],
+            ['id' => '[0-9]+']
+        );
+    });
 
 The ``DashedRoute`` class will make sure that the ``:controller`` and
 ``:plugin`` parameters are correctly lowercased and dashed.
@@ -314,23 +336,23 @@ following::
 If you would like to provide a case insensitive URL, you can use regular
 expression inline modifiers::
 
+    // Prior to 3.5 use the options array instead of setPatterns()
     $routes->connect(
         '/:userShortcut',
         ['controller' => 'Teachers', 'action' => 'profile', 1],
-        ['userShortcut' => '(?i:principal)']
-    );
+    )->setPatterns(['userShortcut' => '(?i:principal)']);
 
 One more example, and you'll be a routing pro::
 
+    // Prior to 3.5 use the options array instead of setPatterns()
     $routes->connect(
         '/:controller/:year/:month/:day',
-        ['action' => 'index'],
-        [
-            'year' => '[12][0-9]{3}',
-            'month' => '0[1-9]|1[012]',
-            'day' => '0[1-9]|[12][0-9]|3[01]'
-        ]
-    );
+        ['action' => 'index']
+    )->setPatterns([
+        'year' => '[12][0-9]{3}',
+        'month' => '0[1-9]|1[012]',
+        'day' => '0[1-9]|[12][0-9]|3[01]'
+    ]);
 
 This is rather involved, but shows how powerful routes can be. The URL supplied
 has four route elements. The first is familiar to us: it's a default route
@@ -430,16 +452,16 @@ functions::
     Router::scope('/', function ($routes) {
         $routes->connect(
             '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
-            ['controller' => 'Blogs', 'action' => 'view'],
-            [
-                // Define the route elements in the route template
-                // to pass as function arguments. Order matters since this
-                // will simply map ":id" to $articleId in your action
-                'pass' => ['id', 'slug'],
-                // Define a pattern that `id` must match.
-                'id' => '[0-9]+'
-            ]
-        );
+            ['controller' => 'Blogs', 'action' => 'view']
+        )
+        ->setPatterns([
+            // Define the route elements in the route template
+            // to pass as function arguments. Order matters since this
+            // will simply map ":id" to $articleId in your action
+            'pass' => ['id', 'slug'],
+            // Define a pattern that `id` must match.
+            'id' => '[0-9]+'
+        ]);
     });
 
 Now thanks to the reverse routing capabilities, you can pass in the URL array
@@ -508,7 +530,7 @@ you to define name prefixes in each scope::
 
     Router::scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
         // This route's name will be `api:ping`
-        $routes->connect('/ping', ['controller' => 'Pings'], ['_name' => 'ping']);
+        $routes->get('/ping', ['controller' => 'Pings'], 'ping');
     });
     // Generate a URL for the ping route
     Router::url(['_name' => 'api:ping']);
@@ -529,7 +551,7 @@ you'd expect::
     Router::plugin('Contacts', ['_namePrefix' => 'contacts:'], function ($routes) {
         $routes->scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
             // This route's name will be `contacts:api:ping`
-            $routes->connect('/ping', ['controller' => 'Pings'], ['_name' => 'ping']);
+            $routes->get('/ping', ['controller' => 'Pings'], 'ping');
         });
     });
 
@@ -722,14 +744,14 @@ Routes can match specific HTTP methods using the HTTP verb helper methods::
         );
 
         // Match multiple verbs
+        // Prior to 3.5 use $options[_method] to set method
         $routes->connect(
             '/reviews/start',
             [
                 'controller' => 'Reviews',
                 'action' => 'start',
-                '_method' => ['POST', 'PUT']
             ]
-        );
+        )->setMethods(['POST', 'PUT']);
     });
 
 You can match multiple HTTP methods by using an array. Because the ``_method``
@@ -751,18 +773,17 @@ the ``*.`` wildcard to match any subdomain::
 
     Router::scope('/', function($routes) {
         // This route only matches on http://images.example.com
+        // Prior to 3.5 use the _host option
         $routes->connect(
             '/images/default-logo.png',
-            ['controller' => 'Images', 'action' => 'default'],
-            ['_host' => 'images.example.com']
-        );
+            ['controller' => 'Images', 'action' => 'default']
+        )->setHost('images.example.com');
 
         // This route only matches on http://*.example.com
         $routes->connect(
             '/images/old-log.png',
-            ['controller' => 'Images', 'action' => 'oldLogo'],
-            ['_host' => '*.example.com']
-        );
+            ['controller' => 'Images', 'action' => 'oldLogo']
+        )->setHost('images.example.com');
     });
 
 The ``_host`` option is also used in URL generation. If your ``_host`` option
@@ -773,9 +794,8 @@ parameter when generating URLs::
     // If you have this route
     $routes->connect(
         '/images/old-log.png',
-        ['controller' => 'Images', 'action' => 'oldLogo'],
-        ['_host' => '*.example.com']
-    );
+        ['controller' => 'Images', 'action' => 'oldLogo']
+    )->setHost('images.example.com');
 
     // You need this to generate a url
     echo Router::url([
@@ -835,11 +855,8 @@ and then parse what remains. If you want to create a URL such as
         $routes->extensions(['json', 'xml', 'html']);
         $routes->connect(
             '/:title',
-            ['controller' => 'Pages', 'action' => 'view'],
-            [
-                'pass' => ['title']
-            ]
-        );
+            ['controller' => 'Pages', 'action' => 'view']
+        )->setPass(['title']);
     });
 
 Then to create links which map back to the routes simply use::
@@ -1283,6 +1300,15 @@ option::
          ['controller' => 'Articles', 'action' => 'view'],
          ['routeClass' => 'SlugRoute']
     );
+
+    // Or by setting the routeClass in your scope.
+    $routes->scope('/', function ($routes) {
+        $routes->routeClass('SlugRoute');
+        $routes->connect(
+             '/:slug',
+             ['controller' => 'Articles', 'action' => 'view']
+        );
+    });
 
 This route would create an instance of ``SlugRoute`` and allow you
 to implement custom parameter handling. You can use plugin route classes using
