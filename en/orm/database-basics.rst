@@ -531,12 +531,14 @@ value object and into SQL expressions::
             if ($value instanceof Point) {
                 return new FunctionExpression(
                     'POINT',
-                    $value->lat(),
-                    $value->long()
+                    [
+                        $value->lat(),
+                        $value->long()
+                    ]
                 );
             }
             if (is_array($value)) {
-                return new FunctionExpression('POINT', $value[0], $value[1]);
+                return new FunctionExpression('POINT', [$value[0], $value[1]]);
             }
             // Handle other cases.
         }
