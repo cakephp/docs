@@ -421,8 +421,8 @@ of ``connect()``::
 
     // Set the matching patterns for route elements
     ->setPatterns([
-        'slug' => '[a-z0-9-_]+'
-        'lang' => 'en|fr|es'
+        'slug' => '[a-z0-9-_]+',
+        'lang' => 'en|fr|es',
     ])
 
     // Also allow JSON file extensions
@@ -460,7 +460,7 @@ functions::
             // will simply map ":id" to $articleId in your action
             'pass' => ['id', 'slug'],
             // Define a pattern that `id` must match.
-            'id' => '[0-9]+'
+            'id' => '[0-9]+',
         ]);
     });
 
@@ -744,7 +744,7 @@ Routes can match specific HTTP methods using the HTTP verb helper methods::
         );
 
         // Match multiple verbs
-        // Prior to 3.5 use $options[_method] to set method
+        // Prior to 3.5 use $options['_method'] to set method
         $routes->connect(
             '/reviews/start',
             [
@@ -762,7 +762,7 @@ the ``_method`` key when generating the URL::
     $url = Router::url([
         'controller' => 'Reviews',
         'action' => 'start',
-        '_method' => 'POST'
+        '_method' => 'POST',
     ]);
 
 Matching Specific Hostnames
@@ -801,7 +801,7 @@ parameter when generating URLs::
     echo Router::url([
         'controller' => 'Images',
         'action' => 'oldLogo',
-        '_host' => 'images.example.com'
+        '_host' => 'images.example.com',
     ]);
 
 .. versionadded:: 3.4.0
