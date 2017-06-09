@@ -270,8 +270,8 @@ stored on the entity itself. You can access any validation errors using the
 The ``setErrors()`` or ``setError()`` method can also be used to set the errors on an entity, making
 it easier to test code that works with error messages::
 
-	$user->setError('password',['Password is required']);
-	$user->setErrors(['pasword'=>['Password is required'],'username'=>['Username is required']]);
+    $user->setError('password', ['Password is required']);
+    $user->setErrors(['pasword' => ['Password is required'], 'username' => ['Username is required']]);
     // Prior to 3.4.0
     $user->errors('password', ['Password is required.']);
 
