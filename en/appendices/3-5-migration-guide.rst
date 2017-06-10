@@ -64,6 +64,8 @@ The following is a list of methods that are deprecated and replaced with
     * ``tableLocator()``
 ``Cake\ORM\Table``
     * ``validator()``
+``Cake\Routing\RouteCollection``
+    * ``extensions()``
 ``Cake\TestSuite\TestFixture``
     * ``schema()``
 ``Cake\Utility\Security``
