@@ -694,6 +694,9 @@ When using scopes you can nest plugin scopes within prefix scopes::
 The above would create a route that looks like ``/admin/debug_kit/:controller``.
 It would have the ``prefix``, and ``plugin`` route elements set.
 
+Creating Links to Plugin Routes
+-------------------------------
+
 You can create links that point to a plugin, by adding the plugin key to your
 URL array::
 
@@ -710,7 +713,7 @@ a link that has no plugin you can do the following::
         ['plugin' => null, 'controller' => 'Users', 'action' => 'profile']
     );
 
-By setting ``plugin => null`` you tell the Router that you want to
+By setting ``'plugin' => null`` you tell the Router that you want to
 create a link that is not part of a plugin.
 
 SEO-Friendly Routing

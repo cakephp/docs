@@ -8,7 +8,7 @@ To upgrade to 3.5.x run the following composer command:
 
 .. code-block:: bash
 
-    php composer.phar require "cakephp/cakephp:3.5.*"
+    php composer.phar require --update-with-dependencies "cakephp/cakephp:3.5.*"
 
 Deprecations
 ============
@@ -180,6 +180,7 @@ Routing
   match.
 * ``Cake\Routing\RouteBuilder`` now has methods to create routes for
   specific HTTP methods. e.g ``get()`` and ``post()``.
+* ``Cake\Routing\RouteBuilder::loadPlugin()`` was added.
 * ``Cake\Routing\Route`` now has fluent methods for defining options.
 
 Validation
