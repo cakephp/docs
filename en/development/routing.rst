@@ -692,7 +692,8 @@ When using scopes you can nest plugin scopes within prefix scopes::
     });
 
 The above would create a route that looks like ``/admin/debug_kit/:controller``.
-It would have the ``prefix``, and ``plugin`` route elements set.
+It would have the ``prefix``, and ``plugin`` route elements set. The
+:ref:`plugin-routes` section has more information on building plugin routes.
 
 Creating Links to Plugin Routes
 -------------------------------
