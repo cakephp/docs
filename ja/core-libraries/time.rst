@@ -23,7 +23,7 @@
         {
             $time = new Time($this->Auth->user('date_of_birth'));
             if ($time->isToday()) {
-                // 誕生日祝いのメッセージでユーザに挨拶
+                // 誕生日祝いのメッセージでユーザーに挨拶
                 $this->Flash->success(__('Happy birthday to you...'));
             }
         }
@@ -69,8 +69,8 @@ Time インスタンスを作成する
 
     $time = new Time('2 hours ago');
 
-``Time`` クラスのコンストラクタは、内部の PHP クラスである ``Datetime`` が受け取れる、
-あらゆるパラメータを受け取ることができます。数値や数字文字列を渡したとき、
+``Time`` クラスのコンストラクターは、内部の PHP クラスである ``Datetime`` が受け取れる、
+あらゆるパラメーターを受け取ることができます。数値や数字文字列を渡したとき、
 UNIX タイムスタンプとして解釈されます。
 
 テストケースでは、 ``setTestNow()`` を使うことで ``now()`` をモックアップできます。 ::
@@ -108,7 +108,7 @@ PHP のビルトインの ``DateTime`` クラスで提供されているメソ�
     // strtotime で使用する文字列
     $now->modify('+5 days');
 
-プロパティにアクセスすることで日付の内部コンポーネントを取得することができます。 ::
+プロパティーにアクセスすることで日付の内部コンポーネントを取得することができます。 ::
 
     $now = Time::now();
     echo $now->year; // 2014
@@ -116,7 +116,7 @@ PHP のビルトインの ``DateTime`` クラスで提供されているメソ�
     echo $now->day; // 10
     echo $now->timezone; // America/New_York
 
-日付を編集する際に、直接これらのプロパティを指定することもできます。 ::
+日付を編集する際に、直接これらのプロパティーを指定することもできます。 ::
 
     $time->year = 2015;
     $time->timezone = 'Europe/Paris';
@@ -186,9 +186,9 @@ http://www.icu-project.org/apiref/icu4c/classSimpleDateFormat.html#details.
     グレゴリオ暦以外の暦のサポートは 3.1 で追加されました。
 
 .. note::
-   IntlDateFormatter::FULL のような文字列定数のために Intl は ICU ライブラリを使用します。
-   そのライブラリは、 CLDR (http://cldr.unicode.org/) からデータを取り入れています。
-   ライブラリのバージョンは、 PHP のインストールにとても依存し、バージョンにより異なる結果を返します。
+   IntlDateFormatter::FULL のような文字列定数のために Intl は ICU ライブラリーを使用します。
+   そのライブラリーは、 CLDR (http://cldr.unicode.org/) からデータを取り入れています。
+   ライブラリーのバージョンは、 PHP のインストールにとても依存し、バージョンにより異なる結果を返します。
 
 .. php:method:: nice()
 
@@ -200,7 +200,7 @@ http://www.icu-project.org/apiref/icu4c/classSimpleDateFormat.html#details.
     echo $now->nice();
 
 ``Time`` オブジェクトそのものを変更することなく、出力される日付のタイムゾーンを変更することができます。
-一つのタイムゾーンでデータを保存しているけれども、ユーザのそれぞれのタイムゾーンで表示したい場合に
+一つのタイムゾーンでデータを保存しているけれども、ユーザーのそれぞれのタイムゾーンで表示したい場合に
 便利です。 ::
 
     $now->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Paris');
@@ -378,7 +378,7 @@ CakePHP 内の ``Date`` クラスの実装は、API や :php:class:`Cake\\I18n\\
 .. php:class:: FrozenTime
 .. php:class:: FrozenDate
 
-CakePHP は、変更可能な仲間と同じインタフェースを実装する、不変な日付と時刻のクラスを
+CakePHP は、変更可能な仲間と同じインターフェイスを実装する、不変な日付と時刻のクラスを
 提供しています。不変なオブジェクトは、偶発的にデータが変わってしまうのを防ぎたいときや、
 順番に依存する問題を避けたいときに、便利です。以下のコードをご覧ください。 ::
 
@@ -406,14 +406,14 @@ CakePHP は、変更可能な仲間と同じインタフェースを実装する
     // ここでの出力結果は明らかです。
     echo $time->format('Y-m-d H:i:s');
 
-不変の日付と時刻は、エンティティ内での偶然的な更新を防ぎ、変更を明示するよう強制したいときに便利です。
+不変の日付と時刻は、エンティティー内での偶然的な更新を防ぎ、変更を明示するよう強制したいときに便利です。
 不変なオブジェクトを利用することで、ORM が変更を追跡したり、日付や日付と時刻のカラムを正しく保持する
 ことが、より簡単になります。 ::
 
     // 記事が保存されるとき、この変更は消去されます。
     $article->updated->modify('+1 hour');
 
-    // 時刻のオブジェクトを置き換えると、プロパティが保存されます。
+    // 時刻のオブジェクトを置き換えると、プロパティーが保存されます。
     $article->updated = $article->updated->modify('+1 hour');
 
 地域化されたリクエストデータの受け入れ

@@ -1,8 +1,8 @@
-ディスパッチャフィルタ
-######################
+ディスパッチャーフォルター
+##########################
 
 .. deprecated:: 3.3.0
-    3.3.0 でディスパッチャフィルタは非推奨になりました。代わりに
+    3.3.0 でディスパッチャーフォルターは非推奨になりました。代わりに
     :doc:`/controllers/middleware` を使用してください。
 
 コントローラーのコードが実行される前やクライアントからレスポンスを受けたり、ヘッダーをチューニングしたり、
@@ -19,7 +19,7 @@ CakePHP はきれいなディスパッチサイクルに使う強固なフィル
 いくつかの既定のフィルターがあります。それらは一般的なアプリがおおよそ必要とされる機能を操作できます。
 その機能は以下です:
 
-* ``AssetFilter`` テーマやプラグイン内 webroot フォルダやテーマに関係している CSS や
+* ``AssetFilter`` テーマやプラグイン内 webroot フォルダーやテーマに関係している CSS や
   JavaScript や画像ファイルを参照しているかどうかチェックします。これは、ファイルが
   見つかったら、残りのディスパッチサイクルを止めて、それに応じてファイルを提供します。 ::
 
@@ -189,4 +189,4 @@ CakePHP はきれいなディスパッチサイクルに使う強固なフィル
 .. meta::
     :title lang=ja: ディスパッチャーフィルター
     :description lang=ja: ディスパッチャーフィルターはCakePHPがリクエストやレスポンスが送られる前にそれを編集するための ミドルレイヤー
-    :keywords lang=ja: middleware, ミドルウェアー,filter, フィルター, ディスパッチャー, request, リクエスト, response, レスポンス, rack, application stack, events, beforeDispatch, afterDispatch, router, ルーター, ルーティング
+    :keywords lang=ja: middleware, ミドルウェア,filter, フィルター, ディスパッチャー, request, リクエスト, response, レスポンス, rack, application stack, events, beforeDispatch, afterDispatch, router, ルーター, ルーティング

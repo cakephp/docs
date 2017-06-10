@@ -10,7 +10,7 @@ RssHelper は `RSS feeds <https://en.wikipedia.org/wiki/RSS>`_ である XML の
 RssHelper で RSS フィードを生成
 =======================================
 
-この例では、Articles コントローラと Articles テーブル、Article エンティティがすでに作成されていて、
+この例では、Articles コントローラーと Articles テーブル、Article エンティティーがすでに作成されていて、
 これに RSS 用のビューを作成すると仮定します。
 
 CakePHP で ``articles/index`` の XML/RSS バージョンがすぐに作成できます。
@@ -28,9 +28,9 @@ CakePHP で ``articles/index`` の XML/RSS バージョンがすぐに作成で�
 これはあなたのアプリに各拡張子 / コンテンツタイプを有効化するでしょう。
 
 これで、 ``articles/index.rss`` がリクエストされたときに ``articles/index`` の XML バージョンが取得できるようになります。
-しかし、RSS 仕様のコードを追加するためには、まず最初にコントローラを編集する必要があります。
+しかし、RSS 仕様のコードを追加するためには、まず最初にコントローラーを編集する必要があります。
 
-コントローラのコード
+コントローラーのコード
 -----------------------------------
 ArticlesController の ``initialize()`` メソッドに RequestHandler を加えるのは 良いアイディアです。これで、多くのことが自動的に行われます。
 ::
@@ -42,15 +42,15 @@ ArticlesController の ``initialize()`` メソッドに RequestHandler を加え
     }
 
 ``articles/index`` の RSS バージョンが作れる前に、いくつかのことを順番に行う必要があります。
-コントローラのアクションで、 :php:meth:`Cake\\Controller\\Controller::set()` を使ってチャンネルメタデータをセットし、
+コントローラーのアクションで、 :php:meth:`Cake\\Controller\\Controller::set()` を使ってチャンネルメタデータをセットし、
 それをビューに渡したくなりますが、これは不適切です。
 その情報はビューの中でも処理できます。
 
 後述しますが、もし RSS フィードを作成するためのデータと HTML ビュー用のデータがそれぞれ異なるロジックを用意しているのであれば、
-:php:meth:`Cake\\Controller\\Component\\RequestHandler::isRss()` メソッドが利用でき、そうでなければあなたのコントローラは手を加えずにすみます。
+:php:meth:`Cake\\Controller\\Component\\RequestHandler::isRss()` メソッドが利用でき、そうでなければあなたのコントローラーは手を加えずにすみます。
 ::
 
-    // Articles コントローラで RSS フィードの配信を行うアクションを編集、
+    // Articles コントローラーで RSS フィードの配信を行うアクションを編集、
     // この例は Index アクションです。
 
     public function index()
@@ -94,12 +94,12 @@ RSS レイアウトはとてもシンプルです。 **src/Template/Layout/rss/d
     echo $this->Rss->document($documentData, $channel);
 
 そのようには見えませんが、 ``RssHelper`` のパワーのおかげで、私たちのために多くのことをしてくれています。
-``$documentData`` や ``$channelData`` はコントローラ内でセットしていませんが、CakePHP では、ビューからレイアウトに変数を渡すことができます。
+``$documentData`` や ``$channelData`` はコントローラー内でセットしていませんが、CakePHP では、ビューからレイアウトに変数を渡すことができます。
 ``$channelData`` 配列がどこにあるかは、フィードのメタデータ全てをセットしてから得られます。
 
 次に articles/index のビューファイルを作成します。
-私たちが作成したレイアウトファイルのように **src/Template/Posts/rss/** ディレクトリを作成し、
-そのフォルダの中に **index.ctp** を作成する必要があります。ファイルの内容は以下の通りです。
+私たちが作成したレイアウトファイルのように **src/Template/Posts/rss/** ディレクトリーを作成し、
+そのフォルダーの中に **index.ctp** を作成する必要があります。ファイルの内容は以下の通りです。
 
 ビュー
 -----------------------------------
@@ -163,7 +163,7 @@ RSS レイアウトはとてもシンプルです。 **src/Template/Layout/rss/d
     }
 
 上記は、ループして XML 要素の中に変換するデータを用意しています。
-特にブログの本文のためのリッチテキストエディタを使用している場合には、 プレーンテキストではない文字を除外することは重要です。
+特にブログの本文のためのリッチテキストエディターを使用している場合には、 プレーンテキストではない文字を除外することは重要です。
 上記のコードでは、 ``strip_tags()`` と :php:func:`h()` を使って、バリデーションエラーを引き起こす XML 特殊文字を本文から削除・エスケープしています。
 ひとたびフィードのためのデータをセットアップしたら、RSS 形式の XML を作成するために :php:meth:`RssHelper::item()` メソッドを使用します。
 一旦このセットアップをすべて行ったら、あなたのサイトの ``/posts/index.rss`` へアクセスして RSS フィードをテストでき、新しいフィードを確認します。

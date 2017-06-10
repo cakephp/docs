@@ -9,7 +9,7 @@ FlashHelperは、 :doc:`FlashComponent </controllers/components/flash>` によ�
 ``$_SESSION`` にセットされたフラッシュメッセージを描画する方法を提供しています。
 :doc:`FlashComponent </controllers/components/flash>` および
 FlashHelper はフラッシュメッセージを描画するためのエレメントを使用します。
-フラッシュエレメントは **src/Template/Element/Flash** ディレクトリ以下に存在します。
+フラッシュエレメントは **src/Template/Element/Flash** ディレクトリー以下に存在します。
 CakePHP の App テンプレートには、 **success.ctp** と **error.ctp** の
 2つのフラッシュエレメントが付属しています。
 
@@ -28,7 +28,7 @@ CakePHP の App テンプレートには、 **success.ctp** と **error.ctp** �
 
 FlashComponent の中で設定したオプションを上書きすることもできます。 ::
 
-    // コントローラの中で
+    // コントローラーの中で
     $this->Flash->set('The user has been saved.', [
         'element' => 'success'
     ]);
@@ -40,8 +40,8 @@ FlashComponent の中で設定したオプションを上書きすることも�
 
 .. note::
 
-    フラッシュメッセージの独自テンプレートを作成する場合、全てのユーザデータを適切に
-    HTML エンコードしてください。CakePHP は、フラッシュメッセージのパラメータをエスケープしません。
+    フラッシュメッセージの独自テンプレートを作成する場合、全てのユーザーデータを適切に
+    HTML エンコードしてください。CakePHP は、フラッシュメッセージのパラメーターをエスケープしません。
 
 .. versionadded:: 3.1
 
