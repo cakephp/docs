@@ -299,11 +299,13 @@ ContactManager plugin routes. Put the following into
         'ContactManager',
         ['path' => '/contact-manager'],
         function ($routes) {
-            $routes->fallbacks(DashedRoute::class);
+            $routes->get('/contacts', ['controller' => 'Contacts']);
+            $routes->get('/contacts/:id', ['controller' => 'Contacts', 'action' => 'view']);
+            $routes->put('/contacts/:id', ['controller' => 'Contacts', 'action' => 'update']);
         }
     );
 
-The above will connect default routes for you plugin. You can customize this
+The above will connect default routes for your plugin. You can customize this
 file with more specific routes later on.
 
 Before you can access your controllers, you'll need to ensure the plugin is
