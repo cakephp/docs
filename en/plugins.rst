@@ -320,12 +320,12 @@ plugin routes in additional scopes or prefixes::
 
     Router::scope('/', function ($routes) {
         // Connect other routes.
-        $routes->scope('/a', function ($routes) {
+        $routes->scope('/backend', function ($routes) {
             $routes->loadPlugin('ContactManager');
         });
     });
 
-The above would result in URLs like ``/a/contact_manager/contacts``.
+The above would result in URLs like ``/backend/contact_manager/contacts``.
 
 .. versionadded:: 3.5.0
     ``RouteBuilder::loadPlugin()`` was added in 3.5.0
