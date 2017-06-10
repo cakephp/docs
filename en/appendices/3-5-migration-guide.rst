@@ -4,6 +4,12 @@
 CakePHP 3.5 is an API compatible upgrade from 3.4. This page outlines the
 changes and improvements made in 3.5.
 
+To upgrade to 3.5.x run the following composer command:
+
+.. code-block:: bash
+
+    php composer.phar require "cakephp/cakephp:3.5.*"
+
 Deprecations
 ============
 
