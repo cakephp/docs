@@ -21,6 +21,10 @@ a users table, creating a model, controller & views, etc.
 This is all covered step by step in the
 :doc:`Blog Tutorial </tutorials-and-examples/blog-auth-example/auth>`.
 
+If you are looking for existing authentication and/or authorization solutions
+for CakePHP, have a look at the 
+`Authentication and Authorization <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/README.md#authentication-and-authorization>`_ section of the Awesome CakePHP list.
+
 
 Authentication
 ==============
