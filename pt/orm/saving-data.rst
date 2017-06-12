@@ -1,28 +1,17 @@
 Salvando dados
 ##############
 
-.. note::
-    Atualmente, a documentação desta página não é suportada em português.
+.. php:namespace:: Cake\ORM
 
-    Por favor, sinta-se a vontade para nos enviar um *pull request* para o
-    `Github <https://github.com/cakephp/docs>`_ ou use o botão
-    **IMPROVE THIS DOC** para propor suas mudanças diretamente.
+.. php:class:: Table
+    :noindex:
 
-    Você pode consultar a versão em inglês deste tópico através do seletor de
-    idiomas localizado ao lado direito do campo de buscas da documentação.
+Depois que você :doc:`carregou seus dados</orm/retrieving-data-and-resultsets>`
+provavelmente vai querer atualizar e salvar as alterações.
 
-.. figure:: /_static/img/validation-cycle.png
-   :align: left
-   :alt: Flow diagram showing the marshalling/validation process.
+A Glance Over Saving Data
+=========================
 
-.. figure:: /_static/img/save-cycle.png
-   :align: left
-   :alt: Flow diagram showing the save process.
-
-.. _changing-accessible-fields:
-
-.. _before-marshal:
-
-.. _saving-entities:
-
-.. _saving-complex-types:
+Applications will usually have a couple of ways in which data is saved. The
+first one is obviously through web forms and the other is by directly generating
+or changing data in the code to be sent to the database.
