@@ -93,18 +93,17 @@ Using Short Tag support::
 
   <?= $variable ?>
 
-Alternative Control Structures
-------------------------------
+Structures de Contrôle Alternatives
+-----------------------------------
 
-Control structures, like ``if``, ``for``, ``foreach``, ``switch``, and ``while``
-can be written in a simplified format. Notice that there are no braces. Instead,
-the end brace for the ``foreach`` is replaced with ``endforeach``. Each of the
-control structures listed below has a similar closing syntax: ``endif``,
-``endfor``, ``endforeach``, and ``endwhile``. Also notice that instead of using
-a ``semicolon`` after each structure (except the last one), there is a
-``colon``.
+Les structures de contrôle tel que ``if``, ``for``, ``foreach``, ``switch``, et ``while``
+peuvent êtres écrites dans un format simplifié. Remarquez l'absence d'accolades. A la place,
+l'accolade de fin du ``foreach``  est remplacé par ``endforeach``. Chaque structure de contrôle 
+listées ci-dessous on une syntaxe de fermeture similaire: ``endif``,
+``endfor``, ``endforeach``, et ``endwhile``. Remarquez aussi qu'à la place du ``semicolon`` après
+chaque structure (à l'exception du dernier), il y a un ``colon``.
 
-The following is an example using ``foreach``:
+Voici un example de ``foreach``:
 
 .. code-block:: php
 
