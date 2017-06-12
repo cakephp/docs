@@ -26,6 +26,9 @@ fields with errors will not be present in the returned entity::
         // Entity failed validation.
     }
 
+.. versionadded:: 3.4.0
+    The ``getErrors()`` function was added.	
+
 When building an entity with validation enabled the following occurs:
 
 1. The validator object is created.
