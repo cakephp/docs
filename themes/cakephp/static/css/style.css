@@ -646,8 +646,9 @@ iframe {
 .section-dark { background-color:#303236; }
 .section-white { background-color: #f5f5f5; }
 
-
-
+.section > p {
+    overflow-wrap: break-word;
+}
 
 /* Column paddings */
 .row.col-p0 { margin-left:0; margin-right:0; }
