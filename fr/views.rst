@@ -101,7 +101,7 @@ peuvent être écrites dans un format simplifié. Remarquez l'absence d'accolade
 l'accolade de fin du ``foreach``  est remplacé par ``endforeach``. Chacune des structures de contrôle 
 listées ci-dessous a une syntaxe de fermeture similaire: ``endif``,
 ``endfor``, ``endforeach``, et ``endwhile``. Vous remarquerez aussi qu'à la place du ``point-virgule`` après
-chaque structure (à l'exception du dernier), il y a un ``double-point``.
+chaque structure (à l'exception de la dernière), il y a un ``double-point``.
 
 Voici un example de ``foreach``:
 
