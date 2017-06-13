@@ -17,11 +17,11 @@ tasks. You should see something like::
 
     $ bin/cake bake
 
-    Welcome to CakePHP v3.1.6 Console
+    Welcome to CakePHP v3.4.6 Console
     ---------------------------------------------------------------
     App : src
     Path: /var/www/cakephp.dev/src/
-    PHP: 5.5.8
+    PHP : 5.6.20
     ---------------------------------------------------------------
     The following commands can be used to generate skeleton code for your application.
 
@@ -37,57 +37,84 @@ tasks. You should see something like::
     - helper
     - mailer
     - migration
+    - migration_diff
     - migration_snapshot
     - model
     - plugin
+    - seed
     - shell
-    - shell-helper
+    - shell_helper
+    - task
     - template
     - test
 
     By using `cake bake [name]` you can invoke a specific bake task.
 
+
 You can get more information on what each task does, and what options are
 available using the ``--help`` option::
 
-    $ bin/cake bake controller --help
+    $ bin/cake bake --help
 
-    Welcome to CakePHP v3.1.6 Console
+    Welcome to CakePHP v3.4.6 Console
     ---------------------------------------------------------------
     App : src
     Path: /var/www/cakephp.dev/src/
+    PHP : 5.6.20
     ---------------------------------------------------------------
-    Bake a controller skeleton.
+    The Bake script generates controllers, models and template files for
+    your application. If run with no command line arguments, Bake guides the
+    user through the class creation process. You can customize the
+    generation process by telling Bake where different parts of your
+    application are using command line arguments.
 
     Usage:
-    cake bake controller [subcommand] [options] [<name>]
+    cake bake.bake [subcommand] [options]
 
     Subcommands:
 
-    all  Bake all controllers with CRUD methods.
+    all                 Bake a complete MVC skeleton.
+    behavior            Bake a behavior class file.
+    cell                Bake a cell class file.
+    component           Bake a component class file.
+    controller          Bake a controller skeleton.
+    fixture             Generate fixtures for use with the test suite. You
+                        can use `bake fixture all` to bake all fixtures.
+    form                Bake a form class file.
+    helper              Bake a helper class file.
+    mailer              Bake a mailer class file.
+    migration           Bake migration class.
+    migration_diff      Bake migration class.
+    migration_snapshot  Bake migration snapshot class.
+    model               Bake table and entity classes.
+    plugin              Create the directory structure, AppController class
+                        and testing setup for a new plugin. Can create
+                        plugins in any of your bootstrapped plugin paths.
+    seed                Bake seed class.
+    shell               Bake a shell class file.
+    shell_helper        Bake a shell_helper class file.
+    task                Bake a task class file.
+    template            Bake views for a controller, using built-in or
+                        custom templates.
+    test                Bake test case skeletons for classes.
 
-    To see help on a subcommand use `cake bake controller [subcommand] --help`
+    To see help on a subcommand use `cake bake.bake [subcommand] --help`
 
     Options:
 
-    --help, -h        Display this help.
-    --verbose, -v     Enable verbose output.
-    --quiet, -q       Enable quiet output.
-    --plugin, -p      Plugin to bake into.
-    --force, -f       Force overwriting existing files without prompting.
-    --connection, -c  The datasource connection to get data from.
-                      (default: default)
-    --theme, -t       The theme to use when baking code.
-    --components      The comma separated list of components to use.
-    --helpers         The comma separated list of helpers to use.
-    --prefix          The namespace/routing prefix to use.
-    --no-test         Do not generate a test skeleton.
-    --no-actions      Do not generate basic CRUD action methods.
-
-    Arguments:
-
-    name  Name of the controller to bake. Can use Plugin.name to bake
-        controllers into plugins. (optional)
+    --connection, -c   Database connection to use in conjunction with `bake
+                       all`. (default: default)
+    --everything       Bake a complete MVC skeleton, using all the available
+                       tables. Usage: "bake all --everything"
+    --force, -f        Force overwriting existing files without prompting.
+    --help, -h         Display this help.
+    --plugin, -p       Plugin to bake into.
+    --prefix           Prefix to bake controllers and templates into.
+    --quiet, -q        Enable quiet output.
+    --tablePrefix      Table prefix to be used in models.
+    --theme, -t        The theme to use when baking code. (choices:
+                       Bake|Migrations)
+    --verbose, -v      Enable verbose output.
 
 Bake Themes
 ===========
