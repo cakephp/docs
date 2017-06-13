@@ -411,7 +411,7 @@ respectively. You can customize them as per your needs. By default your
 **src/Template/Layout/error.ctp** is used for error pages too. If for
 example, you want to use another layout **src/Template/Layout/my_error.ctp**
 for your error pages, simply edit the error views and add the statement
-``$this->layout = 'my_error';`` to the **error400.ctp** and **error500.ctp**.
+``$this->layout = 'my_error;`` to the **error400.ctp** and **error500.ctp**.
 
 Each framework layer exception has its own view file located in the core
 templates but you really don't need to bother customizing them as they are used
