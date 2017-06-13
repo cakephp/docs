@@ -34,7 +34,7 @@ your application:
   logged to :php:class:`Cake\\Log\\Log`.
 * ``skipLog`` - array - An array of exception classnames that should not be
   logged. This is useful to remove NotFoundExceptions or other common, but
-  uninteresting logs messages.
+  uninteresting log messages.
 * ``extraFatalErrorMemory`` - int - Set to the number of megabytes to increase
   the memory limit by when a fatal error is encountered. This allows breathing
   room to complete logging or error handling.
