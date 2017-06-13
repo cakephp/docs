@@ -75,36 +75,35 @@ navigateurs, mais vous pourriez aussi avoir besoin de fournir des données AMF
 à un objet Flash, répondre à une application distante via SOAP ou produire un
 fichier CSV pour un utilisateur.
 
-CakePHP template files have a default extension of **.ctp** (CakePHP Template)
-and utilize the `alternative PHP syntax
-<http://php.net/manual/en/control-structures.alternative-syntax.php>`_
-for control structures and output. These files contain the logic necessary to
-prepare the data received from the controller into a presentation format that is
-ready for your audience.
+Les fichiers de template de CakePHP possèdent une extension **.ctp** (CakePHP Template)
+et utilisent la `syntaxe alternative de PHP
+<http://php.net/manual/fr/control-structures.alternative-syntax.php>`_
+pour les structures de contrôle et les sorties. Ces fichiers contiennent la logique necessaire
+pour servir les données reçues d'un controller dans un format de présentation qui est lisible
+par votre public.
 
-Alternative Echos
------------------
+Sorties Alternatives
+--------------------
 
-Echo, or print a variable in your template::
+Utilisez ``echo`` ou ``print`` sur une variable dans votre template::
 
   <?php echo $variable; ?>
 
-Using Short Tag support::
+Avec le support de "Short Tag"::
 
   <?= $variable ?>
 
-Alternative Control Structures
-------------------------------
+Structures de Contrôle Alternatives
+-----------------------------------
 
-Control structures, like ``if``, ``for``, ``foreach``, ``switch``, and ``while``
-can be written in a simplified format. Notice that there are no braces. Instead,
-the end brace for the ``foreach`` is replaced with ``endforeach``. Each of the
-control structures listed below has a similar closing syntax: ``endif``,
-``endfor``, ``endforeach``, and ``endwhile``. Also notice that instead of using
-a ``semicolon`` after each structure (except the last one), there is a
-``colon``.
+Les structures de contrôle tel que ``if``, ``for``, ``foreach``, ``switch``, et ``while``
+peuvent être écrites dans un format simplifié. Remarquez l'absence d'accolades. À la place,
+l'accolade de fin du ``foreach``  est remplacée par ``endforeach``. Chacune des structures de contrôle 
+listées ci-dessous a une syntaxe de fermeture similaire: ``endif``,
+``endfor``, ``endforeach``, et ``endwhile``. Vous remarquerez aussi qu'à la place du ``point-virgule`` après
+chaque structure (à l'exception de la dernière), il y a un ``double-point``.
 
-The following is an example using ``foreach``:
+Voici un example de ``foreach``:
 
 .. code-block:: php
 
