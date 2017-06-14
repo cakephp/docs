@@ -1235,7 +1235,7 @@ Sauvegarder Plusieurs Entities
 
 
 En utilisant cette méthode, vous pouvez sauvegarder plusieurs entities de façon
-atomique. ``$entites`` peuvent être un tableau d'entities créé avec
+atomique. ``$entities`` peuvent être un tableau d'entities créé avec
 ``newEntities()`` / ``patchEntities()``. ``$options`` peut avoir les mêmes
 options que celles acceptées par ``save()``::
 
