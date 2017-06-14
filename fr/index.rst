@@ -2,7 +2,7 @@ Bienvenue
 #########
 
 CakePHP 3 est un framework pour le développement web qui fonctionne avec
-**PHP 7** (min. PHP |minphpversion|).
+**PHP 7.1** (min. PHP |minphpversion|).
 Vous pouvez lire :doc:`CakePHP en un coup d'oeil </intro>` pour avoir une
 introduction aux fondamentaux de CakePHP 3.
 
