@@ -540,19 +540,8 @@ suit::
         }
     }
 
-Nous pouvons aussi définir une relation plus spécifique en utilisant les
-setters::
-
-    // In src/Model/Table/ArticlesTable.php
-    class ArticlesTable extends Table
-    {
-
-        public function initialize(array $config)
-        {
-            $this->belongsToMany('Tags')
-                ->setJoinTable('articles_tags');
-        }
-    }
+Nous pouvons aussi définir une relation plus spécifique en passant un tableau
+de configuration::
 
     // In src/Model/Table/TagsTable.php
     class TagsTable extends Table
