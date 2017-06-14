@@ -27,7 +27,7 @@ Plusieurs propriétés de ``Cake\Network\Request`` ont été dépréciées :
   * ``Request::$cookies`` est dépréciée. Utilisez ``Request::getCookie()`` à la place.
   * ``Request::$base`` est dépréciée. Utilisez ``Request::getAttribute('base')`` à la place.
   * ``Request::$webroot`` est dépréciée. Utilisez ``Request::getAttribute('webroot')`` à la place.
-  * ``Request::$here`` est dépréciée. Utilisez ``Request::here()`` à la place.
+  * ``Request::$here`` est dépréciée. Utilisez ``Request::getRequestTarget()`` à la place.
   * ``Request::$_session`` a été renommée ``Request::$session``.
 
 Certaines méthodes de ``Cake\Network\Request`` ont été dépréciées :
