@@ -459,6 +459,10 @@ en utilisant l'habituelle :term:`syntaxe de plugin`::
 
     $contacts = TableRegistry::get('ContactManager.Contacts');
 
+Si vous êtes dans un Controller, vous pouvez aussi utiliser::
+
+    $this->loadModel('ContactsMangager.Contacts');
+
 Vues du Plugin
 ==============
 
