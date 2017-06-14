@@ -136,7 +136,7 @@ tests:
 
 .. versionadded:: 3.4.1
     Support for PHPUnit 6 was addded. If you're using a PHPUnit version lower
-    than 5.7.0, your tests classes should either extends Cake's classes or
+    than 5.7.0, your tests classes should either extends CakePHP's classes or
     ``PHPUnit_Framework_TestCase``.
 
 Creating Your First Test Case

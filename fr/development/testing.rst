@@ -36,6 +36,9 @@ Pour installer PHPUnit avec Composer:
 
 .. code-block:: bash
 
+    $ php composer.phar require --dev phpunit/phpunit:"^5.7|^6.0"
+
+    // Avant CakePHP 3.4.1
     $ php composer.phar require --dev phpunit/phpunit
 
 Ceci va ajouter la dépendance à la section ``require-dev`` de votre
@@ -140,7 +143,7 @@ conventions. En ce qui concerne les tests:
 #. Les noms de ces fichiers doivent finir par **Test.php** plutôt que juste
    **.php**.
 #. Les classes contenant les tests doivent étendre ``Cake\TestSuite\TestCase``,
-   ``Cake\TestSuite\ControllerTestCase`` ou ``\PHPUnit_Framework_TestCase``.
+   ``Cake\TestSuite\IntegrationTestCase`` ou ``\PHPUnit\Framework\TestCase``.
 #. Comme les autres noms de classe, les noms de classe des cas de test doivent
    correspondre au nom de fichier. **RouterTest.php** doit contenir
    ``class RouterTest extends TestCase``.
@@ -148,6 +151,11 @@ conventions. En ce qui concerne les tests:
    doit commencer par ``test``, comme dans ``testPublished()``.
    Vous pouvez aussi utiliser l'annotation ``@test`` pour marquer les méthodes
    en méthodes de test.
+
+.. versionadded:: 3.4.1
+    Le support de PHPUnit 6 a été ajouté. Si vous utilisez une version de PHPUnit
+    inférieure à 5.7.0, vos classes de tests devront soit *extends* les classes
+    de CakePHP, soit ``PHPUnit_Framework_TestCase``.
 
 Créer Votre Premier Cas de Test
 ===============================
