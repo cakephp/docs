@@ -280,6 +280,56 @@ autoloader once you've created your plugin:
 
     $ php composer.phar dumpautoload
 
+.. _plugin-routes:
+
+Plugin Routes
+=============
+
+Plugins can provide routes files containing their routes. Each plugin can
+contain a **config/routes.php** file. This routes file can be loaded when the
+plugin is added, or in the application's routes file. To create the
+ContactManager plugin routes. Put the following into
+**plugins/ContactManager/config/routes.php**::
+
+    <?php
+    use Cake\Routing\Route\DashedRoute;
+    use Cake\Routing\Router;
+
+    Router::plugin(
+        'ContactManager',
+        ['path' => '/contact-manager'],
+        function ($routes) {
+            $routes->get('/contacts', ['controller' => 'Contacts']);
+            $routes->get('/contacts/:id', ['controller' => 'Contacts', 'action' => 'view']);
+            $routes->put('/contacts/:id', ['controller' => 'Contacts', 'action' => 'update']);
+        }
+    );
+
+The above will connect default routes for your plugin. You can customize this
+file with more specific routes later on.
+
+Before you can access your controllers, you'll need to ensure the plugin is
+loaded and the plugin routes are loaded.  In your **config/bootstrap.php** add
+the following::
+
+    Plugin::load('ContactManager', ['routes' => true]);
+
+You can also load plugin routes in your application's routes list. Doing this
+provides you more control on how plugin routes are loaded and allows you to wrap
+plugin routes in additional scopes or prefixes::
+
+    Router::scope('/', function ($routes) {
+        // Connect other routes.
+        $routes->scope('/backend', function ($routes) {
+            $routes->loadPlugin('ContactManager');
+        });
+    });
+
+The above would result in URLs like ``/backend/contact_manager/contacts``.
+
+.. versionadded:: 3.5.0
+    ``RouteBuilder::loadPlugin()`` was added in 3.5.0
+
 Plugin Controllers
 ==================
 
@@ -318,34 +368,6 @@ Also make the ``AppController`` if you don't have one already::
 
 A plugin's ``AppController`` can hold controller logic common to all controllers
 in a plugin but is not required if you don't want to use one.
-
-Before you can access your controllers, you'll need to ensure the plugin is
-loaded and the plugin routes are loaded.  In your **config/bootstrap.php** add
-the following::
-
-    Plugin::load('ContactManager', ['routes' => true]);
-
-If you are using ``Plugin::loadAll()`` ensure that routes are loaded::
-
-    Plugin::loadAll(['routes' => true]);
-
-Then create the ContactManager plugin routes. Put the following into
-**plugins/ContactManager/config/routes.php**::
-
-    <?php
-    use Cake\Routing\Route\DashedRoute;
-    use Cake\Routing\Router;
-
-    Router::plugin(
-        'ContactManager',
-        ['path' => '/contact-manager'],
-        function ($routes) {
-            $routes->fallbacks(DashedRoute::class);
-        }
-    );
-
-The above will connect default routes for you plugin. You can customize this
-file with more specific routes later on.
 
 If you want to access what we've got going thus far, visit
 ``/contact-manager/contacts``. You should get a "Missing Model" error
