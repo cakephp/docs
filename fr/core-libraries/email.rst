@@ -421,7 +421,7 @@ ressembler à cela::
 
 Vous devez intégrer la méthode ``send(Email $email)`` avec votre
 logique personnalisée. En option, vous pouvez intégrer la méthode
-``config($config)``. ``config()`` est appelée avant send() et vous permet
+``setConfig($config)``. ``setConfig()`` est appelée avant send() et vous permet
 d'accepter les configurations de l'utilisateur. Par défaut, cette méthode
 met la configuration dans l'attribut protégé ``$_config``.
 
