@@ -112,7 +112,7 @@ Création de liens triés
 
     :param string $key: Le nom de la clé du jeu d'enregistrement qui doit être
         triée.
-    :param string $title: Titre du lien. Si $title est null $key sera
+    :param string $title: Titre du lien. Si $title est null, $key sera
         utilisée pour le titre et sera générée par inflexion.
     :param array $options: Options pour le tri des liens.
 
