@@ -665,9 +665,9 @@ entities ne soient créées::
     // Dans une classe table ou behavior
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
-       if (isset($data['username'])) {
-           $data['username'] = mb_strtolower($data['username']);
-       }
+        if (isset($data['username'])) {
+            $data['username'] = mb_strtolower($data['username']);
+        }
     }
 
 Le paramètre ``$data`` est une instance ``ArrayObject``, donc vous n'avez pas
