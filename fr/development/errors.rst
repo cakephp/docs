@@ -327,6 +327,13 @@ Autres Exceptions Intégrées
 
     Une behavior du model n'a pas pu être trouvé.
 
+.. php:exception:: PersistenceFailedException
+
+    Une entity n'a pas pu être sauvegardée / supprimée en utilisant :php:meth:`Cake\\ORM\\Table::saveOrFail()` ou
+    :php:meth:`Cake\\ORM\\Table::deleteOrFail()`
+
+    .. versionadded:: 3.4.1 PersistenceFailedException a été ajoutée.
+
 .. php:namespace:: Cake\Datasource\Exception
 
 .. php:exception:: RecordNotFoundException
