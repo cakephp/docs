@@ -681,7 +681,6 @@ use the values that are defined in the **app.php**. You can use
 environment variables in a local development. See the Readme instructions of the
 library for more information.
 
-
 Disabling Generic Tables
 ========================
 

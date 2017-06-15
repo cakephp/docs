@@ -638,19 +638,20 @@ courantes:
 - Configurer les inflections personnalisées.
 - Charger les fichiers de configuration.
 
-It might be tempting to place formatting functions there in order to use them in
-your controllers. As you'll see in the :doc:`/controllers` and :doc:`/views`
-sections there are better ways you add custom logic to your application.
+Il pourrait être tentant de placer des fonction de formatage ici pour les
+utiliser dans vos controllers. Comme vous le verrez dans les documentations sur
+les :doc:`/controllers` et les :doc:`/views`, il y a de meilleurs moyens pour
+vous d'ajouter de la logique personnalisée dans votre application.
 
 .. _application-bootstrap:
 
 Application::bootstrap()
 ------------------------
 
-In addition to the **config/bootstrap.php** file which should be used to
-configure low-level concerns of your application, you can also use the
-``Application::bootstrap()`` hook method to load/initialize plugins, and attach
-global event listeners::
+En plus du fichier **config/bootstrap.php** qui doit être utilisé pour faire de
+la configuration "bas niveau" de votre application, vous pouvez également
+utiliser la méthode "hook" ``Application::bootstrap()`` pour charger /
+initialiser des plugins et attacher des écouteurs d'événements globaux::
 
     // in src/Application.php
     namespace App;
@@ -662,53 +663,56 @@ global event listeners::
     {
         public function bootstrap()
         {
-            // Call the parent to `require_once` config/bootstrap.php
+            // Appeler la méthode parente permet de faire le `require_once`
+            // pour charger le fichier config/bootstrap.php
             parent::bootstrap();
 
             Plugin::load('MyPlugin', ['bootstrap' => true, 'routes' => true]);
         }
     }
 
-Loading plugins/events in ``Application::bootstrap()`` makes
-:ref:`integration-testing` easier as events and routes will be re-processed on
-each test method.
+Charger les plugins et les événements dans ``Application::bootstrap()`` rend
+les :ref:`integration-testing` plus facile car les événements et les routes
+seront ainsi à nouveau traités pour chaque méthode de test.
 
-Environment Variables
-=====================
+Variables d'environnement
+=========================
 
-Some of the modern cloud providers, like Heroku, let you define environment
-variables. By defining environment variables, you can configure your CakePHP
-app as an 12factor app. Following the
-`12factor app instructions <http://12factor.net/>`_ is a good way to create a
-stateless app, and to ease the deployment of your app.
-This means for example, that if you need to change your database, you'll just
-need to modify a DATABASE_URL variable on your host configuration without the
-need to change it in your source code.
+Certains fournisseurs d'architectures dans le cloud comme Heroku, vous
+permettent de définir des variables d'environnement. En définissant des
+variables d'environnement, vous pouvez configurer vos applications comme des
+applications 12factor. Suivre les `instructions pour les applications 12factor <http://12factor.net/>`_
+vous permet de créer des applications "stateless" et donc de faciliter le
+déploiement de votre application.
+Cela signifie ainsi que si vous avez besoin par exemple de changer votre base
+de données, vous avez juste besoin de changer la variable DATABASE_URL dans la
+configuration sur votre fournisseur sans rien avoir à changer dans votre code.
 
-As you can see in your **app.php**, the following variables are concerned:
+Comme vous pouvez le voir dans le fichier **app.php**, les variables suivantes
+sont concernés :
 
 - ``DEBUG`` (``0`` or ``1``)
-- ``APP_ENCODING`` (ie UTF-8)
-- ``APP_DEFAULT_LOCALE`` (ie ``en_US``)
+- ``APP_ENCODING`` (ex: UTF-8)
+- ``APP_DEFAULT_LOCALE`` (ex: ``en_US``)
 - ``SECURITY_SALT``
-- ``CACHE_DEFAULT_URL`` (ie ``File:///?prefix=myapp_&serialize=true&timeout=3600&path=../tmp/cache/``)
-- ``CACHE_CAKECORE_URL`` (ie ``File:///?prefix=myapp_cake_core_&serialize=true&timeout=3600&path=../tmp/cache/persistent/``)
-- ``CACHE_CAKEMODEL_URL`` (ie ``File:///?prefix=myapp_cake_model_&serialize=true&timeout=3600&path=../tmp/cache/models/``)
-- ``EMAIL_TRANSPORT_DEFAULT_URL`` (ie ``smtp://user:password@hostname:port?tls=null&client=null&timeout=30``)
-- ``DATABASE_URL`` (ie ``mysql://user:pass@db/my_app``)
-- ``DATABASE_TEST_URL`` (ie ``mysql://user:pass@db/test_my_app``)
-- ``LOG_DEBUG_URL`` (ie ``file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=../logs/``)
-- ``LOG_ERROR_URL`` (ie ``file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=../logs/``)
+- ``CACHE_DEFAULT_URL`` (ex: ``File:///?prefix=myapp_&serialize=true&timeout=3600&path=../tmp/cache/``)
+- ``CACHE_CAKECORE_URL`` (ex: ``File:///?prefix=myapp_cake_core_&serialize=true&timeout=3600&path=../tmp/cache/persistent/``)
+- ``CACHE_CAKEMODEL_URL`` (ex: ``File:///?prefix=myapp_cake_model_&serialize=true&timeout=3600&path=../tmp/cache/models/``)
+- ``EMAIL_TRANSPORT_DEFAULT_URL`` (ex: ``smtp://user:password@hostname:port?tls=null&client=null&timeout=30``)
+- ``DATABASE_URL`` (ex: ``mysql://user:pass@db/my_app``)
+- ``DATABASE_TEST_URL`` (ex: ``mysql://user:pass@db/test_my_app``)
+- ``LOG_DEBUG_URL`` (ex: ``file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=../logs/``)
+- ``LOG_ERROR_URL`` (ex: ``file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=../logs/``)
 
-As you can see in the examples, we define some options configuration as
-:term:`DSN` strings. This is the case for databases, logs, email transport and
-cache configurations.
+Comme vous pouvez le voir dans ces exemples, nous définissons certaines options
+de configuration à l'aide de chaînes :term:`DSN`. C'est le cas pour les bases
+de données, les logs, le transport d'emails et les configurations du cache.
 
-If the environment variables are not defined in your environment, CakePHP will
-use the values that are defined in the **app.php**. You can use
-`php-dotenv library <https://github.com/josegonzalez/php-dotenv>`_ to use
-environment variables in a local development. See the Readme instructions of the
-library for more information.
+Si certaines variables d'environnement ne sont pas définies dans votre environnement,
+CakePHP utilisera les valeurs définies dans **app.php**. Vous pouvez utiliser
+la `librairie php-dotenv <https://github.com/josegonzalez/php-dotenv>`_ pour
+utiliser les variables d'environnement dans vos développements en local.
+Reportez-vous aux instructions dans le README pour plus d'informations.
 
 .. meta::
     :title lang=fr: Configuration
