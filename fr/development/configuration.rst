@@ -714,6 +714,36 @@ la `librairie php-dotenv <https://github.com/josegonzalez/php-dotenv>`_ pour
 utiliser les variables d'environnement dans vos développements en local.
 Reportez-vous aux instructions dans le README pour plus d'informations.
 
+Désactiver les tables génériques
+================================
+
+Bien qu'utiliser les classes génériques de Table (aussi appeler les "auto-tables")
+soit pratique lorsque vous développez rapidement de nouvelles applications, les
+tables génériques rendent le debug plus difficile dans certains cas.
+
+Vous pouvez vérifier si une requête a été générée à partir d'une table générique
+via le DebugKit, dans le panel SQL. Si vous avez encore des difficultés à
+diagnostiquer un problème qui pourrait être causer par les auto-tables, vous
+pouvez lancer une exception quand CakePHP utilise implicitement une ``Cake\ORM\Table``
+générique plutôt que la vraie classe du Model::
+
+    // Dans votre fichier bootstrap.php
+    use Cake\Event\EventManager;
+    use Cake\Network\Exception\InternalErrorException;
+
+    $isCakeBakeShellRunning = (PHP_SAPI === 'cli' && isset($argv[1]) && $argv[1] === 'bake');
+    if (!$isCakeBakeShellRunning) {
+        EventManager::instance()->on('Model.initialize', function($event) {
+            $subject = $event->getSubject();
+            if (get_class($subject === 'Cake\ORM\Table') {
+                $msg = sprintf(
+                    'Missing table class or incorrect alias when registering table class for database table %s.',
+                    $subject->getTable());
+                throw new InternalErrorException($msg);
+            }
+        });
+    }
+
 .. meta::
     :title lang=fr: Configuration
-    :keywords lang=fr: configuration finie,legacy database,configuration base de données,value pairs,connection par défaut,configuration optionnelle,exemple base de données,classe php,configuration base de données,base de données par default,étapes de configuration,index base de données,détails de configuration,classe base de données,hôte localhost,inflections,valeur clé,connection base de données,facile,basic web
+    :keywords lang=fr: configuration finie,legacy database,configuration base de données,value pairs,connection par défaut,configuration optionnelle,exemple base de données,classe php,configuration base de données,base de données par default,étapes de configuration,index base de données,détails de configuration,classe base de données,hôte localhost,inflections,valeur clé,connection base de données,facile,basic web,auto tables,auto-tables,table générique,class
