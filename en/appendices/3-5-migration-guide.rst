@@ -183,6 +183,12 @@ Routing
 * ``Cake\Routing\RouteBuilder::loadPlugin()`` was added.
 * ``Cake\Routing\Route`` now has fluent methods for defining options.
 
+TestSuite
+---------
+
+* ``IntegrationTestCase::head()`` was added.
+* ``IntegrationTestCase::options()`` was added.
+
 Validation
 ----------
 * ``Cake\Validation\Validator::regex()`` was added for a more convenient way
