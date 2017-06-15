@@ -157,7 +157,7 @@ Hash パス構文
     .. versionchanged:: 2.5
        2.5.0 から、 insert() で属性のマッチャー表現が動作します。
 
-.. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
+.. php:staticmethod:: combine(array $data, $keyPath, $valuePath = null, $groupPath = null)
 
     :rtype: array
 

@@ -513,7 +513,7 @@ iframe {
 /* Hamburger menu on mobile */
 .btn-menu {
     background: transparent;
-    padding: 0px 0 9px 15px;
+    padding: 0 0 9px 15px;
     border: none;
 }
 .toggle-modal {
@@ -1811,7 +1811,7 @@ header {
     bottom: calc(70% - 44px);
     right: 0;
     background: #363637;
-    padding: 5px 0px 4px;
+    padding: 5px 0 4px;
     z-index: 90; /* Behind header */
 }
 /* Improve Doc */
@@ -1824,7 +1824,7 @@ header {
     -o-transition-duration: 0.3s;
     transition-duration: 0.3s;
     background: #363637;
-    padding: 5px 0px 4px;
+    padding: 5px 0 4px;
     z-index: 90; /* Behind header */
 }
 #improve-slideout:hover {
@@ -1939,7 +1939,7 @@ header {
     text-align: center;
     line-height: 22px;
     padding-bottom: 10px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 
