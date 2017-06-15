@@ -609,6 +609,71 @@ jusqu'à ce que la réponse soit émise par ``Cake\Http\Server``.
 Vous pouvez maintenant utiliser la méthode :php:meth:`Cake\\Http\\Response::withLocation()`
 pour définir ou obtenir directement le header "redirect location".
 
+Définir le Corps de la réponse
+------------------------------
+
+.. php:method:: withStringBody($string)
+
+Pour définir une chaîne comme corps de réponse, écrivez ceci::
+
+    // Définit une chaîne dans le corps
+    $response = $response->withStringBody('My Body');
+
+    // Si vous souhaitez une réponse JSON
+    $response = $response->withType('application/json')
+        ->withStringBody(json_encode(['Foo' => 'bar']));
+
+.. versionadded:: 3.4.3
+
+    ``withStringBody()`` was added in 3.4.3
+
+.. php:method:: withBody($body)
+
+Pour définir le corps de la réponse, utilisez la méthode ``withBody()`` qui est
+fournie par le :php:class:`Zend\\Diactoros\\MessageTrait`::
+
+    $response = $response->withBody($stream);
+
+    // Avant 3.4.0, pour définir le corps de la réponse
+    $this->response->body('My Body');
+
+Assurez-vous que ``$stream`` est un objet de type :php:class:`Psr\\Http\\Message\\StreamInterface`.
+Ci-dessous, la manière de créer un nouveau stream.
+
+Vous pouvez également "*streamer*" les réponses depuis des fichiers en
+utilisant des streams :php:class:`Zend\\Diactoros\\Stream`::
+
+    // Pour "streamer" depuis un fichier
+    use Zend\Diactoros\Stream;
+
+    $stream = new Stream('/path/to/file', 'rb');
+    $response = $response->withBody($stream);
+
+Vous pouvez aussi streamer des réponses depuis un callback en utilisant un
+``CallbackStream``. C'est utile si vous avez des ressources comme des images,
+des fichiers CSV ou des fichiers PDF à streamer au client::
+
+    // Streamer depuis un callback
+    use Cake\Http\CallbackStream;
+
+    // Création d'une image
+    $img = imagecreate(100, 100);
+    // ...
+
+    $stream = new CallbackStream(function () use ($img) {
+        imagepng($img);
+    });
+    $response = $response->withBody($stream);
+
+    // Avant 3.4.0, vous pouvez utiliser la méthode ci-dessous pour créer des
+    // réponses sous forme de stream
+    $file = fopen('/some/file.png', 'r');
+    $this->response->body(function () use ($file) {
+        rewind($file);
+        fpassthru($file);
+        fclose($file);
+    });
+
 Définir le Character Set
 ------------------------
 
