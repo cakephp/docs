@@ -32,6 +32,10 @@ Components
 * ``FlashComponent`` now stacks messages of the same type. This is a feature
   backport from 3.x. To disable this behavior, add ``'clear' => true`` to the
   configuration for FlashComponent.
+* ``PaginatorComponent`` now supports multiple paginators through the
+  ``queryScope`` option. Using this option when paginating data will force
+  PaginatorComponent to read from scoped query parameters instead of the root
+  query string data.
 
 Helpers
 =======
