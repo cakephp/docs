@@ -172,6 +172,14 @@ personnaliser le masque utilisé pour générer le JSON. Regardez la
 documentation `json_encode <http://php.net/json_encode>`_ sur les valeurs
 valides de cette option.
 
+Par exemple, pour serializer le rendu des erreurs de validation des entités de
+CakePHP de manière cohérente, vous pouvez le faire de la manière suivante::
+
+    // Dans l'action de votre controller, quand une sauvegarde échoue
+    $this->set('errors', $articles->errors());
+    $this->set('_jsonOptions', JSON_FORCE_OBJECT);
+    $this->set('_serialize', ['errors']);
+
 Réponse JSONP
 -------------
 
