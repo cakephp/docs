@@ -331,7 +331,7 @@ d'utiliser le bon theme en utilisant la méthode ``Email::theme()``::
 Ceci vous permet de remplacer le template `new_comment` dans votre theme sans
 modifier le plugin Blog. Le fichier de template devra être créé dans le
 chemin suivant:
-**src/View/Themed/TestTheme/Blog/Email/text/new_comment.ctp**.
+**src/Template/Plugin/TestTheme/Plugin/Blog/Email/text/new_comment.ctp**.
 
 Envoyer les pièces jointes
 ==========================
@@ -421,7 +421,7 @@ ressembler à cela::
 
 Vous devez intégrer la méthode ``send(Email $email)`` avec votre
 logique personnalisée. En option, vous pouvez intégrer la méthode
-``config($config)``. ``config()`` est appelée avant send() et vous permet
+``setConfig($config)``. ``setConfig()`` est appelée avant send() et vous permet
 d'accepter les configurations de l'utilisateur. Par défaut, cette méthode
 met la configuration dans l'attribut protégé ``$_config``.
 

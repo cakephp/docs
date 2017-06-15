@@ -83,3 +83,30 @@ lignes ont été supprimées.
     deleteAll *ne* va *pas* déclencher les événements beforeDelete/afterDelete.
     Si vous avez besoin d'eux, chargez d'abord une collection d'enregistrements
     et supprimez les.
+
+Suppressions strictes
+---------------------
+
+.. php:method:: deleteOrFail($entity, $options = [])
+
+Utiliser cette méthode lancera une :php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException`
+si :
+
+* l'entity est _new_ (si elle n'a jamais été persistée)
+* l'entity n'a pas de valeur pour sa clé primaire
+* les règles de validation ont échoué
+* la suppression a été annulée via un _callback_.
+
+Si vous voulez trouver l'entity qui n'a pas pu être sauvegardée, vous pouvez
+utiliser la méthode :php:meth:`Cake\\ORM\Exception\\PersistenceFailedException::getEntity()`::
+
+        try {
+            $table->deleteOrFail($entity);
+        } catch (\Cake\ORM\Exception\PersistenceFailedException $e) {
+            echo $e->getEntity();
+        }
+
+Puisque cette méthode utilise la méthode :php:meth:`Cake\\ORM\\Table::delete()`,
+tous les événements de ``delete`` seront déclenchés.
+
+.. versionadded:: 3.4.1

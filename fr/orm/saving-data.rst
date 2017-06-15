@@ -665,9 +665,9 @@ entities ne soient créées::
     // Dans une classe table ou behavior
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
-       if (isset($data['username'])) {
-           $data['username'] = mb_strtolower($data['username']);
-       }
+        if (isset($data['username'])) {
+            $data['username'] = mb_strtolower($data['username']);
+        }
     }
 
 Le paramètre ``$data`` est une instance ``ArrayObject``, donc vous n'avez pas
@@ -1193,6 +1193,41 @@ correctement les données complexes va permettre à des utilisateurs mal
 intentionnés d'être capable de stocker des données qu'ils ne pourraient pas
 stocker normalement.
 
+Strict Saving
+=============
+
+.. php:method:: saveOrFail($entity, $options = [])
+
+Utiliser cette méthode lancera une :php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException`
+si :
+
+* les règles de validation ont échoué
+* l'entity contient des erreurs
+* la sauvegarde a été annulée par un _callback_.
+
+Utiliser cette méthode peut être utile pour effectuer des opérations complexes
+en base de données sans surveillance humaine comme lors de l'utilisation de
+script via des _tasks_ Shell.
+
+.. note::
+
+    Si vous utilisez cette méthode dans un Controller, assurez-vous de
+    capturer la ``PersistenceFailedException`` qui pourrait être levée.
+
+Si vous voulez trouver l'entity qui n'a pas pu être sauvegardée, vous pouvez
+utiliser la méthode :php:meth:`Cake\\ORM\Exception\\PersistenceFailedException::getEntity()`::
+
+        try {
+            $table->saveOrFail($entity);
+        } catch (\Cake\ORM\Exception\PersistenceFailedException $e) {
+            echo $e->getEntity();
+        }
+
+Puisque cette méthode utilise la méthode :php:meth:`Cake\\ORM\\Table::save()`,
+tous les événements de ``save`` seront déclenchés.
+
+.. versionadded:: 3.4.1
+
 Sauvegarder Plusieurs Entities
 ==============================
 
@@ -1200,7 +1235,7 @@ Sauvegarder Plusieurs Entities
 
 
 En utilisant cette méthode, vous pouvez sauvegarder plusieurs entities de façon
-atomique. ``$entites`` peuvent être un tableau d'entities créé avec
+atomique. ``$entities`` peuvent être un tableau d'entities créé avec
 ``newEntities()`` / ``patchEntities()``. ``$options`` peut avoir les mêmes
 options que celles acceptées par ``save()``::
 

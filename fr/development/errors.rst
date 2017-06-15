@@ -81,11 +81,11 @@ une logique de gestion des erreurs personnalisée. Un exemple serait::
     {
         public function _displayError($error, $debug)
         {
-            return 'Il y a eu une erreur!';
+            echo 'Il y a eu une erreur!';
         }
         public function _displayException($exception)
         {
-            return 'Il y a eu un exception';
+            echo 'Il y a eu un exception';
         }
     }
 
@@ -326,6 +326,13 @@ Autres Exceptions Intégrées
 .. php:exception:: MissingBehaviorException
 
     Une behavior du model n'a pas pu être trouvé.
+
+.. php:exception:: PersistenceFailedException
+
+    Une entity n'a pas pu être sauvegardée / supprimée en utilisant :php:meth:`Cake\\ORM\\Table::saveOrFail()` ou
+    :php:meth:`Cake\\ORM\\Table::deleteOrFail()`
+
+    .. versionadded:: 3.4.1 PersistenceFailedException a été ajoutée.
 
 .. php:namespace:: Cake\Datasource\Exception
 

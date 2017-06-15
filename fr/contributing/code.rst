@@ -14,7 +14,7 @@ suivants:
 
 * Git
 * PHP |minphpversion| ou supérieur
-* PHPUnit 3.7.0 ou supérieur
+* PHPUnit 5.7.0 ou supérieur
 
 Mettez en place vos informations d'utilisateur avec votre nom/titre et adresse
 e-mail de travail::

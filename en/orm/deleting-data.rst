@@ -82,11 +82,13 @@ Strict Deletes
 
 .. php:method:: deleteOrFail($entity, $options = [])
 
-
 Using this method will throw an
-:php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException` if the entity is
-new, has no primary key value, application rules checks failed or the delete was
-aborted by a callback.
+:php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException` if :
+
+* the entity is new
+* the entity has no primary key value
+* application rules checks failed
+* the delete was aborted by a callback.
 
 If you want to track down the entity that failed to save, you can use the
 :php:meth:`Cake\\ORM\Exception\\PersistenceFailedException::getEntity()` method::

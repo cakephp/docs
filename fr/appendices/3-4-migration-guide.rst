@@ -4,6 +4,11 @@
 CakePHP 3.4 est une mise à jour de CakePHP 3.3 dont la compatibilité API est
 complète. Cette page souligne les changements et améliorations faits dans 3.4.
 
+PHP 5.6 devient le minimum requis
+=================================
+CakePHP 3.4 a maintenant besoin d'au minimum PHP 5.6.0 puisque PHP 5.5 n'est
+plus supporté et ne recevra plus de correctifs de sécurité.
+
 Dépréciations
 =============
 
@@ -21,13 +26,13 @@ suivent le pattern des "objets immutables" décrit dans le standard PSR-7.
 
 Plusieurs propriétés de ``Cake\Network\Request`` ont été dépréciées :
 
-  * ``Request::$params`` est dépréciée. Utilisez ``Request::getParam()`` à la place.
+  * ``Request::$params`` est dépréciée. Utilisez ``Request::getAttribute('params')`` à la place.
   * ``Request::$data`` est dépréciée. Utilisez ``Request::getData()`` à la place.
-  * ``Request::$query`` est dépréciée. Utilisez ``Request::getQuery()`` à la place.
+  * ``Request::$query`` est dépréciée. Utilisez ``Request::getQueryParams()`` à la place.
   * ``Request::$cookies`` est dépréciée. Utilisez ``Request::getCookie()`` à la place.
   * ``Request::$base`` est dépréciée. Utilisez ``Request::getAttribute('base')`` à la place.
   * ``Request::$webroot`` est dépréciée. Utilisez ``Request::getAttribute('webroot')`` à la place.
-  * ``Request::$here`` est dépréciée. Utilisez ``Request::here()`` à la place.
+  * ``Request::$here`` est dépréciée. Utilisez ``Request::getRequestTarget()`` à la place.
   * ``Request::$_session`` a été renommée ``Request::$session``.
 
 Certaines méthodes de ``Cake\Network\Request`` ont été dépréciées :
@@ -467,3 +472,10 @@ PluginShell
 * ``cake plugin load`` et ``cake plugin unload`` supportent maintenant une
   option ``--cli`` qui permet de mettre à jour ``bootstrap_cli.php`` à la place
   de ``bootstrap.php``.
+
+TestSuite
+=========
+
+* Le support de ``PHPUnit 6`` a été ajouté. Puisque cette version du framework
+  a au minimum besoin de PHP 5.6.0, les versions supportées de PHPUnit sont
+  maintenant ``^5.7|^6.0``

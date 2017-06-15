@@ -280,7 +280,7 @@ Les autres propriétés accessibles sont:
 Aides aux Tests
 ---------------
 
-Quand vous écrivez des tests unitaires, il peut être utile de fixer le time
+Quand vous écrivez des tests unitaires, il peut être utile de fixer le *time*
 courant. Chronos vous permet de fixer le time courant pour chaque classe.
 Pour l'intégrer dans votre processus de démarrage (bootstrap) de suite de tests,
 vous pouvez inclure ce qui suit::
@@ -302,3 +302,5 @@ retournée relativement à la date fixée::
     $time = new Chronos(); // 1975-12-25 00:00:00
     $time = new Chronos('1 hour ago'); // 1975-12-24 23:00:00
 
+Pour réinitialiser la "fixation" du temps, appelez simplement ``setTestNow()``
+sans paramètre ou avec ``null`` comme paramètre.
