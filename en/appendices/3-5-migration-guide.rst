@@ -68,6 +68,9 @@ The following is a list of methods that are deprecated and replaced with
     * ``translator()``
 ``Cake\ORM\LocatorAwareTrait``
     * ``tableLocator()``
+``Cake\ORM\EntityTrait``
+    * ``invalid()`` (now ``getInvalid()``, ``setInvalid()``,
+      ``setInvalidField()``, and ``getInvalidField()``)
 ``Cake\ORM\Table``
     * ``validator()``
 ``Cake\Routing\RouteCollection``
