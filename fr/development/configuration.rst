@@ -638,7 +638,7 @@ courantes:
 - Configurer les inflections personnalisées.
 - Charger les fichiers de configuration.
 
-Il pourrait être tentant de placer des fonction de formatage ici pour les
+Il pourrait être tentant de placer des fonctions de formatage ici pour les
 utiliser dans vos controllers. Comme vous le verrez dans les documentations sur
 les :doc:`/controllers` et les :doc:`/views`, il y a de meilleurs moyens pour
 vous d'ajouter de la logique personnalisée dans votre application.
@@ -672,7 +672,7 @@ initialiser des plugins et attacher des écouteurs d'événements globaux::
     }
 
 Charger les plugins et les événements dans ``Application::bootstrap()`` rend
-les :ref:`integration-testing` plus facile car les événements et les routes
+les :ref:`integration-testing` plus faciles car les événements et les routes
 seront ainsi à nouveau traités pour chaque méthode de test.
 
 Variables d'environnement
@@ -723,7 +723,7 @@ tables génériques rendent le debug plus difficile dans certains cas.
 
 Vous pouvez vérifier si une requête a été générée à partir d'une table générique
 via le DebugKit, dans le panel SQL. Si vous avez encore des difficultés à
-diagnostiquer un problème qui pourrait être causer par les auto-tables, vous
+diagnostiquer un problème qui pourrait être causé par les auto-tables, vous
 pouvez lancer une exception quand CakePHP utilise implicitement une ``Cake\ORM\Table``
 générique plutôt que la vraie classe du Model::
 
