@@ -103,7 +103,9 @@ whose name contains multiple words, the foreign key would be
 
 Join tables, used in BelongsToMany relationships between models, should be named
 after the model tables they will join, arranged in alphabetical order
-(``articles_tags`` rather than ``tags_articles``).
+(``articles_tags`` rather than ``tags_articles``). It's important to add an 
+individual ``id`` field to the join table, so the ``articles_tags`` table will have
+at least these keys ``article_id``, ``tag_id`` and ``id``.
 
 In addition to use an auto-increment key as the primary key, you may also use
 UUID columns. CakePHP will create a unique 36 character UUID
