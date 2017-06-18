@@ -5,13 +5,13 @@
 ======================
 
 ブログアプリケーションを進めましょう。投稿記事をカテゴライズすることを想像してください。
-順に並べられたカテゴリが必要で、カテゴリの作成のために
+順に並べられたカテゴリーが必要で、カテゴリーの作成のために
 :doc:`Tree behavior </orm/behaviors/tree>` を使いましょう。
 
 しかしまずはじめに、テーブルを編集する必要があります。
 
 Migrations プラグイン
-===========================
+=====================
 
 データベース内にテーブルを作るのに `migrations プラグイン
 <https://github.com/cakephp/migrations>`_ を利用します。
@@ -23,7 +23,7 @@ Migrations プラグイン
 
     composer require cakephp/migrations:~1.0
 
-マイグレーションプラグインはアプリケーションの ``plugins`` フォルダに存在します。
+マイグレーションプラグインはアプリケーションの ``plugins`` フォルダーに存在します。
 そして、 アプリケーションの ``bootstrap.php`` ファイルに ``Plugin::load('Migrations');``
 を追加してください。
 
@@ -31,7 +31,7 @@ Migrations プラグイン
 
     bin/cake bake migration CreateArticles title:string body:text category_id:integer created modified
 
-``/config/Migrations`` フォルダにマイグレーションファイルが以下のように生成されます。 ::
+``/config/Migrations`` フォルダーにマイグレーションファイルが以下のように生成されます。 ::
 
     <?php
 
@@ -123,7 +123,7 @@ Migrations プラグイン
 
 ではマイグレーションファイルが作成されたので、テーブルを作成する前にこれを編集しましょう。
 ``parent_id`` フィールドを ``'null' => false`` を ``'null' => true`` に変更してください。
-トップレベルのカテゴリでは ``parent_id`` は null になるからです。
+トップレベルのカテゴリーでは ``parent_id`` は null になるからです。
 
 テーブルを作る際は以下のコマンドを実行してください。 ::
 
@@ -136,7 +136,7 @@ Migrations プラグイン
 テーブルの設定ができたので、投稿記事のカテゴライズに注力しましょう。
 
 既にパート2でファイル (Articles の Table, Controller および Template) ができあがっているはずです。
-カテゴリへ参照を追記していきましょう。
+カテゴリーへ参照を追記していきましょう。
 
 Articles と Categories テーブルとを結びつける必要があります。
 **src/Model/Table/ArticlesTable.php** ファイルを開き、以下のように追加してください。 ::
@@ -162,17 +162,17 @@ Articles と Categories テーブルとを結びつける必要があります�
 Categories のスケルトンコードを作成する
 =======================================
 
-bakeコマンドを利用してすべてのファイルを作成しましょう。 ::
+bake コマンドを利用してすべてのファイルを作成しましょう。 ::
 
     bin/cake bake model Categories
     bin/cake bake controller Categories
     bin/cake bake template Categories
 
-代わりに、1行でbakeすることもできます。 ::
+代わりに、1行で bake することもできます。 ::
 
     bin/cake bake all Categories
 
-bakeツールによって、すぐにすべてのファイルが作成されました。もし CakePHP が
+bake ツールによって、すぐにすべてのファイルが作成されました。もし CakePHP が
 どのように動いているかを知りたかったら簡単に bake ツールを読んでおきましょう。
 
 .. note::
@@ -198,14 +198,14 @@ MPTT ツリー構造は読み込みに最適化されているので、
 ``src/Model/Table/CategoriesTable.php`` ファイルの ``initialize()`` メソッド内で、
 TreeBehavior が CategoriesTable と紐づけられていることがお分かりいただけるでしょう。
 
-bake は ``lft`` 列と ``rght`` 列が存在するあらゆるテーブルにこのビヘイビアを追加します。 ::
+bake は ``lft`` 列と ``rght`` 列が存在するあらゆるテーブルにこのビヘイビアーを追加します。 ::
 
     $this->addBehavior('Tree');
 
-紐づけられた TreeBehavior によって、カテゴリの順を並べ直すような機能にアクセスすることが可能になります。
+紐づけられた TreeBehavior によって、カテゴリーの順を並べ直すような機能にアクセスすることが可能になります。
 すぐにわかるでしょう。
 
-しかし今は、カテゴリの中にある add と edit のテンプレートファイル内の次の control を削除てください。 ::
+しかし今は、カテゴリーの中にある add と edit のテンプレートファイル内の次の control を削除てください。 ::
 
     echo $this->Form->control('lft');
     echo $this->Form->control('rght');
@@ -230,17 +230,17 @@ requirePresense を無効にするか削除してください。 ::
             ->notEmpty('rght');
     }
 
-カテゴリが保存される際に、これらのフィールドは TreeBehavior によって自動的に管理されます。
+カテゴリーが保存される際に、これらのフィールドは TreeBehavior によって自動的に管理されます。
 
-ブラウザを用いて、 ``/yoursite/categories/add`` コントローラアクションから
-いくつかの新しいカテゴリを登録してください。
+ブラウザーを用いて、 ``/yoursite/categories/add`` コントローラーアクションから
+いくつかの新しいカテゴリーを登録してください。
 
-TreeBehavior でカテゴリを並べ替える
+TreeBehavior でカテゴリーを並べ替える
 =====================================
 
 categories の index テンプレートファイルでは、categories を一覧したり並べ替えたりすることができます。
 
-``CategoriesController.php`` の index メソッドを編集して、ツリーでカテゴリを並べ替えるために
+``CategoriesController.php`` の index メソッドを編集して、ツリーでカテゴリーを並べ替えるために
 ``moveUp()`` および ``moveDown()`` メソッドを追加してください。 ::
 
     class CategoriesController extends AppController
@@ -324,11 +324,11 @@ categories の index テンプレートファイルでは、categories を一覧
     </div>
 
 
-Articles コントローラを編集する
-===============================
+Articles コントローラーを編集する
+=================================
 
-``ArticlesController`` ではすべてのカテゴリを一覧できます。
-投稿記事を作成あるいは編集するときに、カテゴリを選ぶことができるようになります。 ::
+``ArticlesController`` ではすべてのカテゴリーを一覧できます。
+投稿記事を作成あるいは編集するときに、カテゴリーを選ぶことができるようになります。 ::
 
     // src/Controller/ArticlesController.php
 
@@ -354,7 +354,7 @@ Articles コントローラを編集する
             }
             $this->set('article', $article);
 
-            // 記事のカテゴリを１つ選択するためにカテゴリの一覧を追加
+            // 記事のカテゴリーを１つ選択するためにカテゴリーの一覧を追加
             $categories = $this->Articles->Categories->find('treeList');
             $this->set(compact('categories'));
         }
@@ -373,14 +373,14 @@ Articles テンプレートを編集する
     <h1>Add Article</h1>
     <?php
     echo $this->Form->create($article);
-    // ここにカテゴリのコントロールを追加
+    // ここにカテゴリーのコントロールを追加
     echo $this->Form->control('category_id');
     echo $this->Form->control('title');
     echo $this->Form->control('body', ['rows' => '3']);
     echo $this->Form->button(__('Save Article'));
     echo $this->Form->end();
 
-`/yoursite/articles/add` のアドレスに行くと、カテゴリを選ぶための一覧を見れるでしょう。
+`/yoursite/articles/add` のアドレスに行くと、カテゴリーを選ぶための一覧を見れるでしょう。
 
 .. meta::
     :title lang=ja: Blog Tutorial Migrations and Tree

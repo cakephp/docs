@@ -11,14 +11,14 @@
 CakePHP はいくつかのミドルウェアを既成で提供します。
 
 * ``Cake\Error\Middleware\ErrorHandlerMiddleware`` はラップされたミドルウェアからくる
-  例外を捕まえ、 :doc:`/development/errors` の例外ハンドラを使ってエラーページを描画します。
-* ``Cake\Routing\AssetMiddleware`` はリクエストが、プラグインの webroot フォルダ
+  例外を捕まえ、 :doc:`/development/errors` の例外ハンドラーを使ってエラーページを描画します。
+* ``Cake\Routing\AssetMiddleware`` はリクエストが、プラグインの webroot フォルダー
   あるいはテーマのそれに格納された CSS 、 JavaScript または画像ファイルといった、
   テーマまたはプラグインのアセットファイルを参照するかどうかを確認します。
 * ``Cake\Routing\Middleware\RoutingMiddleware`` は受け取った URL を解析して、
-  リクエストにルーティングパラメータを割り当てるために ``Router`` を使用します。
-* ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` はブラウザによって送られる
-  ``Accept-Language`` ヘッダによって自動で言語を切り替えられるようにします。
+  リクエストにルーティングパラメーターを割り当てるために ``Router`` を使用します。
+* ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` はブラウザーによって送られる
+  ``Accept-Language`` ヘッダーによって自動で言語を切り替えられるようにします。
 
 .. _using-middleware:
 
@@ -39,7 +39,7 @@ CakePHP はいくつかのミドルウェアを既成で提供します。
     {
         public function middleware($middlewareStack)
         {
-            // ミドルウェアのキューにエラーハンドラを結びつけます。
+            // ミドルウェアのキューにエラーハンドラーを結びつけます。
             $middlewareStack->add(new ErrorHandlerMiddleware());
             return $middlewareStack;
         }
@@ -97,22 +97,22 @@ PSR-7 リクエストとレスポンス
 
 `PSR-7 リクエストとレスポンスインターフェイス <http://www.php-fig.org/psr/psr-7/>`__
 の先頭でミドルウェアと新しい HTTP スタックは構築されます。すべてのミドルウェアは
-これらのインターフェイスに触れることになりますが、コントローラ、コンポーネント
+これらのインターフェイスに触れることになりますが、コントローラー、コンポーネント
 およびビューは *そうではありません* 。
 
 リクエストとの対話
 ------------------
 
-``RequestInterface`` は、リクエストのヘッダ、メソッド、 URI 、およびボディと対話するための
-メソッドを提供します。ヘッダと対話するには、このようにします。 ::
+``RequestInterface`` は、リクエストのヘッダー、メソッド、 URI 、およびボディーと対話するための
+メソッドを提供します。ヘッダーと対話するには、このようにします。 ::
 
-    // ヘッダをテキストとして読みます
+    // ヘッダーをテキストとして読みます
     $value = $request->getHeaderLine(‘Content-Type’);
 
-    // ヘッダを配列として読みます
+    // ヘッダーを配列として読みます
     $value = $request->getHeader(‘Content-Type’);
 
-    // すべてのヘッダを連想配列として読みます
+    // すべてのヘッダーを連想配列として読みます
     $headers = $request->getHeaders();
 
 リクエストは、それらが持つクッキーやアップロードされたファイルへのアクセスも提供します。 ::
@@ -143,11 +143,11 @@ PSR-7 リクエストとレスポンス
     $host = $uri->getHost();
 
 最後に、リクエストの‘属性’と対話することができます。 CakePHP はフレームワーク固有の
-リクエストパラメータを用いるためにこの属性を利用します。 CakePHP によって処理される
+リクエストパラメーターを用いるためにこの属性を利用します。 CakePHP によって処理される
 どのリクエストにおいても重要ないくつかの属性があります。
 
-* ``base`` は、もしあればアプリケーションのベースディレクトリを持っています。
-* ``webroot`` は、アプリケーションの webroot ディレクトリを持っています。
+* ``base`` は、もしあればアプリケーションのベースディレクトリーを持っています。
+* ``webroot`` は、アプリケーションの webroot ディレクトリーを持っています。
 * ``params`` は、ルーティング規則が処理された後で、ルートマッチングの結果を持ちます。
 * ``session`` は、 CakePHP の ``Session`` オブジェクトのインスタンスを持っています。
   セッションオブジェクトをどう使うかについての詳しい情報は :ref:`accessing-session-object`
@@ -171,14 +171,14 @@ PSR-7 リクエストとレスポンス
     // これは動きます！
     $newResponse = $response->withHeader('Content-Type', 'application/json');
 
-多くの場合、リクエスト上でヘッダとレスポンスのボディを設定することになるでしょう。 ::
+多くの場合、リクエスト上でヘッダーとレスポンスのボディーを設定することになるでしょう。 ::
 
-    // ヘッダとステータスコードを割り当てます
+    // ヘッダーとステータスコードを割り当てます
     $response = $response->withHeader('Content-Type', 'application/json')
         ->withHeader('Pragma', 'no-cache')
         ->withStatus(422);
 
-    // ボディに書き込みます
+    // ボディーに書き込みます
     $body = $response->getBody();
     $body->write(json_encode(['errno' => $errorCode]));
 
@@ -265,7 +265,7 @@ PSR-7 リクエストとレスポンス
    <https://github.com/cakephp/app/tree/master/src/Application.php>`__
    の中の例をコピーしてください。
 
-これら二つの手順が完了すると、アプリケーション／プラグインのディスパッチフィルタを
+これら二つの手順が完了すると、アプリケーション／プラグインのディスパッチフィルターを
 HTTP ミドルウェアとして再実装を始める準備が整います。
 
 もし、テストを実行する場合は、 `app スケルトン
