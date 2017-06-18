@@ -41,6 +41,9 @@ add more recipients to their respective field::
     // The email's To recipients are: to@example.com and to2@example.com
     $email->to('test@example.com', 'ToTest Example');
     // The email's To recipient is: test@example.com
+    
+.. deprecated:: 3.4.0
+    Use ``setFrom()``, ``setTo()``, ``setCc()`` , ``setBcc()``  and ``setSubject()`` instead.
 
 Choosing the Sender
 -------------------
