@@ -681,7 +681,6 @@ use the values that are defined in the **app.php**. You can use
 environment variables in a local development. See the Readme instructions of the
 library for more information.
 
-
 Disabling Generic Tables
 ========================
 
@@ -691,7 +690,7 @@ make debugging more difficult in some scenarios.
 
 You can check if any query was emitted from a generic table class via DebugKit
 via the SQL panel in DebugKit. If you're still having trouble diagnosing an
-issue that could be caused by auto-tables, you can throw an exeception when
+issue that could be caused by auto-tables, you can throw an exception when
 CakePHP implicitly uses a generic ``Cake\ORM\Table`` instead of your concrete
 class like so::
 

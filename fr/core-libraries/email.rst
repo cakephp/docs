@@ -224,7 +224,7 @@ sont utilisées:
 - ``'transport'``: Nom du Transport. Regardez
   :php:meth:`~Cake\\Mailer\\Email::setConfigTransport()`.
 - ``'log'``: Niveau de Log pour connecter les headers de l'email headers et le
-  message. ``true`` va utiliser LOG_DEBUG. Regardez aussi ``CakeLog::write()``.
+  message. ``true`` va utiliser LOG_DEBUG. Regardez aussi :ref:`logging-levels`.
 - ``'helpers'``: Tableau de helpers utilisés dans le template email. ``Email::setHelpers()``.
 
 Toutes ces configurations sont optionnelles, excepté ``'from'``.

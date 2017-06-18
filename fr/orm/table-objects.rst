@@ -39,7 +39,7 @@ Par convention, les objets Table vont utiliser une table avec la notation en
 minuscule et avec des underscores pour le nom de la classe. Dans l'exemple du
 dessus, la table ``articles`` va être utilisée. Si notre classe table était
 nommée ``BlogPosts``, votre table serait nommée ``blog_posts``. Vous pouvez
-spécifier la table en utilisant la méthode ``table()``::
+spécifier la table en utilisant la méthode ``setTable()``::
 
     namespace App\Model\Table;
 
@@ -50,6 +50,9 @@ spécifier la table en utilisant la méthode ``table()``::
 
         public function initialize(array $config)
         {
+            $this->setTable('my_table');
+
+            // Avant 3.4.0
             $this->table('my_table');
         }
 
@@ -58,7 +61,7 @@ spécifier la table en utilisant la méthode ``table()``::
 Aucune convention d'inflection ne sera appliquée quand on spécifie une table.
 Par convention, l'ORM s'attend aussi à ce que chaque table ait une clé primaire
 avec le nom de ``id``. Si vous avez besoin de modifier ceci, vous pouvez
-utiliser la méthode ``primaryKey()``::
+utiliser la méthode ``setPrimaryKey()``::
 
     namespace App\Model\Table;
 
@@ -68,6 +71,9 @@ utiliser la méthode ``primaryKey()``::
     {
         public function initialize(array $config)
         {
+            $this->setPrimaryKey('my_id');
+
+            // Avant 3.4.0
             $this->primaryKey('my_id');
         }
     }
@@ -81,12 +87,15 @@ conventions de nommage. Par exemple, si votre classe de table est appelée
 ``ArticlesTable`` l'entity sera ``Article``. Si la classe table est
 ``PurchaseOrdersTable`` l'entity sera ``PurchaseOrder``. Cependant si vous
 souhaitez utiliser une entity qui ne suit pas les conventions, vous pouvez
-utiliser la méthode ``entityClass()`` pour changer les choses::
+utiliser la méthode ``setEntityClass()`` pour changer les choses::
 
     class PurchaseOrdersTable extends Table
     {
         public function initialize(array $config)
         {
+            $this->setEntityClass('App\Model\Entity\PO');
+
+            // Avant 3.4.0
             $this->entityClass('App\Model\Entity\PO');
         }
     }
