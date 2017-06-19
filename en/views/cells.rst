@@ -234,13 +234,13 @@ messages could look like::
                 $this->request->getQueryParams(),
                 [
                     // Use a parameterized custom finder.
-                    'finder' => ['favourites' => [$user]]
+                    'finder' => ['favorites' => [$user]]
 
                     // Use scoped query string parameters.
-                    'scope' => 'favourites'
+                    'scope' => 'favorites'
                 ]
             );
-            $this->set('favourites', $results);
+            $this->set('favorites', $results);
         }
     }
 
