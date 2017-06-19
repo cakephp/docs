@@ -1118,7 +1118,7 @@ De plus, l'évaluation lazy aide à accélérer certaines operations. Considére
 l'exemple suivant::
 
     $collection = new Collection($oneMillionItems);
-    $collection->map(function ($item) {
+    $collection = $collection->map(function ($item) {
         return $item * 2;
     });
     $itemsToShow = $collection->take(30);
