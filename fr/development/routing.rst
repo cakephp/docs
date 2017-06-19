@@ -712,23 +712,38 @@ Routing des Extensions de Fichier
 
 .. php:staticmethod:: extensions(string|array|null $extensions, $merge = true)
 
+
 Pour manipuler différentes extensions de fichier avec vos routes, vous pouvez
-ajouter ce qui suit dans votre fichier de config des routes::
+définir vos extensions de manière globale ou dans un *scope*. Définir des
+extensions globales peut se faire via la méthode static :php:meth:`Router::extensions()`
+
+    Router::extensions(['json', 'xml']);
+    // ...
+
+Ceci affectera **toutes** les routes qui seront connectés **après** cet appel,
+quelque soit leur *scope*.
+
+Pour restreindre les extensions à un *scope* spécifique, vous pouvez les définir
+en utilisant la méthode :php:meth:`Cake\\Routing\\RouteBuilder::extensions()`::
 
     Router::scope('/', function ($routes) {
         $routes->extensions(['json', 'xml']);
-        ...
+        // ...
     });
 
-Cela activera les extensions de nom pour toutes les routes déclarées **après**
-l'appel de cette méthode. Par défaut, les extensions que vous avez déclarées
-seront fusionnées avec la liste des extensions existantes.
+Cela activera les extensions pour toutes les routes qui seront définies dans ce
+scope **après** l'appel à ``extensions()``, tout en incluant les routes inclus
+dans les scopes imbriqués. De la même manière que la méthode :php:meth:`Router::extensions()`,
+toutes les routes connectés avant cet appel n'hériteront pas de ces extensions.
 
 .. note::
 
     Le réglage des extensions devrait être la première chose que vous devriez
     faire dans un scope, car les extensions seront appliquées uniquement aux
     routes qui sont définies **après** la déclaration des extensions.
+
+    Lorsque vous définissez des routes dans le même scope mais dans deux appels
+    différents, les extensions ne seront pas hérités d'un appel à l'autre.
 
 En utilisant des extensions, vous dites au router de supprimer toutes les
 extensions de fichiers correspondant, puis d'analyser le reste. Si vous
