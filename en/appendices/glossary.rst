@@ -3,11 +3,6 @@ Glossary
 
 .. glossary::
 
-
-    CSRF
-        Cross Site Request Forgery. Prevents replay attacks, double
-        submissions and forged requests from other domains.
-
     CDN
         Content Delivery Network. A 3rd party vendor you can pay to help
         distribute your content to data centers around the world. This helps
@@ -16,6 +11,10 @@ Glossary
     columns
         Used in the ORM when referring to the table columns in an database
         table.
+
+    CSRF
+        Cross Site Request Forgery. Prevents replay attacks, double
+        submissions and forged requests from other domains.
 
     DSN
         Data Source Name. A connection string format that is formed like a URI.
