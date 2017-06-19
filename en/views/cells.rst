@@ -240,7 +240,7 @@ messages could look like::
                     'scope' => 'favourites'
                 ]
             );
-            $this->set('favorites', $results);
+            $this->set('favourites', $results);
         }
     }
 
