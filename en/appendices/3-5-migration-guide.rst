@@ -136,6 +136,26 @@ Console
   allows you to set the command name used when generating help output. Defaults
   to ``cake``.
 
+Datasource
+----------
+
+* ``Cake\Datasource\SchemaInterface`` was added.
+* New abstract types were added for ``smallinteger`` and ``tinyinteger``.
+  Existing ``SMALLINT`` and ``TINYINT`` columns will now be reflected as these
+  new abstract types. ``TINYINT(1)`` columns will continue to be treated as
+  boolean columns in MySQL.
+* ``Cake\Datasource\PaginatorInterface`` was added. The ``PaginatorComponent``
+  now uses this interface to interact with paginators. This allows other
+  ORM-like implementations to be paginated by the component.
+* ``Cake\Datasource\Paginator`` was added to paginate ORM/Database Query
+  instances.
+
+Event
+-----
+
+* ``Cake\Event\EventManager::on()`` and ``off()`` methods are now chainable
+  making it simpler to set multiple events at once.
+
 Http
 ----
 
@@ -153,20 +173,9 @@ Http
 * ``Cake\Http\Client::addCookie()`` was added to make it easy to add cookies to
   a client instance.
 
-Event
------
-
-* ``Cake\Event\EventManager::on()`` and ``off()`` methods are now chainable
-  making it simpler to set multiple events at once.
-
 ORM
 ---
 
-* ``Cake\Datasource\SchemaInterface`` was added.
-* New abstract types were added for ``smallinteger`` and ``tinyinteger``.
-  Existing ``SMALLINT`` and ``TINYINT`` columns will now be reflected as these
-  new abstract types. ``TINYINT(1)`` columns will continue to be treated as
-  boolean columns in MySQL.
 * ``Cake\ORM\Query::contain()`` now allows you to call it without the wrapping
   array when containing a single association. ``contain('Comments', function ()
   { ... });`` will now work. This makes ``contain()`` consistent with other
