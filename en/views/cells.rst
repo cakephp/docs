@@ -226,7 +226,7 @@ messages could look like::
             $this->loadModel('Messages');
 
             // Create a paginator
-            $paginator = new Paginator()
+            $paginator = new Paginator();
 
             // Paginate the model
             $results = $paginator->paginate(
