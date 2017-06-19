@@ -205,3 +205,47 @@ name will be used.
     do not share context with the main template / layout. Each cell is
     self-contained and only has access to variables passed as arguments to the
     ``View::cell()`` call.
+
+
+Paginating Data inside a Cell
+=============================
+
+Creating a cell that renders a paginated result set can be done by leveraging
+the ``Paginator`` class of the ORM. An example of paginating a user's favorite
+messages could look like::
+
+    namespace App\View\Cell;
+
+    use Cake\View\Cell;
+    use Cake\Datasource\Paginator;
+
+    class FavoritesCell extends Cell
+    {
+        public function display($user)
+        {
+            $this->loadModel('Messages');
+
+            // Create a paginator
+            $paginator = new Paginator()
+
+            // Paginate the model
+            $results = $paginator->paginate(
+                $this->Messages,
+                $this->request->getQueryParams(),
+                [
+                    // Use a parameterized custom finder.
+                    'finder' => ['favourites' => [$user]]
+
+                    // Use scoped query string parameters.
+                    'scope' => 'favourites'
+                ]
+            );
+            $this->set('favorites', $results);
+        }
+    }
+
+The above cell would  paginate the ``Messages`` model using :ref:`scoped
+pagination parameters <paginating-multiple-queries>`.
+
+.. versionadded:: 3.5.0
+    ``Cake\Datasource\Paginator`` was added in 3.5.0.
