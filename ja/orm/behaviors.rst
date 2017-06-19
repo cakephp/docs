@@ -92,7 +92,7 @@ sluggable behavior を作成してみます。
 
     public function slug($value)
     {
-        return Inflector::slug($value, $this->_config['replacement']);
+        return Text::slug($value, $this->_config['replacement']);
     }
 
 これは以下を使用して呼び出すことができます。 ::
@@ -140,7 +140,7 @@ sluggable behavior を作成してみます。
     use Cake\ORM\Behavior;
     use Cake\ORM\Entity;
     use Cake\ORM\Query;
-    use Cake\Utility\Inflector;
+    use Cake\Utility\Text;
 
     class SluggableBehavior extends Behavior
     {
@@ -154,7 +154,7 @@ sluggable behavior を作成してみます。
         {
             $config = $this->config();
             $value = $entity->get($config['field']);
-            $entity->set($config['slug'], Inflector::slug($value, $config['replacement']));
+            $entity->set($config['slug'], Text::slug($value, $config['replacement']));
         }
 
         public function beforeSave(Event $event, EntityInterface $entity)
@@ -295,7 +295,7 @@ slug 値を持つ記事を保存できるようになったので、slug で記�
             parent::initialize($options);
 
             // 例：親クラスが $this->addBehavior('Timestamp'); を呼び出していて、さらにイベントを追加したい場合
-            if ($this->behaviors()->has('Timestamp') {
+            if ($this->behaviors()->has('Timestamp')) {
                 $this->behaviors()->get('Timestamp')->config([
                     'events' => [
                         'Users.login' => [
@@ -306,4 +306,3 @@ slug 値を持つ記事を保存できるようになったので、slug で記�
             }
         }
     }
-
