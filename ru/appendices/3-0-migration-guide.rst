@@ -365,3 +365,38 @@ RequestActionTrait
   - ``options[url]`` заменен на ``options[query]``.
   - ``options[data]`` заменен на ``options[post]``.
   - Именованные параметры больше не поддерживаются.
+
+Router
+------
+
+* Именованные параметры удалены, более полную информацию смотрите выше.
+* Опция ``full_base`` заменена опцией ``_full``.
+* Опция ``ext`` заменена опцией ``_ext``.
+* Добавлены опции ``_scheme``, ``_port``, ``_host``, ``_base``, ``_full``, ``_ext``.
+* String URLs are no longer modified by adding the plugin/controller/prefix names.
+* The default fallback route handling was removed.  If no routes
+  match a parameter set ``/`` will be returned.
+* Route classes are responsible for *all* URL generation including
+  query string parameters. This makes routes far more powerful and flexible.
+* Persistent parameters were removed. They were replaced with
+  :php:meth:`Cake\\Routing\\Router::urlFilter()` which allows
+  a more flexible way to mutate URLs being reverse routed.
+* Удален метод ``Router::parseExtensions()``.
+  Используйте вместо этого :php:meth:`Cake\\Routing\\Router::extensions()`. This method
+  **must** be called before routes are connected. It won't modify existing
+  routes.
+* Удален метод ``Router::setExtensions()``.
+  Use :php:meth:`Cake\\Routing\\Router::extensions()` instead.
+* Удален метод ``Router::resourceMap()``.
+* The ``[method]`` option has been renamed to ``_method``.
+* The ability to match arbitrary headers with ``[]`` style parameters has been
+  removed. If you need to parse/match on arbitrary conditions consider using
+  custom route classes.
+* Удален метод ``Router::promote()``.
+* ``Router::parse()`` will now raise an exception when a URL cannot be handled
+  by any route.
+* ``Router::url()`` will now raise an exception when no route matches a set of
+  parameters.
+* Routing scopes have been introduced. Routing scopes allow you to keep your
+  routes file DRY and give Router hints on how to optimize parsing & reverse
+  routing URLs.
