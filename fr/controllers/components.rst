@@ -46,7 +46,7 @@ via le tableau ``$components``::
                 'authorize' => ['controller'],
                 'loginAction' => ['controller' => 'Users', 'action' => 'login']
             ]);
-            $this->loadComponent('Cookie', ['expiry' => '1 day']);
+            $this->loadComponent('Cookie', ['expires' => '1 day']);
         }
 
     }
