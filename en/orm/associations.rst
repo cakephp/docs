@@ -552,7 +552,7 @@ Possible keys for belongsToMany association arrays include:
 - **sort**: an array of find() compatible order clauses.
 - **dependent**: When the dependent key is set to ``false``, and an entity is
   deleted, the data of the join table will not be deleted.
-- **through**: Allows you to provide a either the name of the Table instance you
+- **through**: Allows you to provide either the name of the Table instance you
   want used on the join table, or the instance itself. This makes customizing
   the join table keys possible, and allows you to customize the behavior of the
   pivot table.
@@ -639,7 +639,7 @@ following models::
         public function initialize(array $config)
         {
             $this->belongsToMany('Courses', [
-                'through' => 'CourseMemberships',
+                'through' => 'CoursesMemberships',
             ]);
         }
     }
@@ -649,7 +649,7 @@ following models::
         public function initialize(array $config)
         {
             $this->belongsToMany('Students', [
-                'through' => 'CourseMemberships',
+                'through' => 'CoursesMemberships',
             ]);
         }
     }
