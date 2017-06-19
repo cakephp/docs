@@ -195,9 +195,9 @@ formulaire HTML. FormHelper comprend les objets Form de la même manière que de
 entities de l'ORM::
 
     echo $this->Form->create($contact);
-    echo $this->Form->input('name');
-    echo $this->Form->input('email');
-    echo $this->Form->input('body');
+    echo $this->Form->control('name');
+    echo $this->Form->control('email');
+    echo $this->Form->control('body');
     echo $this->Form->button('Submit');
     echo $this->Form->end();
 

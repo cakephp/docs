@@ -446,13 +446,13 @@ Vous pouvez créer des inputs de formulaire pour vos champs traduits::
     <?= $this->Form->create($article); ?>
     <fieldset>
         <legend>French</legend>
-        <?= $this->Form->input('_translations.fr.title'); ?>
-        <?= $this->Form->input('_translations.fr.body'); ?>
+        <?= $this->Form->control('_translations.fr.title'); ?>
+        <?= $this->Form->control('_translations.fr.body'); ?>
     </fieldset>
     <fieldset>
         <legend>Spanish</legend>
-        <?= $this->Form->input('_translations.es.title'); ?>
-        <?= $this->Form->input('_translations.es.body'); ?>
+        <?= $this->Form->control('_translations.es.title'); ?>
+        <?= $this->Form->control('_translations.es.body'); ?>
     </fieldset>
 
 Dans votre controller, vous pouvez marshal les données comme d'habitude, mais
