@@ -198,8 +198,14 @@ Requêtes de Paginating Multiple
 ===============================
 
 Vous pouvez paginer plusieurs models dans une unique action de controller en
-utilisant l'option ``scope``::
+utilisant l'option ``scope`` à la fois dans la propriété $paginate du controller et à l'appel de la méthode paginate():
 
+    // Par la propriété $paginate du controller
+    public $paginate = [
+        'Articles' => ['scope' => 'article'],
+        'Tags' => ['scope' => 'tag']
+    ];
+    
     // Dans une action de controller
     $articles = $this->paginate($this->Articles, ['scope' => 'article']);
     $tags = $this->paginate($this->Tags, ['scope' => 'tag']);
