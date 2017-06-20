@@ -642,6 +642,18 @@ Sélection Automatique de Locale Basée sur les Données de Requêtes
 En utilisant le ``LocaleSelectorFilter`` dans votre application, CakePHP
 définira automatiquement la locale en se basant sur l'utilisateur actuel::
 
+    // dans src/Application.php
+    use Cake\I18n\Middleware\LocaleSelectorMiddleware;
+
+    // Mise à jour de la méthode "middleware" pour ajouter le nouveau middleware
+    public function middleware($middleware)
+    {
+        // Add middleware and set the valid locales
+        $middleware->add(new LocaleSelectorMiddleware(['en_US', 'fr_FR']));
+    }
+
+
+    // Avant 3.3.0, il faut utiliser un DispatchFilter
     // dans config/bootstrap.php
     DispatcherFactory::add('LocaleSelector');
 
