@@ -46,7 +46,7 @@ via le tableau ``$components``::
                 'authorize' => ['controller'],
                 'loginAction' => ['controller' => 'Users', 'action' => 'login']
             ]);
-            $this->loadComponent('Cookie', ['expiry' => '1 day']);
+            $this->loadComponent('Cookie', ['expires' => '1 day']);
         }
 
     }
@@ -135,8 +135,7 @@ Utiliser les Components
 Une fois que vous avez inclus quelques components dans votre controller, les
 utiliser est très simple. Chaque component que vous utilisez est enregistré
 comme propriété dans votre controller. Si vous avez chargé la
-:php:class:`Cake\\Controller\\Component\\FlashComponent` et le
-:php:class:`Cake\\Controller\\Component\\CookieComponent` dans votre controller,
+:php:class:`Cake\\Controller\\Component\\FlashComponent` dans votre controller,
 vous pouvez y accéder comme ceci::
 
     class PostsController extends AppController
@@ -145,7 +144,6 @@ vous pouvez y accéder comme ceci::
         {
             parent::initialize();
             $this->loadComponent('Flash');
-            $this->loadComponent('Cookie');
         }
 
         public function delete()

@@ -222,13 +222,6 @@ compte::
         ]
     ]);
 
-Vous pouvez aussi désactiver le marshalling d'associations imbriquées comme
-ceci::
-
-    $entity = $articles->newEntity($data, ['associated' => []]);
-    // ou...
-    $entity = $articles->patchEntity($entity, $data, ['associated' => []]);
-
 Ce qui est au-dessus indique que les 'Tags', 'Comments' et 'Users' pour les
 Comments doivent être prises en compte. D'une autre façon, vous pouvez utiliser
 la notation par point pour être plus bref::
@@ -241,6 +234,13 @@ la notation par point pour être plus bref::
     $entity = $articles->newEntity($this->request->getData(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
+
+Vous pouvez aussi désactiver le marshalling d'associations imbriquées comme
+ceci::
+
+    $entity = $articles->newEntity($data, ['associated' => []]);
+    // ou...
+    $entity = $articles->patchEntity($entity, $data, ['associated' => []]);
 
 Les données associées sont également validées par défaut à moins que le
 contraire ne lui soit spécifié. Vous pouvez également changer l'ensemble

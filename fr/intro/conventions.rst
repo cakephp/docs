@@ -158,7 +158,6 @@ essayer de dérouler
 :doc:`le tutoriel du Blog CakePHP </tutorials-and-examples/bookmarks/intro>`
 pour voir comment les choses s'articulent.
 
-
 .. meta::
     :title lang=fr: Conventions de CakePHP
     :keywords lang=fr: expérience de développement web,maintenance cauchemard,méthode index,systèmes légaux,noms de méthode,classe php,système uniforme,fichiers de config,tenets,articles,conventions,controller conventionel,bonnes pratiques,maps,visibilité,nouveaux articles,fonctionnalité,logique,cakephp,développeurs

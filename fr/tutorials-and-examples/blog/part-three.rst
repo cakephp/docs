@@ -190,7 +190,7 @@ CakePHP.
 Vous devrez modifier ce qui suit dans **src/Template/Categories/add.ctp**
 et **src/Template/Categories/edit.ctp**::
 
-    echo $this->Form->input('parent_id', [
+    echo $this->Form->control('parent_id', [
         'options' => $parentCategories,
         'empty' => 'Pas de catégorie parente'
     ]);
@@ -219,8 +219,8 @@ cela dans un moment.
 Mais pour l'instant, vous devez retirer les lignes suivantes dans vos fichiers
 de template add et edit::
 
-    echo $this->Form->input('lft');
-    echo $this->Form->input('rght');
+    echo $this->Form->control('lft');
+    echo $this->Form->control('rght');
 
 De plus, vous devez désactiver ou retirer les requirePresence du validateur
 pour ``lft`` et ``rght`` dans votre model CategoriesTable::
@@ -370,8 +370,8 @@ lorsque l'on va le créer ou le modifier::
             }
             $this->set('article', $article);
 
-            // Just added the categories list to be able to choose
-            // one category for an article
+            // Ajout de la liste des catégories pour pouvoir choisir
+            // une catégorie pour un article
             $categories = $this->Articles->Categories->find('treeList');
             $this->set(compact('categories'));
         }
@@ -380,7 +380,7 @@ lorsque l'on va le créer ou le modifier::
 Modifier les Templates des Articles
 ===================================
 
-Le fichier add des articles devrait ressembler à quelque chose comme:
+Le fichier **add** des articles devrait ressembler à ceci :
 
 .. code-block:: php
 
@@ -389,10 +389,10 @@ Le fichier add des articles devrait ressembler à quelque chose comme:
     <h1>Add Article</h1>
     <?php
     echo $this->Form->create($article);
-    // just added the categories input
-    echo $this->Form->input('category_id');
-    echo $this->Form->input('title');
-    echo $this->Form->input('body', ['rows' => '3']);
+    // Ajout des input (via la méthode "control") liés aux catégories
+    echo $this->Form->control('category_id');
+    echo $this->Form->control('title');
+    echo $this->Form->control('body', ['rows' => '3']);
     echo $this->Form->button(__('Save Article'));
     echo $this->Form->end();
 

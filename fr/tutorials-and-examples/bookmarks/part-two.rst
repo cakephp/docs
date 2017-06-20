@@ -79,10 +79,15 @@ Et dans **src/Template/Users/login.ctp**, ajoutez ce qui suit::
 
     <h1>Connexion</h1>
     <?= $this->Form->create() ?>
-    <?= $this->Form->input('email') ?>
-    <?= $this->Form->input('password') ?>
+    <?= $this->Form->control('email') ?>
+    <?= $this->Form->control('password') ?>
     <?= $this->Form->button('Login') ?>
     <?= $this->Form->end() ?>
+
+.. note::
+
+    La méthode ``control()`` est disponible depuis 3.4. Si vous utilisez une
+    version précédente, utilisez la méthode ``input()``.
 
 Maintenant que nous avons un formulaire simple de connexion, nous devrions
 pouvoir nous connecter avec un de nos utilisateurs qui a un mot de passe
@@ -238,7 +243,7 @@ problèmes:
 #. Lors de l'édition d'un bookmark vous pouvez choisir l'utilisateur.
 #. La page de liste montre les bookmarks des autres utilisateurs.
 
-Attaquons nous d'abord à add. Pour commencer, retirez ``input('user_id')`` de
+Attaquons nous d'abord à add. Pour commencer, retirez ``control('user_id')`` de
 **src/Template/Bookmarks/add.ctp**. Une fois retiré, nous allons aussi mettre à
 jour l'action ``add()`` dans **src/Controller/BookmarksController.php** pour
 ressembler à ceci::
@@ -343,7 +348,7 @@ pouvons ajouter un champ virtuel/calculé à l'entity. Dans
     }
 
 Cela nous laissera l'accès à la propriété calculée ``$bookmark->tag_string``.
-Nous utiliserons cette propriété dans inputs plus tard. Rappelez-vous
+Nous utiliserons cette propriété dans controls plus tard. Rappelez-vous
 d'ajouter la propriété ``tag_string`` dans la liste ``_accessible`` de votre
 entity, puisque nous voulons la 'sauvegarder' plus tard.
 
@@ -363,11 +368,11 @@ la propriété ``_accessible`` comme ceci::
 Mettre à Jour les Vues
 ----------------------
 
-Avec l'entity mise à jour, nous pouvons ajouter un nouvel input pour nos tags.
+Avec l'entity mise à jour, nous pouvons ajouter un nouveau *control* pour nos tags.
 Dans **src/Template/Bookmarks/add.ctp** et **src/Template/Bookmarks/edit.ctp**,
 remplacez l'input ``tags._ids`` existant avec ce qui suit::
 
-    echo $this->Form->input('tag_string', ['type' => 'text']);
+    echo $this->Form->control('tag_string', ['type' => 'text']);
 
 Persister la Chaîne Tag
 -----------------------

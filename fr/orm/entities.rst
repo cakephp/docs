@@ -254,6 +254,15 @@ d'être marqués dirty en passant une option supplémentaire::
 
     $article = new Article(['title' => 'New Article'], ['markClean' => true]);
 
+Pour récupérer la liste des propriétés *dirty* (modifiées) d'une ``Entity``,
+vous pouvez utiliser la méthode ``getDirty()``::
+
+    $dirtyFields = $entity->getDirty();
+
+.. versionadded:: 3.4.3
+
+    ``getDirty()`` a été ajoutée.
+
 Erreurs de Validation
 =====================
 
