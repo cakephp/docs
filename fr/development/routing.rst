@@ -895,8 +895,8 @@ renommer vos actions::
         'actions' => ['update' => 'put', 'create' => 'add']
     ]);
 
-Le code ci-dessus va utiliser ``put()`` pour l'action ``edit()``, et
-``create()`` au lieu de ``add()``.
+Le code ci-dessus va utiliser la méthode ``put()`` pour l'action ``edit()``, et
+``add()`` au lieu de ``create()``.
 
 Mapper des Routes de Ressource Supplémentaires
 ----------------------------------------------
