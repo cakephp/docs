@@ -373,7 +373,7 @@ Router
 * Опция ``full_base`` заменена опцией ``_full``.
 * Опция ``ext`` заменена опцией ``_ext``.
 * Добавлены опции ``_scheme``, ``_port``, ``_host``, ``_base``, ``_full``, ``_ext``.
-* String URLs are no longer modified by adding the plugin/controller/prefix names.
+* Строки URL больше не изменяются добавлением имен плагина/контроллера/префикса.
 * The default fallback route handling was removed.  If no routes
   match a parameter set ``/`` will be returned.
 * Route classes are responsible for *all* URL generation including
@@ -388,15 +388,15 @@ Router
 * Удален метод ``Router::setExtensions()``.
   Use :php:meth:`Cake\\Routing\\Router::extensions()` instead.
 * Удален метод ``Router::resourceMap()``.
-* The ``[method]`` option has been renamed to ``_method``.
+* Опция ``[метод]`` переименована в ``_метод``.
 * The ability to match arbitrary headers with ``[]`` style parameters has been
   removed. If you need to parse/match on arbitrary conditions consider using
   custom route classes.
 * Удален метод ``Router::promote()``.
-* ``Router::parse()`` will now raise an exception when a URL cannot be handled
-  by any route.
-* ``Router::url()`` will now raise an exception when no route matches a set of
-  parameters.
+* ``Router::parse()`` теперь выбрасывает исключение, когда URL не может быть
+  обработан каким-либо из маршрутов.
+* ``Router::url()`` теперь выбрасывает исключение, когда ни один маршрут не
+  совпадает с набором параметров.
 * Routing scopes have been introduced. Routing scopes allow you to keep your
   routes file DRY and give Router hints on how to optimize parsing & reverse
   routing URLs.
