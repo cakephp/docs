@@ -53,9 +53,9 @@ Glossaire
         de tout type. Dans CakePHP, DRY est utilisé pour vous permettre de
         coder des choses et de les réutiliser à travers votre application.
 
-    notation avec points (ou *dot notation*)
-        La notation avec points définit un chemin de tableau, en séparant les
-        niveaux imbriqués avec ``.``
+    notation avec points
+        La notation avec points (ou *dot notation*) définit un chemin de tableau,
+        en séparant les niveaux imbriqués avec le caractère ``.``.
         Par exemple::
 
             Cache.default.engine
