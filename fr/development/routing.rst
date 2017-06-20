@@ -720,7 +720,7 @@ extensions globales peut se faire via la méthode static :php:meth:`Router::exte
     Router::extensions(['json', 'xml']);
     // ...
 
-Ceci affectera **toutes** les routes qui seront connectés **après** cet appel,
+Ceci affectera **toutes** les routes qui seront connectées **après** cet appel,
 quelque soit leur *scope*.
 
 Pour restreindre les extensions à un *scope* spécifique, vous pouvez les définir
@@ -734,7 +734,7 @@ en utilisant la méthode :php:meth:`Cake\\Routing\\RouteBuilder::extensions()`::
 Cela activera les extensions pour toutes les routes qui seront définies dans ce
 scope **après** l'appel à ``extensions()``, tout en incluant les routes inclus
 dans les scopes imbriqués. De la même manière que la méthode :php:meth:`Router::extensions()`,
-toutes les routes connectés avant cet appel n'hériteront pas de ces extensions.
+toutes les routes connectées avant cet appel n'hériteront pas de ces extensions.
 
 .. note::
 
@@ -743,7 +743,7 @@ toutes les routes connectés avant cet appel n'hériteront pas de ces extensions
     routes qui sont définies **après** la déclaration des extensions.
 
     Lorsque vous définissez des routes dans le même scope mais dans deux appels
-    différents, les extensions ne seront pas hérités d'un appel à l'autre.
+    différents, les extensions ne seront pas héritées d'un appel à l'autre.
 
 En utilisant des extensions, vous dites au router de supprimer toutes les
 extensions de fichiers correspondant, puis d'analyser le reste. Si vous
