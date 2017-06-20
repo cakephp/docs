@@ -102,6 +102,8 @@ Autres dépréciations
 * ``Event::data()`` est dépréciée. Utilisez ``Event::getData()`` à la place.
 * La valeur de ``Auth.redirect`` stockée en session n'est plus utilisée. Un
   paramètre d'URL est maintenant utilisé pour stocker l'URL de redirection.
+  Ceci retire cependant la possibilité de définir une URL de redirection en
+  session en dehors des scénarios de login.
 * ``AuthComponent`` ne stocke plus les URLs de redirection quand l'URL non
   autorisée n'est pas une action ``GET``.
 * L'option ``ajaxLogin`` du ``AuthComponent`` est dépréciée. Vous devez maintenant
