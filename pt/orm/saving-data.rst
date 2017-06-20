@@ -9,9 +9,9 @@ Salvando dados
 Depois que você :doc:`carregou seus dados</orm/retrieving-data-and-resultsets>`
 provavelmente vai querer atualizar e salvar as alterações.
 
-A Glance Over Saving Data
+Visão geral sobre Salvando Dados
 =========================
 
-Applications will usually have a couple of ways in which data is saved. The
-first one is obviously through web forms and the other is by directly generating
-or changing data in the code to be sent to the database.
+Aplicações geralmente terá algumas maneiras de como os dados são salvos. A
+primeira é, obviamente, atravéz de formulários web e a outra é por geração direta
+ou alterando dados no código para enviar ao banco de dados.
