@@ -1672,6 +1672,8 @@ Créer des Boutons Indépendants et des liens POST
         ouvert. À la place, utilisez l'option ``block`` pour mettre en mémoire
         tampon le formulaire dans des :ref:`view-blocks`
 
+.. _customizing-templates:
+
 Personnaliser les Templates que FormHelper Utilise
 ==================================================
 
@@ -1965,7 +1967,12 @@ voulez construire un widget Autocomplete, vous pouvez le faire comme ceci::
 
 
 Évidemment, c'est un exemple très simple, mais il montre comment développer
-un widget personnalisé.
+un widget personnalisé. Ce widget ferait un rendu du template "autocomplete",
+si définit comme ceci par exemple::
+
+    $this->Form->setTemplates([
+        'autocomplete' => '<input type="autocomplete" name="{{name}}" {{attrs}} />'
+    ]);
 
 Utiliser les Widgets
 --------------------
