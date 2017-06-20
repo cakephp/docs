@@ -1052,10 +1052,10 @@ générés vont automatiquement être mises à jour.
 
 Si vous créez des URLs en utilisant des chaînes de caractères comme::
 
-    $this->Html->link('View', '/articles/view/' + $id);
+    $this->Html->link('View', '/articles/view/' . $id);
 
-Et ensuite plus tard, vous décidez que ``/posts`` devrait vraiment être
-appelé 'articles' à la place, vous devrez aller dans toute votre application
+Et ensuite plus tard, vous décidez que ``/articles`` devrait vraiment être
+appelé 'posts' à la place, vous devrez aller dans toute votre application
 en renommant les URLs. Cependant, si vous définissiez votre lien comme::
 
     $this->Html->link(
