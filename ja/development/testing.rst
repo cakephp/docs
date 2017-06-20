@@ -129,7 +129,7 @@ CakePHP におけるほとんどのことがそうであるように、テスト
 
 .. versionadded:: 3.4.1
     PHPUnit 6 のサポートが追加されました。5.7.0 より低いバージョンの PHPUnit を
-    使用する場合、テストケースは Cake のクラスまたは ``PHPUnit_Framework_TestCase`` を
+    使用する場合、テストケースは CakePHP のクラスまたは ``PHPUnit_Framework_TestCase`` を
     継承してください。
 
 最初のテストケース作成

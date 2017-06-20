@@ -20,6 +20,8 @@
 :doc:`ブログチュートリアル </tutorials-and-examples/blog-auth-example/auth>`
 の中で順を追って説明しています。
 
+もし、CakePHP のための既存の認証や認可の解決方法を探しているなら、Awesome CakePHP リストの
+`Authentication and Authorization <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/README.md#authentication-and-authorization>`_ セクションを見てください。
 
 認証
 ====

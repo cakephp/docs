@@ -41,6 +41,10 @@ Email
     $email->to('test@example.com', 'ToTest Example');
     // メールの To 受信者は test@example.com
 
+.. deprecated:: 3.4.0
+    代わりに ``setFrom()`` 、 ``setTo()`` 、 ``setCc()`` 、 ``setBcc()``
+    そして、 ``setSubject()`` を使用してください。
+
 送り主の選択
 ------------
 
