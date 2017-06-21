@@ -46,6 +46,9 @@ Paramètres de la Requête
 
     $controllerName = $this->request->getParam('controller');
 
+    // Avant 3.4.0
+    $controllerName = $this->request->param('controller');
+
 Tous les éléments de route :ref:`route-elements` sont accessibles à travers
 cette interface.
 
