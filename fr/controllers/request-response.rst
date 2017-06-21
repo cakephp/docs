@@ -513,6 +513,13 @@ Vous pouvez le faire en utilisant
         return $response;
     }
 
+    // Avant 3.4.0
+    $file = $this->Attachments->getFile($id);
+    $this->response->file($file['path']);
+    // Retourne la réponse pour éviter que le controller n'essaie de
+    // rendre la vue
+    return $this->response;
+
 Comme montré dans l'exemple ci-dessus, vous devez passer le
 chemin du fichier à la méthode. CakePHP va envoyer le bon en-tête de type de
 contenu si c'est un type de fichier connu listé dans
@@ -524,6 +531,12 @@ Si vous voulez, vous pouvez aussi forcer un fichier à être téléchargé au li
 d'être affiché dans le navigateur en spécifiant les options::
 
     $response = $this->response->withFile(
+        $file['path'],
+        ['download' => true, 'name' => 'foo']
+    );
+
+    // Avant 3.4.0
+    $this->response->file(
         $file['path'],
         ['download' => true, 'name' => 'foo']
     );

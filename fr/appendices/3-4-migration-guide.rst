@@ -102,6 +102,8 @@ Autres dépréciations
 * ``Event::data()`` est dépréciée. Utilisez ``Event::getData()`` à la place.
 * La valeur de ``Auth.redirect`` stockée en session n'est plus utilisée. Un
   paramètre d'URL est maintenant utilisé pour stocker l'URL de redirection.
+  Ceci retire cependant la possibilité de définir une URL de redirection en
+  session en dehors des scénarios de login.
 * ``AuthComponent`` ne stocke plus les URLs de redirection quand l'URL non
   autorisée n'est pas une action ``GET``.
 * L'option ``ajaxLogin`` du ``AuthComponent`` est dépréciée. Vous devez maintenant
@@ -353,6 +355,14 @@ variations mineures qui pourraient avoir un impact sur votre application :
   des pièces jointes en utilisant ``mime_content_type`` si le "content-type"
   n'est pas spécifié. Auparavant, les pièces jointes étaient considérées comme
   'application/octet-stream' par défaut.
+* CakePHP utilise maintenant l'opérateur ``...`` à la place de ``call_user_func_array()``.
+  Si vous passez des tableaux associatifs, vous devez mettre à jour votre code
+  pour passer des tableaux à index numériques en utilisant la méthode ``array_values()``
+  pour les méthodes suivantes :
+
+  * ``Cake\Mailer\Mailer::send()``
+  * ``Cake\Controller\Controller::setAction()``
+  * ``Cake\Http\ServerRequest::is()``
 
 Visibility Changes
 ==================

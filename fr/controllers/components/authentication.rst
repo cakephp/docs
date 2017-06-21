@@ -277,8 +277,7 @@ Après avoir connecté un utilisateur, vous voudrez généralement le rediriger 
 l'endroit d'où il vient. Passez une URL pour définir la destination vers
 laquelle l'utilisateur doit être redirigé après s'être connecté.
 
-Si aucun paramètre n'est passé, elle obtient l'URL de redirection
-d'authentification. L'URL retournée correspond aux règles suivantes:
+Si aucun paramètre n'est passé, l'URL retournée suivra les règles suivantes :
 
 - Retourne l'URL normalisée du paramètre URL redirect s'il est présent et qu'il
   pointe sur le même domaine que celui de l'application. Avant 3.4.0, la valeur
