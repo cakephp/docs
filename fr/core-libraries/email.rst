@@ -592,6 +592,12 @@ Vous pourriez par exemple ajouter ce qui suit à votre ``UserMailer``::
         }
     }
 
+L'objet mailer serait ainsi enregistré en tant qu'écouteur (listeners)
+d'événement et la méthode ``onRegistration()`` serait appellée à chaque fois
+que l'événement ``Model.afterSave`` serait déclenché. Plus d'information sur
+comment enregistrer des objets écouteurs d'événements sont disponibles dans la
+documentation :ref:`registering-event-listeners`.
+
 .. meta::
     :title lang=fr: Email
     :keywords lang=fr: envoyer mail,email emmetteur sender,envelope sender,classe php,database configuration,sending emails,meth,shells,smtp,transports,attributes,array,config,flexibilité,php email,nouvel email,sending email,models
