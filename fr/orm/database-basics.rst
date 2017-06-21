@@ -763,8 +763,8 @@ supplémentaires et l'exécuter.
 
 .. _database-basics-binding-values:
 
-Lier les Valeurs
-----------------
+Lier les Valeurs (Binding)
+--------------------------
 
 Une fois que vous avez créé une requête préparée, vous voudrez peut-être
 lier des données supplémentaires. Vous pouvez lier plusieurs valeurs en une
