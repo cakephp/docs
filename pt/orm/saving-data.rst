@@ -86,3 +86,75 @@ O método ``save()`` também é capaz de criar novos registros para associaçõe
     $article->tags = [$tag1, $tag2];
 
     $articlesTable->save($article);
+
+Associe Muitos para Muitos (N para N) registros
+------------------------------
+
+O exemplo anterior demonstra como associar algumas tags a um artigo.
+Outra maneira de realizar a mesma coisa é usando o método ``link()``
+na associação::
+
+    $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
+    $tag2 = $articlesTable->Tags->newEntity();
+    $tag2->name = 'awesome';
+
+    $articlesTable->Tags->link($article, [$tag1, $tag2]);
+ 
+Salvando dados da tabela de ligação
+-----------------------------
+Salvar dados na tabela de ligação é realizado usando a propriedade especial
+``_joinData``. Esta propriedade deve ser um instância de ``Entity`` da classe
+Table de ligação::
+
+    // Link records for the first time.
+    $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
+    $tag1->_joinData = $articlesTable->ArticlesTags->newEntity();
+    $tag1->_joinData->tagComment = 'The CakePHP ORM is so powerful!';
+
+    $articlesTable->Tags->link($article, [$tag1]);
+
+    // Update an existing association.
+    $article = $articlesTable->get(1, ['contain' => ['Tags']]);
+    $article->tags[0]->_joinData->tagComment = 'Fresh comment.'
+
+    // Necessary because we are changing a property directly
+    $article->dirty('tags', true);
+
+    $articlesTable->save($article, ['associated' => ['Tags']]);
+
+Você também pode criar / atualizar informações na tabela de ligação utilizando
+``newEntity()`` ou ``patchEntity()``. Os seus dados de POST devem parecer::
+
+    $data = [
+        'title' => 'My great blog post',
+        'body' => 'Some content that goes on for a bit.',
+        'tags' => [
+            [
+                'id' => 10,
+                '_joinData' => [
+                    'tagComment' => 'Great article!',
+                ]
+            ],
+        ]
+    ];
+    $articlesTable->newEntity($data, ['associated' => ['Tags']]);
+
+Remover associação Muitos para Muitos (N para N) registros
+---------------------------
+
+A remoção de associação Muitos para Muitos registros é realizada através do método
+``unlink()``::
+
+    $tags = $articlesTable
+        ->Tags
+        ->find()
+        ->where(['name IN' => ['cakephp', 'awesome']])
+        ->toArray();
+
+    $articlesTable->Tags->unlink($article, $tags);
+
+Quando modificando registros, configurando ou alterando diretamente as propriedades,
+nenhuma validação é realizada, que é um problema quando está aceitando dados de 
+formulário. As seções seguintes demostrarão como converter eficientemente dados de 
+formulário em entidades que podem ser validadas e salva.
+.. _converting-request-data:
