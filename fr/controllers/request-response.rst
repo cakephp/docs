@@ -84,7 +84,7 @@ Les paramètres Querystring peuvent être lus en utilisant la méthode ``getQuer
     $page = $this->request->query('page');
 
 Vous pouvez soit directement accéder à la propriété demandée, soit vous pouvez
-utiliser ``query()`` pour lire l'URL requêtée sans erreur. Toute clé qui
+utiliser ``getQuery()`` pour lire l'URL requêtée sans erreur. Toute clé qui
 n'existe pas va retourner ``null``::
 
     $foo = $this->request->getQuery('valeur_qui_n_existe_pas');
