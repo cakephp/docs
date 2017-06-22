@@ -557,6 +557,7 @@ AuthComponent uses for setting flash messages. The available keys are
 
 - ``key`` - The key to use, defaults to 'default'. Prior to 3.4.0, the key
   defaulted to 'auth'.
+- ``element`` - The element name to use for rendering, defaults to null.
 - ``params`` - The array of additional params to use, defaults to ``[]``.
 
 In addition to the flash message settings you can customize other error
