@@ -1139,7 +1139,96 @@ manière, vous vous assurez que les événements et les routes seront connectés
 chacun de vos "test case".
 
 .. versionadded:: 3.3.0
-    PSR-7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
+    Les Middleware PSR-7 et la méthode ``useHttpServer()`` ont été ajoutée avec 3.3.0.
+
+Tester avec des cookies chiffrés
+--------------------------------
+
+Si vous utilisez le :php:class:`Cake\\Controller\\Component\\CookieComponent`
+dans vos controllers, vos cookies sont probablement chiffrés. Depuis 3.1.7,
+CakePHP met à votre disposition des méthodes pour intéragir avec les cookies
+chiffrés dans vos "test cases"::
+
+    // Définit un cookie en utilisant AES et la clé par défaut.
+    $this->cookieEncrypted('my_cookie', 'Some secret values');
+
+    // Partons du principe que cette requête modifie le cookie.
+    $this->get('/bookmarks/index');
+
+    $this->assertCookieEncrypted('An updated value', 'my_cookie');
+
+.. versionadded:: 3.1.7
+
+    ``assertCookieEncrypted`` et ``cookieEncrypted`` ont été ajoutées dans 3.1.7.
+
+Tester les Messages Flash
+-------------------------
+
+Si vous souhaitez faire une assertion sur la présence de messages Flash en
+session et pas sur le rendu du HTML, vous pouvez utiliser ``enableRetainFlashMessages()``
+dans vos tests pour que les messages Flash soient conservés dans la session
+pour que vous puissez écrire vos assertions::
+
+    $this->enableRetainFlashMessages();
+    $this->get('/bookmarks/delete/9999');
+
+    $this->assertSession('That bookmark does not exist', 'Flash.flash.0.message');
+
+.. versionadded:: 3.4.7
+
+    ``enableRetainFlashMessages()`` a été ajoutée dans 3.4.7
+
+Tester un controller renvoyer du JSON
+-------------------------------------
+
+JSON est un format commun lors de la conception de web service. Tester les
+endpoints de votre web service est très simple avec CakePHP. Commençons avec
+un exemple simple de controller qui renvoie du JSON::
+
+    class MarkersController extends AppController
+    {
+        public function initialize()
+        {
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
+        }
+
+        public function view($id)
+        {
+            $marker = $this->Markers->get($id);
+            $this->set([
+                '_serialize' => ['marker'],
+                'marker' => $marker,
+            ]);
+        }
+    }
+
+Créons maintenant le fichier **tests/TestCase/Controller/MarkersControllerTest.php**
+et assurons-nous que le web service répond correctement::
+
+    class MarkersControllerTest extends IntegrationTestCase
+    {
+
+        public function testGet()
+        {
+            $this->configRequest([
+                'headers' => ['Accept' => 'application/json']
+            ]);
+            $result = $this->get('/markers/view/1.json');
+
+            // Vérification que la réponse était bien une 200
+            $this->assertResponseOk();
+
+            $expected = [
+                ['id' => 1, 'lng' => 66, 'lat' => 45],
+            ];
+            $expected = json_encode($expected, JSON_PRETTY_PRINT);
+            $this->assertEquals($expected, $this->_response->body());
+        }
+    }
+
+Nous utilisons l'option ``JSON_PRETTY_PRINT`` car la JsonView intégrée à CakePHP
+utilise cette option quand le mode ``debug`` est activé.
 
 Méthodes d'Assertion
 --------------------
