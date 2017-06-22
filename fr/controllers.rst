@@ -143,7 +143,7 @@ manuellement. Au lieu de ça, une fois qu'une action du controller est terminée
 CakePHP va gérer le rendu et la livraison de la Vue.
 
 Si pour certaines raisons, vous voulez éviter le comportement par défaut, vous
-pouvez retourner un objet de :php:class:`Cake\\Network\\Response` de l'action
+pouvez retourner un objet de :php:class:`Cake\\Http\\Response` de l'action
 avec la response complètement créée.
 
 Afin que vous utilisiez efficacement le controller dans votre propre

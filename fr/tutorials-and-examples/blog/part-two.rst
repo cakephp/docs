@@ -337,7 +337,7 @@ Chaque requête de CakePHP contient un objet ``ServerRequest`` qui est accessibl
 en utilisant ``$this->request``. Cet objet contient des informations utiles
 sur la requête qui vient d'être reçue, et permet de contrôler les flux de votre
 application. Dans ce cas, nous utilisons la méthode
-:php:meth:`Cake\\Network\\ServerRequest::is()` pour vérifier que la requête est de
+:php:meth:`Cake\\Http\\ServerRequest::is()` pour vérifier que la requête est de
 type POST.
 
 Lorsqu'un utilisateur utilise un formulaire pour poster des données dans votre

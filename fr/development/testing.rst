@@ -1498,8 +1498,8 @@ dans notre component. Nous créons le fichier
     use Cake\Controller\Controller;
     use Cake\Controller\ComponentRegistry;
     use Cake\Event\Event;
-    use Cake\Network\Request;
-    use Cake\Network\Response;
+    use Cake\Http\ServerRequest;
+    use Cake\Http\Response;
     use Cake\TestSuite\TestCase;
 
     class PagematronComponentTest extends TestCase
@@ -1512,7 +1512,7 @@ dans notre component. Nous créons le fichier
         {
             parent::setUp();
             // Configuration de notre component et de notre faux controller de test.
-            $request = new Request();
+            $request = new ServerRequest();
             $response = new Response();
             $this->controller = $this->getMockBuilder('Cake\Controller\Controller')
                 ->setConstructorArgs([$request, $response])

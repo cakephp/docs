@@ -151,9 +151,9 @@ filtres de dispatcher suivent quelques conventions:
 sous-classes qui sont ``beforeDispatch()`` et ``afterDispatch()``. Ces méthodes
 sont exécutées respectivement avant et après l'exécution de tout controller.
 les deux méthodes reçoivent un objet :php:class:`Cake\\Event\\Event` contenant
-les objets ``request`` et ``response``
-(instances de :php:class:`Cake\\Network\\Request` et
-:php:class:`Cake\\Network\\Response`) dans la propriété ``data``.
+les objets ``ServerRequest`` et ``Response``
+(instances de :php:class:`Cake\\Http\\ServerRequest` et
+:php:class:`Cake\\Http\\Response`) dans la propriété ``data``.
 
 Alors que notre filtre était relativement simple, il y a quelques autres choses
 intéressantes que nous pouvons réaliser dans les méthodes de filtre. En
