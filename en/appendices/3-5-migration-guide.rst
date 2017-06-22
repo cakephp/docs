@@ -119,9 +119,20 @@ behavior that may affect your application:
   defaults alone.
 * ``Cake\ORM\Table::addBehavior()`` and ``removeBehavior()`` now return
   ``$this`` to assist in defining table objects in a fluent fashion.
+* Cache engines no longer throw an exception when they fail or are misconfigured,
+  but instead fall back to the noop ``NullEngine``. Fallbacks can also be
+  :ref:`configured <cache-configuration-fallback>` on a per-engine basis.
 
 New Features
 ============
+
+Cache
+-----
+
+* Cache engines can now be configured with a ``fallback`` key that defines a
+  cache configuration to fall back to if the engine is misconfigured (or
+  unavailable). See :ref:`cache-configuration-fallback` for more information on
+  configuring fallbacks.
 
 Core
 ----
