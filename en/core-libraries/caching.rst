@@ -160,6 +160,9 @@ If writing to the ``default`` cache configuration *also* failed in this scenario
 engine would fall back once again to the ``NullEngine`` and prevent the application
 from throwing an uncaught exception.
 
+.. versionadded:: 3.5.0
+    Cache engine fallbacks were added.
+
 Removing Configured Cache Engines
 ---------------------------------
 
