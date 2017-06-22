@@ -166,8 +166,7 @@ get() et set(). Par exemple::
 
         protected function _setTitle($title)
         {
-            $this->set('slug', Text::slug($title));
-            return $title;
+            return Text::slug($title);
         }
 
     }
