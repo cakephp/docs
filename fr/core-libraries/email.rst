@@ -346,10 +346,9 @@ chemin suivant:
 **src/Template/Plugin/TestTheme/Plugin/Blog/Email/text/new_comment.ctp**.
 
 .. deprecated:: 3.4.0
-
-    * Utilisez ``setTempalte()`` à la place de ``template()``.
-    * Utilisez ``setLayout()`` à la place de ``layout()``.
-    * Utilisez ``setTheme()`` à la place de ``theme()``.
+    Utilisez ``setTemplate()`` à la place de ``template()``. Utilisez
+    ``setLayout()`` à la place de ``layout()``. Utilisez ``setTheme()`` à la
+    place de ``theme()``.
 
 
 Envoyer les pièces jointes
