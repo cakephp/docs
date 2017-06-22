@@ -469,12 +469,12 @@ Vous pouvez utiliser les types personnalisés créés en faisant la correspondan
 des types dans la :ref:`méthode _initializeSchema() <saving-complex-types>` de
 votre Table::
 
-    use Cake\Database\Schema\Table as Schema;
+    use Cake\Database\Schema\TableSchema;
 
     class WidgetsTable extends Table
     {
 
-        protected function _initializeSchema(Schema $schema)
+        protected function _initializeSchema(TableSchema $schema)
         {
 
             $schema->columnType('widget_prefs', 'json');
