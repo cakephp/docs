@@ -1102,38 +1102,41 @@ bonnes variables d'environnement::
     Les méthodes ``enableCsrfToken()`` et ``enableSecurityToken()`` ont été
     ajoutées dans la version 3.1.2.
 
-Integration Testing PSR-7 Middleware
-------------------------------------
+Test d'intégration sur les middlewares PSR-7
+--------------------------------------------
 
-Integration testing can also be used to test your entire PSR-7 application and
-:doc:`/controllers/middleware`. By default ``IntegrationTestCase`` will
-auto-detect the presence of an ``App\Application`` class and automatically
-enable integration testing of your Application. You can toggle this behavior
-with the ``useHttpServer()`` method::
+Les tests d'intégration peuvent aussi être utilisés pour tester entièrement vos
+applications PSR-7 et les :doc:`/controllers/middleware`. Par défaut,
+``IntegrationTestCase`` détectera automatiquement la présence d'une classe
+``App\Application`` et activera automatiquement les tests d'intégration sur
+votre Application. Vous pouvez activer / désactiver ce comportement avec la
+méthode ``useHttpServer()``::
 
     public function setUp()
     {
-        // Enable PSR-7 integration testing.
+        // Active les tests d'intégration PSR-7
         $this->useHttpServer(true);
 
-        // Disable PSR-7 integration testing.
+        // Désactive les tests d'intégration PSR-7
         $this->useHttpServer(false);
     }
 
-You can customize the application class name used, and the constructor
-arguments, by using the ``configApplication()`` method::
+Vous pouvez personnaliser le nom de la classe Application utilisé ainsi que les
+arguments du contructeur en utilisant la méthode ``configApplication()``::
 
     public function setUp()
     {
         $this->configApplication('App\App', [CONFIG]);
     }
 
-After enabling the PSR-7 mode, and possibly configuring your application class,
-you can use the remaining ``IntegrationTestCase`` features as normal.
+Après avoir activé le mode PSR-7 (et avoir peut-être configuré la classe
+d'Application), vous pouvez utiliser le reste des fonctionnalités de
+``IntegrationTestCase`` normalement.
 
-You should also take care to try and use :ref:`application-bootstrap` to load
-any plugins containing events/routes. Doing so will ensure that your
-events/routes are connected for each test case.
+Vous devriez également faire en sorte d'utiliser :ref:`application-bootstrap`
+pour charger les plugins qui contiennent des événements et des routes. De cette
+manière, vous vous assurez que les événements et les routes seront connectés pour
+chacun de vos "test case".
 
 .. versionadded:: 3.3.0
     PSR-7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
