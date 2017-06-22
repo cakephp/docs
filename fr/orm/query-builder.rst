@@ -1408,7 +1408,7 @@ Lier les Valeurs (Binding)
 --------------------------
 
 Il est possible de protéger vos requêtes en utilisant le "binding".
-De la même manière que vous pouvez :ref:`"binder" des valeurs pour les requêtes préparés <database-basics-binding-values>`,
+De la même manière que vous pouvez :ref:`"binder" des valeurs pour les requêtes préparées <database-basics-binding-values>`,
 des valeurs peuvent être "bindées" aux requêtes en utilisant la méthode :php:meth:`Cake\\Database\\Query::bind()`.
 
 L'exemple ci-dessous est une alternative sûre par rapport à la version donnée
