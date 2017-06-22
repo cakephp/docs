@@ -528,9 +528,9 @@ Un extrait de directive "server" ci-dessous :
     }
 
 .. note::
-    Des modifications récentes de PHP-FPM sont configuré pour écouter le socket
-    unix php-fpm plutôt que le port TCP 9000 de l'adresse 127.0.0.1. Si vous
-    avez une erreur "502 bad gateway errors" avec la configuration ci-dessus,
+    Dans les dernière versions de PHP-FPM, le système est configuré pour écouter
+    le socket unix php-fpm plutôt que le port TCP 9000 de l'adresse 127.0.0.1.
+    Si vous avez une erreur "502 bad gateway errors" avec la configuration ci-dessus,
     essayez de mettre à jour ``fastcgi_pass`` en pointant sur le socket unix
     Recent configurations of PHP-FPM are set to listen to the unix php-fpm
     (ex: fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;) plutôt que le port
