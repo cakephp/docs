@@ -222,7 +222,7 @@ sont utilisées:
   ``Email::theme()``.
 - ``'layout'``: Si vous utilisez un contenu rendu, définissez le layout à
   rendre. Si vous voulez rendre un template sans layout, définissez ce champ
-  à null. Regardez ``Email::layout()``.
+  à null. Regardez ``Email::template()``.
 - ``'viewVars'``: Si vous utilisez un contenu rendu, définissez le tableau avec
   les variables devant être rendus dans la vue. Regardez
   ``Email::viewVars()``.
@@ -272,8 +272,7 @@ templates normales::
 
     $email = new Email();
     $email
-        ->template('welcome')
-        ->layout('fancy')
+        ->template('welcome', 'fancy')
         ->emailFormat('html')
         ->to('bob@example.com')
         ->from('app@domain.com')
@@ -285,8 +284,7 @@ aussi envoyer des messages email templaté multipart::
 
     $email = new Email();
     $email
-        ->template('welcome')
-        ->layout('fancy')
+        ->template('welcome', 'fancy')
         ->emailFormat('both')
         ->to('bob@example.com')
         ->from('app@domain.com')
@@ -325,8 +323,7 @@ Si vous voulez envoyer un email en utilisant templates dans un plugin, vous
 pouvez utiliser la :term:`syntaxe de plugin` familière pour le faire::
 
     $email = new Email();
-    $email->template('Blog.new_comment');
-    $email->layout('Blog.auto_message');
+    $email->template('Blog.new_comment', 'Blog.auto_message');
 
 Ce qui est au-dessus utiliserait les templates à partir d'un plugin de Blog par
 exemple.
@@ -336,8 +333,7 @@ les plugins. Vous pouvez faire ceci en utilisant les themes en disant à Email
 d'utiliser le bon theme en utilisant la méthode ``Email::theme()``::
 
     $email = new Email();
-    $email->template('Blog.new_comment');
-    $email->layout('Blog.auto_message');
+    $email->template('Blog.new_comment', 'Blog.auto_message');
     $email->theme('TestTheme');
 
 Ceci vous permet de remplacer le template `new_comment` dans votre theme sans
@@ -347,8 +343,8 @@ chemin suivant:
 
 .. deprecated:: 3.4.0
     Utilisez ``setTemplate()`` à la place de ``template()``. Utilisez
-    ``setLayout()`` à la place de ``layout()``. Utilisez ``setTheme()`` à la
-    place de ``theme()``.
+    ``setLayout()`` à la place de l'argument layout de ``template().
+    Utilisez ``setTheme()`` à la place de ``theme()``.
 
 
 Envoyer les pièces jointes
@@ -556,8 +552,7 @@ aux utilisateurs. Pour créer votre ``UserMailer``, créez un fichier
             $this
                 ->to($user->email)
                 ->subject(sprintf('Welcome %s', $user->name))
-                ->template('welcome_mail') // Par défaut le template avec le même nom que le nom de la méthode est utilisé.
-                ->layout('custom');
+                ->template('welcome_mail', 'custom'); // Par défaut le template avec le même nom que le nom de la méthode est utilisé.
         }
 
         public function resetPassword($user)
