@@ -410,7 +410,7 @@ to exist as ``NULL`` is not equal to itself. While, allowing multiple null
 values is the default behavior of CakePHP, you can include null values in your
 unique checks using ``allowMultipleNulls``::
 
-    // Only only null value can exist in `parent_id` and `site_id`
+    // Only one null value can exist in `parent_id` and `site_id`
     $rules->add($rules->existsIn(
         ['parent_id', 'site_id'],
         'ParentNodes',

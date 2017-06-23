@@ -1157,12 +1157,12 @@ construire les Types de colonne personnalisés::
     Type::map('json', 'Cake\Database\Type\JsonType');
 
     // Dans src/Model/Table/UsersTable.php
-    use Cake\Database\Schema\Table as Schema;
+    use Cake\Database\Schema\TableSchema;
 
     class UsersTable extends Table
     {
 
-        protected function _initializeSchema(Schema $schema)
+        protected function _initializeSchema(TableSchema $schema)
         {
             $schema->columnType('preferences', 'json');
             return $schema;

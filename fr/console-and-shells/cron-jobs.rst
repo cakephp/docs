@@ -23,6 +23,22 @@ Vous pouvez avoir plus d'infos ici: http://fr.wikipedia.org/wiki/Cron
     Utilisez ``-q`` (or `--quiet`) pour ne pas afficher de sortie pour les
     cronjobs.
 
+Tâches Cron sur des serveurs mutualisés
+---------------------------------------
+
+Sur certains serveurs mutualisés ``cd /full/path/to/root && bin/cake myshell myparam``
+pourrait ne pas fonctionner. Vous pouvez à la place utiliser
+``php /full/path/to/root/bin/cake.php myshell myparam``.
+
+.. note::
+
+    register_argc_argv a besoin d'être activé en incluant
+    ``register_argc_argv = 1`` dans votre php.ini. Si vous ne pouvez pas
+    changer register_argc_argv de manière globale, vous pouvez préciser à la
+    tâche cron d'utiliser votre propre php.ini en le spécifiant via
+    ``-c /full/path/to/root/php.ini``. Exemple :
+    ``php -c /full/path/to/root/php.ini /full/path/to/root/bin/cake.php myshell myparam``.
+
 .. meta::
     :title lang=fr: Lancer des Shells en tant que cronjobs
     :keywords lang=fr: tâche cron,cronjob,crontab

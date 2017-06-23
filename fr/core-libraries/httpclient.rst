@@ -18,7 +18,7 @@ Faire des Requêtes
 Faire des requêtes est simple et direct. Faire une requête GET ressemble à
 ceci::
 
-    use Cake\Network\Http\Client;
+    use Cake\Http\Client;
 
     $http = new Client();
 
@@ -93,10 +93,10 @@ Construire des Corps de Requête Multipart à la Main
 
 Il peut arriver que vous souhaitiez construire un corps de requête d'une
 façon très spécifique. Dans ces situations, vous pouvez utiliser
-``Cake\Network\Http\FormData`` pour fabriquer la requête HTTP multipart
+``Cake\Http\Client\FormData`` pour fabriquer la requête HTTP multipart
 spécifique que vous souhaitez::
 
-    use Cake\Network\Http\FormData;
+    use Cake\Http\Client\FormData;
 
     $data = new FormData();
 

@@ -408,20 +408,35 @@ parti de la clé primaire.
 Vous pouvez forcer ``existsIn`` à passer quand des parties qui peuvent être
 nulles de votre clé étrangère composite sont nulles::
 
-    // Example: A composite primary key within NodesTable is (id, site_id).
-    // A Node may reference a parent Node but does not need to. In latter case, parent_id is null.
-    // Allow this rule to pass, even if fields that are nullable, like parent_id, are null:
+    // Example: Une clé primaire composée dans NodesTable est (id, site_id).
+    // Un "Node" peut faire référence à un parent Node mais ce n'est pas obligatoire.
+    // Dans un cas d'utilisation, parent_id est null.
+    // Nous permettons à cette règle de passer, même si les champs qui sont nullable, comme
+    // parent_id, sont null :
     $rules->add($rules->existsIn(
         ['parent_id', 'site_id'], // Schema: parent_id NULL, site_id NOT NULL
         'ParentNodes',
         ['allowNullableNulls' => true]
     ));
 
-    // A Node however must in addition also always reference a Site.
+    // Un Node doit cependant toujours avoir une référence à un Site.
     $rules->add($rules->existsIn(['site_id'], 'Sites'));
 
+Dans la majorité des bases de données SQL, les index ``UNIQUE`` sur plusieurs
+colonnes permettent à plusieurs valeurs null d'exister car ``NULL`` n'est
+pas égale à lui même. Même si autoriser plusieurs valeurs null est le comportement
+par défaut de CakePHP, vous pouvez inclure des valeurs null dans vos validations
+en utilisant ``allowMultipleNulls``::
+
+    // Seulement une valeur null peut exister dans `parent_id` et `site_id`
+    $rules->add($rules->existsIn(
+        ['parent_id', 'site_id'],
+        'ParentNodes',
+        ['allowMultipleNulls' => false]
+    ));
+
 .. versionadded:: 3.3.0
-    L'option ``allowNullableNulls`` a été ajoutée.
+    Les options ``allowNullableNulls`` et ``allowMultipleNulls`` ont été ajoutées.
 
 Règles sur le Nombre de Valeurs d'une Association
 -------------------------------------------------

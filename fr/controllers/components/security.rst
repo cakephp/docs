@@ -43,7 +43,7 @@ avant ces components dans la méthode ``initialize()``.
 
     Vous devez toujours vérifier les méthodes HTTP utilisées avant d'exécuter
     d'autre code. Vous devez :ref:`vérifier la méthode HTTP <check-the-request>`
-    ou utiliser :php:meth:`Cake\\Network\\Request::allowMethod()` pour vous
+    ou utiliser :php:meth:`Cake\\Http\\ServerRequest::allowMethod()` pour vous
     assurer que la bonne méthode HTTP est utilisée.
 
 Gestion des callbacks Blackhole
