@@ -599,6 +599,7 @@ envoyer des messages flash. Les clés disponibles sont
 
 - ``key`` - La clé à utiliser, 'default' par défaut. Avant 3.4.0, la clé par
   défaut était 'auth'.
+- ``element`` - Le nom de l'élément à utiliser pour le rendu. ``null`` par défaut.
 - ``params`` - Le tableau des paramètres supplémentaires à utiliser, ``[]`` par
   défaut.
 
