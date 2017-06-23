@@ -29,6 +29,9 @@ retournée::
         // validation de l'entity a échouée.
     }
 
+.. versionadded:: 3.4.0
+    LA méthode ``getErrors()`` a été ajoutée.
+
 Quand vous construisez une entity avec la validation activée, les choses
 suivantes vont se produire:
 
