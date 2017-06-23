@@ -617,7 +617,7 @@ CoursesMemberships モデルを作ればよいのです。以下のモデルを�
         public function initialize(array $config)
         {
             $this->belongsToMany('Courses', [
-                'through' => 'CourseMemberships',
+                'through' => 'CoursesMemberships',
             ]);
         }
     }
@@ -627,7 +627,7 @@ CoursesMemberships モデルを作ればよいのです。以下のモデルを�
         public function initialize(array $config)
         {
             $this->belongsToMany('Students', [
-                'through' => 'CourseMemberships',
+                'through' => 'CoursesMemberships',
             ]);
         }
     }

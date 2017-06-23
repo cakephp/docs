@@ -20,6 +20,8 @@
 :doc:`ブログチュートリアル </tutorials-and-examples/blog-auth-example/auth>`
 の中で順を追って説明しています。
 
+もし、CakePHP のための既存の認証や認可の解決方法を探しているなら、Awesome CakePHP リストの
+`Authentication and Authorization <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/README.md#authentication-and-authorization>`_ セクションを見てください。
 
 認証
 ====
@@ -523,6 +525,7 @@ AuthComponent の flash 設定を使うことでエラーメッセージをカ�
 設定することができます。利用可能なキーは次のとおりです。
 
 - ``key`` - 使用されるキー。デフォルトは 'default'。 3.4.0 より前の key のデフォルトは 'auth'。
+- ``element`` - 描画に使用するエレメント名。デフォルトは null。
 - ``params`` - 使用される追加の params 配列。デフォルトは ``[]`` 。
 
 フラッシュメッセージの設定だけでなく、AuthComponent が使用する他のエラーメッセージを

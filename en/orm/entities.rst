@@ -262,7 +262,6 @@ stored on the entity itself. You can access any validation errors using the
     $errors = $user->errors();
 
     // Get the errors for a single field.
-    
     $errors = $user->getError('password');
     // Prior to 3.4.0
     $errors = $user->errors('password');

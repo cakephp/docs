@@ -79,10 +79,13 @@ atomic オプションで無効化することも出来ます。 ::
 
 .. php:method:: deleteOrFail($entity, $options = [])
 
-
-このメソッドを使用すると、エンティティーが新しく主キーの値を持たず、
-アプリケーションルールのチェックに失敗したり、削除がコールバックによって中断された場合、
+このメソッドを使用すると、次の条件で
 :php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException` を投げます。
+
+* エンティティーが新しい場合
+* エンティティーが主キーの値を持たない場合
+* アプリケーションルールのチェックが失敗した場合
+* 削除コールバックによって中断された場合
 
 保存に失敗したエンティティーを追跡する場合、
 :php:meth:`Cake\\ORM\Exception\\PersistenceFailedException::getEntity()` メソッドを
