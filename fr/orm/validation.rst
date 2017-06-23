@@ -423,7 +423,7 @@ nulles de votre clé étrangère composite sont nulles::
     $rules->add($rules->existsIn(['site_id'], 'Sites'));
 
 Dans la majorité des bases de données SQL, les index ``UNIQUE`` sur plusieurs
-colonnes permettent d'avoir plusieurs valeurs null d'exister car ``NULL`` n'est
+colonnes permettent à plusieurs valeurs null d'exister car ``NULL`` n'est
 pas égale à lui même. Même si autoriser plusieurs valeurs null est le comportement
 par défaut de CakePHP, vous pouvez inclure des valeurs null dans vos validations
 en utilisant ``allowMultipleNulls``::

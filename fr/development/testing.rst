@@ -1178,8 +1178,8 @@ pour que vous puissez écrire vos assertions::
 
     ``enableRetainFlashMessages()`` a été ajoutée dans 3.4.7
 
-Tester un controller renvoyer du JSON
--------------------------------------
+Tester un controller retournant du JSON
+---------------------------------------
 
 JSON est un format commun lors de la conception de web service. Tester les
 endpoints de votre web service est très simple avec CakePHP. Commençons avec
