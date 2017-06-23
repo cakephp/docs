@@ -409,7 +409,7 @@ sauvegardée. Si vous voulez traiter toutes les entities en transaction unique,
 vous pouvez utiliser ``transactional()``::
 
     // Dans un controller.
-    $articles->connection()->transactional(function () use ($articles, $entities) {
+    $articles->getConnection()->transactional(function () use ($articles, $entities) {
         foreach ($entities as $entity) {
             $articles->save($entity, ['atomic' => false]);
         }
