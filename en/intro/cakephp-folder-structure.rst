@@ -26,7 +26,7 @@ level folders you should see:
   Make sure that the *tmp* and *logs* folders exist and are writable,
   otherwise the performance of your application will be severely
   impacted. In debug mode, CakePHP will warn you, if these directories are not
-  writable
+  writable.
 
 The src Folder
 ==============
