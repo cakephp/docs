@@ -71,7 +71,7 @@ mise en trou noir (blackhole callback)::
     }
 
 Note : utilisez ``$this->Security->config()`` pour les versions de CakePHP
-avant 3.4.0.
+inférieures à 3.4.0.
 
 Le  paramètre ``$type`` peut avoir les valeurs suivantes:
 
@@ -260,7 +260,7 @@ fonctionnalités de ``SecurityComponent``::
     }
 
 Note : utilisez ``$this->Security->config()`` pour les versions de CakePHP
-avant 3.4.0.
+inférieures à 3.4.0.
 
 Cet exemple désactiverait toutes les vérifications de sécurité pour une action
 edit.
