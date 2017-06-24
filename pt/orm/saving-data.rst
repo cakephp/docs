@@ -726,3 +726,83 @@ A opção ``fieldList`` também é aceita nos métodos ``newEntity()``, ``newEnt
 e ``patchEntities()``.
 
 .. _saving-entities:
+
+Salvando Entidades
+===============
+
+.. php:method:: save(Entity $entity, array $options = [])
+
+Ao salvar dados de requisição no seu banco de dados, você primeiro precisa hidratar (hydrate) 
+uma nova entidade usando ``newEntity()`` para passar no ``save()``. Por exemplo::
+
+  // Num controller
+  $articles = TableRegistry::get('Articles');
+  $article = $articles->newEntity($this->request->getData());
+  if ($articles->save($article)) {
+      // ...
+  }
+
+O ORM usa o método ``isNew()`` em uma entidade para determinar quando um insert ou update
+deve ser realizado ou não. Se o método ``isNew()`` retorna ``true`` e a entidade tiver um valor
+de chave primária, então será emitida uma query 'exists'. A query 'exists' pode ser suprimida
+informando a opção ``'checkExisting' => false`` no argumento ``$options``::
+
+    $articles->save($article, ['checkExisting' => false]);
+
+Uma vez, que você carregou algumas entidades, você provavelmente desejará modificar elas e
+atualizar em seu banco de dados. Este é um exercício bem simples no CakePHP::
+
+    $articles = TableRegistry::get('Articles');
+    $article = $articles->find('all')->where(['id' => 2])->first();
+
+    $article->title = 'My new title';
+    $articles->save($article);
+
+Ao salvar, CakePHP irá :ref:`aplicar suas regras<application-rules>`, e 
+envolver a operação de salvar em uma trasação de banco de dados. Também atualizará
+as propriedades que mudaram. A chamada ``save()`` do exemplo acima geraria SQL como::
+
+    UPDATE articles SET title = 'My new title' WHERE id = 2;
+
+Se você tem uma nova entidade, o seguinte SQL seria gerado::
+
+    INSERT INTO articles (title) VALUES ('My new title');
+
+Quando uma entidade é salva algumas coisas acontecem:
+When an entity is saved a few things happen:
+
+1. A verificação de regras será iniciada se não estiver desativada.
+2. A verificação de regras irá disparar o evento ``Model.beforeRules``. Se esse evento for
+   parado, a operação de salvamento falhará e retornará ``false``.
+3. As regras serão verificadas. Se a entidade está sendo criada, as regras ``create`` serão
+   usadas. Se a entidade estiver sendo atualizada, as regras  ``update`` serão usadas.
+4. O evento ``Model.afterRules`` será disparado.
+5. O evento ``Model.beforeSave`` será disparado. Se ele for parado, o processo de
+   salvamento será abortado, e save() retornará ``false``.
+6. As associações de pais são salvas. Por exemplo, qualquer associação belongsTo listada
+   serão salvas.
+7. Os campos modificados na entidade serão salvos.
+8. As associações filhas são salvas. Por exemplo, qualquer associação hasMany, hasOne, ou
+   belongsToMany listada serão salvas.
+9. O evento ``Model.afterSave`` será disparado.
+10. O evento ``Model.afterSaveCommit`` será disparado.
+
+O seguinte diagrama ilustra o processo acima::
+
+.. figure:: /_static/img/save-cycle.png
+   :align: left
+   :alt: Flow diagram showing the save process.
+
+Consule a seção :ref:`application-rules` para mais informação sobre como criar
+e usar regras.
+
+.. warning::
+    
+    Se nenhuma alteração é feita na entidade quando ela é salva, os callbacks não
+    serão disparado porque o salvar não é executado.
+
+O método ``save()`` retornará a entidade modificada quando sucesso, e ``false`` quando
+falhar. Você pode desativar regras e/ou transações usando o argumento ``$options`` para salvar::
+
+    // Num método de controller ou model
+    $articles->save($article, ['checkRules' => false, 'atomic' => false]);
