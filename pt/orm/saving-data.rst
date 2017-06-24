@@ -401,3 +401,217 @@ pode usar ``transactional()``::
 
 
 .. _changing-accessible-fields:
+
+Alterando campos acessíveis
+--------------------------
+
+Também é possível permitir ``newEntity()`` escreva em campos não acessiveis.
+Por exemplo, ``id`` geralmente está ausente da propriedade ``_accessible``.
+Nesse caso , você pode usar a opção `accessibleFields``. Isso pode ser útil para
+manter ids de entidades associadas::
+
+    // No controller
+    $articles = TableRegistry::get('Articles');
+    $entity = $articles->newEntity($this->request->getData(), [
+        'associated' => [
+            'Tags', 'Comments' => [
+                'associated' => [
+                    'Users' => [
+                        'accessibleFields' => ['id' => true]
+                    ]
+                ]
+            ]
+        ]
+    ]);
+
+O exemplo acima manterá a associação inalterada entre Comments e Users para a
+entidade envolvida.
+
+.. note::
+
+    Se você estiver usando newEntity() e as entidades resultantes estão faltando algum
+    ou todos os dados passados, verifique se as colunas que deseja definir estão
+    listadas na propriedade ``$_accessible`` da sua entidade. Consulte :ref:`entities-mass-assignment`.
+    
+Mesclando dados de requisição em entidades
+----------------------------------
+
+Para atualizar as entidades, você pode escolher de aplicar dados de requisição diretamente
+em uma entidade existente. Isto tem a vantagem que apenas os campos que realmente mudaram 
+serão salvos, em oposição ao envio de todos os campos para o banco de dados pra ser persistido.
+Você pode mesclar um array de dados bruto em uma entidade existente usando o método
+``patchEntity()``::
+
+    // No controller.
+    $articles = TableRegistry::get('Articles');
+    $article = $articles->get(1);
+    $articles->patchEntity($article, $this->request->getData());
+    $articles->save($article);
+    
+Validação e patchEntity
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Semelhante ao ``newEntity()``, o método ``patchEntity`` validará os dados
+antes de ser copiado para entidade. O mecanismo é explicado na seção
+:ref:`validating-request-data`. Se você deseja desativar a validação, informe a
+o opção ``validate`` assim::
+
+    // No controller.
+    $articles = TableRegistry::get('Articles');
+    $article = $articles->get(1);
+    $articles->patchEntity($article, $data, ['validate' => false]);
+
+Você também pode alterar a regra de validação utilizada pela entidade ou qualquer
+uma das associações::
+
+    $articles->patchEntity($article, $this->request->getData(), [
+        'validate' => 'custom',
+        'associated' => ['Tags', 'Comments.Users' => ['validate' => 'signup']]
+    ]);
+
+Patching HasMany and BelongsToMany
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Como explicado na seção anterior, os dados de requisição deve seguir a 
+estrutura de sua entidade. O método `patchEntity()`` é igualmente capaz de
+mesclar associações, por padrão, apenas o primeiro nível de associações são
+mesclados, mas se você deseja controlar a lista de associações a serem mescladas
+ou mesclar em níveis mais profundos, você pode usar o terceiro parâmetro do método::
+
+    // No controller.
+    $associated = ['Tags', 'Comments.Users'];
+    $article = $articles->get(1, ['contain' => $associated]);
+    $articles->patchEntity($article, $this->request->getData(), [
+        'associated' => $associated
+    ]);
+    $articles->save($article);
+
+As associações são mescladas ao combinar o campo da chave primária nas entidades de origem
+com os campos correspondentes no array de dados. As associações irão construir novas
+entidades se nenhuma entidade anterior for encontrada para a propriedade alvo da associação.
+
+Por exemplo, forneça alguns dados de requisição como este::
+
+    $data = [
+        'title' => 'My title',
+        'user' => [
+            'username' => 'mark'
+        ]
+    ];
+
+Tentando popular uma entidade sem uma entidade na propriedade user criará
+uma nova entidade do tipo user::
+
+    // In a controller.
+    $entity = $articles->patchEntity(new Article, $data);
+    echo $entity->user->username; // Echoes 'mark'
+
+O mesmo pode ser dito sobre associaçes hasMany e belongsToMany, com uma
+advertência importante:
+
+.. note::
+    
+    Para as associações belongsToMany, garanta que a entidade relevante tenha
+    uma propriedade acessível para a entidade associada.
+
+Se um Produto pertence a várias (belongsToMany) Tag::
+
+    // Na classe da entidade Product
+    protected $_accessible = [
+        // .. outras propriedades
+       'tags' => true,
+    ];
+
+.. note::
+    
+    Para as associações hasMany e belongsToMany, se houvesse algumas entidades que
+    que não pudessem ser correspondidas por chave primaria a um registro no array de dados,
+    então esses registros serão descartados da entidade resultante.
+    
+    Lembre-se que usando ``patchEntity()`` ou ``patchEntities()`` não persiste os
+    dados, isso apenas edita (ou cria) as entidades informadas. Para salvar a entidade você
+    terá que chamar o método ``save()`` da model Table.
+
+Por exemplo, considere o seguinte caso::
+
+    $data = [
+        'title' => 'My title',
+        'body' => 'The text',
+        'comments' => [
+            ['body' => 'First comment', 'id' => 1],
+            ['body' => 'Second comment', 'id' => 2],
+        ]
+    ];
+    $entity = $articles->newEntity($data);
+    $articles->save($entity);
+
+    $newData = [
+        'comments' => [
+            ['body' => 'Changed comment', 'id' => 1],
+            ['body' => 'A new comment'],
+        ]
+    ];
+    $articles->patchEntity($entity, $newData);
+    $articles->save($entity);
+
+No final, se a entidade for convertida de volta para um array, você obterá o
+seguinte resultado::
+
+    [
+        'title' => 'My title',
+        'body' => 'The text',
+        'comments' => [
+            ['body' => 'Changed comment', 'id' => 1],
+            ['body' => 'A new comment'],
+        ]
+    ];
+
+Como você pode ver, o comentário com id 2 não está mais lá, já que ele não
+pode ser correspondido a nada no array ``$newData``. Isso acontece porque CakePHP está
+refletindo o novo estado descrito nos dados de requisição.
+
+Algumas vantagens adicionais desta abordagem é que isto reduz o número de
+operações a serem executadas ao persistir a entidade novamente.
+
+Por favor, observer que isso não significa que o comentário com id 2 foi removido do
+bando de dados, se você deseja remover os comentários para este artigo que não estão
+presentes na entidade, você pode coletar as chaves primárias e executar uma exclusão
+de lote para esses que não estão na lista::
+
+    // Num controller.
+    $comments = TableRegistry::get('Comments');
+    $present = (new Collection($entity->comments))->extract('id')->filter()->toArray();
+    $comments->deleteAll([
+        'article_id' => $article->id,
+        'id NOT IN' => $present
+    ]);
+
+Como você pode ver, isso também ajuda ao criar soluçes onde uma associação precisa de
+ser implementada como um único conjunto.
+
+Você também pode popular várias entidades ao mesmo tempo. As considerações feitas para 
+popular (patch) associaçes hasMany e belongsToMany se aplicam para popular várias entidades:
+As comparação são feitas pelo valor do campo da chave primária e as correspondências que
+faltam no array das entidades originais serão removidas e não estarão presentes no resultado::
+
+
+    // Num controller.
+    $articles = TableRegistry::get('Articles');
+    $list = $articles->find('popular')->toArray();
+    $patched = $articles->patchEntities($list, $this->request->getData());
+    foreach ($patched as $entity) {
+        $articles->save($entity);
+    }
+
+Semelhante de usar ``patchEntity()``, você pode usar o terceiro argumento para
+controlar as associações que serão mescladas em cada uma das entidades no array::
+
+    // Num controller.
+    $patched = $articles->patchEntities(
+        $list,
+        $this->request->getData(),
+        ['associated' => ['Tags', 'Comments.Users']]
+    );
+
+
+.. _before-marshal:
