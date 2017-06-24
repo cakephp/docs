@@ -270,7 +270,7 @@ The ``setErrors()`` or ``setError()`` method can also be used to set the errors 
 it easier to test code that works with error messages::
 
     $user->setError('password', ['Password is required']);
-    $user->setErrors(['pasword' => ['Password is required'], 'username' => ['Username is required']]);
+    $user->setErrors(['password' => ['Password is required'], 'username' => ['Username is required']]);
     // Prior to 3.4.0
     $user->errors('password', ['Password is required.']);
 

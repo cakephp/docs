@@ -22,6 +22,10 @@ etc..
 Tout ceci est couvert étape par étape dans le
 :doc:`Tutorial du Blog </tutorials-and-examples/blog-auth-example/auth>`.
 
+Si vous cherchez des solutions existantes pour l'authentification et / ou
+l'autorisation pour CakePHP, allez jeter un oeil à la section
+`Authentication and Authorization <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/README.md#authentication-and-authorization>`_ de la CakePHP Awesome List.
+
 Authentification
 ================
 
@@ -595,6 +599,7 @@ envoyer des messages flash. Les clés disponibles sont
 
 - ``key`` - La clé à utiliser, 'default' par défaut. Avant 3.4.0, la clé par
   défaut était 'auth'.
+- ``element`` - Le nom de l'élément à utiliser pour le rendu. ``null`` par défaut.
 - ``params`` - Le tableau des paramètres supplémentaires à utiliser, ``[]`` par
   défaut.
 

@@ -262,6 +262,20 @@ vous pouvez utiliser la méthode ``order``::
     $query = $articles->find()
         ->order(['title' => 'ASC', 'id' => 'ASC']);
 
+Lorsque vous appelez ``order()`` plusieurs fois sur une même requête, les clauses
+seront ajoutées les unes après les autres. Cependant, en utilisant les finders,
+vous pouvez parfois avoir besoin d'écraser le ``ORDER BY``. Pour se faire, vous
+pouvez utiliser le second paramètre de ``order()`` (mais aussi de ``orderAsc()``
+ou ``orderDesc()``) et le définir à ``Query::OVERWRITE`` ou ``true``::
+
+    $query = $articles->find()
+        ->order(['title' => 'ASC']);
+
+    // Plus loin dans le code, vous écrasez la clause ORDER BY plutôt
+    // qu'ajouter une autre clause à l'existante.
+    $query = $articles->find()
+        ->order(['created' => 'DESC'], Query::OVERWRITE);
+
 .. versionadded:: 3.0.12
 
     En plus de ``order``, les méthodes ``orderAsc`` et ``orderDesc`` peuvent

@@ -42,7 +42,11 @@ respectifs::
     $email->addTo('to2@example.com', 'To2 Example');
     // Les destinaitres de l'email sont: to@example.com et to2@example.com
     $email->to('test@example.com', 'ToTest Example');
-    // Le destinaitre de l'email est: test@example.com
+    // Le destinataire de l'email est: test@example.com
+
+.. deprecated:: 3.4.0
+    Utilisez ``setFrom()``, ``setTo()``, ``setCc()`` , ``setBcc()``  et
+    ``setSubject()`` à la place.
 
 Choisir l'émetteur
 ------------------

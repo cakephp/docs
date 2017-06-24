@@ -677,7 +677,7 @@ Regardez les models suivants::
         public function initialize(array $config)
         {
             $this->belongsToMany('Courses', [
-                'through' => 'CourseMemberships',
+                'through' => 'CoursesMemberships',
             ]);
         }
     }
@@ -687,7 +687,7 @@ Regardez les models suivants::
         public function initialize(array $config)
         {
             $this->belongsToMany('Students', [
-                'through' => 'CourseMemberships',
+                'through' => 'CoursesMemberships',
             ]);
         }
     }

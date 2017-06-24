@@ -337,6 +337,14 @@ Cela mettra la couverture des résultats dans le répertoire webroot de votre
 application. Vous pourrez voir les résultats en allant à
 ``http://localhost/votre_app/coverage``.
 
+Si vous utilisez PHP 5.6.0 (ou supérieur), vous pouvez utilisez `phpdbg <http://phpdbg.com/>`__
+pour générer la couverture des résultats à la place de xdebug. ``phpdbg`` est
+généralement plus rapide dans la génération des rapports de couverture :
+
+.. code-block:: bash
+
+    $ phpdbg -qrr phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
+
 Combiner les Suites de Test pour les Plugins
 --------------------------------------------
 

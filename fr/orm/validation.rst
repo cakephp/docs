@@ -29,6 +29,10 @@ retournée::
         // validation de l'entity a échouée.
     }
 
+.. versionadded:: 3.4.0
+
+    La méthode ``getErrors()`` a été ajoutée.
+
 Quand vous construisez une entity avec la validation activée, les choses
 suivantes vont se produire:
 
@@ -458,6 +462,14 @@ règles::
     // Entre 3 et 5 tags
     $rules->add($rules->validCount('tags', 3, '>=', 'Vous devez avoir au moins 3 tags'));
     $rules->add($rules->validCount('tags', 5, '<=', 'Vous devez avoir au moins 5 tags'));
+    $rules->add($rules->validCount('subscription', 0, '==', 'Vous pouvez ne pas avoir de subscription'));
+
+.. note::
+
+    ``validCount`` retourne ``false`` si la propriété ne peut pas être comptée
+    ou n'existe pas. Par exemple, comparé via ``<``, ``<=`` ou avec ``0``
+    retournera ``false`` si vous ne fournissez pas au moins une liste vide
+    d'abonnements.
 
 .. versionadded:: 3.3.0
     La méthode ``validCount()`` a été ajoutée dans la version 3.3.0.

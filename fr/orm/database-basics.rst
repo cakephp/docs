@@ -568,12 +568,14 @@ faire correspondre les données dans cet objet et les expressions SQL::
             if ($value instanceof Point) {
                 return new FunctionExpression(
                     'POINT',
-                    $value->lat(),
-                    $value->long()
+                    [
+                        $value->lat(),
+                        $value->long()
+                    ]
                 );
             }
             if (is_array($value)) {
-                return new FunctionExpression('POINT', $value[0], $value[1]);
+                return new FunctionExpression('POINT', [$value[0], $value[1]]);
             }
             // Handle other cases.
         }

@@ -269,18 +269,27 @@ Erreurs de Validation
 
 Après avoir :ref:`sauvegardé une entity <saving-entities>` toute erreur de
 validation sera stockée sur l'entity elle-même. Vous pouvez accéder à toutes
-les erreurs de validation en utilisant la méthode ``errors()``::
+les erreurs de validation en utilisant les méthodes ``getErrors()`` et
+``getError()``::
 
     // Récupère toutes les erreurs
+    $errors = $user->getErrors();
+    // Avant 3.4.0
     $errors = $user->errors();
 
     // Récupère les erreurs pour un champ unique.
+    $errors = $user->getError('password');
+    // Avant 3.4.0
     $errors = $user->errors('password');
 
-La méthode ``errors()`` peut aussi être utilisée pour définir les erreurs sur
-une entity, facilitant les tests du code qui fonctionne avec les messages
-d'erreur::
+Les méthodes ``setErrors()`` et ``setError()`` peuvent aussi être utilisées
+pour définir les erreurs sur une entity, facilitant les tests du code qui
+fonctionne avec les messages d'erreur::
 
+    $user->setError('password', ['Password is required.']);
+    $user->setErrors(['password' => ['Password is required'], 'username' => ['Username is required']]);
+
+    // Avant 3.4.0
     $user->errors('password', ['Password is required.']);
 
 .. _entities-mass-assignment:
