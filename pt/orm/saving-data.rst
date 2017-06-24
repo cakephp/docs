@@ -615,3 +615,114 @@ controlar as associações que serão mescladas em cada uma das entidades no arr
 
 
 .. _before-marshal:
+
+Modificando Dados de Requisição Antes de Contruir Entidades
+-----------------------------------------------
+
+Se você precisa modificar dados de requisição antes de converter em entidades, você
+pode usar o evento ``Model.beforeMarshal``. Esse evento deixa você manipular o dados
+de requisição antes das entidades serem criadas::
+
+    // Inclua as instruções na área superior do seu arquivo.
+    use Cake\Event\Event;
+    use ArrayObject;
+
+    // Na classe da sua table ou behavior 
+    public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
+    {
+        if (isset($data['username'])) {
+            $data['username'] = mb_strtolower($data['username']);
+        }
+    }
+
+O parâmetro ``$data` é uma instância de ``ArrayObject``, então você não precisa
+retornar ele para alterar os dados usado para criar entidades.
+
+O propósito principal do ``beforeMarshal`` é auxiliar os usuários a passar o processo
+de validação quando erros simples podem ser automaticamente resolvidos, ou quando os dados
+precisam ser reestruturados para que ele possa ser colocado nos campos corretos.
+
+O evento ``Model.beforeMarshal`` é disparado apenas no início do processo de 
+validação, uma das razões é que o ``beforeMarshal`` é permitido de alterar as
+regras de validação e opões de salvamento, como o campo whitelist.
+Validação é disparada logo após este evento ser finalizado. Um exemplo comum de alteração
+de dados antes de ser validado, é retirar espaço no ínicio e final (trimming) de todos os
+campos antes de salvar::
+
+    // Inclua as instruções na área superior do seu arquivo.
+    use Cake\Event\Event;
+    use ArrayObject;
+
+    // Na classe da sua table ou behavior 
+    public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
+    {
+        foreach ($data as $key => $value) {
+            if (is_string($value)) {
+                $data[$key] = trim($value);
+            }
+        }
+    }
+
+Por causa de como o processo de marshalling trabalha, se um campo não passar
+na validação ele será automaticamente removido do array de dados e não será
+copiado na entidade. Isso previne que dados inconsistentes entrem no objeto
+de entidade.
+
+Além disso, os dados em ``beforeMarshal`` são uma cópia dos dados passados. Isto é
+assim porque é importante preservar a entrada original do usuário, pois ele pode
+ser usado em outro lugar.
+
+Validando Dados Antes de Construir Entidades
+----------------------------------------
+
+O capítulo :doc:`/orm/validation` contém mais informações de como usar os 
+recursos de validação do CakePHP para garantir que os seus dados permaneçam
+corretos e consitentes.
+
+Evitando Ataques de Atribuição em Massa de Propriedade 
+-----------------------------------------
+
+Ao criar ou mesclar entidades a partir de dados de requisição, você precisa ser
+cuidadoso com o que você permite seus usuários de alterar ou incluir nas entidades.
+Por exemplo, ao enviar um array na requisição contendo o ``user_id`` um invasor
+pode alterar o proprietário de um artigo, causando efeitos indesejáveis::
+
+    // Contêm ['user_id' => 100, 'title' => 'Hacked!'];
+    $data = $this->request->getData();
+    $entity = $this->patchEntity($entity, $data);
+    $this->save($entity);
+
+Há dois modos de proteger você contra este problema. O primeiro é configurando
+as colunas padrão que podem ser definidas com segurança a partir de um requisição
+usando o recurso :ref:`entities-mass-assignment` nas entidades.
+
+O segundo modo é usando a opção ``fieldList`` ao criar ou mesclar dados em
+uma entidade::
+
+    // Contem ['user_id' => 100, 'title' => 'Hacked!'];
+    $data = $this->request->getData();
+
+    // Apenas permite alterar o campo title
+    $entity = $this->patchEntity($entity, $data, [
+        'fieldList' => ['title']
+    ]);
+    $this->save($entity);
+
+Você também pode controlar quais propriedades poder ser atribuidas para associações::
+
+    // Apenas permite alterar o title e tags
+    // e nome da tag é a única columa que pode ser definido
+    $entity = $this->patchEntity($entity, $data, [
+        'fieldList' => ['title', 'tags'],
+        'associated' => ['Tags' => ['fieldList' => ['name']]]
+    ]);
+    $this->save($entity);
+
+Usar este recurso é útil quando você tem várias funcões diferentes que seus usuários
+podem acessar, e você deseja que eles editem difentes dados baseados em seus
+privilégios.
+
+A opção ``fieldList`` também é aceita nos métodos ``newEntity()``, ``newEntities()``
+e ``patchEntities()``.
+
+.. _saving-entities:
