@@ -241,6 +241,17 @@ CakePHP ではこれらを簡単につくれます。フェッチする列を制
     $query = $articles->find()
         ->order(['title' => 'ASC', 'id' => 'ASC']);
 
+一つのクエリーで ``order()`` を複数回呼ぶと、複数の句が追加されます。
+しかし、ファインダーを使用する時、 ``ORDER BY`` を上書きする必要が生じることもあります。
+``order()`` (``orderAsc()`` や ``orderDesc()`` も同様に) の第２パラメーターに
+``Query::OVERWRITE`` または ``true`` をセットしてください。 ::
+
+    $query = $articles->find()
+        ->order(['title' => 'ASC']);
+    // あとで、ORDER BY 句を追加の代わりに上書きします。
+    $query = $articles->find()
+        ->order(['created' => 'DESC'], Query::OVERWRITE);
+
 .. versionadded:: 3.0.12
 
     複合的な式でソートする必要があるなら ``order`` に加えて、 ``orderAsc`` と ``orderDesc``

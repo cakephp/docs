@@ -1,70 +1,51 @@
-CakePHPのフォルダ構成
+CakePHP のフォルダー構成
 ########################
 
-CakePHPアプリケーションをダウンロードして展開すると、次のようなファイルとフォルダが含まれているはずです:
+CakePHP アプリケーションスケルトンをダウンロードすると、次のようないくつかのトップレベルのフォルダーが
+あるはずです。
 
-- bin
-- config
-- logs
-- plugins
-- src
-- tests
-- tmp
-- vendor
-- webroot
-- .htaccess
-- composer.json
-- index.php
-- README.md
+- *bin* フォルダーには実行可能な Cake コンソールを保持します。
+- *config* フォルダーは、CakePHP が使用する（数個の） :doc:`/development/configuration`
+  ファイルが入る場所です。データーベース接続の詳細、ブートストラップ、
+  コアの設定ファイルなどがここに格納されます。
+- *plugins* フォルダーは、あなたのアプリケーションが使う :doc:`/plugins` が格納されます。
+- *logs* フォルダーは、通常、ログ設定に応じたログファイルが含まれます。
+- *src* フォルダーは、あなたのアプリケーションのファイルが配置される場所です。
+- *tests* フォルダーは、あなたのアプリケーションのテストケースを置く場所です。
+- *tmp* フォルダーは、CakePHP が一時的なデータを格納する場所です。
+  格納する実際のデータは、CakePHP の設定方法によって異なりますが、このフォルダーは、通常、
+  翻訳メッセージ、モデルの詳細、および時にはセッション情報を格納するために使用されます。
+- *vendor* フォルダーは、CakePHP と他のアプリケーションの依存ライブラリーが入る場所です。
+  これらのファイルを編集することは推奨されません。次回の更新時に composer があなたの変更を
+  上書きしてしまうからです。
+- *webroot* ディレクトリーは、あなたのアプリケーションのパブリックドキュメントルートです。
+  それはあなたが公開したいすべてのファイルを含みます。
 
-いくつかのトップレベルのフォルダに注目してください:
+  *tmp* フォルダーと *logs* フォルダーは存在していてかつ書き込み可能な状態にしておいてください。
+  そうでない場合、あなたのアプリケーションのパフォーマンスに影響を及ぼす場合があります。
+  これらのディレクトリーが書き込み可能ではない場合、デバッグモードでは CakePHP は警告を出します。
 
-- *bin* フォルダには実行可能なCakeコンソールが入ります。
-- *config* フォルダは CakePHP が使用する（数個の）設定ファイルが入る場所です。
-  データベース接続の詳細、ブートストラップ、コアの設定ファイルなどがここに入ります。
-- *plugins* フォルダはあなたのアプリケーションが使うプラグインが入ります。
-- The *logs* folder normally contains your log files, depending on your log
-  configuration.
-- *src* フォルダは、作成するプログラムが入る場所です。
-  あなたのアプリケーションのファイルはここに入れます。
-- *tests* フォルダはあなたのアプリケーションのテストケースが入る場所です。
-- *tmp* フォルダは CakePHP の一時的なデータが入る場所です。
-  The actual data it
-  stores depends on how you have CakePHP configured, but this folder
-  is usually used to store model descriptions and sometimes
-  session information.
-- *vendor* フォルダは CakePHP と他のアプリケーションの依存ライブラリが入る場所です。
-  このフォルダの中のファイルを勝手に編集 **しない** と誓ってください。
-  これはコア (心臓部分) で、ここをいじってしまうと、私たちはもう助けを差し伸べることができません。
-- *webroot* ディレクトリはあなたのアプリケーションのパブリックドキュメントルートです。
-  It contains all the files you want to be publically reachable.
-
-  *tmp* フォルダと *logs* フォルダは存在していてかつ書き込み可能な状態にしておいてください。
-  そうでないばあい、あなたのアプリケーションのパフォーマンスに影響を及ぼす場合があります。
-  これらのケースに当てはまらない場合、デバッグモードではCakePHPは警告を出します。
-
-srcフォルダ
+src フォルダー
 ===============
 
-アプリケーション開発の大部分は、CakePHP の *src* フォルダ内で行われます。
-*src* の内部フォルダについて調べてみましょう。
+アプリケーション開発の大部分は、CakePHP の *src* フォルダー内で行われます。
+*src* 内のフォルダーを少し近づいて見てみましょう。
 
-Console
+Controller
+    アプリケーションのコントローラーとコンポーネントを含みます。
+Locale
+    国際化のための文字列ファイルを格納します。
+Model
+    アプリケーションのテーブル、エンティティー、ビヘイビアーを含みます。
+Shell
     あなたのアプリケーションで使うコンソールコマンドやコンソールタスクが入ります。
     詳細は :doc:`/console-and-shells` を確認してください。
-Controller
-    アプリケーションのコントローラとコンポーネントが入ります。
-Locale
-    国際化のための文字ファイルが入ります。
-Model
-    アプリケーションのモデル、ビヘイビア、データソースが入ります。
 View
-    表示用のクラスはここに置きます。
-    ヘルパー、レイアウト、ビューのファイルなどです。
+    表示用のクラスが、ここに配置されます。ビュー、セル、ヘルパーなどです。
 Template
-    表示用のファイルはここに置きます。
+    表示用のファイルが、ここに配置されます。
     エレメント、エラーページ、レイアウト、ビューテンプレートのファイルなどです。
 
 .. meta::
-    :title lang=ja: CakePHP Folder Structure
+    :title lang=ja: CakePHP のフォルダー構成
     :keywords lang=ja: internal libraries,core configuration,model descriptions,external vendors,connection details,folder structure,party libraries,personal commitment,database connection,internationalization,configuration files,folders,application development,readme,lib,configured,logs,config,third party,cakephp
