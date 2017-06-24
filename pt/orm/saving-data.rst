@@ -253,7 +253,7 @@ O capitulo :ref:`using-different-validators-per-association` possui mais informa
 sobre como usar diferentes validadores para associações ao transformar em entidades.
 
 O diagrama a seguir fornece uma visão geral do que acontece dentro dos métodos 
-``newEntity()`` ou ``patchEntity()``::
+``newEntity()`` ou ``patchEntity()``:
 
 .. figure:: /_static/img/validation-cycle.png
    :align: left
@@ -262,3 +262,142 @@ O diagrama a seguir fornece uma visão geral do que acontece dentro dos métodos
 Você sempre pode contar de obter uma entidade de volta com ``newEntity()``. Se a validação
 falhar, sua entidade conterá erros, e quaisquer campos inválidos não serão preenchidos 
 na entidade criada.
+
+Convertendo dados de associação BelongsToMany
+-----------------------------
+
+Se você está salvando associações belongsToMany, você pode tanto usar uma lista de entidades
+ou uma lista de ids. Ao usar uma lista de dados de entidade, seus dados de requisição
+devem parecer com::
+
+    $data = [
+        'title' => 'My title',
+        'body' => 'The text',
+        'user_id' => 1,
+        'tags' => [
+            ['tag' => 'CakePHP'],
+            ['tag' => 'Internet'],
+        ]
+    ];
+
+O exemplo acima criará 2 novas tags. Se você deseja associar um artigo com tags existentes,
+você pode usar uma lista de ids. Seus dados de requisição devem parecer com::
+
+    $data = [
+        'title' => 'My title',
+        'body' => 'The text',
+        'user_id' => 1,
+        'tags' => [
+            '_ids' => [1, 2, 3, 4]
+        ]
+    ];
+
+Se você precisa associar a alguns belongsToMany registros existentes, e criar novos ao
+mesmo tempo, você pode usar um formato expandido::
+
+    $data = [
+        'title' => 'My title',
+        'body' => 'The text',
+        'user_id' => 1,
+        'tags' => [
+            ['name' => 'A new tag'],
+            ['name' => 'Another new tag'],
+            ['id' => 5],
+            ['id' => 21]
+        ]
+    ];
+
+Quando os dados acima são convertidos em entidades, você terá 4 tags. As duas primeiras
+serão objetos novos, e as outras duas serão referências a registros existentes.
+
+Ao converter dados belongsToMany, você pode desativar a criação de nova entidade, usando
+a opção ``onlyIds``. Quando habilitado, esta opção restringe transformação de
+belongsToMany para apenas usar a chave ``_ids`` e ignorar todos os outros dados.
+
+.. versionadded:: 3.1.0
+    A opção ``onlyIds`` foi adicionada na versão 3.1.0
+
+Convertendo dados de associação HasMany
+-----------------------
+
+Se você deseja atualizar as associações hasMany existentes e atualizar suas
+propriedades, primeiro você deve garantir que sua entidade seja carregada com a
+associação hasMany. Você pode então usar dados de requisição semelhantes a::
+
+    $data = [
+        'title' => 'My Title',
+        'body' => 'The text',
+        'comments' => [
+            ['id' => 1, 'comment' => 'Update the first comment'],
+            ['id' => 2, 'comment' => 'Update the second comment'],
+            ['comment' => 'Create a new comment'],
+        ]
+    ];
+
+Se você está salvando associaçoes hasMany e deseja vincular a registros existentes,
+você pode usar o formato ``_ids``::
+
+    $data = [
+        'title' => 'My new article',
+        'body' => 'The text',
+        'user_id' => 1,
+        'comments' => [
+            '_ids' => [1, 2, 3, 4]
+        ]
+    ];
+
+Ao converter dados hasMany, você pode desativar a criação de nova entidade, usando
+a opção ``onlyIds`. Quando ativada, esta opção restringe transformação de hasMany
+para apenas usar a chave ``_ids`` e ignorar todos os outros dados.
+
+.. versionadded:: 3.1.0
+     A opção ``onlyIds`` foi adicionada na versão 3.1.0
+     
+Conventendo vários registros
+---------------------------
+
+Ao criar formulários que cria/atualiza vários registros ao mesmo tempo, você pode usar
+o método ``newEntities()``::
+
+    // No controller.
+    $articles = TableRegistry::get('Articles');
+    $entities = $articles->newEntities($this->request->getData());
+
+Nessa situação, os dados de requisição para vários artigos devem parecer com::
+
+    $data = [
+        [
+            'title' => 'First post',
+            'published' => 1
+        ],
+        [
+            'title' => 'Second post',
+            'published' => 1
+        ],
+    ];
+
+Uma vez que você converteu os dados de requisição em entidades, você pode
+salvar com ``save()`` e remover com ``delete()`` elas::
+
+    // No controller.
+    foreach ($entities as $entity) {
+        // Salva a entidade
+        $articles->save($entity);
+
+        // Remover a entidade
+        $articles->delete($entity);
+    }
+
+O exemplo acima executará uma transação separada para cada entidade salva. 
+Se você deseja processar todas as entidades como uma única transação, você 
+pode usar ``transactional()``::
+
+    // No controller.
+    $articles->getConnection()->transactional(function () use ($articles, $entities) {
+        foreach ($entities as $entity) {
+            $articles->save($entity, ['atomic' => false]);
+        }
+    });
+
+
+.. _changing-accessible-fields:
