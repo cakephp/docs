@@ -806,3 +806,424 @@ falhar. Você pode desativar regras e/ou transações usando o argumento ``$opti
 
     // Num método de controller ou model
     $articles->save($article, ['checkRules' => false, 'atomic' => false]);
+
+Salvando Associações
+-------------------
+
+Quando você está salvando uma entidade, você também pode escolher de salvar alguma ou
+todas as entidades associadas. Por padrão, todos as entidades de primeiro nível serão salvas.
+Por exemplo salvando um Artigo, você também atualizará todas as entidades modificadas (dirty)
+que são diretamente realicionadas a tabela de artigos.
+
+Você pode ajustar as associações que são salvas usando a opção ``associated``::
+
+    // Num controller.
+
+    // Apenas salva a associação de comentários
+    $articles->save($entity, ['associated' => ['Comments']]);
+
+Você pode definir para salvar associações distantes ou profundamente aninhadas
+usando a notação de pontos (dot notation)::
+
+    // Salva a company (empresa), employees (funcionários) e os addresses (endereços) relacionado
+    para cada um deles
+    $companies->save($entity, ['associated' => ['Employees.Addresses']]);
+
+Além disso, você pode combinar a notação de pontos (dot notation) para associações com
+o array de opções::
+
+    $companies->save($entity, [
+      'associated' => [
+        'Employees',
+        'Employees.Addresses'
+      ]
+    ]);
+
+As suas entidades devem ser estruturadas na mesma maneira como elas são quando carregadas
+do banco de dados. Consule a documentação do form helper para :ref:`como criar inputs
+para associações <associated-form-inputs>`.
+
+Se você está construindo ou modificando dados de associação pós a construção de suas entidades, 
+você terá que marcar a propriedade da associação como modificado com o método ``dirty()``::
+
+    $company->author->name = 'Master Chef';
+    $company->dirty('author', true);
+
+Salvando Associações BelongsTo
+-----------------------------
+
+Ao salvar associações belongsTo, o ORM espera uma única entidade aninhada nomeada com a
+singular, :ref:`underscored <inflector-methods-summary>` versão do nome da associação.
+Por exemplo::
+
+    // Num controller.
+    $data = [
+        'title' => 'First Post',
+        'user' => [
+            'id' => 1,
+            'username' => 'mark'
+        ]
+    ];
+    $articles = TableRegistry::get('Articles');
+    $article = $articles->newEntity($data, [
+        'associated' => ['Users']
+    ]);
+
+    $articles->save($article);
+
+Salvando Associações HasOne
+--------------------------
+
+Ao salvar associações hasOne, o ORM espera uma única entidade aninhada nomeada com a
+singular, :ref:`underscored <inflector-methods-summary>` versão do nome da associação.
+Por exemplo::
+
+    // Num controller.
+    $data = [
+        'id' => 1,
+        'username' => 'cakephp',
+        'profile' => [
+            'twitter' => '@cakephp'
+        ]
+    ];
+    $users = TableRegistry::get('Users');
+    $user = $users->newEntity($data, [
+        'associated' => ['Profiles']
+    ]);
+    $users->save($user);
+    
+Saving HasMany Associations
+---------------------------
+
+Ao salvar associações hasMany, o ORM espera um array de entidades nomeada com a
+plural, :ref:`underscored <inflector-methods-summary>` versão do nome da associação.
+Por exemplo::
+
+    // Num controller.
+    $data = [
+        'title' => 'First Post',
+        'comments' => [
+            ['body' => 'Best post ever'],
+            ['body' => 'I really like this.']
+        ]
+    ];
+    $articles = TableRegistry::get('Articles');
+    $article = $articles->newEntity($data, [
+        'associated' => ['Comments']
+    ]);
+    $articles->save($article);
+
+Ao salvar associações hasMany, registros associados serão atualizados ou inseridos.
+Para os caso em que o registro já tem registros associados no banco de dados, você
+tem que escolher entre duas estrategias de salvamento:
+
+append
+    Os registros associados são atualizados no banco de dados ou, se não econtrado nenhum
+    registro existente ele é inserido.
+replace
+    Todos os registros existentes que não estão presentes nos registros fornecidos serão
+    removidos do banco deados. Apenas os registros fornecidos permanecerão (ou serão 
+    inseridos).
+
+Por padrão é utilizado a estratégia de salvamento ``append`.
+Consosule :ref:`has-many-associations` para mais detalhes sobre como definir ``saveStrategy``.
+
+Sempre que você adiciona novos registros a uma associação existente, você sempre deve marcar
+a propriedade de associação como 'dirty'. Isso permite que o ORM saiba que a propriedade de
+associação tem que ser persistida::
+
+    $article->comments[] = $comment;
+    $article->dirty('comments', true);
+
+Sem a chamada ao método ``dirty()`` os comentários atualizados não serão salvos.
+
+Salvando Associações BelongsToMany
+---------------------------------
+
+Ao salvar associações belongsToMany, o ORM espera um array de entidades nomeada com a
+plural, :ref:`underscored <inflector-methods-summary>` versão do nome da associação.
+Por exemplo::
+
+    // Num controller.
+    $data = [
+        'title' => 'First Post',
+        'tags' => [
+            ['tag' => 'CakePHP'],
+            ['tag' => 'Framework']
+        ]
+    ];
+    $articles = TableRegistry::get('Articles');
+    $article = $articles->newEntity($data, [
+        'associated' => ['Tags']
+    ]);
+    $articles->save($article);
+
+Ao converter dados de requisição em entidades, os métodos ``newEntity()`` e
+``newEntities()`` processarão ambos, arrays de propriedades, bem como uma lista de
+ids na chave ``_ids``. Utilizando a chave ``_ids`` facilita a criação de uma caixa
+de seleção ou checkox para associações pertence a muitos (belongs to many). Consulte
+a seção :ref:`converting-request-data` para mais informações.
+
+
+Ao salvar associações belongsToMany, você tem que escolher entre duas estrategias
+de salvamento:
+
+append
+    Apenas novos links serão criados entre cada lado dessa associação. Essa estratégia
+    não destruirá links existentes, mesmo se não estiver presente no array de
+    entidades a serem salvas.
+replace
+    Ao salvar, os links existentes serão removidos e novos links serão criados na tabela
+    de ligação. Se houver link existente no banco de dados para algumas das entidades
+    a serem salvas, esses links serão atualiados, e não excluídos para então serem salvos
+    novamente.
+    
+Consulte :ref:`belongs-to-many-associations` para detalhes de como definir ``saveStrategy``.
+
+Por padrão é utilizado a estratégia ``replace`. Sempre que você adiciona novos registros
+a uma associação existente, você sempre deve marcar a propriedade de associação como 'dirty'. 
+Isso permite que o ORM saiba que a propriedade de associação tem que ser persistida::
+
+    $article->tags[] = $tag;
+    $article->dirty('tags', true);
+
+Sem a chamada ao método ``dirty()`` as tags atualizados não serão salvos.
+
+Frequentemente você se encontrará querendo fazer uma associação entre duas entidades
+exitentes, por exemplo.  Um usuário que é autor de um artigo. Isso é feito usando o
+método ``link()``, como isso::
+
+    $article = $this->Articles->get($articleId);
+    $user = $this->Users->get($userId);
+
+    $this->Articles->Users->link($article, [$user]);
+
+Ao salvar associações belongsToMany, pode ser relevente de salvar algumas
+informações adicionais na tabela de ligação. No exemplo anterior de tags, poderia ser
+o ``vote_type`` da pessoa que votou nesse artigo. O ``vote_type`` pode ser ``upvote``
+ou ``downvote`` e ele é representado por uma string. A relação é entre Users e Articles.
+
+Salvando esa associaçao, e o ``vote_type`` é feito primeiramente adicionando alguns dados
+em ``_joinData`` e então salvando a associação com ``link()``, exemplo::
+
+    $article = $this->Articles->get($articleId);
+    $user = $this->Users->get($userId);
+
+    $user->_joinData = new Entity(['vote_type' => $voteType], ['markNew' => true]);
+    $this->Articles->Users->link($article, [$user]);
+
+Salvando Dados Adicionais na Tabela de Ligação
+----------------------------------------
+
+Em algumas situações a tabela ligando sua associação BelongsToMany, terá colunas
+adicionais nela. CakePHP torna simples salvar propriendade nessas colunas.
+Cada entidade em uma associação belongsToMany tem uma propriedade ``_joinData``
+que contém as colunas adicionais na tabela de ligação. Esses dados podem ser
+um array ou uma instância de Entity. Por exemplo se Students BelongsToMany
+Courses, nós poderíamos ter uma tabela de ligação que parece com::
+
+    id | student_id | course_id | days_attended | grade
+
+Ao salvar dados, você pode popular as colunas adicionais na tabela de ligação
+definindo dados na propriedade ``_joinData``::
+
+    $student->courses[0]->_joinData->grade = 80.12;
+    $student->courses[0]->_joinData->days_attended = 30;
+
+    $studentsTable->save($student);
+
+A propriedade ``_joinData`` pode ser uma entity, ou um array de dados, se você estiver
+salvando entidades construídas a partir de dados de requisição. Ao salvar os dados de
+tabela de ligação apartir de dados de requisição, seus dados POST devem parecer com::
+
+    $data = [
+        'first_name' => 'Sally',
+        'last_name' => 'Parker',
+        'courses' => [
+            [
+                'id' => 10,
+                '_joinData' => [
+                    'grade' => 80.12,
+                    'days_attended' => 30
+                ]
+            ],
+            // Other courses.
+        ]
+    ];
+    $student = $this->Students->newEntity($data, [
+        'associated' => ['Courses._joinData']
+    ]);
+
+Consulte a documentação :ref:`associated-form-inputs` para saber como criar inputs
+com ``FormHelper`` corretamente.
+
+
+.. _saving-complex-types:
+
+Salvando Tipos Complexos (Complex Types)
+--------------------
+
+As tabelas são capazes de armazenar dados reprentado em tipos básicos, como strings,
+inteiros, flutuante, booleanos, etc. Mas também pode ser estendido para aceitar
+tipos mais complexos, como arrays ou objects e serializar esses dados em tipos mais
+simples que podem ser salvos em banco de dados.
+
+Essa funcionalidade é alcaçada usando o sistema de tipos personalizados (custom types system).
+Consulte a seção :ref:`adding-custom-database-types` para descobrir como criar tipo de coluna
+personalizada (custom column Types)::
+
+    // No config/bootstrap.php
+    use Cake\Database\Type;
+    Type::map('json', 'Cake\Database\Type\JsonType');
+
+    // No src/Model/Table/UsersTable.php
+    use Cake\Database\Schema\TableSchema;
+
+    class UsersTable extends Table
+    {
+
+        protected function _initializeSchema(TableSchema $schema)
+        {
+            $schema->columnType('preferences', 'json');
+            return $schema;
+        }
+
+    }
+
+O código acima mapeia a coluna ``preferences``  para o tipo personalizado (custom type)
+``json``. Isso significa que, ao obter dados dessa coluna, ele será desserializado 
+de uma string JSON no banco de dados e colocado em uma entidade como um array.
+
+Da mesma forma, quando salvo, o array será transformado novamente em sua 
+representação de JSON::
+
+    $user = new User([
+        'preferences' => [
+            'sports' => ['football', 'baseball'],
+            'books' => ['Mastering PHP', 'Hamlet']
+        ]
+    ]);
+    $usersTable->save($user);
+
+Ao usar tipos complexos, é importante validar que os dados que você está
+recebendo do usuário final são do tipo correto. A falha ao gerir corretamente
+dados complexos, pode resultar em usuário mal-intencionados serem capazes de
+armazenar dados que eles normalmente não seriam capaz.
+
+Strict Saving
+=============
+
+.. php:method:: saveOrFail($entity, $options = [])
+
+Usar este método lançará uma
+:php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException` se:
+
+* as verificações das regras de validação falharam
+* a entidade contém erros
+* o save foi abortado por um callback.
+
+Usar isso pode ser útil quando você estiver realizando operações
+complexas no banco de dado sem monitoramento humano, por exemplo, dentro
+de uma tarefa de Shell.
+
+.. note::
+
+    Se você usar esse método em um controlleer, certifique-se de tratar a
+    ``PersistenceFailedException`` que pode ser lançada.
+
+Se você quiser rastrear a entidade que falhou ao salvar, você pode usar o método
+:php:meth:`Cake\\ORM\Exception\\PersistenceFailedException::getEntity()`::
+
+        try {
+            $table->saveOrFail($entity);
+        } catch (\Cake\ORM\Exception\PersistenceFailedException $e) {
+            echo $e->getEntity();
+        }
+
+Como isso executa internamente uma chamada ao  :php:meth:`Cake\\ORM\\Table::save()`,
+todos eventos de save correspondentes serão disparados.
+
+.. versionadded:: 3.4.1
+
+Salvando Várias Entidades
+========================
+
+.. php:method:: saveMany($entities, $options = [])
+
+Usando esse método você pode salvar várias entidades atomicamente. ``$entities`` 
+podem ser um array de entidades criadas usando ``newEntities()`` / ``patchEntities()``.
+``$options`` pode ter as mesmas opções aceitas por ``save()``::
+
+    $data = [
+        [
+            'title' => 'First post',
+            'published' => 1
+        ],
+        [
+            'title' => 'Second post',
+            'published' => 1
+        ],
+    ];
+    $articles = TableRegistry::get('Articles');
+    $entities = $articles->newEntities($data);
+    $result = $articles->saveMany($entities);
+
+O resultado será as entidades atualizadas em caso de sucesso ou ``false`` 
+em caso de falha.
+
+.. versionadded:: 3.2.8
+
+Atualização em Massa
+============
+
+.. php:method:: updateAll($fields, $conditions)
+
+Pode haver momentos em que atualizar linhas individualmente não é eficiente ou
+necesária. Nesses casos, é mais eficiente usar uma atualização em massa para 
+modificar várias linhas de uma vez só::
+
+    // Publique todos artigos não publicados
+    function publishAllUnpublished()
+    {
+        $this->updateAll(
+            ['published' => true], // fields
+            ['published' => false]); // conditions
+    }
+
+Se você precisa de atualização em massa e usar expressões SQL, você precisará
+usar um objeto de expressão como ``updateAll()`` usa prepared statements
+por baixo dos panos::
+
+    use Cake\Database\Expression\QueryExpression;
+
+    ...
+
+    function incrementCounters()
+    {
+        $expression = new QueryExpression('view_count = view_count + 1');
+        $this->updateAll([$expression], ['published' => true]);
+    }
+
+Uma atualização em massa será considera bem-sucedida se uma ou mais linhas
+forem atualizadas.
+
+.. warning::
+
+    updateAll *não* irá disparar os eventos beforeSave/afterSave. Se você
+    precisa deles, primeiro carregue uma coleção de registros e então atualize
+    eles.
+    
+``updateAll()`` é apenas por conveniência. Você também pode usar essa interface
+mais flexível::
+
+    // Publique todos artigos não publicados.
+    function publishAllUnpublished()
+    {
+        $this->query()
+            ->update()
+            ->set(['published' => true])
+            ->where(['published' => false])
+            ->execute();
+    }
+
+Consulte também: :ref:`query-builder-updating-data`.
