@@ -20,7 +20,7 @@ Inserindo Dados
 --------------
 
 A maneira mais fácil de inserir dados no banco de dados é criando uma nova entidade
-e passando ela pro método ``save()`` na class ``Table`` class::
+e passando ela pro método ``save()`` na classe ``Table``::
 
     use Cake\ORM\TableRegistry;
 
