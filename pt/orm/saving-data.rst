@@ -16,7 +16,7 @@ Aplicações geralmente terá algumas maneiras de como os dados são salvos. A
 primeira é, obviamente, atravéz de formulários web e a outra é por geração direta
 ou alterando dados no código para enviar ao banco de dados.
 
-Inserindo dados
+Inserindo Dados
 --------------
 
 A maneira mais fácil de inserir dados no banco de dados é criando uma nova entidade
@@ -34,7 +34,7 @@ e passando ela pro método ``save()`` na class ``Table`` class::
         // The $article entity contains the id now
         $id = $article->id;
     }
-Atualizando dados
+Atualizando Dados
 -------------
 
 Atualizar seus dados é igualmente fácil, e o método ``save()`` também é usado para
@@ -52,7 +52,7 @@ CakePHP saberá quando deve realizar uma inserção ou atualização com base no
 de retorno do método ``isNew()``. Entidades que foram obtidas com ``get()`` ou
 ``find()`` sempre retornará ``false`` quando ``isNew()`` é chamado nelas.
 
-Salvando com associações
+Salvando com Associações
 ------------------------
 
 Por padrão o método ``save()`` também salvará associações de um nível::
@@ -100,7 +100,7 @@ na associação::
 
     $articlesTable->Tags->link($article, [$tag1, $tag2]);
  
-Salvando dados da tabela de ligação
+Salvando Dados da Tabela de Ligação
 -----------------------------
 Salvar dados na tabela de ligação é realizado usando a propriedade especial
 ``_joinData``. Esta propriedade deve ser um instância de ``Entity`` da classe
@@ -139,7 +139,7 @@ Você também pode criar / atualizar informações na tabela de ligação utiliz
     ];
     $articlesTable->newEntity($data, ['associated' => ['Tags']]);
 
-Remover associação Muitos para Muitos (N para N) registros
+Remover Associação Muitos para Muitos (N para N) Registros
 ---------------------------
 
 A remoção de associação Muitos para Muitos registros é realizada através do método
@@ -160,7 +160,7 @@ formulário em entidades que podem ser validadas e salva.
 
 .. _converting-request-data:
 
-Convertendo dados de requisição em entidades
+Convertendo Dados de Requisição em Entidades
 =====================================
 
 Antes de editar e salvar os dados de volta no seu banco de dados, você precisará
@@ -263,7 +263,7 @@ Você sempre pode contar de obter uma entidade de volta com ``newEntity()``. Se 
 falhar, sua entidade conterá erros, e quaisquer campos inválidos não serão preenchidos 
 na entidade criada.
 
-Convertendo dados de associação BelongsToMany
+Convertendo Dados de Associação BelongsToMany
 -----------------------------
 
 Se você está salvando associações belongsToMany, você pode tanto usar uma lista de entidades
@@ -317,7 +317,7 @@ belongsToMany para apenas usar a chave ``_ids`` e ignorar todos os outros dados.
 .. versionadded:: 3.1.0
     A opção ``onlyIds`` foi adicionada na versão 3.1.0
 
-Convertendo dados de associação HasMany
+Convertendo Dados de Associação HasMany
 -----------------------
 
 Se você deseja atualizar as associações hasMany existentes e atualizar suas
@@ -353,7 +353,7 @@ para apenas usar a chave ``_ids`` e ignorar todos os outros dados.
 .. versionadded:: 3.1.0
      A opção ``onlyIds`` foi adicionada na versão 3.1.0
      
-Conventendo vários registros
+Conventendo Vários Registros
 ---------------------------
 
 Ao criar formulários que cria/atualiza vários registros ao mesmo tempo, você pode usar
@@ -402,7 +402,7 @@ pode usar ``transactional()``::
 
 .. _changing-accessible-fields:
 
-Alterando campos acessíveis
+Alterando Campos Acessíveis
 --------------------------
 
 Também é possível permitir ``newEntity()`` escreva em campos não acessiveis.
@@ -433,7 +433,7 @@ entidade envolvida.
     ou todos os dados passados, verifique se as colunas que deseja definir estão
     listadas na propriedade ``$_accessible`` da sua entidade. Consulte :ref:`entities-mass-assignment`.
     
-Mesclando dados de requisição em entidades
+Mesclando Dados de Requisição em Entidades
 ----------------------------------
 
 Para atualizar as entidades, você pode escolher de aplicar dados de requisição diretamente
