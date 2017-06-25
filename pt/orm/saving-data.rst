@@ -205,7 +205,7 @@ deseja pular a validação de dados, informe a opção ``'validate' => false``::
     $entity = $articles->newEntity($data, ['validate' => false]);
 
 Ao criar formulários que salvam associações aninhadas, você precisa definir
-quais associaçes devem ser convertidas:: 
+quais associações devem ser convertidas:: 
 
     // No controller
     $articles = TableRegistry::get('Articles');
@@ -506,7 +506,7 @@ uma nova entidade do tipo user::
     $entity = $articles->patchEntity(new Article, $data);
     echo $entity->user->username; // Echoes 'mark'
 
-O mesmo pode ser dito sobre associaçes hasMany e belongsToMany, com uma
+O mesmo pode ser dito sobre associações hasMany e belongsToMany, com uma
 advertência importante:
 
 .. note::
@@ -590,7 +590,7 @@ Como você pode ver, isso também ajuda ao criar soluçes onde uma associação 
 ser implementada como um único conjunto.
 
 Você também pode popular várias entidades ao mesmo tempo. As considerações feitas para 
-popular (patch) associaçes hasMany e belongsToMany se aplicam para popular várias entidades:
+popular (patch) associações hasMany e belongsToMany se aplicam para popular várias entidades:
 As comparação são feitas pelo valor do campo da chave primária e as correspondências que
 faltam no array das entidades originais serão removidas e não estarão presentes no resultado::
 
