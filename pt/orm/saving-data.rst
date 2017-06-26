@@ -979,7 +979,7 @@ replace
     
 Consulte :ref:`belongs-to-many-associations` para detalhes de como definir ``saveStrategy``.
 
-Por padrão é utilizado a estratégia ``replace`. Sempre que você adiciona novos registros
+Por padrão é utilizado a estratégia ``replace``. Sempre que você adiciona novos registros
 a uma associação existente, você sempre deve marcar a propriedade de associação como 'dirty'. 
 Isso permite que o ORM saiba que a propriedade de associação tem que ser persistida::
 
