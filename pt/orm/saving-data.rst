@@ -635,7 +635,7 @@ de requisição antes das entidades serem criadas::
         }
     }
 
-O parâmetro ``$data` é uma instância de ``ArrayObject``, então você não precisa
+O parâmetro ``$data`` é uma instância de ``ArrayObject``, então você não precisa
 retornar ele para alterar os dados usado para criar entidades.
 
 O propósito principal do ``beforeMarshal`` é auxiliar os usuários a passar o processo
