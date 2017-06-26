@@ -84,8 +84,10 @@ Celui-ci va POSTer les données de formulaire à l'action ``add()`` de
 créer un formulaire d'édition. Le FormHelper utilise l'objet ``Entity`` pour
 détecter automatiquement s'il faut créer un formulaire d'ajout (add) ou un
 d'édition (edit). Si l'entity fournie n'est pas 'nouvelle', le form va être créé
-comme un formulaire d'édition. Par exemple, si nous naviguons vers
-**http://example.org/articles/edit/5**, nous pourrions faire ce qui suit::
+comme un formulaire d'édition.
+
+Par exemple, si nous naviguons vers **http://example.org/articles/edit/5**,
+nous pourrions faire ce qui suit::
 
     // src/Controller/ArticlesController.php:
     public function edit($id = null)
@@ -114,9 +116,58 @@ Affichera:
     Puisque c'est un formulaire d'édition, un champ input caché est généré
     pour surcharger la méthode HTTP par défaut.
 
+Options for Form Creation
+-------------------------
+
 Le tableau ``$options`` est là où la configuration du formulaire se passe. Ce
 tableau spécial peut contenir un certain nombre de paires de clé-valeur
-différentes qui affectent la façon dont la balise form est générée.
+différentes qui affectent la façon dont la balise form est générée. Voici les
+valeurs autorisés :
+
+* ``'type'`` - Vous permet de choisir le type de formulaire à créer. Si vous ne
+  fournissez pas de type, il sera automatiquement détecté en fonction du 'context'
+  du formulaire. Cette option peut prendre une des valeurs suivantes :
+
+  * ``'get'`` - Définira la ``method`` du formulaire à GET.
+  * ``'file'`` - Définira la ``method`` du formulaire à POST et le ``'enctype'``
+    à "multipart/form-data".
+  * ``'post'`` - Définira la ``method`` à POST.
+  * ``'put', 'delete', 'patch'`` - Définira le verbe HTTP à, respectivement, PUT,
+    DELETE ou PATCH quand le formulaire sera soumis.
+
+* ``'method'`` - Vous permet de définir explicitement la ``method`` du formulaire.
+  Les valeurs autorisés sont les même que pour le paramètre ci-dessus.
+
+* ``'url'`` - Permet de spécifier l'URL à laquelle le formulaire postera les données.
+  Peut être une chaîne ou un tableau de paramètre d'URL.
+
+* ``'encoding'`` - Permet de définir l'attribut ``accept-charset`` du formulaire.
+  Par défaut, la valeur de ``Configure::read('App.encoding')`` sera utilisée.
+
+* ``'enctype'`` - Vous permet de définir l'encodage du formulaire de manière
+  explicite.
+
+* ``'templates'`` - Les templates pour les éléments à utiliser pour ce formulaire.
+  Tous les templates fournis écraseront les templates déjà chargés. Ce paramètre
+  peut soit être un nom de fichier (sans extension) du dossier ``/config`` ou un
+  tableau de templates.
+
+* ``'context'`` - Options supplémentaires qui seront fournies à la classe de
+  'context' liée au formulaire. (Par exemple, le 'context' ``EntityContext``
+  accepte une option ``table`` qui permet de définir la classe Table sur
+  laquelle le formulaire devra se baser.
+
+* ``'idPrefix'`` - Préfixe à utiliser pour les attributs ``id`` des éléments du
+  formulaire.
+
+* ``'templateVars'`` - Vous permet de définir des variables de template pour le
+  template ``formStart``.
+
+.. tip::
+
+    Vous pouvez, en plus des options définies ci-dessus, définir dans l'argument
+    ``$options``, tous les attributs HTML que vous pourriez vouloir passer à
+    l'élément ``form`` (des classes, des attributs ``data``, etc.).
 
 .. _form-values-from-query-string:
 
@@ -175,10 +226,10 @@ Affichera:
 
      <form method="get" action="/articles/edit/5">
 
-En spécifiant 'file' cela changera la méthode de soumission à 'post', et
-ajoutera un enctype "multipart/form-data" dans le tag du formulaire.
-Vous devez l'utiliser si vous avez des demandes de fichiers dans votre
-formulaire. L'absence de cet attribut enctype empêchera le fonctionnement de
+En spécifiant ``file`` à l'option ``type``, cela changera la méthode de
+soumission à 'post', et ajoutera un ``enctype`` "multipart/form-data" dans le tag
+du formulaire. Vous devez l'utiliser si vous avez des demandes de fichiers dans
+votre formulaire. L'absence de cet attribut ``enctype`` empêchera le fonctionnement de
 l'envoi de fichiers::
 
     echo $this->Form->create($article, ['type' => 'file']);
@@ -189,19 +240,19 @@ Affichera:
 
     <form enctype="multipart/form-data" method="post" action="/articles/add">
 
-Quand vous utilisez 'put', 'patch' ou 'delete', votre formulaire aura un
-fonctionnement équivalent à un formulaire de type 'post', mais quand il sera
-envoyé, la méthode de requête HTTP sera respectivement réécrite avec 'PUT',
-PATCH' ou 'DELETE'. Cela permettra à CakePHP de créer son propre support REST
-dans les navigateurs web.
+Quand vous utilisez ``put``, ``patch`` ou ``delete`` dans l'option ``type``,
+votre formulaire aura un fonctionnement équivalent à un formulaire de type
+'post', mais quand il sera envoyé, la méthode de requête HTTP sera respectivement
+réécrite avec 'PUT', 'PATCH' ou 'DELETE'. Cela permet à CakePHP d'émuler un support
+REST dans les navigateurs web.
 
 Définir l'URL pour le Formulaire
 --------------------------------
 
 Utiliser l'option ``url`` vous permet de diriger le formulaire vers une
 action spécifique dans votre controller courant ou dans toute votre application.
-Par exemple, si vous voulez diriger le formulaire vers une action login() du
-controller courant, vous pouvez fournir le tableau $options comme ce qui suit::
+Par exemple, si vous voulez diriger le formulaire vers une action ``login()`` du
+controller courant, vous pouvez fournir le tableau ``$options`` comme ce qui suit::
 
     echo $this->Form->create($article, ['url' => ['action' => 'login']]);
 
@@ -303,13 +354,38 @@ Création d'éléments de Formulaire
 
 .. php:method:: control(string $fieldName, array $options = [])
 
+* ``$fieldName`` - Nom du champ (attribut ``name``) de l'élément dans le
+  formulaire (exemple : ``'Modelname.fieldname'``).
+* ``$options`` - Un tableau d'option qui peut inclure à la fois des :ref:`control-specific-options`
+  et des options d'autres méthodes (que la méthode ``control()`` utilise en interne
+  pour générer les différents éléments HTML) ainsi que attribut HTML valide.
+
 La méthode ``control()`` vous laisse générer des inputs de formulaire. Ces inputs
 incluent une div enveloppante, un label, un widget d'input, et une erreur de
 validation si besoin. En utilisant les metadonnées dans le contexte du
 formulaire, cette méthode va choisir un type d'input approprié pour chaque
 champ. En interne, ``control()`` utilise les autres méthodes de FormHelper.
 
-Le type d'input créé dépend de la colonne datatype:
+.. tip::
+
+    Veuillez notez que, même si les éléments générés par la méthode ``control()``
+    sont appelés des "inputs" sur cette page, techniquement parlant, la méthode
+    ``control()`` peut générer n'importe quel type de balise ``input`` ainsi
+    que tous les autres types d'éléments HTML de formulaire (``select``,
+    ``button``, ``textarea``)
+
+Par défaut, la méthode ``control()`` utilisera les templates de widget suivant::
+
+    'inputContainer' => '<div class="input {{type}}{{required}}">{{content}}</div>'
+    'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}/>'
+
+En cas d'erreurs de validation, elle utilisera également::
+
+    'inputContainerError' => '<div class="input {{type}}{{required}} error">{{content}}{{error}}</div>'
+
+Le type d'élément créé, dans le cas où aucune autre option n'est fournie pour
+générer le type d'élément est induit par l'introspection du Model et dépendra
+du datatype de la colonne en question:
 
 Column Type
     Champ de formulaire résultant
@@ -345,12 +421,21 @@ vous avez besoin::
 
     echo $this->Form->control('published', ['type' => 'checkbox']);
 
+.. tip::
+
+    Veuillez notez que, par défaut, générer un élément via la méthode ``control()``
+    générera systématiquement un ``div`` autour de l'élément généré.
+    Cependant, générer le même élément mais avec la méthode spécifique du ``FormHelper``
+    (par exemple ``$this->Form->checkbox('published');``) ne générera pas, dans la
+    majorité des cas, un ``div`` autour de l'élément. En fonction de votre cas d'usage,
+    utilisez l'une ou l'autre méthode.
+
 .. _html5-required:
 
-Un nom de classe ``required`` sera ajouté à la div enveloppante si les règles de
+Un nom de classe ``required`` sera ajouté à la ``div`` enveloppante si les règles de
 validation pour le champ du model indiquent qu'il est requis et ne peut pas être
-vide. Vous pouvez désactiver les require automatiques en utilisant l'option
-required::
+vide. Vous pouvez désactiver les ``required`` automatiques en utilisant l'option
+``required``::
 
     echo $this->Form->control('title', ['required' => false]);
 
@@ -362,18 +447,19 @@ bouton input que vous générez en utilisant
 :php:meth:`~Cake\\View\\Helper\\FormHelper::create()`.
 
 Par exemple, supposons que votre model User intègre les champs pour un
-username (varchar), password (varchar), approved (datetime) and
-quote (text). Vous pouvez utiliser la méthode control() du FormHelper pour
+*username* (varchar), *password* (varchar), *approved* (datetime) and
+*quote* (text). Vous pouvez utiliser la méthode ``control()`` du FormHelper pour
 créer les bons inputs pour tous ces champs de formulaire::
 
     echo $this->Form->create($user);
-    // Text
+    // Va générer un input type="text"
     echo $this->Form->control('username');
-    // Password
+    // Va générer un input type="password"
     echo $this->Form->control('password');
-    // Jour, mois, année, heure, minute, méridien
+    // En partant du principe que 'approved' est un "datetime" ou un "timestamp"
+    // va générer des champs Jour, mois, année, heure, minute
     echo $this->Form->control('approved');
-    // Textarea
+    // Va générer un textarea
     echo $this->Form->control('quote');
 
     echo $this->Form->button('Ajouter');
@@ -387,13 +473,13 @@ Un exemple plus complet montrant quelques options pour le champ de date::
         'maxYear' => date('Y') - 18,
     ]);
 
-Outre les options spécifiques pour ``control()`` vu ci-dessus, vous pouvez
-spécifier n'importe quelle option pour le type d'input et n'importe quel
-attribut HTML (par exemple ``onfocus``).
+Outre les :ref:`control-specific-options` pour ``control()`` vu ci-dessus,
+vous pouvez spécifier n'importe quelle option des méthodes spécifiques pour le
+type d'input et n'importe quel attribut HTML (par exemple ``onfocus``).
 
-Si vous voulez un champ de sélection utilisant une relation belongsTo
-ou hasOne, vous pouvez ajouter ceci dans votre controller Users
-(en supposant que l'User belongsTo Group)::
+Si vous voulez un ``select`` utilisant une relation *belongsTo* ou *hasOne*,
+vous pouvez ajouter ceci dans votre controller Users (en supposant que
+l'User *belongsTo* Group)::
 
     $this->set('groups', $this->Users->Groups->find('list'));
 
