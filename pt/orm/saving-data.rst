@@ -405,7 +405,7 @@ pode usar ``transactional()``::
 Alterando Campos Acessíveis
 --------------------------
 
-Também é possível permitir ``newEntity()`` escreva em campos não acessiveis.
+Também é possível permitir ``newEntity()`` escrever em campos não acessiveis.
 Por exemplo, ``id`` geralmente está ausente da propriedade ``_accessible``.
 Nesse caso , você pode usar a opção `accessibleFields``. Isso pode ser útil para
 manter ids de entidades associadas::
