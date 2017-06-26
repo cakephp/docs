@@ -842,7 +842,7 @@ As suas entidades devem ser estruturadas na mesma maneira como elas são quando 
 do banco de dados. Consulte a documentação do form helper para saber :ref:`como criar inputs
 para associações <associated-form-inputs>`.
 
-Se você está construindo ou modificando dados de associação pós a construção de suas entidades, 
+Se você está construindo ou modificando dados de associação após a construção de suas entidades, 
 você terá que marcar a propriedade da associação como modificado com o método ``dirty()``::
 
     $company->author->name = 'Master Chef';
