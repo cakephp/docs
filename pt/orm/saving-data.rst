@@ -769,7 +769,6 @@ Se você tem uma nova entidade, o seguinte SQL seria gerado::
     INSERT INTO articles (title) VALUES ('My new title');
 
 Quando uma entidade é salva algumas coisas acontecem:
-When an entity is saved a few things happen:
 
 1. A verificação de regras será iniciada se não estiver desativada.
 2. A verificação de regras irá disparar o evento ``Model.beforeRules``. Se esse evento for
