@@ -644,7 +644,7 @@ precisam ser reestruturados para que ele possa ser colocado nos campos corretos.
 
 O evento ``Model.beforeMarshal`` é disparado apenas no início do processo de 
 validação, uma das razões é que o ``beforeMarshal`` é permitido de alterar as
-regras de validação e opões de salvamento, como o campo whitelist.
+regras de validação e opções de salvamento, como o campo whitelist.
 Validação é disparada logo após este evento ser finalizado. Um exemplo comum de alteração
 de dados antes de ser validado, é retirar espaço no ínicio e final (trimming) de todos os
 campos antes de salvar::
