@@ -974,7 +974,7 @@ append
 replace
     Ao salvar, os links existentes serão removidos e novos links serão criados na tabela
     de ligação. Se houver link existente no banco de dados para algumas das entidades
-    a serem salvas, esses links serão atualiados, e não excluídos para então serem salvos
+    a serem salvas, esses links serão atualizados, e não excluídos para então serem salvos
     novamente.
     
 Consulte :ref:`belongs-to-many-associations` para detalhes de como definir ``saveStrategy``.
