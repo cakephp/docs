@@ -839,7 +839,7 @@ o array de opções::
     ]);
 
 As suas entidades devem ser estruturadas na mesma maneira como elas são quando carregadas
-do banco de dados. Consule a documentação do form helper para :ref:`como criar inputs
+do banco de dados. Consulte a documentação do form helper para saber :ref:`como criar inputs
 para associações <associated-form-inputs>`.
 
 Se você está construindo ou modificando dados de associação pós a construção de suas entidades, 
