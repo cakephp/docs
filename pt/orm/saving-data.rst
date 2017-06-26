@@ -10,14 +10,14 @@ Depois que você :doc:`carregou seus dados</orm/retrieving-data-and-resultsets>`
 provavelmente vai querer atualizar e salvar as alterações.
 
 Visão Geral Sobre Salvando Dados
-=========================
+================================
 
 Aplicações geralmente terá algumas maneiras de como os dados são salvos. A
 primeira é, obviamente, atravéz de formulários web e a outra é por geração direta
 ou alterando dados no código para enviar ao banco de dados.
 
 Inserindo Dados
---------------
+---------------
 
 A maneira mais fácil de inserir dados no banco de dados é criando uma nova entidade
 e passando ela pro método ``save()`` na classe ``Table``::
@@ -34,8 +34,9 @@ e passando ela pro método ``save()`` na classe ``Table``::
         // The $article entity contains the id now
         $id = $article->id;
     }
+
 Atualizando Dados
--------------
+-----------------
 
 Atualizar seus dados é igualmente fácil, e o método ``save()`` também é usado para
 esse propósito::
@@ -88,7 +89,7 @@ O método ``save()`` também é capaz de criar novos registros para associaçõe
     $articlesTable->save($article);
 
 Associe Muitos para Muitos (N para N) registros
-------------------------------
+-----------------------------------------------
 
 O exemplo anterior demonstra como associar algumas tags a um artigo.
 Outra maneira de realizar a mesma coisa é usando o método ``link()``
@@ -101,7 +102,8 @@ na associação::
     $articlesTable->Tags->link($article, [$tag1, $tag2]);
  
 Salvando Dados da Tabela de Ligação
------------------------------
+-----------------------------------
+
 Salvar dados na tabela de ligação é realizado usando a propriedade especial
 ``_joinData``. Esta propriedade deve ser um instância de ``Entity`` da classe
 Table de ligação::
@@ -140,7 +142,7 @@ Você também pode criar / atualizar informações na tabela de ligação utiliz
     $articlesTable->newEntity($data, ['associated' => ['Tags']]);
 
 Remover Associação Muitos para Muitos (N para N) Registros
----------------------------
+----------------------------------------------------------
 
 A remoção de associação Muitos para Muitos registros é realizada através do método
 ``unlink()``::
@@ -161,7 +163,7 @@ formulário em entidades que podem ser validadas e salva.
 .. _converting-request-data:
 
 Convertendo Dados de Requisição em Entidades
-=====================================
+============================================
 
 Antes de editar e salvar os dados de volta no seu banco de dados, você precisará
 converter os dados da requisição, de array mantido na requisição em entidades
@@ -228,7 +230,8 @@ ser convertidos. Alternativamente, você pode usar a notação de ponto
     $entity = $articles->newEntity($this->request->getData(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
-Você  também pode desativar a conversão de possíveis associações aninhadas como::
+
+Você também pode desativar a conversão de possíveis associações aninhadas como::
 
     $entity = $articles->newEntity($data, ['associated' => []]);
     // ou...
@@ -264,7 +267,7 @@ falhar, sua entidade conterá erros, e quaisquer campos inválidos não serão p
 na entidade criada.
 
 Convertendo Dados de Associação BelongsToMany
------------------------------
+---------------------------------------------
 
 Se você está salvando associações belongsToMany, você pode tanto usar uma lista de entidades
 ou uma lista de ids. Ao usar uma lista de dados de entidade, seus dados de requisição
@@ -318,7 +321,7 @@ belongsToMany para apenas usar a chave ``_ids`` e ignorar todos os outros dados.
     A opção ``onlyIds`` foi adicionada na versão 3.1.0
 
 Convertendo Dados de Associação HasMany
------------------------
+---------------------------------------
 
 Se você deseja atualizar as associações hasMany existentes e atualizar suas
 propriedades, primeiro você deve garantir que sua entidade seja carregada com a
@@ -354,7 +357,7 @@ para apenas usar a chave ``_ids`` e ignorar todos os outros dados.
      A opção ``onlyIds`` foi adicionada na versão 3.1.0
      
 Conventendo Vários Registros
----------------------------
+----------------------------
 
 Ao criar formulários que cria/atualiza vários registros ao mesmo tempo, você pode usar
 o método ``newEntities()``::
@@ -403,7 +406,7 @@ pode usar ``transactional()``::
 .. _changing-accessible-fields:
 
 Alterando Campos Acessíveis
---------------------------
+---------------------------
 
 Também é possível permitir ``newEntity()`` escrever em campos não acessiveis.
 Por exemplo, ``id`` geralmente está ausente da propriedade ``_accessible``.
@@ -434,7 +437,7 @@ entidade envolvida.
     listadas na propriedade ``$_accessible`` da sua entidade. Consulte :ref:`entities-mass-assignment`.
     
 Mesclando Dados de Requisição em Entidades
-----------------------------------
+------------------------------------------
 
 Para atualizar as entidades, você pode escolher de aplicar dados de requisição diretamente
 em uma entidade existente. Isto tem a vantagem que apenas os campos que realmente mudaram 
@@ -449,7 +452,7 @@ Você pode mesclar um array de dados bruto em uma entidade existente usando o m�
     $articles->save($article);
     
 Validação e patchEntity
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 Semelhante ao ``newEntity()``, o método ``patchEntity`` validará os dados
 antes de ser copiado para entidade. O mecanismo é explicado na seção
@@ -470,7 +473,7 @@ uma das associações::
     ]);
 
 Patching HasMany and BelongsToMany
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------
 
 Como explicado na seção anterior, os dados de requisição deve seguir a 
 estrutura de sua entidade. O método `patchEntity()`` é igualmente capaz de
@@ -617,7 +620,7 @@ controlar as associações que serão mescladas em cada uma das entidades no arr
 .. _before-marshal:
 
 Modificando Dados de Requisição Antes de Contruir Entidades
------------------------------------------------
+-----------------------------------------------------------
 
 Se você precisa modificar dados de requisição antes de converter em entidades, você
 pode usar o evento ``Model.beforeMarshal``. Esse evento deixa você manipular o dados
@@ -673,14 +676,14 @@ assim porque é importante preservar a entrada original do usuário, pois ele po
 ser usado em outro lugar.
 
 Validando Dados Antes de Construir Entidades
-----------------------------------------
+--------------------------------------------
 
 O capítulo :doc:`/orm/validation` contém mais informações de como usar os 
 recursos de validação do CakePHP para garantir que os seus dados permaneçam
 corretos e consitentes.
 
-Evitando Ataques de Atribuição em Massa de Propriedade 
------------------------------------------
+Evitando Ataques de Atribuição em Massa de Propriedade
+------------------------------------------------------
 
 Ao criar ou mesclar entidades a partir de dados de requisição, você precisa ser
 cuidadoso com o que você permite seus usuários de alterar ou incluir nas entidades.
@@ -728,7 +731,7 @@ e ``patchEntities()``.
 .. _saving-entities:
 
 Salvando Entidades
-===============
+==================
 
 .. php:method:: save(Entity $entity, array $options = [])
 
@@ -807,7 +810,7 @@ falhar. Você pode desativar regras e/ou transações usando o argumento ``$opti
     $articles->save($article, ['checkRules' => false, 'atomic' => false]);
 
 Salvando Associações
--------------------
+--------------------
 
 Quando você está salvando uma entidade, você também pode escolher de salvar alguma ou
 todas as entidades associadas. Por padrão, todos as entidades de primeiro nível serão salvas.
@@ -849,7 +852,7 @@ você terá que marcar a propriedade da associação como modificado com o méto
     $company->dirty('author', true);
 
 Salvando Associações BelongsTo
------------------------------
+------------------------------
 
 Ao salvar associações belongsTo, o ORM espera uma única entidade aninhada nomeada com a
 singular, :ref:`underscored <inflector-methods-summary>` versão do nome da associação.
@@ -871,7 +874,7 @@ Por exemplo::
     $articles->save($article);
 
 Salvando Associações HasOne
---------------------------
+---------------------------
 
 Ao salvar associações hasOne, o ORM espera uma única entidade aninhada nomeada com a
 singular, :ref:`underscored <inflector-methods-summary>` versão do nome da associação.
@@ -891,8 +894,8 @@ Por exemplo::
     ]);
     $users->save($user);
     
-Saving HasMany Associations
----------------------------
+Salvando Associações HasMany
+----------------------------
 
 Ao salvar associações hasMany, o ORM espera um array de entidades nomeada com a
 plural, :ref:`underscored <inflector-methods-summary>` versão do nome da associação.
@@ -937,7 +940,7 @@ associação tem que ser persistida::
 Sem a chamada ao método ``dirty()`` os comentários atualizados não serão salvos.
 
 Salvando Associações BelongsToMany
----------------------------------
+----------------------------------
 
 Ao salvar associações belongsToMany, o ORM espera um array de entidades nomeada com a
 plural, :ref:`underscored <inflector-methods-summary>` versão do nome da associação.
@@ -1012,7 +1015,7 @@ em ``_joinData`` e então salvando a associação com ``link()``, exemplo::
     $this->Articles->Users->link($article, [$user]);
 
 Salvando Dados Adicionais na Tabela de Ligação
-----------------------------------------
+----------------------------------------------
 
 Em algumas situações a tabela ligando sua associação BelongsToMany, terá colunas
 adicionais nela. CakePHP torna simples salvar propriendade nessas colunas.
@@ -1060,7 +1063,7 @@ com ``FormHelper`` corretamente.
 .. _saving-complex-types:
 
 Salvando Tipos Complexos (Complex Types)
---------------------
+----------------------------------------
 
 As tabelas são capazes de armazenar dados representados em tipos básicos, como strings,
 inteiros, flutuante, booleanos, etc. Mas também pode ser estendido para aceitar
@@ -1145,7 +1148,7 @@ todos eventos de save correspondentes serão disparados.
 .. versionadded:: 3.4.1
 
 Salvando Várias Entidades
-========================
+=========================
 
 .. php:method:: saveMany($entities, $options = [])
 
@@ -1173,7 +1176,7 @@ em caso de falha.
 .. versionadded:: 3.2.8
 
 Atualização em Massa
-============
+====================
 
 .. php:method:: updateAll($fields, $conditions)
 
