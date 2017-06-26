@@ -986,10 +986,10 @@ Isso permite que o ORM saiba que a propriedade de associação tem que ser persi
     $article->tags[] = $tag;
     $article->dirty('tags', true);
 
-Sem a chamada ao método ``dirty()`` as tags atualizados não serão salvos.
+Sem a chamada ao método ``dirty()`` as tags atualizadas não serão salvas.
 
 Frequentemente você se encontrará querendo fazer uma associação entre duas entidades
-exitentes, por exemplo.  Um usuário que é autor de um artigo. Isso é feito usando o
+existentes, por exemplo.  Um usuário que é autor de um artigo. Isso é feito usando o
 método ``link()``, como isso::
 
     $article = $this->Articles->get($articleId);
@@ -1002,7 +1002,7 @@ informações adicionais na tabela de ligação. No exemplo anterior de tags, po
 o ``vote_type`` da pessoa que votou nesse artigo. O ``vote_type`` pode ser ``upvote``
 ou ``downvote`` e ele é representado por uma string. A relação é entre Users e Articles.
 
-Salvando esa associaçao, e o ``vote_type`` é feito primeiramente adicionando alguns dados
+Salvando essa associaçao, e o ``vote_type`` é feito primeiramente adicionando alguns dados
 em ``_joinData`` e então salvando a associação com ``link()``, exemplo::
 
     $article = $this->Articles->get($articleId);
@@ -1062,12 +1062,12 @@ com ``FormHelper`` corretamente.
 Salvando Tipos Complexos (Complex Types)
 --------------------
 
-As tabelas são capazes de armazenar dados reprentado em tipos básicos, como strings,
+As tabelas são capazes de armazenar dados representados em tipos básicos, como strings,
 inteiros, flutuante, booleanos, etc. Mas também pode ser estendido para aceitar
 tipos mais complexos, como arrays ou objects e serializar esses dados em tipos mais
 simples que podem ser salvos em banco de dados.
 
-Essa funcionalidade é alcaçada usando o sistema de tipos personalizados (custom types system).
+Essa funcionalidade é alcançada usando o sistema de tipos personalizados (custom types system).
 Consulte a seção :ref:`adding-custom-database-types` para descobrir como criar tipo de coluna
 personalizada (custom column Types)::
 
@@ -1127,7 +1127,7 @@ de uma tarefa de Shell.
 
 .. note::
 
-    Se você usar esse método em um controlleer, certifique-se de tratar a
+    Se você usar esse método em um controller, certifique-se de tratar a
     ``PersistenceFailedException`` que pode ser lançada.
 
 Se você quiser rastrear a entidade que falhou ao salvar, você pode usar o método
@@ -1178,7 +1178,7 @@ Atualização em Massa
 .. php:method:: updateAll($fields, $conditions)
 
 Pode haver momentos em que atualizar linhas individualmente não é eficiente ou
-necesária. Nesses casos, é mais eficiente usar uma atualização em massa para 
+necessária. Nesses casos, é mais eficiente usar uma atualização em massa para 
 modificar várias linhas de uma vez só::
 
     // Publique todos artigos não publicados
