@@ -374,19 +374,19 @@ Router
 * Опция ``ext`` заменена опцией ``_ext``.
 * Добавлены опции ``_scheme``, ``_port``, ``_host``, ``_base``, ``_full``, ``_ext``.
 * Строки URL больше не изменяются добавлением имен плагина/контроллера/префикса.
-* The default fallback route handling was removed.  If no routes
-  match a parameter set ``/`` will be returned.
+* Стандартная обработка отсутствующих маршрутов была упразднена.  Если нет
+  маршрутов подходящих под параметры - будет возвращен путь ``/``.
 * Route classes are responsible for *all* URL generation including
   query string parameters. This makes routes far more powerful and flexible.
 * Persistent parameters were removed. They were replaced with
   :php:meth:`Cake\\Routing\\Router::urlFilter()` which allows
   a more flexible way to mutate URLs being reverse routed.
 * Удален метод ``Router::parseExtensions()``.
-  Используйте вместо этого :php:meth:`Cake\\Routing\\Router::extensions()`. This method
-  **must** be called before routes are connected. It won't modify existing
-  routes.
+  Используйте вместо этого :php:meth:`Cake\\Routing\\Router::extensions()`. Этот метод
+  **должен** быть вызван перед подключением маршрутов. Он не затронет уже существующие
+  маршруты.
 * Удален метод ``Router::setExtensions()``.
-  Use :php:meth:`Cake\\Routing\\Router::extensions()` instead.
+  Используйте вместо этого :php:meth:`Cake\\Routing\\Router::extensions()`.
 * Удален метод ``Router::resourceMap()``.
 * Опция ``[метод]`` переименована в ``_метод``.
 * The ability to match arbitrary headers with ``[]`` style parameters has been
