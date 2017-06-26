@@ -377,7 +377,7 @@ Nessa situação, os dados de requisição para vários artigos devem parecer co
     ];
 
 Uma vez que você converteu os dados de requisição em entidades, você pode
-salvar com ``save()`` e remover com ``delete()`` elas::
+salvar com ``save()`` e remover com ``delete()``::
 
     // No controller.
     foreach ($entities as $entity) {
