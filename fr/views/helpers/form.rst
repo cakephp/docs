@@ -18,15 +18,21 @@ Création de Formulaire
 
 .. php:method:: create(mixed $context = null, array $options = [])
 
+* ``$context`` - Le contexte pour lequel le formulaire est créé. Cela peut être
+  une Entity de l'ORM, un retour (ResultSet) de l'ORM, un tableau de meta-données
+  ou ``false/null`` (dans le cas où vous créez un formulaire qui ne serait lié à
+  aucun Model).
+* ``$options`` - Un tableau d'options et / ou d'attributs HTML.
+
 La première méthode que vous aurez besoin d'utiliser pour tirer pleinement
 profit du FormHelper est ``create()``. Cette méthode affichera une balise
 d'ouverture de formulaire.
 
 Tous les paramètres sont optionnels. Si ``create()`` est appelée sans paramètre,
 CakePHP supposera que vous voulez créer un formulaire en rapport avec le
-controller courant, via l'URL actuelle. par défaut, la méthode de soumission par
+controller courant, via l'URL actuelle. Par défaut, la méthode de soumission par
 des formulaires est POST. Si vous appelez ``create()`` dans une vue pour
-UsersController::add(), vous verrez la sortie suivante dans la vue:
+``UsersController::add()``, vous verrez la sortie suivante dans la vue:
 
 .. code-block:: html
 
@@ -37,16 +43,20 @@ plusieurs contextes de formulaires intégrés et vous pouvez ajouter les vôtres
 ce que nous allons voir dans la prochaine section. Ceux intégrés correspondent
 aux valeurs suivantes de ``$context``:
 
-* Une instance ``Entity`` ou un iterateur qui mappe vers ``EntityContext``, ce
-  contexte permet au FormHelper de fonctionner avec les résultats à partir de
-  ceux intégrés dans l'ORM.
-* Un tableau contenant la clé ``schema``, qui mappe vers ``ArrayContext`` ce
-  qui vous permet de créer des structures simples de données pour construire
+* Une instance ``Entity`` ou un iterateur qui mappe vers
+  `EntityContext <https://api.cakephp.org/3.x/class-Cake.View.Form.EntityContext.html>`_;
+  ce contexte permet au FormHelper de fonctionner avec les retours de l'ORM.
+
+* Un tableau contenant la clé ``schema``, qui mappe vers
+  `ArrayContext <https://api.cakephp.org/3.x/class-Cake.View.Form.ArrayContext.html>`_
+  ce qui vous permet de créer des structures simples de données pour construire
   des formulaires.
-* ``null`` et ``false`` mappe vers ``NullContext``, cette classe de contexte
-  satisfait simplement l'interface requise par FormHelper. Ce contexte est utile
-  si vous voulez construire un formulaire court qui ne nécessite pas la
-  persistance de l'ORM.
+
+* ``null`` et ``false`` mappe vers
+  `NullContext <https://api.cakephp.org/3.x/class-Cake.View.Form.NullContext.html>`_;
+  cette classe de contexte satisfait simplement l'interface requise par FormHelper.
+  Ce contexte est utile si vous voulez construire un formulaire court qui ne nécessite
+  pas de persistance via l'ORM.
 
 Toutes les classes de contexte ont aussi un accès aux données requêtées,
 facilitant la construction des formulaires.
