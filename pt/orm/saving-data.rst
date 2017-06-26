@@ -573,7 +573,7 @@ refletindo o novo estado descrito nos dados de requisição.
 Algumas vantagens adicionais desta abordagem é que isto reduz o número de
 operações a serem executadas ao persistir a entidade novamente.
 
-Por favor, observer que isso não significa que o comentário com id 2 foi removido do
+Por favor, observe que isso não significa que o comentário com id 2 foi removido do
 bando de dados, se você deseja remover os comentários para este artigo que não estão
 presentes na entidade, você pode coletar as chaves primárias e executar uma exclusão
 de lote para esses que não estão na lista::
