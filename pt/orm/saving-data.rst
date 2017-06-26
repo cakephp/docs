@@ -586,7 +586,7 @@ de lote para esses que não estão na lista::
         'id NOT IN' => $present
     ]);
 
-Como você pode ver, isso também ajuda ao criar soluçes onde uma associação precisa de
+Como você pode ver, isso também ajuda ao criar soluções onde uma associação precisa de
 ser implementada como um único conjunto.
 
 Você também pode popular várias entidades ao mesmo tempo. As considerações feitas para 
