@@ -407,7 +407,7 @@ Alterando Campos Acessíveis
 
 Também é possível permitir ``newEntity()`` escrever em campos não acessiveis.
 Por exemplo, ``id`` geralmente está ausente da propriedade ``_accessible``.
-Nesse caso , você pode usar a opção `accessibleFields``. Isso pode ser útil para
+Nesse caso , você pode usar a opção ``accessibleFields``. Isso pode ser útil para
 manter ids de entidades associadas::
 
     // No controller
