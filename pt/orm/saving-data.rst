@@ -1,4 +1,4 @@
-Salvando dados
+Salvando Dados
 ##############
 
 .. php:namespace:: Cake\ORM
@@ -9,7 +9,7 @@ Salvando dados
 Depois que você :doc:`carregou seus dados</orm/retrieving-data-and-resultsets>`
 provavelmente vai querer atualizar e salvar as alterações.
 
-Visão geral sobre Salvando Dados
+Visão Geral Sobre Salvando Dados
 =========================
 
 Aplicações geralmente terá algumas maneiras de como os dados são salvos. A
