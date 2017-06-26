@@ -921,7 +921,7 @@ append
     registro existente ele é inserido.
 replace
     Todos os registros existentes que não estão presentes nos registros fornecidos serão
-    removidos do banco deados. Apenas os registros fornecidos permanecerão (ou serão 
+    removidos do banco dados. Apenas os registros fornecidos permanecerão (ou serão 
     inseridos).
 
 Por padrão é utilizado a estratégia de salvamento ``append`.
