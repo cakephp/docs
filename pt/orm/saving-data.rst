@@ -924,7 +924,7 @@ replace
     removidos do banco dados. Apenas os registros fornecidos permanecerão (ou serão 
     inseridos).
 
-Por padrão é utilizado a estratégia de salvamento ``append`.
+Por padrão é utilizado a estratégia de salvamento ``append``.
 Consosule :ref:`has-many-associations` para mais detalhes sobre como definir ``saveStrategy``.
 
 Sempre que você adiciona novos registros a uma associação existente, você sempre deve marcar
