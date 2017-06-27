@@ -789,11 +789,11 @@ Quando uma entidade é salva algumas coisas acontecem:
 9. O evento ``Model.afterSave`` será disparado.
 10. O evento ``Model.afterSaveCommit`` será disparado.
 
-O seguinte diagrama ilustra o processo acima::
+O seguinte diagrama ilustra o processo acima:
 
 .. figure:: /_static/img/save-cycle.png
-:align: left
-:alt: Flow diagram showing the save process.
+   :align: left
+   :alt: Flow diagram showing the save process.
 
 Consule a seção :ref:`application-rules` para mais informação sobre como criar
 e usar regras.
