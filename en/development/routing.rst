@@ -1177,8 +1177,8 @@ Is equivalent to the following explicit calls::
 
     use Cake\Routing\Route\DashedRoute;
 
-    $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => DashedRoute:class]);
-    $routes->connect('/:controller/:action/*', [], ['routeClass' => DashedRoute:class]);
+    $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => DashedRoute::class]);
+    $routes->connect('/:controller/:action/*', [], ['routeClass' => DashedRoute::class]);
 
 .. note::
 
