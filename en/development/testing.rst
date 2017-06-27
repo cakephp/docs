@@ -914,11 +914,16 @@ methods to send a request:
 * ``put()`` Sends a PUT request.
 * ``delete()`` Sends a DELETE request.
 * ``patch()`` Sends a PATCH request.
+* ``options()`` Sends an OPTIONS request.
+* ``head()`` Sends an OPTIONS request.
 
 All of the methods except ``get()`` and ``delete()`` accept a second parameter
 that allows you to send a request body. After dispatching a request you can use
 the various assertions provided by ``IntegrationTestCase`` or PHPUnit to
 ensure your request had the correct side-effects.
+
+.. versionadded:: 3.5.0
+    ``options()`` and ``head()`` were added in 3.5.0.
 
 Setting up the Request
 ----------------------
@@ -1169,6 +1174,26 @@ and make sure our web service is returning the proper response::
 We use the ``JSON_PRETTY_PRINT`` option as CakePHP's built in JsonView will use
 that option when ``debug`` is enabled.
 
+Disabling Error Handling Middleware in Tests
+--------------------------------------------
+
+When debugging tests that are failing because your application is encountering
+errors it can be helpful to temporarily disable the error handling middleware to
+allow the underlying error to bubble up. You can use
+``disableErrorHandlerMiddleware()`` to do this::
+
+    public function testGetMissing()
+    {
+        $this->disableErrorHandlerMiddleware();
+        $this->get('/markers/not-there');
+        $this->assertResponseCode(404);
+    }
+
+In the above example, the test would fail and the underlying exception message
+and stack trace would be displayed instead of the rendered error page being
+checked.
+
+.. versionadded:: 3.5.0
 
 Assertion methods
 -----------------

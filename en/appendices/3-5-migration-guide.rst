@@ -211,6 +211,8 @@ TestSuite
 
 * ``IntegrationTestCase::head()`` was added.
 * ``IntegrationTestCase::options()`` was added.
+* ``IntegrationTestCase::disableErrorHandlerMiddleware()`` was added to make
+  debugging errors easier in integration tests.
 
 Validation
 ----------
