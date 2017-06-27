@@ -15,7 +15,7 @@ CakePHP の修正に取りかかる前に自分の環境を整えることをお
 * PHP |minphpversion| 以上
 * PHPUnit 5.7.0 以上
 
-ユーザ情報（自分の名前/ハンドル名とメールアドレス）をセットしてください。 ::
+ユーザー情報（自分の名前/ハンドル名とメールアドレス）をセットしてください。 ::
 
     git config --global user.name 'Bob Barker'
     git config --global user.email 'bob.barker@example.com'
@@ -28,15 +28,15 @@ CakePHP の修正に取りかかる前に自分の環境を整えることをお
 CakePHP のソースコードの clone を GitHub から取得してください。
 
 * `GitHub <http://github.com>`_ アカウントを持っていないなら、作成してください。
-* `CakePHP リポジトリ <http://github.com/cakephp/cakephp>`_ の **Fork**
+* `CakePHP リポジトリー <http://github.com/cakephp/cakephp>`_ の **Fork**
   ボタンをクリックして Fork してください。
 
 Fork できたら、Fork したものを自分のローカルマシンへと clone してください。 ::
 
     git clone git@github.com:YOURNAME/cakephp.git
 
-オリジナルの CakePHP リポジトリを remote リポジトリとして追加してください。
-これは後で CakePHP リポジトリから変更分を fetch するのに使うことになり、
+オリジナルの CakePHP リポジトリーを remote リポジトリーとして追加してください。
+これは後で CakePHP リポジトリーから変更分を fetch するのに使うことになり、
 こうすることで CakePHP を最新の状態にしておくのです。 ::
 
     cd cakephp

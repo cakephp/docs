@@ -394,7 +394,7 @@ to process all the entities as a single transaction you can use
 ``transactional()``::
 
     // In a controller.
-    $articles->connection()->transactional(function () use ($articles, $entities) {
+    $articles->getConnection()->transactional(function () use ($articles, $entities) {
         foreach ($entities as $entity) {
             $articles->save($entity, ['atomic' => false]);
         }
@@ -1112,11 +1112,14 @@ Strict Saving
 
 .. php:method:: saveOrFail($entity, $options = [])
 
-
 Using this method will throw an
-:php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException` if the application
-rules checks failed, the entity contains errors or the save was aborted by
-a callback.  Using this can be helpful when you performing complex database
+:php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException` if:
+
+* the application rules checks failed
+* the entity contains errors
+* the save was aborted by a callback.
+
+Using this can be helpful when you performing complex database
 operations without human monitoring, for example, inside a Shell task.
 
 .. note::

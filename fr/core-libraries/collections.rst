@@ -642,7 +642,7 @@ utiliser pour comparer deux valeurs différentes dans la collection::
 Afin de spécifier la direction dans laquelle la collection doit être triée, vous
 devez fournir soit ``SORT_ASC`` soit ``SORT_DESC`` en deuxième paramètre pour
 trier respectivement par ordre croissant ou décroissant. Par défaut, les
-collections sont triées par ordre croissant::
+collections sont triées par ordre décroissant::
 
     $collection = new Collection($people);
     $sorted = $collection->sortBy('age', SORT_ASC);
@@ -1118,7 +1118,7 @@ De plus, l'évaluation lazy aide à accélérer certaines operations. Considére
 l'exemple suivant::
 
     $collection = new Collection($oneMillionItems);
-    $collection->map(function ($item) {
+    $collection = $collection->map(function ($item) {
         return $item * 2;
     });
     $itemsToShow = $collection->take(30);

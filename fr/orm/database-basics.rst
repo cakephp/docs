@@ -469,12 +469,12 @@ Vous pouvez utiliser les types personnalisés créés en faisant la correspondan
 des types dans la :ref:`méthode _initializeSchema() <saving-complex-types>` de
 votre Table::
 
-    use Cake\Database\Schema\Table as Schema;
+    use Cake\Database\Schema\TableSchema;
 
     class WidgetsTable extends Table
     {
 
-        protected function _initializeSchema(Schema $schema)
+        protected function _initializeSchema(TableSchema $schema)
         {
 
             $schema->columnType('widget_prefs', 'json');
@@ -568,12 +568,14 @@ faire correspondre les données dans cet objet et les expressions SQL::
             if ($value instanceof Point) {
                 return new FunctionExpression(
                     'POINT',
-                    $value->lat(),
-                    $value->long()
+                    [
+                        $value->lat(),
+                        $value->long()
+                    ]
                 );
             }
             if (is_array($value)) {
-                return new FunctionExpression('POINT', $value[0], $value[1]);
+                return new FunctionExpression('POINT', [$value[0], $value[1]]);
             }
             // Handle other cases.
         }
@@ -763,8 +765,8 @@ supplémentaires et l'exécuter.
 
 .. _database-basics-binding-values:
 
-Lier les Valeurs
-----------------
+Lier les Valeurs (Binding)
+--------------------------
 
 Une fois que vous avez créé une requête préparée, vous voudrez peut-être
 lier des données supplémentaires. Vous pouvez lier plusieurs valeurs en une

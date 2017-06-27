@@ -95,7 +95,7 @@ dans un select HTML par exemple, il est préférable d'utiliser le finder
     $list = $categories->find('treeList');
 
     // Dans un fichier template de CakePHP:
-    echo $this->Form->input('categories', ['options' => $list]);
+    echo $this->Form->control('categories', ['options' => $list]);
 
     // Ou vous pouvez l'afficher en texte, par exemple dans un script de CLI
     foreach ($list as $categoryName) {

@@ -222,13 +222,6 @@ compte::
         ]
     ]);
 
-Vous pouvez aussi désactiver le marshalling d'associations imbriquées comme
-ceci::
-
-    $entity = $articles->newEntity($data, ['associated' => []]);
-    // ou...
-    $entity = $articles->patchEntity($entity, $data, ['associated' => []]);
-
 Ce qui est au-dessus indique que les 'Tags', 'Comments' et 'Users' pour les
 Comments doivent être prises en compte. D'une autre façon, vous pouvez utiliser
 la notation par point pour être plus bref::
@@ -241,6 +234,13 @@ la notation par point pour être plus bref::
     $entity = $articles->newEntity($this->request->getData(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
+
+Vous pouvez aussi désactiver le marshalling d'associations imbriquées comme
+ceci::
+
+    $entity = $articles->newEntity($data, ['associated' => []]);
+    // ou...
+    $entity = $articles->patchEntity($entity, $data, ['associated' => []]);
 
 Les données associées sont également validées par défaut à moins que le
 contraire ne lui soit spécifié. Vous pouvez également changer l'ensemble
@@ -409,7 +409,7 @@ sauvegardée. Si vous voulez traiter toutes les entities en transaction unique,
 vous pouvez utiliser ``transactional()``::
 
     // Dans un controller.
-    $articles->connection()->transactional(function () use ($articles, $entities) {
+    $articles->getConnection()->transactional(function () use ($articles, $entities) {
         foreach ($entities as $entity) {
             $articles->save($entity, ['atomic' => false]);
         }
@@ -665,9 +665,9 @@ entities ne soient créées::
     // Dans une classe table ou behavior
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
-       if (isset($data['username'])) {
-           $data['username'] = mb_strtolower($data['username']);
-       }
+        if (isset($data['username'])) {
+            $data['username'] = mb_strtolower($data['username']);
+        }
     }
 
 Le paramètre ``$data`` est une instance ``ArrayObject``, donc vous n'avez pas
@@ -1157,12 +1157,12 @@ construire les Types de colonne personnalisés::
     Type::map('json', 'Cake\Database\Type\JsonType');
 
     // Dans src/Model/Table/UsersTable.php
-    use Cake\Database\Schema\Table as Schema;
+    use Cake\Database\Schema\TableSchema;
 
     class UsersTable extends Table
     {
 
-        protected function _initializeSchema(Schema $schema)
+        protected function _initializeSchema(TableSchema $schema)
         {
             $schema->columnType('preferences', 'json');
             return $schema;
@@ -1193,6 +1193,41 @@ correctement les données complexes va permettre à des utilisateurs mal
 intentionnés d'être capable de stocker des données qu'ils ne pourraient pas
 stocker normalement.
 
+Strict Saving
+=============
+
+.. php:method:: saveOrFail($entity, $options = [])
+
+Utiliser cette méthode lancera une :php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException`
+si :
+
+* les règles de validation ont échoué
+* l'entity contient des erreurs
+* la sauvegarde a été annulée par un _callback_.
+
+Utiliser cette méthode peut être utile pour effectuer des opérations complexes
+en base de données sans surveillance humaine comme lors de l'utilisation de
+script via des _tasks_ Shell.
+
+.. note::
+
+    Si vous utilisez cette méthode dans un Controller, assurez-vous de
+    capturer la ``PersistenceFailedException`` qui pourrait être levée.
+
+Si vous voulez trouver l'entity qui n'a pas pu être sauvegardée, vous pouvez
+utiliser la méthode :php:meth:`Cake\\ORM\Exception\\PersistenceFailedException::getEntity()`::
+
+        try {
+            $table->saveOrFail($entity);
+        } catch (\Cake\ORM\Exception\PersistenceFailedException $e) {
+            echo $e->getEntity();
+        }
+
+Puisque cette méthode utilise la méthode :php:meth:`Cake\\ORM\\Table::save()`,
+tous les événements de ``save`` seront déclenchés.
+
+.. versionadded:: 3.4.1
+
 Sauvegarder Plusieurs Entities
 ==============================
 
@@ -1200,7 +1235,7 @@ Sauvegarder Plusieurs Entities
 
 
 En utilisant cette méthode, vous pouvez sauvegarder plusieurs entities de façon
-atomique. ``$entites`` peuvent être un tableau d'entities créé avec
+atomique. ``$entities`` peuvent être un tableau d'entities créé avec
 ``newEntities()`` / ``patchEntities()``. ``$options`` peut avoir les mêmes
 options que celles acceptées par ``save()``::
 

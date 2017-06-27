@@ -633,7 +633,7 @@ Output:
 ::
 
     echo $this->Html->tableHeaders(
-        ['Date','Title','Active'],
+        ['Date', 'Title','Active'],
         ['class' => 'status'],
         ['class' => 'product_table']
     );

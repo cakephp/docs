@@ -22,6 +22,10 @@ etc..
 Tout ceci est couvert étape par étape dans le
 :doc:`Tutorial du Blog </tutorials-and-examples/blog-auth-example/auth>`.
 
+Si vous cherchez des solutions existantes pour l'authentification et / ou
+l'autorisation pour CakePHP, allez jeter un oeil à la section
+`Authentication and Authorization <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/README.md#authentication-and-authorization>`_ de la CakePHP Awesome List.
+
 Authentification
 ================
 
@@ -250,9 +254,7 @@ connexion pourrait ressembler à cela::
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
-                $this->Flash->error(__("Nom d'utilisateur ou mot de passe incorrect"), [
-                    'key' => 'auth'
-                ]);
+                $this->Flash->error(__("Nom d'utilisateur ou mot de passe incorrect"));
             }
         }
     }
@@ -279,8 +281,7 @@ Après avoir connecté un utilisateur, vous voudrez généralement le rediriger 
 l'endroit d'où il vient. Passez une URL pour définir la destination vers
 laquelle l'utilisateur doit être redirigé après s'être connecté.
 
-Si aucun paramètre n'est passé, elle obtient l'URL de redirection
-d'authentification. L'URL retournée correspond aux règles suivantes:
+Si aucun paramètre n'est passé, l'URL retournée suivra les règles suivantes :
 
 - Retourne l'URL normalisée du paramètre URL redirect s'il est présent et qu'il
   pointe sur le même domaine que celui de l'application. Avant 3.4.0, la valeur
@@ -598,6 +599,7 @@ envoyer des messages flash. Les clés disponibles sont
 
 - ``key`` - La clé à utiliser, 'default' par défaut. Avant 3.4.0, la clé par
   défaut était 'auth'.
+- ``element`` - Le nom de l'élément à utiliser pour le rendu. ``null`` par défaut.
 - ``params`` - Le tableau des paramètres supplémentaires à utiliser, ``[]`` par
   défaut.
 

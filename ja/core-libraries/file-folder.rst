@@ -3,8 +3,8 @@ Folder & File
 
 .. php:namespace:: Cake\Filesystem
 
-Folder と File ユーティリティは、ファイルの読み書きやフォルダ内のファイル名一覧の取得、
-その他ディレクトリに関連するタスクにおいて便利なクラスです。
+Folder と File ユーティリティは、ファイルの読み書きやフォルダー内のファイル名一覧の取得、
+その他ディレクトリーに関連するタスクにおいて便利なクラスです。
 
 基本的な使用法
 ==============
@@ -14,11 +14,11 @@ Folder と File ユーティリティは、ファイルの読み書きやフォ�
     use Cake\Filesystem\Folder;
     use Cake\Filesystem\File;
 
-すると、新しいフォルダインスタンスをセットアップすることができるようになります。 ::
+すると、新しいフォルダーインスタンスをセットアップすることができるようになります。 ::
 
     $dir = new Folder('/path/to/folder');
 
-そして、そのフォルダ内から *.ctp* の拡張子が付いたファイルを
+そして、そのフォルダー内から *.ctp* の拡張子が付いたファイルを
 正規表現を使って検索できます。 ::
 
     $files = $dir->find('.*\.ctp');
@@ -42,12 +42,12 @@ Folder API
 
 ::
 
-    // 0755 のパーミッションで新しいフォルダを作成します
+    // 0755 のパーミッションで新しいフォルダーを作成します
     $dir = new Folder('/path/to/folder', true, 0755);
 
 .. php:attr:: path
 
-    フォルダの現在のパス。
+    フォルダーの現在のパス。
     :php:meth:`Folder::pwd()` は同じ情報を返します。
 
 .. php:attr:: sort
@@ -56,7 +56,7 @@ Folder API
 
 .. php:attr:: mode
 
-    フォルダ作成時のモード。デフォルトは ``0755`` です。
+    フォルダー作成時のモード。デフォルトは ``0755`` です。
     Windows マシンでは何も影響しません。
 
 .. php:staticmethod:: addPathElement(string $path, string $element)
@@ -73,7 +73,7 @@ Folder API
 
 .. php:method:: cd( $path )
 
-    ディレクトリを $path へ移動します。失敗時には ``false`` が返ります。 ::
+    ディレクトリーを $path へ移動します。失敗時には ``false`` が返ります。 ::
 
         $folder = new Folder('/foo');
         echo $folder->path; // /foo を表示
@@ -83,15 +83,15 @@ Folder API
 
 .. php:method:: chmod(string $path, integer $mode = false, boolean $recursive = true, array $exceptions = [])
 
-    ディレクトリ構造のモードを再帰的に変更します。ファイルのモードも同様に変更します。 ::
+    ディレクトリー構造のモードを再帰的に変更します。ファイルのモードも同様に変更します。 ::
 
         $dir = new Folder();
         $dir->chmod('/path/to/folder', 0755, true, ['skip_me.php']);
 
 .. php:method:: copy(array|string $options = [])
 
-    再帰的にディレクトリをコピーします。
-    唯一のパラメータである $options にはコピー先のパスか、オプションの配列を指定します。 ::
+    再帰的にディレクトリーをコピーします。
+    唯一のパラメーターである $options にはコピー先のパスか、オプションの配列を指定します。 ::
 
         $folder1 = new Folder('/path/to/folder1');
         $folder1->copy('/path/to/folder2');
@@ -103,18 +103,18 @@ Folder API
             'from' => '/path/to/copy/from', // Will cause a cd() to occur
             'mode' => 0755,
             'skip' => ['skip-me.php', '.git'],
-            'scheme' => Folder::SKIP  // 既存のディレクトリやファイルはスキップ。
+            'scheme' => Folder::SKIP  // 既存のディレクトリーやファイルはスキップ。
         ]);
 
     以下の３つの動作 (*scheme*) に対応します。
 
-    * ``Folder::SKIP`` コピー・移動先にファイルやディレクトリが既に存在している場合は、スキップします。
-    * ``Folder::MERGE`` コピー元とコピー先のディレクトリをマージします。
-      コピー元のディレクトリにある ファイルは、対象のディレクトリにあるファイルを置き換えます。
-      ディレクトリの中身はマージされます。
-    * ``Folder::OVERWRITE`` 対象のディレクトリに存在するファイルやディレクトリはコピー元の
-      ディレクトリの内容で上書きされます。対象とコピー先の両方にサブディレクトリが含まれる場合、
-      対象のディレクトリの内容は、コピー元の内容に削除や置き換えられます。
+    * ``Folder::SKIP`` コピー・移動先にファイルやディレクトリーが既に存在している場合は、スキップします。
+    * ``Folder::MERGE`` コピー元とコピー先のディレクトリーをマージします。
+      コピー元のディレクトリーにある ファイルは、対象のディレクトリーにあるファイルを置き換えます。
+      ディレクトリーの中身はマージされます。
+    * ``Folder::OVERWRITE`` 対象のディレクトリーに存在するファイルやディレクトリーはコピー元の
+      ディレクトリーの内容で上書きされます。対象とコピー先の両方にサブディレクトリーが含まれる場合、
+      対象のディレクトリーの内容は、コピー元の内容に削除や置き換えられます。
 
 
 .. php:staticmethod:: correctSlashFor(string $path)
@@ -124,26 +124,26 @@ Folder API
 
 .. php:method:: create(string $pathname, integer $mode = false)
 
-   再帰的にディレクトリ構造を作成します。
+   再帰的にディレクトリー構造を作成します。
    `/foo/bar/baz/shoe/horn` のような深い階層の作成も可能です。 ::
 
         $folder = new Folder();
         if ($folder->create('foo' . DS . 'bar' . DS . 'baz' . DS . 'shoe' . DS . 'horn')) {
-            // 入れ子になっているフォルダの作成に成功
+            // 入れ子になっているフォルダーの作成に成功
         }
 
 .. php:method:: delete(string $path = null)
 
-    システムが許可していた場合、再帰的にディレクトリを削除します。 ::
+    システムが許可していた場合、再帰的にディレクトリーを削除します。 ::
 
         $folder = new Folder('foo');
         if ($folder->delete()) {
-            // foo とその入れ子になっているフォルダの削除に成功
+            // foo とその入れ子になっているフォルダーの削除に成功
         }
 
 .. php:method:: dirsize()
 
-    フォルダとその内容のサイズをバイト数で返します。
+    フォルダーとその内容のサイズをバイト数で返します。
 
 .. php:method:: errors()
 
@@ -151,9 +151,9 @@ Folder API
 
 .. php:method:: find(string $regexpPattern = '.*', boolean $sort = false)
 
-    現在のディレクトリでマッチしたファイルを配列で返します。 ::
+    現在のディレクトリーでマッチしたファイルを配列で返します。 ::
 
-        // webroot/img/ フォルダ内の .png を検索し、ソートして返す
+        // webroot/img/ フォルダー内の .png を検索し、ソートして返す
         $dir = new Folder(WWW_ROOT . 'img');
         $files = $dir->find('.*\.png', true);
         /*
@@ -169,13 +169,13 @@ Folder API
 
 .. note::
 
-    フォルダの find メソッドと findRecursive メソッドは、ファイルのみを検索します。
-    フォルダとファイルを取得したい場合は、 :php:meth:`Folder::read()` もしくは
+    フォルダーの find メソッドと findRecursive メソッドは、ファイルのみを検索します。
+    フォルダーとファイルを取得したい場合は、 :php:meth:`Folder::read()` もしくは
     :php:meth:`Folder::tree()` 参照してください。
 
 .. php:method:: findRecursive(string $pattern = '.*', boolean $sort = false)
 
-    現在のディレクトリ内とそれ以下のすべての一致するファイルの配列を返します。 ::
+    現在のディレクトリー内とそれ以下のすべての一致するファイルの配列を返します。 ::
 
         // test もしくは index で始まるファイルを再帰的に検索する
         $dir = new Folder(WWW_ROOT);
@@ -230,7 +230,7 @@ Folder API
 
 .. php:method:: move(array $options)
 
-    再帰的にディレクトリを移動。
+    再帰的にディレクトリーを移動。
 
 .. php:staticmethod:: normalizePath(string $path)
 
@@ -243,8 +243,8 @@ Folder API
 
 .. php:method:: read(boolean $sort = true, array|boolean $exceptions = false, boolean $fullPath = false)
 
-    現在のディレクトリの内容を配列で返します。
-    戻り値は2つの配列となります。1つはディレクトリ名の配列。もう1つはファイル名の配列です。 ::
+    現在のディレクトリーの内容を配列で返します。
+    戻り値は2つの配列となります。1つはディレクトリー名の配列。もう1つはファイル名の配列です。 ::
 
         $dir = new Folder(WWW_ROOT);
         $files = $dir->read(true, ['files', 'index.php']);
@@ -276,7 +276,7 @@ Folder API
 
 .. php:method:: tree(null|string $path = null, array|boolean $exceptions = true, null|string $type = null)
 
-    入れ子になったディレクトリと各ディレクトリ中のファイルの配列を返します。
+    入れ子になったディレクトリーと各ディレクトリー中のファイルの配列を返します。
 
 File API
 ========
@@ -290,7 +290,7 @@ File API
 
 .. php:attr:: Folder
 
-    ファイルが属するフォルダ・オブジェクト。
+    ファイルが属するフォルダー・オブジェクト。
 
 .. php:attr:: name
 
@@ -348,7 +348,7 @@ File API
 
 .. php:method:: Folder()
 
-    現在のフォルダを返します。
+    現在のフォルダーを返します。
 
 .. php:method:: group()
 
@@ -442,5 +442,5 @@ File API
 
 .. meta::
     :title lang=ja: Folder & File
-    :description lang=ja: Folder と File ユーティリティは、ファイルの読み書きや追記、フォルダ内のファイル名一覧の取得、その他ディレクトリに関連するタスクにおいて便利なクラスです。
+    :description lang=ja: Folder と File ユーティリティは、ファイルの読み書きや追記、フォルダー内のファイル名一覧の取得、その他ディレクトリーに関連するタスクにおいて便利なクラスです。
     :keywords lang=ja: file,folder,cakephp utility,read file,write file,append file,recursively copy,copy options,folder path,class folder,file php,php files,change directory,file utilities,new folder,directory structure,delete file

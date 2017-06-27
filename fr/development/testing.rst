@@ -36,6 +36,9 @@ Pour installer PHPUnit avec Composer:
 
 .. code-block:: bash
 
+    $ php composer.phar require --dev phpunit/phpunit:"^5.7|^6.0"
+
+    // Avant CakePHP 3.4.1
     $ php composer.phar require --dev phpunit/phpunit
 
 Ceci va ajouter la dépendance à la section ``require-dev`` de votre
@@ -140,7 +143,7 @@ conventions. En ce qui concerne les tests:
 #. Les noms de ces fichiers doivent finir par **Test.php** plutôt que juste
    **.php**.
 #. Les classes contenant les tests doivent étendre ``Cake\TestSuite\TestCase``,
-   ``Cake\TestSuite\ControllerTestCase`` ou ``\PHPUnit_Framework_TestCase``.
+   ``Cake\TestSuite\IntegrationTestCase`` ou ``\PHPUnit\Framework\TestCase``.
 #. Comme les autres noms de classe, les noms de classe des cas de test doivent
    correspondre au nom de fichier. **RouterTest.php** doit contenir
    ``class RouterTest extends TestCase``.
@@ -148,6 +151,11 @@ conventions. En ce qui concerne les tests:
    doit commencer par ``test``, comme dans ``testPublished()``.
    Vous pouvez aussi utiliser l'annotation ``@test`` pour marquer les méthodes
    en méthodes de test.
+
+.. versionadded:: 3.4.1
+    Le support de PHPUnit 6 a été ajouté. Si vous utilisez une version de PHPUnit
+    inférieure à 5.7.0, vos classes de tests devront soit *extends* les classes
+    de CakePHP, soit ``PHPUnit_Framework_TestCase``.
 
 Créer Votre Premier Cas de Test
 ===============================
@@ -328,6 +336,14 @@ test en faisant ce qui suit:
 Cela mettra la couverture des résultats dans le répertoire webroot de votre
 application. Vous pourrez voir les résultats en allant à
 ``http://localhost/votre_app/coverage``.
+
+Si vous utilisez PHP 5.6.0 (ou supérieur), vous pouvez utilisez `phpdbg <http://phpdbg.com/>`__
+pour générer la couverture des résultats à la place de xdebug. ``phpdbg`` est
+généralement plus rapide dans la génération des rapports de couverture :
+
+.. code-block:: bash
+
+    $ phpdbg -qrr phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 
 Combiner les Suites de Test pour les Plugins
 --------------------------------------------
@@ -1094,41 +1110,133 @@ bonnes variables d'environnement::
     Les méthodes ``enableCsrfToken()`` et ``enableSecurityToken()`` ont été
     ajoutées dans la version 3.1.2.
 
-Integration Testing PSR-7 Middleware
-------------------------------------
+Test d'intégration sur les middlewares PSR-7
+--------------------------------------------
 
-Integration testing can also be used to test your entire PSR-7 application and
-:doc:`/controllers/middleware`. By default ``IntegrationTestCase`` will
-auto-detect the presence of an ``App\Application`` class and automatically
-enable integration testing of your Application. You can toggle this behavior
-with the ``useHttpServer()`` method::
+Les tests d'intégration peuvent aussi être utilisés pour tester entièrement vos
+applications PSR-7 et les :doc:`/controllers/middleware`. Par défaut,
+``IntegrationTestCase`` détectera automatiquement la présence d'une classe
+``App\Application`` et activera automatiquement les tests d'intégration sur
+votre Application. Vous pouvez activer / désactiver ce comportement avec la
+méthode ``useHttpServer()``::
 
     public function setUp()
     {
-        // Enable PSR-7 integration testing.
+        // Active les tests d'intégration PSR-7
         $this->useHttpServer(true);
 
-        // Disable PSR-7 integration testing.
+        // Désactive les tests d'intégration PSR-7
         $this->useHttpServer(false);
     }
 
-You can customize the application class name used, and the constructor
-arguments, by using the ``configApplication()`` method::
+Vous pouvez personnaliser le nom de la classe Application utilisé ainsi que les
+arguments du contructeur en utilisant la méthode ``configApplication()``::
 
     public function setUp()
     {
         $this->configApplication('App\App', [CONFIG]);
     }
 
-After enabling the PSR-7 mode, and possibly configuring your application class,
-you can use the remaining ``IntegrationTestCase`` features as normal.
+Après avoir activé le mode PSR-7 (et avoir peut-être configuré la classe
+d'Application), vous pouvez utiliser le reste des fonctionnalités de
+``IntegrationTestCase`` normalement.
 
-You should also take care to try and use :ref:`application-bootstrap` to load
-any plugins containing events/routes. Doing so will ensure that your
-events/routes are connected for each test case.
+Vous devriez également faire en sorte d'utiliser :ref:`application-bootstrap`
+pour charger les plugins qui contiennent des événements et des routes. De cette
+manière, vous vous assurez que les événements et les routes seront connectés pour
+chacun de vos "test case".
 
 .. versionadded:: 3.3.0
-    PSR-7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
+    Les Middleware PSR-7 et la méthode ``useHttpServer()`` ont été ajoutée avec 3.3.0.
+
+Tester avec des cookies chiffrés
+--------------------------------
+
+Si vous utilisez le :php:class:`Cake\\Controller\\Component\\CookieComponent`
+dans vos controllers, vos cookies sont probablement chiffrés. Depuis 3.1.7,
+CakePHP met à votre disposition des méthodes pour intéragir avec les cookies
+chiffrés dans vos "test cases"::
+
+    // Définit un cookie en utilisant AES et la clé par défaut.
+    $this->cookieEncrypted('my_cookie', 'Some secret values');
+
+    // Partons du principe que cette requête modifie le cookie.
+    $this->get('/bookmarks/index');
+
+    $this->assertCookieEncrypted('An updated value', 'my_cookie');
+
+.. versionadded:: 3.1.7
+
+    ``assertCookieEncrypted`` et ``cookieEncrypted`` ont été ajoutées dans 3.1.7.
+
+Tester les Messages Flash
+-------------------------
+
+Si vous souhaitez faire une assertion sur la présence de messages Flash en
+session et pas sur le rendu du HTML, vous pouvez utiliser ``enableRetainFlashMessages()``
+dans vos tests pour que les messages Flash soient conservés dans la session
+pour que vous puissez écrire vos assertions::
+
+    $this->enableRetainFlashMessages();
+    $this->get('/bookmarks/delete/9999');
+
+    $this->assertSession('That bookmark does not exist', 'Flash.flash.0.message');
+
+.. versionadded:: 3.4.7
+
+    ``enableRetainFlashMessages()`` a été ajoutée dans 3.4.7
+
+Tester un controller retournant du JSON
+---------------------------------------
+
+JSON est un format commun lors de la conception de web service. Tester les
+endpoints de votre web service est très simple avec CakePHP. Commençons avec
+un exemple simple de controller qui renvoie du JSON::
+
+    class MarkersController extends AppController
+    {
+        public function initialize()
+        {
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
+        }
+
+        public function view($id)
+        {
+            $marker = $this->Markers->get($id);
+            $this->set([
+                '_serialize' => ['marker'],
+                'marker' => $marker,
+            ]);
+        }
+    }
+
+Créons maintenant le fichier **tests/TestCase/Controller/MarkersControllerTest.php**
+et assurons-nous que le web service répond correctement::
+
+    class MarkersControllerTest extends IntegrationTestCase
+    {
+
+        public function testGet()
+        {
+            $this->configRequest([
+                'headers' => ['Accept' => 'application/json']
+            ]);
+            $result = $this->get('/markers/view/1.json');
+
+            // Vérification que la réponse était bien une 200
+            $this->assertResponseOk();
+
+            $expected = [
+                ['id' => 1, 'lng' => 66, 'lat' => 45],
+            ];
+            $expected = json_encode($expected, JSON_PRETTY_PRINT);
+            $this->assertEquals($expected, $this->_response->body());
+        }
+    }
+
+Nous utilisons l'option ``JSON_PRETTY_PRINT`` car la JsonView intégrée à CakePHP
+utilise cette option quand le mode ``debug`` est activé.
 
 Méthodes d'Assertion
 --------------------
@@ -1186,7 +1294,8 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
     $this->assertHeader('Content-Type', 'application/json');
 
     // Vérifie le contenu d'une variable.
-    $this->assertEquals('jose', $this->viewVariable('user.username'));
+    $user =  $this->viewVariable('user');
+    $this->assertEquals('jose', $user->username);
 
     // Vérifie les cookies.
     $this->assertCookie('1', 'thingid');
@@ -1397,8 +1506,8 @@ dans notre component. Nous créons le fichier
     use Cake\Controller\Controller;
     use Cake\Controller\ComponentRegistry;
     use Cake\Event\Event;
-    use Cake\Network\Request;
-    use Cake\Network\Response;
+    use Cake\Http\ServerRequest;
+    use Cake\Http\Response;
     use Cake\TestSuite\TestCase;
 
     class PagematronComponentTest extends TestCase
@@ -1411,7 +1520,7 @@ dans notre component. Nous créons le fichier
         {
             parent::setUp();
             // Configuration de notre component et de notre faux controller de test.
-            $request = new Request();
+            $request = new ServerRequest();
             $response = new Response();
             $this->controller = $this->getMockBuilder('Cake\Controller\Controller')
                 ->setConstructorArgs([$request, $response])

@@ -337,7 +337,7 @@ Chaque requête de CakePHP contient un objet ``ServerRequest`` qui est accessibl
 en utilisant ``$this->request``. Cet objet contient des informations utiles
 sur la requête qui vient d'être reçue, et permet de contrôler les flux de votre
 application. Dans ce cas, nous utilisons la méthode
-:php:meth:`Cake\\Network\\ServerRequest::is()` pour vérifier que la requête est de
+:php:meth:`Cake\\Http\\ServerRequest::is()` pour vérifier que la requête est de
 type POST.
 
 Lorsqu'un utilisateur utilise un formulaire pour poster des données dans votre
@@ -386,8 +386,8 @@ Voici le code de notre vue "add" (ajout):
     <h1>Ajouter un article</h1>
     <?php
         echo $this->Form->create($article);
-        echo $this->Form->input('title');
-        echo $this->Form->input('body', ['rows' => '3']);
+        echo $this->Form->control('title');
+        echo $this->Form->control('body', ['rows' => '3']);
         echo $this->Form->button(__("Sauvegarder l'article"));
         echo $this->Form->end();
     ?>
@@ -405,11 +405,11 @@ construisez un formulaire qui envoie les données en POST à l'action ``add()``
 (ou ``edit()`` quand ``id`` est dans les données du formulaire) du controller
 actuel.
 
-La méthode ``$this->Form->input()`` est utilisée pour créer des éléments de
+La méthode ``$this->Form->control()`` est utilisée pour créer des éléments de
 formulaire du même nom. Le premier paramètre dit à CakePHP à quels champs ils
 correspondent et le second paramètre vous permet de spécifier un large éventail
 d'options - dans ce cas, le nombre de lignes du textarea. Il y a un peu
-d'introspection et "d'automagie" ici : ``input()`` affichera différents
+d'introspection et "d'automagie" ici : ``control()`` affichera différents
 éléments de formulaire selon le champ spécifié du model.
 
 L'appel de la méthode ``$this->Form->end()`` cloture le formulaire. Affiche les
@@ -465,7 +465,7 @@ configuration, consultez le chapitre :doc:`/core-libraries/validation`.
 Maintenant que vos règles de validation sont en place, utilisez l'application
 pour essayer d'ajouter un article avec un titre et un contenu vide afin de voir
 comment cela fonctionne. Puisque que nous avons utilisé la méthode
-:php:meth:`Cake\\View\\Helper\\FormHelper::input()` du helper "Form" pour
+:php:meth:`Cake\\View\\Helper\\FormHelper::control()` du helper "Form" pour
 créer nos éléments de formulaire, nos messages d'erreurs de validation seront
 affichés automatiquement.
 
@@ -514,8 +514,8 @@ La vue d'édition devrait ressembler à quelque chose comme cela:
     <h1>Modifier un article</h1>
     <?php
         echo $this->Form->create($article);
-        echo $this->Form->input('title');
-        echo $this->Form->input('body', ['rows' => '3']);
+        echo $this->Form->control('title');
+        echo $this->Form->control('body', ['rows' => '3']);
         echo $this->Form->button(__('Sauvegarder l\'article'));
         echo $this->Form->end();
     ?>
@@ -712,7 +712,7 @@ riches en fonctionnalités.
 Maintenant que vous avez créé une application CakePHP basique, vous pouvez soit
 continuer vers :doc:`/tutorials-and-examples/blog/part-three`, ou commencer
 votre propre projet. Vous pouvez aussi lire attentivement les
-:doc:`/topics` ou l'`API <https://api.cakephp.org/3.0>` pour en
+:doc:`/topics` ou l'`API <https://api.cakephp.org>` pour en
 apprendre plus sur CakePHP.
 
 Si vous avez besoin d'aide, il y a plusieurs façons d'obtenir de l'aide -

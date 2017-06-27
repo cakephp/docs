@@ -36,7 +36,7 @@ Creating a Behavior
 
 In the following examples we will create a very simple ``SluggableBehavior``.
 This behavior will allow us to populate a slug field with the results of
-``Inflector::slug()`` based on another field.
+``Text::slug()`` based on another field.
 
 Before we create our behavior we should understand the conventions for
 behaviors:
@@ -102,7 +102,7 @@ method::
 
     public function slug($value)
     {
-        return Inflector::slug($value, $this->_config['replacement']);
+        return Text::slug($value, $this->_config['replacement']);
     }
 
 It could be invoked using::
@@ -153,7 +153,7 @@ behavior should now look like::
     use Cake\ORM\Behavior;
     use Cake\ORM\Entity;
     use Cake\ORM\Query;
-    use Cake\Utility\Inflector;
+    use Cake\Utility\Text;
 
     class SluggableBehavior extends Behavior
     {
@@ -167,7 +167,7 @@ behavior should now look like::
         {
             $config = $this->config();
             $value = $entity->get($config['field']);
-            $entity->set($config['slug'], Inflector::slug($value, $config['replacement']));
+            $entity->set($config['slug'], Text::slug($value, $config['replacement']));
         }
 
         public function beforeSave(Event $event, EntityInterface $entity)
@@ -314,7 +314,7 @@ respond to::
 
             // e.g. if our parent calls $this->addBehavior('Timestamp');
             // and we want to add an additional event
-            if ($this->behaviors()->has('Timestamp') {
+            if ($this->behaviors()->has('Timestamp')) {
                 $this->behaviors()->get('Timestamp')->config([
                     'events' => [
                         'Users.login' => [

@@ -247,6 +247,17 @@ method::
     $query = $articles->find()
         ->order(['title' => 'ASC', 'id' => 'ASC']);
 
+When calling ``order()`` multiple times on a query, multiple clauses will be appended.
+However, when using finders you may sometimes need to overwrite the ``ORDER BY``.
+Set the second parameter of ``order()`` (as well as ``orderAsc()`` or ``orderDesc()``) to
+``Query::OVERWRITE`` or to ``true``::
+
+    $query = $articles->find()
+        ->order(['title' => 'ASC']);
+    // Later, overwrite the ORDER BY clause instead of appending to it.
+    $query = $articles->find()
+        ->order(['created' => 'DESC'], Query::OVERWRITE);
+
 .. versionadded:: 3.0.12
 
     In addition to ``order``, the ``orderAsc`` and ``orderDesc`` methods can be

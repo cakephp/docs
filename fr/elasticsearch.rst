@@ -77,8 +77,8 @@ Nous devrons aussi créer une vue basique pour nos articles indexés::
 
     // Dans src/Template/Articles/add.ctp
     <?= $this->Form->create($article) ?>
-    <?= $this->Form->input('title') ?>
-    <?= $this->Form->input('body') ?>
+    <?= $this->Form->control('title') ?>
+    <?= $this->Form->control('body') ?>
     <?= $this->Form->button('Save') ?>
     <?= $this->Form->end() ?>
 

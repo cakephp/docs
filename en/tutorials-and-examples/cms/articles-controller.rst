@@ -7,6 +7,7 @@ methods, to prepare the response. We'll place this new controller in a file
 called **ArticlesController.php** inside the **src/Controller** directory.
 Here's what the basic controller should look like::
 
+    <?php
     // src/Controller/ArticlesController.php
 
     namespace App\Controller;
@@ -23,6 +24,7 @@ have routes connected to them. For example, when a user requests
 a response by rendering a Template in the View. The code for that action would
 look like this::
 
+    <?php
     // src/Controller/ArticlesController.php
 
     namespace App\Controller;
@@ -31,6 +33,7 @@ look like this::
     {
         public function index()
         {
+            $this->loadComponent('Paginator');
             $articles = $this->Paginator->paginate($this->Articles->find());
             $this->set(compact('articles'));
         }
@@ -43,12 +46,12 @@ able to access that at **www.example.com/articles/foobar**. You may be tempted
 to name your controllers and actions in a way that allows you to obtain specific
 URLs. Resist that temptation. Instead, follow the :doc:`/intro/conventions`
 creating readable, meaningful action names. You can then use
-doc:`/development/routing` to connect the URLs you want to the actions you've
+:doc:`/development/routing` to connect the URLs you want to the actions you've
 created.
 
 Our controller action is very simple. It fetches a paginated set of articles
 from the database, using the Articles Model that is automatically loaded via naming
-conventions. It then uses ``set()`` to pass the articles into the View (which
+conventions. It then uses ``set()`` to pass the articles into the Template (which
 we'll create soon). CakePHP will automatically render the template after our
 controller action completes.
 
@@ -133,7 +136,7 @@ see an error page saying that action hasn't been implemented. Lets fix that now:
 
 While this is a simple action, we've used some powerful CakePHP features. We
 start our action off by using ``findBySlug()`` which is
-a :ref:`dynamic-finders`. This method allows us to create a basic query that
+a :ref:`Dynamic Finder <dynamic-finders>`. This method allows us to create a basic query that
 finds articles by a given slug. We then use ``firstOrFail()`` to either fetch
 the first record, or throw a ``NotFoundException``.
 
@@ -141,7 +144,7 @@ Our action takes a ``$slug`` parameter, but where does that parameter come from?
 If a user requests ``/articles/view/first-post``, then the value 'first-post' is
 passed as ``$slug`` by CakePHP's routing and dispatching layers.  If we
 reload our browser with our new action saved, we'd see another CakePHP error
-page telling use we're missing a view template; lets fix that.
+page telling use we're missing a view template; let's fix that.
 
 Create the View Template
 ========================
@@ -159,7 +162,7 @@ Let's create the view for our new 'view' action and place it in
     <p><?= $this->Html->link('Edit', ['action' => 'edit', $article->slug]) ?></p>
 
 You can verify that this is working by trying the links at ``/articles/index`` or
-manually requesting an article by accessing URLs like ``/articles/view/1``.
+manually requesting an article by accessing URLs like ``/articles/view/slug-name``.
 
 Adding Articles
 ===============
@@ -302,6 +305,9 @@ typically a URL-safe version of an article's title. We can use the
 :ref:`beforeSave() callback <table-callbacks>` of the ORM to populate our slug::
 
     // in src/Model/Table/ArticlesTable.php
+
+    // add this use statement right below the namespace declaration to import
+    // the Text class
     use Cake\Utility\Text;
 
     // Add the following method.
@@ -309,7 +315,9 @@ typically a URL-safe version of an article's title. We can use the
     public function beforeSave($event, $entity, $options)
     {
         if ($entity->isNew() && !$entity->slug) {
-            $entity->slug = Text::slug($entity->title);
+            $sluggedTitle = Text::slug($entity->title);
+            // trim slug to maximum length defined in schema
+            $entity->slug = substr($sluggedTitle, 0, 191)
         }
 
         // This is temporary, and will be removed later
@@ -419,6 +427,10 @@ Up until this point our Articles had no input validation done. Lets fix that by
 using :ref:`a validator <validating-request-data>`::
 
     // src/Model/Table/ArticlesTable.php
+
+    // add this use statement right below the namespace declaration to import
+    // the Validator class
+    use Cake\Validation\Validator;
 
     // Add the following method.
     public function validationDefault(Validator $validator)

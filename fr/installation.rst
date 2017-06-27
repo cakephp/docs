@@ -123,7 +123,7 @@ Rester à jour avec les Derniers Changements de CakePHP
 Par défaut c'est ce à quoi le **composer.json** de votre application ressemble::
 
     "require": {
-        "cakephp/cakephp": "3.3.*"
+        "cakephp/cakephp": "3.4.*"
     }
 
 A chaque fois que vous lancez ``php composer.phar update``, vous allez
@@ -143,6 +143,24 @@ Notez que ce n'est pas recommandé, puisque votre application peut casser quand
 la prochaine version majeure sort. De plus, composer ne met pas en cache les
 branches de développement, donc cela ralentit les installs/updates consécutifs
 de composer.
+
+Installation en utilisant Oven
+------------------------------
+
+Une autre manière rapide d'installer CakePHP est d'utiliser `Oven <https://github.com/CakeDC/oven>`_.
+Il s'agit d'un simple script PHP qui vérifie si vous respectez les
+recommandations systèmes, installe le squelette d'application CakePHP et met
+en place l'environnement de développement.
+
+Après l'installation, votre application CakePHP est prête !
+
+.. note::
+
+    IMPORTANT : Ceci n'est pas un script de déploiement. Il s'agit d'une aide à
+    l'installation de CakePHP. Il permet de mettre en place un environnement de
+    développement rapidement. Les environnements de production doivent
+    également prendre en compte d'autres facteurs comme les permissions de
+    fichiers, les configurations de vhost, etc.
 
 Permissions
 ===========
@@ -464,22 +482,32 @@ donc nécessaire de créer les URLs réécrites disponibles dans la configuratio
 du site. Ceci se fait habituellement dans
 ``/etc/nginx/sites-available/your_virtual_host_conf_file``. Selon votre
 configuration, vous devrez modifier cela, mais à tout le moins, vous aurez
-besoin de PHP fonctionnant comme une instance FastCGI:
+besoin de PHP fonctionnant comme une instance FastCGI.
+La configuration suivante redirige la requête vers ``webroot/index.php`` :
+
+.. code-block:: nginx
+
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+Un extrait de directive "server" ci-dessous :
 
 .. code-block:: nginx
 
     server {
         listen   80;
+        listen   [::]:80;
         server_name www.example.com;
-        rewrite ^(.*) http://example.com$1 permanent;
+        return 301 http://example.com$request_uri;
     }
 
     server {
         listen   80;
+        listen   [::]:80;
         server_name example.com;
 
-        # root directive should be global
-        root   /var/www/example.com/public/webroot/;
+        root   /var/www/example.com/public/webroot;
         index  index.php;
 
         access_log /var/www/example.com/log/access.log;
@@ -491,48 +519,22 @@ besoin de PHP fonctionnant comme une instance FastCGI:
 
         location ~ \.php$ {
             try_files $uri =404;
-            include /etc/nginx/fastcgi_params;
-            fastcgi_pass    127.0.0.1:9000;
-            fastcgi_index   index.php;
+            include fastcgi_params;
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_index index.php;
+            fastcgi_intercept_errors on;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         }
     }
 
-Sur certains serveurs (Comme Ubuntu 14.04) la configuration ci-dessus ne
-fonctionnera pas d'emblée et la documentation de nginx recommande une approche
-différente de toute façon
-(http://nginx.org/en/docs/http/converting_rewrite_rules.html). Vous pourriez
-essayer ce qui suit (vous remarquerez que ceci n'est que pour un unique block
-{} de serveur, plutôt que deux, si bien que si vous voulez que example.com
-accède à votre application CakePHP en plus de www.example.com, consultez le
-lien nginx ci-dessus):
-
-.. code-block:: nginx
-
-    server {
-        listen   80;
-        server_name www.example.com;
-        rewrite 301 http://www.example.com$request_uri permanent;
-
-        # root directive should be global
-        root   /var/www/example.com/public/webroot/;
-        index  index.php;
-
-        access_log /var/www/example.com/log/access.log;
-        error_log /var/www/example.com/log/error.log;
-
-        location / {
-            try_files $uri /index.php?$args;
-        }
-
-        location ~ \.php$ {
-            try_files $uri =404;
-            include /etc/nginx/fastcgi_params;
-            fastcgi_pass    127.0.0.1:9000;
-            fastcgi_index   index.php;
-            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        }
-    }
+.. note::
+    Dans les dernière versions de PHP-FPM, le système est configuré pour écouter
+    le socket unix php-fpm plutôt que le port TCP 9000 de l'adresse 127.0.0.1.
+    Si vous avez une erreur "502 bad gateway errors" avec la configuration ci-dessus,
+    essayez de mettre à jour ``fastcgi_pass`` en pointant sur le socket unix
+    Recent configurations of PHP-FPM are set to listen to the unix php-fpm
+    (ex: fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;) plutôt que le port
+    TCP.
 
 IIS7 (serveurs Windows)
 -----------------------

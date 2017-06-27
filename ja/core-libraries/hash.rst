@@ -11,7 +11,7 @@ CakePHP ではとても便利なユーティリティ群を Hash クラスの中
 static で用意しており、まさにこれをするのに使えます。
 
 CakePHP の Hash クラスは Inflector クラスと同様で、どのモデルや
-コントローラからでも呼ぶことができます。 例: :php:meth:`Hash::combine()` 。
+コントローラーからでも呼ぶことができます。 例: :php:meth:`Hash::combine()` 。
 
 .. _hash-path-syntax:
 
@@ -80,7 +80,7 @@ Hash パス構文
 .. php:staticmethod:: extract(array|\ArrayAccess $data, $path)
 
     ``Hash::extract()`` は :ref:`hash-path-syntax` にあるすべての式とマッチャーを
-    サポートします。extract を使うことで、配列もしくは ``ArrayAccess`` インターフェースを
+    サポートします。extract を使うことで、配列もしくは ``ArrayAccess`` インターフェイスを
     実装したオブジェクトから好きなパスに沿ったデータを手早く取り出すことができます。
     もはやデータ構造をループする必要はありません。その代わりに欲しい要素を絞り込むパス式を
     使うのです。 ::

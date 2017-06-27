@@ -358,7 +358,7 @@ Le tableau devra avoir une clé ``command`` ainsi qu'une clé ``extra``::
 
     // En passant la commande via une chaîne
     $this->dispatchShell([
-       'command' => 'schema create Blog --plugin Blog'
+       'command' => 'schema create Blog --plugin Blog',
        'extra' => [
             'foo' => 'bar'
         ]
@@ -366,7 +366,7 @@ Le tableau devra avoir une clé ``command`` ainsi qu'une clé ``extra``::
 
     // En passant la commande via un tableau
     $this->dispatchShell([
-       'command' => ['schema', 'create', 'Blog', '--plugin', 'Blog']
+       'command' => ['schema', 'create', 'Blog', '--plugin', 'Blog'],
        'extra' => [
             'foo' => 'bar'
         ]

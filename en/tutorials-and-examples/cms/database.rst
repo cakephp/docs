@@ -19,7 +19,7 @@ tables::
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT NOT NULL,
         title VARCHAR(255) NOT NULL,
-        slug VARCHAR(255) NOT NULL,
+        slug VARCHAR(191) NOT NULL,
         body TEXT,
         published BOOLEAN DEFAULT FALSE,
         created DATETIME,
@@ -30,7 +30,7 @@ tables::
 
     CREATE TABLE tags (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        title VARCHAR(255),
+        title VARCHAR(191),
         created DATETIME,
         modified DATETIME,
         UNIQUE KEY (title)
@@ -71,6 +71,7 @@ the values in the ``Datasources.default`` array in your **config/app.php** file
 with those that apply to your setup. A sample completed configuration array
 might look something like the following::
 
+    <?php
     return [
         // More configuration above.
         'Datasources' => [
@@ -112,6 +113,7 @@ They are stored in **src/Model/Table**. The file we'll be creating will be saved
 to **src/Model/Table/ArticlesTable.php**. The completed file should look like
 this::
 
+    <?php
     // src/Model/Table/ArticlesTable.php
     namespace App\Model\Table;
 
@@ -144,6 +146,7 @@ record in the database, and provide row level behavior for our data. Our entity
 will be saved to **src/Model/Entity/Article.php**. The completed file should
 look like this::
 
+    <?php
     // src/Model/Entity/Article.php
     namespace App\Model\Entity;
 

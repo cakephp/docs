@@ -40,6 +40,8 @@ Types d'expression
 |                                | valeur de chaîne y compris les valeurs de  |
 |                                | chaîne numérique.                          |
 +--------------------------------+--------------------------------------------+
+| ``{*}``                        | Toutes les valeurs seront *matchées*       |
++--------------------------------+--------------------------------------------+
 | ``Foo``                        | Matche les clés avec exactement la même    |
 |                                | valeur.                                    |
 +--------------------------------+--------------------------------------------+
@@ -83,7 +85,7 @@ Les Types d'Attribut Correspondants
 .. php:staticmethod:: get(array|\ArrayAccess $data, $path, $default = null)
 
     ``get()`` est une version simplifiée de ``extract()``, elle ne supporte
-    que les expressions de chemin direct. Les chemins avec ``{n}``, ``{s}``
+    que les expressions de chemin direct. Les chemins avec ``{n}``, ``{s}``, ``{*}``
     ou les matchers ne sont pas supportés. Utilisez ``get()`` quand vous
     voulez exactement une valeur sortie d'un tableau. Si un chemin correspondant
     n'est pas trouvé, la valeur par défaut sera retournée.
@@ -128,8 +130,8 @@ Les Types d'Attribut Correspondants
             ]
         ]
 
-    Vous pouvez utiliser les chemins en utilisant ``{n}`` et ``{s}`` pour
-    insérer des données dans des points multiples::
+    Vous pouvez utiliser les chemins en utilisant ``{n}``, ``{s}`` et ``{*}``
+    pour insérer des données dans des points multiples::
 
         $users = Hash::insert($users, '{n}.new', 'value');
 
@@ -171,9 +173,9 @@ Les Types d'Attribut Correspondants
             ]
         */
 
-    L'utilisation de ``{n}`` et ``{s}`` vous autorisera à retirer les valeurs
-    multiples en une fois. Vous pouvez aussi utiliser les matchers d'attribut
-    avec ``remove()``::
+    L'utilisation de ``{n}``, ``{s}`` et ``{*}`` vous autorisera à retirer les
+    valeurs multiples en une fois. Vous pouvez aussi utiliser les matchers
+    d'attribut avec ``remove()``::
 
         $data = [
             0 => ['clear' => true, 'Item' => ['id' => 1, 'title' => 'first']],

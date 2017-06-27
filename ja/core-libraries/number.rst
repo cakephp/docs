@@ -6,7 +6,7 @@ Number
 .. php:class:: Number
 
 あなたが ``View`` の外で :php:class:`NumberHelper` 機能が必要な場合、
-``Number`` クラスを次のように使います::
+``Number`` クラスを次のように使います。 ::
 
     namespace App\Controller;
 
@@ -25,7 +25,7 @@ Number
         {
             $storageUsed = $this->Auth->user('storage_used');
             if ($storageUsed > 5000000) {
-                //  割り当てられたusersに通知
+                // 割り当てられた users に通知
                 $this->Flash->success(__('あなたは {0} ストレージを使用しています', Number::toReadableSize($storageUsed)));
             }
         }
@@ -41,16 +41,16 @@ Number
 .. php:method:: currency(mixed $value, string $currency = null, array $options = [])
 
 このメソッドは、共通通貨フォーマット（ユーロ、英ポンド、米ドル）で数値を表示するために使用されます。
-ビュー内で次のように使います。::
+ビュー内で次のように使います。 ::
 
-    // NumberHelperとしてコール
+    // NumberHelper としてコール
     echo $this->Number->currency($value, $currency);
 
-    // Numberとしてコール
+    // Number としてコール
     echo Number::currency($value, $currency);
 
-1つ目のパラメータ ``$value`` は、合計金額をあらわす浮動小数点数でなければいけません。
-2つ目のパラメータは、あらかじめ定義された通貨フォーマット方式を選択するための文字列です。:
+1つ目のパラメーター ``$value`` は、合計金額をあらわす浮動小数点数でなければいけません。
+2つ目のパラメーターは、あらかじめ定義された通貨フォーマット方式を選択するための文字列です。
 
 +---------------------+----------------------------------------------------+
 | $currency           | 通貨の種類によってフォーマットされた 1234.56       |
@@ -62,8 +62,8 @@ Number
 | USD                 | $1,234.56                                          |
 +---------------------+----------------------------------------------------+
 
-3つ目のパラメータは、出力を定義するためのオプションの配列です。
-次のオプションが用意されています。:
+3つ目のパラメーターは、出力を定義するためのオプションの配列です。
+次のオプションが用意されています。
 
 +---------------------+----------------------------------------------------+
 | オプション          | 説明                                               |
@@ -84,10 +84,10 @@ Number
 +---------------------+----------------------------------------------------+
 | fractionSymbol      | 小数に使用する文字列。例. ' cents'                 |
 +---------------------+----------------------------------------------------+
-| fractionPosition    | fractionSymbolで指定した文字列を、小数の           |
+| fractionPosition    | fractionSymbol で指定した文字列を、小数の          |
 |                     | 'before' または 'after' のどちらに配置するか。     |
 +---------------------+----------------------------------------------------+
-| pattern             | 数値のフォーマットに使用するICU数値パターン。      |
+| pattern             | 数値のフォーマットに使用する ICU 数値パターン。    |
 |                     | 例. #,###.00                                       |
 +---------------------+----------------------------------------------------+
 | useIntlCode         | 通貨記号を国際通貨コードに置き換えるために         |
@@ -101,7 +101,7 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
 
 .. php:method:: defaultCurrency($currency)
 
-デフォルト通貨のためのsetter/getterです。これによって、常に :php:meth:`Cake\\I18n\\Number::currency()` に通貨を渡したり、
+デフォルト通貨のための setter/getter です。これによって、常に :php:meth:`Cake\\I18n\\Number::currency()` に通貨を渡したり、
 他のデフォルトを設定することによって全ての通貨の出力を変更したりする必要がなくなります。
 ``$currency`` に ``false`` が設定された場合、現在格納されている値をクリアします。
 デフォルトでは、設定されていれば ``intl.default_locale`` を取得し、そうでない場合は 'en_US' を設定します。
@@ -114,13 +114,13 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
 このメソッドは指定された精度(小数点以下)で数値を表示します。
 定義された精度のレベルを維持するために丸めます。 ::
 
-    // NumberHelperとしてコール
+    // NumberHelper としてコール
     echo $this->Number->precision(456.91873645, 2);
 
     // 出力
     456.92
 
-    // Numberとしてコール
+    // Number としてコール
     echo Number::precision(456.91873645, 2);
 
 パーセンテージフォーマット
@@ -131,21 +131,21 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
 +---------------------+----------------------------------------------------+
 | オプション          | 説明                                               |
 +=====================+====================================================+
-| multiply            | 値を100で乗算しなければならないかどうかを示す      |
-|                     | Boolean値です。少数のパーセンテージに便利です。    |
+| multiply            | 値を 100 で乗算しなければならないかどうかを示す    |
+|                     | Boolean 値です。少数のパーセンテージに便利です。   |
 +---------------------+----------------------------------------------------+
 
 このメソッドは :php:meth:`Cake\\I18n\\Number::precision()` のように、
 与えられた精度に応じて(精度を満たすように丸めて)数値をフォーマットします。
 このメソッドはパーセンテージとして数値を表現し、パーセント記号を追加して出力します。 ::
 
-    // NumberHelperとしてコール。 出力: 45.69%
+    // NumberHelper としてコール。 出力: 45.69%
     echo $this->Number->toPercentage(45.691873645);
 
-    // Numberとしてコール。 出力: 45.69%
+    // Number としてコール。 出力: 45.69%
     echo Number::toPercentage(45.691873645);
 
-    // multiplyオプションとともにコール。 出力: 45.7%
+    // multiply オプションとともにコール。 出力: 45.7%
     echo Number::toPercentage(0.45691, 1, [
         'multiply' => true
     ]);
@@ -156,16 +156,16 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
 .. php:method:: toReadableSize(string $size)
 
 このメソッドはデータサイズを人が読める形式に整形します。
-これは、バイト数をKB、MB、GB、およびTBへ変換するための近道を提供します。
+これは、バイト数を KB、MB、GB、および TB へ変換するための近道を提供します。
 サイズは、データのサイズに応じて小数点以下二桁の精度で表示されます。(例 大きいサイズの表現)::
 
-    // NumberHelperとしてコール
+    // NumberHelper としてコール
     echo $this->Number->toReadableSize(0); // 0 Byte
     echo $this->Number->toReadableSize(1024); // 1 KB
     echo $this->Number->toReadableSize(1321205.76); // 1.26 MB
     echo $this->Number->toReadableSize(5368709120); // 5 GB
 
-    // Numberとしてコール
+    // Number としてコール
     echo Number::toReadableSize(0); // 0 Byte
     echo Number::toReadableSize(1024); // 1 KB
     echo Number::toReadableSize(1321205.76); // 1.26 MB
@@ -177,23 +177,23 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
 .. php:method:: format(mixed $value, array $options = [])
 
 このメソッドは、ビューで使うための数値の整形をより制御しやすくします。
-(および、メインのメソッドとして、NumberHelperのその他のほとんどのメソッドから使用されます。)
-このメソッドは以下のように使用します::
+(および、メインのメソッドとして、NumberHelper のその他のほとんどのメソッドから使用されます。)
+このメソッドは以下のように使用します。 ::
 
-    // NumberHelperとしてコール
+    // NumberHelper としてコール
     $this->Number->format($value, $options);
 
-    // Numberとしてコール
+    // Number としてコール
     Number::format($value, $options);
 
-``$value`` パラメータは、出力のために整形しようとしている数値です。
-``$options`` が未指定の場合、1236.334という数値は1,236として出力されるでしょう。
+``$value`` パラメーターは、出力のために整形しようとしている数値です。
+``$options`` が未指定の場合、1236.334 という数値は 1,236 として出力されるでしょう。
 デフォルトの制度は1の位であることに注意してください。
 
 ``$options`` パラメーターはこのメソッドに存在している手品のタネの在りかです。
 
 - もし整数を渡した場合、精度もしくは小数点以下の桁数になります。
-- もし連想配列を渡した場合、以下のキーが使用できます。:
+- もし連想配列を渡した場合、以下のキーが使用できます。
 
 +---------------------+----------------------------------------------------+
 | オプション          | 説明                                               |
@@ -202,7 +202,7 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
 +---------------------+----------------------------------------------------+
 | precision           | 小数点以下の最大桁数を指定します。例. 2            |
 +---------------------+----------------------------------------------------+
-| pattern             | 数値のフォーマットに使用するICU数値パターン。      |
+| pattern             | 数値のフォーマットに使用する ICU 数値パターン。    |
 |                     | 例. #,###.00                                       |
 +---------------------+----------------------------------------------------+
 | locale              | 数値フォーマットに使用するロケール名。             |
@@ -215,7 +215,7 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
 
 例::
 
-    // NumberHelperとしてコール
+    // NumberHelper としてコール
     echo $this->Number->format('123456.7890', [
         'places' => 2,
         'before' => '¥ ',
@@ -228,7 +228,7 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
     ]);
     // 出力 '123 456,79 !'
 
-    // Numberとしてコール
+    // Number としてコール
     echo Number::format('123456.7890', [
         'places' => 2,
         'before' => '¥ ',
@@ -266,19 +266,19 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
 
 .. php:method:: formatDelta(mixed $value, array $options = [])
 
-このメソッドは、符号付きの数として値の差分を表示します。::
+このメソッドは、符号付きの数として値の差分を表示します。 ::
 
-    // NumberHelperとしてコール
+    // NumberHelper としてコール
     $this->Number->formatDelta($value, $options);
 
-    // Numberとしてコール
+    // Number としてコール
     Number::formatDelta($value, $options);
 
 ``$value`` パラメーターは、出力のために整形しようとしている数値です。
-``$options`` が未指定の場合、1236.334という数値は1,236として出力されるでしょう。
+``$options`` が未指定の場合、1236.334 という数値は 1,236 として出力されるでしょう。
 デフォルトの制度は1の位であることに注意してください。
 
-``$options`` パラメーターは :php:meth:`Number::format()` と同じキーを取ります。:
+``$options`` パラメーターは :php:meth:`Number::format()` と同じキーを取ります。
 
 +---------------------+----------------------------------------------------+
 | オプション          | 説明                                               |
@@ -297,7 +297,7 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
 
 例::
 
-    // NumberHelperとしてコール
+    // NumberHelper としてコール
     echo $this->Number->formatDelta('123456.7890', [
         'places' => 2,
         'before' => '[',
@@ -305,7 +305,7 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
     ]);
     // 出力 '[+123,456.79]'
 
-    // Numberとしてコール
+    // Number としてコール
     echo Number::formatDelta('123456.7890', [
         'places' => 2,
         'before' => '[',
@@ -315,12 +315,12 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
 
 .. end-cakenumber
 
-フォーマッタ設定
-================
+フォーマッター設定
+==================
 
 .. php:method:: config(string $locale, int $type = NumberFormatter::DECIMAL, array $options = [])
 
-このメソッドを使用すると、様々なメソッドの呼び出し間で持続的なフォーマッタのデフォルトを設定することができます。
+このメソッドを使用すると、様々なメソッドの呼び出し間で持続的なフォーマッターのデフォルトを設定することができます。
 
 例::
 

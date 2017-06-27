@@ -11,15 +11,15 @@ CakePHP における HtmlHelper の役割は、 HTML に関連するオプショ
 
 HtmlHelper にある多くのメソッドは ``$attributes`` という引数を持っています。
 これにより、いかなる追加属性もタグに付け加えることができます。
-ここでは、 ``$attributes`` パラメータを使用する方法の例をいくつか紹介します。
+ここでは、 ``$attributes`` パラメーターを使用する方法の例をいくつか紹介します。
 
 .. code-block:: html
 
     欲しい属性: <tag class="someClass" />
-    配列パラメータ: ['class' => 'someClass']
+    配列パラメーター: ['class' => 'someClass']
 
     欲しい属性: <tag name="foo" value="bar" />
-    配列パラメータ:  ['name' => 'foo', 'value' => 'bar']
+    配列パラメーター:  ['name' => 'foo', 'value' => 'bar']
 
 整形式の要素を挿入
 ==================
@@ -69,7 +69,7 @@ CSS スタイルシートへのリンク（複数可）を作成します。
 ``$options`` 配列のキー 'rel' が 'import' に設定されていると、スタイルシートがインポートされます。
 
 パスが '/' で始まらない場合、CSS をインクルードするこのメソッドは、指定された CSS ファイルが
-**webroot/css** ディレクトリ内にあることを前提としています。 ::
+**webroot/css** ディレクトリー内にあることを前提としています。 ::
 
     echo $this->Html->css('forms');
 
@@ -79,7 +79,7 @@ CSS スタイルシートへのリンク（複数可）を作成します。
 
     <link rel="stylesheet" href="/css/forms.css" />
 
-最初のパラメータは、複数のファイルを含むように配列することができます。 ::
+最初のパラメーターは、複数のファイルを含むように配列することができます。 ::
 
     echo $this->Html->css(['forms', 'tables', 'menu']);
 
@@ -128,11 +128,11 @@ meta タグの作成
 .. php:method:: meta(string|array $type, string $url = null, array $options = [])
 
 このメソッドは、 RSS または Atom フィードや、 favicon といった外部リソースとリンクする際に便利です。
-css() と同様に、 ``['block' => true]`` のように $attributes パラメータの 'block' キーを
+css() と同様に、 ``['block' => true]`` のように $attributes パラメーターの 'block' キーを
 ``true`` に設定することで、このタグをインラインで表示するか
 ``meta`` ブロックに追加するかどうかを指定することができます。
 
-$attributes のパラメータを使って "type" 属性を設定するとき、 CakePHP では、
+$attributes のパラメーターを使って "type" 属性を設定するとき、 CakePHP では、
 いくつかのショートカットを用意しています。
 
 ======== ======================
@@ -347,7 +347,7 @@ HTML リンクを作成するための多目的なメソッドです。
         削除
     </a>
 
-``link()`` でクエリ文字列を作成することもできます。 ::
+``link()`` でクエリー文字列を作成することもできます。 ::
 
     echo $this->Html->link('View image', [
         'controller' => 'Images',
@@ -362,7 +362,7 @@ HTML リンクを作成するための多目的なメソッドです。
 
     <a href="/images/view/1?height=400&width=500">View image</a>
 
-``$title`` の HTML 特殊文字は HTML エンティティに変換されます。
+``$title`` の HTML 特殊文字は HTML エンティティーに変換されます。
 この変換を無効にするには、 ``$options`` 配列の escape オプションを ``false`` に設定します。 ::
 
     echo $this->Html->link(
@@ -458,11 +458,11 @@ script タグは代わりに文書内の他の場所で出力できる ``script`
 ``$options['once']`` は、このスクリプトをリクエストごとに1回または複数回含めるかどうかを制御します。
 デフォルトは ``true`` です。
 
-$options を使用して、生成された script タグに追加のプロパティを設定することができます。
+$options を使用して、生成された script タグに追加のプロパティーを設定することができます。
 script タグの配列を使用すると、生成されたすべての script タグに属性が適用されます。
 
 この JavaScript ファイルをインクルードするメソッドは、指定された JavaScript ファイルが
-**webroot/js** ディレクトリ内にあることを前提としています。 ::
+**webroot/js** ディレクトリー内にあることを前提としています。 ::
 
     echo $this->Html->script('scripts');
 
@@ -486,7 +486,7 @@ script タグの配列を使用すると、生成されたすべての script �
 
     <script src="http://code.jquery.com/jquery.min.js"></script>
 
-最初のパラメータは、複数のファイルをインクルードするために配列することができます。 ::
+最初のパラメーターは、複数のファイルをインクルードするために配列することができます。 ::
 
     echo $this->Html->script(['jquery', 'wysiwyg', 'scripts']);
 
@@ -534,7 +534,7 @@ PHP ビューコードから Javascript ブロックを生成するには、ス�
 .. php:method:: scriptStart($options = [])
 .. php:method:: scriptEnd()
 
-``scriptStart()`` メソッドを使って、 ``<script>`` タグに出力するキャプチャブロックを作成することができます。
+``scriptStart()`` メソッドを使って、 ``<script>`` タグに出力するキャプチャーブロックを作成することができます。
 保存されたスクリプトスニペットをインラインで出力することも、ブロックにバッファリングすることもできます。 ::
 
     // 'script' ブロックに追加
@@ -736,7 +736,7 @@ HtmlHelper によるタグ出力の変更
 
 .. php:method:: setTemplates($templates)
 
-``$templates`` パラメータは、読み込みたいタグを含む PHP ファイルへの文字列ファイルパスか、
+``$templates`` パラメーターは、読み込みたいタグを含む PHP ファイルへの文字列ファイルパスか、
 追加/置換するためのテンプレートの配列です。 ::
 
     // config/my_html.php からテンプレートを読み込む。
@@ -783,7 +783,7 @@ HtmlHelper の助けを借りて、アプリでパンくずリストを作成す
         'escape' => false
     ]);
 
-``text`` や ``url`` 以外のキーは ``$options`` パラメータとして
+``text`` や ``url`` 以外のキーは ``$options`` パラメーターとして
 :php:meth:`~HtmlHelper::link()` に渡されます。
 
 今、ビューでは、各ページ上のパンくずリストを開始するために以下を追加しようと考えています::
@@ -812,7 +812,7 @@ HTML パラメーターを使用することができ、 特別なオプショ�
 
 このメソッドはリストとその要素を生成するために :php:meth:`Cake\\View\\Helper\\HtmlHelper::tag()`
 を使います。 :php:meth:`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()` と同様に動作するので、
-全てのパンくずに追加されたオプションを使用できます。 ``$startText`` パラメータを使って、
+全てのパンくずに追加されたオプションを使用できます。 ``$startText`` パラメーターを使って、
 最初のパンくずのリンクやテキストを提供することができます。
 これは、常にルートのリンクを含めたい場合に便利です。このオプションは
 :php:meth:`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()` の

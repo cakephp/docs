@@ -136,7 +136,7 @@ tests:
 
 .. versionadded:: 3.4.1
     Support for PHPUnit 6 was addded. If you're using a PHPUnit version lower
-    than 5.7.0, your tests classes should either extends Cake's classes or
+    than 5.7.0, your tests classes should either extends CakePHP's classes or
     ``PHPUnit_Framework_TestCase``.
 
 Creating Your First Test Case
@@ -1098,7 +1098,8 @@ helper methods for interacting with encrypted cookies in your test cases::
 
     $this->assertCookieEncrypted('An updated value', 'my_cookie');
 
-.. versionadded: 3.1.7
+.. versionadded:: 3.1.7
+
     ``assertCookieEncrypted`` and ``cookieEncrypted`` were added in 3.1.7.
 
 Testing Flash Messages
@@ -1225,7 +1226,8 @@ make testing responses much simpler. Some examples are::
     $this->assertHeader('Content-Type', 'application/json');
 
     // Assert view variables
-    $this->assertEquals('jose', $this->viewVariable('user.username'));
+    $user =  $this->viewVariable('user');
+    $this->assertEquals('jose', $user->username);
 
     // Assert cookies in the response
     $this->assertCookie('1', 'thingid');

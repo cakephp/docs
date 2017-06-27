@@ -29,6 +29,10 @@ retournée::
         // validation de l'entity a échouée.
     }
 
+.. versionadded:: 3.4.0
+
+    La méthode ``getErrors()`` a été ajoutée.
+
 Quand vous construisez une entity avec la validation activée, les choses
 suivantes vont se produire:
 
@@ -408,20 +412,35 @@ parti de la clé primaire.
 Vous pouvez forcer ``existsIn`` à passer quand des parties qui peuvent être
 nulles de votre clé étrangère composite sont nulles::
 
-    // Example: A composite primary key within NodesTable is (id, site_id).
-    // A Node may reference a parent Node but does not need to. In latter case, parent_id is null.
-    // Allow this rule to pass, even if fields that are nullable, like parent_id, are null:
+    // Example: Une clé primaire composée dans NodesTable est (id, site_id).
+    // Un "Node" peut faire référence à un parent Node mais ce n'est pas obligatoire.
+    // Dans un cas d'utilisation, parent_id est null.
+    // Nous permettons à cette règle de passer, même si les champs qui sont nullable, comme
+    // parent_id, sont null :
     $rules->add($rules->existsIn(
         ['parent_id', 'site_id'], // Schema: parent_id NULL, site_id NOT NULL
         'ParentNodes',
         ['allowNullableNulls' => true]
     ));
 
-    // A Node however must in addition also always reference a Site.
+    // Un Node doit cependant toujours avoir une référence à un Site.
     $rules->add($rules->existsIn(['site_id'], 'Sites'));
 
+Dans la majorité des bases de données SQL, les index ``UNIQUE`` sur plusieurs
+colonnes permettent à plusieurs valeurs null d'exister car ``NULL`` n'est
+pas égale à lui même. Même si autoriser plusieurs valeurs null est le comportement
+par défaut de CakePHP, vous pouvez inclure des valeurs null dans vos validations
+en utilisant ``allowMultipleNulls``::
+
+    // Seulement une valeur null peut exister dans `parent_id` et `site_id`
+    $rules->add($rules->existsIn(
+        ['parent_id', 'site_id'],
+        'ParentNodes',
+        ['allowMultipleNulls' => false]
+    ));
+
 .. versionadded:: 3.3.0
-    L'option ``allowNullableNulls`` a été ajoutée.
+    Les options ``allowNullableNulls`` et ``allowMultipleNulls`` ont été ajoutées.
 
 Règles sur le Nombre de Valeurs d'une Association
 -------------------------------------------------
@@ -429,6 +448,7 @@ Règles sur le Nombre de Valeurs d'une Association
 Si vous devez valider qu'une propriété ou une association contient un bon nombre
 de valeurs, vous pouvez utiliser la règle ``validCount()``::
 
+    // Dans le fichier ArticlesTable.php
     // Pas plus de 5 tags sur un article.
     $rules->add($rules->validCount('tags', 5, '<=', 'Vous pouvez avoir seulement 5 tags'));
 
@@ -438,9 +458,18 @@ paramètre vous permet de définir l'opérateur de comparaison à utiliser. ``==
 assurer qu'un nombre d'une propriété est entre certaines valeurs, utilisez deux
 règles::
 
+    // Dans le fichier ArticlesTable.php
     // Entre 3 et 5 tags
     $rules->add($rules->validCount('tags', 3, '>=', 'Vous devez avoir au moins 3 tags'));
     $rules->add($rules->validCount('tags', 5, '<=', 'Vous devez avoir au moins 5 tags'));
+    $rules->add($rules->validCount('subscription', 0, '==', 'Vous pouvez ne pas avoir de subscription'));
+
+.. note::
+
+    ``validCount`` retourne ``false`` si la propriété ne peut pas être comptée
+    ou n'existe pas. Par exemple, comparé via ``<``, ``<=`` ou avec ``0``
+    retournera ``false`` si vous ne fournissez pas au moins une liste vide
+    d'abonnements.
 
 .. versionadded:: 3.3.0
     La méthode ``validCount()`` a été ajoutée dans la version 3.3.0.

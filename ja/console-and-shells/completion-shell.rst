@@ -63,7 +63,7 @@ options
 CakePHP コンソール用の Bash 自動補完を有効にする方法
 =====================================================
 
-まず、**bash-completion** ライブラリがインストールされていることを確認します。
+まず、**bash-completion** ライブラリーがインストールされていることを確認します。
 もし、ない場合は、次のコマンドでインストールします。 ::
 
     apt-get install bash-completion
@@ -76,8 +76,8 @@ CakePHP コンソール用の Bash 自動補完を有効にする方法
 .. note::
 
     MacOS X を使用している場合は、**homebrew** で ``brew install bash-completion`` を使って
-    **bash-completion** ライブラリをインストールすることができます。
-    **cake** ファイルの対象ディレクトリは、 **/usr/local/etc/bash_completion.d/** になります。
+    **bash-completion** ライブラリーをインストールすることができます。
+    **cake** ファイルの対象ディレクトリーは、 **/usr/local/etc/bash_completion.d/** になります。
 
 .. _bash-completion-file-content:
 

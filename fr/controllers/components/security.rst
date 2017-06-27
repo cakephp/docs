@@ -43,7 +43,7 @@ avant ces components dans la méthode ``initialize()``.
 
     Vous devez toujours vérifier les méthodes HTTP utilisées avant d'exécuter
     d'autre code. Vous devez :ref:`vérifier la méthode HTTP <check-the-request>`
-    ou utiliser :php:meth:`Cake\\Network\\Request::allowMethod()` pour vous
+    ou utiliser :php:meth:`Cake\\Http\\ServerRequest::allowMethod()` pour vous
     assurer que la bonne méthode HTTP est utilisée.
 
 Gestion des callbacks Blackhole
@@ -62,13 +62,16 @@ mise en trou noir (blackhole callback)::
 
     public function beforeFilter(Event $event)
     {
-        $this->Security->config('blackHoleCallback', 'blackhole');
+        $this->Security->setConfig('blackHoleCallback', 'blackhole');
     }
 
     public function blackhole($type)
     {
         // Gère les erreurs.
     }
+
+Note : utilisez ``$this->Security->config()`` pour les versions de CakePHP
+inférieures à 3.4.0.
 
 Le  paramètre ``$type`` peut avoir les valeurs suivantes:
 
@@ -148,7 +151,8 @@ validatePost
     essentiellement éteindre la validation de formulaire.
 
 Les options de configuration ci-dessus peuvent être _set_ via la méthode
-``config()``
+``setConfig()`` ou ``config()`` si vous utilisez une version de CakePHP avant
+3.4.0.
 
 Utilisation
 ===========
@@ -251,9 +255,12 @@ fonctionnalités de ``SecurityComponent``::
 
         public function beforeFilter(Event $event)
         {
-             $this->Security->config('unlockedActions', ['edit']);
+             $this->Security->setConfig('unlockedActions', ['edit']);
         }
     }
+
+Note : utilisez ``$this->Security->config()`` pour les versions de CakePHP
+inférieures à 3.4.0.
 
 Cet exemple désactiverait toutes les vérifications de sécurité pour une action
 edit.

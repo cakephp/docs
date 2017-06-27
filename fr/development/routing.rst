@@ -159,7 +159,7 @@ du tableau devraient être appelées après les éléments de route dans l'URL, 
 les éléments par défaut: ``:controller``, ``:action``, et ``:plugin``. Les
 valeurs dans le tableau sont les valeurs par défaut pour ces clés. Regardons
 quelques exemples simples avant que nous commencions à voir l'utilisation du
-troisième paramètre de connect()::
+troisième paramètre de ``connect()``::
 
     $routes->connect(
         '/pages/*',
@@ -250,7 +250,7 @@ route: ``:controller`` et ``:id``. L'élément ``:controller`` est l'élément d
 route par défaut de CakePHP, donc le router sait comment matcher et identifier
 les noms de controller dans les URLs. L'élément ``:id`` est un élément de route
 personnalisé, et doit être clarifié plus loin en spécifiant une expression
-régulière correspondante dans le troisième paramètre de connect().
+régulière correspondante dans le troisième paramètre de ``connect()``.
 
 CakePHP ne produit pas automatiquement d'urls en minuscule avec des tirets quand
 vous utilisez le paramètre ``:controller``. Si vous avez besoin de ceci,
@@ -277,8 +277,8 @@ d'une application CakePHP 2.x, vous pouvez utiliser à la place la classe
     correctement.
 
 Une fois que cette route a été définie, la requête ``/apples/5`` est la même
-que celle requêtant ``/apples/view/5``. Les deux appelleraient la méthode view()
-de ApplesController. A l'intérieur de la méthode view(), vous aurez besoin
+que celle requêtant ``/apples/view/5``. Les deux appelleraient la méthode ``view()``
+de ApplesController. A l'intérieur de la méthode ``view()``, vous aurez besoin
 d'accéder à l'ID passé à ``$this->request->getParam('id')``.
 
 Si vous avez un unique controller dans votre application et que vous ne
@@ -316,7 +316,7 @@ nous est familier: c'est une route par défaut qui dit à CakePHP d'attendre
 un nom de controller.
 
 Ensuite, nous spécifions quelques valeurs par défaut. Quel que soit le
-controller, nous voulons que l'action index() soit appelée.
+controller, nous voulons que l'action ``index()`` soit appelée.
 
 Finalement, nous spécifions quelques expressions régulières qui vont
 matcher les années, mois et jours sous forme numérique. Notez que les
@@ -326,7 +326,7 @@ dessus, mais ne pas grouper avec les parenthèses.
 
 Une fois définie, cette route va matcher ``/articles/2007/02/01``,
 ``/posts/2004/11/16``, gérant les requêtes
-pour les actions index() de ses controllers respectifs, avec les paramètres de
+pour les actions ``index()`` de ses controllers respectifs, avec les paramètres de
 date dans ``$this->request->getParam()``.
 
 Il y a plusieurs éléments de route qui ont une signification spéciale dans
@@ -712,23 +712,38 @@ Routing des Extensions de Fichier
 
 .. php:staticmethod:: extensions(string|array|null $extensions, $merge = true)
 
+
 Pour manipuler différentes extensions de fichier avec vos routes, vous pouvez
-ajouter ce qui suit dans votre fichier de config des routes::
+définir vos extensions de manière globale ou dans un *scope*. Définir des
+extensions globales peut se faire via la méthode static :php:meth:`Router::extensions()`
+
+    Router::extensions(['json', 'xml']);
+    // ...
+
+Ceci affectera **toutes** les routes qui seront connectées **après** cet appel,
+quelque soit leur *scope*.
+
+Pour restreindre les extensions à un *scope* spécifique, vous pouvez les définir
+en utilisant la méthode :php:meth:`Cake\\Routing\\RouteBuilder::extensions()`::
 
     Router::scope('/', function ($routes) {
         $routes->extensions(['json', 'xml']);
-        ...
+        // ...
     });
 
-Cela activera les extensions de nom pour toutes les routes déclarées **après**
-l'appel de cette méthode. Par défaut, les extensions que vous avez déclarées
-seront fusionnées avec la liste des extensions existantes.
+Cela activera les extensions pour toutes les routes qui seront définies dans ce
+scope **après** l'appel à ``extensions()``, tout en incluant les routes inclus
+dans les scopes imbriqués. De la même manière que la méthode :php:meth:`Router::extensions()`,
+toutes les routes connectées avant cet appel n'hériteront pas de ces extensions.
 
 .. note::
 
     Le réglage des extensions devrait être la première chose que vous devriez
     faire dans un scope, car les extensions seront appliquées uniquement aux
     routes qui sont définies **après** la déclaration des extensions.
+
+    Lorsque vous définissez des routes dans le même scope mais dans deux appels
+    différents, les extensions ne seront pas héritées d'un appel à l'autre.
 
 En utilisant des extensions, vous dites au router de supprimer toutes les
 extensions de fichiers correspondant, puis d'analyser le reste. Si vous
@@ -880,8 +895,8 @@ renommer vos actions::
         'actions' => ['update' => 'put', 'create' => 'add']
     ]);
 
-Le code ci-dessus va utiliser ``put()`` pour l'action ``edit()``, et
-``create()`` au lieu de ``add()``.
+Le code ci-dessus va utiliser la méthode ``put()`` pour l'action ``edit()``, et
+``add()`` au lieu de ``create()``.
 
 Mapper des Routes de Ressource Supplémentaires
 ----------------------------------------------
@@ -948,7 +963,7 @@ Vous pouvez spécifier un type d'inflection alternatif en utilisant l'option
     Router::scope('/', function ($routes) {
         $routes->resources('BlogPosts', [
             'inflect' => 'dasherize' // Utilisera ``Inflector::dasherize()``
-        ];
+        ]);
     })
 
 Ce qui est au-dessus va générer des URLs de style **/blog-posts/***.
@@ -1037,10 +1052,10 @@ générés vont automatiquement être mises à jour.
 
 Si vous créez des URLs en utilisant des chaînes de caractères comme::
 
-    $this->Html->link('View', '/articles/view/' + $id);
+    $this->Html->link('View', '/articles/view/' . $id);
 
-Et ensuite plus tard, vous décidez que ``/posts`` devrait vraiment être
-appelé 'articles' à la place, vous devrez aller dans toute votre application
+Et ensuite plus tard, vous décidez que ``/articles`` devrait vraiment être
+appelé 'posts' à la place, vous devrez aller dans toute votre application
 en renommant les URLs. Cependant, si vous définissiez votre lien comme::
 
     $this->Html->link(

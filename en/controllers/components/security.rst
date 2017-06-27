@@ -249,7 +249,7 @@ There may be cases where you want to disable all security checks for an action
         }
     }
 
-Note: use ``$this->Security->config()`` for CakePHP versions prior to 3.4
+Note: use ``$this->Security->config()`` for CakePHP versions prior to 3.4.0
 
 This example would disable all security checks for the edit action.
 

@@ -180,20 +180,20 @@ classe :php:class:`~Cake\\Validation\\Validation`. Cela facilite l'utilisation
 des méthodes de cette classe en règles de validation. Lors de l'utilisation
 conjointe de Validators et de l'ORM, des providers supplémentaires sont
 configurés pour la table et les objets entity. Vous pouvez utiliser la méthode
-``provider()`` pour ajouter un provider supplémentaire que votre application
+``setProvider()`` pour ajouter un provider supplémentaire que votre application
 a besoin d'utiliser::
 
     $validator = new Validator();
 
     // Utilise une instance de l'object.
-    $validator->provider('custom', $myObject);
+    $validator->setProvider('custom', $myObject);
 
     // Utilise un nom de classe. Les méthodes doivent être static.
-    $validator->provider('custom', 'App\Model\Validation');
+    $validator->setProvider('custom', 'App\Model\Validation');
 
 Les providers de Validation peuvent être des objets, ou des noms de classe. Si
 un nom de classe est utilisé, les méthodes doivent être static. Pour utiliser
-un provider autre que 'default', assurez-vous de définir la clé ``provider()``
+un provider autre que 'default', assurez-vous de définir la clé ``setProvider()``
 dans votre règle::
 
     // Utilise une règle à partir du provider de la table
@@ -216,7 +216,7 @@ pays, par exemple::
         public function validationDefault(Validator $validator)
         {
             // Ajoute le provider au validator
-            $validator->provider('fr', 'Localized\Validation\FrValidation');
+            $validator->setProvider('fr', 'Localized\Validation\FrValidation');
             // utilise le provider dans une règle de validation de champ
             $validator->add('phoneField', 'myCustomRuleNameForPhone', [
                 'rule' => 'phone',

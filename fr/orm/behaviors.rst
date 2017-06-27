@@ -36,7 +36,7 @@ Créer un Behavior
 
 Dans les exemples suivants, nous allons créer un ``SluggableBehavior`` très
 simple. Ce behavior va nous autoriser à remplir un champ slug avec les
-résultats de ``Inflector::slug()`` basé sur un autre champ.
+résultats de ``Text::slug()`` basé sur un autre champ.
 
 Avant de créer notre behavior, nous devrions comprendre les conventions pour
 les behaviors:
@@ -101,7 +101,7 @@ table. Par exemple, si notre SluggableBehavior définit la méthode suivante::
 
     public function slug($value)
     {
-        return Inflector::slug($value, $this->_config['replacement']);
+        return Text::slug($value, $this->_config['replacement']);
     }
 
 Il pourrait être invoqué de la façon suivante::
@@ -155,7 +155,7 @@ behavior devrait maintenant ressembler à ceci::
     use Cake\ORM\Behavior;
     use Cake\ORM\Entity;
     use Cake\ORM\Query;
-    use Cake\Utility\Inflector;
+    use Cake\Utility\Text;
 
     class SluggableBehavior extends Behavior
     {
@@ -169,7 +169,7 @@ behavior devrait maintenant ressembler à ceci::
         {
             $config = $this->config();
             $value = $entity->get($config['field']);
-            $entity->set($config['slug'], Inflector::slug($value, $config['replacement']));
+            $entity->set($config['slug'], Text::slug($value, $config['replacement']));
         }
 
         public function beforeSave(Event $event, EntityInterface $entity)
@@ -325,7 +325,7 @@ lequel nous souhaitons que Timestamp réponde::
 
             // par ex si notre parent appelle $this->addBehavior('Timestamp');
             // et que nous souhaitons ajouter un event supplémentaire
-            if ($this->behaviors()->has('Timestamp') {
+            if ($this->behaviors()->has('Timestamp')) {
                 $this->behaviors()->get('Timestamp')->config([
                     'events' => [
                         'Users.login' => [
@@ -336,4 +336,3 @@ lequel nous souhaitons que Timestamp réponde::
             }
         }
     }
-

@@ -262,6 +262,20 @@ vous pouvez utiliser la méthode ``order``::
     $query = $articles->find()
         ->order(['title' => 'ASC', 'id' => 'ASC']);
 
+Lorsque vous appelez ``order()`` plusieurs fois sur une même requête, les clauses
+seront ajoutées les unes après les autres. Cependant, en utilisant les finders,
+vous pouvez parfois avoir besoin d'écraser le ``ORDER BY``. Pour se faire, vous
+pouvez utiliser le second paramètre de ``order()`` (mais aussi de ``orderAsc()``
+ou ``orderDesc()``) et le définir à ``Query::OVERWRITE`` ou ``true``::
+
+    $query = $articles->find()
+        ->order(['title' => 'ASC']);
+
+    // Plus loin dans le code, vous écrasez la clause ORDER BY plutôt
+    // qu'ajouter une autre clause à l'existante.
+    $query = $articles->find()
+        ->order(['created' => 'DESC'], Query::OVERWRITE);
+
 .. versionadded:: 3.0.12
 
     En plus de ``order``, les méthodes ``orderAsc`` et ``orderDesc`` peuvent
@@ -1364,9 +1378,25 @@ Prévention contre les Injections SQL
 
 Alors que l'ORM et les couches d'abstraction de base de données empêchent la
 plupart des problèmes relatifs aux injections SQL, il est toujours possible que
-vous soyez vulnérables face à une utilisation incorrecte. Lorsque vous utilisez
-le constructeur de fonctions, les noms de colonnes ne doivent pas contenir de
-données provenant d'utilisateurs::
+vous soyez vulnérables face à une utilisation incorrecte.
+
+Lorsque vous utilisez des tableaux de conditions, la clé (la partie à gauche)
+ou bien une valeur seule ne doivent pas contenir de données utilisateur::
+
+    $query->where([
+        // Utiliser cette clé est dangereux car elle sera insérée dans la
+        // requête générée telle quelle
+        $userData => $value,
+
+        // Le même commentaire s'applique pour les valeurs seule : il est
+        // dangereux de les utiliser avec des données utilisateur
+        $userData,
+        "MATCH (comment) AGAINST ($userData)",
+        'created < NOW() - ' . $userData
+    ]);
+
+Lorsque vous utilisez le constructeur de fonctions, les noms de colonnes ne
+doivent pas contenir de données provenant d'utilisateurs::
 
     $query->where(function ($exp) use ($userData, $values) {
         // Les noms de colonnes dans toutes les expressions ne sont pas sûrs.
@@ -1387,6 +1417,30 @@ Les expressions brutes ne sont jamais sécurisées::
 
     $expr = $query->newExpr()->add($userData);
     $query->select(['two' => $expr]);
+
+Lier les Valeurs (Binding)
+--------------------------
+
+Il est possible de protéger vos requêtes en utilisant le "binding".
+De la même manière que vous pouvez :ref:`"binder" des valeurs pour les requêtes préparées <database-basics-binding-values>`,
+des valeurs peuvent être "bindées" aux requêtes en utilisant la méthode :php:meth:`Cake\\Database\\Query::bind()`.
+
+L'exemple ci-dessous est une alternative sûre par rapport à la version donnée
+plus haut, qui serait vulnérable à une injection SQL::
+
+    $query
+        ->where([
+            'MATCH (comment) AGAINST (:userData)',
+            'created < NOW() - :moreUserData'
+        ])
+        ->bind(':userData', $userData, 'string')
+        ->bind(':moreUserData', $moreUserData, 'datetime');
+
+.. note::
+
+    Contrairement à :php:meth:`Cake\\Database\\StatementInterface::bindValue()`,
+    ``Query::bind()`` a besoin que vous passiez les "placeholders" en incluant
+    les deux-points (``:``) !
 
 Plus de Requêtes Complexes
 ==========================

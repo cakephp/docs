@@ -21,6 +21,10 @@ a users table, creating a model, controller & views, etc.
 This is all covered step by step in the
 :doc:`Blog Tutorial </tutorials-and-examples/blog-auth-example/auth>`.
 
+If you are looking for existing authentication and/or authorization solutions
+for CakePHP, have a look at the 
+`Authentication and Authorization <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/README.md#authentication-and-authorization>`_ section of the Awesome CakePHP list.
+
 
 Authentication
 ==============
@@ -553,6 +557,7 @@ AuthComponent uses for setting flash messages. The available keys are
 
 - ``key`` - The key to use, defaults to 'default'. Prior to 3.4.0, the key
   defaulted to 'auth'.
+- ``element`` - The element name to use for rendering, defaults to null.
 - ``params`` - The array of additional params to use, defaults to ``[]``.
 
 In addition to the flash message settings you can customize other error

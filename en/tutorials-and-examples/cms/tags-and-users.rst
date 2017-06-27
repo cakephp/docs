@@ -48,6 +48,7 @@ call convention based setter methods any time a property is set in one of your
 entities. Let's add a setter for the password. In **src/Model/Entity/User.php**
 add the following::
 
+    <?php
     namespace App\Model\Entity;
 
     use Cake\Auth\DefaultPasswordHasher; // Add this line
@@ -58,6 +59,7 @@ add the following::
 
         // Code from bake.
 
+        // Add this method
         protected function _setPassword($value)
         {
             if (strlen($value)) {
@@ -68,7 +70,9 @@ add the following::
         }
     }
 
-Now update one of the users you created earlier, if you change their password,
+Now, point your browser to **http://localhost:8765/users** to see a list of users.
+You can edit the default user that was created during
+:doc:`Installation <installation>`. If you change that user's password,
 you should see a hashed password instead of the original value on the list or
 view pages. CakePHP hashes passwords with `bcrypt
 <http://codahale.com/how-to-safely-store-a-password/>`_ by default. You can also
@@ -91,12 +95,27 @@ to create free-form categories and labels for their content. Again, we'll use
 Once you have the scaffold code created, create a few sample tags by going to
 **http://localhost:8765/tags/add**.
 
+Now that we have a Tags table, we can create an association between Articles and
+Tags. We can do so by adding the following to the ``initialize`` method on the
+ArticlesTable::
+
+    public function initialize(array $config)
+    {
+        $this->addBehavior('Timestamp');
+        $this->belongsToMany('Tags'); // Add this line
+    }
+
+This association will work with this simple definition because we followed
+CakePHP conventions when creating our tables. For more information, read
+:doc:`/orm/associations`.
+
 Updating Articles to Enable Tagging
 ===================================
 
 Now that our application has tags, we need to enable users to tag their
 articles. First, update the ``add`` action to look like::
 
+    <?php
     // in src/Controller/ArticlesController.php
 
     namespace App\Controller;
@@ -130,14 +149,44 @@ articles. First, update the ``add`` action to look like::
 
 The added lines load a list of tags as an associative array of ``id => title``.
 This format will let us create a new tag input in our template.
-Add the following to **src/Template/Articles/add.ctp**::
+Add the following to the PHP block of controls in **src/Template/Articles/add.ctp**::
 
-    <?= $this->Form->control('tags._ids', ['options' => $tags]) ?>
+    echo $this->Form->control('tags._ids', ['options' => $tags]);
 
 This will render a multiple select element that uses the ``$tags`` variable to
 generate the select box options. You should now create a couple new articles
 that have tags, as in the following section we'll be adding the ability to find
 articles by tags.
+
+You should also update the ``edit`` method to allow adding or editing tags. The
+edit method should now look like::
+
+    public function edit($slug)
+    {
+        $article = $this->Articles
+            ->findBySlug($slug)
+            ->contain('Tags') // load associated Tags
+            ->firstOrFail();
+        if ($this->request->is(['post', 'put'])) {
+            $this->Articles->patchEntity($article, $this->request->getData());
+            if ($this->Articles->save($article)) {
+                $this->Flash->success(__('Your article has been updated.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Unable to update your article.'));
+        }
+
+        // Get a list of tags.
+        $tags = $this->Articles->Tags->find('list');
+
+        // Set tags to the view context
+        $this->set('tags', $tags);
+
+        $this->set('article', $article);
+    }
+
+Remember to add the new tags mutliple select control we added to the **add.ctp**
+template to the **src/Template/Articles/edit.ctp** template as well.
 
 Finding Articles By Tags
 ========================
@@ -162,7 +211,7 @@ look like::
     // The trailing `*` tells CakePHP that this action has
     // passed parameters.
     Router::scope(
-        '/bookmarks',
+        '/articles',
         ['controller' => 'Articles'],
         function ($routes) {
             $routes->connect('/tagged/*', ['action' => 'tags']);
@@ -184,6 +233,8 @@ look like::
         $routes->fallbacks();
     });
 
+    Plugin::routes();
+
 The above defines a new 'route' which connects the **/articles/tagged/** path,
 to ``ArticlesController::tags()``. By defining routes, you can isolate how your
 URLs look, from how they are implemented. If we were to visit
@@ -192,14 +243,18 @@ from CakePHP informing you that the controller action does not exist. Let's
 implement that missing method now. In **src/Controller/ArticlesController.php**
 add the following::
 
+    // add this use statement right below the namespace declaration to import
+    // the Query class
+    use Cake\ORM\Query;
+
     public function tags()
     {
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
         $tags = $this->request->getParam('pass');
 
-        // Use the ArticlesTable to find tagged bookmarks.
-        $bookmarks = $this->Articles->find('tagged', [
+        // Use the ArticlesTable to find tagged articles.
+        $articles = $this->Articles->find('tagged', [
             'tags' => $tags
         ]);
 
@@ -212,6 +267,23 @@ add the following::
 
 To access other parts of the request data, consult the :ref:`cake-request`
 section.
+
+Since passed arguments are passed as method parameters, you could also write the
+action using PHP's variadic argument::
+
+    public function tags(...$tags)
+    {
+        // Use the ArticlesTable to find tagged articles.
+        $articles = $this->Articles->find('tagged', [
+            'tags' => $tags
+        ]);
+
+        // Pass variables into the view template context.
+        $this->set([
+            'articles' => $articles,
+            'tags' => $tags
+        ]);
+    }
 
 Creating the Finder Method
 --------------------------
@@ -227,9 +299,15 @@ method has not been implemented yet, so let's do that. In
     // to find('tagged') in our controller action.
     public function findTagged(Query $query, array $options)
     {
+        $columns = [
+            'Articles.id', 'Articles.user_id', 'Articles.title',
+            'Articles.body', 'Articles.published', 'Articles.created',
+            'Articles.slug',
+        ];
+
         $query = $query
-            ->select(['id', 'user_id', 'title', 'body', 'published', 'created'])
-            ->distinct(['id', 'user_id', 'title', 'body', 'published', 'created']);
+            ->select($columns)
+            ->distinct($columns);
 
         if (empty($options['tags'])) {
             // If there are no tags provided, find articles that have no tags.
@@ -263,7 +341,7 @@ put the following content::
 
     <h1>
         Articles tagged with
-        <?= $this->Text->toList(h($tags)) ?>
+        <?= $this->Text->toList(h($tags), 'or') ?>
     </h1>
 
     <section>
@@ -272,7 +350,7 @@ put the following content::
             <!-- Use the HtmlHelper to create a link -->
             <h4><?= $this->Html->link(
                 $article->title,
-                ['controller' => 'Articles', 'action' => 'view', $article->id]
+                ['controller' => 'Articles', 'action' => 'view', $article->slug]
             ) ?></h4>
             <span><?= h($article->created) ?>
         </article>
@@ -312,6 +390,8 @@ Because we'll want a simple way to access the formatted tags for an entity, we
 can add a virtual/computed field to the entity. In
 **src/Model/Entity/Article.php** add the following::
 
+    // add this use statement right below the namespace declaration to import
+    // the Collection class
     use Cake\Collection\Collection;
 
     protected function _getTagString()
@@ -356,6 +436,8 @@ to **src/Model/Table/ArticlesTable.php**::
         if ($entity->tag_string) {
             $entity->tags = $this->_buildTags($entity->tag_string);
         }
+
+        // Other code
     }
 
     protected function _buildTags($tagString)

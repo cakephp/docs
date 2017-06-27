@@ -1,5 +1,5 @@
 クッキー
-##############
+#########
 
 .. php:namespace:: Cake\Controller\Component
 
@@ -35,7 +35,7 @@ expires
     Cookie が無効になる時間を設定します。デフォルトは1ヶ月です。
 path
     Cookie を有効にするパスを設定します。もしパスが '/foo/' で設定されていた場合、
-    Cookie は /foo/ ディレクトリとサブディレクトリ (例: /foo/bar/) でのみ有効になります。
+    Cookie は /foo/ ディレクトリーとサブディレクトリー (例: /foo/bar/) でのみ有効になります。
     デフォルトは、アプリケーションの基本パスです。
 domain
     Cookie が有効なドメイン。
@@ -55,7 +55,7 @@ encryption
     互換性のために `rijndael` を設定することもできます。
 
 コンポーネントの使い方
-==========================
+======================
 
 CookieComponent は、いくつかのメソッドを提供します。
 
@@ -66,7 +66,7 @@ CookieComponent は、いくつかのメソッドを提供します。
 
         $this->Cookie->write('name', 'Larry');
 
-    キーのパラメータにドット記法を使うことで、変数をグループで扱うこともできます。 ::
+    キーのパラメーターにドット記法を使うことで、変数をグループで扱うこともできます。 ::
 
         $this->Cookie->write('User.name', 'Larry');
         $this->Cookie->write('User.role', 'Lead');

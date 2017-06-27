@@ -63,13 +63,16 @@ fichiers de templates devraient ressembler à ceci::
 Changer les Templates à la Volée
 --------------------------------
 
-.. php:method:: templates($templates = null)
+.. php:method:: setTemplates($templates)
 
 Cette méthode vous permet de changer les templates utilisés par PaginatorHelper
 à la volée. Ceci peut être utile quand vous voulez personnaliser des templates
 pour l'appel d'une méthode particulière::
 
     // Lire la valeur du template actuel.
+    $result = $this->Paginator->getTemplates('number');
+
+    // Avant 3.4
     $result = $this->Paginator->templates('number');
 
     // Changez un template
@@ -85,10 +88,10 @@ pour l'appel d'une méthode particulière::
     sont compilés en interne pour être utilisés avec ``sprintf()``.
     Exemple: '<div style="width:{{size}}%%">{{content}}</div>'
 
-Noms du Template
-----------------
+Noms de Templates
+-----------------
 
-PaginatorHelper utilise les templates suivants:
+PaginatorHelper utilise les templates suivants :
 
 - ``nextActive`` L'état activé pour un lien généré par next().
 - ``nextDisabled`` L'état désactivé pour next().
@@ -105,14 +108,14 @@ PaginatorHelper utilise les templates suivants:
 - ``sortAsc`` Le template pour un lien trié avec une direction ascendante.
 - ``sortDesc`` Le template pour un lien trié avec une direction descendante.
 
-Création de liens triés
-=======================
+Création de liens de tri
+========================
 
 .. php:method:: sort($key, $title = null, $options = [])
 
     :param string $key: Le nom de la clé du jeu d'enregistrement qui doit être
         triée.
-    :param string $title: Titre du lien. Si $title est null $key sera
+    :param string $title: Titre du lien. Si $title est null, $key sera
         utilisée pour le titre et sera générée par inflexion.
     :param array $options: Options pour le tri des liens.
 
