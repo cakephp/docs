@@ -20,3 +20,7 @@ Validando dados antes de construir entidades
 
 Aplicando regras da aplicação
 =============================
+
+.. _using-different-validators-per-association
+
+
