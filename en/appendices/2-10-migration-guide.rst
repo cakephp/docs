@@ -19,6 +19,8 @@ Model
   boolean columns in MySQL.
 * ``Model::find()`` now supports ``having`` and ``lock`` options that enable you
   to add ``HAVING`` and ``FOR UPDATE`` locking clauses to your find operations.
+* ``TranslateBehavior`` now supports loading translations with LEFT JOIN. Use
+  the ``joinType`` option to use this feature.
 
 Components
 ==========
