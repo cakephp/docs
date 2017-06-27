@@ -915,7 +915,7 @@ methods to send a request:
 * ``delete()`` Sends a DELETE request.
 * ``patch()`` Sends a PATCH request.
 * ``options()`` Sends an OPTIONS request.
-* ``head()`` Sends an OPTIONS request.
+* ``head()`` Sends an HEAD request.
 
 All of the methods except ``get()`` and ``delete()`` accept a second parameter
 that allows you to send a request body. After dispatching a request you can use
