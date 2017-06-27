@@ -24,6 +24,8 @@ features will continue to function until 4.0.0 after which they will be removed.
   :ref:`csrf-middleware` instead.
 * ``Cake\Datasource\TableSchemaInterface`` is deprecated. Use
   ``Cake\Database\TableSchemaAwareInterface`` instead.
+* ``Cake\Console\ShellDispatcher`` is deprecated. Applications should update to
+  use ``Cake\Console\CommandRunner`` instead.
 
 Deprecated Combined Get/Set Methods
 -----------------------------------
@@ -146,6 +148,10 @@ Console
 * ``Cake\Console\ConsoleOptionParser::setHelpAlias()`` was added. This method
   allows you to set the command name used when generating help output. Defaults
   to ``cake``.
+* ``Cake\Console\CommandRunnner`` was added replacing
+  ``Cake\Console\ShellDispatcher``.
+* ``Cake\Console\CommandCollection`` was added to provide an interface for
+  applications to define the command line tools they offer.
 
 Datasource
 ----------
