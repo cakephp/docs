@@ -487,7 +487,7 @@ Ensuite, ajouter les lignes suivantes à votre template de vue de formulaire::
 
     echo $this->Form->control('group_id', ['options' => $groups]);
 
-Pour créer un select pour l'association belongsToMany Groups, vous pouvez
+Pour créer un ``select`` pour l'association *belongsToMany* Groups, vous pouvez
 ajouter ce qui suit dans votre UsersController::
 
     $this->set('groups', $this->Users->Groups->find('list'));
@@ -496,10 +496,9 @@ Ensuite, ajouter les lignes suivantes à votre template de vue::
 
     echo $this->Form->control('groups._ids', ['options' => $groups]);
 
-Si votre nom de model est composé de deux mots ou plus,
-ex. "UserGroup", quand vous passez les données en utilisant set()
-vous devrez nommer vos données dans un format CamelCase
-(les Majuscules séparent les mots) et au pluriel comme ceci::
+Si votre nom de model est composé de deux mots ou plus (ex. "UserGroup"),
+quand vous passez les données en utilisant ``set()`` vous devrez nommer vos
+données dans un format CamelCase (les Majuscules séparent les mots) et au pluriel comme ceci::
 
     $this->set('userGroups', $this->UserGroups->find('list'));
 
@@ -536,103 +535,136 @@ suffixe au champ. Vous pouvez remarquer des champs supplémentaires nommés
 ont été ajoutés. Ces champs seront automatiquement convertis en objets
 ``DateTime`` quand les entities sont triées.
 
-Options
--------
+Options pour la méthode control()
+---------------------------------
 
-``FormHelper::control()`` supporte un nombre important d'options. En plus de ses
-propres options, ``control()`` accepte des options pour les champs input générés,
-comme les attributs html. Ce qui suit va couvrir les options spécifiques de
-``FormHelper::control()``.
+``FormHelper::control()`` supporte un nombre important d'options via son
+paramètre ``$options``. En plus de ses propres options, ``control()``
+accepte des options pour les champs input générés (et les autres type d'éléments
+comme les ``checkbox`` ou les ``textarea``), comme les attributs HTML. Ce qui
+suit va couvrir les options spécifiques de ``FormHelper::control()``.
 
-* ``$options['type']`` Vous pouvez forcer le type d'un input, remplaçant
-  l'introspection du model, en spécifiant un type. En plus des types de
-  champs vus dans :ref:`automagic-form-elements`, vous pouvez aussi créer
-  des 'fichiers', 'password' et divers types supportés par HTML5::
+* ``$options['type']`` - Une chaîne qui précise le type de widget à générer.
+  En plus des types de champs vus dans :ref:`automagic-form-elements`, vous
+  pouvez aussi créer input de type ``file``, ``password`` et tous les types
+  supportés par HTML5. En spécifiant vous-même le type de l'élément à générer,
+  vous écraserez le type automatique deviné par l'introspection du Model. Le défaut
+  est ``null``::
 
-    echo $this->Form->control('field', ['type' => 'file']);
-    echo $this->Form->control('email', ['type' => 'email']);
+      echo $this->Form->control('field', ['type' => 'file']);
+      echo $this->Form->control('email', ['type' => 'email']);
 
   Affichera:
 
   .. code-block:: html
 
-    <div class="input file">
-        <label for="field">Field</label>
-        <input type="file" name="field" value="" id="field" />
-    </div>
-    <div class="input email">
-        <label for="email">Email</label>
-        <input type="email" name="email" value="" id="email" />
-    </div>
+      <div class="input file">
+          <label for="field">Field</label>
+          <input type="file" name="field" value="" id="field" />
+      </div>
+      <div class="input email">
+          <label for="email">Email</label>
+          <input type="email" name="email" value="" id="email" />
+      </div>
 
-* ``$options['label']`` Définissez cette clé à la chaîne que vous voulez
-  afficher dans le label qui accompagne l'input::
+* ``$options['label']`` Soit une chaîne qui sera utilisé comme valeur pour
+  l'élément HTML ``<label>`` ou bien un tableau :ref:`d'options pour le label<create-label>`.
+  Le défaut est ``null``.
+  Par exemple::
 
-    echo $this->Form->control('name', [
-        'label' => 'The User Alias'
-    ]);
+      echo $this->Form->control('name', [
+          'label' => 'The User Alias'
+      ]);
 
-  Affiche:
-
-  .. code-block:: html
-
-    <div class="input">
-        <label for="name">The User Alias</label>
-        <input name="name" type="text" value="" id="name" />
-    </div>
-
-  D'une autre façon, définissez cette clé à ``false`` pour désactiver
-  l'affichage de ce label::
-
-    echo $this->Form->control('name', ['label' => false]);
-
-  Affiche:
+  Affiche :
 
   .. code-block:: html
 
-    <div class="input">
-        <input name="name" type="text" value="" id="name" />
-    </div>
+      <div class="input">
+          <label for="name">The User Alias</label>
+          <input name="name" type="text" value="" id="name" />
+      </div>
 
-  Définissez ceci dans un tableau pour fournir des options supplémentaires pour
+  Vous pouvez définir cette clé à ``false`` pour désactiver l'affichage de
+  l'élément ``<label>``
+  Par exemple::
+
+      echo $this->Form->control('name', ['label' => false]);
+
+  Affiche :
+
+  .. code-block:: html
+
+      <div class="input">
+          <input name="name" type="text" value="" id="name" />
+      </div>
+
+  Si vous passez un tableau, vous pourrez fournir des options supplémentaires pour
   l'element ``label``. Si vous le faîtes, vous pouvez utiliser une clé ``text``
   dans le tableau pour personnaliser le texte du label::
+  Par exemple::
 
-    echo $this->Form->control('name', [
-        'label' => [
-            'class' => 'thingy',
-            'text' => 'The User Alias'
-        ]
-    ]);
+      echo $this->Form->control('name', [
+          'label' => [
+              'class' => 'thingy',
+              'text' => 'The User Alias'
+          ]
+      ]);
 
-  Affiche:
+  Affiche :
 
   .. code-block:: html
 
-    <div class="input">
-        <label for="name" class="thingy">The User Alias</label>
-        <input name="name" type="text" value="" id="name" />
-    </div>
+      <div class="input">
+          <label for="name" class="thingy">The User Alias</label>
+          <input name="name" type="text" value="" id="name" />
+      </div>
+
+* ``$options['options']`` - Vous pouvez passez à cette option un tableau contenant
+  les choix pour les éléments comme les ``radio`` et les ``select``. Reportez vous
+  à :ref:`create-radio-button` et :ref:`create-select-picker` pour plus de détails.
+  Les défaut est ``null``.
 
 * ``$options['error']`` Utiliser cette clé vous permettra de transformer
   les messages de model par défaut et de les utiliser, par exemple, pour
-  définir des messages i18n.
+  définir des messages i18n. Pour désactiver le rendu des messages d'erreurs
+  définissez la clé ``error`` à ``false``::
 
-  Pour désactiver le rendu des messages d'erreurs définissez la clé error
-  ``false``::
-
-    echo $this->Form->control('name', ['error' => false]);
+      echo $this->Form->control('name', ['error' => false]);
 
   Pour surcharger les messages d'erreurs du model utilisez un tableau
   avec les clés respectant les messages d'erreurs de validation originaux::
 
-    $this->Form->control('name', [
-        'error' => ['Not long enough' => __('This is not long enough')]
-    ]);
+      $this->Form->control('name', [
+          'error' => ['Not long enough' => __('This is not long enough')]
+      ]);
 
   Comme vu précédemment, vous pouvez définir le message d'erreur pour chaque
   règle de validation dans vos models. De plus, vous pouvez fournir des
   messages i18n pour vos formulaires.
+
+* ``$options['nestedInput']`` - Utilisez avec les inputs ``checkbox`` et ``radio``.
+  Cette option permet de contrôler si les éléments ``input`` doivent être générés
+  dans ou à l'extérieur de l'élément ``label``. Quand ``control()`` génère une
+  checkbox ou un bouton radio, vous pouvez définir l'option à ``false`` pour
+  forcer la génération de l'élément ``input`` en dehors du ``label``.
+
+  Cependant, vous pouvez également la définir à ``true`` pour n'importe quel type
+  d'élément pour forcer la génération de l'élément ``input`` dans le ``label``.
+  Si vous changez l'option pour les boutons radio, vous aurez également besoin de
+  modifier le template par défaut :ref:`'radioWrapper'<create-radio-button>`.
+  En fonction du ``type`` d'élément à générer, la valeur par défaut sera ``true``
+  ou ``false``.
+
+* ``$options['templates']`` - Les templates à utiliser pour cet ``input``.
+  N'importe quel template spécifié via cette option surchargera les templates
+  déjà chargés. Cette option accepte soit un nom de fichier (sans extension)
+  provenant de ``/config`` qui contient les templates à charger ou bien un
+  tableau définissant les templates à utiliser.
+
+* ``$options['labelOptions']`` - Définissez l'option à ``false`` pour désactiver
+  les ``label`` autour des ``nestedWidgets`` ou bien définissez un tableau
+  d'attributs à appliquer à l'élément ``label``.
 
 Générer des Types d'Inputs Spécifiques
 ======================================
@@ -653,10 +685,10 @@ Beaucoup des différentes méthodes d'input supportent un jeu d'options communes
 Toutes ses options sont aussi supportées par ``control()``. Pour réduire les
 répétitions, les options communes partagées par toutes les méthodes input sont :
 
-* ``$options['id']`` Définir cette clé pour forcer la valeur du DOM id pour cet
-  input. Cela remplacera l'idPrefix qui pourrait être fixé.
+* ``id`` Définir cette clé pour forcer la valeur du DOM id pour cet
+  input. Cela remplacera l'``idPrefix`` qui pourrait être fixé.
 
-* ``$options['default']`` Utilisé pour définir une valeur par défaut au champ
+* ``default`` Utilisé pour définir une valeur par défaut au champ
   input. La valeur est utilisée si les données passées au formulaire ne
   contiennent pas de valeur pour le champ (ou si aucune donnée n'est
   transmise). Une valeur par défaut explicite va surcharger toute valeur définie
@@ -666,7 +698,7 @@ répétitions, les options communes partagées par toutes les méthodes input so
 
     echo $this->Form->text('ingredient', ['default' => 'Sugar']);
 
-  Exemple avec un champ sélectionné (Taille "Moyen" sera sélectionné par
+  Exemple avec un champ sélectionné (Taille "Medium" sera sélectionné par
   défaut)::
 
     $sizes = ['s' => 'Small', 'm' => 'Medium', 'l' => 'Large'];
@@ -674,25 +706,25 @@ répétitions, les options communes partagées par toutes les méthodes input so
 
   .. note::
 
-    Vous ne pouvez pas utiliser ``default`` pour sélectionner une chekbox -
-    vous devez plutôt définir cette valeur dans ``$this->request->getData()`` dans
-    votre controller, ou définir l'option ``checked`` de l'input à ``true``.
+      Vous ne pouvez pas utiliser ``default`` pour sélectionner une chekbox -
+      vous devez plutôt définir cette valeur dans ``$this->request->getData()`` dans
+      votre controller, ou définir l'option ``checked`` de l'input à ``true``.
 
-    Attention à l'utilisation de ``false`` pour assigner une valeur par défaut.
-    Une valeur ``false`` est utilisée pour désactiver/exclure les options d'un
-    champ, ainsi ``'default' => false`` ne définirait aucune valeur. A la place,
-    utilisez ``'default' => 0``.
+      Attention à l'utilisation de ``false`` pour assigner une valeur par défaut.
+      Une valeur ``false`` est utilisée pour désactiver/exclure les options d'un
+      champ, ainsi ``'default' => false`` ne définirait aucune valeur. A la place,
+      utilisez ``'default' => 0``.
 
-* ``$options['value']`` Utilisée pour définir une valeur spécifique pour le
+* ``value`` Utilisée pour définir une valeur spécifique pour le
   champ d'input. Ceci va surcharger toute valeur qui aurait pu être injectée à
-  partir du contexte, comme Form, Entity or ``request->data`` etc.
+  partir du contexte, comme Form, Entity or ``request->getData()`` etc.
 
   .. note::
 
-    Si vous souhaitez définir un champ pour qu'il ne rende pas sa valeur
-    récupérée à partir du contexte ou de la source de valeurs, vous devrez
-    définir ``$options['value']`` en ``''`` (au lieu de le définir avec
-    ``null``).
+      Si vous souhaitez définir un champ pour qu'il ne rende pas sa valeur
+      récupérée à partir du contexte ou de la source de valeurs, vous devrez
+      définir ``value`` en ``''`` (au lieu de le définir avec
+      ``null``).
 
 En plus des options ci-dessus, vous pouvez mixer n'importe quel attribut HTML
 que vous souhaitez utiliser. Tout nom d'option non-special sera
@@ -706,45 +738,197 @@ convection.
     désactiver ce comportement en définissant l'option ``schemaDefault`` à
     ``false``.
 
+Créer des Elements Input
+========================
+
+Les autres méthodes disponibles dans le FormHelper permettent
+la création d'éléments spécifiques de formulaire. La plupart de ces
+méthodes utilisent également un paramètre spécial $options.
+Toutefois, dans ce cas, $options est utilisé avant tout pour spécifier
+les attributs des balises HTML (comme la valeur ou l'id DOM d'un élément
+du formulaire).
+
+Créer des Inputs Text
+---------------------
+
+.. php:method:: text(string $name, array $options)
+
+* ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>` ainsi que n'importe
+  quel attributs HTML valide.
+
+Va créer un ``input`` de type ``text``::
+
+    echo $this->Form->text('username', ['class' => 'users']);
+
+Affichera:
+
+.. code-block:: html
+
+    <input name="username" type="text" class="users">
+
+Créer des Inputs Password
+-------------------------
+
+.. php:method:: password(string $fieldName, array $options)
+
+* ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>` ainsi que n'importe
+  quel attributs HTML valide.
+
+Création d'un input ``password``::
+
+    echo $this->Form->password('password');
+
+Affichera:
+
+.. code-block:: html
+
+    <input name="password" value="" type="password">
+
+Créer des Inputs Cachés
+-----------------------
+
+.. php:method:: hidden(string $fieldName, array $options)
+
+* ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>` ainsi que n'importe
+  quel attributs HTML valide.
+
+Créera un input ``hidden`` de form. Exemple::
+
+    echo $this->Form->hidden('id');
+
+Affichera:
+
+.. code-block:: html
+
+    <input name="id" value="10" type="hidden" />
+
+Créer des Textareas
+-------------------
+
+.. php:method:: textarea(string $fieldName, array $options)
+
+* ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>` ainsi que n'importe
+  quel attributs HTML valide.
+
+Crée un champ ``textarea`` (zone de texte). Le template utilisé par défaut est::
+
+    'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>'
+
+Par exemple::
+
+    echo $this->Form->textarea('notes');
+
+Affichera:
+
+.. code-block:: html
+
+    <textarea name="notes"></textarea>
+
+Si le form est édité (ainsi, le tableau ``$this->request->getData()`` va contenir
+les informations sauvegardées pour le model ``User``), la valeur
+correspondant au champs ``notes`` sera automatiquement ajoutée au HTML
+généré. Exemple:
+
+.. code-block:: html
+
+    <textarea name="notes" id="notes">
+        Ce Texte va être édité.
+    </textarea>
+
+**Options for Textarea**
+
+En plus :ref:`des options générales<general-control-options>`, ``textarea()``
+supporte 2 autres options spécifiques :
+
+* ``'escape'`` - Permet de définir si le contenu du ``textarea`` doit être
+  échappé ou non. Le défaut est ``true``.
+
+  Par exemple::
+
+      echo $this->Form->textarea('notes', ['escape' => false]);
+      // OU....
+      echo $this->Form->control('notes', ['type' => 'textarea', 'escape' => false]);
+
+* ``'rows', 'cols'`` - Ces deux clés permettent de définir les attributs HTML
+  du même nom et qui sont, respectivement, le nombre de lignes et de colonnes::
+
+      echo $this->Form->textarea('textarea', ['rows' => '5', 'cols' => '5']);
+
+  Affichera:
+
+.. code-block:: html
+
+    <textarea name="textarea" cols="5" rows="5">
+    </textarea>
+
+Créer des Select, des Checkbox et des Boutons Radio
+---------------------------------------------------
+
+Ces éléments ont options et des points en communs, c'est pourquoi ils sont
+regroupés dans section.
+
+.. _checkbox-radio-select-options:
+
 Les Options pour Select, Checkbox et Inputs Radio
--------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* ``$options['value']`` Peut aussi être utilisée en combinaison avec un input
-  de type select (ex. Pour les types select, date, heure, datetime). Définissez
-  'selected' pour définir l'élément que vous souhaiteriez définir par défaut au
-  rendu de l'input::
+Vous trouverez ci-dessous les options partagées entre ``select()``,
+``checkbox()`` et ``radio()`` (les options spécifiques à une seule méthode sont
+décrites dans les sections dédiées à ces méthodes).
 
-    echo $this->Form->time('close_time', [
-        'value' => '13:30:00'
-    ]);
+* ``value`` Permet de définir ou sélectionner la valeur de l'élément ciblé :
+
+  * Pour les checkboxes, cela définit l'attribut HTML ``value`` assigné à
+    l'input à la valeur que vous définissez.
+
+  * Pour les boutons radio ou les select, cela définit la valeur qui sera
+    définit quand le formulaire sera rendu (dans ces cas là, ``'value'`` doit
+    avoir une valeur qui existe dans l'élément). Elle peut être utilisée avec
+    n'importe quel élément basé sur un select comme ``date()``, ``time()``,
+    ``dateTime()``::
+
+        echo $this->Form->time('close_time', [
+            'value' => '13:30:00'
+        ]);
 
   .. note::
 
-    La clé value pour les inputs de type date et datetime peut aussi
+    La clé ``value`` pour les ``date()`` et ``dateTime()`` peut aussi
     être un timestamp UNIX ou un objet DateTime.
 
-  Pour un input select où vous définissez l'attribut ``multiple`` à true,
+  Pour un input ``select`` où vous définissez l'attribut ``multiple`` à true,
   vous pouvez utiliser un tableau des valeurs que vous voulez sélectionner par
   défaut::
 
-    echo $this->Form->select('rooms', [
-        'multiple' => true,
-        // options avec valeurs 1 et 3 seront sélectionnées par défaut
-        'default' => [1, 3]
-    ]);
+      // Les tags <options> avec valeurs 1 et 3 seront sélectionnés par défaut
+      echo $this->Form->select('rooms', [
+          'multiple' => true,
+          'default' => [1, 3]
+      ]);
 
-* ``$options['empty']`` Est défini à ``true``, pour forcer l'input à rester vide.
+* ``empty`` S'applique à ``radio()`` et ``select()``. Le défaut est ``false``.
 
-  Quand passé à une list select (liste de sélection), ceci créera une
-  option vide avec une valeur vide dans la liste déroulante. Si vous
-  voulez une valeur vide avec un texte affiché ou juste une option
-  vide, passer une chaîne pour vider::
+  * Quand vous passe cette option ``radio()``, cela créera un élément ``input``
+    supplémentaire qui sera affiché avant le premier bouton radio, avec une valeur
+    de ``''`` et un ``label`` qui vaudra la chaîne passée dans l'option.
 
-      echo $this->Form->select(
-          'field',
-          [1, 2, 3, 4, 5],
-          ['empty' => '(choisissez)']
-      );
+  * Si vous la passez à la méthode ``select``, cela créer un élément ``option``
+    vide avec une valeur vide dans la liste de choix. Si à la place d'une valeur
+    vide, vous souhaitez afficher un texte, passez une chaîne dans l'option::
+
+        echo $this->Form->select(
+            'field',
+            [1, 2, 3, 4, 5],
+            ['empty' => '(choisissez)']
+        );
 
   Affiche:
 
@@ -867,114 +1051,6 @@ Les Options de Datetime
 * ``$options['monthNames']`` If ``false``, 2 digit numbers will be used instead
   of text. Si on lui passe un tableau du style
   ``['01' => 'Jan', '02' => 'Feb', ...]`` alors ce tableau sera utilisé.
-
-Créer des Elements Input
-========================
-
-Créer des Inputs Text
----------------------
-
-.. php:method:: text(string $name, array $options)
-
-  Les autres méthodes disponibles dans le FormHelper permettent
-  la création d'éléments spécifiques de formulaire. La plupart de ces
-  méthodes utilisent également un paramètre spécial $options.
-  Toutefois, dans ce cas, $options est utilisé avant tout pour spécifier
-  les attributs des balises HTML
-  (comme la valeur ou l'id DOM d'un élément du formulaire)::
-
-    echo $this->Form->text('username', ['class' => 'users']);
-
-Affichera:
-
-.. code-block:: html
-
-    <input name="username" type="text" class="users">
-
-Créer des Inputs Password
--------------------------
-
-.. php:method:: password(string $fieldName, array $options)
-
-Création d'un champ password::
-
-    echo $this->Form->password('password');
-
-Affichera:
-
-.. code-block:: html
-
-    <input name="password" value="" type="password">
-
-Créer des Inputs Cachés
------------------------
-
-.. php:method:: hidden(string $fieldName, array $options)
-
-Créera un input caché de form. Exemple::
-
-    echo $this->Form->hidden('id');
-
-Affichera:
-
-.. code-block:: html
-
-    <input name="id" value="10" type="hidden" />
-
-Créer des Textareas
--------------------
-
-.. php:method:: textarea(string $fieldName, array $options)
-
-Crée un champ input textarea (zone de texte)::
-
-    echo $this->Form->textarea('notes');
-
-Affichera:
-
-.. code-block:: html
-
-    <textarea name="notes"></textarea>
-
-Si le form est édité (ainsi, le tableau ``$this->request->getData()`` va contenir
-les informations sauvegardées pour le model ``User``), la valeur
-correspondant au champs ``notes`` sera automatiquement ajoutée au HTML
-généré. Exemple:
-
-.. code-block:: html
-
-    <textarea name="data[User][notes]" id="UserNotes">
-    Ce Texte va être édité.
-    </textarea>
-
-.. note::
-
-    Le type d'input ``textarea`` permet à l'attribut ``$options`` la valeur
-    ``'escape'`` lequel détermine si oui ou non le contenu du textarea
-    doit être échappé. Par défaut à ``true``.
-
-::
-
-    echo $this->Form->textarea('notes', ['escape' => false]);
-    // OU....
-    echo $this->Form->control('notes', ['type' => 'textarea', 'escape' => false]);
-
-**Options**
-
-En plus de :ref:`general-input-options`, textarea() supporte quelques
-options spécifiques:
-
-* ``$options['rows'], $options['cols']`` Ces deux clés spécifient le
-  nombre de lignes et de colonnes::
-
-    echo $this->Form->textarea('textarea', ['rows' => '5', 'cols' => '5']);
-
-  Affichera:
-
-.. code-block:: html
-
-    <textarea name="textarea" cols="5" rows="5">
-    </textarea>
 
 Créer des Checkboxes
 --------------------
