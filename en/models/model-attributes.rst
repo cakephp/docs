@@ -105,15 +105,15 @@ recursive
 The recursive property defines how deep CakePHP should go to fetch
 associated model data via ``find()``, and ``read()`` methods.
 
-Imagine your application features Groups which belong to a domain
+Imagine your application features Groups which belong to a Domain
 and have many Users which in turn have many Articles. You can set
 $recursive to different values based on the amount of data you want
 back from a $this->Group->find() call:
 
 * -1 CakePHP fetches Group data only, no joins.
-* 0  CakePHP fetches Group data and its domain
-* 1  CakePHP fetches a Group, its domain and its associated Users
-* 2  CakePHP fetches a Group, its domain, its associated Users, and the
+* 0  CakePHP fetches Group data and its Domain
+* 1  CakePHP fetches a Group, its Domain and its associated Users
+* 2  CakePHP fetches a Group, its Domain, its associated Users, and the
   Users' associated Articles
 
 Set it no higher than you need. Having CakePHP fetch data you
@@ -180,12 +180,16 @@ text
 uuid
     Maps to the UUID type if a database provides one, otherwise this will
     generate a CHAR(36) field.
+tinyinteger
+    Maps to the TINYINT or SMALLINT type provided by the database.
+smallinteger
+    Maps to the SMALLINT type provided by the database.
 integer
-    Maps to the INTEGER, SMALLINT types provided by the database.
+    Maps to the INTEGER types provided by the database.
 biginteger
     Maps to the BIGINT type provided by the database.
 decimal
-    Maps to the DECIMAL, NUMERIC types.
+    Maps to the DECIMAL or NUMERIC types.
 float
     Maps to the REAL, DOUBLE PRECISION types.
 boolean
@@ -224,6 +228,9 @@ Example Usage::
         ),
         'message' => array('type' => 'text')
     );
+
+.. versionchanged:: 2.10.0
+    The smallinteger and tinyinteger types were added in 2.10.0
 
 validate
 ========

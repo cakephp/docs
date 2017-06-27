@@ -209,6 +209,12 @@ Most of the following constants refer to paths in your application.
 
     Path to the root lib directory.
 
+.. php:const:: CONFIG
+
+    Path to the app/Config directory.
+
+    .. versionadded:: 2.10.0
+
 .. php:const:: CORE_PATH
 
    Path to the root directory with ending directory slash.

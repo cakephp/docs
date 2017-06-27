@@ -1082,8 +1082,20 @@ Creating breadcrumb trails with HtmlHelper
         $this->Html->addCrumb('Users', '/users');
         $this->Html->addCrumb('Add User', array('controller' => 'users', 'action' => 'add'));
 
-    This will add the output of "**Home > Users > Add User**" in your
+    This will add the output of "**Users > Add User**" in your
     layout where getCrumbs was added.
+
+    You can prepend a crumb with the ``prepend`` option::
+
+        $this->Html->addCrumb('Add User', array('controller' => 'users', 'action' => 'add'));
+        $this->Html->addCrumb('Users', '/users', array('prepend' => true));
+
+    This will add the output of "**Users > Add User**" in your
+    layout where getCrumbs was added.
+
+    .. versionadded:: 2.10
+        The ``prepend`` option was added in 2.10
+
 
 .. php:method:: getCrumbList(array $options = array(), mixed $startText)
 

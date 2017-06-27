@@ -29,17 +29,23 @@ optional::
         'fields' => array('Model.field1', 'DISTINCT Model.field2'),
         //string or array defining order
         'order' => array('Model.created', 'Model.field3 DESC'),
-        'group' => array('Model.field'), //fields to GROUP BY
+        'group' => array('Model.field'), // fields to GROUP BY
         'limit' => n, //int
         'page' => n, //int
         'offset' => n, //int
         'callbacks' => true //other possible values are false, 'before', 'after'
+        'having' => array('COUNT(Model.field) >' => 1), // fields to HAVING by
+        'lock' => true // Enable FORM UPDATE locking
     )
 
 It's also possible to add and use other parameters. Some types of find()
 and behaviors make use of this ability, and your own model methods can, too.
 
-If your find() operation fails to match any records, you will get an empty array.
+If your ``find()`` operation fails to match any records, you will get an empty array.
+
+
+.. versionadded:: 2.10.0
+    The ``having`` and ``lock`` options were added.
 
 .. _model-find-first:
 

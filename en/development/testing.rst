@@ -16,15 +16,26 @@ for making sure your code does what you think it does.
 
 Install via Composer
 --------------------
-The newer versions of PHPUnit do not currently work with cake::
 
-    "phpunit/phpunit": "3.7.38"
+For a long time, CakePHP 2.x supported PHPunit 3.7.x only.
+To install PHPUnit as a development dependency through Composer, execute the
+following in the same directory as your composer.json::
+
+    php composer.phar require --dev phpunit/phpunit:"3.7.38"
+
+As of CakePHP 2.10.0, basic support for PHPUnit 4.x and 5.x was added.
+To upgrade PHPUnit and its dependencies for your application, execute the following::
+
+    php composer.phar require --dev phpunit/phpunit:"4.* || 5.*" --update-with-dependencies
+
+This will install either PHPUnit 4.x or 5.x, depending on your system setup and your
+composer.json configuration.
 
 Install via .phar Package
 -------------------------
 
-You can also download the file directly. Just make sure you get the correct version from https://phar.phpunit.de/.
-Make sure /usr/local/bin is in your php.ini file's include_path::
+You can also download the file directly. Just make sure you get the correct version
+from https://phar.phpunit.de/. Make sure /usr/local/bin is in your php.ini file's include_path::
 
     wget https://phar.phpunit.de/phpunit-3.7.38.phar -O phpunit.phar
     chmod +x phpunit.phar
@@ -415,6 +426,9 @@ they are defined. The format used to define these fields is the same used with
         - ``string``: maps to ``VARCHAR``
         - ``text``: maps to ``TEXT``
         - ``biginteger``: maps to ``BIGINT``
+        - ``smallinteger``: maps to ``SMALLINT``
+        - ``tinyinteger``: maps to ``TINYINT`` or ``SMALLINT`` depending on the
+          database platform.
         - ``integer``: maps to ``INT``
         - ``float``: maps to ``FLOAT``
         - ``decimal``: maps to ``DECIMAL``
@@ -423,7 +437,7 @@ they are defined. The format used to define these fields is the same used with
         - ``time``: maps to ``TIME``
         - ``date``: maps to ``DATE``
         - ``binary``: maps to ``BLOB``
-        - ``boolean``: maps to ``TINYINT``
+        - ``boolean``: maps to ``BOOLEAN`` or ``TINYINT(1)`` on MySQL.
 ``key``
     Set to ``primary`` to make the field AUTO\_INCREMENT, and a PRIMARY KEY
     for the table.
@@ -1013,6 +1027,11 @@ following::
 
 By using ``staticExpects`` you will be able to mock and manipulate static
 methods on components and models.
+
+.. warning::
+    If you are using PHPUnit 4 or 5, ``staticExpects()`` does not exist anymore.
+    Instead, you should insert the necessary data into the session with
+    ``CakeSession::write('Auth.User', $user)`` before calling the action.
 
 Testing a JSON Responding Controller
 ------------------------------------

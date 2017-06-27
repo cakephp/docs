@@ -81,6 +81,26 @@ fallback locales.
     and ``modified`` columns to your table. CakePHP requires at least one non
     primary key field before it will save a record.
 
+Loading Translations With Left Joins
+====================================
+
+When defining the fields that are translated you can also load translations via
+``LEFT JOIN`` instead of the standard ``INNER JOIN``. Doing this will allow you
+to load partially translated records::
+
+    class Post extends AppModel {
+        public $actsAs = array(
+            'Translate' => array(
+                'title',
+                'body',
+                'joinType' => 'left'
+            )
+        );
+    }
+
+.. versionadded:: 2.10.0
+    The ``joinType`` option was added in 2.10.0
+
 Conclusion
 ==========
 
