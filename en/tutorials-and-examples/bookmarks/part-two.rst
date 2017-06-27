@@ -127,7 +127,7 @@ our application. In the ``UsersController`` add the following::
     public function initialize()
     {
         parent::initialize();
-        // Add logout to the allowed actions list.
+        // Add the 'add' action to the allowed actions list.
         $this->Auth->allow(['logout', 'add']);
     }
 
