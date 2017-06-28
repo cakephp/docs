@@ -16,6 +16,11 @@ Associações - Conectando tabelas
 Associações HasOne
 ==================
 
+.. _has-many-associations:
+
+Associações HasMany
+===================
+
 .. _belongs-to-many-associations:
 
 Associações BelongsToMany
