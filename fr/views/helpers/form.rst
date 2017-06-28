@@ -943,30 +943,31 @@ décrites dans les sections dédiées à ces méthodes).
           <option value="4">5</option>
       </select>
 
-  Les options peuvent aussi fournir une paire de clé-valeur.
+* ``hiddenField`` Pour certain types d'input (checkboxes,
+  radios) un input caché est créé. Ainsi, la clé dans ``$this->request->getData()``
+  existera même sans valeur spécifiée. Pour les checkboxes, sa valeur vaudra ``0`` ;
+  pour les boutons radio, elle sera ``''``.
 
-* ``$options['hiddenField']`` Pour certain types d'input (checkboxes,
-  radios) un input caché est créé. Ainsi, la clé dans $this->request->data
-  existera même sans valeur spécifiée:
-
-  .. code-block:: html
-
-    <input type="hidden" name="published" value="0" />
-    <input type="checkbox" name="published" value="1" />
-
-  Ceci peut être désactivé en définissant l'option ``$options['hiddenField'] = false``::
-
-    echo $this->Form->checkbox('published', ['hiddenField' => false]);
-
-  Retournera:
+  Exemple d'un rendu par défaut :
 
   .. code-block:: html
 
-    <input type="checkbox" name="published" value="1">
+      <input type="hidden" name="published" value="0" />
+      <input type="checkbox" name="published" value="1" />
+
+  Ceci peut être désactivé en définissant l'option ``hiddenField`` à ``false``::
+
+      echo $this->Form->checkbox('published', ['hiddenField' => false]);
+
+  Retournera :
+
+  .. code-block:: html
+
+      <input type="checkbox" name="published" value="1">
 
   Si vous voulez créer de multiples blocs d'entrées regroupés
-  ensemble dans un formulaire, vous devriez utiliser ce paramètre
-  sur tous les inputs excepté le premier. Si le input caché est en
+  ensemble dans un formulaire, vous devriez définir ce paramètre à ``false``
+  sur tous les inputs, excepté le premier. Si l'input caché est en
   place à différents endroits c'est seulement le dernier groupe
   de valeur d'input qui sera sauvegardé.
 
@@ -975,40 +976,40 @@ décrites dans les sections dédiées à ces méthodes).
 
   .. code-block:: html
 
-    <h2>Primary Colors</h2>
-    <input type="hidden" name="color" value="0" />
-    <label for="color-red">
-        <input type="checkbox" name="color[]" value="5" id="color-red" />
-        Red
-    </label>
+      <h2>Primary Colors</h2>
+      <input type="hidden" name="color" value="0" />
+      <label for="color-red">
+          <input type="checkbox" name="color[]" value="5" id="color-red" />
+          Red
+      </label>
 
-    <label for="color-blue">
-        <input type="checkbox" name="color[]" value="5" id="color-blue" />
-        Blue
-    </label>
+      <label for="color-blue">
+          <input type="checkbox" name="color[]" value="5" id="color-blue" />
+          Blue
+      </label>
 
-    <label for="color-yellow">
-        <input type="checkbox" name="color[]" value="5" id="color-yellow" />
-        Green
-    </label>
+      <label for="color-yellow">
+          <input type="checkbox" name="color[]" value="5" id="color-yellow" />
+          Green
+      </label>
 
-    <h2>Tertiary Colors</h2>
-    <input type="hidden" name="color" value="0" />
-    <label for="color-green">
-        <input type="checkbox" name="color[]" value="5" id="color-green" />
-        Yellow
-    </label>
-    <label for="color-purple">
-        <input type="checkbox" name="color[]" value="5" id="color-purple" />
-        Purple
-    </label>
-    <label for="color-orange">
-        <input type="checkbox" name="color[]" value="5" id="color-orange" />
-        Orange
-    </label>
+      <h2>Tertiary Colors</h2>
+      <input type="hidden" name="color" value="0" />
+      <label for="color-green">
+          <input type="checkbox" name="color[]" value="5" id="color-green" />
+          Yellow
+      </label>
+      <label for="color-purple">
+          <input type="checkbox" name="color[]" value="5" id="color-purple" />
+          Purple
+      </label>
+      <label for="color-orange">
+          <input type="checkbox" name="color[]" value="5" id="color-orange" />
+          Orange
+      </label>
 
-  Désactiver le champ caché ``'hiddenField'`` dans le second groupe
-  d'input empêchera ce comportement.
+  Désactiver l'option ``'hiddenField'`` dans le second groupe d'input empêcherait
+  ce comportement.
 
   Vous pouvez définir une valeur différente pour le champ caché autre que 0
   comme 'N'::
@@ -1017,6 +1018,417 @@ décrites dans les sections dédiées à ces méthodes).
           'value' => 'Y',
           'hiddenField' => 'N',
       ]);
+
+Créer des Checkboxes
+~~~~~~~~~~~~~~~~~~~~
+
+.. php:method:: checkbox(string $fieldName, array $options)
+
+* ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, des options de la section
+  :ref:`checkbox-radio-select-options`, des options spécifiques aux checkbox (ci-dessous)
+  ainsi que n'importe quel attributs HTML valide.
+
+Créer un élément ``checkbox``. Le template de widget utilisé est le suivant::
+
+    'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>'
+
+**Options spécifiques pour les Checkboxes**
+
+* ``'checked'`` - Booléen utilisé pour indiquer si cette checkbox est cochée ou non.
+  Par défaut à ``false``.
+
+* ``'disabled'`` - Booléen. Si passé à ``true``, la checkbox aura l'attribut ``disabled``.
+
+Cette méthode génère également un input de type ``hidden`` pour forcer l'existence
+de la donnée dans le tableau de POST.
+
+E.g. ::
+
+    echo $this->Form->checkbox('done');
+
+Affichera:
+
+.. code-block:: html
+
+    <input type="hidden" name="done" value="0">
+    <input type="checkbox" name="done" value="1">
+
+Il est possible de modifier la valeur du checkbox en utilisant le tableau
+$options::
+
+    echo $this->Form->checkbox('done', ['value' => 555]);
+
+Affichera:
+
+.. code-block:: html
+
+    <input type="hidden" name="done" value="0">
+    <input type="checkbox" name="done" value="555">
+
+Si vous ne voulez pas que le FormHelper génère un input ``hidden``, vous pouvez
+passer l'option ``hiddenField`` à ``false``::
+
+    echo $this->Form->checkbox('done', ['hiddenField' => false]);
+
+Affichera:
+
+.. code-block:: html
+
+    <input type="checkbox" name="done" value="1">
+
+.. _create-radio-button:
+
+Créer des Boutons Radio
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. php:method:: radio(string $fieldName, array $options, array $attributes)
+
+* ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$options`` - Un tableau optionnel contenant au minimum les labels pour les
+  boutons radio. Ce tableau peut également contenir les ``value`` et des attributs
+  HTML. Si ce tableau n'est pas fourni, la méthode générera seulement le input
+  ``hidden`` (si ``'hiddenField'`` vaut ``true``) ou pas d'élément du tout
+  (si ``'hiddenField'`` vaut ``false``).
+* ``$attributes`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, des options de la section
+  :ref:`checkbox-radio-select-options`, des options spécifiques aux radios (ci-dessous)
+  ainsi que n'importe quel attributs HTML valide.
+
+Crée un jeu d'inputs radios. Les templates de widget utilisés par défaut seront::
+
+    'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>'
+    'radioWrapper' => '{{label}}'
+
+**Attributs spécifiques aux boutons radio**
+
+* ``label`` - booléen pour indiquer si oui ou non les labels pour les widgets
+  doivent être affichés. Défaut à ``true``.
+
+* ``hiddenField`` - booléen pour indiquer si vous voulez que les résultats de
+  radio() incluent un input caché avec une valeur de ''. C'est utile pour créer
+  des ensembles de radio qui ne sont pas continus. Défaut à ``true``.
+
+* ``disabled`` - Définir à ``true`` ou ``disabled`` pour désactiver tous les
+  boutons radio. Défaut à ``false``.
+
+Vous devez fournir les label pour les boutons radio via l'argument ``$options``.
+
+Par exemple::
+
+    $this->Form->radio('gender', ['Masculine','Feminine','Neuter']);
+
+Affichera:
+
+.. code-block:: html
+
+    <input name="gender" value="" type="hidden">
+    <label for="gender-0">
+        <input name="gender" value="0" id="gender-0" type="radio">
+        Masculine
+    </label>
+    <label for="gender-1">
+        <input name="gender" value="1" id="gender-1" type="radio">
+        Feminine
+    </label>
+    <label for="gender-2">
+        <input name="gender" value="2" id="gender-2" type="radio">
+        Neuter
+    </label>
+
+Généralement, ``$options`` est une simple paire clé => valeur. Cependant, si
+vous avez besoin de mettre des attributs personnalisés sur vos boutons radio,
+vous pouvez utiliser le format étendu::
+
+Par exemple ::
+
+    echo $this->Form->radio(
+        'favorite_color',
+        [
+            ['value' => 'r', 'text' => 'Red', 'style' => 'color:red;'],
+            ['value' => 'u', 'text' => 'Blue', 'style' => 'color:blue;'],
+            ['value' => 'g', 'text' => 'Green', 'style' => 'color:green;'],
+        ]
+    );
+
+Affichera :
+
+.. code-block:: html
+
+    <input type="hidden" name="favorite_color" value="">
+    <label for="favorite-color-r">
+        <input type="radio" name="favorite_color" value="r" style="color:red;" id="favorite-color-r">
+        Red
+    </label>
+    <label for="favorite-color-u">
+        <input type="radio" name="favorite_color" value="u" style="color:blue;" id="favorite-color-u">
+        Blue
+    </label>
+    <label for="favorite-color-g">
+        <input type="radio" name="favorite_color" value="g" style="color:green;" id="favorite-color-g">
+        Green
+    </label>
+
+.. _create-select-picker:
+
+Créer des Select
+~~~~~~~~~~~~~~~~
+
+.. php:method:: select(string $fieldName, array $options, array $attributes)
+
+* ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$options`` - Un tableau optionnel contenant la liste des éléments pour le
+  select. Si ce tableau n'est pas fourni, la méthode généra seulement un élément
+  ``select`` vide, sans élément ``option``.
+* ``$attributes`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, des options de la section
+  :ref:`checkbox-radio-select-options`, des options spécifiques aux select (ci-dessous)
+  ainsi que n'importe quel attributs HTML valide.
+
+Crée un élément ``select``, rempli des éléments compris dans ``$options``.
+Si l'option ``$attributes['value']`` est fournie, alors les éléments ``option``
+ayant cette valeur seront affichés comme sélectionné(s) quand le select sera
+rendu.
+
+Par défaut, ``select`` utilise ces templates de widget::
+
+    'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>'
+    'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>'
+
+Il pourra également utilisez les templates suivant::
+
+    'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>'
+    'selectMultiple' => '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>'
+
+**Attributs pour les Select**
+
+* ``'multiple'`` - Si cette option est définie à ``true``, le select sera multiple
+  (plusieurs valeurs pourront être sélectionnées). Si elle est définie à ``checkbox``,
+  à la place d'un select multiple, vous aurez des checkbox.
+  Défaut à ``null``.
+
+* ``'escape'`` - Booleén. Si ``true``, le contenu des éléments ``option`` sera
+  échappé (les entités HTML seront convertis). Défaut à ``true``.
+
+* ``'val'`` - Permet de pré-sélectionner la valeur du select.
+
+* ``'disabled'`` - Contrôle l'attribut ``disabled``. Si l'option est définie à
+  ``true``, l'ensemble du select sera ``disabled``. Si définie sous forme de tableau,
+  seuls les éléments ``option`` dont la valeur est dans le tableau seront désactivés.
+
+L'argument ``$options`` vous permet de définir manuellement le contenu des éléments
+``option`` du ``select``.
+
+Par exemple ::
+
+    echo $this->Form->select('field', [1, 2, 3, 4, 5]);
+
+Affichera:
+
+.. code-block:: html
+
+    <select name="field">
+        <option value="0">1</option>
+        <option value="1">2</option>
+        <option value="2">3</option>
+        <option value="3">4</option>
+        <option value="4">5</option>
+    </select>
+
+La tableau ``$options`` peut aussi être fourni sous forme de paires de clé => valeur.
+
+Par exemple ::
+
+    echo $this->Form->select('field', [
+        'Value 1' => 'Label 1',
+        'Value 2' => 'Label 2',
+        'Value 3' => 'Label 3'
+    ]);
+
+Affichera :
+
+.. code-block:: html
+
+    <select name="field">
+        <option value="Value 1">Label 1</option>
+        <option value="Value 2">Label 2</option>
+        <option value="Value 3">Label 3</option>
+    </select>
+
+Si vous souhaitez générer un ``select`` avec des ``optgroups``, passez les
+données sous forme de tableau multidimensionnel. Cela marche également avec les
+checkbox et les boutons radio, mais à la place d'éléments ``optgroup``, vos éléments
+seront entourés d'un élément ``fieldset``.
+
+Par exemple::
+
+    $options = [
+        'Group 1' => [
+            'Value 1' => 'Label 1',
+            'Value 2' => 'Label 2'
+        ],
+        'Group 2' => [
+            'Value 3' => 'Label 3'
+        ]
+    ];
+    echo $this->Form->select('field', $options);
+
+Affichera :
+
+.. code-block:: html
+
+    <select name="field">
+        <optgroup label="Group 1">
+            <option value="Value 1">Label 1</option>
+            <option value="Value 2">Label 2</option>
+        </optgroup>
+        <optgroup label="Group 2">
+            <option value="Value 3">Label 3</option>
+        </optgroup>
+    </select>
+
+Pour ajouter des attributs HTML aux éléments ``option``::
+
+    $options = [
+        ['text' => 'Description 1', 'value' => 'value 1', 'attr_name' => 'attr_value 1'],
+        ['text' => 'Description 2', 'value' => 'value 2', 'attr_name' => 'attr_value 2'],
+        ['text' => 'Description 3', 'value' => 'value 3', 'other_attr_name' => 'other_attr_value'],
+    ];
+    echo $this->Form->select('field', $options);
+
+Affichera:
+
+.. code-block:: html
+
+    <select name="field">
+        <option value="value 1" attr_name="attr_value 1">Description 1</option>
+        <option value="value 2" attr_name="attr_value 2">Description 2</option>
+        <option value="value 3" other_attr_name="other_attr_value">Description 3</option>
+    </select>
+
+**Contrôle des Select via Attributs**
+
+En utilisant des options spéciales dans l'argument ``$attributes``, vous pouvez
+contrôler certains comportement de la méthode ``select()``.
+
+* ``'empty'`` - Définissez cette option à ``true`` pour ajouter une option vide
+  en première position de la liste de vos ``option``. Défaut à ``false``.
+
+  Par exemple::
+
+      $options = ['M' => 'Male', 'F' => 'Female'];
+      echo $this->Form->select('gender', $options, ['empty' => true]);
+
+  Affichera:
+
+  .. code-block:: html
+
+      <select name="gender">
+          <option value=""></option>
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+      </select>
+
+* ``'escape'`` - Booleén. Si passée à ``true``, le contenu des ``option`` sera
+  échappé (les entités HTML seront encodées).
+
+  Par exemple ::
+
+      // This will prevent HTML-encoding the contents of each option element
+      $options = ['M' => 'Male', 'F' => 'Female'];
+      echo $this->Form->select('gender', $options, ['escape' => false]);
+
+* ``'multiple'`` - Si définie à ``true``, cette option rendra le ``select`` multiple.
+
+  Par exemple ::
+
+      echo $this->Form->select('field', $options, ['multiple' => true]);
+
+  Vous pouvez également définir ``'multiple'`` à ``'checkbox'`` pour afficher une
+  liste de checkbox à la place::
+
+      $options = [
+          'Value 1' => 'Label 1',
+          'Value 2' => 'Label 2'
+      ];
+      echo $this->Form->select('field', $options, [
+          'multiple' => 'checkbox'
+      ]);
+
+  Affichera:
+
+  .. code-block:: html
+
+      <input name="field" value="" type="hidden">
+      <div class="checkbox">
+          <label for="field-1">
+              <input name="field[]" value="Value 1" id="field-1" type="checkbox">
+              Label 1
+          </label>
+      </div>
+      <div class="checkbox">
+          <label for="field-2">
+              <input name="field[]" value="Value 2" id="field-2" type="checkbox">
+              Label 2
+          </label>
+      </div>
+
+* ``'disabled'`` - Cette option sert à désactiver une partie ou tous les éléments
+  ``option``. Pour désactiver tous les éléments, passez ``'disabled'`` à ``true``.
+  Pour désactiver seulement certains éléments, définissez un tableau avec les clés
+  des éléments que vous voulez désactiver.
+
+  Par exemple ::
+
+      $options = [
+          'M' => 'Masculine',
+          'F' => 'Feminine',
+          'N' => 'Neuter'
+      ];
+      echo $this->Form->select('gender', $options, [
+          'disabled' => ['M', 'N']
+      ]);
+
+  Affichera:
+
+  .. code-block:: html
+
+      <select name="gender">
+          <option value="M" disabled="disabled">Masculine</option>
+          <option value="F">Feminine</option>
+          <option value="N" disabled="disabled">Neuter</option>
+      </select>
+
+  Cette option fonctionne également quand ``'multiple'`` est définie à ``'checkbox'``::
+
+      $options = [
+          'Value 1' => 'Label 1',
+          'Value 2' => 'Label 2'
+      ];
+      echo $this->Form->select('field', $options, [
+          'multiple' => 'checkbox',
+          'disabled' => ['Value 1']
+      ]);
+
+  Affichera:
+
+  .. code-block:: html
+
+      <input name="field" value="" type="hidden">
+      <div class="checkbox">
+          <label for="field-1">
+              <input name="field[]" disabled="disabled" value="Value 1" type="checkbox">
+              Label 1
+          </label>
+      </div>
+      <div class="checkbox">
+          <label for="field-2">
+              <input name="field[]" value="Value 2" id="field-2" type="checkbox">
+              Label 2
+          </label>
+      </div>
+
 
 Les Options de Datetime
 -----------------------
@@ -1051,280 +1463,6 @@ Les Options de Datetime
 * ``$options['monthNames']`` If ``false``, 2 digit numbers will be used instead
   of text. Si on lui passe un tableau du style
   ``['01' => 'Jan', '02' => 'Feb', ...]`` alors ce tableau sera utilisé.
-
-Créer des Checkboxes
---------------------
-
-.. php:method:: checkbox(string $fieldName, array $options)
-
-Crée un élément de formulaire checkbox. Cette méthode génère également un
-input de formulaire caché pour forcer la soumission de données pour le champ
-spécifié::
-
-    echo $this->Form->checkbox('done');
-
-Affichera:
-
-.. code-block:: html
-
-    <input type="hidden" name="done" value="0">
-    <input type="checkbox" name="done" value="1">
-
-Il est possible de modifier la valeur du checkbox en utilisant le tableau
-$options::
-
-    echo $this->Form->checkbox('done', ['value' => 555]);
-
-Affichera:
-
-.. code-block:: html
-
-    <input type="hidden" name="done" value="0">
-    <input type="checkbox" name="done" value="555">
-
-Si vous ne voulez pas que le FormHelper génère un input caché::
-
-    echo $this->Form->checkbox('done', ['hiddenField' => false]);
-
-Affichera:
-
-.. code-block:: html
-
-    <input type="checkbox" name="done" value="1">
-
-Créer des Boutons Radio
------------------------
-
-.. php:method:: radio(string $fieldName, array $options, array $attributes)
-
-Crée un jeu d'inputs radios.
-
-**Attributes**
-
-* ``value`` - Indique la valeur quand ce bouton radio est coché.
-* ``label`` - booléen pour indiquer si oui ou non les labels pour les widgets
-  doivent être affichés.
-* ``hiddenField`` - booléen pour indiquer si vous voulez que les résultats de
-  radio() incluent un input caché avec une valeur de ''. C'est utile pour créer
-  des ensembles de radio qui ne sont pas continus.
-* ``disabled`` - Défini à ``true`` ou ``disabled`` pour désactiver tous les
-  boutons radio.
-* ``empty`` - Défini à ``true`` pour créer un input avec la valeur '' en
-  première option. Quand à ``true``, le label radio sera 'vide'. Définissez
-  cette option pour contrôler la valeur du label.
-
-Généralement, ``$options`` est une simple paire clé => valeur. Cependant, si
-vous avez besoin de mettre des attributs personnalisés sur vos boutons radio,
-vous pouvez utiliser le format étendu::
-
-    echo $this->Form->radio(
-        'favorite_color',
-        [
-            ['value' => 'r', 'text' => 'Red', 'style' => 'color:red;'],
-            ['value' => 'u', 'text' => 'Blue', 'style' => 'color:blue;'],
-            ['value' => 'g', 'text' => 'Green', 'style' => 'color:green;'],
-        ]
-    );
-
-    // Affichera
-    <input type="hidden" name="favorite_color" value="">
-    <label for="favorite-color-r">
-        <input type="radio" name="favorite_color" value="r" style="color:red;" id="favorite-color-r">
-        Red
-    </label>
-    <label for="favorite-color-u">
-        <input type="radio" name="favorite_color" value="u" style="color:blue;" id="favorite-color-u">
-        Blue
-    </label>
-    <label for="favorite-color-g">
-        <input type="radio" name="favorite_color" value="g" style="color:green;" id="favorite-color-g">
-        Green
-    </label>
-
-Créer des Pickers Select
-------------------------
-
-.. php:method:: select(string $fieldName, array $options, array $attributes)
-
-Crée un menu de sélection, rempli des éléments compris dans ``$options``,
-avec l'option spécifiée par ``$attributes['value']`` sera montré comme
-sélectionné par défaut. Définir à ``true`` (la valeur par défaut est ``false``)
-pour ajouter une option vide avec une valeur vide en haut de votre liste 
-déroulante::
-
-    $options = ['M' => 'Male', 'F' => 'Female'];
-    echo $this->Form->select('gender', $options, ['empty' => true]);
-
-Affichera:
-
-.. code-block:: html
-
-    <select name="gender">
-    <option value=""></option>
-    <option value="M">Male</option>
-    <option value="F">Female</option>
-    </select>
-
-L'input de type ``select``  permet un attribut ``$option`` spécial
-appelée ``'escape'``  qui accepte un booléen et détermine
-s'il faut que l'entité HTML encode le contenu des options
-sélectionnées. Par défaut à ``true``::
-
-    $options = ['M' => 'Male', 'F' => 'Female'];
-    echo $this->Form->select('gender', $options, ['escape' => false]);
-
-* ``$attributes['options']`` Cette clé vous permet de spécifier
-  manuellement des options pour un input select (menu de sélection),
-  ou pour un groupe radio. A moins que le 'type' soit spécifié à 'radio',
-  le FormHelper supposera que la cible est un input select (menu de
-  sélection)::
-
-    echo $this->Form->select('field', [1,2,3,4,5]);
-
-  Affichera:
-
-  .. code-block:: html
-
-    <select name="field">
-        <option value="0">1</option>
-        <option value="1">2</option>
-        <option value="2">3</option>
-        <option value="3">4</option>
-        <option value="4">5</option>
-    </select>
-
-  Les options peuvent aussi être fournies comme des paires clé-valeur::
-
-    echo $this->Form->select('field', [
-        'Value 1' => 'Label 1',
-        'Value 2' => 'Label 2',
-        'Value 3' => 'Label 3'
-    ]);
-
-  Affichera:
-
-  .. code-block:: html
-
-    <select name="field">
-        <option value="Value 1">Label 1</option>
-        <option value="Value 2">Label 2</option>
-        <option value="Value 3">Label 3</option>
-    </select>
-
-  Si vous souhaitez générer un select avec des groupes optionnels,
-  passez les données dans un format hiérarchique. Ceci fonctionnera
-  avec les checkboxes multiples et les boutons radios également,
-  mais au lieu des groupes optionnels enveloppez les éléments
-  dans des fieldsets::
-
-    $options = [
-       'Group 1' => [
-          'Value 1' => 'Label 1',
-          'Value 2' => 'Label 2'
-       ],
-       'Group 2' => [
-          'Value 3' => 'Label 3'
-       ]
-    ];
-    echo $this->Form->select('field', $options);
-
-  Affichera:
-
-  .. code-block:: html
-
-    <select name="field">
-        <optgroup label="Group 1">
-            <option value="Value 1">Label 1</option>
-            <option value="Value 2">Label 2</option>
-        </optgroup>
-        <optgroup label="Group 2">
-            <option value="Value 3">Label 3</option>
-        </optgroup>
-    </select>
-
-Pour générer des attributs avec option dans une balise::
-
-    $options = [
-        [ 'text' => 'Description 1', 'value' => 'value 1', 'attr_name' => 'attr_value 1' ],
-        [ 'text' => 'Description 2', 'value' => 'value 2', 'attr_name' => 'attr_value 2' ],
-        [ 'text' => 'Description 3', 'value' => 'value 3', 'other_attr_name' => 'other_attr_value' ],
-    ];
-    echo $this->Form->select('field', $options);
-
-Affiche:
-
-.. code-block:: html
-
-    <select name="field">
-        <option value="value 1" attr_name="attr_value 1">Description 1</option>
-        <option value="value 2" attr_name="attr_value 2">Description 2</option>
-        <option value="value 3" other_attr_name="other_attr_value">Description 3</option>
-    </select>
-
-* ``$attributes['multiple']`` Si 'multiple' a été défini à ``true`` pour
-  un input select, celui ci autorisera les sélections multiples::
-
-    echo $this->Form->select('field', $options, ['multiple' => true]);
-
-  Vous pouvez également définir 'checkbox' à 'multiple' pour afficher une
-  liste de check boxes reliés::
-
-    $options = [
-        'Value 1' => 'Label 1',
-        'Value 2' => 'Label 2'
-    ];
-    echo $this->Form->select('field', $options, [
-        'multiple' => 'checkbox'
-    ]);
-
-  Affichera:
-
-  .. code-block:: html
-
-      <input name="field" value="" type="hidden">
-      <div class="checkbox">
-        <label for="field-1">
-         <input name="field[]" value="Value 1" id="field-1" type="checkbox">
-         Label 1
-         </label>
-      </div>
-      <div class="checkbox">
-         <label for="field-2">
-         <input name="field[]" value="Value 2" id="field-2" type="checkbox">
-         Label 2
-         </label>
-      </div>
-
-* ``$attributes['disabled']`` Lors de la création de checkboxes, cette
-  option peut être définie pour désactiver tout ou quelques checkboxes.
-  Pour désactiver toutes les checkboxes, définissez disabled à ``true``::
-
-    $options = [
-        'Value 1' => 'Label 1',
-        'Value 2' => 'Label 2'
-    ];
-    echo $this->Form->select('field', $options, [
-        'multiple' => 'checkbox',
-        'disabled' => ['Value 1']
-    ]);
-
-  Affiche:
-
-  .. code-block:: html
-
-       <input name="field" value="" type="hidden">
-       <div class="checkbox">
-          <label for="field-1">
-          <input name="field[]" disabled="disabled" value="Value 1" type="checkbox">
-          Label 1
-          </label>
-       </div>
-       <div class="checkbox">
-          <label for="field-2">
-          <input name="field[]" value="Value 2" id="field-2" type="checkbox">
-          Label 2
-          </label>
-       </div>
 
 Créer des Inputs File
 ---------------------
