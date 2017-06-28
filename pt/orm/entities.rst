@@ -11,4 +11,7 @@ Entities (Entidades)
     Você pode consultar a versão em inglês deste tópico através do seletor de
     idiomas localizado ao lado direito do campo de buscas da documentação.
 
-.. _entities-mass-assignment: 
+.. _entities-mass-assignment:
+
+Atribuição em Massa
+===================
