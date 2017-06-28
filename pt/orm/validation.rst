@@ -21,4 +21,10 @@ Validando dados antes de construir entidades
 Aplicando regras da aplicação
 =============================
 
+Usando um Conjunto de Validação Diferente
+=========================================
+
 .. _using-different-validators-per-association:
+
+Usando um Conjunto de Validação Diferente para Associações
+----------------------------------------------------------
