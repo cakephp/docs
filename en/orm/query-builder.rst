@@ -582,7 +582,7 @@ conditions arrays in previous versions of CakePHP::
     $query = $articles->find()
         ->where([
             'author_id' => 3,
-            'OR' => [['view_count' => 2], ['view_count' => 3]],
+            'OR' => ['view_count' => 2, 'view_count' => 3],
         ]);
 
 The above would generate SQL like::
