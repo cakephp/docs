@@ -262,7 +262,7 @@ CakePHP の ORM を使うためにエンティティークラスを生成する�
 これにより、エラーメッセージで動くコードのテストが簡単になります。 ::
 
     $user->setError('password', ['Password is required']);
-    $user->setErrors(['pasword' => ['Password is required'], 'username' => ['Username is required']]);
+    $user->setErrors(['password' => ['Password is required'], 'username' => ['Username is required']]);
     // 3.4.0 より前
     $user->errors('password', ['Password is required.']);
 

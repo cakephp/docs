@@ -436,6 +436,13 @@ CakePHP は、エンティティーが保存される前に適用される「ル
     // タグは３つ以上、５つ以内
     $rules->add($rules->validCount('tags', 3, '>=', 'タグは 3 つ以上必要です'));
     $rules->add($rules->validCount('tags', 5, '<=', 'タグは 5 つ以下です'));
+    $rules->add($rules->validCount('subscription', 0, '==', '購読してません'));
+
+.. note::
+
+    そのプロパティーが数えられない場合や存在しない場合、 ``validCount`` は ``false`` を返します。
+    例えば、上記の例で言うと、subscription は少なくとも空のリストになっていなければ、``<`` や
+    ``<=`` による比較や ``0`` と比較する場合に ``false`` を返します。
 
 .. versionadded:: 3.3.0
     ``validCount()`` メソッドは、3.3.0 で追加されました。

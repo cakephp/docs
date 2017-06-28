@@ -54,13 +54,15 @@ Security コンポーネントのフォーム保護機能と、 ``startup()`` �
 
     public function beforeFilter(Event $event)
     {
-        $this->Security->config('blackHoleCallback', 'blackhole');
+        $this->Security->setConfig('blackHoleCallback', 'blackhole');
     }
 
     public function blackhole($type)
     {
         // エラー処理
     }
+
+注意: CakePHP バージョン 3.4 より前の場合、 ``$this->Security->config()`` を使用してください。
 
 ``$type`` パラメーターは、以下の値を指定できます。
 
@@ -99,7 +101,8 @@ allowedActions
     これは、コントローラー間リクエストの制御に利用できます。
 
 これらの設定オプションを使用すると、コントローラー間の通信を制限することができます。
-それらは、 ``config()`` メソッドで設定します。
+それらは、 ``setConfig()`` メソッドで設定します。
+もし CakePHP バージョン 3.4 より前を使用している場合は ``config()`` です。
 
 フォーム改ざん防止
 ==================
@@ -131,7 +134,7 @@ validatePost
     ``false`` をセットすると、POST リクエストのバリデーションを完全にスキップし、
     実質フォームバリデーションを無効化します。
 
-上記の設定オプションは、 ``config()`` で設定することができます。
+上記の設定オプションは、 ``setConfig()`` で設定することができます。
 
 使い方
 ======
@@ -229,9 +232,11 @@ CSRF 保護機能を有効にするには、 :doc:`/controllers/components/csrf`
 
         public function beforeFilter(Event $event)
         {
-             $this->Security->config('unlockedActions', ['edit']);
+             $this->Security->setConfig('unlockedActions', ['edit']);
         }
     }
+
+注意: CakePHP バージョン 3.4.0 より前の場合、 ``$this->Security->config()`` を使用してください。
 
 この例では、edit アクションのすべてのセキュリティチェックが無効になります。
 
