@@ -13,4 +13,10 @@ Associações - Conectando tabelas
     
 .. _has-many-associations:
 
+Associações HasOne
+==================
+
 .. _belongs-to-many-associations:
+
+Associações BelongsToMany
+=========================
