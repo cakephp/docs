@@ -301,6 +301,10 @@ pratiques comme :php:meth:`Cake\\Log\\Log::error()` pour indiquer clairement le
 niveau de journalisation. Utiliser un niveau qui n'est pas dans les niveaux
 ci-dessus va entraîner une exception.
 
+.. note::
+    Quand l'option ``levels`` est une valeur vide dans la configuration du logger,
+    n'importe quel niveau de message sera capturé.
+
 .. _logging-scopes:
 
 Scopes de Journalisation
@@ -315,8 +319,7 @@ journalisation moins critiques.
 CakePHP expose ce concept dans les scopes de journalisation. Quand les messages
 d'erreur sont écrits, vous pouvez inclure un nom scope. S'il y a un logger
 configuré pour ce scope, les messages de log seront dirigés vers ces loggers.
-Si un message de log est écrit vers un scope inconnu, les loggers qui gèrent
-ce niveau de message va journaliser le message. Par exemple::
+Par exemple::
 
     // Configurez logs/shops.log pour recevoir tous les types (niveaux de log),
     // mais seulement ceux avec les scope `orders` et `payments`
@@ -349,6 +352,11 @@ de données en contexte::
 
     Log::warning('This is a warning', ['orders']);
     Log::warning('This is a warning', 'payments');
+
+.. note::
+    Quand l'option ``scopes`` est vide ou ``null`` dans la configuration d'un
+    logger, les messages de tous les ``scopes`` seront capturés. Définir l'option
+    à ``false`` captura seulement les messages sans scope.
 
 l'API de Log
 ============

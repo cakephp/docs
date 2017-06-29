@@ -280,7 +280,7 @@ level. Using a level that is not in the above levels will result in an
 exception.
 
 .. note::
-    When ```levels``` is set to an empty value in a logger's configuration, it
+    When ``levels`` is set to an empty value in a logger's configuration, it
     will take messages of any level.
 
 .. _logging-scopes:
@@ -327,8 +327,8 @@ Note that using this form will limit the ability to pass more data as context::
     Log::warning('This is a warning', 'payments');
 
 .. note::
-    When ```scopes``` is set to an empty array or null in a logger's
-    configuration, it will take messages of any scope. Setting it to false
+    When ``scopes`` is set to an empty array or ``null`` in a logger's
+    configuration, it will take messages of any scope. Setting it to ``false``
     will only match messages without scope.
 
 Log API
