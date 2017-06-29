@@ -102,11 +102,11 @@ whose name contains multiple words, the foreign key would be
 ``article_category_id``.
 
 Join tables, used in BelongsToMany relationships between models, should be named
-after the model tables they will join, arranged in alphabetical order
-(``articles_tags`` rather than ``tags_articles``). In case you want to add aditional
-data to the intermediate table you will need to to add an individual ``id`` field to 
-the join table, so the ``articles_tags`` table will have at least these keys ``article_id``,
-``tag_id`` and ``id``.
+after the model tables they will join or the bake command wont work, arranged in
+alphabetical order (``articles_tags`` rather than ``tags_articles``). In case you
+want to add aditional data to the intermediate table you will to to add an ``id``
+field to the join table so ``articles_tags`` becomes an entity and table will have
+at least these keys ``article_id``, ``tag_id`` and ``id``.
 
 In addition to use an auto-increment key as the primary key, you may also use
 UUID columns. CakePHP will create a unique 36 character UUID
