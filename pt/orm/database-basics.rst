@@ -12,3 +12,8 @@ O básico sobre banco de dados
     idiomas localizado ao lado direito do campo de buscas da documentação.
 
 .. _database-configuration:
+
+.. _adding-custom-database-types:
+
+Adicionando Tipos Personalizados
+================================
