@@ -5,21 +5,22 @@ Entities (Entidades)
 
 .. php:class:: Entity
 
-While :doc:`/orm/table-objects` represent and provide access to a collection of
-objects, entities represent individual rows or domain objects in your
-application. Entities contain persistent properties and methods to manipulate and
-access the data they contain.
+Enquanto :doc:`/orm/table-objects` representam e fornecem acesso a uma coleção
+de objetos, entidades representam linhas individuais ou objetos de domínio na
+sua aplicação. Entidades contêm propriedades persistentes e métodos para
+manipular e acessar os dados que elas contêm.
 
-Entities are created for you by CakePHP each time you use ``find()`` on a table
-object.
+Entidades são criadas para você pelo CakePHP cada vez que utilizar o ``find()`` em um
+objeto de Table.
 
-Creating Entity Classes
-=======================
+Criando Classes de Entidade
+============================
 
-You don't need to create entity classes to get started with the ORM in CakePHP.
-However, if you want to have custom logic in your entities you will need to
-create classes. By convention entity classes live in **src/Model/Entity/**. If
-our application had an ``articles`` table we could create the following entity::
+Você não precisa criar classes de entidade para iniciar com o ORM no CakePHP.
+No entanto, se você deseja ter lógica personalizada nas suas entidades, você
+precisará criar classes. Por convensão, classes de entidades ficam em 
+**src/Model/Entity/**. Se a nossa aplicação tem um tabela ``articles``, poderiamos
+criar a seguinte entidade::
 
     // src/Model/Entity/Article.php
     namespace App\Model\Entity;
@@ -30,24 +31,24 @@ our application had an ``articles`` table we could create the following entity::
     {
     }
 
-Right now this entity doesn't do very much. However, when we load data from our
-articles table, we'll get instances of this class.
+Neste momento, essa entidade não faz muita coisa. No entanto, quando carregarmos dados
+da nossa tabela articles, obteremos instâncias dessa classe.
 
 .. note::
 
-    If you don't define an entity class CakePHP will use the basic Entity class.
+    Se você não definir uma classe de entitdade o CakePHP usará a classe Entity básica.
 
-Creating Entities
+Criando Entidade
 =================
 
-Entities can be directly instantiated::
+Entidades podem ser instanciadas diretamente::
 
     use App\Model\Entity\Article;
 
     $article = new Article();
 
-When instantiating an entity you can pass the properties with the data you want
-to store in them::
+Ao instanciar uma entidade, você pode passar as propriedades com os dados que deseja
+armazenar nelas::
 
     use App\Model\Entity\Article;
 
@@ -57,8 +58,8 @@ to store in them::
         'created' => new DateTime('now')
     ]);
 
-Another way of getting new entities is using the ``newEntity()`` method from the
-``Table`` objects::
+Outro maneira de obter novas entidades é usando o método ``newEntity()`` dos objetos
+``Table``::
 
     use Cake\ORM\TableRegistry;
 
@@ -69,11 +70,11 @@ Another way of getting new entities is using the ``newEntity()`` method from the
         'created' => new DateTime('now')
     ]);
 
-Accessing Entity Data
-=====================
+Acessando Dados de Entidade
+===========================
 
-Entities provide a few ways to access the data they contain. Most commonly you
-will access the data in an entity using object notation::
+Entidades fornecem algumas maneiras de acessar os dados que contêm. Normalmente, você
+acessará os dados de uma entidade usando notação de objeto (object notation)::
 
     use App\Model\Entity\Article;
 
@@ -81,12 +82,13 @@ will access the data in an entity using object notation::
     $article->title = 'This is my first post';
     echo $article->title;
 
-You can also use the ``get()`` and ``set()`` methods::
+Você também pode usar os métodos ``get()`` e ``set()``::
 
     $article->set('title', 'This is my first post');
     echo $article->get('title');
 
-When using ``set()`` you can update multiple properties at once using an array::
+Ao usar ``set()``, você pode atualizar várias propriedades ao mesmo tempo usando
+um array::
 
     $article->set([
         'title' => 'My first post',
@@ -94,9 +96,9 @@ When using ``set()`` you can update multiple properties at once using an array::
     ]);
 
 .. warning::
-
-    When updating entities with request data you should whitelist which fields
-    can be set with mass assignment.
+    
+    Ao atualizar entidades com dados de requisição, você deve especificar com
+    whitelist quais campos podem ser definidos com atribuição de massa.
 
 Accessors & Mutators
 ====================
