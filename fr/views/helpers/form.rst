@@ -1772,206 +1772,63 @@ Ce qui générera le code suivant :
         <option value="45">45</option>
     </select>
 
-
-
-
-
-* ``$options['timeFormat']``. Utilisé pour spécifier le format des inputs
-  select (menu de sélection) pour un jeu d'input en relation avec le temps.
-  Les valeurs valides sont ``12``, ``24``, et ``null``.
-
-* ``$options['minYear'], $options['maxYear']`` Utilisé en combinaison avec un
-  input date/datetime. Définit les valeurs minimales et/ou maximales de butée
-  montrées dans le champ select des années.
-
-* ``$options['orderYear']`` Utilisé en combinaison avec un input
-  date/datetime. Définit l'ordre dans lequel la valeur de l'année sera
-  délivré. Les valeurs valides sont  'asc', 'desc'. La valeur par défaut
-  est 'desc'.
-
-* ``$options['interval']`` Cette option spécifie l'écart de minutes
-  entre chaque option dans la select box minute::
-
-    echo $this->Form->control('time', [
-        'type' => 'time',
-        'interval' => 15
-    ]);
-
-  Créera 4 options dans la select box minute. Une toutes les 15 minutes.
-
-* ``$options['round']`` Peut être défini à `up` ou `down` pour forcer l'arrondi
-  dans une direction. Par défaut à null qui arrondit à la moitié
-  supérieure selon `interval`.
-
-* ``$options['monthNames']`` If ``false``, 2 digit numbers will be used instead
-  of text. Si on lui passe un tableau du style
-  ``['01' => 'Jan', '02' => 'Feb', ...]`` alors ce tableau sera utilisé.
-
-
-Crée des Inputs DateTime
-------------------------
-
-.. php:method:: dateTime($fieldName, $options = [])
-
-Crée un ensemble d'inputs select pour les date et time. Cette méthode accepte
-un certain nombre d'options:
-
-* ``monthNames`` Si ``false``, un chiffre à 2 digits sera utilisé à la place
-  d'un texte.
-  Si c'est un tableau, le tableau passé sera utilisé.
-* ``minYear`` L'année la plus ancienne à utiliser dans le select de l'année
-* ``maxYear`` L'année la plus lointaine à utiliser dans le select de l'année
-* ``interval`` L'intervale en minutes entre chaque valeur dans le slect des
-  minutes. 1 par défaut.
-* ``empty`` - Si ``true``, une option select vide est affichée. Si c'est une
-  chaine, cette chaine est affichée comme élément vide.
-* ``round`` - Mettre à ``up`` ou ``down`` pour forcer l'arrondi
-  dans une direction. Par défaut à null.
-* ``default`` Le valeur par défaut à utiliser par l'input. Une valeur dans
-  ``$this->request->getData()`` correspondante au nom du l'input écrasera cette
-  valeur. Si aucune valeur par défaut n'est définie, ``time()`` sera utilisé.
-* ``timeFormat`` Le format d'heure à utiliser, soit 12 soit 24.
-* ``second`` Mettre à ``true`` to activer l'affichage des secondes.
-
-Pour controller l'ordre des inputs, et chaque élément/contenu entre les inputs,
-vous pouvez remplacer le template ``dateWidget``. Par défaut le template
-``dateWidget`` est::
-
-    {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
-
-Pour créer un input datetime avec des classes/attributs personnalisés pour une
-select box spécifique, vous pouvez utiliser les options dans chaque component::
-
-    echo $this->Form->dateTime('released', [
-        'year' => [
-            'class' => 'year-classname',
-        ],
-        'month' => [
-            'class' => 'month-class',
-            'data-type' => 'month',
-        ],
-    ]);
-
-Ce qui créerait les deux selects suivants:
-
-.. code-block:: html
-
-    <select name="released[year]" class="year-class">
-        <option value="" selected="selected"></option>
-        <option value="00">0</option>
-        <option value="01">1</option>
-        <!-- .. snipped for brevity .. -->
-    </select>
-    <select name="released[month]" class="month-class" data-type="month">
-        <option value="" selected="selected"></option>
-        <option value="01">January</option>
-        <!-- .. snipped for brevity .. -->
-    </select>
-
-Créer des Inputs Time
----------------------
-
-.. php:method:: time($fieldName, $options = [])
-
-Crée deux éléments select remplis respectivement avec 24 hours et 60 minutes
-pour ``hour`` et ``minute``.
-De plus, les attributs HTML peuvent être fournis dans $options pour chaque
-``type`` spécifique. Si ``$options['empty']`` est ``false``, le select
-n'inclura pas une option vide:
-
-* ``empty`` - Si ``true``, l'option select vide est montrée. Si c'est une
-  chaîne, cette chaîne sera affichée en tant qu'élément vide.
-* ``default`` | ``value`` La valeur par défaut à utiliser pour l'input. Une
-  valeur dans ``$this->request->getData()`` qui correspond au nom du champ va écraser
-  cette valeur.
-  Si aucune valeur par défaut n'est fournie, ``time()`` sera utilisée.
-* ``timeFormat`` Le format de time à utiliser, soit 12 soit 24. Par défaut à 24.
-* ``second`` Défini à ``true`` pour activer les secondes déroulantes.
-* ``interval`` L'intervalle pour le select minutes. Par défaut à 1.
-
-Par exemple, pour créer un intervalle de temps avec des minutes selectionnables
-toutes les 15 minutes, et pour l'appliquer aux selects, vous pourriez faire
-ceci::
-
-    echo $this->Form->time('released', [
-        'interval' => 15,
-        'hour' => [
-            'class' => 'foo-class',
-        ],
-        'minute' => [
-            'class' => 'bar-class',
-        ],
-    ]);
-
-Ce qui créerait les deux selects suivants:
-
-.. code-block:: html
-
-    <select name="released[hour]" class="foo-class">
-        <option value="" selected="selected"></option>
-        <option value="00">0</option>
-        <option value="01">1</option>
-        <!-- .. snipped for brevity .. -->
-        <option value="22">22</option>
-        <option value="23">23</option>
-    </select>
-    <select name="released[minute]" class="bar-class">
-        <option value="" selected="selected"></option>
-        <option value="00">00</option>
-        <option value="15">15</option>
-        <option value="30">30</option>
-        <option value="45">45</option>
-    </select>
-
-Créer des Inputs Year
----------------------
+Créer des éléments Année (Year)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: year(string $fieldName, array $options = [])
 
-Crée un input de type select rempli avec les années comprises entre ``minYear``
-et ``maxYear``. En plus, des attributs HTML peuvent être fournis via $options.
-Si ``$options['empty']`` est ``false``, le select n'aura pas de choix vide:
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
 
-* ``empty`` - Si ``true``, une option select vide est affichée. Si c'est une
-  chaine, cette chaine est affichée comme élément vide.
-* ``orderYear`` - Ordre de tri des années dans les options du select.
-  Les valeurs acceptées sont 'asc', 'desc'. 'desc' par défaut.
-* ``value`` La valeur sélectionnée pour l'input.
-* ``maxYear`` L'année la plus lointaine à utiliser dans le select.
-* ``minYear`` L'année la plus ancienne à utiliser dans le select de l'année.
+Crée un élément ``select`` qui contiendra une option par année pour les années
+situées entre ``minYear`` et ``maxYear`` si ces options sont fournies ou
+pour les années entre -5 et +5 par rapport à l'année du jour.
+Si ``$options['empty']`` est passé à ``false``, le ``select`` n'aura pas d'élément
+vide en début de liste.
 
-Par exemple, pour créer une sélection depuis 2000 jusqu'à l'année actuelle,
-vous devez faire cela::
+Par exemple pour créer un élément qui propose les années entre 2000 et
+l'année en cours, vous utiliserez le code suivant::
 
     echo $this->Form->year('purchased', [
         'minYear' => 2000,
         'maxYear' => date('Y')
     ]);
 
-Si nous étions en 2009, vous auriez ceci:
+Si nous sommes en 2009, nous obtiendrons :
 
 .. code-block:: html
 
     <select name="purchased[year]">
-    <option value=""></option>
-    <option value="2009">2009</option>
-    <option value="2008">2008</option>
-    <option value="2007">2007</option>
-    <option value="2006">2006</option>
-    <option value="2005">2005</option>
-    <option value="2004">2004</option>
-    <option value="2003">2003</option>
-    <option value="2002">2002</option>
-    <option value="2001">2001</option>
-    <option value="2000">2000</option>
+        <option value=""></option>
+        <option value="2009">2009</option>
+        <option value="2008">2008</option>
+        <option value="2007">2007</option>
+        <option value="2006">2006</option>
+        <option value="2005">2005</option>
+        <option value="2004">2004</option>
+        <option value="2003">2003</option>
+        <option value="2002">2002</option>
+        <option value="2001">2001</option>
+        <option value="2000">2000</option>
     </select>
 
-Créer des Inputs Month
-----------------------
+Créer des éléments Mois (Month)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: month(string $fieldName, array $attributes)
 
-Crée un élément select (menu de sélection) avec le nom des mois::
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
+
+Crée un ``select`` avec les mois sous forme textuelle.
+
+Par exemple::
 
     echo $this->Form->month('mob');
 
@@ -1980,63 +1837,85 @@ Affichera:
 .. code-block:: html
 
     <select name="mob[month]">
-    <option value=""></option>
-    <option value="01">January</option>
-    <option value="02">February</option>
-    <option value="03">March</option>
-    <option value="04">April</option>
-    <option value="05">May</option>
-    <option value="06">June</option>
-    <option value="07">July</option>
-    <option value="08">August</option>
-    <option value="09">September</option>
-    <option value="10">October</option>
-    <option value="11">November</option>
-    <option value="12">December</option>
+        <option value=""></option>
+        <option value="01">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
     </select>
 
-Vous pouvez passer votre propre tableau des mois à utiliser en
-paramétrant l'attribut 'monthNames', ou avoir les mois affichés
-comme des nombres en passant ``false``. (Note: les mois par défaut
-sont internationalisés et peuvent être traduits en utilisant la
-:doc:`localisation </core-libraries/internationalization-and-localization>`.)::
+Vous pouvez passer votre propre tableau de valeurs en utilisant l'option
+``'monthNames'`` ou bien avoir les mois afficher sous leur forme chiffrée
+en passant ``false``.
 
-    echo $this->Form->month('mob', ['monthNames' => false]);
+Par exemple ::
 
-Créer des Inputs Day
---------------------
+  echo $this->Form->month('mob', ['monthNames' => false]);
+
+.. note::
+
+    Les mois par défaut peuvent être traduits via les fonctionnalités
+    d'internationalisation de CakePHP. Vous reportez à la section
+    :doc:`/core-libraries/internationalization-and-localization` pour plus
+    d'informations.
+
+Créer des éléments Jour (Day)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: day(string $fieldName, array $attributes)
 
-Crée un élément select (menu de sélection) rempli avec les jours
-(numériques) du mois.
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
 
-Pour créer une option empty avec l'affichage d'un texte de votre choix
-(ex. la première option est 'Jour'), vous pouvez fournir le texte comme
-paramètre final comme ceci::
+Crée un ``select`` avec les jours du mois sous forme numérique.
 
-    echo $this->Form->day('created');
+Pour créer un ``option`` vide affichant le texte de votre choix (pour qu'à
+l'initialisation la première option soit "Jour" par exemple), vous pouvez
+définir le texte souhaité dans le paramètre ``'empty'``.
+
+Par exemple::
+
+    echo $this->Form->day('created', ['empty' => 'Jour']);
 
 Affichera:
 
 .. code-block:: html
 
     <select name="created[day]">
-    <option value=""></option>
-    <option value="01">1</option>
-    <option value="02">2</option>
-    <option value="03">3</option>
-    ...
-    <option value="31">31</option>
+        <option value="" selected="selected">Jour</option>
+        <option value="01">1</option>
+        <option value="02">2</option>
+        <option value="03">3</option>
+        ...
+        <option value="31">31</option>
     </select>
 
-Créer des Inputs Hour
----------------------
+Créer des éléments Heure (Hour)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: hour(string $fieldName, array $attributes)
 
-Crée un élément select (menu de sélection) rempli avec les heures de la journée.
-Vous pouvez créer un select en de 12 ou 24 heures en utilisant l'option format::
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
+
+Créer un ``select`` avec les heures du jour.
+
+Vous pouvez avoir un ``select`` au format 12 ou 24 heures en utilisant l'option
+``'format'``::
 
     echo $this->Form->hour('created', [
         'format' => 12
@@ -2045,35 +1924,71 @@ Vous pouvez créer un select en de 12 ou 24 heures en utilisant l'option format:
         'format' => 24
     ]);
 
-Créer des Inputs Minute
------------------------
+Créer des éléments Minute
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: minute(string $fieldName, array $attributes)
 
-Crée un élément select (menu de sélection) rempli avec les minutes
-d'une heure. Vous pouvez créer un select qui contient des valeurs spécifiques
-en utilisant l'option ``interval``. Par exemple si vous souhaitez une
-incrémentation toutes les 10 minutes, vous devez faire::
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
 
-    echo $this->Form->minute('created', [
+Crée un ``select`` avec les valeurs des minutes pour l'heure. VOus pouvez créer un
+``select`` qui contient seulement des valeurs spécifiques en utilisant l'option
+``'interval'``.
+
+Par exemple si vous voulez des paliers de 10 minutes, vous utiliseriez le code
+suivant::
+
+    echo $this->Form->minute('arrival', [
         'interval' => 10
     ]);
 
-Créer des Inputs Meridian
--------------------------
+Affichera:
+
+.. code-block:: html
+
+    <select name="arrival[minute]">
+        <option value="" selected="selected"></option>
+        <option value="00">00</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+    </select>
+
+Creating Meridian Controls
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: meridian(string $fieldName, array $attributes)
 
-Crée un élément select (menu de sélection) rempli avec'am' et 'pm'.
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
+
+Crée un ``select`` avec les valeurs 'am' et 'pm'. Utile si vous utilisez le format
+d'heure ``12`` car il vous permettra de préciser la période de la journée à laquelle
+cette heure appartient
 
 Créer les Labels
 ================
 
 .. php:method:: label(string $fieldName, string $text, array $options)
 
-Crée un élément label. ``$fieldName`` est utilisé pour générer le
-Dom id. Si ``$text`` n'est pas défini, ``$fieldName`` sera utilisé pour
-définir le texte du label::
+* ``$fieldName`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$text`` - Chaîne optionnelle pour définir le texte du label.
+* ``$options`` - Optionel. Chaîne ou tableau qui peut contenir n'importe laquelle
+  :ref:`des options générales<general-control-options>` ainsi que n'importe quel
+  attribut HTML valide.
+
+Crée un élément label. ``$fieldName`` est utilisé pour générer l'attribut ``for``.
+Si ``$text`` n'est pas défini, ``$fieldName`` sera utilisé pour définir le texte
+du label::
 
     echo $this->Form->label('User.name');
     echo $this->Form->label('User.name', 'Your username');
@@ -2101,20 +2016,78 @@ Affichera:
 Afficher et vérifier les erreurs
 ================================
 
+FormHelper expose quelques méthodes qui vous permette de facilement vérifier
+si vos champs contiennent des erreurs ou pour afficher des messages d'erreur
+personnalisés.
+
+Afficher les Erreurs
+--------------------
+
 .. php:method:: error(string $fieldName, mixed $text, array $options)
 
-Affiche un message d'erreur de validation, spécifiée par $texte, pour
-le champ donné, dans le cas où une erreur de validation a eu lieu.
+* ``$fieldName`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$text`` - Optionnel. Une chaîne ou un tableau fournissant le(s) message(s)
+  d'erreur. Si c'est un tableau, cela devra être un tableau de paire clé / valeur
+  où la clé est le nom du champ en erreur et la valeur le message associé.
+  Défaut à ``null``.
+* ``$options`` - Tableau optionnel qui ne peut contenir qu'une clé ``escape``
+  qui attend un booléen et qui permet de définir si le contenu HTML du message
+  d'erreur doit être échappé ou non. Défaut à ``true``.
 
-Options:
+Affiche un message d'erreur de validation, spécifiée par ``$text``, pour
+le champ donné, dans le cas où une erreur de validation a eu lieu. Si ``$text``
+n'est pas fourni alors le message de validation par défaut pour le type de champ
+sera utilisé.
 
--  'escape' booléen s'il faut ou non que le HTML échappe le contenu de
-   l'erreur.
+Cette méthode utilise les templates de widgets suivant::
+
+    'error' => '<div class="error-message">{{content}}</div>'
+    'errorList' => '<ul>{{content}}</ul>'
+    'errorItem' => '<li>{{text}}</li>'
+
+Les templates ``'errorList'`` et ``'errorItem'`` sont utilisés pour formater
+plusieurs messages d'erreur pour un seul champ.
+
+Exemple::
+
+    // Dans TicketsTable vous avez une règle de validation 'notEmpty' :
+    public function validationDefault(Validator $validator)
+    {
+        $validator
+            ->requirePresence('ticket', 'create')
+            ->notEmpty('ticket');
+    }
+
+    // Dans Templates/Tickets/add.ctp vous avez :
+    echo $this->Form->text('ticket');
+
+    if ($this->Form->isFieldError('ticket')) {
+        echo $this->Form->error('ticket', 'Message d\'erreur 100% personnalisé !');
+    }
+
+Si vous soumettez le formulaire sans fournir de valeur pour le champ *Ticket*,
+votre formulaire affichera :
+
+.. code-block:: html
+
+    <input name="ticket" class="form-error" required="required" value="" type="text">
+    <div class="error-message">Message d'erreur 100% personnalisé !</div>
+
+.. note::
+
+    En utilisant :php:meth:`~Cake\\View\\Helper\\FormHelper::control()`, les erreurs
+    sont rendues par défaut, donc vous n'aurez pas besoin d'utiliser ``isFieldError()``
+    ou d'appeler ``error()`` manuellement.
+
+Vérifier la Présence d'Erreurs
+------------------------------
 
 .. php:method:: isFieldError(string $fieldName)
 
-Retourne ``true`` si le champ $fieldName fourni a une erreur de validation en
-cours::
+* ``$fieldName`` - Un nom de champ sous la forme ``'Modelname.fieldname'``.
+
+Retourne ``true`` si le champ ``$fieldName`` fourni a une erreur de validation en
+cours. Sinon, retournera ``false``::
 
     if ($this->Form->isFieldError('gender')) {
         echo $this->Form->error('gender');
