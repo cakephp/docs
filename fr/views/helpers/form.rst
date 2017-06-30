@@ -756,7 +756,7 @@ Créer des Inputs Text
 * ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
 * ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
   :ref:`des options générales<general-control-options>` ainsi que n'importe
-  quel attributs HTML valide.
+  quel attribut HTML valide.
 
 Va créer un ``input`` de type ``text``::
 
@@ -776,7 +776,7 @@ Créer des Inputs Password
 * ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
 * ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
   :ref:`des options générales<general-control-options>` ainsi que n'importe
-  quel attributs HTML valide.
+  quel attribut HTML valide.
 
 Création d'un input ``password``::
 
@@ -796,7 +796,7 @@ Créer des Inputs Cachés
 * ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
 * ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
   :ref:`des options générales<general-control-options>` ainsi que n'importe
-  quel attributs HTML valide.
+  quel attribut HTML valide.
 
 Créera un input ``hidden`` de form. Exemple::
 
@@ -816,7 +816,7 @@ Créer des Textareas
 * ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
 * ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
   :ref:`des options générales<general-control-options>` ainsi que n'importe
-  quel attributs HTML valide.
+  quel attribut HTML valide.
 
 Crée un champ ``textarea`` (zone de texte). Le template utilisé par défaut est::
 
@@ -1028,7 +1028,7 @@ Créer des Checkboxes
 * ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
   :ref:`des options générales<general-control-options>`, des options de la section
   :ref:`checkbox-radio-select-options`, des options spécifiques aux checkbox (ci-dessous)
-  ainsi que n'importe quel attributs HTML valide.
+  ainsi que n'importe quel attribut HTML valide.
 
 Créer un élément ``checkbox``. Le template de widget utilisé est le suivant::
 
@@ -1094,7 +1094,7 @@ Créer des Boutons Radio
 * ``$attributes`` - Un tableau optionnel d'options avec n'importe laquelle
   :ref:`des options générales<general-control-options>`, des options de la section
   :ref:`checkbox-radio-select-options`, des options spécifiques aux radios (ci-dessous)
-  ainsi que n'importe quel attributs HTML valide.
+  ainsi que n'importe quel attribut HTML valide.
 
 Crée un jeu d'inputs radios. Les templates de widget utilisés par défaut seront::
 
@@ -1184,7 +1184,7 @@ Créer des Select
 * ``$attributes`` - Un tableau optionnel d'options avec n'importe laquelle
   :ref:`des options générales<general-control-options>`, des options de la section
   :ref:`checkbox-radio-select-options`, des options spécifiques aux select (ci-dessous)
-  ainsi que n'importe quel attributs HTML valide.
+  ainsi que n'importe quel attribut HTML valide.
 
 Crée un élément ``select``, rempli des éléments compris dans ``$options``.
 Si l'option ``$attributes['value']`` est fournie, alors les éléments ``option``
@@ -1429,9 +1429,352 @@ contrôler certains comportement de la méthode ``select()``.
           </label>
       </div>
 
+Créer des Inputs File
+---------------------
 
-Les Options de Datetime
------------------------
+.. php:method:: file(string $fieldName, array $options)
+
+* ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>` ainsi que n'importe
+  quel attribut HTML valide.
+
+Permet de créer un input de type ``file`` dans votre formulaire, pour faire de
+l'upload de fichier.
+Le template de widget utilisé sera::
+
+    'file' => '<input type="file" name="{{name}}"{{attrs}}>'
+
+Vous devez vous assurer que le ``enctype`` du formulaire est défini a
+``multipart/form-data``.
+Pour cela, commencez par appeler la méthode ``create`` de votre formulaire
+via une des deux méthodes ci-dessous::
+
+    echo $this->Form->create($document, ['enctype' => 'multipart/form-data']);
+    // OU
+    echo $this->Form->create($document, ['type' => 'file']);
+
+Ensuite ajoutez l'une des deux lignes dans votre formulaire::
+
+    echo $this->Form->control('submittedfile', [
+        'type' => 'file'
+    ]);
+
+    // OU
+    echo $this->Form->file('submittedfile');
+
+.. note::
+
+    En raison des limitations du code HTML lui même, il n'est pas possible
+    de placer des valeurs par défauts dans les champs inputs de type 'file'.
+    A chaque fois que le formulaire sera affiché, la valeur sera vide.
+
+Lors de la soumission, le champ file fournit un tableau étendu de données
+au script recevant les données de formulaire.
+
+Pour l'exemple ci-dessus, les valeurs dans le tableau de données soumis
+devraient être organisées comme ci-dessous, si CakePHP à été installé sur
+un server Windows (la clé ``tmp\_name`` aura un chemin différent dans un
+environnement Unix)::
+
+    $this->request->data['submittedfile'] = [
+        'name' => 'conference_schedule.pdf',
+        'type' => 'application/pdf',
+        'tmp_name' => 'C:/WINDOWS/TEMP/php1EE.tmp',
+        'error' => 0, // Peut être une chaine sur Windows.
+        'size' => 41737,
+    ];
+
+Ce tableau est généré par PHP lui-même, pour plus de détails
+sur la façon dont PHP gère les données passées a travers
+les champs ``files``,
+`lire la section file uploads du manuel de PHP
+<http://php.net/features.file-upload>`_.
+
+.. note::
+
+    Quand vous utilisez ``$this->Form->file()``, pensez à bien définir le
+    type d'envodage du formulaire en définissant l'option type à 'file' dans
+    ``$this->Form->create()``.
+
+Creating Date & Time Related Controls
+-------------------------------------
+
+.. _datetime-options:
+
+Les Options communes pour les éléments Date et Time
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+These options are common for the date and time related controls:
+
+* ``'empty'`` - Si à ``true``, un élément ``option`` vide sera ajouté dans le
+  ``select`` en début de liste. Si vous fournissez une chaîne, elle sera utilisé
+  comme texte de l'``option``. Défaut à ``true``.
+
+* ``'default'`` | ``value`` - Utilisez l'une ou l'autre de ces options pour définir
+  la valeur qui sera affiché pour le champ. Une valeur présente dans ``$this->request->getData()``
+  avec en clé le nom du champ écrasera cette valeur. Si aucune valeur par défaut
+  n'est fournie, ``time()`` sera utilisé.
+
+* ``'year', 'month', 'day', 'hour', 'minute', 'second', 'meridian'`` - Ces options
+  vous permettent de contrôler quels éléments sont générés ou non. En définissant
+  une de ces options à ``false``, vous pouvez désactiver la génération du ``select``
+  correspondant (s'il est normalement rendu par la méthode appelée). En plus de ce
+  comportement, vous pouvez également passer des attributs HTML pour les éléments
+  en question.
+
+.. _date-options:
+
+Options pour les éléments Date
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Ces options sont liées aux méthodes liées aux dates, c'est-à-dire ``year()``,
+``month()``, ``day()``, ``dateTime()`` et ``date()``:
+
+* ``'monthNames'`` - Si à ``false``, un nombre à deux chiffres sera utilisé
+  pour afficher les mois plutôt que le nom des mois. Si vous passez un tableau
+  (``['01' => 'Jan', '02' => 'Feb', ...]``), le tableau passé sera utilisé à la
+  place.
+
+* ``'minYear'`` - Année minimum à utiliser pour le ``select`` qui correspond à
+  l'année
+
+* ``'maxYear'`` - Année maximum à utiliser pour le ``select`` qui correspond à
+  l'année
+
+* ``'orderYear'`` - L'ordre d'affichage des années dans ``select`` qui correspond
+  à l'année. Les valeurs possibles sont ``'asc'`` et ``'desc'``. Défaut à ``'desc'``.
+
+.. _time-options:
+
+Options pour les éléments Time
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Ces options sont liées aux méthodes liées à l'heure - ``hour()``,
+``minute()``, ``second()``, ``dateTime()`` et ``time()``:
+
+* ``'interval'`` - L'intervale en minute entre les valeurs affichées dans le
+  ``select`` qui correspond aux minutes. Défaut à 1.
+
+* ``'round'`` - Définir à ``up`` ou ``down`` si vous voulez forcer les minutes
+  à être arrondie dans l'une ou l'autre des direction (au supérieur ou à l'inférieur)
+  si la valeur ne correspond pas à l'intervale défini. Défaut à ``null``.
+
+* ``timeFormat`` - Applicable à ``dateTime()`` et ``time()``. Le format d'heure à
+  utiliser pour le ``select`` des heures : ``12`` ou ``24``. Si vous passez
+  autre chose que ``24``, le format ``12`` sera utilisé par défaut et le ``select``
+  correspondant au ``meridian`` sera affiché automatiquement à côté du ``select``
+  des secondes. Défaut à 24.
+
+* ``format`` - S'applique à la méthode ``hour()`` : soit ``12`` soit ``24``. Si
+  vous la définissez à ``12``, le ``select`` correspondant au ``meridian`` ne sera
+  pas automatiquement affiché. Défaut à ``24``.
+
+* ``second`` - Applicable à ``dateTime()`` and ``time()``. Définir à ``true``
+  pour activer le ``select`` correspondant aux secondes. Défaut à ``false``.
+
+Créer des champs DateTime
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. php:method:: dateTime($fieldName, $options = [])
+
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
+
+Crée un ensemble d'élément ``select`` qui permettent de définir une date et une
+heure.
+
+Pour contrôler l'ordre des éléments ainsi qu'ajouter des éléments ou du contenu entre
+les différents éléments, vous pouvez surcharger le template ``dateWidget``. Par défaut,
+le template a cette forme::
+
+    {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
+
+Appeler cette méthode sans options générera, par défaut, 5 ``select`` :
+année (4 chiffres), mois (textuelle complète), jour (numérique),
+heure (numérique), minutes (numérique).
+
+Par exemple::
+
+    <?= $this->form->dateTime('registered') ?>
+
+Affichera:
+
+.. code-block:: html
+
+    <select name="registered[year]">
+        <option value="" selected="selected"></option>
+        <option value="2022">2022</option>
+        ...
+        <option value="2012">2012</option>
+    </select>
+    <select name="registered[month]">
+        <option value="" selected="selected"></option>
+        <option value="01">January</option>
+        ...
+        <option value="12">December</option>
+    </select>
+    <select name="registered[day]">
+        <option value="" selected="selected"></option>
+        <option value="01">1</option>
+        ...
+        <option value="31">31</option>
+    </select>
+    <select name="registered[hour]">
+        <option value="" selected="selected"></option>
+        <option value="00">0</option>
+        ...
+        <option value="23">23</option>
+    </select>
+    <select name="registered[minute]">
+        <option value="" selected="selected"></option>
+        <option value="00">00</option>
+        ...
+        <option value="59">59</option>
+    </select>
+
+Pour créer des éléments avec des classes et des attributs spécifiques sur un
+élément donné, vous pouvez passer un tableau de paramètres pour chaque élément,
+via l'argument ``$options``.
+
+Par exemple::
+
+    echo $this->Form->dateTime('released', [
+        'year' => [
+            'class' => 'year-classname',
+        ],
+        'month' => [
+            'class' => 'month-class',
+            'data-type' => 'month',
+        ],
+    ]);
+
+Ce qui créera les 2 éléments suivant:
+
+.. code-block:: html
+
+    <select name="released[year]" class="year-class">
+        <option value="" selected="selected"></option>
+        <option value="00">0</option>
+        <option value="01">1</option>
+        <!-- .. snipped for brevity .. -->
+    </select>
+    <select name="released[month]" class="month-class" data-type="month">
+        <option value="" selected="selected"></option>
+        <option value="01">January</option>
+        <!-- .. snipped for brevity .. -->
+    </select>
+
+Créer des éléments Date
+~~~~~~~~~~~~~~~~~~~~~~~
+.. php:method:: date($fieldName, $options = [])
+
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
+
+Va créer, par défaut, 3 ``select`` : un pour l'année (4 chiffres), un pour le
+mois (forme textuelle complète) et un pour le jour (numérique).
+
+Vous pouvez contrôler les éléments ``select`` en passant des tableaux de
+d'options.
+
+Par exemple::
+
+    // En partant du principe que l'année en cours est 2017, cet appel va
+    // désactiver le select pour le jour, retirer l'option vide pour le select
+    // de l'année, limiter l'année minimum à 2018, ajouter des attributs HTML
+    // à l'année, ajouter une chaîne pour l'option vide des mois et changer les
+    // mois pour qu'il soit afficher sous forme de chiffres
+    <?php
+        echo $this->Form->date('registered', [
+            'minYear' => 2018,
+            'monthNames' => false,
+            'empty' => [
+                'year' => false,
+                'month' => 'Choisissez un mois...'
+            ],
+            'day' => false,
+            'year' => [
+                'class' => 'cool-years',
+                'title' => 'Année d'inscription'
+            ]
+        ]);
+    ?>
+
+Affichera:
+
+.. code-block:: html
+
+    <select class= "cool-years" name="registered[year]" title="Année d'inscription">
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        ...
+        <option value="2018">2018</option>
+    </select>
+    <select name="registered[month]">
+        <option value="" selected="selected">Choisissez un mois...</option>
+        <option value="01">1</option>
+        ...
+        <option value="12">12</option>
+    </select>
+
+Créer des éléments Time
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. php:method:: time($fieldName, $options = [])
+
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
+
+Va créer, par défaut, 2 ``select`` : un pour l'heure (sous forme 24 heures) et
+un pour le temps (sous forme 60 minutes).
+
+Par exemple, pour créer un ``select`` qui propose les minutes par tranche de
+15 minutes et appliquer une classe aux ``select``, vous pouvez utiliser l'appel
+suivant::
+
+    echo $this->Form->time('released', [
+        'interval' => 15,
+        'hour' => [
+            'class' => 'foo-class',
+        ],
+        'minute' => [
+            'class' => 'bar-class',
+        ],
+    ]);
+
+Ce qui générera le code suivant :
+
+.. code-block:: html
+
+    <select name="released[hour]" class="foo-class">
+        <option value="" selected="selected"></option>
+        <option value="00">0</option>
+        <option value="01">1</option>
+        <!-- .. snipped for brevity .. -->
+    <option value="22">22</option>
+    <option value="23">23</option>
+    </select>
+    <select name="released[minute]" class="bar-class">
+        <option value="" selected="selected"></option>
+        <option value="00">00</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+    </select>
+
+
+
+
 
 * ``$options['timeFormat']``. Utilisé pour spécifier le format des inputs
   select (menu de sélection) pour un jeu d'input en relation avec le temps.
@@ -1464,59 +1807,6 @@ Les Options de Datetime
   of text. Si on lui passe un tableau du style
   ``['01' => 'Jan', '02' => 'Feb', ...]`` alors ce tableau sera utilisé.
 
-Créer des Inputs File
----------------------
-
-.. php:method:: file(string $fieldName, array $options)
-
-Pour ajouter un champ upload à un formulaire, vous devez vous assurer que le
-enctype du formulaire est définit a  "multipart/form-data", donc commençons
-avec une fonction create comme ci-dessous::
-
-    echo $this->Form->create($document, ['enctype' => 'multipart/form-data']);
-    // OU
-    echo $this->Form->create($document, ['type' => 'file']);
-
-Ensuite ajoutez l'une des deux lignes dans votre formulaire::
-
-    echo $this->Form->control('submittedfile', [
-        'type' => 'file'
-    ]);
-
-    // OU
-    echo $this->Form->file('submittedfile');
-
-En raison des limitations du code HTML lui même, il n'est pas possible
-de placer des valeurs par défauts dans les champs inputs de type 'file'.
-A chaque fois que le formulaire sera affiché, la valeur sera vide.
-
-Lors de la soumission, le champ file fournit un tableau étendu de données
-au script recevant les données de formulaire.
-
-Pour l'exemple ci-dessus, les valeurs dans le tableau de données soumis
-devraient être organisées comme à la suite, si CakePHP à été installé sur
-un server Windows .'tmp\_name'  aura un chemin différent dans un
-environnement Unix::
-
-    $this->request->data['submittedfile'] = [
-        'name' => 'conference_schedule.pdf',
-        'type' => 'application/pdf',
-        'tmp_name' => 'C:/WINDOWS/TEMP/php1EE.tmp',
-        'error' => 0, // Peut être une chaine sur Windows.
-        'size' => 41737,
-    ];
-
-Ce tableau est généré par PHP lui-même, pour plus de détails
-sur la façon dont PHP gère les données passées a travers
-les champs ``files``,
-`lire la section file uploads du manuel de PHP
-<http://php.net/features.file-upload>`_.
-
-.. note::
-
-    Quand vous utilisez ``$this->Form->file()``, pensez à bien définir le
-    type d'envodage du formulaire en définissant l'option type à 'file' dans
-    ``$this->Form->create()``.
 
 Crée des Inputs DateTime
 ------------------------
