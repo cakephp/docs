@@ -2101,19 +2101,47 @@ cours. Sinon, retournera ``false``::
 Création des boutons et des éléments submit
 ===========================================
 
+Créer des éléments Submit
+-------------------------
+
 .. php:method:: submit(string $caption, array $options)
 
-Crée un input submit avec le texte ``$caption``. Si la ``$caption``
-fournie est l'URL d'une image, un bouton submit de l'image sera généré.
-Ce qui suit::
+* ``$caption`` - Chaîne optionnelle qui permet de fournir le texte à afficher
+  ou le chemin vers une image pour le bouton. Défaut à ``'Submit'``.
+* ``$options`` - Optionel. Chaîne ou tableau qui peut contenir n'importe laquelle
+  :ref:`des options générales<general-control-options>` ainsi que n'importe quel
+  attribut HTML valide.
 
-    echo $this->Form->submit();
+Crée un input ``submit`` avec le texte ``$caption``. Si la ``$caption``
+fournie est l'URL d'une image (sous-entendu que la valeur fournie contient '://'
+ou que son extension soit '.jpg, .jpe, .jpeg, .gif'), un bouton submit de
+l'image sera généré (si l'image existe). Si le premier caractère est '/' alors
+le chemin de l'image sera relatif à *webroot*, sinon, il sera relatif à *webroot/img*.
+
+Par défaut, les templates de widgets utilisés sont::
+
+    'inputSubmit' => '<input type="{{type}}"{{attrs}}/>'
+    'submitContainer' => '<div class="submit">{{content}}</div>'
+
+**Options pour les Submit**
+
+* ``'type'`` - Définissez cette option à ``'reset'`` pour générer un bouton
+  "reset" (de remise à zéro) pour le formulaire. Défaut à ``'submit'``.
+
+* ``'templateVars'`` - Utilisez ce tableau pour fournir des templates de
+  variables supplémentaire pour l'élément et / ou ses conteneurs.
+
+* Tout autre paramètre sera considéré comme un attribut à l'élément HTML ``input``.
+
+Le code suivant::
+
+    echo $this->Form->submit('Click me');
 
 Affichera:
 
 .. code-block:: html
 
-    <div class="submit"><input value="Submit" type="submit"></div>
+    <div class="submit"><input value="Click me" type="submit"></div>
 
 Vous pouvez aussi passer une URL relative ou absolue vers une image
 au paramètre caption au lieu d'un caption text::
@@ -2135,15 +2163,30 @@ Créer des Elements Button
 
 .. php:method:: button(string $title, array $options = [])
 
-Crée un bouton HTML avec le titre spécifié et un type par défaut "button".
-Définir ``$options['type']`` affichera l'un des trois types de boutons
-possibles:
+* ``$title`` - Chaîne obligatoire qui permet de fournir le texte du bouton.
+* ``$options`` - Optionel. Chaîne ou tableau qui peut contenir n'importe laquelle
+  :ref:`des options générales<general-control-options>` ainsi que n'importe quel
+  attribut HTML valide.
 
-#. submit: Comme celui de la méthode ``$this->Form->submit``- (par défaut).
-#. reset: Crée un bouton reset.
-#. button: Crée un bouton standard.
+Crée un bouton HTML avec le titre spécifié et un type par défaut ``button``.
+Définir
 
-::
+**Options pour les Button**
+
+* ``$options['type']`` - Définissez cette variable à l'une des trois valeurs
+  suivantes :
+
+  #. ``'submit'`` - Comme pour la méthode ``$this->Form->submit()``, cela créera
+     un bouton de type ``submit``. Notez cependant que ça ne générera pas de ``div``
+     autour comme pour ``submit()``. C'est le type par défaut.
+  #. ``'reset'`` - Crée un bouton "reset" (remise à zéro) pour le formulairere.
+  #. ``'button'`` - Crée un bouton standard.
+
+* ``$options['escape']`` - Booléen. Si cette option est définie à ``true``, le
+  contenu HTML de la valeur fournie pour ``$title`` sera échappé. Défaut à
+  ``false``.
+
+Par exemple::
 
     echo $this->Form->button('A Button');
     echo $this->Form->button('Another Button', ['type' => 'button']);
@@ -2159,9 +2202,7 @@ Affichera :
     <button type="reset">Reset the Form</button>
     <button type="submit">Submit Form</button>
 
-L'input de type ``button`` supporte l'option ``escape`` qui accepte un
-booléen et détermine si oui ou non l'entité HTML encode le $title du bouton.
-Par défaut à ``false``::
+Exemple en utilisant l'option ``escape``::
 
     // Va afficher le HTML echappé.
     echo $this->Form->button('<em>Submit Form</em>', [
@@ -2173,6 +2214,10 @@ Fermer le Formulaire
 ====================
 
 .. php:method:: end($secureAttributes = [])
+
+* ``$secureAttributes`` - Optionnel. Vous permet de fournir des attributs qui
+  seront utilisés comme attributs HTML aux inputs ``hidden`` générés par le
+  ``SecurityComponent``.
 
 La méthode ``end()`` ferme et complète le marquage du formulaire. Souvent,
 ``end()`` affiche juste la base fermante du formulaire, mais l'utilisation de
@@ -2188,11 +2233,10 @@ a besoin:
 
     <?= $this->Form->end(); ?>
 
-Le paramètre ``$secureAttributes`` vous permet de passer des attributs HTML
-supplémentaires aux inputs cachés qui sont générés quand votre application
-utilise ``SecurityComponent``. Si vous avez besoin d'ajouter des attributs
-supplémentaires aux inputs cachés générés, vous pouvez utiliser l'argument
-``$secureAttributes``::
+Si vous avez besoin d'appliquer des attributs supplémentaires aux inputs
+``hidden``, vous pouvez utiliser l'argument ``$secureAttributes``.
+
+Ainsi::
 
     echo $this->Form->end(['data-type' => 'hidden']);
 
@@ -2211,39 +2255,116 @@ Affichera:
 
     Si vous utilisez
     :php:class:`Cake\\Controller\\Component\\SecurityComponent` dans votre
-    application, vous devrez terminer vos formulaires avec ``end()``.
+    application, vous devrez obligatoirement terminer vos formulaires avec
+    ``end()``.
 
 Créer des Boutons Indépendants et des liens POST
 ================================================
 
+Créer des Boutons POST
+----------------------
+
 .. php:method:: postButton(string $title, mixed $url, array $options = [])
 
-    Crée une balise ``<button>`` avec un ``<form>`` l'entourant  qui soumet à
-    travers POST.
+* ``$title`` - Chaîne obligatoire qui sera utilisé comme texte du bouton. Notez
+  que, par défaut, cette valeur ne sera pas échappée.
+* ``$url`` - URL cible du formulaire, sous forme de chaîne ou de tableau.
+* ``$options`` - Optionel. Chaîne ou tableau qui peut contenir n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (ci-dessous) ainsi que n'importe quel attribut HTML valide.
 
-    Cette méthode crée un élément ``<form>``. Donc n'utilisez pas
-    cette méthode dans un formulaire ouvert. Utilisez plutôt
-    :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` ou
-    :php:meth:`Cake\\View\\Helper\\FormHelper::button()`
-    pour créer des boutons à l'intérieur de formulaires ouvert.
+Crée une balise ``<button>`` avec un ``<form>`` l'entourant qui soumet une requête
+POST. De plus, par défaut, cela générera des inputs ``hidden`` pour le
+``SecurityComponent``.
+
+**Options for POST Button**
+
+* ``'data'`` - Tableau clé / valeur à passer aux inputs ``hidden``.
+
+* ``'method'`` - La méthode de la requête à utiliser. Par exemple si vous voulez
+  que la requête émise simule une requête HTTP/1.1 DELETE, passez ``delete``.
+  La valeur par défaut est ``post``.
+
+* ``'form'`` - Tableau dans lequel vous pouvez passer n'importe quelle valeur
+  supportée par ``FormHelper::create()``.
+
+* De plus, la méthode ``postButton()`` acceptera n'importe quelle option également
+  valide pour la méthode ``button()``.
+
+Par exemple ::
+
+    // Dans Templates/Tickets/index.ctp
+    <?= $this->Form->postButton('Supprimer', ['controller' => 'Tickets', 'action' => 'delete', 5]) ?>
+
+Affichera un HTML similaire à:
+
+.. code-block:: html
+
+    <form method="post" accept-charset="utf-8" action="/Rtools/tickets/delete/5">
+        <div style="display:none;">
+            <input name="_method" value="POST" type="hidden">
+        </div>
+        <button type="submit">Supprimer</button>
+        <div style="display:none;">
+            <input name="_Token[fields]" value="186cfbfc6f519622e19d1e688633c4028229081f%3A" type="hidden">
+            <input name="_Token[unlocked]" value="" type="hidden">
+            <input name="_Token[debug]" value="%5B%22%5C%2FRtools%5C%2Ftickets%5C%2Fdelete%5C%2F1%22%2C%5B%5D%2C%5B%5D%5D" type="hidden">
+        </div>
+    </form>
+
+Cette méthode crée un élément ``<form>``. Donc n'utilisez pas cette méthode dans
+un formulaire ouvert. Utilisez plutôt
+:php:meth:`Cake\\View\\Helper\\FormHelper::submit()` ou
+:php:meth:`Cake\\View\\Helper\\FormHelper::button()`
+pour créer des boutons à l'intérieur de formulaires ouvert.
+
+Créer des liens POST
+--------------------
 
 .. php:method:: postLink(string $title, mixed $url = null, array $options = [])
 
-    Crée un lien HTML, mais accède à l'Url en utilisant la méthode POST.
-    Requiert que JavaScript soit autorisé dans votre navigateur.
+* ``$title`` - Chaîne obligatoire qui sera utilisé comme texte du bouton. Notez
+  que, par défaut, cette valeur ne sera pas échappée.
+* ``$url`` - URL cible du formulaire, sous forme de chaîne ou de tableau.
+* ``$options`` - Optionel. Chaîne ou tableau qui peut contenir n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (ci-dessous) ainsi que n'importe quel attribut HTML valide.
 
-    Cette méthode crée un élément ``<form>``. Si vous souhaitez utiliser cette
-    méthode à l'intérieur d'un formulaire existant, vous devez utiliser l'option
-    ``block`` pour que le nouveau formulaire soit défini en un :ref:`view block <view-blocks>` qui peut être affiché en dehors du formulaire principal.
+Crée un lien HTML, mais accède à l'Url en utilisant la méthode POST (par défaut).
+Requiert que JavaScript soit autorisé dans votre navigateur.
 
-    Si vous cherchez un bouton pour soumettre votre formulaire, alors vous
-    devriez plutôt utiliser :php:meth:`Cake\\View\\Helper\\FormHelper::button()`
-    ou :php:meth:`Cake\\View\\Helper\\FormHelper::submit()`.
+**Options pour les liens POST**
 
-    .. note::
-        Attention à ne pas mettre un postLink à l'intérieur d'un formulaire
-        ouvert. À la place, utilisez l'option ``block`` pour mettre en mémoire
-        tampon le formulaire dans des :ref:`view-blocks`
+* ``'data'`` - Tableau clé / valeur à passer aux inputs ``hidden``.
+
+* ``'method'`` - La méthode de la requête à utiliser. Par exemple si vous voulez
+  que la requête émise simule une requête HTTP/1.1 DELETE, passez ``delete``.
+  La valeur par défaut est ``post``.
+
+* ``'confirm'`` - Le message de confirmation à afficher lors du clic sur le lien.
+  Défaut à ``null``.
+
+* ``'block'`` - Définissez cette option à ``true`` pour ajouter le lien au
+  "view block" ``'postLink'`` ou pour fournir un nom de bloc personnalisé.
+  Défaut à ``null``.
+
+* De plus, la méthode ``postLink`` acceptera n'importe quelle option également
+  valide pour la méthode ``link()``.
+
+Cette méthode crée un élément ``<form>``. Si vous souhaitez utiliser cette
+méthode à l'intérieur d'un formulaire existant, vous devez utiliser l'option
+``block`` pour que le nouveau formulaire soit défini en un :ref:`view block <view-blocks>`
+qui peut être affiché en dehors du formulaire principal.
+
+Si vous souhaitez plutôt créer un bouton pour soumettre votre formulaire, alors vous
+devriez plutôt utiliser :php:meth:`Cake\\View\\Helper\\FormHelper::button()`
+ou :php:meth:`Cake\\View\\Helper\\FormHelper::submit()`.
+
+.. note::
+
+    Attention à ne pas mettre un postLink à l'intérieur d'un formulaire
+    ouvert. À la place, utilisez l'option ``block`` pour mettre en mémoire
+    tampon le formulaire dans des :ref:`view-blocks`
 
 .. _customizing-templates:
 
