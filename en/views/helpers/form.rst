@@ -2567,8 +2567,7 @@ Creating Controls for a Whole Entity
 .. php:method:: allControls(array $fields, $options = [])
 
 * ``$fields`` - Optional. An array of customizations for the fields that will
-  be generated to generate. Allows setting custom types, labels and other
-  options.
+  be generated. Allows setting custom types, labels and other options.
 * ``$options`` - Optional. An array of options. Valid keys are:
 
   #. ``'fieldset'`` - Set this to ``false`` to disable the fieldset.

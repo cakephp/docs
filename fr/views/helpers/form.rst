@@ -2385,17 +2385,20 @@ l'option ``templates`` lors de l'inclusion du helper dans votre controller::
         'templates' => 'app_form',
     ]);
 
-Ceci charge les balises dans **config/app_form.php**. Le fichier devra
-contenir un tableau des templates indexés par leur nom::
+Ceci chargera les balises dans **config/app_form.php**. Le fichier devra
+contenir un tableau des templates *indexés par leur nom*::
 
+    // dans config/app_form.php
     return [
         'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
 
 Tous les templates que vous définissez vont remplacer ceux par défaut dans
 le helper. Les Templates qui ne sont pas remplacés vont continuer à être
-utilisés avec les valeurs par défaut. Vous pouvez aussi changer les templates
-à la volée en utilisant la méthode ``setTemplates()``::
+utilisés avec les valeurs par défaut.
+
+Vous pouvez aussi changer les templates à la volée en utilisant la méthode
+``setTemplates()``::
 
     $myTemplates = [
         'inputContainer' => '<div class="form-control">{{content}}</div>',
@@ -2410,13 +2413,16 @@ utilisés avec les valeurs par défaut. Vous pouvez aussi changer les templates
     une attention spéciale, vous devriez préfixer ce caractère avec un autre
     pourcentage pour qu'il ressemble à ``%%``. La raison est que les templates
     sont compilés en interne pour être utilisé avec ``sprintf()``.
-    Exemple: '<div style="width:{{size}}%%">{{content}}</div>'
+    Exemple: ``<div style="width:{{size}}%%">{{content}}</div>``
 
 Liste des Templates
 -------------------
 
 La liste des templates par défaut, leur format par défaut et les variables
 qu'ils attendent se trouvent dans la `documentation API du FormHelper <https://api.cakephp.org/3.x/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
+
+Utiliser des conteneurs personnalisés distincts pour les éléments
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 En plus de ces templates, la méthode ``control()`` va essayer d'utiliser les
 templates pour chaque conteneur d'input. Par exemple, lors de la création
@@ -2430,14 +2436,20 @@ Par exemple::
     ]);
 
     // Crée un ensemble d'inputs radio avec notre div personnalisé autour
-    echo $this->Form->radio('User.email_notifications', ['y', 'n']);
+    echo $this->Form->control('User.email_notifications', [
+        'options' => ['y', 'n'],
+        'type' => 'radio'
+    ]);
 
-De la même manière qu'avec les conteneurs d'input, la méthode ``ìnput()``
+Utiliser des groupe de formulaire (formGroup) personnalisés distincts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+De la même manière qu'avec les conteneurs d'input, la méthode ``control()``
 essayera d'utiliser différents templates pour chaque groupe de formulaire
-(formGroup). Un group de formulaire est un combo d'un label et d'une input.
+(formGroup). Un group de formulaire est un ensemble un label & input.
 Par exemple, lorsque vous créez des inputs de type radio, le template
 ``radioFormGroup`` sera utilisé s'il est présent. Si ce template est manquant,
-par défaut chaque ensemble label & input sera généré en utilisant le template
+par défaut chaque ensemble ``label`` & ``input`` sera généré en utilisant le template
 ``formGroup``::
 
     // Ajoute un groupe de formulaire pour radio personnalisé
@@ -2450,7 +2462,9 @@ Ajouter des Variables de Template Supplémentaires aux Templates
 
 Vous pouvez aussi ajouter des placeholders de template supplémentaires dans des
 templates personnalisés et remplir ces placeholders lors de la génération des
-inputs::
+inputs.
+
+Par exemple::
 
     // Ajoute un template avec le placeholder help.
     $this->Form->setTemplates([
@@ -2463,16 +2477,29 @@ inputs::
         'templateVars' => ['help' => 'Au moins 8 caractères.']
     ]);
 
+Affichera:
+
+.. code-block:: html
+
+    <div class="input password">
+        <label for="password">
+            Password
+        </label>
+        <input name="password" id="password" type="password">
+        <span class="help">Au moins 8 caractères.</span>
+    </div>
+
 .. versionadded:: 3.1
     L'option templateVars a été ajoutée dans 3.1.0
 
 Déplacer les Checkboxes & Boutons Radios à l'Extérieur du Label
 ---------------------------------------------------------------
 
-Par défaut, CakePHP incorpore les cases à cocher et des boutons radio dans des
-éléments label. Cela contribue à faciliter l'intégration des framework CSS
-populaires. Si vous avez besoin de placer ces inputs à l'extérieur de la balise
-label, vous pouvez le faire en modifiant les templates::
+Par défaut, CakePHP incorpore les cases à cocher créées via ``control()`` et
+les boutons radios créés par ``control()`` et ``radio()`` dans des éléments label.
+Cela contribue à faciliter l'intégration des framework CSS populaires. Si vous
+avez besoin de placer ces éléments à l'extérieur de la balise label, vous pouvez
+le faire en modifiant les templates::
 
     $this->Form->setTemplates([
         'nestingLabel' => '{{input}}<label{{attrs}}>{{text}}</label>',
@@ -2484,58 +2511,81 @@ Cela générera les checkbox et les boutons radio à l'extérieur de leurs label
 Générer des Formulaires Entiers
 ===============================
 
-.. php:method:: inputs(mixed $fields = [], $options = [])
+Créer plusieurs éléments (controls)
+-----------------------------------
 
-Génère un ensemble d'inputs pour un contexte donné. Vous pouvez spécifier les
-champs générés en les incluant::
+.. php:method:: controls(mixed $fields = [], $options = [])
 
-    echo $this->Form->inputs([
+* ``$fields`` - Un tableau des champs à générer. Permet de définir des types
+  personnalisés, des labels et toutes autres options pour chaque champ.
+* ``$options`` - Optionnel. Un tableau d'options. Les clés supportées sont :
+
+  #. ``'fieldset'`` - Définir à ``false`` pour désactiver l'ajout d'un ``fieldset``.
+     Si vide, le ``fieldset`` sera ajouté. Peut aussi être un tableau de paramètres
+     à appliquer comme attributs HTML au ``fieldset`` généré.
+  #. ``legend`` - Chaîne utilisé pour personnalisé le texte de l'élément ``legend``.
+     Définir à ``false`` pour désactiver l'ajout de l'élément ``legend``.
+
+Génère un ensemble d'inputs pour un contexte donné, entouré d'un ``fieldset``.
+Vous pouvez spécifier les champs générés en les incluant::
+
+    echo $this->Form->controls([
         'name',
         'email'
     ]);
 
 Vous pouvez personnaliser le texte de légende en utilisant une option::
 
-    echo $this->Form->inputs($fields, ['legend' => 'Update news post']);
+    echo $this->Form->controls($fields, ['legend' => 'Mettre à jour le post']);
 
 Vous pouvez personnaliser les inputs générés en définissant des options
 additionnelles dans le paramètre ``$fields``::
 
-    echo $this->Form->inputs([
-        'name' => ['label' => 'custom label']
+    echo $this->Form->controls([
+        'name' => ['label' => 'Label personnalisé']
     ]);
 
 Quand vous personnalisez ``fields``, vous pouvez utiliser le paramètre
-``$options`` pour contrôler les legend/fields générés.
-
-- ``fieldset`` Défini à ``false`` pour désactiver le fieldset. Vous pouvez
-  également passer un tableau de paramètres qui seront rendus comme attributs
-  HTML sur le tag du fieldset. Si vous passez un tableau vide, le fieldset sera
-  simplement rendu sans attributs.
-- ``legend`` Défini à ``false`` pour désactiver la legend pour l'ensemble
-  d'input généré.
-  Ou fournir une chaîne pour personnaliser le texte de legend.
+``$options`` pour contrôler les éléments ``legend`` et ``fieldset`` générés.
 
 Par exemple::
 
-    echo $this->Form->inputs(
+    echo $this->Form->controls(
         [
-            'name' => ['label' => 'custom label']
+            'name' => ['label' => 'Label personnalisé']
         ],
         null,
-        ['legend' => 'Update your post']
+        ['legend' => 'Mettre à jour votre post']
     );
 
-Si vous désactiver le fieldset, la legend ne s'affichera pas.
+Si vous désactiver le ``fieldset``, la ``legend`` ne s'affichera pas.
 
-.. php:method:: allInputs(array $fields, $options = [])
+Créer les éléments pour une Entity complète
+-------------------------------------------
 
-Cette méthode est étroitement liée à ``inputs()``, cependant l'argument
+.. php:method:: allControls(array $fields, $options = [])
+
+* ``$fields`` - Optionnel. Un tableau de paramétrages pour les champs qui seront
+  générés. Permet de définir des types personnalisés, des labels et toutes autres
+  options.
+* ``$options`` - Optionnel. Un tableau d'options. Les clés supportées sont :
+
+  #. ``'fieldset'`` - Définir à ``false`` pour désactiver l'ajout d'un ``fieldset``.
+     Si vide, le ``fieldset`` sera ajouté. Peut aussi être un tableau de paramètres
+     à appliquer comme attributs HTML au ``fieldset`` généré.
+  #. ``legend`` - Chaîne utilisé pour personnalisé le texte de l'élément ``legend``.
+     Définir à ``false`` pour désactiver l'ajout de l'élément ``legend``.
+
+Cette méthode est étroitement liée à ``controls()``, cependant l'argument
 ``$fields`` est égal par défaut à *tous* les champs de l'entity de niveau
 supérieur actuelle. Pour exclure des champs spécifiques de la liste d'inputs
-générées, définissez les à ``false`` dans le paramètre fields::
+générées, définissez les à ``false`` dans le paramètre ``$fields``::
 
+    echo $this->Form->allControls(['password' => false]);
+    // Avant 3.4.0:
     echo $this->Form->allInputs(['password' => false]);
+
+Si vous désactiver le ``fieldset``, la ``legend`` ne s'affichera pas.
 
 .. _associated-form-inputs:
 
