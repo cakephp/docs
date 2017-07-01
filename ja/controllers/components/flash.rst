@@ -78,8 +78,8 @@ FlashComponent の ``__call()`` および ``set()`` メソッドは任意に第2
     // コントローラーの中で
     $this->Flash->warning('My message', ['plugin' => 'PluginName']);
 
-上記のコードは ``plugins/PluginName/src/Template/Element/Flash`` 配下の
-``warning.ctp`` エレメントを使用しています。
+上記のコードは **plugins/PluginName/src/Template/Element/Flash** 配下の
+**warning.ctp** エレメントを使用しています。
 
 .. note::
 
