@@ -107,9 +107,9 @@ automatiquement un élément de top-niveau ``<response>`` en utilisant
 
 .. versionadded:: 3.1.0
 
-    Vous pouvez maintenant définir ``_serialize`` à ``true`` pour
-    pour sérialiser toutes les variables de vue au lieu de les spécifier
-    explicitement.
+    Dans cette version, la variable ``_serialize`` est maintenant automatiquement
+    définie à ``true`` pour sérialiser toutes les variables de vue au lieu de
+    devoir les spécifier explicitement.
 
 Utilisation d'une Vue de Données avec les Fichiers de Template
 ==============================================================
@@ -145,8 +145,9 @@ sérialisé.
 
     Depuis 3.1.0, le AppController du squelette d'application ajoute
     automatiquement ``'_serialize' => true`` à toutes les requêtes XML/JSON.
-    Vous devrez retirer ce code à partir du callback beforeRender si vous
-    souhaitez utiliser les fichiers de vue.
+    Vous devrez retirer ce code à partir du callback beforeRender ou définir
+    ``'_serialize' => false`` dans l'action de votre controller si vous souhaitez
+    utiliser les fichiers de vue.
 
 Créer des Views XML
 ===================
