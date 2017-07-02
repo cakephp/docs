@@ -106,6 +106,10 @@ behavior that may affect your application:
   As a result this allows you to use forms to delete/unlink all associated
   records by passing an empty string. Previously this would have required custom
   marshalling logic.
+* ``ORM\Table::newEntity()`` now only marks association properties dirty if the
+  marshalled association record is dirty. In scenarios where an association
+  entity is created that contains no properties the empty record will not be
+  flagged for persistence.
 * ``Http\Client`` no longer uses the ``cookie()`` method results when building
   requests. Instead the ``Cookie`` header and internal CookieCollection are
   used. This should only effect applications that have a custom HTTP adapter in
