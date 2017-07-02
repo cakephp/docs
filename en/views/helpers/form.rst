@@ -2657,7 +2657,7 @@ Adding Custom Widgets
 CakePHP makes it easy to add custom control widgets in your application, and use
 them like any other control type. All of the core control types are implemented as
 widgets, which means you can override any core widget with your own
-implemenation as well.
+implementation as well.
 
 Building a Widget Class
 -----------------------

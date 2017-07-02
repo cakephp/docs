@@ -535,6 +535,8 @@ suffixe au champ. Vous pouvez remarquer des champs supplémentaires nommés
 ont été ajoutés. Ces champs seront automatiquement convertis en objets
 ``DateTime`` quand les entities sont triées.
 
+.. _control-specific-options:
+
 Options pour la méthode control()
 ---------------------------------
 
@@ -676,7 +678,7 @@ d'autres méthodes comme :php:meth:`~Cake\\View\\Helper\\FormHelper::label()` et
 :php:meth:`~Cake\\View\\Helper\\FormHelper::error()` pour générer des layouts
 (mise en page) complètements personnalisés.
 
-.. _general-input-options:
+.. _general-control-options:
 
 Options Communes
 ----------------
@@ -1139,9 +1141,9 @@ Affichera:
 
 Généralement, ``$options`` est une simple paire clé => valeur. Cependant, si
 vous avez besoin de mettre des attributs personnalisés sur vos boutons radio,
-vous pouvez utiliser le format étendu::
+vous pouvez utiliser le format étendu.
 
-Par exemple ::
+Par exemple::
 
     echo $this->Form->radio(
         'favorite_color',
@@ -1975,6 +1977,8 @@ Crée un ``select`` avec les valeurs 'am' et 'pm'. Utile si vous utilisez le for
 d'heure ``12`` car il vous permettra de préciser la période de la journée à laquelle
 cette heure appartient
 
+.. _create-label:
+
 Créer les Labels
 ================
 
@@ -2593,8 +2597,8 @@ Créer des Inputs pour les Données Associées
 ===========================================
 
 Créer des formulaires pour les données associées est assez simple et est
-étroitement lié au chemins des données de votre entity. Imaginons les
-relations suivantes:
+étroitement lié aux chemins des données de votre entity. Imaginons les
+relations suivantes :
 
 * Authors HasOne Profiles
 * Authors HasMany Articles
@@ -2718,6 +2722,8 @@ si défini comme ceci par exemple::
         'autocomplete' => '<input type="autocomplete" name="{{name}}" {{attrs}} />'
     ]);
 
+Pour plus d'informations sur les templates, référez-vous à la section :ref:`customizing-templates`.
+
 Utiliser les Widgets
 --------------------
 
@@ -2745,8 +2751,8 @@ dépendances lorsqu'elles sont déclarées::
         ]
     ]);
 
-Dans l'exemple ci-dessus, le widget autocomplete widget dépendrait des widgets
-``text`` et ``label``.Si votre widget doit accéder à la View, vous devrez
+Dans l'exemple ci-dessus, le widget ``autocomplete`` widget dépendrait des widgets
+``text`` et ``label``. Si votre widget doit accéder à la View, vous devrez
 utiliser le 'widget' ``_view``. Lorsque le widget autocomplete est créé, les
 objets widget liés au noms ``text`` et ``label`` lui sont passés. Ajouter des
 widgets en utilisant la méthode ``addWidget`` resemble à ceci::
@@ -2770,7 +2776,7 @@ Une fois ajoutés/remplacés, les widgets peuvent être utilisés en tant que
 
     echo $this->Form->control('search', ['type' => 'autocomplete']);
 
-Cela créera un widget personnalisé avec un label et une div enveloppante
+Cela créera un widget personnalisé avec un ``label`` et une ``div`` enveloppante
 tout comme ``control()`` le fait toujours. Sinon vous pouvez juste créer un widget
 input en utilisant la méthode magique::
 
@@ -2792,17 +2798,30 @@ inputs spéciales ``_Token`` soient générées.
 
 .. php:method:: unlockField($name)
 
-    Déverrouille un champ en l’exemptant du hashage de ``SecurityComponent``.
-    Cela autorise également à manipuler le champ via JavaScript.
-    Le paramètre ``$name`` doit correspondre au nom de la propriété de l'entity
-    pour l'input::
+* ``$name`` - Optionnel. Le nom du champ en notation avec point (sous la forme
+  ``'Modelname.fieldname'``).
 
-        $this->Form->unlockField('id');
+Déverrouille un champ en l’exemptant du hashage de ``SecurityComponent``.
+Cela autorise également à manipuler le champ via JavaScript.
+Le paramètre ``$name`` doit correspondre au nom de la propriété de l'entity
+pour l'input::
 
-.. php:method:: secure(array $fields = [])
+    $this->Form->unlockField('id');
 
-    Génère un champ caché avec un hash de sécurité basé sur les champs utilisés
-    dans le formulaire.
+.. php:method:: secure(array $fields = [], array $secureAttributes = [])
+
+* ``$fields`` - Optionnel. Un tableau contenant la liste des champs à utiliser
+  lors de la génération du hash. S'il n'est pas fourni, alors ``$this->fields``
+  sera utilisé.
+* ``$secureAttributes`` - Optionnel. Un tableau d'attributs HTML à passer aux
+  élément ``input`` de type ``hidden`` qui seront générés.
+
+Génère un ``input`` de type ``hidden`` avec un hash de sécurité basé sur les
+champs du formulaire ou une chaîne si la sécurisation des formulaire n'est pas
+utilisée.
+Si l'option ``$secureAttributes`` est définie, ces attributs HTML seront utilisés
+avec ceux générés par le SecurityComponent. Cela vous permet de définir des attributs
+HTML spécifique en fonction de vos besoins.
 
 .. meta::
     :title lang=fr: FormHelper
