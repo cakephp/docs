@@ -13,9 +13,9 @@ Core
 Model
 =====
 
-* New abstract types were added for ``smallinteger`` and ``tinyinteger``.
+* New internal data types were added for ``smallinteger`` and ``tinyinteger``.
   Existing ``SMALLINT`` and ``TINYINT`` columns will now be reflected as these
-  new abstract types. ``TINYINT(1)`` columns will continue to be treated as
+  new internal data types. ``TINYINT(1)`` columns will continue to be treated as
   boolean columns in MySQL.
 * ``Model::find()`` now supports ``having`` and ``lock`` options that enable you
   to add ``HAVING`` and ``FOR UPDATE`` locking clauses to your find operations.
