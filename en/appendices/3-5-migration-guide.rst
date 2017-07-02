@@ -102,11 +102,10 @@ behavior that may affect your application:
   association property, similar to ``BelongsToMany`` associations - that is they
   treat ``false``, ``null``, and empty strings the same way as empty arrays. For
   ``HasMany`` associations this now results in all associated records to be
-  deleted/unlinked in case the ``replace`` save strategy is being used.
-  Consequently this allows to use forms to delete/unlink all associated records
-  by passing an empty string. Previously this would have required custom
-  marshalling logic, without that it would have only been possible to remove all
-  but one record, as form data cannot be used to describe empty arrays.
+  deleted/unlinked when the ``replace`` save strategy is being used.
+  As a result this allows you to use forms to delete/unlink all associated
+  records by passing an empty string. Previously this would have required custom
+  marshalling logic.
 * ``Http\Client`` no longer uses the ``cookie()`` method results when building
   requests. Instead the ``Cookie`` header and internal CookieCollection are
   used. This should only effect applications that have a custom HTTP adapter in
