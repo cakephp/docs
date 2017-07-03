@@ -100,17 +100,17 @@ such as debugging and translating content.
 
     The context is a unique identifier for the translations string that makes it
     unique within the same domain.
-    
+
 .. php:function:: __xn(string $context, string $singular, string $plural, integer $count, mixed $args = null)
 
-    Returns correct plural form of message identified by $singular and
-    $plural for count $count. It also allows you
-    to specify a context. Some languages have more than one form for plural
-    messages dependent on the count.
+    Returns correct plural form of the message identified by ``$singular`` and
+    ``$plural`` for count $count. It also allows you to specify a context. Some
+    languages have more than one form for plural messages dependent on the
+    count.
 
     The context is a unique identifier for the translations string that makes it
     unique within the same domain.
-    
+
 .. php:function:: __dx(string $domain, string $context, string $msg, mixed $args = null)
 
     Allows you to override the current domain for a single message lookup. It
@@ -121,24 +121,22 @@ such as debugging and translating content.
 
 .. php:function:: __dxn(string $domain, string $context, string $singular, string $plural, integer $count, mixed $args = null)
 
-    Allows you to override the current domain for a single plural message
-    lookup. It also allows you to specify a context. Returns correct plural
-    form of message identified by $singular and $plural for count
-    $count from domain $domain. Some languages have more than one form
-    for plural messages dependent on the count.
+    Allows you to override the current domain and context for a single plural
+    message lookup. Returns correct plural form of message identified by
+    $singular and ``$plural`` for count $count from domain $domain. Some languages
+    have more than one form for plural messages dependent on the count.
 
-    The context is a unique identifier for the translations string that makes it
+    The context is a unique identifier for the translation string that makes it
     unique within the same domain.
-    
-    
+
 .. php:function:: __dxc(string $domain, string $context, string $msg, integer $category, mixed $args = null)
-    
+
     Allows you to override the current domain for a single message
     lookup. It also allows you to specify a category and a context.
 
     The context is a unique identifier for the translations string that makes it
     unique within the same domain.
-    
+
     Note that the category must be specified with an I18n class constant, instead of
     only the constant name. The values are:
 
@@ -149,12 +147,12 @@ such as debugging and translating content.
     - I18n::LC_NUMERIC - LC_NUMERIC
     - I18n::LC_TIME - LC_TIME
     - I18n::LC_MESSAGES - LC_MESSAGES
-    
+
 .. php:function:: __xc(string $context, string $msg, integer $count, integer $category, mixed $args = null)
 
     The context is a unique identifier for the translations string that makes it
     unique within the same domain.
-    
+
     Note that the category must be specified with an I18n class constant, instead of
     only the constant name. The values are:
 
@@ -175,7 +173,7 @@ such as debugging and translating content.
 
     The context is a unique identifier for the translations string that makes it
     unique within the same domain.
-    
+
     Note that the category must be specified with an I18n class constant, instead of
     only the constant name. The values are:
 
