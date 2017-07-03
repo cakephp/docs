@@ -192,7 +192,7 @@ such as debugging and translating content.
     Returns correct plural form of message identified by $singular and $plural
     for count $count. Some languages have more than one form for plural
     messages dependent on the count.
-    
+
 .. php:function:: am(array $one, $two, $three...)
 
     Merges all the arrays passed as parameters and returns the merged
