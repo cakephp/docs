@@ -141,9 +141,7 @@ Cache
 
 * Les moteurs de cache peuvent maintenant être configurés avec une clé ``fallback``
   qui permet de définir une configuration de cache sur laquelle se rabattre si
-  le moteur était mal configuré ou indisponible. Référez-vous à la section
-  :ref:`cache-configuration-fallback` pour plus d'informations sur la configuration
-  des *fallbacks*.
+  le moteur était mal configuré ou indisponible.
 
 Core
 ----
