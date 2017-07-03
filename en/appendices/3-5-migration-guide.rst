@@ -181,7 +181,7 @@ Http
 
 * New Cookie & CookieCollection classes have been added. These classes allow you
   to work with cookies in an object-orientated way, and are available on
-  ``Cake\Http\ServerRequest``, ``Cake\Http\Repsonse``, and
+  ``Cake\Http\ServerRequest``, ``Cake\Http\Response``, and
   ``Cake\Http\Client\Response``. See the :ref:`request-cookies` and
   :ref:`response-cookies` for more information.
 * New middleware has been added to make applying security headers easier. See
