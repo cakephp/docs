@@ -96,6 +96,97 @@ such as debugging and translating content.
     lookup. Returns correct plural form of message identified by $singular and
     $plural for count $count from domain $domain.
 
+.. php:function:: __x(string $context, string $singular, mixed $args = null)
+
+    The context is a unique identifier for the translations string that makes it
+    unique within the same domain.
+    
+.. php:function:: __xn(string $context, string $singular, string $plural, integer $count, mixed $args = null)
+
+    Returns correct plural form of message identified by $singular and
+    $plural for count $count. It also allows you
+    to specify a context. Some languages have more than one form for plural
+    messages dependent on the count.
+
+    The context is a unique identifier for the translations string that makes it
+    unique within the same domain.
+    
+.. php:function:: __dx(string $domain, string $context, string $msg, mixed $args = null)
+
+    Allows you to override the current domain for a single message lookup. It
+    also allows you to specify a context.
+
+    The context is a unique identifier for the translations string that makes it
+    unique within the same domain.
+
+.. php:function:: __dxn(string $domain, string $context, string $singular, string $plural, integer $count, mixed $args = null)
+
+    Allows you to override the current domain for a single plural message
+    lookup. It also allows you to specify a context. Returns correct plural
+    form of message identified by $singular and $plural for count
+    $count from domain $domain. Some languages have more than one form
+    for plural messages dependent on the count.
+
+    The context is a unique identifier for the translations string that makes it
+    unique within the same domain.
+    
+    
+.. php:function:: __dxc(string $domain, string $context, string $msg, integer $category, mixed $args = null)
+    
+    Allows you to override the current domain for a single message
+    lookup. It also allows you to specify a category and a context.
+
+    The context is a unique identifier for the translations string that makes it
+    unique within the same domain.
+    
+    Note that the category must be specified with an I18n class constant, instead of
+    only the constant name. The values are:
+
+    - I18n::LC_ALL - LC_ALL
+    - I18n::LC_COLLATE - LC_COLLATE
+    - I18n::LC_CTYPE - LC_CTYPE
+    - I18n::LC_MONETARY - LC_MONETARY
+    - I18n::LC_NUMERIC - LC_NUMERIC
+    - I18n::LC_TIME - LC_TIME
+    - I18n::LC_MESSAGES - LC_MESSAGES
+    
+.. php:function:: __xc(string $context, string $msg, integer $count, integer $category, mixed $args = null)
+
+    The context is a unique identifier for the translations string that makes it
+    unique within the same domain.
+    
+    Note that the category must be specified with an I18n class constant, instead of
+    only the constant name. The values are:
+
+    - I18n::LC_ALL - LC_ALL
+    - I18n::LC_COLLATE - LC_COLLATE
+    - I18n::LC_CTYPE - LC_CTYPE
+    - I18n::LC_MONETARY - LC_MONETARY
+    - I18n::LC_NUMERIC - LC_NUMERIC
+    - I18n::LC_TIME - LC_TIME
+    - I18n::LC_MESSAGES - LC_MESSAGES
+
+.. php:function:: __dxcn(string $domain, string $context, string $singular, string $plural, integer $count, integer $category, mixed $args = null)
+
+    Allows you to override the current domain for a single plural message
+    lookup. It also allows you to specify a category and a context. 
+    Returns correct plural form of message identified by $singular and $plural 
+    for count $count from domain $domain.
+
+    The context is a unique identifier for the translations string that makes it
+    unique within the same domain.
+    
+    Note that the category must be specified with an I18n class constant, instead of
+    only the constant name. The values are:
+
+    - I18n::LC_ALL - LC_ALL
+    - I18n::LC_COLLATE - LC_COLLATE
+    - I18n::LC_CTYPE - LC_CTYPE
+    - I18n::LC_MONETARY - LC_MONETARY
+    - I18n::LC_NUMERIC - LC_NUMERIC
+    - I18n::LC_TIME - LC_TIME
+    - I18n::LC_MESSAGES - LC_MESSAGES
+
 .. php:function:: __n(string $singular, string $plural, integer $count, mixed $args = null)
 
     Returns correct plural form of message identified by $singular and $plural
