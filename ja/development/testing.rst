@@ -15,9 +15,21 @@ CakePHP のテストフレームワークは、PHPUnit を基礎としていま�
 
 Composer でのインストール
 -------------------------
-PHPUnit の最新バージョンは、 今のところ cake では動作しません。 ::
 
-    "phpunit/phpunit": "3.7.38"
+長い間、CakePHP 2.x は PHPUnit 3.7.x のみをサポートしてきました。
+Composer で開発に必要なものとして PHPUnit をインストールするには、
+composer.json と同じディレクトリーで次を実行してください。 ::
+
+    php composer.phar require --dev phpunit/phpunit:"3.7.38"
+
+CakePHP 2.10.0 以降、PHPUnit 4.x や 5.x の基本サポートが追加されました。
+あなたのアプリケーションで PHPUnit とそれに依存するライブラリーをアップグレードするには、
+次を実行してください。 ::
+
+    php composer.phar require --dev phpunit/phpunit:"4.* || 5.*" --update-with-dependencies
+
+これにより、システム設定と composer.json の設定に応じて、
+PHPUnit 4.x または 5.x のいずれかがインストールされます。
 
 .phar パッケージでのインストール
 --------------------------------
@@ -970,6 +982,11 @@ SessionComponent がモックされたことで、それを用いたテストメ
 
 ``staticExpects`` を使うことにより、コンポーネントやモデルの静的メソッドをモック、
 操作することができるようになります。
+
+.. warning::
+    PHPUnit 4 や 5 を使用している場合、 ``staticExpects()`` はもはや存在しません。
+    代わりに、アクションを呼ぶ前に ``CakeSession::write('Auth.User', $user)`` を使って
+    セッションの中に必要なデータを挿入してください。
 
 JSON を返すコントローラーのテスト
 ---------------------------------
