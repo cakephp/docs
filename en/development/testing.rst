@@ -1376,7 +1376,7 @@ moment, but let's just test that our shell's description is displayed in ``stdou
 
 Our test passes! While this is very trivial example, it shows that creating an
 integration test case for console applications is quite easy. Let's continue by
-adding some subcommands and options to our parser::
+adding some subcommands and options to our shell::
 
     namespace App\Shell;
 
@@ -1468,12 +1468,12 @@ table we provided and set the ``modified`` column to the current time.
 Remember, ``exec()`` will take the same string you type into your CLI, so you
 can include options and arguments in your command string.
 
-Testing input responses
------------------------
+Testing Interactive Shells
+--------------------------
 
 Consoles are often interactive. Testing interactive shells with the
 ``Cake\TestSuite\ConsoleIntegrationTestCase`` class only requires passing the
-responses you expect as the second parameter of ``exec()``. They should be
+inputs you expect as the second parameter of ``exec()``. They should be
 included as an array in the order that you expect them.
 
 Continuing with our example shell, let's add an interactive subcommand. Update
