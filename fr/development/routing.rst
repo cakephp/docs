@@ -966,7 +966,7 @@ Vous pouvez spécifier un type d'inflection alternatif en utilisant l'option
         ]);
     })
 
-Ce qui est au-dessus va générer des URLs de style **/blog-posts/***.
+Ce qui est au-dessus va générer des URLs de style **/blog-posts***.
 
 .. note::
 
@@ -974,6 +974,20 @@ Ce qui est au-dessus va générer des URLs de style **/blog-posts/***.
     comme classe de route par défaut. Donc il est recommandé d'utiliser l'option
     ``'inflect' => 'dasherize'`` pour connecter les routes resssource afin de
     garder la cohérence de l'URL.
+
+Changer le chemin d'un élément
+------------------------------
+
+Par défaut, les ressources de routes utilisent le nom de ressource ayant subi
+une inflexion en guise de segment d'URL. Vous pouvez définir un segment d'URL
+personnalisé à l'aide de l'option ``path``::
+
+    Router::scope('/', function ($routes) {
+        $routes->resources('BlogPosts', ['path' => 'posts']);
+    });
+
+.. versionadded:: 3.5.0
+    L'option ``path`` a été ajoutée dans 3.5.0.
 
 .. index:: passed arguments
 .. _passed-arguments:
