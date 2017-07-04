@@ -421,6 +421,38 @@ supportées sont:
   :php:meth:`PaginatorHelper::defaultModel()`. Ceci est utilisé en conjonction
   avec la chaîne personnalisée de l'option 'format'.
 
+Générer des Url de Pagination
+=============================
+
+.. php:method:: generateUrl(array $options = [], $model = null, $full = false)
+
+Retourne par défaut une chaine de l'URL de pagination complète pour utiliser
+dans contexte non-standard (ex. JavaScript)::
+
+    echo $this->Paginator->generateUrl(['sort' => 'title']);
+
+Créer un Select de Limite
+=========================
+
+.. php:method:: limitControl(array $limits = [], $default = null, array $options = [])
+
+Créer un ``select`` qui permet de changer le paramètre ``limit`` de la query::
+
+    // Utilise le défaut.
+    echo $this->Paginator->limitControl();
+
+    // Permet de définir les limites que vous souhaitez.
+    echo $this->Paginator->limitControl([25 => 25, 50 => 50]);
+
+    // Limites personnalisées et set l'option sélectionnée
+    echo $this->Paginator->limitControl([25 => 25, 50 => 50], $user->perPage);
+
+Cela générera un ``form`` qui sera automatiquement soumis lors d'un changement
+de valeur sur le ``select``.
+
+.. versionadded:: 3.5.0
+    La méthode ``limitControl()`` a été ajoutée dans 3.5.0
+
 Configurer les Options de Pagination
 ====================================
 
@@ -532,16 +564,6 @@ utilisant des marqueurs spéciaux::
         'format' => 'Page {{page}} of {{pages}}, showing {{current}} records out of
                  {{count}} total, starting on record {{start}}, ending on {{end}}'
     ]) ?>
-
-Générer des Url de Pagination
-=============================
-
-.. php:method:: generateUrl(array $options = [], $model = null, $full = false)
-
-Retourne par défaut une chaine de l'URL de pagination complète pour utiliser
-dans contexte non-standard(ex. JavaScript)::
-
-    echo $this->Paginator->generateUrl(['sort' => 'title']);
 
 .. _paginator-helper-multiple:
 
