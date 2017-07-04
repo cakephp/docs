@@ -47,6 +47,12 @@ FlashComponent 内で設定したオプションを上書きすることがで�
     もし、リクエストやユーザーデータをフラッシュメッセージに含める場合は、
     メッセージを整形するときに :php:func:`h` でエスケープするべきです。
 
+.. versionadded:: 2.10.0
+
+    :doc:`/core-libraries/components/flash` は 2.10.0 ではメッセージを積み重ねます。
+    複数のフラッシュメッセージをセットした場合、 ``render()`` を呼び出すと、各メッセージは
+    メッセージが設定された順序で、それ自身の要素で描画されます。
+
 利用可能なオプション配列に関する詳しい情報は、
 :doc:`FlashComponent </core-libraries/components/flash>` セクションをご覧ください。
 
