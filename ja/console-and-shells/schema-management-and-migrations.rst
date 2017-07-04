@@ -191,17 +191,21 @@ type
     以下の型の一つ
 
     * integer
+    * smallinteger
+    * tinyinteger
+    * biginteger
     * date
     * time
     * datetime
     * timestamp
     * boolean
-    * biginteger
     * float
     * string
     * text
     * binary
 
+.. versionchanged:: 2.10.0
+    smallinteger と tinyinteger 型は 2.10.0 で追加されました。
 
 テーブルキー `indexes`
 ======================

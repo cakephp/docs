@@ -409,6 +409,9 @@ CakePHP はフィクスチャに基づいたテストケースを実行するに
         - ``string``: ``VARCHAR`` と対応
         - ``text``: ``TEXT`` と対応
         - ``biginteger``: ``BIGINT`` と対応
+        - ``smallinteger``: ``SMALLINT`` と対応
+        - ``tinyinteger``: データベースプラットフォームに応じて ``TINYINT`` または
+	  ``SMALLINT`` と対応
         - ``integer``: ``INT`` と対応
         - ``float``: ``FLOAT`` と対応
         - ``decimal``: ``DECIMAL`` と対応
@@ -417,7 +420,7 @@ CakePHP はフィクスチャに基づいたテストケースを実行するに
         - ``time``: ``TIME`` と対応
         - ``date``: ``DATE`` と対応
         - ``binary``: ``BLOB`` と対応
-        - ``boolean``: ``TINYINT`` と対応
+        - ``boolean``: ``BOOLEAN`` または MySQL の ``TINYINT(1)`` と対応
 ``key``
     ``primary`` を設定するとフィールドに *field AUTO\_INCREMENT* と *PRIMARY KEY* が適用されます。
 ``length``
