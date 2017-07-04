@@ -788,8 +788,8 @@ This will change the usage output to ``my-shell`` instead of the default ``cake`
     Usage:
     my-shell console [-h] [-v] [-q]
 
-.. versionadded:: 3.5
-    The help alias was added in 3.5.
+.. versionadded:: 3.5.0
+    The ``setHelpAlias`` method was added in 3.5.0
 
 Set the Epilog
 --------------
