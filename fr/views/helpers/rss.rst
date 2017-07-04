@@ -8,6 +8,9 @@ Rss
 Le RssHelper permet de générer facilement le XML pour les
 `flux RSS <https://en.wikipedia.org/wiki/RSS>`_.
 
+.. deprecated:: 3.5.0
+    Le RssHelper est déprécié à partir de 3.5.0 et sera supprimé dans 4.0.0
+
 Créer un flux RSS avec RssHelper
 ================================
 
