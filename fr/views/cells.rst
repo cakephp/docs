@@ -216,3 +216,46 @@ template seront utilisés.
     ces nouveaux objets ne partagent pas de contexte avec le template /layout
     principal. Chaque cell est auto-contenu et a seulement accès aux variables
     passés en arguments par l'appel de ``View::cell()``.
+
+Paginer des Données dans une Cell
+=================================
+
+Créer une cell qui qui rend des résultats paginés peut être fait en utilisant
+la classe ``Paginator`` de l'ORM. Voici un exemple de pagination des messages
+favoris d'un utilisateur::
+
+    namespace App\View\Cell;
+
+    use Cake\View\Cell;
+    use Cake\Datasource\Paginator;
+
+    class FavoritesCell extends Cell
+    {
+        public function display($user)
+        {
+            $this->loadModel('Messages');
+
+            // Création du paginator
+            $paginator = new Paginator();
+
+            // Pagination du model
+            $results = $paginator->paginate(
+                $this->Messages,
+                $this->request->getQueryParams(),
+                [
+                    // Utilisation d'un finder personnalisé avec paramètre
+                    'finder' => ['favorites' => [$user]],
+
+                    // Utilisation de paramètre de query 'scoped'.
+                    'scope' => 'favorites',
+                ]
+            );
+            $this->set('favorites', $results);
+        }
+    }
+
+La cell ci-dessus va paginer le model ``Messages`` en utilisant les
+:ref:`paramètres de pagination 'scopés' <paginating-multiple-queries>`.
+
+.. versionadded:: 3.5.0
+    ``Cake\Datasource\Paginator`` a été ajoutée dans 3.5.0.
