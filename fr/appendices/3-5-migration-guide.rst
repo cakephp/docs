@@ -31,10 +31,10 @@ version 4.0.0, à partir de laquelle ils seront supprimés.
 Dépréciation des Méthodes Get / Set combinées
 ---------------------------------------------
 
-Dans le passé, CakePHP a utilisé des méthodes 'modal' qui proposait à la fois
+Dans le passé, CakePHP a utilisé des méthodes 'modal' qui proposaient à la fois
 un mode get et un mode set. Ces méthodes compliquent l'auto-complétion des IDE
 et notre capacité à ajouter des *return type* stricts dans le futur. Pour ces
-raisons, ces méthodes get / set combinés sont scindées en méthodes get et set
+raisons, ces méthodes get / set combinées sont scindées en méthodes get et set
 séparées.
 
 La liste suivante regroupe les méthodes dépréciées et qu'il faudra remplacer
@@ -125,7 +125,7 @@ variations mineures qui pourraient avoir un impact sur votre application.
   nom mais 2 inflections différentes, seule la dernière commande liée fonctionnera.
 * ``SecurityComponent`` bloquera les requête POST qui ne passent pas de données
   dans la requête (pas de *request data*). Cela aide à la protection des actions
-  qui créent des enregistrement en base en utilisant seulement les *defaults* de
+  qui créent des enregistrements en base en utilisant seulement les *defaults* de
   la base de données.
 * ``Cake\ORM\Table::addBehavior()`` et ``removeBehavior()`` retournent maintenant
   ``$this`` pour faciliter la définition d'objets Table avec une interface fluide.
