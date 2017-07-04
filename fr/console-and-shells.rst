@@ -1092,6 +1092,11 @@ suivantes:
 Ajouter des sous-commandes peut être fait comme une partie de la chaîne de
 méthode courante.
 
+.. versionchanged:: 3.5.0
+    Lorsque vous ajouter des sous-commandes composées de plusieurs mots, vous
+    pouvez maintenant les appeler en ``snake_case`` en plus de la forme en
+    camelBack.
+
 Construire un ConsoleOptionParser à partir d'un Tableau
 -------------------------------------------------------
 
