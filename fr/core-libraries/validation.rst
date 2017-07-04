@@ -202,6 +202,25 @@ dans votre règle::
         'provider' => 'table'
     ]);
 
+Si vous souhaitez ajouter un ``provider`` à tous les objets ``Validator`` créés
+plus tard, vous pouvez utiliser la méthode ``addDefaultProvider()``::
+
+    use Cake\Validation\Validator;
+
+    // En utilisant une instance d'objet.
+    Validator::addDefaultProvider('custom', $myObject);
+
+    // En utilisant un nom de classe. Les méthodes devront être static.
+    Validator::addDefaultProvider('custom', 'App\Model\Validation');
+
+.. note::
+
+    Les DefaultProviders doivent être ajoutés avant que l'objet ``Validator`` ne
+    soit créé. Par conséquent **config/bootstrap.php** est le meilleur endroit
+    pour définir vos providers par défaut.
+
+.. versionadded:: 3.5.0
+
 Vous pouvez utiliser le `plugin Localized <https://github.com/cakephp/localized>`_ pour fournir des providers basés sur
 les pays. Avec ce plugin, vous pourrez valider les champs de models selon un
 pays, par exemple::

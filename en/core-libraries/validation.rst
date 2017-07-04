@@ -203,7 +203,8 @@ in the future, you can use the ``addDefaultProvider()`` method as follows::
 .. note::
 
     DefaultProviders must be added before the ``Validator`` object is created
-    therefore **config/bootstrap.php** is the best place
+    therefore **config/bootstrap.php** is the best place to set up your
+    default providers.
 
 .. versionadded:: 3.5.0
 
