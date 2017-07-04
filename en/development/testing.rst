@@ -1351,6 +1351,7 @@ Let's start with a very simple shell, located in **src/Shell/MyConsoleShell.php*
         {
             $parser = new ConsoleOptionParser();
             $parser->setDescription('My cool console app');
+
             return $parser;
         }
     }
@@ -1399,6 +1400,7 @@ adding some subcommands and options to our parser::
                 ->addSubcommand('updateModified', [
                     'parser' => $updateModifiedParser
                 ]);
+
             return $parser;
         }
 
@@ -1502,6 +1504,7 @@ the shell class to the following::
                 ])
                 // add a new subcommand
                 ->addSubcommand('bestFramework');
+
             return $parser;
         }
 
