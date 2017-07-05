@@ -221,12 +221,12 @@ Control which Fields Used for Ordering
 By default sorting can be done on any non-virtual column a table has. This is
 sometimes undesirable as it allows users to sort on un-indexed columns that can
 be expensive to order by. You can set the whitelist of fields that can be sorted
-using the ``sortWhitelist`` option. This option is required when you want to
+using the ``whitelist`` option. This option is required when you want to
 sort on any associated data, or computed fields that may be part of your
 pagination query::
 
     public $paginate = [
-        'sortWhitelist' => [
+        'whitelist' => [
             'id', 'title', 'Users.username', 'created'
         ]
     ];
