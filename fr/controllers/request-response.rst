@@ -444,6 +444,8 @@ Vérifier si une langue spécifique est acceptée::
 
     $acceptsFrench = $this->request->acceptLanguage('fr-fr');
 
+.. _request-cookies:
+
 Cookies
 -------
 
