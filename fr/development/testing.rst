@@ -968,17 +968,22 @@ assertions qu'intègre ``IntegrationTestCase``. Avant de pouvoir utiliser les
 assertions, vous aurez besoin de simuler une requête. Vous pouvez utiliser
 l'une des méthodes suivantes pour simuler une requête:
 
-* ``get()`` Sends a GET request.
-* ``post()`` Sends a POST request.
-* ``put()`` Sends a PUT request.
-* ``delete()`` Sends a DELETE request.
-* ``patch()`` Sends a PATCH request.
+* ``get()`` Envoie une requête GET.
+* ``post()`` Envoie une requête POST.
+* ``put()`` Envoie une requête PUT.
+* ``delete()`` Envoie une requête DELETE.
+* ``patch()`` Envoie une requête PATCH.
+* ``options()`` Envoie une requête OPTIONS.
+* ``head()`` Envoie une requête HEAD.
 
 Toutes les méthodes exceptées ``get()`` et ``delete()`` acceptent un second
 paramètre qui vous permet de saisir le corps d'une requête. Après avoir émis
 une requête, vous pouvez utiliser les différentes assertions que fournit
 ``IntegrationTestCase`` ou PHPUnit afin de vous assurer que votre requête
 possède de correctes effets secondaires.
+
+.. versionadded:: 3.5.0
+    ``options()`` et ``head()`` ont été ajoutées dans 3.5.0.
 
 Configurer la Requête
 ---------------------
@@ -1237,6 +1242,26 @@ et assurons-nous que le web service répond correctement::
 
 Nous utilisons l'option ``JSON_PRETTY_PRINT`` car la JsonView intégrée à CakePHP
 utilise cette option quand le mode ``debug`` est activé.
+
+Désactiver le Middleware de Gestion d'Erreurs dans les Tests
+------------------------------------------------------------
+
+Quand vous debuggez des tests qui échouent car l'application a rencontré des
+erreurs, il peut être utile de désactiver temporairement le middleware de gestion
+des erreurs pour permettre aux erreurs de remonter. Vous pouvez utiliser la méthode
+``disableErrorHandlerMiddleware()`` pour permettre ce comportement::
+
+    public function testGetMissing()
+    {
+        $this->disableErrorHandlerMiddleware();
+        $this->get('/markers/not-there');
+        $this->assertResponseCode(404);
+    }
+
+Dans l'exemple ci-dessus, le test échouera et le message d'exception et le stack-trace
+seront affichés à la place de la page d'erreur de l'application.
+
+.. versionadded:: 3.5.0
 
 Méthodes d'Assertion
 --------------------

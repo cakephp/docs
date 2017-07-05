@@ -265,6 +265,9 @@ table, vous pouvez récupérer l'objet résultant via son nom::
 
     $hardenedValidator = $usersTable->validator('hardened');
 
+.. deprecated:: 3.5.0
+    ``validator()`` est dépréciée. Utilisez ``getValidator()`` à la place.
+
 Classe Validator par Défault
 ============================
 

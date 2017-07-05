@@ -811,6 +811,25 @@ suivante::
     --verbose, -v  Enable verbose output.
     --quiet, -q    Enable quiet output.
 
+Set a help alias
+~~~~~~~~~~~~~~~~
+
+.. php:method:: setHelpAlias($alias)
+
+Si vous souhaitez changer le nom de la commande, vous pouvez utiliser la méthode
+``setHelpAlias()``::
+
+    $parser->setHelpAlias('my-shell');
+
+Cela changera la phrase de 'Usage' pour ``my-shell`` à la place de la valeur par
+défaut ``cake``::
+
+    Usage:
+    my-shell console [-h] [-v] [-q]
+
+.. versionadded:: 3.5.0
+    La méthode ``setHelpAlias`` a été ajoutée dans 3.5.0
+
 Définir un "Epilog"
 ~~~~~~~~~~~~~~~~~~~
 
@@ -1091,6 +1110,11 @@ suivantes:
 
 Ajouter des sous-commandes peut être fait comme une partie de la chaîne de
 méthode courante.
+
+.. versionchanged:: 3.5.0
+    Lorsque vous ajouter des sous-commandes composées de plusieurs mots, vous
+    pouvez maintenant les appeler en ``snake_case`` en plus de la forme en
+    camelBack.
 
 Construire un ConsoleOptionParser à partir d'un Tableau
 -------------------------------------------------------

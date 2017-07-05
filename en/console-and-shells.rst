@@ -788,8 +788,8 @@ This will change the usage output to ``my-shell`` instead of the default ``cake`
     Usage:
     my-shell console [-h] [-v] [-q]
 
-.. versionadded:: 3.5
-    The help alias was added in 3.5.
+.. versionadded:: 3.5.0
+    The ``setHelpAlias`` method was added in 3.5.0
 
 Set the Epilog
 --------------
@@ -1060,11 +1060,9 @@ When defining a subcommand you can use the following options:
 
 Adding subcommands can be done as part of a fluent method chain.
 
-
 .. versionchanged:: 3.5.0
     When adding multi-word subcommands you can now invoke those commands using
     ``snake_case`` in addition to the camelBacked form.
-
 
 Building a ConsoleOptionParser from an Array
 --------------------------------------------
