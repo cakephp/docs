@@ -431,8 +431,8 @@ dans contexte non-standard (ex. JavaScript)::
 
     echo $this->Paginator->generateUrl(['sort' => 'title']);
 
-Créer un Select de Limite
-=========================
+Créer une Liste Déroulante de Limites
+=====================================
 
 .. php:method:: limitControl(array $limits = [], $default = null, array $options = [])
 

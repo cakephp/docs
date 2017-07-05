@@ -1246,7 +1246,7 @@ utilise cette option quand le mode ``debug`` est activé.
 Désactiver le Middleware de Gestion d'Erreurs dans les Tests
 ------------------------------------------------------------
 
-Quand vous debugger des tests qui échouent car l'application a rencontré des
+Quand vous debuggez des tests qui échouent car l'application a rencontré des
 erreurs, il peut être utile de désactiver temporairement le middleware de gestion
 des erreurs pour permettre aux erreurs de remonter. Vous pouvez utiliser la méthode
 ``disableErrorHandlerMiddleware()`` pour permettre ce comportement::
