@@ -379,7 +379,7 @@ of an error message saying you are missing a table):
     $ Console/cake schema create
     $ Console/cake schema update
 
-All these operations can be done in dry-run mode.
+All these operations can be done in dry-run mode with a ``--dry`` option.
 
 Rolling back
 ------------
