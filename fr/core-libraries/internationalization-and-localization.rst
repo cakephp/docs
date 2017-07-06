@@ -128,6 +128,7 @@ cette méthode::
 
     use Cake\I18n\I18n;
 
+    // Avant 3.5, utilisez I18n::locale()
     I18n::setLocale('de_DE');
 
 Cela changera également le formatage des nombres et des dates lorsque vous
@@ -425,6 +426,7 @@ fonction loader doit retourner un objet ``Aura\Intl\Package``. Une fois que le
 code est en place vous pouvez utiliser les fonctions de traduction comme
 d'habitude::
 
+    // Avant 3.5, utilisez I18n::locale()
     I18n::setLocale('fr_FR');
     __d('animals', 'Dog'); // Retourne "Chien"
 
@@ -441,6 +443,7 @@ depuis un autre endroit::
 
     // Charge les messages depuis src/Locale/folder/sub_folder/filename.po
 
+    // Avant 3.5, utilisez translator()
     I18n::setTranslator(
         'animals',
         new Loader('filename', 'folder/sub_folder', 'po'),
@@ -480,6 +483,7 @@ Enfin, configurez le loader de traduction pour le domaine et la locale::
 
     use Cake\I18n\MessagesFileLoader as Loader;
 
+    // Avant 3.5, utilisez translator()
     I18n::setTranslator(
         'animals',
         new Loader('animals', 'fr_FR', 'yaml'),
@@ -596,6 +600,7 @@ la locale et utiliser les bonnes classes::
     use Cake\I18n\Time;
     use Cake\I18n\Number;
 
+    // Avant 3.5, utilisez I18n::locale()
     I18n::setLocale('fr-FR');
 
     $date = new Time('2015-04-05 23:00:00');

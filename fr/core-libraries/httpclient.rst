@@ -353,6 +353,19 @@ les paramètres ``$options`` de la requête::
         'cookies' => ['sessionid' => '123abc']
     ]);
 
+Vous pouvez ajouter des cookies au client après l'avoir créé en utilisant la méthode
+``addCookie()``::
+
+    use Cake\Http\Cookie\Cookie;
+
+    $http = new Client([
+        'host' => 'cakephp.org'
+    ]);
+    $http->addCookie(new Cookie('session', 'abc123'));
+
+.. versionadded:: 3.5.0
+    ``addCookie()`` a été ajoutée dans 3.5.0
+
 .. _httpclient-response-objects:
 
 Objets Response

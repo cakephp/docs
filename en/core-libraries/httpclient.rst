@@ -339,7 +339,6 @@ request's ``$options`` parameters::
         'cookies' => ['sessionid' => '123abc']
     ]);
 
-
 You can add cookie objects to the client after creating it using the ``addCookie()``
 method::
 
