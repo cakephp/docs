@@ -364,7 +364,7 @@ CakePHP のスキーマシェルを使ったマイグレーション
     $ Console/cake schema create
     $ Console/cake schema update
 
-いずれの操作でも dry-run が使用できます。
+いずれの操作でも ``--dry`` オプションで dry-run が使用できます。
 
 ロールバック
 ------------
