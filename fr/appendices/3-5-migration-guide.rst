@@ -187,7 +187,7 @@ Http
 * Les classes ``Cookie`` & ``CookieCollection`` ont été ajoutées. Ces classes vous
   permettent de travailler avec les cookies de manière orientée objet et sont
   disponibles dans ``Cake\Http\ServerRequest``, ``Cake\Http\Response``, et
-  ``Cake\Http\Client\Response``. Référez-vous aux section :ref:`request-cookies` et
+  ``Cake\Http\Client\Response``. Référez-vous aux sections :ref:`request-cookies` et
   :ref:`response-cookies` pour plus d'informations.
 * Un nouveau middleware a été ajouté pour permettre d'appliquer des headers de
   sécurité plus facilement. Référez-vous à :ref:`security-header-middleware` pour

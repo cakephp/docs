@@ -449,7 +449,7 @@ Vérifier si une langue spécifique est acceptée::
 Cookies
 -------
 
-Les cookies de la Request peuvent être lu à travers plusieurs méthodes::
+Les cookies de la Request peuvent être lus à travers plusieurs méthodes::
 
     // Récupère la valeur du cookie, ou null si le cookie n'existe pas
     $rememberMe = $this->request->getCookie('remember_me');
@@ -1025,9 +1025,9 @@ CookieCollections
 
 .. php:class:: CookieCollection
 
-Les objets ``CookieCollection`` sont accessible depuis les objets Request et
+Les objets ``CookieCollection`` sont accessibles depuis les objets Request et
 Response. Ils vous permettent d'intéragir avec des groupes de cookies en utilisant
-des patterns immutable, ce qui permet au caractère immutable des Request et des
+des patterns immutables, ce qui permet au caractère immutable des Request et des
 Response d'être préservé.
 
 .. _creating-cookies:
@@ -1036,7 +1036,7 @@ Créer des Cookies
 -----------------
 
 Les objets ``Cookie`` peuvent être définis via le constructor ou en utilisant
-l'interface fluide qui suit les patterns immutable::
+l'interface fluide qui suit les patterns immutables::
 
     use Cake\Http\Cookie\Cookie;
 

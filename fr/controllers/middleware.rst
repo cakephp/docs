@@ -312,7 +312,7 @@ Si votre application utilise des cookies qui contiennent des données que vous
 avez besoin d'obfusquer pour vous protéger contre les modifications utilisateurs,
 vous pouvez utiliser le middleware de gestion des cookies chiffrés de CakePHP pour
 chiffrer et déchiffrer les données des cookies.
-Les données des cookies sont chiffrés via OpenSSL, en AES::
+Les données des cookies sont chiffrées via OpenSSL, en AES::
 
     use Cake\Http\Middleware\EncryptedCookieMiddleware;
 
@@ -340,7 +340,7 @@ Middleware Cross Site Request Forgery (CSRF)
 ============================================
 
 La protection CSRF peut être appliqué à votre application complète ou à des
-'scopes' spécifiques en application le ``CsrfProtectionMiddleware`` à votre
+'scopes' spécifiques en applicant le ``CsrfProtectionMiddleware`` à votre
 stack de middlewares::
 
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
