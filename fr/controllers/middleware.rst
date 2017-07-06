@@ -88,6 +88,10 @@ différentes opérations ::
             $layer
         );
 
+En plus d'appliquer des middleware à la totalité de votre application, vous pouvez
+appliquer des middleware à des jeux de routes spécifiques en utilisant les
+:ref:`middlewares connectés à un scope <connecting-scoped-middleware>`.
+
 Ajout de Middleware à partir de Plugins
 ---------------------------------------
 

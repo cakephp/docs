@@ -43,7 +43,7 @@ d'accueil de votre site est visitée. Parfois vous avez besoin de routes
 dynamiques qui vont accepter plusieurs paramètres, ce sera par exemple le cas
 d'une route pour voir le contenu d'un article::
 
-    Router::connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
+    $routes->connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
 
 La route ci-dessus accepte toute URL qui ressemble à ``/articles/15`` et appelle
 la méthode ``view(15)`` dans ``ArticlesController``. En revanche, ceci ne va pas
@@ -51,7 +51,7 @@ empêcher les visiteurs d'accéder à une URLs ressemblant à
 ``/articles/foobar``. Si vous le souhaitez, vous pouvez restreindre certains
 paramètres grâce à une expression régulière::
 
-    Router::connect(
+    $routes->connect(
         '/articles/:id',
         ['controller' => 'Articles', 'action' => 'view'],
         ['id' => '\d+', 'pass' => ['id']]
@@ -79,13 +79,14 @@ Les routes peuvent aussi être labellisées avec un nom unique, cela vous permet
 de rapidement leur faire référence lors de la construction des liens plutôt
 que de spécifier chacun des paramètres de routing::
 
-    use Cake\Routing\Router;
-
-    Router::connect(
+    // Dans le fichier routes.php
+    $routes->connect(
         '/login',
         ['controller' => 'Users', 'action' => 'login'],
         ['_name' => 'login']
     );
+
+    use Cake\Routing\Router;
 
     echo Router::url(['_name' => 'login']);
     // Va afficher
@@ -115,13 +116,12 @@ par défaut si vous n'en avez pas besoin.
 Connecter les Routes
 ====================
 
-.. php:staticmethod:: connect($route, $defaults = [], $options = [])
+.. php:method:: connect($route, $defaults = [], $options = [])
 
 Pour garder votre code :term:`DRY`, vous pouvez utiliser les 'routing scopes'.
 Les scopes de Routing permettent non seulement de garder votre code DRY mais
 aident aussi le Router à optimiser son opération. Comme vous l'avez vu
-précédemment, vous pouvez aussi utiliser ``Router::connect()`` pour connecter
-les routes. Cette méthode va par défaut vers le scope ``/``. Pour créer un
+précédemment. Cette méthode va par défaut vers le scope ``/``. Pour créer un
 scope et connecter certaines routes, nous allons utiliser la méthode
 ``scope()``::
 
@@ -771,6 +771,41 @@ Ensuite, pour créer des liens, utilisez simplement::
 Les extensions de fichier sont utilisées par le
 :doc:`/controllers/components/request-handling` qui fait la commutation des
 vues automatiquement en se basant sur les types de contenu.
+
+.. _connecting-scoped-middleware:
+
+Connecter des Middlewares à un scope
+------------------------------------
+
+Les middleware peuvent être appliqués à l'ensemble de votre application ou bien
+à des scopes spécifiques. Avant qu'un middleware ne soit appliqué à un scope,
+il a besoin d'être enregistré::
+
+    // dans config/routes.php
+    use Cake\Http\Middleware\CsrfProtectionMiddleware;
+    use Cake\Http\Middleware\EncryptedCookieMiddleware;
+
+    Router::scope('/', function ($routes) {
+        $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
+        $routes->registerMiddleware('cookies', new EncryptedCookiesMiddleware());
+    });
+
+Une fois enregistré dans le builder de routes, le middleware peut être appliqué
+à des scopes spécifiques::
+
+    $routes->scope('/cms', function ($routes) {
+        // Active les middlewares enregistrés pour ce scope.
+        $routes->applyMiddleware('csrf', 'cookies');
+    });
+
+Dans les cas où vous avez des scopes imbriqués, tous les middlewares appliqués
+à chacun des scopes seront appliqués à partir du middleware de plus haut niveau
+en terminant par les scopes imbriqués. En appliquant un middleware à des scopes
+spécifiques, vous éviterez d'ajouter de la complexité dans la logique de vos
+middlewares et les laisser s'occuper de leur tâche principale.
+
+.. versionadded:: 3.5.0
+    Le support des middlewares par scope a été ajouté dans 3.5.0
 
 .. _resource-routes:
 
