@@ -22,7 +22,7 @@ version 4.0.0, à partir de laquelle ils seront supprimés.
 * ``Cake\View\Helper\RssHelper`` est dépréciée. Vu son peu d'utilisation, le
   RssHelper est déprécié.
 * ``Cake\Controller\Component\CsrfComponent`` est dépréciée. Utilisez
-  le middleware CSRF à la place.
+  le :ref:`csrf-middleware` à la place.
 * ``Cake\Datasource\TableSchemaInterface`` est dépréciée. Utilisez
   ``Cake\Database\TableSchemaAwareInterface`` à la place.
 * ``Cake\Console\ShellDispatcher`` est dépréciée. Vous devez mettre à jour vos
@@ -187,12 +187,16 @@ Http
 * Les classes ``Cookie`` & ``CookieCollection`` ont été ajoutées. Ces classes vous
   permettent de travailler avec les cookies de manière orientée objet et sont
   disponibles dans ``Cake\Http\ServerRequest``, ``Cake\Http\Response``, et
-  ``Cake\Http\Client\Response``.
+  ``Cake\Http\Client\Response``. Référez-vous aux sections :ref:`request-cookies` et
+  :ref:`response-cookies` pour plus d'informations.
 * Un nouveau middleware a été ajouté pour permettre d'appliquer des headers de
-  sécurité plus facilement.
+  sécurité plus facilement. Référez-vous à :ref:`security-header-middleware` pour
+  plus d'informations.
 * Un nouveau middleware a été ajouté pour chiffrer de manière transparente les
-  données de cookie.
+  données de cookie. Référez-vous à :ref:`encrypted-cookie-middleware` pour
+  plus d'informations.
 * Un nouveau middleware a été ajouté pour permettre une protection CSRF plus simple.
+  Référez-vous à :ref:`csrf-middleware` pour plus d'informations.
 * ``Cake\Http\Client::addCookie()`` a été ajoutée pour faciliter l'ajoute de cookies
   à une instance d'un client.
 

@@ -444,6 +444,31 @@ Vérifier si une langue spécifique est acceptée::
 
     $acceptsFrench = $this->request->acceptLanguage('fr-fr');
 
+.. _request-cookies:
+
+Cookies
+-------
+
+Les cookies de la Request peuvent être lus à travers plusieurs méthodes::
+
+    // Récupère la valeur du cookie, ou null si le cookie n'existe pas
+    $rememberMe = $this->request->getCookie('remember_me');
+
+    // Lit la valeur ou retourne le défaut (qui est 0 ici)
+    $rememberMe = $this->request->getCookie('remember_me', 0);
+
+    // Récupère tous les cookies dans un tableau
+    $cookies = $this->request->getCookieParams();
+
+    // Récupère une instance de CookieCollection (à partir de 3.5.0)
+    $cookies = $this->request->getCookieCollection()
+
+Référez-vous à la documentation de :php:class:`Cake\\Http\\Cookie\\CookieCollection`
+pour savoir comment travailler avec les collections de cookies.
+
+.. versionadded:: 3.5.0
+    ``ServerRequest::getCookieCollection()`` a été ajouté dans 3.5.0
+
 .. index:: $this->response
 
 Response
@@ -914,6 +939,35 @@ il supprime le contenu de la réponse et envoie l'en-tête `304 Not Modified`::
         return $this->response;
     }
 
+.. _response-cookies:
+
+Définir des Cookies
+===================
+
+Des cookies peuvent être ajoutés aux réponses en utilisant soit un tableau, soit
+un objet :php:class:`Cookie``::
+
+    // Ajoute un cookie avec un tableau en utilisant l'API immutable (3.4.0+)
+    $this->response = $this->response->withCookie('remember_me', [
+        'value' => 'yes',
+        'path' => '/',
+        'httpOnly' => true,
+        'secure' => false,
+        'expire' => strtotime('+1 year')
+    ]);
+
+    // Avant 3.4.0
+    $this->response->cookie('remember', [
+        'value' => 'yes',
+        'path' => '/',
+        'httpOnly' => true,
+        'secure' => false,
+        'expire' => strtotime('+1 year')
+    ]);
+
+Référez-vous à la section :ref:`creating-cookies` pour savoir comment utiliser
+l'objet Cookie.
+
 .. _cors-headers:
 
 Définir les En-têtes de Requête d'Origine Croisée (Cross Origin Request Headers = CORS)
@@ -963,6 +1017,107 @@ un code fonctionnel, vous devrez écrire::
 
     $this->response = $this->response->withHeader('X-CakePHP', 'yes!');
 
+
+.. php:namespace:: Cake\Http\Cookie
+
+CookieCollections
+=================
+
+.. php:class:: CookieCollection
+
+Les objets ``CookieCollection`` sont accessibles depuis les objets Request et
+Response. Ils vous permettent d'intéragir avec des groupes de cookies en utilisant
+des patterns immutables, ce qui permet au caractère immutable des Request et des
+Response d'être préservé.
+
+.. _creating-cookies:
+
+Créer des Cookies
+-----------------
+
+Les objets ``Cookie`` peuvent être définis via le constructor ou en utilisant
+l'interface fluide qui suit les patterns immutables::
+
+    use Cake\Http\Cookie\Cookie;
+
+    // Tous les arguments dans le constructor
+    $cookie = new Cookie(
+        'remember_me', // nom
+        1, // valeur
+        new DateTime('+1 year'), // durée d'expiration, si applicable
+        '/', // chemin, si applicable
+        'example.com', // domaine, si applicable
+        false, // seulement en mode 'secure' ?
+        true // seulement en http ?
+    );
+
+    // En utilisant les méthodes immutables
+    $cookie = (new Cookie('remember_me'))
+        ->withValue('1')
+        ->withExpiry(new DateTime('+1 year'))
+        ->withPath('/')
+        ->withDomain('example.com')
+        ->withSecure(false)
+        ->withHttpOnly(true);
+
+Une fois que vous avez créer un cookie, vous pouvez l'ajouter à une nouvelle
+``CookieCollection``, ou à une existante::
+
+    use Cake\Http\Cookie\CookieCollection;
+
+    // Crée une nouvelle collection
+    $cookies = new CookieCollection([$cookie]);
+
+    // Ajoute à une collection existante
+    $cookies = $cookies->add($cookie);
+
+    // Supprime un cookie via son nom
+    $cookies = $cookies->remove('remember_me');
+
+.. note::
+    Gardez bien à l'esprit que les collections sont immutables et qu'ajouter des
+    cookies dans une collection ou retirer des cookies d'une collection va créer
+    *une nouvelle* collection.
+
+Vous devriez utiliser la méthode ``withCookie()`` pour ajouter des cookies aux
+objets ``Response``::
+
+    $response = $this->response->withCookie($cookie);
+
+Les cookies ajoutés aux Response peuvent être chiffrés en utilisant le
+:ref:`encrypted-cookie-middleware`
+
+Lire des Cookies
+----------------
+
+Une fois que vous avez une instance de ``CookieCollection``, vous pouvez accéder
+aux cookies qu'elle contient::
+
+    // Vérifie l'existence d'un cookie
+    $cookies->has('remember_me');
+
+    // Récupère le nombre de cookie dans une collection
+    count($cookies);
+
+    // Récupère l'instance d'un cookie
+    $cookie = $cookies->get('remember_me');
+
+Une fois que vous avez un objet ``Cookie``, vous pouvez intéragir avec son état
+et le modifier. Gardez à l'esprit que les cookies sont immutables, donc vous allez
+devoir mettre à jour la collection si vous modifiez un cookie::
+
+    // Récupère la valeur
+    $value = $cookie->getValue()
+
+    // Accède à une donnée dans une valeur JSON
+    $id = $cookie->read('User.id');
+
+    // Vérifie l'état
+    $cookie->isHttpOnly();
+    $cookie->isSecure();
+
+.. versionadded:: 3.5.0
+    ``CookieCollection`` et ``Cookie`` ont été ajoutés dans 3.5.0.
 
 .. meta::
     :title lang=fr: Objets ServerRequest et Response

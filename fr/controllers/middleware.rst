@@ -22,6 +22,13 @@ CakePHP fournit nativement plusieurs middleware :
 * ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` active le changement
   automatique de langage à partir de l'en-tête ``Accept-Language`` envoyé par le
   navigateur
+* ``Cake\Http\Middleware\SecurityHeadersMiddleware`` facilite l'ajout de
+  header liés à la sécurité comme ``X-Frame-Options`` aux réponses.
+* ``Cake\Http\Middleware\EncryptedCookieMiddleware`` vous permet de manipuler
+  des cookies chiffrés dans le cas où vous auriez besoin de manipuler des cookies
+  avec des données obfusqués.
+* ``Cake\Http\Middleware\CsrfProtectionMiddleware`` ajoute une protection CSRF
+  à votre application.
 
 .. _using-middleware:
 
@@ -261,6 +268,107 @@ Après avoir créer le middleware, attachez-le à votre application ::
             return $middlewareStack;
         }
     }
+
+.. _security-header-middleware:
+
+Ajouter des Headers de Sécurité
+===============================
+
+La couche ``SecurityHeaderMiddleware`` facilite l'ajout de headers liés à la
+sécurité à votre application. Une fois configuré, le middleware peut ajouter
+les headers suivants aux réponses :
+
+* ``X-Content-Type-Options``
+* ``X-Download-Options``
+* ``X-Frame-Options``
+* ``X-Permitted-Cross-Domain-Policies``
+* ``Referrer-Policy``
+
+Ce middleware peut être configuré en utilisant l'interface fluide avant d'être
+appliqué au stack de middlewares::
+
+    use Cake\Http\Middleware\SecurityHeadersMiddleware;
+
+    $headers = new SecurityHeadersMiddleware();
+    $headers
+        ->setCrossDomainPolicy()
+        ->setReferrerPolicy()
+        ->setXFrameOptions()
+        ->setXssProtection()
+        ->noOpen()
+        ->noSniff();
+
+    $middleware->add($headers);
+
+.. versionadded:: 3.5.0
+    ``SecurityHeadersMiddleware`` a été ajouté dans 3.5.0
+
+.. _encrypted-cookie-middleware:
+
+Middleware de Gestion de Cookies Chiffrés
+=========================================
+
+Si votre application utilise des cookies qui contiennent des données que vous
+avez besoin d'obfusquer pour vous protéger contre les modifications utilisateurs,
+vous pouvez utiliser le middleware de gestion des cookies chiffrés de CakePHP pour
+chiffrer et déchiffrer les données des cookies.
+Les données des cookies sont chiffrées via OpenSSL, en AES::
+
+    use Cake\Http\Middleware\EncryptedCookieMiddleware;
+
+    $cookies = new EncryptedCookieMiddleware(
+        // Noms des cookies à protéger
+        ['secrets', 'protected'],
+        Configure::read('Security.cookieKey')
+    );
+
+    $middleware->add($cookies);
+
+.. note::
+    Il est recommandé que la clé de chiffrage utilisée pour les données des cookies
+    soit *exclusivement* utilisée pour les données des cookies.
+
+L'algorithme de chiffrement et le 'padding style' utilisé par le middleware
+sont compatible avec le ``CookieComponent`` des versions précédents de CakePHP.
+
+.. versionadded:: 3.5.0
+    ``EncryptedCookieMiddleware`` a été ajouté dans 3.5.0
+
+.. _csrf-middleware:
+
+Middleware Cross Site Request Forgery (CSRF)
+============================================
+
+La protection CSRF peut être appliqué à votre application complète ou à des
+'scopes' spécifiques en applicant le ``CsrfProtectionMiddleware`` à votre
+stack de middlewares::
+
+    use Cake\Http\Middleware\CsrfProtectionMiddleware;
+
+    $options = [
+        // ...
+    ];
+    $csrf = new CsrfProtectionMiddleware($options);
+
+    $middleware->add($csrf);
+
+Des options peuvent être passées au constructor du middleware.
+Les options utilisables sont :
+
+- ``cookieName`` Le nom du cookie à envoyer. Défaut à ``csrfToken``.
+- ``expiry`` La durée de vie du token CSRF. Défaut à la durée de vie du navigateur.
+- ``secure`` Si le cookie doit avoir le flag 'Secure' ou pas. C'est-à-dire si le
+  cookie sera seulement disponible sur une connexion HTTPS et que toute tentative
+  d'accès via une requête HTTP "normale" échouera. Défaut à ``false``.
+- ``field`` Le champ du formulaire à vérifier. Défaut à  ``_csrfToken``. Changer
+  cete valeur vous obligera également à configurer le FormHelper.
+
+Une fois activé, vous pouvez accéder au token CSRF actuel via l'objet "Request"::
+
+    $token = $this->request->getParam('_csrfToken');
+
+.. versionadded:: 3.5.0
+    ``CsrfProtectionMiddleware`` a été ajouté dans 3.5.0
 
 .. _adding-http-stack:
 

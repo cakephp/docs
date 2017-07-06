@@ -179,7 +179,7 @@ Event
 Http
 ----
 
-* New Cookie & CookieCollection classes have been added. These classes allow you
+* New ``Cookie`` & ``CookieCollection`` classes have been added. These classes allow you
   to work with cookies in an object-orientated way, and are available on
   ``Cake\Http\ServerRequest``, ``Cake\Http\Response``, and
   ``Cake\Http\Client\Response``. See the :ref:`request-cookies` and

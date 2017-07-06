@@ -976,7 +976,7 @@ Cookie Collections
 
 .. php:class:: CookieCollection
 
-CookieCollection objects are accessible from the request and response objects.
+``CookieCollection`` objects are accessible from the request and response objects.
 They let you interact with groups of cookies using immutable patterns, which
 allow the immutability of the request and response to be preserved.
 
@@ -985,7 +985,7 @@ allow the immutability of the request and response to be preserved.
 Creating Cookies
 ----------------
 
-Cookie objects can be defined through constructor objects, or by using the
+``Cookie`` objects can be defined through constructor objects, or by using the
 fluent interface that follows immutable patterns::
 
     use Cake\Http\Cookie\Cookie;

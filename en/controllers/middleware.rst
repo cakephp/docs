@@ -21,8 +21,9 @@ CakePHP provides several middleware out of the box:
   switching from the ``Accept-Language`` header sent by the browser.
 * ``Cake\Http\Middleware\SecurityHeadersMiddleware`` makes it easy to add
   security related headers like ``X-Frame-Options`` to responses.
-* ``Cake\Http\Middleware\EncryptedCookieMiddleware`` makes it easy to add
-  security related headers like ``X-Frame-Options`` to responses.
+* ``Cake\Http\Middleware\EncryptedCookieMiddleware`` gives you the ability to
+  manipulate encrypted cookies in case you need to manipulate cookie with
+  obfuscated data.
 * ``Cake\Http\Middleware\CsrfProtectionMiddleware`` adds CSRF protection to your
   application.
 
