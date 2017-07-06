@@ -370,6 +370,27 @@ Une fois activé, vous pouvez accéder au token CSRF actuel via l'objet "Request
 .. versionadded:: 3.5.0
     ``CsrfProtectionMiddleware`` a été ajouté dans 3.5.0
 
+Intégration avec le FormHelper
+------------------------------
+
+Le ``CsrfProtectionMiddleware`` s'intègre parfaitement avec le ``FormHelper``.
+Chaque fois que vous créez un formulaire avec le ``FormHelper``, cela créera un
+champ caché contenant le token CSRF.
+
+.. note::
+
+    Lorsque vous utilisez la protection CSRF, vous devriez toujours commencer
+    vos formulaires avec le ``FormHelper``. Si vous ne le faites pas, vous allez
+    devoir créer manuellement les champs cachés dans chaque formulaire.
+
+Protection CSRF et Requêtes AJAX
+--------------------------------
+
+En plus des données de la requête, les tokens CSRF peuvent être soumis via le
+header spécial ``X-CSRF-Token``. Utiliser un header facilite généralement
+l'intégration du token CSRF dans les applications qui utilisent Javascript de
+manière intensive ou avec les applications API JSON / XML.
+
 .. _adding-http-stack:
 
 Ajout de la nouvelle pile HTTP à une application existante

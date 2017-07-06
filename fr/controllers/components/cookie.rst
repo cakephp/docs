@@ -9,6 +9,10 @@ Le component Cookie est un conteneur de la méthode native de PHP
 ``setcookie()``. Il simplifie la manipulation des cookies et chiffre
 automatiquement les données du cookie.
 
+.. deprecated:: 3.5.0
+    Vous devriez utiliser le :ref:`encrypted-cookie-middleware` à la place du
+    ``CookieComponent``.
+
 Paramétrage des Cookies
 =======================
 
