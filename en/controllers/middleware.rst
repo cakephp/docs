@@ -368,17 +368,17 @@ Integration with FormHelper
 ---------------------------
 
 The ``CsrfProtectionMiddleware`` integrates seamlessly with ``FormHelper``. Each
-time you create a form with FormHelper, it will insert a hidden field containing
+time you create a form with ``FormHelper``, it will insert a hidden field containing
 the CSRF token.
 
 .. note::
 
     When using CSRF protection you should always start your forms with the
-    FormHelper. If you do not, you will need to manually create hidden inputs in
+    ``FormHelper``. If you do not, you will need to manually create hidden inputs in
     each of your forms.
 
 CSRF Protection and AJAX Requests
-----------------------------------
+---------------------------------
 
 In addition to request data parameters, CSRF tokens can be submitted through
 a special ``X-CSRF-Token`` header. Using a header often makes it easier to
