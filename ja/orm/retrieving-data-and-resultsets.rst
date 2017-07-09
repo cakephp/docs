@@ -532,13 +532,11 @@ contain に条件を渡す
 
     // コントローラーやテーブルのメソッド内で
 
-    $query = $articles->find()->contain([
-        'Comments' => function ($q) {
-           return $q
-                ->select(['body', 'author_id'])
-                ->where(['Comments.approved' => true]);
-        }
-    ]);
+    $query = $articles->find()->contain('Comments', function ($q) {
+       return $q
+            ->select(['body', 'author_id'])
+            ->where(['Comments.approved' => true]);
+    });
 
 これは、またコントローラーレベルでページネーションが働きます。 ::
 
@@ -564,15 +562,16 @@ contain に条件を渡す
         }
     ]);
 
-関連テーブルにカスタム Finder メソッドをいくつか定義しているなら、 ``contain()`` の中で
+上記の例では、公開されたプロファイル (profile) を持たなくても、著者 (author) は引き続き取得します。
+公開されたプロファイル (profile) を持つ著者のみを取得するには、
+:ref:`matching() <filtering-by-associated-data>` を使用してください。
+関連にカスタム Finder メソッドをいくつか定義しているなら、 ``contain()`` の中で
 それらを使うことができます。 ::
 
     // すべての article を取り出すが、承認され (approved)、人気のある (popular) ものだけに限定する
-    $query = $articles->find()->contain([
-        'Comments' => function ($q) {
-           return $q->find('approved')->find('popular');
-        }
-    ]);
+    $query = $articles->find()->contain('Comments', function ($q) {
+        return $q->find('approved')->find('popular');
+    });
 
 .. note::
 
