@@ -162,38 +162,41 @@ data
 -  name
 -  type
 
-The types CakePHP supports are:
+CakePHP がサポートする型は:
 
 string
-    Generally backed by CHAR or VARCHAR columns. In SQL Server, NCHAR and
-    NVARCHAR types are used.
+    一般的には、CHAR または VARCHAR のカラムを使用します。SQL Server では、
+    NCHAR や NVARCHAR の型が使用されます。
 text
-    Maps to TEXT, MONEY types.
+    TEXT や MONEY の型に対応します。
 uuid
-    Maps to the UUID type if a database provides one, otherwise this will
-    generate a CHAR(36) field.
+    データベースが UUID 型を提供する場合は UUID 型に対応し、
+    そうでなければ CHAR(36) 型のフィールドを生成します。
+tinyinteger
+    データベースが提供する TINYINT または SMALLINT 型に対応します。
+smallinteger
+    テータベースが提供する SMALLINT 型に対応します。
 integer
-    Maps to the INTEGER, SMALLINT types provided by the database.
+    データベースが提供する INTEGER 型に対応します。
 biginteger
-    Maps to the BIGINT type provided by the database.
+    データベースが提供する BIGINT 型に対応します。
 decimal
-    Maps to the DECIMAL, NUMERIC types.
+    DECIMAL や NUMERIC 型に対応します。
 float
-    Maps to the REAL, DOUBLE PRECISION types.
+    REAL や DOUBLE PRECISION 型に対応します。
 boolean
-    Maps to BOOLEAN except in MySQL, where TINYINT(1) is used to represent
-    booleans.
+    MySQL 以外は BOOLEAN。ここで TINYINT(1) は boolean を表すために使用されます。
 binary
-    Maps to the BLOB or BYTEA type provided by the database.
+    データベースが提供する BLOB または BYTEA 型に対応します。
 date
-    Maps to a timezone naive DATE column type.
+    タイムゾーン無しの DATE カラム型に対応します。
 datetime
-    Maps to a timezone naive DATETIME column type. In PostgreSQL, and SQL
-    Server this turns into a TIMESTAMP or TIMESTAMPTZ type.
+    タイムゾーン無しの DATETIME カラム型に対応します。PostgreSQL や SQL Server では、
+    TIMESTAMP または TIMESTAMPTZ 型に変わります。
 timestamp
-    Maps to the TIMESTAMP type.
+    TIMESTAMP 型に対応します。
 time
-    Maps to a TIME type in all databases.
+    全てのデータベースで TIME 型に対応します。
 
 -  null
 -  default value

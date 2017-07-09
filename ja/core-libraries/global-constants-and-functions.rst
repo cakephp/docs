@@ -90,6 +90,86 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
     $domain でドメインを指定し、 $count の数を数え、 $singular と $plural
     に基いて複数形を正しく処理したメッセージを返します。
 
+.. php:function:: __x(string $context, string $singular, mixed $args = null)
+
+    context は、同じドメイン内で一意にする翻訳文字列の一意の識別子です。
+
+.. php:function:: __xn(string $context, string $singular, string $plural, integer $count, mixed $args = null)
+
+    $count の数を数え、 ``$singular`` と ``$plural`` に基いて複数形を正しく処理した
+    メッセージを返します。また、コンテキストを指定することもできます。
+    言語によっては、カウントに応じて複数のメッセージに対して複数の形式があります。
+
+    context は、同じドメイン内で一意にする翻訳文字列の一意の識別子です。
+
+.. php:function:: __dx(string $domain, string $context, string $msg, mixed $args = null)
+
+    メッセージを一つ取得するために、現在のドメインを変更することが可能です。
+    同時にカテゴリーとコンテキストも指定できます。
+
+    context は、同じドメイン内で一意にする翻訳文字列の一意の識別子です。
+
+.. php:function:: __dxn(string $domain, string $context, string $singular, string $plural, integer $count, mixed $args = null)
+
+    複数形のメッセージを一つ取得するために、現在のドメインを変更することが可能です。
+    $domain でドメインを指定し、 $count の数を数え、 $singular と ``$plural``
+    に基いて複数形を正しく処理したメッセージを返します。
+    言語によっては、カウントに応じて複数のメッセージに対して複数の形式があります。
+
+    context は、同じドメイン内で一意にする翻訳文字列の一意の識別子です。
+
+.. php:function:: __dxc(string $domain, string $context, string $msg, integer $category, mixed $args = null)
+
+    メッセージを一つ取得するために、現在のドメインを変更することが可能です。
+    同時にカテゴリーとコンテキストも指定できます。
+
+    context は、同じドメイン内で一意にする翻訳文字列の一意の識別子です。
+
+    カテゴリーは定義済みの名前をそのまま使うのではなく、 I18n クラスの定数で指定されなければなりません。
+    それらの値は以下の通り:
+
+    - I18n::LC_ALL - LC_ALL
+    - I18n::LC_COLLATE - LC_COLLATE
+    - I18n::LC_CTYPE - LC_CTYPE
+    - I18n::LC_MONETARY - LC_MONETARY
+    - I18n::LC_NUMERIC - LC_NUMERIC
+    - I18n::LC_TIME - LC_TIME
+    - I18n::LC_MESSAGES - LC_MESSAGES
+
+.. php:function:: __xc(string $context, string $msg, integer $count, integer $category, mixed $args = null)
+
+    context は、同じドメイン内で一意にする翻訳文字列の一意の識別子です。
+
+    カテゴリーは定義済みの名前をそのまま使うのではなく、 I18n クラスの定数で指定されなければなりません。
+    それらの値は以下の通り:
+
+    - I18n::LC_ALL - LC_ALL
+    - I18n::LC_COLLATE - LC_COLLATE
+    - I18n::LC_CTYPE - LC_CTYPE
+    - I18n::LC_MONETARY - LC_MONETARY
+    - I18n::LC_NUMERIC - LC_NUMERIC
+    - I18n::LC_TIME - LC_TIME
+    - I18n::LC_MESSAGES - LC_MESSAGES
+
+.. php:function:: __dxcn(string $domain, string $context, string $singular, string $plural, integer $count, integer $category, mixed $args = null)
+
+    複数形のメッセージを一つ取得するために、現在のドメインを変更することが可能です。
+    同時にカテゴリーとコンテキストも指定できます。 $domain でドメインを指定し、
+    $count の数を数え、 $singular と $plural に基いて複数形を正しく処理したメッセージを返します。
+
+    context は、同じドメイン内で一意にする翻訳文字列の一意の識別子です。
+
+    カテゴリーは定義済みの名前をそのまま使うのではなく、 I18n クラスの定数で指定されなければなりません。
+    それらの値は以下の通り:
+
+    - I18n::LC_ALL - LC_ALL
+    - I18n::LC_COLLATE - LC_COLLATE
+    - I18n::LC_CTYPE - LC_CTYPE
+    - I18n::LC_MONETARY - LC_MONETARY
+    - I18n::LC_NUMERIC - LC_NUMERIC
+    - I18n::LC_TIME - LC_TIME
+    - I18n::LC_MESSAGES - LC_MESSAGES
+
 .. php:function:: __n(string $singular, string $plural, integer $count, mixed $args = null)
 
     $count の数を数え、 $singular と $plural に基いて複数形を正しく処理したメッセージを返します。
@@ -194,6 +274,12 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 .. php:const:: CAKE_CORE_INCLUDE_PATH
 
     ルートの lib ディレクトリへのパス。
+
+.. php:const:: CONFIG
+
+    app/Config ディレクトリーへのパス。
+
+    .. versionadded:: 2.10.0
 
 .. php:const:: CORE_PATH
 

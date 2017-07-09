@@ -15,9 +15,21 @@ CakePHP のテストフレームワークは、PHPUnit を基礎としていま�
 
 Composer でのインストール
 -------------------------
-PHPUnit の最新バージョンは、 今のところ cake では動作しません。 ::
 
-    "phpunit/phpunit": "3.7.38"
+長い間、CakePHP 2.x は PHPUnit 3.7.x のみをサポートしてきました。
+Composer で開発に必要なものとして PHPUnit をインストールするには、
+composer.json と同じディレクトリーで次を実行してください。 ::
+
+    php composer.phar require --dev phpunit/phpunit:"3.7.38"
+
+CakePHP 2.10.0 以降、PHPUnit 4.x や 5.x の基本サポートが追加されました。
+あなたのアプリケーションで PHPUnit とそれに依存するライブラリーをアップグレードするには、
+次を実行してください。 ::
+
+    php composer.phar require --dev phpunit/phpunit:"4.* || 5.*" --update-with-dependencies
+
+これにより、システム設定と composer.json の設定に応じて、
+PHPUnit 4.x または 5.x のいずれかがインストールされます。
 
 .phar パッケージでのインストール
 --------------------------------
@@ -397,6 +409,9 @@ CakePHP はフィクスチャに基づいたテストケースを実行するに
         - ``string``: ``VARCHAR`` と対応
         - ``text``: ``TEXT`` と対応
         - ``biginteger``: ``BIGINT`` と対応
+        - ``smallinteger``: ``SMALLINT`` と対応
+        - ``tinyinteger``: データベースプラットフォームに応じて ``TINYINT`` または
+	  ``SMALLINT`` と対応
         - ``integer``: ``INT`` と対応
         - ``float``: ``FLOAT`` と対応
         - ``decimal``: ``DECIMAL`` と対応
@@ -405,7 +420,7 @@ CakePHP はフィクスチャに基づいたテストケースを実行するに
         - ``time``: ``TIME`` と対応
         - ``date``: ``DATE`` と対応
         - ``binary``: ``BLOB`` と対応
-        - ``boolean``: ``TINYINT`` と対応
+        - ``boolean``: ``BOOLEAN`` または MySQL の ``TINYINT(1)`` と対応
 ``key``
     ``primary`` を設定するとフィールドに *field AUTO\_INCREMENT* と *PRIMARY KEY* が適用されます。
 ``length``
@@ -970,6 +985,11 @@ SessionComponent がモックされたことで、それを用いたテストメ
 
 ``staticExpects`` を使うことにより、コンポーネントやモデルの静的メソッドをモック、
 操作することができるようになります。
+
+.. warning::
+    PHPUnit 4 や 5 を使用している場合、 ``staticExpects()`` はもはや存在しません。
+    代わりに、アクションを呼ぶ前に ``CakeSession::write('Auth.User', $user)`` を使って
+    セッションの中に必要なデータを挿入してください。
 
 JSON を返すコントローラーのテスト
 ---------------------------------

@@ -191,17 +191,21 @@ type
     以下の型の一つ
 
     * integer
+    * smallinteger
+    * tinyinteger
+    * biginteger
     * date
     * time
     * datetime
     * timestamp
     * boolean
-    * biginteger
     * float
     * string
     * text
     * binary
 
+.. versionchanged:: 2.10.0
+    smallinteger と tinyinteger 型は 2.10.0 で追加されました。
 
 テーブルキー `indexes`
 ======================
@@ -360,7 +364,7 @@ CakePHP のスキーマシェルを使ったマイグレーション
     $ Console/cake schema create
     $ Console/cake schema update
 
-いずれの操作でも dry-run が使用できます。
+いずれの操作でも ``--dry`` オプションで dry-run が使用できます。
 
 ロールバック
 ------------
