@@ -158,7 +158,7 @@ Configurer un Fallback de Cache
 -------------------------------
 
 Dans le cas où un moteur de cache n'est pas disponible, comme par exemple le
-``FileEngine`` essayant par exemple d'écrire dans un dossier sans les droits
+``FileEngine`` essayant d'écrire dans un dossier sans les droits
 d'écriture ou le ``RedisEngine`` n'arrivant pas à se connecter à Redis, le moteur
 se repliera sur le moteur 'noop' ``NullEngine`` et déclenchera une erreur qui sera
 loggée. Cela permet d'éviter que l'application lance une exception qui ne sera pas

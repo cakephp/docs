@@ -297,7 +297,7 @@ re-générer votre autoloader une fois que vous avez créé votre plugin:
 Routes de Plugins
 =================
 
-Les plugins peuvent contenir des fichiers de route contenant leurs propres routes.
+Les plugins peuvent contenir des fichiers de routes contenant leurs propres routes.
 Chaque plugin contient un fichier **config/routes.php**. Ce fichier de routes
 peut être chargé quand le plugin est ajouté ou dans le fichier de routes de l'application.
 Pour créer les routes du plugin ContractManager, ajoutez le code suivant dans
@@ -328,7 +328,7 @@ chargé et que les routes du plugin le sont également. Dans votre fichier
 
 Vous pouvez également charger les routes du plugin dans la liste des routes de votre
 application. Le faire de cette manière vous permet d'avoir plus de contrôle sur la manière
-dont les routes de plugin sont chargés et vous permet d'englober les routes du plugin
+dont les routes de plugin sont chargées et vous permet d'englober les routes du plugin
 dans des préfixes et des 'scopes' spécifiques::
 
     Router::scope('/', function ($routes) {

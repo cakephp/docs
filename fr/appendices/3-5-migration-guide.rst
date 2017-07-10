@@ -143,7 +143,7 @@ Cache
   qui permet de définir une configuration de cache sur laquelle se rabattre si
   le moteur était mal configuré ou indisponible. Reportez-vous à la section
   :ref:`cache-configuration-fallback` pour plus d'informations sur la configuration
-  de 'fallbacks' pour vos configuration de cache.
+  de 'fallbacks' pour vos configurations de cache.
 
 Core
 ----
