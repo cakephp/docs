@@ -137,7 +137,7 @@ scope et connecter certaines routes, nous allons utiliser la méthode
     use Cake\Routing\Route\DashedRoute;
 
     Router::scope('/', function ($routes) {
-        // Connecte la routes de 'fallback' générique
+        // Connecte la route de 'fallback' générique
         $routes->fallbacks(DashedRoute::class);
     });
 
@@ -210,11 +210,11 @@ pourriez considérer la création d'une route. Cela vous permet de vous lier à
 Une utilisation classique du routing peut impliquer la création de segments
 d'URL qui ne correspondent pas aux noms de vos controllers ou de vos models.
 Imaginons qu'au lieu de vouloir accéder à une URL ``/users/some_action/5``,
-vous souhaitiez y accéder via ``/cuisiniers/une_action/5``. Pour ce faire,
+vous souhaitiez y accéder via ``/cooks/une_action/5``. Pour ce faire,
 vous devriez configurer la route suivante::
 
     $routes->connect(
-        '/cuisiniers/:action/*', ['controller' => 'Users']
+        '/cooks/:action/*', ['controller' => 'Users']
     );
 
 Cela dit au Router que toute URL commençant par ``/cooks/`` devrait être envoyée
@@ -264,7 +264,7 @@ verbes :
 * OPTIONS
 * HEAD
 
-Toutes ces méthodes retourne une instance de Route ce qui vous permet d'utiliser les
+Toutes ces méthodes retournent une instance de Route ce qui vous permet d'utiliser les
 :ref:`setters fluides <route-fluent-methods>` pour configurer plus précisément vos
 routes.
 
@@ -320,7 +320,7 @@ l'exemple ci-dessus peut être réécrit en::
         $routes->connect('/:controller/:id', ['action' => 'view'])
             ->setPatterns(['id' => '[0-9]+']);
 
-        // Prior to 3.5 use options array
+        // Avant 3.5, utilisez le tableau d'options
         $routes->connect(
             '/:controller/:id',
             ['action' => 'view'],
