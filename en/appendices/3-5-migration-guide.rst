@@ -127,6 +127,10 @@ behavior that may affect your application:
 * Cache engines no longer throw an exception when they fail or are misconfigured,
   but instead fall back to the noop ``NullEngine``. Fallbacks can also be
   :ref:`configured <cache-configuration-fallback>` on a per-engine basis.
+* ``Cake\Database\Type\DateTimeType`` will now marshal ISO-8859-1 formatted
+  datetime strings (e.g. 2017-07-09T12:33:00+00:02) in addition to the
+  previously accepted format. If you have a subclass of DateTimeType you may
+  need to update your code.
 
 New Features
 ============
