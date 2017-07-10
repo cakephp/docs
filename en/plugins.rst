@@ -288,7 +288,7 @@ Plugin Routes
 Plugins can provide routes files containing their routes. Each plugin can
 contain a **config/routes.php** file. This routes file can be loaded when the
 plugin is added, or in the application's routes file. To create the
-ContactManager plugin routes. Put the following into
+ContactManager plugin routes, put the following into
 **plugins/ContactManager/config/routes.php**::
 
     <?php

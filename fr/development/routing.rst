@@ -726,7 +726,11 @@ un scope de prefix::
 
 Le code ci-dessus devrait créer une route similaire à
 ``/admin/debug_kit/:controller``. Elle devrait avoir les éléments de route
-``prefix`` et ``plugin`` définis.
+``prefix`` et ``plugin`` définis. Référez-vous à la section :ref:`plugin-routes`
+pour avoir plus d'informations sur comment construire des routes de plugin.
+
+Créer des Liens vers des Routes de Plugins
+------------------------------------------
 
 Vous pouvez créer des liens qui pointent vers un plugin, en ajoutant la clé
 ``plugin`` au tableau de l'URL::
@@ -744,7 +748,7 @@ souhaitez créer un lien qui n'a pas de plugin, vous pouvez faire ceci::
         ['plugin' => null, 'controller' => 'Users', 'action' => 'profile']
     );
 
-En définissant ``plugin => null``, vous dites au Router que vous souhaitez
+En définissant ``'plugin' => null``, vous dites au Router que vous souhaitez
 créer un lien qui n'appartient pas à un plugin.
 
 Routing Favorisant le SEO

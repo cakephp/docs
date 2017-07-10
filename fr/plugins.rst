@@ -292,6 +292,57 @@ re-générer votre autoloader une fois que vous avez créé votre plugin:
 
     php composer.phar dumpautoload
 
+.. _plugin-routes:
+
+Routes de Plugins
+=================
+
+Les plugins peuvent contenir des fichiers de routes contenant leurs propres routes.
+Chaque plugin contient un fichier **config/routes.php**. Ce fichier de routes
+peut être chargé quand le plugin est ajouté ou dans le fichier de routes de l'application.
+Pour créer les routes du plugin ContractManager, ajoutez le code suivant dans
+**plugins/ContactManager/config/routes.php**::
+
+    <?php
+    use Cake\Routing\Route\DashedRoute;
+    use Cake\Routing\Router;
+
+    Router::plugin(
+        'ContactManager',
+        ['path' => '/contact-manager'],
+        function ($routes) {
+            $routes->get('/contacts', ['controller' => 'Contacts']);
+            $routes->get('/contacts/:id', ['controller' => 'Contacts', 'action' => 'view']);
+            $routes->put('/contacts/:id', ['controller' => 'Contacts', 'action' => 'update']);
+        }
+    );
+
+Le code ci-dessus connectera les routes par défaut de votre plugin. Vous pouvez
+personnaliser ce fichier avec plus de routes plus tard.
+
+Avant de pouvoir accéder à vos controllers, assuez-vous que le plugin est bien
+chargé et que les routes du plugin le sont également. Dans votre fichier
+**config/bootstrap.php**, ajoutez la ligne suivante::
+
+    Plugin::load('ContactManager', ['routes' => true]);
+
+Vous pouvez également charger les routes du plugin dans la liste des routes de votre
+application. Le faire de cette manière vous permet d'avoir plus de contrôle sur la manière
+dont les routes de plugin sont chargées et vous permet d'englober les routes du plugin
+dans des préfixes et des 'scopes' spécifiques::
+
+    Router::scope('/', function ($routes) {
+        // Connect other routes.
+        $routes->scope('/backend', function ($routes) {
+            $routes->loadPlugin('ContactManager');
+        });
+    });
+
+Le code ci-dessus vous permettrait d'avoir des URLs de la forme ``/backend/contact_manager/contacts``.
+
+.. versionadded:: 3.5.0
+    ``RouteBuilder::loadPlugin()`` a été ajoutée dans 3.5.0
+
 Controllers du Plugin
 =====================
 
@@ -331,35 +382,6 @@ Créez également le ``AppController`` si vous n'en avez pas déjà un::
 Un ``AppController`` dédié à votre plugin peut contenir la logique commune à
 tous les controllers de votre plugin, et n'est pas obligatoire si vous ne
 souhaitez pas en utiliser.
-
-Avant d'accéder à vos controllers, vous devrez vous assurez que le plugin est
-chargé et que les routes du plugin sont chargées. Dans votre
-**config/bootstrap.php**, ajoutez ce qui suit::
-
-    Plugin::load('ContactManager', ['routes' => true]);
-
-Si vous utilisez ``Plugin::loadAll()``, assurez-vous que les routes sont
-chargées::
-
-    Plugin::loadAll(['routes' => true]);
-
-Ensuite créez les routes du plugin ContactManager. Mettez ce qui suit dans
-**plugins/ContactManager/config/routes.php**::
-
-    <?php
-    use Cake\Routing\Route\DashedRoute;
-    use Cake\Routing\Router;
-
-    Router::plugin(
-        'ContactManager',
-        ['path' => '/contact-manager'],
-        function ($routes) {
-            $routes->fallbacks(DashedRoute::class);
-        }
-    );
-
-Ce qui est au-dessus connecte les routes par défaut pour votre plugin. Vous
-pouvez personnaliser ce fichier avec des routes plus spécifiques plus tard.
 
 Si vous souhaitez accéder à ce qu'on a fait avant, visitez
 ``/contact-manager/contacts``. Vous aurez une erreur "Missing Model"
