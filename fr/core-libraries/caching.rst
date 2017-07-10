@@ -152,6 +152,39 @@ syntaxes suivantes:
     l'option ``mask`` pour assurer que les fichiers de cache sont créés avec
     les autorisations nécessaires.
 
+.. _cache-configuration-fallback:
+
+Configurer un Fallback de Cache
+-------------------------------
+
+Dans le cas où un moteur de cache n'est pas disponible, comme par exemple le
+``FileEngine`` essayant par exemple d'écrire dans un dossier sans les droits
+d'écriture ou le ``RedisEngine`` n'arrivant pas à se connecter à Redis, le moteur
+se repliera sur le moteur 'noop' ``NullEngine`` et déclenchera une erreur qui sera
+loggée. Cela permet d'éviter que l'application lance une exception qui ne sera pas
+interceptée à cause d'une erreur de cache.
+
+Vous pouvez configurer vos configurations de Cache pour se replier sur une configuration
+spécifique en utilisant la clé de configuration ``fallback``::
+
+    Cache::config('redis', [
+        'className' => 'Redis',
+        'duration' => '+1 hours',
+        'prefix' => 'cake_redis_',
+        'host' => '127.0.0.1',
+        'port' => 6379,
+        'fallback' => 'default',
+    ]);
+
+Si le serveur Redis tombait en erreur de manière inattendue, l'écriture dans le
+cache avec la configuration ``redis`` se repliera sur la configuration ``default``.
+Si l'écriture dans la configuration ``default`` échouait *elle aussi*, le moteur
+se replierait à nouveau sur un autre 'fallback', ici le ``NullEngine``, et
+empêcherait l'application de lancer une exception.
+
+.. versionadded:: 3.5.0
+    Les fallbacks pour moteur de cache ont été ajoutés.
+
 Suppression de Configuration de Cache
 -------------------------------------
 
