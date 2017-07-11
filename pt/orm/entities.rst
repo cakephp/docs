@@ -103,19 +103,19 @@ um array::
 Accessors & Mutators
 ====================
 
-In addition to the simple get/set interface, entities allow you to provide
-accessors and mutator methods. These methods let you customize how properties
-are read or set.
+Além da simple interface get/set, as entidades permitem que você forneça
+métodos acessadores e mutadores. Esses métodos deixam você personalizar
+como as propriedades são lidas ou definidas.
 
-Accessors use the convention of ``_get`` followed by the CamelCased version of
-the field name.
+Acessadores usam a convenção de ``_get`` seguido da versão CamelCased do nome
+do campo.
 
 .. php:method:: get($field)
 
-They receive the basic value stored in the ``_properties`` array
-as their only argument. Accessors will be used when saving entities, so be
-careful when defining methods that format data, as the formatted data will be
-persisted. For example::
+Eles recebem o valor básico armazenado no array ``_properties`` como seu
+único argumento. Acessadores serão usadas ao salvar entidades, então seja
+cuidadoso ao definir métodos que formatam dados, já que os dados formatados
+serão persistido. Por exemplo::
 
     namespace App\Model\Entity;
 
@@ -129,23 +129,28 @@ persisted. For example::
         }
     }
 
-The accessor would be run when getting the property through any of these two ways::
+O acessador seria executado ao obter a propriedade através de qualquer uma dessas
+duas formas::
 
     echo $user->title;
     echo $user->get('title');
 
-You can customize how properties get set by defining a mutator:
+
+
+Você pode personalizar como as propriedades são atribuidas definindo um mutador: 
 
 .. php:method:: set($field = null, $value = null)
 
-Mutator methods should always return the value that should be stored in the
-property. As you can see above, you can also use mutators to set other
-calculated properties. When doing this, be careful to not introduce any loops,
-as CakePHP will not prevent infinitely looping mutator methods.
+Os métodos mutadores sempre devem retornar o valor que deve ser armazenado na
+propriedade. Como você pode ver acima, você também pode usar mutadores para
+atribuir outras propriedades calculadas. Ao fazer isso, seja cuidadoso para não
+introduzir nenhum loos, já que o CakePHP não impedirá os métodos mutadores de
+looping infinitos.
 
-Mutators allow you to convert properties as they are set, or create calculated
-data. Mutators and accessors are applied when properties are read using object
-notation, or using ``get()`` and ``set()``. For example::
+Os mutadores permitem você converter as propriedades conforme são atribuidas, ou
+criar dados calculados. Os mutadores e acessores são aplicados quando as
+propriedades são lidas usando notação de objeto (object notation), ou usando os
+métodos ``get()`` e ``set()``. Por exemplo::
 
     namespace App\Model\Entity;
 
@@ -162,8 +167,8 @@ notation, or using ``get()`` and ``set()``. For example::
 
     }
 
-The mutator would be run when setting the property through any of these two
-ways::
+O mutador seria executado ao atribuir a propriedade através de qualquer uma
+dessas duas formas::
 
     $user->title = 'foo'; // slug is set as well
     $user->set('title', 'foo'); // slug is set as well
