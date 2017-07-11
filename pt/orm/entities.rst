@@ -204,51 +204,52 @@ Tenha em mente que as propriedades virtuais não podem ser usadas nos finds. Se
 você deseja que as propriedades virtuais façam parte de representações JSON ou
 array de suas entidades, consulte :ref:`exposing-virtual-properties`.
 
-Checking if an Entity Has Been Modified
-=======================================
+Verificando se uma Entidade Foi Modificada
+==========================================
 
 .. php:method:: dirty($field = null, $dirty = null)
 
-You may want to make code conditional based on whether or not properties have
-changed in an entity. For example, you may only want to validate fields when
-they change::
+Você pode querer fazer código condicional com base em se as propriedades foram
+modificadas ou não em uma entidade. Por exemplo, você pode só querer validar 
+campos quando eles mudarem::
 
     // See if the title has been modified.
     $article->dirty('title');
 
-You can also flag fields as being modified. This is handy when appending into
-array properties::
+Você também pode marcar campos como sendo modificados. Isso é útil quando
+adiciona item em propriedades do tipo array::
 
-    // Add a comment and mark the field as changed.
+    // Adiciona um comentário e marca o campo como modificado
     $article->comments[] = $newComment;
     $article->dirty('comments', true);
 
-In addition you can also base your conditional code on the original property
-values by using the ``getOriginal()`` method. This method will either return
-the original value of the property if it has been modified or its actual value.
+Além disso, você também pode basear o seu código condicional nos valores de
+proprieades originais usando o método ``getOriginal()``. Esse método retornará
+o valor original da propriedade se tiver sido modificado ou seu valor real.
 
-You can also check for changes to any property in the entity::
+Você também pode verificar se há mudanças em qualquer propriedade na entidade::
 
-    // See if the entity has changed
+    // Verifica se a entidade foi modificada
     $article->dirty();
 
-To remove the dirty mark from fields in an entity, you can use the ``clean()``
-method::
+Para remover a marca de modificação (dirty flag) em um entidade, você pode usar
+o método ``clean()``::
 
     $article->clean();
 
-When creating a new entity, you can avoid the fields from being marked as dirty
-by passing an extra option::
+Ao criar uma nova entidade, você pode evitar que os campos sejam marcados como
+modificados (dirty) passando uma opção extra::
 
     $article = new Article(['title' => 'New Article'], ['markClean' => true]);
 
-To get a list of all dirty properties of an ``Entity`` you may call::
+Para obter uma lista de todos as propriedades modificada (dirty) de uma ``Entity``,
+você pode chamar::
 
     $dirtyFields = $entity->getDirty();
 
 .. versionadded:: 3.4.3
 
-    ``getDirty()`` has been added.
+    ``getDirty()`` foi adicionado.
 
 
 Validation Errors
