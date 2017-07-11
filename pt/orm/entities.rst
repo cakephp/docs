@@ -103,7 +103,7 @@ um array::
 Accessors & Mutators
 ====================
 
-Além da simple interface get/set, as entidades permitem que você forneça
+Além da simples interface get/set, as entidades permitem que você forneça
 métodos acessadores e mutadores. Esses métodos deixam você personalizar
 como as propriedades são lidas ou definidas.
 
@@ -134,8 +134,6 @@ duas formas::
 
     echo $user->title;
     echo $user->get('title');
-
-
 
 Você pode personalizar como as propriedades são atribuidas definindo um mutador: 
 
@@ -175,12 +173,12 @@ dessas duas formas::
 
 .. _entities-virtual-properties:
 
-Creating Virtual Properties
----------------------------
+Criando Propriedades Virtuais
+-----------------------------
 
-By defining accessors you can provide access to fields/properties that do not
-actually exist. For example if your users table has ``first_name`` and
-``last_name`` you could create a method for the full name::
+Ao definir acessadores, você pode fornecer acesso aos campos/propriedades que
+não existem. Por exemplo, se sua tabela users tem ``first_name`` e
+``last_name``, você poderia criar um método para o ``full_name``::
 
     namespace App\Model\Entity;
 
@@ -197,15 +195,14 @@ actually exist. For example if your users table has ``first_name`` and
 
     }
 
-You can access virtual properties as if they existed on the entity. The property
-name will be the lower case and underscored version of the method::
+Você pode acessar propriedades virtuais como se elas existissem na entidade.
+O nome da propriedade será a versão lower case e underscored do método::
 
     echo $user->full_name;
 
-Do bear in mind that virtual properties cannot be used in finds. If you want
-virtual properties to be part of JSON or array representations of your entities,
-see :ref:`exposing-virtual-properties`.
-
+Tenha em mente que as propriedades virtuais não podem ser usadas nos finds. Se
+você deseja que as propriedades virtuais façam parte de representações JSON ou
+array de suas entidades, consulte :ref:`exposing-virtual-properties`.
 
 Checking if an Entity Has Been Modified
 =======================================
