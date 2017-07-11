@@ -595,13 +595,11 @@ retournées par les associations et les filtrer par conditions::
 
     // Dans un controller ou une méthode de table.
 
-    $query = $articles->find()->contain([
-        'Comments' => function ($q) {
-           return $q
-                ->select(['body', 'author_id'])
-                ->where(['Comments.approved' => true]);
-        }
-    ]);
+    $query = $articles->find()->contain('Comments', function ($q) {
+       return $q
+            ->select(['body', 'author_id'])
+            ->where(['Comments.approved' => true]);
+    });
 
 Cela fonctionne aussi pour la pagination au niveau du Controller::
 
@@ -629,16 +627,18 @@ en utilisant la notation par point::
         }
     ]);
 
-Si vous avez défini certaines méthodes de finder personnalisées dans votre table
-associée, vous pouvez les utiliser à l'intérieur de ``contain()``::
+Dans l'exemple ci-dessus, vous obtiendrez les auteurs même s'ils n'ont pas
+de profil publié. Pour ne récupérer que les auteurs avec un profil publié,
+utilisez :ref:`matching() <filtering-by-associated-data>`.
+
+Si vous avez des méthodes de finder personnalisées dans votre table associée,
+vous pouvez les utiliser à l'intérieur de ``contain()``::
 
     // Récupère tous les articles, mais récupère seulement les commentaires qui
     // sont approuvés et populaires.
-    $query = $articles->find()->contain([
-        'Comments' => function ($q) {
-           return $q->find('approved')->find('popular');
-        }
-    ]);
+    $query = $articles->find()->contain('Comments', function ($q) {
+        return $q->find('approved')->find('popular');
+    });
 
 .. note::
 
