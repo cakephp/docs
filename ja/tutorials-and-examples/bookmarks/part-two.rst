@@ -128,7 +128,7 @@ AppController に追加しましょう。 ::
     public function initialize()
     {
         parent::initialize();
-        // 許可するアクション一覧に logout を追加
+        // 許可するアクション一覧に 'add' アクションを追加
         $this->Auth->allow(['logout', 'add']);
     }
 
