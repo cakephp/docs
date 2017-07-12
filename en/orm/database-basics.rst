@@ -200,7 +200,9 @@ password
 database
     The name of the database for this connection to use. Avoid using ``.`` in
     your database name. Because of how it complicates identifier quoting CakePHP
-    does not support ``.`` in database names. Especially if you use sqlite database.If you just provide the database name (i.e in config/app.php 'database' => 'my_app.db') the database will be search by cake in webroot. Don't put your database in webroot it is a security issue. You can put it in the application ROOT directory. The config file should look  like to 'database' => ROOT . DS . 'my_app.db'.
+    does not support ``.`` in database names. The path to your SQLite database
+    should be an absolute path (e.g. ``ROOT . DS . 'my_app.db'``) to avoid
+    incorrect paths caused by relative paths.
 port (*optional*)
     The TCP port or Unix socket used to connect to the server.
 encoding
