@@ -230,7 +230,7 @@ Example Usage::
     );
 
 .. versionchanged:: 2.10.0
-    The smallinteger and tinyinteger types were added in 2.10.0
+    The ``smallinteger`` and ``tinyinteger`` types were added in 2.10.0
 
 validate
 ========

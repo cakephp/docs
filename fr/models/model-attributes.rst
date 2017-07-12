@@ -187,12 +187,16 @@ text
 uuid
     Correspond au type UUID si une base de données en fournit un, sinon cela
     générera un champ CHAR(36).
+tinyinteger
+    Correspond aux types TINYINT ou SMALLINT fournis par la base de données.
+smallinteger
+    Correspond au type SMALLINT fourni par la base de données.
 integer
     Correspond aux types INTEGER et SMALLINT fournis par la base de données.
 biginteger
     Correspond au type BIGINT fourni par la base de données.
 decimal
-    Correspond aux types DECIMAL et NUMERIC.
+    Correspond aux types DECIMAL ou NUMERIC.
 float
     Correspond aux types REAL et DOUBLE PRECISION.
 boolean
@@ -231,6 +235,10 @@ Exemple d'utilisation::
         ),
         'message' => array('type' => 'text')
     );
+
+
+.. versionchanged:: 2.10.0
+    Les types ``smallinteger`` et ``tinyinteger`` ont été ajoutées dans 2.10.0
 
 validate
 ========
