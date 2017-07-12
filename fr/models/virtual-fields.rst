@@ -116,6 +116,79 @@ votre model::
 Cela permet à vos champs virtuels de travailler pour n'importe quel alias que
 vous donnez à un model.
 
+Pagination et Champs Virtuels définis dans un controller avec des JOIN
+======================================================================
+
+L'exemple suivant vous permet d'avoir un compteur d'associations hasMany et vous
+permet d'utiliser les champs virtuels. Par exemple, si vous avez le lien suivant
+de 'sorting' dans votre template::
+
+    // Crée un lien de 'sorting' pour un champ virtuel
+    $this->Paginator->sort('ProductsItems.Total','Items Total');
+
+Vous pourrez ensuite utiliser la configuration de pagination suivante dans votre
+controller::
+
+    $this->Products->recursive = -1;
+
+    // Association Products hasMany ProductsItems
+    $this->Products->ProductsItems->virtualFields['Total'] = 'count(ProductsItems.products_id)';
+
+    // Conditions 'where' dans l'ORM
+    $where = array(
+        'fields' => array(
+            'Products.*',
+            'count(ProductsItems.products_id) AS ProductsItems__Total',
+        ),
+        'joins' => array(
+            array(
+                'table' => 'products_items',
+                'alias' => 'ProductsItems',
+                'type' => 'LEFT',
+                'conditions' => array(
+                    'ProductsItems.products_id = Products.id',
+                )
+            )
+        ),
+        'group' => 'ProductsItems.products_id'
+    );
+
+    // Définit les conditions dans le Paginator
+    $this->paginate = $where;
+
+    // Récupération des données
+    $data = $this->Paginator->paginate();
+
+Ce qui retournerait quelque chose comme::
+
+   Array
+   (
+       [0] => Array
+           (
+               [Products] => Array
+                   (
+                       [id] => 1234,
+                       [description] => 'Text bla bla...',
+                   )
+                [ProductsItems] => Array
+                    (
+                        [Total] => 25
+                    )
+           )
+        [1] => Array
+           (
+               [Products] => Array
+                   (
+                       [id] => 4321,
+                       [description] => 'Text 2 bla bla...',
+                   )
+                [ProductsItems] => Array
+                    (
+                        [Total] => 50
+                    )
+           )
+    )
+
 Champs virtuels dans les requêtes SQL
 =====================================
 
