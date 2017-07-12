@@ -558,13 +558,11 @@ associations and filter them by conditions::
 
     // In a controller or table method.
 
-    $query = $articles->find()->contain([
-        'Comments' => function ($q) {
-           return $q
-                ->select(['body', 'author_id'])
-                ->where(['Comments.approved' => true]);
-        }
-    ]);
+    $query = $articles->find()->contain('Comments', function ($q) {
+       return $q
+            ->select(['body', 'author_id'])
+            ->where(['Comments.approved' => true]);
+    });
 
 This also works for pagination at the Controller level::
 
@@ -591,16 +589,16 @@ notation::
         }
     ]);
 
-If you have defined some custom finder methods in your associated table, you can
-use them inside ``contain()``::
+In the above example, you'll still get authors even if they don't have
+a published profile. To only get authors with a published profile use
+:ref:`matching() <filtering-by-associated-data>`. If you have defined custom
+finders in your associations, you can use them inside ``contain()``::
 
     // Bring all articles, but only bring the comments that are approved and
     // popular.
-    $query = $articles->find()->contain([
-        'Comments' => function ($q) {
-           return $q->find('approved')->find('popular');
-        }
-    ]);
+    $query = $articles->find()->contain('Comments', function ($q) {
+        return $q->find('approved')->find('popular');
+    });
 
 .. note::
 

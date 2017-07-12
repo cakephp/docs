@@ -422,6 +422,12 @@ CakePHP は、変更可能な仲間と同じインターフェイスを実装す
 日付を操作するテキストの入力を作成するとき、きっと地域化された日時の文字列を受け入れて
 パースしたいはずです。 :ref:`parsing-localized-dates` をご覧ください。
 
+サポートされるタイムゾーン
+==========================
+
+CakePHP はすべての有効な PHP タイムゾーンをサポートしています。サポートされるタイムゾーンの一覧は、
+`このページをご覧ください <http://php.net/manual/ja/timezones.php>`_ 。
+
 .. meta::
     :title lang=ja: Time
     :description lang=ja: Time class helps you format time and test time.

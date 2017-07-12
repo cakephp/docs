@@ -10,3 +10,18 @@ Associações - Conectando tabelas
 
     Você pode consultar a versão em inglês deste tópico através do seletor de
     idiomas localizado ao lado direito do campo de buscas da documentação.
+    
+.. _has-one-associations:
+
+Associações HasOne
+==================
+
+.. _has-many-associations:
+
+Associações HasMany
+===================
+
+.. _belongs-to-many-associations:
+
+Associações BelongsToMany
+=========================

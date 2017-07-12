@@ -137,7 +137,7 @@ voulons que les utilisateurs s'inscrivent à notre application. Dans
     public function initialize()
     {
         parent::initialize();
-        // Ajoute logout à la liste des actions autorisées.
+        // Ajoute l'action 'add' à la liste des actions autorisées.
         $this->Auth->allow(['logout', 'add']);
     }
 

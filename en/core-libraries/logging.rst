@@ -279,6 +279,10 @@ log messages. Alternatively, you can use convenience methods like
 level. Using a level that is not in the above levels will result in an
 exception.
 
+.. note::
+    When ``levels`` is set to an empty value in a logger's configuration, it
+    will take messages of any level.
+
 .. _logging-scopes:
 
 Logging Scopes
@@ -291,9 +295,7 @@ you do other less critical logs.
 
 CakePHP exposes this concept as logging scopes. When log messages are written
 you can include a scope name. If there is a configured logger for that scope,
-the log messages will be directed to those loggers. If a log message is written
-to an unknown scope, loggers that handle that level of message will log the
-message. For example::
+the log messages will be directed to those loggers. For example::
 
     // Configure logs/shops.log to receive all levels, but only
     // those with `orders` and `payments` scope.
@@ -317,13 +319,17 @@ message. For example::
 
     Log::warning('this gets written only to shops.log', ['scope' => ['orders']]);
     Log::warning('this gets written to both shops.log and payments.log', ['scope' => ['payments']]);
-    Log::warning('this gets written to both shops.log and payments.log', ['scope' => ['unknown']]);
 
 Scopes can also be passed as a single string or a numerically indexed array.
 Note that using this form will limit the ability to pass more data as context::
 
     Log::warning('This is a warning', ['orders']);
     Log::warning('This is a warning', 'payments');
+
+.. note::
+    When ``scopes`` is set to an empty array or ``null`` in a logger's
+    configuration, it will take messages of any scope. Setting it to ``false``
+    will only match messages without scope.
 
 Log API
 =======

@@ -433,3 +433,8 @@ and parse localized datetime strings. See the :ref:`parsing-localized-dates`.
     :title lang=en: Time
     :description lang=en: Time class helps you format time and test time.
     :keywords lang=en: time,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt
+
+Supported Timezones
+===================
+
+CakePHP supports all valid PHP timezones. For a list of supported timezones, `see this page <http://php.net/manual/en/timezones.php>`_.

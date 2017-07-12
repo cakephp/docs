@@ -105,8 +105,8 @@ element the Xml will fail to generate.
 
 .. versionadded:: 3.1.0
 
-    You can also set ``_serialize`` to ``true`` to serialize all view variables
-    instead of explicitly specifying them.
+    In this version, the variable ``_serialize`` is automaticaly set to ``true``
+    to serialize all view variables instead of explicitly specifying them.
 
 Using a Data View with Template Files
 =====================================
@@ -139,7 +139,8 @@ output the serialized content.
 .. note::
     As of 3.1.0 AppController, in the application skeleton automatically adds
     ``'_serialize' => true`` to all XML/JSON requests. You will need to remove
-    this code from the beforeRender callback if you want to use view files.
+    this code from the beforeRender callback or set ``'_serialize' => false`` in
+    your controller's action if you want to use view files.
 
 
 Creating XML Views

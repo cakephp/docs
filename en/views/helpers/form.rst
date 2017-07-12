@@ -2567,8 +2567,7 @@ Creating Controls for a Whole Entity
 .. php:method:: allControls(array $fields, $options = [])
 
 * ``$fields`` - Optional. An array of customizations for the fields that will
-  be generated to generate. Allows setting custom types, labels and other
-  options.
+  be generated. Allows setting custom types, labels and other options.
 * ``$options`` - Optional. An array of options. Valid keys are:
 
   #. ``'fieldset'`` - Set this to ``false`` to disable the fieldset.
@@ -2658,7 +2657,7 @@ Adding Custom Widgets
 CakePHP makes it easy to add custom control widgets in your application, and use
 them like any other control type. All of the core control types are implemented as
 widgets, which means you can override any core widget with your own
-implemenation as well.
+implementation as well.
 
 Building a Widget Class
 -----------------------
