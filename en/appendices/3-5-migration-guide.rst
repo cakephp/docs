@@ -135,6 +135,17 @@ behavior that may affect your application:
 New Features
 ============
 
+New Console Runner
+------------------
+
+3.5.0 adds ``Cake\Console\CommandRunner``. This class alongside
+``Cake\Console\CommandCollection`` integrate the CLI environment with the new
+``Application`` class. Application classes can now implement a ``console()``
+hook that allows them to have full control over which CLI commands are exposed,
+how they are named and how the shells get their dependencies. Adopting this new
+class requires replacing the contents of your ``bin/cake.php`` file with the
+`following file <https://github.com/cakephp/app/tree/3.next/bin/cake.php>`_.
+
 Cache
 -----
 
