@@ -252,47 +252,48 @@ você pode chamar::
     ``getDirty()`` foi adicionado.
 
 
-Validation Errors
-=================
+Erros de Validação
+==================
 
 .. php:method:: errors($field = null, $errors = null)
 
-After you :ref:`save an entity <saving-entities>` any validation errors will be
-stored on the entity itself. You can access any validation errors using the
-``getErrors()`` or ``getError()`` method::
+Depois que você :ref:`salva uma entidade <saving-entities>`, quaisquer erros de
+validação serão armazenados na própria entidade. Você pode acessar os erros
+de validação usando os métodos ``getErrors()`` ou ``getError()``::
 
-    // Get all the errors
+    // Obtem todos os errors
     $errors = $user->getErrors();
-    // Prior to 3.4.0
+    // Antes da versão 3.4.0
     $errors = $user->errors();
 
-    // Get the errors for a single field.
+    // Obtem os errors para um único campo.
     $errors = $user->getError('password');
-    // Prior to 3.4.0
+    // Antes da versão 3.4.0
     $errors = $user->errors('password');
 
-The ``setErrors()`` or ``setError()`` method can also be used to set the errors on an entity, making
-it easier to test code that works with error messages::
+Os métodos ``setErrors()`` ou ``setError()`` podem também ser usados para definir
+erros em uma entidade, tornando mais fácil testar código que trabalha com mensagens
+de erro::
 
     $user->setError('password', ['Password is required']);
     $user->setErrors(['password' => ['Password is required'], 'username' => ['Username is required']]);
-    // Prior to 3.4.0
+    // Antes da versão 3.4.0
     $user->errors('password', ['Password is required.']);
 
 .. _entities-mass-assignment:
 
-Mass Assignment
-===============
+Atribuição em Massa
+===================
 
-While setting properties to entities in bulk is simple and convenient, it can
-create significant security issues. Bulk assigning user data from the request
-into an entity allows the user to modify any and all columns. When using
-anonymous entity classes or creating the entity class with the :doc:`/bake`
-CakePHP does not protect against mass-assignment.
+Embora a definição de propriedades para entidades em massa seja simples e conveniente,
+isso pode criar problemas de segurança significativos. Atribuindo em massa dados de
+usuário apartir da requisição a uma entidade permite ao usuário modificar todas e
+quaisquer colunas. Ao usar classes de entidade anônimas ou criar a classe de entidade
+com :doc:`/bake, o CakePHP não protege contra a atribuição em massa.
 
-The ``_accessible`` property allows you to provide a map of properties and
-whether or not they can be mass-assigned. The values ``true`` and ``false``
-indicate whether a field can or cannot be mass-assigned::
+A propriedade ``_accessible`` permite que você forneça um mapa de propriedades
+e se elas podem ou não ser atribuídas em massa. Os valores ``true`` e ``false``
+indicam se um campo pode ou não ser atribuído em massa::
 
     namespace App\Model\Entity;
 
@@ -306,8 +307,8 @@ indicate whether a field can or cannot be mass-assigned::
         ];
     }
 
-In addition to concrete fields there is a special ``*`` field which defines the
-fallback behavior if a field is not specifically named::
+Além dos campos concretos, existe um campo especial ``*`` que define o comportamento
+de falbback se um campo não for especificamente nomeado::
 
     namespace App\Model\Entity;
 
@@ -322,63 +323,63 @@ fallback behavior if a field is not specifically named::
         ];
     }
 
-.. note:: If the ``*`` property is not defined it will default to ``false``.
+.. note:: Se a propriedade ``*`` não for definida, seu padrão será ``false``.
 
-Avoiding Mass Assignment Protection
------------------------------------
+Evitando Proteção de Atribuição em Massa
+----------------------------------------
 
-When creating a new entity using the ``new`` keyword you can tell it to not
-protect itself against mass assignment::
+Ao criar uma nova entidade usando a palavra-chave ``new``, você pode dizer para
+não se proteger de atribuição em massa::
 
     use App\Model\Entity\Article;
 
     $article = new Article(['id' => 1, 'title' => 'Foo'], ['guard' => false]);
 
-Modifying the Guarded Fields at Runtime
----------------------------------------
+Modificando os Campos Vigiados em Tempo de Execução
+---------------------------------------------------
 
-You can modify the list of guarded fields at runtime using the ``accessible``
-method::
+Você pode modificar a lista de campos vigiados em tempo de execução usando o
+método ``accessible``::
 
-    // Make user_id accessible.
+    // Faz user_id ser acessível.
     $article->accessible('user_id', true);
 
-    // Make title guarded.
+    // Faz title ser vigiado.
     $article->accessible('title', false);
 
 .. note::
 
-    Modifying accessible fields effects only the instance the method is called
-    on.
+    A modificação de campos afetam apenas a instância em que o método é
+    chamado.
 
-When using the ``newEntity()`` and ``patchEntity()`` methods in the ``Table``
-objects you can customize mass assignment protection with options. Please refer
-to the :ref:`changing-accessible-fields` section for more information.
+Ao usar os métodos ``newEntity()`` e ``patchEntity()`` nos objetos ``Table``,
+você pode personalizar a proteção de atribuição em massa com opções, Por favor 
+consulte a seção :ref:`changing-accessible-fields` para obter mais informações.
 
 Bypassing Field Guarding
 ------------------------
 
-There are some situations when you want to allow mass-assignment to guarded
-fields::
+Existem algumas situações em que você deseja permitir atribuição em massa
+para campos vigiados (guarded)::
 
     $article->set($properties, ['guard' => false]);
 
-By setting the ``guard`` option to ``false``, you can ignore the accessible
-field list for a single call to ``set()``.
+Definindo a opção ``guard`` como ``false``, você pode ignorar a lista de
+campos acessíveis para uma única chamado ao método ``set()``.
 
 
-Checking if an Entity was Persisted
------------------------------------
+Verificando se uma Entidade foi Persistida
+------------------------------------------
 
-It is often necessary to know if an entity represents a row that is already
-in the database. In those situations use the ``isNew()`` method::
+Frequentemente é necessário saber se uma entnidade representa uma linha que
+já está no banco de dados. Nessas situações, use o método ``isNew()``::
 
     if (!$article->isNew()) {
         echo 'This article was saved already!';
     }
 
-If you are certain that an entity has already been persisted, you can use
-``isNew()`` as a setter::
+Se você está certo que uma entidade já foi persistida, você pode usar
+``isNew()`` como um setter::
 
     $article->isNew(false);
 
