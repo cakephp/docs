@@ -202,6 +202,9 @@ type
     Un des types suivants
 
     * integer
+    * smallinteger
+    * tinyinteger
+    * biginteger
     * date
     * time
     * datetime
@@ -213,6 +216,8 @@ type
     * text
     * binary
 
+.. versionchanged:: 2.10.0
+    Les types ``smallinteger`` et ``tinyinteger`` ont été ajoutés dans 2.10.0
 
 La clé de Table `indexes`
 =========================

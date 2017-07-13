@@ -423,6 +423,9 @@ la définition de la table sont:
         - ``string``: redirige vers ``VARCHAR``.
         - ``text``: redirige vers ``TEXT``.
         - ``biginteger``: redirige vers ``BIGINT``.
+        - ``smallinteger``: redirige vers ``SMALLINT``
+        - ``tinyinteger``: redirige vers ``TINYINT`` ou ``SMALLINT`` en fonction
+          du moteur de base de données utilisé
         - ``integer``: redirige vers ``INT``.
         - ``float``: redirige vers ``FLOAT``.
         - ``decimal``: redirige vers ``DECIMAL``.
@@ -431,7 +434,7 @@ la définition de la table sont:
         - ``time``: redirige vers ``TIME``.
         - ``date``: redirige vers ``DATE``.
         - ``binary``: redirige vers ``BLOB``.
-        - ``boolean``: redirige vers ``TINYINT``.
+        - ``boolean``: redirige vers ``BOOLEAN`` (ou ``TINYINT`` pour MySQL).
 ``key``
     Défini à ``primary`` pour que le champ soit en AUTO\_INCREMENT, et une
     PRIMARY KEY pour la table.

@@ -236,8 +236,9 @@ la commande ``locale -a`` dans un terminal.
 
 Traduire les erreurs de validation de model
 ===========================================
+
 CakePHP va automatiquement extraire l'erreur de validation quand vous utilisez
-:doc:`i18n console task </console-and-shells>`. Par défaut, le domaine default
+:doc:`i18n console task </console-and-shells/i18n-shell>`. Par défaut, le domaine default
 est utilisé. Ceci peut être surchargé en configurant la propriété
 ``$validationDomain`` dans votre model::
 

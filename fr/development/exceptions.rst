@@ -111,6 +111,36 @@ applications clientes et aux utilisateurs.
 De plus, les exceptions de couche du framework suivantes sont disponibles, et
 seront lancées à partir de certains components du coeur de CakePHP:
 
+.. php:exception:: CakeException
+
+    Classe d'exception de base dans CakePHP. Toutes les exceptions lancées par
+    CakePHP étendront cette classe.
+
+Ces classes d'exception étendent toutes :php:exc:`CakeException`.
+En étendant CakeException, vous pouvez créer vos propres erreurs 'framework'.
+Toutes les Exceptions standards que CakePHP va aussi lancer les CakeException
+étendues.
+
+.. versionadded:: 2.3
+    CakeBaseException a été ajoutée
+
+.. php:exception:: CakeBaseException
+
+    La classe d'exception de base dans CakePHP.
+    Toutes les CakeExceptions et HttpExceptions ci-dessus étendent cette
+    classe.
+
+.. php:method:: responseHeader($header = null, $value = null)
+
+    Voir :php:func:`CakeResponse::header()`.
+
+Toutes les exceptions Http et CakePHP étendent la classe CakeBaseException, qui
+a une méthode pour ajouter les en-têtes à la réponse. Par exemple quand vous
+lancez une MethodNotAllowedException 405,
+le rfc2616 dit:
+"La réponse DOIT inclure un en-tête contenant une liste de méthodes valides
+pour la ressource requêtée."
+
 .. php:exception:: MissingViewException
 
     Le fichier de vue choisi n'a pas pu être trouvé.
@@ -170,36 +200,6 @@ seront lancées à partir de certains components du coeur de CakePHP:
     Accès privé à l'action. Soit les actions ont un accès
     privé/protegé/préfixé par _, ou essaient d'accéder aux routes préfixés de
     manière incorrecte.
-
-.. php:exception:: CakeException
-
-    Classe d'exception de base dans CakePHP. Toutes les exceptions lancées par
-    CakePHP étendront cette classe.
-
-Ces classes d'exception étendent toutes :php:exc:`CakeException`.
-En étendant CakeException, vous pouvez créer vos propres erreurs 'framework'.
-Toutes les Exceptions standards que CakePHP va aussi lancer les CakeException
-étendues.
-
-.. versionadded:: 2.3
-    CakeBaseException a été ajoutée
-
-.. php:exception:: CakeBaseException
-
-    La classe d'exception de base dans CakePHP.
-    Toutes les CakeExceptions et HttpExceptions ci-dessus étendent cette
-    classe.
-
-.. php:method:: responseHeader($header = null, $value = null)
-
-    Voir :php:func:`CakeResponse::header()`.
-
-Toutes les exceptions Http et CakePHP étendent la classe CakeBaseException, qui
-a une méthode pour ajouter les en-têtes à la réponse. Par exemple quand vous
-lancez une MethodNotAllowedException 405,
-le rfc2616 dit:
-"La réponse DOIT inclure un en-tête contenant une liste de méthodes valides
-pour la ressource requêtée."
 
 Utiliser les exceptions HTTP dans vos controllers
 =================================================
