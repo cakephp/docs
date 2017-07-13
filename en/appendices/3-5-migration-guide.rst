@@ -157,6 +157,8 @@ Cache
 Core
 ----
 
+* ``Cake\Core\Configure::read()`` now supports default values if the desired key
+  does not exist.
 * ``Cake\Core\ObjectRegistry`` now implements the ``Countable`` and
   ``IteratorAggregate`` interfaces.
 
