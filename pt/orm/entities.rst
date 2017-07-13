@@ -390,33 +390,37 @@ Se você está certo que uma entidade já foi persistida, você pode usar
 Lazy Loading Associations
 =========================
 
-While eager loading associations is generally the most efficient way to access
-your associations, there may be times when you need to lazily load associated
-data. Before we get into how to lazy load associations, we should discuss the
-differences between eager loading and lazy loading associations:
+Embora que eager loading de associações é geralmente o modo mais eficiente de
+acessar suas associações, pode exister momentos em que você precisa carregar
+seus dados sobre demanda (lazy load). Antes de entrar em como carregar
+associaçes sobre demanda, devemos discutir as diferenças entre eager loading e 
+lazy loading de associações:
 
 Eager loading
-    Eager loading uses joins (where possible) to fetch data from the
-    database in as *few* queries as possible. When a separate query is required,
-    like in the case of a HasMany association, a single query is emitted to
-    fetch *all* the associated data for the current set of objects.
+    Eager loading utiliza joins (onde possível) para buscar os dados do
+    banco de dados em *poucas* consultas possível. Quando uma consulta separada
+    é necessária, como no caso de uma associação HasMany, uma única consulta é
+    emitida para buscar *todos* os dados associados para o conjunto atual de
+    objetos.
 Lazy loading
-    Lazy loading defers loading association data until it is absolutely
-    required. While this can save CPU time because possibly unused data is not
-    hydrated into objects, it can result in many more queries being emitted to
-    the database. For example looping over a set of articles & their comments
-    will frequently emit N queries where N is the number of articles being
-    iterated.
+    Lazy loading difere o carregamento de associação até que seja absolutamente
+    necessário. Embora isso posso economizar tempo de CPU, porque possivelmente
+    dad
+    os não utilizados não são hidratados (hydrated) em objetos, isso pode
+    resultar em muitas outras consultas sendo emitidas para o banco de dados.
+    Por exemplo, fazer um loop sobre um conjunto de artigos e seus comentários
+    frequentemente emitirão N consultas onde N é o número de artigos sendo
+    iterados.
 
-While lazy loading is not included by CakePHP's ORM, you can just use one of the
-community plugins to do so. We recommend `the LazyLoad Plugin
+Embora lazy loading não esteja incluído no ORM do CakePHP, você pode usar um
+dos plugins da comunidade para fazer isso. Nós recomendamos `o LazyLoad Plugin
 <https://github.com/jeremyharris/cakephp-lazyload>`__
 
-After adding the plugin to your entity, you will be able to do the following::
+Depois de adicionar o plugin em sua entidade, você será capaz de fazer o seguinte::
 
     $article = $this->Articles->findById($id);
 
-    // The comments property was lazy loaded
+    // A propriedade comments foi carregado sobre demanda (lazy loaded)
     foreach ($article->comments as $comment) {
         echo $comment->body;
     }
