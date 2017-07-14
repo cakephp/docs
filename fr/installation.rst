@@ -140,7 +140,7 @@ Souvent, le plus facile est d'utiliser le ``include_path`` de PHP. Pour
 commencer, copiez CakePHP dans un répertoire. Pour cet exemple, nous utiliserons
 ``/home/mark/projects``::
 
-    git clone git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
+    git clone -b 2.x git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
 
 Cela copiera CakePHP dans votre répertoire ``/home/mark/projects``. Si vous ne
 voulez pas utiliser git, vous pouvez télécharger un zipball et les étapes

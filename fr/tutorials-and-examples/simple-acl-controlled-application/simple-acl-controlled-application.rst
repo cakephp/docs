@@ -43,14 +43,13 @@ Pour ce tutoriel vous aurez besoin de la dernière version 2.x.
 Vous pouvez aussi dupliquer le dépôt en utilisant
 `git <http://git-scm.com/>`_::
 
-    git clone git://github.com/cakephp/cakephp.git.
+    git clone -b 2.x git://github.com/cakephp/cakephp.git
 
-Une fois que vous avez votre copie toute récente de CakePHP, changez votre
-branche vers la dernière version de 2.0, configurez votre fichier
-``database.php`` et changez la valeur du Security.salt ("grain" de sécurité)
-dans votre fichier ``app/Config/core.php``. A ce stade, nous construirons un
-schéma simple de base de données sur lequel bâtir notre application. Exécutez
-les commandes SQL suivantes sur votre base de données::
+Une fois que vous avez votre copie de la dernière version 2.0 de CakePHP,
+configurez votre fichier ``database.php`` et changez la valeur du Security.salt
+("grain" de sécurité) dans votre fichier ``app/Config/core.php``. A ce stade,
+nous construirons un schéma simple de base de données sur lequel bâtir notre
+application. Exécutez les commandes SQL suivantes sur votre base de données::
 
    CREATE TABLE users (
        id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
