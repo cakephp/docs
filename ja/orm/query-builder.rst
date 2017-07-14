@@ -1313,7 +1313,7 @@ Expression ビルダーを使う際には、カラム名にユーザーデータ
 -------------------
 
 バインディングを使用することにより、多くの安全でない状況から保護することが可能です。
-:ref:`プリペアドステートメントへの値のバインディング <database-basics-binding-values>`
+:ref:`プリペアードステートメントへの値のバインディング <database-basics-binding-values>`
 と同様に、 :php:meth:`Cake\\Database\\Query::bind()` メソッドを使用して、
 クエリーに値をバインドすることができます。
 

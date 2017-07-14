@@ -979,7 +979,7 @@ replace
 ``dirty()`` の呼び出しがないと、更新された tags は保存されません。
 
 二つの既存のエンティティー間でアソシエーションを作りたいことがしばしばあるかもしれません。例えば、
-ユーザーがある記事を共同で編集するなど。これは ``link`` メソッドを使って、こんなふうに行います。 ::
+ユーザーがある記事を共同で編集するなど。これは ``link`` メソッドを使って、次のようにします。 ::
 
     $article = $this->Articles->get($articleId);
     $user = $this->Users->get($userId);
@@ -1004,7 +1004,7 @@ belongsToMany アソシエーションを保存する時に、いくつかの追
 --------------------------------
 
 いくつかの状況では、BelongsToMany アソシエーションを結合するテーブルは、追加のカラムを持ちます。
-CakePHP では、これらのカラムへのプロパティーを保存は簡単です。
+CakePHP はこれらのプロパティーをカラムに保存することを簡単にします。
 belongsToMany アソシエーションのそれぞれのエンティティーは、 ``_joinData`` プロパティーを持っていて、
 これは結合テーブル上の追加のカラムを含んでいます。このデータは配列か Entity
 インターフェイスになります。例えば、もしも Students BelongsToMany Courses であれば、
@@ -1042,7 +1042,7 @@ belongsToMany アソシエーションのそれぞれのエンティティーは
         'associated' => ['Courses._joinData']
     ]);
 
-``FormHelper`` で入力をどやって正しく構築するかについては :ref:`associated-form-inputs`
+``FormHelper`` で入力を正しく構築する方法については :ref:`associated-form-inputs`
 のドキュメントを参照してください。
 
 .. _saving-complex-types:
@@ -1176,7 +1176,7 @@ belongsToMany アソシエーションのそれぞれのエンティティーは
     }
 
 もし 一括更新をしつつ、かつ SQL 式を使う必要がある場合、内部的に ``updateAll()`` が
-準備済みステートメントを使うので、式オブジェクトを使う必要があります。 ::
+プリペアードステートメントを使うので、式オブジェクトを使う必要があります。 ::
 
     use Cake\Database\Expression\QueryExpression;
 
