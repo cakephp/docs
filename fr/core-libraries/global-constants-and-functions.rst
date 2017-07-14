@@ -216,6 +216,12 @@ dans votre application.
 
     Chemin vers la racine du répertoire lib.
 
+.. php:const:: CONFIG
+
+    Chemin vers le dossier app/Config.
+
+    .. versionadded:: 2.10.0
+
 .. php:const:: CORE_PATH
 
    Chemin vers le répertoire racine avec un slash à la fin.
