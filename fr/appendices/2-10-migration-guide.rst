@@ -37,7 +37,7 @@ Components
   ajoutez ``'clear' => true`` à la configuration du ``FlashComponent``.
 * ``PaginatorComponent`` supporte maintenant les paginators multiples via
   l'option ``queryScope``. Utiliser cette option lorsque vous paginez des données
-  forcera le ``PaginatorComponent`` a lire les données depuis les paramètres 'scopés'
+  forcera le ``PaginatorComponent`` à lire les données depuis les paramètres 'scopés'
   de la requête plutôt que les données de la requête mère.
 
 Helpers

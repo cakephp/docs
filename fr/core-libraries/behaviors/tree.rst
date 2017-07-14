@@ -811,7 +811,7 @@ voulez récupérer les noeuds seulement pour un certain niveau par exemple, quan
 vous générez des menus. Vous pouvez utiliser l'option ``level`` pour spécifier
 le champ qui sauvegardera le niveau de chaque noeud::
 
-    public $actAs = array('Tree' => array(
+    public $actsAs = array('Tree' => array(
         'level' => 'level', // Defaults to null, i.e. no level saving
     ));
 

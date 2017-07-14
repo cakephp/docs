@@ -40,6 +40,9 @@ Types d'expression
 |                                | valeur de chaîne y compris les valeurs de  |
 |                                | chaîne numérique.                          |
 +--------------------------------+--------------------------------------------+
+| ``{*}``                        | Représente n'importe quelle valeur, quel   |
+|                                | que soit le type.                          |
++--------------------------------+--------------------------------------------+
 | ``Foo``                        | Matche les clés avec exactement la même    |
 |                                | valeur keys with the exact same value.     |
 +--------------------------------+--------------------------------------------+

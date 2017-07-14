@@ -9,6 +9,22 @@ Glossaire
 
             array('controller' => 'posts', 'action' => 'view', 5)
 
+        Ou un exemple plus complexe::
+
+            array(
+                'subdomain' => 'dev',
+                'plugin' => 'account',
+                'prefix' => 'admin',
+                'controller' => 'profiles',
+                'action' => 'edit',
+                10257
+                '#' => 'email',
+                '?' => array(
+                    'reset' => true,
+                ),
+                'full_base' => true,
+            )
+
     attributs HTML
         Un tableau de clé => valeurs qui sont composées dans les attributs
         HTML. Par exemple::
