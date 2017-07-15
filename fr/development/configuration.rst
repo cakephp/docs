@@ -300,6 +300,18 @@ App.baseUrl
     pouvez trouver des instructions pour faire fonctionner l'URL rewriting
     pour d'autres serveurs dans la section
     :doc:`/installation/url-rewriting`.
+App.fullBaseUrl
+    Le nom de domaine complet (incluant le protocole) de la racine de votre application.
+    Pour configurer CakePHP à utiliser une URL spécifique pour n'importe quelle
+    génération d'URL dans votre application, utilisez cette variable de configuration.
+    Cela écrasera la détection automatique du domaine et vous permettra également
+    de faciliter la génération de lien depuis le CLI (par exemple, si vous envoyez
+    des emails). Si l'application est dans un sous-dossier, vous devriez également
+    définir ``App.base``.
+App.base
+    Le dossier de base où votre application est hébergée. Cette option doit être
+    utilisée si l'application est dans un sous-dossier et que ``App.fullBaseUrl``
+    est définie.
 App.encoding
     Définit quel encodage votre application utilise. Cet encodage est utilisé
     pour générer le charset dans le layout, et les entités d'encodage.
