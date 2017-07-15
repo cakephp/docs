@@ -18,9 +18,21 @@ ce que vous pensez qu'il doit faire.
 
 Installation via Composer
 -------------------------
-Les dernières versions de PHPUnit ne fonctionnent pas avec cake::
 
-    "phpunit/phpunit": "3.7.38"
+Pendant longtemps, CakePHP 2.x a seulement supporté PHPUnit 3.7.x.
+Pour installer PHPUnit comme dépendance "development" via Composer, exécutez
+la commande suivante dans le même dossier que votre fichier composer.json::
+
+    php composer.phar require --dev phpunit/phpunit:"3.7.38"
+
+Depuis CakePHP 2.10.0, un support basique de PHPUnit 4.x et 5.x a été ajouté.
+Pour mettre à jour PHPUnit et ses dépendances pour votre application, exécutez
+la commande suivante::
+
+    php composer.phar require --dev phpunit/phpunit:"4.* || 5.*" --update-with-dependencies
+
+Cela installera soit PHPUnit 4.x, soit PHPUnit 5.x, en fonction de votre système
+et de la configuration de votre composer.json.
 
 Installation via Package .phar
 ------------------------------
@@ -1021,6 +1033,11 @@ inscrire vos attentes de mock. Par exemple si vous voulez mock out
 
 En utilisant ``staticExpects`` vous serez capable de mock et de manipuler les
 méthodes statiques sur les components et models.
+
+.. warning::
+    Si vous utilisez PHPUnit 4 ou 5, ``staticExpects()`` n'existe plus.
+    Vous devrez à la place insérer les données nécessaires dans la session avec
+    ``CakeSession::write('Auth.User', $user)`` avant d'appeler votre action.
 
 Tester un Controller de Réponse JSON
 ------------------------------------
