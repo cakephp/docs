@@ -379,7 +379,8 @@ et découvrez des changements dans la structure de la base de données
     $ Console/cake schema create
     $ Console/cake schema update
 
-Toutes ces opérations peuvent être faîtes en mode sans écriture.
+Toutes ces opérations peuvent être faîtes en mode sans écriture ("dry-run")
+via l'option ``--dry``.
 
 Revenir en arrière
 ------------------
