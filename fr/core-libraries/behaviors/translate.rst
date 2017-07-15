@@ -89,7 +89,7 @@ Charer les traductions avec des Left Joins
 Lorsque vous définissez des champs qui sont traduits, vous pouvez aussi configurer
 le chargement des traductions pour qu'il se fasse via un ``LEFT JOIN`` à la place
 d'un ``INNER JOIN`` (qui est la méthode standard).
-Cela vous permettra de charger les enregistrements qui pourrait être partiellement
+Cela vous permettra de charger les enregistrements qui pourraient être partiellement
 traduits::
 
     class Post extends AppModel {
