@@ -1464,9 +1464,8 @@ activé. Vous pouvez utiliser ceci afin que votre test marche dans les deux cas:
 
     json_encode($data, Configure::read('debug') ? JSON_PRETTY_PRINT : 0);
 
-
-Console Integration Testing
-===========================
+Tests d'Intégration de la Console
+=================================
 
 Pour faciliter les tests de vos applications console, CakePHP est doté d'une classe
 ``ConsoleIntegrationTestCase`` qui peut être utiliser pour tester vos applications
@@ -1608,7 +1607,7 @@ que la sous-commande ``update_modified`` met à jour la table que nous passons
 comme premier argument. Premièrement, nous faisons l'assertion que le shell
 a terminé de s'exécuter avec le bon code de statut, ``0``. Ensuite, nous testons
 que notre sous-commande a fait son travail, c'est-à-dire qu'elle a correctement
-mis à jour la colonne ``modified`` de la table que nous avons passé en argument.
+mis à jour la colonne ``modified`` de la table que nous avons passée en argument.
 
 Gardez bien en mémoire que la méthode ``exec()`` accepte la même chaîne que ce
 que vous tapez dans votre CLI, donc vous pouvez ajouter des options et des arguments
@@ -1620,8 +1619,8 @@ Tester les Shells Interactifs
 Les applications console sont souvent interactives. Tester les shells interactifs
 avec la classe ``Cake\TestSuite\ConsoleIntegrationTestCase`` va seulement nécessiter
 que vous passiez les données attendues comme second paramètre de la méthode ``exec()``.
-Ces données être passées sous forme de tableau, dans l'ordre dans lequel ces données sont
-attendues.
+Ces données doivent être passées sous forme de tableau, dans l'ordre dans lequel ces
+données sont attendues.
 
 En continuant avec notre shell d'exemple, ajoutons une sous-commande interactive.
 Mettez à jour la classe de shell avec le code suivant::
@@ -1684,8 +1683,8 @@ Mettez à jour la classe de shell avec le code suivant::
 
 Maintenant que nous avons une sous-commande interactive, nous pouvons ajouter
 un test qui va permettre de vérifier que nous recevons la réponse attendue et
-un test où nous passerons une réponse que nous savons incorrecte. Ajouter les
-méthode suivantes dans **tests/TestCase/Shell/MyConsoleShellTest.php**::
+un test où nous passerons une réponse que nous savons incorrecte. Ajoutez les
+méthodes suivantes dans **tests/TestCase/Shell/MyConsoleShellTest.php**::
 
     public function testBestFramework()
     {

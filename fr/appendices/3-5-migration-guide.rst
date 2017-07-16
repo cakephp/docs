@@ -143,7 +143,7 @@ Nouveau Lanceur de Console
 intègre l'environnement CLI dans la nouvelle classe ``Application``.
 Les classes ``Application`` peuvent maintenant implémenter un hook ``console()``
 qui permet d'avoir un contrôle complet sur les commandes CLI exposées, comment
-elles sont nommés et comment les shells récupèrent leurs dépendances. Adopter
+elles sont nommées et comment les shells récupèrent leurs dépendances. Adopter
 cette nouvelle classe nécessite que vous remplaciez le contenu de votre fichier
 ``bin/cake.php`` par le `fichier suivant <https://github.com/cakephp/app/tree/3.next/bin/cake.php>`_.
 
