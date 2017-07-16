@@ -214,7 +214,7 @@ database
     Le nom de la base de données à utiliser pour cette connexion. Éviter
     d'utiliser ``.`` dans votre nom de base de données. Comme cela complique
     l'identifier quoting, CakePHP ne supporte pas ``.`` dans les noms de base de
-    données. Les chemins vers vos bases de données SQLite doivent être absolu
+    données. Les chemins vers vos bases de données SQLite doivent être absolus
     (par exemple ``ROOT . DS . 'my_app.db'``) pour éviter les erreurs de chemins
     incorrects à cause de chemins relatifs.
 port (*optionnel*)
