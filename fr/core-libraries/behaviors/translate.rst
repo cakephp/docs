@@ -83,8 +83,8 @@ récupération de données avec les locales.
     d'au moins un champ différent d'une clé primaire avant d'enregistrer un
     enregistrement.
 
-Charer les traductions avec des Left Joins
-==========================================
+Charger les traductions avec des Left Joins
+===========================================
 
 Lorsque vous définissez des champs qui sont traduits, vous pouvez aussi configurer
 le chargement des traductions pour qu'il se fasse via un ``LEFT JOIN`` à la place

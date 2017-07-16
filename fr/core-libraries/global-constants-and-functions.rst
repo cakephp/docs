@@ -81,7 +81,7 @@ la traduction de contenu.
     pour le compteur $count depuis le domaine $domain. Certaines langues ont
     plus d'une forme de pluriel dépendant du compteur.
 
-    Notez que la catégorie doit être spécifiée avec des une constante de classe
+    Notez que la catégorie doit être spécifiée avec une des constantes de classe
     I18n, au lieu des noms de constantes. Les valeurs sont:
 
     - I18n::LC_ALL - LC_ALL
@@ -106,7 +106,7 @@ la traduction de contenu.
 
 .. php:function:: __xn(string $context, string $singular, string $plural, integer $count, mixed $args = null)
 
-    Retourne la forme pluriel correct pour le message identifié par `$singular`` et
+    Retourne la forme plurielle correcte pour le message identifié par `$singular`` et
     ``$plural`` pour le compteur ``$count``. Cette méthode vous permet également de
     définir un "contexte". Cette méthode est particulièrement pratique car certaines
     langues ont plus d'une forme pluriel en fonction du nombre de l'objet à mettre au
@@ -179,7 +179,7 @@ la traduction de contenu.
     Le contexte est un identifiant unique pour la traduction qui permet de la rendre
     unique pour un domaine défini.
 
-    Notez que la catégorie doit être spécifiée avec des une constante de classe
+    Notez que la catégorie doit être spécifiée avec une des constantes de classe
     I18n, au lieu des noms de constantes. Les valeurs sont:
 
     - I18n::LC_ALL - LC_ALL
