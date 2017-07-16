@@ -99,6 +99,97 @@ la traduction de contenu.
     message identifié par $singular et $plural pour le compteur $count
     depuis le domaine $domain.
 
+.. php:function:: __x(string $context, string $singular, mixed $args = null)
+
+    Le contexte est un identifiant unique pour la traduction qui permet de la rendre
+    unique pour un domaine défini.
+
+.. php:function:: __xn(string $context, string $singular, string $plural, integer $count, mixed $args = null)
+
+    Retourne la forme pluriel correct pour le message identifié par `$singular`` et
+    ``$plural`` pour le compteur ``$count``. Cette méthode vous permet également de
+    définir un "contexte". Cette méthode est particulièrement pratique car certaines
+    langues ont plus d'une forme pluriel en fonction du nombre de l'objet à mettre au
+    pluriel.
+
+    Le contexte est un identifiant unique pour la traduction qui permet de la rendre
+    unique pour un domaine défini.
+
+.. php:function:: __dx(string $domain, string $context, string $msg, mixed $args = null)
+
+    Vous permet de remplacer le domaine courant lors de la recherche d'un
+    message. Cette méthode vous permet également de définir un "contexte".
+
+    Le contexte est un identifiant unique pour la traduction qui permet de la rendre
+    unique pour un domaine défini.
+
+.. php:function:: __dxn(string $domain, string $context, string $singular, string $plural, integer $count, mixed $args = null)
+
+    Vous permet de redéfinir le domaine courant pour une recherche simple
+    au pluriel d'un message. Retourne la forme pluriel correcte d'un
+    message identifié par ``$singular`` et ``$plural`` pour le compteur ``$count``
+    depuis le domaine ``$domain``.
+
+    Le contexte est un identifiant unique pour la traduction qui permet de la rendre
+    unique pour un domaine défini.
+
+.. php:function:: __dxc(string $domain, string $context, string $msg, integer $category, mixed $args = null)
+
+    Vous permet de remplacer le domaine courant pour la recherche d'un message.
+    Permet également de spécifier une catégorie.
+
+    Le contexte est un identifiant unique pour la traduction qui permet de la rendre
+    unique pour un domaine défini.
+
+    Notez que la catégorie doit être spécifiée avec une constante de classe I18n
+    au lieu du nom de la constante. Les valeurs sont:
+
+    - I18n::LC_ALL - LC_ALL
+    - I18n::LC_COLLATE - LC_COLLATE
+    - I18n::LC_CTYPE - LC_CTYPE
+    - I18n::LC_MONETARY - LC_MONETARY
+    - I18n::LC_NUMERIC - LC_NUMERIC
+    - I18n::LC_TIME - LC_TIME
+    - I18n::LC_MESSAGES - LC_MESSAGES
+
+.. php:function:: __xc(string $context, string $msg, integer $count, integer $category, mixed $args = null)
+
+    Le contexte est un identifiant unique pour la traduction qui permet de la rendre
+    unique pour un domaine défini.
+
+    Notez que la catégorie doit être spécifiée avec une constante de classe
+    I18n, au lieu d'un nom de constante. Les valeurs sont:
+
+    - I18n::LC_ALL - LC_ALL
+    - I18n::LC_COLLATE - LC_COLLATE
+    - I18n::LC_CTYPE - LC_CTYPE
+    - I18n::LC_MONETARY - LC_MONETARY
+    - I18n::LC_NUMERIC - LC_NUMERIC
+    - I18n::LC_TIME - LC_TIME
+    - I18n::LC_MESSAGES - LC_MESSAGES
+
+.. php:function:: __dxcn(string $domain, string $context, string $singular, string $plural, integer $count, integer $category, mixed $args = null)
+
+    Vous permet de remplacer le domaine courant pour la recherche simple au
+    pluriel d'un message. Cela permet également de spécifier une catégorie.
+    Retourne la forme correcte d'un message identifié par $singular et $plural
+    pour le compteur $count depuis le domaine $domain. Certaines langues ont
+    plus d'une forme de pluriel dépendant du compteur.
+
+    Le contexte est un identifiant unique pour la traduction qui permet de la rendre
+    unique pour un domaine défini.
+
+    Notez que la catégorie doit être spécifiée avec des une constante de classe
+    I18n, au lieu des noms de constantes. Les valeurs sont:
+
+    - I18n::LC_ALL - LC_ALL
+    - I18n::LC_COLLATE - LC_COLLATE
+    - I18n::LC_CTYPE - LC_CTYPE
+    - I18n::LC_MONETARY - LC_MONETARY
+    - I18n::LC_NUMERIC - LC_NUMERIC
+    - I18n::LC_TIME - LC_TIME
+    - I18n::LC_MESSAGES - LC_MESSAGES
+
 .. php:function:: __n(string $singular, string $plural, integer $count, mixed $args = null)
 
     Retourne la forme correcte d'un message identifié par $singular et $plural
