@@ -1468,7 +1468,7 @@ Tests d'Intégration de la Console
 =================================
 
 Pour faciliter les tests de vos applications console, CakePHP est doté d'une classe
-``ConsoleIntegrationTestCase`` qui peut être utiliser pour tester vos applications
+``ConsoleIntegrationTestCase`` qui peut être utilisée pour tester vos applications
 consoles et faire des assertions sur leurs résultats.
 
 .. versionadded:: 3.5.0
@@ -1478,7 +1478,7 @@ consoles et faire des assertions sur leurs résultats.
 Pour commencer à tester votre application console, créez un "test case" qui *extends*
 ``Cake\TestSuite\ConsoleIntegrationTestCase``. Cette classe contient une méthode
 ``exec()`` qui est utilisée pour exécuter votre commande. Vous pouvez passer la
-même chaîne que vous passerez au CLI dans cette méthode.
+même chaîne que vous passeriez au CLI dans cette méthode.
 
 Commençons par créer un shell très simple, stocké dans **src/Shell/MyConsoleShell.php**::
 
