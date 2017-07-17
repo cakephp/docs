@@ -899,7 +899,7 @@ Once registered, scoped middleware can be applied to specific
 scopes::
 
     $routes->scope('/cms', function ($routes) {
-        // Enable csrf & cookies middleware
+        // Enable CSRF & cookies middleware
         $routes->applyMiddleware('csrf', 'cookies');
         $routes->get('/articles/:action/*', ['controller' => 'Articles'])
     });
