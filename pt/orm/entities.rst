@@ -356,8 +356,8 @@ Ao usar os métodos ``newEntity()`` e ``patchEntity()`` nos objetos ``Table``,
 você pode personalizar a proteção de atribuição em massa com opções, Por favor 
 consulte a seção :ref:`changing-accessible-fields` para obter mais informações.
 
-Bypassing Field Guarding
-------------------------
+Ignorando Proteção de Campo
+-----------------------------
 
 Existem algumas situações em que você deseja permitir atribuição em massa
 para campos vigiados (guarded)::
