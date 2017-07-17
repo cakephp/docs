@@ -472,11 +472,11 @@ Ao construir APIs, você geralmente pode precisar converter entidades em arrays
 ou dados JSON. CakePHP torna isso simples::
 
     // Obtem um array.
-    // Associations will be converted with toArray() as well.
+    // Associações serão convertida com toArray() também.
     $array = $user->toArray();
 
     // Converte para JSON
-    // Associaçes serão convertida com jsonSerialize hook também.
+    // Associações serão convertida com jsonSerialize hook também.
     $json = json_encode($user);
 
 Ao converter uma entidade para um JSON, as listas de campos virtuais e ocultos
