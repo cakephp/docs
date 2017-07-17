@@ -405,8 +405,7 @@ Eager loading
 Lazy loading
     Lazy loading difere o carregamento de associação até que seja absolutamente
     necessário. Embora isso posso economizar tempo de CPU, porque possivelmente
-    dad
-    os não utilizados não são hidratados (hydrated) em objetos, isso pode
+    dados não utilizados não são hidratados (hydrated) em objetos, isso pode
     resultar em muitas outras consultas sendo emitidas para o banco de dados.
     Por exemplo, fazer um loop sobre um conjunto de artigos e seus comentários
     frequentemente emitirão N consultas onde N é o número de artigos sendo
