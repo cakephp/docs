@@ -508,8 +508,10 @@ virtuais que devem ser expostas::
 Esta lista pode ser modificada em tempo de execução usando o método
 ``virtualProperties``::
 
-Ocultando Proprieddes
----------------------
+    $user->virtualProperties(['full_name', 'is_admin']);
+
+Ocultando Propriedades
+----------------------
 
 Muitas vezes, há campos que você não deseja ser exportado em formatos
 de array ou JSON. Por exemplo geralmente não é sensato expor hash de 
