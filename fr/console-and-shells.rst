@@ -1,5 +1,5 @@
-Shells, Tasks & Outils de Console
-#################################
+Outils de Console, Shells, & Tasks
+##################################
 
 .. php:namespace:: Cake\Console
 
@@ -53,7 +53,7 @@ avec un exécutable dans le répertoire **bin**::
 
 Quand vous lancez la Console sans argument, cela affiche ce message d'aide::
 
-    Welcome to CakePHP v3.0.0 Console
+    Welcome to CakePHP v3.5.0 Console
     ---------------------------------------------------------------
     App : App
     Path: /Users/markstory/Sites/cakephp-app/src/
@@ -139,11 +139,6 @@ application, lancez::
 
 Vous devriez voir la sortie suivante::
 
-    Welcome to CakePHP Console
-    ---------------------------------------------------------------
-    App : app
-    Path: /Users/markstory/Sites/cake_dev/src/
-    ---------------------------------------------------------------
     Hello world.
 
 Comme mentionné précédemment, la méthode ``main()`` dans les shells est une
@@ -189,42 +184,6 @@ les arguments de position ou les paramètres. Cela parce que le premier argument
 de position ou l'option est interprété en tant que nom de commande. Si vous
 voulez utiliser des arguments et des options, vous devriez utiliser un autre
 nom de méthode que ``main``.
-
-Utiliser les Models dans vos shells
------------------------------------
-
-Vous avez souvent besoin d'accéder à la logique métier de votre application
-dans les utilitaires de shell. CakePHP rend cela super facile. Vous pouvez
-charger les models dans les shells, juste comme vous le feriez dans un
-controller en utilisant ``loadModel()``. Les models définis sont chargés en
-propriétés attachées à votre shell::
-
-    namespace App\Shell;
-
-    use Cake\Console\Shell;
-
-    class UserShell extends Shell
-    {
-
-        public function initialize()
-        {
-            parent::initialize();
-            $this->loadModel('Users');
-        }
-
-        public function show()
-        {
-            if (empty($this->args[0])) {
-                // Utilisez error() avant CakePHP 3.2
-                return $this->abort("Merci de rentrer un nom d'utilisateur.");
-            }
-            $user = $this->Users->findByUsername($this->args[0])->first();
-            $this->out(print_r($user, true));
-        }
-    }
-
-Le shell ci-dessus récupérera un utilisateur par son username et affichera
-l'information stockée dans la base de données.
 
 Les Tâches Shell
 ================
@@ -318,6 +277,42 @@ Chargera et retournera une instance ProjectTask. Vous pouvez charger les tâches
 à partir des plugins en utilisant::
 
     $progressBar = $this->Tasks->load('ProgressBar.ProgressBar');
+
+Utiliser les Models dans vos shells
+-----------------------------------
+
+Vous avez souvent besoin d'accéder à la logique métier de votre application
+dans les utilitaires de shell. CakePHP rend cela super facile. Vous pouvez
+charger les models dans les shells, juste comme vous le feriez dans un
+controller en utilisant ``loadModel()``. Les models définis sont chargés en
+propriétés attachées à votre shell::
+
+    namespace App\Shell;
+
+    use Cake\Console\Shell;
+
+    class UserShell extends Shell
+    {
+
+        public function initialize()
+        {
+            parent::initialize();
+            $this->loadModel('Users');
+        }
+
+        public function show()
+        {
+            if (empty($this->args[0])) {
+                // Utilisez error() avant CakePHP 3.2
+                return $this->abort("Merci de rentrer un nom d'utilisateur.");
+            }
+            $user = $this->Users->findByUsername($this->args[0])->first();
+            $this->out(print_r($user, true));
+        }
+    }
+
+Le shell ci-dessus récupérera un utilisateur par son username et affichera
+l'information stockée dans la base de données.
 
 Shell Helpers
 =============
@@ -1264,6 +1259,42 @@ un exemple de documentation:
             </argument>
         </arguments>
     </shell>
+
+Renommer des Commandes
+======================
+
+Par défaut, CakePHP va automatiquement chercher et mettre à disposition
+toutes les commandes dans votre application et ses plugins. Il est possible
+que vous souhaitiez réduire le nombre de commandes exposées lorsque vous
+construisez une application console indépendante. Pour cela, vous pouvez utiliser
+le hook ``console()`` de votre Application pour limiter le nombre de commandes
+qui sont exposées::
+
+    namespace App;
+
+    use App\Shell\UserShell;
+    use App\Shell\VersionShell;
+    use Cake\Http\BaseApplication;
+
+    class Application extends BaseApplication
+    {
+        public function console($commands)
+        {
+            // Ajout par nom de de classe
+            $commands->add('user', UserShell::class);
+
+            // Ajout par une instance
+            $commands->add('version', new VersionShell());
+
+            return $commands;
+        }
+    }
+
+Dans l'exemple ci-dessus, les seules commandes qui seront disponibles seront
+``help``, ``version`` and ``user``.
+
+.. versionadded:: 3.5.0
+    Le hook ``console`` a été ajouté.
 
 Routing dans shells / CLI
 =========================
