@@ -428,7 +428,7 @@ Criando Código Re-utilizável com Traits
 =======================================
 
 Você pode encontrar-se  precisando da mesma lógica em várias classes de entidades.
-As Traits do PHP são perfeitas para isso. Você pode colocar as traits da da sua
+As Traits do PHP são perfeitas para isso. Você pode colocar as traits da sua
 aplicação em **src/Model/Entity**. Por convensão traits no CakePHP são sufixadas
 com ``Trait`` para que elas possam ser discerníveis de classes ou interfaces.
 Traits são geralmente um bom complemento para os behaviors, permitindo que você
