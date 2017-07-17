@@ -427,12 +427,6 @@ Depois de adicionar o plugin em sua entidade, você será capaz de fazer o segui
 Criando Código Re-utilizável com Traits
 =======================================
 
-Você pode encontrar-se precisando da mesma lógica em classes de múltiplas entidades. Os traços do PHP são perfeitos para isso. Você pode colocar os traços do seu aplicativo em
-** src / Modelo / Entidade **. Por convenção, traços no CakePHP são sufixados com `` Trait`` para que possam ser discerníveis a partir de classes ou interfaces. Os traços são muitas vezes um bom complemento para os comportamentos, permitindo que você forneça funcionalidade para a tabela e objetos de entidade.
-
-Por exemplo, se tivéssemos um plugin SoftDeletable, ele poderia fornecer uma característica. Esta característica poderia fornecer métodos para marcar entidades como 'excluídas', o método `` softDelete`` poderia ser fornecido por uma característica ::
-
-
 Você pode encontrar-se  precisando da mesma lógica em várias classes de entidades.
 As Traits do PHP são perfeitos para isso. Você pode colocar as traits da da sua
 aplicação em **src/Model/Entity**. Por convensão traits no CakePHP são sufixadas
