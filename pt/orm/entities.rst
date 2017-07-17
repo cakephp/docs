@@ -289,7 +289,7 @@ Embora a definição de propriedades para entidades em massa seja simples e conv
 isso pode criar problemas de segurança significativos. Atribuindo em massa dados de
 usuário apartir da requisição a uma entidade permite ao usuário modificar todas e
 quaisquer colunas. Ao usar classes de entidade anônimas ou criar a classe de entidade
-com :doc:`/bake, o CakePHP não protege contra a atribuição em massa.
+com :doc:`/bake`, o CakePHP não protege contra a atribuição em massa.
 
 A propriedade ``_accessible`` permite que você forneça um mapa de propriedades
 e se elas podem ou não ser atribuídas em massa. Os valores ``true`` e ``false``
