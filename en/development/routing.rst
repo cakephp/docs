@@ -878,9 +878,13 @@ to do automatic view switching based on content types.
 Connecting Scoped Middleware
 ----------------------------
 
-Middleware can be applied to your entire application, or to an individual
-routing scope. Before middleware can be applied to a scope, it needs to be
-registered::
+While Middleware can be applied to your entire application, applying middleware
+to specific routing scopes offers more flexibility, as you can apply middleware
+only where it is needed allowing your middleware to not concern itself with
+how/where it is being applied.
+
+Before middleware can be applied to a scope, it needs to be
+registered into the route collection::
 
     // in config/routes.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
@@ -891,21 +895,61 @@ registered::
         $routes->registerMiddleware('cookies', new EncryptedCookiesMiddleware());
     });
 
-Once registered into the route builder, middleware can be applied to specific
+Once registered, scoped middleware can be applied to specific
 scopes::
 
     $routes->scope('/cms', function ($routes) {
-        // Enable registered middleware for this scope.
+        // Enable csrf & cookies middleware
         $routes->applyMiddleware('csrf', 'cookies');
+        $routes->get('/articles/:action/*', ['controller' => 'Articles'])
     });
 
-In situations where you have nested scopes, all middleware applied in each scope
-will be applied starting from the top-most scope and ending with the nested
-scopes. By applying middleware in specific scopes you can omit complicated URL
-matching logic out of your middleware layers and let them focus on their task.
+In situations where you have nested scopes, inner scopes will inherit the
+middleware applied in the containing scope::
+
+    $routes->scope('/api', function ($routes) {
+        $routes->applyMiddleware('ratelimit', 'auth.api');
+        $routes->scope('/v1', function ($routes) {
+            $routes->applyMiddleware('v1compat');
+            // Define routes here.
+        });
+    });
+
+In the above example, the routes defined in ``/v1`` will have 'ratelimit',
+'auth.api', and 'v1compat' middleware applied. If you re-open a scope, the
+middleware applied to routes in each scope will be isolated::
+
+    $routes->scope('/blog', function ($routes) {
+        $routes->applyMiddleware('auth');
+        // Connect the authenticated actions.
+    });
+    $routes->scope('/blog', function ($routes) {
+        // Connect the public actions for blog.
+    });
+
+In the above example, the two uses of the ``/blog`` scope do not share
+middleware. However, both of these scopes will inherit middleware defied in
+their enclosing scopes.
+
+
+Grouping Middleware
+-------------------
+
+To help keep your route code :abbr:`DRY (Do not Repeat Yourself)` middleware can
+be combined into groups. Once combined groups can be applied like middleware
+can::
+
+    $routes->registerMiddleware('cookie', new EncryptedCookieMiddleware());
+    $routes->registerMiddleware('auth', new AuthenticationMiddleware());
+    $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
+    $routes->middlewareGroup('web', ['cookie', 'auth', 'csrf']);
+
+    // Apply the group
+    $routes->applyMiddleware('web');
+
 
 .. versionadded:: 3.5.0
-    Scoped middleware support was added in 3.5.0
+    Scoped middleware & middleware groups were added in 3.5.0
 
 .. _resource-routes:
 
