@@ -171,7 +171,7 @@ Le premier argument est le contexte du message et le second est le message
 
 .. code-block:: pot
 
-     msgctxt "written communication"
+     msgctxt "communication écrite"
      msgid "He read the first letter"
      msgstr "Il a lu le premier courrier"
 
