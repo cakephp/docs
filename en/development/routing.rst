@@ -921,10 +921,10 @@ middleware applied to routes in each scope will be isolated::
 
     $routes->scope('/blog', function ($routes) {
         $routes->applyMiddleware('auth');
-        // Connect the authenticated actions.
+        // Connect the authenticated actions for the blog here.
     });
     $routes->scope('/blog', function ($routes) {
-        // Connect the public actions for blog.
+        // Connect the public actions for the blog here.
     });
 
 In the above example, the two uses of the ``/blog`` scope do not share
