@@ -138,7 +138,7 @@ New Features
 Scoped Middleware
 -----------------
 
-Middleware can now be conditionally applied to only routes in specific URL
+Middleware can now be conditionally applied to routes in specific URL
 scopes. This allows you to build specific stacks of middleware for different
 parts of your application without having to write URL checking code in your
 middleware. See the :ref:`connecting-scoped-middleware` section for more
