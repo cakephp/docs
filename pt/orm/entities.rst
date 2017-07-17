@@ -1,4 +1,4 @@
-Entities (Entidades)
+Entidades
 ####################
 
 .. php:namespace:: Cake\ORM
