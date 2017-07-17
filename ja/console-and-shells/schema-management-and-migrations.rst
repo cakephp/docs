@@ -205,7 +205,7 @@ type
     * binary
 
 .. versionchanged:: 2.10.0
-    smallinteger と tinyinteger 型は 2.10.0 で追加されました。
+    ``smallinteger`` 型と ``tinyinteger`` 型は 2.10.0 で追加されました。
 
 テーブルキー `indexes`
 ======================

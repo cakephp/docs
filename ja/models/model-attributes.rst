@@ -220,6 +220,9 @@ time
         'message' => array('type' => 'text')
     );
 
+.. versionchanged:: 2.10.0
+    ``smallinteger`` 型と ``tinyinteger`` 型は 2.10.0 で追加されました。
+
 validate
 ========
 

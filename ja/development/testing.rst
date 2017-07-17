@@ -420,7 +420,7 @@ CakePHP はフィクスチャに基づいたテストケースを実行するに
         - ``time``: ``TIME`` と対応
         - ``date``: ``DATE`` と対応
         - ``binary``: ``BLOB`` と対応
-        - ``boolean``: ``BOOLEAN`` または MySQL の ``TINYINT(1)`` と対応
+        - ``boolean``: ``BOOLEAN`` (または MySQL の ``TINYINT(1)``) と対応
 ``key``
     ``primary`` を設定するとフィールドに *field AUTO\_INCREMENT* と *PRIMARY KEY* が適用されます。
 ``length``
