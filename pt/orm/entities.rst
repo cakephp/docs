@@ -425,19 +425,25 @@ Depois de adicionar o plugin em sua entidade, você será capaz de fazer o segui
         echo $comment->body;
     }
 
-Creating Re-usable Code with Traits
-===================================
+Criando Código Re-utilizável com Traits
+=======================================
 
-You may find yourself needing the same logic in multiple entity classes. PHP's
-traits are a great fit for this. You can put your application's traits in
-**src/Model/Entity**. By convention traits in CakePHP are suffixed with
-``Trait`` so they can be discernible from classes or interfaces. Traits are
-often a good complement to behaviors, allowing you to provide functionality for
-the table and entity objects.
+Você pode encontrar-se precisando da mesma lógica em classes de múltiplas entidades. Os traços do PHP são perfeitos para isso. Você pode colocar os traços do seu aplicativo em
+** src / Modelo / Entidade **. Por convenção, traços no CakePHP são sufixados com `` Trait`` para que possam ser discerníveis a partir de classes ou interfaces. Os traços são muitas vezes um bom complemento para os comportamentos, permitindo que você forneça funcionalidade para a tabela e objetos de entidade.
 
-For example if we had SoftDeletable plugin, it could provide a trait. This trait
-could give methods for marking entities as 'deleted', the method ``softDelete``
-could be provided by a trait::
+Por exemplo, se tivéssemos um plugin SoftDeletable, ele poderia fornecer uma característica. Esta característica poderia fornecer métodos para marcar entidades como 'excluídas', o método `` softDelete`` poderia ser fornecido por uma característica ::
+
+
+Você pode encontrar-se  precisando da mesma lógica em várias classes de entidades.
+As Traits do PHP são perfeitos para isso. Você pode colocar as traits da da sua
+aplicação em **src/Model/Entity**. Por convensão traits no CakePHP são sufixadas
+com ``Trait`` para que elas possam ser discerníveis de classes ou interfaces.
+Traits são geralmente um bom complemento para os behaviors, permitindo que você
+forneça funcionalidade para objetos de tabela e entidade.
+
+Por exemplo, se tivéssemos plugin SoftDeletable, isso poderia fornecer uma trait.
+Essa trait poderia fornecer métodos para marcar entidades como 'deleted', o método
+``softDelete`` poderia ser fornecido por uma trait::
 
     // SoftDelete/Model/Entity/SoftDeleteTrait.php
 
@@ -453,8 +459,8 @@ could be provided by a trait::
 
     }
 
-You could then use this trait in your entity class by importing it and including
-it::
+Você poderia então usar essa trait na sua classe de entidade importando-a e
+incluíndo-a::
 
     namespace App\Model\Entity;
 
@@ -466,34 +472,34 @@ it::
         use SoftDeleteTrait;
     }
 
-Converting to Arrays/JSON
-=========================
+Convertendo para Arrays/JSON
+============================
 
-When building APIs, you may often need to convert entities into arrays or JSON
-data. CakePHP makes this simple::
+Ao construir APIs, você geralmente pode precisar converter entidades em arrays
+ou dados JSON. CakePHP torna isso simples::
 
-    // Get an array.
+    // Obtem um array.
     // Associations will be converted with toArray() as well.
     $array = $user->toArray();
 
-    // Convert to JSON
-    // Associations will be converted with jsonSerialize hook as well.
+    // Converte para JSON
+    // Associaçes serão convertida com jsonSerialize hook também.
     $json = json_encode($user);
 
-When converting an entity to an JSON the virtual & hidden field lists are
-applied. Entities are recursively converted to JSON as well. This means that if you
-eager loaded entities and their associations CakePHP will correctly handle
-converting the associated data into the correct format.
+Ao converter uma entidade para um JSON, as listas de campos virtuais e ocultos
+são aplicadas. Entidades são recursivamente convertidas para JSON também. Isso
+signinifica que, se você eager loaded entidades e suas associações, o CakePHP 
+manipulará corretamente a conversão dos dados associados no formato correto.
 
 .. _exposing-virtual-properties:
 
-Exposing Virtual Properties
----------------------------
+Expondo Propriedades Virtuais
+-----------------------------
 
-By default virtual fields are not exported when converting entities to
-arrays or JSON. In order to expose virtual properties you need to make them
-visible. When defining your entity class you can provide a list of virtual
-properties that should be exposed::
+Por padrão, campos virtuais não são exportados ao converter entidades para arrays
+ou JSON. Para expor propriedades virtuais, você precisa torna-las visíveis. Ao
+definir sua classe de entidade, você pode fornecer uma lista de propriedades
+virtuais que devem ser expostas::
 
     namespace App\Model\Entity;
 
@@ -506,17 +512,16 @@ properties that should be exposed::
 
     }
 
-This list can be modified at runtime using ``virtualProperties``::
+Esta lista pode ser modificada em tempo de execução usando o método
+``virtualProperties``::
 
-    $user->virtualProperties(['full_name', 'is_admin']);
+Ocultando Proprieddes
+---------------------
 
-Hiding Properties
------------------
-
-There are often fields you do not want exported in JSON or array formats. For
-example it is often unwise to expose password hashes or account recovery
-questions. When defining an entity class, define which properties should be
-hidden::
+Muitas vezes, há campos que você não deseja ser exportado em formatos
+de array ou JSON. Por exemplo geralmente não é sensato expor hash de 
+senha ou perguntas de recuperação de conta. Ao definir uma classe de
+entidade, defina quais propriedades devem ser ocultadas::
 
     namespace App\Model\Entity;
 
@@ -529,17 +534,18 @@ hidden::
 
     }
 
-This list can be modified at runtime using ``hiddenProperties``::
+Esta lista pode ser modificada em tempo de execução usando o método
+``hiddenProperties``::
 
     $user->hiddenProperties(['password', 'recovery_question']);
 
-Storing Complex Types
-=====================
+Armazenando Tipos Complexos
+===========================
 
-Accessor & Mutator methods on entities are not intended to contain the logic for
-serializing and unserializing complex data coming from the database. Refer to
-the :ref:`saving-complex-types` section to understand how your application can
-store more complex data types like arrays and objects.
+Métodos Acessores & Mutadores em entidades não são destinados para conter
+a lógica de serializar e deserializar dados complexos vindo do banco de dados.
+Consulte a seção :ref:`saving-complex-types` para entender como sua aplicação
+pode armazenar tipos de dado complexos, como arrays e objetos.
 
 .. meta::
     :title lang=en: Entities
