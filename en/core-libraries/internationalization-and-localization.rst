@@ -154,9 +154,9 @@ This can happen if two strings are identical but refer to different things. For
 example, 'letter' has multiple meanings in English. To solve that problem, you
 can use the :php:func:`__x()` function::
 
-    echo __x('written communication', 'He read the first letter');
+    echo __x('written communication', 'He reads the first letter');
 
-    echo __x('alphabet learning', 'He read the first letter');
+    echo __x('alphabet learning', 'He reads the first letter');
 
 The first argument is the context of the message and the second is the message
 to be translated.
@@ -164,7 +164,7 @@ to be translated.
 .. code-block:: pot
 
      msgctxt "written communication"
-     msgid "He read the first letter"
+     msgid "He reads the first letter"
      msgstr "Hey, lies den ersten Brief"
 
 Using Variables in Translation Messages

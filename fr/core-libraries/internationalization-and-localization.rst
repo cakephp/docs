@@ -169,6 +169,12 @@ la fonction :php:func:`__x()`::
 Le premier argument est le contexte du message et le second est le message
 à traduire.
 
+.. code-block:: pot
+
+     msgctxt "written communication"
+     msgid "He reads the first letter"
+     msgstr "Il lit le premier courrier"
+
 Utiliser des Variables dans les Traductions de Messages
 -------------------------------------------------------
 
