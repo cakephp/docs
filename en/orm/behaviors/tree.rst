@@ -70,13 +70,12 @@ Getting a flat list of the descendants for a node is equally easy::
         echo $category->name . "\n";
     }
     
-If you need to pass conditions you would do it as follows::
+If you need to pass conditions you do so as per normal::
 
     $descendants = $categories
-        ->find()
-        ->where(['name LIKE' => '%Foo%'])
-        ->find('children', ['for' => 1]);
-
+        ->find('children', ['for' => 1])
+        ->where(['name LIKE' => '%Foo%']);
+        
     foreach ($descendants as $category) {
         echo $category->name . "\n";
     }
