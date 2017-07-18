@@ -1,67 +1,70 @@
 O básico sobre banco de dados
 #############################
 
-The CakePHP database access layer abstracts and provides help with most aspects
-of dealing with relational databases such as, keeping connections to the server,
-building queries, preventing SQL injections, inspecting and altering schemas,
-and with debugging and profiling queries sent to the database.
+A camada de acesso a banco de dados do CakePHP abstrai e fornece auxilio com
+a maioria dos aspectos de lidar com bancos de dados relacionais como, manter
+conexões com o servidor, contruir consultas, prevenir injeções SQL, inspecionar
+e alterar schemas, e com debugging e profiling de consultas enviadas ao banco
+de dados.
 
-Quick Tour
-==========
+Tour Rápido
+===========
 
-The functions described in this chapter illustrate what is possible to do with
-the lower-level database access API. If instead you want to learn more about the
-complete ORM, you can read the :doc:`/orm/query-builder` and
-:doc:`/orm/table-objects` sections.
+As funções descritas nesse capítulo ilustram o que é possível fazer com a API
+de acesso a banco de dados de baixo-nível. Se ao invés, você deseja aprender
+mais sobre o ORM completo, você pode ler as seções :doc:`/orm/query-builder` e
+:doc:`/orm/table-objects`.
 
-The easiest way to create a database connection is using a ``DSN`` string::
+A maneira mais fácil de crir uma conexão de banco de dados é usando uma string 
+``DSN``::
 
     use Cake\Datasource\ConnectionManager;
 
     $dsn = 'mysql://root:password@localhost/my_database';
     ConnectionManager::config('default', ['url' => $dsn]);
 
-Once created, you can access the connection object to start using it::
+Uma vez criada, você pode acessar o objeto da conexo para iniciar a usá-lo::
 
     $connection = ConnectionManager::get('default');
 
-Supported Databases
--------------------
+Bancos de Dados Suportados
+--------------------------
 
-CakePHP supports the following relational database servers:
+O CakePHP suporta os seguintes servidores de banco de dados relacionais:
 
 * MySQL 5.1+
 * SQLite 3
 * PostgreSQL 8+
 * SQLServer 2008+
-* Oracle (through a community plugin)
+* Oracle (atravéz de um plugin da comunidade)
 
-You will need the correct PDO extension installed for each of the above database
-drivers. Procedural APIs are not supported.
+Você precisará da extensão PDO correta instalada para cada um dos drivers de
+banco de dados acima. As APIs processuais não são suportadas.
+O banco de dados Oracle é suportado atravéz do plugin da comunidade
+`Driver para Banco de Dados Oracle <https://github.com/CakeDC/cakephp-oracle-driver>`_
 
 The Oracle database is supported through the
-`Driver for Oracle Database <https://github.com/CakeDC/cakephp-oracle-driver>`_
-community plugin.
+`Driver for Oracle Database <https://github.com/CakeDC/cakephp-oracle-driver>`_.
 
 .. _running-select-statements:
 
-Running Select Statements
--------------------------
+Executando Instruções de Consulta
+---------------------------------
 
-Running raw SQL queries is a breeze::
+Executar consultas SQL é uma moleza::
 
     use Cake\Datasource\ConnectionManager;
 
     $connection = ConnectionManager::get('default');
     $results = $connection->execute('SELECT * FROM articles')->fetchAll('assoc');
 
-You can use prepared statements to insert parameters::
+Você pode usar prepared statement para inserir parâmetros::
 
     $results = $connection
         ->execute('SELECT * FROM articles WHERE id = :id', ['id' => 1])
         ->fetchAll('assoc');
 
-It is also possible to use complex data types as arguments::
+Também é possível usar tipos de dados complexos como argumentos::
 
     $results = $connection
         ->execute(
@@ -71,7 +74,7 @@ It is also possible to use complex data types as arguments::
         )
         ->fetchAll('assoc');
 
-Instead of writing the SQL manually, you can use the query builder::
+Ao invés de escrever a SQL manualmente, você pode usar o query builder::
 
     $results = $connection
         ->newQuery()
@@ -82,10 +85,10 @@ Instead of writing the SQL manually, you can use the query builder::
         ->execute()
         ->fetchAll('assoc');
 
-Running Insert Statements
--------------------------
+Executando Instruções de Inserção
+---------------------------------
 
-Inserting rows in the database is usually a matter of a couple lines::
+Inserir registros no banco de dados é geralmente uma questão de algumas linhas::
 
     use Cake\Datasource\ConnectionManager;
 
@@ -95,21 +98,22 @@ Inserting rows in the database is usually a matter of a couple lines::
         'created' => new DateTime('now')
     ], ['created' => 'datetime']);
 
-Running Update Statements
--------------------------
+Executando Instruções de Atualização
+------------------------------------
 
-Updating rows in the database is equally intuitive, the following example will
-update the article with **id** 10::
+Atualizar registros no banco de dados é igualmente intuitivo, o exemplo a seguir
+atualizará o artigo com **id** 10::
 
     use Cake\Datasource\ConnectionManager;
     $connection = ConnectionManager::get('default');
     $connection->update('articles', ['title' => 'New title'], ['id' => 10]);
 
-Running Delete Statements
--------------------------
 
-Similarly, the ``delete()`` method is used to delete rows from the database, the
-following example deletes the article with **id** 10::
+Executando Instruções de Exclusão
+---------------------------------
+
+Da mesma forma, o método ``delete()`` é usado para excluír registros do banco de
+dados, o exemplo a seguir exclui o artigo com **id** 10::
 
     use Cake\Datasource\ConnectionManager;
     $connection = ConnectionManager::get('default');
