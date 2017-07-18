@@ -70,7 +70,7 @@ Getting a flat list of the descendants for a node is equally easy::
         echo $category->name . "\n";
     }
     
-If you need to pass conditions you would do it as follows:
+If you need to pass conditions you would do it as follows::
 
     $descendants = $categories
         ->find()
