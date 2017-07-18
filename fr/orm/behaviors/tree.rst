@@ -73,6 +73,17 @@ Obtenir une liste aplatie des descendants pour un nœud est également facile::
         echo $category->name . "\n";
     }
 
+Si vous avez besoin de passer des conditions, vous pouvez le faire
+comme avec n'importe quelle requête::
+
+    $descendants = $categories
+        ->find('children', ['for' => 1])
+        ->where(['name LIKE' => '%Foo%']);
+
+    foreach ($descendants as $category) {
+        echo $category->name . "\n";
+    }
+
 Si à la place, vous avez besoin d'une liste liée, où les enfants pour
 chaque nœud sont imbriqués dans une hiérarchie, vous pouvez utiliser le
 finder 'threaded'::
