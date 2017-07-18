@@ -67,17 +67,26 @@ Running the Console with no arguments produces this help message::
 
     Available Shells:
 
-    [Bake] bake
+    - version
+    - help
+    - cache
+    - completion
+    - i18n
+    - orm_cache
+    - plugin
+    - routes
+    - server
+    - bug
+    - console
+    - event
+    - orm
+    - bake
+    - bake.bake
+    - migrations
+    - migrations.migrations
 
-    [Migrations] migrations
-
-    [CORE] i18n, orm_cache, plugin, routes, server
-
-    [app] behavior_time, console, orm
-
-    To run an app or core command, type cake shell_name [args]
-    To run a plugin command, type cake Plugin.shell_name [args]
-    To get help on a specific command, type cake shell_name --help
+    To run a command, type `cake shell_name [args|options]`
+    To get help on a specific command, type `cake shell_name --help`
 
 The first information printed relates to paths. This is helpful if you're
 running the console from different parts of the filesystem.
