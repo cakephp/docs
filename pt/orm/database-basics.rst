@@ -121,15 +121,15 @@ dados, o exemplo a seguir exclui o artigo com **id** 10::
 
 .. _database-configuration:
 
-Configuration
-=============
+Configuração
+============
 
-By convention database connections are configured in **config/app.php**. The
-connection information defined in this file is fed into
-:php:class:`Cake\\Datasource\\ConnectionManager` creating the connection configuration
-your application will be using. Sample connection information can be found in
-**config/app.default.php**. A sample connection configuration would look
-like::
+Por convenção, as conexões de banco de dados são configuradas em **config/app.php**. As
+informações de conexão definida nesse arquivo são alimentadas em 
+:php:class:`Cake\\Datasource\\ConnectionManager`, criando a configuração de
+conexão que sua aplicação usará. Exemplo de informação de conexão pode ser
+encontrada em **config/app.default.php**. Um exemplo de configuração de conexão
+poderia parecer com::
 
     'Datasources' => [
         'default' => [
@@ -146,11 +146,10 @@ like::
         ]
     ],
 
-The above will create a 'default' connection, with the provided parameters. You
-can define as many connections as you want in your configuration file. You can
-also define additional connections at runtime using
-:php:meth:`Cake\\Datasource\\ConnectionManager::config()`. An example of that
-would be::
+O exemplo acima criará a conexão 'default', com os parâmetros fornecidos. Você pode
+definir quantas conexões quiser no seu arquivo de configuração. Você também pode
+definir conexões adicionais em tempo de execução usando o método
+:php:meth:`Cake\\Datasource\\ConnectionManager::config()`. Um exemplo disso seria::
 
     use Cake\Datasource\ConnectionManager;
 
@@ -168,21 +167,21 @@ would be::
     ]);
 
 
-Configuration options can also be provided as a :term:`DSN` string. This is
-useful when working with environment variables or :term:`PaaS` providers::
+As opções de configuração também podem ser fornecidas como uma string :term:`DSN`.
+Isso é útil ao trabalhar com variáveis de ambiente ou :term:`PaaS` providers::
 
     ConnectionManager::config('default', [
         'url' => 'mysql://my_app:sekret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
     ]);
 
-When using a DSN string you can define any additional parameters/options as
-query string arguments.
+Ao usar uma string DSN, você pode definir qualquer parâmetros/opções adicionais como
+argumentos de query string.
 
-By default, all Table objects will use the ``default`` connection. To
-use a non-default connection, see :ref:`configuring-table-connections`.
+Por padrão, todos objetos Table usará a conexão ``default``. Para usar
+uma conexão não-padrão, consulte :ref:`configuring-table-connections`.
 
-There are a number of keys supported in database configuration. A full list is
-as follows:
+Existem várias keys suportadas na configuração de banco de dados. Uma lista
+completa é a seguinte:
 
 className
     The fully namespaced class name of the class that represents the connection to a database server.
