@@ -13,6 +13,58 @@ estaticamente. Exemplo:
 Você pode testar as inflexões em `inflector.cakephp.org
 <https://inflector.cakephp.org/>`_.
 
+.. _inflector-methods-summary:
+
+Resumo dos métodos de Inflexão e Suas Saídas
+============================================
+
+Resumo rápido dos métodos embutidos no Inflector e os resultados que produzem
+quando fornecidos um argumento de palavra composta.
+
++-------------------+---------------+---------------+
+| Method            | Argument      | Output        |
++===================+===============+===============+
+| ``pluralize()``   | BigApple      | BigApples     |
++                   +---------------+---------------+
+|                   | big_apple     | big_apples    |
++-------------------+---------------+---------------+
+| ``singularize()`` | BigApples     | BigApple      |
++                   +---------------+---------------+
+|                   | big_apples    | big_apple     |
++-------------------+---------------+---------------+
+| ``camelize()``    | big_apples    | BigApples     |
++                   +---------------+---------------+
+|                   | big apple     | BigApple      |
++-------------------+---------------+---------------+
+| ``underscore()``  | BigApples     | big_apples    |
++                   +---------------+---------------+
+|                   | Big Apples    | big apples    |
++-------------------+---------------+---------------+
+| ``humanize()``    | big_apples    | Big Apples    |
++                   +---------------+---------------+
+|                   | bigApple      | BigApple      |
++-------------------+---------------+---------------+
+| ``classify()``    | big_apples    | BigApple      | 
++                   +---------------+---------------+
+|                   | big apple     | BigApple      |
++-------------------+---------------+---------------+
+| ``dasherize()``   | BigApples     | big-apples    |
++                   +---------------+---------------+
+|                   | big apple     | big apple     |
++-------------------+---------------+---------------+
+| ``tableize()``    | BigApple      | big_apples    |
++                   +---------------+---------------+
+|                   | Big Apple     | big apples    |
++-------------------+---------------+---------------+
+| ``variable()``    | big_apple     | bigApple      |
++                   +---------------+---------------+
+|                   | big apples    | bigApples     |
++-------------------+---------------+---------------+
+| ``slug()``        | Big Apple     | big-apple     |
++                   +---------------+---------------+
+|                   | BigApples     | BigApples     |
++-------------------+---------------+---------------+
+
 Criando as formas singulares e plurais
 ======================================
 

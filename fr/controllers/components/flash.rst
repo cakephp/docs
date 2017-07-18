@@ -85,7 +85,7 @@ Par exemple::
     // Dans votre Controller
     $this->Flash->warning('My message', ['plugin' => 'PluginName']);
 
-Le code ci-dessus va utiliser l'element warning.ctp dans
+Le code ci-dessus va utiliser l'element **warning.ctp** dans
 **plugins/PluginName/src/Template/Element/Flash** pour afficher le message
 flash.
 

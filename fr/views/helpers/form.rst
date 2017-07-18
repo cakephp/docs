@@ -18,15 +18,21 @@ Création de Formulaire
 
 .. php:method:: create(mixed $context = null, array $options = [])
 
+* ``$context`` - Le contexte pour lequel le formulaire est créé. Cela peut être
+  une Entity de l'ORM, un retour (ResultSet) de l'ORM, un tableau de meta-données
+  ou ``false/null`` (dans le cas où vous créez un formulaire qui ne serait lié à
+  aucun Model).
+* ``$options`` - Un tableau d'options et / ou d'attributs HTML.
+
 La première méthode que vous aurez besoin d'utiliser pour tirer pleinement
 profit du FormHelper est ``create()``. Cette méthode affichera une balise
 d'ouverture de formulaire.
 
 Tous les paramètres sont optionnels. Si ``create()`` est appelée sans paramètre,
 CakePHP supposera que vous voulez créer un formulaire en rapport avec le
-controller courant, via l'URL actuelle. par défaut, la méthode de soumission par
+controller courant, via l'URL actuelle. Par défaut, la méthode de soumission par
 des formulaires est POST. Si vous appelez ``create()`` dans une vue pour
-UsersController::add(), vous verrez la sortie suivante dans la vue:
+``UsersController::add()``, vous verrez la sortie suivante dans la vue:
 
 .. code-block:: html
 
@@ -37,16 +43,20 @@ plusieurs contextes de formulaires intégrés et vous pouvez ajouter les vôtres
 ce que nous allons voir dans la prochaine section. Ceux intégrés correspondent
 aux valeurs suivantes de ``$context``:
 
-* Une instance ``Entity`` ou un iterateur qui mappe vers ``EntityContext``, ce
-  contexte permet au FormHelper de fonctionner avec les résultats à partir de
-  ceux intégrés dans l'ORM.
-* Un tableau contenant la clé ``schema``, qui mappe vers ``ArrayContext`` ce
-  qui vous permet de créer des structures simples de données pour construire
+* Une instance ``Entity`` ou un iterateur qui mappe vers
+  `EntityContext <https://api.cakephp.org/3.x/class-Cake.View.Form.EntityContext.html>`_;
+  ce contexte permet au FormHelper de fonctionner avec les retours de l'ORM.
+
+* Un tableau contenant la clé ``schema``, qui mappe vers
+  `ArrayContext <https://api.cakephp.org/3.x/class-Cake.View.Form.ArrayContext.html>`_
+  ce qui vous permet de créer des structures simples de données pour construire
   des formulaires.
-* ``null`` et ``false`` mappe vers ``NullContext``, cette classe de contexte
-  satisfait simplement l'interface requise par FormHelper. Ce contexte est utile
-  si vous voulez construire un formulaire court qui ne nécessite pas la
-  persistance de l'ORM.
+
+* ``null`` et ``false`` mappe vers
+  `NullContext <https://api.cakephp.org/3.x/class-Cake.View.Form.NullContext.html>`_;
+  cette classe de contexte satisfait simplement l'interface requise par FormHelper.
+  Ce contexte est utile si vous voulez construire un formulaire court qui ne nécessite
+  pas de persistance via l'ORM.
 
 Toutes les classes de contexte ont aussi un accès aux données requêtées,
 facilitant la construction des formulaires.
@@ -74,8 +84,10 @@ Celui-ci va POSTer les données de formulaire à l'action ``add()`` de
 créer un formulaire d'édition. Le FormHelper utilise l'objet ``Entity`` pour
 détecter automatiquement s'il faut créer un formulaire d'ajout (add) ou un
 d'édition (edit). Si l'entity fournie n'est pas 'nouvelle', le form va être créé
-comme un formulaire d'édition. Par exemple, si nous naviguons vers
-**http://example.org/articles/edit/5**, nous pourrions faire ce qui suit::
+comme un formulaire d'édition.
+
+Par exemple, si nous naviguons vers **http://example.org/articles/edit/5**,
+nous pourrions faire ce qui suit::
 
     // src/Controller/ArticlesController.php:
     public function edit($id = null)
@@ -104,9 +116,58 @@ Affichera:
     Puisque c'est un formulaire d'édition, un champ input caché est généré
     pour surcharger la méthode HTTP par défaut.
 
+Options for Form Creation
+-------------------------
+
 Le tableau ``$options`` est là où la configuration du formulaire se passe. Ce
 tableau spécial peut contenir un certain nombre de paires de clé-valeur
-différentes qui affectent la façon dont la balise form est générée.
+différentes qui affectent la façon dont la balise form est générée. Voici les
+valeurs autorisés :
+
+* ``'type'`` - Vous permet de choisir le type de formulaire à créer. Si vous ne
+  fournissez pas de type, il sera automatiquement détecté en fonction du 'context'
+  du formulaire. Cette option peut prendre une des valeurs suivantes :
+
+  * ``'get'`` - Définira la ``method`` du formulaire à GET.
+  * ``'file'`` - Définira la ``method`` du formulaire à POST et le ``'enctype'``
+    à "multipart/form-data".
+  * ``'post'`` - Définira la ``method`` à POST.
+  * ``'put', 'delete', 'patch'`` - Définira le verbe HTTP à, respectivement, PUT,
+    DELETE ou PATCH quand le formulaire sera soumis.
+
+* ``'method'`` - Vous permet de définir explicitement la ``method`` du formulaire.
+  Les valeurs autorisés sont les même que pour le paramètre ci-dessus.
+
+* ``'url'`` - Permet de spécifier l'URL à laquelle le formulaire postera les données.
+  Peut être une chaîne ou un tableau de paramètre d'URL.
+
+* ``'encoding'`` - Permet de définir l'attribut ``accept-charset`` du formulaire.
+  Par défaut, la valeur de ``Configure::read('App.encoding')`` sera utilisée.
+
+* ``'enctype'`` - Vous permet de définir l'encodage du formulaire de manière
+  explicite.
+
+* ``'templates'`` - Les templates pour les éléments à utiliser pour ce formulaire.
+  Tous les templates fournis écraseront les templates déjà chargés. Ce paramètre
+  peut soit être un nom de fichier (sans extension) du dossier ``/config`` ou un
+  tableau de templates.
+
+* ``'context'`` - Options supplémentaires qui seront fournies à la classe de
+  'context' liée au formulaire. (Par exemple, le 'context' ``EntityContext``
+  accepte une option ``table`` qui permet de définir la classe Table sur
+  laquelle le formulaire devra se baser.
+
+* ``'idPrefix'`` - Préfixe à utiliser pour les attributs ``id`` des éléments du
+  formulaire.
+
+* ``'templateVars'`` - Vous permet de définir des variables de template pour le
+  template ``formStart``.
+
+.. tip::
+
+    Vous pouvez, en plus des options définies ci-dessus, définir dans l'argument
+    ``$options``, tous les attributs HTML que vous pourriez vouloir passer à
+    l'élément ``form`` (des classes, des attributs ``data``, etc.).
 
 .. _form-values-from-query-string:
 
@@ -165,10 +226,10 @@ Affichera:
 
      <form method="get" action="/articles/edit/5">
 
-En spécifiant 'file' cela changera la méthode de soumission à 'post', et
-ajoutera un enctype "multipart/form-data" dans le tag du formulaire.
-Vous devez l'utiliser si vous avez des demandes de fichiers dans votre
-formulaire. L'absence de cet attribut enctype empêchera le fonctionnement de
+En spécifiant ``file`` à l'option ``type``, cela changera la méthode de
+soumission à 'post', et ajoutera un ``enctype`` "multipart/form-data" dans le tag
+du formulaire. Vous devez l'utiliser si vous avez des demandes de fichiers dans
+votre formulaire. L'absence de cet attribut ``enctype`` empêchera le fonctionnement de
 l'envoi de fichiers::
 
     echo $this->Form->create($article, ['type' => 'file']);
@@ -179,19 +240,19 @@ Affichera:
 
     <form enctype="multipart/form-data" method="post" action="/articles/add">
 
-Quand vous utilisez 'put', 'patch' ou 'delete', votre formulaire aura un
-fonctionnement équivalent à un formulaire de type 'post', mais quand il sera
-envoyé, la méthode de requête HTTP sera respectivement réécrite avec 'PUT',
-PATCH' ou 'DELETE'. Cela permettra à CakePHP de créer son propre support REST
-dans les navigateurs web.
+Quand vous utilisez ``put``, ``patch`` ou ``delete`` dans l'option ``type``,
+votre formulaire aura un fonctionnement équivalent à un formulaire de type
+'post', mais quand il sera envoyé, la méthode de requête HTTP sera respectivement
+réécrite avec 'PUT', 'PATCH' ou 'DELETE'. Cela permet à CakePHP d'émuler un support
+REST dans les navigateurs web.
 
 Définir l'URL pour le Formulaire
 --------------------------------
 
 Utiliser l'option ``url`` vous permet de diriger le formulaire vers une
 action spécifique dans votre controller courant ou dans toute votre application.
-Par exemple, si vous voulez diriger le formulaire vers une action login() du
-controller courant, vous pouvez fournir le tableau $options comme ce qui suit::
+Par exemple, si vous voulez diriger le formulaire vers une action ``login()`` du
+controller courant, vous pouvez fournir le tableau ``$options`` comme ce qui suit::
 
     echo $this->Form->create($article, ['url' => ['action' => 'login']]);
 
@@ -293,13 +354,38 @@ Création d'éléments de Formulaire
 
 .. php:method:: control(string $fieldName, array $options = [])
 
+* ``$fieldName`` - Nom du champ (attribut ``name``) de l'élément dans le
+  formulaire (exemple : ``'Modelname.fieldname'``).
+* ``$options`` - Un tableau d'option qui peut inclure à la fois des :ref:`control-specific-options`
+  et des options d'autres méthodes (que la méthode ``control()`` utilise en interne
+  pour générer les différents éléments HTML) ainsi que attribut HTML valide.
+
 La méthode ``control()`` vous laisse générer des inputs de formulaire. Ces inputs
 incluent une div enveloppante, un label, un widget d'input, et une erreur de
 validation si besoin. En utilisant les metadonnées dans le contexte du
 formulaire, cette méthode va choisir un type d'input approprié pour chaque
 champ. En interne, ``control()`` utilise les autres méthodes de FormHelper.
 
-Le type d'input créé dépend de la colonne datatype:
+.. tip::
+
+    Veuillez notez que, même si les éléments générés par la méthode ``control()``
+    sont appelés des "inputs" sur cette page, techniquement parlant, la méthode
+    ``control()`` peut générer n'importe quel type de balise ``input`` ainsi
+    que tous les autres types d'éléments HTML de formulaire (``select``,
+    ``button``, ``textarea``)
+
+Par défaut, la méthode ``control()`` utilisera les templates de widget suivant::
+
+    'inputContainer' => '<div class="input {{type}}{{required}}">{{content}}</div>'
+    'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}/>'
+
+En cas d'erreurs de validation, elle utilisera également::
+
+    'inputContainerError' => '<div class="input {{type}}{{required}} error">{{content}}{{error}}</div>'
+
+Le type d'élément créé, dans le cas où aucune autre option n'est fournie pour
+générer le type d'élément est induit par l'introspection du Model et dépendra
+du datatype de la colonne en question:
 
 Column Type
     Champ de formulaire résultant
@@ -335,12 +421,21 @@ vous avez besoin::
 
     echo $this->Form->control('published', ['type' => 'checkbox']);
 
+.. tip::
+
+    Veuillez notez que, par défaut, générer un élément via la méthode ``control()``
+    générera systématiquement un ``div`` autour de l'élément généré.
+    Cependant, générer le même élément mais avec la méthode spécifique du ``FormHelper``
+    (par exemple ``$this->Form->checkbox('published');``) ne générera pas, dans la
+    majorité des cas, un ``div`` autour de l'élément. En fonction de votre cas d'usage,
+    utilisez l'une ou l'autre méthode.
+
 .. _html5-required:
 
-Un nom de classe ``required`` sera ajouté à la div enveloppante si les règles de
+Un nom de classe ``required`` sera ajouté à la ``div`` enveloppante si les règles de
 validation pour le champ du model indiquent qu'il est requis et ne peut pas être
-vide. Vous pouvez désactiver les require automatiques en utilisant l'option
-required::
+vide. Vous pouvez désactiver les ``required`` automatiques en utilisant l'option
+``required``::
 
     echo $this->Form->control('title', ['required' => false]);
 
@@ -352,18 +447,19 @@ bouton input que vous générez en utilisant
 :php:meth:`~Cake\\View\\Helper\\FormHelper::create()`.
 
 Par exemple, supposons que votre model User intègre les champs pour un
-username (varchar), password (varchar), approved (datetime) and
-quote (text). Vous pouvez utiliser la méthode control() du FormHelper pour
+*username* (varchar), *password* (varchar), *approved* (datetime) and
+*quote* (text). Vous pouvez utiliser la méthode ``control()`` du FormHelper pour
 créer les bons inputs pour tous ces champs de formulaire::
 
     echo $this->Form->create($user);
-    // Text
+    // Va générer un input type="text"
     echo $this->Form->control('username');
-    // Password
+    // Va générer un input type="password"
     echo $this->Form->control('password');
-    // Jour, mois, année, heure, minute, méridien
+    // En partant du principe que 'approved' est un "datetime" ou un "timestamp"
+    // va générer des champs Jour, mois, année, heure, minute
     echo $this->Form->control('approved');
-    // Textarea
+    // Va générer un textarea
     echo $this->Form->control('quote');
 
     echo $this->Form->button('Ajouter');
@@ -377,13 +473,13 @@ Un exemple plus complet montrant quelques options pour le champ de date::
         'maxYear' => date('Y') - 18,
     ]);
 
-Outre les options spécifiques pour ``control()`` vu ci-dessus, vous pouvez
-spécifier n'importe quelle option pour le type d'input et n'importe quel
-attribut HTML (par exemple ``onfocus``).
+Outre les :ref:`control-specific-options` pour ``control()`` vu ci-dessus,
+vous pouvez spécifier n'importe quelle option des méthodes spécifiques pour le
+type d'input et n'importe quel attribut HTML (par exemple ``onfocus``).
 
-Si vous voulez un champ de sélection utilisant une relation belongsTo
-ou hasOne, vous pouvez ajouter ceci dans votre controller Users
-(en supposant que l'User belongsTo Group)::
+Si vous voulez un ``select`` utilisant une relation *belongsTo* ou *hasOne*,
+vous pouvez ajouter ceci dans votre controller Users (en supposant que
+l'User *belongsTo* Group)::
 
     $this->set('groups', $this->Users->Groups->find('list'));
 
@@ -391,7 +487,7 @@ Ensuite, ajouter les lignes suivantes à votre template de vue de formulaire::
 
     echo $this->Form->control('group_id', ['options' => $groups]);
 
-Pour créer un select pour l'association belongsToMany Groups, vous pouvez
+Pour créer un ``select`` pour l'association *belongsToMany* Groups, vous pouvez
 ajouter ce qui suit dans votre UsersController::
 
     $this->set('groups', $this->Users->Groups->find('list'));
@@ -400,10 +496,9 @@ Ensuite, ajouter les lignes suivantes à votre template de vue::
 
     echo $this->Form->control('groups._ids', ['options' => $groups]);
 
-Si votre nom de model est composé de deux mots ou plus,
-ex. "UserGroup", quand vous passez les données en utilisant set()
-vous devrez nommer vos données dans un format CamelCase
-(les Majuscules séparent les mots) et au pluriel comme ceci::
+Si votre nom de model est composé de deux mots ou plus (ex. "UserGroup"),
+quand vous passez les données en utilisant ``set()`` vous devrez nommer vos
+données dans un format CamelCase (les Majuscules séparent les mots) et au pluriel comme ceci::
 
     $this->set('userGroups', $this->UserGroups->find('list'));
 
@@ -440,103 +535,138 @@ suffixe au champ. Vous pouvez remarquer des champs supplémentaires nommés
 ont été ajoutés. Ces champs seront automatiquement convertis en objets
 ``DateTime`` quand les entities sont triées.
 
-Options
--------
+.. _control-specific-options:
 
-``FormHelper::control()`` supporte un nombre important d'options. En plus de ses
-propres options, ``control()`` accepte des options pour les champs input générés,
-comme les attributs html. Ce qui suit va couvrir les options spécifiques de
-``FormHelper::control()``.
+Options pour la méthode control()
+---------------------------------
 
-* ``$options['type']`` Vous pouvez forcer le type d'un input, remplaçant
-  l'introspection du model, en spécifiant un type. En plus des types de
-  champs vus dans :ref:`automagic-form-elements`, vous pouvez aussi créer
-  des 'fichiers', 'password' et divers types supportés par HTML5::
+``FormHelper::control()`` supporte un nombre important d'options via son
+paramètre ``$options``. En plus de ses propres options, ``control()``
+accepte des options pour les champs input générés (et les autres type d'éléments
+comme les ``checkbox`` ou les ``textarea``), comme les attributs HTML. Ce qui
+suit va couvrir les options spécifiques de ``FormHelper::control()``.
 
-    echo $this->Form->control('field', ['type' => 'file']);
-    echo $this->Form->control('email', ['type' => 'email']);
+* ``$options['type']`` - Une chaîne qui précise le type de widget à générer.
+  En plus des types de champs vus dans :ref:`automagic-form-elements`, vous
+  pouvez aussi créer input de type ``file``, ``password`` et tous les types
+  supportés par HTML5. En spécifiant vous-même le type de l'élément à générer,
+  vous écraserez le type automatique deviné par l'introspection du Model. Le défaut
+  est ``null``::
+
+      echo $this->Form->control('field', ['type' => 'file']);
+      echo $this->Form->control('email', ['type' => 'email']);
 
   Affichera:
 
   .. code-block:: html
 
-    <div class="input file">
-        <label for="field">Field</label>
-        <input type="file" name="field" value="" id="field" />
-    </div>
-    <div class="input email">
-        <label for="email">Email</label>
-        <input type="email" name="email" value="" id="email" />
-    </div>
+      <div class="input file">
+          <label for="field">Field</label>
+          <input type="file" name="field" value="" id="field" />
+      </div>
+      <div class="input email">
+          <label for="email">Email</label>
+          <input type="email" name="email" value="" id="email" />
+      </div>
 
-* ``$options['label']`` Définissez cette clé à la chaîne que vous voulez
-  afficher dans le label qui accompagne l'input::
+* ``$options['label']`` Soit une chaîne qui sera utilisé comme valeur pour
+  l'élément HTML ``<label>`` ou bien un tableau :ref:`d'options pour le label<create-label>`.
+  Le défaut est ``null``.
+  Par exemple::
 
-    echo $this->Form->control('name', [
-        'label' => 'The User Alias'
-    ]);
+      echo $this->Form->control('name', [
+          'label' => 'The User Alias'
+      ]);
 
-  Affiche:
-
-  .. code-block:: html
-
-    <div class="input">
-        <label for="name">The User Alias</label>
-        <input name="name" type="text" value="" id="name" />
-    </div>
-
-  D'une autre façon, définissez cette clé à ``false`` pour désactiver
-  l'affichage de ce label::
-
-    echo $this->Form->control('name', ['label' => false]);
-
-  Affiche:
+  Affiche :
 
   .. code-block:: html
 
-    <div class="input">
-        <input name="name" type="text" value="" id="name" />
-    </div>
+      <div class="input">
+          <label for="name">The User Alias</label>
+          <input name="name" type="text" value="" id="name" />
+      </div>
 
-  Définissez ceci dans un tableau pour fournir des options supplémentaires pour
+  Vous pouvez définir cette clé à ``false`` pour désactiver l'affichage de
+  l'élément ``<label>``
+  Par exemple::
+
+      echo $this->Form->control('name', ['label' => false]);
+
+  Affiche :
+
+  .. code-block:: html
+
+      <div class="input">
+          <input name="name" type="text" value="" id="name" />
+      </div>
+
+  Si vous passez un tableau, vous pourrez fournir des options supplémentaires pour
   l'element ``label``. Si vous le faîtes, vous pouvez utiliser une clé ``text``
   dans le tableau pour personnaliser le texte du label::
+  Par exemple::
 
-    echo $this->Form->control('name', [
-        'label' => [
-            'class' => 'thingy',
-            'text' => 'The User Alias'
-        ]
-    ]);
+      echo $this->Form->control('name', [
+          'label' => [
+              'class' => 'thingy',
+              'text' => 'The User Alias'
+          ]
+      ]);
 
-  Affiche:
+  Affiche :
 
   .. code-block:: html
 
-    <div class="input">
-        <label for="name" class="thingy">The User Alias</label>
-        <input name="name" type="text" value="" id="name" />
-    </div>
+      <div class="input">
+          <label for="name" class="thingy">The User Alias</label>
+          <input name="name" type="text" value="" id="name" />
+      </div>
+
+* ``$options['options']`` - Vous pouvez passez à cette option un tableau contenant
+  les choix pour les éléments comme les ``radio`` et les ``select``. Reportez vous
+  à :ref:`create-radio-button` et :ref:`create-select-picker` pour plus de détails.
+  Les défaut est ``null``.
 
 * ``$options['error']`` Utiliser cette clé vous permettra de transformer
   les messages de model par défaut et de les utiliser, par exemple, pour
-  définir des messages i18n.
+  définir des messages i18n. Pour désactiver le rendu des messages d'erreurs
+  définissez la clé ``error`` à ``false``::
 
-  Pour désactiver le rendu des messages d'erreurs définissez la clé error
-  ``false``::
-
-    echo $this->Form->control('name', ['error' => false]);
+      echo $this->Form->control('name', ['error' => false]);
 
   Pour surcharger les messages d'erreurs du model utilisez un tableau
   avec les clés respectant les messages d'erreurs de validation originaux::
 
-    $this->Form->control('name', [
-        'error' => ['Not long enough' => __('This is not long enough')]
-    ]);
+      $this->Form->control('name', [
+          'error' => ['Not long enough' => __('This is not long enough')]
+      ]);
 
   Comme vu précédemment, vous pouvez définir le message d'erreur pour chaque
   règle de validation dans vos models. De plus, vous pouvez fournir des
   messages i18n pour vos formulaires.
+
+* ``$options['nestedInput']`` - Utilisez avec les inputs ``checkbox`` et ``radio``.
+  Cette option permet de contrôler si les éléments ``input`` doivent être générés
+  dans ou à l'extérieur de l'élément ``label``. Quand ``control()`` génère une
+  checkbox ou un bouton radio, vous pouvez définir l'option à ``false`` pour
+  forcer la génération de l'élément ``input`` en dehors du ``label``.
+
+  Cependant, vous pouvez également la définir à ``true`` pour n'importe quel type
+  d'élément pour forcer la génération de l'élément ``input`` dans le ``label``.
+  Si vous changez l'option pour les boutons radio, vous aurez également besoin de
+  modifier le template par défaut :ref:`'radioWrapper'<create-radio-button>`.
+  En fonction du ``type`` d'élément à générer, la valeur par défaut sera ``true``
+  ou ``false``.
+
+* ``$options['templates']`` - Les templates à utiliser pour cet ``input``.
+  N'importe quel template spécifié via cette option surchargera les templates
+  déjà chargés. Cette option accepte soit un nom de fichier (sans extension)
+  provenant de ``/config`` qui contient les templates à charger ou bien un
+  tableau définissant les templates à utiliser.
+
+* ``$options['labelOptions']`` - Définissez l'option à ``false`` pour désactiver
+  les ``label`` autour des ``nestedWidgets`` ou bien définissez un tableau
+  d'attributs à appliquer à l'élément ``label``.
 
 Générer des Types d'Inputs Spécifiques
 ======================================
@@ -548,7 +678,7 @@ d'autres méthodes comme :php:meth:`~Cake\\View\\Helper\\FormHelper::label()` et
 :php:meth:`~Cake\\View\\Helper\\FormHelper::error()` pour générer des layouts
 (mise en page) complètements personnalisés.
 
-.. _general-input-options:
+.. _general-control-options:
 
 Options Communes
 ----------------
@@ -557,10 +687,10 @@ Beaucoup des différentes méthodes d'input supportent un jeu d'options communes
 Toutes ses options sont aussi supportées par ``control()``. Pour réduire les
 répétitions, les options communes partagées par toutes les méthodes input sont :
 
-* ``$options['id']`` Définir cette clé pour forcer la valeur du DOM id pour cet
-  input. Cela remplacera l'idPrefix qui pourrait être fixé.
+* ``id`` Définir cette clé pour forcer la valeur du DOM id pour cet
+  input. Cela remplacera l'``idPrefix`` qui pourrait être fixé.
 
-* ``$options['default']`` Utilisé pour définir une valeur par défaut au champ
+* ``default`` Utilisé pour définir une valeur par défaut au champ
   input. La valeur est utilisée si les données passées au formulaire ne
   contiennent pas de valeur pour le champ (ou si aucune donnée n'est
   transmise). Une valeur par défaut explicite va surcharger toute valeur définie
@@ -570,7 +700,7 @@ répétitions, les options communes partagées par toutes les méthodes input so
 
     echo $this->Form->text('ingredient', ['default' => 'Sugar']);
 
-  Exemple avec un champ sélectionné (Taille "Moyen" sera sélectionné par
+  Exemple avec un champ sélectionné (Taille "Medium" sera sélectionné par
   défaut)::
 
     $sizes = ['s' => 'Small', 'm' => 'Medium', 'l' => 'Large'];
@@ -578,25 +708,25 @@ répétitions, les options communes partagées par toutes les méthodes input so
 
   .. note::
 
-    Vous ne pouvez pas utiliser ``default`` pour sélectionner une chekbox -
-    vous devez plutôt définir cette valeur dans ``$this->request->getData()`` dans
-    votre controller, ou définir l'option ``checked`` de l'input à ``true``.
+      Vous ne pouvez pas utiliser ``default`` pour sélectionner une chekbox -
+      vous devez plutôt définir cette valeur dans ``$this->request->getData()`` dans
+      votre controller, ou définir l'option ``checked`` de l'input à ``true``.
 
-    Attention à l'utilisation de ``false`` pour assigner une valeur par défaut.
-    Une valeur ``false`` est utilisée pour désactiver/exclure les options d'un
-    champ, ainsi ``'default' => false`` ne définirait aucune valeur. A la place,
-    utilisez ``'default' => 0``.
+      Attention à l'utilisation de ``false`` pour assigner une valeur par défaut.
+      Une valeur ``false`` est utilisée pour désactiver/exclure les options d'un
+      champ, ainsi ``'default' => false`` ne définirait aucune valeur. A la place,
+      utilisez ``'default' => 0``.
 
-* ``$options['value']`` Utilisée pour définir une valeur spécifique pour le
+* ``value`` Utilisée pour définir une valeur spécifique pour le
   champ d'input. Ceci va surcharger toute valeur qui aurait pu être injectée à
-  partir du contexte, comme Form, Entity or ``request->data`` etc.
+  partir du contexte, comme Form, Entity or ``request->getData()`` etc.
 
   .. note::
 
-    Si vous souhaitez définir un champ pour qu'il ne rende pas sa valeur
-    récupérée à partir du contexte ou de la source de valeurs, vous devrez
-    définir ``$options['value']`` en ``''`` (au lieu de le définir avec
-    ``null``).
+      Si vous souhaitez définir un champ pour qu'il ne rende pas sa valeur
+      récupérée à partir du contexte ou de la source de valeurs, vous devrez
+      définir ``value`` en ``''`` (au lieu de le définir avec
+      ``null``).
 
 En plus des options ci-dessus, vous pouvez mixer n'importe quel attribut HTML
 que vous souhaitez utiliser. Tout nom d'option non-special sera
@@ -610,182 +740,27 @@ convection.
     désactiver ce comportement en définissant l'option ``schemaDefault`` à
     ``false``.
 
-Les Options pour Select, Checkbox et Inputs Radio
--------------------------------------------------
-
-* ``$options['value']`` Peut aussi être utilisée en combinaison avec un input
-  de type select (ex. Pour les types select, date, heure, datetime). Définissez
-  'selected' pour définir l'élément que vous souhaiteriez définir par défaut au
-  rendu de l'input::
-
-    echo $this->Form->time('close_time', [
-        'value' => '13:30:00'
-    ]);
-
-  .. note::
-
-    La clé value pour les inputs de type date et datetime peut aussi
-    être un timestamp UNIX ou un objet DateTime.
-
-  Pour un input select où vous définissez l'attribut ``multiple`` à true,
-  vous pouvez utiliser un tableau des valeurs que vous voulez sélectionner par
-  défaut::
-
-    echo $this->Form->select('rooms', [
-        'multiple' => true,
-        // options avec valeurs 1 et 3 seront sélectionnées par défaut
-        'default' => [1, 3]
-    ]);
-
-* ``$options['empty']`` Est défini à ``true``, pour forcer l'input à rester vide.
-
-  Quand passé à une list select (liste de sélection), ceci créera une
-  option vide avec une valeur vide dans la liste déroulante. Si vous
-  voulez une valeur vide avec un texte affiché ou juste une option
-  vide, passer une chaîne pour vider::
-
-      echo $this->Form->select(
-          'field',
-          [1, 2, 3, 4, 5],
-          ['empty' => '(choisissez)']
-      );
-
-  Affiche:
-
-  .. code-block:: html
-
-      <select name="field">
-          <option value="">(choose one)</option>
-          <option value="0">1</option>
-          <option value="1">2</option>
-          <option value="2">3</option>
-          <option value="3">4</option>
-          <option value="4">5</option>
-      </select>
-
-  Les options peuvent aussi fournir une paire de clé-valeur.
-
-* ``$options['hiddenField']`` Pour certain types d'input (checkboxes,
-  radios) un input caché est créé. Ainsi, la clé dans $this->request->data
-  existera même sans valeur spécifiée:
-
-  .. code-block:: html
-
-    <input type="hidden" name="published" value="0" />
-    <input type="checkbox" name="published" value="1" />
-
-  Ceci peut être désactivé en définissant l'option ``$options['hiddenField'] = false``::
-
-    echo $this->Form->checkbox('published', ['hiddenField' => false]);
-
-  Retournera:
-
-  .. code-block:: html
-
-    <input type="checkbox" name="published" value="1">
-
-  Si vous voulez créer de multiples blocs d'entrées regroupés
-  ensemble dans un formulaire, vous devriez utiliser ce paramètre
-  sur tous les inputs excepté le premier. Si le input caché est en
-  place à différents endroits c'est seulement le dernier groupe
-  de valeur d'input qui sera sauvegardé.
-
-  Dans cet exemple , seules les couleurs tertiaires seront passées,
-  et les couleurs primaires seront réécrites:
-
-  .. code-block:: html
-
-    <h2>Primary Colors</h2>
-    <input type="hidden" name="color" value="0" />
-    <label for="color-red">
-        <input type="checkbox" name="color[]" value="5" id="color-red" />
-        Red
-    </label>
-
-    <label for="color-blue">
-        <input type="checkbox" name="color[]" value="5" id="color-blue" />
-        Blue
-    </label>
-
-    <label for="color-yellow">
-        <input type="checkbox" name="color[]" value="5" id="color-yellow" />
-        Green
-    </label>
-
-    <h2>Tertiary Colors</h2>
-    <input type="hidden" name="color" value="0" />
-    <label for="color-green">
-        <input type="checkbox" name="color[]" value="5" id="color-green" />
-        Yellow
-    </label>
-    <label for="color-purple">
-        <input type="checkbox" name="color[]" value="5" id="color-purple" />
-        Purple
-    </label>
-    <label for="color-orange">
-        <input type="checkbox" name="color[]" value="5" id="color-orange" />
-        Orange
-    </label>
-
-  Désactiver le champ caché ``'hiddenField'`` dans le second groupe
-  d'input empêchera ce comportement.
-
-  Vous pouvez définir une valeur différente pour le champ caché autre que 0
-  comme 'N'::
-
-      echo $this->Form->checkbox('published', [
-          'value' => 'Y',
-          'hiddenField' => 'N',
-      ]);
-
-Les Options de Datetime
------------------------
-
-* ``$options['timeFormat']``. Utilisé pour spécifier le format des inputs
-  select (menu de sélection) pour un jeu d'input en relation avec le temps.
-  Les valeurs valides sont ``12``, ``24``, et ``null``.
-
-* ``$options['minYear'], $options['maxYear']`` Utilisé en combinaison avec un
-  input date/datetime. Définit les valeurs minimales et/ou maximales de butée
-  montrées dans le champ select des années.
-
-* ``$options['orderYear']`` Utilisé en combinaison avec un input
-  date/datetime. Définit l'ordre dans lequel la valeur de l'année sera
-  délivré. Les valeurs valides sont  'asc', 'desc'. La valeur par défaut
-  est 'desc'.
-
-* ``$options['interval']`` Cette option spécifie l'écart de minutes
-  entre chaque option dans la select box minute::
-
-    echo $this->Form->control('time', [
-        'type' => 'time',
-        'interval' => 15
-    ]);
-
-  Créera 4 options dans la select box minute. Une toutes les 15 minutes.
-
-* ``$options['round']`` Peut être défini à `up` ou `down` pour forcer l'arrondi
-  dans une direction. Par défaut à null qui arrondit à la moitié
-  supérieure selon `interval`.
-
-* ``$options['monthNames']`` If ``false``, 2 digit numbers will be used instead
-  of text. Si on lui passe un tableau du style
-  ``['01' => 'Jan', '02' => 'Feb', ...]`` alors ce tableau sera utilisé.
-
 Créer des Elements Input
 ========================
+
+Les autres méthodes disponibles dans le FormHelper permettent
+la création d'éléments spécifiques de formulaire. La plupart de ces
+méthodes utilisent également un paramètre spécial $options.
+Toutefois, dans ce cas, $options est utilisé avant tout pour spécifier
+les attributs des balises HTML (comme la valeur ou l'id DOM d'un élément
+du formulaire).
 
 Créer des Inputs Text
 ---------------------
 
 .. php:method:: text(string $name, array $options)
 
-  Les autres méthodes disponibles dans le FormHelper permettent
-  la création d'éléments spécifiques de formulaire. La plupart de ces
-  méthodes utilisent également un paramètre spécial $options.
-  Toutefois, dans ce cas, $options est utilisé avant tout pour spécifier
-  les attributs des balises HTML
-  (comme la valeur ou l'id DOM d'un élément du formulaire)::
+* ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>` ainsi que n'importe
+  quel attribut HTML valide.
+
+Va créer un ``input`` de type ``text``::
 
     echo $this->Form->text('username', ['class' => 'users']);
 
@@ -800,7 +775,12 @@ Créer des Inputs Password
 
 .. php:method:: password(string $fieldName, array $options)
 
-Création d'un champ password::
+* ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>` ainsi que n'importe
+  quel attribut HTML valide.
+
+Création d'un input ``password``::
 
     echo $this->Form->password('password');
 
@@ -815,7 +795,12 @@ Créer des Inputs Cachés
 
 .. php:method:: hidden(string $fieldName, array $options)
 
-Créera un input caché de form. Exemple::
+* ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>` ainsi que n'importe
+  quel attribut HTML valide.
+
+Créera un input ``hidden`` de form. Exemple::
 
     echo $this->Form->hidden('id');
 
@@ -830,7 +815,16 @@ Créer des Textareas
 
 .. php:method:: textarea(string $fieldName, array $options)
 
-Crée un champ input textarea (zone de texte)::
+* ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>` ainsi que n'importe
+  quel attribut HTML valide.
+
+Crée un champ ``textarea`` (zone de texte). Le template utilisé par défaut est::
+
+    'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>'
+
+Par exemple::
 
     echo $this->Form->textarea('notes');
 
@@ -847,31 +841,28 @@ généré. Exemple:
 
 .. code-block:: html
 
-    <textarea name="data[User][notes]" id="UserNotes">
-    Ce Texte va être édité.
+    <textarea name="notes" id="notes">
+        Ce Texte va être édité.
     </textarea>
 
-.. note::
+**Options for Textarea**
 
-    Le type d'input ``textarea`` permet à l'attribut ``$options`` la valeur
-    ``'escape'`` lequel détermine si oui ou non le contenu du textarea
-    doit être échappé. Par défaut à ``true``.
+En plus :ref:`des options générales<general-control-options>`, ``textarea()``
+supporte 2 autres options spécifiques :
 
-::
+* ``'escape'`` - Permet de définir si le contenu du ``textarea`` doit être
+  échappé ou non. Le défaut est ``true``.
 
-    echo $this->Form->textarea('notes', ['escape' => false]);
-    // OU....
-    echo $this->Form->control('notes', ['type' => 'textarea', 'escape' => false]);
+  Par exemple::
 
-**Options**
+      echo $this->Form->textarea('notes', ['escape' => false]);
+      // OU....
+      echo $this->Form->control('notes', ['type' => 'textarea', 'escape' => false]);
 
-En plus de :ref:`general-input-options`, textarea() supporte quelques
-options spécifiques:
+* ``'rows', 'cols'`` - Ces deux clés permettent de définir les attributs HTML
+  du même nom et qui sont, respectivement, le nombre de lignes et de colonnes::
 
-* ``$options['rows'], $options['cols']`` Ces deux clés spécifient le
-  nombre de lignes et de colonnes::
-
-    echo $this->Form->textarea('textarea', ['rows' => '5', 'cols' => '5']);
+      echo $this->Form->textarea('textarea', ['rows' => '5', 'cols' => '5']);
 
   Affichera:
 
@@ -880,14 +871,182 @@ options spécifiques:
     <textarea name="textarea" cols="5" rows="5">
     </textarea>
 
+Créer des Select, des Checkbox et des Boutons Radio
+---------------------------------------------------
+
+Ces éléments ont options et des points en communs, c'est pourquoi ils sont
+regroupés dans section.
+
+.. _checkbox-radio-select-options:
+
+Les Options pour Select, Checkbox et Inputs Radio
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Vous trouverez ci-dessous les options partagées entre ``select()``,
+``checkbox()`` et ``radio()`` (les options spécifiques à une seule méthode sont
+décrites dans les sections dédiées à ces méthodes).
+
+* ``value`` Permet de définir ou sélectionner la valeur de l'élément ciblé :
+
+  * Pour les checkboxes, cela définit l'attribut HTML ``value`` assigné à
+    l'input à la valeur que vous définissez.
+
+  * Pour les boutons radio ou les select, cela définit la valeur qui sera
+    définit quand le formulaire sera rendu (dans ces cas là, ``'value'`` doit
+    avoir une valeur qui existe dans l'élément). Elle peut être utilisée avec
+    n'importe quel élément basé sur un select comme ``date()``, ``time()``,
+    ``dateTime()``::
+
+        echo $this->Form->time('close_time', [
+            'value' => '13:30:00'
+        ]);
+
+  .. note::
+
+    La clé ``value`` pour les ``date()`` et ``dateTime()`` peut aussi
+    être un timestamp UNIX ou un objet DateTime.
+
+  Pour un input ``select`` où vous définissez l'attribut ``multiple`` à true,
+  vous pouvez utiliser un tableau des valeurs que vous voulez sélectionner par
+  défaut::
+
+      // Les tags <options> avec valeurs 1 et 3 seront sélectionnés par défaut
+      echo $this->Form->select('rooms', [
+          'multiple' => true,
+          'default' => [1, 3]
+      ]);
+
+* ``empty`` S'applique à ``radio()`` et ``select()``. Le défaut est ``false``.
+
+  * Quand vous passe cette option ``radio()``, cela créera un élément ``input``
+    supplémentaire qui sera affiché avant le premier bouton radio, avec une valeur
+    de ``''`` et un ``label`` qui vaudra la chaîne passée dans l'option.
+
+  * Si vous la passez à la méthode ``select``, cela créer un élément ``option``
+    vide avec une valeur vide dans la liste de choix. Si à la place d'une valeur
+    vide, vous souhaitez afficher un texte, passez une chaîne dans l'option::
+
+        echo $this->Form->select(
+            'field',
+            [1, 2, 3, 4, 5],
+            ['empty' => '(choisissez)']
+        );
+
+  Affiche:
+
+  .. code-block:: html
+
+      <select name="field">
+          <option value="">(choose one)</option>
+          <option value="0">1</option>
+          <option value="1">2</option>
+          <option value="2">3</option>
+          <option value="3">4</option>
+          <option value="4">5</option>
+      </select>
+
+* ``hiddenField`` Pour certain types d'input (checkboxes,
+  radios) un input caché est créé. Ainsi, la clé dans ``$this->request->getData()``
+  existera même sans valeur spécifiée. Pour les checkboxes, sa valeur vaudra ``0`` ;
+  pour les boutons radio, elle sera ``''``.
+
+  Exemple d'un rendu par défaut :
+
+  .. code-block:: html
+
+      <input type="hidden" name="published" value="0" />
+      <input type="checkbox" name="published" value="1" />
+
+  Ceci peut être désactivé en définissant l'option ``hiddenField`` à ``false``::
+
+      echo $this->Form->checkbox('published', ['hiddenField' => false]);
+
+  Retournera :
+
+  .. code-block:: html
+
+      <input type="checkbox" name="published" value="1">
+
+  Si vous voulez créer de multiples blocs d'entrées regroupés
+  ensemble dans un formulaire, vous devriez définir ce paramètre à ``false``
+  sur tous les inputs, excepté le premier. Si l'input caché est en
+  place à différents endroits c'est seulement le dernier groupe
+  de valeur d'input qui sera sauvegardé.
+
+  Dans cet exemple , seules les couleurs tertiaires seront passées,
+  et les couleurs primaires seront réécrites:
+
+  .. code-block:: html
+
+      <h2>Primary Colors</h2>
+      <input type="hidden" name="color" value="0" />
+      <label for="color-red">
+          <input type="checkbox" name="color[]" value="5" id="color-red" />
+          Red
+      </label>
+
+      <label for="color-blue">
+          <input type="checkbox" name="color[]" value="5" id="color-blue" />
+          Blue
+      </label>
+
+      <label for="color-yellow">
+          <input type="checkbox" name="color[]" value="5" id="color-yellow" />
+          Green
+      </label>
+
+      <h2>Tertiary Colors</h2>
+      <input type="hidden" name="color" value="0" />
+      <label for="color-green">
+          <input type="checkbox" name="color[]" value="5" id="color-green" />
+          Yellow
+      </label>
+      <label for="color-purple">
+          <input type="checkbox" name="color[]" value="5" id="color-purple" />
+          Purple
+      </label>
+      <label for="color-orange">
+          <input type="checkbox" name="color[]" value="5" id="color-orange" />
+          Orange
+      </label>
+
+  Désactiver l'option ``'hiddenField'`` dans le second groupe d'input empêcherait
+  ce comportement.
+
+  Vous pouvez définir une valeur différente pour le champ caché autre que 0
+  comme 'N'::
+
+      echo $this->Form->checkbox('published', [
+          'value' => 'Y',
+          'hiddenField' => 'N',
+      ]);
+
 Créer des Checkboxes
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: checkbox(string $fieldName, array $options)
 
-Crée un élément de formulaire checkbox. Cette méthode génère également un
-input de formulaire caché pour forcer la soumission de données pour le champ
-spécifié::
+* ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, des options de la section
+  :ref:`checkbox-radio-select-options`, des options spécifiques aux checkbox (ci-dessous)
+  ainsi que n'importe quel attribut HTML valide.
+
+Créer un élément ``checkbox``. Le template de widget utilisé est le suivant::
+
+    'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>'
+
+**Options spécifiques pour les Checkboxes**
+
+* ``'checked'`` - Booléen utilisé pour indiquer si cette checkbox est cochée ou non.
+  Par défaut à ``false``.
+
+* ``'disabled'`` - Booléen. Si passé à ``true``, la checkbox aura l'attribut ``disabled``.
+
+Cette méthode génère également un input de type ``hidden`` pour forcer l'existence
+de la donnée dans le tableau de POST.
+
+E.g. ::
 
     echo $this->Form->checkbox('done');
 
@@ -910,7 +1069,8 @@ Affichera:
     <input type="hidden" name="done" value="0">
     <input type="checkbox" name="done" value="555">
 
-Si vous ne voulez pas que le FormHelper génère un input caché::
+Si vous ne voulez pas que le FormHelper génère un input ``hidden``, vous pouvez
+passer l'option ``hiddenField`` à ``false``::
 
     echo $this->Form->checkbox('done', ['hiddenField' => false]);
 
@@ -920,30 +1080,70 @@ Affichera:
 
     <input type="checkbox" name="done" value="1">
 
+.. _create-radio-button:
+
 Créer des Boutons Radio
------------------------
+~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: radio(string $fieldName, array $options, array $attributes)
 
-Crée un jeu d'inputs radios.
+* ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$options`` - Un tableau optionnel contenant au minimum les labels pour les
+  boutons radio. Ce tableau peut également contenir les ``value`` et des attributs
+  HTML. Si ce tableau n'est pas fourni, la méthode générera seulement le input
+  ``hidden`` (si ``'hiddenField'`` vaut ``true``) ou pas d'élément du tout
+  (si ``'hiddenField'`` vaut ``false``).
+* ``$attributes`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, des options de la section
+  :ref:`checkbox-radio-select-options`, des options spécifiques aux radios (ci-dessous)
+  ainsi que n'importe quel attribut HTML valide.
 
-**Attributes**
+Crée un jeu d'inputs radios. Les templates de widget utilisés par défaut seront::
 
-* ``value`` - Indique la valeur quand ce bouton radio est coché.
+    'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>'
+    'radioWrapper' => '{{label}}'
+
+**Attributs spécifiques aux boutons radio**
+
 * ``label`` - booléen pour indiquer si oui ou non les labels pour les widgets
-  doivent être affichés.
+  doivent être affichés. Défaut à ``true``.
+
 * ``hiddenField`` - booléen pour indiquer si vous voulez que les résultats de
   radio() incluent un input caché avec une valeur de ''. C'est utile pour créer
-  des ensembles de radio qui ne sont pas continus.
-* ``disabled`` - Défini à ``true`` ou ``disabled`` pour désactiver tous les
-  boutons radio.
-* ``empty`` - Défini à ``true`` pour créer un input avec la valeur '' en
-  première option. Quand à ``true``, le label radio sera 'vide'. Définissez
-  cette option pour contrôler la valeur du label.
+  des ensembles de radio qui ne sont pas continus. Défaut à ``true``.
+
+* ``disabled`` - Définir à ``true`` ou ``disabled`` pour désactiver tous les
+  boutons radio. Défaut à ``false``.
+
+Vous devez fournir les label pour les boutons radio via l'argument ``$options``.
+
+Par exemple::
+
+    $this->Form->radio('gender', ['Masculine','Feminine','Neuter']);
+
+Affichera:
+
+.. code-block:: html
+
+    <input name="gender" value="" type="hidden">
+    <label for="gender-0">
+        <input name="gender" value="0" id="gender-0" type="radio">
+        Masculine
+    </label>
+    <label for="gender-1">
+        <input name="gender" value="1" id="gender-1" type="radio">
+        Feminine
+    </label>
+    <label for="gender-2">
+        <input name="gender" value="2" id="gender-2" type="radio">
+        Neuter
+    </label>
 
 Généralement, ``$options`` est une simple paire clé => valeur. Cependant, si
 vous avez besoin de mettre des attributs personnalisés sur vos boutons radio,
-vous pouvez utiliser le format étendu::
+vous pouvez utiliser le format étendu.
+
+Par exemple::
 
     echo $this->Form->radio(
         'favorite_color',
@@ -954,7 +1154,10 @@ vous pouvez utiliser le format étendu::
         ]
     );
 
-    // Affichera
+Affichera :
+
+.. code-block:: html
+
     <input type="hidden" name="favorite_color" value="">
     <label for="favorite-color-r">
         <input type="radio" name="favorite_color" value="r" style="color:red;" id="favorite-color-r">
@@ -969,49 +1172,63 @@ vous pouvez utiliser le format étendu::
         Green
     </label>
 
-Créer des Pickers Select
-------------------------
+.. _create-select-picker:
+
+Créer des Select
+~~~~~~~~~~~~~~~~
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
 
-Crée un menu de sélection, rempli des éléments compris dans ``$options``,
-avec l'option spécifiée par ``$attributes['value']`` sera montré comme
-sélectionné par défaut. Définir à ``true`` (la valeur par défaut est ``false``)
-pour ajouter une option vide avec une valeur vide en haut de votre liste 
-déroulante::
+* ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$options`` - Un tableau optionnel contenant la liste des éléments pour le
+  select. Si ce tableau n'est pas fourni, la méthode généra seulement un élément
+  ``select`` vide, sans élément ``option``.
+* ``$attributes`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, des options de la section
+  :ref:`checkbox-radio-select-options`, des options spécifiques aux select (ci-dessous)
+  ainsi que n'importe quel attribut HTML valide.
 
-    $options = ['M' => 'Male', 'F' => 'Female'];
-    echo $this->Form->select('gender', $options, ['empty' => true]);
+Crée un élément ``select``, rempli des éléments compris dans ``$options``.
+Si l'option ``$attributes['value']`` est fournie, alors les éléments ``option``
+ayant cette valeur seront affichés comme sélectionné(s) quand le select sera
+rendu.
+
+Par défaut, ``select`` utilise ces templates de widget::
+
+    'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>'
+    'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>'
+
+Il pourra également utilisez les templates suivant::
+
+    'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>'
+    'selectMultiple' => '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>'
+
+**Attributs pour les Select**
+
+* ``'multiple'`` - Si cette option est définie à ``true``, le select sera multiple
+  (plusieurs valeurs pourront être sélectionnées). Si elle est définie à ``checkbox``,
+  à la place d'un select multiple, vous aurez des checkbox.
+  Défaut à ``null``.
+
+* ``'escape'`` - Booleén. Si ``true``, le contenu des éléments ``option`` sera
+  échappé (les entités HTML seront convertis). Défaut à ``true``.
+
+* ``'val'`` - Permet de pré-sélectionner la valeur du select.
+
+* ``'disabled'`` - Contrôle l'attribut ``disabled``. Si l'option est définie à
+  ``true``, l'ensemble du select sera ``disabled``. Si définie sous forme de tableau,
+  seuls les éléments ``option`` dont la valeur est dans le tableau seront désactivés.
+
+L'argument ``$options`` vous permet de définir manuellement le contenu des éléments
+``option`` du ``select``.
+
+Par exemple ::
+
+    echo $this->Form->select('field', [1, 2, 3, 4, 5]);
 
 Affichera:
 
 .. code-block:: html
-
-    <select name="gender">
-    <option value=""></option>
-    <option value="M">Male</option>
-    <option value="F">Female</option>
-    </select>
-
-L'input de type ``select``  permet un attribut ``$option`` spécial
-appelée ``'escape'``  qui accepte un booléen et détermine
-s'il faut que l'entité HTML encode le contenu des options
-sélectionnées. Par défaut à ``true``::
-
-    $options = ['M' => 'Male', 'F' => 'Female'];
-    echo $this->Form->select('gender', $options, ['escape' => false]);
-
-* ``$attributes['options']`` Cette clé vous permet de spécifier
-  manuellement des options pour un input select (menu de sélection),
-  ou pour un groupe radio. A moins que le 'type' soit spécifié à 'radio',
-  le FormHelper supposera que la cible est un input select (menu de
-  sélection)::
-
-    echo $this->Form->select('field', [1,2,3,4,5]);
-
-  Affichera:
-
-  .. code-block:: html
 
     <select name="field">
         <option value="0">1</option>
@@ -1021,7 +1238,9 @@ sélectionnées. Par défaut à ``true``::
         <option value="4">5</option>
     </select>
 
-  Les options peuvent aussi être fournies comme des paires clé-valeur::
+La tableau ``$options`` peut aussi être fourni sous forme de paires de clé => valeur.
+
+Par exemple ::
 
     echo $this->Form->select('field', [
         'Value 1' => 'Label 1',
@@ -1029,9 +1248,9 @@ sélectionnées. Par défaut à ``true``::
         'Value 3' => 'Label 3'
     ]);
 
-  Affichera:
+Affichera :
 
-  .. code-block:: html
+.. code-block:: html
 
     <select name="field">
         <option value="Value 1">Label 1</option>
@@ -1039,26 +1258,27 @@ sélectionnées. Par défaut à ``true``::
         <option value="Value 3">Label 3</option>
     </select>
 
-  Si vous souhaitez générer un select avec des groupes optionnels,
-  passez les données dans un format hiérarchique. Ceci fonctionnera
-  avec les checkboxes multiples et les boutons radios également,
-  mais au lieu des groupes optionnels enveloppez les éléments
-  dans des fieldsets::
+Si vous souhaitez générer un ``select`` avec des ``optgroups``, passez les
+données sous forme de tableau multidimensionnel. Cela marche également avec les
+checkbox et les boutons radio, mais à la place d'éléments ``optgroup``, vos éléments
+seront entourés d'un élément ``fieldset``.
+
+Par exemple::
 
     $options = [
-       'Group 1' => [
-          'Value 1' => 'Label 1',
-          'Value 2' => 'Label 2'
-       ],
-       'Group 2' => [
-          'Value 3' => 'Label 3'
-       ]
+        'Group 1' => [
+            'Value 1' => 'Label 1',
+            'Value 2' => 'Label 2'
+        ],
+        'Group 2' => [
+            'Value 3' => 'Label 3'
+        ]
     ];
     echo $this->Form->select('field', $options);
 
-  Affichera:
+Affichera :
 
-  .. code-block:: html
+.. code-block:: html
 
     <select name="field">
         <optgroup label="Group 1">
@@ -1070,16 +1290,16 @@ sélectionnées. Par défaut à ``true``::
         </optgroup>
     </select>
 
-Pour générer des attributs avec option dans une balise::
+Pour ajouter des attributs HTML aux éléments ``option``::
 
     $options = [
-        [ 'text' => 'Description 1', 'value' => 'value 1', 'attr_name' => 'attr_value 1' ],
-        [ 'text' => 'Description 2', 'value' => 'value 2', 'attr_name' => 'attr_value 2' ],
-        [ 'text' => 'Description 3', 'value' => 'value 3', 'other_attr_name' => 'other_attr_value' ],
+        ['text' => 'Description 1', 'value' => 'value 1', 'attr_name' => 'attr_value 1'],
+        ['text' => 'Description 2', 'value' => 'value 2', 'attr_name' => 'attr_value 2'],
+        ['text' => 'Description 3', 'value' => 'value 3', 'other_attr_name' => 'other_attr_value'],
     ];
     echo $this->Form->select('field', $options);
 
-Affiche:
+Affichera:
 
 .. code-block:: html
 
@@ -1089,21 +1309,54 @@ Affiche:
         <option value="value 3" other_attr_name="other_attr_value">Description 3</option>
     </select>
 
-* ``$attributes['multiple']`` Si 'multiple' a été défini à ``true`` pour
-  un input select, celui ci autorisera les sélections multiples::
+**Contrôle des Select via Attributs**
 
-    echo $this->Form->select('field', $options, ['multiple' => true]);
+En utilisant des options spéciales dans l'argument ``$attributes``, vous pouvez
+contrôler certains comportement de la méthode ``select()``.
 
-  Vous pouvez également définir 'checkbox' à 'multiple' pour afficher une
-  liste de check boxes reliés::
+* ``'empty'`` - Définissez cette option à ``true`` pour ajouter une option vide
+  en première position de la liste de vos ``option``. Défaut à ``false``.
 
-    $options = [
-        'Value 1' => 'Label 1',
-        'Value 2' => 'Label 2'
-    ];
-    echo $this->Form->select('field', $options, [
-        'multiple' => 'checkbox'
-    ]);
+  Par exemple::
+
+      $options = ['M' => 'Male', 'F' => 'Female'];
+      echo $this->Form->select('gender', $options, ['empty' => true]);
+
+  Affichera:
+
+  .. code-block:: html
+
+      <select name="gender">
+          <option value=""></option>
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+      </select>
+
+* ``'escape'`` - Booleén. Si passée à ``true``, le contenu des ``option`` sera
+  échappé (les entités HTML seront encodées).
+
+  Par exemple ::
+
+      // This will prevent HTML-encoding the contents of each option element
+      $options = ['M' => 'Male', 'F' => 'Female'];
+      echo $this->Form->select('gender', $options, ['escape' => false]);
+
+* ``'multiple'`` - Si définie à ``true``, cette option rendra le ``select`` multiple.
+
+  Par exemple ::
+
+      echo $this->Form->select('field', $options, ['multiple' => true]);
+
+  Vous pouvez également définir ``'multiple'`` à ``'checkbox'`` pour afficher une
+  liste de checkbox à la place::
+
+      $options = [
+          'Value 1' => 'Label 1',
+          'Value 2' => 'Label 2'
+      ];
+      echo $this->Form->select('field', $options, [
+          'multiple' => 'checkbox'
+      ]);
 
   Affichera:
 
@@ -1111,57 +1364,93 @@ Affiche:
 
       <input name="field" value="" type="hidden">
       <div class="checkbox">
-        <label for="field-1">
-         <input name="field[]" value="Value 1" id="field-1" type="checkbox">
-         Label 1
-         </label>
+          <label for="field-1">
+              <input name="field[]" value="Value 1" id="field-1" type="checkbox">
+              Label 1
+          </label>
       </div>
       <div class="checkbox">
-         <label for="field-2">
-         <input name="field[]" value="Value 2" id="field-2" type="checkbox">
-         Label 2
-         </label>
+          <label for="field-2">
+              <input name="field[]" value="Value 2" id="field-2" type="checkbox">
+              Label 2
+          </label>
       </div>
 
-* ``$attributes['disabled']`` Lors de la création de checkboxes, cette
-  option peut être définie pour désactiver tout ou quelques checkboxes.
-  Pour désactiver toutes les checkboxes, définissez disabled à ``true``::
+* ``'disabled'`` - Cette option sert à désactiver une partie ou tous les éléments
+  ``option``. Pour désactiver tous les éléments, passez ``'disabled'`` à ``true``.
+  Pour désactiver seulement certains éléments, définissez un tableau avec les clés
+  des éléments que vous voulez désactiver.
 
-    $options = [
-        'Value 1' => 'Label 1',
-        'Value 2' => 'Label 2'
-    ];
-    echo $this->Form->select('field', $options, [
-        'multiple' => 'checkbox',
-        'disabled' => ['Value 1']
-    ]);
+  Par exemple ::
 
-  Affiche:
+      $options = [
+          'M' => 'Masculine',
+          'F' => 'Feminine',
+          'N' => 'Neuter'
+      ];
+      echo $this->Form->select('gender', $options, [
+          'disabled' => ['M', 'N']
+      ]);
+
+  Affichera:
 
   .. code-block:: html
 
-       <input name="field" value="" type="hidden">
-       <div class="checkbox">
+      <select name="gender">
+          <option value="M" disabled="disabled">Masculine</option>
+          <option value="F">Feminine</option>
+          <option value="N" disabled="disabled">Neuter</option>
+      </select>
+
+  Cette option fonctionne également quand ``'multiple'`` est définie à ``'checkbox'``::
+
+      $options = [
+          'Value 1' => 'Label 1',
+          'Value 2' => 'Label 2'
+      ];
+      echo $this->Form->select('field', $options, [
+          'multiple' => 'checkbox',
+          'disabled' => ['Value 1']
+      ]);
+
+  Affichera:
+
+  .. code-block:: html
+
+      <input name="field" value="" type="hidden">
+      <div class="checkbox">
           <label for="field-1">
-          <input name="field[]" disabled="disabled" value="Value 1" type="checkbox">
-          Label 1
+              <input name="field[]" disabled="disabled" value="Value 1" type="checkbox">
+              Label 1
           </label>
-       </div>
-       <div class="checkbox">
+      </div>
+      <div class="checkbox">
           <label for="field-2">
-          <input name="field[]" value="Value 2" id="field-2" type="checkbox">
-          Label 2
+              <input name="field[]" value="Value 2" id="field-2" type="checkbox">
+              Label 2
           </label>
-       </div>
+      </div>
 
 Créer des Inputs File
 ---------------------
 
 .. php:method:: file(string $fieldName, array $options)
 
-Pour ajouter un champ upload à un formulaire, vous devez vous assurer que le
-enctype du formulaire est définit a  "multipart/form-data", donc commençons
-avec une fonction create comme ci-dessous::
+* ``$name`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>` ainsi que n'importe
+  quel attribut HTML valide.
+
+Permet de créer un input de type ``file`` dans votre formulaire, pour faire de
+l'upload de fichier.
+Le template de widget utilisé sera::
+
+    'file' => '<input type="file" name="{{name}}"{{attrs}}>'
+
+Vous devez vous assurer que le ``enctype`` du formulaire est défini a
+``multipart/form-data``.
+Pour cela, commencez par appeler la méthode ``create`` de votre formulaire
+via une des deux méthodes ci-dessous::
 
     echo $this->Form->create($document, ['enctype' => 'multipart/form-data']);
     // OU
@@ -1176,17 +1465,19 @@ Ensuite ajoutez l'une des deux lignes dans votre formulaire::
     // OU
     echo $this->Form->file('submittedfile');
 
-En raison des limitations du code HTML lui même, il n'est pas possible
-de placer des valeurs par défauts dans les champs inputs de type 'file'.
-A chaque fois que le formulaire sera affiché, la valeur sera vide.
+.. note::
+
+    En raison des limitations du code HTML lui même, il n'est pas possible
+    de placer des valeurs par défauts dans les champs inputs de type 'file'.
+    A chaque fois que le formulaire sera affiché, la valeur sera vide.
 
 Lors de la soumission, le champ file fournit un tableau étendu de données
 au script recevant les données de formulaire.
 
 Pour l'exemple ci-dessus, les valeurs dans le tableau de données soumis
-devraient être organisées comme à la suite, si CakePHP à été installé sur
-un server Windows .'tmp\_name'  aura un chemin différent dans un
-environnement Unix::
+devraient être organisées comme ci-dessous, si CakePHP à été installé sur
+un server Windows (la clé ``tmp\_name`` aura un chemin différent dans un
+environnement Unix)::
 
     $this->request->data['submittedfile'] = [
         'name' => 'conference_schedule.pdf',
@@ -1208,39 +1499,150 @@ les champs ``files``,
     type d'envodage du formulaire en définissant l'option type à 'file' dans
     ``$this->Form->create()``.
 
-Crée des Inputs DateTime
-------------------------
+Creating Date & Time Related Controls
+-------------------------------------
+
+.. _datetime-options:
+
+Les Options communes pour les éléments Date et Time
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+These options are common for the date and time related controls:
+
+* ``'empty'`` - Si à ``true``, un élément ``option`` vide sera ajouté dans le
+  ``select`` en début de liste. Si vous fournissez une chaîne, elle sera utilisé
+  comme texte de l'``option``. Défaut à ``true``.
+
+* ``'default'`` | ``value`` - Utilisez l'une ou l'autre de ces options pour définir
+  la valeur qui sera affiché pour le champ. Une valeur présente dans ``$this->request->getData()``
+  avec en clé le nom du champ écrasera cette valeur. Si aucune valeur par défaut
+  n'est fournie, ``time()`` sera utilisé.
+
+* ``'year', 'month', 'day', 'hour', 'minute', 'second', 'meridian'`` - Ces options
+  vous permettent de contrôler quels éléments sont générés ou non. En définissant
+  une de ces options à ``false``, vous pouvez désactiver la génération du ``select``
+  correspondant (s'il est normalement rendu par la méthode appelée). En plus de ce
+  comportement, vous pouvez également passer des attributs HTML pour les éléments
+  en question.
+
+.. _date-options:
+
+Options pour les éléments Date
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Ces options sont liées aux méthodes liées aux dates, c'est-à-dire ``year()``,
+``month()``, ``day()``, ``dateTime()`` et ``date()``:
+
+* ``'monthNames'`` - Si à ``false``, un nombre à deux chiffres sera utilisé
+  pour afficher les mois plutôt que le nom des mois. Si vous passez un tableau
+  (``['01' => 'Jan', '02' => 'Feb', ...]``), le tableau passé sera utilisé à la
+  place.
+
+* ``'minYear'`` - Année minimum à utiliser pour le ``select`` qui correspond à
+  l'année
+
+* ``'maxYear'`` - Année maximum à utiliser pour le ``select`` qui correspond à
+  l'année
+
+* ``'orderYear'`` - L'ordre d'affichage des années dans ``select`` qui correspond
+  à l'année. Les valeurs possibles sont ``'asc'`` et ``'desc'``. Défaut à ``'desc'``.
+
+.. _time-options:
+
+Options pour les éléments Time
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Ces options sont liées aux méthodes liées à l'heure - ``hour()``,
+``minute()``, ``second()``, ``dateTime()`` et ``time()``:
+
+* ``'interval'`` - L'intervale en minute entre les valeurs affichées dans le
+  ``select`` qui correspond aux minutes. Défaut à 1.
+
+* ``'round'`` - Définir à ``up`` ou ``down`` si vous voulez forcer les minutes
+  à être arrondie dans l'une ou l'autre des direction (au supérieur ou à l'inférieur)
+  si la valeur ne correspond pas à l'intervale défini. Défaut à ``null``.
+
+* ``timeFormat`` - Applicable à ``dateTime()`` et ``time()``. Le format d'heure à
+  utiliser pour le ``select`` des heures : ``12`` ou ``24``. Si vous passez
+  autre chose que ``24``, le format ``12`` sera utilisé par défaut et le ``select``
+  correspondant au ``meridian`` sera affiché automatiquement à côté du ``select``
+  des secondes. Défaut à 24.
+
+* ``format`` - S'applique à la méthode ``hour()`` : soit ``12`` soit ``24``. Si
+  vous la définissez à ``12``, le ``select`` correspondant au ``meridian`` ne sera
+  pas automatiquement affiché. Défaut à ``24``.
+
+* ``second`` - Applicable à ``dateTime()`` and ``time()``. Définir à ``true``
+  pour activer le ``select`` correspondant aux secondes. Défaut à ``false``.
+
+Créer des champs DateTime
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: dateTime($fieldName, $options = [])
 
-Crée un ensemble d'inputs select pour les date et time. Cette méthode accepte
-un certain nombre d'options:
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
 
-* ``monthNames`` Si ``false``, un chiffre à 2 digits sera utilisé à la place
-  d'un texte.
-  Si c'est un tableau, le tableau passé sera utilisé.
-* ``minYear`` L'année la plus ancienne à utiliser dans le select de l'année
-* ``maxYear`` L'année la plus lointaine à utiliser dans le select de l'année
-* ``interval`` L'intervale en minutes entre chaque valeur dans le slect des
-  minutes. 1 par défaut.
-* ``empty`` - Si ``true``, une option select vide est affichée. Si c'est une
-  chaine, cette chaine est affichée comme élément vide.
-* ``round`` - Mettre à ``up`` ou ``down`` pour forcer l'arrondi
-  dans une direction. Par défaut à null.
-* ``default`` Le valeur par défaut à utiliser par l'input. Une valeur dans
-  ``$this->request->getData()`` correspondante au nom du l'input écrasera cette
-  valeur. Si aucune valeur par défaut n'est définie, ``time()`` sera utilisé.
-* ``timeFormat`` Le format d'heure à utiliser, soit 12 soit 24.
-* ``second`` Mettre à ``true`` to activer l'affichage des secondes.
+Crée un ensemble d'élément ``select`` qui permettent de définir une date et une
+heure.
 
-Pour controller l'ordre des inputs, et chaque élément/contenu entre les inputs,
-vous pouvez remplacer le template ``dateWidget``. Par défaut le template
-``dateWidget`` est::
+Pour contrôler l'ordre des éléments ainsi qu'ajouter des éléments ou du contenu entre
+les différents éléments, vous pouvez surcharger le template ``dateWidget``. Par défaut,
+le template a cette forme::
 
     {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
 
-Pour créer un input datetime avec des classes/attributs personnalisés pour une
-select box spécifique, vous pouvez utiliser les options dans chaque component::
+Appeler cette méthode sans options générera, par défaut, 5 ``select`` :
+année (4 chiffres), mois (textuelle complète), jour (numérique),
+heure (numérique), minutes (numérique).
+
+Par exemple::
+
+    <?= $this->form->dateTime('registered') ?>
+
+Affichera:
+
+.. code-block:: html
+
+    <select name="registered[year]">
+        <option value="" selected="selected"></option>
+        <option value="2022">2022</option>
+        ...
+        <option value="2012">2012</option>
+    </select>
+    <select name="registered[month]">
+        <option value="" selected="selected"></option>
+        <option value="01">January</option>
+        ...
+        <option value="12">December</option>
+    </select>
+    <select name="registered[day]">
+        <option value="" selected="selected"></option>
+        <option value="01">1</option>
+        ...
+        <option value="31">31</option>
+    </select>
+    <select name="registered[hour]">
+        <option value="" selected="selected"></option>
+        <option value="00">0</option>
+        ...
+        <option value="23">23</option>
+    </select>
+    <select name="registered[minute]">
+        <option value="" selected="selected"></option>
+        <option value="00">00</option>
+        ...
+        <option value="59">59</option>
+    </select>
+
+Pour créer des éléments avec des classes et des attributs spécifiques sur un
+élément donné, vous pouvez passer un tableau de paramètres pour chaque élément,
+via l'argument ``$options``.
+
+Par exemple::
 
     echo $this->Form->dateTime('released', [
         'year' => [
@@ -1252,7 +1654,7 @@ select box spécifique, vous pouvez utiliser les options dans chaque component::
         ],
     ]);
 
-Ce qui créerait les deux selects suivants:
+Ce qui créera les 2 éléments suivant:
 
 .. code-block:: html
 
@@ -1268,30 +1670,79 @@ Ce qui créerait les deux selects suivants:
         <!-- .. snipped for brevity .. -->
     </select>
 
-Créer des Inputs Time
----------------------
+Créer des éléments Date
+~~~~~~~~~~~~~~~~~~~~~~~
+.. php:method:: date($fieldName, $options = [])
+
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
+
+Va créer, par défaut, 3 ``select`` : un pour l'année (4 chiffres), un pour le
+mois (forme textuelle complète) et un pour le jour (numérique).
+
+Vous pouvez contrôler les éléments ``select`` en passant des tableaux de
+d'options.
+
+Par exemple::
+
+    // En partant du principe que l'année en cours est 2017, cet appel va
+    // désactiver le select pour le jour, retirer l'option vide pour le select
+    // de l'année, limiter l'année minimum à 2018, ajouter des attributs HTML
+    // à l'année, ajouter une chaîne pour l'option vide des mois et changer les
+    // mois pour qu'il soit afficher sous forme de chiffres
+    <?php
+        echo $this->Form->date('registered', [
+            'minYear' => 2018,
+            'monthNames' => false,
+            'empty' => [
+                'year' => false,
+                'month' => 'Choisissez un mois...'
+            ],
+            'day' => false,
+            'year' => [
+                'class' => 'cool-years',
+                'title' => 'Année d'inscription'
+            ]
+        ]);
+    ?>
+
+Affichera:
+
+.. code-block:: html
+
+    <select class= "cool-years" name="registered[year]" title="Année d'inscription">
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        ...
+        <option value="2018">2018</option>
+    </select>
+    <select name="registered[month]">
+        <option value="" selected="selected">Choisissez un mois...</option>
+        <option value="01">1</option>
+        ...
+        <option value="12">12</option>
+    </select>
+
+Créer des éléments Time
+~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: time($fieldName, $options = [])
 
-Crée deux éléments select remplis respectivement avec 24 hours et 60 minutes
-pour ``hour`` et ``minute``.
-De plus, les attributs HTML peuvent être fournis dans $options pour chaque
-``type`` spécifique. Si ``$options['empty']`` est ``false``, le select
-n'inclura pas une option vide:
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
 
-* ``empty`` - Si ``true``, l'option select vide est montrée. Si c'est une
-  chaîne, cette chaîne sera affichée en tant qu'élément vide.
-* ``default`` | ``value`` La valeur par défaut à utiliser pour l'input. Une
-  valeur dans ``$this->request->getData()`` qui correspond au nom du champ va écraser
-  cette valeur.
-  Si aucune valeur par défaut n'est fournie, ``time()`` sera utilisée.
-* ``timeFormat`` Le format de time à utiliser, soit 12 soit 24. Par défaut à 24.
-* ``second`` Défini à ``true`` pour activer les secondes déroulantes.
-* ``interval`` L'intervalle pour le select minutes. Par défaut à 1.
+Va créer, par défaut, 2 ``select`` : un pour l'heure (sous forme 24 heures) et
+un pour le temps (sous forme 60 minutes).
 
-Par exemple, pour créer un intervalle de temps avec des minutes selectionnables
-toutes les 15 minutes, et pour l'appliquer aux selects, vous pourriez faire
-ceci::
+Par exemple, pour créer un ``select`` qui propose les minutes par tranche de
+15 minutes et appliquer une classe aux ``select``, vous pouvez utiliser l'appel
+suivant::
 
     echo $this->Form->time('released', [
         'interval' => 15,
@@ -1303,7 +1754,7 @@ ceci::
         ],
     ]);
 
-Ce qui créerait les deux selects suivants:
+Ce qui générera le code suivant :
 
 .. code-block:: html
 
@@ -1312,8 +1763,8 @@ Ce qui créerait les deux selects suivants:
         <option value="00">0</option>
         <option value="01">1</option>
         <!-- .. snipped for brevity .. -->
-        <option value="22">22</option>
-        <option value="23">23</option>
+    <option value="22">22</option>
+    <option value="23">23</option>
     </select>
     <select name="released[minute]" class="bar-class">
         <option value="" selected="selected"></option>
@@ -1323,55 +1774,63 @@ Ce qui créerait les deux selects suivants:
         <option value="45">45</option>
     </select>
 
-Créer des Inputs Year
----------------------
+Créer des éléments Année (Year)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: year(string $fieldName, array $options = [])
 
-Crée un input de type select rempli avec les années comprises entre ``minYear``
-et ``maxYear``. En plus, des attributs HTML peuvent être fournis via $options.
-Si ``$options['empty']`` est ``false``, le select n'aura pas de choix vide:
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
 
-* ``empty`` - Si ``true``, une option select vide est affichée. Si c'est une
-  chaine, cette chaine est affichée comme élément vide.
-* ``orderYear`` - Ordre de tri des années dans les options du select.
-  Les valeurs acceptées sont 'asc', 'desc'. 'desc' par défaut.
-* ``value`` La valeur sélectionnée pour l'input.
-* ``maxYear`` L'année la plus lointaine à utiliser dans le select.
-* ``minYear`` L'année la plus ancienne à utiliser dans le select de l'année.
+Crée un élément ``select`` qui contiendra une option par année pour les années
+situées entre ``minYear`` et ``maxYear`` si ces options sont fournies ou
+pour les années entre -5 et +5 par rapport à l'année du jour.
+Si ``$options['empty']`` est passé à ``false``, le ``select`` n'aura pas d'élément
+vide en début de liste.
 
-Par exemple, pour créer une sélection depuis 2000 jusqu'à l'année actuelle,
-vous devez faire cela::
+Par exemple pour créer un élément qui propose les années entre 2000 et
+l'année en cours, vous utiliserez le code suivant::
 
     echo $this->Form->year('purchased', [
         'minYear' => 2000,
         'maxYear' => date('Y')
     ]);
 
-Si nous étions en 2009, vous auriez ceci:
+Si nous sommes en 2009, nous obtiendrons :
 
 .. code-block:: html
 
     <select name="purchased[year]">
-    <option value=""></option>
-    <option value="2009">2009</option>
-    <option value="2008">2008</option>
-    <option value="2007">2007</option>
-    <option value="2006">2006</option>
-    <option value="2005">2005</option>
-    <option value="2004">2004</option>
-    <option value="2003">2003</option>
-    <option value="2002">2002</option>
-    <option value="2001">2001</option>
-    <option value="2000">2000</option>
+        <option value=""></option>
+        <option value="2009">2009</option>
+        <option value="2008">2008</option>
+        <option value="2007">2007</option>
+        <option value="2006">2006</option>
+        <option value="2005">2005</option>
+        <option value="2004">2004</option>
+        <option value="2003">2003</option>
+        <option value="2002">2002</option>
+        <option value="2001">2001</option>
+        <option value="2000">2000</option>
     </select>
 
-Créer des Inputs Month
-----------------------
+Créer des éléments Mois (Month)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: month(string $fieldName, array $attributes)
 
-Crée un élément select (menu de sélection) avec le nom des mois::
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
+
+Crée un ``select`` avec les mois sous forme textuelle.
+
+Par exemple::
 
     echo $this->Form->month('mob');
 
@@ -1380,63 +1839,85 @@ Affichera:
 .. code-block:: html
 
     <select name="mob[month]">
-    <option value=""></option>
-    <option value="01">January</option>
-    <option value="02">February</option>
-    <option value="03">March</option>
-    <option value="04">April</option>
-    <option value="05">May</option>
-    <option value="06">June</option>
-    <option value="07">July</option>
-    <option value="08">August</option>
-    <option value="09">September</option>
-    <option value="10">October</option>
-    <option value="11">November</option>
-    <option value="12">December</option>
+        <option value=""></option>
+        <option value="01">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
     </select>
 
-Vous pouvez passer votre propre tableau des mois à utiliser en
-paramétrant l'attribut 'monthNames', ou avoir les mois affichés
-comme des nombres en passant ``false``. (Note: les mois par défaut
-sont internationalisés et peuvent être traduits en utilisant la
-:doc:`localisation </core-libraries/internationalization-and-localization>`.)::
+Vous pouvez passer votre propre tableau de valeurs en utilisant l'option
+``'monthNames'`` ou bien avoir les mois afficher sous leur forme chiffrée
+en passant ``false``.
 
-    echo $this->Form->month('mob', ['monthNames' => false]);
+Par exemple ::
 
-Créer des Inputs Day
---------------------
+  echo $this->Form->month('mob', ['monthNames' => false]);
+
+.. note::
+
+    Les mois par défaut peuvent être traduits via les fonctionnalités
+    d'internationalisation de CakePHP. Vous reportez à la section
+    :doc:`/core-libraries/internationalization-and-localization` pour plus
+    d'informations.
+
+Créer des éléments Jour (Day)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: day(string $fieldName, array $attributes)
 
-Crée un élément select (menu de sélection) rempli avec les jours
-(numériques) du mois.
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
 
-Pour créer une option empty avec l'affichage d'un texte de votre choix
-(ex. la première option est 'Jour'), vous pouvez fournir le texte comme
-paramètre final comme ceci::
+Crée un ``select`` avec les jours du mois sous forme numérique.
 
-    echo $this->Form->day('created');
+Pour créer un ``option`` vide affichant le texte de votre choix (pour qu'à
+l'initialisation la première option soit "Jour" par exemple), vous pouvez
+définir le texte souhaité dans le paramètre ``'empty'``.
+
+Par exemple::
+
+    echo $this->Form->day('created', ['empty' => 'Jour']);
 
 Affichera:
 
 .. code-block:: html
 
     <select name="created[day]">
-    <option value=""></option>
-    <option value="01">1</option>
-    <option value="02">2</option>
-    <option value="03">3</option>
-    ...
-    <option value="31">31</option>
+        <option value="" selected="selected">Jour</option>
+        <option value="01">1</option>
+        <option value="02">2</option>
+        <option value="03">3</option>
+        ...
+        <option value="31">31</option>
     </select>
 
-Créer des Inputs Hour
----------------------
+Créer des éléments Heure (Hour)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: hour(string $fieldName, array $attributes)
 
-Crée un élément select (menu de sélection) rempli avec les heures de la journée.
-Vous pouvez créer un select en de 12 ou 24 heures en utilisant l'option format::
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
+
+Créer un ``select`` avec les heures du jour.
+
+Vous pouvez avoir un ``select`` au format 12 ou 24 heures en utilisant l'option
+``'format'``::
 
     echo $this->Form->hour('created', [
         'format' => 12
@@ -1445,35 +1926,73 @@ Vous pouvez créer un select en de 12 ou 24 heures en utilisant l'option format:
         'format' => 24
     ]);
 
-Créer des Inputs Minute
------------------------
+Créer des éléments Minute
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: minute(string $fieldName, array $attributes)
 
-Crée un élément select (menu de sélection) rempli avec les minutes
-d'une heure. Vous pouvez créer un select qui contient des valeurs spécifiques
-en utilisant l'option ``interval``. Par exemple si vous souhaitez une
-incrémentation toutes les 10 minutes, vous devez faire::
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
 
-    echo $this->Form->minute('created', [
+Crée un ``select`` avec les valeurs des minutes pour l'heure. VOus pouvez créer un
+``select`` qui contient seulement des valeurs spécifiques en utilisant l'option
+``'interval'``.
+
+Par exemple si vous voulez des paliers de 10 minutes, vous utiliseriez le code
+suivant::
+
+    echo $this->Form->minute('arrival', [
         'interval' => 10
     ]);
 
-Créer des Inputs Meridian
--------------------------
+Affichera:
+
+.. code-block:: html
+
+    <select name="arrival[minute]">
+        <option value="" selected="selected"></option>
+        <option value="00">00</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+    </select>
+
+Creating Meridian Controls
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: meridian(string $fieldName, array $attributes)
 
-Crée un élément select (menu de sélection) rempli avec'am' et 'pm'.
+* ``$fieldName`` - Une chaîne qui sera utilisé comme préfixe pour l'attribut
+  ``name`` des ``select``.
+* ``$options`` - Un tableau optionnel d'options avec n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (vu ci-dessus) ainsi que n'importe quel attribut HTML valide.
+
+Crée un ``select`` avec les valeurs 'am' et 'pm'. Utile si vous utilisez le format
+d'heure ``12`` car il vous permettra de préciser la période de la journée à laquelle
+cette heure appartient
+
+.. _create-label:
 
 Créer les Labels
 ================
 
 .. php:method:: label(string $fieldName, string $text, array $options)
 
-Crée un élément label. ``$fieldName`` est utilisé pour générer le
-Dom id. Si ``$text`` n'est pas défini, ``$fieldName`` sera utilisé pour
-définir le texte du label::
+* ``$fieldName`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$text`` - Chaîne optionnelle pour définir le texte du label.
+* ``$options`` - Optionel. Chaîne ou tableau qui peut contenir n'importe laquelle
+  :ref:`des options générales<general-control-options>` ainsi que n'importe quel
+  attribut HTML valide.
+
+Crée un élément label. ``$fieldName`` est utilisé pour générer l'attribut ``for``.
+Si ``$text`` n'est pas défini, ``$fieldName`` sera utilisé pour définir le texte
+du label::
 
     echo $this->Form->label('User.name');
     echo $this->Form->label('User.name', 'Your username');
@@ -1501,20 +2020,78 @@ Affichera:
 Afficher et vérifier les erreurs
 ================================
 
+FormHelper expose quelques méthodes qui vous permette de facilement vérifier
+si vos champs contiennent des erreurs ou pour afficher des messages d'erreur
+personnalisés.
+
+Afficher les Erreurs
+--------------------
+
 .. php:method:: error(string $fieldName, mixed $text, array $options)
 
-Affiche un message d'erreur de validation, spécifiée par $texte, pour
-le champ donné, dans le cas où une erreur de validation a eu lieu.
+* ``$fieldName`` - Le ``name`` du champ sous la forme ``'Modelname.fieldname'``.
+* ``$text`` - Optionnel. Une chaîne ou un tableau fournissant le(s) message(s)
+  d'erreur. Si c'est un tableau, cela devra être un tableau de paire clé / valeur
+  où la clé est le nom du champ en erreur et la valeur le message associé.
+  Défaut à ``null``.
+* ``$options`` - Tableau optionnel qui ne peut contenir qu'une clé ``escape``
+  qui attend un booléen et qui permet de définir si le contenu HTML du message
+  d'erreur doit être échappé ou non. Défaut à ``true``.
 
-Options:
+Affiche un message d'erreur de validation, spécifiée par ``$text``, pour
+le champ donné, dans le cas où une erreur de validation a eu lieu. Si ``$text``
+n'est pas fourni alors le message de validation par défaut pour le type de champ
+sera utilisé.
 
--  'escape' booléen s'il faut ou non que le HTML échappe le contenu de
-   l'erreur.
+Cette méthode utilise les templates de widgets suivant::
+
+    'error' => '<div class="error-message">{{content}}</div>'
+    'errorList' => '<ul>{{content}}</ul>'
+    'errorItem' => '<li>{{text}}</li>'
+
+Les templates ``'errorList'`` et ``'errorItem'`` sont utilisés pour formater
+plusieurs messages d'erreur pour un seul champ.
+
+Exemple::
+
+    // Dans TicketsTable vous avez une règle de validation 'notEmpty' :
+    public function validationDefault(Validator $validator)
+    {
+        $validator
+            ->requirePresence('ticket', 'create')
+            ->notEmpty('ticket');
+    }
+
+    // Dans Templates/Tickets/add.ctp vous avez :
+    echo $this->Form->text('ticket');
+
+    if ($this->Form->isFieldError('ticket')) {
+        echo $this->Form->error('ticket', 'Message d\'erreur 100% personnalisé !');
+    }
+
+Si vous soumettez le formulaire sans fournir de valeur pour le champ *Ticket*,
+votre formulaire affichera :
+
+.. code-block:: html
+
+    <input name="ticket" class="form-error" required="required" value="" type="text">
+    <div class="error-message">Message d'erreur 100% personnalisé !</div>
+
+.. note::
+
+    En utilisant :php:meth:`~Cake\\View\\Helper\\FormHelper::control()`, les erreurs
+    sont rendues par défaut, donc vous n'aurez pas besoin d'utiliser ``isFieldError()``
+    ou d'appeler ``error()`` manuellement.
+
+Vérifier la Présence d'Erreurs
+------------------------------
 
 .. php:method:: isFieldError(string $fieldName)
 
-Retourne ``true`` si le champ $fieldName fourni a une erreur de validation en
-cours::
+* ``$fieldName`` - Un nom de champ sous la forme ``'Modelname.fieldname'``.
+
+Retourne ``true`` si le champ ``$fieldName`` fourni a une erreur de validation en
+cours. Sinon, retournera ``false``::
 
     if ($this->Form->isFieldError('gender')) {
         echo $this->Form->error('gender');
@@ -1528,19 +2105,47 @@ cours::
 Création des boutons et des éléments submit
 ===========================================
 
+Créer des éléments Submit
+-------------------------
+
 .. php:method:: submit(string $caption, array $options)
 
-Crée un input submit avec le texte ``$caption``. Si la ``$caption``
-fournie est l'URL d'une image, un bouton submit de l'image sera généré.
-Ce qui suit::
+* ``$caption`` - Chaîne optionnelle qui permet de fournir le texte à afficher
+  ou le chemin vers une image pour le bouton. Défaut à ``'Submit'``.
+* ``$options`` - Optionel. Chaîne ou tableau qui peut contenir n'importe laquelle
+  :ref:`des options générales<general-control-options>` ainsi que n'importe quel
+  attribut HTML valide.
 
-    echo $this->Form->submit();
+Crée un input ``submit`` avec le texte ``$caption``. Si la ``$caption``
+fournie est l'URL d'une image (sous-entendu que la valeur fournie contient '://'
+ou que son extension soit '.jpg, .jpe, .jpeg, .gif'), un bouton submit de
+l'image sera généré (si l'image existe). Si le premier caractère est '/' alors
+le chemin de l'image sera relatif à *webroot*, sinon, il sera relatif à *webroot/img*.
+
+Par défaut, les templates de widgets utilisés sont::
+
+    'inputSubmit' => '<input type="{{type}}"{{attrs}}/>'
+    'submitContainer' => '<div class="submit">{{content}}</div>'
+
+**Options pour les Submit**
+
+* ``'type'`` - Définissez cette option à ``'reset'`` pour générer un bouton
+  "reset" (de remise à zéro) pour le formulaire. Défaut à ``'submit'``.
+
+* ``'templateVars'`` - Utilisez ce tableau pour fournir des templates de
+  variables supplémentaire pour l'élément et / ou ses conteneurs.
+
+* Tout autre paramètre sera considéré comme un attribut à l'élément HTML ``input``.
+
+Le code suivant::
+
+    echo $this->Form->submit('Click me');
 
 Affichera:
 
 .. code-block:: html
 
-    <div class="submit"><input value="Submit" type="submit"></div>
+    <div class="submit"><input value="Click me" type="submit"></div>
 
 Vous pouvez aussi passer une URL relative ou absolue vers une image
 au paramètre caption au lieu d'un caption text::
@@ -1562,15 +2167,30 @@ Créer des Elements Button
 
 .. php:method:: button(string $title, array $options = [])
 
-Crée un bouton HTML avec le titre spécifié et un type par défaut "button".
-Définir ``$options['type']`` affichera l'un des trois types de boutons
-possibles:
+* ``$title`` - Chaîne obligatoire qui permet de fournir le texte du bouton.
+* ``$options`` - Optionel. Chaîne ou tableau qui peut contenir n'importe laquelle
+  :ref:`des options générales<general-control-options>` ainsi que n'importe quel
+  attribut HTML valide.
 
-#. submit: Comme celui de la méthode ``$this->Form->submit``- (par défaut).
-#. reset: Crée un bouton reset.
-#. button: Crée un bouton standard.
+Crée un bouton HTML avec le titre spécifié et un type par défaut ``button``.
+Définir
 
-::
+**Options pour les Button**
+
+* ``$options['type']`` - Définissez cette variable à l'une des trois valeurs
+  suivantes :
+
+  #. ``'submit'`` - Comme pour la méthode ``$this->Form->submit()``, cela créera
+     un bouton de type ``submit``. Notez cependant que ça ne générera pas de ``div``
+     autour comme pour ``submit()``. C'est le type par défaut.
+  #. ``'reset'`` - Crée un bouton "reset" (remise à zéro) pour le formulairere.
+  #. ``'button'`` - Crée un bouton standard.
+
+* ``$options['escape']`` - Booléen. Si cette option est définie à ``true``, le
+  contenu HTML de la valeur fournie pour ``$title`` sera échappé. Défaut à
+  ``false``.
+
+Par exemple::
 
     echo $this->Form->button('A Button');
     echo $this->Form->button('Another Button', ['type' => 'button']);
@@ -1586,9 +2206,7 @@ Affichera :
     <button type="reset">Reset the Form</button>
     <button type="submit">Submit Form</button>
 
-L'input de type ``button`` supporte l'option ``escape`` qui accepte un
-booléen et détermine si oui ou non l'entité HTML encode le $title du bouton.
-Par défaut à ``false``::
+Exemple en utilisant l'option ``escape``::
 
     // Va afficher le HTML echappé.
     echo $this->Form->button('<em>Submit Form</em>', [
@@ -1600,6 +2218,10 @@ Fermer le Formulaire
 ====================
 
 .. php:method:: end($secureAttributes = [])
+
+* ``$secureAttributes`` - Optionnel. Vous permet de fournir des attributs qui
+  seront utilisés comme attributs HTML aux inputs ``hidden`` générés par le
+  ``SecurityComponent``.
 
 La méthode ``end()`` ferme et complète le marquage du formulaire. Souvent,
 ``end()`` affiche juste la base fermante du formulaire, mais l'utilisation de
@@ -1615,11 +2237,10 @@ a besoin:
 
     <?= $this->Form->end(); ?>
 
-Le paramètre ``$secureAttributes`` vous permet de passer des attributs HTML
-supplémentaires aux inputs cachés qui sont générés quand votre application
-utilise ``SecurityComponent``. Si vous avez besoin d'ajouter des attributs
-supplémentaires aux inputs cachés générés, vous pouvez utiliser l'argument
-``$secureAttributes``::
+Si vous avez besoin d'appliquer des attributs supplémentaires aux inputs
+``hidden``, vous pouvez utiliser l'argument ``$secureAttributes``.
+
+Ainsi::
 
     echo $this->Form->end(['data-type' => 'hidden']);
 
@@ -1638,39 +2259,116 @@ Affichera:
 
     Si vous utilisez
     :php:class:`Cake\\Controller\\Component\\SecurityComponent` dans votre
-    application, vous devrez terminer vos formulaires avec ``end()``.
+    application, vous devrez obligatoirement terminer vos formulaires avec
+    ``end()``.
 
 Créer des Boutons Indépendants et des liens POST
 ================================================
 
+Créer des Boutons POST
+----------------------
+
 .. php:method:: postButton(string $title, mixed $url, array $options = [])
 
-    Crée une balise ``<button>`` avec un ``<form>`` l'entourant  qui soumet à
-    travers POST.
+* ``$title`` - Chaîne obligatoire qui sera utilisé comme texte du bouton. Notez
+  que, par défaut, cette valeur ne sera pas échappée.
+* ``$url`` - URL cible du formulaire, sous forme de chaîne ou de tableau.
+* ``$options`` - Optionel. Chaîne ou tableau qui peut contenir n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (ci-dessous) ainsi que n'importe quel attribut HTML valide.
 
-    Cette méthode crée un élément ``<form>``. Donc n'utilisez pas
-    cette méthode dans un formulaire ouvert. Utilisez plutôt
-    :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` ou
-    :php:meth:`Cake\\View\\Helper\\FormHelper::button()`
-    pour créer des boutons à l'intérieur de formulaires ouvert.
+Crée une balise ``<button>`` avec un ``<form>`` l'entourant qui soumet une requête
+POST. De plus, par défaut, cela générera des inputs ``hidden`` pour le
+``SecurityComponent``.
+
+**Options for POST Button**
+
+* ``'data'`` - Tableau clé / valeur à passer aux inputs ``hidden``.
+
+* ``'method'`` - La méthode de la requête à utiliser. Par exemple si vous voulez
+  que la requête émise simule une requête HTTP/1.1 DELETE, passez ``delete``.
+  La valeur par défaut est ``post``.
+
+* ``'form'`` - Tableau dans lequel vous pouvez passer n'importe quelle valeur
+  supportée par ``FormHelper::create()``.
+
+* De plus, la méthode ``postButton()`` acceptera n'importe quelle option également
+  valide pour la méthode ``button()``.
+
+Par exemple ::
+
+    // Dans Templates/Tickets/index.ctp
+    <?= $this->Form->postButton('Supprimer', ['controller' => 'Tickets', 'action' => 'delete', 5]) ?>
+
+Affichera un HTML similaire à:
+
+.. code-block:: html
+
+    <form method="post" accept-charset="utf-8" action="/Rtools/tickets/delete/5">
+        <div style="display:none;">
+            <input name="_method" value="POST" type="hidden">
+        </div>
+        <button type="submit">Supprimer</button>
+        <div style="display:none;">
+            <input name="_Token[fields]" value="186cfbfc6f519622e19d1e688633c4028229081f%3A" type="hidden">
+            <input name="_Token[unlocked]" value="" type="hidden">
+            <input name="_Token[debug]" value="%5B%22%5C%2FRtools%5C%2Ftickets%5C%2Fdelete%5C%2F1%22%2C%5B%5D%2C%5B%5D%5D" type="hidden">
+        </div>
+    </form>
+
+Cette méthode crée un élément ``<form>``. Donc n'utilisez pas cette méthode dans
+un formulaire ouvert. Utilisez plutôt
+:php:meth:`Cake\\View\\Helper\\FormHelper::submit()` ou
+:php:meth:`Cake\\View\\Helper\\FormHelper::button()`
+pour créer des boutons à l'intérieur de formulaires ouvert.
+
+Créer des liens POST
+--------------------
 
 .. php:method:: postLink(string $title, mixed $url = null, array $options = [])
 
-    Crée un lien HTML, mais accède à l'Url en utilisant la méthode POST.
-    Requiert que JavaScript soit autorisé dans votre navigateur.
+* ``$title`` - Chaîne obligatoire qui sera utilisé comme texte du bouton. Notez
+  que, par défaut, cette valeur ne sera pas échappée.
+* ``$url`` - URL cible du formulaire, sous forme de chaîne ou de tableau.
+* ``$options`` - Optionel. Chaîne ou tableau qui peut contenir n'importe laquelle
+  :ref:`des options générales<general-control-options>`, les options spécifiques
+  (ci-dessous) ainsi que n'importe quel attribut HTML valide.
 
-    Cette méthode crée un élément ``<form>``. Si vous souhaitez utiliser cette
-    méthode à l'intérieur d'un formulaire existant, vous devez utiliser l'option
-    ``block`` pour que le nouveau formulaire soit défini en un :ref:`view block <view-blocks>` qui peut être affiché en dehors du formulaire principal.
+Crée un lien HTML, mais accède à l'Url en utilisant la méthode POST (par défaut).
+Requiert que JavaScript soit autorisé dans votre navigateur.
 
-    Si vous cherchez un bouton pour soumettre votre formulaire, alors vous
-    devriez plutôt utiliser :php:meth:`Cake\\View\\Helper\\FormHelper::button()`
-    ou :php:meth:`Cake\\View\\Helper\\FormHelper::submit()`.
+**Options pour les liens POST**
 
-    .. note::
-        Attention à ne pas mettre un postLink à l'intérieur d'un formulaire
-        ouvert. À la place, utilisez l'option ``block`` pour mettre en mémoire
-        tampon le formulaire dans des :ref:`view-blocks`
+* ``'data'`` - Tableau clé / valeur à passer aux inputs ``hidden``.
+
+* ``'method'`` - La méthode de la requête à utiliser. Par exemple si vous voulez
+  que la requête émise simule une requête HTTP/1.1 DELETE, passez ``delete``.
+  La valeur par défaut est ``post``.
+
+* ``'confirm'`` - Le message de confirmation à afficher lors du clic sur le lien.
+  Défaut à ``null``.
+
+* ``'block'`` - Définissez cette option à ``true`` pour ajouter le lien au
+  "view block" ``'postLink'`` ou pour fournir un nom de bloc personnalisé.
+  Défaut à ``null``.
+
+* De plus, la méthode ``postLink`` acceptera n'importe quelle option également
+  valide pour la méthode ``link()``.
+
+Cette méthode crée un élément ``<form>``. Si vous souhaitez utiliser cette
+méthode à l'intérieur d'un formulaire existant, vous devez utiliser l'option
+``block`` pour que le nouveau formulaire soit défini en un :ref:`view block <view-blocks>`
+qui peut être affiché en dehors du formulaire principal.
+
+Si vous souhaitez plutôt créer un bouton pour soumettre votre formulaire, alors vous
+devriez plutôt utiliser :php:meth:`Cake\\View\\Helper\\FormHelper::button()`
+ou :php:meth:`Cake\\View\\Helper\\FormHelper::submit()`.
+
+.. note::
+
+    Attention à ne pas mettre un postLink à l'intérieur d'un formulaire
+    ouvert. À la place, utilisez l'option ``block`` pour mettre en mémoire
+    tampon le formulaire dans des :ref:`view-blocks`
 
 .. _customizing-templates:
 
@@ -1691,17 +2389,20 @@ l'option ``templates`` lors de l'inclusion du helper dans votre controller::
         'templates' => 'app_form',
     ]);
 
-Ceci charge les balises dans **config/app_form.php**. Le fichier devra
-contenir un tableau des templates indexés par leur nom::
+Ceci chargera les balises dans **config/app_form.php**. Le fichier devra
+contenir un tableau des templates *indexés par leur nom*::
 
+    // dans config/app_form.php
     return [
         'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
 
 Tous les templates que vous définissez vont remplacer ceux par défaut dans
 le helper. Les Templates qui ne sont pas remplacés vont continuer à être
-utilisés avec les valeurs par défaut. Vous pouvez aussi changer les templates
-à la volée en utilisant la méthode ``setTemplates()``::
+utilisés avec les valeurs par défaut.
+
+Vous pouvez aussi changer les templates à la volée en utilisant la méthode
+``setTemplates()``::
 
     $myTemplates = [
         'inputContainer' => '<div class="form-control">{{content}}</div>',
@@ -1716,13 +2417,16 @@ utilisés avec les valeurs par défaut. Vous pouvez aussi changer les templates
     une attention spéciale, vous devriez préfixer ce caractère avec un autre
     pourcentage pour qu'il ressemble à ``%%``. La raison est que les templates
     sont compilés en interne pour être utilisé avec ``sprintf()``.
-    Exemple: '<div style="width:{{size}}%%">{{content}}</div>'
+    Exemple: ``<div style="width:{{size}}%%">{{content}}</div>``
 
 Liste des Templates
 -------------------
 
 La liste des templates par défaut, leur format par défaut et les variables
 qu'ils attendent se trouvent dans la `documentation API du FormHelper <https://api.cakephp.org/3.x/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
+
+Utiliser des conteneurs personnalisés distincts pour les éléments
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 En plus de ces templates, la méthode ``control()`` va essayer d'utiliser les
 templates pour chaque conteneur d'input. Par exemple, lors de la création
@@ -1736,14 +2440,20 @@ Par exemple::
     ]);
 
     // Crée un ensemble d'inputs radio avec notre div personnalisé autour
-    echo $this->Form->radio('User.email_notifications', ['y', 'n']);
+    echo $this->Form->control('User.email_notifications', [
+        'options' => ['y', 'n'],
+        'type' => 'radio'
+    ]);
 
-De la même manière qu'avec les conteneurs d'input, la méthode ``ìnput()``
+Utiliser des groupe de formulaire (formGroup) personnalisés distincts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+De la même manière qu'avec les conteneurs d'input, la méthode ``control()``
 essayera d'utiliser différents templates pour chaque groupe de formulaire
-(formGroup). Un group de formulaire est un combo d'un label et d'une input.
+(formGroup). Un group de formulaire est un ensemble un label & input.
 Par exemple, lorsque vous créez des inputs de type radio, le template
 ``radioFormGroup`` sera utilisé s'il est présent. Si ce template est manquant,
-par défaut chaque ensemble label & input sera généré en utilisant le template
+par défaut chaque ensemble ``label`` & ``input`` sera généré en utilisant le template
 ``formGroup``::
 
     // Ajoute un groupe de formulaire pour radio personnalisé
@@ -1756,7 +2466,9 @@ Ajouter des Variables de Template Supplémentaires aux Templates
 
 Vous pouvez aussi ajouter des placeholders de template supplémentaires dans des
 templates personnalisés et remplir ces placeholders lors de la génération des
-inputs::
+inputs.
+
+Par exemple::
 
     // Ajoute un template avec le placeholder help.
     $this->Form->setTemplates([
@@ -1769,16 +2481,29 @@ inputs::
         'templateVars' => ['help' => 'Au moins 8 caractères.']
     ]);
 
+Affichera:
+
+.. code-block:: html
+
+    <div class="input password">
+        <label for="password">
+            Password
+        </label>
+        <input name="password" id="password" type="password">
+        <span class="help">Au moins 8 caractères.</span>
+    </div>
+
 .. versionadded:: 3.1
     L'option templateVars a été ajoutée dans 3.1.0
 
 Déplacer les Checkboxes & Boutons Radios à l'Extérieur du Label
 ---------------------------------------------------------------
 
-Par défaut, CakePHP incorpore les cases à cocher et des boutons radio dans des
-éléments label. Cela contribue à faciliter l'intégration des framework CSS
-populaires. Si vous avez besoin de placer ces inputs à l'extérieur de la balise
-label, vous pouvez le faire en modifiant les templates::
+Par défaut, CakePHP incorpore les cases à cocher créées via ``control()`` et
+les boutons radios créés par ``control()`` et ``radio()`` dans des éléments label.
+Cela contribue à faciliter l'intégration des framework CSS populaires. Si vous
+avez besoin de placer ces éléments à l'extérieur de la balise label, vous pouvez
+le faire en modifiant les templates::
 
     $this->Form->setTemplates([
         'nestingLabel' => '{{input}}<label{{attrs}}>{{text}}</label>',
@@ -1790,58 +2515,81 @@ Cela générera les checkbox et les boutons radio à l'extérieur de leurs label
 Générer des Formulaires Entiers
 ===============================
 
-.. php:method:: inputs(mixed $fields = [], $options = [])
+Créer plusieurs éléments (controls)
+-----------------------------------
 
-Génère un ensemble d'inputs pour un contexte donné. Vous pouvez spécifier les
-champs générés en les incluant::
+.. php:method:: controls(mixed $fields = [], $options = [])
 
-    echo $this->Form->inputs([
+* ``$fields`` - Un tableau des champs à générer. Permet de définir des types
+  personnalisés, des labels et toutes autres options pour chaque champ.
+* ``$options`` - Optionnel. Un tableau d'options. Les clés supportées sont :
+
+  #. ``'fieldset'`` - Définir à ``false`` pour désactiver l'ajout d'un ``fieldset``.
+     Si vide, le ``fieldset`` sera ajouté. Peut aussi être un tableau de paramètres
+     à appliquer comme attributs HTML au ``fieldset`` généré.
+  #. ``legend`` - Chaîne utilisé pour personnalisé le texte de l'élément ``legend``.
+     Définir à ``false`` pour désactiver l'ajout de l'élément ``legend``.
+
+Génère un ensemble d'inputs pour un contexte donné, entouré d'un ``fieldset``.
+Vous pouvez spécifier les champs générés en les incluant::
+
+    echo $this->Form->controls([
         'name',
         'email'
     ]);
 
 Vous pouvez personnaliser le texte de légende en utilisant une option::
 
-    echo $this->Form->inputs($fields, ['legend' => 'Update news post']);
+    echo $this->Form->controls($fields, ['legend' => 'Mettre à jour le post']);
 
 Vous pouvez personnaliser les inputs générés en définissant des options
 additionnelles dans le paramètre ``$fields``::
 
-    echo $this->Form->inputs([
-        'name' => ['label' => 'custom label']
+    echo $this->Form->controls([
+        'name' => ['label' => 'Label personnalisé']
     ]);
 
 Quand vous personnalisez ``fields``, vous pouvez utiliser le paramètre
-``$options`` pour contrôler les legend/fields générés.
-
-- ``fieldset`` Défini à ``false`` pour désactiver le fieldset. Vous pouvez
-  également passer un tableau de paramètres qui seront rendus comme attributs
-  HTML sur le tag du fieldset. Si vous passez un tableau vide, le fieldset sera
-  simplement rendu sans attributs.
-- ``legend`` Défini à ``false`` pour désactiver la legend pour l'ensemble
-  d'input généré.
-  Ou fournir une chaîne pour personnaliser le texte de legend.
+``$options`` pour contrôler les éléments ``legend`` et ``fieldset`` générés.
 
 Par exemple::
 
-    echo $this->Form->inputs(
+    echo $this->Form->controls(
         [
-            'name' => ['label' => 'custom label']
+            'name' => ['label' => 'Label personnalisé']
         ],
         null,
-        ['legend' => 'Update your post']
+        ['legend' => 'Mettre à jour votre post']
     );
 
-Si vous désactiver le fieldset, la legend ne s'affichera pas.
+Si vous désactiver le ``fieldset``, la ``legend`` ne s'affichera pas.
 
-.. php:method:: allInputs(array $fields, $options = [])
+Créer les éléments pour une Entity complète
+-------------------------------------------
 
-Cette méthode est étroitement liée à ``inputs()``, cependant l'argument
+.. php:method:: allControls(array $fields, $options = [])
+
+* ``$fields`` - Optionnel. Un tableau de paramétrages pour les champs qui seront
+  générés. Permet de définir des types personnalisés, des labels et toutes autres
+  options.
+* ``$options`` - Optionnel. Un tableau d'options. Les clés supportées sont :
+
+  #. ``'fieldset'`` - Définir à ``false`` pour désactiver l'ajout d'un ``fieldset``.
+     Si vide, le ``fieldset`` sera ajouté. Peut aussi être un tableau de paramètres
+     à appliquer comme attributs HTML au ``fieldset`` généré.
+  #. ``legend`` - Chaîne utilisé pour personnalisé le texte de l'élément ``legend``.
+     Définir à ``false`` pour désactiver l'ajout de l'élément ``legend``.
+
+Cette méthode est étroitement liée à ``controls()``, cependant l'argument
 ``$fields`` est égal par défaut à *tous* les champs de l'entity de niveau
 supérieur actuelle. Pour exclure des champs spécifiques de la liste d'inputs
-générées, définissez les à ``false`` dans le paramètre fields::
+générées, définissez les à ``false`` dans le paramètre ``$fields``::
 
+    echo $this->Form->allControls(['password' => false]);
+    // Avant 3.4.0:
     echo $this->Form->allInputs(['password' => false]);
+
+Si vous désactiver le ``fieldset``, la ``legend`` ne s'affichera pas.
 
 .. _associated-form-inputs:
 
@@ -1849,8 +2597,8 @@ Créer des Inputs pour les Données Associées
 ===========================================
 
 Créer des formulaires pour les données associées est assez simple et est
-étroitement lié au chemins des données de votre entity. Imaginons les
-relations suivantes:
+étroitement lié aux chemins des données de votre entity. Imaginons les
+relations suivantes :
 
 * Authors HasOne Profiles
 * Authors HasMany Articles
@@ -1974,6 +2722,8 @@ si défini comme ceci par exemple::
         'autocomplete' => '<input type="autocomplete" name="{{name}}" {{attrs}} />'
     ]);
 
+Pour plus d'informations sur les templates, référez-vous à la section :ref:`customizing-templates`.
+
 Utiliser les Widgets
 --------------------
 
@@ -2001,8 +2751,8 @@ dépendances lorsqu'elles sont déclarées::
         ]
     ]);
 
-Dans l'exemple ci-dessus, le widget autocomplete widget dépendrait des widgets
-``text`` et ``label``.Si votre widget doit accéder à la View, vous devrez
+Dans l'exemple ci-dessus, le widget ``autocomplete`` widget dépendrait des widgets
+``text`` et ``label``. Si votre widget doit accéder à la View, vous devrez
 utiliser le 'widget' ``_view``. Lorsque le widget autocomplete est créé, les
 objets widget liés au noms ``text`` et ``label`` lui sont passés. Ajouter des
 widgets en utilisant la méthode ``addWidget`` resemble à ceci::
@@ -2026,7 +2776,7 @@ Une fois ajoutés/remplacés, les widgets peuvent être utilisés en tant que
 
     echo $this->Form->control('search', ['type' => 'autocomplete']);
 
-Cela créera un widget personnalisé avec un label et une div enveloppante
+Cela créera un widget personnalisé avec un ``label`` et une ``div`` enveloppante
 tout comme ``control()`` le fait toujours. Sinon vous pouvez juste créer un widget
 input en utilisant la méthode magique::
 
@@ -2048,17 +2798,30 @@ inputs spéciales ``_Token`` soient générées.
 
 .. php:method:: unlockField($name)
 
-    Déverrouille un champ en l’exemptant du hashage de ``SecurityComponent``.
-    Cela autorise également à manipuler le champ via JavaScript.
-    Le paramètre ``$name`` doit correspondre au nom de la propriété de l'entity
-    pour l'input::
+* ``$name`` - Optionnel. Le nom du champ en notation avec point (sous la forme
+  ``'Modelname.fieldname'``).
 
-        $this->Form->unlockField('id');
+Déverrouille un champ en l’exemptant du hashage de ``SecurityComponent``.
+Cela autorise également à manipuler le champ via JavaScript.
+Le paramètre ``$name`` doit correspondre au nom de la propriété de l'entity
+pour l'input::
 
-.. php:method:: secure(array $fields = [])
+    $this->Form->unlockField('id');
 
-    Génère un champ caché avec un hash de sécurité basé sur les champs utilisés
-    dans le formulaire.
+.. php:method:: secure(array $fields = [], array $secureAttributes = [])
+
+* ``$fields`` - Optionnel. Un tableau contenant la liste des champs à utiliser
+  lors de la génération du hash. S'il n'est pas fourni, alors ``$this->fields``
+  sera utilisé.
+* ``$secureAttributes`` - Optionnel. Un tableau d'attributs HTML à passer aux
+  élément ``input`` de type ``hidden`` qui seront générés.
+
+Génère un ``input`` de type ``hidden`` avec un hash de sécurité basé sur les
+champs du formulaire ou une chaîne si la sécurisation des formulaire n'est pas
+utilisée.
+Si l'option ``$secureAttributes`` est définie, ces attributs HTML seront utilisés
+avec ceux générés par le SecurityComponent. Cela vous permet de définir des attributs
+HTML spécifique en fonction de vos besoins.
 
 .. meta::
     :title lang=fr: FormHelper

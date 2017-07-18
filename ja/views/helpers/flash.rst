@@ -10,8 +10,8 @@ FlashHelperは、 :doc:`FlashComponent </controllers/components/flash>` によ�
 :doc:`FlashComponent </controllers/components/flash>` および
 FlashHelper はフラッシュメッセージを描画するためのエレメントを使用します。
 フラッシュエレメントは **src/Template/Element/Flash** ディレクトリー以下に存在します。
-CakePHP の App テンプレートには、 **success.ctp** と **error.ctp** の
-2つのフラッシュエレメントが付属しています。
+CakePHP の App テンプレートには、 **success.ctp** 、 **default.ctp** と **error.ctp** の
+3つのフラッシュエレメントが付属しています。
 
 フラッシュメッセージの描画
 ==========================

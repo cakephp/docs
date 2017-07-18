@@ -200,7 +200,9 @@ password
 database
     The name of the database for this connection to use. Avoid using ``.`` in
     your database name. Because of how it complicates identifier quoting CakePHP
-    does not support ``.`` in database names.
+    does not support ``.`` in database names. The path to your SQLite database
+    should be an absolute path (e.g. ``ROOT . DS . 'my_app.db'``) to avoid
+    incorrect paths caused by relative paths.
 port (*optional*)
     The TCP port or Unix socket used to connect to the server.
 encoding
