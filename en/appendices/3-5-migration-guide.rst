@@ -135,6 +135,15 @@ behavior that may affect your application:
 New Features
 ============
 
+Scoped Middleware
+-----------------
+
+Middleware can now be conditionally applied to routes in specific URL
+scopes. This allows you to build specific stacks of middleware for different
+parts of your application without having to write URL checking code in your
+middleware. See the :ref:`connecting-scoped-middleware` section for more
+information.
+
 New Console Runner
 ------------------
 
@@ -146,13 +155,13 @@ how they are named and how the shells get their dependencies. Adopting this new
 class requires replacing the contents of your ``bin/cake.php`` file with the
 `following file <https://github.com/cakephp/app/tree/3.next/bin/cake.php>`_.
 
-Cache
------
+Cache Engine Fallbacks
+----------------------
 
-* Cache engines can now be configured with a ``fallback`` key that defines a
-  cache configuration to fall back to if the engine is misconfigured (or
-  unavailable). See :ref:`cache-configuration-fallback` for more information on
-  configuring fallbacks.
+Cache engines can now be configured with a ``fallback`` key that defines a
+cache configuration to fall back to if the engine is misconfigured (or
+unavailable). See :ref:`cache-configuration-fallback` for more information on
+configuring fallbacks.
 
 Core
 ----
