@@ -125,8 +125,8 @@ scripts, that add middleware::
 
     EventManager::instance()->on(
         'Server.buildMiddleware',
-        function ($event, $middlewareQueueStack) {
-            $middlewareQueueStack->add(new ContactPluginMiddleware());
+        function ($event, $middlewareQueue) {
+            $middlewareQueue->add(new ContactPluginMiddleware());
         });
 
 PSR-7 Requests and Responses
@@ -278,14 +278,14 @@ application::
 
     class Application
     {
-        public function middleware($middlewareQueueStack)
+        public function middleware($middlewareQueue)
         {
             // Add your simple middleware onto the queue
-            $middlewareQueueStack->add(new TrackingCookieMiddleware());
+            $middlewareQueue->add(new TrackingCookieMiddleware());
 
             // Add some more middleware onto the queue
 
-            return $middlewareQueueStack;
+            return $middlewareQueue;
         }
     }
 
