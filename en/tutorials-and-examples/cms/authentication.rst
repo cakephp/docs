@@ -25,6 +25,8 @@ AuthComponent in our AppController::
     {
         public function initialize()
         {
+            // Existing code
+
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
                 'authenticate' => [
@@ -51,9 +53,10 @@ AuthComponent in our AppController::
 
 We've just told CakePHP that we want to load the ``Flash`` and ``Auth``
 components. In addition, we've customized the configuration of AuthComponent, as
-our users table uses ``email`` as the username. Now, if you go to any URL you'll
-be redirected to **/users/login**, which will show an error page as we have
-not written that code yet. So let's create the login action::
+our users table uses ``email`` as the username. Now, if you go any protected
+URL, such as ``/articles/add``, you'll be redirected to **/users/login**, which
+will show an error page as we have not written that code yet. So let's create
+the login action::
 
     // In src/Controller/UsersController.php
     public function login()
@@ -88,11 +91,14 @@ the users that has a hashed password.
 .. note::
 
     If none of your users have hashed passwords, comment the
-    ``loadComponent('Auth')`` line. Then go and edit the user,
-    saving a new password for them.
+    ``loadComponent('Auth')`` block and ``$this->Auth->allow()`` calls. Then go
+    and edit the user, saving a new password for them. After saving a new
+    password for the user, make sure to uncomment the lines we just temporarily
+    commented!
 
-You should now be able to log in. If not, make sure you are using a user that
-has a hashed password.
+Try it out! Before logging in, visit ``/articles/add``. Since this action is not
+allowed, you will be redirected to the login page. After logging in
+successfully, CakePHP will automatically redirect you back to ``/articles/add``.
 
 Adding Logout
 =============
@@ -112,9 +118,9 @@ well. Again, in the ``UsersController``, add the following code::
         return $this->redirect($this->Auth->logout());
     }
 
-This code adds the ``logout`` action as one that does not require authentication
-and implements the logout method. Now you can visit ``/users/logout`` to log
-out. You should then be sent to the login page.
+This code adds the ``logout`` action to the list of actions that do not require
+authentication and implements the logout method. Now you can visit
+``/users/logout`` to log out. You should then be sent to the login page.
 
 Enabling Registrations
 ======================
