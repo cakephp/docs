@@ -5,15 +5,15 @@ Les objets Middleware vous donnent la possibilité d'encapsuler votre applicatio
 dans des couches modulables et réutilisables du gestionnaire de requête ou de
 logique de construction de réponses. Visuellement, votre application se trouve au
 centre et les middlewares entourent l'application comme un oignon. Ici, on peut voir
-une application entourés des middlewares Routes, Assets, gestion d'Exceptions et
+une application entourée des middlewares Routes, Assets, gestion d'Exceptions et
 gestion des headers CORS.
 
 .. image:: /_static/img/middleware-setup.png
 
 Quand une requête est gérée par votre application, elle entre par le middleware le
 plus à l'extérieur. Chaque middleware peut soit passer la requête / la réponse à la
-couche suivante ou retourner une réponse. Retourner une réponse empêchera les couches
-plus basse d'accéder à la requête. Un exemple illustrant ce principe serait
+couche suivante, soit retourner une réponse. Retourner une réponse empêchera les couches
+plus basses d'accéder à la requête. Un exemple illustrant ce principe serait
 l'AssetMiddleware qui gérera la requête d'une image de plugin pendant le développement. 
 
 .. image:: /_static/img/middleware-request.png
@@ -21,7 +21,7 @@ l'AssetMiddleware qui gérera la requête d'une image de plugin pendant le déve
 Si aucun middleware n'effectue une action pour gérer la requête, un controller sera
 utilisé et son action exécutée, ou une exception sera levée et génerera une erreur.
 
-Les Middleware font partie de la nouvelle pile HTTP qui influence la requête et
+Les Middlewares font partie de la nouvelle pile HTTP qui influence la requête et
 les interfaces de réponse PSR-7. Ceci permet d'utiliser n'importe quel middleware
 compatible avec PSR-7 disponible sur `Packagist <https://packagist.org>`__.
 

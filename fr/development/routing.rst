@@ -906,11 +906,11 @@ Connecter des Middlewares à un scope
 Bien que les middlewares puissent être appliqués à toute votre application, appliquer
 les middlewares à des 'scopes' de routing offre plus de flexibilité puisque vous
 pouvez appliquer des middlewares seulement où ils sont nécessaires permettant à vos
-middleware de ne pas nécessiter de logique spécifique sur le comment / où il doit
+middlewares de ne pas nécessiter de logique spécifique sur le comment / où il doit
 s'appliquer.
 
 Avant qu'un middleware ne puisse être appliqué à un scope, il a besoin d'être
-enregistré dans la collection de route::
+enregistré dans la collection de routes::
 
     // in config/routes.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
