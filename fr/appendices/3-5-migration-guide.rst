@@ -183,6 +183,13 @@ Console
   que les applications puissent définir les outils en ligne de commande qu'elles
   offrent.
 
+Database
+--------
+
+* Une nouvelle option ``mask`` pour le driver SQLite a été ajoutée. Cette option
+  vous permet de définir les droits sur le fichier de la base SQLite quand il est
+  créé.
+
 Datasource
 ----------
 

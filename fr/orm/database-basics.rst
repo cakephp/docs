@@ -265,6 +265,9 @@ cacheMetadata
     metadata n'est pas conseillé et peut entraîner de faibles performances.
     Consultez la section sur :ref:`database-metadata-cache` pour plus
     d'information.
+mask
+    Définit les droits sur le fichier de base de données généré (seulement supporté
+    par SQLite)
 
 Au point où nous sommes, vous pouvez aller voir
 :doc:`/intro/conventions`. Le nommage correct pour vos
