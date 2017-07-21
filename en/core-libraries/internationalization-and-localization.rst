@@ -165,7 +165,7 @@ to be translated.
 
      msgctxt "written communication"
      msgid "He read the first letter"
-     msgstr "Hey, lies den ersten Brief"
+     msgstr "Er las den ersten Brief"
 
 Using Variables in Translation Messages
 ---------------------------------------
