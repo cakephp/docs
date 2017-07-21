@@ -344,7 +344,7 @@ this way::
         'url' => true,
         'user' => true,
         'tags' => true,
-        'tag_string' => true,
+        'tag_string' => true
     ];
 
 
