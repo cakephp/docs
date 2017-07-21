@@ -136,7 +136,7 @@ variations mineures qui pourraient avoir un impact sur votre application.
 Nouvelles Fonctionnalités
 =========================
 
-Middleware sur scopes
+Middleware sur Scopes
 ---------------------
 
 Les middlewares peuvent maintenant être appliqués conditionnellement à des routes
