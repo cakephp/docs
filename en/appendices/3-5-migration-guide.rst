@@ -182,6 +182,12 @@ Console
 * ``Cake\Console\CommandCollection`` was added to provide an interface for
   applications to define the command line tools they offer.
 
+Database
+--------
+
+* SQLite driver had the ``mask`` option added. This option lets you set the
+  file permissions on the SQLite database file when it is created.
+
 Datasource
 ----------
 

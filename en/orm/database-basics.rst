@@ -245,6 +245,8 @@ cacheMetadata
     store meta data in. Having metadata caching disable is not advised and can
     result in very poor performance. See the :ref:`database-metadata-cache`
     section for more information.
+mask
+    Set the permissions on the generated database file. (Only supported by SQLite)
 
 At this point, you might want to take a look at the
 :doc:`/intro/conventions`. The correct naming for your tables (and the addition
