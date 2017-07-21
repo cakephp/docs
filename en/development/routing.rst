@@ -928,9 +928,8 @@ middleware applied to routes in each scope will be isolated::
     });
 
 In the above example, the two uses of the ``/blog`` scope do not share
-middleware. However, both of these scopes will inherit middleware defied in
+middleware. However, both of these scopes will inherit middleware defined in
 their enclosing scopes.
-
 
 Grouping Middleware
 -------------------
@@ -946,7 +945,6 @@ can::
 
     // Apply the group
     $routes->applyMiddleware('web');
-
 
 .. versionadded:: 3.5.0
     Scoped middleware & middleware groups were added in 3.5.0

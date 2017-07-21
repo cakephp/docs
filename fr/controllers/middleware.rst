@@ -3,12 +3,33 @@ Middleware
 
 Les objets Middleware vous donnent la possibilité d'encapsuler votre application
 dans des couches modulables et réutilisables du gestionnaire de requête ou de
-logique de construction de réponses. Les Middleware font partie de la nouvelle
-pile HTTP qui influence la requête et les interfaces de réponse PSR-7. Ceci
-permet d'utiliser n'importe quel middleware compatible avec PSR-7 disponible
-sur `Packagist <https://packagist.org>`__.
+logique de construction de réponses. Visuellement, votre application se trouve au
+centre et les middlewares entourent l'application comme un oignon. Ici, on peut voir
+une application entourés des middlewares Routes, Assets, gestion d'Exceptions et
+gestion des headers CORS.
 
-CakePHP fournit nativement plusieurs middleware :
+.. image:: /_static/img/middleware-setup.png
+
+Quand une requête est gérée par votre application, elle entre par le middleware le
+plus à l'extérieur. Chaque middleware peut soit passer la requête / la réponse à la
+couche suivante ou retourner une réponse. Retourner une réponse empêchera les couches
+plus basse d'accéder à la requête. Un exemple illustrant ce principe serait
+l'AssetMiddleware qui gérera la requête d'une image de plugin pendant le développement. 
+
+.. image:: /_static/img/middleware-request.png
+
+Si aucun middleware n'effectue une action pour gérer la requête, un controller sera
+utilisé et son action exécutée, ou une exception sera levée et génerera une erreur.
+
+Les Middleware font partie de la nouvelle pile HTTP qui influence la requête et
+les interfaces de réponse PSR-7. Ceci permet d'utiliser n'importe quel middleware
+compatible avec PSR-7 disponible sur `Packagist <https://packagist.org>`__.
+
+Les Middlewares dans CakePHP
+============================
+
+CakePHP fournit nativement plusieurs middlewares pour gérer des cas classiques
+d'une application web :
 
 * ``Cake\Error\Middleware\ErrorHandlerMiddleware`` capture les exceptions à
   partir du middleware encapsulé et affiche un page d'erreur en utilisant le
@@ -35,11 +56,14 @@ CakePHP fournit nativement plusieurs middleware :
 Utilisation des Middleware
 ==========================
 
-Les middleware sont ajoutés dans la méthode ``middleware`` dans la classe
-``App\Application``. Si la classe ``App\Application`` n'existe pas,
+Les middlewares peuvent être appliqués de manière globale à votre application ou
+un scope de routing.
+
+Pour appliquer un middleware à toutes les requêtes, utilisez la méthode ``middleware``
+de la classe ``App\Application``. Si la classe ``App\Application`` n'existe pas,
 reportez-vous à la section :ref:`adding-http-stack` pour plus d'informations.
 La méthode d'attache ``middleware`` de votre application sera appelée très tôt
-dans le processus de requête, vous pouvez utiliser les objets ``Middleware``
+dans le processus de requête, vous pouvez utiliser les objets ``MiddlewareQueue``
 pour en attacher ::
 
     namespace App;
@@ -49,11 +73,11 @@ pour en attacher ::
 
     class Application extends BaseApplication
     {
-        public function middleware($middlewareStack)
+        public function middleware($middlewareQueue)
         {
             // Attache le gestionnaire d'erreur dans la file du middleware
-            $middlewareStack->add(new ErrorHandlerMiddleware());
-            return $middlewareStack;
+            $middlewareQueue->add(new ErrorHandlerMiddleware());
+            return $middlewareQueue;
         }
     }
 
@@ -63,19 +87,19 @@ différentes opérations ::
         $layer = new \App\Middleware\CustomMiddleware;
 
         // Le middleware sera ajouté à la fin de la file.
-        $middlewareStack->add($layer);
+        $middlewareQueue->add($layer);
 
         // Le middleware sera ajouté au début de la file
-        $middlewareStack->prepend($layer);
+        $middlewareQueue->prepend($layer);
 
         // Insère dans une place spécifique. Si cette dernière est
         // hors des limites, il sera ajouté à la fin.
-        $middlewareStack->insertAt(2, $layer);
+        $middlewareQueue->insertAt(2, $layer);
 
         // Insère avant un autre middleware.
         // Si la classe nommée ne peut pas être trouvée,
         // une exception sera renvoyée.
-        $middlewareStack->insertBefore(
+        $middlewareQueue->insertBefore(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
@@ -83,7 +107,7 @@ différentes opérations ::
         // Insère après un autre middleware.
         // Si la classe nommée ne peut pas être trouvée,
         // le middleware sera ajouté à la fin.
-        $middlewareStack->insertAfter(
+        $middlewareQueue->insertAfter(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
@@ -106,8 +130,8 @@ un middleware ::
 
     EventManager::instance()->on(
         'Server.buildMiddleware',
-        function ($event, $middlewareStack) {
-            $middlewareStack->add(new ContactPluginMiddleware());
+        function ($event, $middlewareQueue) {
+            $middlewareQueue->add(new ContactPluginMiddleware());
         });
 
 Requêtes et Réponses PSR-7
@@ -262,14 +286,14 @@ Après avoir créer le middleware, attachez-le à votre application ::
 
     class Application
     {
-        public function middleware($middlewareStack)
+        public function middleware($middlewareQueue)
         {
             // Ajoutez votre middleware dans la file
-            $middlewareStack->add(new TrackingCookieMiddleware());
+            $middlewareQueue->add(new TrackingCookieMiddleware());
 
             // Ajoutez d'autres middleware dans la file
 
-            return $middlewareStack;
+            return $middlewareQueue;
         }
     }
 
@@ -302,7 +326,7 @@ appliqué au stack de middlewares::
         ->noOpen()
         ->noSniff();
 
-    $middleware->add($headers);
+    $middlewareQueue->add($headers);
 
 .. versionadded:: 3.5.0
     ``SecurityHeadersMiddleware`` a été ajouté dans 3.5.0
@@ -326,7 +350,7 @@ Les données des cookies sont chiffrées via OpenSSL, en AES::
         Configure::read('Security.cookieKey')
     );
 
-    $middleware->add($cookies);
+    $middlewareQueue->add($cookies);
 
 .. note::
     Il est recommandé que la clé de chiffrage utilisée pour les données des cookies
@@ -354,7 +378,7 @@ stack de middlewares::
     ];
     $csrf = new CsrfProtectionMiddleware($options);
 
-    $middleware->add($csrf);
+    $middlewareQueue->add($csrf);
 
 Des options peuvent être passées au constructor du middleware.
 Les options utilisables sont :
