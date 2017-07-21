@@ -101,46 +101,6 @@ method in the association::
 
     $articlesTable->Tags->link($article, [$tag1, $tag2]);
 
-Saving Data To The Join Table
------------------------------
-
-Saving data to the join table is done by using the special ``_joinData``
-property. This property should be an ``Entity`` instance from the join Table
-class::
-
-    // Link records for the first time.
-    $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
-    $tag1->_joinData = $articlesTable->ArticlesTags->newEntity();
-    $tag1->_joinData->tagComment = 'The CakePHP ORM is so powerful!';
-
-    $articlesTable->Tags->link($article, [$tag1]);
-
-    // Update an existing association.
-    $article = $articlesTable->get(1, ['contain' => ['Tags']]);
-    $article->tags[0]->_joinData->tagComment = 'Fresh comment.'
-
-    // Necessary because we are changing a property directly
-    $article->dirty('tags', true);
-
-    $articlesTable->save($article, ['associated' => ['Tags']]);
-
-You can also create/update join table information when using ``newEntity()`` or
-``patchEntity()``. Your POST data should look like::
-
-    $data = [
-        'title' => 'My great blog post',
-        'body' => 'Some content that goes on for a bit.',
-        'tags' => [
-            [
-                'id' => 10,
-                '_joinData' => [
-                    'tagComment' => 'Great article!',
-                ]
-            ],
-        ]
-    ];
-    $articlesTable->newEntity($data, ['associated' => ['Tags']]);
-
 Unlink Many To Many Records
 ---------------------------
 
