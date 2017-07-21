@@ -136,6 +136,15 @@ variations mineures qui pourraient avoir un impact sur votre application.
 Nouvelles Fonctionnalités
 =========================
 
+Middleware sur Scopes
+---------------------
+
+Les middlewares peuvent maintenant être appliqués conditionnellement à des routes
+sur des URL 'scopées'. Cela vous permet de construire des stacks de middlewares
+spécifiques pour différentes parties de votre application sans avoir à faire des
+tests sur l'URL dans le code de vos middlewares. Plus d'informations dans la section
+:ref:`connecting-scoped-middleware`.
+
 Nouveau Lanceur de Console
 --------------------------
 
@@ -147,14 +156,14 @@ elles sont nommées et comment les shells récupèrent leurs dépendances. Adopt
 cette nouvelle classe nécessite que vous remplaciez le contenu de votre fichier
 ``bin/cake.php`` par le `fichier suivant <https://github.com/cakephp/app/tree/3.next/bin/cake.php>`_.
 
-Cache
------
+Fallbacks pour les Moteurs de Cache
+-----------------------------------
 
-* Les moteurs de cache peuvent maintenant être configurés avec une clé ``fallback``
-  qui permet de définir une configuration de cache sur laquelle se rabattre si
-  le moteur était mal configuré ou indisponible. Reportez-vous à la section
-  :ref:`cache-configuration-fallback` pour plus d'informations sur la configuration
-  de 'fallbacks' pour vos configurations de cache.
+Les moteurs de cache peuvent maintenant être configurés avec une clé ``fallback``
+qui permet de définir une configuration de cache sur laquelle se rabattre si
+le moteur était mal configuré ou indisponible. Reportez-vous à la section
+:ref:`cache-configuration-fallback` pour plus d'informations sur la configuration
+de 'fallbacks' pour vos configurations de cache.
 
 Core
 ----
@@ -173,6 +182,13 @@ Console
 * ``Cake\Console\CommandCollection`` a été ajouté afin de fournir une interface pour
   que les applications puissent définir les outils en ligne de commande qu'elles
   offrent.
+
+Database
+--------
+
+* Une nouvelle option ``mask`` pour le driver SQLite a été ajoutée. Cette option
+  vous permet de définir les droits sur le fichier de la base SQLite quand il est
+  créé.
 
 Datasource
 ----------

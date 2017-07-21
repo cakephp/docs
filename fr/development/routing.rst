@@ -903,11 +903,16 @@ vues automatiquement en se basant sur les types de contenu.
 Connecter des Middlewares à un scope
 ------------------------------------
 
-Les middleware peuvent être appliqués à l'ensemble de votre application ou bien
-à des scopes spécifiques. Avant qu'un middleware ne soit appliqué à un scope,
-il a besoin d'être enregistré::
+Bien que les middlewares puissent être appliqués à toute votre application, appliquer
+les middlewares à des 'scopes' de routing offre plus de flexibilité puisque vous
+pouvez appliquer des middlewares seulement où ils sont nécessaires permettant à vos
+middlewares de ne pas nécessiter de logique spécifique sur le comment / où il doit
+s'appliquer.
 
-    // dans config/routes.php
+Avant qu'un middleware ne puisse être appliqué à un scope, il a besoin d'être
+enregistré dans la collection de routes::
+
+    // in config/routes.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
     use Cake\Http\Middleware\EncryptedCookieMiddleware;
 
@@ -922,16 +927,54 @@ Une fois enregistré dans le builder de routes, le middleware peut être appliqu
     $routes->scope('/cms', function ($routes) {
         // Active les middlewares enregistrés pour ce scope.
         $routes->applyMiddleware('csrf', 'cookies');
+        $routes->get('/articles/:action/*', ['controller' => 'Articles'])
     });
 
-Dans les cas où vous avez des scopes imbriqués, tous les middlewares appliqués
-à chacun des scopes seront appliqués à partir du middleware de plus haut niveau
-en terminant par les scopes imbriqués. En appliquant un middleware à des scopes
-spécifiques, vous éviterez d'ajouter de la complexité dans la logique de vos
-middlewares et les laisser s'occuper de leur tâche principale.
+Dans le cas où vous auriez des 'scopes' imbriqués, les "sous" scopes hériteront
+des middlewares apppliqués dans le scope contenant::
+
+    $routes->scope('/api', function ($routes) {
+        $routes->applyMiddleware('ratelimit', 'auth.api');
+        $routes->scope('/v1', function ($routes) {
+            $routes->applyMiddleware('v1compat');
+            // Définissez vos routes
+        });
+    });
+
+Dans l'exemple ci-dessus, les routes définies dans ``/v1`` auront les middlewares
+'ratelimit', 'auth.api', and 'v1compat' appliqués. Si vous ré-ouvrez un scope, les
+middlewares appliqués aux routes dans chaque scopes seront isolés::
+
+    $routes->scope('/blog', function ($routes) {
+        $routes->applyMiddleware('auth');
+        // Connecter les actions qui nécessitent l'authentification aux 'blog' ici
+    });
+    $routes->scope('/blog', function ($routes) {
+        // Connecter les actions publiques pour le 'blog' ici
+    });
+
+Dans l'exemple ci-dessus, les 2 utilisations du scope ``/blog`` ne partagent
+pas les middlewares. Par contre, les 2 scopes hériteront des middlewares définis
+dans le scope qui les contient.
+
+Grouper les Middlewares
+-----------------------
+
+Pour vous aider à garder votre code :abbr:`DRY (Do not Repeat Yourself)`, les
+middlewares peuvent être combinés en groupes. Une fois créés, les groupes peuvent
+être appliqués comme des middlewares::
+
+    $routes->registerMiddleware('cookie', new EncryptedCookieMiddleware());
+    $routes->registerMiddleware('auth', new AuthenticationMiddleware());
+    $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
+    $routes->middlewareGroup('web', ['cookie', 'auth', 'csrf']);
+
+    // Application du groupe
+    $routes->applyMiddleware('web');
 
 .. versionadded:: 3.5.0
-    Le support des middlewares par scope a été ajouté dans 3.5.0
+    Le support des middlewares par scope et des groupes de middlewares
+    a été ajouté dans 3.5.0
 
 .. _resource-routes:
 
