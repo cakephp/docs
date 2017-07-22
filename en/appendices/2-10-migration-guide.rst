@@ -4,6 +4,12 @@
 CakePHP 2.10 is a fully API compatible upgrade from 2.9. This page outlines
 the changes and improvements made in 2.10.
 
+Console
+=======
+
+* Using undefined CLI options will now result in an error. This behavior has
+  been backported from 3.x
+
 Core
 ====
 
