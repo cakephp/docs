@@ -184,78 +184,85 @@ Existem várias keys suportadas na configuração de banco de dados. Uma lista
 completa é a seguinte:
 
 className
-    The fully namespaced class name of the class that represents the connection to a database server.
-    This class is responsible for loading the database driver, providing SQL
-    transaction mechanisms and preparing SQL statements among other things.
+    O nome completo de classe incluindo namespace da classe que representa a
+    conexão a um servidor de banco de dados. Esta classe é responsável por 
+    carregar o driver do banco de dados, fornecendo mecanismos de transação SQL
+    e preparando instruções SQL entre outras coisas.
 driver
-    The class name of the driver used to implements all specificities for
-    a database engine. This can either be a short classname using :term:`plugin syntax`,
-    a fully namespaced name, or a constructed driver instance.
-    Examples of short classnames are Mysql, Sqlite, Postgres, and Sqlserver.
+    O nome da classe do driver usado para implementar todas as especificidades
+    para um mecanismo de banco de dados. Isso pode ser um nome de classe curto
+    usando :term:`plugin syntax`, um nome de classe com seu namespace ou uma
+    instância de driver. 
+    Exemplos de nomes de classes curtos são Mysql, Sqlite, Postgres e Sqlserver.   
 persistent
-    Whether or not to use a persistent connection to the database.
+    Se deve ou não usar uma conexão persistente com o banco de dados.
 host
-    The database server's hostname (or IP address).
+    O nome de host do servidor de banco de dados (ou o endereço IP).
 username
-    The username for the account.
+    O nome de usuário da conta.
 password
-    The password for the account.
+    A senha da conta.
 database
-    The name of the database for this connection to use. Avoid using ``.`` in
-    your database name. Because of how it complicates identifier quoting CakePHP
-    does not support ``.`` in database names. The path to your SQLite database
-    should be an absolute path (e.g. ``ROOT . DS . 'my_app.db'``) to avoid
-    incorrect paths caused by relative paths.
-port (*optional*)
-    The TCP port or Unix socket used to connect to the server.
+    O noma do banco de dados para essa conexão usar. Evite usar ``.`` no nome
+    do seu banco de dados. Por causa de como isso complica citação de 
+    identificadores, o CakePHP não suporta ``.``  em nomes de banco de dados.
+    O caminho para o seu banco de dados SQLite deve ser um caminho absoluto
+    (ex: ``ROOT . DS . 'my_app.db'``) para evitar caminhos incorretos
+    causados por caminhos relativos.
+port (*opcional*)
+    A porta TCP ou o soquete Unix usado para se conectar ao servidor.
 encoding
-    Indicates the character set to use when sending SQL statements to
-    the server. This defaults to the database's default encoding for
-    all databases other than DB2. If you wish to use UTF-8 encoding
-    with MySQL connections you must use 'utf8' without the
-    hyphen.
+    Indica a configuração de charset usado ao enviar instruções SQL ao servidor.
+    Seu padrão é a codificação padrão do banco de dados para todos os banco de
+    dados exceto o DB2. Se você deseja usar a codificação UTF-8 com conexões 
+    MySQL, você deve usar 'utf8' sem o hífen.
 timezone
-    Server timezone to set.
+    Fuso horário do servidor para definir.
 schema
-    Used in PostgreSQL database setups to specify which schema to use.
+    Usado em configurações de banco de dados do PostgreSQL para especificar qual schema usar.
 unix_socket
-    Used by drivers that support it to connect via Unix socket files. If you are
-    using PostgreSQL and want to use Unix sockets, leave the host key blank.
+    Usado por drivers que o suportam para se conectar via arquivos de soquete Unix.
+    Se você estiver usando o PostgreSQL e quiser usar os soquetes Unix, deixe a chave
+    do host em branco.
 ssl_key
-    The file path to the SSL key file. (Only supported by MySQL).
+    O caminho para o arquivo de chave SSL. (Somente suportado pelo MySQL).
 ssl_cert
-    The file path to the SSL certificate file. (Only supported by MySQL).
+    O caminho para o arquivo de certificado SSL. (Somente suportado pelo MySQL).
 ssl_ca
-    The file path to the SSL certificate authority. (Only supported by MySQL).
+    O caminho do arquivo de a autoridade de certificação SSL. (Somente suportado pelo MySQL).
 init
-    A list of queries that should be sent to the database server as
-    when the connection is created.
+    Uma lista de queries que devem ser enviadas para o servidor de banco de dados 
+    como quando a conexão é criada.
 log
-    Set to ``true`` to enable query logging. When enabled queries will be logged
-    at a ``debug`` level with the ``queriesLog`` scope.
+    Defina para ``true`` para habilitar o log de query. Quando habilitado, queries
+    serão registradas(logged) em um nível ``debug`` com o escopo `` queriesLog``.
 quoteIdentifiers
-    Set to ``true`` if you are using reserved words or special characters in
-    your table or column names. Enabling this setting will result in queries
-    built using the :doc:`/orm/query-builder` having identifiers quoted when
-    creating SQL. It should be noted that this decreases performance because
-    each query needs to be traversed and manipulated before being executed.
+    Defina para ``true`` se você estiver usando palavras reservadas os caracteres
+    especiais nos nomes de suas tabelas ou colunas. Habilitando essa configuração,
+    resultará em consultas criadas usando o :doc:`/orm/query-builder`com identificadores
+    citados (quoted) ao criar SQL. Deve ser notado, que isso diminui o desempenho
+    porque cada consulta precisa ser percorrida e manipulada antes de ser executada.
 flags
-    An associative array of PDO constants that should be passed to the
-    underlying PDO instance. See the PDO documentation for the flags supported
-    by the driver you are using.
+    Um array associativo de constantes PDO que devem ser passada para a instância PDO
+    subjacente. Consulte a documentação do PDO sobre as flags suportadas pelo driver
+    que você está usando.
 cacheMetadata
-    Either boolean ``true``, or a string containing the cache configuration to
-    store meta data in. Having metadata caching disable is not advised and can
-    result in very poor performance. See the :ref:`database-metadata-cache`
-    section for more information.
+    Tanto um boolean ``true``, ou uma string contendo a configuração de cache para
+    armazenar metaddos. Desativar o cache de metadados não é a aconselhado e pode
+    resultar em desempenho muito frato. Consulte a seção :ref:`database-metadata-cache`
+    para obter mais informações.
 
-At this point, you might want to take a look at the
-:doc:`/intro/conventions`. The correct naming for your tables (and the addition
-of some columns) can score you some free functionality and help you avoid
-configuration. For example, if you name your database table big\_boxes, your
-table BigBoxesTable, and your controller BigBoxesController, everything will
-work together automatically. By convention, use underscores, lower case, and
-plural forms for your database table names - for example: bakers,
+
+Neste ponto, você pode querer dar uma olhada no: doc: `/ intro / conventions`. A nomeação correta para suas tabelas (e a adição de algumas colunas) pode marcar algumas funcionalidades gratuitas e ajudá-lo a evitar a configuração. Por exemplo, se você nomear sua tabela de banco de dados big \ _boxes, sua tabela BigBoxesTable e seu controlador BigBoxesController, tudo funcionará em conjunto automaticamente. Por convenção, use sublinhados, minúsculas e formulários plurais para os nomes da tabela de banco de dados - por exemplo: padeiros, pastelaria \ _stores e savory \ _cakes.
+
+
+Neste ponto, pode desejar dar uma olhada no :doc:`/intro/conventions`.
+A correta nomenclatura para suas tables (e a adição de algumas colunas) podem
+garantir algumas funcionalidades gratuitas e ajudá-lo a evitar configuração.
+Por exemplo, se você nomear sua tabela de banco de dados big\_boxes, sua
+tabela BigBoxesTable e o seu controller BigBoxesController, tudo funcionará
+em conjunto automaticamente. Por convenção, use sublinhados, minúsculas e 
+plurais para os nomes de tabelas de banco de dados - por exemplo: bakers,
 pastry\_stores, and savory\_cakes.
 
 .. php:namespace:: Cake\Datasource
