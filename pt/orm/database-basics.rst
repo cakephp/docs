@@ -252,10 +252,6 @@ cacheMetadata
     resultar em desempenho muito frato. Consulte a seção :ref:`database-metadata-cache`
     para obter mais informações.
 
-
-Neste ponto, você pode querer dar uma olhada no: doc: `/ intro / conventions`. A nomeação correta para suas tabelas (e a adição de algumas colunas) pode marcar algumas funcionalidades gratuitas e ajudá-lo a evitar a configuração. Por exemplo, se você nomear sua tabela de banco de dados big \ _boxes, sua tabela BigBoxesTable e seu controlador BigBoxesController, tudo funcionará em conjunto automaticamente. Por convenção, use sublinhados, minúsculas e formulários plurais para os nomes da tabela de banco de dados - por exemplo: padeiros, pastelaria \ _stores e savory \ _cakes.
-
-
 Neste ponto, pode desejar dar uma olhada no :doc:`/intro/conventions`.
 A correta nomenclatura para suas tables (e a adição de algumas colunas) podem
 garantir algumas funcionalidades gratuitas e ajudá-lo a evitar configuração.
