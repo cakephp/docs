@@ -67,6 +67,16 @@ CakePHP は内部構造を構築することができます。 ::
         echo $category->name . "\n";
     }
 
+条件を渡す必要がある場合は、通常通り::
+
+    $descendants = $categories
+        ->find('children', ['for' => 1])
+        ->where(['name LIKE' => '%Foo%']);
+
+    foreach ($descendants as $category) {
+        echo $category->name . "\n";
+    }
+
 代わりに、各ノードの子が階層内にネストされているスレッドリストが必要な場合は、
 'threaded' ファインダを積み重ねられます。 ::
 

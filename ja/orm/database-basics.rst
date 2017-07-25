@@ -65,7 +65,7 @@ Select 文の実行
     $results = $connection
         ->execute(
             'SELECT * FROM articles WHERE created >= :created',
-            ['created' => DateTime('1 day ago')],
+            ['created' => new DateTime('1 day ago')],
             ['created' => 'datetime']
         )
         ->fetchAll('assoc');

@@ -101,45 +101,6 @@ CakePHP は挿入または更新のいずれの処理を行うかを ``isNew()``
 
     $articlesTable->Tags->link($article, [$tag1, $tag2]);
 
-結合用テーブルへのデータ保存
-----------------------------
-
-結合用テーブルへのデータ保存は、特別な ``_joinData`` プロパティーを使用して行われます。
-このプロパティーは結合用の Table クラスの ``Entity`` インスタンスになっているはずです。 ::
-
-    // 最初にレコードを紐付けます。
-    $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
-    $tag1->_joinData = $articlesTable->ArticlesTags->newEntity();
-    $tag1->_joinData->tagComment = 'CakePHP の ORM は実に強力です！';
-
-    $articlesTable->Tags->link($article, [$tag1]);
-
-    // 既存のアソシエーションを更新します。
-    $article = $articlesTable->get(1, ['contain' => ['Tags']]);
-    $article->tags[0]->_joinData->tagComment = '新しいコメント。'
-
-    // 必須です。なぜならプロパティーを直接変更しているからです。
-    $article->dirty('tags', true);
-
-    $articlesTable->save($article, ['associated' => ['Tags']]);
-
-``newEntity()`` や ``patchEntity()`` を使う時に、結合用テーブルの情報もまた
-作成／更新することができます。 POST データはこうなります。 ::
-
-    $data = [
-        'title' => '私の素晴らしいブログ投稿',
-        'body' => '何かのコンテンツが少し続きます。',
-        'tags' => [
-            [
-                'id' => 10,
-                '_joinData' => [
-                    'tagComment' => '素晴らしい記事です！',
-                ]
-            ],
-        ]
-    ];
-    $articlesTable->newEntity($data, ['associated' => ['Tags']]);
-
 多対多レコードの紐付け解除
 --------------------------
 
