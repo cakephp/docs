@@ -304,65 +304,65 @@ dados de configuração usados ao criar conexões.
 
 .. php:namespace:: Cake\Database
 
-Data Types
-==========
+Tipos de Dados
+==============
 
 .. php:class:: Type
 
-Since not every database vendor includes the same set of data types, or
-the same names for similar data types, CakePHP provides a set of abstracted
-data types for use with the database layer. The types CakePHP supports are:
+Como nem todos os fornecedores de banco de dados incluem o mesmo conjunto de tipos
+de dados, ou os mesmos nomes para tipos de dados semelhantes, o CakePHP fornece um
+conjunto de tipos de dados abstraídos para uso com a camada do banco de dados. Os
+tipos suportados pelo CakePHP são:
 
 string
-    Generally backed by CHAR or VARCHAR columns. Using the ``fixed`` option
-    will force a CHAR column. In SQL Server, NCHAR and NVARCHAR types are used.
+    Geralmente usado para colunas dos tipos CHAR ou VARCHAR. Ao usar a opção ``fixed``
+    forçará uma coluna CHAR. No SQL Server, os tipos NCHAR e NVARCHAR são usados.    
 text
-    Maps to TEXT types.
+    Mapeia para tipos de TEXT.
 uuid
-    Maps to the UUID type if a database provides one, otherwise this will
-    generate a CHAR(36) field.
+    Mapeia para o tipo UUID se um banco de dados fornecer um, caso contrário, isso
+    gerará um campo CHAR(36).
 integer
-    Maps to the INTEGER type provided by the database. BIT is not yet supported
-    at this moment.
+    Mapeia para o tipo INTEGER fornecido pelo banco de dados. O BIT ainda não é
+    suportado neste momento.
 biginteger
-    Maps to the BIGINT type provided by the database.
+    Mapeia para o tipo BIGINT fornecido pelo banco de dados.
 float
-    Maps to either DOUBLE or FLOAT depending on the database. The ``precision``
-    option can be used to define the precision used.
+    Mapeia para DOUBLE ou FLOAT, dependendo do banco de dados. A opção  ``precision``
+    pode ser usada para definir a precisão utilizada.
 decimal
-    Maps to the DECIMAL type. Supports the ``length`` and  ``precision``
-    options.
+    Mapeia para o tipo DECIMAL. Suporta as opções ``length`` e ``precision``.
 boolean
-    Maps to BOOLEAN except in MySQL, where TINYINT(1) is used to represent
-    booleans. BIT(1) is not yet supported at this moment.
+    Mapeia para BOOLEAN, exceto no MySQL, onde TINYINT(1) é usado para representar
+    booleans. BIT(1) ainda não é suportado neste momento.
 binary
-    Maps to the BLOB or BYTEA type provided by the database.
+    Mapeia para os tipos BLOB ou BYTEA fornecido pelo banco de dados.
 date
-    Maps to a timezone naive DATE column type. The return value of this column
-    type is :php:class:`Cake\\I18n\\Date` which extends the native ``DateTime``
-    class.
+    Mapeia para o tipo de coluna DATE de fuso horario nativo. O valor de retorno
+    desse tipo de coluna é :php:class:`Cake\\I18n\\Date` que estende a classe
+    nativa ``DateTime``.
 datetime
-    Maps to a timezone naive DATETIME column type. In PostgreSQL, and SQL Server
-    this turns into a TIMESTAMP type. The default return value of this column
-    type is :php:class:`Cake\\I18n\\Time` which extends the built-in
-    ``DateTime`` class and `Chronos <https://github.com/cakephp/chronos>`_.
+    Mapeia para o tipo de coluna DATETIME de fuso horario nativo. No PostgreSQL
+    e no SQL Server, isso se transforma em um tipo TIMESTAMP. O valor de retorno
+    padrão desse tipo de coluna é :php:class:`Cake\\I18n\\Date` que estende a classe
+    nativa ``DateTime`` e `Chronos <https://github.com/cakephp/chronos>`_.
 timestamp
-    Maps to the TIMESTAMP type.
+    Mapeia para o tipo TIMESTAMP.
 time
-    Maps to a TIME type in all databases.
+    Mapeia para um tipo TIME em todos bancos de dados.
 json
-    Maps to a JSON type if it's available, otherwise it maps to TEXT. The 'json'
-    type was added in 3.3.0
+    Mapeia para um tipo JSON se disponível, caso contrário mapeia para TEXT. 
+    O tipo 'json' foi adicionado na versão 3.3.0
 
-These types are used in both the schema reflection features that CakePHP
-provides, and schema generation features CakePHP uses when using test fixtures.
+Esses tipos são usados tanto nos recursos de schema reflection que o CakePHP fornece,
+quanto nos recursos de geração de schema que o CakePHP utiliza ao usar fixtures de testes.
 
-Each type can also provide translation functions between PHP and SQL
-representations. These methods are invoked based on the type hints provided when
-doing queries. For example a column that is marked as 'datetime' will
-automatically convert input parameters from ``DateTime`` instances into a
-timestamp or formatted datestrings. Likewise, 'binary' columns will accept file
-handles, and generate file handles when reading data.
+Cada tipo também pode fornecer funções de tradução entre representações de PHP e SQL. 
+Esses métodos são invocados com base nos type hints fornecidos ao fazer consultas. 
+Por exemplo, uma coluna marcada como 'datetime' automaticamente converterá os parâmetros
+de entrada das instâncias ``DateTime`` em timestamp ou string de data formatada. Da mesma
+forma, as colunas 'binary' aceitarão manipuladores de arquivos e gerarão manipuladores de
+arquivos ao ler dados.
 
 .. _adding-custom-database-types:
 
