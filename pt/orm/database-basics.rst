@@ -366,23 +366,23 @@ arquivos ao ler dados.
 
 .. _adding-custom-database-types:
 
-Adding Custom Types
--------------------
+Adicionando Tipos Personalizados
+--------------------------------
 
 .. php:staticmethod:: map($name, $class)
 
-If you need to use vendor specific types that are not built into CakePHP you can
-add additional new types to CakePHP's type system. Type classes are expected to
-implement the following methods:
+Se você precisar usar tipos específicos do fornecedor que não estão incorporados no CakePHP,
+você pode adicionar novos tipos adicionais ao sistema de tipos do CakePHP. As classes de tipos
+devem implementar os seguintes métodos:
 
-* ``toPHP``: Casts given value from a database type to a PHP equivalent.
-* ``toDatabase``: Casts given value from a PHP type to one acceptable by a database.
-* ``toStatement``: Casts given value to its Statement equivalent.
-* ``marshal``: Marshals flat data into PHP objects.
+* ``toPHP``: Converte valor vindo do banco de dados em um tipo equivalente do PHP.
+* ``toDatabase``: Converte valor vindo do PHP em um tipo aceitável por um banco de dados.
+* ``toStatement``: Converte valor para seu equivalente Statement.
+* ``marshal``: Converte dados simples em objetos PHP.
 
-An easy way to fulfill the basic interface is to extend
-:php:class:`Cake\\Database\\Type`. For example if we wanted to add a JSON type,
-we could make the following type class::
+Uma maneira fácil de atender a interface básica é estender
+:php:class:`Cake\\Database\\Type`. Por exemplo, se quiséssemos adicionar um tipo JSON, 
+poderíamos fazer a seguinte classe de tipo::
 
     // in src/Database/Type/JsonType.php
 
@@ -426,21 +426,24 @@ we could make the following type class::
 
     }
 
-By default the ``toStatement()`` method will treat values as strings which will
-work for our new type. Once we've created our new type, we need to add it into
-the type mapping. During our application bootstrap we should do the following::
+Por padrão, o método ``toStatement()`` tratará os valores como strings que
+funcionarão para o nosso novo tipo. Uma vez que criamos nosso novo tipo, nós
+precisamos adicioná-lo ao mapeamento de tipo. Durante o bootstrap do nosso
+aplicativo, devemos fazer o seguinte::
 
     use Cake\Database\Type;
 
     Type::map('json', 'App\Database\Type\JsonType');
 
 .. versionadded:: 3.3.0
-    The JsonType described in this example was added to the core.
+    A classe JsonType descrita neste exemplo foi adicionada ao core.
 
-We can then overload the reflected schema data to use our new type, and
-CakePHP's database layer will automatically convert our JSON data when creating
-queries. You can use the custom types you've created by mapping the types in
-your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
+Podemos então sobrecarregar os dados do esquema refletido para usar nosso novo tipo, e a camada de banco de dados do CakePHP converterá automaticamente nossos dados JSON ao criar consultas. Você pode usar os tipos personalizados que você criou mapeando os tipos na Tabela: ref: `_initializeSchema () method <saving-complex-types>` ::
+
+Nós podemos então overload os dados de schema refletido para usar nosso novo tipo, e
+a camada de banco de dados do CakePHP converterá automaticamente nossos dados JSON ao
+criar consultas. Você pode usar os tipos personalizados que você criou mapeando os tipos
+no seu método :ref:`_initializeSchema() <saving-complex-types>` da Tabela::
 
     use Cake\Database\Schema\TableSchema;
 
