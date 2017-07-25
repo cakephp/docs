@@ -75,6 +75,9 @@ The following is a list of methods that are deprecated and replaced with
       ``setInvalidField()``, and ``getInvalidField()``)
 ``Cake\ORM\Table``
     * ``validator()``
+``Cake\Routing\RouteBuilder``
+    * ``extensions()``
+    * ``routeClass()``
 ``Cake\Routing\RouteCollection``
     * ``extensions()``
 ``Cake\TestSuite\TestFixture``

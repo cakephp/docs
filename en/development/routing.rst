@@ -298,7 +298,7 @@ rewritten like so::
 
     // Create a builder with a different route class.
     $routes->scope('/', function ($routes) {
-        $routes->routeClass(DashedRoute::class);
+        $routes->setRouteClass(DashedRoute::class);
         $routes->connect('/:controller/:id', ['action' => 'view'])
             ->setPatterns(['id' => '[0-9]+']);
 
@@ -830,15 +830,15 @@ This will affect **all** routes that are being connected **afterwards**, no matt
 their scope.
 
 In order to restrict extensions to specific scopes, you can define them using the
-:php:meth:`Cake\\Routing\\RouteBuilder::extensions()` method::
+:php:meth:`Cake\\Routing\\RouteBuilder::setExtensions()` method::
 
     Router::scope('/', function ($routes) {
-        $routes->extensions(['json', 'xml']);
-        // ...
+        // Prior to 3.5.0 use `extensions()`
+        $routes->setExtensions(['json', 'xml']);
     });
 
 This will enable the named extensions for all routes that are being connected in
-that scope **after** the ``extensions()`` call, including those that are being
+that scope **after** the ``setExtensions()`` call, including those that are being
 connected in nested scopes. Similar to the global :php:meth:`Router::extensions()`
 method, any routes connected prior to the call will not inherit the extensions.
 
@@ -856,7 +856,7 @@ and then parse what remains. If you want to create a URL such as
 /page/title-of-page.html you would create your route using::
 
     Router::scope('/page', function ($routes) {
-        $routes->extensions(['json', 'xml', 'html']);
+        $routes->setExtensions(['json', 'xml', 'html']);
         $routes->connect(
             '/:title',
             ['controller' => 'Pages', 'action' => 'view']
@@ -962,7 +962,7 @@ this::
     // In config/routes.php...
 
     Router::scope('/', function ($routes) {
-        $routes->extensions(['json']);
+        $routes->setExtensions(['json']);
         $routes->resources('Recipes');
     });
 
@@ -1349,7 +1349,8 @@ option::
 
     // Or by setting the routeClass in your scope.
     $routes->scope('/', function ($routes) {
-        $routes->routeClass('SlugRoute');
+        //Prior to 3.5.0 use `routeClass()`
+        $routes->setRouteClass('SlugRoute');
         $routes->connect(
              '/:slug',
              ['controller' => 'Articles', 'action' => 'view']
