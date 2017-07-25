@@ -263,42 +263,42 @@ pastry\_stores, and savory\_cakes.
 
 .. php:namespace:: Cake\Datasource
 
-Managing Connections
+Gerenciando Conexões
 ====================
 
 .. php:class:: ConnectionManager
 
-The ``ConnectionManager`` class acts as a registry to access database
-connections your application has. It provides a place that other objects can get
-references to existing connections.
+A classe `ConnectionManager`` atua como um registro para acessar conexões de
+banco de dados que seu aplicativo tem. Ele fornece um lugar onde outros objetos
+podem obter referências às conexões existentes.
 
-Accessing Connections
----------------------
+Acessando Conexões
+------------------
 
 .. php:staticmethod:: get($name)
 
-Once configured connections can be fetched using
-:php:meth:`Cake\\Datasource\\ConnectionManager::get()`. This method will
-construct and load a connection if it has not been built before, or return the
-existing known connection::
+Uma vez configurada, as conexões podem ser obtidas usando 
+:php:meth:`Cake\\Datasource\\ConnectionManager::get()`. Este método irá construir
+e carregar uma conexão se não tiver sido construído antes ou retornar a conexão
+conhecida existente::
 
     use Cake\Datasource\ConnectionManager;
 
     $conn = ConnectionManager::get('default');
 
-Attempting to load connections that do not exist will throw an exception.
+Ao tentar carregar conexões que não existem será lançado uma exceção.
 
-Creating Connections at Runtime
--------------------------------
+Criando Conexões em Tempo de Execução
+-------------------------------------
 
-Using ``config()`` and ``get()`` you can create new connections that are not
-defined in your configuration files at runtime::
+Usando ``config()`` e ``get()`` você pode criar novas conexões que não estão
+definadas em seus arquivos de configuração em tempo de execução::
 
     ConnectionManager::config('my_connection', $config);
     $conn = ConnectionManager::get('my_connection');
 
-See the :ref:`database-configuration` for more information on the configuration
-data used when creating connections.
+Consulte a seção :ref:`database-configuration` para mais informações sobre os
+dados de configuração usados ao criar conexões.
 
 .. _database-data-types:
 
