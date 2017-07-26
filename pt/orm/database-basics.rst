@@ -569,15 +569,17 @@ personalizado à nossa classe table <saving-complex-types>`.
 
 .. _immutable-datetime-mapping:
 
-Enabling Immutable DateTime Objects
------------------------------------
+Habilitando Objetos DataTime Imutáveis
+--------------------------------------
 
 .. versionadded:: 3.2
     Immutable date/time objects were added in 3.2.
 
-Because Date/Time objects are easily mutated in place, CakePHP allows you to
-enable immutable value objects. This is best done in your application's
-**config/bootstrap.php** file::
+Como os objetos Data / Hora são facilmente mutados, o CakePHP permite habilitar objetos de valor imutáveis. Isso é melhor feito no arquivo ** config / bootstrap.php ** da sua aplicação ::
+
+Como objetos Date/Time são facilmente mutados, o CakePHP permite você habilitar
+objetos de valores imutáveis. Isso é melhor feito no arquivo
+**config/bootstrap.php** da sua aplicação::
 
     Type::build('datetime')->useImmutable();
     Type::build('date')->useImmutable();
@@ -585,7 +587,7 @@ enable immutable value objects. This is best done in your application's
     Type::build('timestamp')->useImmutable();
 
 .. note::
-    New applications will have immutable objects enabled by default.
+    Novas aplicações terão objetos imutáveis habilitado por padrão.
 
 Connection Classes
 ==================
