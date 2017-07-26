@@ -260,6 +260,7 @@ beforeSave
 ``Model.beforeSave`` イベントはエンティティーが保存する前に発行されます。
 このイベントを止めることによって、保存を停止できます。イベントが停止すると、
 このイベントの結果が返されます。
+イベントを停止する方法は、 :ref:`こちら <stopping-events>` に記載されています。
 
 afterSave
 ---------
@@ -284,7 +285,9 @@ beforeDelete
 .. php:method:: beforeDelete(Event $event, EntityInterface $entity, ArrayObject $options)
 
 ``Model.beforeDelete`` イベントはエンティティーを削除する前に発行されます。
-このイベントを停止することによって、削除を中止できます。
+このイベントを停止することによって、削除を中止できます。イベントが停止すると、
+このイベントの結果が返されます。
+イベントを停止する方法は、 :ref:`こちら <stopping-events>` に記載されています。
 
 afterDelete
 -----------
