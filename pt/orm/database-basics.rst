@@ -438,9 +438,7 @@ aplicativo, devemos fazer o seguinte::
 .. versionadded:: 3.3.0
     A classe JsonType descrita neste exemplo foi adicionada ao core.
 
-Podemos então sobrecarregar os dados do esquema refletido para usar nosso novo tipo, e a camada de banco de dados do CakePHP converterá automaticamente nossos dados JSON ao criar consultas. Você pode usar os tipos personalizados que você criou mapeando os tipos na Tabela: ref: `_initializeSchema () method <saving-complex-types>` ::
-
-Nós podemos então overload os dados de schema refletido para usar nosso novo tipo, e
+Nós podemos então sobrecarregar os dados de schema refletido para usar nosso novo tipo, e
 a camada de banco de dados do CakePHP converterá automaticamente nossos dados JSON ao
 criar consultas. Você pode usar os tipos personalizados que você criou mapeando os tipos
 no seu método :ref:`_initializeSchema() <saving-complex-types>` da Tabela::
@@ -460,21 +458,22 @@ no seu método :ref:`_initializeSchema() <saving-complex-types>` da Tabela::
 
 .. _mapping-custom-datatypes-to-sql-expressions:
 
-Mapping Custom Datatypes to SQL Expressions
--------------------------------------------
+Mapeando Tipos de Dados Personalizados para Expressões SQL
+----------------------------------------------------------
 
 .. versionadded:: 3.3.0
-    Support for mapping custom data types to SQL expressions was added in 3.3.0.
+   O suporte de mapeamento de tipos de dados personalizados para expressões SQL
+   foi adicionado na versão 3.3.0.
 
-The previous example maps a custom datatype for a 'json' column type which is
-easily represented as a string in a SQL statement. Complex SQL data
-types cannot be represented as strings/integers in SQL queries. When working
-with these datatypes your Type class needs to implement the
-``Cake\Database\Type\ExpressionTypeInterface`` interface. This interface lets
-your custom type represent a value as a SQL expression. As an example, we'll
-build a simple Type class for handling ``POINT`` type data out of MySQL. First
-we'll define a 'value' object that we can use to represent ``POINT`` data in
-PHP::
+O exemplo anterior mapeia um tipo de dados personalizado para um tipo de coluna
+'json' que é facilmente representado como uma string em uma instrução SQL. Os
+tipos complexos de dados SQL não podem ser representados como strings/integers
+em consultas SQL. Ao trabalhar com esses tipos de dados, sua classe Type precisa
+implementar a interface ``Cake\Database\Type\ExpressionTypeInterface``. Essa
+interface permite que seu tipo personalizado represente um valor como uma
+expressão SQL. Como exemplo, nós vamos construir uma simples classe Type para
+manipular dados do tipo ``POINT`` do MySQL. Primeiramente, vamos definir um
+objeto 'value' que podemos usar para representar dados ``POINT`` no PHP::
 
     // in src/Database/Point.php
     namespace App\Database;
@@ -509,8 +508,8 @@ PHP::
         }
     }
 
-With our value object created, we'll need a Type class to map data into this
-value object and into SQL expressions::
+Com o nosso objeto de valor criado, nós vamos precisar de uma classe Type para
+mapear dados nesse objeto de valor e em expressões SQL::
 
     namespace App\Database\Type;
 
@@ -555,18 +554,18 @@ value object and into SQL expressions::
         }
     }
 
-The above class does a few interesting things:
+A classe acima faz algumas coisas interessantes:
 
-* The ``toPHP`` method handles parsing the SQL query results into a value
-  object.
-* The ``marshal`` method handles converting, data such as given request data, into our value object.
-  We're going to accept string values like ``'10.24,12.34`` and arrays for now.
-* The ``toExpression`` method handles converting our value object into the
-  equivalent SQL expressions. In our example the resulting SQL would be
-  something like ``POINT(10.24, 12.34)``.
+* O método ``toPHP`` lida com o parse de resultados de consulta SQL em um objeto de valor.
+* O método ``marshal`` lida com a conversão, de dados como dados de requisição, em nosso
+  objeto de valor.
+  Nós vamos aceitar valores string como ``'10.24,12.34`` e array por enquanto.
+* O método ``toExpression`` lida com a conversão do nosso objeto de valor para
+  as expressões SQL equivalentes. No nosso exemplo, o SQL resultante seria algo como
+  ``POINT(10.24, 12.34)``.
 
-Once we've built our custom type, we'll need to :ref:`connect our type
-to our table class <saving-complex-types>`.
+Uma vez que criamos nosso tipo personalizado, precisaremos :ref:`connectar nosso tipo
+personalizado à nossa classe table <saving-complex-types>`.
 
 .. _immutable-datetime-mapping:
 
