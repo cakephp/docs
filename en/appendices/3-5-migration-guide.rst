@@ -269,6 +269,9 @@ TestSuite
 
 Validation
 ----------
+
+* ``Cake\Validation\Validator::scalar()`` was added to ensure that fields do not
+  get non-scalar data.
 * ``Cake\Validation\Validator::regex()`` was added for a more convenient way
   to validate data against a regex pattern.
 * ``Cake\Validation\Validator::addDefaultProvider()`` was added. This method
