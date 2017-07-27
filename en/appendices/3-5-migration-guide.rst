@@ -167,6 +167,15 @@ cache configuration to fall back to if the engine is misconfigured (or
 unavailable). See :ref:`cache-configuration-fallback` for more information on
 configuring fallbacks.
 
+Console Integration Testing
+---------------------------
+
+The ``Cake\TestSuite\ConsoleIntegrationTestCase`` class was added to make
+integration testing console applications easier. For more information, visit
+the :ref:`console-integration-testing` section. This test class is fully
+compatible with the current shell dispatcher as well as the new
+``Cake\Console\CommandRunner``.
+
 Core
 ----
 
