@@ -26,6 +26,12 @@ features will continue to function until 4.0.0 after which they will be removed.
   ``Cake\Database\TableSchemaAwareInterface`` instead.
 * ``Cake\Console\ShellDispatcher`` is deprecated. Applications should update to
   use ``Cake\Console\CommandRunner`` instead.
+* ``Cake\Database\Schema\TableSchema::column()`` is deprecated. Use
+  ``Cake\Database\Schema\TableSchema::getColumn()`` instead.
+* ``Cake\Database\Schema\TableSchema::constraint()`` is deprecated. Use
+  ``Cake\Database\Schema\TableSchema::getConstraint()`` instead.
+* ``Cake\Database\Schema\TableSchema::index()`` is deprecated. Use
+  ``Cake\Database\Schema\TableSchema::getIndex()`` instead.
 
 Deprecated Combined Get/Set Methods
 -----------------------------------
@@ -56,9 +62,11 @@ The following is a list of methods that are deprecated and replaced with
 ``Cake\Datasource\ModelAwareTrait``
     * ``modelType()``
 ``Cake\Database\Query``
-    * ``valueBinder()`` is now ``getValueBinder()``
+    * getter part of ``valueBinder()`` (now ``getValueBinder()``)
+``Cake\Database\Schema\TableSchema``
+    * ``columnType()``
 ``Cake\Datasource\QueryTrait``
-    * ``eagerLoaded()`` (now ``isEagerLoaded()``)
+    * getter part of ``eagerLoaded()`` (now ``isEagerLoaded()``)
 ``Cake\Event\EventDispatcherTrait``
     * ``eventManager()``
 ``Cake\Error\Debugger``
