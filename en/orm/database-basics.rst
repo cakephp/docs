@@ -245,6 +245,8 @@ cacheMetadata
     store meta data in. Having metadata caching disable is not advised and can
     result in very poor performance. See the :ref:`database-metadata-cache`
     section for more information.
+mask
+    Set the permissions on the generated database file. (Only supported by SQLite)
 
 At this point, you might want to take a look at the
 :doc:`/intro/conventions`. The correct naming for your tables (and the addition
@@ -318,6 +320,11 @@ uuid
 integer
     Maps to the INTEGER type provided by the database. BIT is not yet supported
     at this moment.
+smallinteger
+    Maps to the SMALLINT type provided by the database.
+tinyinteger
+    Maps to the TINYINT or SMALLINT type provided by the database. In MySQL
+    ``TINYINT(1)`` is treated as a boolean.
 biginteger
     Maps to the BIGINT type provided by the database.
 float
@@ -357,6 +364,12 @@ doing queries. For example a column that is marked as 'datetime' will
 automatically convert input parameters from ``DateTime`` instances into a
 timestamp or formatted datestrings. Likewise, 'binary' columns will accept file
 handles, and generate file handles when reading data.
+
+.. versionchanged:: 3.3.0
+    The ``json`` type was added.
+
+.. versionchanged:: 3.5.0
+    The ``smallinteger`` and ``tinyinteger`` types were added.
 
 .. _adding-custom-database-types:
 

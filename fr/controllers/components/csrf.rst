@@ -29,6 +29,10 @@ deux valeurs ne correspondent pas, le component lancera une
     :php:class:`Cake\\Network\\Exception\\ForbiddenException` en
     :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
 
+.. deprecated:: 3.5.0
+    Vous devriez utiliser le :ref:`csrf-middleware` à la place du
+    ``CsrfComponent``.
+
 Utiliser le CsrfComponent
 =========================
 

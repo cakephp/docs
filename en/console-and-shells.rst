@@ -1,4 +1,4 @@
-Shells, Tasks & Console Tools
+Console Tools, Shells & Tasks
 #############################
 
 .. php:namespace:: Cake\Console
@@ -49,7 +49,7 @@ the **bin** directory::
 
 Running the Console with no arguments produces this help message::
 
-    Welcome to CakePHP v3.0.0 Console
+    Welcome to CakePHP v3.5.0 Console
     ---------------------------------------------------------------
     App : App
     Path: /Users/markstory/Sites/cakephp-app/src/
@@ -67,17 +67,26 @@ Running the Console with no arguments produces this help message::
 
     Available Shells:
 
-    [Bake] bake
+    - version
+    - help
+    - cache
+    - completion
+    - i18n
+    - orm_cache
+    - plugin
+    - routes
+    - server
+    - bug
+    - console
+    - event
+    - orm
+    - bake
+    - bake.bake
+    - migrations
+    - migrations.migrations
 
-    [Migrations] migrations
-
-    [CORE] i18n, orm_cache, plugin, routes, server
-
-    [app] behavior_time, console, orm
-
-    To run an app or core command, type cake shell_name [args]
-    To run a plugin command, type cake Plugin.shell_name [args]
-    To get help on a specific command, type cake shell_name --help
+    To run a command, type `cake shell_name [args|options]`
+    To get help on a specific command, type `cake shell_name --help`
 
 The first information printed relates to paths. This is helpful if you're
 running the console from different parts of the filesystem.
@@ -130,11 +139,6 @@ application directory, run::
 
 You should see the following output::
 
-    Welcome to CakePHP Console
-    ---------------------------------------------------------------
-    App : app
-    Path: /Users/markstory/Sites/cake_dev/src/
-    ---------------------------------------------------------------
     Hello world.
 
 As mentioned before, the ``main()`` method in shells is a special method called
@@ -179,41 +183,6 @@ When using a ``main()`` method you won't be able to use the positional
 arguments. This is because the first positional argument or option is
 interpreted as the command name. If you want to use arguments, you should use
 method names other than ``main``.
-
-Using Models in Your Shells
----------------------------
-
-You'll often need access to your application's business logic in shell
-utilities; CakePHP makes that super easy. You can load models in shells, just as
-you would in a controller using ``loadModel()``. The loaded models are set as
-properties attached to your shell::
-
-    namespace App\Shell;
-
-    use Cake\Console\Shell;
-
-    class UserShell extends Shell
-    {
-
-        public function initialize()
-        {
-            parent::initialize();
-            $this->loadModel('Users');
-        }
-
-        public function show()
-        {
-            if (empty($this->args[0])) {
-                // Use error() before CakePHP 3.2
-                return $this->abort('Please enter a username.');
-            }
-            $user = $this->Users->findByUsername($this->args[0])->first();
-            $this->out(print_r($user, true));
-        }
-    }
-
-The above shell, will fetch a user by username and display the information
-stored in the database.
 
 Shell Tasks
 ===========
@@ -301,6 +270,41 @@ Would load and return a ProjectTask instance. You can load tasks from plugins
 using::
 
     $progressBar = $this->Tasks->load('ProgressBar.ProgressBar');
+
+Using Models in Your Shells
+===========================
+
+You'll often need access to your application's business logic in shell
+utilities; CakePHP makes that super easy. You can load models in shells, just as
+you would in a controller using ``loadModel()``. The loaded models are set as
+properties attached to your shell::
+
+    namespace App\Shell;
+
+    use Cake\Console\Shell;
+
+    class UserShell extends Shell
+    {
+
+        public function initialize()
+        {
+            parent::initialize();
+            $this->loadModel('Users');
+        }
+
+        public function show()
+        {
+            if (empty($this->args[0])) {
+                // Use error() before CakePHP 3.2
+                return $this->abort('Please enter a username.');
+            }
+            $user = $this->Users->findByUsername($this->args[0])->first();
+            $this->out(print_r($user, true));
+        }
+    }
+
+The above shell, will fetch a user by username and display the information
+stored in the database.
 
 Shell Helpers
 =============
@@ -774,6 +778,23 @@ command::
     --verbose, -v  Enable verbose output.
     --quiet, -q    Enable quiet output.
 
+Set a help alias
+~~~~~~~~~~~~~~~~
+
+.. php:method:: setHelpAlias($alias)
+
+If you want to change the command name, you can use the ``setHelpAlias()`` method::
+
+    $parser->setHelpAlias('my-shell');
+
+This will change the usage output to ``my-shell`` instead of the default ``cake`` value::
+
+    Usage:
+    my-shell console [-h] [-v] [-q]
+
+.. versionadded:: 3.5.0
+    The ``setHelpAlias`` method was added in 3.5.0
+
 Set the Epilog
 --------------
 
@@ -1043,6 +1064,10 @@ When defining a subcommand you can use the following options:
 
 Adding subcommands can be done as part of a fluent method chain.
 
+.. versionchanged:: 3.5.0
+    When adding multi-word subcommands you can now invoke those commands using
+    ``snake_case`` in addition to the camelBacked form.
+
 Building a ConsoleOptionParser from an Array
 --------------------------------------------
 
@@ -1188,6 +1213,41 @@ look like:
             </argument>
         </arguments>
     </shell>
+
+Renaming Commands
+=================
+
+By default CakePHP will automatically discover all the commands in your
+application and its plugins. You may want to reduce the number of exposed
+commands, when building standalone console applications. You can use your
+Application's ``console()`` hook to limit which commands are exposed and rename
+the commands that are exposed::
+
+    namespace App;
+
+    use App\Shell\UserShell;
+    use App\Shell\VersionShell;
+    use Cake\Http\BaseApplication;
+
+    class Application extends BaseApplication
+    {
+        public function console($commands)
+        {
+            // Add by classname
+            $commands->add('user', UserShell::class);
+
+            // Add instance
+            $commands->add('version', new VersionShell());
+
+            return $commands;
+        }
+    }
+
+In the above example, the only commands available would be ``help``, ``version``
+and ``user``.
+
+.. versionadded:: 3.5.0
+    The ``console`` hook was added.
 
 Routing in Shells / CLI
 =======================

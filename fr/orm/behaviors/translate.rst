@@ -32,7 +32,7 @@ behavior à l'objet Table que vous souhaitez rendre traduisible::
 Maintenant, sélectionnez une langue à utiliser pour récupérer les entities::
 
     // Dans un controller. Change la locale
-    I18n::locale('es');
+    I18n::setLocale('es');
     $this->loadModel('Articles');
 
 Ensuite, récupérez une entity existante::
@@ -176,7 +176,7 @@ la traduction active pour les entities qui sont chargées::
     use Cake\I18n\I18n;
 
     // Change la langue dans votre action
-    I18n::locale('es');
+    I18n::setLocale('es');
     $this->loadModel('Articles');
 
     // Toutes les entities dans les résultats vont contenir la traduction espagnol
@@ -186,7 +186,7 @@ Cette méthode fonctionne avec n'importe quel finder se trouvant dans vos
 tables. Par exemple, vous pouvez utiliser TranslateBehavior avec
 ``find('list')``::
 
-    I18n::locale('es');
+    I18n::setLocale('es');
     $data = $this->Articles->find('list')->toArray();
 
     // Data va contenir
@@ -298,12 +298,12 @@ l'association.
 Récupérer une Langue sans Utiliser I18n::locale
 -----------------------------------------------
 
-Appeler ``I18n::locale('es');`` change la locale par défaut pour tous les finds
+Appeler ``I18n::setLocale('es');`` change la locale par défaut pour tous les finds
 traduits, il peut y avoir des fois où vous souhaitez récupérer du contenu
 traduit sans modification de l'état de l'application. Pour ces scenarios,
 utilisez la méthode ``locale`` du behavior::
 
-    I18n::locale('en'); // réinitialisation pour l'exemple
+    I18n::setLocale('en'); // réinitialisation pour l'exemple
 
     $this->loadModel('Articles');
     $articles->locale('es'); // locale spécifique
@@ -316,7 +316,7 @@ changera pas la langue des données associées. Pour utiliser cette technique
 pour changer les données associées, il est nécessaire d'appeler la locale
 pour chaque table par exemple::
 
-    I18n::locale('en'); // reset for illustration
+    I18n::setLocale('en'); // reset for illustration
 
     $this->loadModel('Articles');
     $this->Articles->locale('es');
@@ -401,7 +401,7 @@ sauvegardée et récupérée comme d'habitude::
 La deuxième manière de l'utiliser pour sauvegarder les entities dans une autre
 langue est de définir par défaut la langue directement à la table::
 
-    I18n::locale('es');
+    I18n::setLocale('es');
     $article->title = 'Mi Primer Artículo';
     $this->Articles->save($article);
 

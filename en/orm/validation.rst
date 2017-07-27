@@ -255,6 +255,10 @@ resulting object by name::
 
     $hardenedValidator = $usersTable->validator('hardened');
 
+
+.. deprecated:: 3.5.0
+    ``validator()`` is deprecated. Use ``getValidator()`` instead.
+
 Default Validator Class
 =======================
 

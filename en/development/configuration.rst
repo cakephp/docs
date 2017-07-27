@@ -161,7 +161,7 @@ Additional Class Paths
 ======================
 
 Additional class paths are setup through the autoloaders your application uses.
-When using ``Composer`` to generate your autoloader, you could do the following,
+When using ``composer`` to generate your autoloader, you could do the following,
 to provide fallback paths for controllers in your application::
 
     "autoload": {
@@ -229,11 +229,7 @@ of your code: a sure temptation to break the MVC pattern CakePHP
 was designed for. The main goal of Configure class is to keep
 centralized variables that can be shared between many objects.
 Remember to try to live by "convention over configuration" and you
-won't end up breaking the MVC structure we've set in place.
-
-You can access ``Configure`` from anywhere in your application::
-
-    Configure::read('debug');
+won't end up breaking the MVC structure CakePHP provides.
 
 Writing Configuration data
 --------------------------
@@ -264,24 +260,29 @@ where debugging information can cause parsing problems.
 Reading Configuration Data
 --------------------------
 
-.. php:staticmethod:: read($key = null)
+.. php:staticmethod:: read($key = null, $default = null)
 
-Used to read configuration data from the application. Defaults to
-CakePHP's important debug value. If a key is supplied, the data is
-returned. Using our examples from write() above, we can read that
-data back::
+Used to read configuration data from the application. If a key is supplied, the
+data is returned. Using our examples from write() above, we can read that data
+back::
 
-    Configure::read('Company.name');    // Yields: 'Pizza, Inc.'
-    Configure::read('Company.slogan');  // Yields: 'Pizza for your body
-                                        // and soul'
+    // Returns 'Pizza Inc.'
+    Configure::read('Company.name');
+
+    // Returns 'Pizza for your body and soul'
+    Configure::read('Company.slogan');
 
     Configure::read('Company');
-
-    // Yields:
+    // Returns:
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 
-If $key is left null, all values in Configure will be returned.
+    // Returns 'fallback' as Company.nope is undefined.
+    Configure::read('Company.nope', 'fallback');
 
+If ``$key`` is left null, all values in Configure will be returned.
+
+.. versionchanged:: 3.5.0
+    The ``$default`` parameter was added in 3.5.0
 
 .. php:staticmethod:: readOrFail($key)
 

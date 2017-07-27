@@ -121,7 +121,8 @@ To change the language for translated strings you can call this method::
 
     use Cake\I18n\I18n;
 
-    I18n::locale('de_DE');
+    // Prior to 3.5 use I18n::locale()
+    I18n::setLocale('de_DE');
 
 This will also change how numbers and dates are formatted when using one of the
 localization tools.
@@ -390,7 +391,7 @@ for a single domain and locale::
 
     use Aura\Intl\Package;
 
-    I18n::translator('animals', 'fr_FR', function () {
+    I18n::setTranslator('animals', function () {
         $package = new Package(
             'default', // The formatting strategy (ICU)
             'default'  // The fallback domain
@@ -403,7 +404,7 @@ for a single domain and locale::
         ]);
 
         return $package;
-    });
+    }, 'fr_FR');
 
 The above code can be added to your **config/bootstrap.php** so that
 translations can be found before any translation function is used. The absolute
@@ -411,7 +412,8 @@ minimum that is required for creating a translator is that the loader function
 should return a ``Aura\Intl\Package`` object. Once the code is in place you can
 use the translation functions as usual::
 
-    I18n::locale('fr_FR');
+    // Prior to 3.5 use I18n::locale()
+    I18n::setLocale('fr_FR');
     __d('animals', 'Dog'); // Returns "Chien"
 
 As you see, ``Package`` objects take translation messages as an array. You can
@@ -423,11 +425,11 @@ For example, you can still use **.po** files, but loaded from another location::
     use Cake\I18n\MessagesFileLoader as Loader;
 
     // Load messages from src/Locale/folder/sub_folder/filename.po
-
-    I18n::translator(
+    // Prior to 3.5 use translator()
+    I18n::setTranslator(
         'animals',
-        'fr_FR',
-        new Loader('filename', 'folder/sub_folder', 'po')
+        new Loader('filename', 'folder/sub_folder', 'po'),
+        'fr_FR'
     );
 
 Creating Message Parsers
@@ -463,10 +465,11 @@ And finally, configure the translation loader for the domain and locale::
 
     use Cake\I18n\MessagesFileLoader as Loader;
 
-    I18n::translator(
+    // Prior to 3.5 use translator()
+    I18n::setTranslator(
         'animals',
-        'fr_FR',
-        new Loader('animals', 'fr_FR', 'yaml')
+        new Loader('animals', 'fr_FR', 'yaml'),
+        'fr_FR'
     );
 
 .. _creating-generic-translators:
@@ -474,7 +477,7 @@ And finally, configure the translation loader for the domain and locale::
 Creating Generic Translators
 ----------------------------
 
-Configuring translators by calling ``I18n::translator()`` for each domain and
+Configuring translators by calling ``I18n::setTranslator()`` for each domain and
 locale you need to support can be tedious, specially if you need to support more
 than a few different locales. To avoid this problem, CakePHP lets you define
 generic translator loaders for each domain.
@@ -557,7 +560,7 @@ interpolating the variables::
 
 It is possible to set the default formatter for all translators created by
 CakePHP before they are used for the first time. This does not include manually
-created translators using the ``translator()`` and ``config()`` methods::
+created translators using the ``setTranslator()`` and ``config()`` methods::
 
     I18n::defaultFormatter('sprintf');
 
@@ -575,7 +578,8 @@ the current locale setting and use the right classes::
     use Cake\I18n\Time;
     use Cake\I18n\Number;
 
-    I18n::locale('fr-FR');
+    // Prior to 3.5 use I18n::locale()
+    I18n::setLocale('fr-FR');
 
     $date = new Time('2015-04-05 23:00:00');
 

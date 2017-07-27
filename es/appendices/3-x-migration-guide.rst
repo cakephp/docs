@@ -4,7 +4,17 @@
 .. toctree::
    :hidden:
 
-Las guías de migración contienen información relativa a las novedades introducidas en cada versión y los pasos a seguir para la migración entre versiones.
+Las guías de migración contienen información relativa a las novedades
+introducidas en cada versión y los pasos a seguir para la migración entre
+versiones.
+
+3.5 Guía de migración
+=====================
+
+.. toctree::
+    :maxdepth: 1
+
+    3-5-migration-guide
 
 3.4 Guía de migración
 =====================

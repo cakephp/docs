@@ -267,6 +267,9 @@ cacheMetadata
     metadata n'est pas conseillé et peut entraîner de faibles performances.
     Consultez la section sur :ref:`database-metadata-cache` pour plus
     d'information.
+mask
+    Définit les droits sur le fichier de base de données généré (seulement supporté
+    par SQLite)
 
 Au point où nous sommes, vous pouvez aller voir
 :doc:`/intro/conventions`. Le nommage correct pour vos
@@ -348,6 +351,11 @@ uuid
 integer
     Correspond au type INTEGER fourni par la base de données. BIT n'est pour
     l'instant pas supporté.
+smallinteger
+    Correspond au type SMALLINT fourni par la base de données.
+tinyinteger
+    Correspond au type TINYINT (ou SMALLINT) fourni par la base de données. Sur MySQL
+    ``TINYINT(1)`` sera traité comme un booléen.
 biginteger
     Correspond au type BIGINT fourni par la base de données.
 float
@@ -391,6 +399,12 @@ en 'datetime' va automatiquement convertir les paramètres d'input d'instances
 ``DateTime`` en timestamp ou chaines de dates formatées. Egalement, les
 colonnes 'binary' vont accepter un fichier qui gère, et génère le fichier lors
 de la lecture des données.
+
+.. versionchanged:: 3.3.0
+    Le type ``json`` a été ajouté.
+
+.. versionchanged:: 3.5.0
+    Les types ``smallinteger`` et ``tinyinteger`` ont été ajoutés.
 
 .. _adding-custom-database-types:
 
