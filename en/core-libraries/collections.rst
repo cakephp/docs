@@ -478,7 +478,7 @@ for::
 
     $items = [
        ['invoice' => ['total' => 100]],
-       ['invoice' => ['total' => 200]]
+       ['invoice' => ['total' => 200]],
     ];
 
     // Total: 150
@@ -493,10 +493,10 @@ path, or function to extract values to generate the median for::
 
     $items = [
       ['invoice' => ['total' => 400]],
-      ['invoice' => ['total' => 500]]
-      ['invoice' => ['total' => 100]]
-      ['invoice' => ['total' => 333]]
-      ['invoice' => ['total' => 200]]
+      ['invoice' => ['total' => 500]],
+      ['invoice' => ['total' => 100]],
+      ['invoice' => ['total' => 333]],
+      ['invoice' => ['total' => 200]],
     ];
     // Total: 333
     $total = (new Collection($items))->median('invoice.total');
