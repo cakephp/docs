@@ -95,6 +95,8 @@ plugin::
 
     namespace App\Model\Document;
 
+    use Cake\ElasticSearch\Type;
+
     class Article extends Document
     {
     }
