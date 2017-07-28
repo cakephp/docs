@@ -498,6 +498,7 @@ path, or function to extract values to generate the median for::
       ['invoice' => ['total' => 333]],
       ['invoice' => ['total' => 200]],
     ];
+
     // Total: 333
     $total = (new Collection($items))->median('invoice.total');
 
