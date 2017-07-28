@@ -175,6 +175,12 @@ cache configuration to fall back to if the engine is misconfigured (or
 unavailable). See :ref:`cache-configuration-fallback` for more information on
 configuring fallbacks.
 
+Collection
+----------
+
+* ``Cake\Collection\Collection::avg()`` was added.
+* ``Cake\Collection\Collection::median()`` was added.
+
 Core
 ----
 
