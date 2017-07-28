@@ -488,7 +488,7 @@ for::
 
 .. php:method:: median($matcher = null)
 
-Calculate the median value of the set of elements. Optionally provide a matcher
+Calculate the median value of a set of elements. Optionally provide a matcher
 path, or function to extract values to generate the median for::
 
     $items = [
