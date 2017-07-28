@@ -175,7 +175,7 @@ cache configuration to fall back to if the engine is misconfigured (or
 unavailable). See :ref:`cache-configuration-fallback` for more information on
 configuring fallbacks.
 
-dotenv Support Added to Application Skeleton
+dotenv Support added to Application Skeleton
 --------------------------------------------
 
 The application skeleton now features a 'dotenv' integration making it easier to
