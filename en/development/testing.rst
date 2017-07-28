@@ -1322,6 +1322,8 @@ comparison files as they are referenced:
     #
     #   modified:   tests/comparisons/example.php
 
+.. _console-integration-testing:
+
 Console Integration Testing
 ===========================
 
