@@ -55,7 +55,9 @@ The following is a list of methods that are deprecated and replaced with
     * ``outputAs()``
 ``Cake\Database\Connection``
     * ``logger()``
-``Cake\Datasource\TypedResultTrait``
+``Cake\Database\TypedResultInterface``
+    * ``returnType()``
+``Cake\Database\TypedResultTrait``
     * ``returnType()``
 ``Cake\Database\Log\LoggingStatement``
     * ``logger()``
@@ -67,6 +69,8 @@ The following is a list of methods that are deprecated and replaced with
     * ``columnType()``
 ``Cake\Datasource\QueryTrait``
     * getter part of ``eagerLoaded()`` (now ``isEagerLoaded()``)
+``Cake\Event\EventDispatcherInterface``
+    * ``eventManager()``
 ``Cake\Event\EventDispatcherTrait``
     * ``eventManager()``
 ``Cake\Error\Debugger``
@@ -77,6 +81,8 @@ The following is a list of methods that are deprecated and replaced with
 ``Cake\I18n\I18n``
     * ``locale()``
     * ``translator()``
+``Cake\ORM\Association\BelongsToMany``
+    * ``sort()``
 ``Cake\ORM\LocatorAwareTrait``
     * ``tableLocator()``
 ``Cake\ORM\EntityTrait``
