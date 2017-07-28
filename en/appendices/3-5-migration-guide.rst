@@ -175,11 +175,19 @@ cache configuration to fall back to if the engine is misconfigured (or
 unavailable). See :ref:`cache-configuration-fallback` for more information on
 configuring fallbacks.
 
+dotenv Support added to Application Skeleton
+--------------------------------------------
+
+The application skeleton now features a 'dotenv' integration making it easier to
+use environment variables to configure your application. See the
+:ref:`environment-variables` section for more information.
+
 Collection
 ----------
 
 * ``Cake\Collection\Collection::avg()`` was added.
 * ``Cake\Collection\Collection::median()`` was added.
+
 
 Core
 ----
