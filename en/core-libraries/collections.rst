@@ -481,8 +481,8 @@ for::
        ['invoice' => ['total' => 200]],
     ];
 
-    // Total: 150
-    $total = (new Collection($items))->avg('invoice.total');
+    // Average: 150
+    $average = (new Collection($items))->avg('invoice.total');
 
 .. versionadded:: 3.5.0
 
@@ -499,8 +499,8 @@ path, or function to extract values to generate the median for::
       ['invoice' => ['total' => 200]],
     ];
 
-    // Total: 333
-    $total = (new Collection($items))->median('invoice.total');
+    // Median: 333
+    $median = (new Collection($items))->median('invoice.total');
 
 .. versionadded:: 3.5.0
 
