@@ -574,7 +574,7 @@ Comme vous avez pu le voir, la première couche est réalisée via l'objet
 Dans l'exemple ci-dessus, nous allons utiliser un validateur 'custom', qui est
 défini en utilisant la méthode ``validationCustomName()``::
 
-    public function validationCustom($validator)
+    public function validationCustomName($validator)
     {
         $validator->add(...);
         return $validator;
