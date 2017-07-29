@@ -57,7 +57,9 @@ par des méthodes ``getX()`` et ``setX()`` :
     * ``outputAs()``
 ``Cake\Database\Connection``
     * ``logger()``
-``Cake\Datasource\TypedResultTrait``
+``Cake\Database\TypedResultInterface``
+    * ``returnType()``
+``Cake\Database\TypedResultTrait``
     * ``returnType()``
 ``Cake\Database\Log\LoggingStatement``
     * ``logger()``
@@ -70,6 +72,8 @@ par des méthodes ``getX()`` et ``setX()`` :
 ``Cake\Datasource\QueryTrait``
     * la partie "getter" de ``eagerLoaded()`` (maintenant ``isEagerLoaded()``)
     * ``eagerLoaded()`` (maintenant ``isEagerLoaded()``)
+``Cake\Event\EventDispatcherInterface``
+    * ``eventManager()``
 ``Cake\Event\EventDispatcherTrait``
     * ``eventManager()``
 ``Cake\Error\Debugger``
@@ -79,6 +83,8 @@ par des méthodes ``getX()`` et ``setX()`` :
 ``Cake\I18n\I18n``
     * ``locale()``
     * ``translator()``
+``Cake\ORM\Association\BelongsToMany``
+    * ``sort()``
 ``Cake\ORM\LocatorAwareTrait``
     * ``tableLocator()``
 ``Cake\ORM\EntityTrait``
