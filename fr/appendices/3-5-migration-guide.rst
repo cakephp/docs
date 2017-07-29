@@ -77,6 +77,9 @@ par des méthodes ``getX()`` et ``setX()`` :
       ``setInvalidField()``, maintenant ``getInvalidField()``)
 ``Cake\ORM\Table``
     * ``validator()``
+``Cake\Routing\RouteBuilder``
+    * ``extensions()``
+    * ``routeClass()``
 ``Cake\Routing\RouteCollection``
     * ``extensions()``
 ``Cake\TestSuite\TestFixture``

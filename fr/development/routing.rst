@@ -316,7 +316,8 @@ l'exemple ci-dessus peut être réécrit en::
 
     // Crée un builder avec une classe de Route différente.
     $routes->scope('/', function ($routes) {
-        $routes->routeClass(DashedRoute::class);
+
+        $routes->setRouteClass(DashedRoute::class);
         $routes->connect('/:controller/:id', ['action' => 'view'])
             ->setPatterns(['id' => '[0-9]+']);
 
@@ -856,7 +857,7 @@ Pour restreindre les extensions à un *scope* spécifique, vous pouvez les défi
 en utilisant la méthode :php:meth:`Cake\\Routing\\RouteBuilder::extensions()`::
 
     Router::scope('/', function ($routes) {
-        $routes->extensions(['json', 'xml']);
+        $routes->setExtensions(['json', 'xml']);
         // ...
     });
 
@@ -880,7 +881,7 @@ souhaitez créer une URL comme ``/page/title-of-page.html`` vous devriez créer
 un scope comme ceci::
 
     Router::scope('/page', function ($routes) {
-        $routes->extensions(['json', 'xml', 'html']);
+        $routes->setExtensions(['json', 'xml', 'html']);
         $routes->connect(
             '/:title',
             ['controller' => 'Pages', 'action' => 'view']
@@ -989,7 +990,7 @@ de données REST, nous ferions quelque chose comme ceci::
     //Dans config/routes.php
 
     Router::scope('/', function ($routes) {
-        $routes->extensions(['json']);
+        $routes->setExtensions(['json']);
         $routes->resources('Recipes');
     });
 
@@ -1397,7 +1398,8 @@ d'une route en utilisant l'option ``routeClass``::
 
     // Ou en définissant la routeClass dans votre scope.
     $routes->scope('/', function ($routes) {
-        $routes->routeClass('SlugRoute');
+        // Avant 3.5.0, utilisez `routeClass()`
+        $routes->setRouteClass('SlugRoute');
         $routes->connect(
              '/:slug',
              ['controller' => 'Articles', 'action' => 'view']
