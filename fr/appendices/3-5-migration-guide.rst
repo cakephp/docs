@@ -27,6 +27,12 @@ version 4.0.0, à partir de laquelle ils seront supprimés.
   ``Cake\Database\TableSchemaAwareInterface`` à la place.
 * ``Cake\Console\ShellDispatcher`` est dépréciée. Vous devez mettre à jour vos
   Applications pour qu'elles utilisent ``Cake\Console\CommandRunner`` à la place.
+* ``Cake\Database\Schema\TableSchema::column()`` est dépréciée. Utilisez
+  ``Cake\Database\Schema\TableSchema::getColumn()`` à la place.
+* ``Cake\Database\Schema\TableSchema::constraint()`` est dépréciée. Utilisez
+  ``Cake\Database\Schema\TableSchema::getConstraint()`` à la place.
+* ``Cake\Database\Schema\TableSchema::index()`` est dépréciée. Utilisez
+  ``Cake\Database\Schema\TableSchema::getIndex()`` à la place.
 
 Dépréciation des Méthodes Get / Set combinées
 ---------------------------------------------
@@ -58,8 +64,11 @@ par des méthodes ``getX()`` et ``setX()`` :
 ``Cake\Datasource\ModelAwareTrait``
     * ``modelType()``
 ``Cake\Database\Query``
-    * ``valueBinder()`` est maintenant ``getValueBinder()``
+    * la partie "getter" de ``valueBinder()`` (maintenant ``getValueBinder()``)
+``Cake\Database\Schema\TableSchema``
+    * ``columnType()``
 ``Cake\Datasource\QueryTrait``
+    * la partie "getter" de ``eagerLoaded()`` (maintenant ``isEagerLoaded()``)
     * ``eagerLoaded()`` (maintenant ``isEagerLoaded()``)
 ``Cake\Event\EventDispatcherTrait``
     * ``eventManager()``
