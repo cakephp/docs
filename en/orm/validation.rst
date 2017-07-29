@@ -549,7 +549,7 @@ objects when calling ``newEntity()`` or ``patchEntity()``::
 In the above example, we'll use a 'custom' validator, which is defined using the
 ``validationCustomName()`` method::
 
-    public function validationCustom($validator)
+    public function validationCustomName($validator)
     {
         $validator->add(...);
         return $validator;

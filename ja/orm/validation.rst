@@ -543,7 +543,7 @@ CakePHP の ORM は検証に二層のアプローチを使う点がユニーク�
 上記の例では、 ``validationCustomName()`` メソッドを使って定義される
 「カスタム」バリデータを使用します。 ::
 
-    public function validationCustom($validator)
+    public function validationCustomName($validator)
     {
         $validator->add(...);
         return $validator;
