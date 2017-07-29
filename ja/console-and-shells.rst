@@ -1,5 +1,5 @@
-シェルとタスクとコンソール
-##########################
+コンソールツール、シェルとタスク
+################################
 
 .. php:namespace:: Cake\Console
 
@@ -50,7 +50,7 @@ CakePHP のアプリケーションは、シェルとタスクのすべてが含
 
 引数なしでコンソールを実行すると、以下のヘルプメッセージを生成します。 ::
 
-    Welcome to CakePHP v3.0.0 Console
+    Welcome to CakePHP v3.5.0 Console
     ---------------------------------------------------------------
     App : App
     Path: /Users/markstory/Sites/cakephp-app/src/
@@ -68,17 +68,26 @@ CakePHP のアプリケーションは、シェルとタスクのすべてが含
 
     Available Shells:
 
-    [Bake] bake
+    - version
+    - help
+    - cache
+    - completion
+    - i18n
+    - orm_cache
+    - plugin
+    - routes
+    - server
+    - bug
+    - console
+    - event
+    - orm
+    - bake
+    - bake.bake
+    - migrations
+    - migrations.migrations
 
-    [Migrations] migrations
-
-    [CORE] i18n, orm_cache, plugin, routes, server
-
-    [app] behavior_time, console, orm
-
-    To run an app or core command, type cake shell_name [args]
-    To run a plugin command, type cake Plugin.shell_name [args]
-    To get help on a specific command, type cake shell_name --help
+    To run a command, type `cake shell_name [args|options]`
+    To get help on a specific command, type `cake shell_name --help`
 
 先頭部分にはパスに関連する情報が表示されます。
 これはファイルシステム上の異なる場所からコンソールを動かしている場合に便利です。
@@ -131,11 +140,6 @@ CakePHP のアプリケーションは、シェルとタスクのすべてが含
 
 次の出力が表示されるはずです。 ::
 
-    Welcome to CakePHP Console
-    ---------------------------------------------------------------
-    App : app
-    Path: /Users/markstory/Sites/cake_dev/src/
-    ---------------------------------------------------------------
     Hello world.
 
 すでに述べたように、シェルで ``main()`` メソッドは、シェルに与えられた他のコマンドや
@@ -174,40 +178,6 @@ public メソッドのうち頭に _ が付かないものは、コマンドラ�
 ``main()`` メソッドを使用するときは、位置引数を使用することはできません。
 最初の位置引数やオプションが、コマンド名として解釈されるためです。
 引数を使用したい場合、 ``main`` 以外のメソッド名を使用する必要があります。
-
-シェルの中でモデルを使う
-------------------------
-
-アプリケーションのビジネスロジックを、シェルユーティリティーの中からアクセスする必要があることも
-よくあるでしょう。 CakePHP はそれが超簡単にできます。コントローラーの中で ``loadModel()`` を
-使用するのと同じように、シェルの中でモデルを読み込むことができます。
-ロードされたモデルは、あなたのシェルに付属するプロパティーとして設定されます。 ::
-
-    namespace App\Shell;
-
-    use Cake\Console\Shell;
-
-    class UserShell extends Shell
-    {
-
-        public function initialize()
-        {
-            parent::initialize();
-            $this->loadModel('Users');
-        }
-
-        public function show()
-        {
-            if (empty($this->args[0])) {
-                // CakePHP 3.2 より前なら error() を利用
-                return $this->abort('Please enter a username.');
-            }
-            $user = $this->Users->findByUsername($this->args[0])->first();
-            $this->out(print_r($user, true));
-        }
-    }
-
-上記のシェルは、username によってユーザーを取得し、データベースに格納された情報が表示されます。
 
 シェルのタスク
 ==============
@@ -294,6 +264,40 @@ ProjectTask インスタンスをロードして返します。
 プラグインからタスクをロードすることもできます。 ::
 
     $progressBar = $this->Tasks->load('ProgressBar.ProgressBar');
+
+シェルの中でのモデルの使用
+===========================
+
+アプリケーションのビジネスロジックに、シェルユーティリティーの中からアクセスする必要があることも
+よくあるでしょう。 CakePHP はそれが超簡単にできます。コントローラーの中で ``loadModel()`` を
+使用するのと同じように、シェルの中でモデルを読み込むことができます。
+ロードされたモデルは、あなたのシェルに付属するプロパティーとして設定されます。 ::
+
+    namespace App\Shell;
+
+    use Cake\Console\Shell;
+
+    class UserShell extends Shell
+    {
+
+        public function initialize()
+        {
+            parent::initialize();
+            $this->loadModel('Users');
+        }
+
+        public function show()
+        {
+            if (empty($this->args[0])) {
+                // CakePHP 3.2 より前なら error() を利用
+                return $this->abort('Please enter a username.');
+            }
+            $user = $this->Users->findByUsername($this->args[0])->first();
+            $this->out(print_r($user, true));
+        }
+    }
+
+上記のシェルは、username によってユーザーを取得し、データベースに格納された情報が表示されます。
 
 シェルヘルパー
 ==============
@@ -745,6 +749,23 @@ CakePHPのコンソールのフレームワークは ``$this->getOptionParser()`
     --verbose, -v  Enable verbose output.
     --quiet, -q    Enable quiet output.
 
+ヘルプエイリアスの設定
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. php:method:: setHelpAlias($alias)
+
+コマンド名を変更したい場合、 ``setHelpAlias()`` メソッドを使用することができます。 ::
+
+    $parser->setHelpAlias('my-shell');
+
+これにより、使用方法の出力がデフォルトの ``cake`` の値の代わりに ``my-shell`` に変更されます。 ::
+
+    Usage:
+    my-shell console [-h] [-v] [-q]
+
+.. versionadded:: 3.5.0
+    ``setHelpAlias`` は、3.5.0 で追加されました。
+
 エピローグの設定
 ----------------
 
@@ -994,6 +1015,10 @@ Bake は多くの別々のタスクから構成されますが、各タスクは
 
 サブコマンドの追加も強力なメソッドチェーンの一部として使えます。
 
+.. versionchanged:: 3.5.0
+    複数語のサブコマンドを追加する際、キャメルバック (camelBacked) 形式に加えて
+    ``スネークケース (snake_cake)`` を使ってこれらのコマンドを呼び出すことができます。
+
 配列から ConsoleOptionParser の構築
 -----------------------------------
 
@@ -1133,6 +1158,39 @@ XML で返します。XML ドキュメントの例としては以下のように
             </argument>
         </arguments>
     </shell>
+
+コマンド名の変更
+=================
+
+デフォルトで、 CakePHP は、アプリケーションやプラグインの中の全てのコマンドを
+自動的に検出します。独立したコンソールアプリケーションを構築する際、
+公開されるコマンドの数を減らすことができます。Application の ``console()`` フックを使って、
+公開されるコマンドを制限し、公開されるコマンドの名前を変更することができます。 ::
+
+    namespace App;
+
+    use App\Shell\UserShell;
+    use App\Shell\VersionShell;
+    use Cake\Http\BaseApplication;
+
+    class Application extends BaseApplication
+    {
+        public function console($commands)
+        {
+            // クラス名で追加
+            $commands->add('user', UserShell::class);
+
+            // インスタンスを追加
+            $commands->add('version', new VersionShell());
+
+            return $commands;
+        }
+    }
+
+上記の例で、利用できるコマンドは、 ``help`` 、 ``version`` 、そして ``user`` です。
+
+.. versionadded:: 3.5.0
+    ``console`` フックが追加されました。
 
 シェル／CLI におけるルーティング
 ================================
