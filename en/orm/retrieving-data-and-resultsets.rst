@@ -1129,7 +1129,7 @@ Calculating the most commonly mentioned words, where the articles contain
 information about CakePHP, as usual we need a mapper function::
 
     $mapper = function ($article, $key, $mapReduce) {
-        if (stripos('cakephp', $article['body']) === false) {
+        if (stripos($article['body'], 'cakephp') === false) {
             return;
         }
 
@@ -1150,11 +1150,12 @@ only extract the count::
 
 Finally, we put everything together::
 
-    $articlesByStatus = $articles->find()
+    $wordCount = $articles->find()
         ->where(['published' => true])
         ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
         ->hydrate(false)
-        ->mapReduce($mapper, $reducer);
+        ->mapReduce($mapper, $reducer)
+        ->toArray();
 
 This could return a very large array if we don't clean stop words, but it could
 look something like this::
@@ -1173,26 +1174,41 @@ better said, people who do not follow each other. Let's start with our
 ``mapper()`` function::
 
     $mapper = function ($rel, $key, $mr) {
-        $mr->emitIntermediate($rel['source_user_id'], $rel['target_user_id']);
-        $mr->emitIntermediate($rel['target_user_id'], $rel['source_target_id']);
+        $mr->emitIntermediate($rel['target_user_id'], $rel['source_user_id']);
+        $mr->emitIntermediate(-$rel['source_user_id'], $rel['target_user_id']);
     };
 
-We just duplicated our data to have a list of users each other user follows.
+The intermediate array will be like the following::
+
+    [
+        1 => [2, 3, 4, 5, -3, -5],
+        2 => [-1],
+        3 => [-1, 1, 6],
+        4 => [-1],
+        5 => [-1, 1],
+        6 => [-3],
+        ...
+    ]
+
+Positive numbers mean that a user, indicated with the first-level key, is 
+following them, and negative numbers mean that the user is followed by them.
+
 Now it's time to reduce it. For each call to the reducer, it will receive a list
 of followers per user::
 
-    // $friends list will look like
-    // repeated numbers mean that the relationship existed in both directions
-    [2, 5, 100, 2, 4]
-
-    $reducer = function ($friendsList, $user, $mr) {
-        $friends = array_count_values($friendsList);
-        foreach ($friends as $friend => $count) {
-            if ($count < 2) {
-                $mr->emit($friend, $user);
+    $reducer = function ($friends, $user, $mr) {
+        $fakeFriends = [];
+    
+        foreach ($friends as $friend) {
+            if ($friend > 0 && !in_array(-$friend, $friends)) {
+                $fakeFriends[] = $friend;
             }
         }
-    }
+    
+        if ($fakeFriends) {
+            $mr->emit($fakeFriends, $user);
+        }
+    };
 
 And we supply our functions to a query::
 
