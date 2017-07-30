@@ -1464,6 +1464,8 @@ activé. Vous pouvez utiliser ceci afin que votre test marche dans les deux cas:
 
     json_encode($data, Configure::read('debug') ? JSON_PRETTY_PRINT : 0);
 
+.. _console-integration-testing:
+
 Tests d'Intégration de la Console
 =================================
 

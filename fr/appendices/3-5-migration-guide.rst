@@ -165,6 +165,15 @@ le moteur était mal configuré ou indisponible. Reportez-vous à la section
 :ref:`cache-configuration-fallback` pour plus d'informations sur la configuration
 de 'fallbacks' pour vos configurations de cache.
 
+Console Integration Testing
+---------------------------
+
+La classe ``Cake\TestSuite\ConsoleIntegrationTestCase`` a été ajoutée pour
+faciliter les tests d'intégration des applications console. Pour plus d'informations
+rendez-vous à la section :ref:`console-integration-testing`. Cette classe de
+test est compatible avec le dispatcher de shell actuel mais aussi avec le
+nouveau ``Cake\Console\CommandRunner``.
+
 Core
 ----
 
