@@ -194,7 +194,6 @@ Collection
 * ``Cake\Collection\Collection::avg()`` was added.
 * ``Cake\Collection\Collection::median()`` was added.
 
-
 Core
 ----
 

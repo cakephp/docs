@@ -231,6 +231,48 @@ Configuration de Inflection
 
 Regardez :ref:`inflection-configuration` pour plus d'informations.
 
+.. _environment-variables:
+
+Variables d'Environnement
+=========================
+
+Beaucoup de fournisseurs de cloud, comme Heroku, vous permettent de définir des
+variables pour les données de configuration. Vous pouvez configurer CakePHP
+via des variables d'environnement à la manière `12factor app <http://12factor.net/>`_.
+Les variables d'environnement permettent à votre application d'avoir besoin de moins
+d'états, facilitant la gestion de votre application lors de déploiements sur
+plusieurs environnements.
+
+Comme vous pouvez le voir dans votre fichier **app.php**, la fonction ``env()``
+est utilisée pour lire des données de configuration depuis l'environnement et
+construire la configuration de l'application.
+CakePHP utilise les chaînes :term:`DSN` pour les configurations des bases de données,
+des logs, des transports d'emails et du cache, vous permettant de faire varier les
+configurations d'un environnement à l'autre.
+
+Lors d'un développement local, CakePHP utilise `dotenv
+<https://github.com/josegonzalez/dotenv>`_ pour faciliter l'utilisation des variables
+d'environnement. Vous verrez un fichier ``config/.env.default`` dans votre application.
+En copiant ce fichier dans ``config/.env`` et en modifiant les valeurs, vous pourrez
+configurer votre application.
+
+Il est conseillé de ne pas commiter le fichier ``config/.env`` dans votre dépôt
+et d'utiliser le fichier ``config/.env.default`` comme template avec des valeurs
+par défaut (ou des placeholders) pour que les membres de votre équipe sachent
+quelles variables sont utilisées et ce que chaque variable est censée contenir.
+
+Une fois vos variables d'environnement définies, vous pouvez utiliser la
+fonction ``env()`` pour lire les données depuis l'environnement::
+
+    $debug = env('APP_DEBUG', false);
+
+La seconde valeur passée à la fonction ``env()`` est la valeur par défaut. Cette
+valeur sera utilisée si aucune variable d'environnement n'existe pas pour la clé
+fournie.
+
+.. versionchanged:: 3.5.0
+    Support de la librairie dotenv ajouté au squelette d'application.
+
 Classe Configure
 ================
 
@@ -674,45 +716,6 @@ initialiser des plugins et attacher des écouteurs d'événements globaux::
 Charger les plugins et les événements dans ``Application::bootstrap()`` rend
 les :ref:`integration-testing` plus faciles car les événements et les routes
 seront ainsi à nouveau traités pour chaque méthode de test.
-
-Variables d'environnement
-=========================
-
-Certains fournisseurs d'architectures dans le cloud comme Heroku, vous
-permettent de définir des variables d'environnement. En définissant des
-variables d'environnement, vous pouvez configurer vos applications comme des
-applications 12factor. Suivre les `instructions pour les applications 12factor <http://12factor.net/>`_
-vous permet de créer des applications "stateless" et donc de faciliter le
-déploiement de votre application.
-Cela signifie ainsi que si vous avez besoin par exemple de changer votre base
-de données, vous avez juste besoin de changer la variable DATABASE_URL dans la
-configuration sur votre fournisseur sans rien avoir à changer dans votre code.
-
-Comme vous pouvez le voir dans le fichier **app.php**, les variables suivantes
-sont concernés :
-
-- ``DEBUG`` (``0`` or ``1``)
-- ``APP_ENCODING`` (ex: UTF-8)
-- ``APP_DEFAULT_LOCALE`` (ex: ``en_US``)
-- ``SECURITY_SALT``
-- ``CACHE_DEFAULT_URL`` (ex: ``File:///?prefix=myapp_&serialize=true&timeout=3600&path=../tmp/cache/``)
-- ``CACHE_CAKECORE_URL`` (ex: ``File:///?prefix=myapp_cake_core_&serialize=true&timeout=3600&path=../tmp/cache/persistent/``)
-- ``CACHE_CAKEMODEL_URL`` (ex: ``File:///?prefix=myapp_cake_model_&serialize=true&timeout=3600&path=../tmp/cache/models/``)
-- ``EMAIL_TRANSPORT_DEFAULT_URL`` (ex: ``smtp://user:password@hostname:port?tls=null&client=null&timeout=30``)
-- ``DATABASE_URL`` (ex: ``mysql://user:pass@db/my_app``)
-- ``DATABASE_TEST_URL`` (ex: ``mysql://user:pass@db/test_my_app``)
-- ``LOG_DEBUG_URL`` (ex: ``file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=../logs/``)
-- ``LOG_ERROR_URL`` (ex: ``file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=../logs/``)
-
-Comme vous pouvez le voir dans ces exemples, nous définissons certaines options
-de configuration à l'aide de chaînes :term:`DSN`. C'est le cas pour les bases
-de données, les logs, le transport d'emails et les configurations du cache.
-
-Si certaines variables d'environnement ne sont pas définies dans votre environnement,
-CakePHP utilisera les valeurs définies dans **app.php**. Vous pouvez utiliser
-la `librairie php-dotenv <https://github.com/josegonzalez/php-dotenv>`_ pour
-utiliser les variables d'environnement dans vos développements en local.
-Reportez-vous aux instructions dans le README pour plus d'informations.
 
 Désactiver les tables génériques
 ================================
