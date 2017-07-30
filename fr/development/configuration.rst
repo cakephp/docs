@@ -236,30 +236,30 @@ Regardez :ref:`inflection-configuration` pour plus d'informations.
 Variables d'Environnement
 =========================
 
-Beaucoup de fournisseur de cloud, comme Heroku, vous permettent de définir des
+Beaucoup de fournisseurs de cloud, comme Heroku, vous permettent de définir des
 variables pour les données de configuration. Vous pouvez configurer CakePHP
 via des variables d'environnement à la manière `12factor app <http://12factor.net/>`_.
 Les variables d'environnement permettent à votre application d'avoir besoin de moins
-d'état, facilitant la gestion de votre application lors de déploiements sur des
+d'états, facilitant la gestion de votre application lors de déploiements sur
 plusieurs environnements.
 
 Comme vous pouvez le voir dans votre fichier **app.php**, la fonction ``env()``
 est utilisée pour lire des données de configuration depuis l'environnement et
 construire la configuration de l'application.
-CakePHP utilise les chaînes :term:`DSN` pour les configurations de bases de données,
+CakePHP utilise les chaînes :term:`DSN` pour les configurations des bases de données,
 des logs, des transports d'emails et du cache, vous permettant de faire varier les
 configurations d'un environnement à l'autre.
 
 Lors d'un développement local, CakePHP utilise `dotenv
-<https://github.com/josegonzalez/dotenv>`_ pour faciliter le développement local
-utilisant des variables d'environnement. Vous verrez un fichier ``config/.env.default``
-dans votre application. En copiant ce fichier dans ``config/.env`` et en modifiant les
-valeurs, vous pourrez configurer votre application.
+<https://github.com/josegonzalez/dotenv>`_ pour faciliter l'utilisation des variables
+d'environnement. Vous verrez un fichier ``config/.env.default`` dans votre application.
+En copiant ce fichier dans ``config/.env`` et en modifiant les valeurs, vous pourrez
+configurer votre application.
 
 Il est conseillé de ne pas commiter le fichier ``config/.env`` dans votre dépôt
 et d'utiliser le fichier ``config/.env.default`` comme template avec des valeurs
 par défaut (ou des placeholders) pour que les membres de votre équipe sachent
-quelles variables sont utilisés et ce que chaque variable est censée contenir.
+quelles variables sont utilisées et ce que chaque variable est censée contenir.
 
 Une fois vos variables d'environnement définies, vous pouvez utiliser la
 fonction ``env()`` pour lire les données depuis l'environnement::
@@ -267,7 +267,8 @@ fonction ``env()`` pour lire les données depuis l'environnement::
     $debug = env('APP_DEBUG', false);
 
 La seconde valeur passée à la fonction ``env()`` est la valeur par défaut. Cette
-valeur sera utilisée si aucune variable d'environnement n'existe pour la clé fournie.
+valeur sera utilisée si aucune variable d'environnement n'existe pas pour la clé
+fournie.
 
 .. versionchanged:: 3.5.0
     Support de la librairie dotenv ajouté au squelette d'application.

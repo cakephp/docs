@@ -494,7 +494,7 @@ lesquelles vous souhaitez générer la moyenne::
        ['invoice' => ['total' => 200]],
     ];
 
-    // Average: 150
+    // Moyenne : 150
     $average = (new Collection($items))->avg('invoice.total');
 
 .. versionadded:: 3.5.0
@@ -513,7 +513,7 @@ lesquelles vous souhaitez calculer la valeur moyenne::
       ['invoice' => ['total' => 200]],
     ];
 
-    // Median: 333
+    // Valeur médiane : 333
     $median = (new Collection($items))->median('invoice.total');
 
 .. versionadded:: 3.5.0
