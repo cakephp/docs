@@ -463,7 +463,7 @@ You can create as many layouts as you wish: just place them in the
 controller actions using the controller or view's ``$layout`` property::
 
     // From a controller
-    public function admin_view()
+    public function view()
     {
         // Set the layout.
         $this->viewBuilder()->setLayout('admin');
