@@ -503,7 +503,7 @@ lesquelles vous souhaitez générer la moyenne::
 
 Calcule la valeur médianne d'un jeu d'élément. Vous pouvez passer, en
 option, un "path" à matcher ou une fonction pour extraire les valeurs pour
-lesquelles vous souhaitez calculer la valeur moyenne::
+lesquelles vous souhaitez calculer la valeur médianne::
 
     $items = [
       ['invoice' => ['total' => 400]],
