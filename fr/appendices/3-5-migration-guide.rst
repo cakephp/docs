@@ -183,6 +183,19 @@ le moteur était mal configuré ou indisponible. Reportez-vous à la section
 :ref:`cache-configuration-fallback` pour plus d'informations sur la configuration
 de 'fallbacks' pour vos configurations de cache.
 
+Support de dotenv au squelette d'Application
+--------------------------------------------
+
+Le squelette d'application possède maintenant une intégration "dotenv", facilitant
+l'utilisation de variables d'environnement pour configurer votre application.
+Référez-vous à la section :ref:`environment-variables` pour plus d'informations.
+
+Collection
+----------
+
+* ``Cake\Collection\Collection::avg()`` a été ajoutée.
+* ``Cake\Collection\Collection::median()`` a été ajoutée.
+
 Core
 ----
 
