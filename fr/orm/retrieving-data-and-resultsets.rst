@@ -1198,7 +1198,7 @@ l'information sur CakePHP, comme d'habitude nous avons besoin d'une fonction
 mapper::
 
     $mapper = function ($article, $key, $mapReduce) {
-        if (stripos('cakephp', $article['body']) === false) {
+        if (stripos($article['body'], 'cakephp') === false) {
             return;
         }
 
@@ -1219,7 +1219,7 @@ résultats pour extraire seulement le compte::
 
 Finalement, nous mettons tout ensemble::
 
-    $articlesByStatus = $articles->find()
+    $wordCount = $articles->find()
         ->where(['published' => true])
         ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
         ->hydrate(false)
@@ -1242,26 +1242,42 @@ dans notre base de données ou, autrement dit, les gens qui ne se suivent pas
 mutuellement. Commençons avec notre fonction ``mapper()``::
 
     $mapper = function ($rel, $key, $mr) {
-        $mr->emitIntermediate($rel['source_user_id'], $rel['target_user_id']);
-        $mr->emitIntermediate($rel['target_user_id'], $rel['source_target_id']);
+        $mr->emitIntermediate($rel['target_user_id'], $rel['source_user_id']);
+        $mr->emitIntermediate(-$rel['source_user_id'], $rel['target_user_id']);
     };
 
-Nous avons juste dupliqué nos données pour avoir une liste d'utilisateurs que
-chaque utilisateur suit. Maintenant, il est temps de la réduire. Pour chaque
-appel au reducer, il va recevoir une liste de followers par utilisateur::
+Le tableau intermédiaire ressemblera à ceci::
 
-    // liste de $friends ressemblera à des nombres répétés
-    // ce qui signifie que les relations existent dans les deux directions
-    [2, 5, 100, 2, 4]
+    [
+        1 => [2, 3, 4, 5, -3, -5],
+        2 => [-1],
+        3 => [-1, 1, 6],
+        4 => [-1],
+        5 => [-1, 1],
+        6 => [-3],
+        ...
+    ]
 
-    $reducer = function ($friendsList, $user, $mr) {
-        $friends = array_count_values($friendsList);
-        foreach ($friends as $friend => $count) {
-            if ($count < 2) {
-                $mr->emit($friend, $user);
+La clé de premier niveau étant un utilisateur, les nombres positifs indiquent
+que l'utilisateur suit d'autres utilisateurs et les nombres négatifs qu'il est
+suivi par d'autres utilisateurs.
+
+Maintenant, il est temps de la réduire. Pour chaque appel au reducer, il va recevoir
+une liste de followers par utilisateur::
+
+    $reducer = function ($friends, $user, $mr) {
+        $fakeFriends = [];
+
+        foreach ($friends as $friend) {
+            if ($friend > 0 && !in_array(-$friend, $friends)) {
+                $fakeFriends[] = $friend;
             }
         }
-    }
+
+        if ($fakeFriends) {
+            $mr->emit($fakeFriends, $user);
+        }
+    };
 
 Et nous fournissons nos fonctions à la requête::
 

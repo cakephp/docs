@@ -487,7 +487,7 @@ actions de votre controller en utilisant la propriété
 ``$layout`` de votre controller ou de votre vue::
 
     // A partir d'un controller
-    public function admin_view()
+    public function view()
     {
         // Défini le layout
         $this->viewBuilder()->setLayout('admin');
