@@ -444,13 +444,11 @@ two rules::
     // Between 3 and 5 tags
     $rules->add($rules->validCount('tags', 3, '>=', 'You must have at least 3 tags'));
     $rules->add($rules->validCount('tags', 5, '<=', 'You must have at most 5 tags'));
-    $rules->add($rules->validCount('subscription', 0, '==', 'You may not have a subscription'));
 
-.. note::
+Note that ``validCount`` returns ``false`` if the property is not countable or does not exist::
 
-    ``validCount`` returns ``false`` if the property is not countable or does not exist.
-    E.g. comparing via ``<``, ``<=`` or against ``0`` will return ``false``,
-    if you do not supply at least an empty list of - say - subscriptions.
+    // The save operation will fail if tags is null.
+    $rules->add($rules->validCount('tags', 0, '<=', 'You must not have any tags'));
 
 .. versionadded:: 3.3.0
     The ``validCount()`` method was added in 3.3.0.
