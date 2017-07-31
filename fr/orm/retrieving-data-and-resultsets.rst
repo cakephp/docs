@@ -1259,8 +1259,8 @@ Le tableau intermédiaire ressemblera à ceci::
     ]
 
 La clé de premier niveau étant un utilisateur, les nombres positifs indiquent
-qu'un utilisateur le suit et les nombres négatifs qu'il est suivi par d'autres
-utilisateurs.
+que l'utilisateur suit d'autres utilisateurs et les nombres négatifs qu'il est
+suivi par d'autres utilisateurs.
 
 Maintenant, il est temps de la réduire. Pour chaque appel au reducer, il va recevoir
 une liste de followers par utilisateur::
