@@ -164,7 +164,8 @@ methods will let you re-use your queries and make testing easier.
 
 By default queries and result sets will return :doc:`/orm/entities` objects. You
 can retrieve basic arrays by disabling hydration::
-
+    $query->enableHydration(false);
+    // Prior to 3.4.0
     $query->hydrate(false);
 
     // $data is ResultSet that contains array data.
@@ -228,7 +229,7 @@ data::
 
 With no additional options the keys of ``$data`` will be the primary key of your
 table, while the values will be the 'displayField' of the table. You can use the
-``displayField()`` method on a table object to configure the display field of
+``setDisplayField()`` method on a table object to configure the display field of
 a table::
 
     class ArticlesTable extends Table
@@ -236,6 +237,8 @@ a table::
 
         public function initialize(array $config)
         {
+            $this->setDisplayField('title');
+            // Prior to 3.4.0
             $this->displayField('title');
         }
     }
@@ -312,9 +315,9 @@ the Author entity. ::
 You can also fetch the label in the list directly using. ::
 
     // In AuthorsTable::initialize():
-    $this->displayField('label'); // Will utilize Author::_getLabel()
+    $this->setDisplayField('label'); // Will utilize Author::_getLabel()
     // In your finders/controller:
-    $query = $authors->find('list'); // Will utilize AuthorsTable::displayField()
+    $query = $authors->find('list'); // Will utilize AuthorsTable::getDisplayField()
 
 Finding Threaded Data
 =====================
@@ -630,13 +633,13 @@ to ``select()``::
         ->select($articles->Users)
         ->contain(['Users']);
 
-Alternatively, if you have multiple associations, you can use ``autoFields()``::
+Alternatively, if you have multiple associations, you can use ``enableAutoFields()``::
 
     // Select id & title from articles, but all fields off of Users, Comments
     // and Tags.
     $query->select(['id', 'title'])
         ->contain(['Comments', 'Tags'])
-        ->autoFields(true)
+        ->enableAutoFields(true) // Prior to 3.4.0 use autoFields(true)
         ->contain(['Users' => function($q) {
             return $q->autoFields(true);
         }]);
@@ -820,7 +823,7 @@ data, you can use the ``leftJoinWith()`` function::
     $query->select(['total_comments' => $query->func()->count('Comments.id')])
         ->leftJoinWith('Comments')
         ->group(['Articles.id'])
-        ->autoFields(true);
+        ->enableAutoFields(true); // Prior to 3.4.0 use autoFields(true);
 
 The results for the above query will contain the article data and the
 ``total_comments`` property for each of them.
@@ -836,7 +839,7 @@ word, per author::
             return $q->where(['Tags.name' => 'awesome']);
         })
         ->group(['Authors.id'])
-        ->autoFields(true);
+        ->enableAutoFields(true); // Prior to 3.4.0 use autoFields(true);
 
 This function will not load any columns from the specified associations into the
 result set.
@@ -878,7 +881,8 @@ column::
 
 Dynamically changing the strategy in this way will only apply to a specific
 query. If you want to make the strategy change permanent you can do::
-
+    $articles->FirstComment->setStrategy('seelct');
+    // Prior to 3.4.0
     $articles->FirstComment->strategy('select');
 
 Using the ``select`` strategy is also a great way of making associations with
@@ -909,7 +913,9 @@ databases that limit the amount of bound parameters per query, such as
 **Microsoft SQL Server**.
 
 You can also make the strategy permanent for the association by doing::
-
+    
+    $articles->Comments->setStrategy('subquery');
+    // Prior to 3.4.0
     $articles->Comments->strategy('subquery');
 
 Lazy Loading Associations
@@ -934,7 +940,9 @@ By default results will be buffered in memory allowing you to iterate a result
 set multiple times, or cache and iterate the results. If you need work with
 a data set that does not fit into memory you can disable buffering on the query
 to stream results::
-
+    
+    $query->enableBufferResults(false);
+    // Prior to 3.4.0
     $query->bufferResults(false);
 
 Turning buffering off has a few caveats:
@@ -1153,7 +1161,7 @@ Finally, we put everything together::
     $wordCount = $articles->find()
         ->where(['published' => true])
         ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
-        ->hydrate(false)
+        ->enableHydrate(false) // Prior to 3.4.0 use hydrate(false)
         ->mapReduce($mapper, $reducer)
         ->toArray();
 
@@ -1213,7 +1221,7 @@ of followers per user::
 And we supply our functions to a query::
 
     $fakeFriends = $friends->find()
-        ->hydrate(false)
+        ->enableHydrate(false) // Prior to 3.4.0 use hydrate(false)
         ->mapReduce($mapper, $reducer)
         ->toArray();
 
