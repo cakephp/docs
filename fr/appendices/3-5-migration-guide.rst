@@ -296,6 +296,8 @@ Routing
 TestSuite
 ---------
 
+* ``TestCase::loadFixtures()`` chargera maintenant toutes les fixtures si aucun
+  argument n'est passé.
 * ``IntegrationTestCase::head()`` a été ajoutée.
 * ``IntegrationTestCase::options()`` a été ajoutée.
 * ``IntegrationTestCase::disableErrorHandlerMiddleware()`` a été ajoutée pour
