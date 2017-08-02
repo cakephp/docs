@@ -162,6 +162,12 @@ can use the :php:func:`__x()` function::
 The first argument is the context of the message and the second is the message
 to be translated.
 
+.. code-block:: pot
+
+     msgctxt "written communication"
+     msgid "He read the first letter"
+     msgstr "Er las den ersten Brief"
+
 Using Variables in Translation Messages
 ---------------------------------------
 

@@ -50,30 +50,19 @@ application as well.
 List of Methods
 ===============
 
-.. table::
+.. csv-table::
     :class: docutils internal-toc
 
-    +---------------------------------------------------+----------------------+------------------------+
-    | :php:meth:`append`        | :php:meth:`avg`       | :php:meth:`buffered` | :php:meth:`combine`    |
-    +---------------------------+-----------------------+----------------------+------------------------+
-    | :php:meth:`compile`       | :php:meth:`contains`  | :php:meth:`countBy`  | :php:meth:`chunk`      |
-    +---------------------------+-----------------------+----------------------+------------------------+
-    | :php:meth:`chunkWithKeys` | :php:meth:`each`      | :php:meth:`every`    | :php:meth:`extract`    |
-    +---------------------------+-----------------------+----------------------+------------------------+
-    | :php:meth:`filter`        | :php:meth:`first`     | :php:meth:`groupBy`  | :php:meth:`indexBy`    |
-    +---------------------------+-----------------------+----------------------+------------------------+
-    | :php:meth:`insert`        | :php:meth:`isEmpty`   | :php:meth:`last`     | :php:meth:`listNested` |
-    +---------------------------+-----------------------+----------------------+------------------------+
-    | :php:meth:`map`           | :php:meth:`match`     | :php:meth:`max`      | :php:meth:`median`     |
-    +---------------------------+-----------------------+----------------------+------------------------+
-    | :php:meth:`min`           | :php:meth:`nest`      | :php:meth:`reduce`   | :php:meth:`reject`     |
-    +---------------------------+-----------------------+----------------------+------------------------+
-    | :php:meth:`sample`        | :php:meth:`shuffle`   | :php:meth:`skip`     | :php:meth:`some`       |
-    +---------------------------+-----------------------+----------------------+------------------------+
-    | :php:meth:`sortBy`        | :php:meth:`stopWhen`  | :php:meth:`sumOf`    | :php:meth:`take`       |
-    +---------------------------+-----------------------+----------------------+------------------------+
-    | :php:meth:`through`       | :php:meth:`transpose` | :php:meth:`unfold`   | :php:meth:`zip`        |
-    +---------------------------+-----------------------+----------------------+------------------------+
+    :php:meth:`append`, :php:meth:`avg`, :php:meth:`buffered`, :php:meth:`chunk`
+    :php:meth:`chunkWithKeys`, :php:meth:`combine`, :php:meth:`compile`, :php:meth:`contains`
+    :php:meth:`countBy`, :php:meth:`each`, :php:meth:`every`, :php:meth:`extract`
+    :php:meth:`filter`, :php:meth:`first`, :php:meth:`groupBy`, :php:meth:`indexBy`
+    :php:meth:`insert`, :php:meth:`isEmpty`, :php:meth:`last`, :php:meth:`listNested`
+    :php:meth:`map`, :php:meth:`match`, :php:meth:`max`, :php:meth:`median`
+    :php:meth:`min`, :php:meth:`nest`, :php:meth:`reduce`, :php:meth:`reject`
+    :php:meth:`sample`, :php:meth:`shuffle`, :php:meth:`skip`, :php:meth:`some`
+    :php:meth:`sortBy`, :php:meth:`stopWhen`, :php:meth:`sumOf`, :php:meth:`take`
+    :php:meth:`through`, :php:meth:`transpose`, :php:meth:`unfold`, :php:meth:`zip`
 
 Iterating
 =========

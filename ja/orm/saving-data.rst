@@ -101,45 +101,6 @@ CakePHP は挿入または更新のいずれの処理を行うかを ``isNew()``
 
     $articlesTable->Tags->link($article, [$tag1, $tag2]);
 
-結合用テーブルへのデータ保存
-----------------------------
-
-結合用テーブルへのデータ保存は、特別な ``_joinData`` プロパティーを使用して行われます。
-このプロパティーは結合用の Table クラスの ``Entity`` インスタンスになっているはずです。 ::
-
-    // 最初にレコードを紐付けます。
-    $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
-    $tag1->_joinData = $articlesTable->ArticlesTags->newEntity();
-    $tag1->_joinData->tagComment = 'CakePHP の ORM は実に強力です！';
-
-    $articlesTable->Tags->link($article, [$tag1]);
-
-    // 既存のアソシエーションを更新します。
-    $article = $articlesTable->get(1, ['contain' => ['Tags']]);
-    $article->tags[0]->_joinData->tagComment = '新しいコメント。'
-
-    // 必須です。なぜならプロパティーを直接変更しているからです。
-    $article->dirty('tags', true);
-
-    $articlesTable->save($article, ['associated' => ['Tags']]);
-
-``newEntity()`` や ``patchEntity()`` を使う時に、結合用テーブルの情報もまた
-作成／更新することができます。 POST データはこうなります。 ::
-
-    $data = [
-        'title' => '私の素晴らしいブログ投稿',
-        'body' => '何かのコンテンツが少し続きます。',
-        'tags' => [
-            [
-                'id' => 10,
-                '_joinData' => [
-                    'tagComment' => '素晴らしい記事です！',
-                ]
-            ],
-        ]
-    ];
-    $articlesTable->newEntity($data, ['associated' => ['Tags']]);
-
 多対多レコードの紐付け解除
 --------------------------
 
@@ -979,7 +940,7 @@ replace
 ``dirty()`` の呼び出しがないと、更新された tags は保存されません。
 
 二つの既存のエンティティー間でアソシエーションを作りたいことがしばしばあるかもしれません。例えば、
-ユーザーがある記事を共同で編集するなど。これは ``link`` メソッドを使って、こんなふうに行います。 ::
+ユーザーがある記事を共同で編集するなど。これは ``link`` メソッドを使って、次のようにします。 ::
 
     $article = $this->Articles->get($articleId);
     $user = $this->Users->get($userId);
@@ -1004,7 +965,7 @@ belongsToMany アソシエーションを保存する時に、いくつかの追
 --------------------------------
 
 いくつかの状況では、BelongsToMany アソシエーションを結合するテーブルは、追加のカラムを持ちます。
-CakePHP では、これらのカラムへのプロパティーを保存は簡単です。
+CakePHP はこれらのプロパティーをカラムに保存することを簡単にします。
 belongsToMany アソシエーションのそれぞれのエンティティーは、 ``_joinData`` プロパティーを持っていて、
 これは結合テーブル上の追加のカラムを含んでいます。このデータは配列か Entity
 インターフェイスになります。例えば、もしも Students BelongsToMany Courses であれば、
@@ -1042,7 +1003,7 @@ belongsToMany アソシエーションのそれぞれのエンティティーは
         'associated' => ['Courses._joinData']
     ]);
 
-``FormHelper`` で入力をどやって正しく構築するかについては :ref:`associated-form-inputs`
+``FormHelper`` で入力を正しく構築する方法については :ref:`associated-form-inputs`
 のドキュメントを参照してください。
 
 .. _saving-complex-types:
@@ -1176,7 +1137,7 @@ belongsToMany アソシエーションのそれぞれのエンティティーは
     }
 
 もし 一括更新をしつつ、かつ SQL 式を使う必要がある場合、内部的に ``updateAll()`` が
-準備済みステートメントを使うので、式オブジェクトを使う必要があります。 ::
+プリペアードステートメントを使うので、式オブジェクトを使う必要があります。 ::
 
     use Cake\Database\Expression\QueryExpression;
 

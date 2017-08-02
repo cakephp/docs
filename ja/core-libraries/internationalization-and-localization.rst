@@ -149,6 +149,12 @@ CakePHP はアプリケーションを国際化する手助けになるさまざ
 
 第1引数はメッセージの文脈を示し、第2引数は翻訳されるべきメッセージです。
 
+.. code-block:: pot
+
+     msgctxt "written communication"
+     msgid "He read the first letter"
+     msgstr "彼は最初の手紙を読みました"
+
 翻訳メッセージで変数を利用する
 ------------------------------
 

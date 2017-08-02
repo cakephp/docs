@@ -269,6 +269,7 @@ beforeSave
 The ``Model.beforeSave`` event is fired before each entity is saved. Stopping
 this event will abort the save operation. When the event is stopped the result
 of the event will be returned.
+How to stop an event is documented :ref:`here <stopping-events>`.
 
 afterSave
 ---------
@@ -294,7 +295,9 @@ beforeDelete
 .. php:method:: beforeDelete(Event $event, EntityInterface $entity, ArrayObject $options)
 
 The ``Model.beforeDelete`` event is fired before an entity is deleted. By
-stopping this event you will abort the delete operation.
+stopping this event you will abort the delete operation. When the event is stopped the result
+of the event will be returned.
+How to stop an event is documented :ref:`here <stopping-events>`.
 
 afterDelete
 -----------

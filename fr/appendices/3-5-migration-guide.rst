@@ -190,6 +190,15 @@ Le squelette d'application possède maintenant une intégration "dotenv", facili
 l'utilisation de variables d'environnement pour configurer votre application.
 Référez-vous à la section :ref:`environment-variables` pour plus d'informations.
 
+Console Integration Testing
+---------------------------
+
+La classe ``Cake\TestSuite\ConsoleIntegrationTestCase`` a été ajoutée pour
+faciliter les tests d'intégration des applications console. Pour plus d'informations
+rendez-vous à la section :ref:`console-integration-testing`. Cette classe de
+test est compatible avec le dispatcher de shell actuel mais aussi avec le
+nouveau ``Cake\Console\CommandRunner``.
+
 Collection
 ----------
 

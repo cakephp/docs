@@ -39,7 +39,7 @@ copyright = u'%d, Cake Software Foundation, Inc' % datetime.datetime.now().year
 # built documents.
 #
 # The short X.Y version.
-version = '3.next'
+version = '3.5'
 
 # The full version, including alpha/beta/rc tags.
 release = '3.next'

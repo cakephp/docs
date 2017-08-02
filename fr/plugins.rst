@@ -2,16 +2,19 @@ Plugins
 #######
 
 CakePHP vous permet de mettre en place une combinaison de controllers, models
-et vues et de les distribuer comme un plugin d'application packagé que d'autres
-peuvent utiliser dans leurs applications CakePHP. Vous avez un module de
+et vues et de les distribuer comme un plugin d'application pré-packagé que d'autres
+peuvent utiliser dans leurs applications CakePHP. Vous avez développé un module de
 gestion des utilisateurs sympa, un simple blog, ou un module de service web
-dans une de vos applications ? Packagez le en plugin CakePHP afin de pouvoir la
-mettre dans d'autres applications.
+dans une de vos applications ? Pourquoi ne pas en faire un plugin CakePHP ?
+De cette manière, vous pourrez le réutiliser dans d'autres applications et le
+partager avec la communauté.
 
-Le principal lien entre un plugin et l'application dans laquelle il a été
-installé, est la configuration de l'application (connexion à la base de
-données, etc.). Autrement, il fonctionne dans son propre espace, se comportant
-comme il l'aurait fait s'il était une application à part entière.
+Un plugin CakePHP est séparé de l'application qui l'héberge et fournit généralement
+des fonctionnalités précises qui sont packagées de manière à être réutilisées très
+facilement dans d'autres applications. L'application et le plugin fonctionnent dans
+leurs espaces dédiés mais partage des propriétés spécifiques à l'application (comme
+les paramètres de connexion à la base de données par exemple) qui sont définies et
+partagées au travers de la configuration de l'application.
 
 Dans CakePHP 3.0 chaque plugin définit son namespace de top-niveau. Par exemple
 ``DebugKit``. Par convention, les plugins utilisent leur nom de package pour

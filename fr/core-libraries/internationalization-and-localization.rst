@@ -163,12 +163,18 @@ se réfèrent à des choses différentes. Par exemple 'lettre' a plusieurs
 significations en français. Pour résoudre ce problème, vous pouvez utiliser
 la fonction :php:func:`__x()`::
 
-    echo __x('communication écrite', 'Il a lu la première lettre');
+    echo __x('communication écrite', 'He read the first letter');
 
-    echo __x('apprentissage de l alphabet', 'Il a lu la première lettre');
+    echo __x('apprentissage de l alphabet', 'He read the first letter');
 
 Le premier argument est le contexte du message et le second est le message
 à traduire.
+
+.. code-block:: pot
+
+     msgctxt "communication écrite"
+     msgid "He read the first letter"
+     msgstr "Il a lu le premier courrier"
 
 Utiliser des Variables dans les Traductions de Messages
 -------------------------------------------------------

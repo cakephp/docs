@@ -69,6 +69,16 @@ Getting a flat list of the descendants for a node is equally easy::
     foreach ($descendants as $category) {
         echo $category->name . "\n";
     }
+    
+If you need to pass conditions you do so as per normal::
+
+    $descendants = $categories
+        ->find('children', ['for' => 1])
+        ->where(['name LIKE' => '%Foo%']);
+        
+    foreach ($descendants as $category) {
+        echo $category->name . "\n";
+    }
 
 If you instead need a threaded list, where children for each node are nested
 in a hierarchy, you can stack the 'threaded' finder::

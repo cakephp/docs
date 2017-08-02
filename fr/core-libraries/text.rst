@@ -138,7 +138,7 @@ Formater une chaîne
 La méthode insérée est utilisée pour créer des chaînes templates et pour
 permettre les remplacements de clé/valeur::
 
-    Text::insert('Mon nom est :name et j'ai :age ans.', ['name' => 'Bob', 'age' => '65']);
+    Text::insert("Mon nom est :name et j'ai :age ans.", ['name' => 'Bob', 'age' => '65']);
     // génère: "Mon nom est Bob et j'ai 65 ans."
 
 .. php:staticmethod:: cleanInsert($string, $options = [])
