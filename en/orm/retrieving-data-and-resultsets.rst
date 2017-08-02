@@ -164,6 +164,7 @@ methods will let you re-use your queries and make testing easier.
 
 By default queries and result sets will return :doc:`/orm/entities` objects. You
 can retrieve basic arrays by disabling hydration::
+
     $query->enableHydration(false);
     // Prior to 3.4.0
     $query->hydrate(false);
@@ -913,7 +914,7 @@ databases that limit the amount of bound parameters per query, such as
 **Microsoft SQL Server**.
 
 You can also make the strategy permanent for the association by doing::
-    
+
     $articles->Comments->setStrategy('subquery');
     // Prior to 3.4.0
     $articles->Comments->strategy('subquery');
@@ -940,7 +941,7 @@ By default results will be buffered in memory allowing you to iterate a result
 set multiple times, or cache and iterate the results. If you need work with
 a data set that does not fit into memory you can disable buffering on the query
 to stream results::
-    
+
     $query->enableBufferResults(false);
     // Prior to 3.4.0
     $query->bufferResults(false);
@@ -1198,7 +1199,7 @@ The intermediate array will be like the following::
         ...
     ]
 
-Positive numbers mean that a user, indicated with the first-level key, is 
+Positive numbers mean that a user, indicated with the first-level key, is
 following them, and negative numbers mean that the user is followed by them.
 
 Now it's time to reduce it. For each call to the reducer, it will receive a list
@@ -1206,13 +1207,13 @@ of followers per user::
 
     $reducer = function ($friends, $user, $mr) {
         $fakeFriends = [];
-    
+
         foreach ($friends as $friend) {
             if ($friend > 0 && !in_array(-$friend, $friends)) {
                 $fakeFriends[] = $friend;
             }
         }
-    
+
         if ($fakeFriends) {
             $mr->emit($fakeFriends, $user);
         }
@@ -1300,4 +1301,3 @@ calling the method with both parameters as null and the third parameter
 (overwrite) as ``true``::
 
     $query->mapReduce(null, null, true);
-
