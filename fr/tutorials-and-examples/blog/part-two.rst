@@ -122,9 +122,9 @@ de retour de la méthode ``find('all')`` de l'objet table Articles.
     Si vous avez terminé la :doc:`Partie 1 du Tutoriel du blog
     </tutorials-and-examples/blog/blog>` et créé la table ``articles`` dans
     notre base de données Blog, vous pouvez utiliser la console bake de CakePHP
-    et la possibilité de générer du code pour créer le model ArticlesTable::
+    et la possibilité de générer du code pour créer le controller ArticlesController::
 
-        bin/cake bake model Articles
+        bin/cake bake controller Articles
 
 Pour plus d'informations sur bake et les fonctionnalités de génération de code,
 vous pouvez allez voir :doc:`/bake/usage`.
