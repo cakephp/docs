@@ -378,9 +378,9 @@ Router
   маршрутов подходящих под параметры - будет возвращен путь ``/``.
 * Route classes are responsible for *all* URL generation including
   query string parameters. This makes routes far more powerful and flexible.
-* Persistent parameters were removed. They were replaced with
-  :php:meth:`Cake\\Routing\\Router::urlFilter()` which allows
-  a more flexible way to mutate URLs being reverse routed.
+* Устойчивые параметры были удалены. Они были заменены методом
+  :php:meth:`Cake\\Routing\\Router::urlFilter()`, который предоставляет
+  более гибкий способ видоизменять URL при обратной маршрутизации.
 * Удален метод ``Router::parseExtensions()``.
   Используйте вместо этого :php:meth:`Cake\\Routing\\Router::extensions()`. Этот метод
   **должен** быть вызван перед подключением маршрутов. Он не затронет уже существующие
