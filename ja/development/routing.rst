@@ -40,14 +40,14 @@ URL の構造を全部のコードの書き直しをせずにリファクタリ�
 index メソッドを実行します。時々、複数のパラメーターを受け取る動的なルートが
 必要になると思います。それが必要になるケースは、例えば、記事の内容を表示するためのルートです。 ::
 
-    Router::connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
+    $routes->connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
 
 上記のルートは、  ``/articles/15`` のような URL を受け取り、 ``ArticlesController``
 の ``view(15)`` メソッドを呼びます。しかし、これは ``/articles/foobar`` のような URL からの
 アクセスを防ぐわけではありません。もし、あなたが望むなら、いくつかのパラメーターを正規表現に従うように
 修正できます。 ::
 
-    Router::connect(
+    $routes->connect(
         '/articles/:id',
         ['controller' => 'Articles', 'action' => 'view'],
         ['id' => '\d+', 'pass' => ['id']]
@@ -71,13 +71,14 @@ URL 文字列を生成できることを意味します。 ::
 ルートは一意の名前を付けることもできます。これは、リンクを構築する際に、
 ルーティングパラメーターをそれぞれ指定する代わりに、ルートを素早く参照することができます。 ::
 
-    use Cake\Routing\Router;
-
-    Router::connect(
+    // In routes.php
+    $routes->connect(
         '/login',
         ['controller' => 'Users', 'action' => 'login'],
         ['_name' => 'login']
     );
+
+    use Cake\Routing\Router;
 
     echo Router::url(['_name' => 'login']);
     // 出力結果
@@ -106,11 +107,10 @@ URL 文字列を生成できることを意味します。 ::
 ルートを接続
 ============
 
-.. php:staticmethod:: connect($route, $defaults = [], $options = [])
+.. php:method:: connect($route, $defaults = [], $options = [])
 
 コードを :term:`DRY` に保つために 'ルーティングスコープ' を使用してください。
 ルーティングスコープはコードを DRY に保つためだけではなく、Router の操作を最適化します。
-上記を参照すると、 ``Router::connect()`` をルートを接続するために使えることがわかります。
 このメソッドは ``/`` スコープがデフォルトです。スコープを作成しいくつかのルートを
 接続するために、 ``scope()`` メソッドを使います。 ::
 
@@ -716,6 +716,82 @@ SEO に親和性があるルーティング
 
 拡張子が :doc:`/controllers/components/request-handling` で使われ、それによって
 コンテンツタイプに合わせた自動的なビューの切り替えを行います。
+
+.. _connecting-scoped-middleware:
+
+Connecting Scoped Middleware
+----------------------------
+
+While Middleware can be applied to your entire application, applying middleware
+to specific routing scopes offers more flexibility, as you can apply middleware
+only where it is needed allowing your middleware to not concern itself with
+how/where it is being applied.
+
+Before middleware can be applied to a scope, it needs to be
+registered into the route collection::
+
+    // in config/routes.php
+    use Cake\Http\Middleware\CsrfProtectionMiddleware;
+    use Cake\Http\Middleware\EncryptedCookieMiddleware;
+
+    Router::scope('/', function ($routes) {
+        $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
+        $routes->registerMiddleware('cookies', new EncryptedCookiesMiddleware());
+    });
+
+Once registered, scoped middleware can be applied to specific
+scopes::
+
+    $routes->scope('/cms', function ($routes) {
+        // Enable CSRF & cookies middleware
+        $routes->applyMiddleware('csrf', 'cookies');
+        $routes->get('/articles/:action/*', ['controller' => 'Articles'])
+    });
+
+In situations where you have nested scopes, inner scopes will inherit the
+middleware applied in the containing scope::
+
+    $routes->scope('/api', function ($routes) {
+        $routes->applyMiddleware('ratelimit', 'auth.api');
+        $routes->scope('/v1', function ($routes) {
+            $routes->applyMiddleware('v1compat');
+            // Define routes here.
+        });
+    });
+
+In the above example, the routes defined in ``/v1`` will have 'ratelimit',
+'auth.api', and 'v1compat' middleware applied. If you re-open a scope, the
+middleware applied to routes in each scope will be isolated::
+
+    $routes->scope('/blog', function ($routes) {
+        $routes->applyMiddleware('auth');
+        // Connect the authenticated actions for the blog here.
+    });
+    $routes->scope('/blog', function ($routes) {
+        // Connect the public actions for the blog here.
+    });
+
+In the above example, the two uses of the ``/blog`` scope do not share
+middleware. However, both of these scopes will inherit middleware defined in
+their enclosing scopes.
+
+Grouping Middleware
+-------------------
+
+To help keep your route code :abbr:`DRY (Do not Repeat Yourself)` middleware can
+be combined into groups. Once combined groups can be applied like middleware
+can::
+
+    $routes->registerMiddleware('cookie', new EncryptedCookieMiddleware());
+    $routes->registerMiddleware('auth', new AuthenticationMiddleware());
+    $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
+    $routes->middlewareGroup('web', ['cookie', 'auth', 'csrf']);
+
+    // Apply the group
+    $routes->applyMiddleware('web');
+
+.. versionadded:: 3.5.0
+    Scoped middleware & middleware groups were added in 3.5.0
 
 .. _resource-routes:
 
