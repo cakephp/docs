@@ -8,6 +8,10 @@
 CookieComponent は PHP に組み込まれている ``setcookie()`` メソッドのラッパーです。
 このコンポーネントは、 Cookie の扱いを容易にし、 Cookie のデータを暗号化します。
 
+.. deprecated:: 3.5.0
+    You should use :ref:`encrypted-cookie-middleware` instead of
+    ``CookieComponent``.
+
 Cookie の設定
 =================
 

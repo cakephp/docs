@@ -318,6 +318,63 @@ backwards compatible with ``CookieComponent`` from earlier versions of CakePHP.
 .. versionadded:: 3.5.0
     The ``EncryptedCookieMiddleware`` was added in 3.5.0
 
+.. _csrf-middleware:
+
+Cross Site Request Forgery (CSRF) Middleware
+============================================
+
+CSRF protection can be applied to your entire application, or to specific scopes
+by applying the ``CsrfProtectionMiddleware`` to your middleware stack::
+
+    use Cake\Http\Middleware\CsrfProtectionMiddleware;
+
+    $options = [
+        // ...
+    ];
+    $csrf = new CsrfProtectionMiddleware($options);
+
+    $middlewareQueue->add($csrf);
+
+Options can be passed into the middleware's constructor.
+The available configuration options are:
+
+- ``cookieName`` The name of the cookie to send. Defaults to ``csrfToken``.
+- ``expiry`` How long the CSRF token should last. Defaults to browser session.
+- ``secure`` Whether or not the cookie will be set with the Secure flag. That is,
+  the cookie will only be set on a HTTPS connection and any attempt over normal HTTP
+  will fail. Defaults to ``false``.
+- ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
+  will also require configuring FormHelper.
+
+When enabled, you can access the current CSRF token on the request object::
+
+    $token = $this->request->getParam('_csrfToken');
+
+.. versionadded:: 3.5.0
+    The ``CsrfProtectionMiddleware`` was added in 3.5.0
+
+
+Integration with FormHelper
+---------------------------
+
+The ``CsrfProtectionMiddleware`` integrates seamlessly with ``FormHelper``. Each
+time you create a form with ``FormHelper``, it will insert a hidden field containing
+the CSRF token.
+
+.. note::
+
+    When using CSRF protection you should always start your forms with the
+    ``FormHelper``. If you do not, you will need to manually create hidden inputs in
+    each of your forms.
+
+CSRF Protection and AJAX Requests
+---------------------------------
+
+In addition to request data parameters, CSRF tokens can be submitted through
+a special ``X-CSRF-Token`` header. Using a header often makes it easier to
+integrate a CSRF token with JavaScript heavy applications, or XML/JSON based API
+endpoints.
+
 .. _adding-http-stack:
 
 既存アプリケーションへの新しい HTTP スタック追加
