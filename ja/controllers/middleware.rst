@@ -19,6 +19,11 @@ CakePHP はいくつかのミドルウェアを既成で提供します。
   リクエストにルーティングパラメーターを割り当てるために ``Router`` を使用します。
 * ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` はブラウザーによって送られる
   ``Accept-Language`` ヘッダーによって自動で言語を切り替えられるようにします。
+* ``Cake\Http\Middleware\EncryptedCookieMiddleware`` gives you the ability to
+  manipulate encrypted cookies in case you need to manipulate cookie with
+  obfuscated data.
+* ``Cake\Http\Middleware\CsrfProtectionMiddleware`` adds CSRF protection to your
+  application.
 
 .. _using-middleware:
 
@@ -248,6 +253,70 @@ PSR-7 リクエストとレスポンス
             return $middlewareStack;
         }
     }
+
+.. _security-header-middleware:
+
+Adding Security Headers
+=======================
+
+The ``SecurityHeaderMiddleware`` layer makes it easy to apply security related
+headers to your application. Once setup the middleware can apply the following
+headers to responses:
+
+* ``X-Content-Type-Options``
+* ``X-Download-Options``
+* ``X-Frame-Options``
+* ``X-Permitted-Cross-Domain-Policies``
+* ``Referrer-Policy``
+
+This middleware is configured using a fluent interface before it is applied to
+your application's middleware stack::
+
+    use Cake\Http\Middleware\SecurityHeadersMiddleware;
+
+    $headers = new SecurityHeadersMiddleware();
+    $headers
+        ->setCrossDomainPolicy()
+        ->setReferrerPolicy()
+        ->setXFrameOptions()
+        ->setXssProtection()
+        ->noOpen()
+        ->noSniff();
+
+    $middlewareQueue->add($headers);
+
+.. versionadded:: 3.5.0
+    The ``SecurityHeadersMiddleware`` was added in 3.5.0
+
+.. _encrypted-cookie-middleware:
+
+Encrypted Cookie Middleware
+===========================
+
+If your application has cookies that contain data you want to obfuscate and
+protect against user tampering, you may can use CakePHP's encrypted cookie
+middleware to transparently encrypt and decrypt cookie data via middleware.
+Cookie data is encrypted with via OpenSSL using AES::
+
+    use Cake\Http\Middleware\EncryptedCookieMiddleware;
+
+    $cookies = new EncryptedCookieMiddleware(
+        // Names of cookies to protect
+        ['secrets', 'protected'],
+        Configure::read('Security.cookieKey')
+    );
+
+    $middlewareQueue->add($cookies);
+
+.. note::
+    It is recommended that the encryption key you use for cookie data, is used
+    *exclusively* for cookie data.
+
+The encryption algorithms and padding style used by the cookie middleware are
+backwards compatible with ``CookieComponent`` from earlier versions of CakePHP.
+
+.. versionadded:: 3.5.0
+    The ``EncryptedCookieMiddleware`` was added in 3.5.0
 
 .. _adding-http-stack:
 
