@@ -166,9 +166,9 @@ ways::
     $user->title = 'foo'; // slug is set as well
     $user->set('title', 'foo'); // slug is set as well
 
-.. note::
+.. warning::
 
-  Accessor are also being run before entities are being persisted to the database.
+  Accessors are also being run before entities are being persisted to the database.
   If you want to transform fields but not persist that transformation,
   we recommend using virtual properties as those are not persisted.
 
