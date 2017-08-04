@@ -26,14 +26,14 @@ suivent le pattern des "objets immutables" décrit dans le standard PSR-7.
 
 Plusieurs propriétés de ``Cake\Network\Request`` ont été dépréciées :
 
-  * ``Request::$params`` est dépréciée. Utilisez ``Request::getAttribute('params')`` à la place.
-  * ``Request::$data`` est dépréciée. Utilisez ``Request::getData()`` à la place.
-  * ``Request::$query`` est dépréciée. Utilisez ``Request::getQueryParams()`` à la place.
-  * ``Request::$cookies`` est dépréciée. Utilisez ``Request::getCookie()`` à la place.
-  * ``Request::$base`` est dépréciée. Utilisez ``Request::getAttribute('base')`` à la place.
-  * ``Request::$webroot`` est dépréciée. Utilisez ``Request::getAttribute('webroot')`` à la place.
-  * ``Request::$here`` est dépréciée. Utilisez ``Request::getRequestTarget()`` à la place.
-  * ``Request::$_session`` a été renommée ``Request::$session``.
+* ``Request::$params`` est dépréciée. Utilisez ``Request::getAttribute('params')`` à la place.
+* ``Request::$data`` est dépréciée. Utilisez ``Request::getData()`` à la place.
+* ``Request::$query`` est dépréciée. Utilisez ``Request::getQueryParams()`` à la place.
+* ``Request::$cookies`` est dépréciée. Utilisez ``Request::getCookie()`` à la place.
+* ``Request::$base`` est dépréciée. Utilisez ``Request::getAttribute('base')`` à la place.
+* ``Request::$webroot`` est dépréciée. Utilisez ``Request::getAttribute('webroot')`` à la place.
+* ``Request::$here`` est dépréciée. Utilisez ``Request::getRequestTarget()`` à la place.
+* ``Request::$_session`` a été renommée ``Request::$session``.
 
 Certaines méthodes de ``Cake\Network\Request`` ont été dépréciées :
 
