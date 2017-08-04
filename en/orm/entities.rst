@@ -166,8 +166,6 @@ ways::
     $user->title = 'foo'; // slug is set as well
     $user->set('title', 'foo'); // slug is set as well
 
-
-
 .. note::
 
   Accessor are also being run before entities are being persisted to the database.
