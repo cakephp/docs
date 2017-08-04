@@ -1075,12 +1075,12 @@ and ask it to build the query as if we were calling a find() method,
 but it will just return the SQL statement. After that we make an
 expression and add it to the conditions array::
 
-    $conditionsSubQuery['"User2"."status"'] = 'B';
+      $conditionsSubQuery['User2.status'] = 'B';
 
     $db = $this->User->getDataSource();
     $subQuery = $db->buildStatement(
         array(
-            'fields'     => array('"User2"."id"'),
+            'fields'     => array('User2.id'),
             'table'      => $db->fullTableName($this->User),
             'alias'      => 'User2',
             'limit'      => null,
@@ -1092,7 +1092,7 @@ expression and add it to the conditions array::
         ),
         $this->User
     );
-    $subQuery = ' "User"."id" NOT IN (' . $subQuery . ') ';
+    $subQuery = 'User.id NOT IN (' . $subQuery . ') ';
     $subQueryExpression = $db->expression($subQuery);
 
     $conditions[] = $subQueryExpression;
@@ -1102,19 +1102,19 @@ expression and add it to the conditions array::
 This should generate the following SQL::
 
     SELECT
-        "User"."id" AS "User__id",
-        "User"."name" AS "User__name",
-        "User"."status" AS "User__status"
+        User.id AS "User__id",
+        User.name AS "User__name",
+        User.status AS "User__status"
     FROM
-        "users" AS "User"
+        users AS User
     WHERE
-        "User"."id" NOT IN (
+        User.id NOT IN (
             SELECT
-                "User2"."id"
+                User2.id
             FROM
-                "users" AS "User2"
+                users AS User2
             WHERE
-                "User2"."status" = 'B'
+                "User2.status" = 'B'
         )
 
 Also, if you need to pass just part of your query as raw SQL as
