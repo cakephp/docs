@@ -168,7 +168,7 @@ ways::
 
 .. warning::
 
-  Accessors are also being run before entities are being persisted to the database.
+  Accessors are also run before entities are being persisted to the database.
   If you want to transform fields but not persist that transformation,
   we recommend using virtual properties as those are not persisted.
 
