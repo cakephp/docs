@@ -180,6 +180,8 @@ Par défaut, les requêtes et les ensembles de résultat seront retournés
 en objets :doc:`/orm/entities`. Vous pouvez récupérer des tableaux basiques en
 désactivant l'hydratation::
 
+    $query->enableHydration(false);
+    // Avant 3.4.0
     $query->hydrate(false);
 
     // $data est le ResultSet qui contient le tableau de données.
@@ -245,7 +247,7 @@ pour générer des 'lists' de données::
 
 Avec aucune option supplémentaire, les clés de ``$data`` seront la clé primaire
 de votre table, alors que les valeurs seront le 'displayField' (champAAfficher)
-de la table. Vous pouvez utiliser la méthode ``displayField()`` sur un objet
+de la table. Vous pouvez utiliser la méthode ``setDisplayField()`` sur un objet
 table pour configurer le champ à afficher sur une table::
 
     class Articles extends Table
@@ -253,6 +255,8 @@ table pour configurer le champ à afficher sur une table::
 
         public function initialize(array $config)
         {
+            $this->setDisplayField('title');
+            // Avant 3.4.0
             $this->displayField('title');
         }
     }
@@ -333,9 +337,9 @@ partir de l'entity Author. ::
 Vous pouvez aussi récupérer le label dans la liste directement en utilisant. ::
 
     // Dans AuthorsTable::initialize():
-    $this->displayField('label'); // Va utiliser Author::_getLabel()
+    $this->setDisplayField('label'); // Va utiliser Author::_getLabel()
     // Dans votre finders/controller:
-    $query = $authors->find('list'); // Va utiliser AuthorsTable::displayField()
+    $query = $authors->find('list'); // Va utiliser AuthorsTable::getDisplayField()
 
 Trouver des Données Threaded
 ============================
@@ -672,13 +676,13 @@ vous pouvez passer l'objet association à ``select()``::
         ->contain(['Users']);
 
 D'une autre façon, si vous pouvez faire des associations multiples, vous
-pouvez utiliser ``autoFields()``::
+pouvez utiliser ``enableAutoFields()``::
 
     // Sélectionne id & title de articles, mais tous les champs enlevés de
     // Users, Comments et Tags.
     $query->select(['id', 'title'])
         ->contain(['Comments', 'Tags'])
-        ->autoFields(true)
+        ->enableAutoFields(true) // Avant 3.4.0 utilisez autoFields(true)
         ->contain(['Users' => function($q) {
             return $q->autoFields(true);
         }]);
@@ -869,7 +873,7 @@ a, ainsi que toutes les données de l'article, vous pouvez utiliser la fonction
     $query->select(['total_comments' => $query->func()->count('Comments.id')])
         ->leftJoinWith('Comments')
         ->group(['Articles.id'])
-        ->autoFields(true);
+        ->enableAutoFields(true); // Avant 3.4.0 utilisez autoFields(true)
 
 Le résultat de la requête ci-dessus va contenir les données de l'article et
 la propriété ``total_comments`` pour chacun d'eux.
@@ -885,7 +889,7 @@ avec un certain mot::
             return $q->where(['Tags.name' => 'awesome']);
         })
         ->group(['Authors.id'])
-        ->autoFields(true);
+        ->enableAutoFields(true); // Avant 3.4.0 utilisez autoFields(true)
 
 Cette fonction ne va charger aucune colonne des associations spécifiées dans
 l'ensemble de résultats.
@@ -931,6 +935,8 @@ Changer la stratégie de façon dynamique de cette façon va seulement l'appliqu
 pour une requête spécifique. Si vous souhaitez rendre le changement de stratégie
 permanent, vous pouvez faire::
 
+    $articles->FirstComment->setStrategy('seelct');
+    // Avant 3.4.0
     $articles->FirstComment->strategy('select');
 
 Utiliser la stratégie ``select`` est aussi une bonne façon de faire des
@@ -964,6 +970,8 @@ SQL**.
 Vous pouvez aussi rendre la stratégie pour les associations permanente en
 faisant::
 
+    $articles->Comments->setStrategy('subquery');
+    // Avant 3.4.0
     $articles->Comments->strategy('subquery');
 
 Lazy loading des Associations
@@ -991,6 +999,8 @@ d'itérer les résultats. Si vous devez travailler sur un ensemble de données q
 ne rentre pas dans la mémoire, vous pouvez désactiver la mise en mémoire sur la
 requête pour faire un stream des résultats::
 
+    $query->enableBufferResults(false);
+    // Avant 3.4.0
     $query->bufferResults(false);
 
 Stopper la mise en mémoire tampon nécessite quelques mises en garde:
@@ -1222,8 +1232,9 @@ Finalement, nous mettons tout ensemble::
     $wordCount = $articles->find()
         ->where(['published' => true])
         ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
-        ->hydrate(false)
-        ->mapReduce($mapper, $reducer);
+        ->enableHydrate(false) // Avant 3.4.0 utilisez hydrate(false)
+        ->mapReduce($mapper, $reducer)
+        ->toArray();
 
 Ceci pourrait retourner un tableau très grand si nous ne nettoyons pas les mots
 interdits, mais il pourrait ressembler à ceci::
@@ -1282,7 +1293,7 @@ une liste de followers par utilisateur::
 Et nous fournissons nos fonctions à la requête::
 
     $fakeFriends = $friends->find()
-        ->hydrate(false)
+        ->enableHydrate(false) // Avant 3.4.0 utilisez hydrate(false)
         ->mapReduce($mapper, $reducer)
         ->toArray();
 

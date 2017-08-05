@@ -883,7 +883,7 @@ column::
 Dynamically changing the strategy in this way will only apply to a specific
 query. If you want to make the strategy change permanent you can do::
 
-    $articles->FirstComment->setStrategy('seelct');
+    $articles->FirstComment->setStrategy('select');
     // Prior to 3.4.0
     $articles->FirstComment->strategy('select');
 

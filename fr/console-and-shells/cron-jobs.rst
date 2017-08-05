@@ -35,9 +35,9 @@ pourrait ne pas fonctionner. Vous pouvez à la place utiliser
     register_argc_argv a besoin d'être activé en incluant
     ``register_argc_argv = 1`` dans votre php.ini. Si vous ne pouvez pas
     changer register_argc_argv de manière globale, vous pouvez préciser à la
-    tâche cron d'utiliser votre propre php.ini en le spécifiant via
-    ``-c /full/path/to/root/php.ini``. Exemple :
-    ``php -c /full/path/to/root/php.ini /full/path/to/root/bin/cake.php myshell myparam``.
+    tâche cron d'utiliser votre propre configuration en la spécifiant via le
+    paramètre ``-d register_argc_argv=1``. Exemple :
+    ``php -d register_argc_argv=1 /full/path/to/root/bin/cake.php myshell myparam``.
 
 .. meta::
     :title lang=fr: Lancer des Shells en tant que cronjobs
