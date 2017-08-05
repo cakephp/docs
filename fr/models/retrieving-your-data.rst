@@ -1104,12 +1104,12 @@ une méthode "find", mais elle retournera uniquement la commande SQL. Après
 cela, nous construisons une expression et l'ajoutons au tableau des
 conditions::
 
-    $conditionsSubQuery['"User2"."status"'] = 'B';
+    $conditionsSubQuery['User2.status'] = 'B';
 
-    $db = $this->Utilisateur->getDataSource();
+    $db = $this->User->getDataSource();
     $subQuery = $db->buildStatement(
         array(
-            'fields'     => array('"User2"."id"'),
+            'fields'     => array('User2.id'),
             'table'      => $db->fullTableName($this->User),
             'alias'      => 'User2',
             'limit'      => null,
@@ -1121,7 +1121,7 @@ conditions::
         ),
         $this->User
     );
-    $subQuery = ' "User"."id" NOT IN (' . $subQuery . ') ';
+    $subQuery = 'User.id NOT IN (' . $subQuery . ') ';
     $subQueryExpression = $db->expression($subQuery);
 
     $conditions[] = $subQueryExpression;
@@ -1131,19 +1131,19 @@ conditions::
 Ceci devrait générer la commande SQL suivante::
 
     SELECT
-        "User"."id" AS "User__id",
-        "User"."name" AS "User__nom",
-        "User"."status" AS "User__status"
+        User.id AS "User__id",
+        User.name AS "User__name",
+        User.status AS "User__status"
     FROM
-        "users" AS "User"
+        users AS User
     WHERE
-        "User"."id" NOT IN (
+        User.id NOT IN (
             SELECT
-                "User2"."id"
+                User2.id
             FROM
-                "users" AS "User2"
+                users AS User2
             WHERE
-                "User2"."status" = 'B'
+                "User2.status" = 'B'
         )
 
 Aussi, si vous devez passer juste une partie de votre requête en
