@@ -203,3 +203,46 @@
     各セルを描画するために新しい ``View`` インスタンスが作成され、それらの新しいオブジェクトは
     メインのテンプレート／レイアウトとはコンテキストを共有しません。各セルは内包されていて、
     ``View::cell()`` の呼び出しの引数として渡された変数にのみアクセスが可能です。
+
+
+セル内のデータのページ制御
+=============================
+
+ページ制御された結果セットを描画するセルを作成するには、ORM の ``Paginator`` クラスを利用します。
+ユーザーのお気に入りメッセージをページ制御する例は次のようになります。 ::
+
+    namespace App\View\Cell;
+
+    use Cake\View\Cell;
+    use Cake\Datasource\Paginator;
+
+    class FavoritesCell extends Cell
+    {
+        public function display($user)
+        {
+            $this->loadModel('Messages');
+
+            // paginator の作成
+            $paginator = new Paginator();
+
+            // モデルをページ制御
+            $results = $paginator->paginate(
+                $this->Messages,
+                $this->request->getQueryParams(),
+                [
+                    // パラメーター付きカスタムファインダーを使用
+                    'finder' => ['favorites' => [$user]],
+
+                    // スコープ指定のクエリー文字列パラメーターを使用
+                    'scope' => 'favorites',
+                ]
+            );
+            $this->set('favorites', $results);
+        }
+    }
+
+上記のセルは、 :ref:`スコープ指定のページ制御パラメーター <paginating-multiple-queries>`
+を使用して ``Messages`` モデルをページ制御します。
+
+.. versionadded:: 3.5.0
+    ``Cake\Datasource\Paginator`` は 3.5.0 で追加されました。
