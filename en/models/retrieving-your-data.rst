@@ -1075,7 +1075,7 @@ and ask it to build the query as if we were calling a find() method,
 but it will just return the SQL statement. After that we make an
 expression and add it to the conditions array::
 
-      $conditionsSubQuery['User2.status'] = 'B';
+    $conditionsSubQuery['User2.status'] = 'B';
 
     $db = $this->User->getDataSource();
     $subQuery = $db->buildStatement(
