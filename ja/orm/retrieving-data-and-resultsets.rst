@@ -1066,7 +1066,7 @@ CakePHP についての情報を含む記事 (article) でもっともよく発�
 例によって mapper 関数が必要です。 ::
 
     $mapper = function ($article, $key, $mapReduce) {
-        if (stripos('cakephp', $article['body']) === false) {
+        if (stripos($article['body'], 'cakephp') === false) {
             return;
         }
 
@@ -1086,11 +1086,12 @@ CakePHP についての情報を含む記事 (article) でもっともよく発�
 
 最後に、すべてを一緒にします。 ::
 
-    $articlesByStatus = $articles->find()
+    $wordCount = $articles->find()
         ->where(['published' => true])
         ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
         ->hydrate(false)
-        ->mapReduce($mapper, $reducer);
+        ->mapReduce($mapper, $reducer)
+        ->toArray();
 
 これは、ストップワードを除去しない場合、非常に大きな配列を返すこともありえますが、
 このようなものを返します。 ::
@@ -1109,26 +1110,41 @@ CakePHP についての情報を含む記事 (article) でもっともよく発�
 ``mapper()`` 関数を見てみましょう。 ::
 
     $mapper = function ($rel, $key, $mr) {
-        $mr->emitIntermediate($rel['source_user_id'], $rel['target_user_id']);
-        $mr->emitIntermediate($rel['target_user_id'], $rel['source_target_id']);
+        $mr->emitIntermediate($rel['target_user_id'], $rel['source_user_id']);
+        $mr->emitIntermediate(-$rel['source_user_id'], $rel['target_user_id']);
     };
 
-互いにフォローしあっているユーザーリストを得るためにデータをコピーしていきました。
+中間の配列は次のようになります。 ::
+
+    [
+        1 => [2, 3, 4, 5, -3, -5],
+        2 => [-1],
+        3 => [-1, 1, 6],
+        4 => [-1],
+        5 => [-1, 1],
+        6 => [-3],
+        ...
+    ]
+
+正の数は第１レベルのキーで示されたユーザーが彼らをフォローしていることを意味し、
+負の数はそのユーザーが彼らからフォローされていることを意味します。
+
 それでは reduce しましょう。
 reducer が呼ばれるごとに、reducer はユーザーごとのフォロワーのリストを受け取ります。 ::
 
-    // $friendsList は次のようになっています
-    // 繰り返し登場する数字は双方向で関係が繋がっていることを意味しています
-    [2, 5, 100, 2, 4]
+    $reducer = function ($friends, $user, $mr) {
+        $fakeFriends = [];
 
-    $reducer = function ($friendsList, $user, $mr) {
-        $friends = array_count_values($friendsList);
-        foreach ($friends as $friend => $count) {
-            if ($count < 2) {
-                $mr->emit($friend, $user);
+        foreach ($friends as $friend) {
+            if ($friend > 0 && !in_array(-$friend, $friends)) {
+                $fakeFriends[] = $friend;
             }
         }
-    }
+
+        if ($fakeFriends) {
+            $mr->emit($fakeFriends, $user);
+        }
+    };
 
 そして、クエリーにこの関数を渡します。 ::
 
