@@ -450,7 +450,7 @@ CakePHP の既定のレイアウトは **src/Template/Layout/default.ctp** に�
 コントローラーのアクションの中か、ビューの ``$layout`` プロパティーで切り替えるだけです。 ::
 
     // コントローラーから
-    public function admin_view()
+    public function view()
     {
         // レイアウトの設定
         $this->viewBuilder()->setLayout('admin');
