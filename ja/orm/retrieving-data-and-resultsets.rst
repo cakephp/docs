@@ -157,6 +157,8 @@ find() で使えるオプションは次の通りです:
 デフォルトでクエリーと結果セットは :doc:`/orm/entities` オブジェクトを返します。
 変換 (hydrate) を無効化すれば、素となる配列を取得することができます。 ::
 
+    $query->enableHydration(false);
+    // 3.4.0 より前は
     $query->hydrate(false);
 
     // $data は配列のデータを含む ResultSet です。
@@ -217,7 +219,7 @@ CakePHP ではデータの 'list' を生成するメソッドを使うことで�
     ];
 
 追加のオプションがない場合、 ``$data`` のキーはテーブルの主キーになり、値はテーブルの
-'displayField' になります。テーブルオブジェクトの ``displayField()`` メソッドを使うことで
+'displayField' になります。テーブルオブジェクトの ``setDisplayField()`` メソッドを使うことで
 テーブルの表示列を設定できます。 ::
 
     class ArticlesTable extends Table
@@ -225,6 +227,8 @@ CakePHP ではデータの 'list' を生成するメソッドを使うことで�
 
         public function initialize(array $config)
         {
+            $this->setDisplayField('title');
+            // 3.4.0 より前は
             $this->displayField('title');
         }
     }
@@ -301,9 +305,9 @@ join でつながっている関連テーブルからリストのデータを生
 オプション指定なしで、ラベルを取得することもできます。 ::
 
     // AuthorsTable::initialize() の中で
-    $this->displayField('label'); // Author::_getLabel() を利用します。
+    $this->setDisplayField('label'); // Author::_getLabel() を利用します。
     // ファインダーやコントローラーの中で
-    $query = $authors->find('list'); // AuthorsTable::displayField() を利用します。
+    $query = $authors->find('list'); // AuthorsTable::getDisplayField() を利用します。
 
 スレッド状のデータを検索する
 ============================
@@ -601,12 +605,12 @@ contain に条件を渡す
         ->select($articles->Users)
         ->contain(['Users']);
 
-別の方法として、複数の関連がある場合には、 ``autoFields()`` を使うことができます。 ::
+別の方法として、複数の関連がある場合には、 ``enableAutoFields()`` を使うことができます。 ::
 
     // Articles から id と title を、 Users、Comments、Tags から全列を select する
     $query->select(['id', 'title'])
         ->contain(['Comments', 'Tags'])
-        ->autoFields(true)
+        ->enableAutoFields(true) // 3.4.0 より前は autoFields(true) を使用
         ->contain(['Users' => function($q) {
             return $q->autoFields(true);
         }]);
@@ -777,7 +781,7 @@ leftJoinWith を使う
     $query->select(['total_comments' => $query->func()->count('Comments.id')])
         ->leftJoinWith('Comments')
         ->group(['Articles.id'])
-        ->autoFields(true);
+        ->enableAutoFields(true); // 3.4.0 より前は autoFields(true); を使用
 
 上記クエリーの結果は Article データの結果に加え、データごとに ``total_comments``
 プロパティーが含まれます。
@@ -792,7 +796,7 @@ leftJoinWith を使う
             return $q->where(['Tags.name' => 'awesome']);
         })
         ->group(['Authors.id'])
-        ->autoFields(true);
+        ->enableAutoFields(true); // 3.4.0 より前は autoFields(true); を使用
 
 この関数は指定した関連からいずれのカラムも結果セットへとロードしません。
 
@@ -831,6 +835,8 @@ leftJoinWith を使う
 この方法での戦略 (strategy) の動的な変更は指定したクエリーのみに適用されます。
 もしも戦略の変更を永続的に行いたいなら次のようにできます。 ::
 
+    $articles->FirstComment->setStrategy('select');
+    // 3.4.0 より前は
     $articles->FirstComment->strategy('select');
 
 ``select`` 戦略の利用は、別データベースにあるテーブルとの関連を作るのに優れた方法です。
@@ -881,6 +887,8 @@ ResultSet オブジェクトは基本となるプリペアードステートメ�
 何度もイテレートすることができるようになり、まだバッファされていなければ、結果をキャッシュしつつ
 イテレートします。 ::
 
+    $query->enableBufferResults(false);
+    // 3.4.0 より前は
     $query->bufferResults(false);
 
 バッファを OFF に切り替える場合にはいくつか注意点があります:
@@ -1089,7 +1097,7 @@ CakePHP についての情報を含む記事 (article) でもっともよく発�
     $wordCount = $articles->find()
         ->where(['published' => true])
         ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
-        ->hydrate(false)
+        ->enableHydrate(false) // 3.4.0 より前は hydrate(false) を使用
         ->mapReduce($mapper, $reducer)
         ->toArray();
 
@@ -1149,7 +1157,7 @@ reducer が呼ばれるごとに、reducer はユーザーごとのフォロワ�
 そして、クエリーにこの関数を渡します。 ::
 
     $fakeFriends = $friends->find()
-        ->hydrate(false)
+        ->enableHydrate(false) // 3.4.0 より前は hydrate(false) を使用
         ->mapReduce($mapper, $reducer)
         ->toArray();
 
@@ -1225,4 +1233,3 @@ stack されたすべての MapReduce 操作をを取り除く
 を呼び出すことで達成できます。 ::
 
     $query->mapReduce(null, null, true);
-
