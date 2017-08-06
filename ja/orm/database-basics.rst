@@ -238,6 +238,8 @@ cacheMetadata
     メタデータのキャッシュをオフにする事はお勧めしませんし、パフォーマンスがとても
     悪化します。詳細は :ref:`database-metadata-cache` のセクションを
     参照してください。
+mask
+    生成されたデータベースファイルのパーミッションをセットします。 (SQLite のみでサポートされています)
 
 この時点で、あなたは :doc:`/intro/conventions` を見たいと思うかもしれません。
 正しいテーブル名（といくつかのカラムの追加）によって、いくつかの機能を獲得して、
@@ -310,8 +312,13 @@ uuid
 integer
     データベースがサポートする INTEGER 型に変換します。現時点では、
     BIT はサポートしていません。
+smallinteger
+    データベースによって提供される SMALLINT 型に変換します。
+tinyinteger
+    データベースによって提供される TINYINT 型か SMALLINT 型に変換します。
+    MySQL の ``TINYINT(1)`` は、 boolean として扱われます。
 biginteger
-    データベースがサポートする BIGINT 型に変換します。
+    データベースによって提供される BIGINT 型に変換します。
 float
     データベースに応じて DOUBLE 型か FLOAT 型に変換されます。
     精度（小数点以下桁数）を指定するために ``precision`` オプションを使うことができます。
@@ -322,7 +329,7 @@ boolean
     BOOLEAN に変換します。MySQL の場合は TINYINT(1) になります。現時点では、
     BIT(1) はサポートしていません。
 binary
-    データベースに応じて BLOB または BYTEA 型に変換します。
+    データベースによって提供される BLOB 型または BYTEA 型に変換します。
 date
     タイムゾーン情報を持たない DATE 型に変換されます。この型の戻り値は、ネイティブな
     ``DateTime`` クラスを拡張した :php:class:`Cake\\I18n\\Date` です。
@@ -349,6 +356,12 @@ json
 timestamp か 整形した日付文字列に変換します。
 同様に 'binary' という名前の項目ならファイルハンドラを受け入れ、データを読み込むときには
 ファイルハンドラを生成します。
+
+.. versionchanged:: 3.3.0
+    ``json`` 型が追加されました。
+
+.. versionchanged:: 3.5.0
+    ``smallinteger`` 型と ``tinyinteger`` 型が追加されました。
 
 .. _adding-custom-database-types:
 
