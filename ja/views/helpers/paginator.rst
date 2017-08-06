@@ -21,7 +21,7 @@ PaginatorHelper テンプレート
 マークアップを生成します。これらのテンプレートを変更して、PaginatorHelper
 によって生成された HTML をカスタマイズすることができます。
 
-テンプレートは ``{{var}}`` スタイルのプレースホルダを使います。``{{}}``
+テンプレートは ``{{var}}`` スタイルのプレースホルダを使います。 ``{{}}``
 のまわりに空白を入れないことが重要です。そうしないと置き換えが機能しません。
 
 ファイルからテンプレートをロードする
@@ -29,7 +29,7 @@ PaginatorHelper テンプレート
 
 コントローラーに PaginatorHelper を追加するとき、'templates'
 設定を定義して読み込むテンプレートファイルを定義することができます。
-これにより、複数のテンプレートをカスタマイズし、コードを DRY に保つことができます。::
+これにより、複数のテンプレートをカスタマイズし、コードを DRY に保つことができます。 ::
 
     // AppView.php の中で
     public function initialize()
@@ -40,7 +40,7 @@ PaginatorHelper テンプレート
 
 これは **config/paginator-templates.php** にあるファイルをロードします。
 ファイルの外観は以下の例を参照してください。 :term:`プラグイン記法`
-を使ってプラグインからテンプレートをロードすることもできます。::
+を使ってプラグインからテンプレートをロードすることもできます。 ::
 
     // AppView.php の中で
     public function initialize()
@@ -50,7 +50,7 @@ PaginatorHelper テンプレート
     }
 
 テンプレートが、主となるアプリケーションのものでもプラグインのものでも、
-テンプレートファイルは次のようになります。::
+テンプレートファイルは次のようになります。 ::
 
     return [
         'number' => '<a href="{{url}}">{{text}}</a>',
@@ -62,7 +62,7 @@ PaginatorHelper テンプレート
 .. php:method:: setTemplates($templates)
 
 このメソッドを使用すると、実行時に PaginatorHelper で使用されるテンプレートを変更できます。
-これは、特定のメソッド呼び出しのテンプレートをカスタマイズする場合に便利です::
+これは、特定のメソッド呼び出しのテンプレートをカスタマイズする場合に便利です。 ::
 
     // 現在のテンプレート値を読み込みます
     $result = $this->Paginator->getTemplates('number');
@@ -147,7 +147,7 @@ title パラメーターを使って、リンクに付けるカスタムテキ�
 
     <a href="/posts/index?page=1&amp;sort=user_id&amp;direction=asc">User account</a>
 
-リンクに対して HTML のような画像を使っている場合は、エスケープを off にする必要があります。::
+リンクに対して HTML のような画像を使っている場合は、エスケープを off にする必要があります。 ::
 
     echo $this->Paginator->sort(
       'user_id',
@@ -162,7 +162,7 @@ title パラメーターを使って、リンクに付けるカスタムテキ�
     <a href="/posts/index?page=1&amp;sort=user_id&amp;direction=asc"><em>User account</em></a>
 
 direction オプションでリンクのデフォルトのソート順を設定できます。
-一度リンクがアクティブになると、通常のように自動的にソート順が切り替わります::
+一度リンクがアクティブになると、通常のように自動的にソート順が切り替わります。 ::
 
     echo $this->Paginator->sort('user_id', null, ['direction' => 'desc']);
 
@@ -172,7 +172,7 @@ direction オプションでリンクのデフォルトのソート順を設定�
 
     <a href="/posts/index?page=1&amp;sort=user_id&amp;direction=desc">User Id</a>
 
-lock オプションでソート順を指定された順に固定できます::
+lock オプションでソート順を指定された順に固定できます。 ::
 
     echo $this->Paginator->sort('user_id', null, ['direction' => 'asc', 'lock' => true]);
 
@@ -203,7 +203,7 @@ lock オプションでソート順を指定された順に固定できます::
 * ``modulus`` 現在のページの両側に含める数字の数。
   デフォルトは 8。
 * ``first`` 先頭ページへのリンクを生成したい場合、先頭から何ページ分を生成するかを整数で指定します。
-  デフォルトは ``false`` です。文字列を指定すると、その文字列をタイトルの値として先頭ページへのリンクを生成します。::
+  デフォルトは ``false`` です。文字列を指定すると、その文字列をタイトルの値として先頭ページへのリンクを生成します。 ::
 
       echo $this->Paginator->numbers(['first' => 'First page']);
 
@@ -212,13 +212,13 @@ lock オプションでソート順を指定された順に固定できます::
   :php:meth:`~PaginatorHelper::last()` メソッドを使って別々に定義することも可能です。
 
 このメソッドを使えば出力の多くをカスタマイズできますが、
-一切パラメーターを指定せずにコールしても問題ありません。::
+一切パラメーターを指定せずにコールしても問題ありません。 ::
 
     echo $this->Paginator->numbers();
 
 first と last オプションを使って先頭ページと最終ページへのリンクを作れます。
 以下の例ではページ制御された結果セットの中の、
-先頭から２ページと末尾から２ページのリンクを含むページリンクの並びを生成します。::
+先頭から２ページと末尾から２ページのリンクを含むページリンクの並びを生成します。 ::
 
     echo $this->Paginator->numbers(['first' => 2, 'last' => 2]);
 
@@ -303,17 +303,17 @@ first と last オプションを使って先頭ページと最終ページへ�
 ヘッダーリンクタグの作成
 ========================
 
-PaginatorHelper を使用すると、ページの ``<head>`` 要素に改行タグを作成できます::
+PaginatorHelper を使用すると、ページの ``<head>`` 要素に改行タグを作成できます。 ::
 
-    // 現在のモデルの次ページと前ページのリンクを作成する。
-    echo $this->Paginator->meta();
+    // 現在のモデルの次ページと前ページのリンクを作成する。
+    echo $this->Paginator->meta();
 
-    // 現在のモデルの次ページと前ページ、先頭ページと最終ページのリンクを作成する。
+    // 現在のモデルの次ページと前ページ、先頭ページと最終ページのリンクを作成する。
     echo $this->Paginator->meta(['first' => true, 'last' => true]);
 
 .. versionadded:: 3.4.0
 
-    ``first`` と ``last`` オプションは 3.4.0 で追加されました
+    ``first`` と ``last`` オプションは 3.4.0 で追加されました
 
 ページ制御状態の確認
 ====================
@@ -353,12 +353,12 @@ PaginatorHelper を使用すると、ページの ``<head>`` 要素に改行タ�
 与えられた書式文字列と多くのオプションを使って、ページ制御された 結果セットの中の位置を表す、
 ローカライズされたアプリケーション固有の文字列を生成することができます。
 
-``counter()`` には多くのオプションがあります。 サポートされているのは以下のものです。:
+``counter()`` には多くのオプションがあります。 サポートされているのは以下のものです。
 
 * ``format`` カウンターの書式。サポートされている書式は 'range', 'pages' およびカスタムです。
   pages のデフォルトは '1 of 10' のような出力です。
   カスタムモードでは与えられた文字列がパースされ、トークンが実際の値に置き換えられます。
-  利用できるトークンは以下の通りです。:
+  利用できるトークンは以下の通りです。
 
   -  ``{{page}}`` - 表示された現在のページ
   -  ``{{pages}}`` - 総ページ数
@@ -370,14 +370,14 @@ PaginatorHelper を使用すると、ページの ``<head>`` 要素に改行タ�
      あなたのモデルが 'RecipePage' であれば、 ``{{model}}`` は 'recipe pages' になります。
 
   counter メソッドに対して利用できるトークンを使って、文字列だけを与えることもできます。
-  たとえば以下のようにできます。::
+  たとえば以下のようにできます。 ::
 
       echo $this->Paginator->counter(
           '{{page}} / {{pages}} ページ, {{current}} 件目 / 全 {{count}} 件,
           開始レコード番号 {{start}}, 終了レコード番号 {{end}}'
       );
 
-  'format' を range に設定すると '1 - 3 of 13' のように出力します。::
+  'format' を range に設定すると '1 - 3 of 13' のように出力します。 ::
 
       echo $this->Paginator->counter([
           'format' => 'range'
@@ -386,6 +386,37 @@ PaginatorHelper を使用すると、ページの ``<head>`` 要素に改行タ�
 * ``model`` ページ制御する対象のモデル。デフォルトは
   :php:meth:`PaginatorHelper::defaultModel()` 。
   これは 'format' オプションのカスタム文字列と組み合わせて使われます。
+
+ページ制御 URL の生成
+==========================
+
+.. php:method:: generateUrl(array $options = [], $model = null, $full = false)
+
+デフォルトでは、非標準的なコンテキスト（JavaScript など）で使用する
+完全なページ制御 URL 文字列を返します。 ::
+
+    echo $this->Paginator->generateUrl(['sort' => 'title']);
+
+制限セレクトボックスコントロールの作成
+======================================
+
+.. php:method:: limitControl(array $limits = [], $default = null, array $options = [])
+
+``limit`` クエリーパラメーターを変更するドロップダウンコントロールを作成します。 ::
+
+    // デフォルトを使用
+    echo $this->Paginator->limitControl();
+
+    // 必要な limit オプションを定義
+    echo $this->Paginator->limitControl([25 => 25, 50 => 50]);
+
+    // カスタム制限と選択されたオプションの設定
+    echo $this->Paginator->limitControl([25 => 25, 50 => 50], $user->perPage);
+
+生成されたフォームやコントロールは、変更時に自動的に送信されます。
+
+.. versionadded:: 3.5.0
+    ``limitControl()`` メソッドは、3.5.0 で追加されました。
 
 ページ制御オプションの設定
 ==========================
@@ -401,7 +432,7 @@ PaginatorHelperのすべてのオプションを設定します。サポート�
   -  ``page`` 表示するページ番号。
 
   上記の例で出てきたオプションは、特定のページやソート順を強制するのに使用できます。
-  このヘルパーで生成された URL に対して、追加的な URL コンテンツを追加できます。::
+  このヘルパーで生成された URL に対して、追加的な URL コンテンツを追加できます。 ::
 
       $this->Paginator->options([
           'url' => [
@@ -430,7 +461,7 @@ PaginatorHelperのすべてのオプションを設定します。サポート�
 そのように機能を制限されているわけではありません。
 
 詳細は API の中の `PaginatorHelper <https://api.cakephp.org/3.x/class-Cake.View.Helper.PaginatorHelper.html>`_
-を参照してください。なお、前述のように、PaginatorHelper には、テーブルの列ヘッダーに統合できるソート機能もあります。:
+を参照してください。なお、前述のように、PaginatorHelper には、テーブルの列ヘッダーに統合できるソート機能もあります。
 
 .. code-block:: php
 
@@ -451,7 +482,7 @@ PaginatorHelperのすべてのオプションを設定します。サポート�
 ``PaginatorHelper`` の ``sort()`` メソッドから出力されたリンクにより、
 ユーザーはテーブルのヘッダーをクリックして、指定されたフィールドによるデータのソートを切り替えることができます。
 
-アソシエーションに基づいて列をソートすることもできます。:
+アソシエーションに基づいて列をソートすることもできます。
 
 .. code-block:: php
 
@@ -469,7 +500,7 @@ PaginatorHelperのすべてのオプションを設定します。サポート�
     </table>
 
 ビューにおけるページ制御の表示に関する最後のネタは、
-PaginationHelperによって提供されるページナビゲーションの追加です。::
+PaginationHelper によって提供されるページナビゲーションの追加です。 ::
 
     // ページ番号を表示する
     <?= $this->Paginator->numbers() ?>
@@ -481,21 +512,12 @@ PaginationHelperによって提供されるページナビゲーションの追�
     // 現在のページ番号 / 全ページ数 を表示する
     <?= $this->Paginator->counter() ?>
 
-counter() メソッドによる文章出力は、特殊なマーカーを使用してカスタマイズできます。::
+counter() メソッドによる文章出力は、特殊なマーカーを使用してカスタマイズできます。 ::
 
     <?= $this->Paginator->counter([
         'format' => 'ページ {{page}} / {{pages}}, 全 {{count}} レコード中の
                  {{current}} レコードを表示中, 先頭レコード {{start}}, 末尾 {{end}}'
     ]) ?>
-
-ページ制御URLの生成
-===================
-
-.. php:method:: generateUrl(array $options = [], $model = null, $full = false)
-
-デフォルトでは、非標準的なコンテキスト（JavaScriptなど）で使用する完全なページ制御URL文字列を返します。::
-
-    echo $this->Paginator->generateUrl(['sort' => 'title']);
 
 .. _paginator-helper-multiple:
 
@@ -505,7 +527,7 @@ counter() メソッドによる文章出力は、特殊なマーカーを使用�
 :ref:`複数のクエリーをページ制御する <paginating-multiple-queries>` 場合は、
 ページ設定関連要素を生成するときに ``model`` オプションを設定する必要があります。
 ``PaginatorHelper`` のすべてのメソッド呼び出しで ``model`` オプションを使用するか、
-``options()`` を使用してデフォルトモデルを設定することができます。::
+``options()`` を使用してデフォルトモデルを設定することができます。 ::
 
     // モデルオプションを渡す
     echo $this->Paginator->sort('title', ['model' => 'Articles']);
