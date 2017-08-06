@@ -169,10 +169,10 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
 
     $validator = new Validator();
 
-    // オブジェクトインスタンスを用いる。
+    // オブジェクトインスタンスを使います。
     $validator->setProvider('custom', $myObject);
 
-    // クラス名を用いる。メソッドは静的なものでなければならない。
+    // クラス名を使います。メソッドは静的なものでなければなりません。
     $validator->setProvider('custom', 'App\Model\Validation');
 
 バリデーションプロバイダーは、オブジェクトか、あるいはクラス名で設定されます。
@@ -185,6 +185,24 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
         'rule' => 'customTableMethod',
         'provider' => 'table'
     ]);
+
+今後作成される全ての ``Validator`` オブジェクトに ``provider`` を追加したい場合、
+以下のように ``addDefaultProvider()`` メソッドを使用できます。 ::
+
+    use Cake\Validation\Validator;
+
+    // オブジェクトインスタンスを使います。
+    Validator::addDefaultProvider('custom', $myObject);
+
+    // クラス名を使います。メソッドは静的なものでなければなりません。
+    Validator::addDefaultProvider('custom', 'App\Model\Validation');
+
+.. note::
+
+    デフォルトプロバイダーは、 ``Validator`` オブジェクトが作成される前に追加されなければなりません。
+    そのため **config/bootstrap.php** がデフォルトプロバイダーの設定に最適な場所です。
+
+.. versionadded:: 3.5.0
 
 国に基いて提供するための `Localized プラグイン <https://github.com/cakephp/localized>`_
 が利用できます。このプラグインで、国に依存するモデルのフィールドをバリデートできます。
