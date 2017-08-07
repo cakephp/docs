@@ -966,7 +966,11 @@ un objet :php:class:`Cookie``::
     ]);
 
 Référez-vous à la section :ref:`creating-cookies` pour savoir comment utiliser
-l'objet Cookie.
+l'objet Cookie. Vous pouvez utiliser ``withExpiredCookie()`` pour envoyer un cookie
+expiré dans la réponse. De cette manière, le navigateur supprimera son cookie local::
+
+    // À partir de 3.5.0
+    $this->response = $this->response->withExpiredCookie('remember_me');
 
 .. _cors-headers:
 
