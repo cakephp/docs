@@ -72,7 +72,7 @@ quando chamar ``get()`` para uma performance na leitura - ``caching``::
 
 
 ``Por padrão o CakePHP possui um sistema interno de cache que viabiliza busca
-e aumenta a performance - não recomendado desabilatar.``
+e aumenta a performance - não é recomendado desabilitar.``
 
 Opcionalmente você pode usar ``get()`` nas entidades com busca customizavél
 :ref:`custom-find-methods`. Por exemplo, você pode querer pegar todas as
