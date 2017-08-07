@@ -177,6 +177,13 @@ ces deux manières::
     $user->title = 'foo' // slug sera aussi défini
     $user->set('title', 'foo'); // slug sera aussi défini
 
+.. warning::
+
+    Les accesseurs sont également appelés avant que l'entity ne soit persistée
+    en base. Si vous souhaitez transformer un champ mais ne pas persister la
+    transformation, il est recommandé d'utiliser les propriétés virtuelles car
+    ces dernières ne seront pas persistées.
+
 .. _entities-virtual-properties:
 
 Créer des Propriétés Virtuelles
