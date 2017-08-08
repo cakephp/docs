@@ -899,7 +899,7 @@ the response content, and sends the `304 Not Modified` header::
 Setting Cookies
 ===============
 
-Cookies can be added to response using either an array or a :php:class:`Cookie``
+Cookies can be added to response using either an array or a ``Cookie``
 object::
 
     // Add a cookie as an array using the immutable API (3.4.0+)
