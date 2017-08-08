@@ -462,8 +462,8 @@ BelongsToMany Associations
 
 .. note::
 
-  In 3.0 and onward `hasAndBelongsToMany` / `HABTM` has been renamed to
-  `belongsToMany` / `BTM`.
+  In 3.0 and onward ``hasAndBelongsToMany`` / ``HABTM`` has been renamed to
+  ``belongsToMany`` / ``BTM``.
 
 An example of a BelongsToMany association is "Article BelongsToMany Tags", where
 the tags from one article are shared with other articles.  BelongsToMany is
