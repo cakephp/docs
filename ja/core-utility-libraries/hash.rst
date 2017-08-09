@@ -93,7 +93,7 @@ Hash パス構文
 
         // 共通の使い方:
         $users = $this->user->find("all");
-        $results = Hash::extract($users, '{n}.user.id');
+        $results = Hash::extract($users, '{n}.User.id');
         // $results は以下のとおり:
         // array(1,2,3,4,5,...);
 
