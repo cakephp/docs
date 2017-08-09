@@ -332,6 +332,19 @@ Client インスタンスに格納されているクッキーは、それ以後�
         'cookies' => ['sessionid' => '123abc']
     ]);
 
+``addCookie()`` メソッドを使って、作成された後のクライアントにクッキーオブジェクトを
+追加することができます。 ::
+
+    use Cake\Http\Cookie\Cookie;
+
+    $http = new Client([
+        'host' => 'cakephp.org'
+    ]);
+    $http->addCookie(new Cookie('session', 'abc123'));
+
+.. versionadded:: 3.5.0
+    ``addCookie()`` は 3.5.0 で追加されました。
+
 .. _httpclient-response-objects:
 
 レスポンスオブジェクト

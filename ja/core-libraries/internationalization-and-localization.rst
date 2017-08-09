@@ -106,13 +106,14 @@ i18n シェルを利用できます。より知りたい場合は、 :doc:`次�
 デフォルトの翻訳言語、日付のフォーマット、番号のフォーマットおよび通貨を含む、
 アプリケーションのいくつかの様相をコントロールします。
 
-ランタイムでロケールを変更する
+実行時にロケールを変更する
 ------------------------------
 
 翻訳文字列の言語を変更する場合はこのメソッドを呼び出せます。 ::
 
     use Cake\I18n\I18n;
 
+    // 3.5 より前は I18n::locale() を使用します
     I18n::setLocale('de_DE');
 
 地域化のツールを使うと、これは数字や日付がどのようにフォーマットされているかについても変更します。
@@ -361,7 +362,7 @@ Gettext の複数形選択を使用する
 
     use Aura\Intl\Package;
 
-    I18n::translator('animals', function () {
+    I18n::setTranslator('animals', function () {
         $package = new Package(
             'default', // フォーマット戦略 (ICU)
             'default'  // フォールバックドメイン
@@ -380,6 +381,7 @@ Gettext の複数形選択を使用する
 見つかります。翻訳機構を作成するのに最低限必要なのは、ローダー機能が ``Aura\Intl\Package``
 オブジェクトを返すことです。一旦コードを置けば、翻訳機能は以下のように利用できるでしょう。 ::
 
+    // 3.5 より前は I18n::locale() を使用します
     I18n::setLocale('fr_FR');
     __d('animals', 'Dog'); // "Chien" を返す
 
@@ -392,7 +394,7 @@ Gettext の複数形選択を使用する
     use Cake\I18n\MessagesFileLoader as Loader;
 
     // src/Locale/folder/sub_folder/filename.po からメッセージをロード
-
+    // 3.5 より前は translator() を使用します
     I18n::setTranslator(
         'animals',
         new Loader('filename', 'folder/sub_folder', 'po'),
@@ -432,6 +434,7 @@ CakePHP が利用しているものと同じやり方を使い続けることも
 
     use Cake\I18n\MessagesFileLoader as Loader;
 
+    // 3.5 より前は translator() を使用します
     I18n::setTranslator(
         'animals',
         new Loader('animals', 'fr_FR', 'yaml'),
