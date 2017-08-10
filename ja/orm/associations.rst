@@ -447,6 +447,11 @@ hasMany アソシエーションにおいて件数をキャッシュしたいか
 belongsToMany アソシエーション
 ==============================
 
+.. note::
+
+  3.0 以降では、 ``hasAndBelongsToMany`` / ``HABTM`` は、 ``belongsToMany`` / ``BTM`` に
+  名前が変更されました。
+
 belongsToMany アソシエーションの一例は "Article belongsToMany Tags"
 (記事が多くのタグに属する) で、一つの記事のタグがほかの記事によって共有される場合です。
 belongsToMany はしばしば "has and belongs to many" （多くを持ち、多くに属する）
