@@ -454,12 +454,12 @@ functions::
             '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
             ['controller' => 'Blogs', 'action' => 'view']
         )
+        // Define the route elements in the route template
+        // to pass as function arguments. Order matters since this
+        // will simply map ":id" to $articleId in your action
+        ->setPass(['id', 'slug'])
+        // Define a pattern that `id` must match.
         ->setPatterns([
-            // Define the route elements in the route template
-            // to pass as function arguments. Order matters since this
-            // will simply map ":id" to $articleId in your action
-            'pass' => ['id', 'slug'],
-            // Define a pattern that `id` must match.
             'id' => '[0-9]+',
         ]);
     });
@@ -504,7 +504,7 @@ option can be used in reverse routing to identify the route you want to use::
     // Name a verb specific route (3.5.0+)
     $routes->post(
         '/logout',
-        ``['controller' => 'Users', 'action' => 'logout'],
+        ['controller' => 'Users', 'action' => 'logout'],
         'logout'
     );
 
