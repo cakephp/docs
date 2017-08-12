@@ -486,6 +486,11 @@ l'association ou le nom de la colonne.
 Associations BelongsToMany
 ==========================
 
+.. note::
+
+    A partir de la version 3.0, ``hasAndBelongsToMany`` / ``HABTM`` a été renommé
+    en ``belongsToMany`` / ``BTM``.
+
 Un exemple d'association BelongsToMany est "Article BelongsToMany Tags", où
 les tags d'un article sont partagés avec d'autres articles. BelongsToMany fait
 souvent référence au "has and belongs to many", et est une association classique
