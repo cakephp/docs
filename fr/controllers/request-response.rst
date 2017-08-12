@@ -945,7 +945,7 @@ Définir des Cookies
 ===================
 
 Des cookies peuvent être ajoutés aux réponses en utilisant soit un tableau, soit
-un objet :php:class:`Cake\\Http\\Cookie\\Cookie`
+un objet :php:class:`Cake\\Http\\Cookie\\Cookie`::
 
     // Ajoute un cookie avec un tableau en utilisant l'API immutable (3.4.0+)
     $this->response = $this->response->withCookie('remember_me', [
