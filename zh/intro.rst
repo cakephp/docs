@@ -63,7 +63,7 @@ View层会渲染来自Model的数据。通过与Model对象的分离，它能够
         </li>
     <?php endforeach; ?>
 
-View层提供了很多像 :ref:`view-templates`, :ref:`view-elements`
+View层提供了很多像 :ref:`view-templates` , :ref:`view-elements`
 和 :doc:`/views/cells` 的扩展功能来让您重复利用你的表示逻辑。
 
 View层不仅仅限制于呈现数据的HTML或者文本。它还可以用于传递像JSON、XML、以及任何可通
@@ -148,5 +148,5 @@ CakePHP请求周期
 
 .. meta::
     :title lang=zh: Getting Started
-    :keywords lang=zh: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
+    :keywords lang=zh: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
 
