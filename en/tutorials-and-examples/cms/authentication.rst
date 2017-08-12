@@ -205,15 +205,15 @@ sense. First, we'll add the authorization logic for articles. In your
         if (in_array($action, ['add', 'tags'])) {
             return true;
         }
-        // All other actions require an id.
-        $id = $this->request->getParam('pass.0');
-        if ($id) {
+        // All other actions require a slug.
+        $slug = $this->request->getParam('pass.0');
+        if (!$slug) {
             return false;
         }
 
         // Check that the article belongs to the current user.
-        $article = $this->Articles->get($id);
-        return $article->user_id == $user['id'];
+        $article = $this->Articles->findBySlug($slug)->first();
+        return $article->user_id === $user['id'];
     }
 
 Now if you try to edit or delete an article that does not belong to you,
@@ -263,7 +263,6 @@ action. Replace the edit method with the following::
 
     // in src/Controller/ArticlesController.php
 
-
     public function edit($slug)
     {
         $article = $this->Articles
@@ -294,7 +293,16 @@ action. Replace the edit method with the following::
 
 Here we're modifying which properties can be mass-assigned, via the options
 for ``patchEntity()``. See the :ref:`changing-accessible-fields` section for
-more information.
+more information. Remember to remove the ``user_id`` control from
+**src/Templates/Articles/edit.ctp** as we no longer need it.
 
-* Conclusion
-* Next steps?
+Wrapping Up
+===========
+
+We've built a simple CMS application that allows users to login, post articles,
+tag them, explore posted articles by tag, and applied basic access control to
+articles. We've also added some nice UX improvements by leveraging the
+FormHelper and ORM capabilities.
+
+Thanks for taking the time to explore CakePHP. Next, you should learn more about
+the :doc:`/orm`, or you peruse the :doc:`/topics`.
