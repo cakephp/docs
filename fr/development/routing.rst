@@ -481,13 +481,13 @@ passé aux fonctions du controller::
             '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
             ['controller' => 'Blogs', 'action' => 'view']
         )
+        // Défini les éléments de route dans le template de route
+        // à passer en tant qu'arguments à la fonction. L'ordre est
+        // important car cela fera simplement correspondre ":id" avec
+        // articleId dans votre action.
+        ->setPass(['id', 'slug'])
+        // Defini un pattern que `id` doit avoir.
         ->setPatterns([
-            // Défini les éléments de route dans le template de route
-            // à passer en tant qu'arguments à la fonction. L'ordre est
-            // important car cela fera simplement correspondre ":id" avec
-            // articleId dans votre action.
-            'pass' => ['id', 'slug'],
-            // Define a pattern that `id` must match.
             'id' => '[0-9]+',
         ]);
     });
@@ -535,7 +535,7 @@ utiliser::
     // Nommage d'une route liée à un verbe spécifique (3.5.0+)
     $routes->post(
         '/logout',
-        ``['controller' => 'Users', 'action' => 'logout'],
+        ['controller' => 'Users', 'action' => 'logout'],
         'logout'
     );
 
