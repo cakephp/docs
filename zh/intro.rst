@@ -136,7 +136,7 @@ CakePHP请求周期
 :doc:`教程并且制作些很棒的东西
 </tutorials-and-examples/bookmarks/intro>`.
 
-Additional Reading
+附录
 ==================
 
 .. toctree::
@@ -147,6 +147,7 @@ Additional Reading
     /intro/cakephp-folder-structure
 
 .. meta::
-    :title lang=en: Getting Started
-    :keywords lang=en: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
+    :title lang=zh: 如何开始
+    :keywords lang=zh: 文件夹结构,表名,初始请求,数据表,组织结构,
+    rst,文件名,规约,mvc,网页,sit
 
