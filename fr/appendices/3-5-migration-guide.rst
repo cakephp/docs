@@ -27,6 +27,12 @@ version 4.0.0, à partir de laquelle ils seront supprimés.
   ``Cake\Database\TableSchemaAwareInterface`` à la place.
 * ``Cake\Console\ShellDispatcher`` est dépréciée. Vous devez mettre à jour vos
   Applications pour qu'elles utilisent ``Cake\Console\CommandRunner`` à la place.
+* ``Cake\Database\Schema\TableSchema::column()`` est dépréciée. Utilisez
+  ``Cake\Database\Schema\TableSchema::getColumn()`` à la place.
+* ``Cake\Database\Schema\TableSchema::constraint()`` est dépréciée. Utilisez
+  ``Cake\Database\Schema\TableSchema::getConstraint()`` à la place.
+* ``Cake\Database\Schema\TableSchema::index()`` est dépréciée. Utilisez
+  ``Cake\Database\Schema\TableSchema::getIndex()`` à la place.
 
 Dépréciation des Méthodes Get / Set combinées
 ---------------------------------------------
@@ -51,16 +57,23 @@ par des méthodes ``getX()`` et ``setX()`` :
     * ``outputAs()``
 ``Cake\Database\Connection``
     * ``logger()``
-``Cake\Datasource\TypedResultTrait``
+``Cake\Database\TypedResultInterface``
+    * ``returnType()``
+``Cake\Database\TypedResultTrait``
     * ``returnType()``
 ``Cake\Database\Log\LoggingStatement``
     * ``logger()``
 ``Cake\Datasource\ModelAwareTrait``
     * ``modelType()``
 ``Cake\Database\Query``
-    * ``valueBinder()`` est maintenant ``getValueBinder()``
+    * la partie "getter" de ``valueBinder()`` (maintenant ``getValueBinder()``)
+``Cake\Database\Schema\TableSchema``
+    * ``columnType()``
 ``Cake\Datasource\QueryTrait``
+    * la partie "getter" de ``eagerLoaded()`` (maintenant ``isEagerLoaded()``)
     * ``eagerLoaded()`` (maintenant ``isEagerLoaded()``)
+``Cake\Event\EventDispatcherInterface``
+    * ``eventManager()``
 ``Cake\Event\EventDispatcherTrait``
     * ``eventManager()``
 ``Cake\Error\Debugger``
@@ -70,6 +83,8 @@ par des méthodes ``getX()`` et ``setX()`` :
 ``Cake\I18n\I18n``
     * ``locale()``
     * ``translator()``
+``Cake\ORM\Association\BelongsToMany``
+    * ``sort()``
 ``Cake\ORM\LocatorAwareTrait``
     * ``tableLocator()``
 ``Cake\ORM\EntityTrait``
@@ -77,6 +92,9 @@ par des méthodes ``getX()`` et ``setX()`` :
       ``setInvalidField()``, maintenant ``getInvalidField()``)
 ``Cake\ORM\Table``
     * ``validator()``
+``Cake\Routing\RouteBuilder``
+    * ``extensions()``
+    * ``routeClass()``
 ``Cake\Routing\RouteCollection``
     * ``extensions()``
 ``Cake\TestSuite\TestFixture``
@@ -165,6 +183,13 @@ le moteur était mal configuré ou indisponible. Reportez-vous à la section
 :ref:`cache-configuration-fallback` pour plus d'informations sur la configuration
 de 'fallbacks' pour vos configurations de cache.
 
+Support de dotenv au squelette d'Application
+--------------------------------------------
+
+Le squelette d'application possède maintenant une intégration "dotenv", facilitant
+l'utilisation de variables d'environnement pour configurer votre application.
+Référez-vous à la section :ref:`environment-variables` pour plus d'informations.
+
 Console Integration Testing
 ---------------------------
 
@@ -173,6 +198,12 @@ faciliter les tests d'intégration des applications console. Pour plus d'informa
 rendez-vous à la section :ref:`console-integration-testing`. Cette classe de
 test est compatible avec le dispatcher de shell actuel mais aussi avec le
 nouveau ``Cake\Console\CommandRunner``.
+
+Collection
+----------
+
+* ``Cake\Collection\Collection::avg()`` a été ajoutée.
+* ``Cake\Collection\Collection::median()`` a été ajoutée.
 
 Core
 ----
@@ -265,6 +296,8 @@ Routing
 TestSuite
 ---------
 
+* ``TestCase::loadFixtures()`` chargera maintenant toutes les fixtures si aucun
+  argument n'est passé.
 * ``IntegrationTestCase::head()`` a été ajoutée.
 * ``IntegrationTestCase::options()`` a été ajoutée.
 * ``IntegrationTestCase::disableErrorHandlerMiddleware()`` a été ajoutée pour
