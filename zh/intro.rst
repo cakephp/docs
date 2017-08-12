@@ -118,7 +118,7 @@ CakePHP请求周期
 #. Controller的Action被调用并且Controller与请求的Models和Components（部件）发生反应。
 #. Controller分配给视图（view）一个创建的响应来生成Model数据输出的结果。
 #. 视图（view）使用Helpers和Cells来生成响应的头部（headers）和身体（body）内容。
-#. 响应结果通过 :doc:`/controllers/middleware`被送回。
+#. 响应结果通过 :doc:`/controllers/middleware` 被送回。
 #. ``HttpServer`` 向网页服务器放出响应结果。
 
 让我们开始吧
@@ -126,7 +126,7 @@ CakePHP请求周期
 
 希望这个快速的概览能够激起你的兴趣。一些其它的CakePHP的显著特征是:
 
-* 一个由Memcached, Redis 和其它后端所集成的 :doc:`缓存 </core-libraries/caching>`框架
+* 一个由Memcached, Redis 和其它后端所集成的 :doc:`缓存 </core-libraries/caching>` 框架
 * 强力的 :doc:`代码生成工具
   </bake/usage>` 让你可以迅速地开始
 * :doc:`结合测试框架 </development/testing>` 可以让你确保你的代码完美运行
