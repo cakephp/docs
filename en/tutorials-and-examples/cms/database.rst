@@ -107,7 +107,7 @@ modify our data. They allow us to build relations between our data, validate
 data, and apply application rules. Models build the foundations necessary to
 build our controller actions and templates.
 
-CakePHP's models are composed of ``Table`` and ``Entity`` objects.  ``Table``
+CakePHP's models are composed of ``Table`` and ``Entity`` objects. ``Table``
 objects provide access to the collection of entities stored in a specific table.
 They are stored in **src/Model/Table**. The file we'll be creating will be saved
 to **src/Model/Table/ArticlesTable.php**. The completed file should look like
