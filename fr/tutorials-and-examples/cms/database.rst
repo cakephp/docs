@@ -165,7 +165,7 @@ Le fichier devra ressembler à ceci::
 
 Notre entity est assez simple pour l'instant et nous y avons seulement défini la
 propriété ``_accessible`` qui permet de contrôler quelles propriétés peuvent être
-modifier via :ref:`entities-mass-assignment`.
+modifiées via :ref:`entities-mass-assignment`.
 
 Pour l'instant, nous ne pouvons pas faire grande chose avec notre model. Pour
 intéragir avec notre model, nous allons ensuite créer nos premiers
