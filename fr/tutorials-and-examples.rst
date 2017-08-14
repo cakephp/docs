@@ -19,6 +19,11 @@ et components existants.
     tutorials-and-examples/blog/part-three
     tutorials-and-examples/blog-auth-example/auth
 
+.. toctree::
+    :hidden:
+
+    tutorials-and-examples/cms/installation
+
 .. meta::
     :title lang=fr: Tutoriels & Exemples
     :keywords lang=fr: tutoriels application,glob,bakery,boulangerie,repository,applications,blog,acl
