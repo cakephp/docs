@@ -482,156 +482,20 @@ When restoring configuration information it's important to restore it with
 the same key, and cache configuration as was used to store it. Restored
 information is merged on top of the existing runtime configuration.
 
-Creating your Own Configuration Engines
-=======================================
+Configuration Engines
+---------------------
 
-Since configuration engines are an extensible part of CakePHP, you can create
-configuration engines in your application and plugins.  Configuration engines
-need to implement the
-:php:interface:`Cake\\Core\\Configure\\ConfigEngineInterface`.  This interface
-defines a read method, as the only required method.  If you like XML
-files, you could create a simple Xml config engine for you application::
+CakePHP provides the ability to load configuration files from a number of
+different sources, and features a pluggable system for `creating your own
+confiugration engines
+<https://api.cakephp.org/3x/class-Cake.Core.Configure.ConfigEngineInterface.html>`__.
+The built in configuration engines are:
 
-    // In src/Configure/Engine/XmlConfig.php
-    namespace App\Configure\Engine;
+* `JsonConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.JsonConfig.html>`__
+* `IniConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.IniConfig.html>`__
+* `PhpConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.PhpConfig.html>`__
 
-    use Cake\Core\Configure\ConfigEngineInterface;
-    use Cake\Utility\Xml;
-
-    class XmlConfig implements ConfigEngineInterface
-    {
-
-        public function __construct($path = null)
-        {
-            if (!$path) {
-                $path = CONFIG;
-            }
-            $this->_path = $path;
-        }
-
-        public function read($key)
-        {
-            $xml = Xml::build($this->_path . $key . '.xml');
-            return Xml::toArray($xml);
-        }
-
-        public function dump($key, array $data)
-        {
-            // Code to dump data to file
-        }
-    }
-
-In your **config/bootstrap.php** you could attach this engine and use it::
-
-    use App\Configure\Engine\XmlConfig;
-
-    Configure::config('xml', new XmlConfig());
-    ...
-
-    Configure::load('my_xml', 'xml');
-
-The ``read()`` method of a config engine, must return an array of the
-configuration information that the resource named ``$key`` contains.
-
-.. php:namespace:: Cake\Core\Configure
-
-.. php:interface:: ConfigEngineInterface
-
-    Defines the interface used by classes that read configuration data and
-    store it in :php:class:`Configure`
-
-.. php:method:: read($key)
-
-    :param string $key: The key name or identifier to load.
-
-    This method should load/parse the configuration data identified by ``$key``
-    and return an array of data in the file.
-
-.. php:method:: dump($key)
-
-    :param string $key: The identifier to write to.
-    :param array $data: The data to dump.
-
-    This method should dump/store the provided configuration data to a key identified by ``$key``.
-
-Built-in Configuration Engines
-==============================
-
-.. php:namespace:: Cake\Core\Configure\Engine
-
-PHP Configuration Files
------------------------
-
-.. php:class:: PhpConfig
-
-Allows you to read configuration files that are stored as plain PHP files.
-You can read either files from your app's config or from plugin configs
-directories by using :term:`plugin syntax`. Files *must* return an array.
-An example configuration file would look like::
-
-    return [
-        'debug' => 0,
-        'Security' => [
-            'salt' => 'its-secret'
-        ],
-        'App' => [
-            'namespace' => 'App'
-        ]
-    ];
-
-Load your custom configuration file by inserting the following in
-**config/bootstrap.php**::
-
-    Configure::load('customConfig');
-
-Ini Configuration Files
------------------------
-
-.. php:class:: IniConfig
-
-Allows you to read configuration files that are stored as plain .ini files.
-The ini files must be compatible with php's ``parse_ini_file()`` function, and
-benefit from the following improvements
-
-* dot separated values are expanded into arrays.
-* boolean-ish values like 'on' and 'off' are converted to booleans.
-
-An example ini file would look like::
-
-    debug = 0
-
-    [Security]
-    salt = its-secret
-
-    [App]
-    namespace = App
-
-The above ini file, would result in the same end configuration data
-as the PHP example above. Array structures can be created either
-through dot separated values, or sections. Sections can contain
-dot separated keys for deeper nesting.
-
-
-Json Configuration Files
-------------------------
-
-.. php:class:: JsonConfig
-
-Allows you to read / dump configuration files that are stored as JSON encoded
-strings in .json files.
-
-An example JSON file would look like::
-
-    {
-        "debug": false,
-        "App": {
-            "namespace": "MyApp"
-        },
-        "Security": {
-            "salt": "its-secret"
-        }
-    }
-
+By default your application will use ``PhpConfig``.
 
 Bootstrapping CakePHP
 =====================
