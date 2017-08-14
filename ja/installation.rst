@@ -20,7 +20,7 @@ CakePHP は nginx や lighttpd や Microsoft IIS のような様々なウェブ�
     動きます。
 
     XAMPP では intl 拡張は同梱されていますが、 **php.ini** の ``extension=php_intl.dll``
-    という行をコメントアウトして XAMPP コントロールパネルからサーバーの再起動を行う必要はあります。
+    のコメントを外して XAMPP コントロールパネルからサーバーの再起動を行う必要はあります。
 
     WAMP では intl 拡張は最初からアクティブになっているのですが動作しません。
     動作させるためには php フォルダー（初期状態では **C:\\wamp\\bin\\php\\php{version}** ）にある
