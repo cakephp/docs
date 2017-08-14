@@ -23,6 +23,7 @@ et components existants.
     :hidden:
 
     tutorials-and-examples/cms/installation
+    tutorials-and-examples/cms/database
 
 .. meta::
     :title lang=fr: Tutoriels & Exemples

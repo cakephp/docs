@@ -112,4 +112,4 @@ CakePHP arrive à se connecter à la base de données. Si d'autres points ne son
 pas validés, vous avez peut-être besoin d'installer des extensions PHP supplémentaires
 ou définir les bonnes permissions sur certains dossiers.
 
-Ensuite, nous allons créer notre base de données et créer notre premier model.
+Ensuite, nous allons créer notre :doc:`base de données et créer notre premier model <database>`.
