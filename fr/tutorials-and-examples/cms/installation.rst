@@ -1,16 +1,16 @@
-Tutorial d'un système de gestion de contenu
+Tutoriel d'un système de gestion de contenu
 ###########################################
 
-Ce tutorial vous accompagnera dans la création d'une application de type
+Ce tutoriel vous accompagnera dans la création d'une application de type
 :abbr:`CMS (Content Management System)`. Pour commencer, nous installerons
 CakePHP, créerons notre base de données et construirons un système simple
 de gestion d'articles.
 
 Voici les pré-requis:
 
-#. Un serveur de base de données. Nous utiliserons MySQL dans ce tutorial. Vous
+#. Un serveur de base de données. Nous utiliserons MySQL dans ce tutoriel. Vous
    avez besoin de connaître assez de SQL pour créer une base de données et exécuter
-   quelques requêtes SQL que nous fournirons dans ce tutorial. CakePHP se chargera
+   quelques requêtes SQL que nous fournirons dans ce tutoriel. CakePHP se chargera
    de construire les requêtes nécessaires pour votre application. Puisque nous allons
    utiliser MySQL, assurez-vous que ``pdo_mysql`` est bien activé dans PHP.
 #. Les connaissances de base en PHP.
@@ -56,7 +56,7 @@ votre terminal depuis le dossier d'installation (par exemple C:\\wamp\\www\\dev\
     composer self-update && composer create-project --prefer-dist cakephp/app cms
 
 Utiliser Composer a l'avantage d'exécuter automatiquement certaines tâches
-important d'installation, comme définir les bonnes permissions sur les fichiers
+importantes d'installation, comme définir les bonnes permissions sur les dossiers
 et créer votre fichier **config/app.php**.
 
 Il existe d'autres moyens d'installer CakePHP. Si vous ne pouvez pas (ou ne
@@ -91,8 +91,9 @@ pour en savoir plus.
 Vérifier l'installation
 =======================
 
-Il est possible de vérifier que l'installation est terminée en vérifiant la page
-d'accueil. Avant de faire ça, vous allez devoir lancer le serveur de développement :
+Il est possible de vérifier que l'installation est terminée en vous rendant sur
+la page d'accueil. Avant de faire ça, vous allez devoir lancer le serveur de
+développement :
 
 .. code-block:: bash
 
