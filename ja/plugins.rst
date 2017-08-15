@@ -267,6 +267,55 @@ Bake を使ってプラグインを作成する
 
     php composer.phar dumpautoload
 
+.. _plugin-routes:
+
+プラグインのルート
+==================
+
+プラグインは、ルートを含むルートファイルを提供できます。各プラグインは、
+**config/routes.php** ファイルを含むことができます。このルートファイルは、
+プラグインが追加された時、またはアプリケーションのルートファイルの中で
+ロードすることができます。ContactManager プラグインのルートを作成するためには、
+**plugins/ContactManager/config/routes.php** の中に以下を記述してください。 ::
+
+    <?php
+    use Cake\Routing\Route\DashedRoute;
+    use Cake\Routing\Router;
+
+    Router::plugin(
+        'ContactManager',
+        ['path' => '/contact-manager'],
+        function ($routes) {
+            $routes->get('/contacts', ['controller' => 'Contacts']);
+            $routes->get('/contacts/:id', ['controller' => 'Contacts', 'action' => 'view']);
+            $routes->put('/contacts/:id', ['controller' => 'Contacts', 'action' => 'update']);
+        }
+    );
+
+上記のようにすれば、プラグインのデフォルトルートに接続できるでしょう。
+このファイルをカスタマイズすることで、後から個別のルートを設定することができます。
+
+コントローラーにアクセスする前に、プラグインがロードされ、ルートがロードされる必要があります。
+**config/bootstrap.php** に下記を追加してください。 ::
+
+    Plugin::load('ContactManager', ['routes' => true]);
+
+アプリケーションのルート一覧の中で、プラグインのルートをロードすることもできます。
+これにより、プラグインのルートをロードする方法かをより詳細に制御し、
+追加のスコープやプレフィックスでプラグインのルートをラップすることができます。 ::
+
+    Router::scope('/', function ($routes) {
+        // 他のルートに接続。
+        $routes->scope('/backend', function ($routes) {
+            $routes->loadPlugin('ContactManager');
+        });
+    });
+
+上記の結果は、 ``/backend/contact_manager/contacts`` のような URL になります。
+
+.. versionadded:: 3.5.0
+    ``RouteBuilder::loadPlugin()`` は 3.5.0 で追加されました。
+
 プラグインコントローラー
 ========================
 
@@ -304,33 +353,6 @@ contacts の管理ですので、このプラグインには ContactsController 
 
 プラグインの ``AppController`` は、プラグイン内の全コントローラー共通のロジックを
 持ちますが、使わないようでしたら作らなくても構いません。
-
-コントローラーにアクセスする前に、プラグインがロードされ、ルートがロードされる必要があります。
-これは **config/bootstrap.php** に下記のように記述します。 ::
-
-    Plugin::load('ContactManager', ['routes' => true]);
-
-``Plugin::loadAll()`` を使用する場合、ルートがロードされる必要があります。 ::
-
-    Plugin::loadAll(['routes' => true]);
-
-続いて ContactManager プラグインのルート情報を作成します。
-**plugins/ContactManager/config/routes.php** に下記のように追加してください。 ::
-
-    <?php
-    use Cake\Routing\Route\DashedRoute;
-    use Cake\Routing\Router;
-
-    Router::plugin(
-        'ContactManager',
-        ['path' => '/contact-manager'],
-        function ($routes) {
-            $routes->fallbacks(DashedRoute::class);
-        }
-    );
-
-上記のようにすれば、プラグインのデフォルトルートに接続できるでしょう。
-このファイルをカスタマイズすることで、後から個別のルートを設定することができます。
 
 これまでのところでアクセスするなら、 ``/contact-manager/contacts`` にアクセスして
 みてください。 "Missing Model" エラーが表示されるでしょうが、これはまだ
