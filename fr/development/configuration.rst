@@ -515,7 +515,7 @@ Moteurs de Configuration
 CakePHP vous permet de charger des configurations provenant de plusieurs sources
 et formats de données différents et vous donne accès à un système extensible pour
 `créer vos propres moteurs de configuration
-<https://api.cakephp.org/3x/class-Cake.Core.Configure.ConfigEngineInterface.html>`__.
+<https://api.cakephp.org/3.x/class-Cake.Core.Configure.ConfigEngineInterface.html>`__.
 Les moteurs inclus dans CakePHP sont :
 
 * `JsonConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.JsonConfig.html>`__
