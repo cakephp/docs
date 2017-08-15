@@ -509,159 +509,20 @@ restaurer avec la même clé, et la configuration de cache comme elle était
 utilisée pour les stocker. Les informations restaurées sont fusionnées en haut
 de la configuration existante exécutée.
 
-Créer vos Propres Lecteurs de Configuration
-===========================================
+Moteurs de Configuration
+------------------------
 
-Comme les lecteurs de configuration sont une partie extensible de CakePHP, vous
-pouvez créer des lecteurs de configuration dans votre application et plugins.
-Les lecteurs de configuration ont besoin d'implémenter l'
-:php:interface:`Cake\\Core\\Configure\\ConfigEngineInterface`. Cette interface
-définit une méthode de lecture, comme seule méthode requise. Si vous aimez
-vraiment les fichiers XML, vous pouvez créer un lecteur de config simple Xml
-pour votre application::
+CakePHP vous permet de charger des configurations provenant de plusieurs sources
+et formats de données différents et vous donne accès à un système extensible pour
+`créer vos propres moteurs de configuration
+<https://api.cakephp.org/3.x/class-Cake.Core.Configure.ConfigEngineInterface.html>`__.
+Les moteurs inclus dans CakePHP sont :
 
-    // Dans src/Configure/Engine/XmlConfig.php
-    namespace App\Configure\Engine;
+* `JsonConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.JsonConfig.html>`__
+* `IniConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.IniConfig.html>`__
+* `PhpConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.PhpConfig.html>`__
 
-    use Cake\Core\Configure\ConfigEngineInterface;
-    use Cake\Utility\Xml;
-
-    class XmlConfig implements ConfigEngineInterface
-    {
-
-        public function __construct($path = null)
-        {
-            if (!$path) {
-                $path = CONFIG;
-            }
-            $this->_path = $path;
-        }
-
-        public function read($key)
-        {
-            $xml = Xml::build($this->_path . $key . '.xml');
-            return Xml::toArray($xml);
-        }
-
-        public function dump($key, array $data)
-        {
-            // Code to dump data to file
-        }
-    }
-
-Dans votre **config/bootstrap.php**, vous pouvez attacher ce lecteur et
-l'utiliser::
-
-    use App\Configure\Engine\XmlConfig;
-
-    Configure::config('xml', new XmlConfig());
-    ...
-
-    Configure::load('my_xml', 'xml');
-
-La méthode ``read()`` du lecteur de config, doit retourner un tableau
-d'informations de configuration que la ressource nommée ``$key`` contient.
-
-.. php:namespace:: Cake\Core\Configure
-
-.. php:interface:: ConfigEngineInterface
-
-    Définit l'interface utilisée par les classes qui lisent les données de
-    configuration et les stockent dans :php:class:`Configure`.
-
-.. php:method:: read($key)
-
-    :param string $key: Le nom de la clé ou l'identifieur à charger.
-
-    Cette méthode devrait charger/parser les données de configuration
-    identifiées par ``$key`` et retourner un tableau de données dans le fichier.
-
-.. php:method:: dump($key)
-
-    :param string $key: L'identifieur dans lequel écrire.
-    :param array $data: La donnée à supprimer.
-
-    Cette méthode doit supprimer/stocker la donnée de configuration fournie à
-    une clé identifié par ``$key``.
-
-Moteurs de Configuration intégrés
-=================================
-
-.. php:namespace:: Cake\Core\Configure\Engine
-
-Fichiers de Configuration PHP
------------------------------
-
-.. php:class:: PhpConfig
-
-Vous permet de lire les fichiers de configuration de votre application qui sont
-stockés en fichiers PHP simples. Vous pouvez lire soit les fichiers à partir de
-votre config, soit des répertoires configs du plugin en utilisant la
-:term:`syntaxe de plugin`. Les fichiers **doivent** retourner un tableau.
-Un fichier de configuration d'exemple ressemblerait à cela::
-
-    return [
-        'debug' => 0,
-        'Security' => [
-            'salt' => 'its-secret'
-        ],
-        'App' => [
-            'namespace' => 'App'
-        ]
-    ];
-
-Chargez votre fichier de configuration personnalisé en insérant ce qui suit dans
-**config/bootstrap.php**::
-
-    Configure::load('customConfig');
-
-Fichiers de Configuration Ini
------------------------------
-
-.. php:class:: IniConfig
-
-Vous permet de lire les fichiers de configuration qui sont stockés en fichiers
-.ini simples. Les fichiers ini doivent être compatibles avec la fonction php
-``parse_ini_file()``, et bénéficie des améliorations suivantes:
-
-* Les valeurs séparées par des points sont étendues dans les tableaux.
-* Les valeurs de la famille des booléens comme 'on' et 'off' sont converties
-  en booléens.
-
-Un fichier ini d'exemple ressemblerait à cela::
-
-    debug = 0
-
-    [Security]
-    salt = its-secret
-
-    [App]
-    namespace = App
-
-Le fichier ini ci-dessus aboutirait aux mêmes données de configuration que dans
-l'exemple PHP du dessus. Les structures de tableau peuvent être créées soit à
-travers des valeurs séparées de point, soit des sections. Les sections peuvent
-contenir des clés séparées de point pour des imbrications plus profondes.
-
-Fichiers de Configuration Json
-------------------------------
-
-.. php:class:: JsonConfig
-
-Vous permet de lire / effacer les fichiers de configuration qui sont stockés en
-chaînes encodées JSON dans des fichiers .json.
-
-Un exemple de fichier JSON ressemblerait à ceci::
-
-    {
-        "debug": false,
-        "App": {
-            "namespace": "MyApp"
-        },
-        "Security": {
-            "salt": "its-secret"
-        }
-    }
+Par défaut, votre application utilisera ``PhpConfig``.
 
 Bootstrapping CakePHP
 =====================
