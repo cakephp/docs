@@ -202,6 +202,41 @@ Inflection の設定
 
 :ref:`inflection-configuration` を参照してください。
 
+.. _environment-variables:
+
+環境変数
+========
+
+例えば Heroku のように、多くの現代的なクラウド事業者では、設定データのために環境変数を定義できます。
+`12factor app style <http://12factor.net/>`_ の環境変数を通して CakePHP を設定することができます。
+環境変数を使用すると、アプリケーションの状態を少なくして、
+多くの環境にデプロイされたアプリケーションの管理が容易になります。
+
+**app.php** を参照の通り、 ``env()`` 関数は、環境から設定を読み込むために使用され、
+アプリケーションの設定を構築します。 CakePHP は、データベースやログ、メール送信や
+キャッシュ設定のための :term:`DSN` 文字列を使用して、各環境でこれらのライブラリーを簡単に変更できます。
+
+CakePHP は、環境変数を使ってローカル開発を容易にするために `dotenv
+<https://github.com/josegonzalez/dotenv>`_ を活用します。
+アプリケーションの中に ``config/.env.default`` があるでしょう。
+このファイルを ``config/.env`` にコピーし、値をカスタマイズすることで、
+アプリケーションを設定できます。
+
+``config/.env`` ファイルをあなたのリポジトリーにコミットすることは避けてください。
+代わりに、プレースホルダー値を持つテンプレートとして ``config/.env.default`` を使用して、
+チームの全員が、どの環境変数が使用されているのか、それぞれの環境変数を把握する必要があります。
+
+環境変数がセットされると、環境からデータを読むために ``env()`` を使用することができます。 ::
+
+    $debug = env('APP_DEBUG', false);
+
+env 関数に渡された２番目の値は、デフォルト値です。この値は、
+与えられたキーの環境変数が存在しない場合に使用されます。
+
+.. versionchanged:: 3.5.0
+    dotenv ライブラリーのサポートが、アプリケーションスケルトンに追加されました。
+
+
 Configure クラス
 ================
 
@@ -420,150 +455,19 @@ Configure の全てのデータを `my_config.php` に保存します。 ::
 およびキャッシュ設定で復元することが重要です。
 復元された情報は、既存の実行時設定の最上位にマージされます。
 
-自分の設定エンジンを作成
-========================
+設定エンジン
+------------
 
-設定エンジンは CakePHP の拡張可能な部品であり、設定エンジンをアプリケーションやプラグインに作成できます。
-設定エンジンは :php:interface:`Cake\\Core\\Configure\\ConfigEngineInterface`
-を実装する必要があります。このインタフェースは唯一の必須メソッドとして read メソッドを定義します。
-もしあなたが XML ファイルを好むなら、シンプルな Xml 設定エンジンを作成できるでしょう。 ::
+CakePHP は、さまざまなソースから設定ファイルを読み込む機能を提供し、
+`独自の設定エンジンを作成するための
+<https://api.cakephp.org/3.x/class-Cake.Core.Configure.ConfigEngineInterface.html>`__
+プラガブルなシステムを備えています。組み込みの設定エンジンは次の通りです。
 
-    // src/Configure/Engine/XmlConfig.php の中で
-    namespace App\Configure\Engine;
+* `JsonConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.JsonConfig.html>`__
+* `IniConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.IniConfig.html>`__
+* `PhpConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.PhpConfig.html>`__
 
-    use Cake\Core\Configure\ConfigEngineInterface;
-    use Cake\Utility\Xml;
-
-    class XmlConfig implements ConfigEngineInterface
-    {
-
-        public function __construct($path = null)
-        {
-            if (!$path) {
-                $path = CONFIG;
-            }
-            $this->_path = $path;
-        }
-
-        public function read($key)
-        {
-            $xml = Xml::build($this->_path . $key . '.xml');
-            return Xml::toArray($xml);
-        }
-
-        public function dump($key, array $data)
-        {
-            // ファイルにデータをダンプするためのコード
-        }
-    }
-
-**config/bootstrap.php** 内にこのエンジンを配置してそれを利用できます。 ::
-
-    use App\Configure\Engine\XmlConfig;
-
-    Configure::config('xml', new XmlConfig());
-    ...
-
-    Configure::load('my_xml', 'xml');
-
-設定エンジンの ``read()`` メソッドは、 ``$key`` という名前の
-リソースに含まれる設定情報を配列形式で返さなければなりません。
-
-.. php:namespace:: Cake\Core\Configure
-
-.. php:interface:: ConfigEngineInterface
-
-    :php:class:`Configure` 中で設定データの読み込みとその保存を行うクラスによって使用される
-    インターフェースを定義します。
-
-.. php:method:: read($key)
-
-    :param string $key: キー名や読み込みの識別子
-
-    このメソッドは ``$key`` で識別される設定データの読み込みやパースを行い、
-    ファイルにある配列データを返却すべきです。
-
-.. php:method:: dump($key)
-
-    :param string $key: 書き出しの識別子
-    :param array $data: ダンプデータ
-
-    このメソッドは ``$key`` で識別されるキーに
-    与えられた設定データのダンプや保存を行うべきです。
-
-組み込みの設定エンジン
-======================
-
-.. php:namespace:: Cake\Core\Configure\Engine
-
-PHP の設定ファイル
-------------------
-
-.. php:class:: PhpConfig
-
-プレーンな PHP として保存された設定ファイルを読み込むことができます。あなたのアプリの設定ファイル、
-もしくは :term:`プラグイン記法` を使用してプラグインの設定ディレクトリーから読み込むことができます。
-ファイルは *必ず* 配列を返却しなければいけません。設定ファイルの一例はこのようになります。 ::
-
-    return [
-        'debug' => 0,
-        'Security' => [
-            'salt' => 'its-secret'
-        ],
-        'App' => [
-            'namespace' => 'App'
-        ]
-    ];
-
-**config/bootstrap.php** 内に以下のように挿入して、カスタム設定ファイルを読み込みます。 ::
-
-    Configure::load('customConfig');
-
-Ini 設定ファイル
-----------------
-
-.. php:class:: IniConfig
-
-プレーンな .ini ファイルとして保存された設定ファイルを読み込むことができます。
-ini ファイルは php の ``parse_ini_file()`` 関数と互換性がある必要があり、
-以下の改善事項の恩恵を受けます。
-
-* ドット記法の値は配列に展開される
-* 'on' や 'off' のような真偽値じみた値は真偽値に変換される
-
-ini ファイルの一例です。 ::
-
-    debug = 0
-
-    [Security]
-    salt = its-secret
-
-    [App]
-    namespace = App
-
-上記の ini ファイルでは、先述した PHP の設定データと同じ結果になるでしょう。
-配列構造はドット記法の値もしくはセクションを通じて作成されます。
-セクションはドットで分割されたキーを深いネストに含むことができます。
-
-Json 設定ファイル
------------------
-
-.. php:class:: JsonConfig
-
-JSON 形式でエンコードされた .json 設定ファイルを読み込んだりダンプしたりできます。
-
-以下、JSON ファイルの一例です。 ::
-
-    {
-        "debug": false,
-        "App": {
-            "namespace": "MyApp"
-        },
-        "Security": {
-            "salt": "its-secret"
-        }
-    }
-
+デフォルトでは、アプリケーションは ``PhpConfig`` を使用します。
 
 CakePHP のブート処理
 ====================
@@ -612,38 +516,6 @@ Application::bootstrap()
 
 ``Application::bootstrap()`` の中でプラグインやイベントを読み込むと、各テストメソッドで
 イベントやルートが再処理されるため :ref:`integration-testing` が簡単になります。
-
-環境変数
-========
-
-例えば Heroku のように、いくつかの現代的なクラウド事業者では、環境変数を定義できます。
-環境変数を定義することによって、CakePHP アプリケーションを 12factor app のように設定できます。
-`12factor app instructions <http://12factor.net/>`_ はステートレスなアプリを作成するための、
-そしてデプロイを簡単にするための良い方法です。例えば、もしデータベースを変更することが必要な場合、
-ソースコード内で変更することなく、ホスト設定の DATABASE_URL 変数を変更するだけで済みます。
-
-**app.php** を参照の通り、以下の変数が影響されます。
-
-- ``DEBUG`` (``0`` または ``1``)
-- ``APP_ENCODING`` (例: UTF-8)
-- ``APP_DEFAULT_LOCALE`` (例: ``en_US``)
-- ``SECURITY_SALT``
-- ``CACHE_DEFAULT_URL`` (例: ``File:///?prefix=myapp_&serialize=true&timeout=3600&path=../tmp/cache/``)
-- ``CACHE_CAKECORE_URL`` (例: ``File:///?prefix=myapp_cake_core_&serialize=true&timeout=3600&path=../tmp/cache/persistent/``)
-- ``CACHE_CAKEMODEL_URL`` (例: ``File:///?prefix=myapp_cake_model_&serialize=true&timeout=3600&path=../tmp/cache/models/``)
-- ``EMAIL_TRANSPORT_DEFAULT_URL`` (例: ``smtp://user:password@hostname:port?tls=null&client=null&timeout=30``)
-- ``DATABASE_URL`` (例: ``mysql://user:pass@db/my_app``)
-- ``DATABASE_TEST_URL`` (例: ``mysql://user:pass@db/test_my_app``)
-- ``LOG_DEBUG_URL`` (例: ``file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=../logs/``)
-- ``LOG_ERROR_URL`` (例: ``file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=../logs/``)
-
-例をご覧のように、いくつかの設定オプションを :term:`DSN` 文字列として定義します。
-これはデータベースやログ、メール送信やキャッシュ設定のケースが挙げられます。
-
-もし環境変数があなたの環境に定義されていなければ、CakePHP は **app.php** に定義されている変数を利用します。
-`php-dotenv ライブラリー <https://github.com/josegonzalez/php-dotenv>`_
-を利用して環境変数をローカルの開発に使えます。詳しい情報はライブラリーの Readme の説明を参照してください。
-
 
 汎用テーブルの無効化
 ====================
