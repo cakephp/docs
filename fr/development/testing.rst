@@ -700,7 +700,7 @@ fixtures à partir du cœur de CakePHP ou des plugins::
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['plugin.debug_kit.articles', 'core.comments'];
+        public $fixtures = ['plugin.DebugKit.articles', 'plugin.MyVendorName/MyPlugin.messages', 'core.comments'];
     }
 
 Utiliser le préfixe ``core`` va charger les fixtures à partir de CakePHP, et
