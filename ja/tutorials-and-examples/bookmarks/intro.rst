@@ -31,7 +31,7 @@ CakePHP の取得
 最も簡単な CakePHP のインストール方法は Composer を使う方法です。Composer は、
 ターミナルやコマンドラインプロンプトから CakePHP をインストールのシンプルな方法です。
 まだ準備ができていない場合、最初に Composer をダウンロードとインストールが必要です。
-cURL をインストールされていたら、以下のように実行するのがが簡単です。 ::
+cURL をインストールされていたら、以下のように実行するのが簡単です。 ::
 
     curl -s https://getcomposer.org/installer | php
 
