@@ -285,7 +285,7 @@ action. Replace the edit method with the following::
         // Get a list of tags.
         $tags = $this->Articles->Tags->find('list');
 
-        // Set tags to the view context
+        // Set article & tags to the view context
         $this->set('tags', $tags);
         $this->set('article', $article);
     }
