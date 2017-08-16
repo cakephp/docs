@@ -303,5 +303,5 @@ tag them, explore posted articles by tag, and applied basic access control to
 articles. We've also added some nice UX improvements by leveraging the
 FormHelper and ORM capabilities.
 
-Thanks for taking the time to explore CakePHP. Next, you should learn more about
+Thank you for taking the time to explore CakePHP. Next, you should learn more about
 the :doc:`/orm`, or you peruse the :doc:`/topics`.
