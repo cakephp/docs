@@ -271,7 +271,6 @@ action. Replace the edit method with the following::
             ->firstOrFail();
 
         if ($this->request->is(['post', 'put'])) {
-
             $this->Articles->patchEntity($article, $this->request->getData(), [
                 // Added: Disable modification of user_id.
                 'accessibleFields' => ['user_id' => false]
