@@ -2,9 +2,9 @@ Tutoriel CMS - Création du Controller Articles
 ##############################################
 
 Maintenant que notre model est créé, nous avons besoin d'un controller pour nos
-articles. Les controllers dans CakePHP se charge de gérer les requêtes HTTP et
-exécute la logique métier des méthodes des models pour préparer une réponse. Nous
-placerons le code de ce controller dans un fichier **ArticlesController.php**,
+articles. Dans CakePHP, les controllers se chargent de gérer les requêtes HTTP et
+exécutent la logique métier des méthodes des models pour préparer une réponse. Nous
+placerons le code de ce controller dans un nouveau fichier **ArticlesController.php**,
 dans le dossier **src/Controller**. La base du controller ressemblera à ceci::
 
     <?php
@@ -47,7 +47,7 @@ de nommer vos controllers et vos actions afin d'obtenir des URL spécifiques. Ce
 ceci est déconseillé. Vous devriez plutôt suivre les :doc:`/intro/conventions`
 et créer des noms d'actions lisibles ayant un sens pour votre application. Vous pouvez
 ensuite utiliser le :doc:`/development/routing` pour obtenir les URLs que vous
-souhaitez et les connecter aux actions que vous avez créé.
+souhaitez et les connecter aux actions que vous avez créées.
 
 Notre action est très simple. Elle récupère un jeu d'articles paginés dans la base de
 données en utilisant l'objet model Articles qui est chargé automatiquement via les
@@ -173,7 +173,7 @@ Ajouter des articles
 ====================
 
 Maintenant que les views de lecture ont été créées, il est temps de rendre possible
-la création d'articles. Commencez par créé une action ``add()`` dans le
+la création d'articles. Commencez par créer une action ``add()`` dans le
 ``ArticlesController``::
 
     // src/Controller/ArticlesController.php
@@ -244,7 +244,7 @@ Vous pouvez utiliser les fonctions :php:func:`pr()` ou :php:func:`debug()` pour
 afficher les données si vous voulez voir à quoi elles ressemblent. Pour sauvegarder
 les données, nous devons tout d'abord "marshaller" les données du POST en une
 Entity Article. L'Entity sera ensuite persistée en utilisant la classe ArticlesTable
-que nous avons créé plus tôt.
+que nous avons créée plus tôt.
 
 Après la sauvegarde de notre article, nous utilisons la méthode ``success()`` du
 FlashComponent pour définir le message en Session. La méthode ``success`` est
@@ -269,7 +269,7 @@ Voici le code de notre template de la view "add" :
 
     <!-- Fichier : src/Template/Articles/add.ctp -->
 
-    <h1>Add Article</h1>
+    <h1>Ajouter un article</h1>
     <?php
         echo $this->Form->create($article);
         echo $this->Form->control('title');
@@ -295,7 +295,7 @@ d'options - dans notre cas, le nombre de lignes (rows) pour le textarea. Il y a
 un peu d'instrospection et de conventions utilisées ici. La méthode ``control()``
 affichera des éléments de formulaire différents en fonction du champ du model
 spécifié et utilisera une inflection automatique pour définir le label associé.
-Vous pouvez personnaliser le label, les input ou tout autre aspect du formulaire
+Vous pouvez personnaliser le label, les inputs ou tout autre aspect du formulaire
 en utilisant les options. La méthode ``$this->Form->end()`` ferme le formulaire.
 
 Retournons à notre template **src/Template/Articles/index.ctp** pour ajouter
@@ -303,7 +303,6 @@ un lien "Ajouter un article". Avant le ``<table>``, ajoutons la ligne
 suivante::
 
     <?= $this->Html->link('Ajouter un article', ['action' => 'add']) ?>
-
 
 Ajout de la génération de slug
 ==============================
@@ -376,7 +375,7 @@ Ensuite l'action va vérifier si la requête est une requête POST ou PUT. Si c'
 nous utiliserons alors les données du POST/PUT pour mettre à jour l'entity de l'article
 en utilisant la méthode ``patchEntity()``. Enfin, nous appelons la méthode ``save()``,
 nous définissons un message Flash approprié et soit nous redirigeons, soit nous affichons
-les erreurs de validation.
+les erreurs de validation en fonction du résultat de l'opération de sauvegarde.
 
 Création du template Edit
 =========================
@@ -397,7 +396,7 @@ Le template edit devra ressembler à ceci :
     ?>
 
 Ce template affiche le formulaire de modification (avec les valeurs déjà remplies),
-ainsi que les messages d'erreur de validation.
+ainsi que les messages d'erreurs de validation.
 
 Vous pouvez maintenant mettre à jour notre view index avec les liens pour modifier
 les articles :
@@ -499,7 +498,7 @@ Ce code va supprimer l'article ayant le slug ``$slug`` et utilisera la méthode
 après l'avoir redirigé sur ``/articles``. Si l'utilisateur essaie d'aller supprimer
 un article avec une requête GET, la méthode ``allowMethod()`` lancera une exception.
 Les exceptions non capturées sont récupérées par le gestionnaire d'exception de CakePHP
-et affichera une belle page d'erreur. Il existe plusieurs :doc:`Exceptions </development/errors>`
+qui affichera une belle page d'erreur. Il existe plusieurs :doc:`Exceptions </development/errors>`
 intégrées qui peuvent être utilisées pour remonter les différentes erreurs HTTP
 que votre application aurait besoin de générer.
 
