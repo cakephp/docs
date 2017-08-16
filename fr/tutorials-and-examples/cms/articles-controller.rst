@@ -274,7 +274,7 @@ Voici le code de notre template de la view "add" :
         echo $this->Form->create($article);
         echo $this->Form->control('title');
         echo $this->Form->control('body', ['rows' => '3']);
-        echo $this->Form->button(__('Sauvegarder l'article'));
+        echo $this->Form->button(__('Sauvegarder l\'article'));
         echo $this->Form->end();
     ?>
 
@@ -360,7 +360,7 @@ pas modifier les articles existants. Ajoutez l'action suivante dans votre
                 $this->Flash->success(__('Votre article a été mis à jour.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Impossible de mettre à jour l'article.'));
+            $this->Flash->error(__('Impossible de mettre à jour l\'article.'));
         }
 
         $this->set('article', $article);
@@ -391,7 +391,7 @@ Le template edit devra ressembler à ceci :
         echo $this->Form->create($article);
         echo $this->Form->control('title');
         echo $this->Form->control('body', ['rows' => '3']);
-        echo $this->Form->button(__('Sauvegarder l'article'));
+        echo $this->Form->button(__('Sauvegarder l\'article'));
         echo $this->Form->end();
     ?>
 
