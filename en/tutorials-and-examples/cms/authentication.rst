@@ -171,7 +171,6 @@ like::
             $this->loadComponent('Auth', [
                 // Added this line
                 'authorize'=> 'Controller',
-
                 'authenticate' => [
                     'Form' => [
                         'fields' => [
@@ -213,6 +212,7 @@ sense. First, we'll add the authorization logic for articles. In your
 
         // Check that the article belongs to the current user.
         $article = $this->Articles->findBySlug($slug)->first();
+
         return $article->user_id === $user['id'];
     }
 
