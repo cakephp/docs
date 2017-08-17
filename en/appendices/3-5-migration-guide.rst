@@ -265,6 +265,13 @@ Http
 * ``Cake\Http\Client::addCookie()`` was added to make it easy to add cookies to
   a client instance.
 
+InstanceConfigTrait
+-------------------
+
+* ``InstanceConfigTrait::getConfig()`` now takes a 2nd parameter ``$default``.
+  If no value is available for specified ``$key`` then the ``$default`` value
+  will be returned.
+
 ORM
 ---
 
