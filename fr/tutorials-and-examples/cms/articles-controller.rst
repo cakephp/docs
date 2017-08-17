@@ -103,7 +103,7 @@ dans ce fichier:
     </table>
 
 Dans la précédente section, nous avons assigné la variable 'articles' à la view en
-utilisant la méthode ``set()``. Les variables passées à la view sont disponible dans
+utilisant la méthode ``set()``. Les variables passées à la view sont disponibles dans
 les templates de view comme des "variables locales", comme nous l'avons fait ci-dessus.
 
 Vous avez peut-être remarqué que nous utilisons un objet appelé ``$this->Html``.
@@ -147,7 +147,7 @@ correspondant n'est trouvé.
 Notre action attend un paramètre ``$slug``, mais d'où vient-il ? Si un utilisateur
 requête ``/articles/view/first-post``, alors la valeur 'first-post' sera passé
 à ``$slug`` par la couche de routing et de dispatching de CakePHP. Si nous rechargeons
-notre navigateur, nous aurons une nouvelle erreur, nous indiquant qu'il mange un template
+notre navigateur, nous aurons une nouvelle erreur, nous indiquant qu'il manque un template
 de View.
 
 Création du template View
