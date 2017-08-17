@@ -269,7 +269,7 @@ InstanceConfigTrait
 -------------------
 
 * ``InstanceConfigTrait::getConfig()`` now takes a 2nd parameter ``$default``.
-  If no value is available for specified ``$key`` then the ``$default`` value
+  If no value is available for specified ``$key``, the ``$default`` value
   will be returned.
 
 ORM
