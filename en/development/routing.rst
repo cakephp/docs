@@ -856,6 +856,7 @@ and then parse what remains. If you want to create a URL such as
 /page/title-of-page.html you would create your route using::
 
     Router::scope('/page', function ($routes) {
+        // Prior to 3.5.0 use `extensions()`
         $routes->setExtensions(['json', 'xml', 'html']);
         $routes->connect(
             '/:title',
@@ -962,6 +963,7 @@ this::
     // In config/routes.php...
 
     Router::scope('/', function ($routes) {
+        // Prior to 3.5.0 use `extensions()`
         $routes->setExtensions(['json']);
         $routes->resources('Recipes');
     });
