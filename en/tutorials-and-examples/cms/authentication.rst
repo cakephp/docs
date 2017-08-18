@@ -143,6 +143,165 @@ misleading links, or continue on to the next section. We won't be building out
 user editing, viewing or listing in this tutorial, but that is an exercise you
 can complete on your own.
 
-* Enabling Access Control
-* Updating Creation
-* Restricting Editing
+Restricting Article Access
+==========================
+
+Now that users can log in, we'll want to limit users to only edit articles that
+they created. We'll do this using an 'authorization' adapter. Since our
+requirements are pretty simple, we can write some simple code in our
+``ArticlesController``. But before we do that, we'll want to tell the
+``AuthComponent`` how our application is going to authorize actions. Update your
+``AppController`` adding the following::
+
+    public function isAuthorized($user)
+    {
+        // By default deny access.
+        return false;
+    }
+
+Next we'll tell ``AuthComponent`` that we want to use controller hook methods
+for authorization. Your ``AppController::initialize()`` method should now look
+like::
+
+        public function initialize()
+        {
+            // Existing code
+
+            $this->loadComponent('Flash');
+            $this->loadComponent('Auth', [
+                // Added this line
+                'authorize'=> 'Controller',
+                'authenticate' => [
+                    'Form' => [
+                        'fields' => [
+                            'username' => 'email',
+                            'password' => 'password'
+                        ]
+                    ]
+                ],
+                'loginAction' => [
+                    'controller' => 'Users',
+                    'action' => 'login'
+                ],
+                 // If unauthorized, return them to page they were just on
+                'unauthorizedRedirect' => $this->referer()
+            ]);
+
+            // Allow the display action so our pages controller
+            // continues to work. Also enable the read only actions.
+            $this->Auth->allow(['display', 'view', 'index']);
+        }
+
+We'll default to denying access, and incrementally grant access where it makes
+sense. First, we'll add the authorization logic for articles. In your
+``ArticlesController`` add the following::
+
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+        // The add and tags actions are always allowed to logged in users.
+        if (in_array($action, ['add', 'tags'])) {
+            return true;
+        }
+
+        // All other actions require a slug.
+        $slug = $this->request->getParam('pass.0');
+        if (!$slug) {
+            return false;
+        }
+
+        // Check that the article belongs to the current user.
+        $article = $this->Articles->findBySlug($slug)->first();
+
+        return $article->user_id === $user['id'];
+    }
+
+Now if you try to edit or delete an article that does not belong to you,
+you should be redirected back to the page you came from. If no error message is
+displayed, add the following to your layout::
+
+    // In src/Template/Layout/default.ctp
+    <?= $this->Flash->render() ?>
+
+While the above is fairly simplistic it illustrates how you could build more
+complex logic that combines the current user and request data to build flexible
+authorization logic.
+
+Fixing the Add & Edit Actions
+=============================
+
+While we've blocked access to the edit action, we're still open to users
+changing the ``user_id`` attribute of articles on creation or during edit. We
+will solve these problems next. First up is the ``add`` action.
+
+When creating articles, we want to fix the ``user_id`` to be the currently
+logged in user. Replace your add action with the following::
+
+    // in src/Controller/ArticlesController.php
+
+    public function add()
+    {
+        $article = $this->Articles->newEntity();
+        if ($this->request->is('post')) {
+            $article = $this->Articles->patchEntity($article, $this->request->getData());
+
+            // Added: Set the user_id from the session.
+            $article->user_id = $this->Auth->user('id');
+
+            if ($this->Articles->save($article)) {
+                $this->Flash->success(__('Your article has been saved.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Unable to add your article.'));
+        }
+        $this->set('article', $article);
+    }
+
+Remember to remove the ``user_id`` control from
+**src/Templates/Articles/add.ctp** as well. Next we'll update the ``edit``
+action. Replace the edit method with the following::
+
+    // in src/Controller/ArticlesController.php
+
+    public function edit($slug)
+    {
+        $article = $this->Articles
+            ->findBySlug($slug)
+            ->contain('Tags') // load associated Tags
+            ->firstOrFail();
+
+        if ($this->request->is(['post', 'put'])) {
+            $this->Articles->patchEntity($article, $this->request->getData(), [
+                // Added: Disable modification of user_id.
+                'accessibleFields' => ['user_id' => false]
+            ]);
+            if ($this->Articles->save($article)) {
+                $this->Flash->success(__('Your article has been updated.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Unable to update your article.'));
+        }
+
+        // Get a list of tags.
+        $tags = $this->Articles->Tags->find('list');
+
+        // Set article & tags to the view context
+        $this->set('tags', $tags);
+        $this->set('article', $article);
+    }
+
+Here we're modifying which properties can be mass-assigned, via the options
+for ``patchEntity()``. See the :ref:`changing-accessible-fields` section for
+more information. Remember to remove the ``user_id`` control from
+**src/Templates/Articles/edit.ctp** as we no longer need it.
+
+Wrapping Up
+===========
+
+We've built a simple CMS application that allows users to login, post articles,
+tag them, explore posted articles by tag, and applied basic access control to
+articles. We've also added some nice UX improvements by leveraging the
+FormHelper and ORM capabilities.
+
+Thank you for taking the time to explore CakePHP. Next, you should learn more about
+the :doc:`/orm`, or you peruse the :doc:`/topics`.
