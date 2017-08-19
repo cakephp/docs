@@ -81,6 +81,8 @@ The following is a list of methods that are deprecated and replaced with
 ``Cake\I18n\I18n``
     * ``locale()``
     * ``translator()``
+    * ``defaultLocale()``
+    * ``defaultFormatter()``
 ``Cake\ORM\Association\BelongsToMany``
     * ``sort()``
 ``Cake\ORM\LocatorAwareTrait``
