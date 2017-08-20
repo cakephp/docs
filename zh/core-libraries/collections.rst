@@ -102,31 +102,28 @@ Collection中的每个值上。
     $collection = new Collection($people);
     $names = $collection->extract('name');
 
-    // $result 中是 ['mark', 'jose', 'barbara'];
+    // $result 内容是 ['mark', 'jose', 'barbara'];
     $result = $names->toArray();
 
-As with many other functions in the collection class, you are allowed to specify
-a dot-separated path for extracting columns. This example will return
-a collection containing the author names from a list of articles::
+Collection中还存在着很多其它方法，你也可以使用点分割的表现方式来选取需要的项目。这个例子
+将会返回一个从文章列表里提取的作者名（author names）的Collection::
 
     $collection = new Collection($articles);
     $names = $collection->extract('author.name');
 
-    // $result contains ['Maria', 'Stacy', 'Larry'];
+    // $result 内容是 ['Maria', 'Stacy', 'Larry'];
     $result = $names->toArray();
 
-Finally, if the property you are looking after cannot be expressed as a path,
-you can use a callback function to return it::
+最后，如果你使用的属性不被认为是一个正确的路劲，你可以用一个回调方法返回它::
 
     $collection = new Collection($articles);
     $names = $collection->extract(function ($article) {
         return $article->author->name . ', ' . $article->author->last_name;
     });
 
-Often, the properties you need to extract a common key present in multiple
-arrays or objects that are deeply nested inside other structures. For those
-cases you can use the ``{*}`` matcher in the path key. This matcher is often
-helpful when matching HasMany and BelongsToMany association data::
+时常有这么一回事，你需要选取（extract）一个在复杂的数组或对象中，被嵌套在其它结构
+里面共同的键（这里指的是'number')。这种情况你可以用 ``{*}`` 来配对表路劲的键。当你从
+HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行选取时，这种匹配方式会很实用::
 
     $data = [
         [
@@ -150,34 +147,33 @@ helpful when matching HasMany and BelongsToMany association data::
     $numbers->toList();
     // Returns ['number-1', 'number-2', 'number-3', 'number-4', 'number-5']
 
-This last example uses ``toList()`` unlike other examples, which is important
-when we're getting results with possibly duplicate keys. By using ``toList()``
-we'll be guaranteed to get all values even if there are duplicate keys.
+这个例子和其它例子不同，使用的是 ``toList()`` 方法。这是个我们在有可能有相同的键的时候
+也能得到结果的重要方法。 ``toList()`` 方法允许我们在即使有很多键重复的情况下也能得到所
+有的值。
 
-Unlike :php:meth:`Cake\\Utility\\Hash::extract()` this method only supports the
-``{*}`` wildcard. All other wildcard and attributes matchers are not supported.
+不同于 :php:meth:`Cake\\Utility\\Hash::extract()` ，这个方法只允许 ``{*}`` 通配符。
+并不支持其它的通配符和匹配属性。
 
 .. php:method:: combine($keyPath, $valuePath, $groupPath = null)
 
-Collections allow you to create a new collection made from keys and values in
-an existing collection. Both the key and value paths can be specified with
-dot notation paths::
+Collections允许你在已有的Collection的基础上创建一个由键值对组成的新的Collection。
+键和值的路径都可以使用点记法来表示::
 
     $items = [
         ['id' => 1, 'name' => 'foo', 'parent' => 'a'],
-        ['id' => 2, 'name' => 'bar', 'parent' => 'b'],
-        ['id' => 3, 'name' => 'baz', 'parent' => 'a'],
+        ['id' => 2, 'name' => 'bar', 'parent' => 'b'],
+        ['id' => 3, 'name' => 'baz', 'parent' => 'a'],
     ];
     $combined = (new Collection($items))->combine('id', 'name');
 
     // Result will look like this when converted to array
     [
         1 => 'foo',
-        2 => 'bar',
-        3 => 'baz',
+        2 => 'bar',
+        3 => 'baz',
     ];
 
-You can also optionally use a ``groupPath`` to group results based on a path::
+你也可以选择性地使用 ``groupPath`` 来将基于键值对的结果分组::
 
     $combined = (new Collection($items))->combine('id', 'name', 'parent');
 
@@ -187,9 +183,7 @@ You can also optionally use a ``groupPath`` to group results based on a path::
         'b' => [2 => 'bar']
     ];
 
-Finally you can use *closures* to build keys/values/groups paths dynamically,
-for example when working with entities and dates (converted to ``Cake/Time``
-instances by the ORM) you may want to group results by date::
+最后你可以用 *closures* 来动态地构建一个keys/values/groups路径，比方说当你需要用到entities（实体）和dates（日期）时（被ORM转换成了 ``Cake/Time`` 的实例），你可能会想要将结果根据日期（date）进行分组::
 
     $combined = (new Collection($entities))->combine(
         'id',
@@ -197,7 +191,7 @@ instances by the ORM) you may want to group results by date::
         function ($entity) { return $entity->date->toDateString(); }
     );
 
-    // Result will look like this when converted to array
+    // 当转换成数组时结果将会像以下
     [
         'date string like 2015-05-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
         'date string like 2015-06-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
@@ -205,50 +199,45 @@ instances by the ORM) you may want to group results by date::
 
 .. php:method:: stopWhen(callable $c)
 
-You can stop the iteration at any point using the ``stopWhen()`` method. Calling
-it in a collection will create a new one that will stop yielding results if the
-passed callable returns false for one of the elements::
+你可以通过 ``stopWhen()`` 方法在任意点上停止迭代。在Collection中使用这个方法时，如果某
+一个元素传入可调用方法返回false，将会产生一个新的Collection并停止产生其它返回结果::
 
     $items = [10, 20, 50, 1, 2];
     $collection = new Collection($items);
 
     $new = $collection->stopWhen(function ($value, $key) {
-        // Stop on the first value bigger than 30
+        // 在出现第一个大于30的值的时停止
         return $value > 30;
     });
 
-    // $result contains [10, 20];
+    // $result 内容是 [10, 20];
     $result = $new->toArray();
 
 .. php:method:: unfold(callable $c)
 
-Sometimes the internal items of a collection will contain arrays or iterators
-with more items. If you wish to flatten the internal structure to iterate once
-over all elements you can use the ``unfold()`` method. It will create a new
-collection that will yield every single element nested in the collection::
+有时Collection的内部项目包含有拥有更多内部项目的数组或迭代器。如果你希望让这些内部结构变得平行并且一次迭代就能遍历所有元素，你可以使用 ``unfold()`` 方法。它将会创建一个单一嵌套着每个元素的新Collection::
 
     $items = [[1, 2, 3], [4, 5]];
     $collection = new Collection($items);
     $new = $collection->unfold();
 
-    // $result contains [1, 2, 3, 4, 5];
+    // $result 内容是 [1, 2, 3, 4, 5];
     $result = $new->toList();
 
-When passing a callable to ``unfold()`` you can control what elements will be
-unfolded from each item in the original collection. This is useful for returning
-data from paginated services::
+当传递一个可调用函数到 ``unfold()`` 时，你可以控制原始的Collection中的项目的哪一个来
+执行unfolded（展开）操作。这在返回分页服务的数据时很有帮助::
 
     $pages = [1, 2, 3, 4];
     $collection = new Collection($pages);
     $items = $collection->unfold(function ($page, $key) {
-        // An imaginary web service that returns a page of results
-        return MyService::fetchPage($page)->toArray();
+        // 返回一页结果的假想web服务
+        return MyService::fetchPage($page)->toArray();
     });
 
     $allPagesItems = $items->toList();
 
-If you are using PHP 5.5+, you can use the ``yield`` keyword inside ``unfold()``
-to return as many elements for each item in the collection as you may need::
+如果你使用的是PHP 5.5+版本，你在 ``unfold()`` 中使用关键词 ``yield`` 来返回Collection的
+每个项目中你需要数量的元素::
 
     $oddNumbers = [1, 3, 5, 7];
     $collection = new Collection($oddNumbers);
@@ -257,24 +246,21 @@ to return as many elements for each item in the collection as you may need::
         yield $oddNumber + 1;
     });
 
-    // $result contains [1, 2, 3, 4, 5, 6, 7, 8];
+    // $result 内容是 [1, 2, 3, 4, 5, 6, 7, 8];
     $result = $new->toList();
 
 
 .. php:method:: chunk($chunkSize)
 
-When dealing with large amounts of items in a collection, it may make sense to
-process the elements in batches instead of one by one. For splitting
-a collection into multiple arrays of a certain size, you can use the ``chunk()``
-function::
+当处理Collection中包含有非常多数量的项目时，把它们批量处理或许比一个个处理更好一点。你
+可以使用 ``chunk()`` 将一个Collection分割成多个固定容量的数组::
 
     $items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
     $collection = new Collection($items);
     $chunked = $collection->chunk(2);
     $chunked->toList(); // [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11]]
 
-The ``chunk`` function is particularly useful when doing batch processing, for
-example with a database result::
+``chunk`` 方法在进行批量处理时非常有用，用一个数据库结果来举例子::
 
     $collection = new Collection($articles);
     $collection->map(function ($article) {
@@ -283,15 +269,14 @@ example with a database result::
         })
         ->chunk(20)
         ->each(function ($batch) {
-            myBulkSave($batch); // This function will be called for each batch
-        });
+            myBulkSave($batch); // 该方法将会被每个批量处理（batch）调用
+        });
 
 .. php:method:: chunkWithKeys($chunkSize)
 
-Much like :php:meth:`chunk()`, ``chunkWithKeys()`` allows you to slice up
-a collection into smaller batches but with keys preserved. This is useful when
-chunking associative arrays::
-
+与 :php:meth:`chunk()`相似，``chunkWithKeys()`` 允许你将一个Collection保留着键分割
+成更小的几部分进行处理。这在分割关联数组时十分有用::
+ 
     $collection = new Collection([
         'a' => 1,
         'b' => 2,
@@ -308,14 +293,13 @@ chunking associative arrays::
 .. versionadded:: 3.4.0
     ``chunkWithKeys()`` was added in 3.4.0
 
-Filtering
-=========
+过滤（Filtering）
+==================
 
 .. php:method:: filter(callable $c)
 
-Collections make it easy to filter and create new collections based on
-the result of callback functions. You can use ``filter()`` to create a new
-collection of elements matching a criteria callback::
+Collections能够基于回调方法简单地过滤并创建新的Collection。你能用 ``filter()`` 
+创建一个符合回调标准元素构成的Collection::
 
     $collection = new Collection($people);
     $ladies = $collection->filter(function ($person, $key) {
@@ -327,8 +311,8 @@ collection of elements matching a criteria callback::
 
 .. php:method:: reject(callable $c)
 
-The inverse of ``filter()`` is ``reject()``. This method does a negative filter,
-removing elements that match the filter function::
+与 ``filter()`` 对立的是 ``reject()``。该方法执行一个消极过滤，它将符合过滤条件的元素
+都删除::
 
     $collection = new Collection($people);
     $ladies = $collection->reject(function ($person, $key) {
@@ -337,8 +321,8 @@ removing elements that match the filter function::
 
 .. php:method:: every(callable $c)
 
-You can do truth tests with filter functions. To see if every element in
-a collection matches a test you can use ``every()``::
+你可以用过滤方法来进行真伪测试。要检测是否Collection中每个元素都符合测试条件的
+话你可以使用 ``every()``::
 
     $collection = new Collection($people);
     $allYoungPeople = $collection->every(function ($person) {
@@ -347,8 +331,7 @@ a collection matches a test you can use ``every()``::
 
 .. php:method:: some(callable $c)
 
-You can see if the collection contains at least one element matching a filter
-function using the ``some()`` method::
+你可以用 `some()`` 方法来检测Collection中包含的元是否至少有一个符合过滤条件::
 
     $collection = new Collection($people);
     $hasYoungPeople = $collection->some(function ($person) {
@@ -357,17 +340,16 @@ function using the ``some()`` method::
 
 .. php:method:: match(array $conditions)
 
-If you need to extract a new collection containing only the elements that
-contain a given set of properties, you should use the ``match()`` method::
+你想要提取出一个只包含你指定属性的元素的新Collection的话，你可以使用
+``match()`` 方法::
 
     $collection = new Collection($comments);
     $commentsFromMark = $collection->match(['user.name' => 'Mark']);
 
 .. php:method:: firstMatch(array $conditions)
 
-The property name can be a dot-separated path. You can traverse into nested
-entities and match the values they contain. When you only need the first
-matching element from a collection, you can use ``firstMatch()``::
+属性名可以用点记法表示。你可以遍历过嵌套着的实例并匹配它们的值，当你只需要第一个匹配
+的元素时，你可以用 ``firstMatch()``::
 
     $collection = new Collection($comments);
     $comment = $collection->firstMatch([
@@ -375,28 +357,23 @@ matching element from a collection, you can use ``firstMatch()``::
         'active' => true
     ]);
 
-As you can see from the above, both ``match()`` and ``firstMatch()`` allow you
-to provide multiple conditions to match on. In addition, the conditions can be
-for different paths, allowing you to express complex conditions to match
-against.
+就像你在上面看到的那样， ``match()`` 和 ``firstMatch()`` 都让你能用复数条件进行匹配。
+另外，条件能用于不同的路径，能够允许你用复杂的方式表现。
 
-Aggregation
-===========
+集成（Aggregation）
+======================
 
 .. php:method:: reduce(callable $c)
 
-The counterpart of a ``map()`` operation is usually a ``reduce``. This
-function will help you build a single result out of all the elements in a
-collection::
+``map()`` 的对立操作是 ``reduce()`` 。该方法能够从Collection的所有元素中得到一
+个单一的结果::
 
     $totalPrice = $collection->reduce(function ($accumulated, $orderLine) {
         return $accumulated + $orderLine->price;
     }, 0);
 
-In the above example, ``$totalPrice`` will be the sum of all single prices
-contained in the collection. Note the second argument for the ``reduce()``
-function takes the initial value for the reduce operation you are
-performing::
+在上面例子中， ``$totalPrice`` 将是集合中所有单价的总和。需要注意 ``reduce()`` 
+的第二个参数将为reduce操作传递一个初期值::
 
     $allTags = $collection->reduce(function ($accumulated, $article) {
         return array_merge($accumulated, $article->tags);
