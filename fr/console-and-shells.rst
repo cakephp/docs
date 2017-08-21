@@ -708,8 +708,8 @@ pour configurer les multiple options/arguments en une fois::
         return $parser;
     }
 
-Configurer un option parser avec l'interface courante
------------------------------------------------------
+Configurer un option parser avec l'interface chainée
+----------------------------------------------------
 
 Toutes les méthodes utilisées pour configurer le parser peuvent
 être chainées, vous permettant de définir l'intégralité des options du
@@ -1316,7 +1316,8 @@ lequel vous souhaitez envoyer l'email en faisant::
     use Cake\Mailer\Email;
 
     $email = new Email();
-    $email->domain('www.example.org');
+    // Avant 3.4 utilisez domain() 
+    $email->setDomain('www.example.org');
 
 Cela suppose que les ID du message généré sont valides et correspondent au
 domaine duquel les emails sont envoyés.
