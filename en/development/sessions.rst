@@ -153,18 +153,18 @@ If you need to use a database to store your session data, configure as follows::
         'defaults' => 'database'
     ]
 
-This configuration will require a database table to be added with
-at least these fields::
+This configuration requires a database table, having this schema::
 
-    CREATE TABLE `sessions` (
-      `id` varchar(255) NOT NULL DEFAULT '',
-      `data` BLOB, -- or BYTEA for PostgreSQL
-      `expires` int(11) DEFAULT NULL,
-      PRIMARY KEY (`id`)
-    );
+  CREATE TABLE `sessions` (
+    `id` char(40) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+    `created` datetime DEFAULT CURRENT_TIMESTAMP, -- Optional
+    `modified` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Optional
+    `data` blob DEFAULT NULL, -- for PostgreSQL use bytea instead of blob
+    `expires` int(10) unsigned DEFAULT NULL,
+    PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-You can find a copy of the schema for the sessions table in the application
-skeleton.
+You can find a copy of the schema for the sessions table in the `application skeleton <https://github.com/cakephp/app>`_ in ``config/schema/sessions.sql``.
 
 You can also use your own ``Table`` class to handle the saving of the sessions::
 
