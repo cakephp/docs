@@ -148,6 +148,7 @@ behavior should now look like::
 
     namespace App\Model\Behavior;
 
+    use ArrayObject;
     use Cake\Datasource\EntityInterface;
     use Cake\Event\Event;
     use Cake\ORM\Behavior;
@@ -170,7 +171,7 @@ behavior should now look like::
             $entity->set($config['slug'], Text::slug($value, $config['replacement']));
         }
 
-        public function beforeSave(Event $event, EntityInterface $entity)
+        public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
         {
             $this->slug($entity);
         }
@@ -186,7 +187,7 @@ The above code shows a few interesting features of behaviors:
 
 To prevent the saving from continuing simply stop event propagation in your callback::
 
-    public function beforeSave(Event $event, EntityInterface $entity)
+    public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
     {
         if (...) {
             $event->stopPropagation();
