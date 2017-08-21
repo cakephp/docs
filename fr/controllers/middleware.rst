@@ -14,7 +14,7 @@ Quand une requête est gérée par votre application, elle entre par le middlewa
 plus à l'extérieur. Chaque middleware peut soit passer la requête / la réponse à la
 couche suivante, soit retourner une réponse. Retourner une réponse empêchera les couches
 plus basses d'accéder à la requête. Un exemple illustrant ce principe serait
-l'AssetMiddleware qui gérera la requête d'une image de plugin pendant le développement. 
+l'AssetMiddleware qui gérera la requête d'une image de plugin pendant le développement.
 
 .. image:: /_static/img/middleware-request.png
 
@@ -149,10 +149,10 @@ Interagir avec les Requêtes
 méthodes, URI, et corps de la requête. Pour cela, vous pouvez::
 
     // Lire l'en-tête en tant que texte
-    $value = $request->getHeaderLine(‘Content-Type’);
+    $value = $request->getHeaderLine('Content-Type');
 
     // Lire l'en-tête en tant que tableau
-    $value = $request->getHeader(‘Content-Type’);
+    $value = $request->getHeader('Content-Type');
 
     // Lire l'ensemble des en-têtes en tant que tableau associatif.
     $headers = $request->getHeaders();
@@ -245,7 +245,7 @@ CakePhp ont quelques conventions :
 * Les Middleware requièrent l'implémentation du protocole middleware.
 
 Bien que pas (encore) une interface formelle, Middleware a une soft-interface
-ou 'protocole'. Ce dernier est tel que : 
+ou 'protocole'. Ce dernier est tel que :
 
 #. Middleware doit implémenter ``__invoke($request, $response, $next)``.
 #. Middleware doit rendre un objet implémentant la ``ResponseInterface`` PSR-7.
