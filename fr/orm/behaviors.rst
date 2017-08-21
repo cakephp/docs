@@ -150,6 +150,7 @@ behavior devrait maintenant ressembler à ceci::
 
     namespace App\Model\Behavior;
 
+    use ArrayObject;
     use Cake\Datasource\EntityInterface;
     use Cake\Event\Event;
     use Cake\ORM\Behavior;
@@ -172,7 +173,7 @@ behavior devrait maintenant ressembler à ceci::
             $entity->set($config['slug'], Text::slug($value, $config['replacement']));
         }
 
-        public function beforeSave(Event $event, EntityInterface $entity)
+        public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
         {
             $this->slug($entity);
         }
@@ -190,7 +191,7 @@ Le code ci-dessus montre quelques fonctionnalités intéressantes des behaviors:
 Pour empêcher l'enregistrement de continuer, arrêtez simplement la propagation
 de l'évènement dans votre callback::
 
-    public function beforeSave(Event $event, EntityInterface $entity)
+    public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
     {
         if (...) {
             $event->stopPropagation();
