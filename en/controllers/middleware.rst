@@ -144,10 +144,10 @@ The ``RequestInterface`` provides methods for interacting with the headers,
 method, URI, and body of a request. To interact with the headers, you can::
 
     // Read a header as text
-    $value = $request->getHeaderLine(‘Content-Type’);
+    $value = $request->getHeaderLine('Content-Type');
 
     // Read header as an array
-    $value = $request->getHeader(‘Content-Type’);
+    $value = $request->getHeader('Content-Type');
 
     // Read all the headers as an associative array.
     $headers = $request->getHeaders();
