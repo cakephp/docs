@@ -671,7 +671,7 @@ CakePHPのコンソールのフレームワークは ``$this->getOptionParser()`
         ])->addOption('method', [
             'short' => 'm',
             'help' => __('The specific method you want help on.')
-        ])->description(__('Lookup doc block comments for classes in CakePHP.'));
+        ])->setDescription(__('Lookup doc block comments for classes in CakePHP.'));
         return $parser;
     }
 
@@ -1209,7 +1209,8 @@ URL となってしまいます。こういったケースでは、ドメイン�
     use Cake\Mailer\Email;
 
     $email = new Email();
-    $email->domain('www.example.org');
+    // 3.4 より前は domain() を使用
+    $email->setDomain('www.example.org');
 
 これにより生成されるメッセージ ID は有効で、また送信元ドメイン名にも合致したものになります。
 
