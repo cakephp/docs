@@ -153,7 +153,7 @@ If you need to use a database to store your session data, configure as follows::
         'defaults' => 'database'
     ]
 
-This configuration will require a database table, having this schema::
+This configuration requires a database table, having this schema::
 
   CREATE TABLE `sessions` (
     `id` char(40) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
