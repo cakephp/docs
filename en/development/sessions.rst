@@ -164,8 +164,7 @@ This configuration requires a database table, having this schema::
     PRIMARY KEY (`id`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-You can find a copy of the schema for the sessions table in the application
-skeleton in ``config/schema/sessions.sql``.
+You can find a copy of the schema for the sessions table in the `application skeleton <https://github.com/cakephp/app>`_ in ``config/schema/sessions.sql``.
 
 You can also use your own ``Table`` class to handle the saving of the sessions::
 
