@@ -383,7 +383,7 @@ You can greatly improve the performance of your application by putting results
 that infrequently change, or that are subject to heavy reads into the cache.
 A perfect example of this are the results from
 :php:meth:`Cake\\ORM\\Table::find()`. The Query object allows you to cache
-results using the ``cache()`` method. See the :ref:`caching-query-results` section
+results using the ``cache()`` method. See the :ref:`caching-loaded-results` section
 for more information.
 
 Using Groups
