@@ -501,6 +501,7 @@ ConsoleOutput will replace these tags with the correct ansi code sequence, or
 remove the tags if you are on a console that doesn't support ansi codes. There
 are several built-in styles, and you can create more. The built-in ones are
 
+* ``success`` Success messages. Green text.
 * ``error`` Error messages. Red text.
 * ``warning`` Warning messages. Yellow text.
 * ``info`` Informational messages. Cyan text.
