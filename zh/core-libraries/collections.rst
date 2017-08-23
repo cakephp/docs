@@ -1,5 +1,5 @@
-Collections
-###########
+（集合）Collections
+######################
 
 .. php:namespace:: Cake\Collection
 
@@ -381,17 +381,15 @@ Collections能够基于回调方法简单地过滤并创建新的Collection。�
 
 .. php:method:: min(string|callable $callback, $type = SORT_NUMERIC)
 
-To extract the minimum value for a collection based on a property, just use the
-``min()`` function. This will return the full element from the collection and
-not just the smallest value found::
+需要选取一个属性的最小值的话，可以使用 ``min()`` 方法，注意它会返回集合中拥有该最小值的
+元素，而不仅仅是一个值::
 
     $collection = new Collection($people);
     $youngest = $collection->min('age');
 
     echo $youngest->name;
 
-You are also able to express the property to compare by providing a path or a
-callback function::
+你也能通过提供正确的路径或者一个回调函数来选择你要比较的属性::
 
     $collection = new Collection($people);
     $personYoungestChild = $collection->min(function ($person) {
@@ -402,8 +400,7 @@ callback function::
 
 .. php:method:: max(string|callable $callback, $type = SORT_NUMERIC)
 
-The same can be applied to the ``max()`` function, which will return a single
-element from the collection having the highest property value::
+以上用发也能应用到 ``max()`` 方法上，它将返回集合中拥有该属性最大值的的元素::
 
     $collection = new Collection($people);
     $oldest = $collection->max('age');
@@ -416,8 +413,7 @@ element from the collection having the highest property value::
 
 .. php:method:: sumOf(string|callable $callback)
 
-Finally, the ``sumOf()`` method will return the sum of a property of all
-elements::
+最后， ``sumOf()`` 方法会返回所有元素某项属性的和值::
 
     $collection = new Collection($people);
     $sumOfAges =  $collection->sumOf('age');
@@ -430,24 +426,21 @@ elements::
 
 .. php:method:: avg($matcher = null)
 
-Calculate the average value of the elements in the collection. Optionally
-provide a matcher path, or function to extract values to generate the average
-for::
+该方法能计算集合中元素的平均值。选择一个复合路径或者函数来确定需要计算哪样属性的平均值::
 
     $items = [
        ['invoice' => ['total' => 100]],
        ['invoice' => ['total' => 200]],
     ];
 
-    // Average: 150
+    // 平均值: 150
     $average = (new Collection($items))->avg('invoice.total');
 
 .. versionadded:: 3.5.0
 
 .. php:method:: median($matcher = null)
 
-Calculate the median value of a set of elements. Optionally provide a matcher
-path, or function to extract values to generate the median for::
+该方法可计算一组元素的中间值。在参数中输入一个复合路径或者函数来确定需要计算哪样属性的中间值::
 
     $items = [
       ['invoice' => ['total' => 400]],
@@ -467,8 +460,7 @@ Grouping and Counting
 
 .. php:method:: groupBy($callback)
 
-Collection values can be grouped by different keys in a new collection when they
-share the same value for a property::
+当Collection的某项属性的值一样时，可以用不同的键来将它们结合到一个新的collection中::
 
     $students = [
         ['name' => 'Mark', 'grade' => 9],
@@ -479,7 +471,7 @@ share the same value for a property::
     $collection = new Collection($students);
     $studentsByGrade = $collection->groupBy('grade');
 
-    // Result will look like this when converted to array:
+    // 转化成数组后结果将会如下:
     [
       10 => [
         ['name' => 'Andrew', 'grade' => 10],
@@ -491,8 +483,7 @@ share the same value for a property::
       ]
     ]
 
-As usual, it is possible to provide either a dot-separated path for nested
-properties or your own callback function to generate the groups dynamically::
+一般情况，可以提供一个点分割路径来选取嵌套结构的值或者提供你自己的回调函数来进行动态的结合::
 
     $commentsByUserId = $comments->groupBy('user.id');
 
@@ -502,34 +493,30 @@ properties or your own callback function to generate the groups dynamically::
 
 .. php:method:: countBy($callback)
 
-If you only wish to know the number of occurrences per group, you can do so by
-using the ``countBy()`` method. It takes the same arguments as ``groupBy`` so it
-should be already familiar to you::
+如果想要知道不同的分组范围内的出现次数，你可以用 ``countBy()`` 方法。它的参数与上面已经
+知道的 `groupBy`` 相同::
 
     $classResults = $students->countBy(function ($student) {
         return $student->grade > 6 ? 'approved' : 'denied';
     });
 
-    // Result could look like this when converted to array:
+    // 转化成数组后结果将会如下:
     ['approved' => 70, 'denied' => 20]
 
 .. php:method:: indexBy($callback)
 
-There will be certain cases where you know an element is unique for the property
-you want to group by. If you wish a single result per group, you can use the
-function ``indexBy()``::
+有些特定的时候你知道你想要用来分组的某元素的某属性时唯一的，这时候你可以使用 ``indexBy()`` 方法::
 
     $usersById = $users->indexBy('id');
 
-    // When converted to array result could look like
+    // 转化成数组后结果将会如下:
     [
         1 => 'markstory',
         3 => 'jose_zap',
         4 => 'jrbasso'
     ]
 
-As with the ``groupBy()`` function you can also use a property path or
-a callback::
+和 ``groupBy()`` 方法一样，你也能使用路径表属性或者回调函数::
 
     $articlesByAuthorId = $articles->indexBy('author.id');
 
@@ -539,22 +526,21 @@ a callback::
 
 .. php:method:: zip($elements)
 
-The elements of different collections can be grouped together using the
-``zip()`` method. It will return a new collection containing an array grouping
-the elements from each collection that are placed at the same position::
+使用 ``zip()`` 方法能够将不同Collection中的元素结合到一起。它将返回一个元素结合后的Collection,
+其中处于Collection中同一位置的元素将被结合到一起::
 
     $odds = new Collection([1, 3, 5]);
     $pairs = new Collection([2, 4, 6]);
     $combined = $odds->zip($pairs)->toList(); // [[1, 2], [3, 4], [5, 6]]
 
-You can also zip multiple collections at once::
+你也能够一次性打包复数个Collection::
 
     $years = new Collection([2013, 2014, 2015, 2016]);
     $salaries = [1000, 1500, 2000, 2300];
     $increments = [0, 500, 500, 300];
 
     $rows = $years->zip($salaries, $increments)->toList();
-    // Returns:
+    // 结果:
     [
         [2013, 1000, 0],
         [2014, 1500, 500],
@@ -562,8 +548,7 @@ You can also zip multiple collections at once::
         [2016, 2300, 300]
     ]
 
-As you can already see, the ``zip()`` method is very useful for transposing
-multidimensional arrays::
+就像你看到的， ``zip()`` 方法在转换多重数组时非常实用::
 
     $data = [
         2014 => ['jan' => 100, 'feb' => 200],
@@ -571,27 +556,26 @@ multidimensional arrays::
         2016 => ['jan' => 400, 'feb' => 600],
     ]
 
-    // Getting jan and feb data together
+    // 把'jan'和'feb'数据打包到一起
 
     $firstYear = new Collection(array_shift($data));
     $firstYear->zip($data[0], $data[1])->toList();
 
-    // Or $firstYear->zip(...$data) in PHP >= 5.6
+    // 或者 $firstYear->zip(...$data) 当 PHP >= 5.6
 
-    // Returns
-    [
+    // 结果
+    [
         [100, 300, 400],
         [200, 500, 600]
     ]
 
-Sorting
+排序（Sorting）
 =======
 
 .. php:method:: sortBy($callback)
 
-Collection values can be sorted in ascending or descending order based on
-a column or custom function. To create a new sorted collection out of the values
-of another one, you can use ``sortBy``::
+Collection的值可以基于某一列或者一个自定义函数来升序或降序排列。使用 ``sortBy`` 
+你可以根据Collection中的某项值来生成一个排序过的::
 
     $collection = new Collection($people);
     $sorted = $collection->sortBy('age');
