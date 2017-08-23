@@ -15,3 +15,5 @@ Deprecations
 
 The following is a list of deprecated methods, properties and behaviors. These
 features will continue to function until 4.0.0 after which they will be removed.
+
+* ``bin/cake orm_cache`` is now ``bin/cake schema_cache``.

@@ -943,12 +943,13 @@ If you use the plugin when deploying your application, be sure to clear the ORM
 cache so it renews the column metadata of your tables.
 Otherwise, you might end up having errors about columns not existing when
 performing operations on those new columns.
-The CakePHP Core includes a :doc:`ORM Cache Shell <console-and-shells/orm-cache>`
+The CakePHP Core includes a :doc:`Schema Cache Shell <console-and-shells/schema-cache>`
 that you can use to perform this operation::
 
-    $ bin/cake orm_cache clear
+    // Prior to 3.6 use orm_cache
+    $ bin/cake schema_cache clear
 
-Be sure to read the :doc:`ORM Cache Shell <console-and-shells/orm-cache>`
+Be sure to read the :doc:`Schema Cache Shell <console-and-shells/schema-cache>`
 section of the cookbook if you want to know more about this shell.
 
 Renaming a table
