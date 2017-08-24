@@ -580,65 +580,52 @@ Collection的值可以基于某一列或者一个自定义函数来升序或降�
     $collection = new Collection($people);
     $sorted = $collection->sortBy('age');
 
-As seen above, you can sort by passing the name of a column or property that
-is present in the collection values. You are also able to specify a property
-path instead using the dot notation. The next example will sort articles by
-their author's name::
+像上面那样，你可以传递一个拥有值的列名或者属性名来排序。你也能用点分割的方法来指定属性
+路径。下面一个例子将会根据作者的名字对作品进行排序::
 
     $collection = new Collection($articles);
     $sorted = $collection->sortBy('author.name');
 
-The ``sortBy()`` method is flexible enough to let you specify an extractor
-function that will let you dynamically select the value to use for comparing two
-different values in the collection::
+``sortBy()`` 方法可以让你柔软地定义一个提取功能动态地选择集合中两个值的比较值::
 
     $collection = new Collection($articles);
     $sorted = $collection->sortBy(function ($article) {
         return $article->author->name . '-' . $article->title;
     });
 
-In order to specify in which direction the collection should be sorted, you need
-to provide either ``SORT_ASC`` or ``SORT_DESC`` as the second parameter for
-sorting in ascending or descending direction respectively. By default,
-collections are sorted in descending direction::
+为了定义集合要如何排序，你可以提供 ``SORT_ASC`` 或者 ``SORT_DESC`` 当作第二个参数以确定
+要“升序”还是“降序”。默认情况下，集合会自动选择降序::
 
     $collection = new Collection($people);
     $sorted = $collection->sortBy('age', SORT_ASC);
 
-Sometimes you will need to specify which type of data you are trying to compare
-so that you get consistent results. For this purpose, you should supply a third
-argument in the ``sortBy()`` function with one of the following constants:
+有时你需要定义你用来比较的是哪一类数据。这种情况你需要在 ``sortBy()`` 方法中提供第三个
+参数，参数需要在以下定数中选择一个:
 
-- **SORT_NUMERIC**: For comparing numbers
-- **SORT_STRING**: For comparing string values
-- **SORT_NATURAL**: For sorting string containing numbers and you'd like those
-  numbers to be order in a natural way. For example: showing "10" after "2".
-- **SORT_LOCALE_STRING**: For comparing strings based on the current locale.
+- **SORT_NUMERIC**: 用于比较数值
+- **SORT_STRING**: 用于比较字符串的值
+- **SORT_NATURAL**: 对包含数字的字符串进行排序时，那些数字会以自然顺序排列。比方说"10"会显示在"2"的后面
+- **SORT_LOCALE_STRING**: 根据当前环境来比较字符串
 
-By default, ``SORT_NUMERIC`` is used::
+默认情况下, ``SORT_NUMERIC`` 将自动使用::
 
     $collection = new Collection($articles);
     $sorted = $collection->sortBy('title', SORT_ASC, SORT_NATURAL);
 
 .. warning::
 
-    It is often expensive to iterate sorted collections more than once. If you
-    plan to do so, consider converting the collection to an array or simply use
-    the ``compile()`` method on it.
+    一次以上用迭代来对Collection进行排序通常比较麻烦。如果你打算这么做，可以考虑将Collection
+    转换成数组或者对它简单使用 ``compile()`` 方法。 
 
 Working with Tree Data
 ======================
 
 .. php:method:: nest($idPath, $parentPath)
 
-Not all data is meant to be represented in a linear way. Collections make it
-easier to construct and flatten hierarchical or nested structures. Creating
-a nested structure where children are grouped by a parent identifier property is
-easy with the ``nest()`` method.
+并非所有数据都是用线形表示的。集合可以让复杂的嵌套构造变得更加平坦化和结构化。
+用 ``nest()`` 方法能够很容易创建一个根据父元素的标识符属性来把子元素分组的嵌套结构。
 
-Two parameters are required for this function. The first one is the property
-representing the item identifier. The second parameter is the name of the
-property representing the identifier for the parent item::
+此方法需要两个参数。第一个参数是用来辨别元素的属性，第二个参数是识别关系的标识符属性名::
 
     $collection = new Collection([
         ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
@@ -650,8 +637,8 @@ property representing the identifier for the parent item::
     ]);
 
     $collection->nest('id', 'parent_id')->toArray();
-    // Returns
-    [
+    // 结果
+    [
         [
             'id' => 1,
             'parent_id' => null,
@@ -672,25 +659,20 @@ property representing the identifier for the parent item::
         ]
     ];
 
-Children elements are nested inside the ``children`` property inside each of the
-items in the collection. This type of data representation is helpful for
-rendering menus or traversing elements up to certain level in the tree.
+子元素嵌套在集合中的每个元素的 ``children`` 属性里面。这样的数据表现方式对于展示某些品目
+或者将元素放置到树结构的确定的层级上时会比较有帮助。
 
 .. php:method:: listNested($dir = 'desc', $nestingKey = 'children')
 
-The inverse of ``nest()`` is ``listNested()``. This method allows you to flatten
-a tree structure back into a linear structure. It takes two parameters; the
-first one is the traversing mode (asc, desc or leaves), and the second one is
-the name of the property containing the children for each element in the
-collection.
+将 ``nest()`` 进行反转的是 ``listNested()`` 。该方法能够将一个树结构变成一个线形结构。它
+需要两个参数，第一参数决定运行模式（升序，降序，或者保持不变），第二个是指向集合中各元素的子元素的属性名。
 
-Taking the input the nested collection built in the previous example, we can
-flatten it::
+输入之前的例子中构建的嵌套结构，我们可以展开它::
 
     $nested->listNested()->toList();
 
-    // Returns
-    [
+    // 结果
+    [
         ['id' => 1, 'parent_id' => null, 'name' => 'Birds', 'children' => [...]],
         ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
         ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
@@ -699,20 +681,18 @@ flatten it::
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
     ]
 
-By default, the tree is traversed from the root to the leaves. You can also
-instruct it to only return the leaf elements in the tree::
+默认情况下，树结构的头部到末尾都会被转化。你可以指示它仅仅返回树结构最末端的元素::
 
     $nested->listNested()->toArray();
 
-    // Returns
-    [
+    // 结果
+  。  [
         ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
         ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
     ]
 
-Once you have converted a tree into a nested list, you can use the ``printer()``
-method to configure how the list output should be formatted::
+一旦你将一个树结构转换成列表结构，使用 ``printer()`` 方法能够设置列表的输出方式::
 
     $nested->listNested()->printer('name', 'id', '--')->toArray();
 
