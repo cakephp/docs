@@ -540,6 +540,14 @@ chemin vers la vue 'index' du controlleur Custom sera
 Créer ce fichier vous permettra de redéfinir
 **vendor/levendor/leplugin/src/Template/Custom/index.ctp**.
 
+Si le plugin implémente un préfixe de routing, vous devez inclure ce préfixe
+dans la surcharge de template de votre application.
+
+Si le plugin 'ContactManager' implémente un préfixe 'admin', le chemin de la
+redéfinition sera::
+    
+    src/Template/Plugin/ContactManager/Admin/ContactManager/index.ctp
+
 .. _plugin-assets:
 
 

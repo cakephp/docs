@@ -83,6 +83,8 @@ par des méthodes ``getX()`` et ``setX()`` :
 ``Cake\I18n\I18n``
     * ``locale()``
     * ``translator()``
+    * ``defaultLocale()`` 
+    * ``defaultFormatter()``
 ``Cake\ORM\Association\BelongsToMany``
     * ``sort()``
 ``Cake\ORM\LocatorAwareTrait``
@@ -268,6 +270,13 @@ Http
   Référez-vous à :ref:`csrf-middleware` pour plus d'informations.
 * ``Cake\Http\Client::addCookie()`` a été ajoutée pour faciliter l'ajoute de cookies
   à une instance d'un client.
+
+InstanceConfigTrait
+-------------------
+
+* ``InstanceConfigTrait::getConfig()`` accepte maintenant un second paramètre
+  ``$default``. Si aucune valeur n'est disponible pour la ``$key`` spécifiée, la
+  valeur de ``$default`` sera retournée.
 
 ORM
 ---
