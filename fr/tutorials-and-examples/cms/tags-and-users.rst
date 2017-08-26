@@ -39,7 +39,7 @@ Corriger ce point nous permet de parler un peu plus de la couche model de CakePH
 Dans CakePHP, nous séparons les méthodes qui s'occupent des collections d'objets
 et d'un seul objet en différentes classes. Les méthodes qui s'occupent de
 collections d'entity sont dans les classes ``Table`` tandis que les fonctionnalités
-liés à un seul enregistrement sont mises dans les classes ``Entity``.
+liées à un seul enregistrement sont mises dans les classes ``Entity``.
 
 Par exemple, hasher un mot de passe se fait par enregistrement, c'est pourquoi nous
 allons implémenter ce comportement dans l'objet Entity. Puisque nous voulons hasher
@@ -77,7 +77,7 @@ changez le mot de passe de l'utilisateur, vous devriez voir une version hashé d
 mot de passe à la place de la valeur par défaut sur l'action index ou view. CakePHP
 hash les mots de passe, par défaut, avec `bcrypt
 <http://codahale.com/how-to-safely-store-a-password/>`_. Vous pouvez aussi utiliser
-SHA-1 ou MD5 si vous travaillez sur uen base de données déjà existantes mais nous
+SHA-1 ou MD5 si vous travaillez sur une base de données déjà existante mais nous
 vous recommandons d'utiliser bcrypt pour toutes vos nouvelles applications.
 
 Ajouter un système de Tags aux Articles
@@ -96,7 +96,7 @@ nous allons utiliser ``bake`` pour générer rapidement un code de base :
 Une fois que le code de base est généré, créez quelques tags en vous rendant sur
 la page **http://localhost:8765/tags/add**.
 
-Maintenant que nous avons une table Tags, nous pouvons créer une associations entre
+Maintenant que nous avons une table Tags, nous pouvons créer une association entre
 la table Articles et la table Tags. Nous pouvons le faire en ajoutant le code suivant
 à la méthode ``initialize`` de ArticlesTable::
 
@@ -107,7 +107,7 @@ la table Articles et la table Tags. Nous pouvons le faire en ajoutant le code su
     }
 
 Cette association fonctionnera avec cette définition qui tient sur une seule ligne
-car nous avons suivi les convention de CakePHP lors de la création de nos tables.
+car nous avons suivi les conventions de CakePHP lors de la création de nos tables.
 Pour plus d'informations, rendez-vous dans la section :doc:`/orm/associations`.
 
 Mettre à jour la gestion des Articles pour permettre d'ajouter des Tags
@@ -162,7 +162,7 @@ mettant des tags car dans la section suivante, nous allons ajouter la possibilit
 de trouver des articles par leurs tags.
 
 Vous devriez également mettre à jour la méthode ``edit`` pour permettre l'ajout
-et la modification de tags sur les articles existant. La méthode edit devrait
+et la modification de tags sur les articles existant. La méthode ``edit`` devrait
 maintenant ressemble à ceci::
 
     public function edit($slug)
@@ -196,10 +196,10 @@ comme nous l'avons fait dans le template **add.ctp** au template
 Trouver des Articles via les Tags
 =================================
 
-Une fois que les utilisateurs ont catégorisé leur contenu, ils voudront probablement
+Une fois que les utilisateurs ont catégorisé leurs contenus, ils voudront probablement
 retrouver ces contenus en fonction des tags utilisés. Pour développer ces fonctionnalités,
 nous allons implémenter une nouvelle route, une nouvelle action de controller et une
-fonction de finder pour chercher ces articles par tag.
+fonction de finder pour chercher les articles par tags.
 
 Idéalement, nous voulons une URL qui ressemblera à
 **http://localhost:8765/articles/tagged/funny/cat/gifs**. Cela nous permettra
@@ -247,7 +247,7 @@ route, vous pouvez isoler le format de vos URLs de la manière dont elles sont i
 Si nous venions à visiter **http://localhost:8765/articles/tagged**, nous verrions
 une page d'erreur de CakePHP vous indiquant que l'action du controller n'existe
 pas. Créons de ce pas cette nouvelle méthode. Dans **src/Controller/ArticlesController.php**,
-ajouter ce qui suit::
+ajoutez ce qui suit::
 
     // Ajouter ce 'use' juste sous la déclaration du namespace pour importer
     // la classe Query
@@ -271,7 +271,7 @@ ajouter ce qui suit::
         ]);
     }
 
-Pour accéder aux autres parties des données de la requêtes, consultez la section
+Pour accéder aux autres parties des données de la requête, consultez la section
 :ref:`cake-request`.
 
 Puisque les arguments passés sont aussi fournis comme paramètres de la méthode
@@ -331,19 +331,19 @@ vous indiquant que la méthode ``findTagged()`` n'existe pas. Dans
 
 Nous venons d'implémenter :ref:`un custom finder <custom-find-methods>`. Ce concept
 très pratique de CakePHP vous permet de définir des requêtes réutilisables. Les
-méthodes finder récupère toujours en paramètres un objet :doc:`/orm/query-builder`
+méthodes finder récupèrent toujours en paramètres un objet :doc:`/orm/query-builder`
 et un tableau d'options. Les finders peuvent manipuler la requête et ajouter
 n'importe quels condition ou critère. Une fois la logique terminée, le finder doit
-retourner une instance de l'objet query modifié. Dans notre finder, nous utilisons
-les méthodes ``distinct()`` et ``leftJoin()`` qui nous permet de trouver les articles
-différents qui ont les tag correspondant.
+retourner une instance modifiée de l'objet query. Dans notre finder, nous utilisons
+les méthodes ``distinct()`` et ``leftJoin()`` qui nous permettent de trouver les articles
+différents qui ont les tags correspondant.
 
 Création de la view
 -------------------
 
 Si vous visitez à nouveau **/articles/tagged**, CakePHP vous affichera une nouvelle
 erreur qui vous fait savoir qu'il manque le fichier de view. Créez le fichier
-**src/Template/Articles/tags.ctp** et ajouter le contenu suivant::
+**src/Template/Articles/tags.ctp** et ajoutez le contenu suivant::
 
     <h1>
         Articles avec les tags
@@ -373,11 +373,11 @@ Le fichier **tags.ctp** que nous venons de créer suit les conventions CakePHP
 pour les templates de view. La convention est d'utiliser le nom de l'action du
 controller en minuscule et avec un underscore en séparateur.
 
-Vous avez peut-être remarquer que nous utilisons les variables ``$tags`` et
+Vous avez peut-être remarqué que nous utilisons les variables ``$tags`` et
 ``$articles`` dans notre template de view. Quand nous utilisons la méthode
 ``set()`` dans notre controller, nous définissons les variables qui doivent
 être envoyées à notre view. La classe View fera alors en sorte de passer les
-variables au scope du template comme variable "locale".
+variables au scope du template comme variables "locales".
 
 Vous devriez maintenant être capable de visiter la page **/articles/tagged/funny**
 et voir tous les articles avec le tag 'funny'.
@@ -387,15 +387,15 @@ Améliorer la Gestion des Tags
 
 Pour le moment, ajouter des tags est assez fastidieux puisque les rédacteurs auront
 besoin de créer les tags à utiliser avant de les assigner. Nous pouvons améliorer
-l'UI de notre gestion de tag en utilisant une liste de valeur séparées par des
+l'UI de notre gestion de tag en utilisant une liste de valeurs séparées par des
 virgules. Cela nous permettra d'améliorer l'expérience utilisateur et de découvrir
 d'autres fonctionnalités de l'ORM.
 
-Ajouter un Champ Précalculé
----------------------------
+Ajouter un Champ Pré-calculé
+----------------------------
 
 Puisque nous souhaitons une manière simple d'accéder aux tags formattés pour une
-entity, nous ajoutons un champ virtuel / précalculé pour l'entity. Dans
+entity, nous ajoutons un champ virtuel / pré-calculé pour l'entity. Dans
 **src/Model/Entity/Article.php** ajoutez la méthode suivante::
 
     // Ajouter ce 'use' juste sous la déclaration du namespace pour importer
@@ -426,7 +426,7 @@ Mettre à jour nos View
 Maintenant que notre entity est mise à jour, nous pouvons ajouter un nouvel
 élément de contrôle pour nos tags. Dans
 **src/Template/Articles/add.ctp** et **src/Template/Articles/edit.ctp**,
-remplacez l'élément de contrôle ``tags._ids`` existant avec la déclaration
+remplacez l'élément de contrôle existant ``tags._ids`` avec la déclaration
 suivante::
 
     echo $this->Form->control('tag_string', ['type' => 'text']);
@@ -436,9 +436,9 @@ Persister la Chaîne de Tags
 
 Maintenant que nous voyons les tags existant sous forme d'une chaîne, nous avons
 besoin de sauvegarder les tags sous ce format. Puisque que nous avons rendu ``tag_string``
-comme accessible, l'ORM copiera les données de la requête dans notre entity. Nous
+accessible, l'ORM copiera les données de la requête dans notre entity. Nous
 pouvons utiliser le hook ``beforeSave()`` pour parser la chaîne de tags et trouver /
-construire les entities correspondantes. Ajouter le code suivant à
+construire les entities correspondantes. Ajoutez le code suivant à
 **src/Model/Table/ArticlesTable.php**::
 
 
@@ -486,6 +486,6 @@ Bien que ce code soit plus compliqué que tout ce que nous avons fait jusqu'ici,
 il permet de mettre en avant les fonctions avancées de l'ORM : vous pouvez manipuler
 le résultat de la requête en utilisant les méthodes de la classe Collection
 (voir la section :doc:`/core-libraries/collections`) et pouvez également gérer
-les scénarios ou vous avez besoin de créer des entities à la volée.
+les scénarios où vous avez besoin de créer des entities à la volée.
 
 Dans le chapitre suivant, nous ajouter une couche d'authentification.
