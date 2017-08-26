@@ -25,6 +25,7 @@ et components existants.
     tutorials-and-examples/cms/installation
     tutorials-and-examples/cms/database
     tutorials-and-examples/cms/articles-controller
+    tutorials-and-examples/cms/tags-and-users
 
 .. meta::
     :title lang=fr: Tutoriels & Exemples
