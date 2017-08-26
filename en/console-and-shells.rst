@@ -72,7 +72,7 @@ Running the Console with no arguments produces this help message::
     - cache
     - completion
     - i18n
-    - orm_cache
+    - schema_cache
     - plugin
     - routes
     - server
@@ -1283,12 +1283,18 @@ More Topics
     console-and-shells/repl
     console-and-shells/cron-jobs
     console-and-shells/i18n-shell
+    console-and-shells/schema-cache
     console-and-shells/completion-shell
     console-and-shells/plugin-shell
     console-and-shells/routes-shell
     console-and-shells/upgrade-shell
     console-and-shells/server-shell
     console-and-shells/cache
+
+.. toctree::
+    :hidden:
+
+    console-and-shells/orm-cache
 
 .. meta::
     :title lang=en: Shells, Tasks & Console Tools
