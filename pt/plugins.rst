@@ -65,6 +65,8 @@ método::
 configurações para plugins. ``load()`` funciona de forma semelhante, mas apenas carrega o
 Plugins que você especifica explicitamente.
 
+.. note::
+
     ``Plugin::loadAll()`` não irá carregar os plugins vendor namespaced que não são
      Definido em **vendor/cakephp-plugins.php**.
 
@@ -175,7 +177,7 @@ Se você preferir ter seu nome vendor como nível superior e ter um espaço para
     Plugin::load('AcmeCorp/Users');
 
 Isso garantirá que os nomes das classes sejam resolvidos corretamente ao usar
-:term: `sintaxe do plugin`.
+:term:`sintaxe do plugin`.
 
 A maioria dos plugins indicará o procedimento adequado para configurá-los e configurar
 até o banco de dados em sua documentação. Alguns plugins exigirão mais configuração
@@ -195,7 +197,7 @@ poderia ficar assim ::
     public $helpers = ['ContactManager.ContactInfo'];
 
 .. note::
-	Esse nome de classe separado por pontos é denominado :term: `sintaxe de plugin '.
+	Esse nome de classe separado por pontos é denominado :term:`sintaxe de plugin '.
 
 Você poderia então acessar o ``ContactInfoHelper`` como
 qualquer outro helper em sua view, como ::
@@ -203,7 +205,7 @@ qualquer outro helper em sua view, como ::
     echo $this->ContactInfo->address($contact);
 
 Criando seus próprios complementos
-=========================
+==================================
 
 Apenas como um exemplo, vamos começar a criar o ContactManager
 plugin referenciado acima. Para começar, vamos configurar o nosso plugin
@@ -265,7 +267,7 @@ do seu aplicativo. Por exemplo - baking controllers:
 
 
 Consulte o capítulo
-:Doc: `/bake/usage` se você
+:doc:`/bake/usage` se você
 tiver problemas para usar a linha de comando. Certifique-se de voltar a gerar o seu
 autoloader uma vez que você criou seu plugin:
 
@@ -282,7 +284,7 @@ Os plugins podem fornecer arquivos de rotas contendo suas rotas. Cada plugin pod
 conter um arquivo **config/routes.php**. Este arquivo de rotas pode ser carregado quando o
 complemento é adicionado ou no arquivo de rotas do aplicativo. Para criar as
 rotas de plugins do ContactManager, coloque o seguinte
-**plugins/ContactManager/config/routes.php** ::
+**plugins/ContactManager/config/routes.php**::
 
     <?php
     use Cake\Routing\Route\DashedRoute;
@@ -543,7 +545,7 @@ Você pode colocar qualquer tipo de arquivo em qualquer no diretório webroot.
 Linking to Assets in Plugins
 ----------------------------
 
-Você pode usar o :term: `plugin syntax` ao vincular aos recursos do plugin usando o
+Você pode usar o :term:`plugin syntax` ao vincular aos recursos do plugin usando o
 :php:class:`~Cake\\View\\Helper\\HtmlHelper`'s script, image ou css methods ::
 
     // Gera a URL /contact_manager/css/styles.css
