@@ -1063,5 +1063,5 @@ map操作仅仅会作用到我们使用的30条元素。即使是很小的集合
     }
 
 .. meta::
-    :title lang=en: Collections
+    :title lang=zh: Collections
     :keywords lang=en: collections, cakephp, append, sort, compile, contains, countBy, each, every, extract, filter, first, firstMatch, groupBy, indexBy, jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some, random, sortBy, take, toArray, insert, sumOf, stopWhen, unfold, through
