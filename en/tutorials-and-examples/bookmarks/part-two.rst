@@ -92,9 +92,6 @@ the users that has a hashed password.
     ``loadComponent('Auth')`` line. Then go and edit the user,
     saving a new password for them.
 
-You should now be able to log in. If not, make sure you are using a user that
-has a hashed password.
-
 Adding Logout
 =============
 
