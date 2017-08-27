@@ -1,4 +1,4 @@
-（集合）Collections
+集合
 ######################
 
 .. php:namespace:: Cake\Collection
@@ -9,22 +9,22 @@
 对象。如果你使用过underscore.js，你就能对 ``Traversable`` 对象所具有的功能有大致的
 了解。
 
-Collection的实例是不可变的; 修改一个Collection将会产生一个新的Collection。这让使用
-Collection对象产生更少的副作用并且有更多的可预测性。
+集合的实例是不可变的; 修改一个集合将会产生一个新的集合。这让使用
+集合对象产生更少的副作用并且有更多的可预测性。
 
 简单例子
 =============
 
-Collections可以使用数组或者 ``Traversable`` 对象创建出来。每当你操作CakePHP中的
-ORM时，你也会和Collections发生作用。
-Collection的一个简单使用::
+集合可以使用数组或者 ``Traversable`` 对象创建出来。每当你操作CakePHP中的
+ORM时，你也会和集合发生作用。
+集合的一个简单使用::
 
     use Cake\Collection\Collection;
 
     $items = ['a' => 1, 'b' => 2, 'c' => 3];
     $collection = new Collection($items);
 
-    // 创建一个包含元素的新Collection
+    // 创建一个包含元素的新集合
     // 拥有比1大的值。
     $overOne = $collection->filter(function ($value, $key, $iterator) {
         return $value > 1;
@@ -45,7 +45,7 @@ Collection()``::
 任意地整合进应用中已有的 ``Traversable`` 对象。
 
 方法（Methods）列表
-===============
+====================
 
 .. csv-table::
     :class: docutils internal-toc
@@ -66,8 +66,8 @@ Collection()``::
 
 .. php:method:: each(callable $c)
 
-Collections 可以通过 ``each()`` 和 ``map()`` 方法来转换为一个新的Collections。 
-``each()`` 方法不会创建一个新的Collection，但是能让你修改Collection中的任意对象::
+集合可以通过 ``each()`` 和 ``map()`` 方法来转换为一个新的集合。 
+``each()`` 方法不会创建一个新的集合，但是能让你修改集合中的任意对象::
 
     $collection = new Collection($items);
     $collection = $collection->each(function ($value, $key) {
@@ -75,12 +75,12 @@ Collections 可以通过 ``each()`` 和 ``map()`` 方法来转换为一个新的
     });
 
 
-``each()`` 的返回值是一个Collection对象。Each会迅速迭代Collection同时将结果回调到
-Collection中的每个值上。
+``each()`` 的返回值是一个集合对象。Each会迅速迭代集合同时将结果回调到
+集合中的每个值上。
 
 .. php:method:: map(callable $c) 
-``map()``方法会基于一开始的Collection内的各对象产生回调影响后的输出结果，来创建一个
-新Collection::
+``map()``方法会基于一开始的集合内的各对象产生回调影响后的输出结果，来创建一个
+新集合::
 
     $items = ['a' => 1, 'b' => 2, 'c' => 3];
     $collection = new Collection($items);
@@ -96,7 +96,7 @@ Collection中的每个值上。
 
 .. php:method:: extract($matcher)
 
-``map()`` 的一个最常用的功能是从Collection中选取一个单独的项目。如果你打算建一个由
+``map()`` 的一个最常用的功能是从集合中选取一个单独的项目。如果你打算建一个由
 个别属性值的元素组成的列表，你可以使用 ``extract()`` 方法::
 
     $collection = new Collection($people);
@@ -105,8 +105,8 @@ Collection中的每个值上。
     // $result 内容是 ['mark', 'jose', 'barbara'];
     $result = $names->toArray();
 
-Collection中还存在着很多其它方法，你也可以使用点分割的表现方式来选取需要的项目。这个例子
-将会返回一个从文章列表里提取的作者名（author names）的Collection::
+集合中还存在着很多其它方法，你也可以使用点分割的表现方式来选取需要的项目。这个例子
+将会返回一个从文章列表里提取的作者名（author names）的集合::
 
     $collection = new Collection($articles);
     $names = $collection->extract('author.name');
@@ -114,7 +114,7 @@ Collection中还存在着很多其它方法，你也可以使用点分割的表�
     // $result 内容是 ['Maria', 'Stacy', 'Larry'];
     $result = $names->toArray();
 
-最后，如果你使用的属性不被认为是一个正确的路劲，你可以用一个回调方法返回它::
+最后，如果你使用的属性不被认为是一个正确的路径，你可以用一个回调方法返回它::
 
     $collection = new Collection($articles);
     $names = $collection->extract(function ($article) {
@@ -122,7 +122,7 @@ Collection中还存在着很多其它方法，你也可以使用点分割的表�
     });
 
 时常有这么一回事，你需要选取（extract）一个在复杂的数组或对象中，被嵌套在其它结构
-里面共同的键（这里指的是'number')。这种情况你可以用 ``{*}`` 来配对表路劲的键。当你从
+里面共同的键（这里指的是'number')。这种情况你可以用 ``{*}`` 来配对表路径的键。当你从
 HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行选取时，这种匹配方式会很实用::
 
     $data = [
@@ -156,7 +156,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 
 .. php:method:: combine($keyPath, $valuePath, $groupPath = null)
 
-Collections允许你在已有的Collection的基础上创建一个由键值对组成的新的Collection。
+集合允许你在已有的集合的基础上创建一个由键值对组成的新的集合。
 键和值的路径都可以使用点记法来表示::
 
     $items = [
@@ -177,8 +177,8 @@ Collections允许你在已有的Collection的基础上创建一个由键值对�
 
     $combined = (new Collection($items))->combine('id', 'name', 'parent');
 
-    // Result will look like this when converted to array
-    [
+    // 当转换成数组后结果将会如下
+    [
         'a' => [1 => 'foo', 3 => 'baz'],
         'b' => [2 => 'bar']
     ];
@@ -191,16 +191,16 @@ Collections允许你在已有的Collection的基础上创建一个由键值对�
         function ($entity) { return $entity->date->toDateString(); }
     );
 
-    // 当转换成数组时结果将会像以下
-    [
+    // 当转换成数组时结果将会如下
+    [
         'date string like 2015-05-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
         'date string like 2015-06-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
     ]
 
 .. php:method:: stopWhen(callable $c)
 
-你可以通过 ``stopWhen()`` 方法在任意点上停止迭代。在Collection中使用这个方法时，如果某
-一个元素传入可调用方法返回false，将会产生一个新的Collection并停止产生其它返回结果::
+你可以通过 ``stopWhen()`` 方法在任意点上停止迭代。在集合中使用这个方法时，如果某
+一个元素传入可调用方法返回false，将会产生一个新的集合并停止产生其它返回结果::
 
     $items = [10, 20, 50, 1, 2];
     $collection = new Collection($items);
@@ -215,7 +215,7 @@ Collections允许你在已有的Collection的基础上创建一个由键值对�
 
 .. php:method:: unfold(callable $c)
 
-有时Collection的内部项目包含有拥有更多内部项目的数组或迭代器。如果你希望让这些内部结构变得平行并且一次迭代就能遍历所有元素，你可以使用 ``unfold()`` 方法。它将会创建一个单一嵌套着每个元素的新Collection::
+有时集合的内部项目包含有拥有更多内部项目的数组或迭代器。如果你希望让这些内部结构变得平行并且一次迭代就能遍历所有元素，你可以使用 ``unfold()`` 方法。它将会创建一个单一嵌套着每个元素的新集合::
 
     $items = [[1, 2, 3], [4, 5]];
     $collection = new Collection($items);
@@ -224,7 +224,7 @@ Collections允许你在已有的Collection的基础上创建一个由键值对�
     // $result 内容是 [1, 2, 3, 4, 5];
     $result = $new->toList();
 
-当传递一个可调用函数到 ``unfold()`` 时，你可以控制原始的Collection中的项目的哪一个来
+当传递一个可调用函数到 ``unfold()`` 时，你可以控制原始的集合中的项目的哪一个来
 执行unfolded（展开）操作。这在返回分页服务的数据时很有帮助::
 
     $pages = [1, 2, 3, 4];
@@ -236,7 +236,7 @@ Collections允许你在已有的Collection的基础上创建一个由键值对�
 
     $allPagesItems = $items->toList();
 
-如果你使用的是PHP 5.5+版本，你在 ``unfold()`` 中使用关键词 ``yield`` 来返回Collection的
+如果你使用的是PHP 5.5+版本，你在 ``unfold()`` 中使用关键词 ``yield`` 来返回集合的
 每个项目中你需要数量的元素::
 
     $oddNumbers = [1, 3, 5, 7];
@@ -252,8 +252,8 @@ Collections允许你在已有的Collection的基础上创建一个由键值对�
 
 .. php:method:: chunk($chunkSize)
 
-当处理Collection中包含有非常多数量的项目时，把它们批量处理或许比一个个处理更好一点。你
-可以使用 ``chunk()`` 将一个Collection分割成多个固定容量的数组::
+当处理集合中包含有非常多数量的项目时，把它们批量处理或许比一个个处理更好一点。你
+可以使用 ``chunk()`` 将一个集合分割成多个固定容量的数组::
 
     $items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
     $collection = new Collection($items);
@@ -274,7 +274,7 @@ Collections允许你在已有的Collection的基础上创建一个由键值对�
 
 .. php:method:: chunkWithKeys($chunkSize)
 
-与 :php:meth:`chunk()`相似，``chunkWithKeys()`` 允许你将一个Collection保留着键分割
+与 :php:meth:`chunk()`相似，``chunkWithKeys()`` 允许你将一个集合保留着键分割
 成更小的几部分进行处理。这在分割关联数组时十分有用::
  
     $collection = new Collection([
@@ -298,8 +298,8 @@ Collections允许你在已有的Collection的基础上创建一个由键值对�
 
 .. php:method:: filter(callable $c)
 
-Collections能够基于回调方法简单地过滤并创建新的Collection。你能用 ``filter()`` 
-创建一个符合回调标准元素构成的Collection::
+集合能够基于回调方法简单地过滤并创建新的集合。你能用 ``filter()`` 
+创建一个符合回调标准元素构成的集合::
 
     $collection = new Collection($people);
     $ladies = $collection->filter(function ($person, $key) {
@@ -321,7 +321,7 @@ Collections能够基于回调方法简单地过滤并创建新的Collection。�
 
 .. php:method:: every(callable $c)
 
-你可以用过滤方法来进行真伪测试。要检测是否Collection中每个元素都符合测试条件的
+你可以用过滤方法来进行真伪测试。要检测是否集合中每个元素都符合测试条件的
 话你可以使用 ``every()``::
 
     $collection = new Collection($people);
@@ -331,7 +331,7 @@ Collections能够基于回调方法简单地过滤并创建新的Collection。�
 
 .. php:method:: some(callable $c)
 
-你可以用 `some()`` 方法来检测Collection中包含的元是否至少有一个符合过滤条件::
+你可以用 `some()`` 方法来检测集合中包含的元是否至少有一个符合过滤条件::
 
     $collection = new Collection($people);
     $hasYoungPeople = $collection->some(function ($person) {
@@ -340,7 +340,7 @@ Collections能够基于回调方法简单地过滤并创建新的Collection。�
 
 .. php:method:: match(array $conditions)
 
-你想要提取出一个只包含你指定属性的元素的新Collection的话，你可以使用
+你想要提取出一个只包含你指定属性的元素的新集合的话，你可以使用
 ``match()`` 方法::
 
     $collection = new Collection($comments);
@@ -365,7 +365,7 @@ Collections能够基于回调方法简单地过滤并创建新的Collection。�
 
 .. php:method:: reduce(callable $c)
 
-``map()`` 的对立操作是 ``reduce()`` 。该方法能够从Collection的所有元素中得到一
+``map()`` 的对立操作是 ``reduce()`` 。该方法能够从集合的所有元素中得到一
 个单一的结果::
 
     $totalPrice = $collection->reduce(function ($accumulated, $orderLine) {
@@ -455,12 +455,12 @@ Collections能够基于回调方法简单地过滤并创建新的Collection。�
 
 .. versionadded:: 3.5.0
 
-Grouping and Counting
----------------------
+分组和统计（Grouping and Counting）
+------------------------------------------
 
 .. php:method:: groupBy($callback)
 
-当Collection的某项属性的值一样时，可以用不同的键来将它们结合到一个新的collection中::
+当集合的某项属性的值一样时，可以用不同的键来将它们结合到一个新的collection中::
 
     $students = [
         ['name' => 'Mark', 'grade' => 9],
@@ -526,14 +526,14 @@ Grouping and Counting
 
 .. php:method:: zip($elements)
 
-使用 ``zip()`` 方法能够将不同Collection中的元素结合到一起。它将返回一个元素结合后的Collection,
-其中处于Collection中同一位置的元素将被结合到一起::
+使用 ``zip()`` 方法能够将不同集合中的元素结合到一起。它将返回一个元素结合后的集合,
+其中处于集合中同一位置的元素将被结合到一起::
 
     $odds = new Collection([1, 3, 5]);
     $pairs = new Collection([2, 4, 6]);
     $combined = $odds->zip($pairs)->toList(); // [[1, 2], [3, 4], [5, 6]]
 
-你也能够一次性打包复数个Collection::
+你也能够一次性打包复数个集合::
 
     $years = new Collection([2013, 2014, 2015, 2016]);
     $salaries = [1000, 1500, 2000, 2300];
@@ -570,12 +570,12 @@ Grouping and Counting
     ]
 
 排序（Sorting）
-=======
+==============
 
 .. php:method:: sortBy($callback)
 
-Collection的值可以基于某一列或者一个自定义函数来升序或降序排列。使用 ``sortBy`` 
-你可以根据Collection中的某项值来生成一个排序过的::
+集合的值可以基于某一列或者一个自定义函数来升序或降序排列。使用 ``sortBy`` 
+你可以根据集合中的某项值来生成一个排序过的::
 
     $collection = new Collection($people);
     $sorted = $collection->sortBy('age');
@@ -614,11 +614,11 @@ Collection的值可以基于某一列或者一个自定义函数来升序或降�
 
 .. warning::
 
-    一次以上用迭代来对Collection进行排序通常比较麻烦。如果你打算这么做，可以考虑将Collection
+    一次以上用迭代来对集合///////////////////////////////进行排序通常比较麻烦。如果你打算这么做，可以考虑将集合
     转换成数组或者对它简单使用 ``compile()`` 方法。 
 
-Working with Tree Data
-======================
+使用树结构（Tree Data）数据
+==============================
 
 .. php:method:: nest($idPath, $parentPath)
 
@@ -703,8 +703,7 @@ Working with Tree Data
         5 -> '--Clown Fish',
     ]
 
-The ``printer()`` method also lets you use a callback to generate the keys and
-or values::
+``printer()`` 方法也可以让你使用回调函数来生成键或者值::
 
     $nested->listNested()->printer(
         function ($el) {
@@ -715,38 +714,36 @@ or values::
         }
     );
 
-Other Methods
+其它方法
 =============
 
 .. php:method:: isEmpty()
 
-Allows you to see if a collection contains any elements::
+可以让你知道一个集合是否有包含元素::
 
     $collection = new Collection([]);
-    // Returns true
+    // 结果为 true
     $collection->isEmpty();
 
     $collection = new Collection([1]);
-    // Returns false
+    // 结果为 false
     $collection->isEmpty();
 
 .. php:method:: contains($value)
 
-Collections allow you to quickly check if they contain one particular
-value: by using the ``contains()`` method::
+使用 ``contains()`` 方法能让你快速检查集合是否包含某个特定的值::
 
     $items = ['a' => 1, 'b' => 2, 'c' => 3];
     $collection = new Collection($items);
     $hasThree = $collection->contains(3);
 
-Comparisons are performed using the ``===`` operator. If you wish to do looser
-comparison types you can use the ``some()`` method.
+其中的比较是通过 ``===`` 来执行的，如果你希望执行一个松散的比较，
+你可以使用 ``some()`` 方法。
 
 .. php:method:: shuffle()
 
-Sometimes you may wish to show a collection of values in a random order. In
-order to create a new collection that will return each value in a randomized
-position, use the ``shuffle``::
+有时你可能希望随机显示集合的值。要生成一个各个值被分配到随机位置的集合的话，可以使用 
+``shuffle``::
 
     $collection = new Collection(['a' => 1, 'b' => 2, 'c' => 3]);
 
@@ -755,8 +752,7 @@ position, use the ``shuffle``::
 
 .. php:method:: transpose()
 
-When you transpose a collection, you get a new collection containing a row made
-of the each of the original columns::
+当你翻转一个集合时，你能得到每一行都由原先在同一列上的元素组成的集合::
 
      $items = [
         ['Products', '2012', '2013', '2014'],
@@ -766,8 +762,8 @@ of the each of the original columns::
      ]
      $transpose = (new Collection($items))->transpose()->toList();
 
-     // Returns
-     [
+     // 返回
+     [
          ['Products', 'Product A', 'Product B', 'Product C'],
          ['2012', '200', '300', '400'],
          ['2013', '100', '200', '300'],
@@ -775,107 +771,93 @@ of the each of the original columns::
      ]
 
 .. versionadded:: 3.3.0
-    ``Collection::transpose()`` was added in 3.3.0.
+    ``Collection::transpose()`` 追加于 3.3.0.
 
-Withdrawing Elements
+抽取元素
 --------------------
 
 .. php:method:: sample(int $size)
 
-Shuffling a collection is often useful when doing quick statistical analysis.
-Another common operation when doing this sort of task is withdrawing a few
-random values out of a collection so that more tests can be performed on those.
-For example, if you wanted to select 5 random users to which you'd like to apply
-some A/B tests to, you can use the ``sample()`` function::
+当做一个快速的静态分析时，对一个集合的元素进行随机化的处理比较常见。另一个比较常见的处理是，
+从集合中抽取几个随机的值出来以进行更多的测试。比方说你想要随机抽取5名用户来进行A/B测试，你
+可以使用 ``sample()`` 方法::
 
     $collection = new Collection($people);
 
-    // Withdraw maximum 20 random users from this collection
-    $testSubjects = $collection->sample(20);
+    // 从集合中随机抽取最大20名用户
+    $testSubjects = $collection->sample(20);
 
-``sample()`` will take at most the number of values you specify in the first
-argument. If there are not enough elements in the collection to satisfy the
-sample, the full collection in a random order is returned.
+
+``sample()`` 会根据你定义的第一个参数来决定最大的抽取数。如果集合中没有足够数量的元
+素来满足样本要求，那么将返回元素被随机排列过后的整个元素本身。
 
 .. php:method:: take(int $size, int $from)
 
-Whenever you want to take a slice of a collection use the ``take()`` function,
-it will create a new collection with at most the number of values you specify in
-the first argument, starting from the position passed in the second argument::
+无论何时你想要集合中的某一部分的时候，可以使用 ``take()`` 方法，它会创建一个数量为你在
+第一个参数中定义的，同时位置由你传的第二个参数定义的新集合::
 
     $topFive = $collection->sortBy('age')->take(5);
 
-    // Take 5 people from the collection starting from position 4
+    // 从位置4开始在集合中抽取5个人
     $nextTopFive = $collection->sortBy('age')->take(5, 4);
 
-Positions are zero-based, therefore the first position number is ``0``.
+位置是从0开始的，所以第一个位置其实是``0``。
 
 .. php:method:: skip(int $positions)
 
-While the second argument of ``take()`` can help you skip some elements before
-getting them from the collection, you can also use ``skip()`` for the same
-purpose as a way to take the rest of the elements after a certain position::
+像 ``take()`` 的第二个参数能够让你从集合中取值时略过一些元素，你也可以用 ``skip()`` 
+来拿到某个位置之后余下的元素::
 
     $collection = new Collection([1, 2, 3, 4]);
     $allExceptFirstTwo = $collection->skip(2)->toList(); // [3, 4]
 
 .. php:method:: first()
 
-One of the most common uses of ``take()`` is getting the first element in the
-collection. A shortcut method for achieving the same goal is using the
-``first()`` method::
+一个 ``take()`` 的最常用的用法是取得集合的第一个元素。一个快捷方法 ``first()`` 也能
+让你得到相同的效果::
 
     $collection = new Collection([5, 4, 3, 2]);
     $collection->first(); // Returns 5
 
 .. php:method:: last()
 
-Similarly, you can get the last element of a collection using the ``last()``
-method::
+相似地，你也能用 `last()`` 方法来取得集合最后一个元素::
 
     $collection = new Collection([5, 4, 3, 2]);
     $collection->last(); // Returns 2
 
-Expanding Collections
+集合扩展
 ---------------------
 
 .. php:method:: append(array|Traversable $items)
 
-You can compose multiple collections into a single one. This enables you to
-gather data from various sources, concatenate it, and apply other collection
-functions to it very smoothly. The ``append()`` method will return a new
-collection containing the values from both sources::
+你也可以把复数个集合组合成一个。这让你能够从不同的资源中聚集数据，并把它们串联起来，
+然后更顺畅地使用其它的集合方法。 ``append()`` 方法将返回一个包含着两边资源值的新集合::
 
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->append($phpTweets);
 
-    // Tweets containing cakefest from both sources
-    $myTimeline->filter(function ($tweet) {
+    // 两边资源中包含cakefest的Tweets
+    $myTimeline->filter(function ($tweet) {
         return strpos($tweet, 'cakefest');
     });
 
 .. warning::
 
-    When appending from different sources, you can expect some keys from both
-    collections to be the same. For example, when appending two simple arrays.
-    This can present a problem when converting a collection to an array using
-    ``toArray()``. If you do not want values from one collection to override
-    others in the previous one based on their key, make sure that you call
-    ``toList()`` in order to drop the keys and preserve all values.
+    当从不同的资源处进行增加合并时，你可以预期到两个集中有一样的键的存在。举个例子，当
+    你合并两个简单的数组，这种情况将会在你用 ``toArray()`` 把集合转换为数组时出现问题。
+    如果你不想要一个集合中的值因为键相同而覆盖掉另一集合中的值，你需要确保使用 ``toList()`` 
+    来去掉它们的键而表示整个集合的值。
 
-Modifiying Elements
+元素的更新
 -------------------
 
 .. php:method:: insert(string $path, array|Traversable $items)
 
-At times, you may have two separate sets of data that you would like to insert
-the elements of one set into each of the elements of the other set. This is
-a very common case when you fetch data from a data source that does not support
-data-merging or joins natively.
+有时，你或许有两个不同数据的集合，你想要将其中一组的元素插入到另一组中间去。这是一个从
+没有支持数据结合以及合并的资源中取得数据的常见例子。
 
-Collections offer an ``insert()`` method that will allow you to insert each of
-the elements in one collection into a property inside each of the elements of
-another collection::
+集合提供一个 ``insert()`` 方法让你可以将集合中的各个元素注入到另一个集合中::
 
     $users = [
         ['username' => 'mark'],
@@ -891,7 +873,7 @@ another collection::
 
     $merged = (new Collection($users))->insert('skills', $languages);
 
-When converted to an array, the ``$merged`` collection will look like this::
+当转换成数组之后， ``$merged`` 集合将会时::
 
     [
         ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
@@ -899,16 +881,13 @@ When converted to an array, the ``$merged`` collection will look like this::
         ['username' => 'jose', 'skills' => ['Javascript', 'Prolog']]
     ];
 
-The first parameter for the ``insert()`` method is a dot-separated path of
-properties to follow so that the elements can be inserted at that position. The
-second argument is anything that can be converted to a collection object.
+``insert()`` 的第一个参数是一个点分割路径，用来指定元素将要插入的位置。第二个参数是
+任意的你想要转化成集合的对象。
 
-Please observe that elements are inserted by the position they are found, thus,
-the first element of the second collection is merged into the first
-element of the first collection.
+请注意要素是根据它们的位置顺序进行插入的，因此，第二个集合的第一个元素会合并到第一个集
+合的第一个元素中。
 
-If there are not enough elements in the second collection to insert into the
-first one, then the target property will be filled with ``null`` values::
+如果第二个集合中没有足够的元素插入到第一个集合中，那么对应的属性将会是 ``null``::
 
     $languages = [
         ['PHP', 'Python', 'Ruby'],
@@ -917,28 +896,23 @@ first one, then the target property will be filled with ``null`` values::
 
     $merged = (new Collection($users))->insert('skills', $languages);
 
-    // Will yield
-    [
+    // 结果
+    [
         ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
         ['username' => 'juan', 'skills' => ['Bash', 'PHP', 'Javascript']],
         ['username' => 'jose', 'skills' => null]
     ];
 
-The ``insert()`` method can operate array elements or objects implementing the
-``ArrayAccess`` interface.
+``insert()`` 方法可以操作包含 ``ArrayAccess`` 接口的数组元素或者对象。
 
-Making Collection Methods Reusable
+让集合的方法重复使用
 ----------------------------------
 
-Using closures for collection methods is great when the work to be done is small
-and focused, but it can get messy very quickly. This becomes more obvious when
-a lot of different methods need to be called or when the length of the closure
-methods is more than just a few lines.
+使用集合闭包方法在工作小或者明确的时候非常有效，但是它也容易很快陷入麻烦。这在需要使用
+大量不同方法时或者闭包方法不仅仅只有几行时比较明显。
 
-There are also cases when the logic used for the collection methods can be
-reused in multiple parts of your application. It is recommended that you
-consider extracting complex collection logic to separate classes. For example,
-imagine a lengthy closure like this one::
+有些情况你用于集合方法的逻辑可以在你应用的许多地方重复利用。这中种情况建议你将复杂的集合
+逻辑抽取出来定义成一个类。举个例子，想象一下下面一样的长的闭包方法::
 
         $collection
                 ->map(function ($row, $key) {
@@ -950,12 +924,12 @@ imagine a lengthy closure like this one::
                         $row['tax_amount'] = $row['total'] * 0.25;
                     }
 
-                    // More code here...
+                    // 后面有更多的代码...
 
                     return $modifiedRow;
                 });
 
-This can be refactored by creating another class::
+它可以通过创建另一个类来重构::
 
         class TotalOrderCalculator
         {
@@ -970,22 +944,20 @@ This can be refactored by creating another class::
                         $row['tax_amount'] = $row['total'] * 0.25;
                     }
 
-                    // More code here...
+                    // 后面有更多代码...
 
                     return $modifiedRow;
                 }
         }
 
-        // Use the logic in your map() call
-        $collection->map(new TotalOrderCalculator)
+        // 在你的map()函数使用这些逻辑
+        $collection->map(new TotalOrderCalculator)
 
 
 .. php:method:: through(callable $c)
 
-Sometimes a chain of collection method calls can become reusable in other parts
-of your application, but only if they are called in that specific order. In
-those cases you can use ``through()`` in combination with a class implementing
-``__invoke`` to distribute your handy data processing calls::
+有时一个集合连锁使用一些方法也能够被重复利用，不过它们必须按照特定的顺序。在这些情况中，你可以用 ``through()`` 
+来与一个包含了 ``__invoke`` 的类组合以构建方便的数据调取::
 
         $collection
                 ->map(new ShippingCostCalculator)
@@ -994,8 +966,7 @@ those cases you can use ``through()`` in combination with a class implementing
                 ->buffered()
                ...
 
-The above method calls can be extracted into a new class so they don't need to
-be repeated every time::
+以上的方法可以被提取进一个新的类中，这样就不需要每次都重复调用它们::
 
         class FinalCheckOutRowProcessor
         {
@@ -1012,24 +983,19 @@ be repeated every time::
         }
 
 
-        // Now you can use the through() method to call all methods at once
+        // 现在你能使用 through() 方法来一次性调用所有方法
         $collection->through(new FinalCheckOutRowProcessor);
 
-Optimizing Collections
+集合优化
 ----------------------
 
 .. php:method:: buffered()
 
-Collections often perform most operations that you create using its functions in
-a lazy way. This means that even though you can call a function, it does not
-mean it is executed right away. This is true for a great deal of functions in
-this class. Lazy evaluation allows you to save resources in situations
-where you don't use all the values in a collection. You might not use all the
-values when iteration stops early, or when an exception/failure case is reached
-early.
+集合一般在大多数情况下创建新集合时会延迟使用函数。这意味着即使你调用一个函数也不等于马上就
+会执行它。在这个类中的大多数函数都是这种情况。延迟评价在你不使用集合中的全部的值时能够节约
+资源。当迭代器早早停止的时候你或许并没有用到所有的值，或者一个例外/失败提前出现。
 
-Additionally, lazy evaluation helps speed up some operations. Consider the
-following example::
+另外，延迟评价帮助某些操作的速度提高。思考一下下面的例子::
 
     $collection = new Collection($oneMillionItems);
     $collection = $collection->map(function ($item) {
@@ -1037,16 +1003,11 @@ following example::
     });
     $itemsToShow = $collection->take(30);
 
-Had the collections not been lazy, we would have executed one million operations,
-even though we only wanted to show 30 elements out of it. Instead, our map
-operation was only applied to the 30 elements we used. We can also
-derive benefits from this lazy evaluation for smaller collections when we
-do more than one operation on them. For example: calling ``map()`` twice and
-then ``filter()``.
+如果集合没有延迟处理，即使我们只想要取出30个元素我们也将不得不处理百万条数据。相对地，
+map操作仅仅会作用到我们使用的30条元素。即使是很小的集合，当我使用复数回操作时也能够从
+延迟评价中得到好处。举个例子：调用 ``map()`` 两回然后调用 ``filter()`` 。
 
-Lazy evaluation comes with its downside too. You could be doing the same
-operations more than once if you optimize a collection prematurely. Consider
-this example::
+延迟评价也有它的缺点。如果你早期对集合进行优化，你会执行多次相同的操作。考虑一下下面的例子::
 
     $ages = $collection->extract('age');
 
@@ -1058,29 +1019,24 @@ this example::
         return $item > 30;
     });
 
-If we iterate both ``youngerThan30`` and ``olderThan30``, the collection would
-unfortunately execute the ``extract()`` operation twice. This is because
-collections are immutable and the lazy-extracting operation would be done for
-both filters.
+如果我们两次迭代 ``youngerThan30`` 和 ``olderThan30``，集合将需要执行 ``extract()`` 操作两次。
+这是因为集合时不变的，延迟的抽出操作将会为两个过滤器使用。
 
-Luckily we can overcome this issue with a single function. If you plan to reuse
-the values from certain operations more than once, you can compile the results
-into another collection using the ``buffered()`` function::
+幸运的是我们可以用一个简单的方法来克服这个问题。如果你打算从确定的操作中不止一次重复利用某些值，你
+能用 ``buffered()`` 方法将一个结果编入另一个集合中::
 
     $ages = $collection->extract('age')->buffered();
     $youngerThan30 = ...
     $olderThan30 = ...
 
-Now, when both collections are iterated, they will only call the
-extracting operation once.
+现在，当两个集合进行迭代时，它们只会调取抽出操作一次。
 
-Making Collections Rewindable
+让集合能够迭代回
 -----------------------------
 
-The ``buffered()`` method is also useful for converting non-rewindable iterators
-into collections that can be iterated more than once::
+``buffered()`` 方法在将non-rewindable的迭代器转化为集合时会比较实用，因为这样可以迭代一次以上::
 
-    // In PHP 5.5+
+    // 在 PHP 5.5+
     public function results()
     {
         ...
@@ -1090,15 +1046,13 @@ into collections that can be iterated more than once::
     }
     $rewindable = (new Collection(results()))->buffered();
 
-Cloning Collections
+复制集合
 -------------------
 
 .. php:method:: compile(bool $preserveKeys = true)
 
-Sometimes you need to get a clone of the elements from another
-collection. This is useful when you need to iterate the same set from different
-places at the same time. In order to clone a collection out of another use the
-``compile()`` method::
+有时候你需要从其它的集合中克隆出元素。这在你需要在不同地方同时迭代相同的一组元素时非常有帮助。
+``compile()`` 方法可以从另一个集合中克隆出一个::
 
     $ages = $collection->extract('age')->compile();
 
