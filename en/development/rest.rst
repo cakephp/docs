@@ -1,25 +1,24 @@
 REST
 ####
 
-Many newer application programmers are realizing the need to open their core
-functionality to a greater audience. Providing easy, unfettered access to your
-core API can help get your platform accepted, and allows for mashups and easy
-integration with other systems.
+Muitos programadores de aplicações mais recentes estão percebendo a necessidade de abrir seu núcleo
+de funcionalidade para uma maior audiência. Fornecer acesso fácil e irrestrito ao seu
+a API principal pode ajudar a aceitar sua plataforma, e permite o mashups e fácil
+integração com outros sistemas.
 
-While other solutions exist, REST is a great way to provide easy access to the
-logic you've created in your application. It's simple, usually XML-based (we're
-talking simple XML, nothing like a SOAP envelope), and depends on HTTP headers
-for direction. Exposing an API via REST in CakePHP is simple.
+Embora existam outras soluções, o REST é uma ótima maneira de facilitar o acesso
+a lógica que você criou em sua aplicação. É simples, geralmente baseado em XML (nós estamos
+falando XML simples, nada como um envelope SOAP) e depende de cabeçalhos HTTP
+para direção. Expor uma API via REST no CakePHP é simples.
 
-The Simple Setup
-================
 
-The fastest way to get up and running with REST is to add a few lines to setup
-:ref:`resource routes <resource-routes>` in your config/routes.php file.
+A Configuração é simples
+========================
 
-Once the router has been set up to map REST requests to certain controller
-actions, we can move on to creating the logic in our controller actions. A basic
-controller might look something like this::
+A maneira mais rápida de começar com o REST é adicionar algumas linhas para configurar :ref:`resource routes <resource-routes>` em seu config/routes.php.
+
+Uma vez que o roteador foi configurado para mapear solicitações REST para determinado controller
+as actions, podemos avançar para criar a lógica em nossas actions no controller. Um controller básico pode parecer algo assim::
 
     // src/Controller/RecipesController.php
     class RecipesController extends AppController
@@ -95,33 +94,31 @@ controller might look something like this::
         }
     }
 
-RESTful controllers often use parsed extensions to serve up different views
-based on different kinds of requests. Since we're dealing with REST requests,
-we'll be making XML views. You can make JSON views using CakePHP's
-built-in :doc:`/views/json-and-xml-views`. By using the built in
-:php:class:`XmlView` we can define a ``_serialize`` view variable. This special
-view variable is used to define which view variables ``XmlView`` should
-serialize into XML.
+Os controllers RESTful geralmente usam extensões analisadas para exibir diferentes visualizações
+com base em diferentes tipos de requisições. Como estamos lidando com pedidos REST, estaremos fazendo visualizações XML. 
+Você pode fazer visualizações JSON usando o CakePHP's para criar :doc:`/views/json-and-xml-views`. Ao usar o buld-in
+:php:class:`XmlView` podemos definir uma variável na view ``_serialize``. A variável de exibição é usada para definir 
+quais variáveis de exibição ``XmlView`` devem Serializar em XML ou JSON.
 
-If we wanted to modify the data before it is converted into XML we should not
-define the ``_serialize`` view variable, and instead use template files. We place
-the REST views for our RecipesController inside **src/Template/Recipes/xml**. We can also use
-the :php:class:`Xml` for quick-and-easy XML output in those views. Here's what
-our index view might look like::
+
+Se quisermos modificar os dados antes de serem convertidos em XML ou JSON, não devemos
+definir a variável de exibição ``_serialize`` e, em vez disso, use arquivos de template. Colocamos
+as saidas REST para nosso RecipesController dentro de **src/Template/Recipes/xml**. Nós também podemos usar
+The :php:class:`Xml` para saída XML rápida e fácil::
 
     // src/Template/Recipes/xml/index.ctp
-    // Do some formatting and manipulation on
+    // Faça alguma formatação e manipulação em
     // the $recipes array.
     $xml = Xml::fromArray(['response' => $recipes]);
     echo $xml->asXML();
 
-When serving up a specific content type using :php:meth:`Cake\\Routing\\Router::extensions()`,
-CakePHP automatically looks for a view helper that matches the type.
-Since we're using XML as the content type, there is no built-in helper,
-however if you were to create one it would automatically be loaded
-for our use in those views.
+Ao servir um tipo de conteúdo específico usando :php:meth:`Cake\\Routing\\Router::extensions()`,
+CakePHP procura automaticamente um auxiliar de visualização.
+Uma vez que estamos usando o XML como o tipo de conteúdo, não há um helper interno,
+no entanto, se você criasse um, ele seria automaticamente carregado
+Para o nosso uso nessas views.
 
-The rendered XML will end up looking something like this::
+O XML renderizado acabará por parecer algo assim::
 
     <recipes>
         <recipe>
@@ -141,33 +138,34 @@ The rendered XML will end up looking something like this::
         ...
     </recipes>
 
-Creating the logic for the edit action is a bit trickier, but not by much. Since
-you're providing an API that outputs XML, it's a natural choice to receive XML
-as input. Not to worry, the
-:php:class:`Cake\\Controller\\Component\\RequestHandler` and
-:php:class:`Cake\\Routing\\Router` classes make things much easier. If a POST or
-PUT request has an XML content-type, then the input is run through  CakePHP's
-:php:class:`Xml` class, and the array representation of the data is assigned to
-``$this->request->getData()``.  Because of this feature, handling XML and POST data in
-parallel is seamless: no changes are required to the controller or model code.
-Everything you need should end up in ``$this->request->getData()``.
+Criar uma lógica para editar uma action é um pouco mais complicado, mas não muito. Desde a
+que você está fornecendo uma API que emite XML, é uma escolha natural para receber XML
+Como entrada. Não se preocupe, o
+:php:class:`Cake\\Controller\\Component\\RequestHandler` e
+:php:class:`Cake\\Routing\\Router` tornam as coisas muito mais fáceis. Se um POST ou
+A solicitação PUT tem um tipo de conteúdo XML, então a entrada é executada através do CakePHP's
+:php:class:`Xml`, e a representação da array dos dados é atribuída a
+``$this->request->getData()``. Devido a essa característica, lidar com dados XML e POST em
+O paralelo é transparente: não são necessárias alterações ao código do controlador ou do modelo.
+Tudo o que você precisa deve terminar em ``$this->request->getData()``.
 
-Accepting Input in Other Formats
-================================
 
-Typically REST applications not only output content in alternate data formats,
-but also accept data in different formats. In CakePHP, the
-:php:class:`RequestHandlerComponent` helps facilitate this. By default,
-it will decode any incoming JSON/XML input data for POST/PUT requests
-and supply the array version of that data in ``$this->request->getData()``.
-You can also wire in additional deserializers for alternate formats if you
-need them, using :php:meth:`RequestHandler::addInputType()`.
+Aceitando entrada em outros formatos
+====================================
 
-RESTful Routing
-===============
+Normalmente, os aplicativos REST não apenas exibem conteúdo em formatos de dados alternativos,
+Mas também aceitam dados em diferentes formatos. No CakePHP, o
+:php:class:`RequestHandlerComponent` ajuda a facilitar isso. Por padrão,
+Ele decodificará qualquer entrada de dados de entrada JSON/XML para solicitações POST/PUT
+E forneça a versão da array desses dados em ``$this->request->getData()``.
+Você também pode usar desserializadores adicionais para formatos alternativos se você
+Precisa deles, usando :php:meth:`RequestHandler::addInputType()`.
 
-CakePHP's Router makes connecting RESTful resource routes easy. See the section
-on :ref:`resource-routes` for more information.
+
+Roteamento RESTful
+==================
+
+O roteador CakePHP facilita a conexão das rotas de recursos RESTful. Veja a seção :ref:`resource-routes`  para mais informações.
 
 .. meta::
     :title lang=en: REST
