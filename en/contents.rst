@@ -87,6 +87,12 @@ Contents
     core-libraries/global-constants-and-functions
     appendices
 
+.. toctree::
+    :maxdepth: 3
+    :caption: Phinx
+
+    phinx
+
 .. todolist::
 
 .. meta::
