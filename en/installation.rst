@@ -122,7 +122,8 @@ By default this is what your application **composer.json** looks like::
     }
 
 Each time you run ``php composer.phar update`` you will receive bugfix
-releases for this minor version.
+releases for this minor version. You can instead change this to ``^3.5`` to
+also receive the latest stable releases of the ``3.x`` branch.
 
 If you want to stay up to date with the latest unreleased changes in CakePHP,
 designate **dev-master** as the package version in your application's
