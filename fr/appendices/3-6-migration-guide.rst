@@ -1,7 +1,7 @@
 3.6 Migration Guide
 ###################
 
-CakePHP 3.6 est une mise à jour de CakePHP 3.4 dont la compatibilité API est
+CakePHP 3.6 est une mise à jour de CakePHP 3.5 dont la compatibilité API est
 complète. Cette page souligne les changements et améliorations faits dans 3.6.
 
 Pour mettre à jour vers 3.6.x, lancez la commande suivante :
