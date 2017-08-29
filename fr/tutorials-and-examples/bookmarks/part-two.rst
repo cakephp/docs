@@ -99,9 +99,6 @@ hashé.
     ``loadComponent('Auth')``. Puis allez modifier l'utilisateur, créez-
     lui un nouveau mot de passe.
 
-Vous devriez maintenant pouvoir vous connecter. Si ce n'est pas le cas,
-assurez-vous que vous utilisez un utilisateur qui a un mot de passe hashé.
-
 Ajouter la Déconnexion
 ======================
 

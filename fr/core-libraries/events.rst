@@ -267,8 +267,9 @@ et écouter seulement l'événement dont vous avez réellement besoin::
         ->on('Model.afterSave', function($event, $entity)
         {
             // Par exemple nous pouvons envoyer un email à l'admin
+            // Avant 3.4, utilisez les méthodes from()/to()/subject()
             $email = new Email('default');
-            $email->from('info@yoursite.com' => 'Your Site')
+            $email->setFrom(['info@yoursite.com' => 'Your Site'])
                 ->setTo('admin@yoursite.com')
                 ->setSubject('New Feedback - Your Site')
                 ->send('Body of message');

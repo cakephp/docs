@@ -410,7 +410,7 @@ a special ``X-CSRF-Token`` header. Using a header often makes it easier to
 integrate a CSRF token with JavaScript heavy applications, or XML/JSON based API
 endpoints.
 
-The CSRF Token can be obtained via the Cookie ``csrfToken``. 
+The CSRF Token can be obtained via the Cookie ``csrfToken``.
 
 .. _adding-http-stack:
 
