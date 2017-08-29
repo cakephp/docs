@@ -75,11 +75,9 @@ Inserting Data
 Using The Table Object
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Seed classes can also use the familiar `Table` object to insert data. You can
+Seed classes can also use the familiar ``Table`` object to insert data. You can
 retrieve an instance of the Table object by calling the ``table()`` method from
-within your seed class and then use the `insert()` method to insert data:
-
-.. code-block:: php
+within your seed class and then use the ``insert()`` method to insert data:
 
         <?php
 
@@ -156,7 +154,7 @@ Truncating Tables
 -----------------
 
 In addition to inserting data Phinx makes it trivial to empty your tables using the
-SQL `TRUNCATE` command:
+SQL ``TRUNCATE`` command:
 
 .. code-block:: php
 
@@ -190,21 +188,21 @@ SQL `TRUNCATE` command:
 
 .. note::
 
-    SQLite doesn't natively support the `TRUNCATE` command so behind the scenes
-    `DELETE FROM` is used. It is recommended to call the `VACUUM` command
+    SQLite doesn't natively support the ``TRUNCATE`` command so behind the scenes
+    ``DELETE FROM`` is used. It is recommended to call the ``VACUUM`` command
     after truncating a table. Phinx does not do this automatically.
 
 Executing Seed Classes
 ----------------------
 
-This is the easy part. To seed your database, simply use the `seed:run` command:
+This is the easy part. To seed your database, simply use the ``seed:run`` command:
 
 .. code-block:: bash
 
         $ php vendor/bin/phinx seed:run
 
 By default, Phinx will execute all available seed classes. If you would like to
-run a specific class, simply pass in the name of it using the `-s` parameter:
+run a specific class, simply pass in the name of it using the ``-s`` parameter:
 
 .. code-block:: bash
 
@@ -216,7 +214,7 @@ You can also run multiple seeders:
 
         $ php vendor/bin/phinx seed:run -s UserSeeder -s PermissionSeeder -s LogSeeder
 
-You can also use the `-v` parameter for more output verbosity:
+You can also use the ``-v`` parameter for more output verbosity:
 
 .. code-block:: bash
 
