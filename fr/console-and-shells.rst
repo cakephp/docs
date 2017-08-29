@@ -53,7 +53,7 @@ avec un exécutable dans le répertoire **bin**::
 
 Quand vous lancez la Console sans argument, cela affiche ce message d'aide::
 
-    Welcome to CakePHP v3.5.0 Console
+    Welcome to CakePHP v3.6.0 Console
     ---------------------------------------------------------------
     App : App
     Path: /Users/markstory/Sites/cakephp-app/src/
@@ -66,23 +66,31 @@ Quand vous lancez la Console sans argument, cela affiche ce message d'aide::
 
     Changing Paths:
 
-    Votre working path devrait être le même que celui de votre application. Pour
-    changer votre path, utilisez le paramètre '-app'.
-    Exemple: -app relative/path/to/myapp ou -app /absolute/path/to/myapp
+    Your working path should be the same as your application path. To change your path use the '-app' param.
+    Example: -app relative/path/to/myapp or -app /absolute/path/to/myapp
 
-    Shells disponibles:
+    Available Shells:
 
-    [Bake] bake
+    - version
+    - help
+    - cache
+    - completion
+    - i18n
+    - schema_cache
+    - plugin
+    - routes
+    - server
+    - bug
+    - console
+    - event
+    - orm
+    - bake
+    - bake.bake
+    - migrations
+    - migrations.migrations
 
-    [Migrations] migrations
-
-    [CORE] i18n, orm_cache, plugin, routes, server
-
-    [app] behavior_time, console, orm
-
-    Pour lancer une commande de app ou du cœur, tapez cake shell_name [args]
-    Pour lancer une commande d'un plugin, tapez cake Plugin.shell_name [args]
-    Pour avoir de l'aide sur une commande spécifique, tapez cake shell_name --help
+    To run a command, type `cake shell_name [args|options]`
+    To get help on a specific command, type `cake shell_name --help`
 
 La première information affichée est en rapport avec les chemins. Ceci est
 particulièrement pratique si vous exécutez la Console depuis différents
@@ -1331,12 +1339,18 @@ Plus de sujets
     console-and-shells/repl
     console-and-shells/cron-jobs
     console-and-shells/i18n-shell
+    console-and-shells/schema-cache
     console-and-shells/completion-shell
     console-and-shells/plugin-shell
     console-and-shells/routes-shell
     console-and-shells/upgrade-shell
     console-and-shells/server-shell
     console-and-shells/cache
+
+.. toctree::
+    :hidden:
+
+    console-and-shells/orm-cache
 
 .. meta::
     :title lang=fr: Shells, Tasks & Outils de Console
