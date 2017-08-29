@@ -1,22 +1,24 @@
-CMS Tutorial - Authentication
-#############################
+Tutoriel CMS - Authentification
+###############################
 
-Now that our CMS has users, we should enable them to login, and apply some basic
-access control to the article creation & editing experiences.
+Maintenant que nous avons des utilisateurs dans notre CMS, nous devons leur donner
+la possibilité de se connecter et appliquer une gestion basique de contrôle d'accès
+à la création et à la modification d'articles.
 
-Adding Login
-============
+Ajouter la Connexion
+====================
 
-In CakePHP, authentication is handled by :doc:`/controllers/components`.
-Components can be thought of as ways to create reusable chunks of controller
-code related to a specific feature or concept. Components can hook into the
-controller's event life-cycle and interact with your application that way. To
-get started, we'll add the :doc:`AuthComponent
-</controllers/components/authentication>` to our application. We'll want the
-create, update and delete methods to require authentication, so we'll add
-AuthComponent in our AppController::
+Dans CakePHP, l'authentification est généré via :doc:`/controllers/components`.
+Les Components peuvent être considérés comme un moyen de créer des morceaux de
+code réutilisables pour les controllers en leur donnant un concept ou une
+fonctionnalité spécifique. Les Components peuvent se greffer au cycle de vie des
+événements des controllers et intéragir avec l'application de cette manière.
+Pour commencer, nous allons ajouter :doc:`AuthComponent
+</controllers/components/authentication>` à notre application. Puisque nous
+voulons que les méthodes create, update et delete requierent l'authentification,
+nous allons ajouter AuthComponent dans notre AppController::
 
-    // In src/Controller/AppController.php
+    // Dans src/Controller/AppController.php
     namespace App\Controller;
 
     use Cake\Controller\Controller;
@@ -25,7 +27,7 @@ AuthComponent in our AppController::
     {
         public function initialize()
         {
-            // Existing code
+            // Code existant
 
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
@@ -41,24 +43,26 @@ AuthComponent in our AppController::
                     'controller' => 'Users',
                     'action' => 'login'
                 ],
-                 // If unauthorized, return them to page they were just on
+                 // Si pas authorisé, on les renvoit sur la page sur laquelle ils étaient
                 'unauthorizedRedirect' => $this->referer()
             ]);
 
-            // Allow the display action so our PagesController
-            // continues to work. Also enable the read only actions.
+            // Permet à l'action "display" de notre PagesController de continuer
+            // à fonctionner. Autorise également les actions "read-only".
             $this->Auth->allow(['display', 'view', 'index']);
         }
     }
 
-We've just told CakePHP that we want to load the ``Flash`` and ``Auth``
-components. In addition, we've customized the configuration of AuthComponent, as
-our users table uses ``email`` as the username. Now, if you go any protected
-URL, such as ``/articles/add``, you'll be redirected to **/users/login**, which
-will show an error page as we have not written that code yet. So let's create
-the login action::
+De cette manière, nous disons à CakePHP de charger les Components ``Flash`` et
+``Auth``. De plus, nous avons personnaliser la configuration de AuthComponent
+car notre tables d'utilisateurs (users), utilise le champ ``email`` comme
+identifiant. À partir de maintenant, si vous vous rendez sur n'importe laquelle
+des URLs protégées, comme ``/articles/add``, vous allez être redirigé sur
+**/users/login**, ce qui devrait vous afficher une page d'erreur puisque nous
+n'avons pas encore écrit le code qui gère cette page. Créons maintenant l'action
+login::
 
-    // In src/Controller/UsersController.php
+    // Dans src/Controller/UsersController.php
     public function login()
     {
         if ($this->request->is('post')) {
@@ -67,44 +71,44 @@ the login action::
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Flash->error('Your username or password is incorrect.');
+            $this->Flash->error('Votre identifiant ou votre mot de passe est incorrect.');
         }
     }
 
-And in **src/Template/Users/login.ctp** add the following::
+Et dans **src/Template/Users/login.ctp**, ajoutez::
 
     <h1>Login</h1>
     <?= $this->Form->create() ?>
     <?= $this->Form->control('email') ?>
     <?= $this->Form->control('password') ?>
-    <?= $this->Form->button('Login') ?>
+    <?= $this->Form->button('Connexion') ?>
     <?= $this->Form->end() ?>
 
 .. note::
 
-   The ``control()`` method is available since 3.4. For prior versions you can
-   use the ``input()`` method instead.
+   La méthode ``control()`` est disponible depuis 3.4. Pour les versions précédentes,
+   utilisez la méthode ``input()`` à la place.
 
-Now that we have a simple login form, we should be able to log in with one of
-the users that has a hashed password.
+Maintenant que nous avons un formulaire de connexion basique, nous devrions être
+capable de nous connecter avec un utilisateur qui a un mot de passe hashé.
 
 .. note::
 
-    If none of your users have hashed passwords, comment the
-    ``loadComponent('Auth')`` block and ``$this->Auth->allow()`` calls. Then go
-    and edit the user, saving a new password for them. After saving a new
-    password for the user, make sure to uncomment the lines we just temporarily
-    commented!
+    Si aucun de vos utilisateur a un mot de passe hashé, commentez le bloc
+    ``loadComponent('Auth')`` et les appels à ``$this->Auth->allow()``.
+    Puis allez éditer un utilisateur pour lui sauvegarder un nouveau mot de passe.
+    Après avoir sauvegardé le mot de passe pour l'utilisateur, décommentez les
+    lignes que vous venez tout juste de commenter.
 
-Try it out! Before logging in, visit ``/articles/add``. Since this action is not
-allowed, you will be redirected to the login page. After logging in
-successfully, CakePHP will automatically redirect you back to ``/articles/add``.
+Avant de vous connectez, visitez ``/articles/add``. Puisque l'action n'est pas
+autorisée, vous serez redirigé sur la page de connexion. Après vous être connecté
+CakePHP vous redirigera automatiquement sur ``/articles/add``.
 
-Adding Logout
-=============
+Ajout de la Déconnexion
+=======================
 
-Now that people can log in, you'll probably want to provide a way to log out as
-well. Again, in the ``UsersController``, add the following code::
+Maintenant que vos utilisateurs peuvent se connecter, il faut leur donner la possibilité
+de se connecter. Ajoutez le code suivant dans le ``UsersController``::
 
     public function initialize()
     {
@@ -114,62 +118,64 @@ well. Again, in the ``UsersController``, add the following code::
 
     public function logout()
     {
-        $this->Flash->success('You are now logged out.');
+        $this->Flash->success('Vous avez été déconnecté.');
         return $this->redirect($this->Auth->logout());
     }
 
-This code adds the ``logout`` action to the list of actions that do not require
-authentication and implements the logout method. Now you can visit
-``/users/logout`` to log out. You should then be sent to the login page.
+Ce code ajoute l'action ``logout`` à la liste des actions qui ne nécessitent pas
+d'être authentifié et implémente la logique de déconnexion. Vous pouvez vous rendre
+à l'adresse ``/users/logout`` pour vous déconnecter. Vous serez ensuite redirigé
+sur la page de connexion.
 
-Enabling Registrations
-======================
+Autoriser la Création de Compte
+===============================
 
-If you aren't logged in and you try to visit **/users/add** you will be
-redirected to the login page. We should fix that as we want to allow people to
-sign up for our application. In the ``UsersController`` add the following::
+Si vous n'êtes pas connecté et essayez de visiter **/users/add**, vous serez
+redirigé sur la page de connexion. Puisque nous voulons autoriser nos utilisateurs
+à créer un compte sur notre application, ajoutez ceci à votre ``UsersController``::
 
     public function initialize()
     {
         parent::initialize();
-        // Add the 'add' action to the allowed actions list.
+        // Ajoute l'action 'add' à la liste des actions autorisées.
         $this->Auth->allow(['logout', 'add']);
     }
 
-The above tells ``AuthComponent`` that the ``add()`` action of the
-``UsersController`` does *not* require authentication or authorization. You may
-want to take the time to clean up the **Users/add.ctp** and remove the
-misleading links, or continue on to the next section. We won't be building out
-user editing, viewing or listing in this tutorial, but that is an exercise you
-can complete on your own.
+Le code ci-dessus indique à ``AuthComponent`` que la méthode ``add()`` du
+``UsersController`` peut être visitée sans être authentifié ou avoir besoin
+d'autorisation. Pour avoir une page de création plus propre, nous vous invitons
+à retirer les liens et autre contenus qui n'ont plus de sens pour cette page de
+création de compte. De même, nous ne nous occuperons pas des autres actions
+spécifiques aux utilisateurs, mais c'est quelque chose que vous pouvez faire vous
+même comme exercice.
 
-Restricting Article Access
-==========================
+Restreindre l'Accès aux Articles
+================================
 
-Now that users can log in, we'll want to limit users to only edit articles that
-they created. We'll do this using an 'authorization' adapter. Since our
-requirements are pretty simple, we can write some simple code in our
-``ArticlesController``. But before we do that, we'll want to tell the
-``AuthComponent`` how our application is going to authorize actions. Update your
-``AppController`` adding the following::
+Maintenant que nos utilisateurs peuvent se connecter, nous souhaitons limiter
+l'édition seulement aux articles qu'ils ont rédigé. Nous allons implémenter cette
+fonctionnalité à l'aide d'un adapter 'authorization'. Puisque nos besoins sont
+assez limités, nous pouvons rediger cette logique dans le  ``ArticlesController``.
+Mais avant, nous devons indiquer à ``AuthComponent`` comment notre application
+va gérer l'accès à nos actions. Mettez à jour votre ``AppController`` avec ceci::
 
     public function isAuthorized($user)
     {
-        // By default deny access.
+        // Par défaut, on refuse l'accès.
         return false;
     }
 
-Next we'll tell ``AuthComponent`` that we want to use controller hook methods
-for authorization. Your ``AppController::initialize()`` method should now look
-like::
+Ensuite, nous allons indiquer à ``AuthComponent`` que nous voulons utiliser les
+méthodes de hooks des controllers pour gérer *l'authorization*. Votre méthode
+``AppController::initialize()`` devrait maintenant ressembler à ceci::
 
         public function initialize()
         {
-            // Existing code
+            // Code existant code
 
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
-                // Added this line
+                // La ligne suivante a été ajoutée
                 'authorize'=> 'Controller',
                 'authenticate' => [
                     'Form' => [
@@ -183,12 +189,12 @@ like::
                     'controller' => 'Users',
                     'action' => 'login'
                 ],
-                 // If unauthorized, return them to page they were just on
+                 // Si pas authorisé, on les renvoit sur la page sur laquelle ils étaient
                 'unauthorizedRedirect' => $this->referer()
             ]);
 
-            // Allow the display action so our pages controller
-            // continues to work. Also enable the read only actions.
+            // Permet à l'action "display" de notre PagesController de continuer
+            // à fonctionner. Autorise également les actions "read-only".
             $this->Auth->allow(['display', 'view', 'index']);
         }
 
