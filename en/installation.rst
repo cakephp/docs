@@ -121,7 +121,7 @@ By default this is what your application **composer.json** looks like::
         "cakephp/cakephp": "3.5.*"
     }
 
-Each time you run ``php composer.phar update`` you will receive bugfix
+Each time you run ``php composer.phar update`` you will receive patch
 releases for this minor version. You can instead change this to ``^3.5`` to
 also receive the latest stable minor releases of the ``3.x`` branch.
 
