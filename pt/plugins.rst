@@ -18,8 +18,7 @@ deve fazer assim o assim ::
 
     php composer.phar require cakephp/debug_kit
 
-Isso instalaria a versão mais recente do DebugKit e atualizaria seus arquivos **composer.json**,**composer.lock**, atualização
-**vendor/cakephp-plugins.php**e atualize seu autoloader.
+Isso instalaria a versão mais recente do DebugKit e atualizaria seus arquivos **composer.json**, **composer.lock**, atualização **vendor/cakephp-plugins.php** e atualize seu autoloader.
 
 Se o plugin que deseja instalar não estiver disponível em
 Packagist.org, você pode clonar ou copiar o código do plugin para seu diretório**plugins**. 
