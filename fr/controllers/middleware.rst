@@ -419,6 +419,8 @@ header spécial ``X-CSRF-Token``. Utiliser un header facilite généralement
 l'intégration du token CSRF dans les applications qui utilisent Javascript de
 manière intensive ou avec les applications API JSON / XML.
 
+Le token CSRF peut être récupéré via le Cookie ``csrfToken``.
+
 .. _adding-http-stack:
 
 Ajout de la nouvelle pile HTTP à une application existante
