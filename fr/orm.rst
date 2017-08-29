@@ -136,4 +136,4 @@ Pour en savoir plus sur les Models
     orm/associations
     orm/behaviors
     orm/schema-system
-    console-and-shells/orm-cache
+    console-and-shells/schema-cache

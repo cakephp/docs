@@ -49,7 +49,7 @@ the **bin** directory::
 
 Running the Console with no arguments produces this help message::
 
-    Welcome to CakePHP v3.5.0 Console
+    Welcome to CakePHP v3.6.0 Console
     ---------------------------------------------------------------
     App : App
     Path: /Users/markstory/Sites/cakephp-app/src/

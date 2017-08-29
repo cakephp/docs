@@ -153,8 +153,8 @@ Commands
 Sample output for commands autocompletion::
 
     $ bin/cake <tab>
-    bake        i18n        orm_cache   routes
-    console     migrations  plugin      server
+    bake        i18n        schema_cache   routes
+    console     migrations  plugin         server
 
 Subcommands
 -----------

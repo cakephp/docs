@@ -117,7 +117,7 @@ using::
 Deploying an update
 ===================
 
-After deployment of an update you might also want to run ``bin/cake orm_cache
+After deployment of an update you might also want to run ``bin/cake schema_cache
 clear``, part of the :doc:`/console-and-shells/schema-cache` shell.
 
 .. meta::
