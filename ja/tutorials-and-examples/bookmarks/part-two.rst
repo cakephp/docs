@@ -110,7 +110,7 @@ AppController に追加しましょう。 ::
 
     public function logout()
     {
-        $this->Flash->success('ログアウトします。');
+        $this->Flash->success('ログアウトしました。');
         return $this->redirect($this->Auth->logout());
     }
 
