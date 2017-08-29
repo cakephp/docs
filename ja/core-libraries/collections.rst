@@ -35,7 +35,7 @@
 
     $items = ['a' => 1, 'b' => 2, 'c' => 3];
 
-    // 両方ともコレクションノンスタンスを作成します。
+    // 両方ともコレクションのインスタンスを作成します。
     $collectionA = new Collection($items);
     $collectionB = collection($items);
 
