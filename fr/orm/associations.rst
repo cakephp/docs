@@ -438,12 +438,12 @@ Les clés possibles pour les tableaux d'association hasMany sont:
 - **strategy**: Définit la stratégie de requête à utiliser. Par défaut à
   'select'. L'autre valeur valide est 'subquery', qui remplace la liste ``IN``
   avec une sous-requête équivalente.
-- **saveStrategy**: Soit 'append' ou bien 'replace'. Quand 'append' est choisi,
-  les enregistrements existants sont ajoutés aux enregistrements de la base de
-  données. Quand 'replace' est choisi, les enregistrements associés qui ne sont
-  pas dans l'ensemble actuel seront retirés. Si la clé étrangère est une colonne
-  qui peut être null ou si ``dependent`` est à true, les enregistrements seront
-  orphelins.
+- **saveStrategy**: Soit 'append' ou bien 'replace'. Par défaut à 'append'.
+  Quand 'append' est choisi, les enregistrements existants sont ajoutés aux
+  enregistrements de la base de données. Quand 'replace' est choisi, les enregistrements
+  associés qui ne sont pas dans l'ensemble actuel seront retirés. Si la clé étrangère
+  est une colonne qui peut être null ou si ``dependent`` est à true, les
+  enregistrements seront orphelins.
 - **finder**: La méthode finder à utiliser lors du chargement des
   enregistrements associés.
 
@@ -607,7 +607,7 @@ sont:
 - **strategy**: Définit la stratégie de requête à utiliser. Par défaut à
   'select'. L'autre valeur valide est 'subquery', qui remplace la liste ``IN``
   avec une sous-requête équivalente.
-- **saveStrategy**: Soit 'append' ou bien 'replace'. Parr défaut à 'replace'.
+- **saveStrategy**: Soit 'append' ou bien 'replace'. Par défaut à 'replace'.
   Indique le mode à utiliser pour sauvegarder les entities associées. Le
   premier va seulement créer des nouveaux liens entre les deux côtés de la
   relation et le deuxième va effacer et remplacer pour créer les liens entre
