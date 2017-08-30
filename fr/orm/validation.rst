@@ -20,7 +20,7 @@ Durant la transformation des données en entities, vous pouvez valider les
 données. La validation des données vous permet de vérifier le type, la forme et
 la taille des données. Par défaut les données requêtées seront validées avant
 qu'elles ne soient converties en entities.
-Si aucune règle de validation n'échoue, l'entity retournée va contenir les
+Si une des règles de validation échoue, l'entity retournée contiendra des
 erreurs. Les champs avec des erreurs ne seront pas présents dans l'entity
 retournée::
 
