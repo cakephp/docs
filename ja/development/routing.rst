@@ -323,7 +323,7 @@ CakePHP ではプレフィックスルーティングをコア設定ファイル
 
     Configure::write('Routing.prefixes', array('admin'));
 
-コントローラーでは、すべてのn ``admin_`` プレフィックス付きのアクションが呼ばれることがあるでしょう。
+コントローラーでは、すべての ``admin_`` プレフィックス付きのアクションが呼ばれることがあるでしょう。
 このユーザーの例を使うと、 ``/admin/users/edit/5`` にアクセスしたとき、  ``UsersController``  の ``admin_edit``
 メソッドを5を第一引数として渡しながら呼びます。このとき ``app/View/Users/admin_edit.ctp`` にあるビューファイルを呼びます。
 /admin へのアクセスを page コントローラーの ``admin_index`` アクションに以下のルーティング設定を使ってマップします。::
