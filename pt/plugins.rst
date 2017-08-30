@@ -14,7 +14,7 @@ Instalando um Plugin com Composer
 
 Muitos plugins estão disponíveis no `Packagist <http://packagist.org>` _
 E podem ser instalado com ``Composer``. Para instalar o DebugKit, você
-deve fazer assim o assim ::
+deve fazer assim o assim::
 
     php composer.phar require cakephp/debug_kit
 
@@ -26,7 +26,7 @@ Supondo que você deseja instalar um plugin chamado 'ContactManager', você
 Deve ter uma pasta em**plugins**chamado 'ContactManager'. Neste diretório
 São o src do plugin, testes e outros diretórios.
 
-.. index :: vendor/cakephp-plugins.php
+.. index:: vendor/cakephp-plugins.php
 
 
 Plugin Map File
@@ -87,7 +87,7 @@ Composer, você normalmente não precisa fazer alterações em seu aplicativo pa
 faça com que o CakePHP reconheça as classes que vivem dentro dele.
 
 Em qualquer outro caso, você precisará modificar o arquivo do composer.json do seu aplicativo.
-Para conter as seguintes informações ::
+Para conter as seguintes informações::
 
     "psr-4": {
         (...)
@@ -96,7 +96,7 @@ Para conter as seguintes informações ::
     }
 
 Se você estiver usando o vendor namespaces para seus plugins, o espaço para nome para mapeamento de caminho
-deve se parecer com o seguinte ::
+deve se parecer com o seguinte::
 
     "psr-4": {
         (...)
@@ -104,12 +104,12 @@ deve se parecer com o seguinte ::
         "AcmeCorp\\Users\\Test\\": "./plugins/AcmeCorp/Users/tests"
     }
 
-Além disso, você precisará dizer ao Composer para atualizar o cache de autoloading ::
+Além disso, você precisará dizer ao Composer para atualizar o cache de autoloading::
 
     $ php composer.phar dumpautoload
 
 Se você não conseguir usar o Composer por qualquer outro motivo, você também pode usar um recurso alternativo
-Autoloading para o seu plugin ::
+Autoloading para o seu plugin::
 
     Plugin::load('ContactManager', ['autoload' => true]);
 
@@ -120,7 +120,7 @@ Configuração do Plugin
 
 Os métodos ``load()`` e ``loadAll()`` podem ajudar na configuração do plugin
 E roteamento. Talvez você queira carregar todos os plugins automaticamente enquanto especifica
-Rotas personalizadas e arquivos bootstrap para determinados plugins ::
+Rotas personalizadas e arquivos bootstrap para determinados plugins::
 
     // No config/bootstrap.php,
     // ou in Application::bootstrap()
@@ -132,7 +132,7 @@ Rotas personalizadas e arquivos bootstrap para determinados plugins ::
         'WebmasterTools' => ['bootstrap' => true, 'routes' => true],
     ]);
 
-Ou você pode carregar os plugins individualmente ::
+Ou você pode carregar os plugins individualmente::
 
     // Carregando apenas o blog e inclui rotas
     Plugin::load('Blog', ['routes' => true]);
@@ -148,7 +148,7 @@ Você pode especificar um conjunto de padrões para ``loadAll()`` que irá
 aplicar a cada plugin que não tenha uma configuração mais específica.
 
 O seguinte exemplo irá carregar o arquivo bootstrap de todos os plugins e
-além disso, as rotas do Blog Plugin ::
+além disso, as rotas do Blog Plugin::
 
     Plugin::loadAll([
         ['bootstrap' => true],
@@ -157,7 +157,7 @@ além disso, as rotas do Blog Plugin ::
 
 Tenha em atenção que todos os arquivos especificados deveriam existir na configuração
 o(s) plugin(s) ou PHP dará avisos para cada arquivo que não pode carregar. Você pode evitar
-potenciais avisos usando a opção ``ignoreMissing`` ::
+potenciais avisos usando a opção ``ignoreMissing``::
 
     Plugin::loadAll([
         ['ignoreMissing' => true, 'bootstrap' => true],
@@ -166,12 +166,12 @@ potenciais avisos usando a opção ``ignoreMissing`` ::
 
 Ao carregar os plugins, o nome do plugin usado deve corresponder ao namespace. Para
 por exemplo, se você tiver um plugin com o namespace de nível superior ``Users`` você carregaria
-Usando ::
+Usando::
 
     Plugin::load('User');
 
 Se você preferir ter seu nome vendor como nível superior e ter um espaço para nome como
-``AcmeCorp/Users``, então você carregaria o plugin como ::
+``AcmeCorp/Users``, então você carregaria o plugin como::
 
     Plugin::load('AcmeCorp/Users');
 
@@ -191,15 +191,15 @@ behaviors, e helpers, prefixando o nome do plugin antes
 Por exemplo, vamos supor que você queria usar o plugin do ContactManager
 ContactInfoHelper para produzir algumas informações de contato legítimas em
 uma das suas opiniões. No seu controller, o ``$helpers`` array
-poderia ficar assim ::
+poderia ficar assim::
 
     public $helpers = ['ContactManager.ContactInfo'];
 
 .. note::
-	Esse nome de classe separado por pontos é denominado :term:`sintaxe de plugin '.
+	Esse nome de classe separado por pontos é denominado :term:`sintaxe de plugin`.
 
 Você poderia então acessar o ``ContactInfoHelper`` como
-qualquer outro helper em sua view, como ::
+qualquer outro helper em sua view, como::
 
     echo $this->ContactInfo->address($contact);
 
@@ -208,7 +208,7 @@ Criando seus próprios complementos
 
 Apenas como um exemplo, vamos começar a criar o ContactManager
 plugin referenciado acima. Para começar, vamos configurar o nosso plugin
-estrutura de diretório básico. Deve ser assim ::
+estrutura de diretório básico. Deve ser assim::
 
     /src
     /plugins
@@ -307,7 +307,7 @@ no arquivo com rotas mais específicas mais tarde.
 
 Você também pode carregar rotas de plugins na lista de rotas do seu aplicativo. Fazendo isso
 fornece mais controle sobre como as rotas do plugin são carregadas e permite que você envolva
-as rotas de plugin em escopos ou prefixos adicionais ::
+as rotas de plugin em escopos ou prefixos adicionais::
 
     Router::scope('/', function ($routes) {
         // Connect other routes.
@@ -320,7 +320,7 @@ as rotas de plugin em escopos ou prefixos adicionais ::
 O código acima resultaria em URLs como ``/backend/contact_manager/contacts``.
 
 .. versionadded:: 3.5.0
-    ``RouteBuilder::loadPlugin()``was added in 3.5.0
+    ``RouteBuilder::loadPlugin()`` foi adicionado in 3.5.0
 
 Plugin Controllers
 ==================
@@ -366,7 +366,7 @@ Se você deseja acessar o que temos chegado até agora, visite
 porque ainda não temos um model de Contact definido.
 
 Se o seu aplicativo incluir o roteamento padrão do CakePHP, você será
-capaz de acessar seus controllers de plugins usando URLs como ::
+capaz de acessar seus controllers de plugins usando URLs como::
 
     // Acesse a rota de índice de um controller de plugin.
     /contact-manager/contacts
@@ -375,7 +375,7 @@ capaz de acessar seus controllers de plugins usando URLs como ::
     /contact-manager/contacts/view/1
 
 Se o seu aplicativo definir prefixos de roteamento, o roteamento padrão do CakePHP
-também conecte rotas que usam o seguinte padrão ::
+também conecte rotas que usam o seguinte padrão::
 
     /:prefix/:plugin/:controller
     /:prefix/:plugin/:controller/:action
@@ -394,7 +394,7 @@ Plugin Models
 
 Os models para o plugin são armazenados em **plugins/ContactManager/src/Model**.
 Nós já definimos um ContactsController para este plugin, então vamos
-criar a tabela e a entidade para esse controlador ::
+criar a tabela e a entidade para esse controlador::
 
     // plugins/ContactManager/src/Model/Entity/Contact.php:
     namespace ContactManager\Model\Entity;
@@ -432,7 +432,7 @@ name, separado com um ponto. Por exemplo::
     }
 
 Se você preferir que as chaves da array para a associação não tenham o prefixo plugin
-sobre eles, use a sintaxe alternativa ::
+sobre eles, use a sintaxe alternativa::
 
     // plugins/ContactManager/src/Model/Table/ContactsTable.php:
     namespace ContactManager\Model\Table;
@@ -456,7 +456,7 @@ Você pode usar `TableRegistry`` para carregar suas tabelas de plugins usando o 
 
     $contacts = TableRegistry::get('ContactManager.Contacts');
 
-Alternativamente, a partir de um contexto de controller, você pode usar ::
+Alternativamente, a partir de um contexto de controller, você pode usar::
 
     $this->loadModel('ContactsMangager.Contacts');
 
@@ -466,7 +466,7 @@ Plugin Views
 As views se comportam exatamente como ocorrem em aplicações normais. Basta colocá-los na
 pasta ``plugins/[PluginName]/src/Template/``. Para nós
 o plugin ContactManager, precisamos de uma view para o nosso ``ContactsController::index()``
-action, então incluamos isso também ::
+action, então incluamos isso também::
 
 
     // plugins/ContactManager/src/Template/Contacts/index.ctp:
@@ -476,7 +476,7 @@ action, então incluamos isso também ::
 
 Os plugins podem fornecer seus próprios layouts. Para adicionar layouts em plugins, coloque seus arquivos de template dentro
 ``plugins/[PluginName]/src/Template/Layout``. Para usar um layout de plug-in em seu controller
-você pode fazer o seguinte ::
+você pode fazer o seguinte::
 
     public $layout = 'ContactManager.admin';
 
@@ -494,7 +494,7 @@ Você pode substituir todas as view do plugin do seu aplicativo usando caminhos 
 você tem um plugin chamado 'ContactManager', você pode substituir os arquivos do template do
 plugin com lógica de visualização específica da aplicação criando arquivos usando o seguinte
 template **src/Template/Plugin/[Plugin]/[Controller]/[view].ctp**. Para o
-controller Contacts você pode fazer o seguinte arquivo ::
+controller Contacts você pode fazer o seguinte arquivo::
 
     src/Template/Plugin/ContactManager/Contacts/index.ctp
 
@@ -503,7 +503,7 @@ Criar este arquivo permitiria que você substituir
 
 
 Se o seu plugin estiver em uma dependência no composer (ou seja, 'TheVendor/ThePlugin'), o
-caminho para da view 'index' do controller personalizado será ::
+caminho para da view 'index' do controller personalizado será::
 
     src/Template/Plugin/TheVendor/ThePlugin/Custom/index.ctp
 
@@ -513,7 +513,7 @@ Criar este arquivo permitiria que você substituir
 Se o plugin implementar um prefixo de roteamento, você deve incluir o prefixo de roteamento em seu
 O template para substitui.
 
-Se o plugin 'Contact Manager' implementou um prefixo 'admin', o caminho principal seria ::
+Se o plugin 'Contact Manager' implementou um prefixo 'admin', o caminho principal seria::
     
     src/Template/Plugin/ContactManager/Admin/ContactManager/index.ctp
 
@@ -524,7 +524,7 @@ Plugin Assets
 =============
 
 Os recursos da web de um plugin (mas não arquivos PHP) podem ser atendidos através do plugin no
-diretório ``webroot``, assim como os assets da aplicação principal ::
+diretório ``webroot``, assim como os assets da aplicação principal::
 
     /plugins/ContactManager/webroot/
                                    css/
@@ -545,7 +545,7 @@ Linking to Assets in Plugins
 ----------------------------
 
 Você pode usar o :term:`plugin syntax` ao vincular aos recursos do plugin usando o
-:php:class:`~Cake\\View\\Helper\\HtmlHelper`'s script, image ou css methods ::
+:php:class:`~Cake\\View\\Helper\\HtmlHelper`'s script, image ou css methods::
 
     // Gera a URL /contact_manager/css/styles.css
     echo $this->Html->css('ContactManager.styles');
@@ -621,11 +621,10 @@ Depende de você decidir o que implementar no seu Plugins. Apenas não esqueça 
 que todos possam se beneficiar de seus componentes incríveis e reutilizáveis!
 
 
-Publish Your Plugin
+Publique seu plugin
 ===================
 
-Certifique-se de adicionar o seu plug-in para
-`Plugins.cakephp.org <https://plugins.cakephp.org>` _. Desta forma, outras pessoas podem
+Certifique-se de adicionar o seu plug-in para `Plugins.cakephp.org <https://plugins.cakephp.org>`_. Desta forma, outras pessoas podem
 Use-o como dependência do compositor.
 Você também pode propor seu plugin para o
 Lista de "awesome-cakephp" <https://github.com/FriendsOfCake/awesome-cakephp> `_.
@@ -638,10 +637,8 @@ Plugins de propriedade.
 
 A convenção é usar letras minúsculas e traços como separador.
 
-Então, se você criou um plugin "Logging" com sua conta do GitHub "FooBar", um bom
-O nome seria `foo-bar/cakephp-logging`.
-E o plugin "Localized" do CakePHP pode ser encontrado em ``cakephp/localized`
-respectivamente.
+Então, se você criou um plugin "Logging" com sua conta do GitHub "FooBar", um bom nome seria `foo-bar/cakephp-logging`.
+E o plugin "Localized" do CakePHP pode ser encontrado em ``cakephp/localized`` respectivamente.
 
 .. meta::
     :title lang=en: Plugins
