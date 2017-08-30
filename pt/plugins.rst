@@ -448,7 +448,7 @@ sobre eles, use a sintaxe alternativa::
         }
     }
 
-Você pode usar `TableRegistry`` para carregar suas tabelas de plugins usando o familiar :term:`plugin syntax`::
+Você pode usar ``TableRegistry`` para carregar suas tabelas de plugins usando o familiar :term:`plugin syntax`::
 
     use Cake\ORM\TableRegistry;
 
@@ -624,7 +624,7 @@ Publique seu plugin
 Certifique-se de adicionar o seu plug-in para `Plugins.cakephp.org <https://plugins.cakephp.org>`_. Desta forma, outras pessoas podem
 Use-o como dependência do compositor.
 Você também pode propor seu plugin para o
-Lista de "awesome-cakephp" <https://github.com/FriendsOfCake/awesome-cakephp> `_.
+Lista de `awesome-cakephp list <https://github.com/FriendsOfCake/awesome-cakephp>`_.
 
 Escolha um nome semanticamente significativo para o nome do pacote. Isso deve ser ideal
 prefixado com a dependência, neste caso "cakephp" como o framework.
