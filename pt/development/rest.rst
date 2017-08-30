@@ -15,11 +15,10 @@ para direção. Expor uma API via REST no CakePHP é simples.
 A Configuração é simples
 ========================
 
-A maneira mais rápida de começar com o REST é adicionar algumas linhas para configurar
-:ref:`resource routes <resource-routes>` em seu config/routes.php.
+A maneira mais rápida de começar com o REST é adicionar algumas linhas para configurar :ref:`resource routes <resource-routes>` em seu config/routes.php.
 
 Uma vez que o roteador foi configurado para mapear solicitações REST para determinado controller
-as actions, podemos avançar para criar a lógica em nossas actions no controller. Um controller básico pode parecer algo assim ::
+as actions, podemos avançar para criar a lógica em nossas actions no controller. Um controller básico pode parecer algo assim::
 
     // src/Controller/RecipesController.php
     class RecipesController extends AppController
@@ -119,7 +118,7 @@ Uma vez que estamos usando o XML como o tipo de conteúdo, não há um helper in
 no entanto, se você criasse um, ele seria automaticamente carregado
 Para o nosso uso nessas views.
 
-O XML renderizado acabará por parecer algo assim ::
+O XML renderizado acabará por parecer algo assim::
 
     <recipes>
         <recipe>
