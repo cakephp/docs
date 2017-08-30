@@ -8,14 +8,14 @@ la possibilité de se connecter et appliquer une gestion basique de contrôle d'
 Ajouter la Connexion
 ====================
 
-Dans CakePHP, l'authentification est généré via :doc:`/controllers/components`.
+Dans CakePHP, l'authentification est gérée via :doc:`/controllers/components`.
 Les Components peuvent être considérés comme un moyen de créer des morceaux de
 code réutilisables pour les controllers en leur donnant un concept ou une
-fonctionnalité spécifique. Les Components peuvent se greffer au cycle de vie des
-événements des controllers et intéragir avec l'application de cette manière.
-Pour commencer, nous allons ajouter :doc:`AuthComponent
+fonctionnalité spécifique. Les Components peuvent se greffer aux événements
+du cycle de vie des événements des controllers et intéragir avec l'application
+de cette manière. Pour commencer, nous allons ajouter :doc:`AuthComponent
 </controllers/components/authentication>` à notre application. Puisque nous
-voulons que les méthodes create, update et delete requierent l'authentification,
+voulons que les méthodes create, update et delete requièrent l'authentification,
 nous allons ajouter AuthComponent dans notre AppController::
 
     // Dans src/Controller/AppController.php
@@ -43,7 +43,7 @@ nous allons ajouter AuthComponent dans notre AppController::
                     'controller' => 'Users',
                     'action' => 'login'
                 ],
-                 // Si pas authorisé, on les renvoit sur la page sur laquelle ils étaient
+                 // Si pas autorisé, on renvoit sur la page précédente
                 'unauthorizedRedirect' => $this->referer()
             ]);
 
@@ -94,7 +94,7 @@ capable de nous connecter avec un utilisateur qui a un mot de passe hashé.
 
 .. note::
 
-    Si aucun de vos utilisateur a un mot de passe hashé, commentez le bloc
+    Si aucun de vos utilisateurs a un mot de passe hashé, commentez le bloc
     ``loadComponent('Auth')`` et les appels à ``$this->Auth->allow()``.
     Puis allez éditer un utilisateur pour lui sauvegarder un nouveau mot de passe.
     Après avoir sauvegardé le mot de passe pour l'utilisateur, décommentez les
@@ -108,7 +108,7 @@ Ajout de la Déconnexion
 =======================
 
 Maintenant que vos utilisateurs peuvent se connecter, il faut leur donner la possibilité
-de se connecter. Ajoutez le code suivant dans le ``UsersController``::
+de se déconnecter. Ajoutez le code suivant dans le ``UsersController``::
 
     public function initialize()
     {
@@ -144,7 +144,7 @@ redirigé sur la page de connexion. Puisque nous voulons autoriser nos utilisate
 Le code ci-dessus indique à ``AuthComponent`` que la méthode ``add()`` du
 ``UsersController`` peut être visitée sans être authentifié ou avoir besoin
 d'autorisation. Pour avoir une page de création plus propre, nous vous invitons
-à retirer les liens et autre contenus qui n'ont plus de sens pour cette page de
+à retirer les liens et autres contenus qui n'ont plus de sens pour cette page de
 création de compte. De même, nous ne nous occuperons pas des autres actions
 spécifiques aux utilisateurs, mais c'est quelque chose que vous pouvez faire vous
 même comme exercice.
@@ -189,7 +189,7 @@ méthodes de hooks des controllers pour gérer *l'authorization*. Votre méthode
                     'controller' => 'Users',
                     'action' => 'login'
                 ],
-                 // Si pas authorisé, on les renvoit sur la page sur laquelle ils étaient
+                 // Si pas autorisé, on renvoit sur la page précédente
                 'unauthorizedRedirect' => $this->referer()
             ]);
 
@@ -308,8 +308,9 @@ Conclusion
 
 Nous avons créer une application CMS simple qui permet à nos utilisateurs de se
 connecter, de poster des articles, leur ajouter des tags, récupérer les articles
-par leur tag et ajouter une couche de contrôle d'accès à nos articles. Nous avons
-également ajouté des améliorations UX en tirant avantage du FormHelper et de l'ORM.
+par leurs tags et nous avons fini par ajouter une couche de contrôle d'accès à nos
+articles. Nous avons également ajouté des améliorations UX en tirant avantage du
+FormHelper et de l'ORM.
 
 Merci d'avoir pris le temps d'explorer CakePHP. Pour les prochaines étapes de votre
 apprentissage, nous vous conseillons la documentations de :doc:`l'ORM </orm>` ou bien
