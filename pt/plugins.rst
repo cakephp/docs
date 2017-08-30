@@ -21,9 +21,9 @@ deve fazer assim o assim::
 Isso instalaria a versão mais recente do DebugKit e atualizaria seus arquivos **composer.json**, **composer.lock**, atualização **vendor/cakephp-plugins.php** e atualize seu autoloader.
 
 Se o plugin que deseja instalar não estiver disponível em
-Packagist.org, você pode clonar ou copiar o código do plugin para seu diretório**plugins**. 
+Packagist.org, você pode clonar ou copiar o código do plugin para seu diretório **plugins**. 
 Supondo que você deseja instalar um plugin chamado 'ContactManager', você
-Deve ter uma pasta em**plugins**chamado 'ContactManager'. Neste diretório
+Deve ter uma pasta em **plugins** chamado 'ContactManager'. Neste diretório
 São o src do plugin, testes e outros diretórios.
 
 .. index:: vendor/cakephp-plugins.php
@@ -141,7 +141,7 @@ Ou você pode carregar os plugins individualmente::
     Plugin::load('ContactManager', ['bootstrap' => true]);
 
 Com qualquer uma das abordagens, você não precisa mais manualmente ``include()`` ou
-``Require()`` configuração de um plugin ou arquivo de rotas - acontece
+``require()`` configuração de um plugin ou arquivo de rotas - acontece
 Automaticamente no momento e no lugar certos.
 
 Você pode especificar um conjunto de padrões para ``loadAll()`` que irá
@@ -300,7 +300,7 @@ rotas de plugins do ContactManager, coloque o seguinte
 
 
 O código acima irá conectar as rotas padrão para o seu plugin. Você pode personalizar isso
-no arquivo com rotas mais específicas mais tarde.
+no arquivo com rotas mais específicas mais tarde::
 
     Plugin::load('ContactManager', ['routes' => true]);
 
