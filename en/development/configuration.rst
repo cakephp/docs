@@ -51,7 +51,8 @@ datasource
 persistent
     Whether or not to use a persistent connection to the database. When using
     SQLServer you should not enable persistent connections as it causes
-    difficult to diagnose crashes.
+    difficult to diagnose crashes in older versions of CakePHP or, as of version
+    2.10.2, an exception will be thrown.
 host
     The database server's hostname (or IP address).
 login
