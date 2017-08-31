@@ -298,13 +298,11 @@ and refer to it using the plugin notation::
 Connecting to SQL Server
 ========================
 
-The Sqlserver datasource depends on Microsoft's PHP extension called pdo_sqlsrv.
+The Sqlserver datasource depends on 
+`Microsoft's PHP extension called pdo_sqlsrv <https://github.com/Microsoft/msphpsql>`_.
 This PHP Extension is not included in the base installation of PHP and must be
-installed separately.
-
-Also the SQL Server Native Client must be installed for the extension to work.
-As the Native Client is available only for Windows you will not be able to
-install it on Linux, Mac OS X or FreeBSD.
+installed separately.  The SQL Server Native Client must also be installed for
+the extension to work.
 
 So if the Sqlserver Datasource errors out with::
 
