@@ -190,9 +190,9 @@ driver
     a fully namespaced name, or a constructed driver instance.
     Examples of short classnames are Mysql, Sqlite, Postgres, and Sqlserver.
 persistent
-    Whether or not to use a persistent connection to the database.  This option is not supported by
-    SqlServer.  As of CakePHP version 3.4.13 an exception is thrown if you attempt to set persitent to true
-    with SqlServer.
+    Whether or not to use a persistent connection to the database. This option
+    is not supported by SqlServer. As of CakePHP version 3.4.13 an exception is
+    thrown if you attempt to set ``persistent`` to ``true`` with SqlServer.
 host
     The database server's hostname (or IP address).
 username
