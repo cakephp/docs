@@ -55,7 +55,9 @@ datasource
 persistent
     Indique si l'on doit ou non utiliser une connexion persistante à la base.
     Si vous utilisez SQLServer, vous ne devriez pas activer les connections
-    persistantes car cela entraîne des problèmes pour diagnostiquer des crashes.
+    persistantes car cela entraîne des problèmes pour diagnostiquer des crashes
+    dans les versions antérieures de CakePHP. A partir de la version 2.10.2, une
+    exception sera lancée pour SQLServer si vous essayez de l'activer.
 host
     Le nom du serveur de base de données (ou son adresse IP).
 login

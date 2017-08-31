@@ -305,13 +305,11 @@ y référence en utilisant la syntaxe pour les plugins::
 Se connecter à un serveur SQL
 =============================
 
-La source de données Sqlserver dépend de l'extension PHP de Microsoft appelée
-pdo_sqlsrv. Cette extension PHP n'est pas inclue dans l'installation de base
-de PHP et doit être installée séparément.
-
-Le Client Native du Serveur SQL doit aussi être installé pour que l'extension
-fonctionne. Puisque le Client Native est disponible seulement pour Windows,
-vous ne serez pas capable de l'installer sur Linux, Mac OS X ou FreeBSD.
+La source de données Sqlserver dépend de
+`l'extension PHP de Microsoft appelée pdo_sqlsrv <https://github.com/Microsoft/msphpsql>`_.
+Cette extension PHP n'est pas inclue dans l'installation de base
+de PHP et doit être installée séparément. Le SQL Server Native Client doit également
+être installé pour que l'extension fonctionne.
 
 Donc si les erreurs de la source de données Sqlserver sortent::
 

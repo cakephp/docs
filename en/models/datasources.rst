@@ -301,7 +301,7 @@ Connecting to SQL Server
 The Sqlserver datasource depends on 
 `Microsoft's PHP extension called pdo_sqlsrv <https://github.com/Microsoft/msphpsql>`_.
 This PHP Extension is not included in the base installation of PHP and must be
-installed separately.  The SQL Server Native Client must also be installed for
+installed separately. The SQL Server Native Client must also be installed for
 the extension to work.
 
 So if the Sqlserver Datasource errors out with::
