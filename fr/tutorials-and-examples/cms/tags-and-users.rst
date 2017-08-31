@@ -488,4 +488,4 @@ le résultat de la requête en utilisant les méthodes de la classe Collection
 (voir la section :doc:`/core-libraries/collections`) et pouvez également gérer
 les scénarios où vous avez besoin de créer des entities à la volée.
 
-Dans le chapitre suivant, nous ajouter une couche d'authentification.
+Dans le chapitre suivant, nous ajouter une couche :doc:`d'authentification <authentication>`.
