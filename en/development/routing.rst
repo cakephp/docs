@@ -61,7 +61,7 @@ you wish, you can restrict some parameters to conform to a regular expression::
         '/articles/:id',
         ['controller' => 'Articles', 'action' => 'view'],
         ['id' => '\d+', 'pass' => ['id']]
-    )
+    );
 
 The previous example changed the star matcher by a new placeholder ``:id``.
 Using placeholders allows us to validate parts of the URL, in this case we used
