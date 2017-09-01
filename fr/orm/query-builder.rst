@@ -719,7 +719,7 @@ SQL résultant serait::
 
 .. deprecated:: 3.5.0
     Depuis la version 3.5.0, la méthode ``orWhere()`` est dépréciée. Cette méthode
-    crée des requêtes SQL difficiles à prédire en fonction de l'état actuelle de la
+    crée des requêtes SQL difficiles à prédire en fonction de l'état actuel de la
     requête. Utilisez plutôt ``where()`` car son comportement est plus prévisible
     et plus facile à comprendre.
 

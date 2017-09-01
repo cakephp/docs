@@ -308,7 +308,8 @@ quelques exemples de règles de domaine:
 * Etats de transition ou étapes de flux de travail, par exemple pour mettre à
   jour un statut de facture.
 * Eviter la modification ou la suppression soft d'articles.
-* Appliquer des limites d'usage, que ce soit en nombre ou en vitesse.
+* Appliquer des limites d'usage, que ce soit en nombre d'appels total ou en nombre
+  d'appels sur une période donnée.
 
 Les règles de domaine sont vérifiées lors de l'appel aux méthodes ``save()`` et
 ``delete()`` de la Table.
