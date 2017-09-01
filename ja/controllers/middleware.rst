@@ -41,6 +41,8 @@ CakePHP はWebアプリケーションで一般的なタスクを取り扱うた
   リクエストにルーティングパラメーターを割り当てるために ``Router`` を使用します。
 * ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` はブラウザーによって送られる
   ``Accept-Language`` ヘッダーによって自動で言語を切り替えられるようにします。
+* ``Cake\Http\Middleware\SecurityHeadersMiddleware`` makes it easy to add
+  security related headers like ``X-Frame-Options`` to responses.
 * ``Cake\Http\Middleware\EncryptedCookieMiddleware`` gives you the ability to
   manipulate encrypted cookies in case you need to manipulate cookie with
   obfuscated data.
