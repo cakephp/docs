@@ -135,6 +135,7 @@ sluggable behavior を作成してみます。
 
     namespace App\Model\Behavior;
 
+    use ArrayObject;
     use Cake\Datasource\EntityInterface;
     use Cake\Event\Event;
     use Cake\ORM\Behavior;
@@ -157,7 +158,7 @@ sluggable behavior を作成してみます。
             $entity->set($config['slug'], Text::slug($value, $config['replacement']));
         }
 
-        public function beforeSave(Event $event, EntityInterface $entity)
+        public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
         {
             $this->slug($entity);
         }
@@ -172,7 +173,7 @@ sluggable behavior を作成してみます。
 
 保存が続行しないようにするには、コールバック内のイベント伝播を停止するだけです。 ::
 
-    public function beforeSave(Event $event, EntityInterface $entity)
+    public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
     {
         if (...) {
             $event->stopPropagation();

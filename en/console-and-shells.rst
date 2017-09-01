@@ -501,6 +501,7 @@ ConsoleOutput will replace these tags with the correct ansi code sequence, or
 remove the tags if you are on a console that doesn't support ansi codes. There
 are several built-in styles, and you can create more. The built-in ones are
 
+* ``success`` Success messages. Green text.
 * ``error`` Error messages. Red text.
 * ``warning`` Warning messages. Yellow text.
 * ``info`` Informational messages. Cyan text.
@@ -698,7 +699,7 @@ to define an entire option parser in one series of method calls::
         ])->addOption('method', [
             'short' => 'm',
             'help' => __('The specific method you want help on.')
-        ])->description(__('Lookup doc block comments for classes in CakePHP.'));
+        ])->setDescription(__('Lookup doc block comments for classes in CakePHP.'));
         return $parser;
     }
 
@@ -1268,7 +1269,8 @@ send the email with::
     use Cake\Mailer\Email;
 
     $email = new Email();
-    $email->domain('www.example.org');
+    // Prior to 3.4 use domain()
+    $email->setDomain('www.example.org');
 
 This asserts that the generated message IDs are valid and fit to the domain the
 emails are sent from.

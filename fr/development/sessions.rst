@@ -169,15 +169,16 @@ configurez comme suit::
         'defaults' => 'database'
     ]
 
-Cette configuration nécessitera l'ajout d'une table de base de données avec au
-moins ces champs::
+Cette configuration nécessitera une table ayant ce schema::
 
-    CREATE TABLE `sessions` (
-      `id` varchar(255) NOT NULL DEFAULT '',
-      `data` BLOB, -- ou BYTEA pour PostgreSQL
-      `expires` int(11) DEFAULT NULL,
-      PRIMARY KEY (`id`)
-    );
+  CREATE TABLE `sessions` (
+    `id` char(40) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+    `created` datetime DEFAULT CURRENT_TIMESTAMP, -- Optional
+    `modified` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Optional
+    `data` blob DEFAULT NULL, -- for PostgreSQL use bytea instead of blob
+    `expires` int(10) unsigned DEFAULT NULL,
+    PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 Vous pouvez trouver une copie du schéma pour la table de sessions dans le
 squelette d'application.

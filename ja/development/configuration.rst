@@ -217,7 +217,7 @@ Inflection の設定
 キャッシュ設定のための :term:`DSN` 文字列を使用して、各環境でこれらのライブラリーを簡単に変更できます。
 
 CakePHP は、環境変数を使ってローカル開発を容易にするために `dotenv
-<https://github.com/josegonzalez/dotenv>`_ を活用します。
+<https://github.com/josegonzalez/php-dotenv>`_ を活用します。
 アプリケーションの中に ``config/.env.default`` があるでしょう。
 このファイルを ``config/.env`` にコピーし、値をカスタマイズすることで、
 アプリケーションを設定できます。

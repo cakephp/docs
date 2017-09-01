@@ -233,7 +233,7 @@ CakePHP uses :term:`DSN` strings for databases, logs, email transports and cache
 configurations allowing you to easily vary these libraries in each environment.
 
 For local development, CakePHP leverages `dotenv
-<https://github.com/josegonzalez/dotenv>`_ to allow easy local development using
+<https://github.com/josegonzalez/php-dotenv>`_ to allow easy local development using
 environment variables. You will see a ``config/.env.default`` in your
 application. By copying this file into ``config/.env`` and customizing the
 values you can configure your application.

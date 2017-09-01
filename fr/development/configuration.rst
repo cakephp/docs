@@ -251,7 +251,7 @@ des logs, des transports d'emails et du cache, vous permettant de faire varier l
 configurations d'un environnement à l'autre.
 
 Lors d'un développement local, CakePHP utilise `dotenv
-<https://github.com/josegonzalez/dotenv>`_ pour faciliter l'utilisation des variables
+<https://github.com/josegonzalez/php-dotenv>`_ pour faciliter l'utilisation des variables
 d'environnement. Vous verrez un fichier ``config/.env.default`` dans votre application.
 En copiant ce fichier dans ``config/.env`` et en modifiant les valeurs, vous pourrez
 configurer votre application.

@@ -893,7 +893,7 @@ registered into the route collection::
 
     Router::scope('/', function ($routes) {
         $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
-        $routes->registerMiddleware('cookies', new EncryptedCookiesMiddleware());
+        $routes->registerMiddleware('cookies', new EncryptedCookieMiddleware());
     });
 
 Once registered, scoped middleware can be applied to specific

@@ -857,6 +857,7 @@ Pour restreindre les extensions à un *scope* spécifique, vous pouvez les défi
 en utilisant la méthode :php:meth:`Cake\\Routing\\RouteBuilder::extensions()`::
 
     Router::scope('/', function ($routes) {
+        // Avant 3.5.0 utilisez `extensions()` 
         $routes->setExtensions(['json', 'xml']);
         // ...
     });
@@ -919,7 +920,7 @@ enregistré dans la collection de routes::
 
     Router::scope('/', function ($routes) {
         $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
-        $routes->registerMiddleware('cookies', new EncryptedCookiesMiddleware());
+        $routes->registerMiddleware('cookies', new EncryptedCookieMiddleware());
     });
 
 Une fois enregistré dans le builder de routes, le middleware peut être appliqué
