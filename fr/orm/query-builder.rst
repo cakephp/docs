@@ -705,10 +705,9 @@ avec une objet ``Expression`` serait::
         });
 
 Puisque nous avons commencé à utiliser ``where()``, nous n'avons pas besoin
-d'appeler ``and_()``, puisqu'elle est appelée implicitement. Un peu de la même
-façon que nous n'appellerions pas ``or_()`` si nous avons commencé notre requête
-avec ``orWhere()``. Le code ci-dessus montre quelques nouvelles méthodes de
-conditions combinées avec ``AND``. Le code SQL résultant serait::
+d'appeler ``and_()``, puisqu'elle est appelée implicitement. Le code ci-dessus
+montre quelques nouvelles méthodes de conditions combinées avec ``AND``. Le code
+SQL résultant serait::
 
     SELECT *
     FROM articles
@@ -717,6 +716,12 @@ conditions combinées avec ``AND``. Le code SQL résultant serait::
     AND published = 1
     AND spam != 1
     AND view_count >= 10)
+
+.. deprecated:: 3.5.0
+    Depuis la version 3.5.0, la méthode ``orWhere()`` est dépréciée. Cette méthode
+    crée des requêtes SQL difficiles à prédire en fonction de l'état actuel de la
+    requête. Utilisez plutôt ``where()`` car son comportement est plus prévisible
+    et plus facile à comprendre.
 
 Cependant, si nous souhaitons utiliser les deux conditions ``AND`` & ``OR``,
 nous pourrions faire ce qui suit::
