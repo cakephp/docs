@@ -308,9 +308,9 @@ quelques exemples de règles de domaine:
 * Etats de transition ou étapes de flux de travail, par exemple pour mettre à
   jour un statut de facture.
 * Eviter la modification ou la suppression soft d'articles.
-* Enforcing usage/rate limit caps.
+* Appliquer des limites d'usage, que ce soit en nombre ou en vitesse.
 
-Les règles de domaine sont vérifiées lors de l'appel au méthodes ``save()`` et
+Les règles de domaine sont vérifiées lors de l'appel aux méthodes ``save()`` et
 ``delete()`` de la Table.
 
 Créer un Vérificateur de Règles
@@ -431,7 +431,7 @@ nulles de votre clé étrangère composite sont nulles::
 
 Dans la majorité des bases de données SQL, les index ``UNIQUE`` sur plusieurs
 colonnes permettent à plusieurs valeurs null d'exister car ``NULL`` n'est
-pas égale à lui même. Même si autoriser plusieurs valeurs null est le comportement
+pas égal à lui même. Même si autoriser plusieurs valeurs null est le comportement
 par défaut de CakePHP, vous pouvez inclure des valeurs null dans vos validations
 en utilisant ``allowMultipleNulls``::
 
