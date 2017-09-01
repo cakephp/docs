@@ -33,9 +33,9 @@ might not work. Instead you can use
 
     register_argc_argv has to be turned on by including ``register_argc_argv
     = 1`` in your php.ini.  If you cannot change register_argc_argv globally,
-    you can tell the cron job to use your own configuration file (php.ini) by
-    specifying it with ``-c /full/path/to/root/php.ini``. Example: ``php -c
-    /full/path/to/root/php.ini /full/path/to/root/bin/cake.php myshell
+    you can tell the cron job to use your own configuration by
+    specifying it with ``-d register_argc_argv=1`` parameter. Example: ``php
+    -d register_argc_argv=1 /full/path/to/root/bin/cake.php myshell
     myparam``
 
 .. meta::

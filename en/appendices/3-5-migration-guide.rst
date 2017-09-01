@@ -26,6 +26,12 @@ features will continue to function until 4.0.0 after which they will be removed.
   ``Cake\Database\TableSchemaAwareInterface`` instead.
 * ``Cake\Console\ShellDispatcher`` is deprecated. Applications should update to
   use ``Cake\Console\CommandRunner`` instead.
+* ``Cake\Database\Schema\TableSchema::column()`` is deprecated. Use
+  ``Cake\Database\Schema\TableSchema::getColumn()`` instead.
+* ``Cake\Database\Schema\TableSchema::constraint()`` is deprecated. Use
+  ``Cake\Database\Schema\TableSchema::getConstraint()`` instead.
+* ``Cake\Database\Schema\TableSchema::index()`` is deprecated. Use
+  ``Cake\Database\Schema\TableSchema::getIndex()`` instead.
 
 Deprecated Combined Get/Set Methods
 -----------------------------------
@@ -49,16 +55,22 @@ The following is a list of methods that are deprecated and replaced with
     * ``outputAs()``
 ``Cake\Database\Connection``
     * ``logger()``
-``Cake\Datasource\TypedResultTrait``
+``Cake\Database\TypedResultInterface``
+    * ``returnType()``
+``Cake\Database\TypedResultTrait``
     * ``returnType()``
 ``Cake\Database\Log\LoggingStatement``
     * ``logger()``
 ``Cake\Datasource\ModelAwareTrait``
     * ``modelType()``
 ``Cake\Database\Query``
-    * ``valueBinder()`` is now ``getValueBinder()``
+    * getter part of ``valueBinder()`` (now ``getValueBinder()``)
+``Cake\Database\Schema\TableSchema``
+    * ``columnType()``
 ``Cake\Datasource\QueryTrait``
-    * ``eagerLoaded()`` (now ``isEagerLoaded()``)
+    * getter part of ``eagerLoaded()`` (now ``isEagerLoaded()``)
+``Cake\Event\EventDispatcherInterface``
+    * ``eventManager()``
 ``Cake\Event\EventDispatcherTrait``
     * ``eventManager()``
 ``Cake\Error\Debugger``
@@ -69,6 +81,10 @@ The following is a list of methods that are deprecated and replaced with
 ``Cake\I18n\I18n``
     * ``locale()``
     * ``translator()``
+    * ``defaultLocale()``
+    * ``defaultFormatter()``
+``Cake\ORM\Association\BelongsToMany``
+    * ``sort()``
 ``Cake\ORM\LocatorAwareTrait``
     * ``tableLocator()``
 ``Cake\ORM\EntityTrait``
@@ -167,6 +183,13 @@ cache configuration to fall back to if the engine is misconfigured (or
 unavailable). See :ref:`cache-configuration-fallback` for more information on
 configuring fallbacks.
 
+dotenv Support added to Application Skeleton
+--------------------------------------------
+
+The application skeleton now features a 'dotenv' integration making it easier to
+use environment variables to configure your application. See the
+:ref:`environment-variables` section for more information.
+
 Console Integration Testing
 ---------------------------
 
@@ -175,6 +198,12 @@ integration testing console applications easier. For more information, visit
 the :ref:`console-integration-testing` section. This test class is fully
 compatible with the current shell dispatcher as well as the new
 ``Cake\Console\CommandRunner``.
+
+Collection
+----------
+
+* ``Cake\Collection\Collection::avg()`` was added.
+* ``Cake\Collection\Collection::median()`` was added.
 
 Core
 ----
@@ -238,6 +267,13 @@ Http
 * ``Cake\Http\Client::addCookie()`` was added to make it easy to add cookies to
   a client instance.
 
+InstanceConfigTrait
+-------------------
+
+* ``InstanceConfigTrait::getConfig()`` now takes a 2nd parameter ``$default``.
+  If no value is available for the specified ``$key``, the ``$default`` value
+  will be returned.
+
 ORM
 ---
 
@@ -263,6 +299,8 @@ Routing
 TestSuite
 ---------
 
+* ``TestCase::loadFixtures()`` will now load all fixtures when no arguments are
+  provided.
 * ``IntegrationTestCase::head()`` was added.
 * ``IntegrationTestCase::options()`` was added.
 * ``IntegrationTestCase::disableErrorHandlerMiddleware()`` was added to make
@@ -270,6 +308,9 @@ TestSuite
 
 Validation
 ----------
+
+* ``Cake\Validation\Validator::scalar()`` was added to ensure that fields do not
+  get non-scalar data.
 * ``Cake\Validation\Validator::regex()`` was added for a more convenient way
   to validate data against a regex pattern.
 * ``Cake\Validation\Validator::addDefaultProvider()`` was added. This method

@@ -899,7 +899,7 @@ the response content, and sends the `304 Not Modified` header::
 Setting Cookies
 ===============
 
-Cookies can be added to response using either an array or a :php:class:`Cookie``
+Cookies can be added to response using either an array or a :php:class:`Cake\\Http\\Cookie\\Cookie`
 object::
 
     // Add a cookie as an array using the immutable API (3.4.0+)
@@ -920,7 +920,12 @@ object::
         'expire' => strtotime('+1 year')
     ]);
 
-See the :ref:`creating-cookies` section for how to use the cookie object.
+See the :ref:`creating-cookies` section for how to use the cookie object. You
+can use ``withExpiredCookie()`` to send an expired cookie in the response. This
+will make the browser remove its local cookie::
+
+    // As of 3.5.0
+    $this->response = $this->response->withExpiredCookie('remember_me');
 
 .. _cors-headers:
 
@@ -984,6 +989,8 @@ allow the immutability of the request and response to be preserved.
 
 Creating Cookies
 ----------------
+
+.. php:class:: Cookie
 
 ``Cookie`` objects can be defined through constructor objects, or by using the
 fluent interface that follows immutable patterns::

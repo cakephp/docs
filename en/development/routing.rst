@@ -454,12 +454,12 @@ functions::
             '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
             ['controller' => 'Blogs', 'action' => 'view']
         )
+        // Define the route elements in the route template
+        // to pass as function arguments. Order matters since this
+        // will simply map ":id" to $articleId in your action
+        ->setPass(['id', 'slug'])
+        // Define a pattern that `id` must match.
         ->setPatterns([
-            // Define the route elements in the route template
-            // to pass as function arguments. Order matters since this
-            // will simply map ":id" to $articleId in your action
-            'pass' => ['id', 'slug'],
-            // Define a pattern that `id` must match.
             'id' => '[0-9]+',
         ]);
     });
@@ -504,7 +504,7 @@ option can be used in reverse routing to identify the route you want to use::
     // Name a verb specific route (3.5.0+)
     $routes->post(
         '/logout',
-        ``['controller' => 'Users', 'action' => 'logout'],
+        ['controller' => 'Users', 'action' => 'logout'],
         'logout'
     );
 
@@ -856,6 +856,7 @@ and then parse what remains. If you want to create a URL such as
 /page/title-of-page.html you would create your route using::
 
     Router::scope('/page', function ($routes) {
+        // Prior to 3.5.0 use `extensions()`
         $routes->setExtensions(['json', 'xml', 'html']);
         $routes->connect(
             '/:title',
@@ -892,7 +893,7 @@ registered into the route collection::
 
     Router::scope('/', function ($routes) {
         $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
-        $routes->registerMiddleware('cookies', new EncryptedCookiesMiddleware());
+        $routes->registerMiddleware('cookies', new EncryptedCookieMiddleware());
     });
 
 Once registered, scoped middleware can be applied to specific
@@ -962,6 +963,7 @@ this::
     // In config/routes.php...
 
     Router::scope('/', function ($routes) {
+        // Prior to 3.5.0 use `extensions()`
         $routes->setExtensions(['json']);
         $routes->resources('Recipes');
     });

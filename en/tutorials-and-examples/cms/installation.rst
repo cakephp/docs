@@ -2,7 +2,7 @@ Content Management Tutorial
 ###########################
 
 This tutorial will walk you through the creation of a simple :abbr:`CMS (Content
-Management System)` application. . To start with, we'll be installing CakePHP,
+Management System)` application. To start with, we'll be installing CakePHP,
 creating our database, and building simple article management.
 
 Here's what you'll need:
@@ -32,7 +32,7 @@ Getting CakePHP
     Should we use Oven instead?
 
 The easiest way to install CakePHP is to use Composer. Composer is a simple way
-of installing CakePHP from your terminal or command line prompt.  First, you'll
+of installing CakePHP from your terminal or command line prompt. First, you'll
 need to download and install Composer if you haven't done so already. If you
 have cURL installed, it's as easy as running the following:
 
@@ -45,7 +45,7 @@ Or, you can download ``composer.phar`` from the
 
 Then simply type the following line in your terminal from your
 installation directory to install the CakePHP application skeleton
-in the **cms** directory:
+in the **cms** directory of the current working directory:
 
 .. code-block:: bash
 

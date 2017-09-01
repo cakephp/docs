@@ -700,7 +700,7 @@ fixtures à partir du cœur de CakePHP ou des plugins::
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['plugin.debug_kit.articles', 'core.comments'];
+        public $fixtures = ['plugin.DebugKit.articles', 'plugin.MyVendorName/MyPlugin.messages', 'core.comments'];
     }
 
 Utiliser le préfixe ``core`` va charger les fixtures à partir de CakePHP, et
@@ -1463,6 +1463,8 @@ la classe JsonView. Ce dernier utilise cette option quand le mode ``debug`` est
 activé. Vous pouvez utiliser ceci afin que votre test marche dans les deux cas::
 
     json_encode($data, Configure::read('debug') ? JSON_PRETTY_PRINT : 0);
+
+.. _console-integration-testing:
 
 Tests d'Intégration de la Console
 =================================

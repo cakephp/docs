@@ -945,7 +945,7 @@ Définir des Cookies
 ===================
 
 Des cookies peuvent être ajoutés aux réponses en utilisant soit un tableau, soit
-un objet :php:class:`Cookie``::
+un objet :php:class:`Cake\\Http\\Cookie\\Cookie`::
 
     // Ajoute un cookie avec un tableau en utilisant l'API immutable (3.4.0+)
     $this->response = $this->response->withCookie('remember_me', [
@@ -966,7 +966,11 @@ un objet :php:class:`Cookie``::
     ]);
 
 Référez-vous à la section :ref:`creating-cookies` pour savoir comment utiliser
-l'objet Cookie.
+l'objet Cookie. Vous pouvez utiliser ``withExpiredCookie()`` pour envoyer un cookie
+expiré dans la réponse. De cette manière, le navigateur supprimera son cookie local::
+
+    // À partir de 3.5.0
+    $this->response = $this->response->withExpiredCookie('remember_me');
 
 .. _cors-headers:
 
@@ -1034,6 +1038,8 @@ Response d'être préservé.
 
 Créer des Cookies
 -----------------
+
+.. php:class:: Cookie
 
 Les objets ``Cookie`` peuvent être définis via le constructor ou en utilisant
 l'interface fluide qui suit les patterns immutables::

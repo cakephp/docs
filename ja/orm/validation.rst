@@ -255,6 +255,10 @@ CakePHP ではデータの検証には二つの段階があります:
 
     $hardenedValidator = $usersTable->validator('hardened');
 
+
+.. deprecated:: 3.5.0
+    ``validator()`` は非推奨です。代わりに ``getValidator()`` を使用してください。
+
 既定のバリデータクラス
 ======================
 
@@ -426,7 +430,7 @@ CakePHP は、エンティティーが保存される前に適用される「ル
 
     // ArticlesTable.php ファイルの中で
     // 記事にタグは５つ以内。
-    $rules->add($rules->validCount('tags', 5, '<=', 'You can only have 5 tags'));
+    $rules->add($rules->validCount('tags', 5, '<=', 'タグは 5 つまで持てます'));
 
 ルールに基づく件数を定義する際、第３引数は、比較演算子を定義します。
 比較には ``==``, ``>=``, ``<=``, ``>``, ``<``, そして ``!=`` が使えます。
@@ -436,13 +440,12 @@ CakePHP は、エンティティーが保存される前に適用される「ル
     // タグは３つ以上、５つ以内
     $rules->add($rules->validCount('tags', 3, '>=', 'タグは 3 つ以上必要です'));
     $rules->add($rules->validCount('tags', 5, '<=', 'タグは 5 つ以下です'));
-    $rules->add($rules->validCount('subscription', 0, '==', '購読してません'));
 
-.. note::
+もしプロパティーが数えられない場合や存在しない場合、 ``validCount`` は ``false``
+を返すことに注意してください。 ::
 
-    そのプロパティーが数えられない場合や存在しない場合、 ``validCount`` は ``false`` を返します。
-    例えば、上記の例で言うと、subscription は少なくとも空のリストになっていなければ、``<`` や
-    ``<=`` による比較や ``0`` と比較する場合に ``false`` を返します。
+    // もし tags が null の場合、保存操作は失敗します。
+    $rules->add($rules->validCount('tags', 0, '<=', 'タグを持つことはできません'));
 
 .. versionadded:: 3.3.0
     ``validCount()`` メソッドは、3.3.0 で追加されました。

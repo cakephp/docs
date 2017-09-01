@@ -4,7 +4,7 @@ cron ジョブに登録してシェルを実行する
 通常シェルは、ニュースレターを送ったり、たまにデータベースをクリーンアップしたりすることを、
 cron ジョブとして実行します。
 
-このように簡単な設定で行えます。::
+このように簡単な設定で行えます。 ::
 
       */5  *    *    *    *  cd /full/path/to/app && bin/cake myshell myparam
     # *    *    *    *    *  実行するコマンド
@@ -33,9 +33,9 @@ cron ジョブとして実行します。
 .. note::
      php.ini の中で ``register_argc_argv = 1`` を含めることによって、
      register_argc_argv を有効にしなければなりません。グローバルに register_argc_argv
-     を変更できない場合、 ``-c /full/path/to/root/php.ini`` をつけることで、
-     cron ジョブに独自の設定ファイル (php.ini) を指定することができます。例: ``php -c
-     /full/path/to/root/php.ini /full/path/to/root/bin/cake.php myshell
+     を変更できない場合、 ``-d register_argc_argv=1`` パラメーターをつけることで、
+     cron ジョブに独自の設定ファイル (php.ini) を指定することができます。例: ``php
+     -d register_argc_argv=1 /full/path/to/root/bin/cake.php myshell
      myparam``
 
 .. meta::

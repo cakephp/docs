@@ -285,6 +285,7 @@ beforeSave
 L'event ``Model.beforeSave`` est déclenché avant que chaque entity ne soit
 sauvegardée. Stopper cet event va annuler l'opération de sauvegarde. Quand
 l'event est stoppé, le résultat de l'event sera retourné.
+La manière de stopper un event est documentée :ref:`ici <stopping-events>`.
 
 afterSave
 ---------
@@ -313,7 +314,8 @@ beforeDelete
 
 L'event ``Model.beforeDelete`` est déclenché avant qu'une entity ne soit
 supprimée. En stoppant cet event, vous allez annuler l'opération de
-suppression.
+suppression. Quand l'event est stoppé le résultat de l'event sera retourné.
+La manière de stopper un event est documentée :ref:`ici <stopping-events>`.
 
 afterDelete
 -----------

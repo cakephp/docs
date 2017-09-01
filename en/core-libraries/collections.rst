@@ -50,30 +50,19 @@ application as well.
 List of Methods
 ===============
 
-.. table::
+.. csv-table::
     :class: docutils internal-toc
 
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`append`    | :php:meth:`buffered`      | :php:meth:`combine`  | :php:meth:`compile` |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`contains`  | :php:meth:`countBy`       | :php:meth:`chunk`    | :php:meth:`each`    |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`every`     | :php:meth:`extract`       | :php:meth:`filter`   | :php:meth:`first`   |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`groupBy`   | :php:meth:`indexBy`       | :php:meth:`insert`   | :php:meth:`isEmpty` |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`last`      | :php:meth:`listNested`    | :php:meth:`map`      | :php:meth:`match`   |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`max`       | :php:meth:`min`           | :php:meth:`nest`     | :php:meth:`reduce`  |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`reject`    | :php:meth:`sample`        | :php:meth:`shuffle`  | :php:meth:`skip`    |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`some`      | :php:meth:`sortBy`        | :php:meth:`stopWhen` | :php:meth:`sumOf`   |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`take`      | :php:meth:`through`       | :php:meth:`unfold`   | :php:meth:`zip`     |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`transpose` | :php:meth:`chunkWithKeys` |                      |                     |
-    +-----------------------+---------------------------+----------------------+---------------------+
+    :php:meth:`append`, :php:meth:`avg`, :php:meth:`buffered`, :php:meth:`chunk`
+    :php:meth:`chunkWithKeys`, :php:meth:`combine`, :php:meth:`compile`, :php:meth:`contains`
+    :php:meth:`countBy`, :php:meth:`each`, :php:meth:`every`, :php:meth:`extract`
+    :php:meth:`filter`, :php:meth:`first`, :php:meth:`groupBy`, :php:meth:`indexBy`
+    :php:meth:`insert`, :php:meth:`isEmpty`, :php:meth:`last`, :php:meth:`listNested`
+    :php:meth:`map`, :php:meth:`match`, :php:meth:`max`, :php:meth:`median`
+    :php:meth:`min`, :php:meth:`nest`, :php:meth:`reduce`, :php:meth:`reject`
+    :php:meth:`sample`, :php:meth:`shuffle`, :php:meth:`skip`, :php:meth:`some`
+    :php:meth:`sortBy`, :php:meth:`stopWhen`, :php:meth:`sumOf`, :php:meth:`take`
+    :php:meth:`through`, :php:meth:`transpose`, :php:meth:`unfold`, :php:meth:`zip`
 
 Iterating
 =========
@@ -469,6 +458,40 @@ elements::
     });
 
     $sumOfDadAges = $collection->sumOf('dad.age');
+
+.. php:method:: avg($matcher = null)
+
+Calculate the average value of the elements in the collection. Optionally
+provide a matcher path, or function to extract values to generate the average
+for::
+
+    $items = [
+       ['invoice' => ['total' => 100]],
+       ['invoice' => ['total' => 200]],
+    ];
+
+    // Average: 150
+    $average = (new Collection($items))->avg('invoice.total');
+
+.. versionadded:: 3.5.0
+
+.. php:method:: median($matcher = null)
+
+Calculate the median value of a set of elements. Optionally provide a matcher
+path, or function to extract values to generate the median for::
+
+    $items = [
+      ['invoice' => ['total' => 400]],
+      ['invoice' => ['total' => 500]],
+      ['invoice' => ['total' => 100]],
+      ['invoice' => ['total' => 333]],
+      ['invoice' => ['total' => 200]],
+    ];
+
+    // Median: 333
+    $median = (new Collection($items))->median('invoice.total');
+
+.. versionadded:: 3.5.0
 
 Grouping and Counting
 ---------------------

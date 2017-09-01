@@ -157,6 +157,8 @@ find() で使えるオプションは次の通りです:
 デフォルトでクエリーと結果セットは :doc:`/orm/entities` オブジェクトを返します。
 変換 (hydrate) を無効化すれば、素となる配列を取得することができます。 ::
 
+    $query->enableHydration(false);
+    // 3.4.0 より前は
     $query->hydrate(false);
 
     // $data は配列のデータを含む ResultSet です。
@@ -217,7 +219,7 @@ CakePHP ではデータの 'list' を生成するメソッドを使うことで�
     ];
 
 追加のオプションがない場合、 ``$data`` のキーはテーブルの主キーになり、値はテーブルの
-'displayField' になります。テーブルオブジェクトの ``displayField()`` メソッドを使うことで
+'displayField' になります。テーブルオブジェクトの ``setDisplayField()`` メソッドを使うことで
 テーブルの表示列を設定できます。 ::
 
     class ArticlesTable extends Table
@@ -225,6 +227,8 @@ CakePHP ではデータの 'list' を生成するメソッドを使うことで�
 
         public function initialize(array $config)
         {
+            $this->setDisplayField('title');
+            // 3.4.0 より前は
             $this->displayField('title');
         }
     }
@@ -301,9 +305,9 @@ join でつながっている関連テーブルからリストのデータを生
 オプション指定なしで、ラベルを取得することもできます。 ::
 
     // AuthorsTable::initialize() の中で
-    $this->displayField('label'); // Author::_getLabel() を利用します。
+    $this->setDisplayField('label'); // Author::_getLabel() を利用します。
     // ファインダーやコントローラーの中で
-    $query = $authors->find('list'); // AuthorsTable::displayField() を利用します。
+    $query = $authors->find('list'); // AuthorsTable::getDisplayField() を利用します。
 
 スレッド状のデータを検索する
 ============================
@@ -601,12 +605,12 @@ contain に条件を渡す
         ->select($articles->Users)
         ->contain(['Users']);
 
-別の方法として、複数の関連がある場合には、 ``autoFields()`` を使うことができます。 ::
+別の方法として、複数の関連がある場合には、 ``enableAutoFields()`` を使うことができます。 ::
 
     // Articles から id と title を、 Users、Comments、Tags から全列を select する
     $query->select(['id', 'title'])
         ->contain(['Comments', 'Tags'])
-        ->autoFields(true)
+        ->enableAutoFields(true) // 3.4.0 より前は autoFields(true) を使用
         ->contain(['Users' => function($q) {
             return $q->autoFields(true);
         }]);
@@ -777,7 +781,7 @@ leftJoinWith を使う
     $query->select(['total_comments' => $query->func()->count('Comments.id')])
         ->leftJoinWith('Comments')
         ->group(['Articles.id'])
-        ->autoFields(true);
+        ->enableAutoFields(true); // 3.4.0 より前は autoFields(true); を使用
 
 上記クエリーの結果は Article データの結果に加え、データごとに ``total_comments``
 プロパティーが含まれます。
@@ -792,7 +796,7 @@ leftJoinWith を使う
             return $q->where(['Tags.name' => 'awesome']);
         })
         ->group(['Authors.id'])
-        ->autoFields(true);
+        ->enableAutoFields(true); // 3.4.0 より前は autoFields(true); を使用
 
 この関数は指定した関連からいずれのカラムも結果セットへとロードしません。
 
@@ -831,6 +835,8 @@ leftJoinWith を使う
 この方法での戦略 (strategy) の動的な変更は指定したクエリーのみに適用されます。
 もしも戦略の変更を永続的に行いたいなら次のようにできます。 ::
 
+    $articles->FirstComment->setStrategy('select');
+    // 3.4.0 より前は
     $articles->FirstComment->strategy('select');
 
 ``select`` 戦略の利用は、別データベースにあるテーブルとの関連を作るのに優れた方法です。
@@ -877,10 +883,13 @@ CakePHP は簡単に関連付くデータをイーガーロード (Eager Load) �
 ですので、 ResultSet オブジェクトのコレクションメソッドをどれでも使うことができます。
 
 ResultSet オブジェクトは基本となるプリペアードステートメント (prepared statement) から行を
-レイジーロード (Lazy Load) します。デフォルトでは、結果をメモリーにバッファしますので、結果セットを
-何度もイテレートすることができるようになり、まだバッファされていなければ、結果をキャッシュしつつ
-イテレートします。 ::
+レイジーロード (Lazy Load) します。デフォルトでは、結果をメモリーにバッファしますので、
+ある結果セットを何度もイテレートしたり、結果をキャッシュしてイテレートしたりすることができます。
+もしメモリーに収まらないデータセットを扱う必要がある場合、クエリー上でバッファリングを無効にして
+結果をストリームすることができます。 ::
 
+    $query->enableBufferResults(false);
+    // 3.4.0 より前は
     $query->bufferResults(false);
 
 バッファを OFF に切り替える場合にはいくつか注意点があります:
@@ -1066,7 +1075,7 @@ CakePHP についての情報を含む記事 (article) でもっともよく発�
 例によって mapper 関数が必要です。 ::
 
     $mapper = function ($article, $key, $mapReduce) {
-        if (stripos('cakephp', $article['body']) === false) {
+        if (stripos($article['body'], 'cakephp') === false) {
             return;
         }
 
@@ -1086,11 +1095,12 @@ CakePHP についての情報を含む記事 (article) でもっともよく発�
 
 最後に、すべてを一緒にします。 ::
 
-    $articlesByStatus = $articles->find()
+    $wordCount = $articles->find()
         ->where(['published' => true])
         ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
-        ->hydrate(false)
-        ->mapReduce($mapper, $reducer);
+        ->enableHydrate(false) // 3.4.0 より前は hydrate(false) を使用
+        ->mapReduce($mapper, $reducer)
+        ->toArray();
 
 これは、ストップワードを除去しない場合、非常に大きな配列を返すこともありえますが、
 このようなものを返します。 ::
@@ -1109,31 +1119,46 @@ CakePHP についての情報を含む記事 (article) でもっともよく発�
 ``mapper()`` 関数を見てみましょう。 ::
 
     $mapper = function ($rel, $key, $mr) {
-        $mr->emitIntermediate($rel['source_user_id'], $rel['target_user_id']);
-        $mr->emitIntermediate($rel['target_user_id'], $rel['source_target_id']);
+        $mr->emitIntermediate($rel['target_user_id'], $rel['source_user_id']);
+        $mr->emitIntermediate(-$rel['source_user_id'], $rel['target_user_id']);
     };
 
-互いにフォローしあっているユーザーリストを得るためにデータをコピーしていきました。
+中間の配列は次のようになります。 ::
+
+    [
+        1 => [2, 3, 4, 5, -3, -5],
+        2 => [-1],
+        3 => [-1, 1, 6],
+        4 => [-1],
+        5 => [-1, 1],
+        6 => [-3],
+        ...
+    ]
+
+正の数は第１レベルのキーで示されたユーザーが彼らをフォローしていることを意味し、
+負の数はそのユーザーが彼らからフォローされていることを意味します。
+
 それでは reduce しましょう。
 reducer が呼ばれるごとに、reducer はユーザーごとのフォロワーのリストを受け取ります。 ::
 
-    // $friendsList は次のようになっています
-    // 繰り返し登場する数字は双方向で関係が繋がっていることを意味しています
-    [2, 5, 100, 2, 4]
+    $reducer = function ($friends, $user, $mr) {
+        $fakeFriends = [];
 
-    $reducer = function ($friendsList, $user, $mr) {
-        $friends = array_count_values($friendsList);
-        foreach ($friends as $friend => $count) {
-            if ($count < 2) {
-                $mr->emit($friend, $user);
+        foreach ($friends as $friend) {
+            if ($friend > 0 && !in_array(-$friend, $friends)) {
+                $fakeFriends[] = $friend;
             }
         }
-    }
+
+        if ($fakeFriends) {
+            $mr->emit($fakeFriends, $user);
+        }
+    };
 
 そして、クエリーにこの関数を渡します。 ::
 
     $fakeFriends = $friends->find()
-        ->hydrate(false)
+        ->enableHydrate(false) // 3.4.0 より前は hydrate(false) を使用
         ->mapReduce($mapper, $reducer)
         ->toArray();
 
@@ -1209,4 +1234,3 @@ stack されたすべての MapReduce 操作をを取り除く
 を呼び出すことで達成できます。 ::
 
     $query->mapReduce(null, null, true);
-

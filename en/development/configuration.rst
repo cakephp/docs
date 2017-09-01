@@ -215,6 +215,46 @@ Inflection Configuration
 
 See the :ref:`inflection-configuration` docs for more information.
 
+.. _environment-variables:
+
+Environment Variables
+=====================
+
+Many modern cloud providers, like Heroku, let you define environment
+variables for configuration data. You can configure your CakePHP through
+environment variables in the `12factor app style <http://12factor.net/>`_.
+Environment variables allow your application to require less state making your
+application easier to manage when it is deployed across a number of
+environments.
+
+As you can see in your **app.php**, the ``env()`` function is used to read
+configuration from the environment, and build the application configuration.
+CakePHP uses :term:`DSN` strings for databases, logs, email transports and cache
+configurations allowing you to easily vary these libraries in each environment.
+
+For local development, CakePHP leverages `dotenv
+<https://github.com/josegonzalez/php-dotenv>`_ to allow easy local development using
+environment variables. You will see a ``config/.env.default`` in your
+application. By copying this file into ``config/.env`` and customizing the
+values you can configure your application.
+
+You should avoid committing the ``config/.env`` file to your repository and
+instead use the ``config/.env.default`` as a template with placeholder values so
+everyone on your team knows what environment variables are in use and what
+should go in each one.
+
+Once your environment variables have been set, you can use ``env()`` to read
+data from the environment::
+
+    $debug = env('APP_DEBUG', false);
+
+The second value passed to the env function is the default value. This value
+will be used if no environment variable exists for the given key.
+
+.. versionchanged:: 3.5.0
+    dotenv library support was added to the application skeleton.
+
+
 Configure Class
 ===============
 
@@ -326,7 +366,6 @@ Reading & Deleting Configuration Data
 
 Read and delete a key from Configure. This is useful when you want to
 combine reading and deleting values in a single operation.
-
 
 
 Reading and writing configuration files
@@ -443,156 +482,20 @@ When restoring configuration information it's important to restore it with
 the same key, and cache configuration as was used to store it. Restored
 information is merged on top of the existing runtime configuration.
 
-Creating your Own Configuration Engines
-=======================================
+Configuration Engines
+---------------------
 
-Since configuration engines are an extensible part of CakePHP, you can create
-configuration engines in your application and plugins.  Configuration engines
-need to implement the
-:php:interface:`Cake\\Core\\Configure\\ConfigEngineInterface`.  This interface
-defines a read method, as the only required method.  If you like XML
-files, you could create a simple Xml config engine for you application::
+CakePHP provides the ability to load configuration files from a number of
+different sources, and features a pluggable system for `creating your own
+confiugration engines
+<https://api.cakephp.org/3.x/class-Cake.Core.Configure.ConfigEngineInterface.html>`__.
+The built in configuration engines are:
 
-    // In src/Configure/Engine/XmlConfig.php
-    namespace App\Configure\Engine;
+* `JsonConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.JsonConfig.html>`__
+* `IniConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.IniConfig.html>`__
+* `PhpConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.PhpConfig.html>`__
 
-    use Cake\Core\Configure\ConfigEngineInterface;
-    use Cake\Utility\Xml;
-
-    class XmlConfig implements ConfigEngineInterface
-    {
-
-        public function __construct($path = null)
-        {
-            if (!$path) {
-                $path = CONFIG;
-            }
-            $this->_path = $path;
-        }
-
-        public function read($key)
-        {
-            $xml = Xml::build($this->_path . $key . '.xml');
-            return Xml::toArray($xml);
-        }
-
-        public function dump($key, array $data)
-        {
-            // Code to dump data to file
-        }
-    }
-
-In your **config/bootstrap.php** you could attach this engine and use it::
-
-    use App\Configure\Engine\XmlConfig;
-
-    Configure::config('xml', new XmlConfig());
-    ...
-
-    Configure::load('my_xml', 'xml');
-
-The ``read()`` method of a config engine, must return an array of the
-configuration information that the resource named ``$key`` contains.
-
-.. php:namespace:: Cake\Core\Configure
-
-.. php:interface:: ConfigEngineInterface
-
-    Defines the interface used by classes that read configuration data and
-    store it in :php:class:`Configure`
-
-.. php:method:: read($key)
-
-    :param string $key: The key name or identifier to load.
-
-    This method should load/parse the configuration data identified by ``$key``
-    and return an array of data in the file.
-
-.. php:method:: dump($key)
-
-    :param string $key: The identifier to write to.
-    :param array $data: The data to dump.
-
-    This method should dump/store the provided configuration data to a key identified by ``$key``.
-
-Built-in Configuration Engines
-==============================
-
-.. php:namespace:: Cake\Core\Configure\Engine
-
-PHP Configuration Files
------------------------
-
-.. php:class:: PhpConfig
-
-Allows you to read configuration files that are stored as plain PHP files.
-You can read either files from your app's config or from plugin configs
-directories by using :term:`plugin syntax`. Files *must* return an array.
-An example configuration file would look like::
-
-    return [
-        'debug' => 0,
-        'Security' => [
-            'salt' => 'its-secret'
-        ],
-        'App' => [
-            'namespace' => 'App'
-        ]
-    ];
-
-Load your custom configuration file by inserting the following in
-**config/bootstrap.php**::
-
-    Configure::load('customConfig');
-
-Ini Configuration Files
------------------------
-
-.. php:class:: IniConfig
-
-Allows you to read configuration files that are stored as plain .ini files.
-The ini files must be compatible with php's ``parse_ini_file()`` function, and
-benefit from the following improvements
-
-* dot separated values are expanded into arrays.
-* boolean-ish values like 'on' and 'off' are converted to booleans.
-
-An example ini file would look like::
-
-    debug = 0
-
-    [Security]
-    salt = its-secret
-
-    [App]
-    namespace = App
-
-The above ini file, would result in the same end configuration data
-as the PHP example above. Array structures can be created either
-through dot separated values, or sections. Sections can contain
-dot separated keys for deeper nesting.
-
-
-Json Configuration Files
-------------------------
-
-.. php:class:: JsonConfig
-
-Allows you to read / dump configuration files that are stored as JSON encoded
-strings in .json files.
-
-An example JSON file would look like::
-
-    {
-        "debug": false,
-        "App": {
-            "namespace": "MyApp"
-        },
-        "Security": {
-            "salt": "its-secret"
-        }
-    }
-
+By default your application will use ``PhpConfig``.
 
 Bootstrapping CakePHP
 =====================
@@ -644,43 +547,6 @@ global event listeners::
 Loading plugins/events in ``Application::bootstrap()`` makes
 :ref:`integration-testing` easier as events and routes will be re-processed on
 each test method.
-
-Environment Variables
-=====================
-
-Some of the modern cloud providers, like Heroku, let you define environment
-variables. By defining environment variables, you can configure your CakePHP
-app as an 12factor app. Following the
-`12factor app instructions <http://12factor.net/>`_ is a good way to create a
-stateless app, and to ease the deployment of your app.
-This means for example, that if you need to change your database, you'll just
-need to modify a DATABASE_URL variable on your host configuration without the
-need to change it in your source code.
-
-As you can see in your **app.php**, the following variables are concerned:
-
-- ``DEBUG`` (``0`` or ``1``)
-- ``APP_ENCODING`` (ie UTF-8)
-- ``APP_DEFAULT_LOCALE`` (ie ``en_US``)
-- ``SECURITY_SALT``
-- ``CACHE_DEFAULT_URL`` (ie ``File:///?prefix=myapp_&serialize=true&timeout=3600&path=../tmp/cache/``)
-- ``CACHE_CAKECORE_URL`` (ie ``File:///?prefix=myapp_cake_core_&serialize=true&timeout=3600&path=../tmp/cache/persistent/``)
-- ``CACHE_CAKEMODEL_URL`` (ie ``File:///?prefix=myapp_cake_model_&serialize=true&timeout=3600&path=../tmp/cache/models/``)
-- ``EMAIL_TRANSPORT_DEFAULT_URL`` (ie ``smtp://user:password@hostname:port?tls=null&client=null&timeout=30``)
-- ``DATABASE_URL`` (ie ``mysql://user:pass@db/my_app``)
-- ``DATABASE_TEST_URL`` (ie ``mysql://user:pass@db/test_my_app``)
-- ``LOG_DEBUG_URL`` (ie ``file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=../logs/``)
-- ``LOG_ERROR_URL`` (ie ``file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=../logs/``)
-
-As you can see in the examples, we define some options configuration as
-:term:`DSN` strings. This is the case for databases, logs, email transport and
-cache configurations.
-
-If the environment variables are not defined in your environment, CakePHP will
-use the values that are defined in the **app.php**. You can use
-`php-dotenv library <https://github.com/josegonzalez/php-dotenv>`_ to use
-environment variables in a local development. See the Readme instructions of the
-library for more information.
 
 Disabling Generic Tables
 ========================

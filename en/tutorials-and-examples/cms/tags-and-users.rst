@@ -185,7 +185,7 @@ edit method should now look like::
         $this->set('article', $article);
     }
 
-Remember to add the new tags mutliple select control we added to the **add.ctp**
+Remember to add the new tags multiple select control we added to the **add.ctp**
 template to the **src/Template/Articles/edit.ctp** template as well.
 
 Finding Articles By Tags
@@ -328,7 +328,7 @@ queries. Finder methods always get a :doc:`/orm/query-builder` object and an
 array of options as parameters. Finders can manipulate the query and add any
 required conditions or criteria. When complete, finder methods must return
 a modified query object. In our finder we've leveraged the ``distinct()`` and
-``leftJoin()`` methods which allow us to find distinct bookmarks that have
+``leftJoin()`` methods which allow us to find distinct articles that have
 a 'matching' tag.
 
 Creating the View

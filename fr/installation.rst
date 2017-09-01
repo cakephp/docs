@@ -123,14 +123,14 @@ Rester à jour avec les Derniers Changements de CakePHP
 Par défaut c'est ce à quoi le **composer.json** de votre application ressemble::
 
     "require": {
-        "cakephp/cakephp": "3.4.*"
+        "cakephp/cakephp": "3.5.*"
     }
 
 A chaque fois que vous lancez ``php composer.phar update``, vous allez
 recevoir la dernière version contenant les dernières corrections de bugs pour
 cette version mineure. Si vous souhaitez également recevoir les dernières
 versions stables de la branche ``3.x``, vous pouvez changer la contrainte de
-version par ``~3.3``.
+version par ``~3.5``.
 
 Si vous voulez rester à jour avec les derniers changements de CakePHP non
 stables, vous pouvez changer le **composer.json** de votre application::

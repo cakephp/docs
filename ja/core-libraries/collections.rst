@@ -35,7 +35,7 @@
 
     $items = ['a' => 1, 'b' => 2, 'c' => 3];
 
-    // 両方ともコレクションノンスタンスを作成します。
+    // 両方ともコレクションのインスタンスを作成します。
     $collectionA = new Collection($items);
     $collectionB = collection($items);
 
@@ -47,30 +47,19 @@
 メソッド一覧
 =============
 
-.. table::
+.. csv-table::
     :class: docutils internal-toc
 
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`append`    | :php:meth:`buffered`      | :php:meth:`combine`  | :php:meth:`compile` |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`contains`  | :php:meth:`countBy`       | :php:meth:`chunk`    | :php:meth:`each`    |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`every`     | :php:meth:`extract`       | :php:meth:`filter`   | :php:meth:`first`   |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`groupBy`   | :php:meth:`indexBy`       | :php:meth:`insert`   | :php:meth:`isEmpty` |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`last`      | :php:meth:`listNested`    | :php:meth:`map`      | :php:meth:`match`   |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`max`       | :php:meth:`min`           | :php:meth:`nest`     | :php:meth:`reduce`  |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`reject`    | :php:meth:`sample`        | :php:meth:`shuffle`  | :php:meth:`skip`    |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`some`      | :php:meth:`sortBy`        | :php:meth:`stopWhen` | :php:meth:`sumOf`   |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`take`      | :php:meth:`through`       | :php:meth:`unfold`   | :php:meth:`zip`     |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`transpose` | :php:meth:`chunkWithKeys` |                      |                     |
-    +-----------------------+---------------------------+----------------------+---------------------+
+    :php:meth:`append`, :php:meth:`avg`, :php:meth:`buffered`, :php:meth:`chunk`
+    :php:meth:`chunkWithKeys`, :php:meth:`combine`, :php:meth:`compile`, :php:meth:`contains`
+    :php:meth:`countBy`, :php:meth:`each`, :php:meth:`every`, :php:meth:`extract`
+    :php:meth:`filter`, :php:meth:`first`, :php:meth:`groupBy`, :php:meth:`indexBy`
+    :php:meth:`insert`, :php:meth:`isEmpty`, :php:meth:`last`, :php:meth:`listNested`
+    :php:meth:`map`, :php:meth:`match`, :php:meth:`max`, :php:meth:`median`
+    :php:meth:`min`, :php:meth:`nest`, :php:meth:`reduce`, :php:meth:`reject`
+    :php:meth:`sample`, :php:meth:`shuffle`, :php:meth:`skip`, :php:meth:`some`
+    :php:meth:`sortBy`, :php:meth:`stopWhen`, :php:meth:`sumOf`, :php:meth:`take`
+    :php:meth:`through`, :php:meth:`transpose`, :php:meth:`unfold`, :php:meth:`zip`
 
 反復
 ====
@@ -449,6 +438,39 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
     });
 
     $sumOfDadAges = $collection->sumOf('dad.age');
+
+.. php:method:: avg($matcher = null)
+
+コレクション内の要素の平均値を計算します。必要に応じて、平均値を生成するためのマッチャーパスや
+値を抽出する関数を指定してください。 ::
+
+    $items = [
+       ['invoice' => ['total' => 100]],
+       ['invoice' => ['total' => 200]],
+    ];
+
+    // 平均値: 150
+    $average = (new Collection($items))->avg('invoice.total');
+
+.. versionadded:: 3.5.0
+
+.. php:method:: median($matcher = null)
+
+要素の集合の中央値を計算します。必要に応じて、中央値を生成するためのマッチャーパスや
+値を抽出する関数を指定してください。 ::
+
+    $items = [
+      ['invoice' => ['total' => 400]],
+      ['invoice' => ['total' => 500]],
+      ['invoice' => ['total' => 100]],
+      ['invoice' => ['total' => 333]],
+      ['invoice' => ['total' => 200]],
+    ];
+
+    // 中央値: 333
+    $median = (new Collection($items))->median('invoice.total');
+
+.. versionadded:: 3.5.0
 
 グループ化とカウント
 --------------------

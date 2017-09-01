@@ -417,7 +417,7 @@ Possible keys for hasMany association arrays include:
 - **strategy**: Defines the query strategy to use. Defaults to 'select'. The
   other valid value is 'subquery', which replaces the ``IN`` list with an
   equivalent subquery.
-- **saveStrategy**: Either 'append' or 'replace'. When 'append' the current
+- **saveStrategy**: Either 'append' or 'replace'. Defaults to 'append'. When 'append' the current
   records are appended to any records in the database. When 'replace' associated
   records not in the current set will be removed. If the foreign key is a null
   able column or if ``dependent`` is true records will be orphaned.
@@ -459,6 +459,11 @@ the column name.
 
 BelongsToMany Associations
 ==========================
+
+.. note::
+
+    In 3.0 and onward ``hasAndBelongsToMany`` / ``HABTM`` has been renamed to
+    ``belongsToMany`` / ``BTM``.
 
 An example of a BelongsToMany association is "Article BelongsToMany Tags", where
 the tags from one article are shared with other articles.  BelongsToMany is

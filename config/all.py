@@ -42,7 +42,7 @@ copyright = u'%d, Cake Software Foundation, Inc' % datetime.datetime.now().year
 version = '3.5'
 
 # The full version, including alpha/beta/rc tags.
-release = '3.next'
+release = '3.5'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:

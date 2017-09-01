@@ -316,7 +316,8 @@ l'exemple ci-dessus peut être réécrit en::
 
     // Crée un builder avec une classe de Route différente.
     $routes->scope('/', function ($routes) {
-        $routes->routeClass(DashedRoute::class);
+
+        $routes->setRouteClass(DashedRoute::class);
         $routes->connect('/:controller/:id', ['action' => 'view'])
             ->setPatterns(['id' => '[0-9]+']);
 
@@ -480,13 +481,13 @@ passé aux fonctions du controller::
             '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
             ['controller' => 'Blogs', 'action' => 'view']
         )
+        // Défini les éléments de route dans le template de route
+        // à passer en tant qu'arguments à la fonction. L'ordre est
+        // important car cela fera simplement correspondre ":id" avec
+        // articleId dans votre action.
+        ->setPass(['id', 'slug'])
+        // Defini un pattern que `id` doit avoir.
         ->setPatterns([
-            // Défini les éléments de route dans le template de route
-            // à passer en tant qu'arguments à la fonction. L'ordre est
-            // important car cela fera simplement correspondre ":id" avec
-            // articleId dans votre action.
-            'pass' => ['id', 'slug'],
-            // Define a pattern that `id` must match.
             'id' => '[0-9]+',
         ]);
     });
@@ -534,7 +535,7 @@ utiliser::
     // Nommage d'une route liée à un verbe spécifique (3.5.0+)
     $routes->post(
         '/logout',
-        ``['controller' => 'Users', 'action' => 'logout'],
+        ['controller' => 'Users', 'action' => 'logout'],
         'logout'
     );
 
@@ -856,7 +857,8 @@ Pour restreindre les extensions à un *scope* spécifique, vous pouvez les défi
 en utilisant la méthode :php:meth:`Cake\\Routing\\RouteBuilder::extensions()`::
 
     Router::scope('/', function ($routes) {
-        $routes->extensions(['json', 'xml']);
+        // Avant 3.5.0 utilisez `extensions()` 
+        $routes->setExtensions(['json', 'xml']);
         // ...
     });
 
@@ -880,7 +882,7 @@ souhaitez créer une URL comme ``/page/title-of-page.html`` vous devriez créer
 un scope comme ceci::
 
     Router::scope('/page', function ($routes) {
-        $routes->extensions(['json', 'xml', 'html']);
+        $routes->setExtensions(['json', 'xml', 'html']);
         $routes->connect(
             '/:title',
             ['controller' => 'Pages', 'action' => 'view']
@@ -918,7 +920,7 @@ enregistré dans la collection de routes::
 
     Router::scope('/', function ($routes) {
         $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
-        $routes->registerMiddleware('cookies', new EncryptedCookiesMiddleware());
+        $routes->registerMiddleware('cookies', new EncryptedCookieMiddleware());
     });
 
 Une fois enregistré dans le builder de routes, le middleware peut être appliqué
@@ -989,7 +991,7 @@ de données REST, nous ferions quelque chose comme ceci::
     //Dans config/routes.php
 
     Router::scope('/', function ($routes) {
-        $routes->extensions(['json']);
+        $routes->setExtensions(['json']);
         $routes->resources('Recipes');
     });
 
@@ -1397,7 +1399,8 @@ d'une route en utilisant l'option ``routeClass``::
 
     // Ou en définissant la routeClass dans votre scope.
     $routes->scope('/', function ($routes) {
-        $routes->routeClass('SlugRoute');
+        // Avant 3.5.0, utilisez `routeClass()`
+        $routes->setRouteClass('SlugRoute');
         $routes->connect(
              '/:slug',
              ['controller' => 'Articles', 'action' => 'view']

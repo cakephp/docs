@@ -258,7 +258,7 @@ Você pode resgatar a lista de todos os blocos populados usand o método ``block
 Usando View Blocks
 ==================
 
-*View blocks* provê uma API flexvel que lhe permite definir slots ou blocos em 
+*View blocks* provê uma API flexível que lhe permite definir slots ou blocos em 
 suas *views/layouts* que serão definidas em outro lugar. Por exemplo, *blocks* 
 são ideais para implementar coisas como *sidebars*, ou regiões para carregar *assets*
 ao final/inicio do seu *layout*. *Blocks* podem ser definidos de duas formas: 

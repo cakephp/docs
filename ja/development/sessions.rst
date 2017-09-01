@@ -144,16 +144,19 @@ CakePHP は、 ``Network\Session`` 名前空間内にクラスがあることを
         'defaults' => 'database'
     ]
 
-この設定は、少なくとも以下の項目が追加されたデータベーステーブルが必要になります。 ::
+この設定は、以下の項目を持つデータベーステーブルが必要になります。 ::
 
-    CREATE TABLE `sessions` (
-      `id` varchar(255) NOT NULL DEFAULT '',
-      `data` BLOB, -- or BYTEA for PostgreSQL
-      `expires` int(11) DEFAULT NULL,
-      PRIMARY KEY (`id`)
-    );
+  CREATE TABLE `sessions` (
+    `id` char(40) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+    `created` datetime DEFAULT CURRENT_TIMESTAMP, -- Optional
+    `modified` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Optional
+    `data` blob DEFAULT NULL, -- for PostgreSQL use bytea instead of blob
+    `expires` int(10) unsigned DEFAULT NULL,
+    PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-アプリケーションスケルトンの中に、sessions テーブルのためのスキーマのコピーがあります。
+`アプリケーションスケルトン <https://github.com/cakephp/app>`_ の中の
+``config/schema/sessions.sql`` に、sessions テーブルのためのスキーマのコピーがあります。
 
 セッションの保存を処理するための独自の ``Table`` クラスを使用することもできます。 ::
 
@@ -186,7 +189,7 @@ APC, Memcached, または Xcache のように格納することを可能にし�
         ]
     ]);
 
-これは CakeSession に ``CacheSession`` クラスをセッション保存先として
+これは Session に ``CacheSession`` クラスをセッション保存先として
 委任する設定です。'config' キーをキャッシュの設定に使用できます。
 デフォルトのキャッシュ設定は ``'default'`` です。
 

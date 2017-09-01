@@ -165,6 +165,8 @@ methods will let you re-use your queries and make testing easier.
 By default queries and result sets will return :doc:`/orm/entities` objects. You
 can retrieve basic arrays by disabling hydration::
 
+    $query->enableHydration(false);
+    // Prior to 3.4.0
     $query->hydrate(false);
 
     // $data is ResultSet that contains array data.
@@ -228,7 +230,7 @@ data::
 
 With no additional options the keys of ``$data`` will be the primary key of your
 table, while the values will be the 'displayField' of the table. You can use the
-``displayField()`` method on a table object to configure the display field of
+``setDisplayField()`` method on a table object to configure the display field of
 a table::
 
     class ArticlesTable extends Table
@@ -236,6 +238,8 @@ a table::
 
         public function initialize(array $config)
         {
+            $this->setDisplayField('title');
+            // Prior to 3.4.0
             $this->displayField('title');
         }
     }
@@ -312,9 +316,9 @@ the Author entity. ::
 You can also fetch the label in the list directly using. ::
 
     // In AuthorsTable::initialize():
-    $this->displayField('label'); // Will utilize Author::_getLabel()
+    $this->setDisplayField('label'); // Will utilize Author::_getLabel()
     // In your finders/controller:
-    $query = $authors->find('list'); // Will utilize AuthorsTable::displayField()
+    $query = $authors->find('list'); // Will utilize AuthorsTable::getDisplayField()
 
 Finding Threaded Data
 =====================
@@ -630,13 +634,13 @@ to ``select()``::
         ->select($articles->Users)
         ->contain(['Users']);
 
-Alternatively, if you have multiple associations, you can use ``autoFields()``::
+Alternatively, if you have multiple associations, you can use ``enableAutoFields()``::
 
     // Select id & title from articles, but all fields off of Users, Comments
     // and Tags.
     $query->select(['id', 'title'])
         ->contain(['Comments', 'Tags'])
-        ->autoFields(true)
+        ->enableAutoFields(true) // Prior to 3.4.0 use autoFields(true)
         ->contain(['Users' => function($q) {
             return $q->autoFields(true);
         }]);
@@ -820,7 +824,7 @@ data, you can use the ``leftJoinWith()`` function::
     $query->select(['total_comments' => $query->func()->count('Comments.id')])
         ->leftJoinWith('Comments')
         ->group(['Articles.id'])
-        ->autoFields(true);
+        ->enableAutoFields(true); // Prior to 3.4.0 use autoFields(true);
 
 The results for the above query will contain the article data and the
 ``total_comments`` property for each of them.
@@ -836,7 +840,7 @@ word, per author::
             return $q->where(['Tags.name' => 'awesome']);
         })
         ->group(['Authors.id'])
-        ->autoFields(true);
+        ->enableAutoFields(true); // Prior to 3.4.0 use autoFields(true);
 
 This function will not load any columns from the specified associations into the
 result set.
@@ -879,6 +883,8 @@ column::
 Dynamically changing the strategy in this way will only apply to a specific
 query. If you want to make the strategy change permanent you can do::
 
+    $articles->FirstComment->setStrategy('select');
+    // Prior to 3.4.0
     $articles->FirstComment->strategy('select');
 
 Using the ``select`` strategy is also a great way of making associations with
@@ -910,6 +916,8 @@ databases that limit the amount of bound parameters per query, such as
 
 You can also make the strategy permanent for the association by doing::
 
+    $articles->Comments->setStrategy('subquery');
+    // Prior to 3.4.0
     $articles->Comments->strategy('subquery');
 
 Lazy Loading Associations
@@ -935,6 +943,8 @@ set multiple times, or cache and iterate the results. If you need work with
 a data set that does not fit into memory you can disable buffering on the query
 to stream results::
 
+    $query->enableBufferResults(false);
+    // Prior to 3.4.0
     $query->bufferResults(false);
 
 Turning buffering off has a few caveats:
@@ -1129,7 +1139,7 @@ Calculating the most commonly mentioned words, where the articles contain
 information about CakePHP, as usual we need a mapper function::
 
     $mapper = function ($article, $key, $mapReduce) {
-        if (stripos('cakephp', $article['body']) === false) {
+        if (stripos($article['body'], 'cakephp') === false) {
             return;
         }
 
@@ -1150,11 +1160,12 @@ only extract the count::
 
 Finally, we put everything together::
 
-    $articlesByStatus = $articles->find()
+    $wordCount = $articles->find()
         ->where(['published' => true])
         ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
-        ->hydrate(false)
-        ->mapReduce($mapper, $reducer);
+        ->enableHydrate(false) // Prior to 3.4.0 use hydrate(false)
+        ->mapReduce($mapper, $reducer)
+        ->toArray();
 
 This could return a very large array if we don't clean stop words, but it could
 look something like this::
@@ -1173,31 +1184,46 @@ better said, people who do not follow each other. Let's start with our
 ``mapper()`` function::
 
     $mapper = function ($rel, $key, $mr) {
-        $mr->emitIntermediate($rel['source_user_id'], $rel['target_user_id']);
-        $mr->emitIntermediate($rel['target_user_id'], $rel['source_target_id']);
+        $mr->emitIntermediate($rel['target_user_id'], $rel['source_user_id']);
+        $mr->emitIntermediate(-$rel['source_user_id'], $rel['target_user_id']);
     };
 
-We just duplicated our data to have a list of users each other user follows.
+The intermediate array will be like the following::
+
+    [
+        1 => [2, 3, 4, 5, -3, -5],
+        2 => [-1],
+        3 => [-1, 1, 6],
+        4 => [-1],
+        5 => [-1, 1],
+        6 => [-3],
+        ...
+    ]
+
+Positive numbers mean that a user, indicated with the first-level key, is
+following them, and negative numbers mean that the user is followed by them.
+
 Now it's time to reduce it. For each call to the reducer, it will receive a list
 of followers per user::
 
-    // $friends list will look like
-    // repeated numbers mean that the relationship existed in both directions
-    [2, 5, 100, 2, 4]
+    $reducer = function ($friends, $user, $mr) {
+        $fakeFriends = [];
 
-    $reducer = function ($friendsList, $user, $mr) {
-        $friends = array_count_values($friendsList);
-        foreach ($friends as $friend => $count) {
-            if ($count < 2) {
-                $mr->emit($friend, $user);
+        foreach ($friends as $friend) {
+            if ($friend > 0 && !in_array(-$friend, $friends)) {
+                $fakeFriends[] = $friend;
             }
         }
-    }
+
+        if ($fakeFriends) {
+            $mr->emit($fakeFriends, $user);
+        }
+    };
 
 And we supply our functions to a query::
 
     $fakeFriends = $friends->find()
-        ->hydrate(false)
+        ->enableHydrate(false) // Prior to 3.4.0 use hydrate(false)
         ->mapReduce($mapper, $reducer)
         ->toArray();
 
@@ -1276,4 +1302,3 @@ calling the method with both parameters as null and the third parameter
 (overwrite) as ``true``::
 
     $query->mapReduce(null, null, true);
-

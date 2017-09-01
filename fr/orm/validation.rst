@@ -20,7 +20,7 @@ Durant la transformation des données en entities, vous pouvez valider les
 données. La validation des données vous permet de vérifier le type, la forme et
 la taille des données. Par défaut les données requêtées seront validées avant
 qu'elles ne soient converties en entities.
-Si aucune règle de validation n'échoue, l'entity retournée va contenir les
+Si une des règles de validation échoue, l'entity retournée contiendra des
 erreurs. Les champs avec des erreurs ne seront pas présents dans l'entity
 retournée::
 
@@ -308,9 +308,9 @@ quelques exemples de règles de domaine:
 * Etats de transition ou étapes de flux de travail, par exemple pour mettre à
   jour un statut de facture.
 * Eviter la modification ou la suppression soft d'articles.
-* Enforcing usage/rate limit caps.
+* Appliquer des limites d'usage, que ce soit en nombre ou en vitesse.
 
-Les règles de domaine sont vérifiées lors de l'appel au méthodes ``save()`` et
+Les règles de domaine sont vérifiées lors de l'appel aux méthodes ``save()`` et
 ``delete()`` de la Table.
 
 Créer un Vérificateur de Règles
@@ -431,7 +431,7 @@ nulles de votre clé étrangère composite sont nulles::
 
 Dans la majorité des bases de données SQL, les index ``UNIQUE`` sur plusieurs
 colonnes permettent à plusieurs valeurs null d'exister car ``NULL`` n'est
-pas égale à lui même. Même si autoriser plusieurs valeurs null est le comportement
+pas égal à lui même. Même si autoriser plusieurs valeurs null est le comportement
 par défaut de CakePHP, vous pouvez inclure des valeurs null dans vos validations
 en utilisant ``allowMultipleNulls``::
 
@@ -465,14 +465,12 @@ règles::
     // Entre 3 et 5 tags
     $rules->add($rules->validCount('tags', 3, '>=', 'Vous devez avoir au moins 3 tags'));
     $rules->add($rules->validCount('tags', 5, '<=', 'Vous devez avoir au moins 5 tags'));
-    $rules->add($rules->validCount('subscription', 0, '==', 'Vous pouvez ne pas avoir de subscription'));
 
-.. note::
+Notez que ``validCount`` retourne ``false`` si la propriété ne peut pas être comptée
+ou n'existe pas::
 
-    ``validCount`` retourne ``false`` si la propriété ne peut pas être comptée
-    ou n'existe pas. Par exemple, comparé via ``<``, ``<=`` ou avec ``0``
-    retournera ``false`` si vous ne fournissez pas au moins une liste vide
-    d'abonnements.
+    // La sauvegarde échouera si tags est null
+    $rules->add($rules->validCount('tags', 0, '<=', 'Vous ne devez pas avoir de tags'));
 
 .. versionadded:: 3.3.0
     La méthode ``validCount()`` a été ajoutée dans la version 3.3.0.
