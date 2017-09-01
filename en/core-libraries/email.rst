@@ -156,8 +156,7 @@ The above configuration would enable TLS communication for email messages.
     account <https://support.google.com/accounts/answer/6010255>`__.
 
 .. note::
-    `Use Gmail SMTP settings to send mail from a printer, scanner, or app     
-    <https://support.google.com/a/answer/176600?hl=en>`.
+    `Gmail SMTP settings <https://support.google.com/a/answer/176600?hl=en>`__.
     
 .. note::
     To use SSL + SMTP, you will need to have the SSL configured in your PHP
