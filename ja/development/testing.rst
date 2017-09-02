@@ -883,11 +883,16 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
 * ``put()`` PUT リクエストを送信します。
 * ``delete()`` DELETE リクエストを送信します。
 * ``patch()`` PATCH リクエストを送信します。
+* ``options()`` OPTIONS リクエストを送信します。
+* ``head()`` HEAD リクエストを送信します。
 
 ``get()`` と ``delete()`` を除く全てのメソッドは、あなたがリクエストボディーを送信することを
 可能にする二番目のパラメーターを受け入れます。リクエストをディスパッチした後、あなたのリクエストに対して
 正しく動作したことを確実にするために ``IntegrationTestCase`` や、PHPUnit が提供するさまざまな
 アサーションを使用することができます。
+
+.. versionadded:: 3.5.0
+    ``options()`` と ``head()`` は 3.5.0 で追加されました。
 
 リクエストの設定
 ----------------
@@ -1131,6 +1136,26 @@ JSON を返すコントローラーの簡単な例を示します。 ::
 CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合、 ``JSON_PRETTY_PRINT``
 オプションを使用します。
 
+Disabling Error Handling Middleware in Tests
+--------------------------------------------
+
+When debugging tests that are failing because your application is encountering
+errors it can be helpful to temporarily disable the error handling middleware to
+allow the underlying error to bubble up. You can use
+``disableErrorHandlerMiddleware()`` to do this::
+
+    public function testGetMissing()
+    {
+        $this->disableErrorHandlerMiddleware();
+        $this->get('/markers/not-there');
+        $this->assertResponseCode(404);
+    }
+
+In the above example, the test would fail and the underlying exception message
+and stack trace would be displayed instead of the rendered error page being
+checked.
+
+.. versionadded:: 3.5.0
 
 アサーションメソッド
 --------------------
