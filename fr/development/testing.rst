@@ -1,17 +1,6 @@
 Testing
 #######
 
-.. note::
-    The documentation is not currently supported in French language for this
-    page.
-
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
-
-    You can refer to the English version in the select top menu to have
-    information about this page's topic.
-
 CakePHP fournit un support de test intégré compréhensible. CakePHP permet
 l'intégration de `PHPUnit <http://phpunit.de>`_. En plus de toutes les
 fonctionnalités offertes par PHPUnit, CakePHP offre quelques fonctionnalités
@@ -39,7 +28,7 @@ Pour installer PHPUnit avec Composer:
     $ php composer.phar require --dev phpunit/phpunit:"^5.7|^6.0"
 
     // Avant CakePHP 3.4.1
-    $ php composer.phar require --dev phpunit/phpunit
+    $ php composer.phar require --dev phpunit/phpunit:"<6.0"
 
 Ceci va ajouter la dépendance à la section ``require-dev`` de votre
 ``composer.json``, et ensuite installer PHPUnit avec vos autres dépendances.
@@ -103,8 +92,7 @@ données::
 Vérifier la Configuration Test
 ==============================
 
-Après avoir installé PHPUnit et configuré le ``test`` de la configuration de la
-base de données, vous pouvez vous assurer que vous êtes prêt à écrire et lancer
+Après avoir installé PHPUnit et configuré la configuration de la base de donnée de ``test``, vous pouvez vous assurer que vous êtes prêt à écrire et lancer
 vos propres tests en lançant un de ceux présents dans le cœur:
 
 .. code-block:: bash
@@ -414,7 +402,7 @@ CakePHP utilise la connexion nommée ``test`` dans votre fichier de configuratio
 **config/app.php**. Si la connexion n'est pas utilisable, une exception
 sera levée et vous ne pourrez pas utiliser les fixtures de la base de données.
 
-CakePHP effectue ce qui suit pendant le chemin d'une fixture basée sur un cas
+CakePHP effectue ce qui suit pendant le déroulement d'une fixture basée sur un cas
 de test:
 
 #. Crée les tables pour chacune des fixtures nécessaires.
@@ -759,14 +747,10 @@ Disons que nous avons déjà notre table Articles définie dans
         }
     }
 
-Nous voulons maintenant configurer un test qui va utiliser la définition du
-model, mais à travers les fixtures, pour tester quelques fonctionnalités dans
-le model. Le test suite de CakePHP charge un petit ensemble minimum de fichiers
-(pour garder les tests isolés), ainsi nous devons commencer par charger notre
-model - dans ce cas le model Article que nous avons déjà défini.
-
-Créons maintenant un fichier nommé **ArticlesTableTest.php** dans notre
-répertoire **tests/TestCase/Model/Table**, avec le contenu suivant::
+Nous voulons maintenant configurer un test qui va tester ce model tout 
+en utilisant les fictures pour garder nos test isolés. Créons  un fichier 
+nommé **ArticlesTableTest.php** dans notre répertoire 
+**tests/TestCase/Model/Table**, avec le contenu suivant::
 
     namespace App\Test\TestCase\Model\Table;
 
@@ -963,7 +947,7 @@ Créez un fichier nommé **ArticlesControllerTest.php** dans votre répertoire
         }
     }
 
-Cet exemple montre quelques façons d'utiliser l'envoi de requête et quelques
+Cet exemple montre quelques méthodes d'envoi de requête et quelques
 assertions qu'intègre ``IntegrationTestCase``. Avant de pouvoir utiliser les
 assertions, vous aurez besoin de simuler une requête. Vous pouvez utiliser
 l'une des méthodes suivantes pour simuler une requête:
@@ -1043,17 +1027,19 @@ authentification, vous pourriez écrire les tests suivants::
         // Autres assertions.
     }
 
-Testing Stateless Authentication and APIs
+Test de l'Authentification stateless (sans état) et des APIs
 -----------------------------------------
 
-To test APIs that use stateless authentication, such as Basic authentication,
-you can configure the request to inject environment conditions or headers that
-simulate actual authentication request headers.
+Pour tester les APIs qui utilisent l'authentification sans état, vous pouvez, 
+comme pour l'authentification basique, configurer la demande de manière à ce 
+qu'elle injecte des variables d'environnements et des headers (en-têtes) qui 
+permettront de simuler les en-têtes d'une demande d'authentification réelle.
 
-When testing Basic or Digest Authentication, you can add the environment
-variables that `PHP creates <http://php.net/manual/en/features.http-auth.php>`_
-automatically. These environment variables used in the authentication adapter
-outlined in :ref:`basic-authentication`::
+Lorsque vous testez l'authentification simple (Basic) ou de type "Digest", vous
+pouvez ajouter les variables d'environnement que PHP crée 
+<http://php.net/manual/fr/features.http-auth.php> `_ Automatiquement. 
+Ces variables d'environnement utilisées dans l'adaptateur d'authentification sont
+décrit dans: ref: `basic-authentication` ::
 
     public function testBasicAuthentication()
     {
@@ -1068,8 +1054,8 @@ outlined in :ref:`basic-authentication`::
         $this->assertResponseOk();
     }
 
-If you are testing other forms of authentication, such as OAuth2, you can set
-the Authorization header directly::
+Si vous testez d'autres types d'authentification, tel que OAuth2, vous pouvez définir
+l'en-tête d'autorisation directement::
 
     public function testOauthToken()
     {
@@ -1083,8 +1069,8 @@ the Authorization header directly::
         $this->assertResponseOk();
     }
 
-The headers key in ``configRequest()`` can be used to configure any additional
-HTTP headers needed for an action.
+La clé des en-têtes dans ``configRequest()`` peut être utilisée pour configurer
+tout en-tête HTTP supplémentaires necessaires à une action.
 
 Tester les Actions Protégées par CsrfComponent ou SecurityComponent
 -------------------------------------------------------------------
@@ -1194,9 +1180,9 @@ pour que vous puissez écrire vos assertions::
 Tester un controller retournant du JSON
 ---------------------------------------
 
-JSON est un format commun lors de la conception de web service. Tester les
-endpoints de votre web service est très simple avec CakePHP. Commençons avec
-un exemple simple de controller qui renvoie du JSON::
+JSON est un format commun à utiliser lors de la conception de web service. Tester les
+points de terminaisons (endpoints) de votre web service est très simple avec CakePHP. 
+Commençons avec un simple exemple de controller qui renvoie du JSON::
 
     class MarkersController extends AppController
     {
@@ -1240,8 +1226,9 @@ et assurons-nous que le web service répond correctement::
         }
     }
 
-Nous utilisons l'option ``JSON_PRETTY_PRINT`` car la JsonView intégrée à CakePHP
-utilise cette option quand le mode ``debug`` est activé.
+Nous utilisons l'option ``JSON_PRETTY_PRINT`` car la vue qui retourne la représentation
+JSON intégrée à CakePHP (JsonView) utilise cette option quand le mode ``debug`` est 
+activé.
 
 Désactiver le Middleware de Gestion d'Erreurs dans les Tests
 ------------------------------------------------------------
@@ -1477,7 +1464,7 @@ consoles et faire des assertions sur leurs résultats.
 
     ``ConsoleIntegrationTestCase`` a été ajoutée dans 3.5.0.
 
-Pour commencer à tester votre application console, créez un "test case" qui *extends*
+Pour commencer à tester votre application console, créez un "test case" qui étend
 ``Cake\TestSuite\ConsoleIntegrationTestCase``. Cette classe contient une méthode
 ``exec()`` qui est utilisée pour exécuter votre commande. Vous pouvez passer la
 même chaîne que vous passeriez au CLI dans cette méthode.
@@ -1867,7 +1854,7 @@ Tester les Helpers
 Puisqu'un bon nombre de logique se situe dans les classes Helper, il est
 important de s'assurer que ces classes sont couvertes par des cas de test.
 
-Tout d'abord, nous créons un helper d'exemple à tester.
+Tout d'abord, nous créons un exemple de helper à tester.
 ``CurrencyRendererHelper`` va nous aider à afficher les monnaies dans nos vues
 et pour simplifier, il ne va avoir qu'une méthode ``usd()``::
 
@@ -2215,7 +2202,7 @@ configuration spécifique pour Jenkins. Vous pouvez utiliser ce même fichier de
 configuration pour remplacer tous les autres fichiers de configuration dont vous
 avez besoin sur Jenkins.
 
-Il est souvent une bonne idée de supprimer et re-créer la base de données avant
+C'est souvent une bonne idée de supprimer et re-créer la base de données avant
 chaque build aussi. Cela vous évite des echecs de chaînes, où un build cassé
 entraîne l'echec des autres. Ajoutez une autre *étape de script shell* au build
 qui contient ce qui suit:
