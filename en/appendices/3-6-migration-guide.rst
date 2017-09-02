@@ -17,3 +17,13 @@ The following is a list of deprecated methods, properties and behaviors. These
 features will continue to function until 4.0.0 after which they will be removed.
 
 * ``bin/cake orm_cache`` is now ``bin/cake schema_cache``.
+
+
+Behavior Changes
+================
+
+The following changes are API compatible, but they represent minor variances in
+behavior that may affect your application:
+
+* ``Cake\Utility\Security::randomBytes()`` will now throw exceptions when
+  a secure source of entropy cannot be found in PHP5.
