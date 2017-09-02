@@ -1028,7 +1028,7 @@ authentification, vous pourriez écrire les tests suivants::
     }
 
 Test de l'Authentification stateless (sans état) et des APIs
------------------------------------------
+------------------------------------------------------------
 
 Pour tester les APIs qui utilisent l'authentification sans état, vous pouvez, 
 comme pour l'authentification basique, configurer la demande de manière à ce 
