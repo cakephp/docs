@@ -459,10 +459,11 @@ h6:hover .headerlink {
 /* inline code */
 tt {
     font-family: "Roboto Mono", "Consolas", "Monaco", monospace;
-    font-size: 105%;
+    font-size: 100%;
     line-height: normal;
     padding: 0px 2px;
     color: #363637;
+    background-color: #ECECE9;
 }
 dl tt {
     border-bottom: none;
