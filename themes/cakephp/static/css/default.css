@@ -435,11 +435,11 @@ h6:hover .headerlink {
 code,
 tt {
     font-family: "Roboto Mono", "Consolas", "Monaco", monospace;
-    font-size: 105%;
+    font-size: 100%;
     line-height: normal;
     padding: 0 2px;
     color: #363637;
-    background-color: transparent;
+    background-color: #ECECE9;
 }
 a code,
 a tt {
