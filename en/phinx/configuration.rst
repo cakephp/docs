@@ -34,20 +34,21 @@ This means that:
 
 .. code-block:: php
 
-   require 'app/init.php';
+        <?php
+           require 'app/init.php';
 
-   global $app;
-   $pdo = $app->getDatabase()->getPdo();
+           global $app;
+           $pdo = $app->getDatabase()->getPdo();
 
-   return ['environments' =>
-            [
-              'default_database' => 'development',
-              'development' => [
-                'name' => 'devdb',
-                'connection' => $pdo
-              ]
-            ]
-          ];
+           return ['environments' =>
+                    [
+                      'default_database' => 'development',
+                      'development' => [
+                        'name' => 'devdb',
+                        'connection' => $pdo,
+                      ]
+                    ]
+                  ];
 
 Migration Paths
 ---------------
@@ -250,7 +251,7 @@ Phinx currently supports the following database adapters natively:
 * `SQL Server <http://www.microsoft.com/sqlserver>`_: specify the ``sqlsrv`` adapter.
 
 SQLite
-`````````````````
+~~~~~~
 
 Declaring an SQLite database uses a simplified structure:
 
@@ -265,7 +266,7 @@ Declaring an SQLite database uses a simplified structure:
             memory: true     # Setting memory to *any* value overrides name
 
 SQL Server
-`````````````````
+~~~~~~~~~~
 
 When using the ``sqlsrv`` adapter and connecting to a named instance you should
 omit the ``port`` setting as SQL Server will negotiate the port automatically.
@@ -273,7 +274,7 @@ Additionally, omit the ``charset: utf8`` or change to ``charset: 65001`` which
 corresponds to UTF8 for SQL Server.
 
 Custom Adapters
-`````````````````
+~~~~~~~~~~~~~~~
 
 You can provide a custom adapter by registering an implementation of the `Phinx\\Db\\Adapter\\AdapterInterface`
 with `AdapterFactory`:
@@ -302,7 +303,7 @@ The aliased classes will still be required to implement the ``Phinx\Migration\Cr
         view: \Namespace\Migrations\ViewMigrationTemplateGenerator
 
 Version Order
-------
+-------------
 
 When rolling back or printing the status of migrations, Phinx orders the executed migrations according to the 
 ``version_order`` option, which can have the following values:
