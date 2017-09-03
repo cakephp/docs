@@ -92,7 +92,7 @@ données::
 Vérifier la Configuration Test
 ==============================
 
-Après avoir installé PHPUnit et configuré la configuration de la base de donnée de ``test``, vous pouvez vous assurer que vous êtes prêt à écrire et lancer
+Après avoir installé PHPUnit et configuré la configuration de la base de données de ``test``, vous pouvez vous assurer que vous êtes prêt à écrire et lancer
 vos propres tests en lançant un de ceux présents dans le cœur:
 
 .. code-block:: bash
@@ -748,7 +748,7 @@ Disons que nous avons déjà notre table Articles définie dans
     }
 
 Nous voulons maintenant configurer un test qui va tester ce model tout 
-en utilisant les fictures pour garder nos test isolés. Créons  un fichier 
+en utilisant les Fixtures pour garder nos Tests isolés. Créons  un fichier 
 nommé **ArticlesTableTest.php** dans notre répertoire 
 **tests/TestCase/Model/Table**, avec le contenu suivant::
 
@@ -1030,16 +1030,16 @@ authentification, vous pourriez écrire les tests suivants::
 Test de l'Authentification stateless (sans état) et des APIs
 ------------------------------------------------------------
 
-Pour tester les APIs qui utilisent l'authentification sans état, vous pouvez, 
-comme pour l'authentification basique, configurer la demande de manière à ce 
-qu'elle injecte des variables d'environnements et des headers (en-têtes) qui 
-permettront de simuler les en-têtes d'une demande d'authentification réelle.
+Pour tester les APIs qui utilisent l'authentification stateless, vous pouvez, 
+comme pour l'authentification basic, configurer la demande de manière à ce 
+qu'elle injecte des variables d'environnement et des headers (en-têtes), ce qui 
+permettra de simuler les en-têtes d'une demande d'authentification réelle.
 
 Lorsque vous testez l'authentification simple (Basic) ou de type "Digest", vous
 pouvez ajouter les variables d'environnement que PHP crée 
-<http://php.net/manual/fr/features.http-auth.php> `_ Automatiquement. 
+`<http://php.net/manual/fr/features.http-auth.php> `_ automatiquement. 
 Ces variables d'environnement utilisées dans l'adaptateur d'authentification sont
-décrit dans: ref: `basic-authentication` ::
+décrites dans: ref: `basic-authentication` ::
 
     public function testBasicAuthentication()
     {
@@ -1070,7 +1070,7 @@ l'en-tête d'autorisation directement::
     }
 
 La clé des en-têtes dans ``configRequest()`` peut être utilisée pour configurer
-tout en-tête HTTP supplémentaires necessaires à une action.
+tout en-tête HTTP supplémentaires nécessaires à une action.
 
 Tester les Actions Protégées par CsrfComponent ou SecurityComponent
 -------------------------------------------------------------------
