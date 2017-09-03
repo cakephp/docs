@@ -152,6 +152,9 @@ Gmail のように、SSL SMTP サーバーを設定することができます�
     <https://support.google.com/accounts/answer/6010255>`__ 。
 
 .. note::
+    `Gmail の SMTP 設定 <https://support.google.com/a/answer/176600?hl=ja>`__ 。
+
+.. note::
 
     SSL + SMTP を使用するには、PHP のインストール時に SSL が設定されている必要があります。
 

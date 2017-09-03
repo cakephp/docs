@@ -185,7 +185,9 @@ driver
     完全名前空間名でも、どちらでもドライバーインスタンスを生成することが可能です。
     短いクラス名の例は、 Mysql, Sqlite, Postgres, Sqlserver などです。
 persistent
-    データベースへの持続的接続を使うかどうか。
+    データベースへの持続的接続を使うかどうか。このオプションは、 SqlServer ではサポートされません。
+    CakePHP バージョン 3.4.13 以降、SqlServer で ``persistent`` を ``true`` にセットすると
+    例外が投げられます。
 host
     データベースサーバーのホスト名 （または IP アドレス）。
 username
