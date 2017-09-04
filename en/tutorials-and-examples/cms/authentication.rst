@@ -231,7 +231,7 @@ Fixing the Add & Edit Actions
 =============================
 
 While we've blocked access to the edit action, we're still open to users
-changing the ``user_id`` attribute of articles on creation or during edit. We
+changing the ``user_id`` attribute of articles during edit. We
 will solve these problems next. First up is the ``add`` action.
 
 When creating articles, we want to fix the ``user_id`` to be the currently
@@ -245,7 +245,7 @@ logged in user. Replace your add action with the following::
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
 
-            // Added: Set the user_id from the session.
+            // Changed: Set the user_id from the session.
             $article->user_id = $this->Auth->user('id');
 
             if ($this->Articles->save($article)) {
@@ -257,9 +257,7 @@ logged in user. Replace your add action with the following::
         $this->set('article', $article);
     }
 
-Remember to remove the ``user_id`` control from
-**src/Templates/Articles/add.ctp** as well. Next we'll update the ``edit``
-action. Replace the edit method with the following::
+Next we'll update the ``edit`` action. Replace the edit method with the following::
 
     // in src/Controller/ArticlesController.php
 
