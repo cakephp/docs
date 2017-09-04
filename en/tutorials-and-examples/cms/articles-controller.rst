@@ -204,6 +204,11 @@ to be created. Start by creating an ``add()`` action in the
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
+
+                // Hardcoding the user_id is temporary, and will be removed later
+                // when we build authentication out.
+                $article->user_id = 1;
+
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
                     return $this->redirect(['action' => 'index']);
@@ -320,12 +325,6 @@ typically a URL-safe version of an article's title. We can use the
             $sluggedTitle = Text::slug($entity->title);
             // trim slug to maximum length defined in schema
             $entity->slug = substr($sluggedTitle, 0, 191)
-        }
-
-        // This is temporary, and will be removed later
-        // when we build authentication out.
-        if (!$entity->user_id) {
-            $entity->user_id = 1;
         }
     }
 
