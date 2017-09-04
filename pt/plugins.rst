@@ -175,7 +175,8 @@ Se você preferir ter seu nome vendor como nível superior e ter um espaço para
 
     Plugin::load('AcmeCorp/Users');
 
-Isso garantirá que os nomes das classes sejam resolvidos corretamente ao usar :term:`sintaxe do plugin`.
+Isso garantirá que os nomes das classes sejam resolvidos corretamente ao usar 
+:term:`plugin syntax`.
 
 A maioria dos plugins indicará o procedimento adequado para configurá-los e configurar
 até o banco de dados em sua documentação. Alguns plugins exigirão mais configuração
@@ -195,7 +196,7 @@ poderia ficar assim::
     public $helpers = ['ContactManager.ContactInfo'];
 
 .. note::
-	Esse nome de classe separado por pontos é denominado :term:`sintaxe de plugin`.
+	Esse nome de classe separado por pontos é denominado :term:`plugin syntax`.
 
 Você poderia então acessar o ``ContactInfoHelper`` como
 qualquer outro helper em sua view, como::
@@ -448,7 +449,8 @@ sobre eles, use a sintaxe alternativa::
         }
     }
 
-Você pode usar ``TableRegistry`` para carregar suas tabelas de plugins usando o familiar :term:`plugin syntax`::
+Você pode usar ``TableRegistry`` para carregar suas tabelas de plugins usando o familiar 
+:term:`plugin syntax`::
 
     use Cake\ORM\TableRegistry;
 
