@@ -78,7 +78,8 @@ Collection()``::
 ``each()`` 的返回值是一个集合对象。Each会迅速迭代集合同时将结果回调到
 集合中的每个值上。
 
-.. php:method:: map(callable $c) 
+.. php:method:: map(callable $c)
+
 ``map()`` 方法会基于一开始的集合内的各对象产生回调影响后的输出结果，来创建一个
 新集合::
 
