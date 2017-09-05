@@ -649,6 +649,8 @@ To rename a table access an instance of the Table object then call the
 Working With Columns
 --------------------
 
+.. _valid-column-types:
+
 Valid Column Types
 ~~~~~~~~~~~~~~~~~~
 
@@ -1000,7 +1002,7 @@ Changing Column Attributes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To change column type or options on an existing column, use the
-``changeColumn()`` method.  See `Valid Column Types`_ and `Valid Column
+``changeColumn()`` method.  See :ref:`valid-column-types` and `Valid Column
 Options`_ for allowed values::
 
     <?php
