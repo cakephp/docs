@@ -32,23 +32,23 @@ This means that:
   and/or share the same connection. However remember to also pass the database name
   as Phinx cannot infer this from the PDO connection.
 
-.. code-block:: php
+::
 
-        <?php
-           require 'app/init.php';
+    <?php
+    require 'app/init.php';
 
-           global $app;
-           $pdo = $app->getDatabase()->getPdo();
+    global $app;
+    $pdo = $app->getDatabase()->getPdo();
 
-           return ['environments' =>
-                    [
-                      'default_database' => 'development',
-                      'development' => [
-                        'name' => 'devdb',
-                        'connection' => $pdo,
-                      ]
-                    ]
-                  ];
+    return ['environments' =>
+             [
+               'default_database' => 'development',
+               'development' => [
+                 'name' => 'devdb',
+                 'connection' => $pdo,
+               ]
+             ]
+           ];
 
 Migration Paths
 ---------------
@@ -84,7 +84,7 @@ You can also use the ``%%PHINX_CONFIG_DIR%%`` token in your path.
 .. code-block:: yaml
 
     paths:
-        migrations: %%PHINX_CONFIG_DIR%%/your/relative/path
+        migrations: '%%PHINX_CONFIG_DIR%%/your/relative/path'
 
 Migrations are captured with ``glob``, so you can define a pattern for multiple
 directories.
@@ -92,13 +92,13 @@ directories.
 .. code-block:: yaml
 
     paths:
-        migrations: %%PHINX_CONFIG_DIR%%/module/*/{data,scripts}/migrations
+        migrations: '%%PHINX_CONFIG_DIR%%/module/*/{data,scripts}/migrations'
 
 Custom Migration Base
 ---------------------
 
-By default all migrations will extend from Phinx's `AbstractMigration` class.
-This can be set to a custom class that extends from `AbstractMigration` by
+By default all migrations will extend from Phinx's ``AbstractMigration`` class.
+This can be set to a custom class that extends from ``AbstractMigration`` by
 setting ``migration_base_class`` in your config:
 
 .. code-block:: yaml
@@ -139,7 +139,7 @@ You can also use the ``%%PHINX_CONFIG_DIR%%`` token in your path.
 .. code-block:: yaml
 
     paths:
-        seeds: %%PHINX_CONFIG_DIR%%/your/relative/path
+        seeds: '%%PHINX_CONFIG_DIR%%/your/relative/path'
 
 Environments
 ------------
@@ -233,10 +233,10 @@ demonstrated by the following example:
         default_database: development
         production:
             adapter: mysql
-            host: %%PHINX_DBHOST%%
-            name: %%PHINX_DBNAME%%
-            user: %%PHINX_DBUSER%%
-            pass: %%PHINX_DBPASS%%
+            host: '%%PHINX_DBHOST%%'
+            name: '%%PHINX_DBNAME%%'
+            user: '%%PHINX_DBUSER%%'
+            pass: '%%PHINX_DBPASS%%'
             port: 3306
             charset: utf8
 
@@ -276,8 +276,8 @@ corresponds to UTF8 for SQL Server.
 Custom Adapters
 ~~~~~~~~~~~~~~~
 
-You can provide a custom adapter by registering an implementation of the `Phinx\\Db\\Adapter\\AdapterInterface`
-with `AdapterFactory`:
+You can provide a custom adapter by registering an implementation of the
+``Phinx\\Db\\Adapter\\AdapterInterface`` with ``AdapterFactory``:
 
 .. code-block:: php
 
