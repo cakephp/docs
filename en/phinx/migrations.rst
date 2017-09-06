@@ -387,7 +387,7 @@ store a collection of users::
                   ->addColumn('last_name', 'string', ['limit' => 30])
                   ->addColumn('created', 'datetime')
                   ->addColumn('updated', 'datetime', ['null' => true])
-                  ->addIndex(['username', 'email'), ['unique' => true])
+                  ->addIndex(['username', 'email'], ['unique' => true])
                   ->save();
         }
 
@@ -610,7 +610,7 @@ good idea to recreate the table again in the ``down()`` method::
                   ->addColumn('last_name', 'string', ['limit' => 30])
                   ->addColumn('created', 'datetime')
                   ->addColumn('updated', 'datetime', ['null' => true])
-                  ->addIndex(['username', 'email'), ['unique' => true])
+                  ->addIndex(['username', 'email'], ['unique' => true])
                   ->save();
         }
     }
