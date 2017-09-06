@@ -14,6 +14,7 @@ Requirements
 - PHP |minphpversion| or greater (including PHP 7.1).
 - mbstring PHP extension
 - intl PHP extension
+- simplexml PHP extension
 
 .. note::
 
