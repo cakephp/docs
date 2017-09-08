@@ -176,7 +176,7 @@ Se você preferir ter seu nome vendor como nível superior e ter um espaço para
     Plugin::load('AcmeCorp/Users');
 
 Isso garantirá que os nomes das classes sejam resolvidos corretamente ao usar 
-:term:`plugin syntax`.
+:term:`sintaxe plugin`.
 
 A maioria dos plugins indicará o procedimento adequado para configurá-los e configurar
 até o banco de dados em sua documentação. Alguns plugins exigirão mais configuração
@@ -196,7 +196,7 @@ poderia ficar assim::
     public $helpers = ['ContactManager.ContactInfo'];
 
 .. note::
-	Esse nome de classe separado por pontos é denominado :term:`plugin syntax`.
+    Esse nome de classe separado por pontos é denominado :term:`sintaxe plugin`.
 
 Você poderia então acessar o ``ContactInfoHelper`` como
 qualquer outro helper em sua view, como::
@@ -450,7 +450,7 @@ sobre eles, use a sintaxe alternativa::
     }
 
 Você pode usar ``TableRegistry`` para carregar suas tabelas de plugins usando o familiar 
-:term:`plugin syntax`::
+:term:`sintaxe plugin`::
 
     use Cake\ORM\TableRegistry;
 
@@ -544,7 +544,9 @@ Você pode colocar qualquer tipo de arquivo em qualquer no diretório webroot.
 Linking to Assets in Plugins
 ----------------------------
 
-Você pode usar o :term:`plugin syntax` ao vincular aos recursos do plugin usando o :php:class:`~Cake\\View\\Helper\\HtmlHelper` script, image ou css methods::
+Você pode usar o :term:`sintaxe plugin` ao vincular aos recursos do plugin
+usando o :php:class:`~Cake\\View\\Helper\\HtmlHelper` script, image ou css
+methods::
 
     // Gera a URL /contact_manager/css/styles.css
     echo $this->Html->css('ContactManager.styles');
