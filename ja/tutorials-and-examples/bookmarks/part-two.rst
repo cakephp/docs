@@ -92,9 +92,6 @@ AppController に追加しましょう。 ::
     もしハッシュ化されたパスワードを持つユーザーがいなければ、 ``loadComponent('Auth')`` 
     の行をコメントアウトして、ユーザーを編集して新しいパスワードを保存して下さい。
 
-これでログインできるようになっているはずです。もしできない場合、ユーザーのパスワードが
-ハッシュ化されていることを確認してください。
-
 ログアウトを追加
 ================
 
@@ -110,7 +107,7 @@ AppController に追加しましょう。 ::
 
     public function logout()
     {
-        $this->Flash->success('ログアウトしました。');
+        $this->Flash->success('ログアウトしました。');
         return $this->redirect($this->Auth->logout());
     }
 
