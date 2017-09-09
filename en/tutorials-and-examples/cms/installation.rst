@@ -110,7 +110,7 @@ home page. Before you can do that, you'll need to start the development server:
 
 This will start PHP's built-in webserver on port 8765. Open up
 **http://localhost:8765** in your web browser to see the welcome page. All the
-bullet points should be checkmarks other than CakePHP being able to connect to
+bullet points should be green chef hats other than CakePHP being able to connect to
 your database. If not, you may need to install additional PHP extensions, or set
 directory permissions.
 
