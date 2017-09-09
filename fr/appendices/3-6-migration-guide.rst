@@ -18,3 +18,12 @@ dépréciés. Ces différents éléments continueront de fonctionner jusqu'à la
 version 4.0.0, à partir de laquelle ils seront supprimés.
 
 * ``bin/cake orm_cache`` est maintenant ``bin/cake schema_cache``.
+
+Changement de Comportements
+============================
+
+Les changements suivants sont compatibles avec l'API, mais elles représentent
+des écarts mineurs de comportement qui pourrait affecter votre application:
+
+* ``Cake\Utility\Security::randomBytes()`` lancera maintenant une exception
+  lorsqu'une source sécurisée d'entropie ne peut pas être trouvée en PHP5.
