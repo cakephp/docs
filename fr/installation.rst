@@ -15,6 +15,8 @@ Conditions requises
 - PHP |minphpversion| ou plus (y compris PHP 7.1)
 - extension PHP mbstring
 - extension PHP intl
+- extension PHP simplexml
+
 
 .. note::
 

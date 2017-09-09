@@ -1185,6 +1185,10 @@ utilisant la fonction ``buffered()``::
 Maintenant quand les deux collections sont itérées, elles vont seulement appeler
 l'opération d'extraction en une fois.
 
+.. versionadded:: 3.5.0
+    Les Collections initialisées avec un tableau ne peuvent plus etre itérées
+    de façon Lazy tafin d'améliorer les performances.
+
 Rendre les Collections Rembobinables
 ------------------------------------
 
