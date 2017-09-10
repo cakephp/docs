@@ -26,6 +26,12 @@ CakePHP 3.5 は、3.4 の API の完全上位互換です。
   ``Cake\Database\TableSchemaAwareInterface`` を使用してください。
 * ``Cake\Console\ShellDispatcher`` は非推奨です。アプリケーションでは
   ``Cake\Console\CommandRunner`` を代わりに使用するように更新してください。
+* ``Cake\Database\Schema\TableSchema::column()`` は非推奨です。
+  代わりに ``Cake\Database\Schema\TableSchema::getColumn()`` を使用してください。
+* ``Cake\Database\Schema\TableSchema::constraint()`` は非推奨です。
+  代わりに ``Cake\Database\Schema\TableSchema::getConstraint()`` を使用してください。
+* ``Cake\Database\Schema\TableSchema::index()`` は非推奨です。
+  代わりに ``Cake\Database\Schema\TableSchema::getIndex()`` を使用してください。
 
 非推奨の複合 get / set メソッド
 -------------------------------
@@ -50,16 +56,22 @@ set メソッドに分割されています。
     * ``outputAs()``
 ``Cake\Database\Connection``
     * ``logger()``
-``Cake\Datasource\TypedResultTrait``
+``Cake\Database\TypedResultInterface``
+    * ``returnType()``
+``Cake\Database\TypedResultTrait``
     * ``returnType()``
 ``Cake\Database\Log\LoggingStatement``
     * ``logger()``
 ``Cake\Datasource\ModelAwareTrait``
     * ``modelType()``
 ``Cake\Database\Query``
-    * ``valueBinder()`` (今は ``getValueBinder()``)
+    * ``valueBinder()`` の getter 部分 (今は ``getValueBinder()``)
+``Cake\Database\Schema\TableSchema``
+    * ``columnType()``
 ``Cake\Datasource\QueryTrait``
-    * ``eagerLoaded()`` (今は ``isEagerLoaded()``)
+    * ``eagerLoaded()`` の getter 部分 (今は ``isEagerLoaded()``)
+``Cake\Event\EventDispatcherInterface``
+    * ``eventManager()``
 ``Cake\Event\EventDispatcherTrait``
     * ``eventManager()``
 ``Cake\Error\Debugger``
@@ -70,6 +82,10 @@ set メソッドに分割されています。
 ``Cake\I18n\I18n``
     * ``locale()``
     * ``translator()``
+    * ``defaultLocale()``
+    * ``defaultFormatter()``
+``Cake\ORM\Association\BelongsToMany``
+    * ``sort()``
 ``Cake\ORM\LocatorAwareTrait``
     * ``tableLocator()``
 ``Cake\ORM\EntityTrait``
@@ -174,6 +190,13 @@ set メソッドに分割されています。
 フォールバックを使用する構成を定義するものです。
 詳しくは :ref:`cache-configuration-fallback` のフォールバックの設定をご覧ください。
 
+アプリケーションのスケルトンに dotenv のサーポートを追加
+--------------------------------------------------------
+
+アプリケーションのスケルトンに、「dotenv」の統合機能が追加されました。
+これは、あなたのアプリケーションを環境変数を使用して構成することを容易にします。
+詳しくは :ref:`environment-variables` の章をご覧ください。
+
 コンソールの結合テスト
 ----------------------
 
@@ -182,6 +205,13 @@ set メソッドに分割されています。
 詳しくは、 :ref:`console-integration-testing` をご覧ください。
 このテストクラスは、現在の ``Cake\Console\ShellDispatcher`` および
 新たに追加された ``Cake\Console\CommandRunner`` と完全に互換性があります。
+
+コレクション
+------------
+
+* ``Cake\Collection\Collection::avg()`` が追加されました。
+* ``Cake\Collection\Collection::median()`` が追加されました。
+
 
 コア
 ----
@@ -246,6 +276,13 @@ Http
 * ``Cake\Http\Client::addCookie()`` が追加されました。
   これはクライアントインスタンスへのクッキー追加を容易にします。
 
+インスタンス設定トレイト
+------------------------
+
+* ``InstanceConfigTrait::getConfig()`` は ``$default`` という
+  第二引数を取るようになりました。もし特定の ``key`` に使用できる値がない場合、
+  その ``$default`` の値が返却されます。
+
 ORM
 ---
 
@@ -273,6 +310,8 @@ ORM
 TestSuite
 ---------
 
+* ``TestCase::loadFixtures()`` は引数が与えられていないとき、
+  すべてのフィクスチャーをロードするようになりました。
 * ``IntegrationTestCase::head()`` が追加されました。
 * ``IntegrationTestCase::options()`` が追加されました。
 * ``IntegrationTestCase::disableErrorHandlerMiddleware()`` が追加されました。
@@ -280,8 +319,11 @@ TestSuite
 
 バリデーション
 --------------
+
+* 非整数の値を取得できないようにするため、
+  ``Cake\Validation\Validator::scalar()`` が追加されました。
 * ``Cake\Validation\Validator::regex()`` が追加されました。
-  これは正規表現パターンでデータ検証を今までより便利に行う方法です。
+  正規表現パターンでのデータ検証を今までより便利にします。
 * ``Cake\Validation\Validator::addDefaultProvider()`` が追加されました。
   このメソッドでアプリケーションで作成されたすべてのバリデーターに
   バリデーションプロバイダーを挿入できます。
