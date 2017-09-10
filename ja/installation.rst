@@ -9,10 +9,11 @@ CakePHP は nginx や lighttpd や Microsoft IIS のような様々なウェブ�
 システム要件
 ============
 
--  HTTP サーバー。例: Apache。mod\_rewrite が推奨されますが、必須ではありません。
--  PHP |minphpversion| 以上 (PHP 7.1 も含む)
--  PHP mbstring 拡張
--  PHP intl 拡張
+- HTTP サーバー。例: Apache。mod\_rewrite が推奨されますが、必須ではありません。
+- PHP |minphpversion| 以上 (PHP 7.1 も含む)
+- mbstring PHP 拡張
+- intl PHP 拡張
+- simplexml PHP 拡張
 
 .. note::
 
@@ -113,12 +114,12 @@ CakePHP の変更に合わせて最新の状態に保つ
 デフォルトではあなたのアプリケーションの **composer.json** は下記のようになっています。 ::
 
     "require": {
-        "cakephp/cakephp": "3.4.*"
+        "cakephp/cakephp": "3.5.*"
     }
 
 あなたが ``php composer.phar update`` を実行するたびに、このマイナーバージョンの
-バグ修正リリースが手に入ります。代わりに ``~3.4`` に変更して、 ``3.x`` ブランチの
-最新の安定版リリースを手に入れることができます。
+パッチリリースが手に入ります。代わりに ``^3.5`` に変更して、 ``3.x`` ブランチの
+最新の安定版マイナーリリースを手に入れることができます。
 
 もし CakePHP をリリース前の最新状態で維持したいのなら、あなたのアプリケーションの
 **composer.json** にパッケージバージョンとして **dev-master** を指定してください。 ::

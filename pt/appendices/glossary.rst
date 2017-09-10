@@ -1,59 +1,47 @@
 Glossário
 #########
-
-.. note::
-    Atualmente, a documentação desta página não é suportada em português.
-
-    Por favor, sinta-se a vontade para nos enviar um *pull request* para o
-    `Github <https://github.com/cakephp/docs>`_ ou use o botão
-    **IMPROVE THIS DOC** para propor suas mudanças diretamente.
-
-    Você pode consultar a versão em inglês deste tópico através do seletor de
-    idiomas localizado ao lado direito do campo de buscas da documentação.
-
 .. glossary::
 
     routing array
-        An array of attributes that are passed to :php:meth:`Router::url()`.
-        They typically look like::
+        Uma série de atributos que são passados para :php:meth:`Router::url()`.
+        Eles normalmente parecem::
 
             ['controller' => 'Posts', 'action' => 'view', 5]
 
     HTML attributes
-        An array of key => values that are composed into HTML attributes. For example::
+        Uma série de arrays key => values que são compostos em atributos HTML. Por Exemplo::
 
-            // Given
+            // Tendo isso
             ['class' => 'my-class', 'target' => '_blank']
 
-            // Would generate
+            // Geraria isto
             class="my-class" target="_blank"
 
-        If an option can be minimized or accepts its name as the value, then ``true``
-        can be used::
+        Se uma opção pode ser minimizada ou aceitar seu nome como valor, então ``true``
+        pode ser usado::
 
-            // Given
+            // Tendo isso
             ['checked' => true]
 
-            // Would generate
+            // Geraria isto
             checked="checked"
 
     sintaxe plugin
-        Plugin syntax refers to the dot separated class name indicating classes
-        are part of a plugin::
+        A sintaxe do plugin refere-se ao nome da classe separada por pontos que indica classes::
 
-            // The plugin is "DebugKit", and the class name is "Toolbar".
+            // O plugin "DebugKit", e o nome da "Toolbar".
             'DebugKit.Toolbar'
 
-            // The plugin is "AcmeCorp/Tools", and the class name is "Toolbar".
+            // O plugin "AcmeCorp/Tools", e o nome da class  "Toolbar".
             'AcmeCorp/Tools.Toolbar'
 
     dot notation
-        Dot notation defines an array path, by separating nested levels with ``.``
-        For example::
+        A notação de ponto define um caminho do array, separando níveis aninhados com ``.``
+        Por exemplo::
 
             Cache.default.engine
 
-        Would point to the following value::
+        Geraria o seguinte valor::
 
             [
                 'Cache' => [
@@ -64,31 +52,19 @@ Glossário
             ]
 
     CSRF
-        Cross Site Request Forgery. Prevents replay attacks, double
-        submissions and forged requests from other domains.
+        Cross Site Request Forgery. Impede ataques de repetição, envios duplos e solicitações forjadas de outros domínios.
 
     CDN
-        Content Delivery Network. A 3rd party vendor you can pay to help
-        distribute your content to data centers around the world. This helps
-        put your static assets closer to geographically distributed users.
+        Content Delivery Network. Um fornecedor de código de terceiros que você pode pagar para ajudar a distribuir seu conteúdo para centros de dados em todo o mundo. Isso ajuda a colocar seus ativos estáticos mais próximos dos usuários distribuídos geograficamente.
 
     routes.php
-        A file in ``config`` directory that contains routing configuration.
-        This file is included before each request is processed.
-        It should connect all the routes your application needs so
-        requests can be routed to the correct controller + action.
+        O arquivo ``config`` diretório que contém configuração de roteamento. Este arquivo está incluído antes de cada solicitação ser processada. Ele deve conectar todas as rotas que seu aplicativo precisa para que as solicitações possam ser encaminhadas para a ação correta do controlador.
 
     DRY
-        Don't repeat yourself. Is a principle of software development aimed at
-        reducing repetition of information of all kinds. In CakePHP DRY is used
-        to allow you to code things once and re-use them across your
-        application.
+        Não se repita. É um princípio de desenvolvimento de software destinado a reduzir a repetição de informações de todos os tipos. No CakePHP DRY é usado para permitir codificar coisas uma vez e reutilizá-las em toda a sua aplicação.
 
     PaaS
-        Platform as a Service. Platform as a Service providers will provide
-        cloud based hosting, database and caching resources. Some popular
-        providers include Heroku, EngineYard and PagodaBox
+        Plataforma como um serviço. A plataforma como um provedor de serviços fornecerá recursos baseados em nuvem de hospedagem, banco de dados e armazenamento em cache. Alguns provedores populares incluem Heroku, EngineYard e PagodaBox.
 
     DSN
-        Data Source Name. A connection string format that is formed like a URI.
-        CakePHP supports DSN's for Cache, Database, Log and Email connections.
+        Data Source Name. Um formato de seqüência de conexão que é formado como um URI. O CakePHP suporta DSN para conexões Cache, Database, Log e Email.
