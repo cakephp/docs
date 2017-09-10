@@ -3,9 +3,9 @@
 
 ミドルウェアオブジェクトは、再利用可能で構成可能なリクエスト処理、あるいは
 レスポンス構築処理の層でアプリケーションを‘ラップ’する機能を提供します。
-ミドルウエアの視覚的なイメージとしては、あなたの作るアプリケーションは中央で完結していて、
-ミドルウェアはタマネギのようにアプリケーションの周囲を包み込むに囲っているものになります。
-この例では、Routes、Assets、Exception Handling、およびCORSヘッダーミドルウェアでラップされたアプリケーションを見て取れます。
+視覚的には、アプリケーションは中央で終了し、ミドルウェアはタマネギのように
+アプリの周囲を包み込みます。この例では、Routes、Assets、Exception Handling、
+およびCORSヘッダーミドルウェアでラップされたアプリケーションを見て取れます。
 
 .. image:: /_static/img/middleware-setup.png
 
@@ -71,7 +71,7 @@ CakePHP はWebアプリケーションで一般的なタスクを取り扱うた
     {
         public function middleware($middlewareQueue)
         {
-            // Bind the error handler into the middleware queue.
+            // ミドルウェアのキューにエラーハンドラーを結びつけます。
             $middlewareQueue->add(new ErrorHandlerMiddleware());
             return $middlewareQueue;
         }

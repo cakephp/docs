@@ -19,7 +19,7 @@ CakePHP 3.5 は、3.4 の API の完全上位互換です。
 * ``Cake\Http\Client\CookieCollection`` は非推奨です。
   代わりに ``Cake\Http\Cookie\CookieCollection`` を使用してください。
 * ``Cake\View\Helper\RssHelper`` は非推奨です。
-  まれ利用されることがあるためRssHelperは非推奨となっています。
+  使用されることがまれなため、RssHelperは非推奨です。
 * ``Cake\Controller\Component\CsrfComponent`` は非推奨です。
   代わりに :ref:`csrf-middleware` を使用してください。
 * ``Cake\Datasource\TableSchemaInterface`` は非推奨です。
