@@ -232,7 +232,7 @@ configure a web server.
 
 .. note::
 
-    Try `bin/cake server -H 0.0.0.0` if the server is unreachable from other hosts.
+    Try ``bin/cake server -H 0.0.0.0`` if the server is unreachable from other hosts.
 
 .. warning::
 
