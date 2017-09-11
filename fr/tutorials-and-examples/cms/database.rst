@@ -7,6 +7,8 @@ pas encore fait, créez une base de données vide qui servira pour ce tutoriel, 
 le nom de votre choix (par exemple ``cake_cms``). Exécutez ensuite la requête suivante
 pour créer les premières tables nécessaires au tutoriel::
 
+    USE cake_cms; 
+
     CREATE TABLE users (
         id INT AUTO_INCREMENT PRIMARY KEY,
         email VARCHAR(255) NOT NULL,
