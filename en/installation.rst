@@ -230,6 +230,10 @@ This will serve your application at **http://192.168.13.37:5673/**.
 That's it! Your CakePHP application is up and running without having to
 configure a web server.
 
+.. note::
+
+    Try `bin/cake server -H 0.0.0.0` if the server is unreachable from other hosts.
+
 .. warning::
 
     The development server should *never* be used in a production environment.
