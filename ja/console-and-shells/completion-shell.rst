@@ -21,7 +21,7 @@ commands
 出力します。(出力結果は、このコマンド自身や他のサブコマンド全てがスペースで
 区切られています。) 例えば::
 
-    bin/cake Completion commands
+    bin/cake completion commands
 
 実行結果::
 
@@ -37,7 +37,7 @@ subCommands
 そして、与えられたシェルコマンドのために利用可能なサブコマンドを出力します。
 例えば::
 
-    bin/cake Completion subcommands bake
+    bin/cake completion subcommands bake
 
 実行結果::
 
@@ -51,7 +51,7 @@ options
 (Shell から継承されたデフォルトのオプションを含みます。)
 例えば::
 
-    bin/cake Completion options bake
+    bin/cake completion options bake
 
 実行結果::
 
@@ -101,11 +101,11 @@ Bash 補完ファイルの内容
 
         if [[ "$cur" == -* ]] ; then
             if [[ ${COMP_CWORD} = 1 ]] ; then
-                opts=$(${cake} Completion options)
+                opts=$(${cake} completion options)
             elif [[ ${COMP_CWORD} = 2 ]] ; then
-                opts=$(${cake} Completion options "${COMP_WORDS[1]}")
+                opts=$(${cake} completion options "${COMP_WORDS[1]}")
             else
-                opts=$(${cake} Completion options "${COMP_WORDS[1]}" "${COMP_WORDS[2]}")
+                opts=$(${cake} completion options "${COMP_WORDS[1]}" "${COMP_WORDS[2]}")
             fi
 
             COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
@@ -113,13 +113,13 @@ Bash 補完ファイルの内容
         fi
 
         if [[ ${COMP_CWORD} = 1 ]] ; then
-            opts=$(${cake} Completion commands)
+            opts=$(${cake} completion commands)
             COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
             return 0
         fi
 
         if [[ ${COMP_CWORD} = 2 ]] ; then
-            opts=$(${cake} Completion subcommands $prev)
+            opts=$(${cake} completion subcommands $prev)
             COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
             if [[ $COMPREPLY = "" ]] ; then
                 _filedir
@@ -128,7 +128,7 @@ Bash 補完ファイルの内容
             return 0
         fi
 
-        opts=$(${cake} Completion fuzzy "${COMP_WORDS[@]:1}")
+        opts=$(${cake} completion fuzzy "${COMP_WORDS[@]:1}")
         COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
         if [[ $COMPREPLY = "" ]] ; then
             _filedir
