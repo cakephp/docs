@@ -28,9 +28,6 @@ should be the same version your command line interface (CLI) PHP is.
 Getting CakePHP
 ===============
 
-.. TODO::
-    Should we use Oven instead?
-
 The easiest way to install CakePHP is to use Composer. Composer is a simple way
 of installing CakePHP from your terminal or command line prompt. First, you'll
 need to download and install Composer if you haven't done so already. If you
@@ -91,6 +88,9 @@ completed, your directory setup should look something like the following::
 
 Now might be a good time to learn a bit about how CakePHP's directory structure
 works: check out the :doc:`/intro/cakephp-folder-structure` section.
+
+If you get lost during this tutorial, you can see the finished result `on GitHub
+<https://github.com/cakephp/cms-tutorial>`_.
 
 Checking our Installation
 =========================
