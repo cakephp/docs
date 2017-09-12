@@ -21,7 +21,7 @@ For the first step commands outputs the available Shell Commands, including
 plugin name when applicable. (All returned possibilities, for this and the other
 sub commands, are separated by a space.) For example::
 
-    bin/cake Completion commands
+    bin/cake completion commands
 
 Returns::
 
@@ -37,7 +37,7 @@ Once the preferred command has been chosen subCommands comes in as the second
 step and outputs the possible sub command for the given shell command. For
 example::
 
-    bin/cake Completion subcommands bake
+    bin/cake completion subcommands bake
 
 Returns::
 
@@ -50,7 +50,7 @@ As the third and final options outputs options for the given (sub) command as
 set in getOptionParser. (Including the default options inherited from Shell.)
 For example::
 
-    bin/cake Completion options bake
+    bin/cake completion options bake
 
 Returns::
 
@@ -101,11 +101,11 @@ in order to get autocompletion when using the CakePHP console::
 
         if [[ "$cur" == -* ]] ; then
             if [[ ${COMP_CWORD} = 1 ]] ; then
-                opts=$(${cake} Completion options)
+                opts=$(${cake} completion options)
             elif [[ ${COMP_CWORD} = 2 ]] ; then
-                opts=$(${cake} Completion options "${COMP_WORDS[1]}")
+                opts=$(${cake} completion options "${COMP_WORDS[1]}")
             else
-                opts=$(${cake} Completion options "${COMP_WORDS[1]}" "${COMP_WORDS[2]}")
+                opts=$(${cake} completion options "${COMP_WORDS[1]}" "${COMP_WORDS[2]}")
             fi
 
             COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
@@ -113,13 +113,13 @@ in order to get autocompletion when using the CakePHP console::
         fi
 
         if [[ ${COMP_CWORD} = 1 ]] ; then
-            opts=$(${cake} Completion commands)
+            opts=$(${cake} completion commands)
             COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
             return 0
         fi
 
         if [[ ${COMP_CWORD} = 2 ]] ; then
-            opts=$(${cake} Completion subcommands $prev)
+            opts=$(${cake} completion subcommands $prev)
             COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
             if [[ $COMPREPLY = "" ]] ; then
                 _filedir
@@ -128,7 +128,7 @@ in order to get autocompletion when using the CakePHP console::
             return 0
         fi
 
-        opts=$(${cake} Completion fuzzy "${COMP_WORDS[@]:1}")
+        opts=$(${cake} completion fuzzy "${COMP_WORDS[@]:1}")
         COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
         if [[ $COMPREPLY = "" ]] ; then
             _filedir
