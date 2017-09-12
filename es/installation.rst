@@ -162,6 +162,10 @@ Esto colocará tu aplicación en **http://192.168.13.37:5673/**.
 ¡Eso es todo! Tu aplicación de CakePHP está corriendo perfectamente sin tener que
 haber configurado el servidor web manualmente.
 
+.. note::
+
+    Prueba ``bin/cake server -H 0.0.0.0`` si el servidor no es accesible desde otra máquina.
+
 .. warning::
 
     El servidor de desarrollo *nunca* debe ser utilizado en un ambiente de
