@@ -246,6 +246,10 @@ Cela affichera votre application sur **http://192.168.13.37:5673/**.
 C'est tout! Votre application CakePHP est ok et elle est lancée sans avoir
 à configurer un serveur web.
 
+.. note::
+
+    Essayez ``bin/cake server -H 0.0.0.0`` si le serveur est inaccessible depuis autres hôtes.
+
 .. warning::
 
     Ceci *n'a pas* vocation à être utilisé, ni ne devrait être utilisé dans un
