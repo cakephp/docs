@@ -426,7 +426,7 @@ of ``connect()``::
     ])
 
     // Also allow JSON file extensions
-    ->setExtenions(['json'])
+    ->setExtensions(['json'])
 
     // Set lang to be a persistent parameter
     ->setPersist(['lang']);
