@@ -136,13 +136,13 @@ set メソッドに分割されています。
   ``cookie()`` の結果を使用しなくなりました。代わりに ``Cookie`` ヘッダーと
   ``CookieCollection`` が使用できます。
   これは、クライアントにカスタムHTTPアダプターを使用しているときにのみ影響があります。
-* シェルを呼び出すときにサブコマンドに複数文字を用いる場合、
+* シェルを呼び出すときにサブコマンドに複数ワードを用いる場合、
   名前にはキャメルケースを使用する必要がありました。これからは
   アンダースコアでサブコマンドを呼び出すことができます。例えば、
   ``cake tool initMyDb`` は ``cake tool init_my_db`` と呼び出すことができます。
   あなたのシェルが変換規則の異なる2つのサブコマンドを用いていた場合は
   最後に関連付けた規則のコマンドだけが機能します。
-* ``SecurityComponent`` はリクエストデータを持たないPOSTリクエストを捕獲します。
+* ``SecurityComponent`` はリクエストデータを持たないPOSTリクエストを破棄します。
   この変更はデータベースのデフォルト値のみを使用してレコードを作成するアクションを
   保護するのに役立ちます。
 * ``Cake\ORM\Table::addBehavior()`` と ``removeBehavior()`` は ``$this`` を
@@ -150,8 +150,7 @@ set メソッドに分割されています。
   流れるようなインターフェイスで定義するのに便利です。
 * キャッシュエンジンは失敗または誤って構成されたときに例外を発生させなくなりました。
   代わりに、操作不能な ``NullEngine`` としてフォールバックさせます。フォールバックは
-  エンジンごとに定義することができます。
-  詳しくは、 :ref:`configured <cache-configuration-fallback>` をご覧ください
+  エンジンごとに :ref:`設定 <cache-configuration-fallback>` することもできます。
 * ``Cake\Database\Type\DateTimeType`` は以前からのフォーマットに加えて
   ISO-8859-1 でフォーマットされた日付文字列（例えば、 2017-07-09T12:33:00+00:02) を
   変換するようになりました。DateTimeTypeのサブクラスを作成している場合は
@@ -250,8 +249,8 @@ set メソッドに分割されています。
   ``PaginatorComponent`` は、このインターフェイスを通してページネーションを
   取り扱うようになりました。これにより、他のORMと似た実装で
   コンポーネントによってページネーションをできるようになりました。
-* ``Cake\Datasource\Paginator`` を追加して ``ORM/Database/QueryInstances`` を
-  ページネーションできるようにしました。
+* ``Cake\Datasource\Paginator`` は ORM/Database のクエリーインスタンスを
+  ページ制御するために追加されました。
 
 イベント
 --------
@@ -289,8 +288,8 @@ ORM
 * ``Cake\ORM\Query::contain()`` は一つのアソシエーションが入る場合、
   ラッピング配列なしで呼び出すことができるようになり。つまり、
   ``contain('Comments', function (){ ... });`` で動作するようになります。
-  この変更で ``leftJoinWith()`` や ``matching()`` のような、他のeagerloading関連の
-  メソッドと ``contain()`` の一貫性を与えています。
+  この変更で ``leftJoinWith()`` や ``matching()`` のような、他の
+  イーガーローディング関連のメソッドと ``contain()`` の一貫性を与えています。
 
 ルーティング
 ------------
@@ -320,8 +319,8 @@ TestSuite
 バリデーション
 --------------
 
-* 非整数の値を取得できないようにするため、
-  ``Cake\Validation\Validator::scalar()`` が追加されました。
+* ``Cake\Validation\Validator::scalar()`` は、フィールドが非スカラー型データを
+  取得しないことを保証するために追加されました。
 * ``Cake\Validation\Validator::regex()`` が追加されました。
   正規表現パターンでのデータ検証を今までより便利にします。
 * ``Cake\Validation\Validator::addDefaultProvider()`` が追加されました。

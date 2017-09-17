@@ -196,7 +196,7 @@ Console Integration Testing
 The ``Cake\TestSuite\ConsoleIntegrationTestCase`` class was added to make
 integration testing console applications easier. For more information, visit
 the :ref:`console-integration-testing` section. This test class is fully
-compatible with the current shell dispatcher as well as the new
+compatible with the current ``Cake\Console\ShellDispatcher`` as well as the new
 ``Cake\Console\CommandRunner``.
 
 Collection
