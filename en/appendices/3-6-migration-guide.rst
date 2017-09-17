@@ -31,3 +31,8 @@ behavior that may affect your application:
   to prevent token reuse between users/sessions. This changes the value of
   security tokens and will cause forms created in earlier versions of CakePHP to
   fail validation in 3.6.
+
+ORM
+========
+
+* ``EntityTrait::isEmpty()`` and ``EntityTrait::hasValue()`` were added.
