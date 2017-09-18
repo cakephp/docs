@@ -98,6 +98,33 @@ When using ``set()`` you can update multiple properties at once using an array::
     When updating entities with request data you should whitelist which fields
     can be set with mass assignment.
 
+You can check if properties are defined in your entities with ``has()``::
+
+    $article = new Article([
+        'title' => 'First post',
+        'user_id' => null
+    ]);
+    $article->has('title'); // true
+    $article->has('user_id'); // false
+    $article->has('undefined'); // false.
+
+The ``has()`` method will return ``true`` if a property is defined and has
+a non-null value. You can use ``isEmpty()`` and ``hasValue()`` to check if
+a property contains a 'non-empty' value::
+
+    $article = new Article([
+        'title' => 'First post',
+        'user_id' => null
+    ]);
+    $article->isEmpty('title');  // false
+    $article->hasValue('title'); // true
+
+    $article->isEmpty('user_id');  // true
+    $article->hasValue('user_id'); // false
+
+.. versionadded:: 3.6.0
+    The ``hasValue()`` and ``isEmpty()`` methods were added in 3.6.0
+
 Accessors & Mutators
 ====================
 
@@ -216,14 +243,16 @@ changed in an entity. For example, you may only want to validate fields when
 they change::
 
     // See if the title has been modified.
-    $article->dirty('title');
+    // Prior to 3.5 use dirty()
+    $article->isDirty('title');
 
 You can also flag fields as being modified. This is handy when appending into
 array properties::
 
     // Add a comment and mark the field as changed.
+    // Prior to 3.5 use dirty()
     $article->comments[] = $newComment;
-    $article->dirty('comments', true);
+    $article->setDirty('comments', true);
 
 In addition you can also base your conditional code on the original property
 values by using the ``getOriginal()`` method. This method will either return
@@ -232,7 +261,8 @@ the original value of the property if it has been modified or its actual value.
 You can also check for changes to any property in the entity::
 
     // See if the entity has changed
-    $article->dirty();
+    // Prior to 3.5 use dirty()
+    $article->isDirty();
 
 To remove the dirty mark from fields in an entity, you can use the ``clean()``
 method::
@@ -252,11 +282,12 @@ To get a list of all dirty properties of an ``Entity`` you may call::
 
     ``getDirty()`` has been added.
 
+.. versionadded:: 3.5.0
+    ``isDirty()``, ``setDirty()`` were added.
+
 
 Validation Errors
 =================
-
-.. php:method:: errors($field = null, $errors = null)
 
 After you :ref:`save an entity <saving-entities>` any validation errors will be
 stored on the entity itself. You can access any validation errors using the
@@ -272,11 +303,15 @@ stored on the entity itself. You can access any validation errors using the
     // Prior to 3.4.0
     $errors = $user->errors('password');
 
-The ``setErrors()`` or ``setError()`` method can also be used to set the errors on an entity, making
-it easier to test code that works with error messages::
+The ``setErrors()`` or ``setError()`` method can also be used to set the errors
+on an entity, making it easier to test code that works with error messages::
 
     $user->setError('password', ['Password is required']);
-    $user->setErrors(['password' => ['Password is required'], 'username' => ['Username is required']]);
+    $user->setErrors([
+        'password' => ['Password is required'],
+        'username' => ['Username is required']
+    ]);
+
     // Prior to 3.4.0
     $user->errors('password', ['Password is required.']);
 
