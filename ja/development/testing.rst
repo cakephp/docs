@@ -883,11 +883,16 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
 * ``put()`` PUT リクエストを送信します。
 * ``delete()`` DELETE リクエストを送信します。
 * ``patch()`` PATCH リクエストを送信します。
+* ``options()`` OPTIONS リクエストを送信します。
+* ``head()`` HEAD リクエストを送信します。
 
 ``get()`` と ``delete()`` を除く全てのメソッドは、あなたがリクエストボディーを送信することを
 可能にする二番目のパラメーターを受け入れます。リクエストをディスパッチした後、あなたのリクエストに対して
 正しく動作したことを確実にするために ``IntegrationTestCase`` や、PHPUnit が提供するさまざまな
 アサーションを使用することができます。
+
+.. versionadded:: 3.5.0
+    ``options()`` と ``head()`` は 3.5.0 で追加されました。
 
 リクエストの設定
 ----------------
@@ -1131,6 +1136,26 @@ JSON を返すコントローラーの簡単な例を示します。 ::
 CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合、 ``JSON_PRETTY_PRINT``
 オプションを使用します。
 
+Disabling Error Handling Middleware in Tests
+--------------------------------------------
+
+When debugging tests that are failing because your application is encountering
+errors it can be helpful to temporarily disable the error handling middleware to
+allow the underlying error to bubble up. You can use
+``disableErrorHandlerMiddleware()`` to do this::
+
+    public function testGetMissing()
+    {
+        $this->disableErrorHandlerMiddleware();
+        $this->get('/markers/not-there');
+        $this->assertResponseCode(404);
+    }
+
+In the above example, the test would fail and the underlying exception message
+and stack trace would be displayed instead of the rendered error page being
+checked.
+
+.. versionadded:: 3.5.0
 
 アサーションメソッド
 --------------------
@@ -1256,6 +1281,286 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
     #   (use "git checkout -- <file>..." to discard changes in working directory)
     #
     #   modified:   tests/comparisons/example.php
+
+.. _console-integration-testing:
+
+Console Integration Testing
+===========================
+
+To make testing console applications easier, CakePHP comes with a
+``ConsoleIntegrationTestCase`` class that can be used to test console applications
+and assert against their results.
+
+.. versionadded:: 3.5.0
+
+    The ``ConsoleIntegrationTestCase`` was added.
+
+To get started testing your console application, create a test case that extends
+``Cake\TestSuite\ConsoleIntegrationTestCase``. This class contains a method
+``exec()`` that is used to execute your command. You can pass the same string
+you would use in the CLI to this method.
+
+Let's start with a very simple shell, located in **src/Shell/MyConsoleShell.php**::
+
+    namespace App\Shell;
+
+    use Cake\Console\ConsoleOptionParser;
+    use Cake\Console\Shell;
+
+    class MyConsoleShell extends Shell
+    {
+        public function getOptionParser()
+        {
+            $parser = new ConsoleOptionParser();
+            $parser->setDescription('My cool console app');
+
+            return $parser;
+        }
+    }
+
+To write an integration test for this shell, we would create a test case in
+**tests/TestCase/Shell/MyConsoleShellTest.php** that extends
+``Cake\TestSuite\ConsoleIntegrationTestCase``. This shell doesn't do much at the
+moment, but let's just test that our shell's description is displayed in ``stdout``::
+
+    namespace App\Test\TestCase\Shell;
+
+    use Cake\TestSuite\ConsoleIntegrationTestCase;
+
+    class MyConsoleShellTest extends ConsoleIntegrationTestCase
+    {
+        public function testDescriptionOutput()
+        {
+            $this->exec('my_console');
+            $this->assertOutputContains('My cool console app');
+        }
+    }
+
+Our test passes! While this is very trivial example, it shows that creating an
+integration test case for console applications is quite easy. Let's continue by
+adding some subcommands and options to our shell::
+
+    namespace App\Shell;
+
+    use Cake\Console\ConsoleOptionParser;
+    use Cake\I18n\FrozenTime;
+
+    class MyConsoleShell extends Shell
+    {
+        public function getOptionParser()
+        {
+            $parser = new ConsoleOptionParser();
+
+            $updateModifiedParser = new ConsoleOptionParser();
+            $updateModifiedParser->addArgument('table', [
+                'help' => 'Table to update',
+                'required' => true
+            ]);
+
+            $parser
+                ->setDescription('My cool console app')
+                ->addSubcommand('updateModified', [
+                    'parser' => $updateModifiedParser
+                ]);
+
+            return $parser;
+        }
+
+        public function updateModified()
+        {
+            $table = $this->args[0];
+            $this->loadModel($table);
+            $this->{$table}->query()
+                ->update()
+                ->set([
+                    'modified' => new FrozenTime()
+                ])
+                ->execute();
+        }
+    }
+
+This is a more complete shell that has a subcommand with its own parser. Let's
+test the ``updateModified`` subcommand. Modify your test case to the following
+snippet of code::
+
+    namespace Cake\Test\TestCase\Shell;
+
+    use Cake\Console\Shell;
+    use Cake\I18n\FrozenTime;
+    use Cake\ORM\TableRegistry;
+    use Cake\TestSuite\ConsoleIntegrationTestCase;
+
+    class MyConsoleShellTest extends ConsoleIntegrationTestCase
+    {
+
+        public $fixtures = [
+            // assumes you have a UsersFixture
+            'app.users'
+        ];
+
+        public function testDescriptionOutput()
+        {
+            $this->exec('my_console');
+            $this->assertOutputContains('My cool console app');
+        }
+
+        public function testUpdateModified()
+        {
+            $now = new FrozenTime('2017-01-01 00:00:00');
+            FrozenTime::setTestNow($now);
+
+            $this->loadFixtures('Users');
+
+            $this->exec('my_console update_modified Users');
+            $this->assertExitCode(Shell::CODE_SUCCESS);
+
+            $user = TableRegistry::get('Users')->get(1);
+            $this->assertSame($user->modified->timestamp, $now->timestamp);
+
+            FrozenTime::setTestNow(null);
+        }
+    }
+
+As you can see from the ``testUpdateModified`` method, we are testing that our
+``update_modified`` subcommand updates the table that we are passing as the first
+argument. First, we assert that the shell exited with the proper status code,
+``0``. Then we check that our subcommand did its work, that is, updated the
+table we provided and set the ``modified`` column to the current time.
+
+Remember, ``exec()`` will take the same string you type into your CLI, so you
+can include options and arguments in your command string.
+
+Testing Interactive Shells
+--------------------------
+
+Consoles are often interactive. Testing interactive shells with the
+``Cake\TestSuite\ConsoleIntegrationTestCase`` class only requires passing the
+inputs you expect as the second parameter of ``exec()``. They should be
+included as an array in the order that you expect them.
+
+Continuing with our example shell, let's add an interactive subcommand. Update
+the shell class to the following::
+
+    namespace App\Shell;
+
+    use Cake\Console\ConsoleOptionParser;
+    use Cake\Console\Shell;
+    use Cake\I18n\FrozenTime;
+
+    class MyConsoleShell extends Shell
+    {
+        public function getOptionParser()
+        {
+            $parser = new ConsoleOptionParser();
+
+            $updateModifiedParser = new ConsoleOptionParser();
+            $updateModifiedParser->addArgument('table', [
+                'help' => 'Table to update',
+                'required' => true
+            ]);
+
+            $parser
+                ->setDescription('My cool console app')
+                ->addSubcommand('updateModified', [
+                    'parser' => $updateModifiedParser
+                ])
+                // add a new subcommand
+                ->addSubcommand('bestFramework');
+
+            return $parser;
+        }
+
+        public function updateModified()
+        {
+            $table = $this->args[0];
+            $this->loadModel($table);
+            $this->{$table}->query()
+                ->update()
+                ->set([
+                    'modified' => new FrozenTime()
+                ])
+                ->execute();
+        }
+
+        // create this interactive subcommand
+        public function bestFramework()
+        {
+            $this->out('Hi there!');
+
+            $framework = $this->in('What is the best PHP framework?');
+            if ($framework !== 'CakePHP') {
+                $this->err("I disagree that '$framework' is the best.");
+                $this->_stop(Shell::CODE_ERROR);
+            }
+
+            $this->out('I agree!');
+        }
+    }
+
+Now that we have an interactive subcommand, we can add a test case that tests
+that we receive the proper response, and one that tests that we receive an
+incorrect response. Add the following methods to
+**tests/TestCase/Shell/MyConsoleShellTest.php**::
+
+    public function testBestFramework()
+    {
+        $this->exec('my_console best_framework', [
+            'CakePHP'
+        ]);
+        $this->assertExitCode(Shell::CODE_SUCCESS);
+        $this->assertOutputContains('I agree!');
+    }
+
+    public function testBestFrameworkWrongAnswer()
+    {
+        $this->exec('my_console best_framework', [
+            'my homemade framework'
+        ]);
+        $this->assertExitCode(Shell::CODE_ERROR);
+        $this->assertErrorRegExp("/I disagree that \'(.+)\' is the best\./");
+    }
+
+As you can see from the ``testBestFramework``, it responds to the first input
+request with "CakePHP". Since this is the correct answer according to our
+subcommand, the shell will exit successfully after outputting a response.
+
+The second test case, ``testBestFrameworkWrongAnswer``, provides an incorrect
+answer which causes our shell to fail and exit with ``1``. We also assert
+that ``stderr`` was given our error, which includes the name of the incorrect
+answer.
+
+Testing the CommandRunner
+-------------------------
+
+To test shells that are dispatched using the ``CommandRunner`` class, enable it
+in your test case with the following method::
+
+    $this->useCommandRunner();
+
+.. versionadded:: 3.5.0
+
+    The ``CommandRunner`` class was added.
+
+Assertion methods
+-----------------
+
+The ``Cake\TestSuite\ConsoleIntegrationTestCase`` class provides a number of
+assertion methods that make it easy to assert against console output::
+
+    // assert that the shell exited with the expected code
+    $this->assertExitCode($expected);
+
+    // assert that stdout contains a string
+    $this->assertOutputContains($expected);
+
+    // assert that stderr contains a string
+    $this->assertErrorContains($expected);
+
+    // assert that stdout matches a regular expression
+    $this->assertOutputRegExp($expected);
+
+    // assert that stderr matches a regular expression
+    $this->assertErrorRegExp($expected);
 
 ビューのテスト
 ==============
