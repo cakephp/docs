@@ -122,17 +122,15 @@ DSN を使用するとき、追加のクエリー文字列要素としてパラ�
 
 .. _cache-configuration-fallback:
 
-Configuring Cache Fallbacks
----------------------------
+キャッシュフォールバックの設定
+------------------------------
 
-In the event that an engine is not available, such as the ``FileEngine`` trying
-to write to an unwritable folder or the ``RedisEngine`` failing to connect to
-Redis, the engine will fall back to the noop ``NullEngine`` and trigger a loggable
-error. This prevents the application from throwing an uncaught exception due to
-cache failure.
+書き込み不可能なフォルダに書き込む ``FileEngine`` や、 ``RedisEngine`` が Redis に
+接続できないなど、エンジンが利用できない場合、　エンジンは ``NullEngine`` に縮退運転し、
+ログ可能なエラーを引き起こします。これにより、キャッシュ障害のためにアプリケーションが
+キャッチされない例外をスローするのを防ぎます。
 
-You can configure Cache configurations to fall back to a specified config using
-the ``fallback`` configuration key::
+``fallback`` 設定キーを使ってキャッシュ設定を指定された設定に縮退運転するよう設定できます。 ::
 
     Cache::config('redis', [
         'className' => 'Redis',
@@ -143,14 +141,12 @@ the ``fallback`` configuration key::
         'fallback' => 'default',
     ]);
 
-If the Redis server unexpectedly failed, writing to the ``redis`` cache
-configuration would fall back to writing to the ``default`` cache configuration.
-If writing to the ``default`` cache configuration *also* failed in this scenario, the
-engine would fall back once again to the ``NullEngine`` and prevent the application
-from throwing an uncaught exception.
+Redis サーバーが予期せず失敗した場合、 ``redis`` キャッシュ設定への書き込みは、
+``default`` キャッシュ設定への書き込みに縮退運転します。このシナリオで ``default`` キャッシュ設定への
+書き込みも失敗した場合、 ``NullEngine`` へ再び縮退運転し、キャッチされない例外をスローするのを防ぎます。
 
 .. versionadded:: 3.5.0
-    Cache engine fallbacks were added.
+    キャッシュエンジンフォールバックが追加されました。
 
 設定されたキャッシュエンジンを削除する
 --------------------------------------

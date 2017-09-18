@@ -630,7 +630,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['plugin.debug_kit.articles', 'core.comments'];
+        public $fixtures = ['plugin.DebugKit.articles', 'plugin.MyVendorName/MyPlugin.messages', 'core.comments'];
     }
 
 ``core`` のプレフィックスを使えば CakePHP からフィクスチャーをロードし、プラグイン名を
@@ -1136,13 +1136,12 @@ JSON を返すコントローラーの簡単な例を示します。 ::
 CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合、 ``JSON_PRETTY_PRINT``
 オプションを使用します。
 
-Disabling Error Handling Middleware in Tests
+テスト中のエラー処理ミドルウェアの無効化
 --------------------------------------------
 
-When debugging tests that are failing because your application is encountering
-errors it can be helpful to temporarily disable the error handling middleware to
-allow the underlying error to bubble up. You can use
-``disableErrorHandlerMiddleware()`` to do this::
+アプリケーションにエラーが発生したために失敗したテストをデバッグする場合、
+エラー処理ミドルウェアを一時的に無効にして、根本的なエラーを目立たせることができます。
+これをするために ``disableErrorHandlerMiddleware()`` が使用できます。 ::
 
     public function testGetMissing()
     {
@@ -1151,9 +1150,8 @@ allow the underlying error to bubble up. You can use
         $this->assertResponseCode(404);
     }
 
-In the above example, the test would fail and the underlying exception message
-and stack trace would be displayed instead of the rendered error page being
-checked.
+上の例では、テストは失敗し、描画されたエラーページがチェックされる代わりに、
+基本的な例外メッセージとスタックトレースが表示されます。
 
 .. versionadded:: 3.5.0
 
@@ -1284,23 +1282,22 @@ checked.
 
 .. _console-integration-testing:
 
-Console Integration Testing
-===========================
+コンソールの統合テスト
+======================
 
-To make testing console applications easier, CakePHP comes with a
-``ConsoleIntegrationTestCase`` class that can be used to test console applications
-and assert against their results.
+コンソールアプリケーションをより簡単にテストするため、CakePHP は、
+コンソールアプリケーションをテストし、結果に対してアサートするための
+``ConsoleIntegrationTestCase`` クラスが付属しています。
 
 .. versionadded:: 3.5.0
 
-    The ``ConsoleIntegrationTestCase`` was added.
+    ``ConsoleIntegrationTestCase`` が追加されました。
 
-To get started testing your console application, create a test case that extends
-``Cake\TestSuite\ConsoleIntegrationTestCase``. This class contains a method
-``exec()`` that is used to execute your command. You can pass the same string
-you would use in the CLI to this method.
+コンソールアプリケーションのテストを始めるために、 ``Cake\TestSuite\ConsoleIntegrationTestCase``
+を継承したテストケースを作成してください。このクラスは、あなたのコマンドを実行するために使用する
+``exec()`` メソッドを含みます。このメソッドに、CLI で使用するのと同じ文字列を渡すことができます。
 
-Let's start with a very simple shell, located in **src/Shell/MyConsoleShell.php**::
+**src/Shell/MyConsoleShell.php** に置かれた、とてもシンプルなシェルで始めましょう。 ::
 
     namespace App\Shell;
 
@@ -1318,10 +1315,10 @@ Let's start with a very simple shell, located in **src/Shell/MyConsoleShell.php*
         }
     }
 
-To write an integration test for this shell, we would create a test case in
-**tests/TestCase/Shell/MyConsoleShellTest.php** that extends
-``Cake\TestSuite\ConsoleIntegrationTestCase``. This shell doesn't do much at the
-moment, but let's just test that our shell's description is displayed in ``stdout``::
+このシェルの統合テストを書くために、 **tests/TestCase/Shell/MyConsoleShellTest.php**
+に ``Cake\TestSuite\ConsoleIntegrationTestCase`` を継承したテストケースを作成します。
+このシェルは現時点ですることはあまりありませんが、シェルの説明が ``stdout``
+に表示されていることをテストしましょう。 ::
 
     namespace App\Test\TestCase\Shell;
 
@@ -1336,9 +1333,9 @@ moment, but let's just test that our shell's description is displayed in ``stdou
         }
     }
 
-Our test passes! While this is very trivial example, it shows that creating an
-integration test case for console applications is quite easy. Let's continue by
-adding some subcommands and options to our shell::
+テストが合格します！これは非常に簡単な例ですが、コンソールアプリケーションの
+統合テストケースを作成することは非常に簡単です。このシェルにいくつかの
+サブコマンドとオプションを追加して続けてみましょう。 ::
 
     namespace App\Shell;
 
@@ -1379,9 +1376,9 @@ adding some subcommands and options to our shell::
         }
     }
 
-This is a more complete shell that has a subcommand with its own parser. Let's
-test the ``updateModified`` subcommand. Modify your test case to the following
-snippet of code::
+これは、独自のパーサーがあるサブコマンドを持つより完全なシェルです。
+``updateModified`` サブコマンドをテストしましょう。
+テストケースを次のコードスニペットに変更します。 ::
 
     namespace Cake\Test\TestCase\Shell;
 
@@ -1394,7 +1391,7 @@ snippet of code::
     {
 
         public $fixtures = [
-            // assumes you have a UsersFixture
+            // UsersFixture を持っていると仮定
             'app.users'
         ];
 
@@ -1421,25 +1418,24 @@ snippet of code::
         }
     }
 
-As you can see from the ``testUpdateModified`` method, we are testing that our
-``update_modified`` subcommand updates the table that we are passing as the first
-argument. First, we assert that the shell exited with the proper status code,
-``0``. Then we check that our subcommand did its work, that is, updated the
-table we provided and set the ``modified`` column to the current time.
+``testUpdateModified`` メソッドから分かるように、 ``update_modified`` サブコマンドが
+１番目の引数として渡すテーブルを更新することをテストしています。
+最初に、シェルが適切なステータスコード "0" で終了したことをアサートします。
+次に、私たちのサブコマンドが動作をしたことを確認します。つまり、提供したテーブルを更新し、
+``modified`` カラムを現在の時刻に設定します。
 
-Remember, ``exec()`` will take the same string you type into your CLI, so you
-can include options and arguments in your command string.
+また、 ``exec()`` はあなたが入力したのと同じ文字列を CLI に取り込むので、
+コマンド文字列にオプションと引数を含めることができます。
 
-Testing Interactive Shells
---------------------------
+対話的なシェルのテスト
+----------------------
 
-Consoles are often interactive. Testing interactive shells with the
-``Cake\TestSuite\ConsoleIntegrationTestCase`` class only requires passing the
-inputs you expect as the second parameter of ``exec()``. They should be
-included as an array in the order that you expect them.
+コンソールはしばしば対話的です。 ``Cake\TestSuite\ConsoleIntegrationTestCase``
+クラスで対話的なシェルをテストするには、期待する入力を ``exec()`` の２番目の
+パラメーターとして渡すだけです。それらは、期待どおりの順序で配列として含める必要があります。
 
-Continuing with our example shell, let's add an interactive subcommand. Update
-the shell class to the following::
+引き続きシェルの例で、対話的なサブコマンドを追加しましょう。
+シェルクラスを次のように更新します。 ::
 
     namespace App\Shell;
 
@@ -1464,7 +1460,7 @@ the shell class to the following::
                 ->addSubcommand('updateModified', [
                     'parser' => $updateModifiedParser
                 ])
-                // add a new subcommand
+                // 新しいサブコマンドの追加
                 ->addSubcommand('bestFramework');
 
             return $parser;
@@ -1482,7 +1478,7 @@ the shell class to the following::
                 ->execute();
         }
 
-        // create this interactive subcommand
+        // この対話的なサブコマンドを作成
         public function bestFramework()
         {
             $this->out('Hi there!');
@@ -1497,10 +1493,9 @@ the shell class to the following::
         }
     }
 
-Now that we have an interactive subcommand, we can add a test case that tests
-that we receive the proper response, and one that tests that we receive an
-incorrect response. Add the following methods to
-**tests/TestCase/Shell/MyConsoleShellTest.php**::
+対話的なサブコマンドがあるので、適切な応答を受け取るかどうかをテストするテストケースと、
+誤った応答を受け取るかどうかをテストするケースを追加できます。
+**tests/TestCase/Shell/MyConsoleShellTest.php** に以下のメソッドを追加してください。 ::
 
     public function testBestFramework()
     {
@@ -1520,46 +1515,44 @@ incorrect response. Add the following methods to
         $this->assertErrorRegExp("/I disagree that \'(.+)\' is the best\./");
     }
 
-As you can see from the ``testBestFramework``, it responds to the first input
-request with "CakePHP". Since this is the correct answer according to our
-subcommand, the shell will exit successfully after outputting a response.
+``testBestFramework`` から分かるように、最初の入力要求に "CakePHP" で応答します。
+これはサブコマンドにとって正しい回答であるため、シェルは応答を出力した後に正常に終了します。
 
-The second test case, ``testBestFrameworkWrongAnswer``, provides an incorrect
-answer which causes our shell to fail and exit with ``1``. We also assert
-that ``stderr`` was given our error, which includes the name of the incorrect
-answer.
+２番目のテストケース、 ``testBestFrameworkWrongAnswer`` は、誤った答えが返され、
+シェルが失敗して ``1`` で終了します。 誤った答えの名前を含むエラーが
+``stderr`` に与えられることをアサートします。
 
-Testing the CommandRunner
--------------------------
+CommandRunner のテスト
+----------------------
 
-To test shells that are dispatched using the ``CommandRunner`` class, enable it
-in your test case with the following method::
+``CommandRunner`` クラスを使ってディスパッチされたシェルをテストするには、
+次のメソッドを使ってテストケースでそれを有効にしてください。 ::
 
     $this->useCommandRunner();
 
 .. versionadded:: 3.5.0
 
-    The ``CommandRunner`` class was added.
+    ``CommandRunner`` クラスが追加されました。
 
-Assertion methods
------------------
+アサーションメソッド
+--------------------
 
-The ``Cake\TestSuite\ConsoleIntegrationTestCase`` class provides a number of
-assertion methods that make it easy to assert against console output::
+``Cake\TestSuite\ConsoleIntegrationTestCase`` クラスは、コンソールの出力に対して
+容易にアサートできるようにするいくつかのアサーションメソッドを提供します。 ::
 
-    // assert that the shell exited with the expected code
+    // シェルが期待したコードで終了したことをアサート
     $this->assertExitCode($expected);
 
-    // assert that stdout contains a string
+    // 標準出力が文字列を含むことをアサート
     $this->assertOutputContains($expected);
 
-    // assert that stderr contains a string
+    // 標準エラーが文字列を含むことをアサート
     $this->assertErrorContains($expected);
 
-    // assert that stdout matches a regular expression
+    // 標準出力を正規表現にマッチするかをアサート
     $this->assertOutputRegExp($expected);
 
-    // assert that stderr matches a regular expression
+    // 標準エラーが正規表現にマッチするかをアサート
     $this->assertErrorRegExp($expected);
 
 ビューのテスト
