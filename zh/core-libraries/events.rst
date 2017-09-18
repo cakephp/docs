@@ -1,53 +1,36 @@
-Events System
-#############
+事件系统（Events System）
+##########################
 
-Creating maintainable applications is both a science and an art. It is
-well-known that a key for having good quality code is making your objects
-loosely coupled and strongly cohesive at the same time. Cohesion means that
-all methods and properties for a class are strongly related to the class
-itself and it is not trying to do the job other objects should be doing,
-while loosely coupling is the measure of how little a class is "wired"
-to external objects, and how much that class is depending on them.
+创造一个可维持得应用既是一门科学也是一门艺术。让代码变得更加有质量的方式就是让你的对
+象变得松耦合（loosely coupled）的同时保持强内聚（strongly cohesive）。内聚意味着一个
+类的所有方法和属性都和类本身强烈关联并且该类不会去做其它对象
+应该做的事。而相对应的松耦合是指一个类与外部对象的关联度有多低，这个类依赖于其它对象的程度。
 
-There are certain cases where you need to cleanly communicate with other parts
-of an application, without having to hard code dependencies, thus losing
-cohesion and increasing class coupling. Using the Observer pattern, which allows
-objects to notify other objects and anonymous listeners about changes is
-a useful pattern to achieve this goal.
+确实有些时候你需要在没有太多的代码依赖的基础上与其它应用保持干净的交流，因此你让耦合变
+得疏松同时增加类的内聚。使用观察者模式，让一些对象在变化时可以通知另外一些对象和匿名的
+监听器，是一种达到该目的常用模式。
 
-Listeners in the observer pattern can subscribe to events and choose to act upon
-them if they are relevant. If you have used JavaScript, there is a good chance
-that you are already familiar with event driven programming.
+在观察者模式中监听器可以订阅事件并且选择在事件发生时要做出的动作。如果你已经使用
+过JavaScript，那么很有可能你已经接触过并且熟悉了事件驱动的程序设计。
 
-CakePHP emulates several aspects of how events are triggered and managed in
-popular JavaScript libraries such as jQuery. In the CakePHP implementation, an
-event object is dispatched to all listeners. The event object holds information
-about the event, and provides the ability to stop event propagation at any
-point. Listeners can register themselves or can delegate this task to other
-objects and have the chance to alter the state and the event itself for the rest
-of the callbacks.
+CakePHP 模拟了类似jQuery的流行的JavaScript库中，对于事件触发和管理的几个方面。在CakePHP实装的时候，
+一个事件对象将会发送给所有监听者。事件对象掌握着关于事件的信息，并且可以在任意点上停止事件的传播。
+监听器可以注册它们自身，可以将一个任务委任给其它对象并且可以用回调函数转换状态和事件本身。
 
-The event subsystem is at the heart of Model, Behavior, Controller, View and
-Helper callbacks. If you've ever used any of them, you are already somewhat
-familiar with events in CakePHP.
+事件辅助系统是模型（Model）、行为（Behavior）、控制器（Controller）、视图（View）和助件（Helper）的
+回调的核心。如果你已经用过它们，那么你已经或多或少熟悉CakePHP中的事件了。
 
-Example Event Usage
+事件的使用例
 ===================
 
-Let's suppose you are building a Cart plugin, and you'd like to focus on just
-handling order logic. You don't really want to include shipping logic, emailing
-the user or decrementing the item from the stock, but these are important tasks
-to the people using your plugin. If you were not using events, you may try to
-implement this by attaching behaviors to models, or adding components to your
-controllers. Doing so represents a challenge most of the time, since you
-would have to come up with the code for externally loading those behaviors or
-attaching hooks to your plugin controllers.
+让我们假设你已经建立了一个购物车插件，你希望专注于完善订单的逻辑。不希望在购物逻辑中包含物流、邮件通知、或者
+在库削减的逻辑。但是这些对于使用你的插件的人来说是非常重要的。如果你不使用事件，或许你会试着通过在模型中添加
+行为来将这些包含进来，或者给你的控制器增加部件。做这些意味着花费大量时间，因为你将要让这些加载的行为来迎合你
+的代码，或者来和你的插件控制器连接起来。
 
-Instead, you can use events to allow you to cleanly separate the concerns of
-your code and allow additional concerns to hook into your plugin using events.
-For example, in your Cart plugin you have an Orders model that deals with
-creating orders. You'd like to notify the rest of the application that an order
-has been created. To keep your Orders model clean you could use events::
+取而代之，你可以使用事件来干净地分离你代码的关系并且为你使用事件的插件提供附加的关联。举个例子，在你的购物车
+插件中你有一个处理新增订单的模型。你可能会通知其它应用一个订单已经被新增了。你可以使用这些事件来让你的模型保
+持干净::
 
     // Cart/Model/Table/OrdersTable.php
     namespace Cart\Model\Table;
@@ -72,35 +55,27 @@ has been created. To keep your Orders model clean you could use events::
         }
     }
 
-The above code allows you to notify the other parts of the application
-that an order has been created. You can then do tasks like send email
-notifications, update stock, log relevant statistics and other tasks in separate
-objects that focus on those concerns.
+上述代码可以让你通知其它应用一个订单已经被创建。之后你可以在其它关注该事件的独立对象中执行像发送邮件通知、
+更新在库、日志相关统计以及其它任务。
 
-Accessing Event Managers
-========================
+访问事件管理器（Event Managers）
+==========================================
 
-In CakePHP events are triggered against event managers. Event managers are
-available in every Table, View and Controller using ``eventManager()``::
+CakePHP事件会触发事件管理器。在各表、视图、控制器中使用 ``eventManager()`` 能够访问事件管理器::
 
     $events = $this->eventManager();
 
-Each model has a separate event manager, while the View and Controller
-share one. This allows model events to be self contained, and allow components
-or controllers to act upon events created in the view if necessary.
+各模型都拥有一个独立的事件管理器，而视图和控制器共享一个。这使得模型的事件可以容纳自身，并且能够让部件
+或者控制器基于视图中的事件来启动。 
 
-Global Event Manager
---------------------
+全局事件管理器
+-----------------------
 
-In addition to instance level event managers, CakePHP provides a global event
-manager that allows you to listen to any event fired in an application. This is
-useful when attaching listeners to a specific instance might be cumbersome or
-difficult. The global manager is a singleton instance of
-:php:class:`Cake\\Event\\EventManager`. Listeners attached to the global
-dispatcher will be fired before instance listeners at the same priority. You can
-access the global manager using a static method::
+除了实例级别的事件管理器，CakePHP还提供一个全局的事件管理器让你可以监听应用中发生的任意事件。这在添加一个监听
+器到个别实例会很笨重或者困难的时候将会比较实用。全局管理器是一个 :php:class:`Cake\\Event\\EventManager`  的单子
+实例。登录到全局发送者的监听器在同样的优先级下将会比实例监听器先发动。你可以使用静态方法进入全局管理器::
 
-    // In any configuration file or piece of code that executes before the event
+    // 在事件执行前的配置文件或者代码片段中
     use Cake\Event\EventManager;
 
     EventManager::instance()->on(
@@ -108,47 +83,37 @@ access the global manager using a static method::
         $aCallback
     );
 
-One important thing you should consider is that there are events that will be
-triggered having the same name but different subjects, so checking it in the
-event object is usually required in any function that gets attached globally in
-order to prevent some bugs. Remember that with the flexibility of using the
-global manager, some additional complexity is incurred.
+一个你应该考虑的重要事情是有些拥有相同名字但是不同内容的事件被发动的情况。因此需要在事件对象中检查以防止分配
+到全局的任意机能中漏洞。记住使用全局管理者的柔软性，会让额外的复杂程度增加。
 
-:php:meth:`Cake\\Event\\EventManager::dispatch()` method accepts the event
-object as an argument and notifies all listener and callbacks passing this
-object along. The listeners will handle all the extra logic around the
-``afterPlace`` event, you can log the time, send emails, update user statistics
-possibly in separate objects and even delegating it to offline tasks if you have
-the need.
+:php:meth:`Cake\\Event\\EventManager::dispatch()` 方法接受事件对象作为宣言并且通知所有的监听器，通过回填函数
+单独传递这个对象。监听器将会掌握围绕着 ``afterPlace`` 事件的全部逻辑，你可以通过不同的独立对象记录时间、发送
+邮件、更新用户统计，甚至委托线下任务如果你需要的话。
 
 .. _tracking-events:
 
-Tracking Events
+跟踪事件
 ---------------
 
-To keep a list of events that are fired on a particular ``EventManager``, you
-can enable event tracking. To do so, simply attach an
-:php:class:`Cake\\Event\\EventList` to the manager::
+保持一个由特别的 ``EventManager`` 发动的事件列表，你可以使用事件追踪。只需要简单地登录一个
+ :php:class:`Cake\\Event\\EventList` 到管理器::
 
     EventManager::instance()->setEventList(new EventList());
 
-After firing an event on the manager, you can retrieve it from the event list::
+在管理器触发一个事件时，你可以从事件列表中回收掉它::
 
     $eventsFired = EventManager::instance()->getEventList();
     $firstEvent = $eventsFired[0];
 
-Tracking can be disabled by removing the event list or calling
-:php:meth:`Cake\\Event\\EventList::trackEvents(false)`.
+追踪可以通过移除事件列表或者调用 :php:meth:`Cake\\Event\\EventList::trackEvents(false)` 来取消。
 
 .. versionadded:: 3.2.11
-    Event tracking and :php:class:`Cake\\Event\\EventList` were added.
+    事件追踪和 :php:class:`Cake\\Event\\EventList` 被增加。
 
-Core Events
-===========
+核心事件
+=================
 
-There are a number of core events within the framework which your application
-can listen to. Each layer of CakePHP emits events that you can use in your
-application.
+框架中有很多你的应用能够监听的核心事件。CakePHP的各层会发出你的应用能够监听的事件。
 
 * :ref:`ORM/Model events <table-callbacks>`
 * :ref:`Controller events <controller-life-cycle>`
@@ -156,20 +121,14 @@ application.
 
 .. _registering-event-listeners:
 
-Registering Listeners
+注册监听器
 =====================
 
-Listeners are the preferred way to register callbacks for an event. This is done
-by implementing the :php:class:`Cake\\Event\\EventListenerInterface` interface
-in any class you wish to register some callbacks. Classes implementing it need
-to provide the ``implementedEvents()`` method. This method must return an
-associative array with all event names that the class will handle.
+监听器是为事件注册回调函数的好方法。它通过包含任意你想注册回调函数的类中的 :php:class:`Cake\\Event\\EventListenerInterface` 
+接口来实现。包含它的类需要实现 ``implementedEvents()`` 方法。该方法需要返回一个该类掌握的有所有事件的名字的关联数组。
 
-To continue our previous example, let's imagine we have a UserStatistic class
-responsible for calculating a user's purchasing history, and compiling into
-global site statistics. This is a great place to use a listener class. Doing so
-allows you to concentrate the statistics logic in one place and react to events
-as necessary. Our ``UserStatistics`` listener might start out like::
+继续我们之前的例子，让我们想象我们有一个用户统计类，负责计算用户的购买记录，并且编写成全局位置的统计。这是个非常适合使用监
+听类的位置。这样做让你可以集中于一处的统计逻辑并且在必要情况下将其反应成事件。我们的 ``UserStatistics`` 监听器也许如下开始::
 
     use Cake\Event\EventListenerInterface;
 
@@ -185,25 +144,22 @@ as necessary. Our ``UserStatistics`` listener might start out like::
 
         public function updateBuyStatistic($event, $order)
         {
-            // Code to update statistics
+            // 更新统计的代码
         }
     }
 
-    // Attach the UserStatistic object to the Order's event manager
+    // 将用户统计对象登录到事件管理者
     $statistics = new UserStatistic();
     $this->Orders->eventManager()->on($statistics);
 
-As you can see in the above code, the ``on()`` function will accept instances
-of the ``EventListener`` interface. Internally, the event manager will use
-``implementedEvents()`` to attach the correct callbacks.
+像你在上面的代码中看到的，``on()`` 函数会接收 ``EventListener`` 接口的实例。内部地，事件管理器会使用 ``implementedEvents()`` 
+来登录正确的回调函数。
 
-Registering Anonymous Listeners
+注册匿名监听器
 -------------------------------
 
-While event listener objects are generally a better way to implement listeners,
-you can also bind any ``callable`` as an event listener. For example if we
-wanted to put any orders into the log files, we could use a simple anonymous
-function to do so::
+事件监听器对象通常是一个实行监听器的好方法。同时你也可以捆绑任何的 ``callable`` 作为事件监听器。举例来说如果我们想要放任何订单
+到日志文件里面，我们可以用一个简单的匿名函数来做这些::
 
     use Cake\Log\Log;
 
@@ -214,8 +170,7 @@ function to do so::
         );
     });
 
-In addition to anonymous functions you can use any other callable type that PHP
-supports::
+除了匿名函数，你也可以使用PHP支持的任何种类回调函数::
 
     $events = [
         'email-sending' => 'EmailSender::sendBuyEmail',
@@ -225,24 +180,21 @@ supports::
         $eventManager->on('Model.Order.afterPlace', $callable);
     }
 
-When working with plugins that don't trigger specific events, you can leverage
-event listeners on the default events. Lets take an example  'UserFeedback'
-plugin which handles feedback forms from users. From your application you would
-like to know when a Feedback record has been saved and ultimately act on it. You
-can could listen to the global ``Model.afterSave`` event.  However, you can take
-a more direct approach and only listen to the event you really need::
+当使用不触发特殊事件的插件时，你可以触动默认事件的事件监听器。让我们举个掌管用户的反馈表单的'UserFeedback'插件的例子。从你的
+应用开始，你可能会知道何时一个反馈记录会被存储并且最终处理它。你可以监听全局的 
+``Model.afterSave`` 事件。然而，你可以取得一个更加直接的路径并且仅仅监听你需要的事件::
 
-    // You can create the following before the
-    // save operation, ie. config/bootstrap.php
+    // 在存储操作之前，你可以
+    // 创建如下, ie. config/bootstrap.php
     use Cake\ORM\TableRegistry;
-    // If sending emails
+    // 如果发送邮件
     use Cake\Mailer\Email;
 
     TableRegistry::get('ThirdPartyPlugin.Feedbacks')
         ->eventManager()
         ->on('Model.afterSave', function($event, $entity)
         {
-            // For example we can send an email to the admin
+            // 比方说我们可以给管理者发送一封邮件
             $email = new Email('default');
             $email->from('info@yoursite.com' => 'Your Site')
                 ->setTo('admin@yoursite.com')
