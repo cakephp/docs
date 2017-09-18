@@ -6,7 +6,7 @@ mínimo com o PHP |minphpversion|. Leia a seção :doc:`CakePHP num piscar de ol
 para ter uma ideia geral dos fundamentos do CakePHP 3.
 
 O *cookbook* do CakePHP é um projeto de documentação editável aberto à
-comunidade. Observe o botão com um ícone de pincel fixado no canto direito, ele
+comunidade. Observe o botão com um ícone de um lápis no canto direito, ele
 vai direcioná-lo para o editor online do GitHub referente a página atual,
 permitindo que você facilmente contribua com quaisquer adições, exclusões ou
 correções para a documentação.
