@@ -1178,6 +1178,35 @@ places at the same time. In order to clone a collection out of another use the
         }
     }
 
+Creating your own custom Collections
+====================================
+
+It is possible to create your own collection classes in your application to store, manage and manipulate groups of items. Simply create your collection class and extend the core collection class instance.::
+
+    namespace App\Lib\Collections;
+
+    use Cake\Collection\Collection;
+
+    class ExamplesCollection extends Collection
+    {
+
+    }
+
+You can now use your collection class as you would a regular collection, and access all the power of the collection methods.::
+
+    $examplesCollection = new ExamplesCollection(['first' => 'Custom class example', 'second' => 'Extend core class']);
+
+If you are storing object instances in a custom collection it is recommended to include a key when constructing the collection.::
+
+    $objectCollection = new ExamplesCollection(
+        'first' => new FirstExample(),
+        'second' => new SecondExample()
+    );
+
+In the above example, your Example objects will now be contained in the collection. However, the objects will need to implement the `PHP ArrayAccess interface <http://php.net/manual/en/class.arrayaccess.php>`_ in order to be compatible with the collection methods. It is also recommended to include the ``toArray()`` method in the object, so that they can be displayed correctly in Debug Kit.
+
+When you are nesting custom collections within objects which are themselves in a collection, some customisation of your custom collections ``toArray()`` method will be required.
+
 .. meta::
     :title lang=en: Collections
     :keywords lang=en: collections, cakephp, append, sort, compile, contains, countBy, each, every, extract, filter, first, firstMatch, groupBy, indexBy, jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some, random, sortBy, take, toArray, insert, sumOf, stopWhen, unfold, through
