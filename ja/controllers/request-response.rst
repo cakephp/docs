@@ -409,34 +409,33 @@ Accept ヘッダーの確認
 
     $acceptsSpanish = $this->request->acceptLanguage('es-es');
 
+
 .. _request-cookies:
 
-Cookies
--------
+クッキー
+---------
 
-Request cookies can be read through a number of methods::
+リクエストのクッキーはいくつかのメソッドを介して読むことができます。 ::
 
-    // Get the cookie value, or null if the cookie is missing.
+    // クッキーの値、またはクッキーが存在しない場合 null を取得
     $rememberMe = $this->request->getCookie('remember_me');
 
-    // Read the value, or get the default of 0
+    // 値の読み込み、またはデフォルトの 0 を取得
     $rememberMe = $this->request->getCookie('remember_me', 0);
 
-    // Get all cookies as an hash
+    // ハッシュとして全てのクッキーを取得
     $cookies = $this->request->getCookieParams();
 
-    // Get a CookieCollection instance (starting with 3.5.0)
+    // CookieCollection インスタンス (3.5.0 以降) を取得
     $cookies = $this->request->getCookieCollection()
 
-See the :php:class:`Cake\\Http\\Cookie\\CookieCollection` documentation for how
-to work with cookie collection.
+クッキーコレクションの操作方法については、 :php:class:`Cake\\Http\\Cookie\\CookieCollection`
+のドキュメントをご覧ください。
 
 .. versionadded:: 3.5.0
-    ``ServerRequest::getCookieCollection()`` was added in 3.5.0
+    ``ServerRequest::getCookieCollection()`` は 3.5.0 で追加されました。
 
 .. index:: $this->response
-
-
 
 レスポンス
 ==========
@@ -850,13 +849,13 @@ Not-Modified レスポンスの送信
 
 .. _response-cookies:
 
-Setting Cookies
+クッキーの設定
 ===============
 
-Cookies can be added to response using either an array or a :php:class:`Cookie``
-object::
+クッキーは、配列または :php:class:`Cake\Http\Cookie\Cookie` オブジェクトを使って
+レスポンスに追加することができます。 ::
 
-    // Add a cookie as an array using the immutable API (3.4.0+)
+    // イミュータブル API (3.4.0 以上) を使って配列としてクッキーを追加
     $this->response = $this->response->withCookie('remember_me', [
         'value' => 'yes',
         'path' => '/',
@@ -865,7 +864,7 @@ object::
         'expire' => strtotime('+1 year')
     ]);
 
-    // Before 3.4.0
+    // 3.4.0 より前
     $this->response->cookie('remember', [
         'value' => 'yes',
         'path' => '/',
@@ -874,7 +873,12 @@ object::
         'expire' => strtotime('+1 year')
     ]);
 
-See the :ref:`creating-cookies` section for how to use the cookie object.
+クッキーオブジェクトの使い方は :ref:`creating-cookies` セクションをご覧ください。
+``withExpiredCookie()`` を使ってレスポンスに期限切れのクッキーを送ることができます。
+これにより、ブラウザはローカルクッキーを削除します。 ::
+
+    // 3.5.0 以降
+    $this->response = $this->response->withExpiredCookie('remember_me');
 
 .. _cors-headers:
 
@@ -923,37 +927,40 @@ CakePHP 3.4.0 以降、レスポンスオブジェクトはレスポンスを不
 
 .. php:namespace:: Cake\Http\Cookie
 
-Cookie Collections
-==================
+クッキーコレクション
+====================
 
 .. php:class:: CookieCollection
 
-``CookieCollection`` objects are accessible from the request and response objects.
-They let you interact with groups of cookies using immutable patterns, which
-allow the immutability of the request and response to be preserved.
+``CookieCollection`` オブジェクトは、リクエストオブジェクトとレスポンスオブジェクトから
+アクセス可能です。イミュータブルパターンを使ってクッキーのグループとやり取りすることができ、
+リクエストとレスポンスの不変性が維持されます。
 
 .. _creating-cookies:
 
-Creating Cookies
+クッキーの作成
 ----------------
 
-``Cookie`` objects can be defined through constructor objects, or by using the
-fluent interface that follows immutable patterns::
+.. php:class:: Cookie
+
+``Cookie`` オブジェクトは、コンストラクタオブジェクトを介して、または
+イミュータブルパターンに従って流れるようなインターフェースを使用することによって
+定義することができます。 ::
 
     use Cake\Http\Cookie\Cookie;
 
-    // All arguments in the constructor
+    // コンストラクタの中の全ての引数
     $cookie = new Cookie(
-        'remember_me', // name
-        1, // value
-        new DateTime('+1 year'), // expiration time, if applicable
-        '/', // path, if applicable
-        'example.com', // domain, if applicable
-        false, // secure only?
-        true // http only ?
+        'remember_me', // 名前
+        1, // 値
+        new DateTime('+1 year'), // 有効期限、適用する場合
+        '/', // パス、該当する場合
+        'example.com', // ドメイン名、適用する場合
+        false, // secure のみ?
+        true // http のみ ?
     );
 
-    // Using the builder methods
+    // ビルダーメソッドを使用
     $cookie = (new Cookie('remember_me'))
         ->withValue('1')
         ->withExpiry(new DateTime('+1 year'))
@@ -962,63 +969,61 @@ fluent interface that follows immutable patterns::
         ->withSecure(false)
         ->withHttpOnly(true);
 
-Once you have created a cookie, you can add it to a new or existing
-``CookieCollection``::
+クッキーを作成したら、新規または既存の ``CookieCollection`` に追加することができます。 ::
 
     use Cake\Http\Cookie\CookieCollection;
 
-    // Create a new collection
+    // 新規のコレクションを作成
     $cookies = new CookieCollection([$cookie]);
 
-    // Add to an existing collection
+    // 既存のコレクションに追加
     $cookies = $cookies->add($cookie);
 
-    // Remove a cookie by name
+    // 名前でクッキーを削除
     $cookies = $cookies->remove('remember_me');
 
 .. note::
-    Remember that collections are immutable and adding cookies into, or removing
-    cookies from a collection, creates a *new* collection object.
+    コレクションは不変であり、クッキーを追加したりコレクションからクッキーを削除すると、
+    *新規に* コレクションが作成されることに注意してください。
 
-You should use the ``withCookie()`` method to add cookies to ``Response``
-objects as it is simpler to use::
+クッキーを ``Response`` オブジェクトに追加するために ``withCookie()``
+メソッドを使ってください。 ::
 
     $response = $this->response->withCookie($cookie);
 
-Cookies set to responses can be encrypted using the
-:ref:`encrypted-cookie-middleware`.
+レスポンスにセットするクッキーは :ref:`encrypted-cookie-middleware` を使って
+暗号化することができます。
 
-Reading Cookies
----------------
+クッキーの読込み
+----------------
 
-Once you have a ``CookieCollection`` instance, you can access the cookies it
-contains::
+``CookieCollection`` インスタンスを取得すると、それに含まれるクッキーにアクセスできます。 ::
 
-    // Check if a cookie exists
+    // クッキーが存在するかどうかをチェック
     $cookies->has('remember_me');
 
-    // Get the number of cookies in the collection
+    // コレクション内のクッキーの数を取得
     count($cookies);
 
-    // Get a cookie instance
+    // クッキーインスタンスを取得
     $cookie = $cookies->get('remember_me');
 
-Once you have a ``Cookie`` object you can interact with it's state and modify
-it. Keep in mind that cookies are immutable, so you'll need to update the
-collection if you modify a cookie::
+``Cookie`` オブジェクトを取得すると、その状態をやりとりしたり変更したりできます。
+クッキーは不変なので、クッキーを変更した場合にコレクションを更新する必要があることに
+注意してください。 ::
 
-    // Get the value
+    // 値の取得
     $value = $cookie->getValue()
 
-    // Access data inside a JSON value
+    // JSON 値の中のデータにアクセス
     $id = $cookie->read('User.id');
 
-    // Check state
+    // 状態のチェック
     $cookie->isHttpOnly();
     $cookie->isSecure();
 
 .. versionadded:: 3.5.0
-    ``CookieCollection`` and ``Cookie`` were added in 3.5.0.
+    ``CookieCollection`` と ``Cookie`` は 3.5.0 で追加されました。
 
 .. meta::
     :title lang=ja: リクエストとレスポンスオブジェクト
