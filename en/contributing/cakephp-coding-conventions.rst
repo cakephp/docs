@@ -27,6 +27,10 @@ There should be no trailing spaces per line.
 Most modern IDEs also support an ``.editorconfig`` file. The CakePHP app
 skeleton ships with it by default. It already contains best practise defaults.
 
+We recommend to use the `IdeHelper<https://github.com/dereuromark/cakephp-ide-helper>`_ plugin if you
+want to maximize IDE compatibility. It will assist to keep the annotations up-to-date which will make
+the IDE fully understand how all classes work together and provides better type-hinting and auto-completion.
+
 Indentation
 ===========
 
@@ -311,7 +315,7 @@ tags:
 *  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    Using the ``@version <vector> <description>`` format, where ``version``
-   and ``description`` are mandatory.
+   and ``description`` are mandatory. Version refers to the one it got deprecated in.
 *  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
 *  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
