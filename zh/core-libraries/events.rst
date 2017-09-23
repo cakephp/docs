@@ -1,5 +1,5 @@
 事件系统（Events System）
-##########################
+##################################
 
 创造一个可维持得应用既是一门科学也是一门艺术。让代码变得更加有质量的方式就是让你的对
 象变得松耦合（loosely coupled）的同时保持强内聚（strongly cohesive）。内聚意味着一个
@@ -202,63 +202,51 @@ CakePHP事件会触发事件管理器。在各表、视图、控制器中使用 
                 ->send('Body of message');
         });
 
-You can use this same approach to bind listener objects.
+你可以用这个相同的路径去绑定监听器对象。
 
-Interacting with Existing Listeners
+和既存监听器互相作用
 -----------------------------------
 
-Assuming several event listeners have been registered the presence or absence
-of a particular event pattern can be used as the basis of some action.::
+假设几个事件监听器已经被登录的情况下，某个特定事件模式的有无可以当作有些动作的基础使用。::
 
-    // Attach listeners to EventManager.
+    // 登录监听器到事件管理器
     $this->eventManager()->on('User.Registration', [$this, 'userRegistration']);
     $this->eventManager()->on('User.Verification', [$this, 'userVerification']);
     $this->eventManager()->on('User.Authorization', [$this, 'userAuthorization']);
 
-    // Somewhere else in your application.
+    // 应用的其它地方。
     $events = $this->eventManager()->matchingListeners('Verification');
     if (!empty($events)) {
-        // Perform logic related to presence of 'Verification' event listener.
-        // For example removing the listener if present.
+        // 实行存在'Verification'事件监听器的逻辑
+        // 比方说如果存在就移除该监听器
         $this->eventManager()->off('User.Verification');
     } else {
-        // Perform logic related to absence of 'Verification' event listener
+        // 实行不存在'Verification'事件监听器的逻辑
     }
 
 .. note::
 
-    The pattern passed to the ``matchingListeners`` method is case sensitive.
+    传递到 ``matchingListeners`` 方法的模式区分大小写。
 
 .. versionadded:: 3.2.3
 
-    The ``matchingListeners`` method returns an array of events matching
-    a search pattern.
+    ``matchingListeners`` 方法返回一个与检索模式一致的数组。
 
 .. _event-priorities:
 
-Establishing Priorities
------------------------
+优先顺序设置
+------------------------------------
 
-In some cases you might want to control the order that listeners are invoked.
-For instance, if we go back to our user statistics example. It would be ideal if
-this listener was called at the end of the stack. By calling it at the end of
-the listener stack, we can ensure that the event was not cancelled, and that no
-other listeners raised exceptions. We can also get the final state of the
-objects in the case that other listeners have modified the subject or event
-object.
+在某些情况下你可能会想要控制监听器的调用顺序。比方说，如果你返回我们用户统计的例子。监听器在堆（stack）的最后被调用会
+比较理想。在监听器堆的最后调用它，我们可以确保事件没有被取消，以及其它监听器没有发生例外。在其它监听器修改标题或者事件
+对象时，我们也能得到对象的最后状态。
 
-Priorities are defined as an integer when adding a listener. The higher the
-number, the later the method will be fired. The default priority for all
-listeners is ``10``. If you need your method to be run earlier, using any value
-below this default will work. On the other hand if you desire to run the
-callback after the others, using a number above ``10`` will do.
+当增加一个监听器时，优先级被定义成了一个整数值。数值越高，方法越晚被调用。所有监听器的默认优先级都是 ``10``。如果你想要你的方法更早调用，可以使用一个低于默认值的整数。在另一方面，如果你想要比其它方法更晚调用，可以使用一个比 ``10`` 大的数字。
 
-If two callbacks happen to have the same priority value, they will be executed
-with a the order they were attached. You set priorities using the ``on()``
-method for callbacks, and declaring it in the ``implementedEvents()`` function
-for event listeners::
+两个回调函数拥有相同优先级的情况下，它们将会按照我们登录的顺序执行。你可以用 ``on()`` 方法来为回调函数设定优先级，
+在 ``implementedEvents()`` 函数内宣言给事件监听器设定优先级::
 
-    // Setting priority for a callback
+    // 给回调函数设定优先级
     $callback = [$this, 'doSomething'];
     $this->eventManager()->on(
         'Model.Order.afterPlace',
@@ -266,7 +254,7 @@ for event listeners::
         $callback
     );
 
-    // Setting priority for a listener
+    // 给监听器设定优先级
     class UserStatistic implements EventListenerInterface
     {
         public function implementedEvents()
@@ -280,85 +268,63 @@ for event listeners::
         }
     }
 
-As you see, the main difference for ``EventListener`` objects is that you need
-to use an array for specifying the callable method and the priority preference.
-The ``callable`` key is a special array entry that the manager will read to know
-what function in the class it should be calling.
+如你所见， ``EventListener`` 对象的主要不同是需要用一个数组来确定回调方法和选择优先级。 
+``callable`` 键是一个管理器可以读取以确定调用类中哪个方法的特殊数组输入。
 
-Getting Event Data as Function Parameters
------------------------------------------
+将事件数据作为函数参数取得
+--------------------------------------------------------
 
-When events have data provided in their constructor, the provided data is
-converted into arguments for the listeners. An example from the View layer is
-the afterRender callback::
+当给事件的构造函数提供数据时，被提供的数据会转化成监听器的参数。一个视图层的例子时afterRender回调函数::
 
     $this->eventManager()
         ->dispatch(new Event('View.afterRender', $this, ['view' => $viewFileName]));
 
-The listeners of the ``View.afterRender`` callback should have the following
-signature::
+``View.afterRender`` 回调函数的监听器有以下签名::
 
     function (Event $event, $viewFileName)
 
-Each value provided to the Event constructor will be converted into function
-parameters in the order they appear in the data array. If you use an associative
-array, the result of ``array_values`` will determine the function argument
-order.
+提供给事件构造函数的各值会按照它们在数据数组的顺序转化成函数的参数。如果你使用一个关联数组， 
+``array_values`` 的结果将会决定函数参数的顺序。
 
 .. note::
 
-    Unlike in 2.x, converting event data to listener arguments is the default
-    behavior and cannot be disabled.
+	和2.x不同，将事件数据转化成监听器参数是一个不可取消的默认行为。
 
-Dispatching Events
-==================
+发送事件
+====================
 
-Once you have obtained an instance of an event manager you can dispatch events
-using :php:meth:`~Cake\\Event\\EventManager::dispatch()`. This method takes an
-instance of the :php:class:`Cake\\Event\\Event` class. Let's look at dispatching
-an event::
+一旦你得到一个事件管理器的实例，你可以使用 :php:meth:`~Cake\\Event\\EventManager::dispatch()` 来发送事件。
+该方法接收一个 :php:class:`Cake\\Event\\Event` 实例。让我们看看发送事件::
 
-    // An event listener has to be instantiated before dispatching an event.
-    // Create a new event and dispatch it.
+    // 一个事件监听器在发送之前已经实例化。
+    // 创建一个新事件并发送它。
     $event = new Event('Model.Order.afterPlace', $this, [
         'order' => $order
     ]);
     $this->eventManager()->dispatch($event);
 
-:php:class:`Cake\\Event\\Event` accepts 3 arguments in its constructor. The
-first one is the event name, you should try to keep this name as unique as
-possible, while making it readable. We suggest a convention as follows:
-``Layer.eventName`` for general events happening at a layer level (e.g.
-``Controller.startup``, ``View.beforeRender``) and ``Layer.Class.eventName`` for
-events happening in specific classes on a layer, for example
-``Model.User.afterRegister`` or ``Controller.Courses.invalidAccess``.
+:php:class:`Cake\\Event\\Event` 在构造函数中接收3个参数。第一个是事件名，你应该尽可能确保该名字是唯一可读的。我们推荐以下惯例: 
+``Layer.eventName`` 对应发生在一个层级的事件（例如；``Controller.startup``，``View.beforeRender``），``Layer.Class.eventName`` 
+对应发生在某个层的特定类中的事件，比方说 ``Model.User.afterRegister`` 或者 ``Controller.Courses.invalidAccess``。
 
-The second argument is the ``subject``, meaning the object associated to the
-event, usually when it is the same class triggering events about itself, using
-``$this`` will be the most common case. Although a Component could trigger
-controller events too. The subject class is important because listeners will get
-immediate access to the object properties and have the chance to inspect or
-change them on the fly.
+第二个参数是 ``subject`` ，表明着对象与事件的关联，通常是触发与自身相关的事件的类，``$this`` 是最常见的使用例子。尽管一个
+部件（Component）也能触发控制器事件。标题类（subject class）依然非常重要，因为监听器可以迅速访问对象的属性，有机会动态地检查
+和变更它们。
 
-Finally, the third argument is any additional event data.This can be any data
-you consider useful to pass around so listeners can act upon it. While this can
-be an argument of any type, we recommend passing an associative array.
+最后，第三个参数是附加事件数据。这里可以是任意你认为有用的数据，因此监听器可以依据你传递的数据来发生动作。这个参数可以是任意
+类型的，我们推荐传递一个关联数组。
 
-The :php:meth:`~Cake\\Event\\EventManager::dispatch()` method accepts an event
-object as an argument and notifies all subscribed listeners.
+The :php:meth:`~Cake\\Event\\EventManager::dispatch()` 方法接收一个事件对象作为参数并且通知所有订阅了的监听器。
 
 .. _stopping-events:
 
-Stopping Events
+停止事件
 ---------------
 
-Much like DOM events, you may want to stop an event to prevent additional
-listeners from being notified. You can see this in action during model callbacks
-(e.g. beforeSave) in which it is possible to stop the saving operation if
-the code detects it cannot proceed any further.
+像DOM事件一样，你也许想停止一个事件让追加的监听器不会收到通知。当检测出处理不能再进行下去的代码的时候，中止保存操作
+的模型回调函数(比方说 beforeSave)能够让你知道如何停止。
 
-In order to stop events you can either return ``false`` in your callbacks or
-call the ``stopPropagation()`` method on the event object::
+你也可以在你的回调函数中返回一个 ``false`` 来中止事件，或者在事件对象上调用 ``stopPropagation()`` 方法::
 
     public function doSomething($event)
     {
@@ -372,14 +338,10 @@ call the ``stopPropagation()`` method on the event object::
         $event->stopPropagation();
     }
 
-Stopping an event will prevent any additional callbacks from being called.
-Additionally the code triggering the event may behave differently based on the
-event being stopped or not. Generally it does not make sense to stop 'after'
-events, but stopping 'before' events is often used to prevent the entire
-operation from occurring.
+停止一个事件将会停止任何被调用的回调函数。触发事件的附加代码也许会根据事件是否被停止而有不同的表现。通常来说，
+停止 'after' 事件没有意义，不过停止 'before' 事件经常被用来停止整个操作的发生。
 
-To check if an event was stopped, you call the ``isStopped()`` method in the
-event object::
+你可以使用 ``isStopped()`` 方法来检查是否事件被停止::
 
     public function place($order)
     {
@@ -394,19 +356,15 @@ event object::
         // ...
     }
 
-In the previous example the order would not get saved if the event is stopped
-during the ``beforePlace`` process.
+在之前的例子，如果事件在 ``beforePlace`` 过程中被停止的话，订单不会被保存。
 
-Getting Event Results
----------------------
+取得事件结果
+----------------------------
 
-Every time a callback returns a non-null non-false value, it gets stored in the
-``$result`` property of the event object. This is useful when you want to allow
-callbacks to modify the event execution. Let's take again our ``beforePlace``
-example and let callbacks modify the ``$order`` data.
+每当回调函数返回一个非null和false的值，都会被保存在事件对象的 ``$result`` 属性里面。这在你想要让回调
+函数调整事件的执行时比较有帮助。在让我们用 ``beforePlace`` 来举例子，让回调函数修改 ``$order`` 数据。
 
-Event results can be altered either using the event object result property
-directly or returning the value in the callback itself::
+每个事件结果都可以通过直接使用事件对象结果属性或者返回回调函数自身的值来改变::
 
     // A listener callback
     public function doSomething($event)
@@ -437,49 +395,44 @@ directly or returning the value in the callback itself::
         // ...
     }
 
-It is possible to alter any event object property and have the new data passed
-to the next callback. In most of the cases, providing objects as event data or
-result and directly altering the object is the best solution as the reference is
-kept the same and modifications are shared across all callback calls.
+转化任意事件对象的属性和拥有传递到下一个回调函数的新数据是可能的。在多数例子中，作为事件数据或者结果来提供
+对象，直接转化对象，是保持相同参照和修改被共享到所有回调函数的调用的最优解决方案。
 
-Removing Callbacks and Listeners
---------------------------------
+删除回调函数和监听器
+-------------------------------------------
 
-If for any reason you want to remove any callback from the event manager just
-call the :php:meth:`Cake\\Event\\EventManager::off()` method using as
-arguments the first two params you used for attaching it::
+如果有任何理由你想要从事件管理器删除任意的回调函数，只需要使用你用来登录它的前两个参数来
+调用 :php:meth:`Cake\\Event\\EventManager::off()` 方法::
 
-    // Attaching a function
+    // 登录一个函数
     $this->eventManager()->on('My.event', [$this, 'doSomething']);
 
-    // Detaching the function
+    // 删除一个函数
     $this->eventManager()->off('My.event', [$this, 'doSomething']);
 
-    // Attaching an anonymous function.
+    // 登录一个匿名函数
     $myFunction = function ($event) { ... };
     $this->eventManager()->on('My.event', $myFunction);
 
-    // Detaching the anonymous function
+    // 删除匿名函数
     $this->eventManager()->off('My.event', $myFunction);
 
-    // Adding a EventListener
+    // 添加一个事件监听器
     $listener = new MyEventLister();
     $this->eventManager()->on($listener);
 
-    // Detaching a single event key from a listener
+    // 从监听器删除一个简单的事件键
     $this->eventManager()->off('My.event', $listener);
 
-    // Detaching all callbacks implemented by a listener
+    // 删除监听器包含的所有回调函数
     $this->eventManager()->off($listener);
 
-Events are a great way of separating concerns in your application and make
-classes both cohesive and decoupled from each other. Events can be utilized to
-de-couple application code and make extensible plugins.
+事件是让你在应用中把关心的东西分开的非常好的方法。它让类与其它类之间保持耦合与凝聚力。事件可以利用于应用代码
+的疏结合和作成能够扩张的插件。
 
-Keep in mind that with great power comes great responsibility. Using too many
-events can make debugging harder and require additional integration testing.
+记住更大的能力带来更大的责任。使用太多的事件会让调试更困难并且需要额外的结合测试。
 
-Additional Reading
+扩展阅读
 ==================
 
 * :doc:`/orm/behaviors`
@@ -489,5 +442,5 @@ Additional Reading
 
 
 .. meta::
-    :title lang=en: Events system
+    :title lang=zh: Events system
     :keywords lang=en: events, dispatch, decoupling, cakephp, callbacks, triggers, hooks, php
