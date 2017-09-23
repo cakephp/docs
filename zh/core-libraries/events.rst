@@ -93,7 +93,7 @@ CakePHP事件会触发事件管理器。在各表、视图、控制器中使用 
 .. _tracking-events:
 
 跟踪事件
----------------
+---------------------
 
 保持一个由特别的 ``EventManager`` 发动的事件列表，你可以使用事件追踪。只需要简单地登录一个
  :php:class:`Cake\\Event\\EventList` 到管理器::
@@ -128,7 +128,7 @@ CakePHP事件会触发事件管理器。在各表、视图、控制器中使用 
 接口来实现。包含它的类需要实现 ``implementedEvents()`` 方法。该方法需要返回一个该类掌握的有所有事件的名字的关联数组。
 
 继续我们之前的例子，让我们想象我们有一个用户统计类，负责计算用户的购买记录，并且编写成全局位置的统计。这是个非常适合使用监
-听类的位置。这样做让你可以集中于一处的统计逻辑并且在必要情况下将其反应成事件。我们的 ``UserStatistics`` 监听器也许如下开始::
+听类的位置。这样做让你可以集中于一处的统计逻辑并且在必要情况下将其反应成事件。我们的 ``UserStatistics`` 监听器也许像下面那样开始::
 
     use Cake\Event\EventListenerInterface;
 
@@ -152,7 +152,7 @@ CakePHP事件会触发事件管理器。在各表、视图、控制器中使用 
     $statistics = new UserStatistic();
     $this->Orders->eventManager()->on($statistics);
 
-像你在上面的代码中看到的，``on()`` 函数会接收 ``EventListener`` 接口的实例。内部地，事件管理器会使用 ``implementedEvents()`` 
+像你在上面的代码中看到的，``on()`` 函数会接收 ``EventListener`` 接口的实例。在内部，事件管理器会使用 ``implementedEvents()`` 
 来登录正确的回调函数。
 
 注册匿名监听器
