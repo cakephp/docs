@@ -562,11 +562,12 @@ associations and filter them by conditions::
 
     // In a controller or table method.
 
-    $query = $articles->find()->contain('Comments', function ($q) {
-       return $q
-            ->select(['body', 'author_id'])
-            ->where(['Comments.approved' => true]);
-    });
+    $query = $articles->find()->contain(['Comments' => function ($q) {
+            return $q
+                ->select(['body', 'author_id'])
+                ->where(['Comments.approved' => true]);
+        }
+    ]);
 
 This also works for pagination at the Controller level::
 
