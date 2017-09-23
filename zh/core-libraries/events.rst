@@ -274,7 +274,7 @@ CakePHP事件会触发事件管理器。在各表、视图、控制器中使用 
 将事件数据作为函数参数取得
 --------------------------------------------------------
 
-当给事件的构造函数提供数据时，被提供的数据会转化成监听器的参数。一个视图层的例子时afterRender回调函数::
+当给事件的构造函数提供数据时，被提供的数据会转化成监听器的参数。一个视图层的例子是afterRender回调函数::
 
     $this->eventManager()
         ->dispatch(new Event('View.afterRender', $this, ['view' => $viewFileName]));
@@ -329,8 +329,8 @@ The :php:meth:`~Cake\\Event\\EventManager::dispatch()` 方法接收一个事件�
     public function doSomething($event)
     {
         // ...
-        return false; // Stops the event
-    }
+        return false; // 停止事件
+    }
 
     public function updateBuyStatistic($event)
     {
@@ -339,7 +339,7 @@ The :php:meth:`~Cake\\Event\\EventManager::dispatch()` 方法接收一个事件�
     }
 
 停止一个事件将会停止任何被调用的回调函数。触发事件的附加代码也许会根据事件是否被停止而有不同的表现。通常来说，
-停止 'after' 事件没有意义，不过停止 'before' 事件经常被用来停止整个操作的发生。
+停止 'after' 事件没有意义，不过停止 'before' 事件经常被用来阻止整个操作的发生。
 
 你可以使用 ``isStopped()`` 方法来检查是否事件被停止::
 
@@ -366,23 +366,23 @@ The :php:meth:`~Cake\\Event\\EventManager::dispatch()` 方法接收一个事件�
 
 每个事件结果都可以通过直接使用事件对象结果属性或者返回回调函数自身的值来改变::
 
-    // A listener callback
-    public function doSomething($event)
+    // 一个监听器的回调函数
+    public function doSomething($event)
     {
         // ...
         $alteredData = $event->getData('order') + $moreData;
         return $alteredData;
     }
 
-    // Another listener callback
-    public function doSomethingElse($event)
+    // 另一个监听器的回调函数
+    public function doSomethingElse($event)
     {
         // ...
         $event->setResult(['order' => $alteredData] + $this->result());
     }
 
-    // Using the event result
-    public function place($order)
+    // 使用事件结果
+    public function place($order)
     {
         $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
         $this->eventManager()->dispatch($event);
