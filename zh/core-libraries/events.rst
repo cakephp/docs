@@ -115,9 +115,9 @@ CakePHP事件会触发事件管理器。在各表、视图、控制器中使用 
 
 框架中有很多你的应用能够监听的核心事件。CakePHP的各层会发出你的应用能够监听的事件。
 
-* :ref:`ORM/Model events <table-callbacks>`
-* :ref:`Controller events <controller-life-cycle>`
-* :ref:`View events <view-events>`
+* :ref:`__ORM/Model events <table-callbacks>`
+* :ref:`__Controller events <controller-life-cycle>`
+* :ref:`__View events <view-events>`
 
 .. _registering-event-listeners:
 
