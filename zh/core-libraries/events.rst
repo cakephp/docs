@@ -438,7 +438,7 @@ The :php:meth:`~Cake\\Event\\EventManager::dispatch()` 方法接收一个事件�
 * :doc:`/orm/behaviors`
 * :doc:`/controllers/components`
 * :doc:`/views/helpers`
-* :ref:`testing-events`
+* :ref:`__testing-events`
 
 
 .. meta::
