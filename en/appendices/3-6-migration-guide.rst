@@ -31,6 +31,8 @@ behavior that may affect your application:
   to prevent token reuse between users/sessions. This changes the value of
   security tokens and will cause forms created in earlier versions of CakePHP to
   fail validation in 3.6.
+* ``Cake\Database\Query::page()`` now raises exceptions when page values are
+  < 1.
 * Pagination now allows sorting on multiple fields across all pages. Previously
   only the first page could be sorted by more than one column. Furthermore, sort
   conditions defined in the query string are *prepended* to the default order
