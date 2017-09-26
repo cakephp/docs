@@ -33,6 +33,10 @@ behavior that may affect your application:
   fail validation in 3.6.
 * ``Cake\Database\Query::page()`` now raises exceptions when page values are
   < 1.
+* Pagination now allows sorting on multiple fields across all pages. Previously
+  only the first page could be sorted by more than one column. Furthermore, sort
+  conditions defined in the query string are *prepended* to the default order
+  parameters now instead of fully replacing the default ordering.
 
 ORM
 ========

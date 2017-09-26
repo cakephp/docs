@@ -240,9 +240,10 @@ Limit the Maximum Number of Rows per Page
 The number of results that are fetched per page is exposed to the user as the
 ``limit`` parameter. It is generally undesirable to allow users to fetch all
 rows in a paginated set. The ``maxLimit`` option asserts that no one can set
-this limit too high from the outside. By default CakePHP limits the maximum number of rows
-that can be fetched to 100. If this default is not appropriate for your
-application, you can adjust it as part of the pagination options, for example reducing it to ``10``::
+this limit too high from the outside. By default CakePHP limits the maximum
+number of rows that can be fetched to 100. If this default is not appropriate
+for your application, you can adjust it as part of the pagination options, for
+example reducing it to ``10``::
 
     public $paginate = [
         // Other keys here.
