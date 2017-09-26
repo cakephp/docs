@@ -26,6 +26,11 @@ IDE が空白の "trim right" の設定がされているかどうかを確か�
 最新の IDE は、 ``.editorconfig`` ファイルをサポートします。CakePHP アプリの
 スケルトンは、デフォルトで提供しています。すでにデフォルトでベストプラクティスが入っています。
 
+IDE との互換性を最大限にしたい場合、 `IdeHelper
+<https://github.com/dereuromark/cakephp-ide-helper>`_ プラグインの使用をお勧めします。
+アノテーションを最新の状態に保ち、IDE がすべてのクラスの仕組みを完全に理解し、
+より良いタイプヒントと自動補完を提供するのを支援します。
+
 インデント
 ==========
 
@@ -296,7 +301,8 @@ false を、関数呼び出しが成功したかどうかを判定できるよ�
 *  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
 *  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
-   ``@version <vector> <description>`` 形式を使用して、 ``version`` と ``description`` は必須です。
+   ``@version <vector> <description>`` 形式を使用して、 ``version`` と ``description``
+   は必須です。バージョンは非推奨のバージョンを示します。
 *  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
 *  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
