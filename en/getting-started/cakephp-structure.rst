@@ -50,9 +50,9 @@ Controllers are also fitted with callbacks. These callbacks are
 available for your use, just in case you need to insert some logic
 between CakePHP's core operations. Callbacks available include:
 
+-  :php:meth:`~Controller::beforeFilter()`, executed before any controller action logic
 -  :php:meth:`~Controller::afterFilter()`, executed after all controller logic,
    including the rendering of the view
--  :php:meth:`~Controller::beforeFilter()`, executed before any controller action logic
 -  :php:meth:`~Controller::beforeRender()`, executed after controller logic, but before
    the view is rendered
 
