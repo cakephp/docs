@@ -369,6 +369,7 @@ CSRF 保護は、ミドルウェアスタックに ``CsrfProtectionMiddleware`` 
 - ``secure`` クッキーにセキュアフラグをセットするかどうか。
   これは、HTTPS 接続でのみクッキーが設定され、通常の HTTP 経由での試みは失敗します。
   デフォルトは ``false`` 。
+- ``httpOnly`` クッキーに HttpOnly フラグをセットするかどうか。デフォルトは ``false`` 。
 - ``field`` 確認するフォームフィールド。デフォルトは ``_csrfToken`` 。
   これを変更するには、FormHelper の設定も必要です。
 
