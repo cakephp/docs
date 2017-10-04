@@ -21,7 +21,7 @@ level folders you should see:
   be installed by composer. Editing these files is not advised, as composer will
   overwrite your changes next time you update.
 - The *webroot* directory is the public document root of your application. It
-  contains all the files you want to be publically reachable.
+  contains all the files you want to be publicly reachable.
 
   Make sure that the *tmp* and *logs* folders exist and are writable,
   otherwise the performance of your application will be severely
