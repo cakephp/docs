@@ -10,7 +10,7 @@ uniform development experience, allowing other developers to jump in and help.
 Controller Conventions
 ======================
 
-Controller class names are plural, CamelCased, and end in ``Controller``.
+Controller class names are plural, PascalCased, and end in ``Controller``.
 ``UsersController`` and ``ArticleCategoriesController`` are both examples of
 conventional controller names.
 
@@ -35,9 +35,9 @@ When you create links using ``this->Html->link()``, you can use the following
 conventions for the url array::
 
     $this->Html->link('link-title', [
-        'prefix' => 'MyPrefix' // CamelCased
-        'plugin' => 'MyPlugin', // CamelCased
-        'controller' => 'ControllerName', // CamelCased
+        'prefix' => 'MyPrefix' // PascalCased
+        'plugin' => 'MyPlugin', // PascalCased
+        'controller' => 'ControllerName', // PascalCased
         'action' => 'actionName' // camelBacked
     ]
 
@@ -76,7 +76,7 @@ folder.
 Model and Database Conventions
 ==============================
 
-Table class names are plural, CamelCased and end in ``Table``. ``UsersTable``, ``ArticleCategoriesTable``,
+Table class names are plural, PascalCased and end in ``Table``. ``UsersTable``, ``ArticleCategoriesTable``,
 and ``UserFavoritePagesTable`` are all examples of conventional model names.
 
 Table names corresponding to CakePHP models are plural and underscored. The
