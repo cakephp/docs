@@ -38,7 +38,7 @@ Create a Posts Controller
 =========================
 
 Next, we'll create a controller for our posts. The controller is
-where all the business logic for post interaction will happen. In a
+where all the controlling logic for post interaction will happen. In a
 nutshell, it's the place where you play with the models and get
 post-related work done. We'll place this new controller in a file
 called ``PostsController.php`` inside the ``/app/Controller``
