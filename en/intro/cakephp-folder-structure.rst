@@ -18,7 +18,7 @@ level folders you should see:
   is usually used to store translation messages, model descriptions and sometimes
   session information.
 - The *vendor* folder is where CakePHP and other application dependencies will
-  be installed by composer. Editing these files is not advised, as composer will
+  be installed by Composer. Editing these files is not advised, as Composer will
   overwrite your changes next time you update.
 - The *webroot* directory is the public document root of your application. It
   contains all the files you want to be publically reachable.
