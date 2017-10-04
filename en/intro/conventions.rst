@@ -49,9 +49,8 @@ For more information on CakePHP URLs and parameter handling, see
 File and Class Name Conventions
 ===============================
 
-In general, filenames match the class names, and follow the PSR-0 or PSR-4
-standards for autoloading. The following are some examples of class names and
-their filenames:
+In general, filenames match the class names, and follow the PSR-4 standard for
+autoloading. The following are some examples of class names and their filenames:
 
 -  The Controller class ``LatestArticlesController`` would be found in a file
    named **LatestArticlesController.php**
