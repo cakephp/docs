@@ -70,7 +70,7 @@ or a XML formatted result for others to consume::
     // In a view template file, we'll render an 'element' for each user.
     <?php foreach ($users as $user): ?>
         <li class="user">
-            <?= $this->element('user', ['user' => $user]) ?>
+            <?= $this->element('user_info', ['user' => $user]) ?>
         </li>
     <?php endforeach; ?>
 
