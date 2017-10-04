@@ -11,7 +11,7 @@ level folders you should see:
 - The *plugins* folder is where the :doc:`/plugins` your application uses are stored.
 - The *logs* folder normally contains your log files, depending on your log
   configuration.
-- The *src* folder will be where your application’s files will be placed.
+- The *src* folder will be where your application’s source files will be placed.
 - The *tests* folder will be where you put the test cases for your application.
 - The *tmp* folder is where CakePHP stores temporary data. The actual data it
   stores depends on how you have CakePHP configured, but this folder
