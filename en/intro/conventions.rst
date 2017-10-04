@@ -120,6 +120,9 @@ will look for a view template in **src/Template/Articles/view_all.ctp**.
 The basic pattern is
 **src/Template/Controller/underscored_function_name.ctp**.
 
+Summarized
+==========
+
 By naming the pieces of your application using CakePHP conventions, you gain
 functionality without the hassle and maintenance tethers of configuration.
 Here's a final example that ties the conventions together:
