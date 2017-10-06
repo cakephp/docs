@@ -877,7 +877,7 @@ As seen in the ``testIndexPostData()`` example above, you can use
 ``testAction()`` to test POST actions as well as GET actions. By supplying the
 ``data`` key, the request made to the controller will be POST. By default all
 requests will be POST requests. You can simulate a GET request by setting the
-method key::
+method key and supplying the ``url`` key::
 
     public function testAdding() {
         $data = array(
@@ -886,7 +886,7 @@ method key::
                 'body' => 'Secret sauce'
             )
         );
-        $this->testAction('/posts/add', array('data' => $data, 'method' => 'get'));
+        $this->testAction('/posts/add', array('url' => $data, 'method' => 'get'));
         // some assertions.
     }
 
