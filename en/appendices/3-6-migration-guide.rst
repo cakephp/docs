@@ -37,6 +37,10 @@ behavior that may affect your application:
   only the first page could be sorted by more than one column. Furthermore, sort
   conditions defined in the query string are *prepended* to the default order
   parameters now instead of fully replacing the default ordering.
+* Shell classes will now throw exceptions when task classes cannot be found.
+  Previously invalid tasks would be silently ignored.
+* CakePHP internals now chain exceptions where possible, allowing root causes of
+  errors to be exposed.
 
 ORM
 ========
