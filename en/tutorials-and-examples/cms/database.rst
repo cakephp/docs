@@ -7,6 +7,8 @@ an empty database for use in this tutorial, with a name of your choice, e.g.
 ``cake_cms``. You can execute the following SQL to create the necessary
 tables::
 
+    USE cake_cms;
+
     CREATE TABLE users (
         id INT AUTO_INCREMENT PRIMARY KEY,
         email VARCHAR(255) NOT NULL,
@@ -92,7 +94,7 @@ might look something like the following::
     ];
 
 Once you've saved your **config/app.php** file, you should see that 'CakePHP is
-able to connect to the database' section have a checkmark.
+able to connect to the database' section have a green chef hat.
 
 .. note::
 

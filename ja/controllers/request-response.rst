@@ -409,6 +409,32 @@ Accept ヘッダーの確認
 
     $acceptsSpanish = $this->request->acceptLanguage('es-es');
 
+
+.. _request-cookies:
+
+クッキー
+---------
+
+リクエストのクッキーはいくつかのメソッドを介して読むことができます。 ::
+
+    // クッキーの値、またはクッキーが存在しない場合 null を取得
+    $rememberMe = $this->request->getCookie('remember_me');
+
+    // 値の読み込み、またはデフォルトの 0 を取得
+    $rememberMe = $this->request->getCookie('remember_me', 0);
+
+    // ハッシュとして全てのクッキーを取得
+    $cookies = $this->request->getCookieParams();
+
+    // CookieCollection インスタンス (3.5.0 以降) を取得
+    $cookies = $this->request->getCookieCollection()
+
+クッキーコレクションの操作方法については、 :php:class:`Cake\\Http\\Cookie\\CookieCollection`
+のドキュメントをご覧ください。
+
+.. versionadded:: 3.5.0
+    ``ServerRequest::getCookieCollection()`` は 3.5.0 で追加されました。
+
 .. index:: $this->response
 
 レスポンス
@@ -821,6 +847,39 @@ Not-Modified レスポンスの送信
         return $this->response;
     }
 
+.. _response-cookies:
+
+クッキーの設定
+===============
+
+クッキーは、配列または :php:class:`Cake\Http\Cookie\Cookie` オブジェクトを使って
+レスポンスに追加することができます。 ::
+
+    // イミュータブル API (3.4.0 以上) を使って配列としてクッキーを追加
+    $this->response = $this->response->withCookie('remember_me', [
+        'value' => 'yes',
+        'path' => '/',
+        'httpOnly' => true,
+        'secure' => false,
+        'expire' => strtotime('+1 year')
+    ]);
+
+    // 3.4.0 より前
+    $this->response->cookie('remember', [
+        'value' => 'yes',
+        'path' => '/',
+        'httpOnly' => true,
+        'secure' => false,
+        'expire' => strtotime('+1 year')
+    ]);
+
+クッキーオブジェクトの使い方は :ref:`creating-cookies` セクションをご覧ください。
+``withExpiredCookie()`` を使ってレスポンスに期限切れのクッキーを送ることができます。
+これにより、ブラウザはローカルクッキーを削除します。 ::
+
+    // 3.5.0 以降
+    $this->response = $this->response->withExpiredCookie('remember_me');
+
 .. _cors-headers:
 
 クロスオリジンリクエストヘッダー（CORS）の設定
@@ -865,6 +924,106 @@ CakePHP 3.4.0 以降、レスポンスオブジェクトはレスポンスを不
 上記のコードを修正するには、次のように記述します。 ::
 
     $this->response = $this->response->withHeader('X-CakePHP', 'yes!');
+
+.. php:namespace:: Cake\Http\Cookie
+
+クッキーコレクション
+====================
+
+.. php:class:: CookieCollection
+
+``CookieCollection`` オブジェクトは、リクエストオブジェクトとレスポンスオブジェクトから
+アクセス可能です。イミュータブルパターンを使ってクッキーのグループとやり取りすることができ、
+リクエストとレスポンスの不変性が維持されます。
+
+.. _creating-cookies:
+
+クッキーの作成
+----------------
+
+.. php:class:: Cookie
+
+``Cookie`` オブジェクトは、コンストラクタオブジェクトを介して、または
+イミュータブルパターンに従って流れるようなインターフェースを使用することによって
+定義することができます。 ::
+
+    use Cake\Http\Cookie\Cookie;
+
+    // コンストラクタの中の全ての引数
+    $cookie = new Cookie(
+        'remember_me', // 名前
+        1, // 値
+        new DateTime('+1 year'), // 有効期限、適用する場合
+        '/', // パス、該当する場合
+        'example.com', // ドメイン名、適用する場合
+        false, // secure のみ?
+        true // http のみ ?
+    );
+
+    // ビルダーメソッドを使用
+    $cookie = (new Cookie('remember_me'))
+        ->withValue('1')
+        ->withExpiry(new DateTime('+1 year'))
+        ->withPath('/')
+        ->withDomain('example.com')
+        ->withSecure(false)
+        ->withHttpOnly(true);
+
+クッキーを作成したら、新規または既存の ``CookieCollection`` に追加することができます。 ::
+
+    use Cake\Http\Cookie\CookieCollection;
+
+    // 新規のコレクションを作成
+    $cookies = new CookieCollection([$cookie]);
+
+    // 既存のコレクションに追加
+    $cookies = $cookies->add($cookie);
+
+    // 名前でクッキーを削除
+    $cookies = $cookies->remove('remember_me');
+
+.. note::
+    コレクションは不変であり、クッキーを追加したりコレクションからクッキーを削除すると、
+    *新規に* コレクションが作成されることに注意してください。
+
+クッキーを ``Response`` オブジェクトに追加するために ``withCookie()``
+メソッドを使ってください。 ::
+
+    $response = $this->response->withCookie($cookie);
+
+レスポンスにセットするクッキーは :ref:`encrypted-cookie-middleware` を使って
+暗号化することができます。
+
+クッキーの読込み
+----------------
+
+``CookieCollection`` インスタンスを取得すると、それに含まれるクッキーにアクセスできます。 ::
+
+    // クッキーが存在するかどうかをチェック
+    $cookies->has('remember_me');
+
+    // コレクション内のクッキーの数を取得
+    count($cookies);
+
+    // クッキーインスタンスを取得
+    $cookie = $cookies->get('remember_me');
+
+``Cookie`` オブジェクトを取得すると、その状態をやりとりしたり変更したりできます。
+クッキーは不変なので、クッキーを変更した場合にコレクションを更新する必要があることに
+注意してください。 ::
+
+    // 値の取得
+    $value = $cookie->getValue()
+
+    // JSON 値の中のデータにアクセス
+    $id = $cookie->read('User.id');
+
+    // 状態のチェック
+    $cookie->isHttpOnly();
+    $cookie->isSecure();
+
+.. versionadded:: 3.5.0
+    ``CookieCollection`` と ``Cookie`` は 3.5.0 で追加されました。
 
 .. meta::
     :title lang=ja: リクエストとレスポンスオブジェクト

@@ -61,7 +61,7 @@ you wish, you can restrict some parameters to conform to a regular expression::
         '/articles/:id',
         ['controller' => 'Articles', 'action' => 'view'],
         ['id' => '\d+', 'pass' => ['id']]
-    )
+    );
 
 The previous example changed the star matcher by a new placeholder ``:id``.
 Using placeholders allows us to validate parts of the URL, in this case we used
@@ -426,7 +426,7 @@ of ``connect()``::
     ])
 
     // Also allow JSON file extensions
-    ->setExtenions(['json'])
+    ->setExtensions(['json'])
 
     // Set lang to be a persistent parameter
     ->setPersist(['lang']);

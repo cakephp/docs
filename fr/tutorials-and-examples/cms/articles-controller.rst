@@ -79,7 +79,7 @@ dans ce fichier:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp -->
+    <!-- Fichier : src/Template/Articles/index.ctp -->
 
     <h1>Articles</h1>
     <table>
@@ -167,14 +167,14 @@ Créons le template de view pour notre action "view" dans
 
 Vous pouvez vérifier que tout fonctionne en essayant de cliquer sur un lien de
 ``/articles/index`` ou en vous rendant manuellement sur une URL de la forme
-``/articles/view/slug-name``.
+``/articles/view/first-post``.
 
 Ajouter des articles
 ====================
 
 Maintenant que les views de lecture ont été créées, il est temps de rendre possible
 la création d'articles. Commencez par créer une action ``add()`` dans le
-``ArticlesController``::
+``ArticlesController``. Notre controller doit maintenant ressembler à ceci::
 
     // src/Controller/ArticlesController.php
 
@@ -189,6 +189,7 @@ la création d'articles. Commencez par créer une action ``add()`` dans le
         {
             parent::initialize();
 
+            $this->loadComponent('Paginator'); 
             $this->loadComponent('Flash'); // Inclusion du FlashComponent
         }
 
@@ -327,7 +328,7 @@ de l'ORM pour créer notre slug::
             $sluggedTitle = Text::slug($entity->title);
             // On ne garde que le nombre de caractère correspondant à la longueur
             // maximum définie dans notre schéma
-            $entity->slug = substr($sluggedTitle, 0, 191)
+            $entity->slug = substr($sluggedTitle, 0, 191);
         }
 
         // Ceci est temporaire, nous le retirerons quand nous

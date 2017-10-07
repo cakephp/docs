@@ -10,7 +10,7 @@ uniform development experience, allowing other developers to jump in and help.
 Controller Conventions
 ======================
 
-Controller class names are plural, CamelCased, and end in ``Controller``.
+Controller class names are plural, PascalCased, and end in ``Controller``.
 ``UsersController`` and ``ArticleCategoriesController`` are both examples of
 conventional controller names.
 
@@ -35,9 +35,9 @@ When you create links using ``this->Html->link()``, you can use the following
 conventions for the url array::
 
     $this->Html->link('link-title', [
-        'prefix' => 'MyPrefix' // CamelCased
-        'plugin' => 'MyPlugin', // CamelCased
-        'controller' => 'ControllerName', // CamelCased
+        'prefix' => 'MyPrefix' // PascalCased
+        'plugin' => 'MyPlugin', // PascalCased
+        'controller' => 'ControllerName', // PascalCased
         'action' => 'actionName' // camelBacked
     ]
 
@@ -49,9 +49,8 @@ For more information on CakePHP URLs and parameter handling, see
 File and Class Name Conventions
 ===============================
 
-In general, filenames match the class names, and follow the PSR-0 or PSR-4
-standards for autoloading. The following are some examples of class names and
-their filenames:
+In general, filenames match the class names, and follow the PSR-4 standard for
+autoloading. The following are some examples of class names and their filenames:
 
 -  The Controller class ``LatestArticlesController`` would be found in a file
    named **LatestArticlesController.php**
@@ -76,7 +75,7 @@ folder.
 Model and Database Conventions
 ==============================
 
-Table class names are plural, CamelCased and end in ``Table``. ``UsersTable``, ``ArticleCategoriesTable``,
+Table class names are plural, PascalCased and end in ``Table``. ``UsersTable``, ``ArticleCategoriesTable``,
 and ``UserFavoritePagesTable`` are all examples of conventional model names.
 
 Table names corresponding to CakePHP models are plural and underscored. The
@@ -119,6 +118,9 @@ will look for a view template in **src/Template/Articles/view_all.ctp**.
 
 The basic pattern is
 **src/Template/Controller/underscored_function_name.ctp**.
+
+Summarized
+==========
 
 By naming the pieces of your application using CakePHP conventions, you gain
 functionality without the hassle and maintenance tethers of configuration.

@@ -378,6 +378,7 @@ The available configuration options are:
 - ``secure`` Whether or not the cookie will be set with the Secure flag. That is,
   the cookie will only be set on a HTTPS connection and any attempt over normal HTTP
   will fail. Defaults to ``false``.
+- ``httpOnly`` Whether or not the cookie will be set with the HttpOnly flag. Defaults to ``false``.
 - ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
   will also require configuring FormHelper.
 

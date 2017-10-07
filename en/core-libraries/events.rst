@@ -229,7 +229,7 @@ When working with plugins that don't trigger specific events, you can leverage
 event listeners on the default events. Lets take an example  'UserFeedback'
 plugin which handles feedback forms from users. From your application you would
 like to know when a Feedback record has been saved and ultimately act on it. You
-can could listen to the global ``Model.afterSave`` event.  However, you can take
+can listen to the global ``Model.afterSave`` event.  However, you can take
 a more direct approach and only listen to the event you really need::
 
     // You can create the following before the

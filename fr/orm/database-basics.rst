@@ -204,6 +204,9 @@ driver
     courts sont Mysql, Sqlite, Postgres, et Sqlserver.
 persistent
     S'il faut utiliser ou non une connexion persistante à la base de données.
+    Cette option n'est pas supportée par SqlServer. A partir de CakePHP 3.4.13,
+    une exception est lancée si vous essayez de définir ``persistent`` à ``true``
+    sur SqlServer.
 host
     Le nom d'hôte du serveur de base de données (ou une adresse IP).
 username

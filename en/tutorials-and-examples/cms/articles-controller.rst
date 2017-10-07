@@ -162,14 +162,15 @@ Let's create the view for our new 'view' action and place it in
     <p><?= $this->Html->link('Edit', ['action' => 'edit', $article->slug]) ?></p>
 
 You can verify that this is working by trying the links at ``/articles/index`` or
-manually requesting an article by accessing URLs like ``/articles/view/slug-name``.
+manually requesting an article by accessing URLs like
+``/articles/view/first-post``.
 
 Adding Articles
 ===============
 
 With the basic read views created, we need to make it possible for new articles
 to be created. Start by creating an ``add()`` action in the
-``ArticlesController``::
+``ArticlesController``. Our controller should now look like::
 
     // src/Controller/ArticlesController.php
 
@@ -184,6 +185,7 @@ to be created. Start by creating an ``add()`` action in the
         {
             parent::initialize();
 
+            $this->loadComponent('Paginator');
             $this->loadComponent('Flash'); // Include the FlashComponent
         }
 
@@ -319,7 +321,7 @@ typically a URL-safe version of an article's title. We can use the
         if ($entity->isNew() && !$entity->slug) {
             $sluggedTitle = Text::slug($entity->title);
             // trim slug to maximum length defined in schema
-            $entity->slug = substr($sluggedTitle, 0, 191)
+            $entity->slug = substr($sluggedTitle, 0, 191);
         }
 
         // This is temporary, and will be removed later
@@ -504,7 +506,7 @@ that allow users to delete articles:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp  (deleted links added) -->
+    <!-- File: src/Template/Articles/index.ctp  (delete links added) -->
 
     <h1>Articles</h1>
     <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>

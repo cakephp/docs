@@ -2421,7 +2421,7 @@ List of Templates
 -----------------
 
 The list of default templates, their default format and the variables they
-expect can be found at the
+expect can be found in the
 `FormHelper API documentation <https://api.cakephp.org/3.x/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
 
 Using Distinct Custom Control Containers

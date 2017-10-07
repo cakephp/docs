@@ -20,7 +20,7 @@ que você deve ver:
 
 Você notará alguns diretórios principais:
 
-- The *bin* folder holds the Cake console executables.
+- O diretório *bin* contem os executáveis por console do Cake.
 - O diretório *config* contem os (poucos) :doc:`/development/configuration`
   arquivos de configuração que o CakePHP utiliza. Detalhes de conexão com banco
   de dados, inicialização, arquivos de configuração do núcleo da aplicação, e
@@ -31,11 +31,11 @@ Você notará alguns diretórios principais:
   serão armazenados.
 - O diretório *src* será onde você fará sua mágica: é onde os arquivos
   da sua aplicação serão colocados.
-- O diretório *tests* será onde você colocará os testes de caso para sua
+- O diretório *tests* será onde você colocará os casos de teste para sua
   aplicação.
 - O diretório *tmp* será onde o CakePHP armazenará dados temporários. O modo
   como os dados serão armazenados depende da configuração do CakePHP, mas esse
-  diretório é comunmente usado para armazenar descrições de modelos e algumas
+  diretório é comumente usado para armazenar descrições de modelos e algumas
   vezes informação de sessão.
 - O diretório *vendor* será onde o CakePHP e outras dependências da aplicação
   serão instalados. Faça uma nota pessoal para **não** editar arquivos deste

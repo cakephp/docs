@@ -235,8 +235,9 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
         ->on('Model.afterSave', function($event, $entity)
         {
             // 例えば、管理者のメールを送信することができます。
+	    // 3.4 より前は from()/to()/subject() メソッドを使用してください。
             $email = new Email('default');
-            $email->from('info@yoursite.com' => 'Your Site')
+            $email->setFrom('info@yoursite.com' => 'Your Site')
                 ->setTo('admin@yoursite.com')
                 ->setSubject('New Feedback - Your Site')
                 ->send('Body of message');

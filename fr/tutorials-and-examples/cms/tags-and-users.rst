@@ -18,7 +18,7 @@ utiliser ``bake`` pour créer le code relatif à la gestion d'utilisateurs :
     bin/cake bake controller users
     bin/cake bake template users
 
-Ces 3 commandes vont générées :
+Ces 3 commandes vont générer :
 
 * Les fichiers de Table, Entity, et Fixture.
 * Le Controller
