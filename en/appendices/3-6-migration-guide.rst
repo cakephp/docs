@@ -53,5 +53,5 @@ Validation
 
 * ``Validation::compareFields()`` was added as a more flexible version of
   ``Validation::compareWith()``.
-* ``Validator::sameAs()`` and ``Validator::notSameAs()`` were added to make it
-  easier to check if a field is the same as/not the same as another field.
+* ``Validator::notSameAs()`` was added to make it
+  easier to check if a field is not the same as another field.
