@@ -73,7 +73,7 @@ The Change Method
 
 Phinx 0.2.0 introduced a new feature called reversible migrations. This feature
 has now become the default migration method. With reversible migrations, you
-only need to define the ``up`` logic, and Phinx can figure out how to migrate
+only need to define the ``change`` logic, and Phinx can figure out how to migrate
 down automatically for you. For example::
 
     <?php
