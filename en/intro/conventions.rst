@@ -102,12 +102,13 @@ Model Conventions
 
 Table class names are plural, PascalCased and end in ``Table``. ``UsersTable``,
 ``ArticleCategoriesTable``, and ``UserFavoritePagesTable`` are all examples of
-conventional model names.
+table class names matching the ``users``, ``article_categories`` and
+``user_favorite_pages`` tables respectively.
 
 Entity class names are singular PascalCased and have no suffix. ``User``,
-``ArticleCategories``, and ``UserFavoritePage`` are all examples of entity
-names.
-
+``ArticleCategories``, and ``UserFavoritePage`` are all examples of entity names
+matching the ``users``, ``article_categories`` and ``user_favorite_pages``
+tables respectively.
 
 View Conventions
 ================
@@ -127,8 +128,6 @@ The basic pattern is
     :php:class:`Cake\\Utility\\Inflector` to define your custom inflection
     rules. See the documentation about :doc:`/core-libraries/inflector` for more
     information.
-
-
 
 Summarized
 ==========
