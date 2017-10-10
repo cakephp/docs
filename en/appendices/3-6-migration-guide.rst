@@ -42,6 +42,12 @@ behavior that may affect your application:
 * CakePHP internals now chain exceptions where possible, allowing root causes of
   errors to be exposed.
 
+Core
+====
+
+- ``getTypeName()`` was added to assist in getting correct class/type name when
+  building more descriptive error messages.
+
 ORM
 ========
 
@@ -54,4 +60,4 @@ Validation
 * ``Validation::compareFields()`` was added as a more flexible version of
   ``Validation::compareWith()``.
 * ``Validator::notSameAs()`` was added to make it
-  easier to check if a field is not the same as another field.
+  easier to check if a field is hot the same as another field.
