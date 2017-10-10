@@ -428,7 +428,7 @@ application.
    <https://github.com/cakephp/app/tree/master/src/Application.php>`__.
 #. Create **config/requirements.php** if it doesn't exist and add the contents from the `app skeleton <https://github.com/cakephp/app/blob/master/config/requirements.php>`__.
 
-Once those two steps are complete, you are ready to start re-implementing any
+Once those three steps are complete, you are ready to start re-implementing any
 application/plugin dispatch filters as HTTP middleware.
 
 If you are running tests you will also need to update your
