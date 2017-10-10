@@ -106,7 +106,7 @@ table class names matching the ``users``, ``article_categories`` and
 ``user_favorite_pages`` tables respectively.
 
 Entity class names are singular PascalCased and have no suffix. ``User``,
-``ArticleCategories``, and ``UserFavoritePage`` are all examples of entity names
+``ArticleCategory``, and ``UserFavoritePage`` are all examples of entity names
 matching the ``users``, ``article_categories`` and ``user_favorite_pages``
 tables respectively.
 
