@@ -418,8 +418,11 @@ CSRF トークンは、クッキーの ``csrfToken`` で取得されます。
    セクションを参照してください。もしくは `app スケルトン
    <https://github.com/cakephp/app/tree/master/src/Application.php>`__
    の中の例をコピーしてください。
+#. **config/requirements.php** が作成します。もし存在しない場合、 `app スケルトン
+   <https://github.com/cakephp/app/blob/master/config/requirements.php>`__ から
+   内容を追加してください。
 
-これら二つの手順が完了すると、アプリケーション／プラグインのディスパッチフィルターを
+これら三つの手順が完了すると、アプリケーション／プラグインのディスパッチフィルターを
 HTTP ミドルウェアとして再実装を始める準備が整います。
 
 もし、テストを実行する場合は、 `app スケルトン
