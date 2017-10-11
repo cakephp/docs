@@ -593,7 +593,7 @@ Custom コントローラーの 'index' ビューへのパスは、以下の通�
 
 
 プラグインの拡張
-=================
+================
 
 この例は、プラグインを作るための一つの良い開始方法であって、他にも色んな方法があります。
 一般的なルールとして、アプリケーションでできることは、プラグインでもできます。
@@ -610,7 +610,7 @@ ContactManager の例だと、ContactsController 内に add/remove/edit/delete
 
 
 プラグインの公開
-===================
+================
 
 あなたのプラグインを `plugins.cakephp.org <https://plugins.cakephp.org>`_ に追加できます。
 こちらでは、他の人々は composer の依存関係として使用することができます。
@@ -627,6 +627,13 @@ CakePHP 名前空間 (cakephp) を **使用しない** でください。
 もし、あなたの GitHub アカウントが "FooBar" で "Logging" プラグインを作成する場合、
 `foo-bar/cakephp-logging` と名付けるといいでしょう。
 そして、CakePHP 自身の "Localized" プラグンは、 `cakephp/localized` で見つけられます。
+
+Mixer を使用したプラグインの管理
+================================
+
+CakePHP アプリケーションでプラグインを発見して管理する別の方法は、 `Mixer
+<https://github.com/CakeDC/mixer>`_ です。これは Packagist からプラグインをインストールするのに
+便利な CakePHP のプラグインです。また、既存のプラグインを管理するのにも役立ちます。
 
 .. meta::
     :title lang=ja: Plugins
