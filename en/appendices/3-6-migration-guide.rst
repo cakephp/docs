@@ -53,6 +53,11 @@ ORM
 
 * ``EntityTrait::isEmpty()`` and ``EntityTrait::hasValue()`` were added.
 
+Shell
+=====
+
+* The ``cake assets copy`` command now features an ``--overwrite`` option for
+  overwriting plugin assets if they already exist in the application webroot.
 
 Validation
 ==========
