@@ -222,7 +222,12 @@ templates that bake uses. The best way to do this is:
    **vendor/cakephp/bake/src/Template/Bake/Template** to matching files in your
    plugin.
 #. When running bake use the ``--theme`` option to specify the bake-theme you
-   want to use.
+   want to use. To avoid having to specify this option in each call, you can also
+   set your custom theme to be used as default theme.
+
+    <?php
+    // in config/bootstrap.php or config/bootstrap_cli.php
+    Configure::write('Bake.theme', 'MyTheme');
 
 Customizing the Bake Templates
 ==============================
@@ -234,8 +239,7 @@ create your own bake templates in your application. This way does not use the
 #. Create a new directory **/src/Template/Bake/**.
 #. Copy any templates you want to override from
    **vendor/cakephp/bake/src/Template/Bake/** to matching files in your
-   application.
-
+   application.    
 
 Creating New Bake Command Options
 =================================
