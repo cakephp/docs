@@ -223,7 +223,7 @@ templates that bake uses. The best way to do this is:
    plugin.
 #. When running bake use the ``--theme`` option to specify the bake-theme you
    want to use. To avoid having to specify this option in each call, you can also
-   set your custom theme to be used as default theme.
+   set your custom theme to be used as default theme::
 
     <?php
     // in config/bootstrap.php or config/bootstrap_cli.php
