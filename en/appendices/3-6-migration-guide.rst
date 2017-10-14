@@ -37,8 +37,32 @@ behavior that may affect your application:
   only the first page could be sorted by more than one column. Furthermore, sort
   conditions defined in the query string are *prepended* to the default order
   parameters now instead of fully replacing the default ordering.
+* Shell classes will now throw exceptions when task classes cannot be found.
+  Previously invalid tasks would be silently ignored.
+* CakePHP internals now chain exceptions where possible, allowing root causes of
+  errors to be exposed.
+
+Core
+====
+
+- ``getTypeName()`` was added to assist in getting correct class/type name when
+  building more descriptive error messages.
 
 ORM
 ========
 
 * ``EntityTrait::isEmpty()`` and ``EntityTrait::hasValue()`` were added.
+
+Shell
+=====
+
+* The ``cake assets copy`` command now features an ``--overwrite`` option for
+  overwriting plugin assets if they already exist in the application webroot.
+
+Validation
+==========
+
+* ``Validation::compareFields()`` was added as a more flexible version of
+  ``Validation::compareWith()``.
+* ``Validator::notSameAs()`` was added to make it
+  easier to check if a field is hot the same as another field.
