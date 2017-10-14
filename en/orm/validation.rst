@@ -465,19 +465,22 @@ You may want to use entity methods as domain rules::
 Using Conditional Rules
 -----------------------
 
-You may want to use conditional rules::
+You may want to conditionally apply rules based on entity data::
 
     $rules->add(function ($entity, $options) use($rules) {
-        if($entity->role=='admin'){
-            $rule=$rules->existsIn('user_id', 'Admins');
+        if ($entity->role == 'admin') {
+            $rule = $rules->existsIn('user_id', 'Admins');
+
             return $rule($entity, $options);
         }
-        if($entity->role=='user'){
-            $rule=$rules->existsIn('user_id', 'Users');
+        if ($entity->role == 'user') {
+            $rule = $rules->existsIn('user_id', 'Users');
+
             return $rule($entity, $options);
         }
+
         return false;
-    }, 'ruleName');
+    }, 'userExists');
 
 Creating Custom re-usable Rules
 -------------------------------
