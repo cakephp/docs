@@ -72,7 +72,7 @@ CMS チュートリアル - データベース作成
 
     <?php
     return [
-        // More configuration above.
+        // 上には他の設定があります
         'Datasources' => [
             'default' => [
                 'className' => 'Cake\Database\Connection',
@@ -87,7 +87,7 @@ CMS チュートリアル - データベース作成
                 'cacheMetadata' => true,
             ],
         ],
-        // More configuration below.
+        // 下には他の設定があります
     ];
 
 一度 **config/app.php** ファイルを保存して、 'CakePHP is able to connect to the database'
@@ -101,7 +101,7 @@ CMS チュートリアル - データベース作成
 ========================
 
 モデルは、CakePHP アプリケーションの心臓部です。データを読んだり変更することができます。
-それらは、データ間のリレーションを構築、データの検証、アプリケーションルールの適用をすることができます。
+それらは、データ間のリレーションの構築、データの検証、アプリケーションルールの適用をすることができます。
 モデルは、コントローラーアクションとテンプレートを構築するために必要な基礎を構築します。
 
 CakePHP のモデルは ``Table`` と ``Entity`` オブジェクトで構成されています。 ``Table``
@@ -159,6 +159,6 @@ Table オブジェクトを ``ArticlesTable`` と名付けることで、CakePHP
 エンティティーは、今はとてもスリムです。そして、 :ref:`entities-mass-assignment` によって
 どのようにプロパティーを変更できるかを制御するプロパティー ``_accessible`` をセットアップしました。
 
-このモデルは、今は動きませんが、次は最初に
+このモデルは、今は動きませんが、次は最初の
 :doc:`コントローラーとテンプレート <articles-controller>`
 を作成し、このモデルとのやりとりができるようにします。
