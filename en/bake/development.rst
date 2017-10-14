@@ -225,9 +225,9 @@ templates that bake uses. The best way to do this is:
    want to use. To avoid having to specify this option in each call, you can also
    set your custom theme to be used as default theme::
 
-    <?php
-    // in config/bootstrap.php or config/bootstrap_cli.php
-    Configure::write('Bake.theme', 'MyTheme');
+        <?php
+        // in config/bootstrap.php or config/bootstrap_cli.php
+        Configure::write('Bake.theme', 'MyTheme');
 
 Customizing the Bake Templates
 ==============================
