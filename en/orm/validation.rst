@@ -462,6 +462,23 @@ You may want to use entity methods as domain rules::
         return $entity->isOkLooking();
     }, 'ruleName');
 
+Using Conditional Rules
+-----------------------
+
+You may want to use conditional rules::
+
+    $rules->add(function ($entity, $options) use($rules) {
+        if($entity->role=='admin'){
+            $rule=$rules->existsIn('user_id', 'Admins');
+            return $rule($entity, $options);
+        }
+        if($entity->role=='user'){
+            $rule=$rules->existsIn('user_id', 'Users');
+            return $rule($entity, $options);
+        }
+        return false;
+    }, 'ruleName');
+
 Creating Custom re-usable Rules
 -------------------------------
 
