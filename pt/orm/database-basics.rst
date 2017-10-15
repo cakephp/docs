@@ -40,11 +40,9 @@ O CakePHP suporta os seguintes servidores de banco de dados relacionais:
 
 Você precisará da extensão PDO correta instalada para cada um dos drivers de
 banco de dados acima. As APIs processuais não são suportadas.
-O banco de dados Oracle é suportado atravéz do plugin da comunidade
-`Driver para Banco de Dados Oracle <https://github.com/CakeDC/cakephp-oracle-driver>`_
 
-The Oracle database is supported through the
-`Driver for Oracle Database <https://github.com/CakeDC/cakephp-oracle-driver>`_.
+O banco de dados Oracle é suportado atravéz do plugin da comunidade
+`Driver para Banco de Dados Oracle <https://github.com/CakeDC/cakephp-oracle-driver>`_.
 
 .. _running-select-statements:
 
@@ -195,7 +193,9 @@ driver
     instância de driver. 
     Exemplos de nomes de classes curtos são Mysql, Sqlite, Postgres e Sqlserver.   
 persistent
-    Se deve ou não usar uma conexão persistente com o banco de dados.
+    Se deve ou não usar uma conexão persistente com o banco de dados. Esta opção não
+    é suportada pelo SqlServer. A partir da versão 3.4.13 do CakePHP, uma exceção é
+    lançada se você tentar definir persistent como ``true`` com SqlServer.
 host
     O nome de host do servidor de banco de dados (ou o endereço IP).
 username
