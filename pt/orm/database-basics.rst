@@ -189,7 +189,7 @@ className
 driver
     O nome da classe do driver usado para implementar todas as especificidades
     para um mecanismo de banco de dados. Isso pode ser um nome de classe curto
-    usando :term:`plugin syntax`, um nome de classe com seu namespace ou uma
+    usando :term:`sintaxe plugin`, um nome de classe com seu namespace ou uma
     instância de driver. 
     Exemplos de nomes de classes curtos são Mysql, Sqlite, Postgres e Sqlserver.   
 persistent
