@@ -15,7 +15,7 @@ de acesso a banco de dados de baixo-nível. Se ao invés, você deseja aprender
 mais sobre o ORM completo, você pode ler as seções :doc:`/orm/query-builder` e
 :doc:`/orm/table-objects`.
 
-A maneira mais fácil de crir uma conexão de banco de dados é usando uma string 
+A maneira mais fácil de criar uma conexão de banco de dados é usando uma string 
 ``DSN``::
 
     use Cake\Datasource\ConnectionManager;
@@ -23,7 +23,7 @@ A maneira mais fácil de crir uma conexão de banco de dados é usando uma strin
     $dsn = 'mysql://root:password@localhost/my_database';
     ConnectionManager::config('default', ['url' => $dsn]);
 
-Uma vez criada, você pode acessar o objeto da conexo para iniciar a usá-lo::
+Uma vez criada, você pode acessar o objeto da conexão para iniciar a usá-lo::
 
     $connection = ConnectionManager::get('default');
 
