@@ -239,7 +239,7 @@ log
 quoteIdentifiers
     Defina para ``true`` se você estiver usando palavras reservadas os caracteres
     especiais nos nomes de suas tabelas ou colunas. Habilitando essa configuração,
-    resultará em consultas criadas usando o :doc:`/orm/query-builder`com identificadores
+    resultará em consultas criadas usando o :doc:`/orm/query-builder` com identificadores
     citados (quoted) ao criar SQL. Deve ser notado, que isso diminui o desempenho
     porque cada consulta precisa ser percorrida e manipulada antes de ser executada.
 flags
