@@ -55,8 +55,8 @@ tables::
     (1, 'First Post', 'first-post', 'This is the first post.', 1, now(), now());
 
 You may have noticed that the ``articles_tags`` table used a composite primary
-key. CakePHP supports composite primary keys almost everywhere, making it easier
-to build multi-tenanted applications.
+key. CakePHP supports composite primary keys almost everywhere allowing you to
+have simpler schemas that don't require additional ``id`` columns.
 
 The table and column names we used were not arbitrary. By using CakePHP's
 :doc:`naming conventions </intro/conventions>`, we can leverage CakePHP more
