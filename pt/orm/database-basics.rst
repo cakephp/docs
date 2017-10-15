@@ -203,7 +203,7 @@ username
 password
     A senha da conta.
 database
-    O noma do banco de dados para essa conexão usar. Evite usar ``.`` no nome
+    O nome do banco de dados para essa conexão usar. Evite usar ``.`` no nome
     do seu banco de dados. Por causa de como isso complica citação de 
     identificadores, o CakePHP não suporta ``.``  em nomes de banco de dados.
     O caminho para o seu banco de dados SQLite deve ser um caminho absoluto
