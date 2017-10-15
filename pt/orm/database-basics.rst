@@ -796,21 +796,21 @@ a declaração::
     Lendo linhas através de iteração irá obter linhas no modo 'both'. Isso significa que você
     obterá os resultados indexados numericamente e indexados associativamente.
 
-Getting Row Counts
-------------------
+Obtendo Contagens de Linha
+--------------------------
 
-After executing a statement, you can fetch the number of affected rows::
+Depois de executar uma declaração, você pode buscar o número de linhas afetadas::
 
     $rowCount = count($stmt);
     $rowCount = $stmt->rowCount();
 
 
-Checking Error Codes
---------------------
+Verificando Códigos de Erro
+---------------------------
 
-If your query was not successful, you can get related error information
-using the ``errorCode()`` and ``errorInfo()`` methods. These methods work the
-same way as the ones provided by PDO::
+Se a sua consulta não foi bem sucedida, você pode obter informações de erro relacionadas
+usando os métodos ``errorCode()`` e ``errorInfo()``. Estes métodos funcionam da mesma 
+maneira que os fornecidos pelo PDO::
 
     $code = $stmt->errorCode();
     $info = $stmt->errorInfo();
@@ -823,21 +823,22 @@ same way as the ones provided by PDO::
 Query Logging
 =============
 
-Query logging can be enabled when configuring your connection by setting the
-``log`` option to ``true``. You can also toggle query logging at runtime, using
-``logQueries``::
+O log de consultas pode ser habilitado ao configurar sua conexão definindo a opção ``log``
+com o valor ``true``. Você também pode alternar o log de consulta em tempo de execução,
+usando o método ``logQueries``::
 
-    // Turn query logging on.
+    // Habilita log de consultas.
     $conn->logQueries(true);
 
-    // Turn query logging off
+    // Desabilita o log de consultas.
     $conn->logQueries(false);
 
-When query logging is enabled, queries will be logged to
-:php:class:`Cake\\Log\\Log` using the 'debug' level, and the 'queriesLog' scope.
-You will need to have a logger configured to capture this level & scope. Logging
-to ``stderr`` can be useful when working on unit tests, and logging to
-files/syslog can be useful when working with web requests::
+Quando o log de consultas está habilitado, as consultas serão logadas em
+:php:class:`Cake\\Log\\Log` usando o nível 'debug', e o escopo 'queriesLog'.
+Você precisará ter um logger configurado para capturar esse nível e escopo. 
+Logar no ``stderr`` pode ser útil quando se estiver trabalhando com testes
+de unidade e logar em arquivos/syslog pode ser útil ao trabalhar com
+requisições web::
 
     use Cake\Log\Log;
 
@@ -857,47 +858,48 @@ files/syslog can be useful when working with web requests::
     ]);
 
 .. note::
-
-    Query logging is only intended for debugging/development uses. You should
-    never leave query logging on in production as it will negatively impact the
-    performance of your application.
+    
+    log de consultas destina-se apenas para usos de depuração/desenvolvimento. 
+    Você nunca deve deixar o log de consultas em ambiente de produção, pois isso
+    afetará negativamente o desempenho de sua aplicação.
 
 .. _identifier-quoting:
 
 Identifier Quoting
 ==================
 
-By default CakePHP does **not** quote identifiers in generated SQL queries. The
-reason for this is identifier quoting has a few drawbacks:
+Por padrão, o CakePHP **não** cita (<em>quote<em>) identificadores em consultas
+SQL geradas. A razão disso é que a citação de identificadores tem algumas desvantagens:
 
-* Performance overhead - Quoting identifiers is much slower and complex than not doing it.
-* Not necessary in most cases - In non-legacy databases that follow CakePHP's
-  conventions there is no reason to quote identifiers.
+* Sobrecarga de desempenho - Citar identificadores é muito mais lentos e complexos 
+  do que não fazê-lo.
+* Não é necessário na maioria dos casos - Em bancos de dados não legados que seguem as
+  convenções do CakePHP não há motivo para citar identificadores.
 
-If you are using a legacy schema that requires identifier quoting you can enable
-it using the ``quoteIdentifiers`` setting in your
-:ref:`database-configuration`. You can also enable this feature at runtime::
+Se você estiver usando um schema legado que requer citação de identificador, você pode 
+habilitar isso usando a configuração ``quoteIdentifiers``` em seu 
+:ref:`database-configuration`. Você também pode habilitar esse recurso em tempo de execução::
 
     $conn->driver()->autoQuoting(true);
 
-When enabled, identifier quoting will cause additional query traversal that
-converts all identifiers into ``IdentifierExpression`` objects.
+Quando habilitado, a citação de identificador causará uma <em>traversal query</em> adicional
+que converte todos os identificadores em objetos ``IdentifierExpression``.
 
 .. note::
-
-    SQL snippets contained in QueryExpression objects will not be modified.
+    
+    Os fragmentos de SQL contidos em objetos QueryExpression não serão modificados.
 
 .. _database-metadata-cache:
 
 Metadata Caching
 ================
 
-CakePHP's ORM uses database reflection to determine the schema, indexes and
-foreign keys your application contains. Because this metadata changes
-infrequently and can be expensive to access, it is typically cached. By default,
-metadata is stored in the ``_cake_model_`` cache configuration. You can define
-a custom cache configuration using the ``cacheMetatdata`` option in your
-datasource configuration::
+O ORM do CakePHP usa reflexão de banco de dados para determinar a schema, índices e
+chaves estrangeiras que sua aplicação contém. Como esse metadado é alterado
+com pouca frequência e pode ser caro de acessar, ele geralmente é armazenado em cache.
+Por padrão, os metadados são armazenados na configuração de cache ``_cake_model_``. 
+Você pode definir uma configuração de cache personalizada usando a opção ``cacheMetatdata``
+na sua configuração de <em>datasource</em>::
 
     'Datasources' => [
         'default' => [
@@ -908,39 +910,39 @@ datasource configuration::
         ]
     ],
 
-You can also configure the metadata caching at runtime with the
-``cacheMetadata()`` method::
+Você também pode configurar o cache de metadados em tempo de execução
+com o método ``cacheMetadata()``::
 
-    // Disable the cache
+    // Desabilitar o cache
     $connection->cacheMetadata(false);
 
-    // Enable the cache
+    // Habilitar tohe cache
     $connection->cacheMetadata(true);
 
-    // Use a custom cache config
+    // Utilizar uma configuração de cache personalizada
     $connection->cacheMetadata('orm_metadata');
 
-CakePHP also includes a CLI tool for managing metadata caches. See the
-:doc:`/console-and-shells/orm-cache` chapter for more information.
+O CakePHP também inclui uma ferramenta CLI para gerenciar caches de metadados. 
+Confira o capítulo :doc:`/console-and-shells/orm-cache` para obter mais informações.
 
-Creating Databases
-==================
+Criando Banco de Dados
+======================
 
-If you want to create a connection without selecting a database you can omit
-the database name::
+Se você quer criar uma conexão sem selecionar um banco de dados, você pode omitir o
+nome do banco de dados::
 
     $dsn = 'mysql://root:password@localhost/';
 
-You can now use your connection object to execute queries that create/modify
-databases. For example to create a database::
+Agora você pode usar seu objeto de conexão para executar consultas que cria/modifica
+bancos de dados. Por exemplo, para criar um banco de dados::
 
     $connection->query("CREATE DATABASE IF NOT EXISTS my_database");
 
 .. note::
-
-    When creating a database it is a good idea to set the character set and
-    collation parameters. If these values are missing, the database will set
-    whatever system default values it uses.
+    
+    Ao criar um banco de dados, é uma boa idéia definir o conjunto de caracteres e os 
+    parâmetros de collation. Se esses valores estiverem faltando, o banco de dados 
+    definirá quaisquer valores padrão de sistema que ele use.
 
 .. meta::
     :title lang=en: Database Basics
