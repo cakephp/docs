@@ -589,46 +589,48 @@ objetos de valores imutáveis. Isso é melhor feito no arquivo
 .. note::
     Novas aplicações terão objetos imutáveis habilitado por padrão.
 
-Connection Classes
+Classes de Conexão
 ==================
 
 .. php:class:: Connection
 
-Connection classes provide a simple interface to interact with database
-connections in a consistent way. They are intended as a more abstract interface to
-the driver layer and provide features for executing queries, logging queries, and doing
-transactional operations.
+As classes de conexão fornecem uma interface simples para interagir
+com conexões de banco de dados de modo consistente. Elas servem como
+uma interface mais abstrata para a camada do driver e fornecer recursos
+para executar consultas, registrar (<em>loggin</em>) consultas e realizar
+operações transacionais.
 
 .. _database-queries:
 
-Executing Queries
------------------
+Executando Consultas
+--------------------
 
 .. php:method:: query($sql)
 
-Once you've gotten a connection object, you'll probably want to issue some
-queries with it. CakePHP's database abstraction layer provides wrapper features
-on top of PDO and native drivers. These wrappers provide a similar interface to
-PDO. There are a few different ways you can run queries depending on the type of
-query you need to run and what kind of results you need back. The most basic
-method is ``query()`` which allows you to run already completed SQL queries::
+Uma vez que você obteve um objeto de conexão, você provavelmente quererá
+executar algumas consultas com ele. A camada de abstração de banco de dados
+do CakePHP fornece recursos de wrapper em cima do PDO e drivers nativos.
+Esses wrappers fornecem uma interface similar ao PDO. Há algumas formas
+diferentes de executar consultas, dependendo do tipo de consulta que você
+precisa executar e do tipo de resultados que você precisa receber. O método
+mais básico é o ``query()`` que lhe permite executar consultas SQL já completas::
 
     $stmt = $conn->query('UPDATE articles SET published = 1 WHERE id = 2');
 
 .. php:method:: execute($sql, $params, $types)
 
-The ``query()`` method does not allow for additional parameters. If you need
-additional parameters you should use the ``execute()`` method, which allows for
-placeholders to be used::
+O método ``query()`` não aceita parâmetros adicionais. Se você precisa de 
+parâmetros adicionais, você deve usar o método ``execute()``, que permite que
+placeholders sejam usados::
 
     $stmt = $conn->execute(
         'UPDATE articles SET published = ? WHERE id = ?',
         [1, 2]
     );
 
-Without any type hinting information, ``execute`` will assume all placeholders
-are string values. If you need to bind specific types of data, you can use their
-abstract type names when creating a query::
+Sem qualquer informação de indução de tipo, ``execute`` assumirá que todos os
+placeholders são valores do tipo string. Se você precisa vincular tipos específicos
+de dados, você pode usar seus nomes de tipos abstratos ao criar uma consulta::
 
     $stmt = $conn->execute(
         'UPDATE articles SET published_date = ? WHERE id = ?',
@@ -638,10 +640,10 @@ abstract type names when creating a query::
 
 .. php:method:: newQuery()
 
-This allows you to use rich data types in your applications and properly convert
-them into SQL statements. The last and most flexible way of creating queries is
-to use the :doc:`/orm/query-builder`. This approach allows you to build complex and
-expressive queries without having to use platform specific SQL::
+Isso permite que você use tipos de dados ricos em suas aplicações e convertê-los
+adequadamente em instruções SQL. A última e mais flexível maneira de criar consultas
+é usar o :doc:`/orm/query-builder`. Essa abordagem lhe permite criar consultas
+complexas e expressivas sem ter que usar SQL específico de plataforma::
 
     $query = $conn->newQuery();
     $query->update('articles')
@@ -649,9 +651,10 @@ expressive queries without having to use platform specific SQL::
         ->where(['id' => 2]);
     $stmt = $query->execute();
 
-When using the query builder, no SQL will be sent to the database server until
-the ``execute()`` method is called, or the query is iterated. Iterating a query
-will first execute it and then start iterating over the result set::
+Ao usar o construtor de consulta (<em>query builder</em>), nenhum SQL será enviado
+para o servidor do banco de dados até que o método ``execute()`` é chamado ou a
+consulta seja iterada. Iterar uma consulta irá primeiro executá-lo e então começar a
+iterar sobre o conjunto de resultados::
 
     $query = $conn->newQuery();
     $query->select('*')
@@ -659,20 +662,18 @@ will first execute it and then start iterating over the result set::
         ->where(['published' => true]);
 
     foreach ($query as $row) {
-        // Do something with the row.
+        // Faz alguma coisa com a linha.
     }
 
 .. note::
+    Quando você tem uma instância de :php:class:`Cake\\ORM\\Query` você pode
+    usar o método ``all()`` para obter o conjunto de resultados de consultas SELECT.
 
-    When you have an instance of :php:class:`Cake\\ORM\\Query` you can use
-    ``all()`` to get the result set for SELECT queries.
-
-Using Transactions
-------------------
-
-The connection objects provide you a few simple ways you do database
-transactions. The most basic way of doing transactions is through the ``begin()``,
-``commit()`` and ``rollback()`` methods, which map to their SQL equivalents::
+Usando Transações
+-----------------
+Os objetos de conexão lhe fornecem algumas maneiras simples de realizar transações
+de banco de dados. A maneira mais básica de fazer transações é através dos métodos
+``begin()``, ``commit()`` e ``rollback()``, que mapeiam para seus equivalentes em SQL::
 
     $conn->begin();
     $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
@@ -681,124 +682,119 @@ transactions. The most basic way of doing transactions is through the ``begin()`
 
 .. php:method:: transactional(callable $callback)
 
-In addition to this interface connection instances also provide the
-``transactional()`` method which makes handling the begin/commit/rollback calls
-much simpler::
+Além disso, essas instâncias de interface de conexão também fornecem o método 
+``transactional()`` que faz o tratamento das chamadas begin/commit/rollback muito mais simples::
 
     $conn->transactional(function ($conn) {
         $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
         $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
     });
 
-In addition to basic queries, you can execute more complex queries using either
-the :doc:`/orm/query-builder` or :doc:`/orm/table-objects`. The transactional method will
-do the following:
+Além de consultas básicas, você pode executar consultas mais complexas usando 
+:doc:`/orm/query-builder` ou :doc:`/orm/table-objects`. O método transacional vai fazer o seguinte:
 
-- Call ``begin``.
-- Call the provided closure.
-- If the closure raises an exception, a rollback will be issued. The original
-  exception will be re-thrown.
-- If the closure returns ``false``, a rollback will be issued.
-- If the closure executes successfully, the transaction will be committed.
+- Chamar método ``begin``.
+- Chamar a closure fornecida.
+- Se a closure lançar uma exceção, um rollback será emitido. A exceção original será re-lançada.
+- Se a closure retornar ``false``, um rollback será emitido.
+- Se a closure for executada com sucesso, a transação será cometida (<em>committed</em>).
 
-Interacting with Statements
+
+Interagindo com Declarações
 ===========================
 
-When using the lower level database API, you will often encounter statement
-objects. These objects allow you to manipulate the underlying prepared statement
-from the driver. After creating and executing a query object, or using
-``execute()`` you will have a ``StatementDecorator`` instance. It wraps the
-underlying basic statement object and provides a few additional features.
+Ao usar a API do banco de dados de baixo nível, você muitas vezes encontrará objetos de declaração.
+Esses objetos lhe permitem manipular a instrução preparada subjacente do driver. Depois de criar e
+executar um objeto de consulta, ou usando ``execute()`` você terá uma instância ``StatementDecorator``.
+Isso envolve o objeto de declaração básico subjacente e fornece alguns recursos adicionais.
 
-Preparing a Statement
+Preparando um Declaração
 ---------------------
 
-You can create a statement object using ``execute()``, or ``prepare()``. The
-``execute()`` method returns a statement with the provided values bound to it.
-While ``prepare()`` returns an incomplete statement::
+Você pode criar um objeto de declaração usando ``execute()`` ou ``prepare()```. O método ``execute()``
+retorna uma declaração com os valores fornecidos ligados a ela. Enquanto que o ``prepare()`` retorna
+uma declaração incompleta::
 
-    // Statements from execute will have values bound to them already.
+    // Declarações do ``execute`` terão valores já vinculados a eles.
     $stmt = $conn->execute(
         'SELECT * FROM articles WHERE published = ?',
         [true]
     );
 
-    // Statements from prepare will be parameters for placeholders.
-    // You need to bind parameters before attempting to execute it.
+    // Declarações do ``prepare``serão parâmetros para placeholders.
+    // Você precisa vincular os parâmetros antes de executar.
     $stmt = $conn->prepare('SELECT * FROM articles WHERE published = ?');
 
-Once you've prepared a statement you can bind additional data and execute it.
+Uma vez que você preparou uma declaração, você pode vincular dados adicionais e executá-lo.
 
 .. _database-basics-binding-values:
 
 Binding Values
 --------------
 
-Once you've created a prepared statement, you may need to bind additional data.
-You can bind multiple values at once using the ``bind()`` method, or bind
-individual elements using ``bindValue``::
+Uma vez que você criou uma declaração preparada, você talvez precise vincular dados adicionais.
+Você pode vincular vários valores ao mesmo tempo usando o método ``bind()``, ou vincular elementos
+individuais usando ``bindValue``::
 
     $stmt = $conn->prepare(
         'SELECT * FROM articles WHERE published = ? AND created > ?'
     );
 
-    // Bind multiple values
+    // Vincular vários valores
     $stmt->bind(
         [true, new DateTime('2013-01-01')],
         ['boolean', 'date']
     );
 
-    // Bind a single value
-    $stmt->bindValue(1, true, 'boolean');
+    // Vincular único valor
+    $stmt->bindValue(1, true, 'boolean');
     $stmt->bindValue(2, new DateTime('2013-01-01'), 'date');
 
-When creating statements you can also use named array keys instead of
-positional ones::
+Ao criar declarações você também pode usar chave de array nomeadas em vez de posicionais::
 
     $stmt = $conn->prepare(
         'SELECT * FROM articles WHERE published = :published AND created > :created'
     );
 
-    // Bind multiple values
+    // Vincular vários valores
     $stmt->bind(
         ['published' => true, 'created' => new DateTime('2013-01-01')],
         ['published' => 'boolean', 'created' => 'date']
     );
 
-    // Bind a single value
+    // Vincular um valor único
     $stmt->bindValue('published', true, 'boolean');
     $stmt->bindValue('created', new DateTime('2013-01-01'), 'date');
 
 .. warning::
+    
+    Você não pode misturar posicionais e chave de array nomeadas na mesma declaração.
 
-    You cannot mix positional and named array keys in the same statement.
+Executando & Obtendo Linhas
+---------------------------
 
-Executing & Fetching Rows
--------------------------
-
-After preparing a statement and binding data to it, you can execute it and fetch
-rows. Statements should be executed using the ``execute()`` method. Once
-executed, results can be fetched using ``fetch()``, ``fetchAll()`` or iterating
-the statement::
+Depois de preparar uma declaração e vincular dados a ela, você pode executá-la e obter
+linhas. As declarações devem ser executadas usando o método ``execute()``. Uma vez
+executado, os resultados podem ser obtidos usando ``fetch()``, ``fetchAll()`` ou iterando 
+a declaração::
 
     $stmt->execute();
 
-    // Read one row.
+    // Lê uma linha.
     $row = $stmt->fetch('assoc');
 
-    // Read all rows.
+    // Lê todas as linhas.
     $rows = $stmt->fetchAll('assoc');
 
-    // Read rows through iteration.
+    // Lê linhas através de iteração.
     foreach ($rows as $row) {
         // Do work
     }
 
 .. note::
-
-    Reading rows through iteration will fetch rows in 'both' mode. This means
-    you will get both the numerically indexed and associatively indexed results.
-
+    
+    Lendo linhas através de iteração irá obter linhas no modo 'both'. Isso significa que você
+    obterá os resultados indexados numericamente e indexados associativamente.
 
 Getting Row Counts
 ------------------
