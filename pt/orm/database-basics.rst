@@ -96,7 +96,7 @@ Inserir registros no banco de dados é geralmente uma questão de algumas linhas
         'created' => new DateTime('now')
     ], ['created' => 'datetime']);
 
-Executando Instruções de Atualização
+Executando . de Atualização
 ------------------------------------
 
 Atualizar registros no banco de dados é igualmente intuitivo, o exemplo a seguir
@@ -698,39 +698,39 @@ Além de consultas básicas, você pode executar consultas mais complexas usando
 - Se a closure for executada com sucesso, a transação será cometida (<em>committed</em>).
 
 
-Interagindo com Declarações
-===========================
+Interagindo com Instruções
+==========================
 
-Ao usar a API do banco de dados de baixo nível, você muitas vezes encontrará objetos de declaração.
+Ao usar a API do banco de dados de baixo nível, você muitas vezes encontrará objetos de instrução.
 Esses objetos lhe permitem manipular a instrução preparada subjacente do driver. Depois de criar e
 executar um objeto de consulta, ou usando ``execute()`` você terá uma instância ``StatementDecorator``.
-Isso envolve o objeto de declaração básico subjacente e fornece alguns recursos adicionais.
+Isso envolve o objeto de instrução básico subjacente e fornece alguns recursos adicionais.
 
-Preparando um Declaração
----------------------
+Preparando um Instrução
+-----------------------
 
-Você pode criar um objeto de declaração usando ``execute()`` ou ``prepare()```. O método ``execute()``
-retorna uma declaração com os valores fornecidos ligados a ela. Enquanto que o ``prepare()`` retorna
-uma declaração incompleta::
+Você pode criar um objeto de instrução usando ``execute()`` ou ``prepare()```. O método ``execute()``
+retorna uma instrução com os valores fornecidos ligados a ela. Enquanto que o ``prepare()`` retorna
+uma instrução incompleta::
 
-    // Declarações do ``execute`` terão valores já vinculados a eles.
+    // Instruções do ``execute`` terão valores já vinculados a eles.
     $stmt = $conn->execute(
         'SELECT * FROM articles WHERE published = ?',
         [true]
     );
 
-    // Declarações do ``prepare``serão parâmetros para placeholders.
+    // Instruções do ``prepare``serão parâmetros para placeholders.
     // Você precisa vincular os parâmetros antes de executar.
     $stmt = $conn->prepare('SELECT * FROM articles WHERE published = ?');
 
-Uma vez que você preparou uma declaração, você pode vincular dados adicionais e executá-lo.
+Uma vez que você preparou uma instrução, você pode vincular dados adicionais e executá-lo.
 
 .. _database-basics-binding-values:
 
 Binding Values
 --------------
 
-Uma vez que você criou uma declaração preparada, você talvez precise vincular dados adicionais.
+Uma vez que você criou uma instrução preparada, você talvez precise vincular dados adicionais.
 Você pode vincular vários valores ao mesmo tempo usando o método ``bind()``, ou vincular elementos
 individuais usando ``bindValue``::
 
@@ -748,7 +748,7 @@ individuais usando ``bindValue``::
     $stmt->bindValue(1, true, 'boolean');
     $stmt->bindValue(2, new DateTime('2013-01-01'), 'date');
 
-Ao criar declarações você também pode usar chave de array nomeadas em vez de posicionais::
+Ao criar instruções, você também pode usar chave de array nomeadas em vez de posicionais::
 
     $stmt = $conn->prepare(
         'SELECT * FROM articles WHERE published = :published AND created > :created'
@@ -766,15 +766,15 @@ Ao criar declarações você também pode usar chave de array nomeadas em vez de
 
 .. warning::
     
-    Você não pode misturar posicionais e chave de array nomeadas na mesma declaração.
+    Você não pode misturar posicionais e chave de array nomeadas na mesma instrução.
 
 Executando & Obtendo Linhas
 ---------------------------
 
-Depois de preparar uma declaração e vincular dados a ela, você pode executá-la e obter
-linhas. As declarações devem ser executadas usando o método ``execute()``. Uma vez
+Depois de preparar uma instrução e vincular dados a ela, você pode executá-la e obter
+linhas. As instruções devem ser executadas usando o método ``execute()``. Uma vez
 executado, os resultados podem ser obtidos usando ``fetch()``, ``fetchAll()`` ou iterando 
-a declaração::
+a instrução::
 
     $stmt->execute();
 
@@ -818,8 +818,8 @@ maneira que os fornecidos pelo PDO::
 
 .. _database-query-logging:
 
-Query Logging
-=============
+Log de Consultas
+================
 
 O log de consultas pode ser habilitado ao configurar sua conexão definindo a opção ``log``
 com o valor ``true``. Você também pode alternar o log de consulta em tempo de execução,
@@ -857,8 +857,8 @@ requisições web::
 
 .. note::
     
-    log de consultas destina-se apenas para usos de depuração/desenvolvimento. 
-    Você nunca deve deixar o log de consultas em ambiente de produção, pois isso
+    Log de consultas destina-se apenas para usos de depuração/desenvolvimento. 
+    Você nunca deve habilitar o log de consultas em ambiente de produção, pois isso
     afetará negativamente o desempenho de sua aplicação.
 
 .. _identifier-quoting:
@@ -896,7 +896,7 @@ O ORM do CakePHP usa reflexão de banco de dados para determinar a schema, índi
 chaves estrangeiras que sua aplicação contém. Como esse metadado é alterado
 com pouca frequência e pode ser caro de acessar, ele geralmente é armazenado em cache.
 Por padrão, os metadados são armazenados na configuração de cache ``_cake_model_``. 
-Você pode definir uma configuração de cache personalizada usando a opção ``cacheMetatdata``
+Você pode definir uma configuração de cache personalizada usando a opção ``cacheMetadata``
 na sua configuração de <em>datasource</em>::
 
     'Datasources' => [
