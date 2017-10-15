@@ -55,7 +55,7 @@ tables::
     (1, 'First Post', 'first-post', 'This is the first post.', 1, now(), now());
 
 You may have noticed that the ``articles_tags`` table used a composite primary
-key. CakePHP supports composite primary keys almost everywhere - not forcing you
+key. CakePHP supports composite primary keys almost everywhere, not forcing you
 to use artificial surrogate primary keys such - say - an ``id`` column despite
 your natural primary key being ``(website_id, username)``.
 
