@@ -229,7 +229,7 @@ ssl_key
 ssl_cert
     O caminho para o arquivo de certificado SSL. (Somente suportado pelo MySQL).
 ssl_ca
-    O caminho do arquivo de a autoridade de certificação SSL. (Somente suportado pelo MySQL).
+    O caminho do arquivo de autoridade de certificação SSL. (Somente suportado pelo MySQL).
 init
     Uma lista de queries que devem ser enviadas para o servidor de banco de dados 
     como quando a conexão é criada.
@@ -248,8 +248,8 @@ flags
     que você está usando.
 cacheMetadata
     Tanto um boolean ``true``, ou uma string contendo a configuração de cache para
-    armazenar metaddos. Desativar o cache de metadados não é a aconselhado e pode
-    resultar em desempenho muito frato. Consulte a seção :ref:`database-metadata-cache`
+    armazenar metadados. Desativar o cache de metadados não é a aconselhado e pode
+    resultar em desempenho muito fraco. Consulte a seção :ref:`database-metadata-cache`
     para obter mais informações.
 
 Neste ponto, pode desejar dar uma olhada no :doc:`/intro/conventions`.
@@ -371,7 +371,7 @@ Adicionando Tipos Personalizados
 
 .. php:staticmethod:: map($name, $class)
 
-Se você precisar usar tipos específicos do fornecedor que não estão incorporados no CakePHP,
+Se você precisa usar tipos específicos do fornecedor que não estão incorporados no CakePHP,
 você pode adicionar novos tipos adicionais ao sistema de tipos do CakePHP. As classes de tipos
 devem implementar os seguintes métodos:
 
@@ -557,7 +557,7 @@ mapear dados nesse objeto de valor e em expressões SQL::
 A classe acima faz algumas coisas interessantes:
 
 * O método ``toPHP`` lida com o parse de resultados de consulta SQL em um objeto de valor.
-* O método ``marshal`` lida com a conversão, de dados como dados de requisição, em nosso
+* O método ``marshal`` lida com a conversão, de dados como os dados de requisição, em nosso
   objeto de valor.
   Nós vamos aceitar valores string como ``'10.24,12.34`` e array por enquanto.
 * O método ``toExpression`` lida com a conversão do nosso objeto de valor para
@@ -573,11 +573,9 @@ Habilitando Objetos DataTime Imutáveis
 --------------------------------------
 
 .. versionadded:: 3.2
-    Immutable date/time objects were added in 3.2.
+    Immutable date/time objetos foram adicionados na versão 3.2.
 
-Como os objetos Data / Hora são facilmente mutados, o CakePHP permite habilitar objetos de valor imutáveis. Isso é melhor feito no arquivo ** config / bootstrap.php ** da sua aplicação ::
-
-Como objetos Date/Time são facilmente mutados, o CakePHP permite você habilitar
+Como objetos Date/Time são facilmente modificados, o CakePHP permite você habilitar
 objetos de valores imutáveis. Isso é melhor feito no arquivo
 **config/bootstrap.php** da sua aplicação::
 
