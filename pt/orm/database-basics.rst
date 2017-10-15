@@ -594,8 +594,8 @@ Classes de Conexão
 
 As classes de conexão fornecem uma interface simples para interagir
 com conexões de banco de dados de modo consistente. Elas servem como
-uma interface mais abstrata para a camada do driver e fornecer recursos
-para executar consultas, registrar (<em>loggin</em>) consultas e realizar
+uma interface mais abstrata para a camada do driver e fornece recursos
+para executar consultas, logar (<em>logging</em>) consultas e realizar
 operações transacionais.
 
 .. _database-queries:
@@ -611,7 +611,7 @@ do CakePHP fornece recursos de wrapper em cima do PDO e drivers nativos.
 Esses wrappers fornecem uma interface similar ao PDO. Há algumas formas
 diferentes de executar consultas, dependendo do tipo de consulta que você
 precisa executar e do tipo de resultados que você precisa receber. O método
-mais básico é o ``query()`` que lhe permite executar consultas SQL já completas::
+mais básico é o ``query()`` que lhe permite executar consultas SQL já prontas::
 
     $stmt = $conn->query('UPDATE articles SET published = 1 WHERE id = 2');
 
@@ -651,7 +651,7 @@ complexas e expressivas sem ter que usar SQL específico de plataforma::
 
 Ao usar o construtor de consulta (<em>query builder</em>), nenhum SQL será enviado
 para o servidor do banco de dados até que o método ``execute()`` é chamado ou a
-consulta seja iterada. Iterar uma consulta irá primeiro executá-lo e então começar a
+consulta seja iterada. Iterar uma consulta irá primeiro executá-la e então começar a
 iterar sobre o conjunto de resultados::
 
     $query = $conn->newQuery();
@@ -681,7 +681,7 @@ de banco de dados. A maneira mais básica de fazer transações é através dos 
 .. php:method:: transactional(callable $callback)
 
 Além disso, essas instâncias de interface de conexão também fornecem o método 
-``transactional()`` que faz o tratamento das chamadas begin/commit/rollback muito mais simples::
+``transactional()`` que torna o tratamento das chamadas begin/commit/rollback muito mais simples::
 
     $conn->transactional(function ($conn) {
         $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
@@ -689,7 +689,7 @@ Além disso, essas instâncias de interface de conexão também fornecem o méto
     });
 
 Além de consultas básicas, você pode executar consultas mais complexas usando 
-:doc:`/orm/query-builder` ou :doc:`/orm/table-objects`. O método transacional vai fazer o seguinte:
+:doc:`/orm/query-builder` ou :doc:`/orm/table-objects`. O método transactional vai fazer o seguinte:
 
 - Chamar método ``begin``.
 - Chamar a closure fornecida.
