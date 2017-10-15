@@ -905,10 +905,14 @@ methods are described in each method's own section.)
   by default::
 
       // HTML <option> elements with values 1 and 3 will be rendered preselected
-      echo $this->Form->select('rooms', [
-          'multiple' => true,
-          'value' => [1, 3]
-      ]);
+      echo $this->Form->select(
+          'rooms',
+          [1, 2, 3, 4, 5],
+          [
+              'multiple' => true,
+              'value' => [1, 3]
+          ]
+      );
 
 * ``'empty'`` - Applies to ``radio()`` and ``select()``. Defaults to ``false``.
 
