@@ -715,7 +715,7 @@ Possible keys for HABTM association arrays include:
    highly customized results.
 
 Once this association has been defined, find operations on the
-Recipe model will also fetch related Tag records if they exist::
+Recipe model will also fetch related Ingredient records if they exist::
 
     // Sample results from a $this->Recipe->find() call.
 
