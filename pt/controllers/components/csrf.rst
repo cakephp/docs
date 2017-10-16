@@ -33,7 +33,7 @@ imcompatíveis o componente lançará um
     ``CsrfComponent``.
 
 Usando o CsrfComponent
-=======================
+======================
 
 Simplismente adicionando o ``CsrfComponent`` ao array de componentes,
 você pode se beneficiar da proteção contra CSRF fornecida::
