@@ -1108,7 +1108,7 @@ radio ボタン入力を作成します。使用されるデフォルトのウ�
 .. _create-select-picker:
 
 選択ピッカーの作成
-------------------
+~~~~~~~~~~~~~~~~~~
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
 
