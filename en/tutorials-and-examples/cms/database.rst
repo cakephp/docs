@@ -56,9 +56,11 @@ tables::
 
 You may have noticed that the ``articles_tags`` table used a composite primary
 key. CakePHP supports composite primary keys almost everywhere, not forcing you
-to - say - add an artificial surrogate primary key, such as ``id``
-to table ``articles_tables`` where a natural primary key ``(article_id, tag_id)``
-already exists.
+to - say - add an
+`artificial surrogate primary key <https://en.wikipedia.org/wiki/Surrogate_key>`_,
+such as ``id`` to table ``articles_tables`` where a
+`natural primary key <https://en.wikipedia.org/wiki/Natural_key>`_
+``(article_id, tag_id)`` already exists.
 
 The table and column names we used were not arbitrary. By using CakePHP's
 :doc:`naming conventions </intro/conventions>`, we can leverage CakePHP more
