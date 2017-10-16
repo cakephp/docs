@@ -519,6 +519,7 @@ also provide a similar set of callbacks.
 Remember to call ``AppController``'s callbacks within child controller callbacks
 for best results::
 
+    //use Cake\Event\Event;
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
