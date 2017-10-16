@@ -55,8 +55,16 @@ tables::
     (1, 'First Post', 'first-post', 'This is the first post.', 1, now(), now());
 
 You may have noticed that the ``articles_tags`` table used a composite primary
-key. CakePHP supports composite primary keys almost everywhere allowing you to
-have simpler schemas that don't require additional ``id`` columns.
+key. CakePHP supports `composite keys <https://en.wikipedia.org/wiki/Compound_key>`_
+almost everywhere.
+
+.. note::
+
+    For example you are not forced to add an
+    `artificial surrogate primary key <https://en.wikipedia.org/wiki/Surrogate_key>`_,
+    such as ``id`` to given table ``articles_tables`` because ``(article_id, tag_id)``
+    is an existing `natural primary key <https://en.wikipedia.org/wiki/Natural_key>`_
+    and CakePHP can make use of that.
 
 The table and column names we used were not arbitrary. By using CakePHP's
 :doc:`naming conventions </intro/conventions>`, we can leverage CakePHP more
