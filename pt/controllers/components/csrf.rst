@@ -29,7 +29,7 @@ imcompatíveis o componente lançará um
     :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
 
 .. deprecated:: 3.5.0
-    Você deve usar :ref:`csrf-middleware` ao invés do
+    Você deve usar Cross Site Request Forgery (CSRF) Middleware ao invés do
     ``CsrfComponent``.
 
 Usando o CsrfComponent
