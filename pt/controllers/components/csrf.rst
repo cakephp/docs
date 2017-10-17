@@ -18,7 +18,7 @@ imcompatíveis o componente lançará um
 
 .. note::
     Você sempre deve verificar o método HTTP que está sendo usado antes de 
-    tomar uma ação. Você deve :ref:`verificar o método HTTP <check-the-request>` 
+    tomar uma ação. Você deve :ref:`verificar o método HTTP <cake-request>` 
     ou usar :php:meth:`Cake\\Http\\ServerRequest::allowMethod()` para garantir que o
     método HTTP correto está sendo usado.
 
@@ -33,7 +33,7 @@ imcompatíveis o componente lançará um
     ``CsrfComponent``.
 
 Usando o CsrfComponent
-=======================
+======================
 
 Simplismente adicionando o ``CsrfComponent`` ao array de componentes,
 você pode se beneficiar da proteção contra CSRF fornecida::
