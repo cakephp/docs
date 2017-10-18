@@ -30,7 +30,7 @@ Supported Databases
 
 CakePHP supports the following relational database servers:
 
-* MySQL 5.1+
+* MySQL 5.5+
 * SQLite 3
 * PostgreSQL 8+
 * SQLServer 2008+
@@ -136,7 +136,7 @@ like::
             'username' => 'my_app',
             'password' => 'sekret',
             'database' => 'my_app',
-            'encoding' => 'utf8',
+            'encoding' => 'utf8mb4',
             'timezone' => 'UTC',
             'cacheMetadata' => true,
         ]
@@ -158,7 +158,7 @@ would be::
         'username' => 'my_app',
         'password' => 'sekret',
         'database' => 'my_app',
-        'encoding' => 'utf8',
+        'encoding' => 'utf8mb4',
         'timezone' => 'UTC',
         'cacheMetadata' => true,
     ]);
@@ -210,9 +210,7 @@ port (*optional*)
 encoding
     Indicates the character set to use when sending SQL statements to
     the server. This defaults to the database's default encoding for
-    all databases other than DB2. If you wish to use UTF-8 encoding
-    with MySQL connections you must use 'utf8' without the
-    hyphen.
+    all databases other than DB2.
 timezone
     Server timezone to set.
 schema

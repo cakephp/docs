@@ -41,6 +41,9 @@ behavior that may affect your application:
   Previously invalid tasks would be silently ignored.
 * CakePHP internals now chain exceptions where possible, allowing root causes of
   errors to be exposed.
+* MySQL connections now default to ``utf8mb4`` as their encoding. If you want to
+  continue using the old default of ``utf8`` update your application's
+  connection information.
 
 Core
 ====
