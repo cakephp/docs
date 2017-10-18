@@ -635,6 +635,10 @@ CakePHP アプリケーションでプラグインを発見して管理する別
 <https://github.com/CakeDC/mixer>`_ です。これは Packagist からプラグインをインストールするのに
 便利な CakePHP のプラグインです。また、既存のプラグインを管理するのにも役立ちます。
 
+.. note::
+
+    重要: 本番環境でこれを使用しないでください。
+
 .. meta::
     :title lang=ja: Plugins
     :keywords lang=ja: plugin folder,plugins,controllers,models,views,package,application,database connection,little space
