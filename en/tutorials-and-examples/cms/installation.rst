@@ -114,4 +114,4 @@ bullet points should be green chef hats other than CakePHP being able to connect
 your database. If not, you may need to install additional PHP extensions, or set
 directory permissions.
 
-Next, we will build our :doc:`Database and create our first model <database>`.
+Next, we will build our :doc:`Database and create our first model </tutorials-and-examples/cms/database>`.

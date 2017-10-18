@@ -485,4 +485,4 @@ to showcase how powerful the ORM in CakePHP is. You can manipulate query
 results using the :doc:`/core-libraries/collections` methods, and handle
 scenarios where you are creating entities on the fly with ease.
 
-Next we'll be adding :doc:`authentication <authentication>`.
+Next we'll be adding :doc:`authentication </tutorials-and-examples/cms/authentication>`.
