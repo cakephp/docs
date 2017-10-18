@@ -10,7 +10,7 @@ CakePHP の規約を習得するには少し時間がかかりますが、長い
 コントローラーの規約
 ====================
 
-コントローラーのクラス名は複数形でキャメル記法で、最後に ``Controller`` が付きます。
+コントローラーのクラス名は複数形でパスカルケースで、最後に ``Controller`` が付きます。
 ``UsersController`` 、 ``ArticleCategoriesController`` は規約に合ったコントローラー名の例
 となります。
 
@@ -33,9 +33,9 @@ http://example.com/users としてアクセスできます。
 ``this->Html->link`` を使用してリンクを作成した時、URL 配列に以下の規約を使用できます。 ::
 
     $this->Html->link('link-title', [
-        'prefix' => 'MyPrefix', // キャメルケース
-        'plugin' => 'MyPlugin', // キャメルケース
-        'controller' => 'ControllerName', // キャメルケース
+        'prefix' => 'MyPrefix', // パスカルケース
+        'plugin' => 'MyPlugin', // パスカルケース
+        'controller' => 'ControllerName', // パスカルケース
         'action' => 'actionName' // キャメルバック
     ]
 
@@ -47,8 +47,8 @@ CakePHP の URL とパラメーターの取り扱いに関するより詳細な�
 ファイルとクラス名の規約
 ========================
 
-通常、ファイル名はクラス名と一致し、オートローディングのために PRS-0 や PSR-4
-標準に準拠してください。以下に、クラスメイトファイル名の例を挙げます。
+通常、ファイル名はクラス名と一致し、オートローディングのために PSR-4
+標準に準拠してください。以下に、クラス名とファイル名の例を挙げます。
 
 -  ``LatestArticlesController`` というコントローラークラスは、
    **LatestArticlesController.php** というファイル名にします。
@@ -69,25 +69,15 @@ CakePHP の URL とパラメーターの取り扱いに関するより詳細な�
 
 .. _model-and-database-conventions:
 
-モデルとデータベースの規約
-==========================
-
-Table クラスの名前は複数形でキャメル記法で、最後に ``Table`` が付きます。 ``UsersTable``,
-``ArticleCategoriesTable``, ``UserFavoritePagesTable`` などは規約に合ったモデル名です。
+データベースの規約
+==================
 
 CakePHP のモデルに対応するテーブル名は、複数形でアンダースコアー記法です。上記の例で言えば、
 テーブル名はそれぞれ、 ``users`` 、 ``article_categories`` 、 ``user_favorite_pages``
 になります。
 
-規約は、テーブルやカラム名のための英語単語を使用するためのものです。もし、別の言語の単語を
-使っているなら、CakePHP は正しい語形変化 (単数形から複数形、逆もまた同様) の処理ができません。
-何らかの理由で、いくつかの単語のためのあなたの言語の規則を追加する必要がある場合、
-ユーティリティライブラリーの :php:class:`Cake\\Utility\\Inflector` を使うことができます。
-これら独自の語形変化規則を定義することのほかに、このクラスは、 CakePHP が複数形や単数形の
-単語のための独自構文を解釈することを確認できます。より詳しい情報は、
-:doc:`/core-libraries/inflector` をご覧ください。
-
-二個以上の単語で構成されるフィールドの名前は、 ``first_name`` のようにアンダースコアー記法になります。
+二個以上の単語で構成されるフィールド/カラムの名前は、
+``first_name`` のようにアンダースコアー記法になります。
 
 hasMany, blongsTo, hasOne 中の外部キーは、デフォルトで関連するモデルの(単数形の)名前に
 ``_id`` を付けたものとして認識されます。ユーザーが記事を複数持っている (*Users hasMany Articles*)
@@ -102,6 +92,17 @@ hasMany, blongsTo, hasOne 中の外部キーは、デフォルトで関連する
 ``Table::save()`` メソッドを使って新規レコードを保存するとき、CakePHP はユニークな
 36 文字の UUID (:php:meth:`Cake\\Utilitiy\\Text::uuid`) を用いようとします。
 
+モデルの規約
+============
+
+Table クラスの名前は複数形でパスカルケースで、最後に ``Table`` が付きます。 ``UsersTable``,
+``ArticleCategoriesTable``, ``UserFavoritePagesTable`` などは ``users``,
+``article_categories``, ``user_favorite_pages`` テーブルに対応するテーブルクラス名の例です。
+
+Entity クラスの名前は単数形でパスカルケースで、サフィックスはありません。 ``User``,
+``ArticleCategory``, ``UserFavoritePage`` などは ``users``, ``article_categories``,
+``user_favorite_pages`` テーブルに対応するエンティティー名の例です。
+
 ビューの規約
 ============
 
@@ -111,6 +112,17 @@ hasMany, blongsTo, hasOne 中の外部キーは、デフォルトで関連する
 **src/Template/Articles/view_all.ctp** を探すことになります。
 
 基本パターンは、 **src/Template/コントローラー名/アンダースコアー記法_関数名.ctp** です。
+
+.. note::
+
+   デフォルトで、CakePHP は英単語の語形変化を使用します。もし、別の言語を使った
+   データベースのテーブルやカラムがある場合、語形変化規則 (単数形から複数形、逆もまた同様) の
+   追加が必要になります。カスタム語形変化規則を定義するために
+   :php:class:`Cake\\Utility\\Inflector` を使うことができます。より詳しい情報は、
+   :doc:`/core-libraries/inflector` をご覧ください。
+
+要約
+====
 
 各部分を CakePHP の規約に合わせて命名しておくことで、混乱を招く面倒な設定をしなくても
 機能的に動作するようになります。以下が最後の規約に合った命名の例です。

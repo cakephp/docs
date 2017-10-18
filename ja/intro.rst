@@ -65,7 +65,7 @@ XML 形式の結果をレンダリングできます。 ::
     // ビューテンプレートファイルで 'element' をそれぞれのユーザーに対してレンダリングする
     <?php foreach ($users as $user): ?>
         <li class="user">
-            <?= $this->element('user', ['user' => $user]) ?>
+            <?= $this->element('user_info', ['user' => $user]) ?>
         </li>
     <?php endforeach; ?>
 
