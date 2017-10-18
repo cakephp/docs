@@ -1,62 +1,63 @@
 Phinx Migrations
 ################
 
-Phinx is a standalone command line tool for managing database Migrations. The official Migrations plugin for CakePHP is based on this tool.
+Phinx est un utilitaire autonome en ligne de commande pour gérer les Migrations de bases de données. Le plugin officiel de Migrations de CakePHP est basé sur cet outil. 
 
-Phinx makes it ridiculously easy to manage the database migrations for your PHP app. In less than 5 minutes, you can install Phinx using Composer and create your first database migration. Phinx is just about migrations without all the bloat of a database ORM system or application framework.
+Phinx rend ridiculement simple la gestion des migrations de bases de données pour vos applications PHP. En moins de 5 minutes,
+vous pouvez installer Composer et créer votre première migration de base de données. Phinx ne s'occupe que de la migration des 
+bases de données, il laisse de côté les aspects ORM de la base de données et le cadre applicatif.
 
 Introduction
 ============
 
-Good developers always version their code using a SCM system, so why don't they
-do the same for their database schema?
+Les bons développeurs gèrent toujours leurs codes sources avec un outil de gestion de versions,
+alors pourquoi ne feraient-ils pas la même chose avec leurs schémas de bases de données.
 
-Phinx allows developers to alter and manipulate databases in a clear and
-concise way. It avoids the use of writing SQL by hand and instead offers a
-powerful API for creating migrations using PHP code. Developers can then
-version these migrations using their preferred SCM system. This makes Phinx
-migrations portable between different database systems. Phinx keeps track of
-which migrations have been run, so you can worry less about the state of your
-database and instead focus on building better software.
 
-Goals
-=====
+Phinx permet aux développeurs de modifier et de manipuler leurs bases de données d'une façon claire et concise. Il évite
+d'avoir à écrire du SQL à la main et offre à la place une API puissante pour écrire des scripts de migration en utilisant PHP.
+Les développeurs peuvent alors versionner ces fichiers de migration en utilisant leur outil de versionnement préféré. Cela rend 
+les migrations Phinx indépendantes des moteurs de base de données. Phinx conserve la trace des migrations précédentes, cela 
+permet de se concentrer un peu plus sur l'amélioration de votre application et un peu moins sur l'état de votre base de 
+données.
 
-Phinx was developed with the following goals in mind:
 
-* Be portable amongst the most popular database vendors.
-* Be PHP framework independent.
-* Have a simple install process.
-* Have an easy to use command-line operation.
-* Integrate with various other PHP tools (Phing, PHPUnit) and web frameworks.
+Objectifs
+=========
+
+Phinx a été développé avec les objectifs suivants en tête :
+
+* Être portable entre les principaux moteurs de base de données.
+* Être indépendant de tout framework PHP.
+* Être aisement installable.
+* Être utilisable facilement en ligne de commande.
+* Être intégrable avec d'autres outils PHP (Phing, PHPUnit) et des frameworks web. 
 
 Installation
 ============
 
-Phinx should be installed using Composer, which is a tool for dependency
-management in PHP. Please visit the `Composer <https://getcomposer.org/>`_ 
-website for more information.
+Phinx devrait être installé en utilisant Composer, qui est un outil pour la gestion des dépendances en PHP. Visiter le site
+internet de `Composer <https://getcomposer.org/>`_ pour avoir plus d’informations.
 
 .. note::
 
-    Phinx requires at least PHP 5.4 (or later).
+	Phinx a besoin au minimum de PHP 5.4 (ou supérieur)
 
-To install Phinx, simply require it using Composer:
+Pour installer Phinx, il suffit simplement de l'appeler via Composer
 
 .. code-block:: bash
 
     php composer.phar require robmorgan/phinx
 
-Create folders in your project following the structure ``db/migrations`` with adequate permissions.
-It is where your migration files will live and should be writable.
+Créez les dossiers ``db/migrations`` dans votre projet en vous assurant que les droits sont bien configurés.
+C’est à cet endroit que vos fichiers de migrations devraient être créés et laissés.
 
-Phinx can now be executed from within your project:
-
+Phinx peut maintenant être exécuté depuis la racine de votre projet.
 .. code-block:: bash
 
     vendor/bin/phinx init
 
-Contents
+Contenus
 ========
 
 .. toctree::

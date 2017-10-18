@@ -215,11 +215,6 @@ You should see a basic but functional application providing data access to your
 application's database tables. Once you're at the list of bookmarks, add a few
 users, bookmarks, and tags.
 
-.. note::
-
-    If you see a Not Found (404) page, confirm that the Apache mod_rewrite
-    module is loaded.
-
 Adding Password Hashing
 =======================
 

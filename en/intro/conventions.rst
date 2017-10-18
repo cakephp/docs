@@ -72,26 +72,14 @@ folder.
 
 .. _model-and-database-conventions:
 
-Model and Database Conventions
-==============================
+Database Conventions
+====================
 
-Table class names are plural, PascalCased and end in ``Table``. ``UsersTable``, ``ArticleCategoriesTable``,
-and ``UserFavoritePagesTable`` are all examples of conventional model names.
+Table names corresponding to CakePHP models are plural and underscored. For
+example ``users``, ``article_categories``, and ``user_favorite_pages``
+respectively.
 
-Table names corresponding to CakePHP models are plural and underscored. The
-underlying tables for the above mentioned models would be ``users``,
-``article_categories``, and ``user_favorite_pages``, respectively.
-
-The convention is to use English words for table and column names. If you use
-words in another language, CakePHP might not be able to process the right
-inflections (from singular to plural and vice-versa). If you need to add your
-own language rules for some words, you can use the utility class
-:php:class:`Cake\\Utility\\Inflector`. Besides defining those custom inflection
-rules, this class also allows you to check that CakePHP understands your custom
-syntax for plurals and singulars words. See the documentation about
-:doc:`/core-libraries/inflector` for more information.
-
-Field names with two or more words are underscored: ``first_name``.
+Field/Column names with two or more words are underscored: ``first_name``.
 
 Foreign keys in hasMany, belongsTo/hasOne relationships are recognized by
 default as the (singular) name of the related table followed by ``_id``. So if
@@ -109,6 +97,19 @@ UUID columns. CakePHP will create a unique 36 character UUID
 (:php:meth:`Cake\\Utility\\Text::uuid()`) whenever you save a new record using
 the ``Table::save()`` method.
 
+Model Conventions
+=================
+
+Table class names are plural, PascalCased and end in ``Table``. ``UsersTable``,
+``ArticleCategoriesTable``, and ``UserFavoritePagesTable`` are all examples of
+table class names matching the ``users``, ``article_categories`` and
+``user_favorite_pages`` tables respectively.
+
+Entity class names are singular PascalCased and have no suffix. ``User``,
+``ArticleCategory``, and ``UserFavoritePage`` are all examples of entity names
+matching the ``users``, ``article_categories`` and ``user_favorite_pages``
+tables respectively.
+
 View Conventions
 ================
 
@@ -118,6 +119,15 @@ will look for a view template in **src/Template/Articles/view_all.ctp**.
 
 The basic pattern is
 **src/Template/Controller/underscored_function_name.ctp**.
+
+.. note::
+
+    By default CakePHP uses English inflections. If you have database
+    tables/columns that use another language, you will need to add inflection
+    rules (from singular to plural and vice-versa).  You can use
+    :php:class:`Cake\\Utility\\Inflector` to define your custom inflection
+    rules. See the documentation about :doc:`/core-libraries/inflector` for more
+    information.
 
 Summarized
 ==========
@@ -141,7 +151,7 @@ file. None of these relationships have been configured by any means other than
 by creating classes and files that you'd need to create anyway.
 
 Now that you've been introduced to CakePHP's fundamentals, you might try a run
-through the :doc:`/tutorials-and-examples/bookmarks/intro` to see how things fit
+through the :doc:`/tutorials-and-examples/cms/installation` to see how things fit
 together.
 
 .. meta::
