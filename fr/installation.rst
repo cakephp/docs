@@ -15,6 +15,8 @@ Conditions requises
 - PHP |minphpversion| ou plus (y compris PHP 7.1)
 - extension PHP mbstring
 - extension PHP intl
+- extension PHP simplexml
+
 
 .. note::
 
@@ -129,8 +131,8 @@ Par défaut c'est ce à quoi le **composer.json** de votre application ressemble
 A chaque fois que vous lancez ``php composer.phar update``, vous allez
 recevoir la dernière version contenant les dernières corrections de bugs pour
 cette version mineure. Si vous souhaitez également recevoir les dernières
-versions stables de la branche ``3.x``, vous pouvez changer la contrainte de
-version par ``~3.5``.
+versions stables mineures de la branche ``3.x``, vous pouvez changer la contrainte
+de version par ``^3.5``.
 
 Si vous voulez rester à jour avec les derniers changements de CakePHP non
 stables, vous pouvez changer le **composer.json** de votre application::
@@ -243,6 +245,10 @@ Cela affichera votre application sur **http://192.168.13.37:5673/**.
 
 C'est tout! Votre application CakePHP est ok et elle est lancée sans avoir
 à configurer un serveur web.
+
+.. note::
+
+    Essayez ``bin/cake server -H 0.0.0.0`` si le serveur est inaccessible depuis autres hôtes.
 
 .. warning::
 

@@ -409,7 +409,7 @@ La contrepartie de l'opération ``map()`` est habituellement un ``reduce``. Cett
 fonction va vous aider à construire un résultat unique à partir de tous les
 éléments d'une collection::
 
-    $totalPrice = $collection->reduce(function ($accumulated, $orderLine) {
+    $totalPrice = $collection->reduce(function ($accumulated, $orderLine, $index) {
         return $accumulated + $orderLine->price;
     }, 0);
 
@@ -418,7 +418,7 @@ uniques qui se trouvent dans la collection. Remarquez le deuxième argument
 pour la fonction ``reduce()``, il prend la valeur initiale pour l'opération
 ``reduce`` que vous souhaitez faire::
 
-    $allTags = $collection->reduce(function ($accumulated, $article) {
+    $allTags = $collection->reduce(function ($accumulated, $article, $index) {
         return array_merge($accumulated, $article->tags);
     }, []);
 
@@ -1184,6 +1184,10 @@ utilisant la fonction ``buffered()``::
 
 Maintenant quand les deux collections sont itérées, elles vont seulement appeler
 l'opération d'extraction en une fois.
+
+.. versionadded:: 3.5.0
+    Les Collections initialisées avec un tableau ne peuvent plus etre itérées
+    de façon Lazy afin d'améliorer les performances.
 
 Rendre les Collections Rembobinables
 ------------------------------------

@@ -896,6 +896,13 @@ property has to be persisted::
 
 Without the call to ``dirty()`` the updated comments will not be saved.
 
+If you are creating a new entity with existing records for your association you
+need to intitialize the corresponding property first::
+
+    $mentor->students = [];
+
+Without initializing calling ``$mentor->students[] = $student;`` will have no effect.
+
 Saving BelongsToMany Associations
 ---------------------------------
 

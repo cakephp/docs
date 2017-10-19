@@ -386,10 +386,10 @@ CakePHP は、エンティティーが保存される前に適用される「ル
 このために CakePHP は ``ExistsIn`` ルールクラスを内包しています。 ::
 
     // 一つのフィールド
-    $rules->add($rules->existsIn('article_id', 'articles'));
+    $rules->add($rules->existsIn('article_id', 'Articles'));
 
     // 複数キー。複合主キーに役立ちます。
-    $rules->add($rules->existsIn(['site_id', 'article_id'], 'articles'));
+    $rules->add($rules->existsIn(['site_id', 'article_id'], 'Articles'));
 
 存在をチェックするための関連テーブルのフィールドは主キーの一部でなければなりません。
 

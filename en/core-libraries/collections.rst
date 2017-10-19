@@ -1141,6 +1141,9 @@ into another collection using the ``buffered()`` function::
 Now, when both collections are iterated, they will only call the
 extracting operation once.
 
+.. versionadded:: 3.5.0
+    Collections initialized with an array are no longer iterated lazily in order to improve performance.
+
 Making Collections Rewindable
 -----------------------------
 

@@ -8,9 +8,9 @@
 ルーティングは URL とコントローラーのアクションをマップするツールを提供します。
 ルートを設定することで、アプリケーションの実装方法を URL の構造から分離できます。
 
-CakePHP でのルーティングはまた 配列による引数を文字列による URL に変換する
-リバースルーティングも含みます。リバースルーティングによって、アプリケーションの
-URL の構造を全部のコードの書き直しをせずにリファクタリングできます。
+CakePHP でのルーティングはまた パラメーターの配列を URL 文字列に変換する
+リバースルーティングというアイディアも含まれます。リバースルーティングを使用することによって、
+アプリケーションの URL の構造を全部のコードの書き直しをせずに再調整できます。
 
 .. index:: routes.php
 
@@ -40,14 +40,22 @@ URL の構造を全部のコードの書き直しをせずにリファクタリ�
 index メソッドを実行します。時々、複数のパラメーターを受け取る動的なルートが
 必要になると思います。それが必要になるケースは、例えば、記事の内容を表示するためのルートです。 ::
 
-    Router::connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
+    $routes->connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
 
 上記のルートは、  ``/articles/15`` のような URL を受け取り、 ``ArticlesController``
 の ``view(15)`` メソッドを呼びます。しかし、これは ``/articles/foobar`` のような URL からの
 アクセスを防ぐわけではありません。もし、あなたが望むなら、いくつかのパラメーターを正規表現に従うように
-修正できます。 ::
+制限することができます。 ::
 
-    Router::connect(
+    $routes->connect(
+        '/articles/:id',
+        ['controller' => 'Articles', 'action' => 'view'],
+    )
+    ->setPatterns(['id' => '\d+'])
+    ->setPass(['id']);
+
+    // 3.5 より前はオプション配列を使用
+    $routes->connect(
         '/articles/:id',
         ['controller' => 'Articles', 'action' => 'view'],
         ['id' => '\d+', 'pass' => ['id']]
@@ -59,7 +67,7 @@ index メソッドを実行します。時々、複数のパラメーターを�
 最後に、 Router に ``id`` プレースホルダーを ``view()`` 関数の引数として渡すように
 ``pass`` オプションで伝えます。このオプションの詳細は後で説明します。
 
-CakePHP の Router はリバースルーティングできます。それは、一致するパラメーターを含む配列から、
+CakePHP の Router はルートを逆にできます。それは、一致するパラメーターを含む配列から、
 URL 文字列を生成できることを意味します。 ::
 
     use Cake\Routing\Router;
@@ -71,13 +79,14 @@ URL 文字列を生成できることを意味します。 ::
 ルートは一意の名前を付けることもできます。これは、リンクを構築する際に、
 ルーティングパラメーターをそれぞれ指定する代わりに、ルートを素早く参照することができます。 ::
 
-    use Cake\Routing\Router;
-
-    Router::connect(
+    // routes.php の中で
+    $routes->connect(
         '/login',
         ['controller' => 'Users', 'action' => 'login'],
         ['_name' => 'login']
     );
+
+    use Cake\Routing\Router;
 
     echo Router::url(['_name' => 'login']);
     // 出力結果
@@ -106,11 +115,10 @@ URL 文字列を生成できることを意味します。 ::
 ルートを接続
 ============
 
-.. php:staticmethod:: connect($route, $defaults = [], $options = [])
+.. php:method:: connect($route, $defaults = [], $options = [])
 
 コードを :term:`DRY` に保つために 'ルーティングスコープ' を使用してください。
 ルーティングスコープはコードを DRY に保つためだけではなく、Router の操作を最適化します。
-上記を参照すると、 ``Router::connect()`` をルートを接続するために使えることがわかります。
 このメソッドは ``/`` スコープがデフォルトです。スコープを作成しいくつかのルートを
 接続するために、 ``scope()`` メソッドを使います。 ::
 
@@ -118,6 +126,7 @@ URL 文字列を生成できることを意味します。 ::
     use Cake\Routing\Route\DashedRoute;
 
     Router::scope('/', function ($routes) {
+        // 標準のフォールバックルートを接続します。
         $routes->fallbacks(DashedRoute::class);
     });
 
@@ -129,7 +138,7 @@ URL 文字列を生成できることを意味します。 ::
 ルートを定義するための基本のフォーマットは、次の通りです。 ::
 
     $routes->connect(
-        'URL テンプレート',
+        '/url/template',
         ['default' => 'defaultValue'],
         ['option' => 'matchingRegex']
     );
@@ -140,9 +149,10 @@ URL 文字列を生成できることを意味します。 ::
 \* なしだと、文字列に完全一致するものだけに絞られます。
 
 URL が特定されたら、一致したときにどのような動作をするかを CakePHP に伝えるために
-``connect()`` の残り２つのパラメーターを使います。２番目のパラメーターは、連想配列です。この配列のキーは、
-URL テンプレートが示すルート要素に因んで命名すべきです。配列の値はキーのためのデフォルトの
-値になります。 ``connect()`` の３番目のパラメーターを使う前に基本的な例を見てみましょう。 ::
+``connect()`` の残り２つのパラメーターを使います。２番目のパラメーターは、連想配列です。
+この配列のキーは、URL テンプレートが示すルート要素に因んで命名すべきです。
+配列の値はキーのためのデフォルトの値になります。 ``connect()`` の３番目のパラメーターを
+使う前に基本的な例を見てみましょう。 ::
 
     $routes->connect(
         '/pages/*',
@@ -176,18 +186,18 @@ URL テンプレートが示すルート要素に因んで命名すべきです�
 
 この例では、 ``connect()`` の２番目のパラメーターをデフォルトの値を定義するために使う方法を
 示しています。もし、いろいろなカテゴリーの製品を顧客に対して提供するサイトを作るのであれば、
-ルーティングすることを考えるべきです。この例では、 ``/pages/display/5`` にアクセスするために
-``/government``  がURLとして使えます。
+ルーティングすることを考えるべきです。上記は、 ``/pages/display/5`` ではなく ``/government``
+にリンクすることができます。
 
-Router の別の一般的な使い方は、コントローラーの "エイリアス" (**ailias**) を定義することです。
-``/users/some_action/5`` の代わりに、 ``/cooks/some_action/5`` で同じ場所に
-アクセスしたい場合、以下のように簡単にできます。 ::
+ルーティングの一般的な用途は、コントローラーまたはモデル名と一致しない URL セグメントを作成することです。
+``/users/some_action/5`` で標準の URL にアクセスするのではなく、 ``/cooks/some_action/5``
+でアクセスしたいとしましょう。次のルートでそれが処理できます。 ::
 
     $routes->connect(
         '/cooks/:action/*', ['controller' => 'Users']
     );
 
-これは Router に ``/cooks/`` で始まるすべての URL は users コントローラーに送るように
+これは Router に ``/cooks/`` で始まるすべての URL は ``UsersController`` に送るように
 伝えています。 アクションは  ``:action`` パラメーターの値によって呼ばれるかどうか決まります。
 :ref:`route-elements` を使って、ユーザーの入力や変数を受け付けるいろいろなルーティングが
 できます。上記のルーティングの方法は、貧欲なスター (greedy star） を使います。
@@ -197,6 +207,42 @@ Router の別の一般的な使い方は、コントローラーの "エイリ�
 URL を生成するときにもルーティングは使われます。もし最初に一致するものがあった場合、
 ``['controller' => 'users', 'action' => 'some_action', 5]`` を使って
 ``/cooks/some_action/5`` と出力します。
+
+これまでに接続したルートは、任意の HTTP 動詞と一致します。REST API を構築している際、
+HTTP アクションを異なるコントローラメソッドにマップすることがよくあります。
+``RouteBuilder`` はヘルパーメソッドを提供し、特定の HTTP 動詞のルートをより簡単に定義します。 ::
+
+    // GET リクエストへのみ応答するルートの作成
+    $routes->get(
+        '/cooks/:id',
+        ['controller' => 'Users', 'action' => 'view'],
+        'users:view'
+    );
+
+    // PUT リクエストへのみ応答するルートの作成
+    $routes->put(
+        '/cooks/:id',
+        ['controller' => 'Users', 'action' => 'update'],
+        'users:update'
+    );
+
+上記のルートは、使用される HTTP 動詞に基づいて、同じ URL を異なるコントローラーアクションに
+マップします。GET リクエストは 'view' アクションに行き、PUT リクエストは 'update' アクションに
+行きます。次の HTTP ヘルパーメソッドがあります。
+
+* GET
+* POST
+* PUT
+* PATCH
+* DELETE
+* OPTIONS
+* HEAD
+
+これらのメソッドはすべてルートインスタンスを返すので、 :ref:`流暢なセッター
+<route-fluent-methods>` を活用してルートをさらに設定することができます。
+
+.. versionadded:: 3.5.0
+    HTTP 動詞ヘルパーメソッドは 3.5.0 で追加されました。
 
 .. _route-elements:
 
@@ -210,6 +256,12 @@ URL のどこに配置すべきなのかを定義することができます。�
 これは CakePHP にどんな URL が正しいフォーマットなのかを伝えます。
 正規表現を使用しなかった場合、 ``/`` 以外の文字はパラメーターの一部として扱われます。 ::
 
+    $routes->connect(
+        '/:controller/:id',
+        ['action' => 'view']
+    )->setPatterns(['id' => '[0-9]+']);
+
+    // 3.5 より前はオプション配列を使用
     $routes->connect(
         '/:controller/:id',
         ['action' => 'view'],
@@ -228,11 +280,19 @@ CakePHP は小文字とダッシュによって表された URL を ``:controlle
 
     use Cake\Routing\Route\DashedRoute;
 
-    $routes->connect(
-        '/:controller/:id',
-        ['action' => 'view'],
-        ['id' => '[0-9]+', 'routeClass' => DashedRoute::class]
-    );
+    // 異なるルートクラスを持つビルダーを作成します。
+    $routes->scope('/', function ($routes) {
+        $routes->setRouteClass(DashedRoute::class);
+        $routes->connect('/:controller/:id', ['action' => 'view'])
+            ->setPatterns(['id' => '[0-9]+']);
+
+        // 3.5 より前はオプション配列を使用
+        $routes->connect(
+            '/:controller/:id',
+            ['action' => 'view'],
+            ['id' => '[0-9]+']
+        );
+    });
 
 ``DashedRoute`` クラス ``:controller`` を確認し、
 ``:plugin`` パラメーターを正しく小文字とダッシュによって表します。
@@ -258,23 +318,23 @@ ApplesController の ``view()`` メソッドを呼びます。  ``view()`` メ�
 
 もし、大文字小文字を区別しない URL を提供したい場合、正規表現インライン修飾子を使います。 ::
 
+    // 3.5 より前は setPatterns() の代わりにオプション配列を使用
     $routes->connect(
         '/:userShortcut',
         ['controller' => 'Teachers', 'action' => 'profile', 1],
-        ['userShortcut' => '(?i:principal)']
-    );
+    )->setPatterns(['userShortcut' => '(?i:principal)']);
 
 もう一つ例を挙げます。これであなたはルーティングのプロです。 ::
 
+    // 3.5 より前は setPatterns() の代わりにオプション配列を使用
     $routes->connect(
         '/:controller/:year/:month/:day',
-        ['action' => 'index'],
-        [
-            'year' => '[12][0-9]{3}',
-            'month' => '0[1-9]|1[012]',
-            'day' => '0[1-9]|[12][0-9]|3[01]'
-        ]
-    );
+        ['action' => 'index']
+    )->setPatterns([
+        'year' => '[12][0-9]{3}',
+        'month' => '0[1-9]|1[012]',
+        'day' => '0[1-9]|[12][0-9]|3[01]'
+    ]);
 
 これは、いっそう複雑になりますが、ルーティングがとても強力になったことを示しています。
 この URL は４つのルート要素を持っています。１番目は、なじみがあります。デフォルトのルート要素で
@@ -314,6 +374,43 @@ CakePHP には、いくつかの特別な意味を持つルート要素があり
 * ``_name`` ルートの名前。名前付きルートをセットアップするときに、
   それを指定するためのキーとして使えます。
 
+.. _route-fluent-methods:
+
+ルートオプションの設定
+----------------------
+
+各ルートに設定できる多くのルートオプションがあります。ルートを接続したら、
+その流れるようなビルダーメソッドを使用してルートをさらに設定できます。
+これらのメソッドは、 ``connect()`` の ``$options`` パラメータの多くのキーを置き換えます。 ::
+
+    $routes->connect(
+        '/:lang/articles/:slug',
+        ['controller' => 'Articles', 'action' => 'view'],
+    )
+    // GET と POST リクエストを許可
+    ->setMethods(['GET', 'POST'])
+
+    // blog サブドメインにのみ一致
+    ->setHost('blog.example.com')
+
+    // 渡された引数に変換されるルート要素を設定
+    ->setPass(['slug'])
+
+    // ルート要素の一致するパターンを設定
+    ->setPatterns([
+        'slug' => '[a-z0-9-_]+',
+        'lang' => 'en|fr|es',
+    ])
+
+    // JSON ファイル拡張子も許可
+    ->setExtensions(['json'])
+
+    // lang を永続的なパラメータに設定
+    ->setPersist(['lang']);
+
+.. versionadded:: 3.5.0
+    流れるようなビルダーメソッドは 3.5.0 で追加されました。
+
 アクションへのパラメーター渡し
 ------------------------------
 
@@ -332,15 +429,15 @@ CakePHP には、いくつかの特別な意味を持つルート要素があり
         $routes->connect(
             '/blog/:id-:slug', // 例えば /blog/3-CakePHP_Rocks
             ['controller' => 'Blogs', 'action' => 'view'],
-            [
-                // 関数に引数を渡すためのルーティングテンプレートの中で、ルート要素を定義します。
-                // テンプレートの中で、ルート要素を定義します。
-                //  ":id" をアクション内の $articleId にマップします。
-                'pass' => ['id', 'slug'],
-                // `id` が一致するパターンを定義します。
-                'id' => '[0-9]+'
-            ]
-        );
+        )
+        // 関数に引数を渡すためのルーティングテンプレートの中で、ルート要素を定義します。
+        // テンプレートの中で、ルート要素を定義します。
+        // ":id" をアクション内の $articleId にマップします。
+        ->setPass(['id', 'slug'])
+        // `id` が一致するパターンを定義します。
+        ->setPatterns([
+            'id' => '[0-9]+',
+        ]);
     });
 
 今、リバースルーティング機能のおかげで、下記のように URL 配列を渡し、
@@ -380,8 +477,15 @@ CakePHP はルートに定義された URL をどのように整えるのかを�
         ['_name' => 'login']
     );
 
+    // HTTP メソッド指定でルートを命名 (3.5.0 以降)
+    $routes->post(
+        '/logout',
+        ['controller' => 'Users', 'action' => 'logout'],
+        'logout'
+    );
+
     // 名前付きルートで URL の生成
-    $url = Router::url(['_name' => 'login']);
+    $url = Router::url(['_name' => 'logout']);
 
     // クエリー文字列引数付きの
     // 名前付きルートで URL の生成
@@ -401,7 +505,7 @@ CakePHP は、各スコープで名前のプレフィックスを定義するこ
 
     Router::scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
         // このルートの名前は `api:ping` になります。
-        $routes->connect('/ping', ['controller' => 'Pings'], ['_name' => 'ping']);
+        $routes->get('/ping', ['controller' => 'Pings'], 'ping');
     });
     // ping ルートのための URL を生成
     Router::url(['_name' => 'api:ping']);
@@ -422,7 +526,7 @@ CakePHP は、各スコープで名前のプレフィックスを定義するこ
     Router::plugin('Contacts', ['_namePrefix' => 'contacts:'], function ($routes) {
         $routes->scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
             // このルートの名前は `contacts:api:ping` になります。
-            $routes->connect('/ping', ['controller' => 'Pings'], ['_name' => 'ping']);
+            $routes->get('/ping', ['controller' => 'Pings'], 'ping');
         });
     });
 
@@ -461,7 +565,7 @@ CakePHP では、プレフィックスルーティングは,  ``prefix`` スコ�
 プレフィックス付き及び付かないコントローラーに共通の動作は、継承や
 :doc:`/controllers/components` やトレイトを使用してカプセル化できます。
 このユーザーの例を使うと、 ``/admin/users/edit/5`` にアクセスしたとき、
-**src/Controller/Admin/UsersController.php**  の ``edit()`` メソッドを
+**src/Controller/Admin/UsersController.php** の ``edit()`` メソッドを
 5 を１番目のパラメーターとして渡しながら呼びます。
 ビューファイルは、 **src/Template/Admin/Users/edit.ctp** が使われます。
 
@@ -478,8 +582,8 @@ CakePHP では、プレフィックスルーティングは,  ``prefix`` スコ�
 設定できます。 ::
 
     Router::prefix('admin', ['param' => 'value'], function ($routes) {
-        //  ここで接続されているルートは '/admin' でプレフィックスされており、
-        //  'param' ルーティングキーを持っています。
+        // ここで接続されているルートは '/admin' でプレフィックスされており、
+        // 'param' ルーティングキーを持っています。
         $routes->connect('/:controller');
     });
 
@@ -598,18 +702,36 @@ SEO に親和性があるルーティング
 指定した HTTP メソッドとの照合
 ------------------------------
 
-ルートは、 ``_method`` ルーティングキーを使用して指定した HTTP メソッドとマッチできます。 ::
+ルートは、HTTP 動詞へルパーを使用して指定した HTTP メソッドとマッチできます。 ::
 
     Router::scope('/', function($routes) {
         // このルートは POST リクエスト上でのみマッチします。
+        $routes->post(
+            '/reviews/start',
+            ['controller' => 'Reviews', 'action' => 'start']
+        );
+
+        // 複数 HTTP メソッドとマッチします
+        // 3.5 より前は $options['_method'] をメソッドにセットして使用
         $routes->connect(
             '/reviews/start',
-            ['controller' => 'Reviews', 'action' => 'start', '_method' => 'POST']
-        );
+            [
+                'controller' => 'Reviews',
+                'action' => 'start',
+            ]
+        )->setMethods(['POST', 'PUT']);
     });
 
 配列を使うことで複数の HTTP メソッドとマッチできます。 ``_method`` パラメーターは
 ルーティングキーなので、 URL の解析と URL の生成の両方に使われます。
+メソッド固有のルートの URL を生成するには、URL を生成する際に
+``_method`` キーを含める必要があります。 ::
+
+    $url = Router::url([
+        'controller' => 'Reviews',
+        'action' => 'start',
+        '_method' => 'POST',
+    ]);
 
 指定したホスト名との照合
 ------------------------
@@ -619,18 +741,17 @@ SEO に親和性があるルーティング
 
     Router::scope('/', function($routes) {
         // このルートは http://images.example.com のみマッチします。
+        // 3.5 より前は _host オプションを使用
         $routes->connect(
             '/images/default-logo.png',
-            ['controller' => 'Images', 'action' => 'default'],
-            ['_host' => 'images.example.com']
-        );
+            ['controller' => 'Images', 'action' => 'default']
+        )->setHost('images.example.com');
 
         // このルートは http://*.example.com のみマッチします。
         $routes->connect(
             '/images/old-log.png',
-            ['controller' => 'Images', 'action' => 'oldLogo'],
-            ['_host' => '*.example.com']
-        );
+            ['controller' => 'Images', 'action' => 'oldLogo']
+        )->setHost('images.example.com');
     });
 
 ``_host`` オプションは URL 生成でも使用されます。 ``_host`` オプションで正確なドメインを
@@ -640,15 +761,14 @@ SEO に親和性があるルーティング
     // このルートを持つ場合、
     $routes->connect(
         '/images/old-log.png',
-        ['controller' => 'Images', 'action' => 'oldLogo'],
-        ['_host' => '*.example.com']
-    );
+        ['controller' => 'Images', 'action' => 'oldLogo']
+    )->setHost('images.example.com');
 
     // url を生成するために指定が必要です。
     echo Router::url([
         'controller' => 'Images',
         'action' => 'oldLogo',
-        '_host' => 'images.example.com'
+        '_host' => 'images.example.com',
     ]);
 
 .. versionadded:: 3.4.0
@@ -671,15 +791,15 @@ SEO に親和性があるルーティング
 
 これは、スコープに関係なく、 **以後に** 接続された **全て** のルートに影響します。
 
-拡張子を特定のスコープに制限するために、 :php:meth:`Cake\\Routing\\RouteBuilder::extensions()`
+拡張子を特定のスコープに制限するために、 :php:meth:`Cake\\Routing\\RouteBuilder::setExtensions()`
 メソッドを使用して定義することができます。 ::
 
     Router::scope('/', function ($routes) {
-        $routes->extensions(['json', 'xml']);
-        // ...
+        // 3.5.0 より前は `extensions()` を使用
+        $routes->setExtensions(['json', 'xml']);
     });
 
-これは、 ``extensions()`` が呼ばれた **後の** スコープの中で接続されている
+これは、 ``setExtensions()`` が呼ばれた **後の** スコープの中で接続されている
 全てのルートのために名前付き拡張子を有効にします。それは、ネストされたスコープの中で
 接続されているルートも含まれます。グローバルの :php:meth:`Router::extensions()` メソッドと
 同様に、呼び出し前に接続されたルートは、拡張子を継承しません。
@@ -697,17 +817,15 @@ SEO に親和性があるルーティング
 以下を使ってルートを設定します。 ::
 
     Router::scope('/page', function ($routes) {
-        $routes->extensions(['json', 'xml', 'html']);
+        // 3.5.0 より前は `extensions()` を使用
+        $routes->setExtensions(['json', 'xml', 'html']);
         $routes->connect(
             '/:title',
-            ['controller' => 'Pages', 'action' => 'view'],
-            [
-                'pass' => ['title']
-            ]
-        );
+            ['controller' => 'Pages', 'action' => 'view']
+        )->setPass(['title']);
     });
 
-そして、ルートに対応するリンクを生成するために、以下のようにします。 ::
+そして、ルートに対応するリンクを作成するために、次のようにします。 ::
 
     $this->Html->link(
         'Link title',
@@ -716,6 +834,78 @@ SEO に親和性があるルーティング
 
 拡張子が :doc:`/controllers/components/request-handling` で使われ、それによって
 コンテンツタイプに合わせた自動的なビューの切り替えを行います。
+
+.. _connecting-scoped-middleware:
+
+スコープ付きミドルウェアの接続
+------------------------------
+
+ミドルウェアをアプリケーション全体に適用することができますが、特定のルーティングスコープに
+ミドルウェアを適用すると、ミドルウェアが必要な場所にのみ適用できるため、適用の方法や範囲の
+配慮がいらないミドルウェアにすることができます。
+
+ミドルウェアをスコープに適用する前に、ルートコレクションに登録する必要があります。 ::
+
+    // config/routes.php の中で
+    use Cake\Http\Middleware\CsrfProtectionMiddleware;
+    use Cake\Http\Middleware\EncryptedCookieMiddleware;
+
+    Router::scope('/', function ($routes) {
+        $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
+        $routes->registerMiddleware('cookies', new EncryptedCookiesMiddleware());
+    });
+
+一度登録されると、スコープ付きミドルウェアは特定のスコープに適用されます。 ::
+
+    $routes->scope('/cms', function ($routes) {
+        // CSRF & cookies ミドルウェアを有効化
+        $routes->applyMiddleware('csrf', 'cookies');
+        $routes->get('/articles/:action/*', ['controller' => 'Articles'])
+    });
+
+ネストされたスコープがある状況では、内部スコープは、
+スコープ内に適用されたミドルウェアを継承します。　::
+
+    $routes->scope('/api', function ($routes) {
+        $routes->applyMiddleware('ratelimit', 'auth.api');
+        $routes->scope('/v1', function ($routes) {
+            $routes->applyMiddleware('v1compat');
+            // ここにルートを定義。
+        });
+    });
+
+上記の例では、 ``/v1`` で定義されたルートは 'ratelimit'、 'auth.api'、および 'v1compat'
+ミドルウェアが適用されます。スコープを再度開くと、各スコープ内のルートに適用されたミドルウェアが
+分離されます。 ::
+
+    $routes->scope('/blog', function ($routes) {
+        $routes->applyMiddleware('auth');
+        // ここに blog の認証が必要なアクションを接続
+    });
+    $routes->scope('/blog', function ($routes) {
+        // ここに blog の公開アクションを接続
+    });
+
+上記の例では、 ``/blog`` スコープの2つの用途はミドルウェアを共有しません。
+ただし、これらのスコープは両方とも、そのスコープ内で定義されたミドルウェアを継承します。
+
+ミドルウェアのグループ化
+------------------------
+
+ルートコードを :abbr:`DRY (Do not Repeat Yourself)` に保つ助けになるよう、
+ミドルウェアをグループにまとめることができます。一度まとめられたグループは、
+ミドルウェアのように適用することができます。 ::
+
+    $routes->registerMiddleware('cookie', new EncryptedCookieMiddleware());
+    $routes->registerMiddleware('auth', new AuthenticationMiddleware());
+    $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
+    $routes->middlewareGroup('web', ['cookie', 'auth', 'csrf']);
+
+    // グループの適用
+    $routes->applyMiddleware('web');
+
+.. versionadded:: 3.5.0
+    スコープ付きミドルウェアとミドルウェアグループは 3.5.0 で追加されました。
 
 .. _resource-routes:
 
@@ -729,7 +919,8 @@ recipe コントローラーに REST アクセスできるようにしたい場�
     // config/routes.php 内で...
 
     Router::scope('/', function ($routes) {
-        $routes->extensions(['json']);
+        // 3.5.0 より前は `extensions()` を使用
+        $routes->setExtensions(['json']);
         $routes->resources('Recipes');
     });
 
@@ -748,9 +939,9 @@ POST        /recipes.format       RecipesController::add()
 ----------- --------------------- ------------------------------
 PUT         /recipes/123.format   RecipesController::edit(123)
 ----------- --------------------- ------------------------------
-DELETE      /recipes/123.format   RecipesController::delete(123)
+PATCH       /recipes/123.format   RecipesController::edit(123)
 ----------- --------------------- ------------------------------
-POST        /recipes/123.format   RecipesController::edit(123)
+DELETE      /recipes/123.format   RecipesController::delete(123)
 =========== ===================== ==============================
 
 CakePHP の Router クラスは、いくつかの異なる方法で HTTP リクエストメソッドを判定します。
@@ -906,6 +1097,19 @@ POST リクエストの中の、 \_method の値を使う方法は、ブラウ�
     として使用します。 URL の一貫性を保つために、リソースルートを接続する際に
     ``'inflect' => 'dasherize'`` オプションを使用することを推奨します。
 
+パス要素の変更
+--------------
+
+デフォルトでは、リソースルートは、URL セグメントのリソース名の語形変化された形式を使用します。
+``path`` オプションでカスタム URL セグメントを設定することができます。 ::
+
+    Router::scope('/', function ($routes) {
+        $routes->resources('BlogPosts', ['path' => 'posts']);
+    });
+
+.. versionadded:: 3.5.0
+    ``path`` オプションは 3.5.0 で追加されました。
+
 .. index:: passed arguments
 .. _passed-arguments:
 
@@ -1011,6 +1215,7 @@ URL を生成するときに、特別なルート要素が使用できます。
   現在のスキーマにデフォルト設定されています。
 * ``_host`` リンクのためのホストを設定します。デフォルトは、現在のホストです。
 * ``_port`` 非標準なポートのリンクを作成するときにポートを設定します。
+* ``_method``  URL が存在する HTTP メソッドを定義します。
 * ``_full``  ``true`` にすると、 ``FULL_BASE_URL`` 定数 が
   生成された URL の前に加えられます。
 * ``_ssl`` ``true`` にすると普通の URL から https に変換します。
@@ -1077,6 +1282,16 @@ URL を文字列で生成します。URL パラメーターがルートに一致
          ['controller' => 'Articles', 'action' => 'view'],
          ['routeClass' => 'SlugRoute']
     );
+
+    // また、スコープの中で routeClass を設定することもできます。
+    $routes->scope('/', function ($routes) {
+        // 3.5.0 以前では `routeClass()` を使用
+        $routes->setRouteClass('SlugRoute');
+        $routes->connect(
+             '/:slug',
+             ['controller' => 'Articles', 'action' => 'view']
+        );
+    });
 
 このルートは ``SlugRoute`` のインスタンスを生成し、カスタムパラメーター処理を実装することができます。
 標準的な :term:`プラグイン記法` を使ってプラグインルートクラスを使用できます。

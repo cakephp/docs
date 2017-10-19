@@ -27,7 +27,6 @@ AuthComponent in our AppController::
         {
             // Existing code
 
-            $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
                 'authenticate' => [
                     'Form' => [
@@ -45,14 +44,14 @@ AuthComponent in our AppController::
                 'unauthorizedRedirect' => $this->referer()
             ]);
 
-            // Allow the display action so our pages controller
+            // Allow the display action so our PagesController
             // continues to work. Also enable the read only actions.
             $this->Auth->allow(['display', 'view', 'index']);
         }
     }
 
-We've just told CakePHP that we want to load the ``Flash`` and ``Auth``
-components. In addition, we've customized the configuration of AuthComponent, as
+We've just told CakePHP that we want to load the ``Auth``
+component. We've customized the configuration of AuthComponent, as
 our users table uses ``email`` as the username. Now, if you go any protected
 URL, such as ``/articles/add``, you'll be redirected to **/users/login**, which
 will show an error page as we have not written that code yet. So let's create
@@ -80,10 +79,6 @@ And in **src/Template/Users/login.ctp** add the following::
     <?= $this->Form->button('Login') ?>
     <?= $this->Form->end() ?>
 
-.. note::
-
-   The ``control()`` method is available since 3.4. For prior versions you can
-   use the ``input()`` method instead.
 
 Now that we have a simple login form, we should be able to log in with one of
 the users that has a hashed password.
@@ -148,7 +143,7 @@ Restricting Article Access
 
 Now that users can log in, we'll want to limit users to only edit articles that
 they created. We'll do this using an 'authorization' adapter. Since our
-requirements are pretty simple, we can write some simple code in our
+requirements are basic, we can use a controller hook method in our
 ``ArticlesController``. But before we do that, we'll want to tell the
 ``AuthComponent`` how our application is going to authorize actions. Update your
 ``AppController`` adding the following::
@@ -223,6 +218,12 @@ displayed, add the following to your layout::
     // In src/Template/Layout/default.ctp
     <?= $this->Flash->render() ?>
 
+Next you should add the ``tags`` action to the actions allowed for
+unauthenticated users, by adding the following to ``initialize()`` in
+**src/Controller/ArticlesController.php**::
+
+    $this->Auth->allow(['tags']);
+
 While the above is fairly simplistic it illustrates how you could build more
 complex logic that combines the current user and request data to build flexible
 authorization logic.
@@ -231,7 +232,7 @@ Fixing the Add & Edit Actions
 =============================
 
 While we've blocked access to the edit action, we're still open to users
-changing the ``user_id`` attribute of articles on creation or during edit. We
+changing the ``user_id`` attribute of articles during edit. We
 will solve these problems next. First up is the ``add`` action.
 
 When creating articles, we want to fix the ``user_id`` to be the currently
@@ -245,7 +246,7 @@ logged in user. Replace your add action with the following::
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
 
-            // Added: Set the user_id from the session.
+            // Changed: Set the user_id from the session.
             $article->user_id = $this->Auth->user('id');
 
             if ($this->Articles->save($article)) {
@@ -257,9 +258,7 @@ logged in user. Replace your add action with the following::
         $this->set('article', $article);
     }
 
-Remember to remove the ``user_id`` control from
-**src/Templates/Articles/add.ctp** as well. Next we'll update the ``edit``
-action. Replace the edit method with the following::
+Next we'll update the ``edit`` action. Replace the edit method with the following::
 
     // in src/Controller/ArticlesController.php
 

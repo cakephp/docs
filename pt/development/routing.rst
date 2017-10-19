@@ -11,11 +11,6 @@ Roteamento
     Você pode consultar a versão em inglês deste tópico através do seletor de
     idiomas localizado ao lado direito do campo de buscas da documentação.
 
-.. index:: :controller, :action, :plugin
-.. index:: greedy star, trailing star
-.. _connecting-routes:
-.. _routes-configuration:
-
 Routing
 #######
 
@@ -1369,7 +1364,7 @@ option::
 
 This route would create an instance of ``SlugRoute`` and allow you
 to implement custom parameter handling. You can use plugin route classes using
-standard :term:`plugin syntax`.
+standard :term:`sintaxe plugin`.
 
 Default Route Class
 -------------------

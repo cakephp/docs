@@ -905,10 +905,14 @@ methods are described in each method's own section.)
   by default::
 
       // HTML <option> elements with values 1 and 3 will be rendered preselected
-      echo $this->Form->select('rooms', [
-          'multiple' => true,
-          'value' => [1, 3]
-      ]);
+      echo $this->Form->select(
+          'rooms',
+          [1, 2, 3, 4, 5],
+          [
+              'multiple' => true,
+              'value' => [1, 3]
+          ]
+      );
 
 * ``'empty'`` - Applies to ``radio()`` and ``select()``. Defaults to ``false``.
 
@@ -2421,7 +2425,7 @@ List of Templates
 -----------------
 
 The list of default templates, their default format and the variables they
-expect can be found at the
+expect can be found in the
 `FormHelper API documentation <https://api.cakephp.org/3.x/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
 
 Using Distinct Custom Control Containers

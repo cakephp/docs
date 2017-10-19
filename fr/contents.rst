@@ -71,18 +71,28 @@ Contenu
     core-libraries/time
     core-libraries/xml
 
+.. toctree::
+    :maxdepth: 3
+    :caption: Plugins
+
+    chronos
+    debug-kit
+    migrations
+    elasticsearch
+    upgrade-tool
 
 .. toctree::
     :maxdepth: 3
     :caption: Divers
 
     core-libraries/global-constants-and-functions
-    chronos
-    debug-kit
-    migrations
-    elasticsearch
-    upgrade-tool
     appendices
+
+.. toctree::
+    :maxdepth: 3
+    :caption: Phinx
+
+    phinx
 
 .. todolist::
 

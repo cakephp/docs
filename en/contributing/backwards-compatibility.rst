@@ -12,8 +12,9 @@ features, but are not allowed to break compatibility. Bug fix releases (such as 
 
 .. note::
 
-    CakePHP started following semantic versioning in 2.0.0. These
-    rules do not apply to 1.x.
+    Deprecations are removed with the next major version of the framework.
+    It is advised to early on adapt your code already each minor as outlined in
+    the deprecation comments and the migration guides.
 
 To clarify what changes you can expect in each release tier we have more
 detailed information for developers using CakePHP, and for developers working on
@@ -159,6 +160,8 @@ In a minor release you can:
 +-------------------------------+--------------------------+
 | Remove a default value from   | No                       |
 | an existing argument          |                          |
++-------------------------------+--------------------------+
+| Change method type void       | Yes                      |
 +-------------------------------+--------------------------+
 
 

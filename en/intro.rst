@@ -8,7 +8,7 @@ work well together or separately.
 The goal of this overview is to introduce the general concepts in CakePHP, and
 give you a quick overview of how those concepts are implemented in CakePHP. If
 you are itching to get started on a project, you can :doc:`start with the
-tutorial </tutorials-and-examples/bookmarks/intro>`, or :doc:`dive into the docs
+tutorial </tutorials-and-examples/cms/installation>`, or :doc:`dive into the docs
 </topics>`.
 
 Conventions Over Configuration
@@ -70,7 +70,7 @@ or a XML formatted result for others to consume::
     // In a view template file, we'll render an 'element' for each user.
     <?php foreach ($users as $user): ?>
         <li class="user">
-            <?= $this->element('user', ['user' => $user]) ?>
+            <?= $this->element('user_info', ['user' => $user]) ?>
         </li>
     <?php endforeach; ?>
 
@@ -159,7 +159,7 @@ features in CakePHP are:
 
 The next obvious steps are to :doc:`download CakePHP </installation>`, read the
 :doc:`tutorial and build something awesome
-</tutorials-and-examples/bookmarks/intro>`.
+</tutorials-and-examples/cms/installation>`.
 
 Additional Reading
 ==================

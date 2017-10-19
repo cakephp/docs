@@ -129,6 +129,11 @@ articles. First, update the ``add`` action to look like::
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
+
+                // Hardcoding the user_id is temporary, and will be removed later
+                // when we build authentication out.
+                $article->user_id = 1;
+
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
                     return $this->redirect(['action' => 'index']);
@@ -243,10 +248,6 @@ from CakePHP informing you that the controller action does not exist. Let's
 implement that missing method now. In **src/Controller/ArticlesController.php**
 add the following::
 
-    // add this use statement right below the namespace declaration to import
-    // the Query class
-    use Cake\ORM\Query;
-
     public function tags()
     {
         // The 'pass' key is provided by CakePHP and contains all
@@ -293,6 +294,10 @@ application's logic in the model layer. If you were to visit the
 **/articles/tagged** URL now you would see an error that the ``findTagged()``
 method has not been implemented yet, so let's do that. In
 **src/Model/Table/ArticlesTable.php** add the following::
+
+    // add this use statement right below the namespace declaration to import
+    // the Query class
+    use Cake\ORM\Query;
 
     // The $query argument is a query builder instance.
     // The $options array will contain the 'tags' option we passed
@@ -471,9 +476,13 @@ to **src/Model/Table/ArticlesTable.php**::
         return $out;
     }
 
+If you now create or edit articles, you should be able to save tags as a comma
+separated list of tags, and have the tags and linking records automatically
+created.
+
 While this code is a bit more complicated than what we've done so far, it helps
 to showcase how powerful the ORM in CakePHP is. You can manipulate query
 results using the :doc:`/core-libraries/collections` methods, and handle
 scenarios where you are creating entities on the fly with ease.
 
-Next we'll be adding :doc:`authentication <authentication>`.
+Next we'll be adding :doc:`authentication </tutorials-and-examples/cms/authentication>`.

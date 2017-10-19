@@ -11,17 +11,17 @@ level folders you should see:
 - The *plugins* folder is where the :doc:`/plugins` your application uses are stored.
 - The *logs* folder normally contains your log files, depending on your log
   configuration.
-- The *src* folder will be where your application’s files will be placed.
+- The *src* folder will be where your application’s source files will be placed.
 - The *tests* folder will be where you put the test cases for your application.
 - The *tmp* folder is where CakePHP stores temporary data. The actual data it
   stores depends on how you have CakePHP configured, but this folder
   is usually used to store translation messages, model descriptions and sometimes
   session information.
 - The *vendor* folder is where CakePHP and other application dependencies will
-  be installed by composer. Editing these files is not advised, as composer will
-  overwrite your changes next time you update.
+  be installed by `Composer <http://getcomposer.org>`_. Editing these files is not
+  advised, as Composer will overwrite your changes next time you update.
 - The *webroot* directory is the public document root of your application. It
-  contains all the files you want to be publically reachable.
+  contains all the files you want to be publicly reachable.
 
   Make sure that the *tmp* and *logs* folders exist and are writable,
   otherwise the performance of your application will be severely

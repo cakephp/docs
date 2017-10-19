@@ -3,6 +3,18 @@ Debug Kit
 
 DebugKit est un plugin supporté par la core team qui fournit une toolbar pour
 vous aider à debugger les applications CakePHP plus facilement.
+DebugKit fournit une barre d'outils de débuggage et des outils de débuggage
+améliorés pour les applications CakePHP. Il vous permet de voir rapidement les
+données de configuration, les messages de logs, les requêtes SQL et des données
+de temps d'exécution pour votre application.
+ 
+.. warning:: 
+ 
+    DebugKit est uniquement destiné à être utilisé dans des environnements de
+    développement local à un seul utilisateur. Vous devez éviter d'utiliser
+    DebugKit dans les environnements de développement partagés, les
+    environnements de stagging où vous devez garder les données de configuration
+    et les variables d'environnement cachées.
 
 Installation
 ============

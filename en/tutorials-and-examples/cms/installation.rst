@@ -28,9 +28,6 @@ should be the same version your command line interface (CLI) PHP is.
 Getting CakePHP
 ===============
 
-.. TODO::
-    Should we use Oven instead?
-
 The easiest way to install CakePHP is to use Composer. Composer is a simple way
 of installing CakePHP from your terminal or command line prompt. First, you'll
 need to download and install Composer if you haven't done so already. If you
@@ -92,6 +89,9 @@ completed, your directory setup should look something like the following::
 Now might be a good time to learn a bit about how CakePHP's directory structure
 works: check out the :doc:`/intro/cakephp-folder-structure` section.
 
+If you get lost during this tutorial, you can see the finished result `on GitHub
+<https://github.com/cakephp/cms-tutorial>`_.
+
 Checking our Installation
 =========================
 
@@ -110,8 +110,8 @@ home page. Before you can do that, you'll need to start the development server:
 
 This will start PHP's built-in webserver on port 8765. Open up
 **http://localhost:8765** in your web browser to see the welcome page. All the
-bullet points should be checkmarks other than CakePHP being able to connect to
+bullet points should be green chef hats other than CakePHP being able to connect to
 your database. If not, you may need to install additional PHP extensions, or set
 directory permissions.
 
-Next, we will build our :doc:`Database and create our first model <database>`.
+Next, we will build our :doc:`Database and create our first model </tutorials-and-examples/cms/database>`.

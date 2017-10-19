@@ -378,6 +378,7 @@ The available configuration options are:
 - ``secure`` Whether or not the cookie will be set with the Secure flag. That is,
   the cookie will only be set on a HTTPS connection and any attempt over normal HTTP
   will fail. Defaults to ``false``.
+- ``httpOnly`` Whether or not the cookie will be set with the HttpOnly flag. Defaults to ``false``.
 - ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
   will also require configuring FormHelper.
 
@@ -425,8 +426,9 @@ application.
 #. Create an ``Application`` class. See the :ref:`using-middleware` section
    above for how to do that. Or copy the example in the `app skeleton
    <https://github.com/cakephp/app/tree/master/src/Application.php>`__.
+#. Create **config/requirements.php** if it doesn't exist and add the contents from the `app skeleton <https://github.com/cakephp/app/blob/master/config/requirements.php>`__.
 
-Once those two steps are complete, you are ready to start re-implementing any
+Once those three steps are complete, you are ready to start re-implementing any
 application/plugin dispatch filters as HTTP middleware.
 
 If you are running tests you will also need to update your

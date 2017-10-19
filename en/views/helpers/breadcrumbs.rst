@@ -121,7 +121,7 @@ It includes four templates, with the following default declaration::
         'wrapper' => '<ul{{attrs}}>{{content}}</ul>',
         'item' => '<li{{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}',
         'itemWithoutLink' => '<li{{attrs}}><span{{innerAttrs}}>{{title}}</span></li>{{separator}}',
-        'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{custom}}{{separator}}</span></li>'
+        'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>'
     ]
 
 You can easily customize them using the ``templates()`` method from the

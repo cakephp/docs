@@ -7,6 +7,8 @@ an empty database for use in this tutorial, with a name of your choice, e.g.
 ``cake_cms``. You can execute the following SQL to create the necessary
 tables::
 
+    USE cake_cms;
+
     CREATE TABLE users (
         id INT AUTO_INCREMENT PRIMARY KEY,
         email VARCHAR(255) NOT NULL,
@@ -53,8 +55,8 @@ tables::
     (1, 'First Post', 'first-post', 'This is the first post.', 1, now(), now());
 
 You may have noticed that the ``articles_tags`` table used a composite primary
-key. CakePHP supports composite primary keys almost everywhere, making it easier
-to build multi-tenanted applications.
+key. CakePHP supports composite primary keys almost everywhere allowing you to
+have simpler schemas that don't require additional ``id`` columns.
 
 The table and column names we used were not arbitrary. By using CakePHP's
 :doc:`naming conventions </intro/conventions>`, we can leverage CakePHP more
@@ -92,7 +94,7 @@ might look something like the following::
     ];
 
 Once you've saved your **config/app.php** file, you should see that 'CakePHP is
-able to connect to the database' section have a checkmark.
+able to connect to the database' section have a green chef hat.
 
 .. note::
 
@@ -166,5 +168,5 @@ property which controls how properties can be modified by
 :ref:`entities-mass-assignment`.
 
 We can't do much with our models right now, so next we'll create our first
-:doc:`Controller and Template <articles-controller>` to allow us to interact
+:doc:`Controller and Template </tutorials-and-examples/cms/articles-controller>` to allow us to interact
 with our model.

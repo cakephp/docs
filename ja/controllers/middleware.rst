@@ -2,13 +2,32 @@
 ############
 
 ミドルウェアオブジェクトは、再利用可能で構成可能なリクエスト処理、あるいは
-レスポンス構築処理の層でアプリケーションを‘ラップ’する機能を提供します。
+レスポンス構築処理の層でアプリケーションを「ラップ」する機能を提供します。
+視覚的には、アプリケーションは中央で終了し、ミドルウェアはタマネギのように
+アプリの周囲を包み込みます。ここでは、Routes、Assets、例外処理、および
+CORS ヘッダーミドルウェアでラップされたアプリケーションを確認できます。
+
+.. image:: /_static/img/middleware-setup.png
+
+アプリケーションによってリクエストが処理されると、最も外側のミドルウェアから
+リクエストが入力されます。各ミドルウェアは、リクエスト/レスポンスを次のレイヤーに委譲するか、
+またはレスポンスを返すことができます。レスポンスを返すことで、下位層がリクエストを見なくなります。
+たとえば、開発中にプラグインの画像のリクエストを処理する AssetMiddleware がその例です。
+
+.. image:: /_static/img/middleware-request.png
+
+ミドルウェアがリクエストを処理するアクションを受け取らない場合、コントローラーが用意され、
+そのアクションを呼び出すか、例外が発生してエラーページが生成されます。
+
 ミドルウェアは CakePHP における新しい HTTP スタックの部分で、 PSR-7 のリクエスト
 およびレスポンスのインターフェイスを活用しています。 PSR-7 標準の活用によって、
 `Packagist <https://packagist.org>`__ で利用可能な、あらゆる PSR-7 互換の
 ミドルウェアを使うことができます。
 
-CakePHP はいくつかのミドルウェアを既成で提供します。
+CakePHP のミドルウェア
+=======================
+
+CakePHP はウェブアプリケーションの一般的なタスクを処理するいくつかのミドルウェアを提供します。
 
 * ``Cake\Error\Middleware\ErrorHandlerMiddleware`` はラップされたミドルウェアからくる
   例外を捕まえ、 :doc:`/development/errors` の例外ハンドラーを使ってエラーページを描画します。
@@ -19,16 +38,25 @@ CakePHP はいくつかのミドルウェアを既成で提供します。
   リクエストにルーティングパラメーターを割り当てるために ``Router`` を使用します。
 * ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` はブラウザーによって送られる
   ``Accept-Language`` ヘッダーによって自動で言語を切り替えられるようにします。
+* ``Cake\Http\Middleware\SecurityHeadersMiddleware`` は、 ``X-Frame-Options``
+  のようなセキュリティに関連するヘッダーをレスポンスに簡単に追加することができます。
+* ``Cake\Http\Middleware\EncryptedCookieMiddleware`` は、難読化されたデータで
+  Cookie を操作する必要がある場合に備えて、暗号化された Cookie を操作する機能を提供します。
+* ``Cake\Http\Middleware\CsrfProtectionMiddleware`` は、アプリケーションに CSRF
+  保護を追加します。
 
 .. _using-middleware:
 
 ミドルウェアの使用
 ==================
 
-``App\Application`` クラスの ``middleware`` メソッドの中でミドルウェアを加えることができます。
+ミドルウェアは、アプリケーションの全体、または個々のルーティングスコープに適用できます。
+
+全てのリクエストにミドルウェアを適用するには、 ``App\Application`` クラスの
+``middleware`` メソッドを使用してください。
 もし ``App\Application`` クラスを持っていない場合、詳しくは :ref:`adding-http-stack`
 の当該のセクションを参照してください。アプリケーションの ``middleware`` フックメソッドは
-リクエスト処理の中で早くに呼ばれて、 ``Middleware`` オブジェクトを加えることができます。 ::
+リクエスト処理の開始時に呼ばれて、 ``MiddlewareQueue`` オブジェクトを加えることができます。 ::
 
     namespace App;
 
@@ -37,11 +65,11 @@ CakePHP はいくつかのミドルウェアを既成で提供します。
 
     class Application extends BaseApplication
     {
-        public function middleware($middlewareStack)
+        public function middleware($middlewareQueue)
         {
             // ミドルウェアのキューにエラーハンドラーを結びつけます。
-            $middlewareStack->add(new ErrorHandlerMiddleware());
-            return $middlewareStack;
+            $middlewareQueue->add(new ErrorHandlerMiddleware());
+            return $middlewareQueue;
         }
     }
 
@@ -50,19 +78,19 @@ CakePHP はいくつかのミドルウェアを既成で提供します。
         $layer = new \App\Middleware\CustomMiddleware;
 
         // 追加されたミドルウェアは行列の末尾になります。
-        $middlewareStack->add($layer);
+        $middlewareQueue->add($layer);
 
         // 追加されたミドルウェアは行列の先頭になります。
-        $middlewareStack->prepend($layer);
+        $middlewareQueue->prepend($layer);
 
         // 特定の位置に挿入します。もし位置が範囲外の場合、
         // 末尾に追加されます。
-        $middlewareStack->insertAt(2, $layer);
+        $middlewareQueue->insertAt(2, $layer);
 
         // 別のミドルウェアの前に挿入します。
         // もしその名前のクラスが見つからない場合、
         // 例外が発生します。
-        $middlewareStack->insertBefore(
+        $middlewareQueue->insertBefore(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
@@ -70,10 +98,13 @@ CakePHP はいくつかのミドルウェアを既成で提供します。
         // 別のミドルウェアの後に挿入します。
         // もしその名前のクラスが見つからない場合、
         // ミドルウェアは末尾に追加されます。
-        $middlewareStack->insertAfter(
+        $middlewareQueue->insertAfter(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
+
+アプリケーション全体にミドルウェアを適用するだけでなく、 :ref:`connecting-scoped-middleware`
+を使用して、特定のルートセットにミドルウェアを適用することができます。
 
 プラグインからのミドルウェア追加
 --------------------------------
@@ -88,8 +119,8 @@ CakePHP はいくつかのミドルウェアを既成で提供します。
 
     EventManager::instance()->on(
         'Server.buildMiddleware',
-        function ($event, $middlewareStack) {
-            $middlewareStack->add(new ContactPluginMiddleware());
+        function ($event, $middlewareQueue) {
+            $middlewareQueue->add(new ContactPluginMiddleware());
         });
 
 PSR-7 リクエストとレスポンス
@@ -107,10 +138,10 @@ PSR-7 リクエストとレスポンス
 メソッドを提供します。ヘッダーと対話するには、このようにします。 ::
 
     // ヘッダーをテキストとして読みます
-    $value = $request->getHeaderLine(‘Content-Type’);
+    $value = $request->getHeaderLine('Content-Type');
 
     // ヘッダーを配列として読みます
-    $value = $request->getHeader(‘Content-Type’);
+    $value = $request->getHeader('Content-Type');
 
     // すべてのヘッダーを連想配列として読みます
     $headers = $request->getHeaders();
@@ -238,16 +269,139 @@ PSR-7 リクエストとレスポンス
 
     class Application
     {
-        public function middleware($middlewareStack)
+        public function middleware($middlewareQueue)
         {
             // 単純なミドルウェアをキューに追加します
-            $middlewareStack->add(new TrackingCookieMiddleware());
+            $middlewareQueue->add(new TrackingCookieMiddleware());
 
             // もう少しミドルウェアをキューに追加します
 
-            return $middlewareStack;
+            return $middlewareQueue;
         }
     }
+
+.. _security-header-middleware:
+
+セキュリティヘッダーの追加
+==========================
+
+``SecurityHeaderMiddleware`` レイヤーは、アプリケーションにセキュリティ関連の
+ヘッダーを簡単に適用することができます。いったんミドルウェアをセットアップすると、
+レスポンスに次のヘッダーを適用します。
+
+* ``X-Content-Type-Options``
+* ``X-Download-Options``
+* ``X-Frame-Options``
+* ``X-Permitted-Cross-Domain-Policies``
+* ``Referrer-Policy``
+
+このミドルウェアは、アプリケーションのミドルウェアスタックに適用される前に、
+流れるようなインターフェースを使用して設定されます。 ::
+
+    use Cake\Http\Middleware\SecurityHeadersMiddleware;
+
+    $headers = new SecurityHeadersMiddleware();
+    $headers
+        ->setCrossDomainPolicy()
+        ->setReferrerPolicy()
+        ->setXFrameOptions()
+        ->setXssProtection()
+        ->noOpen()
+        ->noSniff();
+
+    $middlewareQueue->add($headers);
+
+.. versionadded:: 3.5.0
+    ``SecurityHeadersMiddleware`` は 3.5.0 で追加されました。
+
+.. _encrypted-cookie-middleware:
+
+クッキー暗号化ミドルウェア
+==========================
+
+アプリケーションが難読化してユーザーの改ざんから保護したいデータを含むクッキーがある場合、
+CakePHP のクッキー暗号化ミドルウェアを使用して、ミドルウェア経由でクッキーデータを透過的に
+暗号化や復号化することができます。 クッキーデータは、OpenSSL 経由で AES を使用して
+暗号化されます。 ::
+
+    use Cake\Http\Middleware\EncryptedCookieMiddleware;
+
+    $cookies = new EncryptedCookieMiddleware(
+        // 保護するクッキーの名前
+        ['secrets', 'protected'],
+        Configure::read('Security.cookieKey')
+    );
+
+    $middlewareQueue->add($cookies);
+
+.. note::
+    クッキーデータで使用する暗号化キーは、クッキーデータ *のみ* に使用することを
+    お勧めします。
+
+このミドルウェアが使用する暗号化アルゴリズムとパディングスタイルは、
+CakePHP の以前のバージョンの ``CookieComponent`` と後方換性があります。
+
+.. versionadded:: 3.5.0
+    ``EncryptedCookieMiddleware`` は 3.5.0 で追加されました。
+
+.. _csrf-middleware:
+
+クロスサイトリクエストフォージェリー (CSRF) ミドルウェア
+========================================================
+
+CSRF 保護は、ミドルウェアスタックに ``CsrfProtectionMiddleware`` を適用することにより、
+アプリケーション全体または特定のスコープに適用できます。 ::
+
+    use Cake\Http\Middleware\CsrfProtectionMiddleware;
+
+    $options = [
+        // ...
+    ];
+    $csrf = new CsrfProtectionMiddleware($options);
+
+    $middlewareQueue->add($csrf);
+
+オプションは、ミドルウェアのコンストラクタに渡すことができます。
+利用可能な設定オプションは次の通りです。
+
+- ``cookieName`` 送信するクッキー名。デフォルトは ``csrfToken`` 。
+- ``expiry`` CSRF トークンの有効期限。デフォルトは、ブラウザーセッション。
+- ``secure`` クッキーにセキュアフラグをセットするかどうか。
+  これは、HTTPS 接続でのみクッキーが設定され、通常の HTTP 経由での試みは失敗します。
+  デフォルトは ``false`` 。
+- ``httpOnly`` クッキーに HttpOnly フラグをセットするかどうか。デフォルトは ``false`` 。
+- ``field`` 確認するフォームフィールド。デフォルトは ``_csrfToken`` 。
+  これを変更するには、FormHelper の設定も必要です。
+
+有効にすると、リクエストオブジェクトの現在の CSRF トークンにアクセスできます。 ::
+
+    $token = $this->request->getParam('_csrfToken');
+
+.. versionadded:: 3.5.0
+    ``CsrfProtectionMiddleware`` は 3.5.0 で追加されました。
+
+
+FormHelper との統合
+-------------------
+
+``CsrfProtectionMiddleware`` は、シームレスに ``FormHelper`` と統合されます。
+``FormHelper`` でフォームを作成するたびに、CSRF トークンを含む隠しフィールドを
+挿入します。
+
+.. note::
+
+    CSRF 保護を使用する場合は、常に ``FormHelper`` でフォームを開始する必要があります。
+    そうしないと、各フォームに hidden 入力を手動で作成する必要があります。
+
+CSRF 保護と AJAX リクエスト
+---------------------------
+
+リクエストデータパラメータに加えて、特別な ``X-CSRF-Token`` ヘッダーを通じて
+CSRF トークンを送信することができます。ヘッダーを使用すると、重厚な JavaScript
+アプリケーションや XML/JSON ベースの API エンドポイントに CSRF トークンを簡単に
+統合することができます。
+
+CSRF トークンは、クッキーの ``csrfToken`` で取得されます。
 
 .. _adding-http-stack:
 
@@ -264,8 +418,11 @@ PSR-7 リクエストとレスポンス
    セクションを参照してください。もしくは `app スケルトン
    <https://github.com/cakephp/app/tree/master/src/Application.php>`__
    の中の例をコピーしてください。
+#. **config/requirements.php** が作成します。もし存在しない場合、 `app スケルトン
+   <https://github.com/cakephp/app/blob/master/config/requirements.php>`__ から
+   内容を追加してください。
 
-これら二つの手順が完了すると、アプリケーション／プラグインのディスパッチフィルターを
+これら三つの手順が完了すると、アプリケーション／プラグインのディスパッチフィルターを
 HTTP ミドルウェアとして再実装を始める準備が整います。
 
 もし、テストを実行する場合は、 `app スケルトン

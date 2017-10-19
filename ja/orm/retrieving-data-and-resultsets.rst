@@ -535,9 +535,10 @@ contain に条件を渡す
 ``contain()`` を使う際、関連によって返される列を限定し、条件によってフィルターすることができます。 ::
 
     // コントローラーやテーブルのメソッド内で
+    // 3.5.0 より前は、 contain(['Comments' => function () { ... }]) を使用
 
     $query = $articles->find()->contain('Comments', function ($q) {
-       return $q
+        return $q
             ->select(['body', 'author_id'])
             ->where(['Comments.approved' => true]);
     });
