@@ -10,3 +10,18 @@ Extendendo o Bake
 
     Você pode consultar a versão em inglês deste tópico através do seletor de
     idiomas localizado ao lado direito do campo de buscas da documentação.
+
+Eventos do Bake
+===============
+
+Sintaxe de Template do Bake
+===========================
+
+Criando um Theme para o Bake
+============================
+
+Customizando os Templates do Bake
+=================================
+
+Criando Novas Opções de Comando para o Bake
+===========================================
