@@ -119,8 +119,8 @@ disponível usando o ``--help`` option::
 Temas com Bake
 ==============
 
-A opção de tema é comum a todos os comandos do bake, e permite mudar os arquivos de modelo usados no bake. Para criar seus próprios modelos, veja o
-:ref:`bake theme creation documentation <creating-a-bake-theme>`.
+A opção de tema é comum a todos os comandos do bake, e permite mudar os arquivos de modelo usados no bake. Para criar seus próprios modelos, veja a
+:ref:`documentação de criação de themes para o bake <criando-um-theme-para-o-bake>`.
 
 .. meta::
     :title lang=en: Code Generation with Bake
