@@ -116,12 +116,12 @@ disponível usando o ``--help`` option::
                        Bake|Migrations)
     --verbose, -v      Enable verbose output.
 
-Temas com Bake
-==============
+Temas para o Bake
+=================
 
 A opção de tema é comum a todos os comandos do bake, e permite mudar os arquivos de modelo usados no bake. Para criar seus próprios modelos, veja a
 :ref:`documentação de criação de themes para o bake <criando-um-theme-para-o-bake>`.
 
 .. meta::
-    :title lang=en: Code Generation with Bake
-    :keywords lang=en: command line interface,functional application,database,database configuration,bash script,basic ingredients,project,model,path path,code generation,scaffolding,windows users,configuration file,few minutes,config,iew,shell,models,running,mysql
+    :title lang=pt: Geração de código com bake
+    :keywords lang=pt: command line interface,functional application,database,database configuration,bash script,basic ingredients,project,model,path path,code generation,scaffolding,windows users,configuration file,few minutes,config,iew,shell,models,running,mysql
