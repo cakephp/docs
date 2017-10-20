@@ -96,7 +96,7 @@ Inserir registros no banco de dados é geralmente uma questão de algumas linhas
         'created' => new DateTime('now')
     ], ['created' => 'datetime']);
 
-Executando . de Atualização
+Executando Instruções de Atualização
 ------------------------------------
 
 Atualizar registros no banco de dados é igualmente intuitivo, o exemplo a seguir
@@ -105,7 +105,6 @@ atualizará o artigo com **id** 10::
     use Cake\Datasource\ConnectionManager;
     $connection = ConnectionManager::get('default');
     $connection->update('articles', ['title' => 'New title'], ['id' => 10]);
-
 
 Executando Instruções de Exclusão
 ---------------------------------
@@ -122,12 +121,11 @@ dados, o exemplo a seguir exclui o artigo com **id** 10::
 Configuração
 ============
 
-Por convenção, as conexões de banco de dados são configuradas em **config/app.php**. As
-informações de conexão definida nesse arquivo são alimentadas em 
-:php:class:`Cake\\Datasource\\ConnectionManager`, criando a configuração de
-conexão que sua aplicação usará. Exemplo de informação de conexão pode ser
-encontrada em **config/app.default.php**. Um exemplo de configuração de conexão
-poderia parecer com::
+Por convenção, as conexões do banco de dados são configuradas em **config/app.php**. As
+informações  de conexão definidas neste arquivo são alimentadas em
+:php:class:`Cake\\Datasource\\ConnectionManager` criando a configuração de conexão que
+sua aplicação usará. Exemplos de informações de conexão podem ser encontradas em
+**config/app.default.php**. Uma configuração seria mais ou menos assim::
 
     'Datasources' => [
         'default' => [
@@ -147,7 +145,7 @@ poderia parecer com::
 O exemplo acima criará a conexão 'default', com os parâmetros fornecidos. Você pode
 definir quantas conexões quiser no seu arquivo de configuração. Você também pode
 definir conexões adicionais em tempo de execução usando o método
-:php:meth:`Cake\\Datasource\\ConnectionManager::config()`. Um exemplo disso seria::
+:php:meth:`Cake\\Datasource\\ConnectionManager::config()`. Um bom exemplo disso seria::
 
     use Cake\Datasource\ConnectionManager;
 
@@ -163,6 +161,7 @@ definir conexões adicionais em tempo de execução usando o método
         'timezone' => 'UTC',
         'cacheMetadata' => true,
     ]);
+
 
 
 As opções de configuração também podem ser fornecidas como uma string :term:`DSN`.
@@ -436,6 +435,7 @@ aplicativo, devemos fazer o seguinte::
     Type::map('json', 'App\Database\Type\JsonType');
 
 .. versionadded:: 3.3.0
+
     A classe JsonType descrita neste exemplo foi adicionada ao core.
 
 Nós podemos então sobrecarregar os dados de schema refletido para usar nosso novo tipo, e
@@ -585,6 +585,7 @@ objetos de valores imutáveis. Isso é melhor feito no arquivo
     Type::build('timestamp')->useImmutable();
 
 .. note::
+
     Novas aplicações terão objetos imutáveis habilitado por padrão.
 
 Classes de Conexão
@@ -737,7 +738,6 @@ individuais usando ``bindValue``::
     $stmt = $conn->prepare(
         'SELECT * FROM articles WHERE published = ? AND created > ?'
     );
-
     // Vincular vários valores
     $stmt->bind(
         [true, new DateTime('2013-01-01')],
@@ -765,7 +765,7 @@ Ao criar instruções, você também pode usar chave de array nomeadas em vez de
     $stmt->bindValue('created', new DateTime('2013-01-01'), 'date');
 
 .. warning::
-    
+
     Você não pode misturar posicionais e chave de array nomeadas na mesma instrução.
 
 Executando & Obtendo Linhas
@@ -790,7 +790,7 @@ a instrução::
     }
 
 .. note::
-    
+
     Lendo linhas através de iteração irá obter linhas no modo 'both'. Isso significa que você
     obterá os resultados indexados numericamente e indexados associativamente.
 
@@ -801,7 +801,6 @@ Depois de executar uma declaração, você pode buscar o número de linhas afeta
 
     $rowCount = count($stmt);
     $rowCount = $stmt->rowCount();
-
 
 Verificando Códigos de Erro
 ---------------------------
@@ -856,7 +855,7 @@ requisições web::
     ]);
 
 .. note::
-    
+
     Log de consultas destina-se apenas para usos de depuração/desenvolvimento. 
     Você nunca deve habilitar o log de consultas em ambiente de produção, pois isso
     afetará negativamente o desempenho de sua aplicação.
@@ -937,7 +936,7 @@ bancos de dados. Por exemplo, para criar um banco de dados::
     $connection->query("CREATE DATABASE IF NOT EXISTS my_database");
 
 .. note::
-    
+
     Ao criar um banco de dados, é uma boa idéia definir o conjunto de caracteres e os 
     parâmetros de collation. Se esses valores estiverem faltando, o banco de dados 
     definirá quaisquer valores padrão de sistema que ele use.

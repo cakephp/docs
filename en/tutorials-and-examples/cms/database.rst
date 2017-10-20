@@ -168,5 +168,5 @@ property which controls how properties can be modified by
 :ref:`entities-mass-assignment`.
 
 We can't do much with our models right now, so next we'll create our first
-:doc:`Controller and Template <articles-controller>` to allow us to interact
+:doc:`Controller and Template </tutorials-and-examples/cms/articles-controller>` to allow us to interact
 with our model.

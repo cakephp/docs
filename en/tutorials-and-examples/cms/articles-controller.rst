@@ -549,4 +549,4 @@ that uses JavaScript to do a POST request deleting our article.
     article.
 
 With a basic articles management setup, we'll create the  :doc:`basic actions
-for our Tags and Users tables <tags-and-users>`.
+for our Tags and Users tables </tutorials-and-examples/cms/tags-and-users>`.
