@@ -23,7 +23,7 @@ To use themes, set the theme name in your controller's action or
 
 Theme template files need to be within a plugin with the same name. For example,
 the above theme would be found in **plugins/Modern/src/Template**.
-It's important to remember that CakePHP expects CamelCase plugin/theme names. Beyond
+It's important to remember that CakePHP expects PascalCase plugin/theme names. Beyond
 that, the folder structure within the **plugins/Modern/src/Template** folder is
 exactly the same as **src/Template/**.
 
