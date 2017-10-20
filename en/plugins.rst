@@ -215,6 +215,8 @@ any other helper in your view, such as::
 
     echo $this->ContactInfo->address($contact);
 
+.. _plugin-create-your-own:
+
 Creating Your Own Plugins
 =========================
 
