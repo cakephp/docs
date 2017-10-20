@@ -17,6 +17,8 @@ The following is a list of deprecated methods, properties and behaviors. These
 features will continue to function until 4.0.0 after which they will be removed.
 
 * ``bin/cake orm_cache`` is now ``bin/cake schema_cache``.
+* ``Cake\Cache\Engine\ApcEngine`` has been renamed to
+  ``Cake\Cache\Engine\ApcuEngine`` to better reflect the extension name.
 
 
 Behavior Changes

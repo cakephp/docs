@@ -23,9 +23,10 @@ to implement your own caching systems. The built-in caching engines are:
   atomic operations. However, since disk storage is often quite cheap,
   storing large objects, or elements that are infrequently written
   work well in files.
-* ``ApcCache`` APC cache uses the PHP `APCu <http://php.net/apcu>`_ extension.
+* ``ApcuEngine`` APCu cache uses the PHP `APCu <http://php.net/apcu>`_ extension.
   This extension uses shared memory on the webserver to store objects.
-  This makes it very fast, and able to provide atomic read/write features.
+  This makes it very fast, and able to provide atomic read/write features. Prior
+  to 3.6.0 ``ApcuEngine`` was named ``ApcEngine``.
 * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
   extension. Wincache is similar to APC in features and performance, but
   optimized for Windows and IIS.
@@ -56,7 +57,7 @@ two cache configurations internally.  ``_cake_core_`` is used for storing file
 maps, and parsed results of
 :doc:`/core-libraries/internationalization-and-localization` files.
 ``_cake_model_``, is used to store schema descriptions for your applications
-models. If you are using APC or Memcached you should make sure to set unique keys
+models. If you are using APCu or Memcached you should make sure to set unique keys
 for the core caches.  This will prevent multiple applications from overwriting
 each other's cached data.
 
@@ -322,7 +323,7 @@ Clearing Cached Data
 
 .. php:staticmethod:: clear($check, $config = 'default')
 
-Destroy all cached values for a cache configuration. In engines like: Apc,
+Destroy all cached values for a cache configuration. In engines like: Apcu,
 Memcached, and Wincache, the cache configuration's prefix is used to remove
 cache entries. Make sure that different cache configurations have different
 prefixes::
@@ -342,7 +343,7 @@ that requires manual eviction of cached data.
 
 .. note::
 
-    Because APC and Wincache use isolated caches for webserver and CLI they
+    Because APCu and Wincache use isolated caches for webserver and CLI they
     have to be cleared separately (CLI cannot clear webserver and vice versa).
 
 Using Cache to Store Counters
@@ -373,7 +374,7 @@ After setting an integer value you can manipulate it using ``increment()`` and
 .. note::
 
     Incrementing and decrementing do not work with FileEngine. You should use
-    APC, Wincache, Redis or Memcached instead.
+    APCu, Wincache, Redis or Memcached instead.
 
 
 Using Cache to Store Common Query Results
@@ -551,4 +552,4 @@ The required API for a CacheEngine is
 
 .. meta::
     :title lang=en: Caching
-    :keywords lang=en: uniform api,xcache,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apc,memcache,queries,cakephp,elements,servers,memory
+    :keywords lang=en: uniform api,xcache,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apcu,apc,memcache,queries,cakephp,elements,servers,memory
