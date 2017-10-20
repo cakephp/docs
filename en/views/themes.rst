@@ -1,10 +1,11 @@
 Themes
 ######
 
+Themes in CakePHP are simply plugins that focus on providing template files.
+See the section on :ref:`plugin-create-your-own.
 You can take advantage of themes, making it easy to switch the look and feel of
-your page quickly. Themes in CakePHP are simply plugins that focus on providing
-template files. In addition to template files, they can also provide helpers and
-cells if your theming requires that. When using cells and helpers from your
+your page quickly. In addition to template files, they can also provide helpers
+and cells if your theming requires that. When using cells and helpers from your
 theme, you will need to continue using the :term:`plugin syntax`.
 
 To use themes, set the theme name in your controller's action or
