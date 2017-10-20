@@ -186,7 +186,7 @@ is given the most likely content type is returned. If $type is an
 array the first type the client accepts will be returned.
 Preference is determined primarily by the file extension parsed by
 Router if one has been provided, and secondly by the list of
-content-types in ``HTTP\_ACCEPT``::
+content-types in ``HTTP_ACCEPT``::
 
     $this->RequestHandler->prefers('json');
 
