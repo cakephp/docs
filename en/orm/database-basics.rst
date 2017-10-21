@@ -310,49 +310,52 @@ the same names for similar data types, CakePHP provides a set of abstracted
 data types for use with the database layer. The types CakePHP supports are:
 
 string
-    Generally backed by CHAR or VARCHAR columns. Using the ``fixed`` option
-    will force a CHAR column. In SQL Server, NCHAR and NVARCHAR types are used.
+    Generally backed by ``CHAR`` or ``VARCHAR`` columns. Using the ``fixed`` option
+    will force a CHAR column. In SQL Server, ``NCHAR`` and ``NVARCHAR`` types are used.
 text
-    Maps to TEXT types.
+    Maps to ``TEXT`` types.
 uuid
     Maps to the UUID type if a database provides one, otherwise this will
-    generate a CHAR(36) field.
+    generate a ``CHAR(36)`` field.
+binaryuuid
+    Maps to the UUID type if the database provides one, otherwise this will
+    generate a ``BINARY(16)`` column
 integer
-    Maps to the INTEGER type provided by the database. BIT is not yet supported
+    Maps to the ``INTEGER`` type provided by the database. BIT is not yet supported
     at this moment.
 smallinteger
-    Maps to the SMALLINT type provided by the database.
+    Maps to the ``SMALLINT`` type provided by the database.
 tinyinteger
-    Maps to the TINYINT or SMALLINT type provided by the database. In MySQL
+    Maps to the ``TINYINT`` or ``SMALLINT`` type provided by the database. In MySQL
     ``TINYINT(1)`` is treated as a boolean.
 biginteger
-    Maps to the BIGINT type provided by the database.
+    Maps to the ``BIGINT`` type provided by the database.
 float
-    Maps to either DOUBLE or FLOAT depending on the database. The ``precision``
+    Maps to either ``DOUBLE`` or ``FLOAT`` depending on the database. The ``precision``
     option can be used to define the precision used.
 decimal
-    Maps to the DECIMAL type. Supports the ``length`` and  ``precision``
+    Maps to the ``DECIMAL`` type. Supports the ``length`` and  ``precision``
     options.
 boolean
-    Maps to BOOLEAN except in MySQL, where TINYINT(1) is used to represent
-    booleans. BIT(1) is not yet supported at this moment.
+    Maps to ``BOOLEAN`` except in MySQL, where ``TINYINT(1)`` is used to represent
+    booleans. ``BIT(1)`` is not yet supported at this moment.
 binary
-    Maps to the BLOB or BYTEA type provided by the database.
+    Maps to the ``BLOB`` or ``BYTEA`` type provided by the database.
 date
-    Maps to a timezone naive DATE column type. The return value of this column
+    Maps to a timezone naive ``DATE`` column type. The return value of this column
     type is :php:class:`Cake\\I18n\\Date` which extends the native ``DateTime``
     class.
 datetime
-    Maps to a timezone naive DATETIME column type. In PostgreSQL, and SQL Server
-    this turns into a TIMESTAMP type. The default return value of this column
+    Maps to a timezone naive ``DATETIME`` column type. In PostgreSQL, and SQL Server
+    this turns into a ``TIMESTAMP`` type. The default return value of this column
     type is :php:class:`Cake\\I18n\\Time` which extends the built-in
     ``DateTime`` class and `Chronos <https://github.com/cakephp/chronos>`_.
 timestamp
-    Maps to the TIMESTAMP type.
+    Maps to the ``TIMESTAMP`` type.
 time
-    Maps to a TIME type in all databases.
+    Maps to a ``TIME`` type in all databases.
 json
-    Maps to a JSON type if it's available, otherwise it maps to TEXT. The 'json'
+    Maps to a ``JSON`` type if it's available, otherwise it maps to ``TEXT``. The 'json'
     type was added in 3.3.0
 
 These types are used in both the schema reflection features that CakePHP
@@ -370,6 +373,9 @@ handles, and generate file handles when reading data.
 
 .. versionchanged:: 3.5.0
     The ``smallinteger`` and ``tinyinteger`` types were added.
+
+.. versionchanged:: 3.6.0
+    The ``binaryuuid`` type was added.
 
 .. _adding-custom-database-types:
 

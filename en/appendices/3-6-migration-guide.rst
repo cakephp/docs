@@ -53,6 +53,13 @@ Core
 - ``getTypeName()`` was added to assist in getting correct class/type name when
   building more descriptive error messages.
 
+Datasource
+=========
+
+* A new abstract type was added for ``binaryuuid``. In MySQL and SQLite,
+  ``BINARY(16)`` will be used as the column type. While in SQLServer, and
+  Postgres will use their native UUID types.
+
 ORM
 ========
 
