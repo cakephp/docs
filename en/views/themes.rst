@@ -18,6 +18,9 @@ To use themes, set the theme name in your controller's action or
 
         public function beforeRender(\Cake\Event\Event $event)
         {
+            $this->viewBuilder()->setTheme('Modern');
+                        
+            // For CakePHP before 3.5
             $this->viewBuilder()->theme('Modern');
         }
     }
