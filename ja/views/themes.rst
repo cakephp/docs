@@ -11,11 +11,14 @@ CakePHP のテーマは、テンプレートファイルを供給することに
 
     class ExamplesController extends AppController
     {
-        // For CakePHP before 3.1
+        // CakePHP 3.1 より前
         public $theme = 'Modern';
 
         public function beforeRender(\Cake\Event\Event $event)
         {
+            $this->viewBuilder()->setTheme('Modern');
+
+            // CakePHP 3.5 より前
             $this->viewBuilder()->theme('Modern');
         }
     }
