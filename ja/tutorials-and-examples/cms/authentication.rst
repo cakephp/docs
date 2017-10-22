@@ -221,7 +221,7 @@ logout メソッドを実装します。ログアウトのために ``/users/log
 add と edit アクションの修正
 ==============================
 
-edit アクションへのアクセスをブロックしていますが、作成中または編集中の記事の
+edit アクションへのアクセスをブロックしていますが、編集中の記事の
 ``user_id`` 属性を変更することはできます。次に、これらの問題を解決します。
 最初は ``add`` アクションです。
 
@@ -236,7 +236,7 @@ add アクションを次のように置き換えます。 ::
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
 
-            // 追加: セッションから user_id をセット
+            // 変更: セッションから user_id をセット
             $article->user_id = $this->Auth->user('id');
 
             if ($this->Articles->save($article)) {
@@ -248,8 +248,7 @@ add アクションを次のように置き換えます。 ::
         $this->set('article', $article);
     }
 
-同様に **src/Templates/Articles/add.ctp** から ``user_id`` コントロールを削除することを
-忘れないでください。次は ``edit`` アクションを更新します。edit メソッドを次のように置き換えます。 ::
+次は ``edit`` アクションを更新します。edit メソッドを次のように置き換えます。 ::
 
     // src/Controller/ArticlesController.php の中で
 
