@@ -209,9 +209,12 @@ Cette exemple forcera toutes les actions qui proviennent de la "route" Admin à
 
         public function forceSSL()
         {
-            return $this->redirect('https://' . env('SERVER_NAME') . $this->request->here());
+            return $this->redirect('https://' . env('SERVER_NAME') . $this->request->getRequestTarget());
         }
     }
+
+Note: Utilisez ``$this->request-here()`` pour les versions de CakePHP avant
+3.4.0
 
 Cet exemple forcera toutes les actions qui proviennent de la "route" admin à
 requérir des requêtes sécurisés SSL. Quand la requête est placée dans un trou

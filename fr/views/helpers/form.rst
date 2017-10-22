@@ -911,10 +911,14 @@ décrites dans les sections dédiées à ces méthodes).
   défaut::
 
       // Les tags <options> avec valeurs 1 et 3 seront sélectionnés par défaut
-      echo $this->Form->select('rooms', [
-          'multiple' => true,
-          'default' => [1, 3]
-      ]);
+      echo $this->Form->select(
+          'rooms',
+          [1, 2, 3, 4, 5],
+          [
+              'multiple' => true,
+              'value' => [1, 3]
+          ]
+      );
 
 * ``empty`` S'applique à ``radio()`` et ``select()``. Le défaut est ``false``.
 
