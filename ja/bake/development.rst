@@ -221,8 +221,13 @@ Bake テーマの作成
 #. 新しいディレクトリー **plugins/[name]/src/Template/Bake/Template/** を作成します。
 #. **vendor/cakephp/bake/src/Template/Bake/Template** から上書きしたい
    テンプレートをあなたのプラグインの中の適切なファイルにコピーしてください。
-#. bake を実行するときに、必要であれば、 bake のテーマを指定するための
-   ``--theme`` オプションを使用してください。
+#. bake を実行するときに、必要であれば、 bake のテーマを指定するための ``--theme``
+   オプションを使用してください。各呼び出しでこのオプションを指定しなくても済むように、
+   カスタムテーマをデフォルトテーマとして使用するように設定することもできます。 ::
+
+        <?php
+        // config/bootstrap.php または config/bootstrap_cli.php の中で
+        Configure::write('Bake.theme', 'MyTheme');
 
 Bake テンプレートのカスタマイズ
 ===============================
@@ -234,7 +239,6 @@ bake テンプレートを作成することができます。この方法では
 #. 新しいディレクトリー **/src/Template/Bake/** を作成します。
 #. **vendor/cakephp/bake/src/Template/Bake/** から上書きしたいテンプレートを
    あなたのアプリケーションの中の適切なファイルにコピーします。
-
 
 Bake コマンドオプションの新規作成
 =================================
