@@ -204,7 +204,7 @@ require secure SSL requests::
         }
     }
     
-Note: use ``$this->request-here()`` for CakePHP versions prior to 3.4.0
+Note: use ``$this->request->here()`` for CakePHP versions prior to 3.4.0
 
 This example would force all actions that had admin routing to require secure
 SSL requests. When the request is black holed, it will call the nominated
