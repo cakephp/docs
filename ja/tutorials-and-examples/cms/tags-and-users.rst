@@ -463,4 +463,4 @@ CakePHP では、コントローラーのアクションをスリムに保ち、
 役立ちます。 :doc:`/core-libraries/collections` のメソッドを使用してクエリー結果を操作したり、
 エンティティーを簡単に作成したりするシナリオを扱うことができます。
 
-次は :doc:`認証 <authentication>` を追加しましょう。
+次は :doc:`認証 </tutorials-and-examples/cms/authentication>` を追加しましょう。

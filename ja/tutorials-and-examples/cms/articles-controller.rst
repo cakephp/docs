@@ -536,5 +536,6 @@ JavaScript を使用して記事を削除する POST リクエストを行うリ
     また、このビューコードは ``Form Helper`` を使って記事を削除しようとする前に
     JavaScript の確認ダイアログを表示します。
 
-基本的な記事管理のセットアップの後は、 :doc:`タグとユーザーテーブルの基本的な操作 <tags-and-users>`
+基本的な記事管理のセットアップの後は、 :doc:`タグとユーザーテーブルの基本的な操作
+</tutorials-and-examples/cms/tags-and-users>`
 を作成します。
