@@ -231,21 +231,22 @@ message d'erreur n'apparaît, ajoutez ceci à votre layout::
     <?= $this->Flash->render() ?>
 
 Bien que le code ci-dessus soit très simple, cela démontre comment vous pouvez
-facilement construire des logiques d'autorisation flexibles qui impliquent l'utilisateur
-connecté et / ou les données de la requête.
+facilement construire des logiques d'autorisation flexibles qui impliquent
+l'utilisateur connecté et / ou les données de la requête.
 
 Renforcer les Action Add & Edit
 ===============================
 
-Bien que nous ayons bloqué l'accès de l'action edit, nous sommes toujours vulnérables
-aux utilisateurs qui changeraient l'attribut ``user_id`` des articles à la création
-ou pendant la modification. Mais nous allons commencer par nous occuper de l'action
-``add`` en premier.
+Bien que nous ayons bloqué l'accès de l'action edit, nous sommes toujours
+vulnérables aux utilisateurs qui changeraient l'attribut ``user_id`` des
+articles pendant la modification. Mais nous allons commencer par nous occuper
+de l'action ``add`` en premier.
 
-Lorsque vous créez des articles, on veut forcer le ``user_id`` à celui de l'utilisateur
-actuellement connecté. Remplacer le code de votre action ``add`` par le code suivant::
+Lorsque vous créez des articles, on veut forcer le ``user_id`` à celui de
+l'utilisateur actuellement connecté. Remplacer le code de votre action ``add``
+par le code suivant::
 
-    // in src/Controller/ArticlesController.php
+    // dans src/Controller/ArticlesController.php
 
     public function add()
     {
@@ -253,7 +254,7 @@ actuellement connecté. Remplacer le code de votre action ``add`` par le code su
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
 
-            // Ajouté : On force le user_id à celui de la session
+            // Changé : On force le user_id à celui de la session
             $article->user_id = $this->Auth->user('id');
 
             if ($this->Articles->save($article)) {
@@ -265,9 +266,8 @@ actuellement connecté. Remplacer le code de votre action ``add`` par le code su
         $this->set('article', $article);
     }
 
-Pensez à retirer l'élément de contrôle ``user_id`` de
-**src/Templates/Articles/add.ctp**. Ensuite, nous allons nous occuper de l'action
-``edit``. Remplacez le code de l'action par ceci::
+Ensuite, nous allons nous occuper de l'action ``edit``. Remplacez le code de
+l'action par ceci::
 
     // Dans src/Controller/ArticlesController.php
 
