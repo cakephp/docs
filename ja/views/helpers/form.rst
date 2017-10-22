@@ -1403,7 +1403,7 @@ data 配列を提供します。
 
 CakePHP が Windows サーバー上にインストールされている場合、上記の例について、
 送信されるデータ配列内の値は次のように構成されます
-(Unix 環境では ``'tmp\_name'`` が異なったパスになります)。 ::
+(Unix 環境では ``'tmp_name'`` が異なったパスになります)。 ::
 
     $this->request->data['submittedfile']
 
