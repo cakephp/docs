@@ -227,6 +227,7 @@ helper dans votre vue, comme ceci::
 
     echo $this->ContactInfo->address($contact);
 
+.. _plugin-create-your-own:
 
 Créer Vos Propres Plugins
 =========================
@@ -545,7 +546,7 @@ dans la surcharge de template de votre application.
 
 Si le plugin 'ContactManager' implémente un préfixe 'admin', le chemin de la
 redéfinition sera::
-    
+
     src/Template/Plugin/ContactManager/Admin/ContactManager/index.ctp
 
 .. _plugin-assets:

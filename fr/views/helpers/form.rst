@@ -1476,7 +1476,7 @@ au script recevant les données de formulaire.
 
 Pour l'exemple ci-dessus, les valeurs dans le tableau de données soumis
 devraient être organisées comme ci-dessous, si CakePHP à été installé sur
-un server Windows (la clé ``tmp\_name`` aura un chemin différent dans un
+un server Windows (la clé ``tmp_name`` aura un chemin différent dans un
 environnement Unix)::
 
     $this->request->data['submittedfile'] = [

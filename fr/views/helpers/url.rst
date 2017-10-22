@@ -17,7 +17,7 @@ Générer des URLs
 
 Cette méthode retourne une URL pointant vers la combinaison du controller
 et de l'action.
-Si ``$url`` est vide, elle retourne ``REQUEST\_URI``, dans les autre cas,
+Si ``$url`` est vide, elle retourne ``REQUEST_URI``, dans les autre cas,
 elle génère le lien utilisant le controller et l'action. Si ``full`` vaut
 ``true``, le lien fourni contiendra le chemin complet menant à la page::
 
