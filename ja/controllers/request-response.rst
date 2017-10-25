@@ -664,6 +664,9 @@ download
     {
         // キャッシュの無効化
         $this->response = $this->response->withDisabledCache();
+
+        // 3.4.0 より前
+        $this->response->disableCache();
     }
 
 .. warning::
