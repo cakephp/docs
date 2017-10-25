@@ -522,8 +522,8 @@ Creating this file would allow you to override
 
 If the plugin implements a routing prefix, you must include the routing prefix in your 
 application template overrides.
-
-If the 'ContactManager' plugin implemented an 'admin' prefix the overridng path would be::
+For example, if the 'ContactManager' plugin implemented an 'admin' prefix the overridng path
+would be::
     
     src/Template/Plugin/ContactManager/Admin/ContactManager/index.ctp
 
