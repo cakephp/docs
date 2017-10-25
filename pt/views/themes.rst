@@ -1,5 +1,5 @@
 Temas
-######
+#####
 
 Temas no CakePHP são simplesmente plugins que focam em prover arquivos de template.
 Veja a seção em :ref:`plugin-create-your-own`.
@@ -38,10 +38,6 @@ para plugins com um tema também. Se você tiver um plugin chamado 'Cms', que
 contenha um `TagsController`, o tema moderno poderia fornecer
 **plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ctp** para substituir o template
 da edição no plugin.
-
-If a view file can't be found in the theme, CakePHP will try to locate the view
-file in the **src/Template/** folder. This way, you can create master template files
-and simply override them on a case-by-case basis within your theme folder.
 
 Se um arquivo de exibição não puder ser encontrado no tema, o CakePHP tentará localizar a visualização
 arquivo na pasta **src/Template/**. Desta forma, você pode criar arquivos de `template` mestre
