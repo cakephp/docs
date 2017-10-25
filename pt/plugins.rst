@@ -203,6 +203,8 @@ qualquer outro helper em sua view, como::
 
     echo $this->ContactInfo->address($contact);
 
+.. _plugin-create-your-own:
+
 Criando seus próprios complementos
 ==================================
 
