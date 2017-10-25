@@ -140,7 +140,7 @@ ArticlesController の ``index()`` 関数にマップします。そして、Art
 必要なクラスとファイルを作成しただけでこれらの関係が設定されています。
 
 さて、これで CakePHP の基本について一通り理解できました。物事がどう組み合わせられるかを確かめるために、
-:doc:`/tutorials-and-examples/bookmarks/intro` を体験することができるでしょう。
+:doc:`/tutorials-and-examples/cms/installation` を体験することができるでしょう。
 
 .. meta::
     :title lang=ja: CakePHP の規約

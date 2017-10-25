@@ -54,8 +54,8 @@ CMS チュートリアル - データベース作成
     (1, 'First Post', 'first-post', 'This is the first post.', 1, now(), now());
 
 複合主キーを持つ ``articles_tags`` テーブルにお気づきでしょうか。CakePHP は、
-ほぼどこでも複合主キーをサポートします。これは、マルチテナントなアプリケーションの構築が
-しやすくなります。
+ほぼどこでも複合主キーをサポートしているので、追加の ``id`` カラムを必要としない
+単純なスキーマを持つことができます。
 
 私たちが使用するテーブルやカラムの名前は恣意的ではありませんでした。CakePHP の
 :doc:`命名規則 </intro/conventions>` を使用することによって、CakePHP がより効果的になり、
@@ -160,5 +160,5 @@ Table オブジェクトを ``ArticlesTable`` と名付けることで、CakePHP
 どのようにプロパティーを変更できるかを制御するプロパティー ``_accessible`` をセットアップしました。
 
 このモデルは、今は動きませんが、次は最初の
-:doc:`コントローラーとテンプレート <articles-controller>`
+:doc:`コントローラーとテンプレート </tutorials-and-examples/cms/articles-controller>`
 を作成し、このモデルとのやりとりができるようにします。

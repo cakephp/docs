@@ -460,6 +460,26 @@ CakePHP は、エンティティーが保存される前に適用される「ル
         return $entity->isOkLooking();
     }, 'ruleName');
 
+条件付きルールの使用
+--------------------
+
+エンティティーデータに基づいて条件付きでルールを適用することができます。 ::
+
+    $rules->add(function ($entity, $options) use($rules) {
+        if ($entity->role == 'admin') {
+            $rule = $rules->existsIn('user_id', 'Admins');
+
+            return $rule($entity, $options);
+        }
+        if ($entity->role == 'user') {
+            $rule = $rules->existsIn('user_id', 'Users');
+
+            return $rule($entity, $options);
+        }
+
+        return false;
+    }, 'userExists');
+
 再利用可能なカスタムルールの作成
 --------------------------------
 

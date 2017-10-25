@@ -2,10 +2,11 @@
 **************************
 
 CakePHP を学ぶ最も良い方法はなにか作ってみることです。
-簡単なブックマークアプリケーションから作ることを始めましょう。
+簡単なコンテンツ管理アプリケーションから作ることを始めましょう。
 
-.. include:: /tutorials-and-examples/bookmarks/intro.rst
-.. include:: /tutorials-and-examples/bookmarks/part-two.rst
+.. include:: /tutorials-and-examples/cms/installation.rst
+.. include:: /tutorials-and-examples/cms/database.rst
+.. include:: /tutorials-and-examples/cms/articles-controller.rst
 
 .. meta::
     :title lang=ja: Getting Started

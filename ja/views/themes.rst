@@ -1,21 +1,25 @@
 テーマ
 ######
 
-テーマには、ページの見た目や雰囲気を簡単に素早く切り替えられるようになるという利点があります。
 CakePHP のテーマは、テンプレートファイルを供給することに集中したシンプルなプラグインです。
+:ref:`plugin-create-your-own` のセクションをご覧ください。
+テーマには、ページの見た目や雰囲気を簡単に素早く切り替えられるようになるという利点があります。
 もし必要であれば、テンプレートファイルに追加してヘルパーやセルもまた供給することができます。
 ヘルパーやセルをテーマで使うときは、 :term:`プラグイン記法` を使い続ける必要があります。
 
 テーマを使うためには、コントローラーのアクションをテーマ名にするか
-``beforeRender()`` をコールバックしてください。::
+``beforeRender()`` をコールバックしてください。 ::
 
     class ExamplesController extends AppController
     {
-        // For CakePHP before 3.1
+        // CakePHP 3.1 より前
         public $theme = 'Modern';
 
         public function beforeRender(\Cake\Event\Event $event)
         {
+            $this->viewBuilder()->setTheme('Modern');
+
+            // CakePHP 3.5 より前
             $this->viewBuilder()->theme('Modern');
         }
     }

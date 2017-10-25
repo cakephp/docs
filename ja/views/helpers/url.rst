@@ -16,7 +16,7 @@ URL の生成
 .. php:method:: build(mixed $url = null, boolean|array $full = false)
 
 コントローラーとアクションの組み合わせを指定することで URL を生成して返します。
-``$url`` が空の場合、 ``REQUEST\_URI`` を返します。そうでない場合、
+``$url`` が空の場合、 ``REQUEST_URI`` を返します。そうでない場合、
 コントローラーとアクションの組み合わせで URL を生成します。
 ``full`` が ``true`` の場合、結果がフルベース URL で返されます。 ::
 

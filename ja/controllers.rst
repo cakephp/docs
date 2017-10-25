@@ -496,6 +496,7 @@ CakePHP のコントローラーはリクエストのライフサイクル周り
 最良の結果を得るために、子コントローラーのコールバック中で
 ``AppController`` のコールバックを呼ぶのを忘れないでください。 ::
 
+    //use Cake\Event\Event;
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);

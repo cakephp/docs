@@ -204,6 +204,8 @@ ContactInfoHelper を使いたいとしましょう。この場合、あなた�
 
     echo $this->ContactInfo->address($contact);
 
+.. _plugin-create-your-own:
+
 プラグイン作成
 ================
 

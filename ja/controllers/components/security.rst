@@ -190,9 +190,11 @@ Security コンポーネントは、一般的にコントローラーの ``befor
 
         public function forceSSL()
         {
-            return $this->redirect('https://' . env('SERVER_NAME') . $this->request->here());
+            return $this->redirect('https://' . env('SERVER_NAME') . $this->request->getRequestTarget());
         }
     }
+
+注意: CakePHP バージョン 3.4.0 より前では ``$this->request->here()`` を使用してください。
 
 上記の例では、 管理者用ルーティングの全てのアクションは、セキュアな SSL 通信のみを許可します。
 リクエストが破棄対象になった時、 ``forceSSL()`` コールバック関数が呼ばれ、非セキュアなリクエストを

@@ -6,7 +6,7 @@ CakePHP はウェブ開発を単純に簡単にできるように開発されま
 
 この概要の目的は、CakePHP の一般的なコンセプトとそのコンセプトがどのように CakePHP
 の中で働くのかを紹介することです。 プロジェクトをすぐに始めたいなら、 :doc:`チュートリアルから始める
-</tutorials-and-examples/bookmarks/intro>` か :doc:`直接ドキュメントを見て下さい </topics>` 。
+</tutorials-and-examples/cms/installation>` か :doc:`直接ドキュメントを見て下さい </topics>` 。
 
 設定より規約
 ============
@@ -144,7 +144,7 @@ CakePHP のリクエストサイクル
 
 次の明白なステップは :doc:`download CakePHP </installation>` で,
 :doc:`チュートリアルとなにかすごいものを作る
-</tutorials-and-examples/bookmarks/intro>` を読んで下さい。.
+</tutorials-and-examples/cms/installation>` を読んで下さい。.
 
 付録
 ====
