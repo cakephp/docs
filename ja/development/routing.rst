@@ -864,7 +864,7 @@ SEO に親和性があるルーティング
     });
 
 ネストされたスコープがある状況では、内部スコープは、
-スコープ内に適用されたミドルウェアを継承します。　::
+スコープ内に適用されたミドルウェアを継承します。 ::
 
     $routes->scope('/api', function ($routes) {
         $routes->applyMiddleware('ratelimit', 'auth.api');

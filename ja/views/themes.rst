@@ -52,10 +52,9 @@ edit テンプレートを **plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ct
 によってハンドリングされます。プロダクション環境でパフォーマンスを改善するためには、
 :ref:`symlink-assets` を推奨します。
 
-
 CakePHP の全ての組み込みヘルパーはテーマを認識しており、正確なパスを自動的に生成します。
 テンプレートファイル同様に、ファイルがテーマフォルダーの中に無かったら
-メインの webroot フォルダーをデフォルトにします。::
+メインの webroot フォルダーをデフォルトにします。 ::
 
     // 'purple_cupcake'という名前のテーマの時
     $this->Html->css('main.css');
@@ -65,7 +64,6 @@ CakePHP の全ての組み込みヘルパーはテーマを認識しており、
 
     // 以下をリンクする
     plugins/PurpleCupcake/webroot/css/main.css
-
 
 .. meta::
     :title lang=ja: Themes
