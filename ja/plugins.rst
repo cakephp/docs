@@ -508,7 +508,7 @@ Custom コントローラーの 'index' ビューへのパスは、以下の通�
 プラグインがルーティングプレフィックスを実装する場合、オーバーライドする
 アプリケーションテンプレートのパスにルーティングプレフィックスが含まなければなりません。
 
-'ContactManager' プラグインが 'admin プレフィックス を実装する場合、オーバーライドパスは、
+例えば、'ContactManager' プラグインが 'admin' プレフィックスを実装する場合、オーバーライドパスは、
 次の通りです。 ::
 
     src/Template/Plugin/ContactManager/Admin/ContactManager/index.ctp
