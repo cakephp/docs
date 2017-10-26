@@ -658,7 +658,7 @@ download
 .. php:method:: withDisableCache()
 
 時々、コントローラーアクションの結果をキャッシュしないようにブラウザーに強制する必要がでてきます。
-:php:meth:`Cake\\Http\\Response::disableCache()` はそういった目的で使われます。 ::
+:php:meth:`Cake\\Http\\Response::withDisableCache()` はそういった目的で使われます。 ::
 
     public function index()
     {
