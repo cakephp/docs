@@ -240,6 +240,11 @@ messages could look like::
                     'scope' => 'favorites',
                 ]
             );
+            
+            $this->request->addParams([
+                'paging' => $paginator->getPagingParams(),
+            ]);
+        
             $this->set('favorites', $results);
         }
     }
