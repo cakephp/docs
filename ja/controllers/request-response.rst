@@ -176,7 +176,7 @@ post 形式でデータを交換することがしばしばあります。 :php:
     $base = $request->getAttribute('base');
 
     // /subdir/ を保持
-    $base = $request->getAttribute('webroot');
+    $base = $request->getAttribute('base');
 
     // 3.4.0 より前
     $webroot = $request->webroot;
