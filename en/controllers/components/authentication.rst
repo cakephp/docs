@@ -443,8 +443,8 @@ from the normal password hash::
             // Make a password for digest auth.
             $entity->digest_hash = DigestAuthenticate::password(
                 $entity->username,
-                env('SERVER_NAME'),
-                $entity->plain_password
+                $entity->plain_password,
+                env('SERVER_NAME')
             );
             return true;
         }
