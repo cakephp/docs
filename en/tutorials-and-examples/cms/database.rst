@@ -43,7 +43,7 @@ tables::
         tag_id INT NOT NULL,
         PRIMARY KEY (article_id, tag_id),
         FOREIGN KEY tag_key(tag_id) REFERENCES tags(id),
-        FOREIGN KEY bookmark_key(article_id) REFERENCES articles(id)
+        FOREIGN KEY article_key(article_id) REFERENCES articles(id)
     );
 
     INSERT INTO users (email, password, created, modified)
