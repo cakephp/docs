@@ -183,9 +183,11 @@ runtime warnings you can do so using the ``Error.errorLevel`` configuration
 value::
 
     // in config/app.php
+    // ...
     'Error' => [
-        'errorLevel' => E_ALL ^ E_USER_DEPRECATED
+        'errorLevel' => E_ALL ^ E_USER_DEPRECATED,
     ]
+    // ...
 
 Will disable runtime deprecation warnings.
 
