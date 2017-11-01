@@ -267,9 +267,10 @@ We can also define a more specific relationship using the setters::
 
         public function initialize(array $config)
         {
+            // Prior to 3.4 version, use foreignKey() and joinType()
             $this->belongsTo('Users')
-                ->setForeignKey('user_id') // Below CakePHP 3.4 version, use foreignKey() instead of setForeignKey() 
-                ->setJoinType('INNER'); 
+                ->setForeignKey('user_id')
+                ->setJoinType('INNER');
         }
     }
 
