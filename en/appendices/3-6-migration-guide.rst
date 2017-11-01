@@ -17,6 +17,8 @@ The following is a list of deprecated methods, properties and behaviors. These
 features will continue to function until 4.0.0 after which they will be removed.
 
 * ``bin/cake orm_cache`` is now ``bin/cake schema_cache``.
+* ``Cake\Cache\Engine\ApcEngine`` has been renamed to
+  ``Cake\Cache\Engine\ApcuEngine`` to better reflect the extension name.
 
 
 Behavior Changes
@@ -41,6 +43,9 @@ behavior that may affect your application:
   Previously invalid tasks would be silently ignored.
 * CakePHP internals now chain exceptions where possible, allowing root causes of
   errors to be exposed.
+* MySQL connections now default to ``utf8mb4`` (4 byte unicode) as their
+  encoding. If you want to continue using the old default of ``utf8``, set
+  your application's datasource' encoding in ``config/app.php`` to 'utf8'.
 
 Core
 ====
@@ -48,8 +53,15 @@ Core
 - ``getTypeName()`` was added to assist in getting correct class/type name when
   building more descriptive error messages.
 
+Datasource
+==========
+
+* A new abstract type was added for ``binaryuuid``. In MySQL and SQLite,
+  ``BINARY(16)`` will be used as the column type. While in SQLServer, and
+  Postgres will use their native UUID types.
+
 ORM
-========
+===
 
 * ``EntityTrait::isEmpty()`` and ``EntityTrait::hasValue()`` were added.
 
