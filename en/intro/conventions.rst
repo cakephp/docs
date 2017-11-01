@@ -89,15 +89,14 @@ whose name contains multiple words, the foreign key would be
 ``article_category_id``.
 
 Join tables, used in BelongsToMany relationships between models, should be named
-after the model tables they will join or the bake command wont work, arranged in
-alphabetical order (``articles_tags`` rather than ``tags_articles``). In case you
-want to add aditional data to the intermediate table you will to to add an ``id``
-field to the join table so ``articles_tags`` becomes an entity and table will have
-at least these keys ``article_id``, ``tag_id`` and ``id``.
+after the model tables they will join or the bake command won't work, arranged in
+alphabetical order (``articles_tags`` rather than ``tags_articles``). If you
+need to add additional columns on the junction table you should create
+a separate entity/table class for that table.
 
-In addition to use an auto-increment key as the primary key, you may also use
-UUID columns. CakePHP will create a unique 36 character UUID
-(:php:meth:`Cake\\Utility\\Text::uuid()`) whenever you save a new record using
+In addition to using an auto-incrementing integer as primary keys, you can also
+use UUID columns. CakePHP will create UUID values automatically using
+(:php:meth:`Cake\\Utility\\Text::uuid()`) whenever you save new records using
 the ``Table::save()`` method.
 
 Model Conventions
