@@ -6,7 +6,7 @@ Veja a seção em :ref:`plugin-create-your-own`.
 Você pode tirar vantagem de temas, deixando fácil a troca da aparência da dua página rapidamente. 
 Além de arquivos de templates, eles também podem provers `helpers` e 'cells' 
 se o seu tema assim requerer. Quando usado ``cells`` e ``helpes`` no seu tema, 
-você precisará continuar usando a :term:`plugin syntax`.
+você precisará continuar usando a :term:`sintaxe plugin`.
 
 Para usar temas, defina o tema na `action` do seu `controller` ou no método 
 ``beforeRender()``::
