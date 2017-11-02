@@ -224,7 +224,9 @@ mappings in your controller::
             $this->set('_serialize', ['videos']);
 
             // Set Force Download
-            return $this->response->download('report-' . date('YmdHis') . '.' . $format);
+            // Prior to 3.4.0
+            // $this->response->download('report-' . date('YmdHis') . '.' . $format);
+            return $this->response->withDownload('report-' . date('YmdHis') . '.' . $format);
         }
     }
 
