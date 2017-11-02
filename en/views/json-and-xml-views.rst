@@ -216,15 +216,15 @@ mappings in your controller::
             // Set Out Format View
             $this->viewBuilder()->className($formats[$format]);
 
-            // Set Force Download
-            $this->response->download('report-' . date('YmdHis') . '.' . $format);
-
             // Get data
             $videos = $this->Videos->find('latest');
 
             // Set Data View
             $this->set(compact('videos'));
             $this->set('_serialize', ['videos']);
+
+            // Set Force Download
+            return $this->response->download('report-' . date('YmdHis') . '.' . $format);
         }
     }
 
