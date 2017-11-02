@@ -235,8 +235,8 @@ look like::
         'body' => 'The text',
         'user_id' => 1,
         'tags' => [
-            ['tag' => 'CakePHP'],
-            ['tag' => 'Internet'],
+            ['name' => 'CakePHP'],
+            ['name' => 'Internet'],
         ]
     ];
 
