@@ -466,7 +466,7 @@ password hashes, based on the RFC for digest authentication.
 
     The third parameter of DigestAuthenticate::password() must match the 'realm'
     config value defined when DigestAuthentication was configured in
-    AuthComponent::$authenticate. This defaults to ``env('SCRIPT_NAME')``. You
+    AuthComponent::$authenticate. This defaults to ``env('SERVER_NAME')``. You
     may wish to use a static string if you want consistent hashes in multiple
     environments.
 

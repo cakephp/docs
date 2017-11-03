@@ -441,7 +441,7 @@ Blowfish password hasher は、任意の認証クラスで使用することが�
 
     AuthComponent::$authenticate 内で DigestAuthentication が設定された場合、
     DigestAuthenticate::password() の第３パラメータは定義した 'realm' の設定値と
-    一致する必要があります。このデフォルトは  ``env('SCRIPT_NAME')`` です。
+    一致する必要があります。このデフォルトは  ``env('SERVER_NAME')`` です。
     複数の環境で一貫したハッシュが欲しい場合に static な文字列を使用することができます。
 
 カスタムパスワードハッシュ化クラスの作成
