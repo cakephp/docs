@@ -506,7 +506,7 @@ vous connecter.
     le troisième paramètre de DigestAuthenticate::password() doit correspondre
     à la valeur de la configuration 'realm' définie quand DigestAuthentication
     était configuré dans AuthComponent::$authenticate. Par défaut à
-    ``env('SCRIPT_NAME')``. Vous devez utiliser une chaîne statique si vous
+    ``env('SERVER_NAME')``. Vous devez utiliser une chaîne statique si vous
     voulez un hachage permanent dans des environnements multiples.
 
 Création de classes de hachage de mots de passe personnalisées
