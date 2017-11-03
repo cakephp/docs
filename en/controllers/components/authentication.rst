@@ -19,7 +19,7 @@ Configuring authentication requires several steps including defining
 a users table, creating a model, controller & views, etc.
 
 This is all covered step by step in the
-:doc:`Blog Tutorial </tutorials-and-examples/cms/authentication.html>`.
+:doc:`Blog Tutorial </tutorials-and-examples/cms/authentication>`.
 
 If you are looking for existing authentication and/or authorization solutions
 for CakePHP, have a look at the 
