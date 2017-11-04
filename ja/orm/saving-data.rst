@@ -235,8 +235,8 @@ BelongsToMany データの変換
         'body' => '本文',
         'user_id' => 1,
         'tags' => [
-            ['tag' => 'CakePHP'],
-            ['tag' => 'インターネット'],
+            ['name' => 'CakePHP'],
+            ['name' => 'インターネット'],
         ]
     ];
 
