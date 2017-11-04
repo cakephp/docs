@@ -265,6 +265,7 @@ Mentors belongsTo Doctors mentors.doctor\_id
 
         public function initialize(array $config)
         {
+            // バージョン 3.4 より前は、 foreignKey() と joinType() を使用してください
             $this->belongsTo('Users')
                 ->setForeignKey('user_id')
                 ->setJoinType('INNER');
