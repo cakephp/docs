@@ -16,7 +16,7 @@ Generating URLs
 .. php:method:: build(mixed $url = null, boolean|array $full = false)
 
 Returns a URL pointing to a combination of controller and action.
-If ``$url`` is empty, it returns the ``REQUEST\_URI``, otherwise it
+If ``$url`` is empty, it returns the ``REQUEST_URI``, otherwise it
 generates the URL for the controller and action combo. If ``full`` is
 ``true``, the full base URL will be prepended to the result::
 

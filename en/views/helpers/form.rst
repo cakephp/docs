@@ -1485,7 +1485,7 @@ script receiving the form data.
 
 For the example above, the values in the submitted data array would
 be organized as follows, if CakePHP was installed on a Windows
-server (the key ``'tmp\_name'`` will contain a different path
+server (the key ``'tmp_name'`` will contain a different path
 in a Unix environment)::
 
     $this->request->data['submittedfile']

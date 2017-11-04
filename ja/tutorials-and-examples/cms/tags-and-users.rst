@@ -121,6 +121,10 @@ ArticlesTable の ``initialize`` メソッドに以下を追加することで�
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
+
+		// user_id の決め打ちは一時的なもので、あとで認証を構築する際に削除されます。
+                $article->user_id = 1;
+
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
                     return $this->redirect(['action' => 'index']);
@@ -459,4 +463,4 @@ CakePHP では、コントローラーのアクションをスリムに保ち、
 役立ちます。 :doc:`/core-libraries/collections` のメソッドを使用してクエリー結果を操作したり、
 エンティティーを簡単に作成したりするシナリオを扱うことができます。
 
-次は :doc:`認証 <authentication>` を追加しましょう。
+次は :doc:`認証 </tutorials-and-examples/cms/authentication>` を追加しましょう。

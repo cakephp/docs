@@ -190,7 +190,7 @@ subdirectory. The attributes you can use are::
     $base = $request->getAttribute('base');
 
     // Holds /subdir/
-    $base = $request->getAttribute('base');
+    $base = $request->getAttribute('webroot');
 
     // Prior to 3.4.0
     $webroot = $request->webroot;
@@ -705,6 +705,9 @@ that::
     {
         // Disable caching
         $this->response = $this->response->withDisabledCache();
+
+        // Prior to 3.4.0 
+        $this->response->disableCache();
     }
 
 .. warning::

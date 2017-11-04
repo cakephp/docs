@@ -1,21 +1,25 @@
 テーマ
 ######
 
-テーマには、ページの見た目や雰囲気を簡単に素早く切り替えられるようになるという利点があります。
 CakePHP のテーマは、テンプレートファイルを供給することに集中したシンプルなプラグインです。
+:ref:`plugin-create-your-own` のセクションをご覧ください。
+テーマには、ページの見た目や雰囲気を簡単に素早く切り替えられるようになるという利点があります。
 もし必要であれば、テンプレートファイルに追加してヘルパーやセルもまた供給することができます。
 ヘルパーやセルをテーマで使うときは、 :term:`プラグイン記法` を使い続ける必要があります。
 
 テーマを使うためには、コントローラーのアクションをテーマ名にするか
-``beforeRender()`` をコールバックしてください。::
+``beforeRender()`` をコールバックしてください。 ::
 
     class ExamplesController extends AppController
     {
-        // For CakePHP before 3.1
+        // CakePHP 3.1 より前
         public $theme = 'Modern';
 
         public function beforeRender(\Cake\Event\Event $event)
         {
+            $this->viewBuilder()->setTheme('Modern');
+
+            // CakePHP 3.5 より前
             $this->viewBuilder()->theme('Modern');
         }
     }
@@ -48,10 +52,9 @@ edit テンプレートを **plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ct
 によってハンドリングされます。プロダクション環境でパフォーマンスを改善するためには、
 :ref:`symlink-assets` を推奨します。
 
-
 CakePHP の全ての組み込みヘルパーはテーマを認識しており、正確なパスを自動的に生成します。
 テンプレートファイル同様に、ファイルがテーマフォルダーの中に無かったら
-メインの webroot フォルダーをデフォルトにします。::
+メインの webroot フォルダーをデフォルトにします。 ::
 
     // 'purple_cupcake'という名前のテーマの時
     $this->Html->css('main.css');
@@ -61,7 +64,6 @@ CakePHP の全ての組み込みヘルパーはテーマを認識しており、
 
     // 以下をリンクする
     plugins/PurpleCupcake/webroot/css/main.css
-
 
 .. meta::
     :title lang=ja: Themes
