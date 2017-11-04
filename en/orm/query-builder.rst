@@ -177,8 +177,8 @@ can also do in a Query object::
         echo "$id : $trimmedTitle";
     }
 
-How Are Queries Lazily Evaluated
---------------------------------
+Queries Are Lazily Evaluated
+----------------------------
 
 Query objects are lazily evaluated. This means a query is not executed until one
 of the following things occur:
@@ -200,15 +200,11 @@ re-evaluating a query will result in additional SQL being run.
 If you want to take a look at what SQL CakePHP is generating, you can turn
 database :ref:`query logging <database-query-logging>` on.
 
-The following sections will show you everything there is to know about using and
-combining the Query object methods to construct SQL statements and extract data.
-
 Selecting Data
 ==============
 
-Most web applications make heavy use of ``SELECT`` queries. CakePHP makes
-building them a snap. To limit the fields fetched, you can use the ``select()``
-method::
+CakePHP makes building ``SELECT`` queries simple. To limit the fields fetched,
+you can use the ``select()`` method::
 
     $query = $articles->find();
     $query->select(['id', 'title', 'body']);
@@ -914,6 +910,28 @@ clauses::
     contain untrusted content.  See the :ref:`using-sql-functions` section for
     how to safely include unsafe data into function calls.
 
+Using Identifiers in Expressions
+--------------------------------
+
+When you need to reference a column or SQL identifier in your queries you can
+use the ``identifier()`` method::
+
+    $query = $countries->find();
+    $query->select([
+            'year' => $query->func()->year([$query->identifier('created')])
+        ])
+        ->where(function ($exp, $query) {
+            return $exp->gt('population', 100000);
+        });
+
+.. warning::
+
+    Identifier expressions should never have untrusted data passed into them.
+
+.. versionadded:: 3.6.0
+
+    ``Query::identifier()`` was added in 3.6.0
+
 Automatically Creating IN Clauses
 ---------------------------------
 
@@ -968,6 +986,7 @@ can use the ``IS NOT`` operator to automatically create the correct expression::
 The above will create ``parent_id` != :c1`` or ``parent_id IS NOT NULL``
 depending on the type of ``$parentId``
 
+
 Raw Expressions
 ---------------
 
@@ -984,7 +1003,7 @@ expression objects to add snippets of SQL to your queries::
 .. warning::
 
     Using expression objects leaves you vulnerable to SQL injection. You should
-    avoid interpolating user data into expressions.
+    never insert user data into expressions.
 
 Getting Results
 ===============
