@@ -486,7 +486,6 @@ Localized プラグインは、バリデーションのための国の２文字�
     $article = $this->Articles->newEntity($this->request->getData());
     if ($article->errors()) {
         // エラーメッセージが表示されるためのコードを書く
-
     }
 
 同様に、いくつかのエンティティーに対して同時に事前のバリデーションを実行したい場合は、
@@ -496,7 +495,7 @@ Localized プラグインは、バリデーションのための国の２文字�
     $entities = $this->Articles->newEntities($this->request->getData());
     foreach ($entities as $entity) {
         if (!$entity->errors()) {
-                $this->Articles->save($entity);
+            $this->Articles->save($entity);
         }
     }
 
