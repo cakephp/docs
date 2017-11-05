@@ -53,12 +53,19 @@ Core
 - ``getTypeName()`` was added to assist in getting correct class/type name when
   building more descriptive error messages.
 
+Database
+========
+
+* ``Query::identifier()`` was added. This method makes it easier to create
+  identifier expressions for use in complex queries.
+
 Datasource
 ==========
 
 * A new abstract type was added for ``binaryuuid``. In MySQL and SQLite,
   ``BINARY(16)`` will be used as the column type. While in SQLServer, and
   Postgres will use their native UUID types.
+
 
 ORM
 ===
