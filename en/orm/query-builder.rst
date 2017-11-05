@@ -926,7 +926,8 @@ use the ``identifier()`` method::
 
 .. warning::
 
-    Identifier expressions should never have untrusted data passed into them.
+    To prevent SQL injections, Identifier expressions should never have
+    untrusted data passed into them.
 
 .. versionadded:: 3.6.0
 
@@ -1003,7 +1004,7 @@ expression objects to add snippets of SQL to your queries::
 .. warning::
 
     Using expression objects leaves you vulnerable to SQL injection. You should
-    never insert user data into expressions.
+    never use untrusted data into expressions.
 
 Getting Results
 ===============
