@@ -72,6 +72,13 @@ ORM
 
 * ``EntityTrait::isEmpty()`` and ``EntityTrait::hasValue()`` were added.
 
+Routing
+=======
+
+* ``Cake\Routing\Route\EntityRoute`` was added. This route class makes building
+  routes that need data from entities easier. See the :ref:`entity-routing`
+  section for more information.
+
 Shell
 =====
 

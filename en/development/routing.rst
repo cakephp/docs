@@ -1,4 +1,4 @@
-Routing
+oouting
 #######
 
 .. php:namespace:: Cake\Routing
@@ -1318,6 +1318,55 @@ string URLs as the destination::
 
 This would redirect ``/articles/*`` to ``http://google.com`` with a
 HTTP status of 302.
+
+.. _entity-routing:
+
+Entity Routing
+==============
+
+Entity routing allows you to use an entity, an array or object implement
+``ArrayAccess`` as the source of routing parameters. This allows you to refactor
+routes more easily, and generate URLs with less code. For example, if you start
+off with a route that looks like::
+
+    $routes->get(
+        '/view/:id',
+        ['controller' => 'Articles', 'action' => 'view'],
+        'articles:view'
+    );
+
+You can generate URLs to this route using::
+
+    Router::url(['_name' => 'articles:view', 'id' => $article->id]);
+
+Later on, you may want to expose the article slug in the URL for SEO purposes.
+In order to do this you would need to update everywhere you generate a URL to
+the ``articles:view`` route, which could take some time. If we use entity routes
+we pass the entire entity into URL generation allow us to skip any rework when
+URLs require more parameters::
+
+    use Cake\Routing\Route\EntityRoute;
+
+    // Create entity routes for the rest of this scope.
+    $routes->setRouteClass(EntityRoute::class);
+
+    // Create the route just like before.
+    $routes->get(
+        '/view/:id',
+        ['controller' => 'Articles', 'action' => 'view'],
+        'articles:view'
+    );
+
+Now we can generate URLs using the ``_entity`` key::
+
+    Router::url(['_name' => 'articles:view', '_entity' => $article]);
+
+This will extract both the ``id`` property and the ``slug`` property out of the
+provided entity.
+
+.. versionadded:: 3.6.0
+    Entity routing was added in 3.6.0
+
 
 .. _custom-route-classes:
 
