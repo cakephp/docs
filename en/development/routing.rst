@@ -1,4 +1,4 @@
-oouting
+Routing
 #######
 
 .. php:namespace:: Cake\Routing
