@@ -123,7 +123,7 @@ CakePHP のモデルは ``Table`` と ``Entity`` オブジェクトで構成さ�
         }
     }
 
-このテーブルの ``create`` や ``modified`` カラムを自動的に更新する
+このテーブルの ``created`` や ``modified`` カラムを自動的に更新する
 :doc:`/orm/behaviors/timestamp` ビヘイビアーを追加しました。
 Table オブジェクトを ``ArticlesTable`` と名付けることで、CakePHP は、命名規則により
 ``articles`` テーブルを使用するモデルであると解釈します。また、CakePHP は、
