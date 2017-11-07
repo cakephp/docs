@@ -172,6 +172,7 @@ With the basic read views created, we need to make it possible for new articles
 to be created. Start by creating an ``add()`` action in the
 ``ArticlesController``. Our controller should now look like::
 
+    <?php
     // src/Controller/ArticlesController.php
 
     namespace App\Controller;
@@ -220,6 +221,7 @@ to be created. Start by creating an ``add()`` action in the
             $this->set('article', $article);
         }
     }
+    ?>
 
 .. note::
 
