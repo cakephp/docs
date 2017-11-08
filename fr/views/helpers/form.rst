@@ -911,10 +911,14 @@ décrites dans les sections dédiées à ces méthodes).
   défaut::
 
       // Les tags <options> avec valeurs 1 et 3 seront sélectionnés par défaut
-      echo $this->Form->select('rooms', [
-          'multiple' => true,
-          'default' => [1, 3]
-      ]);
+      echo $this->Form->select(
+          'rooms',
+          [1, 2, 3, 4, 5],
+          [
+              'multiple' => true,
+              'value' => [1, 3]
+          ]
+      );
 
 * ``empty`` S'applique à ``radio()`` et ``select()``. Le défaut est ``false``.
 
@@ -1476,7 +1480,7 @@ au script recevant les données de formulaire.
 
 Pour l'exemple ci-dessus, les valeurs dans le tableau de données soumis
 devraient être organisées comme ci-dessous, si CakePHP à été installé sur
-un server Windows (la clé ``tmp\_name`` aura un chemin différent dans un
+un server Windows (la clé ``tmp_name`` aura un chemin différent dans un
 environnement Unix)::
 
     $this->request->data['submittedfile'] = [

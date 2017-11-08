@@ -543,6 +543,7 @@ fournissent aussi un ensemble similaire de callbacks.
 N'oubliez pas d'appeler les callbacks de ``AppController`` dans les callbacks
 des controllers enfant pour avoir de meilleurs résultats::
 
+    //use Cake\Event\Event;
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);

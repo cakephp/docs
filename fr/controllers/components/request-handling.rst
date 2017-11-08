@@ -193,7 +193,7 @@ donné, le type de contenu le plus approchant est retourné. Si $type est un
 tableau, le premier type que le client accepte sera retourné. La préférence
 est déterminée, premièrement par l'extension de fichier analysée par
 Router, s'il y en avait une de fournie et secondairement, par la liste des
-content-types définis dans ``HTTP\_ACCEPT``::
+content-types définis dans ``HTTP_ACCEPT``::
 
     $this->RequestHandler->prefers('json');
 

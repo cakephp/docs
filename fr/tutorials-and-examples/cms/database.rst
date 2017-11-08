@@ -7,7 +7,7 @@ pas encore fait, créez une base de données vide qui servira pour ce tutoriel, 
 le nom de votre choix (par exemple ``cake_cms``). Exécutez ensuite la requête suivante
 pour créer les premières tables nécessaires au tutoriel::
 
-    USE cake_cms; 
+    USE cake_cms;
 
     CREATE TABLE users (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -55,8 +55,9 @@ pour créer les premières tables nécessaires au tutoriel::
     (1, 'First Post', 'first-post', 'This is the first post.', 1, now(), now());
 
 Vous avez peut-être remarqué que la table ``articles_tags`` utilise une clé primaire
-composée. CakePHP supporte les clés primaires composées presque partout, rendant
-facile la construction d'application multi-entité.
+composée. CakePHP supporte les clés primaires composées presque partout,
+vous permettant d'avoir des shémas plus simples qui ne nécessitent pas de
+colonnes ``id`` supplémentaires.
 
 Les noms de tables et de colonnes utilisés ne sont pas arbitraires. En utilisant les
 :doc:`conventions de nommages </intro/conventions>` de CakePHP, nous allons bénéficier

@@ -1,12 +1,13 @@
 Themes
 ######
 
+Les themes dans CakePHP sont simplement des plugins qui se ne fournissent que
+des fichiers de template. Consultez la section :ref:`plugin-create-your-own`.
 Vous pouvez profiter des themes, ce qui facilite le changement du visuel et
-du ressenti de votre page rapidement. Les Themes dans CakePHP sont simplement
-des plugins qui se focalisent sur la livraison de fichiers de template. En plus
-des fichiers de template, ils peuvent fournir des helpers et des cells si votre
-theme le nécessite. Quand vous utilisez des cells et des helpers à partir de
-votre theme, vous devrez continuer à utiliser la :term:`syntaxe de plugin`.
+du ressenti de votre page rapidement. En plus des fichiers de template, ils
+peuvent fournir des helpers et des cells si votre theme le nécessite. Quand
+vous utilisez des cells et des helpers à partir de votre theme, vous devrez
+continuer à utiliser la :term:`syntaxe de plugin`.
 
 Pour utiliser les themes, définissez le nom du theme dans votre controller ou
 dans votre callback ``beforeRender()``::
@@ -18,6 +19,9 @@ dans votre callback ``beforeRender()``::
 
         public function beforeRender(\Cake\Event\Event $event)
         {
+            $this->viewBuilder()->setTheme('Modern');
+
+            // Pour les versions antérieures à CakePHP 3.5
             $this->viewBuilder()->theme('Modern');
         }
     }

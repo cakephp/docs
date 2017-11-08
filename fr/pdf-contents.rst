@@ -21,8 +21,8 @@ Contenu
     orm
 
     controllers/components/authentication
-    bake
     core-libraries/caching
+    bake
     console-and-shells
     development/debugging
     deployment
@@ -53,6 +53,8 @@ Contenu
     core-libraries/xml
 
     core-libraries/global-constants-and-functions
+    chronos
     debug-kit
     migrations
+    elasticsearch
     appendices
