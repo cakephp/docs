@@ -84,4 +84,4 @@ Validation
 * ``Validation::compareFields()`` was added as a more flexible version of
   ``Validation::compareWith()``.
 * ``Validator::notSameAs()`` was added to make it
-  easier to check if a field is hot the same as another field.
+  easier to check if a field is not the same as another field.
