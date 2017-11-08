@@ -20,7 +20,7 @@ définition d'une table users, la création d'un model, du controller et des vue
 etc..
 
 Tout ceci est couvert étape par étape dans le
-:doc:`Tutorial du Blog </tutorials-and-examples/blog-auth-example/auth>`.
+:doc:`Tutorial du Blog </tutorials-and-examples/cms/authentication>`.
 
 Si vous cherchez des solutions existantes pour l'authentification et / ou
 l'autorisation pour CakePHP, allez jeter un oeil à la section

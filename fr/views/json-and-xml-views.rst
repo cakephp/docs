@@ -226,15 +226,16 @@ gérer les mappings de vue dans votre controller::
             // Définit le format de la Vue
             $this->viewBuilder()->className($formats[$format]);
 
-            // Définit le téléchargement forcé
-            $this->response->download('report-' . date('YmdHis') . '.' . $format);
-
             // Récupérer les données
             $videos = $this->Videos->find('latest');
 
             // Définir les Données de la Vue
             $this->set(compact('videos'));
             $this->set('_serialize', ['videos']);
+
+            // Définit le téléchargement forcé
+            // Avant 3.4.0
+            // $this->response->download('report-' . date('YmdHis') . '.' . $format);
+            return $this->response->withDownload('report-' . date('YmdHis') . '.' . $format);
         }
     }
-

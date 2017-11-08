@@ -181,3 +181,22 @@ Dans une version mineure, vous pouvez:
        bénéfice.
 .. [3] Nous essayons d'éviter ceci à tout prix. Tout retrait doit être documenté
        dans le guide de migration.
+
+Depréciations
+=============
+
+Dans chaque version mineure, les fonctionnalités peuvent être dépréciées. Si les
+fonctionnalités sont dépréciées, la documentation de l'API et des avertissements
+à l'exécution seront ajoutées. Les erreurs à l'exécution vous aideront à
+localiser le code qui doit être mis à jour avant qu'il ne casse. Si vous
+souhaitez désactiver les avertissements à l'exécution, vous pouvez le faire en
+utilisant la valeur de configuration ``Error.errorLevel``::
+
+   // dans config/app.php
+   // ...
+   'Error' => [
+       'errorLevel' => E_ALL ^ E_USER_DEPRECATED,
+   ]
+   // ...
+
+Va désactiver les avertissements de dépréciation à l'exécution.
