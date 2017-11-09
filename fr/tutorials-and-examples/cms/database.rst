@@ -172,4 +172,4 @@ modifiées via :ref:`entities-mass-assignment`.
 
 Pour l'instant, nous ne pouvons pas faire grande chose avec notre model. Pour
 intéragir avec notre model, nous allons ensuite créer nos premiers
-:doc:`Controller et Template <articles-controller>`.
+:doc:`Controller et Template </tutorials-and-examples/cms/articles-controller>`.
