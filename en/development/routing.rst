@@ -1337,13 +1337,14 @@ off with a route that looks like::
 
 You can generate URLs to this route using::
 
+    // $article is an entity in the local scope.
     Router::url(['_name' => 'articles:view', 'id' => $article->id]);
 
 Later on, you may want to expose the article slug in the URL for SEO purposes.
 In order to do this you would need to update everywhere you generate a URL to
 the ``articles:view`` route, which could take some time. If we use entity routes
-we pass the entire entity into URL generation allow us to skip any rework when
-URLs require more parameters::
+we pass the entire article entity into URL generation allowing us to skip any
+rework when URLs require more parameters::
 
     use Cake\Routing\Route\EntityRoute;
 
