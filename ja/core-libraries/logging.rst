@@ -59,7 +59,7 @@ debug/notice/info のログをより深刻なエラーから分離するのが�
         return new \Cake\Log\Engine\FileLog(['path' => LOGS, 'file' => 'log']);
     });
 
-設定オプションは :term:`DSN` の文字列で渡すことも可能性です。これは環境変数や :term:`PaaS`
+設定オプションは :term:`DSN` の文字列で渡すことも可能です。これは環境変数や :term:`PaaS`
 プロバイダーを扱っている時に役立ちます。 ::
 
     Log::config('error', [
