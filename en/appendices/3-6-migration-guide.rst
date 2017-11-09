@@ -19,6 +19,8 @@ features will continue to function until 4.0.0 after which they will be removed.
 * ``bin/cake orm_cache`` is now ``bin/cake schema_cache``.
 * ``Cake\Cache\Engine\ApcEngine`` has been renamed to
   ``Cake\Cache\Engine\ApcuEngine`` to better reflect the extension name.
+* ``Cake\ORM\Table::association()`` is deprecated. Use ``getAssociation()``
+  instead.
 
 
 Behavior Changes
@@ -71,6 +73,15 @@ ORM
 ===
 
 * ``EntityTrait::isEmpty()`` and ``EntityTrait::hasValue()`` were added.
+* ``Table::getAssociation()`` can now read deeply nested associations using
+  ``.`` separated paths. e.g ``Users.Comments``.
+
+Routing
+=======
+
+* ``Cake\Routing\Route\EntityRoute`` was added. This route class makes building
+  routes that need data from entities easier. See the :ref:`entity-routing`
+  section for more information.
 
 Shell
 =====
