@@ -31,7 +31,7 @@ CakePHP は下記のリレーショナルデータベースをサポートして
 
 * MySQL 5.1+
 * SQLite 3
-* PostgreSQL 8+
+* PostgreSQL 8.3+
 * SQLServer 2008+
 * Oracle (コミュニティープラグイン経由)
 
