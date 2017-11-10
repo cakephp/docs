@@ -478,7 +478,7 @@ as in plugins using ``$plugin\Cache\Engine``. src/plugin cache engines can
 also override the core engines. Cache adapters must be in a cache
 directory. If you had a cache engine named ``MyCustomCacheEngine``
 it would be placed in either **src/Cache/Engine/MyCustomCacheEngine.php**
-as an app/libs. Or in **plugin/src/Cache/Engine/MyCustomCacheEngine.php** as
+as an app/libs. Or in **plugins/MyPlugin/src/Cache/Engine/MyCustomCacheEngine.php** as
 part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax. ::
 
