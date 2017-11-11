@@ -454,11 +454,11 @@ src/plugin キャッシュエンジンは、コアエンジンをオーバーラ
 キャッシュアダプターはキャッシュディレクトリー内になければなりません。
 ``MyCustomCacheEngine`` という名前のキャッシュエンジンがあれば、 app/libs として
 **src/Cache/Engine/MyCustomCacheEngine.php** に置かれます。
-または、プラグインの一環として、 **plugin/Cache/Engine/MyCustomCacheEngine.php** に置かれます。
-プラグインのキャッシュ設定は、プラグインドット構文を使用する必要があります。 ::
+または、プラグインの一環として、 **plugins/MyPlugin/src/Cache/Engine/MyCustomCacheEngine.php**
+に置かれます。プラグインのキャッシュ設定は、プラグインドット構文を使用する必要があります。 ::
 
     Cache::config('custom', [
-        'className' => 'CachePack.MyCustomCache',
+        'className' => 'MyPlugin.MyCustomCache',
         // ...
     ]);
 
