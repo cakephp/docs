@@ -84,6 +84,7 @@ CakePHP にバンドルされているコード生成ユーティリティを利
         {
             $user = $this->Users->newEntity();
             if ($this->request->is('post')) {
+                // 3.4.0 より前は $this->request->data() が使われました。
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
@@ -189,9 +190,9 @@ CakePHP にバンドルされているコード生成ユーティリティを利
         public function beforeFilter(Event $event)
         {
             parent::beforeFilter($event);
-            // Allow users to register and logout.
-            // You should not add the "login" action to allow list. Doing so would
-            // cause problems with normal functioning of AuthComponent.
+            // ユーザーの登録とログアウトを許可します。
+            // allow のリストに "login" アクションを追加しないでください。
+            // そうすると AuthComponent の正常な機能に問題が発生します。
             $this->Auth->allow(['add', 'logout']);
         }
 
@@ -225,7 +226,7 @@ CakePHP にバンドルされているコード生成ユーティリティを利
     class User extends Entity
     {
 
-        // Make all fields mass assignable except for primary key field "id".
+        // 主キーフィールド "id" を除く、すべてのフィールドを一括代入可能にします。
         protected $_accessible = [
             '*' => true,
             'id' => false
@@ -303,10 +304,11 @@ password のカラムを持ち、ユーザーデータをコントローラー�
     {
         $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
+            // 3.4.0 より前は $this->request->data() が使われました。
             $article = $this->Articles->patchEntity($article, $this->request->getData());
-            // Added this line
+            // この行を追加
             $article->user_id = $this->Auth->user('id');
-            // You could also do the following
+            // また、次のようにすることもできます
             //$newData = ['user_id' => $this->Auth->user('id')];
             //$article = $this->Articles->patchEntity($article, $newData);
             if ($this->Articles->save($article)) {
@@ -317,8 +319,7 @@ password のカラムを持ち、ユーザーデータをコントローラー�
         }
         $this->set('article', $article);
 
-        // Just added the categories list to be able to choose
-        // one category for an article
+        // 記事のカテゴリーを1つ選択できるようにカテゴリーリストを追加しました
         $categories = $this->Articles->Categories->find('treeList');
         $this->set(compact('categories'));
     }
@@ -337,7 +338,7 @@ password のカラムを持ち、ユーザーデータをコントローラー�
     {
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
-            'authorize' => ['Controller'], // Added this line
+            'authorize' => ['Controller'], // この行を追加
             'loginRedirect' => [
                 'controller' => 'Articles',
                 'action' => 'index'
@@ -352,12 +353,12 @@ password のカラムを持ち、ユーザーデータをコントローラー�
 
     public function isAuthorized($user)
     {
-        // Admin can access every action
+        // 管理者はすべての操作にアクセスできます
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
         }
 
-        // Default deny
+        // デフォルトは拒否
         return false;
     }
 
@@ -376,13 +377,16 @@ password のカラムを持ち、ユーザーデータをコントローラー�
 
     public function isAuthorized($user)
     {
-        // All registered users can add articles
+        // 登録ユーザー全員が記事を追加できます
+        // 3.4.0 より前は $this->request->param('action') が使われました。
         if ($this->request->getParam('action') === 'add') {
             return true;
         }
 
-        // The owner of an article can edit and delete it
+        // 記事の所有者は編集して削除することができます
+        // 3.4.0 より前は $this->request->param('action') が使われました。
         if (in_array($this->request->getParam('action'), ['edit', 'delete'])) {
+            // 3.4.0 より前は $this->request->params('pass.0')
             $articleId = (int)$this->request->getParam('pass.0');
             if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
                 return true;

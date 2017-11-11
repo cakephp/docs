@@ -345,6 +345,7 @@ Articles コントローラーを編集する
         {
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
+                // 3.4.0 より前は $this->request->data() が使われました。
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
