@@ -483,7 +483,7 @@ part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax. ::
 
     Cache::config('custom', [
-        'className' => 'CachePack.MyCustomCache',
+        'className' => 'MyPlugin.MyCustomCache',
         // ...
     ]);
 
