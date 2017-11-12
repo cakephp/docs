@@ -184,7 +184,7 @@ Cache Sessions
 --------------
 
 The Cache class can be used to store sessions as well. This allows you to store
-sessions in a cache like APC, Memcached, or XCache. There are some caveats to
+sessions in a cache like APCu, or Memcached. There are some caveats to
 using cache sessions, in that if you exhaust the cache space, sessions will
 start to expire as records are evicted.
 

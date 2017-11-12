@@ -30,8 +30,6 @@ to implement your own caching systems. The built-in caching engines are:
 * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
   extension. Wincache is similar to APC in features and performance, but
   optimized for Windows and IIS.
-* ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_
-  is a PHP extension that provides similar features to APC.
 * ``MemcachedEngine`` Uses the `Memcached <http://php.net/memcached>`_
   extension.
 * ``RedisEngine`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
@@ -552,4 +550,4 @@ The required API for a CacheEngine is
 
 .. meta::
     :title lang=en: Caching
-    :keywords lang=en: uniform api,xcache,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apcu,apc,memcache,queries,cakephp,elements,servers,memory
+    :keywords lang=en: uniform api,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apcu,apc,memcache,queries,cakephp,elements,servers,memory

@@ -21,6 +21,9 @@ features will continue to function until 4.0.0 after which they will be removed.
   ``Cake\Cache\Engine\ApcuEngine`` to better reflect the extension name.
 * ``Cake\ORM\Table::association()`` is deprecated. Use ``getAssociation()``
   instead.
+* The ``Xcache`` cache engine has been deprecated. The Xcache extension is no
+  longer actively maintained. If you are using xcache, consider adopting APCu,
+  Memcached, or Redis instead.
 
 
 Behavior Changes
