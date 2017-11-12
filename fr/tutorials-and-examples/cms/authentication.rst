@@ -29,7 +29,6 @@ nous allons ajouter AuthComponent dans notre AppController::
         {
             // Code existant
 
-            $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
                 'authenticate' => [
                     'Form' => [
