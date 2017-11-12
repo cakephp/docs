@@ -206,6 +206,7 @@ can implement this, we'll add a new route. Your **config/routes.php** should
 look like::
 
     <?php
+    use Cake\Core\Plugin;
     use Cake\Routing\Route\DashedRoute;
     use Cake\Routing\Router;
 
