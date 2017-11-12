@@ -306,6 +306,10 @@ model. Si vous veniez à visiter l'URL **/articles/tagged**, vous verriez une er
 vous indiquant que la méthode ``findTagged()`` n'existe pas. Dans
 **src/Model/Table/ArticlesTable.php**, ajoutez le code suivant::
 
+    // Ajouter ce 'use' juste sous la déclaration du namespace pour importer
+    // la classe Query
+    use Cake\ORM\Query;
+
     // L'argument $query est une instance du Query builder.
     // Le tableau $options va contenir l'option 'tags' que nous avons passé
     // à find('tagged') dans notre action de controller.
