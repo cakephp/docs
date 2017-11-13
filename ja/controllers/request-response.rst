@@ -170,7 +170,7 @@ post 形式でデータを交換することがしばしばあります。 :php:
     // 現在のリクエスト URL が /subdir/articles/edit/1?page=1 であると仮定
 
     // /subdir/articles/edit/1?page=1 を保持
-    $here = $request->here();
+    $here = $request->getRequestTarget();
 
     // /subdir を保持
     $base = $request->getAttribute('base');
@@ -181,6 +181,7 @@ post 形式でデータを交換することがしばしばあります。 :php:
     // 3.4.0 より前
     $webroot = $request->webroot;
     $base = $request->base;
+    $here = $request->here();
 
 .. _check-the-request:
 
