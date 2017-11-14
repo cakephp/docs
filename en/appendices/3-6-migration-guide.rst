@@ -24,6 +24,8 @@ features will continue to function until 4.0.0 after which they will be removed.
 * The ``Xcache`` cache engine has been deprecated. The Xcache extension is no
   longer actively maintained. If you are using xcache, consider adopting APCu,
   Memcached, or Redis instead.
+* Passing a list of arrays to ``Router::setRequestInfo()`` is now deprecated.
+  Pass an instance of ``ServerRequest`` instead.
 
 
 Behavior Changes
