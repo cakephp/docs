@@ -27,6 +27,22 @@ features will continue to function until 4.0.0 after which they will be removed.
 * Passing a list of arrays to ``Router::setRequestInfo()`` is now deprecated.
   Pass an instance of ``ServerRequest`` instead.
 
+Disabling Deprecation Warnings
+==============================
+
+Deprecation warnings are intended to help you prepare for future versions of
+CakePHP, but updating your code will likely be an incremental process. You can
+disable deprecation warnings while you work towards adopting the new methods. In
+your **config/app.php** you can set ``Error.errorLevel``::
+
+    // in config/app.php
+    'Error' => [
+        'errorLevel' => E_ALL ^ E_USER_DEPRECATED
+    ]
+
+Once you have no remaining deprecation warnings you can set your error level to
+``E_ALL`` to help prevent future use of deprecated methods.
+
 
 Behavior Changes
 ================
