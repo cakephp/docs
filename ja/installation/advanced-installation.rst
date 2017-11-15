@@ -65,7 +65,7 @@ CakePHP アプリケーションのための composer.json ファイルは次の
     {
         "name": "example-app",
         "require": {
-            "cakephp/cakephp": "2.9.*"
+            "cakephp/cakephp": "2.10.*"
         },
         "config": {
             "vendor-dir": "Vendor/"

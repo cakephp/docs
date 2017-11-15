@@ -64,7 +64,7 @@ composer.json 可以象下面这样::
     {
         "name": "example-app",
         "require": {
-            "cakephp/cakephp": "2.8.*"
+            "cakephp/cakephp": "2.10.*"
         },
         "config": {
             "vendor-dir": "Vendor/"
