@@ -101,15 +101,15 @@ recursive
 recursive プロパティは CakePHP が ``find()`` 、 ``read()``
 メソッドを通して、どのぐらい深く関連モデルのデータを取得すべきかを定義します。
 
-アプリケーションががあるドメインに属している Group があり (belongsTo)、
-Group が多くの User を持ち (hasMany)、同様に User が多くの Article を持っているとします。
-$this->Group->find() を呼び出し、取得したいデータ量に基づいて、$recursive に異なる値を
-設定することができます:
+仮にアプリケーションの仕様として Group が Domain に属しており (belongsTo) 、
+多くの User を持ち (hasMany) 、さらに User が多くの Article を持っているとします。
+$this->Group->find() の呼び出しから返したいデータ量に基づいて、 $recursive
+に次のような異なる値を設定することができます。
 
 * -1 CakePHP は Group のデータだけを取得します。join しません。
-* 0  CakePHP は Group のデータとそのドメインを取得します。
-* 1  CakePHP は１つの Group とそのドメインとそれに関連した User を取得します。
-* 2  CakePHP は１つの Group とそのドメインとそれに関連した User と各 User に関連した
+* 0  CakePHP は Group のデータとその Domain を取得します。
+* 1  CakePHP は Group 、その Domain 、および関連する User を取得します。
+* 2  CakePHP は Group 、その Domain 、関連する User 、および User に関連する
   Article を取得します。
 
 必要以上に高く設定しないでください。CakePHP がデータを取得する際に、
