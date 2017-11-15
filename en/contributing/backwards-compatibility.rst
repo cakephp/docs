@@ -105,7 +105,7 @@ Working on CakePHP
 ==================
 
 If you are helping make CakePHP even better please keep the following guidelines
-in mind when adding/changing functionality: 
+in mind when adding/changing functionality:
 
 In a minor release you can:
 
@@ -190,4 +190,3 @@ value::
     // ...
 
 Will disable runtime deprecation warnings.
-
