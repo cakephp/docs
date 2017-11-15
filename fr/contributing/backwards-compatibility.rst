@@ -187,7 +187,7 @@ Depréciations
 
 Dans chaque version mineure, les fonctionnalités peuvent être dépréciées. Si les
 fonctionnalités sont dépréciées, la documentation de l'API et des avertissements
-à l'exécution seront ajoutées. Les erreurs à l'exécution vous aideront à
+à l'exécution seront ajoutés. Les erreurs à l'exécution vous aideront à
 localiser le code qui doit être mis à jour avant qu'il ne casse. Si vous
 souhaitez désactiver les avertissements à l'exécution, vous pouvez le faire en
 utilisant la valeur de configuration ``Error.errorLevel``::
