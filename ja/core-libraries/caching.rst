@@ -406,7 +406,7 @@ Cache API
 .. php:staticmethod:: add($key, $value, $config = 'default')
 
     キャッシュにデータを追加します。しかし、キーが存在しない場合に限ります。
-    データがゾン歳する場合、このメソッドは false を返します。
+    データが存在する場合、このメソッドは false を返します。
     可能な場合、データはアトミックにチェックとセットされます。
 
     .. versionadded:: 2.8
