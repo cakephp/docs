@@ -456,7 +456,7 @@ La même chose peut être appliquée à la fonction ``max()``, qui retourne un
         return $person->child->age;
     });
 
-    $personWithOldestDad = $collection->min('dad.age');
+    $personWithOldestDad = $collection->max('dad.age');
 
 .. php:method:: sumOf(string|callable $callback)
 
