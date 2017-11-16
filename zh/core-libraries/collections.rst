@@ -410,7 +410,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
         return $person->child->age;
     });
 
-    $personWithOldestDad = $collection->min('dad.age');
+    $personWithOldestDad = $collection->max('dad.age');
 
 .. php:method:: sumOf(string|callable $callback)
 

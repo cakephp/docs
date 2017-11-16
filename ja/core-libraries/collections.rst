@@ -424,7 +424,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
         return $person->child->age;
     });
 
-    $personWithOldestDad = $collection->min('dad.age');
+    $personWithOldestDad = $collection->max('dad.age');
 
 .. php:method:: sumOf(string|callable $callback)
 
