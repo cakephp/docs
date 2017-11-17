@@ -69,6 +69,11 @@ behavior that may affect your application:
 * MySQL connections now default to ``utf8mb4`` (4 byte unicode) as their
   encoding. If you want to continue using the old default of ``utf8``, set
   your application's datasource' encoding in ``config/app.php`` to 'utf8'.
+* APCu and Wincache engines no longer set separate ``_expires`` keys for data
+  with a TTL. Instead they rely on the native TTL features of the cache engine.
+  By default all entries created with APCu for a single request/CLI script will
+  have the same expiration time. You can use ``apc.use_request_time`` to change
+  this behavior.
 
 Core
 ====
