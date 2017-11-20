@@ -439,7 +439,7 @@ The ``$components`` property on your controllers allows you to configure
 components. Configured components and their dependencies will be created by
 CakePHP for you. Read the :ref:`configuring-components` section for more
 information. As mentioned earlier the ``$components`` property will be merged
-with the property defined in each of you controller's parent classes.
+with the property defined in each of your controller's parent classes.
 
 Configuring Helpers to Load
 ===========================
