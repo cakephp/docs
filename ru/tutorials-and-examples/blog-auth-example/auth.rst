@@ -1,7 +1,7 @@
 Пример создания блога - Часть 4 - Аутентификаця и авторизация
 #############################################################
 
-Следуя нашему примеру :doc: `/tutorials-and-examples/blog/blog`, представьте,
+Следуя нашему примеру :doc:`/tutorials-and-examples/blog/blog`, представьте,
 что мы хотим обеспечить доступ к определенным URL-адресам на основе 
 зарегистрированного входа пользователей. У нас также есть еще одно требование:
 чтобы наш блог имел нескольких авторов, которые могут создавать, редактировать
@@ -103,10 +103,11 @@
 
     }
 
+
 Тем же образом, которым мы создадим Вид для нашей статьи с помощью инструмента
 генерации кода (bake), таким же образом мы можем сгенерировать Вид для каждого 
 пользователя. Для целей настоящего учебника, мы будем показывать только 
-готовый add.ctp::
+готовый add.ctp:
 
 .. code-block:: php
 
@@ -312,7 +313,7 @@
 
 Кроме того, небольшое изменение в ArticlesController необходимо для 
 хранения данных пользователя, вошедшего в систему, в качестве эталона
-для созданной статьи:
+для созданной статьи::
 
     // src/Controller/ArticlesController.php
 
@@ -322,9 +323,9 @@
         if ($this->request->is('post')) {
             // Prior to 3.4.0 $this->request->data() was used.
             $article = $this->Articles->patchEntity($article, $this->request->getData());
-            // Добавим слудующую строку
+            // Added this line
             $article->user_id = $this->Auth->user('id');
-            // Вы также можете сделать следующее
+            // You could also do the following
             //$newData = ['user_id' => $this->Auth->user('id')];
             //$article = $this->Articles->patchEntity($article, $newData);
             if ($this->Articles->save($article)) {
@@ -335,8 +336,8 @@
         }
         $this->set('article', $article);
 
-        // Просто добавьте список категорий, чтобы иметь возможность выбирать
-        // одну категорию для статьи
+        // Just added the categories list to be able to choose
+        // one category for an article
         $categories = $this->Articles->Categories->find('treeList');
         $this->set(compact('categories'));
     }
