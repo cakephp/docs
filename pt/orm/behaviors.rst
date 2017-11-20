@@ -182,7 +182,7 @@ behavior agora deve parecer com::
 O código acima mostra alguns recursos interessantes de behaviors:
 
 - Behaviors podem definir métodos de callback definindo métodos que seguem as
-  convesões de :ref:`table-callbacks`.
+  convensões de :ref:`table-callbacks`.
 - Behaviors podem definir uma propriedade de configuração padrão. Essa propriedade é mesclada
   com as substituições quando um behavior é anexado à tabela.
 
