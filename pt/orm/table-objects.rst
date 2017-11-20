@@ -11,6 +11,11 @@ Objetos de tabela
     Você pode consultar a versão em inglês deste tópico através do seletor de
     idiomas localizado ao lado direito do campo de buscas da documentação.
 
+.. _table-callbacks:
+
+Lifecycle Callbacks
+===================
+
 Behaviors
 =========
 
