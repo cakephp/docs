@@ -25,7 +25,7 @@
     composer require cakephp/migrations:~1.0
 
 Плагин миграций теперь будет находиться в папке **plugins** вашего приложения.
-Также добавьте строку ``Plugin::load('Migrations');`` в файл **bootstrap.php**.
+Также добавьте строку ``Plugin::load('Migrations');`` в файл **config/bootstrap.php**.
 
 Как только плагин загружен выполните следующую команду для создания файла
 миграции::
