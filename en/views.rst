@@ -224,7 +224,8 @@ uncaptured content from the extending view. Assuming our view file has a
     echo $this->Html->link('edit', [
         'action' => 'edit',
         $post->id
-    ]); ?>
+    ]); 
+    ?>
     </li>
     <?php $this->end(); ?>
 
