@@ -320,11 +320,6 @@ The ``prepend()`` method allows you to prepend content to an existing block::
     // Prepend to sidebar
     $this->prepend('sidebar', 'this content goes on top of sidebar');
 
-.. note::
-
-    You should avoid using ``content`` as a block name. This is used by CakePHP
-    internally for extended views, and view content in the layout.
-
 
 Displaying Blocks
 -----------------
