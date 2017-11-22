@@ -388,5 +388,5 @@ O artigo adicionado deveria se parecer como isto:
     echo $this->Form->end();
 
 
-Quando você vai para o endereço ``/yoursite/articles/add`` você deve ver uma lista
+Quando você vai para o endereço ``/yoursite/categories/add`` você deve ver uma lista
 de categorias para escolher.

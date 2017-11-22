@@ -396,7 +396,7 @@ Le fichier **add** des articles devrait ressembler à ceci :
     echo $this->Form->button(__('Save Article'));
     echo $this->Form->end();
 
-Quand vous allez à l'adresse `/yoursite/articles/add`, vous devriez voir une
+Quand vous allez à l'adresse ``/yoursite/categories/add``, vous devriez voir une
 liste des catégories à choisir.
 
 .. meta::

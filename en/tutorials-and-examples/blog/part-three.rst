@@ -387,7 +387,7 @@ The article add file should look something like this:
     echo $this->Form->button(__('Save Article'));
     echo $this->Form->end();
 
-When you go to the address `/yoursite/articles/add` you should see a list
+When you go to the address `/yoursite/categories/add` you should see a list
 of categories to choose.
 
 .. meta::

@@ -381,7 +381,7 @@ Articles テンプレートを編集する
     echo $this->Form->button(__('Save Article'));
     echo $this->Form->end();
 
-`/yoursite/articles/add` のアドレスに行くと、カテゴリーを選ぶための一覧を見れるでしょう。
+`/yoursite/categories/add` のアドレスに行くと、カテゴリーを選ぶための一覧を見れるでしょう。
 
 .. meta::
     :title lang=ja: Blog Tutorial Migrations and Tree

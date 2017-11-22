@@ -280,7 +280,7 @@ El template add de Article debería verse similar a esto::
     echo $this->Form->button(__('Save Article'));
     echo $this->Form->end();
 
-Ingresando a `/yoursite/articles/add` deberías ver una lista de categorías para elegir.
+Ingresando a ``/yoursite/categories/add`` deberías ver una lista de categorías para elegir.
 
 .. meta::
     :title lang=es: Tutorial Blog - Parte 3
