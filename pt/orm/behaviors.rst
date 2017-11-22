@@ -44,7 +44,7 @@ behaviors:
 - Behavior estão localizados em **src/Model/Behavior**, ou
   ``MyPlugin\Model\Behavior``.
 - Classes de Behavior devem estar no namespace ``App\Model\Behavior``, ou
-  ``MyPlugin\Model\Behavior`` namespace.
+  no namespace ``MyPlugin\Model\Behavior``.
 - Classes de Behavior terminam com ``Behavior``.
 - Behaviors estendem ``Cake\ORM\Behavior``.
 
