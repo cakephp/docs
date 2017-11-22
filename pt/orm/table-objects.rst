@@ -27,10 +27,10 @@ Behaviors fornecem uma maneira fácil de criar partes de lógica horizontalmente
 reutilizáveis relacionadas às classes de tabela. Você pode estar se perguntando
 por que os behaviors são classes regulares e não traits. O principal motivo para
 isso é event listeners. Enquanto as traits permitiriam partes reutilizáveis de
-lógica, eles complicariam ligar os eventos.
+lógica, eles complicariam o uso de eventos.
 
 Para adicionar um behavior à sua tabela, você pode chamar o método ``addBehavior()``.
-Geralmente o melhor lugar para fazer isso está no método ``initialize()``::
+Geralmente o melhor lugar para fazer isso é no método ``initialize()``::
 
     namespace App\Model\Table;
 
