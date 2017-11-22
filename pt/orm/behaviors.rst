@@ -93,9 +93,9 @@ Definindo Métodos de Mixin
 --------------------------
 
 Qualquer método público definido em um behavior será adicionado como um método 'mixin'
-no objeto de tabela que está anexado. Se você anexar dois behavior fornecem os mesmos
-métodos uma exceção será lançada. Se um comportamento fornecer o mesmo método que uma
-classe de tabela, o método de comportamento não será chamado pela tabela. Os métodos
+no objeto de tabela que está anexado. Se você anexar dois behavior que fornecem os mesmos
+métodos uma exceção será lançada. Se um behavior fornecer o mesmo método que uma
+classe de tabela, o método de behavior não será chamado pela tabela. Os métodos
 de mixin receberão exatamente os mesmo argumentos fornecidos à tabela. Por exemplo, se
 o nosso SluggableBehavior definiu o seguinte método::
 
@@ -142,10 +142,10 @@ Defining Event Listeners
 ------------------------
 
 Agora que nosso behavior tem um método de 'mixin' para campos de slug, nós
-podemos implementar um listener de callback para automaticar gerar slug de um
-campo quando entidades são salvas. Nós também iremos modificar nosso método
-de slug para aceitar uma entidade ao invéz de apenas um valor simples. Nosso 
-behavior agora deve parecer com::
+podemos implementar um listener de callback para automaticamente gerar slug
+de um campo quando entidades são salvas. Nós também iremos modificar nosso
+método de slug para aceitar uma entidade ao invéz de apenas um valor simples. 
+Nosso behavior agora deve parecer com::
 
     namespace App\Model\Behavior;
 
@@ -203,8 +203,8 @@ Definindo Finders
 
 Agora que somos capazes de salvar artigos com valores de slug, nós devemos
 implementar um método de 'finder'(busca) para que possamos obter artigos por
-seus slugs. Em métodos de busca de behaviors, use as mesmas convenções que
-:ref:`custom-find-methods` usa. Nosso método ``find('slug')`` pareceria com::
+seus slugs. Em métodos de 'finder'(busca) de behaviors, use as mesmas convenções
+que :ref:`custom-find-methods` usa. Nosso método ``find('slug')`` pareceria com::
 
     public function findSlug(Query $query, array $options)
     {
@@ -230,7 +230,7 @@ nosso método ``find(slug)``, nós poderíamos fazer o seguinte::
         ]
     ];
 
-Aplicando esta configuração fará com ``find('slug')`` dispare um erro. No entanto,
+Aplicando esta configuração fará com que ``find('slug')`` dispare um erro. No entanto,
 ela deixara disponível ``find('slugged')``. Notavelmente, se nosso behavior
 implementasse outros métodos finder, eles **não** estariam disponíveis, pois não
 estão incluídos na configuração.
@@ -238,7 +238,7 @@ estão incluídos na configuração.
 Desde que os métodos expostos são decididos por configuração, você também pode
 renomear/remover métodos finder ao adicionar um behavior à tabela. Por exemplo::
 
-    // In a table's initialize() method.
+    // No método initialize() da tabela.
     $this->addBehavior('Sluggable', [
         'implementedFinders' => [
             'slugged' => 'findSlug',
@@ -282,15 +282,15 @@ Acessando Behaviors Carregados
 Uma vez que você anexou behaviors à sua instância da Table você pode conferir
 os behaviors carregados ou acessar behaviors específicos usando o ``BehaviorRegistry``::
 
-    // See which behaviors are loaded
+    // Verifica quais behaviors estão carregados
     $table->behaviors()->loaded();
 
-    // Check if a specific behavior is loaded.
-    // Remember to omit plugin prefixes.
+    // Verifica se um behavior especifico está carregado
+    // Lembre-se de omitir o prefixo de plugin.
     $table->behaviors()->has('CounterCache');
 
-    // Get a loaded behavior
-    // Remember to omit plugin prefixes
+    // Obtem um behavior carregado
+    // Lembre-se de omitir o prefixo de plugin
     $table->behaviors()->get('CounterCache');
 
 Re-configurando Behaviors Carregados
