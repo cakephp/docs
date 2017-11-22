@@ -92,7 +92,7 @@ realizar slug automaticamento de um campo.
 Definindo Métodos de Mixin
 --------------------------
 
-Qualquer método publico definido em um behavior será adicionado como um método 'mixin'
+Qualquer método público definido em um behavior será adicionado como um método 'mixin'
 no objeto de tabela que está anexado. Se você anexar dois behavior fornecem os mesmos
 métodos uma exceção será lançada. Se um comportamento fornecer o mesmo método que uma
 classe de tabela, o método de comportamento não será chamado pela tabela. Os métodos
