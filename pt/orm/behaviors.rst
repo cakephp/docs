@@ -41,7 +41,7 @@ behavior nos permitirá preencher um campo slug com o resultado de
 Antes de criar nosso behavior, devemos entender as convensão para
 behaviors:
 
-- Behavior estão localizados em **src/Model/Behavior**, or
+- Behavior estão localizados em **src/Model/Behavior**, ou
   ``MyPlugin\Model\Behavior``.
 - Classes de Behavior devem estar no namespace ``App\Model\Behavior``, ou
   ``MyPlugin\Model\Behavior`` namespace.
