@@ -85,7 +85,7 @@ normalmente tem propriedades de slug para criar URLs amigáveis::
         }
     }
 
-Nosso novo behavior não faz muita coisa no momento. Em seguida,, iremos adicionar um
+Nosso novo behavior não faz muita coisa no momento. Em seguida, iremos adicionar um
 método de mixin e um event listener para que, quando salvarmos entidades nós podemos
 realizar slug automaticamento de um campo.
 
