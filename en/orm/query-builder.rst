@@ -1425,7 +1425,7 @@ subqueries::
         ->where(['comment LIKE' => '%CakePHP%']);
 
     $query = $articles->find()
-        ->where(['id' => $matchingComment]);
+        ->where(['id IN' => $matchingComment]);
 
 Subqueries are accepted anywhere a query expression can be used. For example, in
 the ``select()`` and ``join()`` methods.
