@@ -186,7 +186,7 @@ Bake создал все необходимве файлы с нужным со�
 и в **src/Template/Categories/edit.ctp**::
 
     echo $this->Form->input('parent_id', [
-        'options' => $parentCategories,
+        'options' => $categories,
         'empty' => 'Нет родительской категории'
     ]);
 
