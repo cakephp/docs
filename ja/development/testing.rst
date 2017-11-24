@@ -585,7 +585,7 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 
 フィクスチャのロードは :php:attr:`CakeTestCase::$autoFixtures` を
 ``false`` に設定したあと、テストメソッドの中で
-:php:meth:`CakeTestCase::loadFixtures()`:: を使ってを制御することもできます。 ::
+:php:meth:`CakeTestCase::loadFixtures()` を使って制御することもできます。 ::
 
     class ArticleTest extends CakeTestCase {
         public $fixtures = array('app.article', 'app.comment');
