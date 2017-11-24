@@ -70,7 +70,6 @@ To create a default validation object in your table, create the
 
     class ArticlesTable extends Table
     {
-
         public function validationDefault(Validator $validator)
         {
             $validator
@@ -212,7 +211,6 @@ a validation rule::
 
     class UsersTable extends Table
     {
-
         public function validationDefault(Validator $validator)
         {
             $validator
