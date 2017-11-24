@@ -402,7 +402,7 @@ Using the TableRegistry
 
 .. php:class:: TableRegistry
 
-As we've seen earlier, the TableRegistry class provides an easy to use
+As we've seen earlier, the TableRegistry class provides an easy way to use
 factory/registry for accessing your applications table instances. It provides a
 few other useful features as well.
 
