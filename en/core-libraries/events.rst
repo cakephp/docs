@@ -57,7 +57,6 @@ has been created. To keep your Orders model clean you could use events::
 
     class OrdersTable extends Table
     {
-
         public function place($order)
         {
             if ($this->save($order)) {
@@ -175,7 +174,6 @@ as necessary. Our ``UserStatistics`` listener might start out like::
 
     class UserStatistic implements EventListenerInterface
     {
-
         public function implementedEvents()
         {
             return [
