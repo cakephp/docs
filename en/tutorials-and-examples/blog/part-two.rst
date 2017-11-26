@@ -458,6 +458,12 @@ like::
 
     public function edit($id = null)
     {
+        $id = (int)$id;
+        if ($id === 0){
+            $this->Flash->error(__('Error. Incorrect id of the requested article.'));
+            return $this->redirect(['action' => 'index']);
+        }
+
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
             // Prior to 3.4.0 $this->request->data() was used.
