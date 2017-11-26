@@ -209,7 +209,7 @@ into entities. See the :ref:`before-marshal` documentation for more information.
 beforeFind
 ----------
 
-.. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, $primary)
+.. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, boolean $primary)
 
 The ``Model.beforeFind`` event is fired before each find operation. By stopping
 the event and supplying a return value you can bypass the find operation
