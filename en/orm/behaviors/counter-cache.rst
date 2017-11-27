@@ -101,6 +101,9 @@ a callback method. This callable must return the count value to be stored::
         ]
     ]);
 
+It may also return a Query object that produces the count value and will be used
+as a subquery in the update statement. The ``$table`` parameter refers to the
+table object holding the behavior (not the target relation) for convenience.
 
 .. note::
 
