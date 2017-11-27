@@ -3,7 +3,7 @@ Extending Bake
 
 Bake features an extensible architecture that allows your application or plugins
 to modify or add-to the base functionality. Bake makes use of a dedicated
-view class which does not use standard PHP syntax.
+view class which uses the `Twig <https://twig.symfony.com/>`_ template engine.
 
 Bake Events
 ===========
@@ -70,7 +70,7 @@ variables used in the bake templates::
 
 You may also scope the ``Bake.beforeRender`` and ``Bake.afterRender`` events to
 a specific generated file. For instance, if you want to add specific actions to
-your UsersController when generating from a **Controller/controller.ctp** file,
+your UsersController when generating from a **Controller/controller.twig** file,
 you can use the following event::
 
     <?php
@@ -105,22 +105,7 @@ bake related event logic and provide callbacks that are easier to test.
 Bake Template Syntax
 ====================
 
-Bake template files use erb-style (``<% %>``) tags to denote template logic, and
-treat everything else including php tags as plain text.
-
-.. note::
-
-    Bake template files do not use, and are insensitive to, ``asp_tags`` php ini setting.
-
-``BakeView`` implements the following tags:
-
-  * ``<%`` A Bake template php open tag
-  * ``%>`` A Bake template php close tag
-  * ``<%=`` A Bake template php short-echo tag
-  * ``<%-`` A Bake template php open tag, stripping any leading whitespace
-    before the tag
-  * ``-%>`` A Bake template php close tag, stripping trailing whitespace after
-    the tag
+Bake template files use the `Twig <https://twig.symfony.com/doc/2.x/>`_ template syntax.
 
 One way to see/understand how bake templates works, especially when attempting
 to modify bake template files, is to bake a class and compare the template used
@@ -133,43 +118,18 @@ So, for example, when baking a shell like so:
 
     bin/cake bake shell Foo
 
-The template used (**vendor/cakephp/bake/src/Template/Bake/Shell/shell.ctp**)
+The template used (**vendor/cakephp/bake/src/Template/Bake/Shell/shell.twig**)
 looks like this::
 
     <?php
-    namespace <%= $namespace %>\Shell;
+    namespace {{ namespace }}\Shell;
 
     use Cake\Console\Shell;
 
     /**
-     * <%= $name %> shell command.
+     * {{ name }} shell command.
      */
-    class <%= $name %>Shell extends Shell
-    {
-
-        /**
-         * main() method.
-         *
-         * @return bool|int Success or error code.
-         */
-        public function main()
-        {
-        }
-
-    }
-
-The pre-processed template file (**tmp/bake/Bake-Shell-shell-ctp.php**), which is the
-file actually rendered, looks like this::
-
-    <CakePHPBakeOpenTagphp
-    namespace <?= $namespace ?>\Shell;
-
-    use Cake\Console\Shell;
-
-    /**
-     * <?= $name ?> shell command.
-     */
-    class <?= $name ?>Shell extends Shell
+    class {{ name }}Shell extends Shell
     {
 
         /**
@@ -207,6 +167,18 @@ And the resultant baked class (**src/Shell/FooShell.php**) looks like this::
 
     }
 
+.. note::
+
+    Prior to version 1.5.0 bake used a custom erb-style tags inside .ctp template files.
+
+    * ``<%`` A Bake template php open tag
+    * ``%>`` A Bake template php close tag
+    * ``<%=`` A Bake template php short-echo tag
+    * ``<%-`` A Bake template php open tag, stripping any leading whitespace
+      before the tag
+    * ``-%>`` A Bake template php close tag, stripping trailing whitespace after
+      the tag
+
 .. _creating-a-bake-theme:
 
 Creating a Bake Theme
@@ -233,13 +205,13 @@ Customizing the Bake Templates
 ==============================
 
 If you wish to modify the default output produced by the "bake" command, you can
-create your own bake templates in your application. This way does not use the 
+create your own bake templates in your application. This way does not use the
 ``--theme`` option in the command line when baking. The best way to do this is:
 
 #. Create a new directory **/src/Template/Bake/**.
 #. Copy any templates you want to override from
    **vendor/cakephp/bake/src/Template/Bake/** to matching files in your
-   application.    
+   application.
 
 Creating New Bake Command Options
 =================================
@@ -283,16 +255,16 @@ FooTask.php file should look like::
     }
 
 Once this file has been created, we need to create a template that bake can use
-when generating code. Create **src/Template/Bake/foo.ctp**. In this file we'll
+when generating code. Create **src/Template/Bake/foo.twig**. In this file we'll
 add the following content::
 
     <?php
-    namespace <%= $namespace %>\Foo;
+    namespace {{ namespace }}\Foo;
 
     /**
-     * <%= $name %> foo
+     * {{ $name }} foo
      */
-    class <%= $name %>Foo
+    class {{ name }}Foo
     {
         // Add code.
     }
@@ -330,5 +302,5 @@ command name::
 
 .. meta::
     :title lang=en: Extending Bake
-    :keywords lang=en: command line interface,development,bake view, bake template syntax,erb tags,asp tags,percent tags
+    :keywords lang=en: command line interface,development,bake view, bake template syntax,twig,erb tags,percent tags
 
