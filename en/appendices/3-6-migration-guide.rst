@@ -26,6 +26,34 @@ features will continue to function until 4.0.0 after which they will be removed.
   Memcached, or Redis instead.
 * Passing a list of arrays to ``Router::setRequestInfo()`` is now deprecated.
   Pass an instance of ``ServerRequest`` instead.
+* ``Cake\Network\Exception\BadRequestException`` has been renamed to
+  ``Cake\Http\Exception\BadRequestException``.
+* ``Cake\Network\Exception\ConflictException`` has been renamed to
+  ``Cake\Http\Exception\ConflictException``.
+* ``Cake\Network\Exception\ForbiddenException`` has been renamed to
+  ``Cake\Http\Exception\ForbiddenException``.
+* ``Cake\Network\Exception\GoneException`` has been renamed to
+  ``Cake\Http\Exception\GoneException``.
+* ``Cake\Network\Exception\HttpException`` has been renamed to
+  ``Cake\Http\Exception\HttpException``.
+* ``Cake\Network\Exception\InternalErrorException`` has been renamed to
+  ``Cake\Http\Exception\InternalErrorException``.
+* ``Cake\Network\Exception\InvalidCsrfTokenException`` has been renamed to
+  ``Cake\Http\Exception\InvalidCsrfTokenException``.
+* ``Cake\Network\Exception\MethodNotAllowedException`` has been renamed to
+  ``Cake\Http\Exception\MethodNotAllowedException``.
+* ``Cake\Network\Exception\NotAcceptableException`` has been renamed to
+  ``Cake\Http\Exception\NotAcceptableException``.
+* ``Cake\Network\Exception\NotFoundException`` has been renamed to
+  ``Cake\Http\Exception\NotFoundException``.
+* ``Cake\Network\Exception\NotImplementedException`` has been renamed to
+  ``Cake\Http\Exception\NotImplementedException``.
+* ``Cake\Network\Exception\ServiceUnavailableException`` has been renamed to
+  ``Cake\Http\Exception\ServiceUnavailableException``.
+* ``Cake\Network\Exception\UnauthorizedException`` has been renamed to
+  ``Cake\Http\Exception\UnauthorizedException``.
+* ``Cake\Network\Exception\UnavailableForLegalReasonsException`` has been
+  renamed to ``Cake\Http\Exception\UnavailableForLegalReasonsException``.
 
 Disabling Deprecation Warnings
 ==============================
