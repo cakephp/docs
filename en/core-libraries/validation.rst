@@ -501,7 +501,7 @@ use the ``newEntities()`` method::
     $entities = $this->Articles->newEntities($this->request->getData());
     foreach ($entities as $entity) {
         if (!$entity->errors()) {
-                $this->Articles->save($entity);
+            $this->Articles->save($entity);
         }
     }
 

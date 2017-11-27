@@ -281,7 +281,7 @@ setters::
         public function initialize(array $config)
         {
             $this->belongsTo('Users')
-                ->setForeignKey('user_id')
+                ->setForeignKey('user_id') // Avant la version CakePHP 3.4, utilisez foreignKey() au lieu de setForeignKey()
                 ->setJoinType('INNER');
         }
     }

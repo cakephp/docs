@@ -345,6 +345,7 @@ Articles コントローラーを編集する
         {
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
+                // 3.4.0 より前は $this->request->data() が使われました。
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
@@ -380,7 +381,7 @@ Articles テンプレートを編集する
     echo $this->Form->button(__('Save Article'));
     echo $this->Form->end();
 
-`/yoursite/articles/add` のアドレスに行くと、カテゴリーを選ぶための一覧を見れるでしょう。
+`/yoursite/categories/add` のアドレスに行くと、カテゴリーを選ぶための一覧を見れるでしょう。
 
 .. meta::
     :title lang=ja: Blog Tutorial Migrations and Tree

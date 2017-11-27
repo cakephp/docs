@@ -184,7 +184,7 @@ subdirectory. The attributes you can use are::
     // Assume the current request URL is /subdir/articles/edit/1?page=1
 
     // Holds /subdir/articles/edit/1?page=1
-    $here = $request->here();
+    $here = $request->getRequestTarget();
 
     // Holds /subdir
     $base = $request->getAttribute('base');
@@ -195,6 +195,7 @@ subdirectory. The attributes you can use are::
     // Prior to 3.4.0
     $webroot = $request->webroot;
     $base = $request->base;
+    $here = $request->here();
 
 .. _check-the-request:
 

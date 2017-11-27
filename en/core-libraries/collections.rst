@@ -443,7 +443,7 @@ element from the collection having the highest property value::
         return $person->child->age;
     });
 
-    $personWithOldestDad = $collection->min('dad.age');
+    $personWithOldestDad = $collection->max('dad.age');
 
 .. php:method:: sumOf(string|callable $callback)
 

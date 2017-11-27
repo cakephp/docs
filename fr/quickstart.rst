@@ -2,10 +2,11 @@ Guide de Démarrage Rapide
 *************************
 
 Le meilleur moyen de tester et d'apprendre CakePHP est de s'assoir et de
-construire une application simple de bookmarks.
+construire une application simple de gestion de Contenu (CMS).
 
-.. include:: /tutorials-and-examples/bookmarks/intro.rst
-.. include:: /tutorials-and-examples/bookmarks/part-two.rst
+.. include:: /tutorials-and-examples/cms/installation.rst
+.. include:: /tutorials-and-examples/cms/database.rst
+.. include:: /tutorials-and-examples/cms/articles-controller.rst
 
 .. meta::
     :title lang=fr: Pour Commencer

@@ -23,7 +23,7 @@ generates the URL for the controller and action combo. If ``full`` is
     echo $this->Url->build([
         "controller" => "Posts",
         "action" => "view",
-        "bar"
+        "bar",
     ]);
 
     // Output
@@ -36,7 +36,7 @@ URL with extension::
     echo $this->Url->build([
         "controller" => "Posts",
         "action" => "list",
-        "_ext" => "rss"
+        "_ext" => "rss",
     ]);
 
     // Output
@@ -55,7 +55,7 @@ URL with GET params and fragment anchor::
         "controller" => "Posts",
         "action" => "search",
         "?" => ["foo" => "bar"],
-        "#" => "first"
+        "#" => "first",
     ]);
 
     // Output
@@ -74,10 +74,10 @@ URL for named route::
     //     '/products/:slug',
     //     [
     //         'controller' => 'Products',
-    //         'action' => 'view'
+    //         'action' => 'view',
     //     ],
     //     [
-    //         '_name' => 'product-page'
+    //         '_name' => 'product-page',
     //     ]
     // );
     /products/i-m-slug
@@ -87,7 +87,19 @@ whether or not the base path should be added::
 
     $this->Url->build('/posts', [
         'escape' => false,
-        'fullBase' => true
+        'fullBase' => true,
+    ]);
+
+URL with asset timestamp wrapped by a ``<link rel="preload"/>``, here pre-loading
+a font. Note: The file must exist and ``Configure::read('Asset.timestamp')``
+must return ``true`` or ``'force'`` for the timestamp to be appended::
+
+    echo $this->Html->meta([
+        'rel' => 'preload',
+        'href' => $this->Url->assetUrl(
+            '/assets/fonts/yout-font-pack/your-font-name.woff2'
+        ),
+        'as' => 'font',
     ]);
 
 .. versionadded:: 3.3.5

@@ -285,8 +285,8 @@ de données d'entity, vos données requêtées devraient ressembler à ceci::
         'body' => 'The text',
         'user_id' => 1,
         'tags' => [
-            ['tag' => 'CakePHP'],
-            ['tag' => 'Internet'],
+            ['name' => 'CakePHP'],
+            ['name' => 'Internet'],
         ]
     ];
 

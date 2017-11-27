@@ -424,7 +424,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
         return $person->child->age;
     });
 
-    $personWithOldestDad = $collection->min('dad.age');
+    $personWithOldestDad = $collection->max('dad.age');
 
 .. php:method:: sumOf(string|callable $callback)
 
@@ -639,7 +639,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
 
 .. warning::
 
-    複数回ソートされたコレクションで反復処理ことは高コストです。そのような計画をしている場合、
+    複数回ソートされたコレクションで反復処理することは高コストです。そのような計画をしている場合、
     コレクションを配列への変換を検討したり、 単純に ``compile()`` メソッドを使用してください。
 
 ツリーデータの操作

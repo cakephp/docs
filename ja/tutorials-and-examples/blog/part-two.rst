@@ -280,6 +280,7 @@ Articles テーブルに対して ``get()`` を用いるとき、存在するレ
         {
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
+                // 3.4.0 より前は $this->request->data() が使われました。
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
@@ -308,6 +309,7 @@ POST なら、Articles モデルを使ってデータの保存を試みます。
 使用しています。
 
 ユーザーがフォームを使ってデータを POST した場合、その情報は、 ``$this->request->getData()``
+(CakePHP v3.3 以前の場合、 ``$this->request->data()`` )
 の中に入ってきます。 :php:func:`pr()` や :php:func:`debug()` を使うと、
 内容を画面に表示させて、確認することができます。
 
@@ -434,6 +436,7 @@ CakePHP のバリデーションエンジンは強力で、
     {
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
+            // 3.4.0 より前は $this->request->data() が使われました。
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));

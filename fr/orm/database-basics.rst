@@ -36,7 +36,7 @@ CakePHP supporte les serveurs de base de données relationnelles suivants:
 
 * MySQL 5.1+
 * SQLite 3
-* PostgreSQL 8+
+* PostgreSQL 8.3+
 * SQLServer 2008+
 * Oracle (avec un plugin créé par la communauté)
 
@@ -510,15 +510,15 @@ Faire correspondre des types de données personnalisés aux expressions SQL
 .. versionadded:: 3.3.0
     Le support pour le mappage des types de données personnalisés aux expressions SQL a été ajouté dans la version 3.3.0.
 
-L'exemple précédent fait correspondre un type de données personnalisé pour une 
-colonne de type 'json' qui est facilement représenté sous la forme d'une chaîne 
-dans une instruction SQL. Les types de données complexes ne peuvent pas être 
-représentées sous la forme de chaînes/entiers dans des requêtes SQL. Quand vous 
-travaillez avec ces types de données, votre class Type doit implémenter l'interface 
-``Cake\Database\Type\ExpressionTypeInterface``. Cette interface permet de 
+L'exemple précédent fait correspondre un type de données personnalisé pour une
+colonne de type 'json' qui est facilement représenté sous la forme d'une chaîne
+dans une instruction SQL. Les types de données complexes ne peuvent pas être
+représentées sous la forme de chaînes/entiers dans des requêtes SQL. Quand vous
+travaillez avec ces types de données, votre class Type doit implémenter l'interface
+``Cake\Database\Type\ExpressionTypeInterface``. Cette interface permet de
 représenter une valeur de votre type de données personnalisé comme une expression SQL.
 Comme exemple, nous allons construire une simple classe Type pour manipuler le type de
-données ``POINT`` de MysQL. Premièrement, nous allons définir un objet 'value' que nous 
+données ``POINT`` de MysQL. Premièrement, nous allons définir un objet 'value' que nous
 allons pouvoir utiliser pour représenter les données de ``POINT`` en PHP::
 
     // in src/Database/Point.php
@@ -554,7 +554,7 @@ allons pouvoir utiliser pour représenter les données de ``POINT`` en PHP::
         }
     }
 
-Maintenant que notre objet 'value' créé, nous avons besoin d'une classe Type pour 
+Maintenant que notre objet 'value' créé, nous avons besoin d'une classe Type pour
 faire correspondre les données dans cet objet et les expressions SQL::
 
     namespace App\Database\Type;
@@ -605,10 +605,10 @@ La classe ci-dessus fait quelques éléments intéressants :
 * La méthode ``toPHP`` se charge du parsing des résulats de la requête SQL dans un objet 'value'.
 * La méthode ``marshal`` se charge de convertir, comme celles données dans la requête, dans notre objet 'value'.
   Nous allons accepter des chaînes comme ``'10.24,12.34`` ainsi que des tableaux.
-* La méthode ``toExpression`` se charge de convertir notre objet 'value' dans des expressions SQL équivalentes. 
+* La méthode ``toExpression`` se charge de convertir notre objet 'value' dans des expressions SQL équivalentes.
   Dans notre exemple, le SQL résultant devrait être quelque choise comme ``POINT(10.24, 12.34)``.
 
-Une fois que nous avons construit notre type personnalisé, nous allons :ref:`connecter notre type à 
+Une fois que nous avons construit notre type personnalisé, nous allons :ref:`connecter notre type à
 notre class de table <saving-complex-types>`.
 
 .. _immutable-datetime-mapping:

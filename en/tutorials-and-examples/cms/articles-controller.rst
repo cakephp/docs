@@ -144,7 +144,7 @@ Our action takes a ``$slug`` parameter, but where does that parameter come from?
 If a user requests ``/articles/view/first-post``, then the value 'first-post' is
 passed as ``$slug`` by CakePHP's routing and dispatching layers.  If we
 reload our browser with our new action saved, we'd see another CakePHP error
-page telling use we're missing a view template; let's fix that.
+page telling us we're missing a view template; let's fix that.
 
 Create the View Template
 ========================

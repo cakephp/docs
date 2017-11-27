@@ -131,6 +131,11 @@ l'action ``add`` pour qu'elle ressemble à ceci::
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
+
+                // Hardcoding the user_id is temporary, and will be removed later
+                // when we build authentication out.
+                $article->user_id = 1;
+
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Votre article a été sauvegardé.'));
                     return $this->redirect(['action' => 'index']);
@@ -300,6 +305,10 @@ possible et mettons la majorité de la logique de notre application dans la couc
 model. Si vous veniez à visiter l'URL **/articles/tagged**, vous verriez une erreur
 vous indiquant que la méthode ``findTagged()`` n'existe pas. Dans
 **src/Model/Table/ArticlesTable.php**, ajoutez le code suivant::
+
+    // Ajouter ce 'use' juste sous la déclaration du namespace pour importer
+    // la classe Query
+    use Cake\ORM\Query;
 
     // L'argument $query est une instance du Query builder.
     // Le tableau $options va contenir l'option 'tags' que nous avons passé

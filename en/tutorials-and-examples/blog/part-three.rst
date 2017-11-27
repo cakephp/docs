@@ -350,6 +350,7 @@ it::
         {
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
+                // Prior to 3.4.0 $this->request->data() was used.
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
@@ -386,7 +387,7 @@ The article add file should look something like this:
     echo $this->Form->button(__('Save Article'));
     echo $this->Form->end();
 
-When you go to the address `/yoursite/articles/add` you should see a list
+When you go to the address `/yoursite/categories/add` you should see a list
 of categories to choose.
 
 .. meta::

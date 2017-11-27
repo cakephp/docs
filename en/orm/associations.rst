@@ -61,7 +61,7 @@ You can also use arrays to customize your associations::
        'propertyName' => 'person'
    ]);
 
-Arrays however do not offer the typehinting and autocomplete benefit the fluent interface does.
+Arrays, however, do not offer the typehinting and autocomplete benefit, the fluent interface does.
 
 The same table can be used multiple times to define different types of
 associations. For example consider a case where you want to separate
@@ -253,7 +253,6 @@ We can define the belongsTo association in our Addresses table as follows::
 
     class AddressesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->belongsTo('Users');
@@ -264,7 +263,6 @@ We can also define a more specific relationship using the setters::
 
     class AddressesTable extends Table
     {
-
         public function initialize(array $config)
         {
             // Prior to 3.4 version, use foreignKey() and joinType()
@@ -339,7 +337,6 @@ We can define the hasMany association in our Articles model as follows::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->hasMany('Comments');
@@ -350,7 +347,6 @@ We can also define a more specific relationship using the setters::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->hasMany('Comments')
@@ -420,8 +416,8 @@ Possible keys for hasMany association arrays include:
   equivalent subquery.
 - **saveStrategy**: Either 'append' or 'replace'. Defaults to 'append'. When 'append' the current
   records are appended to any records in the database. When 'replace' associated
-  records not in the current set will be removed. If the foreign key is a null
-  able column or if ``dependent`` is true records will be orphaned.
+  records not in the current set will be removed. If the foreign key is a nullable
+  column or if ``dependent`` is true records will be orphaned.
 - **finder**: The finder method to use when loading associated records.
 
 Once this association has been defined, find operations on the Articles table
@@ -472,7 +468,7 @@ often referred to as "has and belongs to many", and is a classic "many to many"
 association.
 
 The main difference between hasMany and BelongsToMany is that the link between
-the models in a BelongsToMany association are not exclusive. For example, we are
+the models in a BelongsToMany association is not exclusive. For example, we are
 joining our Articles table with a Tags table. Using 'funny' as a Tag for my
 Article, doesn't "use up" the tag. I can also use it on the next article
 I write.
@@ -501,7 +497,6 @@ We can define the belongsToMany association in both our models as follows::
     // In src/Model/Table/ArticlesTable.php
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->belongsToMany('Tags');
@@ -511,7 +506,6 @@ We can define the belongsToMany association in both our models as follows::
     // In src/Model/Table/TagsTable.php
     class TagsTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->belongsToMany('Articles');
@@ -523,7 +517,6 @@ We can also define a more specific relationship using configuration::
     // In src/Model/Table/TagsTable.php
     class TagsTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->belongsToMany('Articles', [

@@ -9,7 +9,7 @@ que séparément.
 Le but de cette présentation est d'introduire les concepts généraux de CakePHP,
 et de vous donner un aperçu rapide de la façon dont ces concepts sont mis en
 œuvre dans CakePHP. Si vous êtes impatient de démarrer un projet, vous pouvez
-:doc:`commencer avec le tutoriel </tutorials-and-examples/bookmarks/intro>`, ou
+:doc:`commencer avec le tutoriel </tutorials-and-examples/cms/installation>`, ou
 :doc:`vous plonger dans la documentation </topics>`.
 
 Conventions plutôt que Configuration

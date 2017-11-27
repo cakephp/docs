@@ -234,7 +234,13 @@ template de bake, faîtes ce qui suit:
    **vendor/cakephp/bake/src/Template/Bake/Template** vers les
    fichiers correspondants dans votre plugin.
 #. Quand vous lancez bake, utilisez l'option ``--theme`` pour spécifier le
-   theme de bake que vous souhaitez utiliser.
+   theme de bake que vous souhaitez utiliser. Pour éviter d'avoir à spécifier
+   cette option dans chaque appel, vous pouvez aussi définir votre thème
+   personnalisé à utiliser comme thème par défaut::
+
+        <?php
+        // in config/bootstrap.php or config/bootstrap_cli.php
+        Configure::write('Bake.theme', 'MyTheme');
 
 Personnaliser les Templates de Bake
 ===================================

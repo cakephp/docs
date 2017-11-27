@@ -32,7 +32,7 @@ CakePHP supports the following relational database servers:
 
 * MySQL 5.5+
 * SQLite 3
-* PostgreSQL 8+
+* PostgreSQL 8.3+
 * SQLServer 2008+
 * Oracle (through a community plugin)
 

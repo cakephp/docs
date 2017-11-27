@@ -292,7 +292,7 @@ Next we'll update the ``edit`` action. Replace the edit method with the followin
 Here we're modifying which properties can be mass-assigned, via the options
 for ``patchEntity()``. See the :ref:`changing-accessible-fields` section for
 more information. Remember to remove the ``user_id`` control from
-**src/Templates/Articles/edit.ctp** as we no longer need it.
+**src/Template/Articles/edit.ctp** as we no longer need it.
 
 Wrapping Up
 ===========

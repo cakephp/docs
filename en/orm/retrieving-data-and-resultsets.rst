@@ -21,6 +21,7 @@ ways to inspect the data returned by the ORM.
 - ``debug($query)`` Shows the SQL and bound params, does not show results.
 - ``debug($query->all())`` Shows the ResultSet properties (not the results).
 - ``debug($query->toArray())`` An easy way to show each of the results.
+- ``debug(iterator_to_array($query))`` Shows query results in an array format.
 - ``debug(json_encode($query, JSON_PRETTY_PRINT))`` More human readable results.
 - ``debug($query->first())`` Show the properties of a single entity.
 - ``debug((string)$query->first())`` Show the properties of a single entity as JSON.
@@ -31,7 +32,7 @@ Getting a Single Entity by Primary Key
 .. php:method:: get($id, $options = [])
 
 It is often convenient to load a single entity from the database when editing or
-view entities and their related data. You can do this by using ``get()``::
+viewing entities and their related data. You can do this by using ``get()``::
 
     // In a controller or table method.
 
@@ -874,10 +875,10 @@ column::
 
     $query = $articles->find()->contain([
         'FirstComment' => [
-                'strategy' => 'select',
-                'queryBuilder' => function ($q) {
-                    return $q->order(['FirstComment.created' =>'ASC'])->limit(1);
-                }
+            'strategy' => 'select',
+            'queryBuilder' => function ($q) {
+                return $q->order(['FirstComment.created' =>'ASC'])->limit(1);
+            }
         ]
     ]);
 

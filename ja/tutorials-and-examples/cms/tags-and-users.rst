@@ -107,7 +107,6 @@ ArticlesTable の ``initialize`` メソッドに以下を追加することで�
 アプリケーションにタグが付いたので、ユーザーが記事にタグを付けるようにする必要があります。
 まず ``add`` アクションを次のように更新してください。 ::
 
-    <?php
     // src/Controller/ArticlesController.php の中で
 
     namespace App\Controller;

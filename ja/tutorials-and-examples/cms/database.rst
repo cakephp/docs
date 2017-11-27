@@ -42,7 +42,7 @@ CMS チュートリアル - データベース作成
         tag_id INT NOT NULL,
         PRIMARY KEY (article_id, tag_id),
         FOREIGN KEY tag_key(tag_id) REFERENCES tags(id),
-        FOREIGN KEY bookmark_key(article_id) REFERENCES articles(id)
+        FOREIGN KEY article_key(article_id) REFERENCES articles(id)
     );
 
     INSERT INTO users (email, password, created, modified)
@@ -123,7 +123,7 @@ CakePHP のモデルは ``Table`` と ``Entity`` オブジェクトで構成さ�
         }
     }
 
-このテーブルの ``create`` や ``modified`` カラムを自動的に更新する
+このテーブルの ``created`` や ``modified`` カラムを自動的に更新する
 :doc:`/orm/behaviors/timestamp` ビヘイビアーを追加しました。
 Table オブジェクトを ``ArticlesTable`` と名付けることで、CakePHP は、命名規則により
 ``articles`` テーブルを使用するモデルであると解釈します。また、CakePHP は、

@@ -112,8 +112,12 @@ plusieurs mots comme ``article_categories``, la clé étrangère sera
 ``article_category_id``.
 
 Les tables de jointure utilisées dans les relations BelongsToMany entre models
-doivent être nommées d'après le nom des tables qu'elles unissent, dans l'ordre
-alphabétique (``articles_tags`` plutôt que ``tags_articles``).
+doivent être nommées d'après le nom des tables qu'elles unissent ou la commande
+bake ne fonctionnera pas, dans l'ordre alphabétique (``articles_tags`` plutôt
+que ``tags_articles``). Dans le cas où vous souhaitez ajouter des données
+supplémentaires à la table intermédiaire, vous devrez ajouter un champ ``id``
+à la table de jointure pour que ``articles_tags`` devienne une entity et la
+table aura au moins les clés ``article_id``, ``tag_id`` et ``id``.
 
 En plus de l'utilisation des clés auto-incrémentées en tant que clés primaires,
 vous voudrez peut-être aussi utiliser des colonnes UUID. CakePHP va créer un
@@ -155,7 +159,7 @@ vous aviez besoin de toute façon.
 
 Maintenant que vous avez été initié aux fondamentaux de CakePHP, vous devriez
 essayer de dérouler
-:doc:`le tutoriel du Blog CakePHP </tutorials-and-examples/bookmarks/intro>`
+:doc:`le tutoriel du Blog CakePHP </tutorials-and-examples/cms/installation>`
 pour voir comment les choses s'articulent.
 
 .. meta::

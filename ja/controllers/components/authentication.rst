@@ -17,7 +17,7 @@
 認証の設定には、ユーザーテーブルの定義、モデルやコントローラーやビューの作成など、
 いくつかのステップが必要です。
 
-:doc:`ブログチュートリアル </tutorials-and-examples/blog-auth-example/auth>`
+:doc:`CMS チュートリアル </tutorials-and-examples/cms/authentication>`
 の中で順を追って説明しています。
 
 もし、CakePHP のための既存の認証や認可の解決方法を探しているなら、Awesome CakePHP リストの

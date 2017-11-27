@@ -189,7 +189,7 @@ la création d'articles. Commencez par créer une action ``add()`` dans le
         {
             parent::initialize();
 
-            $this->loadComponent('Paginator'); 
+            $this->loadComponent('Paginator');
             $this->loadComponent('Flash'); // Inclusion du FlashComponent
         }
 
@@ -210,6 +210,11 @@ la création d'articles. Commencez par créer une action ``add()`` dans le
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
+
+                // Hardcoding the user_id is temporary, and will be removed later
+                // when we build authentication out.
+                $article->user_id = 1;
+
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Votre article a été sauvegardé.'));
                     return $this->redirect(['action' => 'index']);
@@ -330,12 +335,6 @@ de l'ORM pour créer notre slug::
             // maximum définie dans notre schéma
             $entity->slug = substr($sluggedTitle, 0, 191);
         }
-
-        // Ceci est temporaire, nous le retirerons quand nous
-        // construirons l'authentification.
-        if (!$entity->user_id) {
-            $entity->user_id = 1;
-        }
     }
 
 Ce code est simple et ne prend pas en compte les potentiels doublons de slug.
@@ -390,6 +389,7 @@ Le template edit devra ressembler à ceci :
     <h1>Modifier un article</h1>
     <?php
         echo $this->Form->create($article);
+        echo $this->Form->control('user_id', ['type' => 'hidden']);
         echo $this->Form->control('title');
         echo $this->Form->control('body', ['rows' => '3']);
         echo $this->Form->button(__('Sauvegarder l\'article'));

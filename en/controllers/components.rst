@@ -250,7 +250,7 @@ way you include them in controllers - using the ``$components`` var::
         public function bar()
         {
             // ...
-       }
+        }
     }
 
     // src/Controller/Component/ExistingComponent.php

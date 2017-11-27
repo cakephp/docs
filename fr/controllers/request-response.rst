@@ -192,17 +192,18 @@ sous-dossier. Les attributs que vous pouvez utiliser sont::
     // Suppose que la requête URL courante est /subdir/articles/edit/1?page=1
 
     // Contient /subdir/articles/edit/1?page=1
-    $here = $request->here();
+    $here = $request->getRequestTarget();
 
     // Contient /subdir
     $base = $request->getAttribute('base');
 
     // Contient /subdir/
-    $base = $request->getAttribute('base');
+    $base = $request->getAttribute('webroot');
 
     // Avant la version 3.4.0
     $webroot = $request->webroot;
     $base = $request->base;
+    $here = $request->here();
 
 .. _check-the-request:
 

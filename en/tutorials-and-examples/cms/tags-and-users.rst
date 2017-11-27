@@ -115,7 +115,6 @@ Updating Articles to Enable Tagging
 Now that our application has tags, we need to enable users to tag their
 articles. First, update the ``add`` action to look like::
 
-    <?php
     // in src/Controller/ArticlesController.php
 
     namespace App\Controller;
@@ -207,6 +206,7 @@ can implement this, we'll add a new route. Your **config/routes.php** should
 look like::
 
     <?php
+    use Cake\Core\Plugin;
     use Cake\Routing\Route\DashedRoute;
     use Cake\Routing\Router;
 

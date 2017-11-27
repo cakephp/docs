@@ -179,12 +179,10 @@ notation, or using ``get()`` and ``set()``. For example::
 
     class Article extends Entity
     {
-
         protected function _setTitle($title)
         {
             return Text::slug($title);
         }
-
     }
 
 The mutator would be run when setting the property through any of these two
@@ -214,13 +212,11 @@ actually exist. For example if your users table has ``first_name`` and
 
     class User extends Entity
     {
-
         protected function _getFullName()
         {
             return $this->_properties['first_name'] . '  ' .
                 $this->_properties['last_name'];
         }
-
     }
 
 You can access virtual properties as if they existed on the entity. The property
@@ -384,7 +380,7 @@ method::
 
 .. note::
 
-    Modifying accessible fields effects only the instance the method is called
+    Modifying accessible fields affects only the instance the method is called
     on.
 
 When using the ``newEntity()`` and ``patchEntity()`` methods in the ``Table``
@@ -476,12 +472,10 @@ could be provided by a trait::
 
     trait SoftDeleteTrait
     {
-
         public function softDelete()
         {
             $this->set('deleted', true);
         }
-
     }
 
 You could then use this trait in your entity class by importing it and including
@@ -511,7 +505,7 @@ data. CakePHP makes this simple::
     // Associations will be converted with jsonSerialize hook as well.
     $json = json_encode($user);
 
-When converting an entity to an JSON the virtual & hidden field lists are
+When converting an entity to an JSON, the virtual & hidden field lists are
 applied. Entities are recursively converted to JSON as well. This means that if you
 eager loaded entities and their associations CakePHP will correctly handle
 converting the associated data into the correct format.
@@ -532,9 +526,7 @@ properties that should be exposed::
 
     class User extends Entity
     {
-
         protected $_virtual = ['full_name'];
-
     }
 
 This list can be modified at runtime using ``virtualProperties``::
@@ -555,9 +547,7 @@ hidden::
 
     class User extends Entity
     {
-
         protected $_hidden = ['password'];
-
     }
 
 This list can be modified at runtime using ``hiddenProperties``::

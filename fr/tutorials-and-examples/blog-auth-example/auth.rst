@@ -89,6 +89,7 @@ classe obtenue grâce à l'utilitaire de génération de code fournis par CakePH
         {
             $user = $this->Users->newEntity();
             if ($this->request->is('post')) {
+                // Avant 3.4.0 $this->request->data() etait utilisée.
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__("L'utilisateur a été sauvegardé."));
@@ -318,6 +319,7 @@ l'utilisateur connecté courant en référence pour l'article créé::
     {
         $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
+            // Avant 3.4.0 $this->request->data() etait utilisée.
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             // Ajout de cette ligne
             $article->user_id = $this->Auth->user('id');
@@ -397,12 +399,15 @@ Ajoutez le contenu suivant à votre ``ArticlesController.php``::
     public function isAuthorized($user)
     {
         // Tous les utilisateurs enregistrés peuvent ajouter des articles
+        // Avant 3.4.0 $this->request->param('action') etait utilisée.
         if ($this->request->getParam('action') === 'add') {
             return true;
         }
 
         // Le propriétaire d'un article peut l'éditer et le supprimer
+        // Avant 3.4.0 $this->request->param('action') etait utilisée.
         if (in_array($this->request->getParam('action'), ['edit', 'delete'])) {
+            // Avant 3.4.0 $this->request->params('pass.0')
             $articleId = (int)$this->request->getParam('pass.0');
             if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
                 return true;

@@ -1046,13 +1046,11 @@ column Types::
 
     class UsersTable extends Table
     {
-
         protected function _initializeSchema(TableSchema $schema)
         {
             $schema->columnType('preferences', 'json');
             return $schema;
         }
-
     }
 
 The code above maps the ``preferences`` column to the ``json`` custom type.
@@ -1151,7 +1149,8 @@ many rows at once::
     {
         $this->updateAll(
             ['published' => true], // fields
-            ['published' => false]); // conditions
+            ['published' => false] // conditions
+        ); 
     }
 
 If you need to do bulk updates and use SQL expressions, you will need to use an
