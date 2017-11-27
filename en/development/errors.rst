@@ -23,7 +23,8 @@ your application:
 
 * ``errorLevel`` - int - The level of errors you are interested in capturing.
   Use the built-in php error constants, and bitmasks to select the level of
-  error you are interested in.
+  error you are interested in. You can set this to ``E_ALL ^ E_USER_DEPRECATED``
+  to disable deprecation warnings.
 * ``trace`` - bool - Include stack traces for errors in log files. Stack
   traces will be included in the log after each error. This is helpful for
   finding where/when errors are being raised.
