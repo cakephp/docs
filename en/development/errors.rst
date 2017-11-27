@@ -117,7 +117,7 @@ standard error page, you can override it like::
         }
     }
 
-.. php:namespace:: Cake\Network\Exception
+.. php:namespace:: Cake\Http\Exception
 
 Exception Classes
 =================
@@ -213,8 +213,9 @@ You can throw these exceptions from your controllers to indicate failure states,
 or HTTP errors. An example use of the HTTP exceptions could be rendering 404
 pages for items that have not been found::
 
-    use Cake\Network\Exception\NotFoundException;
-    
+    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
+    use Cake\Http\Exception\NotFoundException;
+
     public function view($id = null)
     {
         $article = $this->Articles->findById($id)->first();
@@ -380,8 +381,9 @@ Using HTTP Exceptions in your Controllers
 You can throw any of the HTTP related exceptions from your controller actions
 to indicate failure states. For example::
 
-    use Cake\Network\Exception\NotFoundException;
-    
+    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
+    use Cake\Http\Exception\NotFoundException;
+
     public function view($id = null)
     {
         $article = $this->Articles->findById($id)->first();

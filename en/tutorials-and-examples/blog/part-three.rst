@@ -339,7 +339,8 @@ it::
 
     namespace App\Controller;
 
-    use Cake\Network\Exception\NotFoundException;
+    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
+    use Cake\Http\Exception\NotFoundException;
 
     class ArticlesController extends AppController
     {

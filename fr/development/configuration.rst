@@ -593,7 +593,8 @@ générique plutôt que la vraie classe du Model::
 
     // Dans votre fichier bootstrap.php
     use Cake\Event\EventManager;
-    use Cake\Network\Exception\InternalErrorException;
+    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
+    use Cake\Http\Exception\InternalErrorException;
 
     $isCakeBakeShellRunning = (PHP_SAPI === 'cli' && isset($argv[1]) && $argv[1] === 'bake');
     if (!$isCakeBakeShellRunning) {
