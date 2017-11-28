@@ -2,8 +2,8 @@ Bake の拡張
 ###########
 
 Bake は、アプリケーションやプラグインが基本機能に対して変更または追加を可能にする
-拡張可能なアーキテクチャーを備えています。
-Bake は、標準の PHP 構文を使用していない専用のビュークラスを利用します。
+拡張可能なアーキテクチャーを備えています。Bake は、 `Twig <https://twig.symfony.com/>`_
+テンプレートエンジンを使用したビュークラスを利用します。
 
 Bake イベント
 =============
@@ -70,7 +70,7 @@ Bake イベントは、既存のテンプレートに小さな変更を行うた
 
 特定の生成されたファイルへの ``Bake.beforeRender`` と ``Bake.afterRender``
 イベントを指定することもあるでしょう。例えば、
-**Controller/controller.ctp** ファイルから生成する際、 UsersController
+**Controller/controller.twig** ファイルから生成する際、 UsersController
 に特定のアクションを追加したい場合、以下のイベントを使用することができます。 ::
 
     <?php
@@ -106,21 +106,8 @@ bake 関連のイベント・ロジックを簡素化し、テストするのが
 Bake テンプレート構文
 =====================
 
-Bake テンプレートファイルは、テンプレートのロジックを提供し、PHP タグを含む
-他のすべてをプレーンテキストとして扱うために、erb スタイル (``<% %>``) タグを
-使用します。
-
-.. note::
-
-  Bake テンプレートファイルでは、 ``asp_tags`` PHP の ini 設定は使用も反応もしません。
-
-``BakeView`` は、次のタグを実装します。
-
-* ``<%`` Bake テンプレートの PHP 開始タグ
-* ``%>`` Bake テンプレートの PHP 終了タグ
-* ``<%=`` Bake テンプレートの PHP ショートエコータグ
-* ``<%-`` Bake テンプレートの PHP 開始タグ、タグの前に、先頭の空白を除去
-* ``-%>`` Bake テンプレートの PHP 終了タグ、タグの後に末尾の空白を除去
+Bake テンプレートファイルは、 `Twig <https://twig.symfony.com/doc/2.x/>`__
+テンプレート構文を使用します。
 
 bake テンプレートがどのように動作するかを確認/理解する一つの方法は、
 bake テンプレートファイルを変更しようとする場合は特に、クラスを bake して、
@@ -133,43 +120,18 @@ bake テンプレートファイルを変更しようとする場合は特に、
 
     bin/cake bake shell Foo
 
-(**vendor/cakephp/bake/src/Template/Bake/Shell/shell.ctp**) を使用した
+(**vendor/cakephp/bake/src/Template/Bake/Shell/shell.twig**) を使用した
 テンプレートは、以下のようになります。 ::
 
     <?php
-    namespace <%= $namespace %>\Shell;
+    namespace {{ namespace }}\Shell;
 
     use Cake\Console\Shell;
 
     /**
-     * <%= $name %> shell command.
+     * {{ name }} shell command.
      */
-    class <%= $name %>Shell extends Shell
-    {
-
-        /**
-         * main() method.
-         *
-         * @return bool|int Success or error code.
-         */
-        public function main()
-        {
-        }
-
-    }
-
-前処理されたテンプレートファイル (**tmp/bake/Bake-Shell-shell-ctp.php**) は、
-実際にレンダリングされて、このようになります。 ::
-
-    <CakePHPBakeOpenTagphp
-    namespace <?= $namespace ?>\Shell;
-
-    use Cake\Console\Shell;
-
-    /**
-     * <?= $name ?> shell command.
-     */
-    class <?= $name ?>Shell extends Shell
+    class {{ name }}Shell extends Shell
     {
 
         /**
@@ -207,6 +169,17 @@ bake テンプレートファイルを変更しようとする場合は特に、
         }
 
     }
+
+.. note::
+
+    バージョン 1.5.0 より前の bake は、 .ctp テンプレートファイルでカスタム erb スタイルのタグを
+    使用していました。
+
+    * ``<%`` Bake テンプレートの PHP 開始タグ
+    * ``%>`` Bake テンプレートの PHP 終了タグ
+    * ``<%=`` Bake テンプレートの PHP ショートエコータグ
+    * ``<%-`` Bake テンプレートの PHP 開始タグ、タグの前に、先頭の空白を除去
+    * ``-%>`` Bake テンプレートの PHP 終了タグ、タグの後に末尾の空白を除去
 
 .. _creating-a-bake-theme:
 
@@ -282,16 +255,16 @@ FooTask.php ファイルは次のようになります。 ::
     }
 
 このファイルが作成されたら、コードを生成する際に bake 使用することができるテンプレートを
-作成する必要があります。 **src/Template/Bake/foo.ctp** を作成してください。
+作成する必要があります。 **src/Template/Bake/foo.twig** を作成してください。
 このファイルに、以下の内容を追加します。 ::
 
     <?php
-    namespace <%= $namespace %>\Foo;
+    namespace {{ namespace }}\Foo;
 
     /**
-     * <%= $name %> foo
+     * {{ $name }} foo
      */
-    class <%= $name %>Foo
+    class {{ name }}Foo
     {
         // コードを追加。
     }
@@ -327,4 +300,4 @@ FooTask.php ファイルは次のようになります。 ::
 
 .. meta::
     :title lang=ja: Bake の拡張
-    :keywords lang=ja: コマンドラインインターフェース,開発,bake view, bake template 構文,erb タグ,asp タグ,パーセントタグ
+    :keywords lang=ja: command line interface,development,bake view, bake template syntax,twig,erb tags,percent tags
