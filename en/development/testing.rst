@@ -421,7 +421,6 @@ in your **tests/Fixture** directory, with the following content::
 
     class ArticlesFixture extends TestFixture
     {
-
           // Optional. Set this property to load fixtures to a different test datasource
           public $connection = 'test';
 
@@ -530,7 +529,6 @@ you could do the following::
 
     class ArticlesFixture extends TestFixture
     {
-
         public $fields = [
             'id' => ['type' => 'integer'],
             'title' => ['type' => 'string', 'length' => 255, 'null' => false],
@@ -700,7 +698,6 @@ Let's say we already have our Articles Table class defined in
 
     class ArticlesTable extends Table
     {
-
         public function findPublished(Query $query, array $options)
         {
             $query->where([
@@ -1152,7 +1149,6 @@ and make sure our web service is returning the proper response::
 
     class MarkersControllerTest extends IntegrationTestCase
     {
-
         public function testGet()
         {
             $this->configRequest([
@@ -1432,7 +1428,6 @@ snippet of code::
 
     class MyConsoleShellTest extends ConsoleIntegrationTestCase
     {
-
         public $fixtures = [
             // assumes you have a UsersFixture
             'app.users'
@@ -1751,7 +1746,6 @@ Now we create our tests::
 
     class CurrencyRendererHelperTest extends TestCase
     {
-
         public $helper = null;
 
         // Here we instantiate our helper
@@ -1803,7 +1797,6 @@ Expanding on the Orders example, say we have the following tables::
 
     class OrdersTable extends Table
     {
-
         public function place($order)
         {
             if ($this->save($order)) {
@@ -1820,7 +1813,6 @@ Expanding on the Orders example, say we have the following tables::
 
     class CartsTable extends Table
     {
-
         public function implementedEvents()
         {
             return [
@@ -1852,7 +1844,6 @@ the event data::
 
     class OrdersTableTest extends TestCase
     {
-
         public $fixtures = ['app.orders'];
 
         public function setUp()
@@ -1933,7 +1924,6 @@ also need to prefix your plugin fixtures with ``plugin.blog.blog_posts``::
 
     class BlogPostsTableTest extends TestCase
     {
-
         // Plugin fixtures located in /plugins/Blog/tests/Fixture/
         public $fixtures = ['plugin.blog.blog_posts'];
 
