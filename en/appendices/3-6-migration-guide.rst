@@ -26,6 +26,16 @@ features will continue to function until 4.0.0 after which they will be removed.
   Memcached, or Redis instead.
 * Passing a list of arrays to ``Router::setRequestInfo()`` is now deprecated.
   Pass an instance of ``ServerRequest`` instead.
+* ``Cake\Controller\Controller:$name`` is protected now. Use
+  ``Controller::getName()/setName()`` to access a controller's name in other
+  contexts.
+* ``Cake\Controller\Controller:$plugin`` is protected now. Use
+  ``Controller::getPlugin()/setPlugin()`` to access a controller's plugin in
+  other contexts.
+* ``Cake\Controller\Controller:$autoRender`` is deprecated. Use
+  ``enableAutoRender()/disableAutoRender()/isAutoRenderEnabled()`` in other
+  contexts.
+  ``Controller::getPlugin()/setPlugin()`` instead.
 * ``Cake\Network\Exception\BadRequestException`` has been renamed to
   ``Cake\Http\Exception\BadRequestException``.
 * ``Cake\Network\Exception\ConflictException`` has been renamed to
