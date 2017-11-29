@@ -18,7 +18,6 @@ of a ``View``, use the ``Text`` class::
 
     class UsersController extends AppController
     {
-
         public function initialize()
         {
             parent::initialize();
