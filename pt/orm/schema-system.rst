@@ -72,14 +72,14 @@ método  `column()` ou `columns()`::
     $cols = $schema->columns();
 
 
-Indexes and Constraints
------------------------
+Índices e Restrições
+--------------------
 
-Indexes are added using the ``addIndex()``. Constraints are added using
-``addConstraint()``.  Indexes and constraints cannot be added for columns that do
-not exist, as it would result in an invalid state. Indexes are different from
-constraints, and exceptions will be raised if you try to mix types between the
-methods. An example of both methods is::
+Os índices são adicionado usando ``addIndex()``. Restrições são adicionadas
+usando ``addConstraint()``. Os índices e restriçes não podem ser adicionados
+para colunas que não existem, já que isso resultaria em um estado ínvalido.
+Os índices são difentes de restrições, e exceções serão disparadas se você
+tentar misturar tipos entre os métodos. Um exemplo de ambos os métodos é::
 
     $schema = new TableSchema('posts');
     $schema->addColumn('id', 'integer')
@@ -87,22 +87,22 @@ methods. An example of both methods is::
       ->addColumn('title', 'string')
       ->addColumn('slug', 'string');
 
-    // Add a primary key.
+    // Adiciona uma chave primária.
     $schema->addConstraint('primary', [
       'type' => 'primary',
       'columns' => ['id']
     ]);
-    // Add a unique key
-    $schema->addConstraint('slug_idx', [
+    // Adiciona uma chave única
+    $schema->addConstraint('slug_idx', [
       'columns' => ['slug'],
       'type' => 'unique',
     ]);
-    // Add index
+    // Adiciona um index
     $schema->addIndex('slug_title', [
       'columns' => ['slug', 'title'],
       'type' => 'index'
     ]);
-    // Add a foreign key
+    // Adiciona uma chave estrangeira
     $schema->addConstraint('author_id_idx', [
       'columns' => ['author_id'],
       'type' => 'foreign',
@@ -111,9 +111,9 @@ methods. An example of both methods is::
       'delete' => 'cascade'
     ]);
 
-If you add a primary key constraint to a single integer column it will automatically
-be converted into a auto-increment/serial column depending on the database
-platform::
+Se você adicionar uma restrição de chave primária para uma coluna do tipo integer, ela 
+será automaticamente convertida em uma coluna auto-increment/serial dependendo da
+plataforma de banco de dados::
 
     $schema = new TableSchema('posts');
     $schema->addColumn('id', 'integer')
@@ -122,18 +122,17 @@ platform::
         'columns' => ['id']
     ]);
 
-In the above example the ``id`` column would generate the following SQL in
-MySQL::
+No exemplo abaixo a coluna ``id`` geraria o seguinte SQL em MySQL::
 
     CREATE TABLE `posts` (
         `id` INTEGER AUTO_INCREMENT,
         PRIMARY KEY (`id`)
     )
 
-If your primary key contains more than one column, none of them will
-automatically be converted to an auto-increment value. Instead you will need to
-tell the table object which column in the composite key you want to
-auto-increment::
+Se sua chave primária contêm mais que uma coluna, nenhuma delas serão
+automaticamente convertidas para um valor auto-incremento. Em vez disso,
+você precisará dizer ao objeto da tabela qual coluna na chave composta que você
+deseja usar auto-incremento::
 
     $schema = new TableSchema('posts');
     $schema->addColumn('id', [
@@ -146,8 +145,8 @@ auto-increment::
         'columns' => ['id', 'account_id']
     ]);
 
-The ``autoIncrement`` option only works with ``integer`` and ``biginteger``
-columns.
+A opção ``autoIncrement`` apenas funciona com colunas do tipo ``integer``
+e ``biginteger``.
 
 Reading Indexes and Constraints
 -------------------------------
