@@ -187,30 +187,30 @@ pode ser usado para adicionar opções de tabela::
 Os dialetos de plataforma apenas cuidam das chaves que eles estão interessados
 e ignoram o resto. Nem todas as opções são suportadas por todas as plataformas.
 
-Converting Tables into SQL
---------------------------
+Convertendo TableSchema em SQL
+------------------------------
 
-Using the ``createSql()`` or ``dropSql()`` you can get
-platform specific SQL for creating or dropping a specific table::
+Usando os métodos ``createSql()`` ou ``dropSql()`` você pode obter
+SQL específico de plataforma para criar ou remover uma tabela específica::
 
     $db = ConnectionManager::get('default');
     $schema = new TableSchema('posts', $fields, $indexes);
 
-    // Create a table
+    // Criar uma tabela
     $queries = $schema->createSql($db);
     foreach ($queries as $sql) {
       $db->execute($sql);
     }
 
-    // Drop a table
+    // Remover um tabela
     $sql = $schema->dropSql($db);
     $db->execute($sql);
 
-By using a connection's driver the schema data can be converted into platform
-specific SQL. The return of ``createSql`` and ``dropSql`` is a list of SQL
-queries required to create a table and the required indexes. Some platforms may
-require multiple statements to create tables with comments and/or indexes. An
-array of queries is always returned.
+Ao usar o driver de conexão, os dados de schema podem ser convertidos em
+SQL específico da plataforma. O retorno de ``createSql`` e ``dropSql`` é uma
+lista de consultas SQL requeridas para criar uma tabela e os indices.
+Algumas plataformas podem requerer várias declaraçes para criar tabelas com
+comentários e/ou índices. Um array de consultas SQL é sempre retornado.
 
 
 Schema Collections
@@ -218,18 +218,18 @@ Schema Collections
 
 .. php:class:: Collection
 
-``Collection`` provides access to the various tables available on a connection.
-You can use it to get the list of tables or reflect tables into
-:php:class:`TableSchema` objects. Basic usage of the class looks like::
+``Collection`` fornecem acesso as várias tabelas disponíveis numa conexão.
+Você pode usar isto para obter a lista de tabelas ou refletir tabelas em 
+objetos :php:class:`TableSchema`. O uso básico da classe parece com::
 
     $db = ConnectionManager::get('default');
 
-    // Create a schema collection.
+    // Criar uma coleção de schema.
     $collection = $db->schemaCollection();
 
-    // Get the table names
+    // Obtem os nomes das tabelas.
     $tables = $collection->listTables();
 
-    // Get a single table (instance of Schema\TableSchema)
+    // Obtem uma tabela específica (instância de Schema\TableSchema)
     $tableSchema = $collection->describe('posts');
 
