@@ -131,7 +131,6 @@ looks like this::
      */
     class {{ name }}Shell extends Shell
     {
-
         /**
          * main() method.
          *
@@ -155,7 +154,6 @@ And the resultant baked class (**src/Shell/FooShell.php**) looks like this::
      */
     class FooShell extends Shell
     {
-
         /**
          * main() method.
          *
