@@ -159,7 +159,6 @@ want and the Security Component will enforce them on its startup::
 
     class WidgetsController extends AppController
     {
-
         public function initialize()
         {
             parent::initialize();
@@ -184,7 +183,6 @@ require secure SSL requests::
 
     class WidgetsController extends AppController
     {
-
         public function initialize()
         {
             parent::initialize();
@@ -238,7 +236,6 @@ There may be cases where you want to disable all security checks for an action
 
     class WidgetController extends AppController
     {
-
         public function initialize()
         {
             parent::initialize();
