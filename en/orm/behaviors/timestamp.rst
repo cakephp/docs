@@ -84,5 +84,8 @@ saving an entity you can mark the attribute as 'dirty'::
 
     // Mark the modified column as dirty making
     // the current value be set on update.
+    $order->setDirty('modified', true);
+    
+    // Prior to 3.4.0
     $order->dirty('modified', true);
 
