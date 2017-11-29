@@ -148,43 +148,44 @@ deseja usar auto-incremento::
 A opção ``autoIncrement`` apenas funciona com colunas do tipo ``integer``
 e ``biginteger``.
 
-Reading Indexes and Constraints
--------------------------------
+Lendo Índices e Restrições
+--------------------------
 
-Indexes and constraints can be read out of a table object using accessor
-methods. Assuming that ``$schema`` is a populated TableSchema instance you could do the
-following::
+Os índices e restrições podem ser lido de um objeto de tabela usando métodos
+acessores. Assumindo que `$schema`` é uma instância de TableSchema populada, você poderia
+fazer o seguinte::
 
-    // Get contraints. Will return the
-    // names of all constraints.
+
+    // Obter restrições. Retornará os
+    // nomes de todas as restrições.
     $constraints = $schema->constraints()
 
-    // Get data about a single constraint.
-    $constraint = $schema->constraint('author_id_idx')
+    // Obter dados sobre uma restrição.
+    $constraint = $schema->constraint('author_id_idx')
 
-    // Get indexes. Will return the
-    // names of all indexes.
-    $indexes = $schema->indexes()
+    // Obter índices. Retornará os
+    // nomes de todos os índices
+    $indexes = $schema->indexes()
 
-    // Get data about a single index.
-    $index = $schema->index('author_id_idx')
+    // Obter dados sobre um índice
+    $index = $schema->index('author_id_idx')
 
 
-Adding Table Options
---------------------
+Adicionando Opções de Tabela
+----------------------------
 
-Some drivers (primarily MySQL) support and require additional table metadata. In
-the case of MySQL the ``CHARSET``, ``COLLATE`` and ``ENGINE`` properties are
-required for maintaining a table's structure in MySQL. The following could be
-used to add table options::
+Alguns drivers (principalmente MySQL) suportam e requerem metadados de tabela
+adicionais. No caso do MySQL as propriedades ``CHARSET``, ``COLLATE`` e ``ENGINE``
+são requeridos para manter a estrutura de uma tabela no MySQL. O seguinte
+pode ser usado para adicionar opções de tabela::
 
     $schema->options([
       'engine' => 'InnoDB',
       'collate' => 'utf8_unicode_ci',
     ]);
 
-Platform dialects only handle the keys they are interested in
-and ignore the rest. Not all options are supported on all platforms.
+Os dialetos de plataforma apenas cuidam das chaves que eles estão interessados
+e ignoram o resto. Nem todas as opções são suportadas por todas as plataformas.
 
 Converting Tables into SQL
 --------------------------
