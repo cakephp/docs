@@ -3,25 +3,25 @@ Schema
 
 .. php:namespace:: Cake\Database\Schema
 
-CakePHP features a schema system that is capable of reflecting and generating
-schema information for tables in SQL datastores. The schema system can
-generate/reflect a schema for any SQL platform that CakePHP supports.
+O CakePHP possui um sistema de schema que é capaz de refletir e gerar informaçes
+de schema para tabelas em SQL datastores. O sistema de schema pode gear/refletir
+schema para qualquer plataforma que o CakePHP suporte.
 
-The main pieces of the schema system are ``Cake\Database\Schema\Collection`` and
-``Cake\Database\Schema\TableSchema``. These classes give you access to
-database-wide and individual Table object features respectively.
+As partes principais do sistema de schema são ``Cake\Database\Schema\Collection``
+e ``Cake\Database\Schema\TableSchema``. Essas classes te oferecem acesso a
+todo o banco de dados e recursos de tabela individual respectivamente.
 
-The primary use of the schema system is for :ref:`test-fixtures`. However, it
-can also be used in your application if required.
+O uso primário de sistema de schema é para :ref:`test-fixtures`. No entanto, isso
+também ser usado em sua aplicação se requerido.
 
-Schema\\TableSchema Objects
+Objetos Schema\\TableSchema
 ===========================
 
 .. php:class:: TableSchema
 
-The schema subsystem provides a simple TableSchema object to hold data about a
-table in a database. This object is returned by the schema reflection
-features::
+O subsistema de schema oferece um simples objeto TableSchema para guardar dados
+sobre uma tabela do banco de dados. Este objeto é retornado pelos recursos de 
+reflexão de schema::
 
     use Cake\Database\Schema\TableSchema;
 
@@ -45,9 +45,9 @@ features::
     // Schema\TableSchema classes could also be created with array data
     $schema = new TableSchema('posts', $columns);
 
-``Schema\TableSchema`` objects allow you to build up information about a table's schema. It helps to
-normalize and validate the data used to describe a table. For example, the
-following two forms are equivalent::
+Objetos ``Schema\TableSchema`` permitem você construir apartir de informações sobre schema de tabelas.
+Isto ajuda a normalizar e validar os dados usados para descrever uma tabela. Por exemplo, as duas formas
+a seguir são equivalentes::
 
     $schema->addColumn('title', 'string');
     // and
@@ -55,19 +55,20 @@ following two forms are equivalent::
       'type' => 'string'
     ]);
 
-While equivalent, the 2nd form allows more detail and control. This emulates
-the existing features available in Schema files + the fixture schema in 2.x.
+Enquanto equivalete, a 2ª forma permite mais detalhes e controle. Isso emula
+os recursos existentes disponíveis arquivos de Schema + os schema de fixture em 2.x.
 
-Accessing Column Data
----------------------
+Acessando Dados de Coluna
+-------------------------
 
-Columns are either added as constructor arguments, or via `addColumn()`. Once
-fields are added information can be fetched using `column()` or `columns()`::
+Colunas são adicionadas como argumentos do construtor, ou pelo método `addColumn()`.
+Uma vez que os campos são adicionados, as informações podem ser obtidas usando o
+método  `column()` ou `columns()`::
 
-    // Get the array of data about a column
+    // Obtem um array de dados sobre a coluna
     $c = $schema->column('title');
 
-    // Get the list of all columns.
+    // Obtem uma lista com todas as colunas.
     $cols = $schema->columns();
 
 
