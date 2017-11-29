@@ -4,7 +4,7 @@ Schema
 .. php:namespace:: Cake\Database\Schema
 
 O CakePHP possui um sistema de schema que é capaz de refletir e gerar informaçes
-de schema para tabelas em SQL datastores. O sistema de schema pode gear/refletir
+de schema para tabelas em SQL datastores. O sistema de schema pode gerar/refletir
 schema para qualquer plataforma que o CakePHP suporte.
 
 As partes principais do sistema de schema são ``Cake\Database\Schema\Collection``
@@ -25,7 +25,7 @@ reflexão de schema::
 
     use Cake\Database\Schema\TableSchema;
 
-    // Create a table one column at a time.
+    // Criar uma tabela, uma coluna por vez.
     $schema = new TableSchema('posts');
     $schema->addColumn('id', [
       'type' => 'integer',
@@ -35,14 +35,14 @@ reflexão de schema::
     ])->addColumn('title', [
       'type' => 'string',
       'length' => 255,
-      // Create a fixed length (char field)
+      // Cria um campo de tamanho fixo (char field)
       'fixed' => true
     ])->addConstraint('primary', [
       'type' => 'primary',
       'columns' => ['id']
     ]);
 
-    // Schema\TableSchema classes could also be created with array data
+    // Classes Schema\TableSchema também podem ser criados com array de dados
     $schema = new TableSchema('posts', $columns);
 
 Objetos ``Schema\TableSchema`` permitem você construir apartir de informações sobre schema de tabelas.
@@ -50,13 +50,13 @@ Isto ajuda a normalizar e validar os dados usados para descrever uma tabela. Por
 a seguir são equivalentes::
 
     $schema->addColumn('title', 'string');
-    // and
+    // e
     $schema->addColumn('title', [
       'type' => 'string'
     ]);
 
 Enquanto equivalete, a 2ª forma permite mais detalhes e controle. Isso emula
-os recursos existentes disponíveis arquivos de Schema + os schema de fixture em 2.x.
+os recursos existentes disponíveis em arquivos de Schema + os schema de fixture em 2.x.
 
 Acessando Dados de Coluna
 -------------------------
@@ -152,9 +152,8 @@ Lendo Índices e Restrições
 --------------------------
 
 Os índices e restrições podem ser lido de um objeto de tabela usando métodos
-acessores. Assumindo que `$schema`` é uma instância de TableSchema populada, você poderia
+acessores. Assumindo que ``$schema`` é uma instância de TableSchema populada, você poderia
 fazer o seguinte::
-
 
     // Obter restrições. Retornará os
     // nomes de todas as restrições.
@@ -218,7 +217,7 @@ Schema Collections
 
 .. php:class:: Collection
 
-``Collection`` fornecem acesso as várias tabelas disponíveis numa conexão.
+``Collection`` fornece acesso as várias tabelas disponíveis numa conexão.
 Você pode usar isto para obter a lista de tabelas ou refletir tabelas em 
 objetos :php:class:`TableSchema`. O uso básico da classe parece com::
 
