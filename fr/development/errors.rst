@@ -122,7 +122,7 @@ la surcharger comme ceci::
         }
     }
 
-.. php:namespace:: Cake\Network\Exception
+.. php:namespace:: Cake\Http\Exception
 
 Classes des Exceptions
 ======================
@@ -215,7 +215,8 @@ les états d'échecs, ou les erreurs HTTP. Un exemple d'utilisation des
 exceptions HTTP pourrait être le rendu de pages 404 pour les items qui n'ont
 pas été trouvés::
 
-    use Cake\Network\Exception\NotFoundException;
+    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
+    use Cake\Http\Exception\NotFoundException;
 
     public function view($id = null)
     {
@@ -386,7 +387,8 @@ Utiliser les Exceptions HTTP dans vos Controllers
 Vous pouvez envoyer n'importe quelle exception HTTP liée à partir des actions
 de votre controller pour indiquer les états d'échec. Par exemple::
 
-    use Cake\Network\Exception\NotFoundException;
+    // Prior to 3.6 use Cake\Http\Exception\NotFoundException
+    use Cake\Http\Exception\NotFoundException;
 
     public function view($id = null)
     {

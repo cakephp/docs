@@ -107,7 +107,7 @@ CakePHP はエラーが起きるとそれを表示しまたはログに記録す
         }
     }
 
-.. php:namespace:: Cake\Network\Exception
+.. php:namespace:: Cake\Http\Exception
 
 例外クラス
 ==========
@@ -200,7 +200,8 @@ HTTP 5xx エラーステータスコードの詳細は :rfc:`2616#section-10.5` 
 失敗の状態や HTTP エラーを示すためにあなたのコントローラーからこれらの例外を投げることができます。
 HTTP の例外の使用例はアイテムが見つからなかった場合に 404 ページを描画することでしょう。 ::
 
-    use Cake\Network\Exception\NotFoundException;
+    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
+    use Cake\Http\Exception\NotFoundException;
     
     public function view($id = null)
     {
@@ -368,7 +369,8 @@ RFC2616 MethodNotAllowedException は言っています。 ::
 失敗の状態を示すためにあたなのコントローラーのアクションからあらゆる HTTP 関連の例外を投げることができます。
 たとえば::
 
-    use Cake\Network\Exception\NotFoundException;
+    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
+    use Cake\Http\Exception\NotFoundException;
     
     public function view($id = null)
     {

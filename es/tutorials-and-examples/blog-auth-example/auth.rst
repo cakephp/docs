@@ -52,7 +52,8 @@ También vamos a crear UsersController; el siguiente contenido fue generado usan
 
     use App\Controller\AppController;
     use Cake\Event\Event;
-    use Cake\Network\Exception\NotFoundException;
+    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
+    use Cake\Http\Exception\NotFoundException;
 
     class UsersController extends AppController
     {
