@@ -64,6 +64,12 @@ features will continue to function until 4.0.0 after which they will be removed.
   ``Cake\Http\Exception\UnauthorizedException``.
 * ``Cake\Network\Exception\UnavailableForLegalReasonsException`` has been
   renamed to ``Cake\Http\Exception\UnavailableForLegalReasonsException``.
+* ``Cake\Network\Session`` has been renamed to ``Cake\Http\Session``.
+* ``Cake\Network\Session\DatabaseSession`` has been renamed to
+  ``Cake\Http\Session\DatabaseSession``.
+* ``Cake\Network\Session\CacheSession`` has been renamed to
+  ``Cake\Http\Session\CacheSession``.
+* ``Cake\Network\CorsBuilder`` has been renamed to ``Cake\Http\CorsBuilder``.
 
 Disabling Deprecation Warnings
 ==============================
