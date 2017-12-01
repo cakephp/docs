@@ -140,9 +140,13 @@ The above shows how you could setup the Database session handler with an
 application model. When using class names as your handler.engine, CakePHP will
 expect to find your class in the ``Network\Session`` namespace. For example, if
 you had an ``AppSessionHandler`` class,  the file should be
-**src/Network/Session/AppSessionHandler.php**, and the class name should be
-``App\Network\Session\AppSessionHandler``. You can also use session handlers
+**src/Http/Session/AppSessionHandler.php**, and the class name should be
+``App\Http\Session\AppSessionHandler``. You can also use session handlers
 from inside plugins. By setting the engine to ``MyPlugin.PluginSessionHandler``.
+
+.. note::
+    Prior to 3.6.0 session adapter files should be placed in
+    **src/Network/Session/AppHandler.php**.
 
 Database Sessions
 -----------------
@@ -231,14 +235,14 @@ example we'll create a session handler that stores sessions both in the Cache
 without having to worry about sessions evaporating when the cache fills up.
 
 First we'll need to create our custom class and put it in
-**src/Network/Session/ComboSession.php**. The class should look
+**src/Http/Session/ComboSession.php**. The class should look
 something like::
 
-    namespace App\Network\Session;
+    namespace App\Http\Session;
 
     use Cake\Cache\Cache;
     use Cake\Core\Configure;
-    use Cake\Network\Session\DatabaseSession;
+    use Cake\Http\Session\DatabaseSession;
 
     class ComboSession extends DatabaseSession
     {
@@ -325,11 +329,12 @@ In addition to the basic session object, you can also use the
 :php:class:`Cake\\View\\Helper\\SessionHelper` to interact with the session in
 your views. A basic example of session usage would be::
 
-    $name = $this->request->session()->read('User.name');
+    // Prior to 3.6.0 use session() instead.
+    $name = $this->request->getSession()->read('User.name');
 
     // If you are accessing the session multiple times,
     // you will probably want a local variable.
-    $session = $this->request->session();
+    $session = $this->request->getSession();
     $name = $session->read('User.name');
 
 Reading & Writing Session Data
