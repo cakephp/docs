@@ -103,8 +103,8 @@ to contain the following information::
 
     "psr-4": {
         (...)
-        "MyPlugin\\": "./plugins/MyPlugin/src",
-        "MyPlugin\\Test\\": "./plugins/MyPlugin/tests"
+        "MyPlugin\\": "plugins/MyPlugin/src/",
+        "MyPlugin\\Test\\": "plugins/MyPlugin/tests/"
     }
 
 If you are using vendor namespaces for your plugins, the namespace to path mapping
@@ -112,8 +112,8 @@ should resemble the following::
 
     "psr-4": {
         (...)
-        "AcmeCorp\\Users\\": "./plugins/AcmeCorp/Users/src",
-        "AcmeCorp\\Users\\Test\\": "./plugins/AcmeCorp/Users/tests"
+        "AcmeCorp\\Users\\": "plugins/AcmeCorp/Users/src/",
+        "AcmeCorp\\Users\\Test\\": "plugins/AcmeCorp/Users/tests/"
     }
 
 Additionally, you will need to tell Composer to refresh its autoloading cache::

@@ -166,8 +166,8 @@ to provide fallback paths for controllers in your application::
 
     "autoload": {
         "psr-4": {
-            "App\\Controller\\": "/path/to/directory/with/controller/folders",
-            "App\": "src"
+            "App\\Controller\\": "/path/to/directory/with/controller/folders/",
+            "App\\": "src/"
         }
     }
 
@@ -178,7 +178,7 @@ to multiple directories with the following::
 
     "autoload": {
         "psr-4": {
-            "App\": ["src", "/path/to/directory"]
+            "App\\": ["src/", "/path/to/directory/"]
         }
     }
 
