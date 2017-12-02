@@ -1026,7 +1026,6 @@ This can be refactored by creating another class::
 
         class TotalOrderCalculator
         {
-
                 public function __invoke($row, $key)
                 {
                     if (!empty($row['items'])) {
@@ -1066,7 +1065,6 @@ be repeated every time::
 
         class FinalCheckOutRowProcessor
         {
-
                 public function __invoke($collection)
                 {
                         return $collection

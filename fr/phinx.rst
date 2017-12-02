@@ -53,6 +53,7 @@ Créez les dossiers ``db/migrations`` dans votre projet en vous assurant que les
 C’est à cet endroit que vos fichiers de migrations devraient être créés et laissés.
 
 Phinx peut maintenant être exécuté depuis la racine de votre projet.
+
 .. code-block:: bash
 
     vendor/bin/phinx init
