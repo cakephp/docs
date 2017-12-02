@@ -571,9 +571,9 @@ Advanced Conditions
 ===================
 
 The query builder makes it simple to build complex ``where`` clauses.
-Grouped conditions can be expressed by providing combining ``where()``,
-``andWhere()`` and ``orWhere()``. The ``where()`` method works similar to the
-conditions arrays in previous versions of CakePHP::
+Grouped conditions can be expressed by providing combining ``where()`` and
+expression objects. For simple queries, you can build conditions using
+an array of conditions::
 
     $query = $articles->find()
         ->where([
@@ -585,29 +585,20 @@ The above would generate SQL like::
 
     SELECT * FROM articles WHERE author_id = 3 AND (view_count = 2 OR view_count = 3)
 
-If you'd prefer to avoid deeply nested arrays, you can use the ``orWhere()`` and
-``andWhere()`` methods to build your queries. Each method sets the combining
-operator used between the current and previous condition. For example::
+If you'd prefer to avoid deeply nested arrays, you can use the callback form of
+``where()`` to build your queries. The callback form allows you to use the
+expression builder to build more complex conditions without arrays. For example::
 
-    $query = $articles->find()
-        ->where(['author_id' => 2])
-        ->orWhere(['author_id' => 3]);
+    $query = $articles->find()->where(function ($exp, $query) {
+        // Use add() to add multiple conditions for the same field.
+        $author = $exp->or_(['author_id' => 3])->add(['author_id' => 2]);
+        $published = $exp->and_(['published' => true, 'view_count' => 10]);
 
-The above will output SQL similar to::
-
-    SELECT * FROM articles WHERE (author_id = 2 OR author_id = 3)
-
-By combining ``orWhere()`` and ``andWhere()``, you can express complex
-conditions that use a mixture of operators::
-
-    $query = $articles->find()
-        ->where(['author_id' => 2])
-        ->orWhere(['author_id' => 3])
-        ->andWhere([
-            'published' => true,
-            'view_count >' => 10
-        ])
-        ->orWhere(['promoted' => true]);
+        return $exp->or_([
+            'promoted' => true,
+            $exp->and_([$author, $published])
+        ]);
+    });
 
 The above generates SQL similar to::
 
@@ -620,28 +611,6 @@ The above generates SQL similar to::
             (published = 1 AND view_count > 10)
         )
         OR promoted = 1
-    )
-
-By using functions as the parameters to ``orWhere()`` and ``andWhere()``,
-you can compose conditions together with the expression objects::
-
-    $query = $articles->find()
-        ->where(['title LIKE' => '%First%'])
-        ->andWhere(function ($exp) {
-            return $exp->or_([
-                'author_id' => 2,
-                'is_highlighted' => true
-            ]);
-        });
-
-The above would create SQL like::
-
-    SELECT *
-    FROM articles
-    WHERE (
-        title LIKE '%First%'
-        AND
-        (author_id = 2 OR is_highlighted = 1)
     )
 
 The expression object that is passed into ``where()`` functions has two kinds of
