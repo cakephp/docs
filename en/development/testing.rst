@@ -332,13 +332,13 @@ file:
 .. code-block:: xml
 
     <testsuites>
-        <testsuite name="App Test Suite">
-            <directory>./tests/TestCase</directory>
+        <testsuite name="app">
+            <directory>./tests/TestCase/</directory>
         </testsuite>
 
         <!-- Add your plugin suites -->
-        <testsuite name="Forum plugin">
-            <directory>./plugins/Forum/tests/TestCase</directory>
+        <testsuite name="forum">
+            <directory>./plugins/Forum/tests/TestCase/</directory>
         </testsuite>
     </testsuites>
 
@@ -351,7 +351,7 @@ fixture namespace to the autoload section. Example::
 
     "autoload": {
         "psr-4": {
-            "PluginName\\Test\\Fixture\\": "tests\\Fixture"
+            "PluginName\\Test\\Fixture\\": "tests/Fixture/"
         }
     },
 
