@@ -91,9 +91,8 @@ application's ``composer.json``::
 
     "autoload": {
         "psr-4": {
-            "App\\": "App",
-            "App\\Test\\": "Test",
-            "": "./Plugin"
+            "App\\": "src/",
+            "App\\Test\\": "tests/"
         },
         "classmap": [
             "vendor/Acme/AcmeLib"
@@ -106,9 +105,8 @@ using the ``files`` autoloading strategy::
 
     "autoload": {
         "psr-4": {
-            "App\\": "App",
-            "App\\Test\\": "Test",
-            "": "./Plugin"
+            "App\\": "src/",
+            "App\\Test\\": "tests/"
         },
         "files": [
             "vendor/Acme/AcmeLib/functions.php"
