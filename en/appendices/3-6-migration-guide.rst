@@ -36,6 +36,13 @@ features will continue to function until 4.0.0 after which they will be removed.
   ``enableAutoRender()/disableAutoRender()/isAutoRenderEnabled()`` in other
   contexts.
   ``Controller::getPlugin()/setPlugin()`` instead.
+* The setter mode of ``ValidationSet::isPresenceRequired()`` and
+  ``ValidationSet::isEmptyAllowed()`` are deprecated. Use ``requirePresence()``
+  and ``allowEmpty()`` instead.
+
+Several classes were *renamed*. Their old names will continue to work until 4.0,
+but will emit deprecation warnings:
+
 * ``Cake\Network\Exception\BadRequestException`` has been renamed to
   ``Cake\Http\Exception\BadRequestException``.
 * ``Cake\Network\Exception\ConflictException`` has been renamed to
