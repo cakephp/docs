@@ -1,49 +1,49 @@
-Glossary
-########
+Глоссарий
+#########
 
 .. glossary::
 
     routing array
-        An array of attributes that are passed to :php:meth:`Router::url()`.
-        They typically look like::
+        Массив атрибутов, передаваемых в :php:meth:`Router::url()`.
+        Обычно выглядит так::
 
             ['controller' => 'Posts', 'action' => 'view', 5]
 
     HTML attributes
-        An array of key => values that are composed into HTML attributes. For example::
+        Массив key => values которые состоят из атрибутов HTML. Например::
 
-            // Given
+            // Дано
             ['class' => 'my-class', 'target' => '_blank']
 
-            // Would generate
+            // Будет cгенерировано
             class="my-class" target="_blank"
 
-        If an option can be minimized or accepts its name as the value, then ``true``
-        can be used::
+        Если параметр можно минимизировать или принять его имя как значение, 
+        тогда можно использовать ``true``::
 
-            // Given
+            // Дано
             ['checked' => true]
 
-            // Would generate
+            // Будет cгенерировано
             checked="checked"
 
     plugin syntax
-        Plugin syntax refers to the dot separated class name indicating classes
-        are part of a plugin::
+        Синтаксис плагина относится к классу, разделённому точкой, с указанием классов, 
+        которые являются частью данного плагина::
 
-            // The plugin is "DebugKit", and the class name is "Toolbar".
+            // Плагин "DebugKit", и его класс "Toolbar".
             'DebugKit.Toolbar'
 
-            // The plugin is "AcmeCorp/Tools", and the class name is "Toolbar".
+            // Плагин "AcmeCorp/Tools", и его класс "Toolbar".
             'AcmeCorp/Tools.Toolbar'
 
     dot notation
-        Dot notation defines an array path, by separating nested levels with ``.``
-        For example::
+        Точечная нотация определяет путь массива, разделяя вложенные уровни на ``.``
+        Например::
 
             Cache.default.engine
 
-        Would point to the following value::
+        Укажет следующее значение::
 
             [
                 'Cache' => [
@@ -54,35 +54,34 @@ Glossary
             ]
 
     CSRF
-        Cross Site Request Forgery. Prevents replay attacks, double
-        submissions and forged requests from other domains.
+        Cross Site Request Forgery.
+        Предотвращает повторные атаки, дублированную отправку и подделку запроса с другого домена.
 
     CDN
-        Content Delivery Network. A 3rd party vendor you can pay to help
-        distribute your content to data centers around the world. This helps
-        put your static assets closer to geographically distributed users.
+        Content Delivery Network. Сторонний поставщик, которому вы можете заплатить, чтобы помочь
+        распространять ваш контент в центрах обработки данных по всему миру. Это поможет
+        доставить ваши статические данные ближе к пользователям распределенным ближе географически.
 
     routes.php
-        A file in ``config`` directory that contains routing configuration.
-        This file is included before each request is processed.
-        It should connect all the routes your application needs so
-        requests can be routed to the correct controller + action.
+        Файл в каталоге ``config``, который содержит конфигурацию маршрутизации.
+        Этот файл подключается перед обработкой каждого запроса.
+        Он должен соединить все маршруты, в которых нуждается ваше приложение.
+        Запросы могут быть перенаправлены на правильный контроллер + экшен.
 
     DRY
-        Don't repeat yourself. Is a principle of software development aimed at
-        reducing repetition of information of all kinds. In CakePHP DRY is used
-        to allow you to code things once and re-use them across your
-        application.
+        Don't repeat yourself (Не навреди сибе). Является принципом разработки программного обеспечения 
+        который сокращает повторение информации всех видов. В CakePHP используется DRY
+        для того, чтобы вы могли корректно кодировать вещи и повторно использовать их в своих
+        приложениях.
 
     PaaS
-        Platform as a Service. Platform as a Service providers will provide
-        cloud based hosting, database and caching resources. Some popular
-        providers include Heroku, EngineYard and PagodaBox
+        Platform as a Service. Платформа как поставщик услуг, обеспечивает
+        облачный хостинг, базы данных и ресурсы кэширования. Некоторые популярные
+        поставщики включают Heroku, EngineYard и PagodaBox
 
     DSN
-        Data Source Name. A connection string format that is formed like a URI.
-        CakePHP supports DSN's for Cache, Database, Log and Email connections.
-
+        Data Source Name. Формат строки соединения, который формируется как URI.
+        CakePHP поддерживает соединения DSN для кэшей, базы данных, журнала и электронной почты.
 
 .. meta::
     :title lang=ru: Glossary
