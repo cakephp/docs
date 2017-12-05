@@ -115,12 +115,11 @@
                        Bake|Migrations)
     --verbose, -v      Enable verbose output.
 
+
 Темы Bake
 =========
 
-Параметр темы является общим для всех команд bake, так же bake позволяет изменять
-файлы шаблонов, используемые при 'выпечке'. Чтобы создать свои собственные шаблоны см.
-:ref:`bake theme creation documentation <creating-a-bake-theme>`.
+Параметр темы является общим для всех команд bake, так же bake позволяет изменять файлы шаблонов, используемые при 'выпечке'. Чтобы создать свои собственные шаблоны см. :ref:`bake theme creation documentation <creating-a-bake-theme>`.
 
 .. meta::
     :title lang=ru: Code Generation with Bake
