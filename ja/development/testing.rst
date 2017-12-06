@@ -405,7 +405,6 @@ CakePHP はフィクスチャーに基づいたテストケースを実行する
 
     class ArticlesFixture extends TestFixture
     {
-
           // オプション。異なるテストデータソースにフィクスチャーをロードするために、このプロパティーを設定
           public $connection = 'test';
 
@@ -508,7 +507,6 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesFixture extends TestFixture
     {
-
         public $fields = [
             'id' => ['type' => 'integer'],
             'title' => ['type' => 'string', 'length' => 255, 'null' => false],
@@ -675,7 +673,6 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTable extends Table
     {
-
         public function findPublished(Query $query, array $options)
         {
             $query->where([
@@ -1114,7 +1111,6 @@ JSON を返すコントローラーの簡単な例を示します。 ::
 
     class MarkersControllerTest extends IntegrationTestCase
     {
-
         public function testGet()
         {
             $this->configRequest([
@@ -1389,7 +1385,6 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
 
     class MyConsoleShellTest extends ConsoleIntegrationTestCase
     {
-
         public $fixtures = [
             // UsersFixture を持っていると仮定
             'app.users'
@@ -1704,7 +1699,6 @@ PagematronComponent というコンポーネントがアプリケーションに
 
     class CurrencyRendererHelperTest extends TestCase
     {
-
         public $helper = null;
 
         // ここでヘルパーをインスタンス化
@@ -1755,7 +1749,6 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
     class OrdersTable extends Table
     {
-
         public function place($order)
         {
             if ($this->save($order)) {
@@ -1772,7 +1765,6 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
     class CartsTable extends Table
     {
-
         public function implementedEvents()
         {
             return [
@@ -1804,7 +1796,6 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
     class OrdersTableTest extends TestCase
     {
-
         public $fixtures = ['app.orders'];
 
         public function setUp()
@@ -1883,7 +1874,6 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
     class BlogPostsTableTest extends TestCase
     {
-
         // /plugins/Blog/tests/Fixture/ 内のプラグインのフィクスチャーをロード
         public $fixtures = ['plugin.blog.blog_posts'];
 

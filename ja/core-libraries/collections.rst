@@ -981,7 +981,6 @@ sample を満たすためのコレクション内に十分な要素がない場�
 
         class TotalOrderCalculator
         {
-
                 public function __invoke($row, $key)
                 {
                     if (!empty($row['items'])) {
@@ -1020,7 +1019,6 @@ sample を満たすためのコレクション内に十分な要素がない場�
 
         class FinalCheckOutRowProcessor
         {
-
                 public function __invoke($collection)
                 {
                         return $collection

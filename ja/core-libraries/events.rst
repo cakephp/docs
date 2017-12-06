@@ -55,7 +55,6 @@ CakePHP は、jQuery などの一般的な JavaScript フレームワークに�
 
     class OrdersTable extends Table
     {
-
         public function place($order)
         {
             if ($this->save($order)) {
@@ -168,7 +167,6 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
 
     class UserStatistic implements EventListenerInterface
     {
-
         public function implementedEvents()
         {
             return [

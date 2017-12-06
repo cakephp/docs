@@ -216,14 +216,12 @@ Cache を使用すると、Read-through キャッシュを簡単に行うこと�
 
     class IssueService
     {
-
         public function allIssues($repo)
         {
             return Cache::remember($repo . '-issues', function () use ($repo) {
                 return $this->fetchAll($repo);
             });
         }
-
     }
 
 

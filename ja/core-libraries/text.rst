@@ -15,7 +15,6 @@ Text クラスは文字列を作ったり操作したりする便利なメソッ
 
     class UsersController extends AppController
     {
-
         public function initialize()
         {
             parent::initialize();

@@ -14,7 +14,6 @@ Number
 
     class UsersController extends AppController
     {
-
         public function initialize()
         {
             parent::initialize();
