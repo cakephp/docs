@@ -339,7 +339,7 @@ CakePHP のクッキー暗号化ミドルウェアを使用して、ミドルウ
     お勧めします。
 
 このミドルウェアが使用する暗号化アルゴリズムとパディングスタイルは、
-CakePHP の以前のバージョンの ``CookieComponent`` と後方換性があります。
+CakePHP の以前のバージョンの ``CookieComponent`` と後方互換性があります。
 
 .. versionadded:: 3.5.0
     ``EncryptedCookieMiddleware`` は 3.5.0 で追加されました。
