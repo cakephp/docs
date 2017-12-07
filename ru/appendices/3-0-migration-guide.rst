@@ -376,8 +376,8 @@ Router
 * Строки URL больше не изменяются добавлением имен плагина/контроллера/префикса.
 * Стандартная обработка отсутствующих маршрутов была упразднена.  Если нет
   маршрутов подходящих под параметры - будет возвращен путь ``/``.
-* Route classes are responsible for *all* URL generation including
-  query string parameters. This makes routes far more powerful and flexible.
+* Классы маршрутов ответственны за *всё* генерирование URL включая параметры строки
+  запроса. Это делает маршруты намного более мощными и гибкими.
 * Устойчивые параметры были удалены. Они были заменены методом
   :php:meth:`Cake\\Routing\\Router::urlFilter()`, который предоставляет
   более гибкий способ видоизменять URL при обратной маршрутизации.
@@ -389,14 +389,14 @@ Router
   Используйте вместо этого :php:meth:`Cake\\Routing\\Router::extensions()`.
 * Удален метод ``Router::resourceMap()``.
 * Опция ``[метод]`` переименована в ``_метод``.
-* The ability to match arbitrary headers with ``[]`` style parameters has been
-  removed. If you need to parse/match on arbitrary conditions consider using
+* Возможность совпадения произвольных заголовков с параметрамив стиле ``[]`` была
+  упразднена. If you need to parse/match on arbitrary conditions consider using
   custom route classes.
 * Удален метод ``Router::promote()``.
 * ``Router::parse()`` теперь выбрасывает исключение, когда URL не может быть
   обработан каким-либо из маршрутов.
 * ``Router::url()`` теперь выбрасывает исключение, когда ни один маршрут не
   совпадает с набором параметров.
-* Routing scopes have been introduced. Routing scopes allow you to keep your
-  routes file DRY and give Router hints on how to optimize parsing & reverse
-  routing URLs.
+* Добавлены области видимости маршрутов (routing scopes). Они позволяют вам
+  соблюдать принцип DRY (не повторяйся) в ваших файлах маршрутов и дают Роутеру
+  подсказки, как оптимизировать парсинг и обратную маршрутизацию URL.
