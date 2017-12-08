@@ -32,7 +32,6 @@ that the ``order`` key must be defined in an array structure like below::
 
     class ArticlesController extends AppController
     {
-
         public $paginate = [
             'limit' => 25,
             'order' => [
@@ -52,7 +51,6 @@ You can also include any of the options supported by
 
     class ArticlesController extends AppController
     {
-
         public $paginate = [
             'fields' => ['Articles.id', 'Articles.created'],
             'limit' => 25,
@@ -75,7 +73,6 @@ setting the ``finder`` option::
 
     class ArticlesController extends AppController
     {
-
         public $paginate = [
             'finder' => 'published',
         ];
@@ -86,7 +83,6 @@ options into a custom finder method within the paginate property::
 
     class ArticlesController extends AppController
     {
-
         // find articles by tag
         public function tags()
         {
@@ -115,7 +111,6 @@ array after the model you wish to configure::
 
     class ArticlesController extends AppController
     {
-
         public $paginate = [
             'Articles' => [],
             'Authors' => [],
@@ -135,7 +130,6 @@ example of using ``paginate()`` would be::
 
     class ArticlesController extends AppController
     {
-
         public function index()
         {
             $this->set('articles', $this->paginate());
