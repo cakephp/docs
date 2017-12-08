@@ -39,6 +39,8 @@ features will continue to function until 4.0.0 after which they will be removed.
 * The setter mode of ``ValidationSet::isPresenceRequired()`` and
   ``ValidationSet::isEmptyAllowed()`` are deprecated. Use ``requirePresence()``
   and ``allowEmpty()`` instead.
+* ``Cake\Form\Form::validator()`` is deprecated. Use ``getValidator()`` and
+  ``setValidator()`` instead.
 
 Several classes were *renamed*. Their old names will continue to work until 4.0,
 but will emit deprecation warnings:
@@ -144,6 +146,12 @@ Datasource
 * A new abstract type was added for ``binaryuuid``. In MySQL and SQLite,
   ``BINARY(16)`` will be used as the column type. While in SQLServer, and
   Postgres will use their native UUID types.
+
+Form
+====
+
+* Form classes now support the ``_validatorClass`` property which works the same
+  as it does on ``ORM\Table``.
 
 
 ORM
