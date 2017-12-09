@@ -19,7 +19,7 @@ To use themes, set the theme name in your controller's action or
         public function beforeRender(\Cake\Event\Event $event)
         {
             $this->viewBuilder()->setTheme('Modern');
-                        
+
             // For CakePHP before 3.5
             $this->viewBuilder()->theme('Modern');
         }
@@ -43,13 +43,13 @@ If a view file can't be found in the theme, CakePHP will try to locate the view
 file in the **src/Template/** folder. This way, you can create master template files
 and simply override them on a case-by-case basis within your theme folder.
 
-Now download a new plugin for your theme. The plugin is loaded in **config/bootstrap.php**.
-For example::
+If your theme also acts as a plugin, don't forget to ensure it is loaded in
+**config/bootstrap.php**. For example::
 
     /**
-    * Downloaded a new plugin theme, which was created in the folder /plugins/NewTheme
-    */
-    Plugin::load('NewTheme');
+     * Load our plugin theme residing in the folder /plugins/Modern
+     */
+    Plugin::load('Modern');
 
 Theme Assets
 ============
