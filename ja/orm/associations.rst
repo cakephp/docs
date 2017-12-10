@@ -30,12 +30,10 @@ hasOne 、 hasMany 、 belongsTo 、そして belongsToMany です。
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->belongsTo('Authors');
         }
-
     }
 
 
@@ -108,18 +106,16 @@ hasOne 、 hasMany 、 belongsTo 、そして belongsToMany です。
 
     class PostsTable extends Table
     {
-
-      public function initialize(array $config)
-      {
-        $this->addAssociations([
-          'belongsTo' => [
-            'Users' => ['className' => 'App\Model\Table\UsersTable']
-          ],
-          'hasMany' => ['Comments'],
-          'belongsToMany' => ['Tags']
-        ]);
-      }
-
+        public function initialize(array $config)
+        {
+           $this->addAssociations([
+               'belongsTo' => [
+                   'Users' => ['className' => 'App\Model\Table\UsersTable']
+               ],
+               'hasMany' => ['Comments'],
+               'belongsToMany' => ['Tags']
+           ]);
+        }
     }
 
 各アソシエーション種別は、そのエイリアスがキーで、値がアソシエーション設定データになった
@@ -251,7 +247,6 @@ Mentors belongsTo Doctors mentors.doctor\_id
 
     class AddressesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->belongsTo('Users');
@@ -262,7 +257,6 @@ Mentors belongsTo Doctors mentors.doctor\_id
 
     class AddressesTable extends Table
     {
-
         public function initialize(array $config)
         {
             // バージョン 3.4 より前は、 foreignKey() と joinType() を使用してください
@@ -333,7 +327,6 @@ Articles モデルの中で、 hasMany アソシエーションを次のよう�
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->hasMany('Comments');
@@ -344,7 +337,6 @@ Articles モデルの中で、 hasMany アソシエーションを次のよう�
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->hasMany('Comments')
@@ -486,7 +478,6 @@ Patient belongsToMany Doctor doctors_patients.id, doctors_patients.doctor_id,
     // src/Model/Table/ArticlesTable.php の中で
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->belongsToMany('Tags');
@@ -496,7 +487,6 @@ Patient belongsToMany Doctor doctors_patients.id, doctors_patients.doctor_id,
     // src/Model/Table/TagsTable.php の中で
     class TagsTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->belongsToMany('Articles');
@@ -508,7 +498,6 @@ Patient belongsToMany Doctor doctors_patients.id, doctors_patients.doctor_id,
     // src/Model/Table/TagsTable.php の中で
     class TagsTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->belongsToMany('Articles', [
