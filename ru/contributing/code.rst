@@ -44,7 +44,7 @@
 
 Теперь, когда у вас установлен CakePHP, вы должны определить переменную ``$test``,
 :ref:`подключиться к базе данных <database-configuration>`, и 
-:ref:`запустить все тесты <running-tests>`.
+:ref:`running-tests <running-tests>`.
 
 Работа над патчем
 =================
