@@ -1376,10 +1376,10 @@ UNION は１つ以上のクエリーを一緒に構築して作成します。 :
         ->where(['comment LIKE' => '%CakePHP%']);
 
     $query = $articles->find()
-        ->where(['id' => $matchingComment]);
+        ->where(['id IN' => $matchingComment]);
 
 サブクエリーはクエリー式のどこにでも使うことができます。
-たとえば、``select()`` や ``join()`` メソッドの中でもです。
+たとえば、 ``select()`` や ``join()`` メソッドの中でもです。
 
 ステートメントのロックの追加
 ----------------------------

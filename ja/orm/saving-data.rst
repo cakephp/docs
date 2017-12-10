@@ -1037,13 +1037,11 @@ belongsToMany アソシエーションのそれぞれのエンティティーは
 
     class UsersTable extends Table
     {
-
         protected function _initializeSchema(TableSchema $schema)
         {
             $schema->columnType('preferences', 'json');
             return $schema;
         }
-
     }
 
 上記のコードは ``preferences`` カラムを ``json`` カスタムタイプにマップします。
@@ -1141,7 +1139,8 @@ belongsToMany アソシエーションのそれぞれのエンティティーは
     {
         $this->updateAll(
             ['published' => true], // フィールド
-            ['published' => false]); // 条件
+            ['published' => false] // 条件
+        );
     }
 
 もし 一括更新をしつつ、かつ SQL 式を使う必要がある場合、内部的に ``updateAll()`` が
