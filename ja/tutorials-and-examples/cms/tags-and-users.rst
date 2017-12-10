@@ -193,6 +193,7 @@ edit メソッドは次のようになります。 ::
 これを実装する前に、新しいルートを追加します。 **config/routes.php** は次のようになるはずです。 ::
 
     <?php
+    use Cake\Core\Plugin;
     use Cake\Routing\Route\DashedRoute;
     use Cake\Routing\Router;
 
