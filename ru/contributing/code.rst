@@ -42,9 +42,9 @@
     cd cakephp
     git remote add upstream git://github.com/cakephp/cakephp.git
 
-Теперь, когда у вас установлен CakePHP, вы должны определить переменную ``$test``,
-:ref:`подключиться к базе данных <database-configuration>`, и 
-:ref:`running-tests <running-tests>`.
+Теперь, когда у вас установлен CakePHP, вы должны определить переменную ``$test``
+:ref:`database connection <database-configuration>`, и
+:ref:`run all the tests <running-tests>`.
 
 Работа над патчем
 =================
