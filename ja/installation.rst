@@ -525,7 +525,7 @@ IIS に htaccess のルールをインポートすることもできます。
                     </rule>
                     <rule name="Rewrite routed access to assets(img, css, files, js, favicon)"
                       stopProcessing="true">
-                        <match url="^(img|css|files|js|favicon.ico)(.*)$" />
+                        <match url="^(font|img|css|files|js|favicon.ico)(.*)$" />
                         <action type="Rewrite" url="webroot/{R:1}{R:2}"
                           appendQueryString="false" />
                     </rule>
