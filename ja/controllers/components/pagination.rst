@@ -31,7 +31,6 @@ Controller::paginate() の使用
 
     class ArticlesController extends AppController
     {
-
         public $paginate = [
             'limit' => 25,
             'order' => [
@@ -51,7 +50,6 @@ Controller::paginate() の使用
 
     class ArticlesController extends AppController
     {
-
         public $paginate = [
             'fields' => ['Articles.id', 'Articles.created'],
             'limit' => 25,
@@ -74,7 +72,6 @@ Paginate プロパティーからほとんどの検索オプションを指定�
 
     class ArticlesController extends AppController
     {
-
         public $paginate = [
             'finder' => 'published',
         ];
@@ -86,7 +83,6 @@ Paginate プロパティーからほとんどの検索オプションを指定�
 
     class ArticlesController extends AppController
     {
-
         // タグごとに記事を検索する
         public function tags()
         {
@@ -116,7 +112,6 @@ Paginate プロパティーからほとんどの検索オプションを指定�
 
     class ArticlesController extends AppController
     {
-
         public $paginate = [
             'Articles' => [],
             'Authors' => [],
@@ -137,7 +132,6 @@ Controller の paginate メソッドは、ページ分けされた検索結果�
 
     class ArticlesController extends AppController
     {
-
         public function index()
         {
             $this->set('articles', $this->paginate());
