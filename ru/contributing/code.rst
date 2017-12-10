@@ -28,7 +28,7 @@
 Получите клон исходного кода CakePHP с GitHub:
 
 * Если вы не имеете аккаунта на `GitHub <http://github.com>`_, создайте его.
-* Сделайте fork `репозитория CakePHP<http://github.com/cakephp/cakephp>`_, нажав
+* Сделайте fork `CakePHP repository<http://github.com/cakephp/cakephp>`_, нажав
   кнопку **Fork**
 
 После того, как ваш fork сделан, клонируйте его на свою локальную машину::
