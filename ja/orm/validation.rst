@@ -71,7 +71,6 @@ CakePHP ではデータの検証には二つの段階があります:
 
     class ArticlesTable extends Table
     {
-
         public function validationDefault(Validator $validator)
         {
             $validator
@@ -212,7 +211,6 @@ CakePHP ではデータの検証には二つの段階があります:
 
     class UsersTable extends Table
     {
-
         public function validationDefault(Validator $validator)
         {
             $validator
