@@ -75,5 +75,8 @@ Entity を保存後、フィールドが更新されます。
 エンティティーを保存する際の updated タイムスタンプカラムの自動更新を無効化するには、その属性を 'dirty' としてマークします。 ::
 
     // modified カラムを dirty としてマークして、更新時に現在の値がセットされるようにします。
+    $order->setDirty('modified', true);
+
+    // 3.4.0 より前
     $order->dirty('modified', true);
 
