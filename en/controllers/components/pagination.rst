@@ -26,7 +26,7 @@ Using Controller::paginate()
 
 In the controller, we start by defining the default query conditions pagination
 will use in the ``$paginate`` controller variable. These conditions, serve as
-the basis for your pagination queries. They are augmented by the ``sort``, ``direction``
+the basis for your pagination queries. They are augmented by the ``sort``, ``direction``,
 ``limit``, and ``page`` parameters passed in from the URL. It is important to note
 that the ``order`` key must be defined in an array structure like below::
 
