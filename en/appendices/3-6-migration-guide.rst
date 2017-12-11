@@ -127,6 +127,10 @@ behavior that may affect your application:
   By default all entries created with APCu for a single request/CLI script will
   have the same expiration time. You can use ``apc.use_request_time`` to change
   this behavior.
+* ``Router::parseNamedParams()`` no longer mutates the request object in-place.
+  Instead you will need to use the return value of this method to access the
+  modified request.
+
 
 Core
 ====

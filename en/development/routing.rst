@@ -1521,7 +1521,7 @@ arguments::
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        Router::parseNamedParams($this->request);
+        $this->request = Router::parseNamedParams($this->request);
     }
 
 This will populate ``$this->request->getParam('named')`` with any named parameters
