@@ -596,7 +596,7 @@ Classes de Conexão
 As classes de conexão fornecem uma interface simples para interagir
 com conexões de banco de dados de modo consistente. Elas servem como
 uma interface mais abstrata para a camada do driver e fornece recursos
-para executar consultas, logar (<em>logging</em>) consultas e realizar
+para executar consultas, logar (*logging*) consultas e realizar
 operações transacionais.
 
 .. _database-queries:
@@ -650,7 +650,7 @@ complexas e expressivas sem ter que usar SQL específico de plataforma::
         ->where(['id' => 2]);
     $stmt = $query->execute();
 
-Ao usar o construtor de consulta (<em>query builder</em>), nenhum SQL será enviado
+Ao usar o construtor de consulta (*query builder*), nenhum SQL será enviado
 para o servidor do banco de dados até que o método ``execute()`` é chamado ou a
 consulta seja iterada. Iterar uma consulta irá primeiro executá-la e então começar a
 iterar sobre o conjunto de resultados::
@@ -696,7 +696,7 @@ Além de consultas básicas, você pode executar consultas mais complexas usando
 - Chamar a closure fornecida.
 - Se a closure lançar uma exceção, um rollback será emitido. A exceção original será re-lançada.
 - Se a closure retornar ``false``, um rollback será emitido.
-- Se a closure for executada com sucesso, a transação será cometida (<em>committed</em>).
+- Se a closure for executada com sucesso, a transação será cometida (*committed*).
 
 
 Interagindo com Instruções
@@ -710,7 +710,7 @@ Isso envolve o objeto de instrução básico subjacente e fornece alguns recurso
 Preparando um Instrução
 -----------------------
 
-Você pode criar um objeto de instrução usando ``execute()`` ou ``prepare()```. O método ``execute()``
+Você pode criar um objeto de instrução usando ``execute()`` ou ``prepare()``. O método ``execute()``
 retorna uma instrução com os valores fornecidos ligados a ela. Enquanto que o ``prepare()`` retorna
 uma instrução incompleta::
 
@@ -865,7 +865,7 @@ requisições web::
 Identifier Quoting
 ==================
 
-Por padrão, o CakePHP **não** cita (<em>quote<em>) identificadores em consultas
+Por padrão, o CakePHP **não** cita (*quote*) identificadores em consultas
 SQL geradas. A razão disso é que a citação de identificadores tem algumas desvantagens:
 
 * Sobrecarga de desempenho - Citar identificadores é muito mais lentos e complexos 
@@ -879,7 +879,7 @@ habilitar isso usando a configuração ``quoteIdentifiers``` em seu
 
     $conn->driver()->autoQuoting(true);
 
-Quando habilitado, a citação de identificador causará uma <em>traversal query</em> adicional
+Quando habilitado, a citação de identificador causará uma *traversal query* adicional
 que converte todos os identificadores em objetos ``IdentifierExpression``.
 
 .. note::
@@ -896,7 +896,7 @@ chaves estrangeiras que sua aplicação contém. Como esse metadado é alterado
 com pouca frequência e pode ser caro de acessar, ele geralmente é armazenado em cache.
 Por padrão, os metadados são armazenados na configuração de cache ``_cake_model_``. 
 Você pode definir uma configuração de cache personalizada usando a opção ``cacheMetadata``
-na sua configuração de <em>datasource</em>::
+na sua configuração de *datasource*::
 
     'Datasources' => [
         'default' => [
