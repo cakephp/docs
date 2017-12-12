@@ -605,8 +605,8 @@ Variáveis de Ambiente
 Alguns dos provedores modernos de nuvem, como o Heroku, permitem definir variáveis de ambiente. Ao definir variáveis de
 ambiente, você pode configurar seu aplicativo CakePHP como um aplicativo 12factor. Seguir as instruções do aplicativo
 `12factor app instructions <http://12factor.net/>`_ é uma boa maneira de criar um app sem estado e facilitar a implantação
-do seu plicativo. Isso significa, por exemplo, que, se você precisar alterar seu banco de dados, você precisará modificar
-uma ariável DATABASE_URL na sua configuração de host sem a necessidade de alterá-la em seu código-fonte.
+do seu aplicativo. Isso significa, por exemplo, que, se você precisar alterar seu banco de dados, você precisará modificar
+uma variável DATABASE_URL na sua configuração de host sem a necessidade de alterá-la em seu código-fonte.
 
 Como você pode ver no seu **app.php**, as seguintes variáveis estão em uso:
 
