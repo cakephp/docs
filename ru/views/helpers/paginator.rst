@@ -319,9 +319,9 @@ PaginatorHelper можно использовать для создания те
 
     Получает набор записей, на текущей странице, для данной модели::
 
-    // Our URL is: http://example.com/comments/view/page:3
-    echo $this->Paginator->current('Comment');
-    // Output is 3
+        // Our URL is: http://example.com/comments/view/page:3
+        echo $this->Paginator->current('Comment');
+        // Output is 3
 
 .. php:method:: hasNext(string $model = null)
 
