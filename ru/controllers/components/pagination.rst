@@ -5,6 +5,11 @@ Pagination
 
 .. php:class:: PaginatorComponent
 
+.. _paginating-multiple-queries:
+
+Paginating Multiple Queries
+===========================
+
 .. note::
     The documentation is not currently supported in Russian language for this
     page.
