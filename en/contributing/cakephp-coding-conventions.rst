@@ -82,7 +82,7 @@ Line Length
 ===========
 
 It is recommended to keep lines at approximately 100 characters long for better
-code readability. Lines must not be longer than 120 characters.
+code readability. A limit of 80 or 120 characters makes it necessary to distribute complex logic or expressions by function, as well as give functions and objects shorter, more capacious and expressive names. Lines must not be longer than 120 characters.
 
 In short:
 
