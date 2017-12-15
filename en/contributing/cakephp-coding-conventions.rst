@@ -584,9 +584,14 @@ When dealing with defined properties you should favour ``null`` checks over
             if (!isset($this->property)) {
                 // ...
             }
+            
             // Recommended
             if ($this->property === null) {
-
+                // ...
+            }
+            // OR
+            if (is_null($this->property)) {
+                // ...
             }
         }
     }
@@ -609,6 +614,10 @@ are defined::
 
         // Recommended
         if ($array['key'] !== null) {
+            // ...
+        }
+        // OR
+        if (!is_null($array['key'])) {
             // ...
         }
     }
