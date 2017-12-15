@@ -1,20 +1,42 @@
-Controllers
+Контроллеры
 ###########
 
 .. php:namespace:: Cake\Controller
 
 .. php:class:: Controller
 
-.. note::
-    The documentation is not currently supported in Russian language for this
-    page.
+Контроллеры - это то, что скрывается за буквой 'C' в понятии MVC. После того,
+как срабатывает мршрутизация, и обнаруживается правильный котроллер, происходит
+вызов нужного экшена. Ваш контроллер должен произвести верную интерпретацию данных
+запроса, убедившись, что будет вызвана необходимая модель, и возвращен верный вид
+и результат запроса. Контроллеры можно представить себе, как промежуточное звено
+между Моделью и Видом. Старайтесь сохранять ваши контроллеры компактными,
+помещая всю бизнес-логику внутри модели. Это сделает ваш код более гибким и
+облегчит его повторное использование и тестирование.
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+Вцелом контроллер используется для построения логики в работе с конкретной моделью.
+Например, если вы создаете сайт онлайн-пекарни, у вас вероятно будет контроллер
+RecipesController, управляющий вашими рецептами, а также контроллер
+IngredientsController управляющий вашими ингридиентами. Однако может быть и так,
+что некоторые контроллеры могут работать более, чем с одной моделью. В CakePHP
+контроллер именуется в соответствии с основной моделью, с которой он работает.
 
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+Все контроллеры вашего приложения наследуются от класса ``AppController``,
+который в свою очередь наследуется от класса ядра :php:class:`Controller`.
+Класс ``AppController`` может быть объявлен в файле
+**src/Controller/AppController.php**, и он должен содержать методы, которые
+будут общими для всех контроллеров вашего приложения.
+
+Контроллеры предоставляют методы, обрабатывающие запросы. Эти методы называются
+*экшены*. По умолчанию кажды открытый (public) метод в контроллере является экшеном,
+и он доступен из URL. Экшен отвечает за обработку запроса и возвращает его результат.
+Как правило ответ возвращается с использованием вида, но существуют и другие способы
+создания ответов.
+
+.. _app-controller:
+
+Контроллер уровня приложения (AppController)
+============================================
 
 More on Controllers
 ===================
@@ -27,5 +49,5 @@ More on Controllers
 
 
 .. meta::
-    :title lang=ru: Controllers
-    :keywords lang=ru: correct models,controller class,controller controller,core library,single model,request data,middle man,bakery,mvc,attributes,logic,recipes
+    :title lang=ru: Контроллеры
+    :keywords lang=ru: correct models,класс контроллера,controller controller,core library,single model,request data,middle man,bakery,mvc,attributes,логика,recipes
