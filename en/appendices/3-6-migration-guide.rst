@@ -190,5 +190,5 @@ Validation
 
 I18n
 ====
-* The two leftover FormHelper i18n translation texts ``'Edit %s'`` and ``New %s`` are now ``'Edit {0}'`` and ``New {0}``. If you are using translating capability, please
+* The two leftover FormHelper i18n translation strings ``'Edit %s'`` and ``'New %s'`` are now ``'Edit {0}'`` and ``'New {0}'``. If you are using translating capability, please
 make sure you adjust those translations in your PO file.
