@@ -187,3 +187,8 @@ Validation
   ``Validation::compareWith()``.
 * ``Validator::notSameAs()`` was added to make it
   easier to check if a field is not the same as another field.
+
+I18n
+====
+* The two leftover FormHelper i18n translation texts ``'Edit %s'`` and ``New %s`` are now ``'Edit {0}'`` and ``New {0}``. If you are using translating capability, please
+make sure you adjust those translations in your PO file.
