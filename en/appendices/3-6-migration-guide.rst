@@ -151,6 +151,12 @@ Datasource
   ``BINARY(16)`` will be used as the column type. While in SQLServer, and
   Postgres will use their native UUID types.
 
+Event
+=====
+
+* ``Cake\Event\EventInterface`` was added to give allow better typehinting in
+  the future.
+
 Form
 ====
 
