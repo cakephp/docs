@@ -38,8 +38,79 @@ IngredientsController управляющий вашими ингридиента
 Контроллер уровня приложения (AppController)
 ============================================
 
-More on Controllers
-===================
+Как уже упоминалось во введении, класс ``AppController`` - это родительский класс
+для всех контроллеров вашего приложения. Сам по себе класс ``AppController`` наследуется
+от класса :php:class:`Cake\\Controller\\Controller`, входящего в состав CakePHP.
+Класс ``AppController`` объявлен в файле **src/Controller/AppController.php**
+следующим образом::
+
+    namespace App\Controller;
+
+    use Cake\Controller\Controller;
+
+    class AppController extends Controller
+    {
+    }
+    
+Атрибуты и методы, прописанные в вашем классе ``AppController`` будут доступны во
+всех ваших контроллерах, наследующихся от данного класса. Компоненты (о которых будет
+рассказано далее) - это самый лучший вариант для кода, использующегося во многих (но
+необязательно во всех) контроллерах.
+
+Вы можете использовать ваш ``AppController`` для загрузки компонентов, которые будут
+использоваться в каждом контроллере вашего приложения. CakePHP предоставляет метод
+``initialize()``, который вызывается в конце коструктора Контроллера::
+
+    namespace App\Controller;
+
+    use Cake\Controller\Controller;
+
+    class AppController extends Controller
+    {
+
+        public function initialize()
+        {
+            // Always enable the CSRF component.
+            $this->loadComponent('Csrf');
+        }
+
+    }
+    
+В дополнение к методу ``initialize()``, более старое свойство ``$components``
+также позволит вам объявлять обязательные к загрузке компоненты. В то время,
+как применяются стандартные правила наследования ООП, компоненты и хелперы,
+используемые контроллером обрабатываются по-особому. В данном случае значения
+свойств класса ``AppController`` объединяются с массивами дочерних классов
+контроллеров. Значения дочерних классов всегда переопределяют значения из
+``AppController``.
+
+Поток запросов
+==============
+
+Когда к приложению CakePHP делается запрос, классы CakePHP
+:php:class:`Cake\\Routing\\Router` и :php:class:`Cake\\Routing\\Dispatcher`
+используют :ref:`routes-configuration` для обнаружения и создания верного
+экземпляра класса контроллера. Данные запроса инкапсулируются в объект запроса.
+CakePHP помещает всю важную информацию из запроса в свойство ``$this->request``.
+Для более подробной информации об объекте запроса смотрите раздел :ref:`cake-request`.
+When a request is made to a CakePHP application, CakePHP's
+:php:class:`Cake\\Routing\\Router` and :php:class:`Cake\\Routing\\Dispatcher`
+classes use :ref:`routes-configuration` to find and create the correct
+controller instance. The request data is encapsulated in a request object.
+CakePHP puts all of the important request information into the ``$this->request``
+property. See the section on :ref:`cake-request` for more information on the
+CakePHP request object.
+
+Экшены контроллера
+==================
+
+Экшены контроллера ответственны за преобразование параметров запроса в ответ
+для браузера/пользователя совершающего запрос. CakePHP использует соглашения
+для автоматизации данного процесса и для устранения некоторого шаблонного кода,
+который вам пришлось бы писать в противном случае.
+
+Подробнее о контроллерах
+========================
 
 .. toctree::
     :maxdepth: 1
