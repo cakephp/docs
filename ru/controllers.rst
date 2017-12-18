@@ -70,7 +70,7 @@ IngredientsController управляющий вашими ингридиента
 
         public function initialize()
         {
-            // Always enable the CSRF component.
+            // Компонент CSRF всегда включен.
             $this->loadComponent('Csrf');
         }
 
@@ -93,13 +93,6 @@ IngredientsController управляющий вашими ингридиента
 экземпляра класса контроллера. Данные запроса инкапсулируются в объект запроса.
 CakePHP помещает всю важную информацию из запроса в свойство ``$this->request``.
 Для более подробной информации об объекте запроса смотрите раздел :ref:`cake-request`.
-When a request is made to a CakePHP application, CakePHP's
-:php:class:`Cake\\Routing\\Router` and :php:class:`Cake\\Routing\\Dispatcher`
-classes use :ref:`routes-configuration` to find and create the correct
-controller instance. The request data is encapsulated in a request object.
-CakePHP puts all of the important request information into the ``$this->request``
-property. See the section on :ref:`cake-request` for more information on the
-CakePHP request object.
 
 Экшены контроллера
 ==================
@@ -108,6 +101,52 @@ CakePHP request object.
 для браузера/пользователя совершающего запрос. CakePHP использует соглашения
 для автоматизации данного процесса и для устранения некоторого шаблонного кода,
 который вам пришлось бы писать в противном случае.
+
+По соглашению, CakePHP обрабатывает вид с именем, соответствующим имени экшена.
+Возвращаясь к нашему примеру онлайн пекарни, наш контроллер может содержать
+экшены ``view()``, ``share()``, и ``search()``. Контроллер может быть найден в
+файле **src/Controller/RecipesController.php** и содержать следующий код::
+
+    // src/Controller/RecipesController.php
+
+    class RecipesController extends AppController
+    {
+        public function view($id)
+        {
+            // Здесь описывается вся логика экшена.
+        }
+
+        public function share($customerId, $recipeId)
+        {
+            // Здесь описывается вся логика экшена.
+        }
+
+        public function search($query)
+        {
+            // Здесь описывается вся логика экшена.
+        }
+    }
+
+Файлы шаблонов для этих экшенов, назывались бы **src/Template/Recipes/view.ctp**,
+**src/Template/Recipes/share.ctp**, и **src/Template/Recipes/search.ctp**. По
+соглашениям имя файла вида соответствует имени экшена контроллера, записанном в
+нижнем регистре с использованием подчеркиваний для разделения слов.
+
+Экшены контроллера обычно используют метод ``Controller::set()`` для создания
+контекста, используемого ``View`` для обработки слоя вида. Благодаря соглашениям,
+используемым CakePHP, вам не нужно самим создавать и обрабатывать виды. Вместо этого
+как только сработает экшен контроллера, CakePHP сам произведет обработку и передачу
+Вида.
+
+Если по каким-либо причинам вам захочется изменить стандартное поведение, вы можете
+вернуть объект :php:class:`Cake\\Http\\Response` из экшена с полностью созданным
+ответом.
+If for some reason you'd like to skip the default behavior, you can return a
+:php:class:`Cake\\Http\\Response` object from the action with the fully
+created response.
+
+Чтобы вы могли эффективно использовать контроллер в своем приложении, мы
+охватим некоторые основные атрибуты и методы, предоставляемые контроллерами CakePHP.
 
 Подробнее о контроллерах
 ========================
