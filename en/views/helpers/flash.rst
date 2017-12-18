@@ -17,7 +17,7 @@ Rendering Flash Messages
 ========================
 
 To render a flash message, you can simply use FlashHelper's ``render()``
-method::
+method in your template file::
 
     <?= $this->Flash->render() ?>
 
@@ -35,7 +35,7 @@ You can also override any of the options that were set in FlashComponent::
         'element' => 'success'
     ]);
 
-    // In your View: Will use great_success.ctp instead of succcess.ctp
+    // In your template file: Will use great_success.ctp instead of succcess.ctp
     <?= $this->Flash->render('flash', [
         'element' => 'great_success'
     ]);
