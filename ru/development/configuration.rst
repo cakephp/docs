@@ -174,11 +174,6 @@ on configuring your database connections.
         }
     }
 
-The above would setup paths for both the ``App`` and ``App\Controller``
-namespace. The first key will be searched, and if that path does not contain the
-class/file the second key will be searched. You can also map a single namespace
-to multiple directories with the following::
-
 Вышеописанное установило бы пути как для пространства имен ``App``, так и
 ``App\Controller``. Будет проверен первый ключ, и если этот путь не содержит
 класс/файл, будет проверен второй ключ. Вы также можете сопоставить одно
@@ -192,10 +187,6 @@ to multiple directories with the following::
 
 Плагин, Шаблон просмотра и локальные пути
 -----------------------------------------
-
-Since plugins, view templates and locales are not classes, they cannot have an
-autoloader configured. CakePHP provides three Configure variables to setup additional
-paths for these resources. In your **config/app.php** you can set these variables::
 
 Поскольку плагины, шаблоны представлений и локали не являются классами, у них не может
 быть настроен автозагрузчик. CakePHP предоставляет три параметра Configure для настройки
