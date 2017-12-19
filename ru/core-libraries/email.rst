@@ -21,6 +21,11 @@ Email
 
 .. php:class:: Email(mixed $profile = null)
 
+.. _email-configuration:
+
+Configuration
+=============
+
 .. _email-configurations:
 
 Configuration Profiles
