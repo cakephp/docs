@@ -504,7 +504,8 @@ methods are implemented by your controllers
         Метод beforeFilter() будет вызываться для отсутствующих экшенов.
 
     Возврат ответа от метода ``beforeFilter()`` не будет препятствовать вызову других
-    слушателей того же события. Вы должны явно :ref:`stop the event <stopping-events>`.
+    слушателей того же события. Вы должны явно
+    :ref:`stop the event <stopping-events>`.
 
 .. php:method:: beforeRender(Event $event)
 
