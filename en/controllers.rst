@@ -404,9 +404,9 @@ Paginating a Model
 This method is used for paginating results fetched by your models.
 You can specify page sizes, model find conditions and more. See the
 :doc:`pagination <controllers/components/pagination>` section for more details on
-how to use ``paginate()``
+how to use ``paginate()``.
 
-The paginate attribute gives you an easy way to customize how ``paginate()``
+The ``$paginate`` attribute gives you an easy way to customize how ``paginate()``
 behaves::
 
     class ArticlesController extends AppController
