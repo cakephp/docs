@@ -1,23 +1,28 @@
-Authentication
+Аутентификация
 ##############
 
 .. php:class:: AuthComponent(ComponentCollection $collection, array $config = [])
 
+Идентификация, аутентификация и авторизация пользователей является обычной частью
+почти каждого веб-приложения. В CakePHP AuthComponent предоставляет
+подключаемый способ выполнения этих задач. AuthComponent позволяет комбинировать
+объекты аутентификации и объекты авторизации для создания гибких
+способов идентификации и проверки авторизации пользователя.
+
 .. _authentication-objects:
 
-Suggested Reading Before Continuing
-===================================
+Рекомендуется к прочтению
+=========================
 
-.. note::
-    The documentation is not currently supported in Russian language for this
-    page.
+Настройка аутентификации требует нескольких шагов, включая определение
+таблицы пользователей, создание модели, контроллера, видов и т. д.
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+Это все описывается по шагам в
+:doc:`Руководстве по созданию CMS </tutorials-and-examples/cms/authentication>`.
 
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+If you are looking for existing authentication and/or authorization solutions
+for CakePHP, have a look at the 
+`Authentication and Authorization <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/README.md#authentication-and-authorization>`_ section of the Awesome CakePHP list.
 
 .. meta::
     :title lang=ru: Authentication
