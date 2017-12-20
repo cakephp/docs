@@ -5,16 +5,10 @@ Views
 
 .. php:class:: View
 
-.. note::
-    The documentation is not currently supported in Russian language for this
-    page.
-
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
-
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+Виды - это то, что скрывается за буквой **V** в понятии MVC. Виды отвечают за
+вывод данных возвращаемых запросм в определенной форме. Часто это происходит
+в виде HTML, XML или JSON, но потоковые файлы и создание PDF-файлов, которые пользователи могут загружать, также
+обязанности уровня просмотра.
 
 .. _app-view:
 
