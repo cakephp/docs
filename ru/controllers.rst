@@ -490,8 +490,6 @@ CakePHP для вас. Прочтите раздел :ref:`configuration-compone
 
 По умолчанию следующие методы обратного вызова связаны с соответствующими
 событиями, если методы реализуются вашими контроллерами
-By default the following callback methods are connected to related events if the
-methods are implemented by your controllers
 
 .. php:method:: beforeFilter(Event $event)
 
@@ -504,21 +502,20 @@ methods are implemented by your controllers
         Метод beforeFilter() будет вызываться для отсутствующих экшенов.
 
     Возврат ответа от метода ``beforeFilter()`` не будет препятствовать вызову других
-    слушателей того же события. Вы должны явно
-    :ref:`stop the event <stopping-events>`.
+    слушателей того же события. Вы должны явно :ref:`stop the event <stopping-events>`.
 
 .. php:method:: beforeRender(Event $event)
 
     Вызывается во время события ``Controller.beforeRender``, которое происходит после
-    логики экшена контроллера, но перед визуализацией вида. Этот коллбек не
+    логики экшена контроллера, но перед визуализацией вида. Этот коллбек не
     используется часто, но может потребоваться, если вы вызываете вручную метод
     :php:meth:`~Cake\\Controller\\Controller::render()` перед окончанием экшена.
 
 .. php:method:: afterFilter(Event $event)
 
     Вызывается во время события ``Controller.shutdown``, которое запускается после
-    каждого экшена контроллера и после завершения рендеринга. Это последний метод
-    контроллера для запуска.
+    каждого экшена контроллера и после завершения рендеринга. Это последний метод
+    контроллера для запуска.
 
 В дополнение к коллбекам жизненного цикла контроллера :doc:`/controllers/components`
 также предоставляют схожий набор коллбеков.
