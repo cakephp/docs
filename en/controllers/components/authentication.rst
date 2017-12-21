@@ -90,7 +90,7 @@ array::
 In the second example, you'll notice that we had to declare the
 ``userModel`` key twice. To help you keep your code DRY, you can use the
 ``all`` key. This special key allows you to set settings that are passed
-to every attached object. The all key is also exposed as
+to every attached object. The ``all`` key is also exposed as
 ``AuthComponent::ALL``::
 
     // Pass settings in using 'all'
