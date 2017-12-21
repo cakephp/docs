@@ -23,9 +23,6 @@
 Если вы ищете готовые решения по аутентификации и/или авторизации для
 CakePHP, взгляните на раздел 
 `Аутентификация и Авторизация <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/README.md#authentication-and-authorization>`_ списка Awesome CakePHP.
-If you are looking for existing authentication and/or authorization solutions
-for CakePHP, have a look at the 
-`Authentication and Authorization <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/README.md#authentication-and-authorization>`_ section of the Awesome CakePHP list.
 
 
 Аутентификация
@@ -62,6 +59,56 @@ for CakePHP, have a look at the
 
 Вы также можете использовать такие системы аутентификации, как например OpenID,
 но они уже не входят в состав ядра CakePHP.
+
+Настройка обработчиков аутентификации
+-------------------------------------
+
+Вы настраиваете обработчики аутентификации, используя конфигурацию
+``authenticate``. Вы можете настроить один или несколько обработчиков
+для аутентификации. Использование нескольких обработчиков позволяет
+вам поддерживать разные способы входа пользователей. Когда пользователи
+авторизуются, обработчики аутентификации проверяются в том порядке,
+в котором они были объявлены. Как только какой-либо обработчик сможет
+идентифицировать пользователя, все оставшиеся обработчики уже не будут
+использованы. И наоборот, вы можете прервать проверку подлинности,
+выбросив исключение. Вам будет нужно перехватывать любые выбрасываемые
+исключения и обрабатывать их должным образом.
+
+Вы можете настроить обработчики аутентификации в методе 
+``beforeFilter()`` либо ``initialize()``. Вы можете передавать
+информацию о конфигурации в каждый объект аутентификации, используя
+массив::
+
+    // Простая настройка
+    $this->Auth->config('authenticate', ['Form']);
+
+    // Передача параметров
+    $this->Auth->config('authenticate', [
+        'Basic' => ['userModel' => 'Members'],
+        'Form' => ['userModel' => 'Members']
+    ]);
+
+Во втором примере вы возможно обратили внимание, что ключ ``userModel``
+был объявлен дважды. Чтобы ваш код соответствовал принципам DRY (не
+повторяйся), вы можете использовать ключ ``all``. Этот специальный ключ
+позволяет вам устанавливать параметры, которые вы передаете к каждому
+прикрепленному объекту. Ключ ``all`` также доступен в качестве
+статического свойства ``AuthComponent::ALL``::
+
+    // Передача параметров с помощию 'all'
+    $this->Auth->config('authenticate', [
+        AuthComponent::ALL => ['userModel' => 'Members'],
+        'Basic',
+        'Form'
+    ]);
+
+В приведенном выше примере и ``Form`` и ``Basic`` будут получать
+настройки, объявленные в ключе 'all'.
+In the above example, both ``Form`` and ``Basic`` will get the settings
+defined for the 'all' key. Any settings passed to a specific
+authentication object will override the matching key in the 'all' key.
+The core authentication objects support the following configuration
+keys.
 
 
 .. meta::
