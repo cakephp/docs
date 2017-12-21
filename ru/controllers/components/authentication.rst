@@ -102,13 +102,21 @@ CakePHP, взгляните на раздел
         'Form'
     ]);
 
-В приведенном выше примере и ``Form`` и ``Basic`` будут получать
-настройки, объявленные в ключе 'all'.
-In the above example, both ``Form`` and ``Basic`` will get the settings
-defined for the 'all' key. Any settings passed to a specific
-authentication object will override the matching key in the 'all' key.
-The core authentication objects support the following configuration
-keys.
+В приведенном выше примере и ``Form`` и ``Basic`` будут получать настройки,
+объявленные в ключе 'all'. Любые настройки, переданные конкретному объекту
+аутентификации будут переопределять соответствующие ключи внутри ключа 'all'.
+Объекты аутентификации ядра поддерживают следующие ключи конфигурации.
+
+- ``fields`` Поля, используемые для аутентификации пользователя. Вы можете
+  использовать ключи ``username`` и ``password``, чтобы указать поля для
+  имени пользователя и пароля соответственно.
+- ``userModel`` Имя модели для таблицы пользователей; По умолчанию - Users.
+- ``finder`` The finder method to use to fetch a user record. Defaults to 'all'.
+- ``passwordHasher`` Password hasher class; Defaults to ``Default``.
+- The ``scope`` and ``contain`` options have been deprecated as of 3.1. Use
+  a custom finder instead to modify the query to fetch a user record.
+- The ``userFields`` option has been deprecated as of 3.1. Use ``select()`` in 
+  your custom finder.
 
 
 .. meta::
