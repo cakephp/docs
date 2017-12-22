@@ -195,7 +195,7 @@ CakePHP, взгляните на раздел
         ]);
     }
 
-Это потребует наличие поискового метода ``findAuth()`` в вашем классе модели
+Это потребует наличия поискового метода ``findAuth()`` в вашем классе модели
 ``UsersTable``. В приведенном ниже примере запрос скорректирован для выборки
 значений только из необходимых полей и добавлено условие выборки значений.
 Вы должны убедиться, что происходит выборка значений из необходимых полей,
@@ -213,8 +213,51 @@ CakePHP, взгляните на раздел
 .. note::
     Опция ``finder`` доступна только с версии 3.1. В более ранних версиях вы
     можете использовать опции ``scope`` и ``contain`` для изменения запроса.
+    
+Identifying Users and Logging Them In
+-------------------------------------
+
+.. php:method:: identify()
+
+Вам необходимо вручную вызывать ``$this->Auth->identify()``, чтобы
+идентифицировать пользователя, используя учетные данные предоставленные
+в запросе. После этого вы должны использовать метод ``$this->Auth->setUser()``,
+чтобы пользователь вошел в приложение, то есть данные о нем сохранились в
+сессии.
+
+При аутентификации пользователей прикрепленные объекты аутентификации
+проверяются в том порядке, в котором они прикреплены. Как только один из
+объектов сможет идентифицировать пользователя, другие объекты уже не проверяются.
+Пример функции для работы с формой входа может выглядеть так::
+
+    public function login()
+    {
+        if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            } else {
+                $this->Flash->error(__('Username or password is incorrect'));
+            }
+        }
+    }
+
+Приведенный выше код сначала попробует идентифицировать пользователя, используя
+POST-данные. В случае успеха данные о пользователе будут сохранены в сессии, и
+
+The above code will attempt to first identify a user by using the POST data.
+If successful we set the user info to the session so that it persists across requests
+and then redirect to either the last page they were visiting or a URL specified in the
+``loginRedirect`` config. If the login is unsuccessful, a flash message is set.
+
+.. warning::
+
+    ``$this->Auth->setUser($data)`` will log the user in with whatever data is
+    passed to the method. It won't actually check the credentials against an
+    authentication class.
 
 
 .. meta::
     :title lang=ru: Аутентификация
-    :keywords lang=ru: обработчики аутентификации,массив php,базовая аутентификация,веб-приложение,различные способы,credentials,исключения,cakephp,logging
+    :keywords lang=ru: обработчики аутентификации,массив php,базовая аутентификация,веб-приложение,различные способы,учетные данные,исключения,cakephp,logging
