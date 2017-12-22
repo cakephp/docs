@@ -162,24 +162,57 @@ CakePHP, взгляните на раздел
 В дополнение к стандартной конфигурации, Базовая аутентификация (Basic)
 также поддерживает следующие ключи:
 
-- ``realm`` The realm being authenticated. Defaults to ``env('SERVER_NAME')``.
-
-In addition to the common configuration Digest authentication supports
-the following keys:
-
 - ``realm`` Область, для которой предназначена аутентификация.
   По умолчанию servername (имя сервера).
-- ``nonce`` A nonce used for authentication. Defaults to ``uniqid()``.
-- ``qop`` Defaults to auth; no other values are supported at this time.
-- ``opaque`` A string that must be returned unchanged by clients. Defaults
-  to ``md5($config['realm'])``.
+- ``nonce`` Значение nonce для аутентификации. По умолчанию ``uniqid()``.
+- ``qop`` По умолчанию auth; другие значения пока не поддерживаются.
+- ``opaque`` Строка, которая должна быть возвращена в неизменном виде
+  клиентами. По умолчанию ``md5($config['realm'])``.
 
 .. note::
-    To find the user record, the database is queried only using the username.
-    The password check is done in PHP. This is necessary because hashing
-    algorithms like bcrypt (which is used by default) generate a new hash
-    each time, even for the same string and you can't just do simple string
-    comparison in SQL to check if the password matches.
+    Чтобы найти запись пользователя, запрос к базе  данных происходит только
+    с использованием имени пользователя. Проверка пароля производится в PHP.
+    Это связано с тем, что алгоритмы хеширования, такие как bcrypt (алгоритм
+    по умолчанию) генерируют новый хеш каждый раз, даже для неизменной строки,
+    и в данном случае обычное сравнение строк в SQL становится неприменимым
+    для проверки пароля.
+    
+Кастомизация поискового запроса
+-------------------------------
+
+Вы можете кастомизировать запрос на выборку записи пользователя с помощью
+опции ``finder`` в группе параметров ``authenticate``::
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'finder' => 'auth'
+                ]
+            ],
+        ]);
+    }
+
+Это потребует наличие поискового метода ``findAuth()`` в вашем классе модели
+``UsersTable``. В приведенном ниже примере запрос скорректирован для выборки
+значений только из необходимых полей и добавлено условие выборки значений.
+Вы должны убедиться, что происходит выборка значений из необходимых полей,
+таких как ``username`` и ``password``::
+
+    public function findAuth(\Cake\ORM\Query $query, array $options)
+    {
+        $query
+            ->select(['id', 'username', 'password'])
+            ->where(['Users.active' => 1]);
+
+        return $query;
+    }
+
+.. note::
+    Опция ``finder`` доступна только с версии 3.1. В более ранних версиях вы
+    можете использовать опции ``scope`` и ``contain`` для изменения запроса.
 
 
 .. meta::
