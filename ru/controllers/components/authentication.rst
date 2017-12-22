@@ -111,14 +111,77 @@ CakePHP, взгляните на раздел
   использовать ключи ``username`` и ``password``, чтобы указать поля для
   имени пользователя и пароля соответственно.
 - ``userModel`` Имя модели для таблицы пользователей; По умолчанию - Users.
-- ``finder`` The finder method to use to fetch a user record. Defaults to 'all'.
-- ``passwordHasher`` Password hasher class; Defaults to ``Default``.
-- The ``scope`` and ``contain`` options have been deprecated as of 3.1. Use
-  a custom finder instead to modify the query to fetch a user record.
-- The ``userFields`` option has been deprecated as of 3.1. Use ``select()`` in 
-  your custom finder.
+- ``finder`` Метод-файндер для получения записи из таблицы пользователей.
+  По умолчанию устновлен в 'all'.
+- ``passwordHasher`` Класс хешера паролей; По умолчанию ``Default``.
+- Опции ``scope`` и ``contain`` являются устаревшими в версии 3.1. Используйте
+  вместо них пользовательские файндеры для изменения запроса на выборку записи
+  пользователя.
+- Опция ``userFields`` является устаревшей в версии 3.1. Используйте метод 
+  ``select()`` в вашем пользовательском файндере.
+  
+Чтобы настроить дополнительные поля для записи пользвателя в методе
+``initialize()``::
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'fields' => ['username' => 'email', 'password' => 'passwd']
+                ]
+            ]
+        ]);
+    }
+
+Не помещайте другие ключи конфигурации ``Auth``, такие как ``authError``, ``loginAction``,
+и т.д. внутрь элементов ``authenticate`` или ``Form``. Они должны находитя на одном
+с ними уровне. Приведенная выше настройка конфигурации компонента ``Auth`` с использованием
+остальных параметров должна выглядеть так::
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Auth', [
+            'loginAction' => [
+                'controller' => 'Users',
+                'action' => 'login',
+                'plugin' => 'Users'
+            ],
+            'authError' => 'Вы правда думали, что вам можно видеть это?',
+            'authenticate' => [
+                'Form' => [
+                    'fields' => ['username' => 'email']
+                ]
+            ],
+            'storage' => 'Session'
+        ]);
+    }
+
+В дополнение к стандартной конфигурации, Базовая аутентификация (Basic)
+также поддерживает следующие ключи::
+
+- ``realm`` The realm being authenticated. Defaults to ``env('SERVER_NAME')``.
+
+In addition to the common configuration Digest authentication supports
+the following keys:
+
+- ``realm`` Область, для которой предназначена аутентификация.
+  По умолчанию servername (имя сервера).
+- ``nonce`` A nonce used for authentication. Defaults to ``uniqid()``.
+- ``qop`` Defaults to auth; no other values are supported at this time.
+- ``opaque`` A string that must be returned unchanged by clients. Defaults
+  to ``md5($config['realm'])``.
+
+.. note::
+    To find the user record, the database is queried only using the username.
+    The password check is done in PHP. This is necessary because hashing
+    algorithms like bcrypt (which is used by default) generate a new hash
+    each time, even for the same string and you can't just do simple string
+    comparison in SQL to check if the password matches.
 
 
 .. meta::
     :title lang=ru: Аутентификация
-    :keywords lang=ru: authentication handlers,array php,базовая аутентификация,веб-приложение,различные способы,credentials,исключения,cakephp,logging
+    :keywords lang=ru: обработчики аутентификации,массив php,базовая аутентификация,веб-приложение,различные способы,credentials,исключения,cakephp,logging
