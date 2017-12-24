@@ -15,6 +15,9 @@ version = '3.5'
 # The full version, including alpha/beta/rc tags.
 release = '3.5'
 
+# The search index version.
+search_version = '3-0'
+
 # The marketing diplay name for the book.
 version_name = 'Red Velvet'
 
@@ -31,6 +34,7 @@ version_list = [
 languages = ['en', 'pt_BR', 'es', 'ja', 'fr', 'zh', 'tr', 'ru']
 
 # The GitHub branch name for this version of the docs
+# for edit links to point at.
 branch = '3.0'
 
 # Add any paths that contain custom themes here, relative to this directory.
