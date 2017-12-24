@@ -44,6 +44,8 @@ a simple contact form would look like::
                     'rule' => 'email',
                     'message' => 'A valid email address is required',
                 ]);
+
+            return $validator;
         }
 
         protected function _execute(array $data)
