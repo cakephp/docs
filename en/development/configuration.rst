@@ -106,12 +106,15 @@ Security.salt
 Asset.timestamp
     Appends a timestamp which is last modified time of the particular
     file at the end of asset files URLs (CSS, JavaScript, Image) when
-    using proper helpers.
-    Valid values:
+    using proper helpers. Valid values:
 
     - (bool) ``false`` - Doesn't do anything (default)
     - (bool) ``true`` - Appends the timestamp when debug is ``true``
     - (string) 'force' - Always appends the timestamp.
+
+    .. versionchanged:: 3.6.0
+        As of 3.6.0, you can override this global setting when linking assets
+        using the ``timestamp`` option.
 
 Database Configuration
 ----------------------
