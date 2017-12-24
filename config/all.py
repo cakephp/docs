@@ -15,6 +15,8 @@ version = '3.5'
 # The full version, including alpha/beta/rc tags.
 release = '3.5'
 
+version_name = 'Red Velvet'
+
 # Languages available.
 languages = ['en', 'pt_BR', 'es', 'ja', 'fr', 'zh', 'tr', 'ru']
 
