@@ -35,9 +35,9 @@ a simple contact form would look like::
                 ->addField('body', ['type' => 'text']);
         }
 
-        protected function _buildValidator(Validator $validator)
+        public function validationDefault(Validator $validator)
         {
-            return $validator->add('name', 'length', [
+            $validator->add('name', 'length', [
                     'rule' => ['minLength', 10],
                     'message' => 'A name is required'
                 ])->add('email', 'format', [
@@ -57,7 +57,7 @@ In the above example we see the 3 hook methods that forms provide:
 
 * ``_buildSchema`` is used to define the schema data that is used by FormHelper
   to create an HTML form. You can define field type, length, and precision.
-* ``_buildValidator`` Gets a :php:class:`Cake\\Validation\\Validator` instance
+* ``validationDefault`` Gets a :php:class:`Cake\\Validation\\Validator` instance
   that you can attach validators to.
 * ``_execute`` lets you define the behavior you want to happen when
   ``execute()`` is called and the data is valid.
