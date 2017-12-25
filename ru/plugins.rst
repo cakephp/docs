@@ -12,6 +12,11 @@ Plugins
     You can refer to the english version in the select top menu to have
     information about this page's topic.
 
+.. _plugin-routes:
+
+Plugin Routes
+=============
+
 .. meta::
     :title lang=ru: Plugins
     :keywords lang=ru: plugin folder,plugins,controllers,models,views,package,application,database connection,little space
