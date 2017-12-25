@@ -105,6 +105,9 @@ must return ``true`` or ``'force'`` for the timestamp to be appended::
 .. versionadded:: 3.3.5
     ``build()`` accepts an array as the 2nd argument as of 3.3.5
 
+.. versionadded:: 3.6.0
+    The ``timestamp`` option was added to ``build()``.
+
 If you are generating URLs for CSS, Javascript or image files there are helper
 methods for each of these asset types::
 
@@ -117,8 +120,18 @@ methods for each of these asset types::
     // Outputs /css/app.css
     $this->Url->css('app.css');
 
+    // Force timestamps for one method call.
+    $this->Url->css('app.css', ['timestamp' => 'force']);
+
+    // Or disable timestamps for one method call.
+    $this->Url->css('app.css', ['timestamp' => false]);
+
 .. versionadded:: 3.2.4
     The asset helper methods were added in 3.2.4.
+
+.. versionadded:: 3.6.0
+    The ``timestamp`` option was added to asset helper methods.
+
 
 For further information check
 `Router::url <https://api.cakephp.org/3.x/class-Cake.Routing.Router.html#_url>`_

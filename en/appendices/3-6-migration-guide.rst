@@ -163,6 +163,12 @@ Form
 * Form classes now support the ``_validatorClass`` property which works the same
   as it does on ``ORM\Table``.
 
+I18n
+====
+
+* The two leftover FormHelper i18n translation strings ``'Edit %s'`` and ``'New
+  %s'`` are now ``'Edit {0}'`` and ``'New {0}'``. If you are using translating
+  capability, please make sure you adjust those translations in your PO file.
 
 ORM
 ===
@@ -194,7 +200,9 @@ Validation
 * ``Validator::notSameAs()`` was added to make it
   easier to check if a field is not the same as another field.
 
-I18n
+View
 ====
-* The two leftover FormHelper i18n translation strings ``'Edit %s'`` and ``'New %s'`` are now ``'Edit {0}'`` and ``'New {0}'``. If you are using translating capability, please
-make sure you adjust those translations in your PO file.
+
+* ``UrlHelper::script()``, ``css()``, and ``image()`` methods now support
+  a ``timestamp`` option which allows you to set the ``Asset.timestamp``
+  setting for a single method call.
