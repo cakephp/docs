@@ -158,8 +158,14 @@ CakePHP, взгляните на раздел
             'storage' => 'Session'
         ]);
     }
-
+    
 В дополнение к стандартной конфигурации, Базовая аутентификация (Basic)
+также поддерживает следующие ключи:
+
+- ``realm`` Область, для которой предназначена аутентификация.
+  По умолчанию ``env('SERVER_NAME')``.
+
+В дополнение к стандартной конфигурации, Дайджест-аутентификация
 также поддерживает следующие ключи:
 
 - ``realm`` Область, для которой предназначена аутентификация.
@@ -244,18 +250,38 @@ Identifying Users and Logging Them In
     }
 
 Приведенный выше код сначала попробует идентифицировать пользователя, используя
-POST-данные. В случае успеха данные о пользователе будут сохранены в сессии, и
-
-The above code will attempt to first identify a user by using the POST data.
-If successful we set the user info to the session so that it persists across requests
-and then redirect to either the last page they were visiting or a URL specified in the
-``loginRedirect`` config. If the login is unsuccessful, a flash message is set.
+POST-данные. В случае успеха данные о пользователе будут сохранены в сессии, благодаря
+чему будут доступны между отправкой запросов, и после этого будет осуществляться
+перенаправление на последнюю посещенную страницу, либо на URL, указанный в параметре
+конфигурации ``loginRedirect``. В случае, если попытка входа окажется неудачной -
+выведется флеш-сообщение об ошибке.
 
 .. warning::
 
-    ``$this->Auth->setUser($data)`` will log the user in with whatever data is
-    passed to the method. It won't actually check the credentials against an
-    authentication class.
+    Метод ``$this->Auth->setUser($data)`` авторизует пользователя, независимо от того,
+    какие данные были ему переданы. Он не будет проверять пользовательские данные на
+    соответствие классу аутентификации.
+    
+Перенаправление пользователей после входа
+-----------------------------------------
+
+.. php:method:: redirectUrl
+
+После входа пользователя в систему вы, как правило, захотите перенаправить их
+обратно туда, откуда они пришли. Передайте URL-адрес для установки целевой
+страницы, на которую пользователь должен быть перенаправлен после входа в
+систему.
+
+Если параметр не будет передан, возвращаемый URL будет подчиняться следующим
+правилам:
+
+- Returns the normalized URL from the ``redirect`` query string value if it is
+  present and for the same domain the current app is running on. Before 3.4.0,
+  the ``Auth.redirect`` session value was used.
+- If there is no query string/session value and there is a config
+  ``loginRedirect``, the ``loginRedirect`` value is returned.
+- If there is no redirect value and no ``loginRedirect``, ``/`` is returned.
+
 
 
 .. meta::
