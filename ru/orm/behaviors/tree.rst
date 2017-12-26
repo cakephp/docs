@@ -30,8 +30,8 @@ TreeBehavior ('Поведение деревьев') помогает вам п�
 
 Вы можете изменить имена этих полей, если это вам нужно.
 
-More information on the meaning of the fields and how they are used can be found
-in this article describing the `MPTT logic <http://www.sitepoint.com/hierarchical-data-database-2/>`_
+Более подробную информацию о значении полей и их использовании можно найти в этой статье, описывающей 
+`логику MPTT <http://www.sitepoint.com/hierarchical-data-database-2/>`_
 
 .. warning::
 
