@@ -91,7 +91,7 @@ before::
     ]);
 
 Lastly, if a custom finder and conditions are not suitable you can provide
-a callback method. This callable must return the count value to be stored::
+a callback function. Your function must return the count value to be stored::
 
     $this->addBehavior('CounterCache', [
         'Articles' => [
@@ -101,9 +101,11 @@ a callback method. This callable must return the count value to be stored::
         ]
     ]);
 
-It may also return a Query object that produces the count value and will be used
-as a subquery in the update statement. The ``$table`` parameter refers to the
-table object holding the behavior (not the target relation) for convenience.
+Your function can return ``false`` to skip updating the counter column, or
+a ``Query`` object that produced the count value. If you return a ``Query``
+object, your query will be used as a subquery in the update statement.  The
+``$table`` parameter refers to the table object holding the behavior (not the
+target relation) for convenience.
 
 .. note::
 
@@ -111,8 +113,11 @@ table object holding the behavior (not the target relation) for convenience.
     example for "Comments belongsTo Articles", you need to add the CounterCache
     behavior to the ``CommentsTable`` in order to generate ``comment_count`` for
     Articles table.
-    
+
     It is possible though to make this work for ``belongsToMany`` associations.
     You need to enable the CounterCache behavior in a custom ``through`` table
     configured in association options. See how to configure a custom join table
     :ref:`using-the-through-option`.
+
+.. versionchanged:: 3.6.0
+    Returning ``false`` to skip updates was added.
