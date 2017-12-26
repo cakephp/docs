@@ -152,7 +152,7 @@ Composer 経由でインストールすると、 ``vendor/cakephp-plugins.php`` 
 
 特定の設定を持たない全てのプラグインを読み込むデフォルトの ``loadAll()`` を設定できます。
 
-以下の例は、全てのプラグインの bootstarp を読み込み、それに加えて Blog プラグインの
+以下の例は、全てのプラグインの bootstrap を読み込み、それに加えて Blog プラグインの
 routes を読み込みます。 ::
 
     Plugin::loadAll([
