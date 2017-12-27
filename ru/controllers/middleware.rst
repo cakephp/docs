@@ -434,4 +434,4 @@ CSRF Token можно получить через Cookie ``csrfToken``.
 
 .. meta::
     :title lang=ru: Промежуточное ПО
-    :keywords lang=en: http, middleware, psr-7, request, response, wsgi, application, baseapplication
+    :keywords lang=en: http, middleware, psr-7, request, response, wsgi, application, baseapplication 
