@@ -275,12 +275,74 @@ POST-данные. В случае успеха данные о пользова
 Если параметр не будет передан, возвращаемый URL будет подчиняться следующим
 правилам:
 
-- Returns the normalized URL from the ``redirect`` query string value if it is
-  present and for the same domain the current app is running on. Before 3.4.0,
-  the ``Auth.redirect`` session value was used.
-- If there is no query string/session value and there is a config
-  ``loginRedirect``, the ``loginRedirect`` value is returned.
-- If there is no redirect value and no ``loginRedirect``, ``/`` is returned.
+- Возвращается нормализованный URL из значения ``redirect`` строки запроса если
+  он существует и находится в тод же домене, что и текущее приложение. До версии
+  3.4.0  использовалось значение сессионной переменной ``Auth.redirect``.
+- Если в строке запроса/сессии нужное значение отсутствует, но присвоено
+  какое-либо значение параметру конфигурации ``loginRedirect``, то будет
+  возвращено это значение.
+- Если же и в параметре ``loginRedirect`` не окажется нужного значения, будет
+  возвращен ``/``.
+  
+Создание системы аутентификации без сохранения состояния
+--------------------------------------------------------
+
+Базовая и Дайджест-аутентификация - это системы аутентификации не сохраняющие
+состояние, и не требующие исходных POST-данных или формы. Если вы используете
+только эти два способа аутентификации, вашему котроллеру необязательно наличие
+экшена входа в систему (login). Cистема аутентификации без сохранения состояния
+перепроверяет данные пользователя при каждом запросе
+
+Basic and digest are stateless authentication schemes and don't require an
+initial POST or a form. If using only basic/digest authenticators you don't
+require a login action in your controller. Stateless authentication will
+re-verify the user's credentials on each request, this creates a small amount of
+additional overhead, but allows clients to login without using cookies and
+makes AuthComponent more suitable for building APIs.
+
+For stateless authenticators, the ``storage`` config should be set to ``Memory``
+so that AuthComponent does not use a session to store user record. You may also
+want to set config ``unauthorizedRedirect`` to ``false`` so that AuthComponent
+throws a ``ForbiddenException`` instead of the default behavior of redirecting to
+referrer.
+
+Authentication objects can implement a ``getUser()`` method that can be used to
+support user login systems that don't rely on cookies. A typical getUser method
+looks at the request/environment and uses the information there to confirm the
+identity of the user. HTTP Basic authentication for example uses
+``$_SERVER['PHP_AUTH_USER']`` and ``$_SERVER['PHP_AUTH_PW']`` for the username
+and password fields.
+
+.. note::
+
+    In case authentication does not work like expected, check if queries
+    are executed at all (see ``BaseAuthenticate::_query($username)``).
+    In case no queries are executed check if ``$_SERVER['PHP_AUTH_USER']``
+    and ``$_SERVER['PHP_AUTH_PW']`` do get populated by the webserver.
+    If you are using Apache with FastCGI-PHP you might need to add this line
+    to your **.htaccess** file in webroot::
+
+        RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+
+On each request, these values, ``PHP_AUTH_USER`` and ``PHP_AUTH_PW``, are used to
+re-identify the user and ensure they are the valid user. As with authentication
+object's ``authenticate()`` method, the ``getUser()`` method should return
+an array of user information on the success or ``false`` on failure. ::
+
+    public function getUser(ServerRequest $request)
+    {
+        $username = env('PHP_AUTH_USER');
+        $pass = env('PHP_AUTH_PW');
+
+        if (empty($username) || empty($pass)) {
+            return false;
+        }
+        return $this->_findUser($username, $pass);
+    }
+
+The above is how you could implement the getUser method for HTTP basic
+authentication. The ``_findUser()`` method is part of ``BaseAuthenticate``
+and identifies a user based on a username and password.
 
 
 
