@@ -291,14 +291,10 @@ POST-данные. В случае успеха данные о пользова
 состояние, и не требующие исходных POST-данных или формы. Если вы используете
 только эти два способа аутентификации, вашему котроллеру необязательно наличие
 экшена входа в систему (login). Cистема аутентификации без сохранения состояния
-перепроверяет данные пользователя при каждом запросе
-
-Basic and digest are stateless authentication schemes and don't require an
-initial POST or a form. If using only basic/digest authenticators you don't
-require a login action in your controller. Stateless authentication will
-re-verify the user's credentials on each request, this creates a small amount of
-additional overhead, but allows clients to login without using cookies and
-makes AuthComponent more suitable for building APIs.
+перепроверяет данные пользователя при каждом запросе. это создает небольшое
+количество дополнительных накладных расходов, но позволяет клиентам
+осуществлять вход без использования куки и делает AuthComponent более гибким
+при создании API.
 
 For stateless authenticators, the ``storage`` config should be set to ``Memory``
 so that AuthComponent does not use a session to store user record. You may also
