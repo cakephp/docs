@@ -148,7 +148,6 @@ pueden utilizarse paréntesis entorno a las condiciones para dar claridad::
     // Incorrecto, operadores anidados
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
-
 Archivos de plantilla
 ---------------------
 
@@ -165,7 +164,6 @@ de PHP o en etiquetas PHP separadas::
     <?php if ($esAdmin): ?>
         <p>Eres el usuario admin.</p>
     <?php endif; ?>
-
 
 Comparación
 ===========

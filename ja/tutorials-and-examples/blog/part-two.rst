@@ -237,7 +237,6 @@ Articles テーブルに対して ``get()`` を用いるとき、存在するレ
     <p><?= h($article->body) ?></p>
     <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
 
-
 ``/articles/index`` の中にあるリンクをクリックしたり、手動で、 ``/articles/view/1``
 にアクセスしたりして、動作することを確認してください。
 
@@ -447,7 +446,6 @@ CakePHP のバリデーションエンジンは強力で、
 
         $this->set('article', $article);
     }
-
 
 このアクションではまず、ユーザーが実在するレコードにアクセスしようとしていることを確認します。
 もし ``$id`` パラメーターが渡されてないか、ポストが存在しない場合、
@@ -662,7 +660,6 @@ CakePHP を学習する人が次に学びたいと思う共通のタスクがい
 2. :ref:`view-elements`: ビューのスニペットを読み込んで再利用する
 3. :doc:`/bake/usage`: 基本的な CRUD コードの生成
 4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: ユーザーの認証と承認のチュートリアル
-
 
 .. meta::
     :title lang=ja: Blog Tutorial Adding a Layer

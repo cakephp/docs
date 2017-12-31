@@ -358,7 +358,6 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
         }
     });
 
-
 .. _changing-accessible-fields:
 
 アクセス可能なフィールドの変更
@@ -406,7 +405,6 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
     $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->getData());
     $articles->save($article);
-
 
 検証と patchEntity
 ~~~~~~~~~~~~~~~~~~
@@ -513,7 +511,6 @@ hasMany の belongsToMany アソシエーションについても同じことが
     $articles->patchEntity($entity, $newData);
     $articles->save($entity);
 
-
 最後に、もしエンティティーが配列に変換されて戻されたとしたら、
 以下のような結果を得ることになります。 ::
 
@@ -570,7 +567,6 @@ hasMany と belongsToMany アソシエーションに対してのパッチのた
         $this->request->getData(),
         ['associated' => ['Tags', 'Comments.Users']]
     );
-
 
 .. _before-marshal:
 
@@ -1067,7 +1063,6 @@ belongsToMany アソシエーションのそれぞれのエンティティーは
 
 .. php:method:: saveOrFail($entity, $options = [])
 
-
 このメソッドを使用すると、次の条件で
 :php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException` を投げます。
 
@@ -1102,7 +1097,6 @@ belongsToMany アソシエーションのそれぞれのエンティティーは
 ==========================
 
 .. php:method:: saveMany($entities, $options = [])
-
 
 このメソッドを使うと、複数のエンティティーを自動で保存することができます。 ``$entities`` は
 ``newEntities()`` / ``patchEntities()`` で作成されたエンティティーの配列です。
@@ -1162,7 +1156,6 @@ belongsToMany アソシエーションのそれぞれのエンティティーは
 
     updateAll は beforeSave/afterSave イベントを *引き起こしません* 。もしこれらが必要であれば、
     まずレコードのコレクションを読み出して、そして、それらを更新してください。
-
 
 ``updateAll()`` は利便性のためだけにあります。
 次のような、より柔軟なインターフェイスを使うこともできます。 ::

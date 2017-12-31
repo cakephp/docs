@@ -239,7 +239,6 @@ For example, you often want to cache remote service call results. You could use
         }
     }
 
-
 Reading From a Cache
 ====================
 
@@ -285,7 +284,6 @@ CakePHP to use more efficient storage API's where available. For example using
     // $result will contain
     ['article-first-post' => '...', 'article-first-post-comments' => '...']
 
-
 Deleting From a Cache
 =====================
 
@@ -314,7 +312,6 @@ save multiple network connections when using Memcached::
     // $result will contain
     ['article-first-post' => true, 'article-first-post-comments' => true]
 
-
 Clearing Cached Data
 ====================
 
@@ -330,7 +327,6 @@ prefixes::
 
     // Will clear all keys.
     Cache::clear(false);
-
 
 .. php:staticmethod:: gc($config)
 
@@ -372,7 +368,6 @@ After setting an integer value you can manipulate it using ``increment()`` and
 
     Incrementing and decrementing do not work with FileEngine. You should use
     APC, Wincache, Redis or Memcached instead.
-
 
 Using Cache to Store Common Query Results
 =========================================
@@ -467,7 +462,6 @@ Once disabled, you can use ``enable()`` to re-enable caching::
 
 If you need to check on the state of Cache, you can use ``enabled()``.
 
-
 Creating a Storage Engine for Cache
 ===================================
 
@@ -545,7 +539,6 @@ The required API for a CacheEngine is
 
     Not required, but used to do clean up when resources expire.
     FileEngine uses this to delete files containing expired content.
-
 
 .. meta::
     :title lang=en: Caching

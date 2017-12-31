@@ -68,7 +68,6 @@ Template
     Arquivos de apresentação são alocados aqui: elements, páginas de erro,
     layouts, e templates view.
 
-
 .. meta::
     :title lang=pt: Estrutura de pastas do CakePHP
     :keywords lang=pt: bibliotecas internas,configuração do cakephp,descrições dos modelos,vendors,detalhes de conexão,estrutura de pastas,bibliotecas de parceiros,banco de dados,internacionalização,arquivos de configuração,diretórios,pastas,desenvolvimento da aplicação,leia-me,lib,configurado,logs,config,externo,cakephp

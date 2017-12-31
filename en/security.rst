@@ -11,7 +11,6 @@ The following sections cover those tools:
     controllers/components/csrf
     Security Component <controllers/components/security>
 
-
 .. meta::
     :title lang=en: Security
     :keywords lang=en: security, csrf, cross site request forgery component

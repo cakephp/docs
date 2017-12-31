@@ -248,7 +248,6 @@ o *block* ``content``.
     Você deve evitar usar ``content`` como um nome de bloco em seu aplicativo.
     O CakePHP usa isso para conteúdo não capturado em exibições estendidas.
 
-
 Você pode resgatar a lista de todos os blocos populados usand o método ``blocks()``::
 
     $list = $this->blocks();
@@ -317,7 +316,6 @@ O método ``prepend()`` permite que você prefixe conteúdo para um *block* exis
 
     Você deve evitar usar ``content`` como um nome de *block*. Isto é utilizado pelo CakePHP
     Internamente para exibições estendidas e exibir conteúdo no layout.
-
 
 Exibindo *Blocks*
 -----------------
@@ -521,7 +519,6 @@ Por exemplo, para usar o layout contact do plugin Contacts::
         }
     }
 
-
 .. _view-elements:
 
 *Elements*
@@ -646,7 +643,6 @@ Para *elements* dentro de uma subpasta de um plugin
 
     echo $this->element('Contacts.sidebar/helpbox');
 
-
 Requisitando *Elements* do App
 ------------------------------
 
@@ -748,7 +744,6 @@ Mais sobre *Views*
     views/themes
     views/json-and-xml-views
     views/helpers
-
 
 .. meta::
     :title lang=pt: Views

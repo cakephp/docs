@@ -61,7 +61,6 @@ Creating A Default Validation Set
 Validation rules are defined in the Table classes for convenience. This defines
 what data should be validated in conjunction with where it will be saved.
 
-
 To create a default validation object in your table, create the
 ``validationDefault()`` function::
 
@@ -93,7 +92,6 @@ are documented in the :ref:`creating-validators` section.
 
     Validation objects are intended primarily for validating user input, i.e.
     forms and any other posted request data.
-
 
 Using A Different Validation Set
 ================================
@@ -130,7 +128,6 @@ used. An example validator for our articles table would be::
 You can have as many validation sets as necessary. See the :doc:`validation
 chapter </core-libraries/validation>` for more information on building
 validation rule-sets.
-
 
 .. _using-different-validators-per-association:
 
@@ -253,7 +250,6 @@ resulting object by name::
 
     $hardenedValidator = $usersTable->validator('hardened');
 
-
 .. deprecated:: 3.5.0
     ``validator()`` is deprecated. Use ``getValidator()`` instead.
 
@@ -375,7 +371,6 @@ When setting rules on foreign key fields it is important to remember, that
 only the fields listed are used in the rule. This means that setting
 ``$user->account->id`` will not trigger the above rule.
 
-
 Foreign Key Rules
 -----------------
 
@@ -418,7 +413,6 @@ unique checks using ``allowMultipleNulls``::
         'ParentNodes',
         ['allowMultipleNulls' => false]
     ));
-
 
 .. versionadded:: 3.3.0
     The ``allowNullableNulls`` and ``allowMultipleNulls`` options were added.
@@ -518,7 +512,6 @@ those rules into re-usable classes::
         }
     }
 
-
     // Add the custom rule
     use App\Model\Rule\CustomRule;
 
@@ -533,7 +526,6 @@ Disabling Rules
 When saving an entity, you can disable the rules if necessary::
 
     $articles->save($article, ['checkRules' => false]);
-
 
 Validation vs. Application Rules
 ================================
@@ -630,7 +622,6 @@ for data transitions generated inside your application::
     $order->price = 50;
     $order->shipping_mode = 'free';
     $ordersTable->save($order); // Returns false
-
 
 Using Validation as Application Rules
 -------------------------------------

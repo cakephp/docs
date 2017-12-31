@@ -206,7 +206,6 @@ name will be used.
     self-contained and only has access to variables passed as arguments to the
     ``View::cell()`` call.
 
-
 Paginating Data inside a Cell
 =============================
 

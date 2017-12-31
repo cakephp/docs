@@ -65,7 +65,6 @@ Ahora corre el siguiente comando para crear tús tablas::
 
     bin/cake migrations migrate
 
-
 Modificando las tablas
 ======================
 
@@ -222,7 +221,6 @@ En **src/Template/Categories/index.ctp** reemplazá el contenido existente por e
         </table>
     </div>
 
-
 Modificando el ArticlesController
 =================================
 
@@ -259,7 +257,6 @@ Esto nos permitirá elegir una categoría para un Article al momento de crearlo 
             $this->set(compact('categories'));
         }
     }
-
 
 Modificando el template de Articles
 ===================================

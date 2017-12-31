@@ -337,7 +337,6 @@ will generate::
         }
     }
 
-
 Specifying field length
 -----------------------
 

@@ -29,7 +29,6 @@ use the ``Time`` class::
         }
     }
 
-
 Under the hood, CakePHP uses `Chronos <https://github.com/cakephp/chronos>`_
 to power its ``Time`` utility. Anything you can do with ``Chronos`` and
 ``DateTime``, you can do with ``Time`` and ``Date``.

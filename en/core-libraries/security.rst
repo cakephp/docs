@@ -28,7 +28,6 @@ encrypted in one implementation is portable to the other.
     The `mcrypt <http://php.net/mcrypt>`_ extension has been deprecated in
     PHP7.1
 
-
 This method should **never** be used to store passwords.  Instead you should use
 the one way hashing methods provided by
 :php:meth:`~Cake\\Utility\\Security::hash()`. An example use would be::

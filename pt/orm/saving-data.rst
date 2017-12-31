@@ -402,7 +402,6 @@ pode usar ``transactional()``::
         }
     });
 
-
 .. _changing-accessible-fields:
 
 Alterando Campos Acessíveis
@@ -597,7 +596,6 @@ popular (patch) associações hasMany e belongsToMany se aplicam para popular v�
 As comparação são feitas pelo valor do campo da chave primária e as correspondências que
 faltam no array das entidades originais serão removidas e não estarão presentes no resultado::
 
-
     // Num controller.
     $articles = TableRegistry::get('Articles');
     $list = $articles->find('popular')->toArray();
@@ -615,7 +613,6 @@ controlar as associações que serão mescladas em cada uma das entidades no arr
         $this->request->getData(),
         ['associated' => ['Tags', 'Comments.Users']]
     );
-
 
 .. _before-marshal:
 
@@ -966,7 +963,6 @@ ids na chave ``_ids``. Utilizando a chave ``_ids`` facilita a criação de uma c
 de seleção ou checkox para associações pertence a muitos (belongs to many). Consulte
 a seção :ref:`converting-request-data` para mais informações.
 
-
 Ao salvar associações belongsToMany, você tem que escolher entre duas estrategias
 de salvamento:
 
@@ -1058,7 +1054,6 @@ tabela de ligação apartir de dados de requisição, seus dados POST devem pare
 
 Consulte a documentação :ref:`associated-form-inputs` para saber como criar inputs
 com ``FormHelper`` corretamente.
-
 
 .. _saving-complex-types:
 

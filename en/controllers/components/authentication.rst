@@ -25,7 +25,6 @@ If you are looking for existing authentication and/or authorization solutions
 for CakePHP, have a look at the
 `Authentication and Authorization <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/README.md#authentication-and-authorization>`_ section of the Awesome CakePHP list.
 
-
 Authentication
 ==============
 
@@ -268,7 +267,6 @@ If no parameter is passed, the returned URL will use the following rules:
   ``loginRedirect``, the ``loginRedirect`` value is returned.
 - If there is no redirect value and no ``loginRedirect``, ``/`` is returned.
 
-
 Creating Stateless Authentication Systems
 -----------------------------------------
 
@@ -335,7 +333,6 @@ credentials will be rechecked on each request.
 .. warning::
     Basic authentication transmits credentials in plain-text. You should use
     HTTPS when using Basic authentication.
-
 
 To use basic authentication, you'll need to configure AuthComponent::
 
@@ -416,7 +413,6 @@ To use digest authentication, you'll need to configure AuthComponent::
 
 Here we're using username + digest_hash as our fields and use the Users model.
 
-
 Hashing Passwords For Digest Authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -459,7 +455,6 @@ other password hashes, based on the RFC for digest authentication.
     'realm' config value defined when DigestAuthentication was configured
     in AuthComponent::$authenticate. This defaults to ``env('SCRIPT_NAME')``.
     You may wish to use a static string if you want consistent hashes in multiple environments.
-
 
 Creating Custom Authentication Objects
 --------------------------------------
@@ -506,7 +501,6 @@ from ``implementedEvents()`` method of your authenticate class::
             'Auth.logout' => 'logout'
         ];
     }
-
 
 Using Custom Authentication Objects
 -----------------------------------
@@ -759,7 +753,6 @@ in user using ``AuthComponent::user()``::
 If the current user is not logged in or the key doesn't exist, null will
 be returned.
 
-
 Logging Users Out
 -----------------
 
@@ -817,7 +810,6 @@ application or as part of a plugin.
 
     The ``ActionsAuthorize`` & ``CrudAuthorize`` adapter available in CakePHP
     2.x have now been moved to a separate plugin `cakephp/acl <https://github.com/cakephp/acl>`_.
-
 
 Configuring Authorization Handlers
 ----------------------------------
@@ -920,7 +912,6 @@ with ``authorize`` set to ``false``. If you don't use an authorization scheme,
 make sure to check authorization yourself in your controller's
 beforeFilter or with another component.
 
-
 Making Actions Public
 ---------------------
 
@@ -950,7 +941,6 @@ For a single action, you can provide the action name as a string. Otherwise, use
     You should not add the "login" action of your ``UsersController`` to allow list.
     Doing so would cause problems with the normal functioning of ``AuthComponent``.
 
-
 Making Actions Require Authorization
 ------------------------------------
 
@@ -971,7 +961,6 @@ public you want to revoke the public access. You can do so using
 
 By calling it empty you deny all actions.
 For a single action, you can provide the action name as a string. Otherwise, use an array.
-
 
 Using ControllerAuthorize
 -------------------------

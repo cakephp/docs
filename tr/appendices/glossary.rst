@@ -83,7 +83,6 @@ Glossary
         Data Source Name. A connection string format that is formed like a URI.
         CakePHP supports DSN's for Cache, Database, Log and Email connections.
 
-
 .. meta::
     :title lang=tr: Glossary
     :keywords lang=tr: html attributes,array class,array controller,glossary glossary,target blank,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions

@@ -52,7 +52,6 @@ elements in a CakePHP application:
 * :doc:`Models </orm>` are the key ingredient in any application. They handle
   validation, and domain logic within your application.
 
-
 .. meta::
     :title lang=en: .. CakePHP Cookbook documentation master file, created by
     :keywords lang=en: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope

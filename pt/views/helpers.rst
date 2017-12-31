@@ -26,7 +26,6 @@ Helpers (Facilitadores)
     /views/helpers/time
     /views/helpers/url
 
-
 .. _helper-api:
 
 Classe *Helper*

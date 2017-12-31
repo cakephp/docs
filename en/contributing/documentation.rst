@@ -77,7 +77,6 @@ For example, if a new English file is created in **en/file.rst**, we should:
         :title lang=xx: File Title
         :keywords lang=xx: title, description,...
 
-
 Translator tips
 ---------------
 
@@ -314,7 +313,6 @@ Each directive populates the index, and or the namespace index.
 
            Method description
 
-
    Attributes, methods and constants don't need to be nested. They can also just
    follow the class declaration::
 
@@ -325,7 +323,6 @@ Each directive populates the index, and or the namespace index.
         .. php:method:: methodName()
 
             Text about the method
-
 
    .. seealso:: :rst:dir:`php:method`, :rst:dir:`php:attr`, :rst:dir:`php:const`
 
@@ -409,7 +406,6 @@ matching directive is found:
 
    Reference an exception.
 
-
 Source Code
 -----------
 
@@ -426,7 +422,6 @@ block must be indented, and like all paragraphs be separated by single lines::
 
 Literal text is not modified or formatted, save that one level of indentation
 is removed.
-
 
 Notes and Warnings
 ------------------
@@ -482,7 +477,6 @@ Samples
 .. deprecated:: 2.6.3
 
     This old feature was deprecated on version 2.6.3
-
 
 .. meta::
     :title lang=en: Documentation

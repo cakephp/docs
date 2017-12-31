@@ -450,7 +450,6 @@ pouvons utiliser le hook ``beforeSave()`` pour parser la chaîne de tags et trou
 construire les entities correspondantes. Ajoutez le code suivant à
 **src/Model/Table/ArticlesTable.php**::
 
-
     public function beforeSave($event, $entity, $options)
     {
         if ($entity->tag_string) {

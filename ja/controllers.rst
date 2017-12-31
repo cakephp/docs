@@ -339,7 +339,6 @@ HTTP ステータスコードを定義することができます。リダイレ
     // delete アクションから、更新後の一覧ページを描画することができます。
     $this->setAction('index');
 
-
 追加のモデル読み込み
 ====================
 
@@ -502,8 +501,6 @@ CakePHP のコントローラーはリクエストのライフサイクル周り
         parent::beforeFilter($event);
     }
 
-
-
 コントローラーのより詳細
 ========================
 
@@ -512,7 +509,6 @@ CakePHP のコントローラーはリクエストのライフサイクル周り
 
     controllers/pages-controller
     controllers/components
-
 
 .. meta::
     :title lang=ja: Controllers

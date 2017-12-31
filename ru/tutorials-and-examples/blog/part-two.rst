@@ -709,7 +709,6 @@ These are common tasks people learning CakePHP usually want to study next:
 4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Справочник по
    аутентификации и авторизации пользователей
 
-
 .. meta::
     :title lang=ru: Blog Tutorial Adding a Layer
     :keywords lang=ru: doc models,validation check,controller actions,model post,php class,model class,model object,business logic,database table,naming convention,bread and butter,callbacks,prefixes,nutshell,interaction,array,cakephp,interface,applications,delete

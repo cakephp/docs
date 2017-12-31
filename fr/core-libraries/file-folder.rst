@@ -287,7 +287,6 @@ API de Folder
     Retourne un tableau de répertoires imbriqués et de fichiers dans chaque
     répertoire.
 
-
 L'API de File
 =============
 

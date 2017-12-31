@@ -174,7 +174,6 @@ situations.
 
 Get the type of a variable. Objects will return their class name
 
-
 Using Logging to Debug
 ======================
 

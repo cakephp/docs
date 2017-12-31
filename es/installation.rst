@@ -240,7 +240,6 @@ URL Rewriting
 Apache
 ------
 
-
 Mientras que CakePHP está diseñado para trabajar con mod\_rewrite
 recién sacado del horno, usualmente hemos notado que algunos usuarios
 tienen dificultades para lograr que todo funcione bien en sus sistemas.
@@ -463,7 +462,6 @@ a www.example.com consulta el enlace de nginx anterior):
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         }
     }
-
 
 IIS7 (Windows)
 --------------

@@ -28,7 +28,6 @@ São o src do plugin, testes e outros diretórios.
 
 .. index:: vendor/cakephp-plugins.php
 
-
 Plugin Map File
 ---------------
 
@@ -266,7 +265,6 @@ do seu aplicativo. Por exemplo - baking controllers:
 
     bin/cake bake controller --plugin ContactManager Contacts
 
-
 Consulte o capítulo
 :doc:`/bake/usage` se você
 tiver problemas para usar a linha de comando. Certifique-se de voltar a gerar o seu
@@ -301,7 +299,6 @@ rotas de plugins do ContactManager, coloque o seguinte
         }
     );
 
-
 O código acima irá conectar as rotas padrão para o seu plugin. Você pode personalizar isso
 no arquivo com rotas mais específicas mais tarde::
 
@@ -317,7 +314,6 @@ as rotas de plugin em escopos ou prefixos adicionais::
             $routes->loadPlugin('ContactManager');
         });
     });
-
 
 O código acima resultaria em URLs como ``/backend/contact_manager/contacts``.
 
@@ -470,7 +466,6 @@ pasta ``plugins/[PluginName]/src/Template/``. Para nós
 o plugin ContactManager, precisamos de uma view para o nosso ``ContactsController::index()``
 action, então incluamos isso também::
 
-
     // plugins/ContactManager/src/Template/Contacts/index.ctp:
     <h1>Contacts</h1>
     <p>Following is a sortable list of your contacts</p>
@@ -503,7 +498,6 @@ controller Contacts você pode fazer o seguinte arquivo::
 Criar este arquivo permitiria que você substituir
 **plugins/ContactManager/src/Template/Contacts/index.ctp**.
 
-
 Se o seu plugin estiver em uma dependência no composer (ou seja, 'TheVendor/ThePlugin'), o
 caminho para da view 'index' do controller personalizado será::
 
@@ -520,7 +514,6 @@ Se o plugin 'Contact Manager' implementou um prefixo 'admin', o caminho principa
     src/Template/Plugin/ContactManager/Admin/ContactManager/index.ctp
 
 .. _plugin-assets:
-
 
 Plugin Assets
 =============
@@ -568,7 +561,6 @@ da URL para um recurso dentro desse plugin para atendê-lo. Ligando para
 '/contact_manager/js/some_file.js' serviria o asset
 **plugins/ContactManager/webroot/js/some_file.js**.
 
-
 Components, Helpers and Behaviors
 =================================
 
@@ -582,7 +574,6 @@ normal, sem convenção de nome especial.
 
 Referir-se ao seu componente de dentro ou fora do seu plugin requer apenas
 que você prefixa o nome do plugin antes do nome do componente. Por exemplo::
-
 
     // Component definido no 'ContactManager' plugin
     namespace ContactManager\Controller\Component;
@@ -600,9 +591,7 @@ que você prefixa o nome do plugin antes do nome do componente. Por exemplo::
         $this->loadComponent('ContactManager.Example');
     }
 
-
 A mesma técnica se aplica aos Helpers e Behaviors.
-
 
 Expanda seu plugin
 ==================
@@ -611,18 +600,15 @@ Este exemplo criou um bom começo para um plugin, mas há muito
 mais que você pode fazer. Como regra geral, qualquer coisa que você possa fazer com o seu
 aplicativo que você pode fazer dentro de um plugin também.
 
-
 Vá em frente - inclua algumas bibliotecas de terceiros em 'vendor', adicione algumas
 novas shells para o cake console e não se esqueça de criar os testes
 então seus usuários de plugins podem testar automaticamente a funcionalidade do seu plugin!
-
 
 Em nosso exemplo do ContactManager, podemos criar as actions add/remove/edit/delete
 no ContactsController, implementar a validação no model e implementar a funcionalidade
 que se poderia esperar ao gerenciar seus contatos.
 Depende de você decidir o que implementar no seu Plugins. Apenas não esqueça de compartilhar seu código com a comunidade, então
 que todos possam se beneficiar de seus componentes incríveis e reutilizáveis!
-
 
 Publique seu plugin
 ===================

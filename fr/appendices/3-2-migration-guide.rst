@@ -161,7 +161,6 @@ Helper initialize() ajouté
 Les helpers peuvent maintenant avoir une méthode hook
 ``initialize(array $config)`` comme tous les autres types de classe.
 
-
 Manipulation de la Limite de la Mémoire en cas d'Erreur Fatale
 --------------------------------------------------------------
 

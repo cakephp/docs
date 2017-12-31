@@ -74,7 +74,6 @@ Collection()``::
         echo "Element $key: $value";
     });
 
-
 ``each()`` 的返回值是一个集合对象。Each会迅速迭代集合同时将结果回调到
 集合中的每个值上。
 
@@ -249,7 +248,6 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 
     // $result 内容是 [1, 2, 3, 4, 5, 6, 7, 8];
     $result = $new->toList();
-
 
 .. php:method:: chunk($chunkSize)
 
@@ -788,7 +786,6 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
     // 从集合中随机抽取最大20名用户
     $testSubjects = $collection->sample(20);
 
-
 ``sample()`` 会根据你定义的第一个参数来决定最大的抽取数。如果集合中没有足够数量的元
 素来满足样本要求，那么将返回元素被随机排列过后的整个元素本身。
 
@@ -954,7 +951,6 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
         // 在你的map()函数使用这些逻辑
         $collection->map(new TotalOrderCalculator)
 
-
 .. php:method:: through(callable $c)
 
 有时一个集合连锁使用一些方法也能够被重复利用，不过它们必须按照特定的顺序。在这些情况中，你可以用 ``through()``
@@ -982,7 +978,6 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
                                ...
                 }
         }
-
 
         // 现在你能使用 through() 方法来一次性调用所有方法
         $collection->through(new FinalCheckOutRowProcessor);

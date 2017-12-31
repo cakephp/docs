@@ -6,7 +6,6 @@ Construtor de queries
 Returning the Total Count of Records
 ------------------------------------
 
-
 .. note::
     Atualmente, a documentação desta página não é suportada em português.
 

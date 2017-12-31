@@ -172,7 +172,6 @@ Em um *minor release* você pode:
 | um argumento existente        |                          |
 +-------------------------------+--------------------------+
 
-
 .. [1] Seu código *pode* ser quebrado por *minor releases*. Verifique o guia de
        migração para mais detalhes.
 .. [2] Você pode mudar o nome de uma classe/método desde que o nome antigo

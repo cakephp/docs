@@ -103,7 +103,6 @@ PaginatorHelper uses the following templates:
 - ``sortAsc`` The template for a sort link with an ascending direction.
 - ``sortDesc`` The template for a sort link with a descending direction.
 
-
 Creating Sort Links
 ===================
 

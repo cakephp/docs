@@ -31,7 +31,6 @@ Core Behaviors
     /orm/behaviors/translate
     /orm/behaviors/tree
 
-
 Criando Behavior
 ================
 Nos exemplos a seguir, criaremos um bem simples ``SluggableBehavior``. Esse

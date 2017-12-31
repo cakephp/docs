@@ -359,7 +359,6 @@ delete が呼ばれる前にトランザクションが始まっている場合�
 CakePHP によって提供されるビヘイビアーを含む、ビヘイビアーに関する詳細は :doc:`/orm/behaviors`
 の章をご覧ください。
 
-
 .. _configuring-table-connections:
 
 接続設定

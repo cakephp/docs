@@ -118,7 +118,6 @@ Otra vez en ``UsersController``, añade el siguiente código::
         return $this->redirect($this->Auth->logout());
     }
 
-
 Este código añade la acción ``logout`` como una acción pública e implementa
 la función.
 
@@ -140,7 +139,6 @@ En el controlador ``UsersController`` añade lo siguiente::
         // Añade logout a la lista de actiones permitidas.
         $this->Auth->allow(['logout', 'add']);
     }
-
 
 El código anterior le dice a ``AuthComponent`` que la acción ``add()`` no
 necesita autenticación ni autorización.
@@ -373,7 +371,6 @@ este modo::
         'tags' => true,
         'tag_string' => true,
     ];
-
 
 Actualizar las vistas
 ---------------------

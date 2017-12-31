@@ -21,7 +21,6 @@
     appendices/cakephp-development-process
     appendices/glossary
 
-
 .. meta::
     :title lang=ja: 付録
     :keywords lang=ja: 移行ガイド,移行手順,新機能,用語集

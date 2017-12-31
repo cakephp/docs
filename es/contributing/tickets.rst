@@ -45,7 +45,6 @@ confirmada el equipo de CakePHP tomará las siguientes acciones:
 * Publicar nuevas versiones para todas las que estén afectadas.
 * Mostrar de manera acentuada el problema en el anuncio de la publicación.
 
-
 .. meta::
     :title lang=es: Tickets
     :keywords lang=es: sistema de reporte de error, code snippet, reporte de seguridad, mailing privado, anuncio de publicación, google, sistema de tickets, equipo principal, problema de seduridad, bug tracker, canal irc, casos de prueba, preguntas de soporte, reporte de error, problemas de seguridad, reportes de error, exploits, vulnerabilidad, repositorio

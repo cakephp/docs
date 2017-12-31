@@ -37,7 +37,6 @@ of a ``View``, use the ``Text`` class::
         }
     }
 
-
 Convert Strings into ASCII
 ==========================
 
@@ -97,7 +96,6 @@ UUID is a 128-bit string in the format of
 ``485fc381-e790-47a3-9794-1337c0a8fe68``. ::
 
     Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
-
 
 Simple String Parsing
 =====================
@@ -243,7 +241,6 @@ Removing Links
 .. php:method:: stripLinks($text)
 
 Strips the supplied ``$text`` of any HTML links.
-
 
 Truncating Text
 ===============

@@ -216,7 +216,6 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 
     ウェブルートへのフルパス。
 
-
 時間定義定数
 ============
 
@@ -251,7 +250,6 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 .. php:const:: YEAR
 
     31536000 と等しい
-
 
 .. meta::
     :title lang=ja: Global Constants and Functions

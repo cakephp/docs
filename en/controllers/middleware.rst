@@ -191,7 +191,6 @@ important attributes in any request handled by CakePHP:
   :ref:`accessing-session-object` for more information on how to use the session
   object.
 
-
 Interacting with Responses
 --------------------------
 
@@ -388,7 +387,6 @@ When enabled, you can access the current CSRF token on the request object::
 
 .. versionadded:: 3.5.0
     The ``CsrfProtectionMiddleware`` was added in 3.5.0
-
 
 Integration with FormHelper
 ---------------------------

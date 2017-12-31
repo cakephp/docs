@@ -772,7 +772,6 @@ initially populated to the article table.) We test that the result equals our
 expectation by using the ``assertEquals()`` method. See the :ref:`running-tests`
 section for more information on how to run your test case.
 
-
 Mocking Model Methods
 ---------------------
 
@@ -1608,7 +1607,6 @@ you can inspect the rendered view content by setting the ``return`` option to
 a more robust and maintainable integration/view testing can be accomplished
 using tools like `Selenium webdriver <http://seleniumhq.org>`_.
 
-
 Testing Components
 ==================
 
@@ -2047,7 +2045,6 @@ It's often a good idea to drop and re-create the database before each build as
 well. This insulates you from chained failures, where one broken build causes
 others to fail. Add another *shell script step* to the build that contains the
 following:
-
 
 .. code-block:: bash
 

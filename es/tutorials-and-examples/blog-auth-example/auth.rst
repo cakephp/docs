@@ -245,7 +245,6 @@ La función ``login()`` llama a ``$this->Auth->identify()`` del AuthComponent, y
 
 El logout funciona simplemente al acceder a ``/users/logout`` y redirecciona al usuario a la URL configurada.
 
-
 Autorización (quién está autorizado a acceder qué)
 ==================================================
 

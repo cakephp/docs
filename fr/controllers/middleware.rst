@@ -198,7 +198,6 @@ gérée par CakePHP :
   Reportez-vous à :ref:`accessing-session-object` pour plus d'information sur
   l'utilisation de l'objet session.
 
-
 Interagir avec les Réponses
 ---------------------------
 
@@ -444,7 +443,6 @@ Si vous exécutez des tests, vous aurez aussi besoin de mettre à jour
 **tests/bootstrap.php** en copiant le contenu du fichier depuis le
 `squelette d'application
 <https://github.com/cakephp/app/tree/master/tests/bootstrap.php>`_.
-
 
 .. meta::
     :title lang=fr: Middleware Http

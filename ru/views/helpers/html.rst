@@ -123,7 +123,6 @@ Html
 
     background:#633; border-bottom:1px solid #000; padding:10px;
 
-
 Создание мета-тегов
 -------------------
 
@@ -831,7 +830,6 @@ icon     image/x-icon
 предоставить первую хлебную ссылку/текст. Это полезно, когда вы хотите
 включить корневую ссылку. Эта опция работает так же, как опция ``$startText`` для
 :php:meth:`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()`.
-
 
 .. meta::
     :title lang=ru: HtmlHelper

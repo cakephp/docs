@@ -215,7 +215,6 @@ A maior parte das constantes a seguir referem-se a caminhos da sua aplicação.
 
     Caminho completo para o diretório webroot.
 
-
 Constantes de definição de tempo
 ================================
 
@@ -250,7 +249,6 @@ Constantes de definição de tempo
 .. php:const:: YEAR
 
     Igual a 31536000
-
 
 .. meta::
     :title lang=pt: Constantes globais e funções

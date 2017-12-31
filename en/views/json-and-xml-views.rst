@@ -142,7 +142,6 @@ output the serialized content.
     this code from the beforeRender callback or set ``'_serialize' => false`` in
     your controller's action if you want to use view files.
 
-
 Creating XML Views
 ==================
 

@@ -151,7 +151,6 @@ IDE полностью понимающим, как работают все кл
     // Плохо - вложенные тернарные операции
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
-
 Файлы шаблонов
 --------------
 
@@ -168,7 +167,6 @@ IDE полностью понимающим, как работают все кл
     <?php if ($isAdmin): ?>
         <p>You are the admin user.</p>
     <?php endif; ?>
-
 
 Сравнение
 =========

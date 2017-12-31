@@ -328,7 +328,6 @@ Chaque directive remplit l'index, et l'index des espaces de nom.
 
            Description de la méthode
 
-
    Attributs, méthodes et constantes ne doivent pas être imbriqués. Ils peuvent
    aussi suivre la déclaration de classe::
 
@@ -339,7 +338,6 @@ Chaque directive remplit l'index, et l'index des espaces de nom.
         .. php:method:: methodName()
 
             Texte sur la méthode
-
 
    .. seealso:: :rst:dir:`php:method`, :rst:dir:`php:attr`, :rst:dir:`php:const`
 

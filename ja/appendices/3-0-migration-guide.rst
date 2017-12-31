@@ -5,7 +5,6 @@
 プロジェクトを 3.0 に移行するのに役立つ CakePHP 2.x からの変更をまとめました。
 すべての新機能と API の変更については、このガイドの他のページを必ずお読みください。
 
-
 必要条件
 ========
 
@@ -90,7 +89,6 @@ CakePHP 3.0 は、ゼロから再構築された新しい ORM を提供してい
 対象となるすべてのアプリケーションで大幅な変更が必要になります。
 新しい ORM の使用方法については、新しい :doc:`/orm` ドキュメントをご覧ください。
 
-
 基本原則
 ========
 
@@ -139,7 +137,6 @@ CakePHP 3.0 は、ゼロから再構築された新しい ORM を提供してい
 有効期限は、キャッシュエンジンの実行時に config() から取得できます。
 空のキーでキャッシュメソッドを呼び出すと ``false`` を返す代わりに
 :php:class:`InvalidArgumentException` が投げられるようになりました。
-
 
 コア
 ====
@@ -340,7 +337,6 @@ JavaScript ライブラリーを必要としました。 名前付きパラー�
 URL を解析する必要があります。 :php:meth:`Cake\\Routing\\Router::parseNamedParams()`
 は、既存の URL との下位互換性を可能にするために追加されました。
 
-
 RequestActionTrait
 ------------------
 
@@ -400,7 +396,6 @@ Route
 アプリケーションが ``Dispatcher.filters`` を使用していた場合、代わりに
 :php:meth:`Cake\\Routing\\DispatcherFactory::add()` を使用する必要があります。
 
-
 設定方法の変更に加えて、ディスパッチャーフィルターは、いくつかの規則が更新され、機能が追加されました。
 詳細については、:php:meth:`Cake\\Routing\\DispatcherFactory::add()`
 のドキュメントを参照してください。
@@ -414,7 +409,6 @@ Filter\AssetFilter
   多くの問題が修正されています。
 * ``Asset.filter`` 設定とフックのサポートは削除されました。
   この機能は、プラグインやディスパッチャーフィルターに置き換える必要があります。
-
 
 ネットワーク
 ============
@@ -496,7 +490,6 @@ Network\\Email
   トランスポートオプションを削除して、Eメールプロファイルをまたがって再利用することができます。
 * :php:meth:`Cake\\Network\\Email\\Email::dropTransport()` は、トランスポート設定を
   削除できるようにするために追加されました。
-
 
 コントローラー
 ==============
@@ -594,7 +587,6 @@ CookieComponent
   これらの両方は、設定データを介して管理されています。詳細は
   :doc:`/controllers/components/cookie` をご覧ください。
 - クッキーのパスは、"/" の代わりにアプリケーションのベースパスがデフォルトです。
-
 
 AuthComponent
 -------------
@@ -771,7 +763,6 @@ TestCase
 
 - ``assertWithinRange()`` の逆として ``assertNotWithinRange()``
 
-
 ビュー
 ======
 
@@ -886,7 +877,6 @@ View\\Helper
   - data
   - action
   - params
-
 
 Helper
 ------
@@ -1061,7 +1051,6 @@ SessionHelper
   ``$this->request->session()`` を直接使用してください。
   フラッシュメッセージ機能は代わりに :doc:`/views/helpers/flash` に移動されました。
 
-
 JsHelper
 --------
 
@@ -1149,7 +1138,6 @@ L10n
 
 - :php:class:`Cake\\I18n\\L10n` のコンストラクターは
   :php:class:`Cake\\Network\\Request` インスタンスを引数として受け取ります。
-
 
 テスト
 =======

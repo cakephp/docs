@@ -870,7 +870,6 @@ Attribute Matching Types
             ]
             */
 
-
 .. meta::
     :title lang=en: Hash
     :keywords lang=en: array array,path array,array name,numeric key,regular expression,result set,person name,brackets,syntax,cakephp,elements,php,set path

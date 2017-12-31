@@ -220,7 +220,6 @@ les bookmarks. Dans notre ``BookmarksController``, ajoutez ce qui suit::
         return parent::isAuthorized($user);
     }
 
-
 Maintenant, si vous essayez de voir, de modifier ou de supprimer un bookmark qui
 ne vous appartient pas, vous devriez être redirigé vers la page d'où vous venez.
 Si aucun message ne s'affiche, ajoutez la ligne suivante dans votre layout::
@@ -380,7 +379,6 @@ accessibles, l'ORM va copier ces données à partir de la requête dans notre
 entity. Nous pouvons utiliser une méthode hook ``beforeSave()`` pour parser la
 chaîne de tag et trouver/construire les entities liées. Ajoutez ce qui suit dans
 **src/Model/Table/BookmarksTable.php**::
-
 
     public function beforeSave($event, $entity, $options)
     {

@@ -176,7 +176,6 @@ Plugin
 - Quanto estiver carregando plugins você não pode mais fornecer um array de
   arquivos de configuração para carregar.
 
-
 Configure
 ---------
 
@@ -282,7 +281,6 @@ BakeShell / TemplateTask
   lógica de template, permitindo código php ser tratado como texto plano.
 - O comando ``bake view`` foi renomeado para ``bake template``.
 
-
 Eventos
 =======
 
@@ -349,7 +347,6 @@ como argumentos de requisição.
 Como muitas aplicações ainda precisarão analisar URLs contendo parâmetros nomeados,
 o :php:meth:`Cake\\Routing\\Router::parseNamedParams()` foi adicionado para
 permitir compatibilidade com URLs existentes.
-
 
 RequestActionTrait
 ------------------
@@ -461,7 +458,6 @@ Resposta
   não define a extensão para ``csv`` se o cabeçalho ``Accept`` tiver o mimetype ``text/plain``
   que era um problema comum quando recebia uma requisição XHR do jQuery.
 
-
 Sessões
 =======
 
@@ -513,7 +509,6 @@ Network\\Email
   através de perfis de e-mails.
 * O :php:meth:`Cake\\Network\\Email\\Email::dropTransport()` foi adicionado para permitir
   a remoção de configurações de transporte.
-
 
 Controller
 ==========
@@ -754,7 +749,6 @@ do mesmo modo que no 2.x, alguns métodos foram renomeados ou removidos:
 - ``TreeBehavior::reorder()`` foi removido.
 - ``TreeBehavior::verify()`` foi removido.
 
-
 Suíte de Testes
 ===============
 
@@ -791,7 +785,6 @@ consistência na API com ``$expected`` como primeiro argumento.
 Os seguintes métodos de asserção foram adicionados:
 
 - ``assertNotWithinRange()`` em contrapartida ao ``assertWithinRange()``
-
 
 View
 ====
@@ -946,7 +939,6 @@ Ele teve algumas grandes mudanças:
   arrays por toda parte, a maioria do HTML que o FormHelper gera pode ser
   personalizado em um lugar central usando conjuntos de templates.
 
-
 Além dessas grandes mudanças, foram feitas algumas mudanças menores que
 causaram rompendo algumas coisas da versão anterior.
 Essas mudanças devem simplificar o HTML que o FormHelper gera e reduzir
@@ -1073,7 +1065,6 @@ SessionHelper
 - O ``SessionHelper`` está obsoleto. Você pode usar ``$this->request->session()`` diretamente,
   e a funcionalidade de mensagens flash foi movida para :doc:`/views/helpers/flash`.
 
-
 JsHelper
 --------
 
@@ -1169,7 +1160,6 @@ Localização
 
 - Agora o construtor de :php:class:`Cake\\I18n\\L10n` recebe uma instância de
   :php:class:`Cake\\Network\\Request` como argumento.
-
 
 Testes
 ======

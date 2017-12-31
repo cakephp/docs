@@ -371,7 +371,6 @@ your ``use`` statement to look like::
         getMailer as public;
     }
 
-
 Collection
 ==========
 

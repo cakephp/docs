@@ -60,7 +60,6 @@ Se usa para buscar rutas de paquetes dentro del core de Cakephp::
     // Devuelve la ruta de engine de cake.
     App::core('Cache/Engine');
 
-
 Búsqueda de plugins
 ===================
 

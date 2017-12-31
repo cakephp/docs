@@ -227,7 +227,6 @@ CakePHP やアプリケーションにあるヘルパーを明示的に読み込
 HelperRegistry は :doc:`レジストリー </core-libraries/registry-objects>` です。
 そして、 CakePHP の他の場所で使用されるレジストリー API をサポートしています。
 
-
 コールバックメソッド
 ====================
 

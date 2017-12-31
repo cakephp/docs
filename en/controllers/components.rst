@@ -223,7 +223,6 @@ the Component::
 The above would pass the array containing precision and randomGenerator to
 ``MathComponent::initialize()`` in the ``$config`` parameter.
 
-
 Using Other Components in your Component
 ----------------------------------------
 
@@ -271,7 +270,6 @@ way you include them in controllers - using the ``$components`` var::
 
     In contrast to a component included in a controller
     no callbacks will be triggered on a component's component.
-
 
 Accessing a Component's Controller
 ----------------------------------

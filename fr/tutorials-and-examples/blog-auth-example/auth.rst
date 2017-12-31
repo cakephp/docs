@@ -433,7 +433,6 @@ suivante::
         return $this->exists(['id' => $articleId, 'user_id' => $userId]);
     }
 
-
 Ceci conclut notre tutoriel simple sur l'authentification et les autorisations.
 Pour sécuriser le Controller UsersController, vous pouvez suivre la même
 technique que nous faisions pour ArticlesController, vous pouvez aussi être
@@ -451,7 +450,6 @@ Lectures suivantes suggérées
 
 #. :doc:`/bake/usage` Génération basique CRUD de code
 #. :doc:`/controllers/components/authentication`: Inscription d'utilisateur et connexion
-
 
 .. meta::
     :title lang=fr: Authentification Simple et Autorisation de l'Application

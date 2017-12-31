@@ -194,7 +194,6 @@ rapide d'affecter en une seule fois un jeu complet d'informations à la vue::
 
     $this->set($data);
 
-
 Définir les Options d'une View
 ------------------------------
 

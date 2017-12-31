@@ -153,7 +153,6 @@ durée d'écriture - la durée est prise par la configuration d'exécution du
 moteur de cache. Appeler une méthode de cache avec une clé vide va maintenant
 lancer :php:class:`InvalidArgumentException`, au lieu de retourner ``false``.
 
-
 Core
 ====
 
@@ -340,7 +339,6 @@ Log
 * :php:meth:`Cake\\Log\\Engine\\FileLog` écrit maintenant les fichiers dans
   ``ROOT/logs`` au lieu de ``ROOT/tmp/logs``.
 
-
 Routing
 =======
 
@@ -366,7 +364,6 @@ Puisque beaucoup d'applications auront toujours besoin de parser des URLs
 entrantes contenant des paramètres nommés,
 :php:meth:`Cake\\Routing\\Router::parseNamedParams()` a été ajoutée
 pour permettre une rétrocompatibilité avec les URLs existantes.
-
 
 RequestActionTrait
 ------------------
@@ -542,7 +539,6 @@ Network\\Email
   réutiliser les transports à travers les profiles d'email.
 * :php:meth:`Cake\\Network\\Email\\Email::dropTransport()` a été ajoutée pour
   permettre le retrait de la configuration du transport.
-
 
 Controller
 ==========
@@ -952,7 +948,6 @@ View\\Helper
   - data
   - action
   - params
-
 
 Helper
 ------

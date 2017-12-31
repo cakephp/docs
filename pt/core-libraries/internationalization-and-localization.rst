@@ -24,7 +24,6 @@ frequentemente abreviado como i18n (internacionalization) e l10n (localization);
 18 e 10 são o número de caracteres entre a primeira e última letra de cada
 termo.
 
-
 Configurando Traduções
 ======================
 
@@ -233,7 +232,6 @@ a palavra ``number``:
 * ``currency``: Coloca o local do símbolo de moeda e números de casas decimais
 * ``percent``: Formata o número como porcentagem
 
-
 Datas também pode ser formatadas usando a palavra ``date`` após o número do
 espaço reservado. Uma lista de opções adicionais a seguir:
 
@@ -264,14 +262,12 @@ Uma parte crucial de internacionalizar sua aplicação é a pluralização das s
 mensagens corretamente, dependendo do idioma que eles são mostrados. O CakePHP
 fornece algumas maneiras de selecionar corretamente plurais em suas mensagens.
 
-
 Usando UTI para Seleção de Plural
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 O primeiro está aproveitando o formato de mensagem ``ICU`` que vem por padrão
 nas funções de tradução. Nos arquivos de traduções você pode ter as seguintes
 cadeias
-
 
 .. code-block:: pot
 

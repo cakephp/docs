@@ -276,13 +276,11 @@ une instance de ``Cake\Validation\Validator``. Si vous souhaitez utiliser
 une instance d'un validator personnalisé, vous pouvez utiliser l'attribut
 ``$_validatorClass`` de table::
 
-
     // Dans votre class Table
     public function initialize(array $config)
     {
         $this->_validatorClass = '\FullyNamespaced\Custom\Validator';
     }
-
 
 .. _application-rules:
 

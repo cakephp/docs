@@ -11,7 +11,6 @@ Migration Commands
 
 The Init Command
 
-
 The Init command (short for initialize) is used to prepare your project for
 Phinx. This command generates the ``phinx.yml`` file in the root of your
 project directory.
@@ -267,7 +266,6 @@ the database name too, as Phinx requires this for certain methods such as ``hasT
                     ]
                 ]
             ];
-
 
 Running Phinx in a Web App
 --------------------------

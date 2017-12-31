@@ -129,7 +129,6 @@ Run the following command to create your tables::
 
     bin/cake migrations migrate
 
-
 Modifying the Tables
 ====================
 
@@ -327,7 +326,6 @@ In **src/Template/Categories/index.ctp** replace the existing content with::
         </table>
     </div>
 
-
 Modifying the ArticlesController
 ================================
 
@@ -366,7 +364,6 @@ it::
             $this->set(compact('categories'));
         }
     }
-
 
 Modifying the Articles Templates
 ================================

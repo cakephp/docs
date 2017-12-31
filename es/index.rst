@@ -48,7 +48,6 @@ elementos claves en una aplicación de CakePHP:
 * Las :doc:`vistas </views>` de la capa de presentación de tu aplicación, que te dan herramientas poderosas para crear HTML, JSON y otras salidas que tu aplicación necesite.
 * Los :doc:`modelos </orm>`, que son el ingrediente clave en cualquier aplicación. Manejan la validación y la lógica de dominio dentro de tu aplicación.
 
-
 .. meta::
     :title lang=es: .. CakePHP Cookbook archivo de documentación, creado por
     :keywords lang=es: documento modelos,master documentación,capa presentación,proyecto documentación,guia de inicio rápido,fuente original,sphinx,liking,cookbook,validez,convenciones,validación,cakephp,exactitud,almacenaje y recuperación,corazón,blog

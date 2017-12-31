@@ -7,8 +7,6 @@ Text
 
 .. php:staticmethod:: uuid()
 
-
-
 .. note::
     La documentación no es compatible actualmente con el idioma español en esta página.
 

@@ -184,7 +184,6 @@ PSR-7 リクエストとレスポンス
   セッションオブジェクトをどう使うかについての詳しい情報は :ref:`accessing-session-object`
   を参照してください。
 
-
 レスポンスとの対話
 ------------------
 
@@ -379,7 +378,6 @@ CSRF 保護は、ミドルウェアスタックに ``CsrfProtectionMiddleware`` 
 
 .. versionadded:: 3.5.0
     ``CsrfProtectionMiddleware`` は 3.5.0 で追加されました。
-
 
 FormHelper との統合
 -------------------

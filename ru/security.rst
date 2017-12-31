@@ -11,7 +11,6 @@ CakePHP предоставляет инструменты для обеспеч�
     controllers/components/csrf
     Security Component <controllers/components/security>
 
-
 .. meta::
     :title lang=ru: Security
     :keywords lang=ru: безопасность, csrf, межсайтовая подделка запросов

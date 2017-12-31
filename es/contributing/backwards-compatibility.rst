@@ -163,7 +163,6 @@ En una liberación ``minor`` puedes:
 | un argumento existente                |                          |
 +---------------------------------------+--------------------------+
 
-
 .. [1] Tu código *puede* romperse en lanzamientos ``minor``.
        Comprueba la guía de migración para más detalles.
 .. [2] Puedes cambiar el nombre de una clase/método siempre y cuando el

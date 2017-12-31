@@ -523,7 +523,6 @@ CakePHP では 'contain' メソッドを使って関連データのイーガー�
     ])
     ->where($condition);
 
-
 クエリー上の contain を再設定する必要があるなら、第２引数に ``true`` を指定することができます。 ::
 
     $query = $articles->find();
@@ -925,7 +924,6 @@ serialize されたデータは unserialized により結果セットに戻り�
 serialize が簡単にできるだけでなく、結果セットは 'Collection' オブジェクトですので、
 :doc:`collection objects </core-libraries/collections>` でサポートされるすべてのメソッドが
 使えます。たとえば、記事 (Article) のコレクションにあるタグ (Tag) をユニークに取り出すことができます。 ::
-
 
     // コントローラーやテーブルのメソッド内で
     $articles = TableRegistry::get('Articles');

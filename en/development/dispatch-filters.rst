@@ -178,7 +178,6 @@ page, in our case it would be anything served from the ``PagesController``::
         }
     }
 
-
     // In our bootstrap.php
     DispatcherFactory::add('HttpCache', ['for' => '/pages'])
 

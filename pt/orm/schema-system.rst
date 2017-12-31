@@ -71,7 +71,6 @@ método  `column()` ou `columns()`::
     // Obtem uma lista com todas as colunas.
     $cols = $schema->columns();
 
-
 Índices e Restrições
 --------------------
 
@@ -169,7 +168,6 @@ fazer o seguinte::
     // Obter dados sobre um índice
     $index = $schema->index('author_id_idx')
 
-
 Adicionando Opções de Tabela
 ----------------------------
 
@@ -210,7 +208,6 @@ SQL específico da plataforma. O retorno de ``createSql`` e ``dropSql`` é uma
 lista de consultas SQL requeridas para criar uma tabela e os indices.
 Algumas plataformas podem requerer várias declaraçes para criar tabelas com
 comentários e/ou índices. Um array de consultas SQL é sempre retornado.
-
 
 Schema Collections
 ==================

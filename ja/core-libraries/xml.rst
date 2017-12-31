@@ -116,7 +116,6 @@ XML テキストを配列に変換するのは、 Xml クラスと同様にシ�
     <?xml version="1.0"?>
     <project id="1">Value of project<name>Name of project, as tag</name></project>
 
-
 名前空間を利用する
 -------------------
 
@@ -149,7 +148,6 @@ XML の名前空間を利用するには、配列のキーに包括的な名前�
 
     <?xml version="1.0"?>
     <root xmlns="https://cakephp.org"><child>value</child>
-
 
     <?xml version="1.0"?>
     <root><tag xmlns:pref="https://cakephp.org"><pref:item>item 1</pref:item><pref:item>item 2</pref:item></tag></root>

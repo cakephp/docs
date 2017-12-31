@@ -230,4 +230,3 @@ La supresión de un nodo se basa sobre los valores lft y rght de la entity. Es i
 
 TreeBehavior reclasifica los valores lft y rght de los registros de la tabla cuando se suprime un nodo. Tal como están, los valores lft y rght de las entities dentro de ``$descendants`` (guardadas antes de la operación de supresión) serán erróneas. Las entities tendrán que estar cargadas, y modificadas al vuelo para evitar incoherencias en la tabla.
 
-

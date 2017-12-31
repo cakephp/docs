@@ -13,7 +13,6 @@ araçlarını kullanarak uygulamamızı hızlıca yapabileceğiz.
    ``pdo_mysql`` etkin olduğuna emin olun.
 #. Basit PHP bilgisi
 
-
 Başlamadan önce PHP versiyonunun güncel olduğuna emin olunuz.
 
 .. code-block:: bash

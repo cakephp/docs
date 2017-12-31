@@ -336,7 +336,6 @@ irá gerar::
         }
     }
 
-
 Especificando o tamanho do campo
 --------------------------------
 
@@ -503,7 +502,6 @@ Você também pode ver os resultados como JSON utilizando a opção
 
 Você também pode utilizar as opções ``--source``, ``--connection`` e
 ``--plugin`` exatamente como no comando ``migrate``.
-
 
 ``mark_migrated`` : Marcando uma migração como migrada
 ------------------------------------------------------

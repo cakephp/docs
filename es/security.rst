@@ -17,7 +17,6 @@ Security
     controllers/components/csrf
     controllers/components/security
 
-
 .. meta::
     :title lang=es: Security
     :keywords lang=es: security, csrf, cross site request forgery component

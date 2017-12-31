@@ -534,7 +534,6 @@ Additional Reading
 * :doc:`/views/helpers`
 * :ref:`testing-events`
 
-
 .. meta::
     :title lang=en: Events system
     :keywords lang=en: events, dispatch, decoupling, cakephp, callbacks, triggers, hooks, php

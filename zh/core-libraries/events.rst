@@ -440,7 +440,6 @@ The :php:meth:`~Cake\\Event\\EventManager::dispatch()` 方法接收一个事件�
 * :doc:`/views/helpers`
 * `section_section-testing-events`
 
-
 .. meta::
     :title lang=zh: Events system
     :keywords lang=en: events, dispatch, decoupling, cakephp, callbacks, triggers, hooks, php

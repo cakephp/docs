@@ -54,7 +54,6 @@ Template
 View
     Les classes de présentation sont placés ici : views, cells, helpers.
 
-
 .. meta::
     :title lang=fr: Structure du dossier de CakePHP
     :keywords lang=fr: librairies internes,configuration du cœur,descriptions du model,librairies externes,détails de connexion,structure de dossier,librairies tierces,engagement personnel,connexion base de données,internationalisation,fichiersd e configuration,dossiers,développement de l'application,à lire,lib,configuré,logs,config,tierce partie,cakephp

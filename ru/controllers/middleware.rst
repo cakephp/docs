@@ -391,7 +391,6 @@ Cross Site Request Forgery (CSRF) Middleware
 .. versionadded:: 3.5.0
     ``CsrfProtectionMiddleware`` добавлено в 3.5.0
 
-
 Интеграция с FormHelper
 -----------------------
 

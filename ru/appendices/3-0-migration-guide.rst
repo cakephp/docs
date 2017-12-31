@@ -330,7 +330,6 @@ BakeShell / TemplateTask
   ``write()`` в ``log()``.
 * :php:meth:`Cake\\Log\\Engine\\FileLog` теперь пишет файлы в ``ROOT/logs`` вместо ``ROOT/tmp/logs``.
 
-
 Роутинг (маршрутизация)
 =======================
 
@@ -354,7 +353,6 @@ BakeShell / TemplateTask
 URL-адреса, содержащие именованные параметры, был добавлен метод
 :php:meth:`Cake\\Routing\\Router::parseNamedParams()` для обеспечения обратной
 совместимости с существующими URL.
-
 
 RequestActionTrait
 ------------------

@@ -16,7 +16,6 @@ CakePHP提供的基本构造包括class名，文件名，数据库table名。尽
 简单使用的应用结构。在 :doc:`规约章节
 </intro/conventions>` 囊括了CakePHP需要的各种规约.
 
-
 模型（Model）层
 ===============
 
@@ -130,7 +129,6 @@ CakePHP请求周期
 * 强力的 :doc:`代码生成工具
   </bake/usage>` 让你可以迅速地开始
 * :doc:`结合测试框架 </development/testing>` 可以让你确保你的代码完美运行
-
 
 下一步明显要做的是 :doc:`下载 CakePHP </installation>`, 阅读
 :doc:`教程并且制作些很棒的东西

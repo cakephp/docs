@@ -22,7 +22,6 @@ bake はインストールされません。
 
 bake の詳細を、下の各項目で説明します。
 
-
 .. toctree::
     :maxdepth: 1
 

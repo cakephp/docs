@@ -267,7 +267,6 @@ service distant. Vous pouvez utiliser ``remember()`` pour faciliter cela::
 
     }
 
-
 Lire depuis un Cache
 ====================
 
@@ -314,7 +313,6 @@ Memcached::
     // $result contiendra
     ['article-first-post' => '...', 'article-first-post-comments' => '...']
 
-
 Suppression d'un Cache
 ======================
 
@@ -345,7 +343,6 @@ l'utilisation de Memcached::
     // $result contiendra
     ['article-first-post' => true, 'article-first-post-comments' => true]
 
-
 Effacer les Données du Cache
 ============================
 
@@ -361,7 +358,6 @@ différentes configurations de cache ont des préfixes différents::
 
     // Détruira toutes les clés.
     Cache::clear(false);
-
 
 .. php:staticmethod:: gc($config)
 

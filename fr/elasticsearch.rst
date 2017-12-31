@@ -181,7 +181,6 @@ Sauvegarder un document va récupérer les events suivants:
     Il n'y a pas d'events pour les documents intégrés, puisque le document
     parent et tous ses documents intégrés sont sauvegardés en une opération.
 
-
 Mettre à Jour les Documents Existants
 =====================================
 

@@ -11,7 +11,6 @@ As seguintes seções abrangem essas ferramentas:
     controllers/components/csrf
     Componente de Segurança <controllers/components/security>
 
-
 .. meta::
     :title lang=pt: Segurança
     :keywords lang=pt: securança, csrf, cross site request forgery component

@@ -46,7 +46,6 @@ La estructura de archivos de todos los idiomas deben seguir la estructura de
 la versión en inglés. Si la estructura cambia en esta versión debemos realizar
 dichos cambios en los demás idiomas.
 
-
 Por ejemplo, si se crea un nuevo archivo en inglés en **en/file.rst** tendremos que:
 
 - Añadir el archivo en todos los idiomas: **fr/file.rst**, **zh/file.rst**,...
@@ -78,7 +77,6 @@ Por ejemplo, si se crea un nuevo archivo en inglés en **en/file.rst** tendremos
     .. meta::
         :title lang=xx: File Title
         :keywords lang=xx: title, description,...
-
 
 Consejos para traductores
 -------------------------
@@ -261,7 +259,6 @@ Enlaces a referencias cruzadas
     El texto del enlace será el título al que precede el enlace pero puedes
     personalizarlo usando ``:ref:`Texto del enlace <nombre-etiqueta>```.
 
-
 Evitar alertas de Sphinx
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -317,7 +314,6 @@ Cada directiva introduce el contenido del índice y/o índice del *namespace*.
 
            Descripción del método
 
-
    Atributos, métodos y constantes no necesitan estar anidados, pueden seguir
    la siguiente declaración de clase::
 
@@ -328,7 +324,6 @@ Cada directiva introduce el contenido del índice y/o índice del *namespace*.
         .. php:method:: methodName()
 
             Texto sobre el método
-
 
    .. ver también:: :rst:dir:`php:method`, :rst:dir:`php:attr`, :rst:dir:`php:const`
 
@@ -412,7 +407,6 @@ si se encuentra una directiva que coincida:
 
    Referencia una excepción.
 
-
 Código fuente
 -------------
 
@@ -486,7 +480,6 @@ Ejemplos
 .. deprecated:: 2.6.3
 
     Esta antigua funcionalidad pasó a ser obsoleta en la versión 2.6.3
-
 
 .. meta::
     :title lang=es: Documentación

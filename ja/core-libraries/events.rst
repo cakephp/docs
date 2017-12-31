@@ -364,7 +364,6 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
 あるレイヤーの特定のクラスで発生するイベントのための ``Layer.Class.eventName`` 、
 例えば ``Model.User.afterRegister`` や ``Controller.Courses.invalidAccess`` です。
 
-
 2番目の引数は ``subject`` です。サブジェクトとはイベントに関連付けられているオブジェクトを意味し、
 通常それ自身に関するイベントをトリガーしているものと同じクラスであり、
 ``$this`` の使用が一般的なケースとなります。とは言え、コンポーネントが
@@ -516,7 +515,6 @@ DOM イベントのように、追加のリスナーへ通知されることを�
 * :doc:`/controllers/components`
 * :doc:`/views/helpers`
 * :ref:`testing-events`
-
 
 .. meta::
     :title lang=ja: イベントシステム

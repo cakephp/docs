@@ -30,7 +30,6 @@ Core Behaviors
     /orm/behaviors/translate
     /orm/behaviors/tree
 
-
 Creating a Behavior
 ===================
 
@@ -66,7 +65,6 @@ put your behavior's initialization code, if required::
     {
         // Some initialization code here
     }
-
 
 We can now add this behavior to one of our table classes. In this example we'll
 use an ``ArticlesTable``, as articles often have slug properties for creating

@@ -62,7 +62,6 @@ More About Views
     views/json-and-xml-views
     views/helpers
 
-
 .. meta::
     :title lang=ru: Views
     :keywords lang=ru: view logic,csv file,response elements,code elements,default extension,json,flash object,remote application,twig,subclass,ajax,reply,soap,functionality,cakephp,audience,xml,mvc

@@ -21,7 +21,6 @@
   `谷歌讨论组 <http://groups.google.com/group/cake-php>`_ 或 #cakephp 的 IRC 渠道
   或者 Stack Overflow <https://stackoverflow.com/questions/tagged/cakephp>。
 
-
 报告安全问题
 ============
 
@@ -37,10 +36,6 @@
 * 准备一份帖子，描述该漏洞以及可能的利用方式。
 * 针对所有受影响的版本发布新版本。
 * 在版本发布公告中明确地说明该问题。
-
-
-
-
 
 .. meta::
     :title lang=zh: Tickets

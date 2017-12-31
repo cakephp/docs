@@ -26,7 +26,6 @@ Este método irá usar `openssl <http://php.net/openssl>`_ ou `mcrypt
 .. warning::
     A extensão `mcrypt <http://php.net/mcrypt>`_ foi considerada obsoleta no PHP7.1
 
-
 Este método **nunca** deve ser usado para armazenar senhas. Em vez disso, você deve usar
 o método de ``hash`` de mão única fornecidos por
 :php:meth:`~Cake\\Utility\\Security::hash()`. Um exemplo de uso pode ser::

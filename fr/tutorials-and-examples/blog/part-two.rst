@@ -729,7 +729,6 @@ Voici les différents chapitres que les gens veulent souvent lire après:
 3. :doc:`/bake/usage` Générer un code CRUD basique.
 4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Tutoriel sur l'enregistrement et la connexion d'utilisateurs.
 
-
 .. meta::
     :title lang=fr: Blog Tutoriel Ajouter la logique
     :keywords lang=fr: doc models,vérification validation,controller actions,model article,php class,classe model,objet model,business logic,table base de données,convention de nommage,bread et butter,callbacks,prefixes,nutshell,intéraction,array,cakephp,interface,applications,suppression

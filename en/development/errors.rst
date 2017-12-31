@@ -87,7 +87,6 @@ The ``BaseErrorHandler`` defines two abstract methods. ``_displayError()`` is
 used when errors are triggered. The ``_displayException()`` method is called
 when there is an uncaught exception.
 
-
 Changing Fatal Error Behavior
 =============================
 
@@ -166,8 +165,6 @@ exceptions for HTTP methods
 
     Used for doing a 405 Method Not Allowed error.
 
-
-
 .. php:exception:: NotAcceptableException
 
     Used for doing a 406 Not Acceptable error.
@@ -188,7 +185,6 @@ exceptions for HTTP methods
 
 For more details on HTTP 4xx error status codes see :rfc:`2616#section-10.4`.
 
-
 .. php:exception:: InternalErrorException
 
     Used for doing a 500 Internal Server Error.
@@ -197,8 +193,6 @@ For more details on HTTP 4xx error status codes see :rfc:`2616#section-10.4`.
 
     Used for doing a 501 Not Implemented Errors.
 
-
-
 .. php:exception:: ServiceUnavailableException
 
     Used for doing a 503 Service Unavailable error.
@@ -206,7 +200,6 @@ For more details on HTTP 4xx error status codes see :rfc:`2616#section-10.4`.
     .. versionadded:: 3.1.7 Service Unavailable has been added.
 
 For more details on HTTP 5xx error status codes see :rfc:`2616#section-10.5`.
-
 
 You can throw these exceptions from your controllers to indicate failure states,
 or HTTP errors. An example use of the HTTP exceptions could be rendering 404
@@ -452,13 +445,11 @@ which allows the native ``__toString()`` methods to work as normal::
 
     throw new MissingWidgetException(['widget' => 'Pointy']);
 
-
 When caught by the built in exception handler, you would get a ``$widget``
 variable in your error view template. In addition if you cast the exception
 as a string or use its ``getMessage()`` method you will get
 ``Seems that Pointy is missing.``. This allows you to quickly create
 your own rich development errors, just like CakePHP uses internally.
-
 
 Creating Custom Status Codes
 ----------------------------
@@ -476,7 +467,6 @@ see the **error500.ctp** template. For any other error code you'll get the
 custom exception, that template will be used in development mode.
 If you'd like your own exception handling logic even in production,
 see the next section.
-
 
 Extending and Implementing your own Exception Handlers
 ======================================================
@@ -527,7 +517,6 @@ specific errors::
             return 'Oops that widget is missing!';
         }
     }
-
 
     // In config/app.php
     'Error' => [

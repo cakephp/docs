@@ -28,7 +28,6 @@ and components.
     tutorials-and-examples/blog/part-three
     tutorials-and-examples/blog-auth-example/auth
 
-
 .. meta::
     :title lang=en: Tutorials & Examples
     :keywords lang=en: application tutorials,glob,bakery,repository,applications,blog,acl

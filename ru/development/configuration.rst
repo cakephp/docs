@@ -259,7 +259,6 @@ See the :ref:`inflection-configuration` docs for more information.
 .. versionchanged:: 3.5.0
     Поддержка библиотеки dotenv была добавлена в скелет приложения.
 
-
 Настроить класс
 ===============
 
@@ -372,7 +371,6 @@ See the :ref:`inflection-configuration` docs for more information.
 
 Прочтите и удалите ключ из Configure. Это полезно, если вы хотите объединить
 чтение и удаление значений в одной операции.
-
 
 Чтение и запись файлов конфигурации
 ===================================

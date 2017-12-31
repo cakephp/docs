@@ -101,7 +101,6 @@ also just load an array of options::
     The ``default`` email profile is automatically set when an ``Email``
     instance is created.
 
-
 .. deprecated:: 3.4.0
     Use ``setProfile()`` instead of ``profile()``.
 
@@ -327,7 +326,6 @@ following path:
     of the layout argument of ``template()``. Use ``setTheme()`` instead of
     ``theme()``.
 
-
 Sending Attachments
 ===================
 
@@ -446,7 +444,6 @@ necessary when dealing with some Japanese ISP's::
 .. deprecated:: 3.4.0
     Use ``setEmailPattern()`` instead of ``emailPattern()``.
 
-
 Sending Messages Quickly
 ========================
 
@@ -479,7 +476,6 @@ If you want, you can pass the to, subject and message as null and do all
 configurations in the 4th parameter (as array or using ``Configure``).
 Check the list of :ref:`configurations <email-configurations>` to see all accepted configs.
 
-
 Sending Emails from CLI
 =======================
 
@@ -495,7 +491,6 @@ A valid message id can help to prevent emails ending up in spam folders.
 
 .. deprecated:: 3.4.0
     Use ``setDomain()`` instead of ``domain()``.
-
 
 Creating Reusable Emails
 ========================

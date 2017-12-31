@@ -415,7 +415,6 @@ CakePHP では、コントローラーのアクションをスリムに保ち、
 関連するエンティティーを検索/構築することができます。
 **src/Model/Table/ArticlesTable.php** に次を追加してください。 ::
 
-
     public function beforeSave($event, $entity, $options)
     {
         if ($entity->tag_string) {

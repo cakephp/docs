@@ -158,7 +158,6 @@ the condition check of the ternary for clarity::
     // Nested ternaries are bad
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
-
 Template Files
 --------------
 
@@ -176,7 +175,6 @@ tags::
     <?php if ($isAdmin): ?>
         <p>You are the admin user.</p>
     <?php endif; ?>
-
 
 Comparison
 ==========

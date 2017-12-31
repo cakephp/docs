@@ -201,7 +201,6 @@ Do bear in mind that virtual properties cannot be used in finds. If you want
 virtual properties to be part of JSON or array representations of your entities,
 see :ref:`exposing-virtual-properties`.
 
-
 Checking if an Entity Has Been Modified
 =======================================
 
@@ -247,7 +246,6 @@ To get a list of all dirty properties of an ``Entity`` you may call::
 .. versionadded:: 3.4.3
 
     ``getDirty()`` has been added.
-
 
 Validation Errors
 =================
@@ -362,7 +360,6 @@ fields::
 
 By setting the ``guard`` option to ``false``, you can ignore the accessible
 field list for a single call to ``set()``.
-
 
 Checking if an Entity was Persisted
 -----------------------------------

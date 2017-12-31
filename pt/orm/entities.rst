@@ -251,7 +251,6 @@ você pode chamar::
 
     ``getDirty()`` foi adicionado.
 
-
 Erros de Validação
 ==================
 
@@ -366,7 +365,6 @@ para campos vigiados (guarded)::
 
 Definindo a opção ``guard`` como ``false``, você pode ignorar a lista de
 campos acessíveis para uma única chamado ao método ``set()``.
-
 
 Verificando se uma Entidade foi Persistida
 ------------------------------------------

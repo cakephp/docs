@@ -50,7 +50,6 @@ tasks. You should see something like::
 
     By using `cake bake [name]` you can invoke a specific bake task.
 
-
 You can get more information on what each task does, and what options are
 available using the ``--help`` option::
 

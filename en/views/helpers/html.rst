@@ -124,7 +124,6 @@ Will output::
 
     background:#633; border-bottom:1px solid #000; padding:10px;
 
-
 Creating meta Tags
 ------------------
 
@@ -250,7 +249,6 @@ Linking to Images
 
 .. php:method:: image(string $path, array $options = [])
 
-
 Creates a formatted image tag. The path supplied should be relative
 to **webroot/img/**. ::
 
@@ -335,7 +333,6 @@ Will output:
 
     <a href="http://www.yourdomain.com/dashboards/index">Dashboard</a>
 
-
 Specify ``confirm`` key in options to display a JavaScript ``confirm()``
 dialog::
 
@@ -414,7 +411,6 @@ Linking to Videos and Audio Files
 ---------------------------------
 
 .. php:method:: media(string|array $path, array $options)
-
 
 Options:
 
@@ -846,7 +842,6 @@ which every crumb was added with. You can use the ``$startText`` parameter to
 provide the first breadcrumb link/text. This is useful when you always want to
 include a root link. This option works the same as the ``$startText`` option for
 :php:meth:`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()`.
-
 
 .. meta::
     :title lang=en: HtmlHelper

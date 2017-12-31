@@ -300,8 +300,6 @@ Leitura e exclusão de dados de configuração
 Ler e excluir uma chave do Configure. Isso é útil quando você deseja combinar leitura e exclusão de valores em uma única
 operação.
 
-
-
 Lendo e escreveendo arquivos de configuração
 ============================================
 
@@ -377,7 +375,6 @@ Salvar somente a configuração de manipulação de erro::
 
 ``Configure::dump()`` pode ser usado para modificar ou substituir arquivos de configuração que são legíveis com
 :php:meth:`Configure::load()`
-
 
 Armazenando Configuração do Tempo de Execução
 ---------------------------------------------
@@ -550,7 +547,6 @@ Um exemplo de arquivo JSON seria semelhante a::
         }
     }
 
-
 Bootstrapping CakePHP
 =====================
 
@@ -570,7 +566,6 @@ Pode ser tentador para colocar as funções de formatação lá, a fim de usá-l
 seções :doc:`/controllers` e :doc:`/views` há melhores maneiras de adicionar lógica personalizada à sua aplicação.
 
 .. _application-bootstrap:
-
 
 Application::bootstrap()
 ------------------------

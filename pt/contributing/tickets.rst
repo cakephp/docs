@@ -44,7 +44,6 @@ vez confirmada, o time do CakePHP tomará as ações seguintes:
 * Lançar novas versões para todas as versões afetadas.
 * Anunciar o problema no anúncio de lançamento.
 
-
 .. meta::
     :title lang=pt: Tickets
     :keywords lang=pt: bug,vulnerabilidade,segurança,ticket,reportar,problema,irc,suporte

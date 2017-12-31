@@ -121,7 +121,6 @@ tabla, ejecuta el siguiente código SQL en ella::
         modified DATETIME DEFAULT NULL
     );
 
-
     /* Luego insertamos algunos artículos para probar */
     INSERT INTO articles (title,body,created)
         VALUES ('El título', 'Esto es el cuerpo del artículo.', NOW());

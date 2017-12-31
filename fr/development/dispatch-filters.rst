@@ -191,7 +191,6 @@ servi depuis le ``PagesController``::
         }
     }
 
-
     // Dans notre bootstrap.php
     DispatcherFactory::add('HttpCache', ['for' => '/pages'])
 

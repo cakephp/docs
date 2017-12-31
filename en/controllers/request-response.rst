@@ -292,7 +292,6 @@ There are several built-in detectors that you can use:
 .. versionadded:: 3.3.0
     Detectors can take additional parameters as of 3.3.0.
 
-
 Session Data
 ------------
 
@@ -431,7 +430,6 @@ Get the list of accepted languages::
 Check whether a specific language is accepted::
 
     $acceptsSpanish = $this->request->acceptLanguage('es-es');
-
 
 .. _request-cookies:
 
@@ -853,7 +851,6 @@ Also, under the HTTP cache validation model, you can set the ``Last-Modified``
 header to indicate the date and time at which the resource was modified for the
 last time. Setting this header helps CakePHP tell caching clients whether the
 response was modified or not based on their cache.
-
 
 To take advantage of this header, you must either call the
 ``checkNotModified()`` method manually or include the

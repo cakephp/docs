@@ -58,7 +58,6 @@ Used for finding the path to a package inside CakePHP::
     // Get the path to Cache engines.
     App::core('Cache/Engine');
 
-
 Locating Plugins
 ================
 

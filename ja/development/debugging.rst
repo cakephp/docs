@@ -194,7 +194,6 @@ DebugKit は便利なデバッグツールをたくさん提供してくれる�
 現在のリクエストについての情報を大量に提供してくれます。
 DebugKit のインストールと使用方法については :doc:`/debug-kit` の章を見てください。
 
-
 .. meta::
     :title lang=ja: デバッグ
     :description lang=ja: Debugging CakePHP with the Debugger class, logging, basic debugging and using the DebugKit plugin.

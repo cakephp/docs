@@ -139,7 +139,6 @@ in order to get autocompletion when using the CakePHP console::
 
     complete -F _cake cake bin/cake
 
-
 Using autocompletion
 ====================
 

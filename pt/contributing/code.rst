@@ -136,7 +136,6 @@ Ao fazer *pull requests* você deve ter certeza que selecionou o *branch* corret
   atual for ``3.2.2``, então a versão na qual o comportamento pode ser quebrado
   será na versão ``4.x``.
 
-
 .. note::
 
     Lembre-se que todo código que você contribui com o CakePHP será licensiado
@@ -148,7 +147,6 @@ Ao fazer *pull requests* você deve ter certeza que selecionou o *branch* corret
 Todas as correções de *bugs* incorporadas a um *branch* de manutenção serão
 posteriormente mescladas nos lançamentos futuros realizados pelo time do
 CakePHP.
-
 
 .. meta::
     :title lang=pt: Código

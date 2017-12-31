@@ -360,7 +360,6 @@ to process all the entities as a single transaction you can use
         }
     });
 
-
 .. _changing-accessible-fields:
 
 Changing Accessible Fields
@@ -409,7 +408,6 @@ persisted. You can merge an array of raw data into an existing entity using the
     $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->getData());
     $articles->save($article);
-
 
 Validation and patchEntity
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -575,7 +573,6 @@ array::
         $this->request->getData(),
         ['associated' => ['Tags', 'Comments.Users']]
     );
-
 
 .. _before-marshal:
 
@@ -1112,7 +1109,6 @@ Saving Multiple Entities
 
 .. php:method:: saveMany($entities, $options = [])
 
-
 Using this method you can save multiple entities atomically. ``$entities`` can
 be an array of entities created using ``newEntities()`` / ``patchEntities()``.
 ``$options`` can have the same options as accepted by ``save()``::
@@ -1172,7 +1168,6 @@ A bulk-update will be considered successful if 1 or more rows are updated.
 
     updateAll will *not* trigger beforeSave/afterSave events. If you need those
     first load a collection of records and update them.
-
 
 ``updateAll()`` is for convenience only. You can use this more flexible
 interface as well::

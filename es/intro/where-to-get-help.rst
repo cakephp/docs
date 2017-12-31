@@ -56,7 +56,6 @@ El canal IRC
 
 **Canales IRC en irc.freenode.net:**
 
-
 -  `#cakephp <irc://irc.freenode.net/cakephp>`_ -- Discusión general
 -  `#cakephp-docs <irc://irc.freenode.net/cakephp-docs>`_ -- Documentación
 -  `#cakephp-bakery <irc://irc.freenode.net/cakephp-bakery>`_ -- Bakery
@@ -70,7 +69,6 @@ necesitas ayuda como si quieres encontrar usuarios en tu zona o si quieres
 donar tu nuevo coche deportivo de marca.
 
 .. _cakephp-official-communities:
-
 
 Foro oficial de CakePHP
 =======================
@@ -139,7 +137,6 @@ Español
 - `Canal español de CakePHP en Slack <https://cakesf.slack.com/messages/spanish/>`_
 - `Canal IRC de CakePHP en español <irc://irc.freenode.net/cakephp-es>`_
 - `Grupo español de CakePHP en Google <http://groups.google.com/group/cakephp-esp>`_
-
 
 .. meta::
     :title lang=es: Donde obtener ayuda

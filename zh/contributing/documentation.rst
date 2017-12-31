@@ -218,7 +218,6 @@ CakePHP 文档使用 `phpdomain <http://pypi.python.org/pypi/sphinxcontrib-phpdo
 
            方法的说明
 
-
    属性、方法和常量不需要嵌套。他们可以直接位于类的声明之后::
 
         .. php:class:: MyClass
@@ -228,7 +227,6 @@ CakePHP 文档使用 `phpdomain <http://pypi.python.org/pypi/sphinxcontrib-phpdo
         .. php:method:: methodName()
 
             关于方法的文字
-
 
    .. seealso:: :rst:dir:`php:method`, :rst:dir:`php:attr`, :rst:dir:`php:const`
 
@@ -309,7 +307,6 @@ one reference **without** ``:no-index:`` to still have the function referenced::
 
    指向一个异常。
 
-
 源代码
 ------
 
@@ -325,7 +322,6 @@ one reference **without** ``:no-index:`` to still have the function referenced::
     这又是正常的文字了。
 
 代码的文字不会被改动或格式化，除非取消该级别的缩进。
-
 
 注释和警告
 ----------
@@ -362,7 +358,6 @@ one reference **without** ``:no-index:`` to still have the function referenced::
 .. warning::
 
     它可能有危险。
-
 
 .. meta::
     :title lang=zh: Documentation

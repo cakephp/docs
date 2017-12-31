@@ -529,7 +529,6 @@ would be::
 
 .. _plugin-assets:
 
-
 Plugin Assets
 =============
 
@@ -550,7 +549,6 @@ You may put any type of file in any directory, just like a regular webroot.
     Handling static assets (such as images, JavaScript and CSS files)
     through the Dispatcher is very inefficient. See :ref:`symlink-assets`
     for more information.
-
 
 Linking to Assets in Plugins
 ----------------------------
@@ -607,7 +605,6 @@ that you prefix the plugin name before the name of the component. For example::
     }
 
 The same technique applies to Helpers and Behaviors.
-
 
 Expand Your Plugin
 ==================

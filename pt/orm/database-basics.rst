@@ -162,8 +162,6 @@ definir conexões adicionais em tempo de execução usando o método
         'cacheMetadata' => true,
     ]);
 
-
-
 As opções de configuração também podem ser fornecidas como uma string :term:`DSN`.
 Isso é útil ao trabalhar com variáveis de ambiente ou :term:`PaaS` providers::
 
@@ -697,7 +695,6 @@ Além de consultas básicas, você pode executar consultas mais complexas usando
 - Se a closure lançar uma exceção, um rollback será emitido. A exceção original será re-lançada.
 - Se a closure retornar ``false``, um rollback será emitido.
 - Se a closure for executada com sucesso, a transação será cometida (*committed*).
-
 
 Interagindo com Instruções
 ==========================

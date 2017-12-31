@@ -139,7 +139,6 @@ Bash 補完ファイルの内容
 
     complete -F _cake cake bin/cake
 
-
 自動補完の利用
 ==============
 

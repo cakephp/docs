@@ -226,7 +226,6 @@ Añadamos un setter para la contraseña añadiendo el siguiente código en **src
 
 Ahora actualiza uno de los usuarios que creaste antes, si cambias su contraseña deberías ver una contraseña encriptada en vez del valor original en la lista de usuarios o en su página de View.
 
-
 CakePHP encripta contraseñas con `bcrypt
 <http://codahale.com/how-to-safely-store-a-password/>`_ por defecto. Puedes usar también sha1 o md5 si estás trabajando con bases de datos ya existentes.
 

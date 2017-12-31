@@ -172,7 +172,6 @@ Dans une version mineure, vous pouvez:
 | existant                      |                          |
 +-------------------------------+--------------------------+
 
-
 .. [1] Votre code *peut* être cassé par des versions mineures. Vérifiez le
        guide de migration pour plus de détails.
 .. [2] Vous pouvez changer des noms de classe/méthode tant que le vieux nom
