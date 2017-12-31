@@ -129,7 +129,6 @@ Migrations プラグイン
 
     bin/cake migrations migrate
 
-
 テーブルの編集
 ==============
 
@@ -323,7 +322,6 @@ categories の index テンプレートファイルでは、categories を一覧
         </table>
     </div>
 
-
 Articles コントローラーを編集する
 =================================
 
@@ -360,7 +358,6 @@ Articles コントローラーを編集する
             $this->set(compact('categories'));
         }
     }
-
 
 Articles テンプレートを編集する
 ===============================

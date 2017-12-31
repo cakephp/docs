@@ -367,7 +367,6 @@ seront revérifiés à chaque requête.
     L'authentification Basic transmet les certificats d'identification en clair.
     Vous devez utiliser HTTPS quand vous utilisez l'authentification Basic.
 
-
 Pour utiliser l'authentification basic, vous devez configurer AuthComponent::
 
     $this->loadComponent('Auth', [

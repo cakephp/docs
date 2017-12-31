@@ -300,7 +300,6 @@ opérations en lots, par exemple avec les résultats d'une base de données::
             myBulkSave($batch); // Cette fonction sera appelée pour chaque lot
         });
 
-
 .. php:method:: chunkWithKeys($chunkSize)
 
 Tout comme :php:meth:`chunk()`, ``chunkWithKeys()`` vous permet de découper une
@@ -1087,7 +1086,6 @@ Cela peut être remodeler en créant une autre classe::
         // Use the logic in your map() call
         $collection->map(new TotalOrderCalculator)
 
-
 .. php:method:: through(callable $c)
 
 Parfois une suite d'appels de méthodes de Collection peut devenir réutilisable
@@ -1119,7 +1117,6 @@ classe permettant de ne pas être répétés à chaque fois::
                                ...
                 }
         }
-
 
         // Maintenant vous pouvez utiliser la méthode through() pour appeler toutes les méthodes en une fois
         $collection->through(new FinalCheckOutRowProcessor);

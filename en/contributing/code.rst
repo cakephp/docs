@@ -80,7 +80,6 @@ following:
 * Add a test case to show the bug is fixed, or that the new feature works.
 * Keep your commits logical, and write good clear and concise commit messages.
 
-
 Submitting a Pull Request
 =========================
 
@@ -131,7 +130,6 @@ branch, as you cannot edit it once the pull request is created.
   ``3.2.2`` then the next time existing behavior can be broken will be in
   ``4.x`` so you should target that branch.
 
-
 .. note::
 
     Remember that all code you contribute to CakePHP will be licensed under the
@@ -142,7 +140,6 @@ branch, as you cannot edit it once the pull request is created.
 
 All bug fixes merged into a maintenance branch will also be merged into upcoming
 releases periodically by the core team.
-
 
 .. meta::
     :title lang=en: Code

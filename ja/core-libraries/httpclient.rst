@@ -190,7 +190,6 @@ Basic 認証の例::
 デフォルトでは、 auth オプションに ``'type'`` キーが存在しない場合、
 ``Cake\Http\Client`` は Basic 認証を使用します。
 
-
 ダイジェスト認証の使用
 ----------------------
 
@@ -303,7 +302,6 @@ OAuth2 は、多くの場合、単一のヘッダーであるため、特殊な�
 スコープ指定クライアントの作成時に定義された他のすべてのオプションを使用して引き続き行われます。
 対応するオプションの詳細については :ref:`http_client_request_options` をご覧ください。
 
-
 クッキーの設定と管理
 ====================
 
@@ -360,7 +358,6 @@ Response オブジェクトは、レスポンスデータを検査するため�
     3.3.0 では、 ``Cake\Http\Client\Response`` は `PSR-7 ResponseInterface
     <http://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface>`__
     を実装します。
-
 
 レスポンスボディーの読み込み
 ----------------------------

@@ -78,7 +78,6 @@ collection, but will allow you to modify any objects within the collection::
         echo "Element $key: $value";
     });
 
-
 The return of ``each()`` will be the collection object. Each will iterate the
 collection immediately applying the callback to each value in the collection.
 
@@ -267,7 +266,6 @@ to return as many elements for each item in the collection as you may need::
 
     // $result contains [1, 2, 3, 4, 5, 6, 7, 8];
     $result = $new->toList();
-
 
 .. php:method:: chunk($chunkSize)
 
@@ -1045,7 +1043,6 @@ This can be refactored by creating another class::
         // Use the logic in your map() call
         $collection->map(new TotalOrderCalculator)
 
-
 .. php:method:: through(callable $c)
 
 Sometimes a chain of collection method calls can become reusable in other parts
@@ -1075,7 +1072,6 @@ be repeated every time::
                                ...
                 }
         }
-
 
         // Now you can use the through() method to call all methods at once
         $collection->through(new FinalCheckOutRowProcessor);

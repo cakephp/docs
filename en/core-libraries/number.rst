@@ -99,7 +99,6 @@ output. The following options are available:
 If $currency value is ``null``, the default currency will be retrieved from
 :php:meth:`Cake\\I18n\\Number::defaultCurrency()`
 
-
 Setting the Default Currency
 ============================
 
@@ -129,7 +128,6 @@ level of precision defined. ::
     // Called as Number
     echo Number::precision(456.91873645, 2);
 
-
 Formatting Percentages
 ======================
 
@@ -157,7 +155,6 @@ and appends the output with a percent sign. ::
     echo Number::toPercentage(0.45691, 1, [
         'multiply' => true
     ]);
-
 
 Interacting with Human Readable Values
 ======================================

@@ -51,7 +51,6 @@
     // Auth コールバックを再度有効化
     $this->eventManager()->on($this->Auth);
 
-
 .. meta::
     :title lang=ja: Object Registry
     :keywords lang=ja: array name,loading components,several different kinds,unified api,loading objects,component names,special key,core components,callbacks,prg,callback,alias,fatal error,collections,memory,priority,priorities

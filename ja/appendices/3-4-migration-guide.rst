@@ -360,7 +360,6 @@ CakePHP の以前のバージョンでは、コンポーネントは後で変更
         getMailer as public;
     }
 
-
 Collection
 ==========
 

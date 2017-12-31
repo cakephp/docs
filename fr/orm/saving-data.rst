@@ -1233,7 +1233,6 @@ Sauvegarder Plusieurs Entities
 
 .. php:method:: saveMany($entities, $options = [])
 
-
 En utilisant cette méthode, vous pouvez sauvegarder plusieurs entities de façon
 atomique. ``$entities`` peuvent être un tableau d'entities créé avec
 ``newEntities()`` / ``patchEntities()``. ``$options`` peut avoir les mêmes

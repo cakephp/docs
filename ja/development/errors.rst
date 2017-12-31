@@ -129,7 +129,7 @@ HTTP メソッド用のいくつかの例外があります。
 
 .. php:exception:: BadRequestException
 
-    400 Bad Request エラーに使われます。 
+    400 Bad Request エラーに使われます。
 
 .. php:exception:: UnauthorizedException
 
@@ -155,12 +155,10 @@ HTTP メソッド用のいくつかの例外があります。
 
     405 Method Not Allowed エラーに使われます。
 
-
-
 .. php:exception:: NotAcceptableException
 
     406 Not Acceptable エラーに使われます。
-    
+
     .. versionadded:: 3.1.7 NotAcceptableException が追加されました。
 
 .. php:exception:: ConflictException
@@ -177,7 +175,6 @@ HTTP メソッド用のいくつかの例外があります。
 
 HTTP 4xx エラーステータスコードの詳細は :rfc:`2616#section-10.4` をご覧ください。
 
-
 .. php:exception:: InternalErrorException
 
     500 Internal Server Error に使われます。
@@ -185,8 +182,6 @@ HTTP 4xx エラーステータスコードの詳細は :rfc:`2616#section-10.4` 
 .. php:exception:: NotImplementedException
 
     501 Not Implemented エラーに使われます。
-
-
 
 .. php:exception:: ServiceUnavailableException
 
@@ -196,12 +191,11 @@ HTTP 4xx エラーステータスコードの詳細は :rfc:`2616#section-10.4` 
 
 HTTP 5xx エラーステータスコードの詳細は :rfc:`2616#section-10.5` をご覧ください。
 
-
 失敗の状態や HTTP エラーを示すためにあなたのコントローラーからこれらの例外を投げることができます。
 HTTP の例外の使用例はアイテムが見つからなかった場合に 404 ページを描画することでしょう。 ::
 
     use Cake\Network\Exception\NotFoundException;
-    
+
     public function view($id = null)
     {
         $article = $this->Articles->findById($id)->first();
@@ -361,7 +355,6 @@ RFC2616 MethodNotAllowedException は言っています。 ::
 
     「レスポンスは要求されたリソースに有効なメソッドの一覧を含むAllowヘッダーを含まなければ【ならない】」
 
-
 コントローラー中での HTTP の例外の使用
 ======================================
 
@@ -369,7 +362,7 @@ RFC2616 MethodNotAllowedException は言っています。 ::
 たとえば::
 
     use Cake\Network\Exception\NotFoundException;
-    
+
     public function view($id = null)
     {
         $article = $this->Articles->findById($id)->first();
@@ -444,7 +437,7 @@ RFC2616 MethodNotAllowedException は言っています。 ::
 ------------------------------
 
 例外を生成する際にコードを変えることでカスタム HTTP ステータスコードを作ることができます。 ::
-    
+
         throw new MissingWidgetHelperException('それはここにはありません', 501);
 
 これは 501 のレスポンスコードを作るでしょうが、あなたが望むあらゆる HTTP ステータスコードを使うことができます。
@@ -452,7 +445,6 @@ RFC2616 MethodNotAllowedException は言っています。 ::
 **error500.ctp** テンプレートが表示されるでしょう。他のあらゆるエラーコードでは **error400.ctp** テンプレートになるでしょう。
 もしカスタムの例外用のエラーテンプレートを定義している場合、そのテンプレートが開発中は使われるでしょう。
 もし本番でもあなた独自の例外処理方法が欲しい場合は次の節を参照してください。
-
 
 独自の例外ハンドラーの継承と実装
 ================================
@@ -497,7 +489,6 @@ BaseErrorHandler の継承
         }
     }
 
-
     // config/app.php の中で
     'Error' => [
         'exceptionRenderer' => 'App\Error\AppExceptionRenderer',
@@ -510,11 +501,11 @@ BaseErrorHandler の継承
 例外処理メソッドは、引数として処理される例外を受け取ります。
 あなたのカスタム例外処理は文字列または ``Response`` オブジェクトを返すことができます。
 ``Response`` オブジェクトの返却はそれのレスポンスに対する全制御権をあなたに与えます。
-  
+
 .. note::
 
     カスタムレンダラーはコンストラクターで例外を受け取るのを期待し、render メソッドを実装します。
-    
+
     もしもカスタム例外処理を使っている場合、レンダラーの設定変更は効果がありません。
     あなたの実装の中であなたがそれを参照しない限り。
 

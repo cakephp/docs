@@ -78,7 +78,6 @@ utiliser la méthode ``setPrimaryKey()``::
         }
     }
 
-
 Personnaliser la Classe Entity qu'une Table Utilise
 ---------------------------------------------------
 
@@ -335,7 +334,6 @@ déclenché pour des suppressions non atomic, quand les opérations sur la base 
 données sont implicitement committées. L'event est décenché seulement pour
 la table primaire sur laquelle ``delete()`` est directement appelée. L'event
 n'est pas déclenché si une transaction est démarrée avant l'appel de delete.
-
 
 Behaviors
 =========

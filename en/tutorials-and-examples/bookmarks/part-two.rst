@@ -208,7 +208,6 @@ sense. First, we'll add the authorization logic for bookmarks. In your
         return parent::isAuthorized($user);
     }
 
-
 Now if you try to view, edit or delete a bookmark that does not belong to you,
 you should be redirected back to the page you came from. If no error message is
 displayed, add the following to your layout::
@@ -344,7 +343,6 @@ this way::
         'tag_string' => true,
     ];
 
-
 Updating the Views
 ------------------
 
@@ -362,7 +360,6 @@ well. Because we marked the ``tag_string`` as accessible, the ORM will copy that
 data from the request into our entity. We can use a ``beforeSave()`` hook method
 to parse the tag string and find/build the related entities. Add the following
 to **src/Model/Table/BookmarksTable.php**::
-
 
     public function beforeSave($event, $entity, $options)
     {

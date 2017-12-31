@@ -11,14 +11,14 @@ imagem ou recursos em outros domínios.
 O CsrfComponent trabalha setando um cookie no navegador do usuário. Quando os
 formulários são criados com o :php:class:`Cake\\View\\Helper\\FormHelper`, um input
 hidden é adicionado contendo o token CSRF. Durante o evento ``Controller.startup``,
-se a requisição for POST, PUT, DELETE ou PATCH o componente irá comparar os dados da 
-requisição e o valor do cookie. Se um deles estiver faltando ou os dois valores forem 
+se a requisição for POST, PUT, DELETE ou PATCH o componente irá comparar os dados da
+requisição e o valor do cookie. Se um deles estiver faltando ou os dois valores forem
 imcompatíveis o componente lançará um
 :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
 
 .. note::
-    Você sempre deve verificar o método HTTP que está sendo usado antes de 
-    tomar uma ação. Você deve :ref:`verificar o método HTTP <cake-request>` 
+    Você sempre deve verificar o método HTTP que está sendo usado antes de
+    tomar uma ação. Você deve :ref:`verificar o método HTTP <cake-request>`
     ou usar :php:meth:`Cake\\Http\\ServerRequest::allowMethod()` para garantir que o
     método HTTP correto está sendo usado.
 
@@ -66,7 +66,7 @@ token.
 
 .. note::
 
-    Quando usar o CsrfComponent você sempre deverá iniciar seus formulários com 
+    Quando usar o CsrfComponent você sempre deverá iniciar seus formulários com
     o FormHelper. Senão, você precisará criar o input hidden manualmente para
     cada formulário que fizer.
 

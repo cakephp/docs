@@ -4,8 +4,8 @@ Documentación
 Contribuir con la documentación es fácil. Los archivos están hospedados
 en https://github.com/cakephp/docs. Siéntete libre de hacer un *fork* del
 repositorio, añadir tus cambios, mejoras, traducciones y comenzar a ayudar
-a través de un nuevo *pull request*. También puedes editar los archivos de manera 
-online con GitHub sin la necesidad de descargarlos -- el botón *Improve this Doc* 
+a través de un nuevo *pull request*. También puedes editar los archivos de manera
+online con GitHub sin la necesidad de descargarlos -- el botón *Improve this Doc*
 que aparece en todas las páginas te llevará al editor online de GitHub de esa página.
 
 La documentación de CakePHP dispone de `integración continua <https://es.wikipedia.org/wiki/Integraci%C3%B3n_continua>`_
@@ -14,22 +14,22 @@ y se despliega automáticamente tras realizar el *merge* del *pull request*.
 Traducciones
 ============
 
-Envía un email al equipo de documentación (docs *arroba* cakephp *punto* org) o 
-utiliza IRC (#cakephp en *freenode*) para hablar de cualquier trabajo de 
+Envía un email al equipo de documentación (docs *arroba* cakephp *punto* org) o
+utiliza IRC (#cakephp en *freenode*) para hablar de cualquier trabajo de
 traducción en el que quieras participar.
 
 Nueva traducción
 ----------------
 
 Nos gustaría poder disponer de traducciones que estén todo lo completas posible.
-Sin embargo hay ocasiones donde un archivo de traducción no está al día, por lo  
+Sin embargo hay ocasiones donde un archivo de traducción no está al día, por lo
 que debes considerar siempre la versión en inglés como la versión acreditada.
 
-Si tu idioma no está entre los disponibles, por favor, contacta con nosotros a 
-través de Github y estudiaremos la posibilidad de crear la estructura de archivos 
+Si tu idioma no está entre los disponibles, por favor, contacta con nosotros a
+través de Github y estudiaremos la posibilidad de crear la estructura de archivos
 para ello.
 
-Las siguientes secciones son las primeras que deberías considerar 
+Las siguientes secciones son las primeras que deberías considerar
 traducir ya que estos archivos no cambian a menudo:
 
 - index.rst
@@ -43,9 +43,8 @@ Recordatorio para administradores de documentación
 --------------------------------------------------
 
 La estructura de archivos de todos los idiomas deben seguir la estructura de
-la versión en inglés. Si la estructura cambia en esta versión debemos realizar 
+la versión en inglés. Si la estructura cambia en esta versión debemos realizar
 dichos cambios en los demás idiomas.
-
 
 Por ejemplo, si se crea un nuevo archivo en inglés en **en/file.rst** tendremos que:
 
@@ -79,16 +78,15 @@ Por ejemplo, si se crea un nuevo archivo en inglés en **en/file.rst** tendremos
         :title lang=xx: File Title
         :keywords lang=xx: title, description,...
 
-
 Consejos para traductores
 -------------------------
 
-- Navega y edita en el idioma al que quieras traducir el contenido - de otra 
+- Navega y edita en el idioma al que quieras traducir el contenido - de otra
   manera no verás lo que ya está traducido.
 - Siéntete libre de bucear en la traducción si ya existe en tu idioma.
 - Usa la `Forma informal <https://es.wikipedia.org/wiki/Registro_ling%C3%BC%C3%ADstico>`_.
 - Traduce el título y el contenido a la vez.
-- Compara con la versión en inglés antes de subir una corrección (si corriges 
+- Compara con la versión en inglés antes de subir una corrección (si corriges
   algo pero no indicas una referencia tu subida no será aceptada).
 - Si necesitas escribir un término en inglés envuélvelo en etiquetas ``<em>``.
   E.g. "asdf asdf *Controller* asdf" o "asdf asdf Kontroller
@@ -105,11 +103,11 @@ Guía de formato para la documentación
 
 La nueva documentación de CakePHP está escrito con `texto en formato ReST <https://es.wikipedia.org/wiki/ReStructuredText>`_.
 
-ReST (*Re Structured Text*) es una sintaxis de marcado de texto plano similar a 
-*Markdown* o *Textile*. 
+ReST (*Re Structured Text*) es una sintaxis de marcado de texto plano similar a
+*Markdown* o *Textile*.
 
-Para mantener la consistencia cuando añadas algo a la documentación de CakePHP 
-recomendamos que sigas las siguientes líneas guía sobre como dar formato y 
+Para mantener la consistencia cuando añadas algo a la documentación de CakePHP
+recomendamos que sigas las siguientes líneas guía sobre como dar formato y
 estructurar tu texto.
 
 Tamaño de línea
@@ -121,7 +119,7 @@ excepciones son URLs largas y fragmentos de código.
 Cabeceras y secciones
 ---------------------
 
-Las cabeceras de las secciones se crean subrayando el título con caracteres de 
+Las cabeceras de las secciones se crean subrayando el título con caracteres de
 puntuación. El subrayado deberá ser por lo menos tan largo como el texto.
 
 - ``#`` Se utiliza para indicar los títulos de páginas.
@@ -144,20 +142,20 @@ Marcado en línea
 
 * Un asterisco: *texto* en cursiva.
   Lo usaremos para enfatizar/destacar de forma general.
-  
+
   * ``*texto*``.
-  
+
 * Dos astericos: **texto** en negrita.
-  Lo usaremos para indicar directorios de trabajo, títulos de listas y nombres 
+  Lo usaremos para indicar directorios de trabajo, títulos de listas y nombres
   de tablas (excluyendo la palabra *table*).
-  
+
   * ``**/config/Migrations**``, ``**articulos**``, etc.
-  
+
 * Dos acentos graves (*``*): ``texto`` para ejemplos de código.
   Lo usaramos para nombres de opciones de métodos, columnas de tablas,
   objetos (excluyendo la palabra "objeto") y para nombres de métodos y funciones
   (incluídos los paréntesis )
-  
+
   * ````cascadeCallbacks````, ````true````, ````id````,
     ````PagesController````, ````config()````, etc.
 
@@ -167,7 +165,7 @@ los delimitadores de marcado habrá que escaparlos con *\\*.
 Los marcadores en línea tienen algunas restricciones:
 
 * **No pueden** estar anidados.
-* El contenido no puede empezar o acabar con espacios en blanco: ``* texto*`` 
+* El contenido no puede empezar o acabar con espacios en blanco: ``* texto*``
   está mal.
 * El contenido debe separarse del resto del texto por caracteres que no sean
   palabras. Utiliza *\\* para escapar un espacio y solucionarlo: ``onelong\ *bolded*\ word``.
@@ -232,7 +230,7 @@ Enlaces a otras páginas
 
     Puedes crear enlaces a otras páginas de la documentación usando la función
     ``::doc:``. Puedes enlazar a un archivo específico empleando rutas relativas
-    o absolutas omitiendo la extensión ``.rst``. Por ejemplo: si apareciese 
+    o absolutas omitiendo la extensión ``.rst``. Por ejemplo: si apareciese
     ``:doc:`form``` en el documento ``core-helpers/html``, el enlace haría
     referencia a ``core-helpers/form``. Si la referencia fuese ``:doc:`/core-helpers```
     el enlace sería siempre a ``/core-helpers`` sin importar donde se utilice.
@@ -242,12 +240,12 @@ Enlaces a referencias cruzadas
 
 .. rst:role:: ref
 
-    Puedes hacer referncia cruzada a cualquier título de cualquier documento 
-    usando la función ``:ref:``. Los enlaces a etiquetas de destino deben ser 
-    únicos a lo largo de toda la documentación. Cuando se crean etiquetas para 
-    métodos de clase lo mejor es usar ``clase-método`` como formato para tu 
+    Puedes hacer referncia cruzada a cualquier título de cualquier documento
+    usando la función ``:ref:``. Los enlaces a etiquetas de destino deben ser
+    únicos a lo largo de toda la documentación. Cuando se crean etiquetas para
+    métodos de clase lo mejor es usar ``clase-método`` como formato para tu
     etiqueta de destino.
-    
+
     El uso más habitual de etiquetas es encima de un título. Ejemplo::
 
         .. _nombre-etiqueta:
@@ -260,7 +258,6 @@ Enlaces a referencias cruzadas
     En otro sitio podrías enlazar a la sección de arriba usando ``:ref:`nombre-etiqueta```.
     El texto del enlace será el título al que precede el enlace pero puedes
     personalizarlo usando ``:ref:`Texto del enlace <nombre-etiqueta>```.
-
 
 Evitar alertas de Sphinx
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -277,7 +274,7 @@ Describir clases y sus contenidos
 
 La documentación de CakePHP usa el `phpdomain
 <http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ para proveer directivas
-personalizadas para describir objetos PHP y constructores. El uso de estas 
+personalizadas para describir objetos PHP y constructores. El uso de estas
 directivas y funciones es necesario para una correcta indexación y uso de las
 herramientas de referenciación cruzada.
 
@@ -317,7 +314,6 @@ Cada directiva introduce el contenido del índice y/o índice del *namespace*.
 
            Descripción del método
 
-
    Atributos, métodos y constantes no necesitan estar anidados, pueden seguir
    la siguiente declaración de clase::
 
@@ -328,7 +324,6 @@ Cada directiva introduce el contenido del índice y/o índice del *namespace*.
         .. php:method:: methodName()
 
             Texto sobre el método
-
 
    .. ver también:: :rst:dir:`php:method`, :rst:dir:`php:attr`, :rst:dir:`php:const`
 
@@ -362,7 +357,7 @@ una buena manera de asegurarse de que no añades una función dos veces, pero al
 veces puedes querer escribir una función en dos o más archivos, p.ej. *'debug object'*
 es referenciado en *`/development/debugging`* y *`/core-libraries/global-constants-and-functions`*.
 En este caso tu puedes añadir ``:noindex:`` debajo de la función *debug* para eliminar
-los avisos. Mantén únicamente una referencia **sin** ``:no-index:`` para seguir 
+los avisos. Mantén únicamente una referencia **sin** ``:no-index:`` para seguir
 teniendo la función referenciada::
 
     .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
@@ -412,12 +407,11 @@ si se encuentra una directiva que coincida:
 
    Referencia una excepción.
 
-
 Código fuente
 -------------
 
 Los bloques de citas de código fuente se crean finalizando un párrafo con ``::``.
-El bloque debe ir anidado y, como todos los párrafos, separados por líneas en 
+El bloque debe ir anidado y, como todos los párrafos, separados por líneas en
 blanco::
 
     Esto es un párrafo::
@@ -438,20 +432,20 @@ Hay muchas ocasiones en las que quieres avisar al lector de un consejo important
 una nota especial o un peligro potencial. Las admonestaciones en *Sphinx* se
 utilizan justo para eso. Hay cinco tipos de admonestaciones:
 
-* ``.. tip::`` Los consejos (*tips*) se utilizan para documentar o reiterar 
+* ``.. tip::`` Los consejos (*tips*) se utilizan para documentar o reiterar
   información interesante o importante. El contenido de la directiva debe
   escribirse en sentencias completas e incluir todas las puntuaciones apropiadas.
 * ``.. note::`` Las notas (*notes*) se utilizan para documentar una pieza de
-  información importante. El contenido de la directiva debe escribirse en 
+  información importante. El contenido de la directiva debe escribirse en
   sentencias completas e incluir todas las puntuaciones apropiadas.
-* ``.. warning::`` Avisos (*warnings*) se utilizan para documentar posibles 
-  obstáculos o información relativa a seguridad. El contenido de la directiva 
-  debe escribirse en sentencias completas e incluir todas las puntuaciones 
+* ``.. warning::`` Avisos (*warnings*) se utilizan para documentar posibles
+  obstáculos o información relativa a seguridad. El contenido de la directiva
+  debe escribirse en sentencias completas e incluir todas las puntuaciones
   apropiadas.
 * ``.. versionadded:: X.Y.Z`` las admonestaciones *"Version added"*  se utilizan
-  para mostrar notas específicas a nuevas funcionalidades añadidas en una versión 
+  para mostrar notas específicas a nuevas funcionalidades añadidas en una versión
   específica, siendo ``X.Y.Z`` la versión en la que se añadieron.
-* ``.. deprecated:: X.Y.Z`` es lo opuesto a *versionadded*, se utiliza para 
+* ``.. deprecated:: X.Y.Z`` es lo opuesto a *versionadded*, se utiliza para
   avisar de una funcionalidad obsoleta, siendo ``X.Y.Z`` la versión en la
   que pasó a ser obsoleta.
 
@@ -486,7 +480,6 @@ Ejemplos
 .. deprecated:: 2.6.3
 
     Esta antigua funcionalidad pasó a ser obsoleta en la versión 2.6.3
-
 
 .. meta::
     :title lang=es: Documentación

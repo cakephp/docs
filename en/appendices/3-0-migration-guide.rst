@@ -6,7 +6,6 @@ a project to 3.0, as well as a reference to get up to date with the changes made
 to the core since the CakePHP 2.x branch. Be sure to read the other pages in
 this guide for all the new features and API changes.
 
-
 Requirements
 ============
 
@@ -90,7 +89,6 @@ Upgrading to the new ORM will require extensive changes in any application that
 is being upgraded. See the new :doc:`/orm` documentation for information on how
 to use the new ORM.
 
-
 Basics
 ======
 
@@ -137,7 +135,6 @@ configured key prefix. The :php:meth:`Cake\\Cache\\CacheEngine::write()` no long
 the duration on write - the duration is taken from the cache engine's runtime config. Calling a
 cache method with an empty key will now throw an :php:class:`InvalidArgumentException`, instead
 of returning ``false``.
-
 
 Core
 ====
@@ -332,7 +329,6 @@ Since many applications will still need to parse incoming URLs containing named
 parameters.  :php:meth:`Cake\\Routing\\Router::parseNamedParams()` has
 been added to allow backwards compatibility with existing URLs.
 
-
 RequestActionTrait
 ------------------
 
@@ -406,7 +402,6 @@ Filter\AssetFilter
   short_tags enabled.
 * Support for the ``Asset.filter`` configuration and hooks were removed. This
   feature should be replaced with a plugin or dispatcher filter.
-
 
 Network
 =======
@@ -489,7 +484,6 @@ Network\\Email
   profiles.
 * :php:meth:`Cake\\Network\\Email\\Email::dropTransport()` has been added to allow the
   removal of transport configuration.
-
 
 Controller
 ==========
@@ -589,7 +583,6 @@ CookieComponent
   these are now managed through config data. See
   :doc:`/controllers/components/cookie` for more information.
 - The path for cookies now defaults to app's base path instead of "/".
-
 
 AuthComponent
 -------------
@@ -756,7 +749,6 @@ The following assertion methods have been added:
 
 - ``assertNotWithinRange()`` as counter part to ``assertWithinRange()``
 
-
 View
 ====
 
@@ -864,7 +856,6 @@ View\\Helper
   - data
   - action
   - params
-
 
 Helper
 ------
@@ -1030,7 +1021,6 @@ SessionHelper
 - The ``SessionHelper`` has been deprecated. You can use ``$this->request->session()`` directly,
   and the flash message functionality has been moved into :doc:`/views/helpers/flash` instead.
 
-
 JsHelper
 --------
 
@@ -1120,7 +1110,6 @@ L10n
 ====
 
 - :php:class:`Cake\\I18n\\L10n` 's constructor now takes a :php:class:`Cake\\Network\\Request` instance as argument.
-
 
 Testing
 =======

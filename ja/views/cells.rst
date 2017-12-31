@@ -204,7 +204,6 @@
     メインのテンプレート／レイアウトとはコンテキストを共有しません。各セルは内包されていて、
     ``View::cell()`` の呼び出しの引数として渡された変数にのみアクセスが可能です。
 
-
 セル内のデータのページ制御
 =============================
 
@@ -237,10 +236,10 @@
                     'scope' => 'favorites',
                 ]
             );
-            
+
             $paging = $paginator->getPagingParams() + (array)$request->getParam('paging');
             $this->request = $this->request->withParam('paging', $paging));
-        
+
             $this->set('favorites', $results);
         }
     }

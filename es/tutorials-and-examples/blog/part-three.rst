@@ -4,8 +4,8 @@ Tutorial Blog - Parte 3
 Crear categorias en Arbol
 =========================
 
-Vamos a continuar con nuestro blog e imaginar que queremos categorizar nuestros articulos. 
-Queremos que las categorias estén ordenadas, y para esto, vamos a usar :doc:`Tree behavior </orm/behaviors/tree>` 
+Vamos a continuar con nuestro blog e imaginar que queremos categorizar nuestros articulos.
+Queremos que las categorias estén ordenadas, y para esto, vamos a usar :doc:`Tree behavior </orm/behaviors/tree>`
 para ayudarnos a organizar las categorías.
 
 Pero primero necesitamos modificar nuestras tablas.
@@ -13,24 +13,24 @@ Pero primero necesitamos modificar nuestras tablas.
 Plugin de migración
 ===================
 
-Vamos a usar el `migrations plugin <https://github.com/cakephp/migrations>`_ para crear una tabla en nuestra 
+Vamos a usar el `migrations plugin <https://github.com/cakephp/migrations>`_ para crear una tabla en nuestra
 base de datos. Si tienes una tabla de articulos en tu base de datos, borrala.
 
-Abre tu archivo ``composer.json``. Generalmente el plugin de migración ya esta incluido en ``require``. 
+Abre tu archivo ``composer.json``. Generalmente el plugin de migración ya esta incluido en ``require``.
 Si no es el caso, agrégalo::
 
     "require": {
         "cakephp/migrations": "~1.0"
     }
 
-Luego corre el comando ``composer update``. El plugin de migración se alojara en tu carpeta de ``plugins``. 
+Luego corre el comando ``composer update``. El plugin de migración se alojara en tu carpeta de ``plugins``.
 Agrega también ``Plugin::load('Migrations');`` en el archivo bootstrap.php de tú aplicación.
 
 Una vez que el plugin sea cargado, corre el siguiente comando para crear el archivo de migración::
 
     bin/cake migrations create Initial
 
-Un archivo de migración será creado en la carpeta ``/config/Migrations``. Puedes abrir tu archivo y agregar las 
+Un archivo de migración será creado en la carpeta ``/config/Migrations``. Puedes abrir tu archivo y agregar las
 siguientes lineas::
 
     <?php
@@ -65,7 +65,6 @@ Ahora corre el siguiente comando para crear tús tablas::
 
     bin/cake migrations migrate
 
-
 Modificando las tablas
 ======================
 
@@ -74,7 +73,7 @@ Con nuestras tablas creadas, ahora podemos enfocarnos en categorizar los artícu
 Suponemos que ya tienes los archivos (Tables, Controllers y Templates de
 Articles) de la parte 2 de esta serie de tutoriales, por lo que solamente vamos a agregar referencia a las categorías.
 
-Necesitamos asociar las tablas de Articles y Categories. Abre el archivo **src/Model/Table/ArticlesTable.php** 
+Necesitamos asociar las tablas de Articles y Categories. Abre el archivo **src/Model/Table/ArticlesTable.php**
 y agrega las siguientes lineas::
 
     // src/Model/Table/ArticlesTable.php
@@ -104,7 +103,7 @@ Crea todos los archivos corriendo los siguientes comandos::
     bin/cake bake controller Categories
     bin/cake bake template Categories
 
-La herramienta bake ha creado todos los archivos en un instante. Puedes darles una rápida leida si necesitas re-familiarizarte con 
+La herramienta bake ha creado todos los archivos en un instante. Puedes darles una rápida leida si necesitas re-familiarizarte con
 la forma en la que CakePHP funciona.
 
 .. note::
@@ -115,10 +114,10 @@ Agregar el TreeBehavior a CategoriesTable
 
 :doc:`TreeBehavior </orm/behaviors/tree>` ayuda a manejar estructuras de árbol jerarquica en una tabla. Utiliza `MPTT logic
 <http://www.sitepoint.com/hierarchical-data-database-2/>`_ para manejar los datos.
-Las estructuras en árbol MPTT están optimizadas para lecturas, lo cual las hace ideal para aplicaciones con gran carga de 
+Las estructuras en árbol MPTT están optimizadas para lecturas, lo cual las hace ideal para aplicaciones con gran carga de
 lectura como los blogs.
 
-Si abres el archivo **src/Model/Table/CategoriesTable.php** veras que el TreeBehavior fue agregado a CategoriesTable en el método 
+Si abres el archivo **src/Model/Table/CategoriesTable.php** veras que el TreeBehavior fue agregado a CategoriesTable en el método
 ``initialize()``. Bake agrega este behavior a cualquier tabla que contenga las columnas ``lft`` y ``rght``::
 
     $this->addBehavior('Tree');
@@ -139,7 +138,7 @@ Reordenando categorías con TreeBehavior
 
 En el index de categorias, puedes listar y re-ordenar categorias.
 
-Vamos a modificar el método index en tu ``CategoriesController.php``, agregando ``move_up()`` y ``move_down()`` 
+Vamos a modificar el método index en tu ``CategoriesController.php``, agregando ``move_up()`` y ``move_down()``
 para poder reordenar las categorías en ese árbol::
 
     class CategoriesController extends AppController
@@ -222,7 +221,6 @@ En **src/Template/Categories/index.ctp** reemplazá el contenido existente por e
         </table>
     </div>
 
-
 Modificando el ArticlesController
 =================================
 
@@ -260,11 +258,10 @@ Esto nos permitirá elegir una categoría para un Article al momento de crearlo 
         }
     }
 
-
 Modificando el template de Articles
 ===================================
 
-El template add de Article debería verse similar a esto:: 
+El template add de Article debería verse similar a esto::
 
 .. code-block:: php
 

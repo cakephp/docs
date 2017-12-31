@@ -146,7 +146,6 @@ Query
 - Las funciones nativas SQL ``EXTRACT``, ``DATE_ADD`` y ``DAYOFWEEK`` han sido
   abstraídas a ``extract()``, ``dateAdd()`` y ``dayOfWeek()`` respectivamente.
 
-
 Vista
 =====
 

@@ -43,7 +43,6 @@ IRC は `開発チーム <https://github.com/cakephp?tab=members>`_ のメンバ
 いつも通り、どんな質問でもコメントでもありましたら、 irc.freenode.net の #cakephp で
 私たちを訪ねてください。
 
-
 .. meta::
     :title lang=ja: CakePHP の開発プロセス
     :keywords lang=ja: maintenance branch,community interaction,community feature,necessary feature,stable release,ticket system,advanced feature,power users,feature set,chat irc,leading edge,router,new features,members,attempt,development branches,branch development

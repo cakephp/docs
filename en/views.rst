@@ -224,7 +224,7 @@ uncaptured content from the extending view. Assuming our view file has a
     echo $this->Html->link('edit', [
         'action' => 'edit',
         $post->id
-    ]); 
+    ]);
     ?>
     </li>
     <?php $this->end(); ?>
@@ -254,7 +254,6 @@ as the ``content`` block.
 
     You should avoid using ``content`` as a block name in your application.
     CakePHP uses this for uncaptured content in extended views.
-
 
 You can get the list of all populated blocks using the ``blocks()`` method::
 
@@ -320,7 +319,6 @@ The ``prepend()`` method allows you to prepend content to an existing block::
     // Prepend to sidebar
     $this->prepend('sidebar', 'this content goes on top of sidebar');
 
-
 Displaying Blocks
 -----------------
 
@@ -353,7 +351,6 @@ You can provide a default value using the second argument:
         <h3>Your Cart</h3>
         <?= $this->fetch('cart', 'Your cart is empty') ?>
     </div>
-
 
 Using Blocks for Script and CSS Files
 -------------------------------------
@@ -527,7 +524,6 @@ syntax`. For example, to use the contact layout from the Contacts plugin::
         }
     }
 
-
 .. _view-elements:
 
 Elements
@@ -657,7 +653,6 @@ following::
 
     echo $this->element('Contacts.sidebar/helpbox');
 
-
 Requesting Elements from the App
 --------------------------------
 
@@ -668,7 +663,6 @@ or another plugin, use the following::
   echo $this->element('some_global_element', [], ['plugin' => false]);
   // or...
   echo $this->element('some_global_element', ['localVar' => $someData], ['plugin' => false]);
-
 
 Routing prefix and Elements
 ---------------------------
@@ -764,7 +758,6 @@ More About Views
     views/themes
     views/json-and-xml-views
     views/helpers
-
 
 .. meta::
     :title lang=en: Views

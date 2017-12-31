@@ -25,7 +25,6 @@ Helpers (Facilitadores)
     /views/helpers/text
     /views/helpers/time
     /views/helpers/url
-    
 
 .. _helper-api:
 

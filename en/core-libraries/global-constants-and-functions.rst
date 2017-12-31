@@ -223,7 +223,6 @@ Most of the following constants refer to paths in your application.
 
     Full path to the webroot.
 
-
 Timing Definition Constants
 ===========================
 
@@ -258,7 +257,6 @@ Timing Definition Constants
 .. php:const:: YEAR
 
     Equals 31536000
-
 
 .. meta::
     :title lang=en: Global Constants and Functions

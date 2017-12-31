@@ -5,7 +5,7 @@
 
 .. php:class:: Collection
 
-集合类(Collection classes)提供了一组工具来操作数组或 ``Traversable(横穿)`` 
+集合类(Collection classes)提供了一组工具来操作数组或 ``Traversable(横穿)``
 对象。如果你使用过underscore.js，你就能对 ``Traversable`` 对象所具有的功能有大致的
 了解。
 
@@ -66,14 +66,13 @@ Collection()``::
 
 .. php:method:: each(callable $c)
 
-集合可以通过 ``each()`` 和 ``map()`` 方法来转换为一个新的集合。 
+集合可以通过 ``each()`` 和 ``map()`` 方法来转换为一个新的集合。
 ``each()`` 方法不会创建一个新的集合，但是能让你修改集合中的任意对象::
 
     $collection = new Collection($items);
     $collection = $collection->each(function ($value, $key) {
         echo "Element $key: $value";
     });
-
 
 ``each()`` 的返回值是一个集合对象。Each会迅速迭代集合同时将结果回调到
 集合中的每个值上。
@@ -250,7 +249,6 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
     // $result 内容是 [1, 2, 3, 4, 5, 6, 7, 8];
     $result = $new->toList();
 
-
 .. php:method:: chunk($chunkSize)
 
 当处理集合中包含有非常多数量的项目时，把它们批量处理或许比一个个处理更好一点。你
@@ -277,7 +275,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 
 与 :php:meth:`chunk()`相似，``chunkWithKeys()`` 允许你将一个集合保留着键分割
 成更小的几部分进行处理。这在分割关联数组时十分有用::
- 
+
     $collection = new Collection([
         'a' => 1,
         'b' => 2,
@@ -299,7 +297,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 
 .. php:method:: filter(callable $c)
 
-集合能够基于回调方法简单地过滤并创建新的集合。你能用 ``filter()`` 
+集合能够基于回调方法简单地过滤并创建新的集合。你能用 ``filter()``
 创建一个符合回调标准元素构成的集合::
 
     $collection = new Collection($people);
@@ -373,7 +371,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
         return $accumulated + $orderLine->price;
     }, 0);
 
-在上面例子中， ``$totalPrice`` 将是集合中所有单价的总和。需要注意 ``reduce()`` 
+在上面例子中， ``$totalPrice`` 将是集合中所有单价的总和。需要注意 ``reduce()``
 的第二个参数将为reduce操作传递一个初期值::
 
     $allTags = $collection->reduce(function ($accumulated, $article) {
@@ -575,7 +573,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 
 .. php:method:: sortBy($callback)
 
-集合的值可以基于某一列或者一个自定义函数来升序或降序排列。使用 ``sortBy`` 
+集合的值可以基于某一列或者一个自定义函数来升序或降序排列。使用 ``sortBy``
 你可以根据集合中的某项值来生成一个排序过的::
 
     $collection = new Collection($people);
@@ -616,7 +614,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 .. warning::
 
     一次以上用迭代来对集合///////////////////////////////进行排序通常比较麻烦。如果你打算这么做，可以考虑将集合
-    转换成数组或者对它简单使用 ``compile()`` 方法。 
+    转换成数组或者对它简单使用 ``compile()`` 方法。
 
 使用树结构（Tree Data）数据
 ==============================
@@ -743,7 +741,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 
 .. php:method:: shuffle()
 
-有时你可能希望随机显示集合的值。要生成一个各个值被分配到随机位置的集合的话，可以使用 
+有时你可能希望随机显示集合的值。要生成一个各个值被分配到随机位置的集合的话，可以使用
 ``shuffle``::
 
     $collection = new Collection(['a' => 1, 'b' => 2, 'c' => 3]);
@@ -788,7 +786,6 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
     // 从集合中随机抽取最大20名用户
     $testSubjects = $collection->sample(20);
 
-
 ``sample()`` 会根据你定义的第一个参数来决定最大的抽取数。如果集合中没有足够数量的元
 素来满足样本要求，那么将返回元素被随机排列过后的整个元素本身。
 
@@ -806,7 +803,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 
 .. php:method:: skip(int $positions)
 
-像 ``take()`` 的第二个参数能够让你从集合中取值时略过一些元素，你也可以用 ``skip()`` 
+像 ``take()`` 的第二个参数能够让你从集合中取值时略过一些元素，你也可以用 ``skip()``
 来拿到某个位置之后余下的元素::
 
     $collection = new Collection([1, 2, 3, 4]);
@@ -847,7 +844,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 
     当从不同的资源处进行增加合并时，你可以预期到两个集中有一样的键的存在。举个例子，当
     你合并两个简单的数组，这种情况将会在你用 ``toArray()`` 把集合转换为数组时出现问题。
-    如果你不想要一个集合中的值因为键相同而覆盖掉另一集合中的值，你需要确保使用 ``toList()`` 
+    如果你不想要一个集合中的值因为键相同而覆盖掉另一集合中的值，你需要确保使用 ``toList()``
     来去掉它们的键而表示整个集合的值。
 
 元素的更新
@@ -954,10 +951,9 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
         // 在你的map()函数使用这些逻辑
         $collection->map(new TotalOrderCalculator)
 
-
 .. php:method:: through(callable $c)
 
-有时一个集合连锁使用一些方法也能够被重复利用，不过它们必须按照特定的顺序。在这些情况中，你可以用 ``through()`` 
+有时一个集合连锁使用一些方法也能够被重复利用，不过它们必须按照特定的顺序。在这些情况中，你可以用 ``through()``
 来与一个包含了 ``__invoke`` 的类组合以构建方便的数据调取::
 
         $collection
@@ -982,7 +978,6 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
                                ...
                 }
         }
-
 
         // 现在你能使用 through() 方法来一次性调用所有方法
         $collection->through(new FinalCheckOutRowProcessor);

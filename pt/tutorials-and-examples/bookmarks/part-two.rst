@@ -20,7 +20,6 @@ cada método exija autenticação, por isso vamos acrescentar o
 :doc:`AuthComponent</controllers/components/authentication>` em nosso
 AppController::
 
-
     // Em src/Controller/AppController.php
     namespace App\Controller;
 

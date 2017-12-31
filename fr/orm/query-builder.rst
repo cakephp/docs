@@ -801,7 +801,6 @@ Ce qui générerait le code SQL suivant::
     AND published = 1
     )
 
-
 Quand vous utilisez les objets expression, vous pouvez utiliser les méthodes
 suivantes pour créer des conditions:
 
@@ -995,7 +994,6 @@ expression::
     $query = $categories->find()
         ->where(['parent_id IS' => $parentId]);
 
-
 Ce qui précède va créer ``parent_id` = :c1`` ou ``parent_id IS NULL`` selon le
 type de ``$parentId``.
 
@@ -1008,7 +1006,6 @@ expression::
 
     $query = $categories->find()
         ->where(['parent_id IS NOT' => $parentId]);
-
 
 Ce qui précède va créer ``parent_id` != :c1`` ou ``parent_id IS NOT NULL``
 selon le type de ``$parentId``.

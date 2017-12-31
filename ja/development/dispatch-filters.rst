@@ -34,7 +34,6 @@ CakePHP はきれいなディスパッチサイクルに使う強固なフィル
 * ``LocaleSelector`` はブラウザーによって送られる ``Accept-Language`` ヘッダーによって
   自動的に言語を切り替えます。
 
-
 フィルターの使用
 ================
 
@@ -145,7 +144,7 @@ CakePHP はきれいなディスパッチサイクルに使う強固なフィル
 
 .. note::
 
-    beforeDispatch メソッドがレスポンスを返した時に、コントローラーと afterDispatch 
+    beforeDispatch メソッドがレスポンスを返した時に、コントローラーと afterDispatch
     イベントは呼ばれません。
 
 次は、何らかの公開ページにおいて代替のレスポンスヘッダーを返すための
@@ -171,7 +170,6 @@ CakePHP はきれいなディスパッチサイクルに使う強固なフィル
             }
         }
     }
-
 
     // bootstrap.php　にて
     DispatcherFactory::add('HttpCache', ['for' => '/pages'])

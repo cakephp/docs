@@ -15,7 +15,6 @@ Additional Reading
 * :doc:`/controllers/components`
 * :doc:`/views/helpers`
 
-
 .. meta::
     :title lang=tr: Events system
     :keywords lang=tr: events, dispatch, decoupling, cakephp, callbacks, triggers, hooks, php

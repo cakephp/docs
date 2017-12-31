@@ -47,7 +47,6 @@ Asegúrate de que las carpetas *tmp* y *logs* existen y permiten escritura, en
 caso contrario el rendimiento de tu aplicación se verá gravemente perjudicado.
 En modo debug, CakePHP te avisará si este no es el caso.
 
-
 La carpeta src
 ==============
 
@@ -68,7 +67,6 @@ View
 Template
     Los archivos de presentación se almacenan aquí: elementos, páginas de error,
     layouts, y templates.
-
 
 .. meta::
     :title lang=es: CakePHP Structura de Carpetas

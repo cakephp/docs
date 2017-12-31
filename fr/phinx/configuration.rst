@@ -78,7 +78,6 @@ You can also provide multiple migration paths by using an array in your configur
             - application/module1/migrations
             - application/module2/migrations
 
-
 You can also use the ``%%PHINX_CONFIG_DIR%%`` token in your path.
 
 .. code-block:: yaml
@@ -133,7 +132,6 @@ You can also provide multiple seed paths by using an array in your configuration
             - /your/full/path1
             - /your/full/path2
 
-
 You can also use the ``%%PHINX_CONFIG_DIR%%`` token in your path.
 
 .. code-block:: yaml
@@ -177,7 +175,6 @@ file:
 
     export PHINX_ENVIRONMENT=dev-`whoami`-`hostname`
 
-
 Table Prefix and Suffix
 -----------------------
 
@@ -194,7 +191,6 @@ You can define a table prefix and table suffix:
             ....
             table_prefix: test_
             table_suffix: _v2
-
 
 Socket Connections
 ------------------
@@ -305,7 +301,7 @@ The aliased classes will still be required to implement the ``Phinx\Migration\Cr
 Version Order
 -------------
 
-When rolling back or printing the status of migrations, Phinx orders the executed migrations according to the 
+When rolling back or printing the status of migrations, Phinx orders the executed migrations according to the
 ``version_order`` option, which can have the following values:
 
 * ``creation`` (the default): migrations are ordered by their creation time, which is also part of their filename.

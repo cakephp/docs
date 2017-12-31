@@ -383,7 +383,6 @@ de réponse.
     `PSR-7 ResponseInterface
     <http://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface>`__.
 
-
 Lire des Corps des Réponses
 ---------------------------
 

@@ -50,7 +50,6 @@ Migrations
 
 ここにマイグレーションの例があります。 ::
 
-
     <?php
     use Migrations\AbstractMigration;
 
@@ -324,7 +323,6 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
                   ->update();
         }
     }
-
 
 フィールド長を指定
 ------------------

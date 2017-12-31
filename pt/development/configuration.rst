@@ -29,11 +29,11 @@ cada um dos arquivos no seu **config/** diretório, você pode carregá-los em *
 
     use Cake\Core\Configure;
     use Cake\Core\Configure\Engine\PhpConfig;
-    
+
     Configure::config('default', new PhpConfig());
     Configure::load('app', 'default', false);
     Configure::load('other_config', 'default');
-    
+
 Você também pode usar arquivos de configuração adicionais para fornecer sobreposições específicas do ambiente. Cada arquivo
 carregado após **app.php** pode redefinir valores previamente declarados permitindo que você personalize a configuração para
 ambientes de desenvolvimento ou de homologação.
@@ -48,12 +48,12 @@ debug
     ``true`` = Modo de Desenvolvimento. É exibido todas as mensagens de erros e/ou avisos.
 App.namespace
     O namespace em que as classes do aplicativo estão.
-    
+
     .. note::
-    
+
         Ao alterar o namespace em sua configuração, você também precisará atualizar o arquivo ** composer.json ** para usar
         esse namespace também. Além disso, crie um novo carregador automático executando ``php composer.phar dumpautoload``.
-        
+
 .. _core-configuration-baseurl:
 
 App.baseUrl
@@ -95,11 +95,11 @@ Asset.timestamp
     Acrescenta um carimbo de data/hora que é a última hora modificada do arquivo específico no final dos URLs de arquivos de
     recurso (CSS, JavaScript, Image) ao usar assistentes adequados.
     Valores válidos:
-    
+
     - (bool) ``false`` - Não fazer nada (padrão)
     - (bool) ``true`` - Acrescenta o carimbo de data/hora quando depuração é ``true``
     - (string) 'force' - Sempre anexa o carimbo de data/hora.
-    
+
 Configuração do banco de dados
 ------------------------------
 
@@ -125,7 +125,7 @@ Consulte :ref:`log-configuration` para obter informações sobre como configurar
 Configuração de e-mail
 ----------------------
 
-Consulte :ref:`Email Configuration <email-configuration>` para obter informações sobre como configurar predefinições de 
+Consulte :ref:`Email Configuration <email-configuration>` para obter informações sobre como configurar predefinições de
 e-mail no CakePHP.
 
 Configuração de sessão
@@ -136,7 +136,7 @@ Consulte :ref:`session-configuration` para obter informações sobre como config
 Configuração de roteamento
 --------------------------
 
-Consulte :ref:`Routes Configuration <routes-configuration>` para obter mais informações sobre como configurar o roteamento 
+Consulte :ref:`Routes Configuration <routes-configuration>` para obter mais informações sobre como configurar o roteamento
 e criar rotas para seu aplicativo.
 
 .. _additional-class-paths:
@@ -154,7 +154,7 @@ controladores em seu aplicativo::
             "App\": "src"
         }
     }
-    
+
 O código acima seria configurar caminhos para o namespace ``App`` e ``App\Controller``. A primeira chave será pesquisada e,
 se esse caminho não contiver a classe/arquivo, a segunda chave será pesquisada. Você também pode mapear um namespace único
 para vários diretórios com o seguinte código::
@@ -164,7 +164,7 @@ para vários diretórios com o seguinte código::
             "App\": ["src", "/path/to/directory"]
         }
     }
-    
+
 Plugin, Modelos de Visualização e Caminhos Locais
 -------------------------------------------------
 
@@ -190,7 +190,7 @@ recursos. No **config/app.php** você pode definir estas variáveis ::
             ]
         ]
     ];
-    
+
 Caminhos devem terminar com um separador de diretório, ou eles não funcionarão corretamente.
 
 Configuração de Inflexão
@@ -224,18 +224,18 @@ Use ``write()`` para armazenar dados na configuração do aplicativo::
 
     Configure::write('Company.name', 'Pizza, Inc.');
     Configure::write('Company.slogan','Pizza for your body and soul');
-    
+
 .. note::
 
     O :term:`dot notation` usado no parâmetro ``$key`` pode ser usado para organizar suas configurações em grupos lógicos.
-    
+
 O exemplo acima também pode ser escrito em uma única chamada::
 
     Configure::write('Company', [
         'name' => 'Pizza, Inc.',
         'slogan' => 'Pizza for your body and soul'
     ]);
-    
+
 Você pode usar ``Configure::write('debug', $bool)`` para alternar entre os modos de depuração e produção na mosca. Isso é
 especialmente útil para interações JSON onde informações de depuração podem causar problemas de análise.
 
@@ -255,7 +255,7 @@ uma chave, os dados são retornados. Usando nossos exemplos de write() acima, po
 
     //Rendimentos:
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
-    
+
 Se $key for deixada nula, todos os valores em Configure serão retornados.
 
 .. php:staticmethod:: readOrFail($key)
@@ -273,7 +273,7 @@ solicitado não exista, a :php:class:`RuntimeException` será lançada::
 
 .. versionadded:: 3.1.7
     ``Configure::readOrFail()`` Foi adicionado na versão 3.1.7
-    
+
 Verificar se os dados de configuração estão definidos
 -----------------------------------------------------
 
@@ -282,7 +282,7 @@ Verificar se os dados de configuração estão definidos
 Usado para verificar se uma chave/caminho existe e tem valor não nulo::
 
     $exists = Configure::check('Company.name');
-    
+
 Excluindo Dados de Configuração
 -------------------------------
 
@@ -291,7 +291,7 @@ Excluindo Dados de Configuração
 Usado para excluir informações da configuração da aplicação::
 
     Configure::delete('Company.name');
-    
+
 Leitura e exclusão de dados de configuração
 -------------------------------------------
 
@@ -299,8 +299,6 @@ Leitura e exclusão de dados de configuração
 
 Ler e excluir uma chave do Configure. Isso é útil quando você deseja combinar leitura e exclusão de valores em uma única
 operação.
-
-
 
 Lendo e escreveendo arquivos de configuração
 ============================================
@@ -322,7 +320,7 @@ ini. Para usar um mecanismo de configuração do núcleo, você precisará conec
 
     // Ler arquivos de configuração de outro diretório.
     Configure::config('default', new PhpConfig('/path/to/your/config/files/'));
-    
+
 Você pode ter vários mecanismos anexados para Configure, cada um lendo diferentes tipos ou fontes de arquivos de
 configuração. Você pode interagir com os motores conectados usando alguns outros métodos em Configure. Para verificar quais
 aliases de motor estão conectados você pode usar :php:meth:`Configure::configured()`::
@@ -352,7 +350,7 @@ configuração::
 
     // Load my_file.php using the 'default' engine object.
     Configure::load('my_file', 'default');
-    
+
 Os arquivos de configuração que foram carregados mesclam seus dados com a configuração de tempo de execução existente no
 Configure. Isso permite que você sobrescreva e adicione novos valores à configuração de tempo de execução existente. Ao
 definir ``$merge`` para ``true``, os valores nunca substituirão a configuração existente.
@@ -370,14 +368,13 @@ PHP carregável pelo :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig`
 Dado que o motor 'default' é uma instância do PhpConfig. Salve todos os dados em Configure no arquivo `my_config.php`::
 
     Configure::dump('my_config', 'default');
-    
+
 Salvar somente a configuração de manipulação de erro::
 
     Configure::dump('error', 'default', ['Error', 'Exception']);
-    
+
 ``Configure::dump()`` pode ser usado para modificar ou substituir arquivos de configuração que são legíveis com
 :php:meth:`Configure::load()`
-
 
 Armazenando Configuração do Tempo de Execução
 ---------------------------------------------
@@ -390,8 +387,8 @@ quiser usá-la em solicitações futuras::
 
     // Armazena a configuração atual na chave 'user_1234' no cache 'default'.
     Configure::store('user_1234', 'default');
-    
-Os dados de configuração armazenados são mantidos na configuração de cache nomeada. Consulte a documentação 
+
+Os dados de configuração armazenados são mantidos na configuração de cache nomeada. Consulte a documentação
 :doc:`/core-libraries/caching` para obter mais informações sobre o cache.
 
 Restaurando a Configuração do Tempo de Execução
@@ -404,7 +401,7 @@ acessá-la novamente. ``Configure::restore()``  faz exatamente isso::
 
     // Restaura a configuração do tempo de execução do cache.
     Configure::restore('user_1234', 'default');
-    
+
 Ao restaurar informações de configuração, é importante restaurá-lo com a mesma chave e configuração de cache usada para
 armazená-lo. As informações restauradas são mescladas em cima da configuração de tempo de execução existente.
 
@@ -445,7 +442,7 @@ aplicação::
             // Code to dump data to file
         }
     }
-    
+
 No seu **config/bootstrap.php** você poderia anexar este mecanismo e usá-lo::
 
     use App\Configure\Engine\XmlConfig;
@@ -454,7 +451,7 @@ No seu **config/bootstrap.php** você poderia anexar este mecanismo e usá-lo::
     ...
 
     Configure::load('my_xml', 'xml');
-    
+
 O método ``read()`` de um mecanismo de configuração, deve retornar uma matriz das informações de configuração que o recurso
 chamado ``$key`` contém.
 
@@ -463,11 +460,11 @@ chamado ``$key`` contém.
 .. php:interface:: ConfigEngineInterface
 
     Define a interface usada pelas classes que lêem dados de configuração e armazenam-no em :php:class:`Configure`
-    
+
 .. php:method:: read($key)
 
     :param string $key: O nome da chave ou identificador a carregar.
-    
+
     Esse método deve carregar/analisar os dados de configuração identificados pelo ``$key`` e retornar uma matriz de dados
     no arquivo.
 
@@ -475,7 +472,7 @@ chamado ``$key`` contém.
 
     :param string $key: O identificador para escrever.
     :param array $data: Os dados para despejo.
-    
+
     Esse método deve despejar/armazenar os dados de configuração fornecidos para uma chave identificada pelo ``$key``.
 
 Motores de Configuração Integrados
@@ -550,7 +547,6 @@ Um exemplo de arquivo JSON seria semelhante a::
         }
     }
 
-
 Bootstrapping CakePHP
 =====================
 
@@ -570,7 +566,6 @@ Pode ser tentador para colocar as funções de formatação lá, a fim de usá-l
 seções :doc:`/controllers` e :doc:`/views` há melhores maneiras de adicionar lógica personalizada à sua aplicação.
 
 .. _application-bootstrap:
-
 
 Application::bootstrap()
 ------------------------

@@ -20,7 +20,7 @@ Objetos Schema\\TableSchema
 .. php:class:: TableSchema
 
 O subsistema de schema oferece um simples objeto TableSchema para guardar dados
-sobre uma tabela do banco de dados. Este objeto é retornado pelos recursos de 
+sobre uma tabela do banco de dados. Este objeto é retornado pelos recursos de
 reflexão de schema::
 
     use Cake\Database\Schema\TableSchema;
@@ -71,7 +71,6 @@ método  `column()` ou `columns()`::
     // Obtem uma lista com todas as colunas.
     $cols = $schema->columns();
 
-
 Índices e Restrições
 --------------------
 
@@ -111,7 +110,7 @@ tentar misturar tipos entre os métodos. Um exemplo de ambos os métodos é::
       'delete' => 'cascade'
     ]);
 
-Se você adicionar uma restrição de chave primária para uma coluna do tipo integer, ela 
+Se você adicionar uma restrição de chave primária para uma coluna do tipo integer, ela
 será automaticamente convertida em uma coluna auto-increment/serial dependendo da
 plataforma de banco de dados::
 
@@ -169,7 +168,6 @@ fazer o seguinte::
     // Obter dados sobre um índice
     $index = $schema->index('author_id_idx')
 
-
 Adicionando Opções de Tabela
 ----------------------------
 
@@ -211,14 +209,13 @@ lista de consultas SQL requeridas para criar uma tabela e os indices.
 Algumas plataformas podem requerer várias declaraçes para criar tabelas com
 comentários e/ou índices. Um array de consultas SQL é sempre retornado.
 
-
 Schema Collections
 ==================
 
 .. php:class:: Collection
 
 ``Collection`` fornece acesso as várias tabelas disponíveis numa conexão.
-Você pode usar isto para obter a lista de tabelas ou refletir tabelas em 
+Você pode usar isto para obter a lista de tabelas ou refletir tabelas em
 objetos :php:class:`TableSchema`. O uso básico da classe parece com::
 
     $db = ConnectionManager::get('default');

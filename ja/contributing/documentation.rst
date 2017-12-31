@@ -78,7 +78,6 @@ IRC (#cakephp on freenode) で、参加したい旨を連絡してください�
         :title lang=xx: File Title
         :keywords lang=xx: title, description,...
 
-
 翻訳者tips
 ---------------
 
@@ -309,7 +308,6 @@ CakePHP のドキュメントは `phpdomain
 
            メソッドの説明
 
-
    属性、メソッド、定数はネストする必要はありません。
    これらは単にクラス定義の後につけることができます。 ::
 
@@ -320,7 +318,6 @@ CakePHP のドキュメントは `phpdomain
         .. php:method:: methodName()
 
             メソッドについての文
-
 
    .. seealso:: :rst:dir:`php:method`, :rst:dir:`php:attr`, :rst:dir:`php:const`
 
@@ -405,7 +402,6 @@ Sphinx は関数が複数のファイルから参照されていると警告を�
 
    例外を参照します。
 
-
 ソースコード
 ------------
 
@@ -421,7 +417,6 @@ Sphinx は関数が複数のファイルから参照されていると警告を�
     これは普通のテキストの再開です。
 
 リテラルテキストは変更やフォーマットがされず、1レベル分のインデントが削除されたものが残ります。
-
 
 注意と警告
 ----------
@@ -474,7 +469,6 @@ sphinx の勧告 (*Admonitions*) は、まさにそのために使われます�
 .. deprecated:: 2.6.3
 
     この古い機能はバージョン 2.6.3 で撤廃されます。
-
 
 .. meta::
     :title lang=ja: ドキュメンテーション

@@ -5,7 +5,6 @@
 プロジェクトを 3.0 に移行するのに役立つ CakePHP 2.x からの変更をまとめました。
 すべての新機能と API の変更については、このガイドの他のページを必ずお読みください。
 
-
 必要条件
 ========
 
@@ -90,7 +89,6 @@ CakePHP 3.0 は、ゼロから再構築された新しい ORM を提供してい
 対象となるすべてのアプリケーションで大幅な変更が必要になります。
 新しい ORM の使用方法については、新しい :doc:`/orm` ドキュメントをご覧ください。
 
-
 基本原則
 ========
 
@@ -139,7 +137,6 @@ CakePHP 3.0 は、ゼロから再構築された新しい ORM を提供してい
 有効期限は、キャッシュエンジンの実行時に config() から取得できます。
 空のキーでキャッシュメソッドを呼び出すと ``false`` を返す代わりに
 :php:class:`InvalidArgumentException` が投げられるようになりました。
-
 
 コア
 ====
@@ -253,7 +250,7 @@ SchemaShell を削除
 のようなより良いツールの登場により、SchemaShell は削除されました。
 これは、CakePHP と `Phinx <https://phinx.org/>`__ の間のラッパーとして機能する
 `CakePHP Migrations プラグイン <https://github.com/cakephp/migrations>`_
-に置き換えられました。 
+に置き換えられました。
 
 ExtractTask
 -----------
@@ -340,7 +337,6 @@ JavaScript ライブラリーを必要としました。 名前付きパラー�
 URL を解析する必要があります。 :php:meth:`Cake\\Routing\\Router::parseNamedParams()`
 は、既存の URL との下位互換性を可能にするために追加されました。
 
-
 RequestActionTrait
 ------------------
 
@@ -400,7 +396,6 @@ Route
 アプリケーションが ``Dispatcher.filters`` を使用していた場合、代わりに
 :php:meth:`Cake\\Routing\\DispatcherFactory::add()` を使用する必要があります。
 
-
 設定方法の変更に加えて、ディスパッチャーフィルターは、いくつかの規則が更新され、機能が追加されました。
 詳細については、:php:meth:`Cake\\Routing\\DispatcherFactory::add()`
 のドキュメントを参照してください。
@@ -414,7 +409,6 @@ Filter\AssetFilter
   多くの問題が修正されています。
 * ``Asset.filter`` 設定とフックのサポートは削除されました。
   この機能は、プラグインやディスパッチャーフィルターに置き換える必要があります。
-
 
 ネットワーク
 ============
@@ -462,7 +456,7 @@ Filter\AssetFilter
 * ``Session::$requestCountdown`` プロパティーは削除されました。
 * セッションの checkAgent 機能が削除されました。その機能は、 chrome のフレームや
   flash player が関与するとき、多くのバグを引き起こしました。
-* セッション用データベーステーブル名は ``cake_sessions`` の代わりに 
+* セッション用データベーステーブル名は ``cake_sessions`` の代わりに
   ``sessions`` になります。
 * セッションクッキーのタイムアウトは、自動的にセッションデータのタイムアウトと並行して更新されます。
 * セッションクッキーのパスは、"/" の代わりにアプリのベースパスがデフォルトになります。
@@ -496,7 +490,6 @@ Network\\Email
   トランスポートオプションを削除して、Eメールプロファイルをまたがって再利用することができます。
 * :php:meth:`Cake\\Network\\Email\\Email::dropTransport()` は、トランスポート設定を
   削除できるようにするために追加されました。
-
 
 コントローラー
 ==============
@@ -594,7 +587,6 @@ CookieComponent
   これらの両方は、設定データを介して管理されています。詳細は
   :doc:`/controllers/components/cookie` をご覧ください。
 - クッキーのパスは、"/" の代わりにアプリケーションのベースパスがデフォルトです。
-
 
 AuthComponent
 -------------
@@ -739,7 +731,7 @@ TestSuite
 TestCase
 --------
 
-- ``_normalizePath()`` が追加されました。パスの比較をテストすることができ、DS 設定 
+- ``_normalizePath()`` が追加されました。パスの比較をテストすることができ、DS 設定
   (例えば、Windows の ``\`` や UNIX の ``/``) に関しては、
   すべてのオペレーティングシステムで実行できます。
 
@@ -770,7 +762,6 @@ TestCase
 以下のアサーションメソッドが追加されました。
 
 - ``assertWithinRange()`` の逆として ``assertNotWithinRange()``
-
 
 ビュー
 ======
@@ -838,7 +829,7 @@ View クラス
   実行時にヘルパーをロードする必要がある場合は、あなたのビューファイルに
   ``$this->addHelper()`` を使用する必要があります。
 - ``View`` は、テンプレートが存在しない時に ``MissingViewException`` の代わりに
-  ``Cake\View\Exception\MissingTemplateException`` を発生させます。 
+  ``Cake\View\Exception\MissingTemplateException`` を発生させます。
 
 ViewBlock
 ---------
@@ -886,7 +877,6 @@ View\\Helper
   - data
   - action
   - params
-
 
 Helper
 ------
@@ -1061,7 +1051,6 @@ SessionHelper
   ``$this->request->session()`` を直接使用してください。
   フラッシュメッセージ機能は代わりに :doc:`/views/helpers/flash` に移動されました。
 
-
 JsHelper
 --------
 
@@ -1087,7 +1076,7 @@ I18n
 ====
 
 国際化サブシステムは完全に書き直されました。一般的に、 ``__()`` 関数ファミリーを
-使用している場合は、確実に前のバージョンと同じ振る舞いを期待できます。 
+使用している場合は、確実に前のバージョンと同じ振る舞いを期待できます。
 
 内部的には、 ``I18n`` クラスは ``Aura\Intl`` を使用し、適切なメソッドは、
 このライブラリーの特定の機能にアクセスするために用意されています。
@@ -1149,7 +1138,6 @@ L10n
 
 - :php:class:`Cake\\I18n\\L10n` のコンストラクターは
   :php:class:`Cake\\Network\\Request` インスタンスを引数として受け取ります。
-
 
 テスト
 =======
@@ -1247,7 +1235,7 @@ Security
   blowfish ハッシュの生成と検証をするためには、PHP の `password_hash()` と
   `password_verify()` を使用する必要があります。
   CakePHP と一緒にインストールされる互換ライブラリー `ircmaxell/password-compat
-  <https://packagist.org/packages/ircmaxell/password-compat>`_ は、 
+  <https://packagist.org/packages/ircmaxell/password-compat>`_ は、
   PHP < 5.5 のためにこれらの機能を提供します。
 - データの暗号化/復号化する場合、OpenSSL は mcrypt より優先的に使用されます。
   この変更は、パフォーマンスが向上し、mcrypt のためのサポートを終了することで、

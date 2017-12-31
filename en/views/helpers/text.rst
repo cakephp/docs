@@ -56,7 +56,6 @@ are linked appropriately given the supplied ``$options``.
 This method automatically escapes its input. Use the ``escape``
 option to disable this if necessary.
 
-
 Converting Text into Paragraphs
 ===============================
 

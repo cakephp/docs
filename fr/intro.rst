@@ -82,7 +82,6 @@ d'autres l'utilisent::
         </li>
     <?php endforeach; ?>
 
-
 La couche View fournit un certain nombre d'extensions tels que les
 :ref:`Templates <view-templates>`, les :ref:`Elements <view-elements>` et les
 :doc:`Cells </views/cells>` pour vous permettre de réutiliser votre logique de
@@ -162,7 +161,6 @@ chaque requête passe par les étapes suivantes:
 #. La réponse est de nouveau envoyée à travers le
    :doc:`/controllers/middleware`.
 #. ``HttpServer`` émet la réponse au serveur web.
-
 
 Que le Début
 ============

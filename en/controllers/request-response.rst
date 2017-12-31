@@ -76,7 +76,7 @@ Query string parameters can be read using the ``getQuery()`` method::
     // URL is /posts/index?page=1&sort=title
     $page = $this->request->getQuery('page');
 
-    // Prior to 3.4.0 
+    // Prior to 3.4.0
     $page = $this->request->query('page');
 
 You can either directly access the query property, or you can use
@@ -292,7 +292,6 @@ There are several built-in detectors that you can use:
 .. versionadded:: 3.3.0
     Detectors can take additional parameters as of 3.3.0.
 
-
 Session Data
 ------------
 
@@ -431,7 +430,6 @@ Get the list of accepted languages::
 Check whether a specific language is accepted::
 
     $acceptsSpanish = $this->request->acceptLanguage('es-es');
-
 
 .. _request-cookies:
 
@@ -707,7 +705,7 @@ that::
         // Disable caching
         $this->response = $this->response->withDisabledCache();
 
-        // Prior to 3.4.0 
+        // Prior to 3.4.0
         $this->response->disableCache();
     }
 
@@ -853,7 +851,6 @@ Also, under the HTTP cache validation model, you can set the ``Last-Modified``
 header to indicate the date and time at which the resource was modified for the
 last time. Setting this header helps CakePHP tell caching clients whether the
 response was modified or not based on their cache.
-
 
 To take advantage of this header, you must either call the
 ``checkNotModified()`` method manually or include the

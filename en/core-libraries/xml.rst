@@ -8,7 +8,6 @@ Xml
 The Xml class allows you to transform arrays into SimpleXMLElement or
 DOMDocument objects, and back into arrays again.
 
-
 Importing Data to Xml Class
 ===========================
 
@@ -59,7 +58,6 @@ If your input is invalid, the Xml class will throw an exception::
     `SimpleXML <http://php.net/simplexml>`_ implement different API's.
     Be sure to use the correct methods on the object you request from Xml.
 
-
 Transforming a XML String in Array
 ==================================
 
@@ -98,7 +96,6 @@ Examples of invalid arrays::
         'key2' => 'other value'
     ];
 
-
 By default array values will be output as XML tags. If you want to define
 attributes or text values you can prefix the keys that are supposed to be
 attributes with ``@``. For value text, use ``@`` as the key::
@@ -117,7 +114,6 @@ The content of ``$xmlString`` will be::
 
     <?xml version="1.0"?>
     <project id="1">Value of project<name>Name of project, as tag</name></project>
-
 
 Using Namespaces
 ----------------
@@ -151,7 +147,6 @@ The value of ``$xml1`` and ``$xml2`` will be, respectively::
 
     <?xml version="1.0"?>
     <root xmlns="https://cakephp.org"><child>value</child>
-
 
     <?xml version="1.0"?>
     <root><tag xmlns:pref="https://cakephp.org"><pref:item>item 1</pref:item><pref:item>item 2</pref:item></tag></root>

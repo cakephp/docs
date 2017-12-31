@@ -251,7 +251,6 @@ Now let's create the view for our new 'view' action and place it in
     <p><?= h($article->body) ?></p>
     <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
 
-
 Verify that this is working by trying the links at ``/articles/index`` or
 manually requesting an article by accessing ``/articles/view/{id}``, replacing
 ``{id}`` by an article 'id'.
@@ -697,7 +696,6 @@ These are common tasks people learning CakePHP usually want to study next:
 3. :doc:`/bake/usage`: Generating basic CRUD code
 4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: User authentication
    and authorization tutorial
-
 
 .. meta::
     :title lang=en: Blog Tutorial Adding a Layer

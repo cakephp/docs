@@ -1094,7 +1094,6 @@ In addition to the default routes, this would also connect a route for
 can use the 'path' key inside the resource definition to customize the path
 name::
 
-
     $routes->resources('Articles', [
         'map' => [
             'updateAll' => [

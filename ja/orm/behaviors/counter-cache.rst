@@ -95,7 +95,6 @@ CounterCache で複数のフィールドを更新する場合（条件付きカ�
         ]
     ]);
 
-
 .. note::
 
     CounterCache ビヘイビアーは、 ``belongsTo`` アソシエーションに対してのみ機能します。

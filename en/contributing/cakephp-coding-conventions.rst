@@ -158,7 +158,6 @@ the condition check of the ternary for clarity::
     // Nested ternaries are bad
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
-
 Template Files
 --------------
 
@@ -176,7 +175,6 @@ tags::
     <?php if ($isAdmin): ?>
         <p>You are the admin user.</p>
     <?php endif; ?>
-
 
 Comparison
 ==========
@@ -223,7 +221,7 @@ Example of a method definition::
         if (expr) {
             statement;
         }
-        
+
         return $var;
     }
 
@@ -242,7 +240,7 @@ it can be determined whether the function call was successful::
         if (!($dnsInfo) || !($dnsInfo['phpType'])) {
             return $this->addError();
         }
-        
+
         return true;
     }
 

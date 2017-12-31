@@ -5,7 +5,7 @@ CakePHP 的设计是为了让共通的网络开发变得更加轻松，简单。
 您很好地整体或者单独地使用它。
 
 这篇概要的目的是介绍CakePHP的一般概念，并且为您介绍这些概念是如何在CakePHP中得到实现
-的。如果你急于开始一个项目，你可以 :doc:`开始教程 
+的。如果你急于开始一个项目，你可以 :doc:`开始教程
 </tutorials-and-examples/bookmarks/intro>`, 或者 :doc:`直接参考文档</topics>`.
 
 规约来替代设定
@@ -15,7 +15,6 @@ CakePHP提供的基本构造包括class名，文件名，数据库table名。尽
 学习，遵从这些CakePHP为您提供的规约可以让您避免不必要的设定并且拥有一个使各种项目都能
 简单使用的应用结构。在 :doc:`规约章节
 </intro/conventions>` 囊括了CakePHP需要的各种规约.
-
 
 模型（Model）层
 ===============
@@ -130,7 +129,6 @@ CakePHP请求周期
 * 强力的 :doc:`代码生成工具
   </bake/usage>` 让你可以迅速地开始
 * :doc:`结合测试框架 </development/testing>` 可以让你确保你的代码完美运行
-
 
 下一步明显要做的是 :doc:`下载 CakePHP </installation>`, 阅读
 :doc:`教程并且制作些很棒的东西

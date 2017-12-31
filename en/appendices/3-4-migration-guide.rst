@@ -122,7 +122,7 @@ Other Deprecations
 * ``FormHelper::input()`` is deprecated. Use ``FormHelper::control()`` instead.
 * ``FormHelper::inputs()`` is deprecated. Use ``FormHelper::controls()`` instead.
 * ``FormHelper::allInputs()`` is deprecated. Use ``FormHelper::allControls()`` instead.
-* ``Mailer::layout()`` is deprecated. Use ``Mailer::setLayout()`` provided by 
+* ``Mailer::layout()`` is deprecated. Use ``Mailer::setLayout()`` provided by
   ``Mailer::__call()`` instead.
 
 Deprecated Combined Get/Set Methods
@@ -370,7 +370,6 @@ your ``use`` statement to look like::
     use MailerAwareTrait {
         getMailer as public;
     }
-
 
 Collection
 ==========

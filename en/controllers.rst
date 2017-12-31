@@ -359,7 +359,6 @@ view template that will be rendered and forward execution to the named action::
     // list page.
     $this->setAction('index');
 
-
 Loading Additional Models
 =========================
 
@@ -525,8 +524,6 @@ for best results::
         parent::beforeFilter($event);
     }
 
-
-
 More on Controllers
 ===================
 
@@ -535,7 +532,6 @@ More on Controllers
 
     controllers/pages-controller
     controllers/components
-
 
 .. meta::
     :title lang=en: Controllers

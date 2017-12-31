@@ -25,7 +25,6 @@ General Information
     appendices/cakephp-development-process
     appendices/glossary
 
-
 .. meta::
     :title lang=tr: Appendices
     :keywords lang=tr: migration guide,migration path,new features,glossary

@@ -108,12 +108,11 @@ CakePHP 开发人员将使用下面的编码规范。
     //嵌套的三元运算不好
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
-
 视图文件
 --------
 
 在视图文件(.ctp files)中，开发人员使用关键词控制结构。关键词控制结构在复杂的视图
-文件中更容易阅读。控制结构可以放在一段大的 PHP 代码段落中，也可以放在单独的 PHP 
+文件中更容易阅读。控制结构可以放在一段大的 PHP 代码段落中，也可以放在单独的 PHP
 标签中::
 
     <?php
@@ -125,7 +124,6 @@ CakePHP 开发人员将使用下面的编码规范。
     <?php if ($isAdmin): ?>
         <p>You are the admin user.</p>
     <?php endif; ?>
-
 
 比较
 ==========
@@ -470,7 +468,6 @@ PHP 标签
 如果常量名称由多个单词组成的，则应当用下划线分隔，例如::
 
     define('LONG_NAMED_CONSTANT', 2);
-
 
 .. meta::
     :title lang=zh: Coding Standards

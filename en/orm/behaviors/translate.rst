@@ -317,7 +317,7 @@ to call locale on each table for example::
 This example also assumes that ``Categories`` has the TranslateBehavior attached
 to it.
 
-Querying Translated Fields 
+Querying Translated Fields
 --------------------------
 
 TranslateBehavior does not substitute find conditions by default. You need to use

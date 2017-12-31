@@ -36,7 +36,6 @@ Glossary
                 ]
             ]
 
-
     DRY
         Don't repeat yourself. Is a principle of software development aimed at
         reducing repetition of information of all kinds. In CakePHP DRY is used
@@ -65,7 +64,6 @@ Glossary
             // Would generate
             checked="checked"
 
-
     PaaS
         Platform as a Service. Platform as a Service providers will provide
         cloud based hosting, database and caching resources. Some popular
@@ -84,7 +82,6 @@ Glossary
             // The plugin is "AcmeCorp/Tools", and the class name is "Toolbar".
             'AcmeCorp/Tools.Toolbar'
 
-
     routes.php
         A file in ``config`` directory that contains routing configuration.
         This file is included before each request is processed.
@@ -96,7 +93,6 @@ Glossary
         They typically look like::
 
             ['controller' => 'Posts', 'action' => 'view', 5]
-
 
 .. meta::
     :title lang=en: Glossary

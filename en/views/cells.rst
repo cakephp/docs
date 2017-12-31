@@ -206,7 +206,6 @@ name will be used.
     self-contained and only has access to variables passed as arguments to the
     ``View::cell()`` call.
 
-
 Paginating Data inside a Cell
 =============================
 
@@ -240,10 +239,10 @@ messages could look like::
                     'scope' => 'favorites',
                 ]
             );
-            
+
             $paging = $paginator->getPagingParams() + (array)$request->getParam('paging');
             $this->request = $this->request->withParam('paging', $paging));
-        
+
             $this->set('favorites', $results);
         }
     }

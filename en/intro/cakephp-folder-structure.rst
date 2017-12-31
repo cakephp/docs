@@ -50,7 +50,6 @@ Template
     Presentational files are placed here: elements, error pages,
     layouts, and view template files.
 
-
 .. meta::
     :title lang=en: CakePHP Folder Structure
     :keywords lang=en: internal libraries,core configuration,model descriptions,external vendors,connection details,folder structure,party libraries,personal commitment,database connection,internationalization,configuration files,folders,application development,readme,lib,configured,logs,config,third party,cakephp

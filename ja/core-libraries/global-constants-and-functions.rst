@@ -193,7 +193,7 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 
 .. php:const:: DS
 
-    PHP の ``DIRECTORY_SEPARATOR`` (Linux の場合は ``/`` Windows の場合は ``\``) 
+    PHP の ``DIRECTORY_SEPARATOR`` (Linux の場合は ``/`` Windows の場合は ``\``)
     のショートカット。
 
 .. php:const:: LOGS
@@ -215,7 +215,6 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 .. php:const:: WWW\_ROOT
 
     ウェブルートへのフルパス。
-
 
 時間定義定数
 ============
@@ -251,7 +250,6 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 .. php:const:: YEAR
 
     31536000 と等しい
-
 
 .. meta::
     :title lang=ja: Global Constants and Functions

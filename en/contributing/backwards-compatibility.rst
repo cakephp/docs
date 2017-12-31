@@ -164,7 +164,6 @@ In a minor release you can:
 | Change method type void       | Yes                      |
 +-------------------------------+--------------------------+
 
-
 .. [1] Your code *may* be broken by minor releases. Check the migration guide
        for details.
 .. [2] You can change a class/method name as long as the old name remains

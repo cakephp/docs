@@ -272,7 +272,6 @@ post 形式でデータを交換することがしばしばあります。 :php:
 .. versionadded:: 3.3.0
     3.3.0 から検出器は追加のパラメーターが受け取れます。
 
-
 セッションデータ
 ----------------
 
@@ -297,7 +296,7 @@ post 形式でデータを交換することがしばしばあります。 :php:
 
 アプリケーションが実行されているサブドメインを配列で返します。 ::
 
-    // 'my.dev.example.org' の場合、 ['my', 'dev'] を返す 
+    // 'my.dev.example.org' の場合、 ['my', 'dev'] を返す
     $subdomains = $request->subdomains();
 
 .. php:method:: host()
@@ -409,7 +408,6 @@ Accept ヘッダーの確認
 特定の言語が受付られるかどうかの確認::
 
     $acceptsSpanish = $this->request->acceptLanguage('es-es');
-
 
 .. _request-cookies:
 
@@ -709,7 +707,6 @@ HTTP は二つのモデル、expiration と validation を使います。これ�
 :php:meth:`Cake\\Http\\Response::withCache()` と独立して、HTTP キャッシュヘッダーを
 チューニングするための様々なメソッドが使えます。この点に関して、ブラウザーやリバースプロキシーの
 キャッシュよりも有利だと言えます。
-
 
 Cache Control ヘッダー
 ~~~~~~~~~~~~~~~~~~~~~~

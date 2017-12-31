@@ -1,10 +1,10 @@
 Code Generation with Bake
 #########################
 
-The cake console is run using the PHP CLI (command line interface). 
+The cake console is run using the PHP CLI (command line interface).
 If you have problems running the script, ensure that:
 
-#. You have the PHP CLI installed and that it has the proper modules enabled (eg: MySQL, intl). 
+#. You have the PHP CLI installed and that it has the proper modules enabled (eg: MySQL, intl).
 #. Users also might have issues if the database host is 'localhost' and should try '127.0.0.1' instead, as localhost can cause issues with PHP CLI.
 #. Depending on how your computer is configured, you may have to set execute rights on the cake bash script to call it using ``bin/cake bake``.
 
@@ -49,7 +49,6 @@ tasks. You should see something like::
     - test
 
     By using `cake bake [name]` you can invoke a specific bake task.
-
 
 You can get more information on what each task does, and what options are
 available using the ``--help`` option::

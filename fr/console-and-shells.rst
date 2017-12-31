@@ -248,7 +248,6 @@ commande::
     Afin d'accéder aux tâches directement à partir de ligne de commande, la
     tâche **doit** être inclue dans la propriété $tasks de la classe shell.
 
-
 De plus, le nom de la task doit être ajouté en tout que sous commande dans
 l'OptionParser du Shell::
 
@@ -1317,7 +1316,7 @@ lequel vous souhaitez envoyer l'email en faisant::
     use Cake\Mailer\Email;
 
     $email = new Email();
-    // Avant 3.4 utilisez domain() 
+    // Avant 3.4 utilisez domain()
     $email->setDomain('www.example.org');
 
 Cela suppose que les ID du message généré sont valides et correspondent au

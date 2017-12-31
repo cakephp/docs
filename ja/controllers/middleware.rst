@@ -109,7 +109,7 @@ CakePHP はウェブアプリケーションの一般的なタスクを処理す
 プラグインからのミドルウェア追加
 --------------------------------
 
-アプリケーションによってミドルウェアのキューが準備された後に、 ``Server.buildMiddleware`` 
+アプリケーションによってミドルウェアのキューが準備された後に、 ``Server.buildMiddleware``
 イベントが引き起こされます。このイベントはプラグインからミドルウェアを追加するのに便利です。
 プラグインは、それらのブートストラップスクリプトの中でリスナーを登録することができて、
 それらがミドルウェアを追加します。 ::
@@ -183,7 +183,6 @@ PSR-7 リクエストとレスポンス
 * ``session`` は、 CakePHP の ``Session`` オブジェクトのインスタンスを持っています。
   セッションオブジェクトをどう使うかについての詳しい情報は :ref:`accessing-session-object`
   を参照してください。
-
 
 レスポンスとの対話
 ------------------
@@ -380,7 +379,6 @@ CSRF 保護は、ミドルウェアスタックに ``CsrfProtectionMiddleware`` 
 .. versionadded:: 3.5.0
     ``CsrfProtectionMiddleware`` は 3.5.0 で追加されました。
 
-
 FormHelper との統合
 -------------------
 
@@ -411,7 +409,7 @@ CSRF トークンは、クッキーの ``csrfToken`` で取得されます。
 既存のアプリケーションで HTTP ミドルウェアを使うには、アプリケーションにいくつかの
 変更を行わなければなりません。
 
-#. まず **webroot/index.php** を更新します。 `app スケルトン 
+#. まず **webroot/index.php** を更新します。 `app スケルトン
    <https://github.com/cakephp/app/tree/master/webroot/index.php>`__ から
    ファイルの内容をコピーしてください。
 #. ``Application`` クラスを作成します。どのようにするかについては上の :ref:`using-middleware`

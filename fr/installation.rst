@@ -17,7 +17,6 @@ Conditions requises
 - extension PHP intl
 - extension PHP simplexml
 
-
 .. note::
 
     Avec XAMPP et WAMP, l'extension mbstring fonctionne par défaut.

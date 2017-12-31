@@ -31,7 +31,6 @@ Core Behaviors
     /orm/behaviors/translate
     /orm/behaviors/tree
 
-
 Criando Behavior
 ================
 Nos exemplos a seguir, criaremos um bem simples ``SluggableBehavior``. Esse
@@ -65,7 +64,7 @@ behavior, se necessário::
 
     public function initialize(array $config)
     {
-        // Algum código de inicialização aqui 
+        // Algum código de inicialização aqui
     }
 
 Agora nós podemos adicionar esse behavior a uma de nossas classes de tabela
@@ -144,7 +143,7 @@ Defining Event Listeners
 Agora que nosso behavior tem um método de 'mixin' para campos de slug, nós
 podemos implementar um listener de callback para automaticamente gerar slug
 de um campo quando entidades são salvas. Nós também iremos modificar nosso
-método de slug para aceitar uma entidade ao invéz de apenas um valor simples. 
+método de slug para aceitar uma entidade ao invéz de apenas um valor simples.
 Nosso behavior agora deve parecer com::
 
     namespace App\Model\Behavior;

@@ -51,7 +51,6 @@
 
 **IRC чат irc.freenode.net:**
 
-
 -  `#cakephp <irc://irc.freenode.net/cakephp>`_ -- Главный чат
 -  `#cakephp-docs <irc://irc.freenode.net/cakephp-docs>`_ -- Документация
 -  `#cakephp-bakery <irc://irc.freenode.net/cakephp-bakery>`_ -- Пекарня

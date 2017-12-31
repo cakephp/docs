@@ -33,11 +33,11 @@ ORM の調査を始める前に :ref:`あなたのデータベース接続の設
 例えば ``articles`` からいくつかデータをロードしたい場合、このように記述できます。 ::
 
     use Cake\ORM\TableRegistry;
-    
+
     $articles = TableRegistry::get('Articles');
-    
+
     $query = $articles->find();
-    
+
     foreach ($query as $row) {
         echo $row->title;
     }

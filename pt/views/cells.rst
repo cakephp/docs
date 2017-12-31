@@ -12,9 +12,9 @@ Quando usar *Cells*
 interação com modelos, lógica de visualização, e lógica de renderizaço. Um exemplo simples
 seria o carinho em uma loja online, ou um menu de navegação *data-driven* em um CMS.
 
-Para criar uma *cell*, defina uma classe em **src/View/Cell** e um *template* 
+Para criar uma *cell*, defina uma classe em **src/View/Cell** e um *template*
 em **src/Template/Cell/**. Nesse exemplo, nós estaremos fazendo uma *cell* para exibir
-o número de mensagens em uma caixa de notificações do usuário. Primeiro, crie o arquivo da 
+o número de mensagens em uma caixa de notificações do usuário. Primeiro, crie o arquivo da
 classe. O seu conteúdo deve se parecer com::
 
     namespace App\View\Cell;
@@ -30,7 +30,7 @@ classe. O seu conteúdo deve se parecer com::
 
     }
 
-Salve esse arquivo dentro de **src/View/Cell/InboxCell.php**. Como você pode ver, como em 
+Salve esse arquivo dentro de **src/View/Cell/InboxCell.php**. Como você pode ver, como em
 outras classes no CakePHP, *Cells* tem algumas convenções:
 
 * As *Cells* ficam no *namespace* ``App\View\Cell``. Se você está fazendo uma *cell* em
@@ -38,9 +38,9 @@ outras classes no CakePHP, *Cells* tem algumas convenções:
 * Os nomes das classes devem terminar com *Cell*.
 * Classes devem herdar de ``Cake\View\Cell``.
 
-Nós adicionamos um método ``display()`` vazio para nossa *cell*; esse é o método padrão 
+Nós adicionamos um método ``display()`` vazio para nossa *cell*; esse é o método padrão
 convencional quando a *cell* é renderizada. Nós vamos abordar o uso de outros métodos
-mais tarde na documentaço. Agora, crie o arquivo **src/Template/Cell/Inbox/display.ctp**. 
+mais tarde na documentaço. Agora, crie o arquivo **src/Template/Cell/Inbox/display.ctp**.
 Esse será nosso *template* para a nossa nova *cell*.
 
 Vocẽ pode gerar este esboço de código rapidamente usando o ``bake``::
@@ -54,7 +54,7 @@ Implementando a *Cell*
 
 Assumindo que nós estamos trabalhando em uma aplicação que permite que usuários enviem mensagens
 um para o outro. Nós temos o modelo ``Messages``, e nós queremos mostrar a quantidade de mensagens
-não lidas sem ter que poluir o *AppController*. Este é um perfeito caso de uso para uma *cell*. 
+não lidas sem ter que poluir o *AppController*. Este é um perfeito caso de uso para uma *cell*.
 Na classe que acabamos de fazer, adicione o seguinte::
 
     namespace App\View\Cell;
@@ -88,7 +88,7 @@ como faríamos em um *controller*. Em nosso arquivo de *template*, adicione o se
     da view utilizada para processar o *template* e o *layout* para o
     *controller* ou outras *cells*. Assim, eles não sabem de nenhuma chamada de helper
     feita ou blocos definidos no *template* / layout da *action* e vice-versa.
-    
+
 Carregando *Cells*
 ==================
 
@@ -136,7 +136,7 @@ O código acima corresponderia a seguinte assinatura de função::
     public function recent($since)
     {
     }
-    
+
 Renderizando uma Cell
 =====================
 
@@ -145,7 +145,7 @@ para renderizar uma *cell* é dando um *echo*::
 
     <?= $cell ?>
 
-Isso irá renderizar o *template* correspondente a versão minuscula e separada com underscore do nome da 
+Isso irá renderizar o *template* correspondente a versão minuscula e separada com underscore do nome da
 nossa action, e.g. **display.ctp**.
 
 Porque as *cells* usam ``View`` para renderizar *templates*, você pode carregar *cells* adicionais
@@ -154,15 +154,15 @@ dentro do template da *cell* se necessário.
 .. note::
 
     O *echo* da *cell* usa o método PHP mágico ``__toString()`` para prevenir o PHP
-    de mostrar o nome do arquivo e o número da linha caso algum erro fatal seja disparado. 
+    de mostrar o nome do arquivo e o número da linha caso algum erro fatal seja disparado.
     Para obter uma mensagem de erro significativa, é remomendado usar o método ``Cell::render()``,
     por exemplo ``<?= $cell->render() ?>``.
-    
+
 Renderizando template alternativos
 ----------------------------------
 
 Por convenção *cells* renderizam *templates* que correspondem a *action* que está sendo executada.
-Se você precisar renderizar um *template* de visualizaço diferente, você pode especificar o *template* 
+Se você precisar renderizar um *template* de visualizaço diferente, você pode especificar o *template*
 para usar quando estiver renderizando a *cell*::
 
     // Chamando render() explicitamente
@@ -191,11 +191,11 @@ definir a opção ``cache`` ao criar uma célula para ativar e configurar o cach
         'cache' => ['config' => 'cell_cache', 'key' => 'inbox_' . $user->id]
     ]);
 
-Se uma chave é gerada a versão sublinhada da classe da *cell* e o nome do *template* 
+Se uma chave é gerada a versão sublinhada da classe da *cell* e o nome do *template*
 serão usados
 
 .. note::
 
-    Uma nova instância da ``View`` é usada para cada *cell* e esses novos objetos não 
-    compartilham o contexto com o *template* principal/*layout*. Cada *cell* é *self-contained* 
+    Uma nova instância da ``View`` é usada para cada *cell* e esses novos objetos não
+    compartilham o contexto com o *template* principal/*layout*. Cada *cell* é *self-contained*
     e somente tem acesso as variaveis passadas como argumento pelo chamada do método ``View::cell()``.

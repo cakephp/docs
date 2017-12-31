@@ -102,7 +102,6 @@ options suivantes sont disponibles:
 Si la valeur de $currency est ``null``, la devise par défaut est récupérée par
 :php:meth:`Cake\\I18n\\Number::defaultCurrency()`.
 
-
 Paramétrage de la Devise par Défaut
 ===================================
 
@@ -133,7 +132,6 @@ décimale). Elle arrondira afin de maintenir le niveau de précision défini::
     // Appelé avec Number
     echo Number::precision(456.91873645, 2 );
 
-
 Formatage Des Pourcentages
 ==========================
 
@@ -162,7 +160,6 @@ pourcentage et ajoute un signe de pourcent à la sortie::
     echo Number::toPercentage(0.45691, 2, [
         'multiply' => true
     ]);
-
 
 Interagir Avec Des Valeurs Lisibles Par L'Homme
 ===============================================
@@ -209,7 +206,6 @@ ceci : 1,236. Notez que la précision par défaut est d'aucun chiffre après
 la virgule.
 
 Le paramètre ``$options`` est là où réside la réelle magie de cette méthode.
-
 
 -  Si vous passez un entier alors celui-ci devient le montant de précision
    pour la fonction.

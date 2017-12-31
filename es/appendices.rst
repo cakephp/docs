@@ -12,7 +12,6 @@ Guía de Migración a 3.x
 
     appendices/3-x-migration-guide
 
-
 Información General
 ===================
 

@@ -27,7 +27,6 @@
     tutorials-and-examples/blog/part-three
     tutorials-and-examples/blog-auth-example/auth
 
-
 .. meta::
     :title lang=ja: チュートリアルと例
     :keywords lang=ja: application tutorials,glob,bakery,repository,applications,blog,acl

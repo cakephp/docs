@@ -172,7 +172,6 @@ situations personnalisées.
 
     Récupère le type de variable. Les objets retourneront leur nom de classe.
 
-
 Utiliser les Logs pour Debugger
 ===============================
 

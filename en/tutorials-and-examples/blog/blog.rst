@@ -199,7 +199,6 @@ it's not guessable::
         'salt' => 'something long and containing lots of different values.',
     ],
 
-
 A Note on mod\_rewrite
 ======================
 

@@ -842,7 +842,6 @@ INT_BIG      BIGINT
            ->addColumn('quantity', 'integer', ['limit' => MysqlAdapter::INT_TINY])
            ->create();
 
-
 Get a column list
 ~~~~~~~~~~~~~~~~~
 
@@ -974,7 +973,6 @@ To drop a column, use the ``removeColumn()`` method::
                   ->save();
         }
     }
-
 
 Specifying a Column Limit
 ~~~~~~~~~~~~~~~~~~~~~~~~~

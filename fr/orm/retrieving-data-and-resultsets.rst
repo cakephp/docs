@@ -584,7 +584,6 @@ plusieurs appels à ``contain()``::
     ])
     ->where($condition);
 
-
 Si vous avez besoin de remettre les contain sur une requête, vous pouvez
 définir le second argument à ``true``::
 
@@ -1308,7 +1307,6 @@ Ceci retournerait un tableau similaire à ceci::
 Les tableaux résultants signifient, par exemple, que l'utilisateur avec l'id
 ``1`` suit les utilisateurs ``2`` and ``4``, mais ceux-ci ne suivent pas
 ``1`` de leur côté.
-
 
 Stacking Multiple Operations
 ----------------------------

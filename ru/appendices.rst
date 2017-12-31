@@ -21,7 +21,6 @@ CakePHP и инструкции по миграции на новые верси
     appendices/cakephp-development-process
     appendices/glossary
 
-
 .. meta::
     :title lang=ru: Приложения
     :keywords lang=ru: руководство по миграции,путь миграции,новые возможности,глоссарий

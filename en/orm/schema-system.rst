@@ -70,7 +70,6 @@ fields are added information can be fetched using `column()` or `columns()`::
     // Get the list of all columns.
     $cols = $schema->columns();
 
-
 Indexes and Constraints
 -----------------------
 
@@ -169,7 +168,6 @@ following::
     // Get data about a single index.
     $index = $schema->index('author_id_idx')
 
-
 Adding Table Options
 --------------------
 
@@ -210,7 +208,6 @@ specific SQL. The return of ``createSql`` and ``dropSql`` is a list of SQL
 queries required to create a table and the required indexes. Some platforms may
 require multiple statements to create tables with comments and/or indexes. An
 array of queries is always returned.
-
 
 Schema Collections
 ==================

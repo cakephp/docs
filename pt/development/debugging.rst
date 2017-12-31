@@ -116,7 +116,6 @@ Abaixo encontra-se a pilha de execução gerada ao chamar ``Debugger::trace()`` 
 uma ação de um controller. A leitura do fim para o início da pilha exibe a ordem
 de execução das funções.
 
-
 Pegando Trechos de Arquivos
 ===========================
 
@@ -145,7 +144,6 @@ você esteja criando suas próprias mensagens de erros e registros de logs.
 
 Obtém o tipo da variável. Caso seja um objeto, o retorno do método será o nome
 de sua classe
-
 
 Usando Logging para Depuração
 =============================

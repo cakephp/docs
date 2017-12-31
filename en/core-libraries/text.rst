@@ -37,7 +37,6 @@ of a ``View``, use the ``Text`` class::
         }
     }
 
-
 Convert Strings into ASCII
 ==========================
 
@@ -72,7 +71,7 @@ a string in which case it will be used as replacement string. The supported
 options are:
 
 * ``replacement`` Replacement string, defaults to '-'.
-* ``transliteratorId`` A valid tranliterator id string. If default ``null`` 
+* ``transliteratorId`` A valid tranliterator id string. If default ``null``
   ``Text::$_defaultTransliteratorId`` to be used.
   If ``false`` no transliteration will be done, only non words will be removed.
 * ``preserve`` Specific non-word character to preserve. Defaults to ``null``.
@@ -97,7 +96,6 @@ UUID is a 128-bit string in the format of
 ``485fc381-e790-47a3-9794-1337c0a8fe68``. ::
 
     Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
-
 
 Simple String Parsing
 =====================
@@ -243,7 +241,6 @@ Removing Links
 .. php:method:: stripLinks($text)
 
 Strips the supplied ``$text`` of any HTML links.
-
 
 Truncating Text
 ===============

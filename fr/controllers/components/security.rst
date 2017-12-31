@@ -132,7 +132,6 @@ et il en ressort un hash. Quand un formulaire est soumis, SecurityComponent va
 utiliser les données POSTées pour construire la même structure et comparer le
 hash.
 
-
 .. note::
 
     SecurityComponent **ne** va **pas** empêcher aux options sélectionnées

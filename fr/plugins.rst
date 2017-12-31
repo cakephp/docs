@@ -176,7 +176,6 @@ aussi les routes du plugin Blog::
         'Blog' => ['routes' => true]
     ]);
 
-
 Notez que tous les fichiers spécifiés doivent réellement exister dans le(s)
 plugin(s) configurés ou PHP vous donnera des avertissements pour chaque
 fichier qu'il ne peut pas charger. Vous pouvez éviter les avertissements
@@ -550,7 +549,6 @@ redéfinition sera::
     src/Template/Plugin/ContactManager/Admin/ContactManager/index.ctp
 
 .. _plugin-assets:
-
 
 Assets de Plugin
 ================

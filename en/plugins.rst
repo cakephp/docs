@@ -520,15 +520,14 @@ path to the 'index' view of the Custom controller will be::
 Creating this file would allow you to override
 **vendor/thevendor/theplugin/src/Template/Custom/index.ctp**.
 
-If the plugin implements a routing prefix, you must include the routing prefix in your 
+If the plugin implements a routing prefix, you must include the routing prefix in your
 application template overrides.
 For example, if the 'ContactManager' plugin implemented an 'admin' prefix the overridng path
 would be::
-    
+
     src/Template/Plugin/ContactManager/Admin/ContactManager/index.ctp
 
 .. _plugin-assets:
-
 
 Plugin Assets
 =============
@@ -550,7 +549,6 @@ You may put any type of file in any directory, just like a regular webroot.
     Handling static assets (such as images, JavaScript and CSS files)
     through the Dispatcher is very inefficient. See :ref:`symlink-assets`
     for more information.
-
 
 Linking to Assets in Plugins
 ----------------------------
@@ -607,7 +605,6 @@ that you prefix the plugin name before the name of the component. For example::
     }
 
 The same technique applies to Helpers and Behaviors.
-
 
 Expand Your Plugin
 ==================
