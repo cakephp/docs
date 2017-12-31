@@ -205,7 +205,7 @@ view テンプレートの作成
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
 
-		// user_id の決め打ちは一時的なもので、あとで認証を構築する際に削除されます。
+                // user_id の決め打ちは一時的なもので、あとで認証を構築する際に削除されます。
                 $article->user_id = 1;
 
                 if ($this->Articles->save($article)) {
@@ -316,12 +316,6 @@ URL オプションなしで ``create()`` を呼び出したので、 ``FormHelp
             $sluggedTitle = Text::slug($entity->title);
             // スラグをスキーマで定義されている最大長に調整
             $entity->slug = substr($sluggedTitle, 0, 191);
-        }
-
-        // これは一時的なもので、後で認証を構築するときに
-	// 削除されます。
-        if (!$entity->user_id) {
-            $entity->user_id = 1;
         }
     }
 
