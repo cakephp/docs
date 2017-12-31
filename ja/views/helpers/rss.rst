@@ -121,7 +121,7 @@ RSS レイアウトはとてもシンプルです。 **src/Template/Layout/rss/d
     ]);
 
 ビューの後半部分は、実際のフィードのレコードのための要素を生成します。
-これは、ビューの $items に渡されたデータをループし、 :php:meth:`RssHelper::item()` を使うことによって実現します。 
+これは、ビューの $items に渡されたデータをループし、 :php:meth:`RssHelper::item()` を使うことによって実現します。
 その他のメソッドも使用できます。 :php:meth:`RssHelper::items()` はコールバックとフィードの items 配列を受け取とります。
 コールバックメソッドとしてよく ``transformRss()`` が使用されます。
 
@@ -177,7 +177,7 @@ Feed Validator や w3c サイトの http://validator.w3.org/feed/ など、XML �
 
     正しいフィードを取得するためにコア設定内で ‘debug’ の値を ``false`` にセットする必要があります。
     高い debug の設定下では様々なデバッグ情報が自動的に追加され、それが XML 構文やフィードのバリデーションルールを壊すからです。
-        
+
 .. meta::
     :title lang=ja: RssHelper
     :description lang=ja: RssHelper は RSS フィード用の XML 構文を簡単に作成します。

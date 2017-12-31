@@ -3,24 +3,24 @@ CakePHP de un vistazo
 
 CakePHP está diseñado para hacer tareas habituales de desarrollo web simples y
 fáciles. Proporciona una caja de herramientas todo-en-uno y para que puedas
-empezar rápidamente, las diferentes partes de CakePHP trabajan correctamente de 
+empezar rápidamente, las diferentes partes de CakePHP trabajan correctamente de
 manera conjunta o separada.
 
-El objetivo de esta artículo es el de introducirte en los conceptos generales de 
-CakePHP y darte un rápido vistazo sobre como esos conceptos están implementados 
-en CakePHP. Si estás deseando comenzar un proyecto puedes :doc:`empezar con el tutorial 
+El objetivo de esta artículo es el de introducirte en los conceptos generales de
+CakePHP y darte un rápido vistazo sobre como esos conceptos están implementados
+en CakePHP. Si estás deseando comenzar un proyecto puedes :doc:`empezar con el tutorial
 </tutorials-and-examples/bookmarks/intro>`, o :doc:`profundizar en la documentación
 </topics>`.
 
 Convenciones sobre configuración
 ================================
 
-CakePHP proporciona una estructura organizativa básica que cubre los nombres de 
+CakePHP proporciona una estructura organizativa básica que cubre los nombres de
 las clases, archivos, tablas de base de datos y otras convenciones más. Aunque
 lleva algo de tiempo aprender las convenciones, siguiéndolas CakePHP evitará
 que tengas que hacer configuraciones innecesarias y hará que la estructura de la
 aplicación sea uniforme y que el trabajo con varios proyectos sea sencillo. El
-capítulo de :doc:`convenciones </intro/conventions>` muestra las que son utilizadas 
+capítulo de :doc:`convenciones </intro/conventions>` muestra las que son utilizadas
 en CakePHP.
 
 La capa Modelo
@@ -33,7 +33,7 @@ relacionadas con el manejo de datos.
 
 En el caso de una red social la capa modelo se encargaría de tareas como guardar
 los datos del usuario, las asociaciones de amigos, almacenar y obtener fotos,
-buscar sugerencias de amistad, etc. Los objetos modelo serían "Amigo", 
+buscar sugerencias de amistad, etc. Los objetos modelo serían "Amigo",
 "Usuario", "Comentario" o "Foto". Si quisieramos obtener más datos de nuestra
 tabla ``usuarios`` podríamos hacer lo siguiente::
 
@@ -45,7 +45,7 @@ tabla ``usuarios`` podríamos hacer lo siguiente::
         echo $row->nombreusuario;
     }
 
-Como te habrás dado cuenta no hemos necesitado escribir ningún código previo 
+Como te habrás dado cuenta no hemos necesitado escribir ningún código previo
 para empezar a trabajar con nuestros datos. Al utilizar las convenciones CakePHP
 usará clases estándar para tablas y clases de entidad que no hayan sido definidas.
 
@@ -75,7 +75,7 @@ HTML que los contenga o un resultado en formato XML::
         </li>
     <?php endforeach; ?>
 
-La capa Vista proporciona varias extensiones como :ref:`view-templates`, 
+La capa Vista proporciona varias extensiones como :ref:`view-templates`,
 :ref:`view-elements` y :doc:`/views/cells` que te permiten reutilizar tu lógica
 de presentación.
 
@@ -89,8 +89,8 @@ La capa Controlador
 La capa Controlador maneja peticiones de usuarios. Es la responsable de elaborar
 una respuesta con la ayuda de las capas Modelo y Vista.
 
-Un controlador puede verse como un gestor que asegura que todos los recursos 
-necesarios para completar una tarea son delegados a los trabajadores oportunos. 
+Un controlador puede verse como un gestor que asegura que todos los recursos
+necesarios para completar una tarea son delegados a los trabajadores oportunos.
 Espera por las peticiones de los clientes, comprueba la validez de acuerdo con las
 reglas de autenticación y autorización, delega la búsqueda o procesado de datos
 al modelo, selecciona el tipo de presentación que el cliente acepta y finalmente
@@ -131,7 +131,7 @@ El ciclo de petición típico de CakePHP comienza con un usuario solicitando una
 página o recurso en tu aplicación. A un alto nivel cada petición sigue los
 siguientes pasos:
 
-#. Las reglas de rescritura del servidor web envían la petición a **webroot/index.php**. 
+#. Las reglas de rescritura del servidor web envían la petición a **webroot/index.php**.
 #. Tu aplicación es cargada y ligada a un ``HttpServer``.
 #. Se inicializa el ``midleware`` de tu aplicación.
 #. Una petición y respuesta son precesadas a través del ``Middleware PSR-7`` que tu aplicación utiliza. Normalmente esto incluye la captura de errores y enrutamiento.

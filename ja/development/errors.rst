@@ -129,7 +129,7 @@ HTTP メソッド用のいくつかの例外があります。
 
 .. php:exception:: BadRequestException
 
-    400 Bad Request エラーに使われます。 
+    400 Bad Request エラーに使われます。
 
 .. php:exception:: UnauthorizedException
 
@@ -160,7 +160,7 @@ HTTP メソッド用のいくつかの例外があります。
 .. php:exception:: NotAcceptableException
 
     406 Not Acceptable エラーに使われます。
-    
+
     .. versionadded:: 3.1.7 NotAcceptableException が追加されました。
 
 .. php:exception:: ConflictException
@@ -201,7 +201,7 @@ HTTP 5xx エラーステータスコードの詳細は :rfc:`2616#section-10.5` 
 HTTP の例外の使用例はアイテムが見つからなかった場合に 404 ページを描画することでしょう。 ::
 
     use Cake\Network\Exception\NotFoundException;
-    
+
     public function view($id = null)
     {
         $article = $this->Articles->findById($id)->first();
@@ -369,7 +369,7 @@ RFC2616 MethodNotAllowedException は言っています。 ::
 たとえば::
 
     use Cake\Network\Exception\NotFoundException;
-    
+
     public function view($id = null)
     {
         $article = $this->Articles->findById($id)->first();
@@ -444,7 +444,7 @@ RFC2616 MethodNotAllowedException は言っています。 ::
 ------------------------------
 
 例外を生成する際にコードを変えることでカスタム HTTP ステータスコードを作ることができます。 ::
-    
+
         throw new MissingWidgetHelperException('それはここにはありません', 501);
 
 これは 501 のレスポンスコードを作るでしょうが、あなたが望むあらゆる HTTP ステータスコードを使うことができます。
@@ -510,11 +510,11 @@ BaseErrorHandler の継承
 例外処理メソッドは、引数として処理される例外を受け取ります。
 あなたのカスタム例外処理は文字列または ``Response`` オブジェクトを返すことができます。
 ``Response`` オブジェクトの返却はそれのレスポンスに対する全制御権をあなたに与えます。
-  
+
 .. note::
 
     カスタムレンダラーはコンストラクターで例外を受け取るのを期待し、render メソッドを実装します。
-    
+
     もしもカスタム例外処理を使っている場合、レンダラーの設定変更は効果がありません。
     あなたの実装の中であなたがそれを参照しない限り。
 

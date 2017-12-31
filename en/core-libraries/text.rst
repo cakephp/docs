@@ -72,7 +72,7 @@ a string in which case it will be used as replacement string. The supported
 options are:
 
 * ``replacement`` Replacement string, defaults to '-'.
-* ``transliteratorId`` A valid tranliterator id string. If default ``null`` 
+* ``transliteratorId`` A valid tranliterator id string. If default ``null``
   ``Text::$_defaultTransliteratorId`` to be used.
   If ``false`` no transliteration will be done, only non words will be removed.
 * ``preserve`` Specific non-word character to preserve. Defaults to ``null``.

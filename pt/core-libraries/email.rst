@@ -85,7 +85,7 @@ Ao definir perfis e transportes, você pode manter o código do aplicativo livre
 dos dados de configuração, e evitar a duplicação que faz manutenção e
 implantação mais difícil.
 
-Para carregar uma configuração pré-definida, você pode usar o método ``profile()`` 
+Para carregar uma configuração pré-definida, você pode usar o método ``profile()``
 ou passá-lo para o construtor de ``Email``::
 
     $email = new Email();

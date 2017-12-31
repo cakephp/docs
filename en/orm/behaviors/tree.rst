@@ -69,13 +69,13 @@ Getting a flat list of the descendants for a node is equally easy::
     foreach ($descendants as $category) {
         echo $category->name . "\n";
     }
-    
+
 If you need to pass conditions you do so as per normal::
 
     $descendants = $categories
         ->find('children', ['for' => 1])
         ->where(['name LIKE' => '%Foo%']);
-        
+
     foreach ($descendants as $category) {
         echo $category->name . "\n";
     }
@@ -288,14 +288,14 @@ is important to note when looping through the various children of a node for
 conditional deletes::
 
     $descendants = $teams->find('children', ['for' => 1]);
-    
+
     foreach ($descendants as $descendant) {
         $team = $teams->get($descendant->id); // search for the up-to-date entity object
         if ($team->expired) {
             $teams->delete($team); // deletion reorders the lft and rght of database entries
         }
     }
-    
+
 The TreeBehavior reorders the lft and rght values of records in the table when a node
 is deleted. As such, the lft and rght values of the entities inside ``$descendants``
 (saved before the delete operation) will be inaccurate. Entities will have to be loaded

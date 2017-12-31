@@ -297,7 +297,7 @@ post 形式でデータを交換することがしばしばあります。 :php:
 
 アプリケーションが実行されているサブドメインを配列で返します。 ::
 
-    // 'my.dev.example.org' の場合、 ['my', 'dev'] を返す 
+    // 'my.dev.example.org' の場合、 ['my', 'dev'] を返す
     $subdomains = $request->subdomains();
 
 .. php:method:: host()

@@ -1,12 +1,12 @@
 Plugins
 #######
 
-O CakePHP permite que você configure uma combinação de controllers, models,e views, plugin de aplicativo empacotado que outros podem usar em suas aplicações CakePHP. 
+O CakePHP permite que você configure uma combinação de controllers, models,e views, plugin de aplicativo empacotado que outros podem usar em suas aplicações CakePHP.
 Se você criou um módulo de gerenciamento de usuários, blog ou serviços da Web em uma das suas aplicações, por que não torna-lo um plugin CakePHP? Desta forma, você pode reutilizá-lo em seus outros aplicativos e compartilhar com a comunidade!
 
 Um plugin do CakePHP é, em última instância, separado do próprio aplicativo host e, geralmente, oferece algumas funcionalidades bem definidas que podem ser embaladas de maneira ordenada e reutilizadas com pouco esforço em outras aplicações. O aplicativo e o plugin operam em seus respectivos espaços, mas compartilham propriedades específicas da aplicação (parâmetros de conectividade de banco de dados) que são definidos e compartilhados através da configuração do aplicativo.
 
-No CakePHP 3.0 cada plugin define seu próprio namespace de nível superior. Por exemplo: ``DebugKit``. 
+No CakePHP 3.0 cada plugin define seu próprio namespace de nível superior. Por exemplo: ``DebugKit``.
 Por convenção, os plugins usam o nome do pacote como seu namespace. Se você quiser usar um espaço para nome diferente, você pode configurar o espaço para nome do plugin, quando os plugins são carregados.
 
 Instalando um Plugin com Composer
@@ -21,7 +21,7 @@ deve fazer assim o assim::
 Isso instalaria a versão mais recente do DebugKit e atualizaria seus arquivos **composer.json**, **composer.lock**, atualização **vendor/cakephp-plugins.php** e atualize seu autoloader.
 
 Se o plugin que deseja instalar não estiver disponível em
-Packagist.org, você pode clonar ou copiar o código do plugin para seu diretório **plugins**. 
+Packagist.org, você pode clonar ou copiar o código do plugin para seu diretório **plugins**.
 Supondo que você deseja instalar um plugin chamado 'ContactManager', você
 Deve ter uma pasta em **plugins** chamado 'ContactManager'. Neste diretório
 São o src do plugin, testes e outros diretórios.
@@ -175,7 +175,7 @@ Se você preferir ter seu nome vendor como nível superior e ter um espaço para
 
     Plugin::load('AcmeCorp/Users');
 
-Isso garantirá que os nomes das classes sejam resolvidos corretamente ao usar 
+Isso garantirá que os nomes das classes sejam resolvidos corretamente ao usar
 :term:`sintaxe plugin`.
 
 A maioria dos plugins indicará o procedimento adequado para configurá-los e configurar
@@ -236,9 +236,9 @@ Observe o nome da pasta do plugin, '**ContactManager**'. É importante
 Que esta pasta tem o mesmo nome que o plugin.
 
 Dentro da pasta do plugin, você notará que se parece muito com um aplicativo
-CakePHP, e é basicamente isso. Você não precisa incluir qualquer uma das pastas 
-que você não está usando, ou seja, pode remover o que não for usar. 
-Alguns plugins podem apenas define um Component e um Behavior, e nesse 
+CakePHP, e é basicamente isso. Você não precisa incluir qualquer uma das pastas
+que você não está usando, ou seja, pode remover o que não for usar.
+Alguns plugins podem apenas define um Component e um Behavior, e nesse
 caso eles podem completamente omitir o diretório 'Template'.
 
 Um plugin também pode ter basicamente qualquer um dos outros diretórios de seu
@@ -451,7 +451,7 @@ sobre eles, use a sintaxe alternativa::
         }
     }
 
-Você pode usar ``TableRegistry`` para carregar suas tabelas de plugins usando o familiar 
+Você pode usar ``TableRegistry`` para carregar suas tabelas de plugins usando o familiar
 :term:`sintaxe plugin`::
 
     use Cake\ORM\TableRegistry;
@@ -516,7 +516,7 @@ Se o plugin implementar um prefixo de roteamento, você deve incluir o prefixo d
 O template para substitui.
 
 Se o plugin 'Contact Manager' implementou um prefixo 'admin', o caminho principal seria::
-    
+
     src/Template/Plugin/ContactManager/Admin/ContactManager/index.ctp
 
 .. _plugin-assets:
@@ -572,12 +572,12 @@ da URL para um recurso dentro desse plugin para atendê-lo. Ligando para
 Components, Helpers and Behaviors
 =================================
 
-Um plugin pode ter Components, Helpers e Behaviors, como uma aplicação CakePHP 
+Um plugin pode ter Components, Helpers e Behaviors, como uma aplicação CakePHP
 normal. Você pode até criar plugins que consistem apenas em Componentes,
 Helpers ou Behaviors que podem ser uma ótima maneira de construir componentes reutilizáveis que
 pode ser lançado em qualquer projeto.
 
-Construir esses componentes é exatamente o mesmo que construí-lo dentro de uma aplicacao 
+Construir esses componentes é exatamente o mesmo que construí-lo dentro de uma aplicacao
 normal, sem convenção de nome especial.
 
 Referir-se ao seu componente de dentro ou fora do seu plugin requer apenas
@@ -618,8 +618,8 @@ então seus usuários de plugins podem testar automaticamente a funcionalidade d
 
 
 Em nosso exemplo do ContactManager, podemos criar as actions add/remove/edit/delete
-no ContactsController, implementar a validação no model e implementar a funcionalidade 
-que se poderia esperar ao gerenciar seus contatos. 
+no ContactsController, implementar a validação no model e implementar a funcionalidade
+que se poderia esperar ao gerenciar seus contatos.
 Depende de você decidir o que implementar no seu Plugins. Apenas não esqueça de compartilhar seu código com a comunidade, então
 que todos possam se beneficiar de seus componentes incríveis e reutilizáveis!
 

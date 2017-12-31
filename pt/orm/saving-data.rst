@@ -100,7 +100,7 @@ na associação::
     $tag2->name = 'awesome';
 
     $articlesTable->Tags->link($article, [$tag1, $tag2]);
- 
+
 Salvando Dados da Tabela de Ligação
 -----------------------------------
 
@@ -156,8 +156,8 @@ A remoção de associação Muitos para Muitos registros é realizada através d
     $articlesTable->Tags->unlink($article, $tags);
 
 Quando modificando registros, configurando ou alterando diretamente as propriedades,
-nenhuma validação é realizada, que é um problema quando está aceitando dados de 
-formulário. As seções seguintes demostrarão como converter eficientemente dados de 
+nenhuma validação é realizada, que é um problema quando está aceitando dados de
+formulário. As seções seguintes demostrarão como converter eficientemente dados de
 formulário em entidades que podem ser validadas e salva.
 
 .. _converting-request-data:
@@ -182,7 +182,7 @@ usando::
     Se você estiver usando newEntity() e as entidades resultantes estão faltando algum
     ou todos os dados passados, verifique se as colunas que deseja definir estão
     listadas na propriedade ``$_accessible`` da sua entidade. Consulte :ref:`entities-mass-assignment`.
- 
+
 Os dados da requisição devem seguir a estrutura de suas entidades. Por exemplo, se você
 tem um artigo, que pertence a um usuário, e tem muitos comentários, os seus dados de
 requisição devem ser semelhante::
@@ -201,13 +201,13 @@ requisição devem ser semelhante::
     ];
 
 Por padrão, o método ``newEntity()`` valida os dados que são passados para
-ele, conforme explicado na seção :ref:`validating-request-data`. Se você 
+ele, conforme explicado na seção :ref:`validating-request-data`. Se você
 deseja pular a validação de dados, informe a opção ``'validate' => false``::
 
     $entity = $articles->newEntity($data, ['validate' => false]);
 
 Ao criar formulários que salvam associações aninhadas, você precisa definir
-quais associações devem ser convertidas:: 
+quais associações devem ser convertidas::
 
     // No controller
     $articles = TableRegistry::get('Articles');
@@ -218,9 +218,9 @@ quais associações devem ser convertidas::
             'Tags', 'Comments' => ['associated' => ['Users']]
         ]
     ]);
- 
+
 O exemplo acima indica que 'Tags', 'Comments' e 'Users' para os artigos devem
-ser convertidos. Alternativamente, você pode usar a notação de ponto 
+ser convertidos. Alternativamente, você pode usar a notação de ponto
 (dot notation) por brevidade::
 
     // No controller
@@ -255,7 +255,7 @@ contrário. Você também pode alterar o conjunto de validação a ser usada por
 O capitulo :ref:`using-different-validators-per-association` possui mais informações
 sobre como usar diferentes validadores para associações ao transformar em entidades.
 
-O diagrama a seguir fornece uma visão geral do que acontece dentro dos métodos 
+O diagrama a seguir fornece uma visão geral do que acontece dentro dos métodos
 ``newEntity()`` ou ``patchEntity()``:
 
 .. figure:: /_static/img/validation-cycle.png
@@ -263,7 +263,7 @@ O diagrama a seguir fornece uma visão geral do que acontece dentro dos métodos
    :alt: Flow diagram showing the marshalling/validation process.
 
 Você sempre pode contar de obter uma entidade de volta com ``newEntity()``. Se a validação
-falhar, sua entidade conterá erros, e quaisquer campos inválidos não serão preenchidos 
+falhar, sua entidade conterá erros, e quaisquer campos inválidos não serão preenchidos
 na entidade criada.
 
 Convertendo Dados de Associação BelongsToMany
@@ -355,7 +355,7 @@ para apenas usar a chave ``_ids`` e ignorar todos os outros dados.
 
 .. versionadded:: 3.1.0
      A opção ``onlyIds`` foi adicionada na versão 3.1.0
-     
+
 Conventendo Vários Registros
 ----------------------------
 
@@ -391,8 +391,8 @@ salvar com ``save()`` e remover com ``delete()``::
         $articles->delete($entity);
     }
 
-O exemplo acima executará uma transação separada para cada entidade salva. 
-Se você deseja processar todas as entidades como uma única transação, você 
+O exemplo acima executará uma transação separada para cada entidade salva.
+Se você deseja processar todas as entidades como uma única transação, você
 pode usar ``transactional()``::
 
     // No controller.
@@ -435,12 +435,12 @@ entidade envolvida.
     Se você estiver usando newEntity() e as entidades resultantes estão faltando algum
     ou todos os dados passados, verifique se as colunas que deseja definir estão
     listadas na propriedade ``$_accessible`` da sua entidade. Consulte :ref:`entities-mass-assignment`.
-    
+
 Mesclando Dados de Requisição em Entidades
 ------------------------------------------
 
 Para atualizar as entidades, você pode escolher de aplicar dados de requisição diretamente
-em uma entidade existente. Isto tem a vantagem que apenas os campos que realmente mudaram 
+em uma entidade existente. Isto tem a vantagem que apenas os campos que realmente mudaram
 serão salvos, em oposição ao envio de todos os campos para o banco de dados pra ser persistido.
 Você pode mesclar um array de dados bruto em uma entidade existente usando o método
 ``patchEntity()``::
@@ -450,7 +450,7 @@ Você pode mesclar um array de dados bruto em uma entidade existente usando o m�
     $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->getData());
     $articles->save($article);
-    
+
 Validação e patchEntity
 -----------------------
 
@@ -475,7 +475,7 @@ uma das associações::
 Patching HasMany and BelongsToMany
 ----------------------------------
 
-Como explicado na seção anterior, os dados de requisição deve seguir a 
+Como explicado na seção anterior, os dados de requisição deve seguir a
 estrutura de sua entidade. O método `patchEntity()`` é igualmente capaz de
 mesclar associações, por padrão, apenas o primeiro nível de associações são
 mesclados, mas se você deseja controlar a lista de associações a serem mescladas
@@ -513,7 +513,7 @@ O mesmo pode ser dito sobre associações hasMany e belongsToMany, com uma
 advertência importante:
 
 .. note::
-    
+
     Para as associações belongsToMany, garanta que a entidade relevante tenha
     uma propriedade acessível para a entidade associada.
 
@@ -526,11 +526,11 @@ Se um Produto pertence a várias (belongsToMany) Tag::
     ];
 
 .. note::
-    
+
     Para as associações hasMany e belongsToMany, se houvesse algumas entidades que
     que não pudessem ser correspondidas por chave primaria a um registro no array de dados,
     então esses registros serão descartados da entidade resultante.
-    
+
     Lembre-se que usando ``patchEntity()`` ou ``patchEntities()`` não persiste os
     dados, isso apenas edita (ou cria) as entidades informadas. Para salvar a entidade você
     terá que chamar o método ``save()`` da model Table.
@@ -592,7 +592,7 @@ de lote para esses que não estão na lista::
 Como você pode ver, isso também ajuda ao criar soluções onde uma associação precisa de
 ser implementada como um único conjunto.
 
-Você também pode popular várias entidades ao mesmo tempo. As considerações feitas para 
+Você também pode popular várias entidades ao mesmo tempo. As considerações feitas para
 popular (patch) associações hasMany e belongsToMany se aplicam para popular várias entidades:
 As comparação são feitas pelo valor do campo da chave primária e as correspondências que
 faltam no array das entidades originais serão removidas e não estarão presentes no resultado::
@@ -630,7 +630,7 @@ de requisição antes das entidades serem criadas::
     use Cake\Event\Event;
     use ArrayObject;
 
-    // Na classe da sua table ou behavior 
+    // Na classe da sua table ou behavior
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
         if (isset($data['username'])) {
@@ -645,7 +645,7 @@ O propósito principal do ``beforeMarshal`` é auxiliar os usuários a passar o 
 de validação quando erros simples podem ser automaticamente resolvidos, ou quando os dados
 precisam ser reestruturados para que ele possa ser colocado nos campos corretos.
 
-O evento ``Model.beforeMarshal`` é disparado apenas no início do processo de 
+O evento ``Model.beforeMarshal`` é disparado apenas no início do processo de
 validação, uma das razões é que o ``beforeMarshal`` é permitido de alterar as
 regras de validação e opções de salvamento, como o campo whitelist.
 Validação é disparada logo após este evento ser finalizado. Um exemplo comum de alteração
@@ -656,7 +656,7 @@ campos antes de salvar::
     use Cake\Event\Event;
     use ArrayObject;
 
-    // Na classe da sua table ou behavior 
+    // Na classe da sua table ou behavior
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
         foreach ($data as $key => $value) {
@@ -678,7 +678,7 @@ ser usado em outro lugar.
 Validando Dados Antes de Construir Entidades
 --------------------------------------------
 
-O capítulo :doc:`/orm/validation` contém mais informações de como usar os 
+O capítulo :doc:`/orm/validation` contém mais informações de como usar os
 recursos de validação do CakePHP para garantir que os seus dados permaneçam
 corretos e consitentes.
 
@@ -735,7 +735,7 @@ Salvando Entidades
 
 .. php:method:: save(Entity $entity, array $options = [])
 
-Ao salvar dados de requisição no seu banco de dados, você primeiro precisa hidratar (hydrate) 
+Ao salvar dados de requisição no seu banco de dados, você primeiro precisa hidratar (hydrate)
 uma nova entidade usando ``newEntity()`` para passar no ``save()``. Por exemplo::
 
   // Num controller
@@ -761,7 +761,7 @@ atualizar em seu banco de dados. Este é um exercício bem simples no CakePHP::
     $article->title = 'My new title';
     $articles->save($article);
 
-Ao salvar, CakePHP irá :ref:`aplicar suas regras<application-rules>`, e 
+Ao salvar, CakePHP irá :ref:`aplicar suas regras<application-rules>`, e
 envolver a operação de salvar em uma trasação de banco de dados. Também atualizará
 as propriedades que mudaram. A chamada ``save()`` do exemplo acima geraria SQL como::
 
@@ -799,7 +799,7 @@ Consule a seção :ref:`application-rules` para mais informação sobre como cri
 e usar regras.
 
 .. warning::
-    
+
     Se nenhuma alteração é feita na entidade quando ela é salva, os callbacks não
     serão disparado porque o salvar não é executado.
 
@@ -845,7 +845,7 @@ As suas entidades devem ser estruturadas na mesma maneira como elas são quando 
 do banco de dados. Consulte a documentação do form helper para saber :ref:`como criar inputs
 para associações <associated-form-inputs>`.
 
-Se você está construindo ou modificando dados de associação após a construção de suas entidades, 
+Se você está construindo ou modificando dados de associação após a construção de suas entidades,
 você terá que marcar a propriedade da associação como modificado com o método ``dirty()``::
 
     $company->author->name = 'Master Chef';
@@ -893,7 +893,7 @@ Por exemplo::
         'associated' => ['Profiles']
     ]);
     $users->save($user);
-    
+
 Salvando Associações HasMany
 ----------------------------
 
@@ -924,7 +924,7 @@ append
     registro existente ele é inserido.
 replace
     Todos os registros existentes que não estão presentes nos registros fornecidos serão
-    removidos do banco dados. Apenas os registros fornecidos permanecerão (ou serão 
+    removidos do banco dados. Apenas os registros fornecidos permanecerão (ou serão
     inseridos).
 
 Por padrão é utilizado a estratégia de salvamento ``append``.
@@ -979,11 +979,11 @@ replace
     de ligação. Se houver link existente no banco de dados para algumas das entidades
     a serem salvas, esses links serão atualizados, e não excluídos para então serem salvos
     novamente.
-    
+
 Consulte :ref:`belongs-to-many-associations` para detalhes de como definir ``saveStrategy``.
 
 Por padrão é utilizado a estratégia ``replace``. Sempre que você adiciona novos registros
-a uma associação existente, você sempre deve marcar a propriedade de associação como 'dirty'. 
+a uma associação existente, você sempre deve marcar a propriedade de associação como 'dirty'.
 Isso permite que o ORM saiba que a propriedade de associação tem que ser persistida::
 
     $article->tags[] = $tag;
@@ -1093,10 +1093,10 @@ personalizada (custom column Types)::
     }
 
 O código acima mapeia a coluna ``preferences``  para o tipo personalizado (custom type)
-``json``. Isso significa que, ao obter dados dessa coluna, ele será desserializado 
+``json``. Isso significa que, ao obter dados dessa coluna, ele será desserializado
 de uma string JSON no banco de dados e colocado em uma entidade como um array.
 
-Da mesma forma, quando salvo, o array será transformado novamente em sua 
+Da mesma forma, quando salvo, o array será transformado novamente em sua
 representação de JSON::
 
     $user = new User([
@@ -1152,7 +1152,7 @@ Salvando Várias Entidades
 
 .. php:method:: saveMany($entities, $options = [])
 
-Usando esse método você pode salvar várias entidades atomicamente. ``$entities`` 
+Usando esse método você pode salvar várias entidades atomicamente. ``$entities``
 podem ser um array de entidades criadas usando ``newEntities()`` / ``patchEntities()``.
 ``$options`` pode ter as mesmas opções aceitas por ``save()``::
 
@@ -1170,7 +1170,7 @@ podem ser um array de entidades criadas usando ``newEntities()`` / ``patchEntiti
     $entities = $articles->newEntities($data);
     $result = $articles->saveMany($entities);
 
-O resultado será as entidades atualizadas em caso de sucesso ou ``false`` 
+O resultado será as entidades atualizadas em caso de sucesso ou ``false``
 em caso de falha.
 
 .. versionadded:: 3.2.8
@@ -1181,7 +1181,7 @@ Atualização em Massa
 .. php:method:: updateAll($fields, $conditions)
 
 Pode haver momentos em que atualizar linhas individualmente não é eficiente ou
-necessária. Nesses casos, é mais eficiente usar uma atualização em massa para 
+necessária. Nesses casos, é mais eficiente usar uma atualização em massa para
 modificar várias linhas de uma vez só::
 
     // Publique todos artigos não publicados
@@ -1214,7 +1214,7 @@ forem atualizadas.
     updateAll *não* irá disparar os eventos beforeSave/afterSave. Se você
     precisa deles, primeiro carregue uma coleção de registros e então atualize
     eles.
-    
+
 ``updateAll()`` é apenas por conveniência. Você também pode usar essa interface
 mais flexível::
 

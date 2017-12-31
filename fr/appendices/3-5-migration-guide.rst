@@ -83,7 +83,7 @@ par des méthodes ``getX()`` et ``setX()`` :
 ``Cake\I18n\I18n``
     * ``locale()``
     * ``translator()``
-    * ``defaultLocale()`` 
+    * ``defaultLocale()``
     * ``defaultFormatter()``
 ``Cake\ORM\Association\BelongsToMany``
     * ``sort()``

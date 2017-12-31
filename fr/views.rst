@@ -98,7 +98,7 @@ Structures de Contrôle Alternatives
 
 Les structures de contrôle tel que ``if``, ``for``, ``foreach``, ``switch``, et ``while``
 peuvent être écrites dans un format simplifié. Remarquez l'absence d'accolades. À la place,
-l'accolade de fin du ``foreach``  est remplacée par ``endforeach``. Chacune des structures de contrôle 
+l'accolade de fin du ``foreach``  est remplacée par ``endforeach``. Chacune des structures de contrôle
 listées ci-dessous a une syntaxe de fermeture similaire: ``endif``,
 ``endfor``, ``endforeach``, et ``endwhile``. Vous remarquerez aussi qu'à la place du ``point-virgule`` après
 chaque structure (à l'exception de la dernière), il y a un ``double-point``.

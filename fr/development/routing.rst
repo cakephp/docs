@@ -857,7 +857,7 @@ Pour restreindre les extensions à un *scope* spécifique, vous pouvez les défi
 en utilisant la méthode :php:meth:`Cake\\Routing\\RouteBuilder::extensions()`::
 
     Router::scope('/', function ($routes) {
-        // Avant 3.5.0 utilisez `extensions()` 
+        // Avant 3.5.0 utilisez `extensions()`
         $routes->setExtensions(['json', 'xml']);
         // ...
     });

@@ -51,7 +51,7 @@ CakePHP のインストール
 .. code-block:: bash
 
     php -v
-    
+
 PHP |minphpversion| (CLI) 以上がインストールされていなければなりません。
 ウェブサーバー版の PHP もまた |minphpversion| 以上でなければりませんし、
 コマンドラインインターフェース (CLI) 版と同じバージョンを使用してください。

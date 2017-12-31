@@ -33,14 +33,14 @@
 
     git clone git@github.com:你的账号/cakephp.git
 
-把原始的 CakePHP 仓库添加为远程仓库(*remote repository*)。以后你会使用它来抓取 
+把原始的 CakePHP 仓库添加为远程仓库(*remote repository*)。以后你会使用它来抓取
 CakePHP 仓库的改动，保持与 CakePHP 仓库一致::
 
     cd cakephp
     git remote add upstream git://github.com/cakephp/cakephp.git
 
-现在你已经搭建好了 CakePHP 的环境。你应该能够定义一个 ``$test`` 
-:ref:`数据库连接 <database-configuration>`，并且 
+现在你已经搭建好了 CakePHP 的环境。你应该能够定义一个 ``$test``
+:ref:`数据库连接 <database-configuration>`，并且
 :ref:`运行所有的测试 <running-tests>` 。
 
 制作补丁

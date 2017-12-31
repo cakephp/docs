@@ -304,7 +304,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 .. php:method:: beforeRender(Event $event)
 
     コントローラーがリクエストされたアクションのロジックを実行した後、
-    ビューとレイアウトが描画される前に呼び出されます。 
+    ビューとレイアウトが描画される前に呼び出されます。
 
 .. php:method:: shutdown(Event $event)
 

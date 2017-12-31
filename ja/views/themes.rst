@@ -48,7 +48,7 @@ edit テンプレートを **plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ct
 
 テーマは CakePHP の標準のプラグインなので、必要なアセットを webroot ディレクトリーに
 含めることができます。これは、テーマの配布と容易なパッケージングを可能にさせます。
-開発中、テーマのアセットへのリクエストは :php:class:`Cake\\Routing\\Dispatcher` 
+開発中、テーマのアセットへのリクエストは :php:class:`Cake\\Routing\\Dispatcher`
 によってハンドリングされます。プロダクション環境でパフォーマンスを改善するためには、
 :ref:`symlink-assets` を推奨します。
 

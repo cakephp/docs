@@ -217,8 +217,8 @@ Crea el archivo **src/Model/Entity/User.php** y agrega las siguientes lineas::
         // ...
     }
 
-Ahora cada vez que la propiedad password sea asignada a un usuario, será hasheada usando la clase ``DefaultPasswordHasher``.  
-Solamente nos falta un archivo para la vista de la acción login. Abre tu archivo **src/Template/Users/login.ctp** y agrega las siguientes 
+Ahora cada vez que la propiedad password sea asignada a un usuario, será hasheada usando la clase ``DefaultPasswordHasher``.
+Solamente nos falta un archivo para la vista de la acción login. Abre tu archivo **src/Template/Users/login.ctp** y agrega las siguientes
 lineas:
 
 .. code-block:: php
@@ -345,7 +345,7 @@ Estamos sobreescribiendo el método ``isAuthorized()`` de AppController y compro
 
 Esto concluye nuestro simple tutorial de autenticación y autorización. Para proteger el UsersController se puede seguir la misma técnica utilizada para ArticlesController. También es posible implementar una solución mas general en AppController, de acuerdo a tus reglas.
 
-En caso de necesitar más control, sugerimos leer la guia completa sobre Auth en 
+En caso de necesitar más control, sugerimos leer la guia completa sobre Auth en
 :doc:`/controllers/components/authentication`, donde encontrarás mas información para configurar el componente y crear clases de autorizacion a tú medida.
 
 Lectura sugerida

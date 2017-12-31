@@ -32,7 +32,7 @@ Composer Вы с легкостью установите фреймворк че
 Если у Вас установлен cURL, можете использовать следующую команду::
 
     curl -s https://getcomposer.org/installer | php
-    
+
 Или Вы можете скачать ``composer.phar`` с
 `веб-сайта Composer <https://getcomposer.org/download/>`_.
 
@@ -42,11 +42,11 @@ Composer Вы с легкостью установите фреймворк че
 как Вам будет удобно.::
 
     php composer.phar create-project --prefer-dist cakephp/app blog
-    
+
 В том случае, если Composer установлен глобально, можно ввести следующее::
 
     composer self-update && composer create-project --prefer-dist cakephp/app blog
-    
+
 Преимущество при использовании Composer заключается в том, что он
 автоматически произведет все необходимые настройки по правам доступа и создаст
 файл конфигурации приложения config/app.php для Вас.
@@ -105,7 +105,7 @@ Composer Вы с легкостью установите фреймворк че
 
     chmod 777 -R tmp
     chmod 777 -R logs
-    
+
 Создание Базы данных блога
 ==========================
 
@@ -132,7 +132,7 @@ Composer Вы с легкостью установите фреймворк че
         VALUES ('A title once again', 'And the article body follows.', NOW());
     INSERT INTO articles (title,body,created)
         VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
-        
+
 Имя таблицы и ее полей не случайны. Если вы следуете соглашениям CakePHP
 относительно баз данных и именования классов (все они приведены в
 :doc:`/intro/conventions`), Вы получите большое количество готовой
@@ -173,7 +173,7 @@ Composer Вы с легкостью установите фреймворк че
         ],
         // More configuration below.
     ];
-    
+
 Как только вы сохраните ваш файл **config/app.php**, вам должна стать доступна
 приветственная страница CakePHP. Она также должна будет вам сказать, что
 База данных обнаружена и подключение к ней прошло успешно.
@@ -182,7 +182,7 @@ Composer Вы с легкостью установите фреймворк че
 
     Копия файла с настройками по умолчанию может быть найдена в
     **config/app.default.php**.
-    
+
 Дополнительные настройки
 ========================
 

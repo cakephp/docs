@@ -747,9 +747,9 @@ Disons que nous avons déjà notre table Articles définie dans
         }
     }
 
-Nous voulons maintenant configurer un test qui va tester ce model tout 
-en utilisant les Fixtures pour garder nos Tests isolés. Créons  un fichier 
-nommé **ArticlesTableTest.php** dans notre répertoire 
+Nous voulons maintenant configurer un test qui va tester ce model tout
+en utilisant les Fixtures pour garder nos Tests isolés. Créons  un fichier
+nommé **ArticlesTableTest.php** dans notre répertoire
 **tests/TestCase/Model/Table**, avec le contenu suivant::
 
     namespace App\Test\TestCase\Model\Table;
@@ -1030,14 +1030,14 @@ authentification, vous pourriez écrire les tests suivants::
 Test de l'Authentification stateless (sans état) et des APIs
 ------------------------------------------------------------
 
-Pour tester les APIs qui utilisent l'authentification stateless, vous pouvez, 
-comme pour l'authentification basic, configurer la demande de manière à ce 
-qu'elle injecte des variables d'environnement et des headers (en-têtes), ce qui 
+Pour tester les APIs qui utilisent l'authentification stateless, vous pouvez,
+comme pour l'authentification basic, configurer la demande de manière à ce
+qu'elle injecte des variables d'environnement et des headers (en-têtes), ce qui
 permettra de simuler les en-têtes d'une demande d'authentification réelle.
 
 Lorsque vous testez l'authentification simple (Basic) ou de type "Digest", vous
-pouvez ajouter les variables d'environnement que PHP crée 
-`<http://php.net/manual/fr/features.http-auth.php> `_ automatiquement. 
+pouvez ajouter les variables d'environnement que PHP crée
+`<http://php.net/manual/fr/features.http-auth.php> `_ automatiquement.
 Ces variables d'environnement utilisées dans l'adaptateur d'authentification sont
 décrites dans: ref: `basic-authentication` ::
 
@@ -1181,7 +1181,7 @@ Tester un controller retournant du JSON
 ---------------------------------------
 
 JSON est un format commun à utiliser lors de la conception de web service. Tester les
-points de terminaisons (endpoints) de votre web service est très simple avec CakePHP. 
+points de terminaisons (endpoints) de votre web service est très simple avec CakePHP.
 Commençons avec un simple exemple de controller qui renvoie du JSON::
 
     class MarkersController extends AppController
@@ -1227,7 +1227,7 @@ et assurons-nous que le web service répond correctement::
     }
 
 Nous utilisons l'option ``JSON_PRETTY_PRINT`` car la vue qui retourne la représentation
-JSON intégrée à CakePHP (JsonView) utilise cette option quand le mode ``debug`` est 
+JSON intégrée à CakePHP (JsonView) utilise cette option quand le mode ``debug`` est
 activé.
 
 Désactiver le Middleware de Gestion d'Erreurs dans les Tests

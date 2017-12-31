@@ -76,7 +76,7 @@ Query string parameters can be read using the ``getQuery()`` method::
     // URL is /posts/index?page=1&sort=title
     $page = $this->request->getQuery('page');
 
-    // Prior to 3.4.0 
+    // Prior to 3.4.0
     $page = $this->request->query('page');
 
 You can either directly access the query property, or you can use
@@ -707,7 +707,7 @@ that::
         // Disable caching
         $this->response = $this->response->withDisabledCache();
 
-        // Prior to 3.4.0 
+        // Prior to 3.4.0
         $this->response->disableCache();
     }
 

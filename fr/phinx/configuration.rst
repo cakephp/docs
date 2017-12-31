@@ -305,7 +305,7 @@ The aliased classes will still be required to implement the ``Phinx\Migration\Cr
 Version Order
 -------------
 
-When rolling back or printing the status of migrations, Phinx orders the executed migrations according to the 
+When rolling back or printing the status of migrations, Phinx orders the executed migrations according to the
 ``version_order`` option, which can have the following values:
 
 * ``creation`` (the default): migrations are ordered by their creation time, which is also part of their filename.

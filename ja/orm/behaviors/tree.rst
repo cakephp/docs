@@ -272,14 +272,14 @@ TreeBehavior は、内部のすべての削除操作を処理します。
 これは条件付き削除のためにノードのさまざまな子をループするときに注意することは重要です。 ::
 
     $descendants = $teams->find('children', ['for' => 1]);
-    
+
     foreach ($descendants as $descendant) {
         $team = $teams->get($descendant->id); // 最新のエンティティーオブジェクトを検索
         if ($team->expired) {
             $teams->delete($team); // 削除して、データベースに登録された lft と rght を並び替えます
         }
     }
-    
+
 TreeBehavior は、ノードが削除されたときに、テーブル内のレコードの lft と rght の値を並べ替えます。
 したがって、(削除操作の前に保存された) ``$descendants`` 内のエンティティーの lft と rght の値は
 不正確になります。テーブルの不一致を防ぐために、エンティティーは、

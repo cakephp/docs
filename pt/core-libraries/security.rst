@@ -16,7 +16,7 @@ Criptografando e Descriptografando Dados
 .. php:staticmethod:: encrypt($text, $key, $hmacSalt = null)
 .. php:staticmethod:: decrypt($cipher, $key, $hmacSalt = null)
 
-Criptografando ``$text`` usando AES-256. A ``$key`` deve ser um valor com 
+Criptografando ``$text`` usando AES-256. A ``$key`` deve ser um valor com
 dados variados como uma senha forte. O resultado retornado será o valor
 criptografado com um `HMAC checksum`.
 
@@ -25,7 +25,7 @@ Este método irá usar `openssl <http://php.net/openssl>`_ ou `mcrypt
 
 .. warning::
     A extensão `mcrypt <http://php.net/mcrypt>`_ foi considerada obsoleta no PHP7.1
-    
+
 
 Este método **nunca** deve ser usado para armazenar senhas. Em vez disso, você deve usar
 o método de ``hash`` de mão única fornecidos por

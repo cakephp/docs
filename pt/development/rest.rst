@@ -95,9 +95,9 @@ as actions, podemos avançar para criar a lógica em nossas actions no controlle
     }
 
 Os controllers RESTful geralmente usam extensões analisadas para exibir diferentes visualizações
-com base em diferentes tipos de requisições. Como estamos lidando com pedidos REST, estaremos fazendo visualizações XML. 
+com base em diferentes tipos de requisições. Como estamos lidando com pedidos REST, estaremos fazendo visualizações XML.
 Você pode fazer visualizações JSON usando o CakePHP's para criar :doc:`/views/json-and-xml-views`. Ao usar o buld-in
-:php:class:`XmlView` podemos definir uma variável na view ``_serialize``. A variável de exibição é usada para definir 
+:php:class:`XmlView` podemos definir uma variável na view ``_serialize``. A variável de exibição é usada para definir
 quais variáveis de exibição ``XmlView`` devem Serializar em XML ou JSON.
 
 

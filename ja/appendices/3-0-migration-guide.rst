@@ -253,7 +253,7 @@ SchemaShell を削除
 のようなより良いツールの登場により、SchemaShell は削除されました。
 これは、CakePHP と `Phinx <https://phinx.org/>`__ の間のラッパーとして機能する
 `CakePHP Migrations プラグイン <https://github.com/cakephp/migrations>`_
-に置き換えられました。 
+に置き換えられました。
 
 ExtractTask
 -----------
@@ -462,7 +462,7 @@ Filter\AssetFilter
 * ``Session::$requestCountdown`` プロパティーは削除されました。
 * セッションの checkAgent 機能が削除されました。その機能は、 chrome のフレームや
   flash player が関与するとき、多くのバグを引き起こしました。
-* セッション用データベーステーブル名は ``cake_sessions`` の代わりに 
+* セッション用データベーステーブル名は ``cake_sessions`` の代わりに
   ``sessions`` になります。
 * セッションクッキーのタイムアウトは、自動的にセッションデータのタイムアウトと並行して更新されます。
 * セッションクッキーのパスは、"/" の代わりにアプリのベースパスがデフォルトになります。
@@ -739,7 +739,7 @@ TestSuite
 TestCase
 --------
 
-- ``_normalizePath()`` が追加されました。パスの比較をテストすることができ、DS 設定 
+- ``_normalizePath()`` が追加されました。パスの比較をテストすることができ、DS 設定
   (例えば、Windows の ``\`` や UNIX の ``/``) に関しては、
   すべてのオペレーティングシステムで実行できます。
 
@@ -838,7 +838,7 @@ View クラス
   実行時にヘルパーをロードする必要がある場合は、あなたのビューファイルに
   ``$this->addHelper()`` を使用する必要があります。
 - ``View`` は、テンプレートが存在しない時に ``MissingViewException`` の代わりに
-  ``Cake\View\Exception\MissingTemplateException`` を発生させます。 
+  ``Cake\View\Exception\MissingTemplateException`` を発生させます。
 
 ViewBlock
 ---------
@@ -1087,7 +1087,7 @@ I18n
 ====
 
 国際化サブシステムは完全に書き直されました。一般的に、 ``__()`` 関数ファミリーを
-使用している場合は、確実に前のバージョンと同じ振る舞いを期待できます。 
+使用している場合は、確実に前のバージョンと同じ振る舞いを期待できます。
 
 内部的には、 ``I18n`` クラスは ``Aura\Intl`` を使用し、適切なメソッドは、
 このライブラリーの特定の機能にアクセスするために用意されています。
@@ -1247,7 +1247,7 @@ Security
   blowfish ハッシュの生成と検証をするためには、PHP の `password_hash()` と
   `password_verify()` を使用する必要があります。
   CakePHP と一緒にインストールされる互換ライブラリー `ircmaxell/password-compat
-  <https://packagist.org/packages/ircmaxell/password-compat>`_ は、 
+  <https://packagist.org/packages/ircmaxell/password-compat>`_ は、
   PHP < 5.5 のためにこれらの機能を提供します。
 - データの暗号化/復号化する場合、OpenSSL は mcrypt より優先的に使用されます。
   この変更は、パフォーマンスが向上し、mcrypt のためのサポートを終了することで、

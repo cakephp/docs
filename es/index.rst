@@ -1,11 +1,11 @@
 Bienvenido
 ##########
 
-CakePHP 3 es un ``framework`` de desarrollo web que funciona con **PHP 7.1** 
+CakePHP 3 es un ``framework`` de desarrollo web que funciona con **PHP 7.1**
 (min. PHP |minphpversion|). Puedes leer :doc:`CakePHP de un Vistazo </intro>`
 para introducirte en los fundamentos de CakePHP 3.
 
-El manual de CakePHP (``Cookbook``) es un proyecto de documentación abierto, 
+El manual de CakePHP (``Cookbook``) es un proyecto de documentación abierto,
 editable y mantenido por la comunidad. Fíjate en el icono del lápiz anclado en
 en el lado derecho de la página; te llevará al editor online de GitHub de la
 página en la que estés permitiéndote contribuir con cualquier añadido, borrado
@@ -16,8 +16,8 @@ o corrección de la documentación.
     **Lee el libro donde sea**
 
     .. image:: /_static/img/read-the-book.jpg
-    
-    Disfruta del manual de CakePHP en cualquier sitio. Disponible tanto en PDF 
+
+    Disfruta del manual de CakePHP en cualquier sitio. Disponible tanto en PDF
     como en EPUB, puedes leerlo en más dispositivos y de manera offline.
 
     - `PDF <../_downloads/es/CakePHPCookbook.pdf>`_
@@ -33,13 +33,13 @@ Si estás atascado hay varios lugares de :doc:`donde obtener ayuda
 Primeros pasos
 ==============
 
-Aprender un nuevo framework puede ser intimidante y excitante al mismo tiempo. 
-Para ayudarte hemos creado un libro de recetas lleno de ejemplos y recetas 
-para completar las tareas habituales. Si eres nuevo deberías comenzar con la 
+Aprender un nuevo framework puede ser intimidante y excitante al mismo tiempo.
+Para ayudarte hemos creado un libro de recetas lleno de ejemplos y recetas
+para completar las tareas habituales. Si eres nuevo deberías comenzar con la
 :doc:`/guía de inicio rápido </quickstart>` que te ofrecerá un tour por lo que ofrece CakePHP
 y como funciona.
 
-Después de finalizar el tutorial Bookmarker (Favoritos), puedes conocer mejor los 
+Después de finalizar el tutorial Bookmarker (Favoritos), puedes conocer mejor los
 elementos claves en una aplicación de CakePHP:
 
 * El :ref:`ciclo de vida de una petición CakePHP <request-cycle>`

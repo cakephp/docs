@@ -37,11 +37,11 @@ you can just start using the ORM. For example if we wanted to load some data fro
 table we could do::
 
     use Cake\ORM\TableRegistry;
-    
+
     $articles = TableRegistry::get('Articles');
-    
+
     $query = $articles->find();
-    
+
     foreach ($query as $row) {
         echo $row->title;
     }
@@ -67,7 +67,7 @@ suffix as the class name. Once your class has been created you get a reference
 to it using the :php:class:`~Cake\\ORM\\TableRegistry` as before::
 
     use Cake\ORM\TableRegistry;
-    
+
     // Now $articles is an instance of our ArticlesTable class.
     $articles = TableRegistry::get('Articles');
 

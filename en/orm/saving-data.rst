@@ -941,7 +941,7 @@ replace
     the junction table. If there are existing link in the database to some of
     the entities intended to be saved, those links will be updated, not deleted
     and then re-saved.
-    
+
 See :ref:`belongs-to-many-associations` for details on defining the ``saveStrategy``.
 
 By default the ``replace`` strategy is used. Whenever you add new records into
@@ -1150,7 +1150,7 @@ many rows at once::
         $this->updateAll(
             ['published' => true], // fields
             ['published' => false] // conditions
-        ); 
+        );
     }
 
 If you need to do bulk updates and use SQL expressions, you will need to use an

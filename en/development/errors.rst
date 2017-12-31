@@ -171,7 +171,7 @@ exceptions for HTTP methods
 .. php:exception:: NotAcceptableException
 
     Used for doing a 406 Not Acceptable error.
-    
+
     .. versionadded:: 3.1.7 NotAcceptableException has been added.
 
 .. php:exception:: ConflictException
@@ -213,7 +213,7 @@ or HTTP errors. An example use of the HTTP exceptions could be rendering 404
 pages for items that have not been found::
 
     use Cake\Network\Exception\NotFoundException;
-    
+
     public function view($id = null)
     {
         $article = $this->Articles->findById($id)->first();
@@ -380,7 +380,7 @@ You can throw any of the HTTP related exceptions from your controller actions
 to indicate failure states. For example::
 
     use Cake\Network\Exception\NotFoundException;
-    
+
     public function view($id = null)
     {
         $article = $this->Articles->findById($id)->first();

@@ -136,8 +136,8 @@ Use ``--dry-run`` to print the queries to standard output without executing them
 
 .. note::
 
-        When rolling back, Phinx orders the executed migrations using 
-        the order specified in the ``version_order`` option of your 
+        When rolling back, Phinx orders the executed migrations using
+        the order specified in the ``version_order`` option of your
         ``phinx.yml`` file.
         Please see the :doc:`Configuration <configuration>` chapter for more information.
 
@@ -306,7 +306,7 @@ Phinx can be used within your unit tests to prepare or seed the database. You ca
           $app->run(new StringInput('migrate'), new NullOutput());
         }
 
-If you use a memory database, you'll need to give Phinx a specific PDO instance. You can interact with Phinx directly using the Manager class : 
+If you use a memory database, you'll need to give Phinx a specific PDO instance. You can interact with Phinx directly using the Manager class :
 
 .. code-block:: php
 
@@ -318,7 +318,7 @@ If you use a memory database, you'll need to give Phinx a specific PDO instance.
         use Symfony\Component\Console\Output\NullOutput;
 
         class DatabaseTestCase extends TestCase {
-                
+
             public function setUp ()
             {
                 $pdo = new PDO('sqlite::memory:', null, null, [

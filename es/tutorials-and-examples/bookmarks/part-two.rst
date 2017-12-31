@@ -1,10 +1,10 @@
 Tutorial Bookmarker (Favoritos) - Parte 2
 #########################################
 
-Tras realizar :doc:`la primera parte de este tutorial </tutorials-and-examples/bookmarks/intro>` 
+Tras realizar :doc:`la primera parte de este tutorial </tutorials-and-examples/bookmarks/intro>`
 deberías tener una aplicación muy básica para guardar favoritos.
 
-En este capítulo añadiremos la autenticación y restringiremos los favoritos 
+En este capítulo añadiremos la autenticación y restringiremos los favoritos
 (bookmarks) para que cada usuario pueda consultar o modificar solamente los suyos.
 
 Añadir login
@@ -12,15 +12,15 @@ Añadir login
 
 En CakePHP, la autenticación se maneja mediante :doc:`/controllers/components`.
 
-Los componentes pueden verse como una forma de crear trozos reutilizables de 
-código de controlador para una finalidad o idea. Además pueden engancharse al 
-evento de ciclo de vida de los controladores e interactuar con tu aplicación 
+Los componentes pueden verse como una forma de crear trozos reutilizables de
+código de controlador para una finalidad o idea. Además pueden engancharse al
+evento de ciclo de vida de los controladores e interactuar con tu aplicación
 de ese modo.
 
-Para empezar añadiremos el componente :doc:`AuthComponent </controllers/components/authentication>` 
+Para empezar añadiremos el componente :doc:`AuthComponent </controllers/components/authentication>`
 a nuestra aplicación.
 
-Como queremos que todos nuestros métodos requieran de autenticación añadimos 
+Como queremos que todos nuestros métodos requieran de autenticación añadimos
 *AuthComponent* en *AppController* del siguiente modo::
 
     // En src/Controller/AppController.php
@@ -46,7 +46,7 @@ Como queremos que todos nuestros métodos requieran de autenticación añadimos
                     'controller' => 'Users',
                     'action' => 'login'
                 ],
-                'unauthorizedRedirect' => $this->referer() // Si no está autorizado, 
+                'unauthorizedRedirect' => $this->referer() // Si no está autorizado,
 				//el usuario regresa a la página que estaba
             ]);
 
@@ -56,12 +56,12 @@ Como queremos que todos nuestros métodos requieran de autenticación añadimos
         }
     }
 
-Acabamos de decirle a CakePHP que queremos cargar los compomentes ``Flash`` y 
-``Auth``. Además hemos personalizado la configuración de *AuthComponent* indicando 
+Acabamos de decirle a CakePHP que queremos cargar los compomentes ``Flash`` y
+``Auth``. Además hemos personalizado la configuración de *AuthComponent* indicando
 que utilice como *username* el campo *email* de la tabla *Users* de la base de datos.
 
-Ahora si vas a cualquier *URL* serás enviado a **/users/login**, que mostrará una 
-página de error ya que no hemos escrito el código de la función *login* todavía, 
+Ahora si vas a cualquier *URL* serás enviado a **/users/login**, que mostrará una
+página de error ya que no hemos escrito el código de la función *login* todavía,
 así que hagámoslo ahora::
 
     // En src/Controller/UsersController.php
@@ -86,22 +86,22 @@ Y en **src/Template/Users/login.ctp** añade lo siguiente::
     <?= $this->Form->button('Login') ?>
     <?= $this->Form->end() ?>
 
-Ahora que tenemos un formulario de *login* sencillo deberíamos poder loguearnos 
+Ahora que tenemos un formulario de *login* sencillo deberíamos poder loguearnos
 con algún usuario que tenga contraseña encriptada.
 
 .. note::
 
-    Si ninguno de tus usuarios tiene contraseña encriptada comenta la línea 
-	``loadComponent('Auth')``, a continuación edita un usuario y modifica 
+    Si ninguno de tus usuarios tiene contraseña encriptada comenta la línea
+	``loadComponent('Auth')``, a continuación edita un usuario y modifica
 	la contraseña.
 
-Ahora deberías poder loguearte, si no es así asegúrate de que estás utilizando 
+Ahora deberías poder loguearte, si no es así asegúrate de que estás utilizando
 un usuario con contraseña encriptada.
 
 Añadir *logout*
 ===============
 
-Ahora que la gente puede loguearse probablemente quieras añadir una forma de 
+Ahora que la gente puede loguearse probablemente quieras añadir una forma de
 desloguearse también.
 
 Otra vez en ``UsersController``, añade el siguiente código::
@@ -119,17 +119,17 @@ Otra vez en ``UsersController``, añade el siguiente código::
     }
 
 
-Este código añade la acción ``logout`` como una acción pública e implementa 
+Este código añade la acción ``logout`` como una acción pública e implementa
 la función.
 
-Ahora puedes visitar ``/users/logout`` para desloguearte, deberías ser enviado 
+Ahora puedes visitar ``/users/logout`` para desloguearte, deberías ser enviado
 a la página de inicio.
 
 Habilitar registros
 ===================
 
-Si no estás logueado e intentas acceder a **/users/add** eres reenviado a la 
-página de login. Deberíamos arreglar esto si queremos permitir que la gente se 
+Si no estás logueado e intentas acceder a **/users/add** eres reenviado a la
+página de login. Deberíamos arreglar esto si queremos permitir que la gente se
 pueda registrar en nuestra aplicación.
 
 En el controlador ``UsersController`` añade lo siguiente::
@@ -142,25 +142,25 @@ En el controlador ``UsersController`` añade lo siguiente::
     }
 
 
-El código anterior le dice a ``AuthComponent`` que la acción ``add()`` no 
+El código anterior le dice a ``AuthComponent`` que la acción ``add()`` no
 necesita autenticación ni autorización.
 
-Tal vez quieras tomarte un tiempo para limpiar **Users/add.ctp** y eliminar los 
-enlaces erróneos o continuar con el siguiente apartado. No vamos a crear la 
-edición de usuarios, consulta o listado en este tutorial así que no funcionará 
+Tal vez quieras tomarte un tiempo para limpiar **Users/add.ctp** y eliminar los
+enlaces erróneos o continuar con el siguiente apartado. No vamos a crear la
+edición de usuarios, consulta o listado en este tutorial así que no funcionará
 el control de ``AuthComponent`` para el acceso a esas acciones del controlador.
 
 Restringiendo el acceso a favoritos
 ===================================
 
-Ahora que los usuarios pueden loguearse queremos restringir los favoritos que 
-uno puede ver a los que creó. Esto lo haremos usando un adaptador de 
+Ahora que los usuarios pueden loguearse queremos restringir los favoritos que
+uno puede ver a los que creó. Esto lo haremos usando un adaptador de
 'authorization'.
 
-Ya que nuestro requisito es muy sencillo podremos escribir un código también muy 
+Ya que nuestro requisito es muy sencillo podremos escribir un código también muy
 sencillo en nuestro ``BookmarksController``.
 
-Pero antes necesitamos decirle al componente *AuthComponent* cómo va a autorizar 
+Pero antes necesitamos decirle al componente *AuthComponent* cómo va a autorizar
 acciones nuestra aplicación. Para ello añade en ``AppController``::
 
     public function isAuthorized($user)
@@ -194,12 +194,12 @@ Tú método ``initialize()`` debería verse así::
                 'unauthorizedRedirect' => $this->referer()
             ]);
 
-            // Permite ejecutar la acción display para que nuestros controladores 
+            // Permite ejecutar la acción display para que nuestros controladores
             // de páginas sigan funcionando.
             $this->Auth->allow(['display']);
         }
 
-Por defecto denegaremos el acceso siempre y concederemos los accesos donde tenga 
+Por defecto denegaremos el acceso siempre y concederemos los accesos donde tenga
 sentido.
 
 Primero añadiremos la lógica de autorización para favoritos.
@@ -228,8 +228,8 @@ En tu ``BookmarksController`` añade lo siguiente::
         return parent::isAuthorized($user);
     }
 
-Ahora si intentas consultar, editar o borrar un favorito que no te pertenece 
-deberías ser redirigido a la página desde la que accediste. 
+Ahora si intentas consultar, editar o borrar un favorito que no te pertenece
+deberías ser redirigido a la página desde la que accediste.
 
 Si no se muestra ningún mensaje de error añade lo siguiente a tu layout::
 
@@ -241,7 +241,7 @@ Deberías poder ver ahora los mensajes de error de autorización.
 Arreglar lista de consulta y formularios
 ========================================
 
-Mientras que *view* y *delete* están funcionando, *edit*, *add* e *index* presentan un 
+Mientras que *view* y *delete* están funcionando, *edit*, *add* e *index* presentan un
 par de problemas:
 
 #. Cuando añades un favorito puedes elegir el usuario.
@@ -250,9 +250,9 @@ par de problemas:
 
 Abordemos el formulario de añadir favorito primero.
 
-Para empezar elimina ``input('user_id')`` de **src/Template/Bookmarks/add.ctp**. 
+Para empezar elimina ``input('user_id')`` de **src/Template/Bookmarks/add.ctp**.
 
-Con esa parte eliminada actualizaremos la acción ``add()`` de 
+Con esa parte eliminada actualizaremos la acción ``add()`` de
 **src/Controller/BookmarksController.php** para que luzca así::
 
     public function add()
@@ -272,11 +272,11 @@ Con esa parte eliminada actualizaremos la acción ``add()`` de
         $this->set('_serialize', ['bookmark']);
     }
 
-Completando la propiedad de la entidad con datos de la sesión eliminaremos 
-cualquier posibilidad de que el usuario modifique el usuario al que pertenece 
-el favorito. Haremos lo mismo para el formulario de edición. 
+Completando la propiedad de la entidad con datos de la sesión eliminaremos
+cualquier posibilidad de que el usuario modifique el usuario al que pertenece
+el favorito. Haremos lo mismo para el formulario de edición.
 
-Tu acción ``edit()`` de **src/Controller/BookmarksController.php** debería ser 
+Tu acción ``edit()`` de **src/Controller/BookmarksController.php** debería ser
 así::
 
     public function edit($id = null)
@@ -301,9 +301,9 @@ así::
 Listado consulta
 ----------------
 
-Ahora solo necesitamos mostrar los favoritos del usuario actualmente logueado. 
+Ahora solo necesitamos mostrar los favoritos del usuario actualmente logueado.
 
-Podemos hacer eso actualizando la llamada a ``paginate()``. Haz que tu método 
+Podemos hacer eso actualizando la llamada a ``paginate()``. Haz que tu método
 ``index()`` de **src/Controller/BookmarksController.php** se vea así::
 
     public function index()
@@ -317,24 +317,24 @@ Podemos hacer eso actualizando la llamada a ``paginate()``. Haz que tu método
         $this->set('_serialize', ['bookmarks']);
     }
 
-Deberíamos actualizar también el método ``tags()`` y el método finder relacionado, 
+Deberíamos actualizar también el método ``tags()`` y el método finder relacionado,
 pero lo dejaremos como un ejercicio para que lo hagas por tu cuenta.
 
 Mejorar la experiencia de etiquetado
 ====================================
 
-Ahora mismo añadir nuevos tags es un proceso complicado desde que 
+Ahora mismo añadir nuevos tags es un proceso complicado desde que
 ``TagsController`` desautorizó todos los accesos.
 
-En vez de permitirlos podemos mejorar la *UI* para la selección de tags 
-utilizando un campo de texto separado por comas. Esto proporcionará una mejor 
+En vez de permitirlos podemos mejorar la *UI* para la selección de tags
+utilizando un campo de texto separado por comas. Esto proporcionará una mejor
 experiencia para nuestros usuarios y usa algunas de las mejores características de *ORM*.
 
 Añadir un campo calculado
 -------------------------
 
-Para acceder de forma sencilla a las etiquetas formateadas podemos añadir un 
-campo virtual/calculado a la entidad. 
+Para acceder de forma sencilla a las etiquetas formateadas podemos añadir un
+campo virtual/calculado a la entidad.
 
 En **src/Model/Entity/Bookmark.php** añade lo siguiente::
 
@@ -355,13 +355,13 @@ En **src/Model/Entity/Bookmark.php** añade lo siguiente::
         return trim($str, ', ');
     }
 
-Esto nos dará acceso a la propiedad calculada ``$bookmark->tag_string`` que 
+Esto nos dará acceso a la propiedad calculada ``$bookmark->tag_string`` que
 utilizaremos más adelante.
 
-Recuerda añadir la propiedad ``tag_string`` a la lista ``_accessible`` en tu 
+Recuerda añadir la propiedad ``tag_string`` a la lista ``_accessible`` en tu
 entidad para poder 'guardarla' más adelante.
 
-En **src/Model/Entity/Bookmark.php** añade ``tag_string`` a ``$_accessible`` de 
+En **src/Model/Entity/Bookmark.php** añade ``tag_string`` a ``$_accessible`` de
 este modo::
 
     protected $_accessible = [
@@ -378,8 +378,8 @@ este modo::
 Actualizar las vistas
 ---------------------
 
-Con la entidad actualizada podemos añadir un nuevo campo de entrada para nuestros 
-tags. En **src/Template/Bookmarks/add.ctp** y **src/Template/Bookmarks/edit.ctp**, 
+Con la entidad actualizada podemos añadir un nuevo campo de entrada para nuestros
+tags. En **src/Template/Bookmarks/add.ctp** y **src/Template/Bookmarks/edit.ctp**,
 cambia el campo ``tags._ids`` por el siguiente::
 
     echo $this->Form->input('tag_string', ['type' => 'text']);
@@ -387,11 +387,11 @@ cambia el campo ``tags._ids`` por el siguiente::
 Guardar el string de tags
 -------------------------
 
-Ahora que podemos ver los tags existentes como un string querremos guardar 
+Ahora que podemos ver los tags existentes como un string querremos guardar
 también esa información.
 
-Al haber marcado ``tag_string`` como accesible el ORM copiará esa información 
-del request a nuestra entidad. Podemos usar un método de gancho ``beforeSave()`` 
+Al haber marcado ``tag_string`` como accesible el ORM copiará esa información
+del request a nuestra entidad. Podemos usar un método de gancho ``beforeSave()``
 para parsear el *string* de etiquetas y encontrar/crear las entidades relacionadas.
 
 Añade el siguiente código a **src/Model/Table/BookmarksTable.php**::
@@ -434,24 +434,24 @@ Añade el siguiente código a **src/Model/Table/BookmarksTable.php**::
         return $out;
     }
 
-Aunque este código sea algo más complicado de lo que hemos hecho hasta ahora, nos 
+Aunque este código sea algo más complicado de lo que hemos hecho hasta ahora, nos
 ayudará a ver lo potente que es el *ORM* en CakePHP.
 
-Puedes manipular los resultados de la consulta usando los métodos 
-:doc:`/core-libraries/collections` y manejar escenearios en los que estás 
+Puedes manipular los resultados de la consulta usando los métodos
+:doc:`/core-libraries/collections` y manejar escenearios en los que estás
 creando entidades *on the fly* con facilidad.
 
 Para finalizar
 ==============
 
-Hemos mejorado nuestra aplicación de favoritos para manejar escenarios de 
+Hemos mejorado nuestra aplicación de favoritos para manejar escenarios de
 autenticación y de autorización/control de acceso básicos.
 
-Además hemos añadido algunas mejoras interesantes de experiencia de usuario 
+Además hemos añadido algunas mejoras interesantes de experiencia de usuario
 sacándole provecho a *FormHelper* y al potencial de *ORM*.
 
-Gracias por tomarte tu tiempo para explorar CakePHP. Ahora puedes realizar 
-el tutorial :doc:`/tutorials-and-examples/blog/blog`, aprender más sobre :doc:`/orm`, 
+Gracias por tomarte tu tiempo para explorar CakePHP. Ahora puedes realizar
+el tutorial :doc:`/tutorials-and-examples/blog/blog`, aprender más sobre :doc:`/orm`,
 o puedes leer detenidamente los :doc:`/topics`.
 
 .. meta::

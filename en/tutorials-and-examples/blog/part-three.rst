@@ -169,7 +169,7 @@ Create all files by launching bake commands::
     bin/cake bake template Categories
 
 Alternatively, you can bake all with just one line::
-    
+
     bin/cake bake all Categories
 
 The bake tool has created all your files in a snap. You can give them a quick

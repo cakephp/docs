@@ -145,7 +145,7 @@ CakePHP はきれいなディスパッチサイクルに使う強固なフィル
 
 .. note::
 
-    beforeDispatch メソッドがレスポンスを返した時に、コントローラーと afterDispatch 
+    beforeDispatch メソッドがレスポンスを返した時に、コントローラーと afterDispatch
     イベントは呼ばれません。
 
 次は、何らかの公開ページにおいて代替のレスポンスヘッダーを返すための

@@ -41,7 +41,7 @@ add more recipients to their respective field::
     // The email's To recipients are: to@example.com and to2@example.com
     $email->to('test@example.com', 'ToTest Example');
     // The email's To recipient is: test@example.com
-    
+
 .. deprecated:: 3.4.0
     Use ``setFrom()``, ``setTo()``, ``setCc()`` , ``setBcc()``  and ``setSubject()`` instead.
 
@@ -157,7 +157,7 @@ The above configuration would enable TLS communication for email messages.
 
 .. note::
     `Gmail SMTP settings <https://support.google.com/a/answer/176600?hl=en>`__.
-    
+
 .. note::
     To use SSL + SMTP, you will need to have the SSL configured in your PHP
     install.

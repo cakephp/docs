@@ -27,7 +27,7 @@ fields with errors will not be present in the returned entity::
     }
 
 .. versionadded:: 3.4.0
-    The ``getErrors()`` function was added.	
+    The ``getErrors()`` function was added.
 
 When building an entity with validation enabled the following occurs:
 
@@ -401,7 +401,7 @@ are null::
     $rules->add($rules->existsIn(
         ['parent_id', 'site_id'], // Schema: parent_id NULL, site_id NOT NULL
         'ParentNodes',
-        ['allowNullableNulls' => true] 
+        ['allowNullableNulls' => true]
     ));
 
     // A Node however should in addition also always reference a Site.

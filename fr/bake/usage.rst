@@ -49,7 +49,7 @@ des tâches disponibles. Vous devriez voir quelque chose comme ceci::
     - model
     - plugin
     - shell
-    - shell-helper 
+    - shell-helper
     - template
     - test
 

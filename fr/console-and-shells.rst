@@ -1317,7 +1317,7 @@ lequel vous souhaitez envoyer l'email en faisant::
     use Cake\Mailer\Email;
 
     $email = new Email();
-    // Avant 3.4 utilisez domain() 
+    // Avant 3.4 utilisez domain()
     $email->setDomain('www.example.org');
 
 Cela suppose que les ID du message généré sont valides et correspondent au

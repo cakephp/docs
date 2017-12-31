@@ -5,7 +5,7 @@ La clase App
 
 .. php:class:: App
 
-La clase App se encarga de la localización de recursos y de la 
+La clase App se encarga de la localización de recursos y de la
 administración de rutas.
 
 Búsqueda de clases
@@ -14,7 +14,7 @@ Búsqueda de clases
 .. php:staticmethod:: classname($name, $type = '', $suffix = '')
 
 Éste método se utiliza para resolver el nombre completo de una clase en todo Cakephp.
-Como parámetros del método entran los nombre cortos que usa CakePHP y devuelve 
+Como parámetros del método entran los nombre cortos que usa CakePHP y devuelve
 el nombre completo (La ruta relativa al espacio de trabajo)::
 
     // Resuelve el nombre de clase corto utilizando el nombre y el sufijo.
@@ -38,19 +38,19 @@ Búsqueda de rutas al espacio de nombres
 
 .. php:staticmethod:: path(string $package, string $plugin = null)
 
-Se usa para la búsqueda de rutas basada en convenio de nombres de 
+Se usa para la búsqueda de rutas basada en convenio de nombres de
 CakePHP::
 
     // Buscar la ruta de Controller/ en tu aplicación
     App::path('Controller');
 
-Se puede utilizar para todos los espacios de nombres de tu 
+Se puede utilizar para todos los espacios de nombres de tu
 aplicacón. Además puedes extraer rutas de plugins::
 
     // Devuelve la ruta del 'Component' en DebugKit
     App::path('Component', 'DebugKit');
 
-``App::path()`` sólo devuelve la ruta por defecto,no mostrará ningún tipo de 
+``App::path()`` sólo devuelve la ruta por defecto,no mostrará ningún tipo de
 información sobre las rutas adicionales configuadas en autoloader.
 
 .. php:staticmethod:: core(string $package)
@@ -74,9 +74,9 @@ devuelve la ruta completa al plugin DebugKit::
 Localización de temas (nota:'themes')
 =====================================
 
-Dado que los temas (nota:'themes') son también plugins, 
+Dado que los temas (nota:'themes') son también plugins,
 se localizan con el método anterior, "Plugin".
-(nota:'Aquí se refiere a los themes que se pueden crear 
+(nota:'Aquí se refiere a los themes que se pueden crear
 para modificar el comportamiento del bake, generador de código.')
 
 Cargar archivos externos (nota: 'vendor')
@@ -89,9 +89,9 @@ automáticamente o no se pueden instalar con el Composer, entonces hay que usar
 
 Si no puede instalar alguna librería con el Composer, debería instalar cada librería
 en el directorio apropiado, siguiendo el convenio del Composer: ``vendor/$author/$package``.
-Si tiene una librería de autor 'Acme' que se llama 'AcmeLib', la tiene que instalar en: 
-``vendor/Acme/AcmeLib``. Asumiendo que la librería no usa nombres de clase compatibles 
-con 'PSR-0', puede cargar las clases definiéndolas en el ``classmap``, dentro del archivo: 
+Si tiene una librería de autor 'Acme' que se llama 'AcmeLib', la tiene que instalar en:
+``vendor/Acme/AcmeLib``. Asumiendo que la librería no usa nombres de clase compatibles
+con 'PSR-0', puede cargar las clases definiéndolas en el ``classmap``, dentro del archivo:
 ``composer.json`` en su aplicación::
 
     "autoload": {
@@ -105,8 +105,8 @@ con 'PSR-0', puede cargar las clases definiéndolas en el ``classmap``, dentro d
         ]
     }
 
-Si la librería no usa clases y sólo proporciona métodos,puede configurar 
-el Composer para que cargue esos archivos al inicio de cada petición('request'), 
+Si la librería no usa clases y sólo proporciona métodos,puede configurar
+el Composer para que cargue esos archivos al inicio de cada petición('request'),
 usando la estrategia de carga automática de ficheros ``files``, como sigue::
 
     "autoload": {
@@ -120,7 +120,7 @@ usando la estrategia de carga automática de ficheros ``files``, como sigue::
         ]
     }
 
-Después de la configuración de las librerías externas, tiene que regenerar el 
+Después de la configuración de las librerías externas, tiene que regenerar el
 autoloader de su aplicación usando::
 
     $ php composer.phar dump-autoload

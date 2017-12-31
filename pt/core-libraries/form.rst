@@ -98,7 +98,7 @@ adequadas. Poderíamos também ter usado o método ``validate()`` apenas para va
 a requisição de dados::
 
     $isValid = $form->validate($this->request->getData());
-    
+
 
 Definindo os Valores do Formulário
 ==================================
@@ -124,17 +124,17 @@ os valores usando ``$this->request->getData()``, como em todos os outros formul�
                     $this->Flash->error('Houve um problema ao enviar seu formulário.');
                 }
             }
-            
+
             if ($this->request->is('get')) {
                 //Values from the User Model e.g.
                 $this->request->getData('name', 'John Doe');
                 $this->request->getData('email','john.doe@example.com');
             }
-            
+
             $this->set('contact', $contact);
         }
     }
-    
+
 Valores devem apenas serem definidos se a requesição é do tipo GET, caso contrário
 você sobreescreverá os dados anteriormente passados via POST que de certa forma
 poderiam estar incorretos e não salvos.
@@ -182,7 +182,7 @@ Prossiga para Criação do HTML com o FormHelper para ver o resultado.
 Criando o HTML com FormHelper
 =============================
 
-Uma vez sido criado uma class Form, 
+Uma vez sido criado uma class Form,
 Once you've created a Form class, você provavelmente vai querer criar um formulário
 HTML para isso. FormHelper compreende objetos Form apenas como entidades ORM::
 

@@ -66,7 +66,7 @@ CakePHP事件会触发事件管理器。在各表、视图、控制器中使用 
     $events = $this->eventManager();
 
 各模型都拥有一个独立的事件管理器，而视图和控制器共享一个。这使得模型的事件可以容纳自身，并且能够让部件
-或者控制器基于视图中的事件来启动。 
+或者控制器基于视图中的事件来启动。
 
 全局事件管理器
 -----------------------
@@ -124,7 +124,7 @@ CakePHP事件会触发事件管理器。在各表、视图、控制器中使用 
 注册监听器
 =====================
 
-监听器是为事件注册回调函数的好方法。它通过包含任意你想注册回调函数的类中的 :php:class:`Cake\\Event\\EventListenerInterface` 
+监听器是为事件注册回调函数的好方法。它通过包含任意你想注册回调函数的类中的 :php:class:`Cake\\Event\\EventListenerInterface`
 接口来实现。包含它的类需要实现 ``implementedEvents()`` 方法。该方法需要返回一个该类掌握的有所有事件的名字的关联数组。
 
 继续我们之前的例子，让我们想象我们有一个用户统计类，负责计算用户的购买记录，并且编写成全局位置的统计。这是个非常适合使用监
@@ -152,7 +152,7 @@ CakePHP事件会触发事件管理器。在各表、视图、控制器中使用 
     $statistics = new UserStatistic();
     $this->Orders->eventManager()->on($statistics);
 
-像你在上面的代码中看到的，``on()`` 函数会接收 ``EventListener`` 接口的实例。在内部，事件管理器会使用 ``implementedEvents()`` 
+像你在上面的代码中看到的，``on()`` 函数会接收 ``EventListener`` 接口的实例。在内部，事件管理器会使用 ``implementedEvents()``
 来登录正确的回调函数。
 
 注册匿名监听器
@@ -181,7 +181,7 @@ CakePHP事件会触发事件管理器。在各表、视图、控制器中使用 
     }
 
 当使用不触发特殊事件的插件时，你可以触动默认事件的事件监听器。让我们举个掌管用户的反馈表单的'UserFeedback'插件的例子。从你的
-应用开始，你可能会知道何时一个反馈记录会被存储并且最终处理它。你可以监听全局的 
+应用开始，你可能会知道何时一个反馈记录会被存储并且最终处理它。你可以监听全局的
 ``Model.afterSave`` 事件。然而，你可以取得一个更加直接的路径并且仅仅监听你需要的事件::
 
     // 在存储操作之前，你可以
@@ -268,7 +268,7 @@ CakePHP事件会触发事件管理器。在各表、视图、控制器中使用 
         }
     }
 
-如你所见， ``EventListener`` 对象的主要不同是需要用一个数组来确定回调方法和选择优先级。 
+如你所见， ``EventListener`` 对象的主要不同是需要用一个数组来确定回调方法和选择优先级。
 ``callable`` 键是一个管理器可以读取以确定调用类中哪个方法的特殊数组输入。
 
 将事件数据作为函数参数取得
@@ -283,7 +283,7 @@ CakePHP事件会触发事件管理器。在各表、视图、控制器中使用 
 
     function (Event $event, $viewFileName)
 
-提供给事件构造函数的各值会按照它们在数据数组的顺序转化成函数的参数。如果你使用一个关联数组， 
+提供给事件构造函数的各值会按照它们在数据数组的顺序转化成函数的参数。如果你使用一个关联数组，
 ``array_values`` 的结果将会决定函数参数的顺序。
 
 .. note::
@@ -303,8 +303,8 @@ CakePHP事件会触发事件管理器。在各表、视图、控制器中使用 
     ]);
     $this->eventManager()->dispatch($event);
 
-:php:class:`Cake\\Event\\Event` 在构造函数中接收3个参数。第一个是事件名，你应该尽可能确保该名字是唯一可读的。我们推荐以下惯例: 
-``Layer.eventName`` 对应发生在一个层级的事件（例如；``Controller.startup``，``View.beforeRender``），``Layer.Class.eventName`` 
+:php:class:`Cake\\Event\\Event` 在构造函数中接收3个参数。第一个是事件名，你应该尽可能确保该名字是唯一可读的。我们推荐以下惯例:
+``Layer.eventName`` 对应发生在一个层级的事件（例如；``Controller.startup``，``View.beforeRender``），``Layer.Class.eventName``
 对应发生在某个层的特定类中的事件，比方说 ``Model.User.afterRegister`` 或者 ``Controller.Courses.invalidAccess``。
 
 第二个参数是 ``subject`` ，表明着对象与事件的关联，通常是触发与自身相关的事件的类，``$this`` 是最常见的使用例子。尽管一个

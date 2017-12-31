@@ -7,7 +7,7 @@ La página oficial de CakePHP
 `https://cakephp.org <https://cakephp.org>`_
 
 La página oficial de CakePHP es siempre un gran lugar para visitar. Proporciona
-enlaces a las herramientas más utilizadas por desarrolladores, ``screencasts``, 
+enlaces a las herramientas más utilizadas por desarrolladores, ``screencasts``,
 oportunidades para hacer una donación y descargas.
 
 El Cookbook
@@ -15,20 +15,20 @@ El Cookbook
 
 `https://book.cakephp.org <https://book.cakephp.org>`_
 
-Este manual probablemente debería ser el primer lugar al que debas acudir 
+Este manual probablemente debería ser el primer lugar al que debas acudir
 para obtener respuestas. Como muchos otros proyectos de código libre, nuevos
 colaborades se unen regularmente. Intenta encontrar por ti mismo las respuestas
 a tus preguntas primero, puede que así tardes más en encontrar las respuestas
-pero permanecerán durante más tiempo - y además aliviarás nuestra carga de 
+pero permanecerán durante más tiempo - y además aliviarás nuestra carga de
 soporte. Tanto el manual como la API tienen una versión online.
 
-La Bakery 
+La Bakery
 =========
 
 `https://bakery.cakephp.org <https://bakery.cakephp.org>`_
 
 La "panadería" (``bakery``) de CakePHP es un lugar de intercambio para todo
-lo relacionado con CakePHP. Consúltala para tutoriales, casos de estudio y 
+lo relacionado con CakePHP. Consúltala para tutoriales, casos de estudio y
 ejemplos de código. Cuando estés familiarizado con CakePHP, accede y comparte
 tus conocimientos con la comunidad y gana fortuna y fama de forma instantánea.
 
@@ -38,7 +38,7 @@ La API
 `https://api.cakephp.org/ <https://api.cakephp.org/>`_
 
 Directo al punto y directo para desarrolladores del núcleo de CakePHP, la API
-(``Application Programming Interface``) es la documentación más completa para 
+(``Application Programming Interface``) es la documentación más completa para
 todos los detalles esenciales del funcionamiento interno del ``framework``.
 Es referencia directa al código, asi que trae tu sombrero de hélice.
 
@@ -64,7 +64,7 @@ El canal IRC
 
 Si estás atascado, péganos un grito en el canal IRC de CakePHP.
 Alguién del `equipo de desarrollo <https://github.com/cakephp?tab=members>`_
-está normalmente, especialmente durante las horas de día para usuarios de 
+está normalmente, especialmente durante las horas de día para usuarios de
 América del Norte y del Sur. Estaremos encantados de escucharte, tanto si
 necesitas ayuda como si quieres encontrar usuarios en tu zona o si quieres
 donar tu nuevo coche deportivo de marca.

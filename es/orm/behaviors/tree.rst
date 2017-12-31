@@ -16,8 +16,8 @@ Prerrequisitos
 Ese behavior  requiere que las siguientes columnas estén presentes en la tabla:
 
 - ``parent_id`` (nullable) La columna que contiene el ID del registro padre
-- ``lft``  (integer, signed) Utilisado para mantener la estructura en forma de árbol 
-- ``rght``  (integer, signed) Utilisado para mantener la estructura en forma de árbol 
+- ``lft``  (integer, signed) Utilisado para mantener la estructura en forma de árbol
+- ``rght``  (integer, signed) Utilisado para mantener la estructura en forma de árbol
 
 Usted puede configurar el nombre de esos campos. Encontrará más información sobre la significación de los campos y sobre la manera de utilizarlos en este artículo que describe la `MPTT logic <http://www.sitepoint.com/hierarchical-data-database-2/>`_
 
@@ -77,7 +77,7 @@ Recorrer los resultados encadenados requiere generalmente funciónes recursivas,
     //  O puede aficharlo bajo forma de texto, por ejemplo en un script de CLI
     foreach ($list as $categoryName) {
         echo $categoryName . "\n";
-    } 
+    }
 
 La salida se parecerá a esto::
 
@@ -139,7 +139,7 @@ Si los números de columna predeterminados empleados por ese behavior no corresp
         ]);
     }
 
-Nivel de Nodos (profundidad) 
+Nivel de Nodos (profundidad)
 ============================
 Conocer la profundidad de una estructura en árbol puede ser útil cuando quiere recuperar los nodos solo hasta cierto nivel, por ejemplo para generar un menú. Puede utilizar la opción ``level`` para especificar los campos que guardarán el nivel de cada nodo::
 
@@ -179,7 +179,7 @@ Recobro con campo de clasificación personalizada
 
 .. versionadded:: 3.0.14
 
-Por defecto, recover() clasifica los elementos por llave primaria. Eso funciona muy bien si se trata de una columna numérica (con incremento automático), pero puede ocasionar resultados raros si usted utiliza los UUIDs. 
+Por defecto, recover() clasifica los elementos por llave primaria. Eso funciona muy bien si se trata de una columna numérica (con incremento automático), pero puede ocasionar resultados raros si usted utiliza los UUIDs.
 Si necesita una clasificación personalizada para la recuperación de datos, puede agregar una cláusula de orden en la configuración::
 
     $this->addBehavior('Tree', [
@@ -196,7 +196,7 @@ Generalmente cuando utiliza el Tree behavior, no tiene que preocuparse por la re
 
 Proveer ids de padres inexistentes al grabar o intentar crear un bucle en el árbol (hacer un nodo hijo del mismo) provocará una excepción.
 Puede hacer un nodo a la raíz del árbol asignándolenull a la columna ‘parent_id’::
- 
+
     $aCategory = $categoriesTable->get(10);
     $aCategory->parent_id = null;
     $categoriesTable->save($aCategory);
@@ -218,7 +218,7 @@ También es posible suprimir solamente un nodo y reasignar todos los hijos al no
     $categoriesTable->delete($aCategory);
 
 Todos los nodos hijos serán conservados y un nuevo padre les será asignado.
-La supresión de un nodo se basa sobre los valores lft y rght de la entity. Es importante observarlo cuando se ejecuta un bucle sobre los hijos de un nodo para supresiones condicionales:: 
+La supresión de un nodo se basa sobre los valores lft y rght de la entity. Es importante observarlo cuando se ejecuta un bucle sobre los hijos de un nodo para supresiones condicionales::
 
     $descendants = $teams->find('children', ['for' => 1]);
     foreach ($descendants as $descendant) {

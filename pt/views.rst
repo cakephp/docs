@@ -5,12 +5,12 @@ Views (Visualização)
 
 .. php:class:: View
 
-*Views* são o **V** no MVC. *Views* são responsáveis por gerar a saída específica 
+*Views* são o **V** no MVC. *Views* são responsáveis por gerar a saída específica
 requerida para a requisição. Muitas vezes isso é um formulário Html, XML, ou JSON,
-mas *streaming* de arquivos e criar PDF's que os usuários podem baixar também 
+mas *streaming* de arquivos e criar PDF's que os usuários podem baixar também
 são responsabilidades da camanda View.
 
-O CakePHP vem com a algumas Classes View construídas para manipular os cenários de 
+O CakePHP vem com a algumas Classes View construídas para manipular os cenários de
 renderização mais comuns:
 
 - Para criar *webservices* XML ou JSON você pode usar a :doc:`views/json-and-xml-views`.
@@ -37,7 +37,7 @@ A App *View*
     {
     }
 
-Você pode usar sua ``AppView`` para carregar *helpers* que serão usados por todas 
+Você pode usar sua ``AppView`` para carregar *helpers* que serão usados por todas
 as views renderizadas na sua aplicação. CakePHP provê um método ``initialize()`` que é
 invocado no final do construtor da *View* para este tipo de uso:
 
@@ -68,9 +68,9 @@ A camada *View* do CakePHP é como você pode falar com seus usuários. A maior 
 suas views irão renderizar documentos HTML/XHTML para os browsers, mas você também pode precisar
 responder uma aplicação remota via JSON, ou ter uma saída de um arquivo csv para o usuário.
 
-Os arquivos de *template* CakePHP tem a extensão padrão **.ctp** (CakePHP Template) e utiliza a 
+Os arquivos de *template* CakePHP tem a extensão padrão **.ctp** (CakePHP Template) e utiliza a
 `Sintaxe PHP alternativa <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
-para controlar estruturas e saídas. Esses arquivos contem a lógica necessária para preparar os 
+para controlar estruturas e saídas. Esses arquivos contem a lógica necessária para preparar os
 dados recebidos do *controller* para o formato de apresentação que estará pronto para o seu público.
 
 *Echos* Alternativos
@@ -83,7 +83,7 @@ Echo, ou imprime a variável no seu *template*::
 Usando o suporte a Tag curta::
 
   <?= $variable ?>
-  
+
 Estruturas de controle alternativas
 -----------------------------------
 
@@ -91,8 +91,8 @@ Estruturas de controle, como ``if``, ``for``, ``foreach``, ``switch``, e ``while
 podem ser escritas em um formato simplificado. Observe que não há chaves. Ao invés disso, a
 chave de fim do``foreach`` é substituida por ``endforeach``. Cada uma das estruturas de
 controle listadas anteriormente tem uma sintaxe de fechamento similar: ``endif``,
-``endfor``, ``endforeach``, e ``endwhile``. Observe também que ao invés do uso 
-de ``ponto e virgula`` depois da estrutura do foreach (Exceto o último), existem 
+``endfor``, ``endforeach``, e ``endwhile``. Observe também que ao invés do uso
+de ``ponto e virgula`` depois da estrutura do foreach (Exceto o último), existem
 ``dois pontos``.
 
 O bloco a seguir é um exempo do uso de ``foreach``:
@@ -104,7 +104,7 @@ O bloco a seguir é um exempo do uso de ``foreach``:
     <li><?= $item ?></li>
   <?php endforeach; ?>
   </ul>
-  
+
 Outro exemplo, usando if/elseif/else. Note os dois pontos:
 
 .. code-block:: php
@@ -117,7 +117,7 @@ Outro exemplo, usando if/elseif/else. Note os dois pontos:
      <h3>Olá usuário desconhecido</h3>
   <?php endif; ?>
 
-Se você preferir usar uma linguagem de template como 
+Se você preferir usar uma linguagem de template como
 `Twig <http://twig.sensiolabs.org>`_, uma subclasse da *View* irá ligar
 sua linguagem de template e o CakePHP.
 
@@ -129,15 +129,15 @@ normalmente encontrada em **src/Template/Products/view.ctp**.
 A camada *view* do CakePHP pode ser constituida por um número diferente de partes. Cada
 parte tem diferentes usos, e serão abordadas nesse capítulo:
 
-- **views**: Templates são a parte da página que é única para a ação sendo executada. 
+- **views**: Templates são a parte da página que é única para a ação sendo executada.
   Eles formam o cerne da resposta da aplicação.
-- **elements**: pequenos bits reúsaveis do código da *view*. *Elements* são usualmente 
+- **elements**: pequenos bits reúsaveis do código da *view*. *Elements* são usualmente
   renderizados dentro das *views*.
-- **layouts**: Arquivos de modelo que contem código de apresentação que envolve interfaces 
+- **layouts**: Arquivos de modelo que contem código de apresentação que envolve interfaces
   da sua aplicação. A maioria das *Views* são renderizadas em um layout.
 - **helpers**: Essas classes encapsulam lógica de *View* que é necessária em vários lugares
-  na camada *view*. Entre outras coisas, *helpers* em CakePHP podem ajudar você a 
-  construir formulários, construir funcionalidades AJAX, paginar dados do *Model*, 
+  na camada *view*. Entre outras coisas, *helpers* em CakePHP podem ajudar você a
+  construir formulários, construir funcionalidades AJAX, paginar dados do *Model*,
   ou servir *feed* RSS.
 - **cells**: Essas classes proveem uma miniatura de funcionalidades de um controller para criar
   conponentes de interface de usuário independentes. Veja a documentação :doc:`/views/cells`
@@ -146,18 +146,18 @@ parte tem diferentes usos, e serão abordadas nesse capítulo:
 Variáveis da *View*
 -------------------
 
-Quaisquer variáveis que você definir no seu controller com ``set()`` ficarão disponíveis 
-tanto na view quanto no layout que sua view renderiza. Além do mais, quaisquer variáveis 
-definidas também ficarão disponíveis em qualquer *element*. Se você precisa passar variáveis 
+Quaisquer variáveis que você definir no seu controller com ``set()`` ficarão disponíveis
+tanto na view quanto no layout que sua view renderiza. Além do mais, quaisquer variáveis
+definidas também ficarão disponíveis em qualquer *element*. Se você precisa passar variáveis
 adicionais da *view* para o layout você pode chamar o ``set()`` no template da *view*,
 ou use os :ref:`view-blocks`.
 
-Você deve lembrar de **sempre** escapar dados do usuário antes de fazer a saída, 
+Você deve lembrar de **sempre** escapar dados do usuário antes de fazer a saída,
 pois, o CakePHP não escapa automaticamente a saída. Você pode escapar o conteúdo do usuário
 com a função ``h()``::
 
     <?= h($user->bio); ?>
-    
+
 Definindo Variáveis da View
 ---------------------------
 
@@ -179,7 +179,7 @@ Estendendo *Views*
 
 Estender *Views* permite a você utilizar uma view em outra. Combinando isso com os
 :ref:`view blocks <view-blocks>` dá a você uma forma poderosa para deixar suas *views*
-:term:`DRY`. Por Exemplo, sua aplicação tem uma *sidebar* que precisa mudar dependendo da *view* 
+:term:`DRY`. Por Exemplo, sua aplicação tem uma *sidebar* que precisa mudar dependendo da *view*
 especifica que está sendo renderizada. Ao estender um arquivo de exibição comum,
 Você pode evitar repetir a marcação comum para sua barra lateral e apenas definir as partes que mudam:
 
@@ -195,10 +195,10 @@ Você pode evitar repetir a marcação comum para sua barra lateral e apenas def
         <?= $this->fetch('sidebar') ?>
         </ul>
     </div>
-    
+
 O arquivo *view* acima poderia ser usado como uma view pai. Espera-se que a view
 estendida irá definir os *blocks* ``sidebar`` e ``title``. O *block* ``content``
-é um *block* especial que o CakePHP cria. Irá conter todo o conteúdo não capturado 
+é um *block* especial que o CakePHP cria. Irá conter todo o conteúdo não capturado
 da view extendida. Assumindo que nosso arquivo da *view* tem a variável ``$post`` com
 os dados sobre nosso *post*, a view poderia se parecer com isso:
 
@@ -225,22 +225,22 @@ os dados sobre nosso *post*, a view poderia se parecer com isso:
     // na view pai.
     <?= h($post->body) ?>
 
-A *view* do post acima mostra como você pode estender uma view, e preencher 
-um conjunto de *blocks*. Qualquer elemento que ainda não esteja em um *block* 
+A *view* do post acima mostra como você pode estender uma view, e preencher
+um conjunto de *blocks*. Qualquer elemento que ainda não esteja em um *block*
 definido será capturado e colocado em um *block* especial chamado ``content``.
-Quando uma *view* contém uma chamada ``extend()``, a execução continua até o final 
+Quando uma *view* contém uma chamada ``extend()``, a execução continua até o final
 do arquivo da *view* atual. Uma vez completado, a view estendida será renderizada.
-Chamando ``extend()`` mais de uma vez em um arquivo da *view* irá substituir 
+Chamando ``extend()`` mais de uma vez em um arquivo da *view* irá substituir
 a view pai processada em seguida::
 
     $this->extend('/Common/view');
     $this->extend('/Common/index');
-    
-A view acima irá resultar em **/Common/index.ctp** sendo renderizada como a *view* 
+
+A view acima irá resultar em **/Common/index.ctp** sendo renderizada como a *view*
 para a view atual.
 
 Você pode aninhar as view estendidas quantas vezes achar necessário. Cada *view* pode extender
-outra *view* se necessário. Cada *view* pai irá pegar o conteúdo da *view* anterior com 
+outra *view* se necessário. Cada *view* pai irá pegar o conteúdo da *view* anterior com
 o *block* ``content``.
 
 .. note::
@@ -252,18 +252,18 @@ o *block* ``content``.
 Você pode resgatar a lista de todos os blocos populados usand o método ``blocks()``::
 
     $list = $this->blocks();
-    
+
 .. _view-blocks:
-    
+
 Usando View Blocks
 ==================
 
-*View blocks* provê uma API flexível que lhe permite definir slots ou blocos em 
-suas *views/layouts* que serão definidas em outro lugar. Por exemplo, *blocks* 
+*View blocks* provê uma API flexível que lhe permite definir slots ou blocos em
+suas *views/layouts* que serão definidas em outro lugar. Por exemplo, *blocks*
 são ideais para implementar coisas como *sidebars*, ou regiões para carregar *assets*
-ao final/inicio do seu *layout*. *Blocks* podem ser definidos de duas formas: 
+ao final/inicio do seu *layout*. *Blocks* podem ser definidos de duas formas:
 Capturando um bloco, ou por atribuição direta. Os métodos ``start()``, ``append()``,
-``prepend()``, ``assign()``, ``fetch()``, e ``end()`` permitem que você trabalhe 
+``prepend()``, ``assign()``, ``fetch()``, e ``end()`` permitem que você trabalhe
 capturando blocos::
 
     // Cria o bloco *sidebar*.
@@ -300,9 +300,9 @@ O método ``reset()`` irá limpar ou sobrescrever um bloco em qualquer momento. 
 .. versionadded:: 3.2
     View::reset() foi adicionado na versão 3.2
 
-Atribuir um conteúdo de um *block* muitas vezes é usado quando você 
-quer converter uma varável da *view* em um bloco. Por exemplo, você pode 
-querer usar um *block* para a página Título e às vezes atribuir o título como uma 
+Atribuir um conteúdo de um *block* muitas vezes é usado quando você
+quer converter uma varável da *view* em um bloco. Por exemplo, você pode
+querer usar um *block* para a página Título e às vezes atribuir o título como uma
 variável da *view* no *controller*::
 
     // No arquivo da *view* ou *layout* acima $this->fetch('title')
@@ -315,19 +315,19 @@ O método ``prepend()`` permite que você prefixe conteúdo para um *block* exis
 
 .. note::
 
-    Você deve evitar usar ``content`` como um nome de *block*. Isto é utilizado pelo CakePHP 
+    Você deve evitar usar ``content`` como um nome de *block*. Isto é utilizado pelo CakePHP
     Internamente para exibições estendidas e exibir conteúdo no layout.
 
 
 Exibindo *Blocks*
 -----------------
 
-Você pode exibir *blocks* usando o método ``fetch()``. ``fetch()`` irá dar saída ao *block*, 
+Você pode exibir *blocks* usando o método ``fetch()``. ``fetch()`` irá dar saída ao *block*,
 retornando '' se um *block* não existir::
 
     <?= $this->fetch('sidebar') ?>
 
-Você também pode usar *fetch* para condicionalmente mostrar o conteúdo que deverá caso o 
+Você também pode usar *fetch* para condicionalmente mostrar o conteúdo que deverá caso o
 *block* existir. Isso é útil em layouts, ou estender view onde você quer condicionalmente mostrar
 titulos ou outras marcações:
 
@@ -351,7 +351,7 @@ Você pode definir um valor default usando o segundo argumento:
         <h3>Your Cart</h3>
         <?= $this->fetch('cart', 'Seu carrinho está vazio') ?>
     </div>
-    
+
 Usando *Blocks* para arquivos de script e css
 ---------------------------------------------
 
@@ -383,7 +383,7 @@ O :php:meth:`Cake\\View\\Helper\\HtmlHelper` também lhe permite controlar qual 
 
     // No seu *layout*
     <?= $this->fetch('scriptBottom') ?>
-    
+
 .. _view-layouts:
 
 *Layouts*
@@ -393,8 +393,8 @@ Um layout contém códigos de apresentação que envolvem uma *view*. Qualquer c
 as suas *views* deve ser colocada em um *layout*.
 
 O layout default do CakePHP está localizado em **src/Template/Layout/default.ctp**.
-Se você quer alterar a aparência geral da sua aplicação, então este é o lugar certo para começar, 
-porque o código de exibição processado pelo controlador é colocado dentro do 
+Se você quer alterar a aparência geral da sua aplicação, então este é o lugar certo para começar,
+porque o código de exibição processado pelo controlador é colocado dentro do
 layout padrão quando a página é processada.
 
 Outros arquivos de *layout* devem estar localizados em **src/Template/Layout**. Quando você cria
@@ -418,7 +418,7 @@ Aqui um exemplo do que um layout padrão pode parecer:
    </head>
    <body>
 
-   <!-- Se você quiser algum tipo de menu para mostrar no topo 
+   <!-- Se você quiser algum tipo de menu para mostrar no topo
    de todas as suas *views*, inclua isso aqui -->
    <div id="header">
        <div id="menu">...</div>
@@ -433,13 +433,13 @@ Aqui um exemplo do que um layout padrão pode parecer:
    </body>
    </html>
 
-Os blocos ``script``, ``css`` e ``meta`` contém qualquer conteúdo definido nas views usando o 
+Os blocos ``script``, ``css`` e ``meta`` contém qualquer conteúdo definido nas views usando o
 HTML helper do CakePHP. Útil para incluir arquivos JavaScript e CSS das suas views.
 
 .. note::
 
-    Quando usado ``HtmlHelper::css()`` ou ``HtmlHelper::script()`` em arquivos de template, 
-    especifique ``'block' => true`` para colocar o código HTML em um bloco com o mesmo nome. 
+    Quando usado ``HtmlHelper::css()`` ou ``HtmlHelper::script()`` em arquivos de template,
+    especifique ``'block' => true`` para colocar o código HTML em um bloco com o mesmo nome.
     (Veja API para mais detalhes de como utilizar).
 
 O bloco ``content`` contém os conteúdos da view renderizada.
@@ -467,7 +467,7 @@ usando a propriedade do *controller* ou *view* ``$layout``::
 
     // Em um arquivo de *view*
     $this->layout = 'loggedin';
-    
+
 Por exemplo, se uma seção de meu site inclui um pequeno espaço para um banner de propaganda, Eu devo
 criar um novo layout com o pequeno espaço de propaganda e especificá-lo para todas as ações dos *controllers*
 usando algo parecido com::
@@ -496,8 +496,8 @@ usando algo parecido com::
         }
     }
 
-Além do layout padrão, A aplicação esqueleto CakePHP também tem um layout 'ajax. 
-O layout Ajax é útil para criar resposta AJAX - É um layout vazio. 
+Além do layout padrão, A aplicação esqueleto CakePHP também tem um layout 'ajax.
+O layout Ajax é útil para criar resposta AJAX - É um layout vazio.
 (A maioria das chamadas AJAX somente necessitam retornar uma porção de marcação, ao invés de uma
 interface totalmente renderizada.)
 
@@ -506,7 +506,7 @@ A aplicação esqueleto também tem um layout padrão para ajudar a gerar RSS.
 Usando Layouts de Plugins
 -------------------------
 
-Se você quer usar um layout existente em um plugin, você pode usar :term:`sintaxe plugin`. 
+Se você quer usar um layout existente em um plugin, você pode usar :term:`sintaxe plugin`.
 Por exemplo, para usar o layout contact do plugin Contacts::
 
     namespace App\Controller;
@@ -529,20 +529,20 @@ Por exemplo, para usar o layout contact do plugin Contacts::
 
 .. php:method:: element(string $elementPath, array $data, array $options = [])
 
-Muitas aplicações tem pequenos blocos de código de apresentação que precisam ser repetidos página a página, 
+Muitas aplicações tem pequenos blocos de código de apresentação que precisam ser repetidos página a página,
 algumas vezes em diferentes lugares do layout. O CakePHP
 pode ajudar você repetir partes do seu website que precisam ser reusadas. Essas partes reusáveis são chamadas
 de Elements. Publicidade, Caixas de ajuda, controles de navegação, menus extras, formulários de login, e callouts
 são muitas vezes implementados em CakePHP como *elements*. Um elemento é basicamente uma mini-view que pode ser
 incluída em outras *views*, em *layouts*, e mesmo em outros *elements*. *Elements* podem ser usados
-para fazer uma *view* mais legível, colocando a renderização de elementos repetitivos em seu próprio arquivo. 
+para fazer uma *view* mais legível, colocando a renderização de elementos repetitivos em seu próprio arquivo.
 Eles também podem ajudá-lo a reusar conteúdos fragmentados em sua aplicação.
 
-*Elements* estão na pasta **src/Template/Element/**, e tem a extensão .ctp. 
+*Elements* estão na pasta **src/Template/Element/**, e tem a extensão .ctp.
 Eles são exibidos usando o método *element* da *view*::
 
     echo $this->element('helpbox');
-    
+
 Passando variáveis para um *Element*
 ------------------------------------
 
@@ -552,7 +552,7 @@ Você pode passar dados para um *element* através do segundo parâmetro do mét
         "helptext" => "Ah, Este texto é muito útil."
     ]);
 
-Dentro do arquivo do *element*, todas as variáveis estarão disponíveis como membros de um 
+Dentro do arquivo do *element*, todas as variáveis estarão disponíveis como membros de um
 array de parâmetros (da mesma forma que ``Controller::set()`` no *controller*
 funciona com arquivos de template). No exemplo a seguir, no arquivo
 **src/Template/Element/helpbox.ctp** pode usar a variável ``$helptext``::
@@ -574,10 +574,10 @@ As opções suportadas são 'cache' e 'callbacks'. Um exemplo::
             "callbacks" => true
         ]
     );
-    
-Cache de Elementos é facilidatado através da Classe ``Cache``. Você pode configurar *elements* 
+
+Cache de Elementos é facilidatado através da Classe ``Cache``. Você pode configurar *elements*
 para serem armazenados em qualquer configuração de cache que você possua. Isso dá a você uma grande
-flexibilidade para decidir onde e por quanto tempo *elements* serão armazenados. 
+flexibilidade para decidir onde e por quanto tempo *elements* serão armazenados.
 Para fazer cache de diferentes versões do mesmo *element* em uma aplicação, forneça um valor para a chave única de cache usando o seguinte formato::
 
     $this->element('helpbox', [], [
@@ -585,7 +585,7 @@ Para fazer cache de diferentes versões do mesmo *element* em uma aplicação, f
         ]
     );
 
-Se você precisa de mais lógica em seu *element*, como dados dinamicos de uma fonte de dados, 
+Se você precisa de mais lógica em seu *element*, como dados dinamicos de uma fonte de dados,
 considere usar uma *View Cell* ao invés de um *element*. Encontre mais :doc:`sobre View
 Cells </views/cells>`.
 
@@ -593,14 +593,14 @@ Fazendo Cache de *Elements*
 ---------------------------
 
 Você pode tirar vantagem do cache de *view* do CakePHP se você fornecer um parametro de cache.
-Se definido como ``true``, isso irá fazer cache do *element* na Configuração de cache 'default'. 
+Se definido como ``true``, isso irá fazer cache do *element* na Configuração de cache 'default'.
 De qualquer forma, você pode escolher a configuração de cache que será usada.
 Veja :doc:`/core-libraries/caching` para mais informações ao configurar
 ``Cache``. Um simples exemplo de caching de *element* poderia ser::
 
     echo $this->element('helpbox', [], ['cache' => true]);
 
-Se você renderizar o mesmo *element* mais de uma vez em uma *view* e tiver o cache habilitado, 
+Se você renderizar o mesmo *element* mais de uma vez em uma *view* e tiver o cache habilitado,
 tenha certeza de definir o parâmetro 'key' com um nome diferente a cada vez. Isso impedirá que cada chamada
 sucessiva sobrescreva o resultado do cache do *element* anterior. Por exemplo::
 
@@ -617,7 +617,7 @@ sucessiva sobrescreva o resultado do cache do *element* anterior. Por exemplo::
     );
 
 O bloco acima assegurará que o resultado dos *elements* terão o cache armazenados separadamente. Se você quer
-todos os *elements* usando a mesma configuração de cache, você pode evitar a repetição 
+todos os *elements* usando a mesma configuração de cache, você pode evitar a repetição
 definindo ``View::$elementCache`` para a configuração que deseja utilizar. O CakePHP irá usar essa configuração
 quando nenhuma for fornecida.
 
@@ -625,14 +625,14 @@ Requisitando *Elements* de um plugin
 ------------------------------------
 
 Se você está usando um plugin e deseja usar *elements* de dentro do plugin, simplesmente use
-a familiar :term:`sintaxe plugin`. Se a *view* está sendo renderizada de um 
+a familiar :term:`sintaxe plugin`. Se a *view* está sendo renderizada de um
 controller/action de um plugin, o nome do plugin será automaticamente prefixado em todos os *elements*
 a não ser que outro nome de plugin esteja presente.
 Se o *element* não existe no plugin, irá buscar na pasta principal da aplicação::
 
     echo $this->element('Contacts.helpbox');
 
-Se sua *view* é uma parte de um plugin, você pode omitir o nome do plugin. Por exemplo, 
+Se sua *view* é uma parte de um plugin, você pode omitir o nome do plugin. Por exemplo,
 se você está em ``ContactsController`` do plugin Contacts, terá o seguinte::
 
     echo $this->element('helpbox');
@@ -645,7 +645,7 @@ Para *elements* dentro de uma subpasta de um plugin
 (e.g., **plugins/Contacts/Template/Element/sidebar/helpbox.ctp**), use o seguinte::
 
     echo $this->element('Contacts.sidebar/helpbox');
-    
+
 
 Requisitando *Elements* do App
 ------------------------------
@@ -655,19 +655,19 @@ Se você está dentro de um arquivos de template de um plugin e quer renderizar 
   echo $this->element('some_global_element', [], ['plugin' => false]);
   // or...
   echo $this->element('some_global_element', ['localVar' => $someData], ['plugin' => false]);
-  
+
 *Routing prefix* e *Elements*
 -----------------------------
 
 .. versionadded:: 3.0.1
 
-Se você tiver um Routing prefix configurado, o caminho do *Element* pode ser trocado 
+Se você tiver um Routing prefix configurado, o caminho do *Element* pode ser trocado
 para a localização do prefixo, como layouts e *actions* da *View* fazem.
 Assumindo que você tem um prefixo "Admin" configurado e vocẽ chama::
 
     echo $this->element('my_element');
 
-O primeiro *element* procurado será em **src/Template/Admin/Element/**. Se o arquivo não existir, 
+O primeiro *element* procurado será em **src/Template/Admin/Element/**. Se o arquivo não existir,
 será procurado na localizaço padrão.
 
 Fazendo Cache de Seções da sua *View*
@@ -675,8 +675,8 @@ Fazendo Cache de Seções da sua *View*
 
 .. php:method:: cache(callable $block, array $options = [])
 
-As vezes gerar uma seção do resultado da sua view pode ser custoso porque foram renderizados :doc:`/views/cells` 
-ou operações de *helper's* custosas. Para ajudar sua aplicação a rodar mais rapidamente o CakePHP fornece 
+As vezes gerar uma seção do resultado da sua view pode ser custoso porque foram renderizados :doc:`/views/cells`
+ou operações de *helper's* custosas. Para ajudar sua aplicação a rodar mais rapidamente o CakePHP fornece
 uma forma de fazer cache de seções de *view*::
 
     // Assumindo algumas variáveis locais
@@ -685,15 +685,15 @@ uma forma de fazer cache de seções de *view*::
         echo $this->cell('ArticleFull', [$article]);
     }, ['key' => 'my_view_key']);
 
-Por padrão um conteúdo da view em cache irá ir para a configuração de cache ``View::$elementCache``, 
+Por padrão um conteúdo da view em cache irá ir para a configuração de cache ``View::$elementCache``,
 mas você pode usar a opção ``config`` para alterar isso.
 
 .. _view-events:
 
-Eventos da *View* 
+Eventos da *View*
 =================
 
-Como no *Controller*, *view* dispara vários eventos/callbacks que você pode usar para inserir 
+Como no *Controller*, *view* dispara vários eventos/callbacks que você pode usar para inserir
 lógica em torno do ciclo de vida da renderização:
 
 Lista de Eventos
@@ -706,7 +706,7 @@ Lista de Eventos
 * ``View.beforeLayout``
 * ``View.afterLayout``
 
-Você pode anexar à aplicação :doc:`event listeners </core-libraries/events>` 
+Você pode anexar à aplicação :doc:`event listeners </core-libraries/events>`
 para esses eventos ou usar :ref:`Helper Callbacks <helper-api>`.
 
 Criando suas próprias Classes View

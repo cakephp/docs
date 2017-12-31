@@ -1,7 +1,7 @@
 Código
 ######
 
-Parches y *pull requests* son una manera genial de contribuir con código a CakePHP. 
+Parches y *pull requests* son una manera genial de contribuir con código a CakePHP.
 Los *Pull requests* pueden ser creados en Github, preferiblemente a los archivos de
 parches en los comentarios de tickets.
 
@@ -17,7 +17,7 @@ Necesitarás los siguientes programas:
 * PHP |minphpversion| o mayor
 * PHPUnit 5.7.0 o mayor
 
-Configura tu información de usuario con tu nombre/alias y correo electrónico 
+Configura tu información de usuario con tu nombre/alias y correo electrónico
 de trabajo::
 
     git config --global user.name 'Bob Barker'
@@ -31,7 +31,7 @@ de trabajo::
 Clona el código fuente de CakePHP desde GitHub:
 
 * Si no tienes una cuenta de `GitHub <http://github.com>`_  créate una.
-* Haz un *fork* del `repositorio CakePHP <http://github.com/cakephp/cakephp>`_ 
+* Haz un *fork* del `repositorio CakePHP <http://github.com/cakephp/cakephp>`_
   haciendo click en el botón **Fork**.
 
 Después de haber hecho el fork, clónalo en tu equipo local::
@@ -45,7 +45,7 @@ actualizado con CakePHP::
     cd cakephp
     git remote add upstream git://github.com/cakephp/cakephp.git
 
-Ahora que tienes configurado CakePHP deberías poder definir un ``$test`` de 
+Ahora que tienes configurado CakePHP deberías poder definir un ``$test`` de
 :ref:`conexión de base de datos <database-configuration>` y
 :ref:`ejecutar todos los tests <running-tests>`.
 
@@ -82,7 +82,7 @@ lo siguiente:
 * Sigue las :doc:`/contributing/cakephp-coding-conventions`.
 * Añade un caso de prueba para mostrar el error arreglado o que la nueva funcionalidad
   funciona.
-* Mantén lógicos tus commits y escribe comentarios de *commit* bien claros 
+* Mantén lógicos tus commits y escribe comentarios de *commit* bien claros
   y concisos.
 
 Enviar un *Pull Request*
@@ -100,10 +100,10 @@ tendrás que actualizar tu rama::
 
 Esto buscará y hará *merge* de cualquier cambio que haya sucedido en CakePHP desde que
 empezaste. Entonces ejecutará *rebase* o replicará tus cambios en el *top* del
-actual código. 
+actual código.
 
-Puede que encuentres algún conflicto durante el *rebase*. Si este finaliza 
-precipitadamente puedes ver qué archivos son conflictivos/*un-merged* con 
+Puede que encuentres algún conflicto durante el *rebase*. Si este finaliza
+precipitadamente puedes ver qué archivos son conflictivos/*un-merged* con
 ``git status``.
 Resuelve cada conflicto y continúa con el *rebase*::
 
@@ -141,8 +141,8 @@ como base ya que no podrás editarla una vez creada.
 .. note::
 
     Recuerda que todo código que contribuyas a CakePHP será licenciado bajo la
-    Licencia MIT, y la `Cake Software Foundation <http://cakefoundation.org/pages/about>`_ 
-    será la propietaria de cualquier código contribuido. Los contribuidores deberán seguir las 
+    Licencia MIT, y la `Cake Software Foundation <http://cakefoundation.org/pages/about>`_
+    será la propietaria de cualquier código contribuido. Los contribuidores deberán seguir las
     `Guías de la comunidad CakePHP <http://community.cakephp.org/guidelines>`_.
 
 Todos los *merge* de corrección de errores que se hagan a una rama de mantenimiento

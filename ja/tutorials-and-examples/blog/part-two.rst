@@ -15,11 +15,11 @@ CakePHP のモデルクラスのファイルは、 ``Table`` オブジェクト�
 作って保存します。完成したファイルは次のようになります。 ::
 
     // src/Model/Table/ArticlesTable.php
-    
+
     namespace App\Model\Table;
-    
+
     use Cake\ORM\Table;
-    
+
     class ArticlesTable extends Table
     {
         public function initialize(array $config)
@@ -629,7 +629,7 @@ CakePHP のルーティングは、 **config/routes.php** の中にあります�
 
     CakePHP は「リバースルーティング」も利用します。
     上記のルートが定義されている状態で、配列を期待する関数に
-    ``['controller' => 'Articles', 'action' => 'index']`` 
+    ``['controller' => 'Articles', 'action' => 'index']``
     を渡すと、結果のURLは「/」になります。
     つまり、URL の指定に常に配列を使うということが良策となります。
     これによりルートが URL の行き先を定義する意味を持ち、

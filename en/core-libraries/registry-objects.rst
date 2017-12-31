@@ -43,7 +43,7 @@ Disabling Callbacks
 
 In previous versions, collection objects provided a ``disable()`` method to disable
 objects from receiving callbacks. You should use the features in the events system to
-accomplish this now. For example, you could disable component callbacks in the 
+accomplish this now. For example, you could disable component callbacks in the
 following way::
 
     // Remove Auth from callbacks.

@@ -141,7 +141,7 @@ It is also possible to make big jumps to defined points in time::
     $time->endOfDay();
     $time->startOfMonth();
     $time->endOfMonth();
-    $time->startOfYear();    
+    $time->startOfYear();
     $time->endOfYear();
     $time->startOfWeek();
     $time->endOfWeek();
