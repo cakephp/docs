@@ -98,7 +98,7 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
     コア ``$debug`` 変数が ``true`` であれば、 ``$var`` が出力されます。
     ``$showHTML`` が ``true`` あるいは ``null`` のままであればデータはブラウザー表示に
     相応しいように描画されます。 ``$showFrom`` が ``false`` にセットされない場合、
-    それがコールされた行の情報を伴ってデバグ情報の出力が始まります。
+    それがコールされた行の情報を伴ってデバッグ情報の出力が始まります。
     :doc:`/development/debugging` もご覧ください。
 
 .. php:function:: dd(mixed $var, boolean $showHtml = null)
