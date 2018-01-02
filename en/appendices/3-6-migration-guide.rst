@@ -180,6 +180,8 @@ ORM
   behaviors at once.
 * ``CounterCacheBehavior`` callback functions can now return ``false`` to skip
   updating the counter value.
+* ``TimestampBehavior`` now uses the correct mutable/immutable class type when
+  creating time objects instead of always using a mutable time instance.
 
 Routing
 =======
