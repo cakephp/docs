@@ -322,12 +322,10 @@ cookie. Типичный метод ``getUser()`` рассматривает з�
         RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
 
 При каждом запросе данные значения, ``PHP_AUTH_USER`` и ``PHP_AUTH_PW``, используются
-повторной идентификации пользователя, чтобы убедиться в их подлинности.
-
-On each request, these values, ``PHP_AUTH_USER`` and ``PHP_AUTH_PW``, are used to
-re-identify the user and ensure they are the valid user. As with authentication
-object's ``authenticate()`` method, the ``getUser()`` method should return
-an array of user information on the success or ``false`` on failure. ::
+повторной идентификации пользователя, чтобы убедиться в их подлинности. Как и в
+случае с методом объекта аутентификации ``authenticate()``, метод ``getUser()``
+должен возвращать массив с информацией о пользователе, либо ``false`` в случае
+неудачи.::
 
     public function getUser(ServerRequest $request)
     {
@@ -340,9 +338,10 @@ an array of user information on the success or ``false`` on failure. ::
         return $this->_findUser($username, $pass);
     }
 
-The above is how you could implement the getUser method for HTTP basic
-authentication. The ``_findUser()`` method is part of ``BaseAuthenticate``
-and identifies a user based on a username and password.
+Пример выше показывает, как вы можете реализовать метод ``getUser()``
+для Базовой HTTP-аутентификации. Метод ``_findUser()`` является частью
+``BaseAuthenticate``, и идентифицирует пользователя на основе имени
+пользователя и пароля.
 
 .. meta::
     :title lang=ru: Аутентификация
