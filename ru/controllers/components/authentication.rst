@@ -220,8 +220,8 @@ CakePHP, взгляните на раздел
     Опция ``finder`` доступна только с версии 3.1. В более ранних версиях вы
     можете использовать опции ``scope`` и ``contain`` для изменения запроса.
     
-Identifying Users and Logging Them In
--------------------------------------
+Идентификация и вход пользователей
+----------------------------------
 
 .. php:method:: identify()
 
@@ -488,6 +488,53 @@ API-токены произвольно, используя библиотеки
     По умолчанию его значение - это ``env('SCRIPT_NAME')``. Возможно вам
     захочется изменить это значение на какую-нибудь статичную строку, если
     вы например хотите иметь согласованные хеши в различных окружениях.
+    
+Создание кастомных объектов аутентификации
+------------------------------------------
+
+Поскольку объекты аутентификации являются подключаемыми, вы можете
+создавать собственные объекты аутентификации в своем приложении или плагинах.
+Например, если вы хотите создать объект аутентификации OpenID.
+В **src/Auth/OpenidAuthenticate.php** вы можете указать следующее::
+
+    namespace App\Auth;
+
+    use Cake\Auth\BaseAuthenticate;
+    use Cake\Http\ServerRequest;
+    use Cake\Http\Response;
+
+    class OpenidAuthenticate extends BaseAuthenticate
+    {
+        public function authenticate(ServerRequest $request, Response $response)
+        {
+            // Делаем здесь необходимые действия для OpenID.
+            // Возвращаем здесь массив с данным о пользователе,
+            // либо возвращаем false в случае неудачи.
+        }
+    }
+
+Объекты аутентификации должны возвращать ``false``, если идентификация
+пользователя не удалась, либо массив с информацией о пользователе в
+противном случае. Необязательно наследоваться от класса ``BaseAuthenticate``,
+вы можете просто реализовать интерфейс ``Cake\Event\EventListenerInterface``.
+Класс ``BaseAuthenticate`` предоставляет несколько полезных методов, которые
+часто используются. Также вы можете реализовать метод ``getUser()``, если
+ваш объект аутентификации поддерживает аутентификацию без сохранения
+состояния или же без использования куки-файлов. Смотрите разделы по
+базовой и дайджест-аутентификации ниже для более полной информации.
+
+``AuthComponent`` запускает два события, ``Auth.afterIdentify`` и ``Auth.logout``,
+after a user has been identified and before a user is logged out respectively.
+You can set callback functions for these events by returning a mapping array
+from ``implementedEvents()`` method of your authenticate class::
+
+    public function implementedEvents()
+    {
+        return [
+            'Auth.afterIdentify' => 'afterIdentify',
+            'Auth.logout' => 'logout'
+        ];
+    }
 
 
 .. meta::
