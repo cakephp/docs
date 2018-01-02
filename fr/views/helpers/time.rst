@@ -45,7 +45,7 @@ versions anciennes de CakePHP. Comme l'ORM retourne des instances
 :php:class:`Cake\\I18n\\Time` pour chaque colonne ``timestamp`` et ``datetime``,
 vous pouvez utiliser les méthodes ici pour faire la plupart des tâches.
 Par exemple, pour en apprendre plus sur les chaines de formatage, jetez un oeil
-à la méthode `Cake\\I18n\\Time::i18nFormat() 
+à la méthode `Cake\\I18n\\Time::i18nFormat()
 <https://api.cakephp.org/3.x/class-Cake.I18n.Time.html#_i18nFormat>`_.
 
 .. meta::

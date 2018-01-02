@@ -12,8 +12,8 @@
 犠牲になることが多いです。
 
 １ページあたりに表示されるレコードの数を一定数に抑えることは、すべてのアプリケーションにとって
-重大な課題であり、デベロッパーにとって頭の痛い問題でした。CakePHP は素早く、かつ簡単に、
-データをページ分けする方法を提供することで、開発者への負担を軽減させます。
+重大な課題であり、開発者にとって頭の痛い問題でした。CakePHP は素早く、かつ簡単に、
+データをページ分けする方法を提供することで、開発者への負担を軽減します。
 
 CakePHP におけるページネーションは、コントローラーにおけるコンポーネントによって提供され、
 ページ分けされたクエリーをより簡単にビルドできるようにします。ビューの中の
@@ -23,15 +23,14 @@ CakePHP におけるページネーションは、コントローラーにおけ
 Controller::paginate() の使用
 =============================
 
-コントローラーの ``$paginate`` 変数の中でページネーションが使用する
-デフォルトの検索条件を定義することから始めます。これらの条件は、ページネーション検索を
-行うにあたっての基本的な条件となります。これらに対して、URL から指定された、並び替え、
-件数上限、ページパラメーター等が加えられます。重要なこととして、”表示順”のキーが、
-以下のような配列構造にとって定義される必要があることを指摘します。 ::
+コントローラーでは、ページネーションで使用する ``$paginate`` コントローラー変数に
+デフォルトの検索条件を定義することから始めます。これらの条件は、
+ページネーション検索の基礎となります。これらに対して、URL から指定された ``sort`` 、
+``direction`` 、 ``limit`` 、 ``page`` パラメーターが加えられます。
+``order`` キーは、以下のような配列構造で定義しなければならないことに注意してください。 ::
 
     class ArticlesController extends AppController
     {
-
         public $paginate = [
             'limit' => 25,
             'order' => [
@@ -51,7 +50,6 @@ Controller::paginate() の使用
 
     class ArticlesController extends AppController
     {
-
         public $paginate = [
             'fields' => ['Articles.id', 'Articles.created'],
             'limit' => 25,
@@ -74,7 +72,6 @@ Paginate プロパティーからほとんどの検索オプションを指定�
 
     class ArticlesController extends AppController
     {
-
         public $paginate = [
             'finder' => 'published',
         ];
@@ -86,7 +83,6 @@ Paginate プロパティーからほとんどの検索オプションを指定�
 
     class ArticlesController extends AppController
     {
-
         // タグごとに記事を検索する
         public function tags()
         {
@@ -116,13 +112,11 @@ Paginate プロパティーからほとんどの検索オプションを指定�
 
     class ArticlesController extends AppController
     {
-
         public $paginate = [
             'Articles' => [],
             'Authors' => [],
         ];
     }
-
 
 ``Articles`` や ``Authors`` のキーの値は、モデル/キーが有する全てのプロパティーから、
 ``$paginate`` 配列を差し引いた分だけ、含めることができます。
@@ -137,7 +131,6 @@ Controller の paginate メソッドは、ページ分けされた検索結果�
 
     class ArticlesController extends AppController
     {
-
         public function index()
         {
             $this->set('articles', $this->paginate());
@@ -263,7 +256,6 @@ CakePHP は、デフォルトでは取得できる行数の上限は 100 に設�
 
         $this->set('articles', $this->paginate($this->Articles));
     }
-
 
 範囲外のページリクエスト
 =========================

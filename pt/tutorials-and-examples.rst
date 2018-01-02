@@ -19,7 +19,6 @@ componentes existentes.
     tutorials-and-examples/blog/part-three
     tutorials-and-examples/blog-auth-example/auth
 
-
 .. meta::
     :title lang=pt: Tutoriais & Examplos
     :keywords lang=pt: tutoriais,tutoriais de aplicação,bakery,repositório,aplicações,blog,acl,autenticação

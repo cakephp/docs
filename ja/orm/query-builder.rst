@@ -1272,7 +1272,6 @@ update するほうが簡単です。
 通常は、エンティティーを使い、 :php:meth:`~Cake\\ORM\\Table::delete()` でデータを
 delete するほうが簡単です。
 
-
 SQL インジェクションを防止する
 ==============================
 
@@ -1376,10 +1375,10 @@ UNION は１つ以上のクエリーを一緒に構築して作成します。 :
         ->where(['comment LIKE' => '%CakePHP%']);
 
     $query = $articles->find()
-        ->where(['id' => $matchingComment]);
+        ->where(['id IN' => $matchingComment]);
 
 サブクエリーはクエリー式のどこにでも使うことができます。
-たとえば、``select()`` や ``join()`` メソッドの中でもです。
+たとえば、 ``select()`` や ``join()`` メソッドの中でもです。
 
 ステートメントのロックの追加
 ----------------------------

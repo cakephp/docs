@@ -58,7 +58,6 @@ Used for finding the path to a package inside CakePHP::
     // Get the path to Cache engines.
     App::core('Cache/Engine');
 
-
 Locating Plugins
 ================
 
@@ -91,9 +90,8 @@ application's ``composer.json``::
 
     "autoload": {
         "psr-4": {
-            "App\\": "App",
-            "App\\Test\\": "Test",
-            "": "./Plugin"
+            "App\\": "src/",
+            "App\\Test\\": "tests/"
         },
         "classmap": [
             "vendor/Acme/AcmeLib"
@@ -106,9 +104,8 @@ using the ``files`` autoloading strategy::
 
     "autoload": {
         "psr-4": {
-            "App\\": "App",
-            "App\\Test\\": "Test",
-            "": "./Plugin"
+            "App\\": "src/",
+            "App\\Test\\": "tests/"
         },
         "files": [
             "vendor/Acme/AcmeLib/functions.php"

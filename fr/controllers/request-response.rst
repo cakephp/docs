@@ -1022,7 +1022,6 @@ un code fonctionnel, vous devrez écrire::
 
     $this->response = $this->response->withHeader('X-CakePHP', 'yes!');
 
-
 .. php:namespace:: Cake\Http\Cookie
 
 CookieCollections

@@ -103,7 +103,6 @@ PaginatorHelper uses the following templates:
 - ``sortAsc`` The template for a sort link with an ascending direction.
 - ``sortDesc`` The template for a sort link with a descending direction.
 
-
 Creating Sort Links
 ===================
 
@@ -214,7 +213,7 @@ Supported options are:
 * ``last`` Whether you want last links generated, set to an integer to define
   the number of 'last' links to generate. Defaults to ``false``. Follows the same
   logic as the ``first`` option. There is a
-  :php:meth:`~PaginatorHelper::last()`` method to be used separately as well if
+  :php:meth:`~PaginatorHelper::last()` method to be used separately as well if
   you wish.
 
 While this method allows a lot of customization for its output. It is
@@ -274,7 +273,7 @@ pages in the paged data set.
 
 .. php:method:: next($title = 'Next >>', $options = [])
 
-    This method is identical to :php:meth:`~PagintorHelper::prev()` with a few exceptions. It
+    This method is identical to :php:meth:`~PaginatorHelper::prev()` with a few exceptions. It
     creates links pointing to the next page instead of the previous one. It also
     uses ``next`` as the rel attribute value instead of ``prev``
 

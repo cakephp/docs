@@ -51,7 +51,7 @@ CakePHP のインストール
 .. code-block:: bash
 
     php -v
-    
+
 PHP |minphpversion| (CLI) 以上がインストールされていなければなりません。
 ウェブサーバー版の PHP もまた |minphpversion| 以上でなければりませんし、
 コマンドラインインターフェース (CLI) 版と同じバージョンを使用してください。
@@ -278,7 +278,6 @@ Apache を利用している開発者は、当該ドメインの ``DocumentRoot`
 あなたのウェブサーバーが正しく設定されていれば、これで http://www.example.com から
 あなたの CakePHP アプリケーションにアクセスできるようになります。
 
-
 始動
 ====
 
@@ -502,7 +501,6 @@ IIS7 はネイティブで .htaccess ファイルをサポートしていませ�
 IIS に htaccess のルールをインポートすることもできます。
 これをするには、以下のステップを踏んでください:
 
-
 #. URL `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
    をインストールするために、`Microsoftの Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_
    を使うか、直接ダウンロードします。(`32ビット <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
@@ -525,7 +523,7 @@ IIS に htaccess のルールをインポートすることもできます。
                     </rule>
                     <rule name="Rewrite routed access to assets(img, css, files, js, favicon)"
                       stopProcessing="true">
-                        <match url="^(img|css|files|js|favicon.ico)(.*)$" />
+                        <match url="^(font|img|css|files|js|favicon.ico)(.*)$" />
                         <action type="Rewrite" url="webroot/{R:1}{R:2}"
                           appendQueryString="false" />
                     </rule>

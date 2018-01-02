@@ -243,7 +243,6 @@ You can also access tasks directly from the command line::
     In order to access tasks directly from the command line, the task
     **must** be included in the shell class' $tasks property.
 
-
 Also, the task name must be added as a sub-command to the Shell's OptionParser::
 
     public function getOptionParser()

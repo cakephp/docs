@@ -337,7 +337,6 @@ Affichera:
 
     <a href="http://www.yourdomain.com/dashboards/index">Dashboard</a>
 
-
 Spécifiez la clé ``confirm`` dans les options pour afficher une boite de
 dialogue de confirmation JavaScript ``confirm()``::
 

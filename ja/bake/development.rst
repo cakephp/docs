@@ -133,7 +133,6 @@ bake テンプレートファイルを変更しようとする場合は特に、
      */
     class {{ name }}Shell extends Shell
     {
-
         /**
          * main() method.
          *
@@ -158,7 +157,6 @@ bake テンプレートファイルを変更しようとする場合は特に、
      */
     class FooShell extends Shell
     {
-
         /**
          * main() method.
          *

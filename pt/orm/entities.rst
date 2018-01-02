@@ -18,7 +18,7 @@ Criando Classes de Entidade
 
 Você não precisa criar classes de entidade para iniciar com o ORM no CakePHP.
 No entanto, se você deseja ter lógica personalizada nas suas entidades, você
-precisará criar classes. Por convensão, classes de entidades ficam em 
+precisará criar classes. Por convensão, classes de entidades ficam em
 **src/Model/Entity/**. Se a nossa aplicação tem um tabela ``articles``, poderiamos
 criar a seguinte entidade::
 
@@ -96,7 +96,7 @@ um array::
     ]);
 
 .. warning::
-    
+
     Ao atualizar entidades com dados de requisição, você deve especificar com
     whitelist quais campos podem ser definidos com atribuição de massa.
 
@@ -135,7 +135,7 @@ duas formas::
     echo $user->title;
     echo $user->get('title');
 
-Você pode personalizar como as propriedades são atribuidas definindo um mutador: 
+Você pode personalizar como as propriedades são atribuidas definindo um mutador:
 
 .. php:method:: set($field = null, $value = null)
 
@@ -210,7 +210,7 @@ Verificando se uma Entidade Foi Modificada
 .. php:method:: dirty($field = null, $dirty = null)
 
 Você pode querer fazer código condicional com base em se as propriedades foram
-modificadas ou não em uma entidade. Por exemplo, você pode só querer validar 
+modificadas ou não em uma entidade. Por exemplo, você pode só querer validar
 campos quando eles mudarem::
 
     // See if the title has been modified.
@@ -250,7 +250,6 @@ você pode chamar::
 .. versionadded:: 3.4.3
 
     ``getDirty()`` foi adicionado.
-
 
 Erros de Validação
 ==================
@@ -353,7 +352,7 @@ método ``accessible``::
     chamado.
 
 Ao usar os métodos ``newEntity()`` e ``patchEntity()`` nos objetos ``Table``,
-você pode personalizar a proteção de atribuição em massa com opções, Por favor 
+você pode personalizar a proteção de atribuição em massa com opções, Por favor
 consulte a seção :ref:`changing-accessible-fields` para obter mais informações.
 
 Ignorando Proteção de Campo
@@ -366,7 +365,6 @@ para campos vigiados (guarded)::
 
 Definindo a opção ``guard`` como ``false``, você pode ignorar a lista de
 campos acessíveis para uma única chamado ao método ``set()``.
-
 
 Verificando se uma Entidade foi Persistida
 ------------------------------------------
@@ -393,7 +391,7 @@ Lazy Loading Associations
 Embora que eager loading de associações é geralmente o modo mais eficiente de
 acessar suas associações, pode exister momentos em que você precisa carregar
 seus dados sobre demanda (lazy load). Antes de entrar em como carregar
-associaçes sobre demanda, devemos discutir as diferenças entre eager loading e 
+associaçes sobre demanda, devemos discutir as diferenças entre eager loading e
 lazy loading de associações:
 
 Eager loading
@@ -481,7 +479,7 @@ ou dados JSON. CakePHP torna isso simples::
 
 Ao converter uma entidade para um JSON, as listas de campos virtuais e ocultos
 são aplicadas. Entidades são recursivamente convertidas para JSON também. Isso
-signinifica que, se você eager loaded entidades e suas associações, o CakePHP 
+signinifica que, se você eager loaded entidades e suas associações, o CakePHP
 manipulará corretamente a conversão dos dados associados no formato correto.
 
 .. _exposing-virtual-properties:
@@ -514,7 +512,7 @@ Ocultando Propriedades
 ----------------------
 
 Muitas vezes, há campos que você não deseja ser exportado em formatos
-de array ou JSON. Por exemplo geralmente não é sensato expor hash de 
+de array ou JSON. Por exemplo geralmente não é sensato expor hash de
 senha ou perguntas de recuperação de conta. Ao definir uma classe de
 entidade, defina quais propriedades devem ser ocultadas::
 

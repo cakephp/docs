@@ -127,7 +127,6 @@ Un exemple de ces méthodes est le suivant::
         ->notEmpty('body', 'Le body ne peut être vide', 'create')
         ->allowEmpty('header_image', 'update');
 
-
 Marquer les Règles comme étant les Dernières à être exécutées
 -------------------------------------------------------------
 

@@ -317,7 +317,7 @@ to call locale on each table for example::
 This example also assumes that ``Categories`` has the TranslateBehavior attached
 to it.
 
-Querying Translated Fields 
+Querying Translated Fields
 --------------------------
 
 TranslateBehavior does not substitute find conditions by default. You need to use
@@ -443,12 +443,9 @@ create form controls for your translated fields::
         <?= $this->Form->control('_translations.es.body'); ?>
     </fieldset>
 
-In your controller, you can marshal the data as normal, but with the
-``translations`` option enabled::
+In your controller, you can marshal the data as normal::
 
-    $article = $this->Articles->newEntity($this->request->getData(), [
-        'translations' => true
-    ]);
+    $article = $this->Articles->newEntity($this->request->getData());
     $this->Articles->save($article);
 
 This will result in your article, the french and spanish translations all being

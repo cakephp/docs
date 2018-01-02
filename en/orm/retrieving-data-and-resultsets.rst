@@ -448,7 +448,6 @@ Once you have a query object from a dynamic finder, you'll need to call
     While dynamic finders make it simple to express queries, they come with some
     additional performance overhead.
 
-
 Retrieving Associated Data
 ==========================
 
@@ -547,7 +546,6 @@ statements::
         ]
     ])
     ->where($condition);
-
 
 If you need to reset the containments on a query you can set the second argument
 to ``true``::
@@ -649,7 +647,6 @@ Alternatively, if you have multiple associations, you can use ``enableAutoFields
 
 .. versionadded:: 3.1
     Selecting columns via an association object was added in 3.1
-
 
 Sorting Contained Associations
 ------------------------------
@@ -1239,7 +1236,6 @@ This would return an array similar to this::
 
 The resulting array means, for example, that user with id ``1`` follows users
 ``2`` and ``4``, but those do not follow ``1`` back.
-
 
 Stacking Multiple Operations
 ----------------------------

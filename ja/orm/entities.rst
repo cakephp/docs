@@ -150,7 +150,6 @@ CakePHP の ORM を使うためにエンティティークラスを生成する�
 
     class Article extends Entity
     {
-
         protected function _setTitle($title)
         {
             return Text::slug($title);
@@ -184,7 +183,6 @@ CakePHP の ORM を使うためにエンティティークラスを生成する�
 
     class User extends Entity
     {
-
         protected function _getFullName()
         {
             return $this->_properties['first_name'] . '  ' .
@@ -201,7 +199,6 @@ CakePHP の ORM を使うためにエンティティークラスを生成する�
 仮想プロパティーは find で使えないということを覚えておいてください。
 もし、仮想プロパティーを、エンティティーを表す JSON や配列の一部にしたい場合、
 :ref:`exposing-virtual-properties` をご覧ください。
-
 
 エンティティーが変更されたかチェックする
 ========================================
@@ -424,7 +421,6 @@ PHP のトレイトはこういった場合に威力を発揮します。 **src/
 
     trait SoftDeleteTrait
     {
-
         public function softDelete()
         {
             $this->set('deleted', true);
@@ -478,7 +474,6 @@ CakePHP では以下のように簡単にできます。 ::
 
     class User extends Entity
     {
-
         protected $_virtual = ['full_name'];
 
     }
@@ -500,9 +495,7 @@ JSON/配列フォーマットで出力したくないフィールドがある場
 
     class User extends Entity
     {
-
         protected $_hidden = ['password'];
-
     }
 
 実行時に ``hiddenProperties`` を使うことでこのリストを変更できます。 ::

@@ -48,14 +48,11 @@ AppController に追加しましょう。 ::
         }
     }
 
-
-
 これで、 ``Flash`` と ``Auth`` のコンポーネントを読み込むと CakePHP に示しました。
 さらに users テーブルの ``email`` をユーザー名として使用するように AuthComponent の設定を
 カスタマイズしました。何かの URL にアクセスすると **/users/login** に遷移するようになりますが、
 まだそのコードが存在しないというエラーページが表示されるでしょう。
 それでは、ログインアクションを作成しましょう。 ::
-
 
     // src/Controller/UsersController.php の中で
     public function login()
@@ -89,7 +86,7 @@ AppController に追加しましょう。 ::
 
 .. note::
 
-    もしハッシュ化されたパスワードを持つユーザーがいなければ、 ``loadComponent('Auth')`` 
+    もしハッシュ化されたパスワードを持つユーザーがいなければ、 ``loadComponent('Auth')``
     の行をコメントアウトして、ユーザーを編集して新しいパスワードを保存して下さい。
 
 ログアウトを追加
@@ -97,7 +94,6 @@ AppController に追加しましょう。 ::
 
 これで人々はログインできますので、ログアウトする方法も同じように提供したいでしょう。
 ここでも ``UsersController`` に以下のコードを追加します。 ::
-
 
     public function initialize()
     {
@@ -336,7 +332,6 @@ AppController に追加しましょう。 ::
         'tag_string' => true,
     ];
 
-
 ビューを修正する
 ----------------
 
@@ -353,7 +348,6 @@ AppController に追加しましょう。 ::
 ``tag_string`` をアクセス可能に設定したので、ORM はリクエストからエンティティーにデータをコピーします。
 ``beforeSave()`` フックメソッドを使用して、タグ文字列を解析し、関連するエンティティーを検索/構築します。
 **src/Model/Table/BookmarksTable.php** に以下を追加します。 ::
-
 
     public function beforeSave($event, $entity, $options)
     {

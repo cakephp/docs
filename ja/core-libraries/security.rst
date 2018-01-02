@@ -27,7 +27,6 @@
 .. warning::
     `mcrypt <http://php.net/mcrypt>`_ 拡張は、PHP7.1 で非推奨になりました。
 
-
 このメソッドは **決して** パスワードの保存に使ってはいけません。代わりに一方通行の
 ハッシュ化メソッド :php:meth:`~Cake\\Utility\\Security::hash()` を利用すべきです。
 以下に一例を挙げます。 ::
@@ -50,7 +49,6 @@
     $result = Security::decrypt($cipher, $key);
 
 キーや HMAC ソルトの変更により値が復号できない場合、 ``false`` が返却されます。
-
 
 .. _force-mcrypt:
 

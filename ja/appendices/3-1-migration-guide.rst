@@ -144,7 +144,6 @@ Query
 - ``EXTRACT``, ``DATE_ADD`` そして ``DAYOFWEEK`` など素の SQL関数は、 ``extract()``,
   ``dateAdd()`` そして ``dayOfWeek()`` に抽象化されています。
 
-
 ビュー
 ======
 
@@ -208,7 +207,6 @@ Validation
 - ``Validation::isInteger()`` が追加されました。
 - ``Validation::ascii()`` が追加されました。
 - ``Validation::utf8()`` が追加されました。
-
 
 テスト
 =======

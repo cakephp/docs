@@ -179,7 +179,6 @@ for the domain to::
 If your web server is configured correctly, you should now find
 your CakePHP application accessible at http://www.example.com.
 
-
 Fire It Up
 ==========
 
@@ -375,7 +374,6 @@ IIS7 does not natively support .htaccess files. While there are
 add-ons that can add this support, you can also import htaccess
 rules into IIS to use CakePHP's native rewrites. To do this, follow
 these steps:
-
 
 #. Use `Microsoft's Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_ to install the URL
    `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ or download it directly (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).

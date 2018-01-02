@@ -291,7 +291,6 @@ IO をもたらします。
 
 これでアプリケーションはカスタムセッションハンドラーを使ったセッションデータの読み書きを行います。
 
-
 .. php:class:: Session
 
 .. _accessing-session-object:

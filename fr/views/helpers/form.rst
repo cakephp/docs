@@ -2717,7 +2717,6 @@ voulez construire un widget Autocomplete, vous pouvez le faire comme ceci::
         }
     }
 
-
 Évidemment, c'est un exemple très simple, mais il montre comment développer
 un widget personnalisé. Ce widget ferait un rendu du template "autocomplete",
 si défini comme ceci par exemple::

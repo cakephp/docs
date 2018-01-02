@@ -11,7 +11,6 @@ a lógica que você criou em sua aplicação. É simples, geralmente baseado em 
 falando XML simples, nada como um envelope SOAP) e depende de cabeçalhos HTTP
 para direção. Expor uma API via REST no CakePHP é simples.
 
-
 A Configuração é simples
 ========================
 
@@ -95,11 +94,10 @@ as actions, podemos avançar para criar a lógica em nossas actions no controlle
     }
 
 Os controllers RESTful geralmente usam extensões analisadas para exibir diferentes visualizações
-com base em diferentes tipos de requisições. Como estamos lidando com pedidos REST, estaremos fazendo visualizações XML. 
+com base em diferentes tipos de requisições. Como estamos lidando com pedidos REST, estaremos fazendo visualizações XML.
 Você pode fazer visualizações JSON usando o CakePHP's para criar :doc:`/views/json-and-xml-views`. Ao usar o buld-in
-:php:class:`XmlView` podemos definir uma variável na view ``_serialize``. A variável de exibição é usada para definir 
+:php:class:`XmlView` podemos definir uma variável na view ``_serialize``. A variável de exibição é usada para definir
 quais variáveis de exibição ``XmlView`` devem Serializar em XML ou JSON.
-
 
 Se quisermos modificar os dados antes de serem convertidos em XML ou JSON, não devemos
 definir a variável de exibição `` _serialize`` e, em vez disso, use arquivos de template. Colocamos
@@ -149,7 +147,6 @@ A solicitação PUT tem um tipo de conteúdo XML, então a entrada é executada 
 O paralelo é transparente: não são necessárias alterações ao código do controlador ou do modelo.
 Tudo o que você precisa deve terminar em ``$this->request->getData()``.
 
-
 Aceitando entrada em outros formatos
 ====================================
 
@@ -160,7 +157,6 @@ Ele decodificará qualquer entrada de dados de entrada JSON/XML para solicitaç�
 E forneça a versão da array desses dados em ``$this->request->getData()``.
 Você também pode usar desserializadores adicionais para formatos alternativos se você
 Precisa deles, usando :php:meth:`RequestHandler::addInputType()`.
-
 
 Roteamento RESTful
 ==================

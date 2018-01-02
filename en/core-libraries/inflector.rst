@@ -44,7 +44,7 @@ when provided a multi-word argument:
 +                   +---------------+---------------+
 |                   | bigApple      | BigApple      |
 +-------------------+---------------+---------------+
-| ``classify()``    | big_apples    | BigApple      | 
+| ``classify()``    | big_apples    | BigApple      |
 +                   +---------------+---------------+
 |                   | big apple     | BigApple      |
 +-------------------+---------------+---------------+

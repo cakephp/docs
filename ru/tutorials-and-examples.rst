@@ -19,7 +19,6 @@ CakePHP, чтобы увидеть как все части образуют в�
     tutorials-and-examples/blog/part-three
     tutorials-and-examples/blog-auth-example/auth
 
-
 .. meta::
     :title lang=ru: Руководства и примеры
     :keywords lang=ru: application tutorials,glob,bakery,репозиторий,приложения,блог,acl

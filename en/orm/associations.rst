@@ -573,7 +573,6 @@ Possible keys for belongsToMany association arrays include:
   saving.
 - **finder**: The finder method to use when loading associated records.
 
-
 Once this association has been defined, find operations on the Articles table can
 contain the Tag records if they exist::
 

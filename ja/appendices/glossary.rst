@@ -92,7 +92,6 @@
 
             ['controller' => 'Posts', 'action' => 'view', 5]
 
-
 .. meta::
     :title lang=ja: 用語集
     :keywords lang=ja: html attributes,array class,array controller,glossary glossary,target blank,fields,properties,columns,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions

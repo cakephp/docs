@@ -1097,7 +1097,6 @@ In addition to the default routes, this would also connect a route for
 can use the 'path' key inside the resource definition to customize the path
 name::
 
-
     $routes->resources('Articles', [
         'map' => [
             'updateAll' => [
@@ -1490,7 +1489,6 @@ named parameter, will be removed from the list of passed arguments.
 .. meta::
     :title lang=en: Routing
     :keywords lang=en: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router
-
 
 .. toctree::
     :glob:

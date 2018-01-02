@@ -68,9 +68,6 @@ quando chamar ``get()`` para uma performance na leitura - ``caching``::
         'cache' => false
     ]);
 
-
-
-
 ``Por padrão o CakePHP possui um sistema interno de cache que viabiliza busca
 e aumenta a performance - não é recomendado desabilitar.``
 
@@ -231,7 +228,6 @@ O Cake provê um metódo simples e fácil 'lists'::
 
 Com as opções adicionais as chaves de ``$data`` podem representar uma coluna de sua tabela,
 Por exemplo, use ``'displayField()'`` no objeto tabela na função 'initialize()', isto configura um valor a ser mostrado na chave::
-
 
     class ArticlesTable extends Table
     {
@@ -428,7 +424,6 @@ Caso tenha objeto Query retornado da busca dinâmica você necessitará de chama
 
     Esses metódos de busca podem ser simples, porém eles trazem uma sobrecargar adicional, pelo fato de ser necessário enteder as expressões.
 
-
 Retornando Dados Associados
 ===========================
 
@@ -598,7 +593,6 @@ Alternatively, if you have multiple associations, you can use ``autoFields()``::
 
 .. versionadded:: 3.1
     Selecting columns via an association object was added in 3.1
-
 
 Sorting Contained Associations
 ------------------------------
@@ -1168,7 +1162,6 @@ This would return an array similar to this::
 
 The resulting array means, for example, that user with id ``1`` follows users
 ``2`` and ``4``, but those do not follow ``1`` back.
-
 
 Stacking Multiple Operations
 ----------------------------

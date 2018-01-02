@@ -41,7 +41,7 @@ add more recipients to their respective field::
     // The email's To recipients are: to@example.com and to2@example.com
     $email->to('test@example.com', 'ToTest Example');
     // The email's To recipient is: test@example.com
-    
+
 .. deprecated:: 3.4.0
     Use ``setFrom()``, ``setTo()``, ``setCc()`` , ``setBcc()``  and ``setSubject()`` instead.
 
@@ -101,7 +101,6 @@ also just load an array of options::
     The ``default`` email profile is automatically set when an ``Email``
     instance is created.
 
-
 .. deprecated:: 3.4.0
     Use ``setProfile()`` instead of ``profile()``.
 
@@ -157,7 +156,7 @@ The above configuration would enable TLS communication for email messages.
 
 .. note::
     `Gmail SMTP settings <https://support.google.com/a/answer/176600?hl=en>`__.
-    
+
 .. note::
     To use SSL + SMTP, you will need to have the SSL configured in your PHP
     install.
@@ -327,7 +326,6 @@ following path:
     of the layout argument of ``template()``. Use ``setTheme()`` instead of
     ``theme()``.
 
-
 Sending Attachments
 ===================
 
@@ -446,7 +444,6 @@ necessary when dealing with some Japanese ISP's::
 .. deprecated:: 3.4.0
     Use ``setEmailPattern()`` instead of ``emailPattern()``.
 
-
 Sending Messages Quickly
 ========================
 
@@ -479,7 +476,6 @@ If you want, you can pass the to, subject and message as null and do all
 configurations in the 4th parameter (as array or using ``Configure``).
 Check the list of :ref:`configurations <email-configurations>` to see all accepted configs.
 
-
 Sending Emails from CLI
 =======================
 
@@ -495,7 +491,6 @@ A valid message id can help to prevent emails ending up in spam folders.
 
 .. deprecated:: 3.4.0
     Use ``setDomain()`` instead of ``domain()``.
-
 
 Creating Reusable Emails
 ========================

@@ -1,7 +1,7 @@
 Welcome
 #######
 
-CakePHP 3 is a web development framework running on **PHP 7.1** (min. PHP |minphpversion|).
+CakePHP 3 is a web development framework running on **PHP 7.2** (min. PHP |minphpversion|).
 Read :doc:`CakePHP at a Glance </intro>` to get an introduction to the
 fundamentals of CakePHP 3.
 
@@ -51,7 +51,6 @@ elements in a CakePHP application:
   application needs.
 * :doc:`Models </orm>` are the key ingredient in any application. They handle
   validation, and domain logic within your application.
-
 
 .. meta::
     :title lang=en: .. CakePHP Cookbook documentation master file, created by

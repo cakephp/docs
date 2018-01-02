@@ -7,7 +7,7 @@ Para comenzar instalaremos CakePHP creando nuestra base de datos y utilizaremos 
 
 Esto es lo que necesitarás:
 
-#. Un servidor de base de datos. Nosotros utilizaremos MySQL en este tutorial. Necesitarás tener los conocimientos suficientes de SQL para crear una base de datos; CakePHP tomará las riendas desde ahí. Al utilizar MySQL asegúrate de que tienes habilitado ``pdo_mysql`` en PHP.   
+#. Un servidor de base de datos. Nosotros utilizaremos MySQL en este tutorial. Necesitarás tener los conocimientos suficientes de SQL para crear una base de datos; CakePHP tomará las riendas desde ahí. Al utilizar MySQL asegúrate de que tienes habilitado ``pdo_mysql`` en PHP.
 #. Conocimientos básicos de PHP.
 
 Antes de empezar deberías de asegurarte de que tienes actualizada la versión de PHP:
@@ -16,7 +16,7 @@ Antes de empezar deberías de asegurarte de que tienes actualizada la versión d
 
     php -v
 
-Deberías tener instalado PHP |minphpversion| (CLI) o superior. La versión PHP de tu servidor web deberá ser |minphpversion| o superior y lo ideal es que coincida con la versión de la interfaz de línea de comandos (CLI) de PHP. Si quieres ver la aplicación ya finalizada puedes consultar `cakephp/bookmarker <https://github.com/cakephp/bookmarker-tutorial>`__. 
+Deberías tener instalado PHP |minphpversion| (CLI) o superior. La versión PHP de tu servidor web deberá ser |minphpversion| o superior y lo ideal es que coincida con la versión de la interfaz de línea de comandos (CLI) de PHP. Si quieres ver la aplicación ya finalizada puedes consultar `cakephp/bookmarker <https://github.com/cakephp/bookmarker-tutorial>`__.
 
 Empecemos!
 
@@ -69,16 +69,16 @@ Ahora podría ser un buen momento para que aprendas un poco sobre como funciona 
 Comprobar la instalación
 ========================
 
-Podemos comprobar rápidamente que nuestra instalación ha sido correcta accediendo a la página principal que se crea por defecto. 
+Podemos comprobar rápidamente que nuestra instalación ha sido correcta accediendo a la página principal que se crea por defecto.
 
 Pero antes necesitarás inicializar el servidor de desarrollo::
 
     bin/cake server
-    
+
 .. note::
 
     Para Windows introduce el comando ``bin\cake server`` (fíjate en la \\ ).
-    
+
 Esto arrancará el servidor integrado en el puerto 8765. Accede a  **http://localhost:8765** a través de tu navegador para ver la página de bienvenida. Todos los items deberán estar marcados como correctos para que CakePHP pueda conectarse a tu base de datos. Si no, puede que necesites instalar extensiones adicionales de PHP, o dar permisos de directorio.
 
 Crear la base de datos
@@ -86,7 +86,7 @@ Crear la base de datos
 
 Continuamos, creemos ahora la base de datos para nuestra aplicación de favoritos.
 
-Si aún no lo has hecho, crea una base de datos vacía para usar en este tutorial con el nombre que tu quieras, e.g. ``cake_bookmarks``. 
+Si aún no lo has hecho, crea una base de datos vacía para usar en este tutorial con el nombre que tu quieras, e.g. ``cake_bookmarks``.
 
 Puedes ejecutar la siguiente sentencia SQL para crear las tablas necesarias::
 
@@ -225,7 +225,6 @@ Añadamos un setter para la contraseña añadiendo el siguiente código en **src
     }
 
 Ahora actualiza uno de los usuarios que creaste antes, si cambias su contraseña deberías ver una contraseña encriptada en vez del valor original en la lista de usuarios o en su página de View.
-
 
 CakePHP encripta contraseñas con `bcrypt
 <http://codahale.com/how-to-safely-store-a-password/>`_ por defecto. Puedes usar también sha1 o md5 si estás trabajando con bases de datos ya existentes.

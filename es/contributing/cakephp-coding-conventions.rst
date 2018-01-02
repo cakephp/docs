@@ -8,13 +8,13 @@ de codificación.
 Es recomendable que otos *CakeIngredients* que se desarrollen sigan los mismos
 estándares.
 
-Puedes utilizar el `CakePHP Code Sniffer <https://github.com/cakephp/cakephp-codesniffer>`_ 
+Puedes utilizar el `CakePHP Code Sniffer <https://github.com/cakephp/cakephp-codesniffer>`_
 para comprobar que tu código siga los estándares requeridos.
 
 Añadir nuevas funcionalidades
 =============================
 
-Las nuevas funcionalidades no se deberán añadir sin sus propias pruebas, las cuales 
+Las nuevas funcionalidades no se deberán añadir sin sus propias pruebas, las cuales
 deberán ser superadas antes de hacer el *commit* en el repositorio.
 
 Configuración del *IDE*
@@ -23,7 +23,7 @@ Configuración del *IDE*
 Asegúrate de que tu *IDE* haga *trim* por la derecha para que no haya espacios
 al final de las líneas.
 
-La mayoría de los *IDEs* modernos soportan archivos ``.editorconfig``. El 
+La mayoría de los *IDEs* modernos soportan archivos ``.editorconfig``. El
 esqueleto de aplicación de CakePHP viene con él por defecto y contiene las
 mejores prácticas de forma predeterminada.
 
@@ -101,11 +101,11 @@ Las estructuras de control son por ejemplo "``if``", "``for``", "``foreach``",
 
 *  En las estructuras de control deberá haber un espacio antes del primer paréntesis
    y otro entre el último y la llave de apertura.
-*  Utiliza siempre las llaves en las estructuras de control incluso si 
+*  Utiliza siempre las llaves en las estructuras de control incluso si
    no son necesarias. Aumentan la legibilidad del código y te proporcionan menos
    errores lógicos.
-*  Las llaves de apertura deberán estar en la misma línea que la estructura de 
-   control, las de cierre en líneas nuevas y el código dentro de las dos llaves 
+*  Las llaves de apertura deberán estar en la misma línea que la estructura de
+   control, las de cierre en líneas nuevas y el código dentro de las dos llaves
    en un nuevo nivel de tabulación.
 *  No deberán usarse las asignaciones *inline* en las estructras de control.
 
@@ -148,7 +148,6 @@ pueden utilizarse paréntesis entorno a las condiciones para dar claridad::
     // Incorrecto, operadores anidados
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
-
 Archivos de plantilla
 ---------------------
 
@@ -166,11 +165,10 @@ de PHP o en etiquetas PHP separadas::
         <p>Eres el usuario admin.</p>
     <?php endif; ?>
 
-
 Comparación
 ===========
 
-Intenta ser siempre lo más estricto posible. Si una comparación no es estricta 
+Intenta ser siempre lo más estricto posible. Si una comparación no es estricta
 de forma deliberada, puede ser inteligente añadir un comentario para evitar
 confundirla con un error.
 
@@ -216,13 +214,13 @@ Ejemplo de definición de un método::
         if (expr) {
             statement;
         }
-        
+
         return $var;
     }
 
 Parámetros con un valor por defecto deberán ir al final de las definiciones.
-Trata que tus funciones devuelvan siempre un resultado, al menos ``true`` o 
-``false``, para que se pueda determinar cuando la llamada a la función ha sido 
+Trata que tus funciones devuelvan siempre un resultado, al menos ``true`` o
+``false``, para que se pueda determinar cuando la llamada a la función ha sido
 correcta::
 
     public function connection($dns, $persistent = false)
@@ -236,7 +234,7 @@ correcta::
         if (!($dnsInfo) || !($dnsInfo['phpType'])) {
             return $this->addError();
         }
-        
+
         return true;
     }
 
@@ -260,8 +258,8 @@ Solo tipificamos métodos públicos, aunque la tipificación no está libre de c
     {
     }
 
-Aquí ``$table`` debe ser una instancia de ``\Cake\ORM\Table``, ``$array`` debe 
-ser un ``array`` y ``$callback`` debe ser de tipo ``callable`` (un ``callback`` 
+Aquí ``$table`` debe ser una instancia de ``\Cake\ORM\Table``, ``$array`` debe
+ser un ``array`` y ``$callback`` debe ser de tipo ``callable`` (un ``callback``
 válido).
 
 Fíjate en que si quieres permitir que ``$array`` sea también una instancia de
@@ -280,7 +278,7 @@ tipo primitivo::
 Funciones anónimas (``Closures``)
 ---------------------------------
 
-Para definir funciones anónimas sigue la guía de estilo de código 
+Para definir funciones anónimas sigue la guía de estilo de código
 `PSR-2 <http://www.php-fig.org/psr/psr-2/>`_ , donde se declaran con un espacio
 después de la palabra ``function`` y antes y después de la palabra ``use``::
 
@@ -305,7 +303,7 @@ Comentar el código
 Todos los comentarios deberán ir escritos en inglés y describir de un modo claro
 el bloque de código comentado.
 
-Los comentarios pueden incluir las siguientes etiquetas de 
+Los comentarios pueden incluir las siguientes etiquetas de
 `phpDocumentor <http://phpdoc.org>`_:
 
 *  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
@@ -353,7 +351,7 @@ solo son procesadas si son el primer elemento en una línea DocBlock, por ejempl
     {
     }
 
-Los bloques de comentarios, con la excepción del primer bloque en un archivo, 
+Los bloques de comentarios, con la excepción del primer bloque en un archivo,
 deberán ir siempre precedidos por un salto de línea.
 
 Tipos de variables
@@ -381,7 +379,7 @@ object
     Tipo object. Debe usarse un nombre de clase específico si es posible.
 resource
     Tipo resource (devuelto por ejemplo por mysql\_connect()).
-    Recuerda que cuando especificas el tipo como mixed deberás indicar 
+    Recuerda que cuando especificas el tipo como mixed deberás indicar
     si es desconocido o cuales son los tipos posibles.
 callable
     Función Callable.
@@ -392,7 +390,7 @@ Puedes combinar tipos usando el caracter ``|``::
 
 Para más de dos tipos normalmente lo mejor es utilizar ``mixed``.
 
-Cuando se devuelva el propio objeto, p.ej. para encadenar, deberás utilizar 
+Cuando se devuelva el propio objeto, p.ej. para encadenar, deberás utilizar
 ``$this`` en su lugar::
 
     /**
@@ -424,7 +422,7 @@ función `require\_once <http://php.net/require_once>`_.
 Etiquetas PHP
 =============
 
-Utiliza siempre las etiquetas ``<?php`` y ``?>`` en lugar de ``<?`` y ``?>``. 
+Utiliza siempre las etiquetas ``<?php`` y ``?>`` en lugar de ``<?`` y ``?>``.
 
 La sintaxis abreviada de ``echo`` deberá usarse en los archivos de plantilla
 (**.ctp**) donde proceda.
@@ -432,8 +430,8 @@ La sintaxis abreviada de ``echo`` deberá usarse en los archivos de plantilla
 Sintaxis abreviada de echo
 --------------------------
 
-La sintaxis abreviada de ``echo`` (``<?=``) deberá usarse en los archivos de 
-plantillas en lugar de ``<?php echo``. Deberá ir seguido inmediatamente por un 
+La sintaxis abreviada de ``echo`` (``<?=``) deberá usarse en los archivos de
+plantillas en lugar de ``<?php echo``. Deberá ir seguido inmediatamente por un
 espacio, la variable o valor de la función a imprimir, un espacio y la etiqueta
 php de cierre::
 
@@ -473,7 +471,7 @@ Variables
 
 Los nombres de variables deberán ser todo lo descriptibles que puedan pero
 también lo más corto posible. Se escribirán en minúscula salvo que estén compuestos
-por múltiples palabras, en cuyo caso irán en ``camelBack``. Los nombres de las 
+por múltiples palabras, en cuyo caso irán en ``camelBack``. Los nombres de las
 variables que referencien objetos deberán ir asociados de algún modo a la clase
 de la cual es objeto.
 Ejemplo::
@@ -499,7 +497,7 @@ y "example.net", por ejemplo:
 *  WWW: `http://www.example.com <http://www.example.com>`_
 *  FTP: `ftp://ftp.example.com <ftp://ftp.example.com>`_
 
-El nombre de dominio "example.com" está reservado para ello (ver :rfc:`2606`) 
+El nombre de dominio "example.com" está reservado para ello (ver :rfc:`2606`)
 y está recomendado para usar en documentaciones o como ejemplos.
 
 Archivos
@@ -530,7 +528,7 @@ Tipo
 (object)
     Cast a object.
 
-Por favor utiliza ``(int)$var`` en lugar de ``intval($var)`` y ``(float)$var`` 
+Por favor utiliza ``(int)$var`` en lugar de ``intval($var)`` y ``(float)$var``
 en lugar de ``floatval($var)`` cuando aplique.
 
 Constantes
@@ -550,7 +548,7 @@ Cuidado al usar empty()/isset()
 
 Aunque ``empty()`` es una función sencilla de utilizar, puede enmascarar errores
 y causar efectos accidentales cuando se usa con ``'0'`` y ``0``. Cuando
-las variables o propiedades están ya definidas el uso de ``empty()`` no es 
+las variables o propiedades están ya definidas el uso de ``empty()`` no es
 recomendable. Al trabajar con variables es mejor utilizar la conversión a tipo
 booleano en lugar de ``empty()``::
 

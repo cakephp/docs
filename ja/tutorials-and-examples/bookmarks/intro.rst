@@ -178,7 +178,6 @@ CakePHP のディレクトリー構造がどのように働くかを学ぶのに
         // More configuration below.
     ];
 
-
 １度 **config/app.php** ファイルを保存して、 'CakePHP is able to connect to the database'
 がチェック済みであることを確認してください。
 

@@ -32,7 +32,6 @@ use the ``set()`` method::
 
     $this->Flash->set('This is a message');
 
-
 .. versionadded:: 3.1
 
     Flash messages now stack. Successive calls to ``set()`` or ``__call()`` with

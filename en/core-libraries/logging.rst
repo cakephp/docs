@@ -168,7 +168,6 @@ array of all the currently configured streams. You can remove
 streams using :php:meth:`Cake\\Log\\Log::drop()`. Once a log stream has been
 dropped it will no longer receive messages.
 
-
 Using the FileLog Adapter
 =========================
 

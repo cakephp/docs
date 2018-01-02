@@ -221,7 +221,6 @@ set a number of response properties at once::
 Returns the current response type Content-type header or null if one has yet to
 be set.
 
-
 Taking Advantage of HTTP Cache Validation
 =========================================
 

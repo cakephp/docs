@@ -83,7 +83,6 @@ Glosario
         *Data Source Name*. Una cadena de conexión formateada para que sea como una URI.
         CakePHP soporta conexiones DSN para Caché, Base de datos, Registro y de E-mail.
 
-
 .. meta::
     :title lang=es: Glosario
     :keywords lang=en: html attributes,array class,array controller,glossary glossary,target blank,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions

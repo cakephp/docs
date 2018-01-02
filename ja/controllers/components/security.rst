@@ -4,7 +4,7 @@
 .. php:class:: SecurityComponent(ComponentCollection $collection, array $config = [])
 
 Security コンポーネントを使うと、アプリケーションにさらに堅牢なセキュリティを導入できます。
-このコンポーネントは、以下の様々なタスクのためのメソッドを提供します。 
+このコンポーネントは、以下の様々なタスクのためのメソッドを提供します。
 
 * アプリケーションが受付ける HTTP メソッドの限定
 * フォーム改ざん防止
@@ -150,7 +150,6 @@ Security コンポーネントは、一般的にコントローラーの ``befor
 
     class WidgetsController extends AppController
     {
-
         public function initialize()
         {
             parent::initialize();
@@ -174,7 +173,6 @@ Security コンポーネントは、一般的にコントローラーの ``befor
 
     class WidgetsController extends AppController
     {
-
         public function initialize()
         {
             parent::initialize();
@@ -225,7 +223,6 @@ CSRF 保護機能を有効にするには、 :doc:`/controllers/components/csrf`
 
     class WidgetController extends AppController
     {
-
         public function initialize()
         {
             parent::initialize();

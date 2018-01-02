@@ -865,7 +865,6 @@ affectées::
     $rowCount = count($stmt);
     $rowCount = $stmt->rowCount();
 
-
 Vérifier les Codes d'Erreur
 ---------------------------
 

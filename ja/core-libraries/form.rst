@@ -96,7 +96,7 @@
 データ検証のみ行うために ``validate()`` を使うこともできます。 ::
 
     $isValid = $form->validate($this->request->getData());
-    
+
 フォーム値の設定
 ================
 
@@ -122,17 +122,17 @@ FormHelper によって作成される他のすべてのフォームと同様に
                     $this->Flash->error('フォーム送信に問題がありました。');
                 }
             }
-            
+
             if ($this->request->is('get')) {
                 // たとえばユーザーモデルの値
                 $this->request->data('name', 'John Doe');
                 $this->request->data('email','john.doe@example.com');
             }
-            
+
             $this->set('contact', $contact);
         }
     }
-    
+
 値はリクエストメソッドが GET の時にのみ定義されるべきで、
 さもないと正しくないまたは保存されていない直前の POST データを上書きしてしまいます。
 

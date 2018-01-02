@@ -218,8 +218,8 @@ Crea el archivo **src/Model/Entity/User.php** y agrega las siguientes lineas::
         // ...
     }
 
-Ahora cada vez que la propiedad password sea asignada a un usuario, será hasheada usando la clase ``DefaultPasswordHasher``.  
-Solamente nos falta un archivo para la vista de la acción login. Abre tu archivo **src/Template/Users/login.ctp** y agrega las siguientes 
+Ahora cada vez que la propiedad password sea asignada a un usuario, será hasheada usando la clase ``DefaultPasswordHasher``.
+Solamente nos falta un archivo para la vista de la acción login. Abre tu archivo **src/Template/Users/login.ctp** y agrega las siguientes
 lineas:
 
 .. code-block:: php
@@ -245,7 +245,6 @@ Y eso es todo! Se ve demasiado simple para ser verdad. Volvamos un poco para exp
 La función ``login()`` llama a ``$this->Auth->identify()`` del AuthComponent, y funciona sin ninguna otra configuración ya que seguimos la convención. Es decir, tener un modelo llamado User con los campos username y password, y usar un formulario que hace post a un controlador con los datos del usuario. Esta función devuelve si el login fue exitoso o no, y en caso de que tenga exito redirige a la URL puesta en AppController, dentro de la configuracion del AuthComponent.
 
 El logout funciona simplemente al acceder a ``/users/logout`` y redirecciona al usuario a la URL configurada.
-
 
 Autorización (quién está autorizado a acceder qué)
 ==================================================
@@ -346,7 +345,7 @@ Estamos sobreescribiendo el método ``isAuthorized()`` de AppController y compro
 
 Esto concluye nuestro simple tutorial de autenticación y autorización. Para proteger el UsersController se puede seguir la misma técnica utilizada para ArticlesController. También es posible implementar una solución mas general en AppController, de acuerdo a tus reglas.
 
-En caso de necesitar más control, sugerimos leer la guia completa sobre Auth en 
+En caso de necesitar más control, sugerimos leer la guia completa sobre Auth en
 :doc:`/controllers/components/authentication`, donde encontrarás mas información para configurar el componente y crear clases de autorizacion a tú medida.
 
 Lectura sugerida

@@ -13,8 +13,6 @@
     contributing/cakephp-coding-conventions
     contributing/backwards-compatibility
 
-
-
 .. meta::
     :title lang=ru: Сотрудничество
     :keywords lang=ru: соглашения написания кода,документация

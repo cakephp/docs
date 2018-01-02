@@ -125,7 +125,6 @@ CookieComponent は、いくつかのメソッドを提供します。
         // Cookie の bar の値を削除しますが、foo 以下のすべてを削除するわけではありません
         $this->Cookie->delete('foo.bar');
 
-
 .. meta::
     :title lang=ja: Cookie
     :keywords lang=ja: array controller,php setcookie,cookie string,controller setup,string domain,default description,string name,session cookie,integers,variables,domain name,null

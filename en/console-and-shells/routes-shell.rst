@@ -27,7 +27,6 @@ in quotes::
 
     bin/cake routes check "/bookmarks/?page=1&sort=title&direction=desc"
 
-
 Testing URL Generation
 ----------------------
 

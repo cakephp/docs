@@ -46,8 +46,8 @@ Visão Geral
 ===========
 
 Uma migração é basicamente um arquivo PHP que descreve as mudanças a
-serem feitas no banco de dados. Um arquivo de migração pode criar ou excluir 
-tabelas, adicionar ou remover colunas, criar índices e até mesmo inserir 
+serem feitas no banco de dados. Um arquivo de migração pode criar ou excluir
+tabelas, adicionar ou remover colunas, criar índices e até mesmo inserir
 dados em seu banco de dados.
 
 Aqui segue um exemplo de migração::
@@ -104,12 +104,12 @@ com as seguintes colunas:
 .. note::
 
     Note que este arquivo descreve como o banco de dados deve ser **após** a
-    aplicação da migração. Neste ponto, a tabela ``products``ainda não existe 
-    no banco de dados, nós apenas criamos um arquivo que é capaz de criar a 
-    tabela ``products`` com seus devidos campos ou excluir a tabela caso uma 
+    aplicação da migração. Neste ponto, a tabela ``products``ainda não existe
+    no banco de dados, nós apenas criamos um arquivo que é capaz de criar a
+    tabela ``products`` com seus devidos campos ou excluir a tabela caso uma
     operação rollback seja executada.
 
-Com o arquivo criado na pasta **config/MIgrations**, você será capaz de executar 
+Com o arquivo criado na pasta **config/MIgrations**, você será capaz de executar
 o comando abaixo para executar as migrações no seu banco de dados::
 
     bin/cake migrations migrate
@@ -122,15 +122,15 @@ tabela recém criada::
 Criando migrations
 ==================
 
-Arquivos de migração são armazeados no diretório **config/Migrations** da 
-sua aplicação. O nome dos arquivos de migração têm como prefixo a data 
+Arquivos de migração são armazeados no diretório **config/Migrations** da
+sua aplicação. O nome dos arquivos de migração têm como prefixo a data
 em que foram criados, no formato **YYYYMMDDHHMMSS_MigrationName.php**. Aqui
 estão exemplos de arquivos de migração:
 
 * 20160121163850_CreateProducts.php
 * 20160210133047_AddRatingToProducts.php
 
-A maneira mais fácil de criar um arquivo de migrações é usando o 
+A maneira mais fácil de criar um arquivo de migrações é usando o
 :doc:`/bake/usage` a linha de comando.
 
 Por favor, leia a `documentação do Phinx <http://docs.phinx.org/en/latest/migrations.html>`
@@ -153,13 +153,13 @@ Quando utilizar o ``bake`` para criar as migrações, você normalmente precisar
 informar os seguintes dados::
 
   * o nome da migração que você irá gerar (``CreateProducts`` por exemplo)
-  * as colunas da tabela que serão adicionadas ou removidas na migração 
+  * as colunas da tabela que serão adicionadas ou removidas na migração
   (``name:string description:text created modified`` no nosso caso)
 
 Devido às convenções, nem todas as alterações de schema podem ser realizadas
 através destes comandos.
 
-Além disso, você pode criar um arquivo de migração vazio caso deseje ter um 
+Além disso, você pode criar um arquivo de migração vazio caso deseje ter um
 controle total do que precisa ser executado. Para isto, apenas omita a definição
 das colunas::
 
@@ -174,7 +174,7 @@ seguir:
 * (``/^(Create)(.*)/``) Cria a tabela especificada.
 * (``/^(Drop)(.*)/``) Exclui a tabela especificada.
   Ignora campos especificados nos argumentos
-* (``/^(Add).*(?:To)(.*)/``) Adiciona campos a 
+* (``/^(Add).*(?:To)(.*)/``) Adiciona campos a
   tabela especificada
 * (``/^(Remove).*(?:From)(.*)/``) Remove campos de uma
   tabela específica
@@ -215,7 +215,7 @@ Por exemplo, veja formas válidas de especificar um campo de e-mail:
 * ``email:string:unique:EMAIL_INDEX``
 * ``email:string[120]:unique:EMAIL_INDEX``
 
-O parâmetro ``length`` para o ``fieldType`` é opcional e deve sempre ser 
+O parâmetro ``length`` para o ``fieldType`` é opcional e deve sempre ser
 escrito entre colchetes
 
 Os campos  ``created`` e ``modified`` serão automaticamente definidos
@@ -238,7 +238,7 @@ Eles podem ser:
 * boolean
 * uuid
 
-Há algumas heurísticas para a escolha de tipos de campos que não são especificados 
+Há algumas heurísticas para a escolha de tipos de campos que não são especificados
 ou são definidos com valor inválido. O tipo de campo padrão é ``string``;
 
 * id: integer
@@ -336,7 +336,6 @@ irá gerar::
         }
     }
 
-
 Especificando o tamanho do campo
 --------------------------------
 
@@ -376,7 +375,7 @@ Removendo uma coluna de uma tabela
 ----------------------------------
 
 Da mesma forma, você pode gerar uma migração para remover uma coluna
-utilizando a linha de comando, se o nome da migração estiver na forma 
+utilizando a linha de comando, se o nome da migração estiver na forma
 "RemoveXXXFromYYY"::
 
     $ bin/cake bake migration RemovePriceFromProducts price
@@ -398,7 +397,7 @@ Cria o arquivo::
 Gerando migrações a partir de uma base de dados existente
 =========================================================
 
-Se você está trabalhando com um banco de dados pré-existente e quer começar 
+Se você está trabalhando com um banco de dados pré-existente e quer começar
 a usar migrações, ou para versionar o schema inicial da base de dados da sua
 aplicação, você pode executar o comando ``migration_snapshot``::
 
@@ -409,7 +408,7 @@ contendo todas as instruções CREATE para todas as tabelas no seu banco de dado
 
 Por padrão, o snapshot será criado a partir da conexão ``default`` definida na
 configuração.
-Se você precisar fazer o bake de um snapshot de uma fonte de dados diferente, 
+Se você precisar fazer o bake de um snapshot de uma fonte de dados diferente,
 você pode utilizar a opção ``--connection``::
 
     $ bin/cake bake migration_snapshot Initial --connection my_other_connection
@@ -466,7 +465,7 @@ o seguinte comando para aplicar as mudanças a sua base de dados::
     # utilizando a opção ``--connection`` ou ``-c``.
     $ bin/cake migrations migrate -c my_custom_connection
 
-    # Migrações também podem ser executadas para plugins. Simplesmente utilize 
+    # Migrações também podem ser executadas para plugins. Simplesmente utilize
     # a opção ``--plugin`` ou ``-p``
     $ bin/cake migrations migrate -p MyAwesomePlugin
 
@@ -504,7 +503,6 @@ Você também pode ver os resultados como JSON utilizando a opção
 Você também pode utilizar as opções ``--source``, ``--connection`` e
 ``--plugin`` exatamente como no comando ``migrate``.
 
-
 ``mark_migrated`` : Marcando uma migração como migrada
 ------------------------------------------------------
 
@@ -519,7 +517,7 @@ Você pode marcar todas as migrações como migradas utilizando este comando::
 
     $ bin/cake migrations mark_migrated
 
-Você também pode marcar todas as migrações de uma versão específica 
+Você também pode marcar todas as migrações de uma versão específica
 utilizando a opção ``--target``::
 
     $ bin/cake migrations mark_migrated --target=20151016204000
@@ -529,7 +527,7 @@ pode utilizar a opção ``--exclude``::
 
     $ bin/cake migrations mark_migrated --target=20151016204000 --exclude
 
-Finalmente, se você deseja marcar somente a migração alvo como migrada, 
+Finalmente, se você deseja marcar somente a migração alvo como migrada,
 você pode utilizar a opção ``--only``::
 
     $ bin/cake migrations mark_migrated --target=20151016204000 --only
@@ -539,7 +537,7 @@ Você também pode utilizar as opções ``--source``, ``--connection`` e
 
 .. note::
 
-    Quando você criar um snapshot utilizando o bake com o comando 
+    Quando você criar um snapshot utilizando o bake com o comando
     ``cake bake migration_snapshot``, a migração criada será automaticamente
     marcada como migrada.
 

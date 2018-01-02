@@ -82,7 +82,10 @@ Line Length
 ===========
 
 It is recommended to keep lines at approximately 100 characters long for better
-code readability. Lines must not be longer than 120 characters.
+code readability. A limit of 80 or 120 characters makes it necessary to
+distribute complex logic or expressions by function, as well as give functions
+and objects shorter, more expressive names. Lines must not be
+longer than 120 characters.
 
 In short:
 
@@ -155,7 +158,6 @@ the condition check of the ternary for clarity::
     // Nested ternaries are bad
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
-
 Template Files
 --------------
 
@@ -173,7 +175,6 @@ tags::
     <?php if ($isAdmin): ?>
         <p>You are the admin user.</p>
     <?php endif; ?>
-
 
 Comparison
 ==========
@@ -220,7 +221,7 @@ Example of a method definition::
         if (expr) {
             statement;
         }
-        
+
         return $var;
     }
 
@@ -239,7 +240,7 @@ it can be determined whether the function call was successful::
         if (!($dnsInfo) || !($dnsInfo['phpType'])) {
             return $this->addError();
         }
-        
+
         return true;
     }
 

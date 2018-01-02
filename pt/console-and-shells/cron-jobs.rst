@@ -13,15 +13,15 @@ enviar newsletters. Isso é trivial para configurar, por exemplo::
     # │    │    \─────────────── dia do mês (1 - 31)
     # │    \──────────────────── hora (0 - 23)
     # \───────────────────────── minuto (0 - 59)
-    
+
 Você pode ver mais informações aqui: https://pt.wikipedia.org/wiki/Crontab
 
 .. tip::
 
     Use ``-q`` (ou `--quiet`) para silenciar qualquer saída para cronjobs.
-    
+
 .. meta::
- 
+
     :Title lang=pt: Executando Shells como cronjobs
     :keywords lang=pt: crontab, script bash, crontab
 

@@ -134,7 +134,6 @@ $xml1 和 $xml2 的值分别是::
     <?xml version="1.0"?>
     <root xmlns="https://cakephp.org"><child>value</child>
 
-
     <?xml version="1.0"?>
     <root><tag xmlns:pref="https://cakephp.org"><pref:item>item 1</pref:item><pref:item>item 2</pref:item></tag></root>
 

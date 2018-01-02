@@ -19,7 +19,7 @@ DebugKit は、CakePHP アプリケーション用のデバッグツールバー
 ルートディレクトリー (composer.json ファイルのある場所) で実行してください。 ::
 
     php composer.phar require --dev cakephp/debug_kit "~3.0"
-    
+
 そして以下のコマンドでプラグインを有効化する必要があります。 ::
 
     bin/cake plugin load DebugKit

@@ -15,7 +15,7 @@ de acesso a banco de dados de baixo-nível. Se ao invés, você deseja aprender
 mais sobre o ORM completo, você pode ler as seções :doc:`/orm/query-builder` e
 :doc:`/orm/table-objects`.
 
-A maneira mais fácil de criar uma conexão de banco de dados é usando uma string 
+A maneira mais fácil de criar uma conexão de banco de dados é usando uma string
 ``DSN``::
 
     use Cake\Datasource\ConnectionManager;
@@ -162,8 +162,6 @@ definir conexões adicionais em tempo de execução usando o método
         'cacheMetadata' => true,
     ]);
 
-
-
 As opções de configuração também podem ser fornecidas como uma string :term:`DSN`.
 Isso é útil ao trabalhar com variáveis de ambiente ou :term:`PaaS` providers::
 
@@ -182,15 +180,15 @@ completa é a seguinte:
 
 className
     O nome completo de classe incluindo namespace da classe que representa a
-    conexão a um servidor de banco de dados. Esta classe é responsável por 
+    conexão a um servidor de banco de dados. Esta classe é responsável por
     carregar o driver do banco de dados, fornecendo mecanismos de transação SQL
     e preparando instruções SQL entre outras coisas.
 driver
     O nome da classe do driver usado para implementar todas as especificidades
     para um mecanismo de banco de dados. Isso pode ser um nome de classe curto
     usando :term:`sintaxe plugin`, um nome de classe com seu namespace ou uma
-    instância de driver. 
-    Exemplos de nomes de classes curtos são Mysql, Sqlite, Postgres e Sqlserver.   
+    instância de driver.
+    Exemplos de nomes de classes curtos são Mysql, Sqlite, Postgres e Sqlserver.
 persistent
     Se deve ou não usar uma conexão persistente com o banco de dados. Esta opção não
     é suportada pelo SqlServer. A partir da versão 3.4.13 do CakePHP, uma exceção é
@@ -203,7 +201,7 @@ password
     A senha da conta.
 database
     O nome do banco de dados para essa conexão usar. Evite usar ``.`` no nome
-    do seu banco de dados. Por causa de como isso complica citação de 
+    do seu banco de dados. Por causa de como isso complica citação de
     identificadores, o CakePHP não suporta ``.``  em nomes de banco de dados.
     O caminho para o seu banco de dados SQLite deve ser um caminho absoluto
     (ex: ``ROOT . DS . 'my_app.db'``) para evitar caminhos incorretos
@@ -213,7 +211,7 @@ port (*opcional*)
 encoding
     Indica a configuração de charset usado ao enviar instruções SQL ao servidor.
     Seu padrão é a codificação padrão do banco de dados para todos os banco de
-    dados exceto o DB2. Se você deseja usar a codificação UTF-8 com conexões 
+    dados exceto o DB2. Se você deseja usar a codificação UTF-8 com conexões
     MySQL, você deve usar 'utf8' sem o hífen.
 timezone
     Fuso horário do servidor para definir.
@@ -230,7 +228,7 @@ ssl_cert
 ssl_ca
     O caminho do arquivo de autoridade de certificação SSL. (Somente suportado pelo MySQL).
 init
-    Uma lista de queries que devem ser enviadas para o servidor de banco de dados 
+    Uma lista de queries que devem ser enviadas para o servidor de banco de dados
     como quando a conexão é criada.
 log
     Defina para ``true`` para habilitar o log de query. Quando habilitado, queries
@@ -256,7 +254,7 @@ A correta nomenclatura para suas tables (e a adição de algumas colunas) podem
 garantir algumas funcionalidades gratuitas e ajudá-lo a evitar configuração.
 Por exemplo, se você nomear sua tabela de banco de dados big\_boxes, sua
 tabela BigBoxesTable e o seu controller BigBoxesController, tudo funcionará
-em conjunto automaticamente. Por convenção, use sublinhados, minúsculas e 
+em conjunto automaticamente. Por convenção, use sublinhados, minúsculas e
 plurais para os nomes de tabelas de banco de dados - por exemplo: bakers,
 pastry\_stores, and savory\_cakes.
 
@@ -276,7 +274,7 @@ Acessando Conexões
 
 .. php:staticmethod:: get($name)
 
-Uma vez configurada, as conexões podem ser obtidas usando 
+Uma vez configurada, as conexões podem ser obtidas usando
 :php:meth:`Cake\\Datasource\\ConnectionManager::get()`. Este método irá construir
 e carregar uma conexão se não tiver sido construído antes ou retornar a conexão
 conhecida existente::
@@ -315,7 +313,7 @@ tipos suportados pelo CakePHP são:
 
 string
     Geralmente usado para colunas dos tipos CHAR ou VARCHAR. Ao usar a opção ``fixed``
-    forçará uma coluna CHAR. No SQL Server, os tipos NCHAR e NVARCHAR são usados.    
+    forçará uma coluna CHAR. No SQL Server, os tipos NCHAR e NVARCHAR são usados.
 text
     Mapeia para tipos de TEXT.
 uuid
@@ -350,14 +348,14 @@ timestamp
 time
     Mapeia para um tipo TIME em todos bancos de dados.
 json
-    Mapeia para um tipo JSON se disponível, caso contrário mapeia para TEXT. 
+    Mapeia para um tipo JSON se disponível, caso contrário mapeia para TEXT.
     O tipo 'json' foi adicionado na versão 3.3.0
 
 Esses tipos são usados tanto nos recursos de schema reflection que o CakePHP fornece,
 quanto nos recursos de geração de schema que o CakePHP utiliza ao usar fixtures de testes.
 
-Cada tipo também pode fornecer funções de tradução entre representações de PHP e SQL. 
-Esses métodos são invocados com base nos type hints fornecidos ao fazer consultas. 
+Cada tipo também pode fornecer funções de tradução entre representações de PHP e SQL.
+Esses métodos são invocados com base nos type hints fornecidos ao fazer consultas.
 Por exemplo, uma coluna marcada como 'datetime' automaticamente converterá os parâmetros
 de entrada das instâncias ``DateTime`` em timestamp ou string de data formatada. Da mesma
 forma, as colunas 'binary' aceitarão manipuladores de arquivos e gerarão manipuladores de
@@ -380,7 +378,7 @@ devem implementar os seguintes métodos:
 * ``marshal``: Converte dados simples em objetos PHP.
 
 Uma maneira fácil de atender a interface básica é estender
-:php:class:`Cake\\Database\\Type`. Por exemplo, se quiséssemos adicionar um tipo JSON, 
+:php:class:`Cake\\Database\\Type`. Por exemplo, se quiséssemos adicionar um tipo JSON,
 poderíamos fazer a seguinte classe de tipo::
 
     // in src/Database/Type/JsonType.php
@@ -596,7 +594,7 @@ Classes de Conexão
 As classes de conexão fornecem uma interface simples para interagir
 com conexões de banco de dados de modo consistente. Elas servem como
 uma interface mais abstrata para a camada do driver e fornece recursos
-para executar consultas, logar (<em>logging</em>) consultas e realizar
+para executar consultas, logar (*logging*) consultas e realizar
 operações transacionais.
 
 .. _database-queries:
@@ -618,7 +616,7 @@ mais básico é o ``query()`` que lhe permite executar consultas SQL já prontas
 
 .. php:method:: execute($sql, $params, $types)
 
-O método ``query()`` não aceita parâmetros adicionais. Se você precisa de 
+O método ``query()`` não aceita parâmetros adicionais. Se você precisa de
 parâmetros adicionais, você deve usar o método ``execute()``, que permite que
 placeholders sejam usados::
 
@@ -650,7 +648,7 @@ complexas e expressivas sem ter que usar SQL específico de plataforma::
         ->where(['id' => 2]);
     $stmt = $query->execute();
 
-Ao usar o construtor de consulta (<em>query builder</em>), nenhum SQL será enviado
+Ao usar o construtor de consulta (*query builder*), nenhum SQL será enviado
 para o servidor do banco de dados até que o método ``execute()`` é chamado ou a
 consulta seja iterada. Iterar uma consulta irá primeiro executá-la e então começar a
 iterar sobre o conjunto de resultados::
@@ -681,7 +679,7 @@ de banco de dados. A maneira mais básica de fazer transações é através dos 
 
 .. php:method:: transactional(callable $callback)
 
-Além disso, essas instâncias de interface de conexão também fornecem o método 
+Além disso, essas instâncias de interface de conexão também fornecem o método
 ``transactional()`` que torna o tratamento das chamadas begin/commit/rollback muito mais simples::
 
     $conn->transactional(function ($conn) {
@@ -689,15 +687,14 @@ Além disso, essas instâncias de interface de conexão também fornecem o méto
         $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
     });
 
-Além de consultas básicas, você pode executar consultas mais complexas usando 
+Além de consultas básicas, você pode executar consultas mais complexas usando
 :doc:`/orm/query-builder` ou :doc:`/orm/table-objects`. O método transactional vai fazer o seguinte:
 
 - Chamar método ``begin``.
 - Chamar a closure fornecida.
 - Se a closure lançar uma exceção, um rollback será emitido. A exceção original será re-lançada.
 - Se a closure retornar ``false``, um rollback será emitido.
-- Se a closure for executada com sucesso, a transação será cometida (<em>committed</em>).
-
+- Se a closure for executada com sucesso, a transação será cometida (*committed*).
 
 Interagindo com Instruções
 ==========================
@@ -710,7 +707,7 @@ Isso envolve o objeto de instrução básico subjacente e fornece alguns recurso
 Preparando um Instrução
 -----------------------
 
-Você pode criar um objeto de instrução usando ``execute()`` ou ``prepare()```. O método ``execute()``
+Você pode criar um objeto de instrução usando ``execute()`` ou ``prepare()``. O método ``execute()``
 retorna uma instrução com os valores fornecidos ligados a ela. Enquanto que o ``prepare()`` retorna
 uma instrução incompleta::
 
@@ -773,7 +770,7 @@ Executando & Obtendo Linhas
 
 Depois de preparar uma instrução e vincular dados a ela, você pode executá-la e obter
 linhas. As instruções devem ser executadas usando o método ``execute()``. Uma vez
-executado, os resultados podem ser obtidos usando ``fetch()``, ``fetchAll()`` ou iterando 
+executado, os resultados podem ser obtidos usando ``fetch()``, ``fetchAll()`` ou iterando
 a instrução::
 
     $stmt->execute();
@@ -806,7 +803,7 @@ Verificando Códigos de Erro
 ---------------------------
 
 Se a sua consulta não foi bem sucedida, você pode obter informações de erro relacionadas
-usando os métodos ``errorCode()`` e ``errorInfo()``. Estes métodos funcionam da mesma 
+usando os métodos ``errorCode()`` e ``errorInfo()``. Estes métodos funcionam da mesma
 maneira que os fornecidos pelo PDO::
 
     $code = $stmt->errorCode();
@@ -832,7 +829,7 @@ usando o método ``logQueries``::
 
 Quando o log de consultas está habilitado, as consultas serão logadas em
 :php:class:`Cake\\Log\\Log` usando o nível 'debug', e o escopo 'queriesLog'.
-Você precisará ter um logger configurado para capturar esse nível e escopo. 
+Você precisará ter um logger configurado para capturar esse nível e escopo.
 Logar no ``stderr`` pode ser útil quando se estiver trabalhando com testes
 de unidade e logar em arquivos/syslog pode ser útil ao trabalhar com
 requisições web::
@@ -856,7 +853,7 @@ requisições web::
 
 .. note::
 
-    Log de consultas destina-se apenas para usos de depuração/desenvolvimento. 
+    Log de consultas destina-se apenas para usos de depuração/desenvolvimento.
     Você nunca deve habilitar o log de consultas em ambiente de produção, pois isso
     afetará negativamente o desempenho de sua aplicação.
 
@@ -865,25 +862,25 @@ requisições web::
 Identifier Quoting
 ==================
 
-Por padrão, o CakePHP **não** cita (<em>quote<em>) identificadores em consultas
+Por padrão, o CakePHP **não** cita (*quote*) identificadores em consultas
 SQL geradas. A razão disso é que a citação de identificadores tem algumas desvantagens:
 
-* Sobrecarga de desempenho - Citar identificadores é muito mais lentos e complexos 
+* Sobrecarga de desempenho - Citar identificadores é muito mais lentos e complexos
   do que não fazê-lo.
 * Não é necessário na maioria dos casos - Em bancos de dados não legados que seguem as
   convenções do CakePHP não há motivo para citar identificadores.
 
-Se você estiver usando um schema legado que requer citação de identificador, você pode 
-habilitar isso usando a configuração ``quoteIdentifiers``` em seu 
+Se você estiver usando um schema legado que requer citação de identificador, você pode
+habilitar isso usando a configuração ``quoteIdentifiers``` em seu
 :ref:`database-configuration`. Você também pode habilitar esse recurso em tempo de execução::
 
     $conn->driver()->autoQuoting(true);
 
-Quando habilitado, a citação de identificador causará uma <em>traversal query</em> adicional
+Quando habilitado, a citação de identificador causará uma *traversal query* adicional
 que converte todos os identificadores em objetos ``IdentifierExpression``.
 
 .. note::
-    
+
     Os fragmentos de SQL contidos em objetos QueryExpression não serão modificados.
 
 .. _database-metadata-cache:
@@ -894,9 +891,9 @@ Metadata Caching
 O ORM do CakePHP usa reflexão de banco de dados para determinar a schema, índices e
 chaves estrangeiras que sua aplicação contém. Como esse metadado é alterado
 com pouca frequência e pode ser caro de acessar, ele geralmente é armazenado em cache.
-Por padrão, os metadados são armazenados na configuração de cache ``_cake_model_``. 
+Por padrão, os metadados são armazenados na configuração de cache ``_cake_model_``.
 Você pode definir uma configuração de cache personalizada usando a opção ``cacheMetadata``
-na sua configuração de <em>datasource</em>::
+na sua configuração de *datasource*::
 
     'Datasources' => [
         'default' => [
@@ -919,7 +916,7 @@ com o método ``cacheMetadata()``::
     // Utilizar uma configuração de cache personalizada
     $connection->cacheMetadata('orm_metadata');
 
-O CakePHP também inclui uma ferramenta CLI para gerenciar caches de metadados. 
+O CakePHP também inclui uma ferramenta CLI para gerenciar caches de metadados.
 Confira o capítulo :doc:`/console-and-shells/orm-cache` para obter mais informações.
 
 Criando Banco de Dados
@@ -937,8 +934,8 @@ bancos de dados. Por exemplo, para criar um banco de dados::
 
 .. note::
 
-    Ao criar um banco de dados, é uma boa idéia definir o conjunto de caracteres e os 
-    parâmetros de collation. Se esses valores estiverem faltando, o banco de dados 
+    Ao criar um banco de dados, é uma boa idéia definir o conjunto de caracteres e os
+    parâmetros de collation. Se esses valores estiverem faltando, o banco de dados
     definirá quaisquer valores padrão de sistema que ele use.
 
 .. meta::

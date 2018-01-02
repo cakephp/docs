@@ -185,7 +185,6 @@ ou dans la chaine traduite::
 
     echo __("Hello, my name is {0}, I'm {1} years old", ['Sara', 12]);
 
-
 Les marqueurs sont numériques et correspondent aux clés dans le tableau passé.
 Vous pouvez également passer à la fonction les variables en tant qu'arguments
 indépendants::
@@ -662,7 +661,6 @@ définira automatiquement la locale en se basant sur l'utilisateur actuel::
         // Add middleware and set the valid locales
         $middleware->add(new LocaleSelectorMiddleware(['en_US', 'fr_FR']));
     }
-
 
     // Avant 3.3.0, il faut utiliser un DispatchFilter
     // dans config/bootstrap.php

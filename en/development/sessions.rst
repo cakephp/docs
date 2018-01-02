@@ -225,7 +225,6 @@ it to control settings like ``session.gc_divisor``::
         ]
     ]);
 
-
 Creating a Custom Session Handler
 =================================
 
@@ -307,7 +306,6 @@ block look like the following::
 
 Now our application will start using our custom session handler for reading and
 writing session data.
-
 
 .. php:class:: Session
 

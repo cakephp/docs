@@ -62,7 +62,6 @@ CakePHP ではデータの検証には二つの段階があります:
 バリデーションルールは規約ではテーブルクラス中で定義されます。
 何のデータが検証されるかとあわせてどこで保存されるかも定義します。
 
-
 テーブル中で既定のバリデーションオブジェクトを作るには、
 ``validationDefault()`` 関数を作成します。 ::
 
@@ -71,7 +70,6 @@ CakePHP ではデータの検証には二つの段階があります:
 
     class ArticlesTable extends Table
     {
-
         public function validationDefault(Validator $validator)
         {
             $validator
@@ -95,7 +93,6 @@ CakePHP ではデータの検証には二つの段階があります:
 
     バリデーションオブジェクトは主にユーザー入力の検証用に意図されています。
     たとえば、フォームやその他の投稿されたリクエストデータです。
-
 
 異なるバリデーションセットの使用
 ================================
@@ -132,7 +129,6 @@ CakePHP ではデータの検証には二つの段階があります:
 必要に応じていくつものバリデーションセットを設けることができます。
 バリデーションルールセットの構築についてのより多くの情報は :doc:`バリデーション
 </core-libraries/validation>` を参照してください。
-
 
 .. _using-different-validators-per-association:
 
@@ -212,7 +208,6 @@ CakePHP ではデータの検証には二つの段階があります:
 
     class UsersTable extends Table
     {
-
         public function validationDefault(Validator $validator)
         {
             $validator
@@ -254,7 +249,6 @@ CakePHP ではデータの検証には二つの段階があります:
     $defaultValidator = $usersTable->validator('default');
 
     $hardenedValidator = $usersTable->validator('hardened');
-
 
 .. deprecated:: 3.5.0
     ``validator()`` は非推奨です。代わりに ``getValidator()`` を使用してください。
@@ -335,7 +329,7 @@ CakePHP は、エンティティーが保存される前に適用される「ル
 
 ルールの関数はチェックされるエンティティーとオプションの配列を期待します。
 オプションの配列は ``errorField`` 、 ``message`` 、そして ``repository`` を含みます。
-``repository`` オプションはルールが追加されるテーブルクラスを含みます。 
+``repository`` オプションはルールが追加されるテーブルクラスを含みます。
 ルールはあらゆる ``callable`` を受け取るので、インスタンス関数を使うこともできます。 ::
 
     $rules->addCreate([$this, 'uniqueEmail'], 'uniqueEmail');
@@ -376,7 +370,6 @@ CakePHP は、エンティティーが保存される前に適用される「ル
 外部キーフィールドのルールを設定する時には、
 ルールでは列挙したフィールドのみが使われるのを覚えておくことが重要です。
 これは ``$user->account->id`` を変更しても上記のルールは発動しないことを意味します。
-
 
 外部キールール
 --------------
@@ -449,7 +442,6 @@ CakePHP は、エンティティーが保存される前に適用される「ル
 
 .. versionadded:: 3.3.0
     ``validCount()`` メソッドは、3.3.0 で追加されました。
-    
 
 エンティティーメソッドをルールとして使用
 ----------------------------------------
@@ -519,13 +511,12 @@ CakePHP は、エンティティーが保存される前に適用される「ル
         }
     }
 
-
     // カスタムルールの追加
     use App\Model\Rule\CustomRule;
 
     $rules->add(new CustomRule(...), 'ruleName');
 
-カスタムルールクラスを作ることでコードを *重複がない状態* 
+カスタムルールクラスを作ることでコードを *重複がない状態*
 (訳注：DRY = Don't Repeat Yourself の訳)
 に保つことができ、またドメインルールを簡単にテストできるようになります。
 
@@ -535,7 +526,6 @@ CakePHP は、エンティティーが保存される前に適用される「ル
 エンティティーを保存する時、必要であればルールを無効にできます。 ::
 
     $articles->save($article, ['checkRules' => false]);
-
 
 バリデーション対アプリケーションルール
 ======================================
@@ -630,7 +620,6 @@ CakePHP の ORM は検証に二層のアプローチを使う点がユニーク�
     $order->price = 50;
     $order->shipping_mode = 'free';
     $ordersTable->save($order); // 偽を返します
-
 
 バリデーションをアプリケーションルールとして使用
 ------------------------------------------------

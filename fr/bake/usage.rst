@@ -14,7 +14,6 @@ script, vérifiez que :
 #. Selon la configuration de votre ordinateur, vous devrez peut-être permettre
    l'exécution du script bash pour permettre de lancer ``bin/cake bake``.
 
-
 Avant de lancer bake, vous devrez vous assurer qu'au moins une connection à une
 base de données est configurée. Regardez la section dans
 :ref:`configuration de la base de données <database-configuration>` pour plus
@@ -49,7 +48,7 @@ des tâches disponibles. Vous devriez voir quelque chose comme ceci::
     - model
     - plugin
     - shell
-    - shell-helper 
+    - shell-helper
     - template
     - test
 

@@ -121,7 +121,6 @@ CSS ファイルをインクルードすることができます。
 
     background:#633; border-bottom:1px solid #000; padding:10px;
 
-
 meta タグの作成
 ---------------
 
@@ -246,7 +245,6 @@ DOCTYPE の作成
 
 .. php:method:: image(string $path, array $options = [])
 
-
 整形された画像タグを作成します。
 指定されたパスは **webroot/img/** と相対的でなければなりません。 ::
 
@@ -327,7 +325,6 @@ HTML リンクを作成するための多目的なメソッドです。
 
     <a href="http://www.yourdomain.com/dashboards/index">Dashboard</a>
 
-
 オプションで ``confirm`` キーを指定すると、JavaScript の ``confirm()`` ダイアログを表示できます。 ::
 
     echo $this->Html->link(
@@ -403,7 +400,6 @@ HTML リンクを作成するための多目的なメソッドです。
 --------------------------
 
 .. php:method:: media(string|array $path, array $options)
-
 
 オプション:
 
@@ -817,7 +813,6 @@ HTML パラメーターを使用することができ、 特別なオプショ�
 これは、常にルートのリンクを含めたい場合に便利です。このオプションは
 :php:meth:`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()` の
 ``$startText`` オプションと同じ働きをします。
-
 
 .. meta::
     :title lang=ja: HtmlHelper

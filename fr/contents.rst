@@ -30,7 +30,6 @@ Contenu
     views
     orm
 
-
 .. toctree::
     :maxdepth: 3
     :caption: Généralités

@@ -27,7 +27,6 @@ URL が ``check`` メソッドを使用して解析される方法をすぐに�
 
     bin/cake routes check "/bookmarks/?page=1&sort=title&direction=desc"
 
-
 URL 生成のテスト
 ----------------
 

@@ -150,7 +150,6 @@ Query
 - ``EXTRACT``, ``DATE_ADD`` and ``DAYOFWEEK`` raw SQL functions have been
   abstracted to ``extract()``, ``dateAdd()`` and ``dayOfWeek()``.
 
-
 View
 ====
 
@@ -220,7 +219,6 @@ Validation
 - ``Validation::isInteger()`` was added.
 - ``Validation::ascii()`` was added.
 - ``Validation::utf8()`` was added.
-
 
 Testing
 =======

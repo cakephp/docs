@@ -40,7 +40,6 @@ Straight to the point and straight from the core developers, the CakePHP API
 around for all the nitty gritty details of the internal workings of the
 framework. It's a straight forward code reference, so bring your propeller hat.
 
-
 The Test Cases
 ==============
 
@@ -55,7 +54,6 @@ The IRC Channel
 
 **IRC Channels on irc.freenode.net:**
 
-
 -  `#cakephp <irc://irc.freenode.net/cakephp>`_ -- General Discussion
 -  `#cakephp-docs <irc://irc.freenode.net/cakephp-docs>`_ -- Documentation
 -  `#cakephp-bakery <irc://irc.freenode.net/cakephp-bakery>`_ -- Bakery
@@ -68,7 +66,6 @@ America users. We'd love to hear from you, whether you need some help, want to
 find users in your area, or would like to donate your brand new sports car.
 
 .. _cakephp-official-communities:
-
 
 Official CakePHP Forum
 ======================
@@ -137,7 +134,6 @@ Spanish
 - `Spanish CakePHP Slack Channel <https://cakesf.slack.com/messages/spanish/>`_
 - `Spanish CakePHP IRC Channel <irc://irc.freenode.net/cakephp-es>`_
 - `Spanish CakePHP Google Group <http://groups.google.com/group/cakephp-esp>`_
-
 
 .. meta::
     :title lang=en: Where to Get Help

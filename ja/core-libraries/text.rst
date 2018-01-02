@@ -15,7 +15,6 @@ Text クラスは文字列を作ったり操作したりする便利なメソッ
 
     class UsersController extends AppController
     {
-
         public function initialize()
         {
             parent::initialize();
@@ -34,7 +33,6 @@ Text クラスは文字列を作ったり操作したりする便利なメソッ
             }
         }
     }
-
 
 ASCII 文字への変換
 ==================
@@ -58,7 +56,6 @@ ICU のトランスリテレーション識別子は基本的に ``<元のスク
     // Ubermensch (ラテン文字だけを変換する)
     Text::transliterate('Übérmensch', 'Latin-ASCII;');
 
-
 URL に安全な文字列の作成
 =========================
 
@@ -79,7 +76,6 @@ slug をコントロールするオプション配列を渡すことができま
 * ``preserve`` 保持したい特定の非単語文字。デフォルトは ``null`` 。
    たとえば、このオプションに '.' をセットすることでクリーンなファイル名を生成することができます。 ::
 
-
     // apple-puree
     Text::slug('apple purée');
 
@@ -88,7 +84,6 @@ slug をコントロールするオプション配列を渡すことができま
 
     // foo-bar.tar.gz
     Text::slug('foo bar.tar.gz', ['preserve' => '.']);
-
 
 UUID の生成
 ============
@@ -99,7 +94,6 @@ UUID メソッドは :rfc:`4122` 準拠のユニークな識別子を生成す�
 UUID は ``485fc381-e790-47a3-9794-1337c0a8fe68`` というフォーマットの 128 ビットの文字列です。 ::
 
     Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
-
 
 単純な文字列のパース
 =====================
@@ -120,7 +114,6 @@ UUID は ``485fc381-e790-47a3-9794-1337c0a8fe68`` というフォーマットの
 このメソッドは人が読みやすいバイトのサイズのフォーマットから、バイトの整数値へと変換します。 ::
 
     $int = Text::parseFileSize('2GB');
-
 
 文字列のフォーマット
 =====================
@@ -150,7 +143,6 @@ options 配列内で下記のオプションを使うことができます。 ::
         'before' => '',
         'after' => ''
     ];
-
 
 テキストの改行
 ===============
@@ -197,7 +189,6 @@ options 配列内で下記のオプションを使うことができます。 ::
 
 .. start-text
 
-
 文字列の一部をハイライトする
 ============================
 
@@ -233,16 +224,12 @@ options 配列内で下記のオプションを使うことができます。 ::
     $options['format'] で指定された文字列か、デフォルトの文字列を<span class="highlight">使って</span>
     $haystack 中の $needle をハイライトします。
 
-
-
-
 リンク除去
 ==============
 
 .. php:method:: stripLinks($text)
 
 渡された ``$text`` から HTML リンクを取り除きます。
-
 
 テキストの切り詰め
 ===================
@@ -289,7 +276,6 @@ options 配列内で下記のオプションを使うことができます。 ::
 出力::
 
     The killer crept...
-
 
 文字列の末尾を切り詰める
 =========================
@@ -338,7 +324,6 @@ options 配列内で下記のオプションを使うことができます。 ::
 
     ...a TV, a C# program that can divide by zero, death metal t-shirts
 
-
 抜粋の抽出
 ===========
 
@@ -360,7 +345,6 @@ options 配列内で下記のオプションを使うことができます。 ::
 
     ... by $radius, and prefix/suffix with $ellipsis. This method is especially
     handy for search results. The query...
-
 
 配列を文章的なものに変換する
 ============================

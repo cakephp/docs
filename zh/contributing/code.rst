@@ -33,14 +33,14 @@
 
     git clone git@github.com:你的账号/cakephp.git
 
-把原始的 CakePHP 仓库添加为远程仓库(*remote repository*)。以后你会使用它来抓取 
+把原始的 CakePHP 仓库添加为远程仓库(*remote repository*)。以后你会使用它来抓取
 CakePHP 仓库的改动，保持与 CakePHP 仓库一致::
 
     cd cakephp
     git remote add upstream git://github.com/cakephp/cakephp.git
 
-现在你已经搭建好了 CakePHP 的环境。你应该能够定义一个 ``$test`` 
-:ref:`数据库连接 <database-configuration>`，并且 
+现在你已经搭建好了 CakePHP 的环境。你应该能够定义一个 ``$test``
+:ref:`数据库连接 <database-configuration>`，并且
 :ref:`运行所有的测试 <running-tests>` 。
 
 制作补丁
@@ -69,7 +69,6 @@ CakePHP 仓库的改动，保持与 CakePHP 仓库一致::
 * 遵循 :doc:`/contributing/cakephp-coding-conventions` 。
 * 添加一个测试用例来说明错误修复好了，或者新特性能够工作。
 * 使你的提交保持逻辑性，提交信息应当清晰、简洁。
-
 
 提交拉取请求
 ============
@@ -112,7 +111,6 @@ CakePHP 仓库的改动，保持与 CakePHP 仓库一致::
   例如，如果当前的版本是 ``2.2.2``，那么下一次现有的功能可以被打破(*broken*)就是
   在 ``3.0`` 版本了，所以你应该针对这一分支。
 
-
 .. note::
 
     请记住，所有你贡献给 CakePHP 的代码将被置于 MIT 许可之下，
@@ -121,7 +119,6 @@ CakePHP 仓库的改动，保持与 CakePHP 仓库一致::
     `CakePHP Community Guidelines <http://community.cakephp.org/guidelines>`_ 。
 
 所有合并到维护分支中的臭虫修复，也将被核心团队定期地合并到即将发布的下一个版本。
-
 
 .. meta::
     :title lang=zh: Code

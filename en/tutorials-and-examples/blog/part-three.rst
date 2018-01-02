@@ -129,7 +129,6 @@ Run the following command to create your tables::
 
     bin/cake migrations migrate
 
-
 Modifying the Tables
 ====================
 
@@ -169,7 +168,7 @@ Create all files by launching bake commands::
     bin/cake bake template Categories
 
 Alternatively, you can bake all with just one line::
-    
+
     bin/cake bake all Categories
 
 The bake tool has created all your files in a snap. You can give them a quick
@@ -327,7 +326,6 @@ In **src/Template/Categories/index.ctp** replace the existing content with::
         </table>
     </div>
 
-
 Modifying the ArticlesController
 ================================
 
@@ -367,7 +365,6 @@ it::
             $this->set(compact('categories'));
         }
     }
-
 
 Modifying the Articles Templates
 ================================

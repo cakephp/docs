@@ -42,7 +42,6 @@ CakePHP API (*Application Programming Interface*) は、
 この文書は、直接的なコードリファレンスですので、技術的に十分な理解を持っている
 ことを前提としています。
 
-
 テストケース
 ============
 
@@ -69,7 +68,6 @@ IRC チャンネル
 寄付したいという場合でも、喜んで聞いてくれるはずです。
 
 .. _cakephp-official-communities:
-
 
 公式 CakePHP フォーラム
 =======================

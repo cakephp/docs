@@ -49,7 +49,7 @@ method::
         public function initialize(array $config)
         {
             $this->setTable('my_table');
-            
+
             // Prior to 3.4.0
             $this->table('my_table');
         }
@@ -69,7 +69,7 @@ If you need to modify this you can use the ``setPrimaryKey()`` method::
         public function initialize(array $config)
         {
             $this->setPrimaryKey('my_id');
-            
+
             // Prior to 3.4.0
             $this->primaryKey('my_id');
         }
@@ -89,7 +89,7 @@ conventions you can use the ``setEntityClass()`` method to change things up::
         public function initialize(array $config)
         {
             $this->setEntityClass('App\Model\Entity\PO');
-            
+
             // Prior to 3.4.0
             $this->entityClass('App\Model\Entity\PO');
         }

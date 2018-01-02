@@ -44,7 +44,7 @@ quando fornecidos um argumento de palavra composta.
 +                   +---------------+---------------+
 |                   | bigApple      | BigApple      |
 +-------------------+---------------+---------------+
-| ``classify()``    | big_apples    | BigApple      | 
+| ``classify()``    | big_apples    | BigApple      |
 +                   +---------------+---------------+
 |                   | big apple     | BigApple      |
 +-------------------+---------------+---------------+
@@ -144,7 +144,7 @@ Criando nomes de variáveis
 
 .. php:staticmethod:: variable($underscored)
 
-Nomes de variáveis geralmente são úteis em tarefas de meta-programação que 
+Nomes de variáveis geralmente são úteis em tarefas de meta-programação que
 involvem a geração de código ou rotinas baseadas em convenções::
 
     // applePie

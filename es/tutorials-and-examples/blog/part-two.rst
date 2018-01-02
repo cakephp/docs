@@ -52,7 +52,6 @@ en nuestra base de datos llamada ``articles``.
 Para más información sobre modelos, como callbacks y validaciones echa un vistazo
 al capítulo del Manual :doc:`/orm`.
 
-
 Crear el Controlador de Artículos (``Articles Controller``)
 ===========================================================
 
@@ -86,7 +85,6 @@ código para tal acción sería este::
             $this->set(compact('articles'));
         }
     }
-
 
 Por el hecho de haber definido el método ``index()`` en nuestro
 ArticlesController, los usuarios ahora pueden acceder a su lógica solicitando
@@ -237,7 +235,6 @@ Ahora vamos a definir la vista para esta nueva función 'view' ubicándola en
 
 Verifica que esto funciona probando los enlaces en ``/articles/index`` o puedes
 solicitándolo manualmente accediendo a ``/articles/view/1``.
-
 
 Añadiendo Artículos
 ===================

@@ -21,7 +21,6 @@ avoid needless configuration and make a uniform application structure that makes
 working with various projects simple. The :doc:`conventions chapter
 </intro/conventions>` covers the various conventions that CakePHP uses.
 
-
 The Model Layer
 ===============
 

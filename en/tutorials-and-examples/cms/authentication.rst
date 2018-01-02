@@ -79,7 +79,6 @@ And in **src/Template/Users/login.ctp** add the following::
     <?= $this->Form->button('Login') ?>
     <?= $this->Form->end() ?>
 
-
 Now that we have a simple login form, we should be able to log in with one of
 the users that has a hashed password.
 
@@ -280,12 +279,6 @@ Next we'll update the ``edit`` action. Replace the edit method with the followin
             }
             $this->Flash->error(__('Unable to update your article.'));
         }
-
-        // Get a list of tags.
-        $tags = $this->Articles->Tags->find('list');
-
-        // Set article & tags to the view context
-        $this->set('tags', $tags);
         $this->set('article', $article);
     }
 

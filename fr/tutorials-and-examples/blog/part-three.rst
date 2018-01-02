@@ -135,7 +135,6 @@ Exécutez la commande suivante pour créer vos tables::
 
     bin/cake migrations migrate
 
-
 Modifier les Tables
 ===================
 

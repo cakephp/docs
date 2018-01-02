@@ -1,17 +1,14 @@
-The Pages Controller
+Контроллер страниц
 ####################
 
-.. note::
-    The documentation is not currently supported in Russian language for this
-    page.
+Официальное приложение скелета CakePHP поставляется с контроллером по умолчанию **PagesController.php**.
+Это простой и дополнительный контроллер для обслуживания статического контента. Домашняя страница,
+которую вы видите после установки, создается с помощью этого контроллера и файла вида **src/Template/Pages/home.ctp**.
+Если вы создадите файл src **src/Template/Pages/about_us.ctp**, вы можете получить к нему доступ, используя URL **http://example.com/pages/about_us**.
+Вы можете изменять контроллер страниц в соответствии с вашими потребностями.
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
-
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+Когда вы «запекаете» приложение с помощью Composer, контроллер страниц создается в вашей папке src **src/Controller/**.
 
 .. meta::
-    :title lang=ru: The Pages Controller
+    :title lang=ru: Контроллер страниц
     :keywords lang=ru: pages controller,default controller,cakephp,ships,php,file folder,home page

@@ -865,7 +865,6 @@ conditions:
         });
     # WHERE NOT EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
 
-
 In situations when you can't get, or don't want to use the builder methods to
 create the conditions you want you can also use snippets of SQL in where
 clauses::
@@ -939,7 +938,6 @@ use the ``IS`` operator to automatically create the correct expression::
     $query = $categories->find()
         ->where(['parent_id IS' => $parentId]);
 
-
 The above will create ``parent_id` = :c1`` or ``parent_id IS NULL`` depending on
 the type of ``$parentId``
 
@@ -951,7 +949,6 @@ can use the ``IS NOT`` operator to automatically create the correct expression::
 
     $query = $categories->find()
         ->where(['parent_id IS NOT' => $parentId]);
-
 
 The above will create ``parent_id` != :c1`` or ``parent_id IS NOT NULL``
 depending on the type of ``$parentId``
@@ -1302,7 +1299,6 @@ Instead, create new a query object using ``query()``::
 
 Generally, it is easier to delete data using entities and
 :php:meth:`~Cake\\ORM\\Table::delete()`.
-
 
 SQL Injection Prevention
 ========================

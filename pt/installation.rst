@@ -398,7 +398,6 @@ add-ons que adicionam esse suporte, você também pode importar as regras
 .htaccess no IIS para utilizar as reescritas nativas do CakePHP. Para isso, siga
 os seguintes passos:
 
-
 #. Utilize o
    `Microsoft's Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_
    para instalar o `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_

@@ -842,7 +842,6 @@ Routing des Extensions de Fichier
 
 .. php:staticmethod:: extensions(string|array|null $extensions, $merge = true)
 
-
 Pour manipuler différentes extensions de fichier avec vos routes, vous pouvez
 définir vos extensions de manière globale ou dans un *scope*. Définir des
 extensions globales peut se faire via la méthode static :php:meth:`Router::extensions()`
@@ -857,7 +856,7 @@ Pour restreindre les extensions à un *scope* spécifique, vous pouvez les défi
 en utilisant la méthode :php:meth:`Cake\\Routing\\RouteBuilder::extensions()`::
 
     Router::scope('/', function ($routes) {
-        // Avant 3.5.0 utilisez `extensions()` 
+        // Avant 3.5.0 utilisez `extensions()`
         $routes->setExtensions(['json', 'xml']);
         // ...
     });
@@ -1473,7 +1472,6 @@ Les fonctions de callback de filtre doivent attendre les paramètres suivants:
 - ``$params`` Le paramètre d'URL à traiter.
 - ``$request`` La requête actuelle.
 
-
 La fonction filtre d'URL doit *toujours* retourner les paramètres même s'ils
 n'ont pas été modifiés.
 
@@ -1526,7 +1524,6 @@ passés::
 Ceci va remplir ``$this->request->getParam('named')`` avec tout paramètre nommé
 trouvé dans les arguments passés. Tout argument passé qui a été interprété comme
 un paramètre nommé, sera retiré de la liste des arguments passés.
-
 
 .. toctree::
     :glob:

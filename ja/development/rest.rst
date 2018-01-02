@@ -24,7 +24,6 @@ REST を動かすための手っ取り早い方法は、 config/routes.php フ�
     // src/Controller/RecipesController.php
     class RecipesController extends AppController
     {
-
         public function initialize()
         {
             parent::initialize();
@@ -156,7 +155,6 @@ CakePHP では、 :php:class:`RequestHandlerComponent` クラスが助けてく�
 デフォルトでは、POST や PUT で送られてくる JSON/XML の入力データはデコードされ、
 配列に変換されてから ``$this->request->getData()`` に格納されます。独自のデコード処理も
 :php:meth:`RequestHandler::addInputType()` を利用すれば追加可能です。
-
 
 RESTful ルーティング
 =====================

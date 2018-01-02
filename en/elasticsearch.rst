@@ -176,7 +176,6 @@ Saving a document will trigger the following events:
     There are no events for embedded documents, as the parent document and all
     of its embedded documents are saved as one operation.
 
-
 Updating Existing Documents
 ===========================
 

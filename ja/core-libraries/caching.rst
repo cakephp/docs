@@ -117,7 +117,7 @@ DSN を使用するとき、追加のクエリー文字列要素としてパラ�
 
 .. note::
 
-    FileEndine 使用時に、正しいパーミッションでのキャッシュファイルを指定して作成するには、
+    FileEngine 使用時に、正しいパーミッションでのキャッシュファイルを指定して作成するには、
     ``mask`` オプションの設定が必要です。
 
 .. _cache-configuration-fallback:
@@ -216,16 +216,13 @@ Cache を使用すると、Read-through キャッシュを簡単に行うこと�
 
     class IssueService
     {
-
         public function allIssues($repo)
         {
             return Cache::remember($repo . '-issues', function () use ($repo) {
                 return $this->fetchAll($repo);
             });
         }
-
     }
-
 
 キャッシュからの読み込み
 ========================
@@ -271,7 +268,6 @@ Cache を使用すると、Read-through キャッシュを簡単に行うこと�
     // $result は以下を含みます
     ['article-first-post' => '...', 'article-first-post-comments' => '...']
 
-
 キャッシュからの削除
 ====================
 
@@ -299,7 +295,6 @@ Cache を使用すると、Read-through キャッシュを簡単に行うこと�
     // $result は以下を含みます
     ['article-first-post' => true, 'article-first-post-comments' => true]
 
-
 キャッシュデータのクリア
 ========================
 
@@ -314,7 +309,6 @@ Cache を使用すると、Read-through キャッシュを簡単に行うこと�
 
     // すべてのキーをクリアする。
     Cache::clear(false);
-
 
 .. php:staticmethod:: gc($config)
 
@@ -353,7 +347,6 @@ Cache クラスは簡単な方法でカウンター値をインクリメント/�
 
     インクリメントとデクリメントは FileEngine では機能しません。
     代わりに、APC、Wincache、Redis または Memcached を使用する必要があります。
-
 
 キャッシュを使用して共通のクエリー結果を格納する
 ================================================
@@ -444,7 +437,6 @@ Cache クラスは簡単な方法でカウンター値をインクリメント/�
 
 もしキャッシュの状態を確認する必要がある場合は、 ``enabled()`` を使用してください。
 
-
 キャッシュ用ストレージエンジンの作成
 ====================================
 
@@ -521,7 +513,6 @@ src/plugin キャッシュエンジンは、コアエンジンをオーバーラ
 
     必須ではありませんが、リソースの有効期限が切れたときにクリーンアップするために使用されます。
     FileEngine はこれを使用して、期限切れのコンテンツを含むファイルを削除します。
-
 
 .. meta::
     :title lang=ja: キャッシュ

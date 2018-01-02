@@ -147,7 +147,6 @@ Espagnol
 - `Canal IRC de CakePHP espagnol <irc://irc.freenode.net/cakephp-es>`_
 - `Groupe Google de CakePHP espagnol <http://groups.google.com/group/cakephp-esp>`_
 
-
 .. meta::
     :title lang=fr: Où trouver de l'aide
     :description lang=fr: Où trouver de l'aide avec CakePHP: Le site officiel de CakePHP, Le Cookbook, La Boulangerie, L'API, Les cas de test, Le canal IRC, Le Groupe Google CakePHP ou les Questions CakePHP.

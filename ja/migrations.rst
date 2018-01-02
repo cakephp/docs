@@ -50,7 +50,6 @@ Migrations
 
 ここにマイグレーションの例があります。 ::
 
-
     <?php
     use Migrations\AbstractMigration;
 
@@ -324,7 +323,6 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
                   ->update();
         }
     }
-
 
 フィールド長を指定
 ------------------
@@ -679,7 +677,7 @@ JSON 形式の文字列として結果を出力できます。 ::
 
 .. note::
 
-    もし、 ``call()`` メソッドを使いたい場合、Maigrations プラグインの ``AbstractSeed``
+    もし、 ``call()`` メソッドを使いたい場合、Migrations プラグインの ``AbstractSeed``
     クラスを継承していることを確認してください。このクラスは、リリース 1.6.2 で追加されました。
 
 ``dump`` : 差分を bake する機能のためのダンプファイルの生成

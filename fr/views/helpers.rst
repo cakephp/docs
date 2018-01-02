@@ -315,7 +315,6 @@ feriez dans un controller::
         }
     }
 
-
 .. _using-helpers:
 
 Utiliser votre Helper

@@ -193,6 +193,7 @@ edit メソッドは次のようになります。 ::
 これを実装する前に、新しいルートを追加します。 **config/routes.php** は次のようになるはずです。 ::
 
     <?php
+    use Cake\Core\Plugin;
     use Cake\Routing\Route\DashedRoute;
     use Cake\Routing\Router;
 
@@ -413,7 +414,6 @@ CakePHP では、コントローラーのアクションをスリムに保ち、
 エンティティーにコピーします。``beforeSave()`` フックメソッドを使用してタグ文字列を解析し、
 関連するエンティティーを検索/構築することができます。
 **src/Model/Table/ArticlesTable.php** に次を追加してください。 ::
-
 
     public function beforeSave($event, $entity, $options)
     {

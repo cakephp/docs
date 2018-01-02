@@ -180,7 +180,6 @@ set メソッドに分割されています。
 `こちら <https://github.com/cakephp/app/tree/3.next/bin/cake.php>`_ の
 ファイルに置き換える必要があります。
 
-
 キャッシュエンジンフォールバック
 --------------------------------
 
@@ -210,7 +209,6 @@ set メソッドに分割されています。
 
 * ``Cake\Collection\Collection::avg()`` が追加されました。
 * ``Cake\Collection\Collection::median()`` が追加されました。
-
 
 コア
 ----

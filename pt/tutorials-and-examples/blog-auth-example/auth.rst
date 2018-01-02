@@ -426,7 +426,6 @@ Sugerimos as seguintes leituras
 1. :doc:`/bake/usage` Generating basic CRUD code
 2. :doc:`/controllers/components/authentication`: User registration and login
 
-
 .. meta::
     :title lang=pt: Simple Authentication and Authorization Application
     :keywords lang=pt: auto increment,authorization application,model user,array,conventions,authentication,urls,cakephp,delete,doc,columns

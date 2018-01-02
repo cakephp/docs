@@ -29,7 +29,6 @@
         }
     }
 
-
 内部的には、この ``Time`` ユーティリティを動かすために、CakePHP は
 `Chronos <https://github.com/cakephp/chronos>`_ を利用しています。
 ``Chronos`` と ``DateTime`` でできることはなんでも、 ``Time`` と ``Date`` ですることができます。

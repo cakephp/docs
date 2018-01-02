@@ -51,7 +51,6 @@ We can then use this new helper in one of our shell commands by calling it::
     // With ~~~~ on either side
     $this->helper('Heading')->output(['It works!', '~', 4]);
 
-
 Helpers generally implement the ``output()`` method which takes an array of
 parameters. However, because Console Helpers are vanilla classes they can
 implement additional methods that take any form of arguments.

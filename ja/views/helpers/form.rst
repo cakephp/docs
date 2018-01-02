@@ -1957,7 +1957,7 @@ FormHelper は、フィールドエラーを簡単にチェックしたり、必
 
 もし、 *Ticket* フィールドの値を指定せずにフォームの *Submit* ボタンをクリックした場合、
 フォームは次のように出力されます。
-  
+
 .. code-block:: html
 
     <input name="ticket" class="form-error" required="required" value="" type="text">

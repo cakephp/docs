@@ -78,7 +78,6 @@ Por exemplo, se um novo arquivo é criado em **en/file.rst**, nós devemos:
         :title lang=pt: Título do arquivo
         :keywords lang=pt: título, descrição,...
 
-
 Dicas para tradutores
 ---------------------
 
@@ -331,7 +330,6 @@ Cada directiva popula o índice, e/ou o índice do *namespace*.
 
             Texto sobre o método
 
-
    .. seealso:: :rst:dir:`php:method`, :rst:dir:`php:attr`, :rst:dir:`php:const`
 
 .. rst:directive:: .. php:method:: name(signature)
@@ -415,7 +413,6 @@ directiva correspondente for encontrada:
 
    Referencia uma exceção.
 
-
 Código-fonte
 ------------
 
@@ -489,7 +486,6 @@ Exemplos
 .. deprecated:: 2.6.3
 
     Esse recurso antigo foi descontinuado na versão 2.6.3
-
 
 .. meta::
     :title lang=pt: Documentação

@@ -363,7 +363,6 @@ Autres Exceptions Intégrées
     Classe de base des exceptions dans CakePHP. Toutes les exceptions
     lancées par CakePHP étendent cette classe.
 
-
 Ces classes d'exception étendent toutes :php:exc:`Exception`.
 En étendant Exception, vous pouvez créer vos propres erreurs 'framework'.
 Toutes les Exceptions standards que CakePHP va lancer étendent également

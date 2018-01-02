@@ -169,8 +169,8 @@ to provide fallback paths for controllers in your application::
 
     "autoload": {
         "psr-4": {
-            "App\\Controller\\": "/path/to/directory/with/controller/folders",
-            "App\": "src"
+            "App\\Controller\\": "/path/to/directory/with/controller/folders/",
+            "App\\": "src/"
         }
     }
 
@@ -181,7 +181,7 @@ to multiple directories with the following::
 
     "autoload": {
         "psr-4": {
-            "App\": ["src", "/path/to/directory"]
+            "App\\": ["src/", "/path/to/directory/"]
         }
     }
 
@@ -256,7 +256,6 @@ will be used if no environment variable exists for the given key.
 
 .. versionchanged:: 3.5.0
     dotenv library support was added to the application skeleton.
-
 
 Configure Class
 ===============
@@ -370,7 +369,6 @@ Reading & Deleting Configuration Data
 Read and delete a key from Configure. This is useful when you want to
 combine reading and deleting values in a single operation.
 
-
 Reading and writing configuration files
 =======================================
 
@@ -452,7 +450,6 @@ Save only the error handling configuration::
 
 ``Configure::dump()`` can be used to either modify or overwrite
 configuration files that are readable with :php:meth:`Configure::load()`
-
 
 Storing Runtime Configuration
 -----------------------------

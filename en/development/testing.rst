@@ -312,8 +312,8 @@ This will put the coverage results in your application's webroot directory. You
 should be able to view the results by going to
 ``http://localhost/your_app/coverage``.
 
-If you are using PHP 5.6.0 or greater, you can use `phpdbg <http://phpdbg.com/>`__ 
-to generate coverage instead of xdebug. ``phpdbg`` is generally faster at 
+If you are using PHP 5.6.0 or greater, you can use `phpdbg <http://phpdbg.com/>`__
+to generate coverage instead of xdebug. ``phpdbg`` is generally faster at
 generating coverage:
 
 .. code-block:: bash
@@ -332,13 +332,13 @@ file:
 .. code-block:: xml
 
     <testsuites>
-        <testsuite name="App Test Suite">
-            <directory>./tests/TestCase</directory>
+        <testsuite name="app">
+            <directory>./tests/TestCase/</directory>
         </testsuite>
 
         <!-- Add your plugin suites -->
-        <testsuite name="Forum plugin">
-            <directory>./plugins/Forum/tests/TestCase</directory>
+        <testsuite name="forum">
+            <directory>./plugins/Forum/tests/TestCase/</directory>
         </testsuite>
     </testsuites>
 
@@ -351,7 +351,7 @@ fixture namespace to the autoload section. Example::
 
     "autoload": {
         "psr-4": {
-            "PluginName\\Test\\Fixture\\": "tests\\Fixture"
+            "PluginName\\Test\\Fixture\\": "tests/Fixture/"
         }
     },
 
@@ -771,7 +771,6 @@ the proper result (that we know since we have defined which records are
 initially populated to the article table.) We test that the result equals our
 expectation by using the ``assertEquals()`` method. See the :ref:`running-tests`
 section for more information on how to run your test case.
-
 
 Mocking Model Methods
 ---------------------
@@ -1608,7 +1607,6 @@ you can inspect the rendered view content by setting the ``return`` option to
 a more robust and maintainable integration/view testing can be accomplished
 using tools like `Selenium webdriver <http://seleniumhq.org>`_.
 
-
 Testing Components
 ==================
 
@@ -1956,7 +1954,7 @@ present in your **composer.json** file::
 
     "autoload-dev": {
         "psr-4": {
-            "MyPlugin\\Test\\": "./plugins/MyPlugin/tests"
+            "MyPlugin\\Test\\": "plugins/MyPlugin/tests/"
         }
     }
 
@@ -2047,7 +2045,6 @@ It's often a good idea to drop and re-create the database before each build as
 well. This insulates you from chained failures, where one broken build causes
 others to fail. Add another *shell script step* to the build that contains the
 following:
-
 
 .. code-block:: bash
 

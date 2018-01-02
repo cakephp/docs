@@ -233,7 +233,6 @@ do this::
 The HelperRegistry is a :doc:`registry </core-libraries/registry-objects>` and
 supports the registry API used elsewhere in CakePHP.
 
-
 Callback Methods
 ================
 

@@ -119,7 +119,6 @@ Folder API
       destination contain the same subdirectory, the target directory's contents
       will be removed and replaced with the source's.
 
-
 .. php:staticmethod:: correctSlashFor(string $path)
 
     Returns a correct set of slashes for given $path ('\\' for
@@ -428,16 +427,13 @@ File API
 
     Write given data to the current file.
 
-
 .. php:method:: mime()
 
     Get the file's mimetype, returns ``false`` on failure.
 
-
 .. php:method:: replaceText( $search, $replace )
 
     Replaces text in a file. Returns ``false`` on failure and ``true`` on success.
-
 
 .. todo::
 

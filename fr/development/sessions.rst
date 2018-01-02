@@ -218,7 +218,6 @@ config Session comme ceci::
         ]
     ]);
 
-
 Cela va configurer Session pour utiliser la classe ``CacheSession``
 déléguée pour sauvegarder les sessions. Vous pouvez utiliser la clé 'config'
 qui va mettre en cache la configuration à utiliser. La configuration par
@@ -244,7 +243,6 @@ pour contrôler les configurations comme ``session.gc_divisor``::
             'session.cookie_httponly' => true
         ]
     ]);
-
 
 Créer un Gestionnaire de Session Personnalisé
 =============================================

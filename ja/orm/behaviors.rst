@@ -29,7 +29,6 @@
     /orm/behaviors/translate
     /orm/behaviors/tree
 
-
 ビヘイビアーの生成
 ==================
 
@@ -61,7 +60,6 @@ sluggable behavior を作成してみます。
     {
         // 何らかの初期化処理
     }
-
 
 このビヘイビアーをテーブルクラスの1つに追加できるようになりました。
 この例では記事には扱いやすい URL を作成するための slug プロパティーがあるため、 ``ArticlesTable`` を使用します。 ::

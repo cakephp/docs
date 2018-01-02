@@ -95,7 +95,7 @@ Glossaire
     tableau de routing
         Un tableau des attributs qui sont passés au :php:meth:`Router::url()`.
         Typiquement, il ressemble à cela::
-        
+
             ['controller' => 'Posts', 'action' => 'view', 5]
 
 .. meta::

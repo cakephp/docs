@@ -102,7 +102,6 @@ filter and converted into a response. This replaces calls to
 ``response->send()`` and allows dispatcher filters to interact with redirect
 responses.
 
-
 ORM Improvements
 ----------------
 
@@ -114,7 +113,6 @@ ORM Improvements
 * Field data that fails validation can now be accessed in entities via the
   ``invalid()`` method.
 * Entity accessor method lookups are now cached and perform better.
-
 
 Improved Validator API
 ----------------------
@@ -134,7 +132,6 @@ Console Improvements
   These helper methods make using commonly used styling simpler.
 * ``Cake\Console\Exception\StopException`` was added.
 * ``Shell::abort()`` was added to replace ``error()``.
-
 
 StopException Added
 -------------------

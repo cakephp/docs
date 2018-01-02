@@ -1,8 +1,8 @@
 Yerimi Eğitimi
 ##############
 
-Bu eğitim size basit bir yerimi uygulaması yapmanızı sağlayacak. 
-Başlangıçta, CakePHP 'yi kuracak, veritabanımızı oluşturacak, ve CakePHP 
+Bu eğitim size basit bir yerimi uygulaması yapmanızı sağlayacak.
+Başlangıçta, CakePHP 'yi kuracak, veritabanımızı oluşturacak, ve CakePHP
 araçlarını kullanarak uygulamamızı hızlıca yapabileceğiz.
 
 İhtiyacınız olanlar:
@@ -12,7 +12,6 @@ araçlarını kullanarak uygulamamızı hızlıca yapabileceğiz.
    CakePHP sizin için halledecek. MySQL kullandığımız için PHP eklentilerinden
    ``pdo_mysql`` etkin olduğuna emin olun.
 #. Basit PHP bilgisi
-
 
 Başlamadan önce PHP versiyonunun güncel olduğuna emin olunuz.
 
@@ -36,7 +35,7 @@ yolu da aşşağıda ki yöntem ile çok basit yapabilirsiniz::
 
     curl -s https://getcomposer.org/installer | php
 
-Veya, ``composer.phar`` 'ı 
+Veya, ``composer.phar`` 'ı
 `Composer website <https://getcomposer.org/download/>`_. adresinden
 indirebilirsiniz.
 
@@ -190,7 +189,7 @@ gerekmektedir. Yani CakePHP veritabanına erişim sağlamıştır diyor.
 
 .. note::
 
-    Bir CakePHP nin varsayılan yapılandırma dosyası 
+    Bir CakePHP nin varsayılan yapılandırma dosyası
     **config/app.default.php** adresinde bulunabilir.
 
 İskele Yapımızı Oluşturalım
@@ -211,7 +210,7 @@ serveri durdurduysanız yeniden başlatınız ve **http://localhost:8765/bookmar
 adresine gidiniz.
 
 Basit fakat fonksiyonel bir uygulama görüyor olmanız gerekmektedir. Birkaç veri
-ekledikten sonra veritabanı tablolarını görüyor olmanız gerekmektedir. 
+ekledikten sonra veritabanı tablolarını görüyor olmanız gerekmektedir.
 
 .. note::
 
@@ -224,7 +223,7 @@ Parola Karıştırma Ekleme (Hashing)
 Kullanıcılarınızı oluşturduktan sonra (**http://localhost:8765/users**
 sayfasında ki), siz muhtemelen şifrelerin düz metin olarak saklandığını
 görüyorsunuzdur. Bu gözle görünür derecede oldukça güvenlik açısından kötüdür.
-Yani bunu düzeltmemiz gerekiyor. 
+Yani bunu düzeltmemiz gerekiyor.
 
 Aynı zamanda CakePHP deki model yapımız hakkında konuşma zamanımız geldi.
 CakePHP de ayrı metotları ayırarak nesne üstünde birleştiriyoruz ve bir neste

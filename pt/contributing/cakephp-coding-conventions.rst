@@ -145,7 +145,6 @@ ternária para esclarecer a operação::
     // Aninhamento é ruim
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
-
 Arquivos de template
 --------------------
 
@@ -164,7 +163,6 @@ PHP separadas::
     <?php if ($isAdmin): ?>
         <p>Você é o usuário administrador.</p>
     <?php endif; ?>
-
 
 Comparação
 ==========
@@ -554,7 +552,6 @@ Constante
 
 Constantes devem ser definidas em caixa alta::
 
-
     define('CONSTANT', 1);
 
 Se o nome de uma constante consiste de múltiplas palavras, eles devem ser
@@ -570,7 +567,6 @@ causar efeitos não intencionais quando ``'0'`` e ``0`` são retornados. Quando
 variáveis ou propriedades já estão definidas, o uso de ``empty()`` não é
 recomendado. Ao trabalhar com variáveis, é melhor confiar em coerção de tipo
 com booleanos ao invés de ``empty()``::
-
 
     function manipulate($var)
     {

@@ -21,7 +21,6 @@ Informations générales
     appendices/cakephp-development-process
     appendices/glossary
 
-
 .. meta::
     :title lang=fr: Annexes
     :keywords lang=fr: guide de migration,nouvelles fonctionnalités,glossaire,chemin de migration

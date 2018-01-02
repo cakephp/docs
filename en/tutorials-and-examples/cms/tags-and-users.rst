@@ -435,7 +435,6 @@ data from the request into our entity. We can use a ``beforeSave()`` hook method
 to parse the tag string and find/build the related entities. Add the following
 to **src/Model/Table/ArticlesTable.php**::
 
-
     public function beforeSave($event, $entity, $options)
     {
         if ($entity->tag_string) {

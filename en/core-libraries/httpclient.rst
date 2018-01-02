@@ -192,7 +192,6 @@ An example of basic authentication::
 By default ``Cake\Http\Client`` will use basic authentication if there is no
 ``'type'`` key in the auth option.
 
-
 Using Digest Authentication
 ---------------------------
 
@@ -309,7 +308,6 @@ continue using all the other options defined when the scoped client was created.
 See :ref:`http_client_request_options` for more information on the options
 supported.
 
-
 Setting and Managing Cookies
 ============================
 
@@ -367,7 +365,6 @@ Response objects have a number of methods for inspecting the response data.
     As of 3.3.0 ``Cake\Http\Client\Response`` implements the `PSR-7
     ResponseInterface
     <http://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface>`__.
-
 
 Reading Response Bodies
 -----------------------

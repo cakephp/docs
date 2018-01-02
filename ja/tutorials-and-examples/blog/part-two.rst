@@ -15,11 +15,11 @@ CakePHP のモデルクラスのファイルは、 ``Table`` オブジェクト�
 作って保存します。完成したファイルは次のようになります。 ::
 
     // src/Model/Table/ArticlesTable.php
-    
+
     namespace App\Model\Table;
-    
+
     use Cake\ORM\Table;
-    
+
     class ArticlesTable extends Table
     {
         public function initialize(array $config)
@@ -237,7 +237,6 @@ Articles テーブルに対して ``get()`` を用いるとき、存在するレ
     <p><?= h($article->body) ?></p>
     <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
 
-
 ``/articles/index`` の中にあるリンクをクリックしたり、手動で、 ``/articles/view/1``
 にアクセスしたりして、動作することを確認してください。
 
@@ -448,7 +447,6 @@ CakePHP のバリデーションエンジンは強力で、
         $this->set('article', $article);
     }
 
-
 このアクションではまず、ユーザーが実在するレコードにアクセスしようとしていることを確認します。
 もし ``$id`` パラメーターが渡されてないか、ポストが存在しない場合、
 ``NotFoundException`` を送出して CakePHP の ErrorHandler に処理を委ねます。
@@ -629,7 +627,7 @@ CakePHP のルーティングは、 **config/routes.php** の中にあります�
 
     CakePHP は「リバースルーティング」も利用します。
     上記のルートが定義されている状態で、配列を期待する関数に
-    ``['controller' => 'Articles', 'action' => 'index']`` 
+    ``['controller' => 'Articles', 'action' => 'index']``
     を渡すと、結果のURLは「/」になります。
     つまり、URL の指定に常に配列を使うということが良策となります。
     これによりルートが URL の行き先を定義する意味を持ち、
@@ -662,7 +660,6 @@ CakePHP を学習する人が次に学びたいと思う共通のタスクがい
 2. :ref:`view-elements`: ビューのスニペットを読み込んで再利用する
 3. :doc:`/bake/usage`: 基本的な CRUD コードの生成
 4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: ユーザーの認証と承認のチュートリアル
-
 
 .. meta::
     :title lang=ja: Blog Tutorial Adding a Layer

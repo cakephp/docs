@@ -67,7 +67,6 @@ Vous pouvez faire ceci en utilisant ``sender()``::
 .. deprecated:: 3.4.0
     Utilisez plutôt ``setSender()``.
 
-
 .. _email-configuration:
 
 Configuration
@@ -350,7 +349,6 @@ chemin suivant:
     ``setLayout()`` à la place de l'argument layout de ``template().
     Utilisez ``setTheme()`` à la place de ``theme()``.
 
-
 Envoyer les pièces jointes
 ==========================
 
@@ -577,7 +575,6 @@ Vous pouvez maintenant utiliser votre ``UserMailer`` pour envoyer tous les
 emails liés aux utilisateurs depuis n'importe où dans l'application. Par
 exemple, si vous souhaitez envoyer l'email de bienvenue, vous pouvez faire la
 chose suivante::
-
 
     namespace App\Controller;
 

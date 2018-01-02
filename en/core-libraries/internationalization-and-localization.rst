@@ -634,7 +634,6 @@ automatically set the locale based on the current user::
         $middleware->add(new LocaleSelectorMiddleware(['en_US', 'fr_FR']));
     }
 
-
     // Prior to 3.3.0, use the DispatchFilter
     // in config/bootstrap.php
     DispatcherFactory::add('LocaleSelector');

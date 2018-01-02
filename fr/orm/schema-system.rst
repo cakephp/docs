@@ -173,7 +173,6 @@ remplie, vous pourriez faire ce qui suit::
     // Récupère les données d'un index unique.
     $index = $schema->index('author_id_idx')
 
-
 Ajouter des Options de Table
 ----------------------------
 
@@ -217,7 +216,6 @@ converties en SQL spécifique à la plateforme. Le retour de ``createSql`` et
 les index nécessaires. Certaines plateformes peuvent nécessiter plusieurs
 lignes pour créer des tables avec des commentaires et/ou index. Un tableau
 de requêtes est toujours retourné.
-
 
 Collections de Schéma
 =====================

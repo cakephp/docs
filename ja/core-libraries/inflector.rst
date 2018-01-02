@@ -40,7 +40,7 @@ Inflector の組み込みメソッドの簡単な概要と、複数単語の引�
 +                   +---------------+---------------+
 |                   | bigApple      | BigApple      |
 +-------------------+---------------+---------------+
-| ``classify()``    | big_apples    | BigApple      | 
+| ``classify()``    | big_apples    | BigApple      |
 +                   +---------------+---------------+
 |                   | big apple     | BigApple      |
 +-------------------+---------------+---------------+
@@ -82,7 +82,7 @@ Inflector の組み込みメソッドの簡単な概要と、複数単語の引�
 
     // Person
     echo Inflector::singularize('People');
-    
+
 .. note::
 
    ``singularize()`` は、すでに単数形の名詞をいつも正しく変換できるわけではありません。

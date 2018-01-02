@@ -57,7 +57,6 @@ O canal de IRC
 
 **Canal de IRC na irc.freenode.net:**
 
-
 -  `#cakephp <irc://irc.freenode.net/cakephp>`_ --
    Discussão geral
 -  `#cakephp-docs <irc://irc.freenode.net/cakephp-docs>`_ --

@@ -163,7 +163,6 @@ would be::
         'cacheMetadata' => true,
     ]);
 
-
 Configuration options can also be provided as a :term:`DSN` string. This is
 useful when working with environment variables or :term:`PaaS` providers::
 
@@ -808,7 +807,6 @@ the statement::
     Reading rows through iteration will fetch rows in 'both' mode. This means
     you will get both the numerically indexed and associatively indexed results.
 
-
 Getting Row Counts
 ------------------
 
@@ -816,7 +814,6 @@ After executing a statement, you can fetch the number of affected rows::
 
     $rowCount = count($stmt);
     $rowCount = $stmt->rowCount();
-
 
 Checking Error Codes
 --------------------
