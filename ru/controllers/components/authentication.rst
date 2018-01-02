@@ -296,29 +296,33 @@ POST-данные. В случае успеха данные о пользова
 осуществлять вход без использования куки и делает AuthComponent более гибким
 при создании API.
 
-For stateless authenticators, the ``storage`` config should be set to ``Memory``
-so that AuthComponent does not use a session to store user record. You may also
-want to set config ``unauthorizedRedirect`` to ``false`` so that AuthComponent
-throws a ``ForbiddenException`` instead of the default behavior of redirecting to
-referrer.
+Для аутентификаторов без сохранения состояния параметр конфигурации ``storage``
+следует установить в ``Memory``, чтобы ``AuthComponent`` не использовал сеccию
+для хранения  записи пользователя. Вы также можете настроить параметр конфигурации
+``unauthorizedRedirect`` в ``false``, чтобы ``AuthComponent`` выбрасывал
+``ForbiddenException`` вместо поведения по умолчанию перенаправления на ссылающуюся
+страницу.
 
-Authentication objects can implement a ``getUser()`` method that can be used to
-support user login systems that don't rely on cookies. A typical getUser method
-looks at the request/environment and uses the information there to confirm the
-identity of the user. HTTP Basic authentication for example uses
-``$_SERVER['PHP_AUTH_USER']`` and ``$_SERVER['PHP_AUTH_PW']`` for the username
-and password fields.
+Объекты аутентификации могут реализовывать метод ``getUser()``, который может
+использоваться для поддержки систем входа пользователя, независящих от файлов
+cookie. Типичный метод ``getUser()`` рассматривает запрос/среду и использует эту
+информацию для подтверждения личности пользователя. Например, Базовая HTTP-аутентификация
+использует ``$_SERVER['PHP_AUTH_USER']`` и ``$_SERVER['PHP_AUTH_PW']`` для полей
+имени пользователя и пароля.
 
 .. note::
 
-    In case authentication does not work like expected, check if queries
-    are executed at all (see ``BaseAuthenticate::_query($username)``).
-    In case no queries are executed check if ``$_SERVER['PHP_AUTH_USER']``
-    and ``$_SERVER['PHP_AUTH_PW']`` do get populated by the webserver.
-    If you are using Apache with FastCGI-PHP you might need to add this line
-    to your **.htaccess** file in webroot::
+    Если аутентификация не работает как ожидается, проверьте, выполняются ли
+    вообще запросы (смотрите ``BaseAuthenticate::_query($username)``).
+    Если запросы не выполняются, проверьте заполняются ли веб-сервером
+    ключи ``$_SERVER['PHP_AUTH_USER']`` и ``$_SERVER['PHP_AUTH_PW']``.
+    Если вы используете Apache с FastCGI-PHP, вам возможно потребуется
+    добавить следующую строку в ваш корневой файл **.htaccess**::
 
         RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+
+При каждом запросе данные значения, ``PHP_AUTH_USER`` и ``PHP_AUTH_PW``, используются
+повторной идентификации пользователя, чтобы убедиться в их подлинности.
 
 On each request, these values, ``PHP_AUTH_USER`` and ``PHP_AUTH_PW``, are used to
 re-identify the user and ensure they are the valid user. As with authentication
@@ -339,8 +343,6 @@ an array of user information on the success or ``false`` on failure. ::
 The above is how you could implement the getUser method for HTTP basic
 authentication. The ``_findUser()`` method is part of ``BaseAuthenticate``
 and identifies a user based on a username and password.
-
-
 
 .. meta::
     :title lang=ru: Аутентификация
