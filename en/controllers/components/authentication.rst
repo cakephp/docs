@@ -505,7 +505,7 @@ from ``implementedEvents()`` method of your authenticate class::
 Using Custom Authentication Objects
 -----------------------------------
 
-Once you've created your custom authentication object, you can use them
+Once you've created your custom authentication objects, you can use them
 by including them in AuthComponents authenticate array::
 
     $this->Auth->config('authenticate', [
