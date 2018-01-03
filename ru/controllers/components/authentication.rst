@@ -568,7 +568,46 @@ API-токены произвольно, используя библиотеки
 Если аутентификатор возвращает ``null``, то ``AuthComponent`` перенаправляет
 пользователя на экшен входа(login). Если же это AJAX-запрос, и параметр
 конфигурации ``ajaxLogin`` указывает, что элемент визуализируется иначе, то
-бдет возвращен код состояния HTTP 403.
+будет возвращен код состояния HTTP 403.
+
+Вывод флэш-сообщений компонента Auth
+------------------------------------
+
+In order to display the session error messages that Auth generates, you
+need to add the following code to your layout. Add the following two
+lines to the **src/Template/Layout/default.ctp** file in the body section::
+
+    // Все, что необходимо для версий начиная с 3.4.0
+    echo $this->Flash->render();
+
+    // Для версий, предшествующих 3.4.0, потребуется следующее
+    echo $this->Flash->render('auth');
+
+You can customize the error messages and flash settings AuthComponent
+uses. Using ``flash`` config you can configure the parameters
+AuthComponent uses for setting flash messages. The available keys are
+
+- ``key`` - The key to use, defaults to 'default'. Prior to 3.4.0, the key
+  defaulted to 'auth'.
+- ``element`` - The element name to use for rendering, defaults to null.
+- ``params`` - The array of additional params to use, defaults to ``[]``.
+
+In addition to the flash message settings you can customize other error
+messages AuthComponent uses. In your controller's beforeFilter, or
+component settings you can use ``authError`` to customize the error used
+for when authorization fails::
+
+    $this->Auth->config('authError', "Woopsie, you are not authorized to access this area.");
+
+Sometimes, you want to display the authorization error only after
+the user has already logged-in. You can suppress this message by setting
+its value to boolean ``false``.
+
+In your controller's beforeFilter() or component settings::
+
+    if (!$this->Auth->user()) {
+        $this->Auth->config('authError', false);
+    }
 
 
 .. meta::
