@@ -618,8 +618,9 @@ API-токены произвольно, используя библиотеки
 Хеширование паролей
 -------------------
 
-You are responsible for hashing the passwords before they are persisted to the
-database, the easiest way is to use a setter function in your User entity::
+Вы несете ответственность за хэширование паролей, перед тем, как они будут
+сохранены в базе данных, самый простой способ - использовать функцию-сеттер
+в вашей сущности ``User``::
 
     namespace App\Model\Entity;
 
@@ -641,14 +642,63 @@ database, the easiest way is to use a setter function in your User entity::
         // ...
     }
 
-AuthComponent is configured by default to use the ``DefaultPasswordHasher``
-when validating user credentials so no additional configuration is required in
-order to authenticate users.
+По умолчанию ``AuthComponent`` настроен на использование ``DefaultPasswordHasher``
+при проверке учетных данных пользователя, поэтому при аутентификации
+пользователей дополнительной настройки не требуется .
 
-``DefaultPasswordHasher`` uses the bcrypt hashing algorithm internally, which
-is one of the stronger password hashing solutions used in the industry. While it
-is recommended that you use this password hasher class, the case may be that you
-are managing a database of users whose password was hashed differently.
+``DefaultPasswordHasher`` использует встроенный алгоритм хэширования ``bcrypt``,
+который является одним из самых сильных решений хэширования паролей, используемых
+в отрасли. Хотя рекомендуется использовать этот класс хэширования пароля, дело
+может заключаться в том, что вы управляете базой данных пользователей, чей пароль
+был захэширован иным способом.
+
+Создание пользовательских классов хеширования паролей
+-----------------------------------------------------
+
+Чтобы использовать другой хешер пароля, вам необходимо создать класс в
+**src/Auth/LegacyPasswordHasher.php** и реализовать методы ``hash()``
+и ``check()``. Этот класс должен наследоваться от класса
+``AbstractPasswordHasher``::
+
+    namespace App\Auth;
+
+    use Cake\Auth\AbstractPasswordHasher;
+
+    class LegacyPasswordHasher extends AbstractPasswordHasher
+    {
+
+        public function hash($password)
+        {
+            return sha1($password);
+        }
+
+        public function check($password, $hashedPassword)
+        {
+            return sha1($password) === $hashedPassword;
+        }
+    }
+
+После чего вам необходимо настроить AuthComponent для использования вашего
+собственного хешера паролей::
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'passwordHasher' => [
+                        'className' => 'Legacy',
+                    ]
+                ]
+            ]
+        ]);
+    }
+
+Поддержка устаревших систем - хорошая идея, но еще лучше сохранить базу
+данных с последними достижениями в области безопасности. В следующем
+разделе объясняется, как осуществить миграцию с одного алгоритма хеширования
+на алгоритм, используемый в CakePHP по умолчанию.
 
 
 .. meta::
