@@ -573,9 +573,9 @@ API-токены произвольно, используя библиотеки
 Вывод флэш-сообщений компонента Auth
 ------------------------------------
 
-In order to display the session error messages that Auth generates, you
-need to add the following code to your layout. Add the following two
-lines to the **src/Template/Layout/default.ctp** file in the body section::
+Чтобы отображать сообщения об ошибках сессии, генерируемые ``Auth``, вам нужно
+добавить следующий код в свой макет (``layout``). Добавьте следующие две
+строки в файл **src/Template/Layout/default.ctp** в разделе ``body``::
 
     // Все, что необходимо для версий начиная с 3.4.0
     echo $this->Flash->render();
@@ -583,14 +583,21 @@ lines to the **src/Template/Layout/default.ctp** file in the body section::
     // Для версий, предшествующих 3.4.0, потребуется следующее
     echo $this->Flash->render('auth');
 
-You can customize the error messages and flash settings AuthComponent
-uses. Using ``flash`` config you can configure the parameters
-AuthComponent uses for setting flash messages. The available keys are
+Вы можете настроить сообщения об ошибках и параметры флэш-сообщений,
+используемые ``AuthComponent``. Используя параметр конфигурации ``flash``, вы
+можете настроить параметры, используемые AuthComponent для установки
+флэш-сообщений. Доступные ключи:
 
-- ``key`` - The key to use, defaults to 'default'. Prior to 3.4.0, the key
-  defaulted to 'auth'.
-- ``element`` - The element name to use for rendering, defaults to null.
-- ``params`` - The array of additional params to use, defaults to ``[]``.
+- ``key`` - Используемый ключ, по умолчанию 'default'. В версиях ниже 3.4.0,
+  по умолчанию использовалось значение 'auth'.
+- ``element`` - Имя элемента использовать для визуализации, по
+  умолчанию ``null``.
+- ``params`` - Массив дополнительных используемых параметров, по
+  умолчанию ``[]``.
+
+В дополнение к настройкам флэш-сообщений, вы можете настраивать также и
+другие сообщения об ошибках, используемые в ``AuthComponent``. В методе
+``beforeFilter()``
 
 In addition to the flash message settings you can customize other error
 messages AuthComponent uses. In your controller's beforeFilter, or
