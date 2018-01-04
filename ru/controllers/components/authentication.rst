@@ -597,24 +597,58 @@ API-токены произвольно, используя библиотеки
 
 В дополнение к настройкам флэш-сообщений, вы можете настраивать также и
 другие сообщения об ошибках, используемые в ``AuthComponent``. В методе
-``beforeFilter()``
+``beforeFilter()`` или в настройках компонента вы можете использовать
+``authError`` для кастомизации ошибок использующихся при неудачной
+авторизации::
 
-In addition to the flash message settings you can customize other error
-messages AuthComponent uses. In your controller's beforeFilter, or
-component settings you can use ``authError`` to customize the error used
-for when authorization fails::
+    $this->Auth->config('authError', "Упс, вы не авторизованы для получения доступа в этой области.");
 
-    $this->Auth->config('authError', "Woopsie, you are not authorized to access this area.");
+Иногда вы хотите отобразить ошибку авторизации только после того, как
+пользователь уже выполнил вход в систему. Вы можете подавить это сообщение,
+установив его значение в булево ``false``.
 
-Sometimes, you want to display the authorization error only after
-the user has already logged-in. You can suppress this message by setting
-its value to boolean ``false``.
-
-In your controller's beforeFilter() or component settings::
+В методе ``beforeFilter()`` вашего контроллера или в настройках компонента::
 
     if (!$this->Auth->user()) {
         $this->Auth->config('authError', false);
     }
+    
+.. _hashing-passwords:
+
+Хеширование паролей
+-------------------
+
+You are responsible for hashing the passwords before they are persisted to the
+database, the easiest way is to use a setter function in your User entity::
+
+    namespace App\Model\Entity;
+
+    use Cake\Auth\DefaultPasswordHasher;
+    use Cake\ORM\Entity;
+
+    class User extends Entity
+    {
+
+        // ...
+
+        protected function _setPassword($password)
+        {
+            if (strlen($password) > 0) {
+              return (new DefaultPasswordHasher)->hash($password);
+            }
+        }
+
+        // ...
+    }
+
+AuthComponent is configured by default to use the ``DefaultPasswordHasher``
+when validating user credentials so no additional configuration is required in
+order to authenticate users.
+
+``DefaultPasswordHasher`` uses the bcrypt hashing algorithm internally, which
+is one of the stronger password hashing solutions used in the industry. While it
+is recommended that you use this password hasher class, the case may be that you
+are managing a database of users whose password was hashed differently.
 
 
 .. meta::
