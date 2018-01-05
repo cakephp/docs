@@ -968,64 +968,69 @@ starts off with ``authorize`` set to ``false``. If you don't use an
 authorization scheme, make sure to check authorization yourself in your
 controller's ``beforeFilter()`` or with another component.
 
-Making Actions Public
----------------------
+Создание общедоступных экшенов
+------------------------------
 
 .. php:method:: allow($actions = null)
 
-There are often times controller actions that you wish to remain
-entirely public or that don't require users to be logged in.
-``AuthComponent`` is pessimistic and defaults to denying access. You can
-mark actions as public actions by using ``AuthComponent::allow()``. By
-marking actions as public, ``AuthComponent`` will not check for a logged in
-user nor will authorize objects to be checked::
+Часто у вас может возникать необходимость оставлять общедоступными
+некоторые экшены контроллера (не требующие авторизации).
+``AuthComponent`` пессимистичен и по умолчанию закрывает доступ. Вы
+можете пометить экшены как общедоступные с помощью метода
+``AuthComponent::allow()``. ``AuthComponent`` не будет проверять
+авторизацию пользователей, обращающихся к таким экшенам, так же, 
+как не будет проверять объекты авторизации::
 
-    // Allow all actions
+    // Разрешить все экшены
     $this->Auth->allow();
 
-    // Allow only the index action.
+    // Разрешить только экшен index.
     $this->Auth->allow('index');
 
-    // Allow only the view and index actions.
+    // Разрешить только экшены view и index.
     $this->Auth->allow(['view', 'index']);
 
-By calling it empty you allow all actions to be public.
-For a single action, you can provide the action name as a string. Otherwise, use an array.
+Вызывая метод без параметров, вы откроете доступ ко всем экшенам.
+Для уточнения отдельных экшенов, вы передаете их имена в виде строкового значения.
+В противном случае передавайте в качестве параметра массив.
 
 .. note::
 
-    You should not add the "login" action of your ``UsersController`` to allow list.
-    Doing so would cause problems with the normal functioning of ``AuthComponent``.
+    Вы не должны открывать доступ к экшену "login" вашего контроллера
+    ``UsersController``. Подобные действия могут нарушить нормальную работу
+    компонента ``AuthComponent``.
 
-Making Actions Require Authorization
-------------------------------------
+Создание экшенов требующих авторизауации
+----------------------------------------
 
 .. php:method:: deny($actions = null)
 
-By default all actions require authorization. However, after making actions
-public you want to revoke the public access. You can do so using
-``AuthComponent::deny()``::
+По умолчанию все экшены требуют авторизации. И все же, если вы открыли
+доступ ко всем экшенам, и хотите обратить этот процесс, вы можете
+воспользоваться методом ``AuthComponent::deny()``::
 
-    // Deny all actions.
+    // Закрыть все экшены.
     $this->Auth->deny();
 
-    // Deny one action
+    // Закрыть один экшен
     $this->Auth->deny('add');
 
-    // Deny a group of actions.
+    // Закрыть группу экшенов.
     $this->Auth->deny(['add', 'edit']);
 
-By calling it empty you deny all actions.
-For a single action, you can provide the action name as a string. Otherwise, use an array.
+По аналогии с методом ``allow()``, если не передается никаких параметров, то
+доступ закрыватся ко всем экшенам. Если передается строковое значение, то
+доступ закрывается именно к указанному экшену. Для закрытия нескольких экшенов
+в метод передается массив
 
-Using ControllerAuthorize
--------------------------
+Использование ControllerAuthorize
+---------------------------------
 
-ControllerAuthorize allows you to handle authorization checks in a
-controller callback. This is ideal when you have very simple
-authorization or you need to use a combination of models and components
-to do your authorization and don't want to create a custom authorize
-object.
+ControllerAuthorize позволяет обрабатывать проверку авторизации в методах
+обратного вызова контроллера. Это идеальный вариант, когда у вас очень
+простая авторизация или вам нужно использовать комбинацию моделей и
+компонентов для авторизации и вам не хочется создавать пользовательский
+объект авторизации.
 
 The callback is always called ``isAuthorized()`` and it should return a
 boolean as to whether or not the user is allowed to access resources in
@@ -1135,13 +1140,11 @@ only the configuration option::
 This is useful if you want to redirect a user to the ``login`` route for example.
 Without a parameter, the full configuration will be returned.
 
-Testing Actions Protected By AuthComponent
-==========================================
+Тестирование экшенов защищенных AuthComponent
+=============================================
 
-See the :ref:`testing-authentication` section for tips on how to test controller
-actions that are protected by ``AuthComponent``.
-
-
+Смотрите раздел :ref:`testing-authentication` для получения более полной информации
+по тестированию экшенов контроллеразащищенных компонентом ``AuthComponent``.
 
 .. meta::
     :title lang=ru: Аутентификация
