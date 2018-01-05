@@ -941,8 +941,8 @@ that you extend ``BaseAuthorize``, only that your authorize object
 implements an ``authorize()`` method. The ``BaseAuthorize`` class provides
 a number of helpful methods that are commonly used.
 
-Using Custom Authorize Objects
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Использование кастомных объектов авторизации
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Once you've created your custom authorize object, you can use them by
 including them in your ``AuthComponent``'s authorize array::
@@ -952,8 +952,8 @@ including them in your ``AuthComponent``'s authorize array::
         'AuthBag.Combo', // plugin authorize object.
     ]);
 
-Using No Authorization
-----------------------
+Отказ от использования авторизации
+----------------------------------
 
 If you'd like to not use any of the built-in authorization objects and
 want to handle things entirely outside of ``AuthComponent``, you can set
