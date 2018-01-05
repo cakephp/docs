@@ -825,20 +825,21 @@ CakePHP предоставляет чистый способ переноса п
 аутентификации - это еще одно возможное решение, которое работает для
 некоторых клиентов.
 
-Deciding When to run Authentication
------------------------------------
+Когда выполнять аутентификацию
+------------------------------
 
-In some cases you may want to use ``$this->Auth->user()`` in the
-``beforeFilter(Event $event)`` method. This is achievable by using the
-``checkAuthIn`` config key. The following changes which event for which initial
-authentication checks should be done::
+В некоторых случаях вы можете захотеть вызвать метод ``$this->Auth->user()``
+внутри метода ``beforeFilter(Event $event)``. Это осуществимо при
+использовании ключа конфигурации ``checkAuthIn``. Для этого внесите
+следующие изменения для сопоставления, в каких событиях какие проверки
+аутентификации должны быть осуществлены::
 
-    //Set up AuthComponent to authenticate in initialize()
+    //Настройка AuthComponent для аутентификации в методе initialize()
     $this->Auth->config('checkAuthIn', 'Controller.initialize');
 
-Default value for ``checkAuthIn`` is ``'Controller.startup'`` - but by using
-``'Controller.initialize'`` initial authentication is done before ``beforeFilter()``
-method.
+По умолчанию значение ``checkAuthIn`` - ``'Controller.startup'`` - но при
+использовании ``'Controller.initialize'`` первоначальная аутентификация
+осуществляется перед методом ``beforeFilter()``.
 
 
 .. meta::
