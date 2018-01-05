@@ -852,34 +852,36 @@ CakePHP предоставляет чистый способ переноса п
 Существует несколько встроенных обработчиков авторизации, и вы можете
 создавать собственные для своего приложения или вкачестве части плагина.
 
-- ``ControllerAuthorize`` Calls ``isAuthorized()`` on the active controller,
-  and uses the return of that to authorize a user. This is often the most
-  simple way to authorize users.
+- ``ControllerAuthorize`` Вызывает метод ``isAuthorized()`` в активном
+  контроллере, и использует возвращаемое значение для авторизации
+  пользователя. Чаще всего это наиболее простой способ авторизовать
+  пользователей.
 
 .. note::
 
-    The ``ActionsAuthorize`` & ``CrudAuthorize`` adapter available in CakePHP
-    2.x have now been moved to a separate plugin `cakephp/acl <https://github.com/cakephp/acl>`_.
+    Адаптеры ``ActionsAuthorize`` и ``CrudAuthorize`` доступные в CakePHP
+    2.x теперь перемещены в отдельный плагин `cakephp/acl <https://github.com/cakephp/acl>`_.
 
 Настройка обработчиков авторизации
 ----------------------------------
 
-You configure authorization handlers using the ``authorize`` config key.
-You can configure one or many handlers for authorization. Using
-multiple handlers allows you to support different ways of checking
-authorization. When authorization handlers are checked, they will be
-called in the order they are declared. Handlers should return ``false``, if
-they are unable to check authorization, or the check has failed.
-Handlers should return ``true`` if they were able to check authorization
-successfully. Handlers will be called in sequence until one passes. If
-all checks fail, the user will be redirected to the page they came from.
-Additionally, you can halt all authorization by throwing an exception.
-You will need to catch any thrown exceptions and handle them.
+Вы настраиваете обработчики авторизации, используя ключ конфигурации
+``authorize``. Вы можете настроить один или несколько обработчиков для
+авторизации. Использование нескольких обработчиков позволяет поддерживать
+различные способы проверки авторизации. Когда проверяются обработчики
+авторизации, они будут вызваны в том порядке, в котором они объявлены.
+Обработчики должны возвращать ``false``, если они не могут проверить
+авторизацию, или если проверка не удалась. Обработчики должны возвращать
+``true``, если проверка авторизации прошла успешно. Обработчики будут
+вызываться последовательно до тех пор, пока не найдется подходящий. Если
+все проверки закончатся неудачно, пользователь будет перенаправлен на
+страницу, с которой он пришел. Кроме того, вы можете остановить все
+авторизации, выбросив исключение. Вам нужно будет перехватить любые
+выброшенные исключения и обработать их.
 
-You can configure authorization handlers in your controller's
-``beforeFilter()`` or ``initialize()`` methods. You can pass
-configuration information into each authorization object, using an
-array::
+Вы можете настроить обработчики авторизации в методе ``beforeFilter()``
+или ``initialize()`` вашего контроллеоа. Вы можете передать информацию о
+настройках каждого объекта авторизации, используя массив::
 
     // Простейшая настройка
     $this->Auth->config('authorize', ['Controller']);
@@ -890,30 +892,34 @@ array::
         'Controller'
     ]);
 
-Much like ``authenticate``, ``authorize``, helps you
-keep your code DRY, by using the ``all`` key. This special key allows you
-to set settings that are passed to every attached object. The ``all`` key
-is also exposed as ``AuthComponent::ALL``::
+По аналогии с ``authenticate``, ``authorize`` помогает вам соблюдать
+принцип DRY (не повторяйся), с помощью ключа ``all``. Этот специальный
+ключ позволяет вам назначать передаваемые параметры каждому
+прикрепленному объекту. Ключ ``all`` также можно представить в виде
+статического свойства ``AuthComponent::ALL``::
 
-    // Pass settings in using 'all'
+    // Передаем настройки с помощью 'all'
     $this->Auth->config('authorize', [
         AuthComponent::ALL => ['actionPath' => 'controllers/'],
         'Actions',
         'Controller'
     ]);
 
-In the above example, both the ``Actions`` and ``Controller`` will get the
-settings defined for the 'all' key. Any settings passed to a specific
-authorization object will override the matching key in the 'all' key.
+В примере, приведенном выше, как ``Actions`` так и ``Controller`` получат
+все настройки, объявленные для ключа 'all'. Все настройки, переданные
+конкретному объекту авторизации, переопределят значения соответствующих
+ключей, имеющихся внутри ключа 'all'.
 
-If an authenticated user tries to go to a URL he's not authorized to access,
-he's redirected back to the referrer. If you do not want such redirection
-(mostly needed when using stateless authentication adapter) you can set config
-option ``unauthorizedRedirect`` to ``false``. This causes ``AuthComponent``
-to throw a ``ForbiddenException`` instead of redirecting.
+Если аутентифицированный пользователь пытается перейти к URL-адресу, к
+которому у него нет прав доступа, он перенаправляется обратно к
+странице-источнику запроса. Если вы не хотите такого перенаправления
+(в основном, при использовании адаптера аутентификации без учета состояния),
+вы можете установить параметр конфигурации ``unauthorizedRedirect``
+в значение ``false``. Это вынудит ``AuthComponent`` выбросить исключение
+``ForbiddenException`` вместо того, чтобы выполнить перенаправление.
 
-Creating Custom Authorize Objects
----------------------------------
+Создание пользовательских объектов авторизации
+----------------------------------------------
 
 Because authorize objects are pluggable, you can create custom authorize
 objects in your application or plugins. If for example, you wanted to
@@ -941,8 +947,8 @@ that you extend ``BaseAuthorize``, only that your authorize object
 implements an ``authorize()`` method. The ``BaseAuthorize`` class provides
 a number of helpful methods that are commonly used.
 
-Использование кастомных объектов авторизации
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Использование пользовательских объектов авторизации
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Once you've created your custom authorize object, you can use them by
 including them in your ``AuthComponent``'s authorize array::
