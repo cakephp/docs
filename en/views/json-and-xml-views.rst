@@ -103,11 +103,6 @@ If you use a string value for ``_serialize`` and XmlView, make sure that your
 view variable has a single top-level element. Without a single top-level
 element the Xml will fail to generate.
 
-.. versionadded:: 3.1.0
-
-    In this version, the variable ``_serialize`` is automaticaly set to ``true``
-    to serialize all view variables instead of explicitly specifying them.
-
 Using a Data View with Template Files
 =====================================
 
