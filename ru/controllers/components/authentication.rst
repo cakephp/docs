@@ -700,6 +700,144 @@ API-токены произвольно, используя библиотеки
 разделе объясняется, как осуществить миграцию с одного алгоритма хеширования
 на алгоритм, используемый в CakePHP по умолчанию.
 
+Изменение алгоритмов хэширования
+--------------------------------
+
+CakePHP предоставляет чистый способ переноса паролей пользователей с одного алгоритма на
+другой, это достигается с помощью класса ``FallbackPasswordHasher``.
+Предполагая, что вы переносите приложение с CakePHP 2.x, который использует хэши паролей
+``sha1``, вы можете настроить ``AuthComponent`` следующим образом::
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'passwordHasher' => [
+                        'className' => 'Fallback',
+                        'hashers' => [
+                            'Default',
+                            'Weak' => ['hashType' => 'sha1']
+                        ]
+                    ]
+                ]
+            ]
+        ]);
+    }
+
+Первое имя, появляющееся в ключе ``hashers`, указывает, какой из классов
+является предпочтительным, но будет возвращаться к остальным в списке, если
+проверка была неудачной.
+
+При использовании ``WeakPasswordHasher` вам нужно будет установить значение
+``Security.salt``, чтобы гарантироватьнадежность паролей засчет использования
+так называемой "соли".
+
+Чтобы обновить пароли старых пользователей на лету, вы можете изменить функцию
+входа соответствующим образом::
+
+    public function login()
+    {
+        if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
+                if ($this->Auth->authenticationProvider()->needsPasswordRehash()) {
+                    $user = $this->Users->get($this->Auth->user('id'));
+                    $user->password = $this->request->getData('password');
+                    $this->Users->save($user);
+                }
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            ...
+        }
+    }
+
+Как вы можете заметить, мы просто устанавливаем простой пароль, так что
+функция-сеттер в сущности будет хешировать пароль, как показано в предыдущем
+примере, а затем сохранит сущность (entity).
+
+Вход пользователей вручную
+--------------------------
+
+.. php:method:: setUser(array $user)
+
+Иногда возникает необходимость, когда вам нужно вручную осуществлять вход
+пользователя, например, сразу после регистрации в вашем приложении. Вы
+можете сделать это вызвав метод ``$this->Auth->setUser()`` с данными того
+пользователя, вход которого ('login') вы хотите осуществить::
+
+    public function register()
+    {
+        $user = $this->Users->newEntity($this->request->getData());
+        if ($this->Users->save($user)) {
+            $this->Auth->setUser($user->toArray());
+            return $this->redirect([
+                'controller' => 'Users',
+                'action' => 'home'
+            ]);
+        }
+    }
+
+.. warning::
+
+    Убедитесь в том, что вы добавляете вручную id новому пользователю (``User``)
+    в массиве, передаваемом методу ``setUser()``. В противном случае у вас будет
+    отсутствовать идентификатор пользователя.
+
+Получение доступа к вошедшим пользователям
+------------------------------------------
+
+.. php:method:: user($key = null)
+
+Как только пользователь войдет в систему, вам часто потребуется какая-то
+конкретная информация о текущем пользователе. Вы можете получить доступ
+к вошедшему в приложение пользователю с помощью метода
+``AuthComponent::user()``::
+
+    // Вызов из контроллера или другого компонента
+    $this->Auth->user('id');
+
+Если текущий пользователь не вошел в приложение, или же если ключ не
+существует, будет возвращено значение ``null``.
+
+Выход пользователей
+-------------------
+
+.. php:method:: logout()
+
+Eventually, you'll want a quick way to de-authenticate someone and
+redirect them to where they need to go. This method is also useful if
+you want to provide a 'Log me out' link inside a members' area of your
+application::
+
+    public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
+    }
+
+Logging out users that logged in with Digest or Basic auth is difficult
+to accomplish for all clients. Most browsers will retain credentials
+for the duration they are still open. Some clients can be forced to
+logout by sending a 401 status code. Changing the authentication realm
+is another solution that works for some clients.
+
+Deciding When to run Authentication
+-----------------------------------
+
+In some cases you may want to use ``$this->Auth->user()`` in the
+``beforeFilter(Event $event)`` method. This is achievable by using the
+``checkAuthIn`` config key. The following changes which event for which initial
+authentication checks should be done::
+
+    //Set up AuthComponent to authenticate in initialize()
+    $this->Auth->config('checkAuthIn', 'Controller.initialize');
+
+Default value for ``checkAuthIn`` is ``'Controller.startup'`` - but by using
+``'Controller.initialize'`` initial authentication is done before ``beforeFilter()``
+method.
+
 
 .. meta::
     :title lang=ru: Аутентификация
