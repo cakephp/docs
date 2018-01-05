@@ -807,21 +807,23 @@ CakePHP предоставляет чистый способ переноса п
 
 .. php:method:: logout()
 
-Eventually, you'll want a quick way to de-authenticate someone and
-redirect them to where they need to go. This method is also useful if
-you want to provide a 'Log me out' link inside a members' area of your
-application::
+В конце концов вам понадобится быстрый способ разавторизовать кого-то
+и перенаправить их туда, куда нужно. Этот метод также полезен, если
+вы хотите предоставить ссылку «Выйти из системы» внутри области
+вашего приложения для авторизованных пользователей::
 
     public function logout()
     {
         return $this->redirect($this->Auth->logout());
     }
 
-Logging out users that logged in with Digest or Basic auth is difficult
-to accomplish for all clients. Most browsers will retain credentials
-for the duration they are still open. Some clients can be forced to
-logout by sending a 401 status code. Changing the authentication realm
-is another solution that works for some clients.
+Выход из приложения пользователей, вошедших в него с помощью Дайджест
+или Базовой аутентификации, трудно выполнить для всех клиентов.
+Большинство браузеров сохраняют учетные данные на протяжении всего
+времени их работы. Некоторые клиенты могут быть принудительно выброшены
+из приложения, отправкой кода состояния 401. Изменение области
+аутентификации - это еще одно возможное решение, которое работает для
+некоторых клиентов.
 
 Deciding When to run Authentication
 -----------------------------------
