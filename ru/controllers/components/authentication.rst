@@ -1060,7 +1060,7 @@ ControllerAuthorize позволяет обрабатывать проверку
                 return (bool)($user['role'] === 'admin');
             }
 
-            // Default deny
+            // По умолчанию отказ в доступе
             return false;
         }
     }
@@ -1072,44 +1072,46 @@ ControllerAuthorize позволяет обрабатывать проверку
 Параметры конфигурации
 ======================
 
-The following settings can all be defined either in your controller's
-``initialize()`` method or using ``$this->Auth->config()`` in your ``beforeFilter()``:
+Приведенные ниже параметры могут все быть объявлены либо в методе ``initialize()``
+вашего контроллера, либо с помощью метода ``$this->Auth->config()``, вызванного
+внутри вашего метода ``beforeFilter()``:
 
 ajaxLogin
-    The name of an optional view element to render when an AJAX request is made
-    with an invalid or expired session.
+    Имя опционального элемента вида, который выводится при совершении AJAX-запроса с
+    недействительной или истекшей сессией.
 allowedActions
-    Controller actions for which user validation is not required.
+    Экшены контроллера, для которых валидация пользователя необязательна.
 authenticate
-    Set to an array of Authentication objects you want to use when
-    logging users in. There are several core authentication objects;
-    see the section on :ref:`authentication-objects`.
+    Представляет собой массив объектов Аутентификации, которые вы хотите использовать
+    при входе пользователей в приложение. Имеется несколько объектов аутентификации,
+    встроенных в ядро; подробности смотрите в разделе  :ref:`authentication-objects`.
 authError
-    Error to display when user attempts to access an object or action to which
-    they do not have access.
-
-    You can suppress authError message from being displayed by setting this
-    value to boolean ``false``.
+    Ошибка для отображения в том случае, когда пользователь пытается получить доступ
+    к объекту или экшену, к которому у них нет прав доступа.
+    
+    Вы можете подавить вывод сообщения об ошибке, указав в качестве значения параметра
+    булево ``false``.
 authorize
-    Set to an array of Authorization objects you want to use when
-    authorizing users on each request; see the section on
-    :ref:`authorization-objects`.
+    Представляет собой массив объектов Авторизации, которые вы хотите использовать,
+    когда выавторизуете пользователей при каждом запросе; смотрите раздел
+    :ref:`authorization-objects` для более подробной информации.
 flash
-    Settings to use when Auth needs to do a flash message with
-    ``FlashComponent::set()``.
-    Available keys are:
+    Настройки, используемые в случае, если ``Auth`` нужно вывести флеш-сообщение с
+    помощью метода ``FlashComponent::set()``.
+    Доступные ключи:
 
-    - ``element`` - The element to use; defaults to 'default'.
-    - ``key`` - The key to use; defaults to 'auth'.
-    - ``params`` - The array of additional params to use; defaults to '[]'.
+    - ``element`` - Используемый элемент; по умолчанию 'default'.
+    - ``key`` - Используемый ключ; по умолчанию 'auth'.
+    - ``params`` - Массив дополнительных параметров; по умолчанию '[]'.
 
 loginAction
-    A URL (defined as a string or array) to the controller action that handles
-    logins. Defaults to ``/users/login``.
+    URL (объявленный как строка либо как массив) для экшена контроллера,
+    обрабатывающего вход в приложение. По умолчанию ``/users/login``.
 loginRedirect
-    The URL (defined as a string or array) to the controller action users
-    should be redirected to after logging in. This value will be ignored if the
-    user has an ``Auth.redirect`` value in their session.
+    URL (объявленный как строка либо как массив) для экшена контроллера,
+    на который пользователь должен быть перенаправлен после входа. Это
+    значение будет проигнорировано, если у пользователя внутри сессии
+    имеется значение ``Auth.redirect``.
 logoutRedirect
     The default action to redirect to after the user is logged out. While
     ``AuthComponent`` does not handle post-logout redirection, a redirect URL will
