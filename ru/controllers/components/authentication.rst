@@ -841,6 +841,301 @@ CakePHP предоставляет чистый способ переноса п
 использовании ``'Controller.initialize'`` первоначальная аутентификация
 осуществляется перед методом ``beforeFilter()``.
 
+Авторизация
+===========
+
+Авторизация - это процесс подтверждения того, что пользователь, прошедший
+идентификацию/аутентифицикацию имееет права доступа к ресурсам, которые
+он запрашивает. Если активный `` AuthComponent`` может автоматически
+проверить обработчики авторизации и гарантировать, что зарегистрированным
+пользователям разрешен доступ к ресурсам, которые они запрашивают.
+Существует несколько встроенных обработчиков авторизации, и вы можете
+создавать собственные для своего приложения или вкачестве части плагина.
+
+- ``ControllerAuthorize`` Calls ``isAuthorized()`` on the active controller,
+  and uses the return of that to authorize a user. This is often the most
+  simple way to authorize users.
+
+.. note::
+
+    The ``ActionsAuthorize`` & ``CrudAuthorize`` adapter available in CakePHP
+    2.x have now been moved to a separate plugin `cakephp/acl <https://github.com/cakephp/acl>`_.
+
+Настройка обработчиков авторизации
+----------------------------------
+
+You configure authorization handlers using the ``authorize`` config key.
+You can configure one or many handlers for authorization. Using
+multiple handlers allows you to support different ways of checking
+authorization. When authorization handlers are checked, they will be
+called in the order they are declared. Handlers should return ``false``, if
+they are unable to check authorization, or the check has failed.
+Handlers should return ``true`` if they were able to check authorization
+successfully. Handlers will be called in sequence until one passes. If
+all checks fail, the user will be redirected to the page they came from.
+Additionally, you can halt all authorization by throwing an exception.
+You will need to catch any thrown exceptions and handle them.
+
+You can configure authorization handlers in your controller's
+``beforeFilter()`` or ``initialize()`` methods. You can pass
+configuration information into each authorization object, using an
+array::
+
+    // Простейшая настройка
+    $this->Auth->config('authorize', ['Controller']);
+
+    // Передача параметров
+    $this->Auth->config('authorize', [
+        'Actions' => ['actionPath' => 'controllers/'],
+        'Controller'
+    ]);
+
+Much like ``authenticate``, ``authorize``, helps you
+keep your code DRY, by using the ``all`` key. This special key allows you
+to set settings that are passed to every attached object. The ``all`` key
+is also exposed as ``AuthComponent::ALL``::
+
+    // Pass settings in using 'all'
+    $this->Auth->config('authorize', [
+        AuthComponent::ALL => ['actionPath' => 'controllers/'],
+        'Actions',
+        'Controller'
+    ]);
+
+In the above example, both the ``Actions`` and ``Controller`` will get the
+settings defined for the 'all' key. Any settings passed to a specific
+authorization object will override the matching key in the 'all' key.
+
+If an authenticated user tries to go to a URL he's not authorized to access,
+he's redirected back to the referrer. If you do not want such redirection
+(mostly needed when using stateless authentication adapter) you can set config
+option ``unauthorizedRedirect`` to ``false``. This causes ``AuthComponent``
+to throw a ``ForbiddenException`` instead of redirecting.
+
+Creating Custom Authorize Objects
+---------------------------------
+
+Because authorize objects are pluggable, you can create custom authorize
+objects in your application or plugins. If for example, you wanted to
+create an LDAP authorize object. In
+**src/Auth/LdapAuthorize.php** you could put the
+following::
+
+    namespace App\Auth;
+
+    use Cake\Auth\BaseAuthorize;
+    use Cake\Http\ServerRequest;
+
+    class LdapAuthorize extends BaseAuthorize
+    {
+        public function authorize($user, ServerRequest $request)
+        {
+            // Do things for ldap here.
+        }
+    }
+
+Authorize objects should return ``false`` if the user is denied access, or
+if the object is unable to perform a check. If the object is able to
+verify the user's access, ``true`` should be returned. It's not required
+that you extend ``BaseAuthorize``, only that your authorize object
+implements an ``authorize()`` method. The ``BaseAuthorize`` class provides
+a number of helpful methods that are commonly used.
+
+Using Custom Authorize Objects
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Once you've created your custom authorize object, you can use them by
+including them in your ``AuthComponent``'s authorize array::
+
+    $this->Auth->config('authorize', [
+        'Ldap', // app authorize object.
+        'AuthBag.Combo', // plugin authorize object.
+    ]);
+
+Using No Authorization
+----------------------
+
+If you'd like to not use any of the built-in authorization objects and
+want to handle things entirely outside of ``AuthComponent``, you can set
+``$this->Auth->config('authorize', false);``. By default ``AuthComponent``
+starts off with ``authorize`` set to ``false``. If you don't use an
+authorization scheme, make sure to check authorization yourself in your
+controller's ``beforeFilter()`` or with another component.
+
+Making Actions Public
+---------------------
+
+.. php:method:: allow($actions = null)
+
+There are often times controller actions that you wish to remain
+entirely public or that don't require users to be logged in.
+``AuthComponent`` is pessimistic and defaults to denying access. You can
+mark actions as public actions by using ``AuthComponent::allow()``. By
+marking actions as public, ``AuthComponent`` will not check for a logged in
+user nor will authorize objects to be checked::
+
+    // Allow all actions
+    $this->Auth->allow();
+
+    // Allow only the index action.
+    $this->Auth->allow('index');
+
+    // Allow only the view and index actions.
+    $this->Auth->allow(['view', 'index']);
+
+By calling it empty you allow all actions to be public.
+For a single action, you can provide the action name as a string. Otherwise, use an array.
+
+.. note::
+
+    You should not add the "login" action of your ``UsersController`` to allow list.
+    Doing so would cause problems with the normal functioning of ``AuthComponent``.
+
+Making Actions Require Authorization
+------------------------------------
+
+.. php:method:: deny($actions = null)
+
+By default all actions require authorization. However, after making actions
+public you want to revoke the public access. You can do so using
+``AuthComponent::deny()``::
+
+    // Deny all actions.
+    $this->Auth->deny();
+
+    // Deny one action
+    $this->Auth->deny('add');
+
+    // Deny a group of actions.
+    $this->Auth->deny(['add', 'edit']);
+
+By calling it empty you deny all actions.
+For a single action, you can provide the action name as a string. Otherwise, use an array.
+
+Using ControllerAuthorize
+-------------------------
+
+ControllerAuthorize allows you to handle authorization checks in a
+controller callback. This is ideal when you have very simple
+authorization or you need to use a combination of models and components
+to do your authorization and don't want to create a custom authorize
+object.
+
+The callback is always called ``isAuthorized()`` and it should return a
+boolean as to whether or not the user is allowed to access resources in
+the request. The callback is passed the active user so it can be
+checked::
+
+    class AppController extends Controller
+    {
+        public function initialize()
+        {
+            parent::initialize();
+            $this->loadComponent('Auth', [
+                'authorize' => 'Controller',
+            ]);
+        }
+
+        public function isAuthorized($user = null)
+        {
+            // Any registered user can access public functions
+            if (!$this->request->getParam('prefix')) {
+                return true;
+            }
+
+            // Only admins can access admin functions
+            if ($this->request->getParam('prefix') === 'admin') {
+                return (bool)($user['role'] === 'admin');
+            }
+
+            // Default deny
+            return false;
+        }
+    }
+
+The above callback would provide a very simple authorization system
+where only users with role = admin could access actions that were in
+the admin prefix.
+
+Configuration options
+=====================
+
+The following settings can all be defined either in your controller's
+``initialize()`` method or using ``$this->Auth->config()`` in your ``beforeFilter()``:
+
+ajaxLogin
+    The name of an optional view element to render when an AJAX request is made
+    with an invalid or expired session.
+allowedActions
+    Controller actions for which user validation is not required.
+authenticate
+    Set to an array of Authentication objects you want to use when
+    logging users in. There are several core authentication objects;
+    see the section on :ref:`authentication-objects`.
+authError
+    Error to display when user attempts to access an object or action to which
+    they do not have access.
+
+    You can suppress authError message from being displayed by setting this
+    value to boolean ``false``.
+authorize
+    Set to an array of Authorization objects you want to use when
+    authorizing users on each request; see the section on
+    :ref:`authorization-objects`.
+flash
+    Settings to use when Auth needs to do a flash message with
+    ``FlashComponent::set()``.
+    Available keys are:
+
+    - ``element`` - The element to use; defaults to 'default'.
+    - ``key`` - The key to use; defaults to 'auth'.
+    - ``params`` - The array of additional params to use; defaults to '[]'.
+
+loginAction
+    A URL (defined as a string or array) to the controller action that handles
+    logins. Defaults to ``/users/login``.
+loginRedirect
+    The URL (defined as a string or array) to the controller action users
+    should be redirected to after logging in. This value will be ignored if the
+    user has an ``Auth.redirect`` value in their session.
+logoutRedirect
+    The default action to redirect to after the user is logged out. While
+    ``AuthComponent`` does not handle post-logout redirection, a redirect URL will
+    be returned from :php:meth:`AuthComponent::logout()`. Defaults to
+    ``loginAction``.
+unauthorizedRedirect
+    Controls handling of unauthorized access. By default unauthorized user is
+    redirected to the referrer URL or ``loginAction`` or '/'.
+    If set to ``false``, a ForbiddenException exception is thrown instead of
+    redirecting.
+storage
+    Storage class to use for persisting user record. When using stateless
+    authenticator you should set this to ``Memory``. Defaults to ``Session``.
+    You can pass config options to storage class using array format. For e.g. to
+    use a custom session key you can set ``storage`` to ``['className' => 'Session', 'key' => 'Auth.Admin']``.
+checkAuthIn
+    Name of the event in which initial auth checks should be done. Defaults
+    to ``Controller.startup``. You can set it to ``Controller.initialize``
+    if you want the check to be done before controller's ``beforeFilter()``
+    method is run.
+
+You can get current configuration values by calling ``$this->Auth->config()``::
+only the configuration option::
+
+    $this->Auth->config('loginAction');
+
+    $this->redirect($this->Auth->config('loginAction'));
+
+This is useful if you want to redirect a user to the ``login`` route for example.
+Without a parameter, the full configuration will be returned.
+
+Testing Actions Protected By AuthComponent
+==========================================
+
+See the :ref:`testing-authentication` section for tips on how to test controller
+actions that are protected by ``AuthComponent``.
+
+
 
 .. meta::
     :title lang=ru: Аутентификация
