@@ -1032,10 +1032,10 @@ ControllerAuthorize позволяет обрабатывать проверку
 компонентов для авторизации и вам не хочется создавать пользовательский
 объект авторизации.
 
-The callback is always called ``isAuthorized()`` and it should return a
-boolean as to whether or not the user is allowed to access resources in
-the request. The callback is passed the active user so it can be
-checked::
+Коллбек всегда называется ``isAuthorized()``, и он должен возвращать булево
+значение относительно того, разрешен ли пользователю доступ к запрашиваемым
+ресурсам. Коллбек передается активным пользователем, таким образом права
+этого самого пользователя могут быть проверены::
 
     class AppController extends Controller
     {
@@ -1049,12 +1049,13 @@ checked::
 
         public function isAuthorized($user = null)
         {
-            // Any registered user can access public functions
+            // Любой зарегистрированный пользователь может иметь доступ
+            // к общедоступным функциям
             if (!$this->request->getParam('prefix')) {
                 return true;
             }
 
-            // Only admins can access admin functions
+            // Только администоры могут иметь доступ к админке
             if ($this->request->getParam('prefix') === 'admin') {
                 return (bool)($user['role'] === 'admin');
             }
@@ -1064,12 +1065,12 @@ checked::
         }
     }
 
-The above callback would provide a very simple authorization system
-where only users with role = admin could access actions that were in
-the admin prefix.
+Вышеприведенный коллбек обеспечит очень простую систему авторизации,
+где только пользователи с ролью = admin могут обращаться к экшенам,
+у которых задан префикс admin.
 
-Configuration options
-=====================
+Параметры конфигурации
+======================
 
 The following settings can all be defined either in your controller's
 ``initialize()`` method or using ``$this->Auth->config()`` in your ``beforeFilter()``:
