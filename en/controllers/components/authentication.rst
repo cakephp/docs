@@ -362,6 +362,7 @@ generate these API tokens randomly using libraries from CakePHP::
     use Cake\Utility\Text;
     use Cake\Event\Event;
     use Cake\ORM\Table;
+    use Cake\Utility\Security;
 
     class UsersTable extends Table
     {
@@ -373,7 +374,7 @@ generate these API tokens randomly using libraries from CakePHP::
                 $hasher = new DefaultPasswordHasher();
 
                 // Generate an API 'token'
-                $entity->api_key_plain = sha1(Text::uuid());
+                $entity->api_key_plain = Security::hash(Security::randomBytes(32), 'sha256', false);
 
                 // Bcrypt the token so BasicAuthenticate can check
                 // it during login.
