@@ -1113,41 +1113,43 @@ loginRedirect
     значение будет проигнорировано, если у пользователя внутри сессии
     имеется значение ``Auth.redirect``.
 logoutRedirect
-    The default action to redirect to after the user is logged out. While
-    ``AuthComponent`` does not handle post-logout redirection, a redirect URL will
-    be returned from :php:meth:`AuthComponent::logout()`. Defaults to
-    ``loginAction``.
+    Экшен по умолчанию, на который пользователь перенаправляется после выхода
+    из приложения. В то время, ``AuthComponent`` не обрабатывает перенаправление
+    пользователя после выхода, URL будет возвращен из метода
+    :php:meth:`AuthComponent::logout()`.Значение по умолчанию - ``loginAction``.
 unauthorizedRedirect
-    Controls handling of unauthorized access. By default unauthorized user is
-    redirected to the referrer URL or ``loginAction`` or '/'.
-    If set to ``false``, a ForbiddenException exception is thrown instead of
-    redirecting.
+    Контролирует обработку несанкционированного доступа. По умолчанию
+    неавторизованный пользователь перенаправляется на URL-адрес страницы-источника
+    запроса либо на `` loginAction`` либо на '/'. Если установлено значение
+    ``false``, вместо перенаправления выбрасывается исключение ``ForbiddenException``.
 storage
-    Storage class to use for persisting user record. When using stateless
-    authenticator you should set this to ``Memory``. Defaults to ``Session``.
-    You can pass config options to storage class using array format. For e.g. to
-    use a custom session key you can set ``storage`` to ``['className' => 'Session', 'key' => 'Auth.Admin']``.
+    Класс хранения, используемый для сохранения записи пользователя. При
+    использовании аутентификатора без учета состояния вы должны установить значение
+    ``Memory``. По умолчанию используется ``Session``. Вы можете передавать параметры
+    конфигурации в класс хранения, используя формат массива. К примеру для назначения
+    пользовательского ключа сессии вы можете установить значение ``storage`` в
+    ``['className' => 'Session', 'key' => 'Auth.Admin']``.
 checkAuthIn
-    Name of the event in which initial auth checks should be done. Defaults
-    to ``Controller.startup``. You can set it to ``Controller.initialize``
-    if you want the check to be done before controller's ``beforeFilter()``
-    method is run.
+    Название события, в котором должны выполняться первоначальные проверки подлинности.
+    По умолчанию используется ``Controller.startup``. Вы можете установить его в
+    ``Controller.initialize``, если вы хотите, чтобы проверка выполнялась до того, как
+    запустится метод контроллера ``beforeFilter()``.
 
-You can get current configuration values by calling ``$this->Auth->config()``::
-only the configuration option::
+Вы можете получить текущие значения настроек, вызвав метод ``$this->Auth->config()`` 
+с единственным переданным параметром конфигурации::
 
     $this->Auth->config('loginAction');
 
     $this->redirect($this->Auth->config('loginAction'));
 
-This is useful if you want to redirect a user to the ``login`` route for example.
-Without a parameter, the full configuration will be returned.
+Это может оказаться полезным, если вы хотите перенаправить пользователя к примеру
+на маршрут ``login``. Без передачи параметра будет возвращена полная конфигурация.
 
 Тестирование экшенов защищенных AuthComponent
 =============================================
 
 Смотрите раздел :ref:`testing-authentication` для получения более полной информации
-по тестированию экшенов контроллеразащищенных компонентом ``AuthComponent``.
+по тестированию экшенов контроллера, защищенных компонентом ``AuthComponent``.
 
 .. meta::
     :title lang=ru: Аутентификация
