@@ -1,16 +1,97 @@
-Cross Site Request Forgery
-##########################
+Межсайтовая подделка запроса
+############################
+
+Активируя компонент ``CSRF`` вы получаете защиту от атак. `CSRF
+<http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ или 
+Межсайтовая подделка запросов является распространенной уязвимостью в
+веб-приложениях. Он позволяет злоумышленнику захватывать и воспроизводить
+предыдущий запрос, а иногда и отправлять запросы данных с использованием
+тегов изображений или ресурсов в других доменах.
+
+Компонент ``CsrfComponent`` работает, устанавливая куки в браузер пользователя.
+При создании формы с помощью :php:class:`Cake\\View\\Helper\\FormHelper`,
+добавляется скрытое поле с токеном CSRF. Во время события ``Controller.startup``
+если запрос является POST, PUT, DELETE, PATCH запросом, компонент сравнит данные 
+запроса со значением хранящимся в куки. Если какое-либо из этих значений будет
+отсутствовать или же два значения не совпадут, компонент выбросит исключение
+:php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
 
 .. note::
-    The documentation is not currently supported in Russian language for this
-    page.
+    Вы всегда должны проверять используемый HTTP-метод перед выполнением
+    во избежание побочных эффектов. Вы должны :ref:`проверять HTTP-vtnjl <check-the-request>`
+    или использовать :php:meth:`Cake\\Http\\ServerRequest::allowMethod()`
+    чтобы удостовериться, что используется правильный HTTP-метод.
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+.. versionadded:: 3.1
+    Изменен тип выбрасываемого исключения с
+    :php:class:`Cake\\Network\\Exception\\ForbiddenException` на
+    :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
 
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+.. deprecated:: 3.5.0
+    Вы должны использовать :ref:`csrf-middleware` вместо
+    ``CsrfComponent``.
+
+Использование CsrfComponent
+===========================
+
+Просто добавляя ``CsrfComponent`` в массив ваших компонентов, вы
+можете получить выгоду от CSRF-защиты, которую он предоставляет::
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Csrf');
+    }
+
+Параметры могут быть переданы в компонент через настройки вашего компонента.
+Доступные параметры конфигурации:
+
+- ``cookieName`` Имя отправляемой куки-переменной. По умолчанию ``csrfToken``.
+- ``expiry`` Продолжительность жизни токена CSRF. По умолчанию равен
+  продолжительности сессии браузера. Принимает значения ``strtotime``
+  с версии 3.1
+- ``secure`` Будет ли cookie установлен с флагом Secure. То есть, cookie будет
+  установлен только при HTTPS-соединении, и любая попытка по обычному HTTP не
+  удастся. По умолчанию используется ``false``.
+- ``field`` Поле формы для проверки. По умолчанию ``_csrfToken``. Изменение
+  данного параметра потребует также перенастройки хелпера ``FormHelper``.
+
+Когда включено, вы можете получить доступ к текущему токену CSRF в объекте
+запроса::
+
+    $token = $this->request->getParam('_csrfToken');
+
+Интеграция с FormHelper
+=======================
+
+``CsrfComponent`` легко интегрируется с ``FormHelper``. Каждый раз, когда вы
+создаете форму с помощью ``FormHelper``, она вставляет скрытое поле, содержащее
+токен CSRF.
+
+.. note::
+    При использовании ``CsrfComponent`` вы всегда должны создавать формы,
+    используя ``FormHelper``. В противном случае, вам все время придется вручную
+    создавать скрытые поля ввода в каждой вашей форме.
+
+CSRF-защита и AJAX-запросы
+==========================
+
+Помимо параметров запроса данных, токены CSRF могут быть отправлены через
+специальный заголовок ``X-CSRF-Token``. Использование заголовка часто упрощает
+интеграцию токена CSRF с тяжелыми приложениями JavaScript или конечными точками
+API на основе XML/JSON.
+
+Отключение компонента CSRF для определенных экшенов
+===================================================
+
+Хотя это не рекомендуется, вы можете отключить ``CsrfComponent`` для определенных
+запросов. Вы можете сделать это, используя диспетчер событий контроллера, во время
+выполнения метода ``beforeFilter()`` ::
+
+    public function beforeFilter(Event $event)
+    {
+        $this->eventManager()->off($this->Csrf);
+    }
 
 .. meta::
     :title lang=ru: Csrf
