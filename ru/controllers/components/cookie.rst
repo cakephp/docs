@@ -5,16 +5,19 @@ Cookie
 
 .. php:class:: CookieComponent(ComponentRegistry $collection, array $config = [])
 
-.. note::
-    The documentation is not currently supported in Russian language for this
-    page.
+``CookieComponent`` - это оболочка вокруг собственного метода PHP ``setcookie()``.
+Это упрощает манипулирование файлами cookie и автоматически шифрует данные cookie.
+Куки, добавленные через ``CookieComponent``, будут отправляться только в том
+случае, если экшен контроллера завершен.
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+The CookieComponent is a wrapper around the native PHP ``setcookie()`` method. It
+makes it easier to manipulate cookies, and automatically encrypt cookie data.
+Cookies added through CookieComponent will only be sent if the controller action
+completes.
 
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+.. deprecated:: 3.5.0
+    Вы должны использовать :ref:`encrypted-cookie-middleware` вместо
+    ``CookieComponent``.
 
 .. meta::
     :title lang=ru: Cookie
