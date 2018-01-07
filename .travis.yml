@@ -1,14 +1,23 @@
+addons:
+  apt:
+    packages:
+      - texlive-latex-recommended
+      - texlive-latex-extra
+      - texlive-fonts-recommended
+      - texlive-lang-all
+
 language: python
 
-python:
- - "2.7"
+env:
+  matrix:
+    - HTML=1
+    - EPUB=1
+    - PDF=1
 
-install:
-    - pip install -r requirements.txt
-
-script: 'make html SPHINXOPTS="-W"'
-
-sudo: false
+script:
+  - if [ $HTML = '1' ]; then make html; fi
+  - if [ $EPUB = '1' ]; then make epub; fi
+  - if [ $PDF = '1' ]; then make latex; fi
 
 notifications:
-    email: false
+email: false
