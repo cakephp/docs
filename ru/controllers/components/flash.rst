@@ -14,6 +14,12 @@ CakePHP ссылается на эти сообщения как «флэш-со
 Настройка флэш-сообщений
 ========================
 
+``FlashComponent`` предоставляет два способа установки флеш-сообщений: его
+магический метод ``__call()`` и его метод ``set()``. Чтобы предотвратить
+многословность в приложении, магический метод ``__call()`` компонента
+``FlashComponent`` позволяет использовать имя метода, которое сопоставляется с элементом,
+расположенным в каталоге **src/Template/Element/Flash**.
+
 FlashComponent provides two ways to set flash messages: its ``__call()`` magic
 method and its ``set()`` method.  To furnish your application with verbosity,
 FlashComponent's ``__call()`` magic method allows you use a method name that
