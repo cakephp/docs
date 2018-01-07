@@ -63,6 +63,78 @@ httpOnly
 encryption
     Тип используемого шифрования. Значение по умолчанию 'aes'. Можно также
     установить 'rijndael' для обратной совместимости.
+    
+Использование компонента
+========================
+
+Компонент ``CookieComponent`` предлагает некоторое количество методов для
+работы с куки-файлами.
+
+.. php:method:: write(mixed $key, mixed $value = null)
+
+    The write() method is the heart of the cookie component. $key is the
+    cookie variable name you want, and the $value is the information to
+    be stored::
+
+        $this->Cookie->write('name', 'Larry');
+
+    You can also group your variables by using dot notation in the
+    key parameter::
+
+        $this->Cookie->write('User.name', 'Larry');
+        $this->Cookie->write('User.role', 'Lead');
+
+    If you want to write more than one value to the cookie at a time,
+    you can pass an array::
+
+        $this->Cookie->write('User',
+            ['name' => 'Larry', 'role' => 'Lead']
+        );
+
+    All values in the cookie are encrypted with AES by default. If you want to
+    store the values as plain text, be sure to configure the key space::
+
+        $this->Cookie->configKey('User', 'encryption', false);
+
+.. php:method:: read(mixed $key = null)
+
+    This method is used to read the value of a cookie variable with the
+    name specified by $key. ::
+
+        // Outputs "Larry"
+        echo $this->Cookie->read('name');
+
+        // You can also use the dot notation for read
+        echo $this->Cookie->read('User.name');
+
+        // To get the variables which you had grouped
+        // using the dot notation as an array use the following
+        $this->Cookie->read('User');
+
+        // This outputs something like ['name' => 'Larry', 'role' => 'Lead']
+
+    .. warning::
+        CookieComponent cannot interact with bare strings values that contain
+        ``,``. The component will attempt to interpret these values as
+        arrays, leading to incorrect results. Instead you should use
+        ``$request->getCookie()``.
+
+.. php:method:: check($key)
+
+    :param string $key: The key to check.
+
+    Used to check whether a key/path exists and has a non-null value.
+
+.. php:method:: delete(mixed $key)
+
+    Deletes a cookie variable of the name in $key. Works with dot
+    notation::
+
+        // Delete a variable
+        $this->Cookie->delete('bar');
+
+        // Delete the cookie variable bar, but not everything under foo
+        $this->Cookie->delete('foo.bar');
 
 .. meta::
     :title lang=ru: Cookie
