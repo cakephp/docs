@@ -1,15 +1,23 @@
-sudo: required
+addons:
+  apt:
+    packages:
+      - texlive-latex-recommended
+      - texlive-latex-extra
+      - texlive-fonts-recommended
+      - texlive-lang-all
 
-services:
-    - docker
+language: python
 
-before_install:
-    - docker pull cakephpfr/docs
+env:
+  matrix:
+    - HTML=1
+    - EPUB=1
+    - PDF=1
 
 script:
-    - docker run -it --rm -v $(pwd):/data cakephpfr/docs:light make html SPHINXOPTS='-W'
-    - docker run -it --rm -v $(pwd):/data cakephpfr/docs make epub
-    - docker run -it --rm -v $(pwd):/data cakephpfr/docs make latex
+  - if [ $HTML = '1' ]; then make html; fi
+  - if [ $EPUB = '1' ]; then make epub; fi
+  - if [ $PDF = '1' ]; then make latex; fi
 
 notifications:
     email: false

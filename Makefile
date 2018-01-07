@@ -19,6 +19,9 @@ DEST = website
 # Clone the en/Makefile everywhere.
 SPHINX_DEPENDENCIES = $(foreach lang, $(LANGS), $(lang)/Makefile)
 
+# Get path to theme directory to build static assets.
+THEME_DIR = $(shell python -c 'import os, cakephpsphinx; print os.path.abspath(os.path.dirname(cakephpsphinx.__file__))')
+
 # Copy-paste the English Makefile everywhere it's needed (if non existing).
 %/Makefile: en/Makefile
 	cp -n $< $@
@@ -96,23 +99,23 @@ clean-website:
 build/html/%/_static:
 	mkdir -p build/html/$*/_static
 
-CSS_FILES = themes/cakephp/static/css/fonts.css \
-  themes/cakephp/static/css/bootstrap.min.css \
-  themes/cakephp/static/css/font-awesome.min.css \
-  themes/cakephp/static/css/style.css \
-  themes/cakephp/static/css/default.css \
-  themes/cakephp/static/css/pygments.css \
-  themes/cakephp/static/css/responsive.css
+CSS_FILES = $(THEME_DIR)/themes/cakephp/static/css/fonts.css \
+  $(THEME_DIR)/themes/cakephp/static/css/bootstrap.min.css \
+  $(THEME_DIR)/themes/cakephp/static/css/font-awesome.min.css \
+  $(THEME_DIR)/themes/cakephp/static/css/style.css \
+  $(THEME_DIR)/themes/cakephp/static/css/default.css \
+  $(THEME_DIR)/themes/cakephp/static/css/pygments.css \
+  $(THEME_DIR)/themes/cakephp/static/css/responsive.css
 
 build/html/%/_static/css/app.css: build/html/%/_static $(CSS_FILES)
 	# echo all dependencies ($$^) into the output ($$@)
 	cat $(CSS_FILES) > $@
 
-JS_FILES = themes/cakephp/static/jquery.js \
-  themes/cakephp/static/vendor.js \
-  themes/cakephp/static/app.js \
-  themes/cakephp/static/search.js \
-  themes/cakephp/static/typeahead.js
+JS_FILES = $(THEME_DIR)/themes/cakephp/static/jquery.js \
+  $(THEME_DIR)/themes/cakephp/static/vendor.js \
+  $(THEME_DIR)/themes/cakephp/static/app.js \
+  $(THEME_DIR)/themes/cakephp/static/search.js \
+  $(THEME_DIR)/themes/cakephp/static/typeahead.js
 
 build/html/%/_static/app.js: build/html/%/_static $(JS_FILES)
 	# echo all dependencies ($JS_FILES) into the output ($$@)
