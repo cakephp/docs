@@ -17,10 +17,10 @@
 Настройка куки
 ==============
 
-Cookies can be configured either globally or per top-level name. The global
-configuration data will be merged with the top-level configuration. So only need
-to override the parts that are different. To configure the global settings use
-the ``config()`` method::
+Файлы cookie можно настроить как глобально, так и для каждого имени верхнего
+уровня. Данные глобальной конфигурации будут объединены с конфигурацией верхнего
+уровня. Поэтому нужно только переопределить те части, которые отличаются друг от
+друга. Чтобы настроить глобальные параметры, используйте метод ``config()``::
 
     $this->Cookie->config('path', '/');
     $this->Cookie->config([
@@ -36,31 +36,33 @@ the ``config()`` method::
         'httpOnly' => true
     ]);
 
-There are a number of configurable values for cookies:
+Существует некоторое количество параметров конфигурации для
+файлов куки:
 
 expires
-    How long the cookies should last for. Defaults to 1 month.
+    Как долго куки должен существовать. По умолчанию 1 месяц.
 path
-    The path on the server in which the cookie will be available on.
-    If path is set to '/foo/', the cookie will only be available within the
-    /foo/ directory and all sub-directories such as /foo/bar/ of domain.
-    The default value is app's base path.
+    Путь на сервере, по которому куки будет доступен. Если, к примеру,
+    путь задан как '/foo/', то файлы куки будут доступны только внутри
+    каталога ``/foo/`` и всех его подкаталогах, например в папке домена
+    ``/foo/bar/ ``.Значением по умлчанию является базовый путь приложения.
 domain
-    The domain that the cookie is available. To make the cookie
-    available on all subdomains of example.com set domain to '.example.com'.
+    Домен, для которого куки доступны. Чтобы сделать куки доступными на
+    всех поддоменах ``example.com``, установите значение '.example.com'.
 secure
-    Indicates that the cookie should only be transmitted over a secure HTTPS
-    connection. When set to ``true``, the cookie will only be set if a
-    secure connection exists.
+    Показывает, что куки должны передаваться только по защищенному соединению,
+    через протокол HTTPS. Когда установлено значение ``true``, куки будут
+    созданы только в случае если защищенное соединение существует.
 key
-    Encryption key used when encrypted cookies are enabled. Defaults to Security.salt.
+    Ключ шифрования, используемый в случае если включено шифрование куки.
+    По умолчанию ``Security.salt``.
 httpOnly
-    Set to ``true`` to make HTTP only cookies. Cookies that are HTTP only
-    are not accessible in JavaScript. Defaults to ``false``.
+    Установите в ``true``, если хотите сделать куки доступными только по
+    протоколу HTTP. В таком случае куки будут недоступны из JavaScript.
+    По умолчанию ``false``.
 encryption
-    Type of encryption to use. Defaults to 'aes'. Can also be 'rijndael' for
-    backwards compatibility.
-
+    Тип используемого шифрования. Значение по умолчанию 'aes'. Можно также
+    установить 'rijndael' для обратной совместимости.
 
 .. meta::
     :title lang=ru: Cookie
