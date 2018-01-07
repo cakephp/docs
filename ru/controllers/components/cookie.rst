@@ -91,51 +91,56 @@ encryption
             ['name' => 'Larry', 'role' => 'Lead']
         );
 
-    All values in the cookie are encrypted with AES by default. If you want to
-    store the values as plain text, be sure to configure the key space::
+    Все значения в куки зашифрованы с помощью AES по умолчанию. Если вы хотите
+    хранить значения в виде обычного текста, обязательно оставьте ключ
+    пустым::
 
         $this->Cookie->configKey('User', 'encryption', false);
 
 .. php:method:: read(mixed $key = null)
 
-    This method is used to read the value of a cookie variable with the
-    name specified by $key. ::
+    
+    Этот метод используется для чтения значения переменной куки с именем,
+    определенном в параметре ``$key``. ::
 
-        // Outputs "Larry"
+        // Выведется "Larry"
         echo $this->Cookie->read('name');
 
-        // You can also use the dot notation for read
+        // Вы также можете использовать точечную нотацию
         echo $this->Cookie->read('User.name');
 
-        // To get the variables which you had grouped
-        // using the dot notation as an array use the following
+        // Чтобы получить переменные, сгруппированные вами с помощью
+        // точечной нотации в виде массива, используйте следующий формат
         $this->Cookie->read('User');
 
-        // This outputs something like ['name' => 'Larry', 'role' => 'Lead']
+        // Это выведет что-то наподобии ['name' => 'Larry', 'role' => 'Lead']
 
     .. warning::
-        CookieComponent cannot interact with bare strings values that contain
-        ``,``. The component will attempt to interpret these values as
-        arrays, leading to incorrect results. Instead you should use
+        ``CookieComponent`` не может взаимодействовать со строковыми
+        значениями, содержащими ``,``. Компонент попытается интерпретировать
+        эти значения как массивы, что приведет к неправильным результатам.
+        Вместо этого вам лучше воспользоваться методом
         ``$request->getCookie()``.
 
 .. php:method:: check($key)
 
-    :param string $key: The key to check.
+    :param string $key: Ключ для проверки.
 
-    Used to check whether a key/path exists and has a non-null value.
+    Используется для проверки наличия ключа/пути и не равно ли его
+    значение ``null``.
 
 .. php:method:: delete(mixed $key)
 
-    Deletes a cookie variable of the name in $key. Works with dot
-    notation::
+    Удаляет куки-переменную с именем ``$key``. Работает с точечной
+    нотацией::
 
-        // Delete a variable
+        // Удаление переменной
         $this->Cookie->delete('bar');
 
-        // Delete the cookie variable bar, but not everything under foo
+        // Удаляет куки-переменную ``bar``, но не трогает все остальные
+        // значения, принадлежащие ``foo``
         $this->Cookie->delete('foo.bar');
 
 .. meta::
-    :title lang=ru: Cookie
+    :title lang=ru: Куки
     :keywords lang=ru: array controller,php setcookie,cookie string,controller setup,string domain,default description,string name,session cookie,integers,variables,domain name,null
