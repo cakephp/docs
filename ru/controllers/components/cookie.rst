@@ -72,20 +72,20 @@ encryption
 
 .. php:method:: write(mixed $key, mixed $value = null)
 
-    The write() method is the heart of the cookie component. $key is the
-    cookie variable name you want, and the $value is the information to
-    be stored::
+    Метод ``write()`` является сердцем компонента куки. ``$key`` - это имя
+    переменной куки, которое вы хотите использовать, а ``$value`` -
+    информация, которая должна быть сохранена::
 
         $this->Cookie->write('name', 'Larry');
 
-    You can also group your variables by using dot notation in the
-    key parameter::
+    Вы также можете группировать переменные с помощью точечной нотации в
+    параметре ``key``::
 
         $this->Cookie->write('User.name', 'Larry');
         $this->Cookie->write('User.role', 'Lead');
 
-    If you want to write more than one value to the cookie at a time,
-    you can pass an array::
+    Если вы хотите записать несколько значений в файл cookie за один раз,
+    вы можете передать массив::
 
         $this->Cookie->write('User',
             ['name' => 'Larry', 'role' => 'Lead']
