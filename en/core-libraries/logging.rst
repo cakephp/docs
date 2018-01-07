@@ -220,7 +220,7 @@ be done in the **bootstrap.php** file::
 The configuration array accepted for the Syslog logging engine understands the
 following keys:
 
-* ``format``: An sprintf template strings with two placeholders, the first one
+* ``format``: An sprintf template string with two placeholders, the first one
   for the error level, and the second for the message itself. This key is
   useful to add additional information about the server or process in the
   logged message. For example: ``%s - Web Server 1 - %s`` will look like
@@ -243,8 +243,8 @@ is to use the static :php:meth:`Cake\\Log\\Log::write()` method::
 
     Log::write('debug', 'Something did not work');
 
-The second is to use the log() shortcut function available on any
-using the ``LogTrait`` Calling log() will internally call
+The second is to use the ``log()`` shortcut function available on any
+class using the ``LogTrait``. Calling log() will internally call
 ``Log::write()``::
 
     // Executing this inside a class using LogTrait
