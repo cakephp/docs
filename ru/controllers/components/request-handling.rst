@@ -38,16 +38,17 @@ JavaScript-бибилиотеками. При использовании в со
 Получение информации о запросе
 ==============================
 
-Request Handler has several methods that provide information about
-the client and its request.
+Обработчик запросов имеет несколько методов, предоставляющих информацию
+о клиенте и его запросе.
 
 .. php:method:: accepts($type = null)
 
-    $type can be a string, or an array, or null. If a string, accepts
-    will return ``true`` if the client accepts the content type. If an
-    array is specified, accepts return ``true`` if any one of the content
-    types is accepted by the client. If null returns an array of the
-    content-types that the client accepts. For example::
+    ``$type`` может быть строкой, либо массивом, либо ``null``. Если
+    будет строка, ``accepts()`` вернет ``true``, если клиент примет
+    тип содержимого. Если указан массив, ``accepts()`` вернет
+    ``true``, если один любой из типов содержимого будет принят
+    клиентом. Если будет ``null``, будет возвращен массив типов
+    содержимого, принимаемых клиентом. Например::
 
         class ArticlesController extends AppController
         {
@@ -61,32 +62,32 @@ the client and its request.
             public function beforeFilter(Event $event)
             {
                 if ($this->RequestHandler->accepts('html')) {
-                    // Execute code only if client accepts an HTML (text/html)
-                    // response.
+                    // Выполнить код только если клиент принимает HTML (text/html)
+                    // в качестве ответа.
                 } elseif ($this->RequestHandler->accepts('xml')) {
-                    // Execute XML-only code
+                    // Выполняет только XML-код
                 }
                 if ($this->RequestHandler->accepts(['xml', 'rss', 'atom'])) {
-                    // Executes if the client accepts any of the above: XML, RSS
-                    // or Atom.
+                    // Выполнить код, если клиент принимает любой из типов: XML, RSS
+                    // или Atom.
                 }
             }
         }
 
-Other request 'type' detection methods include:
+Другие методы определения 'типа' запроса включают в том числе:
 
 .. php:method:: isXml()
 
-    Returns ``true`` if the current request accepts XML as a response.
+    Возвращает ``true`` если текущий запрос принимает XML в качестве ответа.
 
 .. php:method:: isRss()
 
-    Returns ``true`` if the current request accepts RSS as a response.
+    Возвращает ``true`` если текущий запрос принимает RSS в качестве ответа.
 
 .. php:method:: isAtom()
 
-    Returns ``true`` if the current call accepts an Atom response, false
-    otherwise.
+    Возвращает ``true`` если текущий запрос принимает Atom в качестве ответа,
+    в противном случае возвращает ``false``.
 
 .. php:method:: isMobile()
 
@@ -137,8 +138,8 @@ following would accomplish that::
         }
         // Continue Controller action
 
-Automatically Decoding Request Data
-===================================
+Автоматическое декодирование данных запроса
+===========================================
 
 Add a request data decoder. The handler should contain a callback, and any
 additional arguments for the callback. The callback should return
@@ -195,8 +196,8 @@ content-types in ``HTTP_ACCEPT``::
 
     $this->RequestHandler->prefers('json');
 
-Responding To Requests
-======================
+Ответ на запросы
+================
 
 .. php:method:: renderAs($controller, $type)
 
