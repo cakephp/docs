@@ -20,4 +20,4 @@ script:
   - if [ $PDF = '1' ]; then make latex; fi
 
 notifications:
-email: false
+  email: false
