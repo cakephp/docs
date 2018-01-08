@@ -38,9 +38,9 @@ the client and its request.
 
 .. php:method:: accepts($type = null)
 
-    $type can be a string, or an array, or null. If a string, accepts
+    $type can be a string, or an array, or null. If a string, ``accepts()``
     will return ``true`` if the client accepts the content type. If an
-    array is specified, accepts return ``true`` if any one of the content
+    array is specified, ``accepts()`` return ``true`` if any one of the content
     types is accepted by the client. If null returns an array of the
     content-types that the client accepts. For example::
 
