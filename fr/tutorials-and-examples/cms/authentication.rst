@@ -288,12 +288,6 @@ l'action par ceci::
             }
             $this->Flash->error(__('Impossible de mettre à jour l\'article.'));
         }
-
-        // Récupère une liste des tags.
-        $tags = $this->Articles->Tags->find('list');
-
-        // Donne article & tags au context de la view
-        $this->set('tags', $tags);
         $this->set('article', $article);
     }
 
