@@ -35,21 +35,23 @@ CakePHP ссылается на эти сообщения как «флэш-со
     $this->Flash->set('Это текст сообщения');
 
 .. versionadded:: 3.1
+
     Флэш-сообщения теперь складываются в стопку. Последовательные вызовы
     ``set()`` или ``__call()`` с тем же ключом будут добавлять сообщения
     в ``$_SESSION``. Если вы хотите сохранить прежнее поведение (одно
     сообщение даже после последовательных вызовов), установите параметр
     ``clear`` в ``true`` при настройке Компонента.
 
-FlashComponent's ``__call()`` and ``set()`` methods optionally take a second
-parameter, an array of options:
+Методы ``__call()`` и ``set()`` компонента ``FlashComponent`` опционально
+могут принимать второй параметр - массив опций:
 
-* ``key`` Defaults to 'flash'. The array key found under the ``Flash`` key in
-  the session.
-* ``element`` Defaults to ``null``, but will automatically be set when using the
-  ``__call()`` magic method. The element name to use for rendering.
-* ``params`` An optional array of keys/values to make available as variables
-  within an element.
+* ``key`` По умолчанию 'flash'. Ключ массива, который можно найти в ключе
+  ``Flash`` в сессии.
+* ``element`` По умолчанию ``null``, но будет автоматически назначен при
+  использовании магического метода ``__call()``. Передает имя элемента для
+  вывода.
+* ``params`` Опциональный массив ключей/значений для задания переменных,
+  к которым можно обращаться из элемента.
 
 .. versionadded:: 3.1
 
