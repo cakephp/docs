@@ -17,33 +17,29 @@ CakePHP ссылается на эти сообщения как «флэш-со
 ``FlashComponent`` предоставляет два способа установки флеш-сообщений: его
 магический метод ``__call()`` и его метод ``set()``. Чтобы предотвратить
 многословность в приложении, магический метод ``__call()`` компонента
-``FlashComponent`` позволяет использовать имя метода, которое сопоставляется с элементом,
-расположенным в каталоге **src/Template/Element/Flash**.
+``FlashComponent`` позволяет использовать имя метода, которое сопоставляется
+с элементом, расположенным в каталоге **src/Template/Element/Flash**.
+В соответствии соглашениями, имена методов в верблюжьем регистре будут
+соотносится с именем элемента, написанном в нижнем регистре с разделением слов
+с помощью знака подчеркивания::
 
-FlashComponent provides two ways to set flash messages: its ``__call()`` magic
-method and its ``set()`` method.  To furnish your application with verbosity,
-FlashComponent's ``__call()`` magic method allows you use a method name that
-maps to an element located under the **src/Template/Element/Flash** directory.
-By convention, camelcased methods will map to the lowercased and underscored
-element name::
-
-    // Uses src/Template/Element/Flash/success.ctp
+    // Использует src/Template/Element/Flash/success.ctp
     $this->Flash->success('This was successful');
 
-    // Uses src/Template/Element/Flash/great_success.ctp
+    // Использует src/Template/Element/Flash/great_success.ctp
     $this->Flash->greatSuccess('This was greatly successful');
 
-Alternatively, to set a plain-text message without rendering an element, you can
-use the ``set()`` method::
+В качестве альтернативы вы можете задавать текстовое сообщение без использования
+заготовленного элемента вида, используя метод ``set()``::
 
-    $this->Flash->set('This is a message');
+    $this->Flash->set('Это текст сообщения');
 
 .. versionadded:: 3.1
-
-    Flash messages now stack. Successive calls to ``set()`` or ``__call()`` with
-    the same key will append the messages in the ``$_SESSION``. If you want to
-    keep the old behavior (one message even after consecutive calls), set the
-    ``clear`` parameter to ``true`` when configuring the Component.
+    Флэш-сообщения теперь складываются в стопку. Последовательные вызовы
+    ``set()`` или ``__call()`` с тем же ключом будут добавлять сообщения
+    в ``$_SESSION``. Если вы хотите сохранить прежнее поведение (одно
+    сообщение даже после последовательных вызовов), установите параметр
+    ``clear`` в ``true`` при настройке Компонента.
 
 FlashComponent's ``__call()`` and ``set()`` methods optionally take a second
 parameter, an array of options:
