@@ -269,12 +269,6 @@ add アクションを次のように置き換えます。 ::
             }
             $this->Flash->error(__('Unable to update your article.'));
         }
-
-        // タグのリストを取得
-        $tags = $this->Articles->Tags->find('list');
-
-        // ビューコンテキストに article と tags をセット
-        $this->set('tags', $tags);
         $this->set('article', $article);
     }
 
