@@ -55,13 +55,14 @@ CakePHP ссылается на эти сообщения как «флэш-со
 
 .. versionadded:: 3.1
 
-    A new key ``clear`` was added. This key expects a ``bool`` and allows you
-    to delete all messages in the current stack and start a new one.
+    Добавлен новый ключ ``clear``. Этот ключ ожидает булево значение и
+    позволяет вам удалить все сообщения в текущей стопке, начав тем
+    самым новую.
 
-An example of using these options::
+Пример использования эти опций::
 
-    // In your Controller
-    $this->Flash->success('The user has been saved', [
+    // В вашем Контроллере
+    $this->Flash->success('Пользователь сохранен', [
         'key' => 'positive',
         'params' => [
             'name' => $user->name,
@@ -69,45 +70,51 @@ An example of using these options::
         ]
     ]);
 
-    // In your View
+    // В вашем Виде
     <?= $this->Flash->render('positive') ?>
 
-    <!-- In src/Template/Element/Flash/success.ctp -->
+    <!-- В src/Template/Element/Flash/success.ctp -->
     <div id="flash-<?= h($key) ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>
 
-Note that the parameter ``element`` will be always overridden while using
-``__call()``. In order to retrieve a specific element from a plugin, you should
-set the ``plugin`` parameter. For example::
+Обратите внимание, что параметр ``element`` будет всегда переопределен при
+использовании метода ``__call()``. Чтобы получить определенный элемент из плагина,
+вы должны установить значение параметра ``plugin``. Например::
 
-    // In your Controller
-    $this->Flash->warning('My message', ['plugin' => 'PluginName']);
+    // В вашем Контроллере
+    $this->Flash->warning('Мое сообщение', ['plugin' => 'ИмяПлагина']);
 
-The code above will use the **warning.ctp** element under
-**plugins/PluginName/src/Template/Element/Flash** for rendering the flash
-message.
+Приведенный выше код будет использовать элемент **warning.ctp** находящийся в
+**plugins/PluginName/src/Template/Element/Flash** для вывода флэш-сообщения.
 
 .. note::
 
+    По умолчанию CakePHP экранирует содержимое флэш-сообщений для предотвращения
+    межсайтового скриптинга. Пользовательские данные в ваших флэш-сообщениях
+    будут представлены в виде HTML-сущностей и будут  безопасны для печати.
+    Если вы хотите включить HTML-разметку в ваше флэш-соощение, вам нужно
+    передать параметр ``escape`` и настроить шаблоны флэш-сообщений, чтобы
+    отключить экранирование при передаче значения данной опции.
+    
     By default, CakePHP escapes the content in flash messages to prevent cross
     site scripting. User data in your flash messages will be HTML encoded and
     safe to be printed. If you want to include HTML in your flash messages, you
     need to pass the ``escape`` option and adjust your flash message templates
     to allow disabling escaping when the escape option is passed.
 
-HTML in Flash Messages
-======================
+HTML во флэш-сообщениях
+=======================
 
 .. versionadded:: 3.3.3
 
-It is possible to output HTML in flash messages by using the ``'escape'`` option
-key::
+Возможен вывод HTML во флэш-сообщениях с помощью опции ``'escape'``::
 
     $this->Flash->info(sprintf('<b>%s</b> %s', h($highlight), h($message)), ['escape' => false]);
 
-Make sure that you escape the input manually, then. In the above example
-``$highlight`` and ``$message`` are non-HTML input and therefore escaped.
+Убедитесь в том, что вы вручную экранируете ввод в подобном случае. В примере
+выше ``$highlight`` и ``$message`` не являются HTML-разметкой и благодаря
+этому экранируются.
 
-For more information about rendering your flash messages, please refer to the
-:doc:`FlashHelper </views/helpers/flash>` section.
+Для более подробной информации о выводе ваших флэш-сообщений, пожалуйста
+просмотрите раздел :doc:`FlashHelper </views/helpers/flash>`.
