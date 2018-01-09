@@ -91,9 +91,9 @@ JavaScript-бибилиотеками. При использовании в со
 
 .. php:method:: isMobile()
 
-    Returns ``true`` if user agent string matches a mobile web browser, or
-    if the client accepts WAP content. The supported Mobile User Agent
-    strings are:
+    Возвращает ``true``, если строка user agent совпадает с мобильным
+    веб-браузером или если клиент принимает WAP-контент. Поддерживаемые
+    строки мобильных User Agent:
 
     -  Android
     -  AvantGo
