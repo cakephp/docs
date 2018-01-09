@@ -124,27 +124,28 @@ JavaScript-бибилиотеками. При использовании в со
 
 .. php:method:: isWap()
 
-    Returns ``true`` if the client accepts WAP content.
+    Возвращает ``true`` если клиент принимает WAP-контент.
 
-All of the above request detection methods can be used in a similar
-fashion to filter functionality intended for specific content
-types. For example when responding to AJAX requests, you often will
-want to disable browser caching, and change the debug level.
-However, you want to allow caching for non-AJAX requests. The
-following would accomplish that::
+Все описанные выше методы распознавания запроса могут быть
+использованы аналогичным образом для фильтрации функциональных
+возможностей, предназначенных для конкретных типов содержимого.
+Например, при ответе на AJAX-запросы у вас часто будет возникать
+желание отключить кеширование браузера и изменить уровень отладки.
+В то же время, для запросов, отличных от AJAX, вы вероятно
+захотите разрешить кэширование. Выполнить это можно так::
 
         if ($this->request->is('ajax')) {
             $this->response->disableCache();
         }
-        // Continue Controller action
+        // Остальной код экшена Контроллера
 
 Автоматическое декодирование данных запроса
 ===========================================
 
-Add a request data decoder. The handler should contain a callback, and any
-additional arguments for the callback. The callback should return
-an array of data contained in the request input. For example adding a CSV
-handler could look like::
+Добавьте декодер данных запроса. Обработчик должен содержать метод
+обратного вызова и любые дополнительные аргументы для него. Метод
+обратного вызова должен возвращать массив данных, содержащихся в запросе.
+Например, добавление обработчика CSV может выглядеть так::
 
     class ArticlesController extends AppController
     {
