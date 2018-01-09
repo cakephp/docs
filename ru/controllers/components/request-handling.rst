@@ -167,24 +167,27 @@ JavaScript-бибилиотеками. При использовании в со
         }
     }
 
-You can use any `callable <http://php.net/callback>`_ for the handling function.
-You can also pass additional arguments to the callback, this is useful for
-callbacks like ``json_decode``::
+Вы можете использовать любой `callable <http://php.net/callback>`_ для функции
+обработки. Вы также можете передать дополнительные аргументы для функции
+обратного вызова, это полезно для таких функций, как ``json_decode``::
 
     $this->RequestHandler->addInputType('json', ['json_decode', true]);
 
-    // After 3.1.0 you should use
+    // После версии 3.1.0 вы должны использовать
     $this->RequestHandler->config('inputTypeMap.json', ['json_decode', true]);
 
-The above will make ``$this->request->getData()`` an array of the JSON input data,
-without the additional ``true`` you'd get a set of ``stdClass`` objects.
+Приведенный выше пример сделает результатом ``$this->request->getData()`` массив
+из входящих JSON-данных, без указания дополнительного ``true``, вы бы получили
+набор объектов класса ``stdClass``.
 
 .. deprecated:: 3.1.0
-    As of 3.1.0 the ``addInputType()`` method is deprecated. You should use
-    ``config()`` to add input types at runtime.
+    
+    С версии 3.1.0 метод ``addInputType()`` является устаревшим. Вы должны
+    использовать метод ``config()`` для добавления типов ввода во время
+    выполнения.
 
-Checking Content-Type Preferences
-=================================
+Проверка предпочтений типов содержимого
+=======================================
 
 .. php:method:: prefers($type = null)
 
