@@ -28,57 +28,6 @@ These 3 commands will generate:
 Bake will also use the CakePHP conventions to infer the associations, and
 validation your models have.
 
-Adding Password Hashing
------------------------
-
-If you were to create/update a user at this point in time, you might notice that
-the passwords are stored in plain text. This is really bad from a security point
-of view, so lets fix that.
-
-This is also a good time to talk about the model layer in CakePHP. In CakePHP,
-we separate the methods that operate on a collection of objects, and a single
-object into different classes. Methods that operate on the collection of
-entities are put in the ``Table`` class, while features belonging to a single
-record are put on the ``Entity`` class.
-
-For example, password hashing is done on the individual record, so we'll
-implement this behavior on the entity object. Because we want to hash the
-password each time it is set, we'll use a mutator/setter method. CakePHP will
-call convention based setter methods any time a property is set in one of your
-entities. Let's add a setter for the password. In **src/Model/Entity/User.php**
-add the following::
-
-    <?php
-    namespace App\Model\Entity;
-
-    use Cake\Auth\DefaultPasswordHasher; // Add this line
-    use Cake\ORM\Entity;
-
-    class User extends Entity
-    {
-
-        // Code from bake.
-
-        // Add this method
-        protected function _setPassword($value)
-        {
-            if (strlen($value)) {
-                $hasher = new DefaultPasswordHasher();
-
-                return $hasher->hash($value);
-            }
-        }
-    }
-
-Now, point your browser to **http://localhost:8765/users** to see a list of users.
-You can edit the default user that was created during
-:doc:`Installation <installation>`. If you change that user's password,
-you should see a hashed password instead of the original value on the list or
-view pages. CakePHP hashes passwords with `bcrypt
-<http://codahale.com/how-to-safely-store-a-password/>`_ by default. You can also
-use SHA-1 or MD5 if you're working with an existing database, but we recommend
-bcrypt for all new applications.
-
 Adding Tagging to Articles
 ==========================
 
