@@ -351,7 +351,7 @@ CakePHP のライブラリーを使用してランダムにこれらの API ト�
                 $hasher = new DefaultPasswordHasher();
 
                 // API の 'トークン' を生成
-                $entity->api_key_plain = sha1(Text::uuid());
+                $entity->api_key_plain = Security::hash(Security::randomBytes(32), 'sha256', false);
 
                 // ログインの際に BasicAuthenticate がチェックする
                 // トークンを Bcrypt で暗号化
