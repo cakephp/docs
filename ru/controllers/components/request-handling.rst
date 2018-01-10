@@ -1,19 +1,300 @@
-Request Handling
-################
+Обработка запроса
+#################
 
 .. php:class:: RequestHandlerComponent(ComponentCollection $collection, array $config = [])
 
-.. note::
-    The documentation is not currently supported in Russian language for this
-    page.
+Компонент обработчика запросов используется в CakePHP для получения
+дополнительной информации о HTTP-запросах, которые были сделаны в вашем
+приложении. Вы можете использовать его, чтобы увидеть, какие типы контента
+предпочитают клиенты, осуществлять автоматический парсинг входных данных
+запроса, определять способов отображения типов контента для классов вида
+или путей шаблонов.
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+По умолчанию ``RequestHandler`` будет автоматически определять AJAX-запросы,
+основываясь на HTTP-заголовке ``X-Requested-With``, используемый многими
+JavaScript-бибилиотеками. При использовании в сочетании с 
+:php:meth:`Cake\\Routing\\Router::extensions()`, ``RequestHandler`` будет
+автоматически переключать макеты и шаблоны на те, которые соответствуют типам
+файлов, отличным от HTML. Кроме того, если существует хелпер с тем же именем,
+что и запрашиваемое расширение, он будет добавлен в массив хелперов контроллера.
+Наконец, если XML/JSON-данные переданы методом POST вашим Контроллерам, они
+будут разобраны в массив, который присвоится методу
+``$this->request->getData()``, и к нему можно будет получить доступ, как и к
+стандартным POST-данным. Для того, чтобы сделать возможным использование
+компонента ``RequestHandler``, вы должны добавить его в ваш метод
+``initialize()``::
 
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+    class WidgetsController extends AppController
+    {
+        public function initialize()
+        {
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
+        }
+
+        // Остальное содержимое контроллера
+    }
+
+Получение информации о запросе
+==============================
+
+Обработчик запросов имеет несколько методов, предоставляющих информацию
+о клиенте и его запросе.
+
+.. php:method:: accepts($type = null)
+
+    ``$type`` может быть строкой, либо массивом, либо ``null``. Если
+    будет строка, ``accepts()`` вернет ``true``, если клиент примет
+    тип содержимого. Если указан массив, ``accepts()`` вернет
+    ``true``, если один любой из типов содержимого будет принят
+    клиентом. Если будет ``null``, будет возвращен массив типов
+    содержимого, принимаемых клиентом. Например::
+
+        class ArticlesController extends AppController
+        {
+
+            public function initialize()
+            {
+                parent::initialize();
+                $this->loadComponent('RequestHandler');
+            }
+
+            public function beforeFilter(Event $event)
+            {
+                if ($this->RequestHandler->accepts('html')) {
+                    // Выполнить код только если клиент принимает HTML (text/html)
+                    // в качестве ответа.
+                } elseif ($this->RequestHandler->accepts('xml')) {
+                    // Выполняет только XML-код
+                }
+                if ($this->RequestHandler->accepts(['xml', 'rss', 'atom'])) {
+                    // Выполнить код, если клиент принимает любой из типов: XML, RSS
+                    // или Atom.
+                }
+            }
+        }
+
+Другие методы определения 'типа' запроса включают в том числе:
+
+.. php:method:: isXml()
+
+    Возвращает ``true`` если текущий запрос принимает XML в качестве ответа.
+
+.. php:method:: isRss()
+
+    Возвращает ``true`` если текущий запрос принимает RSS в качестве ответа.
+
+.. php:method:: isAtom()
+
+    Возвращает ``true`` если текущий запрос принимает Atom в качестве ответа,
+    в противном случае возвращает ``false``.
+
+.. php:method:: isMobile()
+
+    Возвращает ``true``, если строка user agent совпадает с мобильным
+    веб-браузером или если клиент принимает WAP-контент. Поддерживаемые
+    строки мобильных User Agent:
+
+    -  Android
+    -  AvantGo
+    -  BlackBerry
+    -  DoCoMo
+    -  Fennec
+    -  iPad
+    -  iPhone
+    -  iPod
+    -  J2ME
+    -  MIDP
+    -  NetFront
+    -  Nokia
+    -  Opera Mini
+    -  Opera Mobi
+    -  PalmOS
+    -  PalmSource
+    -  portalmmm
+    -  Plucker
+    -  ReqwirelessWeb
+    -  SonyEricsson
+    -  Symbian
+    -  UP.Browser
+    -  webOS
+    -  Windows CE
+    -  Windows Phone OS
+    -  Xiino
+
+.. php:method:: isWap()
+
+    Возвращает ``true`` если клиент принимает WAP-контент.
+
+Все описанные выше методы распознавания запроса могут быть
+использованы аналогичным образом для фильтрации функциональных
+возможностей, предназначенных для конкретных типов содержимого.
+Например, при ответе на AJAX-запросы у вас часто будет возникать
+желание отключить кеширование браузера и изменить уровень отладки.
+В то же время, для запросов, отличных от AJAX, вы вероятно
+захотите разрешить кэширование. Выполнить это можно так::
+
+        if ($this->request->is('ajax')) {
+            $this->response->disableCache();
+        }
+        // Остальной код экшена Контроллера
+
+Автоматическое декодирование данных запроса
+===========================================
+
+Добавьте декодер данных запроса. Обработчик должен содержать метод
+обратного вызова и любые дополнительные аргументы для него. Метод
+обратного вызова должен возвращать массив данных, содержащихся в запросе.
+Например, добавление обработчика CSV может выглядеть так::
+
+    class ArticlesController extends AppController
+    {
+        public function initialize()
+        {
+            parent::initialize();
+            $parser = function ($data) {
+                $rows = str_getcsv($data, "\n");
+                foreach ($rows as &$row) {
+                    $row = str_getcsv($row, ',');
+                }
+                return $rows;
+            };
+            $this->loadComponent('RequestHandler', [
+                'inputTypeMap' => [
+                    'csv' => [$parser]
+                ]
+            ]);
+        }
+    }
+
+Вы можете использовать любой `callable <http://php.net/callback>`_ для функции
+обработки. Вы также можете передать дополнительные аргументы для функции
+обратного вызова, это полезно для таких функций, как ``json_decode``::
+
+    $this->RequestHandler->addInputType('json', ['json_decode', true]);
+
+    // После версии 3.1.0 вы должны использовать
+    $this->RequestHandler->config('inputTypeMap.json', ['json_decode', true]);
+
+Приведенный выше пример сделает результатом ``$this->request->getData()`` массив
+из входящих JSON-данных, без указания дополнительного ``true``, вы бы получили
+набор объектов класса ``stdClass``.
+
+.. deprecated:: 3.1.0
+    
+    С версии 3.1.0 метод ``addInputType()`` является устаревшим. Вы должны
+    использовать метод ``config()`` для добавления типов ввода во время
+    выполнения.
+
+Проверка предпочтений типов содержимого
+=======================================
+
+.. php:method:: prefers($type = null)
+
+Определяет, какие типы контента предпочитает клиент. Если параметр
+не задан, возвращается наиболее вероятный тип содержимого. Если
+``$type`` - массив, возвращается первый тип, который принимает
+клиент. Предпочтение определяется главным образом расширением файла,
+проанализированным Маршрутизатором, если оно было предоставлено, а
+во-вторых, списком типов контента в ``HTTP_ACCEPT``::
+
+    $this->RequestHandler->prefers('json');
+
+Ответ на запросы
+================
+
+.. php:method:: renderAs($controller, $type)
+
+Изменяет режим рендеринга контроллера на указанный тип. Также добавит
+соответствующий хелпер к массиву хелперов контроллера, если он доступен,
+но еще отсутствует в массиве::
+
+    // Принудительная обработка ответа контроллером в виде xml.
+    $this->RequestHandler->renderAs($this, 'xml');
+
+Этот метод также попытается добавить хелпер, который соответствует вашему
+текущему типу содержимого. Например, если вы выставляете значение ``rss``,
+будет добавлен ``RssHelper``.
+
+.. php:method:: respondAs($type, $options)
+
+Устанавливает заголовок ответа на основе сопоставления имен типа контента.
+Этот метод позволяет сразу установить несколько свойств ответа ::
+
+Sets the response header based on content-type map names. This method lets you
+set a number of response properties at once::
+
+    $this->RequestHandler->respondAs('xml', [
+        // Forse download
+        'attachment' => true,
+        'charset' => 'UTF-8'
+    ]);
+
+.. php:method:: responseType()
+
+Возвращает заголовок Content-type текущего типа ответа, либо ``null``, если еще
+ни один не был установлен.
+
+Использование преимуществ валидации кэша HTTP
+=============================================
+
+Модель валидации кэша HTTP является одним из процессов, используемых для
+шлюзов кэша, также известных как обратные прокси, для определения того, могут
+ли они подавать сохраненную копию ответа клиенту. В соответствии с этой моделью
+вы в основном сохраняете пропускную способность, но при правильном использовании
+вы также можете сэкономить некоторый объем процессорной обработки, что сократит
+время отклика.
+
+Включение компонента ``RequestHandlerComponent`` в вашем контроллере
+автоматически активирует проверку, выполняемую перед визуализацией вида. Эта
+проверка сравнивает объект ответа с исходным запросом, чтобы определить, не
+изменился ли ответ с момента последнего запроса клиента.
+
+Если ответ оценивается как неизмененный, то процесс рендеринга вида
+прекращается, экономя время обработки и полосу пропускания, а содержимое не
+возвращается клиенту. Код состояния ответа затем устанавливается на
+``304 Not Modified``.
+
+Вы можете отказаться от этой автоматической проверки, установив параметр
+``checkHttpCache`` в ``false``::
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('RequestHandler', [
+            'checkHttpCache' => false
+        ]);
+    }
+
+Использование кастомных ViewClass'ов
+====================================
+
+При использовании JsonView/XmlView вы возможно захотите переопределить
+сериализацию, используемую по умолчанию, с пользовательским классом Вида, либо
+добавить классы Вида для других типов.
+
+Вы можете сопоставить существующие и новые типы с вашими пользовательскими
+классами. Вы также можете автоматизировать процесс сопоставления с помощью
+параметра ``viewClassMap``::
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('RequestHandler', [
+            'viewClassMap' => [
+                'json' => 'ApiKit.MyJson',
+                'xml' => 'ApiKit.MyXml',
+                'csv' => 'ApiKit.Csv'
+            ]
+        ]);
+    }
+
+.. deprecated:: 3.1.0
+    
+    С версии 3.1.0 метод ``viewClassMap()`` является устаревшим. Вместо этого
+    вы должны использовать метод ``config()`` для изменения ``viewClassMap``
+    во время работы приложения.
 
 .. meta::
-    :title lang=ru: Request Handling
-    :keywords lang=ru: handler component,javascript libraries,public components,null returns,model data,request data,content types,file extensions,ajax,meth,content type,array,conjunction,cakephp,insight,php
+    :title lang=ru: Обработка запроса
+    :keywords lang=ru: handler component,библиотеки javascript,public components,null returns,model data,данные запроса,content types,расширения файлов,ajax,meth,тип содержимого,массив,conjunction,cakephp,insight,php
