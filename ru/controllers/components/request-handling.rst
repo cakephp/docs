@@ -269,11 +269,13 @@ set a number of response properties at once::
 Использование кастомных ViewClass'ов
 ====================================
 
-When using JsonView/XmlView you might want to override the default serialization
-with a custom View class, or add View classes for other types.
+При использовании JsonView/XmlView вы возможно захотите переопределить
+сериализацию, используемую по умолчанию, с пользовательским классом Вида, либо
+добавить классы Вида для других типов.
 
-You can map existing and new types to your custom classes. You can also set this
-automatically by using the ``viewClassMap`` setting::
+Вы можете сопоставить существующие и новые типы с вашими пользовательскими
+классами. Вы также можете автоматизировать процесс сопоставления с помощью
+параметра ``viewClassMap``::
 
     public function initialize()
     {
@@ -288,8 +290,10 @@ automatically by using the ``viewClassMap`` setting::
     }
 
 .. deprecated:: 3.1.0
-    As of 3.1.0 the ``viewClassMap()`` method is deprecated. You should use
-    ``config()`` to change the viewClassMap at runtime.
+    
+    С версии 3.1.0 метод ``viewClassMap()`` является устаревшим. Вместо этого
+    вы должны использовать метод ``config()`` для изменения ``viewClassMap``
+    во время работы приложения.
 
 .. meta::
     :title lang=ru: Обработка запроса
