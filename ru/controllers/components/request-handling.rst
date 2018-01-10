@@ -191,12 +191,12 @@ JavaScript-бибилиотеками. При использовании в со
 
 .. php:method:: prefers($type = null)
 
-Determines which content-types the client prefers. If no parameter
-is given the most likely content type is returned. If $type is an
-array the first type the client accepts will be returned.
-Preference is determined primarily by the file extension parsed by
-Router if one has been provided, and secondly by the list of
-content-types in ``HTTP_ACCEPT``::
+Определяет, какие типы контента предпочитает клиент. Если параметр
+не задан, возвращается наиболее вероятный тип содержимого. Если
+``$type`` - массив, возвращается первый тип, который принимает
+клиент. Предпочтение определяется главным образом расширением файла,
+проанализированным Маршрутизатором, если оно было предоставлено, а
+во-вторых, списком типов контента в ``HTTP_ACCEPT``::
 
     $this->RequestHandler->prefers('json');
 
@@ -205,52 +205,58 @@ content-types in ``HTTP_ACCEPT``::
 
 .. php:method:: renderAs($controller, $type)
 
-Change the render mode of a controller to the specified type. Will
-also append the appropriate helper to the controller's helper array
-if available and not already in the array::
+Изменяет режим рендеринга контроллера на указанный тип. Также добавит
+соответствующий хелпер к массиву хелперов контроллера, если он доступен,
+но еще отсутствует в массиве::
 
-    // Force the controller to render an xml response.
+    // Принудительная обработка ответа контроллером в виде xml.
     $this->RequestHandler->renderAs($this, 'xml');
 
-This method will also attempt to add a helper that matches your current content
-type. For example if you render as ``rss``, the ``RssHelper`` will be added.
+Этот метод также попытается добавить хелпер, который соответствует вашему
+текущему типу содержимого. Например, если вы выставляете значение ``rss``,
+будет добавлен ``RssHelper``.
 
 .. php:method:: respondAs($type, $options)
+
+Устанавливает заголовок ответа на основе сопоставления имен типа контента.
+Этот метод позволяет сразу установить несколько свойств ответа ::
 
 Sets the response header based on content-type map names. This method lets you
 set a number of response properties at once::
 
     $this->RequestHandler->respondAs('xml', [
-        // Force download
+        // Forse download
         'attachment' => true,
         'charset' => 'UTF-8'
     ]);
 
 .. php:method:: responseType()
 
-Returns the current response type Content-type header or null if one has yet to
-be set.
+Возвращает заголовок Content-type текущего типа ответа, либо ``null``, если еще
+ни один не был установлен.
 
-Taking Advantage of HTTP Cache Validation
-=========================================
+Использование преимуществ валидации кэша HTTP
+=============================================
 
-The HTTP cache validation model is one of the processes used for cache
-gateways, also known as reverse proxies, to determine if they can serve a
-stored copy of a response to the client. Under this model, you mostly save
-bandwidth, but when used correctly you can also save some CPU processing,
-reducing this way response times.
+Модель валидации кэша HTTP является одним из процессов, используемых для
+шлюзов кэша, также известных как обратные прокси, для определения того, могут
+ли они подавать сохраненную копию ответа клиенту. В соответствии с этой моделью
+вы в основном сохраняете пропускную способность, но при правильном использовании
+вы также можете сэкономить некоторый объем процессорной обработки, что сократит
+время отклика.
 
-Enabling the RequestHandlerComponent in your controller automatically activates
-a check done before rendering the view. This check compares the response object
-against the original request to determine whether the response was not modified
-since the last time the client asked for it.
+Включение компонента ``RequestHandlerComponent`` в вашем контроллере
+автоматически активирует проверку, выполняемую перед визуализацией вида. Эта
+проверка сравнивает объект ответа с исходным запросом, чтобы определить, не
+изменился ли ответ с момента последнего запроса клиента.
 
-If response is evaluated as not modified, then the view rendering process is
-stopped, saving processing time, saving bandwidth and no content is returned to
-the client. The response status code is then set to ``304 Not Modified``.
+Если ответ оценивается как неизмененный, то процесс рендеринга вида
+прекращается, экономя время обработки и полосу пропускания, а содержимое не
+возвращается клиенту. Код состояния ответа затем устанавливается на
+``304 Not Modified``.
 
-You can opt-out this automatic checking by setting the ``checkHttpCache``
-setting to ``false``::
+Вы можете отказаться от этой автоматической проверки, установив параметр
+``checkHttpCache`` в ``false``::
 
     public function initialize()
     {
@@ -260,8 +266,8 @@ setting to ``false``::
         ]);
     }
 
-Using Custom ViewClasses
-========================
+Использование кастомных ViewClass'ов
+====================================
 
 When using JsonView/XmlView you might want to override the default serialization
 with a custom View class, or add View classes for other types.
@@ -287,4 +293,4 @@ automatically by using the ``viewClassMap`` setting::
 
 .. meta::
     :title lang=ru: Обработка запроса
-    :keywords lang=ru: handler component,библиотеки javascript,public components,null returns,model data,данные запроса,content types,расширения файлов,ajax,meth,content type,массив,conjunction,cakephp,insight,php
+    :keywords lang=ru: handler component,библиотеки javascript,public components,null returns,model data,данные запроса,content types,расширения файлов,ajax,meth,тип содержимого,массив,conjunction,cakephp,insight,php
