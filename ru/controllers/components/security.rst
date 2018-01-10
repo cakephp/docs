@@ -29,6 +29,17 @@
 
 .. note::
 
+    При использовании компонента ``Security`` вы **должны** использовать
+    FormHelper для создания ваших форм. Кроме того, вы **не** должны
+    переопределять любые атрибуты "name" полей формы. Компонент ``Security``
+    ищет определенные индикаторы, которые создаются и управляются ``FormHelper``
+    (особенно те, которые создаются в
+    :php:meth:`~Cake\\View\\Helper\\FormHelper::create()` и
+    :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`). Динамическое изменение
+    полей, отправленных в запросе POST (например, отключение, удаление или
+    создание новых полей через JavaScript), скорее всего, приведет к отправке
+    запроса на обратный вызов черной дыры.
+    
     When using the Security Component you **must** use the FormHelper to create
     your forms. In addition, you must **not** override any of the fields' "name"
     attributes. The Security Component looks for certain indicators that are
@@ -258,4 +269,4 @@ This example would disable all security checks for the edit action.
 
 .. meta::
     :title lang=ru: Безопасность
-    :keywords lang=ru: configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class,disable security,unlockActions
+    :keywords lang=ru: configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,ошибка 404,период неактивности,csrf,массив,submission,security class,disable security,unlockActions
