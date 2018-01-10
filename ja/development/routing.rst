@@ -436,7 +436,7 @@ admin ルーティングのように、すべてのプレフィックス付き�
 
 拡張子が :php:class:`RequestHandlerComponent` で使われ、それによって
 コンテンツタイプに合わせた自動的な振り分けがされます。
-RequestHandlerComponent に詳細がありｍす。
+RequestHandlerComponent に詳細があります。
 
 .. _route-conditions:
 
