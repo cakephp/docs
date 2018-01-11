@@ -72,28 +72,28 @@
 .. note::
 
     Используйте метод ``$this->Security->config()`` для версий CakePHP
-    ниже 3.4
+    ниже 3.4.
 
-The ``$type`` parameter can have the following values:
+Параметр ``$type`` может иметь следующие значения:
 
-* 'auth' Indicates a form validation error, or a controller/action mismatch
-  error.
-* 'secure' Indicates an SSL method restriction failure.
+* 'auth' Указывает на ошибку валидации формы, или на несоответствие
+  контроллера/экшена.
+* 'secure' Указывает на сбой SSL-ограничения метода.
 
 .. versionadded:: cakephp/cakephp 3.2.6
 
-    As of v3.2.6 an additional parameter is included in the blackHole callback,
-    an instance of the ``Cake\Controller\Exception\SecurityException`` is
-    included as a second parameter.
+    C версии 3.2.6 к коллбэку ``blackHole`` добавлен дополнительный параметр.
+    В качестве второго параметра передается экземпляр класса
+    ``Cake\Controller\Exception\SecurityException``.
 
-Restrict Actions to SSL
-=======================
+Доступ к экшенам через SSL
+==========================
 
 .. php:method:: requireSecure()
 
-    Sets the actions that require a SSL-secured request. Takes any
-    number of arguments. Can be called with no arguments to force all
-    actions to require a SSL-secured.
+    Устанавливает экшены, требующие запроса, защищенного SSL.
+    Принимает любое количество аргументов. Может вызываться без
+    аргументов, чтобы заставить все экшены требовать SSL-защиты.
 
 .. php:method:: requireAuth()
 
@@ -101,24 +101,24 @@ Restrict Actions to SSL
     token. Takes any number of arguments. Can be called with no
     arguments to force all actions to require a valid authentication.
 
-Restricting Cross Controller Communication
-==========================================
+Ограничение межконтроллерных взаимодействий
+===========================================
 
 allowedControllers
-    A list of controllers which can send requests
-    to this controller.
-    This can be used to control cross controller requests.
+    Список контроллеров, которые могут отправлять запросы данному
+    контроллеру. Это может быть использовано для контроля
+    межконтроллерных запросов.
 allowedActions
-    A list of actions which are allowed to send requests
-    to this controller's actions.
-    This can be used to control cross controller requests.
+    Список экшенов, которым разрешается отправлять запросы к
+    экшенам данного контроллера. Это также может быть использовано
+    для контроля межконтроллерных запросов.
 
-These configuration options allow you to restrict cross controller
-communication. Set them with the ``setConfig()`` method, or
-``config()`` if you are using a CakePHP version below 3.4.
+Эти параметры конфигурации позволяют вам ограничить коммуникацию
+между контроллерами. Установите их с помощью метода ``setConfig()``,
+либо ``config()`` если вы используете CakePHP версии ниже 3.4.
 
-Form Tampering Prevention
-=========================
+Предотвращение фальсификации форм
+=================================
 
 By default the ``SecurityComponent`` prevents users from tampering with forms in
 specific ways. The ``SecurityComponent`` will prevent the following things:
