@@ -15,14 +15,15 @@ version = '3.next'
 release = '3.6'
 
 # The search index version.
-search_version = '3-0'
+search_version = '3-next'
 
 # The marketing diplay name for the book.
 version_name = 'Red Velvet'
 
 # Other versions that display in the version picker menu.
 version_list = [
-    {'name': '3.x', 'number': '3.0', 'current': True, 'title': '3.x Book'},
+    {'name': '3.next', 'number': '3.next', 'current': True, 'title': '3.next Book'},
+    {'name': '3.x', 'number': '3.0', 'title': '3.x Book'},
     {'name': '2.x', 'number': '2.0', 'title': '2.x Book'},
     {'name': '1.3', 'number': '3.0', 'title': '1.3 Book'},
     {'name': '1.2', 'number': '1.2', 'title': '1.2 Book'},
@@ -34,7 +35,7 @@ languages = ['en', 'pt_BR', 'es', 'ja', 'fr', 'zh', 'tr', 'ru']
 
 # The GitHub branch name for this version of the docs
 # for edit links to point at.
-branch = '3.0'
+branch = '3.next'
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = []
