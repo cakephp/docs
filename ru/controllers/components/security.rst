@@ -38,36 +38,26 @@
     :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`). Динамическое изменение
     полей, отправленных в запросе POST (например, отключение, удаление или
     создание новых полей через JavaScript), скорее всего, приведет к отправке
-    запроса на обратный вызов черной дыры.
+    запроса на blackhole-коллбэк.
     
-    When using the Security Component you **must** use the FormHelper to create
-    your forms. In addition, you must **not** override any of the fields' "name"
-    attributes. The Security Component looks for certain indicators that are
-    created and managed by the FormHelper (especially those created in
-    :php:meth:`~Cake\\View\\Helper\\FormHelper::create()` and
-    :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`).  Dynamically altering
-    the fields that are submitted in a POST request (e.g.  disabling, deleting
-    or creating new fields via JavaScript) is likely to cause the request to be
-    send to the blackhole callback.
+    Вы всегда должны проверять используемый HTTP-метод перед выполнением во
+    избежание возможных побочных эффектов. Вы должны
+    :ref:`проверять HTTP-метод <check-the-request>` либо использовать 
+    :php:meth:`Cake\\Http\\ServerRequest::allowMethod()`, чтобы убедиться в том,
+    что используется правильный HTTP-метод.
 
-    You should always verify the HTTP method being used before executing
-    side-effects. You should :ref:`check the HTTP method <check-the-request>` or
-    use :php:meth:`Cake\\Http\\ServerRequest::allowMethod()` to ensure the correct
-    HTTP method is used.
-
-Handling Blackhole Callbacks
-============================
+Обработка Blackhole-коллбэков
+=============================
 
 .. php:method:: blackHole(object $controller, string $error = '', SecurityException $exception = null)
 
-If an action is restricted by the Security Component it is
-'black-holed' as an invalid request which will result in a 400 error
-by default. You can configure this behavior by setting the
-``blackHoleCallback`` configuration option to a callback function
-in the controller.
+Если запрос ограничен компонентом ``Security``, то он будет поглощен
+('black-holed') как неверный запрос, который будет возвращать ошибку 400 по
+умолчанию. Вы можете настроить это поведение установив в качестве значения
+параметра ``blackHoleCallback`` имя коллбэк-функции в контроллере.
 
-By configuring a callback method you can customize how the blackhole process
-works::
+Вы можете управлять этим процессом поглощения, задав необходимую
+коллбэк-функцию::
 
     public function beforeFilter(Event $event)
     {
@@ -76,10 +66,13 @@ works::
 
     public function blackhole($type)
     {
-        // Handle errors.
+        // Здесь обрабатываются ошибки.
     }
 
-Note: use ``$this->Security->config()`` for CakePHP versions prior to 3.4
+.. note::
+
+    Используйте метод ``$this->Security->config()`` для версий CakePHP
+    ниже 3.4
 
 The ``$type`` parameter can have the following values:
 
