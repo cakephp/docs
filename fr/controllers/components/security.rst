@@ -70,8 +70,10 @@ mise en trou noir (blackhole callback)::
         // Gère les erreurs.
     }
 
-Note : utilisez ``$this->Security->config()`` pour les versions de CakePHP
-inférieures à 3.4.0.
+.. note::
+
+    utilisez ``$this->Security->config()`` pour les versions de CakePHP 
+    inférieures à 3.4.0.
 
 Le  paramètre ``$type`` peut avoir les valeurs suivantes:
 
