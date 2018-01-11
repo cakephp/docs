@@ -203,6 +203,10 @@ Validation
   ``Validation::compareWith()``.
 * ``Validator::notSameAs()`` was added to make it
   easier to check if a field is not the same as another field.
+* New field comparison methods were added. ``equalToField()``,
+  ``notEqualToField()``, ``greaterThanField()``,
+  ``greaterThanOrEqualToField()``, ``lessThanField()``,
+  ``lessThanOrEqualToField()`` were added.
 
 View
 ====
