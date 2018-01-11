@@ -408,7 +408,7 @@ de façon aléatoire ces tokens d'API en utilisant les libraries de CakePHP::
                 $hasher = new DefaultPasswordHasher();
 
                 // Generate an API 'token'
-                $entity->api_key_plain = sha1(Text::uuid());
+                $entity->api_key_plain = Security::hash(Security::randomBytes(32), 'sha256', false);
 
                 // Bcrypt the token so BasicAuthenticate can check
                 // it during login.

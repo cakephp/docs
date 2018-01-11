@@ -5,6 +5,58 @@ Maintenant que nous avons des utilisateurs dans notre CMS, nous devons leur donn
 la possibilité de se connecter et appliquer une gestion basique de contrôle d'accès
 à la création et à la modification d'articles.
 
+Ajout du Hash du Mot de Passe
+-----------------------------
+
+Si vous créez ou mettez à jour un utilisateur, vous remarquerez que les mots de
+passe sont stockés en clair, ce qui est évidemment très mauvais en terme de
+sécurité.
+
+Corriger ce point nous permet de parler un peu plus de la couche model de CakePHP.
+Dans CakePHP, nous séparons les méthodes qui s'occupent des collections d'objets
+et d'un seul objet en différentes classes. Les méthodes qui s'occupent de
+collections d'entity sont dans les classes ``Table`` tandis que les fonctionnalités
+liées à un seul enregistrement sont mises dans les classes ``Entity``.
+
+Par exemple, hasher un mot de passe se fait par enregistrement, c'est pourquoi nous
+allons implémenter ce comportement dans l'objet Entity. Puisque nous voulons hasher
+le mot de passe à chaque fois qu'il est défini, nous allons utiliser une méthode
+mutator / setter. Par convention, CakePHP appellera les méthodes de setter chaque fois
+qu'une propriété se voit définie une valeur dans une entity. Ajoutons un setter pour
+le mot de passe. Dans **src/Model/Entity/User.php**, ajoutez le code suivant::
+
+    <?php
+    namespace App\Model\Entity;
+
+    use Cake\Auth\DefaultPasswordHasher; // Ajouter cette ligne
+    use Cake\ORM\Entity;
+
+    class User extends Entity
+    {
+
+        // Tout le code de bake sera ici.
+
+        // Ajoutez cette méthode
+        protected function _setPassword($value)
+        {
+            if (strlen($value)) {
+                $hasher = new DefaultPasswordHasher();
+
+                return $hasher->hash($value);
+            }
+        }
+    }
+
+Maintenant, rendez-vous sur **http://localhost:8765/users** pour voir une liste
+des utilisateurs existants. Vous pouvez modifier l'utilisateur par défaut qui a été
+créé pendant le chapitre :doc:`Installation <installation>` du tutoriel. Si vous
+changez le mot de passe de l'utilisateur, vous devriez voir une version hashé du
+mot de passe à la place de la valeur par défaut sur l'action index ou view. CakePHP
+hash les mots de passe, par défaut, avec `bcrypt
+<http://codahale.com/how-to-safely-store-a-password/>`_. Vous pouvez aussi utiliser
+SHA-1 ou MD5 si vous travaillez sur une base de données déjà existante mais nous
+vous recommandons d'utiliser bcrypt pour toutes vos nouvelles applications.
+
 Ajouter la Connexion
 ====================
 
@@ -288,12 +340,6 @@ l'action par ceci::
             }
             $this->Flash->error(__('Impossible de mettre à jour l\'article.'));
         }
-
-        // Récupère une liste des tags.
-        $tags = $this->Articles->Tags->find('list');
-
-        // Donne article & tags au context de la view
-        $this->set('tags', $tags);
         $this->set('article', $article);
     }
 

@@ -1,21 +1,146 @@
-Cookie
-######
+Куки
+####
 
 .. php:namespace:: Cake\Controller\Component
 
 .. php:class:: CookieComponent(ComponentRegistry $collection, array $config = [])
 
-.. note::
-    The documentation is not currently supported in Russian language for this
-    page.
+``CookieComponent`` - это оболочка вокруг собственного метода PHP ``setcookie()``.
+Это упрощает манипулирование файлами cookie и автоматически шифрует данные cookie.
+Куки, добавленные через ``CookieComponent``, будут отправляться только в том
+случае, если экшен контроллера завершен.
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+.. deprecated:: 3.5.0
+    Вы должны использовать :ref:`encrypted-cookie-middleware` вместо
+    ``CookieComponent``.
+    
+Настройка куки
+==============
 
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+Файлы cookie можно настроить как глобально, так и для каждого имени верхнего
+уровня. Данные глобальной конфигурации будут объединены с конфигурацией верхнего
+уровня. Поэтому нужно только переопределить те части, которые отличаются друг от
+друга. Чтобы настроить глобальные параметры, используйте метод ``config()``::
+
+    $this->Cookie->config('path', '/');
+    $this->Cookie->config([
+        'expires' => '+10 days',
+        'httpOnly' => true
+    ]);
+
+Для настройки определенного ключа используйте метод ``configKey()``::
+
+    $this->Cookie->configKey('User', 'path', '/');
+    $this->Cookie->configKey('User', [
+        'expires' => '+10 days',
+        'httpOnly' => true
+    ]);
+
+Существует некоторое количество параметров конфигурации для
+файлов куки:
+
+expires
+    Как долго куки должен существовать. По умолчанию 1 месяц.
+path
+    Путь на сервере, по которому куки будет доступен. Если, к примеру,
+    путь задан как '/foo/', то файлы куки будут доступны только внутри
+    каталога ``/foo/`` и всех его подкаталогах, например в папке домена
+    ``/foo/bar/ ``.Значением по умлчанию является базовый путь приложения.
+domain
+    Домен, для которого куки доступны. Чтобы сделать куки доступными на
+    всех поддоменах ``example.com``, установите значение '.example.com'.
+secure
+    Показывает, что куки должны передаваться только по защищенному соединению,
+    через протокол HTTPS. Когда установлено значение ``true``, куки будут
+    созданы только в случае если защищенное соединение существует.
+key
+    Ключ шифрования, используемый в случае если включено шифрование куки.
+    По умолчанию ``Security.salt``.
+httpOnly
+    Установите в ``true``, если хотите сделать куки доступными только по
+    протоколу HTTP. В таком случае куки будут недоступны из JavaScript.
+    По умолчанию ``false``.
+encryption
+    Тип используемого шифрования. Значение по умолчанию 'aes'. Можно также
+    установить 'rijndael' для обратной совместимости.
+    
+Использование компонента
+========================
+
+Компонент ``CookieComponent`` предлагает некоторое количество методов для
+работы с куки-файлами.
+
+.. php:method:: write(mixed $key, mixed $value = null)
+
+    Метод ``write()`` является сердцем компонента куки. ``$key`` - это имя
+    переменной куки, которое вы хотите использовать, а ``$value`` -
+    информация, которая должна быть сохранена::
+
+        $this->Cookie->write('name', 'Larry');
+
+    Вы также можете группировать переменные с помощью точечной нотации в
+    параметре ``key``::
+
+        $this->Cookie->write('User.name', 'Larry');
+        $this->Cookie->write('User.role', 'Lead');
+
+    Если вы хотите записать несколько значений в файл cookie за один раз,
+    вы можете передать массив::
+
+        $this->Cookie->write('User',
+            ['name' => 'Larry', 'role' => 'Lead']
+        );
+
+    Все значения в куки зашифрованы с помощью AES по умолчанию. Если вы хотите
+    хранить значения в виде обычного текста, обязательно оставьте ключ
+    пустым::
+
+        $this->Cookie->configKey('User', 'encryption', false);
+
+.. php:method:: read(mixed $key = null)
+
+    
+    Этот метод используется для чтения значения переменной куки с именем,
+    определенном в параметре ``$key``. ::
+
+        // Выведется "Larry"
+        echo $this->Cookie->read('name');
+
+        // Вы также можете использовать точечную нотацию
+        echo $this->Cookie->read('User.name');
+
+        // Чтобы получить переменные, сгруппированные вами с помощью
+        // точечной нотации в виде массива, используйте следующий формат
+        $this->Cookie->read('User');
+
+        // Это выведет что-то наподобии ['name' => 'Larry', 'role' => 'Lead']
+
+    .. warning::
+        ``CookieComponent`` не может взаимодействовать со строковыми
+        значениями, содержащими ``,``. Компонент попытается интерпретировать
+        эти значения как массивы, что приведет к неправильным результатам.
+        Вместо этого вам лучше воспользоваться методом
+        ``$request->getCookie()``.
+
+.. php:method:: check($key)
+
+    :param string $key: Ключ для проверки.
+
+    Используется для проверки наличия ключа/пути и не равно ли его
+    значение ``null``.
+
+.. php:method:: delete(mixed $key)
+
+    Удаляет куки-переменную с именем ``$key``. Работает с точечной
+    нотацией::
+
+        // Удаление переменной
+        $this->Cookie->delete('bar');
+
+        // Удаляет куки-переменную ``bar``, но не трогает все остальные
+        // значения, принадлежащие ``foo``
+        $this->Cookie->delete('foo.bar');
 
 .. meta::
-    :title lang=ru: Cookie
+    :title lang=ru: Куки
     :keywords lang=ru: array controller,php setcookie,cookie string,controller setup,string domain,default description,string name,session cookie,integers,variables,domain name,null

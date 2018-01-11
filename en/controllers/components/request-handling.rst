@@ -5,7 +5,7 @@ Request Handling
 
 The Request Handler component is used in CakePHP to obtain additional
 information about the HTTP requests that are made to your application. You can
-use it to see what content types clients prefer, automatcally parse request
+use it to see what content types clients prefer, automatically parse request
 input, define how content types map to view classes or template paths.
 
 By default RequestHandler will automatically detect AJAX requests based on the
@@ -38,9 +38,9 @@ the client and its request.
 
 .. php:method:: accepts($type = null)
 
-    $type can be a string, or an array, or null. If a string, accepts
+    $type can be a string, or an array, or null. If a string, ``accepts()``
     will return ``true`` if the client accepts the content type. If an
-    array is specified, accepts return ``true`` if any one of the content
+    array is specified, ``accepts()`` return ``true`` if any one of the content
     types is accepted by the client. If null returns an array of the
     content-types that the client accepts. For example::
 

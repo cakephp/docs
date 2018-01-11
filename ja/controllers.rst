@@ -384,7 +384,7 @@ CakePHP のコントローラーに紐づけることができます。 ::
 `paginate()` のより詳しい使い方は :doc:`ページネーション <controllers/components/pagination>`
 の章を参照してください。
 
-paginate 属性は ``paginate()`` がどうふるまうかを簡単にカスタマイズする方法を提供します。 ::
+``$paginate`` 属性は ``paginate()`` がどうふるまうかを簡単にカスタマイズする方法を提供します。 ::
 
     class ArticlesController extends AppController
     {

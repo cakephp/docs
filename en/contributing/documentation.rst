@@ -137,7 +137,7 @@ Paragraphs
 ----------
 
 Paragraphs are simply blocks of text, with all the lines at the same level of
-indentation. Paragraphs should be separated by more than one empty line.
+indentation. Paragraphs should be separated by one blank line.
 
 Inline Markup
 -------------

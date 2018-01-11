@@ -13,7 +13,7 @@ security in your application. It provides methods for various tasks like:
 
 Like all components it is configured through several configurable parameters.
 All of these properties can be set directly or through setter methods of the
-same name in your controller's beforeFilter.
+same name in your controller's ``beforeFilter()``.
 
 By using the Security Component you automatically get form tampering protection.
 Hidden token fields will automatically be inserted into forms and checked by the

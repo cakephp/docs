@@ -4,6 +4,53 @@ CMS チュートリアル - 認証
 CMS にはユーザーがいますので、ログインできるようにし、
 記事の作成と編集の経験に基本的なアクセス制御を適用する必要があります。
 
+パスワードハッシュ化の追加
+--------------------------
+
+もしこの時点でユーザーを作成・更新していたとしたら、パスワードが平文で保存されることに気付いたかもしれません。
+これは、セキュリティの観点から本当に悪いことですので、修正しましょう。
+
+これはまた、CakePHP のモデル層について話す良い時期です。CakePHP では、
+オブジェクトのコレクションに対して操作するメソッドと、単一のオブジェクトを別のクラスに分けています。
+エンティティーのコレクションに対して操作するメソッドは ``Table`` クラスにあり、
+一方、単一のレコードに属する機能は ``Entity`` クラスにあります。
+
+例えば、パスワードのハッシュ化は個々のレコードで行われるため、
+この動作をエンティティーオブジェクトに実装します。パスワードが設定されるたびにパスワードを
+ハッシュ化したいので、ミューテーター/セッターメソッドを使用します。CakePHP は、
+エンティティーの1つにプロパティーが設定されているときはいつでも、規約に基づいたセッターメソッドを呼び出します。
+パスワードのセッターを追加しましょう。 **src/Model/Entity/User.php** の中に次を追加してください。 ::
+
+    <?php
+    namespace App\Model\Entity;
+
+    use Cake\Auth\DefaultPasswordHasher; // この行を追加
+    use Cake\ORM\Entity;
+
+    class User extends Entity
+    {
+
+        // bake のコード
+
+        // このメソッドの追加
+        protected function _setPassword($value)
+        {
+            if (strlen($value)) {
+                $hasher = new DefaultPasswordHasher();
+
+                return $hasher->hash($value);
+            }
+        }
+    }
+
+ここで、ブラウザーで **http://localhost:8765/users** にアクセスしてユーザーのリストを
+見てください。 :doc:`インストール <installation>` 中に作成されたデフォルトユーザーを
+編集することができます。ユーザーのパスワードを変更すると、リストやビューページでは
+元の値の代わりにハッシュ化されたパスワードが表示されます。CakePHP は、デフォルトでは
+`bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_ を使って
+パスワードをハッシュ化します。既存のデータベースを使用している場合は SHA-1 または MD5 を
+使用することもできますが、すべての新しいアプリケーションに対して bcrypt を推奨します。
+
 ログインの追加
 ==============
 
@@ -269,12 +316,6 @@ add アクションを次のように置き換えます。 ::
             }
             $this->Flash->error(__('Unable to update your article.'));
         }
-
-        // タグのリストを取得
-        $tags = $this->Articles->Tags->find('list');
-
-        // ビューコンテキストに article と tags をセット
-        $this->set('tags', $tags);
         $this->set('article', $article);
     }
 

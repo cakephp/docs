@@ -1996,7 +1996,7 @@ Creating Labels
 
 * ``$fieldName`` - A field name in the form ``'Modelname.fieldname'``.
 * ``$text`` - An optional string providing the label caption text.
-* ``$options`` - Optional. String or an array containing any of the
+* ``$options`` - Optional. Array containing any of the
   :ref:`general-control-options` as well as any valid HTML attributes.
 
 Creates a ``label`` element. The argument ``$fieldName`` is used for generating
@@ -2015,10 +2015,10 @@ Output:
     <label for="user-name">Name</label>
     <label for="user-name">Your username</label>
 
-When you set ``$options`` to a string it will be used as a class name::
+With the third parameter ``$options`` you can set the id or class::
 
     echo $this->Form->label('User.name', null, ['id' => 'user-label']);
-    echo $this->Form->label('User.name', 'Your username', 'highlight');
+    echo $this->Form->label('User.name', 'Your username', ['class' => 'highlight']);
 
 Output:
 
