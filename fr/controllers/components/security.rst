@@ -70,8 +70,10 @@ mise en trou noir (blackhole callback)::
         // Gère les erreurs.
     }
 
-Note : utilisez ``$this->Security->config()`` pour les versions de CakePHP
-inférieures à 3.4.0.
+.. note::
+
+    utilisez ``$this->Security->config()`` pour les versions de CakePHP 
+    inférieures à 3.4.0.
 
 Le  paramètre ``$type`` peut avoir les valeurs suivantes:
 
@@ -212,8 +214,10 @@ Cette exemple forcera toutes les actions qui proviennent de la "route" Admin à
         }
     }
 
-Note: Utilisez ``$this->request-here()`` pour les versions de CakePHP avant
-3.4.0
+.. note::
+
+    Utilisez ``$this->request-here()`` pour les versions de CakePHP avant
+    3.4.0
 
 Cet exemple forcera toutes les actions qui proviennent de la "route" admin à
 requérir des requêtes sécurisés SSL. Quand la requête est placée dans un trou
@@ -261,8 +265,10 @@ fonctionnalités de ``SecurityComponent``::
         }
     }
 
-Note : utilisez ``$this->Security->config()`` pour les versions de CakePHP
-inférieures à 3.4.0.
+.. note::
+
+    Utilisez ``$this->Security->config()`` pour les versions de CakePHP
+    inférieures à 3.4.0.
 
 Cet exemple désactiverait toutes les vérifications de sécurité pour une action
 edit.
