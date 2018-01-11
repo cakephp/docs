@@ -194,7 +194,9 @@ Security コンポーネントは、一般的にコントローラーの ``befor
         }
     }
 
-注意: CakePHP バージョン 3.4.0 より前では ``$this->request->here()`` を使用してください。
+.. note::
+
+    CakePHP バージョン 3.4.0 より前では ``$this->request->here()`` を使用してください。
 
 上記の例では、 管理者用ルーティングの全てのアクションは、セキュアな SSL 通信のみを許可します。
 リクエストが破棄対象になった時、 ``forceSSL()`` コールバック関数が呼ばれ、非セキュアなリクエストを
@@ -237,7 +239,9 @@ CSRF 保護機能を有効にするには、 :doc:`/controllers/components/csrf`
         }
     }
 
-注意: CakePHP バージョン 3.4.0 より前の場合、 ``$this->Security->config()`` を使用してください。
+.. note::
+
+    CakePHP バージョン 3.4.0 より前の場合、 ``$this->Security->config()`` を使用してください。
 
 この例では、edit アクションのすべてのセキュリティチェックが無効になります。
 
