@@ -65,7 +65,9 @@ works::
         // Handle errors.
     }
 
-Note: use ``$this->Security->config()`` for CakePHP versions prior to 3.4
+.. note::
+
+    use ``$this->Security->config()`` for CakePHP versions prior to 3.4
 
 The ``$type`` parameter can have the following values:
 
