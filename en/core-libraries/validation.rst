@@ -120,37 +120,12 @@ An example of these methods in action is::
         ->notEmpty('body', 'Body cannot be empty', 'create')
         ->allowEmpty('header_image', 'update');
 
-Marking Rules as the Last to Run
---------------------------------
+Adding Validation Rules
+-----------------------
 
-When fields have multiple rules, each validation rule will be run even if the
-previous one has failed. This allows you to collect as many validation errors as
-you can in a single pass. However, if you want to stop execution after
-a specific rule has failed, you can set the ``last`` option to ``true``::
-
-    $validator = new Validator();
-    $validator
-        ->add('body', [
-            'minLength' => [
-                'rule' => ['minLength', 10],
-                'last' => true,
-                'message' => 'Comments must have a substantial body.'
-            ],
-            'maxLength' => [
-                'rule' => ['maxLength', 250],
-                'message' => 'Comments cannot be too long.'
-            ]
-        ]);
-
-If the minLength rule fails in the example above, the maxLength rule will not be
-run.
-
-Validation Methods Less Verbose
--------------------------------
-
-Since 3.2, the Validator object has a number of new methods that make building
-validators less verbose. For example adding validation rules to a username field
-can now look like::
+The ``Validator`` class provides methods that make building validators simple
+and expressive. For example adding validation rules to a username could look
+like::
 
     $validator = new Validator();
     $validator
@@ -158,96 +133,18 @@ can now look like::
         ->ascii('username')
         ->lengthBetween('username', [4, 8]);
 
-Adding Validation Providers
----------------------------
+See the `Validator API documentation
+<https://api.cakephp.org/3.x/class-Cake.Validation.Validator.html>`_ for the
+full set of validator methods.
 
-The ``Validator``, ``ValidationSet`` and ``ValidationRule`` classes do not
-provide any validation methods themselves. Validation rules come from
-'providers'. You can bind any number of providers to a Validator object.
-Validator instances come with a 'default' provider setup automatically. The
-default provider is mapped to the :php:class:`~Cake\\Validation\\Validation`
-class. This makes it simple to use the methods on that class as validation
-rules. When using Validators and the ORM together, additional providers are
-configured for the table and entity objects. You can use the ``setProvider()``
-method to add any additional providers your application needs::
+.. versionadded:: 3.2
+    Rule building methods were added in 3.2.0
 
-    $validator = new Validator();
+Using Custom Validation Rules
+-----------------------------
 
-    // Use an object instance.
-    $validator->setProvider('custom', $myObject);
-
-    // Use a class name. Methods must be static.
-    $validator->setProvider('custom', 'App\Model\Validation');
-
-Validation providers can be objects, or class names. If a class name is used the
-methods must be static. To use a provider other than 'default', be sure to set
-the ``provider`` key in your rule::
-
-    // Use a rule from the table provider
-    $validator->add('title', 'custom', [
-        'rule' => 'customTableMethod',
-        'provider' => 'table'
-    ]);
-
-If you wish to add a ``provider`` to all ``Validator`` objects that are created
-in the future, you can use the ``addDefaultProvider()`` method as follows::
-
-    use Cake\Validation\Validator;
-
-    // Use an object instance.
-    Validator::addDefaultProvider('custom', $myObject);
-
-    // Use a class name. Methods must be static.
-    Validator::addDefaultProvider('custom', 'App\Model\Validation');
-
-.. note::
-
-    DefaultProviders must be added before the ``Validator`` object is created
-    therefore **config/bootstrap.php** is the best place to set up your
-    default providers.
-
-.. versionadded:: 3.5.0
-
-You can use the `Localized plugin <https://github.com/cakephp/localized>`_ to
-get providers based on countries. With this plugin, you'll be able to validate
-model fields, depending on a country, ie::
-
-    namespace App\Model\Table;
-
-    use Cake\ORM\Table;
-    use Cake\Validation\Validator;
-
-    class PostsTable extends Table
-    {
-        public function validationDefault(Validator $validator)
-        {
-            // add the provider to the validator
-            $validator->setProvider('fr', 'Localized\Validation\FrValidation');
-            // use the provider in a field validation rule
-            $validator->add('phoneField', 'myCustomRuleNameForPhone', [
-                'rule' => 'phone',
-                'provider' => 'fr'
-            ]);
-
-            return $validator;
-        }
-    }
-
-The localized plugin uses the two letter ISO code of the countries for
-validation, like en, fr, de.
-
-There are a few methods that are common to all classes, defined through the
-`ValidationInterface interface <https://github.com/cakephp/localized/blob/master/src/Validation/ValidationInterface.php>`_::
-
-    phone() to check a phone number
-    postal() to check a postal code
-    personId() to check a country specific person ID
-
-Custom Validation Rules
------------------------
-
-In addition to using methods coming from providers, you can also use any
-callable, including anonymous functions, as validation rules::
+In addition to using methods on the ``Validator``, and coming from providers, you
+can also use any callable, including anonymous functions, as validation rules::
 
     // Use a global function
     $validator->add('title', 'custom', [
@@ -367,6 +264,118 @@ required, since it would also be needed when canceling a subscription.
 
 .. versionadded:: 3.1.1
     The callable support for ``requirePresence()`` was added in 3.1.1
+
+
+
+Marking Rules as the Last to Run
+--------------------------------
+
+When fields have multiple rules, each validation rule will be run even if the
+previous one has failed. This allows you to collect as many validation errors as
+you can in a single pass. However, if you want to stop execution after
+a specific rule has failed, you can set the ``last`` option to ``true``::
+
+    $validator = new Validator();
+    $validator
+        ->add('body', [
+            'minLength' => [
+                'rule' => ['minLength', 10],
+                'last' => true,
+                'message' => 'Comments must have a substantial body.'
+            ],
+            'maxLength' => [
+                'rule' => ['maxLength', 250],
+                'message' => 'Comments cannot be too long.'
+            ]
+        ]);
+
+If the minLength rule fails in the example above, the maxLength rule will not be
+run.
+
+Adding Validation Providers
+---------------------------
+
+The ``Validator``, ``ValidationSet`` and ``ValidationRule`` classes do not
+provide any validation methods themselves. Validation rules come from
+'providers'. You can bind any number of providers to a Validator object.
+Validator instances come with a 'default' provider setup automatically. The
+default provider is mapped to the :php:class:`~Cake\\Validation\\Validation`
+class. This makes it simple to use the methods on that class as validation
+rules. When using Validators and the ORM together, additional providers are
+configured for the table and entity objects. You can use the ``setProvider()``
+method to add any additional providers your application needs::
+
+    $validator = new Validator();
+
+    // Use an object instance.
+    $validator->setProvider('custom', $myObject);
+
+    // Use a class name. Methods must be static.
+    $validator->setProvider('custom', 'App\Model\Validation');
+
+Validation providers can be objects, or class names. If a class name is used the
+methods must be static. To use a provider other than 'default', be sure to set
+the ``provider`` key in your rule::
+
+    // Use a rule from the table provider
+    $validator->add('title', 'custom', [
+        'rule' => 'customTableMethod',
+        'provider' => 'table'
+    ]);
+
+If you wish to add a ``provider`` to all ``Validator`` objects that are created
+in the future, you can use the ``addDefaultProvider()`` method as follows::
+
+    use Cake\Validation\Validator;
+
+    // Use an object instance.
+    Validator::addDefaultProvider('custom', $myObject);
+
+    // Use a class name. Methods must be static.
+    Validator::addDefaultProvider('custom', 'App\Model\Validation');
+
+.. note::
+
+    DefaultProviders must be added before the ``Validator`` object is created
+    therefore **config/bootstrap.php** is the best place to set up your
+    default providers.
+
+.. versionadded:: 3.5.0
+
+You can use the `Localized plugin <https://github.com/cakephp/localized>`_ to
+get providers based on countries. With this plugin, you'll be able to validate
+model fields, depending on a country, ie::
+
+    namespace App\Model\Table;
+
+    use Cake\ORM\Table;
+    use Cake\Validation\Validator;
+
+    class PostsTable extends Table
+    {
+        public function validationDefault(Validator $validator)
+        {
+            // add the provider to the validator
+            $validator->setProvider('fr', 'Localized\Validation\FrValidation');
+            // use the provider in a field validation rule
+            $validator->add('phoneField', 'myCustomRuleNameForPhone', [
+                'rule' => 'phone',
+                'provider' => 'fr'
+            ]);
+
+            return $validator;
+        }
+    }
+
+The localized plugin uses the two letter ISO code of the countries for
+validation, like en, fr, de.
+
+There are a few methods that are common to all classes, defined through the
+`ValidationInterface interface <https://github.com/cakephp/localized/blob/master/src/Validation/ValidationInterface.php>`_::
+
+    phone() to check a phone number
+    postal() to check a postal code
+    personId() to check a country specific person ID
 
 Nesting Validators
 ------------------
