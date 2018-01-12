@@ -117,47 +117,48 @@ allowedActions
 между контроллерами. Установите их с помощью метода ``setConfig()``,
 либо ``config()`` если вы используете CakePHP версии ниже 3.4.
 
-Предотвращение фальсификации форм
-=================================
+Предотвращение подделки форм
+============================
 
-By default the ``SecurityComponent`` prevents users from tampering with forms in
-specific ways. The ``SecurityComponent`` will prevent the following things:
+По умолчанию ``SecurityComponent`` не  позволяет пользователям изменять формы
+определенными способами. ``SecurityComponent`` будет предотвращать следующие вещи::
 
-* Unknown fields cannot be added to the form.
-* Fields cannot be removed from the form.
-* Values in hidden inputs cannot be modified.
+* Неизвестные поля не могут быть добавлены в форму.
+* Поля не могут быть удалены из формы.
+* Значения скрытых полей не могут быть изменены.
 
-Preventing these types of tampering is accomplished by working with the FormHelper
-and tracking which fields are in a form. The values for hidden fields are
-tracked as well. All of this data is combined and turned into a hash. When
-a form is submitted, the ``SecurityComponent`` will use the POST data to build the same
-structure and compare the hash.
+Предотвращение этих типов подделки выполняется путем работы с ``FormHelper`` и
+отслеживания, какие поля находятся в форме. Также отслеживаются значения скрытых
+полей. Все эти данные объединены и превращены в хэш. Когда форма отправляется,
+``SecurityComponent`` будет использовать POST-данные для построения той же
+структуры и сравнения хэша.
 
 .. note::
 
-    The SecurityComponent will **not** prevent select options from being
-    added/changed. Nor will it prevent radio options from being added/changed.
+    ``SecurityComponent`` **не** предотвратит добавление/изменение элементов
+    в выпадающих списках. Также он не предотвратит добавление/изменение
+    радио-кнопок.
 
 unlockedFields
-    Set to a list of form fields to exclude from POST validation. Fields can be
-    unlocked either in the Component, or with
-    :php:meth:`FormHelper::unlockField()`. Fields that have been unlocked are
-    not required to be part of the POST and hidden unlocked fields do not have
-    their values checked.
-
+    Указываются поля формы, которые необходимо исключить из POST-валидации.
+    Поля могут быть разблокированы (unlocked) как в Компоненте, так и в
+    :php:meth:`FormHelper::unlockField()`. Разблокированные поля не обязаны
+    быть частью POST, в то время как значения разблокированных скрытых полей
+    не подвергаются проверке.
 validatePost
-    Set to ``false`` to completely skip the validation of POST
-    requests, essentially turning off form validation.
+    Установите в ``false`` для полной отмены валидации POST-запросов,
+    по сути, отключает валидацию форм.
 
-The above configuration options can be set with ``setConfig()`` or
-``config()`` for CakePHP versions below 3.4.
+Указанные выше опции могут быть настроены с помощью метода ``setConfig()``,
+или же ``config()``, если вы используете CakePHP версии ниже 3.4.
 
-Usage
-=====
+Использование
+=============
 
-Using the security component is generally done in the controllers
-``beforeFilter()``. You would specify the security restrictions you
-want and the Security Component will enforce them on its startup::
+Использование компонента Security обычно осуществляется в методе
+``beforeFilter()`` контроллера. Вы должны указать желаемые ограничения
+безопасности, и компонент Security будет обеспечивать их соблюдение
+при запуске::
 
     namespace App\Controller;
 
@@ -180,8 +181,9 @@ want and the Security Component will enforce them on its startup::
         }
     }
 
-The above example would force all actions that had admin routing to
-require secure SSL requests::
+
+Приведенный выше пример, заставит все экшены внутри маршрута ``admin``
+требовать безопасных SSL-запросов::
 
     namespace App\Controller;
 
@@ -209,7 +211,12 @@ require secure SSL requests::
         }
     }
 
-Note: use ``$this->request->here()`` for CakePHP versions prior to 3.4.0
+.. note::
+
+    Use ``$this->request->here()`` for CakePHP версий ниже 3.4.0.
+
+Данный пример заставит все экшены внутри маршрута ``admin`` требовать
+безопасных SSL-запросов.
 
 This example would force all actions that had admin routing to require secure
 SSL requests. When the request is black holed, it will call the nominated
