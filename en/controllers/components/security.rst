@@ -36,7 +36,7 @@ components in your ``initialize()`` method.
     or creating new fields via JavaScript) is likely to cause the request to be
     send to the blackhole callback.
 
-    You should always verify the HTTP method being used before executing
+    You should always verify the HTTP method being used before executing to avoid
     side-effects. You should :ref:`check the HTTP method <check-the-request>` or
     use :php:meth:`Cake\\Http\\ServerRequest::allowMethod()` to ensure the correct
     HTTP method is used.
@@ -122,7 +122,7 @@ specific ways. The ``SecurityComponent`` will prevent the following things:
 * Fields cannot be removed from the form.
 * Values in hidden inputs cannot be modified.
 
-Preventing these types of tampering is accomplished by working with the FormHelper
+Preventing these types of tampering is accomplished by working with the ``FormHelper``
 and tracking which fields are in a form. The values for hidden fields are
 tracked as well. All of this data is combined and turned into a hash. When
 a form is submitted, the ``SecurityComponent`` will use the POST data to build the same
@@ -150,7 +150,7 @@ The above configuration options can be set with ``setConfig()`` or
 Usage
 =====
 
-Using the security component is generally done in the controllers
+Using the security component is generally done in the controller's
 ``beforeFilter()``. You would specify the security restrictions you
 want and the Security Component will enforce them on its startup::
 
