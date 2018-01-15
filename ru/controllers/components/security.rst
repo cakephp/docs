@@ -225,22 +225,19 @@ validatePost
 CSRF Protection
 ===============
 
-CSRF или Межсайтовая подделка Запросов (Cross Site Request Forgery) - распространенная уязвимость в веб-приложениях.
+CSRF или Межсайтовая Подделка Запросов (Cross Site Request Forgery) -
+распространенная уязвимость в веб-приложениях. Она позволяет злоумышленнику
+захватывать и воспроизводить предыдущий запрос, а иногда и отправлять запросы
+данных с использованием тегов изображений или ресурсов в других доменах.
+Чтобы включить функции защиты CSRF, используйте :doc:`/controllers/components/csrf`.
 
-CSRF or Cross Site Request Forgery is a common vulnerability in web
-applications. It allows an attacker to capture and replay a previous request,
-and sometimes submit data requests using image tags or resources on other
-domains. To enable CSRF protection features use the
-:doc:`/controllers/components/csrf`.
+Отключение компонента Security для определенных экшенов
+=======================================================
 
-Disabling Security Component for Specific Actions
-=================================================
-
-There may be cases where you want to disable all security checks for an action
-(ex. AJAX requests).  You may "unlock" these actions by listing them in
-``$this->Security->unlockedActions`` in your ``beforeFilter()``. The
-``unlockedActions`` property will **not** affect other features of
-``SecurityComponent``::
+Могут быть случаи, когда вы захотите отключить все проверки безопасности для экшена
+(например, AJAX-запросы). Вы можете «разблокировать» эти действия, указав их в
+``$this->Security->unlockedActions`` в ``beforeFilter()``. Свойство ``unlockedActions``
+**не будет** влиять на другие функции ``SecurityComponent``::
 
     namespace App\Controller;
 
@@ -261,10 +258,11 @@ There may be cases where you want to disable all security checks for an action
         }
     }
 
-Note: use ``$this->Security->config()`` for CakePHP versions prior to 3.4.0
+.. note::
 
-This example would disable all security checks for the edit action.
+    Используйте ``$this->Security->config()`` для CakePHP версии ниже 3.4.0.
 
+Данный пример отключит все проверки безопасности для экшена ``edit``.
 
 .. meta::
     :title lang=ru: Безопасность
