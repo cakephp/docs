@@ -216,17 +216,16 @@ validatePost
     Use ``$this->request->here()`` for CakePHP версий ниже 3.4.0.
 
 Данный пример заставит все экшены внутри маршрута ``admin`` требовать
-безопасных SSL-запросов.
-
-This example would force all actions that had admin routing to require secure
-SSL requests. When the request is black holed, it will call the nominated
-``forceSSL()`` callback which will redirect non-secure requests to secure
-requests automatically.
+безопасных SSL-запросов. Когда запрос поглощен (black holed), будет
+вызван назначенный коллбэк ``forceSSL()``, который автоматически перенаправит
+небезопасные запросы на безопасные.
 
 .. _security-csrf:
 
 CSRF Protection
 ===============
+
+CSRF или Межсайтовая подделка Запросов (Cross Site Request Forgery) - распространенная уязвимость в веб-приложениях.
 
 CSRF or Cross Site Request Forgery is a common vulnerability in web
 applications. It allows an attacker to capture and replay a previous request,
