@@ -101,17 +101,13 @@ C помщью стандартных чзыковых конструкций ``
 и ``while`` могут быть записаны в упрощенном формате. Заметьте, что в этом
 случае не используются фигурные скобки. Вместо этого, к примеру для закрытия
 конструкции ``foreach`` закрывающая фигурная скобка заменяется на
-``endforeach``. Каждая из перечисленных выше
+``endforeach``. Каждая из перечисленных выше управляющих конструкций, имеет
+схожий синтаксис закрытия: ``endif``, ``endfor``, ``endforeach``, и
+``endwhile``.Также заметьте, что вместо использования ``точки с запятой``
+после каждой структуры (за исключением последней) используется знак
+``двоеточие``.
 
-Control structures, like ``if``, ``for``, ``foreach``, ``switch``, and ``while``
-can be written in a simplified format. Notice that there are no braces. Instead,
-the end brace for the ``foreach`` is replaced with ``endforeach``. Each of the
-control structures listed below has a similar closing syntax: ``endif``,
-``endfor``, ``endforeach``, and ``endwhile``. Also notice that instead of using
-a ``semicolon`` after each structure (except the last one), there is a
-``colon``.
-
-The following is an example using ``foreach``:
+Пример использования ``foreach``:
 
 .. code-block:: php
 
@@ -121,29 +117,32 @@ The following is an example using ``foreach``:
   <?php endforeach; ?>
   </ul>
 
-Another example, using if/elseif/else. Notice the colons:
+Еще пример, использование if/elseif/else. Обратите внимание на двоеточия:
 
 .. code-block:: php
 
-  <?php if ($username === 'sally'): ?>
-     <h3>Hi Sally</h3>
-  <?php elseif ($username === 'joe'): ?>
-     <h3>Hi Joe</h3>
+  <?php if ($username === 'салли'): ?>
+     <h3>Привет Салли</h3>
+  <?php elseif ($username === 'джо'): ?>
+     <h3>Привет Джо</h3>
   <?php else: ?>
-     <h3>Hi unknown user</h3>
+     <h3>Привет неизвестный пользователь</h3>
   <?php endif; ?>
 
-If you'd prefer using a templating language like
-`Twig <http://twig.sensiolabs.org>`_, a subclass of View will bridge your
-templating language and CakePHP.
+Если же вы предпочтете использовать шаблонизаторы, подобные
+`Twig <http://twig.sensiolabs.org>`_, подкласс Представления будет посредничать
+между вашим шаблонизатором и CakePHP.
 
-Template files are stored in **src/Template/**, in a folder named after the
-controller that uses the files, and named after the action it corresponds to.
-For example, the view file for the Products controller's "view()" action, would
-normally be found in **src/Template/Products/view.ctp**.
+Файлы шаблонов хранятся в **src/Template/** в папке с именем, соответствующим
+имени контроллера, использующего файлы, и имеют названия в честь экшенов,
+которые им соответствуют. Например, файл представления для экшена ``view()``
+контроллера ``Products``, обычно располагается по следующему пути - 
+**src/Template/Products/view.ctp**.
 
-The view layer in CakePHP can be made up of a number of different parts. Each
-part has different uses, and will be covered in this chapter:
+
+Слой представления в CakePHP может быть разбит на несколько составляющих
+частей. Каждая часть имеет свое предназначение и будет рассмотрена далее в этой
+главе:
 
 - **views**: Templates are the part of the page that is unique to the action
   being run. They form the meat of your application's response.
@@ -159,8 +158,8 @@ part has different uses, and will be covered in this chapter:
   creating self contained UI components. See the :doc:`/views/cells`
   documentation for more information.
 
-View Variables
---------------
+Переменные Представления
+------------------------
 
 Any variables you set in your controller with ``set()`` will be available in
 both the view and the layout your action renders. In addition, any set variables
@@ -174,8 +173,8 @@ the ``h()`` function::
 
     <?= h($user->bio); ?>
 
-Setting View Variables
-----------------------
+Назначение переменных Представления
+-----------------------------------
 
 .. php:method:: set(string $var, mixed $value)
 
@@ -203,12 +202,12 @@ Using View Blocks
 
 .. _view-layouts:
 
-Layouts
-=======
+Макеты
+======
 
 .. _view-elements:
 
-Elements
+Элементы
 ========
 
 .. _view-events:
@@ -216,8 +215,8 @@ Elements
 View Events
 ===========
 
-More About Views
-================
+Подробнее о Представлениях
+==========================
 
 .. toctree::
     :maxdepth: 1
@@ -229,5 +228,5 @@ More About Views
 
 
 .. meta::
-    :title lang=ru: Views
-    :keywords lang=ru: view logic,csv file,response elements,code elements,default extension,json,flash object,remote application,twig,subclass,ajax,reply,soap,functionality,cakephp,audience,xml,mvc
+    :title lang=ru: Представления
+    :keywords lang=ru: view logic,файл csv,response elements,code elements,default extension,json,flash object,remote application,twig,subclass,ajax,reply,soap,functionality,cakephp,audience,xml,mvc
