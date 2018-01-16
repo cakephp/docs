@@ -129,7 +129,7 @@ normalmente encontrada em **src/Template/Products/view.ctp**.
 A camada *view* do CakePHP pode ser constituida por um número diferente de partes. Cada
 parte tem diferentes usos, e serão abordadas nesse capítulo:
 
-- **views**: Templates são a parte da página que é única para a ação sendo executada.
+- **templates**: Templates são a parte da página que é única para a ação sendo executada.
   Eles formam o cerne da resposta da aplicação.
 - **elements**: pequenos bits reúsaveis do código da *view*. *Elements* são usualmente
   renderizados dentro das *views*.
