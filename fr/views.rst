@@ -137,7 +137,7 @@ La couche vue de CakePHP peut être constituée d'un certain nombre de parties
 différentes. Chaque partie a différents usages qui seront présentés dans ce
 chapitre :
 
-- **templates**: Les Views sont la partie de la page qui est unique pour l'action
+- **templates**: Les templates sont la partie de la page qui est unique pour l'action
   lancée. Elles sont la substance de la réponse de votre application.
 - **elements** : morceaux de code de view plus petits, réutilisables. Les
   elements sont habituellement rendus dans les vues.
