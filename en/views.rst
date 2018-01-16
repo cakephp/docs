@@ -126,7 +126,7 @@ templating language and CakePHP.
 
 Template files are stored in **src/Template/**, in a folder named after the
 controller that uses the files, and named after the action it corresponds to.
-For example, the view file for the Products controller's "view()" action, would
+For example, the view file for the ``Products`` controller's ``view()`` action, would
 normally be found in **src/Template/Products/view.ctp**.
 
 The view layer in CakePHP can be made up of a number of different parts. Each
