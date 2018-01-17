@@ -101,8 +101,8 @@ You can use the ``layout`` property to pick a different layout::
 The above would use  **src/Template/Layout/my_error.ctp** as the layout for your
 error pages.
 
-Each framework layer exception will render specific view templates in debug
-mode. With debug turned off all framework exceptions will choose
+Many exceptions raised by CakePHP will render specific view templates in debug
+mode. With debug turned off all exceptions raised by CakePHP will use either
 **error400.ctp** or **error500.ctp** based on their status code.
 
 Customize the ErrorController
@@ -155,7 +155,7 @@ exceptions.
 
 Exception rendering methods receive the handled exception as an argument, and
 should return a ``Response`` object. You can also implement methods to add
-additional for CakePHP errors::
+additional logic when handling CakePHP errors::
 
     // In src/Error/AppExceptionRenderer.php
     namespace App\Error;
@@ -169,12 +169,6 @@ additional for CakePHP errors::
             // Do something with NotFoundException objects.
         }
     }
-
-.. note::
-
-    Your custom renderer should expect an exception in its constructor, and
-    implement a ``render`` method. Failing to do so will cause additional
-    errors.
 
 Changing the ErrorController class
 ----------------------------------
@@ -454,8 +448,7 @@ page, and log the exception.
 Other Built In Exceptions
 -------------------------
 
-In addition, the following framework layer exceptions are available, and will
-be thrown from a number of CakePHP core components:
+In addition, CakePHP uses the following exceptions:
 
 .. php:namespace:: Cake\View\Exception
 
