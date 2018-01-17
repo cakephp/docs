@@ -170,6 +170,12 @@ I18n
   %s'`` are now ``'Edit {0}'`` and ``'New {0}'``. If you are using translating
   capability, please make sure you adjust those translations in your PO file.
 
+Mailer
+======
+
+* The various email address setter methods on ``Email`` now accept ``[]``
+  allowing individual properties to be reset.
+
 ORM
 ===
 
