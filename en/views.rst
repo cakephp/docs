@@ -132,7 +132,7 @@ normally be found in **src/Template/Products/view.ctp**.
 The view layer in CakePHP can be made up of a number of different parts. Each
 part has different uses, and will be covered in this chapter:
 
-- **views**: Templates are the part of the page that is unique to the action
+- **templates**: Templates are the part of the page that is unique to the action
   being run. They form the meat of your application's response.
 - **elements**: small, reusable bits of view code. Elements are usually rendered
   inside views.
