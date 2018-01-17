@@ -69,7 +69,7 @@
         Запросы могут быть перенаправлены на правильный контроллер + экшен.
 
     DRY
-        Don't repeat yourself (Не навреди сибе). Является принципом разработки программного обеспечения
+        Don't repeat yourself (Не повторяйся). Является принципом разработки программного обеспечения
         который сокращает повторение информации всех видов. В CakePHP используется DRY
         для того, чтобы вы могли корректно кодировать вещи и повторно использовать их в своих
         приложениях.
@@ -84,5 +84,5 @@
         CakePHP поддерживает соединения DSN для кэшей, базы данных, журнала и электронной почты.
 
 .. meta::
-    :title lang=ru: Glossary
+    :title lang=ru: Глоссарий
     :keywords lang=ru: html attributes,array class,array controller,glossary glossary,target blank,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions
