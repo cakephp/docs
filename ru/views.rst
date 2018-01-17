@@ -144,32 +144,32 @@ C помщью стандартных чзыковых конструкций ``
 частей. Каждая часть имеет свое предназначение и будет рассмотрена далее в этой
 главе:
 
-- **views**: Templates are the part of the page that is unique to the action
-  being run. They form the meat of your application's response.
-- **elements**: small, reusable bits of view code. Elements are usually rendered
-  inside views.
-- **layouts**: template files that contain presentational code that wraps many
-  interfaces in your application. Most views are rendered inside a layout.
-- **helpers**: these classes encapsulate view logic that is needed in many
-  places in the view layer. Among other things, helpers in CakePHP can help you
-  build forms, build AJAX functionality, paginate model data, or serve RSS
-  feeds.
-- **cells**: these classes provide miniature controller-like features for
-  creating self contained UI components. See the :doc:`/views/cells`
-  documentation for more information.
+- **шаблоны**: Шаблоны - это часть страницы уникальная для текущего экшена.
+  Они формируют основной костяк ответа на запрос в вашем приложении.
+- **элементы**: небольшая часть кода представления, которую можно использовать
+  повторно. Элементы как правило выводятся внутри представлений.
+- **макеты**: файлы шаблонов, содержащие код визуализации, которые оборачивают
+  собой множество интерфейсов в вашем приложении. Большинство представлений
+  выводятся внутри макета.
+- **хелперы**: эти классы инкапсулируют логику представления, которая необходима
+  во многих местах слоя представления. Наряду с другими вещами, хелперы в CakePHP
+  могут помочь вам создать формы, построить AJAX-функциональность, разбить на
+  страницы данные модели или транслировать RSS-каналы.
+- **ячейки**: эти классы предоставляют возможности схожие с функционалом
+  контроллеров, но в меньшем масштабе, используемые при создании самодостаточных
+  UI-компоненов.  Для более подробной информации смотрите :doc:`/views/cells`.
 
 Переменные Представления
 ------------------------
 
-Any variables you set in your controller with ``set()`` will be available in
-both the view and the layout your action renders. In addition, any set variables
-will also be available in any element. If you need to pass additional variables
-from the view to the layout you can either call ``set()`` in the view template,
-or use a :ref:`view-blocks`.
+Любые переменные, заданные в вашем контроллере с помощью метода ``set()``,
+будут доступны как в представлении, так и в макете вашего экшена. Кроме того,
+любые заданные переменные также будут доступны в любом элементе. Если вам нужно
+передать дополнительные переменные из представления в макет, вы можете либо
+вызвать ``set()`` в шаблоне представления, либо использовать :ref:`view-blocks`.
 
-You should remember to **always** escape any user data before outputting it as
-CakePHP does not automatically escape output. You can escape user content with
-the ``h()`` function::
+Помните, вы **всегда** должны экранировать любые пользовательские данные перед
+их выводом. Вы можете сделать это с помощью функции ``h()``::
 
     <?= h($user->bio); ?>
 
@@ -178,22 +178,100 @@ the ``h()`` function::
 
 .. php:method:: set(string $var, mixed $value)
 
-Views have a ``set()`` method that is analogous to the ``set()`` found in
-Controller objects. Using set() from your view file will add the variables to
-the layout and elements that will be rendered later. See
-:ref:`setting-view_variables` for more information on using ``set()``.
+Представления имеют метод ``set()`` аналогичный методу ``set()`` в объектах
+Контроллера. Использование метода ``set()`` из вашего файла представления
+добавит переменные в макет и элементы, которые будут отображаться позже.
+См. :ref:`setting-view_variables` для более подробной информации.
 
-In your view file you can do::
+Вы можете сделать следующее в вашем файле представления::
 
     $this->set('activeMenuButton', 'posts');
 
-Then, in your layout, the ``$activeMenuButton`` variable will be available and
-contain the value 'posts'.
+Тогда в вашем макете будет доступна переменная ``$activeMenuButton`` со
+значением 'posts'.
 
 .. _extending-views:
 
-Extending Views
----------------
+Расширение Представлений
+------------------------
+
+Расширение представлений дает вам возможность оборачивать одно представление
+в другое. Комбинирование этой возможности с
+:ref:`блоками представления <view-blocks>` дает вам мощный способ для
+соблюдения принципа :term:`DRY`. К примеру ваше приложение имеет сайдбар,
+который должен меняться в зависимости от конкретного отображаемого
+представления. Расширяя наиболее обобщенный файл представления, вы можете
+предотвратить повторение шаблонного кода для вашего сайдбара, и описывать
+только меняющиеся части:
+
+.. code-block:: php
+
+    <!-- src/Template/Common/view.ctp -->
+    <h1><?= $this->fetch('title') ?></h1>
+    <?= $this->fetch('content') ?>
+
+    <div class="actions">
+        <h3>Related actions</h3>
+        <ul>
+        <?= $this->fetch('sidebar') ?>
+        </ul>
+    </div>
+
+The above view file could be used as a parent view. It expects that the view
+extending it will define the ``sidebar`` and ``title`` blocks. The ``content``
+block is a special block that CakePHP creates. It will contain all the
+uncaptured content from the extending view. Assuming our view file has a
+``$post`` variable with the data about our post, the view could look like:
+
+.. code-block:: php
+
+    <!-- src/Template/Posts/view.ctp -->
+    <?php
+    $this->extend('/Common/view');
+
+    $this->assign('title', $post);
+
+    $this->start('sidebar');
+    ?>
+    <li>
+    <?php
+    echo $this->Html->link('edit', [
+        'action' => 'edit',
+        $post->id
+    ]);
+    ?>
+    </li>
+    <?php $this->end(); ?>
+
+    // The remaining content will be available as the 'content' block
+    // In the parent view.
+    <?= h($post->body) ?>
+
+The post view above shows how you can extend a view, and populate a set of
+blocks. Any content not already in a defined block will be captured and put into
+a special block named ``content``. When a view contains a call to ``extend()``,
+execution continues to the bottom of the current view file. Once it is complete,
+the extended view will be rendered. Calling ``extend()`` more than once in a
+view file will override the parent view that will be processed next::
+
+    $this->extend('/Common/view');
+    $this->extend('/Common/index');
+
+The above will result in **/Common/index.ctp** being rendered as the parent view
+to the current view.
+
+You can nest extended views as many times as necessary. Each view can extend
+another view if desired. Each parent view will get the previous view's content
+as the ``content`` block.
+
+.. note::
+
+    You should avoid using ``content`` as a block name in your application.
+    CakePHP uses this for uncaptured content in extended views.
+
+You can get the list of all populated blocks using the ``blocks()`` method::
+
+    $list = $this->blocks();
 
 .. _view-blocks:
 
