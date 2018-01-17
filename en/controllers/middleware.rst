@@ -245,6 +245,7 @@ their own response. We can see both options in our simple middleware::
 
     // In src/Middleware/TrackingCookieMiddleware.php
     namespace App\Middleware;
+    use Cake\I18n\Time;
 
     class TrackingCookieMiddleware
     {
@@ -257,10 +258,10 @@ their own response. We can see both options in our simple middleware::
             // When modifying the response, you should do it
             // *after* calling next.
             if (!$request->getCookie('landing_page')) {
-                $response->cookie([
-                    'name' => 'landing_page',
+                $expiry = new Time('+ 1 year');
+                $response = $response->withCookie('landing_page' ,[
                     'value' => $request->here(),
-                    'expire' => '+ 1 year',
+                    'expire' => $expiry->format('U'),
                 ]);
             }
             return $response;
