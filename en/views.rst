@@ -215,7 +215,7 @@ uncaptured content from the extending view. Assuming our view file has a
     <?php
     $this->extend('/Common/view');
 
-    $this->assign('title', $post);
+    $this->assign('title', $post->title);
 
     $this->start('sidebar');
     ?>
