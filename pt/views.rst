@@ -208,7 +208,7 @@ os dados sobre nosso *post*, a view poderia se parecer com isso:
     <?php
     $this->extend('/Common/view');
 
-    $this->assign('title', $post);
+    $this->assign('title', $post->title);
 
     $this->start('sidebar');
     ?>
