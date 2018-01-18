@@ -217,11 +217,14 @@ C помщью стандартных чзыковых конструкций ``
         </ul>
     </div>
 
-The above view file could be used as a parent view. It expects that the view
-extending it will define the ``sidebar`` and ``title`` blocks. The ``content``
-block is a special block that CakePHP creates. It will contain all the
-uncaptured content from the extending view. Assuming our view file has a
-``$post`` variable with the data about our post, the view could look like:
+Приведенный выше файл представления может быть использован в качестве
+родительского представления. Он ожидает, что представление,
+расширяющее его определит блоки ``sidebar`` и ``title``. Блок ``content`` -
+это специальный блок, создаваемый CakePHP. Он будет содержать весь
+неохваченный контент из расширяющегося представления. Предположим, что
+в нашем файле представления имеется переменная ``$post``, содержащая данные
+о нашем посте, в таком случае файл представления выглядел бы следующим
+образом:
 
 .. code-block:: php
 
@@ -229,7 +232,7 @@ uncaptured content from the extending view. Assuming our view file has a
     <?php
     $this->extend('/Common/view');
 
-    $this->assign('title', $post);
+    $this->assign('title', $post->title);
 
     $this->start('sidebar');
     ?>
@@ -243,40 +246,168 @@ uncaptured content from the extending view. Assuming our view file has a
     </li>
     <?php $this->end(); ?>
 
-    // The remaining content will be available as the 'content' block
-    // In the parent view.
+    // Остальное содержимое будет доступно как блок 'content'
+    // в родительском представлении.
     <?= h($post->body) ?>
 
-The post view above shows how you can extend a view, and populate a set of
-blocks. Any content not already in a defined block will be captured and put into
-a special block named ``content``. When a view contains a call to ``extend()``,
-execution continues to the bottom of the current view file. Once it is complete,
-the extended view will be rendered. Calling ``extend()`` more than once in a
-view file will override the parent view that will be processed next::
+Представление поста, приведенное выше, показывает, как вы можете расширить
+представление и заполнить набор блоков. Любое содержимое, которое не
+принадлежит определенному блоку, будет захвачено и помещено в специальный
+блок с именем ``content``. Когда представление содержит обращение к методу
+``extend()``, выполнение продолжается до конца текущего файла представления.
+После завершения данного процесса, расширенный вид будет отображен. Вызов
+``extend()`` более одного раза в файле представления будет переопределять
+родительское представление, которое будет обработано следующим::
 
     $this->extend('/Common/view');
     $this->extend('/Common/index');
 
-The above will result in **/Common/index.ctp** being rendered as the parent view
-to the current view.
+В результате исполнения кода приведенного выше, для текущего представления
+родительским станет **/Common/index.ctp**.
 
-You can nest extended views as many times as necessary. Each view can extend
-another view if desired. Each parent view will get the previous view's content
-as the ``content`` block.
+У расширяемых представлений может быть столько уровней вложенности, сколько
+вы посчитаете нужным. При желании любое представление может расширять
+какое-нибудь другое представление. Каждое родительское представление будет
+получать содержимое предшествующего представления как содержимое блока
+``content``.
 
 .. note::
 
-    You should avoid using ``content`` as a block name in your application.
-    CakePHP uses this for uncaptured content in extended views.
+    Вы должны избегать использование слова ``content`` в качестве имени
+    блока в вашем приложении. CakePHP использует данное имя для вывода
+    неохваченного содержимого в расширенных представлениях.
 
-You can get the list of all populated blocks using the ``blocks()`` method::
+Вы можете получить перечень всех заполненных блоков с помощью метода
+``blocks()``::
 
     $list = $this->blocks();
 
 .. _view-blocks:
 
-Using View Blocks
-=================
+Использование блоков Представления
+==================================
+
+Блоки представления предоставляют гибкий API, позволяющий вам определять
+блоки вашего представления/макета, которые будут определены где-либо еще.
+Например, блоки идеально подходят для реализации таких вещей, как сайдбар
+или области для загрузки контента в нижней/верхней части макета. Методы
+``start()``, ``append()``, ``prepend()``, ``assign()``, ``fetch()``,
+и ``end()``  позволяют работать с захватом блоков::
+
+    // Создание блока сайдбара.
+    $this->start('sidebar');
+    echo $this->element('sidebar/recent_topics');
+    echo $this->element('sidebar/recent_comments');
+    $this->end();
+
+    // Добавление новых блоков в конец сайдбара.
+    $this->start('sidebar');
+    echo $this->fetch('sidebar');
+    echo $this->element('sidebar/popular_topics');
+    $this->end();
+
+Так же вы можете добавить новое содержимое в конец имеющегося блока
+с помощью метода ``append()``::
+
+    $this->append('sidebar');
+    echo $this->element('sidebar/popular_topics');
+    $this->end();
+
+    // То же самое что и в примере выше
+    $this->append('sidebar', $this->element('sidebar/popular_topics'));
+
+Если вам нужно очистить или переписать блок, существует пара альтернатив.
+Метод ``reset()`` очистит или перепишет блок в любое время. Метод
+``assign()``, в который передается пустая строка также может быть использован
+в этом случае.::
+
+    // Очистить старое содержимое блока сайдбара.
+    $this->reset('sidebar');
+
+    // Присвоение пустой строки также очистит содержимое блока.
+    $this->assign('sidebar', '');
+
+.. versionadded:: 3.2
+    Метод View::reset() был добавлен в версии 3.2
+
+Assigning a block's content is often useful when you want to convert a view
+variable into a block. For example, you may want to use a block for the page
+title, and sometimes assign the title as a view variable in the controller::
+
+    // In view file or layout above $this->fetch('title')
+    $this->assign('title', $title);
+
+The ``prepend()`` method allows you to prepend content to an existing block::
+
+    // Добавить перед блоком сайдбара
+    $this->prepend('sidebar', 'это содержимое попадет в верхнюю часть сайдбара');
+
+Displaying Blocks
+-----------------
+
+You can display blocks using the ``fetch()`` method. ``fetch()`` will output a
+block, returning '' if a block does not exist::
+
+    <?= $this->fetch('sidebar') ?>
+
+You can also use fetch to conditionally show content that should surround a
+block should it exist. This is helpful in layouts, or extended views where you
+want to conditionally show headings or other markup:
+
+.. code-block:: php
+
+    // In src/Template/Layout/default.ctp
+    <?php if ($this->fetch('menu')): ?>
+    <div class="menu">
+        <h3>Menu options</h3>
+        <?= $this->fetch('menu') ?>
+    </div>
+    <?php endif; ?>
+
+You can also provide a default value for a block if it does not exist.
+This allows you to add placeholder content when a block does not exist.
+You can provide a default value using the second argument:
+
+.. code-block:: php
+
+    <div class="shopping-cart">
+        <h3>Your Cart</h3>
+        <?= $this->fetch('cart', 'Your cart is empty') ?>
+    </div>
+
+Using Blocks for Script and CSS Files
+-------------------------------------
+
+The ``HtmlHelper`` ties into view blocks, and its ``script()``, ``css()``, and
+``meta()`` methods each update a block with the same name when used with the
+``block = true`` option:
+
+.. code-block:: php
+
+    <?php
+    // In your view file
+    $this->Html->script('carousel', ['block' => true]);
+    $this->Html->css('carousel', ['block' => true]);
+    ?>
+
+    // In your layout file.
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+        <title><?= $this->fetch('title') ?></title>
+        <?= $this->fetch('script') ?>
+        <?= $this->fetch('css') ?>
+        </head>
+        // Rest of the layout follows
+
+The :php:meth:`Cake\\View\\Helper\\HtmlHelper` also allows you to control which
+block the scripts and CSS go to::
+
+    // In your view
+    $this->Html->script('carousel', ['block' => 'scriptBottom']);
+
+    // In your layout
+    <?= $this->fetch('scriptBottom') ?>
 
 .. _view-layouts:
 
