@@ -16,7 +16,7 @@ version = '2.x'
 # The full version, including alpha/beta/rc tags.
 release = '2.x'
 
-search_version = '2-0'
+search_version = '2-10'
 
 # Branch name in cakephp/docs
 branch = 'master'
