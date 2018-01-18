@@ -224,7 +224,7 @@ données sur notre post. Notre vue pourrait ressembler à ceci:
     <?php
     $this->extend('/Common/view');
 
-    $this->assign('title', $post);
+    $this->assign('title', $post->title);
 
     $this->start('sidebar');
     ?>
