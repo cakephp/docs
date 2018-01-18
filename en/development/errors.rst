@@ -65,8 +65,8 @@ process.
 
 .. _error-views:
 
-Customize the error templates
-=============================
+Customize Error Templates
+=========================
 
 The default error handler renders all uncaught exceptions your application
 raises with the help of ``Cake\Error\ExceptionRenderer``, and your application's
@@ -89,7 +89,7 @@ data returned by ``getAttributes()`` will be exposed as view variables as well.
     **error500** templates. In debug mode, you'll see CakePHP's development
     error page.
 
-Customize the error page layout
+Customize the Error Page Layout
 -------------------------------
 
 By default error templates use **src/Template/Layout/error.ctp** for a layout.
@@ -106,15 +106,15 @@ mode. With debug turned off all exceptions raised by CakePHP will use either
 **error400.ctp** or **error500.ctp** based on their status code.
 
 Customize the ErrorController
------------------------------
+=============================
 
 The ``App\Controller\ErrorController`` class is used by CakePHP's exception
 rendering to render the error page view and receives all the standard request
-life-cycle events. This class gives you a configuration free way of customizing
-error page output.
+life-cycle events. By modifying this class you can control which components are
+used and which templates are rendered.
 
 Change the ExceptionRenderer
-----------------------------
+============================
 
 If you want to control the entire exception rendering and logging process you
 can use the ``Error.exceptionRenderer`` option in **config/app.php** to choose
@@ -170,11 +170,12 @@ additional logic when handling CakePHP errors::
         }
     }
 
-Changing the ErrorController class
+Changing the ErrorController Class
 ----------------------------------
 
-If only want to change which controller is used by exception rendering, you can
-implement the ``_getController()`` method in your exception renderer::
+The exception renderer dictates which controller is used for exception
+rendering. If you want to change which controller is used to render exceptions,
+override the ``_getController()`` method in your exception renderer::
 
     // in src/Error/AppExceptionRenderer
     namespace App\Error;
@@ -274,12 +275,15 @@ If your application contained the following exception::
 
 You could provide nice development errors, by creating
 **src/Template/Error/missing_widget.ctp**. When in production mode, the above
-error would be treated as a 500 error.
+error would be treated as a 500 error and use the **error500** template.
 
-The constructor for :php:exc:`Cake\\Core\\Exception\\Exception` has been
-extended, allowing you to pass in additional data. This additional data is
-interpolated into the the ``_messageTemplate``. This allows you to create data
-rich exceptions, that provide more context around your errors::
+If your exceptions have a code between ``400`` and ``506`` the exception code
+will be used as the HTTP response code.
+
+The constructor for :php:exc:`Cake\\Core\\Exception\\Exception` allows you to
+pass in additional data. This additional data is interpolated into the the
+``_messageTemplate``. This allows you to create data rich exceptions, that
+provide more context around your errors::
 
     use Cake\Core\Exception\Exception;
 
@@ -287,30 +291,16 @@ rich exceptions, that provide more context around your errors::
     {
         // Context data is interpolated into this format string.
         protected $_messageTemplate = 'Seems that %s is missing.';
+
+        // You can set a default exception code as well.
+        protected $_defaultCode = 404;
     }
 
     throw new MissingWidgetException(['widget' => 'Pointy']);
 
-When rendered, this your view template would get a ``$widget`` variable set. In
-addition if you cast the exception as a string or use its ``getMessage()``
-method you will get ``Seems that Pointy is missing.``.
-
-Creating Custom Status Codes
-----------------------------
-
-You can create custom HTTP status codes by changing the code used when
-creating an exception::
-
-    throw new MissingWidgetHelperException('Its not here', 501);
-
-Will create a 501 response code, you can use any HTTP status code
-you want. In development, if your exception doesn't have a specific
-template, and you use a code equal to or greater than 500 you will
-see the **error500.ctp** template. For any other error code you'll get the
-**error400.ctp** template. If you have defined an error template for your
-custom exception, that template will be used in development mode.
-If you'd like your own exception handling logic even in production,
-see the next section.
+When rendered, this your view template would have a ``$widget`` variable set. If
+you cast the exception as a string or use its ``getMessage()`` method you will
+get ``Seems that Pointy is missing.``.
 
 Logging Exceptions
 ------------------
