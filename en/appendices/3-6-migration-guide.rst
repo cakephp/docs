@@ -184,6 +184,7 @@ ORM
   ``.`` separated paths. e.g ``Users.Comments``.
 * ``Table::addBehaviors()`` was added making it simpler to add multiple
   behaviors at once.
+* ``Table::getBehavior()`` was added.
 * ``CounterCacheBehavior`` callback functions can now return ``false`` to skip
   updating the counter value.
 * ``TimestampBehavior`` now uses the correct mutable/immutable class type when
