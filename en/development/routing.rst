@@ -362,7 +362,7 @@ Next, we specify some default values. Regardless of the controller,
 we want the ``index()`` action to be called.
 
 Finally, we specify some regular expressions that will match years,
-months and days in numerical form. Note that parenthesis (grouping)
+months and days in numerical form. Note that parenthesis (capturing groups)
 are not supported in the regular expressions. You can still specify
 alternates, as above, but not grouped with parenthesis.
 
@@ -370,6 +370,20 @@ Once defined, this route will match ``/articles/2007/02/01``,
 ``/articles/2004/11/16``, handing the requests to
 the ``index()`` actions of their respective controllers, with the date
 parameters in ``$this->request->getParam()``.
+
+As of 3.6.0 you can use ``{var}`` for route elements instead of ``:var``. This
+new parameter style enables route elements to be embedded in non-capturing
+blocks. For example::
+
+    $routes->connect(
+        '/images/resize/{id}/{width}x{height}',
+        ['controller' => 'Images', 'action' => 'view']
+    );
+
+Would be impossible to define using ``:var`` style placeholders.
+
+Reserved Route Elements
+-----------------------
 
 There are several route elements that have special meaning in
 CakePHP, and should not be used unless you want the special meaning
