@@ -196,6 +196,9 @@ Routing
 * ``Cake\Routing\Route\EntityRoute`` was added. This route class makes building
   routes that need data from entities easier. See the :ref:`entity-routing`
   section for more information.
+* Routing variables can now use ``{var}`` style placeholders. This style allows
+  mid-word variables to be defined. You cannot combined ``{var}`` placeholders
+  with ``:var`` style placeholders.
 
 Shell
 =====
