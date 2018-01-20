@@ -151,6 +151,22 @@ Or jump to specific days of the week::
     $time->next(ChronosInterface::TUESDAY);
     $time->previous(ChronosInterface::MONDAY);
 
+When modifying dates/times across :abbr:`DST (Daylight Savings Time)` transitions
+your operations may gain/lose an additional hours resulting in hour values that
+don't add up. You can avoid these issues by first changing your timezone to
+``UTC``, modifying the time::
+
+    // Additional hour gained.
+    $time = new Chronos('2014-03-30 00:00:00', 'Europe/London');
+    debug($time->modify('+24 hours')); // 2014-03-31 01:00:00
+
+    // First switch to UTC, and modify
+    $time = $time->setTimezone('UTC')
+        ->modify('+24 hours');
+
+Once you are done modifying the time you can add the original timezone to get
+the localized time.
+
 Comparison Methods
 ------------------
 
