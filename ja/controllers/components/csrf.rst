@@ -16,7 +16,7 @@ hidden フィールドに CSRF トークンが追加されます。 ``Controller
 :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException` を投げます。
 
 .. note::
-    副作用が起こる前に、HTTP メソッドが使われているかをいつも確かめてください。
+    副作用を避けるために、実行前に使用されている HTTP メソッドをいつも確かめてください。
     正しい HTTP メソッドが使用されているかを確認するために、 :ref:`HTTP メソッドを確認する
     <check-the-request>` または :php:meth:`Cake\\Http\\ServerRequest::allowMethod()`
     を使用してください。

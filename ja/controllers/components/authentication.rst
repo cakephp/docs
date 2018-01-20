@@ -374,7 +374,7 @@ CakePHP のライブラリーを使用してランダムにこれらの API ト�
 ダイジェスト認証は、Basic 認証よりも改善されたセキュリティモデルを提供しています。
 ユーザーの認証情報がリクエストヘッダーに送信されないからです。代わりにハッシュが送信されます。
 
-ダイジェスト認証を使用するには、AuthComponent を設定する必要があります。 ::
+ダイジェスト認証を使用するには、 ``AuthComponent`` を設定する必要があります。 ::
 
     $this->loadComponent('Auth', [
         'authenticate' => [
@@ -425,8 +425,8 @@ CakePHP のライブラリーを使用してランダムにこれらの API ト�
 
 .. note::
 
-    AuthComponent::$authenticate 内で DigestAuthentication が設定された場合、
-    DigestAuthenticate::password() の第３パラメーターは定義した 'realm' の設定値と
+    ``AuthComponent::$authenticate`` 内で DigestAuthentication が設定された場合、
+    ``DigestAuthenticate::password()`` の第３パラメーターは定義した 'realm' の設定値と
     一致する必要があります。このデフォルトは  ``env('SCRIPT_NAME')`` です。
     複数の環境で一貫したハッシュが欲しい場合に static な文字列を使用することができます。
 
@@ -477,7 +477,7 @@ CakePHP のライブラリーを使用してランダムにこれらの API ト�
 カスタム認証オブジェクトの利用
 ------------------------------
 
-カスタム認証オブジェクトを作成したら、AuthComponent の authenticate 配列内にそれを
+カスタム認証オブジェクトを作成したら、 ``AuthComponent`` の authenticate 配列内にそれを
 含めることで利用することができます。 ::
 
     $this->Auth->config('authenticate', [
@@ -499,7 +499,7 @@ CakePHP のライブラリーを使用してランダムにこれらの API ト�
 レスポンスオブジェクトを返すことができます。 ``authenticate`` 設定で認証オブジェクトを
 指定する順序を設定できます。
 
-オーセンティケーターが null を返した場合、AuthComponent は、ユーザーをログインアクションに
+オーセンティケーターが null を返した場合、 ``AuthComponent`` は、ユーザーをログインアクションに
 リダイレクトします。Ajax リクエストでかつ ``ajaxLogin`` 設定が指定されていた場合、
 その要素は描画され、そうでなければ HTTP ステータスコード 403 が返されます。
 
@@ -516,16 +516,16 @@ Auth が生成するセッションエラーメッセージを表示するため
     // 3.4.0 より前は、これも同様に必要です。
     echo $this->Flash->render('auth');
 
-AuthComponent の flash 設定を使うことでエラーメッセージをカスタマイズすることができます。
-``flash`` 設定を使うことで、AuthComponent がフラッシュメッセージのために使うパラメーターを
+``AuthComponent`` の flash 設定を使うことでエラーメッセージをカスタマイズすることができます。
+``flash`` 設定を使うことで、 ``AuthComponent`` がフラッシュメッセージのために使うパラメーターを
 設定することができます。利用可能なキーは次のとおりです。
 
 - ``key`` - 使用されるキー。デフォルトは 'default'。 3.4.0 より前の key のデフォルトは 'auth'。
 - ``element`` - 描画に使用するエレメント名。デフォルトは null。
 - ``params`` - 使用される追加の params 配列。デフォルトは ``[]`` 。
 
-フラッシュメッセージの設定だけでなく、AuthComponent が使用する他のエラーメッセージを
-カスタマイズすることもできます。コントローラーの beforeFilter の中や component の設定で、
+フラッシュメッセージの設定だけでなく、 ``AuthComponent`` が使用する他のエラーメッセージを
+カスタマイズすることもできます。コントローラーの ``beforeFilter()`` の中や component の設定で、
 認証が失敗した際に使われるエラーをカスタマイズするのに ``authError`` を使うことができます。 ::
 
     $this->Auth->config('authError', "Woopsie, you are not authorized to access this area.");
@@ -533,7 +533,7 @@ AuthComponent の flash 設定を使うことでエラーメッセージをカ�
 ユーザーがすでにログインしていた後にのみ、認可エラーを表示したいということもあると思います。
 その場合は ``false`` を設定することにより、このメッセージを表示しないようにすることができます。
 
-コントローラーの beforeFilter()、またはコンポーネントの設定で::
+コントローラーの ``beforeFilter()`` 、またはコンポーネントの設定で::
 
     if (!$this->Auth->user()) {
         $this->Auth->config('authError', false);
@@ -567,7 +567,7 @@ User エンティティーでセッター機能を使用することです。 ::
         // ...
     }
 
-AuthComponent は、ユーザーの認証情報を検証するときに、 ``DefaultPasswordHasher`` を
+``AuthComponent`` は、ユーザーの認証情報を検証するときに、 ``DefaultPasswordHasher`` を
 使用するようにデフォルトで設定されています。ユーザーを認証するために追加の設定は必要とされません。
 
 ``DefaultPasswordHasher`` は、業界内で使用される強力なパスワードハッシュソリューションの
@@ -600,7 +600,7 @@ AuthComponent は、ユーザーの認証情報を検証するときに、 ``Def
         }
     }
 
-その後、独自のパスワードハッシュ化クラスを使用するために AuthComponent の設定が必要です。 ::
+その後、独自のパスワードハッシュ化クラスを使用するために ``AuthComponent`` の設定が必要です。 ::
 
     public function initialize()
     {
@@ -626,7 +626,7 @@ AuthComponent は、ユーザーの認証情報を検証するときに、 ``Def
 CakePHP は、1つのアルゴリズムから別のユーザーのパスワードを移行するためのクリーンな方法を提供します。
 これは ``FallbackPasswordHasher`` クラスによって実現されます。
 ``sha1`` パスワードハッシュを使用している CakePHP 2.x のアプリを移行していると仮定すると、
-次のように AuthComponent を設定することができます。 ::
+次のように ``AuthComponent`` を設定することができます。 ::
 
     public function initialize()
     {
@@ -812,7 +812,7 @@ CakePHP は、1つのアルゴリズムから別のユーザーのパスワー�
 認証されたユーザーが、アクセスを許可されていない URL にアクセスしようとすると、リファラーに
 リダイレクトされてしまいます。このようなリダイレクトをしたくない場合
 (主にステートレス認証アダプタを使用する際に必要)、設定オプション ``unauthorizedRedirect`` に
-``false`` を設定することができます。これは、AuthComponent がリダイレクトする代わりに
+``false`` を設定することができます。これは、 ``AuthComponent`` がリダイレクトする代わりに
 ``ForbiddenException`` を投げるようになります。
 
 カスタム認可オブジェクトの作成
@@ -855,10 +855,10 @@ CakePHP は、1つのアルゴリズムから別のユーザーのパスワー�
 認可を使用しない
 ----------------
 
-どの組み込み認可オブジェクトも使いたくなくて、AuthComponent の外側で完全に
+どの組み込み認可オブジェクトも使いたくなくて、 ``AuthComponent`` の外側で完全に
 権限を扱いたい場合は、 ``$this->Auth->config('authorize', false);`` を設定することが可能です。
-デフォルトでは、AuthComponent は、 ``authorize`` に ``false`` をセットした状態で始まります。
-認可スキームを使用しない場合は、独自にコントローラーの beforeFilter または別のコンポーネントで
+デフォルトでは、 ``AuthComponent`` は、 ``authorize`` に ``false`` をセットした状態で始まります。
+認可スキームを使用しない場合は、独自にコントローラーの ``beforeFilter()`` または別のコンポーネントで
 認可を確認してください。
 
 公開するアクションの作成
@@ -867,9 +867,9 @@ CakePHP は、1つのアルゴリズムから別のユーザーのパスワー�
 .. php:method:: allow($actions = null)
 
 コントローラーのアクションが完全に公開すべきものであったり、ユーザーのログインが
-不要であったりという場合があります。AuthComponent は悲観的であり、デフォルトでは
+不要であったりという場合があります。 ``AuthComponent`` は悲観的であり、デフォルトでは
 アクセスを拒否します。 ``AuthComponent::allow()`` を使うことで、公開すべきアクションに
-印をつけることができます。アクションに公開の印をつけることで、AuthComponent は該当のユーザーが
+印をつけることができます。アクションに公開の印をつけることで、 ``AuthComponent`` は該当のユーザーが
 ログインしているかのチェックも、認可オブジェクトによるチェックも行わなくなります。 ::
 
     // すべてのアクションを許可。
@@ -980,7 +980,7 @@ flash
 
     - ``element`` - 使用されるエレメント。デフォルトは 'default' 。
     - ``key`` - 使用されるキー。デフォルトは 'auth' 。
-    - ``params`` - 使用される追加の params 配列。デフォルトは [] 。
+    - ``params`` - 使用される追加の params 配列。デフォルトは '[]' 。
 
 loginAction
     ログインを扱うコントローラーとアクションを表す (文字列や配列で定義した) URL。
@@ -990,7 +990,7 @@ loginRedirect
     この値はユーザーが ``Auth.redirect`` をセッション内に持っている場合には無視されます。
 logoutRedirect
     ユーザーがログアウトした後のリダイレクト先となるデフォルトのアクション。
-    AuthComponent は post-logout のリダイレクトを扱いませんが、リダイレクト先の
+    ``AuthComponent`` は post-logout のリダイレクトを扱いませんが、リダイレクト先の
     URL は :php:meth:`AuthComponent::logout()` から返されるものとなります。
     デフォルトは ``loginAction`` 。
 unauthorizedRedirect
