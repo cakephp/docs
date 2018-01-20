@@ -5,18 +5,17 @@ Caching
 
 .. php:class:: Cache
 
-Caching is frequently used to reduce the time it takes to create or read from
-other resources. Caching is often used to make reading from expensive
-resources less expensive. You can store the results of expensive queries,
-or remote webservice access that doesn't frequently change in a cache. Once
-in the cache, re-reading the stored resource from the cache is much cheaper
-than accessing the remote resource.
+Caching can be used to make reading from expensive or slow resources faster, by
+maintaining a second copy of the required data in a faster or closer storage
+system. For example, you can store the results of expensive queries, or remote
+webservice access that doesn't frequently change in a cache. Once in the cache,
+reading data from the cache is much cheaper than accessing the remote resource.
 
-Caching in CakePHP is primarily facilitated by the ``Cache`` class.
-This class provides a set of static methods that provide a uniform API to
-dealing with all different types of Caching implementations. CakePHP
-comes with several cache engines built-in, and provides an easy system
-to implement your own caching systems. The built-in caching engines are:
+Caching in CakePHP is facilitated by the ``Cache`` class.
+This class provides a static interface and uniform API to
+interact with various Caching implementations. CakePHP
+provides several cache engines, and provides a simple interface if you need to
+build your own backend. The built-in caching engines are:
 
 * ``FileCache`` File cache is a simple cache that uses local files. It
   is the slowest cache engine, and doesn't provide as many features for
@@ -38,30 +37,28 @@ to implement your own caching systems. The built-in caching engines are:
   Memcached, also provides atomic operations.
 
 Regardless of the CacheEngine you choose to use, your application interacts with
-:php:class:`Cake\\Cache\\Cache` in a consistent manner. You can swap cache
-engines as your application grows.
+:php:class:`Cake\\Cache\\Cache`.
 
 .. _cache-configuration:
 
-Configuring Cache Class
-=======================
+Configuring Cache Engines
+=========================
 
 .. php:staticmethod:: config($key, $config = null)
 
-Configuring the Cache class can be done anywhere, but generally you will want to
-configure Cache during bootstrapping.  The **config/app.php** file is the
-conventional location to do this.  You can configure as many cache
-configurations as you need, and use any mixture of cache engines.  CakePHP uses
-two cache configurations internally.  ``_cake_core_`` is used for storing file
-maps, and parsed results of
-:doc:`/core-libraries/internationalization-and-localization` files.
-``_cake_model_``, is used to store schema descriptions for your applications
-models. If you are using APC or Memcached you should make sure to set unique keys
-for the core caches.  This will prevent multiple applications from overwriting
-each other's cached data.
+Your application can configure any number of 'engines' during its bootstrap
+process. Cache engine configurations are defined in **config/app.php**.
 
-Using multiple configurations also lets you incrementally change the storage as
-needed. For example in your **config/app.php** you could put the following::
+For optimal performance CakePHP requires two cache engines to be defined.
+
+* ``_cake_core_`` is used for storing file maps, and parsed results of
+  :doc:`/core-libraries/internationalization-and-localization` files.
+* ``_cake_model_``, is used to store schema descriptions for your applications
+  models.
+
+Using multiple engine configurations also lets you incrementally change the
+storage as needed. For example in your **config/app.php** you could put the
+following::
 
     // ...
     'Cache' => [
@@ -113,23 +110,80 @@ You can also configure Cache engines at runtime::
     $object = new FileEngine($config);
     Cache::config('other', $object);
 
-The name of these configurations 'short' or 'long' is used as the ``$config``
+The name of these engine configurations ('short' and 'long') are used as the ``$config``
 parameter for :php:meth:`Cake\\Cache\\Cache::write()` and
-:php:meth:`Cake\\Cache\\Cache::read()`. When configuring Cache engines you can
-refer to the class name using the following syntaxes:
+:php:meth:`Cake\\Cache\\Cache::read()`. When configuring cache engines you can
+refer to the class name using the following syntaxes::
 
-* Short classname without 'Engine' or a namespace.  This will infer that you
-  want to use a Cache engine in ``Cake\Cache\Engine`` or ``App\Cache\Engine``.
-* Using :term:`plugin syntax` which allows you to load engines from a specific
-  plugin.
-* Using a fully qualified namespaced classname.  This allows you to use
-  classes located outside of the conventional locations.
-* Using an object that extends the ``CacheEngine`` class.
+    // Short name (in App\ or Cake namespaces)
+    Cache::config('long', ['className' => 'File']);
+
+    // Plugin short name
+    Cache::config('long', ['className' => 'MyPlugin.SuperCache']);
+
+    // Full namespace
+    Cache::config('long', ['className' => 'Cake\Cache\Engine\FileEngine']);
+
+    // An object implementing CacheEngineInterface
+    Cache::config('long', ['className' => $myCache]);
 
 .. note::
 
     When using the FileEngine you might need to use the ``mask`` option to
     ensure cache files are made with the correct permissions.
+
+Engine Options
+--------------
+
+Each engine accepts the following options:
+
+* ``duration`` Specify how long items in this cache configuration last.
+  Specified as a ``strototime()`` compatible expression.
+* ``groups`` List of groups or 'tags' associated to every key stored in this
+  config.  handy for deleting a complete group from cache.
+* ``prefix`` Prepended to all entries. Good for when you need to share
+  a keyspace with either another cache config or another application.
+* ``probability``` Probability of hitting a cache gc cleanup. Setting to 0 will disable
+   ``Cache::gc()`` from ever being called automatically.
+
+FileEngine Options
+-------------------
+
+FileEngine uses the following engine specific options:
+
+* ``isWindows`` Automatically populated with whether the host is windows or not
+* ``lock`` Should files be locked before writing to them?
+* ``mask`` The mask used for created files
+* ``path`` Path to where cachefiles should be saved. Defaults to system's temp dir.
+
+RedisEngine Options
+-------------------
+
+RedisEngine uses the following engine specific options:
+
+* ``port`` The port your Redis server is running on.
+* ``host`` The host your Redis server is running on.
+* ``database`` The database number to use for connection.
+* ``password`` Redis server password.
+* ``persistent`` Should a persistent connection be made to Redis.
+* ``timeout`` Connection timeout for Redis.
+* ``unix_socket`` Path to a unix socket for Redist.
+
+MemcacheEngine Options
+----------------------
+
+- ``compress`` Whether to compress data.
+- ``username`` Login to access the Memcache server.
+- ``password`` Password to access the Memcache server.
+- ``persistent`` The name of the persistent connection. All configurations using
+   the same persistent value will share a single underlying connection.
+- ``serialize`` The serializer engine used to serialize data. Available engines are php,
+   igbinary and json. Beside php, the memcached extension must be compiled with the
+   appropriate serializer support.
+- ``servers`` String or array of memcached servers. If an array MemcacheEngine will use
+   them as a pool.
+- ``options`` Additional options for the memcached client. Should be an array of option => value.
+   Use the ``\Memcached::OPT_*`` constants as keys.
 
 .. _cache-configuration-fallback:
 
@@ -462,17 +516,16 @@ Once disabled, you can use ``enable()`` to re-enable caching::
 
 If you need to check on the state of Cache, you can use ``enabled()``.
 
-Creating a Storage Engine for Cache
-===================================
+Creating a Cache Engine
+=======================
 
-You can provide custom ``Cache`` adapters in ``App\Cache\Engine`` as well
-as in plugins using ``$plugin\Cache\Engine``. src/plugin cache engines can
-also override the core engines. Cache adapters must be in a cache
+You can provide custom ``Cache`` engines in ``App\Cache\Engine`` as well
+as in plugins using ``$plugin\Cache\Engine``. Cache engines must be in a cache
 directory. If you had a cache engine named ``MyCustomCacheEngine``
-it would be placed in either **src/Cache/Engine/MyCustomCacheEngine.php**
-as an app/libs. Or in **plugins/MyPlugin/src/Cache/Engine/MyCustomCacheEngine.php** as
+it would be placed in either **src/Cache/Engine/MyCustomCacheEngine.php**.
+Or in **plugins/MyPlugin/src/Cache/Engine/MyCustomCacheEngine.php** as
 part of a plugin. Cache configs from plugins need to use the plugin
-dot syntax. ::
+dot syntax::
 
     Cache::config('custom', [
         'className' => 'MyPlugin.MyCustomCache',
