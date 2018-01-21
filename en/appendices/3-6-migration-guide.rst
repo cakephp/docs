@@ -181,7 +181,8 @@ ORM
 
 * ``EntityTrait::isEmpty()`` and ``EntityTrait::hasValue()`` were added.
 * ``Table::getAssociation()`` can now read deeply nested associations using
-  ``.`` separated paths. e.g ``Users.Comments``.
+  ``.`` separated paths. e.g ``Users.Comments``. This method will raise
+  exceptions when getting an unknown association now.
 * ``Table::addBehaviors()`` was added making it simpler to add multiple
   behaviors at once.
 * ``Table::getBehavior()`` was added.
