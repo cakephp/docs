@@ -93,7 +93,7 @@ Alternative Control Structures
 Control structures, like ``if``, ``for``, ``foreach``, ``switch``, and ``while``
 can be written in a simplified format. Notice that there are no braces. Instead,
 the end brace for the ``foreach`` is replaced with ``endforeach``. Each of the
-control structures listed below has a similar closing syntax: ``endif``,
+control structures listed above has a similar closing syntax: ``endif``,
 ``endfor``, ``endforeach``, and ``endwhile``. Also notice that instead of using
 a ``semicolon`` after each structure (except the last one), there is a
 ``colon``.
@@ -126,13 +126,13 @@ templating language and CakePHP.
 
 Template files are stored in **src/Template/**, in a folder named after the
 controller that uses the files, and named after the action it corresponds to.
-For example, the view file for the Products controller's "view()" action, would
+For example, the view file for the ``Products`` controller's ``view()`` action, would
 normally be found in **src/Template/Products/view.ctp**.
 
 The view layer in CakePHP can be made up of a number of different parts. Each
 part has different uses, and will be covered in this chapter:
 
-- **views**: Templates are the part of the page that is unique to the action
+- **templates**: Templates are the part of the page that is unique to the action
   being run. They form the meat of your application's response.
 - **elements**: small, reusable bits of view code. Elements are usually rendered
   inside views.
@@ -215,7 +215,7 @@ uncaptured content from the extending view. Assuming our view file has a
     <?php
     $this->extend('/Common/view');
 
-    $this->assign('title', $post);
+    $this->assign('title', $post->title);
 
     $this->start('sidebar');
     ?>

@@ -43,6 +43,14 @@ edit テンプレートを **plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ct
 **src/Template/** に配置しようとします。この方法によって、マスターテンプレートファイルを
 作成して、テーマフォルダーには上書きが必要なファイルだけを配置すればよくなります。
 
+テーマがプラグインとしても機能する場合は、 **config/bootstrap.php** の中で
+読み込ませることを忘れないようにしてください。例::
+
+    /**
+     * /plugins/Modern フォルダにあるプラグインテーマを読み込みます
+     */
+    Plugin::load('Modern');
+
 テーマアセット
 ==============
 

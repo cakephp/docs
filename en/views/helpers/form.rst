@@ -1110,7 +1110,9 @@ Creates a set of radio button inputs. The default widget templates used are::
 **Attributes for Radio Buttons**
 
 * ``'label'`` - Boolean to indicate whether or not labels for widgets should be
-  displayed. Defaults to ``true``.
+  displayed, or an array of attributes to apply to all labels. In case a ``class``
+  attribute is defined, ``selected`` will be added to the ``class`` attribute of
+  checked buttons. Defaults to ``true``.
 
 * ``'hiddenField'`` - If set to ``true`` a hidden input with a value of ``''``
   will be included. This is useful for creating radio sets that are
