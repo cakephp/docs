@@ -330,20 +330,25 @@ C помщью стандартных чзыковых конструкций ``
 .. versionadded:: 3.2
     Метод View::reset() был добавлен в версии 3.2
 
-Assigning a block's content is often useful when you want to convert a view
-variable into a block. For example, you may want to use a block for the page
-title, and sometimes assign the title as a view variable in the controller::
+Назначение содержимого блоку часто может быть полезным, если вы хотите
+преобразовать переменную представления в блок. К примеру, вы захотите
+использовать блок для заголовка страницы и в некоторых случаях назначить
+заголовок в качестве переменной предсавления внутри контроллера::
 
-    // In view file or layout above $this->fetch('title')
+    // В файле представления или макета выше строки $this->fetch('title')
     $this->assign('title', $title);
 
-The ``prepend()`` method allows you to prepend content to an existing block::
+Метод ``prepend()`` позволяет вам вставить содержимое перед существующим
+блоком::
 
     // Добавить перед блоком сайдбара
     $this->prepend('sidebar', 'это содержимое попадет в верхнюю часть сайдбара');
 
-Displaying Blocks
------------------
+Отображение блоков
+------------------
+
+Вы можете выводить блоки, используя метод ``fetch()``. Данный метод выведет блок,
+возвращающий '' если указанный блок не будет существовать.
 
 You can display blocks using the ``fetch()`` method. ``fetch()`` will output a
 block, returning '' if a block does not exist::
