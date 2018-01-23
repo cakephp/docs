@@ -159,8 +159,26 @@ If writing to the ``default`` cache configuration *also* failed in this scenario
 engine would fall back once again to the ``NullEngine`` and prevent the application
 from throwing an uncaught exception.
 
+You can turn off cache fallbacks with ``false``::
+
+    Cache::config('redis', [
+        'className' => 'Redis',
+        'duration' => '+1 hours',
+        'prefix' => 'cake_redis_',
+        'host' => '127.0.0.1',
+        'port' => 6379,
+        'fallback' => false
+    ]);
+
+When there is no fallback cache failures will be raised as exceptions.
+
+
+
 .. versionadded:: 3.5.0
     Cache engine fallbacks were added.
+
+.. versionchanged:: 3.6.0
+    Fallbacks can now be disabled via ``false``
 
 Removing Configured Cache Engines
 ---------------------------------

@@ -132,6 +132,13 @@ behavior that may affect your application:
   modified request.
 
 
+Cache
+=====
+
+* Fallback engines can be disabled by setting ``fallback = false`` for any cache
+  configuration.
+
+
 Core
 ====
 
