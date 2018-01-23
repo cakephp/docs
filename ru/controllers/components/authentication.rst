@@ -292,14 +292,14 @@ POST-данные. В случае успеха данные о пользова
 экшена входа в систему (login). Cистема аутентификации без сохранения состояния
 перепроверяет данные пользователя при каждом запросе. это создает небольшое
 количество дополнительных накладных расходов, но позволяет клиентам
-осуществлять вход без использования куки и делает AuthComponent более гибким
+осуществлять вход без использования куки и делает ``AuthComponent`` более гибким
 при создании API.
 
 Для аутентификаторов без сохранения состояния параметр конфигурации ``storage``
 следует установить в ``Memory``, чтобы ``AuthComponent`` не использовал сеccию
 для хранения  записи пользователя. Вы также можете настроить параметр конфигурации
 ``unauthorizedRedirect`` в ``false``, чтобы ``AuthComponent`` выбрасывал
-``ForbiddenException`` вместо поведения по умолчанию перенаправления на ссылающуюся
+``ForbiddenException`` вместо поведения по умолчанию - перенаправления на ссылающуюся
 страницу.
 
 Объекты аутентификации могут реализовывать метод ``getUser()``, который может
@@ -540,7 +540,7 @@ API-токены произвольно, используя библиотеки
 -----------------------------------------------
 
 После того как вы создали свои собственные объекты аутентификации, вы
-можете использовать ихвключая их в массив ``authenticate`` компонента
+можете использовать их включая их в массив ``authenticate`` компонента
 ``AuthComponent``::
 
     $this->Auth->config('authenticate', [
@@ -880,7 +880,7 @@ CakePHP предоставляет чистый способ переноса п
 выброшенные исключения и обработать их.
 
 Вы можете настроить обработчики авторизации в методе ``beforeFilter()``
-или ``initialize()`` вашего контроллеоа. Вы можете передать информацию о
+или ``initialize()`` вашего контроллера. Вы можете передать информацию о
 настройках каждого объекта авторизации, используя массив::
 
     // Простейшая настройка
@@ -921,11 +921,10 @@ CakePHP предоставляет чистый способ переноса п
 Создание пользовательских объектов авторизации
 ----------------------------------------------
 
-Because authorize objects are pluggable, you can create custom authorize
-objects in your application or plugins. If for example, you wanted to
-create an LDAP authorize object. In
-**src/Auth/LdapAuthorize.php** you could put the
-following::
+Поскольку объекты авторизации подключаемы, вы можете создавать
+пользовательские объекты авторизации в своем приложении или плагинах.
+Например, если вы хотите создать объект авторизации LDAP.
+В **src/Auth/LdapAuthorize.php** вы могли бы поместить следующий код::
 
     namespace App\Auth;
 
@@ -936,37 +935,40 @@ following::
     {
         public function authorize($user, ServerRequest $request)
         {
-            // Do things for ldap here.
+            // Здесь вы производите все операции, необходимые для LDAP.
         }
     }
 
-Authorize objects should return ``false`` if the user is denied access, or
-if the object is unable to perform a check. If the object is able to
-verify the user's access, ``true`` should be returned. It's not required
-that you extend ``BaseAuthorize``, only that your authorize object
-implements an ``authorize()`` method. The ``BaseAuthorize`` class provides
-a number of helpful methods that are commonly used.
+Объекты авторизации должны возвращать ``false``, если пользователю отказано
+в доступе, либо если объект не в состоянии произвести проверку полномочий.
+Если же объект способен произвести проверку прав доступа пользователя, то
+в таком случае возвращается значение ``true``. При этом вовсе не обязательно
+наследоваться от ``BaseAuthorize``, достаточно того, чтобы к вашему объекту
+авторизации был подключен метод ``authorize()``. Класс ``BaseAuthorize``
+предоставляет множество полезных методов, которые часто используются.
 
 Использование пользовательских объектов авторизации
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Once you've created your custom authorize object, you can use them by
-including them in your ``AuthComponent``'s authorize array::
+Как только вы создали ваш объект авторизации, вы можете подключить его,
+передав его в массив ``authorize`` вашего компонента ``AuthComponent``::
 
     $this->Auth->config('authorize', [
-        'Ldap', // app authorize object.
-        'AuthBag.Combo', // plugin authorize object.
+        'Ldap', // объект авторизации уровня приложения.
+        'AuthBag.Combo', // объект авторизации плагина.
     ]);
 
 Отказ от использования авторизации
 ----------------------------------
 
-If you'd like to not use any of the built-in authorization objects and
-want to handle things entirely outside of ``AuthComponent``, you can set
-``$this->Auth->config('authorize', false);``. By default ``AuthComponent``
-starts off with ``authorize`` set to ``false``. If you don't use an
-authorization scheme, make sure to check authorization yourself in your
-controller's ``beforeFilter()`` or with another component.
+Если вы все же пожелали не использовать какой-либо из встроенных объектов
+авторизации, и захотели обрабатывать события за пределами ``AuthComponent``,
+в таком случае вы можете установить значение
+``$this->Auth->config('authorize', false);``. По умолчанию ``AuthComponent``
+использует для ``authorize`` значение ``false``. Если вы не используете
+схему авторизации, убедитесь, что проверка авторизации производится либо
+вручную внутри метода ``beforeFilter()`` вашего контроллера, либо с помощью
+какого-нибудь другого компонента.
 
 Создание общедоступных экшенов
 ------------------------------
