@@ -1,5 +1,5 @@
-Views
-#####
+Представления
+#############
 
 .. php:namespace:: Cake\View
 
@@ -348,30 +348,29 @@ C помщью стандартных чзыковых конструкций ``
 ------------------
 
 Вы можете выводить блоки, используя метод ``fetch()``. Данный метод выведет блок,
-возвращающий '' если указанный блок не будет существовать.
-
-You can display blocks using the ``fetch()`` method. ``fetch()`` will output a
-block, returning '' if a block does not exist::
+возвращающий '' если указанный блок не будет существовать::
 
     <?= $this->fetch('sidebar') ?>
 
-You can also use fetch to conditionally show content that should surround a
-block should it exist. This is helpful in layouts, or extended views where you
-want to conditionally show headings or other markup:
+Вы также можете использовать ``fetch()`` для условного отображения контента,
+который должен окружать блок, если он существует. Это полезно в макетах или
+расширенных представлениях, где вы хотите по условию показать заголовки или
+другую разметку:
 
 .. code-block:: php
 
-    // In src/Template/Layout/default.ctp
+    // В макете src/Template/Layout/default.ctp
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
-        <h3>Menu options</h3>
+        <h3>Опции меню</h3>
         <?= $this->fetch('menu') ?>
     </div>
     <?php endif; ?>
 
-You can also provide a default value for a block if it does not exist.
-This allows you to add placeholder content when a block does not exist.
-You can provide a default value using the second argument:
+Вы также можете указать значение по умолчанию для блока, если оно не
+существует. Это позволяет добавлять содержимое-заполнитель, когда блок
+не существует. Вы можете указать значение по умолчанию, используя
+второй аргумент:
 
 .. code-block:: php
 
@@ -380,22 +379,22 @@ You can provide a default value using the second argument:
         <?= $this->fetch('cart', 'Your cart is empty') ?>
     </div>
 
-Using Blocks for Script and CSS Files
--------------------------------------
+Использование блоков для скриптов и CSS-файлов
+----------------------------------------------
 
-The ``HtmlHelper`` ties into view blocks, and its ``script()``, ``css()``, and
-``meta()`` methods each update a block with the same name when used with the
-``block = true`` option:
+``HtmlHelper`` связывается с блоками представления, а каждый из его
+методов ``script()``, ``css()`` и ``meta()``  обновляет блок с
+соответствующим именем при использовании с параметром ``block = true``:
 
 .. code-block:: php
 
     <?php
-    // In your view file
+    // В вашем файле представления
     $this->Html->script('carousel', ['block' => true]);
     $this->Html->css('carousel', ['block' => true]);
     ?>
 
-    // In your layout file.
+    // В вашем файле макета.
     <!DOCTYPE html>
     <html lang="en">
         <head>
@@ -403,21 +402,161 @@ The ``HtmlHelper`` ties into view blocks, and its ``script()``, ``css()``, and
         <?= $this->fetch('script') ?>
         <?= $this->fetch('css') ?>
         </head>
-        // Rest of the layout follows
+        // Остальная часть макета
 
-The :php:meth:`Cake\\View\\Helper\\HtmlHelper` also allows you to control which
-block the scripts and CSS go to::
+:php:meth:`Cake\\View\\Helper\\HtmlHelper` также позволяет вам
+контролировать в каких именно блоках будут размещены скрипты и
+файлы CSS::
 
-    // In your view
+    // В вашем файле представления
     $this->Html->script('carousel', ['block' => 'scriptBottom']);
 
-    // In your layout
+    // В вашем файле макета.
     <?= $this->fetch('scriptBottom') ?>
 
 .. _view-layouts:
 
 Макеты
 ======
+
+Макет содержит код визуализации, который оборачивает собой представления. Любая
+вещь, которую вы желаете видеть в каждом вашем представлении должна быть
+расположена в макете.
+
+Макет, используемый в CakePHP по умолчанию располжен в файле
+**src/Template/Layout/default.ctp**. Если вы хотите полностью изменить внешний
+вид вашего приложения, это то место, с которого вам следует начать, так как
+выводимый контроллером код представлений располагается внутри этого стандартного
+макета при отображении страницы.
+
+Все файлы макетов должны располагаться в папке **src/Template/Layout**. Когда вы
+создаете макет, вы должны указать, где CakePHP должен выводить ваши представления
+
+Other layout files should be placed in **src/Template/Layout**. When you create
+a layout, you need to tell CakePHP where to place the output of your views. To
+do so, make sure your layout includes a place for ``$this->fetch('content')``
+Here's an example of what a default layout might look like:
+
+.. code-block:: php
+
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+   <title><?= h($this->fetch('title')) ?></title>
+   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+   <!-- Include external files and scripts here (See HTML helper for more info.) -->
+   <?php
+   echo $this->fetch('meta');
+   echo $this->fetch('css');
+   echo $this->fetch('script');
+   ?>
+   </head>
+   <body>
+
+   <!-- If you'd like some sort of menu to
+   show up on all of your views, include it here -->
+   <div id="header">
+       <div id="menu">...</div>
+   </div>
+
+   <!-- Here's where I want my views to be displayed -->
+   <?= $this->fetch('content') ?>
+
+   <!-- Add a footer to each displayed page -->
+   <div id="footer">...</div>
+
+   </body>
+   </html>
+
+The ``script``, ``css`` and ``meta`` blocks contain any content defined in the
+views using the built-in HTML helper. Useful for including JavaScript and CSS
+files from views.
+
+.. note::
+
+    When using ``HtmlHelper::css()`` or ``HtmlHelper::script()`` in template
+    files, specify ``'block' => true`` to place the HTML source in a block with
+    the same name. (See API for more details on usage).
+
+The ``content`` block contains the contents of the rendered view.
+
+You can set the ``title`` block content from inside your view file::
+
+    $this->assign('title', 'View Active Users');
+
+You can create as many layouts as you wish: just place them in the
+**src/Template/Layout** directory, and switch between them inside of your
+controller actions using the controller or view's ``$layout`` property::
+
+    // From a controller
+    public function view()
+    {
+        // Назначение макета.
+        $this->viewBuilder()->setLayout('admin');
+
+        // До версии 3.4
+        $this->viewBuilder()->layout('admin');
+
+        // До версии 3.1
+        $this->layout = 'admin';
+    }
+
+    // From a view file
+    $this->layout = 'loggedin';
+
+For example, if a section of my site included a smaller ad banner space, I might
+create a new layout with the smaller advertising space and specify it as the
+layout for all controllers' actions using something like::
+
+    namespace App\Controller;
+
+    class UsersController extends AppController
+    {
+        public function viewActive()
+        {
+            $this->set('title', 'View Active Users');
+            $this->viewBuilder()->setLayout('default_small_ad');
+
+            // or the following before 3.4
+            $this->viewBuilder()->layout('default_small_ad');
+
+            // or the following before 3.1
+            $this->layout = 'default_small_ad';
+        }
+
+        public function viewImage()
+        {
+            $this->viewBuilder()->setLayout('image');
+
+            // Output user image
+        }
+    }
+
+Besides a default layout CakePHP's official skeleton app also has an 'ajax'
+layout. The Ajax layout is handy for crafting AJAX responses - it's an empty
+layout. (Most AJAX calls only require a bit of markup in return, rather than a
+fully-rendered interface.)
+
+The skeleton app also has a default layout to help generate RSS.
+
+Using Layouts from Plugins
+--------------------------
+
+If you want to use a layout that exists in a plugin, you can use :term:`plugin
+syntax`. For example, to use the contact layout from the Contacts plugin::
+
+    namespace App\Controller;
+
+    class UsersController extends AppController
+    {
+        public function view_active()
+        {
+            $this->viewBuilder()->layout('Contacts.contact');
+            // or the following before 3.1
+            $this->layout = 'Contacts.contact';
+        }
+    }
+
 
 .. _view-elements:
 
