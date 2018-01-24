@@ -207,6 +207,8 @@ Routing
 * Routing variables can now use ``{var}`` style placeholders. This style allows
   mid-word variables to be defined. You cannot combined ``{var}`` placeholders
   with ``:var`` style placeholders.
+* ``Router::routeExists()`` was added. This method lets you check if a route
+  array can be resolved into a valid route.
 
 Shell
 =====
