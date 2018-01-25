@@ -35,10 +35,12 @@ RequestHandler はクライアントやリクエストについての情報を�
 
 .. php:method:: accepts($type = null)
 
-    $type は、文字列・配列・ null のいずれかです。
-    文字列の場合、そのコンテンツタイプをクライアントが受付ける場合に ``true`` を返します。
-    配列の場合、そのなかのひとつを受付ける場合に ``true`` を返します。
-    null の場合、クライアントが受付けるコンテンツタイプをすべて配列で返します。
+    $type は、文字列・配列・null のいずれかです。
+    文字列の場合、そのコンテンツタイプをクライアントが受付ける場合、
+    ``accepts()`` は ``true`` を返します。
+    配列の場合、そのコンテンツタイプのいずれかを受付ける場合、
+    ``accepts()`` は ``true`` を返します。
+    null の場合、クライアントが受付けるコンテンツタイプの配列を返します。
     例::
 
         class ArticlesController extends AppController
@@ -60,7 +62,7 @@ RequestHandler はクライアントやリクエストについての情報を�
                 }
                 if ($this->RequestHandler->accepts(['xml', 'rss', 'atom'])) {
                     // クライアントが XML か RSS か Atom のいずれかを
-                    // 受け付ける場合にコードが実行されます。
+                    // 受付ける場合にコードが実行されます。
                 }
             }
         }
