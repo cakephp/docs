@@ -469,10 +469,6 @@ C помщью стандартных чзыковых конструкций ``
 представлениях с помощью встроенного HTML-хелпера. Это удобно для подключения
 JavaScript и CSS-файлов из представлений.
 
-The ``script``, ``css`` and ``meta`` blocks contain any content defined in the
-views using the built-in HTML helper. Useful for including JavaScript and CSS
-files from views.
-
 .. note::
 
     При использовании ``HtmlHelper::css()`` или ``HtmlHelper::script()`` в
@@ -594,54 +590,61 @@ files from views.
         "helptext" => "О, этот текст очень полезен."
     ]);
 
-Inside the element file, all the passed variables are available as members of
-the parameter array (in the same way that ``Controller::set()`` in the
-controller works with template files). In the above example, the
-**src/Template/Element/helpbox.ctp** file can use the ``$helptext`` variable::
+Внутри файла элемента все переданные переменные дступны как элементы массива
+параметров (аналогично работе метода ``Controller::set()`` в контроллере,
+работающемс файлами шаблонов). В примере выше файл
+**src/Template/Element/helpbox.ctp** может использовать переменную
+``$helptext``::
 
-    // Inside src/Template/Element/helpbox.ctp
-    echo $helptext; // Outputs "Oh, this text is very helpful."
+    // Внутри файла src/Template/Element/helpbox.ctp
+    echo $helptext; // Выводит "О, этот текст очень полезен."
 
-The ``View::element()`` method also supports options for the element.
-The options supported are 'cache' and 'callbacks'. An example::
+Метод ``View::element()`` также поддерживает опции для элемента.
+Это опции 'cache' и 'callbacks'. Пример::
 
     echo $this->element('helpbox', [
-            "helptext" => "This is passed to the element as $helptext",
-            "foobar" => "This is passed to the element as $foobar",
+            "helptext" => "Это передано в элемент как $helptext",
+            "foobar" => "Это передано в элемент как $foobar",
         ],
         [
-            // uses the "long_view" cache configuration
+            // использует настройку кэша "long_view"
             "cache" => "long_view",
-            // set to true to have before/afterRender called for the element
+            // установлен в true, чтобы вызывались методы before/afterRender для элемента
             "callbacks" => true
         ]
     );
 
-Element caching is facilitated through the ``Cache`` class. You can configure
-elements to be stored in any Cache configuration you've set up. This gives you a
-great amount of flexibility to decide where and for how long elements are
-stored. To cache different versions of the same element in an application,
-provide a unique cache key value using the following format::
+Кэширование элементов облегчается с помощью класса ``Cache``. Вы можете
+настроить элементы для хранения в любой конфигурации кэша, которую вы
+настроили. Это дает вам большую гибкость, чтобы определить, где и как
+долго сохраняются элементы. Чтобы кэшировать разные версии одного и того
+же элемента в приложении, укажите уникальное значение ключа кеша, используя
+следующий формат::
 
     $this->element('helpbox', [], [
-            "cache" => ['config' => 'short', 'key' => 'unique value']
+            "cache" => ['config' => 'short', 'key' => 'уникальное значение']
         ]
     );
 
-If you need more logic in your element, such as dynamic data from a datasource,
-consider using a View Cell instead of an element. Find out more :doc:`about View
-Cells </views/cells>`.
+Если вам требуется реализовать больше логики в вашем элементе, такие как
+динамически обновляемые данные, используйте для этого ячейки представления
+(View Cell) вместо элементов. Узнайте больше :doc:`о Ячейках </views/cells>`.
 
-Caching Elements
-----------------
+Кэширование элементов
+---------------------
 
-You can take advantage of CakePHP view caching if you supply a cache parameter.
-If set to ``true``, it will cache the element in the 'default' Cache
-configuration. Otherwise, you can set which cache configuration should be used.
-See :doc:`/core-libraries/caching` for more information on configuring
-``Cache``. A simple example of caching an element would be::
+Вы можете использовать преимущества кэширования представления CakePHP, если вы
+задаете параметр ``cache``. Если установлено значение `` true``, он будет
+кэшировать элемент в конфигурации кэша 'по умолчанию'. В противном случае вы
+можете назначить, какую конфигурацию кэша следует использовать. Смотрите
+:doc:`Кэширование </core-libraries/caching>` для получения дополнительной
+информации о настройке ``Cache``. Простым примером кэширования элемента будет::
 
     echo $this->element('helpbox', [], ['cache' => true]);
+
+Если вы выводите один и тот же элемент более одного раза в представлении при
+включенном кешировании, обязательно устанавливайте параметр 'key' в другое
+значение каждый раз. Это предотвратит переопределение результатов
 
 If you render the same element more than once in a view and have caching
 enabled, be sure to set the 'key' parameter to a different name each time. This
