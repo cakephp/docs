@@ -430,12 +430,9 @@ C помщью стандартных чзыковых конструкций ``
 макета при отображении страницы.
 
 Все файлы макетов должны располагаться в папке **src/Template/Layout**. Когда вы
-создаете макет, вы должны указать, где CakePHP должен выводить ваши представления
-
-Other layout files should be placed in **src/Template/Layout**. When you create
-a layout, you need to tell CakePHP where to place the output of your views. To
-do so, make sure your layout includes a place for ``$this->fetch('content')``
-Here's an example of what a default layout might look like:
+создаете макет, вы должны указать, где CakePHP должен выводить ваши представления.
+Для этого выдолжны разместить в файле макета строку ``$this->fetch('content')``.
+Вот пример того, как может выглядеть макет по умолчанию:
 
 .. code-block:: php
 
@@ -444,7 +441,7 @@ Here's an example of what a default layout might look like:
    <head>
    <title><?= h($this->fetch('title')) ?></title>
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-   <!-- Include external files and scripts here (See HTML helper for more info.) -->
+   <!-- Здесь подключаются внешние файлы и скрипты (См. HTML-хелпер для более полной информации.) -->
    <?php
    echo $this->fetch('meta');
    echo $this->fetch('css');
@@ -453,20 +450,24 @@ Here's an example of what a default layout might look like:
    </head>
    <body>
 
-   <!-- If you'd like some sort of menu to
-   show up on all of your views, include it here -->
+   <!-- Если вы захотите, чтобы какое-нибудь меню
+   отображалось во всех ваших представлениях, добавьте его здесь -->
    <div id="header">
        <div id="menu">...</div>
    </div>
 
-   <!-- Here's where I want my views to be displayed -->
+   <!-- Место, в котором я хочу отображать свои представления -->
    <?= $this->fetch('content') ?>
 
-   <!-- Add a footer to each displayed page -->
+   <!-- Добавляем футер к каждой странице -->
    <div id="footer">...</div>
 
    </body>
    </html>
+
+Блоки ``script``, ``css`` и ``meta`` содержат любой контент, объявленный в 
+представлениях с помощью встроенного HTML-хелпера. Это удобно для подключения
+JavaScript и CSS-файлов из представлений.
 
 The ``script``, ``css`` and ``meta`` blocks contain any content defined in the
 views using the built-in HTML helper. Useful for including JavaScript and CSS
@@ -474,21 +475,21 @@ files from views.
 
 .. note::
 
-    When using ``HtmlHelper::css()`` or ``HtmlHelper::script()`` in template
-    files, specify ``'block' => true`` to place the HTML source in a block with
-    the same name. (See API for more details on usage).
+    При использовании ``HtmlHelper::css()`` или ``HtmlHelper::script()`` в
+    шаблоне установите ``'block' => true``, чтобы расместить исходный HTML
+    в одноименном блоке. (См. API чтобы узнать подробнее)
 
-The ``content`` block contains the contents of the rendered view.
+Блок ``content`` содержит контент выводимого представления.
 
-You can set the ``title`` block content from inside your view file::
+Вы можете настроить блок ``title`` изнутри вашего файла представления::
 
     $this->assign('title', 'View Active Users');
 
-You can create as many layouts as you wish: just place them in the
-**src/Template/Layout** directory, and switch between them inside of your
-controller actions using the controller or view's ``$layout`` property::
+Вы можете создать столько макетов, сколько пожелаете: просто поместите их в
+папке **src/Template/Layout** и переключайтесь между ними в экшенах вашего
+контроллера, используя свойство ``$layout`` предствления или контроллера::
 
-    // From a controller
+    // Из контроллера
     public function view()
     {
         // Назначение макета.
@@ -501,12 +502,12 @@ controller actions using the controller or view's ``$layout`` property::
         $this->layout = 'admin';
     }
 
-    // From a view file
+    // Из файла представления
     $this->layout = 'loggedin';
 
-For example, if a section of my site included a smaller ad banner space, I might
-create a new layout with the smaller advertising space and specify it as the
-layout for all controllers' actions using something like::
+Например, если бы раздел моего сайта включал небольшое пространство рекламного
+баннера, я мог бы создать новый макет с меньшим рекламным пространством и указать
+его как макет для всех экшенов контроллеров, используя что-то вроде::
 
     namespace App\Controller;
 
@@ -517,10 +518,10 @@ layout for all controllers' actions using something like::
             $this->set('title', 'View Active Users');
             $this->viewBuilder()->setLayout('default_small_ad');
 
-            // or the following before 3.4
+            // в версиях ниже 3.4
             $this->viewBuilder()->layout('default_small_ad');
 
-            // or the following before 3.1
+            // в версиях ниже 3.1
             $this->layout = 'default_small_ad';
         }
 
@@ -528,22 +529,23 @@ layout for all controllers' actions using something like::
         {
             $this->viewBuilder()->setLayout('image');
 
-            // Output user image
+            // Вывод изображения пользователя
         }
     }
 
-Besides a default layout CakePHP's official skeleton app also has an 'ajax'
-layout. The Ajax layout is handy for crafting AJAX responses - it's an empty
-layout. (Most AJAX calls only require a bit of markup in return, rather than a
-fully-rendered interface.)
+Помимо стандартного макета, каркас приложения CakePHP также имеет макет 'ajax'.
+Макет Ajax удобен для обработки ответов AJAX - это пустой макет. (Для
+большинства вызовов AJAX требуется только немного разметки взамен,
+а не полностью отображаемый интерфейс.)
 
-The skeleton app also has a default layout to help generate RSS.
+Каркас приложения также включает стандартный макет для создания RSS.
 
-Using Layouts from Plugins
---------------------------
+Использование макетов из плагинов
+---------------------------------
 
-If you want to use a layout that exists in a plugin, you can use :term:`plugin
-syntax`. For example, to use the contact layout from the Contacts plugin::
+Если вы хотите использовать макет, который находится внутри плагина, вы можете
+использовать :term:`plugin syntax`. Например, чтобы использовать макет контакта
+из плагина ``Contacts``::
 
     namespace App\Controller;
 
@@ -552,7 +554,7 @@ syntax`. For example, to use the contact layout from the Contacts plugin::
         public function view_active()
         {
             $this->viewBuilder()->layout('Contacts.contact');
-            // or the following before 3.1
+            // или для версий ниже 3.1
             $this->layout = 'Contacts.contact';
         }
     }
@@ -562,6 +564,176 @@ syntax`. For example, to use the contact layout from the Contacts plugin::
 
 Элементы
 ========
+
+.. php:method:: element(string $elementPath, array $data, array $options = [])
+
+Многие приложения имеют небольшие блоки кода представления, которые необходимо
+повторять от страницы к странице, иногда в разных местах макета. CakePHP может
+помочь вам повторять части вашего веб-сайта, которые необходимо использовать
+повторно. Эти многоразовые части называются Элементами. В CakePHP в качестве
+элементов часто используются блоки рекламы, окна справки, навигационные
+элементы управления, дополнительные меню, формы входа и выноски. Элемент
+по сути является мини-представлением, которое может быть включено в другие виды,
+в макеты и даже внутри других элементов. Элементы могут использоваться, чтобы
+сделать представление более читаемым, помещая рендеринг повторяющихся элементов
+в отдельный файл. Они также могут помочь вам повторно использовать фрагменты
+контента в вашем приложении.
+
+Элементы находятся в папке **src/Template/Element/**, и имеют расширение
+``.ctp``. Они выводятся с помощью метода представления ``element()``::
+
+    echo $this->element('helpbox');
+
+Передача переменных в элемент
+-----------------------------
+
+Вы можете передавать данные в элемент, используя второй аргумент метода
+``element()``::
+
+    echo $this->element('helpbox', [
+        "helptext" => "О, этот текст очень полезен."
+    ]);
+
+Inside the element file, all the passed variables are available as members of
+the parameter array (in the same way that ``Controller::set()`` in the
+controller works with template files). In the above example, the
+**src/Template/Element/helpbox.ctp** file can use the ``$helptext`` variable::
+
+    // Inside src/Template/Element/helpbox.ctp
+    echo $helptext; // Outputs "Oh, this text is very helpful."
+
+The ``View::element()`` method also supports options for the element.
+The options supported are 'cache' and 'callbacks'. An example::
+
+    echo $this->element('helpbox', [
+            "helptext" => "This is passed to the element as $helptext",
+            "foobar" => "This is passed to the element as $foobar",
+        ],
+        [
+            // uses the "long_view" cache configuration
+            "cache" => "long_view",
+            // set to true to have before/afterRender called for the element
+            "callbacks" => true
+        ]
+    );
+
+Element caching is facilitated through the ``Cache`` class. You can configure
+elements to be stored in any Cache configuration you've set up. This gives you a
+great amount of flexibility to decide where and for how long elements are
+stored. To cache different versions of the same element in an application,
+provide a unique cache key value using the following format::
+
+    $this->element('helpbox', [], [
+            "cache" => ['config' => 'short', 'key' => 'unique value']
+        ]
+    );
+
+If you need more logic in your element, such as dynamic data from a datasource,
+consider using a View Cell instead of an element. Find out more :doc:`about View
+Cells </views/cells>`.
+
+Caching Elements
+----------------
+
+You can take advantage of CakePHP view caching if you supply a cache parameter.
+If set to ``true``, it will cache the element in the 'default' Cache
+configuration. Otherwise, you can set which cache configuration should be used.
+See :doc:`/core-libraries/caching` for more information on configuring
+``Cache``. A simple example of caching an element would be::
+
+    echo $this->element('helpbox', [], ['cache' => true]);
+
+If you render the same element more than once in a view and have caching
+enabled, be sure to set the 'key' parameter to a different name each time. This
+will prevent each successive call from overwriting the previous element() call's
+cached result. For example::
+
+    echo $this->element(
+        'helpbox',
+        ['var' => $var],
+        ['cache' => ['key' => 'first_use', 'config' => 'view_long']]
+    );
+
+    echo $this->element(
+        'helpbox',
+        ['var' => $differenVar],
+        ['cache' => ['key' => 'second_use', 'config' => 'view_long']]
+    );
+
+The above will ensure that both element results are cached separately. If you
+want all element caching to use the same cache configuration, you can avoid some
+repetition by setting ``View::$elementCache`` to the cache configuration you
+want to use. CakePHP will use this configuration when none is given.
+
+Requesting Elements from a Plugin
+---------------------------------
+
+If you are using a plugin and wish to use elements from within the plugin, just
+use the familiar :term:`plugin syntax`. If the view is being rendered for a
+plugin controller/action, the plugin name will automatically be prefixed onto
+all elements used, unless another plugin name is present.
+If the element doesn't exist in the plugin, it will look in the main APP
+folder::
+
+    echo $this->element('Contacts.helpbox');
+
+If your view is a part of a plugin, you can omit the plugin name. For example,
+if you are in the ``ContactsController`` of the Contacts plugin, the following::
+
+    echo $this->element('helpbox');
+    // and
+    echo $this->element('Contacts.helpbox');
+
+are equivalent and will result in the same element being rendered.
+
+For elements inside subfolder of a plugin
+(e.g., **plugins/Contacts/Template/Element/sidebar/helpbox.ctp**), use the
+following::
+
+    echo $this->element('Contacts.sidebar/helpbox');
+
+Requesting Elements from the App
+--------------------------------
+
+If you are within a plugin's template file and want to render
+an element residing in your main application rather than this
+or another plugin, use the following::
+
+  echo $this->element('some_global_element', [], ['plugin' => false]);
+  // or...
+  echo $this->element('some_global_element', ['localVar' => $someData], ['plugin' => false]);
+
+Routing prefix and Elements
+---------------------------
+
+.. versionadded:: 3.0.1
+
+If you have a Routing prefix configured, the Element path resolution can switch
+to a prefix location, as Layouts and action View do.
+Assuming you have a prefix "Admin" configured and you call::
+
+    echo $this->element('my_element');
+
+The element first be looked for in **src/Template/Admin/Element/**. If such a
+file does not exist, it will be looked for in the default location.
+
+Caching Sections of Your View
+-----------------------------
+
+.. php:method:: cache(callable $block, array $options = [])
+
+Sometimes generating a section of your view output can be expensive because of
+rendered :doc:`/views/cells` or expensive helper operations. To help make your
+application run faster CakePHP provides a way to cache view sections::
+
+    // Assuming some local variables
+    echo $this->cache(function () use ($user, $article) {
+        echo $this->cell('UserProfile', [$user]);
+        echo $this->cell('ArticleFull', [$article]);
+    }, ['key' => 'my_view_key']);
+
+By default cached view content will go into the ``View::$elementCache`` cache
+config, but you can use the ``config`` option to change this.
 
 .. _view-events:
 
