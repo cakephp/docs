@@ -273,6 +273,6 @@ Se você quer ``bake`` chame para também criar um arquivo de teste para o sua c
   .
 
 .. meta::
-    :title lang=en: Exentendo o Bake
+    :title lang=en: Extending Bake
     :keywords lang=en: command line interface,development,bake view, bake template syntax,twig,erb tags,percent tags
 
