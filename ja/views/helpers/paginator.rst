@@ -265,7 +265,7 @@ first と last オプションを使って先頭ページと最終ページへ�
 
 .. php:method:: next($title = 'Next >>', $options = [])
 
-    このメソッドは :php:meth:`~PagintorHelper::prev()` と全く同じですが、
+    このメソッドは :php:meth:`~PaginatorHelper::prev()` と全く同じですが、
     いくつか例外があります。これは直前のページではなく直後のページヘの
     リンクを作ります。また rel 属性には ``prev`` の代わりに ``next``
     を使います。
