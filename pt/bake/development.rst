@@ -4,7 +4,7 @@ Extendendo o Bake
 Bake fornece uma extenssiva arquitetura que permite a sua aplicação ou plugin ser modificado ou adicionar funcionalidades as bases. Bake faz uso de uma classe view dedicada que usa o `Twig <https://twig.symfony.com/>`_ engine de templates.
 
 Eventos do Bake
-===========
+===============
 
 Como uma class view , ``BakeView`` emite o mesmo evento como qualquer outra classe view,
 mais uma extra que inicializa eventos. No entanto, onde classe view padrão usa o prefixo "View.", ``BakeView`` usa o prefixo "Bake.".
@@ -93,8 +93,8 @@ você pode usar o seguinte evento::
 
 Ao adicionar eventos que escutam o seu bake de templates, você pode simplesmente relacionar a sua logica de eventos com o bake e fornecer callbacks que são facilmente testáveis.
 
-Sintace de Templates do Bake
-====================
+Sintaxe de Templates do Bake
+============================
 
 Bake arquivos de template usa a sintaxe `Twig <https://twig.symfony.com/doc/2.x/>`__ de templates .
 
@@ -270,7 +270,6 @@ Se você quer ``bake`` chame para também criar um arquivo de teste para o sua c
 * A **class suffix** vai se indexado ao mesmo nome providenciado por você na sua chamada de ``bake``
   . No exemplo anterior, isto criaria o arquivo ``ExampleFooTest.php`` .
 * O **class type** vai ser o sub namespace usado para o seu arquivo (relativo ao aplicativo ou plugin que vocês está baking). No exemplo anterior, isto poderia criar o seu teste com o namespace ``App\Test\TestCase\Foo``
-  .
 
 .. meta::
     :title lang=en: Extending Bake
