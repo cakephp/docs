@@ -16,7 +16,8 @@ CakePHP の App テンプレートには、 **success.ctp** 、 **default.ctp** 
 フラッシュメッセージの描画
 ==========================
 
-フラッシュメッセージを描画するためには、FlashHelper の ``render()`` メソッドを使用します。 ::
+フラッシュメッセージを描画するためには、テンプレートファイルの中で FlashHelper の ``render()``
+メソッドを使用します。 ::
 
     <?= $this->Flash->render() ?>
 
@@ -33,7 +34,7 @@ FlashComponent の中で設定したオプションを上書きすることも�
         'element' => 'success'
     ]);
 
-    // ビューの中で、 success.ctp の代わりに great_success.ctp を使用
+    // テンプレートファイルの中で、 success.ctp の代わりに great_success.ctp を使用
     <?= $this->Flash->render('flash', [
         'element' => 'great_success'
     ]);
