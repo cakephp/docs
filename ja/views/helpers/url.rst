@@ -23,7 +23,7 @@ URL の生成
     echo $this->Url->build([
         "controller" => "Posts",
         "action" => "view",
-        "bar"
+        "bar",
     ]);
 
     // 出力結果
@@ -36,7 +36,7 @@ URL の生成
     echo $this->Url->build([
         "controller" => "Posts",
         "action" => "list",
-        "_ext" => "rss"
+        "_ext" => "rss",
     ]);
 
     // 出力結果
@@ -55,7 +55,7 @@ GET パラメーターとフラグメントアンカーの URL::
         "controller" => "Posts",
         "action" => "search",
         "?" => ["foo" => "bar"],
-        "#" => "first"
+        "#" => "first",
     ]);
 
     // 出力結果
@@ -74,10 +74,10 @@ GET パラメーターとフラグメントアンカーの URL::
     //     '/products/:slug',
     //     [
     //         'controller' => 'Products',
-    //         'action' => 'view'
+    //         'action' => 'view',
     //     ],
     //     [
-    //         '_name' => 'product-page'
+    //         '_name' => 'product-page',
     //     ]
     // );
     /products/i-m-slug
@@ -87,7 +87,20 @@ GET パラメーターとフラグメントアンカーの URL::
 
     $this->Url->build('/posts', [
         'escape' => false,
-        'fullBase' => true
+        'fullBase' => true,
+    ]);
+
+以下は、アセットタイムスタンプ付きの URL が ``<link rel="preload"/>`` で囲まれており、
+フォントをプリロードしています。注意: ファイルは存在していなければならず、
+``Configure::read('Asset.timestamp')`` は、タイムスタンプを追加するために
+``true`` または ``'force'`` を返さなければなりません。 ::
+
+    echo $this->Html->meta([
+        'rel' => 'preload',
+        'href' => $this->Url->assetUrl(
+            '/assets/fonts/yout-font-pack/your-font-name.woff2'
+        ),
+        'as' => 'font',
     ]);
 
 .. versionadded:: 3.3.5
