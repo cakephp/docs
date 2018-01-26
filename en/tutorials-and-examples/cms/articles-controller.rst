@@ -314,8 +314,9 @@ typically a URL-safe version of an article's title. We can use the
 :ref:`beforeSave() callback <table-callbacks>` of the ORM to populate our slug::
 
     // in src/Model/Table/ArticlesTable.php
+    namespace App\Model\Table;
 
-    // add this use statement right below the namespace declaration to import
+    use Cake\ORM\Table;
     // the Text class
     use Cake\Utility\Text;
 
