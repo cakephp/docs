@@ -1,20 +1,13 @@
-Quick Start Guide
+快速入门
 *****************
 
-.. note::
-    The documentation is not currently supported in Chinese language for this
-    page.
+实战是学习以及体验 CakePHP 的最好途径。
+让我们以开发一个内容管理系统（CMS）为例，来学习 CakePHP。
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
-
-    You can refer to the English version in the select top menu to have
-    information about this page's topic.
-
-.. include:: /tutorials-and-examples/bookmarks/intro.rst
-.. include:: /tutorials-and-examples/bookmarks/part-two.rst
+.. include:: /tutorials-and-examples/cms/installation.rst
+.. include:: /tutorials-and-examples/cms/database.rst
+.. include:: /tutorials-and-examples/cms/articles-controller.rst
 
 .. meta::
-    :title lang=zh: Getting Started
-    :keywords lang=zh: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
+    :title lang=en: 快速入门
+    :keywords lang=en: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
