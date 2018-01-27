@@ -175,6 +175,10 @@ to use when rendering the cell::
 
     // Set template before echoing the cell.
     $cell = $this->cell('Inbox');
+    $cell->viewBuilder()->setTemplate('messages');
+    // Before 3.4
+    $cell->viewBuilder()->template('messages');
+    // Before 3.1
     $cell->template = 'messages';
     echo $cell;
 
