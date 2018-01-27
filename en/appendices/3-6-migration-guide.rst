@@ -234,3 +234,4 @@ View
 * ``UrlHelper::script()``, ``css()``, and ``image()`` methods now support
   a ``timestamp`` option which allows you to set the ``Asset.timestamp``
   setting for a single method call.
+* Cell classes now have an ``initialize()`` hook method.
