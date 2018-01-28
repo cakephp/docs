@@ -51,10 +51,10 @@ You can generate this stub code quickly using ``bake``::
 
     bin/cake bake cell Inbox
 
-Would generate the code we typed out.
+Would generate the code we created above.
 
 Implementing the Cell
----------------------
+=====================
 
 Assume that we are working on an application that allows users to send messages
 to each other. We have a ``Messages`` model, and we want to show the count of
@@ -128,7 +128,7 @@ use the ``CellTrait`` in your controller to enable the ``cell()`` method there::
     }
 
 Passing Arguments to a Cell
----------------------------
+===========================
 
 You will often want to parameterize cell methods to make cells more flexible.
 By using the second and third arguments of ``cell()``, you can pass action
@@ -256,3 +256,37 @@ pagination parameters <paginating-multiple-queries>`.
 
 .. versionadded:: 3.5.0
     ``Cake\Datasource\Paginator`` was added in 3.5.0.
+
+Cell Options
+============
+
+Cells can declare constructor options that are converted into properties when
+creating a cell object::
+
+    namespace App\View\Cell;
+
+    use Cake\View\Cell;
+    use Cake\Datasource\Paginator;
+
+    class FavoritesCell extends Cell
+    {
+        protected $_validCellOptions = ['limit'];
+
+        protected $limit = 3;
+
+        public function display($userId)
+        {
+            $this->loadModel('Users');
+            $result = $this->Users->find('friends', ['for' => $userId]);
+            $this->set('favorites', $result);
+        }
+    }
+
+Here we have defined a ``$limit`` property and add ``limit`` as a cell option.
+This will allow us to define the option when creating the cell::
+
+    $cell = $this->cell('Favorites', [$user->id], ['limit' => 10])
+
+Cell options are handy when you want data available as properties allowing you
+to override default values.
+
