@@ -425,12 +425,9 @@ TranslateBehavior の背後にある哲学は、デフォルトの言語を表�
         <?= $this->Form->control('_translations.es.body'); ?>
     </fieldset>
 
-コントローラーの中では、通常通りにデータをマーシャリングできますが、
-``translations`` オプションを有効にしてください。 ::
+コントローラーの中では、通常通りにデータをマーシャリングできます。 ::
 
-    $article = $this->Articles->newEntity($this->request->data, [
-        'translations' => true
-    ]);
+    $article = $this->Articles->newEntity($this->request->getData());
     $this->Articles->save($article);
 
 これは、すべてが永続化されたフランス語とスペイン語の翻訳の記事になります。

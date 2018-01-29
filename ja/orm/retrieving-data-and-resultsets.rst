@@ -19,6 +19,7 @@ CakePHP よりも複雑になりえます。いまでは、様々な方法で OR
 - ``debug($query)`` SQL とバインドパラメーターが表示されます。結果は表示されません。
 - ``debug($query->all())`` ResultSet のプロパティー (結果ではなく) が表示されます。
 - ``debug($query->toArray())`` 結果を個々に見る簡単な方法です。
+- ``debug(iterator_to_array($query))`` クエリー結果を配列形式で表示します。
 - ``debug(json_encode($query, JSON_PRETTY_PRINT))`` 人に読みやすい形で結果を表示します。
 - ``debug($query->first())`` 単一のエンティティーのプロパティーを表示します。
 - ``debug((string)$query->first())`` 単一のエンティティーのプロパティーを JSON として表示します。
@@ -825,10 +826,10 @@ leftJoinWith を使う
 
     $query = $articles->find()->contain([
         'FirstComment' => [
-                'strategy' => 'select',
-                'queryBuilder' => function ($q) {
-                    return $q->order(['FirstComment.created' =>'ASC'])->limit(1);
-                }
+            'strategy' => 'select',
+            'queryBuilder' => function ($q) {
+                return $q->order(['FirstComment.created' =>'ASC'])->limit(1);
+            }
         ]
     ]);
 
