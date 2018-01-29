@@ -644,12 +644,8 @@ JavaScript и CSS-файлов из представлений.
 
 Если вы выводите один и тот же элемент более одного раза в представлении при
 включенном кешировании, обязательно устанавливайте параметр 'key' в другое
-значение каждый раз. Это предотвратит переопределение результатов
-
-If you render the same element more than once in a view and have caching
-enabled, be sure to set the 'key' parameter to a different name each time. This
-will prevent each successive call from overwriting the previous element() call's
-cached result. For example::
+значение каждый раз. Это предотвратит переопределение кэшированных результатов
+при каждом новом вызове метода ``element()``. Например::
 
     echo $this->element(
         'helpbox',
@@ -663,13 +659,14 @@ cached result. For example::
         ['cache' => ['key' => 'second_use', 'config' => 'view_long']]
     );
 
-The above will ensure that both element results are cached separately. If you
-want all element caching to use the same cache configuration, you can avoid some
-repetition by setting ``View::$elementCache`` to the cache configuration you
-want to use. CakePHP will use this configuration when none is given.
+Приведенный выше пример обеспечит независимое кэширование результатов для
+обоих элементов. Если вы хотите использовать общие параметры кэширования для всех
+элементов, вы можете избежать некоторых повторов в коде, указав желаемые параметры
+кэширования в ``View::$elementCache``. CakePHP будет использовать эти параметры по
+умолчанию, если другие настройки не будут указаны явно.
 
-Requesting Elements from a Plugin
----------------------------------
+Запрос элементов из плагина
+---------------------------
 
 If you are using a plugin and wish to use elements from within the plugin, just
 use the familiar :term:`plugin syntax`. If the view is being rendered for a
