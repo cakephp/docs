@@ -484,7 +484,7 @@ Configuration Engines
 
 CakePHP provides the ability to load configuration files from a number of
 different sources, and features a pluggable system for `creating your own
-confiugration engines
+configuration engines
 <https://api.cakephp.org/3.x/class-Cake.Core.Configure.ConfigEngineInterface.html>`__.
 The built in configuration engines are:
 
