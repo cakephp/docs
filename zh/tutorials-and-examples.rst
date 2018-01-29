@@ -22,6 +22,15 @@ Tutorials & Examples
     tutorials-and-examples/blog/part-three
     tutorials-and-examples/blog-auth-example/auth
 
+.. toctree::
+    :hidden:
+
+    tutorials-and-examples/cms/installation
+    tutorials-and-examples/cms/database
+    tutorials-and-examples/cms/articles-controller
+    tutorials-and-examples/cms/tags-and-users
+    tutorials-and-examples/cms/authentication
+
 .. meta::
     :title lang=zh: Tutorials & Examples
     :keywords lang=zh: application tutorials,glob,bakery,repository,applications,blog,acl
