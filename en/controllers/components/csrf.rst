@@ -89,7 +89,7 @@ requests. You can do this using the controller's event dispatcher, during the
 
     public function beforeFilter(Event $event)
     {
-        $this->eventManager()->off($this->Csrf);
+        $this->getEventManager()->off($this->Csrf);
     }
 
 .. meta::
