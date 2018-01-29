@@ -668,54 +668,56 @@ JavaScript и CSS-файлов из представлений.
 Запрос элементов из плагина
 ---------------------------
 
-If you are using a plugin and wish to use elements from within the plugin, just
-use the familiar :term:`plugin syntax`. If the view is being rendered for a
-plugin controller/action, the plugin name will automatically be prefixed onto
-all elements used, unless another plugin name is present.
-If the element doesn't exist in the plugin, it will look in the main APP
-folder::
+Если вы используете плагин и хотите использовать элементы из плагина, просто
+используйте знакомый :term:`plugin syntax`. Если представление создается для
+контроллера/экшена плагина, имя плагина будет автоматически ставиться перед
+всеми используемыми элементами до тех пор, пока не будет явно указано название
+другого плагина. Если нужный элемент отсутствует в плагине, он будет искаться в
+папке основного приложения::
 
     echo $this->element('Contacts.helpbox');
 
-If your view is a part of a plugin, you can omit the plugin name. For example,
-if you are in the ``ContactsController`` of the Contacts plugin, the following::
+Если ваше представление - это часть плагина, вы можете не указывать явно имя
+плагина. Например, если вы находитесь в контроллере ``ContactsController``
+плагина ``Contacts``, то следующие строки::
 
     echo $this->element('helpbox');
-    // and
+    // и
     echo $this->element('Contacts.helpbox');
 
-are equivalent and will result in the same element being rendered.
+будут равнозначны по смыслу и выведут один и тот же элемент.
 
-For elements inside subfolder of a plugin
-(e.g., **plugins/Contacts/Template/Element/sidebar/helpbox.ctp**), use the
-following::
+Для элементов внутри вложенных папок плагина
+(например, **plugins/Contacts/Template/Element/sidebar/helpbox.ctp**),
+используйте следующий синтаксис::
 
     echo $this->element('Contacts.sidebar/helpbox');
 
-Requesting Elements from the App
---------------------------------
+Запрос элементов уровня приложения
+----------------------------------
 
-If you are within a plugin's template file and want to render
-an element residing in your main application rather than this
-or another plugin, use the following::
+Если вы находитесь в файле шаблона плагина и хотите визуализировать элемент,
+находящийся в основном приложении, а не внутри этого или другой плагина,
+используйте следующее:
 
   echo $this->element('some_global_element', [], ['plugin' => false]);
-  // or...
+  // или...
   echo $this->element('some_global_element', ['localVar' => $someData], ['plugin' => false]);
 
-Routing prefix and Elements
+Префикс маршрута и элементы
 ---------------------------
 
 .. versionadded:: 3.0.1
 
-If you have a Routing prefix configured, the Element path resolution can switch
-to a prefix location, as Layouts and action View do.
-Assuming you have a prefix "Admin" configured and you call::
+Если у вас в маршруте используется префикс, область видимости пути Элемента
+может переключиться на местоположение соответствующее префиксу, так же как
+это делают Макеты и Представления. Предположим у вас настроен префикс "Admin",
+и вы делаете следующий вызов::
 
     echo $this->element('my_element');
 
-The element first be looked for in **src/Template/Admin/Element/**. If such a
-file does not exist, it will be looked for in the default location.
+Сначала элемент будет искаться в **src/Template/Admin/Element/**. Если его
+не окажется в той папке, то поиск продолжится по стандартному пути.
 
 Caching Sections of Your View
 -----------------------------
