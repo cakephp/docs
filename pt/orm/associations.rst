@@ -332,7 +332,7 @@ As chaves possiveis para as associações hasMany são:
    '\_id'.
 - **bindingKey**: O nome da coluna na tabela atual, que será usado
    para combinar o `` foreignKey``. Se não for especificado, a chave primária (para
-   exemplo, a coluna de identificação da tabela `` Artigos '') será usada.
+   exemplo, a coluna de identificação da tabela `` Artigos ``) será usada.
 - **conditions**: uma série de condições compatíveis com find () ou SQL
    strings como `` ['Comments.visible' => true] ``
 - **sort**: uma série de cláusulas de pedido compatíveis com find () ou SQL
