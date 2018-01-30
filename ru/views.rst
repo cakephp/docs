@@ -744,11 +744,12 @@ CakePHP предоставляет способ кэширования секц�
 События представления
 =====================
 
-Like Controller, view trigger several events/callbacks that you can use to
-insert logic around the rendering life-cycle:
+Так же, как и Контроллер, представление запускает несколько коллбэков/событий,
+которыми вы можете пользоваться для встраивания дополнительной логики вокруг
+жизненного цикла отображения данных:
 
-Event List
-----------
+Список событий
+--------------
 
 * ``View.beforeRender``
 * ``View.beforeRenderFile``
@@ -757,25 +758,30 @@ Event List
 * ``View.beforeLayout``
 * ``View.afterLayout``
 
-You can attach application :doc:`event listeners </core-libraries/events>` to
-these events or use :ref:`Helper Callbacks <helper-api>`.
+Вы можете прикреплять :doc:`обработчики </core-libraries/events>`
+приложения к указанным событиям, или использовать
+:ref:`Коллбэки Хелпера <helper-api>`.
 
-Creating Your Own View Classes
-==============================
+Создание ваших собственных классов представления
+================================================
 
-You may need to create custom view classes to enable new types of data views, or
-add additional custom view-rendering logic to your application. Like most
-components of CakePHP, view classes have a few conventions:
+Возможно, вам придется создавать пользовательские классы представления для
+включения новых типов представлений данных или добавить в приложение
+дополнительную пользовательскую логику визуализации представлений. Как и
+большинство компонентов CakePHP, классы представления имеют несколько
+соглашений:
 
-* View class files should be put in **src/View**. For example:
-  **src/View/PdfView.php**
-* View classes should be suffixed with ``View``. For example: ``PdfView``.
-* When referencing view class names you should omit the ``View`` suffix. For
-  example: ``$this->viewBuilder()->className('Pdf');``.
+* Файлы классов представления должны быть расположены в папке **src/View**.
+  Например: **src/View/PdfView.php**
+* Имена классов представления должны оканчиваться на ``View``.
+  Например: ``PdfView``.
+* Когда вы ссылаетесь имена классов представления, вы должны опускать
+  суффикс ``View``. Например: ``$this->viewBuilder()->className('Pdf');``.
 
-You'll also want to extend ``View`` to ensure things work correctly::
+Также, для того, чтобы все работало правильно, вы должны убдиться, что
+наследуетесь от класса ``View``::
 
-    // In src/View/PdfView.php
+    // В src/View/PdfView.php
     namespace App\View;
 
     use Cake\View\View;
@@ -784,12 +790,12 @@ You'll also want to extend ``View`` to ensure things work correctly::
     {
         public function render($view = null, $layout = null)
         {
-            // Custom logic here.
+            // Здесь находится ваша логика.
         }
     }
 
-Replacing the render method lets you take full control over how your content is
-rendered.
+Переопределение метода ``render()`` позволяет вам полностью контролировать то,
+как отображается ваш контент.
 
 Подробнее о Представлениях
 ==========================
