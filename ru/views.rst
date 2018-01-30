@@ -719,28 +719,77 @@ JavaScript и CSS-файлов из представлений.
 Сначала элемент будет искаться в **src/Template/Admin/Element/**. Если его
 не окажется в той папке, то поиск продолжится по стандартному пути.
 
-Caching Sections of Your View
------------------------------
+Кэширование секций вашего представления
+---------------------------------------
 
 .. php:method:: cache(callable $block, array $options = [])
 
-Sometimes generating a section of your view output can be expensive because of
-rendered :doc:`/views/cells` or expensive helper operations. To help make your
-application run faster CakePHP provides a way to cache view sections::
+Иногда генерирование секции вывода вашего представления может быть
+дорогостоящим из-за обработки :doc:`ячеек </views/cells>` или ресурсоемких
+вспомогательных операций. Чтобы помочь вашему приложению работать быстрее,
+CakePHP предоставляет способ кэширования секций представления::
 
-    // Assuming some local variables
+    // Предполагаются некоторые локальные переменные
     echo $this->cache(function () use ($user, $article) {
         echo $this->cell('UserProfile', [$user]);
         echo $this->cell('ArticleFull', [$article]);
     }, ['key' => 'my_view_key']);
 
-By default cached view content will go into the ``View::$elementCache`` cache
-config, but you can use the ``config`` option to change this.
+По умолчанию кэшированное содержимое представления будет передаваться в
+параметр конфигурации ``View::$elementCache``, но вы можете использовать
+опцию ``config``, чтобы изменить это.
 
 .. _view-events:
 
-View Events
-===========
+События представления
+=====================
+
+Like Controller, view trigger several events/callbacks that you can use to
+insert logic around the rendering life-cycle:
+
+Event List
+----------
+
+* ``View.beforeRender``
+* ``View.beforeRenderFile``
+* ``View.afterRenderFile``
+* ``View.afterRender``
+* ``View.beforeLayout``
+* ``View.afterLayout``
+
+You can attach application :doc:`event listeners </core-libraries/events>` to
+these events or use :ref:`Helper Callbacks <helper-api>`.
+
+Creating Your Own View Classes
+==============================
+
+You may need to create custom view classes to enable new types of data views, or
+add additional custom view-rendering logic to your application. Like most
+components of CakePHP, view classes have a few conventions:
+
+* View class files should be put in **src/View**. For example:
+  **src/View/PdfView.php**
+* View classes should be suffixed with ``View``. For example: ``PdfView``.
+* When referencing view class names you should omit the ``View`` suffix. For
+  example: ``$this->viewBuilder()->className('Pdf');``.
+
+You'll also want to extend ``View`` to ensure things work correctly::
+
+    // In src/View/PdfView.php
+    namespace App\View;
+
+    use Cake\View\View;
+
+    class PdfView extends View
+    {
+        public function render($view = null, $layout = null)
+        {
+            // Custom logic here.
+        }
+    }
+
+Replacing the render method lets you take full control over how your content is
+rendered.
 
 Подробнее о Представлениях
 ==========================
