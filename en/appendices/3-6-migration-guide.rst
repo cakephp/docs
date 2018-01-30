@@ -150,6 +150,8 @@ Database
 
 * ``Query::identifier()`` was added. This method makes it easier to create
   identifier expressions for use in complex queries.
+* Database connections will automatically be re-established when connections
+  timeout during long running scripts.
 
 Datasource
 ==========
