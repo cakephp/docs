@@ -91,33 +91,33 @@
 
 .. note::
 
-    Шаблоны ячеек имеют изолированную область видимости
-    
-    Cell templates have an isolated scope that does not share the same View
-    instance as the one used to render template and layout for the current
-    controller action or other cells. Hence they are unaware of any helper calls
-    made or blocks set in the action's template / layout and vice versa.
+    Шаблоны ячеек имеют изолированную область видимости, которая не использует тот
+    же самый экземпляр Представления, который используется для визуализации шаблона
+    и макета для текущего экшена контроллера или других ячеек. Следовательно, они
+    не знают о каких-либо вызовах хелперов или блоках, установленных в
+    шаблоне/макете экшена и наоборот.
 
 Загрузка ячеек
 ==============
 
-Cells can be loaded from views using the ``cell()`` method and works the same in
-both contexts::
+Ячейки могут быть загружены из представлений с помощью метода ``cell()``, и работают
+аналогично в обоих контекстах::
 
-    // Load an application cell
+    // Загрузка ячейки на уровне приложения
     $cell = $this->cell('Inbox');
 
-    // Load a plugin cell
+    // Загрузка ячейки из плагина
     $cell = $this->cell('Messaging.Inbox');
 
-The above will load the named cell class and execute the ``display()`` method.
-You can execute other methods using the following::
+Приведенный выше код загрузит класс названной ячейки, и исполнит метод
+``display()``. Вы можете вызывать другие методы следующим образом::
 
-    // Run the expanded() method on the Inbox cell
+    // Выполнить метод expanded() ячейки Inbox
     $cell = $this->cell('Inbox::expanded');
 
-If you need controller logic to decide which cells to load in a request, you can
-use the ``CellTrait`` in your controller to enable the ``cell()`` method there::
+Если вам понадобится логика контроллера, чтобы решить какие ячейки загружать в
+запросе, вы можете использовать ``CellTrait`` в вашем контроллере, чтобы сделать
+доступным метод ``cell()``::
 
     namespace App\Controller;
 
@@ -128,26 +128,27 @@ use the ``CellTrait`` in your controller to enable the ``cell()`` method there::
     {
         use CellTrait;
 
-        // More code.
+        // Остальной код.
     }
 
-Passing Arguments to a Cell
-===========================
+Передача аргументов ячейке
+==========================
 
-You will often want to parameterize cell methods to make cells more flexible.
-By using the second and third arguments of ``cell()``, you can pass action
-parameters and additional options to your cell classes, as an indexed array::
+Часто вам может понадобиться использовать параметры в методах ячеек, чтобы
+добиться большей гибкости при их использовании. Используя вотрой и третий
+аргументы метода ``cell()``, вы можете передать параметры экшена и
+дополнительные опции классам ваших ячеек в виде индексированного массива::
 
     $cell = $this->cell('Inbox::recent', ['-3 days']);
 
-The above would match the following function signature::
+Это будет соответствовавть следующей сигнатуре функции::
 
     public function recent($since)
     {
     }
 
-Rendering a Cell
-================
+Отображение ячейки
+==================
 
 Once a cell has been loaded and executed, you'll probably want to render it. The
 easiest way to render a cell is to echo it::
