@@ -1443,6 +1443,32 @@ Ex: name=data[User][username], id=UserUsername
            </div>
         </div>
 
+    * ``$attributes['showParents']`` When creating selects with optgroups this will
+      ensure an element will be added for the parent of each option group::
+
+        $options = array(
+            'First' => array('Label 1', 'Label 2'),
+            'Second' => array('Second', 'Third'),
+        );
+        echo $this->Form->select('Model.field', $options, array(
+            'showParents' => true
+        ));
+
+      Output:
+
+      .. code-block:: html
+
+        <select name="data[Model][field]" id="ModelField">
+            <optgroup label="First">
+                <option value="0">Label 1</option>
+                <option value="1">Label 2</option>
+            </optgroup>
+            <optgroup label="Second">
+                <option value="0">Second</option>
+                <option value="1">Third</option>
+            </optgroup>
+        </select>
+
     .. versionchanged:: 2.3
         Support for arrays in ``$attributes['disabled']`` was added in 2.3.
 
