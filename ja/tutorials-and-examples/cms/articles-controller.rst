@@ -303,9 +303,10 @@ URL オプションなしで ``create()`` を呼び出したので、 ``FormHelp
 :ref:`beforeSave() コールバック <table-callbacks>` が使用できます。 ::
 
     // src/Model/Table/ArticlesTable.php の中で
+    namespace App\Model\Table;
 
-    // この use 文を名前空間宣言のすぐ下に追加して、
-    // Text クラスをインポートしてください。
+    use Cake\ORM\Table;
+    // Text クラス
     use Cake\Utility\Text;
 
     // 次のメソッドを追加してください。
