@@ -57,7 +57,7 @@ CakePHP 2.x から CakePHP 3 にアップグレードするためには、多く
     skeleton            Add basic skeleton files and folders from the "app"
                         repository.
     prefixed_templates  Move view templates for prefixed actions.
-    all                 Run all tasks expect for skeleton. That task should
+    all                 Run all tasks except for skeleton. That task should
                         only be run manually, and only for apps (not
                         plugins).
 
