@@ -150,13 +150,13 @@
 Отображение ячейки
 ==================
 
-Once a cell has been loaded and executed, you'll probably want to render it. The
-easiest way to render a cell is to echo it::
+Как только ячейка будет загружена и выполнена, вы вероятно захотите отобразить
+её. Простейший способ отобразить ячейку - использовать ``echo``::
 
     <?= $cell ?>
 
-This will render the template matching the lowercased and underscored version of
-our action name, e.g. **display.ctp**.
+Это выведет шаблон, соответствующий названию нашего экшена, записанным в нижнем
+регистре с разделением слов подчеркиваниями, например **display.ctp**.
 
 Because cells use ``View`` to render templates, you can load additional cells
 within a cell template if required.
