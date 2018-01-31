@@ -649,7 +649,7 @@ serait par exemple::
 Si vous rendez le même element plus d'une fois dans une vue et que vous avez
 activé la mise en cache, assurez-vous de définir le paramètre 'key' avec
 un nom différent à chaque fois. Cela évitera que chaque appel successif
-n'écrase le résultat de la mise en cache du précédent appel de element().
+n'écrase le résultat de la mise en cache du précédent appel de ``element()``.
 Par exemple::
 
     echo $this->element(
