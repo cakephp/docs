@@ -606,7 +606,7 @@ See :doc:`/core-libraries/caching` for more information on configuring
 
 If you render the same element more than once in a view and have caching
 enabled, be sure to set the 'key' parameter to a different name each time. This
-will prevent each successive call from overwriting the previous element() call's
+will prevent each successive call from overwriting the previous ``element()`` call's
 cached result. For example::
 
     echo $this->element(
