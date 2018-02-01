@@ -165,7 +165,7 @@ Configuration options can also be provided as a :term:`DSN` string. This is
 useful when working with environment variables or :term:`PaaS` providers::
 
     Email::configTransport('default', [
-        'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:465?tls=true',
+        'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:587?tls=true',
     ]);
 
 When using a DSN string you can define any additional parameters/options as
