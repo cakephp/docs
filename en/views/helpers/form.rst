@@ -2510,7 +2510,7 @@ place checkbox/radio inputs outside of the label you can do so by modifying the
 templates::
 
     $this->Form->setTemplates([
-        'nestingLabel' => '{{input}}<label{{attrs}}>{{text}}</label>',
+        'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>',
         'formGroup' => '{{input}}{{label}}',
     ]);
 
