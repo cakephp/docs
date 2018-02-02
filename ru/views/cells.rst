@@ -155,21 +155,21 @@
 
     <?= $cell ?>
 
-Это выведет шаблон, соответствующий названию нашего экшена, записанным в нижнем
+Это выведет шаблон, соответствующий названию нашего экшена, записанному в нижнем
 регистре с разделением слов подчеркиваниями, например **display.ctp**.
 
-Because cells use ``View`` to render templates, you can load additional cells
-within a cell template if required.
+Поскольку ячейки используют ``View`` для отображения шаблона, вы можете загружать
+дополнительные ячейки внутри шаблона текущей ячейки, если это потребуется.
 
 .. note::
 
-    Echoing a cell uses the PHP ``__toString()`` magic method which prevents PHP
-    from showing the filename and line number for any fatal errors raised. To
-    obtain a meanful error message, it is recommended to use the
-    ``Cell::render()`` method, for example ``<?= $cell->render() ?>``.
+    Вывод ячейки с помощью ``echo`` использует магический метод PHP
+    ``__toString()``, который предотвращает вывод имени файла и номера строки для
+    появляющихся ошибок. Для получения более информативных сообщений об ошибках
+    рекомендуется использовать метод ``Cell::render()``, например
 
-Rendering Alternate Templates
------------------------------
+Отображение альтернативных шаблонов
+-----------------------------------
 
 By convention cells render templates that match the action they are executing.
 If you need to render a different view template, you can specify the template
