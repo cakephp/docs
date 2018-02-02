@@ -1933,7 +1933,8 @@ also need to prefix your plugin fixtures with ``plugin.blog.blog_posts``::
 
 If you want to use plugin fixtures in the app tests you can
 reference them using ``plugin.pluginName.fixtureName`` syntax in the
-``$fixtures`` array.
+``$fixtures`` array. Additionally if you use vendor plugin name or fixture 
+directories you can use the following: ``plugin.vendorName/pluginName.folderName/fixtureName``.
 
 Before you can use fixtures you should double check that your ``phpunit.xml``
 contains the fixture listener::
