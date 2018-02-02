@@ -171,56 +171,57 @@
 Отображение альтернативных шаблонов
 -----------------------------------
 
-By convention cells render templates that match the action they are executing.
-If you need to render a different view template, you can specify the template
-to use when rendering the cell::
+По соглашениям ячейки визуализируют шаблоны, которые соответствуют экшену,
+который они выполняют. Если вам нужно отобразить другой шаблон представления,
+вы можете указать желаемый для отображения шаблон ячейки::
 
-    // Calling render() explicitly
+    // Явный вызов метода render()
     echo $this->cell('Inbox::recent', ['-3 days'])->render('messages');
 
-    // Set template before echoing the cell.
+    // Установка шаблона перед выводом ячейки.
     $cell = $this->cell('Inbox');
     $cell->viewBuilder()->setTemplate('messages');
-    // Before 3.4
+    // До версии 3.4
     $cell->viewBuilder()->template('messages');
-    // Before 3.1
+    // До версии 3.1
     $cell->template = 'messages';
     echo $cell;
 
-Caching Cell Output
--------------------
+Кэширование выводимых в ячейках данных 
+--------------------------------------
 
-When rendering a cell you may want to cache the rendered output if the contents
-don't change often or to help improve performance of your application. You can
-define the ``cache`` option when creating a cell to enable & configure caching::
+При выводе ячеек вы можете захотеть кэшировать их содержимое, если оно меняется
+нечасто, или чтобы повысить производительность вашего приложения. Вы можете
+определить опцию ``cache`` при создании ячейки для активации и настройки
+параметров кэширования::
 
-    // Cache using the default config and a generated key
+    // Кэширование с использованием стандартной конфигурации и со сгенерированным ключом
     $cell = $this->cell('Inbox', [], ['cache' => true]);
 
-    // Cache to a specific cache config and a generated key
+    // Кэширование с определенной конфигурацией и со сгенерированным ключом
     $cell = $this->cell('Inbox', [], ['cache' => ['config' => 'cell_cache']]);
 
-    // Specify the key and config to use.
+    // Определены и ключ и конфигурация кэширования
     $cell = $this->cell('Inbox', [], [
         'cache' => ['config' => 'cell_cache', 'key' => 'inbox_' . $user->id]
     ]);
 
-If a key is generated the underscored version of the cell class and template
-name will be used.
+Если ключ сгенерирован автоматически, название ключа будет сформировано из
+имени класса ячейки и имени шаблона, разделенных подчеркиванием.
 
 .. note::
 
-    A new ``View`` instance is used to render each cell and these new objects
-    do not share context with the main template / layout. Each cell is
-    self-contained and only has access to variables passed as arguments to the
-    ``View::cell()`` call.
+    Для обработки каждой ячейки используется новый экземпляр ``View``,
+    таким образом они не используют общий контекст с главным шаблоном/макетом.
+    Каждая ячейка изолирована, и может иметь доступ только к переменным,
+    переданным в качестве параметров при вызове метода ``View::cell()``.
 
-Paginating Data inside a Cell
-=============================
+Постраничная навигация внутри ячеек
+===================================
 
-Creating a cell that renders a paginated result set can be done by leveraging
-the ``Paginator`` class of the ORM. An example of paginating a user's favorite
-messages could look like::
+Создание ячейки, которая выводит разбитый на страницы результат запроса, может
+быть осуществлено с помощью класса ORM ``Paginator``. Пример постраничной
+навигации по избранным сообщениям пользователя может выглядеть так::
 
     namespace App\View\Cell;
 
@@ -233,10 +234,10 @@ messages could look like::
         {
             $this->loadModel('Messages');
 
-            // Create a paginator
+            // Создание пагинатора
             $paginator = new Paginator();
 
-            // Paginate the model
+            // Разбиение модели на страницы
             $results = $paginator->paginate(
                 $this->Messages,
                 $this->request->getQueryParams(),
@@ -256,11 +257,13 @@ messages could look like::
         }
     }
 
+Описанная выше ячейка разбивает на страницы модель ``Messages``
+
 The above cell would paginate the ``Messages`` model using :ref:`scoped
 pagination parameters <paginating-multiple-queries>`.
 
 .. versionadded:: 3.5.0
-    ``Cake\Datasource\Paginator`` was added in 3.5.0.
+    ``Cake\Datasource\Paginator`` был добавлен в версии 3.5.0.
 
 Cell Options
 ============
