@@ -257,19 +257,17 @@
         }
     }
 
-Описанная выше ячейка разбивает на страницы модель ``Messages``
-
-The above cell would paginate the ``Messages`` model using :ref:`scoped
-pagination parameters <paginating-multiple-queries>`.
+Описанная выше ячейка разбивает на страницы модель ``Messages``, используя
+:ref:`scoped pagination parameters <paginating-multiple-queries>`.
 
 .. versionadded:: 3.5.0
     ``Cake\Datasource\Paginator`` был добавлен в версии 3.5.0.
 
-Cell Options
-============
+Параметры ячеек
+===============
 
-Cells can declare constructor options that are converted into properties when
-creating a cell object::
+В ячейках могут быть объявлены параметры конструктора, которые конвертируются
+в свойства при создании объекта ячейки::
 
     namespace App\View\Cell;
 
@@ -290,10 +288,10 @@ creating a cell object::
         }
     }
 
-Here we have defined a ``$limit`` property and add ``limit`` as a cell option.
-This will allow us to define the option when creating the cell::
+Здесь мы определили свойство ``$limit`` и добавили параметр ячейки ``limit``.
+Это позволит нам определять параметр при создании ячейки::
 
     $cell = $this->cell('Favorites', [$user->id], ['limit' => 10])
 
-Cell options are handy when you want data available as properties allowing you
-to override default values.
+Параметры ячеек удобны, когда вы хотите, чтобы доступные в виде свойств данные
+переопределяли значения по умолчанию.
