@@ -49,7 +49,7 @@ bake のような CLI ツールのみ提供するプラグインをロードす�
 
     bin/cake plugin unload MyPlugin
 
-これは **config/bootstrap.php** のから ``Plugin::load('MyPlugin',...)``
+これは **config/bootstrap.php** から ``Plugin::load('MyPlugin',...)``
 の行を削除します。
 
 プラグインのアセット
