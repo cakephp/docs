@@ -33,48 +33,47 @@
 
 Например, файл представления для экшена ``edit`` контроллера ``Posts`` будет
 расположен в файле **plugins/Modern/src/Template/Posts/edit.ctp**. Файлы макетов
-будут находиться в **plugins/Modern/src/Template/Layout/**.
+будут находиться в **plugins/Modern/src/Template/Layout/**. Вы также можете
+создавать кастомизированные шаблоны для плагинов с помощью тем. Если бы у вас
+был бы плагин под названием 'Cms', который бы содержал контроллер
+``TagsController``, тема ``Modern`` могла бы предоставить шаблон
+**plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ctp**, заменяющий шаблон
+``edit`` плагина.
 
-For example, the view file for an edit action of a Posts controller would reside
-at **plugins/Modern/src/Template/Posts/edit.ctp**. Layout files would reside in
-**plugins/Modern/src/Template/Layout/**. You can provide customized templates
-for plugins with a theme as well. If you had a plugin named 'Cms', that
-contained a TagsController, the Modern theme could provide
-**plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ctp** to replace the edit
-template in the plugin.
+Если файл представления не может быть найден внутри темы, CakePHP попытается
+обнаружить файл представления в папке **src/Template/**. Таким образом, вы
+можете создать файлы главного шаблона, и просто переопределять их в папке
+с вашей темой.
 
-If a view file can't be found in the theme, CakePHP will try to locate the view
-file in the **src/Template/** folder. This way, you can create master template files
-and simply override them on a case-by-case basis within your theme folder.
 
-If your theme also acts as a plugin, don't forget to ensure it is loaded in
-**config/bootstrap.php**. For example::
+Если ваша тема также действует еще и в качестве плагина, не забудьте проверить,
+что она прописана в файле **config/bootstrap.php**. Например::
 
     /**
-     * Load our plugin theme residing in the folder /plugins/Modern
+     * Загружаем наш плагин с темой в папке /plugins/Modern
      */
     Plugin::load('Modern');
 
-Theme Assets
+Ресурсы темы
 ============
 
-Because themes are standard CakePHP plugins, they can include any necessary
-assets in their webroot directory. This allows for easy packaging and
-distribution of themes. Whilst in development, requests for theme assets will be
-handled by :php:class:`Cake\\Routing\\Dispatcher`. To improve performance for production
-environments, it's recommended that you :ref:`symlink-assets`.
+Так как темы - это стандартные плагины CakePHP, они могут включать в себя все
+необходимые ресурсы в своей папке ``webroot``. Это позволяет с легкостью комплектовать
+и распространять темы. Во время разработки запросы к ресурсам темы бутдут
+обабатываться :php:class:`Cake\\Routing\\Dispatcher`. Для повышения производительности
+на стадии продакшена рекомендуется использовать :ref:`symlink-assets`.
 
-All of CakePHP's built-in helpers are aware of themes and will create the
-correct paths automatically. Like template files, if a file isn't in the theme
-folder, it will default to the main webroot folder::
+Все встроенные хелперы CakePHP отлично работают с темами, и будут всегда создавать для
+них корректные пути автоматически. Подобно файлам шаблонов, если нужный файл будет
+отсутствовать в папке темы, будет использована главная папка ``webroot``::
 
-    // When in a theme with the name of 'purple_cupcake'
+    // В теме под названием 'purple_cupcake'
     $this->Html->css('main.css');
 
-    // creates a path like
+    // создается путь
     /purple_cupcake/css/main.css
 
-    // and links to
+    // и ссылается на
     plugins/PurpleCupcake/webroot/css/main.css
 
 .. meta::
