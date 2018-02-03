@@ -117,19 +117,19 @@ Asset.timestamp
 Настройка базы данных
 ---------------------
 
-See the :ref:`Database Configuration <database-configuration>` for information
-on configuring your database connections.
+См. раздел :ref:`Настройка БД <database-configuration>` для получения
+информации о настройке соединений с базой данных.
 
 Конфигурация кэширования
 ------------------------
 
-См. раздел ::ref:`Caching Configuration <cache-configuration>` для получения
-информации о настройке соединений с базой данных.
+См. раздел :ref:`Настройка кэширования <cache-configuration>` для получения
+информации о настройке кэширования.
 
 Конфигурация ошибок и исключений
 --------------------------------
 
-См. раздел :ref:`Error and Exception Configuration <error-configuration>` для
+См. раздел :ref:`Ошибки и настройка исключений <error-configuration>` для
 получения информации о настройке ошибок и обработчиков исключений.
 
 Конфигурация логирования
@@ -141,7 +141,7 @@ on configuring your database connections.
 Настройка электронной почты
 ---------------------------
 
-См. раздел :ref:`Email Configuration <email-configuration>` для получения
+См. раздел :ref:`Настройка эл. почты <email-configuration>` для получения
 информации о настройке пресетов электронной почты в CakePHP.
 
 Настройка сеанса(сессии)
@@ -153,7 +153,7 @@ on configuring your database connections.
 Конфигурация маршрутизации
 --------------------------
 
-См. раздел :ref:`Routes Configuration <routes-configuration>` для
+См. раздел :ref:`Настройка маршрутизации <routes-configuration>` для
 получения дополнительной информации о настройке маршрутизации и
 создании маршрутов для вашего приложения.
 
