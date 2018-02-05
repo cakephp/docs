@@ -6,7 +6,7 @@ let you create JSON and XML responses, and integrate with the
 :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`.
 
 By enabling ``RequestHandlerComponent`` in your application, and enabling
-support for the ``json`` and or ``xml`` extensions, you can automatically
+support for the ``json`` and/or ``xml`` extensions, you can automatically
 leverage the new view classes. ``JsonView`` and ``XmlView`` will be referred to
 as data views for the rest of this page.
 
@@ -26,7 +26,7 @@ controller::
         $this->loadComponent('RequestHandler');
     }
 
-This can be done in your `AppController` and will enable automatic view class
+This can be done in your ``AppController`` and will enable automatic view class
 switching on content types. You can also set the component up with the
 ``viewClassMap`` setting, to map types to your custom classes and/or map other
 data types.
