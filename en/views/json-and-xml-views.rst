@@ -31,7 +31,7 @@ switching on content types. You can also set the component up with the
 ``viewClassMap`` setting, to map types to your custom classes and/or map other
 data types.
 
-You can optionally enable the json and or xml extensions with
+You can optionally enable the json and/or xml extensions with
 :ref:`file-extensions`. This will allow you to access the ``JSON``, ``XML`` or
 any other special format views by using a custom URL ending with the name of the
 response type as a file extension such as ``http://example.com/articles.json``.
