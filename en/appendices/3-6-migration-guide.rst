@@ -130,6 +130,8 @@ behavior that may affect your application:
 * ``Router::parseNamedParams()`` no longer mutates the request object in-place.
   Instead you will need to use the return value of this method to access the
   modified request.
+* ``Hash::extract()`` no longer matches integer ``0`` when using attribute
+  matchers for string values.
 
 
 Cache
