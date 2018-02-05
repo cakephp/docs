@@ -6,7 +6,7 @@ let you create JSON and XML responses, and integrate with the
 :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`.
 
 By enabling ``RequestHandlerComponent`` in your application, and enabling
-support for the ``json`` and or ``xml`` extensions, you can automatically
+support for the ``json`` and/or ``xml`` extensions, you can automatically
 leverage the new view classes. ``JsonView`` and ``XmlView`` will be referred to
 as data views for the rest of this page.
 
@@ -26,18 +26,18 @@ controller::
         $this->loadComponent('RequestHandler');
     }
 
-This can be done in your `AppController` and will enable automatic view class
+This can be done in your ``AppController`` and will enable automatic view class
 switching on content types. You can also set the component up with the
 ``viewClassMap`` setting, to map types to your custom classes and/or map other
 data types.
 
-You can optionally enable the json and or xml extensions with
+You can optionally enable the json and/or xml extensions with
 :ref:`file-extensions`. This will allow you to access the ``JSON``, ``XML`` or
 any other special format views by using a custom URL ending with the name of the
 response type as a file extension such as ``http://example.com/articles.json``.
 
-By default, when not enabling :ref:`file-extensions`, the request the ``Accept``
-header is used for selecting which type of format should be rendered to the
+By default, when not enabling :ref:`file-extensions`, the request, the ``Accept``
+header is used for, selecting which type of format should be rendered to the
 user. An example ``Accept`` format that is used to render ``JSON`` responses is
 ``application/json``.
 
@@ -69,7 +69,7 @@ serialize::
             // Set the view vars that have to be serialized.
             $this->set('articles', $this->paginate());
             // Specify which view vars JsonView should serialize.
-            $this->set('_serialize', ['articles']);
+            $this->set('_serialize', 'articles');
         }
     }
 
@@ -97,7 +97,7 @@ You can also define ``_serialize`` as an array of view variables to combine::
         }
     }
 
-Defining ``_serialize`` as an array has the added benefit of automatically
+Defining ``_serialize`` as an array has added the benefit of automatically
 appending a top-level ``<response>`` element when using :php:class:`XmlView`.
 If you use a string value for ``_serialize`` and XmlView, make sure that your
 view variable has a single top-level element. Without a single top-level
