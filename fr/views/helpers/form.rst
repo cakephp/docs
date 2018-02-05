@@ -2510,7 +2510,7 @@ avez besoin de placer ces éléments à l'extérieur de la balise label, vous po
 le faire en modifiant les templates::
 
     $this->Form->setTemplates([
-        'nestingLabel' => '{{input}}<label{{attrs}}>{{text}}</label>',
+        'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>',
         'formGroup' => '{{input}}{{label}}',
     ]);
 

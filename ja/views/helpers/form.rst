@@ -2374,7 +2374,7 @@ CakePHP の多くのヘルパーと同じように、FormHelper は、
 テンプレートを変更することで行うことができます。 ::
 
     $this->Form->setTemplates([
-        'nestingLabel' => '{{input}}<label{{attrs}}>{{text}}</label>',
+        'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>',
         'formGroup' => '{{input}}{{label}}',
     ]);
 
