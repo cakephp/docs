@@ -2444,7 +2444,7 @@ or :php:meth:`Cake\\View\\Helper\\FormHelper::button()` для создания 
 поместить флажки/радиокнопки вне метки, вы можете сделать это, изменив шаблоны::
 
     $this->Form->setTemplates([
-        'nestingLabel' => '{{input}}<label{{attrs}}>{{text}}</label>',
+        'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>',
         'formGroup' => '{{input}}{{label}}',
     ]);
 
