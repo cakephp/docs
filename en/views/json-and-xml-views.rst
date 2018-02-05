@@ -97,7 +97,7 @@ You can also define ``_serialize`` as an array of view variables to combine::
         }
     }
 
-Defining ``_serialize`` as an array has the added benefit of automatically
+Defining ``_serialize`` as an array has added the benefit of automatically
 appending a top-level ``<response>`` element when using :php:class:`XmlView`.
 If you use a string value for ``_serialize`` and XmlView, make sure that your
 view variable has a single top-level element. Without a single top-level
