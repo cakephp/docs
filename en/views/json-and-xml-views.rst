@@ -36,8 +36,8 @@ You can optionally enable the json and or xml extensions with
 any other special format views by using a custom URL ending with the name of the
 response type as a file extension such as ``http://example.com/articles.json``.
 
-By default, when not enabling :ref:`file-extensions`, the request the ``Accept``
-header is used for selecting which type of format should be rendered to the
+By default, when not enabling :ref:`file-extensions`, the request, the ``Accept``
+header is used for, selecting which type of format should be rendered to the
 user. An example ``Accept`` format that is used to render ``JSON`` responses is
 ``application/json``.
 
