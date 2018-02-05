@@ -50,15 +50,16 @@
 Использование представлений данных с ключом Serialize
 =====================================================
 
-The ``_serialize`` key is a special view variable that indicates which other
-view variable(s) should be serialized when using a data view. This lets you skip
-defining template files for your controller actions if you don't need to do any
-custom formatting before your data is converted into json/xml.
+Ключ ``_serialize`` - это особая переменная представления, указывающая, какие
+другие переменные представления должны быть сериализованы при использовании
+представлений данных. Это позволяет вам избежать определение файлов шаблонов
+для экшенов ваших контроллеров, если вам не требуется какое-то особое
+форматирование перед тем, как ваши данные будут сконвертированы в json/xml.
 
-If you need to do any formatting or manipulation of your view variables before
-generating the response, you should use template files. The value of
-``_serialize`` can be either a string or an array of view variables to
-serialize::
+Если вам необходимо совершить какие-либо манипуляции с вашими переменными
+представления перед генерированием ответа - используйте файлы шаблонов.
+Значением переменной ``_serialize`` может быть как строка, так и массив
+переменных представления для сериализации::
 
     namespace App\Controller;
 
@@ -72,14 +73,18 @@ serialize::
 
         public function index()
         {
-            // Set the view vars that have to be serialized.
+            // Установить переменные представления, которые должны
+            // быть сериализованы.
             $this->set('articles', $this->paginate());
-            // Specify which view vars JsonView should serialize.
-            $this->set('_serialize', ['articles']);
+            // Указываем, какие переменные представления JsonView
+            // должен сериализовать.
+            $this->set('_serialize', 'articles');
         }
     }
 
-You can also define ``_serialize`` as an array of view variables to combine::
+
+Вы можете также определить ``_serialize`` как массив переменных
+представления, которые нам нужно совместить::
 
     namespace App\Controller;
 
@@ -93,31 +98,35 @@ You can also define ``_serialize`` as an array of view variables to combine::
 
         public function index()
         {
-            // Some code that created $articles and $comments
+            // Какой-то код, создавший $articles и $comments
 
-            // Set the view vars that have to be serialized.
+            // Установливаем переменные представления, которые должны
+            // быть сериализованы.
             $this->set(compact('articles', 'comments'));
 
-            // Specify which view vars JsonView should serialize.
+            // Указываем, какие переменные представления JsonView
+            // должен сериализовать.
             $this->set('_serialize', ['articles', 'comments']);
         }
     }
 
-Defining ``_serialize`` as an array has the added benefit of automatically
-appending a top-level ``<response>`` element when using :php:class:`XmlView`.
-If you use a string value for ``_serialize`` and XmlView, make sure that your
-view variable has a single top-level element. Without a single top-level
-element the Xml will fail to generate.
+Определяя ``_serialize`` как массив, мы получаем преимущество автоматического
+добавления элемента верхнего уровня ``<response>`` при использовании
+:php:class:`XmlView`. Если вы используете строковое значение для
+``_serialize`` и XmlView, убедитесь в том, что ваша переменная представления
+имеет единственный элемент верхнего уровня. Если элементов верхнего уровня
+будет больше одного, Xml не сможет сгенерироваться.
 
-Using a Data View with Template Files
-=====================================
+Использование представления данных с файлами шаблонов
+=====================================================
 
-You should use template files if you need to do some manipulation of your view
-content before creating the final output. For example if we had articles, that had
-a field containing generated HTML, we would probably want to omit that from a
-JSON response. This is a situation where a view file would be useful::
+Вы должны использовать файлы шаблонов, если вам нужно сделать какие-либо
+манипуляции с содержимым вашего представления перед созданием окончательного
+вывода. Например, если бы у нас были статьи, у которых было бы поле,
+содержащее сгенерированный HTML, мы, вероятно, хотели бы исключить это из
+ответа JSON. Это как раз та ситуация, когда файл представления будет полезен::
 
-    // Controller code
+    // Код контроллера
     class ArticlesController extends AppController
     {
         public function index()
@@ -127,7 +136,7 @@ JSON response. This is a situation where a view file would be useful::
         }
     }
 
-    // View code - src/Template/Articles/json/index.ctp
+    // Код представления - src/Template/Articles/json/index.ctp
     foreach ($articles as &$article) {
         unset($article->generated_html);
     }
