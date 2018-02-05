@@ -1,24 +1,26 @@
 Представления JSON и XML
 ########################
 
-The ``JsonView`` and ``XmlView``
-let you create JSON and XML responses, and integrate with the
+``JsonView`` и ``XmlView`` позволяют вам создавать ответы JSON и XML,
+и интегрировать его с
 :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`.
 
-By enabling ``RequestHandlerComponent`` in your application, and enabling
-support for the ``json`` and or ``xml`` extensions, you can automatically
-leverage the new view classes. ``JsonView`` and ``XmlView`` will be referred to
-as data views for the rest of this page.
+Активируя ``RequestHandlerComponent`` в вашем приложении, а также поддержку
+расширений ``json`` и/или ``xml``, вы можете автоматически использовать
+новые классы представлений. ``JsonView`` и ``XmlView`` будут далее именоваться
+просто как представления данных в этом разделе.
 
-There are two ways you can generate data views. The first is by using the
-``_serialize`` key, and the second is by creating normal template files.
+Существует два способа, с помощью которых вы можете создать представления
+данных. Первый - используя ключ ``_serialize``, и второй - создав обычные
+файлы шаблонов.
 
-Enabling Data Views in Your Application
-=======================================
+Активация представлений данных в вашем приложении
+=================================================
 
-Before you can use the data view classes, you'll first need to load the
-:php:class:`Cake\\Controller\\Component\\RequestHandlerComponent` in your
-controller::
+Прежде чем вы сможете использовать классы представлений данных, вам нужно
+сначала загрузить
+:php:class:`Cake\\Controller\\Component\\RequestHandlerComponent` в вашем
+контроллере::
 
     public function initialize()
     {
@@ -26,23 +28,27 @@ controller::
         $this->loadComponent('RequestHandler');
     }
 
-This can be done in your `AppController` and will enable automatic view class
-switching on content types. You can also set the component up with the
-``viewClassMap`` setting, to map types to your custom classes and/or map other
-data types.
+Это может быть сделано в вашем ``AppController``, и активирует автоматическое
+переключение классов представлений, в зависимости от типа содержимого. Вы
+также можете настроить компонент с помощью опции ``viewClassMap``, чтобы
+сопоставить типы вашим кастомным классам и/или добавить сопоставления также и
+для других типов данных (отличных от JSON и XML).
 
-You can optionally enable the json and or xml extensions with
-:ref:`file-extensions`. This will allow you to access the ``JSON``, ``XML`` or
-any other special format views by using a custom URL ending with the name of the
-response type as a file extension such as ``http://example.com/articles.json``.
+Вы опционально можете включить поддержку расширений json и/или xml, используя
+:ref:`маршрутизацию по расширениям файлов <file-extensions>`. Это позволит вам
+получать доступ к данным в определенном формате, будь то ``JSON``, ``XML`` или
+какой-либо другой формат, используя URL, оканчивающийся на имя типа ответа, как
+если бы это было расширением файла. К примеру
+``http://example.com/articles.json``.
 
-By default, when not enabling :ref:`file-extensions`, the request the ``Accept``
-header is used for selecting which type of format should be rendered to the
-user. An example ``Accept`` format that is used to render ``JSON`` responses is
-``application/json``.
+По умолчанию, когда не включена
+:ref:`маршрутизацию по расширениям файлов <file-extensions>`, запрос, для
+которого использовался заголовок ``Accept``, определяет какого типа формат
+должен быть выведен пользователю. Например, формат ``Accept``, используемый для
+вывода ответа в формате ``JSON`` - ``application/json``.
 
-Using Data Views with the Serialize Key
-=======================================
+Использование представлений данных с ключом Serialize
+=====================================================
 
 The ``_serialize`` key is a special view variable that indicates which other
 view variable(s) should be serialized when using a data view. This lets you skip
