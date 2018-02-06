@@ -142,62 +142,71 @@
     }
     echo json_encode(compact('articles'));
 
-You can do more complex manipulations, or use helpers to do formatting as well.
-The data view classes don't support layouts. They assume that the view file will
-output the serialized content.
+Вы можете выполнять более сложные манипуляции или использовать хелперы для
+форматирования. Классы представления данных не поддерживают макеты. Они
+предполагают, что в файле представлений выводится сериализованный контент.
 
 .. note::
-    As of 3.1.0 AppController, in the application skeleton automatically adds
-    ``'_serialize' => true`` to all XML/JSON requests. You will need to remove
-    this code from the beforeRender callback or set ``'_serialize' => false`` in
-    your controller's action if you want to use view files.
+    
+    С версии 3.1.0 ``AppController`` в каркасе приложения автоматически
+    добавляет ``'_serialize' => true`` ко всем запросам XML/JSON. Вам
+    придется удалить этот код из коллбэк-метода ``beforeRender()``,
+    либо установить значение ``'_serialize' => false`` в экшенах вашего
+    контроллера, если вы хотите использовать файлы представлений.
 
-Creating XML Views
-==================
+Создание XML-представлений
+==========================
 
 .. php:class:: XmlView
 
-By default when using ``_serialize`` the XmlView will wrap your serialized
-view variables with a ``<response>`` node. You can set a custom name for
-this node using the ``_rootNode`` view variable.
+По умолчанию при использовании ``_serialize`` XmlView обернет ваши
+сериализованные переменные в узел ``<response>``. Вы можете задать свое
+собственное имя для этого узла, используя переменную представления
+``_rootNode``.
+
+Класс XmlView поддерживает переменную ``_xmlOptions``, которая позволяет
+вам изменять опции, используемые при генерировании XML
 
 The XmlView class supports the ``_xmlOptions`` variable that allows you to
-customize the options used to generate XML, e.g. ``tags`` vs ``attributes``.
+customize the options used to generate XML, например ``tags`` вместо
+``attributes``.
 
-Creating JSON Views
-===================
+Создание JSON-представлений
+===========================
 
 .. php:class:: JsonView
 
-The JsonView class supports the ``_jsonOptions`` variable that allows you to
-customize the bit-mask used to generate JSON. See the
-`json_encode <http://php.net/json_encode>`_ documentation for the valid
-values of this option.
+Класс JsonView поддерживает переменную ``_jsonOptions``, которая позволяет
+вам настроить битовую маску, используемую для генерирования JSON. См.
+`json_encode <http://php.net/json_encode>`_ для более полной информации о
+валидных значениях данной опции.
 
-For example, to serialize validation error output of CakePHP entities in a consistent form of JSON do::
+Например, чтобы сериализовать вывод ошибок валидации сущностей CakePHP в
+совместимой с JSON форме, сделайте следующее::
 
-    // In your controller's action when saving failed
+    // Вэкшене вашего контроллера при ошибке сохранения
     $this->set('errors', $articles->errors());
     $this->set('_jsonOptions', JSON_FORCE_OBJECT);
     $this->set('_serialize', ['errors']);
 
-JSONP Responses
----------------
+Ответы JSONP
+------------
 
-When using ``JsonView`` you can use the special view variable ``_jsonp`` to
-enable returning a JSONP response. Setting it to ``true`` makes the view class
-check if query string parameter named "callback" is set and if so wrap the json
-response in the function name provided. If you want to use a custom query string
-parameter name instead of "callback" set ``_jsonp`` to required name instead of
-``true``.
+При использовании ``JsonView`` вы можете использовать специальную переменную
+представления ``_jsonp`` для активации возможности получения ответа JSONP.
+Если установить значение ``true``, класс представления проверяет, задан ли
+параметр строки запроса с именем "callback" и, если это так, следует обернуть
+ответ json в функцию с указанным именем. Если вы хотите использовать
+собственное имя параметра строки запроса вместо "callback", установите
+``_jsonp`` на требуемое имя вместо ``true``.
 
-Example Usage
-=============
+Пример использования
+====================
 
-While the :doc:`RequestHandlerComponent
-</controllers/components/request-handling>` can automatically set the view based
-on the request content-type or extension, you could also handle view
-mappings in your controller::
+В то время, как :doc:`RequestHandlerComponent
+</controllers/components/request-handling>` может автоматически определять
+представление, основываясь на типе содержимого запроса или на расширении,
+вы также можете управлять сопоставлением представлений в вашем контроллере::
 
     // src/Controller/VideosController.php
     namespace App\Controller;
