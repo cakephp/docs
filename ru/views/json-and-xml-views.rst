@@ -2,7 +2,7 @@
 ########################
 
 ``JsonView`` и ``XmlView`` позволяют вам создавать ответы JSON и XML,
-и интегрировать его с
+и интегрировать их с
 :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`.
 
 Активируя ``RequestHandlerComponent`` в вашем приложении, а также поддержку
