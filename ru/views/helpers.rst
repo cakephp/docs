@@ -1,16 +1,17 @@
 Хелперы
 #######
 
-Helpers are the component-like classes for the presentation layer of your
-application. They contain presentational logic that is shared between many
-views, elements, or layouts. This chapter will show you how to configure
-helpers. How to load helpers and use those helpers, and outline the simple steps
-for creating your own custom helpers.
+Хелперы - это схожие с компонентами классы, для слоя представления вашего
+приложения. Они содержат логику визуализации, которая является общей для
+представлений, элементов или макетов. Эта глава покажет вам как настраивать
+хелперы, как их загружать и использовать, а также опишет простые шаги для
+создания ваших собственных хелперов.
 
-CakePHP includes a number of helpers that aid in view creation. They assist in
-creating well-formed markup (including forms), aid in formatting text, times and
-numbers, and can even speed up AJAX functionality. For more information on the
-helpers included in CakePHP, check out the chapter for each helper:
+CakePHP включает ряд хелперов, помогающих в создании представлений. Они
+помогают в создании хорошо структурированной разметки (включая формы); в
+форматировании текста, чисел, и могут даже повысить производительность
+AJAX-запросов. Для более подробной информации о хелперах, входящих в
+состав CakePHP, ознакомьтесь с главами рассказывающими о каждом хелпере:
 
 .. toctree::
     :maxdepth: 1
@@ -29,12 +30,12 @@ helpers included in CakePHP, check out the chapter for each helper:
 
 .. _configuring-helpers:
 
-Configuring Helpers
-===================
+Настройка хелперов
+==================
 
-You load helpers in CakePHP by declaring them in a view class. An ``AppView``
-class comes with every CakePHP application and is the ideal place to load
-helpers::
+Вы загружаете хелперы в CakePHP, объявляя их в классе представления. Класс
+``AppView`` входит в состав каждого приложения CakePHP и является идеальным
+местом для загрузки хелперов::
 
     class AppView extends View
     {
@@ -47,23 +48,24 @@ helpers::
         }
     }
 
-To load helpers from plugins use the :term:`plugin syntax` used elsewhere in
-CakePHP::
+Для загрузки хелперов из плагинов используйте :term:`plugin syntax`,
+используемый повсеместно в CakePHP::
 
     $this->loadHelper('Blog.Comment');
 
-You don't have to explicitly load Helpers that come from CakePHP or your
-application. These helpers can be lazily loaded upon first use. For example::
+Вы не обязаны явно загружать хелперы, входящие в состав CakePHP или вашего
+приложения. Эти хелперы могут быть лениво загружены при первом
+использовании. Например::
 
-    // Loads the FormHelper if it has not already been loaded.
+    // Загружается FormHelper если он еще не был загружен.
     $this->Form->create($article);
 
-From within a plugin's views, plugin helpers can also be lazily loaded. For
-example, view templates in the 'Blog' plugin, can lazily load helpers from the
-same plugin.
+Из представлений, входящих в состав плагинов, хелперы плагинов также могут
+быть лениво загружены. Например, шаблоны представления в плагине 'Blog'
+могут лениво загружать хелперы из этого же плагина.
 
-Conditionally Loading Helpers
------------------------------
+Загрузка хелперов по условию
+----------------------------
 
 You can use the current action name to conditionally load helpers::
 
