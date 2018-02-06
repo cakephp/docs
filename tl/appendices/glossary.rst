@@ -36,7 +36,6 @@ Glossary
                 ]
             ]
 
-<<<<<<< HEAD
     DRY
         Don't repeat yourself. Is a principle of software development aimed at
         reducing repetition of information of all kinds. In CakePHP DRY is used
@@ -46,25 +45,6 @@ Glossary
     fields
         A generic term used to describe both entity properties, or database
         columns. Often used in conjunction with the FormHelper.
-=======
-            array('controller' => 'posts', 'action' => 'view', 5)
-            
-        Or a more complex example::
-
-            array(
-                'subdomain' => 'dev',
-                'plugin' => 'account',
-                'prefix' => 'admin',
-                'controller' => 'profiles',
-                'action' => 'edit',
-                10257
-                '#' => 'email',
-                '?' => array(
-                    'reset' => true,
-                ),
-                'full_base' => true,
-            )
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     HTML attributes
         An array of key => values that are composed into HTML attributes. For example::

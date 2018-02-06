@@ -20,20 +20,13 @@ In CakePHP 3.0 each plugin defines its own top-level namespace. For example:
 If you'd like to use a different namespace, you can configure the plugin
 namespace, when plugins are loaded.
 
-<<<<<<< HEAD
 Installing a Plugin With Composer
 =================================
-=======
-   plugins/how-to-install-plugins
-   plugins/how-to-use-plugins
-   plugins/how-to-create-plugins
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Many plugins are available on `Packagist <http://packagist.org>`_
 and can be installed with ``Composer``. To install DebugKit, you
 would do the following::
 
-<<<<<<< HEAD
     php composer.phar require cakephp/debug_kit
 
 This would install the latest version of DebugKit and update your
@@ -660,8 +653,6 @@ Another way to discover and manage plugins into your CakePHP application is `Mix
 
     IMPORTANT: Do not use this in production environment.
 
-=======
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 .. meta::
     :title lang=en: Plugins
     :keywords lang=en: plugin folder,plugins,controllers,models,views,package,application,database connection,little space

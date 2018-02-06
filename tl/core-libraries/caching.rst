@@ -21,26 +21,15 @@ build your own backend. The built-in caching engines are:
   is the slowest cache engine, and doesn't provide as many features for
   atomic operations. However, since disk storage is often quite cheap,
   storing large objects, or elements that are infrequently written
-<<<<<<< HEAD
   work well in files.
 * ``ApcCache`` APC cache uses the PHP `APCu <http://php.net/apcu>`_ extension.
   This extension uses shared memory on the webserver to store objects.
   This makes it very fast, and able to provide atomic read/write features.
 * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
-=======
-  work well in files. This is the default Cache engine for 2.3+
-* ``ApcCache`` APC cache uses the `APC <https://secure.php.net/apc>`_ or `APCu
-  <https://secure.php.net/apcu>`_ extension. These extensions use shared memory on the
-  webserver to store objects. This makes it very fast, and able to provide
-  atomic read/write features. By default CakePHP in 2.0-2.2 will use this cache
-  engine, if it's available.
-* ``Wincache`` Wincache uses the `Wincache <https://secure.php.net/wincache>`_
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
   extension. Wincache is similar to APC in features and performance, but
   optimized for Windows and Microsoft IIS.
 * ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_
   is a PHP extension that provides similar features to APC.
-<<<<<<< HEAD
 * ``MemcachedEngine`` Uses the `Memcached <http://php.net/memcached>`_
   extension.
 * ``RedisEngine`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
@@ -116,21 +105,6 @@ You can also configure Cache engines at runtime::
         'probability' => 100,
         'path' => CACHE . 'long' . DS,
     ]);
-=======
-* ``MemcacheEngine`` Uses the `Memcache <https://secure.php.net/memcache>`_
-  extension. Memcache provides a very fast cache system that can be
-  distributed across many servers, and provides atomic operations.
-* ``MemcachedEngine`` Uses the `Memcached <https://secure.php.net/memcached>`_
-  extension. It also interfaces with memcache but provides better performance.
-* ``RedisEngine`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
-  extension (2.2.3 minimum). Redis provides a fast and persistent cache system
-  similar to memcached, also provides atomic operations.
-
-.. versionchanged:: 2.3
-    FileEngine is always the default cache engine. In the past a number of people
-    had difficulty setting up and deploying APC correctly both in CLI + web.
-    Using files should make setting up CakePHP simpler for new developers.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     // Using a constructed object.
     $object = new FileEngine($config);
@@ -141,16 +115,11 @@ parameter for :php:meth:`Cake\\Cache\\Cache::write()` and
 :php:meth:`Cake\\Cache\\Cache::read()`. When configuring cache engines you can
 refer to the class name using the following syntaxes::
 
-<<<<<<< HEAD
     // Short name (in App\ or Cake namespaces)
     Cache::config('long', ['className' => 'File']);
 
     // Plugin short name
     Cache::config('long', ['className' => 'MyPlugin.SuperCache']);
-=======
-Configuring Cache class
-=======================
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     // Full namespace
     Cache::config('long', ['className' => 'Cake\Cache\Engine\FileEngine']);
@@ -163,7 +132,6 @@ Configuring Cache class
     When using the FileEngine you might need to use the ``mask`` option to
     ensure cache files are made with the correct permissions.
 
-<<<<<<< HEAD
 Engine Options
 --------------
 
@@ -233,11 +201,6 @@ the ``fallback`` configuration key::
 
     Cache::config('redis', [
         'className' => 'Redis',
-=======
-    // Cache configuration for data that can be cached for a short time only.
-    Cache::config('short', array(
-        'engine' => 'File',
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
         'duration' => '+1 hours',
         'prefix' => 'cake_redis_',
         'host' => '127.0.0.1',
@@ -245,7 +208,6 @@ the ``fallback`` configuration key::
         'fallback' => 'default',
     ]);
 
-<<<<<<< HEAD
 If the Redis server unexpectedly failed, writing to the ``redis`` cache
 configuration would fall back to writing to the ``default`` cache configuration.
 If writing to the ``default`` cache configuration *also* failed in this scenario, the
@@ -254,20 +216,6 @@ from throwing an uncaught exception.
 
 .. versionadded:: 3.5.0
     Cache engine fallbacks were added.
-=======
-    // Cache configuration for data that can be cached for a long time.
-    Cache::config('long', array(
-        'engine' => 'File',
-        'duration' => '+1 week',
-        'probability' => 100,
-        'path' => CACHE . 'long' . DS,
-    ));
-
-By placing the above code in your ``app/Config/bootstrap.php`` you will
-have two additional Cache configurations. The name of these
-configurations 'short' or 'long' is used as the ``$config``
-parameter for :php:func:`Cache::write()` and :php:func:`Cache::read()`, e.g. ``Cache::read('my_data', 'short')``.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Removing Configured Cache Engines
 ---------------------------------
@@ -284,23 +232,12 @@ Writing to a Cache
 
 .. php:staticmethod:: write($key, $value, $config = 'default')
 
-<<<<<<< HEAD
 ``Cache::write()`` will write a $value to the Cache. You can read or
 delete this value later by referring to it by ``$key``. You may
 specify an optional configuration to store the cache in as well. If
 no ``$config`` is specified, default will be used. ``Cache::write()``
 can store any type of object and is ideal for storing results of
 model finds::
-=======
-You can provide custom ``Cache`` adapters in ``app/Lib`` as well
-as in plugins using ``$plugin/Lib``. App/plugin cache engines can
-also override the core engines. Cache adapters must be in a cache
-directory. If you had a cache engine named ``MyCustomCacheEngine``
-it would be placed in either ``app/Lib/Cache/Engine/MyCustomCacheEngine.php``
-as an app/libs or in ``$plugin/Lib/Cache/Engine/MyCustomCacheEngine.php`` as
-part of a plugin. Cache configs from plugins need to use the plugin
-dot syntax. ::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     if (($posts = Cache::read('posts')) === false) {
         $posts = $someService->getAllPosts();
@@ -389,14 +326,10 @@ Reading Multiple Keys at Once
 
 .. php:staticmethod:: readMany($keys, $config = 'default')
 
-<<<<<<< HEAD
 After you've written multiple keys at once, you'll probably want to read them as
 well. While you could use multiple calls to ``read()``, ``readMany()`` allows
 CakePHP to use more efficient storage API's where available. For example using
 ``readMany()`` save multiple network connections when using Memcached::
-=======
-    :return: The decremented value on success, false otherwise.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     $result = Cache::readMany([
         'article-' . $slug,
@@ -408,11 +341,7 @@ CakePHP to use more efficient storage API's where available. For example using
 Deleting From a Cache
 =====================
 
-<<<<<<< HEAD
 .. php:staticmethod:: delete($key, $config = 'default')
-=======
-    :return: The incremented value on success, false otherwise.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 ``Cache::delete()`` will allow you to completely remove a cached
 object from the store::
@@ -423,20 +352,7 @@ object from the store::
 Deleting Multiple Keys at Once
 ------------------------------
 
-<<<<<<< HEAD
 .. php:staticmethod:: deleteMany($keys, $config = 'default')
-=======
-.. php:method:: add($key, $value)
-
-    Set a value in the cache if it did not already exist. Should use
-    an atomic check and set where possible.
-
-    .. versionadded:: 2.8
-        add method was added in 2.8.0.
-
-Using Cache to store common query results
-=========================================
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 After you've written multiple keys at once, you may want to delete them.  While
 you could use multiple calls to ``delete()``, ``deleteMany()`` allows CakePHP to use
@@ -455,16 +371,10 @@ Clearing Cached Data
 
 .. php:staticmethod:: clear($check, $config = 'default')
 
-<<<<<<< HEAD
 Destroy all cached values for a cache configuration. In engines like: Apc,
 Memcached, and Wincache, the cache configuration's prefix is used to remove
 cache entries. Make sure that different cache configurations have different
 prefixes::
-=======
-As of 2.5 you can accomplish the above much more simple by using
-:php:meth:`Cache::remember()`. Assuming you are using PHP 5.3 or
-newer, using the ``remember()`` method would look like::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     // Will only clear expired keys.
     Cache::clear(true);
@@ -486,7 +396,6 @@ that requires manual eviction of cached data.
 Using Cache to Store Counters
 =============================
 
-<<<<<<< HEAD
 .. php:staticmethod:: increment($key, $offset = 1, $config = 'default')
 
 .. php:staticmethod:: decrement($key, $offset = 1, $config = 'default')
@@ -497,14 +406,6 @@ in Cache. The Cache class exposes atomic ways to increment/decrement counter
 values in an easy way. Atomic operations are important for these values as it
 reduces the risk of contention, and ability for two users to simultaneously
 lower the value by one, resulting in an incorrect value.
-=======
-Counters for various things are easily stored in a cache. For example, a simple
-countdown for remaining 'slots' in a contest could be stored in Cache. The
-Cache class exposes atomic ways to increment/decrement counter values in an easy
-way. Atomic operations are important for these values as it reduces the risk of
-contention, a scenario where two users simultaneously lower the value by one,
-resulting in an incorrect value.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 After setting an integer value you can manipulate it using ``increment()`` and
 ``decrement()``::
@@ -643,16 +544,7 @@ The required API for a CacheEngine is
 
 .. php:method:: write($key, $value, $config = 'default')
 
-<<<<<<< HEAD
     :return: boolean for success.
-=======
-    ``Cache::set()`` allows you to temporarily override a cache config's
-    settings for one operation (usually a read or write). If you use
-    ``Cache::set()`` to change the settings for a write, you should
-    also use ``Cache::set()`` before reading the data back in. If you
-    fail to do so, the default settings will be used when the cache key
-    is read. ::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     Write value for a key into cache, optional string $config
     specifies configuration name to write to.
@@ -673,20 +565,7 @@ The required API for a CacheEngine is
 
 .. php:method:: clear($check)
 
-<<<<<<< HEAD
     :return: Boolean ``true`` on success.
-=======
-.. php:staticmethod:: add($key, $value, $config = 'default')
-
-    Add data to the cache, but only if the key does not exist already.
-    In the case that data did exist, this method will return false.
-    Where possible data is checked & set atomically.
-
-    .. versionadded:: 2.8
-        add method was added in 2.8.0.
-
-.. php:staticmethod:: clear($check, $config = 'default')
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     Delete all keys from the cache. If $check is ``true``, you should
     validate that each value is actually expired.

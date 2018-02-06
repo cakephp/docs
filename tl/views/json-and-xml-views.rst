@@ -64,18 +64,12 @@ serialize::
             $this->loadComponent('RequestHandler');
         }
 
-<<<<<<< HEAD
         public function index()
         {
             // Set the view vars that have to be serialized.
             $this->set('articles', $this->paginate());
             // Specify which view vars JsonView should serialize.
             $this->set('_serialize', 'articles');
-=======
-        public function index() {
-            $this->set('posts', $this->Paginator->paginate());
-            $this->set('_serialize', array('posts'));
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
         }
     }
 
@@ -164,7 +158,6 @@ Creating JSON Views
 
 .. php:class:: JsonView
 
-<<<<<<< HEAD
 The JsonView class supports the ``_jsonOptions`` variable that allows you to
 customize the bit-mask used to generate JSON. See the
 `json_encode <http://php.net/json_encode>`_ documentation for the valid
@@ -234,17 +227,4 @@ mappings in your controller::
             return $this->response->withDownload('report-' . date('YmdHis') . '.' . $format);
         }
     }
-=======
-    A view class for generating Json view data. See above for how you can use
-    JsonView in your application.
-
-    ..  versionadded:: 2.6
-        JsonView now supports the ``_jsonOptions`` view variable.
-        This allows you to configure the bit-mask options used when generating JSON.
-
-JSONP response
-==============
-
-.. versionadded:: 2.4
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 

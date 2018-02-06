@@ -12,16 +12,8 @@ Before working on patches for CakePHP, it's a good idea to get your environment
 setup. You'll need the following software:
 
 * Git
-<<<<<<< HEAD
 * PHP |minphpversion| or greater
 * PHPUnit 5.7.0 or greater
-=======
-* PHP 5.3.0 or greater
-* ext/mcrypt
-* ext/mbstring
-* PHPUnit 3.7.0 or greater (3.7.38 recommended)
-* MySQL, SQLite, or Postgres
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Set up your user information with your name/handle and working email address::
 
@@ -114,13 +106,9 @@ Check that all your tests continue to pass. Then push your branch to your fork::
 
     git push origin <branch-name>
 
-<<<<<<< HEAD
 If you've rebased after pushing your branch, you'll need to use force push::
 
     git push --force origin <branch-name>
-=======
-Once your branch is on GitHub, you can submit a pull request on GitHub.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Once your branch is on GitHub, you can submit a pull request on GitHub.
 
@@ -132,7 +120,6 @@ branch, as you cannot edit it once the pull request is created.
 
 * If your change is a **bugfix** and doesn't introduce new functionality and
   only corrects existing behavior that is present in the current release. Then
-<<<<<<< HEAD
   choose **master** as your merge target.
 * If your change is a **new feature** or an addition to the framework, then you
   should choose the branch with the next version number. For example if the
@@ -142,27 +129,14 @@ branch, as you cannot edit it once the pull request is created.
   to choose then next major release. For example, if the current release is
   ``3.2.2`` then the next time existing behavior can be broken will be in
   ``4.x`` so you should target that branch.
-=======
-  choose **2.x** as your merge target.
-* If your change is a **new feature** or an addition to the framework, then you
-  should choose the ``2.next`` branch.
-* If your change breaks existing functionality, your patch is unlikely to be
-  merged into 2.x. Instead you should target 4.0
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. note::
 
     Remember that all code you contribute to CakePHP will be licensed under the
-<<<<<<< HEAD
     MIT License, and the `Cake Software Foundation
     <http://cakefoundation.org/pages/about>`_ will become the owner of any
     contributed code. Contributors should follow the `CakePHP Community
     Guidelines <http://community.cakephp.org/guidelines>`_.
-=======
-    MIT License, and the `Cake Software Foundation <http://cakefoundation.org/>`_
-    will become the owner of any contributed code. Contributors should follow the
-    `CakePHP Community Guidelines <http://community.cakephp.org/guidelines>`_.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 All bug fixes merged into a maintenance branch will also be merged into upcoming
 releases periodically by the core team.

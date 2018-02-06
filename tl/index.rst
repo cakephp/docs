@@ -1,15 +1,9 @@
 Welcome
 #######
 
-<<<<<<< HEAD
 CakePHP 3 is a web development framework running on **PHP 7.2** (min. PHP |minphpversion|).
 Read :doc:`CakePHP at a Glance </intro>` to get an introduction to the
 fundamentals of CakePHP 3.
-=======
-.. warning::
-    This version of the documentation is for CakePHP 2.x. Go `here for the
-    CakePHP 3.x documentation <https://book.cakephp.org/3.0/>`_.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 The CakePHP cookbook is an openly developed and community editable documentation
 project. Notice the pencil icon button fixated against the right wall; it will

@@ -14,75 +14,12 @@ out default values & implementations with ones tailored to your application.
 Configuring your Application
 ============================
 
-<<<<<<< HEAD
 Configuration is generally stored in either PHP or INI files, and loaded during
 the application bootstrap. CakePHP comes with one configuration file by default,
 but if required you can add additional configuration files and load them in
 your application's bootstrap code. :php:class:`Cake\\Core\\Configure` is used
 for global configuration, and classes like ``Cache`` provide ``config()``
 methods to make configuration simple and transparent.
-=======
-The $default connection array is used unless another connection is
-specified by the ``$useDbConfig`` property in a model. For example, if
-my application has an additional legacy database in addition to the
-default one, I could use it in my models by creating a new $legacy
-database connection array similar to the $default array, and by
-setting ``public $useDbConfig = 'legacy';`` in the appropriate models.
-
-Fill out the key/value pairs in the configuration array to best
-suit your needs.
-
-datasource
-    The name of the datasource this configuration array is for.
-    Examples: Database/Mysql, Database/Sqlserver, Database/Postgres, Database/Sqlite.
-    You can use :term:`plugin syntax` to indicate plugin datasource to use.
-persistent
-    Whether or not to use a persistent connection to the database. When using
-    SQLServer you should not enable persistent connections as it causes
-    difficult to diagnose crashes in older versions of CakePHP or, as of version
-    2.10.2, an exception will be thrown.
-host
-    The database server's hostname (or IP address).
-login
-    The username for the account.
-password
-    The password for the account.
-database
-    The name of the database for this connection to use.
-prefix (*optional*)
-    The string that prefixes every table name in the database. If your
-    tables don't have prefixes, set this to an empty string.
-port (*optional*)
-    The TCP port or Unix socket used to connect to the server.
-encoding
-    Indicates the character set to use when sending SQL statements to
-    the server. This defaults to the database's default encoding for
-    all databases other than DB2. If you wish to use UTF-8 encoding
-    with mysql/mysqli connections you must use 'utf8' without the
-    hyphen.
-schema
-    Used in PostgreSQL database setups to specify which schema to use.
-unix_socket
-    Used by drivers that support it to connect via unix socket files. If you are
-    using PostgreSQL and want to use unix sockets, leave the host key blank.
-ssl_key
-    The file path to the SSL key file. (Only supported by MySQL, requires PHP
-    5.3.7+).
-ssl_cert
-    The file path to the SSL certificate file. (Only supported by MySQL,
-    requires PHP 5.3.7+).
-ssl_ca
-    The file path to the SSL certificate authority. (Only supported by MySQL,
-    requires PHP 5.3.7+).
-settings
-    An array of key/value pairs that should be sent to the database server as
-    ``SET`` commands when the connection is created. This option is only
-    supported by the Mysql, Postgres, and Sqlserver datasources at this time.
-
-.. versionchanged:: 2.4
-    The ``settings``, ``ssl_key``, ``ssl_cert`` and ``ssl_ca`` keys
-    was added in 2.4.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Loading Additional Configuration Files
 --------------------------------------
@@ -98,15 +35,10 @@ configuration into multiple files. After creating each of the files in your
     Configure::load('app', 'default', false);
     Configure::load('other_config', 'default');
 
-<<<<<<< HEAD
 You can also use additional configuration files to provide environment specific
 overrides. Each file loaded after **app.php** can redefine previously declared
 values allowing you to customize configuration for development or staging
 environments.
-=======
-    Add information about specific options for different database
-    vendors, such as Microsoft SQL Server, PostgreSQL and MySQL.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 General Configuration
 ---------------------
@@ -177,19 +109,9 @@ Asset.timestamp
     using proper helpers.
     Valid values:
 
-<<<<<<< HEAD
     - (bool) ``false`` - Doesn't do anything (default)
     - (bool) ``true`` - Appends the timestamp when debug is ``true``
     - (string) 'force' - Always appends the timestamp.
-=======
-Each application in CakePHP contains a configuration file,
-``app/Config/core.php``, to determine CakePHP's internal behavior.
-This file is a collection of Configure class
-variable definitions and constant definitions that determine how
-your application behaves. Before we dive into those particular
-variables, you'll need to be familiar with :php:class:`Configure`, CakePHP's
-configuration registry class.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Database Configuration
 ----------------------
@@ -197,40 +119,8 @@ Database Configuration
 See the :ref:`Database Configuration <database-configuration>` for information
 on configuring your database connections.
 
-<<<<<<< HEAD
 Caching Configuration
 ---------------------
-=======
-debug
-    Changes CakePHP debugging output.
-
-    * 0 = Production mode. No output.
-    * 1 = Show errors and warnings.
-    * 2 = Show errors, warnings, and SQL. [SQL log is only shown when you
-      add $this->element('sql\_dump') to your view or layout.]
-
-Error
-    Configure the Error handler used to handle errors for your application.
-    By default :php:meth:`ErrorHandler::handleError()` is used. It will display
-    errors using :php:class:`Debugger`, when debug > 0
-    and log errors with :php:class:`CakeLog` when debug = 0.
-
-    Sub-keys:
-
-    * ``handler`` - callback - The callback to handle errors. You can set this to any
-      callback type, including anonymous functions.
-    * ``level`` - int - The level of errors you are interested in capturing.
-    * ``trace`` - boolean - Include stack traces for errors in log files.
-
-Exception
-    Configure the Exception handler used for uncaught exceptions. By default,
-    ErrorHandler::handleException() is used. It will display a HTML page for
-    the exception, and while debug > 0, framework errors like
-    Missing Controller will be displayed. When debug = 0,
-    framework errors will be coerced into generic HTTP errors.
-    For more information on Exception handling, see the :doc:`exceptions`
-    section.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 See the :ref:`Caching Configuration <cache-configuration>` for information on
 configuring caching in CakePHP.
@@ -253,78 +143,8 @@ Email Configuration
 See the :ref:`Email Configuration <email-configuration>` for information on
 configuring email presets in CakePHP.
 
-<<<<<<< HEAD
 Session Configuration
 ---------------------
-=======
-    If you are installing CakePHP on a webserver besides Apache, you
-    can find instructions for getting URL rewriting working for other
-    servers under the :doc:`/installation/url-rewriting` section.
-App.fullBaseUrl
-    The fully qualified domain name (including protocol) to your application’s root. 
-    To configure CakePHP to use a particular domain URL for any URL 
-    generation inside the application, set this configuration 
-    variable. This will override the automatic detection of full 
-    base URL and can be useful when generating links from the CLI 
-    (e.g. sending emails). If the application runs in a subfolder, 
-    you should also set ``App.base``.
-App.base
-    The base directory the app resides in. Should be used if the application runs 
-    in a subfolder and ``App.fullBaseUrl`` is set.
-App.encoding
-    Define what encoding your application uses. This encoding
-    is used to generate the charset in the layout, and encode entities.
-    It should match the encoding values specified for your database.
-Routing.prefixes
-    Un-comment this definition if you'd like to take advantage of
-    CakePHP prefixed routes like admin. Set this variable with an array
-    of prefix names of the routes you'd like to use. More on this
-    later.
-Cache.disable
-    When set to true, persistent caching is disabled site-wide.
-    This will make all read/writes to :php:class:`Cache` fail.
-Cache.check
-    If set to true, enables view caching. Enabling is still needed in
-    the controllers, but this variable enables the detection of those
-    settings.
-Session
-    Contains an array of settings to use for session configuration. The defaults key is
-    used to define a default preset to use for sessions, any settings declared here will override
-    the settings of the default config.
-
-    Sub-keys
-
-    * ``name`` - The name of the cookie to use. Defaults to 'CAKEPHP'
-    * ``timeout`` - The number of minutes you want sessions to live for.
-      This timeout is handled by CakePHP
-    * ``cookieTimeout`` - The number of minutes you want session cookies to live for.
-    * ``checkAgent`` - Do you want the user agent to be checked when starting sessions?
-      You might want to set the value to false, when dealing with older versions of
-      IE, Chrome Frame or certain web-browsing devices and AJAX
-    * ``defaults`` - The default configuration set to use as a basis for your session.
-      There are four builtins: php, cake, cache, database.
-    * ``handler`` - Can be used to enable a custom session handler.
-      Expects an array of callables, that can be used with `session_save_handler`.
-      Using this option will automatically add `session.save_handler` to the ini array.
-    * ``autoRegenerate`` - Enabling this setting, turns on automatic renewal
-      of sessions, and sessionids that change frequently.
-      See :php:attr:`CakeSession::$requestCountdown`.
-    * ``ini`` - An associative array of additional ini values to set.
-
-    The built-in defaults are:
-
-    * 'php' - Uses settings defined in your php.ini.
-    * 'cake' - Saves session files in CakePHP's /tmp directory.
-    * 'database' - Uses CakePHP's database sessions.
-    * 'cache' - Use the Cache class to save sessions.
-
-    To define a custom session handler, save it at ``app/Model/Datasource/Session/<name>.php``.
-    Make sure the class implements :php:interface:`CakeSessionHandlerInterface`
-    and set Session.handler to <name>
-
-    To use database sessions, run the ``app/Config/Schema/sessions.php`` schema using
-    the cake shell command: ``cake schema create Sessions``
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 See the :ref:`session-configuration` for information on configuring session
 handling in CakePHP.
@@ -412,7 +232,6 @@ configuration from the environment, and build the application configuration.
 CakePHP uses :term:`DSN` strings for databases, logs, email transports and cache
 configurations allowing you to easily vary these libraries in each environment.
 
-<<<<<<< HEAD
 For local development, CakePHP leverages `dotenv
 <https://github.com/josegonzalez/php-dotenv>`_ to allow easy local development using
 environment variables. You will see a ``config/.env.default`` in your
@@ -435,8 +254,6 @@ will be used if no environment variable exists for the given key.
 .. versionchanged:: 3.5.0
     dotenv library support was added to the application skeleton.
 
-=======
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 Configure Class
 ===============
 
@@ -458,12 +275,7 @@ Writing Configuration data
 
 .. php:staticmethod:: write($key, $value)
 
-<<<<<<< HEAD
 Use ``write()`` to store data in the application's configuration::
-=======
-    :param string $key: The key to write, can be a :term:`dot notation` value.
-    :param mixed $value: The value to store.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     Configure::write('Company.name','Pizza, Inc.');
     Configure::write('Company.slogan','Pizza for your body and soul');
@@ -487,11 +299,7 @@ where debugging information can cause parsing problems.
 Reading Configuration Data
 --------------------------
 
-<<<<<<< HEAD
 .. php:staticmethod:: read($key = null, $default = null)
-=======
-    :param string $key: The key to read, can be a :term:`dot notation` value
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Used to read configuration data from the application. If a key is supplied, the
 data is returned. Using our examples from write() above, we can read that data
@@ -507,21 +315,8 @@ back::
     // Returns:
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 
-<<<<<<< HEAD
     // Returns 'fallback' as Company.nope is undefined.
     Configure::read('Company.nope', 'fallback');
-=======
-    If $key is left null, all values in Configure will be returned. If the value
-    corresponding to the specified $key does not exist then null will be
-    returned.
-
-.. php:staticmethod:: consume($key)
-
-    :param string $key: The key to read, can use be a :term:`dot notation` value
-
-    Read and delete a key from Configure. This is useful when you want to
-    combine reading and deleting values in a single operation.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 If ``$key`` is left null, all values in Configure will be returned.
 
@@ -536,12 +331,7 @@ exist, a :php:class:`RuntimeException` will be thrown::
 
     Configure::readOrFail('Company.name');    // Yields: 'Pizza, Inc.'
     Configure::readOrFail('Company.geolocation');  // Will throw an exception
-
-<<<<<<< HEAD
     Configure::readOrFail('Company');
-=======
-    :param string $key: The key to delete, can be a :term:`dot notation` value
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     // Yields:
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
@@ -578,7 +368,6 @@ combine reading and deleting values in a single operation.
 Reading and writing configuration files
 =======================================
 
-<<<<<<< HEAD
 .. php:staticmethod:: config($name, $engine)
 
 CakePHP comes with two built-in configuration file engines.
@@ -588,15 +377,6 @@ files, in the same format that Configure has historically read.
 files.  See the `PHP documentation <http://php.net/parse_ini_file>`_ for more
 information on the specifics of ini files.  To use a core config engine, you'll
 need to attach it to Configure using :php:meth:`Configure::config()`::
-=======
-CakePHP comes with two built-in configuration file readers.
-:php:class:`PhpReader` is able to read PHP config files, in the same
-format that Configure has historically read. :php:class:`IniReader` is
-able to read ini config files. See the `PHP documentation <https://secure.php.net/parse_ini_file>`_
-for more information on the specifics of ini files.
-To use a core config reader, you'll need to attach it to Configure
-using :php:meth:`Configure::config()`::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     use Cake\Core\Configure\Engine\PhpConfig;
 
@@ -606,18 +386,10 @@ using :php:meth:`Configure::config()`::
     // Read config files from another path.
     Configure::config('default', new PhpConfig('/path/to/your/config/files/'));
 
-<<<<<<< HEAD
 You can have multiple engines attached to Configure, each reading different
 kinds or sources of configuration files. You can interact with attached engines
 using a few other methods on Configure. To check which engine aliases are
 attached you can use :php:meth:`Configure::configured()`::
-=======
-You can have multiple readers attached to Configure, each reading
-different kinds of configuration files, or reading from
-different types of sources. You can interact with attached readers
-using a few other methods on Configure. To see which reader
-aliases are attached you can use :php:meth:`Configure::configured()`::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     // Get the array of aliases for attached engines.
     Configure::configured();
@@ -706,7 +478,6 @@ When restoring configuration information it's important to restore it with
 the same key, and cache configuration as was used to store it. Restored
 information is merged on top of the existing runtime configuration.
 
-<<<<<<< HEAD
 Configuration Engines
 ---------------------
 
@@ -715,83 +486,6 @@ different sources, and features a pluggable system for `creating your own
 configuration engines
 <https://api.cakephp.org/3.x/class-Cake.Core.Configure.ConfigEngineInterface.html>`__.
 The built in configuration engines are:
-=======
-Creating your own Configuration readers
-=======================================
-
-Since configuration readers are an extensible part of CakePHP,
-you can create configuration readers in your application and plugins.
-Configuration readers need to implement the :php:interface:`ConfigReaderInterface`.
-This interface defines a read method, as the only required method.
-If you really like XML files, you could create a simple Xml config
-reader for you application::
-
-    // in app/Lib/Configure/MyXmlReader.php
-    App::uses('Xml', 'Utility');
-    class MyXmlReader implements ConfigReaderInterface {
-        public function __construct($path = null) {
-            if (!$path) {
-                $path = APP . 'Config' . DS;
-            }
-            $this->_path = $path;
-        }
-
-        public function read($key) {
-            $xml = Xml::build($this->_path . $key . '.xml');
-            return Xml::toArray($xml);
-        }
-
-        // As of 2.3 a dump() method is also required
-        public function dump($key, $data) {
-            // code to dump data to file
-        }
-    }
-
-In your ``app/Config/bootstrap.php`` you could attach this reader and use it::
-
-    App::uses('MyXmlReader', 'Configure');
-    Configure::config('xml', new MyXmlReader());
-    ...
-
-    Configure::load('my_xml');
-
-.. warning::
-
-        It is not a good idea to call your custom configure class ``XmlReader`` because that
-        class name is an internal PHP one already:
-        `XMLReader <https://secure.php.net/manual/en/book.xmlreader.php>`_
-
-The ``read()`` method of a config reader, must return an array of the configuration information
-that the resource named ``$key`` contains.
-
-.. php:interface:: ConfigReaderInterface
-
-    Defines the interface used by classes that read configuration data and
-    store it in :php:class:`Configure`
-
-.. php:method:: read($key)
-
-    :param string $key: The key name or identifier to load.
-
-    This method should load/parse the configuration data identified by ``$key``
-    and return an array of data in the file.
-
-.. php:method:: dump($key, $data)
-
-    :param string $key: The identifier to write to.
-    :param array $data: The data to dump.
-
-    This method should dump/store the provided configuration data to a key identified by ``$key``.
-
-.. versionadded:: 2.3
-    ``ConfigReaderInterface::dump()`` was added in 2.3.
-
-.. php:exception:: ConfigureException
-
-    Thrown when errors occur when loading/storing/restoring configuration data.
-    :php:interface:`ConfigReaderInterface` implementations should throw this
-    exception when they encounter an error.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 * `JsonConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.JsonConfig.html>`__
 * `IniConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.IniConfig.html>`__
@@ -806,11 +500,7 @@ If you have any additional configuration needs, you should add them to your
 application's **config/bootstrap.php** file. This file is included before each
 request, and CLI command.
 
-<<<<<<< HEAD
 This file is ideal for a number of common bootstrapping tasks:
-=======
-    Load your custom configuration file by inserting the following in app/Config/bootstrap.php::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 - Defining convenience functions.
 - Declaring constants.
@@ -823,13 +513,7 @@ It might be tempting to place formatting functions there in order to use them in
 your controllers. As you'll see in the :doc:`/controllers` and :doc:`/views`
 sections there are better ways you add custom logic to your application.
 
-<<<<<<< HEAD
 .. _application-bootstrap:
-=======
-    Allows you to read configuration files that are stored as plain .ini files.
-    The ini files must be compatible with PHP's ``parse_ini_file`` function, and
-    benefit from the following improvements
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Application::bootstrap()
 ------------------------
@@ -863,7 +547,6 @@ each test method.
 Disabling Generic Tables
 ========================
 
-<<<<<<< HEAD
 While utilizing generic table classes - also called auto-tables - when quickly
 creating new applications and baking models is useful, generic table class can
 make debugging more difficult in some scenarios.
@@ -890,73 +573,6 @@ class like so::
             }
         });
     }
-=======
-CakePHP's naming conventions can be really nice - you can name your
-database table big_boxes, your model BigBox, your controller
-BigBoxesController, and everything just works together
-automatically. The way CakePHP knows how to tie things together is
-by *inflecting* the words between their singular and plural forms.
-
-There are occasions (especially for our non-English speaking
-friends) where you may run into situations where CakePHP's
-:php:class:`Inflector` (the class that pluralizes, singularizes, camelCases, and
-under\_scores) might not work as you'd like. If CakePHP won't
-recognize your Foci or Fish, you can tell CakePHP about your
-special cases.
-
-Loading custom inflections
---------------------------
-
-You can use :php:meth:`Inflector::rules()` in the file
-``app/Config/bootstrap.php`` to load custom inflections::
-
-    Inflector::rules('singular', array(
-        'rules' => array(
-            '/^(bil)er$/i' => '\1',
-            '/^(inflec|contribu)tors$/i' => '\1ta'
-        ),
-        'uninflected' => array('singulars'),
-        'irregular' => array('spins' => 'spinor')
-    ));
-
-or::
-
-    Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));
-
-Will merge the supplied rules into the inflection sets defined in
-lib/Cake/Utility/Inflector.php, with the added rules taking precedence
-over the core rules.
-
-Bootstrapping CakePHP
-=====================
-
-If you have any additional configuration needs, use CakePHP's
-bootstrap file, found in app/Config/bootstrap.php. This file is
-executed just after CakePHP's core bootstrapping.
-
-This file is ideal for a number of common bootstrapping tasks:
-
-- Defining convenience functions.
-- Registering global constants.
-- Defining additional model, view, and controller paths.
-- Creating cache configurations.
-- Configuring inflections.
-- Loading configuration files.
-
-Be careful to maintain the MVC software design pattern when you add
-things to the bootstrap file: it might be tempting to place
-formatting functions there in order to use them in your
-controllers.
-
-Resist the urge. You'll be glad you did later on down the line.
-
-You might also consider placing things in the :php:class:`AppController` class.
-This class is a parent class to all of the controllers in your
-application. :php:class:`AppController` is a handy place to use controller
-callbacks and define methods to be used by all of your
-controllers.
-
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. meta::
     :title lang=en: Configuration

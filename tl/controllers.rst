@@ -164,12 +164,7 @@ The ``Controller::set()`` method is the main way to send data from your
 controller to your view. Once you've used ``Controller::set()``, the variable
 can be accessed in your view::
 
-<<<<<<< HEAD
     // First you pass data from the controller:
-=======
-For a complete list of controller methods and their descriptions
-visit the `CakePHP API <https://api.cakephp.org/2.x/class-Controller.html>`_.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     $this->set('color', 'pink');
 
@@ -244,16 +239,9 @@ Although CakePHP will automatically call it after every action's logic
 an alternate view file by specifying a view file name as first argument of
 ``Controller::render()`` method.
 
-<<<<<<< HEAD
 If ``$view`` starts with '/', it is assumed to be a view or
 element file relative to the **src/Template** folder. This allows
 direct rendering of elements, very useful in AJAX calls::
-=======
-    Although CakePHP will automatically call it after every action's logic
-    (unless you've set ``$this->autoRender`` to false), you can
-    use it to specify an alternate view file by specifying a view
-    name in the controller using ``$view``.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     // Render the element in src/Template/Element/ajaxreturn.ctp
     $this->render('/Element/ajaxreturn');
@@ -294,42 +282,6 @@ For example::
             $this->render('Users.UserDetails/custom_file');
         }
     }
-<<<<<<< HEAD
-=======
-    
-This would render ``app/Plugin/Users/View/UserDetails/custom_file.ctp``
-
-Flow Control
-------------
-
-.. php:method:: redirect(mixed $url, integer $status, boolean $exit)
-
-    The flow control method you'll use most often is :php:meth:`~Controller::redirect()`.
-    This method takes its first parameter in the form of a
-    CakePHP-relative URL. When a user has successfully placed an order,
-    you might wish to redirect them to a receipt screen. ::
-
-        public function place_order() {
-            // Logic for finalizing order goes here
-            if ($success) {
-                return $this->redirect(
-                    array('controller' => 'orders', 'action' => 'thanks')
-                );
-            }
-            return $this->redirect(
-                array('controller' => 'orders', 'action' => 'confirm')
-            );
-        }
-
-    You can also use a relative or absolute URL as the $url argument::
-
-        $this->redirect('/orders/thanks');
-        $this->redirect('http://www.example.com');
-
-    You can also pass data to the action::
-
-        $this->redirect(array('action' => 'edit', $id));
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 This would render **plugins/Users/src/Template/UserDetails/custom_file.ctp**
 
@@ -470,13 +422,8 @@ Configuring Components to Load
 
 .. php:method:: loadComponent($name, $config = [])
 
-<<<<<<< HEAD
 In your Controller's ``initialize()`` method you can define any components you
 want loaded, and any configuration data for them::
-=======
-For a complete list of controller attributes and their descriptions
-visit the `CakePHP API <https://api.cakephp.org/2.x/class-Controller.html>`_.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     public function initialize()
     {
@@ -547,15 +494,9 @@ methods are implemented by your controllers
 
         The beforeFilter() method will be called for missing actions.
 
-<<<<<<< HEAD
     Returning a response from a ``beforeFilter`` method will not prevent other
     listeners of the same event from being called. You must explicitly
     :ref:`stop the event <stopping-events>`.
-=======
-While you can check out the details for all controller attributes
-in the `API <https://api.cakephp.org>`_, there are other controller attributes that merit their
-own sections in the manual.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. php:method:: beforeRender(Event $event)
 

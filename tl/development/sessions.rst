@@ -7,11 +7,8 @@ requests and store persistent data for specific users. Unlike Cookies, session
 data is not available on the client side. Usage of ``$_SESSION`` is generally
 avoided in CakePHP, and instead usage of the Session classes is preferred.
 
-<<<<<<< HEAD
 .. _session-configuration:
 
-=======
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 Session Configuration
 =====================
 
@@ -33,7 +30,6 @@ options are:
   config. This combined with ``Session.handler`` replace the custom session
   handling features of previous versions
 
-<<<<<<< HEAD
 * ``Session.cookie`` - The name of the cookie to use. Defaults to 'CAKEPHP'.
 
 * ``Session.cookiePath`` - The url path for which session cookie is set. Maps to
@@ -44,18 +40,6 @@ is on an SSL protocol. If your application serves from both SSL and non-SSL
 protocols, then you might have problems with sessions being lost. If you need
 access to the session on both SSL and non-SSL domains you will want to disable
 this::
-=======
-* ``Session.cacheLimiter`` - Allows you define the cache control headers used
-  for the session cookie. The default is ``must-revalidate``. This option was
-  added in 2.8.0.
-
-
-CakePHP's defaults to setting ``session.cookie_secure`` to true, when your
-application is on an SSL protocol. If your application serves from both SSL and
-non-SSL protocols, then you might have problems with sessions being lost. If
-you need access to the session on both SSL and non-SSL domains you will want to
-disable this::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     Configure::write('Session', [
         'defaults' => 'php',
@@ -70,7 +54,6 @@ persist across all subdomains you can do::
 
     Configure::write('Session', [
         'defaults' => 'php',
-<<<<<<< HEAD
         'ini' => [
             'session.cookie_path' => '/',
             'session.cookie_domain' => '.yourdomain.com'
@@ -102,28 +85,6 @@ is used), and does not limit the total amount of minutes a user can stay
 on the site.
 
 Built-in Session Handlers & Configuration
-=======
-        'ini' => array(
-            'session.cookie_path' => '/app/dir'
-        )
-    ));
-
-If you are using php's default session settings, take note that
-session.gc_maxlifetime can override your setting for timeout. The default is
-24 minutes. Change this in your ini settings to get it to match longer
-sessions::
-
-    Configure::write('Session', array(
-        'defaults' => 'php',
-        'timeout' => 2160, // 36 hours
-        'ini' => array(
-            'session.gc_maxlifetime' => 129600 // 36 hours
-        )
-    ));
-
-
-Built-in Session handlers & configuration
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 =========================================
 
 CakePHP comes with several built-in session configurations. You can either use
@@ -159,7 +120,6 @@ configuration. The built-in configurations are:
 Session Handlers
 ----------------
 
-<<<<<<< HEAD
 Session handlers can also be defined in the session config array.  By defining
 the 'handler.engine' config key, you can name the class name, or provide
 a handler instance.  The class/object must implement the
@@ -185,55 +145,6 @@ you had an ``AppSessionHandler`` class,  the file should be
 from inside plugins. By setting the engine to ``MyPlugin.PluginSessionHandler``.
 
 Database Sessions
-=======
-Session handlers can also be defined in the session config array. When defined
-they allow you to map the various ``session_save_handler`` values to a class or
-object you want to use for session saving. There are two ways to use the
-'handler'. The first is to provide an array with 5 callables. These callables
-are then applied to ``session_set_save_handler``::
-
-    Configure::write('Session', array(
-        'userAgent' => false,
-        'cookie' => 'my_cookie',
-        'timeout' => 600,
-        'handler' => array(
-            array('Foo', 'open'),
-            array('Foo', 'close'),
-            array('Foo', 'read'),
-            array('Foo', 'write'),
-            array('Foo', 'destroy'),
-            array('Foo', 'gc'),
-        ),
-        'ini' => array(
-            'cookie_secure' => 1,
-            'use_trans_sid' => 0
-        )
-    ));
-
-The second mode is to define an 'engine' key. This key should be a class name
-that implements ``CakeSessionHandlerInterface``. Implementing this interface
-will allow CakeSession to automatically map the methods for the handler. Both
-the core Cache and Database session handlers use this method for saving
-sessions. Additional settings for the handler should be placed inside the
-handler array. You can then read those values out from inside your handler.
-
-You can also use session handlers from inside plugins. By setting the engine to
-something like ``MyPlugin.PluginSessionHandler``. This will load and use the
-``PluginSessionHandler`` class from inside the MyPlugin of your application.
-
-CakeSessionHandlerInterface
----------------------------
-
-This interface is used for all custom session handlers inside CakePHP, and can
-be used to create custom user land session handlers. Simply implement the
-interface in your class and set ``Session.handler.engine``  to the class name
-you've created. CakePHP will attempt to load the handler from inside
-``app/Model/Datasource/Session/$classname.php``. So if your class name is
-``AppSessionHandler`` the file should be
-``app/Model/Datasource/Session/AppSessionHandler.php``.
-
-Database sessions
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 -----------------
 
 If you need to use a database to store your session data, configure as follows::
@@ -362,17 +273,10 @@ something like::
             return parent::destroy($id);
         }
 
-<<<<<<< HEAD
         // Removes expired sessions.
         public function gc($expires = null)
         {
             return Cache::gc($this->cacheKey) && parent::gc($expires);
-=======
-        // removes expired sessions.
-        public function gc($expires = null) {
-            Cache::gc($this->cacheKey);
-            return parent::gc($expires);
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
         }
     }
 
@@ -399,13 +303,9 @@ block look like the following::
 Now our application will start using our custom session handler for reading and
 writing session data.
 
-<<<<<<< HEAD
 .. php:class:: Session
 
 .. _accessing-session-object:
-=======
-.. php:class:: CakeSession
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Accessing the Session Object
 ============================

@@ -1,15 +1,9 @@
 I18N Shell
 ##########
 
-<<<<<<< HEAD
 The i18n features of CakePHP use `po files <http://en.wikipedia.org/wiki/GNU_gettext>`_
 as their translation source. PO files integrate with commonly used translation tools
 like `Poedit <http://www.poedit.net/>`_.
-=======
-The i18n features of CakePHP use `po files <https://en.wikipedia.org/wiki/GNU_gettext>`_
-as their translation source. This makes them easily to integrate with tools
-like `poedit <http://www.poedit.net/>`_ and other common translation tools.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 The i18n shell provides a quick and easy way to generate po template files.
 These templates files can then be given to translators so they can translate the
@@ -63,13 +57,8 @@ Any path containing a path segment with the provided values will be ignored::
 Skipping Overwrite Warnings for Existing POT Files
 --------------------------------------------------
 
-<<<<<<< HEAD
 By adding ``--overwrite``, the shell script will no longer warn you if a POT
 file already exists and will overwrite by default::
-=======
-By adding ``--overwrite``, the shell script will no longer warn you if a POT file
-already exists and will overwrite by default::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     bin/cake i18n extract --overwrite
 
@@ -77,30 +66,8 @@ Extracting Messages from the CakePHP Core Libraries
 ---------------------------------------------------
 
 By default, the extract shell script will ask you if you like to extract
-<<<<<<< HEAD
 the messages used in the CakePHP core libraries. Set ``--extract-core`` to yes
 or no to set the default behavior::
-=======
-the messages used in the CakePHP core libraries. Set ``--extract-core`` to ``yes`` or
-``no`` to set the default behavior.
-
-::
-
-    ./Console/cake i18n extract --extract-core yes
-
-    or
-
-    ./Console/cake i18n extract --extract-core no
-
-
-
-
-Create the tables used by TranslateBehavior
-===========================================
-
-The i18n shell can also be used to initialize the default tables used by the
-:php:class:`TranslateBehavior`::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     bin/cake i18n extract --extract-core yes
 

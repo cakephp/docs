@@ -21,17 +21,8 @@ translating content.
 .. php:function:: \_\_(string $string_id, [$formatArgs])
 
     This function handles localization in CakePHP applications. The
-<<<<<<< HEAD
     ``$string_id`` identifies the ID for a translation. You can supply
     additional arguments to replace placeholders in your string::
-=======
-    ``$string_id`` identifies the ID for a translation. Strings
-    used for translations are treated as format strings for
-    ``sprintf()``. You can supply additional arguments to replace
-    placeholders in your string::
-
-        __('You have %s unread messages', h($number));
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
         __('You have {0} unread messages', $number);
 
@@ -88,100 +79,7 @@ translating content.
     The context is a unique identifier for the translations string that makes it
     unique within the same domain.
 
-<<<<<<< HEAD
 .. php:function:: __xn(string $context, string $singular, string $plural, integer $count, mixed $args = null)
-=======
-.. php:function:: __x(string $context, string $singular, mixed $args = null)
-
-    The context is a unique identifier for the translations string that makes it
-    unique within the same domain.
-
-.. php:function:: __xn(string $context, string $singular, string $plural, integer $count, mixed $args = null)
-
-    Returns correct plural form of the message identified by ``$singular`` and
-    ``$plural`` for count $count. It also allows you to specify a context. Some
-    languages have more than one form for plural messages dependent on the
-    count.
-
-    The context is a unique identifier for the translations string that makes it
-    unique within the same domain.
-
-.. php:function:: __dx(string $domain, string $context, string $msg, mixed $args = null)
-
-    Allows you to override the current domain for a single message lookup. It
-    also allows you to specify a context.
-
-    The context is a unique identifier for the translations string that makes it
-    unique within the same domain.
-
-.. php:function:: __dxn(string $domain, string $context, string $singular, string $plural, integer $count, mixed $args = null)
-
-    Allows you to override the current domain and context for a single plural
-    message lookup. Returns correct plural form of message identified by
-    $singular and ``$plural`` for count $count from domain $domain. Some languages
-    have more than one form for plural messages dependent on the count.
-
-    The context is a unique identifier for the translation string that makes it
-    unique within the same domain.
-
-.. php:function:: __dxc(string $domain, string $context, string $msg, integer $category, mixed $args = null)
-
-    Allows you to override the current domain for a single message
-    lookup. It also allows you to specify a category and a context.
-
-    The context is a unique identifier for the translations string that makes it
-    unique within the same domain.
-
-    Note that the category must be specified with an I18n class constant, instead of
-    only the constant name. The values are:
-
-    - I18n::LC_ALL - LC_ALL
-    - I18n::LC_COLLATE - LC_COLLATE
-    - I18n::LC_CTYPE - LC_CTYPE
-    - I18n::LC_MONETARY - LC_MONETARY
-    - I18n::LC_NUMERIC - LC_NUMERIC
-    - I18n::LC_TIME - LC_TIME
-    - I18n::LC_MESSAGES - LC_MESSAGES
-
-.. php:function:: __xc(string $context, string $msg, integer $count, integer $category, mixed $args = null)
-
-    The context is a unique identifier for the translations string that makes it
-    unique within the same domain.
-
-    Note that the category must be specified with an I18n class constant, instead of
-    only the constant name. The values are:
-
-    - I18n::LC_ALL - LC_ALL
-    - I18n::LC_COLLATE - LC_COLLATE
-    - I18n::LC_CTYPE - LC_CTYPE
-    - I18n::LC_MONETARY - LC_MONETARY
-    - I18n::LC_NUMERIC - LC_NUMERIC
-    - I18n::LC_TIME - LC_TIME
-    - I18n::LC_MESSAGES - LC_MESSAGES
-
-.. php:function:: __dxcn(string $domain, string $context, string $singular, string $plural, integer $count, integer $category, mixed $args = null)
-
-    Allows you to override the current domain for a single plural message
-    lookup. It also allows you to specify a category and a context. 
-    Returns correct plural form of message identified by $singular and $plural 
-    for count $count from domain $domain.
-
-    The context is a unique identifier for the translations string that makes it
-    unique within the same domain.
-
-    Note that the category must be specified with an I18n class constant, instead of
-    only the constant name. The values are:
-
-    - I18n::LC_ALL - LC_ALL
-    - I18n::LC_COLLATE - LC_COLLATE
-    - I18n::LC_CTYPE - LC_CTYPE
-    - I18n::LC_MONETARY - LC_MONETARY
-    - I18n::LC_NUMERIC - LC_NUMERIC
-    - I18n::LC_TIME - LC_TIME
-    - I18n::LC_MESSAGES - LC_MESSAGES
-
-.. php:function:: __n(string $singular, string $plural, integer $count, mixed $args = null)
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     Returns correct plural form of message identified by ``$singular`` and
     ``$plural`` for count ``$count`` from domain ``$domain``. It also allows you
@@ -218,18 +116,9 @@ translating content.
 
 .. php:function:: pr(mixed $var)
 
-<<<<<<< HEAD
     .. versionchanged:: 3.3.0
         Calling this method will return passed ``$var``, so that you can, for instance,
         place it in return statements.
-=======
-.. php:function:: stackTrace(array $options = array())
-    :noindex:
-
-    If the application's DEBUG level is non-zero, the stack trace is printed out.
-
-.. php:function:: env(string $key)
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     Convenience wrapper for ``print_r()``, with the addition of
     wrapping ``<pre>`` tags around the output.
@@ -302,21 +191,6 @@ Most of the following constants refer to paths in your application.
     Path to the root lib directory.
 
 .. php:const:: CONFIG
-<<<<<<< HEAD
-=======
-
-    Path to the app/Config directory.
-
-    .. versionadded:: 2.10.0
-
-.. php:const:: CORE_PATH
-
-   Path to the root directory with ending directory slash.
-
-.. php:const:: CSS
-
-    Path to the public CSS directory.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
    Path to the config directory.
 
@@ -326,45 +200,8 @@ Most of the following constants refer to paths in your application.
 
 .. php:const:: DS
 
-<<<<<<< HEAD
     Short for PHP's ``DIRECTORY_SEPARATOR``, which is ``/`` on Linux and ``\``
     on Windows.
-=======
-    Short for PHP's DIRECTORY\_SEPARATOR, which is / on Linux and \\ on Windows.
-
-.. php:const:: FULL_BASE_URL
-
-    Full URL prefix. Such as ``https://example.com``
-
-    .. deprecated:: 2.4
-        This constant is deprecated, you should use :php:meth:`Router::fullBaseUrl()` instead.
-
-.. php:const:: IMAGES
-
-    Path to the public images directory.
-
-    .. deprecated:: 2.4
-
-.. php:const:: IMAGES_URL
-
-    Web path to the public images directory.
-
-    .. deprecated:: 2.4
-        Use config value ``App.imageBaseUrl`` instead.
-
-.. php:const:: JS
-
-    Path to the public JavaScript directory.
-
-    .. deprecated:: 2.4
-
-.. php:const:: JS_URL
-
-    Web path to the js files directory.
-
-    .. deprecated:: 2.4
-        Use config value ``App.jsBaseUrl`` instead.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. php:const:: LOGS
 

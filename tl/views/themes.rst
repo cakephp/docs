@@ -67,32 +67,8 @@ folder, it will default to the main webroot folder::
     // When in a theme with the name of 'purple_cupcake'
     $this->Html->css('main.css');
 
-<<<<<<< HEAD
     // creates a path like
     /purple_cupcake/css/main.css
-=======
-    //creates a path like
-    /theme/purple_cupcake/css/main.css
-
-    //and links to
-    app/View/Themed/PurpleCupcake/webroot/css/main.css
-
-Increasing performance of plugin and theme assets
--------------------------------------------------
-
-It's a well known fact that serving assets through PHP is guaranteed to be slower
-than serving those assets without invoking PHP. And while the core team has
-taken steps to make plugin and theme asset serving as fast as possible, there
-may be situations where more performance is required. In these situations it's
-recommended that you either symlink or copy out plugin/theme assets to
-directories in ``app/webroot`` with paths matching those used by CakePHP.
-
-
--  ``app/Plugin/DebugKit/webroot/js/my_file.js`` becomes
-   ``app/webroot/debug_kit/js/my_file.js``
--  ``app/View/Themed/Navy/webroot/css/navy.css`` becomes
-   ``app/webroot/theme/Navy/css/navy.css``
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     // and links to
     plugins/PurpleCupcake/webroot/css/main.css

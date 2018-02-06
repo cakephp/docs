@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 Blog Tutorial - Part 2
 ######################
-=======
-Blog Tutorial - Adding a layer
-******************************
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Create an Article Model
 =======================
@@ -71,16 +66,7 @@ related to articles done. We'll place this new controller in a file called
 **ArticlesController.php** inside the **src/Controller** directory. Here's
 what the basic controller should look like::
 
-<<<<<<< HEAD
     // src/Controller/ArticlesController.php
-=======
-Next, we'll create a controller for our posts. The controller is
-where all the controlling logic for post interaction will happen. In a
-nutshell, it's the place where you play with the models and get
-post-related work done. We'll place this new controller in a file
-called ``PostsController.php`` inside the ``/app/Controller``
-directory. Here's what the basic controller should look like::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     namespace App\Controller;
 
@@ -287,16 +273,9 @@ First, start by creating an ``add()`` action in the
     class ArticlesController extends AppController
     {
 
-<<<<<<< HEAD
         public function initialize()
         {
             parent::initialize();
-=======
-    class PostsController extends AppController {
-        public $helpers = array('Html', 'Form', 'Flash');
-        public $components = array('Flash');
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
-
             $this->loadComponent('Flash'); // Include the FlashComponent
         }
 
@@ -315,7 +294,6 @@ First, start by creating an ``add()`` action in the
         {
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
-<<<<<<< HEAD
                 // Prior to 3.4.0 $this->request->data() was used.
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
@@ -323,14 +301,6 @@ First, start by creating an ``add()`` action in the
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('Unable to add your article.'));
-=======
-                $this->Post->create();
-                if ($this->Post->save($this->request->data)) {
-                    $this->Flash->success(__('Your post has been saved.'));
-                    return $this->redirect(array('action' => 'index'));
-                }
-                $this->Flash->error(__('Unable to add your post.'));
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
             }
             $this->set('article', $article);
         }
@@ -338,22 +308,8 @@ First, start by creating an ``add()`` action in the
 
 .. note::
 
-<<<<<<< HEAD
     You need to include the :doc:`/controllers/components/flash` component in any controller
     where you will use it. If necessary, include it in your ``AppController``.
-=======
-    ``$this->request->is()`` takes a single argument, which can be the
-    request METHOD (``get``, ``put``, ``post``, ``delete``) or some request
-    identifier (``ajax``). It is **not** a way to check for specific posted
-    data. For instance, ``$this->request->is('book')`` will not return true
-    if book data was posted.
-
-.. note::
-
-    You need to include the FlashComponent - and FlashHelper - in
-    any controller where you will use it. If necessary, include it in
-    your AppController.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Here's what the ``add()`` action does: if the HTTP method of the
 request was POST, try to save the data using the Articles model. If for some
@@ -367,7 +323,6 @@ application.  In this case, we use the :php:meth:`Cake\\Http\\ServerRequest::is(
 method to check that the request is a HTTP POST request.
 
 When a user uses a form to POST data to your application, that
-<<<<<<< HEAD
 information is available in ``$this->request->getData()`` ( Or ``$this->request->data()`` for CakePHP v3.3 and under ). You can use the
 :php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to
 see what it looks like.
@@ -384,23 +339,6 @@ index action of the ``ArticlesController``. You can refer to
 :php:func:`Cake\\Routing\\Router::url()` function on the `API
 <https://api.cakephp.org>`_ to see the formats in which you can specify a URL for
 various CakePHP functions.
-=======
-information is available in ``$this->request->data``. You can use the
-:php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to see
-what it looks like.
-
-We use the FlashComponent's :php:meth:`FlashComponent::success()`
-method to set a message to a session variable to be displayed on the page after
-redirection. In the layout we have
-:php:func:`FlashHelper::render()` which displays the
-message and clears the corresponding session variable. The
-controller's :php:meth:`Controller::redirect` function
-redirects to another URL. The param ``array('action' => 'index')``
-translates to URL /posts (that is, the index action of the posts controller).
-You can refer to :php:func:`Router::url()` function on the
-`API <https://api.cakephp.org>`_ to see the formats in which you can specify a
-URL for various CakePHP functions.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Calling the ``save()`` method will check for validation errors and
 abort the save if any occur. We'll discuss how those errors are
@@ -464,7 +402,6 @@ the following line::
 
 You may be wondering: how do I tell CakePHP about my validation
 requirements? Validation rules are defined in the model. Let's look
-<<<<<<< HEAD
 back at our Articles model and make a few adjustments::
 
     // src/Model/Table/ArticlesTable.php
@@ -491,19 +428,6 @@ back at our Articles model and make a few adjustments::
 
             return $validator;
         }
-=======
-back at our Post model and make a few adjustments::
-
-    class Post extends AppModel {
-        public $validate = array(
-            'title' => array(
-                'rule' => 'notBlank'
-            ),
-            'body' => array(
-                'rule' => 'notBlank'
-            )
-        );
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
     }
 
 The ``validationDefault()`` method tells CakePHP how to validate your data when
@@ -528,7 +452,6 @@ should have picked up a pattern. Make the action, then the view.
 Here's what the ``edit()`` action of the ``ArticlesController`` would look
 like::
 
-<<<<<<< HEAD
     // src/Controller/ArticlesController.php
 
     public function edit($id = null)
@@ -542,25 +465,6 @@ like::
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to update your article.'));
-=======
-    public function edit($id = null) {
-        if (!$id) {
-            throw new NotFoundException(__('Invalid post'));
-        }
-
-        $post = $this->Post->findById($id);
-        if (!$post) {
-            throw new NotFoundException(__('Invalid post'));
-        }
-
-        if ($this->request->is(array('post', 'put'))) {
-            $this->Post->id = $id;
-            if ($this->Post->save($this->request->data)) {
-                $this->Flash->success(__('Your post has been updated.'));
-                return $this->redirect(array('action' => 'index'));
-            }
-            $this->Flash->error(__('Unable to update your post.'));
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
         }
 
         $this->set('article', $article);
@@ -645,27 +549,15 @@ Next, let's make a way for users to delete articles. Start with a
     {
         $this->request->allowMethod(['post', 'delete']);
 
-<<<<<<< HEAD
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
             $this->Flash->success(__('The article with id: {0} has been deleted.', h($id)));
             return $this->redirect(['action' => 'index']);
-=======
-        if ($this->Post->delete($id)) {
-            $this->Flash->success(
-                __('The post with id: %s has been deleted.', h($id))
-            );
-        } else {
-            $this->Flash->error(
-                __('The post with id: %s could not be deleted.', h($id))
-            );
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
         }
 
         return $this->redirect(array('action' => 'index'));
     }
 
-<<<<<<< HEAD
 This logic deletes the article specified by ``$id``, and uses
 ``$this->Flash->success()`` to show the user a confirmation
 message after redirecting them on to ``/articles``. If the user attempts to
@@ -674,16 +566,6 @@ Uncaught exceptions are captured by CakePHP's exception handler, and a nice
 error page is displayed. There are many built-in
 :doc:`Exceptions </development/errors>` that can be used to indicate the various
 HTTP errors your application might need to generate.
-=======
-This logic deletes the post specified by $id, and uses
-``$this->Flash->success()`` to show the user a confirmation
-message after redirecting them on to ``/posts``. If the user attempts to
-do a delete using a GET request, we throw an Exception. Uncaught exceptions
-are captured by CakePHP's exception handler, and a nice error page is
-displayed. There are many built-in :doc:`/development/exceptions` that can
-be used to indicate the various HTTP errors your application might need
-to generate.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Because we're just executing some logic and redirecting, this
 action has no view. You might want to update your index view with
@@ -797,16 +679,10 @@ features to offer, and is flexible in ways we didn't wish to cover
 here for simplicity's sake. Use the rest of this manual as a guide
 for building more feature-rich applications.
 
-<<<<<<< HEAD
 Now that you've created a basic CakePHP application, you can either continue to
 :doc:`/tutorials-and-examples/blog/part-three`, or start your own project. You
 can also peruse the :doc:`/topics` or `API <https://api.cakephp.org>`_ to
 learn more about CakePHP.
-=======
-Now that you've created a basic CakePHP application, you're ready for
-the real thing. Start your own project and read the rest of the
-:doc:`Cookbook </index>` and `API <https://api.cakephp.org>`_.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 If you need help, there are many ways to get the help you need - please see the
 :doc:`/intro/where-to-get-help` page.  Welcome to CakePHP!

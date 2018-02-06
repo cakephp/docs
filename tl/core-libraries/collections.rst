@@ -238,13 +238,8 @@ collection that will yield every single element nested in the collection::
     $collection = new Collection($items);
     $new = $collection->unfold();
 
-<<<<<<< HEAD
     // $result contains [1, 2, 3, 4, 5];
     $result = $new->toList();
-=======
-Object callback priorities
-==========================
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 When passing a callable to ``unfold()`` you can control what elements will be
 unfolded from each item in the original collection. This is useful for returning

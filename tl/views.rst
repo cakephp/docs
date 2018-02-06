@@ -1,15 +1,7 @@
 Views
 #####
 
-<<<<<<< HEAD
 .. php:namespace:: Cake\View
-=======
-Views are the **V** in MVC. Views are responsible for generating
-the specific output required for the request. Often this is in the
-form of HTML, XML, or JSON, but streaming files and creating PDFs
-that users can download are also responsibilities of the View
-Layer.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. php:class:: View
 
@@ -181,14 +173,11 @@ the layout and elements that will be rendered later. See
 
 In your view file you can do::
 
-<<<<<<< HEAD
     $this->set('activeMenuButton', 'posts');
 
 Then, in your layout, the ``$activeMenuButton`` variable will be available and
 contain the value 'posts'.
 
-=======
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 .. _extending-views:
 
 Extending Views
@@ -266,13 +255,10 @@ as the ``content`` block.
     You should avoid using ``content`` as a block name in your application.
     CakePHP uses this for uncaptured content in extended views.
 
-<<<<<<< HEAD
 You can get the list of all populated blocks using the ``blocks()`` method::
 
     $list = $this->blocks();
 
-=======
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 .. _view-blocks:
 
 Using View Blocks
@@ -300,30 +286,8 @@ work with capturing blocks::
 
 You can also append into a block using ``append()``::
 
-<<<<<<< HEAD
     $this->append('sidebar');
     echo $this->element('sidebar/popular_topics');
-=======
-
-In 2.3, a few new methods were added for working with blocks. The ``prepend()``
-method was added to prepend content to an existing block::
-
-    // Prepend to sidebar
-    $this->prepend('sidebar', 'this content goes on top of sidebar');
-
-The method ``startIfEmpty()`` can be used to start a block **only** if it is
-empty or undefined. If the block already exists, the captured content will be
-discarded. This is useful when you want to conditionally define default content
-for a block if it does not already exist:
-
-.. code-block:: php
-
-    // In a view file.
-    // Create a navbar block
-    $this->startIfEmpty('navbar');
-    echo $this->element('navbar');
-    echo $this->element('notifications');
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
     $this->end();
 
     // The same as the above.
@@ -350,15 +314,10 @@ title, and sometimes assign the title as a view variable in the controller::
     // In view file or layout above $this->fetch('title')
     $this->assign('title', $title);
 
-<<<<<<< HEAD
 The ``prepend()`` method allows you to prepend content to an existing block::
 
     // Prepend to sidebar
     $this->prepend('sidebar', 'this content goes on top of sidebar');
-=======
-Displaying blocks
------------------
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Displaying Blocks
 -----------------
@@ -374,11 +333,7 @@ want to conditionally show headings or other markup:
 
 .. code-block:: php
 
-<<<<<<< HEAD
     // In src/Template/Layout/default.ctp
-=======
-    // In app/View/Layouts/default.ctp
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -400,31 +355,16 @@ You can provide a default value using the second argument:
 Using Blocks for Script and CSS Files
 -------------------------------------
 
-<<<<<<< HEAD
 The ``HtmlHelper`` ties into view blocks, and its ``script()``, ``css()``, and
 ``meta()`` methods each update a block with the same name when used with the
 ``block = true`` option:
-=======
-.. versionadded:: 2.1
-
-Blocks replace the deprecated ``$scripts_for_layout`` layout variable. Instead
-you should use blocks. The :php:class:`HtmlHelper` ties into view blocks, and
-its :php:meth:`~HtmlHelper::script()`, :php:meth:`~HtmlHelper::css()`, and
-:php:meth:`~HtmlHelper::meta()` methods each update a block with the same name
-when used with the ``inline = false`` option:
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. code-block:: php
 
     <?php
     // In your view file
-<<<<<<< HEAD
     $this->Html->script('carousel', ['block' => true]);
     $this->Html->css('carousel', ['block' => true]);
-=======
-    $this->Html->script('carousel', array('inline' => false));
-    $this->Html->css('carousel', array('inline' => false));
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
     ?>
 
     // In your layout file.
@@ -441,17 +381,10 @@ The :php:meth:`Cake\\View\\Helper\\HtmlHelper` also allows you to control which
 block the scripts and CSS go to::
 
     // In your view
-<<<<<<< HEAD
     $this->Html->script('carousel', ['block' => 'scriptBottom']);
 
     // In your layout
     <?= $this->fetch('scriptBottom') ?>
-=======
-    $this->Html->script('carousel', array('block' => 'scriptBottom'));
-
-    // In your layout
-    echo $this->fetch('scriptBottom');
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. _view-layouts:
 
@@ -508,16 +441,9 @@ files from views.
 
 .. note::
 
-<<<<<<< HEAD
     When using ``HtmlHelper::css()`` or ``HtmlHelper::script()`` in template
     files, specify ``'block' => true`` to place the HTML source in a block with
     the same name. (See API for more details on usage).
-=======
-    Prior to version 2.1, method fetch() was not available, ``fetch('content')``
-    is a replacement for ``$content_for_layout`` and lines ``fetch('meta')``,
-    ``fetch('css')`` and ``fetch('script')`` are contained in the
-    ``$scripts_for_layout`` variable in version 2.0
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 The ``content`` block contains the contents of the rendered view.
 
@@ -529,22 +455,15 @@ You can create as many layouts as you wish: just place them in the
 **src/Template/Layout** directory, and switch between them inside of your
 controller actions using the controller or view's ``$layout`` property::
 
-<<<<<<< HEAD
     // From a controller
     public function view()
     {
         // Set the layout.
         $this->viewBuilder()->setLayout('admin');
-=======
-``$title_for_layout`` contains the page title. This variable is generated
-automatically, but you can override it by setting it in your controller/view as
-you would any other view variable.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
         // Before 3.4
         $this->viewBuilder()->layout('admin');
 
-<<<<<<< HEAD
         // Before 3.1
         $this->layout = 'admin';
     }
@@ -564,16 +483,10 @@ layout for all controllers' actions using something like::
         {
             $this->set('title', 'View Active Users');
             $this->viewBuilder()->setLayout('default_small_ad');
-=======
-    The ``$title_for_layout`` is deprecated as of 2.5, use
-    ``$this->fetch('title')`` in your layout and
-    ``$this->assign('title', 'page title')`` instead.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
             // or the following before 3.4
             $this->viewBuilder()->layout('default_small_ad');
 
-<<<<<<< HEAD
             // or the following before 3.1
             $this->layout = 'default_small_ad';
         }
@@ -594,45 +507,6 @@ fully-rendered interface.)
 The skeleton app also has a default layout to help generate RSS.
 
 Using Layouts from Plugins
-=======
-    // From a controller
-    public function admin_view() {
-        // Stuff
-        $this->layout = 'admin';
-    }
-
-    // From a view file
-    $this->layout = 'loggedin';
-
-For example, if a section of my site included a smaller ad banner
-space, I might create a new layout with the smaller advertising
-space and specify it as the layout for all controllers' actions
-using something like::
-
-   class UsersController extends AppController {
-       public function view_active() {
-           $this->set('title_for_layout', 'View Active Users');
-           $this->layout = 'default_small_ad';
-       }
-
-       public function view_image() {
-           $this->layout = 'image';
-           // Output user image
-       }
-   }
-
-CakePHP features two core layouts (besides CakePHP's default
-layout) you can use in your own application: 'ajax' and 'flash'.
-The Ajax layout is handy for crafting AJAX responses - it's an
-empty layout. (Most AJAX calls only require a bit of markup in
-return, rather than a fully-rendered interface.) The flash layout
-is used for messages shown by :php:meth:`Controller::flash()` method.
-
-Three other layouts, xml, js, and rss, exist in the core for a quick
-and easy way to serve up content that isn't text/html.
-
-Using layouts from plugins
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 --------------------------
 
 If you want to use a layout that exists in a plugin, you can use :term:`plugin
@@ -681,22 +555,12 @@ You can pass data to an element through the element's second argument::
         "helptext" => "Oh, this text is very helpful."
     ]);
 
-<<<<<<< HEAD
 Inside the element file, all the passed variables are available as members of
 the parameter array (in the same way that ``Controller::set()`` in the
 controller works with template files). In the above example, the
 **src/Template/Element/helpbox.ctp** file can use the ``$helptext`` variable::
 
     // Inside src/Template/Element/helpbox.ctp
-=======
-Inside the element file, all the passed variables are available as
-members of the parameter array (in the same way that
-:php:meth:`Controller::set()` in the controller works with view files). In the
-above example, the ``/app/View/Elements/helpbox.ctp`` file can use the
-``$helptext`` variable::
-
-    // Inside app/View/Elements/helpbox.ctp
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
     echo $helptext; // Outputs "Oh, this text is very helpful."
 
 The ``View::element()`` method also supports options for the element.
@@ -705,104 +569,38 @@ The options supported are 'cache' and 'callbacks'. An example::
     echo $this->element('helpbox', [
             "helptext" => "This is passed to the element as $helptext",
             "foobar" => "This is passed to the element as $foobar",
-<<<<<<< HEAD
         ],
         [
             // uses the "long_view" cache configuration
-=======
-        ),
-        array(
-            // Uses the "long_view" cache configuration
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
             "cache" => "long_view",
             // Set to true to have before/afterRender called for the element
             "callbacks" => true
         ]
     );
 
-<<<<<<< HEAD
 Element caching is facilitated through the ``Cache`` class. You can configure
 elements to be stored in any Cache configuration you've set up. This gives you a
 great amount of flexibility to decide where and for how long elements are
 stored. To cache different versions of the same element in an application,
 provide a unique cache key value using the following format::
-=======
-Element caching is facilitated through the :php:class:`Cache` class. You can
-configure elements to be stored in any Cache configuration you've set up. This
-gives you a great amount of flexibility to decide where and for how long
-elements are stored. To cache different versions of the same element in an
-application, provide a unique cache key value using the following format::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     $this->element('helpbox', [], [
             "cache" => ['config' => 'short', 'key' => 'unique value']
         ]
     );
 
-<<<<<<< HEAD
 If you need more logic in your element, such as dynamic data from a datasource,
 consider using a View Cell instead of an element. Find out more :doc:`about View
 Cells </views/cells>`.
-=======
-You can take full advantage of elements by using
-``requestAction()``, which fetches view
-variables from a controller action and returns them as an array.
-This enables your elements to perform in true MVC style. Create a
-controller action that prepares the view variables for your
-elements, then call ``requestAction()`` inside the second parameter
-of ``element()`` to feed the element the view variables from your
-controller.
-
-To do this, in your controller add something like the following for
-the Post example::
-
-    class PostsController extends AppController {
-        // ...
-        public function index() {
-            $posts = $this->paginate();
-            if ($this->request->is('requested')) {
-                return $posts;
-            }
-            $this->set('posts', $posts);
-        }
-    }
-
-And then in the element we can access the paginated posts model. To
-get the latest five posts in an ordered list, we would do something
-like the following:
-
-.. code-block:: php
-
-    <h2>Latest Posts</h2>
-    <?php
-      $posts = $this->requestAction(
-        'posts/index/sort:created/direction:asc/limit:5'
-      );
-    ?>
-    <ol>
-    <?php foreach ($posts as $post): ?>
-          <li><?php echo $post['Post']['title']; ?></li>
-    <?php endforeach; ?>
-    </ol>
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Caching Elements
 ----------------
 
-<<<<<<< HEAD
 You can take advantage of CakePHP view caching if you supply a cache parameter.
 If set to ``true``, it will cache the element in the 'default' Cache
 configuration. Otherwise, you can set which cache configuration should be used.
 See :doc:`/core-libraries/caching` for more information on configuring
 ``Cache``. A simple example of caching an element would be::
-=======
-You can take advantage of CakePHP view caching if you supply a
-cache parameter. If set to true, it will cache the element in the
-'default' Cache configuration. Otherwise, you can set which cache configuration
-should be used. See :doc:`/core-libraries/caching` for more information on
-configuring :php:class:`Cache`. A simple example of caching an element would
-be::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     echo $this->element('helpbox', [], ['cache' => true]);
 
@@ -831,32 +629,12 @@ want to use. CakePHP will use this configuration when none is given.
 Requesting Elements from a Plugin
 ---------------------------------
 
-<<<<<<< HEAD
 If you are using a plugin and wish to use elements from within the plugin, just
 use the familiar :term:`plugin syntax`. If the view is being rendered for a
 plugin controller/action, the plugin name will automatically be prefixed onto
 all elements used, unless another plugin name is present.
 If the element doesn't exist in the plugin, it will look in the main APP
 folder::
-=======
-2.0
----
-
-To load an element from a plugin, use the `plugin` option (moved out of the
-`data` option in 1.x)::
-
-    echo $this->element('helpbox', array(), array('plugin' => 'Contacts'));
-
-2.1
----
-
-If you are using a plugin and wish to use elements from within the
-plugin, just use the familiar :term:`plugin syntax`. If the view is being
-rendered for a plugin controller/action, the plugin name will automatically
-be prefixed onto all elements used, unless another plugin name is present.
-If the element doesn't exist in the plugin, it will look in the main APP
-folder. ::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     echo $this->element('Contacts.helpbox');
 
@@ -869,124 +647,11 @@ if you are in the ``ContactsController`` of the Contacts plugin, the following::
 
 are equivalent and will result in the same element being rendered.
 
-<<<<<<< HEAD
 For elements inside subfolder of a plugin
 (e.g., **plugins/Contacts/Template/Element/sidebar/helpbox.ctp**), use the
 following::
 
     echo $this->element('Contacts.sidebar/helpbox');
-=======
-.. versionchanged:: 2.1
-    The ``$options[plugin]`` option was deprecated and support for
-    ``Plugin.element`` was added.
-
-
-Creating your own view classes
-==============================
-
-You may need to create custom view classes to enable new types of data views, or
-add additional custom view-rendering logic to your application. Like most
-components of CakePHP, view classes have a few conventions:
-
-* View class files should be put in ``App/View``. For example:
-  ``App/View/PdfView.php``
-* View classes should be suffixed with ``View``. For example: ``PdfView``.
-* When referencing view class names you should omit the ``View`` suffix. For
-  example: ``$this->viewClass = 'Pdf';``.
-
-You'll also want to extend ``View`` to ensure things work correctly::
-
-    // In App/View/PdfView.php
-
-    App::uses('View', 'View');
-    class PdfView extends View {
-        public function render($view = null, $layout = null) {
-            // Custom logic here.
-        }
-    }
-
-Replacing the render method lets you take full control over how your content is
-rendered.
-
-View API
-========
-
-.. php:class:: View
-
-View methods are accessible in all view, element and layout files.
-To call any view method use ``$this->method()``
-
-.. php:method:: set(string $var, mixed $value)
-
-    Views have a ``set()`` method that is analogous to the ``set()``
-    found in Controller objects. Using set() from your view file will
-    add the variables to the layout and elements that will be rendered
-    later. See :ref:`controller-methods` for more information on using
-    set().
-
-    In your view file you can do::
-
-        $this->set('activeMenuButton', 'posts');
-
-    Then, in your layout, the ``$activeMenuButton`` variable will be
-    available and contain the value 'posts'.
-
-.. php:method:: get(string $var, $default = null)
-
-    Get the value of a viewVar with the name ``$var``.
-
-    As of 2.5, you can provide a default value in case the variable is not
-    already set.
-
-    .. versionchanged:: 2.5
-        The ``$default`` argument was added in 2.5.
-
-.. php:method:: getVar(string $var)
-
-    Gets the value of the viewVar with the name ``$var``.
-
-    .. deprecated:: 2.3
-        Use :php:meth:`View::get()` instead.
-
-.. php:method:: getVars()
-
-    Gets a list of all the available view variables in the current
-    rendering scope. Returns an array of variable names.
-
-.. php:method:: element(string $elementPath, array $data, array $options = array())
-
-    Renders an element or view partial. See the section on
-    :ref:`view-elements` for more information and
-    examples.
-
-.. php:method:: uuid(string $object, mixed $url)
-
-    Generates a unique non-random DOM ID for an object, based on the
-    object type and URL. This method is often used by helpers that need
-    to generate unique DOM ID's for elements such as the :php:class:`JsHelper`::
-
-        $uuid = $this->uuid(
-          'form',
-          array('controller' => 'posts', 'action' => 'index')
-        );
-        // $uuid contains 'form0425fe3bad'
-
-.. php:method:: addScript(string $name, string $content)
-
-    Adds content to the internal scripts buffer. This buffer is made
-    available in the layout as ``$scripts_for_layout``. This method is
-    helpful when creating helpers that need to add javascript or css
-    directly to the layout. Keep in mind that scripts added from the
-    layout and elements in the layout will not be added to
-    ``$scripts_for_layout``. This method is most often used from inside
-    helpers, such as the :doc:`/core-libraries/helpers/js` and
-    :doc:`/core-libraries/helpers/html` Helpers.
-
-    .. deprecated:: 2.1
-        Use the :ref:`view-blocks` features instead.
-
-.. php:method:: blocks
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Requesting Elements from the App
 --------------------------------
@@ -1052,37 +717,8 @@ Event List
 You can attach application :doc:`event listeners </core-libraries/events>` to
 these events or use :ref:`Helper Callbacks <helper-api>`.
 
-<<<<<<< HEAD
 Creating Your Own View Classes
 ==============================
-=======
-.. php:method:: fetch($name, $default = '')
-
-    Fetch the value of a block. If a block is empty or undefined, '' will be
-    returned. See the section on :ref:`view-blocks` for examples.
-
-    .. versionadded:: 2.1
-
-.. php:method:: extend($name)
-
-    Extend the current view/element/layout with the named one. See the section
-    on :ref:`extending-views` for examples.
-
-    .. versionadded:: 2.1
-
-.. php:attr:: layout
-
-    Set the layout the current view will be wrapped in.
-
-.. php:attr:: elementCache
-
-    The cache configuration used to cache elements. Setting this
-    property will change the default configuration used to cache elements.
-    This default can be overridden using the 'cache' option in the element
-    method.
-
-.. php:attr:: request
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 You may need to create custom view classes to enable new types of data views, or
 add additional custom view-rendering logic to your application. Like most

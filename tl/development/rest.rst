@@ -14,7 +14,6 @@ for direction. Exposing an API via REST in CakePHP is simple.
 The Simple Setup
 ================
 
-<<<<<<< HEAD
 The fastest way to get up and running with REST is to add a few lines to setup
 :ref:`resource routes <resource-routes>` in your config/routes.php file.
 
@@ -35,69 +34,6 @@ controller might look something like this::
         {
             $recipes = $this->Recipes->find('all');
             $this->set([
-=======
-The fastest way to get up and running with REST is to add a few
-lines to your routes.php file, found in app/Config. The Router
-object features a method called ``mapResources()``, that is used to set
-up a number of default routes for REST access to your controllers.
-Make sure ``mapResources()`` comes before ``require CAKE . 'Config' . DS . 'routes.php';``
-and other routes which would override the routes.
-If we wanted to allow REST access to a recipe database, we'd do
-something like this::
-
-    //In app/Config/routes.php...
-
-    Router::mapResources('recipes');
-    Router::parseExtensions();
-
-The first line sets up a number of default routes for easy REST access while 
-``parseExtensions()`` method specifies the desired result format (e.g. xml,
-json, rss). These routes are HTTP Request Method sensitive.
-
-=========== ===================== ==============================
-HTTP format URL format            Controller action invoked
-=========== ===================== ==============================
-GET         /recipes.format       RecipesController::index()
------------ --------------------- ------------------------------
-GET         /recipes/123.format   RecipesController::view(123)
------------ --------------------- ------------------------------
-POST        /recipes.format       RecipesController::add()
------------ --------------------- ------------------------------
-POST        /recipes/123.format   RecipesController::edit(123)
------------ --------------------- ------------------------------
-PUT         /recipes/123.format   RecipesController::edit(123)
------------ --------------------- ------------------------------
-DELETE      /recipes/123.format   RecipesController::delete(123)
-=========== ===================== ==============================
-
-CakePHP's Router class uses a number of different indicators to
-detect the HTTP method being used. Here they are in order of
-preference:
-
-
-#. The *\_method* POST variable
-#. The X\_HTTP\_METHOD\_OVERRIDE
-#. The REQUEST\_METHOD header
-
-The *\_method* POST variable is helpful in using a browser as a
-REST client (or anything else that can do POST easily). Just set
-the value of \_method to the name of the HTTP request method you
-wish to emulate.
-
-Once the router has been set up to map REST requests to certain
-controller actions, we can move on to creating the logic in our
-controller actions. A basic controller might look something like
-this::
-
-    // Controller/RecipesController.php
-    class RecipesController extends AppController {
-
-        public $components = array('RequestHandler');
-
-        public function index() {
-            $recipes = $this->Recipe->find('all');
-            $this->set(array(
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
                 'recipes' => $recipes,
                 '_serialize' => ['recipes']
             ]);

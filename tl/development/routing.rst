@@ -25,17 +25,10 @@ this to your **routes.php** file::
 
     use Cake\Routing\Router;
 
-<<<<<<< HEAD
     // Using the scoped route builder.
     Router::scope('/', function ($routes) {
         $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
     });
-=======
-Routes are parsed and matched, in the order they are connected in.
-If you define two similar routes, the first defined route will
-have higher priority over the one defined latter. After connecting routes you
-can manipulate the order of routes using :php:meth:`Router::promote()`.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     // Using the static method.
     Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
@@ -82,7 +75,6 @@ array containing matching parameters, it is capable of generating a URL string::
 
     use Cake\Routing\Router;
 
-<<<<<<< HEAD
     echo Router::url(['controller' => 'Articles', 'action' => 'view', 'id' => 15]);
     // Will output
     /articles/15
@@ -90,17 +82,6 @@ array containing matching parameters, it is capable of generating a URL string::
 Routes can also be labelled with a unique name, this allows you to quickly
 reference them when building links instead of specifying each of the routing
 parameters::
-=======
-Before you learn about configuring your own routes, you should know
-that CakePHP comes configured with a default set of routes.
-CakePHP's default routing will get you pretty far in any
-application. You can access an action directly via the URL by
-putting its name in the request. You can also pass parameters to
-your controller actions using the URL. ::
-
-        // URL pattern default routes:
-        http://example.com/controller/action/param1/param2/param3
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     // In routes.php
     $routes->connect(
@@ -237,17 +218,10 @@ When generating URLs, routes are used too. Using
 a URL will output ``/cooks/some_action/5`` if the above route is the
 first match found.
 
-<<<<<<< HEAD
 The routes we've connected so far will match any HTTP verb. If you are building
 a REST API you'll often want to map HTTP actions to different controller methods.
 The ``RouteBuilder`` provides helper methods that make defining routes for
 specific HTTP verbs simpler::
-=======
-    Although you can connect alternate routes, the default routes
-    will continue to work. In this setting, you can access a single piece of
-    content from 2 different URLs. See :ref:`disabling-default-routes` to
-    disable default routes, and only provide the URLs you define.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     // Create a route that only responds to GET requests.
     $routes->get(
@@ -870,15 +844,9 @@ method, any routes connected prior to the call will not inherit the extensions.
 
 .. note::
 
-<<<<<<< HEAD
     Setting the extensions should be the first thing you do in a scope, as the
     extensions will only be applied to routes connected **after** the extensions
     are set.
-=======
-Passed arguments are additional arguments or path segments that are
-used when making a request. They are often used to pass parameters
-to your controller methods. ::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     Also be aware that re-opened scopes will **not** inherit extensions defined in
     previously opened scopes.
@@ -1263,11 +1231,7 @@ can later configure routes and the generated URLs will automatically update.
 
 If you create URLs using strings like::
 
-<<<<<<< HEAD
     $this->Html->link('View', '/articles/view/' . $id);
-=======
-    $this->Html->link('View', '/posts/view/' . $id);
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 And then later decide that ``/articles`` should really be called
 'posts' instead, you would have to go through your entire
@@ -1371,41 +1335,18 @@ The ``parse()`` method is used to parse an incoming URL. It should generate an
 array of request parameters that can be resolved into a controller & action.
 Return ``false`` from this method to indicate a match failure.
 
-<<<<<<< HEAD
 The ``match()`` method is used to match an array of URL parameters and create a
 string URL. If the URL parameters do not match the route ``false`` should be
 returned.
-=======
-    Routes are a way of connecting request URLs to objects in your application.
-    At their core routes are a set of regular expressions that are used to
-    match requests to destinations.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 You can use a custom route class when making a route by using the ``routeClass``
 option::
 
-<<<<<<< HEAD
     $routes->connect(
          '/:slug',
          ['controller' => 'Articles', 'action' => 'view'],
          ['routeClass' => 'SlugRoute']
     );
-=======
-        Router::connect('/:controller/:action/*');
-
-    The first parameter will be used as a controller name while the second is
-    used as the action name. The '/\*' syntax makes this route greedy in that
-    it will match requests like ``/posts/index`` as well as requests like
-    ``/posts/edit/1/foo/bar`` . ::
-
-        Router::connect(
-            '/home-page',
-            array('controller' => 'pages', 'action' => 'display', 'home')
-        );
-
-    The above shows the use of route parameter defaults. And providing routing
-    parameters for a static route. ::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     // Or by setting the routeClass in your scope.
     $routes->scope('/', function ($routes) {
@@ -1453,18 +1394,7 @@ Calling fallbacks like so::
 
     $routes->fallbacks(DashedRoute::class);
 
-<<<<<<< HEAD
 Is equivalent to the following explicit calls::
-=======
-    * ``base`` - Set to false to remove the base path from the generated URL.
-      If your application is not in the root directory, this can be used to
-      generate URLs that are 'CakePHP relative'. CakePHP relative URLs are
-      required when using requestAction.
-    * ``?`` - Takes an array of query string parameters
-    * ``#`` - Allows you to set URL hash fragments.
-    * ``full_base`` - If true the value of :php:meth:`Router::fullBaseUrl()` will
-      be prepended to generated URLs.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     use Cake\Routing\Route\DashedRoute;
 

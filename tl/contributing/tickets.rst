@@ -45,10 +45,6 @@ CakePHP team will take the following actions:
 * Release new versions of all affected versions.
 * Prominently feature the problem in the release announcement.
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 .. meta::
     :title lang=en: Tickets
     :keywords lang=en: bug reporting system,code snippet,reporting security,private mailing,release announcement,google,ticket system,core team,security issue,bug tracker,irc channel,test cases,support questions,bug report,security issues,bug reports,exploits,vulnerability,repository

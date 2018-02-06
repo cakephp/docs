@@ -43,14 +43,7 @@ in the directory that you wish to use it with. For this example we will be using
 
 In case you've already got composer installed globally, you may instead type::
 
-<<<<<<< HEAD
     composer self-update && composer create-project --prefer-dist cakephp/app blog
-=======
-You can also clone the repository using
-`git <http://git-scm.com/>`_::
-
-    git clone -b 2.x git://github.com/cakephp/cakephp.git
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and
@@ -128,21 +121,12 @@ SQL statements into your database::
         modified DATETIME DEFAULT NULL
     );
 
-<<<<<<< HEAD
     /* Then insert some articles for testing: */
     INSERT INTO articles (title,body,created)
         VALUES ('The title', 'This is the article body.', NOW());
     INSERT INTO articles (title,body,created)
         VALUES ('A title once again', 'And the article body follows.', NOW());
     INSERT INTO articles (title,body,created)
-=======
-    /* Then insert some posts for testing: */
-    INSERT INTO posts (title, body, created)
-        VALUES ('The title', 'This is the post body.', NOW());
-    INSERT INTO posts (title, body, created)
-        VALUES ('A title once again', 'And the post body follows.', NOW());
-    INSERT INTO posts (title, body, created)
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
         VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
 
 The choices on table and column names are not arbitrary. If you

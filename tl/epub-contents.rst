@@ -4,7 +4,6 @@ Contents
 ########
 
 .. toctree::
-<<<<<<< HEAD
     :maxdepth: 3
 
     intro
@@ -59,26 +58,6 @@ Contents
     migrations
     elasticsearch
     appendices
-=======
-   :maxdepth: 3
-
-   getting-started
-   installation
-   cakephp-overview
-   controllers
-   views
-   models
-   core-libraries
-   plugins
-   console-and-shells
-   development
-   deployment
-   tutorials-and-examples/blog-auth-example/auth
-   tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application
-   tutorials-and-examples/simple-acl-controlled-application/part-two
-   contributing
-   appendices
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. todolist::
 

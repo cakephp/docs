@@ -1,22 +1,14 @@
 Installation
 ############
 
-<<<<<<< HEAD
 CakePHP is simple and easy to install. The minimum requirements are a web server
 and a copy of CakePHP, that's it! While this chapter focuses primarily on
 setting up on Apache (because it's simple to install and setup), CakePHP will
 run on a variety of web servers such as nginx, LightHTTPD, or Microsoft IIS.
-=======
-CakePHP is fast and easy to install. The minimum requirements are a webserver
-and a copy of CakePHP, that's it! While this manual focuses primarily on setting
-up on Apache (because it's the most commonly used), you can configure CakePHP to
-run on a variety of web servers such as lighttpd or Microsoft IIS.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Requirements
 ============
 
-<<<<<<< HEAD
 - HTTP Server. For example: Apache. Having mod\_rewrite is preferred, but
   by no means required.
 - PHP |minphpversion| or greater (including PHP 7.1).
@@ -41,18 +33,6 @@ Requirements
 
 While a database engine isn't required, we imagine that most applications will
 utilize one. CakePHP supports a variety of database storage engines:
-=======
-- HTTP Server. For example: Apache. mod\_rewrite is preferred, but by no means
-  required.
-- PHP 5.3.0 or greater (CakePHP version 2.6 and below support PHP 5.2.8 and
-  above). CakePHP version 2.8.0 and above support PHP 7. To use PHP above 7.1
-  you may need to install mcrypt via PECL. See
-  :doc:`/core-utility-libraries/security` for more information.
-
-Technically a database engine isn't required, but we imagine that most
-applications will utilize one. CakePHP supports a variety of database storage
-engines:
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 -  MySQL (5.1.10 or greater)
 -  PostgreSQL
@@ -63,7 +43,6 @@ engines:
 
     All built-in drivers require PDO. You should make sure you have the correct
     PDO extensions installed.
-<<<<<<< HEAD
 
 Installing CakePHP
 ==================
@@ -109,8 +88,6 @@ CakePHP application into my_app_name folder. For this just run the
 following composer command:
 
 .. code-block:: bash
-=======
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     php composer.phar create-project --prefer-dist cakephp/app my_app_name
 
@@ -118,7 +95,6 @@ Or if Composer is installed globally:
 
 .. code-block:: bash
 
-<<<<<<< HEAD
     composer self-update && composer create-project --prefer-dist cakephp/app my_app_name
 
 Once Composer finishes downloading the application skeleton and the core CakePHP
@@ -139,25 +115,6 @@ further use.
 
 Keeping Up To Date with the Latest CakePHP Changes
 --------------------------------------------------
-=======
-There are two main ways to get a fresh copy of CakePHP. You can either download
-an archived copy (zip/tar.gz/tar.bz2) from the main website, or check out the
-code from the git repository.
-
-To download the latest major release of CakePHP, visit the main website
-`https://cakephp.org <https://cakephp.org>`_ and follow the "Download" link.
-
-All current releases of CakePHP are hosted on
-`GitHub <https://github.com/cakephp/cakephp>`_. GitHub houses both CakePHP itself
-as well as many other plugins for CakePHP. The CakePHP releases are available at
-`GitHub tags <https://github.com/cakephp/cakephp/tags>`_.
-
-Alternatively you can get fresh off the press code, with all the bug-fixes and
-up to the minute enhancements. These can be accessed from GitHub by cloning the
-`GitHub`_ repository::
-
-    git clone -b 2.x git://github.com/cakephp/cakephp.git
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 By default this is what your application **composer.json** looks like::
 
@@ -200,7 +157,6 @@ After the installation completes, your CakePHP application is ready to go!
 Permissions
 ===========
 
-<<<<<<< HEAD
 CakePHP uses the **tmp** directory for a number of different operations.
 Model descriptions, cached views, and session information are a few
 examples. The **logs** directory is used to write log files by the default
@@ -217,19 +173,6 @@ must be writable both by the web server and the command line user. On a UNIX
 system, if your web server user is different from your command line user, you
 can run the following commands from your application directory just once in your
 project to ensure that permissions will be setup properly:
-=======
-CakePHP uses the ``app/tmp`` directory for a number of different operations. A
-few examples would be Model descriptions, cached views and session information.
-
-As such, make sure the directory ``app/tmp`` and all its subdirectories in your
-CakePHP installation are writable by the web server user.
-
-One common issue is that the app/tmp directories and subdirectories must be
-writable both by the web server and the command line user. On a UNIX system, if
-your web server user is different from your command line user, you can run the
-following commands just once in your project to ensure that permissions will be
-setup properly::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. code-block:: bash
 
@@ -239,25 +182,11 @@ setup properly::
     setfacl -R -m u:${HTTPDUSER}:rwx logs
     setfacl -R -d -m u:${HTTPDUSER}:rwx logs
 
-<<<<<<< HEAD
 In order to use the CakePHP console tools, you need to ensure that
 ``bin/cake`` file is executable. On \*nix or macOS, you can
 execute:
 
 .. code-block:: bash
-=======
-Setting up CakePHP can be as simple as slapping it in your web server's document
-root, or as complex and flexible as you wish. This section will cover the three
-main installation types for CakePHP: development, production, and advanced.
-
--  Development: easy to get going, URLs for the application include the CakePHP
-   installation directory name, and less secure.
--  Production: Requires the ability to configure the web server's document root,
-   clean URLs, very secure.
--  Advanced: With some configuration, allows you to place key CakePHP
-   directories in different parts of the filesystem, possibly sharing a single
-   CakePHP core library folder amongst many CakePHP applications.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     chmod +x bin/cake
 
@@ -283,7 +212,6 @@ directory, execute:
 
 .. code-block:: bash
 
-<<<<<<< HEAD
     bin/cake server
 
 By default, without any arguments provided, this will serve your application at
@@ -315,61 +243,6 @@ If you'd prefer to use a real web server, you should be able to move your CakePH
 install (including the hidden files) inside your web server's document root. You
 should then be able to point your web-browser at the directory you moved the
 files into and see your application in action.
-=======
-A development installation is the fastest method to setup CakePHP. This example
-will help you install a CakePHP application and make it available at
-http://www.example.com/cake\_2\_0/. We assume for the purposes of this example
-that your document root is set to ``/var/www/html``.
-
-Unpack the contents of the CakePHP archive into ``/var/www/html``. You now have
-a folder in your document root named after the release you've downloaded (e.g.
-cake\_2.0.0). Rename this folder to cake\_2\_0. Your development setup will look
-like this on the file system::
-
-    /var/www/html/
-        cake_2_0/
-            app/
-            lib/
-            plugins/
-            vendors/
-            .htaccess
-            index.php
-            README
-
-If your web server is configured correctly, you should now find your CakePHP
-application accessible at http://www.example.com/cake\_2\_0/.
-
-Using one CakePHP Checkout for multiple Applications
-----------------------------------------------------
-
-If you are developing a number of applications, it often makes sense to have
-them share the same CakePHP core checkout. There are a few ways in which you can
-accomplish this. Often the easiest is to use PHP's ``include_path``. To start
-off, clone CakePHP into a directory. For this example, we'll use
-``/home/mark/projects``::
-
-    git clone -b 2.x git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
-
-This will clone CakePHP into your ``/home/mark/projects`` directory. If you
-don't want to use git, you can download a zipball and the remaining steps will
-be the same. Next you'll have to locate and modify your ``php.ini``. On \*nix
-systems this is often in ``/etc/php.ini``, but using ``php -i`` and looking for
-'Loaded Configuration File', you can find the actual location. Once you've found
-the correct ini file, modify the ``include_path`` configuration to include
-``/home/mark/projects/cakephp/lib``. An example would look like::
-
-    include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
-
-After restarting your webserver, you should see the changes reflected in
-``phpinfo()``.
-
-.. note::
-
-    If you are on Windows, separate include paths with ; instead of :
-
-Having finished setting up your ``include_path`` your applications should be
-able to find CakePHP automatically.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Production
 ==========
@@ -380,15 +253,9 @@ example will help you install CakePHP anywhere on your filesystem and make it
 available at http://www.example.com. Note that this installation may require the
 rights to change the ``DocumentRoot`` on Apache webservers.
 
-<<<<<<< HEAD
 After installing your application using one of the methods above into the
 directory of your choosing - we'll assume you chose /cake_install - your
 production setup will look like this on the file system::
-=======
-Unpack the contents of the CakePHP archive into a directory of your choice. For
-the purposes of this example, we assume you chose to install CakePHP into
-/cake\_install. Your production setup will look like this on the filesystem::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     /cake_install/
         bin/
@@ -405,23 +272,11 @@ the purposes of this example, we assume you chose to install CakePHP into
         .travis.yml
         composer.json
         index.php
-<<<<<<< HEAD
         phpunit.xml.dist
         README.md
 
 Developers using Apache should set the ``DocumentRoot`` directive for the domain
 to:
-=======
-        README
-
-Developers using Apache should set the ``DocumentRoot`` directive for the domain
-to::
-
-    DocumentRoot /cake_install/app/webroot
-
-If your web server is configured correctly, you should now find your CakePHP
-application accessible at http://www.example.com.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. code-block:: apacheconf
 
@@ -434,7 +289,6 @@ Fire It Up
 ==========
 
 Alright, let's see CakePHP in action. Depending on which setup you used, you
-<<<<<<< HEAD
 should point your browser to http://example.com/ or http://localhost:8765/. At
 this point, you'll be presented with CakePHP's default home, and a message that
 tells you the status of your current database connection.
@@ -484,18 +338,6 @@ further information.
    like:
 
    .. code-block:: apacheconf
-=======
-should point your browser to http://example.com/ or
-http://www.example.com/cake\_2\_0/. At this point, you'll be presented with
-CakePHP's default home, and a message that tells you the status of your current
-database connection.
-
-Congratulations! You are ready to :doc:`create your first CakePHP application
-</getting-started>`.
-
-Not working? If you're getting timezone related errors from PHP uncomment one
-line in ``app/Config/core.php``::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
        LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 

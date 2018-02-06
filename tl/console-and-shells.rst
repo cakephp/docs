@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 Console Tools, Shells & Tasks
-=======
-Shells, Tasks & Console Tools
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 #############################
 
 .. php:namespace:: Cake\Console
@@ -71,7 +67,6 @@ Running the Console with no arguments produces this help message::
 
     Available Shells:
 
-<<<<<<< HEAD
     - version
     - help
     - cache
@@ -117,60 +112,6 @@ a shell.
 
 Creating a Shell
 ================
-=======
-     acl [CORE]                              i18n [CORE]
-     api [CORE]                              import [app]
-     bake [CORE]                             schema [CORE]
-     command_list [CORE]                     testsuite [CORE]
-     console [CORE]                          upgrade [CORE]
-
-    To run a command, type 'cake shell_name [args]'
-    To get help on a specific command, type 'cake shell_name help'
-
-The first information printed relates to paths. This is especially
-helpful if you're running the console from different parts of the
-filesystem.
-
-Since many users add the CakePHP console to their system's path so it can
-be accessed easily. Printing out the working, root, app, and core
-paths allows you to see where the console will be making changes.
-To change the app folder you wish to work with, you can supply its
-path as the first argument to the cake command. This next example
-shows how to specify an app folder, assuming you've already added
-the console folder to your ``PATH``::
-
-    $ cake -app /path/to/cakephp/app
-
-The path supplied can be relative to the current working directory
-or supplied as an absolute path.
-
-.. _adding-cake-to-your-path:
-
-Adding cake to your system path
--------------------------------
-
-If you are on a \*nix system (linux, MacOSX) the following steps will let you add the
-cake executable to your system path.
-
-#. Locate where your CakePHP install, and cake executable are. For example
-   ``/Users/mark/cakephp/lib/Cake/Console/cake``
-#. Edit your ``.bashrc`` or ``.bash_profile`` file in your home directory, and add the following::
-
-    export PATH="$PATH:/Users/mark/cakephp/lib/Cake/Console"
-
-#. Reload the bash configuration or open a new terminal, and ``cake`` should work anywhere.
-
-If you are on Windows Vista or 7, you should follow the steps below.
-
-#. Locate where your CakePHP install and cake executable are. For example
-   ``C:\xampp\htdocs\cakephp\lib\Cake\Console``
-#. Open System Properties window from My Computer. You want to try the shortcut Windows Key + Pause or Windows Key + Break. Or, from the Desktop, right-click My Computer, click Properties then click Advanced System Settings link in the left column
-#. Go under Advanced tab and click on Environment Variables button
-#. In the System Variables portion, reach Path variable and double-click on it to Edit
-#. Add the ``cake`` install path string followed by a semi colon. Result example::
-
-    %SystemRoot%\system32;%SystemRoot%;C:\xampp\htdocs\cakephp\lib\Cake\Console;
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Let's create a shell for use in the Console. For this example, we'll create a
 simple Hello world shell. In your application's **src/Shell** directory create
@@ -222,17 +163,8 @@ something::
         }
     }
 
-<<<<<<< HEAD
 After saving this file, you should be able to run the following command and see
 your name printed out::
-=======
-After saving this file you should be able to run ``Console/cake hello hey_there your-name``
-and see your name printed out. Any public method not prefixed by an ``_`` is allowed to be
-called from the command line. In our ``hey_there`` method we also used ``$this->args``, this
-property contains an array of all the positional arguments provided to a command. You can
-also use switches or options on shell applications, these are available at ``$this->params``,
-and through the ``param()`` method, but we'll cover that in a bit.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     bin/cake hello hey_there your-name
 
@@ -287,7 +219,6 @@ will call this method when the task is invoked. A task class looks like::
     }
 
 A shell can also access its tasks as properties, which makes tasks great for
-<<<<<<< HEAD
 making re-usable chunks of functionality similar to
 :doc:`/controllers/components`::
 
@@ -296,9 +227,6 @@ making re-usable chunks of functionality similar to
     {
         // Found in src/Shell/Task/SoundTask.php
         public $tasks = ['Sound'];
-=======
-making re-usable chunks of functionality similar to :doc:`/controllers/components`::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
         public function main()
         {
@@ -616,11 +544,7 @@ Turning Off Colouring
 Although colouring is pretty awesome, there may be times when you want to turn it off,
 or force it on::
 
-<<<<<<< HEAD
     $this->_io->outputAs(ConsoleOutput::RAW);
-=======
-    $this->stdout->outputAs(ConsoleOutput::RAW);
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 The above will put the output object into raw output mode. In raw output mode,
 no styling is done at all. There are three modes you can use.
@@ -633,7 +557,6 @@ no styling is done at all. There are three modes you can use.
   your styling isn't working.
 
 By default on \*nix systems ConsoleOutput objects default to colour output.
-<<<<<<< HEAD
 On Windows systems, plain output is the default unless the ``ANSICON``
 environment variable is present.
 
@@ -706,10 +629,6 @@ command-line::
     ``sysexits.h``.
     Avoid exit codes above 127, as these are used to indicate process exit
     by signal, such as SIGKILL or SIGSEGV.
-=======
-On Windows systems, plain output is the default unless the ``ANSICON`` environment
-variable is present.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. note::
 
@@ -749,22 +668,12 @@ you to separate basic input validation and your console commands. Secondly, it
 allows you to provide documentation, that is used to generate a well formatted
 help file.
 
-<<<<<<< HEAD
 The console framework in CakePHP gets your shell's option parser by calling
 ``$this->getOptionParser()``. Overriding this method allows you to configure the
 OptionParser to define the expected inputs of your shell. You can also configure
 subcommand option parsers, which allow you to have different option parsers for
 subcommands and tasks. The ConsoleOptionParser implements a fluent interface and
 includes methods for setting multiple options/arguments at once::
-=======
-The console framework gets your shell's option parser by calling
-``$this->getOptionParser()``. Overriding this method allows you to
-configure the OptionParser to match the expected inputs of your shell.
-You can also configure subcommand option parsers, which allow you to
-have different option parsers for subcommands and tasks.
-The ConsoleOptionParser implements a fluent interface and includes
-methods for easily setting multiple options/arguments at once. ::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     public function getOptionParser()
     {
@@ -985,13 +894,8 @@ handle that in your shell.
 
 .. php:method:: addArguments(array $args)
 
-<<<<<<< HEAD
 If you have an array with multiple arguments you can use
 ``$parser->addArguments()`` to add multiple arguments at once. ::
-=======
-If you have an array with multiple arguments you can use ``$parser->addArguments()``
-to add multiple arguments at once. ::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     $parser->addArguments([
         'node' => ['help' => 'The node to create', 'required' => true],
@@ -1025,16 +929,9 @@ Adding Options
 .. php:method:: addOption($name, $options = [])
 
 Options or flags are also frequently used in command line tools.
-<<<<<<< HEAD
 ``ConsoleOptionParser`` supports creating options with both verbose and short
 aliases, supplying defaults and creating boolean switches. Options are created
 with either ``$parser->addOption()`` or ``$parser->addOptions()``. ::
-=======
-``ConsoleOptionParser`` supports creating options
-with both verbose and short aliases, supplying defaults
-and creating boolean switches. Options are created with either
-``$parser->addOption()`` or ``$parser->addOptions()``. ::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     $parser->addOption('connection', [
         'short' => 'c',
@@ -1044,7 +941,6 @@ and creating boolean switches. Options are created with either
 
 The above would allow you to use either ``cake myshell --connection=other``,
 ``cake myshell --connection other``, or ``cake myshell -c other``
-<<<<<<< HEAD
 when invoking the shell. You can also create boolean switches, these switches do
 not consume values, and their presence just enables them in the parsed
 parameters. ::
@@ -1066,26 +962,6 @@ of the option:
    option.
 * ``default`` - The default value for this option. If not defined the default
    will be ``true``.
-=======
-when invoking the shell. You can also create boolean switches, these switches do not
-consume values, and their presence just enables them in the
-parsed parameters. ::
-
-    $parser->addOption('no-commit', array('boolean' => true));
-
-With this option, when calling a shell like ``cake myshell --no-commit something``
-the no-commit param would have a value of true, and 'something'
-would be a treated as a positional argument.
-The built-in ``--help``, ``--verbose``, and ``--quiet`` options
-use this feature.
-
-When creating options you can use the following options to
-define the behavior of the option:
-
-* ``short`` - The single letter variant for this option, leave undefined for none.
-* ``help`` - Help text for this option. Used when generating help for the option.
-* ``default`` - The default value for this option. If not defined the default will be true.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 * ``boolean`` - The option uses no value, it's just a boolean switch.
   Defaults to ``false``.
 * ``choices`` - An array of valid choices for this option. If left empty all
@@ -1142,19 +1018,9 @@ flags::
         // Do something.
     }
 
-<<<<<<< HEAD
 Since the boolean options are always defined as ``true`` or ``false`` you can
 omit additional check methods when using the array access. The
 ``$this->param()`` method makes these checks unnecessary for all cases.
-=======
-    // as of 2.7
-    if ($this->param('verbose')) {
-        // do something
-    }
-
-Since the boolean options are always defined as ``true`` or
-``false`` you can omit additional check methods.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Adding Subcommands
 ------------------
@@ -1286,17 +1152,10 @@ This would get you the help specific to bake's model task.
 Getting Help as XML
 -------------------
 
-<<<<<<< HEAD
 When building automated tools or development tools that need to interact with
 CakePHP shells, it's nice to have help available in a machine parse-able format.
 The ConsoleOptionParser can provide help in xml by setting an additional
 argument::
-=======
-When building automated tools or development tools that need to interact
-with CakePHP shells, it's nice to have help available in a machine parse-able
-format. The ConsoleOptionParser can provide help in xml by setting an
-additional argument::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     cake bake --help xml
     cake bake -h xml
@@ -1355,7 +1214,6 @@ look like:
         </arguments>
     </shell>
 
-<<<<<<< HEAD
 Renaming Commands
 =================
 
@@ -1364,20 +1222,6 @@ application and its plugins. You may want to reduce the number of exposed
 commands, when building standalone console applications. You can use your
 Application's ``console()`` hook to limit which commands are exposed and rename
 the commands that are exposed::
-=======
-Routing in shells / CLI
-=======================
-
-In command-line interface (CLI), specifically your shells and tasks, ``env('HTTP_HOST')`` and
-other webbrowser specific environment variables are not set.
-
-If you generate reports or send emails that make use of ``Router::url()`` those will contain
-the default host ``http://localhost/``  and thus resulting in invalid URLs. In this case you need to
-specify the domain manually.
-You can do that using the Configure value ``App.fullBaseUrl`` from your bootstrap or config, for example.
-
-For sending emails, you should provide CakeEmail class with the host you want to send the email with::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     namespace App;
 
@@ -1395,175 +1239,9 @@ For sending emails, you should provide CakeEmail class with the host you want to
             // Add instance
             $commands->add('version', new VersionShell());
 
-<<<<<<< HEAD
             return $commands;
         }
     }
-=======
-    AppShell can be used as a base class for all your shells. It should extend
-    :php:class:`Shell`, and be located in ``Console/Command/AppShell.php``
-
-.. php:class:: Shell($stdout = null, $stderr = null, $stdin = null)
-
-    Shell is the base class for all shells, and provides a number of functions for
-    interacting with user input, outputting text a generating errors.
-
-.. php:attr:: tasks
-
-    An array of tasks you want loaded for this shell/task.
-
-.. php:attr:: uses
-
-    An array of models that should be loaded for this shell/task.
-
-.. php:method:: clear()
-
-    Clears the current output being displayed.
-
-.. php:method:: param($name)
-
-    Get the value of an option/parameter. Will return null if the parameter does
-    not exist.
-
-    .. versionadded:: 2.7
-
-.. php:method:: createFile($path, $contents)
-
-    :param string $path: Absolute path to the file you want to create.
-    :param string $contents: Contents to put in the file.
-
-    Creates a file at a given path. If the Shell is interactive, a warning will be
-    generated, and the user asked if they want to overwrite the file if it already exists.
-    If the shell's interactive property is false, no question will be asked and the file
-    will simply be overwritten.
-
-.. php:method:: dispatchShell()
-
-    Dispatch a command to another Shell. Similar to
-    :php:meth:`Controller::requestAction()` but intended for running shells
-    from other shells.
-
-    See :ref:`invoking-other-shells-from-your-shell`.
-
-.. php:method:: err($message = null, $newlines = 1)
-
-    :param string $method: The message to print.
-    :param integer $newlines: The number of newlines to follow the message.
-
-    Outputs a method to ``stderr``, works similar to :php:meth:`Shell::out()`
-
-.. php:method:: error($title, $message = null)
-
-    :param string $title: Title of the error
-    :param string $message: An optional error message
-
-    Displays a formatted error message and exits the application with status
-    code 1
-
-.. php:method:: getOptionParser()
-
-    Should return a :php:class:`ConsoleOptionParser` object, with any
-    sub-parsers for the shell.
-
-.. php:method:: hasMethod($name)
-
-    Check to see if this shell has a callable method by the given name.
-
-.. php:method:: hasTask($task)
-
-    Check to see if this shell has a task with the provided name.
-
-.. php:method:: hr($newlines = 0, $width = 63)
-
-    :param int $newlines: The number of newlines to precede and follow the line.
-    :param int $width: The width of the line to draw.
-
-    Create a horizontal line preceded and followed by a number of newlines.
-
-.. php:method:: in($prompt, $options = null, $default = null)
-
-    :param string $prompt: The prompt to display to the user.
-    :param array $options: An array of valid choices the user can pick from.
-       Picking an invalid option will force the user to choose again.
-    :param string $default: The default option if there is one.
-
-    This method helps you interact with the user, and create interactive shells.
-    It will return the users answer to the prompt, and allows you to provide a
-    list of valid options the user can choose from::
-
-        $selection = $this->in('Red or Green?', array('R', 'G'), 'R');
-
-    The selection validation is case-insensitive.
-
-.. php:method:: initialize()
-
-    Initializes the Shell acts as constructor for subclasses allows
-    configuration of tasks prior to shell execution.
-
-.. php:method:: loadTasks()
-
-    Loads tasks defined in public :php:attr:`Shell::$tasks`
-
-.. php:method:: nl($multiplier = 1)
-
-    :param int $multiplier: Number of times the linefeed sequence should be repeated
-
-    Returns a number of linefeed sequences.
-
-.. php:method:: out($message = null, $newlines = 1, $level = Shell::NORMAL)
-
-    :param string $message: The message to print.
-    :param integer $newlines: The number of newlines to follow the message.
-    :param integer $level: The highest :ref:`shell-output-level` this message
-        should display at.
-
-    The primary method for generating output to the user. By using levels, you
-    can limit how verbose a shell is. out() also allows you to use colour formatting
-    tags, which will enable coloured output on systems that support it. There are
-    several built-in styles for colouring text, and you can define your own.
-
-    * ``error`` Error messages.
-    * ``warning`` Warning messages.
-    * ``info`` Informational messages.
-    * ``comment`` Additional text.
-    * ``question`` Magenta text used for user prompts
-
-    By formatting messages with style tags you can display styled output::
-
-        $this->out(
-            '<warning>This will remove data from the filesystems.</warning>'
-        );
-
-    By default on \*nix systems ConsoleOutput objects default to colour output.
-    On Windows systems, plain output is the default unless the ``ANSICON`` environment
-    variable is present.
-
-.. php:method:: overwrite($message = null, $newlines = 1, $size = null)
-
-    :param string $message: The message to print.
-    :param integer $newlines: The number of newlines to follow the message.
-    :param integer $size: The number of bytes to overwrite
-
-    A useful method to generate progress bars or to avoid outputting too many lines.
-
-    Warning: You cannot overwrite text that contains newlines.
-
-    .. versionadded:: 2.6
-
-.. php:method:: runCommand($command, $argv)
-
-    Runs the Shell with the provided argv.
-
-    Delegates calls to Tasks and resolves methods inside the class. Commands
-    are looked up with the following order:
-
-    - Method on the shell.
-    - Matching task name.
-    - main() method.
-
-    If a shell implements a main() method, all missing method calls will be
-    sent to main() with the original method name in the argv.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 In the above example, the only commands available would be ``help``, ``version``
 and ``user``.
@@ -1603,10 +1281,7 @@ More Topics
     :maxdepth: 1
 
     console-and-shells/helpers
-<<<<<<< HEAD
     console-and-shells/repl
-=======
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
     console-and-shells/cron-jobs
     console-and-shells/i18n-shell
     console-and-shells/completion-shell

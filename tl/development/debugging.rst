@@ -42,7 +42,6 @@ a stack trace wherever the function is called.
 
 .. versionadded:: 3.1
 
-<<<<<<< HEAD
 If you have `Psysh <http://psysh.org/>`_ installed you can use this
 function in CLI enviroments to open an interactive console with the current
 local scope::
@@ -53,14 +52,6 @@ local scope::
 Will open an interactive console that can be used to check local variables
 and execute other code. You can exit the interactive debugger and resume the
 original execution by running ``quit`` or ``q`` in the interactive session.
-=======
-When an error is raised, Debugger both outputs information to the
-page and makes an entry in the error.log file. The error report
-that is generated has both a stack trace and a code excerpt from
-where the error was raised. Click on the "Error" link to
-reveal the stack trace, and on the "Code" link to reveal the
-error-causing lines.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Using the Debugger Class
 ========================
@@ -120,14 +111,8 @@ you can mask specific keys::
 
     Output masking was added in 3.4.0
 
-<<<<<<< HEAD
 Logging With Stack Traces
 =========================
-=======
-    Returns the current stack trace. Each line of the trace includes
-    the calling method, including which file and line the call
-    originated from. ::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. php:staticmethod:: log($var, $level = 7, $depth = 3)
 
@@ -142,15 +127,9 @@ Generating Stack Traces
 
 .. php:staticmethod:: trace($options)
 
-<<<<<<< HEAD
 Returns the current stack trace. Each line of the trace includes
 the calling method, including which file and line the call
 originated from::
-=======
-    Grab an excerpt from the file at $path (which is an absolute
-    filepath), highlights line number $line with $context number of
-    lines around it. ::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     // In PostsController::index()
     pr(Debugger::trace());
@@ -221,21 +200,8 @@ Debug Kit
 
 DebugKit is a plugin that provides a number of good debugging tools. It
 primarily provides a toolbar in the rendered HTML, that provides a plethora of
-<<<<<<< HEAD
 information about your application and the current request. See the
 :doc:`/debug-kit` chapter for how to install and use DebugKit.
-=======
-information about your application and the current request. You can download
-`DebugKit <https://github.com/cakephp/debug_kit/tree/2.2>`_ from GitHub.
-
-Xdebug
-======
-
-If your environment supplies the Xdebug PHP extension, fatal errors will show
-additional Xdebug stack trace details. Details about Xdebug can be found at
-`Xdebug <http://xdebug.org>`_ .
-
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. meta::
     :title lang=en: Debugging

@@ -1,7 +1,6 @@
 Helpers
 #######
 
-<<<<<<< HEAD
 Helpers are the component-like classes for the presentation layer of your
 application. They contain presentational logic that is shared between many
 views, elements, or layouts. This chapter will show you how to configure
@@ -29,13 +28,6 @@ helpers included in CakePHP, check out the chapter for each helper:
     /views/helpers/url
 
 .. _configuring-helpers:
-=======
-Helpers are the component-like classes for the presentation layer
-of your application. They contain presentational logic that is
-shared between many views, elements, or layouts. This chapter will
-show you how to create your own helpers, and outline the basic
-tasks CakePHP's core helpers can help you accomplish.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Configuring Helpers
 ===================
@@ -351,7 +343,6 @@ If you would like to access a View variable inside a helper, you can use
         }
     }
 
-<<<<<<< HEAD
 Rendering A View Element Inside Your Helper
 -------------------------------------------
 
@@ -376,8 +367,6 @@ If you would like to render an Element inside your Helper you can use
         }
     }
 
-=======
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 .. _helper-api:
 
 Helper Class

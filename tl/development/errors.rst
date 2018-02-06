@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Error & Exception Handling
 ##########################
 
@@ -40,53 +39,6 @@ of ``debug`` level or ``errorLevel`` configuration, but the result will be
 different based on ``debug`` level. The default behavior for fatal errors is
 show a page to internal server error (``debug`` disabled) or a page with the
 message, file and line (``debug`` enabled).
-=======
-Error Handling
-##############
-
-For 2.0 ``Object::cakeError()`` has been removed. Instead it has been replaced with
-a number of exceptions. All of the core classes that previously called cakeError
-are now throwing exceptions. This lets you either choose to handle the errors
-in your application code, or let the built-in exception handling deal with them.
-
-There is more control than ever for error and exception handling in CakePHP 2.0.
-You can configure which methods you want to set as the default error handler,
-and exception handler using configure.
-
-Error configuration
-===================
-
-Error configuration is done inside your application's ``app/Config/core.php``
-file. You can define a callback to be fired each time your application triggers
-any PHP error. :doc:`/development/exceptions` are handled separately.
-The callback can be any PHP callable, including an anonymous function. The
-default error handling configuration looks like::
-
-    Configure::write('Error', array(
-        'handler' => 'ErrorHandler::handleError',
-        'level' => E_ALL & ~E_DEPRECATED,
-        'trace' => true
-    ));
-
-You have 5 built-in options when configuring error handlers:
-
-* ``handler`` - callback - The callback to handle errors. You can set this to any
-  callable type, including anonymous functions.
-* ``level`` - int - The level of errors you are interested in capturing. Use the
-  built-in PHP error constants, and bitmasks to select the level of error you
-  are interested in.
-* ``trace`` - boolean - Include stack traces for errors in log files. Stack traces
-  will be included in the log after each error. This is helpful for finding
-  where/when errors are being raised.
-* ``consoleHandler`` - callback - The callback used to handle errors when
-  running in the console. If undefined, CakePHP's default handlers will be
-  used.
-
-ErrorHandler by default, displays errors when ``debug`` > 0, and logs errors when
-debug = 0. The type of errors captured in both cases is controlled by ``Error.level``.
-The fatal error handler will be called independent of ``debug`` level or ``Error.level``
-configuration, but the result will be different based on ``debug`` level.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. note::
 
@@ -279,15 +231,9 @@ display logic more simply. As an example, we could build a class called
         }
     }
 
-<<<<<<< HEAD
 The ``BaseErrorHandler`` defines two abstract methods. ``_displayError()`` is
 used when errors are triggered. The ``_displayException()`` method is called
 when there is an uncaught exception.
-=======
-This class/method will print out 'There has been an error!' each time an error
-occurs. Since you can define an error handler as any callback type, you could
-use an anonymous function if you are using PHP5.3 or greater. ::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Changing Fatal Error Behavior
 -----------------------------
@@ -406,7 +352,6 @@ exceptions for HTTP methods
 
 .. php:exception:: NotFoundException
 
-<<<<<<< HEAD
     Used for doing a 404 Not found error.
 
 .. php:exception:: MethodNotAllowedException
@@ -460,33 +405,6 @@ pages for items that have not been found::
         $article = $this->Articles->findById($id)->first();
         if (empty($article)) {
             throw new NotFoundException(__('Article not found'));
-=======
-Since CakePHP 2.2 the ``Error.handler`` will receive the fatal error codes as well.
-If you do not want to show the cake error page, you can override it like::
-
-    //in app/Config/core.php
-    Configure::write('Error.handler', 'AppError::handleError');
-
-    //in app/Config/bootstrap.php
-    App::uses('AppError', 'Lib');
-
-    //in app/Lib/AppError.php
-    class AppError {
-        public static function handleError($code, $description, $file = null,
-            $line = null, $context = null) {
-            list(, $level) = ErrorHandler::mapErrorCode($code);
-            if ($level === LOG_ERR) {
-                // Ignore fatal error. It will keep the PHP error message only
-                return false;
-            }
-            return ErrorHandler::handleError(
-                $code,
-                $description,
-                $file,
-                $line,
-                $context
-            );
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
         }
         $this->set('article', $article);
         $this->set('_serialize', ['article']);

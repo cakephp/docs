@@ -147,7 +147,6 @@ a getter/setter for enviromnent variables without having to modify globals
     // Set a value, generally helpful in testing.
     $this->request->env('REQUEST_METHOD', 'POST');
 
-<<<<<<< HEAD
 To access all the environment variables in a request use ``getServerParams()``::
 
     $env = $this->request->getServerParams();
@@ -162,12 +161,6 @@ Applications employing :doc:`/development/rest` often exchange data in
 non-URL-encoded post bodies. You can read input data in any format using
 :php:meth:`~Cake\\Http\\ServerRequest::input()`. By providing a decoding function,
 you can receive the content in a deserialized format::
-=======
-Applications employing :doc:`/development/rest` often exchange data in non-URL-encoded
-post bodies. You can read input data in any format using
-:php:meth:`CakeRequest::input()`. By providing a decoding function, you can
-receive the content in a deserialized format::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     // Get JSON encoded data submitted to a PUT/POST action
     $jsonData = $this->request->input('json_decode');
@@ -215,7 +208,6 @@ The request object provides an easy way to inspect certain conditions in a given
 request. By using the ``is()`` method you can check a number of common
 conditions, as well as inspect other application specific request criteria::
 
-<<<<<<< HEAD
     $isPost = $this->request->is('post');
 
 You can also extend the request detectors that are available, by using
@@ -224,18 +216,6 @@ detectors. There are four different types of detectors that you can create:
 
 * Environment value comparison - Compares a value fetched from :php:func:`env()`
   for equality with the provided value.
-=======
-Both method calls will return the same value. For the time being, the methods
-are still available on :php:class:`RequestHandlerComponent`, but are deprecated and
-will be removed in 3.0.0. You can also easily extend the request
-detectors that are available by using :php:meth:`CakeRequest::addDetector()`
-to create new kinds of detectors. There are four different types of detectors
-that you can create:
-
-* Environment value comparison - Compares a
-  value fetched from :php:func:`env()` for equality
-  with the provided value.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 * Pattern value comparison - Pattern value comparison allows you to compare a
   value fetched from :php:func:`env()` to a regular expression.
 * Option based comparison -  Option based comparisons use a list of options to
@@ -315,18 +295,7 @@ There are several built-in detectors that you can use:
 Session Data
 ------------
 
-<<<<<<< HEAD
 To access the session for a given request use the ``session()`` method::
-=======
-Since many of the features :php:class:`CakeRequest` offers used to be the realm of
-:php:class:`RequestHandlerComponent`, some rethinking was required to figure out how it
-still fits into the picture. For 2.0, :php:class:`RequestHandlerComponent`
-provides a layer of sugar, such as switching layout
-and views based on content, on top of the utility that
-:php:class:`CakeRequest` affords.
-This separation of utility and sugar between the two classes lets you
-more easily choose what you want.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     $userName = $this->request->session()->read('Auth.User.name');
 
@@ -514,22 +483,7 @@ tasks such as:
 Dealing with Content Types
 --------------------------
 
-<<<<<<< HEAD
 .. php:method:: withType($contentType = null)
-=======
-CakePHP uses :php:class:`CakeResponse` by default. :php:class:`CakeResponse` is a flexible and
-transparent class. If you need to override it with your own application-specific class,
-you can replace :php:class:`CakeResponse` in ``app/webroot/index.php``.
-This will make all the controllers in your application use ``CustomResponse``
-instead of :php:class:`CakeResponse`. You can also replace the response
-instance by setting ``$this->response`` in your controllers. Overriding the
-response object is handy during testing, as it allows you to stub
-out the methods that interact with :php:meth:`~CakeResponse::header()`. See the section on
-:ref:`cakeresponse-testing` for more information.
-
-Dealing with content types
-==========================
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 You can control the Content-Type of your application's responses with
 :php:meth:`Cake\\Http\\Response::withType()`. If your application needs to deal

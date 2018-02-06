@@ -37,11 +37,7 @@ Expression Types
 |                                | string value including numeric string      |
 |                                | values.                                    |
 +--------------------------------+--------------------------------------------+
-<<<<<<< HEAD:en/core-libraries/hash.rst
 | ``{*}``                        | Matches any value.                         |
-=======
-| ``{*}``                        | Represents any value regardless of type.   |
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d:en/core-utility-libraries/hash.rst
 +--------------------------------+--------------------------------------------+
 | ``Foo``                        | Matches keys with the exact same value.    |
 +--------------------------------+--------------------------------------------+
@@ -77,32 +73,12 @@ Attribute Matching Types
 |                                | the regular expression inside ``...``.     |
 +--------------------------------+--------------------------------------------+
 
-<<<<<<< HEAD:en/core-libraries/hash.rst
 .. php:staticmethod:: get(array|\ArrayAccess $data, $path, $default = null)
 
     ``get()`` is a simplified version of ``extract()``, it only supports direct
     path expressions. Paths with ``{n}``, ``{s}``, ``{*}`` or matchers are not
     supported. Use ``get()`` when you want exactly one value out of an array. If
     a matching path is not found the default value will be returned.
-=======
-.. versionchanged:: 2.5
-    Matcher support was added to ``insert()`` and ``remove()``.
-
-.. php:staticmethod:: get(array $data, $path, $default = null)
-
-    :rtype: mixed
-
-    ``get()`` is a simplified version of ``extract()``, it only supports direct
-    path expressions. Paths with ``{n}``, ``{s}`` or matchers are not
-    supported. Use ``get()`` when you want exactly one value out of an array.
-    The optional third argument will be returned if the requested path is not
-    found in the array.
-
-    .. versionchanged:: 2.5
-        The optional third argument ``$default = null`` was added.
-
-.. php:staticmethod:: extract(array $data, $path)
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d:en/core-utility-libraries/hash.rst
 
 .. php:staticmethod:: extract(array|\ArrayAccess $data, $path)
 
@@ -148,7 +124,6 @@ Attribute Matching Types
 
     Attribute matchers work with ``insert()`` as well::
 
-<<<<<<< HEAD:en/core-libraries/hash.rst
         $data = [
             0 => ['up' => true, 'Item' => ['id' => 1, 'title' => 'first']],
             1 => ['Item' => ['id' => 2, 'title' => 'second']],
@@ -166,17 +141,10 @@ Attribute Matching Types
                 ['Item' => ['id' => 5, 'title' => 'fifth']],
             ]
         */
-=======
-.. php:staticmethod:: remove(array $data, $path)
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d:en/core-utility-libraries/hash.rst
 
 .. php:staticmethod:: remove(array $data, $path)
 
-<<<<<<< HEAD:en/core-libraries/hash.rst
     Removes all elements from an array that match ``$path``. ::
-=======
-    Removes all elements from an array that match $path. ::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d:en/core-utility-libraries/hash.rst
 
         $a = [
             'pages' => ['name' => 'page'],
@@ -192,7 +160,6 @@ Attribute Matching Types
             ]
         */
 
-<<<<<<< HEAD:en/core-libraries/hash.rst
     Using ``{n}``, ``{s}`` and ``{*}`` will allow you to remove multiple values at once.
     You can also use attribute matchers with ``remove()``::
 
@@ -213,9 +180,6 @@ Attribute Matching Types
                 ['Item' => ['id' => 5, 'title' => 'fifth']],
             ]
         */
-=======
-.. php:staticmethod:: combine(array $data, $keyPath, $valuePath = null, $groupPath = null)
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d:en/core-utility-libraries/hash.rst
 
 .. php:staticmethod:: combine(array $data, $keyPath, $valuePath = null, $groupPath = null)
 
@@ -223,11 +187,7 @@ Attribute Matching Types
     and optionally ``$valuePath`` as path to get the values. If ``$valuePath`` is not
     specified, or doesn't match anything, values will be initialized to null.
     You can optionally group the values by what is obtained when following the
-<<<<<<< HEAD:en/core-libraries/hash.rst
     path specified in ``$groupPath``. ::
-=======
-    path specified in $groupPath. ::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d:en/core-utility-libraries/hash.rst
 
         $a = [
             [
@@ -468,13 +428,8 @@ Attribute Matching Types
 .. php:staticmethod:: filter(array $data, $callback = ['Hash', 'filter'])
 
     Filters empty elements out of array, excluding '0'. You can also supply a
-<<<<<<< HEAD:en/core-libraries/hash.rst
     custom ``$callback`` to filter the array elements. You callback should
     return ``false`` to remove elements from the resulting array::
-=======
-    custom $callback to filter the array elements. Your callback should return
-    ``false`` to remove elements from the resulting array::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d:en/core-utility-libraries/hash.rst
 
         $data = [
             '0',
@@ -649,19 +604,11 @@ Attribute Matching Types
     Similar to :php:meth:`~Hash::dimensions()`, however this method returns,
     the deepest number of dimensions of any element in the array::
 
-<<<<<<< HEAD:en/core-libraries/hash.rst
         $data = ['1' => '1.1', '2', '3' => ['3.1' => '3.1.1']];
         $result = Hash::maxDimensions($data);
         // $result == 2
 
         $data = ['1' => ['1.1' => '1.1.1'], '2', '3' => ['3.1' => ['3.1.1' => '3.1.1.1']]];
-=======
-        $data = array('1' => '1.1', '2', '3' => array('3.1' => '3.1.1'));
-        $result = Hash::maxDimensions($data);
-        // $result == 2
-
-        $data = array('1' => array('1.1' => '1.1.1'), '2', '3' => array('3.1' => array('3.1.1' => '3.1.1.1')));
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d:en/core-utility-libraries/hash.rst
         $result = Hash::maxDimensions($data);
         // $result == 3
 
@@ -672,20 +619,12 @@ Attribute Matching Types
     this method::
 
         // Call the noop function $this->noop() on every element of $data
-<<<<<<< HEAD:en/core-libraries/hash.rst
         $result = Hash::map($data, "{n}", [$this, 'noop']);
 
         public function noop(array $array)
         {
             // Do stuff to array and return the result
             return $array;
-=======
-        $result = Hash::map($data, "{n}", array($this, 'noop'));
-
-        function noop($array) {
-         // Do stuff to array and return the result
-         return $array;
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d:en/core-utility-libraries/hash.rst
         }
 
 .. php:staticmethod:: reduce(array $data, $path, $function)

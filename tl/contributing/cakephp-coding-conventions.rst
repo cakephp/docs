@@ -60,17 +60,11 @@ Or::
         }
     }
 
-<<<<<<< HEAD
 In cases where you're using a multi-line function call use the following
 guidelines:
 
 *  Opening parenthesis of a multi-line function call must be the last content on
    the line.
-=======
-In cases where you're using a multi-line function call use the following guidelines:
-
-*  Opening parenthesis of a multi-line function call must be the last content on the line.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 *  Only one argument is allowed per line in a multi-line function call.
 *  Closing parenthesis of a multi-line function call must be on a line by itself.
 
@@ -187,11 +181,6 @@ tags::
         <p>You are the admin user.</p>
     <?php endif; ?>
 
-<<<<<<< HEAD
-=======
-We allow PHP closing tags (``?>``) at the end of .ctp files.
-
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 Comparison
 ==========
 
@@ -322,18 +311,12 @@ indented with four spaces::
 DocBlocks
 =========
 
-<<<<<<< HEAD
 All comments should be written in English, and should in a clear way describe
 the commented block of code.
-=======
-All comment blocks, with the exception of the first block in a file, should
-always be preceded by a newline.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 File Header DocBlock
 --------------------
 
-<<<<<<< HEAD
 *  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
 *  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
@@ -349,37 +332,6 @@ File Header DocBlock
 
 PhpDoc tags are very much like JavaDoc tags in Java. Tags are only processed if
 they are the first thing in a DocBlock line, for example::
-=======
-All PHP files should contain a file header DocBlock,
-which should look like this::
-
-    <?php
-    /**
-    * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
-    * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
-    *
-    * Licensed under The MIT License
-    * For full copyright and license information, please see the LICENSE.txt
-    * Redistributions of files must retain the above copyright notice.
-    *
-    * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
-    * @link          https://cakephp.org CakePHP(tm) Project
-    * @since         X.Y.Z
-    * @license       http://www.opensource.org/licenses/mit-license.php MIT License
-    */
-
-The included `phpDocumentor <https://phpdoc.org>`_ tags are:
-
-*  `@copyright <https://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
-*  `@link <https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@license <https://phpdoc.org/docs/latest/references/phpdoc/tags/license.html>`_
-
-Class DocBlocks
----------------
-
-Class DocBlocks should look like this::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     /**
      * Short description of the class.
@@ -418,28 +370,9 @@ Property DocBlocks should look like this::
      * @see Bar::$_bla
      * @link https://book.cakephp.org/2.0/en/foo.html#properties
      */
-<<<<<<< HEAD
     function bar()
     {
     }
-=======
-    protected $_bar = null;
-
-Property DocBlocks may contain the following `phpDocumentor <https://phpdoc.org>`_ tags:
-
-*  `@deprecated <https://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
-   Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
-*  `@internal <https://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
-*  `@link <https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@see <https://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
-*  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@var <https://phpdoc.org/docs/latest/references/phpdoc/tags/var.html>`_
-
-Method/Function DocBlocks
--------------------------
-
-Method and functions DocBlocks should look like this::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     /**
      * Short description of the method.
@@ -456,30 +389,12 @@ Method and functions DocBlocks should look like this::
      * @deprecated 3.0.0 Deprecated as of 2.5.0. Will be removed in 3.0.0. Use Bar::baz instead.
      * @see Bar::baz
      */
-<<<<<<< HEAD
     function foo()
     {
     }
 
 Comment blocks, with the exception of the first block in a file, should always
 be preceded by a newline.
-=======
-     public function bar($param1, $param2 = null) {
-     }
-
-Method and function DocBLocks may contain the following `phpDocumentor <https://phpdoc.org>`_ tags:
-
-*  `@deprecated <https://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
-   Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
-*  `@internal <https://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
-*  `@link <https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@param <https://phpdoc.org/docs/latest/references/phpdoc/tags/param.html>`_
-*  `@return <https://phpdoc.org/docs/latest/references/phpdoc/tags/return.html>`_
-*  `@throws <https://phpdoc.org/docs/latest/references/phpdoc/tags/throws.html>`_
-*  `@see <https://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
-*  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@uses <https://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html>`_
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Variable Types
 --------------
@@ -593,19 +508,11 @@ Class names should be written in CamelCase, for example::
 Variables
 ---------
 
-<<<<<<< HEAD
 Variable names should be as descriptive as possible, but also as short as
 possible. All variables should start with a lowercase letter, and should be
 written in camelBack in case of multiple words. Variables referencing objects
 should in some way associate to the class the variable is an object of.
 Example::
-=======
-Variable names should be as descriptive as possible, but also as short
-as possible. All variables should start with a lowercase letter, and
-should be written in camelBack in case of multiple words. Variables
-referencing objects should in some way associate to the class the
-variable is an object of. Example::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     $user = 'John';
     $users = ['John', 'Hans', 'Arne'];

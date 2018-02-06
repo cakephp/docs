@@ -92,18 +92,11 @@ implementation::
         }
     }
 
-<<<<<<< HEAD
     // src/Controller/Component/MyAuthComponent.php
     use Cake\Controller\Component\AuthComponent;
 
     class MyAuthComponent extends AuthComponent
     {
-=======
-    // app/Controller/Component/MyAuthComponent.php
-    App::uses('AuthComponent', 'Controller/Component');
-    
-    class MyAuthComponent extends AuthComponent {
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
         // Add your code to override the core AuthComponent
     }
 
@@ -149,18 +142,11 @@ in your controller, you could access it like so::
             $this->loadComponent('Flash');
         }
 
-<<<<<<< HEAD
         public function delete()
         {
             if ($this->Post->delete($this->request->getData('Post.id')) {
                 $this->Flash->success('Post deleted.');
                 return $this->redirect(['action' => 'index']);
-=======
-        public function delete() {
-            if ($this->Post->delete($this->request->data('Post.id'))) {
-                $this->Session->setFlash('Post deleted.');
-                return $this->redirect(array('action' => 'index'));
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
             }
         }
 
@@ -185,19 +171,12 @@ component would look something like this::
 
     namespace App\Controller\Component;
 
-<<<<<<< HEAD
     use Cake\Controller\Component;
 
     class MathComponent extends Component
     {
         public function doComplexOperation($amount1, $amount2)
         {
-=======
-    App::uses('Component', 'Controller');
-    
-    class MathComponent extends Component {
-        public function doComplexOperation($amount1, $amount2) {
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
             return $amount1 + $amount2;
         }
     }
@@ -251,19 +230,10 @@ Sometimes one of your components may need to use another component.
 In this case you can include other components in your component the exact same
 way you include them in controllers - using the ``$components`` var::
 
-<<<<<<< HEAD
     // src/Controller/Component/CustomComponent.php
     namespace App\Controller\Component;
 
     use Cake\Controller\Component;
-=======
-    // app/Controller/Component/CustomComponent.php
-    App::uses('Component', 'Controller');
-    
-    class CustomComponent extends Component {
-        // the other component your component uses
-        public $components = array('Existing');
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     class CustomComponent extends Component
     {
@@ -282,17 +252,10 @@ way you include them in controllers - using the ``$components`` var::
         }
     }
 
-<<<<<<< HEAD
     // src/Controller/Component/ExistingComponent.php
     namespace App\Controller\Component;
 
     use Cake\Controller\Component;
-=======
-    // app/Controller/Component/ExistingComponent.php
-    App::uses('Component', 'Controller');
-    
-    class ExistingComponent extends Component {
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     class ExistingComponent extends Component
     {
@@ -351,18 +314,9 @@ augment the request cycle.
 
     Is invoked when the controller's redirect
     method is called but before any further action. If this method
-<<<<<<< HEAD
     returns ``false`` the controller will not continue on to redirect the
     request. The $url, and $response parameters allow you to inspect and modify
     the location or any other headers in the response.
-=======
-    returns false the controller will not continue on to redirect the
-    request. The $url, $status and $exit variables have same meaning as
-    for the controller's method. You can also return a string which
-    will be interpreted as the URL to redirect to or return an associative
-    array with the key 'url' and optionally 'status' and 'exit'.
-
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. meta::
     :title lang=en: Components

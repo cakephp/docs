@@ -122,7 +122,6 @@ the need.
 
 .. _tracking-events:
 
-<<<<<<< HEAD
 Tracking Events
 ---------------
 
@@ -131,21 +130,12 @@ can enable event tracking. To do so, simply attach an
 :php:class:`Cake\\Event\\EventList` to the manager::
 
     EventManager::instance()->setEventList(new EventList());
-=======
-    Prior to 2.5, listeners on the global manager were kept in a separate list
-    and fired **before** instance listeners are. After 2.5, global and instance
-    listeners are fired in priority order.
-
-Dispatching Events
-==================
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 After firing an event on the manager, you can retrieve it from the event list::
 
     $eventsFired = EventManager::instance()->getEventList();
     $firstEvent = $eventsFired[0];
 
-<<<<<<< HEAD
 Tracking can be disabled by removing the event list or calling
 :php:meth:`Cake\\Event\\EventList::trackEvents(false)`.
 
@@ -154,23 +144,11 @@ Tracking can be disabled by removing the event list or calling
 
 Core Events
 ===========
-=======
-Finally, the third argument is any additional event data.This can be any data
-you consider useful to pass around so listeners can act upon it. While this can
-be an argument of any type, we recommend passing an associative array.
-
-The :php:meth:`~CakeEventManager::dispatch()` method accepts an event object as
-an argument and notifies all subscribed listeners.
-
-Registering Listeners
-=====================
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 There are a number of core events within the framework which your application
 can listen to. Each layer of CakePHP emits events that you can use in your
 application.
 
-<<<<<<< HEAD
 * :ref:`ORM/Model events <table-callbacks>`
 * :ref:`Controller events <controller-life-cycle>`
 * :ref:`View events <view-events>`
@@ -185,18 +163,6 @@ by implementing the :php:class:`Cake\\Event\\EventListenerInterface` interface
 in any class you wish to register some callbacks. Classes implementing it need
 to provide the ``implementedEvents()`` method. This method must return an
 associative array with all event names that the class will handle.
-=======
-To continue our previous example, let's imagine we have a UserStatistic class
-responsible for calculating a user's purchasing history, and compiling into
-global site statistics. This is a great place to use a listener class. Doing so
-allows you concentrate the statistics logic in one place and react to events as
-necessary. Our ``UserStatistics`` listener might start out like::
-
-    // In app/Lib/Event/UserStatistic.php
-    App::uses('CakeEventListener', 'Event');
-
-    class UserStatistic implements CakeEventListener {
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 To continue our previous example, let's imagine we have a UserStatistic class
 responsible for calculating a user's purchasing history, and compiling into
@@ -230,35 +196,6 @@ As you can see in the above code, the ``on()`` function will accept instances
 of the ``EventListener`` interface. Internally, the event manager will use
 ``implementedEvents()`` to attach the correct callbacks.
 
-<<<<<<< HEAD
-=======
-Registering Global Listeners
-----------------------------
-
-As shown in the example above, event listeners are conventionally placed in
-``app/Lib/Event``. Following this convention allows you to easily locate your
-listener classes. It is also recommended that you attach global listeners during
-your application bootstrap process::
-
-    // In app/Config/bootstrap.php
-
-    // Load the global event listeners.
-    require_once APP . 'Config' . DS . 'events.php'
-
-An example events bootstrap file for our cart application could look like::
-
-    // In app/Config/events.php
-
-    // Load event listeners
-    App::uses('UserStatistic', 'Lib/Event');
-    App::uses('ProductStatistic', 'Lib/Event');
-    App::uses('CakeEventManager', 'Event');
-
-    // Attach listeners.
-    CakeEventManager::instance()->attach(new UserStatistic());
-    CakeEventManager::instance()->attach(new ProductStatistic());
-
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 Registering Anonymous Listeners
 -------------------------------
 
@@ -458,11 +395,8 @@ be an argument of any type, we recommend passing an associative array.
 The :php:meth:`~Cake\\Event\\EventManager::dispatch()` method accepts an event
 object as an argument and notifies all subscribed listeners.
 
-<<<<<<< HEAD
 .. _stopping-events:
 
-=======
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 Stopping Events
 ---------------
 
@@ -576,15 +510,9 @@ arguments the first two params you used for attaching it::
     // Detaching the anonymous function
     $this->eventManager()->off('My.event', $myFunction);
 
-<<<<<<< HEAD
     // Adding a EventListener
     $listener = new MyEventLister();
     $this->eventManager()->on($listener);
-=======
-    // Attaching a CakeEventListener
-    $listener = new MyEventListener();
-    $this->getEventManager()->attach($listener);
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     // Detaching a single event key from a listener
     $this->eventManager()->off('My.event', $listener);

@@ -8,16 +8,9 @@ You can even edit the docs online with GitHub, without ever downloading the
 files -- the "Improve this Doc" button on any given page will direct you to
 GitHub's online editor for that page.
 
-<<<<<<< HEAD
 CakePHP documentation is
 `continuously integrated <http://en.wikipedia.org/wiki/Continuous_integration>`_,
 and deployed after each pull request is merged.
-=======
-The CakePHP documentation is
-`continuously integrated <https://en.wikipedia.org/wiki/Continuous_integration>`_,
-so you can check the status of the `various builds <https://ci.cakephp.org>`_
-on the Jenkins server at any time.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Translations
 ============
@@ -39,18 +32,10 @@ sections are the first one you should consider translating as these
 files don't change often:
 
 - index.rst
-<<<<<<< HEAD
 - intro.rst
 - quickstart.rst
 - installation.rst
 - /intro folder
-=======
-- cakephp-overview.rst
-- getting-started.rst
-- installation.rst
-- /installation folder
-- /getting-started folder
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 - /tutorials-and-examples folder
 
 Reminder for Docs Administrators
@@ -92,10 +77,6 @@ For example, if a new English file is created in **en/file.rst**, we should:
         :title lang=xx: File Title
         :keywords lang=xx: title, description,...
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 Translator tips
 ---------------
 
@@ -115,11 +96,7 @@ Translator tips
 - Do not submit partial translations.
 - Do not edit a section with a pending change.
 - Do not use
-<<<<<<< HEAD
   `HTML entities <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
-=======
-  `html entities <https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
   for accented characters, the book uses UTF-8.
 - Do not significantly change the markup (HTML) or add new content.
 - If the original content is missing some info, submit an edit for
@@ -129,11 +106,7 @@ Documentation Formatting Guide
 ==============================
 
 The new CakePHP documentation is written with
-<<<<<<< HEAD
 `ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_. ReST
-=======
-`ReST formatted text <https://en.wikipedia.org/wiki/ReStructuredText>`_. ReST
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 (Re Structured Text) is a plain text markup syntax similar to markdown, or
 textile. To maintain consistency it is recommended that when adding to the
 CakePHP documentation you follow the guidelines here on how to format and
@@ -164,11 +137,7 @@ Paragraphs
 ----------
 
 Paragraphs are simply blocks of text, with all the lines at the same level of
-<<<<<<< HEAD
 indentation. Paragraphs should be separated by one blank line.
-=======
-indentation. Paragraphs should be separated by more than one empty line.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Inline Markup
 -------------
@@ -437,10 +406,6 @@ matching directive is found:
 
    Reference an exception.
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 Source Code
 -----------
 
@@ -457,10 +422,6 @@ block must be indented, and like all paragraphs be separated by single lines::
 
 Literal text is not modified or formatted, save that one level of indentation
 is removed.
-<<<<<<< HEAD
-=======
-
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Notes and Warnings
 ------------------
@@ -516,10 +477,6 @@ Samples
 .. deprecated:: 2.6.3
 
     This old feature was deprecated on version 2.6.3
-<<<<<<< HEAD
-=======
-
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. meta::
     :title lang=en: Documentation

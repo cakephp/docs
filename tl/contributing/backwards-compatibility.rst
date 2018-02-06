@@ -13,14 +13,9 @@ performance only.
 
 .. note::
 
-<<<<<<< HEAD
     Deprecations are removed with the next major version of the framework.
     It is advised to early on adapt your code already each minor as outlined in
     the deprecation comments and the migration guides.
-=======
-    CakePHP started following semantic versioning in 2.0.0. These rules do not
-    apply to 1.x.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 To clarify what changes you can expect in each release tier we have more
 detailed information for developers using CakePHP, and for developers working on
@@ -61,19 +56,11 @@ compatibility is ensured.
     classes are **not** stable and do not have any backwards compatibility
     promises.
 
-<<<<<<< HEAD
 In minor releases, new methods may be added to classes, and existing methods may
 have new arguments added. Any new arguments will have default values, but if
 you've overridden methods with a differing signature you may see fatal errors.
 Methods that have new arguments added will be documented in the migration guide
 for that release.
-=======
-In minor releases (3.x.0), new methods may be added to classes, and existing
-methods may have new arguments added. Any new arguments will have default
-values, but if you've overidden methods with a differing signature you may see
-errors. Methods that have new arguments added will be documented in the
-migration guide for that release.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 The following table outlines several use cases and what compatibility you can
 expect from CakePHP:
@@ -170,14 +157,7 @@ In a minor release you can:
 +-------------------------------+--------------------------+
 | Change method name            | Yes [2]_                 |
 +-------------------------------+--------------------------+
-<<<<<<< HEAD
 | Add a new argument with       | Yes                      |
-=======
-| Add default value to          | No                       |
-| existing argument             |                          |
-+-------------------------------+--------------------------+
-| Add argument with             | Yes                      |
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 | default value                 |                          |
 +-------------------------------+--------------------------+
 | Add a new required argument   | No                       |
@@ -196,7 +176,6 @@ In a minor release you can:
        benefit.
 .. [3] Avoid whenever possible. Any removals need to be documented in
        the migration guide.
-<<<<<<< HEAD
 
 Deprecations
 ============
@@ -215,5 +194,3 @@ value::
     // ...
 
 Will disable runtime deprecation warnings.
-=======
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d

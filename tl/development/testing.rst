@@ -12,43 +12,12 @@ Installing PHPUnit
 
 CakePHP uses PHPUnit as its underlying test framework. PHPUnit is the de-facto
 standard for unit testing in PHP. It offers a deep and powerful set of features
-<<<<<<< HEAD
 for making sure your code does what you think it does. PHPUnit can be installed
 through using either a `PHAR package <http://phpunit.de/#download>`__ or
 `Composer <http://getcomposer.org>`_.
 
 Install PHPUnit with Composer
 -----------------------------
-=======
-for making sure your code does what you think it does.
-
-Install via Composer
---------------------
-
-For a long time, CakePHP 2.x supported PHPunit 3.7.x only.
-To install PHPUnit as a development dependency through Composer, execute the
-following in the same directory as your composer.json::
-
-    php composer.phar require --dev phpunit/phpunit:"3.7.38"
-
-As of CakePHP 2.10.0, basic support for PHPUnit 4.x and 5.x was added.
-To upgrade PHPUnit and its dependencies for your application, execute the following::
-
-    php composer.phar require --dev phpunit/phpunit:"4.* || 5.*" --update-with-dependencies
-
-This will install either PHPUnit 4.x or 5.x, depending on your system setup and your
-composer.json configuration.
-
-Install via .phar Package
--------------------------
-
-You can also download the file directly. Just make sure you get the correct version
-from https://phar.phpunit.de/. Make sure /usr/local/bin is in your php.ini file's include_path::
-
-    wget https://phar.phpunit.de/phpunit-3.7.38.phar -O phpunit.phar
-    chmod +x phpunit.phar
-    mv phpunit.phar /usr/local/bin/phpunit
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 To install PHPUnit with Composer:
 
@@ -62,7 +31,6 @@ To install PHPUnit with Composer:
 This will add the dependency to the ``require-dev`` section of your
 ``composer.json``, and then install PHPUnit along with any dependencies.
 
-<<<<<<< HEAD
 You can now run PHPUnit using:
 
 .. code-block:: bash
@@ -78,15 +46,6 @@ tests:
 .. code-block:: bash
 
     php phpunit.phar
-=======
-    PHPUnit 4 is not compatible with CakePHP's Unit Testing.
-
-    Depending on your system's configuration, you may need to run the previous
-    commands with ``sudo``
-
-.. note::
-    In CakePHP 2.5.7 and later you can place the phar directly in your vendors or App/Vendor directory.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. tip::
 
@@ -240,16 +199,10 @@ following::
         $this->Progress = new ProgressHelper($View);
     }
 
-<<<<<<< HEAD
 Calling the parent method is important in test cases, as ``TestCase::setUp()``
 does a number things like backing up the values in
 :php:class:`~Cake\\Core\\Configure` and, storing the paths in
 :php:class:`~Cake\\Core\\App`.
-=======
-Calling the parent method is important in test cases, as CakeTestCase::setUp()
-does a number of things like backing up the values in :php:class:`Configure` and,
-storing the paths in :php:class:`App`.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Next, we'll fill out the test method. We'll use some assertions to ensure that
 our code creates the output we expect::
@@ -291,58 +244,30 @@ application's tests you can simply run:
 
 .. code-block:: bash
 
-<<<<<<< HEAD
     # composer installs
     $ vendor/bin/phpunit
-=======
-Once you've loaded up the test runner, you can navigate App, Core and Plugin
-test suites. Clicking an individual test case will run that test and display the
-results.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     # phar file
     php phpunit.phar
 
-<<<<<<< HEAD
 If you have cloned the `CakePHP source from GitHub <https://github.com/cakephp/cakephp>`__
 and wish to run CakePHP's unit-tests don't forget to execute the following ``Composer``
 command prior to running ``phpunit`` so that any dependencies are installed:
-=======
-If you have `Xdebug <http://xdebug.org>`_ installed, you can view code coverage
-results. Code coverage is useful for telling you what parts of your code your
-tests do not reach. Coverage is useful for determining where you should add
-tests in the future, and gives you one measurement to track your testing
-progress with.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. code-block:: bash
 
     $ composer install --dev
 
-<<<<<<< HEAD
 From your application's root directory. To run tests for a plugin that is part
 of your application source, first ``cd`` into the plugin directory, then use
 ``phpunit`` command that matches how you installed phpunit:
-=======
-The inline code coverage uses green lines to indicate lines that have been run.
-If you hover over a green line a tooltip will indicate which tests covered the
-line. Lines in red did not run, and have not been exercised by your tests. Grey
-lines are considered unexecutable code by Xdebug.
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. code-block:: bash
 
     cd plugins
 
-<<<<<<< HEAD
     # Using composer installed phpunit
     ../vendor/bin/phpunit
-=======
-CakePHP provides a ``test`` shell for running tests. You can run app, core and
-plugin tests easily using the test shell. It accepts all the arguments you would
-expect to find on the normal PHPUnit command line tool as well. From your app
-directory you can do the following to run tests::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     # Using phar file
     php ../phpunit.phar
@@ -352,7 +277,6 @@ a separate directory and install its dependencies:
 
 .. code-block:: bash
 
-<<<<<<< HEAD
     git clone git://github.com/cakephp/debug_kit.git
     cd debug_kit
     php ~/composer.phar install
@@ -366,32 +290,6 @@ methods when you are trying to work on a single failing case. With the
 CLI runner you can use an option to filter test methods:
 
 .. code-block:: bash
-=======
-    If you are running tests that interact with the session it's generally a
-    good idea to use the ``--stderr`` option. This will fix issues with tests
-    failing because of headers_sent warnings.
-
-.. versionchanged:: 2.1
-    The ``test`` shell was added in 2.1. The 2.0 ``testsuite`` shell is still
-    available but the new syntax is preferred.
-
-You can also run ``test`` shell in the project root directory. This shows you a
-full list of all the tests that you currently have. You can then freely choose
-what test(s) to run::
-
-    # Run test in project root directory for application folder called app
-    lib/Cake/Console/cake test app
-
-    # Run test in project root directory for an application in ./myapp
-    lib/Cake/Console/cake test --app myapp app
-
-Filtering test cases
-~~~~~~~~~~~~~~~~~~~~
-
-When you have larger test cases, you will often want to run a subset of the test
-methods when you are trying to work on a single failing case. With the CLI
-runner you can use an option to filter test methods::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     $ phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -577,16 +475,11 @@ all your application's data when running tests.
 
 We use ``$fields`` to specify which fields will be part of this table, and how
 they are defined. The format used to define these fields is the same used with
-<<<<<<< HEAD
 :php:class:`Cake\\Database\\Schema\\Table`. The keys available for table
 definition are:
-=======
-:php:class:`CakeSchema`. The keys available for table definition are:
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 type
     CakePHP internal data type. Currently supported:
-<<<<<<< HEAD
 
     - ``string``: maps to ``VARCHAR`` or ``CHAR``
     - ``uuid``: maps to ``UUID``
@@ -604,27 +497,6 @@ fixed
     Used with string types to create CHAR columns in platforms that support
     them.
 length
-=======
-        - ``string``: maps to ``VARCHAR``
-        - ``text``: maps to ``TEXT``
-        - ``biginteger``: maps to ``BIGINT``
-        - ``smallinteger``: maps to ``SMALLINT``
-        - ``tinyinteger``: maps to ``TINYINT`` or ``SMALLINT`` depending on the
-          database platform.
-        - ``integer``: maps to ``INT``
-        - ``float``: maps to ``FLOAT``
-        - ``decimal``: maps to ``DECIMAL``
-        - ``datetime``: maps to ``DATETIME``
-        - ``timestamp``: maps to ``TIMESTAMP``
-        - ``time``: maps to ``TIME``
-        - ``date``: maps to ``DATE``
-        - ``binary``: maps to ``BLOB``
-        - ``boolean``: maps to ``BOOLEAN`` (or ``TINYINT(1)`` on MySQL).
-``key``
-    Set to ``primary`` to make the field AUTO\_INCREMENT, and a PRIMARY KEY
-    for the table.
-``length``
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
     Set to the specific length the field should take.
 precision
     Set the number of decimal places used on float & decimal fields.
@@ -685,7 +557,6 @@ you could do the following::
 
 When overriding ``init()`` remember to always call ``parent::init()``.
 
-<<<<<<< HEAD
 Importing Table Information
 ---------------------------
 
@@ -699,26 +570,6 @@ definition to create the table definition used in the test suite.
 Let's start with an example. Assuming you have a table named articles available
 in your application, change the example fixture given in the previous section
 (**tests/Fixture/ArticlesFixture.php**) to::
-=======
-.. note::
-
-    Please note that fixtures in 2.x do not handle foreign key constraints.
-
-Importing table information and records
----------------------------------------
-
-Your application may have already working models with real data associated to
-them, and you might decide to test your application with that data. It would be
-then a duplicate effort to have to define the table definition and/or records on
-your fixtures. Fortunately, there's a way for you to define that table
-definition and/or records for a particular fixture come from an existing model
-or an existing table.
-
-Let's start with an example. Assuming you have a model named Article available
-in your application (that maps to a table named articles), change the example
-fixture given in the previous section (``app/Test/Fixture/ArticleFixture.php``)
-to::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     class ArticlesFixture extends TestFixture
     {
@@ -732,42 +583,17 @@ If you want to use a different connection use::
         public $import = ['table' => 'articles', 'connection' => 'other'];
     }
 
-<<<<<<< HEAD
 .. versionadded:: 3.1.7
-=======
-If on the other hand you have a table created but no model available for it, you
-can specify that your import will take place by reading that table information
-instead. For example::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 Usually, you have a Table class along with your fixture, as well. You can also
 use that to retrieve the table name::
 
-<<<<<<< HEAD
     class ArticlesFixture extends TestFixture
     {
         public $import = ['model' => 'Articles'];
     }
 
 Since this uses ``TableRegistry::get()``, it also supports plugin syntax.
-=======
-Will import table definition from a table called 'articles' using your CakePHP
-database connection named 'default'. If you want to use a different connection
-use::
-
-    class ArticleFixture extends CakeTestFixture {
-        public $import = array('table' => 'articles', 'connection' => 'other');
-    }
-
-Since it uses your CakePHP database connection, if there's any table prefix
-declared it will be automatically used when fetching table information. The two
-snippets above do not import records from the table. To force the fixture to
-also import its records, change the import to::
-
-    class ArticleFixture extends CakeTestFixture {
-        public $import = array('table' => 'articles', 'records' => true);
-    }
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 You can naturally import your table definition from an existing model/table, but
 have your records defined directly on the fixture as it was shown on previous
@@ -988,14 +814,7 @@ controller code looks like::
 
     namespace App\Controller;
 
-<<<<<<< HEAD
     use App\Controller\AppController;
-=======
-    App::uses('AppController', 'Controller');
-
-    class ArticlesController extends AppController {
-        public $helpers = array('Form', 'Html');
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     class ArticlesController extends AppController
     {
@@ -1062,7 +881,6 @@ Create a file named **ArticlesControllerTest.php** in your
             // More asserts.
         }
 
-<<<<<<< HEAD
         public function testIndexPostData()
         {
             $data = [
@@ -1078,29 +896,6 @@ Create a file named **ArticlesControllerTest.php** in your
             $articles = TableRegistry::get('Articles');
             $query = $articles->find()->where(['title' => $data['title']]);
             $this->assertEquals(1, $query->count());
-=======
-This example shows a few of the ways you can use testAction to test your
-controllers. The first parameter of ``testAction`` should always be the URL you
-want to test. CakePHP will create a request and dispatch the controller and
-action.
-
-When testing actions that contain ``redirect()`` and other code following the
-redirect it is generally a good idea to return when redirecting. The reason for
-this, is that ``redirect()`` is mocked in testing, and does not exit like
-normal. And instead of your code exiting, it will continue to run code following
-the redirect. For example::
-
-    App::uses('AppController', 'Controller');
-
-    class ArticlesController extends AppController {
-        public function add() {
-            if ($this->request->is('post')) {
-                if ($this->Article->save($this->request->data)) {
-                    $this->redirect(array('action' => 'index'));
-                }
-            }
-            // more code
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
         }
     }
 
@@ -1109,7 +904,6 @@ assertions that ``IntegrationTestCase`` provides. Before you can do any
 assertions you'll need to dispatch a request. You can use one of the following
 methods to send a request:
 
-<<<<<<< HEAD
 * ``get()`` Sends a GET request.
 * ``post()`` Sends a POST request.
 * ``put()`` Sends a PUT request.
@@ -1180,19 +974,6 @@ required authentication, you could write the following tests::
 
         $this->assertResponseOk();
         // Other assertions.
-=======
-    App::uses('AppController', 'Controller');
-
-    class ArticlesController extends AppController {
-        public function add() {
-            if ($this->request->is('post')) {
-                if ($this->Article->save($this->request->data)) {
-                    return $this->redirect(array('action' => 'index'));
-                }
-            }
-            // more code
-        }
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
     }
 
 Testing Stateless Authentication and APIs
@@ -2122,13 +1903,8 @@ would be:
 Creating Tests for Plugins
 ==========================
 
-<<<<<<< HEAD
 Tests for plugins are created in their own directory inside the plugins
 folder. ::
-=======
-Tests for plugins are created in their own directory inside the
-plugins folder. ::
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     /src
     /plugins
@@ -2305,10 +2081,6 @@ Run a Build
 You should be able to run a build now. Check the console output and make any
 necessary changes to get a passing build.
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 .. meta::
     :title lang=en: Testing
     :keywords lang=en: phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration

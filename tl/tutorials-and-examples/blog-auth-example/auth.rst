@@ -29,7 +29,6 @@ us when implementing the user login.
 Next step is to create our UsersTable class, responsible for finding, saving and
 validating any user data::
 
-<<<<<<< HEAD
     // src/Model/Table/UsersTable.php
     namespace App\Model\Table;
 
@@ -50,53 +49,18 @@ validating any user data::
                     'message' => 'Please enter a valid role'
                 ]);
         }
-
-=======
-    // app/Model/User.php
-    App::uses('AppModel', 'Model');
-
-    class User extends AppModel {
-        public $validate = array(
-            'username' => array(
-                'required' => array(
-                    'rule' => 'notBlank',
-                    'message' => 'A username is required'
-                )
-            ),
-            'password' => array(
-                'required' => array(
-                    'rule' => 'notBlank',
-                    'message' => 'A password is required'
-                )
-            ),
-            'role' => array(
-                'valid' => array(
-                    'rule' => array('inList', array('admin', 'author')),
-                    'message' => 'Please enter a valid role',
-                    'allowEmpty' => false
-                )
-            )
-        );
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
     }
 
 Let's also create our UsersController. The following content corresponds to
 parts of a basic baked UsersController class using the code generation utilities bundled
 with CakePHP::
 
-<<<<<<< HEAD
     // src/Controller/UsersController.php
 
     namespace App\Controller;
 
     use App\Controller\AppController;
     use Cake\Event\Event;
-=======
-    // app/Controller/UsersController.php
-    App::uses('AppController', 'Controller');
-
-    class UsersController extends AppController {
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     class UsersController extends AppController
     {
@@ -112,26 +76,16 @@ with CakePHP::
             $this->set('users', $this->Users->find('all'));
         }
 
-<<<<<<< HEAD
         public function view($id)
         {
             $user = $this->Users->get($id);
             $this->set(compact('user'));
-=======
-        public function view($id = null) {
-            $this->User->id = $id;
-            if (!$this->User->exists()) {
-                throw new NotFoundException(__('Invalid user'));
-            }
-            $this->set('user', $this->User->findById($id));
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
         }
 
         public function add()
         {
             $user = $this->Users->newEntity();
             if ($this->request->is('post')) {
-<<<<<<< HEAD
                 // Prior to 3.4.0 $this->request->data() was used.
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
@@ -141,72 +95,13 @@ with CakePHP::
                 $this->Flash->error(__('Unable to add the user.'));
             }
             $this->set('user', $user);
-=======
-                $this->User->create();
-                if ($this->User->save($this->request->data)) {
-                    $this->Flash->success(__('The user has been saved'));
-                    return $this->redirect(array('action' => 'index'));
-                }
-                $this->Flash->error(
-                    __('The user could not be saved. Please, try again.')
-                );
-            }
-        }
-
-        public function edit($id = null) {
-            $this->User->id = $id;
-            if (!$this->User->exists()) {
-                throw new NotFoundException(__('Invalid user'));
-            }
-            if ($this->request->is('post') || $this->request->is('put')) {
-                if ($this->User->save($this->request->data)) {
-                    $this->Flash->success(__('The user has been saved'));
-                    return $this->redirect(array('action' => 'index'));
-                }
-                $this->Flash->error(
-                    __('The user could not be saved. Please, try again.')
-                );
-            } else {
-                $this->request->data = $this->User->findById($id);
-                unset($this->request->data['User']['password']);
-            }
-        }
-
-        public function delete($id = null) {
-            // Prior to 2.5 use
-            // $this->request->onlyAllow('post');
-
-            $this->request->allowMethod('post');
-
-            $this->User->id = $id;
-            if (!$this->User->exists()) {
-                throw new NotFoundException(__('Invalid user'));
-            }
-            if ($this->User->delete()) {
-                $this->Flash->success(__('User deleted'));
-                return $this->redirect(array('action' => 'index'));
-            }
-            $this->Flash->error(__('User was not deleted'));
-            return $this->redirect(array('action' => 'index'));
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
         }
 
     }
 
-<<<<<<< HEAD
 In the same way we created the views for our articles by using the code
 generation tool, we can implement the user views. For the purpose of this
 tutorial, we will show just the add.ctp:
-=======
-.. versionchanged:: 2.5
-
-    Since 2.5, use ``CakeRequest::allowMethod()`` instead of
-    ``CakeRequest::onlyAllow()`` (deprecated).
-
-In the same way we created the views for our blog posts or by using the code
-generation tool, we implement the views. For the purpose of this tutorial, we
-will show just the add.ctp:
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
 .. code-block:: php
 
@@ -248,7 +143,6 @@ To add this component to your application open your
     {
         //...
 
-<<<<<<< HEAD
         public function initialize()
         {
             $this->loadComponent('Flash');
@@ -259,17 +153,6 @@ To add this component to your application open your
                 ],
                 'logoutRedirect' => [
                     'controller' => 'Pages',
-=======
-        public $components = array(
-            'Flash',
-            'Auth' => array(
-                'loginRedirect' => array(
-                    'controller' => 'posts',
-                    'action' => 'index'
-                ),
-                'logoutRedirect' => array(
-                    'controller' => 'pages',
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
                     'action' => 'display',
                     'home'
                 ]
@@ -303,7 +186,6 @@ the users add function and implement the login and logout action::
     use App\Controller\AppController;
     use Cake\Event\Event;
 
-<<<<<<< HEAD
     class UsersController extends AppController
     {
         // Other methods..
@@ -327,14 +209,6 @@ the users add function and implement the login and logout action::
                 }
                 $this->Flash->error(__('Invalid username or password, try again'));
             }
-=======
-    public function login() {
-        if ($this->request->is('post')) {
-            if ($this->Auth->login()) {
-                return $this->redirect($this->Auth->redirectUrl());
-            }
-            $this->Flash->error(__('Invalid username or password, try again'));
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
         }
 
         public function logout()
@@ -347,15 +221,8 @@ Password hashing is not done yet, we need an Entity class for our User in order
 to handle its own specific logic. Create the **src/Model/Entity/User.php**
 entity file and add the following::
 
-<<<<<<< HEAD
     // src/Model/Entity/User.php
     namespace App\Model\Entity;
-=======
-    // app/Model/User.php
-
-    App::uses('AppModel', 'Model');
-    App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     use Cake\Auth\DefaultPasswordHasher;
     use Cake\ORM\Entity;
@@ -391,13 +258,8 @@ and add the following lines:
     <!-- File: src/Template/Users/login.ctp -->
 
     <div class="users form">
-<<<<<<< HEAD
     <?= $this->Flash->render() ?>
     <?= $this->Form->create() ?>
-=======
-    <?php echo $this->Flash->render('auth'); ?>
-    <?php echo $this->Form->create('User'); ?>
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
         <fieldset>
             <legend><?= __('Please enter your username and password') ?></legend>
             <?= $this->Form->control('username') ?>
@@ -449,7 +311,6 @@ currently logged in user as a reference for the created article::
     {
         $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
-<<<<<<< HEAD
             // Prior to 3.4.0 $this->request->data() was used.
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             // Added this line
@@ -460,13 +321,6 @@ currently logged in user as a reference for the created article::
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been saved.'));
                 return $this->redirect(['action' => 'index']);
-=======
-            //Added this line
-            $this->request->data['Post']['user_id'] = $this->Auth->user('id');
-            if ($this->Post->save($this->request->data)) {
-                $this->Flash->success(__('Your post has been saved.'));
-                return $this->redirect(array('action' => 'index'));
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
             }
             $this->Flash->error(__('Unable to add your article.'));
         }
@@ -488,7 +342,6 @@ URL, while normal users (the author role) can only access the permitted actions.
 Again, open the AppController class and add a few more options to the Auth
 config::
 
-<<<<<<< HEAD
     // src/Controller/AppController.php
 
     public function initialize()
@@ -507,27 +360,6 @@ config::
             ]
         ]);
     }
-=======
-    // app/Controller/AppController.php
-
-    public $components = array(
-        'Flash',
-        'Auth' => array(
-            'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
-            'logoutRedirect' => array(
-                'controller' => 'pages',
-                'action' => 'display',
-                'home'
-            ),
-            'authenticate' => array(
-                'Form' => array(
-                    'passwordHasher' => 'Blowfish'
-                )
-            ),
-            'authorize' => array('Controller') // Added this line
-        )
-    );
->>>>>>> f65f0416ab9e6b2c92f1f047a45aa4661affa33d
 
     public function isAuthorized($user)
     {
