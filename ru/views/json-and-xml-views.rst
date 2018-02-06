@@ -220,29 +220,29 @@ customize the options used to generate XML, например ``tags`` вмест
         {
             $format = strtolower($format);
 
-            // Format to view mapping
+            // Формат сопоставления представлений
             $formats = [
               'xml' => 'Xml',
               'json' => 'Json',
             ];
 
-            // Error on unknown type
+            // Ошибка на неизвестных типах
             if (!isset($formats[$format])) {
                 throw new NotFoundException(__('Unknown format.'));
             }
 
-            // Set Out Format View
+            // Установка формата вывода представления
             $this->viewBuilder()->className($formats[$format]);
 
-            // Get data
+            // Получение данных
             $videos = $this->Videos->find('latest');
 
-            // Set Data View
+            // Назначение представления данных
             $this->set(compact('videos'));
             $this->set('_serialize', ['videos']);
 
-            // Set Force Download
-            // Prior to 3.4.0
+            // Принудительная загрузка
+            // До версии 3.4.0
             // $this->response->download('report-' . date('YmdHis') . '.' . $format);
             return $this->response->withDownload('report-' . date('YmdHis') . '.' . $format);
         }
