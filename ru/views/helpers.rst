@@ -80,7 +80,8 @@ You can use the current action name to conditionally load helpers::
         }
     }
 
-You can also use your controller's ``beforeRender`` method to load helpers::
+Вы можете также использовать метод ``beforeRender()`` вашего контроллера для
+загрузки хелперов::
 
     class ArticlesController extends AppController
     {
@@ -91,8 +92,8 @@ You can also use your controller's ``beforeRender`` method to load helpers::
         }
     }
 
-Configuration options
----------------------
+Параметры конфигурации
+----------------------
 
 You can pass configuration options to helpers. These options can be used to set
 attribute values or modify the behavior of a helper::
@@ -105,15 +106,16 @@ attribute values or modify the behavior of a helper::
     class AwesomeHelper extends Helper
     {
 
-        // initialize() hook is available since 3.2. For prior versions you can
-        // override the constructor if required.
+        // Хук initialize() доступен с версии 3.2. Для более ранних версий
+        // вы можете переопределить конструктор, если это необходимо.
         public function initialize(array $config)
         {
             debug($config);
         }
     }
 
-Options can be specified when declaring helpers in controller as shown::
+Параметры могут быть определены при объявлении хелперов в контроллере,
+как показано ниже::
 
     namespace App\Controller;
 
@@ -123,6 +125,9 @@ Options can be specified when declaring helpers in controller as shown::
     {
         public $helpers = ['Awesome' => ['option1' => 'value1']];
     }
+
+По умолчанию все параметры конфигурации будут объединены со свойством
+``$_defaultConfig``. Это свойство должно определять значения по умолчанию
 
 By default all configuration options will be merged with the ``$_defaultConfig``
 property. This property should define the default values of any configuration
