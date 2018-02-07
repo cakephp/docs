@@ -1138,14 +1138,19 @@ Bulk Updates
 
 There may be times when updating rows individually is not efficient or
 necessary. In these cases it is more efficient to use a bulk-update to modify
-many rows at once::
+many rows at once, by assigning the new field values, and conditions for the update::
 
     // Publish all the unpublished articles.
     function publishAllUnpublished()
     {
         $this->updateAll(
-            ['published' => true], // fields
-            ['published' => false] // conditions
+            [  // fields
+                'published' => true,
+                'publish_date' => FrozenTime::now()
+            ],
+            [  // conditions
+                'published' => false
+            ]
         );
     }
 
