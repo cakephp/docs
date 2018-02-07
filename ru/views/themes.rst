@@ -1,17 +1,81 @@
-Themes
-######
+Темы
+####
 
-.. note::
-    The documentation is not currently supported in Russian language for this
-    page.
+Темы в CakePHP - это просто плагины, предоставляющие файлы шаблонов оформления.
+См. раздел :ref:`plugin-create-your-own`. Вы можете исползовать преимущества
+тем, делая простой и быстрой смену внешнего вида ваших страниц. В дополнение к
+файлам шаблонов, они также могут предоставлять хелперы и ячейки, если они
+требуются вашей теме оформления. При использовании ячеек и хелперов из вашей
+темы, вам также придется использовать :term:`plugin syntax`.
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+Чтобы использовать темы, установите название темы в экшене вашего контроллера,
+либо в коллбэк-методе ``beforeRender()``::
 
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+    class ExamplesController extends AppController
+    {
+        // Для CakePHP ниже версии 3.1
+        public $theme = 'Modern';
+
+        public function beforeRender(\Cake\Event\Event $event)
+        {
+            $this->viewBuilder()->setTheme('Modern');
+
+            // Для CakePHP ниже версии 3.5
+            $this->viewBuilder()->theme('Modern');
+        }
+    }
+
+Файлы шаблона темы должны находиться в паке плагина с соответствующим названием.
+К примеру, использованная выше тема может быть найдена в
+**plugins/Modern/src/Template**. Важно помнить, что CakePHP ожидает имена
+плагинов/тем в стиле PascalCase. В остальном, структура папки
+**plugins/Modern/src/Template** аналогична используемой в **src/Template/**.
+
+Например, файл представления для экшена ``edit`` контроллера ``Posts`` будет
+расположен в файле **plugins/Modern/src/Template/Posts/edit.ctp**. Файлы макетов
+будут находиться в **plugins/Modern/src/Template/Layout/**. Вы также можете
+создавать кастомизированные шаблоны для плагинов с помощью тем. Если бы у вас
+был бы плагин под названием 'Cms', который бы содержал контроллер
+``TagsController``, тема ``Modern`` могла бы предоставить шаблон
+**plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ctp**, заменяющий шаблон
+``edit`` плагина.
+
+Если файл представления не может быть найден внутри темы, CakePHP попытается
+обнаружить файл представления в папке **src/Template/**. Таким образом, вы
+можете создать файлы главного шаблона, и просто переопределять их в папке
+с вашей темой.
+
+
+Если ваша тема также действует еще и в качестве плагина, не забудьте проверить,
+что она прописана в файле **config/bootstrap.php**. Например::
+
+    /**
+     * Загружаем наш плагин с темой в папке /plugins/Modern
+     */
+    Plugin::load('Modern');
+
+Ресурсы темы
+============
+
+Так как темы - это стандартные плагины CakePHP, они могут включать в себя все
+необходимые ресурсы в своей папке ``webroot``. Это позволяет с легкостью комплектовать
+и распространять темы. Во время разработки запросы к ресурсам темы бутдут
+обабатываться :php:class:`Cake\\Routing\\Dispatcher`. Для повышения производительности
+на стадии продакшена рекомендуется использовать :ref:`symlink-assets`.
+
+Все встроенные хелперы CakePHP отлично работают с темами, и будут всегда создавать для
+них корректные пути автоматически. Подобно файлам шаблонов, если нужный файл будет
+отсутствовать в папке темы, будет использована главная папка ``webroot``::
+
+    // В теме под названием 'purple_cupcake'
+    $this->Html->css('main.css');
+
+    // создается путь
+    /purple_cupcake/css/main.css
+
+    // и ссылается на
+    plugins/PurpleCupcake/webroot/css/main.css
 
 .. meta::
-    :title lang=ru: Themes
-    :keywords lang=ru: production environments,theme folder,layout files,development requests,callback functions,folder structure,default view,dispatcher,symlink,case basis,layouts,assets,cakephp,themes,advantage
+    :title lang=ru: Темы
+    :keywords lang=ru: production environments,папка тем,файлы макетов,development requests,callback functions,folder structure,представление по умолчанию,dispatcher,symlink,case basis,макеты,assets,cakephp,темы,advantage

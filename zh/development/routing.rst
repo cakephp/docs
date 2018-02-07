@@ -16,6 +16,14 @@ Routing
     You can refer to the English version in the select top menu to have
     information about this page's topic.
 
+.. index:: :controller, :action, :plugin
+.. index:: greedy star, trailing star
+.. _connecting-routes:
+.. _routes-configuration:
+
+Connecting Routes
+=================
+
 .. _resource-routes:
 
 Creating RESTful Routes

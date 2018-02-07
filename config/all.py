@@ -25,7 +25,7 @@ version_list = [
     {'name': '3.next', 'number': '3.next', 'current': True, 'title': '3.next Book'},
     {'name': '3.x', 'number': '3.0', 'title': '3.x Book'},
     {'name': '2.x', 'number': '2.0', 'title': '2.x Book'},
-    {'name': '1.3', 'number': '3.0', 'title': '1.3 Book'},
+    {'name': '1.3', 'number': '1.3', 'title': '1.3 Book'},
     {'name': '1.2', 'number': '1.2', 'title': '1.2 Book'},
     {'name': '1.1', 'number': '1.1', 'title': '1.1 Book'},
 ]

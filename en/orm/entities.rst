@@ -57,7 +57,7 @@ to store in them::
         'created' => new DateTime('now')
     ]);
 
-Another way of getting new entities is using the ``newEntity()`` method from the
+The preferred way of getting new entities is using the ``newEntity()`` method from the
 ``Table`` objects::
 
     use Cake\ORM\TableRegistry;
@@ -68,6 +68,9 @@ Another way of getting new entities is using the ``newEntity()`` method from the
         'title' => 'New Article',
         'created' => new DateTime('now')
     ]);
+    
+``$article`` will be an instance of ``App\Model\Entity\Article`` or fallback to
+``Cake\ORM\Entity` instance if you haven't created the ``Article`` class.
 
 Accessing Entity Data
 =====================

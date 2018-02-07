@@ -85,7 +85,7 @@ error templates will have the following variables available:
 In debug mode if your error extends ``Cake\Core\Exception\Exception`` the
 data returned by ``getAttributes()`` will be exposed as view variables as well.
 
-.. info::
+.. note::
     You will need to set ``debug`` to false, to see your **error404** and
     **error500** templates. In debug mode, you'll see CakePHP's development
     error page.

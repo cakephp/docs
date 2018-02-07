@@ -82,7 +82,7 @@ API エンドポイントと CSRF トークンとを統合しやすくなりま�
 
     public function beforeFilter(Event $event)
     {
-        $this->eventManager()->off($this->Csrf);
+        $this->getEventManager()->off($this->Csrf);
     }
 
 .. meta::

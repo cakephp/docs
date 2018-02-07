@@ -236,6 +236,7 @@ PSR-7 リクエストとレスポンス
 
     // src/Middleware/TrackingCookieMiddleware.php の中で
     namespace App\Middleware;
+    use Cake\I18n\Time;
 
     class TrackingCookieMiddleware
     {
@@ -248,10 +249,10 @@ PSR-7 リクエストとレスポンス
             // レスポンスを変更する時には、 next を呼んだ *後に*
             // それを行うべきです。
             if (!$request->getCookie('landing_page')) {
-                $response->cookie([
-                    'name' => 'landing_page',
+                $expiry = new Time('+ 1 year');
+                $response = $response->withCookie('landing_page' ,[
                     'value' => $request->here(),
-                    'expire' => '+ 1 year',
+                    'expire' => $expiry->format('U'),
                 ]);
             }
             return $response;

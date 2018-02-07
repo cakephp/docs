@@ -1041,7 +1041,9 @@ radio ボタン入力を作成します。使用されるデフォルトのウ�
 
 **ラジオボタンの属性**
 
-* ``label`` - ウィジェットのラベルを表示するかどうかを示すブール値。デフォルトは ``true`` 。
+* ``label`` - ウィジェットのラベルを表示するかどうかを示すブール値、または、全てのラベルに適用する
+  属性の配列。 ``class`` 属性が定義されている場合、チェックされたボタンの ``class`` 属性に
+  ``selected`` が追加されます。デフォルトは ``true`` 。
 
 * ``hiddenField`` - ``true`` に設定すると、 ``''`` の値を持つ非表示の入力がインクルードされます。
   これは、非連続的なラジオセットを作成する場合に便利です。デフォルトは ``true`` 。
@@ -1877,8 +1879,7 @@ CakePHP が Windows サーバー上にインストールされている場合、
 
 * ``$fieldName`` - ``'Modelname.fieldname'`` の形式のフィールド名。
 * ``$text`` - ラベルの見出しテキストを指定するためのオプション文字列。
-* ``$options`` - オプション。:ref:`general-control-options` と有効な HTML 属性を含む
-  文字列または配列。
+* ``$options`` - オプション。:ref:`general-control-options` と有効な HTML 属性を含む配列。
 
 ``label`` 要素を作成します。引数の ``$fieldName`` は、要素の HTML ``for`` 属性を
 生成するために使われます。 ``$text`` が未定義の場合、 ``$fieldName`` はラベルの
@@ -1896,10 +1897,10 @@ CakePHP が Windows サーバー上にインストールされている場合、
     <label for="user-name">Name</label>
     <label for="user-name">Your username</label>
 
-``$options`` に文字列をセットした場合、クラス名として使われます。 ::
+第３パラメーター ``$options`` に id や class を設定できます。 ::
 
     echo $this->Form->label('User.name', null, ['id' => 'user-label']);
-    echo $this->Form->label('User.name', 'Your username', 'highlight');
+    echo $this->Form->label('User.name', 'Your username', ['class' => 'highlight']);
 
 出力結果:
 
@@ -2373,7 +2374,7 @@ CakePHP の多くのヘルパーと同じように、FormHelper は、
 テンプレートを変更することで行うことができます。 ::
 
     $this->Form->setTemplates([
-        'nestingLabel' => '{{input}}<label{{attrs}}>{{text}}</label>',
+        'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>',
         'formGroup' => '{{input}}{{label}}',
     ]);
 
