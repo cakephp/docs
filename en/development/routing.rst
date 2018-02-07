@@ -25,7 +25,7 @@ this to your **routes.php** file::
 
     use Cake\Routing\Router;
 
-    // Using the scoped route builder.
+    // Using a scoped route builder.
     Router::scope('/', function ($routes) {
         $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
     });
@@ -143,7 +143,7 @@ The basic format for a route definition is::
 
     $routes->connect(
         '/url/template',
-        ['default' => 'defaultValue'],
+        ['targetKey' => 'targetValue'],
         ['option' => 'matchingRegex']
     );
 
@@ -155,25 +155,57 @@ a \* only match the exact template pattern supplied.
 
 Once you've specified a URL, you use the last two parameters of ``connect()`` to
 tell CakePHP what to do with a request once it has been matched. The second
-parameter is an associative array. The keys of the array should be named after
-the route elements the URL template represents. The values in the array are the
-default values for those keys.  Let's look at some basic examples before we
-start using the third parameter of ``connect()``::
+parameter defines the route 'target'. This can be defined either as an array, or
+as a destination string. A few examples of route targets are::
 
+    // Array target to an application controller
     $routes->connect(
-        '/pages/*',
-        ['controller' => 'Pages', 'action' => 'display']
+        '/users/view/*
+        ['controller' => 'Users', 'action' => 'view']
     );
+    // String target to an application controller. requires >=3.6.0
+    $routes->connect('/users/view/*', 'Users::view');
 
-This route is found in the routes.php file distributed with CakePHP.  It matches
-any URL starting with ``/pages/`` and hands it to the ``display()`` action of
-the ``PagesController``. A request to ``/pages/products`` would be mapped to
-``PagesController->display('products')``.
+    // Array target to a prefixed plugin controller
+    $routes->connect(
+        '/admin/cms/articles',
+        ['prefix' => 'admin', 'plugin' => 'Cms', controller' => 'Articles', 'action' => 'index']
+    );
+    // String target to a prefixed plugin controller. requires >=3.6.0
+    $routes->connect('/admin/cms/articles', 'Cms.Admin/Articles::index');
 
-In addition to the greedy star ``/*`` there is also the ``/**`` trailing star
-syntax. Using a trailing double star, will capture the remainder of a URL as a
-single passed argument. This is useful when you want to use an argument that
-included a ``/`` in it::
+The first route we connect matches URLs starting with ``/users/view`` and maps
+those requests to the ``UsersController->view()``. The trailing ``/*`` tells the
+router to pass any additional segments as method arguments. For example,
+``/users/view/123`` would map to ``UsersController->view(123)``.
+
+The above example also illustrates string targets. String targets provide
+a compact way to define a route's destination. String targets have the following
+syntax::
+
+    [Plugin].[Prefix]/[Controller]::[action]
+
+Some example string targets are::
+
+    // Application controller
+    'Bookmarks::view'
+
+    // Application controller with prefix
+    Admin/Bookmarks::view
+
+    // Plugin controller
+    Cms.Articles::edit
+
+    // Prefixed plugin controller
+    Vendor/Cms.Management/Admin/Articles::view
+
+.. versionadded:: 3.6.0
+    String based route targets were added.
+
+Earlier we used the greedy star (``/*``) to capture additional path segments,
+there is also the trailing star (``/**``). Using a trailing double star,
+will capture the remainder of a URL as a single passed argument. This is useful
+when you want to use an argument that included a ``/`` in it::
 
     $routes->connect(
         '/pages/**',
@@ -183,23 +215,22 @@ included a ``/`` in it::
 The incoming URL of ``/pages/the-example-/-and-proof`` would result in a single
 passed argument of ``the-example-/-and-proof``.
 
-You can use the second parameter of ``connect()`` to provide any routing
-parameters that are composed of the default values of the route::
+The second parameter of ``connect()`` can define any parameters that
+compose the default route parameters::
 
     $routes->connect(
         '/government',
         ['controller' => 'Pages', 'action' => 'display', 5]
     );
 
-This example shows how you can use the second parameter of ``connect()`` to
-define default parameters. If you built a site that features products for
+This example uses the second parameter of ``connect()`` to
+define default parameters. If you built an application that features products for
 different categories of customers, you might consider creating a route. This
 allows you to link to ``/government`` rather than ``/pages/display/5``.
 
-A common use for routing is to create URL segments that don't match your
-controller or model names. Let's say that instead of accessing our regular URL
-at ``/users/some_action/5``, we'd like to be able to access it by
-``/cooks/some_action/5``. The following route takes care of that::
+A common use for routing is to rename controllers and their actions. Instead of accessing our users controller at ``/users/some_action/5``, we'd like
+to be able to access it through ``/cooks/some_action/5``. The following route takes
+care of that::
 
     $routes->connect(
         '/cooks/:action/*', ['controller' => 'Users']
@@ -253,7 +284,7 @@ All of these methods return the route instance allowing you to leverage the
 :ref:`fluent setters <route-fluent-methods>` to further configure your route.
 
 .. versionadded:: 3.5.0
-    The HTTP verb helper methods were added in 3.5.0
+    The HTTP verb helper methods were added.
 
 .. _route-elements:
 
