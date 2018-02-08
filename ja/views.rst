@@ -169,7 +169,7 @@ CakePHP は自動では出力をエスケープしませんので、ユーザー
 
     $this->set('activeMenuButton', 'posts');
 
-そしてレイアウトでは、 ``$activeMenuButton`` 変数が使用でき、'posts' という値を持ちます。
+そしてレイアウトでは、 ``$activeMenuButton`` 変数が使用でき、 'posts' という値を持ちます。
 
 .. _extending-views:
 
