@@ -47,7 +47,7 @@ edit テンプレートを **plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ct
 読み込ませることを忘れないようにしてください。例::
 
     /**
-     * /plugins/Modern フォルダにあるプラグインテーマを読み込みます
+     * /plugins/Modern フォルダーにあるプラグインテーマを読み込みます
      */
     Plugin::load('Modern');
 
