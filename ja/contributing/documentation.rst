@@ -348,7 +348,7 @@ Sphinx が出力する警告を防ぐ
 
 Sphinx は関数が複数のファイルから参照されていると警告を出力します。
 これは、関数を２度追加していないことを確認する良い方法ではありますが、
-実査には複数回にわたって関数を書きたいときもありえます。
+実際には複数回にわたって関数を書きたいときもありえます。
 たとえば、 `debug object` が `/development/debugging` と
 `/core-libraries/global-constants-and-functions` から参照されます。
 このケースでは、debug 関数の下に ``:noindex:`` を加えることで、
