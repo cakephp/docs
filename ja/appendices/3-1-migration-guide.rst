@@ -68,7 +68,7 @@ AuthComponent
 - 新しい設定オプション ``storage`` が追加されました。 ``AuthComponent`` がユーザーの
   レコードを格納するために使用するストレージ・クラス名が含まれています。
   デフォルトでは ``SessionStorage`` が使用されます。ステートレスオーセンティケーターを
-  使用している場合、 ``MemoryStorage`` を代わりに 使用しするために ``AuthComponent`` を
+  使用している場合、 ``MemoryStorage`` を代わりに 使用するために ``AuthComponent`` を
   設定する必要があります。
 - 新しい設定オプション ``checkAuthIn`` が追加されました。認証チェックが行われるべき対象の
   イベントの名前が含まれています。デフォルトでは ``Controller.startup`` が使用されますが、
