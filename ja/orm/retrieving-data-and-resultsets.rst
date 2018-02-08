@@ -1226,7 +1226,7 @@ reducer が呼ばれるごとに、reducer はユーザーごとのフォロワ�
 
     $articles->find('commonWords')->mapReduce($mapper);
 
-stack されたすべての MapReduce 操作をを取り除く
+stack されたすべての MapReduce 操作を取り除く
 -----------------------------------------------
 
 ときには ``mapReduce`` 操作をまったく実行させずに ``Query`` オブジェクトを更新したいという
