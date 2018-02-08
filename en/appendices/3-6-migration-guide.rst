@@ -222,6 +222,11 @@ Shell
 * The ``cake assets copy`` command now features an ``--overwrite`` option for
   overwriting plugin assets if they already exist in the application webroot.
 
+Utility
+=======
+
+* ``Security::randomString()`` was added.
+
 Validation
 ==========
 

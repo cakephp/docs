@@ -120,7 +120,16 @@ If neither source is available a warning will be emitted and an unsafe value
 will be used for backwards compatibility reasons.
 
 .. versionadded:: 3.2.3
-    The randomBytes method was added in 3.2.3.
+    The randomBytes method was added.
+
+.. php::staticmethod:: randomString($length)
+
+Get a random string ``$length`` long from a secure random source. This method
+draws from the same random source as ``randomBytes()`` and will encode the data
+as a hexadecimal string.
+
+.. versionadded:: 3.6.0
+    The randomString method was added.
 
 .. meta::
     :title lang=en: Security
