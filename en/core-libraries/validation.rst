@@ -302,6 +302,9 @@ Then ensure that your validation method has the second context parameter. ::
     {
         $userid = $context['providers']['passed']['userid'];
     }
+    
+Closures should return boolean true if the validation passes. If it fails, return boolean false or for a custom error message return a string.
+
 
 Conditional Validation
 ----------------------
