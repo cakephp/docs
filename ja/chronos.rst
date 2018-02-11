@@ -149,6 +149,20 @@ Chronos オブジェクトは細やかに値を変更できるメソッドを提
     $time->next(ChronosInterface::TUESDAY);
     $time->previous(ChronosInterface::MONDAY);
 
+:abbr:`DST (夏時間)` の遷移の前後で日付/時間を変更すると、
+あなたの操作で時間が増減するかもしれませんが、その結果、意図しない時間の値になります。
+これらの問題を回避するには、最初にタイムゾーンを ``UTC`` に変更し、時間を変更します。 ::
+
+    // 余分な時間が追加されました
+    $time = new Chronos('2014-03-30 00:00:00', 'Europe/London');
+    debug($time->modify('+24 hours')); // 2014-03-31 01:00:00
+
+    // 最初に UTC に切り替え、そして更新
+    $time = $time->setTimezone('UTC')
+        ->modify('+24 hours');
+
+時間を変更すると、元のタイムゾーンを追加してローカライズされた時間を取得することができます。
+
 比較メソッド
 ------------
 
