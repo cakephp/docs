@@ -177,6 +177,12 @@ Form
 * Form classes now support the ``_validatorClass`` property which works the same
   as it does on ``ORM\Table``.
 
+Http
+====
+
+* ``Response::withAddedLink()`` was added to make creating ``Link`` headers
+  simpler.
+
 I18n
 ====
 
