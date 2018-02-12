@@ -132,6 +132,9 @@ behavior that may affect your application:
   modified request.
 * ``Hash::extract()`` no longer matches integer ``0`` when using attribute
   matchers for string values.
+* The console environment no longer automatically loads plugins specified by the
+  ``--plugin`` option. Instead you must ensure that your application
+  bootstrapping loads all the required plugins.
 
 
 Cache
@@ -144,7 +147,7 @@ Cache
 Core
 ====
 
-- ``getTypeName()`` was added to assist in getting correct class/type name when
+* ``getTypeName()`` was added to assist in getting correct class/type name when
   building more descriptive error messages.
 
 Database
