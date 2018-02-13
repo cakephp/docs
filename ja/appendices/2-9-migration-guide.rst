@@ -13,7 +13,7 @@ CakePHP 2.9 は、PHP7 互換で、テストされています。
 ======
 
 * ``Object`` クラスは非推奨になり、 ``CakeObject`` に名前を変更してください。
-  ``object`` が PHP7 以降、予約後になったためです。
+  ``object`` が PHP7 以降、予約語になったためです。
   ([RFC](https://wiki.php.net/rfc/reserve_even_more_types_in_php_7) をご覧ください。)
 
 新機能
