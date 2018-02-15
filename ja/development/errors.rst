@@ -318,7 +318,7 @@ HTTP エラー用の例外を使うことで、あなたのコードを綺麗に
 .. php:exception:: RecordNotFoundException
 
     要求されたレコードが見つかりません。
-    これは HTTP レスポンスヘッダーに 404 を設定するでしょう。
+    これにより HTTP 応答ヘッダーも 404  に設定されます。
 
 .. php:namespace:: Cake\Routing\Exception
 
