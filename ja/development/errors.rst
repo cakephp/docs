@@ -475,7 +475,12 @@ BaseErrorHandler の継承
 例外レンダリングとロギングプロセス全体を制御したい場合は **config/app.php** の
 ``exceptionRenderer`` オプションを使用して、例外ページをレンダリングするクラスを
 選択することができます。``ExceptionRenderer`` の変更は、アプリケーション固有の
-例外クラスに対してカスタムエラーページを提供する場合に便利です。 ::
+例外クラスに対してカスタムエラーページを提供する場合に便利です。
+
+カスタム例外レンダラークラスは **src/Error** に配置する必要があります。
+アプリケーションで ``App\Exception\MissingWidgetException`` を使用して欠落している
+ウィジェットを示すとしましょう。このエラーが処理されたときに特定のエラーページを
+レンダリングする例外レンダラーを作成することができます。 ::
 
     // src/Error/AppExceptionRenderer.php の中で
     namespace App\Error;
@@ -486,7 +491,8 @@ BaseErrorHandler の継承
     {
         public function missingWidget($error)
         {
-            return 'おっとウィジェットが見つからない！';
+            $response = $this->controller->response;
+            return $response->withStringBody('おっとウィジェットが見つからない！');
         }
     }
 
