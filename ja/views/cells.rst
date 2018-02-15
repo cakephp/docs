@@ -49,10 +49,10 @@
 
     bin/cake bake cell Inbox
 
-これは私たちが打ったコードを生成してくれるでしょう。
+これは上記で作成したコードを生成してくれるでしょう。
 
 セルの実装
-----------
+==========
 
 ユーザー同士で互いにメッセージを送りあえるアプリケーションを開発しているとしましょう。
 私たちは ``Messages`` モデルを持っていて、そして AppController を汚さずに
@@ -127,7 +127,7 @@
     }
 
 セルに引数を渡す
-----------------
+================
 
 セルをより柔軟にするために、パラメーター付きのセルのメソッドが必要になることも多いでしょう。
 添字付きの配列として ``cell()`` の第二、第三引数を使用することで、アクションのパラメーターや、
@@ -174,6 +174,10 @@
 
     // セルをエコーする前にテンプレートを設定します。
     $cell = $this->cell('Inbox');
+    $cell->viewBuilder()->setTemplate('messages');
+    // 3.4 より前
+    $cell->viewBuilder()->template('messages');
+    // 3.1 より前
     $cell->template = 'messages';
     echo $cell;
 
@@ -249,3 +253,35 @@
 
 .. versionadded:: 3.5.0
     ``Cake\Datasource\Paginator`` は 3.5.0 で追加されました。
+
+セルのオプション
+=================
+
+セルは、セルオブジェクトの作成時にプロパティに変換されるコンストラクターオプションを宣言できます。 ::
+
+    namespace App\View\Cell;
+
+    use Cake\View\Cell;
+    use Cake\Datasource\Paginator;
+
+    class FavoritesCell extends Cell
+    {
+        protected $_validCellOptions = ['limit'];
+
+        protected $limit = 3;
+
+        public function display($userId)
+        {
+            $this->loadModel('Users');
+            $result = $this->Users->find('friends', ['for' => $userId]);
+            $this->set('favorites', $result);
+        }
+    }
+
+ここでは、 ``$limit`` プロパティを定義し、 ``limit`` をセルのオプションとして追加しました。
+これにより、セルの作成時にオプションを定義することができます。 ::
+
+    $cell = $this->cell('Favorites', [$user->id], ['limit' => 10])
+
+セルのオプションは、データをプロパティとして使用してデフォルト値を
+オーバーライドできるようにする場合に便利です。
