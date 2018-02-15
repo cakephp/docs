@@ -318,7 +318,7 @@ HTTP エラー用の例外を使うことで、あなたのコードを綺麗に
 .. php:exception:: RecordNotFoundException
 
     要求されたレコードが見つかりません。
-    これは HTTP レスポンスヘッダーに 404 を設定しもするでしょう。
+    これは HTTP レスポンスヘッダーに 404 を設定するでしょう。
 
 .. php:namespace:: Cake\Routing\Exception
 
@@ -332,7 +332,7 @@ HTTP エラー用の例外を使うことで、あなたのコードを綺麗に
 
 .. php:exception:: MissingDispatcherFilterException
 
-    ディスパッチャーフォルターが見つかりません。
+    ディスパッチャーフィルターが見つかりません。
 
 .. php:namespace:: Cake\Core\Exception
 
@@ -358,7 +358,7 @@ RFC2616 MethodNotAllowedException は言っています。 ::
 コントローラー中での HTTP の例外の使用
 ======================================
 
-失敗の状態を示すためにあたなのコントローラーのアクションからあらゆる HTTP 関連の例外を投げることができます。
+失敗の状態を示すためにあなたのコントローラーのアクションからあらゆる HTTP 関連の例外を投げることができます。
 たとえば::
 
     use Cake\Network\Exception\NotFoundException;
@@ -394,7 +394,7 @@ RFC2616 MethodNotAllowedException は言っています。 ::
 単純にエラー用ビューを編集して ``$this->layout = 'my_error';`` という文を
 **error400.ctp** と **error500.ctp** に追加してください。
 
-各フレームワーク層の例外はコアのテンプレートに置かれた個別のビューファイル持っていますが
+各フレームワーク層の例外はコアのテンプレートに置かれた個別のビューファイルを持っていますが
 それらは開発中の間にのみ使われますのでそれらのカスタマイズに悩む必要はまったくありません。
 
 .. index:: application exceptions
@@ -472,9 +472,10 @@ BaseErrorHandler の継承
 既定のハンドラーの exceptionRenderer オプションの使用
 -----------------------------------------------------
 
-もし例外処理の制御権を得る必要はないものの、どのように例外が描画されるを変更したい場合は
-例外ページを描画するであろうクラスを選択するために
-**config/app.php** 中の ``exceptionRenderer`` オプションを使うことができます。 ::
+例外レンダリングとロギングプロセス全体を制御したい場合は **config/app.php** の
+``exceptionRenderer`` オプションを使用して、例外ページをレンダリングするクラスを
+選択することができます。``ExceptionRenderer`` の変更は、アプリケーション固有の
+例外クラスに対してカスタムエラーページを提供する場合に便利です。 ::
 
     // src/Error/AppExceptionRenderer.php の中で
     namespace App\Error;
