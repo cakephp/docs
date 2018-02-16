@@ -283,6 +283,13 @@ want to set config ``unauthorizedRedirect`` to ``false`` so that AuthComponent
 throws a ``ForbiddenException`` instead of the default behavior of redirecting to
 referrer.
 
+.. note::
+
+    Config ``unauthorizedRedirect`` only apply to authenticated users.
+    To handle unauthenticated access without redirect, you will need to load one or
+    more stateless authenticators, like Basic or Digest. Otherwise, your request will
+    be redirect for ``loginAction``.
+
 Authentication objects can implement a ``getUser()`` method that can be used to
 support user login systems that don't rely on cookies. A typical getUser method
 looks at the request/environment and uses the information there to confirm the
