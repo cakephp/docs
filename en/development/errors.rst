@@ -185,7 +185,7 @@ override the ``_getController()`` method in your exception renderer::
 
     class AppExceptionRenderer extends ExceptionRenderer
     {
-        protected function _getController($exception)
+        protected function _getController()
         {
             return new SuperCustomErrorController();
         }
