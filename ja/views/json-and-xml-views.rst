@@ -26,7 +26,7 @@ JSON と XML レスポンスを作成できるようになり、
         $this->loadComponent('RequestHandler');
     }
 
-`AppController` で上記のようにすることで、コンテンツタイプによる自動切り替えが有効化されます。
+``AppController`` で上記のようにすることで、コンテンツタイプによる自動切り替えが有効化されます。
 ``viewClassMap`` 設定でコンポーネットを設定することで、カスタムクラスをマップしたり
 他のデータ型をマップするも出来ます。
 
@@ -65,7 +65,7 @@ JSON と XML レスポンスを作成できるようになり、
             // シリアライズする必要があるビュー変数をセットする
             $this->set('articles', $this->paginate());
             // JsonView がシリアライズするべきビュー変数を指定する
-            $this->set('_serialize', ['articles']);
+            $this->set('_serialize', 'articles');
         }
     }
 
