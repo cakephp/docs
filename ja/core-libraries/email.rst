@@ -161,7 +161,7 @@ Gmail のように、SSL SMTP サーバーを設定することができます�
 これは、環境変数を使ったり :term:`PaaS` プロバイダーで動作する場合に便利です。 ::
 
     Email::configTransport('default', [
-        'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:465?tls=true',
+        'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:587?tls=true',
     ]);
 
 DSN 文字列を使用するときは、クエリー文字列引数として任意の追加のパラメーターやオプションを
