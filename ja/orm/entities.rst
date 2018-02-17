@@ -54,7 +54,7 @@ CakePHP の ORM を使うためにエンティティークラスを生成する�
         'created' => new DateTime('now')
     ]);
 
-エンティティーを生成するもう一つの方法は、 ``Table`` オブジェクトの ``newEntity()`` メソッドです。
+エンティティーを生成するお勧めの方法は、 ``Table`` オブジェクトの ``newEntity()`` メソッドです。
 ::
 
     use Cake\ORM\TableRegistry;
@@ -65,6 +65,9 @@ CakePHP の ORM を使うためにエンティティークラスを生成する�
         'title' => 'New Article',
         'created' => new DateTime('now')
     ]);
+
+``$article`` は、 ``App\Model\Entity\Article`` のインスタンスになります。もしくは
+``Article`` クラスが作成しなかった場合は、代替として ``Cake\ORM\Entity`` のインスタンスになります。
 
 エンティティーのデータへのアクセス
 ==================================
