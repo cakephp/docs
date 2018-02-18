@@ -81,9 +81,6 @@
 检查安装
 =========================
 
-We can quickly check that our installation is correct, by checking the default
-home page. Before you can do that, you'll need to start the development server:
-
 你可以通过访问默认的主页的来检查安装是否成功。当然首先我们需要启动开发服务器：
 
 .. code-block:: bash
