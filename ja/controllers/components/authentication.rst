@@ -259,7 +259,7 @@ Basic およびダイジェストはステートレス認証スキームであ�
 できますし、AuthComponent で API を構築するのに、より適しています。
 
 AuthComponent がユーザーレコードの格納にセッションを使用しないように、ステートレスな
-オーテンティケーターのための ``strage`` 設定は、 ``Memory`` に設定する必要があります。
+オーセンティケーターのための ``strage`` 設定は、 ``Memory`` に設定する必要があります。
 また、``unauthorizedRedirect`` に ``false`` を設定すると、 AuthComponent が、
 デフォルトの動作であるリファラーへのリダイレクトの代わりに ``ForbiddenException``
 をスローすることもできます。
