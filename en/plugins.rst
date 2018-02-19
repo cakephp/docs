@@ -96,8 +96,9 @@ autoloading with ``Plugin``::
 Loading a Plugin
 ================
 
-After installing a plugin and setting up the autoloader, you can load your
-plugins. Plugins are loaded in your application's ``bootstrap()`` function::
+If you want to use a plugin's routes, console commands, middleware, or event
+listeners you will need to load the plugin. Plugins are loaded in your
+application's ``bootstrap()`` function::
 
     // In src/Application.php. Requires at least 3.6.0
     use Cake\Http\BaseApplication;
@@ -115,6 +116,9 @@ plugins. Plugins are loaded in your application's ``bootstrap()`` function::
             $this->addPlugin(AcmeCorp/ContactManager::class);
         }
     }
+
+If you just want to use helpers, behaviors or components from a plugin you do
+not need to load a plugin.
 
 Prior to 3.6.0, you should use ``Plugin::load()``::
 
