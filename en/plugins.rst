@@ -700,39 +700,19 @@ that you prefix the plugin name before the name of the component. For example::
 
 The same technique applies to Helpers and Behaviors.
 
-Expand Your Plugin
-==================
+Publishing Your Plugin
+======================
 
-This example created a good start for a plugin, but there is a lot
-more that you can do. As a general rule, anything you can do with your
-application you can do inside of a plugin as well.
-
-Go ahead - include some third-party libraries in 'vendor', add some
-new shells to the cake console, and don't forget to create test cases
-so your plugin users can automatically test your plugin's functionality!
-
-In our ContactManager example we might create add/remove/edit/delete
-actions in the ContactsController, implement validation in the Contact
-model, and implement the functionality one might expect when managing
-their contacts. It's up to you to decide what to implement in your
-plugins. Just don't forget to share your code with the community so
-that everyone can benefit from your awesome, reusable components!
-
-Publish Your Plugin
-===================
-
-Make sure you add your plugin to
-`plugins.cakephp.org <https://plugins.cakephp.org>`_. This way other people can
-use it as composer dependency.
-You can also propose your plugin to the
-`awesome-cakephp list <https://github.com/FriendsOfCake/awesome-cakephp>`_.
+CakePHP plugins should be published to `the packagist
+<https://packagist.org>`__. This way other people can use it as composer
+dependency.  You can also propose your plugin to the `awesome-cakephp list
+<https://github.com/FriendsOfCake/awesome-cakephp>`_.
 
 Choose a semantically meaningful name for the package name. This should ideally
 be prefixed with the dependency, in this case "cakephp" as the framework.
 The vendor name will usually be your GitHub username.
 Do **not** use the CakePHP namespace (cakephp) as this is reserved to CakePHP
-owned plugins.
-The convention is to use lowercase letters and dashes as separator.
+owned plugins. The convention is to use lowercase letters and dashes as separator.
 
 So if you created a plugin "Logging" with your GitHub account "FooBar", a good
 name would be `foo-bar/cakephp-logging`.
