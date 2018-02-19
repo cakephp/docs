@@ -156,6 +156,7 @@ appropriate parts of your application. The hooks are:
   queue.
 * ``console`` Used to add console commands to an application's command
   collection.
+* ``events`` Used to add event listeners to the application event manager.
 
 When loading plugins you can configure which hooks are enabled. By default
 plugins without a :ref:`plugin-objects` have all hooks disabled. New style plugins
