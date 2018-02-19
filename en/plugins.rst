@@ -4,13 +4,13 @@ Plugins
 CakePHP allows you to set up a combination of controllers, models,
 and views and release them as a pre-packaged application plugin that
 others can use in their CakePHP applications. If you've created
-a great user management, simple blog, or web services module in one of
+great user management, simple blog, or web services module in one of
 your applications, why not package it as a CakePHP plugin? This way you
 can reuse it in your other applications, and share with the community!
 
-A CakePHP plugin is ultimately separate from the host application itself
-and generally provides some well-defined functionality that can be packaged up neatly,
-and reused with little effort in other applications. The application and the plugin
+A CakePHP plugin is separate from the host application itself and generally
+provides some well-defined functionality that can be packaged up neatly, and
+reused with little effort in other applications. The application and the plugin
 operate in their own respective spaces, but share application-specific
 properties (e.g. database connectivity parameters) which are defined and shared
 through the application's configuration.
@@ -25,7 +25,9 @@ Installing a Plugin With Composer
 
 Many plugins are available on `Packagist <http://packagist.org>`_
 and can be installed with ``Composer``. To install DebugKit, you
-would do the following::
+would do the following:
+
+.. code-block:: bash
 
     php composer.phar require cakephp/debug_kit
 
@@ -33,25 +35,63 @@ This would install the latest version of DebugKit and update your
 **composer.json**, **composer.lock** file, update
 **vendor/cakephp-plugins.php**, and update your autoloader.
 
+Manually Installing a Plugin
+============================
+
 If the plugin you want to install is not available on
 packagist.org, you can clone or copy the plugin code into your **plugins**
 directory. Assuming you want to install a plugin named 'ContactManager', you
 should have a folder in **plugins** named 'ContactManager'. In this directory
 are the plugin's src, tests and any other directories.
 
-.. index:: vendor/cakephp-plugins.php
+.. _autoloading-plugin-classes:
 
-Plugin Map File
----------------
+Autoloading Plugin Classes
+--------------------------
 
-When installing plugins via Composer, you may notice that
-**vendor/cakephp-plugins.php** is created. This configuration file contains
-a map of plugin names and their paths on the filesystem. It makes it possible
-for plugins to be installed into the standard vendor directory which is outside
-of the normal search paths. The ``Plugin`` class will use this file to locate
-plugins when they are loaded with ``load()`` or ``loadAll()``. You generally
-won't need to edit this file by hand, as Composer and the ``plugin-installer``
-package will manage it for you.
+If you install your plugins via ``composer`` or ``bake`` you shouldn't need to
+configure class autoloading for your plugins.
+
+In we were installing a plugin named ``MyPlugin`` manually you would need to
+modify your application's **composer.json** file to contain the following
+information:
+
+.. code-block:: json
+
+    "autoload": {
+        "psr-4": {
+            "MyPlugin\\": "plugins/MyPlugin/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MyPlugin\\Test\\": "plugins/MyPlugin/tests/"
+        }
+    }
+    ""
+
+If you are using vendor namespaces for your plugins, the namespace to path mapping
+should resemble the following:
+
+.. code-block:: json
+
+    "autoload": {
+        "psr-4": {
+            "AcmeCorp\\Users\\": "plugins/AcmeCorp/Users/src/",
+            "AcmeCorp\\Users\\Test\\": "plugins/AcmeCorp/Users/tests/"
+        }
+    }
+
+Additionally, you will need to tell Composer to refresh its autoloading cache:
+
+.. code-block:: bash
+
+    php composer.phar dumpautoload
+
+If you are unable to use Composer for any reason, you can also configure
+autoloading with ``Plugin``::
+
+    Plugin::load('ContactManager', ['autoload' => true]);
 
 Loading a Plugin
 ================
@@ -88,42 +128,6 @@ There is also a handy shell command to enable the plugin. Execute the following 
     bin/cake plugin load ContactManager
 
 This will put the ``Plugin::load('ContactManager');`` snippet in the bootstrap for you.
-
-.. _autoloading-plugin-classes:
-
-Autoloading Plugin Classes
---------------------------
-
-When using ``bake`` for creating a plugin or when installing a plugin using
-Composer, you don't typically need to make any changes to your application in order to
-make CakePHP recognize the classes that live inside it.
-
-In any other cases you may need to modify your application's composer.json file
-to contain the following information::
-
-    "psr-4": {
-        (...)
-        "MyPlugin\\": "plugins/MyPlugin/src/",
-        "MyPlugin\\Test\\": "plugins/MyPlugin/tests/"
-    }
-
-If you are using vendor namespaces for your plugins, the namespace to path mapping
-should resemble the following::
-
-    "psr-4": {
-        (...)
-        "AcmeCorp\\Users\\": "plugins/AcmeCorp/Users/src/",
-        "AcmeCorp\\Users\\Test\\": "plugins/AcmeCorp/Users/tests/"
-    }
-
-Additionally, you will need to tell Composer to refresh its autoloading cache::
-
-    $ php composer.phar dumpautoload
-
-If you are unable to use Composer for any reason, you can also use a fallback
-autoloading for your plugin::
-
-    Plugin::load('ContactManager', ['autoload' => true]);
 
 .. _plugin-configuration:
 
@@ -193,6 +197,20 @@ This will ensure that classnames are resolved properly when using
 Most plugins will indicate the proper procedure for configuring them and setting
 up the database in their documentation. Some plugins will require more setup
 than others.
+
+.. index:: vendor/cakephp-plugins.php
+
+Plugin Map File
+===============
+
+When installing plugins via Composer, you may notice that
+**vendor/cakephp-plugins.php** is created. This configuration file contains
+a map of plugin names and their paths on the filesystem. It makes it possible
+for plugins to be installed into the standard vendor directory which is outside
+of the normal search paths. The ``Plugin`` class will use this file to locate
+plugins when they are loaded with ``load()`` or ``loadAll()``. You generally
+won't need to edit this file by hand, as Composer and the ``plugin-installer``
+package will manage it for you.
 
 Using Plugins
 =============
