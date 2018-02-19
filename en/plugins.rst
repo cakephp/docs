@@ -736,7 +736,11 @@ package will manage it for you.
 
 Manage Your Plugins using Mixer
 ===============================
-Another way to discover and manage plugins into your CakePHP application is `Mixer <https://github.com/CakeDC/mixer>`_. It is a CakePHP plugin which helps you to install plugins from Packagist. It also helps you to manage your existing plugins.
+
+Another way to discover and manage plugins into your CakePHP application is
+`Mixer <https://github.com/CakeDC/mixer>`_. It is a CakePHP plugin which helps
+you to install plugins from Packagist. It also helps you to manage your existing
+plugins.
 
 .. note::
 
