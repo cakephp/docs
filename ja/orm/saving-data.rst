@@ -1126,14 +1126,20 @@ belongsToMany アソシエーションのそれぞれのエンティティーは
 .. php:method:: updateAll($fields, $conditions)
 
 時には行を個別に更新するのが効率的ではない、または必要でないことがあるかもしれません。
-こうした場合には、一括更新を使って一度の多くの行を更新するのがより効率的です。 ::
+このような場合は、一括して多くの行を変更するために、
+一括更新で新しいフィールド値と更新条件を割り当てる方が効率的です。 ::
 
     // すべての公開されていない記事を公開します。
     function publishAllUnpublished()
     {
         $this->updateAll(
-            ['published' => true], // フィールド
-            ['published' => false] // 条件
+            [  // フィールド
+                'published' => true,
+                'publish_date' => FrozenTime::now()
+            ],
+            [  // 条件
+                'published' => false
+            ]
         );
     }
 
