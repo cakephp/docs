@@ -41,6 +41,10 @@ features will continue to function until 4.0.0 after which they will be removed.
   and ``allowEmpty()`` instead.
 * ``Cake\Form\Form::validator()`` is deprecated. Use ``getValidator()`` and
   ``setValidator()`` instead.
+* ``Cake\ORM\TableRegistry`` static API has been deprecated. Use a table locator 
+  directly instead. A global ``Cake\ORM\Locator\TableLocator`` instance can be 
+  accessed via ``Cake\ORM\TableRegistry::getTableLocator()`` or using a
+  ``Cake\ORM\Locator\LocatorAwareTrait``.
 
 Several classes were *renamed*. Their old names will continue to work until 4.0,
 but will emit deprecation warnings:
