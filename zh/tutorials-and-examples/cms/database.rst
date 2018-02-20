@@ -118,9 +118,8 @@ CakePHP 的模型是由 ``Table`` and ``Entity`` 两种对象组成。``Table`` 
     }
 
 我们附属了 :doc:`/orm/behaviors/timestamp` 行为 （behavior）。此行为将会帮助我们自动填充
-被附属的数据库表的 ``created`` 列 和 ``modified`` 列。利用 CakePHP 的命名约定，我们取其名为
- ``ArticlesTable``， 这样 CakePHP 便可自动找到 ``articles`` 数据库表。同样利用命名约定，
- CakePHP 默认 ``id`` 为主键。
+被附属的数据库表的 ``created`` 列 和 ``modified`` 列。利用 CakePHP 的命名约定，我们取其名为 ``ArticlesTable``，
+这样 CakePHP 便可自动找到 ``articles`` 数据库表。同样利用命名约定，CakePHP 默认 ``id`` 为主键。
  
 .. note::
 	
