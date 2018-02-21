@@ -67,7 +67,8 @@ AJAX-запросов. Для более подробной информации
 Загрузка хелперов по условию
 ----------------------------
 
-You can use the current action name to conditionally load helpers::
+Вы можете использовать имя текщего экшена, чтобы загружать хелперы по
+условию::
 
     class AppView extends View
     {
@@ -95,8 +96,8 @@ You can use the current action name to conditionally load helpers::
 Параметры конфигурации
 ----------------------
 
-You can pass configuration options to helpers. These options can be used to set
-attribute values or modify the behavior of a helper::
+Вы можете передавать параметры конфигурации хелперам. Эти параметры могут быть
+для установки значений атрибутов, либо для изменения поведения хелпера::
 
     namespace App\View\Helper;
 
@@ -128,10 +129,7 @@ attribute values or modify the behavior of a helper::
 
 По умолчанию все параметры конфигурации будут объединены со свойством
 ``$_defaultConfig``. Это свойство должно определять значения по умолчанию
-
-By default all configuration options will be merged with the ``$_defaultConfig``
-property. This property should define the default values of any configuration
-your helper requires. For example::
+для любых настроек, которые требуются вашему хелперу. К примеру::
 
     namespace App\View\Helper;
 
