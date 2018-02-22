@@ -103,17 +103,16 @@ application's ``bootstrap()`` function::
     // In src/Application.php. Requires at least 3.6.0
     use Cake\Http\BaseApplication;
     use ContactManager\Plugin as ContactManager;
-    use AcmeCorp\ContactManager\Plugin as AcmeContactManager;
 
     class Application extends BaseApplication {
         public function bootstrap()
         {
             parent::bootstrap();
-            // Load the contact manager plugin
+            // Load the contact manager plugin by class name
             $this->addPlugin(ContactManager::class);
 
-            // Load a plugin with a vendor namespace.
-            $this->addPlugin(AcmeCorp/ContactManager::class);
+            // Load a plugin with a vendor namespace by 'short name'
+            $this->addPlugin('AcmeCorp\ContactManager');
         }
     }
 
@@ -139,6 +138,10 @@ line:
 
 This would update your application's bootstrap method, or put the
 ``Plugin::load('ContactManager');`` snippet in the bootstrap for you.
+
+
+.. versionadded:: 3.6.0
+    ``addPlugin()`` was added.
 
 .. _plugin-configuration:
 
@@ -358,9 +361,9 @@ like::
 
     namespace ContactManager;
 
-    use Cake\Core\PluginApp;
+    use Cake\Core\BasePlugin;
 
-    class Plugin extends PluginApp
+    class Plugin extends BasePlugin
     {
         public function middleware($middleware)
         {
@@ -374,9 +377,16 @@ like::
             return $commands;
         }
 
+        public function bootstrap()
+        {
+            // Add constants, load configuration defaults. 
+            // By default will load `config/routes.php` in the plugin.
+        }
+
         public function routes($routes)
         {
-            // Add routes
+            // Add routes. By default will load `config/routes.php` in
+            // the plugin.
         }
     }
 

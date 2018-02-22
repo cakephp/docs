@@ -412,28 +412,6 @@ endpoints.
 
 The CSRF Token can be obtained via the Cookie ``csrfToken``.
 
-.. _adding-http-stack:
-
-Adding the new HTTP Stack to an Existing Application
-====================================================
-
-Using HTTP Middleware in an existing application requires a few changes to your
-application.
-
-#. First update your **webroot/index.php**. Copy the file contents from the `app
-   skeleton <https://github.com/cakephp/app/tree/master/webroot/index.php>`__.
-#. Create an ``Application`` class. See the :ref:`using-middleware` section
-   above for how to do that. Or copy the example in the `app skeleton
-   <https://github.com/cakephp/app/tree/master/src/Application.php>`__.
-#. Create **config/requirements.php** if it doesn't exist and add the contents from the `app skeleton <https://github.com/cakephp/app/blob/master/config/requirements.php>`__.
-
-Once those three steps are complete, you are ready to start re-implementing any
-application/plugin dispatch filters as HTTP middleware.
-
-If you are running tests you will also need to update your
-**tests/bootstrap.php** by copying the file contents from the `app skeleton
-<https://github.com/cakephp/app/tree/master/tests/bootstrap.php>`_.
-
 .. meta::
     :title lang=en: Http Middleware
     :keywords lang=en: http, middleware, psr-7, request, response, wsgi, application, baseapplication
