@@ -1,7 +1,7 @@
-Application Class
-=================
+Application
+===========
 
-The ``Application`` class is the at the heart of your application. It controls
+The ``Application`` is the heart of your application. It controls
 how your application is configured, and what plugins, middleware, console
 commands and routes are included.
 
@@ -10,17 +10,18 @@ it will be pretty slim and only define a few default
 :doc:`/controllers/middleware`. Applications can define the following hook
 methods:
 
-* ``bootstrap`` Used to load configuration files, define
-  constants and other global functions. By default this will include
-  **config/bootstrap.php**. This is the ideal place to load the :doc:`/plugins`
-  your application uses.
-* ``routes`` Used to load routes. By default this will include
-  **config/routes.php**.
-* ``middleware`` Used to add :doc:`/controllers/middleware`` to your application.
-* ``console`` Used to add console commands to your application. By default this
-  will automatically discover shells & commands in your application and all
-  plugins.
-* ``events`` Used to add event listeners to the application event manager.
+* ``bootstrap`` Used to load :doc:`configuration files
+  </development/configuration>`, define constants and other global functions.
+  By default this will include **config/bootstrap.php**. This is the ideal place
+  to load the :doc:`/plugins` your application uses.
+* ``routes`` Used to load :doc:`routes </development/routing>`. By default this
+  will include **config/routes.php**.
+* ``middleware`` Used to add :doc:`middleware </controllers/middleware>` to your application.
+* ``console`` Used to add :doc:`console commands </console-and-shells>` to your
+  application. By default this will automatically discover shells & commands in
+  your application and all plugins.
+* ``events`` Used to add :doc:`event listeners </core-libraries/events>` to the
+  application event manager.
 
 .. _adding-http-stack:
 
