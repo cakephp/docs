@@ -380,7 +380,7 @@ like::
         public function bootstrap()
         {
             // Add constants, load configuration defaults. 
-            // By default will load `config/routes.php` in the plugin.
+            // By default will load `config/bootstrap.php` in the plugin.
         }
 
         public function routes($routes)
