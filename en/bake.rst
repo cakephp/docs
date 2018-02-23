@@ -19,10 +19,10 @@ application. Bake is provided as a plugin that you can install with Composer::
 The above will install bake as a development dependency. This means that it will
 not be installed when you do production deployments. 
 
-When using the Twig templates make sure you are loading the `WyriHaximus/TwigView` plugin with its bootstrap.
-You can also omit it completely which then makes Bake plugin load the plugin on demand.
+When using the Twig templates make sure you are loading the ``WyriHaximus/TwigView`` plugin with its bootstrap.
+You can also omit it completely which then makes Bake plugin load this plugin on demand.
 
-For Plugin::loadAll() you must include `'WyriHaximus/TwigView' => ['bootstrap' => true]`.
+For ``Plugin::loadAll()`` you must include ``'WyriHaximus/TwigView' => ['bootstrap' => true]``.
 
 The following sections
 cover bake in more detail:
