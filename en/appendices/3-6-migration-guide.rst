@@ -45,6 +45,8 @@ features will continue to function until 4.0.0 after which they will be removed.
   directly instead. A global ``Cake\ORM\Locator\TableLocator`` instance can be 
   accessed via ``Cake\ORM\TableRegistry::getTableLocator()`` or using a
   ``Cake\ORM\Locator\LocatorAwareTrait``.
+* ``Cake\View\Helper\FormHelper::widgetRegistry()`` is deprecated. Use
+  ``getWidgetLocator()`` and ``setWidgetLocator()`` instead.
 
 Several classes were *renamed*. Their old names will continue to work until 4.0,
 but will emit deprecation warnings:
@@ -83,6 +85,8 @@ but will emit deprecation warnings:
 * ``Cake\Network\Session\CacheSession`` has been renamed to
   ``Cake\Http\Session\CacheSession``.
 * ``Cake\Network\CorsBuilder`` has been renamed to ``Cake\Http\CorsBuilder``.
+* ``Cake\View\Widget\WidgetRegistry`` has been renamed to
+  ``Cake\View\Widget\WidgetLocator``.
 
 Disabling Deprecation Warnings
 ==============================

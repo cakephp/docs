@@ -2762,10 +2762,11 @@ widgets using the ``addWidget()`` method would look like::
     );
 
     // Using an instance - requires you to resolve dependencies.
+    // Prior to 3.6.0 use widgetRegistry() to fetch widgets.
     $autocomplete = new AutocompleteWidget(
         $this->Form->getTemplater(),
-        $this->Form->widgetRegistry()->get('text'),
-        $this->Form->widgetRegistry()->get('label'),
+        $this->Form->getWidgetLocator()->get('text'),
+        $this->Form->getWidgetLocator()->get('label'),
     );
     $this->Form->addWidget('autocomplete', $autocomplete);
 
