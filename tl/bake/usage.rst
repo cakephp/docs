@@ -1,19 +1,19 @@
-Ang Paggenerate ng Code kasama ang Bake
+Code Generation with Bake
 #########################
 
-Ang cake na console ay pinapatakbo gamit ang PHP na CLI (command line interface).
-Kung may mga problema ka sa pagpapatakbo ng script, siguraduhin na:
+The cake console is run using the PHP CLI (command line interface).
+If you have problems running the script, ensure that:
 
-#. Mayroon kang naka-install na PHP CLI at mayroon itong wastong mga modyul na pinagana (eg: MySQL, intl).
-#. Ang mga gumagamit ay maaaring magkaroon ng mga isyu kung ang host ng database ay 'localhost' at dapat subukan ang '127.0.0.1' sa halip, dahil ang localhost ay maaaring maging sanhi ng mga isyu sa CLI ng PHP.
-#. Dependi kung paano naka-configure ang iyong computer, maaari mong itakda ang mga karapatan sa pag-execute sa script ng cake na bash upang tawagin ito gamit ang ``bin/cake bake``.
+#. You have the PHP CLI installed and that it has the proper modules enabled (eg: MySQL, intl).
+#. Users also might have issues if the database host is 'localhost' and should try '127.0.0.1' instead, as localhost can cause issues with PHP CLI.
+#. Depending on how your computer is configured, you may have to set execute rights on the cake bash script to call it using ``bin/cake bake``.
 
-Bago patakbuhin ang bake dapat mong tiyakin na mayroon kang hindi bababa sa isang database
-na koneksyon na naka-configure. Tingnan ang seksyon sa :ref:`database configuration
-<database-configuration>` para sa karagdagang impormasyon.
+Before running bake you should make sure you have at least one database
+connection configured. See the section on :ref:`database configuration
+<database-configuration>` for more information.
 
-Kapag pinatakbo na walang mga argumento ang ``bin/cake bake`` ay mag-output ng isang listahan ng magagamit na 
-mga gawain. Dapat mong makita ang isang bagay tulad ng::
+When run with no arguments ``bin/cake bake`` will output a list of available
+tasks. You should see something like::
 
     $ bin/cake bake
 
@@ -50,8 +50,8 @@ mga gawain. Dapat mong makita ang isang bagay tulad ng::
 
     By using `cake bake [name]` you can invoke a specific bake task.
 
-Makakakuha ka ng karagdagang impormasyon kung ano ang ginagawa ng bawat gawain, at kung anung mga opsyon ang 
-magagamit gamit ang ``--help`` option::
+You can get more information on what each task does, and what options are
+available using the ``--help`` option::
 
     $ bin/cake bake --help
 
@@ -115,11 +115,11 @@ magagamit gamit ang ``--help`` option::
                        Bake|Migrations)
     --verbose, -v      Enable verbose output.
 
-Mga Tema ng Bake
+Bake Themes
 ===========
 
-Ang opsyon ng tema ay pangkaraniwan sa lahat ng mga command ng bake, at nagpapahintulot sa pagbabago ng bake 
-na template na mga file na ginagamit sa pagbi-bake. Para lumikha ng iyong sariling mga templates, tingnan ang 
+The theme option is common to all bake commands, and allows changing the bake
+template files used when baking. To create your own templates, see the
 :ref:`bake theme creation documentation <creating-a-bake-theme>`.
 
 .. meta::
