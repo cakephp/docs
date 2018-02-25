@@ -1,14 +1,14 @@
 .. _upgrade-shell:
 
-Upgrade Shell
+Ang Upgrade na Shell
 #############
 
-The upgrade shell will do most of the work to upgrade your CakePHP application
-from 2.x to 3.x.
+Ang upgrade na shell ay gagawin ang karamihan na trabaho upang i-upgrade ang iyong CakePHP na aplikasyon
+mula sa 2.x hanggang 3.x.
 
-It is provided by a standalone
-`Upgrade plugin <https://github.com/cakephp/upgrade>`_. Please read the README
-file to get all information on how to upgrade your application.
+Ito ay ibinibigay ng isang standalone
+`Upgrade plugin <https://github.com/cakephp/upgrade>`_. Mangyaring basahin ang README
+na file upang makuha ang lahat ng impormasyon kung paano i-upgrade ang iyong aplikasyon.
 
 .. meta::
     :title lang=en: Upgrade Shell
