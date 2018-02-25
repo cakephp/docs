@@ -54,11 +54,11 @@ Anumang path na naglalaman ng isang segment ng path na may ibinigay na mga halag
 
     bin/cake i18n extract --exclude Test,Vendor
 
-Pag-skip ng mga Babala ng pag-overwrite para sa Umiiral na mga File ng POT
+Paglaktaw sa mga Pag-Overwrite na Babala para sa Umiiral na POT na mga File
 --------------------------------------------------
 
 Sa pagdaragdag ng ``--overwrite``, ang script ng shell ay hindi ka na babalaan kung ang file ng POT 
-ay umiiral na at i-overwrite bilang default::
+ay umiiral na at mag-overwrite bilang default::
 
     bin/cake i18n extract --overwrite
 
@@ -67,7 +67,7 @@ Pag-extract ng mga Mensahe mula sa Core na mga Library ng CakePHP
 
 Bilang default, ang shell na script ng pag-extract ay tatanungin ka kung gusto mong i-extract 
 ang mga mensahe na ginamit sa core na mga library ng CakePHP. I-set ang ``--extract-core`` sa oo 
-o hindi upang i-set ang default na pag-uugali::
+o hindi upang itakda ang default na gawi::
 
     bin/cake i18n extract --extract-core yes
 

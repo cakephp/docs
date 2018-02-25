@@ -1,8 +1,8 @@
 Pagkumpleto ng Shell
 ################
 
-Ang paggawa sa console ay nagbibigay sa developer ng maraming mga posibilidad ngunit ang pagkakaroon na
-upang lubos na malaman at maisulat ang mga utos na iyon ay maaaring nakakapagod. Lalo na kapag 
+Ang paggawa sa console ay nagbibigay sa developer ng maraming mga posibilidad ngunit 
+para lubosang malaman at maisulat ang mga utos na iyon ay maaaring nakakapagod. Lalo na kapag 
 nagbubuo ng mga bagong shell kung saan ang mga utos ay naiiba sa bawat minuto ng pag-uulit. Ang 
 Pagkumpleto ng mga Shell ay tumutulong sa bagay na ito sa pamamagitan ng pagbibigay ng isang API upang magsulat ng kumpletong 
 mga script para sa mga shell tulad ng bash, zsh, fish atbp.
@@ -14,7 +14,7 @@ Ang Pagkumpleto ng Shell ay binubuo ng isang bilang ng mga sub na utos upang tul
 developer na lumikha ng kumpletong script. Bawat isa para sa ibang hakbang sa 
 autocompletion na proseso.
 
-Mga Command
+Mga Utos
 --------
 
 Para sa unang hakbang ng mga utos ay nag-output ng magagamit na mga Utos ng Shell, kasama ang 
@@ -33,7 +33,7 @@ magpagtuloy. (Para dito at sa sumusunod na mga sub na utos.)
 mga subCommand
 -----------
 
-Kapang ang preferred na utos ay napili na ang mga subCommand dadating bilang ang pangalawang 
+Kapag ang nagustuhang utos ay napili na, ang mga subCommand ay papasok bilang pangalawang 
 hakbang at i-output ang posibleng sub na utos para sa ibinigay na utos ng shell. 
 Halimbawa::
 
@@ -46,7 +46,7 @@ Ibabalik::
 mga opsyon
 -------
 
-Habang ang pangatlo at pangwakas ay mag-output ng mga opsyon para sa ibinigay na (sub) utos bilang
+Habang ang pangatlo at pangwakas na mga opsyon ay nag-output ng mga pagpipilian para sa ibinigay na (sub) utos bilang
 na-set sa getOptionParser. (Kabilang ang default na mga opsyon na na-inherit mula sa Shell.)
 Halimbawa::
 
@@ -67,7 +67,7 @@ kasama ang sumusunod na utos::
 
     apt-get install bash-completion
 
-Lumikha ng file na pinangalanang **cake** in **/etc/bash_completion.d/** at ilagay ang 
+Lumikha ng file na pinangalanang **cake** sa **/etc/bash_completion.d/** at ilagay ang 
 :ref:`bash-completion-file-content` sa loob nito.
 
 I-save ang file, pagkatapas ay i-restart ang iyong console.
