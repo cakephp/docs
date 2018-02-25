@@ -149,11 +149,12 @@ AJAX-запросов. Для более подробной информации
         ];
     }
 
-Any configuration provided to your helper's constructor will be merged with the
-default values during construction and the merged data will be set to
-``_config``. You can use the ``config()`` method to read runtime configuration::
+Любые настройки, предоставленные конструктору вашего хелпера, будут объеденены
+со значениями по умолчанию, и получившиеся в результате объединения данные
+будут записаны в ``_config``. Вы можете использовать метод ``config()`` для
+чтения настроек во время работы приложения::
 
-    // Read the errorClass config option.
+    // Чтение параметра конфигурации errorClass.
     $class = $this->Awesome->config('errorClass');
 
 Using helper configuration allows you to declaratively configure your helpers and
