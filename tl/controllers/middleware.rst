@@ -1,35 +1,35 @@
-Middleware
+Ang Middleware
 ##########
 
-Middleware objects give you the ability to 'wrap' your application in re-usable,
-composable layers of Request handling, or response building logic. Visually,
-your application ends up at the center, and middleware is wrapped aroud the app
-like an onion. Here we can see an application wrapped with Routes, Assets,
-Exception Handling and CORS header middleware.
+Ang Middleware na mga bagay ay nagbibigay sayo ng abilidad sa 'wrap' ng iyong aplikasyon sa magagamit muli,
+composable na mga layer sa Hiling na paghahawak, o sagot sa building na logic. Biswal,
+ang iyong aplikasyon ay nagtatapos sa gitna, at ang middleware ay is naka-wrap sa app
+na tulad ng sibuyas. Dito tayo ay maaaring makakita ng isang aplikasyon na naka-wrap na may mga Route, mga Asset,
+Exception Handling at CORS header middleware.
 
 .. image:: /_static/img/middleware-setup.png
 
-When a request is handled by your application it enters from the outermost
-middleware. Each middleware can either delegate the request/response to the next
-layer, or return a response. Returning a response prevents lower layers from
-ever seeing the request. An example of that is the AssetMiddleware handling
-a request for a plugin image during development.
+Kapag ang hiling ay hinahawakan ng iyong aplikasyon ito ay pumapasok mula sa pinakalabas
+na middleware. Bawat middleware ay maaring alinman ay makadelegado ng hiling/sagot sa susunod na
+layer, o bumalik ng sagot. Ang bumabalik na sagot ay pinipigilan ang ibabang mga layer mula
+sa kailanmang nakikita na hiling. Isang halimbawa sa isang AssetMiddleware na paghahawak
+ay ihiling para sa isang plugin na imahe sa panahon sa development.
 
 .. image:: /_static/img/middleware-request.png
 
-If no middleware take action to handle the request, a controller will be located
-and have its action invoked, or an exception will be raised generating an error
-page.
+Kung walang middleware ay gumawa ng aksyon upang hawakan ang hiling, isang controller ay matatagpuan
+at magkaroon ng pagkilos nito, o isang exception ay itataas sa pagbubuo ng mga maling
+pahina.
 
-Middleware are part of the new HTTP stack in CakePHP that leverages the PSR-7
-request and response interfaces. Because CakePHP is leveraging the PSR-7
-standard you can use any PSR-7 compatible middleware available on `The Packagist
+Ang middleware ay parte sa bagong HTTP stack sa CakePHP na pinakikinabangan ang PSR-7
+hiling at tugon na mga interface. Dahil ang CakePHP ay isang pinakikinabangan ang PSR-7
+na pamantayan ay maaari mong gamitin ang alinman sa PSR-7 na magkasundo na magagamit sa `The Packagist
 <https://packagist.org>`__.
 
-Middleware in CakePHP
+Ang Middleware sa CakePHP
 =====================
 
-CakePHP provides several middleware to handle common tasks in web applications:
+Ang CakePHP ay nagbibigay ng ilang mga middleware para i-handle ang komon na mga gawain sa web na mga aplikasyon:
 
 * ``Cake\Error\Middleware\ErrorHandlerMiddleware`` traps exceptions from the
   wrapped middleware and renders an error page using the
