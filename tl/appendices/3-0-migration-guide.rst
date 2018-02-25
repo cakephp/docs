@@ -1,57 +1,60 @@
-3.0 Migration Guide
-###################
+3.0 Gabay sa Paglipat
+#####################
 
-This page summarizes the changes from CakePHP 2.x that will assist in migrating
-a project to 3.0, as well as a reference to get up to date with the changes made
-to the core since the CakePHP 2.x branch. Be sure to read the other pages in
-this guide for all the new features and API changes.
+Ang pahinang ito ay nagbubuod sa mga pagbabago mula sa CakePHP 2.x na tutulong sa paglipat
+ng isang proyekto patungo sa 3.0, pati na rin ang isang reperensya upang maging napapanahon
+sa mga pagbabagong nagawa sa core mula sa CakePHP 2.x na branch. Siguraduhing basahin ang
+ibang mga pahina sa gabay na ito para sa lahat ng bagong mga tampok at mga pagbabago ng API.
 
-Requirements
-============
-
-- CakePHP 3.x supports PHP Version 5.4.16 and above.
-- CakePHP 3.x requires the mbstring extension.
-- CakePHP 3.x requires the intl extension.
-
-.. warning::
-
-    CakePHP 3.0 will not work if you do not meet the above requirements.
-
-Upgrade Tool
-============
-
-While this document covers all the breaking changes and improvements made in
-CakePHP 3.0, we've also created a console application to help you complete some
-of the time consuming mechanical changes. You can `get the upgrade tool from
-github <https://github.com/cakephp/upgrade>`_.
-
-Application Directory Layout
-============================
-
-The application directory layout has changed and now follows
-`PSR-4 <http://www.php-fig.org/psr/psr-4/>`_. You should use the
-`app skeleton <https://github.com/cakephp/app>`_ project as a reference point
-when updating your application.
-
-CakePHP should be installed with Composer
-=========================================
-
-Since CakePHP can no longer be installed via PEAR, or in a shared
-directory, those options are no longer supported. Instead you should use
-`Composer <http://getcomposer.org>`_ to install CakePHP into your application.
-
-Namespaces
-==========
-
-All of CakePHP's core classes are now namespaced and follow PSR-4 autoloading
-specifications. For example **src/Cache/Cache.php** is namespaced as
-``Cake\Cache\Cache``.  Global constants and helper methods like :php:meth:`__()`
-and :php:meth:`debug()` are not namespaced for convenience sake.
-
-Removed Constants
+Mga Kinakailangan
 =================
 
-The following deprecated constants have been removed:
+- Ang CakePHP 3.x  ay sumusuporta sa PHP Bersyon 5.4.16 at pataas.
+- Ang CakePHP 3.x ay nangangailangan ng mbstring na ekstensiyon.
+- Ang CakePHP 3.x ay nangangailangan ng intl na ekstensiyon.
+
+.. babala::
+
+	Ang CakePHP 3.0 ay hindi gagana kung hindi mo nakamit ang mga kinakailangan sa itaas.
+
+Upgrade na Kasangkapan
+======================
+
+Habang ang dokumentong ito ay tumatalakay sa lahat ng nakakasirang mga pagbabago at
+mga pagpapabuti na ginawa sa CakePHP 3.0, kami ay nakalikha rin ng isang console na
+aplikasyon upang tumulong sa iyo na kumpletuhin ang ilang nakakaubos ng oras na mekanikal
+na mga pagbabago. Maaari kang `kumuha sa pang-upgrade na kasangkapan mula sa 
+github <https://github.com/cakephp/upgrade>`_.
+
+Layout ng Aplikasyon na Direktoryo
+==================================
+
+Ang layout ng aplikasyon na direktoryo ay nabago at ngayon ay sumusunod sa
+`PSR-4 <http://www.php-fig.org/psr/psr-4/>`_. Dapat mong gamitin ang 
+`app skeleton <https://github.com/cakephp/app>`_ na proyekto bilang isang 
+punto ng reperensya kapag nag-a-update ng iyong aplikasyon.
+
+Ang CakePHP ay dapat naka-install gamit ang Composer
+====================================================
+
+Dahil ang CakePHP ay hindi na nai-install gamit ang PEAR, o sa isang nakabahaging
+direktoryo, ang mga opsyon na iyon ay hindi na suportado. Sa halip dapat mong 
+gamitin ang `Composer <http://getcomposer.org>`_ upang i-install ang CakePHP sa
+iyong aplikasyon.
+
+Mga Namespace
+=============
+
+Lahat ng core na mga class ng CakePHP ay naka-namespace na ngayon ay sumusunod sa
+PSR-4 autoloading na mga espesipikasyon. Halimbawa ang **src/Cache/Cache.php** ay
+naka-namespace bilang ``Cake\Cache\Cache``. Ang global na mga constant at katulong na
+mga paraan katulad ng :php:meth:`__()` at :php:meth:`debug()` ay hindi naka-namespace 
+para sa kaginhawahan.
+
+Tinggal ang mga Constant
+========================
+
+Ang sumusunod na hindi na ginagamit na mga constant ay tinanggal:
 
 * ``IMAGES``
 * ``CSS``
@@ -61,80 +64,88 @@ The following deprecated constants have been removed:
 * ``CSS_URL``
 * ``DEFAULT_LANGUAGE``
 
-Configuration
+Kumpigurasyon
 =============
 
-Configuration in CakePHP 3.0 is significantly different than in previous
-versions. You should read the :doc:`/development/configuration` documentation
-for how configuration is done in 3.0.
+Ang kumpigurasyon sa CakePHP 3.0 ay makabuluhang magkaiba kaysa sa nakaraang
+mga bersyon. Dapat mong basahin ang :doc:`/development/configuration` na dokumentasyon
+kung paano ginagawa ang kumpigurasyon sa 3.0.
 
-You can no longer use ``App::build()`` to configure additional class paths.
-Instead you should map additional paths using your application's autoloader. See
-the section on :ref:`additional-class-paths` for more information.
+Hindi mo na magagamit ang ``App::build()`` upang i-configure ang karagdagang mga landas
+ng class. Sa halip dapat mong imapa ang karagdagang mga landas gamit ang autoloader
+ng iyong aplikasyon. Tingnan ang seksyon sa :ref:`additional-class-paths` para sa
+higit pang impormasyon.
 
-Three new configure variables provide the path configuration for plugins,
-views and locale files. You can add multiple paths to ``App.paths.templates``,
-``App.paths.plugins``, ``App.paths.locales`` to configure multiple paths for
-templates, plugins and locale files respectively.
+Ang tatlong bagong configure na mga variable ay nagbibigay ng path na kumpigurasyon
+para sa mga plugin, mga view at lokal na mga file. Maaari kang magdagdag ng maramihang
+mga landas sa ``App.paths.templates``, ``App.paths.plugins``, ``App.paths.locales`` upang
+i-configure ang maramihang mga landas para sa mga template, mga plugin at lokal na mga
+file ayon sa pagkakabanggit.
 
-The config key ``www_root`` has been changed to ``wwwRoot`` for consistency. Please adjust
-your **app.php** config file as well as any usage of ``Configure::read('App.wwwRoot')``.
+Ang config key na ``www_root`` ay nabago sa ``wwwRoot`` para sa pagkakaalinsunod. Mangyaring
+ayusin ang iyong **app.php** config na file pati na rin sa anumang paggamit ng 
+``Configure::read('App.wwwRoot')``.
 
-New ORM
-=======
+Bagong ORM
+==========
 
-CakePHP 3.0 features a new ORM that has been re-built from the ground up. The
-new ORM is significantly different and incompatible with the previous one.
-Upgrading to the new ORM will require extensive changes in any application that
-is being upgraded. See the new :doc:`/orm` documentation for information on how
-to use the new ORM.
+Ang CakePHP 3.0 ay nagtatampok ng isang bagong ORM na na-built muli mula sa panimula paitaas.
+Ang bagong ORM ay makabuluhang magkaiba at hindi tumutugma sa nakaraan.
+Ang pag-upgrade sa isang bagong ORM ay nangangailangan ng malawakang pagbabago sa anumang
+aplikasyon na ina-upgrade. Tingnan ang bagong :doc:`/orm` na dokumentasyon para sa
+impormasyon kung paano gamitin ang bagong ORM.
 
-Basics
+Mga Batayan
 ======
 
-* ``LogError()`` was removed, it provided no benefit and is rarely/never used.
-* The following global functions have been removed: ``config()``, ``cache()``,
+* Ang ``LogError()`` ay tinanggal, ito ay walang benepisyong binibigay at bihira/hindi
+  kailanman ginamit
+* Ang sumusunod na global na mga function ay tinangal: ``config()``, ``cache()``,
   ``clearCache()``, ``convertSlashes()``, ``am()``, ``fileExistsInPath()``,
   ``sortByKey()``.
 
-Debugging
+Pag-debug
 =========
 
-* ``Configure::write('debug', $bool)`` does not support 0/1/2 anymore. A simple boolean
-  is used instead to switch debug mode on or off.
+* ``Configure::write('debug', $bool)`` ay hindi na sumusuporta sa 0/1/2. Isang simpleng
+  boolean ay ginamit sa halip upang magpalit ng debug mode sa on o off.
 
-Object settings/configuration
-=============================
+Object na mga setting/kumpigurasyon
+===================================
 
-* Objects used in CakePHP now have a consistent instance-configuration storage/retrieval
-  system. Code which previously accessed for example: ``$object->settings`` should instead
-  be updated to use ``$object->config()``.
+* Ang mga object na ginagamit sa CakePHP ngayon ay may isang magkaalinsunod na 
+  instance-configuration na storage/retrieval na sistema. Ang code na na-access dati sa
+  halimbawa: Ang ``$object->settings`` ay dapat sa halip ma-update upang magamit ang
+  ``$object->config()``.
 
 Cache
 =====
 
-* ``Memcache`` engine has been removed, use :php:class:`Cake\\Cache\\Cache\\Engine\\Memcached` instead.
-* Cache engines are now lazy loaded upon first use.
-* :php:meth:`Cake\\Cache\\Cache::engine()` has been added.
-* :php:meth:`Cake\\Cache\\Cache::enabled()` has been added. This replaced the
-  ``Cache.disable`` configure option.
-* :php:meth:`Cake\\Cache\\Cache::enable()` has been added.
-* :php:meth:`Cake\\Cache\\Cache::disable()` has been added.
-* Cache configurations are now immutable. If you need to change configuration
-  you must first drop the configuration and then re-create it. This prevents
-  synchronization issues with configuration options.
-* ``Cache::set()`` has been removed. It is recommended that you create multiple
-  cache configurations to replace runtime configuration tweaks previously
-  possible with ``Cache::set()``.
-* All ``CacheEngine`` subclasses now implement a ``config()`` method.
-* :php:meth:`Cake\\Cache\\Cache::readMany()`, :php:meth:`Cake\\Cache\\Cache::deleteMany()`,
-  and :php:meth:`Cake\\Cache\\Cache::writeMany()` were added.
+* Ang ``Memcache`` engine ay tinanggal, sa halip ay gumamit ng  :php:class:`Cake\\Cache\\Cache\\Engine\\Memcached`.
+* Ang mga cache engine ay naka-lazy load na ngayon sa unang paggamit.
+* Ang :php:meth:`Cake\\Cache\\Cache::engine()` ay naidagdag.
+* Ang :php:meth:`Cake\\Cache\\Cache::enabled()` ay naidagdag. Pinalitan nito ang
+  ``Cache.disable`` configure na opsyon.
+* Ang :php:meth:`Cake\\Cache\\Cache::enable()` ay naidagdag.
+* Ang :php:meth:`Cake\\Cache\\Cache::disable()` ay naidagdag.
+* Ang cache na mga kumpigurasyon ay hindi na pwedeng baguhin ngayon. Kung kailangan
+  mong baguhin ang kumpigurasyon dapat mong unang i-drop ang kumpigurasyon at
+  pagkatapos ay likhain muli ito. Iniiwasan nito ang sinkronisasyon na mga isyu
+  sa kumpigurasyon na mga opsyon.
+* Ang ``Cache::set()`` ay tinanggal. Inirekomenda na gumawa ka ng maramihang 
+  cache na mga kumpigurasyon upang palitan ang runtime na kumpigurasyon na mga tweak sa
+  nakaraan na posible gamit ang ``Cache::set()``.
+* Ang lahat ng ``CacheEngine`` na mga subclass ngayon ay nagpapatupad ng isang ``config()``
+  na paraan.
+* Ang :php:meth:`Cake\\Cache\\Cache::readMany()`, :php:meth:`Cake\\Cache\\Cache::deleteMany()`,
+  at :php:meth:`Cake\\Cache\\Cache::writeMany()` ay naidagdag.
 
-All :php:class:`Cake\\Cache\\Cache\\CacheEngine` methods now honor/are responsible for handling the
-configured key prefix. The :php:meth:`Cake\\Cache\\CacheEngine::write()` no longer permits setting
-the duration on write - the duration is taken from the cache engine's runtime config. Calling a
-cache method with an empty key will now throw an :php:class:`InvalidArgumentException`, instead
-of returning ``false``.
+Ang lahat ng :php:class:`Cake\\Cache\\Cache\\CacheEngine` na mga paraan ngayon ay pumaparangal/
+responsable sa pag-aasikaso ng na-configure na key prefix. Ang :php:meth:`Cake\\Cache\\CacheEngine::write()` 
+ay hindi na pumapahintulot sa pagtatakda ng tagal sa pagsulat - ang tagal ay kinuha mula sa runtime
+config ng cache engine. Ang pagtawag ng isang cache na paraan gamit ang isang walang laman na key
+ay hindi na maghahagis ng isang :php:class:`InvalidArgumentException`, sa halip ng pagsasauli ng 
+``false``.
 
 Core
 ====
@@ -142,118 +153,122 @@ Core
 App
 ---
 
-- ``App::pluginPath()`` has been removed. Use ``CakePlugin::path()`` instead.
-- ``App::build()`` has been removed.
-- ``App::location()`` has been removed.
-- ``App::paths()`` has been removed.
-- ``App::load()`` has been removed.
-- ``App::objects()`` has been removed.
-- ``App::RESET`` has been removed.
-- ``App::APPEND`` has been removed.
-- ``App::PREPEND`` has been removed.
-- ``App::REGISTER`` has been removed.
+- Ang ``App::pluginPath()`` ay itinanggal. Sa halip ay gumamit ng ``CakePlugin::path()``.
+- Ang ``App::build()`` ay itinanggal.
+- Ang ``App::location()`` ay itinanggal.
+- Ang ``App::paths()`` ay itinanggal.
+- Ang ``App::load()`` ay itinanggal.
+- Ang ``App::objects()`` ay itinanggal.
+- Ang ``App::RESET`` ay itinanggal.
+- Ang ``App::APPEND`` ay itinanggal.
+- Ang ``App::PREPEND`` ay itinanggal.
+- Ang ``App::REGISTER`` ay itinanggal.
 
 Plugin
 ------
 
-- :php:meth:`Cake\\Core\\Plugin::load()` does not setup an autoloader unless
-  you set the ``autoload`` option to ``true``.
-- When loading plugins you can no longer provide a callable.
-- When loading plugins you can no longer provide an array of config files to
-  load.
+- Ang :php:meth:`Cake\\Core\\Plugin::load()` ay hindi nagsi-setup ng autoloader
+  maliban kung itatakda mo ang ``autoload`` na opsyon sa ``true``.
+- Kapag naglo-load ng mga plugin hindi ka na maaaring magbigay ng isang callable.
+- Kapag naglo-load ng mga plugin hindi ka na maaaring magbigay ng isang array
+  ng config na mga file upang i-load.
 
 Configure
 ---------
 
-- ``Cake\Configure\PhpReader`` renamed to
+- Ang ``Cake\Configure\PhpReader`` ay pinalitan ang pangalan sa 
   :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig`
-- ``Cake\Configure\IniReader`` renamed to
+- Ang ``Cake\Configure\IniReader`` ay pinalitan ang pangalan sa 
   :php:class:`Cake\\Core\\Configure\\Engine\IniConfig`
-- ``Cake\Configure\ConfigReaderInterface`` renamed to
+- Ang ``Cake\Configure\ConfigReaderInterface`` ay pinalitan ang pangalan sa 
   :php:class:`Cake\\Core\\Configure\\ConfigEngineInterface`
-- :php:meth:`Cake\\Core\\Configure::consume()` was added.
-- :php:meth:`Cake\\Core\\Configure::load()` now expects the file name without
-  extension suffix as this can be derived from the engine. E.g. using PhpConfig
-  use ``app`` to load **app.php**.
-- Setting a ``$config`` variable in PHP config file is deprecated.
-  :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig` now expects the config
-  file to return an array.
-- A new config engine :php:class:`Cake\\Core\\Configure\\Engine\JsonConfig` has
-  been added.
+- Ang :php:meth:`Cake\\Core\\Configure::consume()` ay idinagdag.
+- Ang :php:meth:`Cake\\Core\\Configure::load()` ngayon ay umaasa sa pangalan
+  ng file na walang ekstensyon na suffix dahil ito ay maaaring makuha mula sa 
+  engine. E.g. ang paggamit ng PhpConfig gamit ang ``app`` upang i-load ang 
+  **app.php**.
+- Ang pagtakda ng isang ``$config`` na variable sa PHP config na file ay
+  hindi na magagamit. Ang :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig` 
+  ngayon ay umaasa ng config file na magsasauli ng isang array.
+- Isang bagong config engine na :php:class:`Cake\\Core\\Configure\\Engine\JsonConfig`
+  ay naidagdag.
 
 Object
 ------
 
-The ``Object`` class has been removed. It formerly contained a grab bag of
-methods that were used in various places across the framework. The most useful
-of these methods have been extracted into traits. You can use the
-:php:trait:`Cake\\Log\\LogTrait` to access the ``log()`` method. The
-:php:trait:`Cake\\Routing\\RequestActionTrait` provides ``requestAction()``.
+Ang ``Object`` na class ay itinanggal. Ito dati ay naglalaman ng maraming iba't ibang
+mga paraan na ginamit sa magkaibang mga lugar sa kabuuan ng balangkas. Ang pinaka 
+kapaki-pakinabang sa lahat ng mga paraang ito ay nakuha sa mga katangian. Maaari
+mong gamitin ang :php:trait:`Cake\\Log\\LogTrait` upang ma-access ang ``log()``
+na paraan. Ang :php:trait:`Cake\\Routing\\RequestActionTrait` ay nagbibigay ng 
+``requestAction()``.
 
 Console
 =======
 
-The ``cake`` executable has been moved from the **app/Console** directory to the
-**bin** directory within the application skeleton. You can now invoke CakePHP's
-console with ``bin/cake``.
+Ang ``cake`` na executable ay inilipat mula sa **app/Console** na direktoryo tungo sa
+**bin** na direktoryo sa loob ng balangkas ng aplikasyon. Maaari mo na ngayong tumawag 
+ng console ng CakePHP gamit ang ``bin/cake``.
 
-TaskCollection Replaced
------------------------
+Ang TaskCollection ay Napalitan
+-------------------------------
 
-This class has been renamed to :php:class:`Cake\\Console\\TaskRegistry`.
-See the section on :doc:`/core-libraries/registry-objects` for more information
-on the features provided by the new class. You can use the ``cake upgrade
-rename_collections`` to assist in upgrading your code. Tasks no longer have
-access to callbacks, as there were never any callbacks to use.
+Ang class na ito ay napalitan ng pangalan sa :php:class:`Cake\\Console\\TaskRegistry`.
+Tingnan ang seksyon sa :doc:`/core-libraries/registry-objects` para sa higit pang
+impormasyon sa mga tampok na ibinigay gamit ang bagong class. Maaari mong gamitin ang 
+``cake upgrade rename_collections`` upang makatulong sa pag-upgrade ng iyong code. 
+Ang mga task ay wala nang access sa mga callback, dahil walang anumang mga callback 
+na magagamit.
 
 Shell
 -----
 
-- ``Shell::__construct()`` has changed. It now takes an instance of
+- Ang ``Shell::__construct()`` ay nabago. Ito ngayon ay kumukuha ng isang instance ng
   :php:class:`Cake\\Console\\ConsoleIo`.
-- ``Shell::param()`` has been added as convenience access to the params.
+- Ang ``Shell::param()`` ay naidagdag bilang kaginhawaan na access sa mga param.
 
-Additionally all shell methods will be transformed to camel case when invoked.
-For example, if you had a ``hello_world()`` method inside a shell and invoked it
-with ``bin/cake my_shell hello_world``, you will need to rename the method
-to ``helloWorld``. There are no changes required in the way you invoke commands.
+Bukod pa rito ang lahat ng shell na mga paraan ay mababago sa camel case kapag tinawag.
+Halimbawa, kung mayroon kang isang ``hello_world()`` na paraan sa loob ng isang shell at 
+tinawag ito gamit ang ``bin/cake my_shell hello_world``, kakailanganin mong palitan 
+ang pangalan ng paraan sa ``helloWorld``. Walang mga pagbabagong kailangan sa paraan 
+ng pagtawag mo sa mga utos.
 
 ConsoleOptionParser
 -------------------
 
-- ``ConsoleOptionParser::merge()`` has been added to merge parsers.
+- Ang ``ConsoleOptionParser::merge()`` ay naidagdag sa merge na mga parser.
 
 ConsoleInputArgument
 --------------------
 
-- ``ConsoleInputArgument::isEqualTo()`` has been added to compare two arguments.
+- Ang ``ConsoleInputArgument::isEqualTo()`` ay naidagdag upang maghambing ng dalawang mga argumento.
 
 Shell / Task
 ============
 
-Shells and Tasks have been moved from ``Console/Command`` and
-``Console/Command/Task`` to ``Shell`` and ``Shell/Task``.
+Ang mga Shell at mga Task ay nailipat mula sa ``Console/Command`` at
+``Console/Command/Task`` tungo sa ``Shell`` at ``Shell/Task``.
 
-ApiShell Removed
-----------------
+Ang ApiShell ay Itinanggal
+--------------------------
 
-The ApiShell was removed as it didn't provide any benefit over the file source
-itself and the online documentation/`API <https://api.cakephp.org/>`_.
+Ang ApiShell ay itinanggal dahil ito ay hindi nagbigay ng anumang pakinabang sa file source
+at ang online na dokumentasyon/`API <https://api.cakephp.org/>`_.
 
-SchemaShell Removed
--------------------
+Ang SchemaShell ay Itinanggal
+-----------------------------
 
-The SchemaShell was removed as it was never a complete database migration implementation
-and better tools such as `Phinx <https://phinx.org/>`_ have emerged. It has been replaced by
-the `CakePHP Migrations Plugin <https://github.com/cakephp/migrations>`_ which acts as a wrapper between
-CakePHP and `Phinx <https://phinx.org/>`_.
+Ang SchemaShell ay itinanggal dahil hindi ito kailanman isang kumpletong implementasyon ng database
+migration at mas mabuting mga kasangkapan katulad ng `Phinx <https://phinx.org/>`_ ay lumitaw.
+Ito ay napalitan ng `CakePHP Migrations Plugin <https://github.com/cakephp/migrations>`_ 
+na kumikilos bilang isang wrapper sa pagitan ng CakePHP at `Phinx <https://phinx.org/>`_.
 
 ExtractTask
 -----------
 
-- ``bin/cake i18n extract`` no longer includes untranslated validation
-  messages. If you want translated validation messages you should wrap those
-  messages in `__()` calls like any other content.
+- Ang ``bin/cake i18n extract`` ay hindi na nagsasama ng hindi isinalin na pagpapatunay
+  na mga mensahe. Kung gusto mo ng nakasalin na pagpapatunay na mga mensahe dapat mong ibalot
+  ang mga mensaheng iyon sa `__()` na mga pagtawag katulad ng anumang ibang nilalaman.
 
 BakeShell / TemplateTask
 ------------------------
