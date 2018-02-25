@@ -1,11 +1,11 @@
-Shell Helpers
+Mga Helper ng Shell
 #############
 
 .. versionadded:: 3.1
     Shell Helpers were added in 3.1.0
 
-Shell Helpers let you package up complex output generation code. Shell
-Helpers can be accessed and used from any shell or task::
+Ang mga Helper ng Shell ay hinahayaan kang i-package ang kumplikadong output ng generation na code. Ang 
+mga Helper ng Shell ay maaaring ma-access at magamit mula sa anumang shell o gawain::
 
     // Output some data as a table.
     $this->helper('Table')->output($data);
@@ -13,20 +13,20 @@ Helpers can be accessed and used from any shell or task::
     // Get a helper from a plugin.
     $this->helper('Plugin.HelperName')->output($data);
 
-You can also get instances of helpers and call any public methods on them::
+Maaari ka ring makakuha ng mga instance ng mga helper at tawagin ang anumang publikong mga paraan sa mga ito::
 
     // Get and use the Progress Helper.
     $progress = $this->helper('Progress');
     $progress->increment(10);
     $progress->draw();
 
-Creating Helpers
+Paglikha ng mga Helper
 ================
 
-While CakePHP comes with a few shell helpers you can create more in your
-application or plugins. As an example, we'll create a simple helper to generate
-fancy headings. First create the **src/Shell/Helper/HeadingHelper.php** and put
-the following in it::
+Habang ang CakePHP ay may ilang mga helper ng shell maaari kang lumikha ng higit pa sa iyong 
+aplikasyon o mga plugin. Bilang isang halimbawa, tayo ay lilikha ng isang simpleng helper para makabuo 
+ng mga magarbong heading. Una ilikha ang **src/Shell/Helper/HeadingHelper.php** at ilagay 
+ang sumusunod sa loob nito::
 
     <?php
     namespace App\Shell\Helper;
@@ -43,7 +43,7 @@ the following in it::
         }
     }
 
-We can then use this new helper in one of our shell commands by calling it::
+Maari nating gamitin ang bagong helper na ito sa isa sa ating mga command ng shell sa pamamagitan ng pagtawag nito::
 
     // With ### on either side
     $this->helper('Heading')->output(['It works!']);
@@ -51,18 +51,18 @@ We can then use this new helper in one of our shell commands by calling it::
     // With ~~~~ on either side
     $this->helper('Heading')->output(['It works!', '~', 4]);
 
-Helpers generally implement the ``output()`` method which takes an array of
-parameters. However, because Console Helpers are vanilla classes they can
-implement additional methods that take any form of arguments.
+Ang mga Helper sa pangkalahatan ay ipapatupad ang ``output()`` na paraan na kukuha ng isang array ng 
+mga parameter. Gayunpaman, dahil ang mga Helper ng Console ay mga class ng vanilla magagawa nilang 
+ipatupad ang mga karagdagang paraan na kukuha ng anumang form ng mga argumento.
 
-Built-In Helpers
+Mga Helper na Built-In
 ================
 
-Table Helper
+Helper ng Table
 ------------
 
-The TableHelper assists in making well formatted ASCII art tables. Using it is
-pretty simple::
+Ang TableHelper ay tumutulong sa paggawa ng mahusay na format ng ASCII na mga table ng sining. Ang paggamit nito ay 
+simple lang::
 
         $data = [
             ['Header 1', 'Header', 'Long Header'],
@@ -79,11 +79,11 @@ pretty simple::
         | Longer thing | short         | Longest Value |
         +--------------+---------------+---------------+
 
-Progress Helper
+Helper ng Pag-unlad
 ---------------
 
-The ProgressHelper can be used in two different ways. The simple mode lets you
-provide a callback that is invoked until the progress is complete::
+Ang ProgressHelper ay maaaring gamitin sa dalawang magkaibang paraan. Ang simple na mode ay hinahayaan kang 
+magbigay ng isang callback nai-invoke hanggang makumpleto ang pag-unlad::
 
     $this->helper('Progress')->output(['callback' => function ($progress) {
         // Do work here.
@@ -91,15 +91,15 @@ provide a callback that is invoked until the progress is complete::
         $progress->draw();
     }]);
 
-You can control the progress bar more by providing additional options:
+Maaari mong kontrolin ang progress bar nang higit pa sa pamamagitan ng pagbigay na mga karagdagang opsyon:
 
-- ``total`` The total number of items in the progress bar. Defaults
-  to 100.
-- ``width`` The width of the progress bar. Defaults to 80.
-- ``callback`` The callback that will be called in a loop to advance the
+- ``total`` Ang kabuuang bilang ng mga item sa progress bar. Ang default ay
+  100.
+- ``width`` Ang lawak ng progress bar. Ang default ay 80.
+- ``callback`` Ang callback na tatawagan sa isang loop upang i-advance ang 
   progress bar.
 
-An example of all the options in use would be::
+Ang isang halimbawa ng lahat ng mga opsyon na ginagamit ay magiging::
 
     $this->helper('Progress')->output([
         'total' => 10,
@@ -110,8 +110,8 @@ An example of all the options in use would be::
         }
     ]);
 
-The progress helper can also be used manually to increment and re-render the
-progress bar as necessary::
+Ang helper ng pag-unlad ay maaari ring gamitin ng manu-mano upang dagdagan at muling i-render ang 
+progress bar kung kinakailangan::
 
     $progress = $this->helper('Progress');
     $progress->init([
