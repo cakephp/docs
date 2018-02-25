@@ -31,23 +31,23 @@ Ang Middleware sa CakePHP
 
 Ang CakePHP ay nagbibigay ng ilang mga middleware para i-handle ang komon na mga gawain sa web na mga aplikasyon:
 
-* ``Cake\Error\Middleware\ErrorHandlerMiddleware`` traps exceptions from the
-  wrapped middleware and renders an error page using the
+* ``Cake\Error\Middleware\ErrorHandlerMiddleware`` nagbibitag ng mga exception mula sa 
+  naka-wrap na middleware at mga render ng maling pahina gamit ang
   :doc:`/development/errors` Exception handler.
-* ``Cake\Routing\AssetMiddleware`` checks whether the request is referring to a
-  theme or plugin asset file, such as a CSS, JavaScript or image file stored in
-  either a plugin's webroot folder or the corresponding one for a Theme.
-* ``Cake\Routing\Middleware\RoutingMiddleware`` uses the ``Router`` to parse the
-  incoming URL and assign routing parameters to the request.
-* ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` enables automatic language
-  switching from the ``Accept-Language`` header sent by the browser.
-* ``Cake\Http\Middleware\SecurityHeadersMiddleware`` makes it easy to add
-  security related headers like ``X-Frame-Options`` to responses.
-* ``Cake\Http\Middleware\EncryptedCookieMiddleware`` gives you the ability to
-  manipulate encrypted cookies in case you need to manipulate cookie with
-  obfuscated data.
-* ``Cake\Http\Middleware\CsrfProtectionMiddleware`` adds CSRF protection to your
-  application.
+* ``Cake\Routing\AssetMiddleware`` sumusuri kung ang hiling ay nagre-refer sa isang
+  tema o plugin asset na file, kagaya ng CSS, JavaScript o imahe na file na naka-imbak sa
+  alinman ang plugin ng webroot folder o ang nararapat na isa para sa Tema.
+* ``Cake\Routing\Middleware\RoutingMiddleware`` gumagamit ng ``Router`` upang i-parse ang
+  papasok na URL at magtalaga ng routing na mga parameter sa hiniling.
+* ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` nagpapagana ng awtomatikong wika
+  na lumilipat mula sa ``Accept-Language`` na header na ipinadala sa browser.
+* ``Cake\Http\Middleware\SecurityHeadersMiddleware`` ginagawang madali ang pagdagdag
+  ng seguridad na kaugnay ng mga header tulad ng ``X-Frame-Options`` para tumugon.
+* ``Cake\Http\Middleware\EncryptedCookieMiddleware`` nagbibigay sayo ng abilidad upang
+  manipulahin ang naka-encrypt na mga cookie na kung sakali kailangan mong manipulahin ang cookie na may
+  obfuscated na datos.
+* ``Cake\Http\Middleware\CsrfProtectionMiddleware`` nagdadagdag ng CSRF na proteksyon sa iyong
+  aplikasyon.
 
 .. _using-middleware:
 
