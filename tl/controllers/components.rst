@@ -97,7 +97,7 @@ pagpapatupad::
 
     class MyAuthComponent extends AuthComponent
     {
-        // Add your code to override the core AuthComponent
+        // Idagdag ang iyong code para sapawan ang core AuthComponent
     }
 
 Ang nasa itaas ay *alias* ``MyAuthComponent`` sa ``$this->Auth`` sa iyong
