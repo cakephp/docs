@@ -1,7 +1,7 @@
 I18N na Shell
 ##########
 
-Ang i18n na mga feature ng CakePHP ay gumagamit ng `po files <http://en.wikipedia.org/wiki/GNU_gettext>`_
+Ang i18n na mga tampok ng CakePHP ay gumagamit ng `po files <http://en.wikipedia.org/wiki/GNU_gettext>`_
 bilang kanilang pinagmulan ng pagsasalin. Angg PO na mga file ay i-integrate sa karaniwang ginagamit na mga tool sa pagsasalin 
 tulad ng `Poedit <http://www.poedit.net/>`_.
 
@@ -13,14 +13,14 @@ i-merge sa umiiral na mga pagsasalin upang tulungang i-update ang iyong aplikasy
 Pagbubuo ng mga File ng POT
 ====================
 
-Ang mga POT files ay maaaring mabuo para sa umiiral na aplikasyon gamit ang ``extract``
-na command. Ang command na ito ay i-scan ang iyong buong aplikasyon para sa ``__()`` na estilo
+Ang mga POT na mga file ay maaaring mabuo para sa umiiral na aplikasyon gamit ang ``extract``
+na utos. Ang utos na ito ay i-scan ang iyong buong aplikasyon para sa ``__()`` na estilo
 ng pagtawag ng function, at i-extract ang string ng mensahe. Ang bawat natatanging string sa iyong 
 aplikasyon ay sasamahin sa isang file ng POT::
 
     bin/cake i18n extract
 
-Ang nasa itaas ay ipatatakbo ang shell ng pagkuha. Ang resulta ng command na ito ay ang 
+Ang nasa itaas ay ipatatakbo ang shell ng pagkuha. Ang resulta ng utos na ito ay ang 
 file na **src/Locale/default.pot**. Ginagamit mo ang file ng pot bilang isang template para sa paglikha ng 
 mga file ng po. Kung ikaw ay manu-manong lumikha ng mga file ng po mula sa file ng pot, siguraduhin na 
 tama ang na-set na ``Plural-Forms`` na line ng header.
@@ -37,10 +37,10 @@ Ito ay bubuo ng kinakailangang mga file ng POT na ginamit sa mga plugin.
 Pag-extract mula sa maramihang mga folder nang sabay-sabay
 ----------------------------------------
 
-Minsan, maaaring kailanganin mong kunin ang mga string mula sa higit sa isang directory ng 
+Minsan, maaaring kailanganin mong kunin ang mga string mula sa higit sa isang direktoryo ng 
 iyong aplikasyon. Halimbawa, kung tinutukoy mo ang ilang mga string sa 
-``config`` na directory ng iyong aplikasyon, baka gusto mong kunin ang mga string 
-mula sa directory na ito pati na rin mula sa ``src`` na directory. Magagawa mo ito sa pamamagitan ng 
+``config`` na direktoryo ng iyong aplikasyon, baka gusto mong kunin ang mga string 
+mula sa direktoryo na ito pati na rin mula sa ``src`` na direktoryo. Magagawa mo ito sa pamamagitan ng 
 paggamit ng ``--paths`` na opsyon. Ito ay kumukuha ng isang comma-separated na listahan ng absolute na mga path
 upang makuha::
 

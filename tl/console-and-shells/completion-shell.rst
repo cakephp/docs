@@ -2,24 +2,24 @@ Pagkumpleto ng Shell
 ################
 
 Ang paggawa sa console ay nagbibigay sa developer ng maraming mga posibilidad ngunit ang pagkakaroon na
-upang lubos na malaman at maisulat ang mga command na iyon ay maaaring nakakapagod. Lalo na kapag 
-nagbubuo ng mga bagong shell kung saan ang mga command ay naiiba sa bawat minuto ng pag-uulit. Ang 
+upang lubos na malaman at maisulat ang mga utos na iyon ay maaaring nakakapagod. Lalo na kapag 
+nagbubuo ng mga bagong shell kung saan ang mga utos ay naiiba sa bawat minuto ng pag-uulit. Ang 
 Pagkumpleto ng mga Shell ay tumutulong sa bagay na ito sa pamamagitan ng pagbibigay ng isang API upang magsulat ng kumpletong 
 mga script para sa mga shell tulad ng bash, zsh, fish atbp.
 
-Mga Sub na Command
+Mga Sub na Utos
 ============
 
-Ang Pagkumpleto ng Shell ay binubuo ng isang bilang ng mga sub na command upang tulungan ang 
+Ang Pagkumpleto ng Shell ay binubuo ng isang bilang ng mga sub na utos upang tulungan ang 
 developer na lumikha ng kumpletong script. Bawat isa para sa ibang hakbang sa 
 autocompletion na proseso.
 
 Mga Command
 --------
 
-Para sa unang hakbang ng mga command ay nag-output ng magagamit na mga Command ng Shell, kasama ang 
+Para sa unang hakbang ng mga utos ay nag-output ng magagamit na mga Utos ng Shell, kasama ang 
 pangalan ng plugin kapag naaangkop. (Lahat ng ibinalik ng mga posibilidad, para dito at sa iba pang 
-mga sub na command, ay pinaghihiwalay ng isang puwang.) Halimbawa::
+mga sub na utos, ay pinaghihiwalay ng isang puwang.) Halimbawa::
 
     bin/cake Completion commands
 
@@ -27,14 +27,14 @@ Ibabalik::
 
     acl api bake command_list completion console i18n schema server test testsuite upgrade
 
-Ang iyong script ng pagkumpleto ay maaaring pumili ng may katuturang mga command mula sa listahang iyon para
-magpagtuloy. (Para dito at sa sumusunod na mga sub na command.)
+Ang iyong script ng pagkumpleto ay maaaring pumili ng may katuturang mga utos mula sa listahang iyon para
+magpagtuloy. (Para dito at sa sumusunod na mga sub na utos.)
 
 mga subCommand
 -----------
 
-Kapang ang preferred na command ay napili na ang mga subCommand dadating bilang ang pangalawang 
-hakbang at i-output ang posibleng sub na command para sa ibinigay na command ng shell. 
+Kapang ang preferred na utos ay napili na ang mga subCommand dadating bilang ang pangalawang 
+hakbang at i-output ang posibleng sub na utos para sa ibinigay na utos ng shell. 
 Halimbawa::
 
     bin/cake Completion subcommands bake
@@ -46,7 +46,7 @@ Ibabalik::
 mga opsyon
 -------
 
-Habang ang pangatlo at pangwakas ay mag-output ng mga opsyon para sa ibinigay na (sub) command bilang
+Habang ang pangatlo at pangwakas ay mag-output ng mga opsyon para sa ibinigay na (sub) utos bilang
 na-set sa getOptionParser. (Kabilang ang default na mga opsyon na na-inherit mula sa Shell.)
 Halimbawa::
 
@@ -63,7 +63,7 @@ Paano paganahin ang autocompletion ng Bash para sa Console ng CakePHP
 =========================================================
 
 Una, siguraduhin na ang **bash-completion** na library ay naka-install. Kung hindi, gagawin mo ito 
-kasama ang sumusunod na command::
+kasama ang sumusunod na utos::
 
     apt-get install bash-completion
 
@@ -75,8 +75,8 @@ I-save ang file, pagkatapas ay i-restart ang iyong console.
 .. tandaan::
 
     Kung ikaw ay gumagamit ng MacOS X, maaari mong i-install ang **bash-completion** na library
-    gamit ang **homebrew** na may command na ``brew install bash-completion``.
-    Ang target na directory para sa **cake** na file ay magiging 
+    gamit ang **homebrew** na may utos na ``brew install bash-completion``.
+    Ang target na direktoryo para sa **cake** na file ay magiging 
     **/usr/local/etc/bash_completion.d/**.
 
 .. _bash-completion-file-content:
@@ -142,14 +142,14 @@ upang makakuha ng autocompletion kapag ginagamit ang console ng CakePHP::
 Paggamit ng autocompletion
 ====================
 
-Kapag na-enable, ang autocompletion ay maaaring gamitin sa parehong paraan kaysa sa ibang 
-built-in na mga command, gamit ang **TAB** na key.
+Kapag napagana, ang autocompletion ay maaaring gamitin sa parehong paraan kaysa sa ibang 
+built-in na mga utos, gamit ang **TAB** na key.
 Tatlong uri ng autocompletion ang ibibigay. Ang sumusunod na output ay mula sa isang sariwang pag-install ng CakePHP.
 
-Mga Command
+Mga Utos
 --------
 
-Sample na output para sa autocompletion ng mga command::
+Sample na output para sa autocompletion ng mga utos::
 
     $ bin/cake <tab>
     bake        i18n        orm_cache   routes
