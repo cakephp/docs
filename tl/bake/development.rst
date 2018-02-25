@@ -31,7 +31,7 @@ Ang kaganapan ng pag-initialize ay magagamit upang gumawa ng mga pagbabago na ma
 Kung nais mong baguhin ang bake mula sa loob ng isa pang plugin, ang paglagay ng mga kaganapan ng bake sa iyong plugin na ``config/bootstrap.php`` na file ay isang magandang ideya.
 
 Ang mga kaganapan ng Bake ay maaaring madaling gamitin para sa paggawa ng maliliit na mga pagbabago sa umiiral na mga template.
-Halimbawa, upang baguhin ang mga pangalan ng variable na ginagamit habang nagbi-bake ng controller/template
+Halimbawa, upang baguhin ang mga pangalan ng variable na ginagamit habang nag-bake ng controller/template
 na mga file ay maaaring gumamit ng isang function na pakikinig sa ``Bake.beforeRender`` upang baguhin ang mga variable na ginagamit sa mga template ng bake::
 
     <?php
@@ -93,7 +93,7 @@ maaari mong gamitin ang sumusunod na kaganapan::
     );
 
 Sa pamamagitan ng pagscope ng mga tagapakinig ng kaganapan sa tiyak na mga template ng bake, maaari mong gawing simple ang iyong
-lohika ng kaganapan na kaugnay ng at magbigay ng mga callbacks na mas madaling subukan.
+lohika ng kaganapan na kaugnay ng at magbigay ng mga callback na mas madaling subukan.
 
 Template ng Bake na Syntax
 ====================
@@ -105,7 +105,7 @@ baguhin ang mga file na template ng bake, ay magbake na klase at ihambing ang te
 na may file ng pre-processed na template na naiwan sa aplikasyon na 
 **tmp/bake** na folder.
 
-Kaya, halimbawa, kapag nagbi-bake ng isang shell tulad nito:
+Kaya, halimbawa, kapag nag-bake ng isang shell tulad nito:
 
 .. code-block:: bash
 
@@ -160,7 +160,7 @@ At ang resultant ng baked na klase (**src/Shell/FooShell.php**) ay katulad ng hi
 
 .. tandaan::
 
-    Bago ang bersyon na 1.5.0 ang bake ay gumagamit na isang custom na er-style na mga tag sa loob ng template ng .ctp na mga file.
+    Bago ang bersyon na 1.5.0 ang bake ay gumagamit na isang pasadya na er-style na mga tag sa loob ng template ng .ctp na mga file.
 
     * ``<%`` Isang template ng Bake na bukas na tag ng php
     * ``%>`` Isang template ng Bake na sirado na tag ng php
@@ -176,17 +176,17 @@ Ang Paglikha ng isang Tema ng Bake
 =====================
 
 Kung nais mong baguhin ang output na ginawa ng command ng "bake", maaari kang
-lumikha ng iyong sariling 'theme' ng bake na nagpapahintulot sa iyo na palitan ang ilan o lahat ng 
+lumikha ng iyong sariling 'tema' ng bake na nagpapahintulot sa iyo na palitan ang ilan o lahat ng 
 mga template na ginagamit ng bake. Ang pinakamahusay na paraan upang gawin ito ay:
 
-#. Magbake ng isang bagong plugin. Ang pangalan ng plugin ay ang pangalan ng 'theme' ng bake
+#. Magbake ng isang bagong plugin. Ang pangalan ng plugin ay ang pangalan ng 'tema' ng bake
 #. Maglikha ng isang bagong directory **plugins/[name]/src/Template/Bake/Template/**.
 #. Kopyahin ang anumang mga template na gusto mong i-override mula sa
    **vendor/cakephp/bake/src/Template/Bake/Template** sa pagtutugma ng mga file sa iyong
    plugin.
 #. Kapag nagpapatakbo ng bake gamitin ang ``--theme`` na opsyon upang tiyakin ang bake-theme 
    na gusto mong gamitin. Upang maiwasan ang pagkakaroon ng pagtiyak ng opsyon na ito sa bawat tawag, maaari mo ring
-   i-set ang iyong custom na tema na gagamitin bilang isang default na tema::
+   itakda ang iyong pasadya na tema na gagamitin bilang isang default na tema::
 
         <?php
         // in config/bootstrap.php or config/bootstrap_cli.php
@@ -195,9 +195,9 @@ mga template na ginagamit ng bake. Ang pinakamahusay na paraan upang gawin ito a
 Ang Pagcustomize ng mga Template ng Bake
 ==============================
 
-Kung nais mong baguhin ang default na output na ginawa ng command ng "bake", maaari kang
-lumikha ng iyong sariling mga template ng bkae sa iyong aplikasyon. Sa ganitong paraan ay hindi ginagamit ang 
-``--theme`` na opsyon sa command line habang nagbi-bake. Ang pinakamahusay na paraan upang gawin ito ay:
+Kung nais mong baguhin ang default na output na ginawa ng utos ng "bake", maaari kang
+lumikha ng iyong sariling mga template ng bake sa iyong aplikasyon. Sa ganitong paraan ay hindi ginagamit ang 
+``--theme`` na opsyon sa command line habang nag-bake. Ang pinakamahusay na paraan upang gawin ito ay:
 
 #. Maglikha ng bagong directory **/src/Template/Bake/**.
 #. Kopyahin ang anumang mga template ang gusto mong i-override mula sa 
@@ -207,7 +207,7 @@ lumikha ng iyong sariling mga template ng bkae sa iyong aplikasyon. Sa ganitong 
 Maglikha ng Bagong Command ng Bake na mga Opsyon
 =================================
 
-Posibleng magdagdag ng bagong command ng bake na mga opsyon, o i-override ang mga binigay ng 
+Posibleng magdagdag ng bagong utos ng bake na mga opsyon, o i-override ang mga binigay ng 
 CakePHP sa pamamagitan ng paglikha ng mga gawain sa iyong aplikasyon o mga plugin. Sa pagpapalawak ng 
 ``Bake\Shell\Task\BakeTask``, ang bake ay maghahanap ng iyong bagong gawain at isama ito bilang 
 bahagi ng bake.
@@ -267,8 +267,8 @@ para gamitin sa iyong aplikasyon.
 
 Kung nais mo na ang ``bake`` na tawag ay maglikha din ng isang test na file para sa iyong 
 klase ng ``ExampleFoo``, kailangan mong i-overwrite ang ``bakeTest()`` na paraan sa 
-klase ng ``FooTask`` upang irehistro ang suffix ng klase at namespace para sa iyong custom
-na pangalan ng command::
+klase ng ``FooTask`` upang irehistro ang suffix ng klase at namespace para sa iyong pasadya
+na pangalan ng utos::
 
     public function bakeTest($className)
     {

@@ -1,8 +1,8 @@
 Shell ng Cache
 ===========
 
-Upang tulungan ka ng mas mahusay na pamamahala ng cached na data mula sa isang CLI na environment, isang command ng shell 
-ay magagamit sa pag-clear ng cached na data na meron ang iyong aplikasyon::
+Upang tulungan ka ng mas mahusay na pamamahala ng cached na data mula sa isang CLI na environment, isang utos ng shell 
+ay magagamit sa paglilinaw ng cached na datos na meron ang iyong aplikasyon::
 
     // Clear one cache config
     bin/cake cache clear <configname>

@@ -4,7 +4,7 @@ Ang Paggenerate ng Code kasama ang Bake
 Ang cake na console ay pinapatakbo gamit ang PHP na CLI (command line interface).
 Kung may mga problema ka sa pagpapatakbo ng script, siguraduhin na:
 
-#. Mayroon kang naka-install na PHP CLI at mayroon itong wastong mga modyul na pinagana (eg: MySQL, intl).
+#. Mayroon kang naka-install na PHP CLI at mayroon itong wastong mga modyul na pinagana (hal: MySQL, intl).
 #. Ang mga gumagamit ay maaaring magkaroon ng mga isyu kung ang host ng database ay 'localhost' at dapat subukan ang '127.0.0.1' sa halip, dahil ang localhost ay maaaring maging sanhi ng mga isyu sa CLI ng PHP.
 #. Dependi kung paano naka-configure ang iyong computer, maaari mong itakda ang mga karapatan sa pag-execute sa script ng cake na bash upang tawagin ito gamit ang ``bin/cake bake``.
 
@@ -118,8 +118,8 @@ magagamit gamit ang ``--help`` option::
 Mga Tema ng Bake
 ===========
 
-Ang opsyon ng tema ay pangkaraniwan sa lahat ng mga command ng bake, at nagpapahintulot sa pagbabago ng bake 
-na template na mga file na ginagamit sa pagbi-bake. Para lumikha ng iyong sariling mga templates, tingnan ang 
+Ang opsyon ng tema ay pangkaraniwan sa lahat ng mga utos ng bake, at nagpapahintulot sa pagbabago ng bake 
+na template na mga file na ginagamit sa pagbi-bake. Para lumikha ng iyong sariling mga template, tingnan ang 
 :ref:`bake theme creation documentation <creating-a-bake-theme>`.
 
 .. meta::
