@@ -20,7 +20,7 @@ Makakakita ka ng higit pang impormasyon dito: http://en.wikipedia.org/wiki/Cron
 
 .. tip::
 
-    Gumamit ng ``-q`` (or `--quiet`) upang patahimikin ang anumang output para sa cronjobs.
+    Gumamit ng ``-q`` (o `--quiet`) upang patahimikin ang anumang output para sa cronjobs.
 
 Mga Cron Job sa Shared na Hosting
 ---------------------------
@@ -41,4 +41,3 @@ ay maaaring hindi gumana. Sa halip maaari mong gamitin ang
 .. meta::
     :title lang=en: Running Shells as cronjobs
     :keywords lang=en: cronjob,bash script,crontab
-    
