@@ -1,73 +1,73 @@
-I18N Shell
+I18N na Shell
 ##########
 
-The i18n features of CakePHP use `po files <http://en.wikipedia.org/wiki/GNU_gettext>`_
-as their translation source. PO files integrate with commonly used translation tools
-like `Poedit <http://www.poedit.net/>`_.
+Ang i18n na mga feature ng CakePHP ay gumagamit ng `po files <http://en.wikipedia.org/wiki/GNU_gettext>`_
+bilang kanilang pinagmulan ng pagsasalin. Angg PO na mga file ay i-integrate sa karaniwang ginagamit na mga tool sa pagsasalin 
+tulad ng `Poedit <http://www.poedit.net/>`_.
 
-The i18n shell provides a quick and easy way to generate po template files.
-These templates files can then be given to translators so they can translate the
-strings in your application. Once you have translations done, pot files can be
-merged with existing translations to help update your translations.
+Ang i18n na shell ay nagbibigay ng isang mabilis at madaling paraan upang makabuo ng mga file ng template ng po.
+Ang mga file ng mga template na ito ay maaaring ibigay sa mga tagasalin upang maisalin nila ang 
+mga string na iyong aplikasyon. Kapag meron ka nang natapos na pagsasalin, ang mga file ng pot ay maaaring 
+i-merge sa umiiral na mga pagsasalin upang tulungang i-update ang iyong aplikasyon.
 
-Generating POT Files
+Pagbubuo ng mga File ng POT
 ====================
 
-POT files can be generated for an existing application using the ``extract``
-command. This command will scan your entire application for ``__()`` style
-function calls, and extract the message string. Each unique string in your
-application will be combined into a single POT file::
+Ang mga POT files ay maaaring mabuo para sa umiiral na aplikasyon gamit ang ``extract``
+na command. Ang command na ito ay i-scan ang iyong buong aplikasyon para sa ``__()`` na estilo
+ng pagtawag ng function, at i-extract ang string ng mensahe. Ang bawat natatanging string sa iyong 
+aplikasyon ay sasamahin sa isang file ng POT::
 
     bin/cake i18n extract
 
-The above will run the extraction shell. The result of this command will be the
-file **src/Locale/default.pot**. You use the pot file as a template for creating
-po files. If you are manually creating po files from the pot file, be sure to
-correctly set the ``Plural-Forms`` header line.
+Ang nasa itaas ay ipatatakbo ang shell ng pagkuha. Ang resulta ng command na ito ay ang 
+file na **src/Locale/default.pot**. Ginagamit mo ang file ng pot bilang isang template para sa paglikha ng 
+mga file ng po. Kung ikaw ay manu-manong lumikha ng mga file ng po mula sa file ng pot, siguraduhin na 
+tama ang na-set na ``Plural-Forms`` na line ng header.
 
-Generating POT Files for Plugins
+Pagbuo ng mga File ng POT para sa mga Plugin
 --------------------------------
 
-You can generate a POT file for a specific plugin using::
+Maaari kang magbuo ng isang file ng POT para sa isang tiyak na plugin gamit ang::
 
     bin/cake i18n extract --plugin <Plugin>
 
-This will generate the required POT files used in the plugins.
+Ito ay bubuo ng kinakailangang mga file ng POT na ginamit sa mga plugin.
 
-Extracting from multiple folders at once
+Pag-extract mula sa maramihang mga folder nang sabay-sabay
 ----------------------------------------
 
-Sometimes, you might need to extract strings from more than one directory of
-your application. For instance, if you are defining some strings in the
-``config`` directory of your application, you probably want to extract strings
-from this directory as well as from the ``src`` directory. You can do it by
-using the ``--paths`` option. It takes a comma-separated list of absolute paths
-to extract::
+Minsan, maaaring kailanganin mong kunin ang mga string mula sa higit sa isang directory ng 
+iyong aplikasyon. Halimbawa, kung tinutukoy mo ang ilang mga string sa 
+``config`` na directory ng iyong aplikasyon, baka gusto mong kunin ang mga string 
+mula sa directory na ito pati na rin mula sa ``src`` na directory. Magagawa mo ito sa pamamagitan ng 
+paggamit ng ``--paths`` na opsyon. Ito ay kumukuha ng isang comma-separated na listahan ng absolute na mga path
+upang makuha::
 
     bin/cake i18n extract --paths /var/www/app/config,/var/www/app/src
 
-Excluding Folders
+Pag-exclude ng mga Folder
 -----------------
 
-You can pass a comma separated list of folders that you wish to be excluded.
-Any path containing a path segment with the provided values will be ignored::
+Maaari kang pumasa ng listahan ng isang pinaghiwalay ng comma na mga folder na nais mong i-exclude.
+Anumang path na naglalaman ng isang segment ng path na may ibinigay na mga halaga ay hindi papansinin::
 
     bin/cake i18n extract --exclude Test,Vendor
 
-Skipping Overwrite Warnings for Existing POT Files
+Pag-skip ng mga Babala ng pag-overwrite para sa Umiiral na mga File ng POT
 --------------------------------------------------
 
-By adding ``--overwrite``, the shell script will no longer warn you if a POT
-file already exists and will overwrite by default::
+Sa pagdaragdag ng ``--overwrite``, ang script ng shell ay hindi ka na babalaan kung ang file ng POT 
+ay umiiral na at i-overwrite bilang default::
 
     bin/cake i18n extract --overwrite
 
-Extracting Messages from the CakePHP Core Libraries
+Pag-extract ng mga Mensahe mula sa Core na mga Library ng CakePHP
 ---------------------------------------------------
 
-By default, the extract shell script will ask you if you like to extract
-the messages used in the CakePHP core libraries. Set ``--extract-core`` to yes
-or no to set the default behavior::
+Bilang default, ang shell na script ng pag-extract ay tatanungin ka kung gusto mong i-extract 
+ang mga mensahe na ginamit sa core na mga library ng CakePHP. I-set ang ``--extract-core`` sa oo 
+o hindi upang i-set ang default na pag-uugali::
 
     bin/cake i18n extract --extract-core yes
 
