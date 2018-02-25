@@ -192,7 +192,7 @@ mga template na ginagamit ng bake. Ang pinakamahusay na paraan upang gawin ito a
         // in config/bootstrap.php or config/bootstrap_cli.php
         Configure::write('Bake.theme', 'MyTheme');
 
-Ang Pagcustomize ng mga Template ng Bake
+Ang Pag-customize ng mga Template ng Bake
 ==============================
 
 Kung nais mong baguhin ang default na output na ginawa ng utos ng "bake", maaari kang
@@ -200,7 +200,7 @@ lumikha ng iyong sariling mga template ng bake sa iyong aplikasyon. Sa ganitong 
 ``--theme`` na opsyon sa command line habang nag-bake. Ang pinakamahusay na paraan upang gawin ito ay:
 
 #. Maglikha ng bagong directory **/src/Template/Bake/**.
-#. Kopyahin ang anumang mga template ang gusto mong i-override mula sa 
+#. Kopyahin ang anumang mga template na gusto mong i-override mula sa 
    **vendor/cakephp/bake/src/Template/Bake/** sa pagtutugma ng mga file sa iyong 
    aplikasyon.
 
@@ -245,7 +245,7 @@ FooTask.php na file ay dapat magmukhang::
 
     }
 
-Sa sandaling nalikha ang file na ito, Kailangan nating lumikha ng isang template na maaaring gamitin ng bake
+Sa sandaling nalikha ang file na ito, kailangan nating maglikha ng isang template na maaaring gamitin ng bake
 kapag bumubuo ng code. Lumikha ng **src/Template/Bake/foo.twig**. Sa file na ito tayo ay 
 magdagdag ng sumusunod na nilalaman::
 
@@ -265,7 +265,7 @@ patakbuhin ang iyong bagong gawain sa pamamagitan ng pagpapatakbo ng ``bin/cake 
 Ito ay bubuo ng isang bagong klase ng ``ExampleFoo`` sa **src/Foo/ExampleFoo.php**
 para gamitin sa iyong aplikasyon.
 
-Kung nais mo na ang ``bake`` na tawag ay maglikha din ng isang test na file para sa iyong 
+Kung nais mo na ang ``bake`` na pagtawag ay maglikha din ng isang test na file para sa iyong 
 klase ng ``ExampleFoo``, kailangan mong i-overwrite ang ``bakeTest()`` na paraan sa 
 klase ng ``FooTask`` upang irehistro ang suffix ng klase at namespace para sa iyong pasadya
 na pangalan ng utos::

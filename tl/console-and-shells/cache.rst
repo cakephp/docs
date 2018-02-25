@@ -1,7 +1,7 @@
 Shell ng Cache
 ===========
 
-Upang tulungan ka ng mas mahusay na pamamahala ng cached na data mula sa isang CLI na environment, isang utos ng shell 
+Para matulungan na mas mahusay na mapamahalaan ang cached na data mula sa isang CLI na environment, isang utos ng shell 
 ay magagamit sa paglilinaw ng cached na datos na meron ang iyong aplikasyon::
 
     // Clear one cache config
