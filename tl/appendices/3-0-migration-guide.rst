@@ -17,7 +17,7 @@ Mga Kinakailangan
 
 	Ang CakePHP 3.0 ay hindi gagana kung hindi mo nakamit ang mga kinakailangan sa itaas.
 
-Upgrade na Kasangkapan
+Pang-Update na Kasangkapan
 ======================
 
 Habang ang dokumentong ito ay tumatalakay sa lahat ng nakakasirang mga pagbabago at
@@ -45,16 +45,16 @@ iyong aplikasyon.
 Mga Namespace
 =============
 
-Lahat ng core na mga class ng CakePHP ay naka-namespace na ngayon ay sumusunod sa
+Lahat ng core na mga class ng CakePHP ay kasalukuyang naka-namespace at sumusunod sa
 PSR-4 autoloading na mga espesipikasyon. Halimbawa ang **src/Cache/Cache.php** ay
 naka-namespace bilang ``Cake\Cache\Cache``. Ang global na mga constant at katulong na
 mga paraan katulad ng :php:meth:`__()` at :php:meth:`debug()` ay hindi naka-namespace 
 para sa kaginhawahan.
 
-Tinggal ang mga Constant
+Tinanggal ang mga Constant
 ========================
 
-Ang sumusunod na hindi na ginagamit na mga constant ay tinanggal:
+Ang sumusunod na hindi na ginagamit na mga constant ay tinanggal na:
 
 * ``IMAGES``
 * ``CSS``
@@ -76,7 +76,7 @@ ng class. Sa halip dapat mong imapa ang karagdagang mga landas gamit ang autoloa
 ng iyong aplikasyon. Tingnan ang seksyon sa :ref:`additional-class-paths` para sa
 higit pang impormasyon.
 
-Ang tatlong bagong configure na mga variable ay nagbibigay ng path na kumpigurasyon
+Ang tatlong bagong configure na mga variable ay nagbibigay ng kumpigurasyon ng landas
 para sa mga plugin, mga view at lokal na mga file. Maaari kang magdagdag ng maramihang
 mga landas sa ``App.paths.templates``, ``App.paths.plugins``, ``App.paths.locales`` upang
 i-configure ang maramihang mga landas para sa mga template, mga plugin at lokal na mga
@@ -89,7 +89,7 @@ ayusin ang iyong **app.php** config na file pati na rin sa anumang paggamit ng
 Bagong ORM
 ==========
 
-Ang CakePHP 3.0 ay nagtatampok ng isang bagong ORM na na-built muli mula sa panimula paitaas.
+Ang CakePHP 3.0 ay nagtatampok ng isang bagong ORM na muling itinayo mula sa panimula paitaas.
 Ang bagong ORM ay makabuluhang magkaiba at hindi tumutugma sa nakaraan.
 Ang pag-upgrade sa isang bagong ORM ay nangangailangan ng malawakang pagbabago sa anumang
 aplikasyon na ina-upgrade. Tingnan ang bagong :doc:`/orm` na dokumentasyon para sa
@@ -129,7 +129,7 @@ Cache
 * Ang :php:meth:`Cake\\Cache\\Cache::enable()` ay naidagdag.
 * Ang :php:meth:`Cake\\Cache\\Cache::disable()` ay naidagdag.
 * Ang cache na mga kumpigurasyon ay hindi na pwedeng baguhin ngayon. Kung kailangan
-  mong baguhin ang kumpigurasyon dapat mong unang i-drop ang kumpigurasyon at
+  mong baguhin ang kumpigurasyon dapat mo unang i-drop ang kumpigurasyon at
   pagkatapos ay likhain muli ito. Iniiwasan nito ang sinkronisasyon na mga isyu
   sa kumpigurasyon na mga opsyon.
 * Ang ``Cache::set()`` ay tinanggal. Inirekomenda na gumawa ka ng maramihang 
@@ -189,7 +189,7 @@ Configure
   **app.php**.
 - Ang pagtakda ng isang ``$config`` na variable sa PHP config na file ay
   hindi na magagamit. Ang :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig` 
-  ngayon ay umaasa ng config file na magsasauli ng isang array.
+  ngayon ay umaasa ng config na file na magsasauli ng isang array.
 - Isang bagong config engine na :php:class:`Cake\\Core\\Configure\\Engine\JsonConfig`
   ay naidagdag.
 
@@ -207,8 +207,8 @@ Console
 =======
 
 Ang ``cake`` na executable ay inilipat mula sa **app/Console** na direktoryo tungo sa
-**bin** na direktoryo sa loob ng balangkas ng aplikasyon. Maaari mo na ngayong tumawag 
-ng console ng CakePHP gamit ang ``bin/cake``.
+**bin** na direktoryo sa loob ng balangkas ng aplikasyon. Maaari mo na ngayong tawagin 
+ang console ng CakePHP gamit ang ``bin/cake``.
 
 Ang TaskCollection ay Napalitan
 -------------------------------
@@ -225,7 +225,7 @@ Shell
 
 - Ang ``Shell::__construct()`` ay nabago. Ito ngayon ay kumukuha ng isang instance ng
   :php:class:`Cake\\Console\\ConsoleIo`.
-- Ang ``Shell::param()`` ay naidagdag bilang kaginhawaan na access sa mga param.
+- Ang ``Shell::param()`` ay naidagdag bilang kaginhawaan na pag-access sa mga param.
 
 Bukod pa rito ang lahat ng shell na mga paraan ay mababago sa camel case kapag tinawag.
 Halimbawa, kung mayroon kang isang ``hello_world()`` na paraan sa loob ng isang shell at 
@@ -252,7 +252,7 @@ Ang mga Shell at mga Task ay nailipat mula sa ``Console/Command`` at
 Ang ApiShell ay Itinanggal
 --------------------------
 
-Ang ApiShell ay itinanggal dahil ito ay hindi nagbigay ng anumang pakinabang sa file source
+Ang ApiShell ay itinanggal dahil ito ay hindi nagbigay ng anumang pakinabang sa pinagmulan ng file
 at ang online na dokumentasyon/`API <https://api.cakephp.org/>`_.
 
 Ang SchemaShell ay Itinanggal
