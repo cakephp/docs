@@ -273,10 +273,10 @@ ExtractTask
 BakeShell / TemplateTask
 ------------------------
 
-- Ang Bake ay hindi na parte ng core na pinagmulan at napalitan ng 
+- Ang Bake ay hindi na parte ng core na pinagmulan at napalitan na ng 
   `CakePHP Bake Plugin <https://github.com/cakephp/bake>`_
 - Ang Bake na mga template ay inilipat sa ilalim ng **src/Template/Bake**.
-- Ngayon ang syntax ng Bake na mga template ay gumagamit ng erb-style na mga tag
+- Ngayon ang palaugnayan ng Bake na mga template ay gumagamit ng erb-style na mga tag
   (``<% %>``) upang magpakilala ng pang-template na lohika, na nagpapahintulot
   sa php code na tratuhin bilang payak na teksto.
 - Ang ``bake view`` na utos ay napalitan ang pangalan ng ``bake template``.
@@ -308,7 +308,7 @@ Log
   baguhin ang kumpigurasyon dapat mo unang i-drop ang kumpigurasyon at pagkatapos
   ay ilikha itong muli. Iniiwasan nito ang sinkronisasyon na mga isyu gamit ang
   kumpigurasyon na mga opsyon.
-* Ngayon ang mga log engine ay nali-lazy load na sa unang pagsulat sa mga log.
+* Ngayon ang mga log engine ay nagsagawa ng lazy na pag-load sa unang pagsulat sa mga log.
 * Ang :php:meth:`Cake\\Log\\Log::engine()` ay naidagdag.
 * Ang sumusunod na mga paraan ay itinangal mula sa :php:class:`Cake\\Log\\Log` ::
   ``defaultLevels()``, ``enabled()``, ``enable()``, ``disable()``.
