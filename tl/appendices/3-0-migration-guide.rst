@@ -476,57 +476,63 @@ Tugon
   naglalaman ng mimetype na ``text/plain`` na isang karaniwang kaguluhan kapag
   tumatanggap ng isang jQuery XHR na kahilingan.  
   
-Sessions
-========
+Mga Sesyon
+==========
 
-The session class is no longer static, instead the session can be accessed
-through the request object. See the :doc:`/development/sessions` documentation
-for using the session object.
+Ang sesyon na class ay hindi na static, sa halip ang sesyon ay maaaring i-access
+gamit ang kahilingan na object. Tingnan ang :doc:`/development/sessions` na
+dokumentasyon para sa paggamit ng sesyon na object.
 
-* :php:class:`Cake\\Network\\Session` and related session classes have been
-  moved under the ``Cake\Network`` namespace.
-* ``SessionHandlerInterface`` has been removed in favor of the one provided by
-  PHP itself.
-* The property ``Session::$requestCountdown`` has been removed.
-* The session checkAgent feature has been removed. It caused a number of bugs
-  when chrome frame, and flash player are involved.
-* The conventional sessions database table name is now ``sessions`` instead of
-  ``cake_sessions``.
-* The session cookie timeout is automatically updated in tandem with the timeout
-  in the session data.
-* The path for session cookie now defaults to app's base path instead of "/".
-  A new configuration variable ``Session.cookiePath`` has been added to
-  customize the cookie path.
-* A new convenience method :php:meth:`Cake\\Network\\Session::consume()` has been added
-  to allow reading and deleting session data in a single step.
-* The default value of :php:meth:`Cake\\Network\\Session::clear()`'s argument ``$renew`` has been changed
-  from ``true`` to ``false``.
+* Ang :php:class:`Cake\\Network\\Session` at may kaugnayang sesyon na mga class
+  ay nailipat sa ilalim ng ``Cake\Network`` na namespace.
+* Ang ``SessionHandlerInterface`` ay itinanggal sa pabor ng isang ibinigay ng
+  PHP mismo.
+* Ang katangian na ``Session::$requestCountdown`` ay itinanggal.
+* Ang sesyong checkAgent na tampok ay itinanggal. Ito ay nagsanhi ng ilang mga
+  bug kapag nag-frame ang chrome, at hindi sangkot ang flash player.
+* Ang kombensyonal na pangalan ng table ng sessions database ay ``sessions`` na
+  ngayon sa halip na ``cake_sessions``.
+* Ang sesyon na cookie timeout ay awtomatikong naa-update na kasunod ng timeout
+  ng sesyon na datos.
+* Ang landas para sa sesyon na cookie ngayon ay nagde-default ng base na landas
+  ng app sa halip na "/". Ang isang bagong kumpigurasyon na variable na
+  ``Session.cookiePath`` ay nadagdag upang i-customize ang landas ng cookie.
+* Isang bagong kaginhawaang paraan na :php:meth:`Cake\\Network\\Session::consume()`
+  ang naidagdag upang payagan ang pagbasa at pagbura ng sesyon na datos sa
+  isang solong hakbang.
+* Ang default na halaga ng argumentong ``$renew`` ng 
+  :php:meth:`Cake\\Network\\Session::clear() ay nabago mula sa ``true`` at
+  naging ``false``.
 
 Network\\Http
 =============
 
-* ``HttpSocket`` is now :php:class:`Cake\\Network\\Http\\Client`.
-* Http\Client has been re-written from the ground up. It has a simpler/easier to
-  use API, support for new authentication systems like OAuth, and file uploads.
-  It uses PHP's stream APIs so there is no requirement for cURL. See the
-  :doc:`/core-libraries/httpclient` documentation for more information.
+* Ang ``HttpSocket`` ngayon ay :php:class:`Cake\\Network\\Http\\Client` na.
+* Ang Http\Client ay muling naisulat mula sa panimula paitaas. Ito ay mayroong
+  isang mas simple/mas madaling magamit na API, suporta para sa bagong
+  pagpapatunay na mga sistema katulad ng OAuth, at file na mga upload.
+  Ito ay gumagamit ng stream na mga API ng PHP kaya walang kinakailangan para
+  sa cURL. Tingnan ang :doc:`/core-libraries/httpclient` na dokumentasyon para
+  sa higit pang impormasyon.
 
 Network\\Email
 ==============
 
-* :php:meth:`Cake\\Network\\Email\\Email::config()` is now used to define
-  configuration profiles. This replaces the ``EmailConfig`` classes in previous
-  versions.
-* :php:meth:`Cake\\Network\\Email\\Email::profile()` replaces ``config()`` as
-  the way to modify per instance configuration options.
-* :php:meth:`Cake\\Network\\Email\\Email::drop()` has been added to allow the
-  removal of email configuration.
-* :php:meth:`Cake\\Network\\Email\\Email::configTransport()` has been added to allow the
-  definition of transport configurations. This change removes transport options
-  from delivery profiles and allows you to re-use transports across email
-  profiles.
-* :php:meth:`Cake\\Network\\Email\\Email::dropTransport()` has been added to allow the
-  removal of transport configuration.
+* Ang :php:meth:`Cake\\Network\\Email\\Email::config()` ngayon ay ginagamit
+  upang tukuyin ang kumpigurasyon na mga profile. Pinapalitan nito ang 
+  ``EmailConfig`` na mga class sa nakaraang mga bersyon.
+* Ang :php:meth:`Cake\\Network\\Email\\Email::profile()` ay pinapalitan ang
+  ``config()`` bilang paraan upang mabago ang bawat instansiya na kumpigurasyon
+  na mga opsyon.
+* Ang :php:meth:`Cake\\Network\\Email\\Email::drop()` ay naidagdag upang payagan
+  ang pagtanggal ng email na kumpigurasyon.
+* Ang :php:meth:`Cake\\Network\\Email\\Email::configTransport()` ay naidagdag upang
+  payagan ang pagpakahulugan ng transport na mga kumpigurasyon. Ang pagbabagong
+  ito ay nagtatanggal ng transport na mga opsyon mula sa paghahatid na mga profile
+  at nagpapahintulot sa iyo na gamitin muli ang mga transport sa kabuuan ng email
+  na mga profile.
+* Ang :php:meth:`Cake\\Network\\Email\\Email::dropTransport()` ay naidagdag upang
+  payagan ang pagtanggal ng transport na kumpigurasyon.
 
 Controller
 ==========
@@ -534,120 +540,134 @@ Controller
 Controller
 ----------
 
-- The ``$helpers``, ``$components`` properties are now merged
-  with **all** parent classes not just ``AppController`` and the plugin
-  AppController. The properties are merged differently now as well. Instead of
-  all settings in all classes being merged together, the configuration defined
-  in the child class will be used. This means that if you have some
-  configuration defined in your AppController, and some configuration defined in
-  a subclass, only the configuration in the subclass will be used.
-- ``Controller::httpCodes()`` has been removed, use
-  :php:meth:`Cake\\Network\\Response::httpCodes()` instead.
-- ``Controller::disableCache()`` has been removed, use
-  :php:meth:`Cake\\Network\\Response::disableCache()` instead.
-- ``Controller::flash()`` has been removed. This method was rarely used in real
-  applications and served no purpose anymore.
-- ``Controller::validate()`` and ``Controller::validationErrors()`` have been
-  removed. They were left over methods from the 1.x days where the concerns of
-  models + controllers were far more intertwined.
-- ``Controller::loadModel()`` now loads table objects.
-- The ``Controller::$scaffold`` property has been removed. Dynamic scaffolding
-  has been removed from CakePHP core.  An improved scaffolding plugin, named CRUD, can be found here: https://github.com/FriendsOfCake/crud
-- The ``Controller::$ext`` property has been removed. You now have to extend and
-  override the ``View::$_ext`` property if you want to use a non-default view file
-  extension.
-- The ``Controller::$methods`` property has been removed. You should now use
-  ``Controller::isAction()`` to determine whether or not a method name is an
-  action. This change was made to allow easier customization of what is and is
-  not counted as an action.
-- The ``Controller::$Components`` property has been removed and replaced with
-  ``_components``. If you need to load components at runtime you should use
-  ``$this->loadComponent()`` on your controller.
-- The signature of :php:meth:`Cake\\Controller\\Controller::redirect()` has been
-  changed to ``Controller::redirect(string|array $url, int $status = null)``.
-  The 3rd argument ``$exit`` has been dropped. The method can no longer send
-  response and exit script, instead it returns a ``Response`` instance with
-  appropriate headers set.
-- The ``base``, ``webroot``, ``here``, ``data``,  ``action``, and ``params``
-  magic properties have been removed. You should access all of these properties
-  on ``$this->request`` instead.
-- Underscore prefixed controller methods like ``_someMethod()`` are no longer
-  treated as private methods. Use proper visibility keywords instead. Only
-  public methods can be used as controller actions.
+- Ang ``$helpers``, ``$components`` na mga katangian ay na-merge na ngayon
+  kasama ang **lahat** ng magulang na mga class hindi lang ang ``AppController``
+  at ang plugin na AppController. Ang mga katangian din ay magkaibang na-merge.
+  Sa halip na lahat ng mga setting sa lahat ng mga class ang sama-samang i-merge, 
+  ang kumpigurasyon na natukoy sa anak na class ay magagamit. Ito ay 
+  nangangahulugan na kung mayroon kang ilang kumpigurasyon na tinukoy sa isang
+  subclass, ang kumpigurasyon lamang sa subclass ang magagamit.
+- Ang ``Controller::httpCodes()`` ay tinanggal, sa halip ay gamitin ang
+  :php:meth:`Cake\\Network\\Response::httpCodes()`.
+- Ang ``Controller::disableCache()`` ay tinanggal, sa halip ay gamitin ang
+  :php:meth:`Cake\\Network\\Response::disableCache()`.
+- Ang ``Controller::flash()`` ay tinanggal. Ang paraang ito ay bihira lamang
+  ginamit sa tunay na mga aplikasyon at walang nang layunin na pinagsisilbihan.
+- Ang ``Controller::validate()`` at ``Controller::validationErrors()`` ay
+  tinanggal. Sila ay mga tirang mga paraan mula sa 1.x na kapanahunan kung saan
+  ang mga alalahanin ng mga modelo + mga controller ay malayong mas magkaakibat.
+- Ang ``Controller::loadModel()`` ngayon ay naglo-load ng table na mga object.
+- Ang ``Controller::$scaffold`` na katangian ay tinanggal. Ang dynamic scaffolding
+  ay tinanggal mula sa core ng CakePHP. Isang pinaunlad na scaffolding na plugin,
+  na nakapangalang CRUD, ay maaaring matagpuan dito:
+  https://github.com/FriendsOfCake/crud
+- Ang ``Controller::$ext`` na katangian ay tinanggal. Ngayon kailangan mong palawigin
+  at i-override ang ``View::$_ext`` na katangian kung gusto mong gumamit ng isang 
+  hindi default na view file na ekstensyon.
+- Ang ``Controller::$methods`` na katangian ay tinanggal. Dapat mo na ngayong
+  gamitin ang ``Controller::isAction()`` upang matukoy kung ang pangalan ng 
+  paraan ay isang aksyon o hindi. Ang pagbabagong ito ay ginawa upang payagan
+  ang mas madaling pag-customize ng kung ano at kung ano ang hindi ang binibilang
+  bilang isang aksyon.
+- Ang ``Controller::$Components`` na katangian ay tinanggal at pinalitan ng 
+  ``_components``. Kung kailangan mong mag-load ng mga komponent sa runtime dapat
+  kang gumamit ng ``$this->loadComponent()`` sa iyong controller.
+- Ang lagda ng :php:meth:`Cake\\Controller\\Controller::redirect()` ay binago
+  sa ``Controller::redirect(string|array $url, int $status = null)``. Ang 
+  pangatlong argumento na ``$exit`` ay tinanggal. Ang paraan ay hindi na nagpapadala
+  ng tugon at labasan na iskrip, sa halip ito ay nagsasauli ng isang ``Response``
+  na instansiya na may nakatakdang angkop na mga header.
+- Ang ``base``, ``webroot``, ``here``, ``data``,  ``action``, at ``params``
+  na madyik mga katangian ay tinanggal. Sa halip ay dapat mong i-access ang lahat 
+  ng mga katangiang ito sa ``$this->request``.
+- Ang naka-prefix sa underscore na controller na mga paraan katulad ng ``_someMethod()``
+  ay hindi na tinatrato bilang pribadong mga paraan. Sa halip ay gumamit ng angkop na 
+  kakayahang makita na mga keyword. Ang publikong mga paraan lamang ang maaaring
+  gamitin bilang controller na mga aksyon.
 
-Scaffold Removed
-----------------
+Tinanggal ang Scaffold
+----------------------
 
-The dynamic scaffolding in CakePHP has been removed from CakePHP core. It was
-infrequently used, and never intended for production use. An improved
-scaffolding plugin, named CRUD, can be found here:
+Ang dynamic scaffolding sa CakePHP ay tinanggal mula sa core ng CakePHP. Ito 
+ay madalang lamang gamitin, at hindi kailanman nilayon para gamitin sa produksyon.
+Isang pinaunlad na scaffolding plugin, na nakapangalang CRUD, ay maaaring matagpuan
+dito:
 https://github.com/FriendsOfCake/crud
 
-ComponentCollection Replaced
-----------------------------
+Pinalitan ang ComponentCollection
+---------------------------------
 
-This class has been renamed to :php:class:`Cake\\Controller\\ComponentRegistry`.
-See the section on :doc:`/core-libraries/registry-objects` for more information
-on the features provided by the new class. You can use the ``cake upgrade
-rename_collections`` to assist in upgrading your code.
+Ang class na ito ay napalitan ang pangalan ng
+:php:class:`Cake\\Controller\\ComponentRegistry`.
+Tingnan ang seksyon sa :doc:`/core-libraries/registry-objects` para sa higit
+pang impormasyon sa mga tampok na ibinigay ng bagong class. Maaari mong
+gamitin ang ``cake upgrade rename_collections`` upang tumulong sa 
+pag-upgrade ng iyong code.
 
-Component
+Komponent
 ---------
 
-* The ``_Collection`` property is now ``_registry``. It contains an instance
-  of :php:class:`Cake\\Controller\\ComponentRegistry` now.
-* All components should now use the ``config()`` method to get/set
-  configuration.
-* Default configuration for components should be defined in the
-  ``$_defaultConfig`` property. This property is automatically merged with any
-  configuration provided to the constructor.
-* Configuration options are no longer set as public properties.
-* The ``Component::initialize()`` method is no longer an event listener.
-  Instead, it is a post-constructor hook like ``Table::initialize()`` and
-  ``Controller::initialize()``. The new ``Component::beforeFilter()`` method is
-  bound to the same event that ``Component::initialize()`` used to be. The
-  initialize method should have the following signature ``initialize(array
+* Ang ``_Collection`` na katangian ngayon ay ``_registry`` na. Ito ngayon ay
+  naglalaman na ng isang instansya ng :php:class:`Cake\\Controller\\ComponentRegistry`
+* Ang lahat ng mga komponent ay dapat na ngayong gumamit ng ``config()``
+  na paraan upang kumuha/magtakda ng kumpigurasyon.
+* Ang default na kumpigurasyon para sa mga komponent ay dapat matukoy sa
+  ``$_defaultConfig`` na katangian. Ang katangiang ito ay awtomatikong nami-merge
+  sa anumang kumpigurasyon na binigay sa constructor.
+* Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang publikong mga 
+  katangian.
+* Ang ``Component::initialize()`` na paraan ay hindi na isang tagapakinig ng kaganapan.
+  Sa halip, ito ay isang post-constructor na hook katulad ng ``Table::initialize()``
+  at ``Controller::initialize()``. Ang bagong ``Component::beforeFilter()`` na
+  paraan ay nakatali sa parehong kaganapan na ``Component::initialize()`` noon.
+  Ang panimulang paraan ay dapat magkaroon ng sumusunod na lagda ``initialize(array
   $config)``.
 
-Controller\\Components
-======================
+Controller\\Mga Komponent
+=========================
 
 CookieComponent
 ---------------
 
-- Uses :php:meth:`Cake\\Network\\Request::cookie()` to read cookie data,
-  this eases testing, and allows for ControllerTestCase to set cookies.
-- Cookies encrypted in previous versions of CakePHP using the ``cipher()`` method
-  are now un-readable because ``Security::cipher()`` has been removed. You will
-  need to re-encrypt cookies with the ``rijndael()`` or ``aes()`` method before upgrading.
-- ``CookieComponent::type()`` has been removed and replaced with configuration
-  data accessed through ``config()``.
-- ``write()`` no longer takes ``encryption`` or ``expires`` parameters. Both of
-  these are now managed through config data. See
-  :doc:`/controllers/components/cookie` for more information.
-- The path for cookies now defaults to app's base path instead of "/".
+- Gumagamit ng :php:meth:`Cake\\Network\\Request::cookie()` upang makabasa ng
+  cookie na datos, pinapadali nito ang pagsusubok, at pinapahintulutan para sa
+  ControllerTestCase upang magtakda ng mga cookie.
+- Ang mga cookie na naka-encrypt sa nakaraang mga bersyon ng CakePHP na gumagamit ng 
+  ``cipher()`` na paraan ay hindi na mababasa ngayon dahil ang ``Security::cipher()``
+  ay tinanggal. Kailangan mong mag-encrypt muli ng mga cookie gamit ang ``rijndael()``
+  o ``aes()`` na paraan bago mag-upgrade.
+- Ang ``CookieComponent::type()`` ay tinanggal at pinalitan ng kumpigurasyon na datos
+  na naa-access gamit ang ``config()``.
+- Ang ``write()`` ay hindi na kumukuha ng ``encryption`` o ``expires`` na mga parameter.
+  Ang dalawang ito ay pinamamahalaan na ngayon gamit ang config na datos. Tingnan
+  ang :doc:`/controllers/components/cookie` para sa higit pang impormasyon.
+- Ang landas para sa mga cookie ngayon ay nagde-default sa base na landas ng app
+  sa halip na "/".
 
 AuthComponent
 -------------
 
-- ``Default`` is now the default password hasher used by authentication classes.
-  It uses exclusively the bcrypt hashing algorithm. If you want to continue using
-  SHA1 hashing used in 2.x use ``'passwordHasher' => 'Weak'`` in your authenticator configuration.
-- A new ``FallbackPasswordHasher`` was added to help users migrate old passwords
-  from one algorithm to another. Check AuthComponent's documentation for more
-  info.
-- ``BlowfishAuthenticate`` class has been removed. Just use ``FormAuthenticate``
-- ``BlowfishPasswordHasher`` class has been removed. Use
-  ``DefaultPasswordHasher`` instead.
-- The ``loggedIn()`` method has been removed. Use ``user()`` instead.
-- Configuration options are no longer set as public properties.
-- The methods ``allow()`` and ``deny()`` no longer accept "var args". All method names need
-  to be passed as first argument, either as string or array of strings.
-- The method ``login()`` has been removed and replaced by ``setUser()`` instead.
-  To login a user you now have to call ``identify()`` which returns user info upon
-  successful identification and then use ``setUser()`` to save the info to
-  session for persistence across requests.
-
+- Ang ``Default`` ngayon ay ang default na password hasher na ginagamit ng pagpapatunay
+  na mga class. Ito ay eksklusibong gumagamit ng bcrypt hashing na algoritmo. Kung 
+  gusto mong magpatuloy sa paggamit ng SHA1 hashing na ginamit sa 2.x gamitin ang 
+  ``'passwordHasher' => 'Weak'`` sa iyong authenticator na kumpigurasyon.
+- Isang bagong ``FallbackPasswordHasher`` ang dinagdag upang tulungan ang mga gumagamit
+  na maglipat ng lumang mga password mula sa isang algoritmo patungo sa iba pa. Suriin
+  ang dokumentasyon ng AuthComponent para sa karagdagang impormasyon.
+- Ang ``BlowfishAuthenticate`` na class ay tinanggal. Gumamit lamang ng ``FormAuthenticate``
+- Ang ``BlowfishPasswordHasher`` na class ay tinanggal. Sa halip ay gumamit ng
+  ``DefaultPasswordHasher``.
+- Ang ``loggedIn()`` na paraan ay tinanggal. Sa halip ay gumamit ng ``user()``.
+- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang publikong mga katangian.
+- Ang mga paraan na ``allow()`` at ``deny()`` ay hindi na tumatanggap ng "var args".
+  Ang lahat ng kinakailangan na mga pangalan ng paraan na ipapasa bilang unang argumento,
+  alinman bilang string o array ng mga string.
+- Ang paraan na ``login()`` ay tinanggal at sa halip ay pinalitan ng ``setUser()``.
+  Upang mag-login ng isang gumagamit kailangan mo ngayong tumawag ng ``identify()``
+  na nagsasauli ng info ng gumagamit sa matagumpay na pagkakakilanlan at pagkatapos
+  ay gumamit ng ``setUser()`` upang i-save ang info sa sesyon para mapanatili
+  sa kabuuan ng mga kahilingan.
+  
 - ``BaseAuthenticate::_password()`` has been removed. Use a ``PasswordHasher``
   class instead.
 - ``BaseAuthenticate::logout()`` has been removed.
