@@ -273,181 +273,209 @@ ExtractTask
 BakeShell / TemplateTask
 ------------------------
 
-- Bake is no longer part of the core source and is superseded by
+- Ang Bake ay hindi na parte ng core na pinagmulan at napalitan na ng 
   `CakePHP Bake Plugin <https://github.com/cakephp/bake>`_
-- Bake templates have been moved under **src/Template/Bake**.
-- The syntax of Bake templates now uses erb-style tags (``<% %>``) to denote
-  templating logic, allowing php code to be treated as plain text.
-- The ``bake view`` command has been renamed ``bake template``.
+- Ang Bake na mga template ay inilipat sa ilalim ng **src/Template/Bake**.
+- Ngayon ang palaugnayan ng Bake na mga template ay gumagamit ng erb-style na mga tag
+  (``<% %>``) upang magpakilala ng pang-template na lohika, na nagpapahintulot
+  sa php code na tratuhin bilang payak na teksto.
+- Ang ``bake view`` na utos ay napalitan ang pangalan ng ``bake template``.
 
-Event
-=====
+Kaganapan
+=========
 
-The ``getEventManager()`` method,  was removed on all objects that had it.  An
-``eventManager()`` method is now provided by the ``EventManagerTrait``. The
-``EventManagerTrait`` contains the logic of instantiating and keeping
-a reference to a local event manager.
+Ang ``getEventManager()`` na paraan, ay itinanggal sa lahat ng mga object kung
+saan naroon ito. Ang isang ``eventManager()`` na paraan ay ibinibigay na ngayon
+ng ``EventManagerTrait``. Ang ``EventManagerTrait`` ay naglalaman ng lohika ng
+pagbibigay ng halimbawa at pagpapanatili ng isang reperensya sa isang lokal na 
+tagapamahala ng kaganapan.
 
-The Event subsystem has had a number of optional features removed. When
-dispatching events you can no longer use the following options:
+Ang Event na subsystem ay may iilang opsyonal na mga tampok na itinanggal.
+Kapag nagpapadala ng mga kaganapan hindi mo na maaaring gamitin ang sumusunod
+na mga opsyon:
 
-* ``passParams`` This option is now enabled always implicitly. You
-  cannot turn it off.
-* ``break`` This option has been removed. You must now stop events.
-* ``breakOn`` This option has been removed. You must now stop events.
+* ``passParams`` Ngayon ang opsyon na ito ay palagi nang ganap na gumagana.
+  Hindi mo na maaaring i-off ito. 
+* ``break`` Ang opsyon na ito ay itinanggal. Dapat mo na ngayong itigil ang mga
+  kaganapan.
+* ``breakOn`` Ang opsyon na ito ay itinanggal. Dapat mo na ngayong itigil ang mga
+  kaganapan.
 
 Log
 ===
 
-* Log configurations are now immutable. If you need to change configuration
-  you must first drop the configuration and then re-create it. This prevents
-  synchronization issues with configuration options.
-* Log engines are now lazily loaded upon the first write to the logs.
-* :php:meth:`Cake\\Log\\Log::engine()` has been added.
-* The following methods have been removed from :php:class:`Cake\\Log\\Log` ::
+* Ngayon ang log na mga kumpigurasyon ay hindi na mababago. Kung kailangan mong
+  baguhin ang kumpigurasyon dapat mo unang i-drop ang kumpigurasyon at pagkatapos
+  ay ilikha itong muli. Iniiwasan nito ang sinkronisasyon na mga isyu gamit ang
+  kumpigurasyon na mga opsyon.
+* Ngayon ang mga log engine ay nagsagawa ng lazy na pag-load sa unang pagsulat sa mga log.
+* Ang :php:meth:`Cake\\Log\\Log::engine()` ay naidagdag.
+* Ang sumusunod na mga paraan ay itinangal mula sa :php:class:`Cake\\Log\\Log` ::
   ``defaultLevels()``, ``enabled()``, ``enable()``, ``disable()``.
-* You can no longer create custom levels using ``Log::levels()``.
-* When configuring loggers you should use ``'levels'`` instead of ``'types'``.
-* You can no longer specify custom log levels.  You must use the default set of
-  log levels.  You should use logging scopes to create custom log files or
-  specific handling for different sections of your application. Using
-  a non-standard log level will now throw an exception.
-* :php:trait:`Cake\\Log\\LogTrait` was added. You can use this trait in your
-  classes to add the ``log()`` method.
-* The logging scope passed to :php:meth:`Cake\\Log\\Log::write()` is now
-  forwarded to the log engines' ``write()`` method in order to provide better
-  context to the engines.
-* Log engines are now required to implement ``Psr\Log\LogInterface`` instead of
-  Cake's own ``LogInterface``. In general, if you extended :php:class:`Cake\\Log\\Engine\\BaseEngine`
-  you just need to rename the ``write()`` method to ``log()``.
-* :php:meth:`Cake\\Log\\Engine\\FileLog` now writes files in ``ROOT/logs`` instead of ``ROOT/tmp/logs``.
+* Hindi ka na maaaring gumawa ng pasadyang mga antas gamit ang ``Log::levels()``.
+* Kapag nagko-configure ng mga logger dapat kang gumamit ng ``'levels'``
+  sa halip ng ``'types'``.
+* Hindi mo na maaaring matukoy ang pasadyang log na mga antas. Dapat kang gumamit
+  ng default na hanay ng log na mga antas. Dapat kang gumamit ng mga logging scope
+  upang lumikha ng pasadyang log na mga file o tiyak na pag-asikaso para sa
+  magkaibang mga seksyon ng iyong aplikasyon. Ang paggamit ng isang non-standard na 
+  antas ng log ay maghahagis na ngayong ng isang eksepsyon.
+* Ang :php:trait:`Cake\\Log\\LogTrait` ay naidagdag. Maaari mong gamitin ang katangiang
+  ito sa iyong mga class upang magdagdag ng ``log()`` na paraan.
+* Ang logging scope na ipinasa sa :php:meth:`Cake\\Log\\Log::write()` ay
+  naipasa na ngayon sa ``write()`` na paraan ng mga log engine upang magbigay
+  ng mas mabuting konteksto sa mga engine.
+* Ngayon ang mga log engine ay nangangailangang magpatupad ng ``Psr\Log\LogInterface``
+  sa halip ng ``LogInterface`` ng Cake. Sa pangkalahatan, kung pinalawak ang 
+  :php:class:`Cake\\Log\\Engine\\BaseEngine` kailangan mo lang palitan ang pangalan 
+  ng ``write()`` na paraan ng ``log()``.
+* Ang :php:meth:`Cake\\Log\\Engine\\FileLog` ngayon ay magsusulat ng mga file sa
+  ``ROOT/logs`` sa halip ng ``ROOT/tmp/logs``.
 
-Routing
-=======
+Pag-Route
+=========
 
-Named Parameters
-----------------
+Nakapangalang mga Parameter
+---------------------------
 
-Named parameters were removed in 3.0. Named parameters were added in 1.2.0 as
-a 'pretty' version of query string parameters.  While the visual benefit is
-arguable, the problems named parameters created are not.
+Ang nakapangalang mga parameter ay itinanggal sa 3.0. Ang nakapangalang mga 
+parameter ay idinagdag sa 1.2.0 bilang isang 'magandang' bersyon ng query string
+na mga parameter. Habang ang biswal na pakinabang ay malabo, ang mga problema
+na ginawa ng nakapangalang mga parameter ay hindi.
 
-Named parameters required special handling in CakePHP as well as any PHP or
-JavaScript library that needed to interact with them, as named parameters are
-not implemented or understood by any library *except* CakePHP.  The additional
-complexity and code required to support named parameters did not justify their
-existence, and they have been removed.  In their place you should use standard
-query string parameters or passed arguments.  By default ``Router`` will treat
-any additional parameters to ``Router::url()`` as query string arguments.
+Ang nakapangalang mga parameter ay nangangailangan ng espesyal na pag-aasikaso
+sa CakePHP pati na rin sa anumang PHP o JavaScript na library na kailangang
+makipag-ugnayan sa kanila, dahil ang nakapangalang mga parameter ay hindi 
+naipatupad o naintindihan ng anumang library *maliban sa* CakePHP. Ang karagdagang
+pagkakumplikado at code na kailangan upang sumuporta ng nakapangalang mga 
+parameter ay hindi nagbibigay-katwiran sa kanilang pag-iral, at sila ay itinanggal.
+Sa kanilang lugar dapat kang gumamit ng standard query string na mga parameter o
+naipasang mga argumento. Bilang default ang ``Router`` ay makikitungo sa 
+anumang karagdagang mga parameter sa ``Router::url()`` bilang query string na
+mga argumento.
 
-Since many applications will still need to parse incoming URLs containing named
-parameters.  :php:meth:`Cake\\Routing\\Router::parseNamedParams()` has
-been added to allow backwards compatibility with existing URLs.
+Dahil maraming mga aplikasyon ang nangangailangan pa ring mag-parse ng paparating
+na mga URL na naglalamang ng nakapangalang mga parameter. Ang 
+:php:meth:`Cake\\Routing\\Router::parseNamedParams()` ay naidagdag upang 
+magpahintulot ng backwards compatibility gamit ang umiiral na mga URL.
 
 RequestActionTrait
 ------------------
 
-- :php:meth:`Cake\\Routing\\RequestActionTrait::requestAction()` has had
-  some of the extra options changed:
+- Ang :php:meth:`Cake\\Routing\\RequestActionTrait::requestAction()` ay mayroong
+  ilan sa karagdagang mga opsyon na nabago:
 
-  - ``options[url]`` is now ``options[query]``.
-  - ``options[data]`` is now ``options[post]``.
-  - Named parameters are no longer supported.
+  - Ang ``options[url]`` ngayon ay ``options[query]`` na.
+  - Ang ``options[data]`` ngayon ay ``options[post]`` na.
+  - Ang nakapangalang mga parameter ay hindi na suportado.
 
 Router
 ------
 
-* Named parameters have been removed, see above for more information.
-* The ``full_base`` option has been replaced with the ``_full`` option.
-* The ``ext`` option has been replaced with the ``_ext`` option.
-* ``_scheme``, ``_port``, ``_host``, ``_base``, ``_full``, ``_ext`` options added.
-* String URLs are no longer modified by adding the plugin/controller/prefix names.
-* The default fallback route handling was removed.  If no routes
-  match a parameter set ``/`` will be returned.
-* Route classes are responsible for *all* URL generation including
-  query string parameters. This makes routes far more powerful and flexible.
-* Persistent parameters were removed. They were replaced with
-  :php:meth:`Cake\\Routing\\Router::urlFilter()` which allows
-  a more flexible way to mutate URLs being reverse routed.
-* ``Router::parseExtensions()`` has been removed.
-  Use :php:meth:`Cake\\Routing\\Router::extensions()` instead. This method
-  **must** be called before routes are connected. It won't modify existing
-  routes.
-* ``Router::setExtensions()`` has been removed.
-  Use :php:meth:`Cake\\Routing\\Router::extensions()` instead.
-* ``Router::resourceMap()`` has been removed.
-* The ``[method]`` option has been renamed to ``_method``.
-* The ability to match arbitrary headers with ``[]`` style parameters has been
-  removed. If you need to parse/match on arbitrary conditions consider using
-  custom route classes.
-* ``Router::promote()`` has been removed.
-* ``Router::parse()`` will now raise an exception when a URL cannot be handled
-  by any route.
-* ``Router::url()`` will now raise an exception when no route matches a set of
-  parameters.
-* Routing scopes have been introduced. Routing scopes allow you to keep your
-  routes file DRY and give Router hints on how to optimize parsing & reverse
-  routing URLs.
+* Ang nakapangalang mga parameter ay itinanggal, tingnan ang itaas para sa
+  higit pang impormasyon.
+* Ang ``full_base`` na opsyon ay napalitan ng ``_full`` na opsyon.
+* Ang ``ext`` na opsyon ay napalitan ng ``_ext`` na opsyon.
+* Ang ``_scheme``, ``_port``, ``_host``, ``_base``, ``_full``, ``_ext`` na mga
+  opsyon ay nadagdag.
+* Ang String na mga URL ay hindi na nababago sa pamamagitan ng pagdagdag ng 
+  plugin/controller/prefix na mga pangalan.
+* Ang default na fallback route na pag-aasikaso ay itinanggal. Kung walang route 
+  na tumutugma ang isang hanay ng parameter na ``/`` ang maisasauli.
+* Ang Route na mga class ay responsable para sa *lahat* ng pagbuo ng URL pati na
+  rin sa query string na mga parameter. Ginagawa nitong sobrang mas makapangyarihan
+  at umaangkop ang mga route.
+* Ang paulit-ulit na mga parameter ay natanggal. Sila ay napalitan ng 
+  :php:meth:`Cake\\Routing\\Router::urlFilter()` na nagpapahintulot ng isang
+  mas umaangkop na paraan upang mag-mutate ng mga URL na iniri-reverse route.
+* Ang ``Router::parseExtensions()`` ay itinanggal.
+  Sa halip ay gamitin ang :php:meth:`Cake\\Routing\\Router::extensions()`. Ang
+  paraang ito ay **dapat** tawagin bago makonektado ang mga route. Hindi nito
+  babaguhin ang umiiral na mga route.
+* Ang ``Router::setExtensions()`` ay itinanggal.
+  Sa halip ay gimitin ang :php:meth:`Cake\\Routing\\Router::extensions()`.
+* Ang ``Router::resourceMap()`` ay itinanggal.
+* Ang ``[method]`` na opsyon ay napalitan ang pangalan ng ``_method``.
+* Ang kakayahang tumugma ng mga arbitrary headers gamit ang ``[]`` na estilo
+  na mga parameter ay itinanggal. Kung kailangan mong mag-parse/tumugma sa 
+  arbitrary na mga kondisyon isaalang-alang ang paggamit ng pasadyang route
+  na mga class.
+* Ang ``Router::promote()`` ay itinanggal.
+* Ang ``Router::parse()`` ngayon ay magtataas ng isang eksepsyon kapag ang isang
+  URL ay hindi kayang maasikaso gamit ang anumang route.
+* Ang ``Router::url()`` ngayon ay magtataas ng isang eksepsyon kapag walang route
+  na tumutugma sa isang hanay ng mga parameter.
+* Ang mga routing scope ay naipakilala. Ang mga routing scope ay nagpapahintulot
+  sa iyo na mapanatiling TUYO ang iyong mga route na file at nagbibigay ng 
+  mga pahiwatig sa Router kung papaano i-optimize ang pag-parse at pag-reverse
+  routing ng mga URL.
 
 Route
 -----
 
-* ``CakeRoute`` was re-named to ``Route``.
-* The signature of ``match()`` has changed to ``match($url, $context = [])``
-  See :php:meth:`Cake\\Routing\\Route::match()` for information on the new signature.
+* Ang ``CakeRoute`` ay napalitan ang pangalan ng ``Route``.
+* Ang lagda ng ``match()`` na binago sa ``match($url, $context = [])``
+  Tingnan ang :php:meth:`Cake\\Routing\\Route::match()` para sa impormasyon
+  sa bagong lagda.
 
-Dispatcher Filters Configuration Changed
-----------------------------------------
 
-Dispatcher filters are no longer added to your application using ``Configure``.
-You now append them with :php:class:`Cake\\Routing\\DispatcherFactory`. This
-means if your application used ``Dispatcher.filters``, you should now use
-:php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
+Ang Kumpigurasyon ng Dispatcher na mga Filter ay Nabago
+-------------------------------------------------------
 
-In addition to configuration changes, dispatcher filters have had some
-conventions updated, and features added. See the
-:doc:`/development/dispatch-filters` documentation for more information.
+Ang Dispatcher na mga filter ay hindi na nadagdag sa iyong aplikasyon gamit 
+ang ``Configure``. Idaragdag mo na ngayon ang mga ito gamit ang 
+:php:class:`Cake\\Routing\\DispatcherFactory`. Ito ay nangangahulugang kung
+ang iyong aplikasyon ay gumamit ng ``Dispatcher.filters``, dapat mo na ngayong
+gamitin ang :php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
+
+Sa karagdagan sa pagkumpigura ng mga pagbabago, ang dispatcher na mga filter
+ay may mga kombensiyon na na-update, at mga tampok na nadagdag. Tingnan ang 
+:doc:`/development/dispatch-filters` na dokumentasyon para sa karagdagang
+impormasyon.
 
 Filter\AssetFilter
 ------------------
 
-* Plugin & theme assets handled by the AssetFilter are no longer read via
-  ``include`` instead they are treated as plain text files.  This fixes a number
-  of issues with JavaScript libraries like TinyMCE and environments with
-  short_tags enabled.
-* Support for the ``Asset.filter`` configuration and hooks were removed. This
-  feature should be replaced with a plugin or dispatcher filter.
+* Ang plugin at theme na mga asset na inasikaso ng AssetFilter ay hindi na 
+  nababasa gamit ang ``include`` sa halip sila ay tinatrato bilang payak na teksto
+  na mga file. Inaayos nito ang ilang mga isyu gamit ang JavaScript na mga library
+  katulad ng TinyMCE at mga environment gamit ang gumaganang short_tags.
+* Ang suporta para sa ``Asset.filter`` na kumpigurasyon at mga hook ay tinanggal.
+  Ang tampok na ito ay dapat mapalitan ng isang plugin o dispatcher na filter.
 
 Network
 =======
 
-Request
--------
+Kahilingan
+----------
 
-* ``CakeRequest`` has been renamed to :php:class:`Cake\\Network\\Request`.
-* :php:meth:`Cake\\Network\\Request::port()` was added.
-* :php:meth:`Cake\\Network\\Request::scheme()` was added.
-* :php:meth:`Cake\\Network\\Request::cookie()` was added.
-* :php:attr:`Cake\\Network\\Request::$trustProxy` was added.  This makes it easier to put
-  CakePHP applications behind load balancers.
-* :php:attr:`Cake\\Network\\Request::$data` is no longer merged with the prefixed data
-  key, as that prefix has been removed.
-* :php:meth:`Cake\\Network\\Request::env()` was added.
-* :php:meth:`Cake\\Network\\Request::acceptLanguage()` was changed from static method
-  to non-static.
-* Request detector for "mobile" has been removed from the core. Instead the app
-  template adds detectors for "mobile" and "tablet" using ``MobileDetect`` lib.
-* The method ``onlyAllow()`` has been renamed to ``allowMethod()`` and no longer accepts "var args".
-  All method names need to be passed as first argument, either as string or array of strings.
+* Ang ``CakeRequest`` ay napalitan ang pangalan ng :php:class:`Cake\\Network\\Request`.
+* Ang :php:meth:`Cake\\Network\\Request::port()` ay nadagdag.
+* Ang :php:meth:`Cake\\Network\\Request::scheme()` ay nadagdag.
+* Ang :php:meth:`Cake\\Network\\Request::cookie()` ay nadagdag.
+* Ang :php:attr:`Cake\\Network\\Request::$trustProxy` ay nadagdag. Ginagawa nitong mas
+  madali ang paglagay ng CakePHP na mga aplikasyon sa likod ng mga load balancer.
+* Ang :php:attr:`Cake\\Network\\Request::$data` ay hindi na naka-merge sa naka-prefix
+  na data key, dahil ang prefix na iyon ay tinanggal.
+* Ang :php:meth:`Cake\\Network\\Request::env()` ay nadagdag.
+* Ang :php:meth:`Cake\\Network\\Request::acceptLanguage()` ay nabago mula sa static na
+  paraan at naging hindi static.
+* Ang detektor ng kahilingan para sa "mobile" ay tinanggal mula sa core. Sa halip ang app
+  na template ay nagdagdag ng mga detektor para sa "mobile" at "table" gamit ang 
+  ``MobileDetect`` na lib.
+* Ang paraan na ``onlyAllow()`` ay napalitan ang pangalan ng ``allowMethod()`` at hindi
+  na tumatanggap ng "var args". Ang lahat ng mga pangalan ng paraan na ipapasa bilang
+  unang argumento, alinman bilang string o array ng mga string.
 
-Response
---------
+Tugon
+-----
 
-* The mapping of mimetype ``text/plain`` to extension ``csv`` has been removed.
-  As a consequence :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`
-  doesn't set extension to ``csv`` if ``Accept`` header contains mimetype ``text/plain``
-  which was a common annoyance when receiving a jQuery XHR request.
-
+* Ang pagmapa ng mimetype na ``text/plain`` sa ekstensyon na ``csv`` ay itinanggal.
+  Bilang kapalit ang :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`
+  ay hindi nagtatakda ng ekstensyon sa ``csv`` kung ang ``Accept`` na header ay
+  naglalaman ng mimetype na ``text/plain`` na isang karaniwang kaguluhan kapag
+  tumatanggap ng isang jQuery XHR na kahilingan.  
+  
 Sessions
 ========
 
