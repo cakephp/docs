@@ -486,10 +486,10 @@ dokumentasyon para sa paggamit ng sesyon na object.
 * Ang :php:class:`Cake\\Network\\Session` at may kaugnayang sesyon na mga class
   ay nailipat sa ilalim ng ``Cake\Network`` na namespace.
 * Ang ``SessionHandlerInterface`` ay itinanggal sa pabor ng isang ibinigay ng
-  PHP.
+  PHP mismo.
 * Ang katangian na ``Session::$requestCountdown`` ay itinanggal.
 * Ang sesyong checkAgent na tampok ay itinanggal. Ito ay nagsanhi ng ilang mga
-  bug kapag nag-frame ang chrome, at hindi kasali ang flash player.
+  bug kapag nag-frame ang chrome, at hindi sangkot ang flash player.
 * Ang kombensyonal na pangalan ng table ng sessions database ay ``sessions`` na
   ngayon sa halip na ``cake_sessions``.
 * Ang sesyon na cookie timeout ay awtomatikong naa-update na kasunod ng timeout
@@ -509,7 +509,7 @@ Network\\Http
 
 * Ang ``HttpSocket`` ngayon ay :php:class:`Cake\\Network\\Http\\Client` na.
 * Ang Http\Client ay muling naisulat mula sa panimula paitaas. Ito ay mayroong
-  isang mas simpleng/mas madaling magamit na API, suporta para sa bagong
+  isang mas simple/mas madaling magamit na API, suporta para sa bagong
   pagpapatunay na mga sistema katulad ng OAuth, at file na mga upload.
   Ito ay gumagamit ng stream na mga API ng PHP kaya walang kinakailangan para
   sa cURL. Tingnan ang :doc:`/core-libraries/httpclient` na dokumentasyon para
@@ -555,7 +555,7 @@ Controller
   ginamit sa tunay na mga aplikasyon at walang nang layunin na pinagsisilbihan.
 - Ang ``Controller::validate()`` at ``Controller::validationErrors()`` ay
   tinanggal. Sila ay mga tirang mga paraan mula sa 1.x na kapanahunan kung saan
-  ang mga alalahanin ng mga model + mga controller ay malayong mas magkaakibat.
+  ang mga alalahanin ng mga modelo + mga controller ay malayong mas magkaakibat.
 - Ang ``Controller::loadModel()`` ngayon ay naglo-load ng table na mga object.
 - Ang ``Controller::$scaffold`` na katangian ay tinanggal. Ang dynamic scaffolding
   ay tinanggal mula sa core ng CakePHP. Isang pinaunlad na scaffolding na plugin,
@@ -575,7 +575,7 @@ Controller
 - Ang lagda ng :php:meth:`Cake\\Controller\\Controller::redirect()` ay binago
   sa ``Controller::redirect(string|array $url, int $status = null)``. Ang 
   pangatlong argumento na ``$exit`` ay tinanggal. Ang paraan ay hindi na nagpapadala
-  ng tugon at exit na iskrip, sa halip ito ay nagsasauli ng isang ``Response``
+  ng tugon at labasan na iskrip, sa halip ito ay nagsasauli ng isang ``Response``
   na instansiya na may nakatakdang angkop na mga header.
 - Ang ``base``, ``webroot``, ``here``, ``data``,  ``action``, at ``params``
   na madyik mga katangian ay tinanggal. Sa halip ay dapat mong i-access ang lahat 
@@ -653,7 +653,7 @@ AuthComponent
   ``'passwordHasher' => 'Weak'`` sa iyong authenticator na kumpigurasyon.
 - Isang bagong ``FallbackPasswordHasher`` ang dinagdag upang tulungan ang mga gumagamit
   na maglipat ng lumang mga password mula sa isang algoritmo patungo sa iba pa. Suriin
-  ang dokumentasyon ng AuthComponent para sa karagdagang info.
+  ang dokumentasyon ng AuthComponent para sa karagdagang impormasyon.
 - Ang ``BlowfishAuthenticate`` na class ay tinanggal. Gumamit lamang ng ``FormAuthenticate``
 - Ang ``BlowfishPasswordHasher`` na class ay tinanggal. Sa halip ay gumamit ng
   ``DefaultPasswordHasher``.
