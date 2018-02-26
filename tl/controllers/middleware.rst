@@ -54,10 +54,10 @@ Ang CakePHP ay nagbibigay ng ilang mga middleware para i-handle ang karaniwang m
 Paggamit sa Middleware
 ================
 
-Ang Middleware ay pwedeng i-apply sa iyong aplikasyon na pangkalahatan, o para indibidwal
+Ang Middleware ay pwedeng gamitin sa iyong aplikasyon na pangkalahatan, o para sa indibidwal
 na mga routing na mga scope.
 
-Para i-apply ang middleware sa lahat na mga hiling, gamitin ang ``middleware`` na pamamaraan sa iyong
+Upang magamit ang middleware sa lahat ng mga kahilingan, gamitin ang ``middleware`` na pamamaraan sa iyong
 ``App\Application`` na class.  Kung ikaw ay walang isang ``App\Application`` na class, tingnan
 ang seksyon sa :ref:`adding-http-stack` para sa karagdagang impormasyon. Ang iyong proseso
 ``middleware`` hook method will be called at the beginning of the request
@@ -83,14 +83,14 @@ ng iba't ibang mga operasyon::
 
         $layer = new \App\Middleware\CustomMiddleware;
 
-        // Idinagdag na middleware ay magiging huli sa linya.
+        // Ang idinagdag na middleware ay magiging huli sa linya.
         $middlewareQueue->add($layer);
 
-        // Inihanda na middleware ay magiging una sa linya.
+        // Ang idinagdag sa unahan na middleware ay magiging una sa linya.
         $middlewareQueue->prepend($layer);
 
-        // Magsingit ng isang tiyak na puwang. Kung ang puwang ay labas sa
-        // hangganan, ito ay maidagdag sa katapusan.
+        // Magsingit ng isang tiyak na puwang. Kung ang puwang ay lumabas sa
+        // hangganan, ito ay madaragdag sa katapusan.
         $middlewareQueue->insertAt(2, $layer);
 
         // Magsingit bago ang ibang middleware.
@@ -109,13 +109,13 @@ ng iba't ibang mga operasyon::
             $layer
         );
 
-Karagdagan sa paggamit ng middleware sa iyong buong aplikasyon, maaari kang gumamit
+Sa karagdagan sa paggamit ng middleware sa iyong buong aplikasyon, maaari kang gumamit
 ng middleware sa partikular na mga hanay ng mga ruta na gamit ang :ref:`connecting-scoped-middleware`.
 
 Pagdaragdag ng Middleware mula sa mga Plugin
 ------------------------------
 
-Pagkatapos ang middleware ay naka-pila ay inihanda ng aplikasyon, ang
+Pagkatapos ihanda ng aplikasyon ang nakapilang middleware, ang
 ``Server.buildMiddleware`` na kaganapan ay na-trigger. Ang kaganapan ay maaaring kapaki-pakinabang na idagdag
 ang middleware mula sa mga plugin. Ang mga plugin ay maaaring magrehistro ng mga tagapakinig sa kanilang bootstrap
 na mga script, na magdagdag sa middleware::
@@ -129,19 +129,19 @@ na mga script, na magdagdag sa middleware::
             $middlewareQueue->add(new ContactPluginMiddleware());
         });
 
-Ang PSR-7 na mga Hiling at mga Tugon
+Ang PSR-7 na mga Kahilingan at mga Tugon
 ============================
 
 Ang Middleware at ang bagong HTTP stack ay itinayo sa ibabaw ng `PSR-7 Request
 & Response Interfaces <http://www.php-fig.org/psr/psr-7/>`__. Habang lahat
-ng middleware ay malantad sa mga interfaces na ito, iyong mga controller, mga components
+ng middleware ay malantad sa mga interface na ito, iyong mga controller, mga komponent
 at mga view ay *hindi*.
 
-Pakikipag-ugnay sa mga Hiling
+Pakikipag-ugnay sa mga Kahilingan
 -------------------------
 
 Ang ``RequestInterface`` ay nagbibigay ng mga pamamaraan para sa pag-uugnay sa mga header,
-pamamaraan, URI, at katawan ng isang hiling. Para makapag-ugnay sa mga header, kaya mo::
+pamamaraan, URI, at katawan ng isang kahilingan. Para makapag-ugnay sa mga header, maaari mong::
 
     // Basahin ang header bilang teksto
     $value = $request->getHeaderLine('Content-Type');
@@ -149,10 +149,10 @@ pamamaraan, URI, at katawan ng isang hiling. Para makapag-ugnay sa mga header, k
     // Basahin ang header bilang isang array
     $value = $request->getHeader('Content-Type');
 
-    // Basahhin lahat ng mga header bilang isang nag-uugnay na array.
+    // Basahin lahat ng mga header bilang isang nag-uugnay na array.
     $headers = $request->getHeaders();
 
-Lahat ng mga hiling ay nagbigay din ng access sa mga cookie at na-upload na mga file na naglalaman ng mga ito::
+Lahat ng mga kahilingan ay nagbigay din ng access sa mga cookie at na-upload na mga file na naglalaman ng mga ito::
 
     // Kumuha ng mga halaga sa cookie.
     $cookies = $request->getCookieParams();
@@ -168,7 +168,7 @@ Lahat ng mga hiling ay nagbigay din ng access sa mga cookie at na-upload na mga 
     // Ilipat ang file.
     $files[0]->moveTo($targetPath);
 
-Ang mga hiling ay naglalaman ng URI object, na kung saan ay naglalaman ng mga pamamaraan para sa pag-ugnayan sa mga hiniling na URI::
+Ang mga kahilingan ay naglalaman ng URI object, na kung saan ay naglalaman ng mga pamamaraan para sa pag-ugnayan sa mga hiniling na URI::
 
     // Kunin ang URI
     $uri = $request->getUri();
@@ -178,27 +178,27 @@ Ang mga hiling ay naglalaman ng URI object, na kung saan ay naglalaman ng mga pa
     $query = $uri->getQuery();
     $host = $uri->getHost();
 
-Panghuli, maaari kang mag-ugnay sa isang humihiling na 'attributes'. Ang CakePHP ay gumagamit nito
-na mga katangian upang dalhin ang framework sa tiyak na mga parameter ng kahilingan. Mayroong kunting
-importante na mga katangian sa anumang hiling na hinawakan ni CakePHP:
+Panghuli, maaari kang mag-ugnay sa isang humihiling na 'attributes'. Ang CakePHP ay gumagamit sa mga 
+katangiang ito upang dalhin ang framework sa tiyak na mga parameter ng kahilingan. Mayroong kunting
+importante na mga katangian sa anumang kahilingan na hinawakan ni CakePHP:
 
 * ``base`` ay naglalaman ng base na direktoryo para sa iyong aplikasyon kung meron mang isa.
 * ``webroot`` ay naglalaman ng webroot na direktoryo para sa iyong aplikasyon.
-* ``params`` ay naglalaman ng mga resulta sa ruta na tumutugma kapang ang mga patakaran ng pag-ruta ay
+* ``params`` ay naglalaman ng mga resulta sa ruta na tumutugma kapag ang mga patakaran ng pag-ruta ay
   nai-proseso.
-* ``session`` ay naglalaman ng isang instance sa CakePHP ``Session`` na object. Tingnan
+* ``session`` ay naglalaman ng isang instance sa CakePHP ``Session`` na object. Tingnan ang
   :ref:`accessing-session-object` para sa karagdagang impormasyon kung papaano gamitin ang sesyon
   na object.
 
 Pag-uugnay ng mga Tugon
 --------------------------
 
-Ang pamamaraan ay magagamit upang lumikha ng server na tugon ay pareho sa mga
-magagamit na iyon kapag nag-uugnay sa :ref:`httpclient-response-objects`. Habang ang
-interface ay pareho lamang ang gamit ng mga sitwasyon ay magkaiba.
+Ang pamamaraan na maaaring magamit upang lumikha ng server na tugon ay pareho dun sa maaaring 
+magamit kapag nag-uugnay sa :ref:`httpclient-response-objects`. Habang ang
+interface ay pareho lamang ang paggamit na mga sitwasyon ay magkaiba.
 
-Kapag nagbago sa tugon, ito ay importante na tandaan na ang mga tugon ay
-**immutable**. Dapat mong laging tandaan na mag-imbak ng mga resulta sa anumang mga setter
+Kapag nagbabago ng tugon, importanteng tandaan na ang mga tugon ay
+**hindi nababago**. Dapat mo laging tandaan na mag-imbak ng mga resulta sa anumang mga setter
 na mga pamamaraan. Halimbawa::
 
     // Ito ay *hindi* nagbabago sa $response. Ang bagong object ay hindi
@@ -208,7 +208,7 @@ na mga pamamaraan. Halimbawa::
     // Ito ay gumagana!
     $newResponse = $response->withHeader('Content-Type', 'application/json');
 
-Madalas ikaw ay magtatakda ng mga header at mga tugon na kumakatawan sa mga hiling::
+Madalas ikaw ay magtatakda ng mga header at mga tugon na kumakatawan sa mga kahilingan::
 
     // Magtakda ng mga header at isang code ng katayuan
     $response = $response->withHeader('Content-Type', 'application/json')
@@ -222,9 +222,9 @@ Madalas ikaw ay magtatakda ng mga header at mga tugon na kumakatawan sa mga hili
 Paglikha ng Middleware
 ===================
 
-Ang Middleware ay maaaring ipatupad bilang hindi kilalang mga function (Closures), o bilang
-nanawagan na mga class. Habang ang Closures ay karapatdapat para sa maliit na mga gawain na ginagawa nila
-na pag-test sa mas mahirap, at maaaring lumikha ng isang kumplikadong ``Application`` na class. Ang Middleware
+Ang Middleware ay maaaring ipatupad bilang hindi kilalang mga function (mga Clousure), o bilang natatawag na mga class.
+Habang ang mga Closure ay karapatdapat para sa maliit na mga gawain na ginagawa nila
+na pang-test sa mas mahirap, at maaaring lumikha ng isang kumplikadong ``Application`` na class. Ang Middleware
 na class sa CakePHP ay nagkaroon ng ilang mga kombensiyon:
 
 * Ang Middleware class na mga file ay dapat ilagay sa **src/Middleware**. Halimbawa:
@@ -239,8 +239,8 @@ Habang hindi sa isang pormal na interface (hindi pa), Ang Middleware ay mayroong
 #. Ang Middleware ay dapat nagpatupad ng ``__invoke($request, $response, $next)``.
 #. Ang Middleware ay dapat magbalik ng isang object na nagpapatupad sa PSR-7 ``ResponseInterface``.
 
-Ang Middleware ay maaaring bumalik ng sagot na alinman sa pamamgitan ng pagtawag sa ``$next`` o sa pamamagitan ng paglilikha
-ng sarili nilang mga tugon. Maaari naming makita ang parehong mga opsyon sa aming simple na middleware::
+Ang Middleware ay maaaring magsauli ng sagot na alinman sa pamamgitan ng pagtawag sa ``$next`` o sa pamamagitan ng paglilikha
+ng sarili nilang mga tugon. Maaari nating makita ang parehong mga opsyon sa ating simpleng middleware::
 
     // Sa src/Middleware/TrackingCookieMiddleware.php
     namespace App\Middleware;
@@ -267,7 +267,7 @@ ng sarili nilang mga tugon. Maaari naming makita ang parehong mga opsyon sa amin
         }
     }
 
-Ngayon na ginawa na namin ang isang pinaka simple na middleware, isama natin ito sa ating
+Ngayon na ginawa na natin ang isang pinaksimpleng middleware, isama natin ito sa ating
 aplikasyon::
 
     // In src/Application.php
@@ -279,7 +279,7 @@ aplikasyon::
     {
         public function middleware($middlewareQueue)
         {
-            // Idagadg sa iyong simple na middleware papunta sa queue
+            // Idagdag sa iyong simple na middleware papunta sa queue
             $middlewareQueue->add(new TrackingCookieMiddleware());
 
             // Magdagdag ng higit pa na middleware papunta sa queue
@@ -329,7 +329,7 @@ Pag-encrypt ng Cookie sa Middleware
 
 Kung ang iyong aplikasyon ay mayroong mga cookie na merong laman na datos na gusto mong tumalbog at
 protektahan laban sa pakikialam sa gumagamit, maaari kang gumamit ng naka-encrypt na cookie sa CakePHP
-na middleware upang halatang naka-encrypt at decrypt cookie sa datos gamit ang middleware.
+na middleware upang halatang mag-encrypt at mag-decrypt ng cookie na datos gamit ang middleware.
 Ang Cookie na datos ay naka-encrypt at dumadaan sa OpenSSL gamit ang AES::
 
     use Cake\Http\Middleware\EncryptedCookieMiddleware;
@@ -344,7 +344,7 @@ Ang Cookie na datos ay naka-encrypt at dumadaan sa OpenSSL gamit ang AES::
 
 .. note::
     Ito ay inirerekomenda na ang naka-encrypt na key na ginagamit mo para sa cookie na datos, ay nagamit
-    *exclusively* para sa cookie na datos.
+    ay *eksklusibong* nagamit para sa cookie na datos.
 
 Ang encryption na mga algorithm at padding na estilo ay ginagamit sa cookie middleware ay
 paurong na compatible sa ``CookieComponent`` mula sa mas naunang mga bersyon sa CakePHP.
@@ -357,7 +357,7 @@ paurong na compatible sa ``CookieComponent`` mula sa mas naunang mga bersyon sa 
 Cross Site Request Forgery (CSRF) na Middleware
 ============================================
 
-CSRF na proteksyon ay maaaring ilapat sa iyong buong aplikasyon, o sa partikular na mga scope
+Ang CSRF na proteksyon ay maaaring ilapat sa iyong buong aplikasyon, o sa partikular na mga scope
 sa pamamagitan ng paglapat ng ``CsrfProtectionMiddleware`` sa iyong middleware na stack::
 
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
@@ -372,13 +372,13 @@ sa pamamagitan ng paglapat ng ``CsrfProtectionMiddleware`` sa iyong middleware n
 Ang mga opsyon ay maaaring maipasa sa constructor ng middleware.
 Ang magagamit na configuration na mga opsyon ay:
 
-- ``cookieName`` Ang pangalan sa cookie na ipapadala. Ay naka-default sa ``csrfToken``.
-- ``expiry`` Gaano katagal ang CSRF token na dapat magtagal. Ang mga default sa browser na sesyon.
+- ``cookieName`` Ang pangalan ng cookie na ipapadala. Naka-default sa ``csrfToken``.
+- ``expiry`` Gaano dapat katagal ang CSRF token. Ang mga default sa browser na sesyon.
 - ``secure`` Kung o hindi ang cookie ay itatakda na may Secure na flag. Yan ay,
   ang cookie ay magtatakda lamang sa HTTPS na koneksyon at anumang pagtatangka na higit sa normal na HTTP
   ay mabibigo. Ang mga default ay ``false``.
 - ``httpOnly`` Kung o hindi ang cookie ay itatakda na may HttpOnly na flag. Ang mga default ay ``false``.
-- ``field`` Ang patlang ng form upang suriin. Ang mga defaults ay ``_csrfToken``. Pagbabago nito
+- ``field`` Ang patlang ng form na susuriin. Ang mga defaults ay ``_csrfToken``. Pagbabago nito
   ay nangangailangan din ng pag-configure sa FormHelper.
 
 Kapag pinagana, maaari kang mag-access sa kasalukuyang CSRF na token sa hiling na object::
@@ -391,25 +391,25 @@ Kapag pinagana, maaari kang mag-access sa kasalukuyang CSRF na token sa hiling n
 Integration with FormHelper
 ---------------------------
 
-Ang ``CsrfProtectionMiddleware`` ay naka pag-ugnayan nang walang putol sa ``FormHelper``. Baway
+Ang ``CsrfProtectionMiddleware`` ay naka pag-ugnayan nang walang putol sa ``FormHelper``. Bawat
 oras na nilikha mo ang isang form na may ``FormHelper``, ito ay nagsingit ng isang nakatagong patlang na nilalaman
 ang CSRF na token.
 
 .. note::
 
-    Kapag gumagamit ng CSRF na proteksyon ay dapay kang laging magsimula sa iyong mga form na may
-    ``FormHelper``. Kung ayaw mo, kakailanganin mo nang mano-mano sa paglikha ng nakatagong mga input sa
+    Kapag gumagamit ng CSRF na proteksyon ay dapat ka laging magsimula sa iyong mga form na may
+    ``FormHelper``. Kung ayaw mo, kakailanganin mo ng manu-manong paglikha ng nakatagong mga input sa
     bawat isa sa iyong form.
 
 Ang CSRF na Proteksyon at AJAX na mga Hiling
 ---------------------------------
 
 At saka sa hiling sa datos ng mga parameter, ang CSRF na mga token ay maaaring masumite sa pamamagitan ng
-isang espesyal ``X-CSRF-Token`` na header. Paggamit ng header ay madalas na ginagawang mas madali sa
+isang espesyal ``X-CSRF-Token`` na header. Ang paggamit ng header ay madalas na ginagawang mas madali sa
 pag-uugnay sa CSRF na token na may JavaScript na may mabigat na mga aplikasyon, o XML/JSON batay sa API
 na mga endpoint.
 
-Ang CSRF Token ay maaaring makakuha sa pamamagitan ng Cookie ``csrfToken``.
+Ang CSRF Token ay maaaring makuha sa pamamagitan ng Cookie ``csrfToken``.
 
 .. _adding-http-stack:
 
