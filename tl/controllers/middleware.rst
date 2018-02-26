@@ -51,17 +51,17 @@ Ang CakePHP ay nagbibigay ng ilang mga middleware para i-handle ang karaniwang m
 
 .. _using-middleware:
 
-Using Middleware
+Paggamit sa Middleware
 ================
 
-Middleware can be applied to your application globally, or to individual
-routing scopes.
+Ang Middleware ay pwedeng i-apply sa iyong aplikasyon na pangkalahatan, o para indibidwal
+na mga routing na mga scope.
 
-To apply middleware to all requests, use the ``middleware`` method of your
-``App\Application`` class.  If you don't have an ``App\Application`` class, see
-the section on :ref:`adding-http-stack` for more information. Your application's
+Para i-apply ang middleware sa lahat na mga hiling, gamitin ang ``middleware`` na pamamaraan sa iyong
+``App\Application`` na class.  Kung ikaw ay walang isang ``App\Application`` na class, tingnan
+ang seksyon sa :ref:`adding-http-stack` para sa karagdagang impormasyon. Ang iyong proseso
 ``middleware`` hook method will be called at the beginning of the request
-process, you can use the ``MiddlewareQueue`` object to attach middleware::
+ng aplikasyon, maaari kang gumamit ng ``MiddlewareQueue`` na object na ilakip sa middleware::
 
     namespace App;
 
@@ -72,55 +72,55 @@ process, you can use the ``MiddlewareQueue`` object to attach middleware::
     {
         public function middleware($middlewareQueue)
         {
-            // Bind the error handler into the middleware queue.
+            // Itali ang tagahawak ng pagkakamali sa middleware na pila.
             $middlewareQueue->add(new ErrorHandlerMiddleware());
             return $middlewareQueue;
         }
     }
 
-In addition to adding to the end of the ``MiddlewareQueue`` you can do
-a variety of operations::
+At saka sa pagdaragdag sa katapusan sa ``MiddlewareQueue`` maaari kang makagawa
+ng iba't ibang mga operasyon::
 
         $layer = new \App\Middleware\CustomMiddleware;
 
-        // Added middleware will be last in line.
+        // Idinagdag na middleware ay magiging huli sa linya.
         $middlewareQueue->add($layer);
 
-        // Prepended middleware will be first in line.
+        // Inihanda na middleware ay magiging una sa linya.
         $middlewareQueue->prepend($layer);
 
-        // Insert in a specific slot. If the slot is out of
-        // bounds, it will be added to the end.
+        // Magsingit ng isang tiyak na puwang. Kung ang puwang ay labas sa
+        // hangganan, ito ay maidagdag sa katapusan.
         $middlewareQueue->insertAt(2, $layer);
 
-        // Insert before another middleware.
-        // If the named class cannot be found,
-        // an exception will be raised.
+        // Magsingit bago ang ibang middleware.
+        // Kung ang nakapangalan na class ay hindi mahanap,
+        // isang exception ay maipahayag.
         $middlewareQueue->insertBefore(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
 
-        // Insert after another middleware.
-        // If the named class cannot be found, the
-        // middleware will added to the end.
+        // Magsingit pagkatapos ng ibang middleware.
+        // Kung ang nakapangalan na class ay hindi mahanap, ang
+        // middleware ay idaragdag sa dulo.
         $middlewareQueue->insertAfter(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
 
-In addition to applying middleware to your entire application, you can apply
-middleware to specific sets of routes using :ref:`connecting-scoped-middleware`.
+Karagdagan sa paggamit ng middleware sa iyong buong aplikasyon, maaari kang gumamit
+ng middleware sa partikular na mga hanay ng mga ruta na gamit ang :ref:`connecting-scoped-middleware`.
 
-Adding Middleware from Plugins
+Pagdaragdag ng Middleware mula sa mga Plugin
 ------------------------------
 
-After the middleware queue has been prepared by the application, the
-``Server.buildMiddleware`` event is triggered. This event can be useful to add
-middleware from plugins. Plugins can register listeners in their bootstrap
-scripts, that add middleware::
+Pagkatapos ang middleware ay naka-pila ay inihanda ng aplikasyon, ang
+``Server.buildMiddleware`` na kaganapan ay na-trigger. Ang kaganapan ay maaaring kapaki-pakinabang na idagdag
+ang middleware mula sa mga plugin. Ang mga plugin ay maaaring magrehistro ng mga tagapakinig sa kanilang bootstrap
+na mga script, na magdagdag sa middleware::
 
-    // In ContactManager plugin bootstrap.php
+    // Sa ContactManager na plugin sa bootstrap.php
     use Cake\Event\EventManager;
 
     EventManager::instance()->on(
@@ -129,121 +129,120 @@ scripts, that add middleware::
             $middlewareQueue->add(new ContactPluginMiddleware());
         });
 
-PSR-7 Requests and Responses
+Ang PSR-7 na mga Hiling at mga Tugon
 ============================
 
-Middleware and the new HTTP stack are built on top of the `PSR-7 Request
-& Response Interfaces <http://www.php-fig.org/psr/psr-7/>`__. While all
-middleware will be exposed to these interfaces, your controllers, components,
-and views will *not*.
+Ang Middleware at ang bagong HTTP stack ay itinayo sa ibabaw ng `PSR-7 Request
+& Response Interfaces <http://www.php-fig.org/psr/psr-7/>`__. Habang lahat
+ng middleware ay malantad sa mga interfaces na ito, iyong mga controller, mga components
+at mga view ay *hindi*.
 
-Interacting with Requests
+Pakikipag-ugnay sa mga Hiling
 -------------------------
 
-The ``RequestInterface`` provides methods for interacting with the headers,
-method, URI, and body of a request. To interact with the headers, you can::
+Ang ``RequestInterface`` ay nagbibigay ng mga pamamaraan para sa pag-uugnay sa mga header,
+pamamaraan, URI, at katawan ng isang hiling. Para makapag-ugnay sa mga header, kaya mo::
 
-    // Read a header as text
+    // Basahin ang header bilang teksto
     $value = $request->getHeaderLine('Content-Type');
 
-    // Read header as an array
+    // Basahin ang header bilang isang array
     $value = $request->getHeader('Content-Type');
 
-    // Read all the headers as an associative array.
+    // Basahhin lahat ng mga header bilang isang nag-uugnay na array.
     $headers = $request->getHeaders();
 
-Requests also give access to the cookies and uploaded files they contain::
+Lahat ng mga hiling ay nagbigay din ng access sa mga cookie at na-upload na mga file na naglalaman ng mga ito::
 
-    // Get an array of cookie values.
+    // Kumuha ng mga halaga sa cookie.
     $cookies = $request->getCookieParams();
 
-    // Get a list of UploadedFile objects
+    // Kumuha ng listahan sa UploadedFile na mga object
     $files = $request->getUploadedFiles();
 
-    // Read the file data.
+    // Basahin ang datos ng file.
     $files[0]->getStream();
     $files[0]->getSize();
     $files[0]->getClientFileName();
 
-    // Move the file.
+    // Ilipat ang file.
     $files[0]->moveTo($targetPath);
 
-Requests contain a URI object, which contains methods for interacting with the
-requested URI::
+Ang mga hiling ay naglalaman ng URI object, na kung saan ay naglalaman ng mga pamamaraan para sa pag-ugnayan sa mga hiniling na URI::
 
-    // Get the URI
+    // Kunin ang URI
     $uri = $request->getUri();
 
-    // Read data out of the URI.
+    // Basahin ang datos na inilabas sa URI.
     $path = $uri->getPath();
     $query = $uri->getQuery();
     $host = $uri->getHost();
 
-Lastly, you can interact with a request's 'attributes'. CakePHP uses these
-attributes to carry framework specific request parameters. There are a few
-important attributes in any request handled by CakePHP:
+Panghuli, maaari kang mag-ugnay sa isang humihiling na 'attributes'. Ang CakePHP ay gumagamit nito
+na mga katangian upang dalhin ang framework sa tiyak na mga parameter ng kahilingan. Mayroong kunting
+importante na mga katangian sa anumang hiling na hinawakan ni CakePHP:
 
-* ``base`` contains the base directory for your application if there is one.
-* ``webroot`` contains the webroot directory for your application.
-* ``params`` contains the results of route matching once routing rules have been
-  processed.
-* ``session`` contains an instance of CakePHP's ``Session`` object. See
-  :ref:`accessing-session-object` for more information on how to use the session
-  object.
+* ``base`` ay naglalaman ng base na direktoryo para sa iyong aplikasyon kung meron mang isa.
+* ``webroot`` ay naglalaman ng webroot na direktoryo para sa iyong aplikasyon.
+* ``params`` ay naglalaman ng mga resulta sa ruta na tumutugma kapang ang mga patakaran ng pag-ruta ay
+  nai-proseso.
+* ``session`` ay naglalaman ng isang instance sa CakePHP ``Session`` na object. Tingnan
+  :ref:`accessing-session-object` para sa karagdagang impormasyon kung papaano gamitin ang sesyon
+  na object.
 
-Interacting with Responses
+Pag-uugnay ng mga Tugon
 --------------------------
 
-The methods available to create a server response are the same as those
-available when interacting with :ref:`httpclient-response-objects`. While the
-interface is the same the usage scenarios are different.
+Ang pamamaraan ay magagamit upang lumikha ng server na tugon ay pareho sa mga
+magagamit na iyon kapag nag-uugnay sa :ref:`httpclient-response-objects`. Habang ang
+interface ay pareho lamang ang gamit ng mga sitwasyon ay magkaiba.
 
-When modifying the response, it is important to remember that responses are
-**immutable**. You must always remember to store the results of any setter
-method. For example::
+Kapag nagbago sa tugon, ito ay importante na tandaan na ang mga tugon ay
+**immutable**. Dapat mong laging tandaan na mag-imbak ng mga resulta sa anumang mga setter
+na mga pamamaraan. Halimbawa::
 
-    // This does *not* modify $response. The new object was not
-    // assigned to a variable.
+    // Ito ay *hindi* nagbabago sa $response. Ang bagong object ay hindi
+    // itinalaga sa isang variable.
     $response->withHeader('Content-Type', 'application/json');
 
-    // This works!
+    // Ito ay gumagana!
     $newResponse = $response->withHeader('Content-Type', 'application/json');
 
-Most often you'll be setting headers and response bodies on requests::
+Madalas ikaw ay magtatakda ng mga header at mga tugon na kumakatawan sa mga hiling::
 
-    // Assign headers and a status code
+    // Magtakda ng mga header at isang code ng katayuan
     $response = $response->withHeader('Content-Type', 'application/json')
         ->withHeader('Pragma', 'no-cache')
         ->withStatus(422);
 
-    // Write to the body
+    // Sumulat sa katawan
     $body = $response->getBody();
     $body->write(json_encode(['errno' => $errorCode]));
 
-Creating Middleware
+Paglikha ng Middleware
 ===================
 
-Middleware can either be implemented as anonymous functions (Closures), or as
-invokable classes. While Closures are suitable for smaller tasks they make
-testing harder, and can create a complicated ``Application`` class. Middleware
-classes in CakePHP have a few conventions:
+Ang Middleware ay maaaring ipatupad bilang hindi kilalang mga function (Closures), o bilang
+nanawagan na mga class. Habang ang Closures ay karapatdapat para sa maliit na mga gawain na ginagawa nila
+na pag-test sa mas mahirap, at maaaring lumikha ng isang kumplikadong ``Application`` na class. Ang Middleware
+na class sa CakePHP ay nagkaroon ng ilang mga kombensiyon:
 
-* Middleware class files should be put in **src/Middleware**. For example:
+* Ang Middleware class na mga file ay dapat ilagay sa **src/Middleware**. Halimbawa:
   **src/Middleware/CorsMiddleware.php**
-* Middleware classes should be suffixed with ``Middleware``. For example:
+* Ang Middleware na mga class ay dapat naka-suffix sa ``Middleware``. Halimbawa:
   ``LinkMiddleware``.
-* Middleware are expected to implement the middleware protocol.
+* Ang Middleware ay inaasahan na ipatupad ang middleware na protocol.
 
-While not a formal interface (yet), Middleware do have a soft-interface or
-'protocol'. The protocol is as follows:
+Habang hindi sa isang pormal na interface (hindi pa), Ang Middleware ay mayroong isang soft-interface o
+'protocol'. Ang protocol ay ang mga sumusunod:
 
-#. Middleware must implement ``__invoke($request, $response, $next)``.
-#. Middleware must return an object implementing the PSR-7 ``ResponseInterface``.
+#. Ang Middleware ay dapat nagpatupad ng ``__invoke($request, $response, $next)``.
+#. Ang Middleware ay dapat magbalik ng isang object na nagpapatupad sa PSR-7 ``ResponseInterface``.
 
-Middleware can return a response either by calling ``$next`` or by creating
-their own response. We can see both options in our simple middleware::
+Ang Middleware ay maaaring bumalik ng sagot na alinman sa pamamgitan ng pagtawag sa ``$next`` o sa pamamagitan ng paglilikha
+ng sarili nilang mga tugon. Maaari naming makita ang parehong mga opsyon sa aming simple na middleware::
 
-    // In src/Middleware/TrackingCookieMiddleware.php
+    // Sa src/Middleware/TrackingCookieMiddleware.php
     namespace App\Middleware;
     use Cake\I18n\Time;
 
@@ -268,8 +267,8 @@ their own response. We can see both options in our simple middleware::
         }
     }
 
-Now that we've made a very simple middleware, let's attach it to our
-application::
+Ngayon na ginawa na namin ang isang pinaka simple na middleware, isama natin ito sa ating
+aplikasyon::
 
     // In src/Application.php
     namespace App;
@@ -280,10 +279,10 @@ application::
     {
         public function middleware($middlewareQueue)
         {
-            // Add your simple middleware onto the queue
+            // Idagadg sa iyong simple na middleware papunta sa queue
             $middlewareQueue->add(new TrackingCookieMiddleware());
 
-            // Add some more middleware onto the queue
+            // Magdagdag ng higit pa na middleware papunta sa queue
 
             return $middlewareQueue;
         }
@@ -291,12 +290,12 @@ application::
 
 .. _security-header-middleware:
 
-Adding Security Headers
+Pagdagdag ng Seguridad sa mga Header
 =======================
 
-The ``SecurityHeaderMiddleware`` layer makes it easy to apply security related
-headers to your application. Once setup the middleware can apply the following
-headers to responses:
+Ang ``SecurityHeaderMiddleware`` na layer ay ginagawang madali upang mag-apply ng kaugnay sa seguridad
+na mga header sa iyong aplikasyon. Sa sandaling i-setup ang middleware ay maaaring ilapat ang sumusunod
+na mga header sa mga tugon:
 
 * ``X-Content-Type-Options``
 * ``X-Download-Options``
@@ -304,8 +303,8 @@ headers to responses:
 * ``X-Permitted-Cross-Domain-Policies``
 * ``Referrer-Policy``
 
-This middleware is configured using a fluent interface before it is applied to
-your application's middleware stack::
+Itong middleware ay naka-configure gamit ang mataas na interface bago ito inilapat sa
+iyong aplikasyon sa middleware stack::
 
     use Cake\Http\Middleware\SecurityHeadersMiddleware;
 
@@ -325,13 +324,13 @@ your application's middleware stack::
 
 .. _encrypted-cookie-middleware:
 
-Encrypted Cookie Middleware
+Pag-encrypt ng Cookie sa Middleware
 ===========================
 
-If your application has cookies that contain data you want to obfuscate and
-protect against user tampering, you can use CakePHP's encrypted cookie
-middleware to transparently encrypt and decrypt cookie data via middleware.
-Cookie data is encrypted with via OpenSSL using AES::
+Kung ang iyong aplikasyon ay mayroong mga cookie na merong laman na datos na gusto mong tumalbog at
+protektahan laban sa pakikialam sa gumagamit, maaari kang gumamit ng naka-encrypt na cookie sa CakePHP
+na middleware upang halatang naka-encrypt at decrypt cookie sa datos gamit ang middleware.
+Ang Cookie na datos ay naka-encrypt at dumadaan sa OpenSSL gamit ang AES::
 
     use Cake\Http\Middleware\EncryptedCookieMiddleware;
 
@@ -344,22 +343,22 @@ Cookie data is encrypted with via OpenSSL using AES::
     $middlewareQueue->add($cookies);
 
 .. note::
-    It is recommended that the encryption key you use for cookie data, is used
-    *exclusively* for cookie data.
+    Ito ay inirerekomenda na ang naka-encrypt na key na ginagamit mo para sa cookie na datos, ay nagamit
+    *exclusively* para sa cookie na datos.
 
-The encryption algorithms and padding style used by the cookie middleware are
-backwards compatible with ``CookieComponent`` from earlier versions of CakePHP.
+Ang encryption na mga algorithm at padding na estilo ay ginagamit sa cookie middleware ay
+paurong na compatible sa ``CookieComponent`` mula sa mas naunang mga bersyon sa CakePHP.
 
 .. versionadded:: 3.5.0
-    The ``EncryptedCookieMiddleware`` was added in 3.5.0
+    Ang ``EncryptedCookieMiddleware`` ay idinagdag sa 3.5.0
 
 .. _csrf-middleware:
 
-Cross Site Request Forgery (CSRF) Middleware
+Cross Site Request Forgery (CSRF) na Middleware
 ============================================
 
-CSRF protection can be applied to your entire application, or to specific scopes
-by applying the ``CsrfProtectionMiddleware`` to your middleware stack::
+CSRF na proteksyon ay maaaring ilapat sa iyong buong aplikasyon, o sa partikular na mga scope
+sa pamamagitan ng paglapat ng ``CsrfProtectionMiddleware`` sa iyong middleware na stack::
 
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
 
@@ -370,19 +369,19 @@ by applying the ``CsrfProtectionMiddleware`` to your middleware stack::
 
     $middlewareQueue->add($csrf);
 
-Options can be passed into the middleware's constructor.
-The available configuration options are:
+Ang mga opsyon ay maaaring maipasa sa constructor ng middleware.
+Ang magagamit na configuration na mga opsyon ay:
 
-- ``cookieName`` The name of the cookie to send. Defaults to ``csrfToken``.
-- ``expiry`` How long the CSRF token should last. Defaults to browser session.
-- ``secure`` Whether or not the cookie will be set with the Secure flag. That is,
-  the cookie will only be set on a HTTPS connection and any attempt over normal HTTP
-  will fail. Defaults to ``false``.
-- ``httpOnly`` Whether or not the cookie will be set with the HttpOnly flag. Defaults to ``false``.
-- ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
-  will also require configuring FormHelper.
+- ``cookieName`` Ang pangalan sa cookie na ipapadala. Ay naka-default sa ``csrfToken``.
+- ``expiry`` Gaano katagal ang CSRF token na dapat magtagal. Ang mga default sa browser na sesyon.
+- ``secure`` Kung o hindi ang cookie ay itatakda na may Secure na flag. Yan ay,
+  ang cookie ay magtatakda lamang sa HTTPS na koneksyon at anumang pagtatangka na higit sa normal na HTTP
+  ay mabibigo. Ang mga default ay ``false``.
+- ``httpOnly`` Kung o hindi ang cookie ay itatakda na may HttpOnly na flag. Ang mga default ay ``false``.
+- ``field`` Ang patlang ng form upang suriin. Ang mga defaults ay ``_csrfToken``. Pagbabago nito
+  ay nangangailangan din ng pag-configure sa FormHelper.
 
-When enabled, you can access the current CSRF token on the request object::
+Kapag pinagana, maaari kang mag-access sa kasalukuyang CSRF na token sa hiling na object::
 
     $token = $this->request->getParam('_csrfToken');
 
@@ -392,46 +391,46 @@ When enabled, you can access the current CSRF token on the request object::
 Integration with FormHelper
 ---------------------------
 
-The ``CsrfProtectionMiddleware`` integrates seamlessly with ``FormHelper``. Each
-time you create a form with ``FormHelper``, it will insert a hidden field containing
-the CSRF token.
+Ang ``CsrfProtectionMiddleware`` ay naka pag-ugnayan nang walang putol sa ``FormHelper``. Baway
+oras na nilikha mo ang isang form na may ``FormHelper``, ito ay nagsingit ng isang nakatagong patlang na nilalaman
+ang CSRF na token.
 
 .. note::
 
-    When using CSRF protection you should always start your forms with the
-    ``FormHelper``. If you do not, you will need to manually create hidden inputs in
-    each of your forms.
+    Kapag gumagamit ng CSRF na proteksyon ay dapay kang laging magsimula sa iyong mga form na may
+    ``FormHelper``. Kung ayaw mo, kakailanganin mo nang mano-mano sa paglikha ng nakatagong mga input sa
+    bawat isa sa iyong form.
 
-CSRF Protection and AJAX Requests
+Ang CSRF na Proteksyon at AJAX na mga Hiling
 ---------------------------------
 
-In addition to request data parameters, CSRF tokens can be submitted through
-a special ``X-CSRF-Token`` header. Using a header often makes it easier to
-integrate a CSRF token with JavaScript heavy applications, or XML/JSON based API
-endpoints.
+At saka sa hiling sa datos ng mga parameter, ang CSRF na mga token ay maaaring masumite sa pamamagitan ng
+isang espesyal ``X-CSRF-Token`` na header. Paggamit ng header ay madalas na ginagawang mas madali sa
+pag-uugnay sa CSRF na token na may JavaScript na may mabigat na mga aplikasyon, o XML/JSON batay sa API
+na mga endpoint.
 
-The CSRF Token can be obtained via the Cookie ``csrfToken``.
+Ang CSRF Token ay maaaring makakuha sa pamamagitan ng Cookie ``csrfToken``.
 
 .. _adding-http-stack:
 
-Adding the new HTTP Stack to an Existing Application
+Pagdagdag ng bagong HTTP Stack sa isang Umiiral na Aplikasyon
 ====================================================
 
-Using HTTP Middleware in an existing application requires a few changes to your
-application.
+Paggamit ng HTTP na Middleware sa isang umiiral na aplikasyon ay nangangailangan ng ilang mga pagbabago ng iyong
+aplikasyon.
 
-#. First update your **webroot/index.php**. Copy the file contents from the `app
+#. Una ay i-update ang iyong **webroot/index.php**. Kopyahin ang nilalaman ng file mula sa `app
    skeleton <https://github.com/cakephp/app/tree/master/webroot/index.php>`__.
-#. Create an ``Application`` class. See the :ref:`using-middleware` section
-   above for how to do that. Or copy the example in the `app skeleton
+#. Lumikha ng ``Application`` na class. Tingnan ang :ref:`using-middleware` na seksyon
+   sa itaas kung paano gawin iyon. O kopyahin ang halimbawa sa `app skeleton
    <https://github.com/cakephp/app/tree/master/src/Application.php>`__.
-#. Create **config/requirements.php** if it doesn't exist and add the contents from the `app skeleton <https://github.com/cakephp/app/blob/master/config/requirements.php>`__.
+#. Lumikha sa **config/requirements.php** kung hindi ito umiiral at idagdag ang nilalaman mula sa `app skeleton <https://github.com/cakephp/app/blob/master/config/requirements.php>`__.
 
-Once those three steps are complete, you are ready to start re-implementing any
-application/plugin dispatch filters as HTTP middleware.
+Sa sandaling ang tatlong mga hakbang ay nakumpleto, handa ka na magsimula sa pagpapatupad ng anumang
+aplikasyon/plugin dispatch na mga filter bilang HTTP na middleware.
 
-If you are running tests you will also need to update your
-**tests/bootstrap.php** by copying the file contents from the `app skeleton
+Kung ikaw ay nagpapatakbo ng mga pagsusuri ay kakailanganin mo din na i-update ang iyong
+**tests/bootstrap.php** sa pamamagitan sa pagkopya ng mga nilalaman ng file mula sa `app skeleton
 <https://github.com/cakephp/app/tree/master/tests/bootstrap.php>`_.
 
 .. meta::
