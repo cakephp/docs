@@ -4,9 +4,9 @@ Mga Komponent
 Ang mga Komponent ay ang mga package sa lohika na ibinabahagi sa pagitan ng mga controller.
 Ang CakePHP ay may isang napakagandang set ng pangunahing mga komponent na pwede mong gamitin para tulungan ka sa 
 iba-ibang mga karaniwang mga gawain. Maaari ka ring lumikha ng sarili mong mga komponent. Kung makikita mo 
-sa sarili na gusto mong i-copy at paste ang mga bagay sa pagitan ng mga controller, dapat mo 
-isaalang-alang Ang paglilikha ng iyong sariling komponent na naglalaman ng functionality. Paglilikha ng 
-mga component ay nagpapanatili ng controller code na malinis at nagpapahintulot sa iyo upang gamitin ang code sa pagitan 
+sa sarili na gusto mong i-copy at paste ang mga bagay sa pagitan ng mga controller, dapat mong 
+isaalang-alang ang paglikha ng iyong sariling komponent na naglalaman ng functionality. Ang paglilikha ng mga 
+komponento ay nagpapanitling malinis sa controller ng code at nagpapahintulot sa iyo upang gamitin ang code sa pagitan 
 ng iba't ibang mga controller.
 
 Para sa karagdagang impormasyon sa mga component na kasama sa CakePHP, tingnan ang 
@@ -28,9 +28,9 @@ kabanata para sa bawat komponent:
 Pag-configure ng mga Komponent
 ======================
 
-Marami sa pangunahing mga komponent ay nangangailangan ng configuration. Ilang mga halimbawa sa mga komponent 
-na nangangailangan ng configuration ay :doc:`/controllers/components/authentication` at
-:doc:`/controllers/components/cookie`.  Ang configuration para sa mga komponent na ito,
+Marami sa pangunahing mga komponent ay nangangailangan ng kumpigurasyon. Ilang mga halimbawa sa mga komponent 
+na nangangailangan ng kumpigurasyon ay :doc:`/controllers/components/authentication` at
+:doc:`/controllers/components/cookie`.  Ang kumpigurasyon para sa mga komponent na ito,
 at para sa mga komponent sa pangkalahatan, ay karaniwang natapos sa pamamagitan ng ``loadComponent()`` sa iyong 
 mga Controller na ``initialize()`` na pamamaraan o sa pamamagitan sa ``$components`` na array::
 
@@ -61,7 +61,7 @@ ding ipahayag bilang::
     }
 
 Tulad ng mga helper, ang mga komponent ay nagpapatupad ng ``config()`` na pamamaraan na ginagamit upang kumuha at 
-magtakda ng anumang configuration ng datos para sa komponent::
+magtakda ng anumang kumpigurasyon ng datos para sa komponent::
 
     // Basahin ang config na datos.
     $this->Auth->config('loginAction');
@@ -70,14 +70,14 @@ magtakda ng anumang configuration ng datos para sa komponent::
     $this->Csrf->config('cookieName', 'token');
 
 Tulad ng mga helper, ang mga komponent ay awtomatikong mag-merge sa kanilang ``$_defaultConfig``
-na property na may constructor configuration upang lumikha sa ``$_config`` na property
+na katangian na may kumpigurasyon ng constructor para malikha ang ``$_config`` na katangian
 na kung saan ay ma-access sa pamamagitan ng ``config()``.
 
 Pag-alias ng mga Komponent
 -------------------
 
-Isang karaniwang setting na gamitin ay ang ``className`` na opsyon, na kung saan ay nagpapahintulot sa iyo na
-i-alias ang mga komponent. Ang feature na ito ay kapaki-pakinabang kapag kailangan mong
+Isang karaniwang setting na gagamitin ay ang ``className`` na opsyon, na kung saan ay nagpapahintulot sa iyo na
+i-alias ang mga komponent. Ang katangiang ito ay kapaki-pakinabang kapag kailangan mong
 palitan ang ``$this->Auth`` o ibang karaniwan na Component na nagrereperensiya na may pasadyang
 pagpapatupad::
 
@@ -121,16 +121,16 @@ na aksyon. Sa mga sitwasyon na tulad nito ay maaari kang maka-load ng isang komp
 
 .. note::
 
-    Tandaan na ang mga komponent na iyon ay naka-load ng nauna ay hindi malampasan
-    na mga callback na tinatawag. Kung ikaw ay umaasa sa ``beforeFilter`` o ``startup``
-    na mga callback na pagiging pagtawag, maaari mong kailangan na tumawag sa kanila ng mano-mano depende kung kailan
+    Isaisip na ang mga komponentong naunang naka-load ay hindi makakalimot sa mga natawag na mga callback.
+    Kung ikaw ay umaasa sa ``beforeFilter`` o ``startup``
+    na mga callback na tinatawag, maaari mong kailangan na tumawag sa kanila ng mano-mano depende kung kailan
     ka nag-load ng iyong komponent.
 
 Paggamit ng mga Komponent
 ================
 
 Sa sandaling iyon ay kasama ang ilang mga komponent sa iyong controller, ang paggamit ng mga ito ay masyadong
-simple. Sa bawat component ikaw ay makagamit sa nakalantad bilang isang property ng iyong controller. Kung
+simple. Sa bawat komponentong nagamit mo ay nakalantad bilang isang katangian ng iyong controller. Kung
 ikaw ay naka-load na nang :php:class:`Cake\\Controller\\Component\\FlashComponent`
 sa iyong controller, maaari mong ma-access kung gusto mo::
 
@@ -153,8 +153,8 @@ sa iyong controller, maaari mong ma-access kung gusto mo::
 .. note::
 
     Dahil pareho na mga Modelo at mga Komponent ay idinadagdag sa mga Controllers bilang
-    mga property na ibinabahagi nila sa parehong 'namespace'. Tiyakin na hindi magbigay ng 
-    komponent at isang modelo na parehong pangalan.
+    mga property na ibinabahagi nila sa parehong 'namespace'. Tiyakin na hindi magbigay ng parehong pangalan 
+    sa komponento at sa isang modelo..
 
 .. _creating-a-component:
 
@@ -183,8 +183,8 @@ component ay mukhang ganito ang anyo::
 
 .. note::
 
-    Lahat ng mga component ay dapat mag-extend sa :php:class:`Cake\\Controller\\Component`. Pagkakamali
-    na gawin ito ay mag-trigger sa isang exception.
+    Lahat ng mga component ay dapat mag-extend sa :php:class:`Cake\\Controller\\Component`. Ang pakakalimot sa paggawa 
+    nito ay mag-trigger sa isang exception.
 
 Isasama ang iyong Component sa iyong mga Controllers
 --------------------------------------------
@@ -287,7 +287,7 @@ object::
 Component ng mga Callback
 ===================
 
-Ang mga Component ay nag-aalok ng ilang mga hiling sa cycle ng buhay na mga callback na nagpapahintulot sa kanila upang
+Ang mga komponento ay nag-aalok rin ng iilang mga hiling sa cycle ng buhay na mga callback na nagpapahintulot sa kanila upang
 dagdagan ang hiling ng cycle.
 
 .. php:method:: beforeFilter(Event $event)
