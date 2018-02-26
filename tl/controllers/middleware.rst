@@ -2,7 +2,7 @@ Ang Middleware
 ##########
 
 Ang Middleware na mga bagay ay nagbibigay sayo ng abilidad sa 'wrap' ng iyong aplikasyon sa magagamit muli,
-composable na mga layer sa Hiling na paghahawak, o sagot sa building na logic. Biswal,
+composable na mga suson ng paghawak sa kahilingan, o lohika sa pagbuo ng sagot. Biswal,
 ang iyong aplikasyon ay nagtatapos sa gitna, at ang middleware ay naka-wrap sa app
 na tulad ng sibuyas. Dito tayo ay maaaring makakita ng isang aplikasyon na naka-wrap na may mga Route, mga Asset,
 Exception Handling at CORS header middleware.
@@ -10,8 +10,8 @@ Exception Handling at CORS header middleware.
 .. image:: /_static/img/middleware-setup.png
 
 Kapag ang hiling ay hinahawakan ng iyong aplikasyon ito ay pumapasok mula sa pinakalabas
-na middleware. Bawat middleware ay maaring alinman ay makadelegado ng hiling/sagot sa susunod na
-layer, o bumalik ng sagot. Ang bumabalik na sagot ay pinipigilan ang ibabang mga layer mula
+na middleware. Bawat middleware ay maaaring mag-delegate sa hiling/sagot sa sunod na suson, o magbalik ng sagot.
+Ang bumabalik na sagot ay pinipigilan ang ibabang mga layer mula
 sa kailanmang nakikita na hiling. Isang halimbawa sa isang AssetMiddleware na paghahawak
 ay ihiling para sa isang plugin na imahe sa panahon ng development.
 
