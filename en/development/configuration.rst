@@ -369,6 +369,23 @@ Reading & Deleting Configuration Data
 Read and delete a key from Configure. This is useful when you want to
 combine reading and deleting values in a single operation.
 
+.. php:staticmethod:: consumeOrFail($key)
+
+Consumes configuration data just like :php:meth:`Cake\\Core\\Configure::consume`
+but expects to find a key/value pair. In case the requested pair does not
+exist, a :php:class:`RuntimeException` will be thrown::
+
+    Configure::consumeOrFail('Company.name');    // Yields: 'Pizza, Inc.'
+    Configure::consumeOrFail('Company.geolocation');  // Will throw an exception
+
+    Configure::consumeOrFail('Company');
+
+    // Yields:
+    ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
+
+.. versionadded:: 3.6.0
+``Configure::readOrFail()`` was added in 3.6.0
+
 Reading and writing configuration files
 =======================================
 

@@ -151,6 +151,10 @@ Cache
 * Fallback engines can be disabled by setting ``fallback = false`` for any cache
   configuration.
 
+Configure
+=========
+
+* ``consumeOrFail()`` has been added to complete the API for reading with the expectation of data being present.
 
 Core
 ====
