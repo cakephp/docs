@@ -1,10 +1,10 @@
 Pag-Extend ng Bake
-##############
+##################
 
 Ang Bake ay nagtatampok ng extensible na arkitektura na nagpapahintulot ng iyong aplikasyon o mga plugin upang baguhin o idagdag sa functionality ng base. Ang Bake ay gumagamit ng isang dedikadong klase ng view na ginagamit ang `Twig <https://twig.symfony.com/>`_ na template ng engine.
 
 Mga Kaganapan ng Bake
-===========
+=====================
 
 Bilang isang klase ng view, ang ``BakeView`` ay nagpapalabas ng parehong mga kaganapan tulad ng anumang klase ng view,
 kasama ang isang dagdag na pagsisimula ng kaganapan. Gayunpaman, samantalang ang karaniwang view na mga klase ay gumagamit ng prefix ng kaganapan na "View.", ang ``BakeView`` ay gumagamit ng kaganapan ng prefix na "Bake.".
@@ -96,7 +96,7 @@ Sa pamamagitan ng pagscope ng mga tagapakinig ng kaganapan sa tiyak na mga templ
 lohika ng kaganapan na kaugnay ng at magbigay ng mga callback na mas madaling subukan.
 
 Template ng Bake na Syntax
-====================
+==========================
 
 Ang template ng Bake na mga file ay ginamit ang `Twig <https://twig.symfony.com/doc/2.x/>`__ na syntax ng template.
 
@@ -173,7 +173,7 @@ At ang resultant ng baked na klase (**src/Shell/FooShell.php**) ay katulad ng hi
 .. _creating-a-bake-theme:
 
 Ang Paglikha ng isang Tema ng Bake
-=====================
+==================================
 
 Kung nais mong baguhin ang output na ginawa ng command ng "bake", maaari kang
 lumikha ng iyong sariling 'tema' ng bake na nagpapahintulot sa iyo na palitan ang ilan o lahat ng 
@@ -193,7 +193,7 @@ mga template na ginagamit ng bake. Ang pinakamahusay na paraan upang gawin ito a
         Configure::write('Bake.theme', 'MyTheme');
 
 Ang Pag-customize ng mga Template ng Bake
-==============================
+=========================================
 
 Kung nais mong baguhin ang default na output na ginawa ng utos ng "bake", maaari kang
 lumikha ng iyong sariling mga template ng bake sa iyong aplikasyon. Sa ganitong paraan ay hindi ginagamit ang 
@@ -205,7 +205,7 @@ lumikha ng iyong sariling mga template ng bake sa iyong aplikasyon. Sa ganitong 
    aplikasyon.
 
 Maglikha ng Bagong Command ng Bake na mga Opsyon
-=================================
+================================================
 
 Posibleng magdagdag ng bagong utos ng bake na mga opsyon, o i-override ang mga binigay ng 
 CakePHP sa pamamagitan ng paglikha ng mga gawain sa iyong aplikasyon o mga plugin. Sa pagpapalawak ng 
