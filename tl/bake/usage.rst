@@ -1,5 +1,5 @@
 Ang Paggenerate ng Code kasama ang Bake
-#########################
+#######################################
 
 Ang cake na console ay pinapatakbo gamit ang PHP na CLI (command line interface).
 Kung may mga problema ka sa pagpapatakbo ng script, siguraduhin na:
@@ -116,7 +116,7 @@ magagamit gamit ang ``--help`` option::
     --verbose, -v      Enable verbose output.
 
 Mga Tema ng Bake
-===========
+================
 
 Ang opsyon ng tema ay pangkaraniwan sa lahat ng mga utos ng bake, at nagpapahintulot sa pagbabago ng bake 
 na template na mga file na ginagamit sa pagbi-bake. Para lumikha ng iyong sariling mga template, tingnan ang 
