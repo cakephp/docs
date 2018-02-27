@@ -18,7 +18,7 @@ Mga Kinakailangan
 	Ang CakePHP 3.0 ay hindi gagana kung hindi mo nakamit ang mga kinakailangan sa itaas.
 
 Pang-Update na Kasangkapan
-======================
+==========================
 
 Habang ang dokumentong ito ay tumatalakay sa lahat ng nakakasirang mga pagbabago at
 mga pagpapabuti na ginawa sa CakePHP 3.0, kami ay nakalikha rin ng isang console na
@@ -52,7 +52,7 @@ mga paraan katulad ng :php:meth:`__()` at :php:meth:`debug()` ay hindi naka-name
 para sa kaginhawahan.
 
 Tinanggal ang mga Constant
-========================
+==========================
 
 Ang sumusunod na hindi na ginagamit na mga constant ay tinanggal na:
 
@@ -96,7 +96,7 @@ aplikasyon na ina-upgrade. Tingnan ang bagong :doc:`/orm` na dokumentasyon para 
 impormasyon kung paano gamitin ang bagong ORM.
 
 Mga Batayan
-======
+===========
 
 * Ang ``LogError()`` ay tinanggal, ito ay walang benepisyong binibigay at bihira/hindi
   kailanman ginamit
@@ -760,7 +760,7 @@ ConnectionManager
   Ito ay maaaring palitan ng ``config($name, $config)`` at ``get($name)``.
 
 Mga Pag-uugali
----------
+--------------
 - Ang naka-prefix ng underscore na pag-uugali na mga paraan katulad ng ``_someMethod()``
   ay hindi na tinatrato bilang pribadong mga paraan. Sa halip ay gumamit ng nararapat na 
   kakayahang makita na mga keyword.
@@ -859,7 +859,7 @@ impormasyon sa mga tampok na ibinigay ng bagong class. Maaari mong gamitin ang
 ``cake upgrade rename_collections`` upang tumulong sa pag-upgrade ng iyong code.
 
 View na Class
-----------
+-------------
 
 - Ang ``plugin`` na key ay tinanggal mula sa ``$options`` na argumento ng 
   :php:meth:`Cake\\View\\View::element()`. Sa halip ay tukuyin ang pangalan ng elemento bilang 
