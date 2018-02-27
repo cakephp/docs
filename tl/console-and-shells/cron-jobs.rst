@@ -1,5 +1,5 @@
 Pagpapatakbo ng mga Shell bilang mga Cron Job
-###########################
+#############################################
 
 Isang karaniwang bagay na gagawin sa isang shell ay ginagawa itong tumatakbo bilang isang cronjob para  
 linisin ang database minsan o magpadala ng mga newsletter. Ito ay 
@@ -23,7 +23,7 @@ Makakakita ka ng higit pang impormasyon dito: http://en.wikipedia.org/wiki/Cron
     Gumamit ng ``-q`` (o `--quiet`) upang patahimikin ang anumang output para sa cronjobs.
 
 Mga Cron Job sa Shared na Hosting
----------------------------
+---------------------------------
 
 Sa ilang mga shared na hosting ``cd /full/path/to/root && bin/cake myshell myparam``
 ay maaaring hindi gumana. Sa halip maaari mong gamitin ang 
