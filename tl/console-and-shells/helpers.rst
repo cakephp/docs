@@ -1,5 +1,5 @@
 Mga Helper ng Shell
-#############
+###################
 
 .. versionadded:: 3.1
     Shell Helpers were added in 3.1.0
@@ -21,7 +21,7 @@ Maaari ka ring makakuha ng mga instance ng mga helper at tawagin ang anumang pub
     $progress->draw();
 
 Paglikha ng mga Helper
-================
+======================
 
 Habang ang CakePHP ay may ilang mga helper ng shell maaari kang lumikha ng higit pa sa iyong 
 aplikasyon o mga plugin. Bilang isang halimbawa, tayo ay lilikha ng isang simpleng helper para makabuo 
@@ -56,10 +56,10 @@ mga parameter. Gayunpaman, dahil ang mga Helper ng Console ay mga class ng vanil
 ipatupad ang mga karagdagang paraan na kukuha ng anumang form ng mga argumento.
 
 Mga Helper na Built-In
-================
+======================
 
 Helper ng Table
-------------
+---------------
 
 Ang TableHelper ay tumutulong sa paggawa ng mahusay na format ng ASCII na mga table ng sining. Ang paggamit nito ay 
 simple lang::
@@ -80,7 +80,7 @@ simple lang::
         +--------------+---------------+---------------+
 
 Helper ng Pag-unlad
----------------
+-------------------
 
 Ang ProgressHelper ay maaaring gamitin sa dalawang magkaibang paraan. Ang simple na mode ay hinahayaan kang 
 magbigay ng isang callback nai-invoke hanggang makumpleto ang pag-unlad::
