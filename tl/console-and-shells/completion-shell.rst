@@ -1,5 +1,5 @@
 Pagkumpleto ng Shell
-################
+####################
 
 Ang paggawa sa console ay nagbibigay sa developer ng maraming mga posibilidad ngunit 
 para lubosang malaman at maisulat ang mga utos na iyon ay maaaring nakakapagod. Lalo na kapag 
@@ -8,7 +8,7 @@ Pagkumpleto ng mga Shell ay tumutulong sa bagay na ito sa pamamagitan ng pagbibi
 mga script para sa mga shell tulad ng bash, zsh, fish atbp.
 
 Mga Sub na Utos
-============
+===============
 
 Ang Pagkumpleto ng Shell ay binubuo ng isang bilang ng mga sub na utos upang tulungan ang 
 developer na lumikha ng kumpletong script. Bawat isa para sa ibang hakbang sa 
@@ -31,7 +31,7 @@ Ang iyong script ng pagkumpleto ay maaaring pumili ng may katuturang mga utos mu
 magpagtuloy. (Para dito at sa sumusunod na mga sub na utos.)
 
 mga subCommand
------------
+--------------
 
 Kapag ang nagustuhang utos ay napili na, ang mga subCommand ay papasok bilang pangalawang 
 hakbang at i-output ang posibleng sub na utos para sa ibinigay na utos ng shell. 
@@ -44,7 +44,7 @@ Ibabalik::
     controller db_config fixture model plugin project test view
 
 mga opsyon
--------
+----------
 
 Habang ang pangatlo at pangwakas na mga opsyon ay nag-output ng mga pagpipilian para sa ibinigay na (sub) utos bilang
 na-set sa getOptionParser. (Kabilang ang default na mga opsyon na na-inherit mula sa Shell.)
@@ -60,7 +60,7 @@ Maaari mo ring ipasa ang karagdagang argumento bilang sub-command ng shell : ito
 mag-output ng tiyak na mga opsyon ng sub-command na ito.
 
 Paano paganahin ang autocompletion ng Bash para sa Console ng CakePHP
-=========================================================
+=====================================================================
 
 Una, siguraduhin na ang **bash-completion** na library ay naka-install. Kung hindi, gagawin mo ito 
 kasama ang sumusunod na utos::
@@ -156,7 +156,7 @@ Sample na output para sa autocompletion ng mga utos::
     console     migrations  plugin      server
 
 Mga Subcommand
------------
+--------------
 
 Sample na output para sa autocompletion ng mga subcommand::
 
@@ -169,7 +169,7 @@ Sample na output para sa autocompletion ng mga subcommand::
     form                plugin
 
 Mga Opsyon
--------
+----------
 
 Sample na output para sa autocompletion ng mga opsyon ng mga subcommand::
 
