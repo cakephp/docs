@@ -138,7 +138,7 @@ Environment Variables (from $_SERVER and $_ENV)
 .. php:method:: env($key, $value = null)
 
 ``ServerRequest::env()`` is a wrapper for ``env()`` global function and acts as
-a getter/setter for enviromnent variables without having to modify globals
+a getter/setter for environment variables without having to modify globals
 ``$_SERVER`` and ``$_ENV``::
 
     // Get the host
