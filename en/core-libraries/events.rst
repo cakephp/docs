@@ -391,7 +391,7 @@ controller events too. The subject class is important because listeners will get
 immediate access to the object properties and have the chance to inspect or
 change them on the fly.
 
-Finally, the third argument is any additional event data.This can be any data
+Finally, the third argument is any additional event data. This can be any data
 you consider useful to pass around so listeners can act upon it. While this can
 be an argument of any type, we recommend passing an associative array.
 
