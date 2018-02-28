@@ -1,5 +1,5 @@
 Mga Komponent
-##########
+#############
 
 Ang mga Komponent ay ang mga package sa lohika na ibinabahagi sa pagitan ng mga controller.
 Ang CakePHP ay may isang napakagandang set ng pangunahing mga komponent na pwede mong gamitin para tulungan ka sa 
@@ -26,7 +26,7 @@ kabanata para sa bawat komponent:
 .. _configuring-components:
 
 Pag-configure ng mga Komponent
-======================
+==============================
 
 Marami sa pangunahing mga komponent ay nangangailangan ng kumpigurasyon. Ilang mga halimbawa sa mga komponent 
 na nangangailangan ng kumpigurasyon ay :doc:`/controllers/components/authentication` at
@@ -74,7 +74,7 @@ na katangian na may kumpigurasyon ng constructor para malikha ang ``$_config`` n
 na kung saan ay ma-access sa pamamagitan ng ``config()``.
 
 Pag-alias ng mga Komponent
--------------------
+--------------------------
 
 Isang karaniwang setting na gagamitin ay ang ``className`` na opsyon, na kung saan ay nagpapahintulot sa iyo na
 i-alias ang mga komponent. Ang katangiang ito ay kapaki-pakinabang kapag kailangan mong
@@ -109,7 +109,7 @@ mga controller.
     kasama sa loob ng ibang mga Component.
 
 Pag-load ng mga Component na nauna
------------------------------
+----------------------------------
 
 Maaaring hindi mo kailangan ang lahat ng iyong mga komponent na magagamit sa bawat controller
 na aksyon. Sa mga sitwasyon na tulad nito ay maaari kang maka-load ng isang komponent sa runtime gamit ang
@@ -127,7 +127,7 @@ na aksyon. Sa mga sitwasyon na tulad nito ay maaari kang maka-load ng isang komp
     ka nag-load ng iyong komponent.
 
 Paggamit ng mga Komponent
-================
+=========================
 
 Sa sandaling iyon ay kasama ang ilang mga komponent sa iyong controller, ang paggamit ng mga ito ay masyadong
 simple. Sa bawat komponentong nagamit mo ay nakalantad bilang isang katangian ng iyong controller. Kung
@@ -159,7 +159,7 @@ sa iyong controller, maaari mong ma-access kung gusto mo::
 .. _creating-a-component:
 
 Paglikha ng Komponent
-====================
+=====================
 
 Ipagpalagay na ang ating aplikasyon ay nangangailangan na gawin ang kumplikadong mathematical na operasyon sa
 maraming ibang mga parte sa aplikasyon.  Maaari tayong lumikha ng isang komponent para ibahay
@@ -224,7 +224,7 @@ Ang itaas ay papasa ng array na naglalaman ng katumpakan at randomGenerator sa
 ``MathComponent::initialize()`` na nasa ``$config`` na parameter.
 
 Paggamit ng Ibang mga Component sa iyong Komponent
-----------------------------------------
+--------------------------------------------------
 
 Minsan isa sa iyong mga komponent ay maaaring kailangan na gumamit ng ibang komponent.
 Sa kasong ito ay maaari kang magsama ng ibang mga komponent na eksaktong parehong 
@@ -272,7 +272,7 @@ paraan na sinama mo sila sa mga controller - gamit ang ``$components`` var::
     walang mga callback na ma-trigger sa isang component sa component.
 
 Pag-access ng Component ng Controller
-----------------------------------
+-------------------------------------
 
 Mula sa loob ng Komponent maaari kang mag-access sa kasalukuyang controller sa pamamagitan ng
 registry::
@@ -285,7 +285,7 @@ object::
     $controller = $event->getSubject();
 
 Component ng mga Callback
-===================
+=========================
 
 Ang mga komponento ay nag-aalok rin ng iilang mga hiling sa cycle ng buhay na mga callback na nagpapahintulot sa kanila upang
 dagdagan ang hiling ng cycle.
