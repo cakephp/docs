@@ -29,7 +29,7 @@ Sa ilang mga shared na hosting ``cd /full/path/to/root && bin/cake myshell mypar
 ay maaaring hindi gumana. Sa halip maaari mong gamitin ang 
 ``php /full/path/to/root/bin/cake.php myshell myparam``.
 
-.. tandaan::
+.. note::
 
     Ang register_argc_argv ay dapat na naka-on sa pamamagitan ng pagsama ng ``register_argc_argv
     = 1`` sa iyong php.ini. Kung hindi mo mapapalitan ang register_argc_argv globally,
