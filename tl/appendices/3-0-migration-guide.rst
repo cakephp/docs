@@ -13,7 +13,7 @@ Mga Kinakailangan
 - Ang CakePHP 3.x ay nangangailangan ng mbstring na ekstensiyon.
 - Ang CakePHP 3.x ay nangangailangan ng intl na ekstensiyon.
 
-.. babala::
+.. warning::
 
 	Ang CakePHP 3.0 ay hindi gagana kung hindi mo nakamit ang mga kinakailangan sa itaas.
 
