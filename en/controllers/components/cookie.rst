@@ -11,8 +11,8 @@ Cookies added through CookieComponent will only be sent if the controller action
 completes.
 
 .. deprecated:: 3.5.0
-    You should use :ref:`encrypted-cookie-middleware` instead of
-    ``CookieComponent``.
+    Cookies are available in the ``ServerRequest`` see :ref:`request-cookies`.
+    For encrypted cookies see the :ref:`encrypted-cookie-middleware`.
 
 Configuring Cookies
 ===================
