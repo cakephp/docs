@@ -18,7 +18,7 @@ Mga Kinakailangan
 	Ang CakePHP 3.0 ay hindi gagana kung hindi mo nakamit ang mga kinakailangan sa itaas.
 
 Pang-Update na Kasangkapan
-======================
+==========================
 
 Habang ang dokumentong ito ay tumatalakay sa lahat ng nakakasirang mga pagbabago at
 mga pagpapabuti na ginawa sa CakePHP 3.0, kami ay nakalikha rin ng isang console na
@@ -52,7 +52,7 @@ mga paraan katulad ng :php:meth:`__()` at :php:meth:`debug()` ay hindi naka-name
 para sa kaginhawahan.
 
 Tinanggal ang mga Constant
-========================
+==========================
 
 Ang sumusunod na hindi na ginagamit na mga constant ay tinanggal na:
 
@@ -96,7 +96,7 @@ aplikasyon na ina-upgrade. Tingnan ang bagong :doc:`/orm` na dokumentasyon para 
 impormasyon kung paano gamitin ang bagong ORM.
 
 Mga Batayan
-======
+===========
 
 * Ang ``LogError()`` ay tinanggal, ito ay walang benepisyong binibigay at bihira/hindi
   kailanman ginamit
