@@ -668,113 +668,116 @@ AuthComponent
   ay gumamit ng ``setUser()`` upang i-save ang info sa sesyon para mapanatili
   sa kabuuan ng mga kahilingan.
   
-- ``BaseAuthenticate::_password()`` has been removed. Use a ``PasswordHasher``
-  class instead.
-- ``BaseAuthenticate::logout()`` has been removed.
-- ``AuthComponent`` now triggers two events ``Auth.afterIdentify`` and
-  ``Auth.logout`` after a user has been identified and before a user is
-  logged out respectively. You can set callback functions for these events by
-  returning a mapping array from ``implementedEvents()`` method of your
-  authenticate class.
+  - Ang ``BaseAuthenticate::_password()`` ay tinanggal. Sa halip ay gumamit ng isang
+  ``PasswordHasher`` na class.
+- Ang ``BaseAuthenticate::logout()`` ay tinanggal.
+- Ang ``AuthComponent`` ngayon ay nagti-trigger ng dalawang mga pangyayari
+  ang ``Auth.afterIdentify`` at ang ``Auth.logout`` pagkatapos natukoy ang
+  isang gumagamit at bago nag-log out ang isang gumagamit ayon sa pagkakabanggit.
+  Maaari kang magtakda ng callback na mga function para sa mga kaganapang
+  ito sa pamamagitan ng pagsasauli ng isang pagmapa na array mula sa 
+  ``implementedEvents()`` na paraan ng iyong authenticate na class.
 
-ACL related classes were moved to a separate plugin. Password hashers, Authentication and
-Authorization providers where moved to the ``\Cake\Auth`` namespace. You are
-required to move your providers and hashers to the ``App\Auth`` namespace as
-well.
+Ang may kaugnayan sa ACL na mga class ay nilipat sa isang hiwalay na plugin. Ang mga password hasher,
+Authentication at Authorization na mga provider ay nilipat sa ``\Cake\Auth`` na namespace.
+Kailangan mo ring ilipat ang iyong mga provider at mga hasher sa ``App\Auth`` na namespace.
 
 RequestHandlerComponent
 -----------------------
 
-- The following methods have been removed from RequestHandler component::
+- Ang sumusunod na mga paraan ay tinanggal mula sa RequestHandler na komponent::
   ``isAjax()``, ``isFlash()``, ``isSSL()``, ``isPut()``, ``isPost()``, ``isGet()``, ``isDelete()``.
-  Use the :php:meth:`Cake\\Network\\Request::is()` method instead with relevant argument.
-- ``RequestHandler::setContent()`` was removed, use :php:meth:`Cake\\Network\\Response::type()` instead.
-- ``RequestHandler::getReferer()`` was removed, use :php:meth:`Cake\\Network\\Request::referer()` instead.
-- ``RequestHandler::getClientIP()`` was removed, use :php:meth:`Cake\\Network\\Request::clientIp()` instead.
-- ``RequestHandler::getAjaxVersion()`` was removed.
-- ``RequestHandler::mapType()`` was removed, use :php:meth:`Cake\\Network\\Response::mapType()` instead.
-- Configuration options are no longer set as public properties.
+  Sa halip ay gamitin ang :php:meth:`Cake\\Network\\Request::is()` na paraan na may nauugnay na argumento.
+- Ang ``RequestHandler::setContent()`` ay tinanggal, sa halip ay gamitin ang :php:meth:`Cake\\Network\\Response::type()`.
+- Ang ``RequestHandler::getReferer()`` ay tinanggal, sa halip ay gamitin ang :php:meth:`Cake\\Network\\Request::referer()`.
+- Ang ``RequestHandler::getClientIP()`` ay tinanggal, sa halip ay gamitin ang :php:meth:`Cake\\Network\\Request::clientIp()`.
+- Ang ``RequestHandler::getAjaxVersion()`` ay tinanggal.
+- Ang ``RequestHandler::mapType()`` ay tinanggal, sa halip ay gamitin ang :php:meth:`Cake\\Network\\Response::mapType()`.
+- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang publikong mga katangian.
 
 SecurityComponent
 -----------------
 
-- The following methods and their related properties have been removed from Security component:
+- Ang sumusunod na mga paraan at ang kanilang nauugnay na mga katangian ay tinanggal mula sa Security na komponent:
   ``requirePost()``, ``requireGet()``, ``requirePut()``, ``requireDelete()``.
-  Use the :php:meth:`Cake\\Network\\Request::allowMethod()` instead.
-- ``SecurityComponent::$disabledFields()`` has been removed, use
+  Sa halip ay gamitin ang :php:meth:`Cake\\Network\\Request::allowMethod()`.
+- Ang ``SecurityComponent::$disabledFields()`` ay tinanggal, gamitin ang
   ``SecurityComponent::$unlockedFields()``.
-- The CSRF related features in SecurityComponent have been extracted and moved
-  into a separate CsrfComponent. This allows you to use CSRF protection
-  without having to use form tampering prevention.
-- Configuration options are no longer set as public properties.
-- The methods ``requireAuth()`` and ``requireSecure()`` no longer accept "var args".
-  All method names need to be passed as first argument, either as string or array of strings.
+- Ang may kaugnayan sa CSRF na mga tampok sa SecurityComponent ay kinuha at inilipat
+  sa isang hiwalay na CsrfComponent. Ito ay nagpapahintulot sa iyo na gumamit ng
+  CSRF na proteksyon nang hindi ginagamit ang form tampering na pag-iiwas.
+- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang publikong mga katangian.
+- Ang mga paraan na ``requireAuth()`` at ``requireSecure()`` ay hindi na tumatanggap ng
+  "var args". Ang lahat ng pangalan ng paraan ay kailangang ipasa bilang unang argumento,
+  alinman bilang string o array ng mga string.
 
 SessionComponent
 ----------------
 
-- ``SessionComponent::setFlash()`` is deprecated. You should use
-  :doc:`/controllers/components/flash` instead.
+- Ang ``SessionComponent::setFlash()`` ay hindi na magagamit. Sa halip dapat mong gamitin ang
+  :doc:`/controllers/components/flash`
 
 Error
 -----
 
-Custom ExceptionRenderers are now expected to either return
-a :php:class:`Cake\\Network\\Response` object or string when rendering errors. This means
-that any methods handling specific exceptions must return a response or string
-value.
+Ang pasadyang mga ExceptionRenderer ngayon ay inaasahan na alinman ay magsauli ng 
+isang :php:class:`Cake\\Network\\Response` na object o string kapag may mga error sa pag-render.
+Ito ay nangangahulugan na anumang mga paraan na nag-aasikaso ng tiyak na mga eksepsyon ay 
+dapat magsauli ng tugon o string na halaga.
 
 Model
 =====
 
-The Model layer in 2.x has been entirely re-written and replaced. You should
-review the :doc:`/appendices/orm-migration` for information on how to use the
-new ORM.
+Ang Model layer sa 2.x ay pangkalahatang isinulat muli at pinalitan. Dapat mong 
+suriin ang :doc:`/appendices/orm-migration` para sa impormasyon kung paano gamitin
+ang bagong ORM.
 
-- The ``Model`` class has been removed.
-- The ``BehaviorCollection`` class has been removed.
-- The ``DboSource`` class has been removed.
-- The ``Datasource`` class has been removed.
-- The various datasource classes have been removed.
+- Ang ``Model`` na class ay tinanggal.
+- Ang ``BehaviorCollection`` na class ay tinanggal.
+- Ang ``DboSource`` na class ay tinanggal.
+- Ang ``Datasource`` na class ay tinanggal.
+- Ang iba't ibang datasource na mga class ay tinanggal.
 
 ConnectionManager
 -----------------
 
-- ConnectionManager has been moved to the ``Cake\Datasource`` namespace.
-- ConnectionManager has had the following methods removed:
+- Ang ConnectionManager ay inilipat sa ``Cake\Datasource`` na namespace.
+- Ang ConnectionManager ay mayroong sumusunod na mga paraan na tinanggal:
 
   - ``sourceList``
   - ``getSourceName``
   - ``loadDataSource``
   - ``enumConnectionObjects``
 
-- :php:meth:`~Cake\\Database\\ConnectionManager::config()` has been added and is
-  now the only way to configure connections.
-- :php:meth:`~Cake\\Database\\ConnectionManager::get()` has been added. It
-  replaces ``getDataSource()``.
-- :php:meth:`~Cake\\Database\\ConnectionManager::configured()` has been added. It
-  and ``config()`` replace ``sourceList()`` & ``enumConnectionObjects()`` with
-  a more standard and consistent API.
-- ``ConnectionManager::create()`` has been removed.
-  It can be replaced by ``config($name, $config)`` and ``get($name)``.
+- Ang :php:meth:`~Cake\\Database\\ConnectionManager::config()` ay naidagdag at 
+  ngayon ang natatanging paraan upang mag-configure ng mga koneksyon.
+- Ang :php:meth:`~Cake\\Database\\ConnectionManager::get()` ay naidagdag. Pinapalitan
+  nito ang ``getDataSource()``.
+- Ang :php:meth:`~Cake\\Database\\ConnectionManager::configured()` ay naidagdag. Ito
+  at ang ``config()`` ay pinapalitan ang ``sourceList()`` at ``enumConnectionObjects()``
+  sa isang mas standard at naaalinsunod na API.
+- Ang ``ConnectionManager::create()`` ay tinanggal.
+  Ito ay maaaring palitan ng ``config($name, $config)`` at ``get($name)``.
 
-Behaviors
----------
-- Underscore prefixed behavior methods like ``_someMethod()`` are no longer
-  treated as private methods. Use proper visibility keywords instead.
+Mga Pag-uugali
+--------------
+- Ang naka-prefix ng underscore na pag-uugali na mga paraan katulad ng ``_someMethod()``
+  ay hindi na tinatrato bilang pribadong mga paraan. Sa halip ay gumamit ng nararapat na 
+  kakayahang makita na mga keyword.
 
 TreeBehavior
 ------------
 
-The TreeBehavior was completely re-written to use the new ORM. Although it works
-the same as in 2.x, a few methods were renamed or removed:
+Ang TreeBehavior ay kumpletong isinulat muli upang magamit ang bagong ORM. Kahit na
+ito ay gumagana na kapareho sa 2.x, ilang kaunting mga paraan ay napalitan ng pangalan
+o natanggal:
 
-- ``TreeBehavior::children()`` is now a custom finder ``find('children')``.
-- ``TreeBehavior::generateTreeList()`` is now a custom finder ``find('treeList')``.
-- ``TreeBehavior::getParentNode()`` was removed.
-- ``TreeBehavior::getPath()`` is now a custom finder ``find('path')``.
-- ``TreeBehavior::reorder()`` was removed.
-- ``TreeBehavior::verify()`` was removed.
+- Ang ``TreeBehavior::children()`` ngayon ay isang pasadyang tagahanap ``find('children')``.
+- Ang ``TreeBehavior::generateTreeList()`` ngayon ay isang pasadyang tagahanap ``find('treeList')``.
+- Ang ``TreeBehavior::getParentNode()`` ay natanggal.
+- Ang ``TreeBehavior::getPath()`` ngayon ay isang pasadyang tagahanap ``find('path')``.
+- Ang ``TreeBehavior::reorder()`` ay natangggal.
+- Ang ``TreeBehavior::verify()`` ay natanggal.
 
 TestSuite
 =========
@@ -782,119 +785,126 @@ TestSuite
 TestCase
 --------
 
-- ``_normalizePath()`` has been added to allow path comparison tests to run across all
-  operation systems regarding their DS settings (``\`` in Windows vs ``/`` in UNIX, for example).
+- Ang ``_normalizePath()`` ay naidagdag upang payagan ang mga pagsubok sa paghahambing ng landas
+  upang mapatakbo sa kabuuang lahat ng operasyon na mga sistema tungkol sa kanilang DS na mga 
+  setting (``\`` sa Windows kontra sa ``/`` ng UNIX, halimbawa).
 
-The following assertion methods have been removed as they have long been deprecated and replaced by
-their new PHPUnit counterpart:
+Ang sumusunod na assertion na mga paraan ay tinanggal dahil sila ay matagal nang hindi ginagamit
+at napalitan ang kanilang bagong PHPUnit na katapat:
 
-- ``assertEqual()`` in favor of ``assertEquals()``
-- ``assertNotEqual()`` in favor of ``assertNotEquals()``
-- ``assertIdentical()`` in favor of ``assertSame()``
-- ``assertNotIdentical()`` in favor of ``assertNotSame()``
-- ``assertPattern()`` in favor of ``assertRegExp()``
-- ``assertNoPattern()`` in favor of ``assertNotRegExp()``
-- ``assertReference()`` if favor of ``assertSame()``
-- ``assertIsA()`` in favor of ``assertInstanceOf()``
+- Ang ``assertEqual()`` sa pabor ng ``assertEquals()``
+- Ang ``assertNotEqual()`` sa pabor ng ``assertNotEquals()``
+- Ang ``assertIdentical()`` sa pabor ng ``assertSame()``
+- Ang ``assertNotIdentical()`` sa pabor ng ``assertNotSame()``
+- Ang ``assertPattern()`` sa pabor ng ``assertRegExp()``
+- Ang ``assertNoPattern()`` sa pabor ng ``assertNotRegExp()``
+- Ang ``assertReference()`` sa pabor ng ``assertSame()``
+- Ang ``assertIsA()`` sa pabor ng ``assertInstanceOf()``
 
-Note that some methods have switched the argument order, e.g. ``assertEqual($is, $expected)`` should now be
-``assertEquals($expected, $is)``.
+Tandaan na ang ilang mga paraan ay nagpalit ng pagkakaayos ng kanilang argumento, e.g.
+``assertEqual($is, $expected)`` ay dapat na ngayong maging ``assertEquals($expected, $is)``.
 
-The following assertion methods have been deprecated and will be removed in the future:
+Ang sumusunod na assertion na mga paraan ay hindi na ginagamit at matatanggal sa hinaharap:
 
-- ``assertWithinMargin()`` in favor of ``assertWithinRange()``
-- ``assertTags()`` in favor of ``assertHtml()``
+- Ang ``assertWithinMargin()`` sa pabor ng ``assertWithinRange()``
+- Ang ``assertTags()`` sa pabor ng ``assertHtml()``
 
-Both method replacements also switched the argument order for a consistent assert method API
-with ``$expected`` as first argument.
+Parehong mga pagpapalit ng paraan din ay nagpalit ng pagkakaayos ng argumento para sa 
+isang naaalinsunod na assert method na API gamit ang ``$expected`` bilang unang argumento.
 
-The following assertion methods have been added:
+Ang sumusunod na assertion na mga paraan ay naidagdag:
 
-- ``assertNotWithinRange()`` as counter part to ``assertWithinRange()``
+- Ang ``assertNotWithinRange()`` bilang katapat ng ``assertWithinRange()``
 
 View
 ====
 
-Themes are now Basic Plugins
-----------------------------
+Ngayon Ang Mga Tema ay Batayan na mga Plugin
+--------------------------------------------
 
-Having themes and plugins as ways to create modular application components has
-proven to be limited, and confusing. In CakePHP 3.0, themes no longer reside
-**inside** the application. Instead they are standalone plugins. This solves
-a few problems with themes:
+Ang pagkakaroon ng mga tema at mga plugin bilang mga paraan sa paglikha ng 
+modyular na aplikasyon na mga komponent ay napatunayang limitado, at nakakalito.
+Sa CakePHP 3.0, ang mga tema ay hindi na naninirahan **sa loob** ng aplikasyon.
+Sa halip sila ay standalone na mga plugin. Nilulutas nito ang ilang mga problema
+gamit ang mga tema:
 
-- You could not put themes *in* plugins.
-- Themes could not provide helpers, or custom view classes.
+- Maaari kang hindi maglagay ng mga tema *sa* mga plugin.
+- Ang mga tema ay hindi makapagbigay ng mga katulong, o pasadyang view na mga class.
 
-Both these issues are solved by converting themes into plugins.
+Ang parehong mga isyu na ito ay nalutas sa pamamagitan ng pagpapalit ng mga tema
+ng mga plugin.
 
-View Folders Renamed
---------------------
+Tingnan ang mga Folder na Napalitan ang Pangalan
+------------------------------------------------
 
-The folders containing view files now go under **src/Template** instead of **src/View**.
-This was done to separate the view files from files containing php classes (eg. Helpers, View classes).
+Ngayon ang mga folder na naglalaman ng view na mga file ay pupunta sa ilalim ng 
+**src/Template** sa halip ng **src/View**.
+Ito ay nagawa upang mahiwalay ang view na mga file mula sa mga file na naglalaman ng
+php na mga class (eg. Helpers, View na mga class).
 
-The following View folders have been renamed to avoid naming collisions with controller names:
+Ang sumusunod na View na mga folder ay napalitan ang pangalan upang maiwasan ang mga
+banggaan sa pagpapangalan ng mga pangalan ng controller:
 
-- ``Layouts`` is now ``Layout``
-- ``Elements`` is now ``Element``
-- ``Errors`` is now ``Error``
-- ``Emails`` is now ``Email`` (same for ``Email`` inside ``Layout``)
+- ``Layouts`` ngayon ay ``Layout``
+- ``Elements`` ngayon ay ``Element``
+- ``Errors`` ngayon ay ``Error``
+- ``Emails`` ngayon ay ``Email`` (pareho rin para sa ``Email`` inside ``Layout``)
 
-HelperCollection Replaced
--------------------------
+Ang HelperCollection ay Napalitan
+---------------------------------
 
-This class has been renamed to :php:class:`Cake\\View\\HelperRegistry`.
-See the section on :doc:`/core-libraries/registry-objects` for more information
-on the features provided by the new class. You can use the ``cake upgrade
-rename_collections`` to assist in upgrading your code.
+Ang class na ito ay napalitan ang pangalan ng :php:class:`Cake\\View\\HelperRegistry`.
+Tingnan ang seksyon sa :doc:`/core-libraries/registry-objects` para sa karagdagang
+impormasyon sa mga tampok na ibinigay ng bagong class. Maaari mong gamitin ang 
+``cake upgrade rename_collections`` upang tumulong sa pag-upgrade ng iyong code.
 
-View Class
-----------
+View na Class
+-------------
 
-- The ``plugin`` key has been removed from ``$options`` argument of :php:meth:`Cake\\View\\View::element()`.
-  Specify the element name as ``SomePlugin.element_name`` instead.
-- ``View::getVar()`` has been removed, use :php:meth:`Cake\\View\\View::get()` instead.
-- ``View::$ext`` has been removed and instead a protected property ``View::$_ext``
-  has been added.
-- ``View::addScript()`` has been removed. Use :ref:`view-blocks` instead.
-- The ``base``, ``webroot``, ``here``, ``data``,  ``action``, and ``params``
-  magic properties have been removed. You should access all of these properties
-  on ``$this->request`` instead.
-- ``View::start()`` no longer appends to an existing block. Instead it will
-  overwrite the block content when end is called. If you need to combine block
-  contents you should fetch the block content when calling start a second time,
-  or use the capturing mode of ``append()``.
-- ``View::prepend()`` no longer has a capturing mode.
-- ``View::startIfEmpty()`` has been removed. Now that start() always overwrites
-  startIfEmpty serves no purpose.
-- The ``View::$Helpers`` property has been removed and replaced with
-  ``_helpers``. If you need to load helpers at runtime you should use
-  ``$this->addHelper()`` in your view files.
-- ``View`` will now raise ``Cake\View\Exception\MissingTemplateException`` when
-  templates are missing instead of ``MissingViewException``.
+- Ang ``plugin`` na key ay tinanggal mula sa ``$options`` na argumento ng 
+  :php:meth:`Cake\\View\\View::element()`. Sa halip ay tukuyin ang pangalan ng elemento bilang 
+  ``SomePlugin.element_name``.
+- Ang ``View::getVar()`` ay tinanggal, sa halip ay gamitin ang :php:meth:`Cake\\View\\View::get()`.
+- Ang ``View::$ext`` ay tinanggal at sa halip ay isang protektadong katangian
+  na ``View::$_ext`` ang dinagdag.
+- Ang ``View::addScript()`` ay tinanggal. Sa halip ay gumamit ng :ref:`view-blocks`.
+- Ang ``base``, ``webroot``, ``here``, ``data``,  ``action``, at ``params``
+  na madyik na mga katangian ay natanggal. Sa halip ay dapat mong i-access lahat 
+  ang mga katangiang ito sa ``$this->request``.
+- Ang ``View::start()`` ay hindi na dumurugtong sa isang umiiral na bloke. Sa halip ito
+  ay io-overwrite ang bloke na nilalaman kapag natawag ang katapusan. Kung kailangan mong
+  pagsamahin ang bloke na mga nilalaman dapat mong kunin ang bloke na nilalaman kapag
+  ang pagtawag ay nagsimula sa pangalawang pagkakataon, o gamitin ang capturing mode ng 
+  ``append()``.
+- Ang ``View::prepend()`` ay hindi na isang capturing mode.
+- Ang ``View::startIfEmpty()`` ay tinanggal. Ngayon na ang start() ay palaging 
+  nag-o-overwrite ng startIfEmpty ay wala nang pinasisilbihang layunin.
+- Ang ``View::$Helpers`` na katangian ay tinanggal at pinalitan gamit ang 
+  ``_helpers``. Kung kailangan mong mag-load ng mga katulong sa runtime dapat mong
+  gamitin ang ``$this->addHelper()`` sa iyong view na mga file.
+- Ang ``View`` ngayon ay magtataas ng ``Cake\View\Exception\MissingTemplateException``
+  kapag ang mga template ay nawawala sa halip ng ``MissingViewException``.
 
 ViewBlock
 ---------
 
-- ``ViewBlock::append()`` has been removed, use :php:meth:`Cake\\View\ViewBlock::concat()` instead. However,
-  ``View::append()`` still exists.
+- Ang ``ViewBlock::append()`` ay tinanggal, sa halip ay gamitin ang :php:meth:`Cake\\View\ViewBlock::concat()`.
+  Gayunpaman, ang ``View::append()`` ay umiiral pa rin.
 
 JsonView
 --------
 
-- By default JSON data will have HTML entities encoded now. This prevents
-  possible XSS issues when JSON view content is embedded in HTML files.
-- :php:class:`Cake\\View\\JsonView` now supports the ``_jsonOptions`` view
-  variable. This allows you to configure the bit-mask options used when generating
-  JSON.
+- Bilang default ang JSON na datos ay magkakaroon ng HTML na mga entity na naka-encode ngayon.
+  Pinipigilan nito ang posibleng XSS na mga isyu kapag ang JSON view na nilalaman ay naka-embed
+  sa HTML na mga file.
+- Ang :php:class:`Cake\\View\\JsonView` ngayon ay sumusuporta sa ``_jsonOptions`` view na variable.
+  Pinapayagan ka nitong mag-configure ng bit-mask na mga opsyon na ginagamit kapag bumubuo ng JSON.
 
 XmlView
 -------
 
-- :php:class:`Cake\\View\\XmlView` now supports the ``_xmlOptions`` view
-  variable. This allows you to configure the options used when generating
-  XML.
+- Ang :php:class:`Cake\\View\\XmlView` ngayon ay sumusuporta ng ``_xmlOptions`` view na variable.
+  Pinapayagan ka nitong mag-configure ng mga opsyon na ginagamit kapag bumubuo ng XML.
 
 View\\Helper
 ============
