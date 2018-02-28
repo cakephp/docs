@@ -70,6 +70,10 @@ has been created. To keep your Orders model clean you could use events::
             return false;
         }
     }
+    
+.. deprecated:: 3.5.0
+Use ``getEventManager()`` instead.
+
 
 The above code allows you to notify the other parts of the application
 that an order has been created. You can then do tasks like send email
@@ -80,9 +84,9 @@ Accessing Event Managers
 ========================
 
 In CakePHP events are triggered against event managers. Event managers are
-available in every Table, View and Controller using ``eventManager()``::
+available in every Table, View and Controller using ``getEventManager()``::
 
-    $events = $this->eventManager();
+    $events = $this->getEventManager();
 
 Each model has a separate event manager, while the View and Controller
 share one. This allows model events to be self contained, and allow components
@@ -189,7 +193,7 @@ as necessary. Our ``UserStatistics`` listener might start out like::
 
     // Attach the UserStatistic object to the Order's event manager
     $statistics = new UserStatistic();
-    $this->Orders->eventManager()->on($statistics);
+    $this->Orders->getEventManager()->on($statistics);
 
 As you can see in the above code, the ``on()`` function will accept instances
 of the ``EventListener`` interface. Internally, the event manager will use
@@ -205,7 +209,7 @@ function to do so::
 
     use Cake\Log\Log;
 
-    $this->Orders->eventManager()->on('Model.Order.afterPlace', function ($event) {
+    $this->Orders->getEventManager()->on('Model.Order.afterPlace', function ($event) {
         Log::write(
             'info',
             'A new order was placed with id: ' . $event->getSubject()->id
@@ -237,7 +241,7 @@ a more direct approach and only listen to the event you really need::
     use Cake\Mailer\Email;
 
     TableRegistry::get('ThirdPartyPlugin.Feedbacks')
-        ->eventManager()
+        ->getEventManager()
         ->on('Model.afterSave', function($event, $entity)
         {
             // For example we can send an email to the admin
@@ -258,16 +262,16 @@ Assuming several event listeners have been registered the presence or absence
 of a particular event pattern can be used as the basis of some action.::
 
     // Attach listeners to EventManager.
-    $this->eventManager()->on('User.Registration', [$this, 'userRegistration']);
-    $this->eventManager()->on('User.Verification', [$this, 'userVerification']);
-    $this->eventManager()->on('User.Authorization', [$this, 'userAuthorization']);
+    $this->getEventManager()->on('User.Registration', [$this, 'userRegistration']);
+    $this->getEventManager()->on('User.Verification', [$this, 'userVerification']);
+    $this->getEventManager()->on('User.Authorization', [$this, 'userAuthorization']);
 
     // Somewhere else in your application.
-    $events = $this->eventManager()->matchingListeners('Verification');
+    $events = $this->getEventManager()->matchingListeners('Verification');
     if (!empty($events)) {
         // Perform logic related to presence of 'Verification' event listener.
         // For example removing the listener if present.
-        $this->eventManager()->off('User.Verification');
+        $this->getEventManager()->off('User.Verification');
     } else {
         // Perform logic related to absence of 'Verification' event listener
     }
@@ -307,7 +311,7 @@ for event listeners::
 
     // Setting priority for a callback
     $callback = [$this, 'doSomething'];
-    $this->eventManager()->on(
+    $this->getEventManager()->on(
         'Model.Order.afterPlace',
         ['priority' => 2],
         $callback
@@ -339,7 +343,7 @@ When events have data provided in their constructor, the provided data is
 converted into arguments for the listeners. An example from the View layer is
 the afterRender callback::
 
-    $this->eventManager()
+    $this->getEventManager()
         ->dispatch(new Event('View.afterRender', $this, ['view' => $viewFileName]));
 
 The listeners of the ``View.afterRender`` callback should have the following
@@ -370,7 +374,7 @@ an event::
     $event = new Event('Model.Order.afterPlace', $this, [
         'order' => $order
     ]);
-    $this->eventManager()->dispatch($event);
+    $this->getEventManager()->dispatch($event);
 
 :php:class:`Cake\\Event\\Event` accepts 3 arguments in its constructor. The
 first one is the event name, you should try to keep this name as unique as
@@ -431,7 +435,7 @@ event object::
     public function place($order)
     {
         $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
-        $this->eventManager()->dispatch($event);
+        $this->getEventManager()->dispatch($event);
         if ($event->isStopped()) {
             return false;
         }
@@ -474,7 +478,7 @@ directly or returning the value in the callback itself::
     public function place($order)
     {
         $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
-        $this->eventManager()->dispatch($event);
+        $this->getEventManager()->dispatch($event);
         if (!empty($event->getResult()['order'])) {
             $order = $event->getResult()['order'];
         }
@@ -497,27 +501,27 @@ call the :php:meth:`Cake\\Event\\EventManager::off()` method using as
 arguments the first two params you used for attaching it::
 
     // Attaching a function
-    $this->eventManager()->on('My.event', [$this, 'doSomething']);
+    $this->getEventManager()->on('My.event', [$this, 'doSomething']);
 
     // Detaching the function
-    $this->eventManager()->off('My.event', [$this, 'doSomething']);
+    $this->getEventManager()->off('My.event', [$this, 'doSomething']);
 
     // Attaching an anonymous function.
     $myFunction = function ($event) { ... };
-    $this->eventManager()->on('My.event', $myFunction);
+    $this->getEventManager()->on('My.event', $myFunction);
 
     // Detaching the anonymous function
-    $this->eventManager()->off('My.event', $myFunction);
+    $this->getEventManager()->off('My.event', $myFunction);
 
     // Adding a EventListener
     $listener = new MyEventLister();
-    $this->eventManager()->on($listener);
+    $this->getEventManager()->on($listener);
 
     // Detaching a single event key from a listener
-    $this->eventManager()->off('My.event', $listener);
+    $this->getEventManager()->off('My.event', $listener);
 
     // Detaching all callbacks implemented by a listener
-    $this->eventManager()->off($listener);
+    $this->getEventManager()->off($listener);
 
 Events are a great way of separating concerns in your application and make
 classes both cohesive and decoupled from each other. Events can be utilized to
