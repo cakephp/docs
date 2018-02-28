@@ -72,7 +72,7 @@ Lumikha ng file na pinangalanang **cake** sa **/etc/bash_completion.d/** at ilag
 
 I-save ang file, pagkatapas ay i-restart ang iyong console.
 
-.. tandaan::
+.. note:
 
     Kung ikaw ay gumagamit ng MacOS X, maaari mong i-install ang **bash-completion** na library
     gamit ang **homebrew** na may utos na ``brew install bash-completion``.
