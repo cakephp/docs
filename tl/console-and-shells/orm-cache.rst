@@ -1,5 +1,5 @@
 ORM na Shell ng Cache
-###############
+#####################
 
 Ang OrmCacheShell ay nagbibigay ng isang simpleng CLI na kasangkapan para sa pamamahala ng iyong aplikasyon na 
 mga cache ng metadata. Sa mga sitwasyon ng pagdeploy, ito ay makakatulong na muling itayo ang cache ng metadata 
