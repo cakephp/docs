@@ -143,7 +143,8 @@ behavior that may affect your application:
 * The console environment no longer automatically loads plugins specified by the
   ``--plugin`` option. Instead you must ensure that your application
   bootstrapping loads all the required plugins.
-
+* ``Cake\Http\CorsBuilder::build()`` no longer mutates the response in place.
+  You must now use the updated response that ``build()`` returns.
 
 Cache
 =====
