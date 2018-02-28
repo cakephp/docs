@@ -1,5 +1,5 @@
 Ang Middleware
-##########
+##############
 
 Ang Middleware na mga bagay ay nagbibigay sayo ng abilidad sa 'wrap' ng iyong aplikasyon sa magagamit muli,
 composable na mga suson ng paghawak sa kahilingan, o lohika sa pagbuo ng sagot. Biswal,
@@ -27,7 +27,7 @@ na pamantayan ay maaari mong gamitin ang alinman sa PSR-7 na magkasundo na magag
 <https://packagist.org>`__.
 
 Ang Middleware sa CakePHP
-=====================
+=========================
 
 Ang CakePHP ay nagbibigay ng ilang mga middleware para i-handle ang karaniwang mga gawain sa web na mga aplikasyon:
 
@@ -52,7 +52,7 @@ Ang CakePHP ay nagbibigay ng ilang mga middleware para i-handle ang karaniwang m
 .. _using-middleware:
 
 Paggamit sa Middleware
-================
+======================
 
 Ang Middleware ay pwedeng gamitin sa iyong aplikasyon na pangkalahatan, o para sa indibidwal
 na mga routing na mga scope.
@@ -113,7 +113,7 @@ Sa karagdagan sa paggamit ng middleware sa iyong buong aplikasyon, maaari kang g
 ng middleware sa partikular na mga hanay ng mga ruta na gamit ang :ref:`connecting-scoped-middleware`.
 
 Pagdaragdag ng Middleware mula sa mga Plugin
-------------------------------
+--------------------------------------------
 
 Pagkatapos ihanda ng aplikasyon ang nakapilang middleware, ang
 ``Server.buildMiddleware`` na kaganapan ay na-trigger. Ang kaganapan ay maaaring kapaki-pakinabang na idagdag
@@ -130,7 +130,7 @@ na mga script, na magdagdag sa middleware::
         });
 
 Ang PSR-7 na mga Kahilingan at mga Tugon
-============================
+========================================
 
 Ang Middleware at ang bagong HTTP stack ay itinayo sa ibabaw ng `PSR-7 Request
 & Response Interfaces <http://www.php-fig.org/psr/psr-7/>`__. Habang lahat
@@ -138,7 +138,7 @@ ng middleware ay malantad sa mga interface na ito, iyong mga controller, mga kom
 at mga view ay *hindi*.
 
 Pakikipag-ugnay sa mga Kahilingan
--------------------------
+---------------------------------
 
 Ang ``RequestInterface`` ay nagbibigay ng mga pamamaraan para sa pag-uugnay sa mga header,
 pamamaraan, URI, at katawan ng isang kahilingan. Para makapag-ugnay sa mga header, maaari mong::
@@ -191,7 +191,7 @@ importante na mga katangian sa anumang kahilingan na hinawakan ni CakePHP:
   na object.
 
 Pag-uugnay ng mga Tugon
---------------------------
+-----------------------
 
 Ang pamamaraan na maaaring magamit upang lumikha ng server na tugon ay pareho dun sa maaaring 
 magamit kapag nag-uugnay sa :ref:`httpclient-response-objects`. Habang ang
@@ -220,7 +220,7 @@ Madalas ikaw ay magtatakda ng mga header at mga tugon na kumakatawan sa mga kahi
     $body->write(json_encode(['errno' => $errorCode]));
 
 Paglikha ng Middleware
-===================
+======================
 
 Ang Middleware ay maaaring ipatupad bilang hindi kilalang mga function (mga Clousure), o bilang natatawag na mga class.
 Habang ang mga Closure ay karapatdapat para sa maliit na mga gawain na ginagawa nila
@@ -291,7 +291,7 @@ aplikasyon::
 .. _security-header-middleware:
 
 Pagdagdag ng Seguridad sa mga Header
-=======================
+====================================
 
 Ang ``SecurityHeaderMiddleware`` na layer ay ginagawang madali upang mag-apply ng kaugnay sa seguridad
 na mga header sa iyong aplikasyon. Sa sandaling i-setup ang middleware ay maaaring ilapat ang sumusunod
@@ -325,7 +325,7 @@ iyong aplikasyon sa middleware stack::
 .. _encrypted-cookie-middleware:
 
 Pag-encrypt ng Cookie sa Middleware
-===========================
+===================================
 
 Kung ang iyong aplikasyon ay mayroong mga cookie na merong laman na datos na gusto mong tumalbog at
 protektahan laban sa pakikialam sa gumagamit, maaari kang gumamit ng naka-encrypt na cookie sa CakePHP
@@ -355,7 +355,7 @@ paurong na compatible sa ``CookieComponent`` mula sa mas naunang mga bersyon sa 
 .. _csrf-middleware:
 
 Cross Site Request Forgery (CSRF) na Middleware
-============================================
+===============================================
 
 Ang CSRF na proteksyon ay maaaring ilapat sa iyong buong aplikasyon, o sa partikular na mga scope
 sa pamamagitan ng paglapat ng ``CsrfProtectionMiddleware`` sa iyong middleware na stack::
@@ -402,7 +402,7 @@ ang CSRF na token.
     bawat isa sa iyong form.
 
 Ang CSRF na Proteksyon at AJAX na mga Hiling
----------------------------------
+--------------------------------------------
 
 At saka sa hiling sa datos ng mga parameter, ang CSRF na mga token ay maaaring masumite sa pamamagitan ng
 isang espesyal ``X-CSRF-Token`` na header. Ang paggamit ng header ay madalas na ginagawang mas madali sa
@@ -414,7 +414,7 @@ Ang CSRF Token ay maaaring makuha sa pamamagitan ng Cookie ``csrfToken``.
 .. _adding-http-stack:
 
 Pagdagdag ng bagong HTTP Stack sa isang Umiiral na Aplikasyon
-====================================================
+=============================================================
 
 Paggamit ng HTTP na Middleware sa isang umiiral na aplikasyon ay nangangailangan ng ilang mga pagbabago ng iyong
 aplikasyon.
