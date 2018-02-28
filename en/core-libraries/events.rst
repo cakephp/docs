@@ -70,9 +70,9 @@ has been created. To keep your Orders model clean you could use events::
             return false;
         }
     }
-    
+
 .. deprecated:: 3.5.0
-Use ``getEventManager()`` instead.
+    Use ``getEventManager()`` instead.
 
 
 The above code allows you to notify the other parts of the application
