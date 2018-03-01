@@ -658,7 +658,7 @@ AuthComponent
 - Ang ``BlowfishPasswordHasher`` na class ay tinanggal. Sa halip ay gumamit ng
   ``DefaultPasswordHasher``.
 - Ang ``loggedIn()`` na paraan ay tinanggal. Sa halip ay gumamit ng ``user()``.
-- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang publikong mga katangian.
+- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang pampublikong mga katangian.
 - Ang mga paraan na ``allow()`` at ``deny()`` ay hindi na tumatanggap ng "var args".
   Ang lahat ng kinakailangan na mga pangalan ng paraan na ipapasa bilang unang argumento,
   alinman bilang string o array ng mga string.
@@ -693,7 +693,7 @@ RequestHandlerComponent
 - Ang ``RequestHandler::getClientIP()`` ay tinanggal, sa halip ay gamitin ang :php:meth:`Cake\\Network\\Request::clientIp()`.
 - Ang ``RequestHandler::getAjaxVersion()`` ay tinanggal.
 - Ang ``RequestHandler::mapType()`` ay tinanggal, sa halip ay gamitin ang :php:meth:`Cake\\Network\\Response::mapType()`.
-- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang publikong mga katangian.
+- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang pampublikong mga katangian.
 
 SecurityComponent
 -----------------
@@ -706,7 +706,7 @@ SecurityComponent
 - Ang may kaugnayan sa CSRF na mga tampok sa SecurityComponent ay kinuha at inilipat
   sa isang hiwalay na CsrfComponent. Ito ay nagpapahintulot sa iyo na gumamit ng
   CSRF na proteksyon nang hindi ginagamit ang form tampering na pag-iiwas.
-- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang publikong mga katangian.
+- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang pampublikong mga katangian.
 - Ang mga paraan na ``requireAuth()`` at ``requireSecure()`` ay hindi na tumatanggap ng
   "var args". Ang lahat ng pangalan ng paraan ay kailangang ipasa bilang unang argumento,
   alinman bilang string o array ng mga string.
@@ -911,7 +911,7 @@ View\\Helper
 
 - Ang ``$settings`` na katangian ay tinatawag na ngayong ``$_config`` at dapat ma-access
   sa pamamagitan ng ``config()`` na paraan.
-- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang publikong mga katangian.
+- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang pampublikong mga katangian.
 - Ang ``Helper::clean()`` ay tinanggal. Ito ay hindi kailanmang sapat na matatag
   upang buong mapigilan ang XSS. Sa halip ay dapat kang lumabas sa nilalaman
   gamit ang :php:func:`h` o gumamit ng isang dedikadong library katulad ng htmlPurifier.
@@ -922,7 +922,7 @@ View\\Helper
   na helper. Ang ``Helper::url()`` ay magagamit na ngayon bilang
   :php:meth:`Cake\\View\\Helper\\UrlHelper::build()`.
 - Ang madyik na mga accessor sa mga hindi na ginagamit na mga katangian ay tinanggal.
-  Ang sumusunod na mga katangian ay nangangailangan na ngayong i-access mula
+  Ang sumusunod na mga katangian ay nangangailangan na ngayong ma-access mula
   sa kahilingan na object:
 
   - base
@@ -969,7 +969,7 @@ ilang malalaking mga pagbabago:
 
 * Ang FormHelper ay gumagana sa bagong ORM. Ngunit mayroong isang napapalawak na 
   sistema para sa pagsasama ng ibang mga ORM o mga datasource.
-* Ang FormHelper na mga tampok ay isang napapalawak na widget system na nagpapahintulot
+* Ang FormHelper na mga tampok ay isang napapalawak na widget na sistema na nagpapahintulot
   sa iyo na lumikha ng bagong pasadyang input na mga widget at dagdagan ang
   mga built-in.
 * Ang string na mga template ay ang pundasyon ng helper. Sa halip na kasamang 
@@ -982,7 +982,7 @@ pagbabago ang nagawa rin. Ang mga pagbabagong ito ay dapat tumulong sa pag-strea
 sa mga binuo ng HTML FormHelper at magbawas ng mga problema na nakasalubong sa 
 mga tao sa nakaraan:
 
-- Ang ``data[`` na prefix ay natanggal mula sa lahat ng nabuong mga input.
+- Ang ``data[`` na prefix ay natanggal mula sa lahat na nabuong mga input.
   Ang prefix ay wala nang tunay na layunin na pinagsisilbihan.
 - Ang iba't ibang standalone na input na mga paraan katulad ng ``text()``, ``select()``
   at iba pa ay hindi na bumubuo ng id na mga katangian.
@@ -1001,10 +1001,10 @@ mga tao sa nakaraan:
 - Ang ``showParents`` na opsyon ay tinanggal mula sa select().
 - Ang ``div``, ``before``, ``after``, ``between`` at ``errorMessage`` na mga opsyon
   ay tinanggal mula sa ``input()``. Maaari kang gumamit ng mga template upang mag-update
-  ng wrapping na HTML. Ang ``templates`` na opsyon ay nagpapahintulot sa iyo na
+  ng bumabalot na HTML. Ang ``templates`` na opsyon ay nagpapahintulot sa iyo na
   i-override ang na-load na mga template para sa isang input.
 - Ang ``separator``, ``between``, at ``legend`` na mga opsyon na tinanggal mula 
-  sa ``radio()``. Maaari kang gumamit ng mga template upang baguhin ang wrapping na
+  sa ``radio()``. Maaari kang gumamit ng mga template upang baguhin ang bumabalot na
   HTML ngayon.
 - Ang ``format24Hours`` na parameter ay tinanggal mula sa ``hour()``.
   Ito ay napalitan ng ``format`` na opsyon.
@@ -1035,7 +1035,7 @@ mga tao sa nakaraan:
   pagkakangkop sa popular na CSS na mga library katulad ng 
   `Bootstrap <http://getbootstrap.com/>`_ at
   `Foundation <http://foundation.zurb.com/>`_.
-- Ang mga templates tag ngayon ay naka-camelBack. Ang nauuna sa 3.0 na mga tag na
+- Ang mga tag ng mga template ngayon ay naka-camelBack na. Ang nauuna sa 3.0 na mga tag na
   ``formstart``, ``formend``, ``hiddenblock`` at ``inputsubmit`` ay
   ``formStart``, ``formEnd``, ``hiddenBlock`` at ``inputSubmit`` na ngayon.
   Siguraduhing baguhin mo ang mga iyon kung sila ay naka-customize sa iyong app.
