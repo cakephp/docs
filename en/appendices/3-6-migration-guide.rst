@@ -160,6 +160,9 @@ Configure
 Core
 ====
 
+* Plugins can now define :ref:`plugin-objects`. These classes are optional and
+  allow a plugin to add middleware and console commands to the host application.
+  They are a class based way to configure and define a plugin.
 * ``getTypeName()`` was added to assist in getting correct class/type name when
   building more descriptive error messages.
 

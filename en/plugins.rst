@@ -4,13 +4,13 @@ Plugins
 CakePHP allows you to set up a combination of controllers, models,
 and views and release them as a pre-packaged application plugin that
 others can use in their CakePHP applications. If you've created
-a great user management, simple blog, or web services module in one of
+great user management, simple blog, or web services module in one of
 your applications, why not package it as a CakePHP plugin? This way you
 can reuse it in your other applications, and share with the community!
 
-A CakePHP plugin is ultimately separate from the host application itself
-and generally provides some well-defined functionality that can be packaged up neatly,
-and reused with little effort in other applications. The application and the plugin
+A CakePHP plugin is separate from the host application itself and generally
+provides some well-defined functionality that can be packaged up neatly, and
+reused with little effort in other applications. The application and the plugin
 operate in their own respective spaces, but share application-specific
 properties (e.g. database connectivity parameters) which are defined and shared
 through the application's configuration.
@@ -25,7 +25,9 @@ Installing a Plugin With Composer
 
 Many plugins are available on `Packagist <http://packagist.org>`_
 and can be installed with ``Composer``. To install DebugKit, you
-would do the following::
+would do the following:
+
+.. code-block:: bash
 
     php composer.phar require cakephp/debug_kit
 
@@ -33,35 +35,93 @@ This would install the latest version of DebugKit and update your
 **composer.json**, **composer.lock** file, update
 **vendor/cakephp-plugins.php**, and update your autoloader.
 
+Manually Installing a Plugin
+============================
+
 If the plugin you want to install is not available on
 packagist.org, you can clone or copy the plugin code into your **plugins**
 directory. Assuming you want to install a plugin named 'ContactManager', you
 should have a folder in **plugins** named 'ContactManager'. In this directory
 are the plugin's src, tests and any other directories.
 
-.. index:: vendor/cakephp-plugins.php
+.. _autoloading-plugin-classes:
 
-Plugin Map File
----------------
+Manually Autoloading Plugin Classes
+-----------------------------------
 
-When installing plugins via Composer, you may notice that
-**vendor/cakephp-plugins.php** is created. This configuration file contains
-a map of plugin names and their paths on the filesystem. It makes it possible
-for plugins to be installed into the standard vendor directory which is outside
-of the normal search paths. The ``Plugin`` class will use this file to locate
-plugins when they are loaded with ``load()`` or ``loadAll()``. You generally
-won't need to edit this file by hand, as Composer and the ``plugin-installer``
-package will manage it for you.
+If you install your plugins via ``composer`` or ``bake`` you shouldn't need to
+configure class autoloading for your plugins.
+
+In we were installing a plugin named ``MyPlugin`` manually you would need to
+modify your application's **composer.json** file to contain the following
+information:
+
+.. code-block:: json
+
+    "autoload": {
+        "psr-4": {
+            "MyPlugin\\": "plugins/MyPlugin/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MyPlugin\\Test\\": "plugins/MyPlugin/tests/"
+        }
+    }
+    ""
+
+If you are using vendor namespaces for your plugins, the namespace to path mapping
+should resemble the following:
+
+.. code-block:: json
+
+    "autoload": {
+        "psr-4": {
+            "AcmeCorp\\Users\\": "plugins/AcmeCorp/Users/src/",
+            "AcmeCorp\\Users\\Test\\": "plugins/AcmeCorp/Users/tests/"
+        }
+    }
+
+Additionally, you will need to tell Composer to refresh its autoloading cache:
+
+.. code-block:: bash
+
+    php composer.phar dumpautoload
+
+If you are unable to use Composer for any reason, you can also configure
+autoloading with ``Plugin``::
+
+    Plugin::load('ContactManager', ['autoload' => true]);
 
 Loading a Plugin
 ================
 
-After installing a plugin and setting up the autoloader, you should load
-the plugin. You can load plugins one by one, or all of them with a single
-method::
+If you want to use a plugin's routes, console commands, middleware, or event
+listeners you will need to load the plugin. Plugins are loaded in your
+application's ``bootstrap()`` function::
+
+    // In src/Application.php. Requires at least 3.6.0
+    use Cake\Http\BaseApplication;
+    use ContactManager\Plugin as ContactManager;
+
+    class Application extends BaseApplication {
+        public function bootstrap()
+        {
+            parent::bootstrap();
+            // Load the contact manager plugin by class name
+            $this->addPlugin(ContactManager::class);
+
+            // Load a plugin with a vendor namespace by 'short name'
+            $this->addPlugin('AcmeCorp\ContactManager');
+        }
+    }
+
+If you just want to use helpers, behaviors or components from a plugin you do
+not need to load a plugin.
+
+Prior to 3.6.0, you should use ``Plugin::load()``::
 
     // In config/bootstrap.php
-    // Or in Application::bootstrap()
 
     // Loads a single plugin
     Plugin::load('ContactManager');
@@ -69,70 +129,76 @@ method::
     // Loads a plugin with a vendor namespace at top level.
     Plugin::load('AcmeCorp/ContactManager');
 
-    // Loads all plugins at once
-    Plugin::loadAll();
-
-``loadAll()`` loads all plugins available, while allowing you to set certain
-settings for specific plugins. ``load()`` works similarly, but only loads the
-plugins you explicitly specify.
-
-.. note::
-
-    ``Plugin::loadAll()`` won't load vendor namespaced plugins that are not
-    defined in **vendor/cakephp-plugins.php**.
-
-There is also a handy shell command to enable the plugin. Execute the following line:
+There is also a handy shell command to enable the plugin.  Execute the following
+line:
 
 .. code-block:: bash
 
     bin/cake plugin load ContactManager
 
-This will put the ``Plugin::load('ContactManager');`` snippet in the bootstrap for you.
+This would update your application's bootstrap method, or put the
+``Plugin::load('ContactManager');`` snippet in the bootstrap for you.
 
-.. _autoloading-plugin-classes:
 
-Autoloading Plugin Classes
---------------------------
-
-When using ``bake`` for creating a plugin or when installing a plugin using
-Composer, you don't typically need to make any changes to your application in order to
-make CakePHP recognize the classes that live inside it.
-
-In any other cases you may need to modify your application's composer.json file
-to contain the following information::
-
-    "psr-4": {
-        (...)
-        "MyPlugin\\": "plugins/MyPlugin/src/",
-        "MyPlugin\\Test\\": "plugins/MyPlugin/tests/"
-    }
-
-If you are using vendor namespaces for your plugins, the namespace to path mapping
-should resemble the following::
-
-    "psr-4": {
-        (...)
-        "AcmeCorp\\Users\\": "plugins/AcmeCorp/Users/src/",
-        "AcmeCorp\\Users\\Test\\": "plugins/AcmeCorp/Users/tests/"
-    }
-
-Additionally, you will need to tell Composer to refresh its autoloading cache::
-
-    $ php composer.phar dumpautoload
-
-If you are unable to use Composer for any reason, you can also use a fallback
-autoloading for your plugin::
-
-    Plugin::load('ContactManager', ['autoload' => true]);
+.. versionadded:: 3.6.0
+    ``addPlugin()`` was added.
 
 .. _plugin-configuration:
 
-Plugin Configuration
-====================
+Plugin Hook Configuration
+=========================
 
-The ``load()`` and ``loadAll()`` methods can assist with plugin configuration
-and routing. Perhaps you want to load all plugins automatically while specifying
-custom routes and bootstrap files for certain plugins::
+Plugins offer several hooks that allow a plugin to inject itself into the
+appropriate parts of your application. The hooks are:
+
+* ``bootstrap`` Used to load plugin default configuration files, define
+  constants and other global functions.
+* ``routes`` Used to load routes for a plugin. Fired after application routes
+  are loaded.
+* ``middleware`` Used to add plugin middleware to an application's middleware
+  queue.
+* ``console`` Used to add console commands to an application's command
+  collection.
+* ``events`` Used to add event listeners to the application event manager.
+
+When loading plugins you can configure which hooks are enabled. By default
+plugins without a :ref:`plugin-objects` have all hooks disabled. New style plugins
+allow plugin authors to set defaults, which can be configured by you in your
+appliation::
+
+    // In Application::bootstrap()
+
+    // Disable routes for the ContactManager plugin
+    $this->addPlugin(ContactManager::class, ['routes' => false]);
+
+You can configure hooks with array options, or the methods provided by plugin
+classes::
+
+    // In Application::bootstrap()
+    // Use the disable/enable to configure hooks.
+    $plugin = new ContactManager();
+
+    $plugin->disable('bootstrap');
+    $plugin->enable('routes');
+    $this->addPlugin($plugin);
+
+Plugin objects also know their names and path information::
+
+    $plugin = new ContactManager();
+
+    // Get the plugin name.
+    $name = $plugin->getName();
+
+    // Path to the plugin root, and other paths.
+    $path = $plugin->getPath();
+    $path = $plugin->getConfigPath();
+    $path = $plugin->getClassPath();
+
+Old Style Plugins
+-----------------
+
+Prior to 3.6.0, you will need to enable the ``bootstrap`` and ``routes`` hooks.
+Old style plugins do not support ``middleware`` and ``console`` hooks::
 
     // In config/bootstrap.php,
     // or in Application::bootstrap()
@@ -191,17 +257,16 @@ This will ensure that classnames are resolved properly when using
 :term:`plugin syntax`.
 
 Most plugins will indicate the proper procedure for configuring them and setting
-up the database in their documentation. Some plugins will require more setup
-than others.
+up the database in their documentation.
 
-Using Plugins
-=============
+Using Plugin Classes
+====================
 
-You can reference a plugin's controllers, models, components,
-behaviors, and helpers by prefixing the name of the plugin before
+You can reference a plugin's controllers, models, components, behaviors, and
+helpers by prefixing the name of the plugin.
 
 For example, say you wanted to use the ContactManager plugin's
-ContactInfoHelper to output some pretty contact information in
+ContactInfoHelper to output formatted contact information in
 one of your views. In your controller, your ``$helpers`` array
 could look like this::
 
@@ -229,6 +294,7 @@ basic directory structure. It should look like this::
         /ContactManager
             /config
             /src
+                /Plugin.php
                 /Controller
                     /Component
                 /Model
@@ -259,8 +325,7 @@ application can, such as Config, Console, webroot, etc.
 Creating a Plugin Using Bake
 ----------------------------
 
-The process of creating plugins can be greatly simplified by using the bake
-shell.
+The process of creating plugins can be greatly simplified by using bake.
 
 In order to bake a plugin, use the following command:
 
@@ -268,8 +333,8 @@ In order to bake a plugin, use the following command:
 
     bin/cake bake plugin ContactManager
 
-Now you can bake using the same conventions which apply to the rest
-of your app. For example - baking controllers:
+Bake can be used to create classes in your plugin. For example to generate
+a plugin controller you could run:
 
 .. code-block:: bash
 
@@ -282,7 +347,51 @@ autoloader once you've created your plugin:
 
 .. code-block:: bash
 
-    $ php composer.phar dumpautoload
+    php composer.phar dumpautoload
+
+.. _plugin-objects:
+
+Plugin Objects
+==============
+
+Plugin Objects allow a plugin author to define set-up logic, define default
+hooks, load routes, middleware and console commands. Plugin objects live in 
+**src/Plugin.php**. For our ContactManager plugin, or plugin class could look
+like::
+
+    namespace ContactManager;
+
+    use Cake\Core\BasePlugin;
+
+    class Plugin extends BasePlugin
+    {
+        public function middleware($middleware)
+        {
+            // Add middleware here.
+            return $middleware;
+        }
+
+        public function console($commands)
+        {
+            // Add console commands here.
+            return $commands;
+        }
+
+        public function bootstrap()
+        {
+            // Add constants, load configuration defaults. 
+            // By default will load `config/bootstrap.php` in the plugin.
+        }
+
+        public function routes($routes)
+        {
+            // Add routes. By default will load `config/routes.php` in
+            // the plugin.
+        }
+    }
+
+.. versionadded:: 3.6.0
+    Plugin Objects were added in 3.6.0
 
 .. _plugin-routes:
 
@@ -606,48 +715,47 @@ that you prefix the plugin name before the name of the component. For example::
 
 The same technique applies to Helpers and Behaviors.
 
-Expand Your Plugin
-==================
+Publishing Your Plugin
+======================
 
-This example created a good start for a plugin, but there is a lot
-more that you can do. As a general rule, anything you can do with your
-application you can do inside of a plugin as well.
-
-Go ahead - include some third-party libraries in 'vendor', add some
-new shells to the cake console, and don't forget to create test cases
-so your plugin users can automatically test your plugin's functionality!
-
-In our ContactManager example we might create add/remove/edit/delete
-actions in the ContactsController, implement validation in the Contact
-model, and implement the functionality one might expect when managing
-their contacts. It's up to you to decide what to implement in your
-plugins. Just don't forget to share your code with the community so
-that everyone can benefit from your awesome, reusable components!
-
-Publish Your Plugin
-===================
-
-Make sure you add your plugin to
-`plugins.cakephp.org <https://plugins.cakephp.org>`_. This way other people can
-use it as composer dependency.
-You can also propose your plugin to the
-`awesome-cakephp list <https://github.com/FriendsOfCake/awesome-cakephp>`_.
+CakePHP plugins should be published to `the packagist
+<https://packagist.org>`__. This way other people can use it as composer
+dependency.  You can also propose your plugin to the `awesome-cakephp list
+<https://github.com/FriendsOfCake/awesome-cakephp>`_.
 
 Choose a semantically meaningful name for the package name. This should ideally
 be prefixed with the dependency, in this case "cakephp" as the framework.
 The vendor name will usually be your GitHub username.
 Do **not** use the CakePHP namespace (cakephp) as this is reserved to CakePHP
-owned plugins.
-The convention is to use lowercase letters and dashes as separator.
+owned plugins. The convention is to use lowercase letters and dashes as separator.
 
 So if you created a plugin "Logging" with your GitHub account "FooBar", a good
 name would be `foo-bar/cakephp-logging`.
 And the CakePHP owned "Localized" plugin can be found under `cakephp/localized`
 respectively.
 
+.. index:: vendor/cakephp-plugins.php
+
+Plugin Map File
+===============
+
+When installing plugins via Composer, you may notice that
+**vendor/cakephp-plugins.php** is created. This configuration file contains
+a map of plugin names and their paths on the filesystem. It makes it possible
+for plugins to be installed into the standard vendor directory which is outside
+of the normal search paths. The ``Plugin`` class will use this file to locate
+plugins when they are loaded with ``load()`` or ``loadAll()``. You generally
+won't need to edit this file by hand, as Composer and the ``plugin-installer``
+package will manage it for you.
+
+
 Manage Your Plugins using Mixer
 ===============================
-Another way to discover and manage plugins into your CakePHP application is `Mixer <https://github.com/CakeDC/mixer>`_. It is a CakePHP plugin which helps you to install plugins from Packagist. It also helps you to manage your existing plugins.
+
+Another way to discover and manage plugins into your CakePHP application is
+`Mixer <https://github.com/CakeDC/mixer>`_. It is a CakePHP plugin which helps
+you to install plugins from Packagist. It also helps you to manage your existing
+plugins.
 
 .. note::
 

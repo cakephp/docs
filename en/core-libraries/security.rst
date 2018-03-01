@@ -1,5 +1,5 @@
-Security
-########
+Security Utility
+################
 
 .. php:namespace:: Cake\Utility
 
