@@ -13,7 +13,7 @@ Mga Kinakailangan
 - Ang CakePHP 3.x ay nangangailangan ng mbstring na ekstensiyon.
 - Ang CakePHP 3.x ay nangangailangan ng intl na ekstensiyon.
 
-.. babala::
+.. warning::
 
 	Ang CakePHP 3.0 ay hindi gagana kung hindi mo nakamit ang mga kinakailangan sa itaas.
 
@@ -658,7 +658,7 @@ AuthComponent
 - Ang ``BlowfishPasswordHasher`` na class ay tinanggal. Sa halip ay gumamit ng
   ``DefaultPasswordHasher``.
 - Ang ``loggedIn()`` na paraan ay tinanggal. Sa halip ay gumamit ng ``user()``.
-- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang publikong mga katangian.
+- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang pampublikong mga katangian.
 - Ang mga paraan na ``allow()`` at ``deny()`` ay hindi na tumatanggap ng "var args".
   Ang lahat ng kinakailangan na mga pangalan ng paraan na ipapasa bilang unang argumento,
   alinman bilang string o array ng mga string.
@@ -693,7 +693,7 @@ RequestHandlerComponent
 - Ang ``RequestHandler::getClientIP()`` ay tinanggal, sa halip ay gamitin ang :php:meth:`Cake\\Network\\Request::clientIp()`.
 - Ang ``RequestHandler::getAjaxVersion()`` ay tinanggal.
 - Ang ``RequestHandler::mapType()`` ay tinanggal, sa halip ay gamitin ang :php:meth:`Cake\\Network\\Response::mapType()`.
-- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang publikong mga katangian.
+- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang pampublikong mga katangian.
 
 SecurityComponent
 -----------------
@@ -706,7 +706,7 @@ SecurityComponent
 - Ang may kaugnayan sa CSRF na mga tampok sa SecurityComponent ay kinuha at inilipat
   sa isang hiwalay na CsrfComponent. Ito ay nagpapahintulot sa iyo na gumamit ng
   CSRF na proteksyon nang hindi ginagamit ang form tampering na pag-iiwas.
-- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang publikong mga katangian.
+- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang pampublikong mga katangian.
 - Ang mga paraan na ``requireAuth()`` at ``requireSecure()`` ay hindi na tumatanggap ng
   "var args". Ang lahat ng pangalan ng paraan ay kailangang ipasa bilang unang argumento,
   alinman bilang string o array ng mga string.
@@ -909,19 +909,21 @@ XmlView
 View\\Helper
 ============
 
-- The ``$settings`` property is now called ``$_config`` and should be accessed
-  through the ``config()`` method.
-- Configuration options are no longer set as public properties.
-- ``Helper::clean()`` was removed. It was never robust enough
-  to fully prevent XSS. instead you should escape content with :php:func:`h` or
-  use a dedicated library like htmlPurifier.
-- ``Helper::output()`` was removed. This method was
-  deprecated in 2.x.
-- Methods ``Helper::webroot()``, ``Helper::url()``, ``Helper::assetUrl()``,
-  ``Helper::assetTimestamp()`` have been moved to new :php:class:`Cake\\View\\Helper\\UrlHelper`
-  helper. ``Helper::url()`` is now available as :php:meth:`Cake\\View\\Helper\\UrlHelper::build()`.
-- Magic accessors to deprecated properties have been removed. The following
-  properties now need to be accessed from the request object:
+- Ang ``$settings`` na katangian ay tinatawag na ngayong ``$_config`` at dapat ma-access
+  sa pamamagitan ng ``config()`` na paraan.
+- Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang pampublikong mga katangian.
+- Ang ``Helper::clean()`` ay tinanggal. Ito ay hindi kailanmang sapat na matatag
+  upang buong mapigilan ang XSS. Sa halip ay dapat kang lumabas sa nilalaman
+  gamit ang :php:func:`h` o gumamit ng isang dedikadong library katulad ng htmlPurifier.
+- Ang ``Helper::output()`` ay natanggal. Ang paraang ito ay
+  hindi na magagamit sa 2.x.
+- Ang mga paraang ``Helper::webroot()``, ``Helper::url()``, ``Helper::assetUrl()``,
+  ``Helper::assetTimestamp()`` ay inilipat sa bagong :php:class:`Cake\\View\\Helper\\UrlHelper`
+  na helper. Ang ``Helper::url()`` ay magagamit na ngayon bilang
+  :php:meth:`Cake\\View\\Helper\\UrlHelper::build()`.
+- Ang madyik na mga accessor sa mga hindi na ginagamit na mga katangian ay tinanggal.
+  Ang sumusunod na mga katangian ay nangangailangan na ngayong i-access mula
+  sa kahilingan na object:
 
   - base
   - here
@@ -933,7 +935,7 @@ View\\Helper
 Helper
 ------
 
-Helper has had the following methods removed:
+Ang helper ay mayroong sumusunod na mga paraan na tinanggal:
 
 * ``Helper::setEntity()``
 * ``Helper::entity()``
@@ -944,156 +946,177 @@ Helper has had the following methods removed:
 * ``Helper::_initInputField()``
 * ``Helper::_selectedArray()``
 
-These methods were part used only by FormHelper, and part of the persistent
-field features that have proven to be problematic over time. FormHelper no
-longer relies on these methods and the complexity they provide is not necessary
-anymore.
+Ang mga paraang ito ay parteng ginamit lamang ng FormHelper, at parte ng paulit-ulit
+na patlang na mga tampok na napatunayang nakapag-aalingan sa paglipas ng panahon.
+Ang FormHelper ay hindi na umaasa sa mga paraang ito at ang pagkakumplikado na 
+binigay nila ay hindi na kinakailangan.
 
-The following methods have been removed:
+Ang sumusunod na mga paraan ay tinanggal:
 
 * ``Helper::_parseAttributes()``
 * ``Helper::_formatAttribute()``
 
-These methods can now be found on the ``StringTemplate`` class that helpers
-frequently use. See the ``StringTemplateTrait`` for an easy way to integrate
-string templates into your own helpers.
+Ang mga paraang ito ay maaari na ngayong matagpuan sa ``StringTemplate`` na class
+na kadalasang ginagamit ng mga helper. Tingnan ang ``StringTemplateTrait`` para sa
+isang madaling paraan upang pagsamahin ang mga string template sa iyong sariling
+mga helper.
 
 FormHelper
 ----------
 
-FormHelper has been entirely rewritten for 3.0. It features a few large changes:
+Ang FormHelper ay pangkalahatang isinulat muli para sa 3.0. Ito ay nagtatampok ng
+ilang malalaking mga pagbabago:
 
-* FormHelper works with the new ORM. But has an extensible system for
-  integrating with other ORMs or datasources.
-* FormHelper features an extensible widget system that allows you to create new
-  custom input widgets and augment the built-in ones.
-* String templates are the foundation of the helper. Instead of munging arrays
-  together everywhere, most of the HTML FormHelper generates can be customized
-  in one central place using template sets.
+* Ang FormHelper ay gumagana sa bagong ORM. Ngunit mayroong isang napapalawak na 
+  sistema para sa pagsasama ng ibang mga ORM o mga datasource.
+* Ang FormHelper na mga tampok ay isang napapalawak na widget na sistema na nagpapahintulot
+  sa iyo na lumikha ng bagong pasadyang input na mga widget at dagdagan ang
+  mga built-in.
+* Ang string na mga template ay ang pundasyon ng helper. Sa halip na kasamang 
+  manipulahin ang mga array kahit saan, kadalasan sa mga HTML FormHelper na mga
+  binuo ay maaaring i-customize sa isang sentral na lugar gamit ang mga
+  template set.
 
-In addition to these larger changes, some smaller breaking changes have been
-made as well. These changes should help streamline the HTML FormHelper generates
-and reduce the problems people had in the past:
+At saka sa mas malaking mga pagbabagong ito, ilang mas maliit na nakakasirang mga
+pagbabago ang nagawa rin. Ang mga pagbabagong ito ay dapat tumulong sa pag-streamline
+sa mga binuo ng HTML FormHelper at magbawas ng mga problema na nakasalubong sa 
+mga tao sa nakaraan:
 
-- The ``data[`` prefix was removed from all generated inputs.  The prefix serves no real purpose anymore.
-- The various standalone input methods like ``text()``, ``select()`` and others
-  no longer generate id attributes.
-- The ``inputDefaults`` option has been removed from ``create()``.
-- Options ``default`` and ``onsubmit`` of ``create()`` have been removed. Instead
-  one should use JavaScript event binding or set all required js code for ``onsubmit``.
-- ``end()`` can no longer make buttons. You should create buttons with
-  ``button()`` or ``submit()``.
-- ``FormHelper::tagIsInvalid()`` has been removed. Use ``isFieldError()``
-  instead.
-- ``FormHelper::inputDefaults()`` has been removed. You can use ``templates()``
-  to define/augment the templates FormHelper uses.
-- The ``wrap`` and ``class`` options have been removed from the ``error()``
-  method.
-- The ``showParents`` option has been removed from select().
-- The ``div``, ``before``, ``after``, ``between`` and ``errorMessage`` options
-  have been removed from ``input()``.  You can use templates to update the
-  wrapping HTML. The ``templates`` option allows you to override the loaded
-  templates for one input.
-- The ``separator``, ``between``, and ``legend`` options have been removed from
-  ``radio()``. You can use templates to change the wrapping HTML now.
-- The ``format24Hours`` parameter has been removed from ``hour()``.
-  It has been replaced with the ``format`` option.
-- The ``minYear``, and ``maxYear`` parameters have been removed from ``year()``.
-  Both of these parameters can now be provided as options.
-- The ``dateFormat`` and ``timeFormat`` parameters have been removed from
-  ``datetime()``. You can use the template to define the order the inputs should
-  be displayed in.
-- The ``submit()`` has had the ``div``, ``before`` and ``after`` options
-  removed. You can customize the ``submitContainer`` template to modify this
-  content.
-- The ``inputs()`` method no longer accepts ``legend`` and ``fieldset`` in the
-  ``$fields`` parameter, you must use the ``$options`` parameter.
-  It now also requires ``$fields`` parameter to be an array. The ``$blacklist``
-  parameter has been removed, the functionality has been replaced by specifying
-  ``'field' => false`` in the ``$fields`` parameter.
-- The ``inline`` parameter has been removed from postLink() method.
-  You should use the ``block`` option instead. Setting ``block => true`` will
-  emulate the previous behavior.
-- The ``timeFormat`` parameter for ``hour()``, ``time()`` and ``dateTime()`` now
-  defaults to 24, complying with ISO 8601.
-- The ``$confirmMessage`` argument of :php:meth:`Cake\\View\\Helper\\FormHelper::postLink()`
-  has been removed. You should now use key ``confirm`` in ``$options`` to specify
-  the message.
-- Checkbox and radio input types are now rendered *inside* of label elements
-  by default. This helps increase compatibility with popular CSS libraries like
-  `Bootstrap <http://getbootstrap.com/>`_ and
+- Ang ``data[`` na prefix ay natanggal mula sa lahat na nabuong mga input.
+  Ang prefix ay wala nang tunay na layunin na pinagsisilbihan.
+- Ang iba't ibang standalone na input na mga paraan katulad ng ``text()``, ``select()``
+  at iba pa ay hindi na bumubuo ng id na mga katangian.
+- Ang ``inputDefaults`` na opsyon ay tinanggal mula sa ``create()``.
+- Ang mga opsyon na ``default`` at ``onsubmit`` ng ``create()`` ay tinanggal.
+  Sa halip ang isa ay dapat gumamit ng JavaScript event binding o itakda ang lahat
+  na kinakailangan na js code para sa ``onsubmit``.
+- Ang ``end()`` ay hindi na maaaring gumawa ng mga pindutan. Dapat kang gumawa ng 
+  mga pindutan gamit ang ``button()`` o ``submit()``.
+- Ang ``FormHelper::tagIsInvalid()`` ay tinanggal. Sa halip ay gumamit ng
+  ``isFieldError()``.
+- Ang ``FormHelper::inputDefaults()`` ay tinanggal. Maaari kang gumamit ng 
+  ``templates()`` upang tumukoy/magdagdag ng mga template na ginagamit ng FormHelper.
+- Ang ``wrap`` at ``class`` na mga opsyon ay tinanggal mula sa ``error()``
+  na paraan.
+- Ang ``showParents`` na opsyon ay tinanggal mula sa select().
+- Ang ``div``, ``before``, ``after``, ``between`` at ``errorMessage`` na mga opsyon
+  ay tinanggal mula sa ``input()``. Maaari kang gumamit ng mga template upang mag-update
+  ng bumabalot na HTML. Ang ``templates`` na opsyon ay nagpapahintulot sa iyo na
+  i-override ang na-load na mga template para sa isang input.
+- Ang ``separator``, ``between``, at ``legend`` na mga opsyon na tinanggal mula 
+  sa ``radio()``. Maaari kang gumamit ng mga template upang baguhin ang bumabalot na
+  HTML ngayon.
+- Ang ``format24Hours`` na parameter ay tinanggal mula sa ``hour()``.
+  Ito ay napalitan ng ``format`` na opsyon.
+- Ang ``minYear``, at ``maxYear`` na mga parameter ay natanggal mula sa ``year()``.
+  Parehong ang mga parameter na ito ay maaari na ngayong ibigay bilang mga opsyon.
+- Ang ``dateFormat`` at ``timeFormat`` na mga parameter ay tinanggal mula sa 
+  ``datetime()``. Maaari mong gamitin ang template upang tukuyin ang pagkakaayos ng
+  mga input kung paano ipapakita ang mga ito.
+- Ang ``submit()`` dati ay may ``div``, ``before`` at ``after`` na mga opsyon na
+  natanggal. Maaari mong i-customize ang ``submitContainer`` na template upang
+  baguhin ang nilalamang ito.
+- Ang ``inputs()`` na paraan ay hindi na tumatanggap ng ``legend`` at ``fieldset``
+  sa ``$fields`` na parameter, dapat mong gamitin ang ``$options`` na parameter.
+  Ito ngayon ay nangangailangan na rin ng ``$fields`` na parameter upang maging
+  isang array. Ang ``$blacklist`` na parameter ay tinanggal, ang functionality ay
+  napalitan sa pamamagitan ng pagtukoy ng ``'field' => false`` sa ``$fields``
+  na parameter.
+- Ang ``inline`` na parameter ay tinanggal mula sa postLink() na paraan.
+  Sa halip ay dapat mong gamitin ang ``block``. Ang pagtatakda ng ``block => true``
+  ay magtutulad sa nakaraang pagkilos.
+- Ang ``timeFormat`` na parameter para sa ``hour()``, ``time()`` at ``dateTime()``
+  ngayon ay nagde-default sa 24, sumusunod sa ISO 8601.
+- Ang ``$confirmMessage`` na argumento ng :php:meth:`Cake\\View\\Helper\\FormHelper::postLink()`
+  ay tinanggal. Dapat ka na ngayong gumamit ng key na ``confirm`` sa ``$options``
+  upang tumukoy ng mensahe.
+- Ang checkbox at radio input na mga uri ay nare-render na ngayon *sa loob* ng
+  label na mga elemento bilang default. Tinutulungan nitong pataasin ang 
+  pagkakangkop sa popular na CSS na mga library katulad ng 
+  `Bootstrap <http://getbootstrap.com/>`_ at
   `Foundation <http://foundation.zurb.com/>`_.
-- Templates tags are now all camelBacked. Pre-3.0 tags ``formstart``, ``formend``, ``hiddenblock``
-  and ``inputsubmit`` are now ``formStart``, ``formEnd``, ``hiddenBlock`` and ``inputSubmit``.
-  Make sure you change them if they are customized in your app.
+- Ang mga tag ng mga template ngayon ay naka-camelBack na. Ang nauuna sa 3.0 na mga tag na
+  ``formstart``, ``formend``, ``hiddenblock`` at ``inputsubmit`` ay
+  ``formStart``, ``formEnd``, ``hiddenBlock`` at ``inputSubmit`` na ngayon.
+  Siguraduhing baguhin mo ang mga iyon kung sila ay naka-customize sa iyong app.
 
-It is recommended that you review the :doc:`/views/helpers/form`
-documentation for more details on how to use the FormHelper in 3.0.
+Inirerekomenda na suriin mo ang :doc:`/views/helpers/form`
+na dokumentasyon para sa karagdagang mga detalye sa kung paano gamitin
+ang FormHelper sa 3.0.
 
 HtmlHelper
 ----------
 
-- ``HtmlHelper::useTag()`` has been removed, use ``tag()`` instead.
-- ``HtmlHelper::loadConfig()`` has been removed. Customizing the tags can now be
-  done using ``templates()`` or the ``templates`` setting.
-- The second parameter ``$options`` for ``HtmlHelper::css()`` now always requires an array as documented.
-- The first parameter ``$data`` for ``HtmlHelper::style()`` now always requires an array as documented.
-- The ``inline`` parameter has been removed from meta(), css(), script(), scriptBlock()
-  methods. You should use the ``block`` option instead. Setting ``block =>
-  true`` will emulate the previous behavior.
-- ``HtmlHelper::meta()`` now requires ``$type`` to be a string. Additional options can
-  further on be passed as ``$options``.
-- ``HtmlHelper::nestedList()`` now requires ``$options`` to be an array. The forth argument for the tag type
-  has been removed and included in the ``$options`` array.
-- The ``$confirmMessage`` argument of :php:meth:`Cake\\View\\Helper\\HtmlHelper::link()`
-  has been removed. You should now use key ``confirm`` in ``$options`` to specify
-  the message.
+- Ang ``HtmlHelper::useTag()`` ay tinanggal, sa halip ay gamitin ang ``tag()``.
+- Ang ``HtmlHelper::loadConfig()`` ay tinanggal. Ang pag-customize ng mga tag ay
+  maaari na ngayong gawin gamit ang ``templates()`` o ang ``templates`` na setting.
+- Ang pangalawang parameter na ``$options`` para sa ``HtmlHelper::css()`` ay palagi
+  na ngayong nangangailangan ng isang array batay sa nadokumento.
+- Ang unang parameter na ``$data`` para sa ``HtmlHelper::style()`` ay palagi na ngayong
+  nangangailangan ng isang array batay sa nadokumento.
+- Ang ``inline`` na parameter ay tinanggal mula sa meta(), css(), script(), scriptBlock()
+  na mga paraan. Sa halip ay dapat mong gamitin ang ``block``. Ang pagtatakda ng 
+  ``block => true`` ay magtutulad sa nakaraang pagkilos.
+- Ang ``HtmlHelper::meta()`` ngayon ay nangangailangan ng ``$type`` na maging isang string.
+  Ang karagdagang mga opsyon ay maaaring mas higit pang maipasa bilang ``$options``.
+- Ang ``HtmlHelper::nestedList()`` ngayon ay nangangailangan ng ``$options`` na maging isang array.
+  Ang pang-apat na argumento para sa tag na uri ay tinanggal at isinama sa ``$options`` na array.
+- Ang ``$confirmMessage`` na argumento ng :php:meth:`Cake\\View\\Helper\\HtmlHelper::link()`
+  ay tinanggal. Dapat mo na ngayong gamitin ang key na ``confirm`` sa ``$options`` upang
+  matukoy ang mensahe.
 
 PaginatorHelper
 ---------------
 
-- ``link()`` has been removed. It was no longer used by the helper internally.
-  It had low usage in user land code, and no longer fit the goals of the helper.
-- ``next()`` no longer has 'class', or 'tag' options. It no longer has disabled
-  arguments. Instead templates are used.
-- ``prev()`` no longer has 'class', or 'tag' options. It no longer has disabled
-  arguments. Instead templates are used.
-- ``first()`` no longer has 'after', 'ellipsis', 'separator', 'class', or 'tag' options.
-- ``last()`` no longer has 'after', 'ellipsis', 'separator', 'class', or 'tag' options.
-- ``numbers()`` no longer has 'separator', 'tag', 'currentTag', 'currentClass',
-  'class', 'tag', 'ellipsis' options. These options are now facilitated through
-  templates. It also requires the ``$options`` parameter to be an array now.
-- The ``%page%`` style placeholders have been removed from :php:meth:`Cake\\View\\Helper\\PaginatorHelper::counter()`.
-  Use ``{{page}}`` style placeholders instead.
-- ``url()`` has been renamed to ``generateUrl()`` to avoid method declaration clashes with ``Helper::url()``.
+- Ang ``link()`` ay tinanggal. Ito ay hindi na panloob na ginagamit ng helper.
+  Ito ay may mababang paggamit sa user land code, at hindi na kasya sa mga 
+  layunin ng helper.
+- Ang ``next()`` ay wala nang 'class', o 'tag' na mga opsyon. Wala na itong naka-disable
+  na mga argumento. Sa halip ay ginamit ang mga template.
+- Ang ``prev()`` ay wala nang 'class', o 'tag' na mga opsyon. Wala na itong naka-disable
+  na mga argumento. Sa halip ay ginamit ang mga template.
+- Ang ``first()`` ay wala nang 'after', 'ellipsis', 'separator', 'class', o 'tag' na mga opsyon.
+- Ang ``last()`` ay wala nang 'after', 'ellipsis', 'separator', 'class', o 'tag' na mga opsyon.
+- Ang ``numbers()`` ay wala nang 'separator', 'tag', 'currentTag', 'currentClass',
+  'class', 'tag', 'ellipsis' na mga opsyon. Ang mga opsyon na ito ay pinadali na ngayon gamit 
+  ang mga template. Ito rin ay nangangailangan ng ``$options`` na parameter na maging 
+  isang array na ngayon.
+- Ang ``%page%`` na estilo na mga placeholder ay tinanggal mula sa 
+  :php:meth:`Cake\\View\\Helper\\PaginatorHelper::counter()`.
+  Sa halip ay gamitin ang ``{{page}}`` na estilo na mga placeholder.
+- Ang ``url()`` ay napalitan ang pangaln sa ``generateUrl()`` upang maiwasan ang banggaan sa deklarasyon ng paraan
+  gamit ang ``Helper::url()``.
 
-By default all links and inactive texts are wrapped in ``<li>`` elements. This
-helps make CSS easier to write, and improves compatibility with popular CSS
-frameworks.
+Bilang default ang lahat ng mga link at hindi aktibong mga teksto ay nakabalot sa ``<li>`` na
+nga elemento. Tinutulungan nitong gawing mas madali ang pagsulat ng CSS, at papabutihin ang
+pagkakatugma sa popular na mga balangkas ng CSS.
 
-Instead of the various options in each method, you should use the templates
-feature. See the :ref:`paginator-templates` documentation for
-information on how to use templates.
+Sa halip ng iba't ibang mga opsyon sa bawat paraan, dapat mong gamitin ang mga template
+na tampok. Tingnan ang :ref:`paginator-templates` dokumentasyon para sa impormasyon
+kung paano gamitin ang mga template.
 
 TimeHelper
 ----------
 
-- ``TimeHelper::__set()``, ``TimeHelper::__get()``, and  ``TimeHelper::__isset()`` were
-  removed. These were magic methods for deprecated attributes.
-- ``TimeHelper::serverOffset()`` has been removed.  It promoted incorrect time math practices.
-- ``TimeHelper::niceShort()`` has been removed.
+- Ang ``TimeHelper::__set()``, ``TimeHelper::__get()``, at  ``TimeHelper::__isset()`` ay
+  tinanggal. Ito ay ang madyik na mga paraan para sa hindi na nagagamit na mga katangian.
+- Ang ``TimeHelper::serverOffset()`` ay tinanggal. Ito ay nagtataguyod ng hindi wastong
+  time match na mga gawi.
+- Ang ``TimeHelper::niceShort()`` ay tinanggal.
 
 NumberHelper
 ------------
 
-- :php:meth:`NumberHelper::format()` now requires ``$options`` to be an array.
+- Ang :php:meth:`NumberHelper::format()` ay nangangailangan na ngayon ng ``$options``
+  na maging isang array.
 
 SessionHelper
 -------------
 
-- The ``SessionHelper`` has been deprecated. You can use ``$this->request->session()`` directly,
-  and the flash message functionality has been moved into :doc:`/views/helpers/flash` instead.
-
+- Ang ``SessionHelper`` ay hindi na nagagamit. Maaari mong direktang gamitin ang 
+  ``$this->request->session()``, at sa halip ang functionality ng flash na mensahe ay nailipat sa 
+  :doc:`/views/helpers/flash`
+  
 JsHelper
 --------
 
