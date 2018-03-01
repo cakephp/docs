@@ -922,7 +922,7 @@ View\\Helper
   na helper. Ang ``Helper::url()`` ay magagamit na ngayon bilang
   :php:meth:`Cake\\View\\Helper\\UrlHelper::build()`.
 - Ang madyik na mga accessor sa mga hindi na ginagamit na mga katangian ay tinanggal.
-  Ang sumusunod na mga katangian ay nangangailangan na ngayong ma-access mula
+  Ang sumusunod na mga katangian ay nangangailangan na ngayong i-access mula
   sa kahilingan na object:
 
   - base
