@@ -1,21 +1,21 @@
-ORM Cache Shell
-###############
+ORM na Shell ng Cache
+#####################
 
-The OrmCacheShell provides a simple CLI tool for managing your application's
-metadata caches. In deployment situations it is helpful to rebuild the metadata
-cache in-place without clearing the existing cache data. You can do this by
-running::
+Ang OrmCacheShell ay nagbibigay ng isang simpleng CLI na kasangkapan para sa pamamahala ng iyong aplikasyon na 
+mga cache ng metadata. Sa mga sitwasyon ng pagdeploy, ito ay makakatulong na muling itayo ang cache ng metadata 
+sa parehong lugar na hindi nangangailangan tanggalin ang umiiral na data ng cache. Maaari mong gawin ito sa pamamagitan ng 
+pagpapatabko ng::
 
     bin/cake orm_cache build --connection default
 
-This will rebuild the metadata cache for all tables on the ``default``
-connection. If you only need to rebuild a single table you can do that by
-providing its name::
+Muling itatayo nito ang cache ng metadata para sa lahat ng mga table sa ``default``
+na koneksyon. Kung kailangan mo lamang muling itayo ang isang table maaari mong gawin iyon sa pamamagitan ng 
+pagbibigay ng pangalan nito::
 
     bin/cake orm_cache build --connection default articles
 
-In addition to building cached data, you can use the OrmCacheShell to remove
-cached metadata as well::
+Bilang karagdagan sa pagtatayo ng naka-cache na data, maaari mong gamitin ang OrmCacheShell para tanggalin 
+na rin ang naka-cache na metadata::
 
     # Clear all metadata
     bin/cake orm_cache clear

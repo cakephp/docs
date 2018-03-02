@@ -1,16 +1,16 @@
-Components
-##########
+Mga Komponent
+#############
 
-Components are packages of logic that are shared between controllers.
-CakePHP comes with a fantastic set of core components you can use to aid in
-various common tasks. You can also create your own components. If you find
-yourself wanting to copy and paste things between controllers, you should
-consider creating your own component to contain the functionality. Creating
-components keeps controller code clean and allows you to reuse code between
-different controllers.
+Ang mga Komponent ay ang mga package sa lohika na ibinabahagi sa pagitan ng mga controller.
+Ang CakePHP ay may isang napakagandang set ng pangunahing mga komponent na pwede mong gamitin para tulungan ka sa 
+iba-ibang mga karaniwang mga gawain. Maaari ka ring lumikha ng sarili mong mga komponent. Kung makikita mo 
+sa sarili na gusto mong i-copy at paste ang mga bagay sa pagitan ng mga controller, dapat mong 
+isaalang-alang ang paglikha ng iyong sariling komponent na naglalaman ng functionality. Ang paglilikha ng mga 
+komponento ay nagpapanitling malinis sa controller ng code at nagpapahintulot sa iyo upang gamitin ang code sa pagitan 
+ng iba't ibang mga controller.
 
-For more information on the components included in CakePHP, check out the
-chapter for each component:
+Para sa karagdagang impormasyon sa mga component na kasama sa CakePHP, tingnan ang 
+kabanata para sa bawat komponent:
 
 .. toctree::
     :maxdepth: 1
@@ -25,14 +25,14 @@ chapter for each component:
 
 .. _configuring-components:
 
-Configuring Components
-======================
+Pag-configure ng mga Komponent
+==============================
 
-Many of the core components require configuration. Some examples of components
-requiring configuration are :doc:`/controllers/components/authentication` and
-:doc:`/controllers/components/cookie`.  Configuration for these components,
-and for components in general, is usually done via ``loadComponent()`` in your
-Controller's ``initialize()`` method or via the ``$components`` array::
+Marami sa pangunahing mga komponent ay nangangailangan ng kumpigurasyon. Ilang mga halimbawa sa mga komponent 
+na nangangailangan ng kumpigurasyon ay :doc:`/controllers/components/authentication` at
+:doc:`/controllers/components/cookie`.  Ang kumpigurasyon para sa mga komponent na ito,
+at para sa mga komponent sa pangkalahatan, ay karaniwang natapos sa pamamagitan ng ``loadComponent()`` sa iyong 
+mga Controller na ``initialize()`` na pamamaraan o sa pamamagitan sa ``$components`` na array::
 
     class PostsController extends AppController
     {
@@ -48,9 +48,9 @@ Controller's ``initialize()`` method or via the ``$components`` array::
 
     }
 
-You can configure components at runtime using the ``config()`` method. Often,
-this is done in your controller's ``beforeFilter()`` method. The above could
-also be expressed as::
+Maaari mong ma-configure ang mga komponent sa runtime gamit ang ``config()`` na pamamaraan. Madalas,
+ito ay natapos sa iyong controller na ``beforeFilter()`` na pamamaraan. Ang itaas ay maaari 
+ding ipahayag bilang::
 
     public function beforeFilter(Event $event)
     {
@@ -60,26 +60,26 @@ also be expressed as::
         $this->Cookie->config('name', 'CookieMonster');
     }
 
-Like helpers, components implement a ``config()`` method that is used to get and
-set any configuration data for a component::
+Tulad ng mga helper, ang mga komponent ay nagpapatupad ng ``config()`` na pamamaraan na ginagamit upang kumuha at 
+magtakda ng anumang kumpigurasyon ng datos para sa komponent::
 
-    // Read config data.
+    // Basahin ang config na datos.
     $this->Auth->config('loginAction');
 
-    // Set config
+    // Itakda ang config
     $this->Csrf->config('cookieName', 'token');
 
-As with helpers, components will automatically merge their ``$_defaultConfig``
-property with constructor configuration to create the ``$_config`` property
-which is accessible with ``config()``.
+Tulad ng mga helper, ang mga komponent ay awtomatikong mag-merge sa kanilang ``$_defaultConfig``
+na katangian na may kumpigurasyon ng constructor para malikha ang ``$_config`` na katangian
+na kung saan ay ma-access sa pamamagitan ng ``config()``.
 
-Aliasing Components
--------------------
+Pag-alias ng mga Komponent
+--------------------------
 
-One common setting to use is the ``className`` option, which allows you to
-alias components. This feature is useful when you want to
-replace ``$this->Auth`` or another common Component reference with a custom
-implementation::
+Isang karaniwang setting na gagamitin ay ang ``className`` na opsyon, na kung saan ay nagpapahintulot sa iyo na
+i-alias ang mga komponent. Ang katangiang ito ay kapaki-pakinabang kapag kailangan mong
+palitan ang ``$this->Auth`` o ibang karaniwan na Component na nagrereperensiya na may pasadyang
+pagpapatupad::
 
     // src/Controller/PostsController.php
     class PostsController extends AppController
@@ -97,42 +97,42 @@ implementation::
 
     class MyAuthComponent extends AuthComponent
     {
-        // Add your code to override the core AuthComponent
+        // Idagdag ang iyong code para i-override ang core AuthComponent
     }
 
-The above would *alias* ``MyAuthComponent`` to ``$this->Auth`` in your
-controllers.
+Ang nasa itaas ay *alias* ``MyAuthComponent`` sa ``$this->Auth`` sa iyong
+mga controller.
 
 .. note::
 
-    Aliasing a component replaces that instance anywhere that component is used,
-    including inside other Components.
+    Pag-alias ng komponent ay nagpapalit sa instance na kung saan ang komponent ay ginamit,
+    kasama sa loob ng ibang mga Component.
 
-Loading Components on the Fly
------------------------------
+Pag-load ng mga Component na nauna
+----------------------------------
 
-You might not need all of your components available on every controller
-action. In situations like this you can load a component at runtime using the
-``loadComponent()`` method in your controller::
+Maaaring hindi mo kailangan ang lahat ng iyong mga komponent na magagamit sa bawat controller
+na aksyon. Sa mga sitwasyon na tulad nito ay maaari kang maka-load ng isang komponent sa runtime gamit ang
+``loadComponent()`` na pamamaraan sa iyong controller::
 
-    // In a controller action
+    // Sa isang controller na aksyon
     $this->loadComponent('OneTimer');
     $time = $this->OneTimer->getTime();
 
 .. note::
 
-    Keep in mind that components loaded on the fly will not have missed
-    callbacks called. If you rely on the ``beforeFilter`` or ``startup``
-    callbacks being called, you may need to call them manually depending on when
-    you load your component.
+    Isaisip na ang mga komponentong naunang naka-load ay hindi makakalimot sa mga natawag na mga callback.
+    Kung ikaw ay umaasa sa ``beforeFilter`` o ``startup``
+    na mga callback na tinatawag, maaari mong kailangan na tumawag sa kanila ng mano-mano depende kung kailan
+    ka nag-load ng iyong komponent.
 
-Using Components
-================
+Paggamit ng mga Komponent
+=========================
 
-Once you've included some components in your controller, using them is pretty
-simple. Each component you use is exposed as a property on your controller. If
-you had loaded up the :php:class:`Cake\\Controller\\Component\\FlashComponent`
-in your controller, you could access it like so::
+Sa sandaling iyon ay kasama ang ilang mga komponent sa iyong controller, ang paggamit ng mga ito ay masyadong
+simple. Sa bawat komponentong nagamit mo ay nakalantad bilang isang katangian ng iyong controller. Kung
+ikaw ay naka-load na nang :php:class:`Cake\\Controller\\Component\\FlashComponent`
+sa iyong controller, maaari mong ma-access kung gusto mo::
 
     class PostsController extends AppController
     {
@@ -152,22 +152,22 @@ in your controller, you could access it like so::
 
 .. note::
 
-    Since both Models and Components are added to Controllers as
-    properties they share the same 'namespace'. Be sure to not give a
-    component and a model the same name.
+    Dahil pareho na mga Modelo at mga Komponent ay idinadagdag sa mga Controllers bilang
+    mga property na ibinabahagi nila sa parehong 'namespace'. Tiyakin na hindi magbigay ng parehong pangalan 
+    sa komponento at sa isang modelo..
 
 .. _creating-a-component:
 
-Creating a Component
-====================
+Paglikha ng Komponent
+=====================
 
-Suppose our application needs to perform a complex mathematical operation in
-many different parts of the application.  We could create a component to house
-this shared logic for use in many different controllers.
+Ipagpalagay na ang ating aplikasyon ay nangangailangan na gawin ang kumplikadong mathematical na operasyon sa
+maraming ibang mga parte sa aplikasyon.  Maaari tayong lumikha ng isang komponent para ibahay
+ang nakabahaging logic na ito para gamitin sa maraming ibang mga controller.
 
-The first step is to create a new component file and class. Create the file in
-**src/Controller/Component/MathComponent.php**. The basic structure for the
-component would look something like this::
+Ang unang hakbang ay ang paglikha ng isang bagong file at class. Lumikha ng file sa
+**src/Controller/Component/MathComponent.php**. Ang pangunahing istraktura para sa
+component ay mukhang ganito ang anyo::
 
     namespace App\Controller\Component;
 
@@ -183,20 +183,20 @@ component would look something like this::
 
 .. note::
 
-    All components must extend :php:class:`Cake\\Controller\\Component`. Failing
-    to do this will trigger an exception.
+    Lahat ng mga component ay dapat mag-extend sa :php:class:`Cake\\Controller\\Component`. Ang pakakalimot sa paggawa 
+    nito ay mag-trigger sa isang exception.
 
-Including your Component in your Controllers
+Isasama ang iyong Component sa iyong mga Controllers
 --------------------------------------------
 
-Once our component is finished, we can use it in the application's
-controllers by loading it during the controller's ``initialize()`` method.
-Once loaded, the controller will be given a new attribute named after the
-component, through which we can access an instance of it::
+Sa sandaling ang ating komponent ay natapos, maaari nating gamitin ito sa mga controller ng ating aplikasyon
+sa pamamagitan ng pag-load nito sa panahon na ang controller ay naka ``initialize()`` na pamamaraan.
+Sa sandaling na-load, ang controller ay ibibigay ang isang bagong attribute na nakapangalan sa 
+component, kung saan maaaring maka-access ng instance nito::
 
-    // In a controller
-    // Make the new component available at $this->Math,
-    // as well as the standard $this->Csrf
+    // Sa isang controller
+    // Gumawa ng bagong component na magagamit sa $this->Math,
+    // pati na rin ang pamantayang $this->Csrf
     public function initialize()
     {
         parent::initialize();
@@ -204,12 +204,12 @@ component, through which we can access an instance of it::
         $this->loadComponent('Csrf');
     }
 
-When including Components in a Controller you can also declare a
-set of parameters that will be passed on to the Component's
-constructor. These parameters can then be handled by
-the Component::
+Kapag kabilang ang mga Component sa isang Controller ay maaari ka ring mag-declare ng
+set ng mga parameter na naipapasa sa constructor ng Component
+Itong mga parameter ay maaaring makahawak sa pamamagitan
+ng Component::
 
-    // In your controller.
+    // Sa iyong controller.
     public function initialize()
     {
         parent::initialize();
@@ -220,15 +220,15 @@ the Component::
         $this->loadComponent('Csrf');
     }
 
-The above would pass the array containing precision and randomGenerator to
-``MathComponent::initialize()`` in the ``$config`` parameter.
+Ang itaas ay papasa ng array na naglalaman ng katumpakan at randomGenerator sa
+``MathComponent::initialize()`` na nasa ``$config`` na parameter.
 
-Using Other Components in your Component
-----------------------------------------
+Paggamit ng Ibang mga Component sa iyong Komponent
+--------------------------------------------------
 
-Sometimes one of your components may need to use another component.
-In this case you can include other components in your component the exact same
-way you include them in controllers - using the ``$components`` var::
+Minsan isa sa iyong mga komponent ay maaaring kailangan na gumamit ng ibang komponent.
+Sa kasong ito ay maaari kang magsama ng ibang mga komponent na eksaktong parehong 
+paraan na sinama mo sila sa mga controller - gamit ang ``$components`` var::
 
     // src/Controller/Component/CustomComponent.php
     namespace App\Controller\Component;
@@ -268,27 +268,27 @@ way you include them in controllers - using the ``$components`` var::
 
 .. note::
 
-    In contrast to a component included in a controller
-    no callbacks will be triggered on a component's component.
+    Sa kaibahan sa isang komponent na sinama sa isang controller
+    walang mga callback na ma-trigger sa isang component sa component.
 
-Accessing a Component's Controller
-----------------------------------
+Pag-access ng Component ng Controller
+-------------------------------------
 
-From within a Component you can access the current controller through the
+Mula sa loob ng Komponent maaari kang mag-access sa kasalukuyang controller sa pamamagitan ng
 registry::
 
     $controller = $this->_registry->getController();
 
-You can access the controller in any callback method from the event
+Maaari mong i-access ang sa anumang callback na pamamaraan mula sa event
 object::
 
     $controller = $event->getSubject();
 
-Component Callbacks
-===================
+Component ng mga Callback
+=========================
 
-Components also offer a few request life-cycle callbacks that allow them to
-augment the request cycle.
+Ang mga komponento ay nag-aalok rin ng iilang mga hiling sa cycle ng buhay na mga callback na nagpapahintulot sa kanila upang
+dagdagan ang hiling ng cycle.
 
 .. php:method:: beforeFilter(Event $event)
 
