@@ -263,6 +263,8 @@ Validation
   ``notEqualToField()``, ``greaterThanField()``,
   ``greaterThanOrEqualToField()``, ``lessThanField()``,
   ``lessThanOrEqualToField()`` were added.
+* Validator rules will now use the rule alias as the rule method when the
+  ``rule`` key is not defined.
 
 View
 ====
