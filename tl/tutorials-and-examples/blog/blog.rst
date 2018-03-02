@@ -99,8 +99,8 @@ While not recommended, if you are unable to set the permissions to the same as
 your webserver, you can simply set write permissions on the folder by running a
 command such as::
 
-    chmod 777 -R tmp
-    chmod 777 -R logs
+    chmod -R 777 tmp
+    chmod -R 777 logs
 
 Creating the Blog Database
 ==========================
