@@ -101,7 +101,7 @@ A pesar de que no se recomienda, si no eres capaz de aplicar la propiedad del
 directorio al mismo usuario que el servidor web, puedes simplemente aplicar
 permisos de escritura al directorio ejecutando un comando tipo::
 
-    $ chmod 777 -R tmp
+    $ chmod -R 777 tmp
 
 Creando la base de datos del Blog
 =================================

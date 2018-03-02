@@ -100,8 +100,8 @@ Embora não seja recomendado, se você é incapaz de redefinir as permissões
 do seu servidor web, você pode simplesmente alterar as permissões de gravação
 diretamente nos diretórios, executando os seguintes comandos::
 
-    chmod 777 -R tmp
-    chmod 777 -R logs
+    chmod -R 777 tmp
+    chmod -R 777 logs
 
 Criando o banco de dados do Blog
 ================================

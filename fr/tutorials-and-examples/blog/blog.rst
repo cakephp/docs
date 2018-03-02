@@ -105,8 +105,8 @@ Bien que non recommandé, si vous ne pouvez pas configurer les permissions de la
 même façon que pour votre serveur web, vous pouvez simplement définir les
 permissions sur le dossier en lançant une commande comme celle-ci::
 
-    chmod 777 -R tmp
-    chmod 777 -R logs
+    chmod -R 777 tmp
+    chmod -R 777 logs
 
 Créer la Base de Données du Blog
 ================================
