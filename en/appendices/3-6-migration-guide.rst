@@ -204,7 +204,8 @@ I18n
 
 * The two leftover FormHelper i18n translation strings ``'Edit %s'`` and ``'New
   %s'`` are now ``'Edit {0}'`` and ``'New {0}'``. If you are using translating
-  capability, please make sure you adjust those translations in your PO file.
+  messages from CakePHP, please make sure you adjust those translations in your
+  PO file.
 
 Mailer
 ======
@@ -234,12 +235,12 @@ Routing
   routes that need data from entities easier. See the :ref:`entity-routing`
   section for more information.
 * Routing variables can now use ``{var}`` style placeholders. This style allows
-  mid-word variables to be defined. You cannot combined ``{var}`` placeholders
+  mid-word variables to be defined. You cannot combine ``{var}`` placeholders
   with ``:var`` style placeholders.
 * ``Router::routeExists()`` was added. This method lets you check if a route
   array can be resolved into a valid route.
-* Routes can now use compact 'string targets'. See :ref:`routes-configuration`
-  for more information.
+* Route connection can now use compact 'string targets' e.g
+  ``Bookmarks::index``. See :ref:`routes-configuration` for more information.
 
 Shell
 =====
