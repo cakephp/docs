@@ -171,7 +171,7 @@ the ``PagesController``. A request to ``/pages/products`` would be mapped to
 ``PagesController->display('products')``.
 
 In addition to the greedy star ``/*`` there is also the ``/**`` trailing star
-syntax. Using a trailing double star, will capture the remainder of a URL as a
+syntax. Using a trailing double star will capture the remainder of a URL as a
 single passed argument. This is useful when you want to use an argument that
 included a ``/`` in it::
 
