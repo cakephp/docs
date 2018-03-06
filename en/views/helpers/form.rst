@@ -110,6 +110,8 @@ Output:
     Since this is an *edit* form, a hidden ``input`` field is generated to
     override the default HTTP method.
 
+In some cases, the entity's ID is automatically appended to the end of the form's ``action`` URL. If you would like to *avoid* an ID being added to the URL, you can pass a string to ``$options['url']``, such as ``'/my-account'`` or ``\Cake\Routing\Router::url(['controller' => 'Users', 'action' => 'myAccount'])``.
+
 Options for Form Creation
 -------------------------
 
