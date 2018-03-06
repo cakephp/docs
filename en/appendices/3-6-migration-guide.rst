@@ -33,9 +33,7 @@ features will continue to function until 4.0.0 after which they will be removed.
   ``Controller::getPlugin()/setPlugin()`` to access a controller's plugin in
   other contexts.
 * ``Cake\Controller\Controller:$autoRender`` is deprecated. Use
-  ``enableAutoRender()/disableAutoRender()/isAutoRenderEnabled()`` in other
-  contexts.
-  ``Controller::getPlugin()/setPlugin()`` instead.
+  ``enableAutoRender()/disableAutoRender()/isAutoRenderEnabled()`` instead.
 * The setter mode of ``ValidationSet::isPresenceRequired()`` and
   ``ValidationSet::isEmptyAllowed()`` are deprecated. Use ``requirePresence()``
   and ``allowEmpty()`` instead.
