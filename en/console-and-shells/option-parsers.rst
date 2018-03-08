@@ -10,9 +10,19 @@ get information from the terminal into your commands.
 Defining an OptionParser
 ========================
 
-Commands and Shells provide a ``getOptionParser()`` hook method that you can use
-to define the options and arguments for your commands. To define an option
-parser, start by overriding the ``getOptionParser()`` method::
+Commands and Shells provide a ``buildOptionParser($parser)`` hook method that
+you can use to define the options and arguments for your commands::
+
+    public function buildOptionParser($parser)
+    {
+        // Define your options and arguments.
+
+        // Return the completed parser
+        return $parser;
+    }
+
+Shell classes use the ``getOptionParser()`` hook method to define their option
+parser::
 
     public function getOptionParser()
     {
@@ -24,6 +34,7 @@ parser, start by overriding the ``getOptionParser()`` method::
         // Return the completed parser
         return $parser;
     }
+
 
 Using Arguments
 ===============

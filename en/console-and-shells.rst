@@ -101,31 +101,22 @@ You could then run the any of the listed commands by using its name:
     # run bake (with plugin prefix)
     bin/cake bake.bake -h
 
-Plugin commands can be invoked without a plugin prefix if the commands's name does
-not overlap with an application or framework shell. In the case that two plugins
-provide a command with the same name, the first loaded plugin will get the short
-alias. You can always use the ``plugin.command`` format to unambiguously reference
-a command.
+Plugin commands can be invoked without a plugin prefix if the commands's name
+does not overlap with an application or framework shell. In the case that two
+plugins provide a command with the same name, the first loaded plugin will get
+the short alias. You can always use the ``plugin.command`` format to
+unambiguously reference a command.
 
-
-* Commands
-* Adding console commands to your app. Renaming console commands
-* More topics?
-
-.. nested-commands::
-
-Creating Nested Commands
-========================
-
-Renaming Commands
-=================
+Console Applications
+====================
 
 By default CakePHP will automatically discover all the commands in your
 application and its plugins. You may want to reduce the number of exposed
 commands, when building standalone console applications. You can use your
-Application's ``console()`` hook to limit which commands are exposed and rename
-the commands that are exposed::
+``Application``'s ``console()`` hook to limit which commands are exposed and
+rename commands that are exposed::
 
+    // in src/Application.php
     namespace App;
 
     use App\Shell\UserShell;
@@ -137,20 +128,88 @@ the commands that are exposed::
         public function console($commands)
         {
             // Add by classname
-            $commands->add('user', UserShell::class);
+            $commands->add('user', UserCommand::class);
 
             // Add instance
-            $commands->add('version', new VersionShell());
+            $commands->add('version', new VersionCommand());
 
             return $commands;
         }
     }
 
 In the above example, the only commands available would be ``help``, ``version``
-and ``user``.
+and ``user``. See the :ref:`plugin-commands` section for how to add commands in
+your plugins.
 
 .. versionadded:: 3.5.0
     The ``console`` hook was added.
+
+.. renaming-commands::
+.. index:: nested commands, subcommands
+
+Renaming Commands
+=================
+
+There are cases where you will want to rename commands, to create nested
+commands or subcommands.  While the default auto-discovery of commands will not
+do this, you can register your commands to create any desired naming::
+
+You can customize the command names by defining each command in your plugin::
+
+    public function console($commands)
+    {
+        // Add commands with nested naming
+        $commands->add('user dump', UserDumpCommand::class)
+        $commands->add('user:show', UserShowCommand::class)
+
+        // Rename a command entirely
+        $commands->add('lazer', UserDeleteCommand::class)
+
+        return $commands;
+    }
+
+When overriding the ``console()`` hook in your application, remember to
+call ``discoverCakephp()`` to add commands from CakePHP.
+
+If you need to rename/remove any attached commands, you can use the
+``Console.buildCommands`` event on your application event manager to modify the
+available commands.
+
+Commands
+========
+
+See the :doc:`/console-and-shells/commands` chapter on how to create your first
+command. Then learn more about commands:
+
+.. toctree::
+    :maxdepth: 1
+
+    console-and-shells/commands
+    console-and-shells/input-output
+    console-and-shells/option-parsers
+    console-and-shells/helpers
+    console-and-shells/cron-jobs
+
+CakePHP Provided Commands
+=========================
+
+.. toctree::
+    :maxdepth: 1
+
+    console-and-shells/cache
+    console-and-shells/i18n-shell
+    console-and-shells/completion-shell
+    console-and-shells/plugin-shell
+    console-and-shells/routes-shell
+    console-and-shells/schema-cache
+    console-and-shells/server-shell
+    console-and-shells/upgrade-shell
+    console-and-shells/shells
+
+.. toctree::
+    :hidden:
+
+    console-and-shells/orm-cache
 
 Routing in the Console Environment
 ==================================
@@ -177,31 +236,6 @@ send the email with::
 This asserts that the generated message IDs are valid and fit to the domain the
 emails are sent from.
 
-More Topics
-===========
-
-.. toctree::
-    :maxdepth: 1
-
-    console-and-shells/input-output
-    console-and-shells/option-parsers
-    console-and-shells/helpers
-    console-and-shells/cron-jobs
-    console-and-shells/repl
-    console-and-shells/shells
-    console-and-shells/cache
-    console-and-shells/i18n-shell
-    console-and-shells/completion-shell
-    console-and-shells/plugin-shell
-    console-and-shells/routes-shell
-    console-and-shells/schema-cache
-    console-and-shells/server-shell
-    console-and-shells/upgrade-shell
-
-.. toctree::
-    :hidden:
-
-    console-and-shells/orm-cache
 
 .. meta::
     :title lang=en: Shells, Tasks & Console Tools

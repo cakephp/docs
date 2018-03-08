@@ -715,6 +715,32 @@ that you prefix the plugin name before the name of the component. For example::
 
 The same technique applies to Helpers and Behaviors.
 
+
+.. plugin-commands::
+
+Commands
+========
+
+Plugins can register their commands inside the ``console()`` hook. By default
+all shells and commands in the plugin are auto-discovered and added to the
+application's command list. Plugin commands are prefixed with the plugin name.
+For example, the ``UserCommand`` provided by the ``ContactManager`` plugin would
+be registered as both ``contact_manager.user`` and ``user``. The un-prefixed
+name will only be taken by a plugin if it is not used by the application, or
+another plugin.
+
+You can customize the command names by defining each command in your plugin::
+
+    public function console($commands)
+    {
+        // Create nested commands
+        $commands->add('bake model', ModelCommand::class);
+        $commands->add('bake controller', ControllerCommand::class);
+
+        return $commands;
+    }
+
+
 Publishing Your Plugin
 ======================
 
