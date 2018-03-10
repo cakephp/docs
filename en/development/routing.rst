@@ -119,8 +119,6 @@ added your own routes, you can remove the default routes if you don't need them.
 Connecting Routes
 =================
 
-.. php:method:: connect($route, $defaults = [], $options = [])
-
 To keep your code :term:`DRY` you should use 'routing scopes'. Routing
 scopes not only let you keep your code DRY, they also help Router optimize its
 operation. This method defaults to the ``/`` scope. To create a scope and connect
@@ -228,9 +226,10 @@ define default parameters. If you built an application that features products fo
 different categories of customers, you might consider creating a route. This
 allows you to link to ``/government`` rather than ``/pages/display/5``.
 
-A common use for routing is to rename controllers and their actions. Instead of accessing our users controller at ``/users/some_action/5``, we'd like
-to be able to access it through ``/cooks/some_action/5``. The following route takes
-care of that::
+A common use for routing is to rename controllers and their actions. Instead of
+accessing our users controller at ``/users/some_action/5``, we'd like to be able
+to access it through ``/cooks/some_action/5``. The following route takes care of
+that::
 
     $routes->connect(
         '/cooks/:action/*', ['controller' => 'Users']
@@ -922,7 +921,7 @@ to do automatic view switching based on content types.
 .. _connecting-scoped-middleware:
 
 Connecting Scoped Middleware
-----------------------------
+============================
 
 While Middleware can be applied to your entire application, applying middleware
 to specific routing scopes offers more flexibility, as you can apply middleware
@@ -997,8 +996,8 @@ can::
 
 .. _resource-routes:
 
-Creating RESTful Routes
-=======================
+RESTful Routing
+===============
 
 Router makes it easy to generate RESTful routes for your controllers. RESTful
 routes are helpful when you are creating API endpoints for your application.  If
@@ -1033,17 +1032,16 @@ PATCH       /recipes/123.format   RecipesController::edit(123)
 DELETE      /recipes/123.format   RecipesController::delete(123)
 =========== ===================== ==============================
 
-CakePHP's Router class uses a number of different indicators to
-detect the HTTP method being used. Here they are in order of
-preference:
+Ths HTTP method being used is detected from a few different sources.
+The sources in order of preference are:
 
-#. The \_method POST variable
-#. The X\_HTTP\_METHOD\_OVERRIDE
-#. The REQUEST\_METHOD header
+#. The ``_method`` POST variable
+#. The ``X_HTTP_METHOD_OVERRIDE`` header.
+#. The ``REQUEST_METHOD`` header
 
-The \_method POST variable is helpful in using a browser as a
+The ``_method`` POST variable is helpful in using a browser as a
 REST client (or anything else that can do POST). Just set
-the value of \_method to the name of the HTTP request method you
+the value of ``_method`` to the name of the HTTP request method you
 wish to emulate.
 
 Creating Nested Resource Routes
