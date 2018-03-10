@@ -225,6 +225,7 @@ ORM
   updating the counter value.
 * ``TimestampBehavior`` now uses the correct mutable/immutable class type when
   creating time objects instead of always using a mutable time instance.
+* ``Query::selectAllExcept()`` was added.
 
 Routing
 =======

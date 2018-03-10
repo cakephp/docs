@@ -278,8 +278,8 @@ As you can see from the examples above, all the methods that modify the query
 provide a fluent interface, allowing you to build a query through chained method
 calls.
 
-Selecting All Fields From a Table
----------------------------------
+Selecting Specific Fields
+-------------------------
 
 By default a query will select all fields from a table, the exception is when you
 call the ``select()`` function yourself and pass certain fields::
@@ -300,6 +300,20 @@ purpose::
 
 .. versionadded:: 3.1
     Passing a table object to select() was added in 3.1.
+
+If you want to select all but a few fields on a table, you can use
+``selectAllExcept()``::
+
+    $query = $articlesTable->find();
+
+    // Get all fields except the published field.
+    $query->selectAllExcept($articlesTable, ['published']);
+
+You can also pass an ``Association`` object when working with contained
+associations.
+
+.. versionadded:: 3.6.0
+    The ``selectAllExcept()`` method was added.
 
 .. _using-sql-functions:
 
