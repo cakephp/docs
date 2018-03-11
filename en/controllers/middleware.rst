@@ -289,10 +289,32 @@ application::
         }
     }
 
+Routing Middleware
+==================
+
+Routing middleware is responsible for applying your application's routes and
+resolving the plugin, controller, and action a request is going to. It can cache
+the route collection used in your application to increase startup time. To
+enable cached routes, provide the desired :ref:`cache configuration
+<cache-configuration>` as a parameter::
+
+    // In Application.php
+    public function middleware($middlewareQueue)
+    {
+        // ...
+        $middlewareQueue->add(new RoutingMiddleware($this, 'routing'));
+    }
+
+The above would use the ``routing`` cache engine to store the generated route
+collection.
+
+.. versionadded:: 3.6.0
+    Route caching was added in 3.6.0
+
 .. _security-header-middleware:
 
-Adding Security Headers
-=======================
+Security Header Middleware
+==========================
 
 The ``SecurityHeaderMiddleware`` layer makes it easy to apply security related
 headers to your application. Once setup the middleware can apply the following

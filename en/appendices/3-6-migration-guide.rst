@@ -225,6 +225,7 @@ ORM
   updating the counter value.
 * ``TimestampBehavior`` now uses the correct mutable/immutable class type when
   creating time objects instead of always using a mutable time instance.
+* ``Query::selectAllExcept()`` was added.
 
 Routing
 =======
@@ -239,6 +240,8 @@ Routing
   array can be resolved into a valid route.
 * Route connection can now use compact 'string targets' e.g
   ``Bookmarks::index``. See :ref:`routes-configuration` for more information.
+* ``RoutingMiddleware`` can now cache the route collection created by your
+  routes. Caching routes greatly improves application startup times.
 
 Shell
 =====
