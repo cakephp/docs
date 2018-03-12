@@ -181,6 +181,10 @@ Database
   identifier expressions for use in complex queries.
 * Database connections will automatically be re-established when connections
   timeout during long running scripts.
+* ``Cake\Database\Type\BatchCastingInterface`` was added. This interface allows
+  type classes to optimize casting operations by operating on all columns in
+  bulk. This interface can be used in custom types now, and will be used in core
+  types in 4.x.
 
 Datasource
 ==========
