@@ -90,7 +90,7 @@ PaginatorHelper использует следующие шаблоны:
 
 - ``nextActive`` Активное состояние для ссылки, сгенерированно для next().
 - ``nextDisabled`` Состояние отключено для next().
-- ``prevActive`` Активное состояние для связи, генерируемой prev().
+- ``prevActive`` Состояние включено для prev().
 - ``prevDisabled`` Состояние отключено для prev()
 - ``counterRange`` Счетчик шаблонов counter() используется в формате format == range.
 - ``counterPages`` Счетчик шаблонов counter() используется в формате format == pages.
