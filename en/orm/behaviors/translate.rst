@@ -291,8 +291,8 @@ Retrieving one language without using I18n::locale
 
 calling ``I18n::setLocale('es');`` changes the default locale for all translated
 finds, there may be times you wish to retrieve translated content without
-modifying the application's state. For these scenarios use the behavior
-``setLocale()`` method::
+modifying the application's state. For these scenarios use the behavior's
+``locale()`` method::
 
     I18n::setLocale('en'); // reset for illustration
 
@@ -303,8 +303,8 @@ modifying the application's state. For these scenarios use the behavior
     echo $article->title; // Echoes 'Un Artículo', yay piece of cake!
 
 Note that this only changes the locale of the Articles table, it would not
-affect the langauge of associated data. To affect associated data it's necessary
-to call locale on each table for example::
+affect the language of associated data. To affect associated data it's necessary
+to call the method on each table, for example::
 
     I18n::setLocale('en'); // reset for illustration
 
@@ -389,8 +389,9 @@ can be retrieved as usual::
 The second way to use for saving entities in another language is to set the
 default language directly to the table::
 
-    I18n::setLocale('es');
     $article->title = 'Mi Primer Artículo';
+
+    $this->Articles->locale('es');
     $this->Articles->save($article);
 
 Setting the language directly in the table is useful when you need to both

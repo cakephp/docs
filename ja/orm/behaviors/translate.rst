@@ -373,8 +373,9 @@ TranslateBehavior の背後にある哲学は、デフォルトの言語を表�
 別の言語でエンティティーを保存するために使用する２つ目の方法は、
 直接テーブルにデフォルトの言語を設定することです。 ::
 
-    I18n::setLocale('es');
     $article->title = 'Mi Primer Artículo';
+
+    $this->Articles->locale('es');
     $this->Articles->save($article);
 
 同じ言語でエンティティーを取得や保存の両方が必要な時や、複数のエンティティーを一括で保存する時に、

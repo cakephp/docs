@@ -401,8 +401,9 @@ sauvegardée et récupérée comme d'habitude::
 La deuxième manière de l'utiliser pour sauvegarder les entities dans une autre
 langue est de définir par défaut la langue directement à la table::
 
-    I18n::setLocale('es');
     $article->title = 'Mi Primer Artículo';
+
+    $this->Articles->locale('es');
     $this->Articles->save($article);
 
 Configurer la langue directement dans la table est utile quand vous avez besoin
