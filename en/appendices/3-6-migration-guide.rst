@@ -47,10 +47,10 @@ features will continue to function until 4.0.0 after which they will be removed.
   ``getWidgetLocator()`` and ``setWidgetLocator()`` instead.
 * ``Cake\ORM\Behavior\TranslateBehavior::locale()`` is deprecated. Use
   ``getLocale()`` and ``setLocale()`` instead.
-* The get mode of ``Cake\ORM\Query::mapReduce()`` is deprecated. Use
-  ``getMapReducers()`` instead.
-* The get mode of ``Cake\ORM\Query::formatResults()`` is deprecated. Use
+* The getter part of ``Cake\Datasource\QueryTrait::formatResults()`` is deprecated. Use
   ``getResultFormatters()`` instead.
+* The getter part of ``Cake\Datasource\QueryTrait::mapReduce()`` is deprecated. Use
+  ``getMapReducers()`` instead.
 
 Several classes were *renamed*. Their old names will continue to work until 4.0,
 but will emit deprecation warnings:
