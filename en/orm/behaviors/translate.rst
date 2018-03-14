@@ -165,7 +165,7 @@ You need to make sure that any custom table you use has the columns ``field``,
 Reading Translated Content
 ==========================
 
-As shown above you can use the ``locale()`` method to choose the active
+As shown above you can use the ``setLocale()`` method to choose the active
 translation for entities that are loaded::
 
     // Load I18n core functions at the beginning of your Controller:
@@ -297,7 +297,9 @@ modifying the application's state. For these scenarios use the behavior
     I18n::setLocale('en'); // reset for illustration
 
     $this->loadModel('Articles');
-    $this->Articles->locale('es'); // specific locale
+
+    // specific locale. Use locale() prior to 3.6
+    $this->Articles->setLocale('es');
 
     $article = $this->Articles->get(12);
     echo $article->title; // Echoes 'Un Artículo', yay piece of cake!
@@ -309,8 +311,9 @@ to call locale on each table for example::
     I18n::setLocale('en'); // reset for illustration
 
     $this->loadModel('Articles');
-    $this->Articles->locale('es');
-    $this->Articles->Categories->locale('es');
+    // Use locale() prior to 3.6
+    $this->Articles->setLocale('es');
+    $this->Articles->Categories->setLocale('es');
 
     $data = $this->Articles->find('all', ['contain' => ['Categories']]);
 
@@ -323,7 +326,7 @@ Querying Translated Fields
 TranslateBehavior does not substitute find conditions by default. You need to use
 ``translationField()`` method to compose find conditions on translated fields::
 
-    $this->Articles->locale('es');
+    $this->Articles->setLocale('es');
     $data = $this->Articles->find()->where([
         $this->Articles->translationField('title') => 'Otro Título'
     ]);

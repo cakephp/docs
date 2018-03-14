@@ -1240,7 +1240,7 @@ The resulting array means, for example, that user with id ``1`` follows users
 Stacking Multiple Operations
 ----------------------------
 
-Using `mapReduce` in a query will not execute it immediately. The operation will
+Using ``mapReduce`` in a query will not execute it immediately. The operation will
 be registered to be run as soon as the first result is attempted to be fetched.
 This allows you to keep chaining additional methods and filters to the query
 even after adding a map-reduce routine::
