@@ -45,6 +45,8 @@ features will continue to function until 4.0.0 after which they will be removed.
   ``Cake\ORM\Locator\LocatorAwareTrait``.
 * ``Cake\View\Helper\FormHelper::widgetRegistry()`` is deprecated. Use
   ``getWidgetLocator()`` and ``setWidgetLocator()`` instead.
+* ``Cake\ORM\Behavior\TranslateBehavior::locale()`` is deprecated. Use
+  ``getLocale()`` and ``setLocale()`` instead.
 
 Several classes were *renamed*. Their old names will continue to work until 4.0,
 but will emit deprecation warnings:
