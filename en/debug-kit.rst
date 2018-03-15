@@ -26,12 +26,17 @@ Then, you need to enable the plugin by executing the following line::
 
     bin/cake plugin load DebugKit
 
-DebugKit Storage
-================
+Configuration
+=============
 
-By default, DebugKit uses a small SQLite database in your application's ``/tmp``
-directory to store the panel data. If you'd like DebugKit to store its data
-elsewhere, you should define a ``debug_kit`` connection.
+* ``DebugKit.panels`` - Enable or disable panels for DebugKit. You can disable any of the
+  standard panels by::
+
+    // Before loading DebugKit
+    Configure::write('DebugKit.panels', ['DebugKit.Packages' => false]);
+
+* ``DebugKit.includeSchemaReflection`` - Set to true to enable logging of schema
+  reflection queries. Disabled by default.
 
 Database Configuration
 ----------------------
@@ -41,32 +46,37 @@ application's ``tmp`` directory. If you cannot install pdo_sqlite, you can
 configure DebugKit to use a different database by defining a ``debug_kit``
 connection in your **config/app.php** file. For example::
 
-        /**
-         * The debug_kit connection stores DebugKit meta-data.
-         */
-        'debug_kit' => [
-            'className' => 'Cake\Database\Connection',
-            'driver' => 'Cake\Database\Driver\Mysql',
-            'persistent' => false,
-            'host' => 'localhost',
-            //'port' => 'nonstandard_port_number',
-            'username' => 'dbusername',    // Your DB username here
-            'password' => 'dbpassword',    // Your DB password here
-            'database' => 'debug_kit',
-            'encoding' => 'utf8',
-            'timezone' => 'UTC',
-            'cacheMetadata' => true,
-            'quoteIdentifiers' => false,
-            //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
-        ],
+    /**
+     * The debug_kit connection stores DebugKit meta-data.
+     */
+    'debug_kit' => [
+        'className' => 'Cake\Database\Connection',
+        'driver' => 'Cake\Database\Driver\Mysql',
+        'persistent' => false,
+        'host' => 'localhost',
+        //'port' => 'nonstandard_port_number',
+        'username' => 'dbusername',    // Your DB username here
+        'password' => 'dbpassword',    // Your DB password here
+        'database' => 'debug_kit',
+        'encoding' => 'utf8',
+        'timezone' => 'UTC',
+        'cacheMetadata' => true,
+        'quoteIdentifiers' => false,
+        //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
+    ],
+
+You can safely remove the **tmp/debug_kit.sqlite** file at any point. 
+DebugKit will regenerate it when necessary.
 
 Toolbar Usage
 =============
 
 The DebugKit Toolbar is comprised of several panels, which are shown by clicking
-the CakePHP icon in the bottom right-hand corner of your browser window. Once
-the toolbar is open, you should see a series of buttons. Each of these buttons
-expands into a panel of related information.
+the CakePHP icon in the upper right-hand corner of your browser after DebugKit
+has been installed and loaded. Each panel is comprised of a panel class and view
+element.  Typically, a panel handles the collection and display of a single type
+of information such as Logs or Request information. You can choose to panels
+from the toolbar or add your own custom panels.
 
 Each panel lets you look at a different aspect of your application:
 
@@ -129,6 +139,32 @@ The mailer preview allows you to easily check emails during development.
 
   .. figure:: /_static/img/debug-kit/mail-previewer.gif
     :alt: Video of Mail panel in action.
+
+Creating Preview Classes
+------------------------
+
+In order to preview emails before sending them, you need to create a preview
+class that defines the receipient and required template variables for your
+mailer methods::
+
+    // in src/Mailer/MailPreview/WelcomePreview.php
+    namespace App\Mailer\Preview;
+
+    use DebugKit\Mailer\MailPreview;
+
+    class WelcomePreview extends MailPreview
+    {
+        public function welcome()
+        {
+            $mailer = $this->getMailer('Welcome');
+            // set any template variables receipients for the mailer.
+
+            return $mailer;
+        }
+    }
+
+MailPreview classes should live in the ``Mailer\Preview`` namespace of your
+application or plugin, and use the ``Preview``
 
 Developing Your Own Panels
 ==========================
@@ -230,3 +266,9 @@ to include the panel::
 
 The above would load all the default panels as well as the ``AppPanel``, and
 ``MyCustomPanel`` panel from ``MyPlugin``.
+
+Helper Functions
+================
+
+* `sql()` Dumps out the SQL from an ORM query.
+* `sqld()` Dumps out the SQL from an ORM query, and exits.
