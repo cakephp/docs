@@ -120,7 +120,7 @@ It is also allowed to directly assign those properties to modify the date::
     $time->timezone = 'Europe/Paris';
     
 .. note::
-    Starting with version 3.5, $now->timezone returned the object(DateTimeZone) 
+    Starting with version 3.4, $now->timezone returned the object(DateTimeZone) 
 
 Formatting
 ==========
