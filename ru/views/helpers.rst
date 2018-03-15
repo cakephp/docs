@@ -157,10 +157,11 @@ AJAX-запросов. Для более подробной информации
     // Чтение параметра конфигурации errorClass.
     $class = $this->Awesome->config('errorClass');
 
-Using helper configuration allows you to declaratively configure your helpers and
-keep configuration logic out of your controller actions. If you have
-configuration options that cannot be included as part of a class declaration,
-you can set those in your controller's beforeRender callback::
+Использование конфигурации хелпера позволяет вам декларативно настраивать ваши
+хелперы и держать логику конфигурации за пределами экшенов вашего контроллера.
+Если у вас есть параметры конфигурации, которые не могут являться частью
+объявления класса, вы можете установить их в коллбеке ``beforeRender()`` вашего
+контроллера::
 
     class PostsController extends AppController
     {
@@ -176,8 +177,8 @@ you can set those in your controller's beforeRender callback::
 
 .. _aliasing-helpers:
 
-Aliasing Helpers
-----------------
+Создание псевдонимов для хелперов
+---------------------------------
 
 One common setting to use is the ``className`` option, which allows you to
 create aliased helpers in your views. This feature is useful when you want to
@@ -212,8 +213,8 @@ The above would *alias* ``MyHtmlHelper`` to ``$this->Html`` in your views.
     Aliasing a helper replaces that instance anywhere that helper is used,
     including inside other Helpers.
 
-Using Helpers
-=============
+Использование хелперов
+======================
 
 Once you've configured which helpers you want to use in your controller,
 each helper is exposed as a public property in the view. For example, if you
@@ -225,8 +226,8 @@ doing the following::
 The above would call the ``css()`` method on the HtmlHelper. You can
 access any loaded helper using ``$this->{$helperName}``.
 
-Loading Helpers On The Fly
---------------------------
+Загрузка хелперов на лету
+-------------------------
 
 There may be situations where you need to dynamically load a helper from inside
 a view.  You can use the view's :php:class:`Cake\\View\\HelperRegistry` to
