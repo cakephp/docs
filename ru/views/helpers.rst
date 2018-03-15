@@ -180,10 +180,11 @@ AJAX-запросов. Для более подробной информации
 Создание псевдонимов для хелперов
 ---------------------------------
 
-One common setting to use is the ``className`` option, which allows you to
-create aliased helpers in your views. This feature is useful when you want to
-replace ``$this->Html`` or another common Helper reference with a custom
-implementation::
+Одним из наиболее часто используемых параметров является ``className``,
+который позволяет вам создавать хелперы, использующие псевдонимы внутри
+ваших представлений. Эта опция может оказаться полезной, когда вы захотите
+заменить стандартный вызов хелпера из представления, такой как например
+``$this->Html`` на что-то более простое и понятное::
 
     // src/View/AppView.php
     class AppView extends View
@@ -203,15 +204,16 @@ implementation::
 
     class MyHtmlHelper extends HtmlHelper
     {
-        // Add your code to override the core HtmlHelper
+        // Добавьте сюда ваш код для переопределения функций HtmlHelper
     }
 
-The above would *alias* ``MyHtmlHelper`` to ``$this->Html`` in your views.
+Приведенный выше пример *установит псевдоним* ``MyHtmlHelper`` для вызова
+``$this->Html`` в ваших представлениях.
 
 .. note::
 
-    Aliasing a helper replaces that instance anywhere that helper is used,
-    including inside other Helpers.
+    Назначение псевдонима хелперу змещает его экземпляры везде, где он
+    используется, включая вызовы этого хелпера внутри других хелперов.
 
 Использование хелперов
 ======================
@@ -229,26 +231,27 @@ access any loaded helper using ``$this->{$helperName}``.
 Загрузка хелперов на лету
 -------------------------
 
-There may be situations where you need to dynamically load a helper from inside
-a view.  You can use the view's :php:class:`Cake\\View\\HelperRegistry` to
-do this::
+Иногда могут возникнуть ситуации, когда вам понадобится динамически загружать
+хелперы из представления. Вы можете использовать для этого класс представления
+:php:class:`Cake\\View\\HelperRegistry`::
 
-    // Either one works.
+    // Можете использовать любой из вариантов.
     $mediaHelper = $this->loadHelper('Media', $mediaConfig);
     $mediaHelper = $this->helpers()->load('Media', $mediaConfig);
 
-The HelperRegistry is a :doc:`registry </core-libraries/registry-objects>` and
-supports the registry API used elsewhere in CakePHP.
+HelperRegistry - это :doc:`реестр </core-libraries/registry-objects>` и он
+поддерживает API реестра используемый повсеместно в CakePHP.
 
-Callback Methods
-================
+Коллбэк-методы
+==============
 
-Helpers feature several callbacks that allow you to augment the view rendering
-process. See the :ref:`helper-api` and the
-:doc:`/core-libraries/events` documentation for more information.
+Помощники имеют несколько коллбэк-методов, которые позволяют вам управлять
+процессом визуализации представления. Смотрите разделы документации 
+:ref:`helper-api` и :doc:`/core-libraries/events` для получения более
+подробной информации.
 
-Creating Helpers
-================
+Создание хелперов
+=================
 
 You can create custom helper classes for use in your application or plugins.
 Like most components of CakePHP, helper classes have a few conventions:
