@@ -253,16 +253,19 @@ HelperRegistry - это :doc:`реестр </core-libraries/registry-objects>` �
 Создание хелперов
 =================
 
-You can create custom helper classes for use in your application or plugins.
-Like most components of CakePHP, helper classes have a few conventions:
+Вы можете создавать пользовательские классы хелперов для ваших приложений и
+плагинов. Как и большинство компонентов CakePHP, классы хелперов следуют
+нескольким соглашениям:
 
-* Helper class files should be put in **src/View/Helper**. For example:
-  **src/View/Helper/LinkHelper.php**
-* Helper classes should be suffixed with ``Helper``. For example: ``LinkHelper``.
-* When referencing helper class names you should omit the ``Helper`` suffix. For
-  example: ``$this->loadHelper('Link');``.
+* Файлы классов хелперов должны располагаться в папке **src/View/Helper**.
+  Например: **src/View/Helper/LinkHelper.php**
+* Имена классов хелперов должны оканчиваться на ``Helper``. Например:
+  ``LinkHelper``.
+* Если вы ссылаетесь на имена классов хелперов, вы должны опускать суффикс
+  ``Helper``. Например: ``$this->loadHelper('Link');``.
 
-You'll also want to extend ``Helper`` to ensure things work correctly::
+Также вы должны наследовать класс ``Helper``, чтобы у вас все работало
+корректно::
 
     /* src/View/Helper/LinkHelper.php */
     namespace App\View\Helper;
@@ -273,12 +276,13 @@ You'll also want to extend ``Helper`` to ensure things work correctly::
     {
         public function makeEdit($title, $url)
         {
-            // Logic to create specially formatted link goes here...
+            // Здесь размещается логика создания ссылок с особым
+            // форматированием
         }
     }
 
-Including Other Helpers
------------------------
+Встраивание других хелперов
+---------------------------
 
 You may wish to use some functionality already existing in another helper. To do
 so, you can specify helpers you wish to use with a ``$helpers`` array, formatted
@@ -427,4 +431,4 @@ does not implement any of the callback methods.
 
 .. meta::
     :title lang=ru: Хелперы
-    :keywords lang=ru: класс php,time function,presentation layer,processing power,ajax,markup,массив,functionality,logic,syntax,элементы,cakephp,плагины
+    :keywords lang=ru: класс php,time function,presentation layer,processing power,ajax,markup,массив,функциональность,логика,синтаксис,элементы,cakephp,плагины
