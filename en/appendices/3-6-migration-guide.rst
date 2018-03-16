@@ -51,6 +51,8 @@ features will continue to function until 4.0.0 after which they will be removed.
   ``getResultFormatters()`` instead.
 * The getter part of ``Cake\Datasource\QueryTrait::mapReduce()`` is deprecated. Use
   ``getMapReducers()`` instead.
+* The getter part of ``Cake\ORM\Query::contain()`` is deprecated. Use
+  ``getContain()`` instead.
 
 Several classes were *renamed*. Their old names will continue to work until 4.0,
 but will emit deprecation warnings:
@@ -246,6 +248,7 @@ ORM
 * ``TimestampBehavior`` now uses the correct mutable/immutable class type when
   creating time objects instead of always using a mutable time instance.
 * ``Query::selectAllExcept()`` was added.
+* ``Query::whereInList()``/``Query::whereNotInList()`` have been added as standalone wrappers around ``IN``/``NOT IN`` conditions.
 
 Routing
 =======
