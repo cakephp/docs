@@ -2625,17 +2625,11 @@ create the following controls::
     echo $this->Form->control('author.profile.username');
 
     // Tags controls (belongsToMany)
+    // as separate inputs
     echo $this->Form->control('tags.0.id');
     echo $this->Form->control('tags.0.name');
     echo $this->Form->control('tags.1.id');
     echo $this->Form->control('tags.1.name');
-
-    // Multiple select element for belongsToMany
-    echo $this->Form->control('tags._ids', [
-        'type' => 'select',
-        'multiple' => true,
-        'options' => $tagList,
-    ]);
 
     // Inputs for the joint table (articles_tags)
     echo $this->Form->control('tags.0._joinData.starred');
@@ -2658,6 +2652,19 @@ the following code in your controller::
             'Comments'
         ]
     ]);
+
+The above example shows an expanded example for belongs to many associations,
+with separate inputs for each entity and join data record. You can also create
+a multiple select input for belongs to many associations::
+
+    // Multiple select element for belongsToMany
+    // Does not support _joinData
+    echo $this->Form->control('tags._ids', [
+        'type' => 'select',
+        'multiple' => true,
+        'options' => $tagList,
+    ]);
+
 
 Adding Custom Widgets
 =====================
