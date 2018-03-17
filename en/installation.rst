@@ -389,7 +389,7 @@ further information.
            AllowOverride All
        </Directory>
        <Directory /var/www>
-           Options Indexes FollowSymLinks MultiViews
+           Options FollowSymLinks
            AllowOverride All
            Order Allow,Deny
            Allow from all
