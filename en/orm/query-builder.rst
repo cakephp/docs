@@ -240,6 +240,15 @@ To set some basic conditions you can use the ``where()`` method::
     $query->where(['title' => 'First Post'])
         ->where(['published' => true]);
 
+You can also pass an anonymous function to the ``where()`` method. The passed anonymous function
+receives as it's first argument an instance of \Cake\Database\Expression\QueryExpression $exp
+and as its second  \Cake\ORM\Query::
+
+    $query = $articles->find();
+    $query->where(function (QueryExpression $exp, Query $q) {
+        return $exp->eq('published', true);
+    });
+
 See the :ref:`advanced-query-conditions` section to find out how to construct
 more complex ``WHERE`` conditions. To apply ordering, you can use the ``order``
 method::
@@ -400,7 +409,7 @@ untrusted data into SQL functions or stored procedures::
     // Use a stored procedure
     $query = $articles->find();
     $lev = $query->func()->levenshtein([$search, 'LOWER(title)' => 'literal']);
-    $query->where(function ($exp) use ($lev) {
+    $query->where(function (QueryExpression $exp) use ($lev) {
         return $exp->between($lev, 0, $tolerance);
     });
 
@@ -464,7 +473,7 @@ If we wanted to classify cities into SMALL, MEDIUM, or LARGE based on population
 size, we could do the following::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->addCase(
                 [
                     $q->newExpr()->lt('population', 100000),
@@ -485,7 +494,7 @@ Any time there are fewer case conditions than values, ``addCase`` will
 automatically produce an ``if .. then .. else`` statement::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->addCase(
                 [
                     $q->newExpr()->eq('population', 0),
@@ -631,7 +640,7 @@ you can compose conditions together with the expression objects::
 
     $query = $articles->find()
         ->where(['title LIKE' => '%First%'])
-        ->andWhere(function ($exp) {
+        ->andWhere(function (QueryExpression $exp) {
             return $exp->or_([
                 'author_id' => 2,
                 'is_highlighted' => true
@@ -661,7 +670,7 @@ with ``OR``. An example of adding conditions with an ``Expression`` object would
 be::
 
     $query = $articles->find()
-        ->where(function ($exp) {
+        ->where(function (QueryExpression $exp) {
             return $exp
                 ->eq('author_id', 2)
                 ->eq('published', true)
@@ -691,7 +700,7 @@ However, if we wanted to use both ``AND`` & ``OR`` conditions we could do the
 following::
 
     $query = $articles->find()
-        ->where(function ($exp) {
+        ->where(function (QueryExpression $exp) {
             $orConditions = $exp->or_(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
@@ -713,7 +722,7 @@ The ``or_()`` and ``and_()`` methods also allow you to use functions as their
 parameters. This is often easier to read than method chaining::
 
     $query = $articles->find()
-        ->where(function ($exp) {
+        ->where(function (QueryExpression $exp) {
             $orConditions = $exp->or_(function ($or) {
                 return $or->eq('author_id', 2)
                     ->eq('author_id', 5);
@@ -726,7 +735,7 @@ parameters. This is often easier to read than method chaining::
 You can negate sub-expressions using ``not()``::
 
     $query = $articles->find()
-        ->where(function ($exp) {
+        ->where(function (QueryExpression $exp) {
             $orConditions = $exp->or_(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
@@ -745,7 +754,7 @@ Which will generate the following SQL looking like::
 It is also possible to build expressions using SQL functions::
 
     $query = $articles->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression , Query $q) {
             $year = $q->func()->year([
                 'created' => 'identifier'
             ]);
@@ -769,7 +778,7 @@ conditions:
 - ``eq()`` Creates an equality condition::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->eq('population', '10000');
         });
     # WHERE population = 10000
@@ -777,7 +786,7 @@ conditions:
 - ``notEq()`` Creates an inequality condition::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->notEq('population', '10000');
         });
     # WHERE population != 10000
@@ -785,7 +794,7 @@ conditions:
 - ``like()`` Creates a condition using the ``LIKE`` operator::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->like('name', '%A%');
         });
     # WHERE name LIKE "%A%"
@@ -793,7 +802,7 @@ conditions:
 - ``notLike()`` Creates a negated ``LIKE`` condition::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->notLike('name', '%A%');
         });
     # WHERE name NOT LIKE "%A%"
@@ -801,7 +810,7 @@ conditions:
 - ``in()`` Create a condition using ``IN``::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->in('country_id', ['AFG', 'USA', 'EST']);
         });
     # WHERE country_id IN ('AFG', 'USA', 'EST')
@@ -809,7 +818,7 @@ conditions:
 - ``notIn()`` Create a negated condition using ``IN``::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->notIn('country_id', ['AFG', 'USA', 'EST']);
         });
     # WHERE country_id NOT IN ('AFG', 'USA', 'EST')
@@ -817,7 +826,7 @@ conditions:
 - ``gt()`` Create a ``>`` condition::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->gt('population', '10000');
         });
     # WHERE population > 10000
@@ -825,7 +834,7 @@ conditions:
 - ``gte()`` Create a ``>=`` condition::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->gte('population', '10000');
         });
     # WHERE population >= 10000
@@ -833,7 +842,7 @@ conditions:
 - ``lt()`` Create a ``<`` condition::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->lt('population', '10000');
         });
     # WHERE population < 10000
@@ -841,7 +850,7 @@ conditions:
 - ``lte()`` Create a ``<=`` condition::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->lte('population', '10000');
         });
     # WHERE population <= 10000
@@ -849,7 +858,7 @@ conditions:
 - ``isNull()`` Create an ``IS NULL`` condition::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->isNull('population');
         });
     # WHERE (population) IS NULL
@@ -857,7 +866,7 @@ conditions:
 - ``isNotNull()`` Create a negated ``IS NULL`` condition::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->isNotNull('population');
         });
     # WHERE (population) IS NOT NULL
@@ -865,7 +874,7 @@ conditions:
 - ``between()`` Create a ``BETWEEN`` condition::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->between('population', 999, 5000000);
         });
     # WHERE population BETWEEN 999 AND 5000000,
@@ -874,13 +883,13 @@ conditions:
 
     $subquery = $cities->find()
         ->select(['id'])
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->equalFields('countries.id', 'cities.country_id');
         })
         ->andWhere(['population >', 5000000]);
 
     $query = $countries->find()
-        ->where(function ($exp, $q) use ($subquery) {
+        ->where(function (QueryExpression $exp, Query $q) use ($subquery) {
             return $exp->exists($subquery);
         });
     # WHERE EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
@@ -889,13 +898,13 @@ conditions:
 
     $subquery = $cities->find()
         ->select(['id'])
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->equalFields('countries.id', 'cities.country_id');
         })
         ->andWhere(['population >', 5000000]);
 
     $query = $countries->find()
-        ->where(function ($exp, $q) use ($subquery) {
+        ->where(function (QueryExpression $exp, Query $q) use ($subquery) {
             return $exp->notExists($subquery);
         });
     # WHERE NOT EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
@@ -1334,7 +1343,7 @@ entries must not contain user data::
 
 When using the expression builder, column names must not contain user data::
 
-    $query->where(function ($exp) use ($userData, $values) {
+    $query->where(function (QueryExpression $exp) use ($userData, $values) {
         // Column names in all expressions are not safe.
         return $exp->in($userData, $values);
     });
