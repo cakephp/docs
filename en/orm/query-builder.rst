@@ -240,9 +240,10 @@ To set some basic conditions you can use the ``where()`` method::
     $query->where(['title' => 'First Post'])
         ->where(['published' => true]);
 
-You can also pass an anonymous function to the ``where()`` method. The passed anonymous function
-receives as it's first argument an instance of \Cake\Database\Expression\QueryExpression $exp
-and as its second  \Cake\ORM\Query::
+You can also pass an anonymous function to the ``where()`` method. The passed
+anonymous function will receive an instance of
+``\Cake\Database\Expression\QueryExpression`` as its first argument, and
+``\Cake\ORM\Query`` as its second::
 
     $query = $articles->find();
     $query->where(function (QueryExpression $exp, Query $q) {
