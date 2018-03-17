@@ -755,7 +755,7 @@ Which will generate the following SQL looking like::
 It is also possible to build expressions using SQL functions::
 
     $query = $articles->find()
-        ->where(function (QueryExpression , Query $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             $year = $q->func()->year([
                 'created' => 'identifier'
             ]);
