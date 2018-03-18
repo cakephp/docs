@@ -1,263 +1,254 @@
-Constants & Functions
-#####################
+Константы и Функции
+###################
 
-While most of your day-to-day work in CakePHP will be utilizing core classes and
-methods, CakePHP features a number of global convenience functions that may come
-in handy. Many of these functions are for use with CakePHP classes (loading
-model or component classes), but many others make working with arrays or
-strings a little easier.
+В то время как большая часть вашей повседневной работы в CakePHP будет использовать основные классы и
+методы, CakePHP имеет ряд глобальных функций для удобства, которые могут вам пригодиться.
+Многие из этих функций предназначены для использования с классами CakePHP (загрузка модели или классы компонентов),
+но многие другие работают с массивами или строками немного легче.
 
-We'll also cover some of the constants available in CakePHP applications. Using
-these constants will help make upgrades more smooth, but are also convenient
-ways to point to certain files or directories in your CakePHP application.
+Мы также рассмотрим некоторые из констант, доступных в приложениях CakePHP.
+С помощью этих констант можно сделать обновления не только более плавными,
+но также получить удобные способы указывать определенные файлы или каталоги в приложении CakePHP.
 
-Global Functions
-================
+Глобальные функции
+==================
 
-Here are CakePHP's globally available functions. Most of them are just
-convenience wrappers for other CakePHP functionality, such as debugging and
-translating content.
+Здесь показаны функции CakePHP, которые доступны глобально. Большинство из них просто
+удобные обёртки для других функций CakePHP, таких как отладка и перевод контента.
 
 .. php:function:: \_\_(string $string_id, [$formatArgs])
 
-    This function handles localization in CakePHP applications. The
-    ``$string_id`` identifies the ID for a translation. You can supply
-    additional arguments to replace placeholders in your string::
+    Эта функция обрабатывает локализацию в приложениях CakePHP.
+    ``$string_id`` идентифицирует ID идентификатор перевода.
+    Вы можете указать дополнительные аргументы для замены определений в строке::
 
         __('You have {0} unread messages', $number);
 
-    You can also provide a name-indexed array of replacements::
+    Вы также можете предоставить список заменяемых имен::
 
         __('You have {unread} unread messages', ['unread' => $number]);
 
     .. note::
-
-        Check out the
-        :doc:`/core-libraries/internationalization-and-localization` section for
-        more information.
+        Ознакомьтесь с разделом
+        :doc:`/core-libraries/internationalization-and-localization` для получения
+        дополнительной информации.
 
 .. php:function:: __d(string $domain, string $msg, mixed $args = null)
 
-    Allows you to override the current domain for a single message lookup.
+    Позволяет переопределить текущий домен для поиска одного сообщения.
 
-    Useful when internationalizing a plugin:
+    Полезно при интернационализации плагина:
     ``echo __d('PluginName', 'This is my plugin');``
 
 .. php:function:: __dn(string $domain, string $singular, string $plural, integer $count, mixed $args = null)
 
-    Allows you to override the current domain for a single plural message
-    lookup. Returns correct plural form of message identified by ``$singular``
-    and ``$plural`` for count ``$count`` from domain ``$domain``.
+    Позволяет переопределить текущий домен для поиска одного множественного сообщения.
+    Возвращает правильную множественную форму сообщения, идентифицированную ``$singular`` и 
+    ``$plural`` для подсчёта суммы ``$count`` из домена ``$domain``.
 
 .. php:function:: __dx(string $domain, string $context, string $msg, mixed $args = null)
 
-    Allows you to override the current domain for a single message lookup. It
-    also allows you to specify a context.
+    Позволяет переопределить текущий домен для поиска одного сообщения. Он также позволяет 
+    указать контекст.
 
-    The context is a unique identifier for the translations string that makes it
-    unique within the same domain.
+    Контекст - это уникальный идентификатор строки перевода, который делает её уникальной в 
+    пределах одного домена.
 
 .. php:function:: __dxn(string $domain, string $context, string $singular, string $plural, integer $count, mixed $args = null)
 
-    Allows you to override the current domain for a single plural message
-    lookup. It also allows you to specify a context. Returns correct plural
-    form of message identified by ``$singular`` and ``$plural`` for count
-    ``$count`` from domain ``$domain``. Some languages have more than one form
-    for plural messages dependent on the count.
+    Позволяет переопределить текущий домен для поиска нескольких множественных сообщений.
+    Он также позволяет указать контекст. Возвращает правильную множественную форму сообщения, 
+    идентифицированную ``$singular`` и ``$plural`` для подсчёта суммы ``$count`` из домена ``$domain``.
 
-    The context is a unique identifier for the translations string that makes it
-    unique within the same domain.
+    Контекст - это уникальный идентификатор строки перевода, который делает её уникальной в
+    пределах одного домена.
 
 .. php:function:: __n(string $singular, string $plural, integer $count, mixed $args = null)
 
-    Returns correct plural form of message identified by ``$singular`` and
-    ``$plural`` for count ``$count``. Some languages have more than one form for
-    plural messages dependent on the count.
+    Возвращает правильную множественную форму сообщения, идентифицированную 
+    ``$singular`` и ``$plural`` для суммы ``$count``. Некоторые языки имеют 
+    более одной формы для множественных сообщений, зависящих от числа.
 
 .. php:function:: __x(string $context, string $msg, mixed $args = null)
 
-    The context is a unique identifier for the translations string that makes it
-    unique within the same domain.
+    Контекст - это уникальный идентификатор строки перевода, который делает её уникальной в 
+    пределах одного домена.
 
 .. php:function:: __xn(string $context, string $singular, string $plural, integer $count, mixed $args = null)
+    
+    Возвращает правильную множественную форму сообщения, идентифицированную 
+    ``$singular`` и ``$plural`` для подсчета суммы ``$count`` из домена ``$domain``.
+    Он также позволяет указать контекст. Некоторые языки имеют более одной формы для
+    множественных сообщений, зависящих от числа.
 
-    Returns correct plural form of message identified by ``$singular`` and
-    ``$plural`` for count ``$count`` from domain ``$domain``. It also allows you
-    to specify a context. Some languages have more than one form for plural
-    messages dependent on the count.
-
-    The context is a unique identifier for the translations string that makes it
-    unique within the same domain.
+    Контекст - это уникальный идентификатор строки перевода, который делает её уникальной в 
+    пределах одного домена.
 
 .. php:function:: collection(mixed $items)
 
-    Convenience wrapper for instantiating a new :php:class:`Cake\\Collection\\Collection`
-    object, wrapping the passed argument. The ``$items`` parameter takes either
-    a ``Traversable`` object or an array.
+    Удобная оболочка для создания нового объекта :php:class:`Cake\\Collection\\Collection`, 
+    обёртка для переданного аргументв. Параметр ``$items`` принимает либо объект 
+    ``Traversable``, либо массив.
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
     .. versionchanged:: 3.3.0
-        Calling this method will return passed ``$var``, so that you can, for instance,
-        place it in return statements.
+        Вызов этого метода вернёт переданный ``$var``, так что вы можете, например, 
+        поместить его в оператор return.
 
-    If the core ``$debug`` variable is ``true``, ``$var`` is printed out.
-    If ``$showHTML`` is ``true`` or left as ``null``, the data is rendered to be
-    browser-friendly. If ``$showFrom`` is not set to ``false``, the debug output
-    will start with the line from which it was called. Also see
-    :doc:`/development/debugging`
+    Если основная переменная ``$debug`` является ``true``, ``$var`` будет распечатан.
+    Если ``$showHTML`` является ``true`` или оставлено как ``null``, данные будут 
+    отображены в браузере. Если ``$showFrom`` не установлен в ``false``, вывод отладки 
+    начинается со строки, из которой он был вызван. Также см :doc:`/development/debugging`
 
 .. php:function:: dd(mixed $var, boolean $showHtml = null)
 
-    It behaves like ``debug()``, but execution is also halted.
-    If the core ``$debug`` variable is ``true``, ``$var`` is printed.
-    If ``$showHTML`` is ``true`` or left as ``null``, the data is rendered to be
-    browser-friendly. Also see :doc:`/development/debugging`
+    Он ведёт себя как ``debug()``, но выполнение также останавливается. 
+    Если основная переменная ``$debug`` является ``true``, печатается ``$var``. 
+    Если ``$showHTML`` является ``true`` или оставлено как ``null``, данные будут 
+    отображены в браузере.
 
 .. php:function:: pr(mixed $var)
 
     .. versionchanged:: 3.3.0
-        Calling this method will return passed ``$var``, so that you can, for instance,
-        place it in return statements.
+        Вызов этого метода вернет переданный ``$var``, так что вы можете, например, 
+        поместить его в оператор return.
 
-    Convenience wrapper for ``print_r()``, with the addition of
-    wrapping ``<pre>`` tags around the output.
+    Удобная обёртка для ``print_r()``, с добавлением тегов ``<pre>`` вокруг вывода.
 
 .. php:function:: pj(mixed $var)
 
     .. versionchanged:: 3.3.0
-        Calling this method will return passed ``$var``, so that you can, for instance,
-        place it in return statements.
+        Вызов этого метода вернёт переданный ``$var``, так что вы можете, например, 
+        поместить его в оператор return.
 
-    JSON pretty print convenience function, with the addition of
-    wrapping ``<pre>`` tags around the output.
+    Функция удобной печати JSON с добавлением тегов ``<pre>`` вокруг вывода.
 
-    It is meant for debugging the JSON representation of objects and arrays.
+    Он предназначен для отладки JSON-представления объектов и массивов.
 
 .. php:function:: env(string $key, string $default = null)
 
     .. versionchanged:: 3.1.1
-        The ``$default`` parameter has been added.
+        Добавлен параметр ``$default``.
 
-    Gets an environment variable from available sources. Used as a backup if
-    ``$_SERVER`` or ``$_ENV`` are disabled.
+    Получает переменную окружения из доступных источников. Используется в качестве 
+    резервной копии, если ``$_SERVER`` или ``$_ENV`` отключены.
 
-    This function also emulates ``PHP_SELF`` and ``DOCUMENT_ROOT`` on
-    unsupporting servers. In fact, it's a good idea to always use ``env()``
-    instead of ``$_SERVER`` or ``getenv()`` (especially if you plan to
-    distribute the code), since it's a full emulation wrapper.
+	Эта функция также эмулирует ``PHP_SELF`` и ``DOCUMENT_ROOT`` на неподдерживаемых серверах.
+    На самом деле, это хорошая идея всегда использовать ``env()`` вместо ``$_SERVER`` или ``getenv()`` 
+    (особенно если вы планируете распространять код), так как это полная эмуляция обёртки.
 
 .. php:function:: h(string $text, boolean $double = true, string $charset = null)
 
-    Convenience wrapper for ``htmlspecialchars()``.
+    Удобная обёртка для ``htmlspecialchars()``.
 
 .. php:function:: pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)
 
-    Splits a dot syntax plugin name into its plugin and class name. If ``$name``
-    does not have a dot, then index 0 will be ``null``.
+    Разделяет имя плагина синтаксиса в своём плагине и имени класса. 
+    Если ``$name`` не имеет точки, то индекс 0 будет ``null``.
 
-    Commonly used like ``list($plugin, $name) = pluginSplit('Users.User');``
+    Обычно используется как ``list($plugin, $name) = pluginSplit('Users.User');``
 
 .. php:function:: namespaceSplit(string $class)
 
-    Split the namespace from the classname.
+    Разделяет пространство имён от имени класса.
 
-    Commonly used like ``list($namespace, $className) = namespaceSplit('Cake\Core\App');``
+    Обычно используется как  ``list($namespace, $className) = namespaceSplit('Cake\Core\App');``
 
-Core Definition Constants
-=========================
+Основные определения констант
+=============================
 
-Most of the following constants refer to paths in your application.
+Большинство из следующих констант относятся к путям в вашем приложении.
 
 .. php:const:: APP
 
-   Absolute path to your application directory, including a trailing slash.
+   Абсолютный путь к вашему каталогу приложений, включая конечную косую черту.
 
 .. php:const:: APP_DIR
 
-    Equals ``app`` or the name of your application directory.
+    Равно ``app`` или имени вашего каталога приложений.
 
 .. php:const:: CACHE
 
-    Path to the cache files directory. It can be shared between hosts in a
-    multi-server setup.
+    Путь к каталогу файлов кеша. Он может совместно использоваться 
+    хостами в многосерверной настройке.
 
 .. php:const:: CAKE
 
-    Path to the cake directory.
+    Путь к каталогу cake.
 
 .. php:const:: CAKE_CORE_INCLUDE_PATH
 
-    Path to the root lib directory.
+    Путь к корневому каталогу lib.
 
 .. php:const:: CONFIG
 
-   Path to the config directory.
+   Путь к каталогу конфигурации.
 
 .. php:const:: CORE_PATH
 
-   Path to the root directory with ending directory slash.
+   Путь к корневому каталогу, заканчивается слешем.
 
 .. php:const:: DS
 
-    Short for PHP's ``DIRECTORY_SEPARATOR``, which is ``/`` on Linux and ``\``
-    on Windows.
+    Сокращение ``DIRECTORY_SEPARATOR``, являющийся ``/`` для Linux и``\`` 
+    для Windows.
 
 .. php:const:: LOGS
 
-    Path to the logs directory.
+    Путь к каталогу журналов(логов).
 
 .. php:const:: ROOT
 
-    Path to the root directory.
+    Путь к корневому каталогу..
 
 .. php:const:: TESTS
 
-    Path to the tests directory.
+    Путь к каталогу тестов.
 
 .. php:const:: TMP
 
-    Path to the temporary files directory.
+    Путь к папке временных файлов.
 
 .. php:const:: WWW\_ROOT
 
-    Full path to the webroot.
+    Полный путь к webroot.
 
-Timing Definition Constants
-===========================
+Сроки определения времени
+=========================
 
 .. php:const:: TIME_START
 
-    Unix timestamp in microseconds as a float from when the application started.
+    Временная метка Unix в микросекундах как плавающее значение с момента запуска приложения.
 
 .. php:const:: SECOND
 
-    Equals 1
+    Равно 1
 
 .. php:const:: MINUTE
 
-    Equals 60
+    Равно 60
 
 .. php:const:: HOUR
 
-    Equals 3600
+    Равно 3600
 
 .. php:const:: DAY
 
-    Equals 86400
+    Равно 86400
 
 .. php:const:: WEEK
 
-    Equals 604800
+    Равно 604800
 
 .. php:const:: MONTH
 
-    Equals 2592000
+    Равно 2592000
 
 .. php:const:: YEAR
 
-    Equals 31536000
+    Равно 31536000
 
 .. meta::
-    :title lang=en: Global Constants and Functions
+    :title lang=ru: Константы и Функции
     :keywords lang=en: internationalization and localization,global constants,example config,array php,convenience functions,core libraries,component classes,optional number,global functions,string string,core classes,format strings,unread messages,placeholders,useful functions,arrays,parameters,existence,translations
