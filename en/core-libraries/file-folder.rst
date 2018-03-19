@@ -204,10 +204,10 @@ Folder API
 
         $Folder = new Folder(WWW_ROOT);
         $result = $Folder->inPath(APP);
-        // $result = true, /var/www/example/ is in /var/www/example/webroot/
+        // $result = false, /var/www/example/src/ is not in /var/www/example/webroot/
 
         $result = $Folder->inPath(WWW_ROOT . 'img' . DS, true);
-        // $result = true, /var/www/example/webroot/ is in /var/www/example/webroot/img/
+        // $result = true, /var/www/example/webroot/img/ is in /var/www/example/webroot/
 
 .. php:staticmethod:: isAbsolute(string $path)
 
