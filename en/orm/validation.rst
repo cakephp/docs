@@ -609,7 +609,7 @@ for data transitions generated inside your application::
     public function buildRules(RulesChecker $rules)
     {
         $check = function($order) {
-            return $order->price < 100 && $order->shipping_mode === 'free';
+            return $order->price >= 100 && $order->shipping_mode === 'free';
         };
         $rules->add($check, [
             'errorField' => 'shipping_mode',
