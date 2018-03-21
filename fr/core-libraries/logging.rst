@@ -189,9 +189,9 @@ Utilisation de l'Adaptateur FileLog
 ===================================
 
 Comme son nom l'indique FileLog écrit les messages log dans des fichiers. Le
-type des messages de log en court d'écriture détermine le nom du fichier ou le
-message sera stocker. Si le type n'est pas fourni, :php:const:`LOG_ERR` est
-utilisé ce qui à pour effet d'écrire dans le log error. Le chemin par défaut est
+type des messages de log en cours d'écriture détermine le nom du fichier où le
+message sera stocké. Si le type n'est pas fourni, :php:const:`LOG_ERR` est
+utilisé ce qui a pour effet d'écrire dans le log error. Le chemin par défaut est
 ``logs/$level.log``::
 
     // Execute cela dans une classe CakePHP
