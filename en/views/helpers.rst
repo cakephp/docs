@@ -334,7 +334,7 @@ If you would like to access a View variable inside a helper, you can use
 
         public $helpers = ['Html'];
 
-        public someMethod()
+        public function someMethod()
         {
             // set meta description
             echo $this->Html->meta(
@@ -351,7 +351,7 @@ If you would like to render an Element inside your Helper you can use
 
     class AwesomeHelper extends Helper
     {
-        public someFunction()
+        public function someFunction()
         {
             // output directly in your helper
             echo $this->_View->element(
