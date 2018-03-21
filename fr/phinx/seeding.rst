@@ -93,7 +93,7 @@ within your seed class and then use the ``insert()`` method to insert data::
                     'body'    => 'bar',
                     'created' => date('Y-m-d H:i:s'),
                 ]
-            );
+            ];
 
             $posts = $this->table('posts');
             $posts->insert($data)
