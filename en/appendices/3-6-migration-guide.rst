@@ -172,6 +172,9 @@ shortcomings that are hard to correct without breaking compatibility.
 to build console applications. See the :doc:`/console-and-shells/commands`
 section for more information.
 
+* ``ConsoleOptionParse::enableSubcommandSort()`` was added. This method allows
+  you to disable the automatic sorting of subcommands in generated help text.
+
 
 Core
 ====
