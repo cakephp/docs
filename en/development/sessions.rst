@@ -323,11 +323,11 @@ In addition to the basic session object, you can also use the
 :php:class:`Cake\\View\\Helper\\SessionHelper` to interact with the session in
 your views. A basic example of session usage would be::
 
-    $name = $this->getRequest()->getSession()->read('User.name');
+    $name = $this->request->session()->read('User.name');
 
     // If you are accessing the session multiple times,
     // you will probably want a local variable.
-    $session = $this->getRequest()->getSession();
+    $session = $this->request->session();
     $name = $session->read('User.name');
 
 Reading & Writing Session Data
