@@ -328,11 +328,11 @@ In addition to the basic session object, you can also use the
 your views. A basic example of session usage would be::
 
     // Prior to 3.6.0 use session() instead.
-    $name = $this->request->getSession()->read('User.name');
+    $name = $this->getRequest()->getSession()->read('User.name');
 
     // If you are accessing the session multiple times,
     // you will probably want a local variable.
-    $session = $this->request->getSession();
+    $session = $this->getRequest()->getSession();
     $name = $session->read('User.name');
 
 Reading & Writing Session Data
