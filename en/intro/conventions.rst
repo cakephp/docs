@@ -170,7 +170,7 @@ The convention is to use lowercase letters and dashes as separator.
     // Good
     your-name/cakephp-foo-bar
 
-See `awesome list recommendations <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/CONTRIBUTING.md#tips-for-creating-cakephp-plugins`_ for details.
+See `awesome list recommendations <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/CONTRIBUTING.md#tips-for-creating-cakephp-plugins>`__ for details.
 
 .. meta::
     :title lang=en: CakePHP Conventions
