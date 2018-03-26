@@ -468,7 +468,7 @@ de layout devem ficar em /app/views/themed/example/layouts/.
 
 Se um arquivo de view não pode ser encontrado em um tema, o CakePHP
 tentará encontrar o arquivo de view em /app/views/. Desta forma, você
-pode criar arquivos views mestres e simplismente sobrescrevê-los
+pode criar arquivos views mestres e simplesmente sobrescrevê-los
 baseando-se caso-por-caso dentro de sua pasta tema.
 
 Se você tem arquivos CSS ou JavaScript que são específicos de seu tema,
