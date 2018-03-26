@@ -110,7 +110,7 @@ Unlinking many to many records is done via the ``unlink()`` method::
         ->Tags
         ->find()
         ->where(['name IN' => ['cakephp', 'awesome']])
-        ->toArray();
+        ->toList();
 
     $articlesTable->Tags->unlink($article, $tags);
 
@@ -541,7 +541,7 @@ delete for those not in the list::
 
     // In a controller.
     $comments = TableRegistry::get('Comments');
-    $present = (new Collection($entity->comments))->extract('id')->filter()->toArray();
+    $present = (new Collection($entity->comments))->extract('id')->filter()->toList();
     $comments->deleteAll([
         'article_id' => $article->id,
         'id NOT IN' => $present
@@ -557,7 +557,7 @@ the original entities array will be removed and not present in the result::
 
     // In a controller.
     $articles = TableRegistry::get('Articles');
-    $list = $articles->find('popular')->toArray();
+    $list = $articles->find('popular')->toList();
     $patched = $articles->patchEntities($list, $this->request->getData());
     foreach ($patched as $entity) {
         $articles->save($entity);
