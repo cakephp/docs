@@ -92,6 +92,9 @@ callback being applied to each object in the original collection::
     $new = $collection->map(function ($value, $key) {
         return $value * 2;
     });
+    
+    // $result contains [2, 4, 6];
+    $result = $new->toList();
 
     // $result contains ['a' => 2, 'b' => 4, 'c' => 6];
     $result = $new->toArray();
@@ -110,7 +113,7 @@ method::
     $names = $collection->extract('name');
 
     // $result contains ['mark', 'jose', 'barbara'];
-    $result = $names->toArray();
+    $result = $names->toList();
 
 As with many other functions in the collection class, you are allowed to specify
 a dot-separated path for extracting columns. This example will return
@@ -120,7 +123,7 @@ a collection containing the author names from a list of articles::
     $names = $collection->extract('author.name');
 
     // $result contains ['Maria', 'Stacy', 'Larry'];
-    $result = $names->toArray();
+    $result = $names->toList();
 
 Finally, if the property you are looking after cannot be expressed as a path,
 you can use a callback function to return it::
@@ -225,7 +228,7 @@ passed callable returns false for one of the elements::
     });
 
     // $result contains [10, 20];
-    $result = $new->toArray();
+    $result = $new->toList();
 
 .. php:method:: unfold(callable $c)
 
@@ -249,7 +252,7 @@ data from paginated services::
     $collection = new Collection($pages);
     $items = $collection->unfold(function ($page, $key) {
         // An imaginary web service that returns a page of results
-        return MyService::fetchPage($page)->toArray();
+        return MyService::fetchPage($page)->toList();
     });
 
     $allPagesItems = $items->toList();
@@ -694,7 +697,7 @@ property representing the identifier for the parent item::
         ['id' => 6, 'parent_id' => null, 'name' => 'Fish'],
     ]);
 
-    $collection->nest('id', 'parent_id')->toArray();
+    $collection->nest('id', 'parent_id')->toList();
     // Returns
     [
         [
@@ -747,7 +750,7 @@ flatten it::
 By default, the tree is traversed from the root to the leaves. You can also
 instruct it to only return the leaf elements in the tree::
 
-    $nested->listNested()->toArray();
+    $nested->listNested()->toList();
 
     // Returns
     [
@@ -816,7 +819,7 @@ position, use the ``shuffle``::
     $collection = new Collection(['a' => 1, 'b' => 2, 'c' => 3]);
 
     // This could return [2, 3, 1]
-    $collection->shuffle()->toArray();
+    $collection->shuffle()->toList();
 
 .. php:method:: transpose()
 
