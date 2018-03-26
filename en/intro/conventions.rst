@@ -156,6 +156,13 @@ Now that you've been introduced to CakePHP's fundamentals, you might try a run
 through the :doc:`/tutorials-and-examples/cms/installation` to see how things fit
 together.
 
+Plugins Conventions
+===================
+The names of the plugins must be semantically significant.
+Ideally, this should be a prefix dependencies of 'cakephp' as the basis.
+Do **not** use the CakePHP namespace (cakephp) as this is reserved to CakePHP owned plugins.
+The convention is to use lowercase letters and dashes as separator.
+
 .. meta::
     :title lang=en: CakePHP Conventions
     :keywords lang=en: web development experience,maintenance nightmare,index method,legacy systems,method names,php class,uniform system,config files,tenets,articles,conventions,conventional controller,best practices,maps,visibility,news articles,functionality,logic,cakephp,developers
