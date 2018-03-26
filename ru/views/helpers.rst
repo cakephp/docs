@@ -218,15 +218,15 @@ AJAX-запросов. Для более подробной информации
 Использование хелперов
 ======================
 
-Once you've configured which helpers you want to use in your controller,
-each helper is exposed as a public property in the view. For example, if you
-were using the :php:class:`HtmlHelper` you would be able to access it by
-doing the following::
+Как только вы указали, какие хелперы вы хотите использовать в вашем
+контроллере, каждый хелпер становится доступным в виде открытого свойства
+в представлении. Например, если вы используете :php:class:`HtmlHelper`,
+то в представлении вы сможете получить к нему доступ следующим образом::
 
     echo $this->Html->css('styles');
 
-The above would call the ``css()`` method on the HtmlHelper. You can
-access any loaded helper using ``$this->{$helperName}``.
+Это вызовет метод ``css()`` хелпера ``HtmlHelper``. Вы можете получить
+доступ к любому хелперу используя конструкцию ``$this->{$имяХелпера}``.
 
 Загрузка хелперов на лету
 -------------------------
@@ -284,9 +284,9 @@ HelperRegistry - это :doc:`реестр </core-libraries/registry-objects>` �
 Встраивание других хелперов
 ---------------------------
 
-You may wish to use some functionality already existing in another helper. To do
-so, you can specify helpers you wish to use with a ``$helpers`` array, formatted
-just as you would in a controller::
+Вы можете захотеть использовать функциональность, уже имеющуюся в каком-нибудь
+другом хелпере. Для этого вы можете определить нужные хелперы в массиве
+``$helpers``, отформатированный также, как и в контроллере
 
     /* src/View/Helper/LinkHelper.php (using other helpers) */
 
@@ -300,8 +300,8 @@ just as you would in a controller::
 
         public function makeEdit($title, $url)
         {
-            // Use the HTML helper to output
-            // Formatted data:
+            // Используйте HTML-хелпер для вывода
+            // форматированных данных:
 
             $link = $this->Html->link($title, $url, ['class' => 'edit']);
 
@@ -311,11 +311,11 @@ just as you would in a controller::
 
 .. _using-helpers:
 
-Using Your Helper
------------------
+Использование вашего хелпера
+----------------------------
 
-Once you've created your helper and placed it in **src/View/Helper/**, you can
-load it in your views::
+Как только вы создали ваш хелпер и разместили его в папке **src/View/Helper/**,
+вы можете загрузить его в ваших представлениях::
 
     class AppView extends View
     {
@@ -326,22 +326,22 @@ load it in your views::
         }
     }
 
-Once your helper has been loaded, you can use it in your views by accessing the
-matching view property::
+После того как ваш хелпер был загружен, вы можете использовать его в своих
+представлениях, обратившись к соответствующему свойству представления::
 
-    <!-- make a link using the new helper -->
+    <!-- создание ссылки с помощью нового хелпера -->
     <?= $this->Link->makeEdit('Change this Recipe', '/recipes/edit/5') ?>
 
 .. note::
 
-    The ``HelperRegistry`` will attempt to lazy load any helpers not
-    specifically identified in your ``Controller``.
+    ``HelperRegistry`` будет пытаться лениво загрузить любые хелперы,
+    не определенные явно в вашем Контроллере.
 
-Accessing View Variables Inside Your Helper
--------------------------------------------
+Доступ к переменным представления внутри вашего хелпера
+-------------------------------------------------------
 
-If you would like to access a View variable inside a helper, you can use
-``$this->_View->get()`` like::
+Если вы захотите получить доступ к переменной Представления внутри хелпера,
+вы можете использовать ``$this->_View->get()``::
 
     class AwesomeHelper extends Helper
     {
@@ -350,30 +350,31 @@ If you would like to access a View variable inside a helper, you can use
 
         public someMethod()
         {
-            // set meta description
+            // установить мета-тег description
             echo $this->Html->meta(
                 'description', $this->_View->get('metaDescription'), ['block' => 'meta']
             );
         }
     }
 
-Rendering A View Element Inside Your Helper
--------------------------------------------
+Вывод элемента Представления внутри вашего хелпера
+--------------------------------------------------
 
-If you would like to render an Element inside your Helper you can use
-``$this->_View->element()`` like::
+Если вы захотите вывести Элемент внутри вашего Хелпера, вы можете использовать
+``$this->_View->element()`` следующим образом::
 
     class AwesomeHelper extends Helper
     {
         public someFunction()
         {
-            // output directly in your helper
+            // вывод непосредственно в вашем хелпере
             echo $this->_View->element(
                 '/path/to/element',
                 ['foo'=>'bar','bar'=>'foo']
             );
 
-            // or return it to your view
+            // или возаращаем результат в
+            // ваше представление
             return $this->_View->element(
                 '/path/to/element',
                 ['foo'=>'bar','bar'=>'foo']
@@ -383,51 +384,50 @@ If you would like to render an Element inside your Helper you can use
 
 .. _helper-api:
 
-Helper Class
+Класс Helper
 ============
 
 .. php:class:: Helper
 
-Callbacks
----------
+Коллбэки
+--------
 
-By implementing a callback method in a helper, CakePHP will automatically
-subscribe your helper to the relevant event. Unlike previous versions of CakePHP
-you should *not* call ``parent`` in your callbacks, as the base Helper class
-does not implement any of the callback methods.
+Реализуя метод обратного вызова в хелпере, CakePHP автоматически подпишет
+ваш хелпер на соответствующее событие. В отличие от предыдущих версий CakePHP
+вы *не должны* вызывать ``parent`` в своих обратных вызовах, поскольку базовый
+класс ``Helper`` не реализует ни один из методов обратного вызова.
 
 .. php:method:: beforeRenderFile(Event $event, $viewFile)
 
-    Is called before each view file is rendered. This includes elements,
-    views, parent views and layouts.
+    Вызывается перед обработкой каждого файла представления. К ним относятся
+    элементы, представления, родительские представления и макеты.
 
 .. php:method:: afterRenderFile(Event $event, $viewFile, $content)
 
-    Is called after each view file is rendered. This includes elements, views,
-    parent views and layouts. A callback can modify and return ``$content`` to
-    change how the rendered content will be displayed in the browser.
+    Вызывается после обработки каждого файла представления. Данный коллбэк
+    способен изменять и возвращать свойство ``$content``, чтобы изменять
+    отображение выводимого контента в браузере.
 
 .. php:method:: beforeRender(Event $event, $viewFile)
 
-    The beforeRender method is called after the controller's beforeRender method
-    but before the controller renders view and layout. Receives the file being
-    rendered as an argument.
+    Вызывается после метода ``beforeRender`` контроллера, но перед тем, как
+    контроллер обработает представление и макет. Получает в качестве аргумента
+    имя обрабатываемого файла.
 
 .. php:method:: afterRender(Event $event, $viewFile)
 
-    Is called after the view has been rendered but before layout rendering has
-    started.
+    Вызывается после того, как файл представления уже обработан, но перед
+    обработкой макета.
 
 .. php:method:: beforeLayout(Event $event, $layoutFile)
 
-    Is called before layout rendering starts. Receives the layout filename as an
-    argument.
+    Вызывается перед началом обработки макета. Получает в качестве аргумента
+    имя файла макета.
 
 .. php:method:: afterLayout(Event $event, $layoutFile)
 
-    Is called after layout rendering is complete. Receives the layout filename
-    as an argument.
-
+    Вызывается после завершения обработки макета. Получает в качестве аргумента
+    имя файла макета.
 
 .. meta::
     :title lang=ru: Хелперы
