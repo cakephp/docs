@@ -19,8 +19,9 @@ be more complicated than in previous CakePHP versions. There are now various
 ways to inspect the data returned by the ORM.
 
 - ``debug($query)`` Shows the SQL and bound params, does not show results.
+- ``sql($query)`` Shows the final rendered SQL, but only when having DebugKit installed.
 - ``debug($query->all())`` Shows the ResultSet properties (not the results).
-- ``debug($query->toArray())`` An easy way to show each of the results.
+- ``debug($query->toList())`` An easy way to show each of the results.
 - ``debug(iterator_to_array($query))`` Shows query results in an array format.
 - ``debug(json_encode($query, JSON_PRETTY_PRINT))`` More human readable results.
 - ``debug($query->first())`` Show the properties of a single entity.
@@ -112,9 +113,9 @@ execute until you start fetching rows, convert it to an array, or when the
     $results = $query->all();
 
     // Once we have a result set we can get all the rows
-    $data = $results->toArray();
+    $data = $results->toList();
 
-    // Converting the query to an array will execute it.
+    // Converting the query to a key-value array will also execute it.
     $data = $query->toArray();
 
 .. note::
