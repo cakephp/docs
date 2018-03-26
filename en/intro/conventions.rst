@@ -158,7 +158,8 @@ together.
 
 Plugins Conventions
 ===================
-The names of the plugins must be semantically significant.
+It is useful to prefix a CakePHP plugin with "cakephp-" in the package name.
+This makes the name semantically related on the framework it depends on.
 Ideally, this should be a prefix dependencies of 'cakephp' as the basis.
 Do **not** use the CakePHP namespace (cakephp) as this is reserved to CakePHP owned plugins.
 The convention is to use lowercase letters and dashes as separator.
