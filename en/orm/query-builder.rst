@@ -81,7 +81,7 @@ state and the SQL that will be executed in the database::
     // ...
 
 You can execute a query directly without having to use ``foreach`` on it.
-The easiest way is to either call the ``all()`` or ``toArray()`` methods::
+The easiest way is to either call the ``all()`` or ``toList()`` methods::
 
     $resultsIteratorObject = $articles
         ->find()
@@ -95,7 +95,7 @@ The easiest way is to either call the ``all()`` or ``toArray()`` methods::
     $resultsArray = $articles
         ->find()
         ->where(['id >' => 1])
-        ->toArray();
+        ->toList();
 
     foreach ($resultsArray as $article) {
         debug($article->id);
@@ -109,7 +109,7 @@ and traversing methods on.
 
 Often, there is no need to call ``all()``, you can simply iterate the
 Query object to get its results. Query objects can also be used directly as the
-result object; trying to iterate the query, calling ``toArray()`` or some of the
+result object; trying to iterate the query, calling ``toList()`` or some of the
 methods inherited from :doc:`Collection </core-libraries/collections>`, will
 result in the query being executed and results returned to you.
 
@@ -190,7 +190,7 @@ of the following things occur:
   built by ``SELECT`` (it adds ``LIMIT 1`` to the query).
 - The query's ``all()`` method is called. This will return the result set and
   can only be used with ``SELECT`` statements.
-- The query's ``toArray()`` method is called.
+- The query's ``toList()`` or ``toArray()`` method is called.
 
 Until one of these conditions are met, the query can be modified without additional
 SQL being sent to the database. It also means that if a Query hasn't been
