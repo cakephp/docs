@@ -24,7 +24,7 @@ URL Considerations for Controller Names
 
 As you've just seen, single word controllers map to a simple lower case URL
 path. For example, ``UsersController`` (which would be defined in the file name
-**UsersController.php**) is accessed from http://example.com/users.
+**UsersController.php**) is accessed from ``http://example.com/users``.
 
 While you can route multiple word controllers in any way you like, the
 convention is that your URLs are lowercase and dashed using the ``DashedRoute``
@@ -146,7 +146,7 @@ Here's a final example that ties the conventions together:
 -  View template, found at **src/Template/Articles/index.ctp**
 
 Using these conventions, CakePHP knows that a request to
-http://example.com/articles/ maps to a call on the ``index()`` function of the
+``http://example.com/articles`` maps to a call on the ``index()`` function of the
 ArticlesController, where the Articles model is automatically available (and
 automatically tied to the 'articles' table in the database), and renders to a
 file. None of these relationships have been configured by any means other than
@@ -155,6 +155,22 @@ by creating classes and files that you'd need to create anyway.
 Now that you've been introduced to CakePHP's fundamentals, you might try a run
 through the :doc:`/tutorials-and-examples/cms/installation` to see how things fit
 together.
+
+Plugins Conventions
+===================
+It is useful to prefix a CakePHP plugin with "cakephp-" in the package name.
+This makes the name semantically related on the framework it depends on.
+
+Do **not** use the CakePHP namespace (cakephp) as vendor name as this is reserved to CakePHP owned plugins.
+The convention is to use lowercase letters and dashes as separator.
+
+    // Bad
+    cakephp/foo-bar
+    
+    // Good
+    your-name/cakephp-foo-bar
+
+See `awesome list recommendations <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/CONTRIBUTING.md#tips-for-creating-cakephp-plugins>`__ for details.
 
 .. meta::
     :title lang=en: CakePHP Conventions
