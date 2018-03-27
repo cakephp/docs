@@ -158,6 +158,12 @@ Cache
 * Fallback engines can be disabled by setting ``fallback = false`` for any cache
   configuration.
 
+Collection
+==========
+
+* The ``appendItem()``, ``prepend()``, ``prependItems()`` methods were added to
+  ``CollectionTrait``.
+
 Configure
 =========
 

@@ -53,16 +53,17 @@ List of Methods
 .. csv-table::
     :class: docutils internal-toc
 
-    :php:meth:`append`, :php:meth:`avg`, :php:meth:`buffered`, :php:meth:`chunk`
-    :php:meth:`chunkWithKeys`, :php:meth:`combine`, :php:meth:`compile`, :php:meth:`contains`
-    :php:meth:`countBy`, :php:meth:`each`, :php:meth:`every`, :php:meth:`extract`
-    :php:meth:`filter`, :php:meth:`first`, :php:meth:`groupBy`, :php:meth:`indexBy`
-    :php:meth:`insert`, :php:meth:`isEmpty`, :php:meth:`last`, :php:meth:`listNested`
-    :php:meth:`map`, :php:meth:`match`, :php:meth:`max`, :php:meth:`median`
-    :php:meth:`min`, :php:meth:`nest`, :php:meth:`reduce`, :php:meth:`reject`
-    :php:meth:`sample`, :php:meth:`shuffle`, :php:meth:`skip`, :php:meth:`some`
-    :php:meth:`sortBy`, :php:meth:`stopWhen`, :php:meth:`sumOf`, :php:meth:`take`
-    :php:meth:`through`, :php:meth:`transpose`, :php:meth:`unfold`, :php:meth:`zip`
+    :php:meth:`append`, :php:meth:`appendItem`, :php:meth:`avg`, :php:meth:`buffered`
+    :php:meth:`chunk`, :php:meth:`chunkWithKeys`, :php:meth:`combine`, :php:meth:`compile`
+    :php:meth:`contains`, :php:meth:`countBy`, :php:meth:`each`, :php:meth:`every`
+    :php:meth:`extract`, :php:meth:`filter`, :php:meth:`first`, :php:meth:`groupBy`
+    :php:meth:`indexBy`, :php:meth:`insert`, :php:meth:`isEmpty`, :php:meth:`last`
+    :php:meth:`listNested`, :php:meth:`map`, :php:meth:`match`, :php:meth:`max`
+    :php:meth:`median`, :php:meth:`min`, :php:meth:`nest`, :php:meth:`prepend`
+    :php:meth:`prependItem`, :php:meth:`reduce`, :php:meth:`reject` :php:meth:`sample`
+    :php:meth:`shuffle`, :php:meth:`skip`, :php:meth:`some`, :php:meth:`sortBy`
+    :php:meth:`stopWhen`, :php:meth:`sumOf`, :php:meth:`take`, :php:meth:`through`
+    :php:meth:`transpose`, :php:meth:`unfold`, :php:meth:`zip`
 
 Iterating
 =========
@@ -918,6 +919,42 @@ collection containing the values from both sources::
     $myTimeline->filter(function ($tweet) {
         return strpos($tweet, 'cakefest');
     });
+
+.. php:method::appendItem($value, $key)
+
+Allows you to append an item with an optional key to the collection. If you
+specify a key that already exists in the collection, the value will not be
+overwritten::
+
+    $cakephpTweets = new Collection($tweets);
+    $myTimeline = $cakephpTweets->appendItem($newTweet, 99);
+
+.. versionadded:: 3.6.0
+    appendItem() was added.
+
+.. php:method:: prepend(array|Traversable $items)
+
+The ``prepend()`` method will return a new collection containing the values from
+both sources::
+
+    $cakephpTweets = new Collection($tweets);
+    $myTimeline = $cakephpTweets->prepend($phpTweets);
+
+.. versionadded:: 3.6.0
+    prepend() was added.
+
+.. php:method::prependItem($value, $key)
+
+Allows you to prepend an item with an optional key to the collection. If you
+specify a key that already exists in the collection, the value will not be
+overwritten::
+
+    $cakephpTweets = new Collection($tweets);
+    $myTimeline = $cakephpTweets->prependItem($newTweet, 99);
+
+.. versionadded:: 3.6.0
+    prependItem() was added.
+
 
 .. warning::
 
