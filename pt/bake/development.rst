@@ -197,16 +197,17 @@ criar o seu próprio tema na sua aplicação. Esta forma não usa a opção
 Criando novos comando bake
 =================================
 
-É possivel adicionar novas opções de comandos, ou sobrescrever alguns providos pelo
-CakePHP, criando tarefas na sua aplicação ou no seu plugin. Extendendo
-``Bake\Shell\Task\BakeTask``, bake encontrará a nova tarefa e incluirá isto como parte de sí mesmo.
+É possivel adicionar novas opções de comandos, ou sobrescrever alguns providos
+pelo CakePHP, criando tarefas na sua aplicação ou no seu plugin. Extendendo
+``Bake\Shell\Task\BakeTask``, bake encontrará a nova tarefa e incluirá isto como
+parte de sí mesmo.
 
-Como um exemplo, nós vamos criar uma tarefa que cria uma classe foo. Primeiro, crie um arquivo de tarefa
- **src/Shell/Task/FooTask.php**. Vamos extender de
-``SimpleBakeTask`` por agora como nossa nova shell task  será simples. ``SimpleBakeTask``
-é abstrata e requer que nós definirmos 3 metodos, que conta ao nosso bake que a tarefa é chamada,
- onde os arquivos são deverão ser gerados, e o qual template usar. Nosso arquivo 
-FooTask.php deve parecer com ::
+Como um exemplo, nós vamos criar uma tarefa que cria uma classe foo. Primeiro,
+crie um arquivo de tarefa **src/Shell/Task/FooTask.php**. Vamos extender de
+``SimpleBakeTask`` por agora como nossa nova shell task  será simples.
+``SimpleBakeTask`` é abstrata e requer que nós definirmos 3 metodos, que conta
+ao nosso bake que a tarefa é chamada, onde os arquivos são deverão ser gerados,
+e o qual template usar. Nosso arquivo FooTask.php deve parecer com ::
 
     <?php
     namespace App\Shell\Task;
