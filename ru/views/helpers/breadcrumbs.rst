@@ -89,11 +89,11 @@
 ее, используя метод ``render()``. Этот метод принимает два массива
 в качестве аргументов:
 
-- ``$attributes`` : Массив аттрибутов, которые будут применены к шаблону
-  ``wrapper``. Это дает вам возможность добавлять аттрибуты тегам HTML. Он
+- ``$attributes`` : Массив атрибутов, которые будут применены к шаблону
+  ``wrapper``. Это дает вам возможность добавлять атрибуты тегам HTML. Он
   принимает специальный ключ ``templateVars``, чтобы позволить вставку
   пользовательских переменных в шаблон.
-- ``$separator`` : Массив аттрибутов для шаблона ``separator``.
+- ``$separator`` : Массив атрибутов для шаблона ``separator``.
   Доступные свойства:
 
   - ``separator`` Строка для отображения в качестве разделителя
@@ -102,26 +102,23 @@
   - ``templateVars`` Позволяет добавить пользовательские переменные в
     шаблон
 
-  Все другие свойства будут конвертированы как HTML-аттрибуты и будут заменять
-  ключ ``attrs`` в шаблоне.
-  
-  All other properties will be converted as HTML attributes and will replace
-  the ``attrs`` key in the template. If you use the default for this option
-  (empty), it will not render a separator.
+  Все другие свойства будут конвертированы как HTML-атрибуты и будут заменять
+  ключ ``attrs`` в шаблоне. Если вы используете значение этой опции по
+  умолчанию (empty), разделитель не будет выводиться.
 
-Here is an example of how to render a trail::
+Вот пример того, как выводится навигационная цепочка::
 
     echo $this->Breadcrumbs->render(
         ['class' => 'breadcrumbs-trail'],
         ['separator' => '<i class="fa fa-angle-right"></i>']
     );
 
-Customizing the Output
-----------------------
+Кастомизация вывода
+-------------------
 
-The BreadcrumbsHelper internally uses the ``StringTemplateTrait``, which gives
-the ability to easily customize output of various HTML strings.
-It includes four templates, with the following default declaration::
+``BreadcrumbsHelper`` внутренне использует ``StringTemplateTrait``, дающий
+возможность с легкостью изменять вывод различных строк HTML.
+В него входят четыре шаблона, со следующими стандартными значениями::
 
     [
         'wrapper' => '<ul{{attrs}}>{{content}}</ul>',
@@ -130,22 +127,22 @@ It includes four templates, with the following default declaration::
         'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>'
     ]
 
-You can easily customize them using the ``templates()`` method from the
+Вы можете с легкостью изменять их, используя метод ``templates()``, из
 ``StringTemplateTrait``::
 
     $this->Breadcrumbs->templates([
         'wrapper' => '<nav class="breadcrumbs"><ul{{attrs}}>{{content}}</ul></nav>',
     ]);
 
-Since your templates will be rendered, the ``templateVars`` option
-allows you to add your own template variables in the various templates::
+Как только ваши шаблоны будут обработаны, опция ``templateVars`` позволит
+вам добавить ваши собственные переменные в различные шаблоны::
 
     $this->Breadcrumbs->templates([
         'item' => '<li{{attrs}}>{{icon}}<a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}'
     ]);
 
-And to define the ``{{icon}}`` parameter, just specify it when adding the
-crumb to the trail::
+Чтобы определить параметр ``{{icon}}``, просто пропишите его при добавлении
+элементов в навигационную цепочку::
 
     $this->Breadcrumbs->add(
         'Products',
@@ -159,8 +156,8 @@ crumb to the trail::
 
 .. _defining_attributes_item:
 
-Defining Attributes for the Item
---------------------------------
+Определение атрибутов для элементов
+-----------------------------------
 
 If you want to apply specific HTML attributes to both the item and its sub-item
 , you can leverage the ``innerAttrs`` key, which the ``$options`` argument
