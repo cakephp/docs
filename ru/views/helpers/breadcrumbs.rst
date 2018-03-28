@@ -159,10 +159,10 @@
 Определение атрибутов для элементов
 -----------------------------------
 
-If you want to apply specific HTML attributes to both the item and its sub-item
-, you can leverage the ``innerAttrs`` key, which the ``$options`` argument
-provides. Everything except ``innerAttrs`` and ``templateVars`` will be
-rendered as HTML attributes::
+Если вы хотите применить специфические HTML-атрибуты к элементу цепочки, а также
+к его дочернему элементу, вы можете использовать ключ ``innerAttrs``, предлагаемый
+аргументом ``$options``. Все кроме параметров ``innerAttrs`` и ``templateVars``
+будет выведено как HTML-атрибуты элемента цепочки::
 
     $this->Breadcrumbs->add(
         'Products',
@@ -177,16 +177,16 @@ rendered as HTML attributes::
         ]
     );
 
-    // Based on the default template, this will render the following HTML :
+    // В соответствии с шаблоном по умолчанию, это сформирует следующий HTML:
     <li class="products-crumb" data-foo="bar">
         <a href="/products/index" class="inner-products-crumb" id="the-products-crumb">Products</a>
     </li>
 
-Clearing the Breadcrumbs
-========================
+Очистка хлебных крошек
+======================
 
-You can clear the bread crumbs using the ``reset()`` method. This can be useful
-when you want to transform the crumbs and overwrite the list::
+Вы можете очистить хлебные крошки, используя метод ``reset()``. Это может
+быть полезным если вы хотите преобразовать крошки и переписать список::
 
     $crumbs = $this->Breadcrumbs->getCrumbs();
     $crumbs = collection($crumbs)->map(function ($crumb) {
@@ -197,9 +197,9 @@ when you want to transform the crumbs and overwrite the list::
     $this->Breadcrumbs->reset()->add($crumbs);
 
 .. versionadded:: 3.4.0
-    The ``reset()`` method was added in 3.4.0
+    Метод ``reset()`` был добавлен в версии 3.4.0
 
 .. meta::
     :title lang=ru: BreadcrumbsHelper
     :description lang=ru: Роль хелпера BreadcrumbsHelper в CakePHP - предоставить способ простого управления хлебными крошками.
-    :keywords lang=ru: breadcrumbs helper,cakephp crumbs
+    :keywords lang=ru: хелпер breadcrumbs,cakephp crumbs
