@@ -11,7 +11,7 @@ CookieComponent で追加されたクッキーは、コントローラーのア�
 
 .. deprecated:: 3.5.0
     クッキーは、 ``ServerRequest`` で利用できます。 :ref:`request-cookies` をご覧ください。
-    暗号化クッキーは :ref:`encrypted-cookie-middleware` をご覧ください。
+    クッキーの暗号化は :ref:`encrypted-cookie-middleware` をご覧ください。
 
 Cookie の設定
 =================
