@@ -36,7 +36,7 @@ Note that we did not tell the ORM which table to use for our class. By
 convention table objects will use a table that matches the lower cased and
 underscored version of the class name. In the above example the ``articles``
 table will be used. If our table class was named ``BlogPosts`` your table should
-be named ``blog_posts``. You can specify the table to using the ``setTable()``
+be named ``blog_posts``. You can specify the table to use by using the ``setTable()``
 method::
 
     namespace App\Model\Table;
