@@ -227,6 +227,7 @@ Http
 
 * ``Response::withAddedLink()`` was added to make creating ``Link`` headers
   simpler.
+* ``BodyParserMiddleware`` was added.
 
 I18n
 ====

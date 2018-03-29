@@ -48,6 +48,8 @@ CakePHP provides several middleware to handle common tasks in web applications:
   obfuscated data.
 * ``Cake\Http\Middleware\CsrfProtectionMiddleware`` adds CSRF protection to your
   application.
+* ``Cake\Http\Middleware\BodyParserMiddleware`` allows you to decode JSON, XML
+  and other encoded request bodies based on ``Content-Type`` header.
 
 .. _using-middleware:
 
@@ -433,6 +435,37 @@ integrate a CSRF token with JavaScript heavy applications, or XML/JSON based API
 endpoints.
 
 The CSRF Token can be obtained via the Cookie ``csrfToken``.
+
+
+.. _body-parser-middleware:
+
+Body Parser Middleware
+======================
+
+If your application accepts JSON, XML or other encoded request bodies, the
+``BodyParserMiddleware`` will let you decode those requests into an array that
+is available via ``$request->getParsedData()`` and ``$request->getData()``. By
+default only ``json`` bodies will be parsed, but XML parsing can be enabled with
+an option. You can also define your own parsers::
+
+    use Cake\Http\Middleware\BodyParserMiddleware;
+
+    // only JSON will be parsed.
+    $bodies = new BodyParserMiddleware();
+
+    // Enable XML parsing
+    $bodies = new BodyParserMiddleware(['xml' => true]);
+
+    // Disable JSON parsing
+    $bodies = new BodyParserMiddleware(['json' => fals]);
+
+    // Add your own parser matching content-type header values
+    // to the callable that can parse them.
+    $bodies = new BodyParserMiddleware();
+    $bodies->addParser(['text/csv'], function ($body, $request) {
+        // Use a CSV parsing library.
+        return Csv::parse($body);
+    });
 
 .. meta::
     :title lang=en: Http Middleware
