@@ -457,7 +457,7 @@ an option. You can also define your own parsers::
     $bodies = new BodyParserMiddleware(['xml' => true]);
 
     // Disable JSON parsing
-    $bodies = new BodyParserMiddleware(['json' => fals]);
+    $bodies = new BodyParserMiddleware(['json' => false]);
 
     // Add your own parser matching content-type header values
     // to the callable that can parse them.
