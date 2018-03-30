@@ -202,6 +202,10 @@ Database
   type classes to optimize casting operations by operating on all columns in
   bulk. This interface can be used in custom types now, and will be used in core
   types in 4.x.
+* ``Cake\Database\Type\DateTimeType::setTimezone()`` was added. This method lets
+  you set the timezone that datetime objects should be converted to before
+  inserting into the database. It does not change datetime data being read from
+  the database.
 
 Datasource
 ==========
