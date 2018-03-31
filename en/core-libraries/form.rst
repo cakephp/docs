@@ -165,6 +165,10 @@ invalidate the fields accordingly to the feedback from the remote server::
         $this->_errors = $errors;
     }
 
+.. versionchanged:: 3.5.1
+    You are not required to specify ``setErrors`` anymore as this has
+    already been included in the ``Form`` class for your convenience.
+
 According to how the validator class would have returned the errors, ``$errors``
 must be in this format::
 
