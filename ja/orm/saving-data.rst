@@ -110,7 +110,7 @@ CakePHP は挿入または更新のいずれの処理を行うかを ``isNew()``
         ->Tags
         ->find()
         ->where(['name IN' => ['cakephp', 'すごい']])
-        ->toArray();
+        ->toList();
 
     $articlesTable->Tags->unlink($article, $tags);
 
@@ -536,7 +536,7 @@ hasMany の belongsToMany アソシエーションについても同じことが
 
     // コントローラーの中で。
     $comments = TableRegistry::get('Comments');
-    $present = (new Collection($entity->comments))->extract('id')->filter()->toArray();
+    $present = (new Collection($entity->comments))->extract('id')->filter()->toList();
     $comments->deleteAll([
         'article_id' => $article->id,
         'id NOT IN' => $present
@@ -552,7 +552,7 @@ hasMany と belongsToMany アソシエーションに対してのパッチのた
 
     // コントローラーの中で。
     $articles = TableRegistry::get('Articles');
-    $list = $articles->find('popular')->toArray();
+    $list = $articles->find('popular')->toList();
     $patched = $articles->patchEntities($list, $this->request->getData());
     foreach ($patched as $entity) {
         $articles->save($entity);

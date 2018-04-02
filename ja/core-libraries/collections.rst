@@ -90,6 +90,9 @@
         return $value * 2;
     });
 
+    // $result には [2, 4, 6] が含まれています。
+    $result = $new->toList();
+
     // $result には ['a' => 2, 'b' => 4, 'c' => 6] が含まれています。
     $result = $new->toArray();
 
@@ -105,7 +108,7 @@
     $names = $collection->extract('name');
 
     // $result には ['mark', 'jose', 'barbara'] が含まれています。
-    $result = $names->toArray();
+    $result = $names->toList();
 
 コレクションクラス内の他の多くの関数と同様に、列を抽出するために、ドット区切りのパスを
 指定することができます。この例では、記事のリストから著者名を含むコレクションを返します。 ::
@@ -114,7 +117,7 @@
     $names = $collection->extract('author.name');
 
     // $result には ['Maria', 'Stacy', 'Larry'] が含まれています。
-    $result = $names->toArray();
+    $result = $names->toList();
 
 最後に、あなたが取得したいプロパティーがパスで表現できない場合は、
 それを返すようにコールバック関数を使用することができます。 ::
@@ -219,7 +222,7 @@
     });
 
     // $result には [10, 20] が含まれています。
-    $result = $new->toArray();
+    $result = $new->toList();
 
 .. php:method:: unfold(callable $c)
 
@@ -243,7 +246,7 @@
     $collection = new Collection($pages);
     $items = $collection->unfold(function ($page, $key) {
         // 結果のページを返す架空のウェブサービス
-        return MyService::fetchPage($page)->toArray();
+        return MyService::fetchPage($page)->toList();
     });
 
     $allPagesItems = $items->toList();
@@ -663,7 +666,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
         ['id' => 6, 'parent_id' => null, 'name' => 'Fish'],
     ]);
 
-    $collection->nest('id', 'parent_id')->toArray();
+    $collection->nest('id', 'parent_id')->toList();
     // 戻り値
     [
         [
@@ -781,7 +784,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
     $collection = new Collection(['a' => 1, 'b' => 2, 'c' => 3]);
 
     // これは [2, 3, 1] を返します。
-    $collection->shuffle()->toArray();
+    $collection->shuffle()->toList();
 
 .. php:method:: transpose()
 
