@@ -312,3 +312,5 @@ View
   a ``timestamp`` option which allows you to set the ``Asset.timestamp``
   setting for a single method call.
 * Cell classes now have an ``initialize()`` hook method.
+* ``PaginatorHelper`` will reset the page to 1 each time sort directions are
+  changed.
