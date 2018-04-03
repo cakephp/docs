@@ -199,8 +199,9 @@ Then ensure that your validation method has the second context parameter. ::
     {
         $userid = $context['providers']['passed']['userid'];
     }
-    
-Closures should return boolean true if the validation passes. If it fails, return boolean false or for a custom error message return a string.
+
+Closures should return boolean true if the validation passes. If it fails,
+return boolean false or for a custom error message return a string.
 
 
 Conditional Validation
@@ -415,6 +416,20 @@ To validate the comments you would use a nested validator::
 You can create 1:1 'relationships' with ``addNested()`` and 1:N 'relationships'
 with ``addNestedMany()``. With both methods, the nested validator's errors will
 contribute to the parent validator's errors and influence the final result.
+Like other validator features, nested validators support error messages and
+conditional application::
+
+    $validator->addNestedMany(
+        'comments',
+        $commentValidator,
+        'Invalid comment',
+        'create'
+    );
+
+The error message for a nested validator can be found in the ``_nested`` key.
+
+.. versionadded:: 3.6.0
+    message and conditions for nested validators were added.
 
 .. _reusable-validators:
 

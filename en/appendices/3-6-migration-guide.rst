@@ -304,6 +304,8 @@ Validation
   ``lessThanOrEqualToField()`` were added.
 * Validator rules will now use the rule alias as the rule method when the
   ``rule`` key is not defined.
+* ``Validator::addNested()`` and ``addNestedMany()`` now support the ``when``
+  and ``message`` parameters like other validator methods.
 
 View
 ====
@@ -312,5 +314,5 @@ View
   a ``timestamp`` option which allows you to set the ``Asset.timestamp``
   setting for a single method call.
 * Cell classes now have an ``initialize()`` hook method.
-* ``PaginatorHelper`` will reset the page to 1 each time sort directions are
+* ``PaginatorHelper`` will now reset the page to 1 each time sort directions are
   changed.
