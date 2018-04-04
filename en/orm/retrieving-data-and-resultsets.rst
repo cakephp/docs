@@ -943,7 +943,7 @@ set multiple times, or cache and iterate the results. If you need work with
 a data set that does not fit into memory you can disable buffering on the query
 to stream results::
 
-    $query->enableBufferResults(false);
+    $query->enableBufferedResults(false);
     // Prior to 3.4.0
     $query->bufferResults(false);
 

@@ -998,7 +998,7 @@ d'itérer les résultats. Si vous devez travailler sur un ensemble de données q
 ne rentre pas dans la mémoire, vous pouvez désactiver la mise en mémoire sur la
 requête pour faire un stream des résultats::
 
-    $query->enableBufferResults(false);
+    $query->enableBufferedResults(false);
     // Avant 3.4.0
     $query->bufferResults(false);
 
