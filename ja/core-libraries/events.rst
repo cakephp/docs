@@ -69,6 +69,9 @@ CakePHP は、jQuery などの一般的な JavaScript フレームワークに�
         }
     }
 
+.. deprecated:: 3.5.0
+    代わりに ``getEventManager()`` を使用してください。
+
 上記のコードは、注文が作成されていることをアプリケーションの別のパーツに通知することを簡単にできます。
 例えば、メール通知の送信、在庫の更新、ログに関する分析、その他のタスクのような関心ごとに注目した
 独立したオブジェクトの中で実行することができます。
@@ -79,7 +82,7 @@ CakePHP は、jQuery などの一般的な JavaScript フレームワークに�
 CakePHP の中でイベントはイベントマネージャーに対して動作します。イベントマネージャーは、
 全てのモデル、ビュー、コントローラーの中で ``getEventManager()`` を使用して取得されます。 ::
 
-    $events = $this->eventManager();
+    $events = $this->getEventManager();
 
 ビューやコントローラーで共有している各モデルは独立したイベントマネージャーを持ちます。
 これは、モデルイベントを自分自身に含むことができ、もし必要であれば、
@@ -182,7 +185,7 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
 
     // UserStatistic オブジェクトを Order のイベントマネージャーに追加
     $statistics = new UserStatistic();
-    $this->Orders->eventManager()->on($statistics);
+    $this->Orders->getEventManager()->on($statistics);
 
 上記のコードを見るとわかるように、 ``on()`` 関数は ``EventListener`` インターフェイスの
 インスタンスを受け取ります。内部的には、イベント·マネージャーは ``implementedEvents()``
@@ -197,7 +200,7 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
 
     use Cake\Log\Log;
 
-    $this->Orders->eventManager()->on('Model.Order.afterPlace', function ($event) {
+    $this->Orders->getEventManager()->on('Model.Order.afterPlace', function ($event) {
         Log::write(
             'info',
             'A new order was placed with id: ' . $event->getSubject()->id
@@ -229,7 +232,7 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
     use Cake\Mailer\Email;
 
     TableRegistry::get('ThirdPartyPlugin.Feedbacks')
-        ->eventManager()
+        ->getEventManager()
         ->on('Model.afterSave', function($event, $entity)
         {
             // 例えば、管理者のメールを送信することができます。
@@ -250,16 +253,16 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
 ある動作の基礎として使用できます。 ::
 
     // EventManager にリスナーを追加
-    $this->eventManager()->on('User.Registration', [$this, 'userRegistration']);
-    $this->eventManager()->on('User.Verification', [$this, 'userVerification']);
-    $this->eventManager()->on('User.Authorization', [$this, 'userAuthorization']);
+    $this->getEventManager()->on('User.Registration', [$this, 'userRegistration']);
+    $this->getEventManager()->on('User.Verification', [$this, 'userVerification']);
+    $this->getEventManager()->on('User.Authorization', [$this, 'userAuthorization']);
 
     // アプリケーションのどこか別の場所で
-    $events = $this->eventManager()->matchingListeners('Verification');
+    $events = $this->getEventManager()->matchingListeners('Verification');
     if (!empty($events)) {
         // 'Verification' イベントリスナーが存在する場合のロジックを実行。
         // 例えば、存在するリスナーを削除。
-        $this->eventManager()->off('User.Verification');
+        $this->getEventManager()->off('User.Verification');
     } else {
         // 'Verification' イベントリスナーが存在しない場合のロジックを実行。
     }
@@ -296,7 +299,7 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
 
     // コールバックの優先順位を設定
     $callback = [$this, 'doSomething'];
-    $this->eventManager()->on(
+    $this->getEventManager()->on(
         'Model.Order.afterPlace',
         ['priority' => 2],
         $callback
@@ -327,7 +330,7 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
 イベントがそのコンストラクターに渡されたデータを持っている場合、渡されたデータは、
 リスナーの引数に変換されます。ビュー層の afterRender のコールバックの例です。 ::
 
-    $this->eventManager()
+    $this->getEventManager()
         ->dispatch(new Event('View.afterRender', $this, ['view' => $viewFileName]));
 
 ``View.afterRender`` コールバックのリスナーは、次のシグネチャを持つ必要があります。 ::
@@ -355,7 +358,7 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
     $event = new Event('Model.Order.afterPlace', $this, [
         'order' => $order
     ]);
-    $this->eventManager()->dispatch($event);
+    $this->getEventManager()->dispatch($event);
 
 :php:class:`Cake\\Event\\Event` は、コンストラクターに3つの引数を受け取ります。
 最初のものはイベント名で、読みやすくすると同時にできるだけ唯一性を維持することを心掛けてください。
@@ -414,7 +417,7 @@ DOM イベントのように、追加のリスナーへ通知されることを�
     public function place($order)
     {
         $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
-        $this->eventManager()->dispatch($event);
+        $this->getEventManager()->dispatch($event);
         if ($event->isStopped()) {
             return false;
         }
@@ -455,7 +458,7 @@ DOM イベントのように、追加のリスナーへ通知されることを�
     public function place($order)
     {
         $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
-        $this->eventManager()->dispatch($event);
+        $this->getEventManager()->dispatch($event);
         if (!empty($event->getResult()['order'])) {
             $order = $event->getResult()['order'];
         }
@@ -479,27 +482,27 @@ DOM イベントのように、追加のリスナーへ通知されることを�
 追加のときと同様の用い方で呼び出すだけで良いです。 ::
 
     // 関数の追加
-    $this->eventManager()->on('My.event', [$this, 'doSomething']);
+    $this->getEventManager()->on('My.event', [$this, 'doSomething']);
 
     // 関数の削除
-    $this->eventManager()->off('My.event', [$this, 'doSomething']);
+    $this->getEventManager()->off('My.event', [$this, 'doSomething']);
 
     // 無名関数の追加
     $myFunction = function ($event) { ... };
-    $this->eventManager()->on('My.event', $myFunction);
+    $this->getEventManager()->on('My.event', $myFunction);
 
     // 無名関数の削除
-    $this->eventManager()->off('My.event', $myFunction);
+    $this->getEventManager()->off('My.event', $myFunction);
 
     // EventListener の追加
     $listener = new MyEventLister();
-    $this->eventManager()->on($listener);
+    $this->getEventManager()->on($listener);
 
     // リスナーから単一のイベントキーを削除
-    $this->eventManager()->off('My.event', $listener);
+    $this->getEventManager()->off('My.event', $listener);
 
     // リスナーで実装された全てのコールバックを削除
-    $this->eventManager()->off($listener);
+    $this->getEventManager()->off($listener);
 
 イベントはあなたのアプリケーション内の関心事を分離させる偉大な方法であり、
 クラスに凝集と疎結合の両方をもたらします。イベントは、アプリケーションコードの疎結合や
