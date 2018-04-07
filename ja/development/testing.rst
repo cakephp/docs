@@ -298,8 +298,7 @@ PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを�
 ``http://localhost/your_app/coverage`` にアクセスすると、結果を表示することができるはずです。
 
 PHP 5.6.0 以上を利用している場合、カバレッジを生成するために xdebug の代わりに
-`phpdbg <http://phpdbg.com/>`__ を使用できます。一般的にカバレッジの生成は
-``phpdbg`` の方が速いです。
+``phpdbg`` を使用できます。一般的にカバレッジの生成は ``phpdbg`` の方が速いです。
 
 .. code-block:: bash
 
