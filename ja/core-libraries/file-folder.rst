@@ -201,10 +201,10 @@ Folder API
 
         $Folder = new Folder(WWW_ROOT);
         $result = $Folder->inPath(APP);
-        // $result = true, /var/www/example/ は /var/www/example/webroot/ の中です
+        // $result = false, /var/www/example/src/ は /var/www/example/webroot/ の中ではありません
 
         $result = $Folder->inPath(WWW_ROOT . 'img' . DS, true);
-        // $result = true, /var/www/example/webroot/ は /var/www/example/webroot/img/ の中です
+        // $result = true, /var/www/example/webroot/img/ は /var/www/example/webroot/ の中です
 
 .. php:staticmethod:: isAbsolute(string $path)
 
