@@ -68,7 +68,7 @@ CakePHP コンソール用の Bash 自動補完を有効にする方法
 
     apt-get install bash-completion
 
-**/etc/bash_completion.d/** に **cake** をという名前のファイルを作成し、配置します。
+**/etc/bash_completion.d/** に **cake** という名前のファイルを作成し、配置します。
 そのファイル中に :ref:`bash-completion-file-content` を記述してください。
 
 ファイルを保存して、コンソールを再起動してください。
