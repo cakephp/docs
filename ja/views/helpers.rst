@@ -325,7 +325,7 @@ CakePHP のコンポーネントと同様に、ヘルパークラスは、いく
 
         public $helpers = ['Html'];
 
-        public someMethod()
+        public function someMethod()
         {
             // meta description の設定
             echo $this->Html->meta(
@@ -342,7 +342,7 @@ CakePHP のコンポーネントと同様に、ヘルパークラスは、いく
 
     class AwesomeHelper extends Helper
     {
-        public someFunction()
+        public function someFunction()
         {
             // ヘルパー内で直接出力
             echo $this->_View->element(
