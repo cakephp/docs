@@ -607,7 +607,10 @@ CakePHP の ORM は検証に二層のアプローチを使う点がユニーク�
     public function buildRules(RulesChecker $rules)
     {
         $check = function($order) {
-            return $order->price < 100 && $order->shipping_mode === 'free';
+            if($order->shipping_mode !== 'free'){
+                return true;
+            }
+            return $order->price >= 100;
         };
         $rules->add($check, [
             'errorField' => 'shipping_mode',
