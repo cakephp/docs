@@ -659,7 +659,7 @@ name as the prefix, will load the fixture from the named plugin.
 
 .. note::
 
-    When using the plugin-prefix you have to add the plugins fixture folder path to composer.json (under autoload-dev).
+    When experiencing problems while using plugins fixtures, check if the plugin autoloads fixture classes properly, otherwise you have to add the plugins fixture folder path to composer.json in your app(under autoload-dev).
     e.g. ``"CakeDC\\Users\\Test\\Fixture\\": "vendor/cakedc/users/tests/Fixture/"``
     
     Don't forget to ``composer dump-autoload``
