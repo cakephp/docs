@@ -450,6 +450,8 @@ The ``content`` block contains the contents of the rendered view.
 You can set the ``title`` block content from inside your view file::
 
     $this->assign('title', 'View Active Users');
+    
+Empty values for the ``title`` block will be automatically replaced with a representation of the current template path, such as ``'Admin/Articles'``.
 
 You can create as many layouts as you wish: just place them in the
 **src/Template/Layout** directory, and switch between them inside of your
