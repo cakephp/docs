@@ -7,10 +7,12 @@ The `security library <https://api.cakephp.org/2.x/class-Security.html>`_
 handles basic security measures such as providing methods for
 hashing and encrypting data.
 
-.. warning::
-    The encryption features offered by Security rely on the deprecated
-    ``mcrypt`` extension. If you are using PHP>=7.1 you will need to install
-    ``mcrypt`` via PECL.
+.. note::
+    By default the encryption features offered by Security rely on the deprecated
+    ``mcrypt`` extension. 
+    This behaviour can be changed by setting ``Security.useOpenSsl``.
+    If you are using the default behaviour using PHP>=7.1 you will need to 
+    install ``mcrypt`` via PECL.
 
 Security API
 ============
@@ -79,6 +81,9 @@ Security API
 
     .. versionadded:: 2.5
 
+    .. versionadded:: 2.10.8
+        Set ``Security.useOpenSsl`` to use OpenSSL instead of the deprecated ``mcrpyt`` extension.
+
 .. php:staticmethod:: decrypt($cipher, $key, $hmacSalt = null)
 
     :param string $cipher: The ciphertext to decrypt.
@@ -100,6 +105,9 @@ Security API
     ``false`` will be returned.
 
     .. versionadded:: 2.5
+
+    .. versionadded:: 2.10.8
+        Set ``Security.useOpenSsl`` to use OpenSSL instead of the deprecated ``mcrpyt`` extension.
 
 .. php:staticmethod:: hash( $string, $type = NULL, $salt = false )
 
