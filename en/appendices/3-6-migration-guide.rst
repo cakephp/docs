@@ -53,6 +53,8 @@ features will continue to function until 4.0.0 after which they will be removed.
   ``getMapReducers()`` instead.
 * The getter part of ``Cake\ORM\Query::contain()`` is deprecated. Use
   ``getContain()`` instead.
+* The getter part of ``Cake\Datasource\QueryInterface::repository()``
+  is deprecated. Use ``getRepository()`` instead.
 
 Several classes were *renamed*. Their old names will continue to work until 4.0,
 but will emit deprecation warnings:
