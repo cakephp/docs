@@ -206,6 +206,11 @@ Database
   you set the timezone that datetime objects should be converted to before
   inserting into the database. It does not change datetime data being read from
   the database.
+* ``Cake\Database\Statement\StatementDecorator::fetchAssoc()`` was added.
+* ``Cake\Database\Statement\BufferedStatement::fetchAssoc()`` was added.
+* ``Cake\Database\Statement\StatementDecorator::FETCH_TYPE_NUM`` was added.
+* ``Cake\Database\Statement\StatementDecorator::FETCH_TYPE_ASSOC`` was added.
+* ``Cake\Database\Statement\StatementDecorator::FETCH_TYPE_OBJ`` was added.
 
 Datasource
 ==========
