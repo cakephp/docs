@@ -11,7 +11,7 @@ Requirements
 
 - HTTP Server. For example: Apache. Having mod\_rewrite is preferred, but
   by no means required.
-- PHP |minphpversion| or greater (including PHP 7.1).
+- PHP |minphpversion| or greater (including PHP 7.2).
 - mbstring PHP extension
 - intl PHP extension
 - simplexml PHP extension
@@ -120,11 +120,11 @@ Keeping Up To Date with the Latest CakePHP Changes
 By default this is what your application **composer.json** looks like::
 
     "require": {
-        "cakephp/cakephp": "3.5.*"
+        "cakephp/cakephp": "3.6.*"
     }
 
 Each time you run ``php composer.phar update`` you will receive patch
-releases for this minor version. You can instead change this to ``^3.5`` to
+releases for this minor version. You can instead change this to ``^3.6`` to
 also receive the latest stable minor releases of the ``3.x`` branch.
 
 If you want to stay up to date with the latest unreleased changes in CakePHP,
