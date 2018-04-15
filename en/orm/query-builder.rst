@@ -177,8 +177,8 @@ can also do in a Query object::
         echo "$id : $trimmedTitle";
     }
 
-How Are Queries Lazily Evaluated
---------------------------------
+Queries Are Lazily Evaluated
+----------------------------
 
 Query objects are lazily evaluated. This means a query is not executed until one
 of the following things occur:
@@ -200,15 +200,11 @@ re-evaluating a query will result in additional SQL being run.
 If you want to take a look at what SQL CakePHP is generating, you can turn
 database :ref:`query logging <database-query-logging>` on.
 
-The following sections will show you everything there is to know about using and
-combining the Query object methods to construct SQL statements and extract data.
-
 Selecting Data
 ==============
 
-Most web applications make heavy use of ``SELECT`` queries. CakePHP makes
-building them a snap. To limit the fields fetched, you can use the ``select()``
-method::
+CakePHP makes building ``SELECT`` queries simple. To limit the fields fetched,
+you can use the ``select()`` method::
 
     $query = $articles->find();
     $query->select(['id', 'title', 'body']);
@@ -292,8 +288,8 @@ As you can see from the examples above, all the methods that modify the query
 provide a fluent interface, allowing you to build a query through chained method
 calls.
 
-Selecting All Fields From a Table
----------------------------------
+Selecting Specific Fields
+-------------------------
 
 By default a query will select all fields from a table, the exception is when you
 call the ``select()`` function yourself and pass certain fields::
@@ -314,6 +310,20 @@ purpose::
 
 .. versionadded:: 3.1
     Passing a table object to select() was added in 3.1.
+
+If you want to select all but a few fields on a table, you can use
+``selectAllExcept()``::
+
+    $query = $articlesTable->find();
+
+    // Get all fields except the published field.
+    $query->selectAllExcept($articlesTable, ['published']);
+
+You can also pass an ``Association`` object when working with contained
+associations.
+
+.. versionadded:: 3.6.0
+    The ``selectAllExcept()`` method was added.
 
 .. _using-sql-functions:
 
@@ -585,9 +595,9 @@ Advanced Conditions
 ===================
 
 The query builder makes it simple to build complex ``where`` clauses.
-Grouped conditions can be expressed by providing combining ``where()``,
-``andWhere()`` and ``orWhere()``. The ``where()`` method works similar to the
-conditions arrays in previous versions of CakePHP::
+Grouped conditions can be expressed by providing combining ``where()`` and
+expression objects. For simple queries, you can build conditions using
+an array of conditions::
 
     $query = $articles->find()
         ->where([
@@ -599,29 +609,20 @@ The above would generate SQL like::
 
     SELECT * FROM articles WHERE author_id = 3 AND (view_count = 2 OR view_count = 3)
 
-If you'd prefer to avoid deeply nested arrays, you can use the ``orWhere()`` and
-``andWhere()`` methods to build your queries. Each method sets the combining
-operator used between the current and previous condition. For example::
+If you'd prefer to avoid deeply nested arrays, you can use the callback form of
+``where()`` to build your queries. The callback form allows you to use the
+expression builder to build more complex conditions without arrays. For example::
 
-    $query = $articles->find()
-        ->where(['author_id' => 2])
-        ->orWhere(['author_id' => 3]);
+    $query = $articles->find()->where(function ($exp, $query) {
+        // Use add() to add multiple conditions for the same field.
+        $author = $exp->or_(['author_id' => 3])->add(['author_id' => 2]);
+        $published = $exp->and_(['published' => true, 'view_count' => 10]);
 
-The above will output SQL similar to::
-
-    SELECT * FROM articles WHERE (author_id = 2 OR author_id = 3)
-
-By combining ``orWhere()`` and ``andWhere()``, you can express complex
-conditions that use a mixture of operators::
-
-    $query = $articles->find()
-        ->where(['author_id' => 2])
-        ->orWhere(['author_id' => 3])
-        ->andWhere([
-            'published' => true,
-            'view_count >' => 10
-        ])
-        ->orWhere(['promoted' => true]);
+        return $exp->or_([
+            'promoted' => true,
+            $exp->and_([$author, $published])
+        ]);
+    });
 
 The above generates SQL similar to::
 
@@ -634,28 +635,6 @@ The above generates SQL similar to::
             (published = 1 AND view_count > 10)
         )
         OR promoted = 1
-    )
-
-By using functions as the parameters to ``orWhere()`` and ``andWhere()``,
-you can compose conditions together with the expression objects::
-
-    $query = $articles->find()
-        ->where(['title LIKE' => '%First%'])
-        ->andWhere(function (QueryExpression $exp) {
-            return $exp->or_([
-                'author_id' => 2,
-                'is_highlighted' => true
-            ]);
-        });
-
-The above would create SQL like::
-
-    SELECT *
-    FROM articles
-    WHERE (
-        title LIKE '%First%'
-        AND
-        (author_id = 2 OR is_highlighted = 1)
     )
 
 The expression object that is passed into ``where()`` functions has two kinds of
@@ -923,6 +902,29 @@ clauses::
     contain untrusted content.  See the :ref:`using-sql-functions` section for
     how to safely include unsafe data into function calls.
 
+Using Identifiers in Expressions
+--------------------------------
+
+When you need to reference a column or SQL identifier in your queries you can
+use the ``identifier()`` method::
+
+    $query = $countries->find();
+    $query->select([
+            'year' => $query->func()->year([$query->identifier('created')])
+        ])
+        ->where(function ($exp, $query) {
+            return $exp->gt('population', 100000);
+        });
+
+.. warning::
+
+    To prevent SQL injections, Identifier expressions should never have
+    untrusted data passed into them.
+
+.. versionadded:: 3.6.0
+
+    ``Query::identifier()`` was added in 3.6.0
+
 Automatically Creating IN Clauses
 ---------------------------------
 
@@ -975,6 +977,7 @@ can use the ``IS NOT`` operator to automatically create the correct expression::
 The above will create ``parent_id` != :c1`` or ``parent_id IS NOT NULL``
 depending on the type of ``$parentId``
 
+
 Raw Expressions
 ---------------
 
@@ -991,7 +994,7 @@ expression objects to add snippets of SQL to your queries::
 .. warning::
 
     Using expression objects leaves you vulnerable to SQL injection. You should
-    avoid interpolating user data into expressions.
+    never use untrusted data into expressions.
 
 Getting Results
 ===============
@@ -1425,7 +1428,8 @@ Subqueries are a powerful feature in relational databases and building them in
 CakePHP is fairly intuitive. By composing queries together, you can make
 subqueries::
 
-    $matchingComment = $articles->association('Comments')->find()
+    // Prior to 3.6.0 use association() instead.
+    $matchingComment = $articles->getAssociation('Comments')->find()
         ->select(['article_id'])
         ->distinct()
         ->where(['comment LIKE' => '%CakePHP%']);

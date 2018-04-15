@@ -204,7 +204,8 @@ gérer les mappings de vue dans votre controller::
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Network\Exception\NotFoundException;
+    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
+    use Cake\Http\Exception\NotFoundException;
 
     class VideosController extends AppController
     {

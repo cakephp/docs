@@ -128,7 +128,7 @@ Déployer une Mise à Jour
 ========================
 
 Après un déploiement ou une mise à jour, vous pouvez aussi lancer ``bin/cake
-orm_cache clear``, qui fait parti du shell :doc:`/console-and-shells/orm-cache`.
+schema_cache clear``, qui fait parti du shell :doc:`/console-and-shells/schema-cache`.
 
 .. meta::
     :title lang=fr: Déploiement

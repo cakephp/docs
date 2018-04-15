@@ -290,7 +290,8 @@ Ainsi vous pouvez soit laisser s'afficher la page d'erreur normale, soit
 utiliser un bloc try catch et faire des actions appropriées quand une
 ``NotFoundException`` est attrapée::
 
-    use Cake\Network\Exception\NotFoundException;
+    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
+    use Cake\Http\Exception\NotFoundException;
 
     public function index()
     {

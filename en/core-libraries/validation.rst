@@ -120,6 +120,157 @@ An example of these methods in action is::
         ->notEmpty('body', 'Body cannot be empty', 'create')
         ->allowEmpty('header_image', 'update');
 
+Adding Validation Rules
+-----------------------
+
+The ``Validator`` class provides methods that make building validators simple
+and expressive. For example adding validation rules to a username could look
+like::
+
+    $validator = new Validator();
+    $validator
+        ->email('username')
+        ->ascii('username')
+        ->lengthBetween('username', [4, 8]);
+
+See the `Validator API documentation
+<https://api.cakephp.org/3.x/class-Cake.Validation.Validator.html>`_ for the
+full set of validator methods.
+
+.. versionadded:: 3.2
+    Rule building methods were added in 3.2.0
+
+Using Custom Validation Rules
+-----------------------------
+
+In addition to using methods on the ``Validator``, and coming from providers, you
+can also use any callable, including anonymous functions, as validation rules::
+
+    // Use a global function
+    $validator->add('title', 'custom', [
+        'rule' => 'validate_title',
+        'message' => 'The title is not valid'
+    ]);
+
+    // Use an array callable that is not in a provider
+    $validator->add('title', 'custom', [
+        'rule' => [$this, 'method'],
+        'message' => 'The title is not valid'
+    ]);
+
+    // Use a closure
+    $extra = 'Some additional value needed inside the closure';
+    $validator->add('title', 'custom', [
+        'rule' => function ($value, $context) use ($extra) {
+            // Custom logic that returns true/false
+        },
+        'message' => 'The title is not valid'
+    ]);
+
+    // Use a rule from a custom provider
+    $validator->add('title', 'custom', [
+        'rule' => 'customRule',
+        'provider' => 'custom',
+        'message' => 'The title is not unique enough'
+    ]);
+
+Closures or callable methods will receive 2 arguments when called. The first
+will be the value for the field being validated. The second is a context array
+containing data related to the validation process:
+
+- **data**: The original data passed to the validation method, useful if you
+  plan to create rules comparing values.
+- **providers**: The complete list of rule provider objects, useful if you
+  need to create complex rules by calling multiple providers.
+- **newRecord**: Whether the validation call is for a new record or
+  a preexisting one.
+
+If you need to pass additional data to your validation methods such as the
+current user's id, you can use a custom dynamic provider from your controller. ::
+
+    $this->Examples->validator('default')->provider('passed', [
+        'count' => $countFromController,
+        'userid' => $this->Auth->user('id')
+    ]);
+
+Then ensure that your validation method has the second context parameter. ::
+
+    public function customValidationMethod($check, array $context)
+    {
+        $userid = $context['providers']['passed']['userid'];
+    }
+
+Closures should return boolean true if the validation passes. If it fails,
+return boolean false or for a custom error message return a string.
+
+
+Conditional Validation
+----------------------
+
+When defining validation rules, you can use the ``on`` key to define when
+a validation rule should be applied. If left undefined, the rule will always be
+applied. Other valid values are ``create`` and ``update``. Using one of these
+values will make the rule apply to only create or update operations.
+
+Additionally, you can provide a callable function that will determine whether or
+not a particular rule should be applied::
+
+    $validator->add('picture', 'file', [
+        'rule' => ['mimeType', ['image/jpeg', 'image/png']],
+        'on' => function ($context) {
+            return !empty($context['data']['show_profile_picture']);
+        }
+    ]);
+
+You can access the other submitted field values using the ``$context['data']``
+array.
+The above example will make the rule for 'picture' optional depending on whether
+the value for ``show_profile_picture`` is empty. You could also use the
+``uploadedFile`` validation rule to create optional file upload inputs::
+
+    $validator->add('picture', 'file', [
+        'rule' => ['uploadedFile', ['optional' => true]],
+    ]);
+
+The ``allowEmpty()``, ``notEmpty()`` and ``requirePresence()`` methods will also
+accept a callback function as their last argument. If present, the callback
+determines whether or not the rule should be applied. For example, a field is
+sometimes allowed to be empty::
+
+    $validator->allowEmpty('tax', function ($context) {
+        return !$context['data']['is_taxable'];
+    });
+
+Likewise, a field can be required to be populated when certain conditions are
+met::
+
+    $validator->notEmpty('email_frequency', 'This field is required', function ($context) {
+        return !empty($context['data']['wants_newsletter']);
+    });
+
+In the above example, the ``email_frequency`` field cannot be left empty if the
+the user wants to receive the newsletter.
+
+Further it's also possible to require a field to be present under certain
+conditions only::
+
+    $validator->requirePresence('full_name', function ($context) {
+        if (isset($context['data']['action'])) {
+            return $context['data']['action'] === 'subscribe';
+        }
+        return false;
+    });
+    $validator->requirePresence('email');
+
+This would require the ``full_name`` field to be present only in case the user
+wants to create a subscription, while the ``email`` field would always be
+required, since it would also be needed when canceling a subscription.
+
+.. versionadded:: 3.1.1
+    The callable support for ``requirePresence()`` was added in 3.1.1
+
+
+
 Marking Rules as the Last to Run
 --------------------------------
 
@@ -144,19 +295,6 @@ a specific rule has failed, you can set the ``last`` option to ``true``::
 
 If the minLength rule fails in the example above, the maxLength rule will not be
 run.
-
-Validation Methods Less Verbose
--------------------------------
-
-Since 3.2, the Validator object has a number of new methods that make building
-validators less verbose. For example adding validation rules to a username field
-can now look like::
-
-    $validator = new Validator();
-    $validator
-        ->email('username')
-        ->ascii('username')
-        ->lengthBetween('username', [4, 8]);
 
 Adding Validation Providers
 ---------------------------
@@ -243,134 +381,6 @@ There are a few methods that are common to all classes, defined through the
     postal() to check a postal code
     personId() to check a country specific person ID
 
-Custom Validation Rules
------------------------
-
-In addition to using methods coming from providers, you can also use any
-callable, including anonymous functions, as validation rules::
-
-    // Use a global function
-    $validator->add('title', 'custom', [
-        'rule' => 'validate_title',
-        'message' => 'The title is not valid'
-    ]);
-
-    // Use an array callable that is not in a provider
-    $validator->add('title', 'custom', [
-        'rule' => [$this, 'method'],
-        'message' => 'The title is not valid'
-    ]);
-
-    // Use a closure
-    $extra = 'Some additional value needed inside the closure';
-    $validator->add('title', 'custom', [
-        'rule' => function ($value, $context) use ($extra) {
-            // Custom logic that returns true/false
-        },
-        'message' => 'The title is not valid'
-    ]);
-
-    // Use a rule from a custom provider
-    $validator->add('title', 'custom', [
-        'rule' => 'customRule',
-        'provider' => 'custom',
-        'message' => 'The title is not unique enough'
-    ]);
-
-Closures or callable methods will receive 2 arguments when called. The first
-will be the value for the field being validated. The second is a context array
-containing data related to the validation process:
-
-- **data**: The original data passed to the validation method, useful if you
-  plan to create rules comparing values.
-- **providers**: The complete list of rule provider objects, useful if you
-  need to create complex rules by calling multiple providers.
-- **newRecord**: Whether the validation call is for a new record or
-  a preexisting one.
-
-If you need to pass additional data to your validation methods such as the
-current user's id, you can use a custom dynamic provider from your controller. ::
-
-    $this->Examples->validator('default')->provider('passed', [
-        'count' => $countFromController,
-        'userid' => $this->Auth->user('id')
-    ]);
-
-Then ensure that your validation method has the second context parameter. ::
-
-    public function customValidationMethod($check, array $context)
-    {
-        $userid = $context['providers']['passed']['userid'];
-    }
-    
-Closures should return boolean true if the validation passes. If it fails, return boolean false or for a custom error message return a string.
-
-
-Conditional Validation
-----------------------
-
-When defining validation rules, you can use the ``on`` key to define when
-a validation rule should be applied. If left undefined, the rule will always be
-applied. Other valid values are ``create`` and ``update``. Using one of these
-values will make the rule apply to only create or update operations.
-
-Additionally, you can provide a callable function that will determine whether or
-not a particular rule should be applied::
-
-    $validator->add('picture', 'file', [
-        'rule' => ['mimeType', ['image/jpeg', 'image/png']],
-        'on' => function ($context) {
-            return !empty($context['data']['show_profile_picture']);
-        }
-    ]);
-
-You can access the other submitted field values using the ``$context['data']``
-array.
-The above example will make the rule for 'picture' optional depending on whether
-the value for ``show_profile_picture`` is empty. You could also use the
-``uploadedFile`` validation rule to create optional file upload inputs::
-
-    $validator->add('picture', 'file', [
-        'rule' => ['uploadedFile', ['optional' => true]],
-    ]);
-
-The ``allowEmpty()``, ``notEmpty()`` and ``requirePresence()`` methods will also
-accept a callback function as their last argument. If present, the callback
-determines whether or not the rule should be applied. For example, a field is
-sometimes allowed to be empty::
-
-    $validator->allowEmpty('tax', function ($context) {
-        return !$context['data']['is_taxable'];
-    });
-
-Likewise, a field can be required to be populated when certain conditions are
-met::
-
-    $validator->notEmpty('email_frequency', 'This field is required', function ($context) {
-        return !empty($context['data']['wants_newsletter']);
-    });
-
-In the above example, the ``email_frequency`` field cannot be left empty if the
-the user wants to receive the newsletter.
-
-Further it's also possible to require a field to be present under certain
-conditions only::
-
-    $validator->requirePresence('full_name', function ($context) {
-        if (isset($context['data']['action'])) {
-            return $context['data']['action'] === 'subscribe';
-        }
-        return false;
-    });
-    $validator->requirePresence('email');
-
-This would require the ``full_name`` field to be present only in case the user
-wants to create a subscription, while the ``email`` field would always be
-required, since it would also be needed when canceling a subscription.
-
-.. versionadded:: 3.1.1
-    The callable support for ``requirePresence()`` was added in 3.1.1
-
 Nesting Validators
 ------------------
 
@@ -406,6 +416,20 @@ To validate the comments you would use a nested validator::
 You can create 1:1 'relationships' with ``addNested()`` and 1:N 'relationships'
 with ``addNestedMany()``. With both methods, the nested validator's errors will
 contribute to the parent validator's errors and influence the final result.
+Like other validator features, nested validators support error messages and
+conditional application::
+
+    $validator->addNestedMany(
+        'comments',
+        $commentValidator,
+        'Invalid comment',
+        'create'
+    );
+
+The error message for a nested validator can be found in the ``_nested`` key.
+
+.. versionadded:: 3.6.0
+    message and conditions for nested validators were added.
 
 .. _reusable-validators:
 

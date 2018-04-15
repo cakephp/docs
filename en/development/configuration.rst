@@ -106,12 +106,15 @@ Security.salt
 Asset.timestamp
     Appends a timestamp which is last modified time of the particular
     file at the end of asset files URLs (CSS, JavaScript, Image) when
-    using proper helpers.
-    Valid values:
+    using proper helpers. Valid values:
 
     - (bool) ``false`` - Doesn't do anything (default)
     - (bool) ``true`` - Appends the timestamp when debug is ``true``
     - (string) 'force' - Always appends the timestamp.
+
+    .. versionchanged:: 3.6.0
+        As of 3.6.0, you can override this global setting when linking assets
+        using the ``timestamp`` option.
 
 Database Configuration
 ----------------------
@@ -366,6 +369,23 @@ Reading & Deleting Configuration Data
 Read and delete a key from Configure. This is useful when you want to
 combine reading and deleting values in a single operation.
 
+.. php:staticmethod:: consumeOrFail($key)
+
+Consumes configuration data just like :php:meth:`Cake\\Core\\Configure::consume`
+but expects to find a key/value pair. In case the requested pair does not
+exist, a :php:class:`RuntimeException` will be thrown::
+
+    Configure::consumeOrFail('Company.name');    // Yields: 'Pizza, Inc.'
+    Configure::consumeOrFail('Company.geolocation');  // Will throw an exception
+
+    Configure::consumeOrFail('Company');
+
+    // Yields:
+    ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
+
+.. versionadded:: 3.6.0
+``Configure::readOrFail()`` was added in 3.6.0
+
 Reading and writing configuration files
 =======================================
 
@@ -560,7 +580,8 @@ class like so::
 
     // In your bootstrap.php
     use Cake\Event\EventManager;
-    use Cake\Network\Exception\InternalErrorException;
+    // Prior to 3.6 use Cake\Network\Exception\InteralErrorException
+    use Cake\Http\Exception\InternalErrorException;
 
     $isCakeBakeShellRunning = (PHP_SAPI === 'cli' && isset($argv[1]) && $argv[1] === 'bake');
     if (!$isCakeBakeShellRunning) {

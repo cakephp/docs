@@ -22,14 +22,13 @@ build your own backend. The built-in caching engines are:
   atomic operations. However, since disk storage is often quite cheap,
   storing large objects, or elements that are infrequently written
   work well in files.
-* ``ApcCache`` APC cache uses the PHP `APCu <http://php.net/apcu>`_ extension.
+* ``ApcuEngine`` APCu cache uses the PHP `APCu <http://php.net/apcu>`_ extension.
   This extension uses shared memory on the webserver to store objects.
-  This makes it very fast, and able to provide atomic read/write features.
+  This makes it very fast, and able to provide atomic read/write features. Prior
+  to 3.6.0 ``ApcuEngine`` was named ``ApcEngine``.
 * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
   extension. Wincache is similar to APC in features and performance, but
   optimized for Windows and IIS.
-* ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_
-  is a PHP extension that provides similar features to APC.
 * ``MemcachedEngine`` Uses the `Memcached <http://php.net/memcached>`_
   extension.
 * ``RedisEngine`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
@@ -214,8 +213,26 @@ If writing to the ``default`` cache configuration *also* failed in this scenario
 engine would fall back once again to the ``NullEngine`` and prevent the application
 from throwing an uncaught exception.
 
+You can turn off cache fallbacks with ``false``::
+
+    Cache::config('redis', [
+        'className' => 'Redis',
+        'duration' => '+1 hours',
+        'prefix' => 'cake_redis_',
+        'host' => '127.0.0.1',
+        'port' => 6379,
+        'fallback' => false
+    ]);
+
+When there is no fallback cache failures will be raised as exceptions.
+
+
+
 .. versionadded:: 3.5.0
     Cache engine fallbacks were added.
+
+.. versionchanged:: 3.6.0
+    Fallbacks can now be disabled via ``false``
 
 Removing Configured Cache Engines
 ---------------------------------
@@ -371,7 +388,7 @@ Clearing Cached Data
 
 .. php:staticmethod:: clear($check, $config = 'default')
 
-Destroy all cached values for a cache configuration. In engines like: Apc,
+Destroy all cached values for a cache configuration. In engines like: Apcu,
 Memcached, and Wincache, the cache configuration's prefix is used to remove
 cache entries. Make sure that different cache configurations have different
 prefixes::
@@ -390,7 +407,7 @@ that requires manual eviction of cached data.
 
 .. note::
 
-    Because APC and Wincache use isolated caches for webserver and CLI they
+    Because APCu and Wincache use isolated caches for webserver and CLI they
     have to be cleared separately (CLI cannot clear webserver and vice versa).
 
 Using Cache to Store Counters
@@ -421,7 +438,7 @@ After setting an integer value you can manipulate it using ``increment()`` and
 .. note::
 
     Incrementing and decrementing do not work with FileEngine. You should use
-    APC, Wincache, Redis or Memcached instead.
+    APCu, Wincache, Redis or Memcached instead.
 
 Using Cache to Store Common Query Results
 =========================================
@@ -595,4 +612,4 @@ The required API for a CacheEngine is
 
 .. meta::
     :title lang=en: Caching
-    :keywords lang=en: uniform api,xcache,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apc,memcache,queries,cakephp,elements,servers,memory
+    :keywords lang=en: uniform api,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apcu,apc,memcache,queries,cakephp,elements,servers,memory

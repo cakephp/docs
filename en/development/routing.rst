@@ -25,7 +25,7 @@ this to your **routes.php** file::
 
     use Cake\Routing\Router;
 
-    // Using the scoped route builder.
+    // Using a scoped route builder.
     Router::scope('/', function ($routes) {
         $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
     });
@@ -119,8 +119,6 @@ added your own routes, you can remove the default routes if you don't need them.
 Connecting Routes
 =================
 
-.. php:method:: connect($route, $defaults = [], $options = [])
-
 To keep your code :term:`DRY` you should use 'routing scopes'. Routing
 scopes not only let you keep your code DRY, they also help Router optimize its
 operation. This method defaults to the ``/`` scope. To create a scope and connect
@@ -143,7 +141,7 @@ The basic format for a route definition is::
 
     $routes->connect(
         '/url/template',
-        ['default' => 'defaultValue'],
+        ['targetKey' => 'targetValue'],
         ['option' => 'matchingRegex']
     );
 
@@ -155,25 +153,57 @@ a \* only match the exact template pattern supplied.
 
 Once you've specified a URL, you use the last two parameters of ``connect()`` to
 tell CakePHP what to do with a request once it has been matched. The second
-parameter is an associative array. The keys of the array should be named after
-the route elements the URL template represents. The values in the array are the
-default values for those keys.  Let's look at some basic examples before we
-start using the third parameter of ``connect()``::
+parameter defines the route 'target'. This can be defined either as an array, or
+as a destination string. A few examples of route targets are::
 
+    // Array target to an application controller
     $routes->connect(
-        '/pages/*',
-        ['controller' => 'Pages', 'action' => 'display']
+        '/users/view/*
+        ['controller' => 'Users', 'action' => 'view']
     );
+    // String target to an application controller. requires >=3.6.0
+    $routes->connect('/users/view/*', 'Users::view');
 
-This route is found in the routes.php file distributed with CakePHP.  It matches
-any URL starting with ``/pages/`` and hands it to the ``display()`` action of
-the ``PagesController``. A request to ``/pages/products`` would be mapped to
-``PagesController->display('products')``.
+    // Array target to a prefixed plugin controller
+    $routes->connect(
+        '/admin/cms/articles',
+        ['prefix' => 'admin', 'plugin' => 'Cms', controller' => 'Articles', 'action' => 'index']
+    );
+    // String target to a prefixed plugin controller. requires >=3.6.0
+    $routes->connect('/admin/cms/articles', 'Cms.Admin/Articles::index');
 
-In addition to the greedy star ``/*`` there is also the ``/**`` trailing star
-syntax. Using a trailing double star will capture the remainder of a URL as a
-single passed argument. This is useful when you want to use an argument that
-included a ``/`` in it::
+The first route we connect matches URLs starting with ``/users/view`` and maps
+those requests to the ``UsersController->view()``. The trailing ``/*`` tells the
+router to pass any additional segments as method arguments. For example,
+``/users/view/123`` would map to ``UsersController->view(123)``.
+
+The above example also illustrates string targets. String targets provide
+a compact way to define a route's destination. String targets have the following
+syntax::
+
+    [Plugin].[Prefix]/[Controller]::[action]
+
+Some example string targets are::
+
+    // Application controller
+    'Bookmarks::view'
+
+    // Application controller with prefix
+    Admin/Bookmarks::view
+
+    // Plugin controller
+    Cms.Articles::edit
+
+    // Prefixed plugin controller
+    Vendor/Cms.Management/Admin/Articles::view
+
+.. versionadded:: 3.6.0
+    String based route targets were added.
+
+Earlier we used the greedy star (``/*``) to capture additional path segments,
+there is also the trailing star (``/**``). Using a trailing double star,
+will capture the remainder of a URL as a single passed argument. This is useful
+when you want to use an argument that included a ``/`` in it::
 
     $routes->connect(
         '/pages/**',
@@ -183,23 +213,23 @@ included a ``/`` in it::
 The incoming URL of ``/pages/the-example-/-and-proof`` would result in a single
 passed argument of ``the-example-/-and-proof``.
 
-You can use the second parameter of ``connect()`` to provide any routing
-parameters that are composed of the default values of the route::
+The second parameter of ``connect()`` can define any parameters that
+compose the default route parameters::
 
     $routes->connect(
         '/government',
         ['controller' => 'Pages', 'action' => 'display', 5]
     );
 
-This example shows how you can use the second parameter of ``connect()`` to
-define default parameters. If you built a site that features products for
+This example uses the second parameter of ``connect()`` to
+define default parameters. If you built an application that features products for
 different categories of customers, you might consider creating a route. This
 allows you to link to ``/government`` rather than ``/pages/display/5``.
 
-A common use for routing is to create URL segments that don't match your
-controller or model names. Let's say that instead of accessing our regular URL
-at ``/users/some_action/5``, we'd like to be able to access it by
-``/cooks/some_action/5``. The following route takes care of that::
+A common use for routing is to rename controllers and their actions. Instead of
+accessing our users controller at ``/users/some_action/5``, we'd like to be able
+to access it through ``/cooks/some_action/5``. The following route takes care of
+that::
 
     $routes->connect(
         '/cooks/:action/*', ['controller' => 'Users']
@@ -253,7 +283,7 @@ All of these methods return the route instance allowing you to leverage the
 :ref:`fluent setters <route-fluent-methods>` to further configure your route.
 
 .. versionadded:: 3.5.0
-    The HTTP verb helper methods were added in 3.5.0
+    The HTTP verb helper methods were added.
 
 .. _route-elements:
 
@@ -362,7 +392,7 @@ Next, we specify some default values. Regardless of the controller,
 we want the ``index()`` action to be called.
 
 Finally, we specify some regular expressions that will match years,
-months and days in numerical form. Note that parenthesis (grouping)
+months and days in numerical form. Note that parenthesis (capturing groups)
 are not supported in the regular expressions. You can still specify
 alternates, as above, but not grouped with parenthesis.
 
@@ -370,6 +400,20 @@ Once defined, this route will match ``/articles/2007/02/01``,
 ``/articles/2004/11/16``, handing the requests to
 the ``index()`` actions of their respective controllers, with the date
 parameters in ``$this->request->getParam()``.
+
+As of 3.6.0 you can use ``{var}`` for route elements instead of ``:var``. This
+new parameter style enables route elements to be embedded in non-capturing
+blocks. For example::
+
+    $routes->connect(
+        '/images/resize/{id}/{width}x{height}',
+        ['controller' => 'Images', 'action' => 'view']
+    );
+
+Would be impossible to define using ``:var`` style placeholders.
+
+Reserved Route Elements
+-----------------------
 
 There are several route elements that have special meaning in
 CakePHP, and should not be used unless you want the special meaning
@@ -877,7 +921,7 @@ to do automatic view switching based on content types.
 .. _connecting-scoped-middleware:
 
 Connecting Scoped Middleware
-----------------------------
+============================
 
 While Middleware can be applied to your entire application, applying middleware
 to specific routing scopes offers more flexibility, as you can apply middleware
@@ -952,8 +996,8 @@ can::
 
 .. _resource-routes:
 
-Creating RESTful Routes
-=======================
+RESTful Routing
+===============
 
 Router makes it easy to generate RESTful routes for your controllers. RESTful
 routes are helpful when you are creating API endpoints for your application.  If
@@ -988,17 +1032,16 @@ PATCH       /recipes/123.format   RecipesController::edit(123)
 DELETE      /recipes/123.format   RecipesController::delete(123)
 =========== ===================== ==============================
 
-CakePHP's Router class uses a number of different indicators to
-detect the HTTP method being used. Here they are in order of
-preference:
+Ths HTTP method being used is detected from a few different sources.
+The sources in order of preference are:
 
-#. The \_method POST variable
-#. The X\_HTTP\_METHOD\_OVERRIDE
-#. The REQUEST\_METHOD header
+#. The ``_method`` POST variable
+#. The ``X_HTTP_METHOD_OVERRIDE`` header.
+#. The ``REQUEST_METHOD`` header
 
-The \_method POST variable is helpful in using a browser as a
+The ``_method`` POST variable is helpful in using a browser as a
 REST client (or anything else that can do POST). Just set
-the value of \_method to the name of the HTTP request method you
+the value of ``_method`` to the name of the HTTP request method you
 wish to emulate.
 
 Creating Nested Resource Routes
@@ -1318,6 +1361,56 @@ string URLs as the destination::
 This would redirect ``/articles/*`` to ``http://google.com`` with a
 HTTP status of 302.
 
+.. _entity-routing:
+
+Entity Routing
+==============
+
+Entity routing allows you to use an entity, an array or object implement
+``ArrayAccess`` as the source of routing parameters. This allows you to refactor
+routes more easily, and generate URLs with less code. For example, if you start
+off with a route that looks like::
+
+    $routes->get(
+        '/view/:id',
+        ['controller' => 'Articles', 'action' => 'view'],
+        'articles:view'
+    );
+
+You can generate URLs to this route using::
+
+    // $article is an entity in the local scope.
+    Router::url(['_name' => 'articles:view', 'id' => $article->id]);
+
+Later on, you may want to expose the article slug in the URL for SEO purposes.
+In order to do this you would need to update everywhere you generate a URL to
+the ``articles:view`` route, which could take some time. If we use entity routes
+we pass the entire article entity into URL generation allowing us to skip any
+rework when URLs require more parameters::
+
+    use Cake\Routing\Route\EntityRoute;
+
+    // Create entity routes for the rest of this scope.
+    $routes->setRouteClass(EntityRoute::class);
+
+    // Create the route just like before.
+    $routes->get(
+        '/view/:id',
+        ['controller' => 'Articles', 'action' => 'view'],
+        'articles:view'
+    );
+
+Now we can generate URLs using the ``_entity`` key::
+
+    Router::url(['_name' => 'articles:view', '_entity' => $article]);
+
+This will extract both the ``id`` property and the ``slug`` property out of the
+provided entity.
+
+.. versionadded:: 3.6.0
+    Entity routing was added in 3.6.0
+
+
 .. _custom-route-classes:
 
 Custom Route Classes
@@ -1470,7 +1563,7 @@ arguments::
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        Router::parseNamedParams($this->request);
+        $this->request = Router::parseNamedParams($this->request);
     }
 
 This will populate ``$this->request->getParam('named')`` with any named parameters

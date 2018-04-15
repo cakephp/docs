@@ -48,6 +48,8 @@ CakePHP provides several middleware to handle common tasks in web applications:
   obfuscated data.
 * ``Cake\Http\Middleware\CsrfProtectionMiddleware`` adds CSRF protection to your
   application.
+* ``Cake\Http\Middleware\BodyParserMiddleware`` allows you to decode JSON, XML
+  and other encoded request bodies based on ``Content-Type`` header.
 
 .. _using-middleware:
 
@@ -289,10 +291,32 @@ application::
         }
     }
 
+Routing Middleware
+==================
+
+Routing middleware is responsible for applying your application's routes and
+resolving the plugin, controller, and action a request is going to. It can cache
+the route collection used in your application to increase startup time. To
+enable cached routes, provide the desired :ref:`cache configuration
+<cache-configuration>` as a parameter::
+
+    // In Application.php
+    public function middleware($middlewareQueue)
+    {
+        // ...
+        $middlewareQueue->add(new RoutingMiddleware($this, 'routing'));
+    }
+
+The above would use the ``routing`` cache engine to store the generated route
+collection.
+
+.. versionadded:: 3.6.0
+    Route caching was added in 3.6.0
+
 .. _security-header-middleware:
 
-Adding Security Headers
-=======================
+Security Header Middleware
+==========================
 
 The ``SecurityHeaderMiddleware`` layer makes it easy to apply security related
 headers to your application. Once setup the middleware can apply the following
@@ -412,27 +436,36 @@ endpoints.
 
 The CSRF Token can be obtained via the Cookie ``csrfToken``.
 
-.. _adding-http-stack:
 
-Adding the new HTTP Stack to an Existing Application
-====================================================
+.. _body-parser-middleware:
 
-Using HTTP Middleware in an existing application requires a few changes to your
-application.
+Body Parser Middleware
+======================
 
-#. First update your **webroot/index.php**. Copy the file contents from the `app
-   skeleton <https://github.com/cakephp/app/tree/master/webroot/index.php>`__.
-#. Create an ``Application`` class. See the :ref:`using-middleware` section
-   above for how to do that. Or copy the example in the `app skeleton
-   <https://github.com/cakephp/app/tree/master/src/Application.php>`__.
-#. Create **config/requirements.php** if it doesn't exist and add the contents from the `app skeleton <https://github.com/cakephp/app/blob/master/config/requirements.php>`__.
+If your application accepts JSON, XML or other encoded request bodies, the
+``BodyParserMiddleware`` will let you decode those requests into an array that
+is available via ``$request->getParsedData()`` and ``$request->getData()``. By
+default only ``json`` bodies will be parsed, but XML parsing can be enabled with
+an option. You can also define your own parsers::
 
-Once those three steps are complete, you are ready to start re-implementing any
-application/plugin dispatch filters as HTTP middleware.
+    use Cake\Http\Middleware\BodyParserMiddleware;
 
-If you are running tests you will also need to update your
-**tests/bootstrap.php** by copying the file contents from the `app skeleton
-<https://github.com/cakephp/app/tree/master/tests/bootstrap.php>`_.
+    // only JSON will be parsed.
+    $bodies = new BodyParserMiddleware();
+
+    // Enable XML parsing
+    $bodies = new BodyParserMiddleware(['xml' => true]);
+
+    // Disable JSON parsing
+    $bodies = new BodyParserMiddleware(['json' => false]);
+
+    // Add your own parser matching content-type header values
+    // to the callable that can parse them.
+    $bodies = new BodyParserMiddleware();
+    $bodies->addParser(['text/csv'], function ($body, $request) {
+        // Use a CSV parsing library.
+        return Csv::parse($body);
+    });
 
 .. meta::
     :title lang=en: Http Middleware

@@ -157,8 +157,8 @@ Commandes
 Exemple de rendu pour l'autocomplétion des commandes::
 
     $ bin/cake <tab>
-    bake        i18n        orm_cache   routes
-    console     migrations  plugin      server
+    bake        i18n        schema_cache   routes
+    console     migrations  plugin         server
 
 Sous-commandes
 --------------

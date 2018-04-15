@@ -17,7 +17,8 @@ handling for your application. The following options are supported:
 
 * ``errorLevel`` - int - The level of errors you are interested in capturing.
   Use the built-in PHP error constants, and bitmasks to select the level of
-  error you are interested in.
+  error you are interested in. You can set this to ``E_ALL ^ E_USER_DEPRECATED``
+  to disable deprecation warnings.
 * ``trace`` - bool - Include stack traces for errors in log files. Stack
   traces will be included in the log after each error. This is helpful for
   finding where/when errors are being raised.
@@ -316,7 +317,7 @@ dealt with by ErrorHandler by setting the ``log`` option to ``true`` in your
     no effect. Unless you reference it inside your implementation.
 
 
-.. php:namespace:: Cake\Network\Exception
+.. php:namespace:: Cake\Http\Exception
 
 .. _built-in-exceptions:
 
@@ -398,7 +399,8 @@ You can throw these exceptions from your controllers to indicate failure states,
 or HTTP errors. An example use of the HTTP exceptions could be rendering 404
 pages for items that have not been found::
 
-    use Cake\Network\Exception\NotFoundException;
+    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
+    use Cake\Http\Exception\NotFoundException;
 
     public function view($id = null)
     {
