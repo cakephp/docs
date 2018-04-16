@@ -95,7 +95,7 @@ a callback function. Your function must return the count value to be stored::
 
     $this->addBehavior('CounterCache', [
         'Articles' => [
-            'rating_avg' => function ($event, $entity, $table) {
+            'rating_avg' => function ($event, $entity, $table, $original) {
                 return 4.5;
             }
         ]
@@ -105,7 +105,10 @@ Your function can return ``false`` to skip updating the counter column, or
 a ``Query`` object that produced the count value. If you return a ``Query``
 object, your query will be used as a subquery in the update statement.  The
 ``$table`` parameter refers to the table object holding the behavior (not the
-target relation) for convenience.
+target relation) for convenience. The callback is invoked at lease once were
+``$original`` is ``true``. If the entity-update changes the association the
+callback is invoked a *second* time with ``false``, the return value then
+updates the counter of the *previously* associated item.
 
 .. note::
 
