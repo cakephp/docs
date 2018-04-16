@@ -18,3 +18,5 @@ Breaking Changes
 * The Session cookie name is no longer set to ``CAKEPHP`` by default. Instead
   the default cookie name defined in your ``php.ini`` file is used. You can use
   the ``Session.cookie`` configuration option to set the cookie name.
+* The default value of ``ServerRequest::getParam()`` when a parameter is missing
+  is now ``null`` and not ``false``.
