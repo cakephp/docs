@@ -202,8 +202,6 @@ require secure SSL requests::
         {
             if ($exception instanceof SecurityException && $exception->getType() === 'secure') {
                 return $this->redirect('https://' . env('SERVER_NAME') . $this->request->getRequestTarget());
-            } else {
-                throw $exception;
             }
         }
     }
