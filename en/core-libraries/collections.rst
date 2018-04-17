@@ -923,7 +923,7 @@ collection containing the values from both sources::
         return strpos($tweet, 'cakefest');
     });
 
-.. php:method::appendItem($value, $key)
+.. php:method:: appendItem($value, $key)
 
 Allows you to append an item with an optional key to the collection. If you
 specify a key that already exists in the collection, the value will not be
@@ -946,7 +946,7 @@ both sources::
 .. versionadded:: 3.6.0
     prepend() was added.
 
-.. php:method::prependItem($value, $key)
+.. php:method:: prependItem($value, $key)
 
 Allows you to prepend an item with an optional key to the collection. If you
 specify a key that already exists in the collection, the value will not be
