@@ -201,7 +201,7 @@ require secure SSL requests::
         public function forceSSL($error = '', SecurityException $exception = null)
         {
             if ($exception instanceof SecurityException && $exception->getType() === 'secure') {
-                return $this->redirect('https://' . env('SERVER_NAME') . $this->request->getRequestTarget());
+                return $this->redirect('https://' . env('SERVER_NAME') . Router::url($this->request->getRequestTarget()));
             }
             
             throw $exception;
