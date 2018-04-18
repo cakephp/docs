@@ -1,50 +1,50 @@
 Sistema de Eventos
 ##################
 
-Criar aplicações com facilidade de manutenção é ambos. uma ciência e uma arte
-É de conhecimento geral que a chave para ter um código de qqualidade é fazer
+Criar aplicações com facilidade de manutenção uma ciência e uma arte ao mesmo tempo.
+É de conhecimento geral que a chave para ter um código de qualidade é fazer
 objetos desacoplados e coesos ao mesmo tempo. Coesão significa que todos os
-metodos e propriedades de uma classe são fortemente relacionados a classe em sí
-e não está tentando fazer o trabalho que deveriam ser feitos por outros objetos,
+metodos e propriedades de uma classe são fortemente relacionados à classe em sí
+e não estão tentando fazer o trabalho que deveria ser feito por outros objetos,
 equanto o desacoplamento é a medida de quão "estranha" uma classe é para objetos
-externos. e quanto dessa classes depende desses objetos.
+externos e quanto essa classe depende desses objetos.
 
 Existem alguns casos onde você precisa se comunicar com outras partes da
-aplicação, sem existir dependencias diretamente no código ("hardcoded"), 
+aplicação, sem existir dependências diretamente no código ("hardcoded"), 
 diminuindo, assim, a coesão e aumentando o acoplamento. Usar o padrão Observer ,
 que permite que objetos sejam notificados por outros objetos e anonymous listeners
 sobre mudanças é um padrão que ajuda a atingir esse objetivo.
 
 Listeners no observer pattern podem se inscrever para eventos e escolher se deve
-agir, caso seja relevante, Se você já usou JavaScript tem uma boa chance de que 
-você já esteja familiar com programação orientada a eventos
+agir, caso seja relevante. Se você já usou JavaScript tem uma boa chance de que 
+você já esteja familiarizado com programação orientada a eventos.
 
 O CakePHP emula vários desses aspectos de quando objetos são engatilhados e
-gerenciados em bibliotecas populares de JavaScript, como Jquery. Na implementação
+gerenciados em bibliotecas populares de JavaScript, como jQuery. Na implementação
 do CakePHP um evento é disparado para todos os listeners (ouvintes). O objeto event 
 tem as informações do evento e a habilidade de parar a propagação de um evento em 
 qualquer ponto do evento. Listeners podem se registrar ou delegar essa tarefa 
-para outros objetos e tem a chance de alterar o estado  e do evento em si pelo 
-resto dos callbacks
+para outros objetos e tem a chance de alterar o estado do evento em si pelo 
+resto dos callbacks.
 
-O subsistema de eventos é o coração dos callbacks do Model, Behavior, Controller, 
-View e Helper. Se você já usou um deles, você já é de alguma forma familiar com os
-eventos no CakePHP
+O subsistema de eventos é o coração dos callbacks de Model, Behavior, Controller, 
+View e Helper. Se você já usou um deles, você já está de alguma forma familiarizado com os
+eventos no CakePHP.
 
 Exemplo de uso dos eventos
 ==========================
 
-Vamos assumir que você está construindo um plugin de carrinho de complas, e gostaria
+Vamos assumir que você está construindo um plugin de carrinho de complas e gostaria
 de focar somente na lógica de lidar com o pedido. Você não quer incluir nenhuma 
-lógica de envios, notificar os usuários ou incrementar/remover um item do estoque.
+lógica de envios, notificação dos os usuários ou incrementar/remover um item do estoque.
 Mas essas são tarefas importantes para pessoas que vão usar o seu plugin. Se você não
 estivesse usando eventos, você poderia tentar implementar isso incluindo Bahaviors no
-seu Model, ou adicionando Components no seu Controller. Fazer isso é um desavio na 
+seu Model, ou adicionando Components no seu Controller. Fazer isso é um desvio na 
 maioria das vezes, já que você teria que adicionar código para carregar externamente
 esses Behaviors, ou adicionar hooks ao Controller do seu plugin.
 
 Você pode usar eventos para permitir que você separe as responsabilidades do seu 
-código e permitir que outras responsabilidades se inscrevem nos eventos so seu plugin.
+código e permitir que outras responsabilidades se inscrevam nos eventos so seu plugin.
 Por exemplo, no plugin de carrinho você tem um Model Orders que cria os pedidos, 
 você gostaria de notificar o resto da aplicação que um pedido foi criado, para manter 
 o Model Orders limpo você poderia usar eventos::
@@ -74,7 +74,7 @@ o Model Orders limpo você poderia usar eventos::
 .. deprecated:: 3.5.0
     Use ``getEventManager()``.
 
-O exemplo acima permite você notificar outras partes da aplicação que um pedido foi 
+O exemplo acima permite você notificar outras partes da aplicação em que um pedido foi feito
 e você pode, então, enviar emails, notificações, atualizar o estoque, fazer o log das
 estatísticas relevantes e outras tarefas em um objeto separado que foca nessas 
 responsabilidades.
