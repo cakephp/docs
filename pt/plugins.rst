@@ -1,8 +1,9 @@
 Plugins
 #######
 
-O CakePHP permite que você configure uma combinação de controllers, models,e views, plugin de aplicativo empacotado que outros podem usar em suas aplicações CakePHP.
-Se você criou um módulo de gerenciamento de usuários, blog ou serviços da Web em uma das suas aplicações, por que não torna-lo um plugin CakePHP? Desta forma, você pode reutilizá-lo em seus outros aplicativos e compartilhar com a comunidade!
+O CakePHP permite que você configure uma combinação de controllers, models e views, que são os plugins de aplicativo empacotado que outros podem usar em suas aplicações CakePHP.
+
+Se você criou um módulo de gerenciamento de usuários, blog ou serviços da Web em uma das suas aplicações, por que não torná-lo um plugin CakePHP? Desta forma, você pode reutilizá-lo em seus outros aplicativos e compartilhar com a comunidade!
 
 Um plugin do CakePHP é, em última instância, separado do próprio aplicativo host e, geralmente, oferece algumas funcionalidades bem definidas que podem ser embaladas de maneira ordenada e reutilizadas com pouco esforço em outras aplicações. O aplicativo e o plugin operam em seus respectivos espaços, mas compartilham propriedades específicas da aplicação (parâmetros de conectividade de banco de dados) que são definidos e compartilhados através da configuração do aplicativo.
 
@@ -13,18 +14,21 @@ Instalando um Plugin com Composer
 =================================
 
 Muitos plugins estão disponíveis no `Packagist <http://packagist.org>` _
-E podem ser instalado com ``Composer``. Para instalar o DebugKit, você
+E podem ser instalados com o ``Composer``. Para instalar o DebugKit, você
 deve fazer assim o assim::
 
     php composer.phar require cakephp/debug_kit
 
-Isso instalaria a versão mais recente do DebugKit e atualizaria seus arquivos **composer.json**, **composer.lock**, atualização **vendor/cakephp-plugins.php** e atualize seu autoloader.
+Ou se o composer tiver sido instalado globalmente assim:
+    composer require cakephp/debug_kit
+
+Isso instalaria a versão mais recente do DebugKit e atualizaria seus arquivos **composer.json**, **composer.lock**, atualiza **vendor/cakephp-plugins.php** e atualize seu autoloader.
 
 Se o plugin que deseja instalar não estiver disponível em
-Packagist.org, você pode clonar ou copiar o código do plugin para seu diretório **plugins**.
+Packagist.org, você pode clonar ou copiar o código do plugin para seu diretório **plugins**, no raiz do aplicativo.
 Supondo que você deseja instalar um plugin chamado 'ContactManager', você
-Deve ter uma pasta em **plugins** chamado 'ContactManager'. Neste diretório
-São o src do plugin, testes e outros diretórios.
+deve ter uma pasta em **plugins** chamado 'ContactManager'. Neste diretório
+existe o src, o plugin, testes e outros diretórios.
 
 .. index:: vendor/cakephp-plugins.php
 
@@ -34,10 +38,10 @@ Plugin Map File
 Ao instalar plugins através do Composer, você pode notar que
 **vendor/cakephp-plugins.php** é criado. Este arquivo de configuração contém
 um mapa de nomes de plugins e seus caminhos no sistema de arquivos. Isso torna possível
-para que os plugins sejam instalados no diretório padrão do vendor que está fora
+que os plugins sejam instalados no diretório padrão do vendor que está fora
 dos caminhos de pesquisa normais. A classe ``Plugin`` usará este arquivo para localizar
 plugins quando são carregados com ``load ()`` ou ``loadAll ()``. Você geralmente
-não precisará editar este arquivo à mão, como Composer e ``plugin-installer``
+não precisará editar este arquivo à mão, com Composer e ``plugin-installer``
 O pacote o gerenciará para você.
 
 Carregando um Plugin
