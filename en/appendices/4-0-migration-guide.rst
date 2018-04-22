@@ -11,9 +11,17 @@ To upgrade to 4.0.x run the following composer command:
 
     php composer.phar require --update-with-dependencies "cakephp/cakephp:4.0.*"
 
+Deprecated Features Removed
+===========================
+
+All methods, properties and functionality that was emitting deprecation warnings
+as of 3.6 have been removed.
 
 Breaking Changes
 ================
+
+In addition to the removal of deprecated features there have been breaking
+changes made:
 
 * The Session cookie name is no longer set to ``CAKEPHP`` by default. Instead
   the default cookie name defined in your ``php.ini`` file is used. You can use
