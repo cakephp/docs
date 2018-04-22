@@ -365,7 +365,7 @@ object from the store::
 
     // Remove a key
     Cache::delete('my_key');
-
+    
 Deleting Multiple Keys at Once
 ------------------------------
 
@@ -382,6 +382,16 @@ save multiple network connections when using Memcached::
     ]);
     // $result will contain
     ['article-first-post' => true, 'article-first-post-comments' => true]
+    
+Deleting Group From Cache
+------------------------------
+
+.. php:staticmethod:: clearGroup($group, $config = 'default')
+
+Delete all keys from the cache belonging to the same group.
+
+    // Remove a key
+    Cache::clearGroup('group_key');        
 
 Clearing Cached Data
 ====================
