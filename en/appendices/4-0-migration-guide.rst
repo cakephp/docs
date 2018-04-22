@@ -20,3 +20,5 @@ Breaking Changes
   the ``Session.cookie`` configuration option to set the cookie name.
 * The default value of ``ServerRequest::getParam()`` when a parameter is missing
   is now ``null`` and not ``false``.
+* Type mapping classes in ``Cake\Database\TypeInterface`` no longer inherit from
+  ``Type``, and leverage ``BatchCastingInterface`` features now.
