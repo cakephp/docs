@@ -624,18 +624,17 @@ Contacts controller you could make the following file::
 Creating this file would allow you to override
 **plugins/ContactManager/src/Template/Contacts/index.ctp**.
 
-If your plugin is in a composer dependency (i.e. 'TheVendor/ThePlugin'), the
-path to the 'index' view of the Custom controller will be::
+If your plugin is in a composer dependency (i.e. 'Company/ContactManager'), the
+path to the 'index' view of the Contacts controller will be::
 
-    src/Template/Plugin/TheVendor/ThePlugin/Custom/index.ctp
+    src/Template/Plugin/Company/ContactManager/Contacts/index.ctp
 
 Creating this file would allow you to override
-**vendor/thevendor/theplugin/src/Template/Custom/index.ctp**.
+**vendor/Company/ContactManager/src/Template/Contacts/index.ctp**.
 
-If the plugin implements a routing prefix, you must include the routing prefix in your
-application template overrides.
-For example, if the 'ContactManager' plugin implemented an 'admin' prefix the overridng path
-would be::
+If the plugin implements a routing prefix, you must include the routing prefix
+in your application template overrides. For example, if the 'ContactManager'
+plugin implemented an 'admin' prefix the overridng path would be::
 
     src/Template/Plugin/ContactManager/Admin/ContactManager/index.ctp
 
