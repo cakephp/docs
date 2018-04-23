@@ -636,7 +636,7 @@ If the plugin implements a routing prefix, you must include the routing prefix
 in your application template overrides. For example, if the 'ContactManager'
 plugin implemented an 'admin' prefix the overridng path would be::
 
-    src/Template/Plugin/ContactManager/Admin/ContactManager/index.ctp
+    src/Template/Plugin/Company/ContactManager/Admin/Contact/index.ctp
 
 .. _plugin-assets:
 
