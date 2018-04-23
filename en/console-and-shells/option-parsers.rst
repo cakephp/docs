@@ -267,7 +267,7 @@ see the generated help content:
     bin/cake bake -h
 
 Would both generate the help for bake. You can also get help for nested
-commands::
+commands:
 
 .. code-block:: bash
 
@@ -429,4 +429,4 @@ Adding subcommands can be done as part of a fluent method chain.
     ``snake_case`` in addition to the camelBacked form.
 
 .. deprecated:: 3.6.0
-    Subcommands are deprecated. Instead use :ref:`nested-commands`.
+    Subcommands are deprecated. Instead use :ref:`nested commands <renaming-commands>`.

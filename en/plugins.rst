@@ -58,27 +58,30 @@ information:
 
 .. code-block:: json
 
-    "autoload": {
-        "psr-4": {
-            "MyPlugin\\": "plugins/MyPlugin/src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "MyPlugin\\Test\\": "plugins/MyPlugin/tests/"
+    {
+        "autoload": {
+            "psr-4": {
+                "MyPlugin\\": "plugins/MyPlugin/src/"
+            }
+        },
+        "autoload-dev": {
+            "psr-4": {
+                "MyPlugin\\Test\\": "plugins/MyPlugin/tests/"
+            }
         }
     }
-    ""
 
 If you are using vendor namespaces for your plugins, the namespace to path mapping
 should resemble the following:
 
 .. code-block:: json
 
-    "autoload": {
-        "psr-4": {
-            "AcmeCorp\\Users\\": "plugins/AcmeCorp/Users/src/",
-            "AcmeCorp\\Users\\Test\\": "plugins/AcmeCorp/Users/tests/"
+    {
+        "autoload": {
+            "psr-4": {
+                "AcmeCorp\\Users\\": "plugins/AcmeCorp/Users/src/",
+                "AcmeCorp\\Users\\Test\\": "plugins/AcmeCorp/Users/tests/"
+            }
         }
     }
 
@@ -718,8 +721,7 @@ that you prefix the plugin name before the name of the component. For example::
 
 The same technique applies to Helpers and Behaviors.
 
-
-.. plugin-commands::
+.. _plugin-commands:
 
 Commands
 ========

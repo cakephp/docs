@@ -144,7 +144,7 @@ your plugins.
 .. versionadded:: 3.5.0
     The ``console`` hook was added.
 
-.. renaming-commands::
+.. _renaming-commands:
 .. index:: nested commands, subcommands
 
 Renaming Commands
@@ -152,7 +152,7 @@ Renaming Commands
 
 There are cases where you will want to rename commands, to create nested
 commands or subcommands.  While the default auto-discovery of commands will not
-do this, you can register your commands to create any desired naming::
+do this, you can register your commands to create any desired naming.
 
 You can customize the command names by defining each command in your plugin::
 

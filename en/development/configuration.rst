@@ -384,7 +384,7 @@ exist, a :php:class:`RuntimeException` will be thrown::
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 
 .. versionadded:: 3.6.0
-``Configure::readOrFail()`` was added in 3.6.0
+    ``Configure::readOrFail()`` was added in 3.6.0
 
 Reading and writing configuration files
 =======================================
