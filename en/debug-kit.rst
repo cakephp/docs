@@ -37,6 +37,8 @@ Configuration
 
 * ``DebugKit.includeSchemaReflection`` - Set to true to enable logging of schema
   reflection queries. Disabled by default.
+* ``DebugKit.forceEnable`` - Force DebugKit to display. This can be used to make
+  sure DebugKit displays on hosts it otherwise determines unsafe.
 
 Database Configuration
 ----------------------
