@@ -109,7 +109,7 @@ add a ``yell`` option to our ``HelloCommand``::
         $io->out("Hello {$name}.");
     }
 
-See the :doc:`/console-and-shells/option-parser` section for more information.
+See the :doc:`/console-and-shells/option-parsers` section for more information.
 
 Creating Output
 ===============
