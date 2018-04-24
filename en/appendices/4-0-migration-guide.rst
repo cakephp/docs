@@ -30,3 +30,5 @@ changes made:
   is now ``null`` and not ``false``.
 * Type mapping classes in ``Cake\Database\TypeInterface`` no longer inherit from
   ``Type``, and leverage ``BatchCastingInterface`` features now.
+* ``Cake\Database\Type::map()`` only functions as a setter now. You must use
+  ``Type::getMap()`` to inspect type instances.
