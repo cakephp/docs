@@ -35,7 +35,7 @@ a simple contact form would look like::
                 ->addField('body', ['type' => 'text']);
         }
 
-        public function validationDefault(Validator $validator)
+        protected function _buildValidator(Validator $validator)
         {
             $validator->add('name', 'length', [
                     'rule' => ['minLength', 10],
