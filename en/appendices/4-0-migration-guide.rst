@@ -32,3 +32,5 @@ changes made:
   ``Type``, and leverage ``BatchCastingInterface`` features now.
 * ``Cake\Database\Type::map()`` only functions as a setter now. You must use
   ``Type::getMap()`` to inspect type instances.
+* ``Cake\Http\Client\Response::isOk()`` now returns ``true`` for all 2xx and 3xx
+  response codes.
