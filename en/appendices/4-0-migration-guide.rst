@@ -34,3 +34,13 @@ changes made:
   ``Type::getMap()`` to inspect type instances.
 * ``Cake\Http\Client\Response::isOk()`` now returns ``true`` for all 2xx and 3xx
   response codes.
+
+
+New Features
+============
+
+Http
+----
+
+* ``Cake\Http\Client\Response::isSuccess()`` was added. This method returns true
+  if the response status code is 2xx.
