@@ -934,7 +934,7 @@ Changer la stratégie de façon dynamique de cette façon va seulement l'appliqu
 pour une requête spécifique. Si vous souhaitez rendre le changement de stratégie
 permanent, vous pouvez faire::
 
-    $articles->FirstComment->setStrategy('seelct');
+    $articles->FirstComment->setStrategy('select');
     // Avant 3.4.0
     $articles->FirstComment->strategy('select');
 
