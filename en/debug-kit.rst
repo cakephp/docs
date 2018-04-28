@@ -162,7 +162,7 @@ mailer methods::
     }
 
 MailPreview classes should live in the ``Mailer\Preview`` namespace of your
-application or plugin, and use the ``Preview``
+application or plugin, and use the ``Preview`` class suffix.
 
 Developing Your Own Panels
 ==========================
