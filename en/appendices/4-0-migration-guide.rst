@@ -34,6 +34,8 @@ changes made:
   ``Type::getMap()`` to inspect type instances.
 * ``Cake\Http\Client\Response::isOk()`` now returns ``true`` for all 2xx and 3xx
   response codes.
+* Date, Time, Timestamp, and Datetime column times now return immutable time
+  objects by default now.
 
 
 New Features

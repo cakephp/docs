@@ -3,12 +3,12 @@ Date & Time
 
 .. php:namespace:: Cake\I18n
 
-.. php:class:: Time
+.. php:class:: FrozenTime
 
 If you need :php:class:`TimeHelper` functionalities outside of a ``View``,
-use the ``Time`` class::
+use the ``FrozenTime`` class::
 
-    use Cake\I18n\Time;
+    use Cake\I18n\FrozenTime;
 
     class UsersController extends AppController
     {
@@ -21,7 +21,7 @@ use the ``Time`` class::
 
         public function afterLogin()
         {
-            $time = new Time($this->Auth->user('date_of_birth'));
+            $time = new FrozenTime($this->Auth->user('date_of_birth'));
             if ($time->isToday()) {
                 // Greet user with a happy birthday message
                 $this->Flash->success(__('Happy birthday to you...'));
@@ -30,8 +30,8 @@ use the ``Time`` class::
     }
 
 Under the hood, CakePHP uses `Chronos <https://github.com/cakephp/chronos>`_
-to power its ``Time`` utility. Anything you can do with ``Chronos`` and
-``DateTime``, you can do with ``Time`` and ``Date``.
+to power its ``FrozenTime`` utility. Anything you can do with ``Chronos`` and
+``DateTime``, you can do with ``FrozenTime`` and ``FrozenDate``.
 
 .. note::
     Prior to 3.2.0 CakePHP used `Carbon
@@ -45,79 +45,74 @@ For more details on Chronos please see `the API documentation
 Creating Time Instances
 =======================
 
-There are a few ways to create ``Time`` instances::
+There are a few ways to create ``FrozenTime`` instances::
 
-    use Cake\I18n\Time;
+    use Cake\I18n\FrozenTime;
 
     // Create from a string datetime.
-    $time = Time::createFromFormat(
+    $time = FrozenTime::createFromFormat(
         'Y-m-d H:i:s',
         $datetime,
         'America/New_York'
     );
 
     // Create from a timestamp
-    $time = Time::createFromTimestamp($ts);
+    $time = FrozenTime::createFromTimestamp($ts);
 
     // Get the current time.
-    $time = Time::now();
+    $time = FrozenTime::now();
 
     // Or just use 'new'
-    $time = new Time('2014-01-10 11:11', 'America/New_York');
+    $time = new FrozenTime('2014-01-10 11:11', 'America/New_York');
 
-    $time = new Time('2 hours ago');
+    $time = new FrozenTime('2 hours ago');
 
-The ``Time`` class constructor can take any parameter that the internal ``DateTime``
+The ``FrozenTime`` class constructor can take any parameter that the internal ``DateTimeImmutable``
 PHP class can. When passing a number or numeric string, it will be interpreted
 as a UNIX timestamp.
 
 In test cases you can mock out ``now()`` using ``setTestNow()``::
 
     // Fixate time.
-    $now = new Time('2014-04-12 12:22:30');
-    Time::setTestNow($now);
+    $now = new FrozenTime('2014-04-12 12:22:30');
+    FrozenTime::setTestNow($now);
 
     // Returns '2014-04-12 12:22:30'
-    $now = Time::now();
+    $now = FrozenTime::now();
 
     // Returns '2014-04-12 12:22:30'
-    $now = Time::parse('now');
+    $now = FrozenTime::parse('now');
 
 Manipulation
 ============
 
-Once created, you can manipulate ``Time`` instances using setter methods::
+Once created, you can manipulate ``FrozenTime`` instances using setter methods::
 
-    $now = Time::now();
+    $now = FrozenTime::now();
     $now->year(2013)
         ->month(10)
         ->day(31);
 
 You can also use the methods provided by PHP's built-in ``DateTime`` class::
 
-    $now->setDate(2013, 10, 31);
+    $now = $now->setDate(2013, 10, 31);
 
 Dates can be modified through subtraction and addition of their components::
 
-    $now = Time::now();
-    $now->subDays(5);
-    $now->addMonth(1);
+    $now = FrozenTime::now();
+    $now = $now->subDays(5)
+        ->addMonth(1);
 
     // Using strtotime strings.
-    $now->modify('+5 days');
+    $now = $now->modify('+5 days');
 
 You can get the internal components of a date by accessing its properties::
 
-    $now = Time::now();
+    $now = FrozenTime::now();
     echo $now->year; // 2014
     echo $now->month; // 5
     echo $now->day; // 10
     echo $now->timezone; // America/New_York
-
-It is also allowed to directly assign those properties to modify the date::
-
-    $time->year = 2015;
-    $time->timezone = 'Europe/Paris';
 
 Formatting
 ==========
@@ -382,7 +377,7 @@ Immutable Dates and Times
 .. php:class:: FrozenTime
 .. php:class:: FrozenDate
 
-CakePHP offers immutable date and time classes that implement the same interface
+CakePHP uses immutable date and time classes that implement the same interface
 as their mutable siblings. Immutable objects are useful when you want to prevent
 accidental changes to data, or when you want to avoid order based dependency
 issues. Take the following code::
@@ -391,7 +386,7 @@ issues. Take the following code::
     $time = new Time('2015-06-15 08:23:45');
     $time->modify('+2 hours');
 
-    // This method also modifies the $time instance
+    // This method also modifies the $time instancegg/
     $this->someOtherFunction($time);
 
     // Output here is unknown.
