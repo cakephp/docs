@@ -39,12 +39,16 @@ use libraries from outside of CakePHP.
 Request Parameters
 ------------------
 
-The request exposes the routing parameters through the ``getParam()`` method::
+The request exposes routing parameters through the ``getParam()`` method::
 
     $controllerName = $this->request->getParam('controller');
 
     // Prior to 3.4.0
     $controllerName = $this->request->param('controller');
+
+As `$this->request->getParams()` does not exist, you may receive all params, at once, like so::
+
+    $params = $request->getAttribute('params');
 
 All :ref:`route-elements` are accessed through this interface.
 
