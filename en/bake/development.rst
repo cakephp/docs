@@ -260,7 +260,7 @@ add the following content::
     namespace {{ namespace }}\Foo;
 
     /**
-     * {{ $name }} foo
+     * {{ name }} foo
      */
     class {{ name }}Foo
     {
