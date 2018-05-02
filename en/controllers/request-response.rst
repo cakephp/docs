@@ -48,7 +48,7 @@ The request exposes routing parameters through the ``getParam()`` method::
 
 As `$this->request->getParams()` does not exist, you may receive all params, at once, like so::
 
-    $params = $request->getAttribute('params');
+    $params = $this->request->getAttribute('params');
 
 All :ref:`route-elements` are accessed through this interface.
 
