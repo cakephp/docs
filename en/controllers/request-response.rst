@@ -46,7 +46,7 @@ The request exposes routing parameters through the ``getParam()`` method::
     // Prior to 3.4.0
     $controllerName = $this->request->param('controller');
 
-As `$this->request->getParams()` does not exist, you may receive all params, at once, like so::
+To get all routing parameters as an array use ``getAttribute()``::
 
     $params = $this->request->getAttribute('params');
 
