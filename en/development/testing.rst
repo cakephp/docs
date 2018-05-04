@@ -312,7 +312,7 @@ This will put the coverage results in your application's webroot directory. You
 should be able to view the results by going to
 ``http://localhost/your_app/coverage``.
 
-If you are using PHP 5.6.0 or greater, you can use ``phpdbg`` 
+If you are using PHP 5.6.0 or greater, you can use ``phpdbg``
 to generate coverage instead of xdebug. ``phpdbg`` is generally faster at
 generating coverage:
 
@@ -1607,6 +1607,11 @@ global events does not require passing the event manager::
     Event tracking, ``assertEventFired()``, and ``assertEventFiredWith`` were
     added.
 
+Testing Email
+=============
+
+See :ref:`email-testing` for information on testing email.
+
 Creating Test Suites
 ====================
 
@@ -1662,7 +1667,7 @@ also need to prefix your plugin fixtures with ``plugin.blog.blog_posts``::
 
 If you want to use plugin fixtures in the app tests you can
 reference them using ``plugin.pluginName.fixtureName`` syntax in the
-``$fixtures`` array. Additionally if you use vendor plugin name or fixture 
+``$fixtures`` array. Additionally if you use vendor plugin name or fixture
 directories you can use the following: ``plugin.vendorName/pluginName.folderName/fixtureName``.
 
 Before you can use fixtures you should double check that your ``phpunit.xml``

@@ -17,6 +17,13 @@ relevant upgrade guides.
 
     4-0-migration-guide
 
+3.7 Migration Guide
+===================
+
+.. toctree::
+    :maxdepth: 1
+
+    3-7-migration-guide
 
 3.6 Migration Guide
 ===================
