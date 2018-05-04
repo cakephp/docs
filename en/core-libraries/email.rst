@@ -584,6 +584,96 @@ The mailer object could now be registered as an event listener, and the
 event would be fired. For information on how to register event listener objects,
 please refer to the :ref:`registering-event-listeners` documentation.
 
+.. _email-testing:
+
+Testing Email
+=============
+
+To test email, add ``Cake\TestSuite\EmailTrait`` to your test case.
+The ``EmailTrait`` provides your test case with a collection of assertions
+that you can perform on any emails sent by the application.
+
+First, replace all of your application's email transports with the
+``Cake\TestSuite\TestEmailTransport``. This transport intercepts emails instead
+of sending them, and allows you to assert against them.
+
+In **tests/bootstrap.php**::
+
+    use Cake\TestSuite\TestEmailTransport;
+
+    // replaces existing transports with the TestEmailTransport for email assertions
+    TestEmailTransport::replaceAllTransports();
+
+Next, add the trait to your test case and perform a bit of cleanup in ``tearDown``::
+
+    namespace App\Test\TestCase;
+
+    use Cake\TestSuite\EmailTrait;
+
+    class MyTestCase extends TestCase
+    {
+        use EmailTrait;
+
+        public function tearDown()
+        {
+            // other cleanup
+            parent::tearDown();
+            // clean up previously sent emails for the next test
+            TestEmailTransport::clearEmails();
+        }
+    }
+
+.. versionadded:: 3.7.0
+
+    ``Cake\TestSuite\EmailTrait`` was added.
+
+Assertion methods
+-----------------
+
+The ``Cake\TestSuite\EmailTrait`` trait provides the following assertions::
+
+    // Asserts an expected number of emails were sent
+    $this->assertMailCount($count);
+
+    // Asserts that no emails were sent
+    $this->assertNoMailSent();
+
+    // Asserts an email was sent to an address
+    $this->assertMailSentTo($address);
+
+    // Asserts an email was sent from an address
+    $this->assertMailSentFrom($address);
+
+    // Asserts an email contains expected contents
+    $this->assertMailContains($contents);
+
+    // Asserts an email contains expected html contents
+    $this->assertMailContainsHtml($contents);
+
+    // Asserts an email contains expected text contents
+    $this->assertMailContainsText($contents);
+
+    // Asserts an email contains the expected value within an Email getter (e.g., "subject")
+    $this->assertMailSentWith($expected, $parameter);
+
+    // Asserts an email at a specific index was sent to an address
+    $this->assertMailSentToAt($at, $address);
+
+    // Asserts an email at a specific index was sent from an address
+    $this->assertMailSentFromAt($at, $address);
+
+    // Asserts an email at a specific index contains expected contents
+    $this->assertMailContainsAt($at, $contents);
+
+    // Asserts an email at a specific index contains expected html contents
+    $this->assertMailContainsHtmlAt($at, $contents);
+
+    // Asserts an email at a specific index contains expected text contents
+    $this->assertMailContainsTextAt($at, $contents);
+
+    // Asserts an email at a specific index contains the expected value within an Email getter (e.g., "subject")
+    $this->assertMailSentWithAt($at, $expected, $parameter);
+
 .. meta::
     :title lang=en: Email
     :keywords lang=en: sending mail,email sender,envelope sender,php class,database configuration,sending emails,meth,shells,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models
