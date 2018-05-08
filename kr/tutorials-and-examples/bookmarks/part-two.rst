@@ -1,7 +1,7 @@
 북마크 튜토리얼 파트 2
 ##################################
 
-:doc:`チュートリアルの前編 </tutorials-and-examples/bookmarks/intro>` 을 끝내면,
+:doc:`튜토리얼 전편 </tutorials-and-examples/bookmarks/intro>` 을 끝내면,
 아주 기본적인 북마크 응용 프로그램이 만들어집니다. 이번에는 인증 기능과
 각 사용자가 자신의 북마크 보기 / 편집 할 수 있도록 제한하는 기능을 추가해 보겠습니다.
 
@@ -137,7 +137,7 @@ Controller에 존재하지않거나 Login전에 URL에 액세스하면 **/users/
 'authorization'어댑터를 사용하여이 작업을 수행합니다.
 요구 사항은 매우 간단하기 때문에 ``BookmarksController`` 에 간단한 코드를 작성할 수있습니다.
 하지만 작성하기 전에 AuthComponent에 애플리케이션이 동작을 인증하는 방법을 알려줘야합니다.
-``AppController`` 에서 다음을 추가합니다 :
+``AppController`` 에서 다음을 추가합니다. ::
 
     public function isAuthorized($user)
     {
@@ -177,7 +177,7 @@ Controller에 존재하지않거나 Login전에 URL에 액세스하면 **/users/
 
 기본적으로 액세스 거부를 설정하고 점진적으로 액세스 권한을 부여합니다.
 먼저 북마크에 대한 승인 로직을 추가합니다.
-``BookmarksController`` 에 다음을 추가합니다.
+``BookmarksController`` 에 다음을 추가합니다. ::
 
     public function isAuthorized($user)
     {
@@ -219,7 +219,7 @@ Controller에 존재하지않거나 Login전에 URL에 액세스하면 **/users/
 #. 목록 페이지에는 다른 사용자의 책갈피가 표시됩니다.
 
 먼저 템플릿을 추가합니다.  **src/Template/Bookmarks/add.ctp** 에서 ``control('user_id')`` 을 제거합니다.
-제거한 후 **src/Controller/BookmarksController.php** 에서 ``add()`` 액션을 다음과 같이 업데이트합니다 :
+제거한 후 **src/Controller/BookmarksController.php** 에서 ``add()`` 액션을 다음과 같이 업데이트합니다. ::
 
     public function add()
     {
@@ -240,7 +240,7 @@ Controller에 존재하지않거나 Login전에 URL에 액세스하면 **/users/
 
 엔티티 프로퍼티를 세션 데이터로 설정함으로써, 본인이 등록한 북마크만 수정 할 수있도록 합니다.
 편집 양식과 행동에 대해서도 똑같이 할 것입니다.
-**src/Controller/BookmarksController.php** 에서 ``edit()`` 액션은 다음과 같아야합니다 :
+**src/Controller/BookmarksController.php** 에서 ``edit()`` 액션은 다음과 같아야합니다. ::
 
     public function edit($id = null)
     {
@@ -265,7 +265,7 @@ Controller에 존재하지않거나 Login전에 URL에 액세스하면 **/users/
 --------
 
 이제는 현재 로그인 한 사용자의 북마크 만 표시하면됩니다. ``paginate()`` 호출해야 합니다.
-**src/Controller/BookmarksController.php** 에서 ``index()`` 액션을 다음과 같이 만듭니다.
+**src/Controller/BookmarksController.php** 에서 ``index()`` 액션을 다음과 같이 만듭니다. ::
 
     public function index()
     {
@@ -292,7 +292,7 @@ Controller에 존재하지않거나 Login전에 URL에 액세스하면 **/users/
 ------------------------
 
 엔티티에 대해 형식이 지정된 태그에 액세스하는 간단한 방법을 원할 것이므로 엔티티에 virtual/computed 필드를 추가 할 수 있습니다.
-**src/Model/Entity/Bookmark.php** 에서 다음을 추가합니다. :
+**src/Model/Entity/Bookmark.php** 에서 다음을 추가합니다. ::
 
     use Cake\Collection\Collection;
 
@@ -332,7 +332,7 @@ Controller에 존재하지않거나 Login전에 URL에 액세스하면 **/users/
 ----------------
 
 엔티티가 업데이트되면 태그에 대한 새로운 컨트롤을 추가 할 수 있습니다.
-**src/Template/Bookmarks/add.ctp** 및 **src/Template/Bookmarks/edit.ctp** 에서 기존 ``tags._ids`` 컨트롤을 다음으로 대체합니다.
+**src/Template/Bookmarks/add.ctp** 및 **src/Template/Bookmarks/edit.ctp** 에서 기존 ``tags._ids`` 컨트롤을 다음으로 대체합니다. ::
 
     echo $this->Form->control('tag_string', ['type' => 'text']);
 
@@ -342,7 +342,7 @@ Controller에 존재하지않거나 Login전에 URL에 액세스하면 **/users/
 기존 태그를 문자열로 볼 수 있으므로 해당 데이터도 저장해야합니다.
 ``tag_string`` 을 액세스 가능한 것으로 표시 했으므로 요청의 데이터를 엔티티에 복사합니다.
 ``beforeSave()`` 훅 메소드를 사용하여 태그 문자열을 파싱하고 관련 엔티티를 찾기 / 구축 할 수 있습니다.
-다음을 **src/Model/Table/BookmarksTable.php*에 추가합니다.
+다음을 **src/Model/Table/BookmarksTable.php*에 추가합니다. ::
 
     public function beforeSave($event, $entity, $options)
     {

@@ -67,7 +67,7 @@ CakePHP는 거의 모든 데이터베이스 스키마를 충분히 수용 할 �
 
     <?php
     return [
-        // 上には他の設定があります
+        // 위에는 다른 설정이 있습니다.
         'Datasources' => [
             'default' => [
                 'className' => 'Cake\Database\Connection',
@@ -98,7 +98,7 @@ CakePHP는 거의 모든 데이터베이스 스키마를 충분히 수용 할 �
 그리고 데이터 간의 관계를 구축하고, 데이터를 검증하고, 애플리케이션 규칙을 적용 할 수 있습니다.
 모델은 컨트롤러 액션과 템플릿을 구축하는데 필요한 기반을 구축합니다.
 
-CakePHP의 모델은 ``Table``과 ``Entity`` 객체로 구성됩니다. ``Table`` 객체는 특정 테이블에 저장된 엔터티 컬렉션에 대한 액세스를 제공합니다.
+CakePHP의 모델은 ``Table`` 과 ``Entity`` 객체로 구성됩니다. ``Table`` 객체는 특정 테이블에 저장된 엔터티 컬렉션에 대한 액세스를 제공합니다.
 이들은 **src/Model/Table** 에 저장됩니다.
 우리가 만들고있는 파일은 **src/Model/Table/ArticlesTable.php** 에 저장 될 것입니다.
 완성 된 파일은 다음과 같아야 합니다. ::
@@ -146,4 +146,4 @@ CakePHP는 또한 ``id`` 컬럼이 테이블의 기본 키임을 알기 위해�
     }
 
 엔티티는 현재 매우 슬림하고 :ref:`entities-mass-assignment` 으로 속성을 편집 하는 방법을 제어하는 ``_accessible`` 속성 만 설정했습니다.
-지금 당장은 모델을 많이 사용할 수 없으므로 첫 번째 :doc:`컨트롤러와 템플릿 </tutorials-and-examples/cms/articles-controller>`을 만들어 모델과 상호 작용할 수 있도록 하겠습니다.
+지금 당장은 모델을 많이 사용할 수 없으므로 첫 번째 :doc:`컨트롤러와 템플릿 </tutorials-and-examples/cms/articles-controller>` 을 만들어 모델과 상호 작용할 수 있도록 하겠습니다.

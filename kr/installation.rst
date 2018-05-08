@@ -1,7 +1,6 @@
 인스톨
 ############
 
-
 CakePHP는 빠르고 간단하게 설치할 수 있습니다.
 최소한의 구성으로 필요한 것은 웹서버와 CakePHP의 복사, 이 두가지 입니다.
 이 항목에서는 주로 Apache에서의 셋업에 초점을 두고 있지만
@@ -85,7 +84,6 @@ CakePHP의 새로운 어플리케이션을 생성해주세요. 아래의 compose
 
     php composer.phar create-project --prefer-dist cakephp/app my_app_name
 
-または Composer にパスが通っているのであれば下記のコマンドも使えます。
 또는 Composer로 경로가 되어 있다면 아래의 명령어도 사용할 수 있습니다.
 
 .. code-block:: bash
@@ -120,7 +118,7 @@ CakePHP 변경에 맞춰 최신 상태를 유지
 최신 안정 버전 마이너릴리즈를 받을 수도 있습니다.
 
 만약 CakePHP를 릴리즈 전 최신상태로 유지하고 싶다면 어플리케이션의
-**composer.json** 에 패키지 버전으로  **dev-master** 를 지정해주세요. ::
+**composer.json** 에 패키지 버전으로  **dev-master** 를 지정합니다. ::
 
     "require": {
         "cakephp/cakephp": "dev-master"
@@ -175,7 +173,7 @@ UNIX 시스템상에서 웹 서버 유저와 커멘드라인 유저가 다른 �
     setfacl -R -d -m u:${HTTPDUSER}:rwx logs
 
 CakePHP 콘솔 툴을 사용하기 위해서는 ``bin/cake`` 파일을
-실행 가능하게 할 필요가 있습니다. \*nix 또는  macOS상에서는 아래의 명령어를 실행해주세요.
+실행 가능하게 할 필요가 있습니다. \*nix 또는  macOS상에서는 아래의 명령어를 실행합니다.
 .. code-block:: bash
 
     chmod +x bin/cake
@@ -274,7 +272,8 @@ CakePHP 어플리케이션에 엑세스할 수 있게 됩니다.
 ============
 
 
-다음으로 CakePHP의 동작을 확인해 봅시다. 사용자가 선택한 방법에 따라 브라우저 `http://example.com/ <http://example.com/>`_  또는 `http://localhost:8765/ <http://localhost:8765/>`_ 를 열어봅니다. 그다음 CakePHP의 기본 홈 화면에서 데이터베이스의 연결상태를 표시하는 메시지를 확인합니다.
+다음으로 CakePHP의 동작을 확인해 봅시다. 사용자가 선택한 방법에 따라 브라우저 `http://example.com/ <http://example.com/>`_  또는 `http://localhost:8765/ <http://localhost:8765/>`_ 를 열어봅니다.
+그다음 CakePHP의 기본 홈 화면에서 데이터베이스의 연결상태를 표시하는 메시지를 확인합니다.
 
 축하합니다! 이것으로 `CakePHP 어플리케이션작성의 첫번째 준비 <https://book.cakephp.org/3.0/kr/quickstart.html>`_를 마쳤습니다.
 
@@ -287,9 +286,9 @@ Apache
 
 CakePHP는, 확장한 상태에서 mod_rewrite를 사용하도록 되어있습니다. 자신의 시스템에서 정상적으로 동작할때까지 고생하는 사용자도 있습니다.
 
-다음은 정상적으로 동작시키기 위해 몇가지 해야할것 을 알려드립니다. 우선 httpd.conf을 확인해주십시요(유저나 사이트 개별의 httpd.conf가 아닌, 반드시 시스템의 httpd.conf를 수정해주십시오.)
+다음은 정상적으로 동작시키기 위해 몇가지 해야할것 을 알려드립니다. 우선 httpd.conf을 확인합니다.(유저나 사이트 개별의 httpd.conf가 아닌 반드시 시스템의 httpd.conf를 수정해주시기 바랍니다.)
 
-이 파일은 배포 및 Apache버전에 따라 크게 달라집니다. 자세한 내용은 `http://wiki.apache.org/httpd/DistrosDefaultLayout <http://wiki.apache.org/httpd/DistrosDefaultLayout>`_ 를 참조해주십시오.
+이 파일은 배포 및 Apache버전에 따라 크게 달라집니다. 자세한 내용은 `http://wiki.apache.org/httpd/DistrosDefaultLayout <http://wiki.apache.org/httpd/DistrosDefaultLayout>`_ 를 참조하시기 바랍니다.
 
 1. 적절한 DocumentRoot에서 .htaccess에 대한 설정 덮어쓰기를 허용하기위해 AllowOverride가 All이 설정되어있지 확인합니다. ::
 
@@ -334,7 +333,9 @@ webroot디렉터리에는 이렇게 작성되어 있습니다. ::
 	    RewriteRule ^ index.php [L]
 	</IfModule>
 
-아직, 여러분의 CakePHP사이트에서 mod_rewrite문제가 발생한다면, 가상 호스트 (virtualhosts) 설정을 수정하는것이 좋습니다. Ubuntu에서는 **/etc/apache2/sites-available/default** (배포판에 따른 위치) 의 파일을 수정해주십시오. 이 파일의 ``AllowOverride None``이 ``AllowOverride All``로 수정되어있는것을 확인해주십시오. 즉, 아래와 같이 됩니다.::
+아직, 여러분의 CakePHP사이트에서 mod_rewrite문제가 발생한다면, 가상 호스트 (virtualhosts) 설정을 수정하는것이 좋습니다.
+Ubuntu에서는 **/etc/apache2/sites-available/default** (배포판에 따른 위치) 파일을 수정합니다.
+이 파일의 ``AllowOverride None``이 ``AllowOverride All``로 수정되어있는것을 확인해주십시오. 즉, 아래와 같이 됩니다.::
 
 	<Directory />
 	    Options FollowSymLinks
@@ -350,9 +351,10 @@ webroot디렉터리에는 이렇게 작성되어 있습니다. ::
 macOS에서 다른 방법은 가상 호스트를 폴더로 향하게하는데 `virtualhostx <https://clickontyler.com/virtualhostx/>`_ 도구를 사용할 수 있습니다.
 
 
-많은 호스팅 서비스(GoDaddy, 1and1) 는 웹 서버가 이미 mod_rewrite를 사용하는 사용자 디렉토리에서 전송됩니다. CakePHP를 사용자 디렉토리 (`http://example.com/~username/cakephp/ <http://example.com/~username/cakephp/>`_) 또는 이미 mod_rewrite를 활용하는 기타 URL 구조로 설치하고 있다면 RewriteBase 문을 CakePHP가 사용하는 .htaccess 파일 (/.htaccess、/app/.htaccess、/app/webroot/.htaccess) 에 추가해야합니다.
+많은 호스팅 서비스(GoDaddy, 1and1) 는 웹 서버가 이미 mod_rewrite를 사용하는 사용자 디렉토리에서 전송됩니다.
+CakePHP를 사용자 디렉토리 (`http://example.com/~username/cakephp/ <http://example.com/~username/cakephp/>`_) 또는 이미 mod_rewrite를 활용하는 기타 URL 구조로 설치하고 있다면 RewriteBase 문을 CakePHP가 사용하는 .htaccess 파일 (/.htaccess、/app/.htaccess、/app/webroot/.htaccess) 에 추가해야합니다.
 
-이것는 RewriteEngine지시문과 같은 섹션에 추가할 수 있습니다. 예를 들면 webroot의 .htaccess파일은 다음과 같이 됩니다.::
+이것는 RewriteEngine지시문과 같은 섹션에 추가할 수 있습니다. 예를 들면 webroot의 .htaccess파일은 다음과 같이 됩니다. ::
 
 	<IfModule mod_rewrite.c>
 	    RewriteEngine On
@@ -361,7 +363,7 @@ macOS에서 다른 방법은 가상 호스트를 폴더로 향하게하는데 `v
 	    RewriteRule ^ index.php [L]
 	</IfModule>
 
-4. (옵션) 발행 환경 설정에서 필요없는 요청은 CakePHP에서 처리되지 않도록합시다. webroot의 .htaccess 파일을 다음과 같이 수정합니다.::
+4. (옵션) 발행 환경 설정에서 필요없는 요청은 CakePHP에서 처리되지 않도록합시다. webroot의 .htaccess 파일을 다음과 같이 수정합니다. ::
 
 	<IfModule mod_rewrite.c>
 	    RewriteEngine On
@@ -373,20 +375,23 @@ macOS에서 다른 방법은 가상 호스트를 폴더로 향하게하는데 `v
 
 위의 예는 잘못된 요청을 index.php로 보내지 않고 웹 서버의 404 페이지를 표시합니다.
 
-HTML의 404 페이지를 만들 수 있으며, ``ErrorDocument``지시문에 추기하여 CakePHP안에 있는 404 페이지를 사용할 수 있습니다.::
+HTML의 404 페이지를 만들 수 있으며, ``ErrorDocument``지시문에 추기하여 CakePHP안에 있는 404 페이지를 사용할 수 있습니다. ::
 
 	ErrorDocument  404  / 404-not-found
 
 nginx
 -----------------------
 
-	nginx는 Apache 같은 .htaccess 파일을 사용하지 않으므로 사이트의 설정에서 URL 재 작성 규칙을 작성해야합니다. 이것은 기본적으로 ``/etc/nginx/sites-available/your_virtual_host_conf_file``에 기재합니다. 당신의 환경 구성에 따라이 이 파일을 재 작성해야하지만, 적어도 PHP를 FastCGI로 실행시킬 필요가있을 것입니다. 아래의 설정은 요청을 ``webroot/index.php``로 리다이렉트합니다.::
+	nginx는 Apache 같은 .htaccess 파일을 사용하지 않으므로 사이트의 설정에서 URL 재 작성 규칙을 작성해야합니다. 
+	이것은 기본적으로 ``/etc/nginx/sites-available/your_virtual_host_conf_file``에 기재합니다. 
+	환경 구성에 따라이 이 파일을 작성해야하지만 적어도 PHP를 FastCGI로 실행시킬 필요가있을 것입니다. 
+	아래의 설정은 요청을 ``webroot/index.php``로 리다이렉트합니다. ::
 
 	location / {
 	    try_files $uri $uri/ /index.php?$args;
 	}
 
-server 지시문의 예는 다음과 같습니다.::
+server 지시문의 예는 다음과 같습니다. ::
 
 	server {
 	    listen   80;
@@ -462,17 +467,17 @@ IIS7은 기본적으로 .htaccess 파일을 지원하지 않습니다. 이를 �
 
 일단 IIS에서 사용할 수있는 재 작성 규칙을 포함하는 web.config 파일이 되었으면 CakePHP 링크, CSS, JavaScript, 재 라우팅 (rerouting)은 제대로 작동하는 것입니다.
 
-URL リライティングを使わない場合
+URL 다시 쓰기를 사용안하는 경우
 -----------------------
 
-	만약 당신의 서버에 mod_rewrite (또는 이것와 호환되는 모듈)을 사용하고 싶지 않거나 사용할 수없는 경우, CakePHP의 기본의 URL을 사용해야합니다. **config/app.php** 의 아래에 덧글을 해제합니다.::
+	만약 당신의 서버에 mod_rewrite (또는 이것와 호환되는 모듈)을 사용하고 싶지 않거나 사용할 수없는 경우 CakePHP의 기본의 URL을 사용해야합니다. **config/app.php** 의 아래에 덧글을 해제합니다. ::
 
 	'App' => [
 	    // ...
 	    // 'baseUrl' => env('SCRIPT_NAME'),
 	]
 
-그리고 아래의 .htaccess 파일을 삭제합니다.::
+그리고 아래의 .htaccess 파일을 삭제합니다. ::
 
 	/.htaccess
 	webroot/.htaccess

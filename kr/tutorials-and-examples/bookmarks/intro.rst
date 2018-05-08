@@ -90,7 +90,7 @@ CakePHP의 디렉토리 구조가 어떻게 작동하는지 배울 수있는 좋
 
 .. note::
 
-    Windows에서이 명령은 ``bin\cake server``  (백 슬래시)입니다.
+    Windows에서이 명령은 ``bin\cake server`` (백 슬래시)입니다.
 
 이제 8765 포트에서 PHP의 내장 웹 서버를 시작합니다. 시작 페이지를보기 위하여
 **http://localhost:8765** 를 웹 브라우저에서 엽니다. CakePHP가 데이터베이스 연결
@@ -184,7 +184,7 @@ Scaffold 코드 작성
 =====================
 
 데이터베이스가 CakePHP의 명명 규칙에 따르고 있으므로 기본적인 응용 프로그램을
-빠르게 생성하기 위해  :doc:`bake コンソール </bake/usage>`응용 프로그램을 사용할 수 있습니다.
+빠르게 생성하기 위해  :doc:`bake 콘솔 </bake/usage>` 응용 프로그램을 사용할 수 있습니다.
 명령 줄에서 다음 명령을 실행합니다. ::
 
     // Windows 에서는 bin\cake 을 사용함
@@ -290,7 +290,7 @@ CakePHP는기본적으로`bcrypt <http://codahale.com/how-to-safely-store-a-pass
         $routes->fallbacks();
     });
 
-위는 **/bookmarks/tagged/** 경로를``BookmarksController::tags()``에 연결
+위는 **/bookmarks/tagged/** 경로를 ``BookmarksController::tags()`` 에 연결
 새로운 「루트」를 정의합니다. 경로를 정의하게 잘하여 URL의 모습과
 그들은 어떻게 구현되었는지를 분리 할 수 있습니다.
 **http://localhost:8765/bookmarks/tagged**에 액세스하는 경우 CakePHP에서
@@ -348,14 +348,14 @@ CakePHP에서 컨트롤러의 액션을 슬림하게 유지하면서 응용 프�
         return $bookmarks->group(['Bookmarks.id']);
     }
 
-:ref:`カスタム Finder メソッド <custom-find-methods>` 을 구현했습니다.
+:ref:`커스텀 Finder 메서드 <custom-find-methods>` 을 구현했습니다.
 이것은 재사용 가능한 쿼리를 정리하는 것을 실현하는 CakePHP의 매우 강력한 개념입니다.
 Finder 메소드는 항상:doc:`/orm/query-builder`  개체 및 옵션 배열을 매개 변수로 가져옵니다.
 Finder 메소드는 쿼리를 조작하여 임의의 필수 조건과 조건을 추가 할 수 있습니다.
 완료되면 Finder 메소드는 업데이트 된 쿼리 개체를 반환해야합니다.
 finder에서 일치하는 태그가있는 특정 책갈피를 검색하기 위해
 ``innerJoinWith()``, ``where()`` 그리고 ``group`` 메소드를 사용합니다.
-태그의 지정이없는 경우, 태그없이 북마크를 검색하기 위해``leftJoinWith()``를 사용하여
+태그의 지정이없는 경우, 태그없이 북마크를 검색하기 위해 ``leftJoinWith()`` 를 사용하여
 'where'조건을 변경합니다.
 
 뷰 작성
@@ -388,11 +388,11 @@ finder에서 일치하는 태그가있는 특정 책갈피를 검색하기 위�
 :php:func:`h`  바로 가기 기능을 사용했습니다. HTML 삽입 문제를 방지하기 위해
 사용자 데이터 출력시에는 반드시``h()``를 사용하는 것을 기억하시기 바랍니다.
 
-뷰 템플릿 파일을위한 CakePHP의 규약에 따라 **tags.ctp**  파일을 만들었습니다.
+뷰 템플릿 파일을위한 CakePHP의 규약에 따라 **tags.ctp** 파일을 만들었습니다.
 이 약관은 문자를 사용하여 컨트롤러의 액션 이름을 밑줄 화 된 템플릿 이름을 사용하는 것입니다.
 
-보기에서``$tags``과``$bookmarks`` 변수를 사용할 것을 알 것입니다.
-컨트롤러에서``set()``메소드를 사용하여 지정된 변수를 뷰에 쓰기 위해 설정합니다.
+보기에서 ``$tags`` 과 ``$bookmarks`` 변수를 사용할 것을 알 것입니다.
+컨트롤러에서 ``set()`` 메소드를 사용하여 지정된 변수를 뷰에 쓰기 위해 설정합니다.
 뷰는 전달 된 모든 변수를 템플릿 내에서 로컬 변수로 이용 가능합니다.
 
 **/bookmarks/tagged/funny**의 URL에 액세스 할 수 있도록하여

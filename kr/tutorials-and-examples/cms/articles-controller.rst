@@ -448,7 +448,7 @@ Article삭제 액션 추가
 
     <!-- File: src/Template/Articles/index.ctp  (삭제링크 추가) -->
 
-    <h1>記事一覧</h1>
+    <h1>기사 일람표</h1>
     <p><?= $this->Html->link("Articles추가", ['action' => 'add']) ?></p>
     <table>
         <tr>
@@ -472,7 +472,7 @@ Article삭제 액션 추가
                 <?= $this->Form->postLink(
                     '삭제',
                     ['action' => 'delete', $article->slug],
-                    ['confirm' => 'よろしいですか?'])
+                    ['confirm' => '삭제하시겠습니까?'])
                 ?>
             </td>
         </tr>

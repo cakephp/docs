@@ -46,7 +46,7 @@ API에서 제공되는 정보가 충분하지 않다고 느끼는 경우 CakePHP
 
 tests/TestCase/
 
-IRC チャンネル
+IRC 채널
 ============
 
 **irc.freenode.net의 IRC 채널:**
