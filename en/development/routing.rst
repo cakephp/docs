@@ -928,6 +928,11 @@ to specific routing scopes offers more flexibility, as you can apply middleware
 only where it is needed allowing your middleware to not concern itself with
 how/where it is being applied.
 
+.. note::
+
+    Applied scoped middleware will be run by :ref:`RoutingMiddleware <routing-middleware>`,
+    normally at the end of your application's middleware queue.
+
 Before middleware can be applied to a scope, it needs to be
 registered into the route collection::
 

@@ -291,6 +291,9 @@ application::
         }
     }
 
+
+.. _routing-middleware:
+
 Routing Middleware
 ==================
 
