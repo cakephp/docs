@@ -100,6 +100,8 @@ Each panel lets you look at a different aspect of your application:
   ``DebugKit\DebugTimer``, and memory usage collected with
   ``DebugKit\DebugMemory``.
 * **Variables** Display View variables set in controller.
+* **Deprecations** Display deprecation warnings in a more readable and less
+  disruptive format.
 
 Using the History Panel
 =======================
