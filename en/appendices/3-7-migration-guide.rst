@@ -26,3 +26,9 @@ features will continue to function until 4.0.0 after which they will be removed.
   request instance instead.
 * ``Cake\View\Cell:$response`` is protected now. Use calling controller's/view's
   response instance instead.
+
+
+New Features
+============
+
+* ``Cake\TestSuite\IntegrationTestCase::assertResponseNotEquals()`` was added.
