@@ -1228,6 +1228,9 @@ make testing responses much simpler. Some examples are::
 
     // Assert response content
     $this->assertResponseEquals('Yeah!');
+    
+    // Assert response content doesn't equal
+    $this->assertResponseNotEquals('No!'
 
     // Assert partial response content
     $this->assertResponseContains('You won!');
