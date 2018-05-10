@@ -143,7 +143,7 @@ CakePHP provides an easy way to do this::
     $color = $io->ask('What color do you like?');
 
     // Get a choice from the user.
-    $selection = $io->ask('Red or Green?', ['R', 'G'], 'R');
+    $selection = $io->askChoice('Red or Green?', ['R', 'G'], 'R');
 
 Selection validation is case-insensitive.
 
