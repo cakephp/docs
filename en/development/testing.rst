@@ -1230,7 +1230,7 @@ make testing responses much simpler. Some examples are::
     $this->assertResponseEquals('Yeah!');
     
     // Assert response content doesn't equal
-    $this->assertResponseNotEquals('No!'
+    $this->assertResponseNotEquals('No!');
 
     // Assert partial response content
     $this->assertResponseContains('You won!');
