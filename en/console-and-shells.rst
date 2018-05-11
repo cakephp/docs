@@ -141,6 +141,11 @@ In the above example, the only commands available would be ``help``, ``version``
 and ``user``. See the :ref:`plugin-commands` section for how to add commands in
 your plugins.
 
+.. note::
+
+    When adding multiple commands that use the same Command class, the ``help``
+    command will display the shortest option.
+
 .. versionadded:: 3.5.0
     The ``console`` hook was added.
 
