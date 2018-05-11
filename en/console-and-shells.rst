@@ -169,7 +169,8 @@ You can customize the command names by defining each command in your plugin::
     }
 
 When overriding the ``console()`` hook in your application, remember to
-call ``discoverCakephp()`` to add commands from CakePHP.
+call ``$commands->autoDiscover()`` to add commands from CakePHP, your
+application, and plugins.
 
 If you need to rename/remove any attached commands, you can use the
 ``Console.buildCommands`` event on your application event manager to modify the
