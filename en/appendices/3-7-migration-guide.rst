@@ -27,6 +27,12 @@ features will continue to function until 4.0.0 after which they will be removed.
 * ``Cake\View\Cell:$response`` is protected now. Use calling controller's/view's
   response instance instead.
 
+Behavior Changes
+================
+
+* ``Cake\Database\Statement\StatementDecorator::fetchAll()`` now returns an
+  empty array instead of ``false`` when no result is found.
+
 
 New Features
 ============
