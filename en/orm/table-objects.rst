@@ -108,6 +108,9 @@ can do this by using the ``TableRegistry`` class::
     // In a controller or table method.
     use Cake\ORM\TableRegistry;
 
+    $articles = TableRegistry::getTableLocator()->get('Articles');
+
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
 
 The TableRegistry class provides the various dependencies for constructing
@@ -121,9 +124,13 @@ being triggered as a default class is used instead of your actual class. To
 correctly load plugin table classes use the following::
 
     // Plugin table
-    $articlesTable = TableRegistry::get('PluginName.Articles');
+    $articlesTable = TableRegistry::getTableLocator()->get('PluginName.Articles');
 
     // Vendor prefixed plugin table
+    $articlesTable = TableRegistry::getTableLocator()->get('VendorName/PluginName.Articles');
+
+    // Prior to 3.6.0
+    $articlesTable = TableRegistry::get('PluginName.Articles');
     $articlesTable = TableRegistry::get('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
@@ -444,6 +451,11 @@ Configuration data is stored *per alias*, and can be overridden by an object's
     You can only configure a table before or during the **first** time you
     access that alias. Doing it after the registry is populated will have no
     effect.
+
+.. note::
+
+    Static API of `Cake\ORM\TableRegistry` has been deprecated in 3.6.0. 
+    Use a table locator directly instead.
 
 Flushing the Registry
 ---------------------
