@@ -141,7 +141,7 @@ CakePHP は、このための簡単な方法を提供します。 ::
     $color = $io->ask('What color do you like?');
 
     // ユーザーの選択を取得
-    $selection = $io->ask('Red or Green?', ['R', 'G'], 'R');
+    $selection = $io->askChoice('Red or Green?', ['R', 'G'], 'R');
 
 選択のバリデーションは大文字と小文字を区別しません。
 
