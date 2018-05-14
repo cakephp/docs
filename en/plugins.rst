@@ -52,7 +52,7 @@ Manually Autoloading Plugin Classes
 If you install your plugins via ``composer`` or ``bake`` you shouldn't need to
 configure class autoloading for your plugins.
 
-In we were installing a plugin named ``MyPlugin`` manually you would need to
+If we were installing a plugin named ``MyPlugin`` manually you would need to
 modify your application's **composer.json** file to contain the following
 information:
 
