@@ -88,7 +88,7 @@ Composer を使ったプラグインのインストール
     php composer.phar dumpautoload
 
 もしあなたが何らかの理由で Composer を使う事ができないのなら、 ``Plugin`` を使って
-自動読み込みをおこなう事ができます。 ::
+自動読み込みを行うこともできます。 ::
 
     Plugin::load('ContactManager', ['autoload' => true]);
 
