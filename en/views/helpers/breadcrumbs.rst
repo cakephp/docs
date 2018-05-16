@@ -21,7 +21,7 @@ arguments:
   :doc:`/views/helpers/url`
 - **options** An array of attributes for the ``item`` and ``itemWithoutLink``
   templates. See the section about :ref:`defining attributes for the item
-  <defining_attributes_item>` for more informations.
+  <defining_attributes_item>` for more information.
 
 In addition to adding to the end of the trail, you can do a variety of operations::
 
