@@ -342,6 +342,7 @@ portable::
 
 A number of commonly used functions can be created with the ``func()`` method:
 
+- ``rand()`` Generate a random value between 0 and 1 via SQL.
 - ``sum()`` Calculate a sum. The arguments will be treated as literal values.
 - ``avg()`` Calculate an average. The arguments will be treated as literal
   values.
@@ -367,6 +368,10 @@ A number of commonly used functions can be created with the ``func()`` method:
 .. versionadded:: 3.1
 
     ``extract()``, ``dateAdd()`` and ``dayOfWeek()`` methods have been added.
+
+.. versionadded:: 3.7
+
+    ``rand()`` was added.
 
 When providing arguments for SQL functions, there are two kinds of parameters
 you can use, literal arguments and bound parameters. Identifier/Literal parameters allow

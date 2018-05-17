@@ -37,4 +37,13 @@ Behavior Changes
 New Features
 ============
 
+Database
+--------
+
+* ``Cake\Database\FunctionsBuilder::rand()`` was added.
+
+TestSuite
+---------
+
 * ``Cake\TestSuite\IntegrationTestCase::assertResponseNotEquals()`` was added.
+
