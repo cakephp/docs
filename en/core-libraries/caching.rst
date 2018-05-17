@@ -142,7 +142,7 @@ Each engine accepts the following options:
   config.  handy for deleting a complete group from cache.
 * ``prefix`` Prepended to all entries. Good for when you need to share
   a keyspace with either another cache config or another application.
-* ``probability``` Probability of hitting a cache gc cleanup. Setting to 0 will disable
+* ``probability`` Probability of hitting a cache gc cleanup. Setting to 0 will disable
    ``Cache::gc()`` from ever being called automatically.
 
 FileEngine Options
