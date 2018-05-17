@@ -246,6 +246,33 @@ it can be determined whether the function call was successful::
 
 There are spaces on both side of the equals sign.
 
+Bail Early
+==========
+
+Try to avoid unnecessary nesting by bailing early::
+
+    public function run(array $data)
+    {
+        ...
+        if (!$success) {
+            return false;
+        }
+
+        ...
+    }
+
+    public function check(array $data)
+    {
+        ...
+        if (!$success) {
+            throw new RuntimeException(...);
+        }
+
+        ...
+    }
+
+This helps to keep the code flow simple and easy to follow.
+
 Typehinting
 -----------
 
