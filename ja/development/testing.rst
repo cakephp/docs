@@ -315,13 +315,13 @@ PHP 5.6.0 以上を利用している場合、カバレッジを生成するた�
 .. code-block:: xml
 
     <testsuites>
-        <testsuite name="App Test Suite">
-            <directory>./tests/TestCase</directory>
+        <testsuite name="app">
+            <directory>./tests/TestCase/</directory>
         </testsuite>
 
         <!-- Add your plugin suites -->
-        <testsuite name="Forum plugin">
-            <directory>./plugins/Forum/tests/TestCase</directory>
+        <testsuite name="forum">
+            <directory>./plugins/Forum/tests/TestCase/</directory>
         </testsuite>
     </testsuites>
 
@@ -333,7 +333,7 @@ PHP 5.6.0 以上を利用している場合、カバレッジを生成するた�
 
     "autoload": {
         "psr-4": {
-            "PluginName\\Test\\Fixture\\": "tests\\Fixture"
+            "PluginName\\Test\\Fixture\\": "tests/Fixture/"
         }
     },
 
@@ -1273,279 +1273,12 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
     #
     #   modified:   tests/comparisons/example.php
 
-.. _console-integration-testing:
 
 コンソールの統合テスト
 ======================
 
-コンソールアプリケーションをより簡単にテストするため、CakePHP は、
-コンソールアプリケーションをテストし、結果に対してアサートするための
-``ConsoleIntegrationTestCase`` クラスが付属しています。
+シェルとコマンドをテストについては :ref:`console-integration-testing` をご覧ください。
 
-.. versionadded:: 3.5.0
-
-    ``ConsoleIntegrationTestCase`` が追加されました。
-
-コンソールアプリケーションのテストを始めるために、 ``Cake\TestSuite\ConsoleIntegrationTestCase``
-を継承したテストケースを作成してください。このクラスは、あなたのコマンドを実行するために使用する
-``exec()`` メソッドを含みます。このメソッドに、CLI で使用するのと同じ文字列を渡すことができます。
-
-**src/Shell/MyConsoleShell.php** に置かれた、とてもシンプルなシェルで始めましょう。 ::
-
-    namespace App\Shell;
-
-    use Cake\Console\ConsoleOptionParser;
-    use Cake\Console\Shell;
-
-    class MyConsoleShell extends Shell
-    {
-        public function getOptionParser()
-        {
-            $parser = new ConsoleOptionParser();
-            $parser->setDescription('My cool console app');
-
-            return $parser;
-        }
-    }
-
-このシェルの統合テストを書くために、 **tests/TestCase/Shell/MyConsoleShellTest.php**
-に ``Cake\TestSuite\ConsoleIntegrationTestCase`` を継承したテストケースを作成します。
-このシェルは現時点ですることはあまりありませんが、シェルの説明が ``stdout``
-に表示されていることをテストしましょう。 ::
-
-    namespace App\Test\TestCase\Shell;
-
-    use Cake\TestSuite\ConsoleIntegrationTestCase;
-
-    class MyConsoleShellTest extends ConsoleIntegrationTestCase
-    {
-        public function testDescriptionOutput()
-        {
-            $this->exec('my_console');
-            $this->assertOutputContains('My cool console app');
-        }
-    }
-
-テストが合格します！これは非常に簡単な例ですが、コンソールアプリケーションの
-統合テストケースを作成することは非常に簡単です。このシェルにいくつかの
-サブコマンドとオプションを追加して続けてみましょう。 ::
-
-    namespace App\Shell;
-
-    use Cake\Console\ConsoleOptionParser;
-    use Cake\I18n\FrozenTime;
-
-    class MyConsoleShell extends Shell
-    {
-        public function getOptionParser()
-        {
-            $parser = new ConsoleOptionParser();
-
-            $updateModifiedParser = new ConsoleOptionParser();
-            $updateModifiedParser->addArgument('table', [
-                'help' => 'Table to update',
-                'required' => true
-            ]);
-
-            $parser
-                ->setDescription('My cool console app')
-                ->addSubcommand('updateModified', [
-                    'parser' => $updateModifiedParser
-                ]);
-
-            return $parser;
-        }
-
-        public function updateModified()
-        {
-            $table = $this->args[0];
-            $this->loadModel($table);
-            $this->{$table}->query()
-                ->update()
-                ->set([
-                    'modified' => new FrozenTime()
-                ])
-                ->execute();
-        }
-    }
-
-これは、独自のパーサーがあるサブコマンドを持つより完全なシェルです。
-``updateModified`` サブコマンドをテストしましょう。
-テストケースを次のコードスニペットに変更します。 ::
-
-    namespace Cake\Test\TestCase\Shell;
-
-    use Cake\Console\Shell;
-    use Cake\I18n\FrozenTime;
-    use Cake\ORM\TableRegistry;
-    use Cake\TestSuite\ConsoleIntegrationTestCase;
-
-    class MyConsoleShellTest extends ConsoleIntegrationTestCase
-    {
-        public $fixtures = [
-            // UsersFixture を持っていると仮定
-            'app.users'
-        ];
-
-        public function testDescriptionOutput()
-        {
-            $this->exec('my_console');
-            $this->assertOutputContains('My cool console app');
-        }
-
-        public function testUpdateModified()
-        {
-            $now = new FrozenTime('2017-01-01 00:00:00');
-            FrozenTime::setTestNow($now);
-
-            $this->loadFixtures('Users');
-
-            $this->exec('my_console update_modified Users');
-            $this->assertExitCode(Shell::CODE_SUCCESS);
-
-            $user = TableRegistry::get('Users')->get(1);
-            $this->assertSame($user->modified->timestamp, $now->timestamp);
-
-            FrozenTime::setTestNow(null);
-        }
-    }
-
-``testUpdateModified`` メソッドから分かるように、 ``update_modified`` サブコマンドが
-１番目の引数として渡すテーブルを更新することをテストしています。
-最初に、シェルが適切なステータスコード "0" で終了したことをアサートします。
-次に、私たちのサブコマンドが動作をしたことを確認します。つまり、提供したテーブルを更新し、
-``modified`` カラムを現在の時刻に設定します。
-
-また、 ``exec()`` はあなたが入力したのと同じ文字列を CLI に取り込むので、
-コマンド文字列にオプションと引数を含めることができます。
-
-対話的なシェルのテスト
-----------------------
-
-コンソールはしばしば対話的です。 ``Cake\TestSuite\ConsoleIntegrationTestCase``
-クラスで対話的なシェルをテストするには、期待する入力を ``exec()`` の２番目の
-パラメーターとして渡すだけです。それらは、期待どおりの順序で配列として含める必要があります。
-
-引き続きシェルの例で、対話的なサブコマンドを追加しましょう。
-シェルクラスを次のように更新します。 ::
-
-    namespace App\Shell;
-
-    use Cake\Console\ConsoleOptionParser;
-    use Cake\Console\Shell;
-    use Cake\I18n\FrozenTime;
-
-    class MyConsoleShell extends Shell
-    {
-        public function getOptionParser()
-        {
-            $parser = new ConsoleOptionParser();
-
-            $updateModifiedParser = new ConsoleOptionParser();
-            $updateModifiedParser->addArgument('table', [
-                'help' => 'Table to update',
-                'required' => true
-            ]);
-
-            $parser
-                ->setDescription('My cool console app')
-                ->addSubcommand('updateModified', [
-                    'parser' => $updateModifiedParser
-                ])
-                // 新しいサブコマンドの追加
-                ->addSubcommand('bestFramework');
-
-            return $parser;
-        }
-
-        public function updateModified()
-        {
-            $table = $this->args[0];
-            $this->loadModel($table);
-            $this->{$table}->query()
-                ->update()
-                ->set([
-                    'modified' => new FrozenTime()
-                ])
-                ->execute();
-        }
-
-        // この対話的なサブコマンドを作成
-        public function bestFramework()
-        {
-            $this->out('Hi there!');
-
-            $framework = $this->in('What is the best PHP framework?');
-            if ($framework !== 'CakePHP') {
-                $this->err("I disagree that '$framework' is the best.");
-                $this->_stop(Shell::CODE_ERROR);
-            }
-
-            $this->out('I agree!');
-        }
-    }
-
-対話的なサブコマンドがあるので、適切な応答を受け取るかどうかをテストするテストケースと、
-誤った応答を受け取るかどうかをテストするケースを追加できます。
-**tests/TestCase/Shell/MyConsoleShellTest.php** に以下のメソッドを追加してください。 ::
-
-    public function testBestFramework()
-    {
-        $this->exec('my_console best_framework', [
-            'CakePHP'
-        ]);
-        $this->assertExitCode(Shell::CODE_SUCCESS);
-        $this->assertOutputContains('I agree!');
-    }
-
-    public function testBestFrameworkWrongAnswer()
-    {
-        $this->exec('my_console best_framework', [
-            'my homemade framework'
-        ]);
-        $this->assertExitCode(Shell::CODE_ERROR);
-        $this->assertErrorRegExp("/I disagree that \'(.+)\' is the best\./");
-    }
-
-``testBestFramework`` から分かるように、最初の入力要求に "CakePHP" で応答します。
-これはサブコマンドにとって正しい回答であるため、シェルは応答を出力した後に正常に終了します。
-
-２番目のテストケース、 ``testBestFrameworkWrongAnswer`` は、誤った答えが返され、
-シェルが失敗して ``1`` で終了します。 誤った答えの名前を含むエラーが
-``stderr`` に与えられることをアサートします。
-
-CommandRunner のテスト
-----------------------
-
-``CommandRunner`` クラスを使ってディスパッチされたシェルをテストするには、
-次のメソッドを使ってテストケースでそれを有効にしてください。 ::
-
-    $this->useCommandRunner();
-
-.. versionadded:: 3.5.0
-
-    ``CommandRunner`` クラスが追加されました。
-
-アサーションメソッド
---------------------
-
-``Cake\TestSuite\ConsoleIntegrationTestCase`` クラスは、コンソールの出力に対して
-容易にアサートできるようにするいくつかのアサーションメソッドを提供します。 ::
-
-    // シェルが期待したコードで終了したことをアサート
-    $this->assertExitCode($expected);
-
-    // 標準出力が文字列を含むことをアサート
-    $this->assertOutputContains($expected);
-
-    // 標準エラーが文字列を含むことをアサート
-    $this->assertErrorContains($expected);
-
-    // 標準出力を正規表現にマッチするかをアサート
-    $this->assertOutputRegExp($expected);
-
-    // 標準エラーが正規表現にマッチするかをアサート
-    $this->assertErrorRegExp($expected);
 
 ビューのテスト
 ==============
@@ -1903,7 +1636,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
     "autoload-dev": {
         "psr-4": {
-            "MyPlugin\\Test\\": "./plugins/MyPlugin/tests"
+            "MyPlugin\\Test\\": "plugins/MyPlugin/tests/"
         }
     }
 
