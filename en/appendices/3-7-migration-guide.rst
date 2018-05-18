@@ -27,6 +27,17 @@ features will continue to function until 4.0.0 after which they will be removed.
 * ``Cake\View\Cell:$response`` is protected now. Use calling controller's/view's
   response instance instead.
 
+
+Soft Deprecations
+=================
+
+The following methods, properties and features have been deprecated but will not
+be removed until 5.0.0:
+
+* ``Cake\TestSuite\ConsoleIntegrationTestCase`` is deprecated. You should
+  include ``Cake\TestSuite\ConsoleIntegrationTestTrait`` into your test case
+  class instead.
+
 Behavior Changes
 ================
 
@@ -46,4 +57,6 @@ TestSuite
 ---------
 
 * ``Cake\TestSuite\IntegrationTestCase::assertResponseNotEquals()`` was added.
+* The custom assertions provided by ``IntegrationTestCase`` and
+  ``ConsoleIntegrationTestCase`` are now implemented through constraint classes.
 
