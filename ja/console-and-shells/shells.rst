@@ -1,4 +1,4 @@
-Shells
+シェル
 ######
 
 .. php:namespace:: Cake\Console
