@@ -60,3 +60,9 @@ TestSuite
 * The custom assertions provided by ``IntegrationTestCase`` and
   ``ConsoleIntegrationTestCase`` are now implemented through constraint classes.
 
+
+Validation
+----------
+
+* ``Cake\Validation\Validation::iban()`` was added for validating international
+  bank account numbers.
