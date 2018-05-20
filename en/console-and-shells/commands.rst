@@ -355,7 +355,9 @@ Update the command class to the following::
 
     namespace App\Command;
 
+    use Cake\Console\Arguments;
     use Cake\Console\Command;
+    use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
     use Cake\I18n\FrozenTime;
 
