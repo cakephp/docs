@@ -211,7 +211,7 @@ To get started testing your console application, create a test case that extends
 you would use in the CLI to this method.
 
 Let's start with a very simple command, located in
-**src/Command/UpdatTableCommand.php**::
+**src/Command/UpdateTableCommand.php**::
 
     namespace App\Command;
 
