@@ -211,16 +211,16 @@ To get started testing your console application, create a test case that extends
 you would use in the CLI to this method.
 
 Let's start with a very simple command, located in
-**src/Shell/UpdatTableCommand.php**::
+**src/Command/UpdateTableCommand.php**::
 
     namespace App\Command;
 
     use Cake\Console\Arguments;
+    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
-    use Cake\Console\Command;
 
-    class UpdateTableCommand extends Shell
+    class UpdateTableCommand extends Command
     {
         public function buildOptionParser(ConsoleOptionParser $parser)
         {
@@ -231,7 +231,7 @@ Let's start with a very simple command, located in
     }
 
 To write an integration test for this shell, we would create a test case in
-**tests/TestCase/Command/UpdateTableTest.php** that extends
+**tests/TestCase/Command/UpdateTableCommandTest.php** that extends
 ``Cake\TestSuite\ConsoleIntegrationTestCase``. This shell doesn't do much at the
 moment, but let's just test that our shell's description is displayed in ``stdout``::
 
@@ -261,9 +261,9 @@ adding more logic to our command::
     namespace App\Command;
 
     use Cake\Console\Arguments;
+    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
-    use Cake\Console\Command;
     use Cake\I18n\FrozenTime;
 
     class UpdateTableCommand extends Command
@@ -324,7 +324,7 @@ Modify your test case to the following snippet of code::
             $this->loadFixtures('Users');
 
             $this->exec('update_table Users');
-            $this->assertExitCode(Shell::CODE_SUCCESS);
+            $this->assertExitCode(Command::CODE_SUCCESS);
 
             $user = TableRegistry::get('Users')->get(1);
             $this->assertSame($user->modified->timestamp, $now->timestamp);
@@ -355,8 +355,8 @@ Update the command class to the following::
 
     namespace App\Command;
 
+    use Cake\Console\Command;
     use Cake\Console\ConsoleOptionParser;
-    use Cake\Console\Shell;
     use Cake\I18n\FrozenTime;
 
     class UpdateTableCommand extends Command
@@ -393,7 +393,7 @@ Update the command class to the following::
 Now that we have an interactive subcommand, we can add a test case that tests
 that we receive the proper response, and one that tests that we receive an
 incorrect response. Remove the ``testUpdateModifed`` mehod and, add the following methods to
-**tests/TestCase/Shell/UpdateTableCommandTest.php**::
+**tests/TestCase/Command/UpdateTableCommandTest.php**::
 
 
     public function testUpdateModifiedSure()
