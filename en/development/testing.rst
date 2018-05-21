@@ -799,9 +799,13 @@ Controller Integration Testing
 ==============================
 
 While you can test controller classes in a similar fashion to Helpers, Models,
-and Components, CakePHP offers a specialized ``IntegrationTestCase`` class.
-Using this class as the base class for your controller test cases allows you to
+and Components, CakePHP offers a specialized ``IntegrationTestTrait`` trait.
+Using this trait in your controller test cases allows you to
 test controllers from a high level.
+
+.. versionadded:: 3.7.0
+
+    The ``IntegrationTestCase`` class was moved into the ``IntegrationTestTrait`` trait.
 
 If you are unfamiliar with integration testing, it is a testing approach that
 makes it easy to test multiple units in concert. The integration testing
@@ -851,10 +855,13 @@ Create a file named **ArticlesControllerTest.php** in your
     namespace App\Test\TestCase\Controller;
 
     use Cake\ORM\TableRegistry;
-    use Cake\TestSuite\IntegrationTestCase;
+    use Cake\TestSuite\IntegrationTestTrait;
+    use Cake\TestSuite\TestCase;
 
-    class ArticlesControllerTest extends IntegrationTestCase
+    class ArticlesControllerTest extends TestCase
     {
+        use IntegrationTestTrait;
+
         public $fixtures = ['app.articles'];
 
         public function testIndex()
@@ -901,7 +908,7 @@ Create a file named **ArticlesControllerTest.php** in your
     }
 
 This example shows a few of the request sending methods and a few of the
-assertions that ``IntegrationTestCase`` provides. Before you can do any
+assertions that ``IntegrationTestTrait`` provides. Before you can do any
 assertions you'll need to dispatch a request. You can use one of the following
 methods to send a request:
 
@@ -915,7 +922,7 @@ methods to send a request:
 
 All of the methods except ``get()`` and ``delete()`` accept a second parameter
 that allows you to send a request body. After dispatching a request you can use
-the various assertions provided by ``IntegrationTestCase`` or PHPUnit to
+the various assertions provided by ``IntegrationTestTrait`` or PHPUnit to
 ensure your request had the correct side-effects.
 
 .. versionadded:: 3.5.0
@@ -924,7 +931,7 @@ ensure your request had the correct side-effects.
 Setting up the Request
 ----------------------
 
-The ``IntegrationTestCase`` class comes with a number of helpers to make it easy
+The ``IntegrationTestTrait`` trait comes with a number of helpers to make it easy
 to configure the requests you will send to your application under test::
 
     // Set cookies
@@ -947,7 +954,7 @@ Testing Actions That Require Authentication
 
 If you are using ``AuthComponent`` you will need to stub out the session data
 that AuthComponent uses to validate a user's identity. You can use helper
-methods in ``IntegrationTestCase`` to do this. Assuming you had an
+methods in ``IntegrationTestTrait`` to do this. Assuming you had an
 ``ArticlesController`` that contained an add method, and that add method
 required authentication, you could write the following tests::
 
@@ -1052,7 +1059,7 @@ Integration Testing PSR-7 Middleware
 ------------------------------------
 
 Integration testing can also be used to test your entire PSR-7 application and
-:doc:`/controllers/middleware`. By default ``IntegrationTestCase`` will
+:doc:`/controllers/middleware`. By default ``IntegrationTestTrait`` will
 auto-detect the presence of an ``App\Application`` class and automatically
 enable integration testing of your Application. You can toggle this behavior
 with the ``useHttpServer()`` method::
@@ -1075,7 +1082,7 @@ arguments, by using the ``configApplication()`` method::
     }
 
 After enabling the PSR-7 mode, and possibly configuring your application class,
-you can use the remaining ``IntegrationTestCase`` features as normal.
+you can use the remaining ``IntegrationTestTrait`` features as normal.
 
 You should also take care to try and use :ref:`application-bootstrap` to load
 any plugins containing events/routes. Doing so will ensure that your
@@ -1193,7 +1200,7 @@ checked.
 Assertion methods
 -----------------
 
-The ``IntegrationTestCase`` class provides a number of assertion methods that
+The ``IntegrationTestTrait`` trait provides a number of assertion methods that
 make testing responses much simpler. Some examples are::
 
     // Check for a 2xx response code
@@ -1228,7 +1235,7 @@ make testing responses much simpler. Some examples are::
 
     // Assert response content
     $this->assertResponseEquals('Yeah!');
-    
+
     // Assert response content doesn't equal
     $this->assertResponseNotEquals('No!');
 
@@ -1333,9 +1340,9 @@ Testing Views
 
 Generally most applications will not directly test their HTML code. Doing so is
 often results in fragile, difficult to maintain test suites that are prone to
-breaking. When writing functional tests using :php:class:`IntegrationTestCase`
+breaking. When writing functional tests using :php:class:`IntegrationTestTrait`
 you can inspect the rendered view content by setting the ``return`` option to
-'view'. While it is possible to test view content using IntegrationTestCase,
+'view'. While it is possible to test view content using ``IntegrationTestTrait``,
 a more robust and maintainable integration/view testing can be accomplished
 using tools like `Selenium webdriver <http://seleniumhq.org>`_.
 
