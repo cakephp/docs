@@ -394,7 +394,7 @@ Update the command class to the following::
 
 Now that we have an interactive subcommand, we can add a test case that tests
 that we receive the proper response, and one that tests that we receive an
-incorrect response. Remove the ``testUpdateModifed`` mehod and, add the following methods to
+incorrect response. Remove the ``testUpdateModifed`` method and, add the following methods to
 **tests/TestCase/Command/UpdateTableCommandTest.php**::
 
 
