@@ -158,7 +158,7 @@ as a destination string. A few examples of route targets are::
 
     // Array target to an application controller
     $routes->connect(
-        '/users/view/*
+        '/users/view/*',
         ['controller' => 'Users', 'action' => 'view']
     );
     // String target to an application controller. requires >=3.6.0
