@@ -206,16 +206,16 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 を継承したテストケースを作成してください。このクラスは、あなたのコマンドを実行するために使用する
 ``exec()`` メソッドを含みます。このメソッドに、CLI で使用するのと同じ文字列を渡すことができます。
 
-**src/Shell/UpdateTableCommand.php** に置かれた、とてもシンプルなシェルで始めましょう。 ::
+**src/Command/UpdateTableCommand.php** に置かれた、とてもシンプルなシェルで始めましょう。 ::
 
     namespace App\Command;
 
     use Cake\Console\Arguments;
+    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
-    use Cake\Console\Command;
 
-    class UpdateTableCommand extends Shell
+    class UpdateTableCommand extends Command
     {
         public function buildOptionParser(ConsoleOptionParser $parser)
         {
@@ -225,7 +225,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
         }
     }
 
-このシェルの統合テストを書くために、 **tests/TestCase/Command/UpdateTableTest.php**
+このシェルの統合テストを書くために、 **tests/TestCase/Command/UpdateTableCommandTest.php**
 に ``Cake\TestSuite\ConsoleIntegrationTestCase`` を継承したテストケースを作成します。
 このシェルは現時点ですることはあまりありませんが、シェルの説明が ``stdout``
 に表示されていることをテストしましょう。 ::
@@ -256,9 +256,9 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
     namespace App\Command;
 
     use Cake\Console\Arguments;
+    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
-    use Cake\Console\Command;
     use Cake\I18n\FrozenTime;
 
     class UpdateTableCommand extends Command
@@ -319,7 +319,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
             $this->loadFixtures('Users');
 
             $this->exec('update_table Users');
-            $this->assertExitCode(Shell::CODE_SUCCESS);
+            $this->assertExitCode(Command::CODE_SUCCESS);
 
             $user = TableRegistry::get('Users')->get(1);
             $this->assertSame($user->modified->timestamp, $now->timestamp);
@@ -349,8 +349,10 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     namespace App\Command;
 
+    use Cake\Console\Arguments;
+    use Cake\Console\Command;
+    use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
-    use Cake\Console\Shell;
     use Cake\I18n\FrozenTime;
 
     class UpdateTableCommand extends Command
@@ -386,7 +388,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
 対話的なサブコマンドがあるので、適切な応答を受け取るかどうかをテストするテストケースと、
 誤った応答を受け取るかどうかをテストするケースを追加できます。 ``testUpdateModifed``
-メソッドを削除し、 **tests/TestCase/Shell/UpdateTableCommandTest.php**
+メソッドを削除し、 **tests/TestCase/Command/UpdateTableCommandTest.php**
 に以下のメソッドを追加してください。 ::
 
     public function testUpdateModifiedSure()
