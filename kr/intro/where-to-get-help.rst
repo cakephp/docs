@@ -14,11 +14,11 @@ Cookbook
 
 `https://book.cakephp.org <https://book.cakephp.org>`_
 
-이 메뉴얼은 의문의 해결을 위한 첫번째 장소가 될것입니다.
+이 메뉴얼은 의문의 해결을 위한 첫번째 장소가 될 것입니다.
 다른 여러 오픈소스 프로젝트처럼 언제나 새로운 동료가 들어옵니다.
 의문에 답을 이곳에서 찾아보세요.
 시간이 걸리지도 모르지만 소중한 지식을 더욱더 얻을 수 있을 것입니다.
-또한 어떤 지원을 하고있는지도 알 수 있을것입니다.
+또한 어떤 지원을 하고있는지도 알 수 있을 것입니다.
 메뉴얼과 API의 양쪽의 정보를 온라인에서 얻을 수 있습니다.
 
 Bakery
@@ -73,9 +73,9 @@ Stackoverflow
 
 `https://stackoverflow.com/ <https://stackoverflow.com/questions/tagged/cakephp/>`_
 
-Stack Overflow의 기존 사용자가 질문을 찾기 쉽게 하기 위해서 질문을 할때 ``cakephp``태그와 이용 중인 버전을 입력하시길 바랍니다.
+Stack Overflow의 기존 사용자가 질문을 찾기 쉽게 하기 위해서 질문을 할때 ``cakephp``태그와 이용 중인 버전을 입력하시기 바랍니다.
 
-당신의 언어로 정보를 얻으려면
+다른 언어 정보
 ============
 
 포르투갈어 (브라질)
