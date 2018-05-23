@@ -130,7 +130,7 @@ Migrations 플러그인
     bin/cake migrations migrate
 
 
-테이블 편집
+테이블 수정
 ==============
 
 테이블이 준비되면 기사를 분류할 수 있습니다.
@@ -173,7 +173,7 @@ bake 명령어를 이용해 모든 파일을 작성해 보겠습니다. ::
     bin/cake bake all Categories
 
 bake로 모든 파일이 생성되었습니다.
-만약 CakePHP가 어떻게 움직이고 있는지를 알고 싶으면 쉽게 bake를 읽어보시기 바랍니다.
+만약 CakePHP가 어떻게 움직이고 있는지를 알고 싶으면 bake를 읽어보시기 바랍니다.
 
 .. note::
 Windows일 경우 / 대신에 \\ 를 사용합니다.
@@ -193,9 +193,10 @@ TreeBehavior 를 Categories 테이블에 추가
 가 도움이 될 것입니다.
 데이터 관리는 `MPTT logic
 <http://www.sitepoint.com/hierarchical-data-database-2/>`_  를 이용하고 있습니다.
-MPTT 트리 구조는 읽기에 최적화되어있어 블로그와 같이 ‘읽기’가 많은 응용 프로그램에 적합합니다.
+MPTT 트리 구조는 읽기에 최적화되어있어 블로그와 같이 '읽기'가 많은 응용 프로그램에 적합합니다.
 
-``src/Model/Table/CategoriesTable.php`` 파일을 열면 ``initialize()`` 메소드안에 TreeBehavior가 CategoriesTable랑 연결되있는 것을 알 수 있습니다. Bake는 ``lft`` 및 ``rght`` 열이 포함 된 테이블에 이 동작을 추가합니다. ::
+``src/Model/Table/CategoriesTable.php`` 파일을 열면 ``initialize()`` 메소드안에 TreeBehavior가 CategoriesTable랑 연결되있는 것을 알 수 있습니다.
+Bake는 ``lft`` 및 ``rght`` 열이 포함 된 테이블에 이 동작을 추가합니다. ::
 
     $this->addBehavior('Tree');
 
@@ -231,7 +232,7 @@ TreeBehavior 에서 카테고리 순서 바꾸기
 
 categories의 index 템플릿에서 categories일람표에서 순서를 바꿀 수 있습니다.
 
-``CategoriesController.php`` index메서드를 편집하고 트리로 카테고리 순서를 바꾸기 위해 ``moveUp()`` 및 ``moveDown()`` 메서드를 추가 합니다. ::
+``CategoriesController.php`` index메서드를 수정하고 트리로 카테고리 순서를 바꾸기 위해 ``moveUp()`` 및 ``moveDown()`` 메서드를 추가 합니다. ::
 
     class CategoriesController extends AppController
     {
@@ -314,11 +315,11 @@ categories의 index 템플릿에서 categories일람표에서 순서를 바꿀 �
     </div>
 
 
-Articles 컨트롤러 편집
+Articles 컨트롤러 수정
 =================================
 
 ``ArticlesController`` 에서 모든 카테고리 목록은 얻을 수 있습니다.
-기사 작성 혹은 편집할 때 카테고리를 선택할 수 있게 됩니다. ::
+기사 작성 혹은 수정할 때 카테고리를 선택할 수 있게 됩니다. ::
 
     // src/Controller/ArticlesController.php
 
@@ -352,10 +353,10 @@ Articles 컨트롤러 편집
     }
 
 
-Articles 템플릿 편집
+Articles 템플릿 수정
 ===============================
 
-기사 추가 파일은 다음과 같이 보일 것입니다. :
+기사 추가 파일은 다음과 같이 보일 것입니다.
 
 .. code-block:: php
 

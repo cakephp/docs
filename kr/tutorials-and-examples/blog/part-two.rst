@@ -6,12 +6,12 @@ Article 모델 작성
 
 모델 클래스는 CakePHP 애플리케이션의 기본 중의 기본 (*bread and butter*)입니다.
 CakePHP의 모델을 작성하여 데이터베이스와 통신 할 수있게 표시 (*view*)
-추가 (*add*), 편집 (*edit*), 삭제 (*delete*) 등의 조작에 필요한 액션을 만들 수 있습니다.
+추가 (*add*), 수정 (*edit*), 삭제 (*delete*) 등의 조작에 필요한 액션을 만들 수 있습니다.
 
 CakePHP의 모델 클래스 파일은 ``Table`` 개체와 ``Entity`` 개체로 나뉩니다.
 ``Table`` 개체는 특정 테이블에 저장된 엔터티 컬렉션에 대한 액세스를 제공하며 ``src/Model/Table`` 로 이동합니다.
 우리가 만들고있는 파일은  ``src/Model/Table/ArticlesTable.php`` 에 저장 될 것입니다.
-완성 된 파일은 다음과 같습니다.  ::
+완성 된 파일은 다음과 같습니다. ::
 
     // src/Model/Table/ArticlesTable.php
 
@@ -37,13 +37,13 @@ Table객체인 ``ArticlesTable`` 의 이름을 지정함으로써 CakePHP는 이
    이것은 실수로 파일의 이름을 잘못 지정하면 (예 : articlestable.php 또는 ArticleTable.php)
    CakePHP가 설정을 인식하지 못하고 대신 생성 된 모델을 사용한다는 것을 의미합니다.
 
-콜백, 유효성 검사와 같은 모델에 대한 자세한 내용은 doc:`/orm` 을 확인하시기 바랍니다.
+콜백, 유효성 검사와 같은 모델에 대한 자세한 내용은 :doc:`/orm` 을 확인하시기 바랍니다.
 
 .. note::
 
  　만약 이미 :doc:`블로그 튜토리얼 파트1 </tutorials-and-examples/blog/blog>`  을 완료하고
    ``articles`` 테이블을 블로그에 데이터베이스 작성하고 있으면
-   CakePHP의 bake 콘솔을 활용하여 ``ArticlesTable`` 모델을 만들 수 있습니다.  ::
+   CakePHP의 bake 콘솔을 활용하여 ``ArticlesTable`` 모델을 만들 수 있습니다. ::
 
             bin/cake bake model Articles
 
@@ -86,7 +86,7 @@ Articles 컨트롤러 작성
     }
 
 ``ArticlesController`` 에 ``index()`` 라는 함수를 정의함으로써 사용자는
-www.example.com/articles/index라는 요청에서 그 로직에 액세스 할 수 있습니다.
+www.example.com/articles/index 라는 요청에서 그 로직에 액세스 할 수 있습니다.
 마찬가지로 ``foobar()`` 라는 함수를 정의하면 사용자는 www.example.com/articles/foobar
 에 액세스 할 수 있습니다.
 
@@ -98,13 +98,13 @@ www.example.com/articles/index라는 요청에서 그 로직에 액세스 할 �
      묶을 수 있습니다.
 
 액션 속에있는 하나의 명령이 ``set()`` 을 사용하여 컨트롤러에서 뷰(다음에 작성함)에 데이터를 전달합니다.
-이 줄은 ``ArticlesTable`` 객체의 ``find('all')`` 메소드가 반환하는 값에서 “articles" 라는 뷰의 변수를 설정합니다.
+이 줄은 ``ArticlesTable`` 객체의 ``find('all')`` 메소드가 반환하는 값에서 'articles' 라는 뷰의 변수를 설정합니다.
 
 .. note::
 
      만약 이미 :doc:`블로그 튜토리얼 파트1 </tutorials-and-examples/blog/blog>`
      을 완료하고 ``articles`` 테이블을 블로그에 대한 데이터베이스 작성하고 있으면,
-     CakePHP의 bake 콘솔을 활용하여 ``ArticlesController`` 클래스를 만들 수 있습니다.  ::
+     CakePHP의 bake 콘솔을 활용하여 ``ArticlesController`` 클래스를 만들 수 있습니다. ::
 
         bin/cake bake controller Articles
 
@@ -169,12 +169,12 @@ URL에 배열 형식을 사용하면 CakePHP의 역방향 라우팅 기능을 �
 / controller / action / param1 / param2 형식으로 응용 프로그램의 기본 위치와 관련된 URL을 지정하거나 명명 된 경로를 사용할 수도 있습니다.
 자세한 내용은 :ref:`named routes <named-routes>` 섹션을 참조하시기 바랍니다.
 
-이제 브라우저를 http://www.example.com/articles/index로 지정할 수 있습니다.
+이제 브라우저를 http://www.example.com/articles/index 로 지정할 수 있습니다.
 기사의 제목과 표 목록으로 올바르게 형식을 지정해야 합니다.
 
 이 뷰에서 만든 링크 중 하나 (기사의 제목을 URL ``/articles/view/some\_id`` 에 링크) 중 하나를 클릭하면 CakePHP에서 해당 작업이 아직 정의안된 것을 알 수 있습니다.
 너무 많은 정보를 얻지 못했다면 무언가 잘못되었거나 이미 그것을 실제로 정의한 것입니다.
-이제  ``ArticlesController`` 에 그것을 만들 것입니다 :
+이제  ``ArticlesController`` 에 만들겠습니다. ::
 
     // src/Controller/ArticlesController.php
 
@@ -238,7 +238,7 @@ URL에 배열 형식을 사용하면 CakePHP의 역방향 라우팅 기능을 �
         {
             parent::initialize();
 
-            $this->loadComponent('Flash'); // Include the FlashComponent
+            $this->loadComponent('Flash'); // FlashComponent 로드
         }
 
         public function index()
@@ -376,7 +376,7 @@ Article 모델을 검토하고 수정해보겠습니다. ::
 
 ``validationDefault()`` 메소드를 사용하여 ``save()`` 메소드가 호출 될 때
 유효성 검사 결과를 CakePHP에게 알려줍니다. 여기에서는 본문과 제목 필드의 값이 있어야 합니다.
-그리고 작성 및 편집 할 때 두개의 필드값이 존재해야한다는 것을 설정해 보겠습니다.
+그리고 작성 및 수정 할 때 두개의 필드값이 존재해야한다는 것을 설정해 보겠습니다.
 CakePHP 유효성 검사 엔진은 강력하고 기본 규칙이 여러 가지 있습니다. (신용 카드 번호, 이메일 주소 등)
 또한 유연하게 자체 규칙을 만들어 설정할 수도 있습니다.
 이 설정에 대한 자세한 내용은 :doc:`/core-libraries/validation` 를 참조하시기 바랍니다.
@@ -384,10 +384,10 @@ CakePHP 유효성 검사 엔진은 강력하고 기본 규칙이 여러 가지 �
 유효성 검사를 하기 위해 값을 입력하지 않고 확인해 보겠습니다. :php:meth:`Cake\\View\\Helper\\FormHelper::control()`
 메서드를 사용하여 양식 요소를 작성했기 때문에 유효성 검사 오류 메시지가 자동으로 표시됩니다.
 
-기사 편집
+기사 수정
 ==============
 
-그러면 즉시 기사를 편집 할 수 있도록 작업을 해보겠습니다.
+그러면 즉시 기사를 수정 할 수 있도록 작업을 해보겠습니다.
 보통 CakePHP는 액션을 만들고, 다음 뷰를 만드는 패턴입니다.
 ``ArticlesController`` 의 ``edit()`` 액션은 아래와 같습니다. ::
 
@@ -414,7 +414,7 @@ CakePHP 유효성 검사 엔진은 강력하고 기본 규칙이 여러 가지 �
 ``NotFoundException`` 을 발생시키고 CakePHP의 ErrorHandler에서 처리합니다.
 
 다음 요청이 POST 또는 PUT인지 확인합니다. 만약 요청이 POST 또는 PUT라면
-``patchEntity()`` 메소드를 사용하여 POST 데이터를 문서 엔티티에 업데이트합니다.
+``patchEntity()`` 메소드를 사용하여 POST 데이터를 문서 엔티티에 수정합니다.
 마지막으로 테이블 객체를 이용하여 엔티티를 저장하거나 유효성 검사를 보고합니다.
 
 edit 뷰는 다음과 같습니다.
@@ -432,13 +432,13 @@ edit 뷰는 다음과 같습니다.
         echo $this->Form->end();
     ?>
 
-(값이 입력되어있는 경우)이 뷰는 편집 양식을 출력합니다.
+(값이 입력되어있는 경우)이 뷰는 수정 양식을 출력합니다.
 필요한 경우, 검증 오류 메시지를 표시합니다.
 
 ``save()`` 가 불려 갔을 때, 엔티티의 내용에 따라
-CakePHP는 삽입 또는 업데이트 중 생성할지 여부를 결정합니다.
+CakePHP는 삽입 또는 수정 중 생성할지 여부를 결정합니다.
 
-이제 특정 기사를 업데이트 할 수있는 링크를 index 뷰에서 확인할 수 있습니다.
+이제 특정 기사를 수정 할 수있는 링크를 index 뷰에서 확인할 수 있습니다.
 
 .. code-block:: php
 
@@ -496,7 +496,7 @@ CakePHP는 삽입 또는 업데이트 중 생성할지 여부를 결정합니다
 로 사용자에게 메시지를 표시하고 그 때 ``/articles`` 로 리디렉션합니다.
 사용자가 GET 요청을 사용하여 삭제를 시도하려고하면 ``allowMethod()`` 이 예외를 발생시킵니다.
 포착되지 않는 예외는 CakePHP의 ErrorHandler가 확인해 오류 페이지가 표시됩니다.
-그리고 :doc:`Exceptions </development/errors>` 는 다양한 HTTP오류는 가르키는 데 사용합니다.
+그리고 :doc:`Exceptions </development/errors>` 는 다양한 HTTP오류를 가르키는 데 사용합니다.
 
 로직을 실행하여 리디렉션하기 때문에이 작업에는 뷰가 없습니다.
 그러나 index 뷰에 링크를 붙여 게시물을 삭제하도록 할 것입니다.
@@ -560,9 +560,9 @@ CakePHP의 기본 라우팅 동작이 충분하다고 생각하시는 분도 계
 URL이 어떻게 특정 함수의 호출에 매핑되는지를 이해하고 싶으실 것입니다.
 이 튜토리얼에서는 routes를 쉽게 바꾸는 방법에 대해 다룹니다.
 
-라우팅 기법의 응용에 관한 정보는  :ref:`routes-configuration` 에서 확인할 수 있습니다.
+라우팅 기법의 응용에 관한 정보는 :ref:`routes-configuration` 에서 확인할 수 있습니다.
 
-지금은 사용자가 사이트 (예를 들어, http://www.example.com)을 보러 와서
+지금은 사용자가 사이트 (예를 들어, http://www.example.com) 을 보러 와서
 CakePHP는 ``PagesController`` 에 연결하고 "home"라는 뷰를 표시하도록되어 있습니다.
 그럼 라우팅 규칙을 작성하고 ArticlesController에서 작동하도록 해보겠습니다.
 
@@ -573,21 +573,21 @@ CakePHP의 라우팅은 **config/routes.php** 안에 있습니다.
 
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
-이 행은 /" URL을 기본 CakePHP의 홈페이지에 연결합니다.
+이 행은 '/' URL을 기본 CakePHP의 홈페이지에 연결합니다.
 이것을 자신의 컨트롤러에 연결하기 위해 다음과 같은 행을 추가합니다.
 
 .. code-block:: php
 
     $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
-이제 "/" 로 요청 해 온 사용자를 ArticlesController의 index() 액션에
+이제 '/' 로 요청 해 온 사용자를 ArticlesController의 index() 액션에
 연결시킬 수 있습니다.
 
 .. note::
 
-    CakePHP는 "리버스 라우팅” 도 이용할 수 있습니다.
+    CakePHP는 '리버스 라우팅' 도 이용할 수 있습니다.
     위의 경로가 정의되어있는 상태에서 배열을 기대하는 함수
-    ``['controller' => 'Articles', 'action' => 'index']`` 를 전달하면 결과 URL은 "/" 입니다.
+    ``['controller' => 'Articles', 'action' => 'index']`` 를 전달하면 결과 URL은 '/' 입니다.
     URL 지정에 항상 배열을 사용하는 것이 좋습니다.
     즉 경로가 URL의 위치를 정의하고 링크가 같은 위치를 가리키는 것을 의미합니다.
 
@@ -600,7 +600,7 @@ CakePHP의 라우팅은 **config/routes.php** 안에 있습니다.
 
 기본 응용 프로그램 만들기가 끝났으니 :doc:`/tutorials-and-examples/blog/part-three`
 으로 진행하거나 자신의 프로젝트를 시작하시기 바랍니다.
-CakePHP에 대해 더 배우기 위하여
+CakePHP에 대해 더 배우기 위해
 :doc:`/topics` 과 `API <https://api.cakephp.org>`_  를 사용합시다.
 
 도움이 필요하면 :doc:`/intro/where-to-get-help` 를 참조시기 바랍니다.

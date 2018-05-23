@@ -3,7 +3,7 @@
 
 :doc:`튜토리얼 전편 </tutorials-and-examples/bookmarks/intro>` 을 끝내면,
 아주 기본적인 북마크 응용 프로그램이 만들어집니다. 이번에는 인증 기능과
-각 사용자가 자신의 북마크 보기 / 편집 할 수 있도록 제한하는 기능을 추가해 보겠습니다.
+각 사용자가 자신의 북마크 보기 / 수정 할 수 있도록 제한하는 기능을 추가해 보겠습니다.
 
 로그인 추가
 ==============
@@ -51,7 +51,7 @@ CakePHP에서 인증은 :doc:`/controllers/components` 로 제어합니다.
 
 이제 CakePHP에 ``Flash`` 와 ``Auth`` 의 구성 요소를 로드하라고 했습니다.
 또한 users 테이블 ``email`` 을 사용자 이름으로 사용하도록 AuthComponent 에 설정했습니다.
-Controller에 존재하지않거나 Login전에 URL에 액세스하면 **/users/login**로 전환합니다.
+Controller에 존재하지 않거나 Login전에 URL에 액세스하면 **/users/login**로 전환합니다.
 그 다음은 로그인 액션을 만들어 보겠습니다. ::
 
     // src/Controller/UsersController.php
@@ -87,12 +87,12 @@ Controller에 존재하지않거나 Login전에 URL에 액세스하면 **/users/
 .. note::
 
     만약 해시 된 암호를 가진 사용자가 없으면 ``loadComponent('Auth')``
-    행을 주석 처리하여 사용자를 편집하여 새 암호를 저장하시기 바랍니다.
+    행을 주석 처리하고 사용자를 수정하여 새 암호를 저장하시기 바랍니다.
 
 로그아웃 추가
 ================
 
-이제 로그인 할 수 있으므로, 로그 아웃하는 방법도 작성해보겠습니다.
+이제 로그인 할 수 있으므로 로그 아웃하는 방법도 작성해보겠습니다.
  ``UsersController`` 에 다음 코드를 추가합니다. ::
 
     public function initialize()
@@ -127,7 +127,7 @@ Controller에 존재하지않거나 Login전에 URL에 액세스하면 **/users/
 
 위의 코드는 ``AuthComponent`` 에게 ``add()`` 액션의 인증이나 권한 부여가 필요 없다는 것을 알려줍니다.
  **Users/add.ctp** 를 정리하고 오해의 소지가있는 링크를 삭제하거나 다음 섹션으로 계속 진행할 수 있습니다.
-이 튜토리얼에서는 사용자 편집, 보기를 작성하지 않았기때문에
+이 튜토리얼에서는 사용자 수정, 보기를 작성하지 않았기 때문에
 ``AuthComponent`` 가 해당 컨트롤러 작업에 대한 액세스를 거부하므로 작동하지 않습니다.
 
 북마크 액세스 제한
@@ -201,7 +201,7 @@ Controller에 존재하지않거나 Login전에 URL에 액세스하면 **/users/
         return parent::isAuthorized($user);
     }
 
-이제 사용자가 소유하지 않은 북마크를 보거나 편집하거나 삭제하려고하면 사용자가 방문한 페이지로 리디렉션되어야합니다.
+이제 사용자가 소유하지 않은 북마크를 보거나 수정하거나 삭제하려고하면 사용자가 방문한 페이지로 리디렉션되어야 합니다.
 오류 메시지가 표시되지 않으면 레이아웃에 다음을 추가합니다.
 
     // src/Template/Layout/default.ctp
@@ -212,14 +212,14 @@ Controller에 존재하지않거나 Login전에 URL에 액세스하면 **/users/
 목록보기 및 템플릿 수정
 ============================
 
-보기 및 삭제가 작동하는 동안 편집, 추가 및 색인에는 몇 가지 문제가 있습니다.
+보기 및 삭제가 작동하는 동안 수정, 추가 및 색인에는 몇 가지 문제가 있습니다.
 
 #. 북마크를 추가 할 때 사용자를 선택할 수 있습니다.
-#. 북마크를 편집 할 때 사용자를 선택할 수 있습니다.
+#. 북마크를 수정 할 때 사용자를 선택할 수 있습니다.
 #. 목록 페이지에는 다른 사용자의 책갈피가 표시됩니다.
 
 먼저 템플릿을 추가합니다.  **src/Template/Bookmarks/add.ctp** 에서 ``control('user_id')`` 을 제거합니다.
-제거한 후 **src/Controller/BookmarksController.php** 에서 ``add()`` 액션을 다음과 같이 업데이트합니다. ::
+제거한 후 **src/Controller/BookmarksController.php** 에서 ``add()`` 액션을 다음과 같이 수정합니다. ::
 
     public function add()
     {
@@ -239,7 +239,7 @@ Controller에 존재하지않거나 Login전에 URL에 액세스하면 **/users/
     }
 
 엔티티 프로퍼티를 세션 데이터로 설정함으로써, 본인이 등록한 북마크만 수정 할 수있도록 합니다.
-편집 양식과 행동에 대해서도 똑같이 할 것입니다.
+수정 양식과 행동에 대해서도 똑같이 할 것입니다.
 **src/Controller/BookmarksController.php** 에서 ``edit()`` 액션은 다음과 같아야합니다. ::
 
     public function edit($id = null)
@@ -278,13 +278,13 @@ Controller에 존재하지않거나 Login전에 URL에 액세스하면 **/users/
         $this->set('_serialize', ['bookmarks']);
     }
 
-``tags()``  액션과 관련 finder 메소드도 업데이트해야하지만,
+``tags()``  액션과 관련 finder 메소드도 수정해야하지만,
 앞서 설명한 예를 보고 작성해주시기 바랍니다.
 
 태그 추가 환경 개선
 ======================
 
- ``TagsController`` 가 모든 액세스를 허용하지 않기 때문에 현재 새 태그를 추가하는 것은 어려운 과정입니다.
+``TagsController`` 가 모든 액세스를 허용하지 않기 때문에 현재 새 태그를 추가하는 것은 어려운 과정입니다.
 액세스를 허용하는 대신 쉼표로 구분 된 텍스트 필드를 사용하여 태그 선택 UI를 개선 할 수 있습니다.
 이렇게하면 사용자에게 더 나은 환경을 제공하고 ORM에서 더 우수한 기능을 사용할 수 있습니다.
 
@@ -331,7 +331,7 @@ Controller에 존재하지않거나 Login전에 URL에 액세스하면 **/users/
 뷰 수정
 ----------------
 
-엔티티가 업데이트되면 태그에 대한 새로운 컨트롤을 추가 할 수 있습니다.
+엔티티가 수정되면 태그에 대한 새로운 컨트롤을 추가 할 수 있습니다.
 **src/Template/Bookmarks/add.ctp** 및 **src/Template/Bookmarks/edit.ctp** 에서 기존 ``tags._ids`` 컨트롤을 다음으로 대체합니다. ::
 
     echo $this->Form->control('tag_string', ['type' => 'text']);
@@ -382,7 +382,7 @@ Controller에 존재하지않거나 Login전에 URL에 액세스하면 **/users/
         return $out;
     }
 
-이 코드는 지금까지했던 것보다 좀 복잡하지만, CakePHP의 ORM이 얼마나 강력한지를 보여주는 데 도움이됩니다.
+이 코드는 지금까지 했던 것보다 좀 복잡하지만, CakePHP의 ORM이 얼마나 강력한지를 보여주는 데 도움이됩니다.
 :doc:`/core-libraries/collections` 메소드를 사용하여 쿼리 결과를 조작하고 쉽게 엔티티를 생성하는 시나리오를 처리 할 수 있습니다.
 
 마무리

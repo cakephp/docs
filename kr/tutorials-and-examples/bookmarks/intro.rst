@@ -23,7 +23,7 @@
 그리고 명령 줄 인터페이스 (CLI) PHP 버전과 동일한 버전이 좋습니다.
 전체 응용 프로그램을 확인하려면 `cakephp/bookmarker
 <https://github.com/cakephp/bookmarker-tutorial>`__ 을 체크 아웃하시기 바랍니다.
-자, 시작합시다!
+그럼, 시작합시다!
 
 CakePHP  취득
 ==============
@@ -147,8 +147,8 @@ CakePHP는 복합 기본 키를 지원합니다.
 데이터베이스 설정
 ===================
 
-다음은 어디 데이터베이스 있는지 그리고 어떻게 테이터베이스에 연결하는 방법을 CakePHP
-에 전합니다. 아마도 이것이 어떤 설정이 필요한 처음이자 마지막입니다.
+다음은 어디 데이터베이스 있는지 그리고 어떻게 테이터베이스에 연결하는 방법을 CakePHP에 전합니다.
+아마도 이것이 어떤 설정이 필요한 처음이자 마지막입니다.
 
 이 설정은 매우 간단합니다. 당신의 설정을 적용하기 위해 **config/app.php**
 파일의 ``Datasources.default`` 배열의 값을 대체합니다.
@@ -207,16 +207,16 @@ Scaffold 코드 작성
 사용자를 생성 할 때 암호가 일반 텍스트로 저장될 것입니다.
 이것은 보안의 관점에서 매우 좋지 않으므로 수정합시다.
 
-이것은 또한 CakePHP의 모델 계층을 설명하는 좋은 기회입니다. CakePHP는
-객체의 집합과 다른 클래스의 단일 개체를 조작하는 방법을 나누고 있습니다.
+이것은 또한 CakePHP의 모델 계층을 설명하는 좋은 기회입니다.
+CakePHP는 객체의 집합과 다른 클래스의 단일 개체를 조작하는 방법을 나누고 있습니다.
 엔티티의 집합은 ``Table``  클래스 내에 포함 된 하나의 레코드에 포함 된 기능은
 ``Entity``  클래스에 저장됩니다.
 
-예를 들어, 암호 해시는 개별 레코드에서 열린 엔티티 객체에
-이 동작을 구현합니다. 암호가 설정 될 때마다 해시설정을 해야하기 때문에,
+예를 들어, 암호 해시는 개별 레코드에서 열린 엔티티 객체에 이 동작을 구현합니다.
+암호가 설정 될 때마다 해시설정을 해야하기 때문에
 변경자 (mutator) 메소드와 setter 메소드를 사용합니다. CakePHP는 약관에 따라
 엔티티의 하나로 등록 정보를 설정하는 세터 메소드를 호출합니다.
-는 비밀번호에 대한 세터를 추가하자. **src/Model/Entity/User.php** 에
+비밀번호 세터는 **src/Model/Entity/User.php** 에
 다음을 추가하시기 바랍니다. ::
 
     namespace App\Model\Entity;
@@ -236,7 +236,7 @@ Scaffold 코드 작성
         }
     }
 
-지금부터 기존의 사용자 암호를 업데이트 합니다.
+지금부터 기존의 사용자 암호를 수정합니다.
 암호를 변경했을 때, 목록 또는 세부 페이지에서입력 한 값 대신 해시 된 암호가 있는지 확인합니다.
 CakePHP는기본적으로`bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_ 를 사용하여 암호를 해시합니다.
 기존 데이터베이스가 실행중인 경우 sha1와 md5도사용할 수 있습니다.
@@ -254,7 +254,7 @@ CakePHP는기본적으로`bcrypt <http://codahale.com/how-to-safely-store-a-pass
 다음은 태그에서 책갈피를 검색하기 위해 루트 컨트롤러의 액션, finder 메소드를 구현합니다.
 
 이상적으로는 **http://localhost:8765/bookmarks/tagged/funny/cat/gifs** 같은 URL이 되겠습니다.
-이 URL은 'funny', 'cat'또는 ‘gifs' 태그 북마크 모든 것을 검색하는 것을 의도하고 있습니다.
+이 URL은 'funny', 'cat'또는 'gifs' 태그 북마크 모든 것을 검색하는 것을 의도하고 있습니다.
 이를 구현하기 전에 새로운 루트를 추가합니다.
 **config/routes.php** *을 다음과 같이합니다. ::
 
@@ -265,7 +265,7 @@ CakePHP는기본적으로`bcrypt <http://codahale.com/how-to-safely-store-a-pass
     Router::defaultRouteClass(DashedRoute::class);
 
     // 새로운 루트를　tagged 액션을 위해 추가함
-    // 마지막 `*` 는 전달 된 인수를 가지고 있는지
+    // 마지막 '*' 는 전달 된 인수를 가지고 있는지
     // CakePHP에게 전함
     Router::scope(
         '/bookmarks',
@@ -291,7 +291,7 @@ CakePHP는기본적으로`bcrypt <http://codahale.com/how-to-safely-store-a-pass
     });
 
 위는 **/bookmarks/tagged/** 경로를 ``BookmarksController::tags()`` 에 연결
-새로운 「루트」를 정의합니다. 경로를 정의하게 잘하여 URL의 모습과
+새로운 '루트' 를 정의합니다. 경로를 정의하게 잘하여 URL의 모습과
 그들은 어떻게 구현되었는지를 분리 할 수 있습니다.
 **http://localhost:8765/bookmarks/tagged**에 액세스하는 경우 CakePHP에서
 컨트롤러의 액션이없는 것을 전하는 유용한 오류 페이지가 표시됩니다.
@@ -324,7 +324,7 @@ Finder 메소드 작성
 
 CakePHP에서 컨트롤러의 액션을 슬림하게 유지하면서 응용 프로그램의 많은 로직을
 모델에 두는 것이 좋습니다. **/bookmarks/tagged** 의 URL에 액세스하는 경우
-``findTagged()``메소드가 아직 구현되지 않은 오류가 표시됩니다.
+``findTagged()`` 메소드가 아직 구현되지 않은 오류가 표시됩니다.
 **src/Model/Table/BookmarksTable.php**에 다음을 추가하시기 바랍니다. ::
 
     // $query 인수는 쿼리 빌더의 인스턴스
@@ -350,9 +350,9 @@ CakePHP에서 컨트롤러의 액션을 슬림하게 유지하면서 응용 프�
 
 :ref:`커스텀 Finder 메서드 <custom-find-methods>` 을 구현했습니다.
 이것은 재사용 가능한 쿼리를 정리하는 것을 실현하는 CakePHP의 매우 강력한 개념입니다.
-Finder 메소드는 항상:doc:`/orm/query-builder`  개체 및 옵션 배열을 매개 변수로 가져옵니다.
+Finder 메소드는 항상 :doc:`/orm/query-builder` 개체 및 옵션 배열을 매개 변수로 가져옵니다.
 Finder 메소드는 쿼리를 조작하여 임의의 필수 조건과 조건을 추가 할 수 있습니다.
-완료되면 Finder 메소드는 업데이트 된 쿼리 개체를 반환해야합니다.
+완료되면 Finder 메소드는 수정 된 쿼리 개체를 반환해야합니다.
 finder에서 일치하는 태그가있는 특정 책갈피를 검색하기 위해
 ``innerJoinWith()``, ``where()`` 그리고 ``group`` 메소드를 사용합니다.
 태그의 지정이없는 경우, 태그없이 북마크를 검색하기 위해 ``leftJoinWith()`` 를 사용하여
@@ -362,7 +362,7 @@ finder에서 일치하는 태그가있는 특정 책갈피를 검색하기 위�
 -------------
 
 **/bookmarks/tagged** 의 URL에 액세스하면 CakePHP는 뷰 파일이 없는지 알리는 오류를 표시합니다.
-그런 다음보기 파일을``tags()`` 행동에 대한 만듭니다.
+그런 다음보기 파일을 ``tags()`` 행동에 대한 만듭니다.
 **src/Template/Bookmarks/tags.ctp** 아래 내용을 추가합니다. ::
 
     <h1>
@@ -383,10 +383,10 @@ finder에서 일치하는 태그가있는 특정 책갈피를 검색하기 위�
     <?php endforeach; ?>
     </section>
 
-위의 코드는 :doc:`/views/helpers/html`과 :doc:`/views/helpers/text` 을
+위의 코드는 :doc:`/views/helpers/html` 과 :doc:`/views/helpers/text` 을
 뷰의 출력 생성을 보조하기 위해 사용했습니다. 또한 HTML 인코딩 출력하기 위해
 :php:func:`h`  바로 가기 기능을 사용했습니다. HTML 삽입 문제를 방지하기 위해
-사용자 데이터 출력시에는 반드시``h()``를 사용하는 것을 기억하시기 바랍니다.
+사용자 데이터 출력시에는 반드시 ``h()`` 를 사용하는 것을 기억하시기 바랍니다.
 
 뷰 템플릿 파일을위한 CakePHP의 규약에 따라 **tags.ctp** 파일을 만들었습니다.
 이 약관은 문자를 사용하여 컨트롤러의 액션 이름을 밑줄 화 된 템플릿 이름을 사용하는 것입니다.
@@ -403,5 +403,5 @@ finder에서 일치하는 태그가있는 특정 책갈피를 검색하기 위�
 다음 장에서는 인증을 구현하고 현재 사용자에 속하는 책갈피 만 표시하도록 제한합니다.
 
 당신의 응용 프로그램의 구축을 계속하기 위해서
-:doc:`/tutorials-and-examples/bookmarks/part-two`를 읽고 하거나
+:doc:`/tutorials-and-examples/bookmarks/part-two` 를 읽고 하거나
 CakePHP에서 할 수있는 것을 :doc:`문서에서 </topics>` 더 자세히 배우시기 바랍니다.

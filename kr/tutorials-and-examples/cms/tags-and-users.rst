@@ -4,8 +4,9 @@ CMS 튜토리얼 - 태그와 유져
 기본 문서 작성 기능이 구축 된 상태에서 여러 작성자가 CMS에서 작업 할 수 있어야합니다.
 이전에는 모든 모델, 뷰 및 컨트롤러를 손으로 제작했습니다.
 이번에는 : doc :`/ bake` :을 사용하여 스켈레톤 코드를 작성하려고합니다.
-Bake는 CakePHP가 : abbr :`CRUD (Create, Read, Update, Delete)` 애플리케이션을 매우 효율적으로 생성하는 데 사용하는 규칙을 활용하는 코드 생성  :abbr:`CLI (Command Line Interface)` 도구입니다.
-사용자 코드를 빌드하기 위해 ``bake`` 를 사용할 것입니다.
+Bake는 CakePHP가 : abbr :`CRUD (Create, Read, Update, Delete)` 애플리케이션을 매우 효율적으로 생성하는데
+사용하는 규칙을 활용하는 코드 생성 :abbr:`CLI (Command Line Interface)` 도구입니다.
+사용자 코드를 빌드하기 위해 ``bake`` 를 사용하겠습니다.
 
 .. code-block:: bash
 
@@ -49,9 +50,9 @@ Tags 테이블이 생겼으니 Articles와 Tags를 만들 수 있습니다.
     }
 
 이 연관성은 따라했기 때문에 간단한 정의로 작동 할 것입니다.
-테이블을 만들 때의 CakePHP 규칙. 자세한 내용은 :doc:`/orm/associations` 을 참조합니다.
+테이블을 만들 때의 CakePHP 규칙은 :doc:`/orm/associations` 을 참조합니다.
 
-태그를 적용하기 위한 기사(Articles) 업데이트
+태그를 적용하기 위한 기사(Articles) 수정
 ===================================
 
 애플리케이션에 태그가 추가되었으므로 사용자가 태그를 지정할 수 있도록 해야합니다.
@@ -100,8 +101,8 @@ Tags 테이블이 생겼으니 Articles와 Tags를 만들 수 있습니다.
 
 이것은``$tags`` 변수를 사용하는 다중 select 요소를 선택 상자 옵션을 생성합니다.
 이제 몇 개의 새로운 기사(Article)를 만들어야합니다.
-또한 태그를 추가하거나 편집 할 수 있도록 ``edit`` 메소드를 업데이트해야합니다.
-편집 방법은 다음과 같습니다. ::
+또한 태그를 추가하거나 수정 할 수 있도록 ``edit`` 메소드를 수정해야합니다.
+수정 방법은 다음과 같습니다. ::
 
     public function edit($slug)
     {
@@ -127,7 +128,7 @@ Tags 테이블이 생겼으니 Articles와 Tags를 만들 수 있습니다.
         $this->set('article', $article);
     }
 
- **add.ctp**에 추가 한 멀티 셀렉트 컨트롤을 새 태그에 추가합니다.
+**add.ctp**에 추가 한 멀티 셀렉트 컨트롤을 새 태그에 추가합니다.
 템플릿을 **src/Template/Articles/edit.ctp* 템플릿에도 추가합니다.
 
 태그로 기사(Articles) 검색
@@ -136,8 +137,8 @@ Tags 테이블이 생겼으니 Articles와 Tags를 만들 수 있습니다.
 사용자가 콘텐츠를 분류하면 해당 콘텐츠를 검색하려고 합니다.
 사용한 태그로 이 기능을 위해 경로, 컨트롤러 액션 및 파인더 메소드를 사용하여 태그별로 기사를 검색합니다.
 
-이상적으로는, **http://localhost:8765/articles/tagged/funny/cat/gifs**과 같은 URL입니다.
-그러면 "funny" "cat"또는 "gifs"태그가있는 모든 문서를 찾을 수 있습니다.
+이상적으로는 **http://localhost:8765/articles/tagged/funny/cat/gifs**과 같은 URL입니다.
+그러면 "funny" "cat" 또는 "gifs" 태그가있는 모든 문서를 찾을 수 있습니다.
 이를 구현하기 전에 새로운 루트를 추가합니다. **config/routes.php**은 다음과 같이 될 것입니다. ::
 
     <?php
@@ -176,7 +177,7 @@ Tags 테이블이 생겼으니 Articles와 Tags를 만들 수 있습니다.
 
 
 위는 **/articles/tagged/** 경로를 연결하는 새로운 'route'를 정의하고,
-``ArticlesController::tags()``에 추가합니다. 경로를 정의하면 URL이 어떻게 구현되는지 살펴 봅니다.
+``ArticlesController::tags()``에 추가합니다. 경로를 정의하면 URL이 어떻게 구현되는지 확인합니다.
 접속한다면 **http://localhost:8765/articles/tagged** 오류 페이지가 표시됩니다.
 이것은 CakePHP에서 컨트롤러 동작이 존재하지 않는다는 것을 알려줍니다.
 그럼 오류 페이지를 고치기위해  **src/Controller/ArticlesController.php**
@@ -202,7 +203,7 @@ Tags 테이블이 생겼으니 Articles와 Tags를 만들 수 있습니다.
 
 요청 데이터의 다른 부분에 액세스하려면 :ref:`cake-request` 섹션을 참조하시기 바랍니다.
 
-전달 된 인수는 메소드 매개 변수로 전달되므로 PHP의 가변 인수를 사용하여 액션을 작성할 수도 있습니다. ::
+전달 된 인수는 메소드 매개 변수로 전달되므로 PHP의 가변 인수를 사용하여 액션을 작성할 수 있습니다. ::
 
     public function tags(...$tags)
     {
@@ -229,9 +230,9 @@ CakePHP에서 컨트롤러의 액션을 유지하면서 응용 프로그램의 �
     // Query 클래스를 가져옵니다
     use Cake\ORM\Query;
 
-    //  $query 인수는 쿼리 빌더의 인스턴스입니다
+    //  $query 인수는 쿼리 빌더의 인스턴스입니다.
     //  $options 배열은 컨트롤러의 액션에서 find('tagged')에 전달하면
-    // "tags"옵션이 포함되어 있습니다.
+    // 'tags'옵션이 포함되어 있습니다.
     public function findTagged(Query $query, array $options)
     {
         $columns = [
@@ -257,7 +258,7 @@ CakePHP에서 컨트롤러의 액션을 유지하면서 응용 프로그램의 �
         return $query->group(['Articles.id']);
     }
 
-사용자 정의  :ref:`custom finder method <custom-find-methods>`를 구현했습니다.
+사용자 정의 :ref:`custom finder method <custom-find-methods>`를 구현했습니다.
 이것은 CakePHP의 매우 강한 개념에서 재사용 가능한 쿼리를 패키지화 할 수 있습니다.
 파인더 메소드는 항상 :doc:`/orm/query-builder`  객체와 options 배열을 매개 변수로 가져옵니다.
 파인더는 쿼리를 조작하여 필수 조건과 조건을 추가 할 수 있습니다. 완료되면 파인더 메소드는 변경된 쿼리 개체를 반환해야합니다.
@@ -267,7 +268,7 @@ View 작성
 -----------------
 
 **/articles/tagged** URL에 다시 액세스하면 CakePHP는 새로운 오류를 표시하여 뷰 파일이 생성되지 않음을 알려드립니다.
-다음은 ``tags()`` 액션의 뷰 파일을 만들 수 있습니다. **src/Template/Articles/tags.ctp**에 다음의 내용을 작성합니다::
+다음은 ``tags()`` 액션의 뷰 파일을 만들 수 있습니다. **src/Template/Articles/tags.ctp**에 다음의 내용을 작성합니다. ::
 
     <h1>
         Articles tagged with
@@ -295,7 +296,7 @@ HTML 인젝션 문제를 방지하기 위해 데이터를 출력 할 때는 항�
 컨트롤러의 액션 이름을 소문자와 밑줄로 바꾼 것을 템플릿에 사용할 수 약관입니다.
 
 뷰 템플릿에 ``$tags``와 ``$articles`` 변수를 사용할 수있는 것을 알 수 있습니다.
-컨트롤러에서 ``set()`` 메소드를 사용하면, 뷰에 쓰기 특정 변수를 설정합니다.
+컨트롤러에서 ``set()`` 메소드를 사용하면 뷰에 쓰기 특정 변수를 설정합니다.
 뷰는 전달 된 모든 변수를 템플릿 범위에서 지역 변수로 사용 가능합니다.
 
 이상  **/articles/tagged/funny** URL로 이동하여 ‘funny’와 태그 된 모든 기사(Articles)를 볼 수 있습니다.
@@ -335,10 +336,10 @@ HTML 인젝션 문제를 방지하기 위해 데이터를 출력 할 때는 항�
 따라서 ``$article->tag_string``  계산 된 속성에 액세스 할 수 있습니다.
 나중에 컨트롤이 등록 정보를 사용합니다.
 
-Views 업데이트
+Views 수정
 ------------------
 
-엔티티가 업데이트되고, 태그의 새로운 개념을 추가했습니다
+엔티티를 수정하고 태그의 새로운 개념을 추가했습니다
 **src/Template/Articles/add.ctp**와 **src/Template/Articles/edit.ctp**의 중,
 기존 태그 ``tags._ids`` 을 다음의 것과 바꿉니다. ::
 
@@ -350,7 +351,7 @@ Views 업데이트
 기존의 태그를 문자열로 표시 할 수있게 되었기 때문에 그 데이터도 저장해야 합니다.
  ``tag_string``를 액세스 가능한 것으로 표시하기 때문에 ORM은 데이터 요청에서 엔티티에 복사합니다.
  ``beforeSave()`` 훅 메소드를 사용하여 태그 문자열을 분석하고 관련 엔티티를 검색/구축 할 수 있습니다.
-src / Model / Table / ArticlesTable.php에 다음을 추가합니다::
+src / Model / Table / ArticlesTable.php에 다음을 추가합니다. ::
 
     public function beforeSave($event, $entity, $options)
     {
@@ -392,7 +393,7 @@ src / Model / Table / ArticlesTable.php에 다음을 추가합니다::
         return $out;
     }
 
-기사를 작성하거나 편집 할 때 태그를 쉼표로 구분 된 태그 목록으로 저장하고 태그와 링크 레코드를 자동으로 생성 할 수 있도록 해야합니다.
+기사를 작성하거나 수정 할 때 태그를 쉼표로 구분 된 태그 목록으로 저장하고 태그와 링크 레코드를 자동으로 생성 할 수 있도록 해야합니다.
 
 이 코드는 지금까지의 방식보다 조금 복잡하지만 'CakePHP의 ORM이 얼마나 강력한가?'를 소개하는 데 도움이됩니다.
 :doc:`/core-libraries/collections`의 메소드를 사용하여 쿼리 결과를 조작하거나 엔티티를 쉽게 생성 할 시나리오를 처리 할 수 있습니다.

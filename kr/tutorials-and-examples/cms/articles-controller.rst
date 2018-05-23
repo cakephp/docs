@@ -35,7 +35,7 @@ CakePHP의 컨트롤러는 HTTP 요청을 처리하고 응답을 준비하기 �
     }
 
 ``ArticlesController`` 에서 ``index()`` 함수를 정의하면 사용자는 **www.example.com/articles/index** 를 요청하여 액세스 할 수 있습니다.
-마찬가지로 ``foobar()`` 라는 함수를 정의하면 사용자는 **www.example.com/articles/foobar**  에 액세스 할 수 있습니다.
+마찬가지로 ``foobar()`` 라는 함수를 정의하면 사용자는 **www.example.com/articles/foobar** 에 액세스 할 수 있습니다.
 특정 URL을 얻을 수 있는 방법으로 컨트롤러와 작업의 이름을 지정해야 할 수도 있지만 :doc:`/intro/conventions` 에 따라 읽기 쉽고 의미있는 액션 이름을 만드는 것을 권장합니다.
 그런 다음 :doc:`/development/routing` 을 사용하여 원하는 URL을 만든 작업에 연결할 수 있습니다.
 
@@ -48,16 +48,16 @@ Articles 일람표 템플릿 작성
 
 이제 컨트롤러가 모델에서 데이터를 가져 와서 뷰 컨텍스트를 준비 했으므로 index 작업을위한 뷰 템플릿을 만들어 보겠습니다.
 
-CakePHP 뷰 템플릿은 어플리케이션의 레이아웃 안에 삽입된 프리젠 테이션용 PHP 코드입니다.
- 여기에서 HTML을 생성하는 동안, Views는 JSON, CSV 또는 심지어 PDF와 같은 바이너리 파일을 생성 할 수 있습니다.
+CakePHP 뷰 템플릿은 애플리케이션의 레이아웃 안에 삽입된 프리젠 테이션용 PHP 코드입니다.
+여기에서 HTML을 생성하는 동안, Views는 JSON, CSV 또는 심지어 PDF와 같은 바이너리 파일을 생성 할 수 있습니다.
 
 레이아웃은 뷰를 감싸는 프리젠 테이션 코드입니다.
 레이아웃 파일에는 머리글, 바닥 글 및 탐색 요소와 같은 공통 사이트 요소가 포함되어 있습니다.
-어플리케이션은 여러 레이아웃을 가질 수 있으며 두 레이아웃을 전환 할 수 있습니다.
+애플리케이션은 여러 레이아웃을 가질 수 있으며 두 레이아웃을 전환 할 수 있습니다.
 하지만 지금은 기본 레이아웃을 사용합시다.
 
 CakePHP의 템플릿 파일은 **src/Template** 에 해당하는 컨트롤러의 이름을 가진 폴더 안에 저장됩니다.
-따라서 이 경우 'Articles'라는 폴더를 만들어야합니다. 어플리케이션에 다음 코드를 작성합니다.
+따라서 이 경우 'Articles'라는 폴더를 만들어야합니다. 애플리케이션에 다음 코드를 작성합니다.
 
 .. code-block:: php
 
@@ -93,8 +93,8 @@ CakePHP의 템플릿 파일은 **src/Template** 에 해당하는 컨트롤러의
 CakePHP에는 링크, 양식 및 페이지 버튼을 쉽게 만들 수 있는 뷰 헬퍼가 있습니다.
 해당 챕터에서 :doc:`/views/helpers` 에 대해 자세히 알아볼 수 있지만
 여기서 중요한 점은 ``link()`` 메서드가 주어진 링크 텍스트 (첫 번째 매개 변수)와 URL (두 번째 매개 변수)을 사용하여 HTML 링크를 생성한다는 것입니다.
-CakePHP에서 URL을 지정할 때, 배열이나 :ref:`명명 <named-routes>` 된 경로를 사용하는 것이 좋습니다. 이러한 구문을 사용하면
-CakePHP에서 제공하는 역방향 라우팅 기능을 활용할 수 있습니다.
+CakePHP에서 URL을 지정할 때, 배열이나 :ref:`명명 <named-routes>` 된 경로를 사용하는 것이 좋습니다.
+이러한 구문을 사용하면 CakePHP에서 제공하는 역방향 라우팅 기능을 활용할 수 있습니다.
 
 이 시점에서 브라우저에서 **http://localhost:8765/articles/index** 를 가리킬 수 있어야 합니다.
 Article의 제목과 표 목록으로 올바르게 형식이 지정된 목록보기가 표시되어야 합니다.
@@ -102,7 +102,7 @@ Article의 제목과 표 목록으로 올바르게 형식이 지정된 목록보
 뷰 액션 만들기
 =====================
 
-Article 목록 페이지에서 ‘뷰'링크 중 하나를 클릭하면 작업이 구현되지 않았다는 오류 페이지가 표시됩니다.
+Article 목록 페이지에서 '뷰'링크 중 하나를 클릭하면 작업이 구현되지 않았다는 오류 페이지가 표시됩니다.
 이제 해결할 수 있습니다. ::
 
     // 기존 src/Controller/ArticlesController.php 파일에 추가
@@ -120,7 +120,7 @@ Article 목록 페이지에서 ‘뷰'링크 중 하나를 클릭하면 작업�
 이 액션은 $slug 매개 변수를 받는데 ``$slug`` 는 사용자가 ``/articles/view/first-post`` 를 요청하면
 'first-post'값은 CakePHP의 라우팅 및 디스패치 계층에 의해 ``$slug`` 로 전달됩니다.
 새로운 작업을 저장 한 상태에서 브라우저를 다시 로드하면 다른 CakePHP 오류 페이지가 표시되어 뷰 템플릿이 누락되었음을 알 수 있습니다.
-그것을 편집합시다.
+그것을 수정합시다.
 
 
 뷰 템플렛 작성
@@ -214,7 +214,7 @@ POST 데이터는 ``$this->request->getData()`` 에서 사용할 수 있습니�
 엔티티는 이전에 작성한 ArticlesTable을 사용하여 지속됩니다.
 
 새 Article을 저장 한 후 FlashComponent의 ``success()`` 메서드를 사용하여 메시지를 세션에 설정합니다.
-``success`` 방법은 PHP의 `매직 메서드 기능 <http://php.net/manual/ja/language.oop5.overloading.php#object.call>`_ 을 사용하여 제공됩니다.
+``success`` 방법은 PHP의 `매직 메서드 기능 <http://php.net/manual/kr/language.oop5.overloading.php#object.call>`_ 을 사용하여 제공됩니다.
 리다이렉트 후 플래시 메시지가 다음 페이지에 표시됩니다.
 레이아웃에는 플래시 메시지를 표시하고 해당 세션 변수를 클리어하는 ``<?= $this->Flash->render() ?>`` 가 있습니다.
 마지막으로 저장이 완료되면 :php:meth:`Cake\\Controller\\Controller::redirect` 를 사용하여 사용자를 기사 목록으로 다시 보냅니다.
@@ -250,14 +250,14 @@ FormHelper를 사용하여 HTML 양식의 태그를 생성합니다.
 URL 옵션없이 ``create()`` 를 호출했기 때문에 ``FormHelper`` 는 양식이 현재 작업으로 다시 제출되기를 원한다고 가정합니다.
 
 ``$this->Form->control()`` 메서드는 동일한 이름의 양식 요소를 작성하는 데 사용됩니다.
-첫 번째 매개 변수는 CakePHP에게 어느 필드가 해당하는지 알려주고 두 번째 매개 변수는 다양한 옵션을 지정할 수있게 해줍니다.
+첫 번째 매개 변수는 CakePHP에게 어느 필드가 해당하는지 알려주고 두 번째 매개 변수는 다양한 옵션을 지정할 수 있게 해줍니다.
 이 경우 텍스트 영역의 행 수를 지정할 수 있습니다.
 여기에 사용 된 내용 확인(introspection) 및 규칙이 있습니다.
 ``control()`` 은 지정된 모델 필드에 따라 다른 양식 요소를 출력하고 언어형태 변화(inflection)을 사용하여 레이블 텍스트를 생성합니다.
 옵션을 사용하여 레이블, 입력 또는 양식 컨트롤의 다른 측면을 사용자 정의 할 수 있습니다.
 ``$this->Form->end()`` 호출은 폼을 닫습니다.
 
-이제 돌아가서  **src/Template/Articles/index.ctp** 보기를 업데이트하여 새로운 "Article 추가"링크를 포함 시킵니다.
+이제 돌아가서  **src/Template/Articles/index.ctp** 보기를 수정해서 새로운 "Article 추가"링크를 포함 시킵니다.
 ``<table>`` 앞에 다음 행을 추가합니다. ::
 
     <?= $this->Html->link('Article추가', ['action' => 'add']) ?>
@@ -265,7 +265,7 @@ URL 옵션없이 ``create()`` 를 호출했기 때문에 ``FormHelper`` 는 양�
 심플 Slug생성
 =============================
 
-지금 Article를 저장한다면, Slug 속성을 생성하지 않고 컬럼이 ``NOT NULL`` 이되어 저장이 실패 할 것입니다.
+지금 Article를 저장한다면, Slug 속성을 생성하지 않고 컬럼이 ``NOT NULL`` 이되어 저장에 실패 할 것입니다.
 Slug 값은 일반적으로 Article의 제목에 대한 URL 안전 버전입니다.
 ORM의 :ref:`beforeSave() 콜백 <table-callbacks>` 을 사용하여 슬러그를 채울 수 있습니다. ::
 
@@ -290,13 +290,13 @@ ORM의 :ref:`beforeSave() 콜백 <table-callbacks>` 을 사용하여 슬러그�
         }
     }
 
-이 코드는 간단하며 중복 된 Slug는 고려하지 않습니다. 하지만 나중에 편집할 것 입니다.
+이 코드는 간단하며 중복 된 Slug는 고려하지 않습니다. 하지만 나중에 수정하겠습니다.
 
-Article편집
+Article수정
 =====================
 
-우리의 응용 프로그램은 이제 Article을 저장할 수 있지만 편집은 할 수는 없습니다.
-``ArticlesController`` 에 다음 작업을 추가해주시길 바랍니다. ::
+우리의 응용 프로그램은 이제 Article을 저장할 수 있지만 수정은 할 수는 없습니다.
+``ArticlesController`` 에 다음 작업을 추가해주시기 바랍니다. ::
 
     // src/Controller/ArticlesController.php 파일
 
@@ -321,19 +321,19 @@ Article편집
 ``$slug`` 매개 변수를 전달하지 않았거나 Article이 존재하지 않으면 ``NotFoundException`` 이 발생하고 CakePHP ErrorHandler가 해당 오류 페이지를 렌더링합니다.
 
 그런 다음 요청은 POST 또는 PUT 요청인지 여부를 확인합니다.
-그렇다면 POST / PUT 데이터를 사용하여 ``patchEntity()`` 메서드를 사용하여 기사 엔티티를 업데이트합니다.
+그렇다면 POST / PUT 데이터를 사용하여 ``patchEntity()`` 메서드를 사용하여 기사 엔티티를 수정합니다.
 마지막으로  ``save()`` 를 호출하여 적절한 플래시 메시지를 설정하고 리디렉션하거나 유효성 검사 오류를 표시합니다.
 
-Article편집 템플릿 만들기
+Article수정 템플릿 만들기
 =======================
 
-Articles편집 템플릿은 다음과 같습니다.
+Articles수정 템플릿은 다음과 같습니다.
 
 .. code-block:: php
 
     <!-- File: src/Template/Articles/edit.ctp -->
 
-    <h1>Articles편집</h1>
+    <h1>Articles수정</h1>
     <?php
         echo $this->Form->create($article);
         echo $this->Form->control('user_id', ['type' => 'hidden']);
@@ -343,12 +343,12 @@ Articles편집 템플릿은 다음과 같습니다.
         echo $this->Form->end();
     ?>
 
-이 템플릿은 필요한 유효성 검사 오류 메시지와 함께 편집 템플릿을 출력합니다.
-이제 Articles를 편집 할 수있는 링크로 색인보기를 업데이트 할 수 있습니다.
+이 템플릿은 필요한 유효성 검사 오류 메시지와 함께 수정 템플릿을 출력합니다.
+이제 Articles를 수정 할 수있는 링크로 색인보기를 수정 할 수 있습니다.
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp  (편집링크) -->
+    <!-- File: src/Template/Articles/index.ctp  (수정링크) -->
 
     <h1>Articles일람</h1>
     <p><?= $this->Html->link("Articles추가", ['action' => 'add']) ?></p>
@@ -377,7 +377,7 @@ Articles편집 템플릿은 다음과 같습니다.
 
     </table>
 
-Article 유효성 검사 규칙 업데이트
+Article 유효성 검사 규칙 수정
 ====================================
 
 이 시점까지 Article은 입력 검증이 완료되지 않았습니다. :ref:`유효성 검사(Validator) <validating-request-data>` 를 사용하여 해결할 수 있습니다. ::
@@ -442,7 +442,7 @@ Article삭제 액션 추가
     그래서 컨트롤러에서 ``allowMethod()`` 를 사용했습니다.
 
 단지 로직을 실행하고 다른 액션으로 리디렉션하기 때문에 이 액션에는 템플릿이 없습니다.
-사용자가 Article을 삭제할 수있는 링크로 색인 템플릿을 업데이트 할 수 있습니다.
+사용자가 Article을 삭제할 수있는 링크로 색인 템플릿을 수정 할 수 있습니다.
 
 .. code-block:: php
 
@@ -468,7 +468,7 @@ Article삭제 액션 추가
                 <?= $article->created->format(DATE_RFC850) ?>
             </td>
             <td>
-                <?= $this->Html->link('편집', ['action' => 'edit', $article->slug]) ?>
+                <?= $this->Html->link('수정', ['action' => 'edit', $article->slug]) ?>
                 <?= $this->Form->postLink(
                     '삭제',
                     ['action' => 'delete', $article->slug],
@@ -480,7 +480,7 @@ Article삭제 액션 추가
 
     </table>
 
-:php:meth:`~Cake\\View\\Helper\\FormHelper::postLink()` 를 사용하면 JavaScript를 사용하여 Article을 삭제하는 POST 요청을하는 링크가 생성됩니다.
+:php:meth:`~Cake\\View\\Helper\\FormHelper::postLink()` 를 사용하면 JavaScript로 Article을 삭제를 요청하는 POST 링크가 생성됩니다.
 
 .. note::
 

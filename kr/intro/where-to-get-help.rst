@@ -6,7 +6,7 @@
 
 `https://cakephp.org <https://cakephp.org>`_
 
-공식 CakePHP 웹사이트는 언제라도 보러 갈 가치가있는 좋은 장소입니다.
+공식 CakePHP 웹사이트는 언제라도 보러 갈 수 있는 좋은 장소입니다.
 자주 사용되고있는 개발툴, 스크린캐스트, 도네이션방법, 다운로드등의 링크가 있습니다.
 
 Cookbook
@@ -42,7 +42,7 @@ API
 ============
 
 API에서 제공되는 정보가 충분하지 않다고 느끼는 경우 CakePHP에서 제공하는 테스트 케이스 코드를 확인할 수 있습니다.
-함수의 실용적인 예제와 클래스의 멤버를 사용하는 방법으로 사용할 수 있습니다.::
+함수의 실용적인 예제와 클래스의 멤버를 사용하는 방법으로 사용할 수 있습니다. ::
 
 tests/TestCase/
 
@@ -73,7 +73,7 @@ Stackoverflow
 
 `https://stackoverflow.com/ <https://stackoverflow.com/questions/tagged/cakephp/>`_
 
-Stack Overflow의 기존 사용자가 질문을 찾기 쉽게 하기 위해서 질문을 할때 ``cakephp``태그와 이용 중인 버전을 입력하시기 바랍니다.
+Stack Overflow의 기존 사용자가 질문을 찾기 쉽게 하기 위해서 질문을 할때 ``cakephp``　태그와 이용 중인 버전을 입력하시기 바랍니다.
 
 다른 언어 정보
 ============

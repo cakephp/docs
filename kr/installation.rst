@@ -19,7 +19,7 @@ CakePHP는 nginx나 lighttpd, Microsoft IIS와 같은 여러가지 웹서버에�
 
     XAMPP / WAMP 중 어느쪽이라도 mcrypt확장, mbstring확장 둘 다 초기 인스톨 상태에서 동작합니다.
     XAMPP 에서는 intl확장은 포함되어 있지만, **php.ini** 의 ``extension=php_intl.dll``
-    의 커멘트를 분리하여 XAMPP 컨트롤 패널에서 서버의 재기동을 할 필요가 있습니다.
+    커멘트를 분리하여 XAMPP 컨트롤 패널에서 서버의 재기동을 할 필요가 있습니다.
 
     WAMP에서 intl확장은 처음부터 액티브로 되어있지만 동작은 하지않습니다.
     동작 시키기위해서는 php디렉토리 (초기상태에서는 **C:\\wamp\\bin\\php\\php{version}** ) 에 있는
@@ -27,7 +27,7 @@ CakePHP는 nginx나 lighttpd, Microsoft IIS와 같은 여러가지 웹서버에�
     ( **C:\\wamp\\bin\\apache\\apache{version}\\bin** ) 에 복사한 뒤에
     전체 서비스를 재기동하면 동작하게 됩니다.
 
-데이터베이스 엔진은 필수는 아니지만 대부분의 어플리케이션은 데이터베이스를 활용한다고 할 수 있습니다.
+데이터베이스 엔진은 필수는 아니지만 대부분의 애플리케이션은 데이터베이스를 활용한다고 할 수 있습니다.
 CakePHP는 여러가지 데이터베이스, 스토리지 엔진을 서포트하고 있습니다.
 
 -  MySQL (5.1.10 이상)
@@ -53,7 +53,6 @@ PHP |minphpversion| (CLI) 이상이 설치되어 있어야 합니다.
 웹 서버의 PHP 또한  |minphpversion| 이상이어야 하며,
 커멘드라인 인터페이스(CLI)와 같은 버전을 사용해주세요.
 
-
 Composer 설치
 -----------------------
 
@@ -78,7 +77,7 @@ CakePHP 프로젝트를 생성
 --------------------------
 
 이상으로 Composer 다운로드와 설치가 완료되었습니다. my_app_name 디렉토리에
-CakePHP의 새로운 어플리케이션을 생성해주세요. 아래의 composer 명령어를 실행하여 생성합니다.
+CakePHP의 새로운 애플리케이션을 아래의 composer 명령어를 실행하여 생성합니다.
 
 .. code-block:: bash
 
@@ -90,24 +89,24 @@ CakePHP의 새로운 어플리케이션을 생성해주세요. 아래의 compose
 
     composer self-update && composer create-project --prefer-dist cakephp/app my_app_name
 
-한 번 Composer가 어플리케이션의 양식과 코어 라이브러리를 다운로드 하면
-설치한 CakePHP 어플리케이션을 Composer로 조작 가능하도록 해두어야 합니다.
+한 번 Composer가 애플리케이션의 양식과 코어 라이브러리를 다운로드 하면
+설치한 CakePHP 애플리케이션을 Composer로 조작 가능하도록 해두어야 합니다.
 반드시 composer.json 과 composer.lock 파일은 남겨둡시다.
 
-이것으로 설치한 CakePHP 어플리케이션에 엑세스하여 디폴트 초기페이지를 볼 수 있게 됩니다.
+이것으로 설치한 CakePHP 애플리케이션에 엑세스하여 디폴트 초기페이지를 볼 수 있게 됩니다.
 이 페이지의 내용을 변경하려면 **src/Template/Pages/home.ctp** 를 수정해주세요.
 
 composer에 의한 설치를 권장하지만
 `Github <https://github.com/cakephp/cakephp/tags>`__
 에는 사전 설치 버전도 있습니다.
-이 파일에는 어플리케이션의 양식과 벤더 패키지 전체가 포함되어 있습니다.
+이 파일에는 애플리케이션의 양식과 벤더 패키지 전체가 포함되어 있습니다.
 또한 ``composer.phar`` 도 포함되어 있으므로, 한층더 폭 넓은 사용을 위한 필요한 것을
 모두 갖추고 있습니다.
 
 CakePHP 변경에 맞춰 최신 상태를 유지
 ----------------------------------------
 
-디폴트로 어플리케이션의 **composer.json** 는 아래와 같이 되어있습니다. ::
+디폴트로 애플리케이션의 **composer.json** 는 아래와 같이 되어있습니다. ::
 
     "require": {
         "cakephp/cakephp": "3.5.*"
@@ -117,14 +116,14 @@ CakePHP 변경에 맞춰 최신 상태를 유지
 패치 릴리즈가 업데이트 됩니다. 대신에 ``^3.5`` 를 변경하여, ``3.x`` 브런치의
 최신 안정 버전 마이너릴리즈를 받을 수도 있습니다.
 
-만약 CakePHP를 릴리즈 전 최신상태로 유지하고 싶다면 어플리케이션의
+만약 CakePHP를 릴리즈 전 최신상태로 유지하고 싶다면 애플리케이션의
 **composer.json** 에 패키지 버전으로  **dev-master** 를 지정합니다. ::
 
     "require": {
         "cakephp/cakephp": "dev-master"
     }
 
-이 방법은 다음 메이저 버전이 릴리즈될 때에 어플리케이션이
+이 방법은 다음 메이저 버전이 릴리즈될 때에 애플리케이션이
 동작하지 않게 될 가능성이 있으므로 권장하지 않으니 주의해주세요.
 더불어 composer 는 개발 브런치를 캐시하지 않으므로 composer 에 의해
 연속적인 설치, 업데이트는 시간이 다소 소요될 수 있습니다.
@@ -133,22 +132,22 @@ Oven을 사용한 설치
 ---------------------------
 
 CakePHP를 신속하게 설치하기 위한 별도의 방법은 `Oven <https://github.com/CakeDC/oven>`_ 입니다.
-이것은 필요한 시스템 요건을 체크, CakePHP 어플리케이션의 뼈대를 설치, 그리고
+이것은 필요한 시스템 요건을 체크, CakePHP 애플리케이션의 뼈대를 설치, 그리고
 개발 환경을 셋업하는 간단한 PHP 스크립트 입니다.
 
-설치가 완료되면 CakePHP 어플리케이션은 곧바로 사용할 수 있습니다!
+설치가 완료되면 CakePHP 애플리케이션은 곧바로 사용할 수 있습니다!
 
 .. note::
 
     중요: 이것은 디플로이 스크립트는 아닙니다. 처음으로 CakePHP를 설치하는 개발자를 돕고
     개발 환경을 신속하게 셋업하는 것이 목적입니다. 실제 운영 환경에서는 파일의 권한,
-    가상 호스트 설정 등, 몇 가지의 요인을 고려할 필요가 있습니다.
+    가상 호스트 설정 등 몇 가지의 요인을 고려할 필요가 있습니다.
 
 권한 (permission)
 ==============
 
 CakePHP는 몇가지 조작을 위해 **tmp** 디렉토리를 사용합니다.
-모델의 정의나 뷰의 캐쉬, 그리고 세션 정보 등입니다.
+모델의 정의나 뷰의 캐쉬 그리고 세션 정보 등입니다.
 **logs** 디렉토리는 디폴트인 ``FileLog`` 엔진이 로그파일을
 출력하기 위해 사용됩니다.
 
@@ -162,7 +161,7 @@ CakePHP는 몇가지 조작을 위해 **tmp** 디렉토리를 사용합니다.
 자주 있는 문제점으로는 **logs** 와 **tmp** 디렉토리와 그 이하 서브디렉토리는
 웹 서버와 커멘드 라인 유저 모두 쓰기 권한이 필요한 경우도 있습니다.
 UNIX 시스템상에서 웹 서버 유저와 커멘드라인 유저가 다른 경우
-권한 프로퍼티 설정을 확보하기 위해 프로젝트의 어플리케이션 디렉토리에서 아래의 명령어를 한 번 실행해 주세요.
+권한 프로퍼티 설정을 확보하기 위해 프로젝트의 애플리케이션 디렉토리에서 아래의 명령어를 한 번 실행해 주세요.
 
 .. code-block:: bash
 
@@ -194,14 +193,14 @@ CakePHP 콘솔은 아래와 같이 실행할 수 있습니다.
 
 개발용 설치는 CakePHP를 가장 빠르게 설치할 수 있는 방법입니다.
 이 예로는 CakePHP 콘솔 툴을 사용하여 PHP의 내장 웹서버를 기동하여
-어플리케이션에 **http://host:port** 라는 형식으로 엑세스 가능하도록 합니다.
+애플리케이션에 **http://host:port** 라는 형식으로 엑세스 가능하도록 합니다.
 app 디렉토리에서 아래의 명령어를 실행해주세요.
 
 .. code-block:: bash
 
     bin/cake server
 
-인수가 없는 디폴트 상태에서는  **http://localhost:8765/** 로 어플리케이션에 엑세스할 수 있습니다.
+인수가 없는 디폴트 상태에서는  **http://localhost:8765/** 로 애플리케이션에 엑세스할 수 있습니다.
 
 만약 해당 환경에서 **localhost** 나 8765번 포트가 이미 사용되고 있다면 CakePHP의 콘솔에서
 아래와 같이 인수를 사용하여 특정 호스트명이나 포트 번호로 웹서버를 기동할 수 있습니다.
@@ -210,10 +209,10 @@ app 디렉토리에서 아래의 명령어를 실행해주세요.
 
     bin/cake server -H 192.168.13.37 -p 5673
 
-이렇게하면 어플리케이션은 **http://192.168.13.37:5673/** 에서 엑세스할 수 있습니다.
+이렇게하면 애플리케이션은 **http://192.168.13.37:5673/** 에서 엑세스할 수 있습니다.
 
 여기까지 입니다!
-방금 설치한 CakePHP 어플리케이션은 웹 서버를 설정하지 않고도 동작합니다.
+방금 설치한 CakePHP 애플리케이션은 웹 서버를 설정하지 않고도 동작합니다.
 
 .. note::
 
@@ -226,20 +225,20 @@ app 디렉토리에서 아래의 명령어를 실행해주세요.
 
 만약 실제 웹 서버를 사용하고 싶다면, 설치한 CakePHP의 파일을 (숨은 파일 포함)
 웹서버의 문서 디렉토리 이하로 이동시킵니다.
-이것으로 브라우저에서 대상 디렉토리를 지정하면 어플리케이션에 엑세스할 수 있습니다.
+이것으로 브라우저에서 대상 디렉토리를 지정하면 애플리케이션에 엑세스할 수 있습니다.
 
 공개용
 ======
 
 공개용 설치는 더욱 유연하게 CakePHP를 셋업하는 방법입니다.
-이 방법을 사용하면 전체 도메인에서 하나의 CakePHP 어플리케이션을 사용하는 것도 가능합니다.
+이 방법을 사용하면 전체 도메인에서 하나의 CakePHP 애플리케이션을 사용하는 것도 가능합니다.
 이번 예제에서는 파일 시스템의 어느곳에 CakePHP를 설치하더라도
 http://www.example.com 와 같이 엑세스할 수 있을 것입니다.
 Apache 웹 서버에서 이 방법을 사용하는 경우는 ``DocumentRoot`` 를 변경하는 권한이 필요할 수도 있으므로
 주의가 필요합니다.
 
 여기까지 소개한 방법 중 하나로 지정한 디렉토리 (여기서는「/cake_install」을 지정했다고 가정)
-에 어플리케이션을 설치하면 파일 시스템에는 아래와 같은 환경이 생길 것입니다. ::
+에 애플리케이션을 설치하면 파일 시스템에는 아래와 같은 환경이 생길 것입니다. ::
 
     /cake_install/
         bin/
@@ -266,7 +265,7 @@ Apache를 사용하고 있는 개발자는 해당 도메인의 ``DocumentRoot`` 
     DocumentRoot /cake_install/webroot
 
 웹 서버가 올바르게 설정되어 있다면 이것으로 http://www.example.com 에서
-CakePHP 어플리케이션에 엑세스할 수 있게 됩니다.
+CakePHP 애플리케이션에 엑세스할 수 있게 됩니다.
 
 동작
 ============
@@ -275,7 +274,7 @@ CakePHP 어플리케이션에 엑세스할 수 있게 됩니다.
 다음으로 CakePHP의 동작을 확인해 봅시다. 사용자가 선택한 방법에 따라 브라우저 `http://example.com/ <http://example.com/>`_  또는 `http://localhost:8765/ <http://localhost:8765/>`_ 를 열어봅니다.
 그다음 CakePHP의 기본 홈 화면에서 데이터베이스의 연결상태를 표시하는 메시지를 확인합니다.
 
-축하합니다! 이것으로 `CakePHP 어플리케이션작성의 첫번째 준비 <https://book.cakephp.org/3.0/kr/quickstart.html>`_를 마쳤습니다.
+축하합니다! 이것으로 `CakePHP 애플리케이션작성의 첫번째 준비 <https://book.cakephp.org/3.0/kr/quickstart.html>`_를 마쳤습니다.
 
 
 URL Rewriting
@@ -284,9 +283,9 @@ URL Rewriting
 Apache
 -----------------------
 
-CakePHP는, 확장한 상태에서 mod_rewrite를 사용하도록 되어있습니다. 자신의 시스템에서 정상적으로 동작할때까지 고생하는 사용자도 있습니다.
+CakePHP는 확장한 상태에서 mod_rewrite를 사용하도록 되어있습니다. 자신의 시스템에서 정상적으로 동작할지 걱정하는 사용자도 있습니다.
 
-다음은 정상적으로 동작시키기 위해 몇가지 해야할것 을 알려드립니다. 우선 httpd.conf을 확인합니다.(유저나 사이트 개별의 httpd.conf가 아닌 반드시 시스템의 httpd.conf를 수정해주시기 바랍니다.)
+다음은 정상적으로 동작시키기 위해 몇가지 해야할것 을 알려드립니다. 우선 httpd.conf을 확인합니다.(유저나 사이트 개별의 httpd.conf가 아닌 반드시 시스템의 httpd.conf를 수정해주세요.)
 
 이 파일은 배포 및 Apache버전에 따라 크게 달라집니다. 자세한 내용은 `http://wiki.apache.org/httpd/DistrosDefaultLayout <http://wiki.apache.org/httpd/DistrosDefaultLayout>`_ 를 참조하시기 바랍니다.
 
@@ -333,9 +332,9 @@ webroot디렉터리에는 이렇게 작성되어 있습니다. ::
 	    RewriteRule ^ index.php [L]
 	</IfModule>
 
-아직, 여러분의 CakePHP사이트에서 mod_rewrite문제가 발생한다면, 가상 호스트 (virtualhosts) 설정을 수정하는것이 좋습니다.
+아직 여러분의 CakePHP사이트에서 mod_rewrite문제가 발생한다면, 가상 호스트 (virtualhosts) 설정을 수정하는것이 좋습니다.
 Ubuntu에서는 **/etc/apache2/sites-available/default** (배포판에 따른 위치) 파일을 수정합니다.
-이 파일의 ``AllowOverride None``이 ``AllowOverride All``로 수정되어있는것을 확인해주십시오. 즉, 아래와 같이 됩니다.::
+이 파일의 ``AllowOverride None``이 ``AllowOverride All``로 수정되어있는것을 확인합니다. ::
 
 	<Directory />
 	    Options FollowSymLinks
@@ -427,16 +426,18 @@ server 지시문의 예는 다음과 같습니다. ::
 
 .. note::
 
-	최근에 PHP-FPM 설정은 주소 127.0.0.1의 TCP 9000 포트 대신 unix php-fpm 소켓을 수신하도록 설정합니다. 만약 위의 설정에서 502 bad gateway 오류가 발생한 경우 TCP 포트 대신 unix 소켓 경로를 사용하기 위해 ``fastcgi_pass``를 업데이트하십시오 (예: fastcgi_pass unix : /var/run/php/php7.1- fpm.sock;).
+	최근에 PHP-FPM 설정은 주소 127.0.0.1의 TCP 9000 포트 대신 unix php-fpm 소켓을 수신하도록 설정합니다. 
+	만약 위의 설정에서 502 bad gateway 오류가 발생한 경우 TCP 포트 대신 unix 소켓 경로를 사용하기 위해 ``fastcgi_pass`` 를 업데이트합니다. (예: fastcgi_pass unix : /var/run/php/php7.1- fpm.sock;)
 
 IIS7 (Windows hosts)
 -----------------------
 
-IIS7은 기본적으로 .htaccess 파일을 지원하지 않습니다. 이를 추가 할 수있는 있지만, CakePHP고유의 재작성을 사용하도록 IIS에 htaccess로 규칙을 가져올 수 있습니다. 이것을하려면 다음의 단계를 진행해 주십시오:
+IIS7은 기본적으로 .htaccess 파일을 지원하지 않습니다. 이를 추가 할 수있는 있지만, CakePHP고유의 재작성을 사용하도록 IIS에 htaccess로 규칙을 가져올 수 있습니다. 
+이것을하려면 다음의 단계를 진행해 주시기 바랍니다. ::
 
 1. URL `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ 을 설치하기 위해 `Microsoft의 Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_ 를 사용하거나 직접 다운로드합니다. ( `32 비트 <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64 비트 <https://www.microsoft.com/en-us/download/details.aspx?id=7435>`_ )
-2. CakePHP의 루트 폴더에 web.config라는 새 파일을 작성하십시오.
-3. 메모장 또는 XML을 편집 할 수있는 편집기를 사용하여 다음의의 코드를 지금 만든 web.config 파일에 복사하십시오. ::
+2. CakePHP의 루트 폴더에 web.config라는 새 파일을 작성합니다.
+3. 메모장 또는 XML을 수정 할 수 있는 에디터를 사용하여 다음의의 코드를 지금 만든 web.config 파일에 복사합니다. ::
 
 	<?xml version="1.0" encoding="UTF-8"?>
 	<configuration>
@@ -465,7 +466,7 @@ IIS7은 기본적으로 .htaccess 파일을 지원하지 않습니다. 이를 �
 	    </system.webServer>
 	</configuration>
 
-일단 IIS에서 사용할 수있는 재 작성 규칙을 포함하는 web.config 파일이 되었으면 CakePHP 링크, CSS, JavaScript, 재 라우팅 (rerouting)은 제대로 작동하는 것입니다.
+일단 IIS에서 사용할 수있는 재 작성 규칙을 포함하는 web.config 파일이 되었으면 CakePHP 링크, CSS, JavaScript, 리라우팅 (rerouting)은 제대로 작동하는 것입니다.
 
 URL 다시 쓰기를 사용안하는 경우
 -----------------------

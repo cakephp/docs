@@ -2,8 +2,8 @@
 ####################
 
 이번 튜토리얼은 간단한 블로그 응용 프로그램을 만드는 과정을 소개하겠습니다.
-먼저 CakePHP를 설치하고, 데이터베이스를 만듭니다.
-그리고 블로그 게시물을 일람표 (*list*), 추가 (*add*), 편집 (*edit*) 및 삭제 (*delete*) 할 수있는 응용 프로그램 로직을 만들겠습니다.
+먼저 CakePHP를 설치하고 데이터베이스를 만듭니다.
+그리고 블로그 게시물을 일람표 (*list*), 추가 (*add*), 수정 (*edit*) 및 삭제 (*delete*) 할 수있는 응용 프로그램 로직을 만들겠습니다.
 
 필요한 것:
 
@@ -150,7 +150,7 @@ CakePHP의 데이터베이스 설정 파일 원본은 ``app/Config/database.php.
     Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
 
 
-암호화 시드(*cipher seed*)는 암호화/복호화 문자열에 사용됩니다.  ``/app/Config/core.php`` 를 편집하여 기본 ``Security.cipherSeed`` 값을 변경합니다.
+암호화 시드(*cipher seed*)는 암호화/복호화 문자열에 사용됩니다. ``/app/Config/core.php`` 를 수정하여 기본 ``Security.cipherSeed`` 값을 변경합니다.
 대체 값은 큰 임의의 정수이여야합니다. ::
 
     /**
@@ -171,7 +171,7 @@ mod_rewrite에 관해서
         /installation/url-rewriting
 
     이제 CakePHP 응용 프로그램을 구축하기위해 :doc:`/tutorials-and-examples/blog/part-two`
-를 계속 읽어주시기 바랍니다.
+    를 계속 읽어주시기 바랍니다.
 
 .. meta::
     :title lang=kr: Blog Tutorial

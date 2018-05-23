@@ -2,13 +2,13 @@ CMS 튜터리얼 - 인증
 #########################
 
 CMS는 사용자가 있으므로 로그인 할 수 있도록
-기사 작성과 편집의 경험에 기본 액세스 제어를 적용해야합니다.
+기사 작성과 수정의 경험에 기본 액세스 제어를 적용해야합니다.
 
 패스워드 해시 추가
 --------------------------
 
 만약에 사용자를 작성, 수정하고 있었다고하면 패스워드가 일반 텍스트로 저장되는 경우가 있습니다.
-이것은 보안상에서 안좋은 예라고 할 수 있겠습니다.
+이것은 보안상에 안 좋은 예라고 할 수 있겠습니다.
 
 그리고 CakePHP의 모델 계층에 대해 이야기 좋은시기입니다.
 CakePHP는개체의 컬렉션에 대해 작업하는 방법과 단일 개체를 다른 클래스로 나뉘어져 있습니다.
@@ -43,7 +43,7 @@ CakePHP는 엔티티의 하나에 프로퍼티가 설정되어있을 때는 언�
     }
 
 여기서 브라우저에서  **http://localhost:8765/users** 에 액세스하여 사용자의 목록 봅시다.
- :doc:`인스톨 <installation>`에 만들어진 기본 사용자를 편집 할 수 있습니다.
+ :doc:`인스톨 <installation>`에 만들어진 기본 사용자를 수정 할 수 있습니다.
 사용자의 패스워드를 변경하면 목록이나 뷰 페이지에서 원래 값 대신 해시 된 암호가 표시됩니다.
 CakePHP는 기본적으로 `bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_ 를 사용하여 암호를 해시합니다.
 기존 데이터베이스를 사용하는 경우는 SHA-1 또는 MD5를 사용할 수 있지만 모든 새로운 응용 프로그램에 bcrypt을 권장합니다.
@@ -54,7 +54,7 @@ CakePHP는 기본적으로 `bcrypt <http://codahale.com/how-to-safely-store-a-pa
 CakePHP에서의 인증은  :doc:`/controllers/components` 의해 처리됩니다.
 구성 요소는 특정 기능이나 개념에 대한 컨트롤러 코드의 재사용 가능한 덩어리를 만드는 방법과 생각할 수 있습니다.
 구성 요소는 컨트롤러의 이벤트 라이프 사이클에 연결하고 그 방법으로 응용 프로그램과 상호 작용할 수 있습니다.
-첫째  :doc:`AuthComponent</controllers/components/authentication>` 를 응용 프로그램에 추가합니다.
+첫째 :doc:`AuthComponent</controllers/components/authentication>` 를 응용 프로그램에 추가합니다.
 create, update 및 delete 메소드에서 인증이 필요하므로 AuthComponent을 AppController 에 추가합니다. ::
 
     // src/Controller/AppController.php
@@ -123,7 +123,7 @@ users 테이블 사용자 이름으로 ``email``을 사용하기 때문에 AuthC
 .. note::
 
 만약 해시 된 암호를 가진 사용자가없는 경우  ``loadComponent('Auth')`` 블록과 ``$this->Auth->allow()`` 를 임시로 주석처리합니다.
-그런 다음 사용자의 패스워드를 저장하고 편집합니다. 사용자의 새 패스워드를 저장 한 후 임시로 주석 행을 취소합니다.
+그런 다음 사용자의 패스워드를 저장하고 수정합니다. 사용자의 새 패스워드를 저장 한 후 임시로 주석 행을 취소합니다.
 
 그럼 시작해 보겠습니다. 로그인하기 전에 ``/articles/add``에 액세스합니다.
 이 작업이 허용되지 않아 로그인 페이지로 리디렉션됩니다.
@@ -133,7 +133,7 @@ users 테이블 사용자 이름으로 ``email``을 사용하기 때문에 AuthC
 ================
 
 사용자가 로그인 할 수있게 되었습니다. 이제 다음 단계인 로그아웃을 진행해보도록 하겠습니다.
-그럼``UsersController``에 다음 코드를 추가합니다. ::
+그럼 ``UsersController`` 에 다음 코드를 추가합니다. ::
 
     public function initialize()
     {
@@ -147,8 +147,8 @@ users 테이블 사용자 이름으로 ``email``을 사용하기 때문에 AuthC
         return $this->redirect($this->Auth->logout());
     }
 
-이 코드는 인증을 필요로하지 않는 작업 목록에``logout`` 액션을 추가하고 logout 메소드를 구현합니다.
-로그 아웃을 위해``/users/logout``에 액세스 할 수 있습니다.
+이 코드는 인증을 필요로하지 않는 작업 목록에 ``logout`` 액션을 추가하고 logout 메소드를 구현합니다.
+로그 아웃을 위해 ``/users/logout`` 에 액세스 할 수 있습니다.
 그때 로그인 페이지로 보내집니다.
 
 사용자 등록 활성화
@@ -167,16 +167,16 @@ users 테이블 사용자 이름으로 ``email``을 사용하기 때문에 AuthC
 
 위의 예는 ``AuthComponent`` 에 ``UsersController`` 의 ``add()`` 액션이 인증 및 승인을 필요로 '하지않음' 을 전하고 있습니다.
 **Users/add.ctp**를 정리하고 잘못된 링크를 제거 할 시간이 걸리거나 다음 섹션으로 진행하고자합니다.
-이 튜토리얼에서는 사용자의 편집,보기, 목록 작성하지 않기 때문에 그 부분은 별도로 진행해 주시기 바랍니다.
+이 튜토리얼에서는 사용자의 수정, 보기, 목록 작성하지 않기 때문에 그 부분은 별도로 진행해 주시기 바랍니다.
 
 기사에 대한 액세스 제한
 ======================
 
-사용자가 로그인 할 수있게 되었기 때문에, 작성한 기사 만 편집하도록 사용자를 제한하려고 합니다.
+사용자가 로그인 할 수있게 되었기 때문에, 작성한 기사만 수정하도록 사용자를 제한하려고 합니다.
 'authorization'어댑터를 사용하여 작업을 수행합니다.
-요구 사항은 기본적인 것이므로,``ArticlesController`` 에 컨트롤러 연결 방법을 사용할 수 있습니다.
+요구 사항은 기본적인 것이므로, ``ArticlesController`` 에 컨트롤러 연결 방법을 사용할 수 있습니다.
 그러나 이렇게하기 전에 응용 프로그램이 작업을 허용하는 방법을
-"AuthComponent"에 전하려고 합니다. ``AppController`` 을 업데이트하고 다음을 추가합니다. ::
+"AuthComponent"에 전하려고 합니다. ``AppController`` 을 수정하고 다음을 추가합니다. ::
 
     public function isAuthorized($user)
     {
@@ -184,8 +184,8 @@ users 테이블 사용자 이름으로 ``email``을 사용하기 때문에 AuthC
         return false;
     }
 
-다음은``AuthComponent``에 컨트롤러 후크 메소드를 사용하여 인증을 수행하도록 지시합니다.
-``AppController::initialize()``메소드는 다음과 같습니다. ::
+다음은 ``AuthComponent`` 에 컨트롤러 후크 메소드를 사용하여 인증을 수행하도록 지시합니다.
+``AppController::initialize()`` 메소드는 다음과 같습니다. ::
 
         public function initialize()
         {
@@ -239,13 +239,13 @@ users 테이블 사용자 이름으로 ``email``을 사용하기 때문에 AuthC
         return $article->user_id === $user['id'];
     }
 
-사용자가 속하지 않는 문서를 편집하거나 삭제하려고하면 원래 페이지로 리디렉션되는 것입니다.
+사용자가 속하지 않는 문서를 수정하거나 삭제하려고하면 원래 페이지로 리디렉션되는 것입니다.
 오류 메시지가 표시되지 않는 경우 레이아웃에 다음을 추가니다. ::
 
     // src/Template/Layout/default.ctp
     <?= $this->Flash->render() ?>
 
-그렇다면 **src/Controller/ArticlesController.php** 의 ``initialize()``에 다음을 추가하여
+그렇다면 **src/Controller/ArticlesController.php** 의 ``initialize()`` 에 다음을 추가하여
 인증되지 않은 사용자에게 허가 된 액션에 ``tags`` 액션을 추가합니다. ::
 
     $this->Auth->allow(['tags']);
@@ -256,9 +256,9 @@ users 테이블 사용자 이름으로 ``email``을 사용하기 때문에 AuthC
 add 와 edit 액션 수정
 ==============================
 
-edit 액션에 대한 액세스를 차단하고 있지만 편집중인 문서 ``user_id`` 속성을 변경할 수 있습니다.
-그렇다면 이러한 문제를 해결합니다. 처음에는``add`` 액션입니다.
-기사를 작성할 때``user_id``을 현재 로그인 한 사용자에게 수정하려고 한다면
+edit 액션에 대한 액세스를 차단하고 있지만 수정중인 문서 ``user_id`` 속성을 변경할 수 있습니다.
+그렇다면 이러한 문제를 해결합니다. 처음에는 ``add`` 액션입니다.
+기사를 작성할 때 ``user_id`` 을 현재 로그인 한 사용자에게 수정하려고 한다면
 add 액션을 다음과 같이 대체합니다. ::
 
     // src/Controller/ArticlesController.php
@@ -281,7 +281,7 @@ add 액션을 다음과 같이 대체합니다. ::
         $this->set('article', $article);
     }
 
-다음은 ``edit`` 액션을 업데이트합니다. edit 메소드를 다음과 같이 대체합니다. ::
+다음은 ``edit`` 액션을 수정합니다. edit 메소드를 다음과 같이 대체합니다. ::
 
     // src/Controller/ArticlesController.php
 
@@ -323,4 +323,4 @@ add 액션을 다음과 같이 대체합니다. ::
 기사에 대한 기본 액세스 제어를 적용 할 수있는 간단한 CMS는 응용 프로그램을 구축했습니다.
 또한 FormHelper와 ORM 기능을 활용하여 UX의 일부 개선 사항을 추가했습니다.
 CakePHP의 탐구에 시간 내 주셔서 감사합니다.
-다음은 :doc:`/orm` 대해 더 배우고 :doc:`/topics`을 알아 보시기 바랍니다.
+다음은 :doc:`/orm` 대해 더 배우고 :doc:`/topics` 을 알아 보시기 바랍니다.

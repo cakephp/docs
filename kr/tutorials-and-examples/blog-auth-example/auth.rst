@@ -1,14 +1,14 @@
 블로그 - 인증 및 권한 부여 프로그램
 ######################################
 
-:doc:`/tutorials-and-examples/blog/blog`  예제에 따라 로그인 한 사용자를 특정 URL에 액세스 권한을 부여 한다고 가정 해보겠습니다.
-또한 블로그에는 자신의 기사를 작성, 편집 및 삭제할 수있는 여러 명의 사용자가 있으며
+:doc:`/tutorials-and-examples/blog/blog` 예제에 따라 로그인 한 사용자를 특정 URL에 액세스 권한을 부여 한다고 가정 해보겠습니다.
+또한 블로그에는 자신의 기사를 작성, 수정 및 삭제할 수있는 여러 명의 사용자가 있으며
 다른 사용자가 자신이 소유하지 않은 기사를 변경할 수 없도록 해야합니다.
 
 사용자 관련 코드 만들기
 ==================================
 
-먼저 블로그 데이터베이스에 사용자의 데이터를 보관할 새 테이블을 만듭니다.  ::
+먼저 블로그 데이터베이스에 사용자의 데이터를 보관할 새 테이블을 만듭니다. ::
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -97,7 +97,7 @@ CakePHP에 있는 코드 생성 유틸리티를 이용하고 있습니다. ::
     }
 
 마찬가지로 코드 생성 도구로 기사 뷰를 만들고 사용자보기를 구현할 수 있습니다.
-이 튜토리얼을 위해, add.ctp을 보겠습니다.
+이 튜토리얼을 위해 add.ctp을 보겠습니다.
 
 .. code-block:: php
 
@@ -125,7 +125,7 @@ CakePHP에서 이것은 :php:class:`Cake\\Controller\\Component\\AuthComponent` 
 이 클래스는 특정 작업에 대한 로그인 요구, 사용자 로그인 및 로그 아웃 처리, 로그인 한 사용자가 할 수있는 동작 권한 부여를 담당합니다.
 
 이 컴포넌트를 응용 프로그램에 추가하려면 **src/Controller/AppController.php**
-파일을 열고 다음을 추가하시기 바랍니다.
+파일을 열고 다음을 추가하시기 바랍니다. ::
 
     // src/Controller/AppController.php
 
@@ -207,7 +207,7 @@ CakePHP에서 이것은 :php:class:`Cake\\Controller\\Component\\AuthComponent` 
         }
     }
 
-암호 해싱이 아직 완료되지 않았으므로, 사용자 고유의 특정 논리를 처리하기 위해 사용자에 대한 Entity 클래스가 필요합니다.
+암호 해싱이 아직 완료되지 않았으므로 사용자 고유의 특정 논리를 처리하기 위해 사용자에 대한 Entity 클래스가 필요합니다.
 **src/Model/Entity/User.php** 엔티티 파일을 만들고 다음을 추가합니다. ::
 
     // src/Model/Entity/User.php
@@ -219,7 +219,7 @@ CakePHP에서 이것은 :php:class:`Cake\\Controller\\Component\\AuthComponent` 
     class User extends Entity
     {
 
-        // 주 키인 “id”를 제외하고 모든 필드를 허가
+        // 주 키인 'id'를 제외하고 모든 필드를 허가
         protected $_accessible = [
             '*' => true,
             'id' => false
@@ -261,7 +261,7 @@ CakePHP에서 이것은 :php:class:`Cake\\Controller\\Component\\AuthComponent` 
 또한 ``/articles/add`` 와 같이 명시 적으로 허용되지 않은 다른 URL에 액세스하려고하면 응용 프로그램이 자동으로 로그인 페이지로 리디렉션되는 것을 볼 수 있습니다.
 
 보기에는 간단해 보입니다. 무엇을 작성했는지 설명하기 위해 설명을 조금 돌아가겠습니다.
-AppController의 ``beforeFilter()`` 는 이미 ``index()``. 와  ``view()`` 액션을 추가하고
+AppController의 ``beforeFilter()`` 는 이미 ``index()`` 와  ``view()`` 액션을 추가하고
 ``add()`` 액션는 로그인 없이도 액세스 할 수있도록 AuthComponent의 ``beforeFilter()`` 에 작성합니다.
 
 ``login()`` 액션은 AuthComponent에서 ``$this->Auth->identify()`` 함수를 호출합니다.
@@ -313,7 +313,7 @@ AppController의 ``beforeFilter()`` 는 이미 ``index()``. 와  ``view()`` 액�
 
 일부 작성자가 다른 사용자의 기사를 수정하거나 삭제하지 못하도록 앱을 보호합시다.
 앱의 기본 규칙은 관리 사용자가 모든 URL에 액세스 할 수있는 반면 일반 사용자 (작성자 역할)는 허용 된 작업에만 액세스 할 수 있다는 것입니다.
-다시, AppController 클래스를 열고 Auth config에 몇 가지 옵션을 추가합니다.  ::
+다시 AppController 클래스를 열고 Auth config에 몇 가지 옵션을 추가합니다. ::
 
     // src/Controller/AppController.php
 
@@ -350,7 +350,7 @@ AppController의 ``beforeFilter()`` 는 이미 ``index()``. 와  ``view()`` 액�
 
 이것은 정확히 우리가 원하는 것이 아닙니다. ``isAuthorized()`` 메소드에 더 많은 규칙을 제공해야 합니다.
 그러나 AppController에 이를 수행하는 대신, 추가 규칙을 각각의 개별 컨트롤러에 제공해야 합니다.
-ArticlesController에 추가 할 규칙은 작성자가 기사를 만들 수 있지만 사용자가 소유하지 않은 기사를 편집하지 못하게 해야합니다.
+ArticlesController에 추가 할 규칙은 작성자가 기사를 만들 수 있지만 사용자가 소유하지 않은 기사를 수정하지 못하게 해야합니다.
 ArticlesController.php에 다음 내용을 추가합니다. ::
 
     // src/Controller/ArticlesController.php
@@ -363,7 +363,7 @@ ArticlesController.php에 다음 내용을 추가합니다. ::
             return true;
         }
 
-        // 사용자가 등록한 기사만 편집, 삭제
+        // 사용자가 등록한 기사만 수정, 삭제
         // 3.4.0 전에는 $this->request->param('action') 을 사용
         if (in_array($this->request->getParam('action'), ['edit', 'delete'])) {
             // 3.4.0 전에는 $this->request->params('pass.0’) 을 사용
@@ -377,8 +377,8 @@ ArticlesController.php에 다음 내용을 추가합니다. ::
     }
 
 이제 AppController의 ``isAuthorized()`` 호출을 재정의하고 부모 클래스가 이미 사용자를 인증하고 있는지 내부적으로 검사합니다.
-사용자가 아니라면 추가 작업에 액세스 할 수있게하고 조건부로 편집 및 삭제에 액세스합니다. 마지막으로 한 가지는 구현하지 않았습니다.
-사용자가 기사를 편집 할 권한이 있는지 여부를 알기 위해 기사 테이블에서 ``isOwnedBy()`` 함수를 호출합니다.
+사용자가 아니라면 추가 작업에 액세스 할 수있게하고 조건부로 수정 및 삭제에 액세스합니다. 마지막으로 한 가지는 구현하지 않았습니다.
+사용자가 기사를 수정 할 권한이 있는지 여부를 알기 위해 기사 테이블에서 ``isOwnedBy()`` 함수를 호출합니다.
 그 함수를 구현해 보겠습니다. ::
 
     // src/Model/Table/ArticlesTable.php
@@ -388,12 +388,12 @@ ArticlesController.php에 다음 내용을 추가합니다. ::
         return $this->exists(['id' => $articleId, 'user_id' => $userId]);
     }
 
-이것으로 간단한 인증 및 인증 작성을 마칩니다. UsersController를 보호하기 위해 ArticlesController에서했던 것과 같은 기술일 수 있습니다.
+이것으로 간단한 인증 및 인증 작성을 마칩니다. UsersController를 보호하기 위해 ArticlesController에서 했던 것과 같은 기술일 수 있습니다.
 또한 자신의 규칙에 따라 AppController에서보다 창의적이고 코드가 좀 더 일반적인 코드 일 수 있습니다.
 
 더 많은 제어가 필요하면 인증 섹션에서 전체 :doc:`/controllers/components/authentication` 가이드를 읽고 컴포넌트 구성, 맞춤 인증 클래스 생성 등에 대해 자세히 알아 보시기 바랍니다.
 
-더 자세히 알 고싶은 분들을 위핸 자료
+더 자세히 알고 싶은 분들을 위한 자료
 ------------------------------------
 
 #. :doc:`/bake/usage` 기본적인 CRUD와 코드 작성에 대해서
