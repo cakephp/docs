@@ -38,7 +38,7 @@ table we could do::
 
     use Cake\ORM\TableRegistry;
 
-    $articles = TableRegistry::get('Articles');
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     $query = $articles->find();
 
@@ -64,12 +64,12 @@ associations or defining some additional methods we would add the following to
 
 Table classes use the CamelCased version of the table name with the ``Table``
 suffix as the class name. Once your class has been created you get a reference
-to it using the :php:class:`~Cake\\ORM\\TableRegistry` as before::
+to it using the :php:class:`~Cake\\ORM\\Locator\\TableLocator` through :php:class:`~Cake\\ORM\\TableRegistry` as before::
 
     use Cake\ORM\TableRegistry;
 
     // Now $articles is an instance of our ArticlesTable class.
-    $articles = TableRegistry::get('Articles');
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
 Now that we have a concrete table class, we'll probably want to use a concrete
 entity class. Entity classes let you define accessor and mutator methods, define
@@ -92,7 +92,7 @@ load entities from the database we'll get instances of our new Article class::
     use Cake\ORM\TableRegistry;
 
     // Now an instance of ArticlesTable.
-    $articles = TableRegistry::get('Articles');
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find();
 
     foreach ($query as $row) {
