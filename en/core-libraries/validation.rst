@@ -140,6 +140,8 @@ full set of validator methods.
 .. versionadded:: 3.2
     Rule building methods were added in 3.2.0
 
+.. _custom-validation-rules:
+
 Using Custom Validation Rules
 -----------------------------
 
@@ -201,8 +203,42 @@ Then ensure that your validation method has the second context parameter. ::
     }
 
 Closures should return boolean true if the validation passes. If it fails,
-return boolean false or for a custom error message return a string.
+return boolean false or for a custom error message return a string, see the
+:ref:`Conditional/Dynamic Error Messages <dynamic_validation_error_messages>`
+section for further details.
 
+.. _dynamic_validation_error_messages:
+
+Conditional/Dynamic Error Messages
+----------------------------------
+
+Validation rule methods, being it :ref:`custom callables <custom-validation-rules>`,
+or :ref:`methods supplied by providers <adding-validation-providers>`, can either
+return a boolean, indicating whether the validation succeeded, or they can return
+a string, which means that the validation failed, and that the returned string
+should be used as the error message.
+
+Possible existing error messages defined via the ``message`` option will be
+overwritten by the ones returned from the validation rule method::
+
+    $validator->add('length', 'custom', [
+        'rule' => function ($value, $context) {
+            if (!$value) {
+                return false;
+            }
+
+            if ($value < 10) {
+                return 'Error message when value is less than 10';
+            }
+
+            if ($value > 20) {
+                return 'Error message when value is greater than 20';
+            }
+
+            return true;
+        },
+        'message' => 'Generic error message used when `false` is returned'
+    ]);
 
 Conditional Validation
 ----------------------
@@ -295,6 +331,8 @@ a specific rule has failed, you can set the ``last`` option to ``true``::
 
 If the minLength rule fails in the example above, the maxLength rule will not be
 run.
+
+.. _adding-validation-providers:
 
 Adding Validation Providers
 ---------------------------
