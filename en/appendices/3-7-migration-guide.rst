@@ -61,6 +61,12 @@ TestSuite
   ``ConsoleIntegrationTestCase`` are now implemented through constraint classes.
 
 
+Utility
+-------
+
+* ``Cake\Utility\Text::getTransliterator()`` was added.
+* ``Cake\Utility\Text::setTransliterator()`` was added.
+
 Validation
 ----------
 
