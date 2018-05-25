@@ -204,7 +204,7 @@ Then ensure that your validation method has the second context parameter. ::
 
 Closures should return boolean true if the validation passes. If it fails,
 return boolean false or for a custom error message return a string, see the
-:ref:`Conditional/Dynamic Error Messages <dynamic_validation_error_messages`
+:ref:`Conditional/Dynamic Error Messages <dynamic_validation_error_messages>`
 section for further details.
 
 .. _dynamic_validation_error_messages:
