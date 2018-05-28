@@ -167,7 +167,7 @@ as a destination string. A few examples of route targets are::
     // Array target to a prefixed plugin controller
     $routes->connect(
         '/admin/cms/articles',
-        ['prefix' => 'admin', 'plugin' => 'Cms', controller' => 'Articles', 'action' => 'index']
+        ['prefix' => 'admin', 'plugin' => 'Cms', 'controller' => 'Articles', 'action' => 'index']
     );
     // String target to a prefixed plugin controller. requires >=3.6.0
     $routes->connect('/admin/cms/articles', 'Cms.Admin/Articles::index');
