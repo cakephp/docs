@@ -72,3 +72,9 @@ Validation
 
 * ``Cake\Validation\Validation::iban()`` was added for validating international
   bank account numbers.
+
+View
+----
+
+* ``FormHelper`` now supports a ``confirmJs`` template variable which allows the
+  javascript snippet generated for confirmation boxes to be customized.
