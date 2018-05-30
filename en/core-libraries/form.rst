@@ -129,8 +129,9 @@ the FormHelper::
 
             if ($this->request->is('get')) {
                 // Values from the User Model e.g.
-                $this->request->data('name', 'John Doe');
-                $this->request->data('email','john.doe@example.com');
+                $this->request = $this->request
+                    ->withData('name', 'John Doe')
+                    ->withData('email','john.doe@example.com');
             }
 
             $this->set('contact', $contact);
