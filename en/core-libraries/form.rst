@@ -105,7 +105,7 @@ Setting Form Values
 ===================
 
 In order to set the values for the fields of a modelless form, one can define
-the values using ``$this->request->data()``, like in all other forms created by
+the values using ``$this->request->withData()``, like in all other forms created by
 the FormHelper::
 
     // In a controller
@@ -129,8 +129,9 @@ the FormHelper::
 
             if ($this->request->is('get')) {
                 // Values from the User Model e.g.
-                $this->request->data('name', 'John Doe');
-                $this->request->data('email','john.doe@example.com');
+                $this->request = $this->request
+                    ->withData('name', 'John Doe')
+                    ->withData('email','john.doe@example.com');
             }
 
             $this->set('contact', $contact);
