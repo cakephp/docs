@@ -162,7 +162,7 @@ URL が特定されたら、一致したときにどのような動作をする�
     // プレフィックス付きのプラグインコントローラーへの配列ターゲット
     $routes->connect(
         '/admin/cms/articles',
-        ['prefix' => 'admin', 'plugin' => 'Cms', controller' => 'Articles', 'action' => 'index']
+        ['prefix' => 'admin', 'plugin' => 'Cms', 'controller' => 'Articles', 'action' => 'index']
     );
     // プレフィックス付きのプラグインコントローラーへの文字列ターゲット。3.6.0 以上が必要
     $routes->connect('/admin/cms/articles', 'Cms.Admin/Articles::index');
