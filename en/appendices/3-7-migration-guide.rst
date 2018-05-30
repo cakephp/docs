@@ -26,6 +26,8 @@ features will continue to function until 4.0.0 after which they will be removed.
   request instance instead.
 * ``Cake\View\Cell:$response`` is protected now. Use calling controller's/view's
   response instance instead.
+* ``Cake\Filesystem\Folder::normalizePath()`` is deprecated. You should use
+  ``correctSlashFor()`` instead.
 
 
 Soft Deprecations
@@ -52,6 +54,11 @@ Database
 --------
 
 * ``Cake\Database\FunctionsBuilder::rand()`` was added.
+
+Filesystem
+----------
+
+* ``Cake\Filesystem\Folder::normalizeFullPath()`` was added.
 
 TestSuite
 ---------
