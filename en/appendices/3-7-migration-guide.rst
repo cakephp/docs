@@ -45,6 +45,10 @@ Behavior Changes
 
 * ``Cake\Database\Statement\StatementDecorator::fetchAll()`` now returns an
   empty array instead of ``false`` when no result is found.
+* ``Cake\Database\Statement\BufferedStatement`` no longer inherits from
+  ``StatementDecorator`` and no longer implements the ``IteratorAggregate``
+  interface. Instead it directly implements the ``Iterator`` interface to better
+  support using statements with collections.
 
 
 New Features
