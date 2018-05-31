@@ -452,7 +452,7 @@ of ``connect()``::
 
     $routes->connect(
         '/:lang/articles/:slug',
-        ['controller' => 'Articles', 'action' => 'view'],
+        ['controller' => 'Articles', 'action' => 'view']
     )
     // Allow GET and POST requests.
     ->setMethods(['GET', 'POST'])
