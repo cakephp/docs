@@ -66,6 +66,9 @@ TestSuite
 * ``Cake\TestSuite\IntegrationTestCase::assertResponseNotEquals()`` was added.
 * The custom assertions provided by ``IntegrationTestCase`` and
   ``ConsoleIntegrationTestCase`` are now implemented through constraint classes.
+* The ``assertFlashMessage()``, ``assertFlashMessageAt()``,
+  ``assertFlashElement()``, ``assertFlashElementAt()`` methods were added to
+  ``IntegrationTestTrait``.
 
 
 Utility

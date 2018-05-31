@@ -1122,8 +1122,29 @@ retain flash messages in the session so you can write assertions::
 
     $this->assertSession('That bookmark does not exist', 'Flash.flash.0.message');
 
+As of 3.7.0 there are additional test helpers for flash messages::
+
+
+    $this->enableRetainFlashMessages();
+    $this->get('/bookmarks/delete/9999');
+
+    // Assert a flash message in the 'flash' key.
+    $this->assertFlashMessage('Bookmark deleted');
+
+    // Assert the second flash message
+    $this->assertFlashMessageAt(1, 'Bookmark really deleted');
+
+    // Assert a flash messages uses the error element
+    $this->assertFlashElement('Flash/error');
+
+    // Assert the second flash message element
+    $this->assertFlashElementAt(1, 'Flash/error');
+
 .. versionadded:: 3.4.7
     ``enableRetainFlashMessages()`` was added in 3.4.7
+
+.. versionadded:: 3.7.0
+    Flash message assertions were added.
 
 Testing a JSON Responding Controller
 ------------------------------------
