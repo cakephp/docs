@@ -64,6 +64,13 @@ Filesystem
 
 * ``Cake\Filesystem\Folder::normalizeFullPath()`` was added.
 
+Form
+----
+
+* ``Cake\Form\Form::setData()`` was added. This method makes defining default
+  values for forms simpler.
+* ``Cake\Form\Form::getData()`` was added.
+
 TestSuite
 ---------
 
