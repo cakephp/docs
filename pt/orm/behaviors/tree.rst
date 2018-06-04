@@ -165,21 +165,20 @@ Se você não quiser armazenar o nível em cache, você pode usar o método ``Tr
 Escopo e Multi Árvores
 ======================
 
-Às vezes você precisa guardar mais de uma árvore dentro da mesma tabela, você pode conseguir isso usando a configuração 'scope'. Por exemplo, em uma tabela de localizações, você pode querer criar uma árvore por país:
+Às vezes você precisa guardar mais de uma árvore dentro da mesma tabela, você pode conseguir isso usando a configuração 'scope'. Por exemplo, em uma tabela de localizações, você pode querer criar uma árvore por país::
 
     class LocationsTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->addBehavior('Tree', [
                 'scope' => ['country_name' => 'Brazil']
             ]);
         }
-
     }
 
-No exemplo anterior, todas as operações de árvore terão o escopo apenas para as linhas que tem a coluna ``country_name`` definida como 'Brazil'. Você pode mudar o escopo utilizando a função 'config':
+
+No exemplo anterior, todas as operações de árvore terão o escopo apenas para as linhas que tem a coluna ``country_name`` definida como 'Brazil'. Você pode mudar o escopo utilizando a função 'config'::
 
     $this->behaviors()->Tree->config('scope', ['country_name' => 'France']);
 
