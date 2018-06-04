@@ -1036,6 +1036,9 @@ column Types::
 
     // In config/bootstrap.php
     use Cake\Database\Type;
+    Type::setMap('json', 'Cake\Database\Type\JsonType');
+
+    // Prior to 3.6 you should use ``map`` instead of ``setMap``.
     Type::map('json', 'Cake\Database\Type\JsonType');
 
     // In src/Model/Table/UsersTable.php
@@ -1045,7 +1048,11 @@ column Types::
     {
         protected function _initializeSchema(TableSchema $schema)
         {
+            $schema->setColumnType('preferences', 'json');
+
+            // Prior to 3.6 you should use ``columnType`` instead of ``setcolumnType``.
             $schema->columnType('preferences', 'json');
+
             return $schema;
         }
     }
