@@ -1036,7 +1036,7 @@ column Types::
 
     // In config/bootstrap.php
     use Cake\Database\Type;
-    Type::setMap('json', 'Cake\Database\Type\JsonType');
+    Type::setMap(['json' => 'Cake\Database\Type\JsonType']);
 
     // Prior to 3.6 you should use ``map`` instead of ``setMap``.
     Type::map('json', 'Cake\Database\Type\JsonType');
