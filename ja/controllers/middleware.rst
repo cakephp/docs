@@ -402,32 +402,6 @@ CSRF トークンを送信することができます。ヘッダーを使用す
 
 CSRF トークンは、クッキーの ``csrfToken`` で取得されます。
 
-.. _adding-http-stack:
-
-既存アプリケーションへの新しい HTTP スタック追加
-================================================
-
-既存のアプリケーションで HTTP ミドルウェアを使うには、アプリケーションにいくつかの
-変更を行わなければなりません。
-
-#. まず **webroot/index.php** を更新します。 `app スケルトン
-   <https://github.com/cakephp/app/tree/master/webroot/index.php>`__ から
-   ファイルの内容をコピーしてください。
-#. ``Application`` クラスを作成します。どのようにするかについては上の :ref:`using-middleware`
-   セクションを参照してください。もしくは `app スケルトン
-   <https://github.com/cakephp/app/tree/master/src/Application.php>`__
-   の中の例をコピーしてください。
-#. **config/requirements.php** が作成します。もし存在しない場合、 `app スケルトン
-   <https://github.com/cakephp/app/blob/master/config/requirements.php>`__ から
-   内容を追加してください。
-
-これら三つの手順が完了すると、アプリケーション／プラグインのディスパッチフィルターを
-HTTP ミドルウェアとして再実装を始める準備が整います。
-
-もし、テストを実行する場合は、 `app スケルトン
-<https://github.com/cakephp/app/tree/master/tests/bootstrap.php>`_ から、
-ファイルの内容をコピーして **tests/bootstrap.php** を更新することも必要になります。
-
 .. meta::
     :title lang=ja: Http ミドルウェア
     :keywords lang=ja: http, ミドルウェア, psr-7, リクエスト, レスポンス, wsgi, アプリケーション, baseapplication
