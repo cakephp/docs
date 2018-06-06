@@ -260,7 +260,7 @@ FooTask.php ファイルは次のようになります。 ::
     namespace {{ namespace }}\Foo;
 
     /**
-     * {{ $name }} foo
+     * {{ name }} foo
      */
     class {{ name }}Foo
     {
