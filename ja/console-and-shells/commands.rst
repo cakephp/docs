@@ -387,7 +387,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
     }
 
 対話的なサブコマンドがあるので、適切な応答を受け取るかどうかをテストするテストケースと、
-誤った応答を受け取るかどうかをテストするケースを追加できます。 ``testUpdateModifed``
+誤った応答を受け取るかどうかをテストするケースを追加できます。 ``testUpdateModified``
 メソッドを削除し、 **tests/TestCase/Command/UpdateTableCommandTest.php**
 に以下のメソッドを追加してください。 ::
 
