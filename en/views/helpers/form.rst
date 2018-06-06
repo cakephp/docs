@@ -155,6 +155,9 @@ Valid values:
 * ``'templateVars'`` - Allows you to provide template variables for the
   ``formStart`` template.
 
+* ``autoSetCustomValidity`` - Set to ``true`` to use custom required and notBlank
+  validation messages in the control's HTML5 validity message. Default is ``false``.
+
 .. tip::
 
     Besides the above options you can provide, in the ``$options`` argument,
@@ -2118,6 +2121,30 @@ Example::
     if ($this->Form->isFieldError('gender')) {
         echo $this->Form->error('gender');
     }
+
+Displaying validation messages in HTML5 validity messages
+---------------------------------------------------------
+
+If the ``autoSetCustomValidity`` FormHelper option is set to ``true``, error messages for
+the field's required and notBlank validation rules will be used in lieu of the default
+browser HTML5 required messages. Enabling the option will add the ``onvalid`` and ``oninvalid``
+event attributes to your fields, for example::
+
+    <input type="text" name="field" required onvalid="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Custom notBlank message')" />
+
+If you want to manually set those events with custom JavaScript, you can set the ``autoSetCustomValidity``
+option to ``false`` and use the special ``customValidityMessage`` template variable instead. This
+template variable is added when a field is required::
+
+    // example template
+    [
+        'input' => '<input type="{{type}}" name="{{name}}" data-error-message="{{customValidityMessage}}" {{attrs}}/>',
+    ]
+
+    // would create an input like this
+    <input type="text" name="field" required data-error-message="Custom notBlank message" />
+
+You could then use JavaScript to set the ``onvalid`` and ``oninvalid`` events as you like.
 
 Creating Buttons and Submit Elements
 ====================================
