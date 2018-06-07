@@ -45,10 +45,17 @@ features will continue to function until 4.0.0 after which they will be removed.
   interact with blocks.
 * ``Cake\View\View:$helpers`` is protected now. Use ``helpers()`` to interact
   with the HelperRegistry instead.
-* ``Cake\View\Cell:$request`` is protected now. Use calling controller's/view's
-  request instance instead.
-* ``Cake\View\Cell:$response`` is protected now. Use calling controller's/view's
-  response instance instead.
+* ``Cake\View\Cell::$template`` is protected now. Use
+  ``viewBuilder()->getTemplate()/setTemplate()`` instead.
+* ``Cake\View\Cell::$plugin`` is protected now. Use
+  ``viewBuilder()->getPlugin()/setPlugin()`` instead.
+* ``Cake\View\Cell::$helpers`` is protected now. Use
+  ``viewBuilder()->getHelpers()/setHelpers()`` instead.
+* ``Cake\View\Cell::$action`` is protected now.
+* ``Cake\View\Cell::$args`` is protected now.
+* ``Cake\View\Cell::$View`` is protected now.
+* ``Cake\View\Cell::$request`` is protected now.
+* ``Cake\View\Cell::$response`` is protected now.
 * ``Cake\Filesystem\Folder::normalizePath()`` is deprecated. You should use
   ``correctSlashFor()`` instead.
 
