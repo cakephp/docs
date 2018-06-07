@@ -2,7 +2,7 @@
 ################
 
 ``Application`` はあなたのアプリケーションの心臓部です。
-アプリケーションの設定方法、プラグイン、ミドルウェア、コンソールコマンド、およびルートが含まれています。
+アプリケーションがどのように構成され、何のプラグイン、ミドルウェア、コンソールコマンド、およびルートが含まれているかを制御します。。
 
 ``Application`` クラスは **src/Application.php** にあります。
 デフォルトでは非常にスリムで、いくつかのデフォルトの :doc:`/controllers/middleware`
@@ -36,7 +36,7 @@
    セクションを参照してください。もしくは `app スケルトン
    <https://github.com/cakephp/app/tree/master/src/Application.php>`__
    の中の例をコピーしてください。
-#. **config/requirements.php** が作成します。もし存在しない場合、 `app スケルトン
+#. **config/requirements.php** を作成します。もし存在しない場合、 `app スケルトン
    <https://github.com/cakephp/app/blob/master/config/requirements.php>`__ から
    内容を追加してください。
 
