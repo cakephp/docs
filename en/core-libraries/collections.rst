@@ -60,7 +60,7 @@ List of Methods
     :php:meth:`indexBy`, :php:meth:`insert`, :php:meth:`isEmpty`, :php:meth:`last`
     :php:meth:`listNested`, :php:meth:`map`, :php:meth:`match`, :php:meth:`max`
     :php:meth:`median`, :php:meth:`min`, :php:meth:`nest`, :php:meth:`prepend`
-    :php:meth:`prependItem`, :php:meth:`reduce`, :php:meth:`reject` :php:meth:`sample`
+    :php:meth:`prependItem`, :php:meth:`reduce`, :php:meth:`reject`, :php:meth:`sample`
     :php:meth:`shuffle`, :php:meth:`skip`, :php:meth:`some`, :php:meth:`sortBy`
     :php:meth:`stopWhen`, :php:meth:`sumOf`, :php:meth:`take`, :php:meth:`through`
     :php:meth:`transpose`, :php:meth:`unfold`, :php:meth:`zip`
