@@ -5,12 +5,16 @@ Timestamp
 
 .. php:class:: TimestampBehavior
 
-O behavior timestamp permite que seus objetos atualizem um ou mais timestamps a cada evento. É utilizado principalmente para preencher os campos ``created`` e ``modified``. Entretanto, com algumas configurações adicionais, você pode atualizar qualquer coluna timestamp/datetime de qualquer tabela.
+The timestamp behavior allows your table objects to update one or more
+timestamps on each model event. This is primarily used to populate data into
+``created`` and ``modified`` fields. However, with some additional
+configuration, you can update any timestamp/datetime column on any event a table
+publishes.
 
-Uso Básico
-==========
+Basic Usage
+===========
 
-Você ativa o behavior timestamp como qualquer outro behavior::
+You enable the timestamp behavior like any other behavior::
 
     class ArticlesTable extends Table
     {
@@ -20,15 +24,17 @@ Você ativa o behavior timestamp como qualquer outro behavior::
         }
     }
 
-A configuração padrão fará o seguinte:
+The default configuration will do the following:
 
-- Quando uma nova entidade é salva, os campos ``created`` e ``modified`` são preenchidos com a hora atual.
-- Quando uma entidade é atualizada, o campo ``modified`` é preenchido com a hora atual.
+- When a new entity is saved the ``created`` and ``modified`` fields will be set
+  to the current time.
+- When an entity is updated, the ``modified`` field is set to the current time.
 
-Usando e Configurando o Behavior
-================================
+Using and Configuring the Behavior
+==================================
 
-Se você precisar modificar campos com nomes diferentes ou quiser atualizar campos de timestamp em eventos personalizados, você pode usar uma configuração adicional::
+If you need to modify fields with different names, or want to update additional
+timestamp fields on custom events you can use some additional configuration::
 
     class OrdersTable extends Table
     {
@@ -48,31 +54,38 @@ Se você precisar modificar campos com nomes diferentes ou quiser atualizar camp
         }
     }
 
-Como você pode ver acima, além do evento padrão ``Model.beforeSave``, nós também estamos atualizando a coluna ``completed_at`` quando os pedidos são concluídos.
+As you can see above, in addition to the standard ``Model.beforeSave`` event, we
+are also updating the ``completed_at`` column when orders are completed.
 
-Atualizando Timestamps em Entidades
-===================================
+Updating Timestamps on Entities
+===============================
 
-Às vezes você vai querer atualizar apenas os timestamps em uma entidade sem alterar quaisquer outras propriedades. Isso é chamado de 'touching' uma informação. No CakePHP você pode usar o método ``touch ()`` para fazer exatamente isso::
+Sometimes you'll want to update just the timestamps on an entity without
+changing any other properties. This is sometimes referred to as 'touching'
+a record. In CakePHP you can use the ``touch()`` method to do exactly this::
 
-    // Touch baseado no evento Model.beforeSave.
+    // Touch based on the Model.beforeSave event.
     $articles->touch($article);
 
-    // Touch baseado em um evento específico.
+    // Touch based on a specific event.
     $orders->touch($order, 'Orders.completed');
 
-Após você salvar a entidade, o campo é atualizado.
+After you have saved the entity, the field is updated.
 
-Registro 'touching' pode ser útil quando você deseja avisar que um recurso pai mudou quando um recurso filho é criado/atualizado. Por exemplo: atualizar um artigo quando um novo comentário é adicionado.
+Touching records can be useful when you want to signal that a parent resource
+has changed when a child resource is created/updated. For example: updating an
+article when a new comment is added.
 
-Salvando Atualizações Sem Alterar o Timestamp
+Saving Updates Without Modifying Timestamps
 ===========================================
 
-Para desativar a atualização automática do campo ``updated``, quando salvamos uma entidade, você pode marcar o atributo como 'dirty'::
+To disable the automatic modification of the ``updated`` timestamp column when
+saving an entity you can mark the attribute as 'dirty'::
 
-    // Marca a coluna modified como dirty
+    // Mark the modified column as dirty making
+    // the current value be set on update.
     $order->setDirty('modified', true);
 
-    // Anterior a versão 3.4.0
+    // Prior to 3.4.0
     $order->dirty('modified', true);
 
