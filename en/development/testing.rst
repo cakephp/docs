@@ -1190,7 +1190,7 @@ and make sure our web service is returning the proper response::
                 ['id' => 1, 'lng' => 66, 'lat' => 45],
             ];
             $expected = json_encode($expected, JSON_PRETTY_PRINT);
-            $this->assertEquals($expected, $this->_response->body());
+            $this->assertEquals($expected, (string)$this->_response->getBody());
         }
     }
 

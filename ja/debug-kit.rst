@@ -24,12 +24,17 @@ DebugKit は、CakePHP アプリケーション用のデバッグツールバー
 
     bin/cake plugin load DebugKit
 
-DebugKit ストレージ
-===================
+設定
+====
 
-デフォルトでは、DebugKit はアプリケーションの ``/tmp`` 内の小さな SQLite データベースに
-パネルデータを保持します。もし DebugKit がデータを他の場所に保持するようにしたい場合は、
-``debug_kit`` コネクションを定義します。
+* ``DebugKit.panels`` - BebugKit のパネルを有効化または無効化します。
+  次のようにして、任意の標準パネルを無効にすることができます。 ::
+
+    // DebugKit をロードする前に
+    Configure::write('DebugKit.panels', ['DebugKit.Packages' => false]);
+
+* ``DebugKit.includeSchemaReflection`` - スキーマリフレクションクエリーの
+  ロギングを有効にするには、true に設定します。デフォルトは無効になっています。
 
 データベース設定
 ----------------
@@ -39,31 +44,36 @@ DebugKit ストレージ
 **config/app.php** ファイル に ``debug_kit`` コネクションを定義すると
 DebugKit が異なるデータベースを使用するように設定できます。例::
 
-        /**
-         * The debug_kit connection stores DebugKit meta-data.
-         */
-        'debug_kit' => [
-            'className' => 'Cake\Database\Connection',
-            'driver' => 'Cake\Database\Driver\Mysql',
-            'persistent' => false,
-            'host' => 'localhost',
-            //'port' => 'nonstandard_port_number',
-            'username' => 'dbusername',    // Your DB username here
-            'password' => 'dbpassword',    // Your DB password here
-            'database' => 'debug_kit',
-            'encoding' => 'utf8',
-            'timezone' => 'UTC',
-            'cacheMetadata' => true,
-            'quoteIdentifiers' => false,
-            //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
-        ],
+    /**
+     * debug_kit コネクションは DebugKit のメタデータを格納します。
+     */
+    'debug_kit' => [
+        'className' => 'Cake\Database\Connection',
+        'driver' => 'Cake\Database\Driver\Mysql',
+        'persistent' => false,
+        'host' => 'localhost',
+        //'port' => 'nonstandard_port_number',
+        'username' => 'dbusername',    // Your DB username here
+        'password' => 'dbpassword',    // Your DB password here
+        'database' => 'debug_kit',
+        'encoding' => 'utf8',
+        'timezone' => 'UTC',
+        'cacheMetadata' => true,
+        'quoteIdentifiers' => false,
+        //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
+    ],
+
+**tmp/debug_kit.sqlite** ファイルは、いつでも削除することができます。
+DebugKit は、必要に応じて、それを再生成します。
 
 ツールバーの使い方
 ==================
 
-DebugKit ツールバーはいくつかのパネルが含まれており、ブラウザーウィンドウの右下の
-CakePHP アイコンをクリックすると表示されます。一度ツールバーが開くと一連のボタンが
-見えるでしょう。これらのボタンの各々は関連情報のパネルを展開します。
+DebugKit ツールバーは、いくつかのパネルで構成されています。これらのパネルは、
+DebugKit をインストールしてロードした後、ブラウザーの右下隅にある CakePHP
+アイコンをクリックすると表示されます。各パネルは、パネルクラスとビューエレメントで構成されています。
+一般的に、パネルは単一の種類の情報のコレクションの処理やログやリクエスト情報の表示を行います。
+ツールバーからパネルを表示したり、独自のカスタムパネルを追加することを選択できます。
 
 各パネルはアプリケーションの様々な側面を見せてくれます。
 
@@ -82,9 +92,6 @@ CakePHP アイコンをクリックすると表示されます。一度ツール
 * **Timer** リクエスト中に ``DebugKit\DebugTimer`` で設定されたすべてのタイマーと、
   ``DebugKit\DebugMemory`` で収集されたメモリー使用状況の表示。
 * **Variables** コントローラーでセットされたビュー変数の表示。
-
-一般的に、パネルは単一の種類の情報のコレクションの処理やログやリクエスト情報の表示を行います。
-ツールバーからのパネルを表示したり、独自のカスタムパネルを追加することを選択できます。
 
 履歴パネルを使用する
 ====================
@@ -120,6 +127,31 @@ CakePHP アイコンをクリックすると表示されます。一度ツール
 
   .. figure:: /_static/img/debug-kit/mail-previewer.gif
     :alt: 実際のメールパネルの映像
+
+プレビュークラスの作成
+------------------------
+
+メールを送信する前にプレビューするには、受信者と mailer メソッドに必要なテンプレート変数を
+定義するプレビュークラスを作成する必要があります。 ::
+
+    // src/Mailer/MailPreview/WelcomePreview.php の中で
+    namespace App\Mailer\Preview;
+
+    use DebugKit\Mailer\MailPreview;
+
+    class WelcomePreview extends MailPreview
+    {
+        public function welcome()
+        {
+            $mailer = $this->getMailer('Welcome');
+            // メーラーのテンプレート変数受信者を設定します。
+
+            return $mailer;
+        }
+    }
+
+MailPreview クラスは、 アプリケーションまたはプラグインの ``Mailer\Preview``
+名前空間に存在し、 ``Preview`` を使用する必要があります。
 
 独自のパネルを開発する
 ======================
@@ -209,9 +241,15 @@ CakePHP アイコンをクリックすると表示されます。一度ツール
 プラグインやアプリケーションパネルを使用するには、アプリケーションの DebugKit の設定を
 更新します。 ::
 
-    // in config/bootstrap.php
+    // config/bootstrap.php の中で
     Configure::write('DebugKit.panels', ['App', 'MyPlugin.MyCustom']);
     Plugin::load('DebugKit', ['bootstrap' => true]);
 
 上記は、すべてのデフォルトのパネルと同じように ``AppPanel`` と ``MyPlugin`` の
 ``MyCustomPanel`` パネルを読みこみます。
+
+ヘルパー関数
+================
+
+* `sql()` ORM クエリーから SQL をダンプします。
+* `sqld()` ORM クエリーから SQL をダンプして終了します。

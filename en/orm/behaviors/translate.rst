@@ -143,9 +143,10 @@ Using a Separate Translations Table
 -----------------------------------
 
 If you wish to use a table other than ``i18n`` for translating a particular
-repository, you can specify it in the behavior's configuration. This is common
-when you have multiple tables to translate and you want a cleaner separation
-of the data that is stored for each different table::
+repository, you can specify the name of the table class name for your custom
+table in the behavior's configuration. This is common when you have multiple
+tables to translate and you want a cleaner separation of the data that is stored
+for each different table::
 
     class ArticlesTable extends Table
     {

@@ -52,33 +52,36 @@ Manually Autoloading Plugin Classes
 If you install your plugins via ``composer`` or ``bake`` you shouldn't need to
 configure class autoloading for your plugins.
 
-In we were installing a plugin named ``MyPlugin`` manually you would need to
+If we were installing a plugin named ``MyPlugin`` manually you would need to
 modify your application's **composer.json** file to contain the following
 information:
 
 .. code-block:: json
 
-    "autoload": {
-        "psr-4": {
-            "MyPlugin\\": "plugins/MyPlugin/src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "MyPlugin\\Test\\": "plugins/MyPlugin/tests/"
+    {
+        "autoload": {
+            "psr-4": {
+                "MyPlugin\\": "plugins/MyPlugin/src/"
+            }
+        },
+        "autoload-dev": {
+            "psr-4": {
+                "MyPlugin\\Test\\": "plugins/MyPlugin/tests/"
+            }
         }
     }
-    ""
 
 If you are using vendor namespaces for your plugins, the namespace to path mapping
 should resemble the following:
 
 .. code-block:: json
 
-    "autoload": {
-        "psr-4": {
-            "AcmeCorp\\Users\\": "plugins/AcmeCorp/Users/src/",
-            "AcmeCorp\\Users\\Test\\": "plugins/AcmeCorp/Users/tests/"
+    {
+        "autoload": {
+            "psr-4": {
+                "AcmeCorp\\Users\\": "plugins/AcmeCorp/Users/src/",
+                "AcmeCorp\\Users\\Test\\": "plugins/AcmeCorp/Users/tests/"
+            }
         }
     }
 
@@ -159,7 +162,6 @@ appropriate parts of your application. The hooks are:
   queue.
 * ``console`` Used to add console commands to an application's command
   collection.
-* ``events`` Used to add event listeners to the application event manager.
 
 When loading plugins you can configure which hooks are enabled. By default
 plugins without a :ref:`plugin-objects` have all hooks disabled. New style plugins
@@ -624,20 +626,19 @@ Contacts controller you could make the following file::
 Creating this file would allow you to override
 **plugins/ContactManager/src/Template/Contacts/index.ctp**.
 
-If your plugin is in a composer dependency (i.e. 'TheVendor/ThePlugin'), the
-path to the 'index' view of the Custom controller will be::
+If your plugin is in a composer dependency (i.e. 'Company/ContactManager'), the
+path to the 'index' view of the Contacts controller will be::
 
-    src/Template/Plugin/TheVendor/ThePlugin/Custom/index.ctp
+    src/Template/Plugin/Company/ContactManager/Contacts/index.ctp
 
 Creating this file would allow you to override
-**vendor/thevendor/theplugin/src/Template/Custom/index.ctp**.
+**vendor/Company/ContactManager/src/Template/Contacts/index.ctp**.
 
-If the plugin implements a routing prefix, you must include the routing prefix in your
-application template overrides.
-For example, if the 'ContactManager' plugin implemented an 'admin' prefix the overridng path
-would be::
+If the plugin implements a routing prefix, you must include the routing prefix
+in your application template overrides. For example, if the 'ContactManager'
+plugin implemented an 'admin' prefix the overridng path would be::
 
-    src/Template/Plugin/ContactManager/Admin/ContactManager/index.ctp
+    src/Template/Plugin/Company/ContactManager/Admin/Contact/index.ctp
 
 .. _plugin-assets:
 
@@ -718,8 +719,7 @@ that you prefix the plugin name before the name of the component. For example::
 
 The same technique applies to Helpers and Behaviors.
 
-
-.. plugin-commands::
+.. _plugin-commands:
 
 Commands
 ========

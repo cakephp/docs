@@ -1,5 +1,5 @@
 Application
-===========
+###########
 
 The ``Application`` is the heart of your application. It controls
 how your application is configured, and what plugins, middleware, console

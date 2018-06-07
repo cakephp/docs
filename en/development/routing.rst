@@ -158,7 +158,7 @@ as a destination string. A few examples of route targets are::
 
     // Array target to an application controller
     $routes->connect(
-        '/users/view/*
+        '/users/view/*',
         ['controller' => 'Users', 'action' => 'view']
     );
     // String target to an application controller. requires >=3.6.0
@@ -167,7 +167,7 @@ as a destination string. A few examples of route targets are::
     // Array target to a prefixed plugin controller
     $routes->connect(
         '/admin/cms/articles',
-        ['prefix' => 'admin', 'plugin' => 'Cms', controller' => 'Articles', 'action' => 'index']
+        ['prefix' => 'admin', 'plugin' => 'Cms', 'controller' => 'Articles', 'action' => 'index']
     );
     // String target to a prefixed plugin controller. requires >=3.6.0
     $routes->connect('/admin/cms/articles', 'Cms.Admin/Articles::index');
@@ -452,7 +452,7 @@ of ``connect()``::
 
     $routes->connect(
         '/:lang/articles/:slug',
-        ['controller' => 'Articles', 'action' => 'view'],
+        ['controller' => 'Articles', 'action' => 'view']
     )
     // Allow GET and POST requests.
     ->setMethods(['GET', 'POST'])
@@ -927,6 +927,11 @@ While Middleware can be applied to your entire application, applying middleware
 to specific routing scopes offers more flexibility, as you can apply middleware
 only where it is needed allowing your middleware to not concern itself with
 how/where it is being applied.
+
+.. note::
+
+    Applied scoped middleware will be run by :ref:`RoutingMiddleware <routing-middleware>`,
+    normally at the end of your application's middleware queue.
 
 Before middleware can be applied to a scope, it needs to be
 registered into the route collection::

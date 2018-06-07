@@ -55,9 +55,7 @@ branch.
 The branch you create should be based on the version that your fix/enhancement
 is for. For example if you are fixing a bug in ``3.x`` you would want to use the
 ``master`` branch as the base for your branch. If your change is a bug fix for
-the 2.x release series, you should use the ``2.x`` branch. This makes merging
-your changes in later much simpler, as Github does not let you edit the target
-branch::
+the 2.x release series, you should use the ``2.x`` branch::
 
     # fixing a bug on 3.x
     git fetch upstream
@@ -78,7 +76,8 @@ following:
 
 * Follow the :doc:`/contributing/cakephp-coding-conventions`.
 * Add a test case to show the bug is fixed, or that the new feature works.
-* Keep your commits logical, and write good clear and concise commit messages.
+* Keep your commits logical, and write clear commit messages that provide
+  context on what you changed and why.
 
 Submitting a Pull Request
 =========================
@@ -123,11 +122,11 @@ branch, as you cannot edit it once the pull request is created.
   choose **master** as your merge target.
 * If your change is a **new feature** or an addition to the framework, then you
   should choose the branch with the next version number. For example if the
-  current stable release is ``3.2.10``, the branch accepting new features will
+  current stable release is ``3.6.0``, the branch accepting new features will
   be ``3.next``.
 * If your change is a breaks existing functionality, or API's then you'll have
   to choose then next major release. For example, if the current release is
-  ``3.2.2`` then the next time existing behavior can be broken will be in
+  ``3.6.0`` then the next time existing behavior can be broken will be in
   ``4.x`` so you should target that branch.
 
 .. note::
