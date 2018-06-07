@@ -16,12 +16,35 @@ Deprecations
 The following is a list of deprecated methods, properties and behaviors. These
 features will continue to function until 4.0.0 after which they will be removed.
 
-* ``Cake\View\View:$request`` is protected now. Use
+* ``Cake\View\View::$request`` is protected now. Use
   ``View::getRequest()/setRequest()`` to access a View's request instance in
   other contexts.
-* ``Cake\View\View:$response`` is protected now. Use
+* ``Cake\View\View::$response`` is protected now. Use
   ``View::getResponse()/setResponse()`` to access a View's response instance in
   other contexts.
+* ``Cake\View\View::$templatePath`` is protected now. Use
+  ``getTemplatePath()/setTemplatePath()`` instead.
+* ``Cake\View\View::$template`` is protected now. Use
+  ``getTemplate()/setTemplate()`` instead.
+* ``Cake\View\View::$layout`` is protected now. Use ``getLayout()/setLayout()``
+  instead.
+* ``Cake\View\View::$layoutPath`` is protected now. Use
+  ``getLayoutPath()/setLayoutPath()`` instead.
+* ``Cake\View\View::$autoLayout`` is protected now. Use
+  ``enableAutoLayout()/isAutoLayoutEnabled()`` instead.
+* ``Cake\View\View::$theme`` is protected now. Use
+  ``getTheme()/setTheme()`` instead.
+* ``Cake\View\View::$subDir`` is protected now. Use ``getSubDir()/setSubDir()`` instead.
+* ``Cake\View\View::$plugin`` is protected now. Use ``getPlugin()/setPlugin()``
+  instead.
+* ``Cake\View\View::$name`` is protected now. Use ``getName()/setName()``
+  instead.
+* ``Cake\View\View::$elementCache`` is protected now. Use
+  ``getElementCache()/setElementCache()`` instead.
+* ``Cake\View\View::$Blocks`` is protected now. Use public methods on View to
+  interact with blocks.
+* ``Cake\View\View:$helpers`` is protected now. Use ``helpers()`` to interact
+  with the HelperRegistry instead.
 * ``Cake\View\Cell:$request`` is protected now. Use calling controller's/view's
   request instance instead.
 * ``Cake\View\Cell:$response`` is protected now. Use calling controller's/view's
