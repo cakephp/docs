@@ -323,7 +323,7 @@ Session
       この timeout は CakePHP が制御します。
     * ``cookieTimeout`` - セッションクッキーを有効にしたい期間（単位：分）。
     * ``checkAgent`` - セッションの開始時にユーザーエージェント文字列を
-      チェックするかどうか。古い IE/Chrome でフレームを使う場合や、Web
+      チェックするかどうか。古い IE 、Chrome Frame を使う場合や、Web
       ブラウザ機能を持つ一部のデバイスで AJAX を使いたい場合に false
       にする必要があるかもしれません。
     * ``defaults`` - あなたのセッションの基本構成として使用する
