@@ -106,6 +106,9 @@ GET パラメーターとフラグメントアンカーの URL::
 .. versionadded:: 3.3.5
     ``build()`` は、3.3.5 より第２引数として配列を受け取ります。
 
+.. versionadded:: 3.6.0
+    ``timestamp`` オプションが ``build()`` に追加されました。
+
 CSS や JavaScript、または画像ファイルの URL を生成する場合、
 これらのアセットタイプのためのヘルパーメソッドがあります。 ::
 
@@ -118,8 +121,18 @@ CSS や JavaScript、または画像ファイルの URL を生成する場合、
     // 出力結果 /css/app.css
     $this->Url->css('app.css');
 
+    // メソッドの呼び出し時にタイムスタンプを強制
+    $this->Url->css('app.css', ['timestamp' => 'force']);
+
+    // または、メソッド呼び出し時にタイムスタンプを無効化
+    $this->Url->css('app.css', ['timestamp' => false]);
+
 .. versionadded:: 3.2.4
     アセットヘルパーメソッドは 3.2.4 で追加されました。
+
+.. versionadded:: 3.6.0
+    ``timestamp`` オプションが、アセットのヘルパーメソッドに追加されました。
+
 
 詳細は API の
 `Router::url <https://api.cakephp.org/3.x/class-Cake.Routing.Router.html#_url>`_
