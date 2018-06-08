@@ -158,8 +158,8 @@ CakePHP のセッション操作の設定は :ref:`セッションの設定 <ses
 
     "autoload": {
         "psr-4": {
-            "App\\Controller\\": "/path/to/directory/with/controller/folders",
-            "App\": "src"
+            "App\\Controller\\": "/path/to/directory/with/controller/folders/",
+            "App\\": "src/"
         }
     }
 
@@ -169,7 +169,7 @@ CakePHP のセッション操作の設定は :ref:`セッションの設定 <ses
 
     "autoload": {
         "psr-4": {
-            "App\": ["src", "/path/to/directory"]
+            "App\\": ["src/", "/path/to/directory/"]
         }
     }
 
