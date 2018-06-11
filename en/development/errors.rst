@@ -51,7 +51,7 @@ message, file and line (``debug`` enabled).
 Changing Exception Handling
 ===========================
 
-Exception handling offers 3 ways to tailor how exceptions are handled.  Each
+Exception handling offers 4 ways to tailor how exceptions are handled.  Each
 approach gives you different amounts of control over the exception handling
 process.
 
