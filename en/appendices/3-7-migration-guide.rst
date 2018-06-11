@@ -129,3 +129,5 @@ View
 
 * ``FormHelper`` now supports a ``confirmJs`` template variable which allows the
   javascript snippet generated for confirmation boxes to be customized.
+* ``FormHelper`` now has a ``autoSetCustomValidity`` option for setting HTML5
+  validity messages from custom validation messages. See: :ref:`html5-validity-messages`
