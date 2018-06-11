@@ -2122,6 +2122,9 @@ Example::
         echo $this->Form->error('gender');
     }
 
+
+.. _html5-validity-messages:
+
 Displaying validation messages in HTML5 validity messages
 ---------------------------------------------------------
 
