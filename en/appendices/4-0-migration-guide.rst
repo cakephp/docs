@@ -36,6 +36,8 @@ changes made:
   response codes.
 * Date, Time, Timestamp, and Datetime column times now return immutable time
   objects by default now.
+* ``Cake\View\View`` will re-render views if ``render()`` is called multiple
+  times instead of returning ``null``.
 
 
 New Features
