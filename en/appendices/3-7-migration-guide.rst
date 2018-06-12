@@ -58,7 +58,13 @@ features will continue to function until 4.0.0 after which they will be removed.
 * ``Cake\View\Cell::$response`` is protected now.
 * ``Cake\Filesystem\Folder::normalizePath()`` is deprecated. You should use
   ``correctSlashFor()`` instead.
-
+* ``Helper::$theme`` is removed. Use ``View::getTheme()`` instead.
+* ``Helper::$plugin`` is removed. Use ``View::getPlugin()`` instead.
+* ``Helper::$fieldset`` and ``Helper::$tags`` are deprecated as they are unsed.
+* ``Helper::$helpers`` is now protected and should not be accessed from outside
+  a helper class.
+* ``Helper::$request`` is removed.
+  Use ``View::getRequest()``, ``View::setRequest()`` instead.
 
 Soft Deprecations
 =================
