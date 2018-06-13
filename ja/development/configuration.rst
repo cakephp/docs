@@ -347,6 +347,23 @@ MVC デザインパターンを破壊する誘惑に気をつけてください�
 Configure からキーの読み込みと削除を行います。
 もしあなたが値の読み込みと削除を単一の動作で組み合わせたい時に便利です。
 
+.. php:staticmethod:: consumeOrFail($key)
+
+:php:meth:`Cake\\Core\\Configure::consume` のように設定データを消費しますが、
+一方でキーと値のペアが見つかることを期待します。要求されたペアが存在しない場合、
+:php:class:`RuntimeException` が投げられます。 ::
+
+    Configure::consumeOrFail('Company.name');    // 出力: 'Pizza, Inc.'
+    Configure::consumeOrFail('Company.geolocation');  // 例外を投げる
+
+    Configure::consumeOrFail('Company');
+
+    // 出力:
+    ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
+
+.. versionadded:: 3.6.0
+    ``Configure::readOrFail()`` は 3.6.0 で追加されました。
+
 設定ファイルの読み書き
 ======================
 
