@@ -905,13 +905,14 @@ Table オブジェクトのレジストリーは、 ``update()`` が呼ばれた
 もし、アプリケーションをデプロイする時にプラグインを使用する場合、
 テーブルのカラムメタデータを更新するように、必ず ORM キャッシュをクリアしてください。
 そうしなければ、それらの新しいカラムの操作を実行する時に、カラムが存在しないエラーになります。
-CakePHP コアは、この操作を行うために使用できる :doc:`ORM キャッシュシェル
-<console-and-shells/orm-cache>` を含みます。 ::
+CakePHP コアは、この操作を行うために使用できる :doc:`スキーマキャッシュシェル
+<console-and-shells/schema-cache>` を含みます。 ::
 
-    $ bin/cake orm_cache clear
+    // 3.6.0 より前の場合、orm_cache を使用
+    $ bin/cake schema_cache clear
 
 このシェルについてもっと知りたい場合、クックブックの
-:doc:`ORM キャッシュシェル <console-and-shells/orm-cache>`
+:doc:`スキーマキャッシュシェル <console-and-shells/schema-cache>`
 セクションをご覧ください。
 
 テーブルのリネーム

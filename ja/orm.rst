@@ -118,4 +118,4 @@ CakePHP は命名規則でテーブルクラスとエンティティークラス
     orm/associations
     orm/behaviors
     orm/schema-system
-    console-and-shells/orm-cache
+    console-and-shells/schema-cache
