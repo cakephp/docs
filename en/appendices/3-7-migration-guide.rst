@@ -16,6 +16,10 @@ Deprecations
 The following is a list of deprecated methods, properties and behaviors. These
 features will continue to function until 4.0.0 after which they will be removed.
 
+* Using ``Cake\Database\Query::join()`` to read information is deprecated.
+  Instead use ``Query::clause('join')``.
+* Using ``Cake\Database\Query::from()`` to read information is deprecated.
+  Instead use ``Query::clause('from')``.
 * ``Cake\View\View::$request`` is protected now. Use
   ``View::getRequest()/setRequest()`` to access a View's request instance in
   other contexts.
