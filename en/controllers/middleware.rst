@@ -469,6 +469,9 @@ an option. You can also define your own parsers::
         // Use a CSV parsing library.
         return Csv::parse($body);
     });
+    
+.. versionadded:: 3.6.0
+    The ``BodyParserMiddleware`` was added in 3.6.0
 
 .. meta::
     :title lang=en: Http Middleware
