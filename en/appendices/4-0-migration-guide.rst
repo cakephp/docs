@@ -38,7 +38,11 @@ changes made:
   objects by default now.
 * ``Cake\View\View`` will re-render views if ``render()`` is called multiple
   times instead of returning ``null``.
-* ``Xml::fromArray()`` now requires an array for the ``$options`` parameter.
+* ``Cake\View\Helper\PaginatorHelper::hasPage()`` has had its arguments
+  reversed. This makes it consistent with other paginator methods where the
+  'model' is the second argument.
+* ``Cake\Utility\Xml::fromArray()`` now requires an array for the ``$options``
+  parameter.
 
 
 New Features

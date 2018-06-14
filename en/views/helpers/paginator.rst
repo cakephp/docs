@@ -342,7 +342,7 @@ Checking the Pagination State
 
     Returns ``true`` if the given result set is not at the first page.
 
-.. php:method:: hasPage(string $model = null, integer $page = 1)
+.. php:method:: hasPage(int $page = 1, string $model = null)
 
     Returns ``true`` if the given result set has the page number given by ``$page``.
 
