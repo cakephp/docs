@@ -17,6 +17,8 @@ Deprecated Features Removed
 All methods, properties and functionality that was emitting deprecation warnings
 as of 3.6 have been removed.
 
+The former Rss helper can be found as standalone [Feed](https://github.com/dereuromark/cakephp-feed) plugin with similar functionality.
+
 Breaking Changes
 ================
 
@@ -43,6 +45,9 @@ changes made:
   'model' is the second argument.
 * ``Cake\Utility\Xml::fromArray()`` now requires an array for the ``$options``
   parameter.
+* ``Cake\Filesystem\Folder::copy($to, array $options = [])`` and
+  ``Cake\Filesystem\Folder::move($to, array $options = [])`` have now the target
+  path extracted as first argument.
 
 
 New Features
