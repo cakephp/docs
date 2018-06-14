@@ -17,7 +17,8 @@ Deprecated Features Removed
 All methods, properties and functionality that was emitting deprecation warnings
 as of 3.6 have been removed.
 
-The former RssHelper can be found as standalone [Feed](https://github.com/dereuromark/cakephp-feed) plugin with similar functionality.
+Authentication functionality has been splitted into standalone plugins `Authentication <https://github.com/cakephp/authentication>`__ and `Authorization <https://github.com/cakephp/authorization>`__.
+The former RssHelper can be found as standalone `Feed plugin <https://github.com/dereuromark/cakephp-feed>`__ with similar functionality.
 
 Breaking Changes
 ================
