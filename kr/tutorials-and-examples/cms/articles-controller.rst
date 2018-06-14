@@ -140,7 +140,7 @@ Article 목록 페이지에서 '뷰'링크 중 하나를 클릭하면 작업이 
 ``/articles/index`` 에서 링크를 사용하거나 ``/articles/view/slug-name`` 와 같은 URL에 액세스하여 기사를 수동으로 요청하여 이것이 작동하는지 확인할 수 있습니다.
 
 Article추가
-==========
+===========
 
 기본 읽기보기가 생성되면 새로운 Article을 작성해야 합니다.
 ``ArticlesController`` 에서 ``add()`` 액션을 작성하는 것으로 시작합니다.
@@ -222,7 +222,7 @@ param ``['action' => 'index']`` 은 URL ``/articles``, 즉 ``ArticlesController`
 `API <https://api.cakephp.org>`_ 의 :php:func:`Cake\\Routing\\Router::url()` 함수를 참조하여 다양한 CakePHP 함수에 대한 URL을 지정할 수있는 형식을 확인할 수 있습니다.
 
 Article추가 템플릿 만들기
-======================
+=========================
 
 Article추가 템플릿은 다음과 같습니다.
 
@@ -325,7 +325,7 @@ Article수정
 마지막으로  ``save()`` 를 호출하여 적절한 플래시 메시지를 설정하고 리디렉션하거나 유효성 검사 오류를 표시합니다.
 
 Article수정 템플릿 만들기
-=======================
+=========================
 
 Articles수정 템플릿은 다음과 같습니다.
 
@@ -431,10 +431,10 @@ Article삭제 액션 추가
         }
     }
 
-이 로직은 ``$slug`` 에 지정된 기사를 삭제하고 ``$this->Flash->success()`` 를 사용하여 / articles로 리디렉션 한 후 사용자에게 확인 메시지를 표시합니다.
-사용자가 GET 요청을 사용하여 ``/articles`` 을 삭제하려고 시도하면 ``allowMethod()`` 가 예외를 throw합니다.
+이 로직은 ``$slug`` 에 지정된 기사를 삭제하고 ``$this->Flash->success()`` 를 사용하여 ``/articles`` 로 리디렉션 한 후 사용자에게 확인 메시지를 표시합니다.
+사용자가 GET 요청을 사용하여 ``/articles`` 을 삭제하려고 시도하면 ``allowMethod()`` 가 예외를 ``throw`` 합니다.
 캐치되지 않은 예외는 CakePHP의 예외 핸들러에 의해 캡쳐되고 멋진 오류 페이지가 표시됩니다.
-응용 프로그램에서 생성해야하는 다양한 HTTP 오류를 나타내는 데 사용할 수있는 기본 제공 :doc:`예외 </development/errors>`가 많이 있습니다.
+응용 프로그램에서 생성해야하는 다양한 HTTP 오류를 나타내는 데 사용할 수있는 기본 제공 :doc:`예외 </development/errors>` 가 많이 있습니다.
 
 .. warning::
 

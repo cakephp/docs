@@ -7,7 +7,7 @@ CakePHP는 빠르고 간단하게 설치할 수 있습니다.
 CakePHP는 nginx나 lighttpd, Microsoft IIS와 같은 여러가지 웹서버에서 동작합니다.
 
 시스템 요구사항
-============
+===============
 
 - HTTP 서버. 예: Apache。mod\_rewrite를 추천하지만 필수는 아닙니다.
 - PHP |minphpversion| 이상 (PHP 7.1도 포함)
@@ -144,7 +144,7 @@ CakePHP를 신속하게 설치하기 위한 별도의 방법은 `Oven <https://g
     가상 호스트 설정 등 몇 가지의 요인을 고려할 필요가 있습니다.
 
 권한 (permission)
-==============
+=================
 
 CakePHP는 몇가지 조작을 위해 **tmp** 디렉토리를 사용합니다.
 모델의 정의나 뷰의 캐쉬 그리고 세션 정보 등입니다.
@@ -274,8 +274,9 @@ CakePHP 애플리케이션에 엑세스할 수 있게 됩니다.
 다음으로 CakePHP의 동작을 확인해 봅시다. 사용자가 선택한 방법에 따라 브라우저 `http://example.com/ <http://example.com/>`_  또는 `http://localhost:8765/ <http://localhost:8765/>`_ 를 열어봅니다.
 그다음 CakePHP의 기본 홈 화면에서 데이터베이스의 연결상태를 표시하는 메시지를 확인합니다.
 
-축하합니다! 이것으로 `CakePHP 애플리케이션작성의 첫번째 준비 <https://book.cakephp.org/3.0/kr/quickstart.html>`_를 마쳤습니다.
+축하합니다! 이것으로 `CakePHP 애플리케이션작성의 첫번째 준비 <https://book.cakephp.org/3.0/kr/quickstart.html>`_ 를 마쳤습니다.
 
+.. _url-rewriting:
 
 URL Rewriting
 ======================
@@ -291,21 +292,21 @@ CakePHP는 확장한 상태에서 mod_rewrite를 사용하도록 되어있습니
 
 1. 적절한 DocumentRoot에서 .htaccess에 대한 설정 덮어쓰기를 허용하기위해 AllowOverride가 All이 설정되어있지 확인합니다. ::
 
-	# Each directory to which Apache has access can be configured with respect
-	# to which services and features are allowed and/or disabled in that
-	# directory (and its subdirectories).
-	#
-	# First, we configure the "default" to be a very restrictive set of
-	# features.
-	<Directory />
-	    Options FollowSymLinks
-	    AllowOverride All
-	#    Order deny,allow
-	#    Deny from all
-	</Directory>
+    # Each directory to which Apache has access can be configured with respect
+    # to which services and features are allowed and/or disabled in that
+    # directory (and its subdirectories).
+    #
+    # First, we configure the "default" to be a very restrictive set of
+    # features.
+    <Directory />
+        Options FollowSymLinks
+        AllowOverride All
+    #    Order deny,allow
+    #    Deny from all
+    </Directory>
 
 2. 아래와 같이 mod_rewrite가 정상적으로 로드되는것을 확인합니다. ::
-	LoadModule rewrite_module libexec/apache2/mod_rewrite.so
+    LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 
 많은 시스템에서 이부분은 기본적으로 주석처리가 되어있습니다.
 그러므로 해당 줄의 가장 처음의 "#" 문자를 제거하여 수정해야합니다.
@@ -318,34 +319,34 @@ CakePHP는 확장한 상태에서 mod_rewrite를 사용하도록 되어있습니
 
 CakePHP의 응용 프로그램 디렉토리 (여러분이 Bake에서 복사 한 최상위 디렉토리) 에는 이렇게 작성 되어 있습니다. ::
 
-	<IfModule mod_rewrite.c>
-	   RewriteEngine on
-	   RewriteRule    ^$    webroot/    [L]
-	   RewriteRule    (.*) webroot/$1    [L]
-	</IfModule>
+    <IfModule mod_rewrite.c>
+       RewriteEngine on
+       RewriteRule    ^$    webroot/    [L]
+       RewriteRule    (.*) webroot/$1    [L]
+    </IfModule>
 
 webroot디렉터리에는 이렇게 작성되어 있습니다. ::
 
-	<IfModule mod_rewrite.c>
-	    RewriteEngine On
-	    RewriteCond %{REQUEST_FILENAME} !-f
-	    RewriteRule ^ index.php [L]
-	</IfModule>
+    <IfModule mod_rewrite.c>
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteRule ^ index.php [L]
+    </IfModule>
 
 아직 여러분의 CakePHP사이트에서 mod_rewrite문제가 발생한다면, 가상 호스트 (virtualhosts) 설정을 수정하는것이 좋습니다.
 Ubuntu에서는 **/etc/apache2/sites-available/default** (배포판에 따른 위치) 파일을 수정합니다.
-이 파일의 ``AllowOverride None``이 ``AllowOverride All``로 수정되어있는것을 확인합니다. ::
+이 파일의 ``AllowOverride None`` 이 ``AllowOverride All`` 로 수정되어있는것을 확인합니다. ::
 
-	<Directory />
-	    Options FollowSymLinks
-	    AllowOverride All
-	</Directory>
-	<Directory /var/www>
-	    Options Indexes FollowSymLinks MultiViews
-	    AllowOverride All
-	    Order Allow,Deny
-	    Allow from all
-	</Directory>
+    <Directory />
+        Options FollowSymLinks
+        AllowOverride All
+    </Directory>
+    <Directory /var/www>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Order Allow,Deny
+        Allow from all
+    </Directory>
 
 macOS에서 다른 방법은 가상 호스트를 폴더로 향하게하는데 `virtualhostx <https://clickontyler.com/virtualhostx/>`_ 도구를 사용할 수 있습니다.
 
@@ -355,132 +356,136 @@ CakePHP를 사용자 디렉토리 (`http://example.com/~username/cakephp/ <http:
 
 이것는 RewriteEngine지시문과 같은 섹션에 추가할 수 있습니다. 예를 들면 webroot의 .htaccess파일은 다음과 같이 됩니다. ::
 
-	<IfModule mod_rewrite.c>
-	    RewriteEngine On
-	    RewriteBase /path/to/app
-	    RewriteCond %{REQUEST_FILENAME} !-f
-	    RewriteRule ^ index.php [L]
-	</IfModule>
+    <IfModule mod_rewrite.c>
+        RewriteEngine On
+        RewriteBase /path/to/app
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteRule ^ index.php [L]
+    </IfModule>
 
 4. (옵션) 발행 환경 설정에서 필요없는 요청은 CakePHP에서 처리되지 않도록합시다. webroot의 .htaccess 파일을 다음과 같이 수정합니다. ::
 
-	<IfModule mod_rewrite.c>
-	    RewriteEngine On
-	    RewriteBase /path/to/app/
-	    RewriteCond %{REQUEST_FILENAME} !-f
-	    RewriteCond %{REQUEST_URI} !^/(webroot/)?(img|css|js)/(.*)$
-	    RewriteRule ^ index.php [L]
-	</IfModule>
+    <IfModule mod_rewrite.c>
+        RewriteEngine On
+        RewriteBase /path/to/app/
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_URI} !^/(webroot/)?(img|css|js)/(.*)$
+        RewriteRule ^ index.php [L]
+    </IfModule>
 
 위의 예는 잘못된 요청을 index.php로 보내지 않고 웹 서버의 404 페이지를 표시합니다.
 
-HTML의 404 페이지를 만들 수 있으며, ``ErrorDocument``지시문에 추기하여 CakePHP안에 있는 404 페이지를 사용할 수 있습니다. ::
+HTML의 404 페이지를 만들 수 있으며, ``ErrorDocument`` 지시문에 추기하여 CakePHP안에 있는 404 페이지를 사용할 수 있습니다. ::
 
-	ErrorDocument  404  / 404-not-found
+    ErrorDocument  404  / 404-not-found
 
 nginx
 -----------------------
 
-	nginx는 Apache 같은 .htaccess 파일을 사용하지 않으므로 사이트의 설정에서 URL 재 작성 규칙을 작성해야합니다. 
-	이것은 기본적으로 ``/etc/nginx/sites-available/your_virtual_host_conf_file``에 기재합니다. 
-	환경 구성에 따라이 이 파일을 작성해야하지만 적어도 PHP를 FastCGI로 실행시킬 필요가 있습니다. 
-	아래의 설정은 요청을 ``webroot/index.php``로 리다이렉트합니다. ::
+nginx는 Apache 같은 .htaccess 파일을 사용하지 않으므로 사이트의 설정에서 URL 재 작성 규칙을 작성해야합니다.
+이것은 기본적으로 ``/etc/nginx/sites-available/your_virtual_host_conf_file`` 에 기재합니다. 
+환경 구성에 따라이 이 파일을 작성해야하지만 적어도 PHP를 FastCGI로 실행시킬 필요가 있습니다. 
+아래의 설정은 요청을 ``webroot/index.php`` 로 리다이렉트합니다. ::
 
-	location / {
-	    try_files $uri $uri/ /index.php?$args;
-	}
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
 
 server 지시문의 예는 다음과 같습니다. ::
 
-	server {
-	    listen   80;
-	    listen   [::]:80;
-	    server_name www.example.com;
-	    return 301 http://example.com$request_uri;
-	}
+    server {
+        listen   80;
+        listen   [::]:80;
+        server_name www.example.com;
+        return 301 http://example.com$request_uri;
+    }
 
-	server {
-		listen   80;
-		listen   [::]:80;
-		server_name example.com;
+    server {
+        listen   80;
+        listen   [::]:80;
+        server_name example.com;
 
-		root   /var/www/example.com/public/webroot;
-		index  index.php;
+        root   /var/www/example.com/public/webroot;
+        index  index.php;
 
-		access_log /var/www/example.com/log/access.log;
-		error_log /var/www/example.com/log/error.log;
+        access_log /var/www/example.com/log/access.log;
+        error_log /var/www/example.com/log/error.log;
 
-		location / {
-		    try_files $uri $uri/ /index.php?$args;
-		}
+        location / {
+            try_files $uri $uri/ /index.php?$args;
+        }
 
-		location ~ \.php$ {
-		    try_files $uri =404;
-		    include fastcgi_params;
-		    fastcgi_pass 127.0.0.1:9000;
-		    fastcgi_index index.php;
-		    fastcgi_intercept_errors on;
-		    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-		}
-	}
+        location ~ \.php$ {
+            try_files $uri =404;
+            include fastcgi_params;
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_index index.php;
+            fastcgi_intercept_errors on;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        }
+    }
 
 .. note::
 
-	최근에 PHP-FPM 설정은 주소 127.0.0.1의 TCP 9000 포트 대신 unix php-fpm 소켓을 수신하도록 설정합니다. 
-	만약 위의 설정에서 502 bad gateway 오류가 발생한 경우 TCP 포트 대신 unix 소켓 경로를 사용하기 위해 ``fastcgi_pass`` 를 업데이트합니다. (예: fastcgi_pass unix : /var/run/php/php7.1- fpm.sock;)
+    최근에 PHP-FPM 설정은 주소 127.0.0.1의 TCP 9000 포트 대신 unix php-fpm 소켓을 수신하도록 설정합니다. 
+    만약 위의 설정에서 502 bad gateway 오류가 발생한 경우 TCP 포트 대신 unix 소켓 경로를 사용하기 위해 ``fastcgi_pass`` 를 업데이트합니다. (예: fastcgi_pass unix : /var/run/php/php7.1- fpm.sock;)
 
 IIS7 (Windows hosts)
 -----------------------
 
 IIS7은 기본적으로 .htaccess 파일을 지원하지 않습니다. 이를 추가 할 수있는 있지만, CakePHP고유의 재작성을 사용하도록 IIS에 htaccess로 규칙을 가져올 수 있습니다. 
-이것을하려면 다음의 단계를 진행해 주시기 바랍니다. ::
+이것을하려면 다음의 단계를 진행해 주시기 바랍니다. :
 
-1. URL `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ 을 설치하기 위해 `Microsoft의 Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_ 를 사용하거나 직접 다운로드합니다. ( `32 비트 <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64 비트 <https://www.microsoft.com/en-us/download/details.aspx?id=7435>`_ )
-2. CakePHP의 루트 폴더에 web.config라는 새 파일을 작성합니다.
-3. 메모장 또는 XML을 수정 할 수 있는 에디터를 사용하여 다음의의 코드를 지금 만든 web.config 파일에 복사합니다. ::
+#. URL `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ 을 설치하기
+   위해 `Microsoft의 Web Platform Installer
+   <http://www.microsoft.com/web/downloads/platform.aspx>`_ 를 사용하거나 직접
+   다운로드합니다. ( `32 비트 <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64 비트
+   <https://www.microsoft.com/en-us/download/details.aspx?id=7435>`_ )
+#. CakePHP의 루트 폴더에 web.config라는 새 파일을 작성합니다.
+#. 메모장 또는 XML을 수정 할 수 있는 에디터를 사용하여 다음의의 코드를 지금 만든 web.config 파일에 복사합니다. ::
 
-	<?xml version="1.0" encoding="UTF-8"?>
-	<configuration>
-	    <system.webServer>
-	        <rewrite>
-	            <rules>
-	                <rule name="Exclude direct access to webroot/*"
-	                  stopProcessing="true">
-	                    <match url="^webroot/(.*)$" ignoreCase="false" />
-	                    <action type="None" />
-	                </rule>
-	                <rule name="Rewrite routed access to assets(img, css, files, js, favicon)"
-	                  stopProcessing="true">
-	                    <match url="^(font|img|css|files|js|favicon.ico)(.*)$" />
-	                    <action type="Rewrite" url="webroot/{R:1}{R:2}"
-	                      appendQueryString="false" />
-	                </rule>
-	                <rule name="Rewrite requested file/folder to index.php"
-	                  stopProcessing="true">
-	                    <match url="^(.*)$" ignoreCase="false" />
-	                    <action type="Rewrite" url="index.php"
-	                      appendQueryString="true" />
-	                </rule>
-	            </rules>
-	        </rewrite>
-	    </system.webServer>
-	</configuration>
+    <?xml version="1.0" encoding="UTF-8"?>
+    <configuration>
+        <system.webServer>
+            <rewrite>
+                <rules>
+                    <rule name="Exclude direct access to webroot/*"
+                      stopProcessing="true">
+                        <match url="^webroot/(.*)$" ignoreCase="false" />
+                        <action type="None" />
+                    </rule>
+                    <rule name="Rewrite routed access to assets(img, css, files, js, favicon)"
+                      stopProcessing="true">
+                        <match url="^(font|img|css|files|js|favicon.ico)(.*)$" />
+                        <action type="Rewrite" url="webroot/{R:1}{R:2}"
+                          appendQueryString="false" />
+                    </rule>
+                    <rule name="Rewrite requested file/folder to index.php"
+                      stopProcessing="true">
+                        <match url="^(.*)$" ignoreCase="false" />
+                        <action type="Rewrite" url="index.php"
+                          appendQueryString="true" />
+                    </rule>
+                </rules>
+            </rewrite>
+        </system.webServer>
+    </configuration>
 
 일단 IIS에서 사용할 수있는 재 작성 규칙을 포함하는 web.config 파일이 되었으면 CakePHP 링크, CSS, JavaScript, 리라우팅 (rerouting)은 제대로 작동하는 것입니다.
 
 URL 다시 쓰기를 사용안하는 경우
------------------------
+--------------------------------
 
-	만약 당신의 서버에 mod_rewrite (또는 이것와 호환되는 모듈)을 사용하고 싶지 않거나 사용할 수 없는 경우 CakePHP의 기본의 URL을 사용해야합니다. **config/app.php** 의 아래에 덧글을 해제합니다. ::
+만약 당신의 서버에 mod_rewrite (또는 이것와 호환되는 모듈)을 사용하고 싶지 않거나 사용할 수 없는 경우 CakePHP의 기본의 URL을 사용해야합니다. **config/app.php** 의 아래에 덧글을 해제합니다. ::
 
-	'App' => [
-	    // ...
-	    // 'baseUrl' => env('SCRIPT_NAME'),
-	]
+    'App' => [
+        // ...
+        // 'baseUrl' => env('SCRIPT_NAME'),
+    ]
 
 그리고 아래의 .htaccess 파일을 삭제합니다. ::
 
-	/.htaccess
-	webroot/.htaccess
+    /.htaccess
+    webroot/.htaccess
 
 이제 URL은 www.example.com/controllername/actionname/param 가 아닌 www.example.com/index.php/controllername/actionname/param 라는 형식이 될 것입니다.

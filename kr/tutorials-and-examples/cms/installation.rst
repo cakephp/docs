@@ -9,7 +9,7 @@
 1.데이터베이스 서버.
   이 튜토리얼은 MySQL서버를 사용하려고 합니다.
   그러므로 데이터베이스를 실행하려면 SQL에 대해 충분히 알고 있어야 합니다.
-  MySQL를 사용하고 있기 때문에 PHP에서 ``pdo_mysql``을 활성화 했는지 확인 해주시기 바랍니다.
+  MySQL를 사용하고 있기 때문에 PHP에서 ``pdo_mysql`` 을 활성화 했는지 확인 해주시기 바랍니다.
 
 2.기초적인 PHP지식이 필요합니다.
 
@@ -33,7 +33,7 @@ Composer는 터미널이나 명령 행 인터페이스(CLI)에서 CakePHP를 간
     curl -s https://getcomposer.org/installer | php
 
 아니면 `Composer 웹사이트 <https://getcomposer.org/download/>`_
-에서 ``composer.phar``를 다운로드 할 수 있습니다.
+에서 ``composer.phar`` 를 다운로드 할 수 있습니다.
 
 그리고 인스톨한 디렉토리에서 아래의 명령어를 입력하면 **cms** 라는 디렉토리에 CakePHP애플리케이션을 인스톨 할 수 있습니다.
 
