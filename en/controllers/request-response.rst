@@ -907,13 +907,18 @@ Setting Cookies
 Cookies can be added to response using either an array or a :php:class:`Cake\\Http\\Cookie\\Cookie`
 object::
 
+    use Cake\Http\Cookie\Cookie;
+    use DateTime;
+
     // Add a cookie as an array using the immutable API (3.4.0+)
-    $this->response = $this->response->withCookie('remember_me', [
-        'value' => 'yes',
-        'path' => '/',
-        'httpOnly' => true,
-        'secure' => false,
-        'expire' => strtotime('+1 year')
+    $this->response = $this->response->withCookie(new Cookie(
+        'remember_me',
+        'yes',
+        new DateTime('+1 year'), // expiration time
+        '/', // path
+        '', // domain
+        false, // secure
+        true // httponly
     ]);
 
     // Before 3.4.0
@@ -1040,8 +1045,8 @@ Once you have created a cookie, you can add it to a new or existing
     Remember that collections are immutable and adding cookies into, or removing
     cookies from a collection, creates a *new* collection object.
 
-You should use the ``withCookie()`` method to add cookies to ``Response``
-objects as it is simpler to use::
+Cookie objects can be added to your controller responses by using
+``withCookie()``::
 
     $response = $this->response->withCookie($cookie);
 
