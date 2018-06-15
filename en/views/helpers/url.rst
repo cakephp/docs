@@ -13,7 +13,7 @@ overriding the core helper with an application one. See the
 Generating URLs
 ===============
 
-.. php:method:: build(mixed $url = null, boolean|array $full = false)
+.. php:method:: build(mixed $url = null, array $full = [])
 
 Returns a URL pointing to a combination of controller and action.
 If ``$url`` is empty, it returns the ``REQUEST_URI``, otherwise it
@@ -44,7 +44,7 @@ URL with extension::
 
 URL (starting with '/') with the full base URL prepended::
 
-    echo $this->Url->build('/posts', true);
+    echo $this->Url->build('/posts', ['fullBase' => true]);
 
     // Output
     http://somedomain.com/posts
@@ -101,12 +101,6 @@ must return ``true`` or ``'force'`` for the timestamp to be appended::
         ),
         'as' => 'font',
     ]);
-
-.. versionadded:: 3.3.5
-    ``build()`` accepts an array as the 2nd argument as of 3.3.5
-
-.. versionadded:: 3.6.0
-    The ``timestamp`` option was added to ``build()``.
 
 If you are generating URLs for CSS, Javascript or image files there are helper
 methods for each of these asset types::

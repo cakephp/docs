@@ -49,6 +49,8 @@ changes made:
 * ``Cake\Filesystem\Folder::copy($to, array $options = [])`` and
   ``Cake\Filesystem\Folder::move($to, array $options = [])`` have now the target
   path extracted as first argument.
+* ``Cake\View\Helper\UrlHelper::build()`` no longer accepts a boolean for the
+  second parameter. You must use ``['fullBase' => true]`` instead.
 
 
 New Features
