@@ -17,6 +17,9 @@ Deprecated Features Removed
 All methods, properties and functionality that was emitting deprecation warnings
 as of 3.6 have been removed.
 
+Authentication functionality has been splitted into standalone plugins `Authentication <https://github.com/cakephp/authentication>`__ and `Authorization <https://github.com/cakephp/authorization>`__.
+The former RssHelper can be found as standalone `Feed plugin <https://github.com/dereuromark/cakephp-feed>`__ with similar functionality.
+
 Breaking Changes
 ================
 
@@ -43,6 +46,9 @@ changes made:
   'model' is the second argument.
 * ``Cake\Utility\Xml::fromArray()`` now requires an array for the ``$options``
   parameter.
+* ``Cake\Filesystem\Folder::copy($to, array $options = [])`` and
+  ``Cake\Filesystem\Folder::move($to, array $options = [])`` have now the target
+  path extracted as first argument.
 
 
 New Features
