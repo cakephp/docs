@@ -406,6 +406,20 @@ have the request object use these headers set the ``trustProxy`` property to
     $scheme = $this->request->scheme();
     $clientIp = $this->request->clientIp();
 
+Once proxies are trusted the ``clientIp()`` method will use the *last* IP
+address in the ``X-Forwarded-For`` header. If your application is behind
+multiple proxies, you can use ``setTrustedProxies()`` to define the IP addresses
+of proxies in your control::
+
+    $request->setTrustedProxies(['127.1.1.1', '127.8.1.3']);
+
+After proxies are trusted ``clientIp()`` will use the first IP address in the
+``X-Forwarded-For`` header providing it is the only value that isn't from a trusted
+proxy.
+
+.. versionadded:: 3.7.0
+    ``setTrustedProxies()`` was added.
+
 Checking Accept Headers
 -----------------------
 

@@ -115,6 +115,11 @@ Form
   values for forms simpler.
 * ``Cake\Form\Form::getData()`` was added.
 
+Http
+----
+
+* ``Cake\Http\ServerRequest::setTrustedProxies()`` was added.
+
 TestSuite
 ---------
 
