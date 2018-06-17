@@ -136,6 +136,7 @@ Utility
 
 * ``Cake\Utility\Text::getTransliterator()`` was added.
 * ``Cake\Utility\Text::setTransliterator()`` was added.
+* ``Cake\Utility\Xml::loadHtml()`` was added.
 
 Validation
 ----------
