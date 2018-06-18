@@ -119,6 +119,8 @@ Http
 ----
 
 * ``Cake\Http\ServerRequest::setTrustedProxies()`` was added.
+* ``Cake\Http\Client`` will now default to use a Curl based adapter if the
+  ``curl`` extension is installed.
 
 TestSuite
 ---------
