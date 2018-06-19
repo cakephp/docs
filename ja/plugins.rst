@@ -111,7 +111,7 @@ Composer を使ったプラグインのインストール
             $this->addPlugin(ContactManager::class);
 
             // '短縮名' でベンダーの名前空間付きプラグインを読み込み
-            $this->addPlugin('AcmeCorp\ContactManager');
+            $this->addPlugin('AcmeCorp/ContactManager');
         }
     }
 
@@ -160,7 +160,6 @@ Composer を使ったプラグインのインストール
   ミドルウェアキューに追加するために使用されます。
 * ``console`` アプリケーションのコマンドコレクションにコンソールコマンドを
   追加するために使用されます。
-* ``events`` イベントリスナーをアプリケーションのイベントマネージャーに追加するために使用されます。
 
 プラグインをロードするとき、有効にするフックを設定できます。
 デフォルトでは、 :ref:`plugin-objects` のないプラグインはすべてのフックを無効にします。
