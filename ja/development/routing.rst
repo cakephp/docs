@@ -49,7 +49,7 @@ index メソッドを実行します。時々、複数のパラメーターを�
 
     $routes->connect(
         '/articles/:id',
-        ['controller' => 'Articles', 'action' => 'view'],
+        ['controller' => 'Articles', 'action' => 'view']
     )
     ->setPatterns(['id' => '\d+'])
     ->setPass(['id']);
@@ -474,7 +474,7 @@ CakePHP には、いくつかの特別な意味を持つルート要素があり
     Router::scope('/', function ($routes) {
         $routes->connect(
             '/blog/:id-:slug', // 例えば /blog/3-CakePHP_Rocks
-            ['controller' => 'Blogs', 'action' => 'view'],
+            ['controller' => 'Blogs', 'action' => 'view']
         )
         // 関数に引数を渡すためのルーティングテンプレートの中で、ルート要素を定義します。
         // テンプレートの中で、ルート要素を定義します。
