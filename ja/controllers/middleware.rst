@@ -280,6 +280,29 @@ PSR-7 リクエストとレスポンス
         }
     }
 
+.. _routing-middleware:
+
+ルーティングミドルウェア
+========================
+
+ルーティングミドルウェアは、アプリケーションのルートの適用や、リクエストが実行するプラグイン、
+コントローラー、アクションを解決することができます。起動時間を向上させるために、
+アプリケーションで使用されているルートコレクションをキャッシュすることができます。
+キャッシュされたルートを有効にするために、目的の :ref:`キャッシュ設定 <cache-configuration>`
+をパラメーターとして指定します。 ::
+
+    // Application.php の中で
+    public function middleware($middlewareQueue)
+    {
+        // ...
+        $middlewareQueue->add(new RoutingMiddleware($this, 'routing'));
+    }
+
+上記は、生成されたルートコレクションを格納するために ``routing`` キャッシュエンジンを使用します。
+
+.. versionadded:: 3.6.0
+    ルートのキャッシュは 3.6.0 で追加されました。
+
 .. _security-header-middleware:
 
 セキュリティヘッダーの追加
