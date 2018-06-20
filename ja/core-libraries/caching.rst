@@ -21,9 +21,10 @@ CakePHP には、いくつかのキャッシュエンジンが用意されてい
   最も遅いキャッシュエンジンで、アトミックな操作のための多くの機能を持ちません。
   しかし、ディスクストレージは非常に安価なので、頻繁に書き込みが行なわれない
   大きなオブジェクトや要素の保存はファイルに適しています。
-* ``ApcCache`` APC キャッシュは、PHP の `APCu <http://php.net/apcu>`_ 拡張を使用します。
+* ``ApcuEngine`` APCu キャッシュは、PHP の `APCu <http://php.net/apcu>`_ 拡張を使用します。
   この拡張はオブジェクトを保存するためにウェブサーバー上の共有メモリーを使います。
   これはとても高速で、かつアトミックな読み込み/書き込みの機能を提供することが可能になります。
+  3.6.0 より前は ``ApcuEngine`` は ``ApcEngine`` という名前でした。
 * ``Wincache`` Wincache は `Wincache <http://php.net/wincache>`_ 拡張を使います。
   Wincache は APC と同様の機能とパフォーマンスを持ちますが、Windows と IIS に最適化されています。
 * ``MemcachedEngine`` `Memcached <http://php.net/memcached>`_ 拡張を使います。
@@ -356,7 +357,7 @@ Cache を使用すると、Read-through キャッシュを簡単に行うこと�
 
 .. php:staticmethod:: clear($check, $config = 'default')
 
-キャッシュ設定から、すべてのキャッシュされた値を破棄します。Apc、Memcached、Wincache
+キャッシュ設定から、すべてのキャッシュされた値を破棄します。Apcu、Memcached、Wincache
 などのエンジンでは、キャッシュ設定のプレフィックスを使用してキャッシュエントリーを削除します。
 異なるキャッシュ設定には異なる接頭辞が付いていることを確認してください。 ::
 
@@ -373,7 +374,7 @@ Cache を使用すると、Read-through キャッシュを簡単に行うこと�
 
 .. note::
 
-    APC と Wincache は、ウェブサーバーと CLI 用に分離されたキャッシュを使用するため、
+    APCu と Wincache は、ウェブサーバーと CLI 用に分離されたキャッシュを使用するため、
     別々にクリアする必要があります。（CLI ではウェブサーバーのキャッシュをクリアできません）
 
 キャッシュを使用してカウンターを保存する
@@ -402,7 +403,7 @@ Cache クラスは簡単な方法でカウンター値をインクリメント/�
 .. note::
 
     インクリメントとデクリメントは FileEngine では機能しません。
-    代わりに、APC、Wincache、Redis または Memcached を使用する必要があります。
+    代わりに、APCu、Wincache、Redis または Memcached を使用する必要があります。
 
 キャッシュを使用して共通のクエリー結果を格納する
 ================================================
@@ -570,4 +571,4 @@ Cache クラスは簡単な方法でカウンター値をインクリメント/�
 
 .. meta::
     :title lang=ja: キャッシュ
-    :keywords lang=ja: uniform api,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apc,memcache,queries,cakephp,elements,servers,memory
+    :keywords lang=ja: uniform api,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apcu,memcache,queries,cakephp,elements,servers,memory
