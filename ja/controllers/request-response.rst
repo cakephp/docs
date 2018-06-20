@@ -42,6 +42,10 @@ CakePHP のリクエストオブジェクトは、入ってきたリクエスト
     // 3.4.0 より前
     $controllerName = $this->request->param('controller');
 
+全てのルーティングパラメーターを配列として取得するためには ``getAttribute()`` を使用します。 ::
+
+    $params = $this->request->getAttribute('params');
+
 すべての :ref:`route-elements` は、このインターフェイスを通してアクセスされます。
 
 :ref:`route-elements` に加えて :ref:`passed-arguments` へのアクセスがしばしば必要になります。
