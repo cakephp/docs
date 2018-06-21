@@ -431,7 +431,7 @@ CakePHP には、いくつかの特別な意味を持つルート要素があり
 
     $routes->connect(
         '/:lang/articles/:slug',
-        ['controller' => 'Articles', 'action' => 'view'],
+        ['controller' => 'Articles', 'action' => 'view']
     )
     // GET と POST リクエストを許可
     ->setMethods(['GET', 'POST'])
@@ -896,6 +896,11 @@ SEO に親和性があるルーティング
 ミドルウェアをアプリケーション全体に適用することができますが、特定のルーティングスコープに
 ミドルウェアを適用すると、ミドルウェアが必要な場所にのみ適用できるため、適用の方法や範囲の
 配慮がいらないミドルウェアにすることができます。
+
+.. note::
+
+    適用されるスコープ付きミドルウェアは :ref:`RoutingMiddleware <routing-middleware>`
+    によって実行され、通常、アプリケーションのミドルウェアキューの最後に配置されます。
 
 ミドルウェアをスコープに適用する前に、ルートコレクションに登録する必要があります。 ::
 
