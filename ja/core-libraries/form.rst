@@ -37,13 +37,15 @@
 
         protected function _buildValidator(Validator $validator)
         {
-            return $validator->add('name', 'length', [
+            $validator->add('name', 'length', [
                     'rule' => ['minLength', 10],
                     'message' => '名前は必須です'
                 ])->add('email', 'format', [
                     'rule' => 'email',
                     'message' => '有効なメールアドレスが要求されます',
                 ]);
+
+            return $validator;
         }
 
         protected function _execute(array $data)
@@ -57,7 +59,7 @@
 
 * ``_buildSchema`` は FormHelper が HTML フォームを作成する際に使用する
   スキーマデータを定義するために使います。フィールドの型、長さ、および精度を定義できます。
-* ``_buildValidator`` はバリデーターを加えることができる
+* ``validationDefault`` はバリデーターを加えることができる
   :php:class:`Cake\\Validation\\Validator` のインスタンスを受け取ります。
 * ``_execute`` では ``execute()`` が呼ばれ、データが有効な時に望むふるまいを定義します。
 
@@ -102,7 +104,7 @@
 
 モデルのないフォームのフィールドに値を設定するために、
 FormHelper によって作成される他のすべてのフォームと同様に、
-``$this->request->data()`` を使って値を定義することができます。 ::
+``$this->request->withData()`` を使って値を定義することができます。 ::
 
     // 何らかのコントローラー中で
     namespace App\Controller;
@@ -125,8 +127,9 @@ FormHelper によって作成される他のすべてのフォームと同様に
 
             if ($this->request->is('get')) {
                 // たとえばユーザーモデルの値
-                $this->request->data('name', 'John Doe');
-                $this->request->data('email','john.doe@example.com');
+                $this->request = $this->request
+                    ->withData('name', 'John Doe')
+                    ->withData('email','john.doe@example.com');
             }
 
             $this->set('contact', $contact);
@@ -162,6 +165,10 @@ Validator クラスを使用せずに、コントローラーから各フォー�
     {
         $this->_errors = $errors;
     }
+
+.. versionchanged:: 3.5.1
+    ``setErrors`` をもう指定する必要はありません。これは、利便性のため ``Form``
+    クラスに既に含まれているからです。
 
 バリデータークラスのエラーの返し方にならって、 ``$errors`` はこの形式でなければなりません。 ::
 
