@@ -13,10 +13,11 @@ connection configured. See the section on :ref:`database configuration
 <database-configuration>` for more information.
 
 When run with no arguments ``bin/cake bake`` will output a list of available
+tasks.
 
-For windows system try with ``bin\cake bake``
+For windows system try with ``bin\cake bake``.
 
-tasks. You should see something like::
+You should see something like::
 
     $ bin/cake bake
 

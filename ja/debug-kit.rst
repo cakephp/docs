@@ -27,7 +27,7 @@ DebugKit は、CakePHP アプリケーション用のデバッグツールバー
 設定
 ====
 
-* ``DebugKit.panels`` - BebugKit のパネルを有効化または無効化します。
+* ``DebugKit.panels`` - DebugKit のパネルを有効化または無効化します。
   次のようにして、任意の標準パネルを無効にすることができます。 ::
 
     // DebugKit をロードする前に
@@ -35,6 +35,12 @@ DebugKit は、CakePHP アプリケーション用のデバッグツールバー
 
 * ``DebugKit.includeSchemaReflection`` - スキーマリフレクションクエリーの
   ロギングを有効にするには、true に設定します。デフォルトは無効になっています。
+* ``DebugKit.forceEnable`` - DebugKit を強制的に表示します。
+  ホスト上で DebugKit が表示されているかどうかを確認するために使用できます。
+  それ以外の場合では、安全ではありません。次のようにして、このオプションを設定する事ができます。 ::
+
+    // DebugKit をロードする前に
+    Configure::write('DebugKit.forceEnable', true);
 
 データベース設定
 ----------------
