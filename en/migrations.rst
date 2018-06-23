@@ -961,7 +961,8 @@ In your migration file, you can do the following::
     public function up()
     {
         $this->table('old_table_name')
-            ->rename('new_table_name');
+            ->rename('new_table_name')
+            ->save();
     }
 
 Skipping the ``schema.lock`` file generation
