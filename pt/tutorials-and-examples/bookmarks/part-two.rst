@@ -5,7 +5,7 @@ Depois de terminar a :doc:`primeira parte deste tutorial
 </tutorials-and-examples/bookmarks/intro>`, você deve ter uma
 aplicação muito básica. Neste capítulo iremos adicionar autenticação e
 restringir as bookmarks para que cada usuário possa ver/modificar somente
-aquelas que possuam.
+aquelas tags que possuam.
 
 Adicionando login
 =================
@@ -13,9 +13,9 @@ Adicionando login
 No CakePHP, a autenticação é feita por :doc:`/controllers/components`. Os
 Components podem ser considerados como formas de criar pedaços reutilizáveis
 de código relacionado a controllers com uma característica específica ou
-conceito. Os components também podem ligar-se ao evento do ciclo de vida do
+conceito. Os components também podem se ligar ao evento do ciclo de vida do
 controller e interagir com a sua aplicação. Para começar, vamos
-adicionar o AuthComponent a nossa aplicação. Nós vamos querer muito que
+adicionar o AuthComponent a nossa aplicação. É essencial que
 cada método exija autenticação, por isso vamos acrescentar o
 :doc:`AuthComponent</controllers/components/authentication>` em nosso
 AppController::
@@ -72,7 +72,7 @@ Então, vamos criar a ação de login::
         }
     }
 
-E em **src/Template/Users/login.ctp** adicione o seguinte::
+E em **src/Template/Users/login.ctp** adicione o seguinte trecho::
 
     <h1>Login</h1>
     <?= $this->Form->create() ?>
@@ -81,7 +81,7 @@ E em **src/Template/Users/login.ctp** adicione o seguinte::
     <?= $this->Form->button('Login') ?>
     <?= $this->Form->end() ?>
 
-Agora que temos um simples formulário de login, devemos ser capazes de efetuar
+Agora que temos um formulário de login simples, devemos ser capazes de efetuar
 login com um dos users que tenham senha criptografada.
 
 .. note::
@@ -115,7 +115,7 @@ Ativando inscrições
 Se você não estiver logado e tentar visitar / usuários / adicionar você vai
 ser expulso para a página de login. Devemos corrigir isso se
 quisermos que as pessoas se inscrevam em nossa aplicação. No
-UsersController adicione o seguinte::
+UsersController adicione o seguinte trecho::
 
     public function beforeFilter(\Cake\Event\Event $event)
     {
@@ -132,7 +132,7 @@ listagem neste tutorial, então eles não vão funcionar, já que o
 Restringindo acesso
 ===================
 
-Agora que os usuários podem conectar-se, nós vamos querer limitar os
+Agora que os usuários podem se conectar, nós vamos querer limitar os
 bookmarks que podem ver para aqueles que fizeram. Nós vamos fazer isso
 usando um adaptador de 'autorização'. Sendo os nossos requisitos
 bastante simples, podemos escrever um código em nossa
@@ -156,7 +156,7 @@ Seu método ``initialize`` agora deve parecer com::
         {
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
-                'authorize'=> 'Controller',//added this line
+                'authorize'=> 'Controller',//adicionado essa linha
                 'authenticate' => [
                     'Form' => [
                         'fields' => [
@@ -224,7 +224,7 @@ alguns problemas:
 #. Ao editar um bookmark, você pode escolher o user.
 #. A página de listagem mostra os bookmarks de outros users.
 
-Vamos enfrentar o formulário de adição em primeiro lugar. Para começar
+Primeiramente, vamos refatorar o formulário de adição. Para começar
 remova o ``input('user_id')`` a partir de **src/Template/Bookmarks/add.ctp**.
 Com isso removido, nós também vamos atualizar o método add::
 
@@ -245,8 +245,8 @@ Com isso removido, nós também vamos atualizar o método add::
     }
 
 Ao definir a propriedade da entidade com os dados da sessão, nós removemos
-qualquer possibilidade do user modificar de que outro user um bookmark
-seja. Nós vamos fazer o mesmo para o formulário edit e action edit. Sua
+qualquer possibilidade do user modificar algo que não pertenca a ele. 
+Nós vamos fazer o mesmo para o formulário edit e action edit. Sua
 ação edit deve ficar assim::
 
     public function edit($id = null)
