@@ -129,10 +129,14 @@ handler 配列内に配置されます。ハンドラー内からこれらの値
 設定できるかを示しています。クラス名をあなたの handler.engine に使用した時、
 CakePHP は、 ``Network\Session`` 名前空間内にクラスがあることを期待します。
 例えば、 ``AppSessionHandler`` クラスを持っていた場合、ファイルは、
-**src/Network/Session/AppSessionHandler.php** であるべきです。そして、
-クラス名は、 ``App\Network\Session\AppSessionHandler`` であるべきです。
-プラグインの中のセッションハンドラを使うこともできます。その場合、エンジンを
+**src/Http/Session/AppSessionHandler.php** に置いてください。そして、
+クラス名は、 ``App\Http\Session\AppSessionHandler`` にしてください。
+プラグインの中のセッションハンドラーを使うこともできます。その場合、エンジンを
 ``MyPlugin.PluginSessionHandler`` のように設定します。
+
+.. note::
+    3.6.0 より前のセッションアダプターファイルは、
+    **src/Network/Session/AppHandler.php** に配置してください。
 
 データーベースセッション
 ------------------------
@@ -220,14 +224,14 @@ ini ディレクティブの設定
 これは APC による、キャッシュ限度を超過した際の消失について心配が不要な、最善で高速な
 IO をもたらします。
 
-まずカスタムクラスを作成し **src/Network/Session/ComboSession.php**
+まずカスタムクラスを作成し **src/Http/Session/ComboSession.php**
 に保存する必要があります。クラスは以下のようになります。 ::
 
-    namespace App\Network\Session;
+    namespace App\Http\Session;
 
     use Cake\Cache\Cache;
     use Cake\Core\Configure;
-    use Cake\Network\Session\DatabaseSession;
+    use Cake\Http\Session\DatabaseSession;
 
     class ComboSession extends DatabaseSession
     {
@@ -311,11 +315,12 @@ IO をもたらします。
 :php:class:`Cake\\View\\Helper\\SessionHelper` が使用できます。
 基本的なセッションの使用例は以下の通り。 ::
 
-    $name = $this->request->session()->read('User.name');
+    // 3.6.0 より前は、代わりに session() を使用
+    $name = $this->getRequest()->getSession()->read('User.name');
 
     // 複数回セッションにアクセスする場合、
     // ローカル変数にしたくなるでしょう。
-    $session = $this->request->session();
+    $session = $this->getRequest()->getSession();
     $name = $session->read('User.name');
 
 セッションデータの読込みと書込み

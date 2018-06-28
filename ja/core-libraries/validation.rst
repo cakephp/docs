@@ -28,11 +28,11 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
 
     $validator
         ->requirePresence('title')
-        ->notEmpty('title', 'Please fill this field')
+        ->notEmpty('title', 'このフィールドに入力してください')
         ->add('title', [
             'length' => [
                 'rule' => ['minLength', 10],
-                'message' => 'Titles need to be at least 10 characters long',
+                'message' => 'タイトルは 10 文字以上必要です',
             ]
         ])
         ->allowEmpty('published')
@@ -42,7 +42,7 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
         ->requirePresence('body')
         ->add('body', 'length', [
             'rule' => ['minLength', 50],
-            'message' => 'Articles must have a substantial body.'
+            'message' => '記事は中身のある本文を持っていなければなりません。',
         ]);
 
 上記例に見られるように、バリデーションは、実際にバリデーションを実行したいフィールドに対して
@@ -79,11 +79,11 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
     $validator->requirePresence([
         'author_id' => [
             'mode' => 'create',
-            'message' => 'An author is required.',
+            'message' => '著者は必須です。',
         ],
         'published' => [
             'mode' => 'update',
-            'message' => 'The published state is required.',
+            'message' => '公開された状態が必要です。',
         ]
     ]);
 
@@ -111,9 +111,190 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
 これらのメソッドの例は以下の通りです。 ::
 
     $validator->allowEmpty('published')
-        ->notEmpty('title', 'Title cannot be empty')
-        ->notEmpty('body', 'Body cannot be empty', 'create')
+        ->notEmpty('title', 'タイトルは空にできません')
+        ->notEmpty('body', '本文は空にできません', 'create')
         ->allowEmpty('header_image', 'update');
+
+バリデーションルールの追加
+---------------------------
+
+``Validator`` クラスはバリデーターの構築をシンプルかつ表現力豊かにするメソッドを提供します。
+例えば、バリデーションルールを username フィールドに追加するには以下のようになります。 ::
+
+    $validator = new Validator();
+    $validator
+        ->email('username')
+        ->ascii('username')
+        ->lengthBetween('username', [4, 8]);
+
+バリデータメソッドの完全なセットについては、 `Validator API ドキュメント
+<https://api.cakephp.org/3.x/class-Cake.Validation.Validator.html>`_ 
+をご覧ください。
+
+.. versionadded:: 3.2
+    ルール構築のメソッドは 3.2.0 で追加されました。
+
+.. _custom-validation-rules:
+
+カスタムバリデーションルールの使用
+----------------------------------
+
+``Validator`` やプロバイダーから与えられるメソッドを使うことに加え、
+匿名関数を含むコールバック関数も、バリデーションルールとして用いることができます。 ::
+
+    // グローバル関数を利用する
+    $validator->add('title', 'custom', [
+        'rule' => 'validate_title',
+        'message' => 'タイトルが正しくありません'
+    ]);
+
+    // プロバイダーではないコールバック関数を利用する
+    $validator->add('title', 'custom', [
+        'rule' => [$this, 'method'],
+        'message' => 'タイトルが正しくありません'
+    ]);
+
+    // クロージャーを利用する
+    $extra = 'クロージャー内に必要な追加値';
+    $validator->add('title', 'custom', [
+        'rule' => function ($value, $context) use ($extra) {
+            // true/falseを返すカスタムロジックを記入
+        },
+        'message' => 'タイトルが正しくありません'
+    ]);
+
+    // カスタムプロバイダーからのルールを利用する
+    $validator->add('title', 'custom', [
+        'rule' => 'customRule',
+        'provider' => 'custom',
+        'message' => 'タイトルが十分にユニークではありません'
+    ]);
+
+クロージャーやコールバックメソッドは、呼び出された際に2つの設定を受けることとなります。
+最初は、バリデーションが行われるフィールド値であり、２番目はバリデーションプロセスに関連する
+データを含む配列です。
+
+- **data**: バリデーションメソッドに与えられた元々のデータのことです。
+  値を比較するようなルールを作る場合には、利用価値が高いといえます。
+- **providers**: プロバイダーオブジェクトについての完成されたリストのことです。
+  複数のプロバイダーを呼び出すことにより複雑なルールを作りたいときに、利用価値が高いといえます。
+- **newRecord**:　バリデーションコールが新しいレコードのためのものか、
+  すでにあるレコードのためのものかを示します。
+
+既存ユーザーの ID のようにあなたのバリデーションメソッドに追加のデータを渡す必要がある場合、
+あなたのコントローラーからカスタム動的プロバイダー利用できます。 ::
+
+    $this->Examples->validator('default')->provider('passed', [
+        'count' => $countFromController,
+        'userid' => $this->Auth->user('id')
+    ]);
+
+そのとき、あなたのバリデーションメソッドが、第２コンテキストパラメーターを持つことを保証します。 ::
+
+    public function customValidationMethod($check, array $context)
+    {
+        $userid = $context['providers']['passed']['userid'];
+    }
+
+もし、バリデーションに合格した場合、クロージャーはブーリアン型の true を返さなければなりません。
+もし、失敗した場合、ブーリアン型の false またはカスタムエラーメッセージとして文字列を返してください。
+詳しくは :ref:`条件付き/動的なエラーメッセージ <dynamic_validation_error_messages>`
+をご覧ください。
+
+.. _dynamic_validation_error_messages:
+
+条件付き/動的なエラーメッセージ
+----------------------------------
+
+バリデーションルールのメソッドは、 :ref:`カスタムコールバック <custom-validation-rules>`
+または :ref:`プロバイダーによって提供されるメソッド <adding-validation-providers>` であり、
+検証が成功したかどうかを示すブーリアン型を返すか、検証が失敗したことを意味する文字列を返すことができ、
+返された文字列はエラーメッセージとして使用されます。
+
+``message`` オプションで定義された既存のエラーメッセージは、
+バリデーションルールメソッドから返されたエラーメッセージによって上書きされます。 ::
+
+    $validator->add('length', 'custom', [
+        'rule' => function ($value, $context) {
+            if (!$value) {
+                return false;
+            }
+
+            if ($value < 10) {
+                return '値が 10 より小さい場合のエラーメッセージ';
+            }
+
+            if ($value > 20) {
+                return '値が 20 より大きい場合のエラーメッセージ';
+            }
+
+            return true;
+        },
+        'message' => '`false` が返されたときに使われる一般的なエラーメッセージ'
+    ]);
+
+条件付バリデーション
+--------------------
+
+バリデーションルールを定義する際、 ``on`` キーを用いることで、バリデーションルールが
+適用されるべきか否かを定義することができます。未定義のままにすると、ルールは常に適用されます。
+他に有効な値は、 ``create`` 及び ``update`` です。これらの値を利用することにより、
+``create`` や ``update`` 実行時にのみ、ルールが適用されることとなります。
+
+加えて、特定なルールが適用されるべきか決めるためのコールバック関数を活用することもできます。 ::
+
+    $validator->add('picture', 'file', [
+        'rule' => ['mimeType', ['image/jpeg', 'image/png']],
+        'on' => function ($context) {
+            return !empty($context['data']['show_profile_picture']);
+        }
+    ]);
+
+``$context['data']`` 配列を用いることで、他の送信されたフィールドにアクセスすることが
+できます。上記例では、 ``show_profile_picture`` の値が空かどうかで 'picture'
+のルールを任意なものとします。また、 ``uploadedFile`` を用いることで、
+任意のファイルアップロードに関する入力を設定することができます。 ::
+
+    $validator->add('picture', 'file', [
+        'rule' => ['uploadedFile', ['optional' => true]],
+    ]);
+
+``allowEmpty()``, ``notEmpty()`` 及び ``requirePresence()`` メソッドは、
+最後に引数としてコールバック関数を受け付けることができます。もしこれがあれば、
+ルールが適用されるべきか否かをコールバック関数が決めます。例えば、以下のように、
+フィールド値が空のままでも許容される時もあります。 ::
+
+    $validator->allowEmpty('tax', function ($context) {
+        return !$context['data']['is_taxable'];
+    });
+
+一方で、以下のように、一定の条件が満たされた場合にのみ、フィールド値が求められる
+（空欄が許容されない）場合もあります。 ::
+
+    $validator->notEmpty('email_frequency', 'このフィールドは必須です', function ($context) {
+        return !empty($context['data']['wants_newsletter']);
+    });
+
+上記の例は、ユーザーがニュースレターを受領したい場合には、 ``email_frequency``
+フィールドが空欄のまま残されてはいけない、という例です。
+
+さらに、一定の条件の下でのみフィールドが存在することを求めることも可能です。 ::
+
+    $validator->requirePresence('full_name', function ($context) {
+        if (isset($context['data']['action'])) {
+            return $context['data']['action'] === 'subscribe';
+        }
+        return false;
+    });
+    $validator->requirePresence('email');
+
+これは、申し込みを作成したいユーザーの場合のみ ``full_name`` フィールドの存在を求め、
+``email`` フィールドは常に要求されます。申し込みをキャンセルした時にも必要とされます。
+
+.. versionadded:: 3.1.1
+    ``requirePresence()`` の callable 対応は、 3.1.1 で追加されました。
+
+
 
 最後に適用されるルールとして設定する
 ------------------------------------
@@ -130,27 +311,17 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
             'minLength' => [
                 'rule' => ['minLength', 10],
                 'last' => true,
-                'message' => 'Comments must have a substantial body.'
+                'message' => 'コメントには中身のある本文が必要です。',
             ],
             'maxLength' => [
                 'rule' => ['maxLength', 250],
-                'message' => 'Comments cannot be too long.'
+                'message' => 'コメントが長すぎることはできません。'
             ]
         ]);
 
 上記例にて、minLength ルール適用によりエラーとなった場合は、maxLength ルールは適用されません。
 
-バリデーションメソッドの短縮
-----------------------------
-
-3.2 から、Validator オブジェクトは、少ない記述でバリデーターを構築する多くの新しいメソッドがあります。
-例えば、バリデーションルールを username フィールドに追加するには以下のようになります。 ::
-
-    $validator = new Validator();
-    $validator
-        ->email('username')
-        ->ascii('username')
-        ->lengthBetween('username', [4, 8]);
+.. _adding-validation-providers:
 
 バリデーションプロバイダーを加える
 ----------------------------------
@@ -238,129 +409,6 @@ Localized プラグインは、バリデーションのための国の２文字�
     郵便番号のチェックのための postal()
     国が定めた個人 ID のチェックのための personId()
 
-カスタムバリデーションルール
-----------------------------
-
-プロバイダーから与えられるメソッドを使うことに加え、匿名関数を含めたいかなるコールバック関数をも、
-バリデーションルールとして用いることができます。 ::
-
-    // グローバル関数を利用する
-    $validator->add('title', 'custom', [
-        'rule' => 'validate_title',
-        'message' => 'タイトルが正しくありません'
-    ]);
-
-    // プロバイダーではないコールバック関数を利用する
-    $validator->add('title', 'custom', [
-        'rule' => [$this, 'method'],
-        'message' => 'タイトルが正しくありません'
-    ]);
-
-    // クロージャーを利用する
-    $extra = 'Some additional value needed inside the closure';
-    $validator->add('title', 'custom', [
-        'rule' => function ($value, $context) use ($extra) {
-            // true/falseを返すカスタムロジックを記入
-        },
-        'message' => 'タイトルが正しくありません'
-    ]);
-
-    // カスタムプロバイダーからのルールを利用する
-    $validator->add('title', 'custom', [
-        'rule' => 'customRule',
-        'provider' => 'custom',
-        'message' => 'タイトルが十分にユニークではありません'
-    ]);
-
-クロージャーやコールバックメソッドは、呼び出された際に2つの設定を受けることとなります。
-最初は、バリデーションが行われるフィールド値であり、２番目はバリデーションプロセスに関連する
-データを含む配列です。
-
-- **data**: バリデーションメソッドに与えられた元々のデータのことです。
-  値を比較するようなルールを作る場合には、利用価値が高いといえます。
-- **providers**: プロバイダーオブジェクトについての完成されたリストのことです。
-  複数のプロバイダーを呼び出すことにより複雑なルールを作りたいときに、利用価値が高いといえます。
-- **newRecord**:　バリデーションコールが新しいレコードのためのものか、
-  すでにあるレコードのためのものかを示します。
-
-既存ユーザーの ID のようにあなたのバリデーションメソッドに追加のデータを渡す必要がある場合、
-あなたのコントローラーからカスタム動的プロバイダー利用できます。 ::
-
-    $this->Examples->validator('default')->provider('passed', [
-        'count' => $countFromController,
-        'userid' => $this->Auth->user('id')
-    ]);
-
-そのとき、あなたのバリデーションメソッドが、第２コンテキストパラメーターを持つことを保証します。 ::
-
-    public function customValidationMethod($check, array $context)
-    {
-        $userid = $context['providers']['passed']['userid'];
-    }
-
-もし、バリデーションに合格した場合、クロージャーはブーリアン型の true を返さなければなりません。
-もし、失敗した場合、ブーリアン型の false またはカスタムエラーメッセージとして文字列を返してください。
-
-条件付バリデーション
---------------------
-
-バリデーションルールを定義する際、``on`` キーを用いることで、バリデーションルールが
-適用されるべきか否かを定義することができます。未定義のままにすると、ルールは常に適用されます。
-他に有効な値は、 ``create`` 及び ``update`` です。これらの値を利用することにより、
-``create`` や ``update`` 実行時にのみ、ルールが適用されることとなります。
-
-加えて、特定なルールが適用されるべきか決めるためのコールバック関数を活用することもできます。 ::
-
-    $validator->add('picture', 'file', [
-        'rule' => ['mimeType', ['image/jpeg', 'image/png']],
-        'on' => function ($context) {
-            return !empty($context['data']['show_profile_picture']);
-        }
-    ]);
-
-``$context['data']`` 配列を用いることで、他の送信されたフィールドにアクセスすることが
-できます。上記例では、 ``show_profile_picture`` の値が空かどうかで 'picture'
-のルールを任意なものとします。また、 ``uploadedFile`` を用いることで、
-任意のファイルアップロードに関する入力を設定することができます。 ::
-
-    $validator->add('picture', 'file', [
-        'rule' => ['uploadedFile', ['optional' => true]],
-    ]);
-
-``allowEmpty()``, ``notEmpty()`` 及び ``requirePresence()`` メソッドは、
-最後に引数としてコールバック関数を受け付けることができます。もしこれがあれば、
-ルールが適用されるべきか否かをコールバック関数が決めます。例えば、以下のように、
-フィールド値が空のままでも許容される時もあります。 ::
-
-    $validator->allowEmpty('tax', function ($context) {
-        return !$context['data']['is_taxable'];
-    });
-
-一方で、以下のように、一定の条件が満たされた場合にのみ、フィールド値が求められる
-（空欄が許容されない）場合もあります。 ::
-
-    $validator->notEmpty('email_frequency', 'This field is required', function ($context) {
-        return !empty($context['data']['wants_newsletter']);
-    });
-
-上記例は、ユーザーがニュースレターを受領したい場合には、 ``email_frequency``
-フィールドが空欄のまま残されてはいけない、という例です。
-
-さらに、一定の条件の下でのみフィールドが存在することを求めることも可能です。 ::
-
-    $validator->requirePresence('full_name', function ($context) {
-        if (isset($context['data']['action'])) {
-            return $context['data']['action'] === 'subscribe';
-        }
-        return false;
-    });
-    $validator->requirePresence('email');
-
-これは、申し込みを作成したいユーザーの場合のみ ``full_name`` フィールドの存在を求め、
-``email`` フィールドは常に要求されます。申し込みをキャンセルした時にも必要とされます。
-
-.. versionadded:: 3.1.1
-    ``requirePresence()`` の callable 対応は、 3.1.1 で追加されました。
 
 バリデーターをネストする
 ------------------------
@@ -397,6 +445,20 @@ Localized プラグインは、バリデーションのための国の２文字�
 ``addNested()`` を用いることで、1:1 の関係を構築することができ、 ``addNestedMany()``
 を用いることで 1:N の関係を築くことができます。両方のメソッドを用いることにより、
 ネストされたバリデーターのエラーは親バリデーターのエラーに貢献し、最終結果に影響を与えます。
+他のバリデーター機能と同様に、ネストされたバリデーターは、エラーメッセージと
+条件付きアプリケーションをサポートします。 ::
+
+    $validator->addNestedMany(
+        'comments',
+        $commentValidator,
+        'Invalid comment',
+        'create'
+    );
+
+ネストされたバリデーターのエラーメッセージは、 ``_nested`` キーにあります。
+
+.. versionadded:: 3.6.0
+    ネストされたバリデーターのメッセージと条件は追加されました。
 
 .. _reusable-validators:
 
@@ -437,12 +499,12 @@ Localized プラグインは、バリデーションのための国の２文字�
         ->requirePresence('email')
         ->add('email', 'validFormat', [
             'rule' => 'email',
-            'message' => 'E-mail must be valid'
+            'message' => 'Eメールは有効でなければなりません。'
         ])
         ->requirePresence('name')
-        ->notEmpty('name', 'We need your name.')
+        ->notEmpty('name', '名前が必要です。')
         ->requirePresence('comment')
-        ->notEmpty('comment', 'You need to give a comment.');
+        ->notEmpty('comment', 'コメントが必要です。');
 
     $errors = $validator->errors($this->request->getData());
     if (empty($errors)) {
@@ -453,7 +515,7 @@ Localized プラグインは、バリデーションのための国の２文字�
 返されたエラー配列は、以下のような構造となっております。 ::
 
     $errors = [
-        'email' => ['E-mail must be valid']
+        'email' => ['Eメールは有効でなければなりません。']
     ];
 
 もし単一のフィールドに複数のエラーがあった場合は、エラーメッセージの配列はフィールドごとに

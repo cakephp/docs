@@ -51,7 +51,7 @@ you wish, you can restrict some parameters to conform to a regular expression::
 
     $routes->connect(
         '/articles/:id',
-        ['controller' => 'Articles', 'action' => 'view'],
+        ['controller' => 'Articles', 'action' => 'view']
     )
     ->setPatterns(['id' => '\d+'])
     ->setPass(['id']);
