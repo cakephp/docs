@@ -924,7 +924,8 @@ CakePHP コアは、この操作を行うために使用できる :doc:`スキ�
     public function up()
     {
         $this->table('old_table_name')
-            ->rename('new_table_name');
+            ->rename('new_table_name')
+            ->save();
     }
 
 ``schema.lock`` ファイル生成のスキップ
