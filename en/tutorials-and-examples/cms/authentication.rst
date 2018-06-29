@@ -92,6 +92,8 @@ AuthComponent in our AppController::
                     'controller' => 'Users',
                     'action' => 'login'
                 ],
+                 //use isAuthorized in Controllers
+                'authorize' => array('Controller'),
                  // If unauthorized, return them to page they were just on
                 'unauthorizedRedirect' => $this->referer()
             ]);
