@@ -563,8 +563,8 @@ CakePHP は計算された値が正しい Entity にセットされることを�
 ==========
 
 クエリービルダーは複雑な ``where`` 句の構築を簡単にします。
-``where()`` や ``andWhere()``、 ``orWhere()`` を使うことで、
-複数条件のグルーピングも表現できます。 ::
+グループ化された条件は、 ``where()`` と Expression オブジェクトを組み合わせることで表現できます。
+単純なクエリーの場合、条件の配列を使用して条件を作成できます。 ::
 
     $query = $articles->find()
         ->where([
@@ -576,28 +576,20 @@ CakePHP は計算された値が正しい Entity にセットされることを�
 
     SELECT * FROM articles WHERE author_id = 3 AND (view_count = 2 OR view_count = 3)
 
-深くネストした配列を使いたくないなら、クエリーをビルドするのに ``orWhere()`` と ``andWhere()``
-メソッドを使うことができます。各メソッドは今の条件と前の条件をつなぐ演算子をセットします。たとえば::
+深くネストされた配列を避けたい場合は、 ``where()`` のコールバック形式を使用して
+クエリーを構築することができます。コールバック形式を使用すると、
+式ビルダーを使用して配列なしでより複雑な条件を作成できます。例::
 
-    $query = $articles->find()
-        ->where(['author_id' => 2])
-        ->orWhere(['author_id' => 3]);
+    $query = $articles->find()->where(function ($exp, $query) {
+        // 同一フィールドに複数条件を追加するために add() を使用
+        $author = $exp->or_(['author_id' => 3])->add(['author_id' => 2]);
+        $published = $exp->and_(['published' => true, 'view_count' => 10]);
 
-上記は次のような SQL を出力します。 ::
-
-    SELECT * FROM articles WHERE (author_id = 2 OR author_id = 3)
-
-``orWhere()`` と ``andWhere()`` を組み合わせることで、演算子を組み合わせるような複雑な条件を
-表現できます。 ::
-
-    $query = $articles->find()
-        ->where(['author_id' => 2])
-        ->orWhere(['author_id' => 3])
-        ->andWhere([
-            'published' => true,
-            'view_count >' => 10
-        ])
-        ->orWhere(['promoted' => true]);
+        return $exp->or_([
+            'promoted' => true,
+            $exp->and_([$author, $published])
+        ]);
+    });
 
 上記は次のような SQL を出力します。 ::
 
@@ -610,28 +602,6 @@ CakePHP は計算された値が正しい Entity にセットされることを�
             (published = 1 AND view_count > 10)
         )
         OR promoted = 1
-    )
-
-関数を引数にして ``orWhere()`` と ``andWhere()`` を使うことで、
-Expression オブジェクトを条件文に加えることができます。 ::
-
-    $query = $articles->find()
-        ->where(['title LIKE' => '%First%'])
-        ->andWhere(function ($exp) {
-            return $exp->or_([
-                'author_id' => 2,
-                'is_highlighted' => true
-            ]);
-        });
-
-上記の SQL は下記のようになります。 ::
-
-    SELECT *
-    FROM articles
-    WHERE (
-        title LIKE '%First%'
-        AND
-        (author_id = 2 OR is_highlighted = 1)
     )
 
 ``where()`` 関数に渡される Expression オブジェクトには２種類のメソッドがあります。
