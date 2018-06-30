@@ -1397,7 +1397,8 @@ UNION は１つ以上のクエリーを一緒に構築して作成します。 :
 サブクエリーはリレーショナル・データベースにおいて強力な機能であり、CakePHP ではそれを実に直感的に
 構築することができます。クエリーを一緒に構築することで、サブクエリーを作ることができます。 ::
 
-    $matchingComment = $articles->association('Comments')->find()
+    // 3.6.0 より前は、代わりに association() を使用
+    $matchingComment = $articles->getAssociation('Comments')->find()
         ->select(['article_id'])
         ->distinct()
         ->where(['comment LIKE' => '%CakePHP%']);
