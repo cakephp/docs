@@ -198,7 +198,7 @@ CakePHP が生成している SQL がどんなものか見たいなら、
 データを select する
 ====================
 
-CakePHP では ``SELECT`` クエリーを簡単につくれます。取得する列を制限するのには、
+CakePHP では ``SELECT`` クエリーを簡単につくれます。取得するフィールドを制限するのには、
 ``select()`` メソッドを使います。 ::
 
     $query = $articles->find();
@@ -207,13 +207,13 @@ CakePHP では ``SELECT`` クエリーを簡単につくれます。取得する
         debug($row->title);
     }
 
-連想配列で列を渡すことで列のエイリアス (別名) をセットすることができます。 ::
+連想配列でフィールドを渡すことでフィールドのエイリアス (別名) をセットすることができます。 ::
 
     // SELECT id AS pk, title AS aliased_title, body ... になる
     $query = $articles->find();
     $query->select(['pk' => 'id', 'aliased_title' => 'title', 'body']);
 
-列を select distinct するために、 ``distinct()`` メソッドを使うことができます。 ::
+フィールドを select distinct するために、 ``distinct()`` メソッドを使うことができます。 ::
 
     // SELECT DISTINCT country FROM ... になる
     $query = $articles->find();
@@ -280,26 +280,39 @@ CakePHP では ``SELECT`` クエリーを簡単につくれます。取得する
 上記の例にあるように、クエリーを変更するすべてのメソッドは流暢 (fluent)
 なインターフェイスを提供しますので、クエリーを構築する際にチェーンメソッドの形で呼び出すことができます。
 
-テーブルからすべての列を select する
-------------------------------------
+特定のフィールドを選択
+----------------------
 
-クエリーはデフォルトで table のすべての列を select します。
-例外となるのは ``select()`` 関数をあえて呼び、特定の列を指定した場合だけです。 ::
+クエリーはデフォルトでテーブルのすべてのフィールドを選択します。
+例外となるのは ``select()`` 関数をあえて呼び、特定のフィールドを指定した場合だけです。 ::
 
-    // articles テーブルから id と title だけが select される
+    // articles テーブルから id と title だけが選択される
     $articles->find()->select(['id', 'title']);
 
-``select($fields)`` を呼んで、なおもテーブルのすべての列を select したいなら、
+``select($fields)`` を呼んで、なおもテーブルのすべてのフィールドを選択したいなら、
 次の方法でテーブルインスタンスを ``select()`` に渡すことができます。 ::
 
-    // 計算された slug 列を含めて、 articles テーブルのすべての列を取得
+    // 計算された slug フィールドを含む、 articles テーブルのすべてのフィールドを取得
     $query = $articlesTable->find();
     $query
         ->select(['slug' => $query->func()->concat(['title' => 'identifier', '-', 'id' => 'identifier'])])
-        ->select($articlesTable); // articles のすべての列を select する
+        ->select($articlesTable); // articles のすべてのフィールドを選択する
 
 .. versionadded:: 3.1
     テーブルオブジェクトを select() に渡すのは 3.1 で追加されました。
+
+テーブル上のいくつかのフィールド以外のすべてのフィールドを選択したい場合には
+``selectAllExcept()`` を使用できます。 ::
+
+    $query = $articlesTable->find();
+
+    // published フィールドを除く全てのフィールドを取得
+    $query->selectAllExcept($articlesTable, ['published']);
+
+アソシエーションが含まれる場合、 ``Association`` オブジェクトを渡すこともできます。
+
+.. versionadded:: 3.6.0
+    ``selectAllExcept()`` メソッドが追加されました。
 
 .. _using-sql-functions:
 
