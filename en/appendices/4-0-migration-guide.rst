@@ -51,6 +51,7 @@ changes made:
   path extracted as first argument.
 * ``Cake\View\Helper\UrlHelper::build()`` no longer accepts a boolean for the
   second parameter. You must use ``['fullBase' => true]`` instead.
+* Return values of ``string|bool`` are now ``string|null`` across the framework.
 
 
 New Features
