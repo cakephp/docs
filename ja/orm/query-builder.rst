@@ -224,7 +224,7 @@ CakePHP ではこれらを簡単につくれます。フェッチする列を制
     $query->select(['country'])
         ->distinct(['country']);
 
-基本の条件をセットするには、``where()`` メソッドを使うことができます。 ::
+基本の条件をセットするには、 ``where()`` メソッドを使うことができます。 ::
 
     // 条件は AND で連結されます
     $query = $articles->find();
@@ -234,6 +234,15 @@ CakePHP ではこれらを簡単につくれます。フェッチする列を制
     $query = $articles->find();
     $query->where(['title' => 'First Post'])
         ->where(['published' => true]);
+
+無名関数を ``where()`` メソッドに渡すこともできます。渡された無名関数は、第一引数として
+``\Cake\Database\Expression\QueryExpression`` のインスタンス、第二引数として
+``\Cake\ORM\Query`` を受け取ります。 ::
+
+    $query = $articles->find();
+    $query->where(function (QueryExpression $exp, Query $q) {
+        return $exp->eq('published', true);
+    });
 
 さらに複雑な ``WHERE`` 条件の作り方を知りたい場合は :ref:`advanced-query-conditions`
 のセクションをご覧ください。ソート順を適用するために、 ``order`` メソッドが使用できます。 ::
@@ -356,7 +365,7 @@ SQL 関数に渡す引数には、リテラルの引数と、バインドパラ�
 
 クエリーが実行される際には、 ``:c0`` という値に ``' - CAT'`` というテキストがバインドされることになります。
 
-上記の関数に加え、``func()`` メソッドは ``year``、 ``date_format``、 ``convert`` などといった、
+上記の関数に加え、 ``func()`` メソッドは ``year`` 、 ``date_format`` 、 ``convert`` などといった、
 一般的な SQL 関数を構築するのに使います。
 たとえば::
 
@@ -383,7 +392,7 @@ SQL 関数に渡す引数には、リテラルの引数と、バインドパラ�
     // ストアドプロシージャを使う
     $query = $articles->find();
     $lev = $query->func()->levenshtein([$search, 'LOWER(title)' => 'literal']);
-    $query->where(function ($exp) use ($lev) {
+    $query->where(function (QueryExpression $exp) use ($lev) {
         return $exp->between($lev, 0, $tolerance);
     });
 
@@ -447,7 +456,7 @@ SQL を使用することができます。 ::
 次のようになります。 ::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->addCase(
                 [
                     $q->newExpr()->lt('population', 100000),
@@ -468,7 +477,7 @@ SQL を使用することができます。 ::
 ``if .. then .. else`` 文を作成します。 ::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->addCase(
                 [
                     $q->newExpr()->eq('population', 0),
@@ -640,7 +649,7 @@ Expression オブジェクトを条件文に加えることができます。 ::
 ``Expression`` object で条件を追加する例は次のようになります。 ::
 
     $query = $articles->find()
-        ->where(function ($exp) {
+        ->where(function (QueryExpression $exp) {
             return $exp
                 ->eq('author_id', 2)
                 ->eq('published', true)
@@ -667,7 +676,7 @@ Expression オブジェクトを条件文に加えることができます。 ::
 ただし、 ``AND`` と ``OR`` の両方を使いたいなら、次のようにすることもできます。 ::
 
     $query = $articles->find()
-        ->where(function ($exp) {
+        ->where(function (QueryExpression $exp) {
             $orConditions = $exp->or_(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
@@ -689,7 +698,7 @@ Expression オブジェクトを条件文に加えることができます。 ::
 これはメソッドをチェーンさせる際に可読性を上げられることが良く有ります。 ::
 
     $query = $articles->find()
-        ->where(function ($exp) {
+        ->where(function (QueryExpression $exp) {
             $orConditions = $exp->or_(function ($or) {
                 return $or->eq('author_id', 2)
                     ->eq('author_id', 5);
@@ -702,7 +711,7 @@ Expression オブジェクトを条件文に加えることができます。 ::
 ``not()`` を使って式を否定することができます。 ::
 
     $query = $articles->find()
-        ->where(function ($exp) {
+        ->where(function (QueryExpression $exp) {
             $orConditions = $exp->or_(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
@@ -721,7 +730,7 @@ Expression オブジェクトを条件文に加えることができます。 ::
 SQL 関数を使った式を構築することも可能です。 ::
 
     $query = $articles->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             $year = $q->func()->year([
                 'created' => 'identifier'
             ]);
@@ -744,7 +753,7 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
 - ``eq()`` 等号の条件を作成します。 ::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->eq('population', '10000');
         });
     # WHERE population = 10000
@@ -752,7 +761,7 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
 - ``notEq()`` 不等号の条件を作成します。 ::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->notEq('population', '10000');
         });
     # WHERE population != 10000
@@ -760,7 +769,7 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
 - ``like()`` ``LIKE`` 演算子を使った条件を作成します。 ::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->like('name', '%A%');
         });
     # WHERE name LIKE "%A%"
@@ -768,7 +777,7 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
 - ``notLike()`` ``LIKE`` 条件の否定を作成します。 ::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->notLike('name', '%A%');
         });
     # WHERE name NOT LIKE "%A%"
@@ -776,7 +785,7 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
 - ``in()`` ``IN`` を使った条件を作成します。 ::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->in('country_id', ['AFG', 'USA', 'EST']);
         });
     # WHERE country_id IN ('AFG', 'USA', 'EST')
@@ -784,7 +793,7 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
 - ``notIn()`` ``IN`` を使った条件の否定を作成します。 ::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->notIn('country_id', ['AFG', 'USA', 'EST']);
         });
     # WHERE country_id NOT IN ('AFG', 'USA', 'EST')
@@ -792,7 +801,7 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
 - ``gt()`` ``>`` の条件を作成します。 ::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->gt('population', '10000');
         });
     # WHERE population > 10000
@@ -800,7 +809,7 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
 - ``gte()`` ``>=`` の条件を作成します。 ::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->gte('population', '10000');
         });
     # WHERE population >= 10000
@@ -808,7 +817,7 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
 - ``lt()`` ``<`` の条件を作成します。 ::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->lt('population', '10000');
         });
     # WHERE population < 10000
@@ -816,7 +825,7 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
 - ``lte()`` ``<=`` の条件を作成します。 ::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->lte('population', '10000');
         });
     # WHERE population <= 10000
@@ -824,7 +833,7 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
 - ``isNull()`` ``IS NULL`` の条件を作成します。 ::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->isNull('population');
         });
     # WHERE (population) IS NULL
@@ -832,7 +841,7 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
 - ``isNotNull()`` ``IS NULL`` の条件の否定を作成します。 ::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->isNotNull('population');
         });
     # WHERE (population) IS NOT NULL
@@ -840,7 +849,7 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
 - ``between()`` ``BETWEEN`` の条件を作成します。 ::
 
     $query = $cities->find()
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->between('population', 999, 5000000);
         });
     # WHERE population BETWEEN 999 AND 5000000,
@@ -849,13 +858,13 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
 
     $subquery = $cities->find()
         ->select(['id'])
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->equalFields('countries.id', 'cities.country_id');
         })
         ->andWhere(['population >', 5000000]);
 
     $query = $countries->find()
-        ->where(function ($exp, $q) use ($subquery) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->exists($subquery);
         });
     # WHERE EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
@@ -864,7 +873,7 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
 
     $subquery = $cities->find()
         ->select(['id'])
-        ->where(function ($exp, $q) {
+        ->where(function (QueryExpression $exp, Query $q) {
             return $exp->equalFields('countries.id', 'cities.country_id');
         })
         ->andWhere(['population >', 5000000]);
@@ -1294,7 +1303,7 @@ ORM とデータベースの抽象層では、ほとんどの SQL インジェ�
 
 Expression ビルダーを使う際には、カラム名にユーザーデータを含めてはいけません。 ::
 
-    $query->where(function ($exp) use ($userData, $values) {
+    $query->where(function (QueryExpression $exp) use ($userData, $values) {
         // いずれの式 (expression) の中であってもカラム名は安全ではありません
         return $exp->in($userData, $values);
     });
