@@ -52,6 +52,8 @@ changes made:
 * ``Cake\View\Helper\UrlHelper::build()`` no longer accepts a boolean for the
   second parameter. You must use ``['fullBase' => true]`` instead.
 * Return values of ``string|bool`` are now ``string|null`` across the framework.
+* The ``readFile`` option of ``Xml::build()`` is no longer true by default.
+  Instead you must enable ``readFile`` to read local files.
 
 
 New Features
