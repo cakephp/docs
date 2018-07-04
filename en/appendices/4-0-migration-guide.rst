@@ -54,6 +54,9 @@ changes made:
 * Return values of ``string|bool`` are now ``string|null`` across the framework.
 * The ``readFile`` option of ``Xml::build()`` is no longer true by default.
   Instead you must enable ``readFile`` to read local files.
+* ``Cake\Controller\Controller::referer()`` now defaults the ``local``
+  parameter to true, instead of false. This makes using referer headers safer as
+  they will be constrained to your application's domain by default.
 
 
 New Features
