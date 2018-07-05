@@ -2016,8 +2016,8 @@ Output:
 
 .. code-block:: html
 
-    <label for="user-name">Name</label>
-    <label for="user-name">Your username</label>
+    <label for="name">Name</label>
+    <label for="name">Your username</label>
 
 With the third parameter ``$options`` you can set the id or class::
 
@@ -2028,8 +2028,8 @@ Output:
 
 .. code-block:: html
 
-    <label for="user-name" id="user-label">Name</label>
-    <label for="user-name" class="highlight">Your username</label>
+    <label for="name" id="user-label">Name</label>
+    <label for="name" class="highlight">Your username</label>
 
 Displaying and Checking Errors
 ==============================
