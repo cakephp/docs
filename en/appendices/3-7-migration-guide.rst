@@ -122,6 +122,13 @@ Http
 * ``Cake\Http\Client`` will now default to use a Curl based adapter if the
   ``curl`` extension is installed.
 
+ORM
+---
+
+* ``Cake\ORM\EntityTrait::hasErrors()`` was added. This method can be used to
+  check whether or not an entity has errors more efficiently than
+  ``getErrors()`` does.
+
 TestSuite
 ---------
 

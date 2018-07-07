@@ -288,7 +288,7 @@ Validation Errors
 
 After you :ref:`save an entity <saving-entities>` any validation errors will be
 stored on the entity itself. You can access any validation errors using the
-``getErrors()`` or ``getError()`` method::
+``getErrors()``, ``getError()`` or ``hadErrors()`` methods::
 
     // Get all the errors
     $errors = $user->getErrors();
@@ -299,6 +299,12 @@ stored on the entity itself. You can access any validation errors using the
     $errors = $user->getError('password');
     // Prior to 3.4.0
     $errors = $user->errors('password');
+
+    // Does the entity or any nested entity have an error.
+    $user->hasErrors();
+
+    // Does only the root entity have an error
+    $user->hasErrors(false);
 
 The ``setErrors()`` or ``setError()`` method can also be used to set the errors
 on an entity, making it easier to test code that works with error messages::
@@ -311,6 +317,9 @@ on an entity, making it easier to test code that works with error messages::
 
     // Prior to 3.4.0
     $user->errors('password', ['Password is required.']);
+
+.. versionadded:: 3.7.0
+    ``hasErrors()`` was added.
 
 .. _entities-mass-assignment:
 
