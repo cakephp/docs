@@ -22,7 +22,7 @@ protected メソッドや private メソッドはルーティングしてアク�
 ~~~~~~~~~~~~~~~~~~~~~~
 
 前節の通り、ひとつの単語からなる名前のコントローラーは、簡単に小文字の URL パスにマップできます。
-例えば、 ``UsersController`` （ファイル名は 'UsersController.php'）には、
+例えば、 ``UsersController`` （ファイル名は **UsersController.php**）には、
 ``http://example.com/users`` としてアクセスできます。
 
 複数語のコントローラーをあなたの好きなようにルーティングできますが、
