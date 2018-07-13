@@ -313,8 +313,8 @@ respond to::
 
             // e.g. if our parent calls $this->addBehavior('Timestamp');
             // and we want to add an additional event
-            if ($this->behaviors()->has('Timestamp')) {
-                $this->behaviors()->get('Timestamp')->config([
+            if ($this->hasBehavior('Timestamp')) {
+                $this->getBehavior('Timestamp')->setConfig([
                     'events' => [
                         'Users.login' => [
                             'last_login' => 'always'
