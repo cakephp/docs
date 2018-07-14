@@ -835,13 +835,14 @@ Query Logging
 
 Query logging can be enabled when configuring your connection by setting the
 ``log`` option to ``true``. You can also toggle query logging at runtime, using
-``logQueries``::
+``enableQueryLogging``::
 
+    // Prior to 3.7.0 use logQueries()
     // Turn query logging on.
-    $conn->logQueries(true);
+    $conn->enableQueryLogging(true);
 
     // Turn query logging off
-    $conn->logQueries(false);
+    $conn->enableQueryLogging(false);
 
 When query logging is enabled, queries will be logged to
 :php:class:`Cake\\Log\\Log` using the 'debug' level, and the 'queriesLog' scope.
