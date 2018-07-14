@@ -16,9 +16,11 @@ following::
     php composer.phar require cakephp/elastic-search "@stable"
 
 You will need to add the following line to your application's
-**config/bootstrap.php** file::
+**src/Application.php** file::
 
-    Plugin::load('Cake/ElasticSearch', ['bootstrap' => true]);
+    $this->addPlugin('Cake/ElasticSearch', ['bootstrap' => true]);
+
+    // Prior to 3.6.0 you need to use Plugin::load()
 
 Additionally, you will need to configure the 'elastic' datasource connection in
 your **config/app.php** file. An example configuration would be::

@@ -260,9 +260,9 @@ render time::
 To use a plugin or app panel, update your application's DebugKit configuration
 to include the panel::
 
-    // in config/bootstrap.php
+    // in src/Application.php bootstrap() method add
     Configure::write('DebugKit.panels', ['App', 'MyPlugin.MyCustom']);
-    Plugin::load('DebugKit', ['bootstrap' => true]);
+    $this->addPlugin('DebugKit', ['bootstrap' => true]);
 
 The above would load all the default panels as well as the ``AppPanel``, and
 ``MyCustomPanel`` panel from ``MyPlugin``.

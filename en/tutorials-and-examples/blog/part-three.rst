@@ -24,7 +24,7 @@ the migrations plugin is already under ``require``. If not, add it by executing:
     composer require cakephp/migrations:~1.0
 
 The migrations plugin will now be in your application's **plugins** folder.
-Also, add ``Plugin::load('Migrations');`` to your application's **bootstrap.php** file.
+Also, add ``$this->addPlugin('Migrations');`` to your application's ``bootstrap`` method.
 
 Once the plugin is loaded, run the following command to create a migration file::
 

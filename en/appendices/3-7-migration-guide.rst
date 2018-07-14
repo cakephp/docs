@@ -73,6 +73,8 @@ features will continue to function until 4.0.0 after which they will be removed.
   a helper class.
 * ``Helper::$request`` is removed.
   Use ``View::getRequest()``, ``View::setRequest()`` instead.
+* ``Cake\Core\Plugin::load()`` and ``loadAll()`` are deprecated. Instead you
+  should use ``Application::addPlugin()``.
 
 Soft Deprecations
 =================
