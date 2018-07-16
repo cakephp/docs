@@ -285,7 +285,7 @@ ElasticSearch プラグインは、シームレスなテストスイートの統
                 'properties' => [
                     'username' => ['type' => 'string'],
                 ]
-            ]
+            ],
             'title' => ['type' => 'string'],
             'body' => ['type' => 'string'],
         ];
