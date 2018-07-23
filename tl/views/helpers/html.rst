@@ -780,7 +780,7 @@ When loading files of templates, your file should look like::
     Template strings containing a percentage sign (``%``) need special attention,
     you should prefix this character with another percentage so it looks like
     ``%%``. The reason is that internally templates are compiled to be used with
-    ``sprintf()``. Example: '<div style="width:{{size}}%%">{{content}}</div>'
+    ``sprintf()``. Example: ``<div style="width:{{size}}%%">{{content}}</div>``
 
 Creating Breadcrumb Trails with HtmlHelper
 ==========================================
