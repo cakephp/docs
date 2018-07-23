@@ -789,7 +789,7 @@ Lors du chargement des fichiers de templates, votre fichier ressemblera à::
     une attention spéciale, vous devriez préfixer ce caractère avec un autre
     pourcentage pour qu'il ressemble à ``%%``. La raison est que les templates
     sont compilés en interne pour être utilisé avec ``sprintf()``.
-    Exemple: '<div style="width:{{size}}%%">{{content}}</div>'
+    Exemple: ``<div style="width:{{size}}%%">{{content}}</div>``
 
 Création d'un chemin de navigation avec le Helper Html
 ======================================================
