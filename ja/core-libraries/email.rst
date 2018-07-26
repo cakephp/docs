@@ -309,7 +309,7 @@ CakePHP は、 :doc:`ビューレイヤー </views>` を使用してメールを
 **src/Template/Plugin/TestTheme/Plugin/Blog/Email/text/new_comment.ctp**
 
 .. deprecated:: 3.4.0
-    ``template()`` の代わりに ``setTempalte()`` を使用してください。
+    ``template()`` の代わりに ``setTemplate()`` を使用してください。
     ``template()`` のレイアウトの引数の代わりに ``setLayout()`` を使用してください。
     ``theme()`` の代わりに ``setTheme()`` を使用してください。
 
