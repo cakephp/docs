@@ -230,6 +230,12 @@ expectations and assertions your tests make. Additionally because tests are
 code, they are easy to re-run whenever you make a change. This helps prevent
 the creation of new bugs.
 
+.. note::
+
+    EventManager is refreshed for each test method. This means that when running 
+    multiple tests at once, you will lose your event listeners that were 
+    registered in config/bootstrap.php as the bootstrap is only executed once.
+
 .. _running-tests:
 
 Running Tests
