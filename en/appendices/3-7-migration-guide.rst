@@ -107,6 +107,14 @@ Database
 
 * ``Cake\Database\FunctionsBuilder::rand()`` was added.
 
+
+Error
+-----
+
+* ``ExceptionRenderer`` will now look for prefixed error controllers when
+  handling exceptions. This allows you to define custom error controller logic
+  for each routing prefix in your application.
+
 Filesystem
 ----------
 

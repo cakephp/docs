@@ -114,6 +114,44 @@ rendering to render the error page view and receives all the standard request
 life-cycle events. By modifying this class you can control which components are
 used and which templates are rendered.
 
+If your application uses :ref:`routing-prefixes` you can create custom error
+controllers for each routing prefix. For example, if you had an ``admin``
+prefix. You could create the following class::
+
+    namespace App\Controller\Admin;
+
+    use App\Controller\AppController;
+
+    class ErrorController extends AppController
+    {
+        /**
+         * Initialization hook method.
+         *
+         * @return void
+         */
+        public function initialize()
+        {
+            $this->loadComponent('RequestHandler');
+        }
+
+        /**
+         * beforeRender callback.
+         *
+         * @param \Cake\Event\Event $event Event.
+         * @return void
+         */
+        public function beforeRender(Event $event)
+        {
+            $this->viewBuilder()->setTemplatePath('Error');
+        }
+    }
+
+This controller would only be used when an error is encountered in a prefixed
+controller, and allows you to define prefix specific logic/templates as needed.
+
+.. versionadded:: 3.7.0
+    Prefixed error controllers were added.
+
 Change the ExceptionRenderer
 ============================
 
