@@ -132,6 +132,9 @@ ORM
 * ``Cake\ORM\EntityTrait::hasErrors()`` was added. This method can be used to
   check whether or not an entity has errors more efficiently than
   ``getErrors()`` does.
+* Updating has many association data now respects ``_ids``. This makes patching
+  has many associations work the same as creating new entities, and creates
+  consistency with belongs to many associations.
 
 TestSuite
 ---------
