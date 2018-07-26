@@ -6,7 +6,8 @@ Shells
 .. php:class:: Shell
 
 .. deprecated:: 3.6.0
-    Shells are deprecated as of 3.6.0, but will not be removed until 5.x
+    Shells are deprecated as of 3.6.0, but will not be removed until 5.x.
+    Use :doc:`/console-and-shells/commands` instead.
 
 Creating a Shell
 ================
