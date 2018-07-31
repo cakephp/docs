@@ -177,6 +177,31 @@ records::
         }
     }
 
+If you want to break different addresses into multiple associations, you can do something like::
+
+    class UsersTable extends Table
+    {
+        public function initialize(array $config)
+        {
+            $this->hasOne('HomeAddress', [
+                    'className' => 'Addresses'
+                ])
+                ->setProperty('home_address')
+                ->setConditions(['HomeAddress.label' => 'Home'])
+                ->setDependent(true);
+            $this->hasOne('WorkAddress', [
+                    'className' => 'Addresses'
+                ])
+                ->setProperty('work_address')
+                ->setConditions(['WorkAddress.label' => 'Work'])
+                ->setDependent(true);
+        }
+    }
+
+.. note::
+
+    If you have multiple hasOne associations with the same columns in the conditions, like ``label``, you need to use the table alias before column name as shown above.
+
 Possible keys for hasOne association arrays include:
 
 - **className**: the class name of the table being associated to the current
