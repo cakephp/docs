@@ -268,7 +268,7 @@ CakePHP は、デフォルトでは取得できる行数の上限は 100 に設�
 従って、 ``NotFoundException`` が返されたときは、通常のエラーページが表示されるようにしたり、
 try-catch 構文を活用して、適切な処理をすればよいです。 ::
 
-    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
+    // 3.6 より前は Cake\Network\Exception\NotFoundException を使用
     use Cake\Http\Exception\NotFoundException;
 
     public function index()

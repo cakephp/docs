@@ -332,7 +332,7 @@ Articles コントローラーを編集する
 
     namespace App\Controller;
 
-    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
+    // 3.6 より前は Cake\Network\Exception\NotFoundException を使用
     use Cake\Http\Exception\NotFoundException;
 
     class ArticlesController extends AppController

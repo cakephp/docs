@@ -551,7 +551,7 @@ CakePHP が固有のクラスを使用する代わりに、暗黙的に汎用的
 
     // bootstrap.php の中で
     use Cake\Event\EventManager;
-    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
+    // 3.6 より前は Cake\Network\Exception\NotFoundException を使用
     use Cake\Http\Exception\InternalErrorException;
 
     $isCakeBakeShellRunning = (PHP_SAPI === 'cli' && isset($argv[1]) && $argv[1] === 'bake');
