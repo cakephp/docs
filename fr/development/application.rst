@@ -12,19 +12,18 @@ methodes de hook suivantes :
 
 * ``bootstrap`` Utilisé pour chargé les :doc:`fichiers de configuration
   </development/configuration>`, définir des constantes et d'autres fonctions
-  globales.
-  Par défaut, cela inclura **config/bootstrap.php**. C'est l'endroit idéal
-  pour charger les :doc:`/plugins` que votre application utilise.
+  globales. Par défaut, cela inclura **config/bootstrap.php**. C'est
+  l'endroit idéal pour charger les :doc:`/plugins` que votre application
+  utilise.
 * ``routes`` Utilisé pour charger les :doc:`routes </development/routing>`.
   Par défaut, cela inclura **config/routes.php**.
 * ``middleware`` Utilisé pour ajouter des :doc:`middleware </controllers/middleware>`
   dans votre application.
-* ``console`` Utilisé pour ajouter des :doc:`commandes de console
-    </console-and-shells>` à votre application. Par défaut, cela
-  découvrira automatiquement les shells et les commandes dans votre
-  application et dans tous les plugins.
-* ``events`` Utilisé pour ajouter des :doc:`écouteurs (listener) d'événement
-  </core-libraries/events>` au gestionnaire d'événements de l'application.
+* ``console`` Utilisé pour ajouter des :doc:`commandes de console </console-and-shells>`
+  à votre application. Par défaut, cela découvrira automatiquement les shells
+  et les commandes dans votre application et dans tous les plugins.
+* ``events`` Utilisé pour ajouter des :doc:`écouteurs (listener) d'événement </core-libraries/events>`
+  au gestionnaire d'événements de l'application.
 
 .. _adding-http-stack:
 
@@ -37,7 +36,7 @@ application existante nécessite quelques modifications de votre code.
 #. Premièrement mettez à jour **webroot/index.php**. Copiez le contenu du
    fichier depuis le `squelette de l'application <https://github.com/cakephp/app/tree/master/webroot/index.php>`__.
 #. Créez une classe ``Application``. Référez-vous à la section
-   :ref:`using-middleware` au dessus pour savoir comment. Ou copiez l'exemple
+   :ref:`using-middleware` pour savoir comment. Ou copiez l'exemple
    dans le `squelette de l'application <https://github.com/cakephp/app/tree/master/src/Application.php>`__.
 #. Créez **config/requirements.php** si il n'existe pas et ajoutez le contenu
    du `squelette de l'application <https://github.com/cakephp/app/blob/master/config/requirements.php>`__.
