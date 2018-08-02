@@ -866,7 +866,7 @@ conditions:
         ->where(function (QueryExpression $exp, Query $q) {
             return $exp->equalFields('countries.id', 'cities.country_id');
         })
-        ->andWhere(['population >', 5000000]);
+        ->andWhere(['population >' => 5000000]);
 
     $query = $countries->find()
         ->where(function (QueryExpression $exp, Query $q) use ($subquery) {
@@ -881,7 +881,7 @@ conditions:
         ->where(function (QueryExpression $exp, Query $q) {
             return $exp->equalFields('countries.id', 'cities.country_id');
         })
-        ->andWhere(['population >', 5000000]);
+        ->andWhere(['population >' => 5000000]);
 
     $query = $countries->find()
         ->where(function (QueryExpression $exp, Query $q) use ($subquery) {
