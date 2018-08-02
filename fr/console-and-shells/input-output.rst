@@ -31,7 +31,7 @@ Créer des Helpers (Assistants)
 
 Alors que CakePHP est fourni avec quelques helpers de commande, vous pouvez
 en créer d'autres dans votre application ou vos plugins. À titre d'exemple,
-nous allons créer un helper simple pour générer des titre élégants.
+nous allons créer un helper simple pour générer des titres élégants.
 Créez d'abord le fichier **src/Command/Helper/HeadingHelper.php** et mettez
 ce qui suit dedans : ::
 
@@ -58,14 +58,14 @@ shell en l'appelant : ::
     // Avec ~~~~ de chaque coté
     $this->helper('Heading')->output(['It works!', '~', 4]);
 
-Les Helpers implementent généralement la méthode ``output()`` qui prend un
-tableau de paramètres.Cependant, comme les Console Helper sont des classes
+Les Helpers implémentent généralement la méthode ``output()`` qui prend un
+tableau de paramètres. Cependant, comme les Console Helper sont des classes
 vanilla, ils implémentent des méthodes suplémentaires qui prennent n'importe
 quelle forme d'arguments.
 
 .. note : ::
-Les Helpers peuvent aussi être placés dans ``src/Shell/Helper`` pour assurer
-la retro-compatibilité.
+Les Helpers peuvent aussi être placés dans ``src/Shell/Helper`` pour des
+raisons de retro-compatibilité.
 
 Les Helpers inclus
 ==================
@@ -174,8 +174,8 @@ Créer une sortie
 .. php:method:out($message, $newlines, $level)
 .. php:method:err($message, $newlines)
 
-Écrire dans ``stdout`` et ``stderr`` est une autre opération de routine que
-CakePHP rend facile : ::
+Écrire dans ``stdout`` et ``stderr`` est une autre opération de routine
+facilitée par CakePHP : ::
 
     // Écrire dans stdout
     $io->out('Normal message');
@@ -218,8 +218,8 @@ des lignes de tirets : ::
     // Dessiner une ligne horizontale
     $io->hr();
 
-Finalement, vous pouvez mettre à jour la ligne de texte actuelle à l'écran of
-text : ::
+Finalement, vous pouvez mettre à jour la ligne de texte actuelle
+à l'écran : ::
 
     $io->out('Counting down');
     $io->out('10', 0);
@@ -247,7 +247,7 @@ indicateur lors de l'appel de la commande. Il y a 3 niveaux :
 * ``QUIET`` - Seulement les informations absolument importantes devraient être
   marquées en sortie silencieuse.
 * ``NORMAL`` -Le niveau par défaut, et  l'utilisation normale.
-* ``VERBOSE`` - Notez ainsi les messages qui peuvent être trop bavard pour un
+* ``VERBOSE`` - Notez ainsi les messages qui peuvent être trop verbeux pour un
   usage régulier, mais utile pour du débogage en ``VERBOSE``.
 
 Vous pouvez marquer la sortie comme ceci : ::
