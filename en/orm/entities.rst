@@ -161,6 +161,12 @@ The accessor would be run when getting the property through any of these two way
 
     echo $user->title;
     echo $user->get('title');
+    
+.. note::
+
+    Code in your accessors is executed each time you reference the field. You can
+    use a local variable to cache it if you are performing a resource-intensive
+    operation in your accessor like this: `$myEntityProp = $entity->my_property`.
 
 You can customize how properties get set by defining a mutator:
 
