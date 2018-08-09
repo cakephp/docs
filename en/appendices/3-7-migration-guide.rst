@@ -77,8 +77,8 @@ features will continue to function until 4.0.0 after which they will be removed.
   Use ``View::getRequest()``, ``View::setRequest()`` instead.
 * ``Cake\Core\Plugin::load()`` and ``loadAll()`` are deprecated. Instead you
   should use ``Application::addPlugin()``.
-* The following properties of ``Cake\Error\ExceptionRender`` are now protected::
-   ``$error``, ``$controller``, ``$template`` and ``$method``.
+* The following properties of ``Cake\Error\ExceptionRender`` are now protected:
+  ``$error``, ``$controller``, ``$template`` and ``$method``.
 
 Soft Deprecations
 =================
