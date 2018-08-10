@@ -136,6 +136,13 @@ Http
 * ``Cake\Http\Client`` will now default to use a Curl based adapter if the
   ``curl`` extension is installed.
 
+Shell
+-----
+
+* ``cake i18n extract`` has a new ``--relative-paths`` option that makes path
+  comments in POT files relative to the application root directory instead of
+  absolute paths.
+
 ORM
 ---
 
