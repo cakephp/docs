@@ -336,8 +336,8 @@ your application's middleware stack::
 
     use Cake\Http\Middleware\SecurityHeadersMiddleware;
 
-    $headers = new SecurityHeadersMiddleware();
-    $headers
+    $securityHeaders = new SecurityHeadersMiddleware();
+    $securityHeaders
         ->setCrossDomainPolicy()
         ->setReferrerPolicy()
         ->setXFrameOptions()
@@ -345,7 +345,7 @@ your application's middleware stack::
         ->noOpen()
         ->noSniff();
 
-    $middlewareQueue->add($headers);
+    $middlewareQueue->add($securityHeaders);
 
 .. versionadded:: 3.5.0
     The ``SecurityHeadersMiddleware`` was added in 3.5.0
