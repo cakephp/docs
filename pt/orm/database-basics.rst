@@ -782,7 +782,7 @@ a instrução::
     $rows = $stmt->fetchAll('assoc');
 
     // Lê linhas através de iteração.
-    foreach ($rows as $row) {
+    foreach ($stmt as $row) {
         // Do work
     }
 
