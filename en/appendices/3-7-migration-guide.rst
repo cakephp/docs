@@ -157,12 +157,16 @@ ORM
 TestSuite
 ---------
 
-* ``Cake\TestSuite\IntegrationTestCase::assertResponseNotEquals()`` was added.
+* New assertion methods were added to ``IntegrationTestCase``:
+
+  * ``assertResponseNotEquals()``,
+  * ``assertHeaderNotContains()``
+  * ``assertRedirectNotContains()``
+  * ``assertFlashElement()``
+  * ``assertFlashElementAt()``
+
 * The custom assertions provided by ``IntegrationTestCase`` and
   ``ConsoleIntegrationTestCase`` are now implemented through constraint classes.
-* The ``assertFlashMessage()``, ``assertFlashMessageAt()``,
-  ``assertFlashElement()``, ``assertFlashElementAt()`` methods were added to
-  ``IntegrationTestTrait``.
 
 
 Utility

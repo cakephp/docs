@@ -1248,6 +1248,9 @@ make testing responses much simpler. Some examples are::
     // Check a part of the Location header
     $this->assertRedirectContains('/articles/edit/');
 
+    // Added in 3.7.0
+    $this->assertRedirectNotContains('/articles/edit/');
+
     // Assert not empty response content
     $this->assertResponseNotEmpty();
 
@@ -1275,6 +1278,10 @@ make testing responses much simpler. Some examples are::
 
     // Assert response header.
     $this->assertHeader('Content-Type', 'application/json');
+    $this->assertHeaderContains('Content-Type', 'html');
+
+    // Added in 3.7.0
+    $this->assertHeaderNotContains('Content-Type', 'xml');
 
     // Assert view variables
     $user =  $this->viewVariable('user');
