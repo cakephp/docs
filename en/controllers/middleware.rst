@@ -112,7 +112,8 @@ a variety of operations::
         );
 
 In addition to applying middleware to your entire application, you can apply
-middleware to specific sets of routes using :ref:`connecting-scoped-middleware`.
+middleware to specific sets of routes using
+:ref:`Scoped Middleware <connecting-scoped-middleware>`.
 
 Adding Middleware from Plugins
 ------------------------------
