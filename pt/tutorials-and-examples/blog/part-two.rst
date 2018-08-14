@@ -165,18 +165,17 @@ adequado de tabela, o código de nossa view deve ser algo como:
             <th>Data de Criação</th>
         </tr>
 
-        <!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo
-             as informações dos posts -->
+        <!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo as informações dos posts -->
 
         <?php foreach ($posts as $post): ?>
-        <tr>
-            <td><?php echo $post['Post']['id']; ?></td>
-            <td>
-                <?php echo $this->Html->link($post['Post']['title'],
-    array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
-            </td>
-            <td><?php echo $post['Post']['created']; ?></td>
-        </tr>
+            <tr>
+                <td><?php echo $post['Post']['id']; ?></td>
+                <td>
+                    <?php echo $this->Html->link($post['Post']['title'],
+                        array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
+                </td>
+                <td><?php echo $post['Post']['created']; ?></td>
+            </tr>
         <?php endforeach; ?>
 
     </table>
@@ -411,7 +410,7 @@ deve se parecer::
     function edit($id = null) {
         $this->Post->id = $id;
         if ($this->request->is('get')) {
-            $this->request->data = $this->Post->findById($id));
+            $this->request->data = $this->Post->findById($id);
         } else {
             if ($this->Post->save($this->request->data)) {
                 $this->Flash->success('Your post has been updated.');
@@ -462,7 +461,7 @@ específicos:
         <tr>
             <th>Id</th>
             <th>Title</th>
-                    <th>Action</th>
+            <th>Action</th>
             <th>Created</th>
         </tr>
 
@@ -474,8 +473,8 @@ específicos:
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
                 <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?>
-                    </td>
-                    <td>
+            </td>
+            <td>
                 <?php echo $this->Form->postLink(
                     'Delete',
                     array('action' => 'delete', $post['Post']['id']),
@@ -532,28 +531,27 @@ helper FormHelper fornece o método ``postLink()``:
         <tr>
             <th>Id</th>
             <th>Title</th>
-                    <th>Actions</th>
+            <th>Actions</th>
             <th>Created</th>
         </tr>
 
-    <!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo
-    as informações dos posts -->
+    <!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo as informações dos posts -->
 
         <?php foreach ($posts as $post): ?>
-        <tr>
-            <td><?php echo $post['Post']['id']; ?></td>
-            <td>
-            <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?>
-            </td>
-            <td>
-            <?php echo $this->Form->postLink(
-                'Delete',
-                array('action' => 'delete', $post['Post']['id']),
-                array('confirm' => 'Are you sure?'));
-            ?>
-            </td>
-            <td><?php echo $post['Post']['created']; ?></td>
-        </tr>
+            <tr>
+                <td><?php echo $post['Post']['id']; ?></td>
+                <td>
+                    <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?>
+                </td>
+                <td>
+                    <?php echo $this->Form->postLink(
+                        'Delete',
+                        array('action' => 'delete', $post['Post']['id']),
+                        array('confirm' => 'Are you sure?'));
+                    ?>
+                </td>
+                <td><?php echo $post['Post']['created']; ?></td>
+            </tr>
         <?php endforeach; ?>
 
     </table>
