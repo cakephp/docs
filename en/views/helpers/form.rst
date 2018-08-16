@@ -1033,7 +1033,7 @@ You can use the ``combine`` method to build a basic options array.
     $options = $entitiesArray->combine('id', 'name');
 
 It's also possible to add extra attributes by expanding the array. The following will create a data attribute on the
-option element.
+option element, using the ``map`` collection method.
 
     $options = $entitiesArray->map(function ($value, $key) {
         return [
