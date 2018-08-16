@@ -123,9 +123,9 @@ Migrations 플러그인
 
 그럼 마이그레이션 파일을 작성했기 때문에 테이블을 작성하기 전에 수정해보겠습니다.
 ``parent_id`` 필드를 ``'null' => false`` 을 ``'null' => true`` 로 변경합니다.
-최상위 카테고리에서 ``parent_id`` 는 null 이되기 때문입니다. 테이블을 만들 때는 다음 명령을 실행하겠습니다. ::
+최상위 카테고리에서 ``parent_id`` 는 null 이되기 때문입니다. 테이블을 만들 때는 다음 명령을 실행하겠습니다.
 
-테이블작성 명령어는 다음과 같습니다. ::
+테이블작성 명령어는 다음과 같습니다.::
 
     bin/cake migrations migrate
 
@@ -176,7 +176,7 @@ bake로 모든 파일이 생성되었습니다.
 만약 CakePHP가 어떻게 움직이고 있는지를 알고 싶으면 bake를 읽어보시기 바랍니다.
 
 .. note::
-Windows일 경우 / 대신에 \\ 를 사용합니다.
+    Windows일 경우 / 대신에 \\ 를 사용합니다.
 
 ``src/Template/Categories/add.ctp`` 및 ``src/Template/Categories/edit.ctp``
 을 아래와 같이 수정합니다. ::
@@ -228,7 +228,7 @@ TreeBehavior를 선언하면 카테고리 순서를 바꾸는 기능이 있는�
 웹 브라우저를 사용하여 ``/yoursite/categories/add`` 컨트롤러 작업을 사용하여 몇 가지 새로운 카테고리를 추가합니다.
 
 TreeBehavior 에서 카테고리 순서 바꾸기
-=====================================
+======================================
 
 categories의 index 템플릿에서 categories일람표에서 순서를 바꿀 수 있습니다.
 

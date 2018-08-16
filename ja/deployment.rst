@@ -117,7 +117,7 @@ CakePHP のアプリケーションは、アプリケーションの ``webroot``
 更新のデプロイ
 ==============
 
-更新をデプロイした後、 :doc:`/console-and-shells/orm-cache` シェルの一部、
+更新をデプロイした後、 :doc:`/console-and-shells/schema-cache` シェルの一部、
 ``bin/cake orm_cache clear`` を実行したい場合もあるかもしれません。
 
 .. meta::

@@ -550,7 +550,7 @@ You can accomplish that by using :php:meth:`Cake\\Http\\Response::withFile()`::
 
 As shown in the above example, you must pass the file path to the method.
 CakePHP will send a proper content type header if it's a known file type listed
-in `Cake\\Http\\Reponse::$_mimeTypes`. You can add new types prior to calling
+in `Cake\\Http\\Response::$_mimeTypes`. You can add new types prior to calling
 :php:meth:`Cake\\Http\\Response::withFile()` by using the
 :php:meth:`Cake\\Http\\Response::withType()` method.
 

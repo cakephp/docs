@@ -38,7 +38,11 @@ Configuration
 * ``DebugKit.includeSchemaReflection`` - Set to true to enable logging of schema
   reflection queries. Disabled by default.
 * ``DebugKit.forceEnable`` - Force DebugKit to display. This can be used to make
-  sure DebugKit displays on hosts it otherwise determines unsafe.
+  sure DebugKit displays on hosts it otherwise determines unsafe. You can configure 
+  this option by::
+
+    // Before loading DebugKit
+    Configure::write('DebugKit.forceEnable', true);  
 
 Database Configuration
 ----------------------

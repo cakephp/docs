@@ -231,7 +231,7 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
     // メールを送信する場合
     use Cake\Mailer\Email;
 
-    TableRegistry::get('ThirdPartyPlugin.Feedbacks')
+    TableRegistry::getTableLocator()->get('ThirdPartyPlugin.Feedbacks')
         ->getEventManager()
         ->on('Model.afterSave', function($event, $entity)
         {

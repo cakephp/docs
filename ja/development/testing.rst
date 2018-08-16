@@ -1122,7 +1122,7 @@ JSON を返すコントローラーの簡単な例を示します。 ::
                 ['id' => 1, 'lng' => 66, 'lat' => 45],
             ];
             $expected = json_encode($expected, JSON_PRETTY_PRINT);
-            $this->assertEquals($expected, $this->_response->body());
+            $this->assertEquals($expected, (string)$this->_response->getBody());
         }
     }
 

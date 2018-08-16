@@ -2012,27 +2012,27 @@ the HTML ``for`` attribute of the element; if ``$text`` is undefined,
 
 E.g. ::
 
-    echo $this->Form->label('User.name');
-    echo $this->Form->label('User.name', 'Your username');
+    echo $this->Form->label('name');
+    echo $this->Form->label('name', 'Your username');
 
 Output:
 
 .. code-block:: html
 
-    <label for="user-name">Name</label>
-    <label for="user-name">Your username</label>
+    <label for="name">Name</label>
+    <label for="name">Your username</label>
 
 With the third parameter ``$options`` you can set the id or class::
 
-    echo $this->Form->label('User.name', null, ['id' => 'user-label']);
-    echo $this->Form->label('User.name', 'Your username', ['class' => 'highlight']);
+    echo $this->Form->label('name', null, ['id' => 'user-label']);
+    echo $this->Form->label('name', 'Your username', ['class' => 'highlight']);
 
 Output:
 
 .. code-block:: html
 
-    <label for="user-name" id="user-label">Name</label>
-    <label for="user-name" class="highlight">Your username</label>
+    <label for="name" id="user-label">Name</label>
+    <label for="name" class="highlight">Your username</label>
 
 Displaying and Checking Errors
 ==============================
@@ -2479,7 +2479,7 @@ For example::
     ]);
 
     // Create a radio set with our custom wrapping div.
-    echo $this->Form->control('User.email_notifications', [
+    echo $this->Form->control('email_notifications', [
         'options' => ['y', 'n'],
         'type' => 'radio'
     ]);

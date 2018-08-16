@@ -280,6 +280,29 @@ PSR-7 リクエストとレスポンス
         }
     }
 
+.. _routing-middleware:
+
+ルーティングミドルウェア
+========================
+
+ルーティングミドルウェアは、アプリケーションのルートの適用や、リクエストが実行するプラグイン、
+コントローラー、アクションを解決することができます。起動時間を向上させるために、
+アプリケーションで使用されているルートコレクションをキャッシュすることができます。
+キャッシュされたルートを有効にするために、目的の :ref:`キャッシュ設定 <cache-configuration>`
+をパラメーターとして指定します。 ::
+
+    // Application.php の中で
+    public function middleware($middlewareQueue)
+    {
+        // ...
+        $middlewareQueue->add(new RoutingMiddleware($this, 'routing'));
+    }
+
+上記は、生成されたルートコレクションを格納するために ``routing`` キャッシュエンジンを使用します。
+
+.. versionadded:: 3.6.0
+    ルートのキャッシュは 3.6.0 で追加されました。
+
 .. _security-header-middleware:
 
 セキュリティヘッダーの追加
@@ -401,32 +424,6 @@ CSRF トークンを送信することができます。ヘッダーを使用す
 統合することができます。
 
 CSRF トークンは、クッキーの ``csrfToken`` で取得されます。
-
-.. _adding-http-stack:
-
-既存アプリケーションへの新しい HTTP スタック追加
-================================================
-
-既存のアプリケーションで HTTP ミドルウェアを使うには、アプリケーションにいくつかの
-変更を行わなければなりません。
-
-#. まず **webroot/index.php** を更新します。 `app スケルトン
-   <https://github.com/cakephp/app/tree/master/webroot/index.php>`__ から
-   ファイルの内容をコピーしてください。
-#. ``Application`` クラスを作成します。どのようにするかについては上の :ref:`using-middleware`
-   セクションを参照してください。もしくは `app スケルトン
-   <https://github.com/cakephp/app/tree/master/src/Application.php>`__
-   の中の例をコピーしてください。
-#. **config/requirements.php** が作成します。もし存在しない場合、 `app スケルトン
-   <https://github.com/cakephp/app/blob/master/config/requirements.php>`__ から
-   内容を追加してください。
-
-これら三つの手順が完了すると、アプリケーション／プラグインのディスパッチフィルターを
-HTTP ミドルウェアとして再実装を始める準備が整います。
-
-もし、テストを実行する場合は、 `app スケルトン
-<https://github.com/cakephp/app/tree/master/tests/bootstrap.php>`_ から、
-ファイルの内容をコピーして **tests/bootstrap.php** を更新することも必要になります。
 
 .. meta::
     :title lang=ja: Http ミドルウェア

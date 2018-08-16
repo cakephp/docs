@@ -12,7 +12,7 @@ CakePHP에서 인증은 :doc:`/controllers/components` 로 제어합니다.
 구성 요소는 재사용 가능한 특정 기능이나 개념을 만들기위한 방법이라고 생각할 수 있습니다.
 구성 요소 또한 컨트롤러의 이벤트의 라이프 사이클을 연결하여 응용 프로그램에
 작용 할 수 있습니다. 처음에는  :doc:`AuthComponent
-</controllers/components/authentication>`를 응용 프로그램에 추가합시다.
+</controllers/components/authentication>` 를 응용 프로그램에 추가합시다.
 모든 메소드에 인증을 요구하는 것을 추천합니다.
 그럼 AuthComponent을 AppController에 추가합니다. ::
 
@@ -51,7 +51,7 @@ CakePHP에서 인증은 :doc:`/controllers/components` 로 제어합니다.
 
 이제 CakePHP에 ``Flash`` 와 ``Auth`` 의 구성 요소를 로드하라고 했습니다.
 또한 users 테이블 ``email`` 을 사용자 이름으로 사용하도록 AuthComponent 에 설정했습니다.
-Controller에 존재하지 않거나 Login전에 URL에 액세스하면 **/users/login**로 전환합니다.
+Controller에 존재하지 않거나 Login전에 URL에 액세스하면 **/users/login** 로 전환합니다.
 그 다음은 로그인 액션을 만들어 보겠습니다. ::
 
     // src/Controller/UsersController.php
@@ -126,7 +126,7 @@ Controller에 존재하지 않거나 Login전에 URL에 액세스하면 **/users
     }
 
 위의 코드는 ``AuthComponent`` 에게 ``add()`` 액션의 인증이나 권한 부여가 필요 없다는 것을 알려줍니다.
- **Users/add.ctp** 를 정리하고 오해의 소지가있는 링크를 삭제하거나 다음 섹션으로 계속 진행할 수 있습니다.
+**Users/add.ctp** 를 정리하고 오해의 소지가있는 링크를 삭제하거나 다음 섹션으로 계속 진행할 수 있습니다.
 이 튜토리얼에서는 사용자 수정, 보기를 작성하지 않았기 때문에
 ``AuthComponent`` 가 해당 컨트롤러 작업에 대한 액세스를 거부하므로 작동하지 않습니다.
 
@@ -289,7 +289,7 @@ Controller에 존재하지 않거나 Login전에 URL에 액세스하면 **/users
 이렇게하면 사용자에게 더 나은 환경을 제공하고 ORM에서 더 우수한 기능을 사용할 수 있습니다.
 
 계산(computed) 된 필드를 추가
-------------------------
+------------------------------
 
 엔티티에 대해 형식이 지정된 태그에 액세스하는 간단한 방법을 원할 것이므로 엔티티에 virtual/computed 필드를 추가 할 수 있습니다.
 **src/Model/Entity/Bookmark.php** 에서 다음을 추가합니다. ::
@@ -342,7 +342,7 @@ Controller에 존재하지 않거나 Login전에 URL에 액세스하면 **/users
 기존 태그를 문자열로 볼 수 있으므로 해당 데이터도 저장해야합니다.
 ``tag_string`` 을 액세스 가능한 것으로 표시 했으므로 요청의 데이터를 엔티티에 복사합니다.
 ``beforeSave()`` 훅 메소드를 사용하여 태그 문자열을 파싱하고 관련 엔티티를 찾기 / 구축 할 수 있습니다.
-다음을 **src/Model/Table/BookmarksTable.php*에 추가합니다. ::
+다음을 **src/Model/Table/BookmarksTable.php** 에 추가합니다. ::
 
     public function beforeSave($event, $entity, $options)
     {

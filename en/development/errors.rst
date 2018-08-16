@@ -51,7 +51,7 @@ message, file and line (``debug`` enabled).
 Changing Exception Handling
 ===========================
 
-Exception handling offers 3 ways to tailor how exceptions are handled.  Each
+Exception handling offers several ways to tailor how exceptions are handled.  Each
 approach gives you different amounts of control over the exception handling
 process.
 
@@ -73,8 +73,8 @@ The default error handler renders all uncaught exceptions your application
 raises with the help of ``Cake\Error\ExceptionRenderer``, and your application's
 ``ErrorController``.
 
-The error page views are located at **src/Template/Error/**. All 4xx errors use
-the **error400.ctp** template, and 5xx errors use the **error500.ctp**. Your
+The error page views are located at **src/Template/Error/**. By default all 4xx errors
+use the **error400.ctp** template, and all 5xx errors use the **error500.ctp**. Your
 error templates will have the following variables available:
 
 * ``message`` The exception message.

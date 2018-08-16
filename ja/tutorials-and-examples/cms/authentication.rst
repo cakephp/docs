@@ -86,6 +86,8 @@ create、update、delete メソッドで認証が必要なので、AuthComponent
                     'controller' => 'Users',
                     'action' => 'login'
                 ],
+                // コントローラーで isAuthorized を使用します
+                'authorize' => ['Controller'],
                 // 未認証の場合、直前のページに戻します
                 'unauthorizedRedirect' => $this->referer()
             ]);

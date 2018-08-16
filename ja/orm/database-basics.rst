@@ -784,7 +784,7 @@ SQL 文を準備したら、あなたは追加のデータをバインドし、�
     $rows = $stmt->fetchAll('assoc');
 
     // 全行読み込んだ結果を順次処理する
-    foreach ($rows as $row) {
+    foreach ($stmt as $row) {
         // Do work
     }
 
@@ -917,7 +917,7 @@ CakePHP の ORM は、あなたのアプリケーションのスキーマ、イ�
     $connection->cacheMetadata('orm_metadata');
 
 CakePHP にはメタデータキャッシュを管理するための CLI ツールも同梱しています。
-詳細については :doc:`/console-and-shells/orm-cache` を参照してください。
+詳細については :doc:`/console-and-shells/schema-cache` を参照してください。
 
 データベースの作成
 ==================

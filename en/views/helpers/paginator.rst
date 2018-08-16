@@ -513,6 +513,25 @@ It is also possible to sort a column based on associations:
         <?php endforeach; ?>
     </table>
 
+.. note::
+
+    Sorting by columns in associated models requires setting these in the
+    ``PaginationComponent::paginate`` property. Using the example above, the
+    controller handling the pagination would need to set its ``sortWhitelist``
+    key as follows:
+    
+    .. code-block:: php
+    
+        $this->paginate = [
+            'sortWhitelist' => [
+                'Posts.title',
+                'Authors.name',
+            ],
+        ];
+        
+    For more information on using the ``sortWhitelist`` option, please see
+    :doc:`controllers/components/pagination.html#control-which-fields-used-for-ordering`
+
 The final ingredient to pagination display in views is the addition of page
 navigation, also supplied by the PaginationHelper::
 

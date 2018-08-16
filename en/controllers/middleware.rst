@@ -112,7 +112,8 @@ a variety of operations::
         );
 
 In addition to applying middleware to your entire application, you can apply
-middleware to specific sets of routes using :ref:`connecting-scoped-middleware`.
+middleware to specific sets of routes using
+:ref:`Scoped Middleware <connecting-scoped-middleware>`.
 
 Adding Middleware from Plugins
 ------------------------------
@@ -339,8 +340,8 @@ your application's middleware stack::
 
     use Cake\Http\Middleware\SecurityHeadersMiddleware;
 
-    $headers = new SecurityHeadersMiddleware();
-    $headers
+    $securityHeaders = new SecurityHeadersMiddleware();
+    $securityHeaders
         ->setCrossDomainPolicy()
         ->setReferrerPolicy()
         ->setXFrameOptions()
@@ -348,7 +349,7 @@ your application's middleware stack::
         ->noOpen()
         ->noSniff();
 
-    $middlewareQueue->add($headers);
+    $middlewareQueue->add($securityHeaders);
 
 .. versionadded:: 3.5.0
     The ``SecurityHeadersMiddleware`` was added in 3.5.0
@@ -472,6 +473,9 @@ an option. You can also define your own parsers::
         // Use a CSV parsing library.
         return Csv::parse($body);
     });
+    
+.. versionadded:: 3.6.0
+    The ``BodyParserMiddleware`` was added in 3.6.0
 
 .. meta::
     :title lang=en: Http Middleware

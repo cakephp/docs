@@ -622,7 +622,8 @@ Table は ``dropTable()`` メソッドを使って非常に簡単に削除する
         public function up()
         {
             $table = $this->table('users');
-            $table->rename('legacy_users');
+            $table->rename('legacy_users')
+                  ->save();
         }
 
         /**
@@ -631,7 +632,8 @@ Table は ``dropTable()`` メソッドを使って非常に簡単に削除する
         public function down()
         {
             $table = $this->table('legacy_users');
-            $table->rename('users');
+            $table->rename('users')
+                  ->save();
         }
     }
 
@@ -1114,10 +1116,12 @@ MySQL アダプターは、 ``fulltext`` インデックスもサポートして
         public function up()
         {
             $table = $this->table('users');
-            $table->removeIndex(['email']);
+            $table->removeIndex(['email'])
+                  ->save();
 
             // あるいは、インデックスの名前で削除することもできます。例:
-            $table->removeIndexByName('idx_users_email');
+            $table->removeIndexByName('idx_users_email')
+                  ->save();
         }
 
         /**
@@ -1129,13 +1133,8 @@ MySQL アダプターは、 ``fulltext`` インデックスもサポートして
         }
     }
 
-.. note::
-
-    ``removeIndex()`` を使うときに ``save()`` メソッドを呼び出す必要はありません。
-    インデックスはすぐに削除されます。
-
 外部キーの操作
--------------------------
+--------------
 
 Phinx は、データベーステーブルに外部キー制約を作成する機能をサポートしています。
 例のテーブルに外部キーを追加しましょう。 ::

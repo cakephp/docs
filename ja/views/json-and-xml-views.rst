@@ -181,7 +181,7 @@ JSONP レスポンスの返すことが出来ます。これに ``true`` を設�
     namespace App\Controller;
 
     use App\Controller\AppController;
-    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
+    // 3.6 より前は Cake\Network\Exception\NotFoundException を使用
     use Cake\Http\Exception\NotFoundException;
 
     class VideosController extends AppController

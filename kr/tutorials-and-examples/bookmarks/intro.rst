@@ -7,9 +7,9 @@
 
 필요한 것 :
 
-# 데이터베이스 서버. 이 튜토리얼에서는 MySQL 서버를 사용합니다.
-    데이터베이스를 생성하기위한 SQL 지식이 필요합니다. CakePHP는 그것을 전제로하고 있습니다.
-    MySQL을 사용하면 PHP에서``pdo_mysql``가 활성화되어 있는지 확인하시기 바랍니다.
+#. 데이터베이스 서버. 이 튜토리얼에서는 MySQL 서버를 사용합니다.
+   데이터베이스를 생성하기위한 SQL 지식이 필요합니다. CakePHP는 그것을 전제로하고 있습니다.
+   MySQL을 사용하면 PHP에서``pdo_mysql``가 활성화되어 있는지 확인하시기 바랍니다.
 #. 기본적인 PHP 지식.
 
 시작하기 전에 최신 PHP 버전인지 확인하시기 바랍니다.
@@ -256,7 +256,7 @@ CakePHP는기본적으로`bcrypt <http://codahale.com/how-to-safely-store-a-pass
 이상적으로는 **http://localhost:8765/bookmarks/tagged/funny/cat/gifs** 같은 URL이 되겠습니다.
 이 URL은 'funny', 'cat'또는 'gifs' 태그 북마크 모든 것을 검색하는 것을 의도하고 있습니다.
 이를 구현하기 전에 새로운 루트를 추가합니다.
-**config/routes.php** *을 다음과 같이합니다. ::
+**config/routes.php** 을 다음과 같이합니다. ::
 
     <?php
     use Cake\Routing\Route\DashedRoute;
@@ -325,7 +325,7 @@ Finder 메소드 작성
 CakePHP에서 컨트롤러의 액션을 슬림하게 유지하면서 응용 프로그램의 많은 로직을
 모델에 두는 것이 좋습니다. **/bookmarks/tagged** 의 URL에 액세스하는 경우
 ``findTagged()`` 메소드가 아직 구현되지 않은 오류가 표시됩니다.
-**src/Model/Table/BookmarksTable.php**에 다음을 추가하시기 바랍니다. ::
+**src/Model/Table/BookmarksTable.php** 에 다음을 추가하시기 바랍니다. ::
 
     // $query 인수는 쿼리 빌더의 인스턴스
     // $options 배열은 컨트롤러의 액션 중에서 find ( 'tagged')에 전달
@@ -395,7 +395,7 @@ finder에서 일치하는 태그가있는 특정 책갈피를 검색하기 위�
 컨트롤러에서 ``set()`` 메소드를 사용하여 지정된 변수를 뷰에 쓰기 위해 설정합니다.
 뷰는 전달 된 모든 변수를 템플릿 내에서 로컬 변수로 이용 가능합니다.
 
-**/bookmarks/tagged/funny**의 URL에 액세스 할 수 있도록하여
+**/bookmarks/tagged/funny** 의 URL에 액세스 할 수 있도록하여
 모든 'funny'태그 된 북마크를 확인합니다.
 
 여기까지 북마크, 태그, 사용자를 관리하는 기본적인 응용 프로그램을 만들어 봤습니다.

@@ -106,6 +106,10 @@ Asset.timestamp
     - (bool) ``true`` - debug が ``true`` の時にタイムスタンプを加えます。
     - (string) 'force' - 常にタイムスタンプを加えます。
 
+    .. versionchanged:: 3.6.0
+        3.6.0 以降、アセットのリンク時に ``timestamp`` オプションを使用することで、
+	グローバルな設定を上書きできます。
+
 データベースの設定
 ------------------
 
@@ -154,8 +158,8 @@ CakePHP のセッション操作の設定は :ref:`セッションの設定 <ses
 
     "autoload": {
         "psr-4": {
-            "App\\Controller\\": "/path/to/directory/with/controller/folders",
-            "App\": "src"
+            "App\\Controller\\": "/path/to/directory/with/controller/folders/",
+            "App\\": "src/"
         }
     }
 
@@ -165,7 +169,7 @@ CakePHP のセッション操作の設定は :ref:`セッションの設定 <ses
 
     "autoload": {
         "psr-4": {
-            "App\": ["src", "/path/to/directory"]
+            "App\\": ["src/", "/path/to/directory/"]
         }
     }
 
@@ -342,6 +346,23 @@ MVC デザインパターンを破壊する誘惑に気をつけてください�
 
 Configure からキーの読み込みと削除を行います。
 もしあなたが値の読み込みと削除を単一の動作で組み合わせたい時に便利です。
+
+.. php:staticmethod:: consumeOrFail($key)
+
+:php:meth:`Cake\\Core\\Configure::consume` のように設定データを消費しますが、
+一方でキーと値のペアが見つかることを期待します。要求されたペアが存在しない場合、
+:php:class:`RuntimeException` が投げられます。 ::
+
+    Configure::consumeOrFail('Company.name');    // 出力: 'Pizza, Inc.'
+    Configure::consumeOrFail('Company.geolocation');  // 例外を投げる
+
+    Configure::consumeOrFail('Company');
+
+    // 出力:
+    ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
+
+.. versionadded:: 3.6.0
+    ``Configure::readOrFail()`` は 3.6.0 で追加されました。
 
 設定ファイルの読み書き
 ======================
@@ -530,7 +551,7 @@ CakePHP が固有のクラスを使用する代わりに、暗黙的に汎用的
 
     // bootstrap.php の中で
     use Cake\Event\EventManager;
-    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
+    // 3.6 より前は Cake\Network\Exception\NotFoundException を使用
     use Cake\Http\Exception\InternalErrorException;
 
     $isCakeBakeShellRunning = (PHP_SAPI === 'cli' && isset($argv[1]) && $argv[1] === 'bake');

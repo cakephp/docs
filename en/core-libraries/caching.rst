@@ -559,12 +559,12 @@ The required API for a CacheEngine is
 
     The base class for all cache engines used with Cache.
 
-.. php:method:: write($key, $value, $config = 'default')
+.. php:method:: write($key, $value)
 
     :return: boolean for success.
 
-    Write value for a key into cache, optional string $config
-    specifies configuration name to write to.
+    Write value for a key into cache, Return ``true``
+    if the data was successfully cached, ``false`` on failure.
 
 .. php:method:: read($key)
 

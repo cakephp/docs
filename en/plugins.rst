@@ -118,7 +118,7 @@ application's ``bootstrap()`` function::
             $this->addPlugin(ContactManager::class);
 
             // Load a plugin with a vendor namespace by 'short name'
-            $this->addPlugin('AcmeCorp\ContactManager');
+            $this->addPlugin('AcmeCorp/ContactManager');
         }
     }
 

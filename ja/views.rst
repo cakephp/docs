@@ -428,7 +428,7 @@ CakePHP の既定のレイアウトは **src/Template/Layout/default.ctp** に�
 
 .. note::
 
-    :php:meth:`HtmlHelper::css()` や :php:meth:`HtmlHelper::script()` を
+    ``HtmlHelper::css()`` や ``HtmlHelper::script()`` を
     テンプレートファイルで使うとき、HTML ソースを同じ名前でブロックの中に配置するには
     ``'block' => true`` を指定してください。 (詳しい使い方は API を参照してください)
 
@@ -437,6 +437,9 @@ CakePHP の既定のレイアウトは **src/Template/Layout/default.ctp** に�
 ``title`` ブロックの内容をビューファイルから設定することができます。 ::
 
     $this->assign('title', 'アクティブユーザー表示');
+    
+``title`` ブロックが空の値の場合、自動的に ``'Admin/Articles'`` のような
+現在のテンプレートパスの表現に置き換えられます。
 
 好きなだけレイアウトを作ることができます。 **src/Template/Layout** ディレクトリーに置いて、
 コントローラーのアクションの中か、ビューの ``$layout`` プロパティーで切り替えるだけです。 ::

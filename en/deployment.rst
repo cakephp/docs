@@ -62,7 +62,7 @@ Check Your Security
 If you're throwing your application out into the wild, it's a good idea to make
 sure it doesn't have any obvious leaks:
 
-* Ensure you are using the :doc:`/controllers/components/csrf` component.
+* Ensure you are using the :doc:`/controllers/components/csrf` component or middleware.
 * You may want to enable the :doc:`/controllers/components/security` component.
   It can help prevent several types of form tampering and reduce the possibility
   of mass-assignment issues.

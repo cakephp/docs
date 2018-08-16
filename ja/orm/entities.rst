@@ -98,6 +98,33 @@ CakePHP の ORM を使うためにエンティティークラスを生成する�
     エンティティーをリクエストデータでアップデートするときには、一度の代入でどのフィールドに
     セットできるかホワイトリストで制限するべきです。
 
+``has()`` を使ってエンティティーにプロパティが定義されているかどうかを確認できます。 ::
+
+    $article = new Article([
+        'title' => 'First post',
+        'user_id' => null
+    ]);
+    $article->has('title'); // true
+    $article->has('user_id'); // false
+    $article->has('undefined'); // false.
+
+``has()`` メソッドは、プロパティが定義されていてヌル以外の値を持つ場合、 ``true`` を返します。
+``isEmpty()`` と ``hasValue()`` を使って、プロパティに '空でない' 値が含まれているかどうかを
+調べることができます。 ::
+
+    $article = new Article([
+        'title' => 'First post',
+        'user_id' => null
+    ]);
+    $article->isEmpty('title');  // false
+    $article->hasValue('title'); // true
+
+    $article->isEmpty('user_id');  // true
+    $article->hasValue('user_id'); // false
+
+.. versionadded:: 3.6.0
+    ``hasValue()`` メソッドと ``isEmpty()`` メソッドが 3.6.0 で追加されました。
+
 アクセサーとミューテーター
 ==========================
 
@@ -213,13 +240,15 @@ CakePHP の ORM を使うためにエンティティークラスを生成する�
 バリデートしたい場合です。 ::
 
     // タイトルが変更された時に、.
-    $article->dirty('title');
+    // 3.5 より前は dirty() を使用
+    $article->isDirty('title');
 
 フィールドに変更されたという印をつける事もできます。これは配列のプロパティーに追加した場合に便利です。 ::
 
     // コメントを追加して、フィールドが変更されたと印をつけます。
+    // 3.5 より前は dirty() を使用
     $article->comments[] = $newComment;
-    $article->dirty('comments', true);
+    $article->setDirty('comments', true);
 
 加えて、 ``getOriginal()`` メソッドを使うことで元のプロパティー値に応じたコードを書くこともできます。
 このメソッドは値が変更されているなら元の値を返し、そうでなければ実際の値を返します。
@@ -227,7 +256,8 @@ CakePHP の ORM を使うためにエンティティークラスを生成する�
 また、エンティティー内のプロパティーのいずれかが変化したかをチェックすることもできます。 ::
 
     // エンティティーが変更されたか確かめる
-    $article->dirty();
+    // 3.5 より前は dirty() を使用
+    $article->isDirty();
 
 ``clean()`` メソッドで不必要な印をエンティティーのフィールドから除去できます。 ::
 
@@ -245,10 +275,11 @@ CakePHP の ORM を使うためにエンティティークラスを生成する�
 
     ``getDirty()`` が追加されました。
 
+.. versionadded:: 3.5.0
+    ``isDirty()``, ``setDirty()`` が追加されました。
+
 バリデーションエラー
 ====================
-
-.. php:method:: errors($field = null, $errors = null)
 
 :ref:`エンティティーの保存 <saving-entities>` がされた後、どんなバリデーションエラーも
 エンティティー自身に保存されます。バリデーションエラーには ``getErrors()`` や
@@ -268,7 +299,11 @@ CakePHP の ORM を使うためにエンティティークラスを生成する�
 これにより、エラーメッセージで動くコードのテストが簡単になります。 ::
 
     $user->setError('password', ['Password is required']);
-    $user->setErrors(['password' => ['Password is required'], 'username' => ['Username is required']]);
+    $user->setErrors([
+        'password' => ['Password is required'],
+        'username' => ['Username is required']
+    ]);
+
     // 3.4.0 より前
     $user->errors('password', ['Password is required.']);
 
