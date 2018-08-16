@@ -25,6 +25,8 @@ features will continue to function until 4.0.0 after which they will be removed.
 * The string/array parameter set for ``Cake\Http\Response::withCookie()`` is
   deprecated. Instead you need to pass in ``Cake\Http\Cookie\Cookie`` instances.
 * ``Cake\Validation\Validation::cc()`` has been renamed to ``creditCard()``.
+* ``Cake\View\ViewVarsTrait::viewOptions()`` is deprecated. Use
+  ``viewBuilder()->setOptions()`` instead.
 * ``Cake\View\View::$request`` is protected now. Use
   ``View::getRequest()/setRequest()`` to access a View's request instance in
   other contexts.
