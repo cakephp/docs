@@ -1035,7 +1035,7 @@ You can use the ``combine`` method to build a basic options array.
 It's also possible to add extra attributes by expanding the array. The following will create a data attribute on the
 option element, using the ``map`` collection method.
 
-    $options = $exampples->map(function ($value, $key) {
+    $options = $examples->map(function ($value, $key) {
         return [
             'value' => $value->id,
             'text' => $value->name,
