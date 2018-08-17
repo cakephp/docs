@@ -53,7 +53,7 @@ command line::
 
     class HelloCommand extends Command
     {
-        public function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser)
         {
             $parser->addArgument('name', [
                 'help' => 'What is your name'
@@ -86,7 +86,7 @@ method to define arguments. We can also define options. For example, we could
 add a ``yell`` option to our ``HelloCommand``::
 
     // ...
-    public function buildOptionParser(ConsoleOptionParser $parser)
+    protected function buildOptionParser(ConsoleOptionParser $parser)
     {
         $parser
             ->addArgument('name', [
@@ -141,7 +141,7 @@ commands::
             $this->loadModel('Users');
         }
 
-        public function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser)
         {
             $parser
                 ->addArgument('name', [
@@ -222,7 +222,7 @@ Let's start with a very simple command, located in
 
     class UpdateTableCommand extends Command
     {
-        public function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser)
         {
             $parser->setDescription('My cool console app');
 
@@ -268,7 +268,7 @@ adding more logic to our command::
 
     class UpdateTableCommand extends Command
     {
-        public function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser)
         {
             $parser
                 ->setDescription('My cool console app')
@@ -363,7 +363,7 @@ Update the command class to the following::
 
     class UpdateTableCommand extends Command
     {
-        public function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser)
         {
             $parser
                 ->setDescription('My cool console app')
