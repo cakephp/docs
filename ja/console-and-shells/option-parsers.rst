@@ -13,7 +13,7 @@ OptionParser の定義
 コマンドとシェルは ``buildOptionParser($parser)`` フックメソッドを提供します。
 このメソッドを使用して、コマンドのオプションと引数を定義できます。 ::
 
-    public function buildOptionParser($parser)
+    protected function buildOptionParser($parser)
     {
         // オプションと引数を定義
 
