@@ -102,6 +102,8 @@ Behavior Changes
   ``StatementDecorator`` and no longer implements the ``IteratorAggregate``
   interface. Instead it directly implements the ``Iterator`` interface to better
   support using statements with collections.
+* When marshalling data from the request into entities, the ORM will now convert
+  non-scalar data into ``null`` for boolean, integer, float, and decimal types.
 
 
 New Features
