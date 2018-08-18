@@ -19,7 +19,7 @@ and components.
     tutorials-and-examples/cms/authentication
 
 .. toctree::
-    :hidden:
+    :maxdepth: 1
 
     tutorials-and-examples/bookmarks/intro
     tutorials-and-examples/bookmarks/part-two
