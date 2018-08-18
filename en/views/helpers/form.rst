@@ -1022,6 +1022,27 @@ methods are described in each method's own section.)
           'hiddenField' => 'N',
       ]);
 
+Using Collections to build options
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+It's possible to use the Collection class to build your options array. This approach is ideal if you already have a
+collection of entities and would like to build a select element from them.
+
+You can use the ``combine`` method to build a basic options array.::
+
+    $options = $examples->combine('id', 'name');
+
+It's also possible to add extra attributes by expanding the array. The following will create a data attribute on the
+option element, using the ``map`` collection method.::
+
+    $options = $examples->map(function ($value, $key) {
+        return [
+            'value' => $value->id,
+            'text' => $value->name,
+            'data-created' => $value->created
+        ];
+    });
+
 Creating Checkboxes
 ~~~~~~~~~~~~~~~~~~~
 
