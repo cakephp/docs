@@ -119,7 +119,8 @@ then updates the counter of the *previously* associated item.
 
     It is possible though to make this work for ``belongsToMany`` associations.
     You need to enable the CounterCache behavior in a custom ``through`` table
-    configured in association options and set the ``cascadeCallbacks`` configuration option to true. See how to configure a custom join table
+    configured in association options and set the ``cascadeCallbacks`` configuration
+    option to true. See how to configure a custom join table
     :ref:`using-the-through-option`.
 
 .. versionchanged:: 3.6.0
