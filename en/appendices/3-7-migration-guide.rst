@@ -147,6 +147,10 @@ Shell
 * ``cake i18n extract`` has a new ``--relative-paths`` option that makes path
   comments in POT files relative to the application root directory instead of
   absolute paths.
+* ``cake i18n extract`` has a new ``--marker-error`` option that enables
+  reporting of translation functions that use non-static values as comments in
+  POT files.
+
 
 ORM
 ---
