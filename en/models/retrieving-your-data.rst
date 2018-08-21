@@ -35,7 +35,7 @@ optional::
         'offset' => n, //int
         'callbacks' => true //other possible values are false, 'before', 'after'
         'having' => array('COUNT(Model.field) >' => 1), // fields to HAVING by
-        'lock' => true // Enable FORM UPDATE locking
+        'lock' => true // Enable FOR UPDATE locking
     )
 
 It's also possible to add and use other parameters. Some types of find()
