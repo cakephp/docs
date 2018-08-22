@@ -71,6 +71,16 @@ features will continue to function until 4.0.0 after which they will be removed.
 * ``Cake\View\Cell::$response`` is protected now.
 * ``Cake\Filesystem\Folder::normalizePath()`` is deprecated. You should use
   ``correctSlashFor()`` instead.
+* ``Cake\Mailer\Email::setConfigTransport()`` is deprecated. Use
+  ``Cake\Mailer\TransportFactory::setConfig()`` instead.
+* ``Cake\Mailer\Email::getConfigTransport()`` is deprecated. Use
+  ``Cake\Mailer\TransportFactory::getConfig()`` instead.
+* ``Cake\Mailer\Email::configTransport()`` is deprecated. Use
+  ``Cake\Mailer\TransportFactory::getConfig()/setConfig()`` instead.
+* ``Cake\Mailer\Email::configuredTransport()`` is deprecated. Use
+  ``Cake\Mailer\TransportFactory::configured()`` instead.
+* ``Cake\Mailer\Email::dropTransport()`` is deprecated. Use
+  ``Cake\Mailer\TransportFactory::drop()`` instead.
 * ``Helper::$theme`` is removed. Use ``View::getTheme()`` instead.
 * ``Helper::$plugin`` is removed. Use ``View::getPlugin()`` instead.
 * ``Helper::$fieldset`` and ``Helper::$tags`` are deprecated as they are unsed.
@@ -141,6 +151,23 @@ Http
 * ``Cake\Http\Client`` will now default to use a Curl based adapter if the
   ``curl`` extension is installed.
 
+Mailer
+------
+
+* ``Cake\Email\TransportFactory`` and ``Cake\Email\TransportRegistry`` were
+  added. This class extracts transport creation out of Email, allowing Email to
+  become simpler in the future.
+
+ORM
+---
+
+* ``Cake\ORM\EntityTrait::hasErrors()`` was added. This method can be used to
+  check whether or not an entity has errors more efficiently than
+  ``getErrors()`` does.
+* Updating has many association data now respects ``_ids``. This makes patching
+  has many associations work the same as creating new entities, and creates
+  consistency with belongs to many associations.
+
 Shell
 -----
 
@@ -152,15 +179,6 @@ Shell
   POT files.
 
 
-ORM
----
-
-* ``Cake\ORM\EntityTrait::hasErrors()`` was added. This method can be used to
-  check whether or not an entity has errors more efficiently than
-  ``getErrors()`` does.
-* Updating has many association data now respects ``_ids``. This makes patching
-  has many associations work the same as creating new entities, and creates
-  consistency with belongs to many associations.
 
 TestSuite
 ---------
