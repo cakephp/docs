@@ -86,7 +86,7 @@ you can use the following event::
             $view = $event->getSubject();
             if ($view->viewVars['name'] == 'Users') {
                 // add the login and logout actions to the Users controller
-                $view->viewVars['actions'] = [
+                $view->set('actions', [
                     'login',
                     'logout',
                     'index',
@@ -94,7 +94,7 @@ you can use the following event::
                     'add',
                     'edit',
                     'delete'
-                ];
+                ]);
             }
         }
     );

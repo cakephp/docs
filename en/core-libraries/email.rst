@@ -217,7 +217,7 @@ following configuration keys are used:
   you want to render a template without layout, set this field to null. See
   ``Email::template()``.
 - ``'viewVars'``: If you are using rendered content, set the array with
-  variables to be used in the view. See ``Email::viewVars()``.
+  variables to be used in the view. See ``Email::setViewVars()``.
 - ``'attachments'``: List of files to attach. See ``Email::attachments()``.
 - ``'emailFormat'``: Format of email (html, text or both). See ``Email::emailFormat()``.
 - ``'transport'``: Transport configuration name. See
@@ -287,10 +287,10 @@ This would use the following template files:
 When sending templated emails you have the option of sending either
 ``text``, ``html`` or ``both``.
 
-You can set view variables with ``Email::viewVars()``::
+You can set view variables with ``Email::setViewViars()``::
 
     $email = new Email('templated');
-    $email->viewVars(['value' => 12345]);
+    $email->setViewVars(['value' => 12345]);
 
 In your email templates you can use these with::
 

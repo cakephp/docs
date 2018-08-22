@@ -69,6 +69,8 @@ features will continue to function until 4.0.0 after which they will be removed.
 * ``Cake\View\Cell::$View`` is protected now.
 * ``Cake\View\Cell::$request`` is protected now.
 * ``Cake\View\Cell::$response`` is protected now.
+* ``Cake\View\ViewVarsTrait::$viewVars`` is deprecated. This public property
+  will be removed in 4.0.0. Use ``set()`` instead.
 * ``Cake\Filesystem\Folder::normalizePath()`` is deprecated. You should use
   ``correctSlashFor()`` instead.
 * ``Cake\Mailer\Email::setConfigTransport()`` is deprecated. Use
