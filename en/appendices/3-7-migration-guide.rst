@@ -217,3 +217,6 @@ View
   javascript snippet generated for confirmation boxes to be customized.
 * ``FormHelper`` now has a ``autoSetCustomValidity`` option for setting HTML5
   validity messages from custom validation messages. See: :ref:`html5-validity-messages`
+* ``ViewBuilder`` had ``setVar()``, ``setVars()``, ``getVar()``, ``getVars()`` and
+  ``hasVar()`` added. These methods will replace the public ``viewVars``
+  property defined in ``ViewVarsTrait``.
