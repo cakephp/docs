@@ -116,14 +116,16 @@ data out of your application code and makes deployment simpler as you can simply
 change the configuration data. An example transport configuration looks like::
 
     use Cake\Mailer\Email;
+    use Cake\Mailer\TransportFactory;
 
     // Sample Mail configuration
-    Email::configTransport('default', [
+    // Prior to 3.7.0 use Email::configTransport()
+    TransportFactory::setConfig('default', [
         'className' => 'Mail'
     ]);
 
     // Sample SMTP configuration.
-    Email::configTransport('gmail', [
+    TransportFactory::setConfig('gmail', [
         'host' => 'ssl://smtp.gmail.com',
         'port' => 465,
         'username' => 'my@gmail.com',
@@ -136,8 +138,9 @@ prefix in the host and configure the port value accordingly. You can also
 enable TLS SMTP using the ``tls`` option::
 
     use Cake\Mailer\Email;
+    use Cake\Mailer\TransportFactory;
 
-    Email::configTransport('gmail', [
+    TransportFactory::setConfig('gmail', [
         'host' => 'smtp.gmail.com',
         'port' => 587,
         'username' => 'my@gmail.com',
@@ -164,15 +167,17 @@ The above configuration would enable TLS communication for email messages.
 Configuration options can also be provided as a :term:`DSN` string. This is
 useful when working with environment variables or :term:`PaaS` providers::
 
+    TransportFactory::setConfig('default', [
+        'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:587?tls=true',
+    ]);
+
+    // Prior to 3.7.0 use
     Email::configTransport('default', [
         'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:587?tls=true',
     ]);
 
 When using a DSN string you can define any additional parameters/options as
 query string arguments.
-
-.. deprecated:: 3.4.0
-    Use ``setConfigTransport()`` instead of ``configTransport()``.
 
 .. php:staticmethod:: dropTransport($key)
 
