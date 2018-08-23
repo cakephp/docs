@@ -1157,7 +1157,6 @@ In addition to loading related data with ``contain()``, you can also add
 additional joins with the query builder::
 
     $query = $articles->find()
-        ->hydrate(false)
         ->join([
             'table' => 'comments',
             'alias' => 'c',
@@ -1169,7 +1168,6 @@ You can append multiple joins at the same time by passing an associative array
 with multiple joins::
 
     $query = $articles->find()
-        ->hydrate(false)
         ->join([
             'c' => [
                 'table' => 'comments',
@@ -1187,7 +1185,6 @@ As seen above, when adding joins the alias can be the outer array key. Join
 conditions can also be expressed as an array of conditions::
 
     $query = $articles->find()
-        ->hydrate(false)
         ->join([
             'c' => [
                 'table' => 'comments',
