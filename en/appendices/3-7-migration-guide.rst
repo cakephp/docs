@@ -83,6 +83,13 @@ features will continue to function until 4.0.0 after which they will be removed.
   ``Cake\Mailer\TransportFactory::configured()`` instead.
 * ``Cake\Mailer\Email::dropTransport()`` is deprecated. Use
   ``Cake\Mailer\TransportFactory::drop()`` instead.
+* Following view related methods of ``Cake\Mailer\Email`` have been deprecated:
+  ``setTemplate()``, ``getTemplate()``, ``setLayout()``, ``getLayout()``,
+  ``setTheme()``, ``getTheme()``, ``setHelpers()``, ``getHelpers()``.
+  Use the same methods through Email's view builder instead. For e.g.
+  ``$email->viewBuilder()->getTemplate()``.
+* ``Cake\Mailer\Mailer::layout()`` is deprecated.
+  Use ``$mailer->viewBuilder()->setLayout()`` instead.
 * ``Helper::$theme`` is removed. Use ``View::getTheme()`` instead.
 * ``Helper::$plugin`` is removed. Use ``View::getPlugin()`` instead.
 * ``Helper::$fieldset`` and ``Helper::$tags`` are deprecated as they are unsed.
