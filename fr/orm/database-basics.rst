@@ -421,10 +421,10 @@ fournis CakePHP, vous pouvez ajouter des nouveaux types supplémentaires
 au système de type de CakePHP. Ces classes de type s'attendent à implémenter
 les méthodes suivantes:
 
-* toPHP
-* toDatabase
-* toStatement
-* marshal
+* ``toPHP``: Formate la valeur de la base de données pour être utilisée en PHP.
+* ``toDatabase``: Formate la valeur PHP pour son enregistrement dans la base de données.
+* ``toStatement``: Convertit la valeur en Statement de base de données.
+* ``marshal``: Convertit des données plates en objet PHP.
 
 Une façon facile de remplir l'interface basique est d'étendre
 :php:class:`Cake\\Database\\Type`. Par exemple, si vous souhaitez ajouter un
