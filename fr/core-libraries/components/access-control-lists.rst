@@ -22,7 +22,7 @@ des fois, vous pourriez vouloir limiter l'accès à certains controllers de
 CakePHP qui doivent initier leur logique dans d'autres parties de votre
 application. Les ACOs pourraient être n'importe quoi que vous voudriez
 contrôler, d'une action de controller à un service Web, en passant par une case
-de l'agenda en ligne de votre Mamy.
+de l'agenda en ligne de votre Mamie.
 
 Rappel :
 
@@ -54,7 +54,7 @@ créer une liste d'AROs (requêteurs) qui comprend :
 
     Comprenez que l'ACL n'est pas la même chose que l'authentification. L'ACL
     est ce qui vient après qu'un utilisateur ait été authentifié. Par contre,
-    les deux sont habituellement utilisés de paire, il est important de faire
+    les deux sont habituellement utilisés de pair, il est important de faire
     la distinction entre savoir qui est quelqu'un (authentification) et savoir
     ce qu'il peut faire (ACL).
 
@@ -75,7 +75,7 @@ tableau, il ressemblerait à ça :
 
 
 ========== ========= ========= ============ ============= ========
-x          Les armes L'anneau  Le porc salé La diplomacie La bière
+x          Les armes L'anneau  Le porc salé La diplomatie La bière
 ========== ========= ========= ============ ============= ========
 Gandalf                        Autorisé     Autorisé      Autorisé
 ---------- --------- --------- ------------ ------------- --------
@@ -187,15 +187,15 @@ est Communauté->Hobbits->Pippin. Ensuite nous verrions les différentes
 permissions qui résident à chacun de ces points et nous utiliserions la plus
 spécifique des permissions reliant Pippin et la bière.
 
-======================= ================ =======================
-ARO Node                Permission Info  Result                 
-======================= ================ =======================
-Fellowship of the Ring  Deny all         Denying access to ale. 
------------------------ ---------------- -----------------------
-Hobbits                 Allow 'ale'      Allowing access to ale!
------------------------ ---------------- -----------------------
-Pippin                  --               Still allowing ale!    
-======================= ================ =======================
+======================= ================== =============================
+Nœud de l'ARO           Permissions       Résultat                 
+======================= ================== =============================
+Communauté de l'Anneau  Interdire tout     Refuser l'accès à la bière. 
+----------------------- ------------------ -----------------------------
+Hobbits                 Autoriser la bière Autoriser l'accès à la bière!
+----------------------- ------------------ -----------------------------
+Pippin                  --                 Autoriser encore la bière!    
+======================= ================== =============================
 
 .. note::
 
@@ -246,11 +246,6 @@ une exception — Merry. Pour voir si Merry peut accéder à la bière, nous
 aurions trouvé son chemin dans l'arbre : Communauté->Hobbits->Merry et appliqué
 notre principe, en gardant une trace des permissions liées à la bière :
 
-Nœud de l'ARO   Information sur la permission   Résultat
-Communauté de l'Anneau  Refuse tout   Refuser l'accès à la bière.
-Hobbits   Autorise la bière   Autoriser l'accès à la bière !
-Merry   Refuse la bière   Refuser la bière
-
 ======================= ============================== ===============================
 Nœud de l'ARO           Information sur la permission  Résultat                 
 ======================= ============================== ===============================
@@ -268,7 +263,7 @@ La première implémentation d'ACL sur CakePHP était basée sur des fichiers
 INI stockés dans l'installation de CakePHP. Bien qu'elle soit stable et pratique,
 nous recommandons d'utiliser plutôt les solutions d'ACL basées sur les bases
 de données, surtout pour leur capacité à créer de nouveaux ACOs et AROs à la
-volée. Nous recommandons son utilisation dans de simples applications - et
+volée. Nous recommandons son utilisation dans des applications simples - et
 spécialement pour ceux qui ont une raison plus ou moins particulière de ne
 pas vouloir utiliser une base de données.
 
