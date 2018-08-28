@@ -123,6 +123,9 @@ Behavior Changes
   support using statements with collections.
 * When marshalling data from the request into entities, the ORM will now convert
   non-scalar data into ``null`` for boolean, integer, float, and decimal types.
+* ``ExceptionRenderer`` will now **always** call handler methods for custom
+  application exception classes. Previously, custom exception class handler
+  methods would only be invoked in debug mode.
 
 
 New Features
