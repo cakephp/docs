@@ -157,7 +157,7 @@ Table への Translate ビヘイビアーの追加
 ========================
 
 上記に示したように、読み込まれたエンティティーの有効な翻訳を選ぶために
-``locale()`` メソッドを使用することができます。 ::
+``setLocale()`` メソッドを使用することができます。 ::
 
     // コントローラーの先頭で I18n コア機能をロード
     use Cake\I18n\I18n;
@@ -275,17 +275,20 @@ translate ビヘイビアーは元のフィールド値を上書きします。
 アソシエーションで ``translations`` カスタムファインダーを使用するには、クエリービルダー関数の
 ``contain`` 句を単に使用するだけです。
 
-I18n::locale を使用せずに一つの言語の取得
+.. _i18n-locale
+
+I18n::setLocale を使用せずに一つの言語の取得
 -----------------------------------------
 
 ``I18n::setLocale('es');`` を呼び出すと、翻訳されたすべての検索のデフォルトロケールが変更されますが、
 アプリケーションの状態を変更せずに翻訳されたコンテンツを取得したいことがあります。
-これらの状況には、ビヘイビアーの ``locale()`` メソッドを使用してください。 ::
+これらの状況には、ビヘイビアーの ``setLocale()`` メソッドを使用してください。 ::
 
     I18n::setLocale('en'); // 説明のためにリセット
 
     $this->loadModel('Articles');
-    $this->Articles->locale('es'); // 特定のロケール
+    // 特定のロケール。3.6 より前は locale() メソッドを使用してください。
+    $this->Articles->setLocale('es');
 
     $article = $this->Articles->get(12);
     echo $article->title; // 'Un Artículo' と出力、超簡単！
@@ -297,8 +300,9 @@ I18n::locale を使用せずに一つの言語の取得
     I18n::setLocale('en'); // 説明のためにリセット
 
     $this->loadModel('Articles');
-    $this->Articles->locale('es');
-    $this->Articles->Categories->locale('es');
+    // 3.6 より前は locale() メソッドを使用してください。
+    $this->Articles->setLocale('es');
+    $this->Articles->Categories->setLocale('es');
 
     $data = $this->Articles->find('all', ['contain' => ['Categories']]);
 
@@ -310,7 +314,8 @@ I18n::locale を使用せずに一つの言語の取得
 TranslateBehavior は、デフォルトでは検索条件を置換しません。
 翻訳されたフィールドの検索条件を作成するには ``translationField()`` メソッドを使用します。 ::
 
-    $this->Articles->locale('es');
+    // 3.6 より前は locale() メソッドを使用してください。
+    $this->Articles->setLocale('es');
     $data = $this->Articles->find()->where([
         $this->Articles->translationField('title') => 'Otro Título'
     ]);
@@ -339,7 +344,7 @@ TranslateBehavior の背後にある哲学は、デフォルトの言語を表�
     }
 
     // コントローラーの中で
-    $articles = $this->loadModel('Articles');
+    $this->loadModel('Articles');
     $article = new Article([
         'title' => 'My First Article',
         'body' => 'This is the content',
@@ -375,7 +380,8 @@ TranslateBehavior の背後にある哲学は、デフォルトの言語を表�
 
     $article->title = 'Mi Primer Artículo';
 
-    $this->Articles->locale('es');
+    // 3.6 より前は locale() メソッドを使用してください。
+    $this->Articles->setLocale('es');
     $this->Articles->save($article);
 
 同じ言語でエンティティーを取得や保存の両方が必要な時や、複数のエンティティーを一括で保存する時に、
