@@ -368,7 +368,7 @@ The ``loadModel()`` function comes handy when you need to use a model
 table/collection that is not the controller's default one::
 
     // In a controller method.
-    $this->loadModel('Articles');
+    $this->Articles = $this->loadModel('Articles');
     $recentArticles = $this->Articles->find('all', [
         'limit' => 5,
         'order' => 'Articles.created DESC'
