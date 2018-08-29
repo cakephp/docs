@@ -520,6 +520,8 @@ syntax`. For example, to use the contact layout from the Contacts plugin::
     {
         public function view_active()
         {
+            $this->viewBuilder()->setLayout('Contacts.contact');
+            // or the following before 3.4
             $this->viewBuilder()->layout('Contacts.contact');
             // or the following before 3.1
             $this->layout = 'Contacts.contact';
