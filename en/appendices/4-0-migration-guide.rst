@@ -57,6 +57,9 @@ changes made:
 * ``Cake\Controller\Controller::referer()`` now defaults the ``local``
   parameter to true, instead of false. This makes using referer headers safer as
   they will be constrained to your application's domain by default.
+* ``Cake\Cache\CacheEngine::gc()`` and all implementations of this method have
+  been removed. This method was a no-op in most cache drivers and was only used
+  in file caching.
 
 
 New Features

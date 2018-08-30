@@ -142,8 +142,6 @@ Each engine accepts the following options:
   config.  handy for deleting a complete group from cache.
 * ``prefix`` Prepended to all entries. Good for when you need to share
   a keyspace with either another cache config or another application.
-* ``probability``` Probability of hitting a cache gc cleanup. Setting to 0 will disable
-   ``Cache::gc()`` from ever being called automatically.
 
 FileEngine Options
 -------------------
@@ -399,12 +397,6 @@ prefixes::
     // Will clear all keys.
     Cache::clear(false);
 
-.. php:staticmethod:: gc($config)
-
-Garbage collects entries in the cache configuration. This is primarily
-used by FileEngine. It should be implemented by any Cache engine
-that requires manual eviction of cached data.
-
 .. note::
 
     Because APCu and Wincache use isolated caches for webserver and CLI they
@@ -604,11 +596,6 @@ The required API for a CacheEngine is
     :return: Boolean ``true`` on success.
 
     Increment a number under the key and return incremented value
-
-.. php:method:: gc()
-
-    Not required, but used to do clean up when resources expire.
-    FileEngine uses this to delete files containing expired content.
 
 .. meta::
     :title lang=en: Caching
