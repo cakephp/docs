@@ -327,9 +327,9 @@ following path:
 **src/Template/Plugin/TestTheme/Plugin/Blog/Email/text/new_comment.ctp**.
 
 .. deprecated:: 3.4.0
-    Use ``setTemplate()`` instead of ``template()``. Use ``setLayout()`` instead
-    of the layout argument of ``template()``. Use ``setTheme()`` instead of
-    ``theme()``.
+    Use ``viewBuilder()->setTemplate()`` instead of ``template()``. Use
+    ``viewBuilder()->setLayout()`` instead of the layout argument of
+    ``template()``. Use ``viewBuilder()->setTheme()`` instead of ``theme()``.
 
 Sending Attachments
 ===================
