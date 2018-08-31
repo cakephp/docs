@@ -287,7 +287,7 @@ This assumes that ``Categories`` has the TranslateBehavior attached to it. It
 simply uses the query builder function for the ``contain`` clause to use the
 ``translations`` custom finder in the association.
 
-.. _retrieving-one-language-without-using-i18n-locale
+.. _retrieving-one-language-without-using-i18n-locale:
 
 Retrieving one language without using I18n::setLocale
 -----------------------------------------------------

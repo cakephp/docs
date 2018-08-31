@@ -295,7 +295,7 @@ utilise simplement la fonction de construction de requête pour la clause
 ``contain`` d'utiliser les ``translations`` du finder personnalisé dans
 l'association.
 
-.. _recuperer-une-langue-sans-utiliser-i18n-locale
+.. _recuperer-une-langue-sans-utiliser-i18n-locale:
 
 Récupérer une Langue sans Utiliser I18n::setLocale
 --------------------------------------------------
