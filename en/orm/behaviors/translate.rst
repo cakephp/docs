@@ -287,13 +287,15 @@ This assumes that ``Categories`` has the TranslateBehavior attached to it. It
 simply uses the query builder function for the ``contain`` clause to use the
 ``translations`` custom finder in the association.
 
-Retrieving one language without using I18n::locale
---------------------------------------------------
+.. _retrieving-one-language-without-using-i18n-locale:
+
+Retrieving one language without using I18n::setLocale
+-----------------------------------------------------
 
 calling ``I18n::setLocale('es');`` changes the default locale for all translated
 finds, there may be times you wish to retrieve translated content without
 modifying the application's state. For these scenarios use the behavior's
-``locale()`` method::
+``setLocale()`` method::
 
     I18n::setLocale('en'); // reset for illustration
 
@@ -327,6 +329,7 @@ Querying Translated Fields
 TranslateBehavior does not substitute find conditions by default. You need to use
 ``translationField()`` method to compose find conditions on translated fields::
 
+    // Use locale() prior to 3.6
     $this->Articles->setLocale('es');
     $data = $this->Articles->find()->where([
         $this->Articles->translationField('title') => 'Otro Título'
@@ -356,7 +359,7 @@ translations for any given entity. For example, given the following setup::
     }
 
     // In a Controller
-    $articles = $this->loadModel('Articles');
+    $this->loadModel('Articles');
     $article = new Article([
         'title' => 'My First Article',
         'body' => 'This is the content',
@@ -395,7 +398,8 @@ default language directly to the table::
 
     $article->title = 'Mi Primer Artículo';
 
-    $this->Articles->locale('es');
+    // Use locale() prior to 3.6
+    $this->Articles->setLocale('es');
     $this->Articles->save($article);
 
 Setting the language directly in the table is useful when you need to both

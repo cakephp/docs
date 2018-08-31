@@ -295,18 +295,21 @@ utilise simplement la fonction de construction de requête pour la clause
 ``contain`` d'utiliser les ``translations`` du finder personnalisé dans
 l'association.
 
-Récupérer une Langue sans Utiliser I18n::locale
------------------------------------------------
+.. _recuperer-une-langue-sans-utiliser-i18n-locale:
+
+Récupérer une Langue sans Utiliser I18n::setLocale
+--------------------------------------------------
 
 Appeler ``I18n::setLocale('es');`` change la locale par défaut pour tous les finds
 traduits, il peut y avoir des fois où vous souhaitez récupérer du contenu
 traduit sans modification de l'état de l'application. Pour ces scenarios,
-utilisez la méthode ``locale`` du behavior::
+utilisez la méthode ``setLocale()`` du behavior::
 
     I18n::setLocale('en'); // réinitialisation pour l'exemple
 
     $this->loadModel('Articles');
-    $articles->locale('es'); // locale spécifique
+    // locale spécifique. Avant CakePHP 3.6 utilisez locale().
+    $this->Articles->setLocale('es');
 
     $article = $this->Articles->get(12);
     echo $article->title; // Echoes 'Un Artículo', yay piece of cake!
@@ -319,8 +322,9 @@ pour chaque table par exemple::
     I18n::setLocale('en'); // reset for illustration
 
     $this->loadModel('Articles');
-    $this->Articles->locale('es');
-    $this->Articles->Categories->locale('es');
+    // Avant CakePHP 3.6 utilisez locale().
+    $this->Articles->setLocale('es');
+    $this->Articles->Categories->setLocale('es');
 
     $data = $this->Articles->find('all', ['contain' => ['Categories']]);
 
@@ -334,7 +338,8 @@ Par défaut, le ``TranslateBehavior`` ne remplace rien dans les conditions des
 Vous devez utiliser la méthode ``translationField()`` pour composer des ``find``
 basés sur des champs traduits::
 
-    $this->Articles->locale('es');
+    // Avant CakePHP 3.6 utilisez locale().
+    $this->Articles->setLocale('es');
     $data = $this->Articles->find()->where([
         $this->Articles->translationField('title') => 'Otro Título'
     ]);
@@ -364,7 +369,7 @@ donnée. Par exemple, étant donné la configuration suivante::
     }
 
     // Dans un controller
-    $articles = $this->loadModel('Articles');
+    $this->loadModel('Articles');
     $article = new Article([
         'title' => 'My First Article',
         'body' => 'This is the content',
@@ -403,7 +408,8 @@ langue est de définir par défaut la langue directement à la table::
 
     $article->title = 'Mi Primer Artículo';
 
-    $this->Articles->locale('es');
+    // Avant CakePHP 3.6 utilisez locale().
+    $this->Articles->setLocale('es');
     $this->Articles->save($article);
 
 Configurer la langue directement dans la table est utile quand vous avez besoin
