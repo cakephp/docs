@@ -37,6 +37,8 @@ changes made:
   ``Type::getMap()`` to inspect type instances.
 * ``Cake\Http\Client\Response::isOk()`` now returns ``true`` for all 2xx and 3xx
   response codes.
+* ``Cake\Http\ServerRequest::referer()`` now returns ``null`` when the current
+  request has no referer. Previously it would return ``/``.
 * Date, Time, Timestamp, and Datetime column times now return immutable time
   objects by default now.
 * ``Cake\View\View`` will re-render views if ``render()`` is called multiple
