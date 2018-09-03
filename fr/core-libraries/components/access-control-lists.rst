@@ -188,7 +188,7 @@ permissions qui résident à chacun de ces points et nous utiliserions la plus
 spécifique des permissions reliant Pippin et la bière.
 
 ======================= ================== =============================
-Nœud de l'ARO           Permissions       Résultat                 
+Nœud de l'ARO           Permissions        Résultat                 
 ======================= ================== =============================
 Communauté de l'Anneau  Interdire tout     Refuser l'accès à la bière. 
 ----------------------- ------------------ -----------------------------
@@ -298,7 +298,7 @@ nous avions façonnée pourrait ressembler dans une syntaxe INI :
 ::
 
     ;-------------------------------------
-        ; AROs
+    ; AROs
     ;-------------------------------------
     [aragorn]
     groups = guerriers
