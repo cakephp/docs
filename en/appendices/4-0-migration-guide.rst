@@ -67,6 +67,13 @@ changes made:
 New Features
 ============
 
+Error
+-----
+
+* If an error is raised by a controller action in a prefixed route,
+  ``ErrorController`` will attempt to use a prefixed error template if one is
+  available. This behavior is only applied when ``debug`` is off.
+
 Http
 ----
 
