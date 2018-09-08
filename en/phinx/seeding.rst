@@ -17,9 +17,15 @@ this path can be changed in your configuration file.
 Creating a New Seed Class
 -------------------------
 
-Phinx includes a command to easily generate a new seed class:
+Phinx includes a command to easily generate a new seed class
+
+1. Init Phinx (only required once, skip if you already did so):
 
 .. code-block:: bash
+
+    $ php vendor/bin/phinx init
+
+2. Create UserSeeder:
 
     $ php vendor/bin/phinx seed:create UserSeeder
 
