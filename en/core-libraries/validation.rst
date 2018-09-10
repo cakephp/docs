@@ -36,7 +36,7 @@ validate::
                 'message' => 'Titles need to be at least 10 characters long',
             ]
         ])
-        ->allowEmpty('published')
+        ->allowEmptyString('published')
         ->add('published', 'boolean', [
             'rule' => 'boolean'
         ])
@@ -96,11 +96,29 @@ If you have multiple fields that are required, you can define them as a list::
 Allowing Empty Fields
 ---------------------
 
-The ``allowEmpty()`` and ``notEmpty()`` methods allow you to control which
-fields are allowed to be 'empty'. By using the ``notEmpty()`` method, the given
-field will be marked invalid when it is empty. You can use ``allowEmpty()`` to
-allow a field to be empty. Both ``allowEmpty()`` and ``notEmpty()`` support a
-mode parameter that allows you to control when a field can or cannot be empty:
+Validators offer several methods to control which fields accept empty values and
+which empty values are accepted and not forwarded to other validation rules for
+the named field. CakePHP provides empty value support for five different shapes
+of data:
+
+#. ``allowEmptyString()`` Should be used when you want to only accept
+   an empty string.
+#. ``allowEmptyArray()`` Should be used when you want to accept an array.
+#. ``allowEmptyDate()`` Should be used when you want to accept an empty string,
+   or an array that is marshalled into a date field.
+#. ``allowEmptyDate()`` Should be used when you want to accept an empty string,
+   or an array that is marshalled into a time field.
+#. ``allowEmptyDateTime()`` Should be used when you want to accept an empty
+   string or an array that is marshalled into a datetime or timestamp field.
+#. ``allowEmptyFile()`` Should be used when you want to accept an array that
+   is contains an empty uploaded file.
+
+You can also use ``notEmpty()`` to mark a field invalid if any 'empty' value is
+used. In general, it is recommended that you do not use ``notEmpty()`` and use more
+specific validators instead. practice to use more specific validators.
+
+The ``allowEmpty`` methods support a mode parameter that allows you to control
+when a field can or cannot be empty:
 
 * ``false`` The field is not allowed to be empty.
 * ``create`` The field can be empty when validating a **create**
@@ -108,17 +126,14 @@ mode parameter that allows you to control when a field can or cannot be empty:
 * ``update`` The field can be empty when validating an **update**
   operation.
 
-The values ``''``, ``null`` and ``[]`` (empty array) will cause validation
-errors when fields are not allowed to be empty.  When fields are allowed to be
-empty, the values ``''``, ``null``, ``false``, ``[]``, ``0``, ``'0'`` are
-accepted.
-
 An example of these methods in action is::
 
-    $validator->allowEmpty('published')
-        ->notEmpty('title', 'Title cannot be empty')
-        ->notEmpty('body', 'Body cannot be empty', 'create')
-        ->allowEmpty('header_image', 'update');
+    // Prior to 3.6.12 you should use allowEmpty().
+    $validator->allowEmptyString('published')
+        ->notEmptyString('title', 'Title cannot be empty')
+        ->notEmptyString('body', 'Body cannot be empty', 'create')
+        ->allowEmptyFile('header_image', 'update');
+        ->allowEmptyDateTime('posted', 'update');
 
 Adding Validation Rules
 -----------------------
@@ -268,12 +283,12 @@ the value for ``show_profile_picture`` is empty. You could also use the
         'rule' => ['uploadedFile', ['optional' => true]],
     ]);
 
-The ``allowEmpty()``, ``notEmpty()`` and ``requirePresence()`` methods will also
+The ``allowEmpty*``, ``notEmpty()`` and ``requirePresence()`` methods will also
 accept a callback function as their last argument. If present, the callback
 determines whether or not the rule should be applied. For example, a field is
 sometimes allowed to be empty::
 
-    $validator->allowEmpty('tax', function ($context) {
+    $validator->allowEmptyString('tax', function ($context) {
         return !$context['data']['is_taxable'];
     });
 
