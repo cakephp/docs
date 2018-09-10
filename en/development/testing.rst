@@ -23,10 +23,7 @@ To install PHPUnit with Composer:
 
 .. code-block:: bash
 
-    $ php composer.phar require --dev phpunit/phpunit:"^5.7|^6.0"
-
-    // Before CakePHP 3.4.1
-    $ php composer.phar require --dev phpunit/phpunit:"<6.0"
+    $ php composer.phar require --dev phpunit/phpunit:"^7.0"
 
 This will add the dependency to the ``require-dev`` section of your
 ``composer.json``, and then install PHPUnit along with any dependencies.
@@ -134,11 +131,6 @@ tests:
    assertion) should begin with ``test``, as in ``testPublished()``.
    You can also use the ``@test`` annotation to mark methods as test methods.
 
-.. versionadded:: 3.4.1
-    Support for PHPUnit 6 was addded. If you're using a PHPUnit version lower
-    than 5.7.0, your tests classes should either extends CakePHP's classes or
-    ``PHPUnit_Framework_TestCase``.
-
 Creating Your First Test Case
 =============================
 
@@ -244,7 +236,7 @@ application's tests you can simply run:
 
 .. code-block:: bash
 
-    # composer installs
+    # composer install
     $ vendor/bin/phpunit
 
     # phar file
@@ -312,9 +304,8 @@ This will put the coverage results in your application's webroot directory. You
 should be able to view the results by going to
 ``http://localhost/your_app/coverage``.
 
-If you are using PHP 5.6.0 or greater, you can use ``phpdbg``
-to generate coverage instead of xdebug. ``phpdbg`` is generally faster at
-generating coverage:
+You can also use ``phpdbg`` to generate coverage instead of xdebug.
+``phpdbg`` is generally faster at generating coverage:
 
 .. code-block:: bash
 
