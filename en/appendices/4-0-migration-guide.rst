@@ -79,3 +79,10 @@ Http
 
 * ``Cake\Http\Client\Response::isSuccess()`` was added. This method returns true
   if the response status code is 2xx.
+
+View
+----
+
+* ``FormHelper`` now generates HTML5 validation messages for fields marked as
+  required in an entity's ORM table class. This feature can be toggled with the
+  ``autoSetCustomValidity`` class configuration option.

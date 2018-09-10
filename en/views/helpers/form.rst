@@ -287,8 +287,8 @@ Use ``'url' => false`` if you don't want to output a URL as the form action.
 Using Custom Validators
 -----------------------
 
-Often models will have multiple validation sets, and you will want FormHelper to
-mark fields required based on a the specific validation rules your controller
+Often models will have multiple validator sets, you can have FormHelper 
+mark fields required based on the specific validator your controller
 action is going to apply. For example, your Users table has specific validation
 rules that only apply when an account is being registered::
 
@@ -296,8 +296,8 @@ rules that only apply when an account is being registered::
         'context' => ['validator' => 'register']
     ]);
 
-The above will use the rules defined in the ``register`` validator, which are
-defined by ``UsersTable::validationRegister()``, for ``$user`` and all
+The above will use validation rules defined in the ``register`` validator, which
+are defined by ``UsersTable::validationRegister()``, for ``$user`` and all
 related associations. If you are creating a form for associated entities, you
 can define validation rules for each association by using an array::
 
@@ -311,7 +311,12 @@ can define validation rules for each association by using an array::
     ]);
 
 The above would use ``register`` for the user, and ``default`` for the user's
-comments.
+comments. FormHelper uses validators to generate HTML5 required attributes and
+set error messages with the `browser validator API
+<https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation#Customized_error_messages>`_
+. If you would like to disable HTML5 validation messages use::
+
+    $this->Form->setConfig('autoSetCustomValidity', false);
 
 Creating context classes
 ------------------------
