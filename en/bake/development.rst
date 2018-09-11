@@ -51,8 +51,8 @@ variables used in the bake templates::
         $view = $event->getSubject();
 
         // Use $rows for the main data variable in indexes
-        if ($view->get('pluralName')) {
-            $view->set('pluralName', 'rows');
+        if ($view->get('pluralHumanName')) {
+            $view->set('pluralHumanName', 'rows');
         }
         if ($view->get('pluralVar')) {
             $view->set('pluralVar', 'rows');
