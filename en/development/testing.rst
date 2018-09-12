@@ -355,7 +355,7 @@ If you are using ``<testsuites>`` to use fixtures from plugins that you have
 installed with composer, the plugin's ``composer.json`` file should add the
 fixture namespace to the autoload section. Example::
 
-    "autoload": {
+    "autoload-dev": {
         "psr-4": {
             "PluginName\\Test\\Fixture\\": "tests/Fixture/"
         }
