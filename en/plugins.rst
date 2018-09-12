@@ -681,7 +681,7 @@ You can use the :term:`plugin syntax` when linking to plugin assets using the
     // Generates a URL of /contact_manager/img/logo.jpg
     echo $this->Html->image('ContactManager.logo');
 
-Plugin assets are served using the ``AssetFilter`` dispatcher filter by default.
+Plugin assets are served using the ``AssetMiddleware`` middleware by default.
 This is only recommended for development. In production you should
 :ref:`symlink plugin assets <symlink-assets>` to improve performance.
 
