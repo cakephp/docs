@@ -105,14 +105,14 @@ application's ``bootstrap()`` function::
 
     // In src/Application.php. Requires at least 3.6.0
     use Cake\Http\BaseApplication;
-    use ContactManager\Plugin as ContactManager;
+    use ContactManager\Plugin as ContactManagerPlugin;
 
     class Application extends BaseApplication {
         public function bootstrap()
         {
             parent::bootstrap();
             // Load the contact manager plugin by class name
-            $this->addPlugin(ContactManager::class);
+            $this->addPlugin(ContactManagerPlugin::class);
 
             // Load a plugin with a vendor namespace by 'short name'
             $this->addPlugin('AcmeCorp/ContactManager');
@@ -169,16 +169,19 @@ allow plugin authors to set defaults, which can be configured by you in your
 appliation::
 
     // In Application::bootstrap()
-
+    use ContactManager\Plugin as ContactManagerPlugin;
+    
     // Disable routes for the ContactManager plugin
-    $this->addPlugin(ContactManager::class, ['routes' => false]);
+    $this->addPlugin(ContactManagerPlugin::class, ['routes' => false]);
 
 You can configure hooks with array options, or the methods provided by plugin
 classes::
 
     // In Application::bootstrap()
+    use ContactManager\Plugin as ContactManagerPlugin;
+    
     // Use the disable/enable to configure hooks.
-    $plugin = new ContactManager();
+    $plugin = new ContactManagerPlugin();
 
     $plugin->disable('bootstrap');
     $plugin->enable('routes');
@@ -186,7 +189,7 @@ classes::
 
 Plugin objects also know their names and path information::
 
-    $plugin = new ContactManager();
+    $plugin = new ContactManagerPlugin();
 
     // Get the plugin name.
     $name = $plugin->getName();
