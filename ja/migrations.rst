@@ -376,7 +376,8 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
         public function up()
         {
             $table = $this->table('products');
-            $table->removeColumn('price');
+            $table->removeColumn('price')
+                  ->save();
         }
     }
 
