@@ -317,7 +317,7 @@ Modify your test case to the following snippet of code::
 
         public $fixtures = [
             // assumes you have a UsersFixture
-            'app.users'
+            'app.Users'
         ];
 
         public function testDescriptionOutput()

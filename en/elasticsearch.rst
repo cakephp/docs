@@ -318,5 +318,5 @@ You can safely omit the type name and top level ``properties`` key. Once your
 fixtures are created you can use them in your test cases by including them in
 your test's ``fixtures`` properties::
 
-    public $fixtures = ['app.articles'];
+    public $fixtures = ['app.Articles'];
 

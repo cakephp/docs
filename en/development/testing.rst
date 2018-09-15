@@ -232,8 +232,8 @@ the creation of new bugs.
 
 .. note::
 
-    EventManager is refreshed for each test method. This means that when running 
-    multiple tests at once, you will lose your event listeners that were 
+    EventManager is refreshed for each test method. This means that when running
+    multiple tests at once, you will lose your event listeners that were
     registered in config/bootstrap.php as the bootstrap is only executed once.
 
 .. _running-tests:
@@ -657,7 +657,7 @@ Fixture directory. You can also load fixtures from CakePHP core, or plugins::
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['plugin.DebugKit.articles', 'plugin.MyVendorName/MyPlugin.messages', 'core.comments'];
+        public $fixtures = ['plugin.DebugKit.Articles', 'plugin.MyVendorName/MyPlugin.Messages', 'core.Comments'];
     }
 
 Using the ``core`` prefix will load fixtures from CakePHP, and using a plugin
@@ -669,7 +669,7 @@ them using :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['app.articles', 'app.comments'];
+        public $fixtures = ['app.Articles', 'app.Comments'];
         public $autoFixtures = false;
 
         public function testMyFunction()
@@ -685,11 +685,11 @@ name::
 
     class ArticlesTest extends CakeTestCase
     {
-        public $fixtures = ['app.blog/articles', 'app.blog/comments'];
+        public $fixtures = ['app.Blog/Articles', 'app.Blog/Comments'];
     }
 
 In the above example, both fixtures would be loaded from
-``tests/Fixture/blog/``.
+``tests/Fixture/Blog/``.
 
 Testing Table Classes
 =====================
@@ -725,7 +725,7 @@ with the following contents::
 
     class ArticlesTableTest extends TestCase
     {
-        public $fixtures = ['app.articles'];
+        public $fixtures = ['app.Articles'];
     }
 
 In our test cases' variable ``$fixtures`` we define the set of fixtures that
@@ -747,7 +747,7 @@ now looks like this::
 
     class ArticlesTableTest extends TestCase
     {
-        public $fixtures = ['app.articles'];
+        public $fixtures = ['app.Articles'];
 
         public function setUp()
         {
@@ -868,7 +868,7 @@ Create a file named **ArticlesControllerTest.php** in your
     {
         use IntegrationTestTrait;
 
-        public $fixtures = ['app.articles'];
+        public $fixtures = ['app.Articles'];
 
         public function testIndex()
         {
@@ -1615,7 +1615,7 @@ the event data::
 
     class OrdersTableTest extends TestCase
     {
-        public $fixtures = ['app.orders'];
+        public $fixtures = ['app.Orders'];
 
         public function setUp()
         {
@@ -1701,7 +1701,7 @@ also need to prefix your plugin fixtures with ``plugin.blog.blog_posts``::
     class BlogPostsTableTest extends TestCase
     {
         // Plugin fixtures located in /plugins/Blog/tests/Fixture/
-        public $fixtures = ['plugin.blog.blog_posts'];
+        public $fixtures = ['plugin.Blog.BlogPosts'];
 
         public function testSomething()
         {

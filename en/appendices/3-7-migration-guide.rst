@@ -101,6 +101,8 @@ features will continue to function until 4.0.0 after which they will be removed.
   should use ``Application::addPlugin()``.
 * The following properties of ``Cake\Error\ExceptionRender`` are now protected:
   ``$error``, ``$controller``, ``$template`` and ``$method``.
+* Using underscored fixtures names in ``TestCase::$fixtures`` is deprecated.
+  Use CamelCased names instead. For e.g. ``app.FooBar``, ``plugin.MyPlugin.FooBar``.
 
 Soft Deprecations
 =================
