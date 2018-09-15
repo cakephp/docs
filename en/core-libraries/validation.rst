@@ -36,7 +36,7 @@ validate::
                 'message' => 'Titles need to be at least 10 characters long',
             ]
         ])
-        ->allowEmptyString('published')
+        ->allowDateTime('published')
         ->add('published', 'boolean', [
             'rule' => 'boolean'
         ])
@@ -106,7 +106,7 @@ of data:
 #. ``allowEmptyArray()`` Should be used when you want to accept an array.
 #. ``allowEmptyDate()`` Should be used when you want to accept an empty string,
    or an array that is marshalled into a date field.
-#. ``allowEmptyDate()`` Should be used when you want to accept an empty string,
+#. ``allowEmptyTime()`` Should be used when you want to accept an empty string,
    or an array that is marshalled into a time field.
 #. ``allowEmptyDateTime()`` Should be used when you want to accept an empty
    string or an array that is marshalled into a datetime or timestamp field.
@@ -115,9 +115,9 @@ of data:
 
 You can also use ``notEmpty()`` to mark a field invalid if any 'empty' value is
 used. In general, it is recommended that you do not use ``notEmpty()`` and use more
-specific validators instead. practice to use more specific validators.
+specific validators instead.
 
-The ``allowEmpty`` methods support a mode parameter that allows you to control
+The ``allowEmpty*`` methods support a mode parameter that allows you to control
 when a field can or cannot be empty:
 
 * ``false`` The field is not allowed to be empty.
@@ -128,7 +128,7 @@ when a field can or cannot be empty:
 
 An example of these methods in action is::
 
-    // Prior to 3.6.12 you should use allowEmpty().
+    // Prior to 3.6.12 you must use allowEmpty().
     $validator->allowEmptyString('published')
         ->notEmptyString('title', 'Title cannot be empty')
         ->notEmptyString('body', 'Body cannot be empty', 'create')
