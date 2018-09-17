@@ -326,7 +326,7 @@ File API
 
 .. php:method:: copy(string $dest, boolean $overwrite = true)
 
-    Copy the file to $dest.
+    Copy the file to the absolute path ``$dest``.
 
 .. php:method:: create()
 
