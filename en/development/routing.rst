@@ -1556,7 +1556,7 @@ into this::
 
 .. warning::
     If you are using the caching features of :ref:`routing-middleware` you must
-    define and URL filters in your application ``bootstrap()`` as filters are
+    define the URL filters in your application ``bootstrap()`` as filters are
     not part of the cached data.
 
 Handling Named Parameters in URLs
