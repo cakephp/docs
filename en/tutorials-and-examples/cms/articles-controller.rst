@@ -70,14 +70,14 @@ contain common site elements like headers, footers and navigation elements. Your
 application can have multiple layouts, and you can switch between them, but for
 now, let's just use the default layout.
 
-CakePHP's template files are stored in **src/Template** inside a folder
+CakePHP's template files are stored in **templates** inside a folder
 named after the controller they correspond to. So we'll have to create
 a folder named 'Articles' in this case. Add the following code to your
 application:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp -->
+    <!-- File: templates/Articles/index.php -->
 
     <h1>Articles</h1>
     <table>
@@ -150,11 +150,11 @@ Create the View Template
 ========================
 
 Let's create the view for our new 'view' action and place it in
-**src/Template/Articles/view.ctp**
+**templates/Articles/view.php**
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/view.ctp -->
+    <!-- File: templates/Articles/view.php -->
 
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
@@ -266,7 +266,7 @@ Here's our add view template:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/add.ctp -->
+    <!-- File: templates/Articles/add.php -->
 
     <h1>Add Article</h1>
     <?php
@@ -299,7 +299,7 @@ field specified, and use inflection to generate the label text. You can
 customize the label, the input or any other aspect of the form controls using
 options. The ``$this->Form->end()`` call closes the form.
 
-Now let's go back and update our **src/Template/Articles/index.ctp**
+Now let's go back and update our **templates/Articles/index.php**
 view to include a new "Add Article" link. Before the ``<table>``, add
 the following line::
 
@@ -376,7 +376,7 @@ The edit template should look like this:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/edit.ctp -->
+    <!-- File: templates/Articles/edit.php -->
 
     <h1>Edit Article</h1>
     <?php
@@ -396,7 +396,7 @@ articles:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp  (edit links added) -->
+    <!-- File: templates/Articles/index.php  (edit links added) -->
 
     <h1>Articles</h1>
     <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>
@@ -506,7 +506,7 @@ that allow users to delete articles:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp  (delete links added) -->
+    <!-- File: templates/Articles/index.php  (delete links added) -->
 
     <h1>Articles</h1>
     <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>

@@ -94,7 +94,7 @@ do the following::
         $this->set('article', $article);
     }
 
-    // View/Articles/edit.ctp:
+    // View/Articles/edit.php:
     // Since $article->isNew() is false, we will get an edit form
     <?= $this->Form->create($article) ?>
 
@@ -287,7 +287,7 @@ Use ``'url' => false`` if you don't want to output a URL as the form action.
 Using Custom Validators
 -----------------------
 
-Often models will have multiple validator sets, you can have FormHelper 
+Often models will have multiple validator sets, you can have FormHelper
 mark fields required based on the specific validator your controller
 action is going to apply. For example, your Users table has specific validation
 rules that only apply when an account is being registered::
@@ -2078,7 +2078,7 @@ Example::
             ->notEmpty('ticket');
     }
 
-    // And inside Templates/Tickets/add.ctp you have:
+    // And inside Templates/Tickets/add.php you have:
     echo $this->Form->text('ticket');
 
     if ($this->Form->isFieldError('ticket')) {
@@ -2315,7 +2315,7 @@ SecurityComponent.
 
 For example::
 
-    // In Templates/Tickets/index.ctp
+    // In Templates/Tickets/index.php
     <?= $this->Form->postButton('Delete Record', ['controller' => 'Tickets', 'action' => 'delete', 5]) ?>
 
 Will output HTML similar to:

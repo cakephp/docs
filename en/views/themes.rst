@@ -26,21 +26,21 @@ To use themes, set the theme name in your controller's action or
     }
 
 Theme template files need to be within a plugin with the same name. For example,
-the above theme would be found in **plugins/Modern/src/Template**.
+the above theme would be found in **plugins/Modern/templates**.
 It's important to remember that CakePHP expects PascalCase plugin/theme names. Beyond
-that, the folder structure within the **plugins/Modern/src/Template** folder is
-exactly the same as **src/Template/**.
+that, the folder structure within the **plugins/Modern/templates** folder is
+exactly the same as **templates/**.
 
 For example, the view file for an edit action of a Posts controller would reside
-at **plugins/Modern/src/Template/Posts/edit.ctp**. Layout files would reside in
-**plugins/Modern/src/Template/Layout/**. You can provide customized templates
+at **plugins/Modern/templates/Posts/edit.php**. Layout files would reside in
+**plugins/Modern/templates/Layout/**. You can provide customized templates
 for plugins with a theme as well. If you had a plugin named 'Cms', that
 contained a TagsController, the Modern theme could provide
-**plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ctp** to replace the edit
+**plugins/Modern/templates/Plugin/Cms/Tags/edit.php** to replace the edit
 template in the plugin.
 
 If a view file can't be found in the theme, CakePHP will try to locate the view
-file in the **src/Template/** folder. This way, you can create master template files
+file in the **templates/** folder. This way, you can create master template files
 and simply override them on a case-by-case basis within your theme folder.
 
 If your theme also acts as a plugin, don't forget to ensure it is loaded in

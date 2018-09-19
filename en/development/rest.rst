@@ -104,11 +104,11 @@ serialize into XML.
 
 If we wanted to modify the data before it is converted into XML we should not
 define the ``_serialize`` view variable, and instead use template files. We place
-the REST views for our RecipesController inside **src/Template/Recipes/xml**. We can also use
+the REST views for our RecipesController inside **templates/Recipes/xml**. We can also use
 the :php:class:`Xml` for quick-and-easy XML output in those views. Here's what
 our index view might look like::
 
-    // src/Template/Recipes/xml/index.ctp
+    // templates/Recipes/xml/index.php
     // Do some formatting and manipulation on
     // the $recipes array.
     $xml = Xml::fromArray(['response' => $recipes]);

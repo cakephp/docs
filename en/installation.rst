@@ -105,7 +105,7 @@ rest of your source code.
 
 You can now visit the path to where you installed your CakePHP application and
 see the default home page. To change the content of this page, edit
-**src/Template/Pages/home.ctp**.
+**templates/Pages/home.php**.
 
 Although composer is the recommended installation method, there are
 pre-installed downloads available on
