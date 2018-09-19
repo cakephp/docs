@@ -26,7 +26,7 @@ Breaking Changes
 In addition to the removal of deprecated features there have been breaking
 changes made:
 
-* Templates have been moved from ``src/Template`` to ``templates`` folder on
+* Templates have been moved from ``src/Template/`` to ``templates/`` folder on
   app and plugin root.
 * The template extension has also been changed from ``.ctp`` to ``.php``.
 * The Session cookie name is no longer set to ``CAKEPHP`` by default. Instead
