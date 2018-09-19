@@ -1554,6 +1554,11 @@ into this::
 
     Router::url(['plugin' => 'MyPlugin', 'controller' => 'Locations', 'action' => 'index', 'language' => 'es']);
 
+.. warning::
+    If you are using the caching features of :ref:`routing-middleware` you must
+    define and URL filters in your application ``bootstrap()`` as filters are
+    not part of the cached data.
+
 Handling Named Parameters in URLs
 =================================
 
