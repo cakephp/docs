@@ -573,7 +573,7 @@ ics generated on the fly from a string::
     {
         $icsString = $this->Calendars->generateIcs();
         $response = $this->response;
-        $response->body($icsString);
+        $response = $response->withStringBody($icsString);
 
         $response = $response->withType('ics');
 
