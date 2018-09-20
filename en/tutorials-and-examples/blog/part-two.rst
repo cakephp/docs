@@ -145,14 +145,14 @@ Remember in the last section how we assigned the 'articles' variable
 to the view using the ``set()`` method? That would hand down the query
 object collection to the view to be invoked with a ``foreach`` iteration.
 
-CakePHP's template files are stored in **src/Template** inside a folder
+CakePHP's template files are stored in **templates** inside a folder
 named after the controller they correspond to (we'll have to create
 a folder named 'Articles' in this case). To format this article data in a
 nice table, our view code might look something like this:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp -->
+    <!-- File: templates/Articles/index.php -->
 
     <h1>Blog articles</h1>
     <table>
@@ -241,11 +241,11 @@ present in the database, or the id is false the ``get()`` function will throw
 a ``NotFoundException``.
 
 Now let's create the view for our new 'view' action and place it in
-**src/Template/Articles/view.ctp**
+**templates/Articles/view.php**
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/view.ctp -->
+    <!-- File: templates/Articles/view.php -->
 
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
@@ -361,7 +361,7 @@ Here's our add view:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/add.ctp -->
+    <!-- File: templates/Articles/add.php -->
 
     <h1>Add Article</h1>
     <?php
@@ -395,7 +395,7 @@ field specified.
 The ``$this->Form->end()`` call ends the form. Outputting hidden inputs if
 CSRF/Form Tampering prevention is enabled.
 
-Now let's go back and update our **src/Template/Articles/index.ctp**
+Now let's go back and update our **templates/Articles/index.php**
 view to include a new "Add Article" link. Before the ``<table>``, add
 the following line::
 
@@ -485,7 +485,7 @@ The edit view might look something like this:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/edit.ctp -->
+    <!-- File: templates/Articles/edit.php -->
 
     <h1>Edit Article</h1>
     <?php
@@ -507,7 +507,7 @@ articles:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp  (edit links added) -->
+    <!-- File: templates/Articles/index.php  (edit links added) -->
 
     <h1>Blog articles</h1>
     <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>
@@ -572,7 +572,7 @@ links that allow users to delete articles, however:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp (delete links added) -->
+    <!-- File: templates/Articles/index.php (delete links added) -->
 
     <h1>Blog articles</h1>
     <p><?= $this->Html->link('Add Article', ['action' => 'add']) ?></p>

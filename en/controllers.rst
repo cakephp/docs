@@ -126,8 +126,8 @@ in **src/Controller/RecipesController.php** and contain::
         }
     }
 
-The template files for these actions would be **src/Template/Recipes/view.ctp**,
-**src/Template/Recipes/share.ctp**, and **src/Template/Recipes/search.ctp**. The
+The template files for these actions would be **templates/Recipes/view.php**,
+**templates/Recipes/share.php**, and **templates/Recipes/search.php**. The
 conventional view file name is the lowercased and underscored version of the
 action name.
 
@@ -219,7 +219,7 @@ you've submitted using the ``Controller::set()`` method), places the view inside
 
 The default view file used by render is determined by convention.
 If the ``search()`` action of the RecipesController is requested,
-the view file in **src/Template/Recipes/search.ctp** will be rendered::
+the view file in **templates/Recipes/search.php** will be rendered::
 
     namespace App\Controller;
 
@@ -228,7 +228,7 @@ the view file in **src/Template/Recipes/search.ctp** will be rendered::
     // ...
         public function search()
         {
-            // Render the view in src/Template/Recipes/search.ctp
+            // Render the view in templates/Recipes/search.php
             $this->render();
         }
     // ...
@@ -240,10 +240,10 @@ an alternate view file by specifying a view file name as first argument of
 ``Controller::render()`` method.
 
 If ``$view`` starts with '/', it is assumed to be a view or
-element file relative to the **src/Template** folder. This allows
+element file relative to the **templates** folder. This allows
 direct rendering of elements, very useful in AJAX calls::
 
-    // Render the element in src/Template/Element/ajaxreturn.ctp
+    // Render the element in templates/Element/ajaxreturn.php
     $this->render('/Element/ajaxreturn');
 
 The second parameter ``$layout`` of ``Controller::render()`` allows you to specify the layout
@@ -266,8 +266,8 @@ have called ``Controller::render()``, CakePHP will not try to re-render the view
         }
     }
 
-This would render **src/Template/Posts/custom_file.ctp** instead of
-**src/Template/Posts/my_action.ctp**.
+This would render **templates/Posts/custom_file.php** instead of
+**templates/Posts/my_action.php**.
 
 You can also render views inside plugins using the following syntax:
 ``$this->render('PluginName.PluginController/custom_file')``.
@@ -283,7 +283,7 @@ For example::
         }
     }
 
-This would render **plugins/Users/src/Template/UserDetails/custom_file.ctp**
+This would render **plugins/Users/templates/UserDetails/custom_file.php**
 
 Redirecting to Other Pages
 ==========================

@@ -117,10 +117,10 @@ View Conventions
 
 View template files are named after the controller functions they display, in an
 underscored form. The ``viewAll()`` function of the ``ArticlesController`` class
-will look for a view template in **src/Template/Articles/view_all.ctp**.
+will look for a view template in **templates/Articles/view_all.php**.
 
 The basic pattern is
-**src/Template/Controller/underscored_function_name.ctp**.
+**templates/Controller/underscored_function_name.php**.
 
 .. note::
 
@@ -143,7 +143,7 @@ Here's a final example that ties the conventions together:
 -  Entity class: ``Article``, found at **src/Model/Entity/Article.php**
 -  Controller class: ``ArticlesController``, found at
    **src/Controller/ArticlesController.php**
--  View template, found at **src/Template/Articles/index.ctp**
+-  View template, found at **templates/Articles/index.php**
 
 Using these conventions, CakePHP knows that a request to
 ``http://example.com/articles`` maps to a call on the ``index()`` function of the
@@ -166,7 +166,7 @@ The convention is to use lowercase letters and dashes as separator.
 
     // Bad
     cakephp/foo-bar
-    
+
     // Good
     your-name/cakephp-foo-bar
 

@@ -75,7 +75,7 @@ You can then use your type class in your controllers::
 
 We would also need to create a basic view for our indexed articles::
 
-    // in src/Template/Articles/add.ctp
+    // in templates/Articles/add.php
     <?= $this->Form->create($article) ?>
     <?= $this->Form->control('title') ?>
     <?= $this->Form->control('body') ?>

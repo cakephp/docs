@@ -118,7 +118,7 @@ So, for example, when baking a shell like so:
 
     bin/cake bake shell Foo
 
-The template used (**vendor/cakephp/bake/src/Template/Bake/Shell/shell.twig**)
+The template used (**vendor/cakephp/bake/templates/Bake/Shell/shell.twig**)
 looks like this::
 
     <?php
@@ -187,9 +187,9 @@ create your own bake 'theme' which allows you to replace some or all of the
 templates that bake uses. The best way to do this is:
 
 #. Bake a new plugin. The name of the plugin is the bake 'theme' name
-#. Create a new directory **plugins/[name]/src/Template/Bake/Template/**.
+#. Create a new directory **plugins/[name]/templates/Bake/Template/**.
 #. Copy any templates you want to override from
-   **vendor/cakephp/bake/src/Template/Bake/Template** to matching files in your
+   **vendor/cakephp/bake/templates/Bake/Template** to matching files in your
    plugin.
 #. When running bake use the ``--theme`` option to specify the bake-theme you
    want to use. To avoid having to specify this option in each call, you can also
@@ -206,9 +206,9 @@ If you wish to modify the default output produced by the "bake" command, you can
 create your own bake templates in your application. This way does not use the
 ``--theme`` option in the command line when baking. The best way to do this is:
 
-#. Create a new directory **/src/Template/Bake/**.
+#. Create a new directory **/templates/Bake/**.
 #. Copy any templates you want to override from
-   **vendor/cakephp/bake/src/Template/Bake/** to matching files in your
+   **vendor/cakephp/bake/templates/Bake/** to matching files in your
    application.
 
 Creating New Bake Command Options
@@ -253,7 +253,7 @@ FooTask.php file should look like::
     }
 
 Once this file has been created, we need to create a template that bake can use
-when generating code. Create **src/Template/Bake/foo.twig**. In this file we'll
+when generating code. Create **templates/Bake/foo.twig**. In this file we'll
 add the following content::
 
     <?php
