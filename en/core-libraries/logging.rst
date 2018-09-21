@@ -154,7 +154,7 @@ interface as it only requires you to implement the ``log()`` method.
 Error and Exception Logging
 ===========================
 
-Errors and Exceptions can also be logged. By configuring the co-responding
+Errors and Exceptions can also be logged. By configuring the corresponding
 values in your app.php file.  Errors will be displayed when debug > 0 and logged
 when debug is ``false``. To log uncaught exceptions, set the ``log`` option to
 ``true``. See :doc:`/development/configuration` for more information.
