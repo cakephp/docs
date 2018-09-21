@@ -11,7 +11,7 @@ In this tutorial you will create a simple application with
 :doc:`/core-libraries/components/authentication` and
 :doc:`/core-libraries/components/access-control-lists`. This
 tutorial assumes you have read the :doc:`/tutorials-and-examples/blog/blog`
-tutorial, and you are familiar with
+and you are familiar with
 :doc:`/console-and-shells/code-generation-with-bake`. You should have
 some experience with CakePHP, and be familiar with MVC concepts.
 This tutorial is a brief introduction to the
@@ -116,8 +116,8 @@ Preparing to Add Auth
 =====================
 
 We now have a functioning CRUD application. Bake should have setup
-all the relations we need, if not add them in now. There are a few
-other pieces that need to be added before we can add the Auth and
+all the relations we need, otherwise add them right now. There are a
+few other pieces that need to be added before we can add the Auth and
 Acl components. First add a login and logout action to your
 ``UsersController``::
 

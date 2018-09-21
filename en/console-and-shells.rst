@@ -184,7 +184,7 @@ and see your name printed out. Any public method not prefixed by an ``_`` is all
 called from the command line. In our ``hey_there`` method we also used ``$this->args``, this
 property contains an array of all the positional arguments provided to a command. You can
 also use switches or options on shell applications, these are available at ``$this->params``,
-and through the ``param()`` method, but we'll cover that in a bit.
+and through the ``param()`` method. We'll cover that in a bit.
 
 When using a ``main()`` method you won't be able to use the positional arguments
 or parameters. This is because the first positional argument or option is

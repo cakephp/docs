@@ -25,9 +25,8 @@ Model definition, for example::
 
 In the example above, the ``$validate`` array is added to the User
 Model, but the array contains no validation rules. Assuming that
-the users table has login, password, email and born fields, the
-example below shows some simple validation rules that apply to
-those fields::
+the users table has login, email and born fields, the example below
+shows some simple validation rules that apply to those fields::
 
     class User extends AppModel {
         public $validate = array(
@@ -46,8 +45,8 @@ the defined rules.
 
 CakePHP has many validation rules and using them can be quite easy.
 Some of the built-in rules allow you to verify the formatting of
-emails, URLs, and credit card numbers – but we'll cover these in
-detail later on.
+emails, URLs, and credit card numbers – we'll cover these in detail
+later on.
 
 Here is a more complex validation example that takes advantage of
 some of these built-in validation rules::
