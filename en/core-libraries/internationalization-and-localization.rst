@@ -76,9 +76,9 @@ messages::
                 /de
                     my_plugin.po
 
-Translation folders can either be the two letter ISO code of the language or the
-full locale name such as ``fr_FR``, ``es_AR``, ``da_DK`` which contains both the
-language and the country where it is spoken.
+Translation folders can be the two or three letter ISO code of the language or
+the full locale name such as ``fr_FR``, ``es_AR``, ``da_DK`` which contains
+both the language and the country where it is spoken.
 
 An example translation file could look like this:
 

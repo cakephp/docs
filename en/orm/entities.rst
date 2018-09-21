@@ -159,8 +159,8 @@ persisted. For example::
 
 The accessor would be run when getting the property through any of these two ways::
 
-    echo $user->title;
-    echo $user->get('title');
+    echo $article->title;
+    echo $article->get('title');
     
 .. note::
 

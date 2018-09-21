@@ -263,7 +263,7 @@ If no parameter is passed, the returned URL will use the following rules:
 - Returns the normalized URL from the ``redirect`` query string value if it is
   present and for the same domain the current app is running on. Before 3.4.0,
   the ``Auth.redirect`` session value was used.
-- If there is no query string/session value and there is a config
+- If there is no query string/session value and there is a config with
   ``loginRedirect``, the ``loginRedirect`` value is returned.
 - If there is no redirect value and no ``loginRedirect``, ``/`` is returned.
 
