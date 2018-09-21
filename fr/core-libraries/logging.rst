@@ -172,9 +172,9 @@ Journalisation des Erreurs et des Exception
 
 Les erreurs et les exception peuvent elles aussi être journalisées. En
 configurant les valeurs correspondantes dans votre fichier app.php.
-Les erreurs seront affichées quand debug > 0 et loguées quand debug est à
-`false`. Définir l'option ``log`` à ``true`` pour logger les exceptions non
-capturées. Voir :doc:`/development/configuration` pour plus d'information.
+Les erreurs seront affichées quand debug est à ``true`` et loguées quand debug
+est à ``false``. Définir l'option ``log`` à ``true`` pour logger les exceptions
+non capturées. Voir :doc:`/development/configuration` pour plus d'information.
 
 Interagir avec les Flux de Log
 ==============================
