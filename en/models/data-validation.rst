@@ -25,9 +25,8 @@ Model definition, for example::
 
 In the example above, the ``$validate`` array is added to the User
 Model, but the array contains no validation rules. Assuming that
-the users table has login, password, email and born fields, the
-example below shows some simple validation rules that apply to
-those fields::
+the users table has login, email and born fields, the example below
+shows some simple validation rules that apply to those fields::
 
     class User extends AppModel {
         public $validate = array(
