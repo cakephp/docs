@@ -11,7 +11,7 @@ In this tutorial you will create a simple application with
 :doc:`/core-libraries/components/authentication` and
 :doc:`/core-libraries/components/access-control-lists`. This
 tutorial assumes you have read the :doc:`/tutorials-and-examples/blog/blog`
-tutorial, and you are familiar with
+and you are familiar with
 :doc:`/console-and-shells/code-generation-with-bake`. You should have
 some experience with CakePHP, and be familiar with MVC concepts.
 This tutorial is a brief introduction to the
