@@ -262,7 +262,7 @@ command prior to running ``phpunit`` so that any dependencies are installed:
 
 .. code-block:: bash
 
-    $ composer install --dev
+    $ composer install
 
 From your application's root directory. To run tests for a plugin that is part
 of your application source, first ``cd`` into the plugin directory, then use
