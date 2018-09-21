@@ -26,7 +26,7 @@ Configuration des flux d'un log (journal)
 La configuration de ``Log`` doit être faite pendant la phase de bootstrap
 de votre application. Le fichier **config/app.php** est justement prévu pour
 ceci. Vous pouvez définir autant de jounaux que votre application nécessite.
-Les journaux doivent être configurés en utilisant :php:class:`Cake\\Core\\Log`.
+Les journaux doivent être configurés en utilisant :php:class:`Cake\\Log\\Log`.
 Un exemple serait::
 
     use Cake\Log\Log;
