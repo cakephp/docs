@@ -116,8 +116,8 @@ Preparing to Add Auth
 =====================
 
 We now have a functioning CRUD application. Bake should have setup
-all the relations we need, if not add them in now. There are a few
-other pieces that need to be added before we can add the Auth and
+all the relations we need, otherwise add them right now. There are a
+few other pieces that need to be added before we can add the Auth and
 Acl components. First add a login and logout action to your
 ``UsersController``::
 
