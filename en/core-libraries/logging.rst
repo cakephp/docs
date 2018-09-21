@@ -26,7 +26,7 @@ Logging Configuration
 Configuring ``Log`` should be done during your application's bootstrap phase.
 The **config/app.php** file is intended for just this.  You can define
 as many or as few loggers as your application needs.  Loggers should be
-configured using :php:class:`Cake\\Core\\Log`. An example would be::
+configured using :php:class:`Cake\\Log\\Log`. An example would be::
 
     use Cake\Log\Log;
 
