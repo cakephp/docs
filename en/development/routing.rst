@@ -1037,7 +1037,7 @@ PATCH       /recipes/123.format   RecipesController::edit(123)
 DELETE      /recipes/123.format   RecipesController::delete(123)
 =========== ===================== ==============================
 
-Ths HTTP method being used is detected from a few different sources.
+The HTTP method being used is detected from a few different sources.
 The sources in order of preference are:
 
 #. The ``_method`` POST variable
