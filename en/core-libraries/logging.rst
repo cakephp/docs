@@ -186,7 +186,7 @@ The configured directory must be writable by the web server user in
 order for logging to work correctly.
 
 You can configure additional/alternate FileLog locations when configuring
-a logger.FileLog accepts a ``path`` which allows for
+a logger. FileLog accepts a ``path`` which allows for
 custom paths to be used::
 
     Log::config('custom_path', [
