@@ -918,6 +918,7 @@ databases that limit the amount of bound parameters per query, such as
 You can also make the strategy permanent for the association by doing::
 
     $articles->Comments->setStrategy('subquery');
+
     // Prior to 3.4.0
     $articles->Comments->strategy('subquery');
 
