@@ -46,8 +46,8 @@ the defined rules.
 
 CakePHP has many validation rules and using them can be quite easy.
 Some of the built-in rules allow you to verify the formatting of
-emails, URLs, and credit card numbers – but we'll cover these in
-detail later on.
+emails, URLs, and credit card numbers – we'll cover these in detail
+later on.
 
 Here is a more complex validation example that takes advantage of
 some of these built-in validation rules::
