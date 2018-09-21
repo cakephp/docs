@@ -10,7 +10,7 @@ Application Simple contrôlée par Acl
 Dans ce tutoriel, vous allez créer une application simple avec
 :doc:`/core-libraries/components/authentication` et
 :doc:`/core-libraries/components/access-control-lists`. Ce tutoriel suppose que
-vous avez lu le tutoriel du :doc:`/tutorials-and-examples/blog/blog`, et que
+vous avez lu le :doc:`/tutorials-and-examples/blog/blog` et que
 vous êtes familier avec :doc:`/console-and-shells/code-generation-with-bake`.
 Vous devrez avoir un peu d'expérience avec CakePHP, et être familier avec les
 concepts MVC. Ce tutoriel est une briève introduction à
