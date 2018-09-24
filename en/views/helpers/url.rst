@@ -71,7 +71,7 @@ URL for named route::
 
     // Assuming route is setup like:
     // $router->connect(
-    //     '/products/:slug',
+    //     '/products/{slug}',
     //     [
     //         'controller' => 'Products',
     //         'action' => 'view',
@@ -119,13 +119,6 @@ methods for each of these asset types::
 
     // Or disable timestamps for one method call.
     $this->Url->css('app.css', ['timestamp' => false]);
-
-.. versionadded:: 3.2.4
-    The asset helper methods were added in 3.2.4.
-
-.. versionadded:: 3.6.0
-    The ``timestamp`` option was added to asset helper methods.
-
 
 For further information check
 `Router::url <https://api.cakephp.org/3.x/class-Cake.Routing.Router.html#_url>`_
