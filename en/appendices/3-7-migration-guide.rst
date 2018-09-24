@@ -119,7 +119,6 @@ be removed until 5.0.0:
 Behavior Changes
 ================
 
-
 * ``Cake\Database\Type\IntegerType`` will now raise an exception when values
   are not numeric when preparing SQL statements and coverting database results
   to PHP types.
@@ -134,6 +133,8 @@ Behavior Changes
 * ``ExceptionRenderer`` will now **always** call handler methods for custom
   application exception classes. Previously, custom exception class handler
   methods would only be invoked in debug mode.
+* ``Router::url()`` will now default the ``_method`` key to ``GET`` when
+  generating URLs with ``Router::url()``.
 
 
 New Features
