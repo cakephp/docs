@@ -16,6 +16,8 @@ Deprecations
 The following is a list of deprecated methods, properties and behaviors. These
 features will continue to function until 4.0.0 after which they will be removed.
 
+* ``Cake\ORM\Association::className()`` has been deprecated. Use
+  ``getClassName()`` and ``setClassName()`` instead.
 * Using ``Cake\Database\Query::join()`` to read information is deprecated.
   Instead use ``Query::clause('join')``.
 * Using ``Cake\Database\Query::from()`` to read information is deprecated.
