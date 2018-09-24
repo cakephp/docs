@@ -7,7 +7,7 @@ un couplage plus lâche et une cohésion plus élevée. La cohésion signifie
 que toutes les méthodes et propriétés pour une classe sont fortement liées à la
 classe elle-même et qu'elles n'essaient pas de faire le travail que d'autre
 objets devraient faire, alors qu'un couplage plus lâche est la mesure du degré
-de connexions d'une classe par rapport aux objets externes, et comment cette
+de connexion d'une classe par rapport aux objets externes, et comment cette
 classe en dépend.
 
 Alors que la plupart des structures CakePHP et des librairies par défaut vous
@@ -16,22 +16,22 @@ communiquer proprement avec les autres parties du système sans avoir à coder e
 dur ces dépendances, ce qui réduit la cohésion et augmente le couplage de
 classe. Un motif de conception (design pattern) fonctionnant très bien dans
 l'ingénierie software est le modèle obervateur (Observer pattern), où les objets
-peuvent générer des événements (events) et notifier à des écouteurs (listener)
+peuvent générer des événements (events) et notifier à des écouteurs (listeners)
 possiblement anonymes des changements d'états internes.
 
 Les écouteurs (listener) dans le modèle observateur (Observer pattern) peuvent
 s'abonner à de tels événements et choisir d'agir sur eux, modifier l'état du
 sujet ou simplement créer des fichiers de logs. Si vous avez utilisé JavaScript
-dans le passé, vous avez la chance d'être déjà familier avec la programmation
-événementielle.
+dans le passé, il y a de fortes chances que vous soyez déjà familier avec la 
+programmation événementielle.
 
 CakePHP émule plusieurs aspects sur la façon dont les événements sont déclenchés
-et managés dans des frameworks JavaScript comme le populaire jQuery, tout en
+et gérés dans des frameworks JavaScript comme le populaire jQuery, tout en
 restant fidèle à sa conception orientée objet. Dans cette implémentation, un
 objet événement est transporté a travers tous les écouteurs qui détiennent
 l'information et la possibilité d'arrêter la propagation des événements à tout
 moment. Les écouteurs peuvent s'enregistrer eux-mêmes ou peuvent déléguer cette
-tâche a d'autres objets et peuvent modifier l'état et l'événement lui-même pour
+tâche à d'autres objets et peuvent modifier l'état et l'événement lui-même pour
 le reste des callbacks.
 
 Le sous-système d'événement est au cœur des callbacks de Model, de Behavior, de
@@ -47,7 +47,10 @@ mail à l'utilisateur ou décrémenter les articles depuis le stock, c'est votre
 souhait de traiter tout cela séparément dans un autre plugin ou dans le code de
 l'application. Typiquement, quand vous n'utilisez pas directement le modèle
 observateur (observer pattern) vous feriez cela en attachant des behaviors à la
-volée à vos models, et peut être quelques components aux controllers.
+volée à vos models, et peut être quelques components aux controllers. Faire 
+comme ceci représente des difficultés la plupart du temps, parce qu'il va falloir
+le code nécessaire pour charger ces behaviors ou pour les attacher aux controllers
+de votre plugin.
 
 A la place, vous pouvez utiliser les événements pour vous permettre de séparer
 clairement ce qui concerne votre code et permettre d'ajouter des besoins
@@ -81,15 +84,15 @@ garder votre model Orders propre, vous pouvez utiliser les événements::
 
 Le code ci-dessus vous permet de notifier aux autres parties de l'application
 qu'une commande a été créée. Vous pouvez ensuite faire des tâches comme envoyer
-les notifications par mail, mettre à jour le stock, créer un fichier de log des
-statistiques pertinents et d'autres tâches dans les objets séparés qui se
+les notifications par mail, mettre à jour le stock, enregistrer les
+statistiques pertinentes et d'autres tâches dans des objets séparés qui se
 focalisent sur ces préoccupations.
 
 Accéder aux Gestionnaires d'Événements
 ======================================
 
 Dans CakePHP, les événements sont attrapés par les gestionnaires d'événements.
-Les gestionnaires d'événements sont disponible dans chaque Table, View et
+Les gestionnaires d'événements sont disponibles dans chaque Table, View et
 Controller en utilisant ``eventManager()``::
 
     $events = $this->eventManager();
@@ -131,10 +134,10 @@ gestionnaire global entraîne une complexité supplémentaire à gérer.
 La méthode :php:meth:`Cake\\Event\\EventManager::dispatch()` accepte l'objet
 event en argument et notifie à tous les écouteurs et les callbacks qui passent
 cet objet. Les écouteurs vont gérer toute la logique supplémentaire autour de
-l'événement ``afterPlace``, vous pouvez faire le log du time, envoyer les
-emails, mettre à jour les statistiques d'un utilisateur, si possible dans des
-objets séparés et même le déléguer à des tâches offline si vous avez ce
-besoin.
+l'événement ``afterPlace``, vous pouvez enregistrer l'horodatage dans les
+journaux, envoyer les emails, mettre à jour les statistiques d'un utilisateur,
+si possible dans des objets séparés et même le déléguer à des tâches offline si
+vous avez ce besoin.
 
 .. _tracking-events:
 
@@ -474,7 +477,7 @@ Pour vérifier si un événement a été stoppé, vous appelez la méthode
         // ...
     }
 
-Dans l'exemple précédent, l'ordre ne serait pas sauvegardé si l'événement est
+Dans l'exemple précédent, la commande ne serait pas sauvegardée si l'événement est
 stoppé pendant le processus ``beforePlace``.
 
 Obtenir des Résultats d'Evenement

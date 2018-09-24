@@ -587,6 +587,11 @@ ics generated on the fly from a string::
     {
         $icsString = $this->Calendars->generateIcs();
         $response = $this->response;
+        
+        // Inject string content into response body (3.4.0+)
+        $response = $response->withStringBody($icsString);
+        
+        // Inject string content into response body (before 3.4.0)
         $response->body($icsString);
 
         $response = $response->withType('ics');

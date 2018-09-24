@@ -262,7 +262,7 @@ command prior to running ``phpunit`` so that any dependencies are installed:
 
 .. code-block:: bash
 
-    $ composer install --dev
+    $ composer install
 
 From your application's root directory. To run tests for a plugin that is part
 of your application source, first ``cd`` into the plugin directory, then use
@@ -355,7 +355,7 @@ If you are using ``<testsuites>`` to use fixtures from plugins that you have
 installed with composer, the plugin's ``composer.json`` file should add the
 fixture namespace to the autoload section. Example::
 
-    "autoload": {
+    "autoload-dev": {
         "psr-4": {
             "PluginName\\Test\\Fixture\\": "tests/Fixture/"
         }

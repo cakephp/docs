@@ -13,6 +13,10 @@ CLI server by visiting ``http://localhost:8765``
 in your web-browser. You can close the server by pressing ``CTRL-C`` in your
 terminal.
 
+.. note::
+
+    Try ``bin/cake server -H 0.0.0.0`` if the server is unreachable from other hosts.
+
 Changing the Port and Document Root
 ===================================
 

@@ -427,9 +427,9 @@ You can also create ``OR`` conditions::
 
     $query = $users->findAllByUsernameOrEmail('joebob', 'joe@example.com');
 
-While you can use either OR or AND conditions, you cannot combine the two in a
-single dynamic finder. Other query options like ``contain`` are also not
-supported with dynamic finders. You should use :ref:`custom-find-methods` to
+While you can use either ``OR`` or ``AND`` conditions, you cannot combine the
+two in a single dynamic finder. Other query options like ``contain`` are also
+not supported with dynamic finders. You should use :ref:`custom-find-methods` to
 encapsulate more complex queries.  Lastly, you can also combine dynamic finders
 with custom finders::
 
@@ -446,8 +446,9 @@ Once you have a query object from a dynamic finder, you'll need to call
 
 .. note::
 
-    While dynamic finders make it simple to express queries, they come with some
-    additional performance overhead.
+    While dynamic finders make it simple to express queries, they add a small
+    amount of overhead. You cannot call ``findBy`` methods from a query object.
+    When using a finder chain the dynamic finder must be called first.
 
 Retrieving Associated Data
 ==========================
@@ -917,6 +918,7 @@ databases that limit the amount of bound parameters per query, such as
 You can also make the strategy permanent for the association by doing::
 
     $articles->Comments->setStrategy('subquery');
+
     // Prior to 3.4.0
     $articles->Comments->strategy('subquery');
 

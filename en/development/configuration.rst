@@ -115,6 +115,12 @@ Asset.timestamp
     .. versionchanged:: 3.6.0
         As of 3.6.0, you can override this global setting when linking assets
         using the ``timestamp`` option.
+Asset.cacheTime
+    Sets the asset cache time. This determines the http header ``Cache-Control``'s
+    ``max-age``, and the http header's ``Expire``'s time for assets.
+    This can take anything that you version of php's strtotime function can take.
+    <http://php.net/manual/en/function.strtotime.php>
+    The default is ``+1 day``.
 
 Database Configuration
 ----------------------

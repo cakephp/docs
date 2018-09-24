@@ -1037,7 +1037,7 @@ PATCH       /recipes/123.format   RecipesController::edit(123)
 DELETE      /recipes/123.format   RecipesController::delete(123)
 =========== ===================== ==============================
 
-Ths HTTP method being used is detected from a few different sources.
+The HTTP method being used is detected from a few different sources.
 The sources in order of preference are:
 
 #. The ``_method`` POST variable
@@ -1553,6 +1553,11 @@ This will alter the following route::
 into this::
 
     Router::url(['plugin' => 'MyPlugin', 'controller' => 'Locations', 'action' => 'index', 'language' => 'es']);
+
+.. warning::
+    If you are using the caching features of :ref:`routing-middleware` you must
+    define the URL filters in your application ``bootstrap()`` as filters are
+    not part of the cached data.
 
 Handling Named Parameters in URLs
 =================================

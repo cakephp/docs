@@ -567,7 +567,7 @@ to ``PaginatorHelper``, or use ``options()`` to set the default model::
     echo $this->Paginator->sort('title', ['model' => 'Articles']);
 
     // Set the default model.
-    $this->Paginator->options(['defaultModel' => 'Articles']);
+    $this->Paginator->options(['model' => 'Articles']);
     echo $this->Paginator->sort('title');
 
 By using the ``model`` option, ``PaginatorHelper`` will automatically use the

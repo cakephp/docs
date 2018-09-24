@@ -1,7 +1,7 @@
 환영합니다
 ##########
 
-CakePHP3는 **PHP 7.1** (최소사양 PHP |minphpversion|) 이상 버전에 작동하는 웹 개발 프레임워크 입니다.
+CakePHP3는 **PHP 7.2** (최소사양 PHP |minphpversion|) 이상 버전에 작동하는 웹 개발 프레임워크 입니다.
 CakePHP3의 기초 입문은 :doc:`CakePHP개요 </intro>` 를 읽어 주시기 바랍니다.
 
 CakePHP 쿡북은 공개적으로 개발되고 커뮤니티 수정이 가능한 문서 프로젝트 입니다.

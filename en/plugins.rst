@@ -108,14 +108,14 @@ application's ``bootstrap()`` function::
 
     // In src/Application.php. Requires at least 3.6.0
     use Cake\Http\BaseApplication;
-    use ContactManager\Plugin as ContactManager;
+    use ContactManager\Plugin as ContactManagerPlugin;
 
     class Application extends BaseApplication {
         public function bootstrap()
         {
             parent::bootstrap();
             // Load the contact manager plugin by class name
-            $this->addPlugin(ContactManager::class);
+            $this->addPlugin(ContactManagerPlugin::class);
 
             // Load a plugin with a vendor namespace by 'short name'
             $this->addPlugin('AcmeCorp/ContactManager');
@@ -172,16 +172,19 @@ allow plugin authors to set defaults, which can be configured by you in your
 appliation::
 
     // In Application::bootstrap()
-
+    use ContactManager\Plugin as ContactManagerPlugin;
+    
     // Disable routes for the ContactManager plugin
-    $this->addPlugin(ContactManager::class, ['routes' => false]);
+    $this->addPlugin(ContactManagerPlugin::class, ['routes' => false]);
 
 You can configure hooks with array options, or the methods provided by plugin
 classes::
 
     // In Application::bootstrap()
+    use ContactManager\Plugin as ContactManagerPlugin;
+    
     // Use the disable/enable to configure hooks.
-    $plugin = new ContactManager();
+    $plugin = new ContactManagerPlugin();
 
     $plugin->disable('bootstrap');
     $plugin->enable('routes');
@@ -189,7 +192,7 @@ classes::
 
 Plugin objects also know their names and path information::
 
-    $plugin = new ContactManager();
+    $plugin = new ContactManagerPlugin();
 
     // Get the plugin name.
     $name = $plugin->getName();
@@ -364,7 +367,7 @@ Plugin Objects
 
 Plugin Objects allow a plugin author to define set-up logic, define default
 hooks, load routes, middleware and console commands. Plugin objects live in 
-**src/Plugin.php**. For our ContactManager plugin, or plugin class could look
+**src/Plugin.php**. For our ContactManager plugin, our plugin class could look
 like::
 
     namespace ContactManager;
@@ -684,7 +687,7 @@ You can use the :term:`plugin syntax` when linking to plugin assets using the
     // Generates a URL of /contact_manager/img/logo.jpg
     echo $this->Html->image('ContactManager.logo');
 
-Plugin assets are served using the ``AssetFilter`` dispatcher filter by default.
+Plugin assets are served using the ``AssetMiddleware`` middleware by default.
 This is only recommended for development. In production you should
 :ref:`symlink plugin assets <symlink-assets>` to improve performance.
 

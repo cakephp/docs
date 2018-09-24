@@ -46,8 +46,8 @@ This will remove the line ``$this->addPlugin('MyPlugin',...)`` from
 Plugin Assets
 -------------
 
-CakePHP by default serves plugins assets using the ``AssetFilter`` dispatcher
-filter. While this is a good convenience, it is recommended to symlink / copy
+CakePHP by default serves plugins assets using the ``AssetMiddleware`` middleware.
+While this is a good convenience, it is recommended to symlink / copy
 the plugin assets under app's webroot so that they can be directly served by the
 web server without invoking PHP. You can do this by running::
 
