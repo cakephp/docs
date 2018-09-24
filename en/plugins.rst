@@ -100,7 +100,7 @@ If you want to use a plugin's routes, console commands, middleware, or event
 listeners you will need to load the plugin. Plugins are loaded in your
 application's ``bootstrap()`` function::
 
-    // In src/Application.php. Requires at least 3.6.0
+    // In src/Application.php
     use Cake\Http\BaseApplication;
     use ContactManager\Plugin as ContactManager;
 
@@ -119,16 +119,6 @@ application's ``bootstrap()`` function::
 If you just want to use helpers, behaviors or components from a plugin you do
 not need to load a plugin.
 
-Prior to 3.6.0, you should use ``Plugin::load()``::
-
-    // In config/bootstrap.php
-
-    // Loads a single plugin
-    Plugin::load('ContactManager');
-
-    // Loads a plugin with a vendor namespace at top level.
-    Plugin::load('AcmeCorp/ContactManager');
-
 There is also a handy shell command to enable the plugin.  Execute the following
 line:
 
@@ -138,10 +128,6 @@ line:
 
 This would update your application's bootstrap method, or put the
 ``Plugin::load('ContactManager');`` snippet in the bootstrap for you.
-
-
-.. versionadded:: 3.6.0
-    ``addPlugin()`` was added.
 
 .. _plugin-configuration:
 
@@ -193,71 +179,6 @@ Plugin objects also know their names and path information::
     $path = $plugin->getPath();
     $path = $plugin->getConfigPath();
     $path = $plugin->getClassPath();
-
-Old Style Plugins
------------------
-
-Prior to 3.6.0, you will need to enable the ``bootstrap`` and ``routes`` hooks.
-Old style plugins do not support ``middleware`` and ``console`` hooks::
-
-    // In config/bootstrap.php,
-    // or in Application::bootstrap()
-
-    // Using loadAll()
-    Plugin::loadAll([
-        'Blog' => ['routes' => true],
-        'ContactManager' => ['bootstrap' => true],
-        'WebmasterTools' => ['bootstrap' => true, 'routes' => true],
-    ]);
-
-Or you can load the plugins individually::
-
-    // Loading just the blog and include routes
-    Plugin::load('Blog', ['routes' => true]);
-
-    // Include bootstrap configuration/initializer file.
-    Plugin::load('ContactManager', ['bootstrap' => true]);
-
-With either approach you no longer need to manually ``include()`` or
-``require()`` a plugin's configuration or routes file -- it happens
-automatically at the right time and place.
-
-You can specify a set of defaults for ``loadAll()`` which will
-apply to every plugin that doesn't have a more specific configuration.
-
-The following example will load the bootstrap file from all plugins, and
-additionally the routes from the Blog plugin::
-
-    Plugin::loadAll([
-        ['bootstrap' => true],
-        'Blog' => ['routes' => true]
-    ]);
-
-Note that all files specified should actually exist in the configured
-plugin(s) or PHP will give warnings for each file it cannot load. You can avoid
-potential warnings by using the ``ignoreMissing`` option::
-
-    Plugin::loadAll([
-        ['ignoreMissing' => true, 'bootstrap' => true],
-        'Blog' => ['routes' => true]
-    ]);
-
-When loading plugins, the plugin name used should match the namespace.  For
-example, if you have a plugin with top level namespace ``Users`` you would load
-it using::
-
-    Plugin::load('User');
-
-If you prefer to have your vendor name as top level and have a namespace like
-``AcmeCorp/Users``, then you would load the plugin as::
-
-    Plugin::load('AcmeCorp/Users');
-
-This will ensure that classnames are resolved properly when using
-:term:`plugin syntax`.
-
-Most plugins will indicate the proper procedure for configuring them and setting
-up the database in their documentation.
 
 Using Plugin Classes
 ====================
@@ -393,9 +314,6 @@ like::
         }
     }
 
-.. versionadded:: 3.6.0
-    Plugin Objects were added in 3.6.0
-
 .. _plugin-routes:
 
 Plugin Routes
@@ -411,13 +329,13 @@ ContactManager plugin routes, put the following into
     use Cake\Routing\Route\DashedRoute;
     use Cake\Routing\Router;
 
-    Router::plugin(
+    Router:{plugin}(
         'ContactManager',
         ['path' => '/contact-manager'],
         function ($routes) {
             $routes->get('/contacts', ['controller' => 'Contacts']);
-            $routes->get('/contacts/:id', ['controller' => 'Contacts', 'action' => 'view']);
-            $routes->put('/contacts/:id', ['controller' => 'Contacts', 'action' => 'update']);
+            $routes->get('/contacts/{id}', ['controller' => 'Contacts', 'action' => 'view']);
+            $routes->put('/contacts/{id}', ['controller' => 'Contacts', 'action' => 'update']);
         }
     );
 
@@ -442,9 +360,6 @@ plugin routes in additional scopes or prefixes::
     });
 
 The above would result in URLs like ``/backend/contact_manager/contacts``.
-
-.. versionadded:: 3.5.0
-    ``RouteBuilder::loadPlugin()`` was added in 3.5.0
 
 Plugin Controllers
 ==================
@@ -501,8 +416,8 @@ able to access your plugin controllers using URLs like::
 If your application defines routing prefixes, CakePHP's default routing will
 also connect routes that use the following pattern::
 
-    /:prefix/:plugin/:controller
-    /:prefix/:plugin/:controller/:action
+    /{prefix}/{plugin}/{controller}
+    /{prefix}/{plugin}/{controller}/{action}
 
 See the section on :ref:`plugin-configuration` for information on how to load
 plugin specific route files.
