@@ -553,7 +553,7 @@ you to define name prefixes in each scope::
     Router::url(['_name' => 'api:ping']);
 
     // Use namePrefix with plugin()
-    Router:{plugin}('Contacts', ['_namePrefix' => 'contacts:'], function ($routes) {
+    Router::plugin('Contacts', ['_namePrefix' => 'contacts:'], function ($routes) {
         // Connect routes.
     });
 
@@ -565,7 +565,7 @@ you to define name prefixes in each scope::
 You can also use the ``_namePrefix`` option inside nested scopes and it works as
 you'd expect::
 
-    Router:{plugin}('Contacts', ['_namePrefix' => 'contacts:'], function ($routes) {
+    Router::plugin('Contacts', ['_namePrefix' => 'contacts:'], function ($routes) {
         $routes->scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
             // This route's name will be `contacts:api:ping`
             $routes->get('/ping', ['controller' => 'Pings'], 'ping');
@@ -629,7 +629,7 @@ the ``$options`` argument::
 
 You can define prefixes inside plugin scopes as well::
 
-    Router:{plugin}('DebugKit', function ($routes) {
+    Router::plugin('DebugKit', function ($routes) {
         $routes->prefix('admin', function ($routes) {
             $routes->connect('/{controller}');
         });
@@ -682,7 +682,7 @@ Plugin Routing
 Routes for :doc:`/plugins` should be created using the ``plugin()``
 method. This method creates a new routing scope for the plugin's routes::
 
-    Router:{plugin}('DebugKit', function ($routes) {
+    Router::plugin('DebugKit', function ($routes) {
         // Routes connected here are prefixed with '/debug_kit' and
         // have the plugin route element set to 'DebugKit'.
         $routes->connect('/{controller}');
@@ -691,7 +691,7 @@ method. This method creates a new routing scope for the plugin's routes::
 When creating plugin scopes, you can customize the path element used with the
 ``path`` option::
 
-    Router:{plugin}('DebugKit', ['path' => '/debugger'], function ($routes) {
+    Router::plugin('DebugKit', ['path' => '/debugger'], function ($routes) {
         // Routes connected here are prefixed with '/debugger' and
         // have the plugin route element set to 'DebugKit'.
         $routes->connect('/{controller}');
@@ -745,7 +745,7 @@ with the following router connection::
 
     use Cake\Routing\Route\DashedRoute;
 
-    Router:{plugin}('ToDo', ['path' => 'to-do'], function ($routes) {
+    Router::plugin('ToDo', ['path' => 'to-do'], function ($routes) {
         $routes->fallbacks(DashedRoute::class);
     });
 
@@ -1531,5 +1531,5 @@ named parameter, will be removed from the list of passed arguments.
     /development/dispatch-filters
 
 .. meta::
-    {title} lang=en: Routing
+    :title lang=en: Routing
     :keywords lang=en: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router
