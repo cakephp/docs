@@ -65,6 +65,8 @@ changes made:
 * ``Cake\Cache\CacheEngine::gc()`` and all implementations of this method have
   been removed. This method was a no-op in most cache drivers and was only used
   in file caching.
+* The ``cacert.pem`` file that was bundled in CakePHP has been replaced by
+  a dependency on `composer/ca-bundle <https://packagist.org/packages/composer/ca-bundle>_`.
 
 
 New Features
