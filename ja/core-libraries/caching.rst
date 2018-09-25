@@ -235,7 +235,7 @@ Redis サーバーが予期せず失敗した場合、 ``redis`` キャッシュ
 キャッシュへの書き込み
 ======================
 
-.. php:staticmethod:: write($key, $value)
+.. php:staticmethod:: write($key, $value, $config = 'default')
 
 ``Cache::write()`` はキャッシュに $value を書き込みます。
 この値は後で ``$key`` で参照したり、削除したりすることができます。
