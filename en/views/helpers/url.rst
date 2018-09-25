@@ -67,9 +67,7 @@ string parameter that shares a name with one of your route placeholders.
 
 URL for named route::
 
-    echo $this->Url->build(['_name' => 'product-page', 'slug' => 'i-m-slug']);
-
-    // Assuming route is setup like:
+    // Assuming a route is setup as a named route:
     // $router->connect(
     //     '/products/:slug',
     //     [
@@ -80,6 +78,9 @@ URL for named route::
     //         '_name' => 'product-page',
     //     ]
     // );
+
+    echo $this->Url->build(['_name' => 'product-page', 'slug' => 'i-m-slug']);
+    // Will result in:
     /products/i-m-slug
 
 The 2nd parameter allows you to define options controlling HTML escaping, and
