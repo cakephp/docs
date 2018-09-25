@@ -217,7 +217,7 @@ Supported options are:
   you wish.
 
 While this method allows a lot of customization for its output. It is
-also ok to just call the method without any params. ::
+also ok to just call the method without any parameters. ::
 
     echo $this->Paginator->numbers();
 
