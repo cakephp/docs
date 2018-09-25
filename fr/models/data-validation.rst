@@ -26,7 +26,7 @@ définition du model, par exemple::
 Dans l'exemple ci-dessus, le tableau ``$validate`` est ajouté au model
 User, mais ce tableau ne contient pas de règles de validation.
 En supposant que la table "users" ait les champs "login",
-"password", "email" et "date_de_naissance", l'exemple ci-dessous
+"email" et "date_de_naissance", l'exemple ci-dessous
 montre quelques règles simples de validation qui s'appliquent à ces champs::
 
     class User extends AppModel {
