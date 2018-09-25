@@ -494,7 +494,7 @@ Removing Callbacks and Listeners
 
 If for any reason you want to remove any callback from the event manager just
 call the :php:meth:`Cake\\Event\\EventManager::off()` method using as
-arguments the first two params you used for attaching it::
+arguments the first two parameters you used for attaching it::
 
     // Attaching a function
     $this->eventManager()->on('My.event', [$this, 'doSomething']);

@@ -211,7 +211,7 @@ Shell
 
 - ``Shell::__construct()`` has changed. It now takes an instance of
   :php:class:`Cake\\Console\\ConsoleIo`.
-- ``Shell::param()`` has been added as convenience access to the params.
+- ``Shell::param()`` has been added as convenience access to the parameters.
 
 Additionally all shell methods will be transformed to camel case when invoked.
 For example, if you had a ``hello_world()`` method inside a shell and invoked it
