@@ -101,14 +101,14 @@ Composer を使ったプラグインのインストール
 
     // src/Application.php の中。3.6.0 以上が必要。
     use Cake\Http\BaseApplication;
-    use ContactManager\Plugin as ContactManager;
+    use ContactManager\Plugin as ContactManagerPlugin;
 
     class Application extends BaseApplication {
         public function bootstrap()
         {
             parent::bootstrap();
             // クラス名で contact manager プラグインを読み込み
-            $this->addPlugin(ContactManager::class);
+            $this->addPlugin(ContactManagerPlugin::class);
 
             // '短縮名' でベンダーの名前空間付きプラグインを読み込み
             $this->addPlugin('AcmeCorp/ContactManager');
@@ -167,16 +167,19 @@ Composer を使ったプラグインのインストール
 これを利用者はアプリケーション中で変更可能です。 ::
 
     // Application::bootstrap() の中で
+    use ContactManager\Plugin as ContactManagerPlugin;
 
     // ContactManager プラグインのルートを無効化
-    $this->addPlugin(ContactManager::class, ['routes' => false]);
+    $this->addPlugin(ContactManagerPlugin::class, ['routes' => false]);
 
 フックを配列オプションで設定することも、
 Plugin クラスで提供されるメソッドで設定することもできます。 ::
 
     // Application::bootstrap() の中で
+    use ContactManager\Plugin as ContactManagerPlugin;
+
     // フックを設定するために disable/enable を使用
-    $plugin = new ContactManager();
+    $plugin = new ContactManagerPlugin();
 
     $plugin->disable('bootstrap');
     $plugin->enable('routes');
@@ -184,7 +187,7 @@ Plugin クラスで提供されるメソッドで設定することもできま�
 
 Plugin オブジェクトは、名前とパス情報も知っています。 ::
 
-    $plugin = new ContactManager();
+    $plugin = new ContactManagerPlugin();
 
     // プラグイン名を取得
     $name = $plugin->getName();
@@ -666,9 +669,9 @@ Custom コントローラーの 'index' ビューへのパスは、次の通り�
     // /contact_manager/img/logo.jpg への URL を生成します
     echo $this->Html->image('ContactManager.logo');
 
-プラグインのアセットは、デフォルトで ``AssetFilter`` というディスパッチャーフィルターを
+プラグインのアセットは、デフォルトで ``AssetMiddleware`` ミドルウェアを
 使用して提供されます。これは開発時のみ使用することが推奨されます。
-公開環境ではパフォーマンスを向上させるために、
+本番環境ではパフォーマンスを向上させるために、
 :ref:`プラグインのアセットをシンボリックリンク化 <symlink-assets>` すべきです。
 
 もしあなたがヘルパーを使わないなら、プラグインのアセットを提供するためには URL の先頭に

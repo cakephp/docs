@@ -507,7 +507,7 @@ Accept ヘッダーの確認
     return $this->response;
 
 上記の例のようにメソッドにファイルのパスを渡す必要があります。CakePHP は、
-`Cake\\Http\\Reponse::$_mimeTypes` に登録された、よく知られるファイルタイプであれば
+`Cake\\Http\\Response::$_mimeTypes` に登録された、よく知られるファイルタイプであれば
 正しいコンテンツタイプヘッダーを送ります。 :php:meth:`Cake\\Http\\Response::withFile()` を呼ぶ前に
 :php:meth:`Cake\\Http\\Response::withType()` メソッドを使って、新しいタイプを追加できます。
 
@@ -541,6 +541,11 @@ download
     {
         $icsString = $this->Calendars->generateIcs();
         $response = $this->response;
+
+        // レスポンスのボディーに文字列コンテンツを挿入する (3.4.0 以降)
+        $response = $response->withStringBody($icsString);
+
+        // レスポンスのボディーに文字列コンテンツを挿入する (3.4.0 より前)
         $response->body($icsString);
 
         $response = $response->withType('ics');

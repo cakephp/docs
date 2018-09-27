@@ -189,7 +189,7 @@ CakePHP におけるほとんどのことがそうであるように、テスト
         $this->Progress = new ProgressHelper($View);
     }
 
-テストケースで親のメソッドを呼ぶことは重要です。``TestCase::setUp()`` は、
+テストケースで親のメソッドを呼ぶことは重要です。 ``TestCase::setUp()`` は、
 :php:class:`~Cake\\Core\\Configure` の値をバックアップしたり、
 :php:class:`~Cake\\Core\\App` にパスを保存したりといった、いくつかの作業をしているからです。
 
@@ -217,6 +217,12 @@ CakePHP におけるほとんどのことがそうであるように、テスト
 また、テストはコードなので、あなたが変更を加えるたびに再実行するのは簡単です。
 これは新たなバグの発生を防ぐ手助けをしてくれるでしょう。
 
+.. note::
+
+    EventManager は、各テストメソッドごとにリフレッシュされます。
+    これは、一度に複数のテストを実行した際、ブートストラップは一度だけ実行されるため、
+    config/bootstrap.php に登録されたイベントリスナーは失われることを意味します。
+
 .. _running-tests:
 
 テストの実行
@@ -243,7 +249,7 @@ CakePHP のユニットテストを実行したい場合、 ``phpunit`` を実�
 
 .. code-block:: bash
 
-    $ composer install --dev
+    $ composer install
 
 アプリケーションのルートディレクトリーから以下を行います。アプリケーションのソースの一部である
 プラグインのテストを実行するには、まず ``cd`` でプラグインディレクトリーに移動し、その後、
@@ -331,7 +337,7 @@ PHP 5.6.0 以上を利用している場合、カバレッジを生成するた�
 ``<testsuites>`` を使用している場合、プラグインの ``composer.json`` ファイルに
 フィクスチャーの名前空間を autoload セクションに追加してください。例::
 
-    "autoload": {
+    "autoload-dev": {
         "psr-4": {
             "PluginName\\Test\\Fixture\\": "tests/Fixture/"
         }

@@ -535,12 +535,12 @@ Cache クラスは簡単な方法でカウンター値をインクリメント/�
 
     Cache で使用されるすべてのキャッシュエンジンの基本クラス。
 
-.. php:method:: write($key, $value, $config = 'default')
+.. php:method:: write($key, $value)
 
     :return: 成功時に boolean
 
-    キーの値をキャッシュに書き込みます。
-    省略可能な文字列 $config は、書き込む設定名を指定します。
+    キーの値をキャッシュに書き込み、データが正常にキャッシュされた場合は
+    ``true`` を返し、失敗した場合は ``false`` を返します。
 
 .. php:method:: read($key)
 
