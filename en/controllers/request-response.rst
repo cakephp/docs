@@ -48,7 +48,7 @@ The request exposes routing parameters through the ``getParam()`` method::
 
 To get all routing parameters as an array use ``getAttribute()``::
 
-    $params = $this->request->getAttribute('params');
+    $parameters = $this->request->getAttribute('params');
 
 All :ref:`route-elements` are accessed through this interface.
 
@@ -1106,4 +1106,4 @@ collection if you modify a cookie::
 
 .. meta::
     :title lang=en: Request and Response objects
-    :keywords lang=en: request controller,request parameters,array indexes,purpose index,response objects,domain information,request object,request data,interrogating,params,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp,PSR-7,immutable
+    :keywords lang=en: request controller,request parameters,array indexes,purpose index,response objects,domain information,request object,request data,interrogating,params,parameters,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp,PSR-7,immutable

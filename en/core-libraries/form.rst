@@ -159,12 +159,15 @@ Getting Form Errors
 
 Once a form has been validated you can retrieve the errors from it::
 
-    $errors = $form->errors();
+    $errors = $form->getErrors(); // $form->errors(); // prior to 3.7.0
     /* $errors contains
     [
         'email' => ['A valid email address is required']
     ]
     */
+
+.. versionadded:: 3.7.0
+    ``errors()`` has been deprecated in favour of ``getErrors()``
 
 Invalidating Individual Form Fields from Controller
 ===================================================
