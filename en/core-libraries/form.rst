@@ -167,7 +167,7 @@ Once a form has been validated you can retrieve the errors from it::
     */
 
 .. versionadded:: 3.7.0
-    ``errors()`` has been deprecated in favour of ``getErrors()``
+    ``errors()`` has been deprecated in favor of ``getErrors()``
 
 Invalidating Individual Form Fields from Controller
 ===================================================
