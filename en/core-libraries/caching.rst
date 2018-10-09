@@ -339,7 +339,8 @@ For example::
     return $cloud;
     
 Or if you are using another cache configuration called ``short``, you can
-specify it in ``Cache::read()`` and ``Cache::write()`` calls as below:
+specify it in ``Cache::read()`` and ``Cache::write()`` calls as below::
+
     // read key cloud, but from short configuration instead of default
     $cloud = Cache::read('cloud', 'short');
 
