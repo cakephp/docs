@@ -68,6 +68,10 @@ token.
     FormHelper. If you do not, you will need to manually create hidden inputs in
     each of your forms.
 
+To manually add the CSRF token to the response object, you can put below code piece inside your form::
+
+    <?= $this->Form->create();?>
+
 CSRF Protection and AJAX Requests
 ==================================
 
