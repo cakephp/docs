@@ -31,6 +31,8 @@ changes made:
   ``Email`` and ``Plugin`` have be renamed to lower case ``cell``, ``element``,
   ``email`` and ``plugin`` respectively.
 * The template extension has also been changed from ``.ctp`` to ``.php``.
+* Constants ``View::NAME_ELEMENT`` and ``View::NAME_LAYOUT`` have been removed.
+  You can use ``View::TYPE_ELEMENT`` and ``View::TYPE_LAYOUT``.
 * The Session cookie name is no longer set to ``CAKEPHP`` by default. Instead
   the default cookie name defined in your ``php.ini`` file is used. You can use
   the ``Session.cookie`` configuration option to set the cookie name.
