@@ -27,7 +27,9 @@ In addition to the removal of deprecated features there have been breaking
 changes made:
 
 * Templates have been moved from ``src/Template/`` to ``templates/`` folder on
-  app and plugin root.
+  app and plugin root. Special templates folder like ``Cell``, ``Element``,
+  ``Email`` and ``Plugin`` have be renamed to lower case ``cell``, ``element``,
+  ``email`` and ``plugin`` respectively.
 * The template extension has also been changed from ``.ctp`` to ``.php``.
 * The Session cookie name is no longer set to ``CAKEPHP`` by default. Instead
   the default cookie name defined in your ``php.ini`` file is used. You can use

@@ -513,7 +513,7 @@ action, so let's include that as well::
     <!-- A sortable list of contacts would go here....-->
 
 Plugins can provide their own layouts. To add plugin layouts, place your template files inside
-``plugins/[PluginName]/templates/Layout``. To use a plugin layout in your controller
+``plugins/[PluginName]/templates/layout``. To use a plugin layout in your controller
 you can do the following::
 
     public $layout = 'ContactManager.admin';
@@ -542,7 +542,7 @@ Creating this file would allow you to override
 If your plugin is in a composer dependency (i.e. 'TheVendor/ThePlugin'), the
 path to the 'index' view of the Custom controller will be::
 
-    templates/Plugin/TheVendor/ThePlugin/Custom/index.php
+    templates/plugin/TheVendor/ThePlugin/Custom/index.php
 
 Creating this file would allow you to override
 **vendor/thevendor/theplugin/templates/Custom/index.php**.
@@ -552,7 +552,7 @@ application template overrides.
 For example, if the 'ContactManager' plugin implemented an 'admin' prefix the overridng path
 would be::
 
-    templates/Plugin/ContactManager/Admin/ContactManager/index.php
+    templates/plugin/ContactManager/Admin/ContactManager/index.php
 
 .. _plugin-assets:
 
