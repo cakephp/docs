@@ -701,8 +701,8 @@ For ``decimal`` columns:
 ========= ===========
 Option    Description
 ========= ===========
-precision combine with ``scale`` set to set decimal accuracy
-scale     combine with ``precision`` to set decimal accuracy
+precision combine with ``scale`` set to set integer decimal accuracy
+scale     combine with ``precision`` to set fractional decimal accuracy
 signed    enable or disable the ``unsigned`` option *(only applies to MySQL)*
 ========= ===========
 
