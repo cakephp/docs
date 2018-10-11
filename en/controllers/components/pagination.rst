@@ -208,6 +208,48 @@ elements and URLs for pagination.
 
 .. versionadded:: 3.3.0
     Multiple Pagination was added in 3.3.0
+    
+Paginating the Same Model multiple Times
+----------------------------------------
+
+To paginate the same model multiple times within a single controller action you
+need to define an alias for the model::
+
+    // In a controller action
+    $this->paginate = [
+        'ArticlesTable' => [
+            'scope' => 'published_articles',
+            'limit' => 10,
+            'order' => [
+                'id' => 'desc',
+            ],
+        ],
+        'UnpublishedArticlesTable' => [
+            'scope' => 'unpublished_articles',
+            'limit' => 10,
+            'order' => [
+                'id' => 'desc',
+            ],
+        ],
+    ];
+    
+    TableRegistry::config('UnpublishedArticles', [
+        'className' => 'App\Model\Table\ArticlesTable',
+        'table' => 'articles',
+        'entityClass' => 'App\Model\Entity\Article',
+    ]);
+
+    $published_articles = $this->paginate(
+        $this->Articles->find('all', [
+            'scope' => 'published_articles'
+        ])->where('published' => true)
+    );
+    
+    $unplublished_articles = $this->paginate(
+        TableRegistry::getTableLocator()->get('UnpublishedArticles')->find('all', [
+            'scope' => 'unpublished_articles'
+        ])->where('published' => false)
+    );
 
 Control which Fields Used for Ordering
 ======================================
