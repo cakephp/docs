@@ -326,7 +326,6 @@ make sure you use the strict comparison operators: ``===`` or
 For example::
 
     $cloud = Cache::read('cloud');
-
     if ($cloud !== false) {
         return $cloud;
     }
@@ -336,14 +335,14 @@ For example::
 
     // Store data in cache
     Cache::write('cloud', $cloud);
+
     return $cloud;
     
 Or if you are using another cache configuration called ``short``, you can
 specify it in ``Cache::read()`` and ``Cache::write()`` calls as below::
 
-    // read key cloud, but from short configuration instead of default
+    // Read key "cloud", but from short configuration instead of default
     $cloud = Cache::read('cloud', 'short');
-
     if ($cloud !== false) {
         return $cloud;
     }
@@ -353,6 +352,7 @@ specify it in ``Cache::read()`` and ``Cache::write()`` calls as below::
 
     // Store data in cache, using short cache configuration instead of default
     Cache::write('cloud', $cloud, 'short');
+
     return $cloud;
 
 Reading Multiple Keys at Once
