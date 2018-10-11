@@ -332,7 +332,7 @@ want to conditionally show headings or other markup:
 
 .. code-block:: php
 
-    // In templates/Layout/default.php
+    // In templates/layout/default.php
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -393,12 +393,12 @@ Layouts
 A layout contains presentation code that wraps around a view. Anything you want
 to see in all of your views should be placed in a layout.
 
-CakePHP's default layout is located at **templates/Layout/default.php**.
+CakePHP's default layout is located at **templates/layout/default.php**.
 If you want to change the overall look of your application, then this is the
 right place to start, because controller-rendered view code is placed inside of
 the default layout when the page is rendered.
 
-Other layout files should be placed in **templates/Layout**. When you create
+Other layout files should be placed in **templates/layout**. When you create
 a layout, you need to tell CakePHP where to place the output of your views. To
 do so, make sure your layout includes a place for ``$this->fetch('content')``
 Here's an example of what a default layout might look like:
@@ -453,7 +453,7 @@ You can set the ``title`` block content from inside your view file::
 Empty values for the ``title`` block will be automatically replaced with a representation of the current template path, such as ``'Admin/Articles'``.
 
 You can create as many layouts as you wish: just place them in the
-**templates/Layout** directory, and switch between them inside of your
+**templates/layout** directory, and switch between them inside of your
 controller actions using the controller or view's ``$layout`` property::
 
     // From a controller
@@ -542,7 +542,7 @@ layouts, and even within other elements. Elements can be used to make a view
 more readable, placing the rendering of repeating elements in its own file. They
 can also help you re-use content fragments in your application.
 
-Elements live in the **templates/Element/** folder, and have the .php
+Elements live in the **templates/element/** folder, and have the .php
 filename extension. They are output using the element method of the view::
 
     echo $this->element('helpbox');
@@ -559,9 +559,9 @@ You can pass data to an element through the element's second argument::
 Inside the element file, all the passed variables are available as members of
 the parameter array (in the same way that ``Controller::set()`` in the
 controller works with template files). In the above example, the
-**templates/Element/helpbox.php** file can use the ``$helptext`` variable::
+**templates/element/helpbox.php** file can use the ``$helptext`` variable::
 
-    // Inside templates/Element/helpbox.php
+    // Inside templates/element/helpbox.php
     echo $helptext; // Outputs "Oh, this text is very helpful."
 
 The ``View::element()`` method also supports options for the element.
@@ -676,7 +676,7 @@ Assuming you have a prefix "Admin" configured and you call::
 
     echo $this->element('my_element');
 
-The element first be looked for in **templates/Admin/Element/**. If such a
+The element first be looked for in **templates/Admin/element/**. If such a
 file does not exist, it will be looked for in the default location.
 
 Caching Sections of Your View
