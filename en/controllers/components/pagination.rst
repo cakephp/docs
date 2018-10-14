@@ -213,7 +213,8 @@ Paginating the Same Model multiple Times
 ----------------------------------------
 
 To paginate the same model multiple times within a single controller action you
-need to define an alias for the model::
+need to define an alias for the model. See :ref:`here <table-registry-usage>` for 
+additional details on how to use the table registry::
 
     // In a controller action
     $this->paginate = [
