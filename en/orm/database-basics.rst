@@ -77,7 +77,7 @@ Instead of writing the SQL manually, you can use the query builder::
         ->newQuery()
         ->select('*')
         ->from('articles')
-        ->where(['created >' => new DateTime('1 day ago'), ['created' => 'datetime']])
+        ->where(['created >' => new DateTime('1 day ago')], ['created' => 'datetime'])
         ->order(['title' => 'DESC'])
         ->execute()
         ->fetchAll('assoc');
