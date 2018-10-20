@@ -63,6 +63,10 @@ You can use prepared statements to insert parameters::
 
 It is also possible to use complex data types as arguments::
 
+    use Cake\Datasource\ConnectionManager;
+    use DateTime;
+
+    $connection = ConnectionManager::get('default');
     $results = $connection
         ->execute(
             'SELECT * FROM articles WHERE created >= :created',
@@ -88,6 +92,7 @@ Running Insert Statements
 Inserting rows in the database is usually a matter of a couple lines::
 
     use Cake\Datasource\ConnectionManager;
+    use DateTime;
 
     $connection = ConnectionManager::get('default');
     $connection->insert('articles', [
