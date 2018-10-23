@@ -12,6 +12,10 @@ level folders you should see:
 - The *logs* folder normally contains your log files, depending on your log
   configuration.
 - The *src* folder will be where your application’s source files will be placed.
+- The *templates* folder has presentational files placed here:
+    elements, error pages, layouts, and view template files.
+- The *resources* folder has sub folder for various types of resource files.
+    The *locales** sub folder stores string files for internationalization.
 - The *tests* folder will be where you put the test cases for your application.
 - The *tmp* folder is where CakePHP stores temporary data. The actual data it
   stores depends on how you have CakePHP configured, but this folder
@@ -37,8 +41,6 @@ development. Let's look a little closer at the folders inside
 
 Controller
     Contains your application's controllers and their components.
-Locale
-    Stores string files for internationalization.
 Model
     Contains your application's tables, entities and behaviors.
 Shell
@@ -46,9 +48,6 @@ Shell
     For more information see :doc:`/console-and-shells`.
 View
     Presentational classes are placed here: views, cells, helpers.
-Template
-    Presentational files are placed here: elements, error pages,
-    layouts, and view template files.
 
 .. meta::
     :title lang=en: CakePHP Folder Structure
