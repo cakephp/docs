@@ -38,11 +38,11 @@ Language Files
 Translations can be made available by using language files stored in the
 application. The default format for CakePHP translation files is the
 `Gettext <http://en.wikipedia.org/wiki/Gettext>`_ format. Files need to be
-placed under **src/Locale/** and within this directory, there should be a
+placed under **resources/locales/** and within this directory, there should be a
 subfolder for each language the application needs to support::
 
-    /src
-        /Locale
+    /resources
+        /locales
             /en_US
                 default.po
             /en_GB
@@ -57,11 +57,11 @@ grouping of translation messages. When no group is used, then the default group
 is selected.
 
 The core strings messages extracted from the CakePHP library can be stored
-separately in a file named **cake.po** in **src/Locale/**.
+separately in a file named **cake.po** in **resources/locales/**.
 The `CakePHP localized library <https://github.com/cakephp/localized>`_ houses
 translations for the client-facing translated strings in the core (the cake
 domain). To use these files, link or copy them into their expected location:
-**src/Locale/<locale>/cake.po**. If your locale is incomplete or incorrect,
+**resources/locales/<locale>/cake.po**. If your locale is incomplete or incorrect,
 please submit a PR in this repository to fix it.
 
 Plugins can also contain translation files, the convention is to use the
@@ -69,8 +69,8 @@ Plugins can also contain translation files, the convention is to use the
 messages::
 
     MyPlugin
-        /src
-            /Locale
+        /resources
+            /locales
                 /fr
                     my_plugin.po
                 /de
@@ -147,7 +147,7 @@ domain::
 
     If you want to translate your plugins and they're namespaced, you must name
     your domain string ``Namespace/PluginName``. But the related language file
-    will become ``plugins/Namespace/PluginName/src/Locale/plugin_name.po``
+    will become ``plugins/Namespace/PluginName/resources/locales/plugin_name.po``
     inside your plugin folder.
 
 Sometimes translations strings can be ambiguous for people translating them.
@@ -424,7 +424,7 @@ For example, you can still use **.po** files, but loaded from another location::
 
     use Cake\I18n\MessagesFileLoader as Loader;
 
-    // Load messages from src/Locale/folder/sub_folder/filename.po
+    // Load messages from resources/locales/folder/sub_folder/filename.po
     // Prior to 3.5 use translator()
     I18n::setTranslator(
         'animals',
@@ -453,7 +453,7 @@ class::
 
 The file should be created in the **src/I18n/Parser** directory of your
 application. Next, create the translations file under
-**src/Locale/fr_FR/animals.yaml**
+**resources/locales/fr_FR/animals.yaml**
 
 .. code-block:: yaml
 
