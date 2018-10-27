@@ -77,6 +77,13 @@ changes made:
 New Features
 ============
 
+Filesystem
+----------
+
+* This package is deprecated and will be removed in 5.0. It has a number of
+  design problems and fixing this infrequently used package does not seem worth
+  the effort when there are a great selection of packages already.
+
 Error
 -----
 
