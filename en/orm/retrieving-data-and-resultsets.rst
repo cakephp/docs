@@ -399,6 +399,14 @@ If you need to modify the results after they have been fetched you should use
 a :ref:`map-reduce` function to modify the results. The map reduce features
 replace the 'afterFind' callback found in previous versions of CakePHP.
 
+.. note::
+
+    Passing arguements exposed in the **config** array, 
+    ``$products->find('sizes', ['large', 'medium'])`` 
+    can give unpredictable results when chaining 
+    custom finders. Always pass them in an associative array, 
+    ``$products->find('sizes', ['values' => ['large', 'medium']])``
+
 .. _dynamic-finders:
 
 Dynamic Finders
