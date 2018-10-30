@@ -7,6 +7,8 @@ Command Input/Output
 CakePHP provides the ``ConsoleIo`` object to commands so that they can
 interactively read user input and output information to the user.
 
+.. _command-helpers:
+
 Command Helpers
 ===============
 

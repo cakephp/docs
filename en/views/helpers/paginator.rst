@@ -530,7 +530,7 @@ It is also possible to sort a column based on associations:
         ];
         
     For more information on using the ``sortWhitelist`` option, please see
-    :doc:`controllers/components/pagination.html#control-which-fields-used-for-ordering`
+    :ref:`control-which-fields-used-for-ordering`.
 
 The final ingredient to pagination display in views is the addition of page
 navigation, also supplied by the PaginationHelper::
