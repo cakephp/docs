@@ -401,7 +401,7 @@ replace the 'afterFind' callback found in previous versions of CakePHP.
 
 .. note::
 
-    Passing arguements exposed in the **config** array, 
+    Passing arguments exposed in the **config** array, 
     ``$products->find('sizes', ['large', 'medium'])`` 
     can give unpredictable results when chaining 
     custom finders. Always pass them in an associative array, 
