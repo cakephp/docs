@@ -209,6 +209,8 @@ elements and URLs for pagination.
 .. versionadded:: 3.3.0
     Multiple Pagination was added in 3.3.0
 
+.. _control-which-fields-used-for-ordering:
+
 Control which Fields Used for Ordering
 ======================================
 
