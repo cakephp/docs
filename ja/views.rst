@@ -505,8 +505,10 @@ Ajax レイアウトは AJAX のレスポンスを組み立てるのに便利で
 
     class UsersController extends AppController
     {
-        public function view_active()
+        public function viewActive()
         {
+            $this->viewBuilder()->setLayout('Contacts.contact');
+            // あるいは 3.4 以前では以下
             $this->viewBuilder()->layout('Contacts.contact');
             // あるいは 3.1 以前では以下
             $this->layout = 'Contacts.contact';
@@ -716,7 +718,7 @@ CakePHP のほとんどの構成要素と同様に、ビュークラスにはい
 * ビュークラスは **src/View**  に配置してください。例: **src/View/PdfView.php**
 * ビュークラス名には ``View`` をサフィックスとしてつけてください。 例: ``PdfView``
 * ビュークラス名を参照するときは ``View`` サフィックスを省略する必要があります。
-  例: ``$this->viewBuilder()->className('Pdf');``.
+  例: ``$this->viewBuilder()->setClassName('Pdf');``.
 
 また、正しく動作するように、 ``View`` を継承しましょう。 ::
 

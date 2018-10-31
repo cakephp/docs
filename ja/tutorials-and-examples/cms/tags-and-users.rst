@@ -294,7 +294,7 @@ CakePHP では、コントローラーのアクションをスリムに保ち、
                 $article->title,
                 ['controller' => 'Articles', 'action' => 'view', $article->slug]
             ) ?></h4>
-            <span><?= h($article->created) ?>
+            <span><?= h($article->created) ?></span>
         </article>
     <?php endforeach; ?>
     </section>
