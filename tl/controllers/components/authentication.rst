@@ -553,7 +553,7 @@ uses. Using ``flash`` config you can configure the parameters
 - ``key`` - The key to use, defaults to 'default'. Prior to 3.4.0, the key
   defaulted to 'auth'.
 - ``element`` - The element name to use for rendering, defaults to null.
-- ``params`` - The array of additional params to use, defaults to ``[]``.
+- ``params`` - The array of additional parameters to use, defaults to ``[]``.
 
 In addition to the flash message settings you can customize other error
 messages ``AuthComponent`` uses. In your controller's ``beforeFilter()``, or
@@ -1040,7 +1040,7 @@ flash
 
     - ``element`` - The element to use; defaults to 'default'.
     - ``key`` - The key to use; defaults to 'auth'.
-    - ``params`` - The array of additional params to use; defaults to '[]'.
+    - ``params`` - The array of additional parameters to use; defaults to '[]'.
 
 loginAction
     A URL (defined as a string or array) to the controller action that handles

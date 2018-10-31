@@ -831,7 +831,7 @@ the ``*.`` wildcard to match any subdomain::
         $routes->connect(
             '/images/old-log.png',
             ['controller' => 'Images', 'action' => 'oldLogo']
-        )->setHost('images.example.com');
+        )->setHost('*.example.com');
     });
 
 The ``_host`` option is also used in URL generation. If your ``_host`` option
@@ -1514,10 +1514,10 @@ allows you to prepare URLs before routing.
 
 Callback filter functions should expect the following parameters:
 
-- ``$params`` The URL params being processed.
+- ``$params`` The URL parameters being processed.
 - ``$request`` The current request.
 
-The URL filter function should *always* return the params even if unmodified.
+The URL filter function should *always* return the parameters even if unmodified.
 
 URL filters allow you to implement features like persistent parameters::
 

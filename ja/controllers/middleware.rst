@@ -323,8 +323,8 @@ PSR-7 リクエストとレスポンス
 
     use Cake\Http\Middleware\SecurityHeadersMiddleware;
 
-    $headers = new SecurityHeadersMiddleware();
-    $headers
+    $securityHeaders = new SecurityHeadersMiddleware();
+    $securityHeaders
         ->setCrossDomainPolicy()
         ->setReferrerPolicy()
         ->setXFrameOptions()
@@ -332,7 +332,7 @@ PSR-7 リクエストとレスポンス
         ->noOpen()
         ->noSniff();
 
-    $middlewareQueue->add($headers);
+    $middlewareQueue->add($securityHeaders);
 
 .. versionadded:: 3.5.0
     ``SecurityHeadersMiddleware`` は 3.5.0 で追加されました。
