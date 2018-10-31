@@ -1,7 +1,7 @@
 CakePHP Documentation
 =====================
 
-[![License](https://img.shields.io/badge/license-CC-By-NC-SA-brightgreen.svg?style=flat-square)](LICENSE.txt)
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgreen.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![Build Status](https://img.shields.io/travis/cakephp/docs/3.0.svg?style=flat-square)](https://travis-ci.org/cakephp/docs)
 
 This is the official documentation for the CakePHP project. It is available
