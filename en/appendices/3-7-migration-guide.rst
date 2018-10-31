@@ -148,7 +148,6 @@ Database
 
 * ``Cake\Database\FunctionsBuilder::rand()`` was added.
 
-
 Error
 -----
 
@@ -175,6 +174,8 @@ Http
 * ``Cake\Http\ServerRequest::setTrustedProxies()`` was added.
 * ``Cake\Http\Client`` will now default to use a Curl based adapter if the
   ``curl`` extension is installed.
+* New constants have been added to the ``SecurityHeadersMiddleware``. The new
+  constants are used to build the components of HTTP headers.
 
 Mailer
 ------
