@@ -531,7 +531,7 @@ not make sense. The process of converting the database results to entities is
 called hydration. If you wish to disable this process you can do this::
 
     $query = $articles->find();
-    $query->hydrate(false); // Results as arrays instead of entities
+    $query->enableHydration(false); // Results as arrays instead of entities
     $result = $query->toList(); // Execute the query and return the array
 
 After executing those lines, your result should look similar to this::
