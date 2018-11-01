@@ -60,9 +60,18 @@ works::
         $this->Security->setConfig('blackHoleCallback', 'blackhole');
     }
 
-    public function blackhole($type)
+    public function blackhole($type, SecurityException $exception)
     {
-        // Handle errors.
+        if ($exception->getMessage() === 'Request is not SSL and the action is required to be secure') {
+            // Reword the exception message with a translatable string.
+            $exception->setMessage(__('Please access the requested page through HTTPS'));
+        }
+        
+        // Re-throw the conditionally reworded exception.
+        throw $exception;
+
+        // Alternatively, handle the error, e.g. set a flash message &
+        // redirect to HTTPS version of the requested page.
     }
 
 .. note::
