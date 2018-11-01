@@ -57,6 +57,8 @@ works::
 
     public function beforeFilter(Event $event)
     {
+        parent::beforeFilter($event);
+        
         $this->Security->setConfig('blackHoleCallback', 'blackhole');
     }
 
@@ -178,6 +180,8 @@ want and the Security Component will enforce them on its startup::
 
         public function beforeFilter(Event $event)
         {
+            parent::beforeFilter($event);
+
             if ($this->request->getParam('admin')) {
                 $this->Security->requireSecure();
             }
@@ -202,6 +206,8 @@ require secure SSL requests::
 
         public function beforeFilter(Event $event)
         {
+            parent::beforeFilter($event);
+
             if ($this->request->getParam('admin')) {
                 $this->Security->requireSecure();
             }
@@ -261,7 +267,10 @@ There may be cases where you want to disable all security checks for an action
 
         public function beforeFilter(Event $event)
         {
-             $this->Security->setConfig('unlockedActions', ['edit']);
+            parent::beforeFilter($event);
+            parent::beforeFilter($event);
+
+            $this->Security->setConfig('unlockedActions', ['edit']);
         }
     }
 
