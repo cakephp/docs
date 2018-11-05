@@ -306,6 +306,14 @@ stopping this event you will abort the delete operation. When the event is stopp
 of the event will be returned.
 How to stop an event is documented :ref:`here <stopping-events>`.
 
+.. note::
+
+    If you are using the TreeBehavior, beforeDelete without any further configuration of priorites is 
+    called after the beforeDelete from TreeBehavior, which deletes all children. If you desire to work
+    with the children in a beforeDelete Event, use the Eventmanager, add a listener and assign a priority 
+    lower than 10.
+
+
 afterDelete
 -----------
 
