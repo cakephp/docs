@@ -219,6 +219,9 @@ TestSuite
 
 * The custom assertions provided by ``IntegrationTestCase`` and
   ``ConsoleIntegrationTestCase`` are now implemented through constraint classes.
+* ``TestCase::loadPlugins()``, ``removePlugins()`` and ``clearPlugins()`` were
+  added to make working with dynamically loaded plugins easier now that
+  ``Plugin::load()`` and ``Plugin::unload()`` are deprecated.
 
 
 Utility
