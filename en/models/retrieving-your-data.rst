@@ -18,27 +18,27 @@ Find is the multifunctional workhorse of all model data-retrieval functions.
 Keep in mind that ``$type`` is case-sensitive. Using an upper case character
 (for example, ``All``) will not produce the expected results.
 
-``$params`` is used to pass all parameters to the various types of find(),
+``$params`` is used to pass all parameters to the various types of ``find()``,
 and has the following possible keys by default, all of which are
 optional::
 
     array(
-        'conditions' => array('Model.field' => $thisValue), //array of conditions
-        'recursive' => 1, //int
-        //array of field names
+        'conditions' => array('Model.field' => $thisValue), // array of conditions
+        'recursive' => 1, // int
+        // array of field names
         'fields' => array('Model.field1', 'DISTINCT Model.field2'),
-        //string or array defining order
+        // string or array defining order
         'order' => array('Model.created', 'Model.field3 DESC'),
         'group' => array('Model.field'), // fields to GROUP BY
-        'limit' => n, //int
-        'page' => n, //int
-        'offset' => n, //int
-        'callbacks' => true //other possible values are false, 'before', 'after'
-        'having' => array('COUNT(Model.field) >' => 1), // fields to HAVING by
-        'lock' => true // Enable FOR UPDATE locking
+        'limit' => n, // int
+        'page' => n, // int
+        'offset' => n, // int
+        'callbacks' => true, // other possible values are false, 'before', 'after'
+        'having' => array('COUNT(Model.field) >' => 1), // array of HAVING conditions
+        'lock' => true, // Enable FOR UPDATE locking
     )
 
-It's also possible to add and use other parameters. Some types of find()
+It's also possible to add and use other parameters. Some types of ``find()``
 and behaviors make use of this ability, and your own model methods can, too.
 
 If your ``find()`` operation fails to match any records, you will get an empty array.
@@ -460,7 +460,7 @@ The ``find`` method is flexible enough to accept your custom finders. This is
 done by declaring your own types in a model variable and by implementing a special
 function in your model class.
 
-A Model Find Type is a shortcut to find() options. For example, the following two finds are equivalent
+A Model Find Type is a shortcut to ``find()`` options. For example, the following two finds are equivalent
 
 ::
 
@@ -527,11 +527,11 @@ ability to modify the query before it is done, or to modify the results after th
 Typically the first thing to check in our custom find function is the state of the query.
 The ``before`` state is the moment to modify the query, bind new associations, apply more
 behaviors, and interpret any special key that is passed in the second argument of ``find``. This
-state requires you to return the $query argument (modified or not).
+state requires you to return the ``$query`` argument (modified or not).
 
 The ``after`` state is the perfect place to inspect the results, inject new data, process it in order
 to return it in another format, or do whatever you like to the recently fetched data. This state
-requires you to return the $results array (modified or not).
+requires you to return the ``$results`` array (modified or not).
 
 You can create as many custom finders as you like, and they are a great way of reusing code in
 your application across models.
@@ -611,9 +611,9 @@ your ``AppModel``, which should fix the pagination count:
 
 .. versionchanged:: 2.2
 
-You no longer need to override _findCount for fixing incorrect count results.
+You no longer need to override ``_findCount`` for fixing incorrect count results.
 The ``'before'`` state of your custom finder will now be called again with
-$query['operation'] = 'count'. The returned $query will be used in ``_findCount()``
+``$query['operation'] = 'count'``. The returned ``$query`` will be used in ``_findCount()``
 If necessary, you can distinguish by checking the ``'operation'`` key
 and return a different ``$query``::
 
@@ -639,8 +639,8 @@ tables by a certain field. Just add the name of the field (in
 CamelCase format) to the end of these functions, and supply the
 criteria for that field as the first parameter.
 
-findAllBy() functions will return results in a format like ``find('all')``,
-while findBy() return in the same format as ``find('first')``
+``findAllBy()`` functions will return results in a format like ``find('all')``,
+while ``findBy()`` return in the same format as ``find('first')``
 
 findAllBy
 ---------
@@ -710,7 +710,7 @@ The findBy magic functions also accept some optional parameters:
 | ``$this->Cake->findById(7);``                              | ``Cake.id = 7``                                       |
 +------------------------------------------------------------+-------------------------------------------------------+
 
-findBy() functions return results like ``find('first')``
+``findBy()`` functions return results like ``find('first')``
 
 .. _model-query:
 
@@ -729,7 +729,7 @@ will create SQL injection vulnerabilities.
 
 .. note::
 
-    ``query()`` does not honor $Model->cacheQueries as its
+    ``query()`` does not honor ``$Model->cacheQueries`` as its
     functionality is inherently disjoint from that of the calling
     model. To avoid caching calls to query, supply a second argument of
     false, ie: ``query($query, $cachequeries = false)``
@@ -803,7 +803,7 @@ which returns::
 ``field(string $name, array $conditions = null, string $order = null)``
 
 Returns the value of a single field, specified as ``$name``, from
-the first record matched by $conditions as ordered by $order. If no
+the first record matched by ``$conditions`` as ordered by ``$order``. If no
 conditions are passed and the model id is set, it will return the
 field value for the current model result. If no matching record is
 found, it returns false.
@@ -890,7 +890,7 @@ a post"::
 
     array("Post.title !=" => "This is a post")
 
-Notice the '!=' that follows the field name. CakePHP can parse out
+Notice the ``'!='`` that follows the field name. CakePHP can parse out
 any valid SQL comparison operator, including match expressions
 using ``LIKE``, ``BETWEEN``, or ``REGEX``, as long as you leave a space between
 field name and the operator. The one exception here is ``IN``
@@ -901,7 +901,7 @@ title was in a given set of values::
         "Post.title" => array("First post", "Second post", "Third post")
     )
 
-To do a NOT IN(...) match to find posts where the title is not in
+To do a ``NOT IN`` (...) match to find posts where the title is not in
 the given set of values, do the following::
 
     array(
@@ -971,7 +971,7 @@ using conditions similar to::
         array('Post.title LIKE' => '%two%')
     ))
 
-The wildcard operators ``ILIKE`` and ``RLIKE`` (RLIKE since version 2.6) are
+The wildcard operators ``ILIKE`` and ``RLIKE`` (``RLIKE`` since version 2.6) are
 also available.
 
 CakePHP can also check for null fields. In this example, the query
@@ -991,7 +991,7 @@ To handle ``BETWEEN`` queries, you can use the following::
     CakePHP will quote the numeric values depending on the field
     type in your DB.
 
-How about GROUP BY?::
+How about ``GROUP BY``?::
 
     array(
         'fields' => array(
@@ -1071,7 +1071,7 @@ and "status". The status can be "A", "B" or "C". We want to retrieve
 all the users that have status other than "B" using a sub-query.
 
 In order to achieve that, we are going to get the model data source
-and ask it to build the query as if we were calling a find() method,
+and ask it to build the query as if we were calling a ``find()`` method,
 but it will just return the SQL statement. After that we make an
 expression and add it to the conditions array::
 
