@@ -306,14 +306,6 @@ stopping this event you will abort the delete operation. When the event is stopp
 of the event will be returned.
 How to stop an event is documented :ref:`here <stopping-events>`.
 
-.. note::
-
-    If you are using the TreeBehavior, beforeDelete without any further configuration of priorites is 
-    called after the beforeDelete from TreeBehavior, which deletes all children. If you desire to work
-    with the children in a beforeDelete Event, use the Eventmanager, add a listener and assign a priority 
-    lower than 10.
-
-
 afterDelete
 -----------
 
@@ -331,6 +323,61 @@ delete operation is wrapped has been is committed. It's also triggered for non
 atomic deletes where database operations are implicitly committed. The event is
 triggered only for the primary table on which ``delete()`` is directly called.
 The event is not triggered if a transaction is started before calling delete.
+
+Callback priorities
+-------------------
+
+If you are using these callbacks from your ``Table`` together with ``Behaviour``'s be aware of the priority your callbacks
+in the ``Table`` class have in comparison to the priority of the callbacks from your ``Behaviour``s. The default ``priority``
+of any ``Event`` is 10. If 2 ``Event``s are fired with the same priority, the ``Event`` in the class that got initialized 
+first will be executed first.
+
+For example, ``TreeBehavior`` is initialized before your ``Model``. This means, ``TreeBehavior.beforeDelete`` will be 
+actively deleting a MPTT-Nodes children, before your ``Model.beforeDelete`` is executed. Therefor you can not work with
+the children of the node in ``Model.beforeDelete``.
+
+To avoid this, you can choose one of the following ways to set the priority:
+
+1) Change the Behaviours ``priority``. This will increase or decrease the priority of all ``Event``s in the Behavior 
+and might cause a wrong execution order on other Events, f.e. instead of your Events on ``beforeDelete`` your Events 
+on ``afterSave`` might run in the wrong order.
+
+    namespace App\Model\Table;
+
+    use Cake\ORM\Table;
+
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
+            $this->addBehavior('Tree', [
+				'priotity' => 2
+			]);
+        }
+    }
+
+2) Set the ``priority`` for the ``Event``s in your ``Table`` class by using the ``Model.implementedEvents()`` function. 
+This allows you to assign a different priority per callback-function.
+
+	namespace App\Model\Table;
+
+    use Cake\ORM\Table;
+
+    class ArticlesTable extends Table
+    {
+        public function implementedEvents()
+        {
+            return [
+			    'Model.beforeDelete' => [
+				    'callable' => 'beforeDelete',
+                    'priority' => 3
+                ],
+            ];
+        }
+    }
+
+3) Use the ``Eventmanager``, add a ``listener`` and assign a ``priority`` as described in 
+:ref:`the guide to the Events System <events>`.
 
 Behaviors
 =========
