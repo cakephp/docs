@@ -62,6 +62,10 @@ Select 文の実行
 
 これは引数として複合データ型を使用することも可能です。 ::
 
+    use Cake\Datasource\ConnectionManager;
+    use DateTime;
+
+    $connection = ConnectionManager::get('default');
     $results = $connection
         ->execute(
             'SELECT * FROM articles WHERE created >= :created',
@@ -76,7 +80,7 @@ SQL 文を手で書く代わりに、クエリービルダーを使うことも�
         ->newQuery()
         ->select('*')
         ->from('articles')
-        ->where(['created >' => new DateTime('1 day ago'), ['created' => 'datetime']])
+        ->where(['created >' => new DateTime('1 day ago')], ['created' => 'datetime'])
         ->order(['title' => 'DESC'])
         ->execute()
         ->fetchAll('assoc');
@@ -87,6 +91,7 @@ Insert 文の実行
 データベースに行を追加するのは、通常は数行の話しです。 ::
 
     use Cake\Datasource\ConnectionManager;
+    use DateTime;
 
     $connection = ConnectionManager::get('default');
     $connection->insert('articles', [

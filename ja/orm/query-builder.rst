@@ -507,7 +507,7 @@ ORM とオブジェクトの結果セットは強力である一方で、エン�
 もし、この処理を無効化したい場合、このようにします。 ::
 
     $query = $articles->find();
-    $query->hydrate(false); // エンティティーの代わりに配列を返す
+    $query->enableHydration(false); // エンティティーの代わりに配列を返す
     $result = $query->toList(); // クエリーを実行し、配列を返す
 
 これらの行を実行した後、結果はこのようになります。 ::
@@ -840,7 +840,7 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
         ->where(function (QueryExpression $exp, Query $q) {
             return $exp->equalFields('countries.id', 'cities.country_id');
         })
-        ->andWhere(['population >', 5000000]);
+        ->andWhere(['population >' => 5000000]);
 
     $query = $countries->find()
         ->where(function (QueryExpression $exp, Query $q) {
@@ -855,7 +855,7 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
         ->where(function (QueryExpression $exp, Query $q) {
             return $exp->equalFields('countries.id', 'cities.country_id');
         })
-        ->andWhere(['population >', 5000000]);
+        ->andWhere(['population >' => 5000000]);
 
     $query = $countries->find()
         ->where(function ($exp, $q) use ($subquery) {
@@ -1118,7 +1118,6 @@ Join を追加する
 追加の join をクエリービルダーに加えることもできます。 ::
 
     $query = $articles->find()
-        ->hydrate(false)
         ->join([
             'table' => 'comments',
             'alias' => 'c',
@@ -1129,7 +1128,6 @@ Join を追加する
 複数 join の連想配列を渡すことで、複数の join を一度に追加できます。 ::
 
     $query = $articles->find()
-        ->hydrate(false)
         ->join([
             'c' => [
                 'table' => 'comments',
@@ -1147,7 +1145,6 @@ Join を追加する
 join の条件も条件の配列と同じように表現できます。 ::
 
     $query = $articles->find()
-        ->hydrate(false)
         ->join([
             'c' => [
                 'table' => 'comments',
