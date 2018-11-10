@@ -24,21 +24,29 @@ find はデータ取得のための、非常に多機能でとても良く働い
 任意です。 ::
 
     array(
-        'conditions' => array('Model.field' => $thisValue), //検索条件の配列
-        'recursive' => 1, //int
-        'fields' => array('Model.field1', 'DISTINCT Model.field2'), //フィールド名の配列
-        'order' => array('Model.created', 'Model.field3 DESC'), //並び順を文字列または配列で指定
-        'group' => array('Model.field'), //GROUP BYのフィールド
-        'limit' => n, //int
-        'page' => n, //int
-        'offset' => n, //int
-        'callbacks' => true //falseの他に'before'、'after'を指定できます
+        'conditions' => array('Model.field' => $thisValue), // 検索条件の配列
+        'recursive' => 1, // int
+        // フィールド名の配列
+        'fields' => array('Model.field1', 'DISTINCT Model.field2'),
+        // 並び順を文字列または配列で指定
+        'order' => array('Model.created', 'Model.field3 DESC'),
+        'group' => array('Model.field'), // GROUP BYのフィールド
+        'limit' => n, // int
+        'page' => n, // int
+        'offset' => n, // int
+        'callbacks' => true, // falseの他に'before'、'after'を指定できます
+        'having' => array('COUNT(Model.field) >' => 1), // HAVING 条件の配列
+        'lock' => true, // FOR UPDATE ロックを有効にします
     )
 
 これ以外のパラメータを追加したり使用することが可能です。いくつかの find() のタイプとビヘイビアは、
 この機能を使用します。そして、あなた自身のモデルのメソッドでも可能です。
 
 もし、find() 操作がレコードの照合に失敗した場合、空の配列を返します。
+
+
+.. versionadded:: 2.10.0
+    ``having`` と ``lock`` オプションが追加されました。
 
 .. _model-find-first:
 
