@@ -204,7 +204,7 @@ Dans l'exemple ci-dessus, le block ``navbar`` va seulement contenir le contenu
 ajouté dans la première section. Puisque le block a été défini dans la vue
 enfant, le contenu par défaut avec la balise ``<p>`` sera écarté.
 
-.. versionadded: 2.3
+.. versionadded:: 2.3
     ``startIfEmpty()`` et ``prepend()`` ont été ajoutées dans 2.3.
 
 .. note::

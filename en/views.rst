@@ -200,7 +200,7 @@ In the above example, the ``navbar`` block will only contain the content added
 in the first section. Since the block was defined in the child view, the
 default content with the ``<p>`` tag will be discarded.
 
-.. versionadded: 2.3
+.. versionadded:: 2.3
     ``startIfEmpty()`` and ``prepend()`` were added in 2.3
 
 .. note::
