@@ -652,7 +652,7 @@ findAllBy
     ));
 
 .. versionadded:: 2.8.0
-    カスタムマジック finder は 2.8.0 に追加されました。
+    カスタムマジック finder が 2.8.0 で追加されました。
 
 findBy
 ------
@@ -988,7 +988,7 @@ CakePHP は null も受け入れることができます。次のクエリは、
         )
     )
 
-上記サンプルは次のようなSQLを生成します。 ::
+上記サンプルは次のような SQL を生成します。 ::
 
     SELECT `Company`.`id`, `Company`.`name`,
     `Company`.`description`, `Company`.`location`,
@@ -1039,7 +1039,7 @@ find メソッドを呼ぶような感じですが、これは SQL 文字列を�
 
     $this->User->find('all', compact('conditions'));
 
-このサンプルは以下のようなSQLを生成します。 ::
+このサンプルは以下のような SQL を生成します。 ::
 
     SELECT
         "User"."id" AS "User__id",
@@ -1058,7 +1058,7 @@ find メソッドを呼ぶような感じですが、これは SQL 文字列を�
         )
 
 また、クエリの一部 (実際の生の SQL) で渡す必要がある場合も、
-データソースの **expressions** を使えば、他のfindクエリでも
+データソースの **expressions** を使えば、他の find クエリでも
 同じようにできます。
 
 .. _prepared-statements:
