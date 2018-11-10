@@ -202,7 +202,7 @@ En el ejemplo de arriba, el bloque ``navbar`` sólo tendrá contenido si
 es agregado después de la primera sección. Ya que el bloque está definido
 en la vista hija, el contenido predeterminado con ``<p>`` será descartado.
 
-.. versionadded: 2.3
+.. versionadded:: 2.3
     ``startIfEmpty()`` y ``prepend()`` fueron añandidos en la versión 2.3
 
 .. note::
