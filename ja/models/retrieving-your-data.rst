@@ -1015,12 +1015,12 @@ CakePHP は null も受け入れることができます。次のクエリは、
 find メソッドを呼ぶような感じですが、これは SQL 文字列を返します。
 その後、expression を呼び出し、その戻り値を conditions 配列に追加します。 ::
 
-    $conditionsSubQuery['"User2"."status"'] = 'B';
+    $conditionsSubQuery['User2.status'] = 'B';
 
     $db = $this->User->getDataSource();
     $subQuery = $db->buildStatement(
         array(
-            'fields'     => array('"User2"."id"'),
+            'fields'     => array('User2.id'),
             'table'      => $db->fullTableName($this->User),
             'alias'      => 'User2',
             'limit'      => null,
@@ -1032,7 +1032,7 @@ find メソッドを呼ぶような感じですが、これは SQL 文字列を�
         ),
         $this->User
     );
-    $subQuery = ' "User"."id" NOT IN (' . $subQuery . ') ';
+    $subQuery = 'User.id NOT IN (' . $subQuery . ') ';
     $subQueryExpression = $db->expression($subQuery);
 
     $conditions[] = $subQueryExpression;
@@ -1042,19 +1042,19 @@ find メソッドを呼ぶような感じですが、これは SQL 文字列を�
 このサンプルは以下のような SQL を生成します。 ::
 
     SELECT
-        "User"."id" AS "User__id",
-        "User"."name" AS "User__name",
-        "User"."status" AS "User__status"
+        User.id AS "User__id",
+        User.name AS "User__name",
+        User.status AS "User__status"
     FROM
-        "users" AS "User"
+        users AS User
     WHERE
-        "User"."id" NOT IN (
+        User.id NOT IN (
             SELECT
-                "User2"."id"
+                User2.id
             FROM
-                "users" AS "User2"
+                users AS User2
             WHERE
-                "User2"."status" = 'B'
+                "User2.status" = 'B'
         )
 
 また、クエリの一部 (実際の生の SQL) で渡す必要がある場合も、
