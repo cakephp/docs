@@ -327,57 +327,44 @@ The event is not triggered if a transaction is started before calling delete.
 Callback priorities
 -------------------
 
-If you are using these callbacks from your ``Table`` together with ``Behaviour``'s be aware of the priority your callbacks
-in the ``Table`` class have in comparison to the priority of the callbacks from your ``Behaviour``s. The default ``priority``
-of any ``Event`` is 10. If 2 ``Event``s are fired with the same priority, the ``Event`` in the class that got initialized 
-first will be executed first.
+When using events on your tables and behaviors be aware of the priority
+and the order listeners are attached. Behavior events are attached before Table
+events are. With the default priorities this means that Behavior callbacks are
+triggered **before** the Table event with the same name.
 
-For example, ``TreeBehavior`` is initialized before your ``Model``. This means, ``TreeBehavior.beforeDelete`` will be 
-actively deleting a MPTT-Nodes children, before your ``Model.beforeDelete`` is executed. Therefor you can not work with
-the children of the node in ``Model.beforeDelete``.
+As an example, if your Table is using ``TreeBehavior`` the
+``TreeBehavior::beforeDelete()`` method will be called before your table's
+``beforeDelete()`` method, and you will not be able to work wth the child nodes
+of the record being deleted in your Table's method.
 
-To avoid this, you can choose one of the following ways to set the priority:
+You can manage event priorities in one of a few ways:
 
-1) Change the Behaviours ``priority``. This will increase or decrease the priority of all ``Event``s in the Behavior 
-and might cause a wrong execution order on other Events, f.e. instead of your Events on ``beforeDelete`` your Events 
-on ``afterSave`` might run in the wrong order.
+#. Change the ``priority`` of a Behavior's listeners using the ``priority``
+   option. This will modify the priority of **all** callback methods in the
+   Behavior::
 
-    namespace App\Model\Table;
+        // In a Table initialize() method
+        $this->addBehavior('Tree', [
+            // Default value is 10 and listeners are dispatched from the
+            // lowest to highest priority.
+            'priority' => 2,
+        ]);
 
-    use Cake\ORM\Table;
+#. Modify the ``priority`` in your ``Table`` class by using the
+   ``Model.implementedEvents()`` method. This allows you to assign a different
+   priority per callback-function::
 
-    class ArticlesTable extends Table
-    {
-        public function initialize(array $config)
-        {
-            $this->addBehavior('Tree', [
-				'priotity' => 2
-			]);
-        }
-    }
-
-2) Set the ``priority`` for the ``Event``s in your ``Table`` class by using the ``Model.implementedEvents()`` function. 
-This allows you to assign a different priority per callback-function.
-
-	namespace App\Model\Table;
-
-    use Cake\ORM\Table;
-
-    class ArticlesTable extends Table
-    {
+        // In a Table class. 
         public function implementedEvents()
         {
-            return [
-			    'Model.beforeDelete' => [
-				    'callable' => 'beforeDelete',
-                    'priority' => 3
-                ],
+            $events = parent::implementedEvents();
+            $events['Model.beforeDelete'] = [
+                'callable' => 'beforeDelete',
+                'priority' => 3
             ];
-        }
-    }
 
-3) Use the ``Eventmanager``, add a ``listener`` and assign a ``priority`` as described in 
-:ref:`the guide to the Events System <events>`.
+            return $events;
+        }
 
 Behaviors
 =========
