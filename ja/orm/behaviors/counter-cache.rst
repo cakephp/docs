@@ -112,7 +112,7 @@ entity-update がアソシエーションを変更した場合、コールバッ
 
     これを ``belongsToMany`` アソシエーションに対して機能させることは可能ですが、
     アソシエーションオプションで設定されたカスタム ``through`` テーブルで CounterCache
-    ビヘイビアーを有効にする必要があります。
+    ビヘイビアーを有効にして ``cascadeCallbacks`` 設定オプションを true にする必要があります。
     カスタム JOIN テーブルを設定する方法は :ref:`using-the-through-option` を参照してください。
 
 .. versionchanged:: 3.6.0

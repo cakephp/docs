@@ -174,6 +174,32 @@ Doctors hasOne Mentors mentors.doctor\_id
         }
     }
 
+異なる Addresses を複数のアソシエーションに分割したい場合は、次のようにすることができます。 ::
+
+    class UsersTable extends Table
+    {
+        public function initialize(array $config)
+        {
+            $this->hasOne('HomeAddress', [
+                    'className' => 'Addresses'
+                ])
+                ->setProperty('home_address')
+                ->setConditions(['HomeAddress.label' => 'Home'])
+                ->setDependent(true);
+            $this->hasOne('WorkAddress', [
+                    'className' => 'Addresses'
+                ])
+                ->setProperty('work_address')
+                ->setConditions(['WorkAddress.label' => 'Work'])
+                ->setDependent(true);
+        }
+    }
+
+.. note::
+
+    条件の中に ``label`` のような同じカラムを持つ複数の hasOne アソシエーションがある場合は、
+    上記のようにカラム名の前にテーブルの別名を使用する必要があります。
+
 hasOne アソシエーションの配列で可能なキーは以下の通りです。
 
 - **className**: 当該のモデルに関連付けられるモデルのクラス名。 'User hasOne Address'
