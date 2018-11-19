@@ -390,8 +390,8 @@ CSRF protection can be applied to your entire application, or to specific routin
 
 .. note::
 
-    You cannot use both following approaches together, you must choose only one.
-    If you use both approaches together, CSRF token mismatch error will occur on every `PUT` and `POST` request
+    You cannot use both of the following approaches together, you must choose only one.
+    If you use both approaches together, a CSRF token mismatch error will occur on every `PUT` and `POST` request
 
 
 .. warning::
