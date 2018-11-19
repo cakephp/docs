@@ -17,7 +17,8 @@ Deprecated Features Removed
 All methods, properties and functionality that was emitting deprecation warnings
 as of 3.6 have been removed.
 
-Authentication functionality has been splitted into standalone plugins `Authentication <https://github.com/cakephp/authentication>`__ and `Authorization <https://github.com/cakephp/authorization>`__.
+Authentication functionality has been splitted into standalone plugins
+`Authentication <https://github.com/cakephp/authentication>`__ and `Authorization <https://github.com/cakephp/authorization>`__.
 The former RssHelper can be found as standalone `Feed plugin <https://github.com/dereuromark/cakephp-feed>`__ with similar functionality.
 
 Breaking Changes
@@ -26,50 +27,86 @@ Breaking Changes
 In addition to the removal of deprecated features there have been breaking
 changes made:
 
+Controller
+----------
+
+* ``Cake\Controller\Controller::referer()`` now defaults the ``local``
+  parameter to true, instead of false. This makes using referer headers safer as
+  they will be constrained to your application's domain by default.
+
+Http
+----
+
+* The default value of ``ServerRequest::getParam()`` when a parameter is missing
+  is now ``null`` and not ``false``.
+* ``Cake\Http\Client\Response::isOk()`` now returns ``true`` for all 2xx and 3xx
+  response codes.
+* ``Cake\Http\ServerRequest::referer()`` now returns ``null`` when the current
+  request has no referer. Previously it would return ``/``.
+* The Session cookie name is no longer set to ``CAKEPHP`` by default. Instead
+  the default cookie name defined in your ``php.ini`` file is used. You can use
+  the ``Session.cookie`` configuration option to set the cookie name.
+
+Router
+------
+
+* ``RoutBuilder::resources()`` now inflects resource names to dasherized form
+  instead of underscored by default in URLs. You can retain underscored
+  inflection by using ``'inflect' => 'underscore'`` in ``$options`` argument.
+* ``Router::plugin()`` and ``Router::prefix()`` now use plugin/prefix name in
+  dasherized form in URL by default. You can retain underscored from (or any other
+  custom path) by using ``'path'`` key in ``$options`` argument.
+
+Database
+--------
+
+* Type mapping classes in ``Cake\Database\TypeInterface`` no longer inherit from
+  ``Type``, and leverage ``BatchCastingInterface`` features now.
+* ``Cake\Database\Type::map()`` only functions as a setter now. You must use
+  ``Type::getMap()`` to inspect type instances.
+* Date, Time, Timestamp, and Datetime column types now return immutable time
+  objects by default now.
+
+View
+----
+
 * Templates have been moved from ``src/Template/`` to ``templates/`` folder on
   app and plugin root. Special templates folder like ``Cell``, ``Element``,
   ``Email`` and ``Plugin`` have be renamed to lower case ``cell``, ``element``,
   ``email`` and ``plugin`` respectively.
 * The template extension has also been changed from ``.ctp`` to ``.php``.
-* Locale files have been moved from ``src/Locale`` to ``resources/locales``.
-* Constants ``View::NAME_ELEMENT`` and ``View::NAME_LAYOUT`` have been removed.
-  You can use ``View::TYPE_ELEMENT`` and ``View::TYPE_LAYOUT``.
-* The Session cookie name is no longer set to ``CAKEPHP`` by default. Instead
-  the default cookie name defined in your ``php.ini`` file is used. You can use
-  the ``Session.cookie`` configuration option to set the cookie name.
-* The default value of ``ServerRequest::getParam()`` when a parameter is missing
-  is now ``null`` and not ``false``.
-* Type mapping classes in ``Cake\Database\TypeInterface`` no longer inherit from
-  ``Type``, and leverage ``BatchCastingInterface`` features now.
-* ``Cake\Database\Type::map()`` only functions as a setter now. You must use
-  ``Type::getMap()`` to inspect type instances.
-* ``Cake\Http\Client\Response::isOk()`` now returns ``true`` for all 2xx and 3xx
-  response codes.
-* ``Cake\Http\ServerRequest::referer()`` now returns ``null`` when the current
-  request has no referer. Previously it would return ``/``.
-* Date, Time, Timestamp, and Datetime column times now return immutable time
-  objects by default now.
 * ``Cake\View\View`` will re-render views if ``render()`` is called multiple
   times instead of returning ``null``.
 * ``Cake\View\Helper\PaginatorHelper::hasPage()`` has had its arguments
   reversed. This makes it consistent with other paginator methods where the
   'model' is the second argument.
+* ``Cake\View\Helper\UrlHelper::build()`` no longer accepts a boolean for the
+  second parameter. You must use ``['fullBase' => true]`` instead.
+* Constants ``View::NAME_ELEMENT`` and ``View::NAME_LAYOUT`` have been removed.
+  You can use ``View::TYPE_ELEMENT`` and ``View::TYPE_LAYOUT``.
+
+Utility
+-------
 * ``Cake\Utility\Xml::fromArray()`` now requires an array for the ``$options``
   parameter.
 * ``Cake\Filesystem\Folder::copy($to, array $options = [])`` and
   ``Cake\Filesystem\Folder::move($to, array $options = [])`` have now the target
   path extracted as first argument.
-* ``Cake\View\Helper\UrlHelper::build()`` no longer accepts a boolean for the
-  second parameter. You must use ``['fullBase' => true]`` instead.
-* Return values of ``string|bool`` are now ``string|null`` across the framework.
 * The ``readFile`` option of ``Xml::build()`` is no longer true by default.
   Instead you must enable ``readFile`` to read local files.
-* ``Cake\Controller\Controller::referer()`` now defaults the ``local``
-  parameter to true, instead of false. This makes using referer headers safer as
-  they will be constrained to your application's domain by default.
+
+Cache
+-----
+
 * ``Cake\Cache\CacheEngine::gc()`` and all implementations of this method have
   been removed. This method was a no-op in most cache drivers and was only used
   in file caching.
+
+Miscellaneous
+-------------
+
+* Locale files have been moved from ``src/Locale`` to ``resources/locales``.
+* Return values of ``string|bool`` are now ``string|null`` across the framework.
 * The ``cacert.pem`` file that was bundled in CakePHP has been replaced by
   a dependency on `composer/ca-bundle <https://packagist.org/packages/composer/ca-bundle>_`.
 
