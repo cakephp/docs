@@ -129,7 +129,7 @@ when a field can or cannot be empty:
 An example of these methods in action is::
 
     // Prior to 3.6.12 you must use allowEmpty().
-    $validator->allowEmptyString('published')
+    $validator->allowEmptyDateTime('published')
         ->notEmptyString('title', 'Title cannot be empty')
         ->notEmptyString('body', 'Body cannot be empty', 'create')
         ->allowEmptyFile('header_image', 'update');

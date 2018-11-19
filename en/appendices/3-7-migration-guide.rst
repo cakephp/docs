@@ -239,6 +239,10 @@ Validation
 
 * ``Cake\Validation\Validation::iban()`` was added for validating international
   bank account numbers.
+* ``Cake\Validation\Validator::allowEmptyString()``, ``allowEmptyArray()``,
+  ``allowEmptyDate()``, ``allowEmptyTime()``, ``allowEmptyDateTime()``, and
+  ``allowEmptyFile()`` were added. These new methods replace ``allowEmpty()``
+  and give you more control over what a field should consider empty.
 
 View
 ----
