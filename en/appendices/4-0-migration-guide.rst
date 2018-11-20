@@ -50,7 +50,7 @@ Http
 Router
 ------
 
-* ``RoutBuilder::resources()`` now inflects resource names to dasherized form
+* ``RouteBuilder::resources()`` now inflects resource names to dasherized form
   instead of underscored by default in URLs. You can retain underscored
   inflection by using ``'inflect' => 'underscore'`` in ``$options`` argument.
 * ``Router::plugin()`` and ``Router::prefix()`` now use plugin/prefix name in
