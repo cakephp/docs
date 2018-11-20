@@ -155,11 +155,20 @@ icon     image/x-icon
     );
     ?>
     // Output (line breaks added)
+    // Note: The helper code makes two meta tags to  ensure the
+    // icon is downloaded by both newer and older browsers
+    // which require different rel attribute values.
     <link
-        href="http://example.com/favicon.ico"
-        title="favicon.ico" type="image/x-icon"
-        rel="alternate"
+        href="/subdir/favicon.ico" 
+        type="image/x-icon" 
+        rel="icon"
     />
+    <link
+        href="/subdir/favicon.ico" 
+        type="image/x-icon" 
+        rel="shortcut icon"
+    />
+    
     <?= $this->Html->meta(
         'Comments',
         '/comments/index.rss',
