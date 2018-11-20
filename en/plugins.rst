@@ -747,7 +747,17 @@ You can customize the command names by defining each command in your plugin::
     }
 
 
-Publishing Your Plugin
+Testing your Plugin
+===================
+
+...
+
+If you have to test controllers or URL generation in general, make sure you
+wire up some routing in your `tests/bootstrap.php`.
+
+For more information see :ref:`testing plugins <testing.rst> page.
+
+Publishing your Plugin
 ======================
 
 CakePHP plugins should be published to `the packagist
