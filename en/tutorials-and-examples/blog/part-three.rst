@@ -217,7 +217,7 @@ for both the ``lft`` and ``rght`` columns in your CategoriesTable model::
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create');
+            ->allowEmptyString('id', 'create');
 
         $validator
             ->add('lft', 'valid', ['rule' => 'numeric'])
