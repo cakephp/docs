@@ -221,8 +221,8 @@ different categories of customers, you might consider creating a route. This
 allows you to link to ``/government`` rather than ``/pages/display/5``.
 
 A common use for routing is to rename controllers and their actions. Instead of
-accessing our users controller at ``/users/some_action/5``, we'd like to be able
-to access it through ``/cooks/some_action/5``. The following route takes care of
+accessing our users controller at ``/users/some-action/5``, we'd like to be able
+to access it through ``/cooks/some-action/5``. The following route takes care of
 that::
 
     $routes->connect(
@@ -238,8 +238,8 @@ additional positional arguments given. These arguments will be made available in
 the :ref:`passed-arguments` array.
 
 When generating URLs, routes are used too. Using
-``['controller' => 'Users', 'action' => 'some_action', 5]`` as
-a URL will output ``/cooks/some_action/5`` if the above route is the
+``['controller' => 'Users', 'action' => 'some-action', 5]`` as
+a URL will output ``/cooks/some-action/5`` if the above route is the
 first match found.
 
 The routes we've connected so far will match any HTTP verb. If you are building
@@ -635,7 +635,7 @@ You can define prefixes inside plugin scopes as well::
         });
     });
 
-The above would create a route template like ``/debug_kit/admin/{controller}``.
+The above would create a route template like ``/debug-kit/admin/{controller}``.
 The connected route would have the ``plugin`` and ``prefix`` route elements set.
 
 When defining prefixes, you can nest multiple prefixes if necessary::
@@ -683,7 +683,7 @@ Routes for :doc:`/plugins` should be created using the ``plugin()``
 method. This method creates a new routing scope for the plugin's routes::
 
     Router::plugin('DebugKit', function ($routes) {
-        // Routes connected here are prefixed with '/debug_kit' and
+        // Routes connected here are prefixed with '/debug-kit' and
         // have the plugin route element set to 'DebugKit'.
         $routes->connect('/{controller}');
     });
@@ -705,7 +705,7 @@ When using scopes you can nest plugin scopes within prefix scopes::
         });
     });
 
-The above would create a route that looks like ``/admin/debug_kit/{controller}``.
+The above would create a route that looks like ``/admin/debug-kit/{controller}``.
 It would have the ``prefix``, and ``plugin`` route elements set. The
 :ref:`plugin-routes` section has more information on building plugin routes.
 
@@ -1095,7 +1095,7 @@ You can map additional resource methods using the ``map`` option::
      // This would connect /articles/deleteAll
 
 In addition to the default routes, this would also connect a route for
-`/articles/delete_all`. By default the path segment will match the key name. You
+`/articles/delete-all`. By default the path segment will match the key name. You
 can use the 'path' key inside the resource definition to customize the path
 name::
 
@@ -1104,11 +1104,11 @@ name::
             'updateAll' => [
                 'action' => 'updateAll',
                 'method' => 'DELETE',
-                'path' => '/update_many'
+                'path' => '/update-many'
             ],
         ]
     ]);
-    // This would connect /articles/update_many
+    // This would connect /articles/update-many
 
 If you define 'only' and 'map', make sure that your mapped methods are also in
 the 'only' list.
@@ -1134,23 +1134,17 @@ URL Inflection for Resource Routes
 
 By default, multi-worded controllers' URL fragments are the underscored
 form of the controller's name. E.g., ``BlogPostsController``'s URL fragment
-would be **/blog_posts**.
+would be **/blog-posts**.
 
 You can specify an alternative inflection type using the ``inflect`` option::
 
     Router::scope('/', function ($routes) {
         $routes->resources('BlogPosts', [
-            'inflect' => 'dasherize' // Will use ``Inflector::dasherize()``
+            'inflect' => 'underscore' // Will use ``Inflector::underscore()``
         ]);
     });
 
 The above will generate URLs styled like: **/blog-posts**.
-
-.. note::
-
-    As of CakePHP 3.1 the official app skeleton uses ``DashedRoute`` as its
-    default route class. Using the ``'inflect' => 'dasherize'`` option when
-    connecting resource routes is recommended for URL consistency.
 
 Changing the Path Element
 -------------------------
