@@ -143,6 +143,13 @@ Behavior Changes
 New Features
 ============
 
+Cache
+-----
+
+* The ``ArrayEngine`` was added. This engine provides an ephemeral in memory
+  cache implementation. It is ideal for test suites or long running processes
+  where you don't want persistent cache storage.
+
 Database
 --------
 
