@@ -106,7 +106,6 @@ Miscellaneous
 -------------
 
 * Locale files have been moved from ``src/Locale`` to ``resources/locales``.
-* Return values of ``string|bool`` are now ``string|null`` across the framework.
 * The ``cacert.pem`` file that was bundled in CakePHP has been replaced by
   a dependency on `composer/ca-bundle <https://packagist.org/packages/composer/ca-bundle>_`.
 
