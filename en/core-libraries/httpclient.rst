@@ -358,9 +358,11 @@ Reading Response Bodies
 You read the entire response body as a string::
 
     // Read the entire response as a string.
-    $response->body();
+    $response->getStringBody();
 
-    // As a property
+    // Prior to 3.7.0 use
+    $response->body();
+    // or
     $response->body;
 
 You can also access the stream object for the response and use its methods::
@@ -385,11 +387,17 @@ XML data is decoded into a ``SimpleXMLElement`` tree::
     // Get some XML
     $http = new Client();
     $response = $http->get('http://example.com/test.xml');
+    $xml = $response->getXml();
+
+    // Prior to 3.7.0
     $xml = $response->xml;
 
     // Get some JSON
     $http = new Client();
     $response = $http->get('http://example.com/test.json');
+    $json = $response->getJson();
+
+    // Prior to 3.7.0
     $json = $response->json;
 
 The decoded response data is stored in the response object, so accessing it
@@ -413,9 +421,6 @@ treated as case-insensitive values when accessing them through methods::
     // Get the response encoding
     $response->getEncoding();
 
-    // Get an array of key=>value for all headers
-    $response->headers;
-
 Accessing Cookie Data
 ---------------------
 
@@ -432,9 +437,6 @@ data you need about the cookies::
     // includes value, expires, path, httponly, secure keys.
     $response->getCookieData('session_id');
 
-    // Access the complete data for all cookies.
-    $response->cookies;
-
 Checking the Status Code
 ------------------------
 
@@ -448,9 +450,6 @@ Response objects provide a few methods for checking status codes::
 
     // Get the status code
     $response->getStatusCode();
-
-    // __get() helper
-    $response->code;
 
 .. meta::
     :title lang=en: HttpClient

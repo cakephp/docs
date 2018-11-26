@@ -17,6 +17,20 @@ The following is a list of deprecated methods, properties and behaviors. These
 features will continue to function until 4.0.0 after which they will be removed.
 
 * ``Cake\Form\Form::errors()`` is deprecated. Use ``getErrors()`` instead.
+* ``Cake\Http\Client\Response::$headers`` is deprecated. Use ``getHeaders()`` or
+  ``getHeaderLine()`` instead.
+* ``Cake\Http\Client\Response::$body`` is deprecated. Use ``getStringBody()``
+  instead.
+* ``Cake\Http\Client\Response::$json`` is deprecated. Use ``getJson()``
+  instead.
+* ``Cake\Http\Client\Response::$xml`` is deprecated. Use ``getXml()``
+  instead.
+* ``Cake\Http\Client\Response::$cookies`` is deprecated. Use ``getCookies()``
+  instead.
+* ``Cake\Http\Client\Response::$code`` is deprecated. Use ``getStatusCode()``
+  instead.
+* ``Cake\Http\Client\Response::body()`` is deprecated. Use ``getStringBody()``
+  instead.
 * ``Cake\ORM\Association::className()`` has been deprecated. Use
   ``getClassName()`` and ``setClassName()`` instead.
 * Using ``Cake\Database\Query::join()`` to read information is deprecated.
