@@ -167,8 +167,6 @@ Form
 * ``Cake\Form\Form::setData()`` was added. This method makes defining default
   values for forms simpler.
 * ``Cake\Form\Form::getData()`` was added.
-* Added ``autoSetCustomValidity`` option to the ``FormHelper`` to add custom
-empty and required validation messages to HTML5 validation 
 
 Http
 ----
