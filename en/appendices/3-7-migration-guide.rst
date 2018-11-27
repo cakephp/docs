@@ -246,6 +246,7 @@ TestSuite
 * ``getMockForModel()`` now supports ``null`` for the ``$methods`` parameter.
   This allows you to create mocks that still execute the original code. This
   aligns the behavior with how PHPUnit mock objects work.
+* Added ``EmailTrait`` to help facilitate testing emails.
 
 
 Utility
