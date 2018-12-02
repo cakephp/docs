@@ -169,6 +169,15 @@ Database
 
 * ``Cake\Database\FunctionsBuilder::rand()`` was added.
 
+Datasource
+----------
+
+* ``Paginator`` will now match unprefixed ``sort`` values in the query string to
+  the primary model if there also exists a matching model prefixed default sort
+  field. As an example, if your controller defines a default sort of
+  ``['Users.name' => 'desc']`` you can now use either ``Users.name`` or ``name``
+  as your sort key.
+
 Error
 -----
 
@@ -276,3 +285,6 @@ View
 * ``ViewBuilder`` had ``setVar()``, ``setVars()``, ``getVar()``, ``getVars()`` and
   ``hasVar()`` added. These methods will replace the public ``viewVars``
   property defined in ``ViewVarsTrait``.
+* ``PaginatorHelper`` will now match unprefixed sort keys to model prefixed ones
+  on the default model. This allow smooth operation with the changes made in
+  ``Cake\Datasource\Paginator``
