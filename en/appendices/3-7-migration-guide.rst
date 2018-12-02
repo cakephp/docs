@@ -256,6 +256,8 @@ TestSuite
   This allows you to create mocks that still execute the original code. This
   aligns the behavior with how PHPUnit mock objects work.
 * Added ``EmailTrait`` to help facilitate testing emails.
+* The default messages for integration assertions have been improved to provide
+  more context from the exception that was raised if possible.
 
 
 Utility
