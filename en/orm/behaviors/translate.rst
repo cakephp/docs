@@ -6,28 +6,131 @@ Translate
 .. php:class:: TranslateBehavior
 
 The Translate behavior allows you to create and retrieve translated copies
-of your entities in multiple languages. It does so by using a separate
-``i18n`` table where it stores the translation for each of the fields of any
-given Table object that it's bound to.
+of your entities in multiple languages.
 
 .. warning::
 
     The TranslateBehavior does not support composite primary keys at this point
     in time.
 
-A Quick Tour
+Translation Strategies
+======================
+
+The behavior offers two strategies for how the translations are stored.
+
+1. Eav Strategy: This strategy uses a ``i18n`` table where it stores the
+  translation for each of the fields of any given Table object that it's bound to.
+  This is currently the default strategy used by the behavior.
+
+2. Shadow table Strategy: This strategy use a separate "shadow table" for each
+  Table object to store translation of all translated fields of that table.
+
+
+Eav Strategy
 ============
 
-After creating the ``i18n`` table in your database attach the behavior to any
-Table object you want to make translatable::
+In order to use the Eav strategy, you need to create a ``i18n`` table with the
+correct schema. Currently the only way of loading the ``i18n`` table is by
+manually running the following SQL script in your database:
+
+.. code-block:: sql
+
+    CREATE TABLE i18n (
+        id int NOT NULL auto_increment,
+        locale varchar(6) NOT NULL,
+        model varchar(255) NOT NULL,
+        foreign_key int(10) NOT NULL,
+        field varchar(255) NOT NULL,
+        content text,
+        PRIMARY KEY	(id),
+        UNIQUE INDEX I18N_LOCALE_FIELD(locale, model, foreign_key, field),
+        INDEX I18N_FIELD(model, foreign_key, field)
+    );
+
+The schema is also available as sql file in **/config/schema/i18n.sql**.
+
+A note on language abbreviations: The Translate Behavior doesn't impose any
+restrictions on the language identifier, the possible values are only restricted
+by the ``locale`` column type/size. ``locale`` is defined as ``varchar(6)`` in
+case you want to use abbreviations like ``es-419`` (Spanish for Latin America,
+language abbreviation with area code `UN M.49
+<https://en.wikipedia.org/wiki/UN_M.49>`_).
+
+.. tip::
+
+    It's wise to use the same language abbreviations as required for
+    :doc:`Internationalization and Localization
+    </core-libraries/internationalization-and-localization>`. Thus you are
+    consistent and switching the language works identical for both, the
+    ``Translate Behaviour`` and ``Internationalization and Localization``.
+
+So it's recommended to use either the two letter ISO code of the language like
+``en``, ``fr``, ``de`` or the full locale name such as ``fr_FR``, ``es_AR``,
+``da_DK`` which contains both the language and the country where it is spoken.
+
+Shadow Table Strategy
+=====================
+
+Let's assume we have an ``articles`` table and we want it's ``title`` and ``body``
+fields to be translated. For that we create a shadow table ``articles_translations``::
+
+.. code-block:: sql
+
+    CREATE TABLE `articles_translations` (
+        `id` int(11) NOT NULL,
+        `locale` varchar(5) NOT NULL,
+        `title` varchar(255) NOT NULL,
+        `body` text NOT NULL,
+        PRIMARY KEY (`id`,`locale`)
+    );
+
+So basically the shadow table needs ``id`` and ``locale`` columns which together
+form the primary key and other columns with same name as primary table which
+need to be translated.
+
+
+Attaching the Translate Behavior to Your Tables
+===============================================
+
+Attaching the behavior can be done in the ``initialize()`` method in your Table
+class::
+
+    class ArticlesTable extends Table
+    {
+
+        public function initialize(array $config)
+        {
+            // By default Eav strategy will be used.
+            $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
+        }
+    }
+
+The first thing to note is that you are required to pass the ``fields`` key in
+the configuration array. This list of fields is needed to tell the behavior what
+columns will be able to store translations.
+
+If you want to use the shadow table strategy then you can configure the behavior
+as::
 
     class ArticlesTable extends Table
     {
         public function initialize(array $config)
         {
-            $this->addBehavior('Translate', ['fields' => ['title']]);
+            $this->addBehavior('Translate', [
+                'strategyClass' => \Cake\ORM\Behavior\Translate\ShadowTableStrategy,
+            ]);
         }
     }
+
+For shadow table strategy specifying the ``fields`` key is optional as the
+behavior can infer the fields from the shadow table columns.
+
+
+Quick tour
+==========
+
+Regardless of the datastructure strategy you choose the behavior provides the
+same API to manage translations.
 
 Now, select a language to be used for retrieving entities by changing
 the application language, which will affect all translations::
@@ -78,69 +181,9 @@ It is equally easy to save multiple translations at once::
 If you want to go deeper on how it works or how to tune the
 behavior for your needs, keep on reading the rest of this chapter.
 
-Initializing the i18n Database Table
-====================================
 
-In order to use the behavior, you need to create a ``i18n`` table with the
-correct schema. Currently the only way of loading the ``i18n`` table is by
-manually running the following SQL script in your database:
-
-.. code-block:: sql
-
-    CREATE TABLE i18n (
-        id int NOT NULL auto_increment,
-        locale varchar(6) NOT NULL,
-        model varchar(255) NOT NULL,
-        foreign_key int(10) NOT NULL,
-        field varchar(255) NOT NULL,
-        content text,
-        PRIMARY KEY	(id),
-        UNIQUE INDEX I18N_LOCALE_FIELD(locale, model, foreign_key, field),
-        INDEX I18N_FIELD(model, foreign_key, field)
-    );
-
-The schema is also available as sql file in **/config/schema/i18n.sql**.
-
-A note on language abbreviations: The Translate Behavior doesn't impose any
-restrictions on the language identifier, the possible values are only restricted
-by the ``locale`` column type/size. ``locale`` is defined as ``varchar(6)`` in
-case you want to use abbreviations like ``es-419`` (Spanish for Latin America,
-language abbreviation with area code `UN M.49
-<https://en.wikipedia.org/wiki/UN_M.49>`_).
-
-.. tip::
-
-    It's wise to use the same language abbreviations as required for
-    :doc:`Internationalization and Localization
-    </core-libraries/internationalization-and-localization>`. Thus you are
-    consistent and switching the language works identical for both, the
-    ``Translate Behaviour`` and ``Internationalization and Localization``.
-
-So it's recommended to use either the two letter ISO code of the language like
-``en``, ``fr``, ``de`` or the full locale name such as ``fr_FR``, ``es_AR``,
-``da_DK`` which contains both the language and the country where it is spoken.
-
-Attaching the Translate Behavior to Your Tables
-===============================================
-
-Attaching the behavior can be done in the ``initialize()`` method in your Table
-class::
-
-    class ArticlesTable extends Table
-    {
-
-        public function initialize(array $config)
-        {
-            $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
-        }
-    }
-
-The first thing to note is that you are required to pass the ``fields`` key in
-the configuration array. This list of fields is needed to tell the behavior what
-columns will be able to store translations.
-
-Using a Separate Translations Table
------------------------------------
+Using a Separate Translations Table for Eav strategy
+----------------------------------------------------
 
 If you wish to use a table other than ``i18n`` for translating a particular
 repository, you can specify it in the behavior's configuration. This is common
@@ -149,7 +192,6 @@ of the data that is stored for each different table::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->addBehavior('Translate', [
@@ -476,7 +518,3 @@ behavior during ``newEntity()`` or ``patchEntity()``::
 
 The above will use the validator created by ``validationTranslated`` to
 validated translated entities.
-
-.. versionadded:: 3.3.0
-    Validating translated entities, and streamlined translation saving was added
-    in 3.3.0
