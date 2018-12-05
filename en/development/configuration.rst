@@ -593,7 +593,7 @@ class like so::
     if (!$isCakeBakeShellRunning) {
         EventManager::instance()->on('Model.initialize', function($event) {
             $subject = $event->getSubject();
-            if (get_class($subject === 'Cake\ORM\Table') {
+            if (get_class($subject) === 'Cake\ORM\Table') {
                 $msg = sprintf(
                     'Missing table class or incorrect alias when registering table class for database table %s.',
                     $subject->getTable());
