@@ -726,7 +726,7 @@ already familiar to you::
     example, when the same users comments more than once on a single article.
 
 The data from the association that is 'matched' will be available on the
-``_matchingData`` property of entities. If you both match and contain the same
+``_matchingData`` property of entities. If both match and contain the same
 association, you can expect to get both the ``_matchingData`` and standard
 association properties in your results.
 
