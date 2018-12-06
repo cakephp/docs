@@ -290,3 +290,6 @@ View
 * ``PaginatorHelper`` will now match unprefixed sort keys to model prefixed ones
   on the default model. This allow smooth operation with the changes made in
   ``Cake\Datasource\Paginator``
+* ``FormHelper`` will now read ``maxLength`` validator rules and use them to
+  automatically define the ``maxlength`` attribute on HTML inputs if a max
+  length is not provided in the input options.
