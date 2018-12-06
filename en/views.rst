@@ -451,7 +451,8 @@ You can set the ``title`` block content from inside your view file::
 
     $this->assign('title', 'View Active Users');
     
-Empty values for the ``title`` block will be automatically replaced with a representation of the current template path, such as ``'Admin/Articles'``.
+Empty values for the ``title`` block will be automatically replaced with a
+representation of the current template path, such as ``'Admin/Articles'``.
 
 You can create as many layouts as you wish: just place them in the
 **src/Template/Layout** directory, and switch between them inside of your
@@ -560,12 +561,15 @@ You can pass data to an element through the element's second argument::
     ]);
 
 Inside the element file, all the passed variables are available as members of
-the parameter array (in the same way that ``Controller::set()`` in the
-controller works with template files). In the above example, the
+the parameter array. In the above example, the
 **src/Template/Element/helpbox.ctp** file can use the ``$helptext`` variable::
 
     // Inside src/Template/Element/helpbox.ctp
     echo $helptext; // Outputs "Oh, this text is very helpful."
+
+Keep in mind that in those view vars are merged with the view vars from the view
+itself. So all view vars set using ``Controller::set()`` in the controller and
+``View::set()`` in the view itself are also available inside the element.
 
 The ``View::element()`` method also supports options for the element.
 The options supported are 'cache' and 'callbacks'. An example::
