@@ -452,7 +452,7 @@ plugin routes in additional scopes or prefixes::
         });
     });
 
-The above would result in URLs like ``/backend/contact_manager/contacts``.
+The above would result in URLs like ``/backend/contact-manager/contacts``.
 
 .. versionadded:: 3.5.0
     ``RouteBuilder::loadPlugin()`` was added in 3.5.0
@@ -475,7 +475,6 @@ So, we place our new ContactsController in
 
     class ContactsController extends AppController
     {
-
         public function index()
         {
             //...
