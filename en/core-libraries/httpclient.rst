@@ -66,23 +66,9 @@ The filehandle will be read until its end; it will not be rewound before being r
 
 .. warning::
 
-    For compatibility reasons, strings beginning with ``@`` will be evaluated
-    as local or remote file paths.
-
-This functionality is deprecated as of CakePHP 3.0.5
-and will be removed in a future version. Until that happens, user data being passed
-to the Http Client must be sanitized as follows::
-
-    $response = $http->post('http://example.com/api', [
-        'search' => ltrim($this->request->getData('search'), '@'),
-    ]);
-
-If it is necessary to preserve leading ``@`` characters in query strings, you can pass
-a pre-encoded query string from ``http_build_query()``::
-
-    $response = $http->post('http://example.com/api', http_build_query([
-        'search' => $this->request->getData('search'),
-    ]));
+    For compatibility reasons, earlier versions of CakePHP will treat strings
+    beginning with ``@`` as local or remote file paths. This functionality was
+    deprecated in CakePHP 3.0.5 and was removed in a 3.7.
 
 Building Multipart Request Bodies by Hand
 -----------------------------------------
@@ -372,9 +358,11 @@ Reading Response Bodies
 You read the entire response body as a string::
 
     // Read the entire response as a string.
-    $response->body();
+    $response->getStringBody();
 
-    // As a property
+    // Prior to 3.7.0 use
+    $response->body();
+    // or
     $response->body;
 
 You can also access the stream object for the response and use its methods::
@@ -399,11 +387,17 @@ XML data is decoded into a ``SimpleXMLElement`` tree::
     // Get some XML
     $http = new Client();
     $response = $http->get('http://example.com/test.xml');
+    $xml = $response->getXml();
+
+    // Prior to 3.7.0
     $xml = $response->xml;
 
     // Get some JSON
     $http = new Client();
     $response = $http->get('http://example.com/test.json');
+    $json = $response->getJson();
+
+    // Prior to 3.7.0
     $json = $response->json;
 
 The decoded response data is stored in the response object, so accessing it
@@ -427,9 +421,6 @@ treated as case-insensitive values when accessing them through methods::
     // Get the response encoding
     $response->getEncoding();
 
-    // Get an array of key=>value for all headers
-    $response->headers;
-
 Accessing Cookie Data
 ---------------------
 
@@ -446,9 +437,6 @@ data you need about the cookies::
     // includes value, expires, path, httponly, secure keys.
     $response->getCookieData('session_id');
 
-    // Access the complete data for all cookies.
-    $response->cookies;
-
 Checking the Status Code
 ------------------------
 
@@ -462,9 +450,6 @@ Response objects provide a few methods for checking status codes::
 
     // Get the status code
     $response->getStatusCode();
-
-    // __get() helper
-    $response->code;
 
 .. meta::
     :title lang=en: HttpClient

@@ -16,22 +16,13 @@ Via the ``Load`` task you are able to load plugins in your
 
     bin/cake plugin load MyPlugin
 
-This will add the following to your **config/bootstrap.php**::
+This will add the following to your **src/Application.php**::
 
+    // In the bootstrap method add:
+    $this->addPlugin('MyPlugin');
+
+    // Prior to 3.6, add the following to config/bootstrap.php
     Plugin::load('MyPlugin');
-
-Adding the ``-b`` or ``-r`` switch to the load task will enable loading of the plugin's
-``bootstrap`` and ``routes`` values::
-
-    bin/cake plugin load -b MyPlugin
-
-    // Load the bootstrap.php from the plugin
-    Plugin::load('MyPlugin', ['bootstrap' => true]);
-
-    bin/cake plugin load -r MyPlugin
-
-    // Load the routes.php from the plugin
-    Plugin::load('MyPlugin', ['routes' => true]);
 
 If you are loading a plugin that only provides CLI tools - like bake - you can
 update your ``bootstrap_cli.php`` with::
@@ -49,8 +40,8 @@ You can unload a plugin by specifying its name::
 
     bin/cake plugin unload MyPlugin
 
-This will remove the line ``Plugin::load('MyPlugin',...)`` from your
-**config/bootstrap.php**.
+This will remove the line ``$this->addPlugin('MyPlugin',...)`` from 
+**src/Application.php**.
 
 Plugin Assets
 -------------

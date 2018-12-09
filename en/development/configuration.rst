@@ -563,7 +563,7 @@ global event listeners::
             // Call the parent to `require_once` config/bootstrap.php
             parent::bootstrap();
 
-            Plugin::load('MyPlugin', ['bootstrap' => true, 'routes' => true]);
+            $this->addPlugin('MyPlugin', ['bootstrap' => true, 'routes' => true]);
         }
     }
 

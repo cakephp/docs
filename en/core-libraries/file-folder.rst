@@ -234,10 +234,12 @@ Folder API
 
     Recursive directory move.
 
-.. php:staticmethod:: normalizePath(string $path)
+.. php:staticmethod:: normalizeFullPath(string $path)
 
-    Returns a correct set of slashes for given $path ('\\' for
-    Windows paths and '/' for other paths).
+    Returns a path with slashes normalized for the operating system.
+
+    .. versionadded:: 3.7.0
+
 
 .. php:method:: pwd()
 

@@ -232,8 +232,8 @@ the creation of new bugs.
 
 .. note::
 
-    EventManager is refreshed for each test method. This means that when running 
-    multiple tests at once, you will lose your event listeners that were 
+    EventManager is refreshed for each test method. This means that when running
+    multiple tests at once, you will lose your event listeners that were
     registered in config/bootstrap.php as the bootstrap is only executed once.
 
 .. _running-tests:
@@ -318,7 +318,7 @@ This will put the coverage results in your application's webroot directory. You
 should be able to view the results by going to
 ``http://localhost/your_app/coverage``.
 
-If you are using PHP 5.6.0 or greater, you can use ``phpdbg`` 
+If you are using PHP 5.6.0 or greater, you can use ``phpdbg``
 to generate coverage instead of xdebug. ``phpdbg`` is generally faster at
 generating coverage:
 
@@ -657,7 +657,7 @@ Fixture directory. You can also load fixtures from CakePHP core, or plugins::
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['plugin.DebugKit.articles', 'plugin.MyVendorName/MyPlugin.messages', 'core.comments'];
+        public $fixtures = ['plugin.DebugKit.Articles', 'plugin.MyVendorName/MyPlugin.Messages', 'core.Comments'];
     }
 
 Using the ``core`` prefix will load fixtures from CakePHP, and using a plugin
@@ -669,7 +669,7 @@ them using :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['app.articles', 'app.comments'];
+        public $fixtures = ['app.Articles', 'app.Comments'];
         public $autoFixtures = false;
 
         public function testMyFunction()
@@ -685,11 +685,11 @@ name::
 
     class ArticlesTest extends CakeTestCase
     {
-        public $fixtures = ['app.blog/articles', 'app.blog/comments'];
+        public $fixtures = ['app.Blog/Articles', 'app.Blog/Comments'];
     }
 
 In the above example, both fixtures would be loaded from
-``tests/Fixture/blog/``.
+``tests/Fixture/Blog/``.
 
 Testing Table Classes
 =====================
@@ -725,7 +725,7 @@ with the following contents::
 
     class ArticlesTableTest extends TestCase
     {
-        public $fixtures = ['app.articles'];
+        public $fixtures = ['app.Articles'];
     }
 
 In our test cases' variable ``$fixtures`` we define the set of fixtures that
@@ -747,7 +747,7 @@ now looks like this::
 
     class ArticlesTableTest extends TestCase
     {
-        public $fixtures = ['app.articles'];
+        public $fixtures = ['app.Articles'];
 
         public function setUp()
         {
@@ -805,9 +805,13 @@ Controller Integration Testing
 ==============================
 
 While you can test controller classes in a similar fashion to Helpers, Models,
-and Components, CakePHP offers a specialized ``IntegrationTestCase`` class.
-Using this class as the base class for your controller test cases allows you to
+and Components, CakePHP offers a specialized ``IntegrationTestTrait`` trait.
+Using this trait in your controller test cases allows you to
 test controllers from a high level.
+
+.. versionadded:: 3.7.0
+
+    The ``IntegrationTestCase`` class was moved into the ``IntegrationTestTrait`` trait.
 
 If you are unfamiliar with integration testing, it is a testing approach that
 makes it easy to test multiple units in concert. The integration testing
@@ -857,11 +861,14 @@ Create a file named **ArticlesControllerTest.php** in your
     namespace App\Test\TestCase\Controller;
 
     use Cake\ORM\TableRegistry;
-    use Cake\TestSuite\IntegrationTestCase;
+    use Cake\TestSuite\IntegrationTestTrait;
+    use Cake\TestSuite\TestCase;
 
-    class ArticlesControllerTest extends IntegrationTestCase
+    class ArticlesControllerTest extends TestCase
     {
-        public $fixtures = ['app.articles'];
+        use IntegrationTestTrait;
+
+        public $fixtures = ['app.Articles'];
 
         public function testIndex()
         {
@@ -907,7 +914,7 @@ Create a file named **ArticlesControllerTest.php** in your
     }
 
 This example shows a few of the request sending methods and a few of the
-assertions that ``IntegrationTestCase`` provides. Before you can do any
+assertions that ``IntegrationTestTrait`` provides. Before you can do any
 assertions you'll need to dispatch a request. You can use one of the following
 methods to send a request:
 
@@ -921,7 +928,7 @@ methods to send a request:
 
 All of the methods except ``get()`` and ``delete()`` accept a second parameter
 that allows you to send a request body. After dispatching a request you can use
-the various assertions provided by ``IntegrationTestCase`` or PHPUnit to
+the various assertions provided by ``IntegrationTestTrait`` or PHPUnit to
 ensure your request had the correct side-effects.
 
 .. versionadded:: 3.5.0
@@ -930,7 +937,7 @@ ensure your request had the correct side-effects.
 Setting up the Request
 ----------------------
 
-The ``IntegrationTestCase`` class comes with a number of helpers to make it easy
+The ``IntegrationTestTrait`` trait comes with a number of helpers to make it easy
 to configure the requests you will send to your application under test::
 
     // Set cookies
@@ -953,7 +960,7 @@ Testing Actions That Require Authentication
 
 If you are using ``AuthComponent`` you will need to stub out the session data
 that AuthComponent uses to validate a user's identity. You can use helper
-methods in ``IntegrationTestCase`` to do this. Assuming you had an
+methods in ``IntegrationTestTrait`` to do this. Assuming you had an
 ``ArticlesController`` that contained an add method, and that add method
 required authentication, you could write the following tests::
 
@@ -1058,7 +1065,7 @@ Integration Testing PSR-7 Middleware
 ------------------------------------
 
 Integration testing can also be used to test your entire PSR-7 application and
-:doc:`/controllers/middleware`. By default ``IntegrationTestCase`` will
+:doc:`/controllers/middleware`. By default ``IntegrationTestTrait`` will
 auto-detect the presence of an ``App\Application`` class and automatically
 enable integration testing of your Application. You can toggle this behavior
 with the ``useHttpServer()`` method::
@@ -1081,7 +1088,7 @@ arguments, by using the ``configApplication()`` method::
     }
 
 After enabling the PSR-7 mode, and possibly configuring your application class,
-you can use the remaining ``IntegrationTestCase`` features as normal.
+you can use the remaining ``IntegrationTestTrait`` features as normal.
 
 You should also take care to try and use :ref:`application-bootstrap` to load
 any plugins containing events/routes. Doing so will ensure that your
@@ -1121,8 +1128,29 @@ retain flash messages in the session so you can write assertions::
 
     $this->assertSession('That bookmark does not exist', 'Flash.flash.0.message');
 
+As of 3.7.0 there are additional test helpers for flash messages::
+
+
+    $this->enableRetainFlashMessages();
+    $this->get('/bookmarks/delete/9999');
+
+    // Assert a flash message in the 'flash' key.
+    $this->assertFlashMessage('Bookmark deleted');
+
+    // Assert the second flash message
+    $this->assertFlashMessageAt(1, 'Bookmark really deleted');
+
+    // Assert a flash messages uses the error element
+    $this->assertFlashElement('Flash/error');
+
+    // Assert the second flash message element
+    $this->assertFlashElementAt(1, 'Flash/error');
+
 .. versionadded:: 3.4.7
     ``enableRetainFlashMessages()`` was added in 3.4.7
+
+.. versionadded:: 3.7.0
+    Flash message assertions were added.
 
 Testing a JSON Responding Controller
 ------------------------------------
@@ -1199,7 +1227,7 @@ checked.
 Assertion methods
 -----------------
 
-The ``IntegrationTestCase`` class provides a number of assertion methods that
+The ``IntegrationTestTrait`` trait provides a number of assertion methods that
 make testing responses much simpler. Some examples are::
 
     // Check for a 2xx response code
@@ -1226,6 +1254,9 @@ make testing responses much simpler. Some examples are::
     // Check a part of the Location header
     $this->assertRedirectContains('/articles/edit/');
 
+    // Added in 3.7.0
+    $this->assertRedirectNotContains('/articles/edit/');
+
     // Assert not empty response content
     $this->assertResponseNotEmpty();
 
@@ -1234,6 +1265,9 @@ make testing responses much simpler. Some examples are::
 
     // Assert response content
     $this->assertResponseEquals('Yeah!');
+
+    // Assert response content doesn't equal
+    $this->assertResponseNotEquals('No!');
 
     // Assert partial response content
     $this->assertResponseContains('You won!');
@@ -1250,6 +1284,10 @@ make testing responses much simpler. Some examples are::
 
     // Assert response header.
     $this->assertHeader('Content-Type', 'application/json');
+    $this->assertHeaderContains('Content-Type', 'html');
+
+    // Added in 3.7.0
+    $this->assertHeaderNotContains('Content-Type', 'xml');
 
     // Assert view variables
     $user =  $this->viewVariable('user');
@@ -1336,9 +1374,9 @@ Testing Views
 
 Generally most applications will not directly test their HTML code. Doing so is
 often results in fragile, difficult to maintain test suites that are prone to
-breaking. When writing functional tests using :php:class:`IntegrationTestCase`
+breaking. When writing functional tests using :php:class:`IntegrationTestTrait`
 you can inspect the rendered view content by setting the ``return`` option to
-'view'. While it is possible to test view content using IntegrationTestCase,
+'view'. While it is possible to test view content using ``IntegrationTestTrait``,
 a more robust and maintainable integration/view testing can be accomplished
 using tools like `Selenium webdriver <http://seleniumhq.org>`_.
 
@@ -1577,7 +1615,7 @@ the event data::
 
     class OrdersTableTest extends TestCase
     {
-        public $fixtures = ['app.orders'];
+        public $fixtures = ['app.Orders'];
 
         public function setUp()
         {
@@ -1612,6 +1650,11 @@ global events does not require passing the event manager::
 
     Event tracking, ``assertEventFired()``, and ``assertEventFiredWith`` were
     added.
+
+Testing Email
+=============
+
+See :ref:`email-testing` for information on testing email.
 
 Creating Test Suites
 ====================
@@ -1658,7 +1701,7 @@ also need to prefix your plugin fixtures with ``plugin.blog.blog_posts``::
     class BlogPostsTableTest extends TestCase
     {
         // Plugin fixtures located in /plugins/Blog/tests/Fixture/
-        public $fixtures = ['plugin.blog.blog_posts'];
+        public $fixtures = ['plugin.Blog.BlogPosts'];
 
         public function testSomething()
         {
@@ -1668,7 +1711,7 @@ also need to prefix your plugin fixtures with ``plugin.blog.blog_posts``::
 
 If you want to use plugin fixtures in the app tests you can
 reference them using ``plugin.pluginName.fixtureName`` syntax in the
-``$fixtures`` array. Additionally if you use vendor plugin name or fixture 
+``$fixtures`` array. Additionally if you use vendor plugin name or fixture
 directories you can use the following: ``plugin.vendorName/pluginName.folderName/fixtureName``.
 
 Before you can use fixtures you should double check that your ``phpunit.xml``

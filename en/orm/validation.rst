@@ -76,7 +76,7 @@ To create a default validation object in your table, create the
                 ->notEmpty('title');
 
             $validator
-                ->allowEmpty('link')
+                ->allowEmptyString('link')
                 ->add('link', 'valid-url', ['rule' => 'url']);
 
             ...

@@ -198,15 +198,19 @@ Testing Commands
 ================
 
 To make testing console applications easier, CakePHP comes with a
-``ConsoleIntegrationTestCase`` class that can be used to test console applications
+``ConsoleIntegrationTestTrait`` trait that can be used to test console applications
 and assert against their results.
 
 .. versionadded:: 3.5.0
 
     The ``ConsoleIntegrationTestCase`` was added.
 
-To get started testing your console application, create a test case that extends
-``Cake\TestSuite\ConsoleIntegrationTestCase``. This class contains a method
+.. versionadded:: 3.7.0
+
+    The ``ConsoleIntegrationTestCase`` class was moved into the ``ConsoleIntegrationTestTrait`` trait.
+
+To get started testing your console application, create a test case that uses the
+``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait. This trait contains a method
 ``exec()`` that is used to execute your command. You can pass the same string
 you would use in the CLI to this method.
 
@@ -231,16 +235,19 @@ Let's start with a very simple command, located in
     }
 
 To write an integration test for this shell, we would create a test case in
-**tests/TestCase/Command/UpdateTableCommandTest.php** that extends
-``Cake\TestSuite\ConsoleIntegrationTestCase``. This shell doesn't do much at the
+**tests/TestCase/Command/UpdateTableTest.php** that uses the
+``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait. This shell doesn't do much at the
 moment, but let's just test that our shell's description is displayed in ``stdout``::
 
     namespace App\Test\TestCase\Command;
 
-    use Cake\TestSuite\ConsoleIntegrationTestCase;
+    use Cake\TestSuite\ConsoleIntegrationTestTrait;
+    use Cake\TestSuite\TestCase;
 
-    class UpdateTableCommandTest extends ConsoleIntegrationTestCase
+    class UpdateTableCommandTest extends TestCase
     {
+        use ConsoleIntegrationTestTrait;
+
         public function setUp()
         {
             parent::setUp();
@@ -301,13 +308,16 @@ Modify your test case to the following snippet of code::
     use Cake\Console\Command;
     use Cake\I18n\FrozenTime;
     use Cake\ORM\TableRegistry;
-    use Cake\TestSuite\ConsoleIntegrationTestCase;
+    use Cake\TestSuite\ConsoleIntegrationTestTrait;
+    use Cake\TestSuite\TestCase;
 
-    class UpdateTableCommandTest extends ConsoleIntegrationTestCase
+    class UpdateTableCommandTest extends TestCase
     {
+        use ConsoleIntegrationTestTrait;
+
         public $fixtures = [
             // assumes you have a UsersFixture
-            'app.users'
+            'app.Users'
         ];
 
         public function testDescriptionOutput()
@@ -346,7 +356,7 @@ Testing Interactive Shells
 --------------------------
 
 Consoles are often interactive. Testing interactive shells with the
-``Cake\TestSuite\ConsoleIntegrationTestCase`` class only requires passing the
+``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait only requires passing the
 inputs you expect as the second parameter of ``exec()``. They should be
 included as an array in the order that you expect them.
 
@@ -447,7 +457,7 @@ in your test case with the following method::
 Assertion methods
 -----------------
 
-The ``Cake\TestSuite\ConsoleIntegrationTestCase`` class provides a number of
+The ``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait provides a number of
 assertion methods that make it easy to assert against console output::
 
     // assert that the shell exited with the expected code

@@ -94,7 +94,10 @@ Additionally, you will need to tell Composer to refresh its autoloading cache:
 If you are unable to use Composer for any reason, you can also configure
 autoloading with ``Plugin``::
 
-    Plugin::load('ContactManager', ['autoload' => true]);
+    // In App\Application::bootstrap() add.
+    $this->addPlugin('ContactManager', ['autoload' => true]);
+
+    // Prior to 3.6.0 you need to use Plugin::load()
 
 Loading a Plugin
 ================
@@ -140,7 +143,7 @@ line:
     bin/cake plugin load ContactManager
 
 This would update your application's bootstrap method, or put the
-``Plugin::load('ContactManager');`` snippet in the bootstrap for you.
+``$this->addPlugin('ContactManager');`` snippet in the bootstrap for you.
 
 
 .. versionadded:: 3.6.0
@@ -263,6 +266,9 @@ This will ensure that classnames are resolved properly when using
 
 Most plugins will indicate the proper procedure for configuring them and setting
 up the database in their documentation.
+
+.. deprecated:: 3.7.0
+    Plugin::load() and Plugin::loadAll() are deprecated.
 
 Using Plugin Classes
 ====================
@@ -430,10 +436,10 @@ The above will connect default routes for your plugin. You can customize this
 file with more specific routes later on.
 
 Before you can access your controllers, you'll need to ensure the plugin is
-loaded and the plugin routes are loaded.  In your **config/bootstrap.php** add
+loaded and the plugin routes are loaded.  In your **src/Application.php** add
 the following::
 
-    Plugin::load('ContactManager', ['routes' => true]);
+    $this->addPlugin('ContactManager', ['routes' => true]);
 
 You can also load plugin routes in your application's routes list. Doing this
 provides you more control on how plugin routes are loaded and allows you to wrap

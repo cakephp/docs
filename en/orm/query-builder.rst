@@ -342,6 +342,7 @@ portable::
 
 A number of commonly used functions can be created with the ``func()`` method:
 
+- ``rand()`` Generate a random value between 0 and 1 via SQL.
 - ``sum()`` Calculate a sum. The arguments will be treated as literal values.
 - ``avg()`` Calculate an average. The arguments will be treated as literal
   values.
@@ -367,6 +368,10 @@ A number of commonly used functions can be created with the ``func()`` method:
 .. versionadded:: 3.1
 
     ``extract()``, ``dateAdd()`` and ``dayOfWeek()`` methods have been added.
+
+.. versionadded:: 3.7
+
+    ``rand()`` was added.
 
 When providing arguments for SQL functions, there are two kinds of parameters
 you can use, literal arguments and bound parameters. Identifier/Literal parameters allow
@@ -526,7 +531,7 @@ not make sense. The process of converting the database results to entities is
 called hydration. If you wish to disable this process you can do this::
 
     $query = $articles->find();
-    $query->hydrate(false); // Results as arrays instead of entities
+    $query->enableHydration(false); // Results as arrays instead of entities
     $result = $query->toList(); // Execute the query and return the array
 
 After executing those lines, your result should look similar to this::

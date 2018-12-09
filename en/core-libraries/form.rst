@@ -104,9 +104,8 @@ the request data::
 Setting Form Values
 ===================
 
-In order to set the values for the fields of a modelless form, one can define
-the values using ``$this->request->withData()``, like in all other forms created by
-the FormHelper::
+You can set default values for modelless forms using the ``setData()`` method.
+Values set with this method will overwrite existing data in the form object::
 
     // In a controller
     namespace App\Controller;
@@ -128,31 +127,47 @@ the FormHelper::
             }
 
             if ($this->request->is('get')) {
-                // Values from the User Model e.g.
-                $this->request = $this->request
-                    ->withData('name', 'John Doe')
-                    ->withData('email','john.doe@example.com');
+                $contact->setData([
+                    'name' => 'John Doe',
+                    'email' => 'john.doe@example.com'
+                ]);
             }
 
             $this->set('contact', $contact);
         }
     }
 
+Prior to 3.7.0 you must set default values for form by modifying the request::
+
+    // Set default values on get
+    if ($this->request->is('get')) {
+        // Values from the User Model e.g.
+        $this->request->data('name', 'John Doe');
+        $this->request->data('email','john.doe@example.com');
+    }
+
 Values should only be defined if the request method is GET, otherwise
-you will overwrite your previous POST Data which might have been incorrect
-and not been saved.
+you will overwrite your previous POST Data which might have validation errors
+that need corrections.
+
+
+.. versionadded:: 3.7.0
+    ``Form::setData()`` was added.
 
 Getting Form Errors
 ===================
 
 Once a form has been validated you can retrieve the errors from it::
 
-    $errors = $form->errors();
+    $errors = $form->getErrors(); // $form->errors(); // prior to 3.7.0
     /* $errors contains
     [
         'email' => ['A valid email address is required']
     ]
     */
+
+.. versionadded:: 3.7.0
+    ``errors()`` has been deprecated in favor of ``getErrors()``
 
 Invalidating Individual Form Fields from Controller
 ===================================================
