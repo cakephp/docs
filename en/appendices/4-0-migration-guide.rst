@@ -34,8 +34,8 @@ Controller
   parameter to true, instead of false. This makes using referer headers safer as
   they will be constrained to your application's domain by default.
 * Controller method name matching when invoking actions is now case sensitive.
-  For example if your controller method is ``forgetPassword()` then using string
-  ``forgotpassword` in URL will not match as action name.
+  For example if your controller method is ``forgetPassword()`` then using string
+  ``forgotpassword`` in URL will not match as action name.
 
 Http
 ----
