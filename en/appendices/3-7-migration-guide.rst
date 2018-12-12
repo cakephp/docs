@@ -210,7 +210,7 @@ Http
 Mailer
 ------
 
-* ``Cake\Email\TransportFactory`` and ``Cake\Email\TransportRegistry`` were
+* ``Cake\Mailer\TransportFactory`` and ``Cake\Mailer\TransportRegistry`` were
   added. This class extracts transport creation out of Email, allowing Email to
   become simpler in the future.
 
