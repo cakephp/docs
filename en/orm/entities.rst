@@ -223,8 +223,7 @@ actually exist. For example if your users table has ``first_name`` and
     {
         protected function _getFullName()
         {
-            return $this->_properties['first_name'] . '  ' .
-                $this->_properties['last_name'];
+            return $this->first_name . '  ' . $this->last_name;
         }
     }
 
