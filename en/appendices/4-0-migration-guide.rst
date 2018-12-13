@@ -37,6 +37,13 @@ Controller
   For example if your controller method is ``forgetPassword()`` then using string
   ``forgotpassword`` in URL will not match as action name.
 
+Database
+--------
+
+* ``BoolType`` no longer marshalls non-empty string values to ``true``. Instead
+  non-boolean string values are converted to ``null``.
+
+
 Http
 ----
 
