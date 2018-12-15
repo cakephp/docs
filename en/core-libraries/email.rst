@@ -526,7 +526,7 @@ following::
             $this
                 ->to($user->email)
                 ->subject('Reset password')
-                ->set(['token' => $user->token]);
+                ->setViewVars(['token' => $user->token]);
         }
     }
 

@@ -95,6 +95,10 @@ View
 * Constants ``View::NAME_ELEMENT`` and ``View::NAME_LAYOUT`` have been removed.
   You can use ``View::TYPE_ELEMENT`` and ``View::TYPE_LAYOUT``.
 
+Mailer
+------
+* ``Email::set()`` has been removed. Use ``Email::setViewVars()`` instead.
+
 Utility
 -------
 * ``Cake\Utility\Xml::fromArray()`` now requires an array for the ``$options``
@@ -142,6 +146,14 @@ Http
 
 * ``Cake\Http\Client\Response::isSuccess()`` was added. This method returns true
   if the response status code is 2xx.
+  
+Mailer
+------
+
+* Email message generation responsibility has now been transferred to ``Cake\Mailer\Renderer``.
+  This is mainly an architectural change and doesn't impact how
+  ``Email`` class is used. The only difference is that you now need to use ``Email::setViewVars()``
+  instead of ``Email::set()`` to set template variables.
 
 View
 ----
@@ -149,3 +161,5 @@ View
 * ``FormHelper`` now generates HTML5 validation messages for fields marked as
   required in an entity's ORM table class. This feature can be toggled with the
   ``autoSetCustomValidity`` class configuration option.
+
+
