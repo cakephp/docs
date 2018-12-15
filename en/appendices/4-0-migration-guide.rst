@@ -146,6 +146,14 @@ Http
 
 * ``Cake\Http\Client\Response::isSuccess()`` was added. This method returns true
   if the response status code is 2xx.
+  
+Mailer
+------
+
+* Email message generation responsibility has now been transferred to ``Cake\Mailer\Renderer``.
+  This is mainly an architectural change and doesn't impact how
+  ``Email`` class is used. The only difference is that you now need to use ``Email::setViewVars()``
+  instead of ``Email::set()`` to set template variables.
 
 View
 ----
@@ -154,10 +162,4 @@ View
   required in an entity's ORM table class. This feature can be toggled with the
   ``autoSetCustomValidity`` class configuration option.
 
-Mailer
-------
 
-* Email message generation responsibility has now been offloaded to ``Cake\Mailer\Renderer``.
-  This is mainly an architectural change and doesn't make much difference to how
-  ``Email`` class is used. Only difference is one now needs to use ``Email::setViewVars()``
-  instead of ``Email::set()`` to set template variables.
