@@ -965,7 +965,7 @@ As of 3.2 you can use the ``cors()`` method to define `HTTP Access Control
 <https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS>`__
 related headers with a fluent interface::
 
-    $this->response->cors($this->request)
+    $this->response = $this->response->cors($this->request)
         ->allowOrigin(['*.cakephp.org'])
         ->allowMethods(['GET', 'POST'])
         ->allowHeaders(['X-CSRF-Token'])
