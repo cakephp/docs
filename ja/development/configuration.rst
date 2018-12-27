@@ -534,7 +534,7 @@ Application::bootstrap()
             // config/bootstrap.php を `require_once`  するために parent を呼びます。
             parent::bootstrap();
 
-            Plugin::load('MyPlugin', ['bootstrap' => true, 'routes' => true]);
+            $this->addPlugin('MyPlugin', ['bootstrap' => true, 'routes' => true]);
         }
     }
 
