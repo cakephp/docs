@@ -36,7 +36,7 @@ HTTP methods.
 
     The parameters for the ``post`` method are almost the same as the
     get method, ``$uri`` is the web address where the request is being
-    made; ``$query`` is the data to be posted, either as a string, or as
+    made; ``$data`` is the data to be posted, either as a string, or as
     an array of keys and values::
 
         App::uses('HttpSocket', 'Network/Http');
