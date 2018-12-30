@@ -5,7 +5,7 @@ Http Client
 
 .. php:class:: Client(mixed $config = [])
 
-CakePHP includes a basic but powerful HTTP client which can be used for
+CakePHP includes a PSR-18 compliant HTTP client which can be used for
 making requests. It is a great way to communicate with webservices, and
 remote APIs.
 
@@ -51,6 +51,19 @@ Doing POST and PUT requests is equally simple::
     $http->delete(...);
     $http->head(...);
     $http->patch(...);
+
+If you have created a PSR-7 request object you can send it using
+``sendRequest()``::
+
+    use Cake\Http\Client;
+    use Cake\Http\Client\Request as ClientRequest;
+
+    $request = new ClientRequest(
+        'http://example.com/search',
+        ClientRequest::METHOD_GET
+    );
+    $client = new Client();
+    $response = $client->sendRequest($request);
 
 Creating Multipart Requests with Files
 ======================================
