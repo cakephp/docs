@@ -61,9 +61,8 @@ URL with GET params and fragment anchor::
     // Output
     /posts/search?foo=bar#first
 
-The above example uses the ``?`` key which is useful when you want to be
-explicit about the query string parameters you are using, or if you want a query
-string parameter that shares a name with one of your route placeholders.
+The above example uses the ``?`` special key for specifying query string
+parameters and ``#`` key for URL fragment.
 
 URL for named route::
 

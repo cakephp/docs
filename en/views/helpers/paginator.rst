@@ -403,7 +403,7 @@ Generating Pagination URLs
 By default returns a full pagination URL string for use in non-standard contexts
 (i.e. JavaScript). ::
 
-    echo $this->Paginator->generateUrl(['sort' => 'title']);
+    echo $this->Paginator->generateUrl(['?' => ['sort' => 'title']]);
 
 Creating a Limit Selectbox Control
 ==================================
@@ -443,14 +443,16 @@ Sets all the options for the PaginatorHelper. Supported options are:
   You can also append additional URL content into all URLs generated in the
   helper::
 
-      $this->Paginator->options([
-          'url' => [
-              'sort' => 'email',
-              'direction' => 'desc',
-              'page' => 6,
-              'lang' => 'en'
-          ]
-      ]);
+    $this->Paginator->options([
+        'url' => [
+            '?' => [
+                'sort' => 'email',
+                'direction' => 'desc',
+                'page' => 6,
+            ]
+            'lang' => 'en'
+        ]
+    ]);
 
   The above adds the ``en`` route parameter to all links the helper will
   generate. It will also create links with specific sort, direction and page

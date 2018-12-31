@@ -60,6 +60,10 @@ Http
 Router
 ------
 
+* URL query string can now be only be generated using ``?`` key in URL array.
+  Earlier any unknown key in URL array was converted to query string param which
+  is no longer the case. 3.x usage like ``['controller' => 'Posts', 'action' => 'search', 'q' => 'keyword']``
+  need to be converted to ``['controller' => 'Posts', 'action' => 'search', '?' => ['q' => 'keyword']]``.
 * ``RouteBuilder::resources()`` now inflects resource names to dasherized form
   instead of underscored by default in URLs. You can retain underscored
   inflection by using ``'inflect' => 'underscore'`` in ``$options`` argument.
