@@ -70,7 +70,8 @@ once::
         return $this->deleteAll(['is_spam' => true]);
     }
 
-A bulk-delete will be considered successful if 1 or more rows are deleted.
+A bulk-delete will be considered successful if 1 or more rows are deleted. The
+function returns the number of deleted records as an integer.
 
 .. warning::
 
