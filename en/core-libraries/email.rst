@@ -598,18 +598,11 @@ To test email, add ``Cake\TestSuite\EmailTrait`` to your test case.
 The ``EmailTrait`` provides your test case with a collection of assertions
 that you can perform on any emails sent by the application.
 
-First, replace all of your application's email transports with the
-``Cake\TestSuite\TestEmailTransport``. This transport intercepts emails instead
-of sending them, and allows you to assert against them.
+Adding the ``EmailTrait`` to your test case will replace all of your application's 
+email transports with the ``Cake\TestSuite\TestEmailTransport``. This transport 
+intercepts emails instead of sending them, and allows you to assert against them.
 
-In **tests/bootstrap.php**::
-
-    use Cake\TestSuite\TestEmailTransport;
-
-    // replaces existing transports with the TestEmailTransport for email assertions
-    TestEmailTransport::replaceAllTransports();
-
-Next, add the trait to your test case and perform a bit of cleanup in ``tearDown``::
+Add the trait to your test case to start testing emails::
 
     namespace App\Test\TestCase;
 
@@ -618,14 +611,6 @@ Next, add the trait to your test case and perform a bit of cleanup in ``tearDown
     class MyTestCase extends TestCase
     {
         use EmailTrait;
-
-        public function tearDown()
-        {
-            // other cleanup
-            parent::tearDown();
-            // clean up previously sent emails for the next test
-            TestEmailTransport::clearEmails();
-        }
     }
 
 .. versionadded:: 3.7.0
