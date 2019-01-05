@@ -247,7 +247,7 @@ additional details on how to use the table registry::
         ])->where('published' => true)
     );
     
-    $unplublishedArticles = $this->paginate(
+    $unpublishedArticles = $this->paginate(
         TableRegistry::getTableLocator()->get('UnpublishedArticles')->find('all', [
             'scope' => 'unpublished_articles'
         ])->where('published' => false)
