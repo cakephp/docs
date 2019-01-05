@@ -234,19 +234,20 @@ additional details on how to use the table registry::
         ],
     ];
     
+    // Register an additional table object to allow differentiating in pagination component
     TableRegistry::config('UnpublishedArticles', [
         'className' => 'App\Model\Table\ArticlesTable',
         'table' => 'articles',
         'entityClass' => 'App\Model\Entity\Article',
     ]);
 
-    $published_articles = $this->paginate(
+    $publishedArticles = $this->paginate(
         $this->Articles->find('all', [
             'scope' => 'published_articles'
         ])->where('published' => true)
     );
     
-    $unplublished_articles = $this->paginate(
+    $unplublishedArticles = $this->paginate(
         TableRegistry::getTableLocator()->get('UnpublishedArticles')->find('all', [
             'scope' => 'unpublished_articles'
         ])->where('published' => false)
