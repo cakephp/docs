@@ -49,6 +49,8 @@ Http
 
 * The default value of ``ServerRequest::getParam()`` when a parameter is missing
   is now ``null`` and not ``false``.
+* ``Cake\Http\Client\Request::body()`` has been removed. Use ``getBody()`` or
+  ``withBody()`` instead.
 * ``Cake\Http\Client\Response::isOk()`` now returns ``true`` for all 2xx and 3xx
   response codes.
 * ``Cake\Http\ServerRequest::referer()`` now returns ``null`` when the current
@@ -60,10 +62,6 @@ Http
 Router
 ------
 
-* URL query string can now be only be generated using ``?`` key in URL array.
-  Earlier any unknown key in URL array was converted to query string param which
-  is no longer the case. 3.x usage like ``['controller' => 'Posts', 'action' => 'search', 'q' => 'keyword']``
-  need to be converted to ``['controller' => 'Posts', 'action' => 'search', '?' => ['q' => 'keyword']]``.
 * ``RouteBuilder::resources()`` now inflects resource names to dasherized form
   instead of underscored by default in URLs. You can retain underscored
   inflection by using ``'inflect' => 'underscore'`` in ``$options`` argument.
@@ -131,11 +129,12 @@ Miscellaneous
 New Features
 ============
 
-Database
---------
+Filesystem
+----------
 
-* ``Cake\Database\Schema\CollectionInterface`` was added as an interface for
-  schema collections.
+* This package is deprecated and will be removed in 5.0. It has a number of
+  design problems and fixing this infrequently used package does not seem worth
+  the effort when there are a great selection of packages already.
 
 Error
 -----
@@ -143,13 +142,6 @@ Error
 * If an error is raised by a controller action in a prefixed route,
   ``ErrorController`` will attempt to use a prefixed error template if one is
   available. This behavior is only applied when ``debug`` is off.
-
-Filesystem
-----------
-
-* This package is deprecated and will be removed in 5.0. It has a number of
-  design problems and fixing this infrequently used package does not seem worth
-  the effort when there are a great selection of packages already.
 
 Http
 ----
