@@ -1,37 +1,39 @@
-Command Input/Output
-====================
+Entrée/sortie de commande
+=========================
 
 .. php:namespace:: Cake\Console
 .. php:class:: ConsoleIo
 
-CakePHP provides the ``ConsoleIo`` object to commands so that they can
-interactively read user input and output information to the user.
+CakePHP fournit l'objet ``ConsoleIo`` aux commandes afin qu'elles puissent
+lire interactivement les informations d'entrée et de sortie de l'utilisateur.
 
-Command Helpers
-===============
+Helpers (Assistants) de commande
+================================
 
-Command Helpers can be accessed and used from any command, shell or task::
+Les Helpers (Assistants) de commande sont accessibles et utilisables depuis
+n'importe quelle commande, shell ou tâche : ::
 
-    // Output some data as a table.
+    // Affiche des données en tant que tableau.
     $io->helper('Table')->output($data);
 
-    // Get a helper from a plugin.
+    // Récupère un helper depuis un plugin.
     $io->helper('Plugin.HelperName')->output($data);
 
-You can also get instances of helpers and call any public methods on them::
-
-    // Get and use the Progress Helper.
+Vous pouvez aussi récupérer les instances des Helpers et appeler n'importe
+quelle méthode publique dessus : ::
+    // Récupérer et utiliser le ProgressHelper.
     $progress = $io->helper('Progress');
     $progress->increment(10);
     $progress->draw();
 
-Creating Helpers
-================
+Créer des Helpers (Assistants)
+==============================
 
-While CakePHP comes with a few command helpers you can create more in your
-application or plugins. As an example, we'll create a simple helper to generate
-fancy headings. First create the **src/Command/Helper/HeadingHelper.php** and put
-the following in it::
+Alors que CakePHP est fourni avec quelques helpers de commande, vous pouvez
+en créer d'autres dans votre application ou vos plugins. À titre d'exemple,
+nous allons créer un helper simple pour générer des titres élégants.
+Créez d'abord le fichier **src/Command/Helper/HeadingHelper.php** et mettez
+ce qui suit dedans : ::
 
     <?php
     namespace App\Command\Helper;
@@ -48,29 +50,31 @@ the following in it::
         }
     }
 
-We can then use this new helper in one of our shell commands by calling it::
-
-    // With ### on either side
+Nous pouvons alors utiliser ce nouvel Helper dans l'une de nos commandes
+shell en l'appelant : ::
+    // Avec ### de chaque coté
     $this->helper('Heading')->output(['It works!']);
 
-    // With ~~~~ on either side
+    // Avec ~~~~ de chaque coté
     $this->helper('Heading')->output(['It works!', '~', 4]);
 
-Helpers generally implement the ``output()`` method which takes an array of
-parameters. However, because Console Helpers are vanilla classes they can
-implement additional methods that take any form of arguments.
+Les Helpers implémentent généralement la méthode ``output()`` qui prend un
+tableau de paramètres. Cependant, comme les Console Helper sont des classes
+vanilla, ils implémentent des méthodes suplémentaires qui prennent n'importe
+quelle forme d'arguments.
 
-.. note::
-    Helpers can also live in ``src/Shell/Helper`` for backwards compatibility.
+.. note : ::
+Les Helpers peuvent aussi être placés dans ``src/Shell/Helper`` pour des
+raisons de retro-compatibilité.
 
-Built-In Helpers
-================
+Les Helpers inclus
+==================
 
-Table Helper
-------------
+L'Helper Table
+--------------
 
-The TableHelper assists in making well formatted ASCII art tables. Using it is
-pretty simple::
+Le TableHelper aide à faire des tableaux d'art ASCII bien formatés.
+L'utiliser est assez simple : ::
 
         $data = [
             ['Header 1', 'Header', 'Long Header'],
@@ -79,7 +83,7 @@ pretty simple::
         ];
         $io->helper('Table')->output($data);
 
-        // Outputs
+        // Affiche
         +--------------+---------------+---------------+
         | Header 1     | Header        | Long Header   |
         +--------------+---------------+---------------+
@@ -87,27 +91,28 @@ pretty simple::
         | Longer thing | short         | Longest Value |
         +--------------+---------------+---------------+
 
-Progress Helper
----------------
+L'Helper Progress
+-----------------
 
-The ProgressHelper can be used in two different ways. The simple mode lets you
-provide a callback that is invoked until the progress is complete::
+Le ProgressHelper peut être utilisé de deux façons. Le mode simple vous permet
+de fournir un callback qui est appelé jusqu'à ce que l'avancement soit complet : ::
 
     $io->helper('Progress')->output(['callback' => function ($progress) {
-        // Do work here.
+        // Faire des choses ici.
         $progress->increment(20);
         $progress->draw();
     }]);
 
-You can control the progress bar more by providing additional options:
+Vous pouvez contrôler davantage la barre de progression en fournissant
+des options supplémentaires :
 
-- ``total`` The total number of items in the progress bar. Defaults
-  to 100.
-- ``width`` The width of the progress bar. Defaults to 80.
-- ``callback`` The callback that will be called in a loop to advance the
-  progress bar.
+- ``total`` Le nombre total d'éléments dans la barre de progression. La valeur
+  par défaut est 100.
+- ``width`` La largeur de la barre de progression. La valeur par défaut est 80.
+- ``callback`` Le callback qui sera appelé dans une boucle pour faire avancer la
+  barre de progression.
 
-An example of all the options in use would be::
+Voici un exemple de toutes les options utilisées : ::
 
     $io->helper('Progress')->output([
         'total' => 10,
@@ -118,8 +123,8 @@ An example of all the options in use would be::
         }
     ]);
 
-The progress helper can also be used manually to increment and re-render the
-progress bar as necessary::
+Le ProgressHelper peut aussi être utilisé manuellement pour incrementer et
+réafficher la barre de progression quand nécessaire : ::
 
     $progress = $io->helper('Progress');
     $progress->init([
@@ -131,13 +136,13 @@ progress bar as necessary::
     $progress->draw();
 
 
-Getting User Input
-==================
+Récuperer l'entrée utilisateur
+==============================
 
 .. php:method:: ask($question, $choices = null, $default = null)
 
-When building interactive console applications you'll need to get user input.
-CakePHP provides an easy way to do this::
+Lorsque vous créez des applications de console interactive, vous devez obtenir
+les entrées de l'utilisateur. CakePHP fournit un moyen facile de le faire : ::
 
     // Get arbitrary text from the user.
     $color = $io->ask('What color do you like?');
@@ -147,14 +152,15 @@ CakePHP provides an easy way to do this::
 
 Selection validation is case-insensitive.
 
-Creating Files
-==============
+Créer des fichiers
+==================
 
 .. php:method:: createFile($path, $contents)
 
-Creating files is often important part of many console commands that help
-automate development and deployment. The ``createFile()`` method gives you
-a simple interface for creating files with interactive confirmation::
+Créer des fichiers est souvent une part importante de beaucoup de commandes
+console qui permettent d'automatiser le développement et le déploiement.
+la méthode ``createFile()`` donne une interface simple pour créer des fichiers,
+avec une confirmation interactive : ::
 
     // Create a file with confirmation on overwrite
     $io->createFile('bower.json', $stuff);
@@ -162,56 +168,58 @@ a simple interface for creating files with interactive confirmation::
     // Force overwriting without asking
     $io->createFile('bower.json', $stuff, true);
 
-Creating Output
-===============
+Créer une sortie
+================
 
 .. php:method:out($message, $newlines, $level)
 .. php:method:err($message, $newlines)
 
-Writing to ``stdout`` and ``stderr`` is another routine operation CakePHP makes
-easy::
+Écrire dans ``stdout`` et ``stderr`` est une autre opération de routine
+facilitée par CakePHP : ::
 
-    // Write to stdout
+    // Écrire dans stdout
     $io->out('Normal message');
 
-    // Write to stderr
+    // Écrire dans stderr
     $io->err('Error message');
 
-In addition to vanilla output methods, CakePHP provides wrapper methods that
-style output with appropriate ANSI colours::
+En plus des méthodes de sortie vanilla, CakePHP fournit des méthodes
+qui stylisent la sortie avec les couleurs ANSI appropriées : ::
 
-    // Green text on stdout
+    // Texte vert dans stdout
     $io->success('Success message');
 
-    // Cyan text on stdout
+    // Texte cyan dans stdout
     $io->info('Informational text');
 
-    // Blue text on stdout
+    // Texte bleu dans stdout
     $io->comment('Additional context');
 
-    // Red text on stderr
+    // Texte rouge dans stderr
     $io->error('Error text');
 
-    // Yellow text on stderr
+    // Texte jaune dans stderr
     $io->warning('Warning text');
 
 It also provides two convenience methods regarding the output level::
 
-    // Would only appear when verbose output is enabled (-v)
+    // N'apparaît que lorsque la sortie verbose est activée. (-v)
     $io->verbose('Verbose message');
 
-    // Would appear at all levels.
+    // Apparaîtrait à tous les niveaux.
     $io->quiet('Quiet message');
 
-You can also create blank lines or draw lines of dashes::
+Vous pouvez également créer des lignes vierges ou tracer
+des lignes de tirets : ::
 
-    // Output 2 newlines
+    // Affiche 2 ligne vides
     $io->out($this->nl(2));
 
-    // Draw a horizontal line
+    // Dessiner une ligne horizontale
     $io->hr();
 
-Lastly, you can update the current line of text on the screen::
+Finalement, vous pouvez mettre à jour la ligne de texte actuelle
+à l'écran : ::
 
     $io->out('Counting down');
     $io->out('10', 0);
@@ -220,77 +228,82 @@ Lastly, you can update the current line of text on the screen::
         $io->overwrite($i, 0, 2);
     }
 
-.. note::
-    It is important to remember, that you cannot overwrite text
-    once a new line has been output.
+.. note : ::
+Il est important de se rappeler que vous ne pouvez pas ecraser le texte une
+fois qu'une nouvelle ligne a été affichée.
 
 .. _shell-output-level:
 
 Output Levels
 =============
 
-Console applications often need different levels of verbosity. For example, when
-running as a cron job, most output is un-necessary. You can use output levels to
-flag output appropriately. The user of the shell, can then decide what level of
-detail they are interested in by setting the correct flag when calling the
-command. There are 3 levels:
+Les applications de console ont souvent besoin de différents niveaux de verbosité.
+Par exemple, lors de l'exécution d'une tâche cron, la plupart des sorties ne sont
+pas nécessaires. Vous pouvez utiliser les niveaux de sortie pour baliser
+l'affichage de manière appropriée. L'utilisateur de l'interpréteur de commandes
+peut alors décider du niveau de détail qui l'intéresse en sélectionnant le bon
+indicateur lors de l'appel de la commande. Il y a 3 niveaux :
 
-* ``QUIET`` - Only absolutely important information should be marked for quiet
-  output.
-* ``NORMAL`` - The default level, and normal usage.
-* ``VERBOSE`` - Mark messages that may be too noisy for everyday use, but
-  helpful for debugging as ``VERBOSE``.
+* ``QUIET`` - Seulement les informations absolument importantes devraient être
+  marquées en sortie silencieuse.
+* ``NORMAL`` -Le niveau par défaut, et  l'utilisation normale.
+* ``VERBOSE`` - Notez ainsi les messages qui peuvent être trop verbeux pour un
+  usage régulier, mais utile pour du débogage en ``VERBOSE``.
 
-You can mark output as follows::
+Vous pouvez marquer la sortie comme ceci : ::
 
-    // Would appear at all levels.
+    // Apparaitra à tous les niveaux.
     $io->out('Quiet message', 1, ConsoleIo::QUIET);
     $io->quiet('Quiet message');
 
-    // Would not appear when quiet output is toggled.
+    // N'apparaît pas lorsque la sortie silencieuse est activée.
     $io->out('normal message', 1, ConsoleIo::NORMAL);
     $io->out('loud message', 1, ConsoleIo::VERBOSE);
     $io->verbose('Verbose output');
 
-    // Would only appear when verbose output is enabled.
+    // N'apparaît que lorsque la sortie verbose est activée.
     $io->out('extra message', 1, ConsoleIo::VERBOSE);
     $io->verbose('Verbose output');
 
-You can control the output level of shells, by using the ``--quiet`` and
-``--verbose`` options. These options are added by default, and allow you to
-consistently control output levels inside your CakePHP comands.
+Vous pouvez contrôler le niveau de sortie des shells, en utilisant les options
+``--quiet`` et ``--verbose``. Ces options sont ajoutées par défaut, et vous
+permettent de contrôler les niveaux de sortie à l'intérieur de vos commandes
+CakePHP.
 
-The ``--quiet`` and ``--verbose`` options also control how logging data is
-output to stdout/stderr. Normally info and higher log messages are output to
-stdout/stderr. When ``--verbose`` is used, debug logs will be output to stdout.
-When ``--quiet`` is used, only warning and higher log messages will be output to
-stderr.
+Les options ``--quiet`` et ``--verbose`` contrôlent aussi l'affichage des données
+de journalisation dans stdout/stderr. Normalement, les messages de journalisation
+d'information et supérieurs sont affichés dans stdout/stderr. Quand ``--verbose``
+est utilisé, le journal de debogage sera affiché dans stdout. Quand ``--quiet``
+est utilisé, seulement les messages d'avertissement et supérieurs seront affichés
+dans stderr.
 
-Styling Output
-==============
+Styliser la sortie
+==================
 
-Styling output is done by including tags - just like HTML - in your output.
-These tags will be replaced with the correct ansi code sequence, or
-stripped if you are on a console that doesn't support ansi codes. There
-are several built-in styles, and you can create more. The built-in ones are
+Le style de sortie se fait en incluant des balises; tout comme le HTML, dans
+votre sortie. Ces balises seront remplacées par la bonne séquence de code ANSI,
+ou supprimées si vous êtes sur une console qui ne supporte pas les codes ANSI.
+Il existe plusieurs styles intégrés, et vous pouvez en créer d'autres. Ceux qui
+sont intégrés sont :
 
-* ``success`` Success messages. Green text.
-* ``error`` Error messages. Red text.
-* ``warning`` Warning messages. Yellow text.
-* ``info`` Informational messages. Cyan text.
-* ``comment`` Additional text. Blue text.
-* ``question`` Text that is a question, added automatically by shell.
+* ``success`` Messages de succès. Texte vert.
+* ``error`` Messages d'erreur. Texte rouge.
+* ``warning`` Messages d'avertissement. Texte jaune.
+* ``info`` Messages d'information. Texte cyan.
+* ``comment`` Texte additionnel. Texte bleu.
+* ``question`` Texte qui est une question, ajouté automatiquement par le shell.
 
-You can create additional styles using ``$io->styles()``. To declare a
-new output style you could do::
+Vous pouvez créer des styles supplémentaires en utilisant ``$io->styles()``. Pour
+déclarer un nouveau style de sortie, vous pouvez faire : ::
 
     $io->styles('flashy', ['text' => 'magenta', 'blink' => true]);
 
-This would then allow you to use a ``<flashy>`` tag in your shell output, and if
-ansi colours are enabled, the following would be rendered as blinking magenta
-text ``$this->out('<flashy>Whoooa</flashy> Something went wrong');``. When
-defining styles you can use the following colours for the ``text`` and
-``background`` attributes:
+Cela vous permettrait alors d'utiliser une balise ``<flashy>`` dans votre sortie
+shell, et si les couleurs ANSI sont activées, ce qui suit serait affiché comme
+texte magenta clignotant
+``$this->out('<flashy>Whoooa</flashy> Something went wrong');``. Lors de la
+définition des styles, vous pouvez utiliser les couleurs suivantes pour les
+attributs ``text`` et ``background`` :
 
 * black
 * blue
@@ -301,35 +314,38 @@ defining styles you can use the following colours for the ``text`` and
 * white
 * yellow
 
-You can also use the following options as boolean switches, setting them to a
-truthy value enables them.
+Vous pouvez également utiliser les options suivantes en tant que commutateurs
+booléens, leur attribuer une valeur considérée comme vraie les active.
 
 * blink
 * bold
 * reverse
 * underline
 
-Adding a style makes it available on all instances of ConsoleOutput as well,
-so you don't have to redeclare styles for both stdout and stderr objects.
+L'ajout d'un style le rend également disponible sur toutes les instances de
+ConsoleOutput, de sorte que vous n'avez pas à redéclarer les styles pour les
+objets stdout et stdout.
 
-Turning Off Colouring
-=====================
+Désactiver la colorisation
+==========================
 
-Although colouring is pretty, there may be times when you want to turn it off,
-or force it on::
+Bien que la colorisation soit très jolie, il peut arriver que vous souhaitiez la
+désactiver, ou la forcer à s'activer : ::
 
     $io->outputAs(ConsoleOutput::RAW);
 
-The above will put the output object into raw output mode. In raw output mode,
-no styling is done at all. There are three modes you can use.
+Ce qui précède placera l'objet de sortie en mode de sortie brute. En mode de
+sortie brute, aucun style n'est effectué. Il y a trois modes que vous pouvez
+utiliser.
 
-* ``ConsoleOutput::COLOR`` - Output with color escape codes in place.
-* ``ConsoleOutput::PLAIN`` - Plain text output, known style tags will be
-  stripped from the output.
-* ``ConsoleOutput::RAW`` - Raw output, no styling or formatting will be done.
-  This is a good mode to use if you are outputting XML or, want to debug why
-  your styling isn't working.
+* ``ConsoleOutput::COLOR`` - Sortie avec les codes d'échappement de couleur en
+  place.
+* ``ConsoleOutput::PLAIN`` - Sortie en texte simple, les balises de style
+  connues seront supprimées de la sortie.
+* ``ConsoleOutput::RAW`` - La sortie brute, aucun style ou formatage ne sera fait.
+  C'est un bon mode à utiliser si vous affichez du XML ou si vous voulez déboguer
+  pourquoi votre style ne fonctionne pas.
 
-By default on \*nix systems ConsoleOutput objects default to colour output.
-On Windows systems, plain output is the default unless the ``ANSICON``
-environment variable is present.
+Par defaut sur les systèmes \*nix les objets ConsoleOutput sont initialisés en
+mode sortie couleur. Sur les systèmes Windows, la sortie en texte simple est la
+valeur par défaut à moins que la variable d'environment ``ANSICON`` est présente.
