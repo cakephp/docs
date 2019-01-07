@@ -750,8 +750,6 @@ You can customize the command names by defining each command in your plugin::
 Testing your Plugin
 ===================
 
-...
-
 If you have to test controllers or URL generation in general, make sure you
 connect some routes in your ``tests/bootstrap.php``.
 
