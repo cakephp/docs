@@ -649,7 +649,7 @@ you define the ``$fixtures`` property in your model::
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['app.articles', 'app.comments'];
+        public $fixtures = ['app.Articles', 'app.Comments'];
     }
 
 The above will load the Article and Comment fixtures from the application's

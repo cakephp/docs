@@ -624,7 +624,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['app.articles', 'app.comments'];
+        public $fixtures = ['app.Articles', 'app.Comments'];
     }
 
 上記の例では、「Article」と「Comment」フィクスチャーをアプリケーションの 「Fixture」ディレクトリーから
@@ -632,7 +632,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['plugin.DebugKit.articles', 'plugin.MyVendorName/MyPlugin.messages', 'core.comments'];
+        public $fixtures = ['plugin.DebugKit.Articles', 'plugin.MyVendorName/MyPlugin.Messages', 'core.Comments'];
     }
 
 ``core`` のプレフィックスを使えば CakePHP からフィクスチャーをロードし、プラグイン名を
@@ -644,7 +644,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['app.articles', 'app.comments'];
+        public $fixtures = ['app.Articles', 'app.Comments'];
         public $autoFixtures = false;
 
         public function testMyFunction()
@@ -659,7 +659,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTest extends CakeTestCase
     {
-        public $fixtures = ['app.blog/articles', 'app.blog/comments'];
+        public $fixtures = ['app.blog/Articles', 'app.blog/Comments'];
     }
 
 上記の例では、両方のフィクスチャーは ``tests/Fixture/blog`` からロードされることになります。
@@ -698,7 +698,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTableTest extends TestCase
     {
-        public $fixtures = ['app.articles'];
+        public $fixtures = ['app.Articles'];
     }
 
 このテストケースの ``$fixtures`` 変数に使用する予定のフィクスチャーを設定します。
@@ -718,7 +718,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTableTest extends TestCase
     {
-        public $fixtures = ['app.articles'];
+        public $fixtures = ['app.Articles'];
 
         public function setUp()
         {
@@ -829,7 +829,7 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
 
     class ArticlesControllerTest extends IntegrationTestCase
     {
-        public $fixtures = ['app.articles'];
+        public $fixtures = ['app.Articles'];
 
         public function testIndex()
         {
@@ -1531,7 +1531,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
     class OrdersTableTest extends TestCase
     {
-        public $fixtures = ['app.orders'];
+        public $fixtures = ['app.Orders'];
 
         public function setUp()
         {
@@ -1610,7 +1610,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
     class BlogPostsTableTest extends TestCase
     {
         // /plugins/Blog/tests/Fixture/ 内のプラグインのフィクスチャーをロード
-        public $fixtures = ['plugin.blog.blog_posts'];
+        public $fixtures = ['plugin.blog.BlogPosts'];
 
         public function testSomething()
         {
