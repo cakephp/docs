@@ -98,10 +98,10 @@ autoloading with ``Plugin``::
 
 
 .. deprecated:: 3.7.0
-    Plugin::load() and `autoload` option  are deprecated.
+    Plugin::load() and ``autoload`` option  are deprecated.
 
 .. note::
-    IMPORTANT: `autoload` option is not available on `addPlugin()`, you should use composer dumpautoload instead.
+    IMPORTANT: ``autoload`` option is not available on ``addPlugin()``, you should use composer dumpautoload instead.
  
 Loading a Plugin
 ================
