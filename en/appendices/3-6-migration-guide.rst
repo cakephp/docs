@@ -286,6 +286,7 @@ Routing
   ``Bookmarks::index``. See :ref:`routes-configuration` for more information.
 * ``RoutingMiddleware`` can now cache the route collection created by your
   routes. Caching routes greatly improves application startup times.
+  It now also requires to be instantiated and the current object (``$this``) passed for plugin routing.
 
 Shell
 =====
