@@ -450,7 +450,7 @@ CommandRunner のテスト
 アサーションメソッド
 --------------------
 
-``Cake\TestSuite\ConsoleIntegrationTestCase`` クラスは、コンソールの出力に対して
+``Cake\TestSuite\ConsoleIntegrationTestTrait`` トレイトは、コンソールの出力に対して
 容易にアサートできるようにするいくつかのアサーションメソッドを提供します。 ::
 
     // シェルが期待したコードで終了したことをアサート
