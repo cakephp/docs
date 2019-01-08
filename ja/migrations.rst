@@ -112,7 +112,7 @@ Migrations
     bin/cake migrations migrate
 
 以下の ``migrations`` コマンドは、 ``rollback`` を実行するとあなたのデータベースから
-デーブルが削除します。 ::
+テーブルが削除されます。 ::
 
     bin/cake migrations rollback
 
