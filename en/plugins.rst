@@ -755,8 +755,8 @@ You can customize the command names by defining each command in your plugin::
 Testing your Plugin
 ===================
 
-If you have to test controllers or URL generation in general, make sure you
-connect some routes in your ``tests/bootstrap.php``.
+If you are testing controllers or generating URLs, make sure your
+plugin connects routes ``tests/bootstrap.php``.
 
 For more information see :ref:`testing plugins </development/testing.rst> page.
 
