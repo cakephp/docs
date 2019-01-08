@@ -196,14 +196,18 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
 コンソールアプリケーションをより簡単にテストするため、CakePHP は、
 コンソールアプリケーションをテストし、結果に対してアサートするための
-``ConsoleIntegrationTestCase`` クラスが付属しています。
+``ConsoleIntegrationTestTrait`` トレイトが付属しています。
 
 .. versionadded:: 3.5.0
 
     ``ConsoleIntegrationTestCase`` が追加されました。
 
-コンソールアプリケーションのテストを始めるために、 ``Cake\TestSuite\ConsoleIntegrationTestCase``
-を継承したテストケースを作成してください。このクラスは、あなたのコマンドを実行するために使用する
+.. versionadded:: 3.7.0
+
+    ``ConsoleIntegrationTestCase`` クラスは ``ConsoleIntegrationTestTrait`` トレイトへ移動しました。
+
+コンソールアプリケーションのテストを始めるために、 ``Cake\TestSuite\ConsoleIntegrationTestTrait``
+を使用したテストケースを作成してください。このトレイトは、あなたのコマンドを実行するために使用する
 ``exec()`` メソッドを含みます。このメソッドに、CLI で使用するのと同じ文字列を渡すことができます。
 
 **src/Command/UpdateTableCommand.php** に置かれた、とてもシンプルなシェルで始めましょう。 ::
@@ -226,16 +230,19 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
     }
 
 このシェルの統合テストを書くために、 **tests/TestCase/Command/UpdateTableCommandTest.php**
-に ``Cake\TestSuite\ConsoleIntegrationTestCase`` を継承したテストケースを作成します。
+に ``Cake\TestSuite\ConsoleIntegrationTestTrait`` を使用したテストケースを作成します。
 このシェルは現時点ですることはあまりありませんが、シェルの説明が ``stdout``
 に表示されていることをテストしましょう。 ::
 
     namespace App\Test\TestCase\Command;
 
-    use Cake\TestSuite\ConsoleIntegrationTestCase;
+    use Cake\TestSuite\ConsoleIntegrationTestTrait;
+    use Cake\TestSuite\TestCase;
 
-    class UpdateTableCommandTest extends ConsoleIntegrationTestCase
+    class UpdateTableCommandTest extends TestCase
     {
+        use ConsoleIntegrationTestTrait;
+
         public function setUp()
         {
             parent::setUp();
@@ -296,13 +303,16 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
     use Cake\Console\Command;
     use Cake\I18n\FrozenTime;
     use Cake\ORM\TableRegistry;
-    use Cake\TestSuite\ConsoleIntegrationTestCase;
+    use Cake\TestSuite\ConsoleIntegrationTestTrait;
+    use Cake\TestSuite\TestCase;
 
-    class UpdateTableCommandTest extends ConsoleIntegrationTestCase
+    class UpdateTableCommandTest extends TestCase
     {
+        use ConsoleIntegrationTestTrait;
+
         public $fixtures = [
-            // UsersFixture を持っていると仮定
-            'app.users'
+            // assumes you have a UsersFixture
+            'app.Users'
         ];
 
         public function testDescriptionOutput()
@@ -340,8 +350,8 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 対話的なシェルのテスト
 ----------------------
 
-コンソールはしばしば対話的です。 ``Cake\TestSuite\ConsoleIntegrationTestCase``
-クラスで対話的なシェルをテストするには、期待する入力を ``exec()`` の２番目の
+コンソールはしばしば対話的です。 ``Cake\TestSuite\ConsoleIntegrationTestTrait``
+トレイトで対話的なシェルをテストするには、期待する入力を ``exec()`` の２番目の
 パラメーターとして渡すだけです。それらは、期待どおりの順序で配列として含める必要があります。
 
 引き続きコマンドの例で、対話的な確認を追加しましょう。
