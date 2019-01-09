@@ -94,11 +94,15 @@ Additionally, you will need to tell Composer to refresh its autoloading cache:
 If you are unable to use Composer for any reason, you can also configure
 autoloading with ``Plugin``::
 
-    // In App\Application::bootstrap() add.
-    $this->addPlugin('ContactManager', ['autoload' => true]);
+    Plugin::load('ContactManager', ['autoload' => true]);
 
-    // Prior to 3.6.0 you need to use Plugin::load()
 
+.. deprecated:: 3.7.0
+    Plugin::load() and ``autoload`` option  are deprecated.
+
+.. note::
+    IMPORTANT: ``autoload`` option is not available on ``addPlugin()``, you should use ``composer dumpautoload`` instead.
+ 
 Loading a Plugin
 ================
 
