@@ -1130,7 +1130,6 @@ retain flash messages in the session so you can write assertions::
 
 As of 3.7.0 there are additional test helpers for flash messages::
 
-
     $this->enableRetainFlashMessages();
     $this->get('/bookmarks/delete/9999');
 
