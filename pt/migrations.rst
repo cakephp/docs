@@ -440,6 +440,50 @@ ao snapshot do seu plugin.
 Fique atento que quando você faz o bake de um snapshot, ele é automaticamente
  adicionado ao log do phinx como migrado.
 
+Gerando um *diff* entre dois estados da base de dados
+=====================================================
+
+.. versionadded:: cakephp/migrations 1.6.0
+
+Você pode gerar um arquivo de migração que agrupará todas as diferenças entre
+dois estados de uma base de dados usando ``migration_diff``. Para fazê-lo,
+você pode usar o seguinte comando::
+
+    $ bin/cake bake migration_diff NomeDasMigrações
+
+De forma a ter um ponto de comparação do estado atual da sua base de dados, a
+*shell* de ``migrations`` gerará um arquivo de *dump* após cada chamada de
+``migrate`` ou ``rollback``. O arquivo de *dump* é um arquivo contendo o
+estado completo do esquema da sua base de dados em um determinado instante no
+tempo.
+
+Uma vez gerado o arquivo de *dump*, cada modificação que você fizer
+diretamente no seu sistema de gerenciamento da base de dados será adicionada
+quando você chamar o comando ``bake migration_diff``.
+
+Por padrão, o *diff* será criado através de uma conexão com a base de dados
+definida na configuração de conexão ``default``.
+Se você precisar criar um *diff* de uma fonte de dados diferente, você pode
+usar a opção ``--connection``::
+
+    $ bin/cake bake migration_diff NomeDasMigrações --connection minha_outra_conexão
+
+Se você quiser usar a funcionalidade de *diff* em uma aplicação que já possui
+um histórico de migrações, você precisará criar manualmente o arquivo de
+*dump* a ser usado como base da comparação::
+
+    $ bin/cake migrations dump
+
+O estado da base de dados deve ser o mesmo que você teria caso você tivesse
+migrado todas as suas migrações antes de criar o arquivo de *dump*.
+Uma vez que o arquivo de *dump* for gerado, você pode começar a fazer
+modificações na sua base de dados e usar o comando ``bake migration_diff``
+sempre que desejar.
+
+.. note::
+
+    A *shell* de migrações não é capaz de detectar colunas renomeadas.
+
 Os Comandos
 ===========
 
