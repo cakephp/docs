@@ -775,8 +775,8 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 ==========================
 
 ヘルパー、モデル、およびコンポーネントと同様にコントローラークラスをテストすることができますが、
-CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています。コントローラーのテストケースの
-ための基本クラスとしてこのクラスを使用すると、高いレベルからコントローラーをテストすることができます。
+CakePHP は特殊な ``IntegrationTestTrait`` トレイトを提供しています。コントローラーのテストケースに
+このトレイトを使用すると、高いレベルからコントローラーをテストすることができます。
 
 .. versionadded:: 3.7.0
 
@@ -829,10 +829,13 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
     namespace App\Test\TestCase\Controller;
 
     use Cake\ORM\TableRegistry;
-    use Cake\TestSuite\IntegrationTestCase;
+    use Cake\TestSuite\IntegrationTestTrait;
+    use Cake\TestSuite\TestCase;
 
-    class ArticlesControllerTest extends IntegrationTestCase
+    class ArticlesControllerTest extends TestCase
     {
+        use IntegrationTestTrait;
+
         public $fixtures = ['app.Articles'];
 
         public function testIndex()
@@ -878,7 +881,7 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
         }
     }
 
-この例では、いくつかのリクエストを送信するメソッドと ``IntegrationTestCase`` が提供するいくつかの
+この例では、いくつかのリクエストを送信するメソッドと ``IntegrationTestTrait`` が提供するいくつかの
 アサーションを示しています。あなたが任意のアサーションを行う前に、リクエストをディスパッチする必要が
 あります。リクエストを送信するには、以下のいずれかのメソッドを使用することができます。
 
@@ -892,7 +895,7 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
 
 ``get()`` と ``delete()`` を除く全てのメソッドは、あなたがリクエストボディーを送信することを
 可能にする二番目のパラメーターを受け入れます。リクエストをディスパッチした後、あなたのリクエストに対して
-正しく動作したことを確実にするために ``IntegrationTestCase`` や、PHPUnit が提供するさまざまな
+正しく動作したことを確実にするために ``IntegrationTestTrait`` や、PHPUnit が提供するさまざまな
 アサーションを使用することができます。
 
 .. versionadded:: 3.5.0
@@ -901,7 +904,7 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
 リクエストの設定
 ----------------
 
-``IntegrationTestCase`` クラスを使用すると、テスト対象のアプリケーションに送信するリクエストを
+``IntegrationTestTrait`` トレイトを使用すると、テスト対象のアプリケーションに送信するリクエストを
 設定することが容易にするために多くのヘルパーが付属しています。 ::
 
     // クッキーのセット
@@ -923,7 +926,7 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
 ------------------------------
 
 もし ``AuthComponent`` を使用している場合、AuthComponent がユーザーの ID を検証するために
-使用するセッションデータをスタブ化する必要があります。これを行うには、 ``IntegrationTestCase``
+使用するセッションデータをスタブ化する必要があります。これを行うには、 ``IntegrationTestTrait``
 のヘルパーメソッドを使用します。 ``ArticlesController`` が add メソッドを含み、
 その add メソッドに必要な認証を行っていたと仮定すると、次のテストを書くことができます。 ::
 
@@ -1025,7 +1028,7 @@ PSR-7 ミドルウェアの統合テスト
 ------------------------------
 
 統合テストは、あなたの PSR-7 アプリケーション全体や :doc:`/controllers/middleware` を
-テストするために利用されます。デフォルトで ``IntegrationTestCase`` は、
+テストするために利用されます。デフォルトで ``IntegrationTestTrait`` は、
 ``App\Application`` クラスの存在を自動検知し、あなたのアプリケーションの統合テストを
 自動的に有効にします。 ``useHttpServer()`` メソッドでこの振舞いを切り替えられます。 ::
 
@@ -1047,7 +1050,7 @@ PSR-7 ミドルウェアの統合テスト
     }
 
 PSR-7 モードを有効にして、アプリケーションクラスの設定を可能にした後でも、
-``IntegrationTestCase`` に存在する機能は、通常と同様に利用できます。
+``IntegrationTestTrait`` に存在する機能は、通常と同様に利用できます。
 
 イベントやルートを含むプラグインを読み込むために :ref:`application-bootstrap` を
 試してみてください。そうすることで、各テストケースごとにイベントやルートが確実に接続されます。
@@ -1070,7 +1073,7 @@ PSR-7 モードを有効にして、アプリケーションクラスの設定�
 
     $this->assertCookieEncrypted('更新された値', 'my_cookie');
 
-.. versionadded: 3.1.7
+.. versionadded:: 3.1.7
     ``assertCookieEncrypted`` とは ``cookieEncrypted`` は 3.1.7 で追加されました。
 
 フラッシュメッセージのテスト
@@ -1161,7 +1164,7 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
 アサーションメソッド
 --------------------
 
-``IntegrationTestCase`` クラスはレスポンスのテストがとても簡単になるアサーションメソッドを
+``IntegrationTestTrait`` トレイトはレスポンスのテストがとても簡単になるアサーションメソッドを
 多数提供しています。いくつかの例をあげます。 ::
 
     // 2xx レスポンスコードをチェック
@@ -1294,9 +1297,9 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
 ==============
 
 一般的に、ほとんどのアプリケーションは、直接 HTML コードをテストしません。そのため、多くの場合、
-テストは壊れやすく、メンテナンスが困難になっています。 :php:class:`IntegrationTestCase` を
+テストは壊れやすく、メンテナンスが困難になっています。 :php:class:`IntegrationTestTrait` を
 使用して機能テストを書くときに ‘view’ に ``return`` オプションを設定することで、
-レンダリングされたビューの内容を調べることができます。 IntegrationTestCase を使用して
+レンダリングされたビューの内容を調べることができます。 IntegrationTestTrait を使用して
 ビューのコンテンツをテストすることは可能ですが、より堅牢でメンテナンスしやすい統合/ビューテストは、
 `Selenium webdriver <http://seleniumhq.org>`_ のようなツールを使うことで実現できます
 
