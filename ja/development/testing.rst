@@ -659,10 +659,10 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTest extends CakeTestCase
     {
-        public $fixtures = ['app.blog/Articles', 'app.blog/Comments'];
+        public $fixtures = ['app.Blog/Articles', 'app.Blog/Comments'];
     }
 
-上記の例では、両方のフィクスチャーは ``tests/Fixture/blog`` からロードされることになります。
+上記の例では、両方のフィクスチャーは ``tests/Fixture/Blog`` からロードされることになります。
 
 テーブルクラスのテスト
 ======================
@@ -1518,7 +1518,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
                 $event = new Event('Model.Order.afterPlace', $this, [
                     'order' => $order
                 ]);
-                $this->eventManager()->dispatch($event);
+                $this->getEventManager()->dispatch($event);
                 return true;
             }
             return false;
@@ -1565,7 +1565,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
             parent::setUp();
             $this->Orders = TableRegistry::get('Orders');
             // イベントトラッキングの有効化
-            $this->Orders->eventManager()->setEventList(new EventList());
+            $this->Orders->getEventManager()->setEventList(new EventList());
         }
 
         public function testPlace()
@@ -1578,8 +1578,8 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
             $this->assertTrue($this->Orders->place($order));
 
-            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->eventManager());
-            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->eventManager());
+            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->getEventManager());
+            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->getEventManager());
         }
     }
 
