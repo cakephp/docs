@@ -659,10 +659,10 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTest extends CakeTestCase
     {
-        public $fixtures = ['app.blog/Articles', 'app.blog/Comments'];
+        public $fixtures = ['app.Blog/Articles', 'app.Blog/Comments'];
     }
 
-上記の例では、両方のフィクスチャーは ``tests/Fixture/blog`` からロードされることになります。
+上記の例では、両方のフィクスチャーは ``tests/Fixture/Blog`` からロードされることになります。
 
 テーブルクラスのテスト
 ======================
