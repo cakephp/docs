@@ -250,7 +250,7 @@ Establishing Priorities
 -----------------------
 
 In some cases you might want to control the order that listeners are invoked.
-For instance, if we go back to our user statistics example. It would ideal if
+For instance, if we go back to our user statistics example. It would be ideal if
 this listener was called at the end of the stack. By calling it at the end of
 the listener stack, we can ensure that the event was not canceled, and that no
 other listeners raised exceptions. We can also get the final state of the
