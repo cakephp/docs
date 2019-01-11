@@ -734,6 +734,12 @@ Custom コントローラーの 'index' ビューへのパスは、次の通り�
         return $commands;
     }
 
+プラグインのテスト
+==================
+
+コントローラーやURLの生成をテストする場合、プラグインがルート ``tests/bootstrap.php`` に接続していることを確認してください。
+
+詳細は :doc:`testing plugins </development/testing>` ページを確認してください。
 
 プラグインの公開
 ================

@@ -762,7 +762,7 @@ Testing your Plugin
 If you are testing controllers or generating URLs, make sure your
 plugin connects routes ``tests/bootstrap.php``.
 
-For more information see :ref:`testing plugins </development/testing.rst> page.
+For more information see :doc:`testing plugins </development/testing>` page.
 
 Publishing your Plugin
 ======================
