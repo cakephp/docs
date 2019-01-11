@@ -92,6 +92,12 @@ Composer を使ったプラグインのインストール
 
     Plugin::load('ContactManager', ['autoload' => true]);
 
+.. deprecated:: 3.7.0
+    Plugin::load() と ``autoload`` オプションは非推奨です。
+
+.. note::
+    重要: ``autoload`` オプションは ``addPlugin()`` では使用できません。代わりに ``composer dumpautoload`` を使用してください。
+
 プラグインの読み込み
 ====================
 
@@ -256,6 +262,9 @@ Plugin オブジェクトは、名前とパス情報も知っています。 ::
 
 ほとんどのプラグインで、設定するための正確な手続きとデータベースのセットアップするための方法が、
 ドキュメントに書かれています。他よりセットアップが必要なものもあります。
+
+.. deprecated:: 3.7.0
+	Plugin::load() と Plugin::loadAdd() は非推奨です。
 
 プラグインの利用
 ================
