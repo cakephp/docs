@@ -1220,6 +1220,9 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
     // レスポンス内容をアサート
     $this->assertResponseEquals('Yeah!');
 
+    // レスポンス内容が等しくないことをアサート
+    $this->assertResponseNotEquals('No!');
+
     // レスポンス内容の一部をアサート
     $this->assertResponseContains('You won!');
     $this->assertResponseNotContains('You lost!');
