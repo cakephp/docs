@@ -1629,7 +1629,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 それらは通常のテストと同じように動作しますが、別のクラスをインポートする場合、プラグインの命名規則を
 使用することを覚えておく必要があります。これは、このマニュアルのプラグインの章から ``BlogPost``
 モデルのテストケースの一例です。他のテストとの違いは、 'Blog.BlogPost' がインポートされている
-最初の行です。プラグインフィクスチャーに ``plugin.blog.blog_posts`` とプレフィックスをつける
+最初の行です。プラグインフィクスチャーに ``plugin.Blog.BlogPosts`` とプレフィックスをつける
 必要があります。 ::
 
     namespace Blog\Test\TestCase\Model\Table;
@@ -1640,7 +1640,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
     class BlogPostsTableTest extends TestCase
     {
         // /plugins/Blog/tests/Fixture/ 内のプラグインのフィクスチャーをロード
-        public $fixtures = ['plugin.blog.BlogPosts'];
+        public $fixtures = ['plugin.Blog.BlogPosts'];
 
         public function testSomething()
         {
@@ -1659,8 +1659,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
     <!-- フィクスチャーのためのリスナーのセットアップ -->
     <listeners>
         <listener
-        class="\Cake\TestSuite\Fixture\FixtureInjector"
-        file="./vendor/cakephp/cakephp/src/TestSuite/Fixture/FixtureInjector.php">
+        class="\Cake\TestSuite\Fixture\FixtureInjector">
             <arguments>
                 <object class="\Cake\TestSuite\Fixture\FixtureManager" />
             </arguments>

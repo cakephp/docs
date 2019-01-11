@@ -1690,7 +1690,7 @@ They work just like normal tests but you have to remember to use the naming
 conventions for plugins when importing classes. This is an example of a testcase
 for the ``BlogPost`` model from the plugins chapter of this manual. A difference
 from other tests is in the first line where 'Blog.BlogPost' is imported. You
-also need to prefix your plugin fixtures with ``plugin.blog.blog_posts``::
+also need to prefix your plugin fixtures with ``plugin.Blog.BlogPosts``::
 
     namespace Blog\Test\TestCase\Model\Table;
 
