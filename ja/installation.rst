@@ -17,7 +17,7 @@ CakePHP は nginx や lighttpd や Microsoft IIS のような様々なウェブ�
 
 .. note::
 
-    XAMPP / WAMP のいずれでも、mcrypt 拡張も mbstring 拡張も初期インストール状態で
+    XAMPP / WAMP のいずれでも、mbstring 拡張が初期インストール状態で
     動きます。
 
     XAMPP では intl 拡張は同梱されていますが、 **php.ini** の ``extension=php_intl.dll``
