@@ -90,10 +90,8 @@ Composer を使ったプラグインのインストール
 もしあなたが何らかの理由で Composer を使う事ができないのなら、 ``Plugin`` を使って
 自動読み込みを行うこともできます。 ::
 
-    // App\Application::bootstrap() の中に追加
-    $this->addPlugin('ContactManager', ['autoload' => true]);
+    Plugin::load('ContactManager', ['autoload' => true]);
 
-    // 3.6.0 より前は Plugin::load() を使用する必要があります。
 
 .. deprecated:: 3.7.0
     Plugin::load() と ``autoload`` オプションは非推奨です。
