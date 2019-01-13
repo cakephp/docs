@@ -1211,6 +1211,9 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
     // Location ヘッダーの一部をチェック
     $this->assertRedirectContains('/articles/edit/');
 
+    // 3.7.0 で追加
+    $this->assertRedirectNotContains('/articles/edit/');
+
     // レスポンスが空ではないことをアサート
     $this->assertResponseNotEmpty();
 
