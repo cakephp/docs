@@ -247,9 +247,9 @@ MailPreview クラスは、 アプリケーションまたはプラグインの 
 プラグインやアプリケーションパネルを使用するには、アプリケーションの DebugKit の設定を
 更新します。 ::
 
-    // config/bootstrap.php の中で
+    // src/Application.php の bootstrap() メソッドの中に追加
     Configure::write('DebugKit.panels', ['App', 'MyPlugin.MyCustom']);
-    Plugin::load('DebugKit', ['bootstrap' => true]);
+    $this->addPlugin('DebugKit', ['bootstrap' => true]);
 
 上記は、すべてのデフォルトのパネルと同じように ``AppPanel`` と ``MyPlugin`` の
 ``MyCustomPanel`` パネルを読みこみます。
