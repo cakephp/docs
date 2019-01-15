@@ -109,7 +109,7 @@ features will continue to function until 4.0.0 after which they will be removed.
   Use ``$mailer->viewBuilder()->setLayout()`` instead.
 * ``Helper::$theme`` is removed. Use ``View::getTheme()`` instead.
 * ``Helper::$plugin`` is removed. Use ``View::getPlugin()`` instead.
-* ``Helper::$fieldset`` and ``Helper::$tags`` are deprecated as they are unsed.
+* ``Helper::$fieldset`` and ``Helper::$tags`` are deprecated as they are unused.
 * ``Helper::$helpers`` is now protected and should not be accessed from outside
   a helper class.
 * ``Helper::$request`` is removed.
