@@ -120,3 +120,11 @@ CakePHP 3.7 は 3.6 の API の完全上位互換です。
   ``$error`` ・ ``$controller`` ・ ``$template`` ・ ``$method``
 * ``TestCase::$fixtures`` にてアンダースコアー形式のフィクスチャ名を使用することは非推奨です。
   代わりにキャメルケース形式の名前を使用してください。例えば、 ``app.FooBar`` や ``plugin.MyPlugin.FooBar`` です。
+
+緩やかな非推奨
+==============
+
+以下のメソッド、プロパティ、機能は非推奨になりますが、5.0.0まで削除されません。
+
+* ``Cake\TestSuite\ConsoleIntegrationTestCase`` は非推奨です。代わりに
+  ``Cake\TestSuite\ConsoleIntegrationTestTrait`` をテストケースに含めるべきです。
