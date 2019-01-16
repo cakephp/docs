@@ -128,3 +128,21 @@ CakePHP 3.7 は 3.6 の API の完全上位互換です。
 
 * ``Cake\TestSuite\ConsoleIntegrationTestCase`` は非推奨です。代わりに
   ``Cake\TestSuite\ConsoleIntegrationTestTrait`` をテストケースに含めるべきです。
+
+振る舞いの変更
+==============
+
+* ``Cake\Database\Type\IntegerType`` はSQLを準備しデータベースの結果をPHPの型に変換するときに
+  値が数字ではない場合に例外を発生させるようになります。
+* ``Cake\Database\Statement\StatementDecorator::fetchAll()`` は結果が見つからなかった時、
+  ``false`` の代わりに空配列を返します。
+* ``Cake\Database\Statement\BufferedStatement`` は ``StatementDecorator`` から継承しなくなり、
+  そして、 ``IteratorAggregate`` インターフェースを実装しなくなりました。代わりに、
+  コレクションと一緒にステートメントを使うことをよりよくサポートするために、 `` Iterator`` インターフェースを直接実装します。
+* リクエストからのデータをエンティティーに整列化するとき、ORMはboolean、integer、float、decimal型のために
+  非スカラーデータを ``null`` に変換します。
+* ``ExceptionRenderer`` はカスタムアプリケーション例外クラスのハンドラメソッドを常に呼び出すようになりました。
+  以前は、カスタム例外クラスハンドラメソッドはデバッグモードのみで呼び出されていました。
+* ``Router::url()`` ``Router::url()`` でURLを生成した時、デフォルトで ``__method`` キーを ``GET`` にします。
+
+
