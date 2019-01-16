@@ -137,7 +137,7 @@ Behavior Changes
 ================
 
 * ``Cake\Database\Type\IntegerType`` will now raise an exception when values
-  are not numeric when preparing SQL statements and coverting database results
+  are not numeric when preparing SQL statements and converting database results
   to PHP types.
 * ``Cake\Database\Statement\StatementDecorator::fetchAll()`` now returns an
   empty array instead of ``false`` when no result is found.
