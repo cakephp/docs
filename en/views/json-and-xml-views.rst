@@ -149,6 +149,30 @@ this node using the ``_rootNode`` view variable.
 The XmlView class supports the ``_xmlOptions`` variable that allows you to
 customize the options used to generate XML, e.g. ``tags`` vs ``attributes``.
 
+Typical example of ``XmlView`` can be ``sitemap.xml`` where you need to change ``_rootNode`` and set attributes. Generally attributes can be defined using the ``@`` prefix. With sitemap you need to set attribute with ``urlset`` root node, which means you have to set each attribute as parameter to the view, example below::
+
+    public function sitemap()
+    {
+        $pages = $this->Pages->find('publishedInSitemap');
+        $url = [];
+        foreach ($pages as $page) {
+            $modified = $page->get('sitemap_modified') ?: $page->get('modified');
+            $url[] = [
+                'location' => Router::url(['controller' => 'Pages', 'action' => 'view', $page->get('slug'), '_full' => true]),
+                'lastmod' => $modified->format('Y-m-d'),
+                'changefreq' => $page->get('sitemap_changes'),
+                'priority' => $page->get('sitemap_priority') ?: '0.5'
+            ];
+        }
+
+        $this->set('_rootNode', 'urlset');
+        $this->set([
+            '@xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
+            'url' => $url
+        ]);
+        $this->set('_serialize', ['@xmlns', 'url']);
+    }
+
 Creating JSON Views
 ===================
 
