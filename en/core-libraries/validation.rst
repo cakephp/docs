@@ -36,7 +36,7 @@ validate::
                 'message' => 'Titles need to be at least 10 characters long',
             ]
         ])
-        ->allowDateTime('published')
+        ->allowEmptyDateTime('published')
         ->add('published', 'boolean', [
             'rule' => 'boolean'
         ])
