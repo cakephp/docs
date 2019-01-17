@@ -209,3 +209,64 @@ ORM
   このメソッドはエンティティがエラーを持っているかどうかを  ``getErrors()`` よりも効率的にチェックできます。
 * 更新は多くの関連付けデータを持つようになり、 ``_ids`` を尊重します。
   これにより、パッチ適用によって多くの関連付けが新しいエンティティの作成と同じように機能し、多くの関連付けとの整合性が保たれます。
+
+Shell
+-----
+
+* ``cake i18n extract`` は新しい ``--relative-paths`` オプションを追加しました。
+  これは、POTファイル内のパスのコメントを、絶対パスではなくアプリケーションのルートディレクトリを基準にして作成します。
+
+* ``cake i18n extract`` は新しい ``--marker-error`` オプションを追加しました。
+  これは、POTファイル内のコメントとして非静的な値を使う翻訳関数の報告を可能にします。
+
+TestSuite
+---------
+
+* 新しいアサーションメソッドが ``IntegrationTestCase`` に追加されました。 :
+
+  * ``assertResponseNotEquals()``,
+  * ``assertHeaderNotContains()``
+  * ``assertRedirectNotContains()``
+  * ``assertFlashElement()``
+  * ``assertFlashElementAt()``
+
+* ``IntegrationTestCase`` と ``ConsoleIntegrationTestCase`` によって提供されていたカスタムアサーションは、
+  現在、制約クラスを通して実装されています。
+* ``TestCase::loadPlugins()` 、 ``removePlugins()`` および ``clearPlugins()`` は、
+  ``Plugin::load()`` と ``Plugin::unload()`` が非推奨になったため、
+  動的にロードされたプラグインを扱うのをより簡単にするために追加されました。
+* ``getMockForModel()`` は ``$methods`` パラメーターに ``null`` をサポートします。
+  これにより、元のコードを実行するモックを作成できます。これは、
+  動作をPHPUnitモックオブジェクトがどのように機能するかに合わせます。
+* メールのテストを容易にするために ``EmailTrait`` が追加されました。
+* 統合アサーションのデフォルトメッセージは、可能であれば発生した例外からより多くのコンテキストを提供するように改善されました。
+
+Utility
+-------
+
+* ``Cake\Utility\Text::getTransliterator()`` が追加されました。
+* ``Cake\Utility\Text::setTransliterator()`` が追加されました。
+* ``Cake\Utility\Xml::loadHtml()`` が追加されました。
+
+Validation
+----------
+
+* ``Cake\Validation\Validation::iban()`` が国際的な銀行口座番号を検証するために追加されました。
+* ``Cake\Validation\Validator::allowEmptyString()`` 、 ``allowEmptyArray()`` 、 ``allowEmptyDate()`` 、
+  ``allowEmptyTime()`` 、 ``allowEmptyDateTime()``  およびに ``allowEmptyFile()`` が追加されました。
+  これらの新しいメソッドは ``allowEmpty()`` に代わるもので、フィールドが空とみなすべきものをより細かく制御できます。
+
+View
+----
+
+* ``FormHelper`` は確認ボックス用に生成されたJavascriptスニペットをカスタマイズすることを可能にする
+  ``confirmJs`` テンプレート変数をサポートしました。
+* ``FormHelper`` はカスタムバリデーションメッセージからHTML5のバリデーションメッセージを設定するための
+  ``autoSetCustomValidity`` オプションを持ちます。
+* ``ViewBuilder`` 、 ``setVar()`` 、 ``setVars()`` 、 ``getVar()`` 、 ``getVars()`` およびに
+  ``hasVar()`` が追加されました。これらのメソッドは ``ViewVarsTrait`` に定義された
+  public の ``viewVars`` プロパティを置き換えます。
+* ``PaginatorHelper`` は接頭辞のないソートキーデフォルトモデルの、モデル接頭辞のついたものと一致するようになります。
+  これは ``Cake\Datasource\Paginator`` で加えられた変更でスムーズな操作を可能にします。
+* ``FormHelper`` は 入力オプションで最大長が指定されていない場合は、``maxLength`` バリデーションルールを読み、
+  HTML入力の ``maxlength`` 属性を自動的に定義します。
