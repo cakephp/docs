@@ -171,7 +171,7 @@ Datasource
 Error
 -----
 
-* ``ExceptionRenderer``は、例外処理時に接頭辞付きのエラーコントローラーを探すようになりました。
+* ``ExceptionRenderer`` は、例外処理時に接頭辞付きのエラーコントローラーを探すようになりました。
   これにより、アプリケーション内の各ルーティングプレフィックスに対して、
   カスタムエラーコントローラーロジックを定義できます。
 * ``ErrorHandlerMiddleware`` は以前の例外をログに含めるようになりました。
@@ -262,7 +262,7 @@ View
 * ``FormHelper`` は確認ボックス用に生成されたJavascriptスニペットをカスタマイズすることを可能にする
   ``confirmJs`` テンプレート変数をサポートしました。
 * ``FormHelper`` はカスタムバリデーションメッセージからHTML5のバリデーションメッセージを設定するための
-  ``autoSetCustomValidity`` オプションを持ちます。 詳しくは、 :doc:`html5-validity-messages` をご覧ください。
+  ``autoSetCustomValidity`` オプションを持ちます。 詳しくは、 :ref:`html5-validity-messages` をご覧ください。
 * ``ViewBuilder`` 、 ``setVar()`` 、 ``setVars()`` 、 ``getVar()`` 、 ``getVars()`` およびに
   ``hasVar()`` が追加されました。これらのメソッドは ``ViewVarsTrait`` に定義された
   public の ``viewVars`` プロパティを置き換えます。
