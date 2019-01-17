@@ -262,7 +262,7 @@ View
 * ``FormHelper`` は確認ボックス用に生成されたJavascriptスニペットをカスタマイズすることを可能にする
   ``confirmJs`` テンプレート変数をサポートしました。
 * ``FormHelper`` はカスタムバリデーションメッセージからHTML5のバリデーションメッセージを設定するための
-  ``autoSetCustomValidity`` オプションを持ちます。
+  ``autoSetCustomValidity`` オプションを持ちます。 詳しくは、 :doc:`html5-validity-messages` をご覧ください。
 * ``ViewBuilder`` 、 ``setVar()`` 、 ``setVars()`` 、 ``getVar()`` 、 ``getVars()`` およびに
   ``hasVar()`` が追加されました。これらのメソッドは ``ViewVarsTrait`` に定義された
   public の ``viewVars`` プロパティを置き換えます。
