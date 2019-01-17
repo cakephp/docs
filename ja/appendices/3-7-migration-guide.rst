@@ -167,3 +167,45 @@ Datasource
   クエリ文字列内の接頭辞のない ``sort`` 値をプライマリモデルと一致させるようになりました。
   例えば、コントローラーがデフォルトソートの ``['Users.name' => 'desc']`` を定義していれば、
   ``Users.name`` か ``name`` のどちらかをソートキーとして使用できます。
+
+Error
+-----
+
+* ``ExceptionRenderer``は、例外処理時に接頭辞付きのエラーコントローラーを探すようになりました。
+  これにより、アプリケーション内の各ルーティングプレフィックスに対して、
+  カスタムエラーコントローラーロジックを定義できます。
+* ``ErrorHandlerMiddleware`` は以前の例外をログに含めるようになりました。
+
+Filesystem
+----------
+
+* ``Cake\Filesystem\Folder::normalizeFullPath()`` が追加されました。
+
+Form
+----
+
+* ``Cake\Form\Form::setData()`` が追加されました。
+  このメソッドはフォームのデフォルト値の定義を簡単にします。
+* ``Cake\Form\Form::getData()`` が追加されました。
+
+Http
+----
+
+* ``Cake\Http\ServerRequest::setTrustedProxies()`` が追加されました。
+* ``curl`` 拡張がインストールされている場合、 ``Cake\Http\Client`` はデフォルトでCurlベースのアダプターを使用するようになりました。
+* 新しい定数が ``SecurityHeadersMiddleware`` に追加されました。新しい定数は、
+  HTTPヘッダーのコンポーネントを構築するために使用されます。
+
+Mailer
+------
+
+* ``Cake\Mailer\TransportFactory`` と ``Cake\Mailer\TransportRegistry`` が追加されました。
+  このクラスは、メールからトランスポート作成を抽出し、メールが将来的によりシンプルになることを可能にします。
+
+ORM
+---
+
+* ``Cake\ORM\EntityTrait::hasErrors()`` が追加されました。
+  このメソッドはエンティティがエラーを持っているかどうかを  ``getErrors()`` よりも効率的にチェックできます。
+* 更新は多くの関連付けデータを持つようになり、 ``_ids`` を尊重します。
+  これにより、パッチ適用によって多くの関連付けが新しいエンティティの作成と同じように機能し、多くの関連付けとの整合性が保たれます。
