@@ -224,7 +224,7 @@ TestSuite
 
 * 新しいアサーションメソッドが ``IntegrationTestCase`` に追加されました。
 
-  * ``assertResponseNotEquals()``,
+  * ``assertResponseNotEquals()``
   * ``assertHeaderNotContains()``
   * ``assertRedirectNotContains()``
   * ``assertFlashElement()``
