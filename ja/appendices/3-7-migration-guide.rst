@@ -124,7 +124,7 @@ CakePHP 3.7 は 3.6 の API の完全上位互換です。
 緩やかな非推奨
 ==============
 
-以下のメソッド、プロパティ、機能は非推奨になりますが、5.0.0まで削除されません。
+以下のメソッド、プロパティー、機能は非推奨になりますが、5.0.0 まで削除されません。
 
 * ``Cake\TestSuite\ConsoleIntegrationTestCase`` は非推奨です。代わりに
   ``Cake\TestSuite\ConsoleIntegrationTestTrait`` をテストケースに含めるべきです。
