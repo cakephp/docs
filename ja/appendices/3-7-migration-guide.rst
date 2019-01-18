@@ -100,15 +100,15 @@ CakePHP 3.7 は 3.6 の API の完全上位互換です。
 * ``Cake\Mailer\Email::dropTransport()`` は非推奨です。代わりに
   ``Cake\Mailer\TransportFactory::drop()`` を使用してください。
 * 以下のビュー関連の ``Cake\Mailer\Email`` のメソッドは非推奨になりました。
-  ``setTemplate()`` ・ ``getTemplate()`` ・ ``setLayout()`` ・ ``getLayout()``
-  ``setTheme()`` ・ ``getTheme()`` ・ ``setHelpers()`` ・ ``getHelpers()``
-  代わりにメールのビュービルダーを通して同じメソッドを使用してください。例えば、
-  ``$email->viewBuilder()->getTemplate()``。
+  ``setTemplate()`` 、 ``getTemplate()`` 、 ``setLayout()`` 、 ``getLayout()``
+  ``setTheme()`` 、 ``getTheme()`` 、 ``setHelpers()`` およびに ``getHelpers()`` です。
+  代わりにメールのビュービルダーを通して同じメソッドを使用してください。
+  例えば、 ``$email->viewBuilder()->getTemplate()`` です。
 * ``Cake\Mailer\Mailer::layout()`` は非推奨です。
   代わりに ``$mailer->viewBuilder()->setLayout()`` を使用してください。
 * ``Helper::$theme`` は削除されました。代わりに ``View::getTheme()`` を使用してください。
 * ``Helper::$plugin`` は削除されました。代わりに ``View::getPlugin()`` を使用してください。
-* ``Helper::$fieldset`` と ``Helper::$tags`` は使われていないので非推奨です。
+* ``Helper::$fieldset`` と ``Helper::$tags`` は使用されていないので非推奨です。
 * ``Helper::$helpers`` は protected になったため、ヘルパークラスの外からアクセスするべきではありません。
 * ``Helper::$request`` は削除されました。
   代わりに ``View::getRequest()``、``View::setRequest()`` を使用してください。
@@ -117,7 +117,7 @@ CakePHP 3.7 は 3.6 の API の完全上位互換です。
 * ``Cake\Core\Plugin::unload()`` は非推奨です。代わりに
   ``Plugin::getCollection()->remove()`` か ``clear()`` を使用してください。
 * 以下の ``Cake\Error\ExceptionRender`` のプロパティは protected になりました。
-  ``$error`` ・ ``$controller`` ・ ``$template`` ・ ``$method``
+  ``$error`` 、 ``$controller`` 、 ``$template`` およびに ``$method`` です。
 * ``TestCase::$fixtures`` にてアンダースコアー形式のフィクスチャー名を使用することは非推奨です。
   代わりにキャメルケース形式の名前を使用してください。例えば、 ``app.FooBar`` や ``plugin.MyPlugin.FooBar`` です。
 
@@ -133,7 +133,7 @@ CakePHP 3.7 は 3.6 の API の完全上位互換です。
 ==============
 
 * ``Cake\Database\Type\IntegerType`` は SQL を生成しデータベースの結果を PHP の型に変換するときに
-  値が数字ではない場合に例外を発生させるようになります。
+  値が数値ではない場合に例外を発生させるようになります。
 * ``Cake\Database\Statement\StatementDecorator::fetchAll()`` は結果が見つからなかった時、
   ``false`` の代わりに空配列を返します。
 * ``Cake\Database\Statement\BufferedStatement`` は ``StatementDecorator`` から継承しなくなり、
@@ -163,7 +163,7 @@ Database
 Datasource
 ----------
 
-* ``Paginator``は、一致するモデルのプレフィクス付きデフォルトソートフィールドも存在する場合、
+* ``Paginator`` は、一致するモデルのプレフィクス付きデフォルトソートフィールドも存在する場合、
   クエリー文字列内のプレフィクスのない ``sort`` 値をプライマリーモデルと一致させるようになりました。
   例えば、コントローラーがデフォルトソートの ``['Users.name' => 'desc']`` を定義していれば、
   ``Users.name`` か ``name`` のどちらかをソートキーとして使用できます。
