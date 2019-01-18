@@ -72,8 +72,8 @@ CakePHP 3.7 は 3.6 の API の完全上位互換です。
   Viewのパブリックメソッドを使用してください。
 * ``Cake\View\View:$helpers`` は protected になります。代わりに
   HelperRegistry と対話するためには ``helpers()`` を使用してください。
-* ``Cake\View\View::$uuids`` は非推奨であり、4.0で削除されます。
-* ``Cake\View\View::uuid()`` は非推奨であり、4.0で削除されます。
+* ``Cake\View\View::$uuids`` は非推奨であり、4.0 で削除されます。
+* ``Cake\View\View::uuid()`` は非推奨であり、4.0 で削除されます。
 * ``Cake\View\Cell::$template`` は protected になります。代わりに
   ``viewBuilder()->getTemplate()/setTemplate()`` を使用してください。
 * ``Cake\View\Cell::$plugin`` は protected になります。代わりに
@@ -99,7 +99,7 @@ CakePHP 3.7 は 3.6 の API の完全上位互換です。
   ``Cake\Mailer\TransportFactory::configured()`` を使用してください。
 * ``Cake\Mailer\Email::dropTransport()`` は非推奨です。代わりに
   ``Cake\Mailer\TransportFactory::drop()`` を使用してください。
-* 以下のビュー関連の ``Cake\Mailer\Email`` のメソッドは非推奨になりました。:
+* 以下のビュー関連の ``Cake\Mailer\Email`` のメソッドは非推奨になりました。
   ``setTemplate()`` ・ ``getTemplate()`` ・ ``setLayout()`` ・ ``getLayout()``
   ``setTheme()`` ・ ``getTheme()`` ・ ``setHelpers()`` ・ ``getHelpers()``
   代わりにメールのビュービルダーを通して同じメソッドを使用してください。例えば、
@@ -116,7 +116,7 @@ CakePHP 3.7 は 3.6 の API の完全上位互換です。
   ``Application::addPlugin()`` を使用するべきです。
 * ``Cake\Core\Plugin::unload()`` は非推奨です。代わりに
   ``Plugin::getCollection()->remove()`` か ``clear()`` を使用してください。
-* 以下の ``Cake\Error\ExceptionRender`` のプロパティは protected になりました。:
+* 以下の ``Cake\Error\ExceptionRender`` のプロパティは protected になりました。
   ``$error`` ・ ``$controller`` ・ ``$template`` ・ ``$method``
 * ``TestCase::$fixtures`` にてアンダースコアー形式のフィクスチャー名を使用することは非推奨です。
   代わりにキャメルケース形式の名前を使用してください。例えば、 ``app.FooBar`` や ``plugin.MyPlugin.FooBar`` です。
@@ -132,14 +132,14 @@ CakePHP 3.7 は 3.6 の API の完全上位互換です。
 振る舞いの変更
 ==============
 
-* ``Cake\Database\Type\IntegerType`` はSQLを準備しデータベースの結果をPHPの型に変換するときに
+* ``Cake\Database\Type\IntegerType`` は SQL を準備しデータベースの結果を PHP の型に変換するときに
   値が数字ではない場合に例外を発生させるようになります。
 * ``Cake\Database\Statement\StatementDecorator::fetchAll()`` は結果が見つからなかった時、
   ``false`` の代わりに空配列を返します。
 * ``Cake\Database\Statement\BufferedStatement`` は ``StatementDecorator`` から継承しなくなり、
-  そして、 ``IteratorAggregate`` インターフェースを実装しなくなりました。代わりに、
-  コレクションと一緒にステートメントを使うことをよりよくサポートするために、 `` Iterator`` インターフェースを直接実装します。
-* リクエストからのデータをエンティティーに整列化するとき、ORMはboolean、integer、float、decimal型のために
+  そして、 ``IteratorAggregate`` インターフェイスを実装しなくなりました。代わりに、
+  コレクションと一緒にステートメントを使うことをよりよくサポートするために、 ``Iterator`` インターフェイスを直接実装します。
+* リクエストからのデータをエンティティーに整列化するとき、 ORM は boolean 、integer 、float 、decimal 型のために
   非スカラーデータを ``null`` に変換します。
 * ``ExceptionRenderer`` はカスタムアプリケーション例外クラスのハンドラーメソッドを常に呼び出すようになりました。
   以前は、カスタム例外クラスハンドラーメソッドはデバッグモードのみで呼び出されていました。
@@ -163,15 +163,15 @@ Database
 Datasource
 ----------
 
-* ``Paginator``は、一致するモデルの接頭辞付きデフォルトソートフィールドも存在する場合、
-  クエリー文字列内の接頭辞のない ``sort`` 値をプライマリーモデルと一致させるようになりました。
+* ``Paginator``は、一致するモデルのプレフィクス付きデフォルトソートフィールドも存在する場合、
+  クエリー文字列内のプレフィクスのない ``sort`` 値をプライマリーモデルと一致させるようになりました。
   例えば、コントローラーがデフォルトソートの ``['Users.name' => 'desc']`` を定義していれば、
   ``Users.name`` か ``name`` のどちらかをソートキーとして使用できます。
 
 Error
 -----
 
-* ``ExceptionRenderer`` は、例外処理時に接頭辞付きのエラーコントローラーを探すようになりました。
+* ``ExceptionRenderer`` は、例外処理時にプレフィクス付きのエラーコントローラーを探すようになりました。
   これにより、アプリケーション内の各ルーティングプレフィックスに対して、
   カスタムエラーコントローラーロジックを定義できます。
 * ``ErrorHandlerMiddleware`` は以前の例外をログに含めるようになりました。
@@ -192,9 +192,9 @@ Http
 ----
 
 * ``Cake\Http\ServerRequest::setTrustedProxies()`` が追加されました。
-* ``curl`` 拡張がインストールされている場合、 ``Cake\Http\Client`` はデフォルトでCurlベースのアダプターを使用するようになりました。
+* ``curl`` 拡張がインストールされている場合、 ``Cake\Http\Client`` はデフォルトで Curl ベースのアダプターを使用するようになりました。
 * 新しい定数が ``SecurityHeadersMiddleware`` に追加されました。新しい定数は、
-  HTTPヘッダーのコンポーネントを構築するために使用されます。
+  HTTP ヘッダーのコンポーネントを構築するために使用されます。
 
 Mailer
 ------
@@ -232,12 +232,12 @@ TestSuite
 
 * ``IntegrationTestCase`` と ``ConsoleIntegrationTestCase`` によって提供されていたカスタムアサーションは、
   現在、制約クラスを通して実装されています。
-* ``TestCase::loadPlugins()` 、 ``removePlugins()`` および ``clearPlugins()`` は、
+* ``TestCase::loadPlugins()`` 、 ``removePlugins()`` および ``clearPlugins()`` は、
   ``Plugin::load()`` と ``Plugin::unload()`` が非推奨になったため、
   動的にロードされたプラグインを扱うのをより簡単にするために追加されました。
 * ``getMockForModel()`` は ``$methods`` パラメーターに ``null`` をサポートします。
   これにより、元のコードを実行するモックを作成できます。これは、
-  動作をPHPUnitモックオブジェクトがどのように機能するかに合わせます。
+  動作を PHPUnit モックオブジェクトがどのように機能するかに合わせます。
 * メールのテストを容易にするために ``EmailTrait`` が追加されました。
 * 統合アサーションのデフォルトメッセージは、可能であれば発生した例外からより多くのコンテキストを提供するように改善されました。
 
@@ -259,14 +259,14 @@ Validation
 View
 ----
 
-* ``FormHelper`` は確認ボックス用に生成されたJavascriptスニペットをカスタマイズすることを可能にする
+* ``FormHelper`` は確認ボックス用に生成された Javascript スニペットをカスタマイズすることを可能にする
   ``confirmJs`` テンプレート変数をサポートしました。
-* ``FormHelper`` はカスタムバリデーションメッセージからHTML5のバリデーションメッセージを設定するための
+* ``FormHelper`` はカスタムバリデーションメッセージから HTML5 の検証メッセージを設定するための
   ``autoSetCustomValidity`` オプションを持ちます。 詳しくは、 :ref:`html5-validity-messages` をご覧ください。
 * ``ViewBuilder`` 、 ``setVar()`` 、 ``setVars()`` 、 ``getVar()`` 、 ``getVars()`` およびに
   ``hasVar()`` が追加されました。これらのメソッドは ``ViewVarsTrait`` に定義された
   public の ``viewVars`` プロパティーを置き換えます。
-* ``PaginatorHelper`` は接頭辞のないソートキーデフォルトモデルの、モデル接頭辞のついたものと一致するようになります。
+* ``PaginatorHelper`` はプレフィクスのないソートキーを、デフォルトモデルのモデルプレフィクスのついたものと一致させるようになります。
   これは ``Cake\Datasource\Paginator`` で加えられた変更でスムーズな操作を可能にします。
 * ``FormHelper`` は 入力オプションで最大長が指定されていない場合は、``maxLength`` バリデーションルールを読み、
-  HTML入力の ``maxlength`` 属性を自動的に定義します。
+  HTML 入力の ``maxlength`` 属性を自動的に定義します。
