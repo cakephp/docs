@@ -85,7 +85,7 @@ CakePHP 3.7 は 3.6 の API の完全上位互換です。
 * ``Cake\View\Cell::$View`` は protected になります。
 * ``Cake\View\Cell::$request`` は protected になります。
 * ``Cake\View\Cell::$response`` は protected になります。
-* ``Cake\View\ViewVarsTrait::$viewVars`` は非推奨です。このパブリックプロパティは、
+* ``Cake\View\ViewVarsTrait::$viewVars`` は非推奨です。このパブリックプロパティーは、
   4.0.0 で削除されます。代わりに ``set()`` を使用してください。
 * ``Cake\Filesystem\Folder::normalizePath()`` は非推奨です。代わりに
   ``correctSlashFor()`` を使用するべきです。
