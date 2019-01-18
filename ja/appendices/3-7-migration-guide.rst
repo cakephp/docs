@@ -265,7 +265,7 @@ View
   ``autoSetCustomValidity`` オプションを持ちます。 詳しくは、 :ref:`html5-validity-messages` をご覧ください。
 * ``ViewBuilder`` 、 ``setVar()`` 、 ``setVars()`` 、 ``getVar()`` 、 ``getVars()`` およびに
   ``hasVar()`` が追加されました。これらのメソッドは ``ViewVarsTrait`` に定義された
-  public の ``viewVars`` プロパティを置き換えます。
+  public の ``viewVars`` プロパティーを置き換えます。
 * ``PaginatorHelper`` は接頭辞のないソートキーデフォルトモデルの、モデル接頭辞のついたものと一致するようになります。
   これは ``Cake\Datasource\Paginator`` で加えられた変更でスムーズな操作を可能にします。
 * ``FormHelper`` は 入力オプションで最大長が指定されていない場合は、``maxLength`` バリデーションルールを読み、
