@@ -428,11 +428,11 @@ Articles の検証ルールの更新
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->notEmpty('title')
+            ->allowEmptyString('title', false)
             ->minLength('title', 10)
             ->maxLength('title', 255)
 
-            ->notEmpty('body')
+            ->allowEmptyString('body', false)
             ->minLength('body', 10);
 
         return $validator;

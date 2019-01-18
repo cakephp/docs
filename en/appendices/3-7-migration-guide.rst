@@ -109,7 +109,7 @@ features will continue to function until 4.0.0 after which they will be removed.
   Use ``$mailer->viewBuilder()->setLayout()`` instead.
 * ``Helper::$theme`` is removed. Use ``View::getTheme()`` instead.
 * ``Helper::$plugin`` is removed. Use ``View::getPlugin()`` instead.
-* ``Helper::$fieldset`` and ``Helper::$tags`` are deprecated as they are unsed.
+* ``Helper::$fieldset`` and ``Helper::$tags`` are deprecated as they are unused.
 * ``Helper::$helpers`` is now protected and should not be accessed from outside
   a helper class.
 * ``Helper::$request`` is removed.
@@ -137,7 +137,7 @@ Behavior Changes
 ================
 
 * ``Cake\Database\Type\IntegerType`` will now raise an exception when values
-  are not numeric when preparing SQL statements and coverting database results
+  are not numeric when preparing SQL statements and converting database results
   to PHP types.
 * ``Cake\Database\Statement\StatementDecorator::fetchAll()`` now returns an
   empty array instead of ``false`` when no result is found.

@@ -13,9 +13,11 @@ ElasticSearch プラグインをインストールするには、 ``composer`` �
 
     php composer.phar require cakephp/elastic-search "@stable"
 
-以下の1行をあなたのアプリケーションの **config/bootstrap.php** ファイルに追加する必要があります。 ::
+以下の1行をあなたのアプリケーションの **src/Application.php** ファイルに追加する必要があります。 ::
 
-    Plugin::load('Cake/ElasticSearch', ['bootstrap' => true]);
+    $this->addPlugin('Cake/ElasticSearch', ['bootstrap' => true]);
+
+    // 3.6.0 より前は、Plugin::load() を使用する必要があります
 
 追加で 'elastic' のデータソースの接続を **config/app.php** ファイルに設定する必要があります。
 設定例は以下のようになります。 ::

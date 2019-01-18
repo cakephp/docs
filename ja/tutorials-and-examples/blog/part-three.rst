@@ -24,7 +24,7 @@ Migrations プラグイン
     composer require cakephp/migrations:~1.0
 
 マイグレーションプラグインはアプリケーションの ``plugins`` フォルダーに存在します。
-そして、 アプリケーションの ``bootstrap.php`` ファイルに ``Plugin::load('Migrations');``
+そして、 Application の ``bootstrap`` メソッドに ``$this->addPlugin('Migrations');``
 を追加してください。
 
 プラグインを読み込んだら、次のコマンドを実行してマイグレーションファイルを作成しましょう。 ::
