@@ -37,7 +37,7 @@ CakePHP 3.7 は 3.6 の API の完全上位互換です。
   代わりに ``Query::clause('from')`` を使用してください。
 * ``Cake\Database\Connection::logQueries()`` は非推奨です。代わりに ``enableQueryLogging()``
   と ``isQueryLoggingEnabled()`` を使用してください。
-* ``Cake\Http\Response::withCookie()`` に文字列/配列パラメータを設定することは非推奨です。
+* ``Cake\Http\Response::withCookie()`` に文字列/配列パラメーターを設定することは非推奨です。
   代わりに ``Cake\Http\Cookie\Cookie`` インスタンスをわたす必要があります。
 * ``Cake\Validation\Validation::cc()`` は ``creditCard()`` に名前が変更されました。
 * ``Cake\View\ViewVarsTrait::viewOptions()`` は非推奨です。代わりに ``viewBuilder()->setOptions()``
