@@ -241,7 +241,7 @@ TestSuite
 
 * New assertion methods were added to ``IntegrationTestCase``:
 
-  * ``assertResponseNotEquals()``,
+  * ``assertResponseNotEquals()``
   * ``assertHeaderNotContains()``
   * ``assertRedirectNotContains()``
   * ``assertFlashElement()``
