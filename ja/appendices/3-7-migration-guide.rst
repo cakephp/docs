@@ -222,7 +222,7 @@ Shell
 TestSuite
 ---------
 
-* 新しいアサーションメソッドが ``IntegrationTestCase`` に追加されました。 :
+* 新しいアサーションメソッドが ``IntegrationTestCase`` に追加されました。
 
   * ``assertResponseNotEquals()``,
   * ``assertHeaderNotContains()``
