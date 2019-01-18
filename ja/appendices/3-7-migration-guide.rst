@@ -118,7 +118,7 @@ CakePHP 3.7 は 3.6 の API の完全上位互換です。
   ``Plugin::getCollection()->remove()`` か ``clear()`` を使用してください。
 * 以下の ``Cake\Error\ExceptionRender`` のプロパティは protected になりました。:
   ``$error`` ・ ``$controller`` ・ ``$template`` ・ ``$method``
-* ``TestCase::$fixtures`` にてアンダースコアー形式のフィクスチャ名を使用することは非推奨です。
+* ``TestCase::$fixtures`` にてアンダースコアー形式のフィクスチャー名を使用することは非推奨です。
   代わりにキャメルケース形式の名前を使用してください。例えば、 ``app.FooBar`` や ``plugin.MyPlugin.FooBar`` です。
 
 緩やかな非推奨
