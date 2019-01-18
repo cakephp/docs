@@ -147,6 +147,9 @@ form タグの生成方法に影響を与えるさまざまなキーと値のペ
 
 * ``'templateVars'`` - ``formStart`` テンプレートのためのテンプレート変数を提供することができます。
 
+* ``autoSetCustomValidity`` - コントロールの HTML5 検証メッセージでカスタム必須および notBlank 検証メッセージを使用するには、
+  ``true`` を設定します。デフォルトは ``false`` です。
+
 .. tip::
 
     上記のオプションの他に、 ``$options`` 引数の中で、 作成した ``form`` 要素に渡したい
@@ -2025,6 +2028,36 @@ FormHelper は、フィールドエラーを簡単にチェックしたり、必
     if ($this->Form->isFieldError('gender')) {
         echo $this->Form->error('gender');
     }
+
+.. _html5-validity-messages:
+
+HTML5 検証メッセージにバリデーションメッセージを表示
+====================================================
+
+.. versionadded:: 3.7.0
+
+``autoSetCustomValidity`` FormHelper オプションが ``true`` に設定されている場合、
+デフォルトのブラウザ HTML5 の必須メッセージの代わりに、フィールドの必須および
+notBlank バリデーションメッセージに対するエラーメッセージが使用されます。
+このオプションを有効にすると、フィールドに ``onvalid`` と ``oninvalid`` イベント属性が追加されます。
+例えば、 ::
+
+    <input type="text" name="field" required onvalid="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Custom notBlank message')" />
+
+カスタム Javascript を使用してこれらのイベントを手動で設定したい場合は、
+``autoSetCustomValidity`` オプションを ``false`` に設定して、
+代わりに 特別な ``customValidityMessage`` テンプレート変数を使用することができます。
+このテンプレート変数はフィールドが必須の場合に追加されます。 ::
+
+    // テンプレート例
+    [
+        'input' => '<input type="{{type}}" name="{{name}}" data-error-message="{{customValidityMessage}}" {{attrs}}/>',
+    ]
+
+    // このような input が作成されます
+    <input type="text" name="field" required data-error-message="Custom notBlank message" />
+
+それから Javascript を使って ``onvalid`` と ``oninvalid`` イベントを好きなように設定できます。
 
 ボタンと submit 要素の作成
 ==========================
