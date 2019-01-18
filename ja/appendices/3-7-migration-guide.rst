@@ -132,16 +132,16 @@ CakePHP 3.7 は 3.6 の API の完全上位互換です。
 振る舞いの変更
 ==============
 
-* ``Cake\Database\Type\IntegerType`` は SQL を準備しデータベースの結果を PHP の型に変換するときに
+* ``Cake\Database\Type\IntegerType`` は SQL を生成しデータベースの結果を PHP の型に変換するときに
   値が数字ではない場合に例外を発生させるようになります。
 * ``Cake\Database\Statement\StatementDecorator::fetchAll()`` は結果が見つからなかった時、
   ``false`` の代わりに空配列を返します。
 * ``Cake\Database\Statement\BufferedStatement`` は ``StatementDecorator`` から継承しなくなり、
   そして、 ``IteratorAggregate`` インターフェイスを実装しなくなりました。代わりに、
   コレクションと一緒にステートメントを使うことをよりよくサポートするために、 ``Iterator`` インターフェイスを直接実装します。
-* リクエストからのデータをエンティティーに整列化するとき、 ORM は boolean 、integer 、float 、decimal 型のために
+* リクエストからのデータをエンティティーに変換するとき、 ORM は boolean 、integer 、float 、decimal 型のために
   非スカラーデータを ``null`` に変換します。
-* ``ExceptionRenderer`` はカスタムアプリケーション例外クラスのハンドラーメソッドを常に呼び出すようになりました。
+* ``ExceptionRenderer`` はカスタムアプリケーション例外クラスのハンドラーメソッドを**常に**呼び出すようになりました。
   以前は、カスタム例外クラスハンドラーメソッドはデバッグモードのみで呼び出されていました。
 * ``Router::url()`` ``Router::url()`` でURLを生成した時、デフォルトで ``__method`` キーを ``GET`` にします。
 
@@ -152,7 +152,7 @@ CakePHP 3.7 は 3.6 の API の完全上位互換です。
 Cache
 -----
 
-* ``ArrayEngine`` が追加されました。このエンジンはメモリーキャッシュの実装においてエフェメラルを提供します。
+* ``ArrayEngine`` が追加されました。このエンジンはメモリーキャッシュの実装において揮発性を提供します。
   永続的なキャッシュストレージを必要としないテストスイートや長期実行プロセスに最適です。
 
 Database
