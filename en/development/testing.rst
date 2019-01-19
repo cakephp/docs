@@ -600,7 +600,7 @@ use that to retrieve the table name::
         public $import = ['model' => 'Articles'];
     }
 
-Since this uses ``TableRegistry::get()``, it also supports plugin syntax.
+Since this uses ``TableRegistry::getTableLocator()->get()``, it also supports plugin syntax.
 
 You can naturally import your table definition from an existing model/table, but
 have your records defined directly on the fixture as it was shown on previous
@@ -752,7 +752,7 @@ now looks like this::
         public function setUp()
         {
             parent::setUp();
-            $this->Articles = TableRegistry::get('Articles');
+            $this->Articles = TableRegistry::getTableLocator()->get('Articles');
         }
 
         public function testFindPublished()
@@ -907,7 +907,7 @@ Create a file named **ArticlesControllerTest.php** in your
             $this->post('/articles', $data);
 
             $this->assertResponseSuccess();
-            $articles = TableRegistry::get('Articles');
+            $articles = TableRegistry::getTableLocator()->get('Articles');
             $query = $articles->find()->where(['title' => $data['title']]);
             $this->assertEquals(1, $query->count());
         }
@@ -1619,7 +1619,7 @@ the event data::
         public function setUp()
         {
             parent::setUp();
-            $this->Orders = TableRegistry::get('Orders');
+            $this->Orders = TableRegistry::getTableLocator()->get('Orders');
             // enable event tracking
             $this->Orders->getEventManager()->setEventList(new EventList());
         }
