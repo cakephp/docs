@@ -36,7 +36,7 @@ validate::
                 'message' => 'Titles need to be at least 10 characters long',
             ]
         ])
-        ->allowDateTime('published')
+        ->allowEmptyDateTime('published')
         ->add('published', 'boolean', [
             'rule' => 'boolean'
         ])
@@ -128,10 +128,10 @@ when a field can or cannot be empty:
 
 An example of these methods in action is::
 
-    // Prior to 3.6.12 you must use allowEmpty().
+    // Prior to 3.7 you must use allowEmpty() or notEmpty().
     $validator->allowEmptyDateTime('published')
-        ->allowEmptyString('title', 'Title cannot be empty')
-        ->allowEmptyString('body', 'Body cannot be empty', 'create')
+        ->allowEmptyString('title', false, 'Title cannot be empty')
+        ->allowEmptyString('body', 'update', 'Body cannot be empty')
         ->allowEmptyFile('header_image', 'update');
         ->allowEmptyDateTime('posted', 'update');
 

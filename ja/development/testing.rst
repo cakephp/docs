@@ -659,10 +659,10 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTest extends CakeTestCase
     {
-        public $fixtures = ['app.blog/Articles', 'app.blog/Comments'];
+        public $fixtures = ['app.Blog/Articles', 'app.Blog/Comments'];
     }
 
-上記の例では、両方のフィクスチャーは ``tests/Fixture/blog`` からロードされることになります。
+上記の例では、両方のフィクスチャーは ``tests/Fixture/Blog`` からロードされることになります。
 
 テーブルクラスのテスト
 ======================
@@ -730,7 +730,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
         {
             $query = $this->Articles->find('published');
             $this->assertInstanceOf('Cake\ORM\Query', $query);
-            $result = $query->hydrate(false)->toArray();
+            $result = $query->enableHydration(false)->toArray();
             $expected = [
                 ['id' => 1, 'title' => 'First Article'],
                 ['id' => 2, 'title' => 'Second Article'],
@@ -775,8 +775,8 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 ==========================
 
 ヘルパー、モデル、およびコンポーネントと同様にコントローラークラスをテストすることができますが、
-CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています。コントローラーのテストケースの
-ための基本クラスとしてこのクラスを使用すると、高いレベルからコントローラーをテストすることができます。
+CakePHP は特殊な ``IntegrationTestTrait`` トレイトを提供しています。コントローラーのテストケースに
+このトレイトを使用すると、高いレベルからコントローラーをテストすることができます。
 
 .. versionadded:: 3.7.0
 
@@ -829,10 +829,13 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
     namespace App\Test\TestCase\Controller;
 
     use Cake\ORM\TableRegistry;
-    use Cake\TestSuite\IntegrationTestCase;
+    use Cake\TestSuite\IntegrationTestTrait;
+    use Cake\TestSuite\TestCase;
 
-    class ArticlesControllerTest extends IntegrationTestCase
+    class ArticlesControllerTest extends TestCase
     {
+        use IntegrationTestTrait;
+
         public $fixtures = ['app.Articles'];
 
         public function testIndex()
@@ -878,7 +881,7 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
         }
     }
 
-この例では、いくつかのリクエストを送信するメソッドと ``IntegrationTestCase`` が提供するいくつかの
+この例では、いくつかのリクエストを送信するメソッドと ``IntegrationTestTrait`` が提供するいくつかの
 アサーションを示しています。あなたが任意のアサーションを行う前に、リクエストをディスパッチする必要が
 あります。リクエストを送信するには、以下のいずれかのメソッドを使用することができます。
 
@@ -892,7 +895,7 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
 
 ``get()`` と ``delete()`` を除く全てのメソッドは、あなたがリクエストボディーを送信することを
 可能にする二番目のパラメーターを受け入れます。リクエストをディスパッチした後、あなたのリクエストに対して
-正しく動作したことを確実にするために ``IntegrationTestCase`` や、PHPUnit が提供するさまざまな
+正しく動作したことを確実にするために ``IntegrationTestTrait`` や、PHPUnit が提供するさまざまな
 アサーションを使用することができます。
 
 .. versionadded:: 3.5.0
@@ -901,7 +904,7 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
 リクエストの設定
 ----------------
 
-``IntegrationTestCase`` クラスを使用すると、テスト対象のアプリケーションに送信するリクエストを
+``IntegrationTestTrait`` トレイトを使用すると、テスト対象のアプリケーションに送信するリクエストを
 設定することが容易にするために多くのヘルパーが付属しています。 ::
 
     // クッキーのセット
@@ -923,7 +926,7 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
 ------------------------------
 
 もし ``AuthComponent`` を使用している場合、AuthComponent がユーザーの ID を検証するために
-使用するセッションデータをスタブ化する必要があります。これを行うには、 ``IntegrationTestCase``
+使用するセッションデータをスタブ化する必要があります。これを行うには、 ``IntegrationTestTrait``
 のヘルパーメソッドを使用します。 ``ArticlesController`` が add メソッドを含み、
 その add メソッドに必要な認証を行っていたと仮定すると、次のテストを書くことができます。 ::
 
@@ -1025,7 +1028,7 @@ PSR-7 ミドルウェアの統合テスト
 ------------------------------
 
 統合テストは、あなたの PSR-7 アプリケーション全体や :doc:`/controllers/middleware` を
-テストするために利用されます。デフォルトで ``IntegrationTestCase`` は、
+テストするために利用されます。デフォルトで ``IntegrationTestTrait`` は、
 ``App\Application`` クラスの存在を自動検知し、あなたのアプリケーションの統合テストを
 自動的に有効にします。 ``useHttpServer()`` メソッドでこの振舞いを切り替えられます。 ::
 
@@ -1047,7 +1050,7 @@ PSR-7 ミドルウェアの統合テスト
     }
 
 PSR-7 モードを有効にして、アプリケーションクラスの設定を可能にした後でも、
-``IntegrationTestCase`` に存在する機能は、通常と同様に利用できます。
+``IntegrationTestTrait`` に存在する機能は、通常と同様に利用できます。
 
 イベントやルートを含むプラグインを読み込むために :ref:`application-bootstrap` を
 試してみてください。そうすることで、各テストケースごとにイベントやルートが確実に接続されます。
@@ -1070,7 +1073,7 @@ PSR-7 モードを有効にして、アプリケーションクラスの設定�
 
     $this->assertCookieEncrypted('更新された値', 'my_cookie');
 
-.. versionadded: 3.1.7
+.. versionadded:: 3.1.7
     ``assertCookieEncrypted`` とは ``cookieEncrypted`` は 3.1.7 で追加されました。
 
 フラッシュメッセージのテスト
@@ -1085,8 +1088,28 @@ PSR-7 モードを有効にして、アプリケーションクラスの設定�
 
     $this->assertSession('ブックマークは存在しません', 'Flash.flash.0.message');
 
+3.7.0 では、フラッシュメッセージ用の追加のテストヘルパーがあります。 ::
+
+    $this->enableRetainFlashMessages();
+    $this->get('/bookmarks/delete/9999');
+
+    // 'flash' キー内のフラッシュメッセージをアサート
+    $this->assertFlashMessage('Bookmark deleted');
+
+    // ２つ目のフラッシュメッセージをアサート
+    $this->assertFlashMessageAt(1, 'Bookmark really deleted');
+
+    // フラッシュメッセージがエラーエレメントを使用していることをアサート
+    $this->assertFlashElement('Flash/error');
+
+    // ２つ目のフラッシュメッセージのエレメントをアサート
+    $this->assertFlashElementAt(1, 'Flash/error');
+
 .. versionadded:: 3.4.7
     ``enableRetainFlashMessages()`` は 3.4.7 で追加されました。
+
+.. versionadded:: 3.7.0
+    フラッシュメッセージアサーションが追加されました。
 
 JSON を返すコントローラーのテスト
 ---------------------------------
@@ -1161,7 +1184,7 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
 アサーションメソッド
 --------------------
 
-``IntegrationTestCase`` クラスはレスポンスのテストがとても簡単になるアサーションメソッドを
+``IntegrationTestTrait`` トレイトはレスポンスのテストがとても簡単になるアサーションメソッドを
 多数提供しています。いくつかの例をあげます。 ::
 
     // 2xx レスポンスコードをチェック
@@ -1188,6 +1211,9 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
     // Location ヘッダーの一部をチェック
     $this->assertRedirectContains('/articles/edit/');
 
+    // 3.7.0 で追加
+    $this->assertRedirectNotContains('/articles/edit/');
+
     // レスポンスが空ではないことをアサート
     $this->assertResponseNotEmpty();
 
@@ -1197,9 +1223,15 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
     // レスポンス内容をアサート
     $this->assertResponseEquals('Yeah!');
 
+    // レスポンス内容が等しくないことをアサート
+    $this->assertResponseNotEquals('No!');
+
     // レスポンス内容の一部をアサート
     $this->assertResponseContains('You won!');
     $this->assertResponseNotContains('You lost!');
+
+    // 3.7.0 で追加
+    $this->assertHeaderNotContains('Content-Type', 'xml');
 
     // レイアウトをアサート
     $this->assertLayout('default');
@@ -1294,9 +1326,9 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
 ==============
 
 一般的に、ほとんどのアプリケーションは、直接 HTML コードをテストしません。そのため、多くの場合、
-テストは壊れやすく、メンテナンスが困難になっています。 :php:class:`IntegrationTestCase` を
+テストは壊れやすく、メンテナンスが困難になっています。 :php:class:`IntegrationTestTrait` を
 使用して機能テストを書くときに ‘view’ に ``return`` オプションを設定することで、
-レンダリングされたビューの内容を調べることができます。 IntegrationTestCase を使用して
+レンダリングされたビューの内容を調べることができます。 IntegrationTestTrait を使用して
 ビューのコンテンツをテストすることは可能ですが、より堅牢でメンテナンスしやすい統合/ビューテストは、
 `Selenium webdriver <http://seleniumhq.org>`_ のようなツールを使うことで実現できます
 
@@ -1495,7 +1527,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
                 $event = new Event('Model.Order.afterPlace', $this, [
                     'order' => $order
                 ]);
-                $this->eventManager()->dispatch($event);
+                $this->getEventManager()->dispatch($event);
                 return true;
             }
             return false;
@@ -1542,7 +1574,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
             parent::setUp();
             $this->Orders = TableRegistry::get('Orders');
             // イベントトラッキングの有効化
-            $this->Orders->eventManager()->setEventList(new EventList());
+            $this->Orders->getEventManager()->setEventList(new EventList());
         }
 
         public function testPlace()
@@ -1555,8 +1587,8 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
             $this->assertTrue($this->Orders->place($order));
 
-            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->eventManager());
-            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->eventManager());
+            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->getEventManager());
+            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->getEventManager());
         }
     }
 
@@ -1570,6 +1602,11 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
     イベントトラッキングと ``assertEventFired()`` と ``assertEventFiredWith`` は
     追加されました。
+
+メールのテスト
+==============
+
+メールのテストについては :ref:`email-testing` をご覧ください。
 
 テストスイートの作成
 ====================
@@ -1603,7 +1640,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 それらは通常のテストと同じように動作しますが、別のクラスをインポートする場合、プラグインの命名規則を
 使用することを覚えておく必要があります。これは、このマニュアルのプラグインの章から ``BlogPost``
 モデルのテストケースの一例です。他のテストとの違いは、 'Blog.BlogPost' がインポートされている
-最初の行です。プラグインフィクスチャーに ``plugin.blog.blog_posts`` とプレフィックスをつける
+最初の行です。プラグインフィクスチャーに ``plugin.Blog.BlogPosts`` とプレフィックスをつける
 必要があります。 ::
 
     namespace Blog\Test\TestCase\Model\Table;
@@ -1614,7 +1651,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
     class BlogPostsTableTest extends TestCase
     {
         // /plugins/Blog/tests/Fixture/ 内のプラグインのフィクスチャーをロード
-        public $fixtures = ['plugin.blog.BlogPosts'];
+        public $fixtures = ['plugin.Blog.BlogPosts'];
 
         public function testSomething()
         {
@@ -1633,8 +1670,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
     <!-- フィクスチャーのためのリスナーのセットアップ -->
     <listeners>
         <listener
-        class="\Cake\TestSuite\Fixture\FixtureInjector"
-        file="./vendor/cakephp/cakephp/src/TestSuite/Fixture/FixtureInjector.php">
+        class="\Cake\TestSuite\Fixture\FixtureInjector">
             <arguments>
                 <object class="\Cake\TestSuite\Fixture\FixtureManager" />
             </arguments>

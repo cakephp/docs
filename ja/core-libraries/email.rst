@@ -563,6 +563,81 @@ Mailer オブジェクトは、イベントリスナーとして登録され、 
 ``Model.afterSave`` イベントが起こるたびに呼び出されます。イベントリスナーオブジェクトの
 登録方法に関する情報は、 :ref:`registering-event-listeners` のドキュメントを参照してください。
 
+.. _email-testing:
+
+メールのテスト
+==============
+
+メールをテストするためには、テストケースに ``Cake\TestSuite\EmailTrait`` を追加します。
+``EmailTrait`` は、アプリケーションから送信されたすべてのメールに対して実行できる
+一連のアサーションをテストケースに提供します。
+
+``EmailTrait`` をテストケースに追加すると、アプリケーションのすべてのメール転送が、
+``Cake\TestSuite\TestEmailTransport`` に置き換えられます。
+このトランスポートは送信する代わりにメールを傍受し、それらに対してアサートすることを可能とします。
+
+テストケースにトレイトを追加してメールのテストを開始します。 ::
+
+    namespace App\Test\TestCase;
+
+    use Cake\TestSuite\EmailTrait;
+
+    class MyTestCase extends TestCase
+    {
+        use EmailTrait;
+    }
+
+.. versionadded:: 3.7.0
+
+    ``Cake\TestSuite\EmailTrait`` が追加されました。
+
+アサーションメソッド
+====================
+
+``Cake\TestSuite\EmailTrait`` トレイトは次のアサーションを提供します。 ::
+
+    // 期待した数のメールが送信されたことをアサート
+    $this->assertMailCount($count);
+
+    // メールが送信されていないことをアサート
+    $this->assertNoMailSent();
+
+    // アドレスに対してメールが送信されたことをアサート
+    $this->assertMailSentTo($address);
+
+    // アドレスからメールが送信されたことをアサート
+    $this->assertMailSentFrom($address);
+
+    // メールに期待した内容が含まれていることをアサート
+    $this->assertMailContains($contents);
+
+    // メールに期待したHTMLコンテンツが含まれていることをアサート
+    $this->assertMailContainsHtml($contents);
+
+    // メールに期待したテキストコンテンツが含まれていることをアサート
+    $this->assertMailContainsText($contents);
+
+    // メールにメールゲッター内の期待値が含まれていることをアサート（例："subject"）
+    $this->assertMailSentWith($expected, $parameter);
+
+    // 特定のインデックスのメールがアドレスに対して送信されたことをアサート
+    $this->assertMailSentToAt($at, $address);
+
+    // 特定のインデックスのメールがアドレスから送信されたことをアサート
+    $this->assertMailSentFromAt($at, $address);
+
+    // 特定のインデックスのメールに期待した内容が含まれていることをアサート
+    $this->assertMailContainsAt($at, $contents);
+
+    // 特定のインデックスのメールに期待したHTMLコンテンツが含まれていることをアサート
+    $this->assertMailContainsHtmlAt($at, $contents);
+
+    // 特定のインデックスのメールに期待したテキストコンテンツが含まれていることをアサート
+    $this->assertMailContainsTextAt($at, $contents);
+
+    // 特定のインデックスのメールにメールゲッター内の期待値が含まれていることをアサート（例："subject"）
+    $this->assertMailSentWithAt($at, $expected, $parameter);
+
 .. meta::
     :title lang=ja: Email
     :keywords lang=ja: sending mail,email sender,envelope sender,php class,database configuration,sending emails,meth,shells,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models

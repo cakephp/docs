@@ -109,6 +109,11 @@ Asset.timestamp
     .. versionchanged:: 3.6.0
         3.6.0 以降、アセットのリンク時に ``timestamp`` オプションを使用することで、
 	グローバルな設定を上書きできます。
+Asset.cacheTime
+    アセットのキャッシュ時間を設定します。 アセットのための HTTP ヘッダー ``Cache-Control`` の
+    ``max-age`` と HTTP ヘッダーの ``Expire`` の時間を決定します。
+    php の `strtotime 関数 <http://php.net/manual/ja/function.strtotime.php>`_
+    の書式を設定できます。デフォルトは ``+1 day`` です。
 
 データベースの設定
 ------------------
@@ -529,7 +534,7 @@ Application::bootstrap()
             // config/bootstrap.php を `require_once`  するために parent を呼びます。
             parent::bootstrap();
 
-            Plugin::load('MyPlugin', ['bootstrap' => true, 'routes' => true]);
+            $this->addPlugin('MyPlugin', ['bootstrap' => true, 'routes' => true]);
         }
     }
 
@@ -558,7 +563,7 @@ CakePHP が固有のクラスを使用する代わりに、暗黙的に汎用的
     if (!$isCakeBakeShellRunning) {
         EventManager::instance()->on('Model.initialize', function($event) {
             $subject = $event->getSubject();
-            if (get_class($subject === 'Cake\ORM\Table') {
+            if (get_class($subject) === 'Cake\ORM\Table') {
                 $msg = sprintf(
                     'データベーステーブル %s のテーブルクラスを登録する時、テーブルクラスが見つからないか、エイリアスが不正です。',
                     $subject->getTable());

@@ -218,7 +218,7 @@ instances by the ORM) you may want to group results by date::
 
 You can stop the iteration at any point using the ``stopWhen()`` method. Calling
 it in a collection will create a new one that will stop yielding results if the
-passed callable returns false for one of the elements::
+passed callable returns true for one of the elements::
 
     $items = [10, 20, 50, 1, 2];
     $collection = new Collection($items);

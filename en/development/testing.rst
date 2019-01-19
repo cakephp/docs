@@ -759,7 +759,7 @@ now looks like this::
         {
             $query = $this->Articles->find('published');
             $this->assertInstanceOf('Cake\ORM\Query', $query);
-            $result = $query->hydrate(false)->toArray();
+            $result = $query->enableHydration(false)->toArray();
             $expected = [
                 ['id' => 1, 'title' => 'First Article'],
                 ['id' => 2, 'title' => 'Second Article'],
@@ -1129,7 +1129,6 @@ retain flash messages in the session so you can write assertions::
     $this->assertSession('That bookmark does not exist', 'Flash.flash.0.message');
 
 As of 3.7.0 there are additional test helpers for flash messages::
-
 
     $this->enableRetainFlashMessages();
     $this->get('/bookmarks/delete/9999');
@@ -1691,7 +1690,7 @@ They work just like normal tests but you have to remember to use the naming
 conventions for plugins when importing classes. This is an example of a testcase
 for the ``BlogPost`` model from the plugins chapter of this manual. A difference
 from other tests is in the first line where 'Blog.BlogPost' is imported. You
-also need to prefix your plugin fixtures with ``plugin.blog.blog_posts``::
+also need to prefix your plugin fixtures with ``plugin.Blog.BlogPosts``::
 
     namespace Blog\Test\TestCase\Model\Table;
 

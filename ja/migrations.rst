@@ -32,10 +32,12 @@ Migrations
 
     $ bin/cake plugin load Migrations
 
-もしくは、あなたの **config/bootstrap.php** ファイルを編集し、次の行を追加することで
+もしくは、あなたの **src/Application.php** ファイルを編集し、次の行を追加することで
 ロードすることができます。 ::
 
-    Plugin::load('Migrations');
+    $this->addPlugin('Migrations');
+
+    // 3.6.0 より前は Plugin::load() を使用する必要があります
 
 また、 :ref:`データベース設定 <database-configuration>` の項で説明したように、
 あなたの **config/app.php** ファイル内のデフォルトのデータベース構成を設定する必要が

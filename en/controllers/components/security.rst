@@ -268,7 +268,6 @@ There may be cases where you want to disable all security checks for an action
         public function beforeFilter(Event $event)
         {
             parent::beforeFilter($event);
-            parent::beforeFilter($event);
 
             $this->Security->setConfig('unlockedActions', ['edit']);
         }

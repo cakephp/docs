@@ -92,6 +92,13 @@ Composer を使ったプラグインのインストール
 
     Plugin::load('ContactManager', ['autoload' => true]);
 
+
+.. deprecated:: 3.7.0
+    Plugin::load() と ``autoload`` オプションは非推奨です。
+
+.. note::
+    重要: ``autoload`` オプションは ``addPlugin()`` では使用できません。代わりに ``composer dumpautoload`` を使用してください。
+
 プラグインの読み込み
 ====================
 
@@ -120,8 +127,7 @@ Composer を使ったプラグインのインストール
 
 3.6.0 より前の場合、 ``Plugin::load()`` を使ってください。 ::
 
-    // config/bootstrap.php
-    // または Application::bootstrap() に記述します。
+    // config/bootstrap.php の中で
 
     // 特定のプラグインを読み込みます。
     Plugin::load('ContactManager');
@@ -136,7 +142,7 @@ Composer を使ったプラグインのインストール
     bin/cake plugin load ContactManager
 
 これは、アプリケーションの bootstrap メソッドを更新、
-または ``Plugin::load('ContactManager');`` を bootstrap に書き込みます。
+または ``$this->addPlugin('ContactManager');`` を bootstrap に書き込みます。
 
 
 .. versionadded:: 3.6.0
@@ -256,6 +262,9 @@ Plugin オブジェクトは、名前とパス情報も知っています。 ::
 
 ほとんどのプラグインで、設定するための正確な手続きとデータベースのセットアップするための方法が、
 ドキュメントに書かれています。他よりセットアップが必要なものもあります。
+
+.. deprecated:: 3.7.0
+    Plugin::load() と Plugin::loadAll() は非推奨です。
 
 プラグインの利用
 ================
@@ -388,7 +397,7 @@ ContactManager プラグイン の場合、 Plugin クラスは、次のよう�
     }
 
 .. versionadded:: 3.6.0
-    プラグインオブジェクトは 3.6.0 で追加されました。
+    Plugin オブジェクトは 3.6.0 で追加されました。
 
 .. _plugin-routes:
 
@@ -419,9 +428,9 @@ ContactManager プラグイン の場合、 Plugin クラスは、次のよう�
 このファイルをカスタマイズすることで、後から個別のルートを設定することができます。
 
 コントローラーにアクセスする前に、プラグインがロードされ、ルートがロードされる必要があります。
-**config/bootstrap.php** に下記を追加してください。 ::
+**src/Application.php** に下記を追加してください。 ::
 
-    Plugin::load('ContactManager', ['routes' => true]);
+    $this->addPlugin('ContactManager', ['routes' => true]);
 
 アプリケーションのルート一覧の中で、プラグインのルートをロードすることもできます。
 これにより、プラグインのルートをロードする方法かをより詳細に制御し、
@@ -434,7 +443,7 @@ ContactManager プラグイン の場合、 Plugin クラスは、次のよう�
         });
     });
 
-上記の結果は、 ``/backend/contact_manager/contacts`` のような URL になります。
+上記の結果は、 ``/backend/contact-manager/contacts`` のような URL になります。
 
 .. versionadded:: 3.5.0
     ``RouteBuilder::loadPlugin()`` は 3.5.0 で追加されました。
@@ -456,7 +465,6 @@ contacts の管理ですので、このプラグインには ContactsController 
 
     class ContactsController extends AppController
     {
-
         public function index()
         {
             //...
@@ -734,6 +742,12 @@ Custom コントローラーの 'index' ビューへのパスは、次の通り�
         return $commands;
     }
 
+プラグインのテスト
+==================
+
+コントローラーやURLの生成をテストする場合、プラグインがルート ``tests/bootstrap.php`` に接続していることを確認してください。
+
+詳細は :doc:`testing plugins </development/testing>` ページを確認してください。
 
 プラグインの公開
 ================
