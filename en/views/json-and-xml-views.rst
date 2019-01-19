@@ -149,7 +149,10 @@ this node using the ``_rootNode`` view variable.
 The XmlView class supports the ``_xmlOptions`` variable that allows you to
 customize the options used to generate XML, e.g. ``tags`` vs ``attributes``.
 
-Typical example of ``XmlView`` can be `sitemap.xml <https://www.sitemaps.org/protocol.html>`_ where you need to change ``_rootNode`` and set attributes. Generally attributes can be defined using the ``@`` prefix. With sitemap you need to set attribute with ``urlset`` root node, which means you have to set each attribute as parameter to the view, example below::
+An example of using ``XmlView`` would be to generate a `sitemap.xml
+<https://www.sitemaps.org/protocol.html>`_. This document type requires that you
+change ``_rootNode`` and set attributes. Attributes are defined using the ``@``
+prefix::
 
     public function sitemap()
     {
@@ -164,8 +167,10 @@ Typical example of ``XmlView`` can be `sitemap.xml <https://www.sitemaps.org/pro
             ];
         }
 
+        // Define a custom root node in the generated document.
         $this->set('_rootNode', 'urlset');
         $this->set([
+            // Define an attribute on the root node.
             '@xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
             'url' => $urls
         ]);
