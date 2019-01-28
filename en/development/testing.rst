@@ -1195,12 +1195,17 @@ and make sure our web service is returning the proper response::
                 ['id' => 1, 'lng' => 66, 'lat' => 45],
             ];
             $expected = json_encode($expected, JSON_PRETTY_PRINT);
-            $this->assertEquals($expected, (string)$this->_response->getBody());
+            $this->assertEquals($expected, $this->_response->getStringBody());
         }
     }
 
 We use the ``JSON_PRETTY_PRINT`` option as CakePHP's built in JsonView will use
 that option when ``debug`` is enabled.
+
+.. versionadded:: 3.7.4
+    ``getStringBody()`` was added to read the rewound response.
+    Before you had to use ``(string)$this->_response->getBody()`` casting.
+
 
 Disabling Error Handling Middleware in Tests
 --------------------------------------------
