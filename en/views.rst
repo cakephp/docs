@@ -193,7 +193,7 @@ parts that change:
 .. code-block:: php
 
     <!-- src/Template/Common/view.ctp -->
-    <h1><?= $this->fetch('title') ?></h1>
+    <h1><?= h($this->fetch('title')) ?></h1>
     <?= $this->fetch('content') ?>
 
     <div class="actions">
@@ -371,7 +371,7 @@ The ``HtmlHelper`` ties into view blocks, and its ``script()``, ``css()``, and
     <!DOCTYPE html>
     <html lang="en">
         <head>
-        <title><?= $this->fetch('title') ?></title>
+        <title><?= h($this->fetch('title')) ?></title>
         <?= $this->fetch('script') ?>
         <?= $this->fetch('css') ?>
         </head>
