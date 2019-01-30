@@ -22,9 +22,9 @@ and have its action invoked, or an exception will be raised generating an error
 page.
 
 Middleware are part of the new HTTP stack in CakePHP that leverages the PSR-7
-request and response interfaces. Because CakePHP is leveraging the PSR-7
-standard you can use any PSR-7 compatible middleware available on `The Packagist
-<https://packagist.org>`__.
+request and response interfaces. CakePHP also supports the PSR-15 standard for
+server request handlers so you can use any PSR-15 compatible middleware available
+on `The Packagist <https://packagist.org>`__.
 
 Middleware in CakePHP
 =====================
@@ -225,40 +225,37 @@ Most often you'll be setting headers and response bodies on requests::
 Creating Middleware
 ===================
 
-Middleware can either be implemented as anonymous functions (Closures), or as
-invokable classes. While Closures are suitable for smaller tasks they make
-testing harder, and can create a complicated ``Application`` class. Middleware
-classes in CakePHP have a few conventions:
+Middleware can either be implemented as anonymous functions (Closures), or classes
+which extend ``Psr\Http\Server\MiddlewareInterface``. While Closures are suitable
+for smaller tasks they make testing harder, and can create a complicated
+``Application`` class. Middleware classes in CakePHP have a few conventions:
 
 * Middleware class files should be put in **src/Middleware**. For example:
   **src/Middleware/CorsMiddleware.php**
 * Middleware classes should be suffixed with ``Middleware``. For example:
   ``LinkMiddleware``.
-* Middleware are expected to implement the middleware protocol.
+* Middleware must implement ``Psr\Http\Server\MiddlewareInterface``.
 
-While not a formal interface (yet), Middleware do have a soft-interface or
-'protocol'. The protocol is as follows:
-
-#. Middleware must implement ``__invoke($request, $response, $next)``.
-#. Middleware must return an object implementing the PSR-7 ``ResponseInterface``.
-
-Middleware can return a response either by calling ``$next`` or by creating
-their own response. We can see both options in our simple middleware::
+Middleware can return a response either by calling ``$handler->handle()`` or by
+creating their own response. We can see both options in our simple middleware::
 
     // In src/Middleware/TrackingCookieMiddleware.php
     namespace App\Middleware;
+
     use Cake\I18n\Time;
+    use Psr\Http\Message\ResponseInterface;
+    use Psr\Http\Message\ServerRequestInterface;
+    use Psr\Http\Server\RequestHandlerInterface;
+    use Psr\Http\Server\MiddlewareInterface;
 
-    class TrackingCookieMiddleware
+    class TrackingCookieMiddleware implements MiddlewareInterface
     {
-        public function __invoke($request, $response, $next)
+        public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
         {
-            // Calling $next() delegates control to the *next* middleware
+            // Calling $handler->handle() delegates control to the *next* middleware
             // In your application's queue.
-            $response = $next($request, $response);
+            $response = $handler->handle($request);
 
-            // When modifying the response, you should do it
-            // *after* calling next.
             if (!$request->getCookie('landing_page')) {
                 $expiry = new Time('+ 1 year');
                 $response = $response->withCookie('landing_page' ,[
@@ -266,6 +263,7 @@ their own response. We can see both options in our simple middleware::
                     'expire' => $expiry->format('U'),
                 ]);
             }
+
             return $response;
         }
     }
@@ -277,10 +275,11 @@ application::
     namespace App;
 
     use App\Middleware\TrackingCookieMiddleware;
+    use Cake\Http\MiddlewareQueue;
 
     class Application
     {
-        public function middleware($middlewareQueue)
+        public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
         {
             // Add your simple middleware onto the queue
             $middlewareQueue->add(new TrackingCookieMiddleware());
@@ -301,7 +300,7 @@ enable cached routes, provide the desired :ref:`cache configuration
 <cache-configuration>` as a parameter::
 
     // In Application.php
-    public function middleware($middlewareQueue)
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
         // ...
         $middlewareQueue->add(new RoutingMiddleware($this, 'routing'));
