@@ -576,7 +576,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
         public $import = ['model' => 'Articles'];
     }
 
-``TableRegistry::get()`` を使用するので、プラグイン記法をサポートしています。
+``TableRegistry::getTableLocator()->get()`` を使用するので、プラグイン記法をサポートしています。
 
 あなたは自然に既存のモデルやテーブルからテーブル定義をインポートしますが、それは前のセクションに
 示されたように、フィクスチャーで直接定義されたレコードを設定することができます。例えば::
@@ -723,7 +723,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
         public function setUp()
         {
             parent::setUp();
-            $this->Articles = TableRegistry::get('Articles');
+            $this->Articles = TableRegistry::getTableLocator()->get('Articles');
         }
 
         public function testFindPublished()
@@ -875,7 +875,7 @@ CakePHP は特殊な ``IntegrationTestTrait`` トレイトを提供していま�
             $this->post('/articles', $data);
 
             $this->assertResponseSuccess();
-            $articles = TableRegistry::get('Articles');
+            $articles = TableRegistry::getTableLocator()->get('Articles');
             $query = $articles->find()->where(['title' => $data['title']]);
             $this->assertEquals(1, $query->count());
         }
@@ -1572,7 +1572,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
         public function setUp()
         {
             parent::setUp();
-            $this->Orders = TableRegistry::get('Orders');
+            $this->Orders = TableRegistry::getTableLocator()->get('Orders');
             // イベントトラッキングの有効化
             $this->Orders->getEventManager()->setEventList(new EventList());
         }

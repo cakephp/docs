@@ -1496,6 +1496,11 @@ URL フィルターは永続的なパラメーターなどを簡単に扱う機�
 
     Router::url(['plugin' => 'MyPlugin', 'controller' => 'Locations', 'action' => 'index', 'language' => 'es']);
 
+.. warning::
+   もし :ref:`routing-middleware` のキャッシュ機能を利用しているのなら、
+   フィルターはキャッシュされたデータの一部ではないため、
+   アプリケーションの ``bootstrap()`` でフィルター関数を定義しなければなりません。
+
 URL 内での名前付きパラメーターの扱い
 ====================================
 
