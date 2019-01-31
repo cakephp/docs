@@ -10,6 +10,13 @@ To upgrade to 3.8.x run the following composer command:
 
     php composer.phar require --update-with-dependencies "cakephp/cakephp:3.8.*"
 
+Behavior Changes
+================
+
+* ``Cake\ORM\Table::findOrCreate()`` now throws a ``PersistenceFailedException``
+  if the find fails and the entity created from ``$search`` contains invalid
+  data. Previously an invalid entity would be saved.
+
 New Features
 ============
 
