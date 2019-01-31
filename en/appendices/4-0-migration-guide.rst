@@ -53,6 +53,8 @@ Http
   ``withBody()`` instead.
 * ``Cake\Http\Client\Response::isOk()`` now returns ``true`` for all 2xx and 3xx
   response codes.
+* ``Cake\Http\Cookie\Cookie::getExpiresTimestamp()`` now returns an integer.
+  This makes it type match the one used in ``setcookie()``.
 * ``Cake\Http\ServerRequest::referer()`` now returns ``null`` when the current
   request has no referer. Previously it would return ``/``.
 * The Session cookie name is no longer set to ``CAKEPHP`` by default. Instead
