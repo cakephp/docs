@@ -72,12 +72,12 @@ approved comments and those that have not been moderated yet::
         public function initialize(array $config)
         {
             $this->hasMany('Comments')
-                ->setConditions(['approved' => true]);
+                ->setFinder('approved');
 
             $this->hasMany('UnapprovedComments', [
                     'className' => 'Comments'
                 ])
-                ->setConditions(['approved' => false])
+                ->setFinder('unapproved')
                 ->setProperty('unapproved_comments');
         }
     }
@@ -172,7 +172,7 @@ records::
         {
             $this->hasOne('Addresses')
                 ->setName('Addresses')
-                ->setConditions(['Addresses.primary' => '1'])
+                ->setFinder('primary')
                 ->setDependent(true);
         }
     }
@@ -191,7 +191,8 @@ Possible keys for hasOne association arrays include:
   for matching the ``foreignKey``. If not specified, the primary key (for
   example the id column of the ``Users`` table) will be used.
 - **conditions**: an array of find() compatible conditions such as
-  ``['Addresses.primary' => true]``
+  ``['Addresses.primary' => true]``. It is recommended to use the ``finder``
+  option instead.
 - **joinType**: the type of the join to use in the SQL query, default
   is LEFT. You can use INNER if your hasOne association is always present.
 - **dependent**: When the dependent key is set to ``true``, and an entity is
@@ -206,7 +207,8 @@ Possible keys for hasOne association arrays include:
   underscored & singular name of the association so ``address`` in our example.
 - **strategy**: Defines the query strategy to use. Defaults to 'join'. The other
   valid value is 'select', which utilizes a separate query instead.
-- **finder**: The finder method to use when loading associated records.
+- **finder**: The finder method to use when loading associated records. See the
+  :reF:`association-finders` section for more information.
 
 Once this association has been defined, find operations on the Users table can
 contain the Address record if it exists::
@@ -285,7 +287,8 @@ Possible keys for belongsTo association arrays include:
   for matching the ``foreignKey``. If not specified, the primary key (for
   example the id column of the ``Users`` table) will be used.
 - **conditions**: an array of find() compatible conditions or SQL strings such
-  as ``['Users.active' => true]``
+  as ``['Users.active' => true]``. It is recommended to use the ``finder``
+  option instead.
 - **joinType**: the type of the join to use in the SQL query, default is LEFT
   which may not fit your needs in all situations, INNER may be helpful when you
   want everything from your main and associated models or nothing at all.
@@ -294,7 +297,8 @@ Possible keys for belongsTo association arrays include:
   underscored & singular name of the association so ``user`` in our example.
 - **strategy**: Defines the query strategy to use. Defaults to 'join'. The other
   valid value is 'select', which utilizes a separate query instead.
-- **finder**: The finder method to use when loading associated records.
+- **finder**: The finder method to use when loading associated records. See the
+  :ref:`association-finder` section for more information.
 
 Once this association has been defined, find operations on the Addresses table can
 contain the User record if it exists::
@@ -398,7 +402,8 @@ Possible keys for hasMany association arrays include:
   for matching the ``foreignKey``. If not specified, the primary key (for
   example the id column of the ``Articles`` table) will be used.
 - **conditions**: an array of find() compatible conditions or SQL
-  strings such as ``['Comments.visible' => true]``
+  strings such as ``['Comments.visible' => true]``. It is recommended to 
+  use the ``finder`` option instead.
 - **sort**: an array of find() compatible order clauses or SQL
   strings such as ``['Comments.created' => 'ASC']``
 - **dependent**: When dependent is set to ``true``, recursive model
@@ -418,7 +423,8 @@ Possible keys for hasMany association arrays include:
   records are appended to any records in the database. When 'replace' associated
   records not in the current set will be removed. If the foreign key is a nullable
   column or if ``dependent`` is true records will be orphaned.
-- **finder**: The finder method to use when loading associated records.
+- **finder**: The finder method to use when loading associated records. See the
+  :ref:`association-finder` section for more information.
 
 Once this association has been defined, find operations on the Articles table
 can contain the Comment records if they exist::
@@ -547,7 +553,8 @@ Possible keys for belongsToMany association arrays include:
   the target model, suffixed with '\_id'.
 - **conditions**: an array of ``find()`` compatible conditions.  If you have
   conditions on an associated table, you should use a 'through' model, and
-  define the necessary belongsTo associations on it.
+  define the necessary belongsTo associations on it. It is recommended to 
+  use the ``finder`` option instead.
 - **sort**: an array of find() compatible order clauses.
 - **dependent**: When the dependent key is set to ``false``, and an entity is
   deleted, the data of the join table will not be deleted.
@@ -571,7 +578,8 @@ Possible keys for belongsToMany association arrays include:
   only create new links between both side of the relation and the latter will
   do a wipe and replace to create the links between the passed entities when
   saving.
-- **finder**: The finder method to use when loading associated records.
+- **finder**: The finder method to use when loading associated records. See the
+  :ref:`association-finder` section for more information.
 
 Once this association has been defined, find operations on the Articles table can
 contain the Tag records if they exist::
@@ -664,17 +672,21 @@ following models::
 The CoursesMemberships join table uniquely identifies a given Student's
 participation on a Course in addition to extra meta-information.
 
-Default Association Conditions
-------------------------------
+.. _association-finder:
 
-The ``finder`` option allows you to use a :ref:`custom finder
-<custom-find-methods>` to load associated record data. This lets you encapsulate
-your queries better and keep your code DRY'er. There are some limitations when
-using finders to load data in associations that are loaded using joins
-(belongsTo/hasOne). Only the following aspects of the query will be applied to
-the root query:
+Using Association Finders
+-------------------------
 
-- WHERE conditions.
+By default associations will load records based on the foreign key columns. If
+you want to define addition conditions for associations you can use
+a ``finder``. When an association is loaded the ORM will use your :ref:`custom
+finder <custom-find-methods>` to load, update, or delete associated records.
+Using finders lets you encapsulate your queries and make them more reusable.
+There are some limitations when using finders to load data in associations that
+are loaded using joins (belongsTo/hasOne). Only the following aspects of the
+query will be applied to the root query:
+
+- Where conditions.
 - Additional joins.
 - Contained associations.
 
