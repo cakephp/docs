@@ -244,13 +244,13 @@ additional details on how to use the table registry::
     $publishedArticles = $this->paginate(
         $this->Articles->find('all', [
             'scope' => 'published_articles'
-        ])->where('published' => true)
+        ])->where(['published' => true])
     );
     
     $unpublishedArticles = $this->paginate(
         TableRegistry::getTableLocator()->get('UnpublishedArticles')->find('all', [
             'scope' => 'unpublished_articles'
-        ])->where('published' => false)
+        ])->where(['published' => false])
     );
 
 .. _control-which-fields-used-for-ordering:
