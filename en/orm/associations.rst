@@ -208,7 +208,7 @@ Possible keys for hasOne association arrays include:
 - **strategy**: Defines the query strategy to use. Defaults to 'join'. The other
   valid value is 'select', which utilizes a separate query instead.
 - **finder**: The finder method to use when loading associated records. See the
-  :reF:`association-finders` section for more information.
+  :ref:`association-finders` section for more information.
 
 Once this association has been defined, find operations on the Users table can
 contain the Address record if it exists::
