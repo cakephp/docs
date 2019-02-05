@@ -1921,27 +1921,27 @@ CakePHP が Windows サーバー上にインストールされている場合、
 
 例::
 
-    echo $this->Form->label('User.name');
-    echo $this->Form->label('User.name', 'Your username');
+    echo $this->Form->label('name');
+    echo $this->Form->label('name', 'Your username');
 
 出力結果:
 
 .. code-block:: html
 
-    <label for="user-name">Name</label>
-    <label for="user-name">Your username</label>
+    <label for="name">Name</label>
+    <label for="name">Your username</label>
 
 第３パラメーター ``$options`` に id や class を設定できます。 ::
 
-    echo $this->Form->label('User.name', null, ['id' => 'user-label']);
-    echo $this->Form->label('User.name', 'Your username', ['class' => 'highlight']);
+    echo $this->Form->label('name', null, ['id' => 'user-label']);
+    echo $this->Form->label('name', 'Your username', ['class' => 'highlight']);
 
 出力結果:
 
 .. code-block:: html
 
-    <label for="user-name" id="user-label">Name</label>
-    <label for="user-name" class="highlight">Your username</label>
+    <label for="name" id="user-label">Name</label>
+    <label for="name" class="highlight">Your username</label>
 
 エラーの表示と確認
 ==================
@@ -2373,7 +2373,7 @@ CakePHP の多くのヘルパーと同じように、FormHelper は、
     ]);
 
     // 独自の div で囲まれた radio セットを作成
-    echo $this->Form->control('User.email_notifications', [
+    echo $this->Form->control('email_notifications', [
         'options' => ['y', 'n'],
         'type' => 'radio'
     ]);
