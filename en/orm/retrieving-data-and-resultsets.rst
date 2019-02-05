@@ -401,10 +401,10 @@ replace the 'afterFind' callback found in previous versions of CakePHP.
 
 .. note::
 
-    Passing arguments exposed in the **config** array, 
-    ``$products->find('sizes', ['large', 'medium'])`` 
-    can give unexpected results when chaining 
-    custom finders. Always pass options as an associative array, 
+    Passing arguments exposed in the **config** array,
+    ``$products->find('sizes', ['large', 'medium'])``
+    can give unexpected results when chaining
+    custom finders. Always pass options as an associative array,
     ``$products->find('sizes', ['values' => ['large', 'medium']])``
 
 .. _dynamic-finders:
@@ -1087,7 +1087,7 @@ Modifying Results with Map/Reduce
 
 More often than not, find operations require post-processing the data that is
 found in the database. While entities' getter methods can take care of most of
-the virtual property generation or special data formatting, sometimes you
+the virtual field generation or special data formatting, sometimes you
 need to change the data structure in a more fundamental way.
 
 For those cases, the ``Query`` object offers the ``mapReduce()`` method, which
