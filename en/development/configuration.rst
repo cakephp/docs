@@ -122,6 +122,23 @@ Asset.cacheTime
     <http://php.net/manual/en/function.strtotime.php>`_ can take.
     The default is ``+1 day``.
 
+Using a CDN
+------------------------------------
+
+To use a CDN for loading your static assets, change ``App.imageBaseUrl``, ``App.cssBaseUrl``, 
+``App.jsBaseUrl`` to point the CDN URI, for example: ``https://mycdn.example.com/`` 
+(note the trailing ``/``).
+
+All images, scripts and styles loaded via HtmlHelper will prepend the absolute CDN path, matching 
+the same relative path used in the application. Please note there is a specific use case when using
+plugin based assets: plugins will not use the plugin's prefix when absolute BaseUrl URI is used, for example 
+By default:
+
+    - ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``test_plugin/logo.png`` 
+If you set ``App.imageBaseUrl`` to ``https://mycdn.example.com/``: 
+
+    - ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``https://mycdn.example.com/logo.png``.
+
 Database Configuration
 ----------------------
 
