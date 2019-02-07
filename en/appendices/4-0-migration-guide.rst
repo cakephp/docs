@@ -21,6 +21,18 @@ Authentication functionality has been split into standalone plugins
 `Authentication <https://github.com/cakephp/authentication>`__ and `Authorization <https://github.com/cakephp/authorization>`__.
 The former RssHelper can be found as standalone `Feed plugin <https://github.com/dereuromark/cakephp-feed>`__ with similar functionality.
 
+Deprecations
+============
+
+The following is a list of deprecated methods, properties and behaviors. These
+features will continue to function in 4.x and will be removed in 5.0.0.
+
+Entity
+------
+
+* ``Entity::visibleProperties()`` has been renamed to ``Entity::getVisible()`` to match the other methods.
+* ``Entity::unsetProperty()`` has been renamed to ``Entity::unset()`` to match the other methods.
+
 Breaking Changes
 ================
 
