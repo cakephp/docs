@@ -135,6 +135,7 @@ plugin based assets: plugins will not use the plugin's prefix when absolute Base
 By default:
 
     - ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``test_plugin/logo.png`` 
+
 If you set ``App.imageBaseUrl`` to ``https://mycdn.example.com/``: 
 
     - ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``https://mycdn.example.com/logo.png``.
