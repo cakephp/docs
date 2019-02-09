@@ -894,7 +894,7 @@ property has to be persisted::
 Without the call to ``dirty()`` the updated comments will not be saved.
 
 If you are creating a new entity, and want to add existing records to a has
-many/belongs to many associatino you need to initialize the association property
+many/belongs to many association you need to initialize the association property
 first::
 
     $article->comments = [];
