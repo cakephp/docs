@@ -899,7 +899,7 @@ first::
 
     $article->comments = [];
 
-Without initialization calling ``$mentor->students[] = $student;`` will have no effect.
+Without initialization calling ``$article->comments[] = $comment;`` will have no effect.
 
 Saving BelongsToMany Associations
 ---------------------------------
