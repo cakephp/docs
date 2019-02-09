@@ -401,11 +401,15 @@ text, with name of email
 text, with name of tel, telephone, or phone
     tel
 date
-    day, month, and year selects
+    date
 datetime, timestamp
-    day, month, year, hour, minute, and meridian selects
+    datetime-local
 time
-    hour, minute, and meridian selects
+    time
+month
+    month
+year
+    select with years
 binary
     file
 
@@ -447,7 +451,7 @@ create appropriate controls for all of these form fields::
     // The following generates a Password input
     echo $this->Form->control('password');
     // Assuming 'approved' is a datetime or timestamp field the following
-    //generates: Day, Month, Year, Hour, Minute
+    //generates an input of type "datetime-local"
     echo $this->Form->control('approved');
     // The following generates a Textarea element
     echo $this->Form->control('quote');
@@ -459,8 +463,8 @@ A more extensive example showing some options for a date field::
 
     echo $this->Form->control('birth_dt', [
         'label' => 'Date of birth',
-        'minYear' => date('Y') - 70,
-        'maxYear' => date('Y') - 18,
+        'min' => date('Y') - 70,
+        'max' => date('Y') - 18,
     ]);
 
 Besides the specific :ref:`control-specific-options`,
@@ -1518,83 +1522,10 @@ way PHP handles data passed via file fields
     encoding-type, by setting the ``'type'`` option to ``'file'`` in
     ``$this->Form->create()``.
 
+.. _create-datetime-controls:
+
 Creating Date & Time Related Controls
 -------------------------------------
-
-The date and time related methods share a number of common traits and options
-and hence are grouped together into this subsection.
-
-.. _datetime-options:
-
-Common Options for Date & Time Controls
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-These options are common for the date and time related controls:
-
-* ``'empty'`` - If ``true`` an extra, empty, ``option`` HTML element is
-  added inside ``select`` at the top of the list. If a string, that string is
-  displayed as the empty element. Defaults to ``true``.
-
-* ``'default'`` | ``value`` - Use either of the two to set the default value to
-  be shown by the field. A value in ``$this->request->getData()`` matching the field
-  name will override this value. If no default is provided ``time()`` will
-  be used.
-
-* ``'year', 'month', 'day', 'hour', 'minute', 'second', 'meridian'`` - These
-  options allow you to control which control elements are generated or not.
-  By setting any of these options to ``false`` you can disable the generation
-  of that specific that select picker (if by default it would be rendered in
-  the used method). In addition each option allows you to pass HTML attributes
-  to that specific ``select`` element.
-
-.. _date-options:
-
-Options for Date-Related Controls
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-These options are concerning the date-related methods - i.e. ``year()``,
-``month()``, ``day()``, ``dateTime()`` and ``date()``:
-
-* ``'monthNames'`` - If ``false``, 2 digit numbers will be used instead of text
-  for displaying months in the select picker. If set to an array (e.g.
-  ``['01' => 'Jan', '02' => 'Feb', ...]``), the given array will be used.
-
-* ``'minYear'`` - The lowest value to use in the year select picker.
-
-* ``'maxYear'`` - The maximum value to use in the year select picker.
-
-* ``'orderYear'`` - The order of year values in the year select picker.
-  Possible values are ``'asc'`` and ``'desc'``. Defaults to ``'desc'``.
-
-.. _time-options:
-
-Options for Time-Related Controls
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-These options are concerning the time-related methods - ``hour()``,
-``minute()``, ``second()``, ``dateTime()`` and ``time()``:
-
-* ``'interval'`` - The interval in minutes between the values which are
-  displayed in the ``option`` elements of the minutes select picker.
-  Defaults to 1.
-
-* ``'round'`` - Set to ``up`` or ``down`` if you want to force rounding minutes
-  in either direction when the value doesn't fit neatly into an interval.
-  Defaults to ``null``.
-
-* ``timeFormat`` - Applies to ``dateTime()`` and ``time()``. The time format to
-  use in the select picker; either ``12`` or ``24``. When this option is set to
-  anything else than ``24`` the format will be automatically set to ``12`` and
-  the ``meridian`` select picker will be displayed automatically to the right of
-  the seconds select picker. Defaults to 24.
-
-* ``format`` - Applies to ``hour()``. The time format to use; either ``12`` or
-  ``24``. In case it's set to ``12`` the ``meridian`` select picker won't be
-  automatically displayed. It's up to you to either add it or provide means
-  to infer from the form context the right period of the day. Defaults to 24.
-
-* ``second`` - Applies to ``dateTime()`` and ``time()``. Set to ``true`` to
-  enable the seconds drop down. Defaults to ``false``.
 
 Creating DateTime Controls
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1604,20 +1535,9 @@ Creating DateTime Controls
 * ``$fieldName`` - A string that will be used as a prefix for the HTML ``name``
   attribute of the ``select`` elements.
 * ``$options`` - An optional array including any of the
-  :ref:`general-control-options`, or specific datetime options (see above),
-  as well as any valid HTML attributes.
+  :ref:`general-control-options` as well as any valid HTML attributes.
 
-Creates a set of ``select`` elements for date and time.
-
-To control the order of controls, and any elements/content between the controls you
-can override the ``dateWidget`` template. By default the ``dateWidget`` template
-is::
-
-    {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
-
-Calling the method without additional options will generate, by default,
-5 select pickers, for: year (4 digits), month (full English name), day (num),
-hour (num), minutes (num).
+The method will generate an input tag with type "datetime-local".
 
 For example ::
 
@@ -1627,68 +1547,19 @@ Output:
 
 .. code-block:: html
 
-    <select name="registered[year]">
-        <option value="" selected="selected"></option>
-        <option value="2022">2022</option>
-        ...
-        <option value="2012">2012</option>
-    </select>
-    <select name="registered[month]">
-        <option value="" selected="selected"></option>
-        <option value="01">January</option>
-        ...
-        <option value="12">December</option>
-    </select>
-    <select name="registered[day]">
-        <option value="" selected="selected"></option>
-        <option value="01">1</option>
-        ...
-        <option value="31">31</option>
-    </select>
-    <select name="registered[hour]">
-        <option value="" selected="selected"></option>
-        <option value="00">0</option>
-        ...
-        <option value="23">23</option>
-    </select>
-    <select name="registered[minute]">
-        <option value="" selected="selected"></option>
-        <option value="00">00</option>
-        ...
-        <option value="59">59</option>
-    </select>
+    <input type="datetime-local" name="registered" />
 
-To create datetime controls with custom classes/attributes on a specific select
-box, you can provide them as arrays of options for each component, within the
-``$options`` argument.
+The value for the input can be valid datetime string or ``DateTime`` instance.
 
-For example::
+For example ::
 
-    echo $this->Form->dateTime('released', [
-        'year' => [
-            'class' => 'year-classname',
-        ],
-        'month' => [
-            'class' => 'month-class',
-            'data-type' => 'month',
-        ],
-    ]);
+    <?= $this->form->dateTime('registered', ['value' => new DateTime()]) ?>
 
-Which would create the following two select pickers:
+Output:
 
 .. code-block:: html
 
-    <select name="released[year]" class="year-class">
-        <option value="" selected="selected"></option>
-        <option value="00">0</option>
-        <option value="01">1</option>
-        <!-- .. snipped for brevity .. -->
-    </select>
-    <select name="released[month]" class="month-class" data-type="month">
-        <option value="" selected="selected"></option>
-        <option value="01">January</option>
-        <!-- .. snipped for brevity .. -->
-    </select>
+    <input type="datetime-local" name="registered" value="2019-02-08T18:20:10" />
 
 Creating Date Controls
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1697,52 +1568,19 @@ Creating Date Controls
 * ``$fieldName`` - A field name that will be used as a prefix for the HTML
   ``name`` attribute of the ``select`` elements.
 * ``$options`` - An optional array including any of the
-  :ref:`general-control-options`, of the :ref:`datetime-options`, any applicable
-  :ref:`time-options`, as well as any valid HTML attributes.
+  :ref:`general-control-options` as well as any valid HTML attributes.
 
-Creates, by default, three select pickers populated with values for:
-year (4 digits), month (full English name) and day (numeric), respectively.
+The method will generate an input tag with type "date".
 
-You can further control the generated ``select`` elements by providing
-additional options.
+For example ::
 
-For example::
-
-    // Assuming current year is 2017; this disables day picker, removes empty
-    // option on year picker, limits lowest year, adds HTML attributes on year,
-    // adds a string 'empty' option on month, changes month to numeric
-    <?php
-        echo $this->Form->date('registered', [
-            'minYear' => 2018,
-            'monthNames' => false,
-            'empty' => [
-                'year' => false,
-                'month' => 'Choose month...'
-            ],
-            'day' => false,
-            'year' => [
-                'class' => 'cool-years',
-                'title' => 'Registration Year'
-            ]
-        ]);
-    ?>
+    <?= $this->form->dateTime('registered') ?>
 
 Output:
 
 .. code-block:: html
 
-    <select class= "cool-years" name="registered[year]" title="Registration Year">
-        <option value="2022">2022</option>
-        <option value="2021">2021</option>
-        ...
-        <option value="2018">2018</option>
-    </select>
-    <select name="registered[month]">
-        <option value="" selected="selected">Choose month...</option>
-        <option value="01">1</option>
-        ...
-        <option value="12">12</option>
-    </select>
+    <input type="datetime-local" name="registered" />
 
 Creating Time Controls
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1752,48 +1590,41 @@ Creating Time Controls
 * ``$fieldName`` - A field name that will be used as a prefix for the HTML
   ``name`` attribute of the ``select`` elements.
 * ``$options`` - An optional array including any of the
-  :ref:`general-control-options`, of the :ref:`datetime-options`, any applicable
-  :ref:`time-options`, as well as any valid HTML attributes.
+  :ref:`general-control-options` as well as any valid HTML attributes.
 
-Creates, by default, two ``select`` elements (``hour`` and ``minute``) populated
-with values for 24 hours and 60 minutes, respectively.
-Additionally, HTML attributes may be supplied in ``$options`` for each specific
-component. If ``$options['empty']`` is ``false``, the select picker will not
-include an empty default option.
+The method will generate an input tag with type "time".
 
-For example, to create a time range with minutes selectable in 15 minute
-increments, and to apply classes to the select boxes, you could do the
-following::
+For example ::
 
-    echo $this->Form->time('released', [
-        'interval' => 15,
-        'hour' => [
-            'class' => 'foo-class',
-        ],
-        'minute' => [
-            'class' => 'bar-class',
-        ],
-    ]);
+    echo $this->Form->time('released');
 
-Which would create the following two select pickers:
+Output:
 
 .. code-block:: html
 
-    <select name="released[hour]" class="foo-class">
-        <option value="" selected="selected"></option>
-        <option value="00">0</option>
-        <option value="01">1</option>
-        <!-- .. snipped for brevity .. -->
-        <option value="22">22</option>
-        <option value="23">23</option>
-    </select>
-    <select name="released[minute]" class="bar-class">
-        <option value="" selected="selected"></option>
-        <option value="00">00</option>
-        <option value="15">15</option>
-        <option value="30">30</option>
-        <option value="45">45</option>
-    </select>
+    <input type="time" name="released" />
+
+Creating Month Controls
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. php:method:: month(string $fieldName, array $attributes)
+
+* ``$fieldName`` - A field name that will be used as a prefix for the HTML
+  ``name`` attribute of the ``select`` element.
+* ``$options`` - An optional array including any of the
+  :ref:`general-control-options` as well as any valid HTML attributes.
+
+The method will generate an input tag with type "month".
+
+For example::
+
+    echo $this->Form->month('mob');
+
+Will output:
+
+.. code-block:: html
+
+    <input type="time" name="mob" />
 
 Creating Year Controls
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1803,29 +1634,32 @@ Creating Year Controls
 * ``$fieldName`` - A field name that will be used as a prefix for the HTML
   ``name`` attribute of the ``select`` element.
 * ``$options`` - An optional array including any of the
-  :ref:`general-control-options`, of the :ref:`datetime-options`, any applicable
-  :ref:`date-options`, as well as any valid HTML attributes.
+  :ref:`general-control-options` as well as any valid HTML attributes.
+  Other valid options are:
+  - ``min`: The lowest value to use in the year select picker.
+  - ``max``: The maximum value to use in the year select picker.
+  - ``order``: The order of year values in the year select picker.
+    Possible values are ``'asc'`` and ``'desc'``. Defaults to ``'desc'``.
 
-Creates a ``select`` element populated with the years from ``minYear``
-to ``maxYear`` (when these options are provided) or else with values starting
-from -5 years to +5 years counted from today. Additionally, HTML attributes may
-be supplied in ``$options``.
-If ``$options['empty']`` is ``false``, the select picker will not include an
-empty item in the list.
+Creates a ``select`` element populated with the years from ``min`` to ``max``
+(when these options are provided) or else with values starting from -5 years
+to +5 years counted from today. Additionally, HTML attributes may be supplied
+in ``$options``. If ``$options['empty']`` is ``false``, the select picker will
+not include an empty item in the list.
 
 For example, to create a year range from 2000 to the current year you
 would do the following::
 
     echo $this->Form->year('purchased', [
-        'minYear' => 2000,
-        'maxYear' => date('Y')
+        'min' => 2000,
+        'max' => date('Y')
     ]);
 
 If it was 2009, you would get the following:
 
 .. code-block:: html
 
-    <select name="purchased[year]">
+    <select name="purchased">
         <option value=""></option>
         <option value="2009">2009</option>
         <option value="2008">2008</option>
@@ -1838,163 +1672,6 @@ If it was 2009, you would get the following:
         <option value="2001">2001</option>
         <option value="2000">2000</option>
     </select>
-
-Creating Month Controls
-~~~~~~~~~~~~~~~~~~~~~~~
-
-.. php:method:: month(string $fieldName, array $attributes)
-
-* ``$fieldName`` - A field name that will be used as a prefix for the HTML
-  ``name`` attribute of the ``select`` element.
-* ``$attributes`` - An optional array including any of the
-  :ref:`general-control-options`, of the :ref:`datetime-options`, any applicable
-  :ref:`date-options`, as well as any valid HTML attributes.
-
-Creates a ``select`` element populated with month names.
-
-For example::
-
-    echo $this->Form->month('mob');
-
-Will output:
-
-.. code-block:: html
-
-    <select name="mob[month]">
-        <option value=""></option>
-        <option value="01">January</option>
-        <option value="02">February</option>
-        <option value="03">March</option>
-        <option value="04">April</option>
-        <option value="05">May</option>
-        <option value="06">June</option>
-        <option value="07">July</option>
-        <option value="08">August</option>
-        <option value="09">September</option>
-        <option value="10">October</option>
-        <option value="11">November</option>
-        <option value="12">December</option>
-    </select>
-
-You can pass in, your own array of months to be used by setting the
-``'monthNames'`` attribute, or have months displayed as numbers by
-passing ``false``.
-
-E.g. ::
-
-  echo $this->Form->month('mob', ['monthNames' => false]);
-
-.. note::
-
-    The default months can be localized with CakePHP
-    :doc:`/core-libraries/internationalization-and-localization` features.
-
-Creating Day Controls
-~~~~~~~~~~~~~~~~~~~~~
-
-.. php:method:: day(string $fieldName, array $attributes)
-
-* ``$fieldName`` - A field name that will be used as a prefix for the HTML
-  ``name`` attribute of the ``select`` element.
-* ``$attributes`` - An optional array including any of the
-  :ref:`general-control-options`, of the :ref:`datetime-options`, any applicable
-  :ref:`date-options`, as well as any valid HTML attributes.
-
-Creates a ``select`` element populated with the (numerical) days of the
-month.
-
-To create an empty ``option`` element with a prompt text of your choosing
-(e.g. the first option is 'Day'), you can supply the text in the ``'empty'``
-parameter.
-
-For example::
-
-    echo $this->Form->day('created', ['empty' => 'Day']);
-
-Will output:
-
-.. code-block:: html
-
-    <select name="created[day]">
-        <option value="" selected="selected">Day</option>
-        <option value="01">1</option>
-        <option value="02">2</option>
-        <option value="03">3</option>
-        ...
-        <option value="31">31</option>
-    </select>
-
-Creating Hour Controls
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. php:method:: hour(string $fieldName, array $attributes)
-
-* ``$fieldName`` - A field name that will be used as a prefix for the HTML
-  ``name`` attribute of the ``select`` element.
-* ``$attributes`` - An optional array including any of the
-  :ref:`general-control-options`, of the :ref:`datetime-options`, any applicable
-  :ref:`time-options`, as well as any valid HTML attributes.
-
-Creates a ``select`` element populated with the hours of the day.
-
-You can create either 12 or 24 hour pickers using the ``'format'`` option::
-
-    echo $this->Form->hour('created', [
-        'format' => 12
-    ]);
-    echo $this->Form->hour('created', [
-        'format' => 24
-    ]);
-
-Creating Minute Controls
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. php:method:: minute(string $fieldName, array $attributes)
-
-* ``$fieldName`` - A field name that will be used as a prefix for the HTML
-  ``name`` attribute of the ``select`` element.
-* ``$attributes`` - An optional array including any of the
-  :ref:`general-control-options`, of the :ref:`datetime-options`, any applicable
-  :ref:`time-options`, as well as any valid HTML attributes.
-
-Creates a ``select`` element populated with values for the minutes of the hour.
-You can create a select picker that only contains specific values by using the
-``'interval'`` option.
-
-For example, if you wanted 10 minutes increments you would do the following::
-
-    // In your view template file
-    echo $this->Form->minute('arrival', [
-        'interval' => 10
-    ]);
-
-This would output:
-
-.. code-block:: html
-
-    <select name="arrival[minute]">
-        <option value="" selected="selected"></option>
-        <option value="00">00</option>
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="30">30</option>
-        <option value="40">40</option>
-        <option value="50">50</option>
-    </select>
-
-Creating Meridian Controls
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. php:method:: meridian(string $fieldName, array $attributes)
-
-* ``$fieldName`` - A field name that will be used as a prefix for the HTML
-  ``name`` attribute of the ``select`` element.
-* ``$attributes`` - An optional array including any of the
-  :ref:`general-control-options` as well as any valid HTML attributes.
-
-Creates a ``select`` element populated with 'am' and 'pm'. This is useful when
-the hour format is set to ``12`` instead of ``24``, as it allows to specify the
-period of the day to which the hour belongs.
 
 .. _create-label:
 
