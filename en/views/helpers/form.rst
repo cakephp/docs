@@ -1549,7 +1549,7 @@ Output:
 
     <input type="datetime-local" name="registered" />
 
-The value for the input can be valid datetime string or ``DateTime`` instance.
+The value for the input can be any valid datetime string or ``DateTime`` instance.
 
 For example ::
 
@@ -1574,13 +1574,13 @@ The method will generate an input tag with type "date".
 
 For example ::
 
-    <?= $this->form->dateTime('registered') ?>
+    <?= $this->form->date('registered') ?>
 
 Output:
 
 .. code-block:: html
 
-    <input type="datetime-local" name="registered" />
+    <input type="date" name="registered" />
 
 Creating Time Controls
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1624,7 +1624,7 @@ Will output:
 
 .. code-block:: html
 
-    <input type="time" name="mob" />
+    <input type="month" name="mob" />
 
 Creating Year Controls
 ~~~~~~~~~~~~~~~~~~~~~~

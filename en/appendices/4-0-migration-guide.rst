@@ -182,4 +182,4 @@ View
   required in an entity's ORM table class. This feature can be toggled with the
   ``autoSetCustomValidity`` class configuration option.
 * ``FormHelper`` now generates native HTML5 input tags for datetime fields.
-  Check the :ref:`Form Helper <create-datetime-controls>`:: page for more details.
+  Check the :ref:`Form Helper <create-datetime-controls>` page for more details.
