@@ -136,7 +136,7 @@ By default:
 
     - ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``test_plugin/logo.png`` 
 
-es "cakedc/users": "dev-develop"If you set ``App.imageBaseUrl`` to ``https://mycdn.example.com/``: 
+If you set ``App.imageBaseUrl`` to ``https://mycdn.example.com/``: 
 
     - ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``https://mycdn.example.com/logo.png``.
 
