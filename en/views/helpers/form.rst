@@ -1527,9 +1527,6 @@ way PHP handles data passed via file fields
 Creating Date & Time Related Controls
 -------------------------------------
 
-Creating DateTime Controls
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 .. php:method:: dateTime($fieldName, $options = [])
 
 * ``$fieldName`` - A string that will be used as a prefix for the HTML ``name``
@@ -1537,7 +1534,7 @@ Creating DateTime Controls
 * ``$options`` - An optional array including any of the
   :ref:`general-control-options` as well as any valid HTML attributes.
 
-The method will generate an input tag with type "datetime-local".
+This method will generate an input tag with type "datetime-local".
 
 For example ::
 
@@ -1563,6 +1560,7 @@ Output:
 
 Creating Date Controls
 ~~~~~~~~~~~~~~~~~~~~~~
+
 .. php:method:: date($fieldName, $options = [])
 
 * ``$fieldName`` - A field name that will be used as a prefix for the HTML
@@ -1570,7 +1568,7 @@ Creating Date Controls
 * ``$options`` - An optional array including any of the
   :ref:`general-control-options` as well as any valid HTML attributes.
 
-The method will generate an input tag with type "date".
+This method will generate an input tag with type "date".
 
 For example ::
 
@@ -1592,7 +1590,7 @@ Creating Time Controls
 * ``$options`` - An optional array including any of the
   :ref:`general-control-options` as well as any valid HTML attributes.
 
-The method will generate an input tag with type "time".
+This method will generate an input tag with type "time".
 
 For example ::
 
@@ -1614,7 +1612,7 @@ Creating Month Controls
 * ``$options`` - An optional array including any of the
   :ref:`general-control-options` as well as any valid HTML attributes.
 
-The method will generate an input tag with type "month".
+This method will generate an input tag with type "month".
 
 For example::
 

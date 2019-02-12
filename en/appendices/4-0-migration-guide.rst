@@ -30,8 +30,10 @@ features will continue to function in 4.x and will be removed in 5.0.0.
 Entity
 ------
 
-* ``Entity::visibleProperties()`` has been renamed to ``Entity::getVisible()`` to match the other methods.
-* ``Entity::unsetProperty()`` has been renamed to ``Entity::unset()`` to match the other methods.
+* ``Entity::visibleProperties()`` has been renamed to ``Entity::getVisible()``
+  to match the other methods.
+* ``Entity::unsetProperty()`` has been renamed to ``Entity::unset()`` to match
+  the other methods.
 
 Breaking Changes
 ================
