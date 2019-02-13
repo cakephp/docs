@@ -282,3 +282,8 @@ Helper Functions
 
 * `sql()` Dumps out the SQL from an ORM query.
 * `sqld()` Dumps out the SQL from an ORM query, and exits.
+
+Know Problems
+=============
+
+If you work with xDebug enabled you'll end up with an exception and stack trace (https://github.com/cakephp/debug_kit/issues/388). This problem can be avoided with setting ``xdebug.collect_params`` to ``1``.
