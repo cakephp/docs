@@ -185,3 +185,4 @@ View
   ``autoSetCustomValidity`` class configuration option.
 * ``FormHelper`` now generates native HTML5 input tags for datetime fields.
   Check the :ref:`Form Helper <create-datetime-controls>` page for more details.
+  If you need to retain the former markup, a shimmed FormHelper can be foudn in `Shim plugin <https://github.com/dereuromark/cakephp-shim>`__ with the old behavior/generation (4.x branch).
