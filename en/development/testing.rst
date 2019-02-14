@@ -31,6 +31,20 @@ To upgrade PHPUnit and its dependencies for your application, execute the follow
 This will install either PHPUnit 4.x or 5.x, depending on your system setup and your
 composer.json configuration.
 
+To be able to work with PHP 7, it is required to install the version 5, and you'll need to setup
+the autoloader, and work around an issue in Composer's autoloader. In your
+``Config/bootstrap.php`` file add the following::
+
+    // Load Composer autoload.
+    require APP . 'Vendor/autoload.php';
+
+    // Remove and re-prepend CakePHP's autoloader as Composer thinks it is the
+    // most important.
+    // See: http://goo.gl/kKVJO7
+    spl_autoload_unregister(array('App', 'load'));
+    spl_autoload_register(array('App', 'load'), true, true);
+
+
 Install via .phar Package
 -------------------------
 
