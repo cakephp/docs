@@ -843,7 +843,7 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
         ->andWhere(['population >' => 5000000]);
 
     $query = $countries->find()
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, Query $q) use ($subquery) {
             return $exp->exists($subquery);
         });
     # WHERE EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
