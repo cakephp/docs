@@ -345,10 +345,7 @@ date
     type is :php:class:`Cake\\I18n\\Date` which extends the native ``DateTime``
     class.
 datetime
-    Maps to a timezone naive ``DATETIME`` column type. In PostgreSQL, and SQL Server
-    this turns into a ``TIMESTAMP`` type. The default return value of this column
-    type is :php:class:`Cake\\I18n\\Time` which extends the built-in
-    ``DateTime`` class and `Chronos <https://github.com/cakephp/chronos>`_.
+    See :ref:`datetime-type`.
 timestamp
     Maps to the ``TIMESTAMP`` type.
 time
@@ -375,6 +372,25 @@ handles, and generate file handles when reading data.
 
 .. versionchanged:: 3.6.0
     The ``binaryuuid`` type was added.
+
+.. _datetime-type:
+
+DateTime Type
+-------------
+
+.. php:class:: Type\DateTimeType
+
+Maps to a timezone naive ``DATETIME`` column type. In PostgreSQL, and SQL Server
+this turns into a ``TIMESTAMP`` type. The default return value of this column
+type is :php:class:`Cake\\I18n\\FrozenTime` which extends the built-in
+``DateTimeImmutable`` class and `Chronos <https://github.com/cakephp/chronos>`_.
+
+.. php:method:: setTimezone(string|\DateTimeZone|null $timezone)
+
+If your database server's timezone does not match your application's PHP timezone
+then you can use this method to specify your database's timezone. This timezone
+will then used when converting PHP objects to database's datetime string and
+vice versa.
 
 .. _adding-custom-database-types:
 
