@@ -683,6 +683,9 @@ privileges.
 The ``fieldList`` options is also accepted by the ``newEntity()``,
 ``newEntities()`` and ``patchEntities()`` methods.
 
+.. deprecated:: 3.4.0
+    Use ``fields`` instead of ``fieldList``.
+
 .. _saving-entities:
 
 Saving Entities
