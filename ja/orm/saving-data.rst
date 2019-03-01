@@ -675,7 +675,7 @@ CakePHP の検証機能をどう使うかについてより詳しい情報があ
 および ``patchEntities()`` メソッドでも受け入れられます。
 
 .. deprecated:: 3.4.0
-    ``fieldList`` の替わりに ``fields`` を使用してください。
+    ``fieldList`` の代わりに ``fields`` を使用してください。
 
 .. _saving-entities:
 
