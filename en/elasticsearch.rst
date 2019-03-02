@@ -20,8 +20,6 @@ You will need to add the following line to your application's
 
     $this->addPlugin('Cake/ElasticSearch', ['bootstrap' => true]);
 
-    // Prior to 3.6.0 you need to use Plugin::load()
-
 Additionally, you will need to configure the 'elastic' datasource connection in
 your **config/app.php** file. An example configuration would be::
 

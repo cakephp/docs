@@ -43,9 +43,6 @@ The request exposes routing parameters through the ``getParam()`` method::
 
     $controllerName = $this->request->getParam('controller');
 
-    // Prior to 3.4.0
-    $controllerName = $this->request->param('controller');
-
 To get all routing parameters as an array use ``getAttribute()``::
 
     $parameters = $this->request->getAttribute('params');
@@ -79,9 +76,6 @@ Query string parameters can be read using the ``getQuery()`` method::
 
     // URL is /posts/index?page=1&sort=title
     $page = $this->request->getQuery('page');
-
-    // Prior to 3.4.0
-    $page = $this->request->query('page');
 
 You can either directly access the query property, or you can use
 ``getQuery()`` method to read the URL query array in an error-free manner.
@@ -195,11 +189,6 @@ subdirectory. The attributes you can use are::
 
     // Holds /subdir/
     $base = $request->getAttribute('webroot');
-
-    // Prior to 3.4.0
-    $webroot = $request->webroot;
-    $base = $request->base;
-    $here = $request->here();
 
 .. _check-the-request:
 
@@ -340,9 +329,6 @@ Returns the HTTP method the request was made with::
     // Output POST
     echo $request->getMethod();
 
-    // Prior to 3.4.0
-    echo $request->method();
-
 Restricting Which HTTP method an Action Accepts
 -----------------------------------------------
 
@@ -373,9 +359,6 @@ for the request. For example::
 
     // Check if a header exists
     $hasAcceptHeader = $this->request->hasHeader('Accept');
-
-    // Prior to 3.4.0
-    $userAgent = $this->request->header('User-Agent');
 
 While some apache installs don't make the ``Authorization`` header accessible,
 CakePHP will make it available through apache specific methods as required.
@@ -514,9 +497,6 @@ with content types that are not built into Response, you can map them with
     // Set the response Content-Type to vcard.
     $this->response = $this->response->withType('vcf');
 
-    // Prior to 3.4.0
-    $this->response->type('vcf');
-
 Usually, you'll want to map additional content types in your controller's
 :php:meth:`~Controller::beforeFilter()` callback, so you can leverage the
 automatic view switching features of :php:class:`RequestHandlerComponent` if you
@@ -541,13 +521,6 @@ You can accomplish that by using :php:meth:`Cake\\Http\\Response::withFile()`::
         return $response;
     }
 
-    // Prior to 3.4.0
-    $file = $this->Attachments->getFile($id);
-    $this->response->file($file['path']);
-    // Return the response to prevent controller from trying to render
-    // a view.
-    return $this->response;
-
 As shown in the above example, you must pass the file path to the method.
 CakePHP will send a proper content type header if it's a known file type listed
 in `Cake\\Http\\Response::$_mimeTypes`. You can add new types prior to calling
@@ -558,12 +531,6 @@ If you want, you can also force a file to be downloaded instead of displayed in
 the browser by specifying the options::
 
     $response = $this->response->withFile(
-        $file['path'],
-        ['download' => true, 'name' => 'foo']
-    );
-
-    // Prior to 3.4.0
-    $this->response->file(
         $file['path'],
         ['download' => true, 'name' => 'foo']
     );
@@ -630,9 +597,6 @@ instance with the new header::
     // Append a value to an existing header
     $response = $response->withAddedHeader('Set-Cookie', 'remember_me=1');
 
-    // Prior to 3.4.0 - Set a header
-    $this->response->header('Location', 'http://example.com');
-
 Headers are not sent when set. Instead, they are held until the response is
 emitted by ``Cake\Http\Server``.
 
@@ -664,9 +628,6 @@ To set the response body, use the ``withBody()`` method, which is provided by th
 
     $response = $response->withBody($stream);
 
-    // Prior to 3.4.0 - Set the body
-    $this->response->body('My Body');
-
 Be sure that ``$stream`` is a :php:class:`Psr\\Http\\Message\\StreamInterface` object.
 See below on how to create a new stream.
 
@@ -694,14 +655,6 @@ stream to the client::
     });
     $response = $response->withBody($stream);
 
-    // Prior to 3.4.0 you can use the following to create streaming responses.
-    $file = fopen('/some/file.png', 'r');
-    $this->response->body(function () use ($file) {
-        rewind($file);
-        fpassthru($file);
-        fclose($file);
-    });
-
 Setting the Character Set
 -------------------------
 
@@ -710,9 +663,6 @@ Setting the Character Set
 Sets the charset that will be used in the response::
 
     $this->response = $this->response->withCharset('UTF-8');
-
-    // Prior to 3.4.0
-    $this->response->charset('UTF-8');
 
 Interacting with Browser Caching
 --------------------------------
@@ -727,9 +677,6 @@ that::
     {
         // Disable caching
         $this->response = $this->response->withDisabledCache();
-
-        // Prior to 3.4.0
-        $this->response->disableCache();
     }
 
 .. warning::

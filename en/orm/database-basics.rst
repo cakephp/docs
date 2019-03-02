@@ -842,7 +842,6 @@ Query logging can be enabled when configuring your connection by setting the
 ``log`` option to ``true``. You can also toggle query logging at runtime, using
 ``enableQueryLogging``::
 
-    // Prior to 3.7.0 use logQueries()
     // Turn query logging on.
     $conn->enableQueryLogging(true);
 

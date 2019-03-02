@@ -1038,7 +1038,6 @@ This functionality is achieved by using the custom types system. See the
 :ref:`adding-custom-database-types` section to find out how to build custom
 column Types::
 
-    // Only prior to 3.6, you have to add a new type map in config/bootstrap.php
     use Cake\Database\Type;
 
     Type::map('json', 'Cake\Database\Type\JsonType');
@@ -1051,9 +1050,6 @@ column Types::
         protected function _initializeSchema(TableSchema $schema)
         {
             $schema->setColumnType('preferences', 'json');
-
-            // Prior to 3.6 you should use ``columnType`` instead of ``setcolumnType``.
-            $schema->columnType('preferences', 'json');
 
             return $schema;
         }

@@ -165,18 +165,6 @@ And the resultant baked class (**src/Shell/FooShell.php**) looks like this::
 
     }
 
-.. note::
-
-    Prior to version 1.5.0 bake used a custom erb-style tags inside .ctp template files.
-
-    * ``<%`` A Bake template php open tag
-    * ``%>`` A Bake template php close tag
-    * ``<%=`` A Bake template php short-echo tag
-    * ``<%-`` A Bake template php open tag, stripping any leading whitespace
-      before the tag
-    * ``-%>`` A Bake template php close tag, stripping trailing whitespace after
-      the tag
-
 .. _creating-a-bake-theme:
 
 Creating a Bake Theme

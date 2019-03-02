@@ -343,7 +343,7 @@ modifying the application's state. For these scenarios use the behavior's
 
     $this->loadModel('Articles');
 
-    // specific locale. Use locale() prior to 3.6
+    // specific locale.
     $this->Articles->setLocale('es');
 
     $article = $this->Articles->get(12);
@@ -356,7 +356,6 @@ to call the method on each table, for example::
     I18n::setLocale('en'); // reset for illustration
 
     $this->loadModel('Articles');
-    // Use locale() prior to 3.6
     $this->Articles->setLocale('es');
     $this->Articles->Categories->setLocale('es');
 
@@ -371,7 +370,6 @@ Querying Translated Fields
 TranslateBehavior does not substitute find conditions by default. You need to use
 ``translationField()`` method to compose find conditions on translated fields::
 
-    // Use locale() prior to 3.6
     $this->Articles->setLocale('es');
     $data = $this->Articles->find()->where([
         $this->Articles->translationField('title') => 'Otro Título'
@@ -440,7 +438,6 @@ default language directly to the table::
 
     $article->title = 'Mi Primer Artículo';
 
-    // Use locale() prior to 3.6
     $this->Articles->setLocale('es');
     $this->Articles->save($article);
 

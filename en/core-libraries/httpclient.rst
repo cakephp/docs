@@ -9,9 +9,6 @@ CakePHP includes a PSR-18 compliant HTTP client which can be used for
 making requests. It is a great way to communicate with webservices, and
 remote APIs.
 
-.. versionchanged:: 3.3.0
-    Prior to 3.3.0 you should use ``Cake\Network\Http\Client``.
-
 Doing Requests
 ==============
 
@@ -373,11 +370,6 @@ You read the entire response body as a string::
     // Read the entire response as a string.
     $response->getStringBody();
 
-    // Prior to 3.7.0 use
-    $response->body();
-    // or
-    $response->body;
-
 You can also access the stream object for the response and use its methods::
 
     // Get a Psr\Http\Message\StreamInterface containing the response body
@@ -402,16 +394,10 @@ XML data is decoded into a ``SimpleXMLElement`` tree::
     $response = $http->get('http://example.com/test.xml');
     $xml = $response->getXml();
 
-    // Prior to 3.7.0
-    $xml = $response->xml;
-
     // Get some JSON
     $http = new Client();
     $response = $http->get('http://example.com/test.json');
     $json = $response->getJson();
-
-    // Prior to 3.7.0
-    $json = $response->json;
 
 The decoded response data is stored in the response object, so accessing it
 multiple times has no additional cost.

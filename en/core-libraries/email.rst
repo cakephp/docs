@@ -119,7 +119,6 @@ change the configuration data. An example transport configuration looks like::
     use Cake\Mailer\TransportFactory;
 
     // Sample Mail configuration
-    // Prior to 3.7.0 use Email::configTransport()
     TransportFactory::setConfig('default', [
         'className' => 'Mail'
     ]);
@@ -168,11 +167,6 @@ Configuration options can also be provided as a :term:`DSN` string. This is
 useful when working with environment variables or :term:`PaaS` providers::
 
     TransportFactory::setConfig('default', [
-        'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:587?tls=true',
-    ]);
-
-    // Prior to 3.7.0 use
-    Email::configTransport('default', [
         'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:587?tls=true',
     ]);
 

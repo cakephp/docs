@@ -137,15 +137,6 @@ Values set with this method will overwrite existing data in the form object::
         }
     }
 
-Prior to 3.7.0 you must set default values for form by modifying the request::
-
-    // Set default values on get
-    if ($this->request->is('get')) {
-        // Values from the User Model e.g.
-        $this->request->data('name', 'John Doe');
-        $this->request->data('email','john.doe@example.com');
-    }
-
 Values should only be defined if the request method is GET, otherwise
 you will overwrite your previous POST Data which might have validation errors
 that need corrections.
@@ -159,7 +150,7 @@ Getting Form Errors
 
 Once a form has been validated you can retrieve the errors from it::
 
-    $errors = $form->getErrors(); // $form->errors(); // prior to 3.7.0
+    $errors = $form->getErrors();
     /* $errors contains
     [
         'email' => ['A valid email address is required']

@@ -22,6 +22,3 @@ cached metadata as well::
 
     # Clear a single table
     bin/cake schema_cache clear articles
-
-.. note::
-    Prior to 3.6 you should use ``orm_cache`` instead of ``schema_cache``.

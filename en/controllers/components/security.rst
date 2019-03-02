@@ -218,14 +218,10 @@ require secure SSL requests::
             if ($exception instanceof SecurityException && $exception->getType() === 'secure') {
                 return $this->redirect('https://' . env('SERVER_NAME') . Router::url($this->request->getRequestTarget()));
             }
-            
+
             throw $exception;
         }
     }
-
-.. note::
-
-    Use ``$this->request->here()`` for CakePHP versions prior to 3.4.0
 
 This example would force all actions that had admin routing to require secure
 SSL requests. When the request is black holed, it will call the nominated
@@ -272,10 +268,6 @@ There may be cases where you want to disable all security checks for an action
             $this->Security->setConfig('unlockedActions', ['edit']);
         }
     }
-
-.. note::
-
-    Use ``$this->Security->config()`` for CakePHP versions prior to 3.4.0
 
 This example would disable all security checks for the edit action.
 

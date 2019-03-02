@@ -144,10 +144,6 @@ you had an ``AppSessionHandler`` class,  the file should be
 ``App\Http\Session\AppSessionHandler``. You can also use session handlers
 from inside plugins. By setting the engine to ``MyPlugin.PluginSessionHandler``.
 
-.. note::
-    Prior to 3.6.0 session adapter files should be placed in
-    **src/Network/Session/AppHandler.php**.
-
 Database Sessions
 -----------------
 
@@ -327,7 +323,6 @@ In addition to the basic session object, you can also use the
 :php:class:`Cake\\View\\Helper\\SessionHelper` to interact with the session in
 your views. A basic example of session usage would be::
 
-    // Prior to 3.6.0 use session() instead.
     $name = $this->getRequest()->getSession()->read('User.name');
 
     // If you are accessing the session multiple times,

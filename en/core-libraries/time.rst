@@ -33,10 +33,6 @@ Under the hood, CakePHP uses `Chronos <https://github.com/cakephp/chronos>`_
 to power its ``FrozenTime`` utility. Anything you can do with ``Chronos`` and
 ``DateTime``, you can do with ``FrozenTime`` and ``FrozenDate``.
 
-.. note::
-    Prior to 3.2.0 CakePHP used `Carbon
-    <https://github.com/briannesbitt/Carbon>`__.
-
 For more details on Chronos please see `the API documentation
 <https://api.cakephp.org/chronos/1.0/>`_.
 

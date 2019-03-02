@@ -236,7 +236,6 @@ send the email with::
     use Cake\Mailer\Email;
 
     $email = new Email();
-    // Prior to 3.4 use domain()
     $email->setDomain('www.example.org');
 
 This asserts that the generated message IDs are valid and fit to the domain the

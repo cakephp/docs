@@ -37,8 +37,6 @@ adding the following statement::
 
     $this->addPlugin('Migrations');
 
-    // Prior to 3.6.0 you need to use Plugin::load()
-
 Additionally, you will need to configure the default database configuration for your
 application in your **config/app.php** file as explained in the
 :ref:`Database Configuration section <database-configuration>`.
@@ -188,10 +186,7 @@ You can also use the ``underscore_form`` as the name for your migrations i.e.
 .. versionadded:: cakephp/migrations 1.5.2
 
     As of v1.5.2 of the `migrations plugin <https://github.com/cakephp/migrations/>`_,
-    the migration filename will be automatically camelized. This version of the
-    plugin is only available with a release of CakePHP >= to 3.1. Prior to this
-    version of the plugin the migration name would be in the underscore form,
-    i.e. ``20160121164955_create_products.php``.
+    the migration filename will be automatically camelized.
 
 .. warning::
 
@@ -947,7 +942,6 @@ performing operations on those new columns.
 The CakePHP Core includes a :doc:`Schema Cache Shell <console-and-shells/schema-cache>`
 that you can use to perform this operation::
 
-    // Prior to 3.6 use orm_cache
     $ bin/cake schema_cache clear
 
 Be sure to read the :doc:`Schema Cache Shell <console-and-shells/schema-cache>`
