@@ -102,9 +102,8 @@
 フォーム値の設定
 ================
 
-モデルのないフォームのフィールドに値を設定するために、
-FormHelper によって作成される他のすべてのフォームと同様に、
-``$this->request->withData()`` を使って値を定義することができます。 ::
+モデルのないフォームのフィールドにデフォルト値を設定するために、 ``setData()`` メソッドが使用できます。
+このメソッドで設定された値はフォームオブジェクトの既存のデータを上書きします。 ::
 
     // 何らかのコントローラー中で
     namespace App\Controller;
@@ -126,30 +125,42 @@ FormHelper によって作成される他のすべてのフォームと同様に
             }
 
             if ($this->request->is('get')) {
-                // たとえばユーザーモデルの値
-                $this->request = $this->request
-                    ->withData('name', 'John Doe')
-                    ->withData('email','john.doe@example.com');
+                $contact->setData([
+                    'name' => 'John Doe',
+                    'email' => 'john.doe@example.com'
+                ]);
             }
 
             $this->set('contact', $contact);
         }
     }
 
+3.7.0 より前の場合は、request を修正してフォームのデフォルト値を設定してください。 ::
+
+    // GET 時にデフォルト値を設定
+    if ($this->request->is('get')) {
+        // たとえばユーザーモデルの値
+        $this->request->data('name', 'John Doe');
+        $this->request->data('email','john.doe@example.com');
+    }
+
 値はリクエストメソッドが GET の時にのみ定義されるべきで、
-さもないと正しくないまたは保存されていない直前の POST データを上書きしてしまいます。
+さもないと修正が必要なバリデーションエラーのある直前の POST データを上書きしてしまいます。
 
 フォームエラーの取得
 ====================
 
 フォームが検証されたら、エラーを取得することができます。 ::
 
-    $errors = $form->errors();
+    $errors = $form->getErrors(); // $form->errors(); // 3.7.0 より前
     /* $errors の中身
     [
         'email' => ['有効なメールアドレスが要求されます']
     ]
     */
+
+.. versionadded:: 3.7.0
+   ``errors()`` は非推奨になりました。代わりに ``getErrors()`` を使用してください。
 
 コントローラーから各フォームフィールドを無効化
 ==============================================

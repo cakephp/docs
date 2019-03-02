@@ -7,10 +7,10 @@ Entities
 
 While :doc:`/orm/table-objects` represent and provide access to a collection of
 objects, entities represent individual rows or domain objects in your
-application. Entities contain persistent properties and methods to manipulate and
-access the data they contain.
+application. Entities contain methods to manipulate and
+access the data they contain. Fields can also be accessed as properties on the object.
 
-Entities are created for you by CakePHP each time you use ``find()`` on a table
+Entities are created for you each time you use ``find()`` on a table
 object.
 
 Creating Entity Classes
@@ -46,7 +46,7 @@ Entities can be directly instantiated::
 
     $article = new Article();
 
-When instantiating an entity you can pass the properties with the data you want
+When instantiating an entity you can pass the fields with the data you want
 to store in them::
 
     use App\Model\Entity\Article;
@@ -68,7 +68,7 @@ The preferred way of getting new entities is using the ``newEntity()`` method fr
         'title' => 'New Article',
         'created' => new DateTime('now')
     ]);
-    
+
 ``$article`` will be an instance of ``App\Model\Entity\Article`` or fallback to
 ``Cake\ORM\Entity`` instance if you haven't created the ``Article`` class.
 
@@ -89,7 +89,7 @@ You can also use the ``get()`` and ``set()`` methods::
     $article->set('title', 'This is my first post');
     echo $article->get('title');
 
-When using ``set()`` you can update multiple properties at once using an array::
+When using ``set()`` you can update multiple fields at once using an array::
 
     $article->set([
         'title' => 'My first post',
@@ -101,7 +101,7 @@ When using ``set()`` you can update multiple properties at once using an array::
     When updating entities with request data you should whitelist which fields
     can be set with mass assignment.
 
-You can check if properties are defined in your entities with ``has()``::
+You can check if fields are defined in your entities with ``has()``::
 
     $article = new Article([
         'title' => 'First post',
@@ -111,9 +111,9 @@ You can check if properties are defined in your entities with ``has()``::
     $article->has('user_id'); // false
     $article->has('undefined'); // false.
 
-The ``has()`` method will return ``true`` if a property is defined and has
+The ``has()`` method will return ``true`` if a field is defined and has
 a non-null value. You can use ``isEmpty()`` and ``hasValue()`` to check if
-a property contains a 'non-empty' value::
+a field contains a 'non-empty' value::
 
     $article = new Article([
         'title' => 'First post',
@@ -132,7 +132,7 @@ Accessors & Mutators
 ====================
 
 In addition to the simple get/set interface, entities allow you to provide
-accessors and mutator methods. These methods let you customize how properties
+accessors and mutator methods. These methods let you customize how fields
 are read or set.
 
 Accessors use the convention of ``_get`` followed by the CamelCased version of
@@ -157,29 +157,29 @@ persisted. For example::
         }
     }
 
-The accessor would be run when getting the property through any of these two ways::
+The accessor would be run when getting the field through any of these two ways::
 
     echo $article->title;
     echo $article->get('title');
-    
+
 .. note::
 
     Code in your accessors is executed each time you reference the field. You can
     use a local variable to cache it if you are performing a resource-intensive
     operation in your accessor like this: `$myEntityProp = $entity->my_property`.
 
-You can customize how properties get set by defining a mutator:
+You can customize how fields get set by defining a mutator:
 
 .. php:method:: set($field = null, $value = null)
 
 Mutator methods should always return the value that should be stored in the
-property. As you can see above, you can also use mutators to set other
-calculated properties. When doing this, be careful to not introduce any loops,
+field. As you can see above, you can also use mutators to set other
+calculated fields. When doing this, be careful to not introduce any loops,
 as CakePHP will not prevent infinitely looping mutator methods.
 
-Mutators allow you to convert properties as they are set, or create calculated
-data. Mutators and accessors are applied when properties are read using object
-notation, or using ``get()`` and ``set()``. For example::
+Mutators allow you to convert fields as they are set, or create calculated
+data. Mutators and accessors are applied when fields are read using property
+access, or using ``get()`` and ``set()``. For example::
 
     namespace App\Model\Entity;
 
@@ -194,7 +194,7 @@ notation, or using ``get()`` and ``set()``. For example::
         }
     }
 
-The mutator would be run when setting the property through any of these two
+The mutator would be run when setting the field through any of these two
 ways::
 
     $user->title = 'foo'; // slug is set as well
@@ -204,14 +204,14 @@ ways::
 
   Accessors are also run before entities are persisted to the database.
   If you want to transform fields but not persist that transformation,
-  we recommend using virtual properties as those are not persisted.
+  we recommend using virtual fields as those are not persisted.
 
-.. _entities-virtual-properties:
+.. _entities-virtual-fields:
 
-Creating Virtual Properties
----------------------------
+Creating Virtual Fields
+-----------------------
 
-By defining accessors you can provide access to fields/properties that do not
+By defining accessors you can provide access to fields that do not
 actually exist. For example if your users table has ``first_name`` and
 ``last_name`` you could create a method for the full name::
 
@@ -227,21 +227,21 @@ actually exist. For example if your users table has ``first_name`` and
         }
     }
 
-You can access virtual properties as if they existed on the entity. The property
-name will be the lower case and underscored version of the method::
+You can access virtual fields as if they existed on the entity. The property
+name will be the lower case and underscored version of the method (``full_name``)::
 
     echo $user->full_name;
 
-Do bear in mind that virtual properties cannot be used in finds. If you want
-virtual properties to be part of JSON or array representations of your entities,
-see :ref:`exposing-virtual-properties`.
+Do bear in mind that virtual fields cannot be used in finds. If you want
+them to be part of JSON or array representations of your entities,
+see :ref:`exposing-virtual-fields`.
 
 Checking if an Entity Has Been Modified
 =======================================
 
 .. php:method:: dirty($field = null, $dirty = null)
 
-You may want to make code conditional based on whether or not properties have
+You may want to make code conditional based on whether or not fields have
 changed in an entity. For example, you may only want to validate fields when
 they change::
 
@@ -250,18 +250,19 @@ they change::
     $article->isDirty('title');
 
 You can also flag fields as being modified. This is handy when appending into
-array properties::
+array fields as this wouldn't automatically mark the field as dirty, only
+exchanging completely would.::
 
     // Add a comment and mark the field as changed.
     // Prior to 3.5 use dirty()
     $article->comments[] = $newComment;
     $article->setDirty('comments', true);
 
-In addition you can also base your conditional code on the original property
+In addition you can also base your conditional code on the original field
 values by using the ``getOriginal()`` method. This method will either return
-the original value of the property if it has been modified or its actual value.
+the original value of the field if it has been modified or its actual value.
 
-You can also check for changes to any property in the entity::
+You can also check for changes to any field in the entity::
 
     // See if the entity has changed
     // Prior to 3.5 use dirty()
@@ -277,7 +278,7 @@ by passing an extra option::
 
     $article = new Article(['title' => 'New Article'], ['markClean' => true]);
 
-To get a list of all dirty properties of an ``Entity`` you may call::
+To get a list of all dirty fields of an ``Entity`` you may call::
 
     $dirtyFields = $entity->getDirty();
 
@@ -331,13 +332,13 @@ on an entity, making it easier to test code that works with error messages::
 Mass Assignment
 ===============
 
-While setting properties to entities in bulk is simple and convenient, it can
+While setting fields to entities in bulk is simple and convenient, it can
 create significant security issues. Bulk assigning user data from the request
 into an entity allows the user to modify any and all columns. When using
 anonymous entity classes or creating the entity class with the :doc:`/bake`
 CakePHP does not protect against mass-assignment.
 
-The ``_accessible`` property allows you to provide a map of properties and
+The ``_accessible`` property allows you to provide a map of fields and
 whether or not they can be mass-assigned. The values ``true`` and ``false``
 indicate whether a field can or cannot be mass-assigned::
 
@@ -369,7 +370,7 @@ fallback behavior if a field is not specifically named::
         ];
     }
 
-.. note:: If the ``*`` property is not defined it will default to ``false``.
+.. note:: If the ``*`` field is not defined it will default to ``false``.
 
 Avoiding Mass Assignment Protection
 -----------------------------------
@@ -408,7 +409,7 @@ Bypassing Field Guarding
 There are some situations when you want to allow mass-assignment to guarded
 fields::
 
-    $article->set($properties, ['guard' => false]);
+    $article->set($fields, ['guard' => false]);
 
 By setting the ``guard`` option to ``false``, you can ignore the accessible
 field list for a single call to ``set()``.
@@ -524,15 +525,15 @@ applied. Entities are recursively converted to JSON as well. This means that if 
 eager loaded entities and their associations CakePHP will correctly handle
 converting the associated data into the correct format.
 
-.. _exposing-virtual-properties:
+.. _exposing-virtual-fields:
 
-Exposing Virtual Properties
----------------------------
+Exposing Virtual Fields
+-----------------------
 
 By default virtual fields are not exported when converting entities to
-arrays or JSON. In order to expose virtual properties you need to make them
+arrays or JSON. In order to expose virtual fields you need to make them
 visible. When defining your entity class you can provide a list of virtual
-properties that should be exposed::
+field that should be exposed::
 
     namespace App\Model\Entity;
 
@@ -547,12 +548,12 @@ This list can be modified at runtime using ``virtualProperties``::
 
     $user->virtualProperties(['full_name', 'is_admin']);
 
-Hiding Properties
------------------
+Hiding Fields
+-------------
 
 There are often fields you do not want exported in JSON or array formats. For
 example it is often unwise to expose password hashes or account recovery
-questions. When defining an entity class, define which properties should be
+questions. When defining an entity class, define which fields should be
 hidden::
 
     namespace App\Model\Entity;
