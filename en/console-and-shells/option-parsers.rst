@@ -358,8 +358,6 @@ in either an array or a string, you can set the value of the description::
 
     // Set multiple lines at once
     $parser->setDescription(['line one', 'line two']);
-    // Prior to 3.4
-    $parser->description(['line one', 'line two']);
 
     // Read the current value
     $parser->getDescription();
@@ -375,8 +373,6 @@ can set the value of the epilog::
 
     // Set multiple lines at once
     $parser->setEpilog(['line one', 'line two']);
-    // Prior to 3.4
-    $parser->epilog(['line one', 'line two']);
 
     // Read the current value
     $parser->getEpilog();

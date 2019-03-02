@@ -24,8 +24,7 @@ build your own backend. The built-in caching engines are:
   work well in files.
 * ``Apcu`` APCu cache uses the PHP `APCu <http://php.net/apcu>`_ extension.
   This extension uses shared memory on the webserver to store objects.
-  This makes it very fast, and able to provide atomic read/write features. Prior
-  to 3.6.0 ``ApcuEngine`` was named ``ApcEngine``.
+  This makes it very fast, and able to provide atomic read/write features.
 * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
   extension. Wincache is similar to APC in features and performance, but
   optimized for Windows and IIS.

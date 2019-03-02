@@ -21,9 +21,6 @@ This will add the following to your **src/Application.php**::
     // In the bootstrap method add:
     $this->addPlugin('MyPlugin');
 
-    // Prior to 3.6, add the following to config/bootstrap.php
-    Plugin::load('MyPlugin');
-
 If you are loading a plugin that only provides CLI tools - like bake - you can
 update your ``bootstrap_cli.php`` with::
 

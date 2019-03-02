@@ -168,7 +168,6 @@ By default queries and result sets will return :doc:`/orm/entities` objects. You
 can retrieve basic arrays by disabling hydration::
 
     $query->enableHydration(false);
-    // Prior to 3.4.0
     $query->hydrate(false);
 
     // $data is ResultSet that contains array data.
@@ -241,8 +240,6 @@ a table::
         public function initialize(array $config)
         {
             $this->setDisplayField('title');
-            // Prior to 3.4.0
-            $this->displayField('title');
         }
     }
 
@@ -571,8 +568,6 @@ associations and filter them by conditions. To specify conditions, pass an anony
 function that receives as the first argument a query object, ``\Cake\ORM\Query``::
 
     // In a controller or table method.
-    // Prior to 3.5.0 you would use contain(['Comments' => function () { ... }])
-
     $query = $articles->find()->contain('Comments', function (Query $q) {
         return $q
             ->select(['body', 'author_id'])
@@ -651,7 +646,7 @@ Alternatively, if you have multiple associations, you can use ``enableAutoFields
     // and Tags.
     $query->select(['id', 'title'])
         ->contain(['Comments', 'Tags'])
-        ->enableAutoFields(true) // Prior to 3.4.0 use autoFields(true)
+        ->enableAutoFields(true)
         ->contain(['Users' => function(Query $q) {
             return $q->autoFields(true);
         }]);
@@ -834,7 +829,7 @@ data, you can use the ``leftJoinWith()`` function::
     $query->select(['total_comments' => $query->func()->count('Comments.id')])
         ->leftJoinWith('Comments')
         ->group(['Articles.id'])
-        ->enableAutoFields(true); // Prior to 3.4.0 use autoFields(true);
+        ->enableAutoFields(true);
 
 The results for the above query will contain the article data and the
 ``total_comments`` property for each of them.
@@ -850,7 +845,7 @@ word, per author::
             return $q->where(['Tags.name' => 'awesome']);
         })
         ->group(['Authors.id'])
-        ->enableAutoFields(true); // Prior to 3.4.0 use autoFields(true);
+        ->enableAutoFields(true);
 
 This function will not load any columns from the specified associations into the
 result set.
@@ -894,8 +889,6 @@ Dynamically changing the strategy in this way will only apply to a specific
 query. If you want to make the strategy change permanent you can do::
 
     $articles->FirstComment->setStrategy('select');
-    // Prior to 3.4.0
-    $articles->FirstComment->strategy('select');
 
 Using the ``select`` strategy is also a great way of making associations with
 tables in another database, since it would not be possible to fetch records
@@ -928,9 +921,6 @@ You can also make the strategy permanent for the association by doing::
 
     $articles->Comments->setStrategy('subquery');
 
-    // Prior to 3.4.0
-    $articles->Comments->strategy('subquery');
-
 Lazy Loading Associations
 =========================
 
@@ -955,8 +945,6 @@ a data set that does not fit into memory you can disable buffering on the query
 to stream results::
 
     $query->enableBufferedResults(false);
-    // Prior to 3.4.0
-    $query->bufferResults(false);
 
 Turning buffering off has a few caveats:
 
@@ -1174,7 +1162,7 @@ Finally, we put everything together::
     $wordCount = $articles->find()
         ->where(['published' => true])
         ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
-        ->enableHydrate(false) // Prior to 3.4.0 use hydrate(false)
+        ->enableHydrate(false)
         ->mapReduce($mapper, $reducer)
         ->toArray();
 
@@ -1234,7 +1222,7 @@ of followers per user::
 And we supply our functions to a query::
 
     $fakeFriends = $friends->find()
-        ->enableHydrate(false) // Prior to 3.4.0 use hydrate(false)
+        ->enableHydrate(false)
         ->mapReduce($mapper, $reducer)
         ->toArray();
 

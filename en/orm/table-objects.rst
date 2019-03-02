@@ -49,9 +49,6 @@ method::
         public function initialize(array $config)
         {
             $this->setTable('my_table');
-
-            // Prior to 3.4.0
-            $this->table('my_table');
         }
 
     }
@@ -69,9 +66,6 @@ If you need to modify this you can use the ``setPrimaryKey()`` method::
         public function initialize(array $config)
         {
             $this->setPrimaryKey('my_id');
-
-            // Prior to 3.4.0
-            $this->primaryKey('my_id');
         }
     }
 
@@ -89,9 +83,6 @@ conventions you can use the ``setEntityClass()`` method to change things up::
         public function initialize(array $config)
         {
             $this->setEntityClass('App\Model\Entity\PO');
-
-            // Prior to 3.4.0
-            $this->entityClass('App\Model\Entity\PO');
         }
     }
 
@@ -110,9 +101,6 @@ can do this by using the ``TableRegistry`` class::
 
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
-    // Prior to 3.6.0
-    $articles = TableRegistry::get('Articles');
-
 The TableRegistry class provides the various dependencies for constructing
 a table, and maintains a registry of all the constructed table instances making
 it easier to build relations and configure the ORM. See
@@ -128,10 +116,6 @@ correctly load plugin table classes use the following::
 
     // Vendor prefixed plugin table
     $articlesTable = TableRegistry::getTableLocator()->get('VendorName/PluginName.Articles');
-
-    // Prior to 3.6.0
-    $articlesTable = TableRegistry::get('PluginName.Articles');
-    $articlesTable = TableRegistry::get('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
 

@@ -121,7 +121,6 @@ To change the language for translated strings you can call this method::
 
     use Cake\I18n\I18n;
 
-    // Prior to 3.5 use I18n::locale()
     I18n::setLocale('de_DE');
 
 This will also change how numbers and dates are formatted when using one of the
@@ -412,7 +411,6 @@ minimum that is required for creating a translator is that the loader function
 should return a ``Aura\Intl\Package`` object. Once the code is in place you can
 use the translation functions as usual::
 
-    // Prior to 3.5 use I18n::locale()
     I18n::setLocale('fr_FR');
     __d('animals', 'Dog'); // Returns "Chien"
 
@@ -425,7 +423,6 @@ For example, you can still use **.po** files, but loaded from another location::
     use Cake\I18n\MessagesFileLoader as Loader;
 
     // Load messages from resources/locales/folder/sub_folder/filename.po
-    // Prior to 3.5 use translator()
     I18n::setTranslator(
         'animals',
         new Loader('filename', 'folder/sub_folder', 'po'),
@@ -578,7 +575,6 @@ the current locale setting and use the right classes::
     use Cake\I18n\Time;
     use Cake\I18n\Number;
 
-    // Prior to 3.5 use I18n::locale()
     I18n::setLocale('fr-FR');
 
     $date = new Time('2015-04-05 23:00:00');
@@ -634,8 +630,6 @@ automatically set the locale based on the current user::
         $middleware->add(new LocaleSelectorMiddleware(['en_US', 'fr_FR']));
     }
 
-    // Prior to 3.3.0, use the DispatchFilter
-    // in config/bootstrap.php
     DispatcherFactory::add('LocaleSelector');
 
     // Restrict the locales to only en_US, fr_FR

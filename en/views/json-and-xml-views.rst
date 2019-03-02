@@ -216,8 +216,6 @@ mappings in your controller::
     namespace App\Controller;
 
     use App\Controller\AppController;
-
-    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
     use Cake\Http\Exception\NotFoundException;
 
     class VideosController extends AppController
@@ -248,8 +246,6 @@ mappings in your controller::
             $this->set('_serialize', ['videos']);
 
             // Set Force Download
-            // Prior to 3.4.0
-            // $this->response->download('report-' . date('YmdHis') . '.' . $format);
             return $this->response->withDownload('report-' . date('YmdHis') . '.' . $format);
         }
     }

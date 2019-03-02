@@ -318,7 +318,6 @@ page count.
 So you could either let the normal error page be rendered or use a try catch
 block and take appropriate action when a ``NotFoundException`` is caught::
 
-    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
     use Cake\Http\Exception\NotFoundException;
 
     public function index()

@@ -246,7 +246,6 @@ changed in an entity. For example, you may only want to validate fields when
 they change::
 
     // See if the title has been modified.
-    // Prior to 3.5 use dirty()
     $article->isDirty('title');
 
 You can also flag fields as being modified. This is handy when appending into
@@ -254,7 +253,6 @@ array fields as this wouldn't automatically mark the field as dirty, only
 exchanging completely would.::
 
     // Add a comment and mark the field as changed.
-    // Prior to 3.5 use dirty()
     $article->comments[] = $newComment;
     $article->setDirty('comments', true);
 
@@ -265,7 +263,6 @@ the original value of the field if it has been modified or its actual value.
 You can also check for changes to any field in the entity::
 
     // See if the entity has changed
-    // Prior to 3.5 use dirty()
     $article->isDirty();
 
 To remove the dirty mark from fields in an entity, you can use the ``clean()``
@@ -298,13 +295,9 @@ stored on the entity itself. You can access any validation errors using the
 
     // Get all the errors
     $errors = $user->getErrors();
-    // Prior to 3.4.0
-    $errors = $user->errors();
 
     // Get the errors for a single field.
     $errors = $user->getError('password');
-    // Prior to 3.4.0
-    $errors = $user->errors('password');
 
     // Does the entity or any nested entity have an error.
     $user->hasErrors();
@@ -320,9 +313,6 @@ on an entity, making it easier to test code that works with error messages::
         'password' => ['Password is required'],
         'username' => ['Username is required']
     ]);
-
-    // Prior to 3.4.0
-    $user->errors('password', ['Password is required.']);
 
 .. versionadded:: 3.7.0
     ``hasErrors()`` was added.

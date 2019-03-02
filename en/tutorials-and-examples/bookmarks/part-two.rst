@@ -80,8 +80,7 @@ And in **templates/Users/login.php** add the following::
 
 .. note::
 
-   The ``control()`` method is available since 3.4. For prior versions you can
-   use the ``input()`` method instead.
+   The ``control()`` method is available since 3.4.
 
 Now that we have a simple login form, we should be able to log in with one of
 the users that has a hashed password.

@@ -2148,8 +2148,6 @@ You can also change the templates at runtime using the ``setTemplates()`` method
         'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
     $this->Form->setTemplates($myTemplates);
-    // Prior to 3.4
-    $this->Form->templates($myTemplates);
 
 .. warning::
 
@@ -2323,8 +2321,6 @@ specific fields from the generated controls, set them to ``false`` in the
 ``$fields`` parameter::
 
     echo $this->Form->allControls(['password' => false]);
-    // Or prior to 3.4.0:
-    echo $this->Form->allInputs(['password' => false]);
 
 .. _associated-form-inputs:
 
@@ -2504,7 +2500,6 @@ widgets using the ``addWidget()`` method would look like::
     );
 
     // Using an instance - requires you to resolve dependencies.
-    // Prior to 3.6.0 use widgetRegistry() to fetch widgets.
     $autocomplete = new AutocompleteWidget(
         $this->Form->getTemplater(),
         $this->Form->getWidgetLocator()->get('text'),

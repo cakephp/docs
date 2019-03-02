@@ -128,7 +128,6 @@ when a field can or cannot be empty:
 
 An example of these methods in action is::
 
-    // Prior to 3.7 you must use allowEmpty() or notEmpty().
     $validator->allowEmptyDateTime('published')
         ->allowEmptyString('title', false, 'Title cannot be empty')
         ->allowEmptyString('body', 'update', 'Body cannot be empty')
