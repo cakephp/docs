@@ -60,7 +60,7 @@ List of Methods
     :php:meth:`indexBy`, :php:meth:`insert`, :php:meth:`isEmpty`, :php:meth:`last`
     :php:meth:`listNested`, :php:meth:`map`, :php:meth:`match`, :php:meth:`max`
     :php:meth:`median`, :php:meth:`min`, :php:meth:`nest`, :php:meth:`prepend`
-    :php:meth:`prependItem`, :php:meth:`reduce`, :php:meth:`reject` :php:meth:`sample`
+    :php:meth:`prependItem`, :php:meth:`reduce`, :php:meth:`reject`, :php:meth:`sample`
     :php:meth:`shuffle`, :php:meth:`skip`, :php:meth:`some`, :php:meth:`sortBy`
     :php:meth:`stopWhen`, :php:meth:`sumOf`, :php:meth:`take`, :php:meth:`through`
     :php:meth:`transpose`, :php:meth:`unfold`, :php:meth:`zip`
@@ -218,7 +218,7 @@ instances by the ORM) you may want to group results by date::
 
 You can stop the iteration at any point using the ``stopWhen()`` method. Calling
 it in a collection will create a new one that will stop yielding results if the
-passed callable returns false for one of the elements::
+passed callable returns true for one of the elements::
 
     $items = [10, 20, 50, 1, 2];
     $collection = new Collection($items);
@@ -923,7 +923,7 @@ collection containing the values from both sources::
         return strpos($tweet, 'cakefest');
     });
 
-.. php:method::appendItem($value, $key)
+.. php:method:: appendItem($value, $key)
 
 Allows you to append an item with an optional key to the collection. If you
 specify a key that already exists in the collection, the value will not be
@@ -946,7 +946,7 @@ both sources::
 .. versionadded:: 3.6.0
     prepend() was added.
 
-.. php:method::prependItem($value, $key)
+.. php:method:: prependItem($value, $key)
 
 Allows you to prepend an item with an optional key to the collection. If you
 specify a key that already exists in the collection, the value will not be

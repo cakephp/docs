@@ -76,7 +76,7 @@ To create a default validation object in your table, create the
                 ->notEmpty('title');
 
             $validator
-                ->allowEmpty('link')
+                ->allowEmptyString('link')
                 ->add('link', 'valid-url', ['rule' => 'url']);
 
             ...
@@ -290,6 +290,8 @@ before entities are persisted. Some example domain rules are:
 
 Domain rules are checked when calling the Table ``save()`` and ``delete()`` methods.
 
+.. _creating-a-rules-checker:
+
 Creating a Rules Checker
 ------------------------
 
@@ -474,6 +476,46 @@ You may want to conditionally apply rules based on entity data::
         return false;
     }, 'userExists');
 
+Conditional/Dynamic Error Messages
+----------------------------------
+
+Rules, being it :ref:`custom callables <creating-a-rules-checker>`, or
+:ref:`rule objects <creating-custom-rule-objects>`, can either return a boolean, indicating
+whether they passed, or they can return a string, which means that the rule did not pass,
+and that the returned string should be used as the error message.
+
+Possible existing error messages defined via the ``message`` option will be overwritten
+by the ones returned from the rule::
+
+    $rules->add(
+        function ($entity, $options) {
+            if (!$entity->length) {
+                return false;
+            }
+
+            if ($entity->length < 10) {
+                return 'Error message when value is less than 10';
+            }
+
+            if ($entity->length > 20) {
+                return 'Error message when value is greater than 20';
+            }
+
+            return true;
+        },
+        'ruleName',
+        [
+            'errorField' => 'length',
+            'message' => 'Generic error message used when `false` is returned'
+        ]
+     );
+
+.. note::
+
+    Note that in order for the returned message to be actually used, you *must* also supply the
+    ``errorField`` option, otherwise the rule will just silently fail to pass, ie without an
+    error message being set on the entity!
+
 Creating Custom re-usable Rules
 -------------------------------
 
@@ -491,6 +533,8 @@ You may want to re-use custom domain rules. You can do so by creating your own i
     }
 
 See the core rules for examples on how to create such rules.
+
+.. _creating-custom-rule-objects:
 
 Creating Custom Rule Objects
 ----------------------------

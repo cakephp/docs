@@ -72,6 +72,17 @@ Obtenir une liste aplatie des descendants pour un nœud est également facile::
     foreach ($descendants as $category) {
         echo $category->name . "\n";
     }
+    
+Si vous souhaitez uniquement les enfants directs du niveau en dessous ::
+
+    $directDescendants = $categories->find('children', ['for' => 1, 'direct' => true]);
+
+    foreach ($directDescendants as $category) {
+        echo $category->name . "\n";
+    }
+    
+vous n'obtiendrez ainsi que les enfants du niveau n-1 et pas ceux des niveaux n-2,n-3 ... etc ...
+
 
 Si vous avez besoin de passer des conditions, vous pouvez le faire
 comme avec n'importe quelle requête::

@@ -18,7 +18,7 @@ Since the ORM now returns Collections and Entities, debugging these objects can
 be more complicated than in previous CakePHP versions. There are now various
 ways to inspect the data returned by the ORM.
 
-- ``debug($query)`` Shows the SQL and bound params, does not show results.
+- ``debug($query)`` Shows the SQL and bound parameters, does not show results.
 - ``sql($query)`` Shows the final rendered SQL, but only when having DebugKit installed.
 - ``debug($query->all())`` Shows the ResultSet properties (not the results).
 - ``debug($query->toList())`` An easy way to show each of the results.
@@ -399,6 +399,14 @@ If you need to modify the results after they have been fetched you should use
 a :ref:`map-reduce` function to modify the results. The map reduce features
 replace the 'afterFind' callback found in previous versions of CakePHP.
 
+.. note::
+
+    Passing arguments exposed in the **config** array,
+    ``$products->find('sizes', ['large', 'medium'])``
+    can give unexpected results when chaining
+    custom finders. Always pass options as an associative array,
+    ``$products->find('sizes', ['values' => ['large', 'medium']])``
+
 .. _dynamic-finders:
 
 Dynamic Finders
@@ -427,9 +435,9 @@ You can also create ``OR`` conditions::
 
     $query = $users->findAllByUsernameOrEmail('joebob', 'joe@example.com');
 
-While you can use either OR or AND conditions, you cannot combine the two in a
-single dynamic finder. Other query options like ``contain`` are also not
-supported with dynamic finders. You should use :ref:`custom-find-methods` to
+While you can use either ``OR`` or ``AND`` conditions, you cannot combine the
+two in a single dynamic finder. Other query options like ``contain`` are also
+not supported with dynamic finders. You should use :ref:`custom-find-methods` to
 encapsulate more complex queries.  Lastly, you can also combine dynamic finders
 with custom finders::
 
@@ -446,8 +454,9 @@ Once you have a query object from a dynamic finder, you'll need to call
 
 .. note::
 
-    While dynamic finders make it simple to express queries, they come with some
-    additional performance overhead.
+    While dynamic finders make it simple to express queries, they add a small
+    amount of overhead. You cannot call ``findBy`` methods from a query object.
+    When using a finder chain the dynamic finder must be called first.
 
 Retrieving Associated Data
 ==========================
@@ -558,12 +567,13 @@ Passing Conditions to Contain
 -----------------------------
 
 When using ``contain()`` you are able to restrict the data returned by the
-associations and filter them by conditions::
+associations and filter them by conditions. To specify conditions, pass an anonymous
+function that receives as the first argument a query object, ``\Cake\ORM\Query``::
 
     // In a controller or table method.
     // Prior to 3.5.0 you would use contain(['Comments' => function () { ... }])
 
-    $query = $articles->find()->contain('Comments', function ($q) {
+    $query = $articles->find()->contain('Comments', function (Query $q) {
         return $q
             ->select(['body', 'author_id'])
             ->where(['Comments.approved' => true]);
@@ -572,7 +582,7 @@ associations and filter them by conditions::
 This also works for pagination at the Controller level::
 
     $this->paginate['contain'] = [
-        'Comments' => function (\Cake\ORM\Query $query) {
+        'Comments' => function (Query $query) {
             return $query->select(['body', 'author_id'])
             ->where(['Comments.approved' => true]);
         }
@@ -589,7 +599,7 @@ notation::
 
     $query = $articles->find()->contain([
         'Comments',
-        'Authors.Profiles' => function ($q) {
+        'Authors.Profiles' => function (Query $q) {
             return $q->where(['Profiles.is_published' => true]);
         }
     ]);
@@ -601,7 +611,7 @@ finders in your associations, you can use them inside ``contain()``::
 
     // Bring all articles, but only bring the comments that are approved and
     // popular.
-    $query = $articles->find()->contain('Comments', function ($q) {
+    $query = $articles->find()->contain('Comments', function (Query $q) {
         return $q->find('approved')->find('popular');
     });
 
@@ -619,7 +629,7 @@ case you should use an array passing ``foreignKey`` and ``queryBuilder``::
     $query = $articles->find()->contain([
         'Authors' => [
             'foreignKey' => false,
-            'queryBuilder' => function ($q) {
+            'queryBuilder' => function (Query $q) {
                 return $q->where(...); // Full conditions for filtering
             }
         ]
@@ -642,7 +652,7 @@ Alternatively, if you have multiple associations, you can use ``enableAutoFields
     $query->select(['id', 'title'])
         ->contain(['Comments', 'Tags'])
         ->enableAutoFields(true) // Prior to 3.4.0 use autoFields(true)
-        ->contain(['Users' => function($q) {
+        ->contain(['Users' => function(Query $q) {
             return $q->autoFields(true);
         }]);
 
@@ -716,7 +726,7 @@ already familiar to you::
     example, when the same users comments more than once on a single article.
 
 The data from the association that is 'matched' will be available on the
-``_matchingData`` property of entities. If you both match and contain the same
+``_matchingData`` property of entities. If both match and contain the same
 association, you can expect to get both the ``_matchingData`` and standard
 association properties in your results.
 
@@ -917,6 +927,7 @@ databases that limit the amount of bound parameters per query, such as
 You can also make the strategy permanent for the association by doing::
 
     $articles->Comments->setStrategy('subquery');
+
     // Prior to 3.4.0
     $articles->Comments->strategy('subquery');
 
@@ -1076,7 +1087,7 @@ Modifying Results with Map/Reduce
 
 More often than not, find operations require post-processing the data that is
 found in the database. While entities' getter methods can take care of most of
-the virtual property generation or special data formatting, sometimes you
+the virtual field generation or special data formatting, sometimes you
 need to change the data structure in a more fundamental way.
 
 For those cases, the ``Query`` object offers the ``mapReduce()`` method, which

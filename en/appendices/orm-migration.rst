@@ -256,7 +256,7 @@ models you used to rely on having an afterFind for all find operations you can
 migrate this code in one of a few ways:
 
 1. Override your entity constructor method and do additional formatting there.
-2. Create accessor methods in your entity to create the virtual properties.
+2. Create accessor methods in your entity to create the virtual fields.
 3. Redefine ``findAll()`` and use ``formatResults``.
 
 In the 3rd case above your code would look like::

@@ -192,7 +192,7 @@ parts that change:
 .. code-block:: php
 
     <!-- templates/Common/view.php -->
-    <h1><?= $this->fetch('title') ?></h1>
+    <h1><?= h($this->fetch('title')) ?></h1>
     <?= $this->fetch('content') ?>
 
     <div class="actions">
@@ -370,7 +370,7 @@ The ``HtmlHelper`` ties into view blocks, and its ``script()``, ``css()``, and
     <!DOCTYPE html>
     <html lang="en">
         <head>
-        <title><?= $this->fetch('title') ?></title>
+        <title><?= h($this->fetch('title')) ?></title>
         <?= $this->fetch('script') ?>
         <?= $this->fetch('css') ?>
         </head>
@@ -450,7 +450,8 @@ You can set the ``title`` block content from inside your view file::
 
     $this->assign('title', 'View Active Users');
 
-Empty values for the ``title`` block will be automatically replaced with a representation of the current template path, such as ``'Admin/Articles'``.
+Empty values for the ``title`` block will be automatically replaced with
+a representation of the current template path, such as ``'Admin/Articles'``.
 
 You can create as many layouts as you wish: just place them in the
 **templates/layout** directory, and switch between them inside of your
@@ -517,8 +518,10 @@ syntax`. For example, to use the contact layout from the Contacts plugin::
 
     class UsersController extends AppController
     {
-        public function view_active()
+        public function viewActive()
         {
+            $this->viewBuilder()->setLayout('Contacts.contact');
+            // or the following before 3.4
             $this->viewBuilder()->layout('Contacts.contact');
             // or the following before 3.1
             $this->layout = 'Contacts.contact';
@@ -563,6 +566,10 @@ controller works with template files). In the above example, the
 
     // Inside templates/element/helpbox.php
     echo $helptext; // Outputs "Oh, this text is very helpful."
+
+Keep in mind that in those view vars are merged with the view vars from the view
+itself. So all view vars set using ``Controller::set()`` in the controller and
+``View::set()`` in the view itself are also available inside the element.
 
 The ``View::element()`` method also supports options for the element.
 The options supported are 'cache' and 'callbacks'. An example::
@@ -729,7 +736,7 @@ components of CakePHP, view classes have a few conventions:
   **src/View/PdfView.php**
 * View classes should be suffixed with ``View``. For example: ``PdfView``.
 * When referencing view class names you should omit the ``View`` suffix. For
-  example: ``$this->viewBuilder()->className('Pdf');``.
+  example: ``$this->viewBuilder()->setClassName('Pdf');``.
 
 You'll also want to extend ``View`` to ensure things work correctly::
 

@@ -37,13 +37,15 @@
 
         protected function _buildValidator(Validator $validator)
         {
-            return $validator->add('name', 'length', [
+            $validator->add('name', 'length', [
                     'rule' => ['minLength', 10],
                     'message' => '名前は必須です'
                 ])->add('email', 'format', [
                     'rule' => 'email',
                     'message' => '有効なメールアドレスが要求されます',
                 ]);
+
+            return $validator;
         }
 
         protected function _execute(array $data)
@@ -57,7 +59,7 @@
 
 * ``_buildSchema`` は FormHelper が HTML フォームを作成する際に使用する
   スキーマデータを定義するために使います。フィールドの型、長さ、および精度を定義できます。
-* ``_buildValidator`` はバリデーターを加えることができる
+* ``validationDefault`` はバリデーターを加えることができる
   :php:class:`Cake\\Validation\\Validator` のインスタンスを受け取ります。
 * ``_execute`` では ``execute()`` が呼ばれ、データが有効な時に望むふるまいを定義します。
 
@@ -100,9 +102,8 @@
 フォーム値の設定
 ================
 
-モデルのないフォームのフィールドに値を設定するために、
-FormHelper によって作成される他のすべてのフォームと同様に、
-``$this->request->data()`` を使って値を定義することができます。 ::
+モデルのないフォームのフィールドにデフォルト値を設定するために、 ``setData()`` メソッドが使用できます。
+このメソッドで設定された値はフォームオブジェクトの既存のデータを上書きします。 ::
 
     // 何らかのコントローラー中で
     namespace App\Controller;
@@ -124,29 +125,42 @@ FormHelper によって作成される他のすべてのフォームと同様に
             }
 
             if ($this->request->is('get')) {
-                // たとえばユーザーモデルの値
-                $this->request->data('name', 'John Doe');
-                $this->request->data('email','john.doe@example.com');
+                $contact->setData([
+                    'name' => 'John Doe',
+                    'email' => 'john.doe@example.com'
+                ]);
             }
 
             $this->set('contact', $contact);
         }
     }
 
+3.7.0 より前の場合は、request を修正してフォームのデフォルト値を設定してください。 ::
+
+    // GET 時にデフォルト値を設定
+    if ($this->request->is('get')) {
+        // たとえばユーザーモデルの値
+        $this->request->data('name', 'John Doe');
+        $this->request->data('email','john.doe@example.com');
+    }
+
 値はリクエストメソッドが GET の時にのみ定義されるべきで、
-さもないと正しくないまたは保存されていない直前の POST データを上書きしてしまいます。
+さもないと修正が必要なバリデーションエラーのある直前の POST データを上書きしてしまいます。
 
 フォームエラーの取得
 ====================
 
 フォームが検証されたら、エラーを取得することができます。 ::
 
-    $errors = $form->errors();
+    $errors = $form->getErrors(); // $form->errors(); // 3.7.0 より前
     /* $errors の中身
     [
         'email' => ['有効なメールアドレスが要求されます']
     ]
     */
+
+.. versionadded:: 3.7.0
+   ``errors()`` は非推奨になりました。代わりに ``getErrors()`` を使用してください。
 
 コントローラーから各フォームフィールドを無効化
 ==============================================
@@ -162,6 +176,10 @@ Validator クラスを使用せずに、コントローラーから各フォー�
     {
         $this->_errors = $errors;
     }
+
+.. versionchanged:: 3.5.1
+    ``setErrors`` をもう指定する必要はありません。これは、利便性のため ``Form``
+    クラスに既に含まれているからです。
 
 バリデータークラスのエラーの返し方にならって、 ``$errors`` はこの形式でなければなりません。 ::
 

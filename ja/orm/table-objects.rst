@@ -105,7 +105,10 @@
     // コントローラーやテーブルのメソッド内で
     use Cake\ORM\TableRegistry;
 
-    $articles = TableRegistry::get('Articles');
+    $articles = TableRegistry::getTableLocator()->get('Articles');
+
+    // 3.6.0 より前
+     $articles = TableRegistry::get('Articles');
 
 TableRegistry クラスはテーブルを作るための様々な依存関係を提供します。
 そして、作成されたすべてのテーブルインスタンスの設定を維持し、リレーションの構築と
@@ -117,9 +120,14 @@ ORM の設定を簡単にしてくれます。詳細は :ref:`table-registry-usa
 正しくロードするために、次のように使用してください。 ::
 
     // プラグインの Table
-    $articlesTable = TableRegistry::get('PluginName.Articles');
+    $articlesTable = TableRegistry::getTableLocator()->get('PluginName.Articles');
 
     // ベンダープレフィックス付きのプラグイン Table
+    $articlesTable = TableRegistry::getTableLocator()->get('VendorName/PluginName.Articles');
+
+
+    // 3.6.0 より前
+    $articlesTable = TableRegistry::get('PluginName.Articles');
     $articlesTable = TableRegistry::get('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
@@ -127,7 +135,7 @@ ORM の設定を簡単にしてくれます。詳細は :ref:`table-registry-usa
 コールバックのライフサイクル
 ============================
 
-上記で示した通り、テーブルオブジェクトは、いろいろなイベントを起こします。イベンドは、
+上記で示した通り、テーブルオブジェクトは、いろいろなイベントを起こします。イベントは、
 ORM 内でフックしたり、サブクラス化やメソッドをオーバーライドせずにロジックを加えたい時に便利です。
 イベントリスナーはテーブルクラスやビヘイビアークラスで定義できます。
 また、テーブルのイベントマネージャーをリスナーをバインドするために使えます。
@@ -431,6 +439,11 @@ TableRegistry の利用
 
     そのエイリアスにアクセスする前か、**最初** のアクセス時だけテーブルの設定が可能です。
     レジストリーが投入された後に設定しても効果がありません。
+
+.. note::
+
+    `Cake\ORM\TableRegistry` のスタティック API は 3.6.0 で非推奨になりました。
+    代わりにテーブルロケーターを直接使用してください。
 
 レジストリーの初期化（追加設定の消去）
 --------------------------------------

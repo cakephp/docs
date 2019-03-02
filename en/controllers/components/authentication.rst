@@ -263,7 +263,7 @@ If no parameter is passed, the returned URL will use the following rules:
 - Returns the normalized URL from the ``redirect`` query string value if it is
   present and for the same domain the current app is running on. Before 3.4.0,
   the ``Auth.redirect`` session value was used.
-- If there is no query string/session value and there is a config
+- If there is no query string/session value and there is a config with
   ``loginRedirect``, the ``loginRedirect`` value is returned.
 - If there is no redirect value and no ``loginRedirect``, ``/`` is returned.
 
@@ -558,7 +558,7 @@ uses. Using ``flash`` config you can configure the parameters
 - ``key`` - The key to use, defaults to 'default'. Prior to 3.4.0, the key
   defaulted to 'auth'.
 - ``element`` - The element name to use for rendering, defaults to null.
-- ``params`` - The array of additional params to use, defaults to ``[]``.
+- ``params`` - The array of additional parameters to use, defaults to ``[]``.
 
 In addition to the flash message settings you can customize other error
 messages ``AuthComponent`` uses. In your controller's ``beforeFilter()``, or
@@ -1045,7 +1045,7 @@ flash
 
     - ``element`` - The element to use; defaults to 'default'.
     - ``key`` - The key to use; defaults to 'auth'.
-    - ``params`` - The array of additional params to use; defaults to '[]'.
+    - ``params`` - The array of additional parameters to use; defaults to '[]'.
 
 loginAction
     A URL (defined as a string or array) to the controller action that handles

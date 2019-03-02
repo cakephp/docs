@@ -16,22 +16,13 @@ Plugin シェルを使用すると、コマンドプロンプトを経由して�
 
     bin/cake plugin load MyPlugin
 
-これはあなたの **config/bootstrap.php** に以下を追加します。 ::
+これはあなたの **src/Application.php** に以下を追加します。 ::
 
+    // bootstrap メソッドの中に追加
+    $this->addPlugin('MyPlugin');
+
+    // 3.6 より前は、config/bootstrap.php に以下を追加
     Plugin::load('MyPlugin');
-
-load タスクに ``-b`` または ``-r`` スイッチを追加すると、プラグインの
-``bootstrap`` と ``routes`` 値の読み込みを可能にします。 ::
-
-    bin/cake plugin load -b MyPlugin
-
-    // プラグインの bootstrap.php をロード
-    Plugin::load('MyPlugin', ['bootstrap' => true]);
-
-    bin/cake plugin load -r MyPlugin
-
-    // プラグインの routes.php をロード
-    Plugin::load('MyPlugin', ['routes' => true]);
 
 bake のような CLI ツールのみ提供するプラグインをロードする場合、以下のように
 ``bootstrap_cli.php`` を更新することができます。 ::
@@ -49,13 +40,13 @@ bake のような CLI ツールのみ提供するプラグインをロードす�
 
     bin/cake plugin unload MyPlugin
 
-これは **config/bootstrap.php** から ``Plugin::load('MyPlugin',...)``
+これは **src/Application.php** から ``$this->addPlugin('MyPlugin',...)``
 の行を削除します。
 
 プラグインのアセット
 --------------------
 
-CakePHP は、デフォルトで ``AssetFilter`` ディスパッチャーフィルターを使用して、
+CakePHP は、デフォルトで ``AssetMiddleware`` ミドルウェアを使用して、
 プラグインのアセットを提供しています。これはとても便利ですが、
 PHP を呼び出すことなく、直接ウェブサーバーがサービスを提供することができるように、
 アプリの webroot 下のプラグインのアセットをシンボリックリンク／コピーすることを

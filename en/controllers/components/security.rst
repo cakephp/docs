@@ -57,12 +57,23 @@ works::
 
     public function beforeFilter(Event $event)
     {
+        parent::beforeFilter($event);
+        
         $this->Security->setConfig('blackHoleCallback', 'blackhole');
     }
 
-    public function blackhole($type)
+    public function blackhole($type, SecurityException $exception)
     {
-        // Handle errors.
+        if ($exception->getMessage() === 'Request is not SSL and the action is required to be secure') {
+            // Reword the exception message with a translatable string.
+            $exception->setMessage(__('Please access the requested page through HTTPS'));
+        }
+        
+        // Re-throw the conditionally reworded exception.
+        throw $exception;
+
+        // Alternatively, handle the error, e.g. set a flash message &
+        // redirect to HTTPS version of the requested page.
     }
 
 .. note::
@@ -169,6 +180,8 @@ want and the Security Component will enforce them on its startup::
 
         public function beforeFilter(Event $event)
         {
+            parent::beforeFilter($event);
+
             if ($this->request->getParam('admin')) {
                 $this->Security->requireSecure();
             }
@@ -193,14 +206,20 @@ require secure SSL requests::
 
         public function beforeFilter(Event $event)
         {
+            parent::beforeFilter($event);
+
             if ($this->request->getParam('admin')) {
                 $this->Security->requireSecure();
             }
         }
 
-        public function forceSSL()
+        public function forceSSL($error = '', SecurityException $exception = null)
         {
-            return $this->redirect('https://' . env('SERVER_NAME') . $this->request->getRequestTarget());
+            if ($exception instanceof SecurityException && $exception->getType() === 'secure') {
+                return $this->redirect('https://' . env('SERVER_NAME') . Router::url($this->request->getRequestTarget()));
+            }
+            
+            throw $exception;
         }
     }
 
@@ -248,7 +267,9 @@ There may be cases where you want to disable all security checks for an action
 
         public function beforeFilter(Event $event)
         {
-             $this->Security->setConfig('unlockedActions', ['edit']);
+            parent::beforeFilter($event);
+
+            $this->Security->setConfig('unlockedActions', ['edit']);
         }
     }
 

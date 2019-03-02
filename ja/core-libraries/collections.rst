@@ -50,16 +50,17 @@
 .. csv-table::
     :class: docutils internal-toc
 
-    :php:meth:`append`, :php:meth:`avg`, :php:meth:`buffered`, :php:meth:`chunk`
-    :php:meth:`chunkWithKeys`, :php:meth:`combine`, :php:meth:`compile`, :php:meth:`contains`
-    :php:meth:`countBy`, :php:meth:`each`, :php:meth:`every`, :php:meth:`extract`
-    :php:meth:`filter`, :php:meth:`first`, :php:meth:`groupBy`, :php:meth:`indexBy`
-    :php:meth:`insert`, :php:meth:`isEmpty`, :php:meth:`last`, :php:meth:`listNested`
-    :php:meth:`map`, :php:meth:`match`, :php:meth:`max`, :php:meth:`median`
-    :php:meth:`min`, :php:meth:`nest`, :php:meth:`reduce`, :php:meth:`reject`
-    :php:meth:`sample`, :php:meth:`shuffle`, :php:meth:`skip`, :php:meth:`some`
-    :php:meth:`sortBy`, :php:meth:`stopWhen`, :php:meth:`sumOf`, :php:meth:`take`
-    :php:meth:`through`, :php:meth:`transpose`, :php:meth:`unfold`, :php:meth:`zip`
+    :php:meth:`append`, :php:meth:`appendItem`, :php:meth:`avg`, :php:meth:`buffered`
+    :php:meth:`chunk`, :php:meth:`chunkWithKeys`, :php:meth:`combine`, :php:meth:`compile`
+    :php:meth:`contains`, :php:meth:`countBy`, :php:meth:`each`, :php:meth:`every`
+    :php:meth:`extract`, :php:meth:`filter`, :php:meth:`first`, :php:meth:`groupBy`
+    :php:meth:`indexBy`, :php:meth:`insert`, :php:meth:`isEmpty`, :php:meth:`last`
+    :php:meth:`listNested`, :php:meth:`map`, :php:meth:`match`, :php:meth:`max`
+    :php:meth:`median`, :php:meth:`min`, :php:meth:`nest`, :php:meth:`prepend`
+    :php:meth:`prependItem`, :php:meth:`reduce`, :php:meth:`reject`, :php:meth:`sample`
+    :php:meth:`shuffle`, :php:meth:`skip`, :php:meth:`some`, :php:meth:`sortBy`
+    :php:meth:`stopWhen`, :php:meth:`sumOf`, :php:meth:`take`, :php:meth:`through`
+    :php:meth:`transpose`, :php:meth:`unfold`, :php:meth:`zip`
 
 反復
 ====
@@ -882,6 +883,39 @@ sample を満たすためのコレクション内に十分な要素がない場�
     $myTimeline->filter(function ($tweet) {
         return strpos($tweet, 'cakefest');
     });
+
+.. php:method:: appendItem($value, $key)
+
+オプションのキーを持つアイテムをコレクションに追加できます。
+コレクション内の既存のキーを指定した場合、値は上書きされません。 ::
+
+    $cakephpTweets = new Collection($tweets);
+    $myTimeline = $cakephpTweets->appendItem($newTweet, 99);
+
+.. versionadded:: 3.6.0
+    appendItem() が追加されました。
+
+.. php:method:: prepend(array|Traversable $items)
+
+``prepend()`` メソッドは両方のソースの値を含む新しいコレクションを返します。 ::
+
+    $cakephpTweets = new Collection($tweets);
+    $myTimeline = $cakephpTweets->prepend($phpTweets);
+
+.. versionadded:: 3.6.0
+    prepend() が追加されました。
+
+.. php:method:: prependItem($value, $key)
+
+オプションのキーを持つアイテムをコレクションに追加できます。
+コレクション内の既存のキーを指定した場合、値は上書きされません。 ::
+
+    $cakephpTweets = new Collection($tweets);
+    $myTimeline = $cakephpTweets->prependItem($newTweet, 99);
+
+.. versionadded:: 3.6.0
+    prependItem() が追加されました。
+
 
 .. warning::
 

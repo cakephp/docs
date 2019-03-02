@@ -116,14 +116,16 @@ data out of your application code and makes deployment simpler as you can simply
 change the configuration data. An example transport configuration looks like::
 
     use Cake\Mailer\Email;
+    use Cake\Mailer\TransportFactory;
 
     // Sample Mail configuration
-    Email::configTransport('default', [
+    // Prior to 3.7.0 use Email::configTransport()
+    TransportFactory::setConfig('default', [
         'className' => 'Mail'
     ]);
 
     // Sample SMTP configuration.
-    Email::configTransport('gmail', [
+    TransportFactory::setConfig('gmail', [
         'host' => 'ssl://smtp.gmail.com',
         'port' => 465,
         'username' => 'my@gmail.com',
@@ -136,8 +138,9 @@ prefix in the host and configure the port value accordingly. You can also
 enable TLS SMTP using the ``tls`` option::
 
     use Cake\Mailer\Email;
+    use Cake\Mailer\TransportFactory;
 
-    Email::configTransport('gmail', [
+    TransportFactory::setConfig('gmail', [
         'host' => 'smtp.gmail.com',
         'port' => 587,
         'username' => 'my@gmail.com',
@@ -164,15 +167,17 @@ The above configuration would enable TLS communication for email messages.
 Configuration options can also be provided as a :term:`DSN` string. This is
 useful when working with environment variables or :term:`PaaS` providers::
 
+    TransportFactory::setConfig('default', [
+        'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:587?tls=true',
+    ]);
+
+    // Prior to 3.7.0 use
     Email::configTransport('default', [
         'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:587?tls=true',
     ]);
 
 When using a DSN string you can define any additional parameters/options as
 query string arguments.
-
-.. deprecated:: 3.4.0
-    Use ``setConfigTransport()`` instead of ``configTransport()``.
 
 .. php:staticmethod:: dropTransport($key)
 
@@ -212,7 +217,7 @@ following configuration keys are used:
   you want to render a template without layout, set this field to null. See
   ``Email::template()``.
 - ``'viewVars'``: If you are using rendered content, set the array with
-  variables to be used in the view. See ``Email::viewVars()``.
+  variables to be used in the view. See ``Email::setViewVars()``.
 - ``'attachments'``: List of files to attach. See ``Email::attachments()``.
 - ``'emailFormat'``: Format of email (html, text or both). See ``Email::emailFormat()``.
 - ``'transport'``: Transport configuration name. See
@@ -282,10 +287,10 @@ This would use the following template files:
 When sending templated emails you have the option of sending either
 ``text``, ``html`` or ``both``.
 
-You can set view variables with ``Email::viewVars()``::
+You can set view variables with ``Email::setViewViars()``::
 
     $email = new Email('templated');
-    $email->viewVars(['value' => 12345]);
+    $email->setViewVars(['value' => 12345]);
 
 In your email templates you can use these with::
 
@@ -322,9 +327,9 @@ following path:
 **templates/plugin/TestTheme/plugin/Blog/email/text/new_comment.php**.
 
 .. deprecated:: 3.4.0
-    Use ``setTemplate()`` instead of ``template()``. Use ``setLayout()`` instead
-    of the layout argument of ``template()``. Use ``setTheme()`` instead of
-    ``theme()``.
+    Use ``viewBuilder()->setTemplate()`` instead of ``template()``. Use
+    ``viewBuilder()->setLayout()`` instead of the layout argument of
+    ``template()``. Use ``viewBuilder()->setTheme()`` instead of ``theme()``.
 
 Sending Attachments
 ===================
@@ -593,18 +598,11 @@ To test email, add ``Cake\TestSuite\EmailTrait`` to your test case.
 The ``EmailTrait`` provides your test case with a collection of assertions
 that you can perform on any emails sent by the application.
 
-First, replace all of your application's email transports with the
-``Cake\TestSuite\TestEmailTransport``. This transport intercepts emails instead
-of sending them, and allows you to assert against them.
+Adding the ``EmailTrait`` to your test case will replace all of your application's 
+email transports with the ``Cake\TestSuite\TestEmailTransport``. This transport 
+intercepts emails instead of sending them, and allows you to assert against them.
 
-In **tests/bootstrap.php**::
-
-    use Cake\TestSuite\TestEmailTransport;
-
-    // replaces existing transports with the TestEmailTransport for email assertions
-    TestEmailTransport::replaceAllTransports();
-
-Next, add the trait to your test case and perform a bit of cleanup in ``tearDown``::
+Add the trait to your test case to start testing emails::
 
     namespace App\Test\TestCase;
 
@@ -613,14 +611,6 @@ Next, add the trait to your test case and perform a bit of cleanup in ``tearDown
     class MyTestCase extends TestCase
     {
         use EmailTrait;
-
-        public function tearDown()
-        {
-            // other cleanup
-            parent::tearDown();
-            // clean up previously sent emails for the next test
-            TestEmailTransport::clearEmails();
-        }
     }
 
 .. versionadded:: 3.7.0

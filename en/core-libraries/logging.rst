@@ -26,7 +26,7 @@ Logging Configuration
 Configuring ``Log`` should be done during your application's bootstrap phase.
 The **config/app.php** file is intended for just this.  You can define
 as many or as few loggers as your application needs.  Loggers should be
-configured using :php:class:`Cake\\Core\\Log`. An example would be::
+configured using :php:class:`Cake\\Log\\Log`. An example would be::
 
     use Cake\Log\Log;
 
@@ -154,10 +154,10 @@ interface as it only requires you to implement the ``log()`` method.
 Error and Exception Logging
 ===========================
 
-Errors and Exceptions can also be logged. By configuring the co-responding
-values in your app.php file.  Errors will be displayed when debug > 0 and logged
-when debug is ``false``. To log uncaught exceptions, set the ``log`` option to
-``true``. See :doc:`/development/configuration` for more information.
+Errors and Exceptions can also be logged. By configuring the corresponding
+values in your app.php file.  Errors will be displayed when debug is ``true``
+and logged when debug is ``false``. To log uncaught exceptions, set the ``log``
+option to ``true``. See :doc:`/development/configuration` for more information.
 
 Interacting with Log Streams
 ============================
@@ -186,7 +186,7 @@ The configured directory must be writable by the web server user in
 order for logging to work correctly.
 
 You can configure additional/alternate FileLog locations when configuring
-a logger.FileLog accepts a ``path`` which allows for
+a logger. FileLog accepts a ``path`` which allows for
 custom paths to be used::
 
     Log::config('custom_path', [

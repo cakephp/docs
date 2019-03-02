@@ -89,22 +89,31 @@ CounterCache で複数のフィールドを更新する場合（条件付きカ�
 
     $this->addBehavior('CounterCache', [
         'Articles' => [
-            'rating_avg' => function ($event, $entity, $table) {
+            'rating_avg' => function ($event, $entity, $table, $original) {
                 return 4.5;
             }
         ]
     ]);
 
-カウント値を生成し、update ステートメントのサブクエリーとして使用される Query
-オブジェクトを返すこともあります。 ``$table`` パラメーターは、便宜上、
-ビヘイビアーを保持している (ターゲット関係ではない) テーブルオブジェクトを参照します。
+あなたの関数は、カウンター列の更新をスキップするために ``false`` を返したり、
+カウント値を生成した ``Query`` オブジェクトを返すことができます。
+``Query`` オブジェクトを返すと、そのクエリーは update 文のサブクエリーとして使われます。
+``$table`` パラメーターは、便宜上、ビヘイビアーを保持している (ターゲット関係ではない)
+テーブルオブジェクトを参照します。コールバックは、 ``$original`` に ``false`` が設定されて
+少なくとも1回呼び出されます。
+entity-update がアソシエーションを変更した場合、コールバックは ``true`` で *2回* 呼び出され、
+戻り値は *以前* に関連付けられたアイテムのカウンターを更新します。
 
 .. note::
 
     CounterCache ビヘイビアーは、 ``belongsTo`` アソシエーションに対してのみ機能します。
-    たとえば、 "Comments belongsTo Articles" の場合、Article テーブルの ``comment_count`` を生成するために、
-    CommentsCache ビヘイビアーを ``CommentsTable`` に追加する必要があります。
+    たとえば、 "Comments belongsTo Articles" の場合、Article テーブルの ``comment_count``
+    を生成するために、 CommentsCache ビヘイビアーを ``CommentsTable`` に追加する必要があります。
 
     これを ``belongsToMany`` アソシエーションに対して機能させることは可能ですが、
-    アソシエーションオプションで設定されたカスタム ``through`` テーブルで CounterCache ビヘイビアーを有効にする必要があります。
+    アソシエーションオプションで設定されたカスタム ``through`` テーブルで CounterCache
+    ビヘイビアーを有効にして ``cascadeCallbacks`` 設定オプションを true にする必要があります。
     カスタム JOIN テーブルを設定する方法は :ref:`using-the-through-option` を参照してください。
+
+.. versionchanged:: 3.6.0
+    更新をスキップするために ``false`` を返すことが追加されました。

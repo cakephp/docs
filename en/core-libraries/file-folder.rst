@@ -237,10 +237,12 @@ Folder API
 
     Recursive directory move.
 
-.. php:staticmethod:: normalizePath(string $path)
+.. php:staticmethod:: normalizeFullPath(string $path)
 
-    Returns a correct set of slashes for given $path ('\\' for
-    Windows paths and '/' for other paths).
+    Returns a path with slashes normalized for the operating system.
+
+    .. versionadded:: 3.7.0
+
 
 .. php:method:: pwd()
 
@@ -329,7 +331,7 @@ File API
 
 .. php:method:: copy(string $dest, boolean $overwrite = true)
 
-    Copy the file to $dest.
+    Copy the file to the absolute path ``$dest``.
 
 .. php:method:: create()
 

@@ -49,7 +49,7 @@ URL (starting with '/') with the full base URL prepended::
     // Output
     http://somedomain.com/posts
 
-URL with GET params and fragment anchor::
+URL with GET parameters and fragment anchor::
 
     echo $this->Url->build([
         "controller" => "Posts",
@@ -66,9 +66,7 @@ parameters and ``#`` key for URL fragment.
 
 URL for named route::
 
-    echo $this->Url->build(['_name' => 'product-page', 'slug' => 'i-m-slug']);
-
-    // Assuming route is setup like:
+    // Assuming a route is setup as a named route:
     // $router->connect(
     //     '/products/{slug}',
     //     [
@@ -79,6 +77,9 @@ URL for named route::
     //         '_name' => 'product-page',
     //     ]
     // );
+
+    echo $this->Url->build(['_name' => 'product-page', 'slug' => 'i-m-slug']);
+    // Will result in:
     /products/i-m-slug
 
 The 2nd parameter allows you to define options controlling HTML escaping, and

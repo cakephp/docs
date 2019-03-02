@@ -53,7 +53,7 @@ command line::
 
     class HelloCommand extends Command
     {
-        public function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser)
         {
             $parser->addArgument('name', [
                 'help' => 'What is your name'
@@ -86,7 +86,7 @@ method to define arguments. We can also define options. For example, we could
 add a ``yell`` option to our ``HelloCommand``::
 
     // ...
-    public function buildOptionParser(ConsoleOptionParser $parser)
+    protected function buildOptionParser(ConsoleOptionParser $parser)
     {
         $parser
             ->addArgument('name', [
@@ -109,7 +109,7 @@ add a ``yell`` option to our ``HelloCommand``::
         $io->out("Hello {$name}.");
     }
 
-See the :doc:`/console-and-shells/option-parser` section for more information.
+See the :doc:`/console-and-shells/option-parsers` section for more information.
 
 Creating Output
 ===============
@@ -141,7 +141,7 @@ commands::
             $this->loadModel('Users');
         }
 
-        public function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser)
         {
             $parser
                 ->addArgument('name', [
@@ -198,31 +198,35 @@ Testing Commands
 ================
 
 To make testing console applications easier, CakePHP comes with a
-``ConsoleIntegrationTestCase`` class that can be used to test console applications
+``ConsoleIntegrationTestTrait`` trait that can be used to test console applications
 and assert against their results.
 
 .. versionadded:: 3.5.0
 
     The ``ConsoleIntegrationTestCase`` was added.
 
-To get started testing your console application, create a test case that extends
-``Cake\TestSuite\ConsoleIntegrationTestCase``. This class contains a method
+.. versionadded:: 3.7.0
+
+    The ``ConsoleIntegrationTestCase`` class was moved into the ``ConsoleIntegrationTestTrait`` trait.
+
+To get started testing your console application, create a test case that uses the
+``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait. This trait contains a method
 ``exec()`` that is used to execute your command. You can pass the same string
 you would use in the CLI to this method.
 
 Let's start with a very simple command, located in
-**src/Shell/UpdatTableCommand.php**::
+**src/Command/UpdateTableCommand.php**::
 
     namespace App\Command;
 
     use Cake\Console\Arguments;
+    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
-    use Cake\Console\Command;
 
-    class UpdateTableCommand extends Shell
+    class UpdateTableCommand extends Command
     {
-        public function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser)
         {
             $parser->setDescription('My cool console app');
 
@@ -231,16 +235,19 @@ Let's start with a very simple command, located in
     }
 
 To write an integration test for this shell, we would create a test case in
-**tests/TestCase/Command/UpdateTableTest.php** that extends
-``Cake\TestSuite\ConsoleIntegrationTestCase``. This shell doesn't do much at the
+**tests/TestCase/Command/UpdateTableTest.php** that uses the
+``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait. This shell doesn't do much at the
 moment, but let's just test that our shell's description is displayed in ``stdout``::
 
     namespace App\Test\TestCase\Command;
 
-    use Cake\TestSuite\ConsoleIntegrationTestCase;
+    use Cake\TestSuite\ConsoleIntegrationTestTrait;
+    use Cake\TestSuite\TestCase;
 
-    class UpdateTableCommandTest extends ConsoleIntegrationTestCase
+    class UpdateTableCommandTest extends TestCase
     {
+        use ConsoleIntegrationTestTrait;
+
         public function setUp()
         {
             parent::setUp();
@@ -261,14 +268,14 @@ adding more logic to our command::
     namespace App\Command;
 
     use Cake\Console\Arguments;
+    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
-    use Cake\Console\Command;
     use Cake\I18n\FrozenTime;
 
     class UpdateTableCommand extends Command
     {
-        public function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser)
         {
             $parser
                 ->setDescription('My cool console app')
@@ -301,13 +308,16 @@ Modify your test case to the following snippet of code::
     use Cake\Console\Command;
     use Cake\I18n\FrozenTime;
     use Cake\ORM\TableRegistry;
-    use Cake\TestSuite\ConsoleIntegrationTestCase;
+    use Cake\TestSuite\ConsoleIntegrationTestTrait;
+    use Cake\TestSuite\TestCase;
 
-    class UpdateTableCommandTest extends ConsoleIntegrationTestCase
+    class UpdateTableCommandTest extends TestCase
     {
+        use ConsoleIntegrationTestTrait;
+
         public $fixtures = [
             // assumes you have a UsersFixture
-            'app.users'
+            'app.Users'
         ];
 
         public function testDescriptionOutput()
@@ -324,7 +334,7 @@ Modify your test case to the following snippet of code::
             $this->loadFixtures('Users');
 
             $this->exec('update_table Users');
-            $this->assertExitCode(Shell::CODE_SUCCESS);
+            $this->assertExitCode(Command::CODE_SUCCESS);
 
             $user = TableRegistry::get('Users')->get(1);
             $this->assertSame($user->modified->timestamp, $now->timestamp);
@@ -346,7 +356,7 @@ Testing Interactive Shells
 --------------------------
 
 Consoles are often interactive. Testing interactive shells with the
-``Cake\TestSuite\ConsoleIntegrationTestCase`` class only requires passing the
+``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait only requires passing the
 inputs you expect as the second parameter of ``exec()``. They should be
 included as an array in the order that you expect them.
 
@@ -355,13 +365,15 @@ Update the command class to the following::
 
     namespace App\Command;
 
+    use Cake\Console\Arguments;
+    use Cake\Console\Command;
+    use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
-    use Cake\Console\Shell;
     use Cake\I18n\FrozenTime;
 
     class UpdateTableCommand extends Command
     {
-        public function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser)
         {
             $parser
                 ->setDescription('My cool console app')
@@ -392,8 +404,8 @@ Update the command class to the following::
 
 Now that we have an interactive subcommand, we can add a test case that tests
 that we receive the proper response, and one that tests that we receive an
-incorrect response. Remove the ``testUpdateModifed`` mehod and, add the following methods to
-**tests/TestCase/Shell/UpdateTableCommandTest.php**::
+incorrect response. Remove the ``testUpdateModified`` method and, add the following methods to
+**tests/TestCase/Command/UpdateTableCommandTest.php**::
 
 
     public function testUpdateModifiedSure()
@@ -445,7 +457,7 @@ in your test case with the following method::
 Assertion methods
 -----------------
 
-The ``Cake\TestSuite\ConsoleIntegrationTestCase`` class provides a number of
+The ``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait provides a number of
 assertion methods that make it easy to assert against console output::
 
     // assert that the shell exited with the expected code

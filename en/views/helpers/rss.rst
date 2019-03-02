@@ -143,7 +143,7 @@ the associative array into an element for each key value pair.
 
     You will need to modify the $link variable as appropriate to
     your application. You might also want to use a
-    :ref:`virtual property <entities-virtual-properties>` in your Entity.
+    :ref:`virtual field <entities-virtual-fields>` in your Entity.
 
 ::
 

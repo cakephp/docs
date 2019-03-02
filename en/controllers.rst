@@ -188,6 +188,10 @@ assign a set of information to the view::
 
     $this->set($data);
 
+Keep in mind that view vars are shared among all parts rendered by your view.
+They will be available in all parts of the view: the template, the layout and
+all elements inside the former two.
+
 Setting View Options
 --------------------
 

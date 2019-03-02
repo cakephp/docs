@@ -141,10 +141,15 @@ In the above example, the only commands available would be ``help``, ``version``
 and ``user``. See the :ref:`plugin-commands` section for how to add commands in
 your plugins.
 
+.. note::
+
+    When adding multiple commands that use the same Command class, the ``help``
+    command will display the shortest option.
+
 .. versionadded:: 3.5.0
     The ``console`` hook was added.
 
-.. renaming-commands::
+.. _renaming-commands:
 .. index:: nested commands, subcommands
 
 Renaming Commands
@@ -152,7 +157,7 @@ Renaming Commands
 
 There are cases where you will want to rename commands, to create nested
 commands or subcommands.  While the default auto-discovery of commands will not
-do this, you can register your commands to create any desired naming::
+do this, you can register your commands to create any desired naming.
 
 You can customize the command names by defining each command in your plugin::
 
@@ -169,7 +174,8 @@ You can customize the command names by defining each command in your plugin::
     }
 
 When overriding the ``console()`` hook in your application, remember to
-call ``discoverCakephp()`` to add commands from CakePHP.
+call ``$commands->autoDiscover()`` to add commands from CakePHP, your
+application, and plugins.
 
 If you need to rename/remove any attached commands, you can use the
 ``Console.buildCommands`` event on your application event manager to modify the

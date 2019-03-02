@@ -108,6 +108,9 @@ can do this by using the ``TableRegistry`` class::
     // In a controller or table method.
     use Cake\ORM\TableRegistry;
 
+    $articles = TableRegistry::getTableLocator()->get('Articles');
+
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
 
 The TableRegistry class provides the various dependencies for constructing
@@ -121,9 +124,13 @@ being triggered as a default class is used instead of your actual class. To
 correctly load plugin table classes use the following::
 
     // Plugin table
-    $articlesTable = TableRegistry::get('PluginName.Articles');
+    $articlesTable = TableRegistry::getTableLocator()->get('PluginName.Articles');
 
     // Vendor prefixed plugin table
+    $articlesTable = TableRegistry::getTableLocator()->get('VendorName/PluginName.Articles');
+
+    // Prior to 3.6.0
+    $articlesTable = TableRegistry::get('PluginName.Articles');
     $articlesTable = TableRegistry::get('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
@@ -317,6 +324,48 @@ atomic deletes where database operations are implicitly committed. The event is
 triggered only for the primary table on which ``delete()`` is directly called.
 The event is not triggered if a transaction is started before calling delete.
 
+Callback priorities
+-------------------
+
+When using events on your tables and behaviors be aware of the priority
+and the order listeners are attached. Behavior events are attached before Table
+events are. With the default priorities this means that Behavior callbacks are
+triggered **before** the Table event with the same name.
+
+As an example, if your Table is using ``TreeBehavior`` the
+``TreeBehavior::beforeDelete()`` method will be called before your table's
+``beforeDelete()`` method, and you will not be able to work wth the child nodes
+of the record being deleted in your Table's method.
+
+You can manage event priorities in one of a few ways:
+
+#. Change the ``priority`` of a Behavior's listeners using the ``priority``
+   option. This will modify the priority of **all** callback methods in the
+   Behavior::
+
+        // In a Table initialize() method
+        $this->addBehavior('Tree', [
+            // Default value is 10 and listeners are dispatched from the
+            // lowest to highest priority.
+            'priority' => 2,
+        ]);
+
+#. Modify the ``priority`` in your ``Table`` class by using the
+   ``Model.implementedEvents()`` method. This allows you to assign a different
+   priority per callback-function::
+
+        // In a Table class. 
+        public function implementedEvents()
+        {
+            $events = parent::implementedEvents();
+            $events['Model.beforeDelete'] = [
+                'callable' => 'beforeDelete',
+                'priority' => 3
+            ];
+
+            return $events;
+        }
+
 Behaviors
 =========
 
@@ -444,6 +493,11 @@ Configuration data is stored *per alias*, and can be overridden by an object's
     You can only configure a table before or during the **first** time you
     access that alias. Doing it after the registry is populated will have no
     effect.
+
+.. note::
+
+    Static API of `Cake\ORM\TableRegistry` has been deprecated in 3.6.0. 
+    Use a table locator directly instead.
 
 Flushing the Registry
 ---------------------

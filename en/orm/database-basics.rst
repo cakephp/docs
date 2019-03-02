@@ -63,6 +63,10 @@ You can use prepared statements to insert parameters::
 
 It is also possible to use complex data types as arguments::
 
+    use Cake\Datasource\ConnectionManager;
+    use DateTime;
+
+    $connection = ConnectionManager::get('default');
     $results = $connection
         ->execute(
             'SELECT * FROM articles WHERE created >= :created',
@@ -77,7 +81,7 @@ Instead of writing the SQL manually, you can use the query builder::
         ->newQuery()
         ->select('*')
         ->from('articles')
-        ->where(['created >' => new DateTime('1 day ago'), ['created' => 'datetime']])
+        ->where(['created >' => new DateTime('1 day ago')], ['created' => 'datetime'])
         ->order(['title' => 'DESC'])
         ->execute()
         ->fetchAll('assoc');
@@ -88,6 +92,7 @@ Running Insert Statements
 Inserting rows in the database is usually a matter of a couple lines::
 
     use Cake\Datasource\ConnectionManager;
+    use DateTime;
 
     $connection = ConnectionManager::get('default');
     $connection->insert('articles', [
@@ -798,7 +803,7 @@ the statement::
     $rows = $stmt->fetchAll('assoc');
 
     // Read rows through iteration.
-    foreach ($rows as $row) {
+    foreach ($stmt as $row) {
         // Do work
     }
 
@@ -835,13 +840,14 @@ Query Logging
 
 Query logging can be enabled when configuring your connection by setting the
 ``log`` option to ``true``. You can also toggle query logging at runtime, using
-``logQueries``::
+``enableQueryLogging``::
 
+    // Prior to 3.7.0 use logQueries()
     // Turn query logging on.
-    $conn->logQueries(true);
+    $conn->enableQueryLogging(true);
 
     // Turn query logging off
-    $conn->logQueries(false);
+    $conn->enableQueryLogging(false);
 
 When query logging is enabled, queries will be logged to
 :php:class:`Cake\\Log\\Log` using the 'debug' level, and the 'queriesLog' scope.

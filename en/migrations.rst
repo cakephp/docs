@@ -32,10 +32,12 @@ your **config/bootstrap.php**::
 
     $ bin/cake plugin load Migrations
 
-Or you can load the plugin by editing your **config/bootstrap.php** file and
+Or you can load the plugin by editing your **src/Application.php** file and
 adding the following statement::
 
-    Plugin::load('Migrations');
+    $this->addPlugin('Migrations');
+
+    // Prior to 3.6.0 you need to use Plugin::load()
 
 Additionally, you will need to configure the default database configuration for your
 application in your **config/app.php** file as explained in the
@@ -961,7 +963,8 @@ In your migration file, you can do the following::
     public function up()
     {
         $this->table('old_table_name')
-            ->rename('new_table_name');
+            ->rename('new_table_name')
+            ->save();
     }
 
 Skipping the ``schema.lock`` file generation

@@ -155,11 +155,20 @@ icon     image/x-icon
     );
     ?>
     // Output (line breaks added)
+    // Note: The helper code makes two meta tags to  ensure the
+    // icon is downloaded by both newer and older browsers
+    // which require different rel attribute values.
     <link
-        href="http://example.com/favicon.ico"
-        title="favicon.ico" type="image/x-icon"
-        rel="alternate"
+        href="/subdir/favicon.ico" 
+        type="image/x-icon" 
+        rel="icon"
     />
+    <link
+        href="/subdir/favicon.ico" 
+        type="image/x-icon" 
+        rel="shortcut icon"
+    />
+    
     <?= $this->Html->meta(
         'Comments',
         '/comments/index.rss',
@@ -754,19 +763,20 @@ Output:
 Changing the Tags Output by HtmlHelper
 ======================================
 
-.. php:method:: setTemplates($templates)
+.. php:method:: setTemplates(array $templates)
 
-The ``$templates`` parameter can be either a string file path to the PHP
-file containing the tags you want to load, or an array of templates to
-add/replace::
-
-    // Load templates from config/my_html.php
-    $this->Html->setTemplates('my_html');
+Load an array of templates to add/replace templates::
 
     // Load specific templates.
     $this->Html->setTemplates([
         'javascriptlink' => '<script src="{{url}}" type="text/javascript"{{attrs}}></script>'
     ]);
+
+You can load a configuration file containing templates using the templater
+directly::
+
+    // Load a configuration file with templates.
+    $this->Html->templater()->load('my_tags');
 
 When loading files of templates, your file should look like::
 
@@ -780,7 +790,7 @@ When loading files of templates, your file should look like::
     Template strings containing a percentage sign (``%``) need special attention,
     you should prefix this character with another percentage so it looks like
     ``%%``. The reason is that internally templates are compiled to be used with
-    ``sprintf()``. Example: '<div style="width:{{size}}%%">{{content}}</div>'
+    ``sprintf()``. Example: ``<div style="width:{{size}}%%">{{content}}</div>``
 
 Creating Breadcrumb Trails with HtmlHelper
 ==========================================

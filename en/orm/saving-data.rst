@@ -683,6 +683,9 @@ privileges.
 The ``fieldList`` options is also accepted by the ``newEntity()``,
 ``newEntities()`` and ``patchEntities()`` methods.
 
+.. deprecated:: 3.4.0
+    Use ``fields`` instead of ``fieldList``.
+
 .. _saving-entities:
 
 Saving Entities
@@ -884,7 +887,7 @@ replace
 By default the ``append`` saving strategy is used.
 See :ref:`has-many-associations` for details on defining the ``saveStrategy``.
 
-Whenever you add new records into an existing association you should always mark
+Whenever you add new records to an existing association you should always mark
 the association property as 'dirty'. This lets the ORM know that the association
 property has to be persisted::
 
@@ -893,12 +896,13 @@ property has to be persisted::
 
 Without the call to ``dirty()`` the updated comments will not be saved.
 
-If you are creating a new entity with existing records for your association you
-need to intitialize the corresponding property first::
+If you are creating a new entity, and want to add existing records to a has
+many/belongs to many association you need to initialize the association property
+first::
 
-    $mentor->students = [];
+    $article->comments = [];
 
-Without initializing calling ``$mentor->students[] = $student;`` will have no effect.
+Without initialization calling ``$article->comments[] = $comment;`` will have no effect.
 
 Saving BelongsToMany Associations
 ---------------------------------
@@ -1034,8 +1038,9 @@ This functionality is achieved by using the custom types system. See the
 :ref:`adding-custom-database-types` section to find out how to build custom
 column Types::
 
-    // In config/bootstrap.php
+    // Only prior to 3.6, you have to add a new type map in config/bootstrap.php
     use Cake\Database\Type;
+
     Type::map('json', 'Cake\Database\Type\JsonType');
 
     // In src/Model/Table/UsersTable.php
@@ -1045,7 +1050,11 @@ column Types::
     {
         protected function _initializeSchema(TableSchema $schema)
         {
+            $schema->setColumnType('preferences', 'json');
+
+            // Prior to 3.6 you should use ``columnType`` instead of ``setcolumnType``.
             $schema->columnType('preferences', 'json');
+
             return $schema;
         }
     }

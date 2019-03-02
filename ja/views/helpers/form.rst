@@ -103,6 +103,11 @@ FormHelper は、 *追加* または *編集* のフォームを作成するか�
     これは *編集* フォームなので、デフォルトの HTTP メソッドを上書きするために
     hidden ``input`` フィールドが生成されます。
 
+場合によっては、フォームの ``action`` の URL の最後にエンティティーの ID が自動的に付加されます。
+URL に ID が付加されることを避けたい場合、 ``$options['url']`` に ``'/my-acount'`` や
+``\Cake\Routing\Router::url(['controller' => 'Users', 'action' => 'myAccount'])``
+のように文字列を渡すことができます。
+
 フォーム作成のためのオプション
 ------------------------------
 
@@ -141,6 +146,9 @@ form タグの生成方法に影響を与えるさまざまなキーと値のペ
 * ``'idPrefix'`` - 生成された ID 属性のプレフィックス。
 
 * ``'templateVars'`` - ``formStart`` テンプレートのためのテンプレート変数を提供することができます。
+
+* ``autoSetCustomValidity`` - コントロールの HTML5 検証メッセージでカスタム必須および notBlank 検証メッセージを使用するには、
+  ``true`` を設定します。デフォルトは ``false`` です。
 
 .. tip::
 
@@ -853,10 +861,14 @@ textarea コントロールフィールドを作成します。使用される�
   デフォルトで選択したい値の配列を使うことができます。 ::
 
       // 値に 1 と 3 を持つ HTML <option> 要素が事前選択されて描画されます。
-      echo $this->Form->select('rooms', [
-          'multiple' => true,
-          'value' => [1, 3]
-      ]);
+      echo $this->Form->select(
+          'rooms',
+          [1, 2, 3, 4, 5],
+          [
+              'multiple' => true,
+              'value' => [1, 3]
+          ]
+      );
 
 * ``'empty'`` - ``radio()`` と ``select()`` に適用します。デフォルトは ``false`` です。
 
@@ -958,6 +970,28 @@ textarea コントロールフィールドを作成します。使用される�
           'hiddenField' => 'N',
       ]);
 
+オプションの作成にコレクションを使用
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+オプション配列の作成に Collection クラスを使うことができます。
+この方法は、すでにエンティティーのコレクションを持っていて、
+そこから select 要素を作成したい場合に理想的です。
+
+``combine`` メソッドを使って、基本的なオプションの配列を作ることができます。 ::
+
+    $options = $examples->combine('id', 'name');
+
+配列を拡張して特別な属性を追加することもできます。
+以下は、 コレクションの ``map`` メソッドを使って option 要素にデータ属性を作成します。 ::
+
+    $options = $examples->map(function ($value, $key) {
+        return [
+            'value' => $value->id,
+            'text' => $value->name,
+            'data-created' => $value->created
+        ];
+    });
+
 チェックボックスの作成
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1041,15 +1075,15 @@ radio ボタン入力を作成します。使用されるデフォルトのウ�
 
 **ラジオボタンの属性**
 
-* ``label`` - ウィジェットのラベルを表示するかどうかを示すブール値、または、全てのラベルに適用する
+* ``'label'`` - ウィジェットのラベルを表示するかどうかを示すブール値、または、全てのラベルに適用する
   属性の配列。 ``class`` 属性が定義されている場合、チェックされたボタンの ``class`` 属性に
   ``selected`` が追加されます。デフォルトは ``true`` 。
 
-* ``hiddenField`` - ``true`` に設定すると、 ``''`` の値を持つ非表示の入力がインクルードされます。
+* ``'hiddenField'`` - ``true`` に設定すると、 ``''`` の値を持つ非表示の入力がインクルードされます。
   これは、非連続的なラジオセットを作成する場合に便利です。デフォルトは ``true`` 。
 
-* ``disabled`` - すべてのラジオボタンを無効にするには ``true`` または ``disabled`` に設定します。
-  デフォルトは ``false`` 。
+* ``'disabled'`` - すべてのラジオボタンを無効にするには ``true`` または
+  ``'disabled'`` に設定します。デフォルトは ``false`` 。
 
 ``$options`` 引数を通してラジオボタンのラベルの見出しを指定してください。
 
@@ -1887,27 +1921,27 @@ CakePHP が Windows サーバー上にインストールされている場合、
 
 例::
 
-    echo $this->Form->label('User.name');
-    echo $this->Form->label('User.name', 'Your username');
+    echo $this->Form->label('name');
+    echo $this->Form->label('name', 'Your username');
 
 出力結果:
 
 .. code-block:: html
 
-    <label for="user-name">Name</label>
-    <label for="user-name">Your username</label>
+    <label for="name">Name</label>
+    <label for="name">Your username</label>
 
 第３パラメーター ``$options`` に id や class を設定できます。 ::
 
-    echo $this->Form->label('User.name', null, ['id' => 'user-label']);
-    echo $this->Form->label('User.name', 'Your username', ['class' => 'highlight']);
+    echo $this->Form->label('name', null, ['id' => 'user-label']);
+    echo $this->Form->label('name', 'Your username', ['class' => 'highlight']);
 
 出力結果:
 
 .. code-block:: html
 
-    <label for="user-name" id="user-label">Name</label>
-    <label for="user-name" class="highlight">Your username</label>
+    <label for="name" id="user-label">Name</label>
+    <label for="name" class="highlight">Your username</label>
 
 エラーの表示と確認
 ==================
@@ -1994,6 +2028,36 @@ FormHelper は、フィールドエラーを簡単にチェックしたり、必
     if ($this->Form->isFieldError('gender')) {
         echo $this->Form->error('gender');
     }
+
+.. _html5-validity-messages:
+
+HTML5 検証メッセージにバリデーションメッセージを表示
+====================================================
+
+.. versionadded:: 3.7.0
+
+``autoSetCustomValidity`` FormHelper オプションが ``true`` に設定されている場合、
+デフォルトのブラウザーの HTML5 必須メッセージの代わりに、フィールドの必須および
+notBlank バリデーションメッセージに対するエラーメッセージが使用されます。
+このオプションを有効にすると、フィールドに ``onvalid`` と ``oninvalid`` イベント属性が追加されます。
+例えば、 ::
+
+    <input type="text" name="field" required onvalid="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Custom notBlank message')" />
+
+カスタム Javascript を使用してこれらのイベントを手動で設定したい場合は、
+``autoSetCustomValidity`` オプションを ``false`` に設定して、
+代わりに 特別な ``customValidityMessage`` テンプレート変数を使用することができます。
+このテンプレート変数はフィールドが必須の場合に追加されます。 ::
+
+    // テンプレート例
+    [
+        'input' => '<input type="{{type}}" name="{{name}}" data-error-message="{{customValidityMessage}}" {{attrs}}/>',
+    ]
+
+    // このような input が作成されます
+    <input type="text" name="field" required data-error-message="Custom notBlank message" />
+
+それから Javascript を使って ``onvalid`` と ``oninvalid`` イベントを好きなように設定できます。
 
 ボタンと submit 要素の作成
 ==========================
@@ -2309,7 +2373,7 @@ CakePHP の多くのヘルパーと同じように、FormHelper は、
     ]);
 
     // 独自の div で囲まれた radio セットを作成
-    echo $this->Form->control('User.email_notifications', [
+    echo $this->Form->control('email_notifications', [
         'options' => ['y', 'n'],
         'type' => 'radio'
     ]);
@@ -2473,10 +2537,10 @@ CakePHP の多くのヘルパーと同じように、FormHelper は、
 
     $this->Form->create($article);
 
-    // Article 入力
+    // Article コントロール
     echo $this->Form->control('title');
 
-    // Author 入力 (belongsTo)
+    // Author コントロール (belongsTo)
     echo $this->Form->control('author.id');
     echo $this->Form->control('author.first_name');
     echo $this->Form->control('author.last_name');
@@ -2485,24 +2549,18 @@ CakePHP の多くのヘルパーと同じように、FormHelper は、
     echo $this->Form->control('author.profile.id');
     echo $this->Form->control('author.profile.username');
 
-    // Tags 入力 (belongsToMany)
+    // 別々の入力として、
+    // Tags コントロール (belongsToMany)
     echo $this->Form->control('tags.0.id');
     echo $this->Form->control('tags.0.name');
     echo $this->Form->control('tags.1.id');
     echo $this->Form->control('tags.1.name');
 
-    // belongsToMany の複数選択要素
-    echo $this->Form->control('tags._ids', [
-        'type' => 'select',
-        'multiple' => true,
-        'options' => $tagList,
-    ]);
-
     // 結合テーブルの入力 (articles_tags)
     echo $this->Form->control('tags.0._joinData.starred');
     echo $this->Form->control('tags.1._joinData.starred');
 
-    // Comments 入力 (hasMany)
+    // Comments コントロール (hasMany)
     echo $this->Form->control('comments.0.id');
     echo $this->Form->control('comments.0.comment');
     echo $this->Form->control('comments.1.id');
@@ -2519,6 +2577,19 @@ CakePHP の多くのヘルパーと同じように、FormHelper は、
             'Comments'
         ]
     ]);
+
+上記の例は、各エンティティーと結合データレコードに対して別々の入力を持つ、
+多数の関連するデータセットの拡張された例を示しています。
+また、多数の関連に属する複数選択入力を作成することもできます。 ::
+
+    // belongsToMany の複数選択要素
+    // _joinData をサポートしません
+    echo $this->Form->control('tags._ids', [
+        'type' => 'select',
+        'multiple' => true,
+        'options' => $tagList,
+    ]);
+
 
 独自ウィジェットの追加
 ======================
@@ -2617,10 +2688,11 @@ autocomplete ウィジェットが作成されると、 ``text`` と ``label``
     );
 
     // インスタンスの使用 - 依存関係を解決する必要があります。
+    // 3.6.0 より前は、ウィジェットの取得に widgetRegistry() を使用。
     $autocomplete = new AutocompleteWidget(
         $this->Form->getTemplater(),
-        $this->Form->widgetRegistry()->get('text'),
-        $this->Form->widgetRegistry()->get('label'),
+        $this->Form->getWidgetLocator()->get('text'),
+        $this->Form->getWidgetLocator()->get('label'),
     );
     $this->Form->addWidget('autocomplete', $autocomplete);
 

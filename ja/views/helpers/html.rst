@@ -730,18 +730,19 @@ Javascript をバッファリングした後、
 HtmlHelper によるタグ出力の変更
 =================================
 
-.. php:method:: setTemplates($templates)
+.. php:method:: setTemplates(array $templates)
 
-``$templates`` パラメーターは、読み込みたいタグを含む PHP ファイルへの文字列ファイルパスか、
-追加/置換するためのテンプレートの配列です。 ::
-
-    // config/my_html.php からテンプレートを読み込む。
-    $this->Html->setTemplates('my_html');
+テンプレートを追加や置換をするためのテンプレートの配列を読み込みます。 ::
 
     // 指定したテンプレートを読み込む。
     $this->Html->setTemplates([
         'javascriptlink' => '<script src="{{url}}" type="text/javascript"{{attrs}}></script>'
     ]);
+
+直接 templater を使うことでテンプレートを含む設定ファイルを読み込むことができます。 ::
+
+    // テンプレートを持つ設定ファイルを読み込む。
+    $this->Html->templater()->load('my_tags');
 
 テンプレートのファイルを読み込む場合、ファイルは次のようになります。 ::
 
@@ -755,7 +756,7 @@ HtmlHelper によるタグ出力の変更
     パーセント記号 (``%``) を含むテンプレート文字列には特別な注意が必要です。
     この文字の先頭に ``%%`` のようにもう一つパーセンテージを付ける必要があります。
     なぜなら、内部的なテンプレートは ``sprintf()`` で使用されるためにコンパイルされているからです。
-    例: '<div style="width:{{size}}%%">{{content}}</div>'
+    例: ``<div style="width:{{size}}%%">{{content}}</div>``
 
 HtmlHelper でパンくずリストを作成
 =================================

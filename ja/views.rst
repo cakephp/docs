@@ -428,7 +428,7 @@ CakePHP の既定のレイアウトは **src/Template/Layout/default.ctp** に�
 
 .. note::
 
-    :php:meth:`HtmlHelper::css()` や :php:meth:`HtmlHelper::script()` を
+    ``HtmlHelper::css()`` や ``HtmlHelper::script()`` を
     テンプレートファイルで使うとき、HTML ソースを同じ名前でブロックの中に配置するには
     ``'block' => true`` を指定してください。 (詳しい使い方は API を参照してください)
 
@@ -437,6 +437,9 @@ CakePHP の既定のレイアウトは **src/Template/Layout/default.ctp** に�
 ``title`` ブロックの内容をビューファイルから設定することができます。 ::
 
     $this->assign('title', 'アクティブユーザー表示');
+    
+``title`` ブロックが空の値の場合、自動的に ``'Admin/Articles'`` のような
+現在のテンプレートパスの表現に置き換えられます。
 
 好きなだけレイアウトを作ることができます。 **src/Template/Layout** ディレクトリーに置いて、
 コントローラーのアクションの中か、ビューの ``$layout`` プロパティーで切り替えるだけです。 ::
@@ -502,8 +505,10 @@ Ajax レイアウトは AJAX のレスポンスを組み立てるのに便利で
 
     class UsersController extends AppController
     {
-        public function view_active()
+        public function viewActive()
         {
+            $this->viewBuilder()->setLayout('Contacts.contact');
+            // あるいは 3.4 以前では以下
             $this->viewBuilder()->layout('Contacts.contact');
             // あるいは 3.1 以前では以下
             $this->layout = 'Contacts.contact';
@@ -713,7 +718,7 @@ CakePHP のほとんどの構成要素と同様に、ビュークラスにはい
 * ビュークラスは **src/View**  に配置してください。例: **src/View/PdfView.php**
 * ビュークラス名には ``View`` をサフィックスとしてつけてください。 例: ``PdfView``
 * ビュークラス名を参照するときは ``View`` サフィックスを省略する必要があります。
-  例: ``$this->viewBuilder()->className('Pdf');``.
+  例: ``$this->viewBuilder()->setClassName('Pdf');``.
 
 また、正しく動作するように、 ``View`` を継承しましょう。 ::
 

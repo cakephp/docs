@@ -49,7 +49,7 @@ URL (starting with '/') with the full base URL prepended::
     // Output
     http://somedomain.com/posts
 
-URL with GET params and fragment anchor::
+URL with GET parameters and fragment anchor::
 
     echo $this->Url->build([
         "controller" => "Posts",

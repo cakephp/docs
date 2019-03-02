@@ -235,6 +235,33 @@ false を、関数呼び出しが成功したかどうかを判定できるよ�
 
 イコール記号の両サイドには空白を置きます。
 
+早期退出
+==========
+
+早期退出により不必要なネストを避けるようにしてください。 ::
+
+    public function run(array $data)
+    {
+        ...
+        if (!$success) {
+            return false;
+        }
+
+        ...
+    }
+
+    public function check(array $data)
+    {
+        ...
+        if (!$success) {
+            throw new RuntimeException(...);
+        }
+
+        ...
+    }
+
+これは、コードの流れをシンプルかつ容易に保つのに役立ちます。
+
 タイプヒンティング
 ------------------
 

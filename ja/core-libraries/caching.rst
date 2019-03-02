@@ -21,13 +21,12 @@ CakePHP には、いくつかのキャッシュエンジンが用意されてい
   最も遅いキャッシュエンジンで、アトミックな操作のための多くの機能を持ちません。
   しかし、ディスクストレージは非常に安価なので、頻繁に書き込みが行なわれない
   大きなオブジェクトや要素の保存はファイルに適しています。
-* ``ApcCache`` APC キャッシュは、PHP の `APCu <http://php.net/apcu>`_ 拡張を使用します。
+* ``ApcuEngine`` APCu キャッシュは、PHP の `APCu <http://php.net/apcu>`_ 拡張を使用します。
   この拡張はオブジェクトを保存するためにウェブサーバー上の共有メモリーを使います。
   これはとても高速で、かつアトミックな読み込み/書き込みの機能を提供することが可能になります。
+  3.6.0 より前は ``ApcuEngine`` は ``ApcEngine`` という名前でした。
 * ``Wincache`` Wincache は `Wincache <http://php.net/wincache>`_ 拡張を使います。
   Wincache は APC と同様の機能とパフォーマンスを持ちますが、Windows と IIS に最適化されています。
-* ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_
-  は APC と同様の機能を持つ PHP 拡張です。
 * ``MemcachedEngine`` `Memcached <http://php.net/memcached>`_ 拡張を使います。
 * ``RedisEngine`` `phpredis <https://github.com/nicolasff/phpredis>`_ 拡張を使います。
   Redis は高速で、Memcached と同様の永続キャッシュシステム、アトミックな操作を提供します。
@@ -203,8 +202,25 @@ Redis サーバーが予期せず失敗した場合、 ``redis`` キャッシュ
 ``default`` キャッシュ設定への書き込みに縮退運転します。このシナリオで ``default`` キャッシュ設定への
 書き込みも失敗した場合、 ``NullEngine`` へ再び縮退運転し、キャッチされない例外をスローするのを防ぎます。
 
+``false`` でキャッシュフォールバックを無効にすることができます。 ::
+
+    Cache::config('redis', [
+        'className' => 'Redis',
+        'duration' => '+1 hours',
+        'prefix' => 'cake_redis_',
+        'host' => '127.0.0.1',
+        'port' => 6379,
+        'fallback' => false
+    ]);
+
+フォールバックがない場合、キャッシュ障害は例外として発生します。
+
+
 .. versionadded:: 3.5.0
     キャッシュエンジンフォールバックが追加されました。
+
+.. versionchanged:: 3.6.0
+    フォールバックは ``false`` で無効化できるようになりました。
 
 設定されたキャッシュエンジンを削除する
 --------------------------------------
@@ -358,7 +374,7 @@ Cache を使用すると、Read-through キャッシュを簡単に行うこと�
 
 .. php:staticmethod:: clear($check, $config = 'default')
 
-キャッシュ設定から、すべてのキャッシュされた値を破棄します。Apc、Memcached、Wincache
+キャッシュ設定から、すべてのキャッシュされた値を破棄します。Apcu、Memcached、Wincache
 などのエンジンでは、キャッシュ設定のプレフィックスを使用してキャッシュエントリーを削除します。
 異なるキャッシュ設定には異なる接頭辞が付いていることを確認してください。 ::
 
@@ -375,7 +391,7 @@ Cache を使用すると、Read-through キャッシュを簡単に行うこと�
 
 .. note::
 
-    APC と Wincache は、ウェブサーバーと CLI 用に分離されたキャッシュを使用するため、
+    APCu と Wincache は、ウェブサーバーと CLI 用に分離されたキャッシュを使用するため、
     別々にクリアする必要があります。（CLI ではウェブサーバーのキャッシュをクリアできません）
 
 キャッシュを使用してカウンターを保存する
@@ -404,7 +420,7 @@ Cache クラスは簡単な方法でカウンター値をインクリメント/�
 .. note::
 
     インクリメントとデクリメントは FileEngine では機能しません。
-    代わりに、APC、Wincache、Redis または Memcached を使用する必要があります。
+    代わりに、APCu、Wincache、Redis または Memcached を使用する必要があります。
 
 キャッシュを使用して共通のクエリー結果を格納する
 ================================================
@@ -519,12 +535,12 @@ Cache クラスは簡単な方法でカウンター値をインクリメント/�
 
     Cache で使用されるすべてのキャッシュエンジンの基本クラス。
 
-.. php:method:: write($key, $value, $config = 'default')
+.. php:method:: write($key, $value)
 
     :return: 成功時に boolean
 
-    キーの値をキャッシュに書き込みます。
-    省略可能な文字列 $config は、書き込む設定名を指定します。
+    キーの値をキャッシュに書き込み、データが正常にキャッシュされた場合は
+    ``true`` を返し、失敗した場合は ``false`` を返します。
 
 .. php:method:: read($key)
 
@@ -572,4 +588,4 @@ Cache クラスは簡単な方法でカウンター値をインクリメント/�
 
 .. meta::
     :title lang=ja: キャッシュ
-    :keywords lang=ja: uniform api,xcache,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apc,memcache,queries,cakephp,elements,servers,memory
+    :keywords lang=ja: uniform api,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apcu,memcache,queries,cakephp,elements,servers,memory

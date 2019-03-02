@@ -39,12 +39,16 @@ use libraries from outside of CakePHP.
 Request Parameters
 ------------------
 
-The request exposes the routing parameters through the ``getParam()`` method::
+The request exposes routing parameters through the ``getParam()`` method::
 
     $controllerName = $this->request->getParam('controller');
 
     // Prior to 3.4.0
     $controllerName = $this->request->param('controller');
+
+To get all routing parameters as an array use ``getAttribute()``::
+
+    $parameters = $this->request->getAttribute('params');
 
 All :ref:`route-elements` are accessed through this interface.
 
@@ -402,6 +406,20 @@ have the request object use these headers set the ``trustProxy`` property to
     $scheme = $this->request->scheme();
     $clientIp = $this->request->clientIp();
 
+Once proxies are trusted the ``clientIp()`` method will use the *last* IP
+address in the ``X-Forwarded-For`` header. If your application is behind
+multiple proxies, you can use ``setTrustedProxies()`` to define the IP addresses
+of proxies in your control::
+
+    $request->setTrustedProxies(['127.1.1.1', '127.8.1.3']);
+
+After proxies are trusted ``clientIp()`` will use the first IP address in the
+``X-Forwarded-For`` header providing it is the only value that isn't from a trusted
+proxy.
+
+.. versionadded:: 3.7.0
+    ``setTrustedProxies()`` was added.
+
 Checking Accept Headers
 -----------------------
 
@@ -532,7 +550,7 @@ You can accomplish that by using :php:meth:`Cake\\Http\\Response::withFile()`::
 
 As shown in the above example, you must pass the file path to the method.
 CakePHP will send a proper content type header if it's a known file type listed
-in `Cake\\Http\\Reponse::$_mimeTypes`. You can add new types prior to calling
+in `Cake\\Http\\Response::$_mimeTypes`. You can add new types prior to calling
 :php:meth:`Cake\\Http\\Response::withFile()` by using the
 :php:meth:`Cake\\Http\\Response::withType()` method.
 
@@ -569,6 +587,11 @@ ics generated on the fly from a string::
     {
         $icsString = $this->Calendars->generateIcs();
         $response = $this->response;
+        
+        // Inject string content into response body (3.4.0+)
+        $response = $response->withStringBody($icsString);
+        
+        // Inject string content into response body (before 3.4.0)
         $response->body($icsString);
 
         $response = $response->withType('ics');
@@ -903,13 +926,18 @@ Setting Cookies
 Cookies can be added to response using either an array or a :php:class:`Cake\\Http\\Cookie\\Cookie`
 object::
 
+    use Cake\Http\Cookie\Cookie;
+    use DateTime;
+
     // Add a cookie as an array using the immutable API (3.4.0+)
-    $this->response = $this->response->withCookie('remember_me', [
-        'value' => 'yes',
-        'path' => '/',
-        'httpOnly' => true,
-        'secure' => false,
-        'expire' => strtotime('+1 year')
+    $this->response = $this->response->withCookie(new Cookie(
+        'remember_me',
+        'yes',
+        new DateTime('+1 year'), // expiration time
+        '/', // path
+        '', // domain
+        false, // secure
+        true // httponly
     ]);
 
     // Before 3.4.0
@@ -937,7 +965,7 @@ As of 3.2 you can use the ``cors()`` method to define `HTTP Access Control
 <https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS>`__
 related headers with a fluent interface::
 
-    $this->response->cors($this->request)
+    $this->response = $this->response->cors($this->request)
         ->allowOrigin(['*.cakephp.org'])
         ->allowMethods(['GET', 'POST'])
         ->allowHeaders(['X-CSRF-Token'])
@@ -1036,8 +1064,8 @@ Once you have created a cookie, you can add it to a new or existing
     Remember that collections are immutable and adding cookies into, or removing
     cookies from a collection, creates a *new* collection object.
 
-You should use the ``withCookie()`` method to add cookies to ``Response``
-objects as it is simpler to use::
+Cookie objects can be added to your controller responses by using
+``withCookie()``::
 
     $response = $this->response->withCookie($cookie);
 
@@ -1078,4 +1106,4 @@ collection if you modify a cookie::
 
 .. meta::
     :title lang=en: Request and Response objects
-    :keywords lang=en: request controller,request parameters,array indexes,purpose index,response objects,domain information,request object,request data,interrogating,params,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp,PSR-7,immutable
+    :keywords lang=en: request controller,request parameters,array indexes,purpose index,response objects,domain information,request object,request data,interrogating,params,parameters,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp,PSR-7,immutable

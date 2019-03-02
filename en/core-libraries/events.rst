@@ -240,7 +240,7 @@ a more direct approach and only listen to the event you really need::
     // If sending emails
     use Cake\Mailer\Email;
 
-    TableRegistry::get('ThirdPartyPlugin.Feedbacks')
+    TableRegistry::getTableLocator()->get('ThirdPartyPlugin.Feedbacks')
         ->getEventManager()
         ->on('Model.afterSave', function($event, $entity)
         {
@@ -498,7 +498,7 @@ Removing Callbacks and Listeners
 
 If for any reason you want to remove any callback from the event manager just
 call the :php:meth:`Cake\\Event\\EventManager::off()` method using as
-arguments the first two params you used for attaching it::
+arguments the first two parameters you used for attaching it::
 
     // Attaching a function
     $this->getEventManager()->on('My.event', [$this, 'doSomething']);

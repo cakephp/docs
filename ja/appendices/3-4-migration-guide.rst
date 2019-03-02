@@ -31,7 +31,7 @@ PSR-7 規格にある不変オブジェクトパターンに従ったメソッ�
 * ``Request::$cookies`` は非推奨です。代わりに ``Request::getCookie()`` を使用してください。
 * ``Request::$base`` は非推奨です。代わりに ``Request::getAttribute('base')`` を使用してください。
 * ``Request::$webroot`` は非推奨です。代わりに ``Request::getAttribute('webroot')`` を使用してください。
-* ``Request::$here`` は非推奨です。代わりに ``Request::getRequestTarget()()`` を使用してください。
+* ``Request::$here`` は非推奨です。代わりに ``Request::getAttribute('here')`` を使用してください。
 * ``Request::$_session`` が ``Request::$session`` に名前が変更されました。
 
 ``Cake\Network\Request`` の多くのメソッドが は非推奨になりました。

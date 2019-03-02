@@ -52,33 +52,36 @@ Manually Autoloading Plugin Classes
 If you install your plugins via ``composer`` or ``bake`` you shouldn't need to
 configure class autoloading for your plugins.
 
-In we were installing a plugin named ``MyPlugin`` manually you would need to
+If we were installing a plugin named ``MyPlugin`` manually you would need to
 modify your application's **composer.json** file to contain the following
 information:
 
 .. code-block:: json
 
-    "autoload": {
-        "psr-4": {
-            "MyPlugin\\": "plugins/MyPlugin/src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "MyPlugin\\Test\\": "plugins/MyPlugin/tests/"
+    {
+        "autoload": {
+            "psr-4": {
+                "MyPlugin\\": "plugins/MyPlugin/src/"
+            }
+        },
+        "autoload-dev": {
+            "psr-4": {
+                "MyPlugin\\Test\\": "plugins/MyPlugin/tests/"
+            }
         }
     }
-    ""
 
 If you are using vendor namespaces for your plugins, the namespace to path mapping
 should resemble the following:
 
 .. code-block:: json
 
-    "autoload": {
-        "psr-4": {
-            "AcmeCorp\\Users\\": "plugins/AcmeCorp/Users/src/",
-            "AcmeCorp\\Users\\Test\\": "plugins/AcmeCorp/Users/tests/"
+    {
+        "autoload": {
+            "psr-4": {
+                "AcmeCorp\\Users\\": "plugins/AcmeCorp/Users/src/",
+                "AcmeCorp\\Users\\Test\\": "plugins/AcmeCorp/Users/tests/"
+            }
         }
     }
 
@@ -93,6 +96,13 @@ autoloading with ``Plugin``::
 
     Plugin::load('ContactManager', ['autoload' => true]);
 
+
+.. deprecated:: 3.7.0
+    Plugin::load() and ``autoload`` option  are deprecated.
+
+.. note::
+    IMPORTANT: ``autoload`` option is not available on ``addPlugin()``, you should use ``composer dumpautoload`` instead.
+ 
 Loading a Plugin
 ================
 
@@ -102,17 +112,17 @@ application's ``bootstrap()`` function::
 
     // In src/Application.php
     use Cake\Http\BaseApplication;
-    use ContactManager\Plugin as ContactManager;
+    use ContactManager\Plugin as ContactManagerPlugin;
 
     class Application extends BaseApplication {
         public function bootstrap()
         {
             parent::bootstrap();
             // Load the contact manager plugin by class name
-            $this->addPlugin(ContactManager::class);
+            $this->addPlugin(ContactManagerPlugin::class);
 
             // Load a plugin with a vendor namespace by 'short name'
-            $this->addPlugin('AcmeCorp\ContactManager');
+            $this->addPlugin('AcmeCorp/ContactManager');
         }
     }
 
@@ -127,7 +137,7 @@ line:
     bin/cake plugin load ContactManager
 
 This would update your application's bootstrap method, or put the
-``Plugin::load('ContactManager');`` snippet in the bootstrap for you.
+``$this->addPlugin('ContactManager');`` snippet in the bootstrap for you.
 
 .. _plugin-configuration:
 
@@ -145,7 +155,6 @@ appropriate parts of your application. The hooks are:
   queue.
 * ``console`` Used to add console commands to an application's command
   collection.
-* ``events`` Used to add event listeners to the application event manager.
 
 When loading plugins you can configure which hooks are enabled. By default
 plugins without a :ref:`plugin-objects` have all hooks disabled. New style plugins
@@ -153,16 +162,19 @@ allow plugin authors to set defaults, which can be configured by you in your
 appliation::
 
     // In Application::bootstrap()
-
+    use ContactManager\Plugin as ContactManagerPlugin;
+    
     // Disable routes for the ContactManager plugin
-    $this->addPlugin(ContactManager::class, ['routes' => false]);
+    $this->addPlugin(ContactManagerPlugin::class, ['routes' => false]);
 
 You can configure hooks with array options, or the methods provided by plugin
 classes::
 
     // In Application::bootstrap()
+    use ContactManager\Plugin as ContactManagerPlugin;
+    
     // Use the disable/enable to configure hooks.
-    $plugin = new ContactManager();
+    $plugin = new ContactManagerPlugin();
 
     $plugin->disable('bootstrap');
     $plugin->enable('routes');
@@ -170,7 +182,7 @@ classes::
 
 Plugin objects also know their names and path information::
 
-    $plugin = new ContactManager();
+    $plugin = new ContactManagerPlugin();
 
     // Get the plugin name.
     $name = $plugin->getName();
@@ -277,7 +289,7 @@ Plugin Objects
 
 Plugin Objects allow a plugin author to define set-up logic, define default
 hooks, load routes, middleware and console commands. Plugin objects live in
-**src/Plugin.php**. For our ContactManager plugin, or plugin class could look
+**src/Plugin.php**. For our ContactManager plugin, our plugin class could look
 like::
 
     namespace ContactManager;
@@ -343,10 +355,10 @@ The above will connect default routes for your plugin. You can customize this
 file with more specific routes later on.
 
 Before you can access your controllers, you'll need to ensure the plugin is
-loaded and the plugin routes are loaded.  In your **config/bootstrap.php** add
+loaded and the plugin routes are loaded.  In your **src/Application.php** add
 the following::
 
-    Plugin::load('ContactManager', ['routes' => true]);
+    $this->addPlugin('ContactManager', ['routes' => true]);
 
 You can also load plugin routes in your application's routes list. Doing this
 provides you more control on how plugin routes are loaded and allows you to wrap
@@ -379,7 +391,6 @@ So, we place our new ContactsController in
 
     class ContactsController extends AppController
     {
-
         public function index()
         {
             //...
@@ -539,18 +550,17 @@ Contacts controller you could make the following file::
 Creating this file would allow you to override
 **plugins/ContactManager/templates/Contacts/index.php**.
 
-If your plugin is in a composer dependency (i.e. 'TheVendor/ThePlugin'), the
-path to the 'index' view of the Custom controller will be::
+If your plugin is in a composer dependency (i.e. 'Company/ContactManager'), the
+path to the 'index' view of the Contacts controller will be::
 
     templates/plugin/TheVendor/ThePlugin/Custom/index.php
 
 Creating this file would allow you to override
 **vendor/thevendor/theplugin/templates/Custom/index.php**.
 
-If the plugin implements a routing prefix, you must include the routing prefix in your
-application template overrides.
-For example, if the 'ContactManager' plugin implemented an 'admin' prefix the overridng path
-would be::
+If the plugin implements a routing prefix, you must include the routing prefix
+in your application template overrides. For example, if the 'ContactManager'
+plugin implemented an 'admin' prefix the overridng path would be::
 
     templates/plugin/ContactManager/Admin/ContactManager/index.php
 
@@ -592,7 +602,7 @@ You can use the :term:`plugin syntax` when linking to plugin assets using the
     // Generates a URL of /contact-manager/img/logo.jpg
     echo $this->Html->image('ContactManager.logo');
 
-Plugin assets are served using the ``AssetFilter`` dispatcher filter by default.
+Plugin assets are served using the ``AssetMiddleware`` middleware by default.
 This is only recommended for development. In production you should
 :ref:`symlink plugin assets <symlink-assets>` to improve performance.
 
@@ -633,8 +643,7 @@ that you prefix the plugin name before the name of the component. For example::
 
 The same technique applies to Helpers and Behaviors.
 
-
-.. plugin-commands::
+.. _plugin-commands:
 
 Commands
 ========
@@ -659,7 +668,15 @@ You can customize the command names by defining each command in your plugin::
     }
 
 
-Publishing Your Plugin
+Testing your Plugin
+===================
+
+If you are testing controllers or generating URLs, make sure your
+plugin connects routes ``tests/bootstrap.php``.
+
+For more information see :doc:`testing plugins </development/testing>` page.
+
+Publishing your Plugin
 ======================
 
 CakePHP plugins should be published to `the packagist

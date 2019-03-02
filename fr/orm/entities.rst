@@ -138,8 +138,8 @@ sont ces données formatées qui seront sauvegardées. Par exemple::
 Les accesseurs seront utilisés quand vous récupérerez la propriété via une de
 ces deux manières::
 
-    echo $user->title;
-    echo $user->get('title');
+    echo $article->title;
+    echo $article->get('title');
 
 Vous pouvez personnaliser la façon dont les propriétés sont récupérées/définies
 en définissant un mutateur:

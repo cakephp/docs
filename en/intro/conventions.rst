@@ -162,7 +162,7 @@ It is useful to prefix a CakePHP plugin with "cakephp-" in the package name.
 This makes the name semantically related on the framework it depends on.
 
 Do **not** use the CakePHP namespace (cakephp) as vendor name as this is reserved to CakePHP owned plugins.
-The convention is to use lowercase letters and dashes as separator.
+The convention is to use lowercase letters and dashes as separator::
 
     // Bad
     cakephp/foo-bar

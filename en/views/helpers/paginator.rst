@@ -217,7 +217,7 @@ Supported options are:
   you wish.
 
 While this method allows a lot of customization for its output. It is
-also ok to just call the method without any params. ::
+also ok to just call the method without any parameters. ::
 
     echo $this->Paginator->numbers();
 
@@ -515,6 +515,25 @@ It is also possible to sort a column based on associations:
         <?php endforeach; ?>
     </table>
 
+.. note::
+
+    Sorting by columns in associated models requires setting these in the
+    ``PaginationComponent::paginate`` property. Using the example above, the
+    controller handling the pagination would need to set its ``sortWhitelist``
+    key as follows:
+    
+    .. code-block:: php
+    
+        $this->paginate = [
+            'sortWhitelist' => [
+                'Posts.title',
+                'Authors.name',
+            ],
+        ];
+        
+    For more information on using the ``sortWhitelist`` option, please see
+    :ref:`control-which-fields-used-for-ordering`.
+
 The final ingredient to pagination display in views is the addition of page
 navigation, also supplied by the PaginationHelper::
 
@@ -550,7 +569,7 @@ to ``PaginatorHelper``, or use ``options()`` to set the default model::
     echo $this->Paginator->sort('title', ['model' => 'Articles']);
 
     // Set the default model.
-    $this->Paginator->options(['defaultModel' => 'Articles']);
+    $this->Paginator->options(['model' => 'Articles']);
     echo $this->Paginator->sort('title');
 
 By using the ``model`` option, ``PaginatorHelper`` will automatically use the

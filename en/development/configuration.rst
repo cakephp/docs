@@ -115,6 +115,30 @@ Asset.timestamp
     .. versionchanged:: 3.6.0
         As of 3.6.0, you can override this global setting when linking assets
         using the ``timestamp`` option.
+Asset.cacheTime
+    Sets the asset cache time. This determines the http header ``Cache-Control``'s
+    ``max-age``, and the http header's ``Expire``'s time for assets.
+    This can take anything that you version of php's `strtotime function
+    <http://php.net/manual/en/function.strtotime.php>`_ can take.
+    The default is ``+1 day``.
+
+Using a CDN
+-----------
+
+To use a CDN for loading your static assets, change ``App.imageBaseUrl``, ``App.cssBaseUrl``, 
+``App.jsBaseUrl`` to point the CDN URI, for example: ``https://mycdn.example.com/`` 
+(note the trailing ``/``).
+
+All images, scripts and styles loaded via HtmlHelper will prepend the absolute CDN path, matching 
+the same relative path used in the application. Please note there is a specific use case when using
+plugin based assets: plugins will not use the plugin's prefix when absolute ``...BaseUrl`` URI is used, for example 
+By default:
+
+    - ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``test_plugin/logo.png`` 
+
+If you set ``App.imageBaseUrl`` to ``https://mycdn.example.com/``: 
+
+    - ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``https://mycdn.example.com/logo.png``.
 
 Database Configuration
 ----------------------
@@ -384,7 +408,7 @@ exist, a :php:class:`RuntimeException` will be thrown::
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 
 .. versionadded:: 3.6.0
-``Configure::readOrFail()`` was added in 3.6.0
+    ``Configure::readOrFail()`` was added in 3.6.0
 
 Reading and writing configuration files
 =======================================
@@ -557,7 +581,7 @@ global event listeners::
             // Call the parent to `require_once` config/bootstrap.php
             parent::bootstrap();
 
-            Plugin::load('MyPlugin', ['bootstrap' => true, 'routes' => true]);
+            $this->addPlugin('MyPlugin', ['bootstrap' => true, 'routes' => true]);
         }
     }
 
@@ -587,7 +611,7 @@ class like so::
     if (!$isCakeBakeShellRunning) {
         EventManager::instance()->on('Model.initialize', function($event) {
             $subject = $event->getSubject();
-            if (get_class($subject === 'Cake\ORM\Table') {
+            if (get_class($subject) === 'Cake\ORM\Table') {
                 $msg = sprintf(
                     'Missing table class or incorrect alias when registering table class for database table %s.',
                     $subject->getTable());

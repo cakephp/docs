@@ -14,6 +14,9 @@ bake を実行する前にデータベースとの接続を確認しましょう
 :ref:`データベースアクセス & ORM 内の設定 <database-configuration>` をご覧ください。
 
 ``bin/cake bake`` を引数無しで実行すると可能なタスクを表示できます。
+
+Windows システムの場合、 ``bin\cake bake`` を試してみてください。
+
 それは以下のように表示されます。 ::
 
     $ bin/cake bake
