@@ -92,9 +92,6 @@ If you want to access all the query parameters you can use
 
     $query = $this->request->getQueryParams();
 
-.. versionadded:: 3.4.0
-    ``getQueryParams()`` and ``getQuery()`` were added in 3.4.0
-
 Request Body Data
 -----------------
 
@@ -148,9 +145,6 @@ a getter/setter for environment variables without having to modify globals
 To access all the environment variables in a request use ``getServerParams()``::
 
     $env = $this->request->getServerParams();
-
-.. versionadded:: 3.4.0
-    ``getServerParams()`` was added in 3.4.0
 
 XML or JSON Data
 ----------------
@@ -282,9 +276,6 @@ There are several built-in detectors that you can use:
 * ``is('xml')`` Check to see whether the request has 'xml' extension and accept
   'application/xml' or 'text/xml' mimetype.
 
-.. versionadded:: 3.3.0
-    Detectors can take additional parameters as of 3.3.0.
-
 Session Data
 ------------
 
@@ -400,9 +391,6 @@ After proxies are trusted ``clientIp()`` will use the first IP address in the
 ``X-Forwarded-For`` header providing it is the only value that isn't from a trusted
 proxy.
 
-.. versionadded:: 3.7.0
-    ``setTrustedProxies()`` was added.
-
 Checking Accept Headers
 -----------------------
 
@@ -453,9 +441,6 @@ Request cookies can be read through a number of methods::
 
 See the :php:class:`Cake\\Http\\Cookie\\CookieCollection` documentation for how
 to work with cookie collection.
-
-.. versionadded:: 3.5.0
-    ``ServerRequest::getCookieCollection()`` was added in 3.5.0
 
 .. index:: $this->response
 
@@ -617,9 +602,6 @@ To set a string as the response body, do the following::
     // If you want a json response
     $response = $response->withType('application/json')
         ->withStringBody(json_encode(['Foo' => 'bar']));
-
-.. versionadded:: 3.4.3
-    ``withStringBody()`` was added in 3.4.3
 
 .. php:method:: withBody($body)
 
@@ -927,9 +909,6 @@ criteria are met:
 #. The request has an ``Origin`` header.
 #. The request's ``Origin`` value matches one of the allowed Origin values.
 
-.. versionadded:: 3.2
-    The ``CorsBuilder`` was added in 3.2
-
 Common Mistakes with Immutable Responses
 ========================================
 
@@ -1047,9 +1026,6 @@ collection if you modify a cookie::
     // Check state
     $cookie->isHttpOnly();
     $cookie->isSecure();
-
-.. versionadded:: 3.5.0
-    ``CookieCollection`` and ``Cookie`` were added in 3.5.0.
 
 .. meta::
     :title lang=en: Request and Response objects

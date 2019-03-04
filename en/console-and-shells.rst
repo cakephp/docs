@@ -146,9 +146,6 @@ your plugins.
     When adding multiple commands that use the same Command class, the ``help``
     command will display the shortest option.
 
-.. versionadded:: 3.5.0
-    The ``console`` hook was added.
-
 .. _renaming-commands:
 .. index:: nested commands, subcommands
 

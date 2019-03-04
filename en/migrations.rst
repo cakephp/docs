@@ -183,11 +183,6 @@ Migration names can follow any of the following patterns:
 You can also use the ``underscore_form`` as the name for your migrations i.e.
 ``create_products``.
 
-.. versionadded:: cakephp/migrations 1.5.2
-
-    As of v1.5.2 of the `migrations plugin <https://github.com/cakephp/migrations/>`_,
-    the migration filename will be automatically camelized.
-
 .. warning::
 
     Migration names are used as migration class names, and thus may collide with
@@ -337,8 +332,6 @@ will generate::
 Specifying field length
 -----------------------
 
-.. versionadded:: cakephp/migrations 1.4
-
 If you need to specify a field length, you can do it within brackets in the
 field type, ie::
 
@@ -445,8 +438,6 @@ log table as migrated.
 Generating a diff between two database states
 =============================================
 
-.. versionadded:: cakephp/migrations 1.6.0
-
 You can generate a migrations file that will group all the differences between
 two database states using the ``migration_diff`` bake template. To do so, you
 can use the following command::
@@ -552,8 +543,6 @@ just like for the ``migrate`` command.
 ``mark_migrated`` : Marking a migration as migrated
 ---------------------------------------------------
 
-.. versionadded:: 1.4.0
-
 It can sometimes be useful to mark a set of migrations as migrated without
 actually running them.
 In order to do this, you can use the ``mark_migrated`` command.
@@ -624,10 +613,6 @@ As for migrations, a ``bake`` interface is provided for seed files::
     # You can specify an alternative connection when generating a seeder.
     $ bin/cake bake seed Articles --connection connection
 
-.. versionadded:: cakephp/migrations 1.6.4
-
-    Options ``--data``, ``--limit`` and ``--fields`` were added to export
-    data from your database.
 
 As of 1.6.4, the ``bake seed`` command allows you to create a seed file with
 data exported from your database by using the ``--data`` flag::
@@ -675,8 +660,6 @@ that the same seeder can be applied multiple times.
 
 Calling a Seeder from another Seeder
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. versionadded:: cakephp/migrations 1.6.2
 
 Usually when seeding, the order in which to insert the data must be respected
 to not encounter constraints violations. Since Seeders are executed in the
@@ -735,8 +718,6 @@ execution to the migrations relative to that plugin::
 
 Running Migrations in a non-shell environment
 =============================================
-
-.. versionadded:: cakephp/migrations 1.2.0
 
 Since the release of version 1.2 of the migrations plugin, you can run
 migrations from a non-shell environment, directly from an app, by using the new
@@ -963,8 +944,6 @@ In your migration file, you can do the following::
 
 Skipping the ``schema.lock`` file generation
 --------------------------------------------
-
-.. versionadded:: cakephp/migrations 1.6.5
 
 In order for the diff feature to work, a **.lock** file is generated everytime
 you migrate, rollback or bake a snapshot, to keep track of the state of your

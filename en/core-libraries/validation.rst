@@ -90,9 +90,6 @@ If you have multiple fields that are required, you can define them as a list::
         ]
     ]);
 
-.. versionadded:: 3.3.0
-    ``requirePresence()`` accepts an array of fields as of 3.3.0
-
 Allowing Empty Fields
 ---------------------
 
@@ -150,9 +147,6 @@ like::
 See the `Validator API documentation
 <https://api.cakephp.org/3.x/class-Cake.Validation.Validator.html>`_ for the
 full set of validator methods.
-
-.. versionadded:: 3.2
-    Rule building methods were added in 3.2.0
 
 .. _custom-validation-rules:
 
@@ -316,10 +310,6 @@ This would require the ``full_name`` field to be present only in case the user
 wants to create a subscription, while the ``email`` field would always be
 required, since it would also be needed when canceling a subscription.
 
-.. versionadded:: 3.1.1
-    The callable support for ``requirePresence()`` was added in 3.1.1
-
-
 
 Marking Rules as the Last to Run
 --------------------------------
@@ -396,8 +386,6 @@ in the future, you can use the ``addDefaultProvider()`` method as follows::
     therefore **config/bootstrap.php** is the best place to set up your
     default providers.
 
-.. versionadded:: 3.5.0
-
 You can use the `Localized plugin <https://github.com/cakephp/localized>`_ to
 get providers based on countries. With this plugin, you'll be able to validate
 model fields, depending on a country, ie::
@@ -435,8 +423,6 @@ There are a few methods that are common to all classes, defined through the
 
 Nesting Validators
 ------------------
-
-.. versionadded:: 3.0.5
 
 When validating :doc:`/core-libraries/form` with nested data, or when working
 with models that contain array data types, it is necessary to validate the
@@ -479,9 +465,6 @@ conditional application::
     );
 
 The error message for a nested validator can be found in the ``_nested`` key.
-
-.. versionadded:: 3.6.0
-    message and conditions for nested validators were added.
 
 .. _reusable-validators:
 

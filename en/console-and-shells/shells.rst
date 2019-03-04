@@ -234,8 +234,6 @@ from inside your plugin's shell.
 Passing extra parameters to the dispatched Shell
 ------------------------------------------------
 
-.. versionadded:: 3.1
-
 It can sometimes be useful to pass on extra parameters (that are not shell arguments)
 to the dispatched Shell. In order to do this, you can now pass an array to
 ``dispatchShell()``. The array is expected to have a ``command`` key as well
@@ -331,10 +329,6 @@ process::
         // Halt with an error message and error code.
         $this->abort('User cannot be found', 128);
     }
-
-.. versionadded:: 3.2
-    The abort() method was added in 3.2. In prior versions you can use
-    ``error()`` to output a message and stop execution.
 
 Status and Error Codes
 ======================

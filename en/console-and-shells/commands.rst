@@ -201,14 +201,6 @@ To make testing console applications easier, CakePHP comes with a
 ``ConsoleIntegrationTestTrait`` trait that can be used to test console applications
 and assert against their results.
 
-.. versionadded:: 3.5.0
-
-    The ``ConsoleIntegrationTestCase`` was added.
-
-.. versionadded:: 3.7.0
-
-    The ``ConsoleIntegrationTestCase`` class was moved into the ``ConsoleIntegrationTestTrait`` trait.
-
 To get started testing your console application, create a test case that uses the
 ``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait. This trait contains a method
 ``exec()`` that is used to execute your command. You can pass the same string
@@ -449,10 +441,6 @@ To test shells that are dispatched using the ``CommandRunner`` class, enable it
 in your test case with the following method::
 
     $this->useCommandRunner();
-
-.. versionadded:: 3.5.0
-
-    The ``CommandRunner`` class was added.
 
 Assertion methods
 -----------------

@@ -125,9 +125,6 @@ a field contains a 'non-empty' value::
     $article->isEmpty('user_id');  // true
     $article->hasValue('user_id'); // false
 
-.. versionadded:: 3.6.0
-    The ``hasValue()`` and ``isEmpty()`` methods were added in 3.6.0
-
 Accessors & Mutators
 ====================
 
@@ -279,13 +276,6 @@ To get a list of all dirty fields of an ``Entity`` you may call::
 
     $dirtyFields = $entity->getDirty();
 
-.. versionadded:: 3.4.3
-
-    ``getDirty()`` has been added.
-
-.. versionadded:: 3.5.0
-    ``isDirty()``, ``setDirty()`` were added.
-
 Validation Errors
 =================
 
@@ -313,9 +303,6 @@ on an entity, making it easier to test code that works with error messages::
         'password' => ['Password is required'],
         'username' => ['Username is required']
     ]);
-
-.. versionadded:: 3.7.0
-    ``hasErrors()`` was added.
 
 .. _entities-mass-assignment:
 

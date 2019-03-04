@@ -254,9 +254,6 @@ messages could look like::
 The above cell would paginate the ``Messages`` model using :ref:`scoped
 pagination parameters <paginating-multiple-queries>`.
 
-.. versionadded:: 3.5.0
-    ``Cake\Datasource\Paginator`` was added in 3.5.0.
-
 Cell Options
 ============
 

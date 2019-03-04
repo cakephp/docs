@@ -372,15 +372,6 @@ automatically convert input parameters from ``DateTime`` instances into a
 timestamp or formatted datestrings. Likewise, 'binary' columns will accept file
 handles, and generate file handles when reading data.
 
-.. versionchanged:: 3.3.0
-    The ``json`` type was added.
-
-.. versionchanged:: 3.5.0
-    The ``smallinteger`` and ``tinyinteger`` types were added.
-
-.. versionchanged:: 3.6.0
-    The ``binaryuuid`` type was added.
-
 .. _adding-custom-database-types:
 
 Adding Custom Types
@@ -451,9 +442,6 @@ the type mapping. During our application bootstrap we should do the following::
 
     Type::map('json', 'App\Database\Type\JsonType');
 
-.. versionadded:: 3.3.0
-    The JsonType described in this example was added to the core.
-
 We can then overload the reflected schema data to use our new type, and
 CakePHP's database layer will automatically convert our JSON data when creating
 queries. You can use the custom types you've created by mapping the types in
@@ -476,9 +464,6 @@ your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
 
 Mapping Custom Datatypes to SQL Expressions
 -------------------------------------------
-
-.. versionadded:: 3.3.0
-    Support for mapping custom data types to SQL expressions was added in 3.3.0.
 
 The previous example maps a custom datatype for a 'json' column type which is
 easily represented as a string in a SQL statement. Complex SQL data
@@ -586,9 +571,6 @@ to our table class <saving-complex-types>`.
 
 Enabling Immutable DateTime Objects
 -----------------------------------
-
-.. versionadded:: 3.2
-    Immutable date/time objects were added in 3.2.
 
 Because Date/Time objects are easily mutated in place, CakePHP allows you to
 enable immutable value objects. This is best done in your application's

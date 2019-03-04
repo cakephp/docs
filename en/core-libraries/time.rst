@@ -171,9 +171,6 @@ The following calendar types are supported:
 * coptic
 * ethiopic
 
-.. versionadded:: 3.1
-    Non-gregorian calendar support was added in 3.1
-
 .. note::
     For constant strings i.e. IntlDateFormatter::FULL Intl uses ICU library
     that feeds its data from CLDR (http://cldr.unicode.org/) which version
@@ -337,8 +334,6 @@ Dates
 =====
 
 .. php:class: Date
-
-.. versionadded:: 3.2
 
 The ``Date`` class in CakePHP implements the same API and methods as
 :php:class:`Cake\\I18n\\Time` does. The main difference between ``Time`` and

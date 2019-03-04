@@ -581,8 +581,6 @@ If you want to use a different connection use::
         public $import = ['table' => 'articles', 'connection' => 'other'];
     }
 
-.. versionadded:: 3.1.7
-
 Usually, you have a Table class along with your fixture, as well. You can also
 use that to retrieve the table name::
 
@@ -800,10 +798,6 @@ and Components, CakePHP offers a specialized ``IntegrationTestTrait`` trait.
 Using this trait in your controller test cases allows you to
 test controllers from a high level.
 
-.. versionadded:: 3.7.0
-
-    The ``IntegrationTestCase`` class was moved into the ``IntegrationTestTrait`` trait.
-
 If you are unfamiliar with integration testing, it is a testing approach that
 makes it easy to test multiple units in concert. The integration testing
 features in CakePHP simulate an HTTP request being handled by your application.
@@ -921,9 +915,6 @@ All of the methods except ``get()`` and ``delete()`` accept a second parameter
 that allows you to send a request body. After dispatching a request you can use
 the various assertions provided by ``IntegrationTestTrait`` or PHPUnit to
 ensure your request had the correct side-effects.
-
-.. versionadded:: 3.5.0
-    ``options()`` and ``head()`` were added in 3.5.0.
 
 Setting up the Request
 ----------------------
@@ -1048,10 +1039,6 @@ can use ``configRequest()`` to set the correct environment variables::
         'environment' => ['HTTPS' => 'on']
     ]);
 
-.. versionadded:: 3.1.2
-    The ``enableCsrfToken()`` and ``enableSecurityToken()`` methods were added
-    in 3.1.2
-
 Integration Testing PSR-7 Middleware
 ------------------------------------
 
@@ -1085,9 +1072,6 @@ You should also take care to try and use :ref:`application-bootstrap` to load
 any plugins containing events/routes. Doing so will ensure that your
 events/routes are connected for each test case.
 
-.. versionadded:: 3.3.0
-    PSR-7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
-
 Testing with Encrypted Cookies
 ------------------------------
 
@@ -1102,10 +1086,6 @@ helper methods for interacting with encrypted cookies in your test cases::
     $this->get('/bookmarks/index');
 
     $this->assertCookieEncrypted('An updated value', 'my_cookie');
-
-.. versionadded:: 3.1.7
-
-    ``assertCookieEncrypted`` and ``cookieEncrypted`` were added in 3.1.7.
 
 Testing Flash Messages
 ----------------------
@@ -1135,12 +1115,6 @@ As of 3.7.0 there are additional test helpers for flash messages::
 
     // Assert the second flash message element
     $this->assertFlashElementAt(1, 'Flash/error');
-
-.. versionadded:: 3.4.7
-    ``enableRetainFlashMessages()`` was added in 3.4.7
-
-.. versionadded:: 3.7.0
-    Flash message assertions were added.
 
 Testing a JSON Responding Controller
 ------------------------------------
@@ -1211,8 +1185,6 @@ allow the underlying error to bubble up. You can use
 In the above example, the test would fail and the underlying exception message
 and stack trace would be displayed instead of the rendered error page being
 checked.
-
-.. versionadded:: 3.5.0
 
 Assertion methods
 -----------------
@@ -1635,11 +1607,6 @@ global events does not require passing the event manager::
 
     $this->assertEventFired('My.Global.Event');
     $this->assertEventFiredWith('My.Global.Event', 'user', 1);
-
-.. versionadded:: 3.2.11
-
-    Event tracking, ``assertEventFired()``, and ``assertEventFiredWith`` were
-    added.
 
 Testing Email
 =============

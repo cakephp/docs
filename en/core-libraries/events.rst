@@ -143,9 +143,6 @@ After firing an event on the manager, you can retrieve it from the event list::
 Tracking can be disabled by removing the event list or calling
 :php:meth:`Cake\\Event\\EventList::trackEvents(false)`.
 
-.. versionadded:: 3.2.11
-    Event tracking and :php:class:`Cake\\Event\\EventList` were added.
-
 Core Events
 ===========
 
@@ -278,11 +275,6 @@ of a particular event pattern can be used as the basis of some action.::
 .. note::
 
     The pattern passed to the ``matchingListeners`` method is case sensitive.
-
-.. versionadded:: 3.2.3
-
-    The ``matchingListeners`` method returns an array of events matching
-    a search pattern.
 
 .. _event-priorities:
 

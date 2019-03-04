@@ -261,9 +261,6 @@ interface requires a single method to be implemented::
 The ``TranslateBehavior`` has a non-trivial implementation of this interface
 that you might want to refer to.
 
-.. versionadded:: 3.3.0
-    The ability for behaviors to participate in marshalling was added in 3.3.0
-
 Removing Loaded Behaviors
 =========================
 

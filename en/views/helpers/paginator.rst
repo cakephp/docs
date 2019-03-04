@@ -317,10 +317,6 @@ PaginatorHelper can be used to create pagination link tags in your page
     // Create next/prev & first/last links for the current model.
     echo $this->Paginator->meta(['first' => true, 'last' => true]);
 
-.. versionadded:: 3.4.0
-
-    The ``first`` and ``last`` options were added in 3.4.0
-
 Checking the Pagination State
 =============================
 
@@ -347,8 +343,6 @@ Checking the Pagination State
 .. php:method:: total(string $model = null)
 
     Returns the total number of pages for the provided model.
-
-    .. versionadded:: 3.4.0
 
 Creating a Page Counter
 =======================
@@ -420,9 +414,6 @@ Create a dropdown control that changes the ``limit`` query parameter::
     echo $this->Paginator->limitControl([25 => 25, 50 => 50], $user->perPage);
 
 The generated form and control will automatically submit on change.
-
-.. versionadded:: 3.5.0
-    The ``limitControl()`` method was added in 3.5.0
 
 Configuring Pagination Options
 ==============================
@@ -572,9 +563,6 @@ to ``PaginatorHelper``, or use ``options()`` to set the default model::
 
 By using the ``model`` option, ``PaginatorHelper`` will automatically use the
 ``scope`` defined in when the query was paginated.
-
-.. versionadded:: 3.3.0
-    Multiple Pagination was added in 3.3.0
 
 .. meta::
     :title lang=en: PaginatorHelper

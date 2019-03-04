@@ -315,9 +315,6 @@ chunking associative arrays::
         ['c' => 3, 'd' => [4, 5]]
     ]
 
-.. versionadded:: 3.4.0
-    ``chunkWithKeys()`` was added in 3.4.0
-
 Filtering
 =========
 
@@ -475,8 +472,6 @@ for::
     // Average: 150
     $average = (new Collection($items))->avg('invoice.total');
 
-.. versionadded:: 3.5.0
-
 .. php:method:: median($matcher = null)
 
 Calculate the median value of a set of elements. Optionally provide a matcher
@@ -493,7 +488,6 @@ path, or function to extract values to generate the median for::
     // Median: 333
     $median = (new Collection($items))->median('invoice.total');
 
-.. versionadded:: 3.5.0
 
 Grouping and Counting
 ---------------------
@@ -843,9 +837,6 @@ of the each of the original columns::
          ['2014', '50', '100', '200'],
      ]
 
-.. versionadded:: 3.3.0
-    ``Collection::transpose()`` was added in 3.3.0.
-
 Withdrawing Elements
 --------------------
 
@@ -932,9 +923,6 @@ overwritten::
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->appendItem($newTweet, 99);
 
-.. versionadded:: 3.6.0
-    appendItem() was added.
-
 .. php:method:: prepend(array|Traversable $items)
 
 The ``prepend()`` method will return a new collection containing the values from
@@ -942,9 +930,6 @@ both sources::
 
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->prepend($phpTweets);
-
-.. versionadded:: 3.6.0
-    prepend() was added.
 
 .. php:method:: prependItem($value, $key)
 
@@ -954,10 +939,6 @@ overwritten::
 
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->prependItem($newTweet, 99);
-
-.. versionadded:: 3.6.0
-    prependItem() was added.
-
 
 .. warning::
 
@@ -1174,9 +1155,6 @@ into another collection using the ``buffered()`` function::
 
 Now, when both collections are iterated, they will only call the
 extracting operation once.
-
-.. versionadded:: 3.5.0
-    Collections initialized with an array are no longer iterated lazily in order to improve performance.
 
 Making Collections Rewindable
 -----------------------------

@@ -26,9 +26,6 @@ fields with errors will not be present in the returned entity::
         // Entity failed validation.
     }
 
-.. versionadded:: 3.4.0
-    The ``getErrors()`` function was added.
-
 When building an entity with validation enabled the following occurs:
 
 1. The validator object is created.
@@ -416,9 +413,6 @@ unique checks using ``allowMultipleNulls``::
         ['allowMultipleNulls' => false]
     ));
 
-.. versionadded:: 3.3.0
-    The ``allowNullableNulls`` and ``allowMultipleNulls`` options were added.
-
 Association Count Rules
 -----------------------
 
@@ -443,9 +437,6 @@ Note that ``validCount`` returns ``false`` if the property is not countable or d
 
     // The save operation will fail if tags is null.
     $rules->add($rules->validCount('tags', 0, '<=', 'You must not have any tags'));
-
-.. versionadded:: 3.3.0
-    The ``validCount()`` method was added in 3.3.0.
 
 Using Entity Methods as Rules
 -----------------------------

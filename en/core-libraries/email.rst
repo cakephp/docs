@@ -97,13 +97,6 @@ also just load an array of options::
     // Or in constructor
     $email = new Email(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
-.. versionchanged:: 3.1
-    The ``default`` email profile is automatically set when an ``Email``
-    instance is created.
-
-.. deprecated:: 3.4.0
-    Use ``setProfile()`` instead of ``profile()``.
-
 Configuring Transports
 ----------------------
 
@@ -488,13 +481,8 @@ message id (since there is no host name in a CLI environment)::
 
 A valid message id can help to prevent emails ending up in spam folders.
 
-.. deprecated:: 3.4.0
-    Use ``setDomain()`` instead of ``domain()``.
-
 Creating Reusable Emails
 ========================
-
-.. versionadded:: 3.1.0
 
 Mailers allow you to create reusable emails throughout your application. They
 can also be used to contain multiple email configurations in one location. This
@@ -606,10 +594,6 @@ Add the trait to your test case to start testing emails::
     {
         use EmailTrait;
     }
-
-.. versionadded:: 3.7.0
-
-    ``Cake\TestSuite\EmailTrait`` was added.
 
 Assertion methods
 -----------------

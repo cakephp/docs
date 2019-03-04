@@ -315,9 +315,6 @@ enable cached routes, provide the desired :ref:`cache configuration
 The above would use the ``routing`` cache engine to store the generated route
 collection.
 
-.. versionadded:: 3.6.0
-    Route caching was added in 3.6.0
-
 .. _security-header-middleware:
 
 Security Header Middleware
@@ -349,9 +346,6 @@ your application's middleware stack::
 
     $middlewareQueue->add($securityHeaders);
 
-.. versionadded:: 3.5.0
-    The ``SecurityHeadersMiddleware`` was added in 3.5.0
-
 .. _encrypted-cookie-middleware:
 
 Encrypted Cookie Middleware
@@ -378,9 +372,6 @@ Cookie data is encrypted with via OpenSSL using AES::
 
 The encryption algorithms and padding style used by the cookie middleware are
 backwards compatible with ``CookieComponent`` from earlier versions of CakePHP.
-
-.. versionadded:: 3.5.0
-    The ``EncryptedCookieMiddleware`` was added in 3.5.0
 
 .. _csrf-middleware:
 
@@ -448,9 +439,6 @@ When enabled, you can access the current CSRF token on the request object::
 
     $token = $this->request->getParam('_csrfToken');
 
-.. versionadded:: 3.5.0
-    The ``CsrfProtectionMiddleware`` was added in 3.5.0
-
 Integration with FormHelper
 ---------------------------
 
@@ -504,9 +492,6 @@ an option. You can also define your own parsers::
         // Use a CSV parsing library.
         return Csv::parse($body);
     });
-    
-.. versionadded:: 3.6.0
-    The ``BodyParserMiddleware`` was added in 3.6.0
 
 .. meta::
     :title lang=en: Http Middleware

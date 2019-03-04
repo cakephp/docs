@@ -343,9 +343,6 @@ method::
     ]);
     $http->addCookie(new Cookie('session', 'abc123'));
 
-.. versionadded:: 3.5.0
-    ``addCookie()`` was added in 3.5.0
-
 .. _httpclient-response-objects:
 
 Response Objects
@@ -356,11 +353,6 @@ Response Objects
 .. php:class:: Response
 
 Response objects have a number of methods for inspecting the response data.
-
-.. versionchanged:: 3.3.0
-    As of 3.3.0 ``Cake\Http\Client\Response`` implements the `PSR-7
-    ResponseInterface
-    <http://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface>`__.
 
 Reading Response Bodies
 -----------------------

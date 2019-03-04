@@ -208,9 +208,6 @@ properties of the view before it is created::
 The above shows how you can load custom helpers, set the theme and use a custom
 view class.
 
-.. versionadded:: 3.1
-    ViewBuilder was added in 3.1
-
 Rendering a View
 ----------------
 

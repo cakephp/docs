@@ -508,9 +508,6 @@ the ``_fallback`` package::
         // Custom code that yields a package here.
     });
 
-.. versionadded:: 3.4.0
-    Replacing the ``_fallback`` loader was added in 3.4.0
-
 Plurals and Context in Custom Translators
 -----------------------------------------
 

@@ -241,9 +241,6 @@ Folder API
 
     Returns a path with slashes normalized for the operating system.
 
-    .. versionadded:: 3.7.0
-
-
 .. php:method:: pwd()
 
     Return current path.
