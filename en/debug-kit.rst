@@ -38,17 +38,17 @@ Configuration
 * ``DebugKit.includeSchemaReflection`` - Set to true to enable logging of schema
   reflection queries. Disabled by default.
   
-* ``DebugKit.safeTld`` - Set an array of whitelisted TDLs for local development.
-  This can be used to make sure DebugKit displays on hosts it otherwise determines unsafe.::
+* ``DebugKit.safeTld`` - Set an array of whitelisted TLDs for local development.
+  This can be used to make sure DebugKit displays on hosts it otherwise determines unsafe. ::
 
     // Allow e.g. http://foo.bar.dev or http://my-shop.local domains locally
     Configure::write('DebugKit.safeTld', ['dev', 'local', 'example']);
 
 * ``DebugKit.forceEnable`` - Force DebugKit to display. Careful with this, it is usually 
-    safer to simply whitelist your local TLDs. Example usage::
+  safer to simply whitelist your local TLDs. Example usage::
 
     // Before loading DebugKit
-    Configure::write('DebugKit.forceEnable', true);  
+    Configure::write('DebugKit.forceEnable', true);
 
 Database Configuration
 ----------------------
