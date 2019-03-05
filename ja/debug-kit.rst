@@ -37,7 +37,7 @@ DebugKit は、CakePHP アプリケーション用のデバッグツールバー
   ロギングを有効にするには、true に設定します。デフォルトは無効になっています。
 
 * ``DebugKit.safeTld`` - ローカル開発用のトップレベルドメインのホワイトリストを設定します。
-  これにより安全でないと判断したホスト上でDebugKitを表示できるようになります。 ::
+  これにより安全でないと判断したホスト上で DebugKit を表示できるようになります。 ::
 
     // 例: http://foo.bar.dev または http://my-shop.local のドメインはローカルとして許可する
     Configure::write('DebugKit.safeTld', ['dev', 'local', 'example']);
@@ -45,7 +45,7 @@ DebugKit は、CakePHP アプリケーション用のデバッグツールバー
 * ``DebugKit.forceEnable`` - DebugKit を強制的に表示します。これを使うときは注意してください。
   通常は単純にローカルのトップレベルドメインをホワイトリストに追加したほうが安全です。 使用例::
 
-    // Before をロードする前に
+    // DebugKit をロードする前に
     Configure::write('DebugKit.forceEnable', true);
 
 データベース設定
