@@ -275,9 +275,6 @@ When converting belongsToMany data, you can disable the new entity creation, by
 using the ``onlyIds`` option. When enabled, this option restricts belongsToMany
 marshalling to only use the ``_ids`` key and ignore all other data.
 
-.. versionadded:: 3.1.0
-    The ``onlyIds`` option was added in 3.1.0
-
 Converting HasMany Data
 -----------------------
 
@@ -310,9 +307,6 @@ new parent record you can use the ``_ids`` format::
 When converting hasMany data, you can disable the new entity creation, by using
 the ``onlyIds`` option. When enabled, this option restricts hasMany marshalling
 to only use the ``_ids`` key and ignore all other data.
-
-.. versionadded:: 3.1.0
-    The ``onlyIds`` option was added in 3.1.0
 
 Converting Multiple Records
 ---------------------------
@@ -1107,8 +1101,6 @@ If you want to track down the entity that failed to save, you can use the
 As this internally perfoms a :php:meth:`Cake\\ORM\\Table::save()` call, all
 corresponding save events will be triggered.
 
-.. versionadded:: 3.4.1
-
 Saving Multiple Entities
 ========================
 
@@ -1133,8 +1125,6 @@ be an array of entities created using ``newEntities()`` / ``patchEntities()``.
     $result = $articles->saveMany($entities);
 
 The result will be updated entities on success or ``false`` on failure.
-
-.. versionadded:: 3.2.8
 
 Bulk Updates
 ============

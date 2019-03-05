@@ -172,10 +172,6 @@ callbacks like ``json_decode``::
 The above will make ``$this->request->getData()`` an array of the JSON input data,
 without the additional ``true`` you'd get a set of ``stdClass`` objects.
 
-.. deprecated:: 3.1.0
-    As of 3.1.0 the ``addInputType()`` method is deprecated. You should use
-    ``config()`` to add input types at runtime.
-
 .. versionchanged:: 3.6.0
     You should prefer using :ref:`body-parser-middleware` instead of
     RequestHandlerComponent.

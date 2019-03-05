@@ -21,12 +21,6 @@ component will throw a
     use :php:meth:`Cake\\Http\\ServerRequest::allowMethod()` to ensure the correct
     HTTP method is used.
 
-.. versionadded:: 3.1
-
-    The exception type changed from
-    :php:class:`Cake\\Network\\Exception\\ForbiddenException` to
-    :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
-
 .. deprecated:: 3.5.0
     You should use :ref:`csrf-middleware` instead of
     ``CsrfComponent``.

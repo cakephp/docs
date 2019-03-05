@@ -39,10 +39,6 @@ build your own backend. The built-in caching engines are:
 Regardless of the CacheEngine you choose to use, your application interacts with
 :php:class:`Cake\\Cache\\Cache`.
 
-
-.. versionadded:: 3.7.0
-    The ``Array`` engine was added.
-
 .. _cache-configuration:
 
 Configuring Cache Engines
@@ -230,14 +226,6 @@ You can turn off cache fallbacks with ``false``::
     ]);
 
 When there is no fallback cache failures will be raised as exceptions.
-
-
-
-.. versionadded:: 3.5.0
-    Cache engine fallbacks were added.
-
-.. versionchanged:: 3.6.0
-    Fallbacks can now be disabled via ``false``
 
 Removing Configured Cache Engines
 ---------------------------------

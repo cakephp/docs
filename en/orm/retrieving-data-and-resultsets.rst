@@ -651,9 +651,6 @@ Alternatively, if you have multiple associations, you can use ``enableAutoFields
             return $q->autoFields(true);
         }]);
 
-.. versionadded:: 3.1
-    Selecting columns via an association object was added in 3.1
-
 Sorting Contained Associations
 ------------------------------
 
@@ -754,9 +751,6 @@ associations::
 Again, the only difference is that no additional columns will be added to the
 result set, and no ``_matchingData`` property will be set.
 
-.. versionadded:: 3.1
-    Query::innerJoinWith() was added in 3.1
-
 Using notMatching
 -----------------
 
@@ -814,9 +808,6 @@ commented by a certain user::
 Keep in mind that contrary to the ``matching()`` function, ``notMatching()``
 will not add any data to the ``_matchingData`` property in the results.
 
-.. versionadded:: 3.1
-    Query::notMatching() was added in 3.1
-
 Using leftJoinWith
 ------------------
 
@@ -849,9 +840,6 @@ word, per author::
 
 This function will not load any columns from the specified associations into the
 result set.
-
-.. versionadded:: 3.1
-    Query::leftJoinWith() was added in 3.1
 
 .. end-filtering
 
@@ -1064,9 +1052,6 @@ can load additional associations using ``loadInto()``::
 
 You can eager load additional data into a single entity, or a collection of
 entities.
-
-.. versionadded: 3.1
-    Table::loadInto() was added in 3.1
 
 .. _map-reduce:
 

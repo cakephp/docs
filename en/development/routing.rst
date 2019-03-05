@@ -820,9 +820,6 @@ parameter when generating URLs::
         '_host' => 'images.example.com',
     ]);
 
-.. versionadded:: 3.4.0
-    The ``_host`` option was added in 3.4.0
-
 .. index:: file extensions
 .. _file-extensions:
 
@@ -1053,9 +1050,6 @@ compatible with :ref:`prefix-routing`.
 
     While you can nest resources as deeply as you require, it is not recommended
     to nest more than 2 resources together.
-
-.. versionadded:: 3.3
-    The ``prefix`` option was added to ``resources()`` in 3.3.
 
 Limiting the Routes Created
 ---------------------------

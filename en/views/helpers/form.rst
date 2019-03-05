@@ -169,8 +169,6 @@ Valid values:
 Getting form values from the query string
 -----------------------------------------
 
-.. versionadded:: 3.4.0
-
 A FormHelper's values sources define where its rendered elements, such as
 input-tags, receive their values from.
 
@@ -700,8 +698,8 @@ as follows:
 
 * ``'default'`` - Used to set a default value for the control field. The
   value is used if the data passed to the form does not contain a value for the
-  field (or if no data is passed at all). An explicit default value will
-  override any default values defined in the schema.
+  field (or if no data is passed at all). If no default value is provided, the
+  column's default value will be used.
 
   Example usage::
 
@@ -736,11 +734,6 @@ as follows:
 In addition to the above options, you can mixin any HTML attribute you wish to
 use. Any non-special option name will be treated as an HTML attribute, and
 applied to the generated HTML control element.
-
-.. versionchanged:: 3.3.0
-    As of 3.3.0, FormHelper will automatically use any default values defined
-    in your database schema. You can disable this behavior by setting
-    the ``schemaDefault`` option to ``false``.
 
 Creating Input Elements
 =======================
@@ -1829,8 +1822,6 @@ Example::
 Displaying validation messages in HTML5 validity messages
 ---------------------------------------------------------
 
-.. versionadded:: 3.7.0
-
 If the ``autoSetCustomValidity`` FormHelper option is set to ``true``, error messages for
 the field's required and notBlank validation rules will be used in lieu of the default
 browser HTML5 required messages. Enabling the option will add the ``onvalid`` and ``oninvalid``
@@ -2229,9 +2220,6 @@ Output:
         <input name="password" id="password" type="password">
         <span class="help">At least 8 characters long.</span>
     </div>
-
-.. versionadded:: 3.1
-    The templateVars option was added in 3.1.0
 
 Moving Checkboxes & Radios Outside of a Label
 ---------------------------------------------

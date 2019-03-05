@@ -112,9 +112,6 @@ Asset.timestamp
     - (bool) ``true`` - Appends the timestamp when debug is ``true``
     - (string) 'force' - Always appends the timestamp.
 
-    .. versionchanged:: 3.6.0
-        As of 3.6.0, you can override this global setting when linking assets
-        using the ``timestamp`` option.
 Asset.cacheTime
     Sets the asset cache time. This determines the http header ``Cache-Control``'s
     ``max-age``, and the http header's ``Expire``'s time for assets.
@@ -278,9 +275,6 @@ data from the environment::
 The second value passed to the env function is the default value. This value
 will be used if no environment variable exists for the given key.
 
-.. versionchanged:: 3.5.0
-    dotenv library support was added to the application skeleton.
-
 Configure Class
 ===============
 
@@ -347,9 +341,6 @@ back::
 
 If ``$key`` is left null, all values in Configure will be returned.
 
-.. versionchanged:: 3.5.0
-    The ``$default`` parameter was added in 3.5.0
-
 .. php:staticmethod:: readOrFail($key)
 
 Reads configuration data just like :php:meth:`Cake\\Core\\Configure::read`
@@ -363,9 +354,6 @@ exist, a :php:class:`RuntimeException` will be thrown::
 
     // Yields:
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
-
-.. versionadded:: 3.1.7
-    ``Configure::readOrFail()`` was added in 3.1.7
 
 Checking to see if Configuration Data is Defined
 ------------------------------------------------
@@ -406,9 +394,6 @@ exist, a :php:class:`RuntimeException` will be thrown::
 
     // Yields:
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
-
-.. versionadded:: 3.6.0
-    ``Configure::readOrFail()`` was added in 3.6.0
 
 Reading and writing configuration files
 =======================================

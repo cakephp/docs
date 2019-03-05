@@ -264,17 +264,15 @@ Set the second parameter of ``order()`` (as well as ``orderAsc()`` or ``orderDes
     $query = $articles->find()
         ->order(['created' => 'DESC'], Query::OVERWRITE);
 
-.. versionadded:: 3.0.12
+The ``orderAsc`` and ``orderDesc`` methods can be used when you need to sort on
+complex expressions::
 
-    In addition to ``order``, the ``orderAsc`` and ``orderDesc`` methods can be
-    used when you need to sort on complex expressions::
-
-        $query = $articles->find();
-        $concat = $query->func()->concat([
-            'title' => 'identifier',
-            'synopsis' => 'identifier'
-        ]);
-        $query->orderAsc($concat);
+    $query = $articles->find();
+    $concat = $query->func()->concat([
+        'title' => 'identifier',
+        'synopsis' => 'identifier'
+    ]);
+    $query->orderAsc($concat);
 
 To limit the number of rows or set the row offset you can use the ``limit()``
 and ``page()`` methods::
@@ -308,9 +306,6 @@ purpose::
         ->select(['slug' => $query->func()->concat(['title' => 'identifier', '-', 'id' => 'identifier'])])
         ->select($articlesTable); // Select all fields from articles
 
-.. versionadded:: 3.1
-    Passing a table object to select() was added in 3.1.
-
 If you want to select all but a few fields on a table, you can use
 ``selectAllExcept()``::
 
@@ -321,9 +316,6 @@ If you want to select all but a few fields on a table, you can use
 
 You can also pass an ``Association`` object when working with contained
 associations.
-
-.. versionadded:: 3.6.0
-    The ``selectAllExcept()`` method was added.
 
 .. _using-sql-functions:
 
@@ -364,14 +356,6 @@ A number of commonly used functions can be created with the ``func()`` method:
 - ``dateAdd()`` Add the time unit to the date expression.
 - ``dayOfWeek()`` Returns a FunctionExpression representing a call to SQL
   WEEKDAY function.
-
-.. versionadded:: 3.1
-
-    ``extract()``, ``dateAdd()`` and ``dayOfWeek()`` methods have been added.
-
-.. versionadded:: 3.7
-
-    ``rand()`` was added.
 
 When providing arguments for SQL functions, there are two kinds of parameters
 you can use, literal arguments and bound parameters. Identifier/Literal parameters allow
@@ -925,10 +909,6 @@ use the ``identifier()`` method::
 
     To prevent SQL injections, Identifier expressions should never have
     untrusted data passed into them.
-
-.. versionadded:: 3.6.0
-
-    ``Query::identifier()`` was added in 3.6.0
 
 Automatically Creating IN Clauses
 ---------------------------------

@@ -122,6 +122,3 @@ then updates the counter of the *previously* associated item.
     configured in association options and set the ``cascadeCallbacks`` configuration
     option to true. See how to configure a custom join table
     :ref:`using-the-through-option`.
-
-.. versionchanged:: 3.6.0
-    Returning ``false`` to skip updates was added.

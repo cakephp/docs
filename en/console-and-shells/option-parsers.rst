@@ -420,9 +420,5 @@ When defining a subcommand you can use the following options:
 
 Adding subcommands can be done as part of a fluent method chain.
 
-.. versionchanged:: 3.5.0
-    When adding multi-word subcommands you can now invoke those commands using
-    ``snake_case`` in addition to the camelBacked form.
-
 .. deprecated:: 3.6.0
     Subcommands are deprecated. Instead use :ref:`nested commands <renaming-commands>`.

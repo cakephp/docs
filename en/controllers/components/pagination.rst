@@ -206,9 +206,6 @@ paginate both tags and articles at the same time::
 See the :ref:`paginator-helper-multiple` section for how to generate scoped HTML
 elements and URLs for pagination.
 
-.. versionadded:: 3.3.0
-    Multiple Pagination was added in 3.3.0
-    
 Paginating the Same Model multiple Times
 ----------------------------------------
 

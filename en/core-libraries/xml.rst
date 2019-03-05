@@ -69,8 +69,6 @@ objects with ``loadHtml()``::
 By default entity loading and huge document parsing are disabled. These modes
 can be enabled with the ``loadEntities`` and ``parseHuge`` options respectively.
 
-.. versionadded:: 3.7.0
-
 Transforming a XML String in Array
 ==================================
 
