@@ -1522,12 +1522,6 @@ This will populate ``$this->request->getParam('named')`` with any named paramete
 found in the passed arguments.  Any passed argument that was interpreted as a
 named parameter, will be removed from the list of passed arguments.
 
-.. toctree::
-    :glob:
-    :maxdepth: 1
-
-    /development/dispatch-filters
-
 .. meta::
     :title lang=en: Routing
     :keywords lang=en: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router

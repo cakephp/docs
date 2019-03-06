@@ -21,8 +21,6 @@ helpers included in CakePHP, check out the chapter for each helper:
     /views/helpers/html
     /views/helpers/number
     /views/helpers/paginator
-    /views/helpers/rss
-    /views/helpers/session
     /views/helpers/text
     /views/helpers/time
     /views/helpers/url

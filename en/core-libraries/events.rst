@@ -71,10 +71,6 @@ has been created. To keep your Orders model clean you could use events::
         }
     }
 
-.. deprecated:: 3.5.0
-    Use ``getEventManager()`` instead.
-
-
 The above code allows you to notify the other parts of the application
 that an order has been created. You can then do tasks like send email
 notifications, update stock, log relevant statistics and other tasks in separate

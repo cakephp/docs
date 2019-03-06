@@ -382,15 +382,12 @@ CSRF protection can be applied to your entire application, or to specific routin
 
 .. note::
 
-    You cannot use both of the following approaches together, you must choose only one.
-    If you use both approaches together, a CSRF token mismatch error will occur on every `PUT` and `POST` request
+    You cannot use both of the following approaches together, you must choose
+    only one.  If you use both approaches together, a CSRF token mismatch error
+    will occur on every `PUT` and `POST` request
 
-
-.. warning::
-
-    You cannot use ``CsrfComponent`` together with ``CsrfProtectionMiddleware``, the warning about conflicting components is not shown until 3.7.0.
-
-By applying the ``CsrfProtectionMiddleware`` to your Application middleware stack you protect all the actions in application::
+By applying the ``CsrfProtectionMiddleware`` to your Application middleware
+stack you protect all the actions in application::
 
     // in src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
@@ -405,7 +402,8 @@ By applying the ``CsrfProtectionMiddleware`` to your Application middleware stac
         return $middlewareQueue;
     }
 
-By applying the ``CsrfProtectionMiddleware`` to routing scopes, you can include or exclude specific route groups::
+By applying the ``CsrfProtectionMiddleware`` to routing scopes, you can include
+or exclude specific route groups::
 
     // in src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
@@ -420,8 +418,8 @@ By applying the ``CsrfProtectionMiddleware`` to routing scopes, you can include 
     // in config/routes.php
     Router::scope('/', function (RouteBuilder $routes) {
         $routes->applyMiddleware('csrf');
-    });    
-    
+    });
+
 
 Options can be passed into the middleware's constructor.
 The available configuration options are:

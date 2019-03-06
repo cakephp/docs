@@ -656,7 +656,7 @@ data into an entity::
 
     // Only allow title to be changed
     $entity = $this->patchEntity($entity, $data, [
-        'fieldList' => ['title']
+        'fields' => ['title']
     ]);
     $this->save($entity);
 
@@ -665,7 +665,7 @@ You can also control which properties can be assigned for associations::
     // Only allow changing the title and tags
     // and the tag name is the only column that can be set
     $entity = $this->patchEntity($entity, $data, [
-        'fieldList' => ['title', 'tags'],
+        'fields' => ['title', 'tags'],
         'associated' => ['Tags' => ['fieldList' => ['name']]]
     ]);
     $this->save($entity);
@@ -673,12 +673,6 @@ You can also control which properties can be assigned for associations::
 Using this feature is handy when you have many different functions your users
 can access and you want to let your users edit different data based on their
 privileges.
-
-The ``fieldList`` options is also accepted by the ``newEntity()``,
-``newEntities()`` and ``patchEntities()`` methods.
-
-.. deprecated:: 3.4.0
-    Use ``fields`` instead of ``fieldList``.
 
 .. _saving-entities:
 

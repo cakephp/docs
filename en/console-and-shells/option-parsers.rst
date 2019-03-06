@@ -421,4 +421,5 @@ When defining a subcommand you can use the following options:
 Adding subcommands can be done as part of a fluent method chain.
 
 .. deprecated:: 3.6.0
-    Subcommands are deprecated. Instead use :ref:`nested commands <renaming-commands>`.
+    Subcommands are deprecated and will be removed in 5.0. 
+    Instead use :ref:`nested commands <renaming-commands>`.

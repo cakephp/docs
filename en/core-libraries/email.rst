@@ -42,9 +42,6 @@ add more recipients to their respective field::
     $email->to('test@example.com', 'ToTest Example');
     // The email's To recipient is: test@example.com
 
-.. deprecated:: 3.4.0
-    Use ``setFrom()``, ``setTo()``, ``setCc()`` , ``setBcc()``  and ``setSubject()`` instead.
-
 Choosing the Sender
 -------------------
 
@@ -59,9 +56,6 @@ original sender using the Sender header. You can do so using ``sender()``::
     It's also a good idea to set the envelope sender when sending mail on another
     person's behalf. This prevents them from getting any messages about
     deliverability.
-
-.. deprecated:: 3.4.0
-    Use ``setSender()`` instead.
 
 .. _email-configuration:
 
@@ -230,9 +224,6 @@ to use Email, do not forget to put the ``X-`` prefix in your headers.
 
 See ``Email::headers()`` and ``Email::addHeaders()``
 
-.. deprecated:: 3.4.0
-    Use ``setHeaders()`` instead of ``headers()``.
-
 Sending Templated Emails
 ========================
 
@@ -313,11 +304,6 @@ modifying the Blog plugin. The template file needs to be created in the
 following path:
 **templates/plugin/TestTheme/plugin/Blog/email/text/new_comment.php**.
 
-.. deprecated:: 3.4.0
-    Use ``viewBuilder()->setTemplate()`` instead of ``template()``. Use
-    ``viewBuilder()->setLayout()`` instead of the layout argument of
-    ``template()``. Use ``viewBuilder()->setTheme()`` instead of ``theme()``.
-
 Sending Attachments
 ===================
 
@@ -360,9 +346,6 @@ you want the filenames to appear in the recipient's mail client:
    a string using the ``data`` option. This allows you to attach files without
    needing file paths to them.
 
-.. deprecated:: 3.4.0
-    Use ``setAttachments()`` instead of ``attachments()``.
-
 Using Transports
 ================
 
@@ -380,9 +363,6 @@ method or have the transport in your configuration::
     // Use a constructed object.
     $transport = new DebugTransport();
     $email->transport($transport);
-
-.. deprecated:: 3.4.0
-    Use ``setTransport()`` instead of ``transport()``.
 
 Creating Custom Transports
 --------------------------
@@ -432,9 +412,6 @@ necessary when dealing with some ISP's::
     // Relax the email pattern, so you can send
     // to non-conformant addresses.
     $email->emailPattern($newPattern);
-
-.. deprecated:: 3.4.0
-    Use ``setEmailPattern()`` instead of ``emailPattern()``.
 
 Sending Messages Quickly
 ========================
