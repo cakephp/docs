@@ -1537,7 +1537,7 @@ Expanding on the Orders example, say we have the following tables::
                 $event = new Event('Model.Order.afterPlace', $this, [
                     'order' => $order
                 ]);
-                $this->eventManager()->dispatch($event);
+                $this->getEventManager()->dispatch($event);
                 return true;
             }
             return false;

@@ -41,7 +41,7 @@ Controller's ``initialize()`` method or via the ``$components`` array::
                 'authorize' => 'Controller',
                 'loginAction' => ['controller' => 'Users', 'action' => 'login']
             ]);
-            $this->loadComponent('Securiy', ['blackholeCallback' => 'blackhole']);
+            $this->loadComponent('Security', ['blackholeCallback' => 'blackhole']);
         }
 
     }

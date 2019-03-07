@@ -64,7 +64,7 @@ has been created. To keep your Orders model clean you could use events::
                 $event = new Event('Model.Order.afterPlace', $this, [
                     'order' => $order
                 ]);
-                $this->eventManager()->dispatch($event);
+                $this->getEventManager()->dispatch($event);
                 return true;
             }
             return false;
