@@ -659,12 +659,6 @@ methods being combined with ``AND``. The resulting SQL would look like::
     AND spam != 1
     AND view_count > 10)
 
-.. deprecated:: 3.5.0
-    As of 3.5.0 the ``orWhere()`` method is deprecated. This method creates
-    hard to predict SQL based on the current query state.
-    Use ``where()`` instead as it has more predictable and easier
-    to understand behavior.
-
 However, if we wanted to use both ``AND`` & ``OR`` conditions we could do the
 following::
 

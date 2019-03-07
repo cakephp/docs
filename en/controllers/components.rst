@@ -16,8 +16,6 @@ chapter for each component:
     :maxdepth: 1
 
     /controllers/components/authentication
-    /controllers/components/cookie
-    /controllers/components/csrf
     /controllers/components/flash
     /controllers/components/security
     /controllers/components/pagination
@@ -29,8 +27,8 @@ Configuring Components
 ======================
 
 Many of the core components require configuration. Some examples of components
-requiring configuration are :doc:`/controllers/components/authentication` and
-:doc:`/controllers/components/cookie`.  Configuration for these components,
+requiring configuration are :doc:`/controllers/components/security` and
+:doc:`/controllers/components/request-handling`.  Configuration for these components,
 and for components in general, is usually done via ``loadComponent()`` in your
 Controller's ``initialize()`` method or via the ``$components`` array::
 
@@ -43,7 +41,7 @@ Controller's ``initialize()`` method or via the ``$components`` array::
                 'authorize' => 'Controller',
                 'loginAction' => ['controller' => 'Users', 'action' => 'login']
             ]);
-            $this->loadComponent('Cookie', ['expires' => '1 day']);
+            $this->loadComponent('Security', ['blackholeCallback' => 'blackhole']);
         }
 
     }

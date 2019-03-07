@@ -208,11 +208,7 @@ CakePHP Provided Commands
     console-and-shells/server-shell
     console-and-shells/upgrade-shell
     console-and-shells/shells
-
-.. toctree::
-    :hidden:
-
-    console-and-shells/orm-cache
+    console-and-shells/repl
 
 Routing in the Console Environment
 ==================================

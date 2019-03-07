@@ -91,18 +91,6 @@ Additionally, you will need to tell Composer to refresh its autoloading cache:
 
     php composer.phar dumpautoload
 
-If you are unable to use Composer for any reason, you can also configure
-autoloading with ``Plugin``::
-
-    Plugin::load('ContactManager', ['autoload' => true]);
-
-
-.. deprecated:: 3.7.0
-    Plugin::load() and ``autoload`` option  are deprecated.
-
-.. note::
-    IMPORTANT: ``autoload`` option is not available on ``addPlugin()``, you should use ``composer dumpautoload`` instead.
- 
 Loading a Plugin
 ================
 

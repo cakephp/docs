@@ -243,12 +243,9 @@ Getting Validators From Tables
 Once you have created a few validation sets in your table class, you can get the
 resulting object by name::
 
-    $defaultValidator = $usersTable->validator('default');
+    $defaultValidator = $usersTable->getValidator('default');
 
-    $hardenedValidator = $usersTable->validator('hardened');
-
-.. deprecated:: 3.5.0
-    ``validator()`` is deprecated. Use ``getValidator()`` instead.
+    $hardenedValidator = $usersTable->getValidator('hardened');
 
 Default Validator Class
 =======================

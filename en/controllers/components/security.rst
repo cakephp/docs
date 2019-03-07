@@ -231,7 +231,7 @@ CSRF or Cross Site Request Forgery is a common vulnerability in web
 applications. It allows an attacker to capture and replay a previous request,
 and sometimes submit data requests using image tags or resources on other
 domains. To enable CSRF protection features use the
-:doc:`/controllers/components/csrf`.
+:ref:`csrf-middleware`.
 
 Disabling Security Component for Specific Actions
 =================================================
