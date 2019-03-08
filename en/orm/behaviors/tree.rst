@@ -134,6 +134,16 @@ An example of all options in use is::
         'valuePath' => 'id',
         'spacer' => ' '
     ]);
+    
+An example using closure:
+
+    $query = $categories->find('treeList', [
+        'keyPath' => 'url',
+        'valuePath' => function($entity){
+            return $entity->url + ' ' + $entity->id
+         },
+        'spacer' => ' '
+    ]);
 
 One very common task is to find the tree path from a particular node to the root
 of the tree. This is useful, for example, for adding the breadcrumbs list for
