@@ -131,6 +131,21 @@ The basic pattern is
     rules. See the documentation about :doc:`/core-libraries/inflector` for more
     information.
 
+Plugins Conventions
+===================
+It is useful to prefix a CakePHP plugin with "cakephp-" in the package name.
+This makes the name semantically related on the framework it depends on.
+
+Do **not** use the CakePHP namespace (cakephp) as vendor name as this is
+reserved to CakePHP owned plugins.  The convention is to use lowercase letters
+and dashes as separator::
+
+    // Bad
+    cakephp/foo-bar
+
+    // Good
+    your-name/cakephp-foo-bar
+
 Summarized
 ==========
 
@@ -155,20 +170,6 @@ by creating classes and files that you'd need to create anyway.
 Now that you've been introduced to CakePHP's fundamentals, you might try a run
 through the :doc:`/tutorials-and-examples/cms/installation` to see how things fit
 together.
-
-Plugins Conventions
-===================
-It is useful to prefix a CakePHP plugin with "cakephp-" in the package name.
-This makes the name semantically related on the framework it depends on.
-
-Do **not** use the CakePHP namespace (cakephp) as vendor name as this is reserved to CakePHP owned plugins.
-The convention is to use lowercase letters and dashes as separator::
-
-    // Bad
-    cakephp/foo-bar
-    
-    // Good
-    your-name/cakephp-foo-bar
 
 See `awesome list recommendations <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/CONTRIBUTING.md#tips-for-creating-cakephp-plugins>`__ for details.
 
