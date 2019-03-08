@@ -135,7 +135,7 @@ An example of all options in use is::
         'spacer' => ' '
     ]);
     
-An example using closure:
+An example using closure::
 
     $query = $categories->find('treeList', [
         'keyPath' => 'url',
