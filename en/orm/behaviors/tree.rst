@@ -140,7 +140,7 @@ An example using closure::
     $query = $categories->find('treeList', [
         'keyPath' => 'url',
         'valuePath' => function($entity){
-            return $entity->url + ' ' + $entity->id
+            return $entity->url . ' ' . $entity->id
          },
         'spacer' => ' '
     ]);
