@@ -860,6 +860,31 @@ result set.
 
 .. end-filtering
 
+Retrieving data from belongsToMany associations
+===================================================
+
+Sometimes you need to retrieve data from a associative table. 
+For example if 'Doctors' ``belongsToMany`` 'Patients' ``through`` 'Appointments'::
+
+   $query = $doctorsTable
+        ->find()
+        ->contain('Patients');
+
+This query will return a set of 'Patients' and also data about 'Appointments' on a special property called ``_joinData``.
+
+And it is possible to retrieve data from a associative data from the 'trough' table using ``junction()``.
+For example if 'Appointments' hasMany 'Examinations'::
+
+   $doctorsTable->Patients->junction()
+
+   $query = $doctorsTable
+        ->find()
+        ->contain('Appointments')
+        ->contain('Appointments.Patients')
+        ->contain('Appointments.Examinations'); 
+        
+The difference here is the absence of ``_joinData``
+
 Changing Fetching Strategies
 ============================
 
