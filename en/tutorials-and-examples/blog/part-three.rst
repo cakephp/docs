@@ -148,7 +148,7 @@ the **src/Model/Table/ArticlesTable.php** file and add the following::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp');
             // Just add the belongsTo relation with CategoriesTable

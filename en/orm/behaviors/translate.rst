@@ -98,7 +98,7 @@ class::
     class ArticlesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             // By default Eav strategy will be used.
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
@@ -114,7 +114,7 @@ as::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
                 'strategyClass' => \Cake\ORM\Behavior\Translate\ShadowTableStrategy,
@@ -193,7 +193,7 @@ for each different table::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],
@@ -299,7 +299,7 @@ If this is undesired, you can ignore translations which are empty using the
     class ArticlesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],
@@ -386,7 +386,7 @@ translations for any given entity. For example, given the following setup::
     // in src/Model/Table/ArticlesTable.php
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
         }
@@ -509,7 +509,7 @@ behavior during ``newEntity()`` or ``patchEntity()``::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title'],

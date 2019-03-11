@@ -20,7 +20,7 @@ Before you can use the data view classes, you'll first need to load the
 :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent` in your
 controller::
 
-    public function initialize()
+    public function initialize(): void
     {
         ...
         $this->loadComponent('RequestHandler');
@@ -58,7 +58,7 @@ serialize::
 
     class ArticlesController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');
@@ -79,7 +79,7 @@ You can also define ``_serialize`` as an array of view variables to combine::
 
     class ArticlesController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');

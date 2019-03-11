@@ -184,7 +184,7 @@ properties attached to your shell::
     class UserShell extends Shell
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadModel('Users');

@@ -135,7 +135,7 @@ commands::
 
     class UserCommand extends Command
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadModel('Users');

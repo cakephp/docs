@@ -52,7 +52,7 @@ is invoked at the end of a View’s constructor for this kind of use:
     class AppView extends View
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             // Always enable the MyUtils Helper
             $this->loadHelper('MyUtils');

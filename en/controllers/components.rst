@@ -34,7 +34,7 @@ Controller's ``initialize()`` method or via the ``$components`` array::
 
     class PostsController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Auth', [
@@ -82,7 +82,7 @@ implementation::
     // src/Controller/PostsController.php
     class PostsController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             $this->loadComponent('Auth', [
                 'className' => 'MyAuth'
@@ -134,7 +134,7 @@ in your controller, you could access it like so::
 
     class PostsController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Flash');
@@ -195,7 +195,7 @@ component, through which we can access an instance of it::
     // In a controller
     // Make the new component available at $this->Math,
     // as well as the standard $this->Csrf
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Math');
@@ -208,7 +208,7 @@ constructor. These parameters can then be handled by
 the Component::
 
     // In your controller.
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Math', [
@@ -239,7 +239,7 @@ way you include them in controllers - using the ``$components`` var::
         public $components = ['Existing'];
 
         // Execute any other additional setup for your component.
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->Existing->foo();
         }

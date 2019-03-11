@@ -36,7 +36,7 @@ helpers::
 
     class AppView extends View
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadHelper('Html');
@@ -67,7 +67,7 @@ You can use the current action name to conditionally load helpers::
 
     class AppView extends View
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             if ($this->request->getParam('action') === 'index') {
@@ -100,7 +100,7 @@ attribute values or modify the behavior of a helper::
 
     class AwesomeHelper extends Helper
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             debug($config);
         }
@@ -176,7 +176,7 @@ implementation::
     // src/View/AppView.php
     class AppView extends View
     {
-        public function initialize()
+        public function initialize(): void
         {
             $this->loadHelper('Html', [
                 'className' => 'MyHtml'
@@ -300,7 +300,7 @@ load it in your views::
 
     class AppView extends View
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadHelper('Link');

@@ -463,7 +463,7 @@ name, separated with a dot. For example::
 
     class ContactsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('ContactManager.AltName');
         }
@@ -479,7 +479,7 @@ prefix on them, use the alternative syntax::
 
     class ContactsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('AltName', [
                 'className' => 'ContactManager.AltName',
@@ -623,7 +623,7 @@ that you prefix the plugin name before the name of the component. For example::
     }
 
     // Within your controllers
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('ContactManager.Example');

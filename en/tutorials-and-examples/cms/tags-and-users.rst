@@ -48,7 +48,7 @@ Now that we have a Tags table, we can create an association between Articles and
 Tags. We can do so by adding the following to the ``initialize`` method on the
 ArticlesTable::
 
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         $this->addBehavior('Timestamp');
         $this->belongsToMany('Tags'); // Add this line
@@ -451,7 +451,7 @@ Before we finish up, we'll need a mechanism that will load the associated tags
 
 In your **src/Model/Table/ArticlesTable.php**, change::
 
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         $this->addBehavior('Timestamp');
         // Change this line

@@ -61,7 +61,7 @@ To create our sluggable behavior. Put the following into
 Similar to tables, behaviors also have an ``initialize()`` hook where you can
 put your behavior's initialization code, if required::
 
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         // Some initialization code here
     }
@@ -77,7 +77,7 @@ friendly URLs::
     class ArticlesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Sluggable');
         }
@@ -304,7 +304,7 @@ respond to::
 
     class UsersTable extends AppTable
     {
-        public function initialize(array $options)
+        public function initialize(array $options): void
         {
             parent::initialize($options);
 

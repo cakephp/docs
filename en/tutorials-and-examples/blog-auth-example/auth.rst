@@ -143,7 +143,7 @@ To add this component to your application open your
     {
         //...
 
-        public function initialize()
+        public function initialize(): void
         {
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
@@ -343,7 +343,7 @@ config::
 
     // src/Controller/AppController.php
 
-    public function initialize()
+    public function initialize(): void
     {
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
