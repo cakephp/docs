@@ -39,7 +39,7 @@ that the ``order`` key must be defined in an array structure like below::
             ]
         ];
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Paginator');
@@ -59,7 +59,7 @@ You can also include any of the options supported by
             ]
         ];
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Paginator');

@@ -67,7 +67,7 @@ is invoked at the end of a Controller's constructor for this kind of use::
     class AppController extends Controller
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             // Always enable the CSRF component.
             $this->loadComponent('Csrf');
@@ -426,7 +426,7 @@ Configuring Components to Load
 In your Controller's ``initialize()`` method you can define any components you
 want loaded, and any configuration data for them::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Csrf');

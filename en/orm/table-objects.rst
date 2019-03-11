@@ -46,7 +46,7 @@ method::
     class ArticlesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->setTable('my_table');
         }
@@ -63,7 +63,7 @@ If you need to modify this you can use the ``setPrimaryKey()`` method::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->setPrimaryKey('my_id');
         }
@@ -80,7 +80,7 @@ conventions you can use the ``setEntityClass()`` method to change things up::
 
     class PurchaseOrdersTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->setEntityClass('App\Model\Entity\PO');
         }
@@ -174,7 +174,7 @@ which implements ``EventListenerInterface``::
                 'Model.initialize' => 'initializeEvent',
             );
         }
-        public function initializeEvent($event)
+        public function initializeEvent($event): void
         {
             $table = $event->getSubject();
             // do something here
@@ -371,7 +371,7 @@ Generally the best place to do this is in the ``initialize()`` method::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp');
         }
@@ -386,7 +386,7 @@ configuration options::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp', [
                 'events' => [

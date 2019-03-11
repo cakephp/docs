@@ -80,7 +80,7 @@ AuthComponent in our AppController::
 
     class AppController extends Controller
     {
-        public function initialize()
+        public function initialize(): void
         {
             // Existing code
 
@@ -158,7 +158,7 @@ Adding Logout
 Now that people can log in, you'll probably want to provide a way to log out as
 well. Again, in the ``UsersController``, add the following code::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->Auth->allow(['logout']);
@@ -181,7 +181,7 @@ If you aren't logged in and you try to visit **/users/add** you will be
 redirected to the login page. We should fix that as we want to allow people to
 sign up for our application. In the ``UsersController`` add the following::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         // Add the 'add' action to the allowed actions list.
@@ -215,7 +215,7 @@ Next we'll tell ``AuthComponent`` that we want to use controller hook methods
 for authorization. Your ``AppController::initialize()`` method should now look
 like::
 
-        public function initialize()
+        public function initialize(): void
         {
             // Existing code
 

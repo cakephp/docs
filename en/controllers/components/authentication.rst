@@ -118,7 +118,7 @@ keys.
 
 To configure different fields for user in your ``initialize()`` method::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -135,7 +135,7 @@ within the ``authenticate`` or ``Form`` element. They should be at the same leve
 the authenticate key. The setup above with other Auth configuration
 should look like::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -181,7 +181,7 @@ Customizing Find Query
 You can customize the query used to fetch the user record using the ``finder``
 option in authenticate class config::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -638,7 +638,7 @@ In order to use a different password hasher, you need to create the class in
 Then you are required to configure the ``AuthComponent`` to use your own password
 hasher::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -664,7 +664,7 @@ to another, this is achieved through the ``FallbackPasswordHasher`` class.
 Assuming you are migrating your app from CakePHP 2.x which uses ``sha1`` password hashes, you
 can configure the ``AuthComponent`` as follows::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -979,7 +979,7 @@ checked::
 
     class AppController extends Controller
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Auth', [

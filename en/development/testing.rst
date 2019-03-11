@@ -1125,7 +1125,7 @@ begin with a simple example controller that responds in JSON::
 
     class MarkersController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');

@@ -216,7 +216,7 @@ use ``embedOne`` and ``embedMany`` to define embedded documents::
 
     class ArticlesType extends Type
     {
-        public function initialize()
+        public function initialize(): void
         {
             $this->embedOne('User');
             $this->embedMany('Comments', [

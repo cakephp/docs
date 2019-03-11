@@ -32,7 +32,7 @@ When adding the PaginatorHelper in your controller, you can define the
 customize multiple templates and keep your code DRY::
 
     // In your AppView.php
-    public function initialize()
+    public function initialize(): void
     {
         ...
         $this->loadHelper('Paginator', ['templates' => 'paginator-templates']);
@@ -43,7 +43,7 @@ example below for how the file should look like. You can also load templates
 from a plugin using :term:`plugin syntax`::
 
     // In your AppView.php
-    public function initialize()
+    public function initialize(): void
     {
         ...
         $this->loadHelper('Paginator', ['templates' => 'MyPlugin.paginator-templates']);
