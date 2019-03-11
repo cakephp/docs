@@ -1092,7 +1092,8 @@ you can use the remaining ``IntegrationTestTrait`` features as normal.
 
 You should also take care to try and use :ref:`application-bootstrap` to load
 any plugins containing events/routes. Doing so will ensure that your
-events/routes are connected for each test case.
+events/routes are connected for each test case. Alternatively if you wish to
+load plugins manually in a test you can use the ``loadPlugins()`` method.
 
 .. versionadded:: 3.3.0
     PSR-7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
