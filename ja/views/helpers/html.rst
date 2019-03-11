@@ -152,11 +152,20 @@ icon     image/x-icon
     );
     ?>
     // 出力結果 (改行を追加しています)
+    // 注意: このヘルパーのコードは、異なる rel 属性値を必要とする
+    // 新旧両方のブラウザーでアイコンをダウンロードさせるための
+    // ２つのタグを作成します。
     <link
-        href="http://example.com/favicon.ico"
-        title="favicon.ico" type="image/x-icon"
-        rel="alternate"
+        href="/subdir/favicon.ico" 
+        type="image/x-icon" 
+        rel="icon"
     />
+    <link
+        href="/subdir/favicon.ico" 
+        type="image/x-icon" 
+        rel="shortcut icon"
+    />
+    
     <?= $this->Html->meta(
         'Comments',
         '/comments/index.rss',

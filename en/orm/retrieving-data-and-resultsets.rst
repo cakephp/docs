@@ -389,7 +389,7 @@ you have both the 'published' and 'recent' finders, you could do the following::
     $articles = TableRegistry::get('Articles');
     $query = $articles->find('published')->find('recent');
 
-While all the examples so far have show finder methods on table classes, finder
+While all the examples so far have shown finder methods on table classes, finder
 methods can also be defined on :doc:`/orm/behaviors`.
 
 If you need to modify the results after they have been fetched you should use

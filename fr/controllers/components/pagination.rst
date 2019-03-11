@@ -224,16 +224,16 @@ générer les elements HTML scopés et les URLS pour la pagination.
 .. versionadded:: 3.3.0
     Pagination multiple a été ajoutée dans la version 3.3.0
 
-Contrôle les Champs Utilisés pour le Tri
-========================================
+Contrôler les Champs Utilisés pour le Tri
+=========================================
 
-Par défaut le tri peut être fait sur n'importe quelle colonne qu'une table a.
-Ceci est parfois non souhaité puisque cela permet aux utilisateurs de trier sur
-des colonnes non indexées qui peuvent être compliqués à trier. Vous pouvez
+Par défaut le tri peut être fait sur n'importe quelle colonne d'une table.
+Ceci n'est parfois pas souhaité puisque cela permet aux utilisateurs de trier sur
+des colonnes non indexées qui peuvent être compliquées à trier. Vous pouvez
 définir la liste blanche des champs qui peut être triée en utilisant
 l'option ``sortWhitelist``. Cette option est nécessaire quand vous voulez trier
-sur des données associées, ou des champs computés qui peuvent faire parti de
-la query de pagination::
+sur des données associées, ou des champs calculés qui peuvent faire parti de
+la requête de pagination::
 
     public $paginate = [
         'sortWhitelist' => [
@@ -247,12 +247,12 @@ blanche sera ignorée.
 Limiter le Nombre Maximum de Lignes par Page
 ============================================
 
-Le nombre de résultat qui sont récupérés est montré à l'utilisateur dans le
-paramètre ``limit``. Il est généralement non souhaité de permettre aux
+Le nombre de résultat qui sont récupérés et montrés à l'utilisateur est configuré par le
+paramètre ``limit``. En général on ne souhaite pas permettre aux
 utilisateurs de récupérer toutes les lignes d'un ensemble paginé. L'option
 ``maxLimit`` permet à ce que personne ne puisse définir cette limite trop haute
-de l'extérieur. Par défaut, CakePHP limite le nombre maximum de lignes qui
-peuvent être récupérées à 100. Si par défaut ce n'est pas approprié pour votre
+depuis l'extérieur. Par défaut, CakePHP limite le nombre maximum de lignes qui
+peuvent être récupérées à 100. Si cette valeur par défaut n'est pas approprié pour votre
 application, vous pouvez l'ajuster dans les options de pagination, par exemple
 en le réduisant à ``10``::
 
@@ -282,9 +282,9 @@ utilisant le paramètre ``contain``::
 Requêtes de Page Out of Range
 =============================
 
-PaginatorComponent va lancer une ``NotFoundException`` quand on essaie d'accéder
-une page non existante, par ex le nombre de page demandé est supérieur au total
-du nombre de page.
+PaginatorComponent va lancer une ``NotFoundException`` quand on essaie d'accéder à
+une page non existante, par exemple le nombre de page demandé est supérieur au total
+du nombre de pages.
 
 Ainsi vous pouvez soit laisser s'afficher la page d'erreur normale, soit
 utiliser un bloc try catch et faire des actions appropriées quand une
@@ -306,7 +306,7 @@ utiliser un bloc try catch et faire des actions appropriées quand une
 Pagination dans la Vue
 ======================
 
-Regardez la documentation :php:class:`~Cake\\View\\Helper\\PaginatorHelper`
+Consultez la documentation :php:class:`~Cake\\View\\Helper\\PaginatorHelper`
 pour savoir comment créer des liens de navigation paginés.
 
 .. meta::

@@ -35,9 +35,15 @@ DebugKit は、CakePHP アプリケーション用のデバッグツールバー
 
 * ``DebugKit.includeSchemaReflection`` - スキーマリフレクションクエリーの
   ロギングを有効にするには、true に設定します。デフォルトは無効になっています。
-* ``DebugKit.forceEnable`` - DebugKit を強制的に表示します。
-  ホスト上で DebugKit が表示されているかどうかを確認するために使用できます。
-  それ以外の場合では、安全ではありません。次のようにして、このオプションを設定する事ができます。 ::
+
+* ``DebugKit.safeTld`` - ローカル開発用のトップレベルドメインのホワイトリストを設定します。
+  これにより安全でないと判断したホスト上で DebugKit を表示できるようになります。 ::
+
+    // 例: http://foo.bar.dev または http://my-shop.local のドメインはローカルとして許可する
+    Configure::write('DebugKit.safeTld', ['dev', 'local', 'example']);
+
+* ``DebugKit.forceEnable`` - DebugKit を強制的に表示します。これを使うときは注意してください。
+  通常は単純にローカルのトップレベルドメインをホワイトリストに追加したほうが安全です。 使用例::
 
     // DebugKit をロードする前に
     Configure::write('DebugKit.forceEnable', true);
