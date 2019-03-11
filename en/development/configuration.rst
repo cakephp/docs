@@ -134,11 +134,11 @@ the same relative path used in the application. Please note there is a specific 
 plugin based assets: plugins will not use the plugin's prefix when absolute ``...BaseUrl`` URI is used, for example 
 By default:
 
-    - ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``test_plugin/logo.png`` 
+* ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``test_plugin/logo.png`` 
 
-If you set ``App.imageBaseUrl`` to ``https://mycdn.example.com/``: 
+If you set ``App.imageBaseUrl`` to ``https://mycdn.example.com/``:
 
-    - ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``https://mycdn.example.com/logo.png``.
+* ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``https://mycdn.example.com/logo.png``.
 
 Database Configuration
 ----------------------
