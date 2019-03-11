@@ -149,7 +149,7 @@ Each engine accepts the following options:
 * ``prefix`` Prepended to all entries. Good for when you need to share
   a keyspace with either another cache config or another application.
 * ``probability`` Probability of hitting a cache gc cleanup. Setting to 0 will disable
-   ``Cache::gc()`` from ever being called automatically.
+  ``Cache::gc()`` from ever being called automatically.
 
 FileEngine Options
 -------------------
@@ -181,14 +181,14 @@ MemcacheEngine Options
 - ``username`` Login to access the Memcache server.
 - ``password`` Password to access the Memcache server.
 - ``persistent`` The name of the persistent connection. All configurations using
-   the same persistent value will share a single underlying connection.
+  the same persistent value will share a single underlying connection.
 - ``serialize`` The serializer engine used to serialize data. Available engines are php,
-   igbinary and json. Beside php, the memcached extension must be compiled with the
-   appropriate serializer support.
+  igbinary and json. Beside php, the memcached extension must be compiled with the
+  appropriate serializer support.
 - ``servers`` String or array of memcached servers. If an array MemcacheEngine will use
-   them as a pool.
+  them as a pool.
 - ``options`` Additional options for the memcached client. Should be an array of option => value.
-   Use the ``\Memcached::OPT_*`` constants as keys.
+  Use the ``\Memcached::OPT_*`` constants as keys.
 
 .. _cache-configuration-fallback:
 
