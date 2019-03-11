@@ -5,7 +5,7 @@ CakePHP has a few system requirements:
 
 - HTTP Server. For example: Apache. Having mod\_rewrite is preferred, but
   by no means required. You can also use nginx, or Microsoft IIS if you prefer.
-- PHP |minphpversion| or greater (including PHP 7.2).
+- PHP |minphpversion| or greater (including PHP 7.3).
 - mbstring PHP extension
 - intl PHP extension
 - simplexml PHP extension
