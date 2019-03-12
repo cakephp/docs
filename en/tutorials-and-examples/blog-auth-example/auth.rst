@@ -61,12 +61,12 @@ with CakePHP::
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
 
     class UsersController extends AppController
     {
 
-        public function beforeFilter(Event $event)
+        public function beforeFilter(EventInterface $event)
         {
             parent::beforeFilter($event);
             $this->Auth->allow('add');
@@ -159,7 +159,7 @@ To add this component to your application open your
             ]);
         }
 
-        public function beforeFilter(Event $event)
+        public function beforeFilter(EventInterface $event)
         {
             $this->Auth->allow(['index', 'view', 'display']);
         }
@@ -184,13 +184,13 @@ the users add function and implement the login and logout action::
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
 
     class UsersController extends AppController
     {
         // Other methods..
 
-        public function beforeFilter(Event $event)
+        public function beforeFilter(EventInterface $event)
         {
             parent::beforeFilter($event);
             // Allow users to register and logout.

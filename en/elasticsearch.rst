@@ -54,7 +54,7 @@ class in elasticsearch::
 
 You can then use your type class in your controllers::
 
-    public function beforeFilter(Event $event)
+    public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
         // Load the Type using the 'Elastic' provider.

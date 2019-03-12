@@ -779,7 +779,7 @@ Deciding When to run Authentication
 -----------------------------------
 
 In some cases you may want to use ``$this->Auth->user()`` in the
-``beforeFilter(Event $event)`` method. This is achievable by using the
+``beforeFilter()`` method. This is achievable by using the
 ``checkAuthIn`` config key. The following changes which event for which initial
 authentication checks should be done::
 

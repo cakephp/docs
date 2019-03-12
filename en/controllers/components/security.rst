@@ -44,7 +44,7 @@ components in your ``initialize()`` method.
 Handling Blackhole Callbacks
 ============================
 
-.. php:method:: blackHole(object $controller, string $error = '', SecurityException $exception = null)
+.. php:method:: blackHole(Controller $controller, string $error = '', ?SecurityException $exception = null)
 
 If an action is restricted by the Security Component it is
 'black-holed' as an invalid request which will result in a 400 error
@@ -55,7 +55,7 @@ in the controller.
 By configuring a callback method you can customize how the blackhole process
 works::
 
-    public function beforeFilter(Event $event)
+    public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
         

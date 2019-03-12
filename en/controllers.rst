@@ -464,7 +464,7 @@ Controller Callback Methods
 By default the following callback methods are connected to related events if the
 methods are implemented by your controllers
 
-.. php:method:: beforeFilter(Event $event)
+.. php:method:: beforeFilter(EventInterface $event)
 
     Called during the ``Controller.initialize`` event which occurs before every
     action in the controller.  It's a handy place to check for an active session
@@ -498,8 +498,8 @@ also provide a similar set of callbacks.
 Remember to call ``AppController``'s callbacks within child controller callbacks
 for best results::
 
-    //use Cake\Event\Event;
-    public function beforeFilter(Event $event)
+    //use Cake\Event\EventInterface;
+    public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
     }
