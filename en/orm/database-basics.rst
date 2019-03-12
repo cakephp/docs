@@ -346,7 +346,7 @@ boolean
 binary
     Maps to the ``BLOB`` or ``BYTEA`` type provided by the database.
 date
-    Maps to a timezone naive ``DATE`` column type. The return value of this column
+    Maps to a native ``DATE`` column type. The return value of this column
     type is :php:class:`Cake\\I18n\\Date` which extends the native ``DateTime``
     class.
 datetime
@@ -376,7 +376,7 @@ DateTime Type
 
 .. php:class:: Type\DateTimeType
 
-Maps to a timezone naive ``DATETIME`` column type. In PostgreSQL, and SQL Server
+Maps to a native ``DATETIME`` column type. In PostgreSQL, and SQL Server
 this turns into a ``TIMESTAMP`` type. The default return value of this column
 type is :php:class:`Cake\\I18n\\FrozenTime` which extends the built-in
 ``DateTimeImmutable`` class and `Chronos <https://github.com/cakephp/chronos>`_.
