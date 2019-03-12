@@ -367,7 +367,7 @@ l'en-tête ``Allow`` nécessaire avec les méthodes passées::
         ...
     }
 
-Lire les En-têtes HTTP
+Lire les en-têtes HTTP
 ----------------------
 
 Ces méthodes vous permettent d'accéder à n'importe quel en-tête ``HTTP_*`` qui
@@ -377,7 +377,7 @@ ont été utilisés dans la requête. Par exemple::
     $userAgent = $this->request->getHeaderLine('User-Agent');
 
     // Récupère un tableau de toutes les valeurs
-    $acceptHeader = $this->request->getHeader('Accept');
+    $acceptHeader = $this->request->getHeaders();
 
     // Vérifie l'existence d'un header
     $hasAcceptHeader = $this->request->hasHeader('Accept');
@@ -1127,4 +1127,4 @@ devoir mettre à jour la collection si vous modifiez un cookie::
 
 .. meta::
     :title lang=fr: Objets ServerRequest et Response
-    :keywords lang=fr: requête controller,paramètres de requête,tableaux indicés,purpose index,objets réponse,information domaine,Objet requête,donnée requêtée,interrogation,params,précédentes versions,introspection,dispatcher,rout,structures de données,tableaux,adresse ip,migration,indexes,cakephp
+    :keywords lang=fr: requête controller,paramètres de requête,tableaux indicés,purpose index,objets réponse,information domaine,Objet requête,donnée requêtée,interrogation,params,parameters,précédentes versions,introspection,dispatcher,rout,structures de données,tableaux,adresse ip,migration,indexes,cakephp

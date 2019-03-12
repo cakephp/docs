@@ -181,7 +181,7 @@ to be created. Start by creating an ``add()`` action in the
     class ArticlesController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
 
@@ -441,11 +441,11 @@ using :ref:`a validator <validating-request-data>`::
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->notEmpty('title')
+            ->allowEmptyString('title', false)
             ->minLength('title', 10)
             ->maxLength('title', 255)
 
-            ->notEmpty('body')
+            ->allowEmptyString('body', false)
             ->minLength('body', 10);
 
         return $validator;

@@ -39,12 +39,13 @@ use libraries from outside of CakePHP.
 Request Parameters
 ------------------
 
-The request exposes the routing parameters through the ``getParam()`` method::
+The request exposes routing parameters through the ``getParam()`` method::
 
     $controllerName = $this->request->getParam('controller');
 
-    // Prior to 3.4.0
-    $controllerName = $this->request->param('controller');
+To get all routing parameters as an array use ``getAttribute()``::
+
+    $parameters = $this->request->getAttribute('params');
 
 All :ref:`route-elements` are accessed through this interface.
 
@@ -76,9 +77,6 @@ Query string parameters can be read using the ``getQuery()`` method::
     // URL is /posts/index?page=1&sort=title
     $page = $this->request->getQuery('page');
 
-    // Prior to 3.4.0
-    $page = $this->request->query('page');
-
 You can either directly access the query property, or you can use
 ``getQuery()`` method to read the URL query array in an error-free manner.
 Any keys that do not exist will return ``null``::
@@ -93,9 +91,6 @@ If you want to access all the query parameters you can use
 ``getQueryParams()``::
 
     $query = $this->request->getQueryParams();
-
-.. versionadded:: 3.4.0
-    ``getQueryParams()`` and ``getQuery()`` were added in 3.4.0
 
 Request Body Data
 -----------------
@@ -151,9 +146,6 @@ To access all the environment variables in a request use ``getServerParams()``::
 
     $env = $this->request->getServerParams();
 
-.. versionadded:: 3.4.0
-    ``getServerParams()`` was added in 3.4.0
-
 XML or JSON Data
 ----------------
 
@@ -191,11 +183,6 @@ subdirectory. The attributes you can use are::
 
     // Holds /subdir/
     $base = $request->getAttribute('webroot');
-
-    // Prior to 3.4.0
-    $webroot = $request->webroot;
-    $base = $request->base;
-    $here = $request->here();
 
 .. _check-the-request:
 
@@ -289,9 +276,6 @@ There are several built-in detectors that you can use:
 * ``is('xml')`` Check to see whether the request has 'xml' extension and accept
   'application/xml' or 'text/xml' mimetype.
 
-.. versionadded:: 3.3.0
-    Detectors can take additional parameters as of 3.3.0.
-
 Session Data
 ------------
 
@@ -336,9 +320,6 @@ Returns the HTTP method the request was made with::
     // Output POST
     echo $request->getMethod();
 
-    // Prior to 3.4.0
-    echo $request->method();
-
 Restricting Which HTTP method an Action Accepts
 -----------------------------------------------
 
@@ -370,9 +351,6 @@ for the request. For example::
     // Check if a header exists
     $hasAcceptHeader = $this->request->hasHeader('Accept');
 
-    // Prior to 3.4.0
-    $userAgent = $this->request->header('User-Agent');
-
 While some apache installs don't make the ``Authorization`` header accessible,
 CakePHP will make it available through apache specific methods as required.
 
@@ -401,6 +379,17 @@ have the request object use these headers set the ``trustProxy`` property to
     $host = $this->request->host();
     $scheme = $this->request->scheme();
     $clientIp = $this->request->clientIp();
+
+Once proxies are trusted the ``clientIp()`` method will use the *last* IP
+address in the ``X-Forwarded-For`` header. If your application is behind
+multiple proxies, you can use ``setTrustedProxies()`` to define the IP addresses
+of proxies in your control::
+
+    $request->setTrustedProxies(['127.1.1.1', '127.8.1.3']);
+
+After proxies are trusted ``clientIp()`` will use the first IP address in the
+``X-Forwarded-For`` header providing it is the only value that isn't from a trusted
+proxy.
 
 Checking Accept Headers
 -----------------------
@@ -453,9 +442,6 @@ Request cookies can be read through a number of methods::
 See the :php:class:`Cake\\Http\\Cookie\\CookieCollection` documentation for how
 to work with cookie collection.
 
-.. versionadded:: 3.5.0
-    ``ServerRequest::getCookieCollection()`` was added in 3.5.0
-
 .. index:: $this->response
 
 Response
@@ -496,9 +482,6 @@ with content types that are not built into Response, you can map them with
     // Set the response Content-Type to vcard.
     $this->response = $this->response->withType('vcf');
 
-    // Prior to 3.4.0
-    $this->response->type('vcf');
-
 Usually, you'll want to map additional content types in your controller's
 :php:meth:`~Controller::beforeFilter()` callback, so you can leverage the
 automatic view switching features of :php:class:`RequestHandlerComponent` if you
@@ -523,16 +506,9 @@ You can accomplish that by using :php:meth:`Cake\\Http\\Response::withFile()`::
         return $response;
     }
 
-    // Prior to 3.4.0
-    $file = $this->Attachments->getFile($id);
-    $this->response->file($file['path']);
-    // Return the response to prevent controller from trying to render
-    // a view.
-    return $this->response;
-
 As shown in the above example, you must pass the file path to the method.
 CakePHP will send a proper content type header if it's a known file type listed
-in `Cake\\Http\\Reponse::$_mimeTypes`. You can add new types prior to calling
+in `Cake\\Http\\Response::$_mimeTypes`. You can add new types prior to calling
 :php:meth:`Cake\\Http\\Response::withFile()` by using the
 :php:meth:`Cake\\Http\\Response::withType()` method.
 
@@ -540,12 +516,6 @@ If you want, you can also force a file to be downloaded instead of displayed in
 the browser by specifying the options::
 
     $response = $this->response->withFile(
-        $file['path'],
-        ['download' => true, 'name' => 'foo']
-    );
-
-    // Prior to 3.4.0
-    $this->response->file(
         $file['path'],
         ['download' => true, 'name' => 'foo']
     );
@@ -569,6 +539,11 @@ ics generated on the fly from a string::
     {
         $icsString = $this->Calendars->generateIcs();
         $response = $this->response;
+        
+        // Inject string content into response body (3.4.0+)
+        $response = $response->withStringBody($icsString);
+        
+        // Inject string content into response body (before 3.4.0)
         $response->body($icsString);
 
         $response = $response->withType('ics');
@@ -607,9 +582,6 @@ instance with the new header::
     // Append a value to an existing header
     $response = $response->withAddedHeader('Set-Cookie', 'remember_me=1');
 
-    // Prior to 3.4.0 - Set a header
-    $this->response->header('Location', 'http://example.com');
-
 Headers are not sent when set. Instead, they are held until the response is
 emitted by ``Cake\Http\Server``.
 
@@ -631,18 +603,12 @@ To set a string as the response body, do the following::
     $response = $response->withType('application/json')
         ->withStringBody(json_encode(['Foo' => 'bar']));
 
-.. versionadded:: 3.4.3
-    ``withStringBody()`` was added in 3.4.3
-
 .. php:method:: withBody($body)
 
 To set the response body, use the ``withBody()`` method, which is provided by the
 :php:class:`Zend\\Diactoros\\MessageTrait`::
 
     $response = $response->withBody($stream);
-
-    // Prior to 3.4.0 - Set the body
-    $this->response->body('My Body');
 
 Be sure that ``$stream`` is a :php:class:`Psr\\Http\\Message\\StreamInterface` object.
 See below on how to create a new stream.
@@ -671,14 +637,6 @@ stream to the client::
     });
     $response = $response->withBody($stream);
 
-    // Prior to 3.4.0 you can use the following to create streaming responses.
-    $file = fopen('/some/file.png', 'r');
-    $this->response->body(function () use ($file) {
-        rewind($file);
-        fpassthru($file);
-        fclose($file);
-    });
-
 Setting the Character Set
 -------------------------
 
@@ -687,9 +645,6 @@ Setting the Character Set
 Sets the charset that will be used in the response::
 
     $this->response = $this->response->withCharset('UTF-8');
-
-    // Prior to 3.4.0
-    $this->response->charset('UTF-8');
 
 Interacting with Browser Caching
 --------------------------------
@@ -704,9 +659,6 @@ that::
     {
         // Disable caching
         $this->response = $this->response->withDisabledCache();
-
-        // Prior to 3.4.0
-        $this->response->disableCache();
     }
 
 .. warning::
@@ -903,13 +855,18 @@ Setting Cookies
 Cookies can be added to response using either an array or a :php:class:`Cake\\Http\\Cookie\\Cookie`
 object::
 
+    use Cake\Http\Cookie\Cookie;
+    use DateTime;
+
     // Add a cookie as an array using the immutable API (3.4.0+)
-    $this->response = $this->response->withCookie('remember_me', [
-        'value' => 'yes',
-        'path' => '/',
-        'httpOnly' => true,
-        'secure' => false,
-        'expire' => strtotime('+1 year')
+    $this->response = $this->response->withCookie(new Cookie(
+        'remember_me',
+        'yes',
+        new DateTime('+1 year'), // expiration time
+        '/', // path
+        '', // domain
+        false, // secure
+        true // httponly
     ]);
 
     // Before 3.4.0
@@ -937,7 +894,7 @@ As of 3.2 you can use the ``cors()`` method to define `HTTP Access Control
 <https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS>`__
 related headers with a fluent interface::
 
-    $this->response->cors($this->request)
+    $this->response = $this->response->cors($this->request)
         ->allowOrigin(['*.cakephp.org'])
         ->allowMethods(['GET', 'POST'])
         ->allowHeaders(['X-CSRF-Token'])
@@ -951,9 +908,6 @@ criteria are met:
 
 #. The request has an ``Origin`` header.
 #. The request's ``Origin`` value matches one of the allowed Origin values.
-
-.. versionadded:: 3.2
-    The ``CorsBuilder`` was added in 3.2
 
 Common Mistakes with Immutable Responses
 ========================================
@@ -1036,8 +990,8 @@ Once you have created a cookie, you can add it to a new or existing
     Remember that collections are immutable and adding cookies into, or removing
     cookies from a collection, creates a *new* collection object.
 
-You should use the ``withCookie()`` method to add cookies to ``Response``
-objects as it is simpler to use::
+Cookie objects can be added to your controller responses by using
+``withCookie()``::
 
     $response = $this->response->withCookie($cookie);
 
@@ -1073,9 +1027,6 @@ collection if you modify a cookie::
     $cookie->isHttpOnly();
     $cookie->isSecure();
 
-.. versionadded:: 3.5.0
-    ``CookieCollection`` and ``Cookie`` were added in 3.5.0.
-
 .. meta::
     :title lang=en: Request and Response objects
-    :keywords lang=en: request controller,request parameters,array indexes,purpose index,response objects,domain information,request object,request data,interrogating,params,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp,PSR-7,immutable
+    :keywords lang=en: request controller,request parameters,array indexes,purpose index,response objects,domain information,request object,request data,interrogating,params,parameters,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp,PSR-7,immutable

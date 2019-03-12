@@ -189,7 +189,7 @@ CakePHP におけるほとんどのことがそうであるように、テスト
         $this->Progress = new ProgressHelper($View);
     }
 
-テストケースで親のメソッドを呼ぶことは重要です。``TestCase::setUp()`` は、
+テストケースで親のメソッドを呼ぶことは重要です。 ``TestCase::setUp()`` は、
 :php:class:`~Cake\\Core\\Configure` の値をバックアップしたり、
 :php:class:`~Cake\\Core\\App` にパスを保存したりといった、いくつかの作業をしているからです。
 
@@ -217,6 +217,12 @@ CakePHP におけるほとんどのことがそうであるように、テスト
 また、テストはコードなので、あなたが変更を加えるたびに再実行するのは簡単です。
 これは新たなバグの発生を防ぐ手助けをしてくれるでしょう。
 
+.. note::
+
+    EventManager は、各テストメソッドごとにリフレッシュされます。
+    これは、一度に複数のテストを実行した際、ブートストラップは一度だけ実行されるため、
+    config/bootstrap.php に登録されたイベントリスナーは失われることを意味します。
+
 .. _running-tests:
 
 テストの実行
@@ -243,7 +249,7 @@ CakePHP のユニットテストを実行したい場合、 ``phpunit`` を実�
 
 .. code-block:: bash
 
-    $ composer install --dev
+    $ composer install
 
 アプリケーションのルートディレクトリーから以下を行います。アプリケーションのソースの一部である
 プラグインのテストを実行するには、まず ``cd`` でプラグインディレクトリーに移動し、その後、
@@ -315,13 +321,13 @@ PHP 5.6.0 以上を利用している場合、カバレッジを生成するた�
 .. code-block:: xml
 
     <testsuites>
-        <testsuite name="App Test Suite">
-            <directory>./tests/TestCase</directory>
+        <testsuite name="app">
+            <directory>./tests/TestCase/</directory>
         </testsuite>
 
         <!-- Add your plugin suites -->
-        <testsuite name="Forum plugin">
-            <directory>./plugins/Forum/tests/TestCase</directory>
+        <testsuite name="forum">
+            <directory>./plugins/Forum/tests/TestCase/</directory>
         </testsuite>
     </testsuites>
 
@@ -331,9 +337,9 @@ PHP 5.6.0 以上を利用している場合、カバレッジを生成するた�
 ``<testsuites>`` を使用している場合、プラグインの ``composer.json`` ファイルに
 フィクスチャーの名前空間を autoload セクションに追加してください。例::
 
-    "autoload": {
+    "autoload-dev": {
         "psr-4": {
-            "PluginName\\Test\\Fixture\\": "tests\\Fixture"
+            "PluginName\\Test\\Fixture\\": "tests/Fixture/"
         }
     },
 
@@ -570,7 +576,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
         public $import = ['model' => 'Articles'];
     }
 
-``TableRegistry::get()`` を使用するので、プラグイン記法をサポートしています。
+``TableRegistry::getTableLocator()->get()`` を使用するので、プラグイン記法をサポートしています。
 
 あなたは自然に既存のモデルやテーブルからテーブル定義をインポートしますが、それは前のセクションに
 示されたように、フィクスチャーで直接定義されたレコードを設定することができます。例えば::
@@ -618,7 +624,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['app.articles', 'app.comments'];
+        public $fixtures = ['app.Articles', 'app.Comments'];
     }
 
 上記の例では、「Article」と「Comment」フィクスチャーをアプリケーションの 「Fixture」ディレクトリーから
@@ -626,7 +632,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['plugin.DebugKit.articles', 'plugin.MyVendorName/MyPlugin.messages', 'core.comments'];
+        public $fixtures = ['plugin.DebugKit.Articles', 'plugin.MyVendorName/MyPlugin.Messages', 'core.Comments'];
     }
 
 ``core`` のプレフィックスを使えば CakePHP からフィクスチャーをロードし、プラグイン名を
@@ -638,7 +644,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['app.articles', 'app.comments'];
+        public $fixtures = ['app.Articles', 'app.Comments'];
         public $autoFixtures = false;
 
         public function testMyFunction()
@@ -653,10 +659,10 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTest extends CakeTestCase
     {
-        public $fixtures = ['app.blog/articles', 'app.blog/comments'];
+        public $fixtures = ['app.Blog/Articles', 'app.Blog/Comments'];
     }
 
-上記の例では、両方のフィクスチャーは ``tests/Fixture/blog`` からロードされることになります。
+上記の例では、両方のフィクスチャーは ``tests/Fixture/Blog`` からロードされることになります。
 
 テーブルクラスのテスト
 ======================
@@ -692,7 +698,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTableTest extends TestCase
     {
-        public $fixtures = ['app.articles'];
+        public $fixtures = ['app.Articles'];
     }
 
 このテストケースの ``$fixtures`` 変数に使用する予定のフィクスチャーを設定します。
@@ -712,19 +718,19 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTableTest extends TestCase
     {
-        public $fixtures = ['app.articles'];
+        public $fixtures = ['app.Articles'];
 
         public function setUp()
         {
             parent::setUp();
-            $this->Articles = TableRegistry::get('Articles');
+            $this->Articles = TableRegistry::getTableLocator()->get('Articles');
         }
 
         public function testFindPublished()
         {
             $query = $this->Articles->find('published');
             $this->assertInstanceOf('Cake\ORM\Query', $query);
-            $result = $query->hydrate(false)->toArray();
+            $result = $query->enableHydration(false)->toArray();
             $expected = [
                 ['id' => 1, 'title' => 'First Article'],
                 ['id' => 2, 'title' => 'Second Article'],
@@ -769,8 +775,12 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 ==========================
 
 ヘルパー、モデル、およびコンポーネントと同様にコントローラークラスをテストすることができますが、
-CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています。コントローラーのテストケースの
-ための基本クラスとしてこのクラスを使用すると、高いレベルからコントローラーをテストすることができます。
+CakePHP は特殊な ``IntegrationTestTrait`` トレイトを提供しています。コントローラーのテストケースに
+このトレイトを使用すると、高いレベルからコントローラーをテストすることができます。
+
+.. versionadded:: 3.7.0
+
+    ``IntegrationTestCase`` クラスは ``IntegrationTestTrait`` トレイトへ移動しました。
 
 あなたが統合テストに慣れていない場合、一斉に複数のユニットをテストすることが容易になるテストの
 アプローチがあります。CakePHP の統合テスト機能は、アプリケーションによって処理される HTTP
@@ -819,11 +829,14 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
     namespace App\Test\TestCase\Controller;
 
     use Cake\ORM\TableRegistry;
-    use Cake\TestSuite\IntegrationTestCase;
+    use Cake\TestSuite\IntegrationTestTrait;
+    use Cake\TestSuite\TestCase;
 
-    class ArticlesControllerTest extends IntegrationTestCase
+    class ArticlesControllerTest extends TestCase
     {
-        public $fixtures = ['app.articles'];
+        use IntegrationTestTrait;
+
+        public $fixtures = ['app.Articles'];
 
         public function testIndex()
         {
@@ -862,13 +875,13 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
             $this->post('/articles', $data);
 
             $this->assertResponseSuccess();
-            $articles = TableRegistry::get('Articles');
+            $articles = TableRegistry::getTableLocator()->get('Articles');
             $query = $articles->find()->where(['title' => $data['title']]);
             $this->assertEquals(1, $query->count());
         }
     }
 
-この例では、いくつかのリクエストを送信するメソッドと ``IntegrationTestCase`` が提供するいくつかの
+この例では、いくつかのリクエストを送信するメソッドと ``IntegrationTestTrait`` が提供するいくつかの
 アサーションを示しています。あなたが任意のアサーションを行う前に、リクエストをディスパッチする必要が
 あります。リクエストを送信するには、以下のいずれかのメソッドを使用することができます。
 
@@ -882,7 +895,7 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
 
 ``get()`` と ``delete()`` を除く全てのメソッドは、あなたがリクエストボディーを送信することを
 可能にする二番目のパラメーターを受け入れます。リクエストをディスパッチした後、あなたのリクエストに対して
-正しく動作したことを確実にするために ``IntegrationTestCase`` や、PHPUnit が提供するさまざまな
+正しく動作したことを確実にするために ``IntegrationTestTrait`` や、PHPUnit が提供するさまざまな
 アサーションを使用することができます。
 
 .. versionadded:: 3.5.0
@@ -891,7 +904,7 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
 リクエストの設定
 ----------------
 
-``IntegrationTestCase`` クラスを使用すると、テスト対象のアプリケーションに送信するリクエストを
+``IntegrationTestTrait`` トレイトを使用すると、テスト対象のアプリケーションに送信するリクエストを
 設定することが容易にするために多くのヘルパーが付属しています。 ::
 
     // クッキーのセット
@@ -913,7 +926,7 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
 ------------------------------
 
 もし ``AuthComponent`` を使用している場合、AuthComponent がユーザーの ID を検証するために
-使用するセッションデータをスタブ化する必要があります。これを行うには、 ``IntegrationTestCase``
+使用するセッションデータをスタブ化する必要があります。これを行うには、 ``IntegrationTestTrait``
 のヘルパーメソッドを使用します。 ``ArticlesController`` が add メソッドを含み、
 その add メソッドに必要な認証を行っていたと仮定すると、次のテストを書くことができます。 ::
 
@@ -1015,7 +1028,7 @@ PSR-7 ミドルウェアの統合テスト
 ------------------------------
 
 統合テストは、あなたの PSR-7 アプリケーション全体や :doc:`/controllers/middleware` を
-テストするために利用されます。デフォルトで ``IntegrationTestCase`` は、
+テストするために利用されます。デフォルトで ``IntegrationTestTrait`` は、
 ``App\Application`` クラスの存在を自動検知し、あなたのアプリケーションの統合テストを
 自動的に有効にします。 ``useHttpServer()`` メソッドでこの振舞いを切り替えられます。 ::
 
@@ -1037,7 +1050,7 @@ PSR-7 ミドルウェアの統合テスト
     }
 
 PSR-7 モードを有効にして、アプリケーションクラスの設定を可能にした後でも、
-``IntegrationTestCase`` に存在する機能は、通常と同様に利用できます。
+``IntegrationTestTrait`` に存在する機能は、通常と同様に利用できます。
 
 イベントやルートを含むプラグインを読み込むために :ref:`application-bootstrap` を
 試してみてください。そうすることで、各テストケースごとにイベントやルートが確実に接続されます。
@@ -1060,7 +1073,7 @@ PSR-7 モードを有効にして、アプリケーションクラスの設定�
 
     $this->assertCookieEncrypted('更新された値', 'my_cookie');
 
-.. versionadded: 3.1.7
+.. versionadded:: 3.1.7
     ``assertCookieEncrypted`` とは ``cookieEncrypted`` は 3.1.7 で追加されました。
 
 フラッシュメッセージのテスト
@@ -1075,8 +1088,28 @@ PSR-7 モードを有効にして、アプリケーションクラスの設定�
 
     $this->assertSession('ブックマークは存在しません', 'Flash.flash.0.message');
 
+3.7.0 では、フラッシュメッセージ用の追加のテストヘルパーがあります。 ::
+
+    $this->enableRetainFlashMessages();
+    $this->get('/bookmarks/delete/9999');
+
+    // 'flash' キー内のフラッシュメッセージをアサート
+    $this->assertFlashMessage('Bookmark deleted');
+
+    // ２つ目のフラッシュメッセージをアサート
+    $this->assertFlashMessageAt(1, 'Bookmark really deleted');
+
+    // フラッシュメッセージがエラーエレメントを使用していることをアサート
+    $this->assertFlashElement('Flash/error');
+
+    // ２つ目のフラッシュメッセージのエレメントをアサート
+    $this->assertFlashElementAt(1, 'Flash/error');
+
 .. versionadded:: 3.4.7
     ``enableRetainFlashMessages()`` は 3.4.7 で追加されました。
+
+.. versionadded:: 3.7.0
+    フラッシュメッセージアサーションが追加されました。
 
 JSON を返すコントローラーのテスト
 ---------------------------------
@@ -1122,7 +1155,7 @@ JSON を返すコントローラーの簡単な例を示します。 ::
                 ['id' => 1, 'lng' => 66, 'lat' => 45],
             ];
             $expected = json_encode($expected, JSON_PRETTY_PRINT);
-            $this->assertEquals($expected, $this->_response->body());
+            $this->assertEquals($expected, (string)$this->_response->getBody());
         }
     }
 
@@ -1151,7 +1184,7 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
 アサーションメソッド
 --------------------
 
-``IntegrationTestCase`` クラスはレスポンスのテストがとても簡単になるアサーションメソッドを
+``IntegrationTestTrait`` トレイトはレスポンスのテストがとても簡単になるアサーションメソッドを
 多数提供しています。いくつかの例をあげます。 ::
 
     // 2xx レスポンスコードをチェック
@@ -1178,6 +1211,9 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
     // Location ヘッダーの一部をチェック
     $this->assertRedirectContains('/articles/edit/');
 
+    // 3.7.0 で追加
+    $this->assertRedirectNotContains('/articles/edit/');
+
     // レスポンスが空ではないことをアサート
     $this->assertResponseNotEmpty();
 
@@ -1187,9 +1223,15 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
     // レスポンス内容をアサート
     $this->assertResponseEquals('Yeah!');
 
+    // レスポンス内容が等しくないことをアサート
+    $this->assertResponseNotEquals('No!');
+
     // レスポンス内容の一部をアサート
     $this->assertResponseContains('You won!');
     $this->assertResponseNotContains('You lost!');
+
+    // 3.7.0 で追加
+    $this->assertHeaderNotContains('Content-Type', 'xml');
 
     // レイアウトをアサート
     $this->assertLayout('default');
@@ -1273,287 +1315,20 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
     #
     #   modified:   tests/comparisons/example.php
 
-.. _console-integration-testing:
 
 コンソールの統合テスト
 ======================
 
-コンソールアプリケーションをより簡単にテストするため、CakePHP は、
-コンソールアプリケーションをテストし、結果に対してアサートするための
-``ConsoleIntegrationTestCase`` クラスが付属しています。
+シェルとコマンドをテストについては :ref:`console-integration-testing` をご覧ください。
 
-.. versionadded:: 3.5.0
-
-    ``ConsoleIntegrationTestCase`` が追加されました。
-
-コンソールアプリケーションのテストを始めるために、 ``Cake\TestSuite\ConsoleIntegrationTestCase``
-を継承したテストケースを作成してください。このクラスは、あなたのコマンドを実行するために使用する
-``exec()`` メソッドを含みます。このメソッドに、CLI で使用するのと同じ文字列を渡すことができます。
-
-**src/Shell/MyConsoleShell.php** に置かれた、とてもシンプルなシェルで始めましょう。 ::
-
-    namespace App\Shell;
-
-    use Cake\Console\ConsoleOptionParser;
-    use Cake\Console\Shell;
-
-    class MyConsoleShell extends Shell
-    {
-        public function getOptionParser()
-        {
-            $parser = new ConsoleOptionParser();
-            $parser->setDescription('My cool console app');
-
-            return $parser;
-        }
-    }
-
-このシェルの統合テストを書くために、 **tests/TestCase/Shell/MyConsoleShellTest.php**
-に ``Cake\TestSuite\ConsoleIntegrationTestCase`` を継承したテストケースを作成します。
-このシェルは現時点ですることはあまりありませんが、シェルの説明が ``stdout``
-に表示されていることをテストしましょう。 ::
-
-    namespace App\Test\TestCase\Shell;
-
-    use Cake\TestSuite\ConsoleIntegrationTestCase;
-
-    class MyConsoleShellTest extends ConsoleIntegrationTestCase
-    {
-        public function testDescriptionOutput()
-        {
-            $this->exec('my_console');
-            $this->assertOutputContains('My cool console app');
-        }
-    }
-
-テストが合格します！これは非常に簡単な例ですが、コンソールアプリケーションの
-統合テストケースを作成することは非常に簡単です。このシェルにいくつかの
-サブコマンドとオプションを追加して続けてみましょう。 ::
-
-    namespace App\Shell;
-
-    use Cake\Console\ConsoleOptionParser;
-    use Cake\I18n\FrozenTime;
-
-    class MyConsoleShell extends Shell
-    {
-        public function getOptionParser()
-        {
-            $parser = new ConsoleOptionParser();
-
-            $updateModifiedParser = new ConsoleOptionParser();
-            $updateModifiedParser->addArgument('table', [
-                'help' => 'Table to update',
-                'required' => true
-            ]);
-
-            $parser
-                ->setDescription('My cool console app')
-                ->addSubcommand('updateModified', [
-                    'parser' => $updateModifiedParser
-                ]);
-
-            return $parser;
-        }
-
-        public function updateModified()
-        {
-            $table = $this->args[0];
-            $this->loadModel($table);
-            $this->{$table}->query()
-                ->update()
-                ->set([
-                    'modified' => new FrozenTime()
-                ])
-                ->execute();
-        }
-    }
-
-これは、独自のパーサーがあるサブコマンドを持つより完全なシェルです。
-``updateModified`` サブコマンドをテストしましょう。
-テストケースを次のコードスニペットに変更します。 ::
-
-    namespace Cake\Test\TestCase\Shell;
-
-    use Cake\Console\Shell;
-    use Cake\I18n\FrozenTime;
-    use Cake\ORM\TableRegistry;
-    use Cake\TestSuite\ConsoleIntegrationTestCase;
-
-    class MyConsoleShellTest extends ConsoleIntegrationTestCase
-    {
-        public $fixtures = [
-            // UsersFixture を持っていると仮定
-            'app.users'
-        ];
-
-        public function testDescriptionOutput()
-        {
-            $this->exec('my_console');
-            $this->assertOutputContains('My cool console app');
-        }
-
-        public function testUpdateModified()
-        {
-            $now = new FrozenTime('2017-01-01 00:00:00');
-            FrozenTime::setTestNow($now);
-
-            $this->loadFixtures('Users');
-
-            $this->exec('my_console update_modified Users');
-            $this->assertExitCode(Shell::CODE_SUCCESS);
-
-            $user = TableRegistry::get('Users')->get(1);
-            $this->assertSame($user->modified->timestamp, $now->timestamp);
-
-            FrozenTime::setTestNow(null);
-        }
-    }
-
-``testUpdateModified`` メソッドから分かるように、 ``update_modified`` サブコマンドが
-１番目の引数として渡すテーブルを更新することをテストしています。
-最初に、シェルが適切なステータスコード "0" で終了したことをアサートします。
-次に、私たちのサブコマンドが動作をしたことを確認します。つまり、提供したテーブルを更新し、
-``modified`` カラムを現在の時刻に設定します。
-
-また、 ``exec()`` はあなたが入力したのと同じ文字列を CLI に取り込むので、
-コマンド文字列にオプションと引数を含めることができます。
-
-対話的なシェルのテスト
-----------------------
-
-コンソールはしばしば対話的です。 ``Cake\TestSuite\ConsoleIntegrationTestCase``
-クラスで対話的なシェルをテストするには、期待する入力を ``exec()`` の２番目の
-パラメーターとして渡すだけです。それらは、期待どおりの順序で配列として含める必要があります。
-
-引き続きシェルの例で、対話的なサブコマンドを追加しましょう。
-シェルクラスを次のように更新します。 ::
-
-    namespace App\Shell;
-
-    use Cake\Console\ConsoleOptionParser;
-    use Cake\Console\Shell;
-    use Cake\I18n\FrozenTime;
-
-    class MyConsoleShell extends Shell
-    {
-        public function getOptionParser()
-        {
-            $parser = new ConsoleOptionParser();
-
-            $updateModifiedParser = new ConsoleOptionParser();
-            $updateModifiedParser->addArgument('table', [
-                'help' => 'Table to update',
-                'required' => true
-            ]);
-
-            $parser
-                ->setDescription('My cool console app')
-                ->addSubcommand('updateModified', [
-                    'parser' => $updateModifiedParser
-                ])
-                // 新しいサブコマンドの追加
-                ->addSubcommand('bestFramework');
-
-            return $parser;
-        }
-
-        public function updateModified()
-        {
-            $table = $this->args[0];
-            $this->loadModel($table);
-            $this->{$table}->query()
-                ->update()
-                ->set([
-                    'modified' => new FrozenTime()
-                ])
-                ->execute();
-        }
-
-        // この対話的なサブコマンドを作成
-        public function bestFramework()
-        {
-            $this->out('Hi there!');
-
-            $framework = $this->in('What is the best PHP framework?');
-            if ($framework !== 'CakePHP') {
-                $this->err("I disagree that '$framework' is the best.");
-                $this->_stop(Shell::CODE_ERROR);
-            }
-
-            $this->out('I agree!');
-        }
-    }
-
-対話的なサブコマンドがあるので、適切な応答を受け取るかどうかをテストするテストケースと、
-誤った応答を受け取るかどうかをテストするケースを追加できます。
-**tests/TestCase/Shell/MyConsoleShellTest.php** に以下のメソッドを追加してください。 ::
-
-    public function testBestFramework()
-    {
-        $this->exec('my_console best_framework', [
-            'CakePHP'
-        ]);
-        $this->assertExitCode(Shell::CODE_SUCCESS);
-        $this->assertOutputContains('I agree!');
-    }
-
-    public function testBestFrameworkWrongAnswer()
-    {
-        $this->exec('my_console best_framework', [
-            'my homemade framework'
-        ]);
-        $this->assertExitCode(Shell::CODE_ERROR);
-        $this->assertErrorRegExp("/I disagree that \'(.+)\' is the best\./");
-    }
-
-``testBestFramework`` から分かるように、最初の入力要求に "CakePHP" で応答します。
-これはサブコマンドにとって正しい回答であるため、シェルは応答を出力した後に正常に終了します。
-
-２番目のテストケース、 ``testBestFrameworkWrongAnswer`` は、誤った答えが返され、
-シェルが失敗して ``1`` で終了します。 誤った答えの名前を含むエラーが
-``stderr`` に与えられることをアサートします。
-
-CommandRunner のテスト
-----------------------
-
-``CommandRunner`` クラスを使ってディスパッチされたシェルをテストするには、
-次のメソッドを使ってテストケースでそれを有効にしてください。 ::
-
-    $this->useCommandRunner();
-
-.. versionadded:: 3.5.0
-
-    ``CommandRunner`` クラスが追加されました。
-
-アサーションメソッド
---------------------
-
-``Cake\TestSuite\ConsoleIntegrationTestCase`` クラスは、コンソールの出力に対して
-容易にアサートできるようにするいくつかのアサーションメソッドを提供します。 ::
-
-    // シェルが期待したコードで終了したことをアサート
-    $this->assertExitCode($expected);
-
-    // 標準出力が文字列を含むことをアサート
-    $this->assertOutputContains($expected);
-
-    // 標準エラーが文字列を含むことをアサート
-    $this->assertErrorContains($expected);
-
-    // 標準出力を正規表現にマッチするかをアサート
-    $this->assertOutputRegExp($expected);
-
-    // 標準エラーが正規表現にマッチするかをアサート
-    $this->assertErrorRegExp($expected);
 
 ビューのテスト
 ==============
 
 一般的に、ほとんどのアプリケーションは、直接 HTML コードをテストしません。そのため、多くの場合、
-テストは壊れやすく、メンテナンスが困難になっています。 :php:class:`IntegrationTestCase` を
+テストは壊れやすく、メンテナンスが困難になっています。 :php:class:`IntegrationTestTrait` を
 使用して機能テストを書くときに ‘view’ に ``return`` オプションを設定することで、
-レンダリングされたビューの内容を調べることができます。 IntegrationTestCase を使用して
+レンダリングされたビューの内容を調べることができます。 IntegrationTestTrait を使用して
 ビューのコンテンツをテストすることは可能ですが、より堅牢でメンテナンスしやすい統合/ビューテストは、
 `Selenium webdriver <http://seleniumhq.org>`_ のようなツールを使うことで実現できます
 
@@ -1752,7 +1527,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
                 $event = new Event('Model.Order.afterPlace', $this, [
                     'order' => $order
                 ]);
-                $this->eventManager()->dispatch($event);
+                $this->getEventManager()->dispatch($event);
                 return true;
             }
             return false;
@@ -1792,14 +1567,14 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
     class OrdersTableTest extends TestCase
     {
-        public $fixtures = ['app.orders'];
+        public $fixtures = ['app.Orders'];
 
         public function setUp()
         {
             parent::setUp();
-            $this->Orders = TableRegistry::get('Orders');
+            $this->Orders = TableRegistry::getTableLocator()->get('Orders');
             // イベントトラッキングの有効化
-            $this->Orders->eventManager()->setEventList(new EventList());
+            $this->Orders->getEventManager()->setEventList(new EventList());
         }
 
         public function testPlace()
@@ -1812,8 +1587,8 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
             $this->assertTrue($this->Orders->place($order));
 
-            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->eventManager());
-            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->eventManager());
+            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->getEventManager());
+            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->getEventManager());
         }
     }
 
@@ -1827,6 +1602,11 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
     イベントトラッキングと ``assertEventFired()`` と ``assertEventFiredWith`` は
     追加されました。
+
+メールのテスト
+==============
+
+メールのテストについては :ref:`email-testing` をご覧ください。
 
 テストスイートの作成
 ====================
@@ -1860,7 +1640,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 それらは通常のテストと同じように動作しますが、別のクラスをインポートする場合、プラグインの命名規則を
 使用することを覚えておく必要があります。これは、このマニュアルのプラグインの章から ``BlogPost``
 モデルのテストケースの一例です。他のテストとの違いは、 'Blog.BlogPost' がインポートされている
-最初の行です。プラグインフィクスチャーに ``plugin.blog.blog_posts`` とプレフィックスをつける
+最初の行です。プラグインフィクスチャーに ``plugin.Blog.BlogPosts`` とプレフィックスをつける
 必要があります。 ::
 
     namespace Blog\Test\TestCase\Model\Table;
@@ -1871,7 +1651,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
     class BlogPostsTableTest extends TestCase
     {
         // /plugins/Blog/tests/Fixture/ 内のプラグインのフィクスチャーをロード
-        public $fixtures = ['plugin.blog.blog_posts'];
+        public $fixtures = ['plugin.Blog.BlogPosts'];
 
         public function testSomething()
         {
@@ -1890,8 +1670,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
     <!-- フィクスチャーのためのリスナーのセットアップ -->
     <listeners>
         <listener
-        class="\Cake\TestSuite\Fixture\FixtureInjector"
-        file="./vendor/cakephp/cakephp/src/TestSuite/Fixture/FixtureInjector.php">
+        class="\Cake\TestSuite\Fixture\FixtureInjector">
             <arguments>
                 <object class="\Cake\TestSuite\Fixture\FixtureManager" />
             </arguments>
@@ -1903,7 +1682,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
     "autoload-dev": {
         "psr-4": {
-            "MyPlugin\\Test\\": "./plugins/MyPlugin/tests"
+            "MyPlugin\\Test\\": "plugins/MyPlugin/tests/"
         }
     }
 

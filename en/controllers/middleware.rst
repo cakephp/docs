@@ -112,7 +112,8 @@ a variety of operations::
         );
 
 In addition to applying middleware to your entire application, you can apply
-middleware to specific sets of routes using :ref:`connecting-scoped-middleware`.
+middleware to specific sets of routes using
+:ref:`Scoped Middleware <connecting-scoped-middleware>`.
 
 Adding Middleware from Plugins
 ------------------------------
@@ -242,6 +243,7 @@ creating their own response. We can see both options in our simple middleware::
     // In src/Middleware/TrackingCookieMiddleware.php
     namespace App\Middleware;
 
+    use Cake\Http\Cookie\Cookie;
     use Cake\I18n\Time;
     use Psr\Http\Message\ResponseInterface;
     use Psr\Http\Message\ServerRequestInterface;
@@ -258,10 +260,11 @@ creating their own response. We can see both options in our simple middleware::
 
             if (!$request->getCookie('landing_page')) {
                 $expiry = new Time('+ 1 year');
-                $response = $response->withCookie('landing_page' ,[
-                    'value' => $request->here(),
-                    'expire' => $expiry->format('U'),
-                ]);
+                $response = $response->withCookie(new Cookie(
+                    'landing_page',
+                    $request->getRequestTarget(),
+                    $expiry
+                ));
             }
 
             return $response;
@@ -290,6 +293,9 @@ application::
         }
     }
 
+
+.. _routing-middleware:
+
 Routing Middleware
 ==================
 
@@ -308,9 +314,6 @@ enable cached routes, provide the desired :ref:`cache configuration
 
 The above would use the ``routing`` cache engine to store the generated route
 collection.
-
-.. versionadded:: 3.6.0
-    Route caching was added in 3.6.0
 
 .. _security-header-middleware:
 
@@ -332,8 +335,8 @@ your application's middleware stack::
 
     use Cake\Http\Middleware\SecurityHeadersMiddleware;
 
-    $headers = new SecurityHeadersMiddleware();
-    $headers
+    $securityHeaders = new SecurityHeadersMiddleware();
+    $securityHeaders
         ->setCrossDomainPolicy()
         ->setReferrerPolicy()
         ->setXFrameOptions()
@@ -341,10 +344,7 @@ your application's middleware stack::
         ->noOpen()
         ->noSniff();
 
-    $middlewareQueue->add($headers);
-
-.. versionadded:: 3.5.0
-    The ``SecurityHeadersMiddleware`` was added in 3.5.0
+    $middlewareQueue->add($securityHeaders);
 
 .. _encrypted-cookie-middleware:
 
@@ -373,25 +373,53 @@ Cookie data is encrypted with via OpenSSL using AES::
 The encryption algorithms and padding style used by the cookie middleware are
 backwards compatible with ``CookieComponent`` from earlier versions of CakePHP.
 
-.. versionadded:: 3.5.0
-    The ``EncryptedCookieMiddleware`` was added in 3.5.0
-
 .. _csrf-middleware:
 
 Cross Site Request Forgery (CSRF) Middleware
 ============================================
 
-CSRF protection can be applied to your entire application, or to specific scopes
-by applying the ``CsrfProtectionMiddleware`` to your middleware stack::
+CSRF protection can be applied to your entire application, or to specific routing scopes.
 
+.. note::
+
+    You cannot use both of the following approaches together, you must choose
+    only one.  If you use both approaches together, a CSRF token mismatch error
+    will occur on every `PUT` and `POST` request
+
+By applying the ``CsrfProtectionMiddleware`` to your Application middleware
+stack you protect all the actions in application::
+
+    // in src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
 
-    $options = [
-        // ...
-    ];
-    $csrf = new CsrfProtectionMiddleware($options);
+    public function middleware($middlewareQueue) {
+        $options = [
+            // ...
+        ];
+        $csrf = new CsrfProtectionMiddleware($options);
 
-    $middlewareQueue->add($csrf);
+        $middlewareQueue->add($csrf);
+        return $middlewareQueue;
+    }
+
+By applying the ``CsrfProtectionMiddleware`` to routing scopes, you can include
+or exclude specific route groups::
+
+    // in src/Application.php
+    use Cake\Http\Middleware\CsrfProtectionMiddleware;
+
+    public function routes($routes) {
+        $options = [
+            // ...
+        ];
+        $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware($options));
+    }
+
+    // in config/routes.php
+    Router::scope('/', function (RouteBuilder $routes) {
+        $routes->applyMiddleware('csrf');
+    });
+
 
 Options can be passed into the middleware's constructor.
 The available configuration options are:
@@ -408,9 +436,6 @@ The available configuration options are:
 When enabled, you can access the current CSRF token on the request object::
 
     $token = $this->request->getParam('_csrfToken');
-
-.. versionadded:: 3.5.0
-    The ``CsrfProtectionMiddleware`` was added in 3.5.0
 
 Integration with FormHelper
 ---------------------------

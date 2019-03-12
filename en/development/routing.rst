@@ -157,7 +157,7 @@ as a destination string. A few examples of route targets are::
 
     // Array target to an application controller
     $routes->connect(
-        '/users/view/*
+        '/users/view/*',
         ['controller' => 'Users', 'action' => 'view']
     );
     $routes->connect('/users/view/*', 'Users::view');
@@ -165,7 +165,7 @@ as a destination string. A few examples of route targets are::
     // Array target to a prefixed plugin controller
     $routes->connect(
         '/admin/cms/articles',
-        ['prefix' => 'admin', 'plugin' => 'Cms', controller' => 'Articles', 'action' => 'index']
+        ['prefix' => 'admin', 'plugin' => 'Cms', 'controller' => 'Articles', 'action' => 'index']
     );
     $routes->connect('/admin/cms/articles', 'Cms.Admin/Articles::index');
 
@@ -799,7 +799,7 @@ the ``*.`` wildcard to match any subdomain::
         $routes->connect(
             '/images/old-log.png',
             ['controller' => 'Images', 'action' => 'oldLogo']
-        )->setHost('images.example.com');
+        )->setHost('*.example.com');
     });
 
 The ``_host`` option is also used in URL generation. If your ``_host`` option
@@ -819,9 +819,6 @@ parameter when generating URLs::
         'action' => 'oldLogo',
         '_host' => 'images.example.com',
     ]);
-
-.. versionadded:: 3.4.0
-    The ``_host`` option was added in 3.4.0
 
 .. index:: file extensions
 .. _file-extensions:
@@ -893,6 +890,11 @@ While Middleware can be applied to your entire application, applying middleware
 to specific routing scopes offers more flexibility, as you can apply middleware
 only where it is needed allowing your middleware to not concern itself with
 how/where it is being applied.
+
+.. note::
+
+    Applied scoped middleware will be run by :ref:`RoutingMiddleware <routing-middleware>`,
+    normally at the end of your application's middleware queue.
 
 Before middleware can be applied to a scope, it needs to be
 registered into the route collection::
@@ -994,7 +996,7 @@ PATCH       /recipes/123.format   RecipesController::edit(123)
 DELETE      /recipes/123.format   RecipesController::delete(123)
 =========== ===================== ==============================
 
-Ths HTTP method being used is detected from a few different sources.
+The HTTP method being used is detected from a few different sources.
 The sources in order of preference are:
 
 #. The ``_method`` POST variable
@@ -1048,9 +1050,6 @@ compatible with :ref:`prefix-routing`.
 
     While you can nest resources as deeply as you require, it is not recommended
     to nest more than 2 resources together.
-
-.. versionadded:: 3.3
-    The ``prefix`` option was added to ``resources()`` in 3.3.
 
 Limiting the Routes Created
 ---------------------------
@@ -1457,10 +1456,10 @@ allows you to prepare URLs before routing.
 
 Callback filter functions should expect the following parameters:
 
-- ``$params`` The URL params being processed.
+- ``$params`` The URL parameters being processed.
 - ``$request`` The current request.
 
-The URL filter function should *always* return the params even if unmodified.
+The URL filter function should *always* return the parameters even if unmodified.
 
 URL filters allow you to implement features like persistent parameters::
 
@@ -1497,6 +1496,11 @@ into this::
 
     Router::url(['plugin' => 'MyPlugin', 'controller' => 'Locations', 'action' => 'index', 'language' => 'es']);
 
+.. warning::
+    If you are using the caching features of :ref:`routing-middleware` you must
+    define the URL filters in your application ``bootstrap()`` as filters are
+    not part of the cached data.
+
 Handling Named Parameters in URLs
 =================================
 
@@ -1517,12 +1521,6 @@ arguments::
 This will populate ``$this->request->getParam('named')`` with any named parameters
 found in the passed arguments.  Any passed argument that was interpreted as a
 named parameter, will be removed from the list of passed arguments.
-
-.. toctree::
-    :glob:
-    :maxdepth: 1
-
-    /development/dispatch-filters
 
 .. meta::
     :title lang=en: Routing

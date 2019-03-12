@@ -67,7 +67,7 @@ is invoked at the end of a Controller's constructor for this kind of use::
     class AppController extends Controller
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             // Always enable the CSRF component.
             $this->loadComponent('Csrf');
@@ -188,6 +188,10 @@ assign a set of information to the view::
 
     $this->set($data);
 
+Keep in mind that view vars are shared among all parts rendered by your view.
+They will be available in all parts of the view: the template, the layout and
+all elements inside the former two.
+
 Setting View Options
 --------------------
 
@@ -203,9 +207,6 @@ properties of the view before it is created::
 
 The above shows how you can load custom helpers, set the theme and use a custom
 view class.
-
-.. versionadded:: 3.1
-    ViewBuilder was added in 3.1
 
 Rendering a View
 ----------------
@@ -425,7 +426,7 @@ Configuring Components to Load
 In your Controller's ``initialize()`` method you can define any components you
 want loaded, and any configuration data for them::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Csrf');
@@ -439,27 +440,6 @@ components. Configured components and their dependencies will be created by
 CakePHP for you. Read the :ref:`configuring-components` section for more
 information. As mentioned earlier the ``$components`` property will be merged
 with the property defined in each of your controller's parent classes.
-
-Configuring Helpers to Load
-===========================
-
-.. php:attr:: helpers
-
-Let's look at how to tell a CakePHP Controller that you plan to use
-additional MVC classes::
-
-    class RecipesController extends AppController
-    {
-        public $helpers = ['Form'];
-    }
-
-Each of these variables are merged with their inherited values,
-therefore it is not necessary (for example) to redeclare the
-``FormHelper``, or anything that is declared in your ``AppController``.
-
-.. deprecated:: 3.0
-    Loading Helpers from the controller is provided for backwards compatibility
-    reasons. You should see :ref:`configuring-helpers` for how to load helpers.
 
 .. _controller-life-cycle:
 

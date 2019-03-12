@@ -37,6 +37,18 @@ Configuration
 
 * ``DebugKit.includeSchemaReflection`` - Set to true to enable logging of schema
   reflection queries. Disabled by default.
+  
+* ``DebugKit.safeTld`` - Set an array of whitelisted TLDs for local development.
+  This can be used to make sure DebugKit displays on hosts it otherwise determines unsafe. ::
+
+    // Allow e.g. http://foo.bar.dev or http://my-shop.local domains locally
+    Configure::write('DebugKit.safeTld', ['dev', 'local', 'example']);
+
+* ``DebugKit.forceEnable`` - Force DebugKit to display. Careful with this, it is usually 
+  safer to simply whitelist your local TLDs. Example usage::
+
+    // Before loading DebugKit
+    Configure::write('DebugKit.forceEnable', true);
 
 Database Configuration
 ----------------------
@@ -72,10 +84,10 @@ Toolbar Usage
 =============
 
 The DebugKit Toolbar is comprised of several panels, which are shown by clicking
-the CakePHP icon in the upper right-hand corner of your browser after DebugKit
+the CakePHP icon in the bottom right-hand corner of your browser after DebugKit
 has been installed and loaded. Each panel is comprised of a panel class and view
-element.  Typically, a panel handles the collection and display of a single type
-of information such as Logs or Request information. You can choose to panels
+element. Typically, a panel handles the collection and display of a single type
+of information such as Logs or Request information. You can choose to view panels
 from the toolbar or add your own custom panels.
 
 Each panel lets you look at a different aspect of your application:
@@ -98,10 +110,8 @@ Each panel lets you look at a different aspect of your application:
   ``DebugKit\DebugTimer``, and memory usage collected with
   ``DebugKit\DebugMemory``.
 * **Variables** Display View variables set in controller.
-
-Typically, a panel handles the collection and display of a single type
-of information such as Logs or Request information. You can choose to view
-panels from the toolbar or add your own custom panels.
+* **Deprecations** Display deprecation warnings in a more readable and less
+  disruptive format.
 
 Using the History Panel
 =======================
@@ -164,7 +174,7 @@ mailer methods::
     }
 
 MailPreview classes should live in the ``Mailer\Preview`` namespace of your
-application or plugin, and use the ``Preview``
+application or plugin, and use the ``Preview`` class suffix.
 
 Developing Your Own Panels
 ==========================
@@ -260,9 +270,9 @@ render time::
 To use a plugin or app panel, update your application's DebugKit configuration
 to include the panel::
 
-    // in config/bootstrap.php
+    // in src/Application.php bootstrap() method add
     Configure::write('DebugKit.panels', ['App', 'MyPlugin.MyCustom']);
-    Plugin::load('DebugKit', ['bootstrap' => true]);
+    $this->addPlugin('DebugKit', ['bootstrap' => true]);
 
 The above would load all the default panels as well as the ``AppPanel``, and
 ``MyCustomPanel`` panel from ``MyPlugin``.

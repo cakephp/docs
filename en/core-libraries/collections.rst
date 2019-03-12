@@ -60,7 +60,7 @@ List of Methods
     :php:meth:`indexBy`, :php:meth:`insert`, :php:meth:`isEmpty`, :php:meth:`last`
     :php:meth:`listNested`, :php:meth:`map`, :php:meth:`match`, :php:meth:`max`
     :php:meth:`median`, :php:meth:`min`, :php:meth:`nest`, :php:meth:`prepend`
-    :php:meth:`prependItem`, :php:meth:`reduce`, :php:meth:`reject` :php:meth:`sample`
+    :php:meth:`prependItem`, :php:meth:`reduce`, :php:meth:`reject`, :php:meth:`sample`
     :php:meth:`shuffle`, :php:meth:`skip`, :php:meth:`some`, :php:meth:`sortBy`
     :php:meth:`stopWhen`, :php:meth:`sumOf`, :php:meth:`take`, :php:meth:`through`
     :php:meth:`transpose`, :php:meth:`unfold`, :php:meth:`zip`
@@ -218,7 +218,7 @@ instances by the ORM) you may want to group results by date::
 
 You can stop the iteration at any point using the ``stopWhen()`` method. Calling
 it in a collection will create a new one that will stop yielding results if the
-passed callable returns false for one of the elements::
+passed callable returns true for one of the elements::
 
     $items = [10, 20, 50, 1, 2];
     $collection = new Collection($items);
@@ -314,9 +314,6 @@ chunking associative arrays::
         ['a' => 1, 'b' => 2],
         ['c' => 3, 'd' => [4, 5]]
     ]
-
-.. versionadded:: 3.4.0
-    ``chunkWithKeys()`` was added in 3.4.0
 
 Filtering
 =========
@@ -475,8 +472,6 @@ for::
     // Average: 150
     $average = (new Collection($items))->avg('invoice.total');
 
-.. versionadded:: 3.5.0
-
 .. php:method:: median($matcher = null)
 
 Calculate the median value of a set of elements. Optionally provide a matcher
@@ -493,7 +488,6 @@ path, or function to extract values to generate the median for::
     // Median: 333
     $median = (new Collection($items))->median('invoice.total');
 
-.. versionadded:: 3.5.0
 
 Grouping and Counting
 ---------------------
@@ -843,9 +837,6 @@ of the each of the original columns::
          ['2014', '50', '100', '200'],
      ]
 
-.. versionadded:: 3.3.0
-    ``Collection::transpose()`` was added in 3.3.0.
-
 Withdrawing Elements
 --------------------
 
@@ -923,7 +914,7 @@ collection containing the values from both sources::
         return strpos($tweet, 'cakefest');
     });
 
-.. php:method::appendItem($value, $key)
+.. php:method:: appendItem($value, $key)
 
 Allows you to append an item with an optional key to the collection. If you
 specify a key that already exists in the collection, the value will not be
@@ -931,9 +922,6 @@ overwritten::
 
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->appendItem($newTweet, 99);
-
-.. versionadded:: 3.6.0
-    appendItem() was added.
 
 .. php:method:: prepend(array|Traversable $items)
 
@@ -943,10 +931,7 @@ both sources::
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->prepend($phpTweets);
 
-.. versionadded:: 3.6.0
-    prepend() was added.
-
-.. php:method::prependItem($value, $key)
+.. php:method:: prependItem($value, $key)
 
 Allows you to prepend an item with an optional key to the collection. If you
 specify a key that already exists in the collection, the value will not be
@@ -954,10 +939,6 @@ overwritten::
 
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->prependItem($newTweet, 99);
-
-.. versionadded:: 3.6.0
-    prependItem() was added.
-
 
 .. warning::
 
@@ -1174,9 +1155,6 @@ into another collection using the ``buffered()`` function::
 
 Now, when both collections are iterated, they will only call the
 extracting operation once.
-
-.. versionadded:: 3.5.0
-    Collections initialized with an array are no longer iterated lazily in order to improve performance.
 
 Making Collections Rewindable
 -----------------------------

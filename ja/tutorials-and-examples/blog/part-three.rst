@@ -24,7 +24,7 @@ Migrations プラグイン
     composer require cakephp/migrations:~1.0
 
 マイグレーションプラグインはアプリケーションの ``plugins`` フォルダーに存在します。
-そして、 アプリケーションの ``bootstrap.php`` ファイルに ``Plugin::load('Migrations');``
+そして、 Application の ``bootstrap`` メソッドに ``$this->addPlugin('Migrations');``
 を追加してください。
 
 プラグインを読み込んだら、次のコマンドを実行してマイグレーションファイルを作成しましょう。 ::
@@ -332,7 +332,7 @@ Articles コントローラーを編集する
 
     namespace App\Controller;
 
-    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
+    // 3.6 より前は Cake\Network\Exception\NotFoundException を使用
     use Cake\Http\Exception\NotFoundException;
 
     class ArticlesController extends AppController

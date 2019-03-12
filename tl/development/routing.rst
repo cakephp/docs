@@ -1416,10 +1416,10 @@ allows you to prepare URLs before routing.
 
 Callback filter functions should expect the following parameters:
 
-- ``$params`` The URL params being processed.
+- ``$params`` The URL parameters being processed.
 - ``$request`` The current request.
 
-The URL filter function should *always* return the params even if unmodified.
+The URL filter function should *always* return the parameters even if unmodified.
 
 URL filters allow you to implement features like persistent parameters::
 

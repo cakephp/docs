@@ -23,7 +23,7 @@ look like this::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp');
         }
@@ -273,7 +273,7 @@ First, start by creating an ``add()`` action in the
     class ArticlesController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
 
@@ -295,7 +295,6 @@ First, start by creating an ``add()`` action in the
         {
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
-                // Prior to 3.4.0 $this->request->data() was used.
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
@@ -414,7 +413,7 @@ back at our Articles model and make a few adjustments::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp');
         }
@@ -459,7 +458,6 @@ like::
     {
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
-            // Prior to 3.4.0 $this->request->data() was used.
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));

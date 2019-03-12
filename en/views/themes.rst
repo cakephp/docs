@@ -44,12 +44,10 @@ file in the **templates/** folder. This way, you can create master template file
 and simply override them on a case-by-case basis within your theme folder.
 
 If your theme also acts as a plugin, don't forget to ensure it is loaded in
-**config/bootstrap.php**. For example::
+your application's ``bootstrap`` method. For example::
 
-    /**
-     * Load our plugin theme residing in the folder /plugins/Modern
-     */
-    Plugin::load('Modern');
+    // Load our plugin theme residing in the folder /plugins/Modern
+    $this->addPlugin('Modern');
 
 Theme Assets
 ============

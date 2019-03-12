@@ -16,9 +16,9 @@ following::
     php composer.phar require cakephp/elastic-search "@stable"
 
 You will need to add the following line to your application's
-**config/bootstrap.php** file::
+**src/Application.php** file::
 
-    Plugin::load('Cake/ElasticSearch', ['bootstrap' => true]);
+    $this->addPlugin('Cake/ElasticSearch', ['bootstrap' => true]);
 
 Additionally, you will need to configure the 'elastic' datasource connection in
 your **config/app.php** file. An example configuration would be::
@@ -216,7 +216,7 @@ use ``embedOne`` and ``embedMany`` to define embedded documents::
 
     class ArticlesType extends Type
     {
-        public function initialize()
+        public function initialize(): void
         {
             $this->embedOne('User');
             $this->embedMany('Comments', [
@@ -316,5 +316,5 @@ You can safely omit the type name and top level ``properties`` key. Once your
 fixtures are created you can use them in your test cases by including them in
 your test's ``fixtures`` properties::
 
-    public $fixtures = ['app.articles'];
+    public $fixtures = ['app.Articles'];
 

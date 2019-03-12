@@ -70,7 +70,8 @@ once::
         return $this->deleteAll(['is_spam' => true]);
     }
 
-A bulk-delete will be considered successful if 1 or more rows are deleted.
+A bulk-delete will be considered successful if 1 or more rows are deleted. The
+function returns the number of deleted records as an integer.
 
 .. warning::
 
@@ -101,5 +102,3 @@ If you want to track down the entity that failed to save, you can use the
 
 As this internally performs a :php:meth:`Cake\\ORM\\Table::delete()` call, all
 corresponding delete events will be triggered.
-
-.. versionadded:: 3.4.1

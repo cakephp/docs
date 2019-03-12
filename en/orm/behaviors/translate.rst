@@ -98,7 +98,7 @@ class::
     class ArticlesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             // By default Eav strategy will be used.
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
@@ -114,7 +114,7 @@ as::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
                 'strategyClass' => \Cake\ORM\Behavior\Translate\ShadowTableStrategy,
@@ -186,13 +186,14 @@ Using a Separate Translations Table for Eav strategy
 ----------------------------------------------------
 
 If you wish to use a table other than ``i18n`` for translating a particular
-repository, you can specify it in the behavior's configuration. This is common
-when you have multiple tables to translate and you want a cleaner separation
-of the data that is stored for each different table::
+repository, you can specify the name of the table class name for your custom
+table in the behavior's configuration. This is common when you have multiple
+tables to translate and you want a cleaner separation of the data that is stored
+for each different table::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],
@@ -298,7 +299,7 @@ If this is undesired, you can ignore translations which are empty using the
     class ArticlesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],
@@ -328,19 +329,21 @@ This assumes that ``Categories`` has the TranslateBehavior attached to it. It
 simply uses the query builder function for the ``contain`` clause to use the
 ``translations`` custom finder in the association.
 
-Retrieving one language without using I18n::locale
---------------------------------------------------
+.. _retrieving-one-language-without-using-i18n-locale:
+
+Retrieving one language without using I18n::setLocale
+-----------------------------------------------------
 
 calling ``I18n::setLocale('es');`` changes the default locale for all translated
 finds, there may be times you wish to retrieve translated content without
 modifying the application's state. For these scenarios use the behavior's
-``locale()`` method::
+``setLocale()`` method::
 
     I18n::setLocale('en'); // reset for illustration
 
     $this->loadModel('Articles');
 
-    // specific locale. Use locale() prior to 3.6
+    // specific locale.
     $this->Articles->setLocale('es');
 
     $article = $this->Articles->get(12);
@@ -353,7 +356,6 @@ to call the method on each table, for example::
     I18n::setLocale('en'); // reset for illustration
 
     $this->loadModel('Articles');
-    // Use locale() prior to 3.6
     $this->Articles->setLocale('es');
     $this->Articles->Categories->setLocale('es');
 
@@ -384,7 +386,7 @@ translations for any given entity. For example, given the following setup::
     // in src/Model/Table/ArticlesTable.php
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
         }
@@ -397,7 +399,7 @@ translations for any given entity. For example, given the following setup::
     }
 
     // In a Controller
-    $articles = $this->loadModel('Articles');
+    $this->loadModel('Articles');
     $article = new Article([
         'title' => 'My First Article',
         'body' => 'This is the content',
@@ -436,7 +438,7 @@ default language directly to the table::
 
     $article->title = 'Mi Primer Artículo';
 
-    $this->Articles->locale('es');
+    $this->Articles->setLocale('es');
     $this->Articles->save($article);
 
 Setting the language directly in the table is useful when you need to both
@@ -507,7 +509,7 @@ behavior during ``newEntity()`` or ``patchEntity()``::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title'],

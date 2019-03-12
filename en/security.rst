@@ -8,8 +8,8 @@ The following sections cover those tools:
     :maxdepth: 1
 
     core-libraries/security
-    controllers/components/csrf
     Security Component <controllers/components/security>
+    CSRF Middleware <controllers/middleware>
 
 .. meta::
     :title lang=en: Security

@@ -10,14 +10,14 @@ CakePHP は nginx や lighttpd や Microsoft IIS のような様々なウェブ�
 ============
 
 - HTTP サーバー。例: Apache。mod\_rewrite が推奨されますが、必須ではありません。
-- PHP |minphpversion| 以上 (PHP 7.1 も含む)
+- PHP |minphpversion| 以上 (PHP 7.2 も含む)
 - mbstring PHP 拡張
 - intl PHP 拡張
 - simplexml PHP 拡張
 
 .. note::
 
-    XAMPP / WAMP のいずれでも、mcrypt 拡張も mbstring 拡張も初期インストール状態で
+    XAMPP / WAMP のいずれでも、mbstring 拡張が初期インストール状態で
     動きます。
 
     XAMPP では intl 拡張は同梱されていますが、 **php.ini** の ``extension=php_intl.dll``
@@ -33,7 +33,8 @@ CakePHP は nginx や lighttpd や Microsoft IIS のような様々なウェブ�
 これを活用することが想像できます。
 CakePHP は種々のデータベース・ストレージのエンジンをサポートしています：
 
--  MySQL (5.1.10 以上)
+-  MySQL (5.5.3 以上)
+-  MariaDB (5.5 以上)
 -  PostgreSQL
 -  Microsoft SQL Server (2008 以上)
 -  SQLite 3
@@ -114,11 +115,11 @@ CakePHP の変更に合わせて最新の状態に保つ
 デフォルトではあなたのアプリケーションの **composer.json** は下記のようになっています。 ::
 
     "require": {
-        "cakephp/cakephp": "3.5.*"
+        "cakephp/cakephp": "3.6.*"
     }
 
 あなたが ``php composer.phar update`` を実行するたびに、このマイナーバージョンの
-パッチリリースが手に入ります。代わりに ``^3.5`` に変更して、 ``3.x`` ブランチの
+パッチリリースが手に入ります。代わりに ``^3.6`` に変更して、 ``3.x`` ブランチの
 最新の安定版マイナーリリースを手に入れることができます。
 
 もし CakePHP をリリース前の最新状態で維持したいのなら、あなたのアプリケーションの
@@ -380,7 +381,7 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
            AllowOverride All
        </Directory>
        <Directory /var/www>
-           Options Indexes FollowSymLinks MultiViews
+           Options FollowSymLinks
            AllowOverride All
            Order Allow,Deny
            Allow from all

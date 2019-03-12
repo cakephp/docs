@@ -18,7 +18,7 @@ You enable the timestamp behavior like any other behavior::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp');
         }
@@ -38,7 +38,7 @@ timestamp fields on custom events you can use some additional configuration::
 
     class OrdersTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp', [
                 'events' => [
@@ -85,7 +85,3 @@ saving an entity you can mark the attribute as 'dirty'::
     // Mark the modified column as dirty making
     // the current value be set on update.
     $order->setDirty('modified', true);
-
-    // Prior to 3.4.0
-    $order->dirty('modified', true);
-

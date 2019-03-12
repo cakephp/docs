@@ -266,7 +266,7 @@ que toutes les dépendances soient installées:
 
 .. code-block:: bash
 
-    $ composer install --dev
+    $ composer install
 
 À partir du répertoire racine de votre application. Pour lancer les tests pour
 un plugin qui fait parti de la source de votre application, d'abord faîtes la

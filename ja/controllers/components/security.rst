@@ -183,14 +183,18 @@ Security コンポーネントは、一般的にコントローラーの ``befor
 
         public function beforeFilter(Event $event)
         {
-            if ($this->getParam('admin')) {
+            if ($this->request->getParam('admin')) {
                 $this->Security->requireSecure();
             }
         }
 
-        public function forceSSL()
+        public function forceSSL($error = '', SecurityException $exception = null)
         {
-            return $this->redirect('https://' . env('SERVER_NAME') . $this->request->getRequestTarget());
+            if ($exception instanceof SecurityException && $exception->getType() === 'secure') {
+                return $this->redirect('https://' . env('SERVER_NAME') . Router::url($this->request->getRequestTarget()));
+            }
+            
+            throw $exception;
         }
     }
 

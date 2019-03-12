@@ -7,6 +7,8 @@ Command Input/Output
 CakePHP provides the ``ConsoleIo`` object to commands so that they can
 interactively read user input and output information to the user.
 
+.. _command-helpers:
+
 Command Helpers
 ===============
 
@@ -143,7 +145,7 @@ CakePHP provides an easy way to do this::
     $color = $io->ask('What color do you like?');
 
     // Get a choice from the user.
-    $selection = $io->ask('Red or Green?', ['R', 'G'], 'R');
+    $selection = $io->askChoice('Red or Green?', ['R', 'G'], 'R');
 
 Selection validation is case-insensitive.
 

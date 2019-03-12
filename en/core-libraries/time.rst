@@ -13,7 +13,7 @@ use the ``FrozenTime`` class::
     class UsersController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Auth');
@@ -32,10 +32,6 @@ use the ``FrozenTime`` class::
 Under the hood, CakePHP uses `Chronos <https://github.com/cakephp/chronos>`_
 to power its ``FrozenTime`` utility. Anything you can do with ``Chronos`` and
 ``DateTime``, you can do with ``FrozenTime`` and ``FrozenDate``.
-
-.. note::
-    Prior to 3.2.0 CakePHP used `Carbon
-    <https://github.com/briannesbitt/Carbon>`__.
 
 For more details on Chronos please see `the API documentation
 <https://api.cakephp.org/chronos/1.0/>`_.
@@ -174,9 +170,6 @@ The following calendar types are supported:
 * hebrew
 * coptic
 * ethiopic
-
-.. versionadded:: 3.1
-    Non-gregorian calendar support was added in 3.1
 
 .. note::
     For constant strings i.e. IntlDateFormatter::FULL Intl uses ICU library
@@ -341,8 +334,6 @@ Dates
 =====
 
 .. php:class: Date
-
-.. versionadded:: 3.2
 
 The ``Date`` class in CakePHP implements the same API and methods as
 :php:class:`Cake\\I18n\\Time` does. The main difference between ``Time`` and

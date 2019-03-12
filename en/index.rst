@@ -1,7 +1,7 @@
 Welcome
 #######
 
-CakePHP 3 is a web development framework running on **PHP 7.2** (min. PHP |minphpversion|).
+CakePHP 3 is a web development framework running on **PHP 7.3** (min. PHP |minphpversion|).
 Read :doc:`CakePHP at a Glance </intro>` to get an introduction to the
 fundamentals of CakePHP 3.
 
@@ -38,7 +38,7 @@ get the common tasks completed. If you are new, you should start off with the
 :doc:`/quickstart` as it will give you a quick tour of what
 CakePHP has to offer and how it works.
 
-After you've finished the Bookmarker Tutorial, you can brush up on the key
+After you've finished the Quickstart tutorial, you can brush up on the key
 elements in a CakePHP application:
 
 * The :ref:`CakePHP request cycle <request-cycle>`

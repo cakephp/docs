@@ -6,7 +6,8 @@ Shells
 .. php:class:: Shell
 
 .. deprecated:: 3.6.0
-    Shells are deprecated as of 3.6.0, but will not be removed until 5.x
+    Shells are deprecated as of 3.6.0, but will not be removed until 5.x.
+    Use :doc:`/console-and-shells/commands` instead.
 
 Creating a Shell
 ================
@@ -183,7 +184,7 @@ properties attached to your shell::
     class UserShell extends Shell
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadModel('Users');
@@ -232,8 +233,6 @@ from inside your plugin's shell.
 
 Passing extra parameters to the dispatched Shell
 ------------------------------------------------
-
-.. versionadded:: 3.1
 
 It can sometimes be useful to pass on extra parameters (that are not shell arguments)
 to the dispatched Shell. In order to do this, you can now pass an array to
@@ -330,10 +329,6 @@ process::
         // Halt with an error message and error code.
         $this->abort('User cannot be found', 128);
     }
-
-.. versionadded:: 3.2
-    The abort() method was added in 3.2. In prior versions you can use
-    ``error()`` to output a message and stop execution.
 
 Status and Error Codes
 ======================

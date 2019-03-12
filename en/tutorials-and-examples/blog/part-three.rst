@@ -24,7 +24,7 @@ the migrations plugin is already under ``require``. If not, add it by executing:
     composer require cakephp/migrations:~1.0
 
 The migrations plugin will now be in your application's **plugins** folder.
-Also, add ``Plugin::load('Migrations');`` to your application's **bootstrap.php** file.
+Also, add ``$this->addPlugin('Migrations');`` to your application's ``bootstrap`` method.
 
 Once the plugin is loaded, run the following command to create a migration file::
 
@@ -148,7 +148,7 @@ the **src/Model/Table/ArticlesTable.php** file and add the following::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp');
             // Just add the belongsTo relation with CategoriesTable
@@ -217,7 +217,7 @@ for both the ``lft`` and ``rght`` columns in your CategoriesTable model::
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create');
+            ->allowEmptyString('id', 'create');
 
         $validator
             ->add('lft', 'valid', ['rule' => 'numeric'])
@@ -337,7 +337,6 @@ it::
 
     namespace App\Controller;
 
-    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
     use Cake\Http\Exception\NotFoundException;
 
     class ArticlesController extends AppController
@@ -349,7 +348,6 @@ it::
         {
             $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
-                // Prior to 3.4.0 $this->request->data() was used.
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));

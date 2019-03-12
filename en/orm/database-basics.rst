@@ -63,6 +63,10 @@ You can use prepared statements to insert parameters::
 
 It is also possible to use complex data types as arguments::
 
+    use Cake\Datasource\ConnectionManager;
+    use DateTime;
+
+    $connection = ConnectionManager::get('default');
     $results = $connection
         ->execute(
             'SELECT * FROM articles WHERE created >= :created',
@@ -77,7 +81,7 @@ Instead of writing the SQL manually, you can use the query builder::
         ->newQuery()
         ->select('*')
         ->from('articles')
-        ->where(['created >' => new DateTime('1 day ago'), ['created' => 'datetime']])
+        ->where(['created >' => new DateTime('1 day ago')], ['created' => 'datetime'])
         ->order(['title' => 'DESC'])
         ->execute()
         ->fetchAll('assoc');
@@ -88,6 +92,7 @@ Running Insert Statements
 Inserting rows in the database is usually a matter of a couple lines::
 
     use Cake\Datasource\ConnectionManager;
+    use DateTime;
 
     $connection = ConnectionManager::get('default');
     $connection->insert('articles', [
@@ -364,15 +369,6 @@ automatically convert input parameters from ``DateTime`` instances into a
 timestamp or formatted datestrings. Likewise, 'binary' columns will accept file
 handles, and generate file handles when reading data.
 
-.. versionchanged:: 3.3.0
-    The ``json`` type was added.
-
-.. versionchanged:: 3.5.0
-    The ``smallinteger`` and ``tinyinteger`` types were added.
-
-.. versionchanged:: 3.6.0
-    The ``binaryuuid`` type was added.
-
 .. _datetime-type:
 
 DateTime Type
@@ -462,9 +458,6 @@ the type mapping. During our application bootstrap we should do the following::
 
     Type::map('json', 'App\Database\Type\JsonType');
 
-.. versionadded:: 3.3.0
-    The JsonType described in this example was added to the core.
-
 We can then overload the reflected schema data to use our new type, and
 CakePHP's database layer will automatically convert our JSON data when creating
 queries. You can use the custom types you've created by mapping the types in
@@ -487,9 +480,6 @@ your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
 
 Mapping Custom Datatypes to SQL Expressions
 -------------------------------------------
-
-.. versionadded:: 3.3.0
-    Support for mapping custom data types to SQL expressions was added in 3.3.0.
 
 The previous example maps a custom datatype for a 'json' column type which is
 easily represented as a string in a SQL statement. Complex SQL data
@@ -597,9 +587,6 @@ to our table class <saving-complex-types>`.
 
 Enabling Immutable DateTime Objects
 -----------------------------------
-
-.. versionadded:: 3.2
-    Immutable date/time objects were added in 3.2.
 
 Because Date/Time objects are easily mutated in place, CakePHP allows you to
 enable immutable value objects. This is best done in your application's
@@ -814,7 +801,7 @@ the statement::
     $rows = $stmt->fetchAll('assoc');
 
     // Read rows through iteration.
-    foreach ($rows as $row) {
+    foreach ($stmt as $row) {
         // Do work
     }
 
@@ -851,13 +838,13 @@ Query Logging
 
 Query logging can be enabled when configuring your connection by setting the
 ``log`` option to ``true``. You can also toggle query logging at runtime, using
-``logQueries``::
+``enableQueryLogging``::
 
     // Turn query logging on.
-    $conn->logQueries(true);
+    $conn->enableQueryLogging(true);
 
     // Turn query logging off
-    $conn->logQueries(false);
+    $conn->enableQueryLogging(false);
 
 When query logging is enabled, queries will be logged to
 :php:class:`Cake\\Log\\Log` using the 'debug' level, and the 'queriesLog' scope.

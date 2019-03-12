@@ -21,7 +21,7 @@ RequestHandler it must be included in your ``initialize()`` method::
 
     class WidgetsController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');
@@ -47,13 +47,13 @@ the client and its request.
         class ArticlesController extends AppController
         {
 
-            public function initialize()
+            public function initialize(): void
             {
                 parent::initialize();
                 $this->loadComponent('RequestHandler');
             }
 
-            public function beforeFilter(Event $event)
+            public function beforeFilter(EventInterface $event)
             {
                 if ($this->RequestHandler->accepts('html')) {
                     // Execute code only if client accepts an HTML (text/html)
@@ -142,7 +142,7 @@ handler could look like::
 
     class ArticlesController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $parser = function ($data) {
@@ -171,10 +171,6 @@ callbacks like ``json_decode``::
 
 The above will make ``$this->request->getData()`` an array of the JSON input data,
 without the additional ``true`` you'd get a set of ``stdClass`` objects.
-
-.. deprecated:: 3.1.0
-    As of 3.1.0 the ``addInputType()`` method is deprecated. You should use
-    ``config()`` to add input types at runtime.
 
 .. versionchanged:: 3.6.0
     You should prefer using :ref:`body-parser-middleware` instead of
@@ -246,7 +242,7 @@ the client. The response status code is then set to ``304 Not Modified``.
 You can opt-out this automatic checking by setting the ``checkHttpCache``
 setting to ``false``::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('RequestHandler', [
@@ -263,7 +259,7 @@ with a custom View class, or add View classes for other types.
 You can map existing and new types to your custom classes. You can also set this
 automatically by using the ``viewClassMap`` setting::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('RequestHandler', [
@@ -274,10 +270,6 @@ automatically by using the ``viewClassMap`` setting::
             ]
         ]);
     }
-
-.. deprecated:: 3.1.0
-    As of 3.1.0 the ``viewClassMap()`` method is deprecated. You should use
-    ``config()`` to change the viewClassMap at runtime.
 
 .. meta::
     :title lang=en: Request Handling

@@ -20,7 +20,7 @@ Before you can use the data view classes, you'll first need to load the
 :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent` in your
 controller::
 
-    public function initialize()
+    public function initialize(): void
     {
         ...
         $this->loadComponent('RequestHandler');
@@ -58,7 +58,7 @@ serialize::
 
     class ArticlesController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');
@@ -79,7 +79,7 @@ You can also define ``_serialize`` as an array of view variables to combine::
 
     class ArticlesController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');
@@ -149,6 +149,34 @@ this node using the ``_rootNode`` view variable.
 The XmlView class supports the ``_xmlOptions`` variable that allows you to
 customize the options used to generate XML, e.g. ``tags`` vs ``attributes``.
 
+An example of using ``XmlView`` would be to generate a `sitemap.xml
+<https://www.sitemaps.org/protocol.html>`_. This document type requires that you
+change ``_rootNode`` and set attributes. Attributes are defined using the ``@``
+prefix::
+
+    public function sitemap()
+    {
+        $pages = $this->Pages->find();
+        $urls = [];
+        foreach ($pages as $page) {
+            $urls[] = [
+                'loc' => Router::url(['controller' => 'Pages', 'action' => 'view', $page->slug, '_full' => true]),
+                'lastmod' => $page->modified->format('Y-m-d'),
+                'changefreq' => 'daily',
+                'priority' => '0.5'
+            ];
+        }
+
+        // Define a custom root node in the generated document.
+        $this->set('_rootNode', 'urlset');
+        $this->set([
+            // Define an attribute on the root node.
+            '@xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
+            'url' => $urls
+        ]);
+        $this->set('_serialize', ['@xmlns', 'url']);
+    }
+
 Creating JSON Views
 ===================
 
@@ -188,8 +216,6 @@ mappings in your controller::
     namespace App\Controller;
 
     use App\Controller\AppController;
-
-    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
     use Cake\Http\Exception\NotFoundException;
 
     class VideosController extends AppController
@@ -220,8 +246,6 @@ mappings in your controller::
             $this->set('_serialize', ['videos']);
 
             // Set Force Download
-            // Prior to 3.4.0
-            // $this->response->download('report-' . date('YmdHis') . '.' . $format);
             return $this->response->withDownload('report-' . date('YmdHis') . '.' . $format);
         }
     }

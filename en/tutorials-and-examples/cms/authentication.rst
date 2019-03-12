@@ -55,6 +55,11 @@ view pages. CakePHP hashes passwords with `bcrypt
 use SHA-1 or MD5 if you're working with an existing database, but we recommend
 bcrypt for all new applications.
 
+.. note::
+
+    Create a hashed password for at least one of the user accounts now! 
+    It will be needed in the next steps.
+    
 
 Adding Login
 ============
@@ -75,7 +80,7 @@ AuthComponent in our AppController::
 
     class AppController extends Controller
     {
-        public function initialize()
+        public function initialize(): void
         {
             // Existing code
 
@@ -100,6 +105,7 @@ AuthComponent in our AppController::
             // continues to work. Also enable the read only actions.
             $this->Auth->allow(['display', 'view', 'index']);
         }
+        
     }
 
 We've just told CakePHP that we want to load the ``Auth``
@@ -122,7 +128,7 @@ the login action::
         }
     }
 
-And in **templates/Users/login.php** add the following::
+Create a new template **templates/Users/login.php** and add the following::
 
     <h1>Login</h1>
     <?= $this->Form->create() ?>
@@ -152,7 +158,7 @@ Adding Logout
 Now that people can log in, you'll probably want to provide a way to log out as
 well. Again, in the ``UsersController``, add the following code::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->Auth->allow(['logout']);
@@ -175,7 +181,7 @@ If you aren't logged in and you try to visit **/users/add** you will be
 redirected to the login page. We should fix that as we want to allow people to
 sign up for our application. In the ``UsersController`` add the following::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         // Add the 'add' action to the allowed actions list.
@@ -209,7 +215,7 @@ Next we'll tell ``AuthComponent`` that we want to use controller hook methods
 for authorization. Your ``AppController::initialize()`` method should now look
 like::
 
-        public function initialize()
+        public function initialize(): void
         {
             // Existing code
 

@@ -24,13 +24,6 @@ default.
 Output from this function is only shown if the core ``$debug`` variable
 has been set to ``true``.
 
-.. versionadded:: 3.3.0
-
-    Calling this method will return passed ``$var``, so that you can, for instance,
-    place it in return statements, for example::
-
-        return debug($data); // will return $data in any case.
-
 Also see ``dd()``, ``pr()`` and ``pj()``.
 
 .. php:function:: stackTrace()
@@ -106,10 +99,6 @@ you can mask specific keys::
         'password' => 'xxxxx',
         'awsKey' => 'yyyyy',
     ]);
-
-.. versionadded:: 3.4.0
-
-    Output masking was added in 3.4.0
 
 Logging With Stack Traces
 =========================

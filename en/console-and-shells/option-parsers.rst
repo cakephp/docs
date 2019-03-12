@@ -13,7 +13,7 @@ Defining an OptionParser
 Commands and Shells provide a ``buildOptionParser($parser)`` hook method that
 you can use to define the options and arguments for your commands::
 
-    public function buildOptionParser($parser)
+    protected function buildOptionParser($parser)
     {
         // Define your options and arguments.
 
@@ -267,7 +267,7 @@ see the generated help content:
     bin/cake bake -h
 
 Would both generate the help for bake. You can also get help for nested
-commands::
+commands:
 
 .. code-block:: bash
 
@@ -358,8 +358,6 @@ in either an array or a string, you can set the value of the description::
 
     // Set multiple lines at once
     $parser->setDescription(['line one', 'line two']);
-    // Prior to 3.4
-    $parser->description(['line one', 'line two']);
 
     // Read the current value
     $parser->getDescription();
@@ -375,8 +373,6 @@ can set the value of the epilog::
 
     // Set multiple lines at once
     $parser->setEpilog(['line one', 'line two']);
-    // Prior to 3.4
-    $parser->epilog(['line one', 'line two']);
 
     // Read the current value
     $parser->getEpilog();
@@ -424,9 +420,6 @@ When defining a subcommand you can use the following options:
 
 Adding subcommands can be done as part of a fluent method chain.
 
-.. versionchanged:: 3.5.0
-    When adding multi-word subcommands you can now invoke those commands using
-    ``snake_case`` in addition to the camelBacked form.
-
 .. deprecated:: 3.6.0
-    Subcommands are deprecated. Instead use :ref:`nested-commands`.
+    Subcommands are deprecated and will be removed in 5.0. 
+    Instead use :ref:`nested commands <renaming-commands>`.

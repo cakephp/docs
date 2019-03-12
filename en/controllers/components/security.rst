@@ -57,12 +57,23 @@ works::
 
     public function beforeFilter(Event $event)
     {
+        parent::beforeFilter($event);
+        
         $this->Security->setConfig('blackHoleCallback', 'blackhole');
     }
 
-    public function blackhole($type)
+    public function blackhole($type, SecurityException $exception)
     {
-        // Handle errors.
+        if ($exception->getMessage() === 'Request is not SSL and the action is required to be secure') {
+            // Reword the exception message with a translatable string.
+            $exception->setMessage(__('Please access the requested page through HTTPS'));
+        }
+        
+        // Re-throw the conditionally reworded exception.
+        throw $exception;
+
+        // Alternatively, handle the error, e.g. set a flash message &
+        // redirect to HTTPS version of the requested page.
     }
 
 .. note::
@@ -74,12 +85,6 @@ The ``$type`` parameter can have the following values:
 * 'auth' Indicates a form validation error, or a controller/action mismatch
   error.
 * 'secure' Indicates an SSL method restriction failure.
-
-.. versionadded:: cakephp/cakephp 3.2.6
-
-    As of v3.2.6 an additional parameter is included in the blackHole callback,
-    an instance of the ``Cake\Controller\Exception\SecurityException`` is
-    included as a second parameter.
 
 Restrict Actions to SSL
 =======================
@@ -157,18 +162,20 @@ want and the Security Component will enforce them on its startup::
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
 
     class WidgetsController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Security');
         }
 
-        public function beforeFilter(Event $event)
+        public function beforeFilter(EventInterface $event)
         {
+            parent::beforeFilter($event);
+
             if ($this->request->getParam('admin')) {
                 $this->Security->requireSecure();
             }
@@ -181,32 +188,34 @@ require secure SSL requests::
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
 
     class WidgetsController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Security', ['blackHoleCallback' => 'forceSSL']);
         }
 
-        public function beforeFilter(Event $event)
+        public function beforeFilter(EventInterface $event)
         {
+            parent::beforeFilter($event);
+
             if ($this->request->getParam('admin')) {
                 $this->Security->requireSecure();
             }
         }
 
-        public function forceSSL()
+        public function forceSSL($error = '', SecurityException $exception = null)
         {
-            return $this->redirect('https://' . env('SERVER_NAME') . $this->request->getRequestTarget());
+            if ($exception instanceof SecurityException && $exception->getType() === 'secure') {
+                return $this->redirect('https://' . env('SERVER_NAME') . Router::url($this->request->getRequestTarget()));
+            }
+
+            throw $exception;
         }
     }
-
-.. note::
-
-    Use ``$this->request->here()`` for CakePHP versions prior to 3.4.0
 
 This example would force all actions that had admin routing to require secure
 SSL requests. When the request is black holed, it will call the nominated
@@ -222,7 +231,7 @@ CSRF or Cross Site Request Forgery is a common vulnerability in web
 applications. It allows an attacker to capture and replay a previous request,
 and sometimes submit data requests using image tags or resources on other
 domains. To enable CSRF protection features use the
-:doc:`/controllers/components/csrf`.
+:ref:`csrf-middleware`.
 
 Disabling Security Component for Specific Actions
 =================================================
@@ -236,25 +245,23 @@ There may be cases where you want to disable all security checks for an action
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
 
     class WidgetController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Security');
         }
 
-        public function beforeFilter(Event $event)
+        public function beforeFilter(EventInterface $event)
         {
-             $this->Security->setConfig('unlockedActions', ['edit']);
+            parent::beforeFilter($event);
+
+            $this->Security->setConfig('unlockedActions', ['edit']);
         }
     }
-
-.. note::
-
-    Use ``$this->Security->config()`` for CakePHP versions prior to 3.4.0
 
 This example would disable all security checks for the edit action.
 

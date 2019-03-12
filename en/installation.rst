@@ -1,24 +1,17 @@
 Installation
 ############
 
-CakePHP is simple and easy to install. The minimum requirements are a web server
-and a copy of CakePHP, that's it! While this chapter focuses primarily on
-setting up on Apache (because it's simple to install and setup), CakePHP will
-run on a variety of web servers such as nginx, LightHTTPD, or Microsoft IIS.
-
-Requirements
-============
+CakePHP has a few system requirements:
 
 - HTTP Server. For example: Apache. Having mod\_rewrite is preferred, but
-  by no means required.
-- PHP |minphpversion| or greater (including PHP 7.2).
+  by no means required. You can also use nginx, or Microsoft IIS if you prefer.
+- PHP |minphpversion| or greater (including PHP 7.3).
 - mbstring PHP extension
 - intl PHP extension
 - simplexml PHP extension
+- PDO PHP extension
 
 .. note::
-
-    In both XAMPP and WAMP, the mbstring extension is working by default.
 
     In XAMPP, intl extension is included but you have to uncomment
     ``extension=php_intl.dll`` in **php.ini** and restart the server through
@@ -84,19 +77,12 @@ as the officially supported method for installation.
 Create a CakePHP Project
 ------------------------
 
-Now that you've downloaded and installed Composer, create a new
-CakePHP application into my_app_name folder. For this just run the
-following composer command:
+You can create a new CakePHP application using composer's ``create-project``
+command::
 
 .. code-block:: bash
 
-    php composer.phar create-project --prefer-dist cakephp/app my_app_name
-
-Or if Composer is installed globally:
-
-.. code-block:: bash
-
-    composer self-update && composer create-project --prefer-dist cakephp/app my_app_name
+    composer create-project --prefer-dist cakephp/app my_app_name
 
 Once Composer finishes downloading the application skeleton and the core CakePHP
 library, you should have a functioning CakePHP application installed via
@@ -120,11 +106,11 @@ Keeping Up To Date with the Latest CakePHP Changes
 By default this is what your application **composer.json** looks like::
 
     "require": {
-        "cakephp/cakephp": "3.6.*"
+        "cakephp/cakephp": "3.7.*"
     }
 
 Each time you run ``php composer.phar update`` you will receive patch
-releases for this minor version. You can instead change this to ``^3.6`` to
+releases for this minor version. You can instead change this to ``^3.7`` to
 also receive the latest stable minor releases of the ``3.x`` branch.
 
 If you want to stay up to date with the latest unreleased changes in CakePHP,
@@ -142,18 +128,16 @@ branches, so it slows down consecutive composer installs/updates.
 Installation using Oven
 -----------------------
 
-Another quick way to install CakePHP is `Oven <https://github.com/CakeDC/oven>`_.
-It is a simple PHP script which checks the necessary system requirements,
-installs the CakePHP application skeleton, and sets up the development environment.
-
-After the installation completes, your CakePHP application is ready to go!
+Another quick way to install CakePHP is via `Oven <https://github.com/CakeDC/oven>`_.
+It is a small PHP script which checks the necessary system requirements,
+and creates a new CakePHP application.
 
 .. note::
 
-    IMPORTANT: This is not a deployment script. It is aimed to help developers install
-    CakePHP for the first time and set up a development environment quickly. Production
-    environments should consider several other factors, like file permissions,
-    virtualhost configuration, etc.
+    IMPORTANT: This is not a deployment script. It is aimed to help developers
+    install CakePHP for the first time and set up a development environment
+    quickly. Production environments should consider several other factors, like
+    file permissions, virtualhost configuration, etc.
 
 Permissions
 ===========

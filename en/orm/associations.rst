@@ -30,7 +30,7 @@ association in our ArticlesTable::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsTo('Authors');
         }
@@ -43,7 +43,7 @@ you can modify them with setters::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsTo('Authors', [
                     'className' => 'Publishing.Authors'
@@ -69,7 +69,7 @@ approved comments and those that have not been moderated yet::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('Comments')
                 ->setFinder('approved');
@@ -88,7 +88,7 @@ self-associated tables to create parent-child relationships::
 
     class CategoriesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('SubCategories', [
                 'className' => 'Categories'
@@ -106,7 +106,7 @@ table names indexed by association type as an argument::
 
     class PostsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
            $this->addAssociations([
                'belongsTo' => [
@@ -156,7 +156,7 @@ the association with the following code::
 
     class UsersTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasOne('Addresses');
         }
@@ -168,7 +168,7 @@ records::
 
     class UsersTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasOne('Addresses')
                 ->setName('Addresses')
@@ -176,6 +176,31 @@ records::
                 ->setDependent(true);
         }
     }
+
+If you want to break different addresses into multiple associations, you can do something like::
+
+    class UsersTable extends Table
+    {
+        public function initialize(array $config): void
+        {
+            $this->hasOne('HomeAddress', [
+                    'className' => 'Addresses'
+                ])
+                ->setProperty('home_address')
+                ->setConditions(['HomeAddress.label' => 'Home'])
+                ->setDependent(true);
+            $this->hasOne('WorkAddress', [
+                    'className' => 'Addresses'
+                ])
+                ->setProperty('work_address')
+                ->setConditions(['WorkAddress.label' => 'Work'])
+                ->setDependent(true);
+        }
+    }
+
+.. note::
+
+    If you have multiple hasOne associations with the same columns in the conditions, like ``label``, you need to use the table alias before column name as shown above.
 
 Possible keys for hasOne association arrays include:
 
@@ -255,7 +280,7 @@ We can define the belongsTo association in our Addresses table as follows::
 
     class AddressesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsTo('Users');
         }
@@ -265,9 +290,8 @@ We can also define a more specific relationship using the setters::
 
     class AddressesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
-            // Prior to 3.4 version, use foreignKey() and joinType()
             $this->belongsTo('Users')
                 ->setForeignKey('user_id')
                 ->setJoinType('INNER');
@@ -341,7 +365,7 @@ We can define the hasMany association in our Articles model as follows::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('Comments');
         }
@@ -351,7 +375,7 @@ We can also define a more specific relationship using the setters::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('Comments')
                 ->setForeignKey('article_id')
@@ -503,7 +527,7 @@ We can define the belongsToMany association in both our models as follows::
     // In src/Model/Table/ArticlesTable.php
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsToMany('Tags');
         }
@@ -512,7 +536,7 @@ We can define the belongsToMany association in both our models as follows::
     // In src/Model/Table/TagsTable.php
     class TagsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsToMany('Articles');
         }
@@ -523,7 +547,7 @@ We can also define a more specific relationship using configuration::
     // In src/Model/Table/TagsTable.php
     class TagsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsToMany('Articles', [
                 'joinTable' => 'articles_tags',
@@ -642,7 +666,7 @@ following models::
 
     class StudentsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsToMany('Courses', [
                 'through' => 'CoursesMemberships',
@@ -652,7 +676,7 @@ following models::
 
     class CoursesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsToMany('Students', [
                 'through' => 'CoursesMemberships',
@@ -662,7 +686,7 @@ following models::
 
     class CoursesMembershipsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsTo('Students');
             $this->belongsTo('Courses');

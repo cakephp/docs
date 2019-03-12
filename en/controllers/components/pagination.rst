@@ -39,7 +39,7 @@ that the ``order`` key must be defined in an array structure like below::
             ]
         ];
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Paginator');
@@ -59,7 +59,7 @@ You can also include any of the options supported by
             ]
         ];
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Paginator');
@@ -206,8 +206,51 @@ paginate both tags and articles at the same time::
 See the :ref:`paginator-helper-multiple` section for how to generate scoped HTML
 elements and URLs for pagination.
 
-.. versionadded:: 3.3.0
-    Multiple Pagination was added in 3.3.0
+Paginating the Same Model multiple Times
+----------------------------------------
+
+To paginate the same model multiple times within a single controller action you
+need to define an alias for the model. See :ref:`table-registry-usage` for 
+additional details on how to use the table registry::
+
+    // In a controller action
+    $this->paginate = [
+        'ArticlesTable' => [
+            'scope' => 'published_articles',
+            'limit' => 10,
+            'order' => [
+                'id' => 'desc',
+            ],
+        ],
+        'UnpublishedArticlesTable' => [
+            'scope' => 'unpublished_articles',
+            'limit' => 10,
+            'order' => [
+                'id' => 'desc',
+            ],
+        ],
+    ];
+    
+    // Register an additional table object to allow differentiating in pagination component
+    TableRegistry::config('UnpublishedArticles', [
+        'className' => 'App\Model\Table\ArticlesTable',
+        'table' => 'articles',
+        'entityClass' => 'App\Model\Entity\Article',
+    ]);
+
+    $publishedArticles = $this->paginate(
+        $this->Articles->find('all', [
+            'scope' => 'published_articles'
+        ])->where(['published' => true])
+    );
+    
+    $unpublishedArticles = $this->paginate(
+        TableRegistry::getTableLocator()->get('UnpublishedArticles')->find('all', [
+            'scope' => 'unpublished_articles'
+        ])->where(['published' => false])
+    );
+
+.. _control-which-fields-used-for-ordering:
 
 Control which Fields Used for Ordering
 ======================================
@@ -272,7 +315,6 @@ page count.
 So you could either let the normal error page be rendered or use a try catch
 block and take appropriate action when a ``NotFoundException`` is caught::
 
-    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
     use Cake\Http\Exception\NotFoundException;
 
     public function index()

@@ -6,7 +6,7 @@ Modelless Forms
 .. php:class:: Form
 
 Most of the time you will have forms backed by :doc:`ORM entities </orm/entities>`
-and :doc:`ORM tables </orm/table-objects>` or other peristent stores,
+and :doc:`ORM tables </orm/table-objects>` or other persistent stores,
 but there are times when you'll need to validate user input and then perform an
 action if the data is valid. The most common example of this is a contact form.
 
@@ -35,7 +35,7 @@ a simple contact form would look like::
                 ->addField('body', ['type' => 'text']);
         }
 
-        public function validationDefault(Validator $validator)
+        protected function _buildValidator(Validator $validator)
         {
             $validator->add('name', 'length', [
                     'rule' => ['minLength', 10],
@@ -104,9 +104,8 @@ the request data::
 Setting Form Values
 ===================
 
-In order to set the values for the fields of a modelless form, one can define
-the values using ``$this->request->data()``, like in all other forms created by
-the FormHelper::
+You can set default values for modelless forms using the ``setData()`` method.
+Values set with this method will overwrite existing data in the form object::
 
     // In a controller
     namespace App\Controller;
@@ -128,9 +127,10 @@ the FormHelper::
             }
 
             if ($this->request->is('get')) {
-                // Values from the User Model e.g.
-                $this->request->data('name', 'John Doe');
-                $this->request->data('email','john.doe@example.com');
+                $contact->setData([
+                    'name' => 'John Doe',
+                    'email' => 'john.doe@example.com'
+                ]);
             }
 
             $this->set('contact', $contact);
@@ -138,15 +138,15 @@ the FormHelper::
     }
 
 Values should only be defined if the request method is GET, otherwise
-you will overwrite your previous POST Data which might have been incorrect
-and not been saved.
+you will overwrite your previous POST Data which might have validation errors
+that need corrections.
 
 Getting Form Errors
 ===================
 
 Once a form has been validated you can retrieve the errors from it::
 
-    $errors = $form->errors();
+    $errors = $form->getErrors();
     /* $errors contains
     [
         'email' => ['A valid email address is required']
@@ -166,10 +166,6 @@ invalidate the fields accordingly to the feedback from the remote server::
     {
         $this->_errors = $errors;
     }
-
-.. versionchanged:: 3.5.1
-    You are not required to specify ``setErrors`` anymore as this has
-    already been included in the ``Form`` class for your convenience.
 
 According to how the validator class would have returned the errors, ``$errors``
 must be in this format::

@@ -34,7 +34,7 @@ ORM の調査を始める前に :ref:`あなたのデータベース接続の設
 
     use Cake\ORM\TableRegistry;
 
-    $articles = TableRegistry::get('Articles');
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     $query = $articles->find();
 
@@ -58,12 +58,13 @@ CakePHP の規約により、お決まりのコード記述をスキップし、
     }
 
 テーブルクラスは、キャメルケースのテーブル名に接尾語 ``Table`` を加えます。
-一度クラスを作成したら、 :php:class:`~Cake\\ORM\\TableRegistry` を利用して参照できます。 ::
+一度クラスを作成したら、 :php:class:`~Cake\\ORM\\TableRegistry` 経由で
+:php:class:`~Cake\\ORM\\Locator\\TableLocator` を利用して参照できます。 ::
 
     use Cake\ORM\TableRegistry;
 
     // $articles は、 ArticlesTable クラスのインスタンスです。
-    $articles = TableRegistry::get('Articles');
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
 具象テーブルクラスがあると、具象化エンティティークラスが欲しくなります。
 エンティティークラスはアクセッサーとミューテーターメソッドを定義でき、
@@ -86,7 +87,7 @@ CakePHP の規約により、お決まりのコード記述をスキップし、
     use Cake\ORM\TableRegistry;
 
     // ArticlesTable のインスタンス取得
-    $articles = TableRegistry::get('Articles');
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find();
 
     foreach ($query as $row) {
@@ -118,4 +119,4 @@ CakePHP は命名規則でテーブルクラスとエンティティークラス
     orm/associations
     orm/behaviors
     orm/schema-system
-    console-and-shells/orm-cache
+    console-and-shells/schema-cache

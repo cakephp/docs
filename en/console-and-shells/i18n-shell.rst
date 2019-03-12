@@ -52,7 +52,7 @@ Excluding Folders
 You can pass a comma separated list of folders that you wish to be excluded.
 Any path containing a path segment with the provided values will be ignored::
 
-    bin/cake i18n extract --exclude Test,Vendor
+    bin/cake i18n extract --exclude vendor,tests
 
 Skipping Overwrite Warnings for Existing POT Files
 --------------------------------------------------

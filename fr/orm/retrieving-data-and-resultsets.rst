@@ -181,6 +181,7 @@ en objets :doc:`/orm/entities`. Vous pouvez récupérer des tableaux basiques en
 désactivant l'hydratation::
 
     $query->enableHydration(false);
+
     // Avant 3.4.0
     $query->hydrate(false);
 
@@ -256,6 +257,7 @@ table pour configurer le champ à afficher sur une table::
         public function initialize(array $config)
         {
             $this->setDisplayField('title');
+
             // Avant 3.4.0
             $this->displayField('title');
         }
@@ -934,7 +936,8 @@ Changer la stratégie de façon dynamique de cette façon va seulement l'appliqu
 pour une requête spécifique. Si vous souhaitez rendre le changement de stratégie
 permanent, vous pouvez faire::
 
-    $articles->FirstComment->setStrategy('seelct');
+    $articles->FirstComment->setStrategy('select');
+
     // Avant 3.4.0
     $articles->FirstComment->strategy('select');
 
@@ -970,6 +973,7 @@ Vous pouvez aussi rendre la stratégie pour les associations permanente en
 faisant::
 
     $articles->Comments->setStrategy('subquery');
+
     // Avant 3.4.0
     $articles->Comments->strategy('subquery');
 
@@ -999,6 +1003,7 @@ ne rentre pas dans la mémoire, vous pouvez désactiver la mise en mémoire sur 
 requête pour faire un stream des résultats::
 
     $query->enableBufferedResults(false);
+
     // Avant 3.4.0
     $query->bufferResults(false);
 

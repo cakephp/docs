@@ -25,7 +25,7 @@ AppController::
 
     class AppController extends Controller
     {
-        public function initialize()
+        public function initialize(): void
         {
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
@@ -80,8 +80,7 @@ And in **templates/Users/login.php** add the following::
 
 .. note::
 
-   The ``control()`` method is available since 3.4. For prior versions you can
-   use the ``input()`` method instead.
+   The ``control()`` method is available since 3.4.
 
 Now that we have a simple login form, we should be able to log in with one of
 the users that has a hashed password.
@@ -98,7 +97,7 @@ Adding Logout
 Now that people can log in, you'll probably want to provide a way to log out as
 well. Again, in the ``UsersController``, add the following code::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->Auth->allow(['logout']);
@@ -121,7 +120,7 @@ If you aren't logged in and you try to visit **/users/add** you will be kicked
 to the login page. We should fix that as we want to allow people to sign up for
 our application. In the ``UsersController`` add the following::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         // Add the 'add' action to the allowed actions list.
@@ -157,7 +156,7 @@ Also, add the following to the configuration for ``Auth`` in your
 
 Your ``initialize()`` method should now look like::
 
-        public function initialize()
+        public function initialize(): void
         {
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [

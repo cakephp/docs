@@ -5,8 +5,6 @@ Breadcrumbs
 
 .. php:class:: BreadcrumbsHelper(View $view, array $config = [])
 
-.. versionadded:: 3.3.6
-
 BreadcrumbsHelper provides a way to easily deal with the creation and rendering
 of a breadcrumbs trail for your app.
 
@@ -21,7 +19,7 @@ arguments:
   :doc:`/views/helpers/url`
 - **options** An array of attributes for the ``item`` and ``itemWithoutLink``
   templates. See the section about :ref:`defining attributes for the item
-  <defining_attributes_item>` for more informations.
+  <defining_attributes_item>` for more information.
 
 In addition to adding to the end of the trail, you can do a variety of operations::
 
@@ -192,9 +190,6 @@ when you want to transform the crumbs and overwrite the list::
     })->toArray();
 
     $this->Breadcrumbs->reset()->add($crumbs);
-
-.. versionadded:: 3.4.0
-    The ``reset()`` method was added in 3.4.0
 
 .. meta::
     :title lang=en: BreadcrumbsHelper

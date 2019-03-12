@@ -49,7 +49,7 @@ POT ファイルの生成
 
 除外したいフォルダーをカンマ区切りで指定します。指定された値に含まれるパスは無視されます。 ::
 
-    bin/cake i18n extract --exclude Test,Vendor
+    bin/cake i18n extract --exclude vendor,tests
 
 既存の POT ファイル上書きの警告をスキップする
 ---------------------------------------------

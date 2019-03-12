@@ -47,10 +47,10 @@ accomplish this now. For example, you could disable component callbacks in the
 following way::
 
     // Remove Auth from callbacks.
-    $this->eventManager()->off($this->Auth);
+    $this->getEventManager()->off($this->Auth);
 
     // Re-enable Auth for callbacks.
-    $this->eventManager()->on($this->Auth);
+    $this->getEventManager()->on($this->Auth);
 
 .. meta::
     :title lang=en: Object Registry

@@ -45,20 +45,12 @@ You can also override any of the options that were set in FlashComponent::
     When building custom flash message templates, be sure to properly HTML
     encode any user data. CakePHP won't escape flash message parameters for you.
 
-.. versionadded:: 3.1
-
-    The :doc:`FlashComponent </controllers/components/flash>` now
-    stacks messages. If you set multiple flash messages, when you call
-    ``render()``, each message will be rendered in its own elements, in the
-    order they were set.
 
 For more information about the available array options, please refer to the
 :doc:`FlashComponent </controllers/components/flash>` section.
 
 Routing Prefix and Flash Messages
 =================================
-
-.. versionadded:: 3.0.1
 
 If you have a Routing prefix configured, you can now have your Flash elements
 stored in **templates/{Prefix}/Element/Flash**. This way, you can have

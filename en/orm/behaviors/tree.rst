@@ -44,7 +44,7 @@ hierarchical data in::
 
     class CategoriesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Tree');
         }
@@ -168,7 +168,7 @@ Configuration
 If the default column names that are used by this behavior don't match your own
 schema, you can provide aliases for them::
 
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         $this->addBehavior('Tree', [
             'parent' => 'ancestor_id', // Use this instead of parent_id
@@ -201,7 +201,7 @@ a locations table you may want to create one tree per country::
     class LocationsTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Tree', [
                 'scope' => ['country_name' => 'Brazil']
@@ -226,8 +226,6 @@ as the scope::
 
 Recovering with custom sort field
 =================================
-
-.. versionadded:: 3.0.14
 
 By default, recover() sorts the items using the primary key. This works great
 if this is a numeric (auto increment) column, but can lead to weird results if you

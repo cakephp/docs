@@ -24,7 +24,7 @@ controller might look something like this::
     // src/Controller/RecipesController.php
     class RecipesController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');

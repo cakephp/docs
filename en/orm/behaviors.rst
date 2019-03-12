@@ -61,7 +61,7 @@ To create our sluggable behavior. Put the following into
 Similar to tables, behaviors also have an ``initialize()`` hook where you can
 put your behavior's initialization code, if required::
 
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         // Some initialization code here
     }
@@ -77,7 +77,7 @@ friendly URLs::
     class ArticlesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Sluggable');
         }
@@ -261,9 +261,6 @@ interface requires a single method to be implemented::
 The ``TranslateBehavior`` has a non-trivial implementation of this interface
 that you might want to refer to.
 
-.. versionadded:: 3.3.0
-    The ability for behaviors to participate in marshalling was added in 3.3.0
-
 Removing Loaded Behaviors
 =========================
 
@@ -307,7 +304,7 @@ respond to::
 
     class UsersTable extends AppTable
     {
-        public function initialize(array $options)
+        public function initialize(array $options): void
         {
             parent::initialize($options);
 

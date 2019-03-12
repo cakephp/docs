@@ -42,6 +42,10 @@ CakePHP のリクエストオブジェクトは、入ってきたリクエスト
     // 3.4.0 より前
     $controllerName = $this->request->param('controller');
 
+全てのルーティングパラメーターを配列として取得するためには ``getAttribute()`` を使用します。 ::
+
+    $params = $this->request->getAttribute('params');
+
 すべての :ref:`route-elements` は、このインターフェイスを通してアクセスされます。
 
 :ref:`route-elements` に加えて :ref:`passed-arguments` へのアクセスがしばしば必要になります。
@@ -503,7 +507,7 @@ Accept ヘッダーの確認
     return $this->response;
 
 上記の例のようにメソッドにファイルのパスを渡す必要があります。CakePHP は、
-`Cake\\Http\\Reponse::$_mimeTypes` に登録された、よく知られるファイルタイプであれば
+`Cake\\Http\\Response::$_mimeTypes` に登録された、よく知られるファイルタイプであれば
 正しいコンテンツタイプヘッダーを送ります。 :php:meth:`Cake\\Http\\Response::withFile()` を呼ぶ前に
 :php:meth:`Cake\\Http\\Response::withType()` メソッドを使って、新しいタイプを追加できます。
 
@@ -537,6 +541,11 @@ download
     {
         $icsString = $this->Calendars->generateIcs();
         $response = $this->response;
+
+        // レスポンスのボディーに文字列コンテンツを挿入する (3.4.0 以降)
+        $response = $response->withStringBody($icsString);
+
+        // レスポンスのボディーに文字列コンテンツを挿入する (3.4.0 より前)
         $response->body($icsString);
 
         $response = $response->withType('ics');
@@ -1028,4 +1037,4 @@ CakePHP 3.4.0 以降、レスポンスオブジェクトはレスポンスを不
 
 .. meta::
     :title lang=ja: リクエストとレスポンスオブジェクト
-    :keywords lang=ja: request controller,request parameters,array indexes,purpose index,response objects,domain information,request object,request data,interrogating,params,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp,PSR-7,immutable
+    :keywords lang=ja: request controller,request parameters,array indexes,purpose index,response objects,domain information,request object,request data,interrogating,params,parameters,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp,PSR-7,immutable

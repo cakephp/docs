@@ -23,7 +23,7 @@ count for each article with the following::
 
     class CommentsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('CounterCache', [
                 'Articles' => ['comment_count']
@@ -95,7 +95,7 @@ a callback function. Your function must return the count value to be stored::
 
     $this->addBehavior('CounterCache', [
         'Articles' => [
-            'rating_avg' => function ($event, $entity, $table) {
+            'rating_avg' => function ($event, $entity, $table, $original) {
                 return 4.5;
             }
         ]
@@ -105,7 +105,10 @@ Your function can return ``false`` to skip updating the counter column, or
 a ``Query`` object that produced the count value. If you return a ``Query``
 object, your query will be used as a subquery in the update statement.  The
 ``$table`` parameter refers to the table object holding the behavior (not the
-target relation) for convenience.
+target relation) for convenience. The callback is invoked at least once with
+``$original`` set to ``false``. If the entity-update changes the association
+then the callback is invoked a *second* time with ``true``, the return value
+then updates the counter of the *previously* associated item.
 
 .. note::
 
@@ -116,8 +119,6 @@ target relation) for convenience.
 
     It is possible though to make this work for ``belongsToMany`` associations.
     You need to enable the CounterCache behavior in a custom ``through`` table
-    configured in association options. See how to configure a custom join table
+    configured in association options and set the ``cascadeCallbacks`` configuration
+    option to true. See how to configure a custom join table
     :ref:`using-the-through-option`.
-
-.. versionchanged:: 3.6.0
-    Returning ``false`` to skip updates was added.

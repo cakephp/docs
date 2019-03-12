@@ -141,10 +141,12 @@ In the above example, the only commands available would be ``help``, ``version``
 and ``user``. See the :ref:`plugin-commands` section for how to add commands in
 your plugins.
 
-.. versionadded:: 3.5.0
-    The ``console`` hook was added.
+.. note::
 
-.. renaming-commands::
+    When adding multiple commands that use the same Command class, the ``help``
+    command will display the shortest option.
+
+.. _renaming-commands:
 .. index:: nested commands, subcommands
 
 Renaming Commands
@@ -152,7 +154,7 @@ Renaming Commands
 
 There are cases where you will want to rename commands, to create nested
 commands or subcommands.  While the default auto-discovery of commands will not
-do this, you can register your commands to create any desired naming::
+do this, you can register your commands to create any desired naming.
 
 You can customize the command names by defining each command in your plugin::
 
@@ -169,7 +171,8 @@ You can customize the command names by defining each command in your plugin::
     }
 
 When overriding the ``console()`` hook in your application, remember to
-call ``discoverCakephp()`` to add commands from CakePHP.
+call ``$commands->autoDiscover()`` to add commands from CakePHP, your
+application, and plugins.
 
 If you need to rename/remove any attached commands, you can use the
 ``Console.buildCommands`` event on your application event manager to modify the
@@ -205,11 +208,7 @@ CakePHP Provided Commands
     console-and-shells/server-shell
     console-and-shells/upgrade-shell
     console-and-shells/shells
-
-.. toctree::
-    :hidden:
-
-    console-and-shells/orm-cache
+    console-and-shells/repl
 
 Routing in the Console Environment
 ==================================
@@ -230,7 +229,6 @@ send the email with::
     use Cake\Mailer\Email;
 
     $email = new Email();
-    // Prior to 3.4 use domain()
     $email->setDomain('www.example.org');
 
 This asserts that the generated message IDs are valid and fit to the domain the

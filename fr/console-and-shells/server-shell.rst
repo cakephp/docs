@@ -13,6 +13,10 @@ Vous pourrez voir le serveur démarré sur le port 8765. Vous pouvez visiter le
 sever CLI en visitant ``http://localhost:8765`` dans votre navigateur. Vous
 pouvez fermer le serveur en tapant ``CTRL-C`` dans votre terminal.
 
+.. note::
+
+    Essayez ``bin/cake server -H 0.0.0.0`` si le serveur est inaccessible depuis d'autres hôtes.
+
 Changer le Port et le Document Root
 ===================================
 

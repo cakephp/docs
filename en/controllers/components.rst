@@ -16,8 +16,6 @@ chapter for each component:
     :maxdepth: 1
 
     /controllers/components/authentication
-    /controllers/components/cookie
-    /controllers/components/csrf
     /controllers/components/flash
     /controllers/components/security
     /controllers/components/pagination
@@ -29,21 +27,21 @@ Configuring Components
 ======================
 
 Many of the core components require configuration. Some examples of components
-requiring configuration are :doc:`/controllers/components/authentication` and
-:doc:`/controllers/components/cookie`.  Configuration for these components,
+requiring configuration are :doc:`/controllers/components/security` and
+:doc:`/controllers/components/request-handling`.  Configuration for these components,
 and for components in general, is usually done via ``loadComponent()`` in your
 Controller's ``initialize()`` method or via the ``$components`` array::
 
     class PostsController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Auth', [
                 'authorize' => 'Controller',
                 'loginAction' => ['controller' => 'Users', 'action' => 'login']
             ]);
-            $this->loadComponent('Cookie', ['expires' => '1 day']);
+            $this->loadComponent('Security', ['blackholeCallback' => 'blackhole']);
         }
 
     }
@@ -84,7 +82,7 @@ implementation::
     // src/Controller/PostsController.php
     class PostsController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             $this->loadComponent('Auth', [
                 'className' => 'MyAuth'
@@ -136,7 +134,7 @@ in your controller, you could access it like so::
 
     class PostsController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Flash');
@@ -197,7 +195,7 @@ component, through which we can access an instance of it::
     // In a controller
     // Make the new component available at $this->Math,
     // as well as the standard $this->Csrf
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Math');
@@ -210,7 +208,7 @@ constructor. These parameters can then be handled by
 the Component::
 
     // In your controller.
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Math', [
@@ -241,7 +239,7 @@ way you include them in controllers - using the ``$components`` var::
         public $components = ['Existing'];
 
         // Execute any other additional setup for your component.
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->Existing->foo();
         }

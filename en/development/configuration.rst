@@ -112,9 +112,30 @@ Asset.timestamp
     - (bool) ``true`` - Appends the timestamp when debug is ``true``
     - (string) 'force' - Always appends the timestamp.
 
-    .. versionchanged:: 3.6.0
-        As of 3.6.0, you can override this global setting when linking assets
-        using the ``timestamp`` option.
+Asset.cacheTime
+    Sets the asset cache time. This determines the http header ``Cache-Control``'s
+    ``max-age``, and the http header's ``Expire``'s time for assets.
+    This can take anything that you version of php's `strtotime function
+    <http://php.net/manual/en/function.strtotime.php>`_ can take.
+    The default is ``+1 day``.
+
+Using a CDN
+-----------
+
+To use a CDN for loading your static assets, change ``App.imageBaseUrl``, ``App.cssBaseUrl``, 
+``App.jsBaseUrl`` to point the CDN URI, for example: ``https://mycdn.example.com/`` 
+(note the trailing ``/``).
+
+All images, scripts and styles loaded via HtmlHelper will prepend the absolute CDN path, matching 
+the same relative path used in the application. Please note there is a specific use case when using
+plugin based assets: plugins will not use the plugin's prefix when absolute ``...BaseUrl`` URI is used, for example 
+By default:
+
+* ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``test_plugin/logo.png`` 
+
+If you set ``App.imageBaseUrl`` to ``https://mycdn.example.com/``:
+
+* ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``https://mycdn.example.com/logo.png``.
 
 Database Configuration
 ----------------------
@@ -254,9 +275,6 @@ data from the environment::
 The second value passed to the env function is the default value. This value
 will be used if no environment variable exists for the given key.
 
-.. versionchanged:: 3.5.0
-    dotenv library support was added to the application skeleton.
-
 Configure Class
 ===============
 
@@ -323,9 +341,6 @@ back::
 
 If ``$key`` is left null, all values in Configure will be returned.
 
-.. versionchanged:: 3.5.0
-    The ``$default`` parameter was added in 3.5.0
-
 .. php:staticmethod:: readOrFail($key)
 
 Reads configuration data just like :php:meth:`Cake\\Core\\Configure::read`
@@ -339,9 +354,6 @@ exist, a :php:class:`RuntimeException` will be thrown::
 
     // Yields:
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
-
-.. versionadded:: 3.1.7
-    ``Configure::readOrFail()`` was added in 3.1.7
 
 Checking to see if Configuration Data is Defined
 ------------------------------------------------
@@ -382,9 +394,6 @@ exist, a :php:class:`RuntimeException` will be thrown::
 
     // Yields:
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
-
-.. versionadded:: 3.6.0
-``Configure::readOrFail()`` was added in 3.6.0
 
 Reading and writing configuration files
 =======================================
@@ -557,7 +566,7 @@ global event listeners::
             // Call the parent to `require_once` config/bootstrap.php
             parent::bootstrap();
 
-            Plugin::load('MyPlugin', ['bootstrap' => true, 'routes' => true]);
+            $this->addPlugin('MyPlugin', ['bootstrap' => true, 'routes' => true]);
         }
     }
 
@@ -580,14 +589,13 @@ class like so::
 
     // In your bootstrap.php
     use Cake\Event\EventManager;
-    // Prior to 3.6 use Cake\Network\Exception\InteralErrorException
     use Cake\Http\Exception\InternalErrorException;
 
     $isCakeBakeShellRunning = (PHP_SAPI === 'cli' && isset($argv[1]) && $argv[1] === 'bake');
     if (!$isCakeBakeShellRunning) {
         EventManager::instance()->on('Model.initialize', function($event) {
             $subject = $event->getSubject();
-            if (get_class($subject === 'Cake\ORM\Table') {
+            if (get_class($subject) === 'Cake\ORM\Table') {
                 $msg = sprintf(
                     'Missing table class or incorrect alias when registering table class for database table %s.',
                     $subject->getTable());

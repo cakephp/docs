@@ -633,7 +633,8 @@ To rename a table access an instance of the Table object then call the
         public function up()
         {
             $table = $this->table('users');
-            $table->rename('legacy_users');
+            $table->rename('legacy_users')
+                  ->save();
         }
 
         /**
@@ -642,7 +643,8 @@ To rename a table access an instance of the Table object then call the
         public function down()
         {
             $table = $this->table('legacy_users');
-            $table->rename('users');
+            $table->rename('users')
+                  ->save();
         }
     }
 
@@ -699,8 +701,8 @@ For ``decimal`` columns:
 ========= ===========
 Option    Description
 ========= ===========
-precision combine with ``scale`` set to set decimal accuracy
-scale     combine with ``precision`` to set decimal accuracy
+precision combine with ``scale`` set to set integer decimal accuracy
+scale     combine with ``precision`` to set fractional decimal accuracy
 signed    enable or disable the ``unsigned`` option *(only applies to MySQL)*
 ========= ===========
 
@@ -1126,10 +1128,12 @@ call this method for each index::
         public function up()
         {
             $table = $this->table('users');
-            $table->removeIndex(['email']);
+            $table->removeIndex(['email'])
+                  ->save();
 
             // alternatively, you can delete an index by its name, ie:
-            $table->removeIndexByName('idx_users_email');
+            $table->removeIndexByName('idx_users_email')
+                  ->save();
         }
 
         /**
@@ -1140,11 +1144,6 @@ call this method for each index::
 
         }
     }
-
-.. note::
-
-    There is no need to call the ``save()`` method when using
-    ``removeIndex()``. The index will be removed immediately.
 
 Working With Foreign Keys
 -------------------------

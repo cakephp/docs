@@ -8,8 +8,8 @@ Xml
 The Xml class allows you to transform arrays into SimpleXMLElement or
 DOMDocument objects, and back into arrays again.
 
-Importing Data to Xml Class
-===========================
+Loading XML documents
+=====================
 
 .. php:staticmethod:: build($input, array $options = [])
 
@@ -57,6 +57,17 @@ If your input is invalid, the Xml class will throw an exception::
     `DOMDocument <http://php.net/domdocument>`_ and
     `SimpleXML <http://php.net/simplexml>`_ implement different API's.
     Be sure to use the correct methods on the object you request from Xml.
+
+Loading HTML documents
+======================
+
+HTML documents can be parsed into ``SimpleXmlElement`` or ``DOMDocument``
+objects with ``loadHtml()``::
+
+    $html = Xml::loadHtml($htmlString, ['return' => 'domdocument']);
+
+By default entity loading and huge document parsing are disabled. These modes
+can be enabled with the ``loadEntities`` and ``parseHuge`` options respectively.
 
 Transforming a XML String in Array
 ==================================

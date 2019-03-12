@@ -9,6 +9,3 @@ is available for clearing cached data your application has::
 
     // Clear all cache configs
     bin/cake cache clear_all
-
-.. versionadded:: 3.3.0
-    The cache shell was added in 3.3.0

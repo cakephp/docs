@@ -87,7 +87,6 @@ with CakePHP::
         {
             $user = $this->Users->newEntity();
             if ($this->request->is('post')) {
-                // Prior to 3.4.0 $this->request->data() was used.
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
@@ -144,7 +143,7 @@ To add this component to your application open your
     {
         //...
 
-        public function initialize()
+        public function initialize(): void
         {
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
@@ -312,7 +311,6 @@ currently logged in user as a reference for the created article::
     {
         $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
-            // Prior to 3.4.0 $this->request->data() was used.
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             // Added this line
             $article->user_id = $this->Auth->user('id');
@@ -345,7 +343,7 @@ config::
 
     // src/Controller/AppController.php
 
-    public function initialize()
+    public function initialize(): void
     {
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
@@ -390,15 +388,12 @@ own.  Add the following content to your **ArticlesController.php**::
     public function isAuthorized($user)
     {
         // All registered users can add articles
-        // Prior to 3.4.0 $this->request->param('action') was used.
         if ($this->request->getParam('action') === 'add') {
             return true;
         }
 
         // The owner of an article can edit and delete it
-        // Prior to 3.4.0 $this->request->param('action') was used.
         if (in_array($this->request->getParam('action'), ['edit', 'delete'])) {
-            // Prior to 3.4.0 $this->request->params('pass.0')
             $articleId = (int)$this->request->getParam('pass.0');
             if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
                 return true;

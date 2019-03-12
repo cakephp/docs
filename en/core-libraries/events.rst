@@ -64,16 +64,12 @@ has been created. To keep your Orders model clean you could use events::
                 $event = new Event('Model.Order.afterPlace', $this, [
                     'order' => $order
                 ]);
-                $this->eventManager()->dispatch($event);
+                $this->getEventManager()->dispatch($event);
                 return true;
             }
             return false;
         }
     }
-
-.. deprecated:: 3.5.0
-    Use ``getEventManager()`` instead.
-
 
 The above code allows you to notify the other parts of the application
 that an order has been created. You can then do tasks like send email
@@ -142,9 +138,6 @@ After firing an event on the manager, you can retrieve it from the event list::
 
 Tracking can be disabled by removing the event list or calling
 :php:meth:`Cake\\Event\\EventList::trackEvents(false)`.
-
-.. versionadded:: 3.2.11
-    Event tracking and :php:class:`Cake\\Event\\EventList` were added.
 
 Core Events
 ===========
@@ -240,12 +233,11 @@ a more direct approach and only listen to the event you really need::
     // If sending emails
     use Cake\Mailer\Email;
 
-    TableRegistry::get('ThirdPartyPlugin.Feedbacks')
+    TableRegistry::getTableLocator()->get('ThirdPartyPlugin.Feedbacks')
         ->getEventManager()
         ->on('Model.afterSave', function($event, $entity)
         {
             // For example we can send an email to the admin
-            // Prior to 3.4 use from()/to()/subject() methods
             $email = new Email('default');
             $email->setFrom(['info@yoursite.com' => 'Your Site'])
                 ->setTo('admin@yoursite.com')
@@ -279,11 +271,6 @@ of a particular event pattern can be used as the basis of some action.::
 .. note::
 
     The pattern passed to the ``matchingListeners`` method is case sensitive.
-
-.. versionadded:: 3.2.3
-
-    The ``matchingListeners`` method returns an array of events matching
-    a search pattern.
 
 .. _event-priorities:
 
@@ -498,7 +485,7 @@ Removing Callbacks and Listeners
 
 If for any reason you want to remove any callback from the event manager just
 call the :php:meth:`Cake\\Event\\EventManager::off()` method using as
-arguments the first two params you used for attaching it::
+arguments the first two parameters you used for attaching it::
 
     // Attaching a function
     $this->getEventManager()->on('My.event', [$this, 'doSomething']);

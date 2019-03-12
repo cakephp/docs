@@ -264,17 +264,15 @@ Set the second parameter of ``order()`` (as well as ``orderAsc()`` or ``orderDes
     $query = $articles->find()
         ->order(['created' => 'DESC'], Query::OVERWRITE);
 
-.. versionadded:: 3.0.12
+The ``orderAsc`` and ``orderDesc`` methods can be used when you need to sort on
+complex expressions::
 
-    In addition to ``order``, the ``orderAsc`` and ``orderDesc`` methods can be
-    used when you need to sort on complex expressions::
-
-        $query = $articles->find();
-        $concat = $query->func()->concat([
-            'title' => 'identifier',
-            'synopsis' => 'identifier'
-        ]);
-        $query->orderAsc($concat);
+    $query = $articles->find();
+    $concat = $query->func()->concat([
+        'title' => 'identifier',
+        'synopsis' => 'identifier'
+    ]);
+    $query->orderAsc($concat);
 
 To limit the number of rows or set the row offset you can use the ``limit()``
 and ``page()`` methods::
@@ -308,9 +306,6 @@ purpose::
         ->select(['slug' => $query->func()->concat(['title' => 'identifier', '-', 'id' => 'identifier'])])
         ->select($articlesTable); // Select all fields from articles
 
-.. versionadded:: 3.1
-    Passing a table object to select() was added in 3.1.
-
 If you want to select all but a few fields on a table, you can use
 ``selectAllExcept()``::
 
@@ -321,9 +316,6 @@ If you want to select all but a few fields on a table, you can use
 
 You can also pass an ``Association`` object when working with contained
 associations.
-
-.. versionadded:: 3.6.0
-    The ``selectAllExcept()`` method was added.
 
 .. _using-sql-functions:
 
@@ -342,6 +334,7 @@ portable::
 
 A number of commonly used functions can be created with the ``func()`` method:
 
+- ``rand()`` Generate a random value between 0 and 1 via SQL.
 - ``sum()`` Calculate a sum. The arguments will be treated as literal values.
 - ``avg()`` Calculate an average. The arguments will be treated as literal
   values.
@@ -363,10 +356,6 @@ A number of commonly used functions can be created with the ``func()`` method:
 - ``dateAdd()`` Add the time unit to the date expression.
 - ``dayOfWeek()`` Returns a FunctionExpression representing a call to SQL
   WEEKDAY function.
-
-.. versionadded:: 3.1
-
-    ``extract()``, ``dateAdd()`` and ``dayOfWeek()`` methods have been added.
 
 When providing arguments for SQL functions, there are two kinds of parameters
 you can use, literal arguments and bound parameters. Identifier/Literal parameters allow
@@ -526,7 +515,7 @@ not make sense. The process of converting the database results to entities is
 called hydration. If you wish to disable this process you can do this::
 
     $query = $articles->find();
-    $query->hydrate(false); // Results as arrays instead of entities
+    $query->enableHydration(false); // Results as arrays instead of entities
     $result = $query->toList(); // Execute the query and return the array
 
 After executing those lines, your result should look similar to this::
@@ -669,12 +658,6 @@ methods being combined with ``AND``. The resulting SQL would look like::
     AND published = 1
     AND spam != 1
     AND view_count > 10)
-
-.. deprecated:: 3.5.0
-    As of 3.5.0 the ``orWhere()`` method is deprecated. This method creates
-    hard to predict SQL based on the current query state.
-    Use ``where()`` instead as it has more predicatable and easier
-    to understand behavior.
 
 However, if we wanted to use both ``AND`` & ``OR`` conditions we could do the
 following::
@@ -866,7 +849,7 @@ conditions:
         ->where(function (QueryExpression $exp, Query $q) {
             return $exp->equalFields('countries.id', 'cities.country_id');
         })
-        ->andWhere(['population >', 5000000]);
+        ->andWhere(['population >' => 5000000]);
 
     $query = $countries->find()
         ->where(function (QueryExpression $exp, Query $q) use ($subquery) {
@@ -881,7 +864,7 @@ conditions:
         ->where(function (QueryExpression $exp, Query $q) {
             return $exp->equalFields('countries.id', 'cities.country_id');
         })
-        ->andWhere(['population >', 5000000]);
+        ->andWhere(['population >' => 5000000]);
 
     $query = $countries->find()
         ->where(function (QueryExpression $exp, Query $q) use ($subquery) {
@@ -920,10 +903,6 @@ use the ``identifier()`` method::
 
     To prevent SQL injections, Identifier expressions should never have
     untrusted data passed into them.
-
-.. versionadded:: 3.6.0
-
-    ``Query::identifier()`` was added in 3.6.0
 
 Automatically Creating IN Clauses
 ---------------------------------
@@ -1157,7 +1136,6 @@ In addition to loading related data with ``contain()``, you can also add
 additional joins with the query builder::
 
     $query = $articles->find()
-        ->hydrate(false)
         ->join([
             'table' => 'comments',
             'alias' => 'c',
@@ -1169,7 +1147,6 @@ You can append multiple joins at the same time by passing an associative array
 with multiple joins::
 
     $query = $articles->find()
-        ->hydrate(false)
         ->join([
             'c' => [
                 'table' => 'comments',
@@ -1187,7 +1164,6 @@ As seen above, when adding joins the alias can be the outer array key. Join
 conditions can also be expressed as an array of conditions::
 
     $query = $articles->find()
-        ->hydrate(false)
         ->join([
             'c' => [
                 'table' => 'comments',
@@ -1428,7 +1404,6 @@ Subqueries are a powerful feature in relational databases and building them in
 CakePHP is fairly intuitive. By composing queries together, you can make
 subqueries::
 
-    // Prior to 3.6.0 use association() instead.
     $matchingComment = $articles->getAssociation('Comments')->find()
         ->select(['article_id'])
         ->distinct()

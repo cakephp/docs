@@ -118,7 +118,7 @@ keys.
 
 To configure different fields for user in your ``initialize()`` method::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -135,7 +135,7 @@ within the ``authenticate`` or ``Form`` element. They should be at the same leve
 the authenticate key. The setup above with other Auth configuration
 should look like::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -181,7 +181,7 @@ Customizing Find Query
 You can customize the query used to fetch the user record using the ``finder``
 option in authenticate class config::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -263,7 +263,7 @@ If no parameter is passed, the returned URL will use the following rules:
 - Returns the normalized URL from the ``redirect`` query string value if it is
   present and for the same domain the current app is running on. Before 3.4.0,
   the ``Auth.redirect`` session value was used.
-- If there is no query string/session value and there is a config
+- If there is no query string/session value and there is a config with
   ``loginRedirect``, the ``loginRedirect`` value is returned.
 - If there is no redirect value and no ``loginRedirect``, ``/`` is returned.
 
@@ -545,20 +545,15 @@ In order to display the session error messages that Auth generates, you
 need to add the following code to your layout. Add the following two
 lines to the **templates/Layout/default.php** file in the body section::
 
-    // Only this is necessary after 3.4.0
     echo $this->Flash->render();
-
-    // Prior to 3.4.0 this will be required as well.
-    echo $this->Flash->render('auth');
 
 You can customize the error messages and flash settings ``AuthComponent``
 uses. Using ``flash`` config you can configure the parameters
 ``AuthComponent`` uses for setting flash messages. The available keys are
 
-- ``key`` - The key to use, defaults to 'default'. Prior to 3.4.0, the key
-  defaulted to 'auth'.
+- ``key`` - The key to use, defaults to 'default'.
 - ``element`` - The element name to use for rendering, defaults to null.
-- ``params`` - The array of additional params to use, defaults to ``[]``.
+- ``params`` - The array of additional parameters to use, defaults to ``[]``.
 
 In addition to the flash message settings you can customize other error
 messages ``AuthComponent`` uses. In your controller's ``beforeFilter()``, or
@@ -643,7 +638,7 @@ In order to use a different password hasher, you need to create the class in
 Then you are required to configure the ``AuthComponent`` to use your own password
 hasher::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -669,7 +664,7 @@ to another, this is achieved through the ``FallbackPasswordHasher`` class.
 Assuming you are migrating your app from CakePHP 2.x which uses ``sha1`` password hashes, you
 can configure the ``AuthComponent`` as follows::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -984,7 +979,7 @@ checked::
 
     class AppController extends Controller
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Auth', [
@@ -1045,7 +1040,7 @@ flash
 
     - ``element`` - The element to use; defaults to 'default'.
     - ``key`` - The key to use; defaults to 'auth'.
-    - ``params`` - The array of additional params to use; defaults to '[]'.
+    - ``params`` - The array of additional parameters to use; defaults to '[]'.
 
 loginAction
     A URL (defined as a string or array) to the controller action that handles

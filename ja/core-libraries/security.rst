@@ -1,5 +1,5 @@
-セキュリティ
-############
+セキュリティユーティリティ
+##########################
 
 .. php:namespace:: Cake\Utility
 
@@ -114,7 +114,16 @@ openssl では互換性がありません。これは、暗号化されたデー
 後方互換のために安全ではない値が使用されます。
 
 .. versionadded:: 3.2.3
-    randomBytes メソッドは 3.2.3 で追加されました。
+    randomBytes メソッドが追加されました。
+
+.. php:staticmethod:: randomString($length)
+
+セキュアなランダムソースから長さ ``$length`` のランダムな文字列を取得します。
+このメソッドは、 ``randomBytes()`` と同じランダムソースから生成し、
+データを16進文字列としてエンコードします。
+
+.. versionadded:: 3.6.0
+    randomString メソッドが追加されました。
 
 .. meta::
     :title lang=ja: Security

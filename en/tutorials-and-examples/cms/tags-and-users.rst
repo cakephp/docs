@@ -48,7 +48,7 @@ Now that we have a Tags table, we can create an association between Articles and
 Tags. We can do so by adding the following to the ``initialize`` method on the
 ArticlesTable::
 
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         $this->addBehavior('Timestamp');
         $this->belongsToMany('Tags'); // Add this line
@@ -306,7 +306,7 @@ put the following content::
                 $article->title,
                 ['controller' => 'Articles', 'action' => 'view', $article->slug]
             ) ?></h4>
-            <span><?= h($article->created) ?>
+            <span><?= h($article->created) ?></span>
         </article>
     <?php endforeach; ?>
     </section>
@@ -374,6 +374,16 @@ With the entity updated we can add a new control for our tags. In
 replace the existing ``tags._ids`` control with the following::
 
     echo $this->Form->control('tag_string', ['type' => 'text']);
+    
+We'll also need to update the article view template. In
+**src/Template/Articles/view.ctp** add the line as shown::
+
+    <!-- File: src/Template/Articles/view.ctp -->
+
+    <h1><?= h($article->title) ?></h1>
+    <p><?= h($article->body) ?></p>
+    // Add the following line
+    <p><b>Tags:</b> <?= h($article->tag_string) ?></p>
 
 Persisting the Tag String
 -------------------------
@@ -432,5 +442,50 @@ While this code is a bit more complicated than what we've done so far, it helps
 to showcase how powerful the ORM in CakePHP is. You can manipulate query
 results using the :doc:`/core-libraries/collections` methods, and handle
 scenarios where you are creating entities on the fly with ease.
+
+Auto-populating the Tag String
+==============================
+
+Before we finish up, we'll need a mechanism that will load the associated tags 
+(if any) whenever we load an article. 
+
+In your **src/Model/Table/ArticlesTable.php**, change::
+
+    public function initialize(array $config): void
+    {
+        $this->addBehavior('Timestamp');
+        // Change this line
+        $this->belongsToMany('Tags', [
+            'joinTable' => 'articles_tags',
+            'dependent' => true
+        ]);
+    }
+
+This will tell the Articles table model that there is a join table associated
+with tags.  The 'dependent' option tells the table to delete any associated 
+records from the join table if an article is deleted.
+
+Lastly, update the findBySlug() method calls in 
+**src/Controller/ArticlesController.php**::
+
+    public function edit($slug)
+    {
+        // Update this line
+        $article = $this->Articles->findBySlug($slug)->contain(['Tags'])
+            ->firstOrFail();
+    ...
+    }
+    
+    public function view($slug = null)
+    {
+        // Update this line
+        $article = $this->Articles->findBySlug($slug)->contain(['Tags'])
+            ->firstOrFail();
+        $this->set(compact('article'));
+    }
+
+The contain() method tells the ArticlesTable object to also populate the Tags 
+association when the article is loaded.  Now when tag_string is called for an
+Article entity, there will be data present to create the string!
 
 Next we'll be adding :doc:`authentication </tutorials-and-examples/cms/authentication>`.

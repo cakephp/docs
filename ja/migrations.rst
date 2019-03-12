@@ -32,10 +32,12 @@ Migrations
 
     $ bin/cake plugin load Migrations
 
-もしくは、あなたの **config/bootstrap.php** ファイルを編集し、次の行を追加することで
+もしくは、あなたの **src/Application.php** ファイルを編集し、次の行を追加することで
 ロードすることができます。 ::
 
-    Plugin::load('Migrations');
+    $this->addPlugin('Migrations');
+
+    // 3.6.0 より前は Plugin::load() を使用する必要があります
 
 また、 :ref:`データベース設定 <database-configuration>` の項で説明したように、
 あなたの **config/app.php** ファイル内のデフォルトのデータベース構成を設定する必要が
@@ -112,7 +114,7 @@ Migrations
     bin/cake migrations migrate
 
 以下の ``migrations`` コマンドは、 ``rollback`` を実行するとあなたのデータベースから
-デーブルが削除します。 ::
+テーブルが削除されます。 ::
 
     bin/cake migrations rollback
 
@@ -376,7 +378,8 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
         public function up()
         {
             $table = $this->table('products');
-            $table->removeColumn('price');
+            $table->removeColumn('price')
+                  ->save();
         }
     }
 
@@ -905,13 +908,14 @@ Table オブジェクトのレジストリーは、 ``update()`` が呼ばれた
 もし、アプリケーションをデプロイする時にプラグインを使用する場合、
 テーブルのカラムメタデータを更新するように、必ず ORM キャッシュをクリアしてください。
 そうしなければ、それらの新しいカラムの操作を実行する時に、カラムが存在しないエラーになります。
-CakePHP コアは、この操作を行うために使用できる :doc:`ORM キャッシュシェル
-<console-and-shells/orm-cache>` を含みます。 ::
+CakePHP コアは、この操作を行うために使用できる :doc:`スキーマキャッシュシェル
+<console-and-shells/schema-cache>` を含みます。 ::
 
-    $ bin/cake orm_cache clear
+    // 3.6.0 より前の場合、orm_cache を使用
+    $ bin/cake schema_cache clear
 
 このシェルについてもっと知りたい場合、クックブックの
-:doc:`ORM キャッシュシェル <console-and-shells/orm-cache>`
+:doc:`スキーマキャッシュシェル <console-and-shells/schema-cache>`
 セクションをご覧ください。
 
 テーブルのリネーム
@@ -923,7 +927,8 @@ CakePHP コアは、この操作を行うために使用できる :doc:`ORM キ�
     public function up()
     {
         $this->table('old_table_name')
-            ->rename('new_table_name');
+            ->rename('new_table_name')
+            ->save();
     }
 
 ``schema.lock`` ファイル生成のスキップ

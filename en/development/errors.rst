@@ -51,7 +51,7 @@ message, file and line (``debug`` enabled).
 Changing Exception Handling
 ===========================
 
-Exception handling offers 3 ways to tailor how exceptions are handled.  Each
+Exception handling offers several ways to tailor how exceptions are handled.  Each
 approach gives you different amounts of control over the exception handling
 process.
 
@@ -113,6 +113,41 @@ The ``App\Controller\ErrorController`` class is used by CakePHP's exception
 rendering to render the error page view and receives all the standard request
 life-cycle events. By modifying this class you can control which components are
 used and which templates are rendered.
+
+If your application uses :ref:`routing-prefixes` you can create custom error
+controllers for each routing prefix. For example, if you had an ``admin``
+prefix. You could create the following class::
+
+    namespace App\Controller\Admin;
+
+    use App\Controller\AppController;
+
+    class ErrorController extends AppController
+    {
+        /**
+         * Initialization hook method.
+         *
+         * @return void
+         */
+        public function initialize(): void
+        {
+            $this->loadComponent('RequestHandler');
+        }
+
+        /**
+         * beforeRender callback.
+         *
+         * @param \Cake\Event\Event $event Event.
+         * @return void
+         */
+        public function beforeRender(Event $event)
+        {
+            $this->viewBuilder()->setTemplatePath('Error');
+        }
+    }
+
+This controller would only be used when an error is encountered in a prefixed
+controller, and allows you to define prefix specific logic/templates as needed.
 
 Change the ExceptionRenderer
 ============================
@@ -343,10 +378,6 @@ exceptions for HTTP methods
 
     Used for doing a 403 Forbidden error.
 
-.. versionadded:: 3.1
-
-    InvalidCsrfTokenException has been added.
-
 .. php:exception:: InvalidCsrfTokenException
 
     Used for doing a 403 error caused by an invalid CSRF token.
@@ -363,19 +394,13 @@ exceptions for HTTP methods
 
     Used for doing a 406 Not Acceptable error.
 
-    .. versionadded:: 3.1.7 NotAcceptableException has been added.
-
 .. php:exception:: ConflictException
 
     Used for doing a 409 Conflict error.
 
-    .. versionadded:: 3.1.7 ConflictException has been added.
-
 .. php:exception:: GoneException
 
     Used for doing a 410 Gone error.
-
-    .. versionadded:: 3.1.7 GoneException has been added.
 
 For more details on HTTP 4xx error status codes see :rfc:`2616#section-10.4`.
 
@@ -391,15 +416,12 @@ For more details on HTTP 4xx error status codes see :rfc:`2616#section-10.4`.
 
     Used for doing a 503 Service Unavailable error.
 
-    .. versionadded:: 3.1.7 Service Unavailable has been added.
-
 For more details on HTTP 5xx error status codes see :rfc:`2616#section-10.5`.
 
 You can throw these exceptions from your controllers to indicate failure states,
 or HTTP errors. An example use of the HTTP exceptions could be rendering 404
 pages for items that have not been found::
 
-    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
     use Cake\Http\Exception\NotFoundException;
 
     public function view($id = null)
@@ -536,8 +558,6 @@ In addition, CakePHP uses the following exceptions:
 
     An entity couldn't be saved/deleted while using :php:meth:`Cake\\ORM\\Table::saveOrFail()` or
     :php:meth:`Cake\\ORM\\Table::deleteOrFail()`.
-
-    .. versionadded:: 3.4.1 PersistenceFailedException has been added.
 
 .. php:namespace:: Cake\Datasource\Exception
 

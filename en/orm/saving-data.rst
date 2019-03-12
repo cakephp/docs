@@ -275,9 +275,6 @@ When converting belongsToMany data, you can disable the new entity creation, by
 using the ``onlyIds`` option. When enabled, this option restricts belongsToMany
 marshalling to only use the ``_ids`` key and ignore all other data.
 
-.. versionadded:: 3.1.0
-    The ``onlyIds`` option was added in 3.1.0
-
 Converting HasMany Data
 -----------------------
 
@@ -310,9 +307,6 @@ new parent record you can use the ``_ids`` format::
 When converting hasMany data, you can disable the new entity creation, by using
 the ``onlyIds`` option. When enabled, this option restricts hasMany marshalling
 to only use the ``_ids`` key and ignore all other data.
-
-.. versionadded:: 3.1.0
-    The ``onlyIds`` option was added in 3.1.0
 
 Converting Multiple Records
 ---------------------------
@@ -662,7 +656,7 @@ data into an entity::
 
     // Only allow title to be changed
     $entity = $this->patchEntity($entity, $data, [
-        'fieldList' => ['title']
+        'fields' => ['title']
     ]);
     $this->save($entity);
 
@@ -671,7 +665,7 @@ You can also control which properties can be assigned for associations::
     // Only allow changing the title and tags
     // and the tag name is the only column that can be set
     $entity = $this->patchEntity($entity, $data, [
-        'fieldList' => ['title', 'tags'],
+        'fields' => ['title', 'tags'],
         'associated' => ['Tags' => ['fieldList' => ['name']]]
     ]);
     $this->save($entity);
@@ -679,9 +673,6 @@ You can also control which properties can be assigned for associations::
 Using this feature is handy when you have many different functions your users
 can access and you want to let your users edit different data based on their
 privileges.
-
-The ``fieldList`` options is also accepted by the ``newEntity()``,
-``newEntities()`` and ``patchEntities()`` methods.
 
 .. _saving-entities:
 
@@ -884,7 +875,7 @@ replace
 By default the ``append`` saving strategy is used.
 See :ref:`has-many-associations` for details on defining the ``saveStrategy``.
 
-Whenever you add new records into an existing association you should always mark
+Whenever you add new records to an existing association you should always mark
 the association property as 'dirty'. This lets the ORM know that the association
 property has to be persisted::
 
@@ -893,12 +884,13 @@ property has to be persisted::
 
 Without the call to ``dirty()`` the updated comments will not be saved.
 
-If you are creating a new entity with existing records for your association you
-need to intitialize the corresponding property first::
+If you are creating a new entity, and want to add existing records to a has
+many/belongs to many association you need to initialize the association property
+first::
 
-    $mentor->students = [];
+    $article->comments = [];
 
-Without initializing calling ``$mentor->students[] = $student;`` will have no effect.
+Without initialization calling ``$article->comments[] = $comment;`` will have no effect.
 
 Saving BelongsToMany Associations
 ---------------------------------
@@ -1034,8 +1026,8 @@ This functionality is achieved by using the custom types system. See the
 :ref:`adding-custom-database-types` section to find out how to build custom
 column Types::
 
-    // In config/bootstrap.php
     use Cake\Database\Type;
+
     Type::map('json', 'Cake\Database\Type\JsonType');
 
     // In src/Model/Table/UsersTable.php
@@ -1045,7 +1037,8 @@ column Types::
     {
         protected function _initializeSchema(TableSchema $schema)
         {
-            $schema->columnType('preferences', 'json');
+            $schema->setColumnType('preferences', 'json');
+
             return $schema;
         }
     }
@@ -1102,8 +1095,6 @@ If you want to track down the entity that failed to save, you can use the
 As this internally perfoms a :php:meth:`Cake\\ORM\\Table::save()` call, all
 corresponding save events will be triggered.
 
-.. versionadded:: 3.4.1
-
 Saving Multiple Entities
 ========================
 
@@ -1128,8 +1119,6 @@ be an array of entities created using ``newEntities()`` / ``patchEntities()``.
     $result = $articles->saveMany($entities);
 
 The result will be updated entities on success or ``false`` on failure.
-
-.. versionadded:: 3.2.8
 
 Bulk Updates
 ============
