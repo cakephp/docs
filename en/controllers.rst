@@ -478,7 +478,7 @@ methods are implemented by your controllers
     listeners of the same event from being called. You must explicitly
     :ref:`stop the event <stopping-events>`.
 
-.. php:method:: beforeRender(Event $event)
+.. php:method:: beforeRender(EventInterface $event)
 
     Called during the ``Controller.beforeRender`` event which occurs after
     controller action logic, but before the view is rendered. This callback is
@@ -486,7 +486,7 @@ methods are implemented by your controllers
     :php:meth:`~Cake\\Controller\\Controller::render()` manually before the end
     of a given action.
 
-.. php:method:: afterFilter(Event $event)
+.. php:method:: afterFilter(EventInterface $event)
 
     Called during the ``Controller.shutdown`` event which is triggered after
     every controller action, and after rendering is complete. This is the last

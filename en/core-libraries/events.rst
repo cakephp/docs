@@ -336,7 +336,7 @@ the afterRender callback::
 The listeners of the ``View.afterRender`` callback should have the following
 signature::
 
-    function (Event $event, $viewFileName)
+    function (EventInterface $event, $viewFileName)
 
 Each value provided to the Event constructor will be converted into function
 parameters in the order they appear in the data array. If you use an associative

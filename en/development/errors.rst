@@ -121,6 +121,7 @@ prefix. You could create the following class::
     namespace App\Controller\Admin;
 
     use App\Controller\AppController;
+    use Cake\Event\EventInterface;
 
     class ErrorController extends AppController
     {
@@ -137,10 +138,10 @@ prefix. You could create the following class::
         /**
          * beforeRender callback.
          *
-         * @param \Cake\Event\Event $event Event.
+         * @param \Cake\Event\EventInterface $event Event.
          * @return void
          */
-        public function beforeRender(Event $event)
+        public function beforeRender(EventInterface $event)
         {
             $this->viewBuilder()->setTemplatePath('Error');
         }

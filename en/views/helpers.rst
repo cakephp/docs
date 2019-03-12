@@ -80,7 +80,7 @@ You can also use your controller's ``beforeRender`` method to load helpers::
 
     class ArticlesController extends AppController
     {
-        public function beforeRender(Event $event)
+        public function beforeRender(EventInterface $event)
         {
             parent::beforeRender($event);
             $this->viewBuilder()->helpers(['MyHelper']);
@@ -153,7 +153,7 @@ you can set those in your controller's beforeRender callback::
 
     class PostsController extends AppController
     {
-        public function beforeRender(Event $event)
+        public function beforeRender(EventInterface $event)
         {
             parent::beforeRender($event);
             $builder = $this->viewBuilder();
@@ -377,34 +377,34 @@ subscribe your helper to the relevant event. Unlike previous versions of CakePHP
 you should *not* call ``parent`` in your callbacks, as the base Helper class
 does not implement any of the callback methods.
 
-.. php:method:: beforeRenderFile(Event $event, $viewFile)
+.. php:method:: beforeRenderFile(EventInterface $event, $viewFile)
 
     Is called before each view file is rendered. This includes elements,
     views, parent views and layouts.
 
-.. php:method:: afterRenderFile(Event $event, $viewFile, $content)
+.. php:method:: afterRenderFile(EventInterface $event, $viewFile, $content)
 
     Is called after each view file is rendered. This includes elements, views,
     parent views and layouts. A callback can modify and return ``$content`` to
     change how the rendered content will be displayed in the browser.
 
-.. php:method:: beforeRender(Event $event, $viewFile)
+.. php:method:: beforeRender(EventInterface $event, $viewFile)
 
     The beforeRender method is called after the controller's beforeRender method
     but before the controller renders view and layout. Receives the file being
     rendered as an argument.
 
-.. php:method:: afterRender(Event $event, $viewFile)
+.. php:method:: afterRender(EventInterface $event, $viewFile)
 
     Is called after the view has been rendered but before layout rendering has
     started.
 
-.. php:method:: beforeLayout(Event $event, $layoutFile)
+.. php:method:: beforeLayout(EventInterface $event, $layoutFile)
 
     Is called before layout rendering starts. Receives the layout filename as an
     argument.
 
-.. php:method:: afterLayout(Event $event, $layoutFile)
+.. php:method:: afterLayout(EventInterface $event, $layoutFile)
 
     Is called after layout rendering is complete. Receives the layout filename
     as an argument.

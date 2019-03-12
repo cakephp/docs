@@ -365,13 +365,13 @@ generate these API tokens randomly using libraries from CakePHP::
 
     use Cake\Auth\DefaultPasswordHasher;
     use Cake\Utility\Text;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
     use Cake\ORM\Table;
     use Cake\Utility\Security;
 
     class UsersTable extends Table
     {
-        public function beforeSave(Event $event)
+        public function beforeSave(EventInterface $event)
         {
             $entity = $event->getData('entity');
 
@@ -433,12 +433,12 @@ from the normal password hash::
     namespace App\Model\Table;
 
     use Cake\Auth\DigestAuthenticate;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
     use Cake\ORM\Table;
 
     class UsersTable extends Table
     {
-        public function beforeSave(Event $event)
+        public function beforeSave(EventInterface $event)
         {
             $entity = $event->getData('entity');
 
