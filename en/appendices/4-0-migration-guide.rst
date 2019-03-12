@@ -145,6 +145,12 @@ Miscellaneous
 New Features
 ============
 
+Database
+--------
+
+* If your database's timezone does not match PHP timezone then you can use the
+  ``DateTime::setTimezone()`` method. See :ref:`datetime-type` for details.
+
 Filesystem
 ----------
 
