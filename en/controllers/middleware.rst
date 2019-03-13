@@ -418,18 +418,14 @@ By applying the ``CsrfProtectionMiddleware`` to your Application middleware stac
 
 By applying the ``CsrfProtectionMiddleware`` to routing scopes, you can include or exclude specific route groups::
 
-    // in src/Application.php
+    // in config/routes.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
-
-    public function routes($routes) {
+    
+    Router::scope('/', function (RouteBuilder $routes) {
         $options = [
             // ...
         ];
         $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware($options));
-    }
-
-    // in config/routes.php
-    Router::scope('/', function (RouteBuilder $routes) {
         $routes->applyMiddleware('csrf');
     });    
     
