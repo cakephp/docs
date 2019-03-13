@@ -19,10 +19,10 @@ be used::
     <?php
     // config/bootstrap_cli.php
 
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
     use Cake\Event\EventManager;
 
-    EventManager::instance()->on('Bake.initialize', function (Event $event) {
+    EventManager::instance()->on('Bake.initialize', function (EventInterface $event) {
         $view = $event->getSubject();
 
         // In my bake templates, allow the use of the MySpecial helper
@@ -44,10 +44,10 @@ variables used in the bake templates::
     <?php
     // config/bootstrap_cli.php
 
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
     use Cake\Event\EventManager;
 
-    EventManager::instance()->on('Bake.beforeRender', function (Event $event) {
+    EventManager::instance()->on('Bake.beforeRender', function (EventInterface $event) {
         $view = $event->getSubject();
 
         // Use $rows for the main data variable in indexes
@@ -82,9 +82,9 @@ you can use the following event::
 
     EventManager::instance()->on(
         'Bake.beforeRender.Controller.controller',
-        function (Event $event) {
+        function (EventInterface $event) {
             $view = $event->getSubject();
-            if ($view->viewVars['name'] == 'Users') {
+            if ($view->get('name') == 'Users') {
                 // add the login and logout actions to the Users controller
                 $view->set('actions', [
                     'login',

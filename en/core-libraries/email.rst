@@ -531,7 +531,7 @@ instructions. For example, we could add the following to our ``UserMailer``::
         ];
     }
 
-    public function onRegistration(Event $event, EntityInterface $entity, ArrayObject $options)
+    public function onRegistration(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
         if ($entity->isNew()) {
             $this->send('welcome', [$entity]);

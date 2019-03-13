@@ -50,7 +50,7 @@ You can configure components at runtime using the ``config()`` method. Often,
 this is done in your controller's ``beforeFilter()`` method. The above could
 also be expressed as::
 
-    public function beforeFilter(Event $event)
+    public function beforeFilter(EventInterface $event)
     {
         $this->Auth->config('authorize', ['controller']);
         $this->Auth->config('loginAction', ['controller' => 'Users', 'action' => 'login']);
@@ -288,27 +288,27 @@ Component Callbacks
 Components also offer a few request life-cycle callbacks that allow them to
 augment the request cycle.
 
-.. php:method:: beforeFilter(Event $event)
+.. php:method:: beforeFilter(EventInterface $event)
 
     Is called before the controller's
     beforeFilter method, but *after* the controller's initialize() method.
 
-.. php:method:: startup(Event $event)
+.. php:method:: startup(EventInterface $event)
 
     Is called after the controller's beforeFilter
     method but before the controller executes the current action
     handler.
 
-.. php:method:: beforeRender(Event $event)
+.. php:method:: beforeRender(EventInterface $event)
 
     Is called after the controller executes the requested action's logic,
     but before the controller renders views and layout.
 
-.. php:method:: shutdown(Event $event)
+.. php:method:: shutdown(EventInterface $event)
 
     Is called before output is sent to the browser.
 
-.. php:method:: beforeRedirect(Event $event, $url, Response $response)
+.. php:method:: beforeRedirect(EventInterface $event, $url, Response $response)
 
     Is invoked when the controller's redirect
     method is called but before any further action. If this method

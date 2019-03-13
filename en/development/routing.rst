@@ -1512,7 +1512,7 @@ In your controller's ``beforeFilter()`` method you can call
 ``parseNamedParams()`` to extract any named parameters from the passed
 arguments::
 
-    public function beforeFilter(Event $event)
+    public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
         $this->request = Router::parseNamedParams($this->request);

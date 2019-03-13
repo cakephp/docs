@@ -1363,7 +1363,7 @@ controllers that use it. Here is our example component located in
             }
         }
 
-        public function startup(Event $event)
+        public function startup(EventInterface $event)
         {
             $this->setController($event->getSubject());
         }
@@ -1553,7 +1553,7 @@ Expanding on the Orders example, say we have the following tables::
             ];
         }
 
-        public function removeFromCart(Event $event)
+        public function removeFromCart(EventInterface $event)
         {
             $order = $event->getData('order');
             $this->delete($order->cart_id);

@@ -464,7 +464,7 @@ Controller Callback Methods
 By default the following callback methods are connected to related events if the
 methods are implemented by your controllers
 
-.. php:method:: beforeFilter(Event $event)
+.. php:method:: beforeFilter(EventInterface $event)
 
     Called during the ``Controller.initialize`` event which occurs before every
     action in the controller.  It's a handy place to check for an active session
@@ -478,7 +478,7 @@ methods are implemented by your controllers
     listeners of the same event from being called. You must explicitly
     :ref:`stop the event <stopping-events>`.
 
-.. php:method:: beforeRender(Event $event)
+.. php:method:: beforeRender(EventInterface $event)
 
     Called during the ``Controller.beforeRender`` event which occurs after
     controller action logic, but before the view is rendered. This callback is
@@ -486,7 +486,7 @@ methods are implemented by your controllers
     :php:meth:`~Cake\\Controller\\Controller::render()` manually before the end
     of a given action.
 
-.. php:method:: afterFilter(Event $event)
+.. php:method:: afterFilter(EventInterface $event)
 
     Called during the ``Controller.shutdown`` event which is triggered after
     every controller action, and after rendering is complete. This is the last
@@ -498,8 +498,8 @@ also provide a similar set of callbacks.
 Remember to call ``AppController``'s callbacks within child controller callbacks
 for best results::
 
-    //use Cake\Event\Event;
-    public function beforeFilter(Event $event)
+    //use Cake\Event\EventInterface;
+    public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
     }

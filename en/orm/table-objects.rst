@@ -156,7 +156,7 @@ Event List
 initialize
 ----------
 
-.. php:method:: initialize(Event $event, ArrayObject $data, ArrayObject $options)
+.. php:method:: initialize(EventInterface $event, ArrayObject $data, ArrayObject $options)
 
 The ``Model.initialize`` event is fired after the constructor and initialize
 methods are called. The ``Table`` classes do not listen to this event by
@@ -192,7 +192,7 @@ This will call the ``initializeEvent`` when any ``Table`` class is constructed.
 beforeMarshal
 -------------
 
-.. php:method:: beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
+.. php:method:: beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options)
 
 The ``Model.beforeMarshal`` event is fired before request data is converted
 into entities. See the :ref:`before-marshal` documentation for more information.
@@ -200,7 +200,7 @@ into entities. See the :ref:`before-marshal` documentation for more information.
 beforeFind
 ----------
 
-.. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, $primary)
+.. php:method:: beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
 
 The ``Model.beforeFind`` event is fired before each find operation. By stopping
 the event and supplying a return value you can bypass the find operation
@@ -221,7 +221,7 @@ been replaced with the :ref:`map-reduce` features and entity constructors.
 buildValidator
 --------------
 
-.. php:method:: buildValidator(Event $event, Validator $validator, $name)
+.. php:method:: buildValidator(EventInterface $event, Validator $validator, $name)
 
 The ``Model.buildValidator`` event is fired when ``$name`` validator is created.
 Behaviors, can use this hook to add in validation methods.
@@ -229,7 +229,7 @@ Behaviors, can use this hook to add in validation methods.
 buildRules
 ----------
 
-.. php:method:: buildRules(Event $event, RulesChecker $rules)
+.. php:method:: buildRules(EventInterface $event, RulesChecker $rules)
 
 The ``Model.buildRules`` event is fired after a rules instance has been
 created and after the table's ``buildRules()`` method has been called.
@@ -237,7 +237,7 @@ created and after the table's ``buildRules()`` method has been called.
 beforeRules
 -----------
 
-.. php:method:: beforeRules(Event $event, EntityInterface $entity, ArrayObject $options, $operation)
+.. php:method:: beforeRules(EventInterface $event, EntityInterface $entity, ArrayObject $options, $operation)
 
 The ``Model.beforeRules`` event is fired before an entity has had rules applied. By
 stopping this event, you can halt the rules checking and set the result
@@ -246,7 +246,7 @@ of applying rules.
 afterRules
 ----------
 
-.. php:method:: afterRules(Event $event, EntityInterface $entity, ArrayObject $options, $result, $operation)
+.. php:method:: afterRules(EventInterface $event, EntityInterface $entity, ArrayObject $options, $result, $operation)
 
 The ``Model.afterRules`` event is fired after an entity has rules applied. By
 stopping this event, you can return the final value of the rules checking
@@ -255,7 +255,7 @@ operation.
 beforeSave
 ----------
 
-.. php:method:: beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 The ``Model.beforeSave`` event is fired before each entity is saved. Stopping
 this event will abort the save operation. When the event is stopped the result
@@ -265,14 +265,14 @@ How to stop an event is documented :ref:`here <stopping-events>`.
 afterSave
 ---------
 
-.. php:method:: afterSave(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 The ``Model.afterSave`` event is fired after an entity is saved.
 
 afterSaveCommit
 ---------------
 
-.. php:method:: afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: afterSaveCommit(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 The ``Model.afterSaveCommit`` event is fired after the transaction in which the
 save operation is wrapped has been committed. It's also triggered for non atomic
@@ -283,7 +283,7 @@ not triggered if a transaction is started before calling save.
 beforeDelete
 ------------
 
-.. php:method:: beforeDelete(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: beforeDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 The ``Model.beforeDelete`` event is fired before an entity is deleted. By
 stopping this event you will abort the delete operation. When the event is stopped the result
@@ -293,14 +293,14 @@ How to stop an event is documented :ref:`here <stopping-events>`.
 afterDelete
 -----------
 
-.. php:method:: afterDelete(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 The ``Model.afterDelete`` event is fired after an entity has been deleted.
 
 afterDeleteCommit
 -----------------
 
-.. php:method:: afterDeleteCommit(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: afterDeleteCommit(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 The ``Model.afterDeleteCommit`` event is fired after the transaction in which the
 delete operation is wrapped has been is committed. It's also triggered for non
