@@ -78,7 +78,7 @@ Create a CakePHP Project
 ------------------------
 
 You can create a new CakePHP application using composer's ``create-project``
-command::
+command :
 
 .. code-block:: bash
 
