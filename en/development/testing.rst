@@ -657,7 +657,11 @@ Fixture directory. You can also load fixtures from CakePHP core, or plugins::
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['plugin.DebugKit.Articles', 'plugin.MyVendorName/MyPlugin.Messages', 'core.Comments'];
+        public $fixtures = [
+            'plugin.DebugKit.Articles',
+            'plugin.MyVendorName/MyPlugin.Messages',
+            'core.Comments'
+        ];
     }
 
 Using the ``core`` prefix will load fixtures from CakePHP, and using a plugin
