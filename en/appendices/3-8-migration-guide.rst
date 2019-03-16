@@ -26,3 +26,11 @@ ORM
 * ``Cake\ORM\Locator\TableLocator`` can now locate table classes in alternative
   locations. You can either provide a list of namespaces to the constructor, or
   use the ``addLocation()`` method.
+
+
+View
+----
+
+* Radio buttons can now customize the generated label by using the ``label`` key
+  inside a complex option definition. This key will be used instead of the
+  ``label`` key defined at the top level options.
