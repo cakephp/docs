@@ -208,7 +208,7 @@ It also provides two convenience methods regarding the output level::
 You can also create blank lines or draw lines of dashes::
 
     // Output 2 newlines
-    $io->out($this->nl(2));
+    $io->out($io->nl(2));
 
     // Draw a horizontal line
     $io->hr();
