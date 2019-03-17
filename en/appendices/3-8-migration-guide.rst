@@ -10,6 +10,15 @@ To upgrade to 3.8.x run the following composer command:
 
     php composer.phar require --update-with-dependencies "cakephp/cakephp:3.8.*"
 
+Deprecations
+============
+
+* ``Validator::allowEmptyString()``, ``allowEmptyArray()``,
+  ``allowEmptyFile()``, ``allowEmptyDate()``, ``allowEmptyTime()``, and
+  ``allowEmptyDateTime()`` now emit a deprecation warning when using the
+  ``$field, $when, $message`` signature. Instead you should use
+  ``$field, $message, $when``.
+
 Behavior Changes
 ================
 
@@ -27,6 +36,13 @@ ORM
   locations. You can either provide a list of namespaces to the constructor, or
   use the ``addLocation()`` method.
 
+Validator
+---------
+
+* ``Validator::notEmptyString()``, ``notEmptyArray()``,
+  ``notEmptyFile()``, ``notEmptyDate()``, ``notEmptyTime()``, and
+  ``notEmptyDateTime()`` were added. They act as compliments to the
+  ``allowEmpty*`` methods added in 3.7.
 
 View
 ----
