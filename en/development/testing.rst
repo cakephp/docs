@@ -1139,10 +1139,13 @@ As of 3.7.0 there are additional test helpers for flash messages::
     $this->get('/bookmarks/delete/9999');
 
     // Assert a flash message in the 'flash' key.
-    $this->assertFlashMessage('Bookmark deleted');
+    $this->assertFlashMessage('Bookmark deleted', 'flash');
 
-    // Assert the second flash message
+    // Assert the second flash message, also  in the 'flash' key.
     $this->assertFlashMessageAt(1, 'Bookmark really deleted');
+
+    // Assert a flash message in the 'auth' key at the first position
+    $this->assertFlashMessageAt(0, 'You are not allowed to enter this dungeon!', 'auth');
 
     // Assert a flash messages uses the error element
     $this->assertFlashElement('Flash/error');
