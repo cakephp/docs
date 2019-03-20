@@ -188,10 +188,10 @@ helpers by prefixing the name of the plugin.
 
 For example, say you wanted to use the ContactManager plugin's
 ContactInfoHelper to output formatted contact information in
-one of your views. In your controller, your ``$helpers`` array
+one of your views. In your controller, ``setHelpers()``
 could look like this::
 
-    public $helpers = ['ContactManager.ContactInfo'];
+    $this->viewBuilder()->setHelpers(['ContactManager.ContactInfo']);
 
 .. note::
     This dot separated class name is referred to as :term:`plugin syntax`.
@@ -224,8 +224,8 @@ basic directory structure. It should look like this::
                     /Behavior
                 /View
                     /Helper
-                /Template
-                    /Layout
+            /templates
+                /layout
             /tests
                 /TestCase
                 /Fixture
@@ -238,7 +238,7 @@ Inside the plugin folder, you'll notice it looks a lot like a CakePHP
 application, and that's basically what it is. You don't have to
 include any of the folders you are not using. Some plugins might
 only define a Component and a Behavior, and in that case they can completely
-omit the 'Template' directory.
+omit the 'templates' directory.
 
 A plugin can also have basically any of the other directories that your
 application can, such as Config, Console, webroot, etc.
@@ -492,7 +492,7 @@ You can use ``TableRegistry`` to load your plugin tables using the familiar
 
     use Cake\ORM\TableRegistry;
 
-    $contacts = TableRegistry::get('ContactManager.Contacts');
+    $contacts = TableRegistry::getTableLocator()->get('ContactManager.Contacts');
 
 Alternatively, from a controller context, you can use::
 
@@ -515,7 +515,7 @@ Plugins can provide their own layouts. To add plugin layouts, place your templat
 ``plugins/[PluginName]/templates/layout``. To use a plugin layout in your controller
 you can do the following::
 
-    public $layout = 'ContactManager.admin';
+    $this->viewBuilder()->setLayout('ContactManager.admin');
 
 If the plugin prefix is omitted, the layout/view file will be located normally.
 
@@ -693,7 +693,7 @@ When installing plugins via Composer, you may notice that
 a map of plugin names and their paths on the filesystem. It makes it possible
 for plugins to be installed into the standard vendor directory which is outside
 of the normal search paths. The ``Plugin`` class will use this file to locate
-plugins when they are loaded with ``load()`` or ``loadAll()``. You generally
+plugins when they are loaded with ``addPlugin()``. You generally
 won't need to edit this file by hand, as Composer and the ``plugin-installer``
 package will manage it for you.
 
