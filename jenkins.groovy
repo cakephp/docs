@@ -1,4 +1,5 @@
 def final REPO_NAME = 'cakephp/docs'
+def final AUTHORIZATION_REPO_NAME = 'cakephp/authorization'
 
 // Each version of the book has basically the same
 // job definition use a string 'template' to save duplication
@@ -21,6 +22,39 @@ git remote | grep dokku || git remote add dokku dokku@new.cakephp.org:book-VERSI
 git push -fv dokku master
 rm -rf /tmp/book-VERSION-$GIT_COMMIT
 '''
+
+job('Book - Deploy Authorization docs') {
+  description('Deploy the authorization docs when changes are pushed.')
+  scm {
+    github(AUTHORIZATION_REPO_NAME, 'master')
+  }
+  triggers {
+    scm('H/5 * * * *')
+  }
+  logRotator {
+    daysToKeep(30)
+  }
+  steps {
+    shell('''\
+# Get docs-builder to populate index
+git clone https:\/\/github.com/cakephp/docs-builder
+pushd docs-builder
+make populate-index SOURCE="$WORKSPACE" ES_HOST="$ELASTICSEARCH_URL" INDEX_PREFIX="authorization-11"
+popd
+
+# Push to dokku
+git remote | grep dokku || git remote add dokku dokku@new.cakephp.org:authorization-docs
+git push -fv dokku master
+    ''')
+  }
+  publishers {
+    slackNotifications {
+      projectChannel('#dev')
+      notifyFailure()
+      notifyRepeatedFailure()
+    }
+  }
+}
 
 job('Book - Deploy 3.x') {
   description('Deploy the 3.x book when changes are pushed.')
