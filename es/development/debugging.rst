@@ -25,7 +25,7 @@ El resultado de esta función solo se mostrará si la variable ``$debug`` en el 
 .. versionadded:: 3.3.0
 
     Al llamar a este método se devolverá ``$var`` que se le haya pasado, para que pueda, por ejemplo,
-    colocarlo en declaraciones de retorno, por ejemplo:
+    colocarlo en declaraciones de retorno, por ejemplo::
     
 
         return debug($data); // devolverá $data en cualquier caso.
