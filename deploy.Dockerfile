@@ -30,8 +30,8 @@ COPY . /data
 RUN make website
 
 RUN rm -rf /var/www/html/* \
-  && mkdir -p /var/www/html/3.0/ \
-  && cp -a /data/website/. /var/www/html/3.0/ \
+  && mkdir -p /var/www/html/4.0/ \
+  && cp -a /data/website/. /var/www/html/4.0/ \
   && mv /data/nginx.conf /etc/nginx/sites-enabled/default
 
 # forward request and error logs to docker log collector
