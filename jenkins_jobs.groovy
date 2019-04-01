@@ -37,10 +37,10 @@ job('Book - Deploy 3.x') {
     shell(BUILD_STEPS.replaceAll('VERSION', '3'))
   }
   publishers {
-    slackNotifications {
-      projectChannel('#dev')
-      notifyFailure()
-      notifyRepeatedFailure()
+    slackNotifier {
+      room('#dev')
+      notifyFailure(true)
+      notifyRepeatedFailure(true)
     }
   }
 }
@@ -60,10 +60,33 @@ job('Book - Deploy 3.next') {
     shell(BUILD_STEPS.replaceAll('VERSION', '3next'))
   }
   publishers {
-    slackNotifications {
-      projectChannel('#dev')
-      notifyFailure()
-      notifyRepeatedFailure()
+    slackNotifier {
+      room('#dev')
+      notifyFailure(true)
+      notifyRepeatedFailure(true)
+    }
+  }
+}
+
+job('Book - Deploy 4.0') {
+  description('Deploy the 4.0 book when changes are pushed.')
+  scm {
+    github(REPO_NAME, '4.0')
+  }
+  triggers {
+    scm('H/5 * * * *')
+  }
+  logRotator {
+    daysToKeep(30)
+  }
+  steps {
+    shell(BUILD_STEPS.replaceAll('VERSION', '4'))
+  }
+  publishers {
+    slackNotifier {
+      room('#dev')
+      notifyFailure(true)
+      notifyRepeatedFailure(true)
     }
   }
 }
@@ -83,10 +106,10 @@ job('Book - Deploy 2.x') {
     shell(BUILD_STEPS.replaceAll('VERSION', '2'))
   }
   publishers {
-    slackNotifications {
-      projectChannel('#dev')
-      notifyFailure()
-      notifyRepeatedFailure()
+    slackNotifier {
+      room('#dev')
+      notifyFailure(true)
+      notifyRepeatedFailure(true)
     }
   }
 }
