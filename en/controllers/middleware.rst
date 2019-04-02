@@ -454,6 +454,12 @@ When enabled, you can access the current CSRF token on the request object::
 .. versionadded:: 3.5.0
     The ``CsrfProtectionMiddleware`` was added in 3.5.0
 
+.. note::
+
+    You should apply the CSRF protection middleware only for URLs which handle stateful
+    requests using cookies/session. For stateless requests, for e.g. when developing an API,
+    are not affected by CSRF so the middleware should be not be applied for those URLs.
+    
 Integration with FormHelper
 ---------------------------
 
