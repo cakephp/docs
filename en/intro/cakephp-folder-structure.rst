@@ -38,6 +38,8 @@ development. Let's look a little closer at the folders inside
 Command
     Contains your application's console commands. See
     :doc:`/console-and-shells/commands` to learn more.
+Console
+    Contains the installation script executed by Composer.
 Controller
     Contains your application's :doc:`/controllers` and their components.
 Locale
