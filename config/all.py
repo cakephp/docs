@@ -18,7 +18,7 @@ release = '4.0'
 search_version = '4-0'
 
 # The marketing diplay name for the book.
-version_name = 'Red Velvet'
+version_name = 'Strawberry'
 
 # Other versions that display in the version picker menu.
 version_list = [
