@@ -29,15 +29,27 @@ Behavior Changes
 New Features
 ============
 
+Datasource
+==========
+
+* ``Cake\Datasource\ModelAwareTrait::get()`` can now locate model classes by
+  fully-qualified class names, enabling you to use ``ArticlesTable::class`` as
+  a parameter to ``get()``.
+
+Email
+-----
+
+* ``Email::setHeaders()`` and ``Email::addHeaders()`` now allow setting multiple
+  headers of the same name. For that the value for the particular header key in
+  the array argument passed to above functions must be an array.
+  e.g. ``$email->addHeaders(['og:tag' => ['foo', 'bar']]);``
+
 ORM
 ---
 
 * ``Cake\ORM\Locator\TableLocator`` can now locate table classes in alternative
   locations. You can either provide a list of namespaces to the constructor, or
   use the ``addLocation()`` method.
-* ``Cake\Datasource\ModelAwareTrait::get()`` can now locate model classes by
-  fully-qualified class names, enabling you to use ``ArticlesTable::class`` as
-  a parameter to ``get()``.
 
 Validator
 ---------
@@ -53,11 +65,3 @@ View
 * Radio buttons can now customize the generated label by using the ``label`` key
   inside a complex option definition. This key will be used instead of the
   ``label`` key defined at the top level options.
-
-Email
------
-
-* ``Email::setHeaders()`` and ``Email::addHeaders()`` now allow setting multiple
-  headers of the same name. For that the value for the particular header key in
-  the array argument passed to above functions must be an array.
-  e.g. ``$email->addHeaders(['og:tag' => ['foo', 'bar']]);``
