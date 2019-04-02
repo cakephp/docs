@@ -49,6 +49,10 @@ comes with an executable in the **bin** directory:
 
     For Windows, the command needs to be ``bin\cake`` (note the backslash).
 
+.. deprecated:: 3.6.0
+    Shells are deprecated as of 3.6.0, but will not be removed until 5.x.
+    Use :doc:`/console-and-shells/commands` instead.
+
 Running the Console with no arguments produces this help message::
 
     Welcome to CakePHP v3.6.0 Console
