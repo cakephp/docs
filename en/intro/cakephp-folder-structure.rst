@@ -49,11 +49,11 @@ Model
 Shell
     Contains shell tasks for your application.
     For more information see :doc:`/console-and-shells`.
-View
-    Presentational classes are placed here: views, cells, helpers.
 Template
     Presentational files are placed here: elements, error pages,
     layouts, and view template files.
+View
+    Presentational classes are placed here: views, cells, helpers.
 
 .. meta::
     :title lang=en: CakePHP Folder Structure
