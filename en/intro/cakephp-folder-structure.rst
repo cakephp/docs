@@ -55,6 +55,11 @@ Template
 View
     Presentational classes are placed here: views, cells, helpers.
 
+.. note::
+
+    The folders ``Command`` and ``Locale`` are not there by default.
+    You can add them when you need them.
+
 .. meta::
     :title lang=en: CakePHP Folder Structure
     :keywords lang=en: internal libraries,core configuration,model descriptions,external vendors,connection details,folder structure,party libraries,personal commitment,database connection,internationalization,configuration files,folders,application development,readme,lib,configured,logs,config,third party,cakephp
