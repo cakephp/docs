@@ -35,6 +35,9 @@ ORM
 * ``Cake\ORM\Locator\TableLocator`` can now locate table classes in alternative
   locations. You can either provide a list of namespaces to the constructor, or
   use the ``addLocation()`` method.
+* ``Cake\Datasource\ModelAwareTrait::get()`` can now locate model classes by
+  fully-qualified class names, enabling you to use ``ArticlesTable::class`` as
+  a parameter to ``get()``.
 
 Validator
 ---------
