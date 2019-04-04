@@ -13,15 +13,14 @@ methods:
 * ``bootstrap`` Used to load :doc:`configuration files
   </development/configuration>`, define constants and other global functions.
   By default this will include **config/bootstrap.php**. This is the ideal place
-  to load the :doc:`/plugins` your application uses.
+  to load :doc:`/plugins` and global :doc:`event listeners </core-libraries/events>`.
 * ``routes`` Used to load :doc:`routes </development/routing>`. By default this
   will include **config/routes.php**.
 * ``middleware`` Used to add :doc:`middleware </controllers/middleware>` to your application.
 * ``console`` Used to add :doc:`console commands </console-and-shells>` to your
   application. By default this will automatically discover shells & commands in
   your application and all plugins.
-* ``events`` Used to add :doc:`event listeners </core-libraries/events>` to the
-  application event manager.
+
 
 .. _adding-http-stack:
 
