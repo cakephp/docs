@@ -21,7 +21,7 @@ Quick Tour
 
 This section will teach you by example the most common uses of the CakePHP
 Router. Typically you want to display something as a landing page, so you add
-this to your **routes.php** file::
+this to your **config/routes.php** file::
 
     use Cake\Routing\Router;
 

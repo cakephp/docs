@@ -51,7 +51,7 @@ comes with an executable in the **bin** directory:
 
 Running the Console with no arguments produces this help message::
 
-    Welcome to CakePHP v3.6.0 Console
+    Welcome to CakePHP v4.0.0 Console
     ---------------------------------------------------------------
     App : App
     Path: /Users/markstory/Sites/cakephp-app/src/

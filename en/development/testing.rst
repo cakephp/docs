@@ -1094,15 +1094,11 @@ If you want to assert the presence of flash messages in the session and not the
 rendered HTML, you can use ``enableRetainFlashMessages()`` in your tests to
 retain flash messages in the session so you can write assertions::
 
+    // Enable retention of flash messages instead of consuming them.
     $this->enableRetainFlashMessages();
     $this->get('/bookmarks/delete/9999');
 
     $this->assertSession('That bookmark does not exist', 'Flash.flash.0.message');
-
-As of 3.7.0 there are additional test helpers for flash messages::
-
-    $this->enableRetainFlashMessages();
-    $this->get('/bookmarks/delete/9999');
 
     // Assert a flash message in the 'flash' key.
     $this->assertFlashMessage('Bookmark deleted');
@@ -1216,7 +1212,7 @@ make testing responses much simpler. Some examples are::
     // Check a part of the Location header
     $this->assertRedirectContains('/articles/edit/');
 
-    // Added in 3.7.0
+    // Assert location header does not contain
     $this->assertRedirectNotContains('/articles/edit/');
 
     // Assert not empty response content
@@ -1248,7 +1244,7 @@ make testing responses much simpler. Some examples are::
     $this->assertHeader('Content-Type', 'application/json');
     $this->assertHeaderContains('Content-Type', 'html');
 
-    // Added in 3.7.0
+    // Assert content-type header doesn't contain xml
     $this->assertHeaderNotContains('Content-Type', 'xml');
 
     // Assert view variables

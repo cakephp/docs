@@ -78,7 +78,7 @@ Create a CakePHP Project
 ------------------------
 
 You can create a new CakePHP application using composer's ``create-project``
-command::
+command:
 
 .. code-block:: bash
 
@@ -106,12 +106,12 @@ Keeping Up To Date with the Latest CakePHP Changes
 By default this is what your application **composer.json** looks like::
 
     "require": {
-        "cakephp/cakephp": "3.7.*"
+        "cakephp/cakephp": "4.0.*"
     }
 
 Each time you run ``php composer.phar update`` you will receive patch
-releases for this minor version. You can instead change this to ``^3.7`` to
-also receive the latest stable minor releases of the ``3.x`` branch.
+releases for this minor version. You can instead change this to ``^4.0`` to
+also receive the latest stable minor releases of the ``4.x`` branch.
 
 If you want to stay up to date with the latest unreleased changes in CakePHP,
 designate **dev-master** as the package version in your application's
@@ -121,9 +121,9 @@ designate **dev-master** as the package version in your application's
         "cakephp/cakephp": "dev-master"
     }
 
-Be aware that this is not recommended, as your application can break when the next major
-version is released. Additionally, composer does not cache development
-branches, so it slows down consecutive composer installs/updates.
+Be aware that this is not recommended, as your application can break when the
+next major version is released. Additionally, composer does not cache
+development branches, so it slows down consecutive composer installs/updates.
 
 Installation using Oven
 -----------------------
@@ -248,6 +248,8 @@ production setup will look like this on the file system::
         logs/
         plugins/
         src/
+        resources/
+        templates/
         tests/
         tmp/
         vendor/
