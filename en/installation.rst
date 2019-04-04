@@ -247,8 +247,8 @@ production setup will look like this on the file system::
         config/
         logs/
         plugins/
-        src/
         resources/
+        src/
         templates/
         tests/
         tmp/

@@ -73,11 +73,11 @@ process, you can use the ``MiddlewareQueue`` object to attach middleware::
 
     class Application extends BaseApplication
     {
-        public function middleware(MiddlewareQueue $middleware): MiddlewareQueue
+        public function middleware(MiddlewareQueue $middlwareQueue): MiddlewareQueue
         {
             // Bind the error handler into the middleware queue.
-            $middleware->add(new ErrorHandlerMiddleware());
-            return $middleware;
+            $middlwareQueue->add(new ErrorHandlerMiddleware());
+            return $middlwareQueue;
         }
     }
 
@@ -87,19 +87,19 @@ a variety of operations::
         $layer = new \App\Middleware\CustomMiddleware;
 
         // Added middleware will be last in line.
-        $middleware->add($layer);
+        $middlwareQueue->add($layer);
 
         // Prepended middleware will be first in line.
-        $middleware->prepend($layer);
+        $middlwareQueue->prepend($layer);
 
         // Insert in a specific slot. If the slot is out of
         // bounds, it will be added to the end.
-        $middleware->insertAt(2, $layer);
+        $middlwareQueue->insertAt(2, $layer);
 
         // Insert before another middleware.
         // If the named class cannot be found,
         // an exception will be raised.
-        $middleware->insertBefore(
+        $middlwareQueue->insertBefore(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
@@ -107,7 +107,7 @@ a variety of operations::
         // Insert after another middleware.
         // If the named class cannot be found, the
         // middleware will added to the end.
-        $middleware->insertAfter(
+        $middlwareQueue->insertAfter(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
@@ -131,11 +131,11 @@ have to the application's middleware queue::
 
     class Plugin extends BasePlugin
     {
-        public function middleware(MiddlewareQueue $middleware): MiddlewareQueue
+        public function middleware(MiddlewareQueue $middlwareQueue): MiddlewareQueue
         {
-            $middleware->add(new ContactManagerContextMiddleware());
+            $middlwareQueue->add(new ContactManagerContextMiddleware());
 
-            return $middleware;
+            return $middlwareQueue;
         }
     }
 
@@ -201,14 +201,14 @@ application::
 
     class Application
     {
-        public function middleware(MiddlewareQueue $middleware): MiddlewareQueue
+        public function middleware(MiddlewareQueue $middlwareQueue): MiddlewareQueue
         {
             // Add your simple middleware onto the queue
-            $middleware->add(new TrackingCookieMiddleware());
+            $middlwareQueue->add(new TrackingCookieMiddleware());
 
             // Add some more middleware onto the queue
 
-            return $middleware;
+            return $middlwareQueue;
         }
     }
 
@@ -225,10 +225,10 @@ enable cached routes, provide the desired :ref:`cache configuration
 <cache-configuration>` as a parameter::
 
     // In Application.php
-    public function middleware(MiddlewareQueue $middleware): MiddlewareQueue
+    public function middleware(MiddlewareQueue $middlwareQueue): MiddlewareQueue
     {
         // ...
-        $middleware->add(new RoutingMiddleware($this, 'routing'));
+        $middlwareQueue->add(new RoutingMiddleware($this, 'routing'));
     }
 
 The above would use the ``routing`` cache engine to store the generated route
@@ -263,7 +263,7 @@ your application's middleware stack::
         ->noOpen()
         ->noSniff();
 
-    $middleware->add($securityHeaders);
+    $middlwareQueue->add($securityHeaders);
 
 .. _encrypted-cookie-middleware:
 
@@ -283,7 +283,7 @@ Cookie data is encrypted with via OpenSSL using AES::
         Configure::read('Security.cookieKey')
     );
 
-    $middleware->add($cookies);
+    $middlwareQueue->add($cookies);
 
 .. note::
     It is recommended that the encryption key you use for cookie data, is used
@@ -311,14 +311,14 @@ stack you protect all the actions in application::
     // in src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
 
-    public function middleware($middleware) {
+    public function middleware($middlwareQueue) {
         $options = [
             // ...
         ];
         $csrf = new CsrfProtectionMiddleware($options);
 
-        $middleware->add($csrf);
-        return $middleware;
+        $middlwareQueue->add($csrf);
+        return $middlwareQueue;
     }
 
 By applying the ``CsrfProtectionMiddleware`` to routing scopes, you can include

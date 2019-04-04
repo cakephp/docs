@@ -378,7 +378,7 @@ replace the existing ``tags._ids`` control with the following::
 We'll also need to update the article view template. In
 **src/Template/Articles/view.php** add the line as shown::
 
-    <!-- File: src/Template/Articles/view.php -->
+    <!-- File: templates/Articles/view.php -->
 
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
