@@ -131,12 +131,6 @@ You can do more complex manipulations, or use helpers to do formatting as well.
 The data view classes don't support layouts. They assume that the view file will
 output the serialized content.
 
-.. note::
-    As of 3.1.0 AppController, in the application skeleton automatically adds
-    ``'_serialize' => true`` to all XML/JSON requests. You will need to remove
-    this code from the beforeRender callback or set ``'_serialize' => false`` in
-    your controller's action if you want to use view files.
-
 Creating XML Views
 ==================
 

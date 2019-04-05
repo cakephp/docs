@@ -37,9 +37,8 @@ Controller's ``initialize()`` method or via the ``$components`` array::
         public function initialize(): void
         {
             parent::initialize();
-            $this->loadComponent('Auth', [
-                'authorize' => 'Controller',
-                'loginAction' => ['controller' => 'Users', 'action' => 'login']
+            $this->loadComponent('RequestHandler', [
+                'viewClassMap' => ['json' => 'AppJsonView'],
             ]);
             $this->loadComponent('Security', ['blackholeCallback' => 'blackhole']);
         }
@@ -52,17 +51,14 @@ also be expressed as::
 
     public function beforeFilter(EventInterface $event)
     {
-        $this->Auth->config('authorize', ['controller']);
-        $this->Auth->config('loginAction', ['controller' => 'Users', 'action' => 'login']);
-
-        $this->Cookie->config('name', 'CookieMonster');
+        $this->RequestHandler->config('viewClassMap', ['rss' => 'MyRssView']);
     }
 
 Like helpers, components implement a ``config()`` method that is used to get and
 set any configuration data for a component::
 
     // Read config data.
-    $this->Auth->config('loginAction');
+    $this->RequestHandler->config('viewClassMap');
 
     // Set config
     $this->Csrf->config('cookieName', 'token');
