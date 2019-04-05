@@ -214,12 +214,12 @@ In the previous example, all tree operations will be scoped to only the rows
 having the column ``country_name`` set to 'Brazil'. You can change the scoping
 on the fly by using the 'config' function::
 
-    $this->behaviors()->Tree->config('scope', ['country_name' => 'France']);
+    $this->behaviors()->Tree->setConfig('scope', ['country_name' => 'France']);
 
 Optionally, you can have a finer grain control of the scope by passing a closure
 as the scope::
 
-    $this->behaviors()->Tree->config('scope', function ($query) {
+    $this->behaviors()->Tree->setConfig('scope', function ($query) {
         $country = $this->getConfigureContry(); // A made-up function
         return $query->where(['country_name' => $country]);
     });

@@ -57,8 +57,8 @@ original sender using the Sender header. You can do so using ``setSender()``::
 Configuration
 =============
 
-Configuration for ``Email`` defaults is created using ``config()`` and
-``configTransport()``. You should put your email presets in the
+Configuration for ``Email`` defaults is created using ``setConfig()`` and
+``TransportFactory::setConfig()``. You should put your email presets in the
 **config/app.php** file.  The **config/app.default.php** file is an
 example of this file. It is not required to define email configuration in
 **config/app.php**. ``Email`` can be used without it and use the respective
@@ -381,7 +381,7 @@ transport). To start off your file should look like::
     }
 
 You must implement the method ``send(Email $email)`` with your custom logic.
-Optionally, you can implement the ``config($config)`` method. ``config()`` is
+Optionally, you can implement the ``setConfig($config)`` method. ``setConfig()`` is
 called before send() and allows you to accept user configurations. By default,
 this method puts the configuration in protected attribute ``$_config``.
 
@@ -416,7 +416,7 @@ want do setup a bunch of configuration ahead of time.
 :php:meth:`Cake\\Mailer\\Email::deliver()` is intended for that purpose.
 
 You can create your configuration using
-:php:meth:`Cake\\Mailer\\Email::config()`, or use an array with all
+:php:meth:`Cake\\Mailer\\Email::setConfig()`, or use an array with all
 options that you need and use the static method ``Email::deliver()``.
 Example::
 

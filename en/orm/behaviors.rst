@@ -164,7 +164,7 @@ behavior should now look like::
 
         public function slug(Entity $entity)
         {
-            $config = $this->config();
+            $config = $this->getConfig();
             $value = $entity->get($config['field']);
             $entity->set($config['slug'], Text::slug($value, $config['replacement']));
         }
@@ -311,7 +311,7 @@ respond to::
             // e.g. if our parent calls $this->addBehavior('Timestamp');
             // and we want to add an additional event
             if ($this->behaviors()->has('Timestamp')) {
-                $this->behaviors()->get('Timestamp')->config([
+                $this->behaviors()->get('Timestamp')->setConfig([
                     'events' => [
                         'Users.login' => [
                             'last_login' => 'always'

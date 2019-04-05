@@ -19,7 +19,7 @@ The easiest way to create a database connection is using a ``DSN`` string::
     use Cake\Datasource\ConnectionManager;
 
     $dsn = 'mysql://root:password@localhost/my_database';
-    ConnectionManager::config('default', ['url' => $dsn]);
+    ConnectionManager::setConfig('default', ['url' => $dsn]);
 
 Once created, you can access the connection object to start using it::
 
@@ -150,12 +150,12 @@ like::
 The above will create a 'default' connection, with the provided parameters. You
 can define as many connections as you want in your configuration file. You can
 also define additional connections at runtime using
-:php:meth:`Cake\\Datasource\\ConnectionManager::config()`. An example of that
+:php:meth:`Cake\\Datasource\\ConnectionManager::setConfig()`. An example of that
 would be::
 
     use Cake\Datasource\ConnectionManager;
 
-    ConnectionManager::config('default', [
+    ConnectionManager::setConfig('default', [
         'className' => 'Cake\Database\Connection',
         'driver' => 'Cake\Database\Driver\Mysql',
         'persistent' => false,
@@ -171,7 +171,7 @@ would be::
 Configuration options can also be provided as a :term:`DSN` string. This is
 useful when working with environment variables or :term:`PaaS` providers::
 
-    ConnectionManager::config('default', [
+    ConnectionManager::setConfig('default', [
         'url' => 'mysql://my_app:sekret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
     ]);
 
@@ -291,10 +291,10 @@ Attempting to load connections that do not exist will throw an exception.
 Creating Connections at Runtime
 -------------------------------
 
-Using ``config()`` and ``get()`` you can create new connections that are not
+Using ``setConfig()`` and ``get()`` you can create new connections that are not
 defined in your configuration files at runtime::
 
-    ConnectionManager::config('my_connection', $config);
+    ConnectionManager::setConfig('my_connection', $config);
     $conn = ConnectionManager::get('my_connection');
 
 See the :ref:`database-configuration` for more information on the configuration
@@ -855,14 +855,14 @@ files/syslog can be useful when working with web requests::
     use Cake\Log\Log;
 
     // Console logging
-    Log::config('queries', [
+    Log::setConfig('queries', [
         'className' => 'Console',
         'stream' => 'php://stderr',
         'scopes' => ['queriesLog']
     ]);
 
     // File logging
-    Log::config('queries', [
+    Log::setConfig('queries', [
         'className' => 'File',
         'path' => LOGS,
         'file' => 'queries.log',

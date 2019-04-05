@@ -152,7 +152,7 @@ Any variables you set in your controller with ``set()`` will be available in
 both the view and the layout your action renders. In addition, any set variables
 will also be available in any element. If you need to pass additional variables
 from the view to the layout you can either call ``set()`` in the view template,
-or use a :ref:`view-blocks`.
+or use :ref:`View Blocks <view-blocks>`.
 
 You should remember to **always** escape any user data before outputting it as
 CakePHP does not automatically escape output. You can escape user content with
@@ -653,7 +653,7 @@ if you are in the ``ContactsController`` of the Contacts plugin, the following::
 are equivalent and will result in the same element being rendered.
 
 For elements inside subfolder of a plugin
-(e.g., **plugins/Contacts/Template/Element/sidebar/helpbox.php**), use the
+(e.g., **plugins/Contacts/Template/element/sidebar/helpbox.php**), use the
 following::
 
     echo $this->element('Contacts.sidebar/helpbox');

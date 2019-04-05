@@ -12,7 +12,7 @@ avoided in CakePHP, and instead usage of the Session classes is preferred.
 Session Configuration
 =====================
 
-Session configuration is generally defined in ``/config/app.php``. The available
+Session configuration is generally defined in **/config/app.php**. The available
 options are:
 
 * ``Session.timeout`` - The number of *minutes* before CakePHP's session
@@ -164,7 +164,7 @@ This configuration requires a database table, having this schema::
     PRIMARY KEY (`id`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-You can find a copy of the schema for the sessions table in the `application skeleton <https://github.com/cakephp/app>`_ in ``config/schema/sessions.sql``.
+You can find a copy of the schema for the sessions table in the `application skeleton <https://github.com/cakephp/app>`_ in **config/schema/sessions.sql**.
 
 You can also use your own ``Table`` class to handle the saving of the sessions::
 
@@ -284,8 +284,8 @@ Our class extends the built-in ``DatabaseSession`` so we don't have to duplicate
 all of its logic and behavior. We wrap each operation with
 a :php:class:`Cake\\Cache\\Cache` operation. This lets us fetch sessions from
 the fast cache, and not have to worry about what happens when we fill the cache.
-Using this session handler is also easy. In your **app.php** make the session
-block look like the following::
+Using this session handler is also easy. In **config/app.php** make the session
+block look like::
 
     'Session' => [
         'defaults' => 'database',
@@ -405,8 +405,8 @@ Flash messages are small messages displayed to end users once. They are often
 used to present error messages, or confirm that actions took place successfully.
 
 To set and display flash messages you should use
-:doc:`/controllers/components/flash` and
-:doc:`/views/helpers/flash`
+:doc:`FlashComponent </controllers/components/flash>` and
+:doc:`FlashHelper </views/helpers/flash>`
 
 .. meta::
     :title lang=en: Sessions

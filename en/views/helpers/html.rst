@@ -792,67 +792,6 @@ When loading files of templates, your file should look like::
     ``%%``. The reason is that internally templates are compiled to be used with
     ``sprintf()``. Example: ``<div style="width:{{size}}%%">{{content}}</div>``
 
-Creating Breadcrumb Trails with HtmlHelper
-==========================================
-
-.. php:method:: addCrumb(string $name, string $link = null, mixed $options = null)
-.. php:method:: getCrumbs(string $separator = '&raquo;', string $startText = false)
-.. php:method:: getCrumbList(array $options = [], $startText = false)
-
-Many applications have breadcrumb trails to ease end user navigations. You can
-create a breadcrumb trail in your app with some help from HtmlHelper. To make
-bread crumbs, first the following in your layout
-template::
-
-    echo $this->Html->getCrumbs(' > ', 'Home');
-
-The ``$startText`` option can also accept an array. This gives more control
-over the generated first link::
-
-    echo $this->Html->getCrumbs(' > ', [
-        'text' => $this->Html->image('home.png'),
-        'url' => ['controller' => 'Pages', 'action' => 'display', 'home'],
-        'escape' => false
-    ]);
-
-Any keys that are not ``text`` or ``url`` will be passed to
-:php:meth:`~HtmlHelper::link()` as the ``$options`` parameter.
-
-Now, in your view you'll want to add the following to start the
-breadcrumb trails on each of the pages::
-
-    $this->Html->addCrumb('Users', '/users');
-    $this->Html->addCrumb('Add User', ['controller' => 'Users', 'action' => 'add']);
-
-This will add the output of "**Home > Users > Add User**" in your layout where
-``getCrumbs`` was added.
-
-You can also fetch the crumbs formatted inside an HTML list::
-
-    echo $this->Html->getCrumbList();
-
-As options you can use regular HTML parameter that fits in the ``<ul>``
-(Unordered List) such as ``class`` and for the specific options, you have:
-``separator`` (will be between the ``<li>`` elements), ``firstClass`` and
-``lastClass`` like::
-
-    echo $this->Html->getCrumbList(
-        [
-            'firstClass' => false,
-            'lastClass' => 'active',
-            'class' => 'breadcrumb'
-        ],
-        'Home'
-    );
-
-This method uses :php:meth:`Cake\\View\\Helper\\HtmlHelper::tag()` to generate
-list and its elements. Works similar to
-:php:meth:`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()`, so it uses options
-which every crumb was added with. You can use the ``$startText`` parameter to
-provide the first breadcrumb link/text. This is useful when you always want to
-include a root link. This option works the same as the ``$startText`` option for
-:php:meth:`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()`.
-
 .. meta::
     :title lang=en: HtmlHelper
     :description lang=en: The role of the HtmlHelper in CakePHP is to make HTML-related options easier, faster, and more resilient to change.

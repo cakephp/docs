@@ -232,7 +232,7 @@ additional details on how to use the table registry::
     ];
     
     // Register an additional table object to allow differentiating in pagination component
-    TableRegistry::config('UnpublishedArticles', [
+    TableRegistry::getTableLocator()->setConfig('UnpublishedArticles', [
         'className' => 'App\Model\Table\ArticlesTable',
         'table' => 'articles',
         'entityClass' => 'App\Model\Entity\Article',

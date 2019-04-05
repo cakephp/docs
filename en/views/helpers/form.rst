@@ -1651,9 +1651,10 @@ Creating Year Controls
 * ``$options`` - An optional array including any of the
   :ref:`general-control-options` as well as any valid HTML attributes.
   Other valid options are:
-  - ``min`: The lowest value to use in the year select picker.
-  - ``max``: The maximum value to use in the year select picker.
-  - ``order``: The order of year values in the year select picker.
+
+  * ``min``: The lowest value to use in the year select picker.
+  * ``max``: The maximum value to use in the year select picker.
+  * ``order``: The order of year values in the year select picker.
     Possible values are ``'asc'`` and ``'desc'``. Defaults to ``'desc'``.
 
 Creates a ``select`` element populated with the years from ``min`` to ``max``
