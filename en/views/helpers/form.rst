@@ -1711,6 +1711,7 @@ Which would create the following two select pickers:
 
 Creating Date Controls
 ~~~~~~~~~~~~~~~~~~~~~~
+
 .. php:method:: date($fieldName, $options = [])
 
 * ``$fieldName`` - A field name that will be used as a prefix for the HTML
@@ -2124,8 +2125,6 @@ for the *Ticket* field, your form would output:
     ``control()``, and you want the same validation error message displayed for
     each one, you will probably be better off defining a custom error message
     inside the respective :ref:`validator rules<creating-validators>`.
-
-.. TODO:: Add examples.
 
 Checking for Errors
 -------------------
