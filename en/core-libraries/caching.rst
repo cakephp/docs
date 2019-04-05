@@ -44,7 +44,7 @@ Regardless of the CacheEngine you choose to use, your application interacts with
 Configuring Cache Engines
 =========================
 
-.. php:staticmethod:: config($key, $config = null)
+.. php:staticmethod:: setConfig($key, $config = null)
 
 Your application can configure any number of 'engines' during its bootstrap
 process. Cache engine configurations are defined in **config/app.php**.
@@ -81,7 +81,7 @@ following::
 Configuration options can also be provided as a :term:`DSN` string. This is
 useful when working with environment variables or :term:`PaaS` providers::
 
-    Cache::config('short', [
+    Cache::setConfig('short', [
         'url' => 'memcached://user:password@cache-host/?timeout=3600&prefix=myapp_',
     ]);
 
@@ -91,7 +91,7 @@ query string arguments.
 You can also configure Cache engines at runtime::
 
     // Using a short name
-    Cache::config('short', [
+    Cache::setConfig('short', [
         'className' => 'File',
         'duration' => '+1 hours',
         'path' => CACHE,
@@ -99,7 +99,7 @@ You can also configure Cache engines at runtime::
     ]);
 
     // Using a fully namespaced name.
-    Cache::config('long', [
+    Cache::setConfig('long', [
         'className' => 'Cake\Cache\Engine\FileEngine',
         'duration' => '+1 week',
         'probability' => 100,
@@ -108,7 +108,7 @@ You can also configure Cache engines at runtime::
 
     // Using a constructed object.
     $object = new FileEngine($config);
-    Cache::config('other', $object);
+    Cache::setConfig('other', $object);
 
 The name of these engine configurations ('short' and 'long') are used as the ``$config``
 parameter for :php:meth:`Cake\\Cache\\Cache::write()` and
@@ -116,16 +116,16 @@ parameter for :php:meth:`Cake\\Cache\\Cache::write()` and
 refer to the class name using the following syntaxes::
 
     // Short name (in App\ or Cake namespaces)
-    Cache::config('long', ['className' => 'File']);
+    Cache::setConfig('long', ['className' => 'File']);
 
     // Plugin short name
-    Cache::config('long', ['className' => 'MyPlugin.SuperCache']);
+    Cache::setConfig('long', ['className' => 'MyPlugin.SuperCache']);
 
     // Full namespace
-    Cache::config('long', ['className' => 'Cake\Cache\Engine\FileEngine']);
+    Cache::setConfig('long', ['className' => 'Cake\Cache\Engine\FileEngine']);
 
     // An object implementing CacheEngineInterface
-    Cache::config('long', ['className' => $myCache]);
+    Cache::setConfig('long', ['className' => $myCache]);
 
 .. note::
 
@@ -199,7 +199,7 @@ cache failure.
 You can configure Cache configurations to fall back to a specified config using
 the ``fallback`` configuration key::
 
-    Cache::config('redis', [
+    Cache::setConfig('redis', [
         'className' => 'Redis',
         'duration' => '+1 hours',
         'prefix' => 'cake_redis_',
@@ -216,7 +216,7 @@ from throwing an uncaught exception.
 
 You can turn off cache fallbacks with ``false``::
 
-    Cache::config('redis', [
+    Cache::setConfig('redis', [
         'className' => 'Redis',
         'duration' => '+1 hours',
         'prefix' => 'cake_redis_',
@@ -234,7 +234,7 @@ Removing Configured Cache Engines
 
 Once a configuration is created you cannot change it. Instead you should drop
 the configuration and re-create it using :php:meth:`Cake\\Cache\\Cache::drop()` and
-:php:meth:`Cake\\Cache\\Cache::config()`. Dropping a cache engine will remove
+:php:meth:`Cake\\Cache\\Cache::setConfig()`. Dropping a cache engine will remove
 the config and destroy the adapter if it was constructed.
 
 Writing to a Cache
@@ -462,7 +462,7 @@ group or namespace. This is a common requirement for mass-invalidating keys
 whenever some information changes that is shared among all entries in the same
 group. This is possible by declaring the groups in cache configuration::
 
-    Cache::config('site_home', [
+    Cache::setConfig('site_home', [
         'className' => 'Redis',
         'duration' => '+999 days',
         'groups' => ['comment', 'article']
@@ -548,7 +548,7 @@ Or in **plugins/MyPlugin/src/Cache/Engine/MyCustomCacheEngine.php** as
 part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax::
 
-    Cache::config('custom', [
+    Cache::setConfig('custom', [
         'className' => 'MyPlugin.MyCustomCache',
         // ...
     ]);

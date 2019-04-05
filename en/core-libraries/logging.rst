@@ -31,7 +31,7 @@ configured using :php:class:`Cake\\Log\\Log`. An example would be::
     use Cake\Log\Log;
 
     // Short classname
-    Log::config('debug', [
+    Log::setConfig('debug', [
         'className' => 'File',
         'path' => LOGS,
         'levels' => ['notice', 'info', 'debug'],
@@ -39,7 +39,7 @@ configured using :php:class:`Cake\\Log\\Log`. An example would be::
     ]);
 
     // Fully namespaced name.
-    Log::config('error', [
+    Log::setConfig('error', [
         'className' => 'Cake\Log\Engine\FileLog',
         'path' => LOGS,
         'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
@@ -54,20 +54,20 @@ information on the different levels and what they mean.
 
 Once a configuration is created you cannot change it. Instead you should drop
 the configuration and re-create it using :php:meth:`Cake\\Log\\Log::drop()` and
-:php:meth:`Cake\\Log\\Log::config()`.
+:php:meth:`Cake\\Log\\Log::setConfig()`.
 
 It is also possible to create loggers by providing a closure. This is useful
 when you need full control over how the logger object is built. The closure
 has to return the constructed logger instance. For example::
 
-    Log::config('special', function () {
+    Log::setConfig('special', function () {
         return new \Cake\Log\Engine\FileLog(['path' => LOGS, 'file' => 'log']);
     });
 
 Configuration options can also be provided as a :term:`DSN` string. This is
 useful when working with environment variables or :term:`PaaS` providers::
 
-    Log::config('error', [
+    Log::setConfig('error', [
         'url' => 'file:///?levels[]=warning&levels[]=error&file=error',
     ]);
 
@@ -83,18 +83,18 @@ plugins. If for example you had a database logger called
 ``DatabaseLog``. As part of your application it would be placed in
 **src/Log/Engine/DatabaseLog.php**. As part of a plugin it would be placed in
 **plugins/LoggingPack/src/Log/Engine/DatabaseLog.php**. To configure log
-adapters you should use :php:meth:`Cake\\Log\\Log::config()`.  For example
+adapters you should use :php:meth:`Cake\\Log\\Log::setConfig()`.  For example
 configuring our DatabaseLog would look like::
 
     // For src/Log
-    Log::config('otherFile', [
+    Log::setConfig('otherFile', [
         'className' => 'Database',
         'model' => 'LogEntry',
         // ...
     ]);
 
     // For plugin called LoggingPack
-    Log::config('otherFile', [
+    Log::setConfig('otherFile', [
         'className' => 'LoggingPack.Database',
         'model' => 'LogEntry',
         // ...
@@ -189,7 +189,7 @@ You can configure additional/alternate FileLog locations when configuring
 a logger. FileLog accepts a ``path`` which allows for
 custom paths to be used::
 
-    Log::config('custom_path', [
+    Log::setConfig('custom_path', [
         'className' => 'File',
         'path' => '/path/to/custom/place/'
     ]);
@@ -213,7 +213,7 @@ to specify ``Syslog`` as the engine to be used for logging. The following
 configuration snippet will replace the default logger with syslog, this should
 be done in the **bootstrap.php** file::
 
-    Log::config('default', [
+    Log::setConfig('default', [
         'engine' => 'Syslog'
     ]);
 
@@ -298,7 +298,7 @@ the log messages will be directed to those loggers. For example::
 
     // Configure logs/shops.log to receive all levels, but only
     // those with `orders` and `payments` scope.
-    Log::config('shops', [
+    Log::setConfig('shops', [
         'className' => 'File',
         'path' => LOGS,
         'levels' => [],
@@ -308,7 +308,7 @@ the log messages will be directed to those loggers. For example::
 
     // Configure logs/payments.log to receive all levels, but only
     // those with `payments` scope.
-    Log::config('payments', [
+    Log::setConfig('payments', [
         'className' => 'File',
         'path' => LOGS,
         'levels' => [],
@@ -339,7 +339,7 @@ Log API
 
     A simple class for writing to logs.
 
-.. php:staticmethod:: config($key, $config)
+.. php:staticmethod:: setConfig($key, $config)
 
     :param string $name: Name for the logger being connected, used
         to drop a logger later on.
@@ -408,14 +408,14 @@ the CakePHP loggers, it is easy to use in your application as the default
 logger.
 
 After installing Monolog using composer, configure the logger using the
-``Log::config()`` method::
+``Log::setConfig()`` method::
 
     // config/bootstrap.php
 
     use Monolog\Logger;
     use Monolog\Handler\StreamHandler;
 
-    Log::config('default', function () {
+    Log::setConfig('default', function () {
         $log = new Logger('app');
         $log->pushHandler(new StreamHandler('path/to/your/combined.log'));
         return $log;
@@ -432,7 +432,7 @@ Use similar methods if you want to configure a different logger for your console
     use Monolog\Logger;
     use Monolog\Handler\StreamHandler;
 
-    Log::config('default', function () {
+    Log::setConfig('default', function () {
         $log = new Logger('cli');
         $log->pushHandler(new StreamHandler('path/to/your/combined-cli.log'));
         return $log;

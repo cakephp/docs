@@ -167,7 +167,7 @@ callbacks like ``json_decode``::
     $this->RequestHandler->addInputType('json', ['json_decode', true]);
 
     // After 3.1.0 you should use
-    $this->RequestHandler->config('inputTypeMap.json', ['json_decode', true]);
+    $this->RequestHandler->setConfig('inputTypeMap.json', ['json_decode', true]);
 
 The above will make ``$this->request->getData()`` an array of the JSON input data,
 without the additional ``true`` you'd get a set of ``stdClass`` objects.

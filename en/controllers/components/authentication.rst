@@ -78,10 +78,10 @@ configuration information into each authentication object using an
 array::
 
     // Simple setup
-    $this->Auth->config('authenticate', ['Form']);
+    $this->Auth->setConfig('authenticate', ['Form']);
 
     // Pass settings in
-    $this->Auth->config('authenticate', [
+    $this->Auth->setConfig('authenticate', [
         'Basic' => ['userModel' => 'Members'],
         'Form' => ['userModel' => 'Members']
     ]);
@@ -93,7 +93,7 @@ to every attached object. The ``all`` key is also exposed as
 ``AuthComponent::ALL``::
 
     // Pass settings in using 'all'
-    $this->Auth->config('authenticate', [
+    $this->Auth->setConfig('authenticate', [
         AuthComponent::ALL => ['userModel' => 'Members'],
         'Basic',
         'Form'
@@ -514,7 +514,7 @@ Using Custom Authentication Objects
 Once you've created your custom authentication objects, you can use them
 by including them in ``AuthComponent``'s authenticate array::
 
-    $this->Auth->config('authenticate', [
+    $this->Auth->setConfig('authenticate', [
         'Openid', // app authentication object.
         'AuthBag.Openid', // plugin authentication object.
     ]);
@@ -560,7 +560,7 @@ messages ``AuthComponent`` uses. In your controller's ``beforeFilter()``, or
 component settings you can use ``authError`` to customize the error used
 for when authorization fails::
 
-    $this->Auth->config('authError', "Woopsie, you are not authorized to access this area.");
+    $this->Auth->setConfig('authError', "Woopsie, you are not authorized to access this area.");
 
 Sometimes, you want to display the authorization error only after
 the user has already logged-in. You can suppress this message by setting
@@ -569,7 +569,7 @@ its value to boolean ``false``.
 In your controller's ``beforeFilter()`` or component settings::
 
     if (!$this->Auth->user()) {
-        $this->Auth->config('authError', false);
+        $this->Auth->setConfig('authError', false);
     }
 
 .. _hashing-passwords:
@@ -784,7 +784,7 @@ In some cases you may want to use ``$this->Auth->user()`` in the
 authentication checks should be done::
 
     //Set up AuthComponent to authenticate in initialize()
-    $this->Auth->config('checkAuthIn', 'Controller.initialize');
+    $this->Auth->setConfig('checkAuthIn', 'Controller.initialize');
 
 Default value for ``checkAuthIn`` is ``'Controller.startup'`` - but by using
 ``'Controller.initialize'`` initial authentication is done before ``beforeFilter()``
@@ -833,10 +833,10 @@ configuration information into each authorization object, using an
 array::
 
     // Basic setup
-    $this->Auth->config('authorize', ['Controller']);
+    $this->Auth->setConfig('authorize', ['Controller']);
 
     // Pass settings in
-    $this->Auth->config('authorize', [
+    $this->Auth->setConfig('authorize', [
         'Actions' => ['actionPath' => 'controllers/'],
         'Controller'
     ]);
@@ -847,7 +847,7 @@ to set settings that are passed to every attached object. The ``all`` key
 is also exposed as ``AuthComponent::ALL``::
 
     // Pass settings in using 'all'
-    $this->Auth->config('authorize', [
+    $this->Auth->setConfig('authorize', [
         AuthComponent::ALL => ['actionPath' => 'controllers/'],
         'Actions',
         'Controller'
@@ -898,7 +898,7 @@ Using Custom Authorize Objects
 Once you've created your custom authorize object, you can use them by
 including them in your ``AuthComponent``'s authorize array::
 
-    $this->Auth->config('authorize', [
+    $this->Auth->setConfig('authorize', [
         'Ldap', // app authorize object.
         'AuthBag.Combo', // plugin authorize object.
     ]);
@@ -908,7 +908,7 @@ Using No Authorization
 
 If you'd like to not use any of the built-in authorization objects and
 want to handle things entirely outside of ``AuthComponent``, you can set
-``$this->Auth->config('authorize', false);``. By default ``AuthComponent``
+``$this->Auth->setConfig('authorize', false);``. By default ``AuthComponent``
 starts off with ``authorize`` set to ``false``. If you don't use an
 authorization scheme, make sure to check authorization yourself in your
 controller's ``beforeFilter()`` or with another component.
@@ -1012,7 +1012,7 @@ Configuration options
 =====================
 
 The following settings can all be defined either in your controller's
-``initialize()`` method or using ``$this->Auth->config()`` in your ``beforeFilter()``:
+``initialize()`` method or using ``$this->Auth->setConfig()`` in your ``beforeFilter()``:
 
 ajaxLogin
     The name of an optional view element to render when an AJAX request is made
@@ -1070,12 +1070,12 @@ checkAuthIn
     if you want the check to be done before controller's ``beforeFilter()``
     method is run.
 
-You can get current configuration values by calling ``$this->Auth->config()``::
+You can get current configuration values by calling ``$this->Auth->getConfig()``::
 only the configuration option::
 
-    $this->Auth->config('loginAction');
+    $this->Auth->getConfig('loginAction');
 
-    $this->redirect($this->Auth->config('loginAction'));
+    $this->redirect($this->Auth->getConfig('loginAction'));
 
 This is useful if you want to redirect a user to the ``login`` route for example.
 Without a parameter, the full configuration will be returned.

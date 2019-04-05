@@ -466,11 +466,11 @@ string values but objects. The connection will take an object of
     If your table also does additional configuration in its ``initialize()`` method,
     those values will overwrite the ones provided to the registry.
 
-You can also pre-configure the registry using the ``config()`` method.
+You can also pre-configure the registry using the ``setConfig()`` method.
 Configuration data is stored *per alias*, and can be overridden by an object's
 ``initialize()`` method::
 
-    TableRegistry::config('Users', ['table' => 'my_users']);
+    TableRegistry::getTableLocator()->setConfig('Users', ['table' => 'my_users']);
 
 .. note::
 

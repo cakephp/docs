@@ -45,27 +45,27 @@ Controller's ``initialize()`` method or via the ``$components`` array::
 
     }
 
-You can configure components at runtime using the ``config()`` method. Often,
+You can configure components at runtime using the ``setConfig()`` method. Often,
 this is done in your controller's ``beforeFilter()`` method. The above could
 also be expressed as::
 
     public function beforeFilter(EventInterface $event)
     {
-        $this->RequestHandler->config('viewClassMap', ['rss' => 'MyRssView']);
+        $this->RequestHandler->setConfig('viewClassMap', ['rss' => 'MyRssView']);
     }
 
-Like helpers, components implement a ``config()`` method that is used to get and
+Like helpers, components implement a ``getConfig()`` method that is used to get and
 set any configuration data for a component::
 
     // Read config data.
-    $this->RequestHandler->config('viewClassMap');
+    $this->RequestHandler->getConfig('viewClassMap');
 
     // Set config
-    $this->Csrf->config('cookieName', 'token');
+    $this->Csrf->setConfig('cookieName', 'token');
 
 As with helpers, components will automatically merge their ``$_defaultConfig``
 property with constructor configuration to create the ``$_config`` property
-which is accessible with ``config()``.
+which is accessible with ``getConfig()`` and  ``setConfig()``.
 
 Aliasing Components
 -------------------

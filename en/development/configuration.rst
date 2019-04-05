@@ -18,7 +18,7 @@ Configuration is generally stored in either PHP or INI files, and loaded during
 the application bootstrap. CakePHP comes with one configuration file by default,
 but if required you can add additional configuration files and load them in
 your application's bootstrap code. :php:class:`Cake\\Core\\Configure` is used
-for global configuration, and classes like ``Cache`` provide ``config()``
+for global configuration, and classes like ``Cache`` provide ``setConfig()``
 methods to make configuration simple and transparent.
 
 Loading Additional Configuration Files
@@ -31,7 +31,7 @@ configuration into multiple files. After creating each of the files in your
     use Cake\Core\Configure;
     use Cake\Core\Configure\Engine\PhpConfig;
 
-    Configure::config('default', new PhpConfig());
+    Configure::setConfig('default', new PhpConfig());
     Configure::load('app', 'default', false);
     Configure::load('other_config', 'default');
 
@@ -398,7 +398,7 @@ exist, a :php:class:`RuntimeException` will be thrown::
 Reading and writing configuration files
 =======================================
 
-.. php:staticmethod:: config($name, $engine)
+.. php:staticmethod:: setConfig($name, $engine)
 
 CakePHP comes with two built-in configuration file engines.
 :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` is able to read PHP config
