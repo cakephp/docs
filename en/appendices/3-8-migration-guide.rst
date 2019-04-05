@@ -29,8 +29,15 @@ Behavior Changes
 New Features
 ============
 
-Datasource
+Collection
 ==========
+
+* ``CollectionTrait`` now uses the ``newCollection`` method to create clones
+  now. This allows sub-classes to have collection methods create instances of
+  themselves instead of using ``Collection``.
+
+Datasource
+----------
 
 * ``Cake\Datasource\ModelAwareTrait::get()`` can now locate model classes by
   fully-qualified class names, enabling you to use ``ArticlesTable::class`` as
