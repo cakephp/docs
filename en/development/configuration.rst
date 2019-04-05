@@ -523,57 +523,6 @@ The built in configuration engines are:
 
 By default your application will use ``PhpConfig``.
 
-Bootstrapping CakePHP
-=====================
-
-If you have any additional configuration needs, you should add them to your
-application's **config/bootstrap.php** file. This file is included before each
-request, and CLI command.
-
-This file is ideal for a number of common bootstrapping tasks:
-
-- Defining convenience functions.
-- Declaring constants.
-- Defining cache configuration.
-- Defining logging configuration.
-- Loading custom inflections.
-- Loading configuration files.
-
-It might be tempting to place formatting functions there in order to use them in
-your controllers. As you'll see in the :doc:`/controllers` and :doc:`/views`
-sections there are better ways you add custom logic to your application.
-
-.. _application-bootstrap:
-
-Application::bootstrap()
-------------------------
-
-In addition to the **config/bootstrap.php** file which should be used to
-configure low-level concerns of your application, you can also use the
-``Application::bootstrap()`` hook method to load/initialize plugins, and attach
-global event listeners::
-
-    // in src/Application.php
-    namespace App;
-
-    use Cake\Core\Plugin;
-    use Cake\Http\BaseApplication;
-
-    class Application extends BaseApplication
-    {
-        public function bootstrap()
-        {
-            // Call the parent to `require_once` config/bootstrap.php
-            parent::bootstrap();
-
-            $this->addPlugin('MyPlugin', ['bootstrap' => true, 'routes' => true]);
-        }
-    }
-
-Loading plugins/events in ``Application::bootstrap()`` makes
-:ref:`integration-testing` easier as events and routes will be re-processed on
-each test method.
-
 Disabling Generic Tables
 ========================
 

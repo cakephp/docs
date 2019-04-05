@@ -68,15 +68,16 @@ process, you can use the ``MiddlewareQueue`` object to attach middleware::
     namespace App;
 
     use Cake\Http\BaseApplication;
+    use Cake\Http\MiddlewareQueue;
     use Cake\Error\Middleware\ErrorHandlerMiddleware;
 
     class Application extends BaseApplication
     {
-        public function middleware($middlewareQueue)
+        public function middleware(MiddlewareQueue $middlwareQueue): MiddlewareQueue
         {
             // Bind the error handler into the middleware queue.
-            $middlewareQueue->add(new ErrorHandlerMiddleware());
-            return $middlewareQueue;
+            $middlwareQueue->add(new ErrorHandlerMiddleware());
+            return $middlwareQueue;
         }
     }
 
@@ -86,19 +87,19 @@ a variety of operations::
         $layer = new \App\Middleware\CustomMiddleware;
 
         // Added middleware will be last in line.
-        $middlewareQueue->add($layer);
+        $middlwareQueue->add($layer);
 
         // Prepended middleware will be first in line.
-        $middlewareQueue->prepend($layer);
+        $middlwareQueue->prepend($layer);
 
         // Insert in a specific slot. If the slot is out of
         // bounds, it will be added to the end.
-        $middlewareQueue->insertAt(2, $layer);
+        $middlwareQueue->insertAt(2, $layer);
 
         // Insert before another middleware.
         // If the named class cannot be found,
         // an exception will be raised.
-        $middlewareQueue->insertBefore(
+        $middlwareQueue->insertBefore(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
@@ -106,7 +107,7 @@ a variety of operations::
         // Insert after another middleware.
         // If the named class cannot be found, the
         // middleware will added to the end.
-        $middlewareQueue->insertAfter(
+        $middlwareQueue->insertAfter(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
@@ -118,110 +119,25 @@ middleware to specific sets of routes using
 Adding Middleware from Plugins
 ------------------------------
 
-After the middleware queue has been prepared by the application, the
-``Server.buildMiddleware`` event is triggered. This event can be useful to add
-middleware from plugins. Plugins can register listeners in their bootstrap
-scripts, that add middleware::
+Plugins can use their ``middleware`` hook method to apply any middleware they
+have to the application's middleware queue::
 
-    // In ContactManager plugin bootstrap.php
-    use Cake\Event\EventManager;
+    // in plugins/ContactManager/src/Plugin.php
+    namespace ContactManager;
 
-    EventManager::instance()->on(
-        'Server.buildMiddleware',
-        function ($event, $middlewareQueue) {
-            $middlewareQueue->add(new ContactPluginMiddleware());
-        });
+    use Cake\Core\BasePlugin;
+    use Cake\Http\MiddlewareQueue;
+    use ContactManager\Middleware\ContactManagerContextMiddleware;
 
-PSR-7 Requests and Responses
-============================
+    class Plugin extends BasePlugin
+    {
+        public function middleware(MiddlewareQueue $middlwareQueue): MiddlewareQueue
+        {
+            $middlwareQueue->add(new ContactManagerContextMiddleware());
 
-Middleware and the new HTTP stack are built on top of the `PSR-7 Request
-& Response Interfaces <http://www.php-fig.org/psr/psr-7/>`__. While all
-middleware will be exposed to these interfaces, your controllers, components,
-and views will *not*.
-
-Interacting with Requests
--------------------------
-
-The ``RequestInterface`` provides methods for interacting with the headers,
-method, URI, and body of a request. To interact with the headers, you can::
-
-    // Read a header as text
-    $value = $request->getHeaderLine('Content-Type');
-
-    // Read header as an array
-    $value = $request->getHeader('Content-Type');
-
-    // Read all the headers as an associative array.
-    $headers = $request->getHeaders();
-
-Requests also give access to the cookies and uploaded files they contain::
-
-    // Get an array of cookie values.
-    $cookies = $request->getCookieParams();
-
-    // Get a list of UploadedFile objects
-    $files = $request->getUploadedFiles();
-
-    // Read the file data.
-    $files[0]->getStream();
-    $files[0]->getSize();
-    $files[0]->getClientFileName();
-
-    // Move the file.
-    $files[0]->moveTo($targetPath);
-
-Requests contain a URI object, which contains methods for interacting with the
-requested URI::
-
-    // Get the URI
-    $uri = $request->getUri();
-
-    // Read data out of the URI.
-    $path = $uri->getPath();
-    $query = $uri->getQuery();
-    $host = $uri->getHost();
-
-Lastly, you can interact with a request's 'attributes'. CakePHP uses these
-attributes to carry framework specific request parameters. There are a few
-important attributes in any request handled by CakePHP:
-
-* ``base`` contains the base directory for your application if there is one.
-* ``webroot`` contains the webroot directory for your application.
-* ``params`` contains the results of route matching once routing rules have been
-  processed.
-* ``session`` contains an instance of CakePHP's ``Session`` object. See
-  :ref:`accessing-session-object` for more information on how to use the session
-  object.
-
-Interacting with Responses
---------------------------
-
-The methods available to create a server response are the same as those
-available when interacting with :ref:`httpclient-response-objects`. While the
-interface is the same the usage scenarios are different.
-
-When modifying the response, it is important to remember that responses are
-**immutable**. You must always remember to store the results of any setter
-method. For example::
-
-    // This does *not* modify $response. The new object was not
-    // assigned to a variable.
-    $response->withHeader('Content-Type', 'application/json');
-
-    // This works!
-    $newResponse = $response->withHeader('Content-Type', 'application/json');
-
-Most often you'll be setting headers and response bodies on requests::
-
-    // Assign headers and a status code
-    $response = $response->withHeader('Content-Type', 'application/json')
-        ->withHeader('Pragma', 'no-cache')
-        ->withStatus(422);
-
-    // Write to the body
-    $body = $response->getBody();
-    $body->write(json_encode(['errno' => $errorCode]));
+            return $middlwareQueue;
+        }
+    }
 
 Creating Middleware
 ===================
@@ -252,7 +168,10 @@ creating their own response. We can see both options in our simple middleware::
 
     class TrackingCookieMiddleware implements MiddlewareInterface
     {
-        public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+        public function process(
+            ServerRequestInterface $request,
+            RequestHandlerInterface $handler
+        ): ResponseInterface 
         {
             // Calling $handler->handle() delegates control to the *next* middleware
             // In your application's queue.
@@ -282,14 +201,14 @@ application::
 
     class Application
     {
-        public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+        public function middleware(MiddlewareQueue $middlwareQueue): MiddlewareQueue
         {
             // Add your simple middleware onto the queue
-            $middlewareQueue->add(new TrackingCookieMiddleware());
+            $middlwareQueue->add(new TrackingCookieMiddleware());
 
             // Add some more middleware onto the queue
 
-            return $middlewareQueue;
+            return $middlwareQueue;
         }
     }
 
@@ -306,10 +225,10 @@ enable cached routes, provide the desired :ref:`cache configuration
 <cache-configuration>` as a parameter::
 
     // In Application.php
-    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+    public function middleware(MiddlewareQueue $middlwareQueue): MiddlewareQueue
     {
         // ...
-        $middlewareQueue->add(new RoutingMiddleware($this, 'routing'));
+        $middlwareQueue->add(new RoutingMiddleware($this, 'routing'));
     }
 
 The above would use the ``routing`` cache engine to store the generated route
@@ -344,7 +263,7 @@ your application's middleware stack::
         ->noOpen()
         ->noSniff();
 
-    $middlewareQueue->add($securityHeaders);
+    $middlwareQueue->add($securityHeaders);
 
 .. _encrypted-cookie-middleware:
 
@@ -364,7 +283,7 @@ Cookie data is encrypted with via OpenSSL using AES::
         Configure::read('Security.cookieKey')
     );
 
-    $middlewareQueue->add($cookies);
+    $middlwareQueue->add($cookies);
 
 .. note::
     It is recommended that the encryption key you use for cookie data, is used
@@ -392,14 +311,14 @@ stack you protect all the actions in application::
     // in src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
 
-    public function middleware($middlewareQueue) {
+    public function middleware($middlwareQueue) {
         $options = [
             // ...
         ];
         $csrf = new CsrfProtectionMiddleware($options);
 
-        $middlewareQueue->add($csrf);
-        return $middlewareQueue;
+        $middlwareQueue->add($csrf);
+        return $middlwareQueue;
     }
 
 By applying the ``CsrfProtectionMiddleware`` to routing scopes, you can include

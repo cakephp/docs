@@ -376,9 +376,9 @@ replace the existing ``tags._ids`` control with the following::
     echo $this->Form->control('tag_string', ['type' => 'text']);
     
 We'll also need to update the article view template. In
-**src/Template/Articles/view.ctp** add the line as shown::
+**src/Template/Articles/view.php** add the line as shown::
 
-    <!-- File: src/Template/Articles/view.ctp -->
+    <!-- File: templates/Articles/view.php -->
 
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>

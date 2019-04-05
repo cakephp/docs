@@ -32,7 +32,7 @@ reference. Some of the duties ``ServerRequest`` performs include:
 * Providing access to request parameters both as array indexes and object
   properties.
 
-As of 3.4.0, CakePHP's request object implements the `PSR-7
+CakePHP's request object implements the `PSR-7
 ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ making it easier to
 use libraries from outside of CakePHP.
 
@@ -279,9 +279,12 @@ There are several built-in detectors that you can use:
 Session Data
 ------------
 
-To access the session for a given request use the ``session()`` method::
+To access the session for a given request use the ``getSession()`` method or use the ``session`` attribute::
 
-    $userName = $this->request->session()->read('Auth.User.name');
+    $session = $this->request->getSession();
+    $session = $this->request->getAttribute('session');
+
+    $userName = $session->read('Auth.User.name');
 
 For more information, see the :doc:`/development/sessions` documentation for how
 to use the session object.
@@ -441,6 +444,39 @@ Request cookies can be read through a number of methods::
 
 See the :php:class:`Cake\\Http\\Cookie\\CookieCollection` documentation for how
 to work with cookie collection.
+
+
+Uploaded Files
+--------------
+
+Requests expose the uploaded file data in ``getData()`` as 
+arrays, and as ``UploadedFileInterface`` objects by ``getUploadedFiles()``::
+
+    // Get a list of UploadedFile objects
+    $files = $request->getUploadedFiles();
+
+    // Read the file data.
+    $files[0]->getStream();
+    $files[0]->getSize();
+    $files[0]->getClientFileName();
+
+    // Move the file.
+    $files[0]->moveTo($targetPath);
+
+Manipulating URIs
+-----------------
+
+Requests contain a URI object, which contains methods for interacting with the
+requested URI::
+
+    // Get the URI
+    $uri = $request->getUri();
+
+    // Read data out of the URI.
+    $path = $uri->getPath();
+    $query = $uri->getQuery();
+    $host = $uri->getHost();
+
 
 .. index:: $this->response
 

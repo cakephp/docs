@@ -72,7 +72,9 @@ completed, your directory setup should look something like the following::
       /config
       /logs
       /plugins
+      /resources
       /src
+      /templates
       /tests
       /tmp
       /vendor
