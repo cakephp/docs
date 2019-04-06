@@ -53,6 +53,11 @@ Template
 View
     表示用のクラスが、ここに配置されます。ビュー、セル、ヘルパーなどです。
 
+.. note::
+
+    ``Command`` と ``Locale`` フォルダーは、デフォルトでは存在しません。
+    必要に応じて追加することができます。
+
 .. meta::
     :title lang=ja: CakePHP のフォルダー構成
     :keywords lang=ja: internal libraries,core configuration,model descriptions,external vendors,connection details,folder structure,party libraries,personal commitment,database connection,internationalization,configuration files,folders,application development,readme,lib,configured,logs,config,third party,cakephp
