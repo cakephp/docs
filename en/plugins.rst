@@ -4,16 +4,15 @@ Plugins
 CakePHP allows you to set up a combination of controllers, models,
 and views and release them as a pre-packaged application plugin that
 others can use in their CakePHP applications. If you've created
-great user management, simple blog, or web services module in one of
+great user management, a simple blog, or web service adapters in one of
 your applications, why not package it as a CakePHP plugin? This way you
 can reuse it in your other applications, and share with the community!
 
 A CakePHP plugin is separate from the host application itself and generally
 provides some well-defined functionality that can be packaged up neatly, and
 reused with little effort in other applications. The application and the plugin
-operate in their own respective spaces, but share application-specific
-properties (e.g. database connectivity parameters) which are defined and shared
-through the application's configuration.
+operate in their own respective spaces, but share the application's
+configuration data (e.g. database connections, email transports)
 
 In CakePHP 3.0 each plugin defines its own top-level namespace. For example:
 ``DebugKit``. By convention, plugins use their package name as their namespace.
@@ -200,6 +199,15 @@ You would then be able to access the ``ContactInfoHelper`` just like
 any other helper in your view, such as::
 
     echo $this->ContactInfo->address($contact);
+
+Plugins can use the models, components, behaviors and helpers provided by the
+application, or other plugins if necessary::
+
+   // Use an application component
+   $this->loadComponent('AppFlash');
+
+   // Use another plugin's behavior
+   $this->addBehavior('OtherPlugin.AuditLog');
 
 .. _plugin-create-your-own:
 
@@ -498,8 +506,8 @@ Alternatively, from a controller context, you can use::
 
     $this->loadModel('ContactsMangager.Contacts');
 
-Plugin Views
-============
+Plugin Templates
+================
 
 Views behave exactly as they do in normal applications. Just place them in the
 right folder inside of the ``plugins/[PluginName]/templates/`` folder. For our
@@ -602,7 +610,7 @@ of the URL for an asset within that plugin to serve it. Linking to
 Components, Helpers and Behaviors
 =================================
 
-A plugin can have Components, Helpers and Behaviors just like a regular CakePHP
+A plugin can have Components, Helpers and Behaviors just like a CakePHP
 application. You can even create plugins that consist only of Components,
 Helpers or Behaviors which can be a great way to build reusable components that
 can be dropped into any project.

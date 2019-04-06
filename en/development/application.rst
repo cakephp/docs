@@ -13,7 +13,7 @@ methods:
 * ``bootstrap`` Used to load :doc:`configuration files
   </development/configuration>`, define constants and other global functions.
   By default this will include **config/bootstrap.php**. This is the ideal place
-  to load the :doc:`/plugins` your application uses.
+  to load :doc:`/plugins` and global :doc:`event listeners </core-libraries/events>`.
 * ``routes`` Used to load :doc:`routes </development/routing>`. By default this
   will include **config/routes.php**.
 * ``middleware`` Used to add :doc:`middleware </controllers/middleware>` to your application.

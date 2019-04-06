@@ -8,6 +8,9 @@ CakePHP comes with a number of built-in commands for speeding up your
 development, and automating routine tasks. You can use these same libraries to
 create commands for your application and plugins.
 
+.. versionadded:: 3.6.0
+    Commands were added to replace Shells long term. Shells & Tasks have several shortcomings that are hard to correct without breaking compatibility.
+
 Creating a Command
 ==================
 

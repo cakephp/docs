@@ -178,7 +178,7 @@ as necessary. Our ``UserStatistics`` listener might start out like::
             ];
         }
 
-        public function updateBuyStatistic($event, $order)
+        public function updateBuyStatistic($event)
         {
             // Code to update statistics
         }

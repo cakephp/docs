@@ -332,6 +332,7 @@ or exclude specific route groups::
             // ...
         ];
         $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware($options));
+        parent::routes($routes);
     }
 
     // in config/routes.php
@@ -355,6 +356,12 @@ The available configuration options are:
 When enabled, you can access the current CSRF token on the request object::
 
     $token = $this->request->getParam('_csrfToken');
+
+.. note::
+
+    You should apply the CSRF protection middleware only for URLs which handle stateful
+    requests using cookies/session. Stateless requests, for e.g. when developing an API,
+    are not affected by CSRF so the middleware does not need to be applied for those URLs.
 
 Integration with FormHelper
 ---------------------------

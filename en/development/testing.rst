@@ -646,7 +646,11 @@ Fixture directory. You can also load fixtures from CakePHP core, or plugins::
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['plugin.DebugKit.Articles', 'plugin.MyVendorName/MyPlugin.Messages', 'core.Comments'];
+        public $fixtures = [
+            'plugin.DebugKit.Articles',
+            'plugin.MyVendorName/MyPlugin.Messages',
+            'core.Comments'
+        ];
     }
 
 Using the ``core`` prefix will load fixtures from CakePHP, and using a plugin
@@ -1070,7 +1074,8 @@ you can use the remaining ``IntegrationTestTrait`` features as normal.
 
 You should also take care to try and use :ref:`application-bootstrap` to load
 any plugins containing events/routes. Doing so will ensure that your
-events/routes are connected for each test case.
+events/routes are connected for each test case. Alternatively if you wish to
+load plugins manually in a test you can use the ``loadPlugins()`` method.
 
 Testing with Encrypted Cookies
 ------------------------------
@@ -1101,10 +1106,13 @@ retain flash messages in the session so you can write assertions::
     $this->assertSession('That bookmark does not exist', 'Flash.flash.0.message');
 
     // Assert a flash message in the 'flash' key.
-    $this->assertFlashMessage('Bookmark deleted');
+    $this->assertFlashMessage('Bookmark deleted', 'flash');
 
-    // Assert the second flash message
+    // Assert the second flash message, also  in the 'flash' key.
     $this->assertFlashMessageAt(1, 'Bookmark really deleted');
+
+    // Assert a flash message in the 'auth' key at the first position
+    $this->assertFlashMessageAt(0, 'You are not allowed to enter this dungeon!', 'auth');
 
     // Assert a flash messages uses the error element
     $this->assertFlashElement('Flash/error');
