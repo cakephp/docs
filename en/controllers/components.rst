@@ -54,8 +54,8 @@ also be expressed as::
         $this->RequestHandler->setConfig('viewClassMap', ['rss' => 'MyRssView']);
     }
 
-Like helpers, components implement a ``getConfig()`` method that is used to get and
-set any configuration data for a component::
+Like helpers, components implement ``getConfig()`` and ``setConfig()`` methods
+to read and write configuration data::
 
     // Read config data.
     $this->RequestHandler->getConfig('viewClassMap');
