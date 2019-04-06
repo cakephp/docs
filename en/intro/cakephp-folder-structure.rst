@@ -38,6 +38,8 @@ development. Let's look a little closer at the folders inside
 Command
     Contains your application's console commands. See
     :doc:`/console-and-shells/commands` to learn more.
+Console
+    Contains the installation script executed by Composer.
 Controller
     Contains your application's :doc:`/controllers` and their components.
 Locale
@@ -49,11 +51,16 @@ Model
 Shell
     Contains shell tasks for your application.
     For more information see :doc:`/console-and-shells`.
-View
-    Presentational classes are placed here: views, cells, helpers.
 Template
     Presentational files are placed here: elements, error pages,
     layouts, and view template files.
+View
+    Presentational classes are placed here: views, cells, helpers.
+
+.. note::
+
+    The folders ``Command`` and ``Locale`` are not there by default.
+    You can add them when you need them.
 
 .. meta::
     :title lang=en: CakePHP Folder Structure

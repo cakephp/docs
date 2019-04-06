@@ -174,7 +174,7 @@ Configure
 Console
 =======
 
-A new way to build CLI tools has been added. Shell & Tasks have several
+A new way to build CLI tools has been added. Shells & Tasks have several
 shortcomings that are hard to correct without breaking compatibility.
 ``Cake\Console\Command`` will replace ``Shell`` long term as the recommended way
 to build console applications. See the :doc:`/console-and-shells/commands`
