@@ -130,6 +130,16 @@ CakePHP は内部構造を構築することができます。 ::
         'spacer' => ' '
     ]);
 
+クロージャーを使用する例です。 ::
+
+    $query = $categories->find('treeList', [
+        'keyPath' => 'url',
+        'valuePath' => function($entity){
+            return $entity->url . ' ' . $entity->id
+         },
+        'spacer' => ' '
+    ]);
+
 とても一般的な作業の1つは、特定のノードからツリーのルートまでのツリーパスを見つけることです。
 例えば、メニュー構造を表すパンくずリストを追加するのに便利です。 ::
 
