@@ -41,7 +41,7 @@ development. Let's look a little closer at the folders inside
 
 Command
     Contains your application's console commands. See
-    :doc:`/console-and-shells/commands` to learn more.
+    :doc:`/console-commands/commands` to learn more.
 Console
     Contains the installation script executed by Composer.
 Controller
@@ -54,7 +54,7 @@ Model
     Contains your application's tables, entities and behaviors.
 Shell
     Contains shell tasks for your application.
-    For more information see :doc:`/console-and-shells`.
+    For more information see :doc:`/console-commands/shells`.
 View
     Presentational classes are placed here: views, cells, helpers.
 

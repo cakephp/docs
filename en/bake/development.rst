@@ -8,11 +8,10 @@ view class which uses the `Twig <https://twig.symfony.com/>`_ template engine.
 Bake Events
 ===========
 
-As a view class, ``BakeView`` emits the same events as any other view class,
-plus one extra initialize event. However, whereas standard view classes use the
-event prefix "View.", ``BakeView`` uses the event prefix "Bake.".
+As a view class, ``BakeView`` emits the similar events to the standard view
+classes, but prefixed with ``Bake.`` instead of ``View.``.
 
-The initialize event can be used to make changes which apply to all baked
+The ``Bake.initialize`` event can be used to make changes which apply to all baked
 output, for example to add another helper to the bake view class this event can
 be used::
 
@@ -112,57 +111,37 @@ to modify bake template files, is to bake a class and compare the template used
 with the pre-processed template file which is left in the application's
 **tmp/bake** folder.
 
-So, for example, when baking a shell like so:
+So, for example, when baking a command like so:
 
 .. code-block:: bash
 
-    bin/cake bake shell Foo
+    bin/cake bake command Foo
 
-The template used (**vendor/cakephp/bake/templates/Bake/Shell/shell.twig**)
+The template used (**vendor/cakephp/bake/templates/Bake/Command/command.twig**)
 looks like this::
 
     <?php
     namespace {{ namespace }}\Shell;
 
-    use Cake\Console\Shell;
+    use Cake\Console\Arguments;
+    use Cake\Console\Command;
+    use Cake\Console\ConsoleIo;
 
     /**
-     * {{ name }} shell command.
+     * {{ name }} command.
      */
-    class {{ name }}Shell extends Shell
+    class {{ name }}Command extends Command
     {
         /**
-         * main() method.
+         * Implement this method with your command's logic.
          *
-         * @return bool|int Success or error code.
+         * @param \Cake\Console\Arguments $args The command arguments.
+         * @param \Cake\Console\ConsoleIo $io The console io
+         * @return null|int The exit code or null for success
          */
-        public function main()
+        public function execute(Arguments $args, ConsoleIo $io)
         {
         }
-
-    }
-
-And the resultant baked class (**src/Shell/FooShell.php**) looks like this::
-
-    <?php
-    namespace App\Shell;
-
-    use Cake\Console\Shell;
-
-    /**
-     * Foo shell command.
-     */
-    class FooShell extends Shell
-    {
-        /**
-         * main() method.
-         *
-         * @return bool|int Success or error code.
-         */
-        public function main()
-        {
-        }
-
     }
 
 .. _creating-a-bake-theme:
@@ -204,36 +183,36 @@ Creating New Bake Command Options
 
 It's possible to add new bake command options, or override the ones provided by
 CakePHP by creating tasks in your application or plugins. By extending
-``Bake\Shell\Task\BakeTask``, bake will find your new task and include it as
-part of bake.
+``Bake\Command\BakeCommand`` or ``SimpleBakeCommand``, bake will find your new
+task and include it as part of bake.
 
 As an example, we'll make a task that creates an arbitrary foo class. First,
-create the task file **src/Shell/Task/FooTask.php**. We'll extend the
-``SimpleBakeTask`` for now as our shell task will be simple. ``SimpleBakeTask``
-is abstract and requires us to define 3 methods that tell bake what the task is
+create the task file **src/Command/FooCommand.php**. We'll extend the
+``SimpleBakeCommand`` for now as we don't need any logic to generate our code. ``SimpleBakeTask``
+requires us to define 3 methods that tell bake what the task is
 called, where the files it generates should go, and what template to use. Our
-FooTask.php file should look like::
+``FooCommand.php`` file should look like::
 
     <?php
-    namespace App\Shell\Task;
+    namespace App\Command;
 
-    use Bake\Shell\Task\SimpleBakeTask;
+    use Bake\Command\SimpleBakeCommand;
 
-    class FooTask extends SimpleBakeTask
+    class FooCommand extends SimpleBakeCommand
     {
         public $pathFragment = 'Foo/';
 
-        public function name()
+        public function name(): string
         {
             return 'foo';
         }
 
-        public function fileName($name)
+        public function fileName(string $name): string
         {
             return $name . 'Foo.php';
         }
 
-        public function template()
+        public function template(): string
         {
             return 'foo';
         }
@@ -262,19 +241,27 @@ for your application to use.
 
 If you want the ``bake`` call to also create a test file for your
 ``ExampleFoo`` class, you need to overwrite the ``bakeTest()`` method in the
-``FooTask`` class to register the class suffix and namespace for your custom
+``FooCommand`` class to register the class suffix and namespace for your custom
 command name::
 
-    public function bakeTest($className)
-    {
-        if (!isset($this->Test->classSuffixes[$this->name()])) {
-          $this->Test->classSuffixes[$this->name()] = 'Foo';
-        }
 
-        $name = ucfirst($this->name());
-        if (!isset($this->Test->classTypes[$name])) {
-          $this->Test->classTypes[$name] = 'Foo';
+    public function bakeTest(string $className, Arguments $args, ConsoleIo $io): void
+    {
+        if ($args->getOption('no-test')) {
+            return;
         }
+        $test = new \Bake\Command\TestCommand();
+        $test->plugin = $this->plugin;
+
+        $name = $this->name();
+        if (!isset($test->classSuffixes[$name])) {
+          $test->classSuffixes[$name] = 'Foo';
+        }
+        $title = ucfirst($name);
+        if (!isset($test->classTypes[$title])) {
+          $test->classTypes[$title] = 'Foo';
+        }
+        $test->bake($name, $className, $args, $io);
 
         return parent::bakeTest($className);
     }

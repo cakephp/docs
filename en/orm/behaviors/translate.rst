@@ -19,11 +19,11 @@ Translation Strategies
 The behavior offers two strategies for how the translations are stored.
 
 1. Eav Strategy: This strategy uses a ``i18n`` table where it stores the
-  translation for each of the fields of any given Table object that it's bound to.
-  This is currently the default strategy used by the behavior.
+   translation for each of the fields of any given Table object that it's bound to.
+   This is currently the default strategy used by the behavior.
 
 2. Shadow table Strategy: This strategy use a separate "shadow table" for each
-  Table object to store translation of all translated fields of that table.
+   Table object to store translation of all translated fields of that table.
 
 
 Eav Strategy

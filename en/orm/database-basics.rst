@@ -934,7 +934,7 @@ You can also configure the metadata caching at runtime with the
     $connection->cacheMetadata('orm_metadata');
 
 CakePHP also includes a CLI tool for managing metadata caches. See the
-:doc:`/console-and-shells/schema-cache` chapter for more information.
+:doc:`/console-commands/schema-cache` chapter for more information.
 
 Creating Databases
 ==================

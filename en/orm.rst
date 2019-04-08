@@ -22,12 +22,6 @@ both patterns to create a fast, simple to use ORM.
 Before we get started exploring the ORM, make sure you :ref:`configure your
 database connections <database-configuration>`.
 
-.. note::
-
-    If you are familiar with previous versions of CakePHP, you should read the
-    :doc:`/appendices/orm-migration` for important differences between CakePHP 3.0
-    and older versions of CakePHP.
-
 Quick Example
 =============
 
@@ -124,4 +118,4 @@ More Information
     orm/associations
     orm/behaviors
     orm/schema-system
-    console-and-shells/schema-cache
+    console-commands/schema-cache

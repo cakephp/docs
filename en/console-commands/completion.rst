@@ -1,4 +1,4 @@
-Completion Shell
+Completion Tool
 ################
 
 Working with the console gives the developer a lot of possibilities but having

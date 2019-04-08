@@ -1,10 +1,12 @@
 .. _plugin-shell:
 
-Plugin Shell
-############
+Plugin Tool
+###########
 
-The plugin shell allows you to load and unload plugins via the command prompt.
-If you need help, run::
+The plugin tool allows you to load and unload plugins via the command prompt.
+If you need help, run:
+
+.. code-block:: bash
 
     bin/cake plugin --help
 
@@ -12,7 +14,9 @@ Loading Plugins
 ---------------
 
 Via the ``Load`` task you are able to load plugins in your
-**config/bootstrap.php**. You can do this by running::
+**config/bootstrap.php**. You can do this by running:
+
+.. code-block:: bash
 
     bin/cake plugin load MyPlugin
 
@@ -22,7 +26,9 @@ This will add the following to your **src/Application.php**::
     $this->addPlugin('MyPlugin');
 
 If you are loading a plugin that only provides CLI tools - like bake - you can
-update your ``bootstrap_cli.php`` with::
+update your ``bootstrap_cli.php`` with:
+
+.. code-block:: bash
 
     bin/cake plugin load --cli MyPlugin
     bin/cake plugin unload --cli MyPlugin
@@ -30,7 +36,9 @@ update your ``bootstrap_cli.php`` with::
 Unloading Plugins
 -----------------
 
-You can unload a plugin by specifying its name::
+You can unload a plugin by specifying its name:
+
+.. code-block:: bash
 
     bin/cake plugin unload MyPlugin
 
@@ -43,7 +51,9 @@ Plugin Assets
 CakePHP by default serves plugins assets using the ``AssetMiddleware`` middleware.
 While this is a good convenience, it is recommended to symlink / copy
 the plugin assets under app's webroot so that they can be directly served by the
-web server without invoking PHP. You can do this by running::
+web server without invoking PHP. You can do this by running:
+
+.. code-block:: bash
 
     bin/cake plugin assets symlink
 
@@ -51,10 +61,12 @@ Running the above command will symlink all plugins assets under app's webroot.
 On Windows, which doesn't support symlinks, the assets will be copied in
 respective folders instead of being symlinked.
 
-You can symlink assets of one particular plugin by specifying its name::
+You can symlink assets of one particular plugin by specifying its name:
+
+.. code-block:: bash
 
     bin/cake plugin assets symlink MyPlugin
 
 .. meta::
-    :title lang=en: Plugin Shell
-    :keywords lang=en: plugin,assets,shell,load,unload
+    :title lang=en: Plugin tool
+    :keywords lang=en: plugin,assets,tool,load,unload

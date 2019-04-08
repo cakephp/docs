@@ -17,7 +17,7 @@ methods:
 * ``routes`` Used to load :doc:`routes </development/routing>`. By default this
   will include **config/routes.php**.
 * ``middleware`` Used to add :doc:`middleware </controllers/middleware>` to your application.
-* ``console`` Used to add :doc:`console commands </console-and-shells>` to your
+* ``console`` Used to add :doc:`console commands </console-commands>` to your
   application. By default this will automatically discover shells & commands in
   your application and all plugins.
 

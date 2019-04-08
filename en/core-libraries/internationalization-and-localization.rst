@@ -95,7 +95,7 @@ Extract Pot Files with I18n Shell
 
 To create the pot files from `__()` and other internationalized types of
 messages that can be found in the application code, you can use the i18n shell.
-Please read the :doc:`following chapter </console-and-shells/i18n-shell>` to
+Please read the :doc:`following chapter </console-commands/i18n>` to
 learn more.
 
 Setting the Default Locale
@@ -594,7 +594,7 @@ Parsing Localized Datetime Data
 
 When accepting localized data from the request, it is nice to accept datetime
 information in a user's localized format. In a controller, or
-:doc:`/development/dispatch-filters` you can configure the Date, Time, and
+:doc:`/development/middleware` you can configure the Date, Time, and
 DateTime types to parse localized formats::
 
     use Cake\Database\Type;

@@ -22,19 +22,21 @@ build your own backend. The built-in caching engines are:
   atomic operations. However, since disk storage is often quite cheap,
   storing large objects, or elements that are infrequently written
   work well in files.
+* ``Memcached`` Uses the `Memcached <http://php.net/memcached>`_
+  extension.
+* ``Redis`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
+  extension. Redis provides a fast and persistent cache system similar to
+  Memcached, also provides atomic operations.
 * ``Apcu`` APCu cache uses the PHP `APCu <http://php.net/apcu>`_ extension.
   This extension uses shared memory on the webserver to store objects.
   This makes it very fast, and able to provide atomic read/write features.
 * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
   extension. Wincache is similar to APC in features and performance, but
   optimized for Windows and IIS.
-* ``Memcached`` Uses the `Memcached <http://php.net/memcached>`_
-  extension.
-* ``Redis`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
-  extension. Redis provides a fast and persistent cache system similar to
-  Memcached, also provides atomic operations.
 * ``Array`` Stores all data in an array. This engine does not provide
   persistent storage and is intended for use in application test suites.
+* ``Null`` The null engine doesn't actually store anything and fails all read
+  operations. 
 
 Regardless of the CacheEngine you choose to use, your application interacts with
 :php:class:`Cake\\Cache\\Cache`.
@@ -137,10 +139,10 @@ Engine Options
 
 Each engine accepts the following options:
 
-* ``duration`` Specify how long items in this cache configuration last.
+* ``duration`` Specify a default duration for how long items are valid.
   Specified as a ``strototime()`` compatible expression.
 * ``groups`` List of groups or 'tags' associated to every key stored in this
-  config.  handy for deleting a complete group from cache.
+  config. Useful when you need to delete a subset of data from a cache.
 * ``prefix`` Prepended to all entries. Good for when you need to share
   a keyspace with either another cache config or another application.
 * ``probability`` Probability of hitting a cache gc cleanup. Setting to 0 will disable
