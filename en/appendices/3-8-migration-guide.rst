@@ -26,6 +26,9 @@ Behavior Changes
   if the find fails and the entity created from ``$search`` contains invalid
   data. Previously an invalid entity would be saved.
 
+* ``Command`` classes that have their ``$modelClass`` property set will now autoload that model.
+The manual ``loadModel()`` call with empty argument is not necessary anymore. This makes it consistent to how Shell classes worked.
+
 New Features
 ============
 
