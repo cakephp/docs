@@ -1,40 +1,23 @@
-Console Tools, Shells & Tasks
-#############################
+Console Commands
+################
 
 .. php:namespace:: Cake\Console
 
-CakePHP features not only a web framework but also a console framework for
-creating console applications. Console applications are ideal for handling a
-variety of background tasks such as maintenance, and completing work outside of
-the request-response cycle. CakePHP console applications allow you to reuse your
-application classes from the command line.
+In addition to a web framework, CakePHP also provides a console framework for
+creating command line tools & applications. Console applications are ideal for
+handling a variety of background & maintenance tasks that leverage your existing
+application configuratino, models, plugins and domain logic.
 
-CakePHP comes with a number of console applications out of the box. Some of
-these applications are used in concert with other CakePHP features (like i18n),
-and others are for general use to get you working faster.
+CakePHP provides several console tools for interacting with CakePHP features
+like i18n and routing that enable you to introspect your application and
+generate related files.
 
 The CakePHP Console
 ===================
 
-This section provides an introduction into CakePHP at the command-line. Console
-tools are ideal for use in cron jobs, or command line based utilities that don't
-need to be accessible from a web browser.
-
-PHP provides a CLI client that makes interfacing with your file system and
-applications much smoother. The CakePHP console provides a framework for
-creating shell scripts. The Console uses a dispatcher-type setup to load a shell
-or task, and provide its parameters.
-
-.. note::
-
-    A command-line (CLI) build of PHP must be available on the system
-    if you plan to use the Console.
-
-Before we get into specifics, let's make sure you can run the CakePHP console.
-First, you'll need to bring up a system terminal. The examples shown in this
-section will be in bash, but the CakePHP Console is compatible with Windows as
-well.  This example assumes that you are currently logged into a bash prompt at
-the root of your CakePHP application.
+The CakePHP Console uses a dispatcher-type system to load a commands, parse
+their arguments and invoke the correct command. While the examples below use
+bash the CakePHP console is compatible with any \*nix shell and windows.
 
 A CakePHP application contains **src/Command**, **src/Shell** and
 **src/Shell/Task** directories that contain its shells and tasks. It also
@@ -49,50 +32,8 @@ comes with an executable in the **bin** directory:
 
     For Windows, the command needs to be ``bin\cake`` (note the backslash).
 
-.. deprecated:: 3.6.0
-    Shells are deprecated as of 3.6.0, but will not be removed until 5.x.
-    Use :doc:`/console-and-shells/commands` instead.
-
-Running the Console with no arguments produces this help message::
-
-    Welcome to CakePHP v4.0.0 Console
-    ---------------------------------------------------------------
-    App : App
-    Path: /Users/markstory/Sites/cakephp-app/src/
-    ---------------------------------------------------------------
-    Current Paths:
-
-    * app: src
-    * root: /Users/markstory/Sites/cakephp-app
-    * core: /Users/markstory/Sites/cakephp-app/vendor/cakephp/cakephp
-
-    Available Commands:
-
-    - version
-    - help
-    - cache
-    - completion
-    - i18n
-    - schema_cache
-    - plugin
-    - routes
-    - server
-    - bug
-    - console
-    - event
-    - orm
-    - bake
-    - bake.bake
-    - migrations
-    - migrations.migrations
-
-    To run a command, type `cake shell_name [args|options]`
-    To get help on a specific command, type `cake shell_name --help`
-
-The first information printed relates to paths. This is helpful if you're
-running the console from different parts of the filesystem.
-
-You could then run the any of the listed commands by using its name:
+Running the Console with no arguments will list out available commands. You
+could then run the any of the listed commands by using its name:
 
 .. code-block:: bash
 
@@ -185,17 +126,16 @@ available commands.
 Commands
 ========
 
-See the :doc:`/console-and-shells/commands` chapter on how to create your first
+See the :doc:`/console-commands/commands` chapter on how to create your first
 command. Then learn more about commands:
 
 .. toctree::
     :maxdepth: 1
 
-    console-and-shells/commands
-    console-and-shells/input-output
-    console-and-shells/option-parsers
-    console-and-shells/helpers
-    console-and-shells/cron-jobs
+    console-commands/commands
+    console-commands/input-output
+    console-commands/option-parsers
+    console-commands/cron-jobs
 
 CakePHP Provided Commands
 =========================
@@ -203,16 +143,15 @@ CakePHP Provided Commands
 .. toctree::
     :maxdepth: 1
 
-    console-and-shells/cache
-    console-and-shells/i18n-shell
-    console-and-shells/completion-shell
-    console-and-shells/plugin-shell
-    console-and-shells/routes-shell
-    console-and-shells/schema-cache
-    console-and-shells/server-shell
-    console-and-shells/upgrade-shell
-    console-and-shells/shells
-    console-and-shells/repl
+    console-commands/cache
+    console-commands/i18n
+    console-commands/completion
+    console-commands/plugin
+    console-commands/routes
+    console-commands/schema-cache
+    console-commands/server
+    console-commands/shells
+    console-commands/repl
 
 Routing in the Console Environment
 ==================================

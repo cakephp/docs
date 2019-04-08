@@ -60,10 +60,9 @@ Middleware can be applied to your application globally, or to individual
 routing scopes.
 
 To apply middleware to all requests, use the ``middleware`` method of your
-``App\Application`` class.  If you don't have an ``App\Application`` class, see
-the section on :ref:`adding-http-stack` for more information. Your application's
-``middleware`` hook method will be called at the beginning of the request
-process, you can use the ``MiddlewareQueue`` object to attach middleware::
+``App\Application`` class. Your application's ``middleware`` hook method will be
+called at the beginning of the request process, you can use the
+``MiddlewareQueue`` object to attach middleware::
 
     namespace App;
 

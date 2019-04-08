@@ -17,107 +17,57 @@ tasks.
 
 For windows system try with ``bin\cake bake``.
 
-You should see something like::
+You should see something like:
 
-    $ bin/cake bake
+.. code-block:: bash
 
-    Welcome to CakePHP v3.4.6 Console
-    ---------------------------------------------------------------
-    App : src
-    Path: /var/www/cakephp.dev/src/
-    PHP : 5.6.20
-    ---------------------------------------------------------------
-    The following commands can be used to generate skeleton code for your application.
+    $ bin/cake bake -h
 
-    Available bake commands:
-
-    - all
-    - behavior
-    - cell
-    - component
-    - controller
-    - fixture
-    - form
-    - helper
-    - mailer
-    - migration
-    - migration_diff
-    - migration_snapshot
-    - model
-    - plugin
-    - seed
-    - shell
-    - shell_helper
-    - task
-    - template
-    - test
-
-    By using `cake bake [name]` you can invoke a specific bake task.
-
-You can get more information on what each task does, and what options are
-available using the ``--help`` option::
-
-    $ bin/cake bake --help
-
-    Welcome to CakePHP v3.4.6 Console
-    ---------------------------------------------------------------
-    App : src
-    Path: /var/www/cakephp.dev/src/
-    PHP : 5.6.20
-    ---------------------------------------------------------------
-    The Bake script generates controllers, models and template files for
-    your application. If run with no command line arguments, Bake guides the
-    user through the class creation process. You can customize the
-    generation process by telling Bake where different parts of your
-    application are using command line arguments.
+    Bake generates code for your application. Different types of classes can
+    be generated with the subcommands listed below. For example run
+    bake controller --help to learn more about generating a
+    controller.
 
     Usage:
-    cake bake.bake [subcommand] [options]
+    cake bake [subcommand] [-h] [-q] [-v]
 
     Subcommands:
 
-    all                 Bake a complete MVC skeleton.
-    behavior            Bake a behavior class file.
-    cell                Bake a cell class file.
-    component           Bake a component class file.
-    controller          Bake a controller skeleton.
-    fixture             Generate fixtures for use with the test suite. You
-                        can use `bake fixture all` to bake all fixtures.
-    form                Bake a form class file.
-    helper              Bake a helper class file.
-    mailer              Bake a mailer class file.
-    migration           Bake migration class.
-    migration_diff      Bake migration class.
-    migration_snapshot  Bake migration snapshot class.
-    model               Bake table and entity classes.
-    plugin              Create the directory structure, AppController class
-                        and testing setup for a new plugin. Can create
-                        plugins in any of your bootstrapped plugin paths.
-    seed                Bake seed class.
-    shell               Bake a shell class file.
-    shell_helper        Bake a shell_helper class file.
-    task                Bake a task class file.
-    template            Bake views for a controller, using built-in or
-                        custom templates.
-    test                Bake test case skeletons for classes.
+    all             Generate all files.
+    behavior        Generate behavior files.
+    cell            Generate cell files.
+    command         Generate command files.
+    component       Generate component files.
+    controller      Generate controller files.
+    controller all  Generate controller files.
+    fixture         Generate fixture files.
+    fixture all     Generate fixture files.
+    form            Generate form files.
+    helper          Generate helper files.
+    mailer          Generate mailer files.
+    middleware      Generate middleware files.
+    model           Generate model files.
+    model all       Generate model files.
+    plugin          Generate plugin files.
+    shell           Generate shell files.
+    shell_helper    Generate shell helper files.
+    task            Generate task files.
+    template        Generate template files.
+    template all    Generate template files.
+    test            Generate test files.
 
-    To see help on a subcommand use `cake bake.bake [subcommand] --help`
+    To see help on a subcommand use `cake bake [subcommand] --help`
 
     Options:
 
-    --connection, -c   Database connection to use in conjunction with `bake
-                       all`. (default: default)
-    --everything       Bake a complete MVC skeleton, using all the available
-                       tables. Usage: "bake all --everything"
-    --force, -f        Force overwriting existing files without prompting.
-    --help, -h         Display this help.
-    --plugin, -p       Plugin to bake into.
-    --prefix           Prefix to bake controllers and templates into.
-    --quiet, -q        Enable quiet output.
-    --tablePrefix      Table prefix to be used in models.
-    --theme, -t        The theme to use when baking code. (choices:
-                       Bake|Migrations)
-    --verbose, -v      Enable verbose output.
+    --help, -h     Display this help.
+    --quiet, -q    Enable quiet output.
+    --verbose, -v  Enable verbose output.
+
+    Older Shell based tasks will not be listed here, but can still be run.
+
+You can get more information on each command using the ``-h`` option. e.g:
+``bin/cake controller -h``.
 
 Bake Themes
 ===========

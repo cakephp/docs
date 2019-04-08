@@ -62,7 +62,7 @@ Check Your Security
 If you're throwing your application out into the wild, it's a good idea to make
 sure it doesn't have any obvious leaks:
 
-* Ensure you are using the :doc:`/controllers/components/csrf` component or middleware.
+* Ensure you are using the :ref:`csrf-middleware` component or middleware.
 * You may want to enable the :doc:`/controllers/components/security` component.
   It can help prevent several types of form tampering and reduce the possibility
   of mass-assignment issues.
@@ -118,7 +118,7 @@ Deploying an update
 ===================
 
 After deployment of an update you might also want to run ``bin/cake schema_cache
-clear``, part of the :doc:`/console-and-shells/schema-cache` shell.
+clear``, part of the :doc:`/console-commands/schema-cache` shell.
 
 .. meta::
     :title lang=en: Deployment

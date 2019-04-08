@@ -25,9 +25,9 @@ You can see more info here: http://en.wikipedia.org/wiki/Cron
 Cron Jobs on Shared Hosting
 ---------------------------
 
-On some shared hostings ``cd /full/path/to/root && bin/cake myshell myparam``
+On some shared hostings ``cd /full/path/to/root && bin/cake mycommand myparam``
 might not work. Instead you can use
-``php /full/path/to/root/bin/cake.php myshell myparam``.
+``php /full/path/to/root/bin/cake.php mycommand myparam``.
 
 .. note::
 
