@@ -51,13 +51,6 @@ Controller
   For example if your controller method is ``forgetPassword()`` then using string
   ``forgotpassword`` in URL will not match as action name.
 
-Database
---------
-
-* ``BoolType`` no longer marshalls non-empty string values to ``true``. Instead
-  non-boolean string values are converted to ``null``.
-
-
 Http
 ----
 
@@ -94,6 +87,10 @@ Database
   ``Type::getMap()`` to inspect type instances.
 * Date, Time, Timestamp, and Datetime column types now return immutable time
   objects by default now.
+* ``BoolType`` no longer marshalls non-empty string values to ``true``. Instead
+  non-boolean string values are converted to ``null``.
+* ``DecimalType`` now uses strings to represent decimal values instead of floats.
+  Using floats caused loss in precision.
 
 View
 ----
