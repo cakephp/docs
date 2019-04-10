@@ -763,10 +763,10 @@ However, it is possible to combine ``innerJoinWith()`` and ``contain()`` when yo
     $filter = ['Tags.name' => 'CakePHP'];
     $query = $articles->find();
     $query->distinct($articles);
-    $query->contain('Tags', function ($q) use ($filter) {
+    $query->contain('Tags', function (Cake\ORM\Query $q) use ($filter) {
         return $q->where($filter);
     })
-          ->innerJoinWith('Tags', function ($q) {
+          ->innerJoinWith('Tags', function (Cake\ORM\Query $q) {
         return $q->where($filter);
     });
 
