@@ -35,6 +35,13 @@ Entity
 * ``Entity::unsetProperty()`` has been renamed to ``Entity::unset()`` to match
   the other methods.
 
+Filesystem
+----------
+
+* This package is deprecated and will be removed in 5.0. It has a number of
+  design problems and fixing this infrequently used package does not seem worth
+  the effort when there are a great selection of packages already.
+
 Breaking Changes
 ================
 
@@ -150,13 +157,6 @@ Database
 
 * If your database's timezone does not match PHP timezone then you can use the
   ``DateTime::setTimezone()`` method. See :ref:`datetime-type` for details.
-
-Filesystem
-----------
-
-* This package is deprecated and will be removed in 5.0. It has a number of
-  design problems and fixing this infrequently used package does not seem worth
-  the effort when there are a great selection of packages already.
 
 Error
 -----
