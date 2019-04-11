@@ -761,15 +761,14 @@ result set, and no ``_matchingData`` property will be set.
 However, it is possible to combine ``innerJoinWith()`` and ``contain()`` when you need to filter by associate data and you want also to retrieve associate fields too (following the same filter)::
 
     $filter = ['Tags.name' => 'CakePHP'];
-    $query = $articles->find();
-    $query->distinct($articles);
-    $query->contain('Tags', function (\Cake\ORM\Query $q) use ($filter) {
-        return $q->where($filter);
-    })
-        ->innerJoinWith('Tags', function (\Cake\ORM\Query $q) use ($filter) {
+    $query = $articles->find()
+    	->distinct($articles)
+        ->contain('Tags', function (\Cake\ORM\Query $q) use ($filter) {
             return $q->where($filter);
-    });
-
+        })
+    	->innerJoinWith('Tags', function (\Cake\ORM\Query $q) use ($filter) {
+            return $q->where($filter);
+        });
 
 .. versionadded:: 3.1
     Query::innerJoinWith() was added in 3.1
