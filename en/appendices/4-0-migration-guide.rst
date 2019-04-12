@@ -15,7 +15,7 @@ Deprecated Features Removed
 ===========================
 
 All methods, properties and functionality that was emitting deprecation warnings
-as of 3.6 have been removed.
+as of 3.7 have been removed.
 
 Authentication functionality has been split into standalone plugins
 `Authentication <https://github.com/cakephp/authentication>`__ and `Authorization <https://github.com/cakephp/authorization>`__.
