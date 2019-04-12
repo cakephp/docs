@@ -180,7 +180,7 @@ JsonView クラスは、JSON の生成に使用するビットマスクを変更
 ``_jsonOptions`` 変数をサポートします。このオプションの有効な値は
 `json_encode <http://php.net/json_encode>`_  を参照してください。
 
-例えば、一貫した JSON 形式で CakePHP エンティティーの検証エラーをシリアライズするには ::
+例えば、一貫した JSON 形式で CakePHP エンティティーの検証エラーをシリアライズするには::
 
     // コントローラーのアクションの中で、保存に失敗した時
     $this->set('errors', $articles->errors());
