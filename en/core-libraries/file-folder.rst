@@ -7,7 +7,7 @@ The Folder and File utilities are convenience classes to help you read from and
 write/append to files; list files within a folder and other common directory
 related tasks.
 
-.. deprecated:: 5.0
+.. deprecated:: 4.0
     The ``File`` and ``Folder`` classes will be removed in 5.0
 
 Basic Usage
