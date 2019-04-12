@@ -146,7 +146,7 @@ XmlView クラスは、XML の生成に使用するオプション（例: ``tags
 ``XmlView`` の使用例は `sitemap.xml
 <https://www.sitemaps.org/protocol.html>`_ を生成することです。
 このドキュメントタイプでは ``_rootNode`` を変更し属性を設定する必要があります。
-属性は ``@`` プレフィックスを使用して定義されます。::
+属性は ``@`` プレフィックスを使用して定義されます。 ::
 
     public function sitemap()
     {
