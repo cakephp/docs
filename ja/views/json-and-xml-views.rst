@@ -143,6 +143,34 @@ XML ビューの作成
 XmlView クラスは、XML の生成に使用するオプション（例: ``tags`` vs ``attributes`` ）を
 変更するための ``_xmlOptions`` 変数をサポートしています。
 
+``XmlView`` の使用例は `sitemap.xml
+<https://www.sitemaps.org/protocol.html>`_ を生成することです。
+このドキュメントタイプでは ``_rootNode`` を変更し属性を設定する必要があります。
+属性は ``@`` プレフィックスを使用して定義されます。 ::
+
+    public function sitemap()
+    {
+        $pages = $this->Pages->find();
+        $urls = [];
+        foreach ($pages as $page) {
+            $urls[] = [
+                'loc' => Router::url(['controller' => 'Pages', 'action' => 'view', $page->slug, '_full' => true]),
+                'lastmod' => $page->modified->format('Y-m-d'),
+                'changefreq' => 'daily',
+                'priority' => '0.5'
+            ];
+        }
+
+        // 生成されたドキュメントにカスタムルートノードを定義します。
+        $this->set('_rootNode', 'urlset');
+        $this->set([
+            // ルートノードで属性を定義します。
+            '@xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
+            'url' => $urls
+        ]);
+        $this->set('_serialize', ['@xmlns', 'url']);
+    }
+
 JSON ビューの作成
 =================
 
