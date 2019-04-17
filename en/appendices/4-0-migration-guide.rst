@@ -104,10 +104,17 @@ View
 ----
 
 * Templates have been moved from ``src/Template/`` to ``templates/`` folder on
-  app and plugin root. Special templates folder like ``Cell``, ``Element``,
-  ``Email`` and ``Plugin`` have be renamed to lower case ``cell``, ``element``,
-  ``email`` and ``plugin`` respectively.
+  app and plugin root. With this change the ``src`` folder now only contains files
+  with classes that are autoloaded via composer's autoloader.
+  
+  Special templates folders like ``Cell``, ``Element``, ``Email`` and ``Plugin``
+  have be renamed to lower case ``cell``, ``element``, ``email`` and ``plugin``
+  respectively. This provides better visual distinction between special folders
+  and the folders corresponding to your app's controller names which are in 
+  ``CamelCase`` form.
 * The template extension has also been changed from ``.ctp`` to ``.php``.
+  The special extension provided no real benefit and instead required editors/IDEs
+  to be configured to recognise files with ``.ctp`` extension as PHP files.
 * ``Cake\View\View`` will re-render views if ``render()`` is called multiple
   times instead of returning ``null``.
 * ``Cake\View\Helper\PaginatorHelper::hasPage()`` has had its arguments
