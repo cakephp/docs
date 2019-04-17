@@ -104,7 +104,7 @@ View
 ----
 
 * Templates have been moved from ``src/Template/`` to ``templates/`` folder on
-  app and plugin root. With this change the `src` folder now only contains files
+  app and plugin root. With this change the ``src`` folder now only contains files
   with classes that are autoloaded via composer's autoloader.
   
   Special templates folder like ``Cell``, ``Element``, ``Email`` and ``Plugin``
