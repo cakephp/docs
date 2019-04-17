@@ -107,7 +107,7 @@ View
   app and plugin root. With this change the ``src`` folder now only contains files
   with classes that are autoloaded via composer's autoloader.
   
-  Special templates folder like ``Cell``, ``Element``, ``Email`` and ``Plugin``
+  Special templates folders like ``Cell``, ``Element``, ``Email`` and ``Plugin``
   have be renamed to lower case ``cell``, ``element``, ``email`` and ``plugin``
   respectively. This provides better visual distinction between special folders
   and the folders corresponding to your app's controller names which are in 
