@@ -114,7 +114,7 @@ View
   ``CamelCase`` form.
 * The template extension has also been changed from ``.ctp`` to ``.php``.
   The special extension provided no real benefit and instead required editors/IDEs
-  to be configured to recognise files with `.ctp` extension as PHP files.
+  to be configured to recognise files with ``.ctp`` extension as PHP files.
 * ``Cake\View\View`` will re-render views if ``render()`` is called multiple
   times instead of returning ``null``.
 * ``Cake\View\Helper\PaginatorHelper::hasPage()`` has had its arguments
