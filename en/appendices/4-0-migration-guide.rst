@@ -104,14 +104,14 @@ View
 ----
 
 * Templates have been moved from ``src/Template/`` to ``templates/`` folder on
-  app and plugin root. With this change the `src` folder  now only contains files
-  which with classes that are autoloaded via composer's autoloader.
+  app and plugin root. With this change the `src` folder now only contains files
+  with classes that are autoloaded via composer's autoloader.
   
   Special templates folder like ``Cell``, ``Element``, ``Email`` and ``Plugin``
   have be renamed to lower case ``cell``, ``element``, ``email`` and ``plugin``
   respectively. This provides better visual distinction between special folders
   and the folders corresponding to your app's controller names which are in 
-  capital case.  
+  capital case.
 * The template extension has also been changed from ``.ctp`` to ``.php``.
   The special extension provided no real benefit and instead required editors/IDEs
   to be configured to recognise files with `.ctp` extension as PHP files.
