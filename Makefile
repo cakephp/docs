@@ -20,7 +20,7 @@ DEST = website
 SPHINX_DEPENDENCIES = $(foreach lang, $(LANGS), $(lang)/Makefile)
 
 # Get path to theme directory to build static assets.
-THEME_DIR = $(shell python -c 'import os, cakephpsphinx; print os.path.abspath(os.path.dirname(cakephpsphinx.__file__))')
+THEME_DIR = $(shell python -c 'import os, cakephpsphinx; print(os.path.abspath(os.path.dirname(cakephpsphinx.__file__)))')
 
 # Copy-paste the English Makefile everywhere it's needed (if non existing).
 %/Makefile: en/Makefile
