@@ -1776,7 +1776,6 @@ code you wrote, you can use ``bake``:
 #. Mailer
 #. Command
 
-
 While ``<name>`` should be the name of the object you want to bake a test
 skeleton for.
 
