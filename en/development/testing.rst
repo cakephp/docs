@@ -1769,7 +1769,13 @@ code you wrote, you can use ``bake``:
 #. Behavior
 #. Helper
 #. Shell
+#. Task
+#. ShellHelper
 #. Cell
+#. Form
+#. Mailer
+#. Command
+
 
 While ``<name>`` should be the name of the object you want to bake a test
 skeleton for.
