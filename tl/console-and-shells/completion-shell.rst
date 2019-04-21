@@ -82,7 +82,7 @@ I-save ang file, pagkatapas ay i-restart ang iyong console.
 .. _bash-completion-file-content:
 
 Pagkumpleto ng Bash na nilalaman ng file
-----------------------------
+----------------------------------------
 
 Ito ang code na kailangan mong ilagay sa loob ng **cake** na file sa tamang lokasyon
 upang makakuha ng autocompletion kapag ginagamit ang console ng CakePHP::
@@ -140,7 +140,7 @@ upang makakuha ng autocompletion kapag ginagamit ang console ng CakePHP::
     complete -F _cake cake bin/cake
 
 Paggamit ng autocompletion
-====================
+==========================
 
 Kapag napagana, ang autocompletion ay maaaring gamitin sa parehong paraan kaysa sa ibang 
 built-in na mga utos, gamit ang **TAB** na key.

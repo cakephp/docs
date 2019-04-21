@@ -203,7 +203,7 @@ Como você pôde ver nó código acima, o metodo ``on()`` aceita instancias da i
 ``implementedEvents()`` para anexar ao callback corretamente.
 
 Registrando Listeners Anônimos
------------------------------
+------------------------------
 
 Enquanto objeto de Event Listerners são geralmente um melhor método para implementar 
 Listeners você pode utilizar uma ``callable`` como Event Listener. Por exempl se nós 

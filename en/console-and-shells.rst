@@ -215,6 +215,7 @@ CakePHP Provided Commands
     console-and-shells/server-shell
     console-and-shells/upgrade-shell
     console-and-shells/shells
+    console-and-shells/repl
 
 .. toctree::
     :hidden:
