@@ -66,7 +66,7 @@ Após você salvar a entidade, o campo é atualizado.
 Registro 'touching' pode ser útil quando você deseja avisar que um recurso pai mudou quando um recurso filho é criado/atualizado. Por exemplo: atualizar um artigo quando um novo comentário é adicionado.
 
 Salvando Atualizações Sem Alterar o Timestamp
-===========================================
+=============================================
 
 Para desativar a atualização automática do campo ``updated``, quando salvamos uma entidade, você pode marcar o atributo como 'dirty'::
 

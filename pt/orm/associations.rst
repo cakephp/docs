@@ -157,11 +157,11 @@ As chaves possíveis para uma relação hasOne incluem:
 
 - **className**: o nome da classe que está sendo associada com o modelo atual. Se você está definindo uma relação 'User hasOne Address', o nome da caheve da classe deve ser igual a 'Addresses'.
 - **foreignKey**:  o nome da chave estrangeira na outra tabela. Este é especialmente acessivel se você precisa definir vários relacionamentos hasOne.
-   O valor padrão para esta chave é o nome sublinhado, singular do modelo atual, seguido do sufixo com '\ _id'. No exemplo acima, seria o padrão para
-   'user\_id'.
+  O valor padrão para esta chave é o nome sublinhado, singular do modelo atual, seguido do sufixo com '\ _id'. No exemplo acima, seria o padrão para
+  'user\_id'.
 - **bindingKey**: O nome da coluna na tabela atual, que será usado
-   para combinar com``foreignKey``. Se não for especificado, a chave primária (para
-   exemplo, a coluna de identificação da tabela ``Users``) será usado.
+  para combinar com``foreignKey``. Se não for especificado, a chave primária (para
+  exemplo, a coluna de identificação da tabela ``Users``) será usado.
 - **conditions**: um array de find() compatível com as condições como
   ``['Addresses.primary' => true]``
 - **joinType**: o tipo do join a ser usado para o SQL query, o padão é LEFT. Você pode usar o INNER se a sua associação é hasOne e estiver sempre presente.
@@ -323,37 +323,37 @@ Confiando no exemplo acima, nos passamos uma array contendo as chaves desejadas 
 As chaves possiveis para as associações hasMany são:
 
 - **className**: o nome da classe do modelo associado a
-   o modelo atual. Se você estiver definindo um 'Usuário tem muitos comentários'
-   relacionamento, a chave className deve ser igual a 'Comentários'.
+  o modelo atual. Se você estiver definindo um 'Usuário tem muitos comentários'
+  relacionamento, a chave className deve ser igual a 'Comentários'.
 - **foreignKey**: o nome da chave estrangeira encontrada no outro
-   mesa. Isto é especialmente útil se você precisar definir múltiplos
-   tem muitos relacionamentos. O valor padrão para esta chave é o
-   sublinhado, nome singular do modelo real, sufixo com
-   '\_id'.
+  mesa. Isto é especialmente útil se você precisar definir múltiplos
+  tem muitos relacionamentos. O valor padrão para esta chave é o
+  sublinhado, nome singular do modelo real, sufixo com
+  '\_id'.
 - **bindingKey**: O nome da coluna na tabela atual, que será usado
-   para combinar o `` foreignKey``. Se não for especificado, a chave primária (para
-   exemplo, a coluna de identificação da tabela `` Artigos ``) será usada.
+  para combinar o ``foreignKey``. Se não for especificado, a chave primária (para
+  exemplo, a coluna de identificação da tabela ``Artigos``) será usada.
 - **conditions**: uma série de condições compatíveis com find () ou SQL
-   strings como `` ['Comments.visible' => true] ``
+  strings como `` ['Comments.visible' => true] ``
 - **sort**: uma série de cláusulas de pedido compatíveis com find () ou SQL
-   strings como `` ['Comments.created' => 'ASC'] ``
+  strings como `` ['Comments.created' => 'ASC'] ``
 - **dependent**: Quando dependente é definido como `` true``, modelo recursivo
-   a eliminação é possível. Neste exemplo, os registros de comentários serão
-   excluído quando o registro do artigo associado foi excluído.
+  a eliminação é possível. Neste exemplo, os registros de comentários serão
+  excluído quando o registro do artigo associado foi excluído.
 - **cascadeCallbacks**: Quando este e ** dependentes ** são `` true``, em cascata
-   as exclusões carregarão e excluirão entidades para que as devoluções de chamada sejam corretamente
-   desencadeada. Quando `` false``, `` deleteAll () `` é usado para remover dados associados
-   e nenhuma devolução de chamada é desencadeada.
+  as exclusões carregarão e excluirão entidades para que as devoluções de chamada sejam corretamente
+  desencadeada. Quando `` false``, `` deleteAll () `` é usado para remover dados associados
+  e nenhuma devolução de chamada é desencadeada.
 - **propertyName**: O nome da propriedade que deve ser preenchido com dados do
-   Tabela associada aos resultados da tabela de origem. Por padrão, esta é a
-   sublinhado e nome plural da associação para "comentários" no nosso exemplo.
+  Tabela associada aos resultados da tabela de origem. Por padrão, esta é a
+  sublinhado e nome plural da associação para "comentários" no nosso exemplo.
 - **strategy**: Define a estratégia de consulta a ser usada. Por padrão, selecione "selecionar". o
-   outro valor válido é "subconsulta", que substitui a lista `` IN`` por uma
-   subconsulta equivalente.
+  outro valor válido é "subconsulta", que substitui a lista `` IN`` por uma
+  subconsulta equivalente.
 - **saveStrategy**: Ou "anexar" ou "substituir". Por padrão, "anexar". Quando 'anexar' a corrente
-   os registros são anexados a qualquer registro no banco de dados. Quando "substituir" associado
-   Os registros que não estão no conjunto atual serão removidos. Se a chave estrangeira for anulável
-   coluna ou se "dependente" é verdadeira, os registros serão órfãos.
+  os registros são anexados a qualquer registro no banco de dados. Quando "substituir" associado
+  Os registros que não estão no conjunto atual serão removidos. Se a chave estrangeira for anulável
+  coluna ou se "dependente" é verdadeira, os registros serão órfãos.
 - **finder**: O método do buscador a ser usado ao carregar registros associados.
 
 Uma vez que essa associação foi definida, encontre operações na tabela Artigos
@@ -464,49 +464,49 @@ Também podemos definir uma relação mais específica usando a configuração::
 Chaves possiveis para uma associação pertence a muitos inclui:
 
 - **className**: ome da classe do modelo associado a
-  o modelo atual. Se você estiver definindo um 'Artigo que pertence a outra etiqueta'
-  relacionamento, a chave className deve igualar 'Tags'.
+  o modelo atual. Se você estiver definindo um 'Artigo que pertence a outra etiqueta'
+  relacionamento, a chave className deve igualar 'Tags'.
 - **joinTable**: O nome da tabela de junção usada neste
-  associação (se a tabela atual não aderir à nomeação
-  convenção para as mesas JoinToMany join). Por padrão, esta tabela
-  O nome será usado para carregar a instância da tabela para a tabela de junção.
+  associação (se a tabela atual não aderir à nomeação
+  convenção para as mesas JoinToMany join). Por padrão, esta tabela
+  O nome será usado para carregar a instância da tabela para a tabela de junção.
 - **foreignKey**: O nome da chave estrangeira que faz referência ao modelo atual
-  encontrado na tabela de junção, ou lista no caso de chaves externas compostas.
-  Isto é especialmente útil se você precisar definir múltiplos
-  pertence a muitos relacionamentos. O valor padrão para esta chave é o
-  sublinhado, nome singular do modelo atual, sufixo com '\ _id'.
+  encontrado na tabela de junção, ou lista no caso de chaves externas compostas.
+  Isto é especialmente útil se você precisar definir múltiplos
+  pertence a muitos relacionamentos. O valor padrão para esta chave é o
+  sublinhado, nome singular do modelo atual, sufixo com '\ _id'.
 - **bindingKey**: O nome da coluna na tabela atual, que será usado
-  para combinar o `` foreignKey``. Predefinições para a chave primária.
+  para combinar o `` foreignKey``. Predefinições para a chave primária.
 - **targetForeignKey**: O nome da chave estrangeira que faz referência ao alvo
-  modelo encontrado no modelo de junção, ou lista no caso de chaves externas compostas.
-  O valor padrão para esta chave é o nome sublinhado, singular de
-  o modelo alvo, sufixo com '\ _id'.
+  modelo encontrado no modelo de junção, ou lista no caso de chaves externas compostas.
+  O valor padrão para esta chave é o nome sublinhado, singular de
+  o modelo alvo, sufixo com '\ _id'.
 - **conditions**: uma série de condições compatíveis com ``find()``. Se você tem
-  condições em uma tabela associada, você deve usar um modelo 'through', e
-  defina as participações necessárias para as associações nela.
+  condições em uma tabela associada, você deve usar um modelo 'through', e
+  defina as participações necessárias para as associações nela.
 - **sort**: uma série de cláusulas de ordem compatíveis com find ().
 - **dependent**: Quando a chave dependente é definida como `` false``, e uma entidade é
-  excluído, os dados da tabela de junção não serão excluídos.
+  excluído, os dados da tabela de junção não serão excluídos.
 - **through**: Permite que você forneça o apelido da instância da tabela que você
-  quer usado na tabela de junção, ou a instância em si. Isso torna a personalização
-  as chaves de tabela de junção possíveis e permite que você personalize o comportamento do
-  tabela dinâmica.
+  quer usado na tabela de junção, ou a instância em si. Isso torna a personalização
+  as chaves de tabela de junção possíveis e permite que você personalize o comportamento do
+  tabela dinâmica.
 - **cascadeCallbacks**: Quando isso é `` true``, os apagados em cascata serão carregados e
-  Elimine entidades de modo que as devoluções de chamada sejam ativadas corretamente na tabela de junção
-  registros. Quando `` false``, `` deleteAll () `` é usado para remover dados associados e
-  nenhum retorno de chamada é desencadeado. Este padrão é "falso" para ajudar a reduzir
-  a sobrecarga.
+  Elimine entidades de modo que as devoluções de chamada sejam ativadas corretamente na tabela de junção
+  registros. Quando `` false``, `` deleteAll () `` é usado para remover dados associados e
+  nenhum retorno de chamada é desencadeado. Este padrão é "falso" para ajudar a reduzir
+  a sobrecarga.
 - **propertyName**: O nome da propriedade que deve ser preenchido com dados do
-  Tabela associada aos resultados da tabela de origem. Por padrão, esta é a
-  sublinhado e nome plural da associação, então "tags" no nosso exemplo.
+  Tabela associada aos resultados da tabela de origem. Por padrão, esta é a
+  sublinhado e nome plural da associação, então "tags" no nosso exemplo.
 - **strategy**: Define a estratégia de consulta a ser usada. Por padrão, selecione "selecionar". o
-  outro valor válido é "subconsulta", que substitui a lista `` IN`` por uma
-  subconsulta equivalente.
+  outro valor válido é "subconsulta", que substitui a lista `` IN`` por uma
+  subconsulta equivalente.
 - **saveStrategy**:Ou "anexar" ou "substituir". Por padrão, 'substituir'.
-  Indica o modo a ser usado para salvar entidades associadas. O primeiro
-  apenas crie novas ligações entre ambos os lados da relação e o último
-  faça uma limpeza e substitua para criar os links entre as entidades aprovadas quando
-  poupança.
+  Indica o modo a ser usado para salvar entidades associadas. O primeiro
+  apenas crie novas ligações entre ambos os lados da relação e o último
+  faça uma limpeza e substitua para criar os links entre as entidades aprovadas quando
+  poupança.
 - **finder**: O método do buscador a ser usado ao carregar registros associados.
 
 Uma vez definida esta associação, encontrar operações na tabela Artigos podem

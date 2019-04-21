@@ -667,8 +667,7 @@ AuthComponent
   na nagsasauli ng info ng gumagamit sa matagumpay na pagkakakilanlan at pagkatapos
   ay gumamit ng ``setUser()`` upang i-save ang info sa sesyon para mapanatili
   sa kabuuan ng mga kahilingan.
-  
-  - Ang ``BaseAuthenticate::_password()`` ay tinanggal. Sa halip ay gumamit ng isang
+- Ang ``BaseAuthenticate::_password()`` ay tinanggal. Sa halip ay gumamit ng isang
   ``PasswordHasher`` na class.
 - Ang ``BaseAuthenticate::logout()`` ay tinanggal.
 - Ang ``AuthComponent`` ngayon ay nagti-trigger ng dalawang mga pangyayari
