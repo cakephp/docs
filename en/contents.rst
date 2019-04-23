@@ -76,6 +76,7 @@ Contents
     :caption: Plugins
 
     authorization <https://book.cakephp.org/authorization/>
+    authentication <https://book.cakephp.org/authentication/>
     chronos
     debug-kit
     migrations

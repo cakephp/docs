@@ -71,7 +71,7 @@ job('Book - Deploy 3.next') {
 job('Book - Deploy 4.0') {
   description('Deploy the 4.0 book when changes are pushed.')
   scm {
-    github(REPO_NAME, '4.0')
+    github(REPO_NAME, '4.x')
   }
   triggers {
     scm('H/5 * * * *')
