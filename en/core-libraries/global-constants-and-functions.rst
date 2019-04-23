@@ -196,7 +196,7 @@ Most of the following constants refer to paths in your application.
 
 .. php:const:: CORE_PATH
 
-   Path to the root directory with ending directory slash.
+   Path to the CakePHP directory with ending directory slash.
 
 .. php:const:: DS
 
