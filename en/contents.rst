@@ -35,7 +35,6 @@ Contents
     :maxdepth: 3
     :caption: Using CakePHP
 
-    controllers/components/authentication
     bake
     core-libraries/caching
     console-and-shells
