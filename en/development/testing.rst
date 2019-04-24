@@ -1279,6 +1279,9 @@ make testing responses much simpler. Some examples are::
     // Assert partial response content
     $this->assertResponseContains('You won!');
     $this->assertResponseNotContains('You lost!');
+    
+    // Assert file sent back
+    $this->assertFileResponse('/absolute/path/to/file.ext');
 
     // Assert layout
     $this->assertLayout('default');
