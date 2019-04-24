@@ -1588,6 +1588,12 @@ These options are concerning the date-related methods - i.e. ``year()``,
 * ``'orderYear'`` - The order of year values in the year select picker.
   Possible values are ``'asc'`` and ``'desc'``. Defaults to ``'desc'``.
 
+* ``'year', 'month', 'day'`` - These options allow you to control which control
+  elements are generated or not. By setting any of these options to ``false``
+  you can disable the generation of that specific that select picker (if by
+  default it would be rendered in the used method). In addition each option
+  allows you to pass HTML attributes to that specific ``select`` element.
+
 .. _time-options:
 
 Options for Time-Related Controls
@@ -1617,6 +1623,12 @@ These options are concerning the time-related methods - ``hour()``,
 
 * ``second`` - Applies to ``dateTime()`` and ``time()``. Set to ``true`` to
   enable the seconds drop down. Defaults to ``false``.
+
+* ``'hour', 'minute', 'second', 'meridian'`` - These options allow you to control
+  which control elements are generated or not. By setting any of these options to
+  ``false`` you can disable the generation of that specific that select picker
+  (if by default it would be rendered in the used method). In addition each option
+  allows you to pass HTML attributes to that specific ``select`` element.
 
 Creating DateTime Controls
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
