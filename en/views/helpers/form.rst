@@ -247,23 +247,26 @@ Using the ``'url'`` option allows you to point the form to a specific action in
 your current controller or another controller in your application.
 
 For example,
-if you'd like to point the form to the ``login()`` action of the current
+if you'd like to point the form to the ``publish()`` action of the current
 controller, you would supply an ``$options`` array, like the following::
 
-    echo $this->Form->create($article, ['url' => ['action' => 'login']]);
+    echo $this->Form->create($article, ['url' => ['action' => 'publish']]);
 
 Output:
 
 .. code-block:: html
 
-    <form method="post" action="/users/login">
+    <form method="post" action="/articles/publish">
 
 If the desired form action isn't in the current controller, you can specify
 a complete URL for the form action. The supplied URL can be relative to your
 CakePHP application::
 
     echo $this->Form->create(null, [
-        'url' => ['controller' => 'Articles', 'action' => 'publish']
+        'url' => [
+            'controller' => 'Articles',
+            'action' => 'publish'
+        ]
     ]);
 
 Output:
