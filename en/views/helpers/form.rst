@@ -1734,12 +1734,12 @@ For example::
     <?php
         echo $this->Form->date('registered', [
             'minYear' => 2018,
-            'monthNames' => false,
+            'monthNames' => false, // Months are displayed as numbers
             'empty' => [
-                'year' => false,
-                'month' => 'Choose month...'
+                'year' => false, // The year select control has no option for empty value
+                'month' => 'Choose month...', // The month select control does, though
             ],
-            'day' => false,
+            'day' => false, // Do now show day select control
             'year' => [
                 'class' => 'cool-years',
                 'title' => 'Registration Year'
