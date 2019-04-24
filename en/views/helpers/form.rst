@@ -1739,7 +1739,7 @@ For example::
                 'year' => false, // The year select control has no option for empty value
                 'month' => 'Choose month...', // The month select control does, though
             ],
-            'day' => false, // Do now show day select control
+            'day' => false, // Do not show day select control
             'year' => [
                 'class' => 'cool-years',
                 'title' => 'Registration Year'
