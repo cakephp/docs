@@ -118,7 +118,7 @@ View
 * You can no longer use ``false`` as argument for ``ViewBuilder::setLayout()``
   or ``View::setLayout()`` to set ``View::$layout`` property to ``false``.
   Instead use ``ViewBuilder::disableAutoLayout()`` and ``View::disableAutoLayout()``
-  to render view without layout.
+  to render a view template without a layout.
 * ``Cake\View\View`` will re-render views if ``render()`` is called multiple
   times instead of returning ``null``.
 * ``Cake\View\Helper\PaginatorHelper::hasPage()`` has had its arguments
