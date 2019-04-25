@@ -1233,9 +1233,6 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
     // 返されたファイルをアサート
     $this->assertFileResponse('/absolute/path/to/file.ext');
 
-    // 3.7.0 で追加
-    $this->assertHeaderNotContains('Content-Type', 'xml');
-
     // レイアウトをアサート
     $this->assertLayout('default');
 
@@ -1247,6 +1244,9 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
 
     // レスポンスヘッダーをアサート
     $this->assertHeader('Content-Type', 'application/json');
+
+    // 3.7.0 で追加
+    $this->assertHeaderNotContains('Content-Type', 'xml');
 
     // ビュー変数をアサート
     $user =  $this->viewVariable('user');
