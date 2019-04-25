@@ -233,22 +233,25 @@ FormHelper の値ソースは、input タグなどの描画される要素がど
 ``url`` オプションを使うと、フォームを現在のコントローラーやアプリケーションの別のコントローラーの
 特定のアクションに向けることができます。
 
-例えば、フォームを現在のコントローラーの ``login()`` アクションに向けるには、次のような
+例えば、フォームを現在のコントローラーの ``publish()`` アクションに向けるには、次のような
 ``$options`` 配列を与えます。 ::
 
-    echo $this->Form->create($article, ['url' => ['action' => 'login']]);
+    echo $this->Form->create($article, ['url' => ['action' => 'publish']]);
 
 出力結果:
 
 .. code-block:: html
 
-    <form method="post" action="/users/login">
+    <form method="post" action="/articles/publish">
 
 目的のフォームアクションが現在のコントローラーにない場合は、フォームアクションの完全な URL を指定できます。
 出力される URL は CakePHP アプリケーションに対する相対になります。 ::
 
     echo $this->Form->create(null, [
-        'url' => ['controller' => 'Articles', 'action' => 'publish']
+        'url' => [
+            'controller' => 'Articles',
+            'action' => 'publish'
+        ]
     ]);
 
 出力結果:
