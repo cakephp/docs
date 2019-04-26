@@ -75,6 +75,8 @@
     :maxdepth: 3
     :caption: プラグイン
 
+    authorization <https://book.cakephp.org/authorization/>
+    authentication <https://book.cakephp.org/authentication/>
     chronos
     debug-kit
     migrations

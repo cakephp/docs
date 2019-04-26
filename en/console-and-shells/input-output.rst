@@ -1,5 +1,5 @@
 Command Input/Output
-====================
+####################
 
 .. php:namespace:: Cake\Console
 .. php:class:: ConsoleIo

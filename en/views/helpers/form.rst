@@ -247,23 +247,26 @@ Using the ``'url'`` option allows you to point the form to a specific action in
 your current controller or another controller in your application.
 
 For example,
-if you'd like to point the form to the ``login()`` action of the current
+if you'd like to point the form to the ``publish()`` action of the current
 controller, you would supply an ``$options`` array, like the following::
 
-    echo $this->Form->create($article, ['url' => ['action' => 'login']]);
+    echo $this->Form->create($article, ['url' => ['action' => 'publish']]);
 
 Output:
 
 .. code-block:: html
 
-    <form method="post" action="/users/login">
+    <form method="post" action="/articles/publish">
 
 If the desired form action isn't in the current controller, you can specify
 a complete URL for the form action. The supplied URL can be relative to your
 CakePHP application::
 
     echo $this->Form->create(null, [
-        'url' => ['controller' => 'Articles', 'action' => 'publish']
+        'url' => [
+            'controller' => 'Articles',
+            'action' => 'publish'
+        ]
     ]);
 
 Output:
@@ -1616,6 +1619,12 @@ These options are concerning the date-related methods - i.e. ``year()``,
 * ``'orderYear'`` - The order of year values in the year select picker.
   Possible values are ``'asc'`` and ``'desc'``. Defaults to ``'desc'``.
 
+* ``'year', 'month', 'day'`` - These options allow you to control which control
+  elements are generated or not. By setting any of these options to ``false``
+  you can disable the generation of that specific that select picker (if by
+  default it would be rendered in the used method). In addition each option
+  allows you to pass HTML attributes to that specific ``select`` element.
+
 .. _time-options:
 
 Options for Time-Related Controls
@@ -1645,6 +1654,12 @@ These options are concerning the time-related methods - ``hour()``,
 
 * ``second`` - Applies to ``dateTime()`` and ``time()``. Set to ``true`` to
   enable the seconds drop down. Defaults to ``false``.
+
+* ``'hour', 'minute', 'second', 'meridian'`` - These options allow you to control
+  which control elements are generated or not. By setting any of these options to
+  ``false`` you can disable the generation of that specific that select picker
+  (if by default it would be rendered in the used method). In addition each option
+  allows you to pass HTML attributes to that specific ``select`` element.
 
 Creating DateTime Controls
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1765,12 +1780,12 @@ For example::
     <?php
         echo $this->Form->date('registered', [
             'minYear' => 2018,
-            'monthNames' => false,
+            'monthNames' => false, // Months are displayed as numbers
             'empty' => [
-                'year' => false,
-                'month' => 'Choose month...'
+                'year' => false, // The year select control has no option for empty value
+                'month' => 'Choose month...', // The month select control does, though
             ],
-            'day' => false,
+            'day' => false, // Do not show day select control
             'year' => [
                 'class' => 'cool-years',
                 'title' => 'Registration Year'

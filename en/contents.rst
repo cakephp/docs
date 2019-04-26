@@ -35,7 +35,6 @@ Contents
     :maxdepth: 3
     :caption: Using CakePHP
 
-    controllers/components/authentication
     bake
     core-libraries/caching
     console-and-shells
@@ -76,6 +75,7 @@ Contents
     :caption: Plugins
 
     authorization <https://book.cakephp.org/authorization/>
+    authentication <https://book.cakephp.org/authentication/>
     chronos
     debug-kit
     migrations
