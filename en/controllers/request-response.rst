@@ -242,7 +242,7 @@ Some examples would be::
         }
     );
 
-    // Add a detector that uses additional arguments. As of 3.3.0
+    // Add a detector that uses additional arguments.
     $this->request->addDetector(
         'controller',
         function ($request, $name) {
@@ -439,7 +439,7 @@ Request cookies can be read through a number of methods::
     // Get all cookies as an hash
     $cookies = $this->request->getCookieParams();
 
-    // Get a CookieCollection instance (starting with 3.5.0)
+    // Get a CookieCollection instance
     $cookies = $this->request->getCookieCollection()
 
 See the :php:class:`Cake\\Http\\Cookie\\CookieCollection` documentation for how
@@ -575,12 +575,9 @@ ics generated on the fly from a string::
     {
         $icsString = $this->Calendars->generateIcs();
         $response = $this->response;
-        
-        // Inject string content into response body (3.4.0+)
+
+        // Inject string content into response body
         $response = $response->withStringBody($icsString);
-        
-        // Inject string content into response body (before 3.4.0)
-        $response->body($icsString);
 
         $response = $response->withType('ics');
 
@@ -894,7 +891,7 @@ object::
     use Cake\Http\Cookie\Cookie;
     use DateTime;
 
-    // Add a cookie as an array using the immutable API (3.4.0+)
+    // Add a cookie
     $this->response = $this->response->withCookie(new Cookie(
         'remember_me',
         'yes',
@@ -905,20 +902,10 @@ object::
         true // httponly
     ]);
 
-    // Before 3.4.0
-    $this->response->cookie('remember', [
-        'value' => 'yes',
-        'path' => '/',
-        'httpOnly' => true,
-        'secure' => false,
-        'expire' => strtotime('+1 year')
-    ]);
-
 See the :ref:`creating-cookies` section for how to use the cookie object. You
 can use ``withExpiredCookie()`` to send an expired cookie in the response. This
 will make the browser remove its local cookie::
 
-    // As of 3.5.0
     $this->response = $this->response->withExpiredCookie('remember_me');
 
 .. _cors-headers:
@@ -926,7 +913,7 @@ will make the browser remove its local cookie::
 Setting Cross Origin Request Headers (CORS)
 ===========================================
 
-As of 3.2 you can use the ``cors()`` method to define `HTTP Access Control
+The ``cors()`` method is used to define `HTTP Access Control
 <https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS>`__
 related headers with a fluent interface::
 
@@ -948,7 +935,7 @@ criteria are met:
 Common Mistakes with Immutable Responses
 ========================================
 
-As of CakePHP 3.4.0, response objects offer a number of methods that treat
+Response objects offer a number of methods that treat
 responses as immutable objects. Immutable objects help prevent difficult to
 track accidental side-effects, and reduce mistakes caused by method calls caused
 by refactoring that change ordering. While they offer a number of benefits,
@@ -1036,9 +1023,6 @@ Cookie objects can be added to responses::
 
 Cookies set to responses can be encrypted using the
 :ref:`encrypted-cookie-middleware`.
-
-.. versionadded:: 3.8.0
-    ``Response::withCookieCollection()`` was added.
 
 Reading Cookies
 ---------------

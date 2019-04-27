@@ -150,20 +150,6 @@ generating code or doing work based on conventions::
     // applePie
     Inflector::variable('apple_pie');
 
-Creating URL Safe Strings
-=========================
-
-.. php:staticmethod:: slug($word, $replacement = '-')
-
-Slug converts special characters into latin versions and converting unmatched
-characters and spaces to dashes. The slug method expects UTF-8 encoding::
-
-    // apple-puree
-    Inflector::slug('apple purée');
-
-.. note::
-    ``Inflector::slug()`` has been deprecated since 3.2.7. Use ``Text::slug()``
-    instead.
 
 .. _inflection-configuration:
 

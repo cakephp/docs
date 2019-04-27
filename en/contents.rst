@@ -80,7 +80,6 @@ Contents
     debug-kit
     migrations
     elasticsearch
-    upgrade-tool
 
 .. toctree::
     :maxdepth: 3

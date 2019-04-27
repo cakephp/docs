@@ -462,7 +462,6 @@ And finally, configure the translation loader for the domain and locale::
 
     use Cake\I18n\MessagesFileLoader as Loader;
 
-    // Prior to 3.5 use translator()
     I18n::setTranslator(
         'animals',
         new Loader('animals', 'fr_FR', 'yaml'),

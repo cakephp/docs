@@ -164,9 +164,6 @@ You can use any `callable <http://php.net/callback>`_ for the handling function.
 You can also pass additional arguments to the callback, this is useful for
 callbacks like ``json_decode``::
 
-    $this->RequestHandler->addInputType('json', ['json_decode', true]);
-
-    // After 3.1.0 you should use
     $this->RequestHandler->setConfig('inputTypeMap.json', ['json_decode', true]);
 
 The above will make ``$this->request->getData()`` an array of the JSON input data,

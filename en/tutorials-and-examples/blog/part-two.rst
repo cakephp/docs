@@ -323,7 +323,7 @@ application.  In this case, we use the :php:meth:`Cake\\Http\\ServerRequest::is(
 method to check that the request is a HTTP POST request.
 
 When a user uses a form to POST data to your application, that
-information is available in ``$this->request->getData()`` ( Or ``$this->request->data()`` for CakePHP v3.3 and under ). You can use the
+information is available in ``$this->request->getData()``. You can use the
 :php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to
 see what it looks like.
 

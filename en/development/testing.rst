@@ -1080,9 +1080,9 @@ load plugins manually in a test you can use the ``loadPlugins()`` method.
 Testing with Encrypted Cookies
 ------------------------------
 
-If you use the :php:class:`Cake\\Controller\\Component\\CookieComponent` in your
-controllers, your cookies are likely encrypted. As of 3.1.7, CakePHP provides
-helper methods for interacting with encrypted cookies in your test cases::
+If you use the :ref:`encrypted-cookie-middleware:` in your
+application, there are helper methods for setting encrypted cookies in your
+test cases::
 
     // Set a cookie using AES and the default key.
     $this->cookieEncrypted('my_cookie', 'Some secret values');

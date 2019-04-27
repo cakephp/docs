@@ -195,8 +195,8 @@ driver
     Examples of short classnames are Mysql, Sqlite, Postgres, and Sqlserver.
 persistent
     Whether or not to use a persistent connection to the database. This option
-    is not supported by SqlServer. As of CakePHP version 3.4.13 an exception is
-    thrown if you attempt to set ``persistent`` to ``true`` with SqlServer.
+    is not supported by SqlServer. An exception is thrown if you attempt to set
+    ``persistent`` to ``true`` with SqlServer.
 host
     The database server's hostname (or IP address).
 username
@@ -356,8 +356,7 @@ timestamp
 time
     Maps to a ``TIME`` type in all databases.
 json
-    Maps to a ``JSON`` type if it's available, otherwise it maps to ``TEXT``. The 'json'
-    type was added in 3.3.0
+    Maps to a ``JSON`` type if it's available, otherwise it maps to ``TEXT``.
 
 These types are used in both the schema reflection features that CakePHP
 provides, and schema generation features CakePHP uses when using test fixtures.

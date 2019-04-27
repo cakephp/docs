@@ -459,12 +459,6 @@ controller actions using the controller or view's ``$layout`` property::
     {
         // Set the layout.
         $this->viewBuilder()->setLayout('admin');
-
-        // Before 3.4
-        $this->viewBuilder()->layout('admin');
-
-        // Before 3.1
-        $this->layout = 'admin';
     }
 
     // From a view file
@@ -482,12 +476,6 @@ layout for all controllers' actions using something like::
         {
             $this->set('title', 'View Active Users');
             $this->viewBuilder()->setLayout('default_small_ad');
-
-            // or the following before 3.4
-            $this->viewBuilder()->layout('default_small_ad');
-
-            // or the following before 3.1
-            $this->layout = 'default_small_ad';
         }
 
         public function viewImage()
@@ -518,10 +506,6 @@ syntax`. For example, to use the contact layout from the Contacts plugin::
         public function viewActive()
         {
             $this->viewBuilder()->setLayout('Contacts.contact');
-            // or the following before 3.4
-            $this->viewBuilder()->layout('Contacts.contact');
-            // or the following before 3.1
-            $this->layout = 'Contacts.contact';
         }
     }
 

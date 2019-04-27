@@ -116,10 +116,6 @@ keys.
 - ``userModel`` The model name of the users table; defaults to Users.
 - ``finder`` The finder method to use to fetch a user record. Defaults to 'all'.
 - ``passwordHasher`` Password hasher class; Defaults to ``Default``.
-- The ``scope`` and ``contain`` options have been deprecated as of 3.1. Use
-  a custom finder instead to modify the query to fetch a user record.
-- The ``userFields`` option has been deprecated as of 3.1. Use ``select()`` in
-  your custom finder.
 
 To configure different fields for user in your ``initialize()`` method::
 
@@ -212,10 +208,6 @@ authenticate a user, such as ``username`` and ``password``::
         return $query;
     }
 
-.. note::
-    ``finder`` option is available since 3.1. Prior to that you can use ``scope``
-    and ``contain`` options to modify a query.
-
 Identifying Users and Logging Them In
 -------------------------------------
 
@@ -266,8 +258,7 @@ to after logging in.
 If no parameter is passed, the returned URL will use the following rules:
 
 - Returns the normalized URL from the ``redirect`` query string value if it is
-  present and for the same domain the current app is running on. Before 3.4.0,
-  the ``Auth.redirect`` session value was used.
+  present and for the same domain the current app is running on.
 - If there is no query string/session value and there is a config with
   ``loginRedirect``, the ``loginRedirect`` value is returned.
 - If there is no redirect value and no ``loginRedirect``, ``/`` is returned.

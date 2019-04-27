@@ -78,10 +78,6 @@ And in **templates/Users/login.php** add the following::
     <?= $this->Form->button('Login') ?>
     <?= $this->Form->end() ?>
 
-.. note::
-
-   The ``control()`` method is available since 3.4.
-
 Now that we have a simple login form, we should be able to log in with one of
 the users that has a hashed password.
 

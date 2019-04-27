@@ -14,7 +14,7 @@ reused with little effort in other applications. The application and the plugin
 operate in their own respective spaces, but share the application's
 configuration data (e.g. database connections, email transports)
 
-In CakePHP 3.0 each plugin defines its own top-level namespace. For example:
+Plugin should define their own top-level namespace. For example:
 ``DebugKit``. By convention, plugins use their package name as their namespace.
 If you'd like to use a different namespace, you can configure the plugin
 namespace, when plugins are loaded.

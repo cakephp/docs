@@ -1501,27 +1501,6 @@ into this::
     define the URL filters in your application ``bootstrap()`` as filters are
     not part of the cached data.
 
-Handling Named Parameters in URLs
-=================================
-
-Although named parameters were removed in CakePHP 3.0, applications may have
-published URLs containing them.  You can continue to accept URLs containing
-named parameters.
-
-In your controller's ``beforeFilter()`` method you can call
-``parseNamedParams()`` to extract any named parameters from the passed
-arguments::
-
-    public function beforeFilter(EventInterface $event)
-    {
-        parent::beforeFilter($event);
-        $this->request = Router::parseNamedParams($this->request);
-    }
-
-This will populate ``$this->request->getParam('named')`` with any named parameters
-found in the passed arguments.  Any passed argument that was interpreted as a
-named parameter, will be removed from the list of passed arguments.
-
 .. meta::
     :title lang=en: Routing
     :keywords lang=en: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router

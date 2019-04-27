@@ -475,8 +475,7 @@ Now, You can populate translations before saving them::
 
     $this->Articles->save($article);
 
-As of 3.3.0, working with multiple translations has been streamlined. You can
-create form controls for your translated fields::
+And create form controls for your translated fields::
 
     // In a view template.
     <?= $this->Form->create($article); ?>
