@@ -35,7 +35,6 @@
     :maxdepth: 3
     :caption: 一般的なトピック
 
-    controllers/components/authentication
     bake
     core-libraries/caching
     console-and-shells
