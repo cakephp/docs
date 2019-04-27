@@ -144,14 +144,14 @@ CakePHP Provided Commands
     :maxdepth: 1
 
     console-commands/cache
-    console-commands/i18n
     console-commands/completion
+    console-commands/i18n
     console-commands/plugin
-    console-commands/routes
     console-commands/schema-cache
     console-commands/server
     console-commands/shells
     console-commands/repl
+    console-commands/routes
 
 Routing in the Console Environment
 ==================================

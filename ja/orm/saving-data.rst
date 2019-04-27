@@ -1025,7 +1025,7 @@ belongsToMany アソシエーションのそれぞれのエンティティーは
 この機能は、カスタム型システムを使って行われます。カスタムカラム型をどう構築するかについては
 :ref:`adding-custom-database-types` のセクションを参照してください。 ::
 
-    // config/bootstrap.php の中で
+    // 3.6 より前では、 config/bootstrap.php で型マップを追加する必要があります。
 
     use Cake\Database\Type;
 
@@ -1038,7 +1038,11 @@ belongsToMany アソシエーションのそれぞれのエンティティーは
     {
         protected function _initializeSchema(TableSchema $schema)
         {
+            $schema->setColumnType('preferences', 'json');
+
+            // 3.6 より前では、 ``setColumnType`` の代わりに ``columnType`` を使用してください。
             $schema->columnType('preferences', 'json');
+
             return $schema;
         }
     }

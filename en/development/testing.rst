@@ -1238,6 +1238,9 @@ make testing responses much simpler. Some examples are::
     // Assert partial response content
     $this->assertResponseContains('You won!');
     $this->assertResponseNotContains('You lost!');
+    
+    // Assert file sent back
+    $this->assertFileResponse('/absolute/path/to/file.ext');
 
     // Assert layout
     $this->assertLayout('default');
@@ -1723,7 +1726,12 @@ code you wrote, you can use ``bake``:
 #. Behavior
 #. Helper
 #. Shell
+#. Task
+#. ShellHelper
 #. Cell
+#. Form
+#. Mailer
+#. Command
 
 While ``<name>`` should be the name of the object you want to bake a test
 skeleton for.

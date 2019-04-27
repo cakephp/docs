@@ -187,7 +187,7 @@ component ay mukhang ganito ang anyo::
     nito ay mag-trigger sa isang exception.
 
 Isasama ang iyong Component sa iyong mga Controllers
---------------------------------------------
+----------------------------------------------------
 
 Sa sandaling ang ating komponent ay natapos, maaari nating gamitin ito sa mga controller ng ating aplikasyon
 sa pamamagitan ng pag-load nito sa panahon na ang controller ay naka ``initialize()`` na pamamaraan.

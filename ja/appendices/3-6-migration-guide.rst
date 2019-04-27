@@ -55,6 +55,12 @@ CakePHP 3.6 は、3.5 の API の完全上位互換です。
   ``getContain()`` を使用してください。
 * ``Cake\Datasource\QueryInterface::repository()`` のゲッター部分は非推奨です。代わりに
   ``getRepository()`` を使用してください。
+* ``Cake\Database\Type::map()`` のゲッター部分は非推奨です。代わりに
+  ``getMap()`` を使用してください。
+* ``Cake\Database\Type::map()`` で完全な型マップを設定することは非推奨です。代わりに
+  ``setMap()`` を使用してください。
+* ``Cake\Database\Type::map()`` へオブジェクトで ``$className`` を渡すことは非推奨です。代わりに
+  ``set()`` を使用してください。
 
 いくつかのクラスは *名前変更* されました。古い名前は 4.0 まで動作しますが、
 非推奨警告が表示されます。

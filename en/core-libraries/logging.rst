@@ -384,8 +384,8 @@ appropriate log level.
 .. php:staticmethod:: error($message, $scope = [])
 .. php:staticmethod:: warning($message, $scope = [])
 .. php:staticmethod:: notice($message, $scope = [])
-.. php:staticmethod:: debug($message, $scope = [])
 .. php:staticmethod:: info($message, $scope = [])
+.. php:staticmethod:: debug($message, $scope = [])
 
 Logging Trait
 =============

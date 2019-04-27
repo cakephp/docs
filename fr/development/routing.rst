@@ -1046,7 +1046,7 @@ Le code ci-dessus va générer une ressource de routes pour ``articles`` et
     /api/articles/:article_id/comments
     /api/articles/:article_id/comments/:id
 
-You can get the ``article_id`` in ``CommentsController`` by::
+Vous pouvez récupérer le champs ``article_id`` de ``CommentsController`` de cette façon::
 
     $this->request->getParam('article_id');
 
@@ -1060,10 +1060,10 @@ controller in each context by using prefixes::
         });
     });
 
-The above would map the 'Comments' resource to the
-``App\Controller\Articles\CommentsController``. Having separate controllers lets
-you keep your controller logic simpler. The prefixes created this way are
-compatible with :ref:`prefix-routing`.
+L'exemple ci-dessus mapperait le champs 'Comments' vers
+``App\Controller\Articles\CommentsController``. Une séparation des controllers
+vous permet de simplifier la logique. Les préfixes créés de cette manière sont
+compatibles avec :ref:`prefix-routing`.
 
 .. note::
 

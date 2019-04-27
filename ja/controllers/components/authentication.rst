@@ -1,5 +1,5 @@
-認証
-####
+AuthComponent
+##############
 
 .. php:class:: AuthComponent(ComponentCollection $collection, array $config = [])
 
