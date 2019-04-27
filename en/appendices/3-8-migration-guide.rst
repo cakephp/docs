@@ -54,6 +54,11 @@ Email
   the array argument passed to above functions must be an array.
   e.g. ``$email->addHeaders(['og:tag' => ['foo', 'bar']]);``
 
+Http
+----
+
+* ``Response::withCookieCollection()`` was added.
+
 ORM
 ---
 

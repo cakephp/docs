@@ -1064,13 +1064,19 @@ Once you have created a cookie, you can add it to a new or existing
     Remember that collections are immutable and adding cookies into, or removing
     cookies from a collection, creates a *new* collection object.
 
-Cookie objects can be added to your controller responses by using
-``withCookie()``::
+Cookie objects can be added to responses::
 
+    // Add one cookie
     $response = $this->response->withCookie($cookie);
+
+    // Replace the entire cookie collection
+    $response = $this->response->withCookieCollection($cookies);
 
 Cookies set to responses can be encrypted using the
 :ref:`encrypted-cookie-middleware`.
+
+.. versionadded:: 3.8.0
+    ``Response::withCookieCollection()`` was added.
 
 Reading Cookies
 ---------------
