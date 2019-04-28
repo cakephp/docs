@@ -39,6 +39,12 @@ Collection
   now. This allows sub-classes to have collection methods create instances of
   themselves instead of using ``Collection``.
 
+Console
+-------
+
+ ``Command::executeCommand()`` was added. This method makes it simple to call
+ another command from the current one.
+
 Datasource
 ----------
 
