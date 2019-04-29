@@ -149,6 +149,13 @@ Cache
 * ``Cake\Cache\CacheEngine::gc()`` and all implementations of this method have
   been removed. This method was a no-op in most cache drivers and was only used
   in file caching.
+  
+I18n
+----
+
+* JSON encoding ``Cake\I18n\Date`` and ``Cake\I18n\FrozenDate`` objects now results
+  in strings with only the date part, in format ``yyyy-MM-dd`` instead of earlier format
+  ``yyyy-MM-dd'T'HH:mm:ssxxx``.
 
 Miscellaneous
 -------------
