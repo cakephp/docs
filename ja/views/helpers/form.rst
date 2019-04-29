@@ -1660,12 +1660,12 @@ CakePHP が Windows サーバー上にインストールされている場合、
     <?php
         echo $this->Form->date('registered', [
             'minYear' => 2018,
-            'monthNames' => false,
+            'monthNames' => false, // 月は数字で表示されます。
             'empty' => [
-                'year' => false,
-                'month' => 'Choose month...'
+                'year' => false, // 年選択コントロールは空の値のオプションを持ちません。
+                'month' => 'Choose month...' // しかしながら、月選択コントロールは持ちます。
             ],
-            'day' => false,
+            'day' => false, // 日付選択コントールを表示しない。
             'year' => [
                 'class' => 'cool-years',
                 'title' => 'Registration Year'
