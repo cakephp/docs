@@ -232,7 +232,7 @@ newer, using the ``remember()`` method would look like::
 
         public function newest() {
             $model = $this;
-            return Cache::remember('newest_posts', function() use ($model){
+            return Cache::remember('newest_posts', function () use ($model){
                 return $model->find('all', array(
                     'order' => 'Post.updated DESC',
                     'limit' => 10
@@ -468,7 +468,7 @@ Cache API
         class Articles extends AppModel {
             function all() {
                 $model = $this;
-                return Cache::remember('all_articles', function() use ($model){
+                return Cache::remember('all_articles', function () use ($model){
                     return $model->find('all');
                 });
             }
