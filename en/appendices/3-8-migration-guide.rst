@@ -33,10 +33,10 @@ New Features
 ============
 
 Collection
-==========
+----------
 
-* ``CollectionTrait`` now uses the ``newCollection`` method to create clones
-  now. This allows sub-classes to have collection methods create instances of
+* ``CollectionTrait`` now uses the ``newCollection`` method to create clones.
+  This allows sub-classes to have collection methods create instances of
   themselves instead of using ``Collection``.
 
 Console
