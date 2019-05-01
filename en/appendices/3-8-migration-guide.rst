@@ -43,7 +43,7 @@ Console
 -------
 
 * ``Command::executeCommand()`` was added. This method makes it simple to call
- another command from the current one.
+  another command from the current one.
 
 Datasource
 ----------
