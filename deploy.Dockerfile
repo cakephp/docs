@@ -1,8 +1,8 @@
-FROM debian:jessie
+FROM debian:stretch as builder
 
 ENV DEBIAN_FRONTEND noninteractive
 
-LABEL Description="This image is used to create an environment to contribute to the cakephp/docs"
+LABEL Description="This image is used to create deployable images for book.cakephp.org"
 
 RUN apt-get update && apt-get install -y \
     python-pip \
@@ -10,11 +10,12 @@ RUN apt-get update && apt-get install -y \
     texlive-latex-extra \
     texlive-fonts-recommended \
     texlive-lang-all \
+    latexmk \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install -y \
-    nginx curl php5 php5-curl \
+RUN apt-get update \
+  && apt-get install -y curl php-cli php-curl \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -28,14 +29,13 @@ COPY . /data
 
 RUN make website
 
-RUN rm -rf /var/www/html/* \
-  && mkdir -p /var/www/html/1.3/ \
-  && cp -a /data/website/. /var/www/html/1.3/
+# Create a slim nginx image.
+# Final image doesn't need python or latex
+FROM nginx:1.15-alpine
 
-# forward request and error logs to docker log collector
-RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-  && ln -sf /dev/stderr /var/log/nginx/error.log
+COPY --from=builder /data/website /data/website
+COPY --from=builder /data/nginx.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+# Move built site into place
+RUN mkdir -p /usr/share/nginx/html/ \
+ && mv /data/website /usr/share/nginx/html/1.3
