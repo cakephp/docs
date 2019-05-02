@@ -189,6 +189,23 @@ You can pass any desired exit code into ``abort()``.
     on most Unix systems (``man sysexits``), or the ``System Error Codes`` help
     page in Windows.
 
+Calling other Commands
+======================
+
+You may need to call other commands from your command. You can use
+``executeCommand`` to do that::
+
+    // You can pass an array of CLI options and arguments.
+    $this->executeCommand(OtherCommand::class, ['--verbose', 'deploy']);
+
+    // Can pass an instance of the command if it has constructor args
+    $command = new OtherCommand($otherArgs);
+    $this->executeCommand($command, ['--verbose', 'deploy']);
+
+
+.. versionadded:: 3.8.0
+    ``executeCommand()`` was added.
+
 .. _console-integration-testing:
 
 Testing Commands
