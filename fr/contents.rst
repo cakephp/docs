@@ -75,7 +75,7 @@ Contenu
     :caption: Plugins
 
     chronos
-    debug-kit
+    debug-kit </debugkit>
     migrations
     elasticsearch
     upgrade-tool
