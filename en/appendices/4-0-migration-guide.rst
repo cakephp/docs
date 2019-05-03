@@ -59,6 +59,11 @@ Controller
   For example if your controller method is ``forgetPassword()`` then using string
   ``forgotpassword`` in URL will not match as action name.
 
+Datasources
+-----------
+
+* ``ModelAwareTrait::$modelClass`` is now protected.
+
 Http
 ----
 
