@@ -77,7 +77,7 @@ Contents
     Authorization </authorization/>
     Authentication </authentication/>
     chronos
-    debug-kit </debugkit>
+    debug-kit </debugkit/>
     migrations
     elasticsearch
     upgrade-tool
