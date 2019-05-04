@@ -75,7 +75,7 @@ Conteúdo
     :caption: Plugins
 
     chronos
-    debug-kit </debugkit/3.x/pt/>
+    Debug Kit <https://book.cakephp.org/debugkit/3.x/pt/>
     migrations
     elasticsearch
     upgrade-tool

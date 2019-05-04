@@ -74,10 +74,10 @@ Contents
     :maxdepth: 3
     :caption: Plugins
 
-    Authorization </authorization/>
-    Authentication </authentication/>
+    Authorization <https://book.cakephp.org/authorization/>
+    Authentication <https://book.cakephp.org/authentication/>
     chronos
-    debug-kit </debugkit/>
+    Debug Kit <https://book.cakephp.org/debugkit/>
     migrations
     elasticsearch
     upgrade-tool
