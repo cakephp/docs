@@ -1,4 +1,4 @@
 Debug Kit
 #########
 
-Esta página foi `movida </debugkit/pt/>`__.
+Esta página foi `movida </debugkit/3.x/pt/>`__.
