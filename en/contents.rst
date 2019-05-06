@@ -76,7 +76,7 @@ Contents
 
     Authorization <https://book.cakephp.org/authorization/>
     Authentication <https://book.cakephp.org/authentication/>
-    chronos
+    Chronos <https://book.cakephp.org/chronos/>
     Debug Kit <https://book.cakephp.org/debugkit/>
     migrations
     elasticsearch

@@ -74,7 +74,7 @@ Contenu
     :maxdepth: 3
     :caption: Plugins
 
-    chronos
+    Chronos <https://book.cakephp.org/chronos/1.x/fr/>
     Debug Kit <https://book.cakephp.org/debugkit/3.x/fr/>
     migrations
     elasticsearch
