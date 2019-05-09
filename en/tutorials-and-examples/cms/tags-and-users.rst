@@ -153,41 +153,32 @@ Ideally, we'd have a URL that looks like
 find all the articles that have the 'funny', 'cat' or 'gifs' tags. Before we
 can implement this, we'll add a new route. Your **config/routes.php** should
 look like::
-
+    
     <?php
-    use Cake\Core\Plugin;
-    use Cake\Routing\Route\DashedRoute;
+    use Cake\Http\Middleware\CsrfProtectionMiddleware;
+    use Cake\Routing\RouteBuilder;
     use Cake\Routing\Router;
+    use Cake\Routing\Route\DashedRoute;
 
     Router::defaultRouteClass(DashedRoute::class);
 
+    Router::scope('/', function (RouteBuilder $routes) {
+        // Register scoped middleware for in scopes.
+        $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware([
+            'httpOnly' => true
+        ]));
+        $routes->applyMiddleware('csrf');
+        $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+        $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
+        $routes->fallbacks(DashedRoute::class);
+    });
+    // Add this
     // New route we're adding for our tagged action.
     // The trailing `*` tells CakePHP that this action has
     // passed parameters.
-    Router::scope(
-        '/articles',
-        ['controller' => 'Articles'],
-        function ($routes) {
-            $routes->connect('/tagged/*', ['action' => 'tags']);
-        }
-    );
-
-    Router::scope('/', function ($routes) {
-        // Connect the default home and /pages/* routes.
-        $routes->connect('/', [
-            'controller' => 'Pages',
-            'action' => 'display', 'home'
-        ]);
-        $routes->connect('/pages/*', [
-            'controller' => 'Pages',
-            'action' => 'display'
-        ]);
-
-        // Connect the conventions based default routes.
-        $routes->fallbacks();
+    Router::scope('/articles', function (RouteBuilder $routes) {
+        $routes->connect('/tagged/*', ['controller' => 'Articles', 'action' => 'tags']);
     });
-
-    Plugin::routes();
 
 The above defines a new 'route' which connects the **/articles/tagged/** path,
 to ``ArticlesController::tags()``. By defining routes, you can isolate how your
