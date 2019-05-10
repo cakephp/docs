@@ -874,7 +874,7 @@ Se você estiver usando um schema legado que requer citação de identificador, 
 habilitar isso usando a configuração ``quoteIdentifiers``` em seu
 :ref:`database-configuration`. Você também pode habilitar esse recurso em tempo de execução::
 
-    $conn->driver()->autoQuoting(true);
+    $conn->getDriver()->enableAutoQuoting(true);
 
 Quando habilitado, a citação de identificador causará uma *traversal query* adicional
 que converte todos os identificadores em objetos ``IdentifierExpression``.
