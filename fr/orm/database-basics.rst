@@ -940,7 +940,7 @@ identifiers, vous pouvez l'activer en utilisant le paramètre
 ``quoteIdentifiers`` dans votre :ref:`database-configuration`. Vous pouvez
 aussi activer cette fonctionnalité à la volée::
 
-    $conn->getDriver()->enableAutoQuoting(true);
+    $conn->getDriver()->enableAutoQuoting();
 
 Quand elle est activée, l'identifier quoting va entrainer des requêtes
 supplémentaires traversales qui convertissent tous les identifiers en objets

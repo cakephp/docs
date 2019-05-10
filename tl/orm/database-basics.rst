@@ -884,7 +884,7 @@ If you are using a legacy schema that requires identifier quoting you can enable
 it using the ``quoteIdentifiers`` setting in your
 :ref:`database-configuration`. You can also enable this feature at runtime::
 
-    $conn->getDriver()->enableAutoQuoting(true);
+    $conn->getDriver()->enableAutoQuoting();
 
 When enabled, identifier quoting will cause additional query traversal that
 converts all identifiers into ``IdentifierExpression`` objects.

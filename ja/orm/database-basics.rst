@@ -879,7 +879,7 @@ Web リクエストの時に便利です。 ::
 引用符を使うことができます。
 また、実行時にこの機能を有効にすることもできます。 ::
 
-    $conn->getDriver()->enableAutoQuoting(true);
+    $conn->getDriver()->enableAutoQuoting();
 
 有効にすると、引用識別子は 全ての識別子を ``IdentifierExpression`` オブジェクトに
 変換するトラバーサルが発生する原因になります。
