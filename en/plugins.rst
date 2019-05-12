@@ -101,7 +101,7 @@ autoloading with ``Plugin``::
 
 .. note::
     IMPORTANT: ``autoload`` option is not available on ``addPlugin()``, you should use ``composer dumpautoload`` instead.
- 
+
 Loading a Plugin
 ================
 
@@ -176,7 +176,7 @@ appliation::
 
     // In Application::bootstrap()
     use ContactManager\Plugin as ContactManagerPlugin;
-    
+
     // Disable routes for the ContactManager plugin
     $this->addPlugin(ContactManagerPlugin::class, ['routes' => false]);
 
@@ -185,7 +185,7 @@ classes::
 
     // In Application::bootstrap()
     use ContactManager\Plugin as ContactManagerPlugin;
-    
+
     // Use the disable/enable to configure hooks.
     $plugin = new ContactManagerPlugin();
 
@@ -378,7 +378,7 @@ Plugin Objects
 ==============
 
 Plugin Objects allow a plugin author to define set-up logic, define default
-hooks, load routes, middleware and console commands. Plugin objects live in 
+hooks, load routes, middleware and console commands. Plugin objects live in
 **src/Plugin.php**. For our ContactManager plugin, our plugin class could look
 like::
 
@@ -403,7 +403,7 @@ like::
 
         public function bootstrap(PluginApplicationInterface $app)
         {
-            // Add constants, load configuration defaults. 
+            // Add constants, load configuration defaults.
             // By default will load `config/bootstrap.php` in the plugin.
             parent::bootstrap($app);
         }
@@ -600,6 +600,9 @@ You can use ``TableRegistry`` to load your plugin tables using the familiar
 
     use Cake\ORM\TableRegistry;
 
+    $contacts = TableRegistry::getTableLocator()->get('ContactManager.Contacts');
+
+    // Prior to 3.6.0
     $contacts = TableRegistry::get('ContactManager.Contacts');
 
 Alternatively, from a controller context, you can use::

@@ -26,7 +26,10 @@ créer une nouvelle entity et de la passer à la méthode ``save()`` de la class
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $articlesTable = TableRegistry::get('Articles');
+
+    $articlesTable = TableRegistry::getTableLocator()->get('Articles');
     $article = $articlesTable->newEntity();
 
     $article->title = 'A New Article';
@@ -45,7 +48,10 @@ but::
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $articlesTable = TableRegistry::get('Articles');
+
+    $articlesTable = TableRegistry::getTableLocator()->get('Articles');
     $article = $articlesTable->get(12); // Retourne l'article avec l'id 12
 
     $article->title = 'Un nouveau titre pour cet article';
@@ -62,7 +68,10 @@ Enregistrements avec Associations
 Par défaut, la méthode ``save()`` ne sauvegardera qu'un seul niveau
 d'association::
 
+    // Prior to 3.6.0
     $articlesTable = TableRegistry::get('Articles');
+
+    $articlesTable = TableRegistry::getTableLocator()->get('Articles');
     $author = $articlesTable->Authors->findByUserName('mark')->first();
 
     $article = $articlesTable->newEntity();
@@ -180,7 +189,10 @@ Table facilite la conversion d'une ou de plusieurs entities à partir des
 données requêtées. Vous pouvez convertir une entity unique en utilisant::
 
     // Dans un controller.
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     // Valide et convertit en un objet Entity
     $entity = $articles->newEntity($this->request->getData());
 
@@ -213,7 +225,10 @@ imbriquées, vous devez définir quelles associations doivent être prises en
 compte::
 
     // Dans un controller
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // Nouvelle entity avec des associations imbriquées
     $entity = $articles->newEntity($this->request->getData(), [
@@ -227,7 +242,10 @@ Comments doivent être prises en compte. D'une autre façon, vous pouvez utilise
 la notation par point pour être plus bref::
 
     // Dans un controller
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // Nouvelle entity avec des associations imbriquées en utilisant
     // la notation par point
@@ -247,7 +265,10 @@ contraire ne lui soit spécifié. Vous pouvez également changer l'ensemble
 de validation utilisé par association::
 
     // Dans un controller
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // Ne fait pas la validation pour l'association Tags et
     // appelle l'ensemble de validation 'signup' pour Comments.Users
@@ -375,7 +396,10 @@ Lorsque vous créez des formulaires de création/mise à jour d'enregistrements
 multiples en une seule opération vous pouvez utiliser ``newEntities()``::
 
     // Dans un controller.
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $entities = $articles->newEntities($this->request->getData());
 
 Dans cette situation, les données de requête pour plusieurs articles doivent
@@ -427,7 +451,10 @@ propriété ``_accessible``. Dans ce cas, vous pouvez utiliser l'option
 associations existantes entre certaines entities::
 
     // Dans un controller.
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags', 'Comments' => [
@@ -461,7 +488,10 @@ fusionner un tableau de données brutes dans une entity existante en utilisant l
 méthode ``patchEntity()``::
 
     // Dans un controller.
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->getData());
     $articles->save($article);
@@ -476,7 +506,10 @@ validation lors du patch d'une entity, passez l'option ``validate`` comme
 montré ci-dessous::
 
     // Dans un controller.
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $data, ['validate' => false]);
 
@@ -612,7 +645,10 @@ les clés primaires et exécuter une suppression batch pour celles qui ne sont
 pas dans la liste::
 
     // Dans un controller.
+    // Prior to 3.6.0
     $comments = TableRegistry::get('Comments');
+
+    $comments = TableRegistry::getTableLocator()->get('Comments');
     $present = (new Collection($entity->comments))->extract('id')->filter()->toArray();
     $comments->deleteAll([
         'article_id' => $article->id,
@@ -630,7 +666,10 @@ manquantes dans le tableau original des entities seront retirées et non
 présentes dans les résultats::
 
     // Dans un controller.
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $list = $articles->find('popular')->toArray();
     $patched = $articles->patchEntities($list, $this->request->getData());
     foreach ($patched as $entity) {
@@ -773,7 +812,10 @@ devez d'abord hydrater une nouvelle entity en utilisant ``newEntity()`` pour
 passer dans ``save()``. Pare exemple::
 
   // Dans un controller
+  // Prior to 3.6.0
   $articles = TableRegistry::get('Articles');
+
+  $articles = TableRegistry::getTableLocator()->get('Articles');
   $article = $articles->newEntity($this->request->getData());
   if ($articles->save($article)) {
       // ...
@@ -791,7 +833,10 @@ Une fois que vous avez chargé quelques entities, vous voudrez probablement les
 modifier et les mettre à jour dans votre base de données. C'est un exercice
 simple dans CakePHP::
 
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->find('all')->where(['id' => 2])->first();
 
     $article->title = 'My new title';
@@ -926,7 +971,11 @@ Par exemple::
             'username' => 'mark'
         ]
     ];
+
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Users']
     ]);
@@ -949,7 +998,11 @@ Par exemple::
             'twitter' => '@cakephp'
         ]
     ];
+
+    // Prior to 3.6.0
     $users = TableRegistry::get('Users');
+
+    $users = TableRegistry::getTableLocator()->get('Users');
     $user = $users->newEntity($data, [
         'associated' => ['Profiles']
     ]);
@@ -971,7 +1024,11 @@ Par exemple::
             ['body' => 'I really like this.']
         ]
     ];
+
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Comments']
     ]);
@@ -1021,7 +1078,11 @@ Par exemple::
             ['tag' => 'Framework']
         ]
     ];
+
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Tags']
     ]);
@@ -1248,7 +1309,11 @@ options que celles acceptées par ``save()``::
             'published' => 1
         ],
     ];
+
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $entities = $articles->newEntities($data);
     $result = $articles->saveMany($entities);
 

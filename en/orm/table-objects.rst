@@ -354,7 +354,7 @@ You can manage event priorities in one of a few ways:
    ``Model.implementedEvents()`` method. This allows you to assign a different
    priority per callback-function::
 
-        // In a Table class. 
+        // In a Table class.
         public function implementedEvents()
         {
             $events = parent::implementedEvents();
@@ -463,7 +463,7 @@ Configuring Table Objects
 When loading tables from the registry you can customize their dependencies, or
 use mock objects by providing an ``$options`` array::
 
-    $articles = TableRegistry::get('Articles', [
+    $articles = TableRegistry::getTableLocator()->get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
         'table' => 'my_articles',
         'connection' => $connectionObject,
@@ -496,7 +496,7 @@ Configuration data is stored *per alias*, and can be overridden by an object's
 
 .. note::
 
-    Static API of `Cake\ORM\TableRegistry` has been deprecated in 3.6.0. 
+    Static API of `Cake\ORM\TableRegistry` has been deprecated in 3.6.0.
     Use a table locator directly instead.
 
 Flushing the Registry

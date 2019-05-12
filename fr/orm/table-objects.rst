@@ -437,7 +437,7 @@ Lors du chargement des tables à partir du registry, vous pouvez personnaliser
 leurs dépendances, ou utiliser les objets factices en fournissant un tableau
 ``$options``::
 
-    $articles = TableRegistry::get('Articles', [
+    $articles = TableRegistry::getTableLocator()->get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
         'table' => 'my_articles',
         'connection' => $connectionObject,

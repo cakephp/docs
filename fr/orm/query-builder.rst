@@ -24,7 +24,11 @@ fonctionnalités de l'ORM, si nécessaire. Consultez la section
 :ref:`database-queries` pour plus d'informations::
 
     use Cake\ORM\TableRegistry;
+
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // Commence une nouvelle requête.
     $query = $articles->find();
@@ -43,7 +47,10 @@ Récupérer les Lignes d'une Table
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $query = TableRegistry::get('Articles')->find();
+
+    $query = TableRegistry::getTableLocator()->get('Articles')->find();
 
     foreach ($query as $article) {
         debug($article->title);

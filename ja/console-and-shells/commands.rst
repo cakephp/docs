@@ -184,7 +184,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
     終了コードの 64 から 78 は避けてください。それらは ``sysexits.h`` で記述された
     特定の意味を持っています。終了コードの 127 以上を避けてください。
     それらは、 SIGKILL や SIGSEGV のようなシグナルによるプロセスの終了を示すために使用されます。
-    
+
     従来の終了コードの詳細については、ほとんどの Unixシステム の sysexit マニュアルページ
     (``man sysexits``)、または Windows の ``System Error Codes`` ヘルプページを
     参照してください。
@@ -331,7 +331,10 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
             $this->exec('update_table Users');
             $this->assertExitCode(Command::CODE_SUCCESS);
 
+            // Prior to 3.6.0
             $user = TableRegistry::get('Users')->get(1);
+
+            $user = TableRegistry::getTableLocator()->get('Users')->get(1);
             $this->assertSame($user->modified->timestamp, $now->timestamp);
 
             FrozenTime::setTestNow(null);
@@ -411,7 +414,10 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
         $this->exec('update_table Users', ['y']);
         $this->assertExitCode(Command::CODE_SUCCESS);
 
+        // Prior to 3.6.0
         $user = TableRegistry::get('Users')->get(1);
+
+        $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $this->assertSame($user->modified->timestamp, $now->timestamp);
 
         FrozenTime::setTestNow(null);
@@ -419,14 +425,20 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     public function testUpdateModifiedUnsure()
     {
+        // Prior to 3.6.0
         $user = TableRegistry::get('Users')->get(1);
+
+        $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $original = $user->modified->timestamp;
 
         $this->exec('my_console best_framework', ['n']);
         $this->assertExitCode(Command::CODE_ERROR);
         $this->assertErrorContains('You need to be sure.');
 
+        // Prior to 3.6.0
         $user = TableRegistry::get('Users')->get(1);
+
+        $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $this->assertSame($original, $user->timestamp);
     }
 
