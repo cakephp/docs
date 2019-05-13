@@ -19,9 +19,6 @@ des requêtes en utilisant les models de votre application::
     App : App
     Path: /Users/mark/projects/cakephp-app/src/
     ---------------------------------------------------------------
-    // Prior to 3.6.0
-    >>> $articles = Cake\ORM\TableRegistry::getTableLocator()->get('Articles');
-
     >>> $articles = Cake\ORM\TableRegistry::getTableLocator()->get('Articles');
     // object(Cake\ORM\Table)(
     //
