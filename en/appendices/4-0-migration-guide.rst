@@ -204,6 +204,11 @@ Mailer
   ``Email`` class is used. The only difference is that you now need to use ``Email::setViewVars()``
   instead of ``Email::set()`` to set template variables.
 
+TestSuite
+---------
+
+* ``TestSuite\EmailTrait::assertMailContainsAttachment()`` was added.
+
 View
 ----
 
