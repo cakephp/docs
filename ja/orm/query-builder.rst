@@ -22,7 +22,11 @@ SQL インジェクション攻撃から守っています。
 のセクションを参照してください。 ::
 
     use Cake\ORM\TableRegistry;
+
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // 新しいクエリーを始めます。
     $query = $articles->find();
@@ -40,7 +44,10 @@ SQL インジェクション攻撃から守っています。
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $query = TableRegistry::get('Articles')->find();
+
+    $query = TableRegistry::getTableLocator()->get('Articles')->find();
 
     foreach ($query as $article) {
         debug($article->title);

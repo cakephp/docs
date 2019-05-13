@@ -59,8 +59,12 @@ CakePHP の ORM を使うためにエンティティークラスを生成する�
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $article = TableRegistry::get('Articles')->newEntity();
-    $article = TableRegistry::get('Articles')->newEntity([
+
+    $article = TableRegistry::getTableLocator()->get('Articles')->newEntity();
+
+    $article = TableRegistry::getTableLocator()->get('Articles')->newEntity([
         'id' => 1,
         'title' => 'New Article',
         'created' => new DateTime('now')
@@ -158,7 +162,7 @@ CakePHP の ORM を使うためにエンティティークラスを生成する�
 
     echo $article->title;
     echo $article->get('title');
-    
+
 .. note::
 
     フィールドを参照するたびに、アクセサーのコードが実行されます。

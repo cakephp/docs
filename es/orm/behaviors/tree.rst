@@ -40,7 +40,10 @@ Active el Tree behavior agregándolo a la Tabla donde usted desea almacenar los 
 
 Tras agregarlas, puede dejar que CakePHP construya la estructura interna si la tabla ya contiene algunos registros::
 
+    // Prior to 3.6.0
     $categories = TableRegistry::get('Categories');
+
+    $categories = TableRegistry::getTableLocator()->get('Categories');
     $categories->recover();
 
 Usted puede comprobar que funciona recuperando cualquier registro de la tabla y preguntando cuantos descendientes posee::

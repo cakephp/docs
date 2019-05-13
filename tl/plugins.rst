@@ -466,6 +466,9 @@ You can use ``TableRegistry`` to load your plugin tables using the familiar
 
     use Cake\ORM\TableRegistry;
 
+    $contacts = TableRegistry::getTableLocator()->get('ContactManager.Contacts');
+
+    // Prior to 3.6.0
     $contacts = TableRegistry::get('ContactManager.Contacts');
 
 Alternatively, from a controller context, you can use::
