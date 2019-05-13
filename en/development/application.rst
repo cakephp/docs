@@ -44,6 +44,7 @@ requires a few changes to your code.
    <https://github.com/cakephp/app/tree/master/config/bootstrap.php>`__,
    being careful to preserve whatever additions and changes are specific to
    your application.  The bootstrap.php updates include
+
    * Disabling the ``_cake_routes_`` cache in development mode
    * Removing the requirements section (now in **config/requirements.php**)
    * Removing DebugKit plugin loading (now in **src/Application.php**)
