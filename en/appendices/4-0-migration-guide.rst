@@ -154,7 +154,7 @@ Cache
 * ``Cake\Cache\CacheEngine::gc()`` and all implementations of this method have
   been removed. This method was a no-op in most cache drivers and was only used
   in file caching.
-  
+
 I18n
 ----
 
@@ -178,6 +178,14 @@ Database
 
 * If your database's timezone does not match PHP timezone then you can use the
   ``DateTime::setTimezone()`` method. See :ref:`datetime-type` for details.
+
+ORM
+---
+
+* ``Table::saveManyOrFail()`` method has been added that will throw ``PersistenceFailedException``
+  with the specific entity that failed in case of an error. The entities are saved transaction safe.
+* ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been added for removing many
+  entities at once including callbacks. The entities are removed transaction safe.
 
 Error
 -----
