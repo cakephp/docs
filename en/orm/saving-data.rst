@@ -852,10 +852,11 @@ the database. See the form helper documentation for :ref:`how to build inputs
 for associations <associated-form-inputs>`.
 
 If you are building or modifying association data after building your entities
-you will have to mark the association property as modified with ``dirty()``::
+you will have to mark the association property as modified with ``setDirty()``::
 
     $company->author->name = 'Master Chef';
-    $company->dirty('author', true);
+    // Prior to 3.5 use dirty()
+    $company->setDirty('author', true);
 
 Saving BelongsTo Associations
 -----------------------------
@@ -949,9 +950,10 @@ the association property as 'dirty'. This lets the ORM know that the association
 property has to be persisted::
 
     $article->comments[] = $comment;
-    $article->dirty('comments', true);
+    // Prior to 3.5 use dirty()
+    $article->setDirty('comments', true);
 
-Without the call to ``dirty()`` the updated comments will not be saved.
+Without the call to ``setDirty()`` the updated comments will not be saved.
 
 If you are creating a new entity, and want to add existing records to a has
 many/belongs to many association you need to initialize the association property
@@ -1012,9 +1014,10 @@ an existing association you should always mark the association property as
 persisted::
 
     $article->tags[] = $tag;
-    $article->dirty('tags', true);
+    // Prior to 3.5 use dirty()
+    $article->setDirty('tags', true);
 
-Without the call to ``dirty()`` the updated tags will not be saved.
+Without the call to ``setDirty()`` the updated tags will not be saved.
 
 Often you'll find yourself wanting to make an association between two existing
 entities, eg. a user coauthoring an article. This is done by using the method
