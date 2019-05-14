@@ -154,7 +154,7 @@ proviennent d'une installation fraîche de CakePHP.
 Commandes
 ---------
 
-Exemple de rendu pour l'autocomplétion des commandes
+Exemple de rendu pour l'autocomplétion des commandes:
 
 .. code-block:: bash
 
@@ -165,7 +165,7 @@ Exemple de rendu pour l'autocomplétion des commandes
 Sous-commandes
 --------------
 
-Exemple de rendu pour l'autocomplétion des sous-commandes
+Exemple de rendu pour l'autocomplétion des sous-commandes:
 
 .. code-block:: bash
 
@@ -180,7 +180,7 @@ Exemple de rendu pour l'autocomplétion des sous-commandes
 Options
 -------
 
-Exemple de rendu pour l'autocomplétion des options d'une sous-commande
+Exemple de rendu pour l'autocomplétion des options d'une sous-commande:
 
 .. code-block:: bash
 

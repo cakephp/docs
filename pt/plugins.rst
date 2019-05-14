@@ -107,7 +107,7 @@ deve se parecer com o seguinte::
         "AcmeCorp\\Users\\Test\\": "./plugins/AcmeCorp/Users/tests"
     }
 
-Além disso, você precisará dizer ao Composer para atualizar o cache de autoloading
+Além disso, você precisará dizer ao Composer para atualizar o cache de autoloading:
 
 .. code-block:: bash
 

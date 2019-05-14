@@ -267,7 +267,7 @@ Usando UTI para Seleção de Plural
 
 O primeiro está aproveitando o formato de mensagem ``ICU`` que vem por padrão
 nas funções de tradução. Nos arquivos de traduções você pode ter as seguintes
-cadeias
+cadeias:
 
 .. code-block:: pot
 
@@ -306,7 +306,7 @@ Note que essa referência para ``[count placeholder]`` dentro de ``{message}``
 você tem que usar ``#``.
 
 Você pode usar ids de mensagem mais simples se você não deseja digitar a plena
-seqüência de seleção para plural em seu código
+seqüência de seleção para plural em seu código:
 
 .. code-block:: pot
 

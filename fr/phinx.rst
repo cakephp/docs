@@ -41,7 +41,7 @@ internet de `Composer <https://getcomposer.org/>`_ pour avoir plus d’informati
 
 	Phinx a besoin au minimum de PHP 5.4 (ou supérieur)
 
-Pour installer Phinx, il suffit simplement de l'appeler via Composer
+Pour installer Phinx, il suffit simplement de l'appeler via Composer:
 
 .. code-block:: bash
 

@@ -116,7 +116,7 @@ should resemble the following::
         "AcmeCorp\\Users\\Test\\": "plugins/AcmeCorp/Users/tests/"
     }
 
-Additionally, you will need to tell Composer to refresh its autoloading cache
+Additionally, you will need to tell Composer to refresh its autoloading cache:
 
 .. code-block:: bash
 

@@ -280,7 +280,7 @@ Utiliser la Sélection Plurielle ICU
 
 La première tire parti du format de message ``ICU`` qui est fourni par défaut
 dans les fonctions de traductions. Dans les fichiers de traduction vous
-pourriez avoir les chaines suivantes
+pourriez avoir les chaines suivantes:
 
 .. code-block:: pot
 

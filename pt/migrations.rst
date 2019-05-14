@@ -18,7 +18,7 @@ Instalação
 Por padrão o plugin é instalado junto com o esqueleto da aplicação.
 Se você o removeu e quer reinstalá-lo, execute o comando a seguir a partir do
 diretório **ROOT** da sua aplicação
-(onde o arquivo composer.json está localizado)
+(onde o arquivo composer.json está localizado):
 
 .. code-block:: bash
 
@@ -149,7 +149,7 @@ os arquivos de migração.
 Sintaxe
 -------
 
-A sintaxe do ``bake`` para a geração de migrações segue o formato abaixo
+A sintaxe do ``bake`` para a geração de migrações segue o formato abaixo:
 
 .. code-block:: bash
 
@@ -167,7 +167,7 @@ através destes comandos.
 
 Além disso, você pode criar um arquivo de migração vazio caso deseje ter um
 controle total do que precisa ser executado. Para isto, apenas omita a definição
-das colunas
+das colunas:
 
 .. code-block:: bash
 
@@ -255,7 +255,7 @@ ou são definidos com valor inválido. O tipo de campo padrão é ``string``;
 Criando uma tabela
 ------------------
 
-Você pode utilizar o ``bake`` para criar uma tabela
+Você pode utilizar o ``bake`` para criar uma tabela:
 
 .. code-block:: bash
 
@@ -304,7 +304,7 @@ Adicionando colunas a uma tabela existente
 
 Se o nome da migração na linha de comando estiver na forma "AddXXXToYYY" e
 for seguido por uma lista de nomes de colunas e tipos, então o arquivo de
-migração com o código para criar as colunas será gerado
+migração com o código para criar as colunas será gerado:
 
 .. code-block:: bash
 
@@ -328,7 +328,7 @@ A linha de comando acima irá gerar um arquivo com o seguinte conteúdo::
 Adicionando uma coluna como indice a uma tabela
 -----------------------------------------------
 
-Também é possível adicionar índices a colunas
+Também é possível adicionar índices a colunas:
 
 .. code-block:: bash
 
@@ -392,7 +392,7 @@ Removendo uma coluna de uma tabela
 
 Da mesma forma, você pode gerar uma migração para remover uma coluna
 utilizando a linha de comando, se o nome da migração estiver na forma
-"RemoveXXXFromYYY"
+"RemoveXXXFromYYY":
 
 .. code-block:: bash
 
@@ -449,7 +449,7 @@ snapshot as tabelas lá definidas.
 
 A mesma lógica será aplicada implicitamente se você quiser fazer o bake de um
 snapshot para um plugin. Para fazer isso, você precisa usar a opção
-``--plugin``, veja a seguir
+``--plugin``, veja a seguir:
 
 .. code-block:: bash
 
@@ -473,7 +473,7 @@ Gerando um *diff* entre dois estados da base de dados
 
 Você pode gerar um arquivo de migração que agrupará todas as diferenças entre
 dois estados de uma base de dados usando ``migration_diff``. Para fazê-lo,
-você pode usar o seguinte comando
+você pode usar o seguinte comando:
 
 .. code-block:: bash
 
@@ -523,7 +523,7 @@ Os Comandos
 ---------------------------------
 
 Depois de ter gerado ou escrito seu arquivo de migração, você precisa executar
-o seguinte comando para aplicar as mudanças a sua base de dados
+o seguinte comando para aplicar as mudanças a sua base de dados:
 
 .. code-block:: bash
 
@@ -571,7 +571,7 @@ Você também pode utilizar as opções ``--source``, ``--connection`` e
 
 O comando status exibe uma lista de todas as migrações juntamente com seu
 status. Você pode utilizar este comando para ver quais migrações foram
-executadas
+executadas:
 
 .. code-block:: bash
 
@@ -595,7 +595,7 @@ efetivamente executá-las.
 Para fazer isto, você pode usar o comando ``mark_migrated``. O comando é
 bastante semelhante aos outros comandos.
 
-Você pode marcar todas as migrações como migradas utilizando este comando
+Você pode marcar todas as migrações como migradas utilizando este comando:
 
 .. code-block:: bash
 
@@ -636,7 +636,7 @@ Você também pode utilizar as opções ``--source``, ``--connection`` e
     A seguinte maneira de utilizar o comando foi depreciada. Use somente se
     você estiver utilizando uma versão do plugin inferior a 1.4.0.
 
-Este comando espera um número de versão de migração como argumento
+Este comando espera um número de versão de migração como argumento:
 
 .. code-block:: bash
 
@@ -644,7 +644,7 @@ Este comando espera um número de versão de migração como argumento
 
 Se você deseja marcar todas as migrações como migradas, você pode utilizar
 o valor especial ``all``. Se você o utilizar, ele irá marcar todas as migrações
-como migradas
+como migradas:
 
 .. code-block:: bash
 
@@ -703,7 +703,7 @@ tabela. Você pode limitar o número de linhas a exportar usando a opção
 Se você deseja incluir apenas uma seleção dos campos da tabela no seu
 arquivo de *seed*, você pode usar a opção ``--fields``. Ela recebe a
 lista de campos a incluir na forma de uma *string* separada por
-vírgulas
+vírgulas:
 
 .. code-block:: bash
 

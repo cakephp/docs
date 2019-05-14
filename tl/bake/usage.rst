@@ -13,7 +13,7 @@ na koneksyon na naka-configure. Tingnan ang seksyon sa :ref:`database configurat
 <database-configuration>` para sa karagdagang impormasyon.
 
 Kapag pinatakbo na walang mga argumento ang ``bin/cake bake`` ay mag-output ng isang listahan ng magagamit na
-mga gawain. Dapat mong makita ang isang bagay tulad ng
+mga gawain. Dapat mong makita ang isang bagay tulad ng:
 
 .. code-block:: bash
 
@@ -53,7 +53,7 @@ mga gawain. Dapat mong makita ang isang bagay tulad ng
     By using `cake bake [name]` you can invoke a specific bake task.
 
 Makakakuha ka ng karagdagang impormasyon kung ano ang ginagawa ng bawat gawain, at kung anung mga opsyon ang
-magagamit gamit ang ``--help`` option
+magagamit gamit ang ``--help`` option:
 
 .. code-block:: bash
 

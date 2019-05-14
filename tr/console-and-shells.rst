@@ -37,7 +37,7 @@ Bu örnek, kullanıcının bir bash istemcisinde oturumu olduğunu ve CakePHP
 uygulamasının kök dizininde olduğunu varsaymaktadır.
 
 CakePHP uygulamaları bir uygulama için tüm kabuk ve görevleri içeren ``Console``
-dizini içerirler. Ayrıca çalıştırılabilir uygulama da mevcuttur
+dizini içerirler. Ayrıca çalıştırılabilir uygulama da mevcuttur:
 
 .. code-block:: bash
 
@@ -239,7 +239,7 @@ kullanabilmemizi sağlar::
         }
     }
 
-Görevlere doğrudan komut satırından ulaşabilirsiniz
+Görevlere doğrudan komut satırından ulaşabilirsiniz:
 
 .. code-block:: bash
 
@@ -489,9 +489,7 @@ Kanca metodları
 Seçenekleri Yapılandırmak ve Yardım Üretmek
 ===========================================
 
-.. php:class
-
-.. code-block:: bashOptionParser
+.. php:class OptionParser
 
 ``ConsoleOptionParser`` bir komut satırı seçeneği sağlar ve argüman ayrıştırıcıdır.
 

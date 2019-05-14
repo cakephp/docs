@@ -90,7 +90,7 @@ También necesitarás aplicar los permisos adecuados en el directorio ``/tmp``
 para que el servidor web pueda escribir en él. El mejor modo de hacer esto es
 encontrar con qué usuario corre tu servidor web (``<?= `whoami`; ?>``) y cambiar
 la propiedad del directorio ``tmp`` hacia dicho usuario. El comando final que
-ejecutarás (en \*nix) se parecerá al siguiente
+ejecutarás (en \*nix) se parecerá al siguiente:
 
 .. code-block:: bash
 
@@ -101,7 +101,7 @@ mediante una alerta mientras no estés en modo producción.
 
 A pesar de que no se recomienda, si no eres capaz de aplicar la propiedad del
 directorio al mismo usuario que el servidor web, puedes simplemente aplicar
-permisos de escritura al directorio ejecutando un comando tipo
+permisos de escritura al directorio ejecutando un comando tipo:
 
 .. code-block:: bash
 

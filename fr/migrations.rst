@@ -19,7 +19,7 @@ Installation
 Par défaut Migrations est installé avec le squelette d’application. Si vous le
 retirez et voulez le réinstaller, vous pouvez le faire en lançant ce qui suit à
 partir du répertoire ROOT de votre application (où le fichier composer.json est
-localisé)
+localisé):
 
 .. code-block:: bash
 
@@ -116,7 +116,7 @@ avec les définitions de colonne suivantes:
 
 Une fois que le fichier a été créé dans le dossier **config/Migrations**, vous
 pourrez exécuter la commande ``migrations`` suivante pour créer la table dans
-votre base de données
+votre base de données:
 
 .. code-block:: bash
 
@@ -154,7 +154,7 @@ migration.
 Syntaxe
 -------
 
-La syntaxe de la commande ``bake`` est de la forme suivante
+La syntaxe de la commande ``bake`` est de la forme suivante:
 
 .. code-block:: bash
 
@@ -174,7 +174,7 @@ fournir deux choses:
 
 De plus, vous pouvez créer un fichier de migration vide si vous voulez un
 contrôle total sur ce qui doit être executé, en ne spécifiant pas de définition
-de colonnes
+de colonnes:
 
 .. code-block:: bash
 
@@ -264,7 +264,7 @@ sont pas spécifiés ou définis avec une valeur invalide. Par défaut, le type 
 Créer une Table
 ---------------
 
-Vous pouvez utiliser ``bake`` pour créer une table
+Vous pouvez utiliser ``bake`` pour créer une table:
 
 .. code-block:: bash
 
@@ -315,7 +315,7 @@ Ajouter des Colonnes à une Table Existante
 Si le nom de la migration dans la ligne de commande est de la forme
 "AddXXXToYYY" et est suivie d'une liste de noms de colonnes et de types alors
 un fichier de migration contenant le code pour la création des colonnes sera
-généré
+généré:
 
 .. code-block:: bash
 
@@ -339,7 +339,7 @@ L'exécution de la ligne de commande ci-dessus va générer::
 Ajouter un Index de Colonne à une Table
 ---------------------------------------
 
-Il est également possible d'ajouter des indexes de colonnes
+Il est également possible d'ajouter des indexes de colonnes:
 
 .. code-block:: bash
 
@@ -367,7 +367,7 @@ Spécifier la Longueur d'un Champ
 .. versionadded:: cakephp/migrations 1.4
 
 Si vous voulez spécifier une longueur de champ, vous pouvez le faire entre
-crochets dans le type du champ, par exemple
+crochets dans le type du champ, par exemple:
 
 .. code-block:: bash
 
@@ -404,7 +404,7 @@ Retirer une Colonne d'une Table
 
 De la même façon, vous pouvez générer une migration pour retirer une colonne
 en utilisant la ligne de commande, si le nom de la migration est de la forme
-"RemoveXXXFromYYY"
+"RemoveXXXFromYYY":
 
 .. code-block:: bash
 
@@ -493,7 +493,7 @@ Générer un diff entre deux états de base de données
 
 Vous pouvez générer un fichier de migrations qui regroupera toutes les
 différences entre deux états de base de données en utilisant le template bake
-``migration_diff``. Pour cela, vous pouvez utiliser la commande suivante
+``migration_diff``. Pour cela, vous pouvez utiliser la commande suivante:
 
 .. code-block:: bash
 
@@ -520,7 +520,7 @@ utiliser l'option ``--connection``
 Si vous souhaitez utiliser la fonctionnalité de diff sur une application qui
 possède déjà un historique de migrations, vous allez avoir besoin de créer le
 fichier dump manuellement pour qu'il puisse être utilisé comme point de
-comparaison
+comparaison:
 
 .. code-block:: bash
 
@@ -545,7 +545,7 @@ Les Commandes
 
 Une fois que vous avez généré ou écrit votre fichier de migration, vous devez
 exécuter la commande suivante pour appliquer les modifications à votre base de
-données
+données:
 
 .. code-block:: bash
 
@@ -598,14 +598,14 @@ Vous pouvez aussi utilisez les options ``--source``, ``--connection`` et
 
 La commande ``status`` affiche une liste de toutes les migrations, ainsi que
 leur état actuel. Vous pouvez utiliser cette commande pour déterminer les
-migrations qui ont été exécutées
+migrations qui ont été exécutées:
 
 .. code-block:: bash
 
     $ bin/cake migrations status
 
 Vous pouvez aussi afficher les résultats avec le format JSON en utilisant
-l'option ``--format`` (ou ``-f`` en raccourci)
+l'option ``--format`` (ou ``-f`` en raccourci):
 
 .. code-block:: bash
 
@@ -625,7 +625,7 @@ Pour ce faire, vous pouvez utiliser la commande ``mark_migrated``.
 Cette commande fonctionne de la même manière que les autres commandes.
 
 Vous pouvez marquer toutes les migrations comme migrées en utilisant cette
-commande
+commande:
 
 .. code-block:: bash
 
@@ -666,7 +666,7 @@ Vous pouvez aussi utilisez les options ``--source``, ``--connection`` et
     Les instructions suivantes ont été dépréciées. Utilisez les seulement si
     vous utilisez une version du plugin inférieure à 1.4.0.
 
-La commande attend le numéro de version de la migration comme argument
+La commande attend le numéro de version de la migration comme argument:
 
 .. code-block:: bash
 
@@ -674,7 +674,7 @@ La commande attend le numéro de version de la migration comme argument
 
 Si vous souhaitez marquer toutes les migrations comme "migrées", vous pouvez
 utiliser la valeur spéciale ``all``. Si vous l'utilisez, toutes les migrations
-trouvées seront marquées comme "migrées"
+trouvées seront marquées comme "migrées":
 
 .. code-block:: bash
 
@@ -691,7 +691,7 @@ Par défaut, les fichiers de seed vont être recherchés dans le répertoire
 `instructions de Phinx pour construire les fichiers de seed <http://docs.phinx.org/en/latest/seeding.html#creating-a-new-seed-class>`_.
 
 En ce qui concerne migrations, une interface ``bake`` est fournie pour les
-fichiers de seed
+fichiers de seed:
 
 .. code-block:: bash
 
@@ -735,7 +735,7 @@ pouvez limiter le nombre de lignes exportées avec l'option ``--limit``
 
 Si vous ne souhaitez inclure qu'une sélection des champs de la table dans votre
 fichier de seed, vous pouvez utiliser l'option ``--fields``. Elle prend la
-liste des champs séparés par une virgule comme argument
+liste des champs séparés par une virgule comme argument:
 
 .. code-block:: bash
 
@@ -833,7 +833,7 @@ Utiliser Migrations dans les Plugins
 Les plugins peuvent également contenir des fichiers de migration. Cela rend les
 plugins destinés à la communauté beaucoup plus portable et plus facile à
 installer. Toutes les commandes du plugin Migrations supportent l'option
-``--plugin`` ou ``-p`` afin d'exécuter les commandes par rapport à ce plugin
+``--plugin`` ou ``-p`` afin d'exécuter les commandes par rapport à ce plugin:
 
 .. code-block:: bash
 
@@ -957,7 +957,7 @@ comme clé primaire.
 
     Quand vous spécifiez une clé primaire personnalisée avec les lignes de
     commande, vous devez la noter comme clé primaire dans le champ id,
-    sinon vous obtiendrez une erreur de champs id dupliqués, par exemple
+    sinon vous obtiendrez une erreur de champs id dupliqués, par exemple:
 
     .. code-block:: bash
 
@@ -1059,7 +1059,7 @@ Autrement, vous pourrez rencontrer des erreurs de colonnes inexistantes quand
 vous effectuerez des opérations sur vos nouvelles colonnes.
 Le Core de CakePHP inclut un
 :doc:`Shell de Cache du Schéma <console-and-shells/schema-cache>` que vous pouvez
-utilisez pour vider le cache
+utilisez pour vider le cache:
 
 .. code-block:: bash
 
@@ -1093,7 +1093,7 @@ généré à chaque que vous faites un migrate, un rollback ou que vous génére
 snapshot via bake pour permettre de suivre l'état de votre base de données à
 n'importe quel moment. Vous pouvez empêcher que ce fichier ne soit généré,
 comme par exemple lors d'un déploiement sur votre environnement de production,
-en utilisant l'option ``--no-lock`` sur les commandes mentionnées ci-dessus
+en utilisant l'option ``--no-lock`` sur les commandes mentionnées ci-dessus:
 
 .. code-block:: bash
 

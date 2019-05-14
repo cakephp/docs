@@ -120,7 +120,7 @@ de chaque requête en utilisant la stratégie d'auto-chargement ``files``::
     }
 
 Après avoir configuré les librairies de vendor, vous devrez regénérer
-l'autoloader de votre application en utilisant
+l'autoloader de votre application en utilisant:
 
 .. code-block:: bash
 

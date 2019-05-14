@@ -149,7 +149,7 @@ Tatlong uri ng autocompletion ang ibibigay. Ang sumusunod na output ay mula sa i
 Mga Utos
 --------
 
-Sample na output para sa autocompletion ng mga utos
+Sample na output para sa autocompletion ng mga utos:
 
 .. code-block:: bash
 
@@ -160,7 +160,7 @@ Sample na output para sa autocompletion ng mga utos
 Mga Subcommand
 --------------
 
-Sample na output para sa autocompletion ng mga subcommand
+Sample na output para sa autocompletion ng mga subcommand:
 
 .. code-block:: bash
 
@@ -175,7 +175,7 @@ Sample na output para sa autocompletion ng mga subcommand
 Mga Opsyon
 ----------
 
-Sample na output para sa autocompletion ng mga opsyon ng mga subcommand
+Sample na output para sa autocompletion ng mga opsyon ng mga subcommand:
 
 .. code-block:: bash
 

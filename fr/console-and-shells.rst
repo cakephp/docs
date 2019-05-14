@@ -249,7 +249,7 @@ tâches meilleures pour la réutilisation de fonctions identiques à
     }
 
 Vous pouvez aussi accéder aux tâches directement à partir de la ligne de
-commande
+commande:
 
 .. code-block:: bash
 
@@ -650,7 +650,7 @@ afficher un message et sortir avec un code spécifique, ou lancer la
     }
 
 L'exemple ci-dessus va retourner les codes de sortie suivants lorsqu'il est
-exécuté en ligne de commande
+exécuté en ligne de commande:
 
 .. code-block:: bash
 
@@ -694,9 +694,7 @@ Méthodes Hook
 Configurer les options et générer de l'aide
 ===========================================
 
-.. php:class
-
-.. code-block:: bashOptionParser
+.. php:class OptionParser
 
 ``ConsoleOptionParser`` helps provide a more familiar command line option and
 argument parser.

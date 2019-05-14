@@ -124,7 +124,7 @@ vers les dossiers doit ressembler à ceci::
     }
 
 De plus, vous aurez besoin de dire à Composer de refraichir le cache de
-l'autochargement
+l'autochargement:
 
 .. code-block:: bash
 

@@ -266,7 +266,7 @@ Using ICU Plural Selection
 
 The first one is taking advantage of the ``ICU`` message format that comes by
 default in the translation functions. In the translations file you could have
-the following strings
+the following strings:
 
 .. code-block:: pot
 
@@ -305,7 +305,7 @@ Note that to reference ``[count placeholder]`` within ``{message}`` you have to
 use ``#``.
 
 You can of course use simpler message ids if you don't want to type the full
-plural selection sequence in your code
+plural selection sequence in your code:
 
 .. code-block:: pot
 

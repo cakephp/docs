@@ -76,7 +76,7 @@ for short.
 
         $ phinx migrate -e development -t 20110103081132
 
-Use ``--dry-run`` to print the queries to standard output without executing them
+Use ``--dry-run`` to print the queries to standard output without executing them:
 
 .. code-block:: bash
 
@@ -127,7 +127,7 @@ breakpoint using the ``--force`` parameter or ``-f`` for short.
 
         $ phinx rollback -e development -t 0 -f
 
-Use ``--dry-run`` to print the queries to standard output without executing them
+Use ``--dry-run`` to print the queries to standard output without executing them:
 
 .. code-block:: bash
 

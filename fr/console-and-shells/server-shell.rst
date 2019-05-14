@@ -5,7 +5,7 @@ Serveur Shell
 serveur web de PHP. Bien que ce serveur **ne** soit **pas** fait pour une
 utilisation en production, il peut être pratique en développement quand vous
 voulez rapidement essayer une idée et ne voulez pas passer du temps à configurer
-Apache ou Nginx. Vous pouvez démarrer le serveur shell avec
+Apache ou Nginx. Vous pouvez démarrer le serveur shell avec:
 
 .. code-block:: bash
 
@@ -22,7 +22,7 @@ pouvez fermer le serveur en tapant ``CTRL-C`` dans votre terminal.
 Changer le Port et le Document Root
 ===================================
 
-Vous pouvez personnaliser le port et le document root en utilisant les options
+Vous pouvez personnaliser le port et le document root en utilisant les options:
 
 .. code-block:: bash
 

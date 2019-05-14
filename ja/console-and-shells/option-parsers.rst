@@ -2,9 +2,7 @@
 ##################
 
 .. php:namespace:: Cake\Console
-.. php:class
-
-.. code-block:: bashOptionParser
+.. php:class OptionParser
 
 コンソールアプリケーションは通常、端末からコマンドに情報を得るための主要な手段として
 オプションと引数を受け取ります。
