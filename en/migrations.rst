@@ -17,18 +17,22 @@ Installation
 By default Migrations is installed with the default application skeleton. If
 you've removed it and want to re-install it, you can do so by running the
 following from your application's ROOT directory (where composer.json file is
-located)::
+located)
+
+.. code-block:: bash
 
     $ php composer.phar require cakephp/migrations "@stable"
 
-    // Or if composer is installed globally
+    # Or if composer is installed globally
 
     $ composer require cakephp/migrations "@stable"
 
 To use the plugin you'll need to load it in your application's
 **config/bootstrap.php** file. You can use
 :ref:`CakePHP's Plugin shell <plugin-shell>` to load and unload plugins from
-your **config/bootstrap.php**::
+your **config/bootstrap.php**
+
+.. code-block:: bash
 
     $ bin/cake plugin load Migrations
 
@@ -147,7 +151,9 @@ files.
 Syntax
 ------
 
-The ``bake`` command syntax follows the form below::
+The ``bake`` command syntax follows the form below
+
+.. code-block:: bash
 
     $ bin/cake bake migration CreateProducts name:string description:text created modified
 
@@ -163,7 +169,9 @@ Due to the conventions, not all schema changes can be performed via these shell
 commands.
 
 Additionally you can create an empty migrations file if you want full control
-over what needs to be executed, by omitting to specify a columns definition::
+over what needs to be executed, by omitting to specify a columns definition
+
+.. code-block:: bash
 
     $ bin/cake migrations create MyCustomMigration
 
@@ -250,7 +258,9 @@ an invalid value. Default field type is ``string``:
 Creating a table
 ----------------
 
-You can use ``bake`` to create a table::
+You can use ``bake`` to create a table
+
+.. code-block:: bash
 
     $ bin/cake bake migration CreateProducts name:string description:text created modified
 
@@ -297,7 +307,9 @@ Adding columns to an existing table
 
 If the migration name in the command line is of the form "AddXXXToYYY" and is
 followed by a list of column names and types then a migration file containing
-the code for creating the columns will be generated::
+the code for creating the columns will be generated
+
+.. code-block:: bash
 
     $ bin/cake bake migration AddPriceToProducts price:decimal
 
@@ -319,7 +331,9 @@ Executing the command line above will generate::
 Adding a column as index to a table
 -----------------------------------
 
-It is also possible to add indexes to columns::
+It is also possible to add indexes to columns
+
+.. code-block:: bash
 
     $ bin/cake bake migration AddNameIndexToProducts name:string:index
 
@@ -345,7 +359,9 @@ Specifying field length
 .. versionadded:: cakephp/migrations 1.4
 
 If you need to specify a field length, you can do it within brackets in the
-field type, ie::
+field type, ie
+
+.. code-block:: bash
 
     $ bin/cake bake migration AddFullDescriptionToProducts full_description:string[60]
 
@@ -378,7 +394,9 @@ Removing a column from a table
 ------------------------------
 
 In the same way, you can generate a migration to remove a column by using the
-command line, if the migration name is of the form "RemoveXXXFromYYY"::
+command line, if the migration name is of the form "RemoveXXXFromYYY"
+
+.. code-block:: bash
 
     $ bin/cake bake migration RemovePriceFromProducts price
 
@@ -408,7 +426,9 @@ Generating migrations from an existing database
 
 If you are dealing with a pre-existing database and want to start using
 migrations, or to version control the initial schema of your application's
-database, you can run the ``migration_snapshot`` command::
+database, you can run the ``migration_snapshot`` command
+
+.. code-block:: bash
 
     $ bin/cake bake migration_snapshot Initial
 
@@ -418,12 +438,16 @@ containing all the create statements for all tables in your database.
 By default, the snapshot will be created by connecting to the database defined
 in the ``default`` connection configuration.
 If you need to bake a snapshot from a different datasource, you can use the
-``--connection`` option::
+``--connection`` option
+
+.. code-block:: bash
 
     $ bin/cake bake migration_snapshot Initial --connection my_other_connection
 
 You can also make sure the snapshot includes only the tables for which you have
-defined the corresponding model classes by using the ``--require-table`` flag::
+defined the corresponding model classes by using the ``--require-table`` flag
+
+.. code-block:: bash
 
     $ bin/cake bake migration_snapshot Initial --require-table
 
@@ -432,7 +456,9 @@ application ``Table`` classes and will only add the model tables in the snapshot
 .
 
 The same logic will be applied implicitly if you wish to bake a snapshot for a
-plugin. To do so, you need to use the ``--plugin`` option::
+plugin. To do so, you need to use the ``--plugin`` option
+
+.. code-block:: bash
 
     $ bin/cake bake migration_snapshot Initial --plugin MyPlugin
 
@@ -454,7 +480,9 @@ Generating a diff between two database states
 
 You can generate a migrations file that will group all the differences between
 two database states using the ``migration_diff`` bake template. To do so, you
-can use the following command::
+can use the following command
+
+.. code-block:: bash
 
     $ bin/cake bake migration_diff NameOfTheMigrations
 
@@ -470,13 +498,17 @@ you call the ``bake migration_diff`` command.
 By default, the diff will be created by connecting to the database defined
 in the ``default`` connection configuration.
 If you need to bake a diff from a different datasource, you can use the
-``--connection`` option::
+``--connection`` option
+
+.. code-block:: bash
 
     $ bin/cake bake migration_diff NameOfTheMigrations --connection my_other_connection
 
 If you want to use the diff feature on an application that already has a
 migrations history, you need to manually create the dump file that will be used
-as comparison::
+as comparison
+
+.. code-block:: bash
 
     $ bin/cake migrations dump
 
@@ -496,7 +528,9 @@ The commands
 ---------------------------------
 
 Once you have generated or written your migration file, you need to execute the
-following command to apply the changes to your database::
+following command to apply the changes to your database
+
+.. code-block:: bash
 
     # Run all the migrations
     $ bin/cake migrations migrate
@@ -525,7 +559,9 @@ following command to apply the changes to your database::
 -----------------------------------
 
 The Rollback command is used to undo previous migrations executed by this
-plugin. It is the reverse action of the ``migrate`` command::
+plugin. It is the reverse action of the ``migrate`` command
+
+.. code-block:: bash
 
     # You can rollback to the previous migration by using the
     # ``rollback`` command::
@@ -542,12 +578,16 @@ just like for the ``migrate`` command.
 ------------------------------
 
 The Status command prints a list of all migrations, along with their current
-status. You can use this command to determine which migrations have been run::
+status. You can use this command to determine which migrations have been run
+
+.. code-block:: bash
 
     $ bin/cake migrations status
 
 You can also output the results as a JSON formatted string using the
-``--format`` option (or ``-f`` for short)::
+``--format`` option (or ``-f`` for short)
+
+.. code-block:: bash
 
     $ bin/cake migrations status --format json
 
@@ -564,22 +604,30 @@ actually running them.
 In order to do this, you can use the ``mark_migrated`` command.
 The command works seamlessly as the other commands.
 
-You can mark all migrations as migrated using this command::
+You can mark all migrations as migrated using this command
+
+.. code-block:: bash
 
     $ bin/cake migrations mark_migrated
 
 You can also mark all migrations up to a specific version as migrated using
-the ``--target`` option::
+the ``--target`` option
+
+.. code-block:: bash
 
     $ bin/cake migrations mark_migrated --target=20151016204000
 
 If you do not want the targeted migration to be marked as migrated during the
-process, you can use the ``--exclude`` flag with it::
+process, you can use the ``--exclude`` flag with it
+
+.. code-block:: bash
 
     $ bin/cake migrations mark_migrated --target=20151016204000 --exclude
 
 Finally, if you wish to mark only the targeted migration as migrated, you can
-use the ``--only`` flag::
+use the ``--only`` flag
+
+.. code-block:: bash
 
     $ bin/cake migrations mark_migrated --target=20151016204000 --only
 
@@ -596,12 +644,16 @@ just like for the ``migrate`` command.
     The following way of using the command has been deprecated. Use it only
     if you are using a version of the plugin < 1.4.0.
 
-This command expects the migration version number as argument::
+This command expects the migration version number as argument
+
+.. code-block:: bash
 
     $ bin/cake migrations mark_migrated 20150420082532
 
 If you wish to mark all migrations as migrated, you can use the ``all`` special
-value. If you use it, it will mark all found migrations as migrated::
+value. If you use it, it will mark all found migrations as migrated
+
+.. code-block:: bash
 
     $ bin/cake migrations mark_migrated all
 
@@ -614,7 +666,9 @@ By default, seed files will be looked for in the ``config/Seeds`` directory of
 your application. Please make sure you follow
 `Phinx instructions to build your seed files <http://docs.phinx.org/en/latest/seeding.html#creating-a-new-seed-class>`_.
 
-As for migrations, a ``bake`` interface is provided for seed files::
+As for migrations, a ``bake`` interface is provided for seed files
+
+.. code-block:: bash
 
     # This will create a ArticlesSeed.php file in the directory config/Seeds of your application
     # By default, the table the seed will try to alter is the "tableized" version of the seed filename
@@ -635,19 +689,25 @@ As for migrations, a ``bake`` interface is provided for seed files::
     data from your database.
 
 As of 1.6.4, the ``bake seed`` command allows you to create a seed file with
-data exported from your database by using the ``--data`` flag::
+data exported from your database by using the ``--data`` flag
+
+.. code-block:: bash
 
     $ bin/cake bake seed --data Articles
 
 By default, it will export all the rows found in your table. You can limit the
-number of rows exported by using the ``--limit`` option::
+number of rows exported by using the ``--limit`` option
+
+.. code-block:: bash
 
     # Will only export the first 10 rows found
     $ bin/cake bake seed --data --limit 10 Articles
 
 If you only want to include a selection of fields from the table in your seed
 file, you can use the ``--fields`` option. It takes the list of fields to
-include as a comma separated value string::
+include as a comma separated value string
+
+.. code-block:: bash
 
     # Will only export the fields `id`, `title` and `excerpt`
     $ bin/cake bake seed --data --fields id,title,excerpt Articles
@@ -657,7 +717,9 @@ include as a comma separated value string::
     Of course you can use both the ``--limit`` and ``--fields`` options in the
     same command call.
 
-To seed your database, you can use the ``seed`` subcommand::
+To seed your database, you can use the ``seed`` subcommand
+
+.. code-block:: bash
 
     # Without parameters, the seed subcommand will run all available seeders
     # in the target directory, in alphabetical order.
@@ -712,7 +774,9 @@ method to define your own sequence of seeders execution::
 -------------------------------------------------------------
 
 The Dump command creates a file to be used with the ``migration_diff`` bake
-template::
+template
+
+.. code-block:: bash
 
     $ bin/cake migrations dump
 
@@ -732,7 +796,9 @@ Using Migrations In Plugins
 Plugins can also provide migration files. This makes plugins that are intended
 to be distributed much more portable and easy to install. All commands in the
 Migrations plugin support the ``--plugin`` or ``-p`` option that will scope the
-execution to the migrations relative to that plugin::
+execution to the migrations relative to that plugin
+
+.. code-block:: bash
 
     $ bin/cake migrations status -p PluginName
 
@@ -850,7 +916,9 @@ The above will create a ``CHAR(36)`` ``id`` column that is also the primary key.
 
     When specifying a custom primary key on the command line, you must note
     it as the primary key in the id field, otherwise you may get an error
-    regarding duplicate id fields, i.e.::
+    regarding duplicate id fields, i.e.
+
+    .. code-block:: bash
 
         $ bin/cake bake migration CreateProducts id:uuid:primary name:string description:text created modified
 
@@ -945,7 +1013,9 @@ cache so it renews the column metadata of your tables.
 Otherwise, you might end up having errors about columns not existing when
 performing operations on those new columns.
 The CakePHP Core includes a :doc:`Schema Cache Shell <console-and-shells/schema-cache>`
-that you can use to perform this operation::
+that you can use to perform this operation
+
+.. code-block:: bash
 
     // Prior to 3.6 use orm_cache
     $ bin/cake schema_cache clear
@@ -976,7 +1046,9 @@ In order for the diff feature to work, a **.lock** file is generated everytime
 you migrate, rollback or bake a snapshot, to keep track of the state of your
 database schema at any given point in time. You can skip this file generation,
 for instance when deploying on your production environment, by using the
-``--no-lock`` option for the aforementioned command::
+``--no-lock`` option for the aforementioned command
+
+.. code-block:: bash
 
     $ bin/cake migrations migrate --no-lock
 

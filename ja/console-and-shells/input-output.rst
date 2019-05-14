@@ -2,7 +2,9 @@
 ####################
 
 .. php:namespace:: Cake\Console
-.. php:class:: ConsoleIo
+.. php:class
+
+.. code-block:: bashIo
 
 CakePHP は ``ConsoleIo`` オブジェクトをコマンドに提供するので、
 ユーザー入力と出力情報を対話的にユーザーに読み取らせることができます。

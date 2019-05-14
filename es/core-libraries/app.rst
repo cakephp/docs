@@ -120,7 +120,9 @@ usando la estrategia de carga automática de ficheros ``files``, como sigue::
     }
 
 Después de la configuración de las librerías externas, tiene que regenerar el
-autoloader de su aplicación usando::
+autoloader de su aplicación usando
+
+.. code-block:: bash
 
     $ php composer.phar dump-autoload
 

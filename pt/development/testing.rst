@@ -19,14 +19,18 @@ O PHPUnit pode ser instalado usando o `PHAR package
 Instalando o PHPUnit com Composer
 ---------------------------------
 
-Para instalar o PHPUnit com Composer::
+Para instalar o PHPUnit com Composer
+
+.. code-block:: bash
 
     $ php composer.phar require --dev phpunit/phpunit
 
 Isto adicionará a dependência para a seção ``require-dev`` do seu
 ``composer.json``, e depois instalará o PHPUnit com qualquer outra dependência.
 
-Agora você executa o PHPUnit usando::
+Agora você executa o PHPUnit usando
+
+.. code-block:: bash
 
     $ vendor/bin/phpunit
 

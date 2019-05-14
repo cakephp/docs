@@ -40,7 +40,9 @@ conectado em um prompt do bash e está atualmente na raiz de uma aplicação
 CakePHP.
 
 Aplicações CakePHP possuem um diretório `Console``` que contém todas as
-shells e tarefas para uma aplicação. Ele também vem com um executável::
+shells e tarefas para uma aplicação. Ele também vem com um executável
+
+.. code-block:: bash
 
     $ cd /path/to/app
     $ bin/cake
@@ -245,7 +247,9 @@ a :doc:`/controllers/components`::
         }
     }
 
-Você também pode acessar tasks diretamente da linha de comando::
+Você também pode acessar tasks diretamente da linha de comando
+
+.. code-block:: bash
 
     $ cake sea sound
 
@@ -473,7 +477,9 @@ ambiente ``ANSICON`` esteja presente.
 Opções de configuração e Geração de ajuda
 =========================================
 
-.. php:class:: ConsoleOptionParser
+.. php:class
+
+.. code-block:: bashOptionParser
 
 ``ConsoleOptionParser`` oferece uma opção de CLI e analisador de argumentos.
 

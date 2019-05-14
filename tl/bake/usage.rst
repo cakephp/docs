@@ -12,8 +12,10 @@ Bago patakbuhin ang bake dapat mong tiyakin na mayroon kang hindi bababa sa isan
 na koneksyon na naka-configure. Tingnan ang seksyon sa :ref:`database configuration
 <database-configuration>` para sa karagdagang impormasyon.
 
-Kapag pinatakbo na walang mga argumento ang ``bin/cake bake`` ay mag-output ng isang listahan ng magagamit na 
-mga gawain. Dapat mong makita ang isang bagay tulad ng::
+Kapag pinatakbo na walang mga argumento ang ``bin/cake bake`` ay mag-output ng isang listahan ng magagamit na
+mga gawain. Dapat mong makita ang isang bagay tulad ng
+
+.. code-block:: bash
 
     $ bin/cake bake
 
@@ -50,8 +52,10 @@ mga gawain. Dapat mong makita ang isang bagay tulad ng::
 
     By using `cake bake [name]` you can invoke a specific bake task.
 
-Makakakuha ka ng karagdagang impormasyon kung ano ang ginagawa ng bawat gawain, at kung anung mga opsyon ang 
-magagamit gamit ang ``--help`` option::
+Makakakuha ka ng karagdagang impormasyon kung ano ang ginagawa ng bawat gawain, at kung anung mga opsyon ang
+magagamit gamit ang ``--help`` option
+
+.. code-block:: bash
 
     $ bin/cake bake --help
 
@@ -118,8 +122,8 @@ magagamit gamit ang ``--help`` option::
 Mga Tema ng Bake
 ================
 
-Ang opsyon ng tema ay pangkaraniwan sa lahat ng mga utos ng bake, at nagpapahintulot sa pagbabago ng bake 
-na template na mga file na ginagamit sa pagbi-bake. Para lumikha ng iyong sariling mga template, tingnan ang 
+Ang opsyon ng tema ay pangkaraniwan sa lahat ng mga utos ng bake, at nagpapahintulot sa pagbabago ng bake
+na template na mga file na ginagamit sa pagbi-bake. Para lumikha ng iyong sariling mga template, tingnan ang
 :ref:`bake theme creation documentation <creating-a-bake-theme>`.
 
 .. meta::

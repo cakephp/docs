@@ -19,7 +19,9 @@ Commands
 
 For the first step commands outputs the available Shell Commands, including
 plugin name when applicable. (All returned possibilities, for this and the other
-sub commands, are separated by a space.) For example::
+sub commands, are separated by a space.) For example
+
+.. code-block:: bash
 
     bin/cake Completion commands
 
@@ -35,7 +37,9 @@ subCommands
 
 Once the preferred command has been chosen subCommands comes in as the second
 step and outputs the possible sub command for the given shell command. For
-example::
+example
+
+.. code-block:: bash
 
     bin/cake Completion subcommands bake
 
@@ -48,7 +52,9 @@ options
 
 As the third and final options outputs options for the given (sub) command as
 set in getOptionParser. (Including the default options inherited from Shell.)
-For example::
+For example
+
+.. code-block:: bash
 
     bin/cake Completion options bake
 
@@ -63,7 +69,9 @@ How to enable Bash autocompletion for the CakePHP Console
 =========================================================
 
 First, make sure the **bash-completion** library is installed. If not, you do it
-with the following command::
+with the following command
+
+.. code-block:: bash
 
     apt-get install bash-completion
 
@@ -149,7 +157,9 @@ Three type of autocompletion are provided. The following output are from a fresh
 Commands
 --------
 
-Sample output for commands autocompletion::
+Sample output for commands autocompletion
+
+.. code-block:: bash
 
     $ bin/cake <tab>
     bake        i18n        schema_cache   routes
@@ -158,7 +168,9 @@ Sample output for commands autocompletion::
 Subcommands
 -----------
 
-Sample output for subcommands autocompletion::
+Sample output for subcommands autocompletion
+
+.. code-block:: bash
 
     $ bin/cake bake <tab>
     behavior            helper              shell
@@ -171,7 +183,9 @@ Sample output for subcommands autocompletion::
 Options
 -------
 
-Sample output for subcommands options autocompletion::
+Sample output for subcommands options autocompletion
+
+.. code-block:: bash
 
     $ bin/cake bake -<tab>
     -c            --everything  --force       --help        --plugin      -q            -t            -v

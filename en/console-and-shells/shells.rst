@@ -133,7 +133,9 @@ making re-usable chunks of functionality similar to
         }
     }
 
-You can also access tasks directly from the command line::
+You can also access tasks directly from the command line
+
+.. code-block:: bash
 
     $ cake sea sound
 
@@ -373,7 +375,9 @@ code, or raise the ``StopException`` directly as shown in the example::
     }
 
 The example above will return the following exit codes when executed on a
-command-line::
+command-line
+
+.. code-block:: bash
 
     $ bin/cake erroneousshell ; echo $?
     0

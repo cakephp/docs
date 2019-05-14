@@ -149,7 +149,9 @@ Bash 補完ファイルの内容
 コマンド
 --------
 
-コマンドの自動補完のためのサンプル出力::
+コマンドの自動補完のためのサンプル出力
+
+.. code-block:: bash
 
     $ bin/cake <tab>
     bake        i18n        orm_cache   routes
@@ -158,7 +160,9 @@ Bash 補完ファイルの内容
 サブコマンド
 ------------
 
-サブコマンドの自動補完のためのサンプル出力::
+サブコマンドの自動補完のためのサンプル出力
+
+.. code-block:: bash
 
     $ bin/cake bake <tab>
     behavior            helper              shell
@@ -171,7 +175,9 @@ Bash 補完ファイルの内容
 オプション
 ----------
 
-サブコマンドのオプションの自動補完のためのサンプル出力::
+サブコマンドのオプションの自動補完のためのサンプル出力
+
+.. code-block:: bash
 
     $ bin/cake bake -<tab>
     -c            --everything  --force       --help        --plugin      -q            -t            -v

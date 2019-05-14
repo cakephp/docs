@@ -42,7 +42,9 @@ connecté dans l'invité bash et qu'il est en root sur une installation CakePHP.
 
 Une application CakePHP contient les répertoires **src/Shell** et
 **src/Shell/Task** qui contiennent tous ses shells et tasks. Il est aussi livré
-avec un exécutable dans le répertoire **bin**::
+avec un exécutable dans le répertoire **bin**
+
+.. code-block:: bash
 
     $ cd /path/to/app
     $ bin/cake
@@ -247,7 +249,9 @@ tâches meilleures pour la réutilisation de fonctions identiques à
     }
 
 Vous pouvez aussi accéder aux tâches directement à partir de la ligne de
-commande::
+commande
+
+.. code-block:: bash
 
     $ cake sea sound
 
@@ -600,7 +604,7 @@ l'exécution s'arrête, vous pouvez utiliser ``abort()`` pour lancer une
     $user = $this->Users->get($this->args[0]);
     if (!$user) {
         // Arrête avec un message et un code d'erreur.
-        $this->abort('Utilisateur non trouvé, 128);
+        $this->abort('Utilisateur non trouvé', 128);
     }
 
 .. versionadded:: 3.2
@@ -646,7 +650,9 @@ afficher un message et sortir avec un code spécifique, ou lancer la
     }
 
 L'exemple ci-dessus va retourner les codes de sortie suivants lorsqu'il est
-exécuté en ligne de commande::
+exécuté en ligne de commande
+
+.. code-block:: bash
 
     $ bin/cake erroneousshell ; echo $?
     0
@@ -688,7 +694,9 @@ Méthodes Hook
 Configurer les options et générer de l'aide
 ===========================================
 
-.. php:class:: ConsoleOptionParser
+.. php:class
+
+.. code-block:: bashOptionParser
 
 ``ConsoleOptionParser`` helps provide a more familiar command line option and
 argument parser.

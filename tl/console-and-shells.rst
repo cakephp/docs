@@ -38,7 +38,9 @@ currently at the root of a CakePHP application.
 
 A CakePHP application contains **src/Shell** and **src/Shell/Task** directories
 that contain all of its shells and tasks. It also comes with an executable in
-the **bin** directory::
+the **bin** directory
+
+.. code-block:: bash
 
     $ cd /path/to/app
     $ bin/cake
@@ -234,7 +236,9 @@ making re-usable chunks of functionality similar to
         }
     }
 
-You can also access tasks directly from the command line::
+You can also access tasks directly from the command line
+
+.. code-block:: bash
 
     $ cake sea sound
 
@@ -614,7 +618,9 @@ code, or raise the ``StopException`` directly as shown in the example::
     }
 
 The example above will return the following exit codes when executed on a
-command-line::
+command-line
+
+.. code-block:: bash
 
     $ bin/cake erroneousshell ; echo $?
     0
@@ -657,7 +663,9 @@ Hook Methods
 Configuring Options and Generating Help
 =======================================
 
-.. php:class:: ConsoleOptionParser
+.. php:class
+
+.. code-block:: bashOptionParser
 
 ``ConsoleOptionParser`` provides a command line option and
 argument parser.
@@ -753,7 +761,9 @@ method in action::
     }
 
 The console's ``description`` output can be seen by executing the following
-command::
+command
+
+.. code-block:: bash
 
     $ bin/cake console --help
 
@@ -837,7 +847,9 @@ To illustrate the ``epilog()`` method in action lets add a call to the
     }
 
 The text added with the ``setEpilog()`` method can be seen in the output from
-the following console command::
+the following console command
+
+.. code-block:: bash
 
     $ bin/cake console --help
 

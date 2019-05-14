@@ -113,7 +113,9 @@ using the ``files`` autoloading strategy::
     }
 
 After configuring the vendor libraries you will need to regenerate your
-application's autoloader using::
+application's autoloader using
+
+.. code-block:: bash
 
     $ php composer.phar dump-autoload
 

@@ -17,7 +17,9 @@ Migrations
 
 初期状態で Migrations は、デフォルトのアプリケーションの雛形と一緒にインストールされます。
 もしあなたがそれを削除して再インストールしたい場合は、（composer.json ファイルが
-配置されている）アプリケーションルートディレクトリーから次のコマンドを実行します。 ::
+配置されている）アプリケーションルートディレクトリーから次のコマンドを実行します。
+
+.. code-block:: bash
 
     $ php composer.phar require cakephp/migrations "@stable"
 
@@ -28,7 +30,9 @@ Migrations
 このプラグインを使用するためには、あなたは、アプリケーションの **config/bootstrap.php**
 ファイルでロードする必要があります。あなたの **config/bootstrap.php** からプラグインを
 ロード・アンロードするために :ref:`CakePHP の Plugin シェル <plugin-shell>`
-が利用できます。 ::
+が利用できます。
+
+.. code-block:: bash
 
     $ bin/cake plugin load Migrations
 
@@ -109,12 +113,16 @@ Migrations
     ``rollback`` すればテーブルが消えてしまいます。
 
 マイグレーションファイルを **config/Migrations** フォルダーに作成したら、下記の
-``migrations`` コマンドを実行することでデータベースにテーブルを作成することがでます。 ::
+``migrations`` コマンドを実行することでデータベースにテーブルを作成することがでます。
+
+.. code-block:: bash
 
     bin/cake migrations migrate
 
 以下の ``migrations`` コマンドは、 ``rollback`` を実行するとあなたのデータベースから
-テーブルが削除されます。 ::
+テーブルが削除されます。
+
+.. code-block:: bash
 
     bin/cake migrations rollback
 
@@ -144,7 +152,9 @@ Migrations
 ------------
 
 以下の ``bake`` コマンドは、 ``products`` テーブルを追加するためのマイグレーションファイルを
-作成します。 ::
+作成します。
+
+.. code-block:: bash
 
     $ bin/cake bake migration CreateProducts name:string description:text created modified
 
@@ -158,7 +168,9 @@ Migrations
 規約のために、すべてのスキーマの変更がこれらのシェルコマンドで動作するわけではありません。
 
 さらに、実行内容を完全に制御したいのであれば、空のマイグレーションファイルを
-作る事ができます。 ::
+作る事ができます。
+
+.. code-block:: bash
 
     $ bin/cake migrations create MyCustomMigration
 
@@ -237,7 +249,9 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
 テーブルの作成
 --------------
 
-テーブルを作成するために ``bake`` が使えます。 ::
+テーブルを作成するために ``bake`` が使えます。
+
+.. code-block:: bash
 
     $ bin/cake bake migration CreateProducts name:string description:text created modified
 
@@ -284,7 +298,9 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
 
 もしコマンドラインのマイグレーション名が "AddXXXToYYY" といった
 書式で、その後にカラム名と型が続けば、カラムの追加を行うコードを含んだ
-マイグレーションファイルが生成されます。 ::
+マイグレーションファイルが生成されます。
+
+.. code-block:: bash
 
     $ bin/cake bake migration AddPriceToProducts price:decimal
 
@@ -306,7 +322,9 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
 テーブルにインデックスとしてカラムを追加
 ----------------------------------------
 
-カラムにインデックスを追加することも可能です。 ::
+カラムにインデックスを追加することも可能です。
+
+.. code-block:: bash
 
     $ bin/cake bake migration AddNameIndexToProducts name:string:index
 
@@ -331,7 +349,9 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
 
 .. versionadded:: cakephp/migrations 1.4
 
-もし、フィールド長を指定する必要がある場合、フィールドタイプにカギ括弧の中で指定できます。例::
+もし、フィールド長を指定する必要がある場合、フィールドタイプにカギ括弧の中で指定できます。例
+
+.. code-block:: bash
 
     $ bin/cake bake migration AddFullDescriptionToProducts full_description:string[60]
 
@@ -364,7 +384,9 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
 ------------------------
 
 もしマイグレーション名が "RemoveXXXFromYYY" であるなら、同様にコマンドラインを使用して、
-カラム削除のマイグレーションファイルを生成することができます。  ::
+カラム削除のマイグレーションファイルを生成することができます。
+
+.. code-block:: bash
 
     $ bin/cake bake migration RemovePriceFromProducts price
 
@@ -393,7 +415,9 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
 
 もしあなたが既存のデータベースで、マイグレーションの使用を始めたい場合や、
 あなたのアプリケーションのデータベースで初期状態のスキーマのバージョン管理を
-行いたい場合、 ``migration_snapshot`` コマンドを実行します。 ::
+行いたい場合、 ``migration_snapshot`` コマンドを実行します。
+
+.. code-block:: bash
 
     $ bin/cake bake migration_snapshot Initial
 
@@ -403,12 +427,16 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
 デフォルトで、スナップショットは、 ``default`` 接続設定で定義されたデータベースに
 接続することによって作成されます。
 もし、異なるデータベースからスナップショットを bake する必要があるなら、
-``--connection`` オプションが使用できます。 ::
+``--connection`` オプションが使用できます。
+
+.. code-block:: bash
 
     $ bin/cake bake migration_snapshot Initial --connection my_other_connection
 
 ``--require-table`` フラグを使用することによって対応するモデルクラスを定義したテーブルだけを
-含まれることを確認することができます。 ::
+含まれることを確認することができます。
+
+.. code-block:: bash
 
     $ bin/cake bake migration_snapshot Initial --require-table
 
@@ -416,7 +444,9 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
 ``Table`` クラスを見つけて、スナップショットのモデルテーブルのみ追加します。
 
 プラグインのためのスナップショットを bake したい場合、同じロジックが暗黙的に適用されます。
-そうするために、 ``--plugin`` オプションを使用する必要があります。 ::
+そうするために、 ``--plugin`` オプションを使用する必要があります。
+
+.. code-block:: bash
 
     $ bin/cake bake migration_snapshot Initial --plugin MyPlugin
 
@@ -437,7 +467,9 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
 
 ``migration_diff`` の bake テンプレートを使用して２つのデータベースの状態の
 すべての差分をまとめたマイグレーションファイルを生成することができます。
-そのためには、以下のコマンドを使用します。 ::
+そのためには、以下のコマンドを使用します。
+
+.. code-block:: bash
 
     $ bin/cake bake migration_diff NameOfTheMigrations
 
@@ -450,12 +482,16 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
 
 デフォルトでは、 ``default`` 接続設定に定義されたデータベースに接続することによって
 差分が作成されます。もし、あなたが異なるデータソースから差分を bake する必要がある場合、
-``--connection`` オプションを使用できます。 ::
+``--connection`` オプションを使用できます。
+
+.. code-block:: bash
 
     $ bin/cake bake migration_diff NameOfTheMigrations --connection my_other_connection
 
 もし、すでにマイグレーションの履歴を持つアプリケーション上で diff 機能を使用したい場合、
-マニュアルで比較に使用するダンプファイルを作成する必要があります。 ::
+マニュアルで比較に使用するダンプファイルを作成する必要があります。
+
+.. code-block:: bash
 
     $ bin/cake migrations dump
 
@@ -474,7 +510,9 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
 ----------------------------------------
 
 マイグレーションファイルを生成したり記述したら、以下のコマンドを実行して
-変更をデータベースに適用しましょう。 ::
+変更をデータベースに適用しましょう。
+
+.. code-block:: bash
 
     # マイグレーションをすべて実行
     $ bin/cake migrations migrate
@@ -502,7 +540,9 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
 -------------------------------------
 
 ロールバックコマンドは、このプラグインを実行する前の状態に戻すために使われます。
-これは ``migrate`` コマンドの逆向きの動作をします。 ::
+これは ``migrate`` コマンドの逆向きの動作をします。
+
+.. code-block:: bash
 
     # あなたは ``rollback`` コマンドを使って以前のマイグレーション状態に戻すことができます。
     $ bin/cake migrations rollback
@@ -517,7 +557,9 @@ fieldType の後のクエスチョンマークは、ヌルを許可するカラ�
 -----------------------------------------
 
 Status コマンドは、現在の状況とすべてのマイグレーションのリストを出力します。
-あなたはマイグレーションが実行されたかを判断するために、このコマンドを使用することができます。 ::
+あなたはマイグレーションが実行されたかを判断するために、このコマンドを使用することができます。
+
+.. code-block:: bash
 
     $ bin/cake migrations status
 
@@ -539,22 +581,30 @@ JSON 形式の文字列として結果を出力できます。 ::
 コマンドは、他のコマンドとしてシームレスに動作します。
 
 このコマンドを使用して、すべてのマイグレーションをマイグレーション済みとして
-マークすることができます。 ::
+マークすることができます。
+
+.. code-block:: bash
 
     $ bin/cake migrations mark_migrated
 
 また、 ``--target`` オプションを使用して、指定したバージョンに対して、
-すべてマイグレーション済みとしてマークすることができます。 ::
+すべてマイグレーション済みとしてマークすることができます。
+
+.. code-block:: bash
 
     $ bin/cake migrations mark_migrated --target=20151016204000
 
 もし、指定したマイグレーションを処理中にマーク済みにしたくない場合、
-``--exclude`` フラグをつけて使用することができます。 ::
+``--exclude`` フラグをつけて使用することができます。
+
+.. code-block:: bash
 
     $ bin/cake migrations mark_migrated --target=20151016204000 --exclude
 
 最後に、指定したマイグレーションだけをマイグレーション済みとしてマークしたい場合、
-``--only`` フラグを使用できます。 ::
+``--only`` フラグを使用できます。
+
+.. code-block:: bash
 
     $ bin/cake migrations mark_migrated --target=20151016204000 --only
 
@@ -571,13 +621,17 @@ JSON 形式の文字列として結果を出力できます。 ::
     以下のコマンドの使用方法は非推奨になりました。もし、あなたが 1.4.0 より前のバージョンの
     プラグインの場合のみに使用してください。
 
-このコマンドは、引数としてマイグレーションバージョン番号を想定しています。 ::
+このコマンドは、引数としてマイグレーションバージョン番号を想定しています。
+
+.. code-block:: bash
 
     $ bin/cake migrations mark_migrated 20150420082532
 
 もし、すべてのマイグレーションをマイグレーション済みとしてマークしたい場合、
 特別な値 ``all`` を使用できます。もし使用した場合、すべての見つかったマイグレーションを
-マイグレーション済みとしてマークします。 ::
+マイグレーション済みとしてマークします。
+
+.. code-block:: bash
 
     $ bin/cake migrations mark_migrated all
 
@@ -591,7 +645,9 @@ JSON 形式の文字列として結果を出力できます。 ::
 <http://docs.phinx.org/en/latest/seeding.html#creating-a-new-seed-class>`_
 を確認してください。
 
-マイグレーションに関して、 seed ファイルのための ``bake`` インターフェースが提供されます。 ::
+マイグレーションに関して、 seed ファイルのための ``bake`` インターフェースが提供されます。
+
+.. code-block:: bash
 
     # これは、あなたのアプリケーションの config/Seeds ディレクトリー内に ArticlesSeed.php を作成します。
     # デフォルトでは、変換対象の seed は、 "tableized" バージョンの seed ファイル名です。
@@ -612,19 +668,25 @@ JSON 形式の文字列として結果を出力できます。 ::
     データベースからデータをエクスポートするために追加されました。
 
 1.6.4 から、 ``bake seed`` コマンドは、 ``--data`` フラグを使用することによって、
-データベースからエクスポートされたデータを元に seed ファイルを作成することができます。 ::
+データベースからエクスポートされたデータを元に seed ファイルを作成することができます。
+
+.. code-block:: bash
 
     $ bin/cake bake seed --data Articles
 
 デフォルトでは、テーブル内にある行を全てエクスポートします。 ``--limit`` オプションを
-使用することによって、エクスポートされる行の数を制限できます。 ::
+使用することによって、エクスポートされる行の数を制限できます。
+
+.. code-block:: bash
 
     # 10 行のみエクスポート
     $ bin/cake bake seed --data --limit 10 Articles
 
 もし、seed ファイルの中にテーブルから選択したフィールドのみを含めたい場合、
 ``--fields`` オプションが使用できます。そのオプションは、
-フィールドのリストをカンマ区切りの値の文字列として含めます。 ::
+フィールドのリストをカンマ区切りの値の文字列として含めます。
+
+.. code-block:: bash
 
     # `id`, `title` そして `excerpt` フィールドのみをエクスポート
     $ bin/cake bake seed --data --fields id,title,excerpt Articles
@@ -634,7 +696,9 @@ JSON 形式の文字列として結果を出力できます。 ::
     もちろん、同じコマンド呼び出し中に ``--limit`` と ``--fields``
     オプションの両方が利用できます。
 
-データベースの初期データ投入のために、 ``seed`` サブコマンドが使用できます。 ::
+データベースの初期データ投入のために、 ``seed`` サブコマンドが使用できます。
+
+.. code-block:: bash
 
     # パラメーターなしの seed サブコマンドは、対象のディレクトリーのアルファベット順で、
     # すべての利用可能なシーダーを実行します。
@@ -686,7 +750,9 @@ JSON 形式の文字列として結果を出力できます。 ::
 ``dump`` : 差分を bake する機能のためのダンプファイルの生成
 -------------------------------------------------------------
 
-dump コマンドは、 ``migration_diff`` の bake テンプレートで使用するファイルを作成します。 ::
+dump コマンドは、 ``migration_diff`` の bake テンプレートで使用するファイルを作成します。
+
+.. code-block:: bash
 
     $ bin/cake migrations dump
 
@@ -705,7 +771,9 @@ dump コマンドは、 ``migration_diff`` の bake テンプレートで使用�
 プラグインはマイグレーションファイルも提供することができます。
 これはプラグインの移植性とインストールの容易さを高め、配布しやすくなるように意図されています。
 Migrations プラグインの全てのコマンドは、プラグイン関連のマイグレーションを行うための
-``--plugin`` か ``-p`` オプションをサポートしています。 ::
+``--plugin`` か ``-p`` オプションをサポートしています。
+
+.. code-block:: bash
 
     $ bin/cake migrations status -p PluginName
 
@@ -818,7 +886,9 @@ migrations プラグインのバージョン 1.2 から、非シェル環境で�
 .. note::
 
     独自の主キーをコマンドラインで指定した時、id フィールドの中の主キーとして注意してください。
-    そうしなければ、id フィールドが重複してエラーになります。例::
+    そうしなければ、id フィールドが重複してエラーになります。例
+
+    .. code-block:: bash
 
         $ bin/cake bake migration CreateProducts id:uuid:primary name:string description:text created modified
 
@@ -909,7 +979,9 @@ Table オブジェクトのレジストリーは、 ``update()`` が呼ばれた
 テーブルのカラムメタデータを更新するように、必ず ORM キャッシュをクリアしてください。
 そうしなければ、それらの新しいカラムの操作を実行する時に、カラムが存在しないエラーになります。
 CakePHP コアは、この操作を行うために使用できる :doc:`スキーマキャッシュシェル
-<console-and-shells/schema-cache>` を含みます。 ::
+<console-and-shells/schema-cache>` を含みます。
+
+.. code-block:: bash
 
     // 3.6.0 より前の場合、orm_cache を使用
     $ bin/cake schema_cache clear
@@ -939,7 +1011,9 @@ CakePHP コアは、この操作を行うために使用できる :doc:`スキ�
 diff 機能を動作させるために、 **.lock** ファイルは、migrate、rollback または
 スナップショットの bake の度に生成され、指定された時点でのデータベーススキーマの状態を追跡します。
 例えば本番環境上にデプロイするときなど、前述のコマンドに ``--no-lock``
-オプションを使用することによって、このファイルの生成をスキップすることができます。 ::
+オプションを使用することによって、このファイルの生成をスキップすることができます。
+
+.. code-block:: bash
 
     $ bin/cake migrations migrate --no-lock
 
