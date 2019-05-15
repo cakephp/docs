@@ -39,7 +39,7 @@ table we could do::
     use Cake\ORM\TableRegistry;
 
     // Prior to 3.6.0
-    $articles = TableRegistry::get('Articles);
+    $articles = TableRegistry::get('Articles');
 
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
@@ -75,7 +75,7 @@ to it using the :php:class:`~Cake\\ORM\\Locator\\TableLocator` through :php:clas
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // Prior to 3.6.0
-    $articles = TableRegistry::get('Articles);
+    $articles = TableRegistry::get('Articles');
 
 Now that we have a concrete table class, we'll probably want to use a concrete
 entity class. Entity classes let you define accessor and mutator methods, define
@@ -98,7 +98,7 @@ load entities from the database we'll get instances of our new Article class::
     use Cake\ORM\TableRegistry;
 
     // Prior to 3.6.0
-    $articles = TableRegistry::get('Articles);
+    $articles = TableRegistry::get('Articles');
 
     // Now an instance of ArticlesTable.
     $articles = TableRegistry::getTableLocator()->get('Articles');
