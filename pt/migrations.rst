@@ -18,11 +18,13 @@ Instalação
 Por padrão o plugin é instalado junto com o esqueleto da aplicação.
 Se você o removeu e quer reinstalá-lo, execute o comando a seguir a partir do
 diretório **ROOT** da sua aplicação
-(onde o arquivo composer.json está localizado)::
+(onde o arquivo composer.json está localizado):
+
+.. code-block:: bash
 
     $ php composer.phar require cakephp/migrations "@stable"
 
-    // Or if composer is installed globally
+    # Or if composer is installed globally
 
     $ composer require cakephp/migrations "@stable"
 
