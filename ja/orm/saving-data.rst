@@ -758,11 +758,15 @@ ORM は、挿入か更新のいずれが実行されるべきかを決定する�
 
 保存する時は、 CakePHP は :ref:`ルールを適用して <application-rules>` 、
 データベーストンザクションの保存操作を巻き取ります。また、変更のあったプロパティーのみを更新します。
-上記の ``save()`` の呼び出しは、こんな SQL を生成します。 ::
+上記の ``save()`` の呼び出しは、こんな SQL を生成します。
+
+.. code-block:: sql
 
     UPDATE articles SET title = '私の新しいタイトル' WHERE id = 2;
 
-もし新しいエンティティーであれば、こんな SQL が生成されます。 ::
+もし新しいエンティティーであれば、こんな SQL が生成されます。
+
+.. code-block:: sql
 
     INSERT INTO articles (title) VALUES ('私の新しいタイトル');
 

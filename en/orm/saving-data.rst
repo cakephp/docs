@@ -768,11 +768,15 @@ your database. This is a pretty simple exercise in CakePHP::
 When saving, CakePHP will :ref:`apply your rules <application-rules>`, and wrap
 the save operation in a database transaction. It will also only update
 properties that have changed. The above ``save()`` call would generate SQL
-like::
+like:
+
+.. code-block:: sql
 
     UPDATE articles SET title = 'My new title' WHERE id = 2;
 
-If you had a new entity, the following SQL would be generated::
+If you had a new entity, the following SQL would be generated:
+
+.. code-block:: sql
 
     INSERT INTO articles (title) VALUES ('My new title');
 

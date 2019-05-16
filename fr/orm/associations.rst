@@ -227,7 +227,9 @@ Users peuvent contenir l'enregistrement Address, s'il existe::
         echo $user->address->street;
     }
 
-Ce qui est au-dessus génèrera une commande SQL similaire à::
+Ce qui est au-dessus génèrera une commande SQL similaire à:
+
+.. code-block:: sql
 
     SELECT * FROM users INNER JOIN addresses ON addresses.user_id = users.id;
 
@@ -323,7 +325,9 @@ Addresses peuvent contenir l'enregistrement User s'il existe::
         echo $address->user->username;
     }
 
-Ce qui est au-dessus génèrera une commande SQL similaire à::
+Ce qui est au-dessus génèrera une commande SQL similaire à:
+
+.. code-block:: sql
 
     SELECT * FROM addresses LEFT JOIN users ON addresses.user_id = users.id;
 
@@ -456,13 +460,17 @@ la table Articles récupèreront également les Comments liés s'ils existent::
         echo $article->comments[0]->text;
     }
 
-Ce qui est au-dessus génèrera une commande SQL similaire à::
+Ce qui est au-dessus génèrera une commande SQL similaire à:
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM comments WHERE article_id IN (1, 2, 3, 4, 5);
 
 Quand la stratégie de sous-requête est utilisée, une commande SQL similaire à
-ce qui suit sera générée::
+ce qui suit sera générée:
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM comments WHERE article_id IN (SELECT id FROM articles);
@@ -624,7 +632,9 @@ Articles peuvent contenir les enregistrements de Tag s'ils existent::
         echo $article->tags[0]->text;
     }
 
-Ce qui est au-dessus génèrera une requête SQL similaire à::
+Ce qui est au-dessus génèrera une requête SQL similaire à:
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM tags
@@ -634,7 +644,9 @@ Ce qui est au-dessus génèrera une requête SQL similaire à::
     );
 
 Quand la stratégie de sous-requête est utilisée, un SQL similaire à ce qui
-suit sera générée::
+suit sera générée:
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM tags

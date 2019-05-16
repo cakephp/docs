@@ -116,7 +116,9 @@ ne l'avez pas déjà fait, créez une base de données vide avec le nom de votre
 choix pour l'utiliser dans ce tutoriel, par ex ``cake_blog``.Pour le moment,
 nous allons juste créer une simple table pour stocker nos posts. Nous allons
 également insérer quelques posts à des fins de tests. Exécutez les requêtes SQL
-suivantes dans votre base de données::
+suivantes dans votre base de données:
+
+.. code-block:: mysql
 
     /* D'abord, créons la table des posts : */
     CREATE TABLE articles (
