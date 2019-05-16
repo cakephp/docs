@@ -805,11 +805,15 @@ atualizar em seu banco de dados. Este é um exercício bem simples no CakePHP::
 
 Ao salvar, CakePHP irá :ref:`aplicar suas regras<application-rules>`, e
 envolver a operação de salvar em uma trasação de banco de dados. Também atualizará
-as propriedades que mudaram. A chamada ``save()`` do exemplo acima geraria SQL como::
+as propriedades que mudaram. A chamada ``save()`` do exemplo acima geraria SQL como:
+
+.. code-block:: sql
 
     UPDATE articles SET title = 'My new title' WHERE id = 2;
 
-Se você tem uma nova entidade, o seguinte SQL seria gerado::
+Se você tem uma nova entidade, o seguinte SQL seria gerado:
+
+.. code-block:: sql
 
     INSERT INTO articles (title) VALUES ('My new title');
 

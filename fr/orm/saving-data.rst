@@ -846,11 +846,15 @@ Lors de la sauvegarde, CakePHP va
 :ref:`appliquer vos règles de validation <application-rules>`, et
 entourer l'opération de sauvegarde dans une transaction de base de données.
 Cela va aussi seulement mettre à jour les propriétés qui ont changé. Le
-``save()`` ci-dessus va générer le code SQL suivant::
+``save()`` ci-dessus va générer le code SQL suivant:
+
+.. code-block:: sql
 
     UPDATE articles SET title = 'My new title' WHERE id = 2;
 
-Si vous avez une nouvelle entity, le code SQL suivant serait généré::
+Si vous avez une nouvelle entity, le code SQL suivant serait généré:
+
+.. code-block:: sql
 
     INSERT INTO articles (title) VALUES ('My new title');
 

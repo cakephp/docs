@@ -88,7 +88,9 @@ Continuamos, creemos ahora la base de datos para nuestra aplicación de favorito
 
 Si aún no lo has hecho, crea una base de datos vacía para usar en este tutorial con el nombre que tu quieras, e.g. ``cake_bookmarks``.
 
-Puedes ejecutar la siguiente sentencia SQL para crear las tablas necesarias::
+Puedes ejecutar la siguiente sentencia SQL para crear las tablas necesarias:
+
+.. code-block:: mysql
 
     CREATE TABLE users (
         id INT AUTO_INCREMENT PRIMARY KEY,

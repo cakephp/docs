@@ -91,7 +91,9 @@ Criando o banco de dados
 Em seguida, vamos criar o banco de dados para a nossa aplicação. Se você
 ainda não tiver feito isso, crie um banco de dados vazio para uso
 nesse tutorial, com um nome de sua escolha, por exemplo, ``cake_bookmarks``.
-Você pode executar o seguinte SQL para criar as tabelas necessárias::
+Você pode executar o seguinte SQL para criar as tabelas necessárias:
+
+.. code-block:: mysql
 
     CREATE TABLE users (
         id INT AUTO_INCREMENT PRIMARY KEY,

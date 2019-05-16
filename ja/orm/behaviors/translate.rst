@@ -82,7 +82,7 @@ i18n データベーステーブルの初期化
 現在、 ``i18n`` テーブルを読み込む唯一の方法は、手動でデータベースに次の
 SQL スクリプトを実行することです。
 
-.. code-block:: sql
+.. code-block:: mysql
 
     CREATE TABLE i18n (
         id int NOT NULL auto_increment,
