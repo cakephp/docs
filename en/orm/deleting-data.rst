@@ -32,6 +32,13 @@ transaction with the atomic option::
 
     $result = $this->Articles->delete($entity, ['atomic' => false]);
 
+The ``$options`` parameter supports the following options:
+
+- ``atomic`` Defaults to true. When true the deletion happens within
+  a transaction.
+- ``checkRules`` Defaults to true. Check deletion rules before deleting
+  records.
+
 Cascading Deletes
 -----------------
 
@@ -57,6 +64,20 @@ these options enabled would be::
 
 Bulk Deletes
 ------------
+
+.. php:method:: deleteMany($entities, $options = [])
+
+If you have an array of entities you want to delete you can use ``deleteMany()``
+to delete them in a single transaction::
+
+    // Get a boolean indicating success
+    $success = $this->Articles->deleteMany($entities);
+
+    // Will throw a PersistenceFailedException if any entity cannot be deleted.
+    $this->Articles->deleteManyOrFail($entities);
+
+The ``$options`` for these methods are the same as ``delete()``. Deleting
+records with these method **will** trigger events.
 
 .. php:method:: deleteAll($conditions)
 
