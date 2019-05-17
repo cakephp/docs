@@ -1,4 +1,4 @@
 Bake コンソール
 ################
 
-このページは移動 `しました<https://book.cakephp.org/bake/1.x/ja/>`__.
+このページは `移動しました <https://book.cakephp.org/bake/1.x/ja/>`_.
