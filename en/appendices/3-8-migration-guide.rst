@@ -28,6 +28,9 @@ Behavior Changes
 * ``Command`` classes that have their ``$modelClass`` property set will now 
   autoload that model. The manual ``loadModel()`` call with empty argument is 
   not necessary anymore. This makes it consistent to how Shell classes worked.
+* The default format for ``Cake\I18n\Time``, ``FrozenTime``, ``Date``, and
+  ``FrozenDate`` is now ``yyyy-MM-dd'T'HH':'mm':'ssxxx`` which solves
+  localization issues in danish and other european locales.
 
 New Features
 ============
