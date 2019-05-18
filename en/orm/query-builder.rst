@@ -349,28 +349,33 @@ portable::
 
 A number of commonly used functions can be created with the ``func()`` method:
 
-- ``rand()`` Generate a random value between 0 and 1 via SQL.
-- ``sum()`` Calculate a sum. The arguments will be treated as literal values.
-- ``avg()`` Calculate an average. The arguments will be treated as literal
-  values.
-- ``min()`` Calculate the min of a column. The arguments will be treated as
-  literal values.
-- ``max()`` Calculate the max of a column. The arguments will be treated as
-  literal values.
-- ``count()`` Calculate the count. The arguments will be treated as literal
-  values.
-- ``concat()`` Concatenate two values together. The arguments are treated as
-  bound parameters unless marked as literal.
-- ``coalesce()`` Coalesce values. The arguments are treated as bound parameters
-  unless marked as literal.
-- ``dateDiff()`` Get the difference between two dates/times. The arguments are
-  treated as bound parameters unless marked as literal.
-- ``now()`` Take either 'time' or 'date' as an argument allowing you to get
-  either the current time, or current date.
-- ``extract()`` Returns the specified date part from the SQL expression.
-- ``dateAdd()`` Add the time unit to the date expression.
-- ``dayOfWeek()`` Returns a FunctionExpression representing a call to SQL
-  WEEKDAY function.
+``rand()``
+    Generate a random value between 0 and 1 via SQL.
+``sum()``
+    Calculate a sum. `Assumes arguments are literal values.`
+``avg()``
+    Calculate an average. `Assumes arguments are literal values.`
+``min()``
+    Calculate the min of a column. `Assumes arguments are literal values.`
+``max()``
+    Calculate the max of a column. `Assumes arguments are literal values.`
+``count()``
+    Calculate the count. `Assumes arguments are literal values.`
+``concat()``
+    Concatenate two values together. `Assumes arguments are bound parameters.`
+``coalesce()``
+    Coalesce values. `Assumes arguments are bound parameters.`
+``dateDiff()``
+    Get the difference between two dates/times. `Assumes arguments are bound parameters.`
+``now()``
+    Defaults to returning date and time, but accepts 'time' or 'date' to return only
+    those values.
+``extract()``
+    Returns the specified date part from the SQL expression.
+``dateAdd()``
+    Add the time unit to the date expression.
+``dayOfWeek()``
+    Returns a FunctionExpression representing a call to SQL WEEKDAY function.
 
 .. versionadded:: 3.1
 
@@ -380,10 +385,11 @@ A number of commonly used functions can be created with the ``func()`` method:
 
     ``rand()`` was added.
 
-When providing arguments for SQL functions, there are two kinds of parameters
-you can use, literal arguments and bound parameters. Identifier/Literal parameters allow
-you to reference columns or other SQL literals. Bound parameters can be used to
-safely add user data to SQL functions. For example::
+Function Arguments
+^^^^^^^^^^^^^^^^^^
+
+SQL functions called through ``func()`` can accept SQL identifiers, literal values,
+bound parameters or other ``ExpressionInterface`` instances as arguments.::
 
     $query = $articles->find()->innerJoinWith('Categories');
     $concat = $query->func()->concat([
@@ -391,25 +397,40 @@ safely add user data to SQL functions. For example::
         ' - CAT: ',
         'Categories.name' => 'identifier',
         ' - Age: ',
-        '(DATEDIFF(NOW(), Articles.created))' => 'literal',
+        $query->func()->dateDiff(
+            'NOW()' => 'literal',
+            'Articles.created' => 'identifier'
+        )
     ]);
     $query->select(['link_title' => $concat]);
 
-By making arguments with a value of ``literal``, the ORM will know that
-the key should be treated as a literal SQL value. By making arguments with
-a value of ``identifier``, the ORM will know that the key should be treated
-as a field identifier. The above would generate the following SQL on MySQL:
+Both `literal` and `identifier` arguments allow you to reference other columns
+and SQL literals while `identifier` will be appropriately quoted if auto-quoting
+is enabled.  If not marked as literal or identifier, arguments will be bound
+parameters allowing you to safely pass user data to the function.
+
+The above example generates something like this in MYSQL.
 
 .. code-block:: mysql
 
-    SELECT CONCAT(Articles.title, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created))) FROM articles;
+    SELECT CONCAT(
+        Articles.title,
+        :c0,
+        Categories.name,
+        :c1,
+        (DATEDIFF(NOW(), Articles.created))
+    ) FROM articles;
 
-The ``:c0`` value will have the ``' - CAT:'`` text bound when the query is
-executed.
+The ``:c0`` argument will have ``' - CAT:'`` text bound when the query is
+executed. The ``dateDiff`` expression was translated to the appropriate SQL.
 
-In addition to the above functions, the ``func()`` method can be used to create
-any generic SQL function such as ``year``, ``date_format``, ``convert``, etc.
-For example::
+Custom Functions
+^^^^^^^^^^^^^^^^
+
+If ``func()`` does not already wrap the SQL function you need, you can call
+it directly through ``func()`` and still safely pass arguments and user data
+as described. Make sure you pass the appropriate argument type for custom
+functions or they will be treated as bound parameters.::
 
     $query = $articles->find();
     $year = $query->func()->year([
@@ -424,24 +445,16 @@ For example::
         'timeCreated' => $time
     ]);
 
-Would result in:
+These custom function would generate something like this in MYSQL:
 
 .. code-block:: mysql
 
-    SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
+    SELECT YEAR(created) as yearCreated,
+           DATE_FORMAT(created, '%H:%i') as timeCreated
+    FROM articles;
 
-You should remember to use the function builder whenever you need to put
-untrusted data into SQL functions or stored procedures::
-
-    // Use a stored procedure
-    $query = $articles->find();
-    $lev = $query->func()->levenshtein([$search, 'LOWER(title)' => 'literal']);
-    $query->where(function (QueryExpression $exp) use ($lev) {
-        return $exp->between($lev, 0, $tolerance);
-    });
-
-    // Generated SQL would be
-    WHERE levenshtein(:c0, lower(street)) BETWEEN :c1 AND :c2
+.. note::
+    Use ``func()`` to pass untrusted user data to any SQL function.
 
 Aggregates - Group and Having
 -----------------------------
