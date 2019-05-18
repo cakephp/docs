@@ -389,7 +389,7 @@ Function Arguments
 ^^^^^^^^^^^^^^^^^^
 
 SQL functions called through ``func()`` can accept SQL identifiers, literal values,
-bound parameters or other ``ExpressionInterface`` instances as arguments.::
+bound parameters or other ``ExpressionInterface`` instances as arguments::
 
     $query = $articles->find()->innerJoinWith('Categories');
     $concat = $query->func()->concat([
@@ -404,8 +404,8 @@ bound parameters or other ``ExpressionInterface`` instances as arguments.::
     ]);
     $query->select(['link_title' => $concat]);
 
-Both `literal` and `identifier` arguments allow you to reference other columns
-and SQL literals while `identifier` will be appropriately quoted if auto-quoting
+Both ``literal`` and ``identifier`` arguments allow you to reference other columns
+and SQL literals while ``identifier`` will be appropriately quoted if auto-quoting
 is enabled.  If not marked as literal or identifier, arguments will be bound
 parameters allowing you to safely pass user data to the function.
 
@@ -430,7 +430,7 @@ Custom Functions
 If ``func()`` does not already wrap the SQL function you need, you can call
 it directly through ``func()`` and still safely pass arguments and user data
 as described. Make sure you pass the appropriate argument type for custom
-functions or they will be treated as bound parameters.::
+functions or they will be treated as bound parameters::
 
     $query = $articles->find();
     $year = $query->func()->year([
