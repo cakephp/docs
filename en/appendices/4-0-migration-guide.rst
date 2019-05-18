@@ -17,10 +17,11 @@ Deprecated Features Removed
 All methods, properties and functionality that were emitting deprecation warnings
 as of 3.8 have been removed.
 
-
 Authentication functionality has been split into standalone plugins
-`Authentication <https://github.com/cakephp/authentication>`__ and `Authorization <https://github.com/cakephp/authorization>`__.
-The former RssHelper can be found as standalone `Feed plugin <https://github.com/dereuromark/cakephp-feed>`__ with similar functionality.
+`Authentication <https://github.com/cakephp/authentication>`__ and
+`Authorization <https://github.com/cakephp/authorization>`__. The former
+RssHelper can be found as standalone `Feed plugin
+<https://github.com/dereuromark/cakephp-feed>`__ with similar functionality.
 
 Deprecations
 ============
@@ -80,6 +81,8 @@ Http
 * The Session cookie name is no longer set to ``CAKEPHP`` by default. Instead
   the default cookie name defined in your ``php.ini`` file is used. You can use
   the ``Session.cookie`` configuration option to set the cookie name.
+* ``Cake\Cookie\CookieCollection::get()`` now throws an exception when accessing
+  a cookie that doesn't exist. Use ``has()`` to check for cookie existence.
 
 Router
 ------
