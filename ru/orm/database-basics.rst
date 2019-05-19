@@ -944,5 +944,5 @@ CakePHP вклчюает инструмент CLI для управления к
     установит системные значения, которые используются по умолчанию.
 
 .. meta::
-    :title lang=en: Database Basics
-    :keywords lang=en: SQL,MySQL,MariaDB,PostGres,Postgres,postgres,PostgreSQL,PostGreSQL,postGreSql,select,insert,update,delete,statement,configuration,connection,database,data,types,custom,,executing,queries,transactions,prepared,statements,binding,fetching,row,count,error,codes,query,logging,identifier,quoting,metadata,caching
+    :title lang=ru: Основы конфигурации базы данных
+    :keywords lang=ru: SQL,MySQL,MariaDB,PostGres,Postgres,postgres,PostgreSQL,PostGreSQL,postGreSql,select,insert,update,delete,выражение,конфигурация,connection,database,data,types,custom,,executing,queries,transactions,prepared,statements,binding,fetching,row,count,error,codes,query,logging,identifier,quoting,metadata,caching
