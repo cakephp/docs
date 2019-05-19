@@ -772,12 +772,20 @@ However, it is possible to combine ``innerJoinWith()`` and ``contain()`` when yo
     $filter = ['Tags.name' => 'CakePHP'];
     $query = $articles->find()
     	->distinct($articles)
-        ->contain('Tags', function (\Cake\ORM\Query $q) use ($filter) {
+        ->contain('Tags', function ($q) use ($filter) {
             return $q->where($filter);
         })
-    	->innerJoinWith('Tags', function (\Cake\ORM\Query $q) use ($filter) {
+    	->innerJoinWith('Tags', function ($q) use ($filter) {
             return $q->where($filter);
         });
+
+.. note::
+    If you want to ``select()`` fields from the association specified in ``innerJoinWith``, you need to specify an alias
+    to prevent the data from showing up in ``_matchingData``::
+
+        $query
+            ->select(['country_name' => 'Countries.name'])
+            ->innerJoinWith('Countries');
 
 .. versionadded:: 3.1
     Query::innerJoinWith() was added in 3.1
