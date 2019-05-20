@@ -167,7 +167,10 @@ I18n
 
 Miscellaneous
 -------------
-
+* ``ObjectRegistry::get()`` now throws exception if object with provided name is not loaded.
+  You should use ``ObjectRegistry::has()`` to ensure that the object exists in registry.
+  The magic getter ``ObjectRegistry::__get()`` will continue to return ``null`` if object
+  with given name is not loaded.
 * Locale files have been moved from ``src/Locale`` to ``resources/locales``.
 * The ``cacert.pem`` file that was bundled in CakePHP has been replaced by
   a dependency on `composer/ca-bundle <https://packagist.org/packages/composer/ca-bundle>_`.
