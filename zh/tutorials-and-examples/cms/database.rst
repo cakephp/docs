@@ -47,7 +47,7 @@ CakePHP 已经安装好，我们可以开始为 :abbr:`CMS (內容管理系統)`
 
     INSERT INTO users (email, password, created, modified)
     VALUES
-    ('cakephp@example.com', 'sekret', NOW(), NOW());
+    ('cakephp@example.com', 'secret', NOW(), NOW());
 
     INSERT INTO articles (user_id, title, slug, body, published, created, modified)
     VALUES

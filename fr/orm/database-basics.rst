@@ -142,7 +142,7 @@ Un exemple d'information sur la configuration ressemblera à ceci::
             'persistent' => false,
             'host' => 'localhost',
             'username' => 'my_app',
-            'password' => 'sekret',
+            'password' => 'secret',
             'database' => 'my_app',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
@@ -165,7 +165,7 @@ serait::
         'persistent' => false,
         'host' => 'localhost',
         'username' => 'my_app',
-        'password' => 'sekret',
+        'password' => 'secret',
         'database' => 'my_app',
         'encoding' => 'utf8',
         'timezone' => 'UTC',
@@ -177,7 +177,7 @@ Les options de configuration peuvent également être fournies en tant que chain
 d'environnement ou des fournisseurs :term:`PaaS`::
 
     ConnectionManager::config('default', [
-        'url' => 'mysql://my_app:sekret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
+        'url' => 'mysql://my_app:secret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
     ]);
 
 Lorsque vous utilisez une chaine DSN, vous pouvez définir des paramètres/options

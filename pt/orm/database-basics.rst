@@ -134,7 +134,7 @@ sua aplicação usará. Exemplos de informações de conexão podem ser encontra
             'persistent' => false,
             'host' => 'localhost',
             'username' => 'my_app',
-            'password' => 'sekret',
+            'password' => 'secret',
             'database' => 'my_app',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
@@ -155,7 +155,7 @@ definir conexões adicionais em tempo de execução usando o método
         'persistent' => false,
         'host' => 'localhost',
         'username' => 'my_app',
-        'password' => 'sekret',
+        'password' => 'secret',
         'database' => 'my_app',
         'encoding' => 'utf8',
         'timezone' => 'UTC',
@@ -166,7 +166,7 @@ As opções de configuração também podem ser fornecidas como uma string :term
 Isso é útil ao trabalhar com variáveis de ambiente ou :term:`PaaS` providers::
 
     ConnectionManager::config('default', [
-        'url' => 'mysql://my_app:sekret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
+        'url' => 'mysql://my_app:secret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
     ]);
 
 Ao usar uma string DSN, você pode definir qualquer parâmetros/opções adicionais como

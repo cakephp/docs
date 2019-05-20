@@ -50,7 +50,7 @@ tables:
 
     INSERT INTO users (email, password, created, modified)
     VALUES
-    ('cakephp@example.com', 'sekret', NOW(), NOW());
+    ('cakephp@example.com', 'secret', NOW(), NOW());
 
     INSERT INTO articles (user_id, title, slug, body, published, created, modified)
     VALUES
