@@ -198,6 +198,7 @@ Http
 * ``Cake\Http\Client`` now follows `PSR-18: HTTP Client <https://www.php-fig.org/psr/psr-18/>_` specifications.
 * ``Cake\Http\Client\Response::isSuccess()`` was added. This method returns true
   if the response status code is 2xx.
+* ``CspMiddleware`` was added to make defining Content Security Policy headers simpler.
 
 Mailer
 ------
