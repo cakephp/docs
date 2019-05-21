@@ -331,28 +331,23 @@ In this situation, the request data for multiple articles should look like::
         ],
     ];
 
-Once you've converted request data into entities you can ``save()`` or
-``delete()`` them::
+Once you've converted request data into entities you can save::
 
     // In a controller.
     foreach ($entities as $entity) {
         // Save entity
         $articles->save($entity);
-
-        // Delete entity
-        $articles->delete($entity);
     }
 
 The above will run a separate transaction for each entity saved. If you'd like
 to process all the entities as a single transaction you can use
-``transactional()``::
+``saveMany()`` or ``saveManyOrFail()``::
 
-    // In a controller.
-    $articles->getConnection()->transactional(function () use ($articles, $entities) {
-        foreach ($entities as $entity) {
-            $articles->save($entity, ['atomic' => false]);
-        }
-    });
+    // Get a boolean indicating success
+    $articles->saveMany($entities);
+
+    // Get a PersistenceFailedException if any records fail to save.
+    $articles->saveManyOrFail($entities);
 
 .. _changing-accessible-fields:
 
