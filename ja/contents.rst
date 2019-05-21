@@ -6,9 +6,11 @@
 
    index
    topics
-   bake
    chronos
    debug-kit
+   bake
+   bake/development
+   bake/usage
 
 .. toctree::
     :maxdepth: 3
@@ -76,8 +78,8 @@
     :maxdepth: 3
     :caption: プラグイン
 
-    authorization <https://book.cakephp.org/authorization/>
-    authentication <https://book.cakephp.org/authentication/>
+    Authorization <https://book.cakephp.org/authorization/>
+    Authentication <https://book.cakephp.org/authentication/>
     Bake <https://book.cakephp.org/bake/1.x/ja/>
     Chronos <https://book.cakephp.org/chronos/1.x/ja/>
     Debug Kit <https://book.cakephp.org/debugkit/3.x/ja/>
