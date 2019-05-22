@@ -357,7 +357,7 @@ for the request. For example::
 While some apache installs don't make the ``Authorization`` header accessible,
 CakePHP will make it available through apache specific methods as required.
 
-.. php:method:: referer($local = false)
+.. php:method:: referer($local = true)
 
 Returns the referring address for the request.
 
@@ -449,7 +449,7 @@ to work with cookie collection.
 Uploaded Files
 --------------
 
-Requests expose the uploaded file data in ``getData()`` as 
+Requests expose the uploaded file data in ``getData()`` as
 arrays, and as ``UploadedFileInterface`` objects by ``getUploadedFiles()``::
 
     // Get a list of UploadedFile objects
