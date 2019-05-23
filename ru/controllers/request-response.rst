@@ -375,7 +375,7 @@ XML в объект DOMDocument, то :php:meth:`~Cake\\Http\\ServerRequest::inp
 Хотя некоторые установки Apache делают заголовок ``Authorization`` не доступным,
 CakePHP сделает его доступным с помощью специальных методов apache по мере необходимости.
 
-.. php:method:: referer($local = false)
+.. php:method:: referer($local = true)
 
 Возвращает ссылочный адрес для запроса.
 

@@ -360,7 +360,7 @@ HTTP ヘッダーの読み込み
 いくつかの apache インストール環境では、 ``Authorization`` ヘッダーにアクセスできませんが、
 CakePHP は、必要に応じて apache 固有のメソッドを介して利用できるようにします。
 
-.. php:method:: referer($local = false)
+.. php:method:: referer($local = true)
 
 リクエストのリファラーを返します。
 

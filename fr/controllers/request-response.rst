@@ -389,7 +389,7 @@ Du fait que certaines installations d'Apache ne rendent pas le header
 ``Authorization`` accessible, CakePHP le rend disponible via des méthodes
 spécifiques.
 
-.. php:method:: referer($local = false)
+.. php:method:: referer($local = true)
 
 Retourne l'adresse référente de la requête.
 
