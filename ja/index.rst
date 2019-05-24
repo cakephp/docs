@@ -21,7 +21,7 @@ CakePHP クックブックは、オープンに開発されている、コミュ
     多くのデバイス上でオフラインでドキュメントを読むことができます。
 
     - `PDF (英語) <../_downloads/en/CakePHPCookbook.pdf>`_
-    - `EPUB <../_downloads/ja/CakePHPCookbook.epub>`_
+    - `EPUB <../_downloads/ja/CakePHP.epub>`_
     - `オリジナルソース <http://github.com/cakephp/docs>`_
 
 助けを得るには
