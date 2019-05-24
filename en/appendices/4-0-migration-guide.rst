@@ -110,6 +110,14 @@ Database
   empty string to ``false``. Instead non-boolean string values are converted to ``null``.
 * ``DecimalType`` now uses strings to represent decimal values instead of floats.
   Using floats caused loss in precision.
+* ``Cake\Database\Connection::setLogger()`` no longer accepts ``null`` to
+  disable logging. Instead pass an instance of ``Psr\Log\NullLogger`` to disable
+  logging.
+* The internals of ``Database\Log\LoggingStatement``, ``Database\QueryLogger``
+  and ``Database\Log\LoggedQuery`` have changed. If you extend these classes you
+  will need to update your code.
+
+
 
 View
 ----
@@ -187,6 +195,7 @@ Database
 
 * If your database's timezone does not match PHP timezone then you can use the
   ``DateTime::setTimezone()`` method. See :ref:`datetime-type` for details.
+* ``Cake\Database\Log\LoggedQuery`` now implements ``JsonSerializable``.
 
 ORM
 ---
