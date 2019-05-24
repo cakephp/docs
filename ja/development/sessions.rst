@@ -127,7 +127,7 @@ handler 配列内に配置されます。ハンドラー内からこれらの値
 
 上記は、どのようにアプリケーションのモデルを使ってデータベースセッションハンドラーを
 設定できるかを示しています。クラス名をあなたの handler.engine に使用した時、
-CakePHP は、 ``Network\Session`` 名前空間内にクラスがあることを期待します。
+CakePHP は、 ``Http\Session`` 名前空間内にクラスがあることを期待します。
 例えば、 ``AppSessionHandler`` クラスを持っていた場合、ファイルは、
 **src/Http/Session/AppSessionHandler.php** に置いてください。そして、
 クラス名は、 ``App\Http\Session\AppSessionHandler`` にしてください。

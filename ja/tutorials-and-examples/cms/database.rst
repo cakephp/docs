@@ -4,7 +4,9 @@ CMS チュートリアル - データベース作成
 先ほどは CakePHP をインストールしましたので、 :abbr:`CMS (Content Management System)`
 アプリケーションのためのデータベースをセットアップしましょう。まだセットアップしていない場合、
 例えば ``cake_cms`` のように、あなたの好きな名前で、このチュートリアルで使用する空のデータベースを
-作成してください。必要なテーブルを作成するために、以下の SQL を実行することができます。 ::
+作成してください。必要なテーブルを作成するために、以下の SQL を実行することができます。
+
+.. code-block:: mysql
 
     USE cake_cms;
 
@@ -47,7 +49,7 @@ CMS チュートリアル - データベース作成
 
     INSERT INTO users (email, password, created, modified)
     VALUES
-    ('cakephp@example.com', 'sekret', NOW(), NOW());
+    ('cakephp@example.com', 'secret', NOW(), NOW());
 
     INSERT INTO articles (user_id, title, slug, body, published, created, modified)
     VALUES

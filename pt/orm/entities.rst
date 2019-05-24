@@ -63,8 +63,12 @@ Outro maneira de obter novas entidades é usando o método ``newEntity()`` dos o
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $article = TableRegistry::get('Articles')->newEntity();
-    $article = TableRegistry::get('Articles')->newEntity([
+
+    $article = TableRegistry::getTableLocator()->get('Articles')->newEntity();
+
+    $article = TableRegistry::getTableLocator()->get('Articles')->newEntity([
         'id' => 1,
         'title' => 'New Article',
         'created' => new DateTime('now')

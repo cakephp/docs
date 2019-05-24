@@ -356,7 +356,10 @@ Neste exemplo mostramos como encontrarmos um artigo quando este estiver publicad
     }
 
     // No controller ou table.
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find('ownedBy', ['user' => $userEntity]);
     //Retorne todos os artigos, quero que seja de meu usuário, porém somente os já publicados.
 
@@ -366,7 +369,10 @@ Sem esforço você pode expressar algumas consultas complexas. Assumindo que voc
 tem ambas as buscas 'published' e 'recent', poderia fazer assim::
 
     // No controller ou table.
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find('published')->find('recent');
     //Busque todos os artigos, dentre eles encontre os publicados, e retorne somente os recentes.
 
@@ -390,7 +396,10 @@ Por exemplo, se você quer buscar usuários por seu nome gostará de::
     $query = $this->Users->findAllByUsername('joebob');
 
     // Na tabela
+    // Prior to 3.6.0
     $users = TableRegistry::get('Users');
+
+    $users = TableRegistry::getTableLocator()->get('Users');
     // Duas chamadas também iguais.
     $query = $users->findByUsername('joebob');
     $query = $users->findAllByUsername('joebob');
@@ -924,7 +933,10 @@ do. For example, you can extract a list of unique tags on a collection of
 articles by running::
 
     // In a controller or table method.
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find()->contain(['Tags']);
 
     $reducer = function ($output, $value) {
@@ -946,7 +958,10 @@ Some other examples of the collection methods being used with result sets are::
     });
 
     // Create an associative array from result properties
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $results = $articles->find()->contain(['Authors'])->all();
 
     $authorList = $results->combine('id', 'author.name');

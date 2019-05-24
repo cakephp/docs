@@ -22,7 +22,11 @@ Query builder that does not include ORM features, if necessary. See the
 :ref:`database-queries` section for more information::
 
     use Cake\ORM\TableRegistry;
+
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // Start a new query.
     $query = $articles->find();
@@ -41,7 +45,10 @@ Selecting Rows From A Table
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $query = TableRegistry::get('Articles')->find();
+
+    $query = TableRegistry::getTableLocator()->get('Articles')->find();
 
     foreach ($query as $article) {
         debug($article->title);
@@ -366,7 +373,9 @@ safely add user data to SQL functions. For example::
 By making arguments with a value of ``literal``, the ORM will know that
 the key should be treated as a literal SQL value. By making arguments with
 a value of ``identifier``, the ORM will know that the key should be treated
-as a field identifier. The above would generate the following SQL on MySQL::
+as a field identifier. The above would generate the following SQL on MySQL:
+
+.. code-block:: mysql
 
     SELECT CONCAT(Articles.title, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created))) FROM articles;
 
@@ -390,7 +399,9 @@ For example::
         'timeCreated' => $time
     ]);
 
-Would result in::
+Would result in:
+
+.. code-block:: mysql
 
     SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
 
@@ -429,7 +440,9 @@ for implementing ``if ... then ... else`` logic inside your SQL. This can be use
 for reporting on data where you need to conditionally sum or count data, or where you
 need to specific data based on a condition.
 
-If we wished to know how many published articles are in our database, we could use the following SQL::
+If we wished to know how many published articles are in our database, we could use the following SQL:
+
+.. code-block:: sql
 
     SELECT
     COUNT(CASE WHEN published = 'Y' THEN 1 END) AS number_published,
@@ -585,7 +598,9 @@ conditions arrays in previous versions of CakePHP::
             'OR' => [['view_count' => 2], ['view_count' => 3]],
         ]);
 
-The above would generate SQL like::
+The above would generate SQL like:
+
+.. code-block:: sql
 
     SELECT * FROM articles WHERE author_id = 3 AND (view_count = 2 OR view_count = 3)
 
@@ -597,7 +612,9 @@ operator used between the current and previous condition. For example::
         ->where(['author_id' => 2])
         ->orWhere(['author_id' => 3]);
 
-The above will output SQL similar to::
+The above will output SQL similar to:
+
+.. code-block:: sql
 
     SELECT * FROM articles WHERE (author_id = 2 OR author_id = 3)
 
@@ -613,7 +630,9 @@ conditions that use a mixture of operators::
         ])
         ->orWhere(['promoted' => true]);
 
-The above generates SQL similar to::
+The above generates SQL similar to:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -638,7 +657,9 @@ you can compose conditions together with the expression objects::
             ]);
         });
 
-The above would create SQL like::
+The above would create SQL like:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -671,7 +692,9 @@ be::
 
 Since we started off using ``where()``, we don't need to call ``and_()``, as
 that happens implicitly. The above shows a few new condition
-methods being combined with ``AND``. The resulting SQL would look like::
+methods being combined with ``AND``. The resulting SQL would look like:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -700,7 +723,9 @@ following::
                 ->gte('view_count', 10);
         });
 
-Which would generate the SQL similar to::
+Which would generate the SQL similar to:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -734,7 +759,9 @@ You can negate sub-expressions using ``not()``::
                 ->lte('view_count', 10);
         });
 
-Which will generate the following SQL looking like::
+Which will generate the following SQL looking like:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -754,7 +781,9 @@ It is also possible to build expressions using SQL functions::
                 ->eq('published', true);
         });
 
-Which will generate the following SQL looking like::
+Which will generate the following SQL looking like:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles

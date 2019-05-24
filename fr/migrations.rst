@@ -19,11 +19,13 @@ Installation
 Par défaut Migrations est installé avec le squelette d’application. Si vous le
 retirez et voulez le réinstaller, vous pouvez le faire en lançant ce qui suit à
 partir du répertoire ROOT de votre application (où le fichier composer.json est
-localisé)::
+localisé):
+
+.. code-block:: bash
 
     $ php composer.phar require cakephp/migrations "@stable"
 
-    // Ou si composer est installé globalement
+    # Ou si composer est installé globalement
 
     $ composer require cakephp/migrations "@stable"
 

@@ -17,11 +17,13 @@ Migrations
 
 初期状態で Migrations は、デフォルトのアプリケーションの雛形と一緒にインストールされます。
 もしあなたがそれを削除して再インストールしたい場合は、（composer.json ファイルが
-配置されている）アプリケーションルートディレクトリーから次のコマンドを実行します。 ::
+配置されている）アプリケーションルートディレクトリーから次のコマンドを実行します。
+
+.. code-block:: bash
 
     $ php composer.phar require cakephp/migrations "@stable"
 
-    // また、composer がグローバルにインストールされていた場合は、
+    # また、composer がグローバルにインストールされていた場合は、
 
     $ composer require cakephp/migrations "@stable"
 

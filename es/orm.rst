@@ -33,7 +33,11 @@ Para comenzar no es necesario escribir código. Si has seguido las convenciones 
 comenzar a utilizar el ORM. Por ejemplo si quisieramos leer datos de nuestra tabla ``articles``::
 
     use Cake\ORM\TableRegistry;
+
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find();
     foreach ($query as $row) {
         echo $row->title;
@@ -56,7 +60,11 @@ Las clases Table usan una version en CamelCase del nombre de la tabla, con el su
 Una vez que tú clase fue creada, puedes obtener una referencia a esta usando :php:class:`~Cake\\ORM\\TableRegistry` como antes::
 
     use Cake\ORM\TableRegistry;
+
     // Now $articles is an instance of our ArticlesTable class.
+    $articles = TableRegistry::getTableLocator()->get('Articles');
+
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
 
 Ahora que tenemos una clase Table concreta, probablemente querramos usar una clase Entity concreta.
@@ -77,8 +85,11 @@ carguemos entidades de nuestra base de datos, vamos a obtener instancias de nues
 
     use Cake\ORM\TableRegistry;
 
-    // Now an instance of ArticlesTable.
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    // Now an instance of ArticlesTable.
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find();
 
     foreach ($query as $row) {

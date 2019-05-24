@@ -2,7 +2,9 @@ CMS 教程 － 创建数据库
 ####################################
 
 CakePHP 已经安装好，我们可以开始为 :abbr:`CMS (內容管理系統)` 应用建立数据库了。首先建立一个
-空的数据库，你可以使用任意的名字，比如 ``cake_cms``。执行以下 SQL 语句来建立需要的数据库表::
+空的数据库，你可以使用任意的名字，比如 ``cake_cms``。执行以下 SQL 语句来建立需要的数据库表:
+
+.. code-block:: mysql
 
     USE cake_cms;
 
@@ -45,7 +47,7 @@ CakePHP 已经安装好，我们可以开始为 :abbr:`CMS (內容管理系統)`
 
     INSERT INTO users (email, password, created, modified)
     VALUES
-    ('cakephp@example.com', 'sekret', NOW(), NOW());
+    ('cakephp@example.com', 'secret', NOW(), NOW());
 
     INSERT INTO articles (user_id, title, slug, body, published, created, modified)
     VALUES
@@ -85,11 +87,11 @@ CakePHP 已经安装好，我们可以开始为 :abbr:`CMS (內容管理系統)`
         // More configuration below.
     ];
 
-一旦配置好你的 **config/app.php** 文件以后，你应该看到 'CakePHP is able to connect to 
+一旦配置好你的 **config/app.php** 文件以后，你应该看到 'CakePHP is able to connect to
 the database' 的部分也出现一个绿色厨师帽。
 
 .. note::
-    
+
     一份默认的 CakePHP 配置文件可在 **config/app.default.php** 找到。
 
 创建第一个的模型
@@ -99,7 +101,7 @@ the database' 的部分也出现一个绿色厨师帽。
 起来，验证数据以及运用各种业务逻辑。模型是建立控制器的动作 （action） 和 模块（template）的基石。
 
 CakePHP 的模型是由 ``Table`` and ``Entity`` 两种对象组成。``Table`` 为是一个特定的数据库表
-的抽象。他们储存在 **src/Model/Table** 目录中。在本教程中，我们将建立文件 
+的抽象。他们储存在 **src/Model/Table** 目录中。在本教程中，我们将建立文件
 **src/Model/Table/ArticlesTable.php**。 完成的文件内容如下::
 
 
@@ -120,9 +122,9 @@ CakePHP 的模型是由 ``Table`` and ``Entity`` 两种对象组成。``Table`` 
 我们附属了 :doc:`/orm/behaviors/timestamp` 行为 （behavior）。此行为将会帮助我们自动填充
 被附属的数据库表的 ``created`` 列 和 ``modified`` 列。利用 CakePHP 的命名约定，我们取其名为 ``ArticlesTable``，
 这样 CakePHP 便可自动找到 ``articles`` 数据库表。同样利用命名约定，CakePHP 默认 ``id`` 为主键。
- 
+
 .. note::
-	
+
 	如果一个模型的定义文件在 **src/Model/Table** 目录中缺失， CakePHP 会动态的建立一个模型对象。
 	这代表着，如果我们不小心写错文件名（比如错写成 articlestable.php 或者 ArticleTable.php），
 	CakePHP 将无法读取你的设置，而是使用动态生成的模型。

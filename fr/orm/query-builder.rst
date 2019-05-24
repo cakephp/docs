@@ -24,7 +24,11 @@ fonctionnalités de l'ORM, si nécessaire. Consultez la section
 :ref:`database-queries` pour plus d'informations::
 
     use Cake\ORM\TableRegistry;
+
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // Commence une nouvelle requête.
     $query = $articles->find();
@@ -43,7 +47,10 @@ Récupérer les Lignes d'une Table
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $query = TableRegistry::get('Articles')->find();
+
+    $query = TableRegistry::getTableLocator()->get('Articles')->find();
 
     foreach ($query as $article) {
         debug($article->title);
@@ -387,7 +394,9 @@ En modifiant les arguments avec une valeur de ``literal``, l'ORM va savoir que
 la clé doit être traitée comme une valeur SQL littérale. En modifiant les
 arguments avec une valeur d'``identifier``, l'ORM va savoir que la clé doit être
 traitée comme un identifieur de champ. Le code ci-dessus va générer le SQL
-suivant sur MySQL::
+suivant sur MySQL:
+
+.. code-block:: mysql
 
     SELECT CONCAT(Articles.title, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created))) FROM articles;
 
@@ -410,7 +419,9 @@ créer toute fonction générique SQL comme ``year``, ``date_format``,
         'timeCreated' => $time
     ]);
 
-Entraînera::
+Entraînera:
+
+.. code-block:: mysql
 
     SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
 
@@ -452,7 +463,9 @@ d'additionner ou de compter conditionnellement, ou si vous avez besoin de
 données spécifiques basées sur une condition.
 
 Si vous vouliez savoir combien d'articles sont publiés dans notre base de
-données, nous pourrions utiliser le SQL suivant::
+données, nous pourrions utiliser le SQL suivant:
+
+.. code-block:: sql
 
     SELECT
     COUNT(CASE WHEN published = 'Y' THEN 1 END) AS number_published,
@@ -631,7 +644,9 @@ les conditions courante et précédente. Par exemple::
         ->where(['author_id' => 2])
         ->orWhere(['author_id' => 3]);
 
-Ce qui précède générerait le code SQL::
+Ce qui précède générerait le code SQL:
+
+.. code-block:: sql
 
     SELECT * FROM articles WHERE (author_id = 2 OR author_id = 3)
 
@@ -647,7 +662,9 @@ conditions complexes qui utilisent un mix d'opérateurs::
         ])
         ->orWhere(['promoted' => true]);
 
-Ce qui précède générerait le code SQL::
+Ce qui précède générerait le code SQL:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -672,7 +689,9 @@ vous pouvez organiser ensemble les conditions avec les objets expression::
             ]);
         });
 
-Ce qui précède générerait le code SQL::
+Ce qui précède générerait le code SQL:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -707,7 +726,9 @@ avec une objet ``Expression`` serait::
 Puisque nous avons commencé à utiliser ``where()``, nous n'avons pas besoin
 d'appeler ``and_()``, puisqu'elle est appelée implicitement. Le code ci-dessus
 montre quelques nouvelles méthodes de conditions combinées avec ``AND``. Le code
-SQL résultant serait::
+SQL résultant serait:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -736,7 +757,9 @@ nous pourrions faire ce qui suit::
                 ->gte('view_count', 10);
         });
 
-Ce qui générerait le code SQL suivant::
+Ce qui générerait le code SQL suivant:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -771,7 +794,9 @@ Vous pouvez faire une négation des sous-expressions en utilisant ``not()``::
                 ->lte('view_count', 10);
         });
 
-Ce qui générerait le code SQL suivant::
+Ce qui générerait le code SQL suivant:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -792,7 +817,9 @@ SQL::
                 ->eq('published', true);
         });
 
-Ce qui générerait le code SQL suivant::
+Ce qui générerait le code SQL suivant:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles

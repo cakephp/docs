@@ -40,7 +40,10 @@ CakePHP имеет встроенное объектно-реляционное 
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     $query = $articles->find();
 
@@ -72,6 +75,9 @@ CakePHP имеет встроенное объектно-реляционное 
     use Cake\ORM\TableRegistry;
 
     // Теперь $articles экземпляр класса ArticlesTable.
+    $articles = TableRegistry::getTableLocator()->get('Articles');
+
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
 
 Теперь, когда у нас есть конкретный класс таблицы, мы возможно захотим использовать
@@ -96,7 +102,10 @@ CakePHP имеет встроенное объектно-реляционное 
     use Cake\ORM\TableRegistry;
 
     // $articles объект класса ArticlesTable.
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find();
 
     foreach ($query as $row) {

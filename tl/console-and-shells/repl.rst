@@ -18,7 +18,7 @@ application's models::
     App : App
     Path: /Users/mark/projects/cakephp-app/src/
     ---------------------------------------------------------------
-    >>> $articles = Cake\ORM\TableRegistry::get('Articles');
+    >>> $articles = Cake\ORM\TableRegistry::getTableLocator()->get('Articles');
     // object(Cake\ORM\Table)(
     //
     // )

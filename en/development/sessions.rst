@@ -138,7 +138,7 @@ You can then read those values out from inside your handler::
 
 The above shows how you could setup the Database session handler with an
 application model. When using class names as your handler.engine, CakePHP will
-expect to find your class in the ``Network\Session`` namespace. For example, if
+expect to find your class in the ``Http\Session`` namespace. For example, if
 you had an ``AppSessionHandler`` class,  the file should be
 **src/Http/Session/AppSessionHandler.php**, and the class name should be
 ``App\Http\Session\AppSessionHandler``. You can also use session handlers

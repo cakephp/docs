@@ -85,7 +85,7 @@ Afin d'utiliser le behavior, vous avez besoin de créer une table ``i18n`` avec
 le bon schéma. Habituellement, la seule façon de charger la table ``i18n`` est
 en lançant manuellement le script SQL suivant dans votre base de données:
 
-.. code-block:: sql
+.. code-block:: mysql
 
     CREATE TABLE i18n (
         id int NOT NULL auto_increment,

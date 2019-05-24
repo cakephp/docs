@@ -22,7 +22,11 @@ SQL インジェクション攻撃から守っています。
 のセクションを参照してください。 ::
 
     use Cake\ORM\TableRegistry;
+
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // 新しいクエリーを始めます。
     $query = $articles->find();
@@ -40,7 +44,10 @@ SQL インジェクション攻撃から守っています。
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $query = TableRegistry::get('Articles')->find();
+
+    $query = TableRegistry::getTableLocator()->get('Articles')->find();
 
     foreach ($query as $article) {
         debug($article->title);
@@ -391,7 +398,9 @@ SQL 関数に渡す引数には、リテラルの引数と、バインドパラ�
         'timeCreated' => $time
     ]);
 
-このようになります。 ::
+このようになります。
+
+.. code-block:: mysql
 
     SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
 
@@ -430,7 +439,9 @@ ORM ではまた、 SQL の ``case`` 式も使えます。 ``case`` 式により
 状況や、条件に基いてデータを特定しなければならない状況で、データを出力するのに便利です。
 
 公開済みの記事（published articles）がデータベース内にいくつあるのか知りたい場合、次の
-SQL を使用することができます。 ::
+SQL を使用することができます。
+
+.. code-block:: sql
 
     SELECT
     COUNT(CASE WHEN published = 'Y' THEN 1 END) AS number_published,
@@ -585,7 +596,9 @@ CakePHP は計算された値が正しい Entity にセットされることを�
             'OR' => [['view_count' => 2], ['view_count' => 3]],
         ]);
 
-上記は次のような SQL を生成します。 ::
+上記は次のような SQL を生成します。
+
+.. code-block:: sql
 
     SELECT * FROM articles WHERE author_id = 3 AND (view_count = 2 OR view_count = 3)
 
@@ -604,7 +617,9 @@ CakePHP は計算された値が正しい Entity にセットされることを�
         ]);
     });
 
-上記は次のような SQL を出力します。 ::
+上記は次のような SQL を出力します。
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -637,7 +652,9 @@ CakePHP は計算された値が正しい Entity にセットされることを�
         });
 
 ``where()`` を使い始めた場合、 ``and_()`` は暗黙的に選ばれているため、それを呼ぶ必要はありません。
-上記の例では新たな条件がいくつか ``AND`` で結合されています。結果の SQL は次のようになります。 ::
+上記の例では新たな条件がいくつか ``AND`` で結合されています。結果の SQL は次のようになります。
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -664,7 +681,9 @@ CakePHP は計算された値が正しい Entity にセットされることを�
                 ->gte('view_count', 10);
         });
 
-これは下記のような SQL を生成します。 ::
+これは下記のような SQL を生成します。
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -698,7 +717,9 @@ CakePHP は計算された値が正しい Entity にセットされることを�
                 ->lte('view_count', 10);
         });
 
-これは下記のような SQL を生成します。 ::
+これは下記のような SQL を生成します。
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -718,7 +739,9 @@ SQL 関数を使った式を構築することも可能です。 ::
                 ->eq('published', true);
         });
 
-これは下記のような SQL を生成します。 ::
+これは下記のような SQL を生成します。
+
+.. code-block:: sql
 
     SELECT *
     FROM articles

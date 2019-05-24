@@ -600,7 +600,7 @@ l'exécution s'arrête, vous pouvez utiliser ``abort()`` pour lancer une
     $user = $this->Users->get($this->args[0]);
     if (!$user) {
         // Arrête avec un message et un code d'erreur.
-        $this->abort('Utilisateur non trouvé, 128);
+        $this->abort('Utilisateur non trouvé', 128);
     }
 
 .. versionadded:: 3.2
