@@ -8,6 +8,7 @@
    topics
    chronos
    debug-kit
+   elasticsearch
    bake
    bake/development
    bake/usage
@@ -84,7 +85,7 @@
     Chronos <https://book.cakephp.org/chronos/1.x/ja/>
     Debug Kit <https://book.cakephp.org/debugkit/3.x/ja/>
     migrations
-    elasticsearch
+    Elasticsearch <https://book.cakephp.org/elasticsearch/2.x/ja/>
     upgrade-tool
 
 .. toctree::

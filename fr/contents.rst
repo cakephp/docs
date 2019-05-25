@@ -10,6 +10,7 @@ Contenu
    bake/usage
    chronos
    debug-kit
+   elasticsearch
 
 
 .. toctree::
@@ -82,7 +83,7 @@ Contenu
     Chronos <https://book.cakephp.org/chronos/1.x/fr/>
     Debug Kit <https://book.cakephp.org/debugkit/3.x/fr/>
     migrations
-    elasticsearch
+    Elasticsearch <https://book.cakephp.org/elasticsearch/2.x/fr/>
     upgrade-tool
 
 .. toctree::
