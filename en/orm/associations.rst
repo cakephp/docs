@@ -702,16 +702,28 @@ The CoursesMemberships join table uniquely identifies a given Student's
 participation on a Course in addition to extra meta-information.
 
 Default Association Conditions
-------------------------------
+==============================
 
 The ``finder`` option allows you to use a :ref:`custom finder
-<custom-find-methods>` to load associated record data. This lets you encapsulate
-your queries better and keep your code DRY'er. There are some limitations when
-using finders to load data in associations that are loaded using joins
-(belongsTo/hasOne). Only the following aspects of the query will be applied to
-the root query:
+<custom-find-methods>` to load associated record data. Using a finder method
+lets you encapsulate and reuse your query logic::
 
-- WHERE conditions.
+    // When the authors association is loaded,
+    // AuthorsTable::findActive() will be called.
+    $this->belongsTo('Authors')
+        ->setFinder('active')
+
+    // Pass options to the association finder
+    // The passed options will be added to the ``$options`` parameter
+    // of findActive()
+    $this->belongsTo('Authors')
+        ->setFinder(['active' => ['temporary' => true]]);
+
+There are some limitations when using finders to load data in associations that
+are loaded using joins (belongsTo/hasOne). Only the following aspects of the
+query will be applied to the root query:
+
+- ``WHERE`` conditions.
 - Additional joins.
 - Contained associations.
 
@@ -721,7 +733,7 @@ that are *not* loaded through joins (hasMany/belongsToMany), do not have the
 above restrictions and can also use result formatters or map/reduce functions.
 
 Loading Associations
---------------------
+====================
 
 Once you've defined your associations you can :ref:`eager load associations
 <eager-loading-associations>` when fetching results.
