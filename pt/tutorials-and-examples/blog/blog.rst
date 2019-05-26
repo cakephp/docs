@@ -113,7 +113,7 @@ Agora, vamos criar uma tabela para armazenar nossos artigos:
 
 .. code-block:: mysql
 
-    # Primeiro, criamos a tabela articles
+    -- Primeiro, criamos a tabela articles
     CREATE TABLE articles (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(50),
@@ -127,7 +127,7 @@ Execute os seguintes comandos SQL em seu banco de dados:
 
 .. code-block:: mysql
 
-    # Então inserimos articles para testes
+    -- Então inserimos articles para testes
     INSERT INTO articles (title,body,created)
         VALUES ('The title', 'This is the article body.', NOW());
     INSERT INTO articles (title,body,created)
