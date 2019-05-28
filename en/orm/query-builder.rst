@@ -646,12 +646,12 @@ expression builder to build more complex conditions without arrays. For example:
 
     $query = $articles->find()->where(function ($exp, $query) {
         // Use add() to add multiple conditions for the same field.
-        $author = $exp->or_(['author_id' => 3])->add(['author_id' => 2]);
-        $published = $exp->and_(['published' => true, 'view_count' => 10]);
+        $author = $query->newExpr()->or_(['author_id' => 3])->add(['author_id' => 2]);
+        $published = $query->newExpr()->and_(['published' => true, 'view_count' => 10]);
 
         return $exp->or_([
             'promoted' => true,
-            $exp->and_([$author, $published])
+            $query->newExpr()->and_([$author, $published])
         ]);
     });
 
