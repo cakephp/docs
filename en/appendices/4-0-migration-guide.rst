@@ -116,8 +116,11 @@ Database
 * The internals of ``Database\Log\LoggingStatement``, ``Database\QueryLogger``
   and ``Database\Log\LoggedQuery`` have changed. If you extend these classes you
   will need to update your code.
-
-
+* The internals of ``Cake\Database\Log\LoggingStatement``, ``Cake\Database\QueryLogger``
+  and ``Cake\Database\Log\LoggedQuery`` have changed. If you extend these classes
+  you will need to update your code.
+* The internals of ``Cake\Database\Schema\CacheCollection`` and ``Cake\Database\SchemaCache``
+  have changed. If you extend these classes you will need to update your code.
 
 View
 ----
@@ -196,6 +199,13 @@ Database
 * If your database's timezone does not match PHP timezone then you can use the
   ``DateTime::setTimezone()`` method. See :ref:`datetime-type` for details.
 * ``Cake\Database\Log\LoggedQuery`` now implements ``JsonSerializable``.
+* ``Cake\Database\Connection`` now allows using any PSR-3 logger. As a result
+  those using the standalone database package are no longer forced to use
+  the ``cakephp/log`` package for logging.
+* ``Cake\Database\Connection`` now allows using any PSR-16 cacher. As a result
+  those using the standalone database package are no longer forced to use
+  the ``cakephp/cache`` package for caching. New methods ``Cake\Database\Connection::setCache()``
+  and ``Cake\Database\Connection::getCache()`` have been added.
 
 ORM
 ---
