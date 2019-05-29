@@ -286,4 +286,4 @@ Helper Functions
 Know Problems
 =============
 
-If you work with xDebug enabled you'll end up with an exception and stack trace (https://github.com/cakephp/debug_kit/issues/388). This problem can be avoided with setting ``xdebug.collect_params`` to ``1``.
+If you work with xDebug enabled you'll end up with an exception and stack trace (https://github.com/cakephp/debug_kit/issues/388). This problem can be avoided by setting ``xdebug.collect_params`` to ``1``.
