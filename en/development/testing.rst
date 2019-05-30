@@ -1138,10 +1138,8 @@ begin with a simple example controller that responds in JSON::
         public function view($id)
         {
             $marker = $this->Markers->get($id);
-            $this->set([
-                '_serialize' => ['marker'],
-                'marker' => $marker,
-            ]);
+            $this->set('marker', $marker);
+            $this->viewBuilder()->setOption('serialize', ['marker']);
         }
     }
 

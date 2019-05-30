@@ -44,6 +44,18 @@ Filesystem
   design problems and fixing this infrequently used package does not seem worth
   the effort when there are a great selection of packages already.
 
+View
+----
+
+* The ``_serialize``, ``_jsonOptions`` and ``_jsonp`` special view variables of
+  ``JsonView`` are
+  now deprected. Instead you should use 
+  ``viewBuilder()->setOption($optionName, $optionValue)`` to set these options.
+* The ``_serialize``, ``_rootNode`` and ``_xmlOptions`` special view variables of
+  ``XmlView`` are
+  now deprected. Instead you should use 
+  ``viewBuilder()->setOption($optionName, $optionValue)`` to set these options.
+
 Breaking Changes
 ================
 
@@ -128,8 +140,7 @@ View
 * Templates have been moved from ``src/Template/`` to ``templates/`` folder on
   app and plugin root. With this change the ``src`` folder now only contains files
   with classes that are autoloaded via composer's autoloader.
-
-  Special templates folders like ``Cell``, ``Element``, ``Email`` and ``Plugin``
+* Special templates folders like ``Cell``, ``Element``, ``Email`` and ``Plugin``
   have be renamed to lower case ``cell``, ``element``, ``email`` and ``plugin``
   respectively. This provides better visual distinction between special folders
   and the folders corresponding to your app's controller names which are in

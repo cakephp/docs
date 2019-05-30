@@ -240,7 +240,7 @@ like::
         }
         $tags = $this->Bookmarks->Tags->find('list');
         $this->set(compact('bookmark', 'tags'));
-        $this->set('_serialize', ['bookmark']);
+        $this->viewBuilder()->setOption('serialize', ['bookmark']);
     }
 
 By setting the entity property with the session data, we remove any possibility
@@ -264,7 +264,7 @@ edit form and action. Your ``edit()`` action from
         }
         $tags = $this->Bookmarks->Tags->find('list');
         $this->set(compact('bookmark', 'tags'));
-        $this->set('_serialize', ['bookmark']);
+        $this->viewBuilder()->setOption('serialize', ['bookmark']);
     }
 
 List View
@@ -282,7 +282,7 @@ that by updating the call to ``paginate()``. Make your ``index()`` action from
             ]
         ];
         $this->set('bookmarks', $this->paginate($this->Bookmarks));
-        $this->set('_serialize', ['bookmarks']);
+        $this->viewBuilder()->setOption('serialize', ['bookmarks']);
     }
 
 We should also update the ``tags()`` action and the related finder method, but

@@ -432,7 +432,7 @@ pages for items that have not been found::
             throw new NotFoundException(__('Article not found'));
         }
         $this->set('article', $article);
-        $this->set('_serialize', ['article']);
+        $this->viewBuilder()->setOption('serialize', ['article']);
     }
 
 By using exceptions for HTTP errors, you can keep your code both clean, and give
@@ -453,7 +453,7 @@ to indicate failure states. For example::
             throw new NotFoundException(__('Article not found'));
         }
         $this->set('article', 'article');
-        $this->set('_serialize', ['article']);
+        $this->viewBuilder()->setOption('serialize', ['article']);
     }
 
 The above would cause the configured exception handler to catch and
