@@ -9,7 +9,8 @@ Security
 .. note::
     Security によって提供される暗号化機能は、非推奨な ``mcrypt`` 拡張に依存します。
     ``Security.useOpenSsl`` に設定することによってこの振る舞いを変更できます。もし
-    PHP=>7.1 を使用している場合、デフォルトではPECL 経由で ``mcrypt`` をインストールする必要があります。
+    PHP=>7.1 でデフォルトの設定を使用している場合、PECL 経由で ``mcrypt`` を
+    インストールする必要があります。
 
 Security API
 ============
@@ -74,7 +75,8 @@ Security API
     .. versionadded:: 2.5
 
     .. versionadded:: 2.10.8
-        非推奨な mcrypt 拡張の代わりに ``Security.useOpenSsl`` を設定してOpenSSLを利用してください。
+        非推奨な ``mcrypt`` 拡張の代わりに ``Security.useOpenSsl`` を設定して
+	OpenSSL を利用してください。
 
 .. php:staticmethod:: decrypt($cipher, $key, $hmacSalt = null)
 
@@ -97,7 +99,8 @@ Security API
     .. versionadded:: 2.5
 
     .. versionadded:: 2.10.8
-        非推奨な mcrypt 拡張の代わりに ``Security.useOpenSsl`` を設定してOpenSSLを利用してください。
+        非推奨な ``mcrypt`` 拡張の代わりに ``Security.useOpenSsl`` を設定して
+	OpenSSL を利用してください。
 
 .. php:staticmethod:: hash( $string, $type = NULL, $salt = false )
 
