@@ -76,7 +76,7 @@ Security API
 
     .. versionadded:: 2.10.8
         非推奨な ``mcrypt`` 拡張の代わりに ``Security.useOpenSsl`` を設定して
-	OpenSSL を利用してください。
+        OpenSSL を利用してください。
 
 .. php:staticmethod:: decrypt($cipher, $key, $hmacSalt = null)
 
@@ -100,7 +100,7 @@ Security API
 
     .. versionadded:: 2.10.8
         非推奨な ``mcrypt`` 拡張の代わりに ``Security.useOpenSsl`` を設定して
-	OpenSSL を利用してください。
+        OpenSSL を利用してください。
 
 .. php:staticmethod:: hash( $string, $type = NULL, $salt = false )
 
