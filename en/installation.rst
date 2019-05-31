@@ -451,29 +451,34 @@ A sample of the server directive is as follows:
 
 .. code-block:: nginx
 
-    server {
-        listen   80;
-        listen   [::]:80;
-        server_name www.example.com;
-        return 301 http://example.com$request_uri;
+   server {
+    listen   80;
+    listen   [::]:80;
+    server_name www.example.com;
+    return 301 http://example.com$request_uri;
+}
+
+server {
+    listen   80;
+    listen   [::]:80;
+    server_name example.com;
+
+    root   /var/www/html/app/webroot;
+    index  index.php;
+
+    error_log /var/www/html/app/logs/error.log;
+
+    location / {
+        try_files $uri $uri/ /index.php?$args;
     }
+    
+    #If you are using PHP-fpm
+    #location ~ \.php$ {
+    #include snippets/fastcgi-php.conf;
+    #fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+    #}
 
-    server {
-        listen   80;
-        listen   [::]:80;
-        server_name example.com;
-
-        root   /var/www/example.com/public/webroot;
-        index  index.php;
-
-        access_log /var/www/example.com/log/access.log;
-        error_log /var/www/example.com/log/error.log;
-
-        location / {
-            try_files $uri $uri/ /index.php?$args;
-        }
-
-        location ~ \.php$ {
+    location ~ \.php$ {
             try_files $uri =404;
             include fastcgi_params;
             fastcgi_pass 127.0.0.1:9000;
@@ -481,7 +486,10 @@ A sample of the server directive is as follows:
             fastcgi_intercept_errors on;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         }
-    }
+     location ~ /\.ht {
+        deny all;
+      }
+   }
 
 .. note::
     Recent configurations of PHP-FPM are set to listen to the unix php-fpm
