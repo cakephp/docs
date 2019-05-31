@@ -6,9 +6,10 @@ Security
 `Security ライブラリ <https://api.cakephp.org/2.x/class-Security.html>`_ は、
 データのハッシュ化や暗号化などのメソッドなどの基本的なセキュリティ分野を取り扱います。
 
-.. warning::
-    Security によって提供される暗号化機能は、非推奨な ``mcrypt`` 拡張に依存します。もし
-    PHP=>7.1 を使用している場合、PECL 経由で ``mcrypt`` をインストールする必要があります。
+.. note::
+    Security によって提供される暗号化機能は、非推奨な ``mcrypt`` 拡張に依存します。
+    ``Security.useOpenSsl`` に設定することによってこの振る舞いを変更できます。もし
+    PHP=>7.1 を使用している場合、デフォルトではPECL 経由で ``mcrypt`` をインストールする必要があります。
 
 Security API
 ============
@@ -72,6 +73,9 @@ Security API
 
     .. versionadded:: 2.5
 
+    .. versionadded:: 2.10.8
+        非推奨な mcrypt 拡張の代わりに ``Security.useOpenSsl`` を設定してOpenSSLを利用してください。
+
 .. php:staticmethod:: decrypt($cipher, $key, $hmacSalt = null)
 
     :param string $cipher: 復号する暗号文字列。
@@ -91,6 +95,9 @@ Security API
     暗号キーや HMAC ソルトが変わったことで復号化できなかった場合は、 ``false`` を返します。
 
     .. versionadded:: 2.5
+
+    .. versionadded:: 2.10.8
+        非推奨な mcrypt 拡張の代わりに ``Security.useOpenSsl`` を設定してOpenSSLを利用してください。
 
 .. php:staticmethod:: hash( $string, $type = NULL, $salt = false )
 
