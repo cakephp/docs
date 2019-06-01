@@ -33,7 +33,7 @@ você pode usar ``get()``::
 
     // No controller ou table tente isto.
 
-    // Retorna um único artigo pelo id primário.
+    // Retorna um único artigo pela chave primária.
     $article = $articles->get($id);
 
     // Retorna um artigo com seus comentários
