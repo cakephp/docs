@@ -84,8 +84,8 @@ Usando ``'find()'`` para carregar dados
 
 .. php:method:: find($type, $options = [])
 
-Agora que você sabe e pode trabalhar com entidades, Precisará carrega las
-e gostará muito como fazer isso. O caminho mais simples para carregar uma
+Agora que você sabe e pode trabalhar com entidades, precisará carregá-las
+e gostará muito de fazer isso. O caminho mais simples para carregar uma
 Entidade ou objetos relacionais metódo ``find()``. find provê um extensivél
 e facíl caminho para procurar e retornar dados, talves você se interesse por
 in::
