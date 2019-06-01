@@ -17,7 +17,8 @@ Quando o ORM foi implementado, era muito difícil depurar os resultados obtidos
 nas versões anteriores do CakePHP. Agora existem muitas formas fáceis de
 inspecionar os dados retornados pelo ORM.
 
-- ``debug($query)`` Mostra o SQL e os parâmetros incluídos, não mostra resultados.
+- ``debug($query)`` Mostra o SQL e os parâmetros incluídos, não mostra resultados
+.
 - ``debug($query->all())`` Mostra a propriedade ResultSet retornado pelo ORM.
 - ``debug($query->toArray())`` Um caminho mais fácil para mostrar todos os resultados.
 - ``debug(json_encode($query, JSON_PRETTY_PRINT))`` Exemplo em JSON.
@@ -209,7 +210,7 @@ Veja :ref:`query-count` para modos de uso diferentes com o metódo ``count()``.
 
 .. _table-find-list:
 
-Encontrando Chaves/Pares de Valores
+Encontrando Pares Chave/Valor
 ===================================
 
 Frequentemente precisamos gerar um dados associados em array de nossas aplicações.
