@@ -5,10 +5,7 @@ Retornando dados e conjuntos de resultados
 
 .. php:class:: Table
 
-Quando executar uma query, você obterá um objeto Entidade. Nesta sessão
-discutiremos diferentes caminhos para se obter: entidades, carregar informações
-relacionais, abstratas, ou complexo relacional. Você poderá ler mais sobre
-:doc:`/orm/entities` ( ‘Entity’ em inglês ).
+Enquanto os objetos Table fornecem uma abstração em torno de um "repositório" ou coleção de objetos, quando você consulta registros individuais, obtém objetos Entity. Nesta sessão discutiremos diferentes caminhos para se obter: entidades, carregar informações relacionais, abstratas, ou complexo relacional. Você poderá ler mais sobre :doc:`/orm/entities` ( ‘Entity’ em inglês ).
 
 Depurando Queries e Resultados
 ==============================
@@ -36,7 +33,7 @@ você pode usar ``get()``::
 
     // No controller ou table tente isto.
 
-    // Retorna um único artigo pelo id primário.
+    // Retorna um único artigo pela chave primária.
     $article = $articles->get($id);
 
     // Retorna um artigo com seus comentários
@@ -84,8 +81,8 @@ Usando ``'find()'`` para carregar dados
 
 .. php:method:: find($type, $options = [])
 
-Agora que você sabe e pode trabalhar com entidades, Precisará carrega las
-e gostará muito como fazer isso. O caminho mais simples para carregar uma
+Agora que você sabe e pode trabalhar com entidades, precisará carregá-las
+e gostará muito de fazer isso. O caminho mais simples para carregar uma
 Entidade ou objetos relacionais metódo ``find()``. find provê um extensivél
 e facíl caminho para procurar e retornar dados, talves você se interesse por
 in::
