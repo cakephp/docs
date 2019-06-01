@@ -5,10 +5,7 @@ Retornando dados e conjuntos de resultados
 
 .. php:class:: Table
 
-Quando executar uma query, você obterá um objeto Entidade. Nesta sessão
-discutiremos diferentes caminhos para se obter: entidades, carregar informações
-relacionais, abstratas, ou complexo relacional. Você poderá ler mais sobre
-:doc:`/orm/entities` ( ‘Entity’ em inglês ).
+Enquanto os objetos Table fornecem uma abstração em torno de um "repositório" ou coleção de objetos, quando você consulta registros individuais, obtém objetos Entity. Nesta sessão discutiremos diferentes caminhos para se obter: entidades, carregar informações relacionais, abstratas, ou complexo relacional. Você poderá ler mais sobre :doc:`/orm/entities` ( ‘Entity’ em inglês ).
 
 Depurando Queries e Resultados
 ==============================
