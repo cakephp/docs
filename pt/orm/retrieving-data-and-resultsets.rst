@@ -45,7 +45,7 @@ Quando não conseguir obter um resultado
 ``Cake\Datasource\Exception\RecordNotFoundException`` será disparado. Você
 poderá tratar esta exceção, ou converter num erro 404.
 
-O metódo ``find()`` usa uma cache integrado. Você pode uma a opção ``cache``
+O metódo ``find()`` usa um cache integrado. Você pode uma a opção ``cache``
 quando chamar ``get()`` para uma performance na leitura - ``caching``::
 
     // No controller ou table tente isto.
