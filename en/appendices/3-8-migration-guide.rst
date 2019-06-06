@@ -82,6 +82,8 @@ Validator
   ``notEmptyFile()``, ``notEmptyDate()``, ``notEmptyTime()``, and
   ``notEmptyDateTime()`` were added. They act as compliments to the
   ``allowEmpty*`` methods added in 3.7.
+* ``Validation::mimeType()`` now compares checks mime-types in a case
+  insensitive manner.
 
 View
 ----
