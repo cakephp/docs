@@ -18,6 +18,8 @@ Deprecations
   ``allowEmptyDateTime()`` now emit a deprecation warning when using the
   ``$field, $when, $message`` signature. Instead you should use
   ``$field, $message, $when``.
+* ``EntityTrait::visibleProperties()`` is now deprecated. Use ``getVisible()``
+  instead.
 
 Behavior Changes
 ================
