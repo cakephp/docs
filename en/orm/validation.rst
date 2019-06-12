@@ -687,7 +687,7 @@ come up when running a CLI script that directly sets properties on entities::
     // In src/Model/Table/UsersTable.php
     public function validationDefault(Validator $validator)
     {
-        $validator->add('email', 'valid', [
+        $validator->add('email', 'valid_email', [
             'rule' => 'email',
             'message' => 'Invalid email'
         ]);
