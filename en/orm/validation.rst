@@ -603,7 +603,10 @@ In the above example, we'll use a 'custom' validator, which is defined using the
 
     public function validationCustomName($validator)
     {
-        $validator->add(...);
+        $validator->add(
+            // ...
+        );
+        
         return $validator;
     }
 
@@ -618,7 +621,8 @@ from any request::
             'message' => 'Passwords are not equal',
         ]);
 
-        ...
+        // ...
+
         return $validator;
     }
 
@@ -639,6 +643,7 @@ Application rules as explained above will be checked whenever ``save()`` or
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique('email'));
+
         return $rules;
     }
 
@@ -656,12 +661,14 @@ for data transitions generated inside your application::
             if($order->shipping_mode !== 'free'){
                 return true;
             }
+
             return $order->price >= 100;
         };
         $rules->add($check, [
             'errorField' => 'shipping_mode',
             'message' => 'No free shipping for orders under 100!'
         ]);
+
         return $rules;
     }
 
@@ -684,7 +691,9 @@ come up when running a CLI script that directly sets properties on entities::
             'rule' => 'email',
             'message' => 'Invalid email'
         ]);
-        ...
+
+        // ...
+        
         return $validator;
     }
 
@@ -700,7 +709,7 @@ come up when running a CLI script that directly sets properties on entities::
             return empty($errors);
         });
 
-        ...
+        // ...
 
         return $rules;
     }
