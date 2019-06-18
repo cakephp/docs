@@ -49,11 +49,11 @@ View
 
 * The ``_serialize``, ``_jsonOptions`` and ``_jsonp`` special view variables of
   ``JsonView`` are
-  now deprected. Instead you should use 
+  now deprected. Instead you should use
   ``viewBuilder()->setOption($optionName, $optionValue)`` to set these options.
 * The ``_serialize``, ``_rootNode`` and ``_xmlOptions`` special view variables of
   ``XmlView`` are
-  now deprected. Instead you should use 
+  now deprected. Instead you should use
   ``viewBuilder()->setOption($optionName, $optionValue)`` to set these options.
 
 Breaking Changes
@@ -189,6 +189,14 @@ I18n
 * JSON encoding ``Cake\I18n\Date`` and ``Cake\I18n\FrozenDate`` objects now results
   in strings with only the date part, in format ``yyyy-MM-dd`` instead of earlier format
   ``yyyy-MM-dd'T'HH:mm:ssxxx``.
+
+Error
+-----
+* The internals of error handler classes ``BaseErrorHandler``, ``ErrorHandler``
+  and ``ConsoleErrorHandler`` have changed. If you have extended these classes
+  you should update them accordingly.
+* ``ErrorHandlerMiddleware`` now takes an error handler class name or instance
+  as constructor argument instead of exception render class name or instance.
 
 Miscellaneous
 -------------

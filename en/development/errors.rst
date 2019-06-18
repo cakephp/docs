@@ -33,6 +33,8 @@ handling for your application. The following options are supported:
 * ``extraFatalErrorMemory`` - int - Set to the number of megabytes to increase
   the memory limit by when a fatal error is encountered. This allows breathing
   room to complete logging or error handling.
+* ``errorLogger`` - \Cake\Error\ErrorLogger - The class responsible for logging
+  errors and unhandled exceptions.
 
 By default, PHP errors are displayed when ``debug`` is ``true``, and logged
 when debug is ``false``. The fatal error handler will be called independent
