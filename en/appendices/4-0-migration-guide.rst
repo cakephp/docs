@@ -223,6 +223,10 @@ Database
   those using the standalone database package are no longer forced to use
   the ``cakephp/cache`` package for caching. New methods ``Cake\Database\Connection::setCache()``
   and ``Cake\Database\Connection::getCache()`` have been added.
+* ``Cake\Database\ConstraintsInterface`` was extracted from
+  ``Cake\Datasource\FixtureInterface``. This interface should be
+  implemented by fixture implementations that support constraints, which from
+  our experience is generally relational databases.
 
 ORM
 ---
