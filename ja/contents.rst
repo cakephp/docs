@@ -2,16 +2,17 @@
 ############
 
 .. toctree::
-   :hidden:
+    :hidden:
 
-   index
-   topics
-   chronos
-   debug-kit
-   elasticsearch
-   bake
-   bake/development
-   bake/usage
+    index
+    topics
+    chronos
+    debug-kit
+    elasticsearch
+    bake
+    bake/development
+    bake/usage
+    migrations
 
 .. toctree::
     :maxdepth: 3
@@ -84,7 +85,7 @@
     Bake <https://book.cakephp.org/bake/1.x/ja/>
     Chronos <https://book.cakephp.org/chronos/1.x/ja/>
     Debug Kit <https://book.cakephp.org/debugkit/3.x/ja/>
-    migrations
+    Migrations <https://book.cakephp.org/migrations/2.x/ja/>
     Elasticsearch <https://book.cakephp.org/elasticsearch/2.x/ja/>
     upgrade-tool
 
