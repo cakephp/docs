@@ -1,28 +1,32 @@
 Middleware
 ##########
 
-Los objetos del middleware le dan la posibilidad de "envolver" su aplicación en capas compuestas y reutilizables
-de la lógica de manejo de la solicitud o respuesta. Visualmente, su aplicación termina en el centro y el 
-middleware se envuelve en la aplicación como una cebolla. Aquí podemos ver una aplicación con enrutamiento,
-activos, manejo de excepciones y middleware de encabezado CORS.
+Los objetos del middleware le dan la posibilidad de "envolver" su aplicación en
+capas compuestas y reutilizables de la lógica de manejo de la solicitud
+o respuesta. Visualmente, su aplicación termina en el centro y el middleware se
+envuelve en la aplicación como una cebolla. Aquí podemos ver una aplicación con
+enrutamiento, activos, manejo de excepciones y middleware de encabezado CORS.
 
 .. image:: /_static/img/middleware-setup.png
 
 
-Cuando una solicitud es manejada por su aplicación, ésta ingresa desde el extremo del
-middleware. Cada middleware puede delegar la solicitud / respuesta a la siguiente
-capa, o devolver una respuesta. Devolver una respuesta evita que las capas inferiores
-siempre vean la solicitud. Un ejemplo de eso es el AssetMiddleware que maneja una solicitud
-de una imagen de un plugin durante el desarrollo.
+Cuando una solicitud es manejada por su aplicación, ésta ingresa desde el
+extremo del middleware. Cada middleware puede delegar la solicitud / respuesta
+a la siguiente capa, o devolver una respuesta. Devolver una respuesta evita que
+las capas inferiores siempre vean la solicitud. Un ejemplo de eso es el
+AssetMiddleware que maneja una solicitud de una imagen de un plugin durante el
+desarrollo.
 
 .. image:: /_static/img/middleware-request.png
 
-Si ningún middleware toma medidas para manejar la solicitud, se ubicará un controlador y se invocará su acción,
-o se generará una excepción generando una página de error.
+Si ningún middleware toma medidas para manejar la solicitud, se ubicará un
+controlador y se invocará su acción, o se generará una excepción generando una
+página de error.
 
-El middleware es parte de la nueva pila HTTP en CakePHP que aprovecha las interfaces de solicitud y respuesta del PSR-7.
-Debido a que CakePHP está aprovechando el estándar PSR-7, puede usar cualquier middleware compatible con PSR-7 disponible en The Packagist
-<https://packagist.org>`__.
+El middleware es parte de la nueva pila HTTP en CakePHP que aprovecha las
+interfaces de solicitud y respuesta del PSR-7.  Debido a que CakePHP está
+aprovechando el estándar PSR-7, puede usar cualquier middleware compatible con
+PSR-7 disponible en The `Packagist <https://packagist.org>`__.
 
 Middleware en CakePHP
 =====================
