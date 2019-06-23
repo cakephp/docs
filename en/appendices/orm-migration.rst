@@ -449,6 +449,7 @@ to have multiple sets of rules::
                 ->add('user_id', 'numeric', [
                     'rule' => 'numeric'
                 ]);
+
             return $validator;
         }
 
@@ -497,6 +498,7 @@ articles table could be::
                     'message' => 'Articles must be reviewed before publishing.'
                 ]
             );
+
             return $rules;
         }
     }
