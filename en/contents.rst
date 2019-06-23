@@ -12,6 +12,7 @@ Contents
    bake
    bake/development
    bake/usage
+   migrations
 
 .. toctree::
     :maxdepth: 3
@@ -84,7 +85,7 @@ Contents
     Bake <https://book.cakephp.org/bake/>
     Chronos <https://book.cakephp.org/chronos/>
     Debug Kit <https://book.cakephp.org/debugkit/>
-    migrations
+    Migrations <https://book.cakephp/migrations/>
     Elasticsearch <https://book.cakephp.org/elasticsearch/2.x/en/>
     upgrade-tool
 
