@@ -210,6 +210,12 @@ Miscellaneous
 New Features
 ============
 
+Console
+-------
+
+* Command classes can implement the ``defaultName()`` method to overwrite the
+  conventions based CLI name.
+
 Database
 --------
 

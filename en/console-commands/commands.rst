@@ -78,6 +78,21 @@ After saving this file, you should be able to run the following command:
     # Outputs
     Hello jillian
 
+Changing the Default Command Name
+=================================
+
+CakePHP will use conventions to generate the name your commands use on the
+command line. If you want to overwrite the generated name implement the
+``defaultName()`` method in your command::
+
+    public static function defaultName(): string
+    {
+        return 'oh_hi';
+    }
+
+The above would make our ``HelloCommand`` accessible by ``cake oh_hi`` instead
+of ``cake hello``.
+
 Defining Arguments and Options
 ==============================
 
@@ -461,6 +476,12 @@ Assertion methods
 
 The ``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait provides a number of
 assertion methods that make it easy to assert against console output::
+
+    // assert that the shell exited as success
+    $this->assertExitSuccess();
+
+    // assert that the shell exited as an error
+    $this->assertExitError();
 
     // assert that the shell exited with the expected code
     $this->assertExitCode($expected);
