@@ -77,8 +77,8 @@ ORM
   locations. You can either provide a list of namespaces to the constructor, or
   use the ``addLocation()`` method.
 
-Validator
----------
+Validation
+----------
 
 * ``Validator::notEmptyString()``, ``notEmptyArray()``,
   ``notEmptyFile()``, ``notEmptyDate()``, ``notEmptyTime()``, and
@@ -86,6 +86,7 @@ Validator
   ``allowEmpty*`` methods added in 3.7.
 * ``Validation::mimeType()`` now compares checks mime-types in a case
   insensitive manner.
+* ``Validation::dateTime()`` now supports the ``iso8601`` format.
 
 View
 ----
