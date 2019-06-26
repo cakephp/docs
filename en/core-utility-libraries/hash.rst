@@ -104,6 +104,12 @@ Attribute Matching Types
         $results = Hash::extract($users, '{n}.User.id');
         // $results equals:
         // array(1,2,3,4,5,...);
+        
+        // Example Attribute Matching Types:
+        $users = $this->User->find("all");
+        $results = Hash::extract($users, '{n}.User[is_softdelete=0].id');
+        // $results equals:
+        // array(1,4,12,64,...);
 
 .. php:staticmethod:: Hash::insert(array $data, $path, $values = null)
 
@@ -409,7 +415,9 @@ Attribute Matching Types
             'My Index 1' => array('First' =>
                 array('Second' =>
                     array('Third' =>
-                        array('Fourth' => 'Heavy. Nesting.'))))
+                        array(
+                        array('Fourth' => 'Heavy. Nesting.'),
+                        array('Fourth' => '1')))))
         );
         $result = Hash::check($set, 'My Index 1.First.Second');
         // $result == True
@@ -417,11 +425,15 @@ Attribute Matching Types
         $result = Hash::check($set, 'My Index 1.First.Second.Third');
         // $result == True
 
-        $result = Hash::check($set, 'My Index 1.First.Second.Third.Fourth');
+        $result = Hash::check($set, 'My Index 1.First.Second.Third.0.Fourth');
         // $result == True
 
-        $result = Hash::check($set, 'My Index 1.First.Seconds.Third.Fourth');
+        $result = Hash::check($set, 'My Index 1.First.Seconds.Third.0.Fourth');
         // $result == False
+        //[is_softdelete=0]
+        
+        $result = Hash::check($set, 'My Index 1.First.Seconds.Third.{n}[Fourth=1].Fourth');
+        // $result == true
 
 .. php:staticmethod:: filter(array $data, $callback = array('Hash', 'filter'))
 
