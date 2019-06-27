@@ -1155,7 +1155,7 @@ argument.
 
 For example::
 
-    $this->Form->radio('gender', ['Masculine','Feminine','Neuter']);
+    $this->Form->radio('gender', ['Masculine', 'Feminine', 'Neuter']);
 
 Will output:
 
@@ -1207,6 +1207,37 @@ Will output:
         <input type="radio" name="favorite_color" value="g" style="color:green;" id="favorite-color-g">
         Green
     </label>
+
+You can define additional attributes for an individual option's label as well::
+
+    echo $this->Form->radio(
+        'favorite_color',
+        [
+            ['value' => 'r', 'text' => 'Red', 'label' => ['class' => 'red']],
+            ['value' => 'u', 'text' => 'Blue', 'label' => ['class' => 'blue']],
+        ]
+    );
+
+Will output:
+
+.. code-block:: html
+
+    <input type="hidden" name="favorite_color" value="">
+    <label for="favorite-color-r" class="red">
+        <input type="radio" name="favorite_color" value="r" style="color:red;" id="favorite-color-r">
+        Red
+    </label>
+    <label for="favorite-color-u" class="blue">
+        <input type="radio" name="favorite_color" value="u" style="color:blue;" id="favorite-color-u">
+        Blue
+    </label>
+
+If the ``label`` key is used on an option, the attributes in
+``$attributes['label']`` will be ignored.
+
+
+.. versionchanged:: 3.8.0
+   The ``label`` key in complex options was added.
 
 .. _create-select-picker:
 

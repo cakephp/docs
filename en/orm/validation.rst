@@ -73,7 +73,7 @@ To create a default validation object in your table, create the
         {
             $validator
                 ->requirePresence('title', 'create')
-                ->notEmpty('title');
+                ->notEmptyString('title');
 
             $validator
                 ->allowEmptyString('link')
@@ -113,14 +113,8 @@ used. An example validator for our articles table would be::
         public function validationUpdate($validator)
         {
             $validator
-                ->add('title', 'notEmpty', [
-                    'rule' => 'notEmpty',
-                    'message' => __('You need to provide a title'),
-                ])
-                ->add('body', 'notEmpty', [
-                    'rule' => 'notEmpty',
-                    'message' => __('A body is required')
-                ]);
+                ->notEmptyString('title', __('You need to provide a title'))
+                ->notEmptyString('body', __('A body is required'));
             return $validator;
         }
     }
@@ -169,8 +163,8 @@ construction process into multiple reusable steps::
 
     public function validationDefault(Validator $validator)
     {
-        $validator->notEmpty('username');
-        $validator->notEmpty('password');
+        $validator->notEmptyString('username');
+        $validator->notEmptyString('password');
         $validator->add('email', 'valid-email', ['rule' => 'email']);
         ...
 
