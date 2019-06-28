@@ -1200,7 +1200,7 @@ Finally, we put everything together::
     $wordCount = $articles->find()
         ->where(['published' => true])
         ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
-        ->enableHydrate(false) // Prior to 3.4.0 use hydrate(false)
+        ->enableHydration(false) // Prior to 3.4.0 use hydrate(false)
         ->mapReduce($mapper, $reducer)
         ->toArray();
 
@@ -1260,7 +1260,7 @@ of followers per user::
 And we supply our functions to a query::
 
     $fakeFriends = $friends->find()
-        ->enableHydrate(false) // Prior to 3.4.0 use hydrate(false)
+        ->enableHydration(false) // Prior to 3.4.0 use hydrate(false)
         ->mapReduce($mapper, $reducer)
         ->toArray();
 
