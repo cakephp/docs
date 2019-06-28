@@ -85,7 +85,7 @@ Contents
     Bake <https://book.cakephp.org/bake/>
     Chronos <https://book.cakephp.org/chronos/>
     Debug Kit <https://book.cakephp.org/debugkit/>
-    Migrations <https://book.cakephp/migrations/>
+    Migrations <https://book.cakephp.org/migrations/>
     Elasticsearch <https://book.cakephp.org/elasticsearch/2.x/en/>
     upgrade-tool
 
