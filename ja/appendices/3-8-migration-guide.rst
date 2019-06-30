@@ -30,7 +30,7 @@ CakePHP 3.8 は 3.7 の API の完全上位互換です。
 * ``$modelClass`` プロパティーが設定された ``Command`` クラスは、そのモデルをオートロードします。
   空の引数を指定した手動の ``loadModel()`` の呼び出しはもう必要ありません。これにより、
   シェルクラスの動作と一貫性が保たれます。
-* ``Cake\I18n\Time`` 、 ``FrozenTime`` 、 ``Date`` と ``FrozenDate`` のデフォルトフォーマットは、
+* ``Cake\I18n\Time`` 、 ``FrozenTime`` 、 ``Date`` および ``FrozenDate`` のデフォルトフォーマットは、
   デンマーク語や他のヨーロッパのロケールにおけるローカリゼーション問題を解決する
   ``yyyy-MM-dd'T'HH':'mm':'ssxxx`` になります。
 
@@ -41,8 +41,11 @@ Collection
 ----------
 
 * ``CollectionTrait`` はクローンを作成するのに ``newCollection`` メソッドを使用するようになりました。
-  これにより、サブクラスは ``Collection`` を使用する代わりにコレクションメソッドに
-  自身のインスタンスを作成されることができます。
+  これにより、サブクラスは ``Collection`` を使用する代わりに、コレクションメソッドに
+  それらのインスタンスを作成させることができます。
+
+
+これにより、サブクラスは、Collectionを使用する代わりに、コレクションメソッドにそれらのインスタンスを作成させることができます。
 
 Console
 -------
@@ -80,7 +83,7 @@ Validation
 ----------
 
 * ``Validator::notEmptyString()`` 、 ``notEmptyArray()`` 、 ``notEmptyFile()`` 、
-  ``notEmptyData()`` 、 ``notEmptyTime()`` と ``notEmptyDateTime()`` が追加されました。
+  ``notEmptyData()`` 、 ``notEmptyTime()`` および ``notEmptyDateTime()`` が追加されました。
   3.7  で追加された ``allowEmpty*`` メソッドを補完するものとして機能します。
 * ``Validation::mimeType()`` は大文字小文字を区別しないで mime-types のチェックを比較するようになりました。
 * ``Validation::dateTime()`` は ``iso8601`` フォーマットをサポートします。
