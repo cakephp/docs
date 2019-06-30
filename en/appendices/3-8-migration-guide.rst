@@ -18,6 +18,8 @@ Deprecations
   ``allowEmptyDateTime()`` now emit a deprecation warning when using the
   ``$field, $when, $message`` signature. Instead you should use
   ``$field, $message, $when``.
+* ``EntityTrait::visibleProperties()`` is now deprecated. Use ``getVisible()``
+  instead.
 
 Behavior Changes
 ================
@@ -28,22 +30,25 @@ Behavior Changes
 * ``Command`` classes that have their ``$modelClass`` property set will now 
   autoload that model. The manual ``loadModel()`` call with empty argument is 
   not necessary anymore. This makes it consistent to how Shell classes worked.
+* The default format for ``Cake\I18n\Time``, ``FrozenTime``, ``Date``, and
+  ``FrozenDate`` is now ``yyyy-MM-dd'T'HH':'mm':'ssxxx`` which solves
+  localization issues in danish and other european locales.
 
 New Features
 ============
 
 Collection
-==========
+----------
 
-* ``CollectionTrait`` now uses the ``newCollection`` method to create clones
-  now. This allows sub-classes to have collection methods create instances of
+* ``CollectionTrait`` now uses the ``newCollection`` method to create clones.
+  This allows sub-classes to have collection methods create instances of
   themselves instead of using ``Collection``.
 
 Console
 -------
 
 * ``Command::executeCommand()`` was added. This method makes it simple to call
- another command from the current one.
+  another command from the current one.
 
 Datasource
 ----------
@@ -72,13 +77,16 @@ ORM
   locations. You can either provide a list of namespaces to the constructor, or
   use the ``addLocation()`` method.
 
-Validator
----------
+Validation
+----------
 
 * ``Validator::notEmptyString()``, ``notEmptyArray()``,
   ``notEmptyFile()``, ``notEmptyDate()``, ``notEmptyTime()``, and
   ``notEmptyDateTime()`` were added. They act as compliments to the
   ``allowEmpty*`` methods added in 3.7.
+* ``Validation::mimeType()`` now compares checks mime-types in a case
+  insensitive manner.
+* ``Validation::dateTime()`` now supports the ``iso8601`` format.
 
 View
 ----

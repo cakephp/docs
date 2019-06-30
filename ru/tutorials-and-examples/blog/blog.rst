@@ -113,9 +113,11 @@ Composer Вы с легкостью установите фреймворк че
 вашего приложения с любым удобным именем, например ``cake_blog``. Теперь
 мы создадим единственную таблицу для наших статей. Также для целей
 тестирования мы добавим в нее несколько статей. Выполните следующие SQL-запросы
-в вашей базе данных::
+в вашей базе данных:
 
-    /* Во-первых, создадим таблицу с нашими статьями: */
+.. code-block:: mysql
+
+    # Во-первых, создадим таблицу с нашими статьями
     CREATE TABLE articles (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(50),
@@ -124,7 +126,7 @@ Composer Вы с легкостью установите фреймворк че
         modified DATETIME DEFAULT NULL
     );
 
-    /* Затем добавим несколько статей для тестирования: */
+    # Затем добавим несколько статей для тестирования
     INSERT INTO articles (title,body,created)
         VALUES ('The title', 'This is the article body.', NOW());
     INSERT INTO articles (title,body,created)

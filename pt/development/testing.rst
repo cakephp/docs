@@ -54,7 +54,7 @@ executar seus testes::
 Configuração do banco de dados test
 ===================================
 
-Lembre-se de ter o debug abilitado em seu arquivo **config/app.php** antes de
+Lembre-se de ter o debug habilitado em seu arquivo **config/app.php** antes de
 executar qualquer teste.  Antes de executar quaisquer testes você deve adicionar
 um datasourse ``test`` para o arquivo **config/app.php**. Esta configuração é
 usada pelo CakePHP para fixar tabelas e dados::

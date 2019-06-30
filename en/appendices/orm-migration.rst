@@ -160,7 +160,10 @@ several purposes.
 
 It is possible to alter queries further, after calling ``find``::
 
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find();
     $query->where(['author_id' => 1])->order(['title' => 'DESC']);
 
@@ -446,6 +449,7 @@ to have multiple sets of rules::
                 ->add('user_id', 'numeric', [
                     'rule' => 'numeric'
                 ]);
+
             return $validator;
         }
 
@@ -494,6 +498,7 @@ articles table could be::
                     'message' => 'Articles must be reviewed before publishing.'
                 ]
             );
+
             return $rules;
         }
     }

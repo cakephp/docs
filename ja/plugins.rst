@@ -382,7 +382,7 @@ ContactManager プラグイン の場合、 Plugin クラスは、次のよう�
         }
 
         public function bootstrap(PluginApplicationInterface $app)
-        {         
+        {
             // 定数を追加。デフォルトの設定をロード。
             // デフォルトでは、プラグインの中の `config/bootstrap.php` をロードします。
             parent::bootstrap($app);
@@ -577,6 +577,9 @@ bake で作っていないプラグインなら、クラスを自動的に読み
 
     use Cake\ORM\TableRegistry;
 
+    $contacts = TableRegistry::getTableLocator()->get('ContactManager.Contacts');
+
+    // Prior to 3.6.0
     $contacts = TableRegistry::get('ContactManager.Contacts');
 
 あるいは、コントローラーの処理の中で以下のように使用できます。 ::

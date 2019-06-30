@@ -410,7 +410,7 @@ TableRegistry の利用
 テーブルをレジストリーからロードする時に、依存関係をカスタマイズするか、
 ``$options`` 配列が用意するモックオブジェクトを使います。 ::
 
-    $articles = TableRegistry::get('Articles', [
+    $articles = TableRegistry::getTableLocator()->get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
         'table' => 'my_articles',
         'connection' => $connectionObject,

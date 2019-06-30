@@ -19,7 +19,7 @@ CakePHP 쿡북은 공개적으로 개발되고 커뮤니티 수정이 가능한 
     PDF 및 EPUB로 제공하고 여러 디바이스 뿐만 아니라 오프라인에서도 읽을 수 있습니다.
 
     - `PDF (영어) <../_downloads/en/CakePHPCookbook.pdf>`_
-    - `EPUB <../_downloads/en/CakePHPCookbook.epub>`_
+    - `EPUB <../_downloads/kr/CakePHP.epub>`_
     - `오리지널 소스 <http://github.com/cakephp/docs>`_
 
 도움말

@@ -66,8 +66,12 @@ Une autre approche pour récupérer une nouvelle entity est d'utiliser la métho
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $article = TableRegistry::get('Articles')->newEntity();
-    $article = TableRegistry::get('Articles')->newEntity([
+
+    $article = TableRegistry::getTableLocator()->get('Articles')->newEntity();
+
+    $article = TableRegistry::getTableLocator()->get('Articles')->newEntity([
         'id' => 1,
         'title' => 'New Article',
         'created' => new DateTime('now')

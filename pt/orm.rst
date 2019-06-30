@@ -41,7 +41,11 @@ usar o ORM. Por exemplo, se quiséssemos carregar alguns dados da nossa tabela
 ``articles`` poderíamos fazer::
 
     use Cake\ORM\TableRegistry;
+
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find();
     foreach ($query as $row) {
         echo $row->title;
@@ -71,6 +75,9 @@ como antes::
 
     use Cake\ORM\TableRegistry;
     // Agora $articles é uma instância de nossa classe ArticlesTable.
+    $articles = TableRegistry::getTableLocator()->get('Articles');
+
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
 
 Agora que temos uma classe de tabela concreta, nós provavelmente vamos querer
@@ -95,8 +102,11 @@ nossa nova classe Article::
 
     use Cake\ORM\TableRegistry;
 
-    // Agora uma instância de ArticlesTable.
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    // Agora uma instância de ArticlesTable.
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find();
 
     foreach ($query as $row) {

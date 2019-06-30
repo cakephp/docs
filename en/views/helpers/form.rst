@@ -2447,7 +2447,14 @@ Creating POST Links
   as any valid HTML attributes.
 
 Creates an HTML link, but accesses the URL using the method you specify
-(defaults to POST). Requires JavaScript to be enabled in browser.
+(defaults to POST). Requires JavaScript to be enabled in browser::
+
+    // In your template, e.g. to delete an article
+    <?= $this->Form->postLink(
+    	'Delete',
+    	['action' => 'delete', $article->id],
+    	['confirm' => 'Are you sure?'])
+    ?>
 
 **Options for POST Link**
 

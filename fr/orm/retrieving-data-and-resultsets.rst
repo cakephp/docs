@@ -405,7 +405,10 @@ des articles publiés, nous ferions ce qui suit::
     }
 
     // Dans un controller ou dans une méthode table.
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find('published');
 
 Les méthodes finder peuvent modifier la requête comme ceci, ou utiliser
@@ -416,7 +419,10 @@ vous avez à la fois les finders 'published' et 'recent', vous pouvez faire
 ce qui suit::
 
     // Dans un controller ou dans une méthode de table.
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find('published')->find('recent');
 
 Alors que les exemples pour l'instant ont montré les méthodes finder sur les
@@ -444,7 +450,10 @@ pourriez faire::
     $query = $this->Users->findAllByUsername('joebob');
 
     // Dans une méthode de table
+    // Prior to 3.6.0
     $users = TableRegistry::get('Users');
+
+    $users = TableRegistry::getTableLocator()->get('Users');
     // Les deux appels suivants sont équivalents.
     $query = $users->findByUsername('joebob');
     $query = $users->findAllByUsername('joebob');
@@ -1047,7 +1056,10 @@ pouvez extraire une liste des tags uniques sur une collection d'articles en
 exécutant::
 
     // Dans un controller ou une méthode de table.
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find()->contain(['Tags']);
 
     $reducer = function ($output, $value) {
@@ -1070,7 +1082,10 @@ avec des ensembles de données::
     });
 
     // Crée un tableau associatif depuis les propriétés du résultat
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $results = $articles->find()->contain(['Authors'])->all();
 
     $authorList = $results->combine('id', 'author.name');

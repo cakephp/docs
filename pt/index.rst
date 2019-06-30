@@ -21,7 +21,7 @@ correções para a documentação.
     como PDF e EPUB, você pode lê-lo em diversos dispositivos, e também offline.
 
     - `PDF <../_downloads/pt/CakePHPCookbook.pdf>`_
-    - `EPUB <../_downloads/pt/CakePHPCookbook.epub>`_
+    - `EPUB <../_downloads/pt/CakePHP.epub>`_
     - `Código-fonte Original <http://github.com/cakephp/docs>`_
 
 Obtendo ajuda

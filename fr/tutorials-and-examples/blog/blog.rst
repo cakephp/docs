@@ -116,9 +116,11 @@ ne l'avez pas déjà fait, créez une base de données vide avec le nom de votre
 choix pour l'utiliser dans ce tutoriel, par ex ``cake_blog``.Pour le moment,
 nous allons juste créer une simple table pour stocker nos posts. Nous allons
 également insérer quelques posts à des fins de tests. Exécutez les requêtes SQL
-suivantes dans votre base de données::
+suivantes dans votre base de données:
 
-    /* D'abord, créons la table des posts : */
+.. code-block:: mysql
+
+    # D'abord, créons la table des posts
     CREATE TABLE articles (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(50),
@@ -127,7 +129,7 @@ suivantes dans votre base de données::
         modified DATETIME DEFAULT NULL
     );
 
-    /* Puis insérons quelques posts pour les tests : */
+    # Puis insérons quelques posts pour les tests
     INSERT INTO articles (title,body,created)
         VALUES ('The title', 'This is the article body.', NOW());
     INSERT INTO articles (title,body,created)
