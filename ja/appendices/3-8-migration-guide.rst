@@ -49,3 +49,45 @@ Console
 
 * ``Command::executeCommand()`` が追加されました。このメソッドは現在のコマンドから
   別のコマンドを呼び出すのを簡単にします。
+
+Datasource
+----------
+
+* ``Cake\Datasource\ModelAwareTrait::get()`` は完全修飾クラス名で
+  モデルクラスを見つけることができるようになり、
+  ``ArticleTable::class`` を ``get()`` のパラメータとして使用できるようになりました。
+
+Email
+-----
+
+* ``Email::setHeaders()`` と ``Email::addHeaders()`` は、同じ名前の複数のヘッダーを
+  設定できるようになりました。そのため、上記の関数に渡される配列育雛の中の特定のヘッダーキーの値は
+  配列でなければなりません。
+  例: ``$email->addHeaders(['og:tag' => ['foo', 'bar']]);``
+
+Http
+----
+
+* ``Response::withCookieCollection()`` が追加されました。
+
+ORM
+---
+
+* ``Cake\ORM\Locator\TableLocator`` はテーブルクラスを別の場所に配置できるようになりました。
+  コンストラクターに名前空間のリストを提供するか、 ``addLocation`` メソッドを使用することができます。
+
+Validation
+----------
+
+* ``Validator::notEmptyString()`` 、 ``notEmptyArray()`` 、 ``notEmptyFile()`` 、
+  ``notEmptyData()`` 、 ``notEmptyTime()`` と ``notEmptyDateTime()`` が追加されました。
+  3.7  で追加された ``allowEmpty*`` メソッドを補完するものとして機能します。
+* ``Validation::mimeType()`` は大文字小文字を区別しないで mime-types のチェックを比較するようになりました。
+* ``Validation::dateTime()`` は ``iso8601`` フォーマットをサポートします。
+
+View
+----
+
+* ラジオボタンは、複雑なオプション定義の中で ``label`` キーを使うことによって生成されたラベルを
+  カスタマイズすることができます。このキーはトップレベルのオプションで定義された
+  ``label`` キーの代わりに使われます。
