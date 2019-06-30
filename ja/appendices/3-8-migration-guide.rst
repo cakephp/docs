@@ -55,7 +55,7 @@ Datasource
 
 * ``Cake\Datasource\ModelAwareTrait::get()`` は完全修飾クラス名で
   モデルクラスを見つけることができるようになり、
-  ``ArticleTable::class`` を ``get()`` のパラメータとして使用できるようになりました。
+  ``ArticleTable::class`` を ``get()`` のパラメーターとして使用できるようになりました。
 
 Email
 -----
