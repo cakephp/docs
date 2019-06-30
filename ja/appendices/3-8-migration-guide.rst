@@ -18,6 +18,8 @@ CakePHP 3.8 は 3.7 の API の完全上位互換です。
   ``allowEmptyDateTime()`` は、 ``$field, $when, $message`` シグネチャ使用時に
   非推奨警告を発するようになりました。代わりに ``$field, $message, $when`` を
   使用するべきです。
+* ``EntityTrait::visibleProperties()`` は、非推奨になります。
+  代わりに、 ``getVisible()`` を使用してください。
 
 振る舞いの変更
 ==============
