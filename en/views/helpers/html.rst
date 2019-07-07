@@ -308,7 +308,7 @@ and also wanted to include **webroot/img/Blog.icon.png**, you would::
 
     echo $this->Html->image('Blog.icon.png', ['plugin' => false]);
 
-Last but no least, if you would like the prefix of the url NOT to be /img, you could override this setting by specifying the prefix on the ``$options`` array ::
+If you would like the prefix of the URL to not be ``/img``, you can override this setting by specifying the prefix in the ``$options`` array ::
 
     echo $this->Html->image("logo.png", ['pathPrefix' => '']);
 
