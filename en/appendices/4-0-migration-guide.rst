@@ -173,6 +173,8 @@ Utility
   path extracted as first argument.
 * The ``readFile`` option of ``Xml::build()`` is no longer true by default.
   Instead you must enable ``readFile`` to read local files.
+* ``Hash::sort()`` now accepts the ``SORT_ASC`` and ``SORT_DESC`` constants in
+  the direction parameter.
 
 Cache
 -----
