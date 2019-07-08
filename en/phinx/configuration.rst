@@ -211,6 +211,16 @@ network connections. The socket path is configured with ``unix_socket``:
             unix_socket: /var/run/mysql/mysql.sock
             charset: utf8
 
+.. note::
+ 
+    Use the following bash command in Linux environment to retrieve socket file path:
+ 
+.. code-block:: bash
+
+    find / -name .s.PGSQL.5432 -ls 2>&1 | grep -v "Permission denied" # For PostGreSQL
+    find / -name mysql.sock -ls 2>&1 | grep -v "Permission denied" # For MySQL
+
+
 External Variables
 ------------------
 
