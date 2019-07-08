@@ -211,9 +211,8 @@ network connections. The socket path is configured with ``unix_socket``:
             unix_socket: /var/run/mysql/mysql.sock
             charset: utf8
 
-.. note::
- 
-    Use the following bash command in Linux environment to retrieve socket file path:
+
+Use the following bash command in Linux environment to retrieve socket file path to use `unix_socket`:
  
 .. code-block:: bash
 
