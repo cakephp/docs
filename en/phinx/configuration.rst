@@ -212,7 +212,7 @@ network connections. The socket path is configured with ``unix_socket``:
             charset: utf8
 
 
-Use the following bash command in a Linux environment to retrieve the socket file path to use for `unix_socket`:
+Use the following bash command in a Linux environment to retrieve the socket file path to use for ``unix_socket``:
  
 .. code-block:: bash
 
