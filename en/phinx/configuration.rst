@@ -216,8 +216,16 @@ Use the following bash command in a Linux environment to retrieve the socket fil
  
 .. code-block:: bash
 
-    find / -name .s.PGSQL.5432 -ls 2>&1 | grep -v "Permission denied" # For PostGreSQL
-    find / -name mysql.sock -ls 2>&1 | grep -v "Permission denied" # For MySQL
+    # For PostGreSQL
+    find / -name .s.PGSQL.5432 -ls 2>&1 | grep -v "Permission denied"
+    # For MySQL
+    find / -name mysql.sock -ls 2>&1 | grep -v "Permission denied" 
+
+Alternatively, mysql.sock file can also be retrieved from ``MySQL Shell``
+
+.. code-block:: sql
+
+    SHOW VARIABLES LIKE 'socket';
 
 
 External Variables
