@@ -1181,6 +1181,34 @@ corresponding save events will be triggered.
 
 .. versionadded:: 3.4.1
 
+Find or Create an Entity
+========================
+
+.. php:method:: findOrCreate($search, $callback = null, $options = [])
+
+Find an existing record based on ``$search`` or create a new record using the
+properties in ``$search`` and calling the optional ``$callback``. This method is
+ideal in scenarios where you need to reduce the chance of duplicate records::
+
+    $record = $table->findOrCreate(
+        ['email' => 'bobbi@example.com'],
+        function ($entity) use ($otherData) {
+            // Only called when a new record is created.
+            $entity->name = $otherData['name'];
+        }
+    );
+
+If your find conditions require custom order, associations or conditions, then
+the ``$search`` parameter can be a callable or ``Query`` object. If you use
+a callable, it should take a ``Query`` as its argument.
+
+The returned entity will have been saved if it was a new record. The supported
+options for this method are:
+
+* ``atomic`` Should the find and save operation be done inside a transaction.
+* ``defaults`` Set to ``false`` to not set ``$search`` properties into the
+  created entity.
+
 Saving Multiple Entities
 ========================
 
