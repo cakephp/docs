@@ -432,8 +432,8 @@ By applying the ``CsrfProtectionMiddleware`` to routing scopes, you can include 
     // in config/routes.php
     Router::scope('/', function (RouteBuilder $routes) {
         $routes->applyMiddleware('csrf');
-    });    
-    
+    });
+
 
 Options can be passed into the middleware's constructor.
 The available configuration options are:
@@ -451,6 +451,29 @@ When enabled, you can access the current CSRF token on the request object::
 
     $token = $this->request->getParam('_csrfToken');
 
+As of 3.8.0 you can also use the whitelisting callback feature for more fine
+grained control over URLs for which CSRF token check should be done.
+
+    // in src/Application.php
+    use Cake\Http\Middleware\CsrfProtectionMiddleware;
+
+    public function middleware($middlewareQueue) {
+        $csrf = new CsrfProtectionMiddleware();
+
+        // Token check will be skipped when callback returns `true`.
+        $csrf->whitelistCallback(function ($request) {
+            // Skip token check for API URLs.
+            if ($request->getParam('prefix') === 'api') {
+                return true;
+            }
+        });
+
+        // Ensure routing middleware is added to the queue before CSRF protection middleware.
+        $middlewareQueue->add($csrf);
+
+        return $middlewareQueue;
+    }
+
 .. versionadded:: 3.5.0
     The ``CsrfProtectionMiddleware`` was added in 3.5.0
 
@@ -459,7 +482,7 @@ When enabled, you can access the current CSRF token on the request object::
     You should apply the CSRF protection middleware only for URLs which handle stateful
     requests using cookies/session. Stateless requests, for e.g. when developing an API,
     are not affected by CSRF so the middleware does not need to be applied for those URLs.
-    
+
 Integration with FormHelper
 ---------------------------
 
@@ -513,7 +536,7 @@ an option. You can also define your own parsers::
         // Use a CSV parsing library.
         return Csv::parse($body);
     });
-    
+
 .. versionadded:: 3.6.0
     The ``BodyParserMiddleware`` was added in 3.6.0
 
