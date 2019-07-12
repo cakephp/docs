@@ -287,7 +287,7 @@ This would use the following template files:
 When sending templated emails you have the option of sending either
 ``text``, ``html`` or ``both``.
 
-You can set view variables with ``Email::setViewViars()``::
+You can set view variables with ``Email::setViewVars()``::
 
     $email = new Email('templated');
     $email->setViewVars(['value' => 12345]);
