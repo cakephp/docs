@@ -5,7 +5,7 @@ CakePHP 3.0 features a new ORM that has been re-written from the ground up.
 While the ORM used in 1.x and 2.x has served us well for a long time it had
 a few issues that we wanted to fix.
 
-* Frankenstein - Is it a record, or a table? Currently it's both.
+* Frankenstein - Is it a record, or a table? In CakePHP 2.x it's both.
 * Inconsistent API - Model::read() for example.
 * No query object - Queries are always defined as arrays, this has some
   limitations and restrictions. For example it makes doing unions and
