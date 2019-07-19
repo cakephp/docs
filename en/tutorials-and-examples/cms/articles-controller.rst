@@ -438,7 +438,7 @@ using :ref:`a validator <validating-request-data>`::
     use Cake\Validation\Validator;
 
     // Add the following method.
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): Validator
     {
         $validator
             ->allowEmptyString('title', false)
