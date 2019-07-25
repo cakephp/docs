@@ -389,13 +389,17 @@ protect itself against mass assignment::
 Modifying the Guarded Fields at Runtime
 ---------------------------------------
 
-You can modify the list of guarded fields at runtime using the ``accessible``
+You can modify the list of guarded fields at runtime using the ``setAccess()``
 method::
 
     // Make user_id accessible.
+    $article->setAccess('user_id', true);
+    // Prior to 3.5
     $article->accessible('user_id', true);
 
     // Make title guarded.
+    $article->setAccess('title', false);
+    // Prior to 3.5
     $article->accessible('title', false);
 
 .. note::
@@ -548,8 +552,10 @@ field that should be exposed::
         protected $_virtual = ['full_name'];
     }
 
-This list can be modified at runtime using ``virtualProperties``::
+This list can be modified at runtime using the ``setVirtual()`` method::
 
+    $user->setVirtual(['full_name', 'is_admin']);
+    // Prior to 3.5
     $user->virtualProperties(['full_name', 'is_admin']);
 
 Hiding Fields
@@ -569,8 +575,10 @@ hidden::
         protected $_hidden = ['password'];
     }
 
-This list can be modified at runtime using ``hiddenProperties``::
+This list can be modified at runtime using the ``setHidden()`` method::
 
+    $user->setHidden(['password', 'recovery_question']);
+    // Prior to 3.5
     $user->hiddenProperties(['password', 'recovery_question']);
 
 Storing Complex Types
