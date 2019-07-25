@@ -552,7 +552,7 @@ field that should be exposed::
         protected $_virtual = ['full_name'];
     }
 
-This list can be modified at runtime using ``setVirtual()`` method::
+This list can be modified at runtime using the ``setVirtual()`` method::
 
     $user->setVirtual(['full_name', 'is_admin']);
     // Prior to 3.5
@@ -575,7 +575,7 @@ hidden::
         protected $_hidden = ['password'];
     }
 
-This list can be modified at runtime using ``setHidden()`` method::
+This list can be modified at runtime using the ``setHidden()`` method::
 
     $user->setHidden(['password', 'recovery_question']);
     // Prior to 3.5
