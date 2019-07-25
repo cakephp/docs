@@ -389,7 +389,7 @@ protect itself against mass assignment::
 Modifying the Guarded Fields at Runtime
 ---------------------------------------
 
-You can modify the list of guarded fields at runtime using the ``setAccess``
+You can modify the list of guarded fields at runtime using the ``setAccess()``
 method::
 
     // Make user_id accessible.
@@ -552,7 +552,7 @@ field that should be exposed::
         protected $_virtual = ['full_name'];
     }
 
-This list can be modified at runtime using ``setVirtual``::
+This list can be modified at runtime using ``setVirtual()`` method::
 
     $user->setVirtual(['full_name', 'is_admin']);
     // Prior to 3.5
@@ -575,7 +575,7 @@ hidden::
         protected $_hidden = ['password'];
     }
 
-This list can be modified at runtime using ``setHidden``::
+This list can be modified at runtime using ``setHidden()`` method::
 
     $user->setHidden(['password', 'recovery_question']);
     // Prior to 3.5
