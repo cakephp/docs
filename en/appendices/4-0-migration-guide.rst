@@ -47,11 +47,11 @@ View
 
 * The ``_serialize``, ``_jsonOptions`` and ``_jsonp`` special view variables of
   ``JsonView`` are
-  now deprected. Instead you should use
+  now deprecated. Instead you should use
   ``viewBuilder()->setOption($optionName, $optionValue)`` to set these options.
 * The ``_serialize``, ``_rootNode`` and ``_xmlOptions`` special view variables of
   ``XmlView`` are
-  now deprected. Instead you should use
+  now deprecated. Instead you should use
   ``viewBuilder()->setOption($optionName, $optionValue)`` to set these options.
 
 Breaking Changes
