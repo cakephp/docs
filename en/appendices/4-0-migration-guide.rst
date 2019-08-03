@@ -42,6 +42,11 @@ Filesystem
   design problems and fixing this infrequently used package does not seem worth
   the effort when there are a great selection of packages already.
 
+ORM
+---
+
+* Using ``Entity::isNew()`` as a setter is deprecated. Use ``setNew()`` instead.
+
 View
 ----
 
