@@ -29,6 +29,13 @@ Deprecations
 The following is a list of deprecated methods, properties and behaviors. These
 features will continue to function in 4.x and will be removed in 5.0.0.
 
+Component
+---------
+
+* ``AuthComponent`` and related classes have been deprecated and will be removed
+  in 5.0.0. You should use the authentication and authorization libs mentioned
+  above instead.
+
 Entity
 ------
 
