@@ -132,6 +132,8 @@ Database
   empty string to ``false``. Instead non-boolean string values are converted to ``null``.
 * ``DecimalType`` now uses strings to represent decimal values instead of floats.
   Using floats caused loss in precision.
+* ``StringType`` now marshalls array values to ``null`` instead of an empty
+  string.
 * ``Cake\Database\Connection::setLogger()`` no longer accepts ``null`` to
   disable logging. Instead pass an instance of ``Psr\Log\NullLogger`` to disable
   logging.
