@@ -162,7 +162,7 @@ ORM
 ---
 
 * Conditions that have null values must explicitly use the ``IS`` operator now.
-  In previous versions using ``['name' => null]`` would generate SQL like 
+  In previous versions using ``['name' => null]`` would generate SQL like
   ``name = NULL`` which always matches 0 rows. This situation will now raise an
   exception. You will need to update your where clauses to use
   ``['name IS' => null]`` instead.
@@ -236,6 +236,14 @@ Console
 
 * Command classes can implement the ``defaultName()`` method to overwrite the
   conventions based CLI name.
+
+Table
+-----
+
+* ``Table::newEmptyEntity()`` has been added to create a new and empty entity object.
+  This does not trigger any field validation. The entity can be persisted without validation
+  error as empty record. ``Table::newEntity()`` now requires an array as input and enforces
+  validation to prevent accidental saves without validation being triggered.
 
 Database
 --------
