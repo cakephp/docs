@@ -1,8 +1,8 @@
 3.9 Migration Guide
 ###################
 
-CakePHP 3.8 is an API compatible upgrade from 3.8. This page outlines the
-changes and improvements made in 3.9.
+CakePHP 3.9 is an API compatible upgrade from 3.8. This page outlines the
+changes and improvements made.
 
 To upgrade to 3.9.x run the following composer command:
 
