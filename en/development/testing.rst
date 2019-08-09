@@ -1061,9 +1061,17 @@ can use ``configRequest()`` to set the correct environment variables::
         'environment' => ['HTTPS' => 'on']
     ]);
 
+If your action requires unlocked fields you can declare them with
+``setUnlockedFields()``::
+
+    $this->setUnlockedFields(['dynamic_field']);
+
 .. versionadded:: 3.1.2
     The ``enableCsrfToken()`` and ``enableSecurityToken()`` methods were added
     in 3.1.2
+
+.. versionadded:: 3.8.3
+    The ``setUnlockedFields()`` method was added.
 
 Integration Testing PSR-7 Middleware
 ------------------------------------
