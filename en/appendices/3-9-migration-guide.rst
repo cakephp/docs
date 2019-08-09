@@ -17,9 +17,9 @@ ORM
 ---
 
 * ``Table::saveManyOrFail()`` method has been added that will throw ``PersistenceFailedException``
-  with the specific entity that failed in case of an error. The entities are saved transaction safe.
+  with the specific entity that failed in case of an error. The entities are saved within a transaction.
 * ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been added for removing many
-  entities at once including callbacks. The entities are removed transaction safe.
+  entities at once including callbacks. The entities are removed within a transaction.
 
 Utility
 -------
