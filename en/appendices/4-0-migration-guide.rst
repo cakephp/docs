@@ -242,7 +242,7 @@ Table
 
 * ``Table::newEmptyEntity()`` has been added to create a new and empty entity object.
   This does not trigger any field validation. The entity can be persisted without validation
-  error as empty record. ``Table::newEntity()`` now requires an array as input and enforces
+  error as an empty record. ``Table::newEntity()`` now requires an array as input and enforces
   validation to prevent accidental saves without validation being triggered.
 
 Database
