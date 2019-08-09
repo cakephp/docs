@@ -1,8 +1,8 @@
 3.9 Migration Guide
 ###################
 
-CakePHP 3.8 is an API compatible upgrade from 3.8. This page outlines the
-changes and improvements made in 3.9.
+CakePHP 3.9 is an API compatible upgrade from 3.8. This page outlines the
+changes and improvements made.
 
 To upgrade to 3.9.x run the following composer command:
 
@@ -12,5 +12,16 @@ To upgrade to 3.9.x run the following composer command:
 
 New Features
 ============
+
+ORM
+---
+
+* ``Table::saveManyOrFail()`` method has been added that will throw ``PersistenceFailedException``
+  with the specific entity that failed in case of an error. The entities are saved within a transaction.
+* ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been added for removing many
+  entities at once including callbacks. The entities are removed within a transaction.
+
+Utility
+-------
 
 * ``Hash::sort()`` now accepts the ``SORT_ASC`` and ``SORT_DESC`` constants in the direction parameter.
