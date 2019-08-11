@@ -72,6 +72,13 @@ Breaking Changes
 In addition to the removal of deprecated features there have been breaking
 changes made:
 
+Cache
+-----
+
+* ``Cake\Cache\CacheEngine::gc()`` and all implementations of this method have
+  been removed. This method was a no-op in most cache drivers and was only used
+  in file caching.
+
 Controller
 ----------
 
@@ -81,43 +88,6 @@ Controller
 * Controller method name matching when invoking actions is now case sensitive.
   For example if your controller method is ``forgotPassword()`` then using string
   ``forgotpassword`` in URL will not match as action name.
-
-Datasources
------------
-
-* ``ModelAwareTrait::$modelClass`` is now protected.
-
-Http
-----
-
-* ``Cake\Http\ServerRequest::referer()`` now defaults the ``local``
-  parameter to true, instead of false. This makes using referer headers safer as
-  they will be constrained to your application's domain by default.
-* The default value of ``Cake\Http\ServerRequest::getParam()`` when a parameter is missing
-  is now ``null`` and not ``false``.
-* ``Cake\Http\Client\Request::body()`` has been removed. Use ``getBody()`` or
-  ``withBody()`` instead.
-* ``Cake\Http\Client\Response::isOk()`` now returns ``true`` for all 2xx and 3xx
-  response codes.
-* ``Cake\Http\Cookie\Cookie::getExpiresTimestamp()`` now returns an integer.
-  This makes it type match the one used in ``setcookie()``.
-* ``Cake\Http\ServerRequest::referer()`` now returns ``null`` when the current
-  request has no referer. Previously it would return ``/``.
-* The Session cookie name is no longer set to ``CAKEPHP`` by default. Instead
-  the default cookie name defined in your ``php.ini`` file is used. You can use
-  the ``Session.cookie`` configuration option to set the cookie name.
-* ``Cake\Cookie\CookieCollection::get()`` now throws an exception when accessing
-  a cookie that doesn't exist. Use ``has()`` to check for cookie existence.
-
-Router
-------
-
-* ``RouteBuilder::resources()`` now inflects resource names to dasherized form
-  instead of underscored by default in URLs. You can retain underscored
-  inflection by using ``'inflect' => 'underscore'`` in ``$options`` argument.
-* ``Router::plugin()`` and ``Router::prefix()`` now use plugin/prefix name in
-  dasherized form in URL by default. You can retain underscored from (or any other
-  custom path) by using ``'path'`` key in ``$options`` argument.
 
 Database
 --------
@@ -146,6 +116,74 @@ Database
 * The internals of ``Cake\Database\Schema\CacheCollection`` and ``Cake\Database\SchemaCache``
   have changed. If you extend these classes you will need to update your code.
 
+Datasources
+-----------
+
+* ``ModelAwareTrait::$modelClass`` is now protected.
+
+Error
+-----
+* The internals of error handler classes ``BaseErrorHandler``, ``ErrorHandler``
+  and ``ConsoleErrorHandler`` have changed. If you have extended these classes
+  you should update them accordingly.
+* ``ErrorHandlerMiddleware`` now takes an error handler class name or instance
+  as constructor argument instead of exception render class name or instance.
+
+Http
+----
+
+* ``Cake\Http\ServerRequest::referer()`` now defaults the ``local``
+  parameter to true, instead of false. This makes using referer headers safer as
+  they will be constrained to your application's domain by default.
+* The default value of ``Cake\Http\ServerRequest::getParam()`` when a parameter is missing
+  is now ``null`` and not ``false``.
+* ``Cake\Http\Client\Request::body()`` has been removed. Use ``getBody()`` or
+  ``withBody()`` instead.
+* ``Cake\Http\Client\Response::isOk()`` now returns ``true`` for all 2xx and 3xx
+  response codes.
+* ``Cake\Http\Cookie\Cookie::getExpiresTimestamp()`` now returns an integer.
+  This makes it type match the one used in ``setcookie()``.
+* ``Cake\Http\ServerRequest::referer()`` now returns ``null`` when the current
+  request has no referer. Previously it would return ``/``.
+* The Session cookie name is no longer set to ``CAKEPHP`` by default. Instead
+  the default cookie name defined in your ``php.ini`` file is used. You can use
+  the ``Session.cookie`` configuration option to set the cookie name.
+* ``Cake\Cookie\CookieCollection::get()`` now throws an exception when accessing
+  a cookie that doesn't exist. Use ``has()`` to check for cookie existence.
+
+I18n
+----
+
+* JSON encoding ``Cake\I18n\Date`` and ``Cake\I18n\FrozenDate`` objects now results
+  in strings with only the date part, in format ``yyyy-MM-dd`` instead of earlier format
+  ``yyyy-MM-dd'T'HH:mm:ssxxx``.
+
+Mailer
+------
+* ``Email::set()`` has been removed. Use ``Email::setViewVars()`` instead.
+
+Router
+------
+
+* ``RouteBuilder::resources()`` now inflects resource names to dasherized form
+  instead of underscored by default in URLs. You can retain underscored
+  inflection by using ``'inflect' => 'underscore'`` in ``$options`` argument.
+* ``Router::plugin()`` and ``Router::prefix()`` now use plugin/prefix name in
+  dasherized form in URL by default. You can retain underscored from (or any other
+  custom path) by using ``'path'`` key in ``$options`` argument.
+
+Utility
+-------
+* ``Cake\Utility\Xml::fromArray()`` now requires an array for the ``$options``
+  parameter.
+* ``Cake\Filesystem\Folder::copy($to, array $options = [])`` and
+  ``Cake\Filesystem\Folder::move($to, array $options = [])`` have now the target
+  path extracted as first argument.
+* The ``readFile`` option of ``Xml::build()`` is no longer true by default.
+  Instead you must enable ``readFile`` to read local files.
+* ``Hash::sort()`` now accepts the ``SORT_ASC`` and ``SORT_DESC`` constants in
+  the direction parameter.
+
 View
 ----
 
@@ -173,44 +211,6 @@ View
   second parameter. You must use ``['fullBase' => true]`` instead.
 * Constants ``View::NAME_ELEMENT`` and ``View::NAME_LAYOUT`` have been removed.
   You can use ``View::TYPE_ELEMENT`` and ``View::TYPE_LAYOUT``.
-
-Mailer
-------
-* ``Email::set()`` has been removed. Use ``Email::setViewVars()`` instead.
-
-Utility
--------
-* ``Cake\Utility\Xml::fromArray()`` now requires an array for the ``$options``
-  parameter.
-* ``Cake\Filesystem\Folder::copy($to, array $options = [])`` and
-  ``Cake\Filesystem\Folder::move($to, array $options = [])`` have now the target
-  path extracted as first argument.
-* The ``readFile`` option of ``Xml::build()`` is no longer true by default.
-  Instead you must enable ``readFile`` to read local files.
-* ``Hash::sort()`` now accepts the ``SORT_ASC`` and ``SORT_DESC`` constants in
-  the direction parameter.
-
-Cache
------
-
-* ``Cake\Cache\CacheEngine::gc()`` and all implementations of this method have
-  been removed. This method was a no-op in most cache drivers and was only used
-  in file caching.
-
-I18n
-----
-
-* JSON encoding ``Cake\I18n\Date`` and ``Cake\I18n\FrozenDate`` objects now results
-  in strings with only the date part, in format ``yyyy-MM-dd`` instead of earlier format
-  ``yyyy-MM-dd'T'HH:mm:ssxxx``.
-
-Error
------
-* The internals of error handler classes ``BaseErrorHandler``, ``ErrorHandler``
-  and ``ConsoleErrorHandler`` have changed. If you have extended these classes
-  you should update them accordingly.
-* ``ErrorHandlerMiddleware`` now takes an error handler class name or instance
-  as constructor argument instead of exception render class name or instance.
 
 Miscellaneous
 -------------
