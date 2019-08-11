@@ -36,12 +36,6 @@ Component
   in 5.0.0. You should use the authentication and authorization libs mentioned
   above instead.
 
-Entity
-------
-
-* ``Entity::unsetProperty()`` has been renamed to ``Entity::unset()`` to match
-  the other methods.
-
 Filesystem
 ----------
 
@@ -53,6 +47,8 @@ ORM
 ---
 
 * Using ``Entity::isNew()`` as a setter is deprecated. Use ``setNew()`` instead.
+* ``Entity::unsetProperty()`` has been renamed to ``Entity::unset()`` to match
+  the other methods.
 
 View
 ----
@@ -161,6 +157,15 @@ I18n
 Mailer
 ------
 * ``Email::set()`` has been removed. Use ``Email::setViewVars()`` instead.
+
+ORM
+---
+
+* Conditions that have null values must explicitly use the ``IS`` operator now.
+  In previous versions using ``['name' => null]`` would generate SQL like 
+  ``name = NULL`` which always matches 0 rows. This situation will now raise an
+  exception. You will need to update your where clauses to use
+  ``['name IS' => null]`` instead.
 
 Router
 ------
