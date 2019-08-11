@@ -339,6 +339,7 @@ can add a virtual/computed field to the entity. In
     // the Collection class
     use Cake\Collection\Collection;
 
+    // Update the accessible property to contain `tag_string`
     protected $_accessible = [
         //other fields...
         'tag_string' => true
