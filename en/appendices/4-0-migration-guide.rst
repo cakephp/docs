@@ -61,6 +61,8 @@ View
   ``XmlView`` are
   now deprecated. Instead you should use
   ``viewBuilder()->setOption($optionName, $optionValue)`` to set these options.
+* ``HtmlHelper::tableHeaders()`` now prefers header cells with attributes to be
+  defined as a nested list. e.g ``['Title', ['class' => 'special']]``.
 
 Breaking Changes
 ================
