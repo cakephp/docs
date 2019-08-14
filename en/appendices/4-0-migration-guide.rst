@@ -211,6 +211,11 @@ View
   to render a view template without a layout.
 * ``Cake\View\View`` will re-render views if ``render()`` is called multiple
   times instead of returning ``null``.
+* Constants ``View::NAME_ELEMENT`` and ``View::NAME_LAYOUT`` have been removed.
+  You can use ``View::TYPE_ELEMENT`` and ``View::TYPE_LAYOUT``.
+
+Helper
+------
 * ``Cake\View\Helper\PaginatorHelper::hasPage()`` has had its arguments
   reversed. This makes it consistent with other paginator methods where the
   'model' is the second argument.
@@ -221,6 +226,12 @@ View
 * You must now only use ``null`` as 1st argument of ``FormHelper::create()`` to
   create a form without context. Passing any other value for which context cannot
   be inferred will result in an exception being thrown.
+* ``Cake\View\\Helper\FormHelper`` and ``Cake\View\\Helper\HtmlHelper`` now
+  use HTML data attribute ``data-confirm-message`` to hold the confirmation
+  message for methods which have the ``confirm`` option.
+* ``Cake\View\\Helper\FormHelper::button()`` now HTML entity encodes the button
+  text and HTML attributes by default. A new option ``escapeTitle`` has been
+  added to allow controlling escaping the title separately from other HTML attributes.
 
 Miscellaneous
 -------------
@@ -311,7 +322,7 @@ View
 ----
 
 * ``FormHelper`` now generates HTML5 validation messages for fields marked as
-  required in an entity's ORM table class. This feature can be toggled with the
+  "notEmpty" in an entity's ORM table class. This feature can be toggled with the
   ``autoSetCustomValidity`` class configuration option.
 * ``FormHelper`` now generates native HTML5 input tags for datetime fields.
   Check the :ref:`Form Helper <create-datetime-controls>` page for more details.
