@@ -12,6 +12,9 @@ introduced in each version and the migration path between versions.
 
     appendices/4-0-migration-guide
 
+If you need/want to shim 3.x behavior, or partially migrate in steps, check out
+to the `Shim plugin <https://github.com/dereuromark/cakephp-shim>`__ that can help mitigate some BC breaking changes.
+
 General Information
 ===================
 
