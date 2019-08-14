@@ -17,7 +17,7 @@ Starting a Form
 .. php:method:: create(mixed $context = null, array $options = [])
 
 * ``$context`` - The context for which the form is being defined. Can be an ORM
-  entity, ORM resultset, array of metadata or ``false/null`` (to make a
+  entity, ORM resultset, ``Form`` instance, array of metadata or ``null`` (to make a
   model-less form).
 * ``$options`` - An array of options and/or HTML attributes.
 
