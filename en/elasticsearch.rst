@@ -160,7 +160,7 @@ convert your data into a ``Document`` that can be indexed::
     }
 
 When marshalling a document, you can specify which embedded documents you wish
-to marshall using the ``associated`` key::
+to marshal using the ``associated`` key::
 
     $article = $this->Articles->newEntity($data, ['associated' => ['Comments']]);
 
