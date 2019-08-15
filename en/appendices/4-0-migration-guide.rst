@@ -100,6 +100,8 @@ Database
   empty string to ``false``. Instead non-boolean string values are converted to ``null``.
 * ``DecimalType`` now uses strings to represent decimal values instead of floats.
   Using floats caused loss in precision.
+* ``JsonType`` now preserves ``null`` when preparing values for database
+  context. In 3.x it would emit ``'null'``.
 * ``StringType`` now marshals array values to ``null`` instead of an empty
   string.
 * ``Cake\Database\Connection::setLogger()`` no longer accepts ``null`` to
