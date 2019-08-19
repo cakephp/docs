@@ -129,7 +129,7 @@ following would accomplish that::
 
         if ($this->request->is('ajax')) {
             
-            $this->response = $this->response->withDisabledCache();
+            $this->response->withDisabledCache();
             // Prior to 3.4.0
             $this->response->disableCache();
         }
