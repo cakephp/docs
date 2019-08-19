@@ -15,7 +15,7 @@ introduced in each version and the migration path between versions.
 Forwards Compatibility Shimming
 ===============================
 
-Forward compatible shimming can prepare your 3.x app for the next major release (4.x).
+FC shimming can prepare your 3.x app for the next major release (4.x).
 
 If you already want to shim 4.x behavior in 3.x, check out
 the `Shim plugin <https://github.com/dereuromark/cakephp-shim>`__ that can help mitigate some BC breaking changes.
