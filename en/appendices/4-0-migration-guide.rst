@@ -150,6 +150,8 @@ Http
   the ``Session.cookie`` configuration option to set the cookie name.
 * ``Cake\Cookie\CookieCollection::get()`` now throws an exception when accessing
   a cookie that doesn't exist. Use ``has()`` to check for cookie existence.
+* The signature of ``Cake\Http\ResponseEmitter::emit()`` has changed, it no longer
+  has the 2nd argument.
 
 I18n
 ----
