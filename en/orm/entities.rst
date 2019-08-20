@@ -298,7 +298,7 @@ Validation Errors
 
 After you :ref:`save an entity <saving-entities>` any validation errors will be
 stored on the entity itself. You can access any validation errors using the
-``getErrors()``, ``getError()`` or ``hadErrors()`` methods::
+``getErrors()``, ``getError()`` or ``hasErrors()`` methods::
 
     // Get all the errors
     $errors = $user->getErrors();
