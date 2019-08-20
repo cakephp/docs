@@ -192,6 +192,10 @@ properties attached to your shell::
 
         public function show()
         {
+
+            // Initialize function call is required to load the Models that are used in initialize method in Shell.
+            $this->initialize();
+
             if (empty($this->args[0])) {
                 // Use error() before CakePHP 3.2
                 return $this->abort('Please enter a username.');
