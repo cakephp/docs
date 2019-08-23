@@ -28,14 +28,11 @@ Esta seção ensinará a você, como exemplo, os usos mais comuns do CakePHP Rou
 
 O ``Router`` fornece duas interfaces para conectar rotas. O método estático é uma interface compatível com versões anteriores, enquanto os construtores com escopo oferecem uma sintaxe mais concisa ao criar várias rotas e melhor desempenho.
 
-Isso executará o método de índice no `` ArticlesController`` quando a página inicial do seu site for visitada. Às vezes, você precisa de rotas dinâmicas que aceitem vários parâmetros; esse seria o caso, por exemplo, de uma rota para visualizar o conteúdo de um artigo::
+Isso executará o método de índice no ``ArticlesController`` quando a página inicial do seu site for visitada. Às vezes, você precisa de rotas dinâmicas que aceitem vários parâmetros; esse seria o caso, por exemplo, de uma rota para visualizar o conteúdo de um artigo::
 
     $routes->connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
 
-The above route will accept any URL looking like ``/articles/15`` and invoke the
-method ``view(15)`` in the ``ArticlesController``. This will not, though,
-prevent people from trying to access URLs looking like ``/articles/foobar``. If
-you wish, you can restrict some parameters to conform to a regular expression::
+A rota acima aceitará qualquer URL semelhante a ``/articles/15`` e invocará o método ``view (15)`` no ``ArticlesController``. Porém, isso não impedirá que as pessoas tentem acessar URLs semelhantes a ``/articles/foobar``. Se desejar, você pode restringir alguns parâmetros para estar em conformidade com uma expressão regular::
 
     $routes->connect(
         '/articles/:id',
@@ -51,20 +48,14 @@ you wish, you can restrict some parameters to conform to a regular expression::
         ['id' => '\d+', 'pass' => ['id']]
     )
 
-The previous example changed the star matcher by a new placeholder ``:id``.
-Using placeholders allows us to validate parts of the URL, in this case we used
-the ``\d+`` regular expression so that only digits are matched. Finally, we told
-the Router to treat the ``id`` placeholder as a function argument to the
-``view()`` function by specifying the ``pass`` option. More on using this
-option later.
+O exemplo anterior alterou o marcador de estrelas por um novo espaço reservado para ``:id``. O uso de espaços reservados nos permite validar partes da URL; nesse caso, usamos a expressão regular ``\d+`` para que apenas os dígitos correspondam. Finalmente, pedimos ao roteador para tratar o espaço reservado ``id`` como um argumento de função para o método ``view()`` especificando a opção ``pass``. Mais sobre o uso dessa opção posteriormente.
 
-The CakePHP Router can also reverse match routes. That means that from an
-array containing matching parameters, it is capable of generating a URL string::
+O roteador do CakePHP também pode reverter as rotas de correspondência. Isso significa que, a partir de uma matriz que contém parâmetros correspondentes, é capaz de gerar uma string de URL::
 
     use Cake\Routing\Router;
 
     echo Router::url(['controller' => 'Articles', 'action' => 'view', 'id' => 15]);
-    // Will output
+    // Saída
     /articles/15
 
 Routes can also be labelled with a unique name, this allows you to quickly
