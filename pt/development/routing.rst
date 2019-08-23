@@ -1,40 +1,20 @@
 Roteamento
-##########
-
-.. note::
-    Atualmente, a documentação desta página não é suportada em português.
-
-    Por favor, sinta-se a vontade para nos enviar um *pull request* para o
-    `Github <https://github.com/cakephp/docs>`_ ou use o botão
-    **IMPROVE THIS DOC** para propor suas mudanças diretamente.
-
-    Você pode consultar a versão em inglês deste tópico através do seletor de
-    idiomas localizado ao lado direito do campo de buscas da documentação.
-
-Routing
 #######
 
 .. php:namespace:: Cake\Routing
 
 .. php:class:: Router
 
-Routing provides you tools that map URLs to controller actions. By defining
-routes, you can separate how your application is implemented from how its URL's
-are structured.
+O roteamento fornece ferramentas que mapeiam URLs para ações do controlador. Ao definir rotas, você pode separar como o aplicativo é implementado e como os URLs são estruturadas.
 
-Routing in CakePHP also encompasses the idea of reverse routing, where an array
-of parameters can be transformed into a URL string. By using reverse routing,
-you can re-factor your application's URL structure without having to update all
-your code.
+O roteamento no CakePHP também abrange a idéia de roteamento reverso, onde uma matriz de parâmetros pode ser transformada em uma string de URL. Ao usar o roteamento reverso, você pode redimensionar a estrutura de URL do seu aplicativo sem precisar atualizar todo o seu código.
 
 .. index:: routes.php
 
-Quick Tour
+Tour rápido
 ==========
 
-This section will teach you by example the most common uses of the CakePHP
-Router. Typically you want to display something as a landing page, so you add
-this to your **routes.php** file::
+Esta seção ensinará a você, como exemplo, os usos mais comuns do CakePHP Router. Normalmente, você deseja exibir algo como uma página de destino e adicionar isso ao seu arquivo **routes.php**::
 
     use Cake\Routing\Router;
 
@@ -46,14 +26,9 @@ this to your **routes.php** file::
     // Using the static method.
     Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
-``Router`` provides two interfaces for connecting routes. The static method is
-a backwards compatible interface, while the scoped builders offer more terse
-syntax when building multiple routes, and better performance.
+O ``Router`` fornece duas interfaces para conectar rotas. O método estático é uma interface compatível com versões anteriores, enquanto os construtores com escopo oferecem uma sintaxe mais concisa ao criar várias rotas e melhor desempenho.
 
-This will execute the index method in the ``ArticlesController`` when the
-homepage of your site is visited. Sometimes you need dynamic routes that will
-accept multiple parameters, this would be the case, for example of a route for
-viewing an article's content::
+Isso executará o método de índice no `` ArticlesController`` quando a página inicial do seu site for visitada. Às vezes, você precisa de rotas dinâmicas que aceitem vários parâmetros; esse seria o caso, por exemplo, de uma rota para visualizar o conteúdo de um artigo::
 
     $routes->connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
 
