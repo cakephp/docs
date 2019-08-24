@@ -245,7 +245,7 @@ Miscellaneous
   with given name is not loaded.
 * Locale files have been moved from ``src/Locale`` to ``resources/locales``.
 * The ``cacert.pem`` file that was bundled in CakePHP has been replaced by
-  a dependency on `composer/ca-bundle <https://packagist.org/packages/composer/ca-bundle>_`.
+  a dependency on `composer/ca-bundle <https://packagist.org/packages/composer/ca-bundle>__`.
 
 
 New Features
