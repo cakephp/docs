@@ -162,7 +162,11 @@ I18n
 
 Mailer
 ------
+
 * ``Email::set()`` has been removed. Use ``Email::setViewVars()`` instead.
+* ``Email::createView()`` has been removed.
+* ``Email::viewOptions()`` has been removed. Use
+  ``$email->getRenderer()->viewBuilder()->setOptions()`` instead.
 
 ORM
 ---
