@@ -230,10 +230,10 @@ Helper
 * You must now only use ``null`` as 1st argument of ``FormHelper::create()`` to
   create a form without context. Passing any other value for which context cannot
   be inferred will result in an exception being thrown.
-* ``Cake\View\\Helper\FormHelper`` and ``Cake\View\\Helper\HtmlHelper`` now
+* ``Cake\View\Helper\FormHelper`` and ``Cake\View\Helper\HtmlHelper`` now
   use HTML data attribute ``data-confirm-message`` to hold the confirmation
   message for methods which have the ``confirm`` option.
-* ``Cake\View\\Helper\FormHelper::button()`` now HTML entity encodes the button
+* ``Cake\View\Helper\FormHelper::button()`` now HTML entity encodes the button
   text and HTML attributes by default. A new option ``escapeTitle`` has been
   added to allow controlling escaping the title separately from other HTML attributes.
 
