@@ -229,8 +229,6 @@ Helper
   'model' is the second argument.
 * ``Cake\View\Helper\UrlHelper::build()`` no longer accepts a boolean for the
   second parameter. You must use ``['fullBase' => true]`` instead.
-* Constants ``View::NAME_ELEMENT`` and ``View::NAME_LAYOUT`` have been removed.
-  You can use ``View::TYPE_ELEMENT`` and ``View::TYPE_LAYOUT``.
 * You must now only use ``null`` as 1st argument of ``FormHelper::create()`` to
   create a form without context. Passing any other value for which context cannot
   be inferred will result in an exception being thrown.
