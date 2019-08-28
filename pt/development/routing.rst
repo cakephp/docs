@@ -18,12 +18,12 @@ Esta seção ensinará a você, como exemplo, os usos mais comuns do CakePHP Rou
 
     use Cake\Routing\Router;
 
-    // Using the scoped route builder.
+    // Usando o construtor de rota com escopo.
     Router::scope('/', function ($routes) {
         $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
     });
 
-    // Using the static method.
+    // Usando o método estático.
     Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
 O ``Router`` fornece duas interfaces para conectar rotas. O método estático é uma interface compatível com versões anteriores, enquanto os construtores com escopo oferecem uma sintaxe mais concisa ao criar várias rotas e melhor desempenho.
