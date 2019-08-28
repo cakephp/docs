@@ -11,7 +11,7 @@ O roteamento no CakePHP também abrange a idéia de roteamento reverso, onde uma
 
 .. index:: routes.php
 
-Tour rápido
+Tour Rápido
 ==========
 
 Esta seção ensinará a você, como exemplo, os usos mais comuns do CakePHP Router. Normalmente, você deseja exibir algo como uma página de destino e adicionar isso ao seu arquivo **routes.php**::
@@ -41,7 +41,7 @@ A rota acima aceitará qualquer URL semelhante a ``/articles/15`` e invocará o 
     ->setPatterns(['id' => '\d+'])
     ->setPass(['id']);
 
-    // Prior to 3.5 use the options array
+    // Antes de 3.5, use o array de opções
     $routes->connect(
         '/articles/:id',
         ['controller' => 'Articles', 'action' => 'view'],
@@ -58,11 +58,9 @@ O roteador do CakePHP também pode reverter as rotas de correspondência. Isso s
     // Saída
     /articles/15
 
-Routes can also be labelled with a unique name, this allows you to quickly
-reference them when building links instead of specifying each of the routing
-parameters::
+As rotas também podem ser rotuladas com um nome exclusivo, isso permite que você as referencie rapidamente ao criar links, em vez de especificar cada um dos parâmetros de roteamento::
 
-    // In routes.php
+    // Em routes.php
     $routes->connect(
         '/login',
         ['controller' => 'Users', 'action' => 'login'],
@@ -72,30 +70,25 @@ parameters::
     use Cake\Routing\Router;
 
     echo Router::url(['_name' => 'login']);
-    // Will output
+    // Saída
     /login
 
-To help keep your routing code DRY, the Router has the concept of 'scopes'.
-A scope defines a common path segment, and optionally route defaults. Any routes
-connected inside a scope will inherit the path/defaults from their wrapping
-scopes::
+Para ajudar a manter seu código de roteamento DRY, o roteador tem o conceito de 'escopos'. Um escopo define um segmento de caminho comum e, opcionalmente, rotea os padrões. Todas as rotas conectadas dentro de um escopo herdarão o caminho/padrão de seus escopos de encapsulamento::
 
     Router::scope('/blog', ['plugin' => 'Blog'], function ($routes) {
         $routes->connect('/', ['controller' => 'Articles']);
     });
 
-The above route would match ``/blog/`` and send it to
-``Blog\Controller\ArticlesController::index()``.
+A rota acima combinaria com ``/blog/`` e enviaria para ``Blog\Controller\ArticlesController::index()``.
 
-The application skeleton comes with a few routes to get you started. Once you've
-added your own routes, you can remove the default routes if you don't need them.
+O esqueleto do aplicativo vem com algumas rotas para você começar. Depois de adicionar suas próprias rotas, você poderá remover as rotas padrão se não precisar delas.
 
 .. index:: :controller, :action, :plugin
 .. index:: greedy star, trailing star
 .. _connecting-routes:
 .. _routes-configuration:
 
-Connecting Routes
+Conectando Rotas
 =================
 
 .. php:method:: connect($route, $defaults = [], $options = [])
@@ -103,22 +96,22 @@ Connecting Routes
 To keep your code :term:`DRY` you should use 'routing scopes'. Routing
 scopes not only let you keep your code DRY, they also help Router optimize its
 operation. This method defaults to the ``/`` scope. To create a scope and connect
-some routes we'll use the ``scope()`` method::
+some routes we'll use the ``scope()`` method
 
-    // In config/routes.php
+
+Para manter seu código :term:`DRY` você deve usar 'escopos de roteamento'. Os escopos de roteamento não apenas permitem que você mantenha seu código DRY, eles também ajudam o Router a otimizar sua operação. O método padrão é o escopo ``/``. Para criar um escopo e conectar algumas rotas, usaremos o método ``scope()``::
+
+    // Em config/routes.php
     use Cake\Routing\Route\DashedRoute;
 
     Router::scope('/', function ($routes) {
-        // Connect the generic fallback routes.
+        // Conecte as rotas de fallback genéricas.
         $routes->fallbacks(DashedRoute::class);
     });
 
-The ``connect()`` method takes up to three parameters: the URL template you wish
-to match, the default values for your route elements, and the options for the
-route. Options frequently include regular expression rules to help the router
-match elements in the URL.
+O método ``connect()`` leva até três parâmetros: o modelo de URL que você deseja corresponder, os valores padrão para seus elementos de rota e as opções para a rota. As opções freqüentemente incluem regras de expressões regulares para ajudar o roteador a combinar elementos na URL.
 
-The basic format for a route definition is::
+O formato básico para uma definição de rota é::
 
     $routes->connect(
         '/url/template',
@@ -126,99 +119,63 @@ The basic format for a route definition is::
         ['option' => 'matchingRegex']
     );
 
-The first parameter is used to tell the router what sort of URL you're trying to
-control. The URL is a normal slash delimited string, but can also contain
-a wildcard (\*) or :ref:`route-elements`.  Using a wildcard tells the router
-that you are willing to accept any additional arguments supplied. Routes without
-a \* only match the exact template pattern supplied.
+O primeiro parâmetro é usado para informar ao roteador que tipo de URL você está tentando controlar. A URL é uma string delimitada por uma barra normal, mas também pode conter um curinga (\*) ou :ref:`route-elements`. O uso de um curinga informa ao roteador que você deseja aceitar quaisquer argumentos adicionais fornecidos. As rotas sem um \* correspondem apenas ao padrão de modelo exato fornecido.
 
-Once you've specified a URL, you use the last two parameters of ``connect()`` to
-tell CakePHP what to do with a request once it has been matched. The second
-parameter is an associative array. The keys of the array should be named after
-the route elements the URL template represents. The values in the array are the
-default values for those keys.  Let's look at some basic examples before we
-start using the third parameter of ``connect()``::
+Depois de especificar uma URL, use os dois últimos parâmetros de ``connect()`` para dizer ao CakePHP o que fazer com uma solicitação, uma vez que ela corresponda. O segundo parâmetro é uma matriz associativa. As chaves da matriz devem ser nomeadas após os elementos de rota que o modelo de URL representa. Os valores na matriz são os valores padrão para essas chaves. Vejamos alguns exemplos básicos antes de começarmos a usar o terceiro parâmetro de ``connect()``::
 
     $routes->connect(
         '/pages/*',
         ['controller' => 'Pages', 'action' => 'display']
     );
 
-This route is found in the routes.php file distributed with CakePHP.  It matches
-any URL starting with ``/pages/`` and hands it to the ``display()`` action of
-the ``PagesController``. A request to ``/pages/products`` would be mapped to
-``PagesController->display('products')``.
+Esta rota é encontrada no arquivo routes.php distribuído com o CakePHP. Ele corresponde a qualquer URL que comece com ``/pages/`` e passa para a ação ``display()`` do ``PagesController``. Um pedido para ``/pages/products`` seria mapeado para ``PagesController->display('products')``.
 
-In addition to the greedy star ``/*`` there is also the ``/**`` trailing star
-syntax. Using a trailing double star, will capture the remainder of a URL as a
-single passed argument. This is useful when you want to use an argument that
-included a ``/`` in it::
+Além da estrela gananciosa ``/*`` existe também a sintaxe da estrela ``/**``. Usando uma estrela dupla à direita, capturaremos o restante de uma URL como um único argumento transmitido. Isto é útil quando você quer usar um argumento que inclua um ``/`` nele::
 
     $routes->connect(
         '/pages/**',
         ['controller' => 'Pages', 'action' => 'show']
     );
 
-The incoming URL of ``/pages/the-example-/-and-proof`` would result in a single
-passed argument of ``the-example-/-and-proof``.
+A URL de entrada de ``/pages/the-example-/-e-proof`` resultaria em um único argumento passado de ``the-example-/-e-proof``.
 
-You can use the second parameter of ``connect()`` to provide any routing
-parameters that are composed of the default values of the route::
+Você pode usar o segundo parâmetro de ``connect()`` para fornecer quaisquer parâmetros de roteamento que sejam compostos dos valores padrão da rota ::
 
     $routes->connect(
         '/government',
         ['controller' => 'Pages', 'action' => 'display', 5]
     );
 
-This example shows how you can use the second parameter of ``connect()`` to
-define default parameters. If you built a site that features products for
-different categories of customers, you might consider creating a route. This
-allows you to link to ``/government`` rather than ``/pages/display/5``.
 
-A common use for routing is to create URL segments that don't match your
-controller or model names. Let's say that instead of accessing our regular URL
-at ``/users/some_action/5``, we'd like to be able to access it by
-``/cooks/some_action/5``. The following route takes care of that::
+Este exemplo mostra como você pode usar o segundo parâmetro de ``connect()`` para definir parâmetros padrão. Se você criou um site que apresenta produtos para diferentes categorias de clientes, considere a possibilidade de criar uma rota. Isso permite que você crie um link para ``/government`` em vez de ``/pages/display/5``.
+
+Um uso comum para o roteamento é criar segmentos de URL que não correspondam aos seus nomes de controlador ou modelo. Digamos que em vez de acessar nosso URL regular em `/users/some_action/5``, gostaríamos de poder acessá-lo por ``/cooks/some_action/5``. A rota seguinte cuida disso::
 
     $routes->connect(
         '/cooks/:action/*', ['controller' => 'Users']
     );
 
-This is telling the Router that any URL beginning with ``/cooks/`` should be
-sent to the ``UsersController``. The action called will depend on the value of
-the ``:action`` parameter. By using :ref:`route-elements`, you can create
-variable routes, that accept user input or variables. The above route also uses
-the greedy star.  The greedy star indicates that this route should accept any
-additional positional arguments given. These arguments will be made available in
-the :ref:`passed-arguments` array.
+Isto está dizendo ao Roteador que qualquer URL que comece com ``/cooks/`` deve ser enviado para o ``UsersController``. A ação chamada dependerá do valor do parâmetro ``:action``. Usando :ref:`route-elements`, você pode criar rotas variáveis, que aceitam entrada ou variáveis do usuário. A rota acima também usa a estrela gananciosa. A estrela gananciosa indica que esta rota deve aceitar qualquer argumento de posição adicional dado. Estes argumentos serão disponibilizados no array :ref:`passed-arguments`.
 
-When generating URLs, routes are used too. Using
-``['controller' => 'Users', 'action' => 'some_action', 5]`` as
-a URL will output ``/cooks/some_action/5`` if the above route is the
-first match found.
+Ao gerar URLs, as rotas são usadas também. Usando ``['controller' => 'Users', 'action' => 'some_action', 5]`` como uma URL irá gerar ``/cooks/some_action/5`` se a rota acima for a primeira encontrada.
 
-The routes we've connected so far will match any HTTP verb. If you are building
-a REST API you'll often want to map HTTP actions to different controller methods.
-The ``RouteBuilder`` provides helper methods that make defining routes for
-specific HTTP verbs simpler::
+As rotas que conectamos até agora corresponderão a qualquer verbo HTTP. Se você estiver criando uma API REST, geralmente desejará mapear ações HTTP para diferentes métodos de controlador. O ``RouteBuilder`` fornece métodos auxiliares que tornam mais simples a definição de rotas para verbos HTTP específicos::
 
-    // Create a route that only responds to GET requests.
+    // Crie uma rota que responda apenas a solicitações GET.
     $routes->get(
         '/cooks/:id',
         ['controller' => 'Users', 'action' => 'view'],
         'users:view'
     );
 
-    // Create a route that only responds to PUT requests
+    // Criar uma rota que responda apenas a solicitações PUT
     $routes->put(
         '/cooks/:id',
         ['controller' => 'Users', 'action' => 'update'],
         'users:update'
     );
 
-The above routes map the same URL to different controller actions based on the
-HTTP verb used. GET requests will go to the 'view' action, while PUT requests
-will go to the 'update' action. There are HTTP helper methods for:
+As rotas acima mapeiam a mesma URL para diferentes ações do controlador com base no verbo HTTP usado. As solicitações GET irão para a ação 'ver', enquanto as solicitações PUT irão para a ação 'atualizar'. Existem métodos auxiliares HTTP para:
 
 * GET
 * POST
@@ -231,12 +188,14 @@ will go to the 'update' action. There are HTTP helper methods for:
 All of these methods return the route instance allowing you to leverage the
 :ref:`fluent setters <route-fluent-methods>` to further configure your route.
 
+Todos esses métodos retornam a instância da rota, permitindo que você aproveite :ref:`setters fluentes <route-fluent-methods>` para configurar ainda mais sua rota.
+
 .. versionadded:: 3.5.0
-    The HTTP verb helper methods were added in 3.5.0
+    Os métodos auxiliares do verbo HTTP foram adicionados em 3.5.0
 
 .. _route-elements:
 
-Route Elements
+Elementos de Rota
 --------------
 
 You can specify your own route elements and doing so gives you the
@@ -248,12 +207,14 @@ expression - this tells CakePHP how to know if the URL is correctly formed or
 not. If you choose to not provide a regular expression, any non ``/`` character
 will be treated as part of the parameter::
 
+Você pode especificar seus próprios elementos de rota e isso permite que você defina locais na URL onde os parâmetros das ações do controlador devem estar. Quando um pedido é feito, os valores para estes elementos de rota são encontrados em ``$this->request->getParam()`` no controlador. Quando você define um elemento de rota personalizado, você pode, opcionalmente, especificar uma expressão regular - isso diz ao CakePHP como saber se a URL está formada corretamente ou não. Se você optar por não fornecer uma expressão regular, qualquer caractere que não seja ``/`` será tratado como parte do parâmetro::
+
     $routes->connect(
         '/:controller/:id',
         ['action' => 'view']
     )->setPatterns(['id' => '[0-9]+']);
 
-    // Prior to 3.5 use the options array
+    // Antes de 3.5, use o array de opções
     $routes->connect(
         '/:controller/:id',
         ['action' => 'view'],
@@ -273,15 +234,19 @@ CakePHP does not automatically produce lowercased and dashed URLs when using the
 ``:controller`` parameter. If you need this, the above example could be
 rewritten like so::
 
+O exemplo acima ilustra como criar uma maneira rápida de visualizar modelos de qualquer controlador criando uma URL que se parece com ``/controllerername/:id``. A URL fornecida para ``connect()`` especifica dois elementos de rota: ``:controller`` e ``:id``. O elemento ``:controller`` é um elemento de rota padrão do CakePHP, portanto o roteador sabe como combinar e identificar os nomes dos controladores nas URLs. O elemento ``:id`` é um elemento de rota personalizado e deve ser esclarecido ainda mais especificando uma expressão regular correspondente no terceiro parâmetro de ``connect()``.
+
+O CakePHP não produz automaticamente URLs em minúsculas e tracejadas ao usar o parâmetro ``:controller``. Se você precisar disso, o exemplo acima pode ser reescrito da seguinte maneira:
+
     use Cake\Routing\Route\DashedRoute;
 
-    // Create a builder with a different route class.
+    // Crie um construtor com uma classe de rota diferente.
     $routes->scope('/', function ($routes) {
         $routes->setRouteClass(DashedRoute::class);
         $routes->connect('/:controller/:id', ['action' => 'view'])
             ->setPatterns(['id' => '[0-9]+']);
 
-        // Prior to 3.5 use options array
+        // Antes de 3.5 usar matriz de opções
         $routes->connect(
             '/:controller/:id',
             ['action' => 'view'],
@@ -289,16 +254,14 @@ rewritten like so::
         );
     });
 
-The ``DashedRoute`` class will make sure that the ``:controller`` and
-``:plugin`` parameters are correctly lowercased and dashed.
+A classe ``DashedRoute`` garantirá que os parâmetros ``:controller`` e ``:plugin`` estejam corretamente em minúsculas e tracejados.
 
-If you need lowercased and underscored URLs while migrating from a CakePHP
-2.x application, you can instead use the ``InflectedRoute`` class.
+Se você precisar de URLs minúsculas e sublinhadas durante a migração de um aplicativo CakePHP 2.x, poderá usar a classe ``InflectedRoute``.
 
 .. note::
 
-    Patterns used for route elements must not contain any capturing
-    groups. If they do, Router will not function correctly.
+    Padrões usados para elementos de rota não devem conter nenhum 
+    grupo de captura. Em caso afirmativo, o roteador não funcionará corretamente.
 
 Once this route has been defined, requesting ``/apples/5`` would call the ``view()``
 method of the ApplesController. Inside the ``view()`` method, you would need to
