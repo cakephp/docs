@@ -230,6 +230,7 @@ View
 
 Helper
 ------
+
 * ``Cake\View\Helper\PaginatorHelper::hasPage()`` has had its arguments
   reversed. This makes it consistent with other paginator methods where the
   'model' is the second argument.
@@ -247,6 +248,7 @@ Helper
 
 Miscellaneous
 -------------
+
 * ``ObjectRegistry::get()`` now throws exception if object with provided name is not loaded.
   You should use ``ObjectRegistry::has()`` to ensure that the object exists in registry.
   The magic getter ``ObjectRegistry::__get()`` will continue to return ``null`` if object
