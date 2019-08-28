@@ -1,5 +1,5 @@
 Roteamento
-#######
+##########
 
 .. php:namespace:: Cake\Routing
 
@@ -12,7 +12,7 @@ O roteamento no CakePHP também abrange a idéia de roteamento reverso, onde uma
 .. index:: routes.php
 
 Tour Rápido
-==========
+===========
 
 Esta seção ensinará a você, como exemplo, os usos mais comuns do CakePHP Router. Normalmente, você deseja exibir algo como uma página de destino e adicionar isso ao seu arquivo **routes.php**::
 
@@ -89,7 +89,7 @@ O esqueleto do aplicativo vem com algumas rotas para você começar. Depois de a
 .. _routes-configuration:
 
 Conectando Rotas
-=================
+================
 
 .. php:method:: connect($route, $defaults = [], $options = [])
 
@@ -196,7 +196,7 @@ Todos esses métodos retornam a instância da rota, permitindo que você aprovei
 .. _route-elements:
 
 Elementos de Rota
---------------
+-----------------
 
 You can specify your own route elements and doing so gives you the
 power to define places in the URL where parameters for controller
