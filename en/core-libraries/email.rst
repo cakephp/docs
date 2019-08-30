@@ -305,7 +305,7 @@ A valid message id can help to prevent emails ending up in spam folders.
 Creating Reusable Mailers
 =========================
 
-Until now we have seen how to directly use the the `Mailer` class to create and
+Until now we have seen how to directly use the the ``Mailer`` class to create and
 send one emails. But main feature of mailer is to allow creating reusable emails
 throughout your application. They can also be used to contain multiple email
 configurations in one location. This helps keep your code DRYer and keeps email
