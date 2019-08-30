@@ -135,6 +135,12 @@ Error
 * ``ErrorHandlerMiddleware`` now takes an error handler class name or instance
   as constructor argument instead of exception render class name or instance.
 
+Event
+-----
+
+* Calling ``getSubject()`` on an event with no subject will now raise an
+  exception.
+
 Http
 ----
 
