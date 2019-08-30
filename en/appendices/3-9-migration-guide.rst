@@ -13,6 +13,11 @@ To upgrade to 3.9.x run the following composer command:
 New Features
 ============
 
+Console
+-------
+
+* ``ConsoleIo::abort()`` was added.
+
 ORM
 ---
 

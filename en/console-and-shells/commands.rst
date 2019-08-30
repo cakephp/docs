@@ -183,6 +183,17 @@ to terminate execution::
         }
     }
 
+You can also use ``abort()`` on the ``$io`` object to emit a message and code::
+
+    public function execute(Arguments $args, ConsoleIo $io)
+    {
+        $name = $args->getArgument('name');
+        if (strlen($name) < 5) {
+            // Halt execution, output to stderr, and set exit code to 99
+            $io->abort('Name must be at least 4 characters long.', 99);
+        }
+    }
+
 You can pass any desired exit code into ``abort()``.
 
 .. tip::
@@ -194,6 +205,9 @@ You can pass any desired exit code into ``abort()``.
     You can read more about conventional exit codes in the sysexit manual page
     on most Unix systems (``man sysexits``), or the ``System Error Codes`` help
     page in Windows.
+
+.. versionadded:: 3.9.0
+    ``ConsoleIo::abort()`` was added.
 
 Calling other Commands
 ======================
