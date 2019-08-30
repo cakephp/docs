@@ -20,6 +20,7 @@ ORM
   with the specific entity that failed in case of an error. The entities are saved within a transaction.
 * ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been added for removing many
   entities at once including callbacks. The entities are removed within a transaction.
+* ``TableLocator::clear()`` now resets the internal ``options`` array.
 
 Utility
 -------
