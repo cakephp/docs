@@ -144,7 +144,7 @@ put the ``X-`` prefix for your custom headers.
 See ``Mailer::setHeaders()`` and ``Mailer::addHeaders()``
 
 Sending Templated Mailers
-========================
+==========================
 
 Mailers are often much more than just a simple text message. In order
 to facilitate that, CakePHP provides a way to send emails using CakePHP's
