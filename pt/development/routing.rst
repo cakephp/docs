@@ -185,10 +185,7 @@ As rotas acima mapeiam a mesma URL para diferentes ações do controlador com ba
 * OPTIONS
 * HEAD
 
-All of these methods return the route instance allowing you to leverage the
-:ref:`fluent setters <route-fluent-methods>` to further configure your route.
-
-Todos esses métodos retornam a instância da rota, permitindo que você aproveite :ref:`setters fluentes <route-fluent-methods>` para configurar ainda mais sua rota.
+Todos esses métodos retornam a instância da rota, permitindo que você aproveite os :ref:`fluent setters <route-fluent-methods>` para configurar ainda mais sua rota.
 
 .. versionadded:: 3.5.0
     Os métodos auxiliares do verbo HTTP foram adicionados em 3.5.0
@@ -197,15 +194,6 @@ Todos esses métodos retornam a instância da rota, permitindo que você aprovei
 
 Elementos de Rota
 -----------------
-
-You can specify your own route elements and doing so gives you the
-power to define places in the URL where parameters for controller
-actions should lie. When a request is made, the values for these
-route elements are found in ``$this->request->getParam()`` in the controller.
-When you define a custom route element, you can optionally specify a regular
-expression - this tells CakePHP how to know if the URL is correctly formed or
-not. If you choose to not provide a regular expression, any non ``/`` character
-will be treated as part of the parameter::
 
 Você pode especificar seus próprios elementos de rota e isso permite que você defina locais na URL onde os parâmetros das ações do controlador devem estar. Quando um pedido é feito, os valores para estes elementos de rota são encontrados em ``$this->request->getParam()`` no controlador. Quando você define um elemento de rota personalizado, você pode, opcionalmente, especificar uma expressão regular - isso diz ao CakePHP como saber se a URL está formada corretamente ou não. Se você optar por não fornecer uma expressão regular, qualquer caractere que não seja ``/`` será tratado como parte do parâmetro::
 
@@ -221,22 +209,9 @@ Você pode especificar seus próprios elementos de rota e isso permite que você
         ['id' => '[0-9]+']
     );
 
-The above example illustrates how to create a quick way to view
-models from any controller by crafting a URL that looks like
-``/controllername/:id``. The URL provided to ``connect()`` specifies two
-route elements: ``:controller`` and ``:id``. The ``:controller`` element
-is a CakePHP default route element, so the router knows how to match and
-identify controller names in URLs. The ``:id`` element is a custom
-route element, and must be further clarified by specifying a
-matching regular expression in the third parameter of ``connect()``.
-
-CakePHP does not automatically produce lowercased and dashed URLs when using the
-``:controller`` parameter. If you need this, the above example could be
-rewritten like so::
-
 O exemplo acima ilustra como criar uma maneira rápida de visualizar modelos de qualquer controlador criando uma URL que se parece com ``/controllerername/:id``. A URL fornecida para ``connect()`` especifica dois elementos de rota: ``:controller`` e ``:id``. O elemento ``:controller`` é um elemento de rota padrão do CakePHP, portanto o roteador sabe como combinar e identificar os nomes dos controladores nas URLs. O elemento ``:id`` é um elemento de rota personalizado e deve ser esclarecido ainda mais especificando uma expressão regular correspondente no terceiro parâmetro de ``connect()``.
 
-O CakePHP não produz automaticamente URLs em minúsculas e tracejadas ao usar o parâmetro ``:controller``. Se você precisar disso, o exemplo acima pode ser reescrito da seguinte maneira:
+O CakePHP não produz automaticamente URLs em minúsculas e tracejadas ao usar o parâmetro ``:controller``. Se você precisar disso, o exemplo acima pode ser reescrito da seguinte maneira::
 
     use Cake\Routing\Route\DashedRoute;
 
@@ -263,30 +238,24 @@ Se você precisar de URLs minúsculas e sublinhadas durante a migração de um a
     Padrões usados para elementos de rota não devem conter nenhum 
     grupo de captura. Em caso afirmativo, o roteador não funcionará corretamente.
 
-Once this route has been defined, requesting ``/apples/5`` would call the ``view()``
-method of the ApplesController. Inside the ``view()`` method, you would need to
-access the passed ID at ``$this->request->getParam('id')``.
+Uma vez definida essa rota, solicitar ``/apples/5`` chamaria o método ``view()`` de ApplesController. Dentro do método ``view()``, você precisaria acessar o ID passado em ``$this->request->getParam('id')``.
 
-If you have a single controller in your application and you do not want the
-controller name to appear in the URL, you can map all URLs to actions in your
-controller. For example, to map all URLs to actions of the ``home`` controller,
-e.g have URLs like ``/demo`` instead of ``/home/demo``, you can do the
-following::
+Se você possui um único controlador no seu aplicativo e não deseja que o nome do controlador apareça na URL, é possível mapear todos os URLs para ações no seu controlador. Por exemplo, para mapear todos os URLs para ações do controlador ``home``, por exemplo, ter URLs como ``/demo`` em vez de ``/home/demo``, você pode fazer o seguinte::
+
 
     $routes->connect('/:action', ['controller' => 'Home']);
 
-If you would like to provide a case insensitive URL, you can use regular
-expression inline modifiers::
+Se você deseja fornecer um URL que não diferencia maiúsculas de minúsculas, pode usar modificadores embutidos de expressão regular::
 
-    // Prior to 3.5 use the options array instead of setPatterns()
+    // Antes da 3.5, use a matriz de opções em vez de setPatterns()
     $routes->connect(
         '/:userShortcut',
         ['controller' => 'Teachers', 'action' => 'profile', 1],
     )->setPatterns(['userShortcut' => '(?i:principal)']);
 
-One more example, and you'll be a routing pro::
+Mais um exemplo e você será um profissional de roteamento::
 
-    // Prior to 3.5 use the options array instead of setPatterns()
+    // Antes da 3.5, use a matriz de opções em vez de setPatterns()
     $routes->connect(
         '/:controller/:year/:month/:day',
         ['action' => 'index']
@@ -296,98 +265,80 @@ One more example, and you'll be a routing pro::
         'day' => '0[1-9]|[12][0-9]|3[01]'
     ]);
 
-This is rather involved, but shows how powerful routes can be. The URL supplied
-has four route elements. The first is familiar to us: it's a default route
-element that tells CakePHP to expect a controller name.
+Isso está bastante envolvido, mas mostra como as rotas podem ser poderosas. O URL fornecido possui quatro elementos de rota. O primeiro é familiar para nós: é um elemento de rota padrão que diz ao CakePHP para esperar um nome de controlador.
 
-Next, we specify some default values. Regardless of the controller,
-we want the ``index()`` action to be called.
+Em seguida, especificamos alguns valores padrão. Independentemente do controlador, queremos que a ação ``index()`` seja chamada.
 
-Finally, we specify some regular expressions that will match years,
-months and days in numerical form. Note that parenthesis (grouping)
-are not supported in the regular expressions. You can still specify
-alternates, as above, but not grouped with parenthesis.
+Por fim, especificamos algumas expressões regulares que corresponderão a anos, meses e dias na forma numérica. Observe que parênteses (agrupamento) não são suportados nas expressões regulares. Você ainda pode especificar alternativas, como acima, mas não agrupadas entre parênteses.
 
-Once defined, this route will match ``/articles/2007/02/01``,
-``/articles/2004/11/16``, handing the requests to
-the ``index()`` actions of their respective controllers, with the date
-parameters in ``$this->request->getParam()``.
+Uma vez definida, essa rota corresponderá a ``/articles/2007/02/01``, ``/articles/2004/11/16``, entregando as solicitações às ações ``index()`` de seus respectivos controladores , com os parâmetros de data em ``$this->request->getParam()``.
 
-There are several route elements that have special meaning in
-CakePHP, and should not be used unless you want the special meaning
+Existem vários elementos de rota que têm um significado especial no CakePHP e não devem ser usados, a menos que você queira o significado especial
 
-* ``controller`` Used to name the controller for a route.
-* ``action`` Used to name the controller action for a route.
-* ``plugin`` Used to name the plugin a controller is located in.
-* ``prefix`` Used for :ref:`prefix-routing`
-* ``_ext`` Used for :ref:`File extentions routing <file-extensions>`.
-* ``_base`` Set to ``false`` to remove the base path from the generated URL. If
-  your application is not in the root directory, this can be used to generate
-  URLs that are 'cake relative'.
-* ``_scheme``  Set to create links on different schemes like `webcal` or `ftp`.
-  Defaults to the current scheme.
-* ``_host`` Set the host to use for the link.  Defaults to the current host.
-* ``_port`` Set the port if you need to create links on non-standard ports.
-* ``_full``  If ``true`` the `FULL_BASE_URL` constant will be prepended to
-  generated URLs.
-* ``#`` Allows you to set URL hash fragments.
-* ``_ssl`` Set to ``true`` to convert the generated URL to https or ``false``
-  to force http.
-* ``_method`` Define the HTTP verb/method to use. Useful when working with
-  :ref:`resource-routes`.
-* ``_name`` Name of route. If you have setup named routes, you can use this key
-  to specify it.
+* ``controller`` Usado para nomear o controlador para uma rota.
+* ``action`` Usado para nomear a ação do controlador para uma rota.
+* ``plugin`` Usado para nomear o plug-in em que um controlador está localizado.
+* ``prefix`` Usado para :ref:`prefix-routing`
+* ``_ext`` Usado para :ref:`File extentions routing <file-extensions>`.
+* ``_base`` Defina como ``false`` para remover o caminho base da URL gerada. Se o seu aplicativo não estiver no diretório raiz, isso poderá ser usado para gerar URLs que são 'relativos ao cake'
+* ``_scheme`` Configure para criar links em diferentes esquemas, como `webcal` ou `ftp`. O padrão é o esquema atual.
+* ``_host`` Defina o host a ser usado para o link. O padrão é o host atual.
+* ``_port`` Defina a porta se precisar criar links em portas não padrão.
+* ``_full`` Se ``true``, a constante `FULL_BASE_URL` será anexada aos URLs gerados
+* ``#`` Permite definir fragmentos de hash de URL.
+* ``_ssl`` Defina como ``true`` para converter o URL gerado em https ou ``false`` para forçar http.
+* ``_method`` Defina o verbo/método HTTP a ser usado. Útil ao trabalhar com :ref:`resource-routes`.
+* ``_name`` Nome da rota. Se você configurou rotas nomeadas, poderá usar esta chave para especificá-la.
 
 .. _route-fluent-methods:
 
-Configuring Route Options
--------------------------
+Configurando opções de rota
+---------------------------
 
-There are a number of route options that can be set on each route. After
-connecting a route you can use its fluent builder methods to further configure
-the route. These methods replace many of the keys in the ``$options`` parameter
-of ``connect()``::
+Há várias opções de rotas que podem ser definidas individualmente. Após conectar uma rota, você pode usar seus métodos fluentes do construtor para configurar ainda mais a rota. Esses métodos substituem muitas das chaves no parâmetro ``$options`` de ``connect()``::
 
     $routes->connect(
         '/:lang/articles/:slug',
         ['controller' => 'Articles', 'action' => 'view'],
     )
-    // Allow GET and POST requests.
+    // Permite requisiçes GET e POSTS.
     ->setMethods(['GET', 'POST'])
 
-    // Only match on the blog subdomain.
+    // Corresponder apenas no subdomínio do blog.
     ->setHost('blog.example.com')
 
-    // Set the route elements that should be converted to passed arguments
+    // Defina os elementos da rota que devem ser convertidos em argumentos passados
     ->setPass(['slug'])
 
-    // Set the matching patterns for route elements
+    // Definir os padrões correspondentes para elementos de rota
     ->setPatterns([
         'slug' => '[a-z0-9-_]+',
         'lang' => 'en|fr|es',
     ])
 
-    // Also allow JSON file extensions
+    // Permitir também extensões de arquivo JSON
     ->setExtenions(['json'])
 
-    // Set lang to be a persistent parameter
+    // Defina lang como um parâmetro persistente
     ->setPersist(['lang']);
 
 .. versionadded:: 3.5.0
-    Fluent builder methods were added in 3.5.0
+    Métodos construtores fluentes foram adicionados em 3.5.0
 
-Passing Parameters to Action
-----------------------------
+Passando parâmetros para ação
+-----------------------------
 
 When connecting routes using :ref:`route-elements` you may want to have routed
 elements be passed arguments instead. The ``pass`` option whitelists which route
 elements should also be made available as arguments passed into the controller
-functions::
+functions
+
+Ao conectar rotas usando :ref:`route-elements`, você pode querer que elementos roteados sejam passados por argumentos. A opção ``pass`` lista as permissões que elementos de rota também devem ser disponibilizados como argumentos passados para as funções do controlador::
 
     // src/Controller/BlogsController.php
     public function view($articleId = null, $slug = null)
     {
-        // Some code here...
+        // Algum código aqui...
     }
 
     // routes.php
@@ -396,21 +347,20 @@ functions::
             '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
             ['controller' => 'Blogs', 'action' => 'view']
         )
-        // Define the route elements in the route template
-        // to pass as function arguments. Order matters since this
-        // will simply map ":id" to $articleId in your action
+        // Define os elementos da rota no modelo de rota 
+        // para passar como argumentos de função. O pedido é importante, 
+        // pois isso simplesmente mapeie ":id" para $articleId em sua ação
         ->setPass(['id', 'slug'])
-        // Define a pattern that `id` must match.
+        // Define um padrão que o `id` deve corresponder.
         ->setPatterns([
             'id' => '[0-9]+',
         ]);
     });
 
-Now thanks to the reverse routing capabilities, you can pass in the URL array
-like below and CakePHP will know how to form the URL as defined in the routes::
+Agora, graças aos recursos de roteamento reverso, você pode passar a matriz de URLs como abaixo e o CakePHP saberá como formar a URL conforme definido nas rotas::
 
     // view.ctp
-    // This will return a link to /blog/3-CakePHP_Rocks
+    // Isso retornará um link para /blog/3-CakePHP_Rocks
     echo $this->Html->link('CakePHP Rocks', [
         'controller' => 'Blog',
         'action' => 'view',
@@ -418,7 +368,7 @@ like below and CakePHP will know how to form the URL as defined in the routes::
         'slug' => 'CakePHP_Rocks'
     ]);
 
-    // You can also used numerically indexed parameters.
+    // Você também pode usar parâmetros indexados numericamente.
     echo $this->Html->link('CakePHP Rocks', [
         'controller' => 'Blog',
         'action' => 'view',
@@ -428,83 +378,82 @@ like below and CakePHP will know how to form the URL as defined in the routes::
 
 .. _named-routes:
 
-Using Named Routes
-------------------
+Usando Rotas Nomeadas
+---------------------
 
-Sometimes you'll find typing out all the URL parameters for a route too verbose,
-or you'd like to take advantage of the performance improvements that named
-routes have. When connecting routes you can specifiy a ``_name`` option, this
-option can be used in reverse routing to identify the route you want to use::
+Às vezes, você encontrará a digitação de todos os parâmetros de URL de uma rota muito detalhados ou gostaria de aproveitar as melhorias de desempenho que as rotas nomeadas possuem. Ao conectar rotas, você pode especificar uma opção ``_name``, essa opção pode ser usada no roteamento reverso para identificar a rota que você deseja usar::
 
-    // Connect a route with a name.
+    // Conecte uma rota com um nome.
     $routes->connect(
         '/login',
         ['controller' => 'Users', 'action' => 'login'],
         ['_name' => 'login']
     );
 
-    // Name a verb specific route (3.5.0+)
+    // Nomear uma rota específica do verbo (3.5.0+)
     $routes->post(
         '/logout',
         ['controller' => 'Users', 'action' => 'logout'],
         'logout'
     );
 
-    // Generate a URL using a named route.
+    // Gere um URL usando uma rota nomeada.
     $url = Router::url(['_name' => 'logout']);
 
-    // Generate a URL using a named route,
-    // with some query string args.
+    // Gere um URL usando uma rota nomeada,
+    // com algumas cadeias de caracteres de consulta args.
     $url = Router::url(['_name' => 'login', 'username' => 'jimmy']);
 
 If your route template contains any route elements like ``:controller`` you'll
 need to supply those as part of the options to ``Router::url()``.
 
+Se o seu modelo de rota contiver elementos de rota como ``:controller``, você precisará fornecê-los como parte das opções para ``Router::url()``.
+
 .. note::
 
-    Route names must be unique across your entire application. The same
-    ``_name`` cannot be used twice, even if the names occur inside a different
-    routing scope.
+    Os nomes das rotas devem ser exclusivos em todo o aplicativo. O mesmo 
+    ``_name`` não pode ser usado duas vezes, mesmo que os nomes ocorram dentro de um 
+    escopo de roteamento diferente.
 
-When building named routes, you will probably want to stick to some conventions
-for the route names. CakePHP makes building up route names easier by allowing
-you to define name prefixes in each scope::
+
+Ao criar rotas nomeadas, você provavelmente desejará seguir algumas convenções para os nomes das rotas. O CakePHP facilita a criação de nomes de rotas, permitindo definir prefixos de nomes em cada escopo:
+
 
     Router::scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
-        // This route's name will be `api:ping`
+        // O nome desta rota será `api:ping`
         $routes->get('/ping', ['controller' => 'Pings'], 'ping');
     });
     // Generate a URL for the ping route
     Router::url(['_name' => 'api:ping']);
 
-    // Use namePrefix with plugin()
+    // Use namePrefix com plugin()
     Router::plugin('Contacts', ['_namePrefix' => 'contacts:'], function ($routes) {
-        // Connect routes.
+        // Conecta rotas.
     });
 
-    // Or with prefix()
+    // Ou com prefix()
     Router::prefix('Admin', ['_namePrefix' => 'admin:'], function ($routes) {
-        // Connect routes.
+        // Conecta rotas.
     });
 
-You can also use the ``_namePrefix`` option inside nested scopes and it works as
-you'd expect::
+Você também pode usar a opção ``_namePrefix`` dentro de escopos aninhados e funciona conforme o esperado:
 
     Router::plugin('Contacts', ['_namePrefix' => 'contacts:'], function ($routes) {
         $routes->scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
-            // This route's name will be `contacts:api:ping`
+            // O nome desta rota será `contacts:api:ping` 
             $routes->get('/ping', ['controller' => 'Pings'], 'ping');
         });
     });
 
-    // Generate a URL for the ping route
+    // Gere uma URL para a rota de ping
     Router::url(['_name' => 'contacts:api:ping']);
 
-Routes connected in named scopes will only have names added if the route is also
-named. Nameless routes will not have the ``_namePrefix`` applied to them.
+
+As rotas conectadas nos escopos nomeados somente terão nomes adicionados se a rota também for nomeada. As rotas sem nome não terão o ``_namePrefix`` aplicado a elas.
+
 
 .. versionadded:: 3.1
-    The ``_namePrefix`` option was added in 3.1
+    A opção ``_namePrefix`` foi adicionada na versão 3.1
 
 .. index:: admin routing, prefix routing
 .. _prefix-routing:
