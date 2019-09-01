@@ -199,6 +199,12 @@ Router
   dasherized form in URL by default. You can retain underscored from (or any other
   custom path) by using ``'path'`` key in ``$options`` argument.
 
+TestSuite
+---------
+
+* ``Cake\TestSuite\TestCase::$fixtures`` cannot be a comma separated string
+  anymore. It must be an array.
+
 Utility
 -------
 * ``Cake\Utility\Xml::fromArray()`` now requires an array for the ``$options``
