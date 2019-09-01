@@ -143,10 +143,10 @@ put the ``X-`` prefix for your custom headers.
 
 See ``Mailer::setHeaders()`` and ``Mailer::addHeaders()``
 
-Sending Templated Mailers
+Sending Templated Emails
 ==========================
 
-Mailers are often much more than just a simple text message. In order
+Emails are often much more than just a simple text message. In order
 to facilitate that, CakePHP provides a way to send emails using CakePHP's
 :doc:`view layer </views>`.
 
@@ -289,7 +289,7 @@ necessary when dealing with some ISP's::
     // to non-conformant addresses.
     $mailer->setEmailPattern($newPattern);
 
-Sending Mailers from CLI
+Sending Emails from CLI
 ========================
 
 When sending emails within a CLI script (Shells, Tasks, ...) you should manually
@@ -302,7 +302,7 @@ message id (since there is no host name in a CLI environment)::
 
 A valid message id can help to prevent emails ending up in spam folders.
 
-Creating Reusable Mailers
+Creating Reusable Emails
 =========================
 
 Until now we have seen how to directly use the the ``Mailer`` class to create and
