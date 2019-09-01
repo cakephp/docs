@@ -64,6 +64,12 @@ View
 * ``HtmlHelper::tableHeaders()`` now prefers header cells with attributes to be
   defined as a nested list. e.g ``['Title', ['class' => 'special']]``.
 
+Mailer
+-----
+
+* The ``Cake\Mailer\Email`` class has been deprecated. Use ``Cake\Mailer\Mailer``
+  instead.
+
 Breaking Changes
 ================
 
