@@ -16,8 +16,8 @@ Prerrequisitos
 Ese behavior  requiere que las siguientes columnas estén presentes en la tabla:
 
 - ``parent_id`` (nullable) La columna que contiene el ID del registro padre
-- ``lft``  (integer, signed) Utilisado para mantener la estructura en forma de árbol
-- ``rght``  (integer, signed) Utilisado para mantener la estructura en forma de árbol
+- ``lft``  (integer, signed) Utilizado para mantener la estructura en forma de árbol
+- ``rght``  (integer, signed) Utilizado para mantener la estructura en forma de árbol
 
 Usted puede configurar el nombre de esos campos. Encontrará más información sobre la significación de los campos y sobre la manera de utilizarlos en este artículo que describe la `MPTT logic <http://www.sitepoint.com/hierarchical-data-database-2/>`_
 
