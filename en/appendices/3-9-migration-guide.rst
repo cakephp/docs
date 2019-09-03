@@ -23,7 +23,7 @@ Datasource
 
 * ``Cake\Datasource\SimplePaginator`` was added. This class makes paginating
   very large results more efficient. It skips running the potentially expensive
-  ``count()`` query. If you don't only use 'next' and 'previous' navigation in
+  ``count()`` query. If you only use 'next' and 'previous' navigation in
   your pagination controls this class can be a good solution.
 
 ORM
