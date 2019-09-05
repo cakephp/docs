@@ -93,12 +93,6 @@ Conectando Rotas
 
 .. php:method:: connect($route, $defaults = [], $options = [])
 
-To keep your code :term:`DRY` you should use 'routing scopes'. Routing
-scopes not only let you keep your code DRY, they also help Router optimize its
-operation. This method defaults to the ``/`` scope. To create a scope and connect
-some routes we'll use the ``scope()`` method
-
-
 Para manter seu código :term:`DRY` você deve usar 'escopos de roteamento'. Os escopos de roteamento não apenas permitem que você mantenha seu código DRY, eles também ajudam o Router a otimizar sua operação. O método padrão é o escopo ``/``. Para criar um escopo e conectar algumas rotas, usaremos o método ``scope()``::
 
     // Em config/routes.php
@@ -328,12 +322,8 @@ Há várias opções de rotas que podem ser definidas individualmente. Após con
 Passando parâmetros para ação
 -----------------------------
 
-When connecting routes using :ref:`route-elements` you may want to have routed
-elements be passed arguments instead. The ``pass`` option whitelists which route
-elements should also be made available as arguments passed into the controller
-functions
-
 Ao conectar rotas usando :ref:`route-elements`, você pode querer que elementos roteados sejam passados por argumentos. A opção ``pass`` lista as permissões que elementos de rota também devem ser disponibilizados como argumentos passados para as funções do controlador::
+
 
     // src/Controller/BlogsController.php
     public function view($articleId = null, $slug = null)
@@ -404,9 +394,6 @@ Usando Rotas Nomeadas
     // com algumas cadeias de caracteres de consulta args.
     $url = Router::url(['_name' => 'login', 'username' => 'jimmy']);
 
-If your route template contains any route elements like ``:controller`` you'll
-need to supply those as part of the options to ``Router::url()``.
-
 Se o seu modelo de rota contiver elementos de rota como ``:controller``, você precisará fornecê-los como parte das opções para ``Router::url()``.
 
 .. note::
@@ -415,15 +402,14 @@ Se o seu modelo de rota contiver elementos de rota como ``:controller``, você p
     ``_name`` não pode ser usado duas vezes, mesmo que os nomes ocorram dentro de um 
     escopo de roteamento diferente.
 
-
 Ao criar rotas nomeadas, você provavelmente desejará seguir algumas convenções para os nomes das rotas. O CakePHP facilita a criação de nomes de rotas, permitindo definir prefixos de nomes em cada escopo:
-
 
     Router::scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
         // O nome desta rota será `api:ping`
         $routes->get('/ping', ['controller' => 'Pings'], 'ping');
     });
-    // Generate a URL for the ping route
+
+    // Gere uma URL para a rota de ping
     Router::url(['_name' => 'api:ping']);
 
     // Use namePrefix com plugin()
@@ -463,48 +449,37 @@ Prefix Routing
 
 .. php:staticmethod:: prefix($name, $callback)
 
-Many applications require an administration section where
-privileged users can make changes. This is often done through a
-special URL such as ``/admin/users/edit/5``. In CakePHP, prefix routing
-can be enabled by using the ``prefix`` scope method::
+Muitos aplicativos requerem uma seção de administração na qual usuários privilegiados podem fazer alterações. Isso geralmente é feito por meio de uma URL especial, como ``/admin/users/edit/5``. No CakePHP, o roteamento de prefixo pode ser ativado usando o método de escopo ``prefix``:
 
     use Cake\Routing\Route\DashedRoute;
 
     Router::prefix('admin', function ($routes) {
-        // All routes here will be prefixed with `/admin`
-        // And have the prefix => admin route element added.
+        // Todas as rotas aqui serão prefixadas com `/ admin` 
+        // e terão o elemento de rota prefix => admin adicionado.
         $routes->fallbacks(DashedRoute::class);
     });
 
-Prefixes are mapped to sub-namespaces in your application's ``Controller``
-namespace. By having prefixes as separate controllers you can create smaller and
-simpler controllers. Behavior that is common to the prefixed and non-prefixed
-controllers can be encapsulated using inheritance,
-:doc:`/controllers/components`, or traits.  Using our users example, accessing
-the URL ``/admin/users/edit/5`` would call the ``edit()`` method of our
-**src/Controller/Admin/UsersController.php** passing 5 as the first parameter.
-The view file used would be **src/Template/Admin/Users/edit.ctp**
+Os prefixos são mapeados para sub-namespaces no namespace ``Controller`` do seu aplicativo. Por ter prefixos como controladores separados, você pode criar controladores menores e mais simples. O comportamento comum aos controladores prefixados e não prefixados pode ser encapsulado usando herança, :doc:`/controllers/components` ou traits. Usando o exemplo de nossos usuários, acessar a URL ``/admin/users/edit/5`` chamaria o método ``edit()`` do nosso
+**src/Controller/Admin/UsersController.php** passando 5 como o primeiro parâmetro. O arquivo de visualização usado seria **src/Template/Admin/Users/edit.ctp**
 
-You can map the URL /admin to your ``index()`` action of pages controller using
-following route::
+Você pode mapear a URL /admin para sua ação ``index()`` do controlador de páginas usando a seguinte rota::
 
     Router::prefix('admin', function ($routes) {
-        // Because you are in the admin scope,
-        // you do not need to include the /admin prefix
-        // or the admin route element.
+        // Como você está no escopo do administrador, 
+        // não é necessário incluir o prefixo /admin 
+        // ou o elemento de rota do administrador.
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
     });
 
-When creating prefix routes, you can set additional route parameters using
-the ``$options`` argument::
+Ao criar rotas de prefixo, você pode definir parâmetros de rota adicionais usando o argumento ``$options``::
 
     Router::prefix('admin', ['param' => 'value'], function ($routes) {
-        // Routes connected here are prefixed with '/admin' and
-        // have the 'param' routing key set.
+        // As rotas conectadas aqui são prefixadas com '/admin' e 
+        // têm a chave de roteamento 'param' definida.
         $routes->connect('/:controller');
     });
 
-You can define prefixes inside plugin scopes as well::
+Você também pode definir prefixos dentro dos escopos de plugins:
 
     Router::plugin('DebugKit', function ($routes) {
         $routes->prefix('admin', function ($routes) {
@@ -512,10 +487,9 @@ You can define prefixes inside plugin scopes as well::
         });
     });
 
-The above would create a route template like ``/debug_kit/admin/:controller``.
-The connected route would have the ``plugin`` and ``prefix`` route elements set.
+O exemplo acima criaria um modelo de rota como ``/debug_kit/admin/:controller``. A rota conectada teria os elementos de rota ``plugin`` e ``prefix`` definidos.
 
-When defining prefixes, you can nest multiple prefixes if necessary::
+Ao definir prefixos, você pode aninhar vários prefixos, se necessário:
 
     Router::prefix('manager', function ($routes) {
         $routes->prefix('admin', function ($routes) {
@@ -523,23 +497,19 @@ When defining prefixes, you can nest multiple prefixes if necessary::
         });
     });
 
-The above would create a route template like ``/manager/admin/:controller``.
-The connected route would have the ``prefix`` route element set to
-``manager/admin``.
+O exemplo acima, criaria um modelo de rota como ``/manager/admin/:controller``. A rota conectada teria o elemento de rota ``prefix`` configurado como ``manager/admin``.
 
-The current prefix will be available from the controller methods through
-``$this->request->getParam('prefix')``
+O prefixo atual estará disponível nos métodos do controlador através de ``$this->request->getParam('prefix')``
 
-When using prefix routes it's important to set the prefix option. Here's how to
-build this link using the HTML helper::
+Ao usar rotas de prefixo, é importante definir a opção de prefixo. Veja como criar esse link usando o HTML Helper::
 
-    // Go into a prefixed route.
+    // Entre em uma rota prefixada.
     echo $this->Html->link(
         'Manage articles',
         ['prefix' => 'manager', 'controller' => 'Articles', 'action' => 'add']
     );
 
-    // Leave a prefix
+    // Deixe um prefixo
     echo $this->Html->link(
         'View Post',
         ['prefix' => false, 'controller' => 'Articles', 'action' => 'view', 5]
@@ -547,34 +517,32 @@ build this link using the HTML helper::
 
 .. note::
 
-    You should connect prefix routes *before* you connect fallback routes.
+    Você deve conectar rotas de prefixo *antes* de conectar rotas de fallback.
 
 .. index:: plugin routing
 
-Plugin Routing
---------------
+Roteamento de Plugins
+---------------------
 
 .. php:staticmethod:: plugin($name, $options = [], $callback)
 
-Routes for :doc:`/plugins` should be created using the ``plugin()``
-method. This method creates a new routing scope for the plugin's routes::
+As rotas para :doc:`/plugins` devem ser criadas usando o método ``plugin()``. Este método cria um novo escopo de roteamento para as rotas do plugin::
 
     Router::plugin('DebugKit', function ($routes) {
-        // Routes connected here are prefixed with '/debug_kit' and
-        // have the plugin route element set to 'DebugKit'.
+        // As rotas conectadas aqui são prefixadas com '/debug_kit' e 
+        // têm o elemento de rota do plug-in definido como 'DebugKit'.
         $routes->connect('/:controller');
     });
 
-When creating plugin scopes, you can customize the path element used with the
-``path`` option::
+Ao criar escopos de plug-in, você pode personalizar o caminho usando a opção ``path``:
 
     Router::plugin('DebugKit', ['path' => '/debugger'], function ($routes) {
-        // Routes connected here are prefixed with '/debugger' and
-        // have the plugin route element set to 'DebugKit'.
+        // As rotas conectadas aqui são prefixadas com '/debug_kit' e 
+        // têm o elemento de rota do plug-in definido como 'DebugKit'.
         $routes->connect('/:controller');
     });
 
-When using scopes you can nest plugin scopes within prefix scopes::
+Ao usar escopos, você pode aninhar escopos de plug-ins dentro de escopos de prefixo::
 
     Router::prefix('admin', function ($routes) {
         $routes->plugin('DebugKit', function ($routes) {
@@ -582,43 +550,33 @@ When using scopes you can nest plugin scopes within prefix scopes::
         });
     });
 
-The above would create a route that looks like ``/admin/debug_kit/:controller``.
-It would have the ``prefix``, and ``plugin`` route elements set. The
-:ref:`plugin-routes` section has more information on building plugin routes.
+O exemplo acima criaria uma rota parecida com ``/admin/debug_kit/:controller``. Teria o conjunto de elementos de rota ``prefix`` e ``plugin``. A seção :ref:`plugin-routes` possui mais informações sobre a construção de rotas para plugins.
 
-Creating Links to Plugin Routes
--------------------------------
+Criando links para rotas de plugins
+-----------------------------------
 
-You can create links that point to a plugin, by adding the plugin key to your
-URL array::
+Você pode criar links que apontam para um plug-in, adicionando a chave do plug-in a seu array de URL::
 
     echo $this->Html->link(
         'New todo',
         ['plugin' => 'Todo', 'controller' => 'TodoItems', 'action' => 'create']
     );
 
-Conversely if the active request is a plugin request and you want to create
-a link that has no plugin you can do the following::
+Por outro lado, se a solicitação ativa for uma solicitação de plug-in e você desejar criar um link que não possua plug-in, faça o seguinte:
 
     echo $this->Html->link(
         'New todo',
         ['plugin' => null, 'controller' => 'Users', 'action' => 'profile']
     );
 
-By setting ``'plugin' => null`` you tell the Router that you want to
-create a link that is not part of a plugin.
+Ao definir ``'plugin' => null``, você diz ao roteador que deseja criar um link que não faça parte de um plug-in.
 
-SEO-Friendly Routing
---------------------
+Roteamento otimizado para SEO
+-----------------------------
 
-Some developers prefer to use dashes in URLs, as it's perceived to give
-better search engine rankings. The ``DashedRoute`` class can be used in your
-application with the ability to route plugin, controller, and camelized action
-names to a dashed URL.
+Alguns desenvolvedores preferem usar hífens nos URLs, pois é percebido que eles fornecem melhores classificações nos mecanismos de pesquisa. A classe ``DashedRoute`` pode ser usada em seu aplicativo com a capacidade de rotear nomes de plugins, controladores e ações "camelizadas" para uma URL tracejada.
 
-For example, if we had a ``ToDo`` plugin, with a ``TodoItems`` controller, and a
-``showItems()`` action, it could be accessed at ``/to-do/todo-items/show-items``
-with the following router connection::
+Por exemplo, se tivéssemos um plugin ``ToDo``, com um controlador ``TodoItems`` e uma ação ``showItems()``, ele poderia ser acessado em ``/to-do/todo-items/show-items`` com a seguinte conexão do roteador::
 
     use Cake\Routing\Route\DashedRoute;
 
@@ -626,20 +584,20 @@ with the following router connection::
         $routes->fallbacks(DashedRoute::class);
     });
 
-Matching Specific HTTP Methods
-------------------------------
+Correspondendo a métodos HTTP específicos
+-----------------------------------------
 
-Routes can match specific HTTP methods using the HTTP verb helper methods::
+As rotas podem corresponder a métodos HTTP específicos usando os métodos auxiliares de verbo HTTP:
 
     Router::scope('/', function($routes) {
-        // This route only matches on POST requests.
+        // Esta rota corresponde apenas às solicitações POST.
         $routes->post(
             '/reviews/start',
             ['controller' => 'Reviews', 'action' => 'start']
         );
 
-        // Match multiple verbs
-        // Prior to 3.5 use $options['_method'] to set method
+        // Corresponder vários verbos 
+        // Antes do 3.5, use $options['_method'] para definir o método
         $routes->connect(
             '/reviews/start',
             [
@@ -649,10 +607,7 @@ Routes can match specific HTTP methods using the HTTP verb helper methods::
         )->setMethods(['POST', 'PUT']);
     });
 
-You can match multiple HTTP methods by using an array. Because the ``_method``
-parameter is a routing key, it participates in both URL parsing and URL
-generation. To generate URLs for method specific routes you'll need to include
-the ``_method`` key when generating the URL::
+Você pode combinar vários métodos HTTP usando uma matriz. Como o parâmetro ``_method`` é uma chave de roteamento, ele participa da análise e geração de URLs. Para gerar URLs para rotas específicas de métodos, você precisará incluir a chave ``_method`` ao gerar a URL:
 
     $url = Router::url([
         'controller' => 'Reviews',
@@ -660,39 +615,35 @@ the ``_method`` key when generating the URL::
         '_method' => 'POST',
     ]);
 
-Matching Specific Hostnames
----------------------------
+Nomes de host específicos correspondentes
+-----------------------------------------
 
-Routes can use the ``_host`` option to only match specific hosts. You can use
-the ``*.`` wildcard to match any subdomain::
+As rotas podem usar a opção ``_host`` para corresponder apenas a hosts específicos. Você pode usar o curinga ``*.`` para corresponder a qualquer subdomínio::
 
     Router::scope('/', function($routes) {
-        // This route only matches on http://images.example.com
-        // Prior to 3.5 use the _host option
+        // Esta rota corresponde apenas a http://images.example.com 
+        // Antes da versão 3.5, use a opção _host
         $routes->connect(
             '/images/default-logo.png',
             ['controller' => 'Images', 'action' => 'default']
         )->setHost('images.example.com');
 
-        // This route only matches on http://*.example.com
+        // Esta rota corresponde apenas a http://*.example.com
         $routes->connect(
             '/images/old-log.png',
             ['controller' => 'Images', 'action' => 'oldLogo']
         )->setHost('images.example.com');
     });
 
-The ``_host`` option is also used in URL generation. If your ``_host`` option
-specifies an exact domain, that domain will be included in the generated URL.
-However, if you use a wildcard, then you will need to provide the ``_host``
-parameter when generating URLs::
+A opção ``_host`` também é usada na geração de URL. Se a opção ``_host`` especificar um domínio exato, esse domínio será incluído no URL gerado. No entanto, se você usar um curinga, precisará fornecer o parâmetro ``_host`` ao gerar URLs:
 
-    // If you have this route
+    // Se você tem esta rota
     $routes->connect(
         '/images/old-log.png',
         ['controller' => 'Images', 'action' => 'oldLogo']
     )->setHost('images.example.com');
 
-    // You need this to generate a url
+    // Você precisa disso para gerar um URL
     echo Router::url([
         'controller' => 'Images',
         'action' => 'oldLogo',
@@ -700,28 +651,26 @@ parameter when generating URLs::
     ]);
 
 .. versionadded:: 3.4.0
-    The ``_host`` option was added in 3.4.0
+    A opção `` _host`` foi adicionada na versão 3.4.0
 
 .. index:: file extensions
 .. _file-extensions:
 
-Routing File Extensions
------------------------
+Extensões de arquivo de roteamento
+----------------------------------
 
 .. php:staticmethod:: extensions(string|array|null $extensions, $merge = true)
 
-To handle different file extensions with your routes, you can define extensions
-on a global, as well as on a scoped level. Defining global extensions can be
-achieved via the routers static :php:meth:`Router::extensions()` method::
+Para lidar com diferentes extensões de arquivo com suas rotas, você pode definir extensões 
+em nível global e de escopo. A definição de extensões globais 
+pode ser obtida através do método estático :php:meth:`Router::extensions()` dos roteadores::
 
     Router::extensions(['json', 'xml']);
     // ...
 
-This will affect **all** routes that are being connected **afterwards**, no matter
-their scope.
+Isso afetará **todas** as rotas que serão conectadas **posteriormente**, independentemente do seu escopo.
 
-In order to restrict extensions to specific scopes, you can define them using the
-:php:meth:`Cake\\Routing\\RouteBuilder::setExtensions()` method::
+Para restringir extensões a escopos específicos, você pode defini-las usando o método :php:meth:`Cake\\Routing\\RouteBuilder::setExtensions()`::
 
     Router::scope('/', function ($routes) {
         // Prior to 3.5.0 use `extensions()`
