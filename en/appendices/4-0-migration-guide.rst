@@ -164,6 +164,9 @@ Http
   a cookie that doesn't exist. Use ``has()`` to check for cookie existence.
 * The signature of ``Cake\Http\ResponseEmitter::emit()`` has changed, it no longer
   has the 2nd argument.
+* The default value of ``App.mergeFilesAsObjects`` is now ``true``. If your
+  application uses file uploads you can set this flag to ``false`` to retain
+  compatibility with the behavior in 3.x.
 
 I18n
 ----

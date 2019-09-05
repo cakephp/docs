@@ -449,8 +449,8 @@ to work with cookie collection.
 Uploaded Files
 --------------
 
-Requests expose the uploaded file data in ``getData()`` as
-arrays, and as ``UploadedFileInterface`` objects by ``getUploadedFiles()``::
+Requests expose the uploaded file data in ``getData()`` or
+``getUploadedFiles()`` as ``UploadedFileInterface`` objects::
 
     // Get a list of UploadedFile objects
     $files = $request->getUploadedFiles();
