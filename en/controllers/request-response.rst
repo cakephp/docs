@@ -129,9 +129,10 @@ be accessed like this::
 
     $attachment = $this->request->getData('MyModel.attachment');
 
-By default file uploads are represented in the request data as arrays, with a normalized structure as known from the
-``$_FILES`` superglobal (refer to `the PHP manual <https://www.php.net/manual/en/features.file-upload.php>`__ for more
-information), ie the ``$attachment`` value would look something like this::
+By default file uploads are represented in the request data as arrays, with a normalized structure that remains the same
+even for nested inputs/names, which is different from how PHP represents them in the ``$_FILES`` superglobal (refer to
+`the PHP manual <https://www.php.net/manual/en/features.file-upload.php>`__ for more information), ie the
+``$attachment`` value would look something like this::
 
     [
         'name' => 'attachment.txt',
