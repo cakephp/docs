@@ -39,3 +39,10 @@ Utility
 -------
 
 * ``Hash::sort()`` now accepts the ``SORT_ASC`` and ``SORT_DESC`` constants in the direction parameter.
+
+Validation
+----------
+
+* The 'empty' field detection in ``Validator`` now considers
+  ``UploadedFileInterface`` objects that have ``UPLOAD_ERR_NO_FILE`` as their
+  error code to be empty.
