@@ -100,6 +100,15 @@ App.paths
     Configure paths for non class based resources. Supports the
     ``plugins``, ``templates``, ``locales`` subkeys, which allow the definition
     of paths for plugins, view templates and locale files respectively.
+App.uploadedFilesAsObjects
+    Defines whether uploaded files are being represented as objects (``true``),
+    or arrays (``false``). This option is being treated as disabled by default.
+    See the :ref:`File Uploads section <request-file-uploads>` in the Request &
+    Response Objects chapter for more information.
+
+    .. versionadded:: 3.9.0
+        Support for uploaded files as objects in the request data was added in
+        version 3.9.0
 Security.salt
     A random string used in hashing. This value is also used as the
     HMAC salt when doing symetric encryption.
