@@ -720,6 +720,17 @@ name::
 In the above example, both fixtures would be loaded from
 ``tests/Fixture/Blog/``.
 
+An alternative of defining `$fixtures` property is to define `getFixtures()` method instead what prevents `$fixtures` property to be leaked in memory between unit tests:
+
+    class ArticlesTest extends TestCase
+    {
+        public function getFixtures() 
+        { 
+            return ['app.Articles', 'app.Comments'];
+        }
+    }
+    
+
 Testing Table Classes
 =====================
 
