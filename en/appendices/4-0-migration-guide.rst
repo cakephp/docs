@@ -70,6 +70,11 @@ Mailer
 * The ``Cake\Mailer\Email`` class has been deprecated. Use ``Cake\Mailer\Mailer``
   instead.
 
+App
+---
+* The 2nd argument ``$plugin`` of ``App::path()`` is deprecated.
+  Use ``\Cake\Core\Plugin::classPath()/templatePath()`` instead for plugin paths.
+
 Breaking Changes
 ================
 
@@ -264,6 +269,9 @@ Helper
 Miscellaneous
 -------------
 
+* ``App::path()`` now uses ``$type`` ``templates`` instead of ``Template`` to
+  get templates path. Similarly ``locales`` is used instead of ``Locale`` to
+  get path to locales folder.
 * ``ObjectRegistry::get()`` now throws exception if object with provided name is not loaded.
   You should use ``ObjectRegistry::has()`` to ensure that the object exists in registry.
   The magic getter ``ObjectRegistry::__get()`` will continue to return ``null`` if object
