@@ -13,7 +13,7 @@ Finding Classes
 .. php:staticmethod:: className($name, $type = '', $suffix = '')
 
 This method is used to resolve class names throughout CakePHP. It resolves
-the short form names CakePHP uses and returns the fully resolved className::
+the short form names CakePHP uses and returns the fully resolved class name::
 
     // Resolve a short className with the namespace + suffix.
     App::className('Auth', 'Controller/Component', 'Component');
