@@ -292,9 +292,15 @@ When the above data is converted into entities, you will have 4 tags. The first
 two will be new objects, and the second two will be references to existing
 records.
 
-When converting belongsToMany data, you can disable the new entity creation, by
-using the ``onlyIds`` option. When enabled, this option restricts belongsToMany
-marshalling to only use the ``_ids`` key and ignore all other data.
+When converting belongsToMany data, you can disable entity creation, by
+using the ``onlyIds`` option::
+
+    $result = $articles->patchEntity($entity, $data, [
+        'associated' => ['Tags' => ['onlyIds' => true]],
+    ]);
+
+When used, this option restricts belongsToMany association marshalling to only
+use the ``_ids`` data.
 
 .. versionadded:: 3.1.0
     The ``onlyIds`` option was added in 3.1.0
