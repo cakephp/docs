@@ -264,7 +264,8 @@ Helper
   message for methods which have the ``confirm`` option.
 * ``Cake\View\Helper\FormHelper::button()`` now HTML entity encodes the button
   text and HTML attributes by default. A new option ``escapeTitle`` has been
-  added to allow controlling escaping the title separately from other HTML attributes.
+  added to allow controlling escaping the title separately from other HTML
+  attributes.
 
 Miscellaneous
 -------------
@@ -293,10 +294,11 @@ Console
 Table
 -----
 
-* ``Table::newEmptyEntity()`` has been added to create a new and empty entity object.
-  This does not trigger any field validation. The entity can be persisted without validation
-  error as an empty record. ``Table::newEntity()`` now requires an array as input and enforces
-  validation to prevent accidental saves without validation being triggered.
+* ``Table::newEmptyEntity()`` has been added to create a new and empty entity
+  object.  This does not trigger any field validation. The entity can be
+  persisted without validation error as an empty record. ``Table::newEntity()``
+  now requires an array as input and enforces validation to prevent accidental
+  saves without validation being triggered.
 
 Database
 --------
@@ -316,14 +318,6 @@ Database
   implemented by fixture implementations that support constraints, which from
   our experience is generally relational databases.
 
-ORM
----
-
-* ``Table::saveManyOrFail()`` method has been added that will throw ``PersistenceFailedException``
-  with the specific entity that failed in case of an error. The entities are saved transaction safe.
-* ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been added for removing many
-  entities at once including callbacks. The entities are removed transaction safe.
-
 Error
 -----
 
@@ -340,15 +334,34 @@ Http
 * ``Cake\Http\Client`` now follows `PSR-18: HTTP Client <https://www.php-fig.org/psr/psr-18/>`__ specifications.
 * ``Cake\Http\Client\Response::isSuccess()`` was added. This method returns true
   if the response status code is 2xx.
-* ``CspMiddleware`` was added to make defining Content Security Policy headers simpler.
+* ``CspMiddleware`` was added to make defining Content Security Policy headers
+  simpler.
 
 Mailer
 ------
 
-* Email message generation responsibility has now been transferred to ``Cake\Mailer\Renderer``.
-  This is mainly an architectural change and doesn't impact how
-  ``Email`` class is used. The only difference is that you now need to use ``Email::setViewVars()``
-  instead of ``Email::set()`` to set template variables.
+* Email message generation responsibility has now been transferred to
+  ``Cake\Mailer\Renderer``.  This is mainly an architectural change and doesn't
+  impact how ``Email`` class is used. The only difference is that you now need
+  to use ``Email::setViewVars()`` instead of ``Email::set()`` to set template
+  variables.
+
+ORM
+---
+
+* ``Table::saveManyOrFail()`` method has been added that will throw
+  ``PersistenceFailedException`` with the specific entity that failed in case of
+  an error. The entities are saved transaction safe.
+* ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been
+  added for removing many entities at once including callbacks. The entities are
+  removed transaction safe.
+
+Routing
+-------
+
+* ``Cake\Routing\Asset`` was added. This class exposes asset URL generation in
+  a static interface similar to ``Router::url()``. See :ref:`asset-routing` for
+  more information.
 
 TestSuite
 ---------
