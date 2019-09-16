@@ -1316,7 +1316,7 @@ The above methods also accept an array of options as their second parameter:
 
     // Generates /img/logo.png?1568563625
     // Where the timestamp is the last modified time of the file.
-    $img = Asset::url('logo.png', ['fullBase' => true]);
+    $img = Asset::url('logo.png', ['timestamp' => true]);
 
 To generate asset URLs for files in plugins use :term:`plugin syntax`::
 
