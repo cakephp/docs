@@ -1544,9 +1544,9 @@ to your form's view template file::
     default values into input fields of type 'file'. Each time the form
     is displayed, the value inside will be empty.
 
-To prevent the ``submittedfile`` from being over-written as blank, remove it from ``$_accessible``.
-Alternatively, you can unset the index by using ``beforeMarshal``::
-
+To prevent the ``submittedfile`` from being over-written as blank, remove it
+from ``$_accessible``.  Alternatively, you can unset the index by using
+``beforeMarshal``::
 
     public function beforeMarshal(\Cake\Event\Event $event, \ArrayObject $data, \ArrayObject $options)
     {
@@ -1556,14 +1556,15 @@ Alternatively, you can unset the index by using ``beforeMarshal``::
     }
 
 
-Upon submission, file fields provides a PSR7 object to the script receiving the form data.
-
-To upload files to a location other than the default storage folder (**/tmp/**), you can use::
-
+Upon submission, file fields can be accessed though ``UploadedFileInterface``
+objects on the request. To move uploaded files to a permanent location, you can
+use::
 
     $fileobject = $this->request->getData('submittedfile');
-    $destination = <path-to-upload> . $fileobject->getClientFilename();
-    $fileobject->moveTo($destination); // Same name files will be over-written without warning.
+    $destination = UPLOAD_DIRECTORY . $fileobject->getClientFilename();
+
+    // Existing files with the same name will be replaced.
+    $fileobject->moveTo($destination);
 
 .. note::
 
