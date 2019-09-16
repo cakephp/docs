@@ -266,7 +266,7 @@ pastry\_stores, and savory\_cakes.
     If your MySQL server is configured with ``skip-character-set-client-handshake``
     then you MUST use the ``flags`` config to set your charset encoding. For e.g.::
 
-    ``'flags' => [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']``
+        'flags' => [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']
 
 .. php:namespace:: Cake\Datasource
 
