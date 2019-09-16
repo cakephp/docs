@@ -1558,7 +1558,8 @@ Alternatively, you can unset the index by using ``beforeMarshal``::
 
 Upon submission, file fields provides a PSR7 object to the script receiving the form data.
 
-To upload files to a location other than the default storage folder (/tmp/), you can use:
+To upload files to a location other than the default storage folder (**/tmp/**), you can use::
+
 
     $fileobject = $this->request->getData('submittedfile');
     $destination = <path-to-upload> . $fileobject->getClientFilename();
