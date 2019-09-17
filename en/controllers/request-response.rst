@@ -873,10 +873,17 @@ To take advantage of this header, you must either call the
     public function index()
     {
         $articles = $this->Articles->find('all');
-        $response = $this->response->withEtag($this->Articles->generateHash($articles));
+
+        // Simple checksum of the article contents.
+        // You should use a more efficient implementation
+        // in a real world application.
+        $checksum = md5(json_encode($articles));
+
+        $response = $this->response->withEtag($checksum);
         if ($response->checkNotModified($this->request)) {
             return $response;
         }
+
         $this->response = $response;
         // ...
     }
