@@ -73,11 +73,6 @@ in the controller.
 
     * 'auth' Indicates a form validation error, or a controller/action mismatch
       error.
-    * 'csrf' Indicates a CSRF error.
-    * 'get' Indicates an HTTP method restriction failure.
-    * 'post' Indicates an HTTP method restriction failure.
-    * 'put' Indicates an HTTP method restriction failure.
-    * 'delete' Indicates an HTTP method restriction failure.
     * 'secure' Indicates an SSL method restriction failure.
 
 Restricting HTTP methods
