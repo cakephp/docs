@@ -126,6 +126,8 @@ Database
   you will need to update your code.
 * The internals of ``Cake\Database\Schema\CacheCollection`` and ``Cake\Database\SchemaCache``
   have changed. If you extend these classes you will need to update your code.
+* The ORM now maps ``CHAR`` columns to the new ``char`` type instead of
+  ``string``.
 
 Datasources
 -----------
@@ -315,6 +317,8 @@ Database
   ``Cake\Datasource\FixtureInterface``. This interface should be
   implemented by fixture implementations that support constraints, which from
   our experience is generally relational databases.
+* The ``char`` abstract type was added. This type handles fixed length string
+  columns.
 
 ORM
 ---
