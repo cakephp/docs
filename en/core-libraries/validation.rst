@@ -130,8 +130,8 @@ An example of these methods in action is::
 
     // Prior to 3.7 you must use allowEmpty() or notEmpty().
     $validator->allowEmptyDateTime('published')
-        ->allowEmptyString('title', false, 'Title cannot be empty')
-        ->allowEmptyString('body', 'update', 'Body cannot be empty')
+        ->allowEmptyString('title', 'Title cannot be empty', false)
+        ->allowEmptyString('body', 'Body cannot be empty', 'update')
         ->allowEmptyFile('header_image', 'update');
         ->allowEmptyDateTime('posted', 'update');
 
