@@ -13,6 +13,12 @@ To upgrade to 3.9.x run the following composer command:
 New Features
 ============
 
+Cache
+-----
+
+* ``MemcachedEngine::write()`` and ``add()`` no longer cap duration to 30 days.
+  Instead all expiration values are forwarded to memcache.
+
 Console
 -------
 
