@@ -73,6 +73,32 @@ Attribute Matching Types
 |                                | the regular expression inside ``...``.     |
 +--------------------------------+--------------------------------------------+
 
+    Use matchers by appending them to the expression element (``{n}``, ``{s}``, etc.) you wish to match.
+    
+    So to return ``id`` fields where a ``name`` matches you can use paths using ``{n}`` and ``{s}`` to insert data into multiple
+    points::
+
+        $users = Array(
+             Array(
+                'id' => 123,
+                'name'=> 'fred',
+                'surname' => 'bloggs'
+             ),
+             Array(
+                'id' => 245,
+                'name' => 'fred',
+                'surname' => 'smith'
+             ),
+             Array(
+                'id' => 356,
+                'name' => 'joe',
+                'surname' => 'smith'
+              )
+           );     
+        $ids = Hash::extract($users, '{n}[name=fred].id');
+        // $ids will be array (123, 245)
+
+
 .. versionchanged:: 2.5
     Matcher support was added to ``insert()`` and ``remove()``.
 
