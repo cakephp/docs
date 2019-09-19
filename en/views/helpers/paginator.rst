@@ -347,18 +347,16 @@ Checking the Pagination State
 Creating a Page Counter
 =======================
 
-.. php:method:: counter($options = [])
+.. php:method:: counter(string $format = 'pages', array $options = [])
 
 Returns a counter string for the paged result set. Using a provided format
 string and a number of options you can create localized and application
 specific indicators of where a user is in the paged data set.
 
-There are a number of options for ``counter()``. The supported ones are:
 
-* ``format`` Format of the counter. Supported formats are 'range', 'pages'
-  and custom. Defaults to pages which would output like '1 of 10'. In the
-  custom mode the supplied string is parsed and tokens are replaced with
-  actual values. The available tokens are:
+Supported formats are 'range', 'pages' and custom. Defaults to pages which would
+output like '1 of 10'. In the custom mode the supplied string is parsed and
+tokens are replaced with actual values. The available tokens are:
 
   -  ``{{page}}`` - the current page displayed.
   -  ``{{pages}}`` - total number of pages.
@@ -379,9 +377,7 @@ There are a number of options for ``counter()``. The supported ones are:
 
   Setting 'format' to range would output like '1 - 3 of 13'::
 
-      echo $this->Paginator->counter([
-          'format' => 'range'
-      ]);
+      echo $this->Paginator->counter('range');
 
 * ``model`` The name of the model being paginated, defaults to
   :php:meth:`PaginatorHelper::defaultModel()`. This is used in
