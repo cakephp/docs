@@ -75,7 +75,7 @@ Attribute Matching Types
 
 Use matchers by appending them to the expression element (``{n}``, ``{s}``, etc.) you wish to match.
     
-    So to return ``id`` fields where a ``name`` matches you can use paths using ``{n}`` and ``{s}`` to insert data into multiple
+So to return ``id`` fields where a ``name`` matches you can use paths using ``{n}`` and ``{s}`` to insert data into multiple
     points::
 
         $users = Array(
