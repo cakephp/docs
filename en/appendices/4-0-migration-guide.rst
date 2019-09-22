@@ -206,6 +206,11 @@ Router
 * ``Router::plugin()`` and ``Router::prefix()`` now use plugin/prefix name in
   dasherized form in URL by default. You can retain underscored from (or any other
   custom path) by using ``'path'`` key in ``$options`` argument.
+* ``Router`` maintains reference to only a single instance of request now instead
+  of a stack of requests. ``Router::pushRequest()``, ``Router::setRequestInfo()``
+  and ``Router::setRequestContext()`` have been removed, use ``Router::setRequest()``
+  instead. ``Router::popRequest()`` has been removed. ``Router::getRequest()``
+  no longer has a ``$current`` argument.
 
 TestSuite
 ---------
