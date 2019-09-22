@@ -98,6 +98,16 @@ Controller
   For example if your controller method is ``forgotPassword()`` then using string
   ``forgotpassword`` in URL will not match as action name.
 
+Component
+---------
+
+* ``Cake\Controller\Component\RequestHandlerComponent`` now sets ``isAjax`` as a
+  request attribute instead of request param. Hence once should now use
+  ``$request->getAttribute('isAjax')`` instead of ``$request->getParam('isAjax')``.
+* ``Cake\Controller\Component\PagingComponent`` now sets paging params info as
+   request attribute instead of request param. Hence once should now use
+  ``$request->getAttribute('paging')`` instead of ``$request->getParam('paging')``.
+
 Database
 --------
 
