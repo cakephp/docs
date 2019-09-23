@@ -105,7 +105,7 @@ Component
   request attribute instead of request param. Hence once should now use
   ``$request->getAttribute('isAjax')`` instead of ``$request->getParam('isAjax')``.
 * ``Cake\Controller\Component\PagingComponent`` now sets paging params info as
-   request attribute instead of request param. Hence once should now use
+   request attribute instead of request param. Hence you should now use
   ``$request->getAttribute('paging')`` instead of ``$request->getParam('paging')``.
 
 Database
