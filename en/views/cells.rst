@@ -244,7 +244,7 @@ messages could look like::
                 ]
             );
 
-            $paging = $paginator->getPagingParams() + (array)$request->getParam('paging');
+            $paging = $paginator->getPagingParams() + (array)$this->request->getParam('paging');
             $this->request = $this->request->withParam('paging', $paging));
 
             $this->set('favorites', $results);
