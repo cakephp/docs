@@ -292,8 +292,6 @@ Il y a plusieurs détecteurs intégrés que vous pouvez utiliser :
   X-Requested-With = XMLHttpRequest.
 * ``is('ssl')`` Vérifie si la requête courante est via SSL.
 * ``is('flash')`` Vérifie si la requête courante a un User-Agent de Flash.
-* ``is('requested')`` Vérifie si la requête a un paramètre de requête
-  'requested' avec la valeur 1.
 * ``is('json')`` Vérifie si la requête a l'extension 'json' ajoutée et si elle
   accepte le mimetype 'application/json'.
 * ``is('xml')`` Vérifie si la requête a l'extension 'xml' ajoutée et si elle

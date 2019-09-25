@@ -269,8 +269,6 @@ There are several built-in detectors that you can use:
   X-Requested-With = XMLHttpRequest.
 * ``is('ssl')`` Check to see whether the request is via SSL.
 * ``is('flash')`` Check to see whether the request has a User-Agent of Flash.
-* ``is('requested')`` Check to see whether the request has a query param
-  'requested' with value 1.
 * ``is('json')`` Check to see whether the request has 'json' extension and
   accept 'application/json' mimetype.
 * ``is('xml')`` Check to see whether the request has 'xml' extension and accept
