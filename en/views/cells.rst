@@ -241,8 +241,8 @@ messages could look like::
                 ]
             );
 
-            $paging = $paginator->getPagingParams() + (array)$request->getParam('paging');
-            $this->request = $this->request->withParam('paging', $paging));
+            $paging = $paginator->getPagingParams() + (array)$this->request->getAttribute('paging');
+            $this->request = $this->request->withAttribute('paging', $paging));
 
             $this->set('favorites', $results);
         }
