@@ -267,7 +267,6 @@ post 形式でデータを交換することがしばしばあります。 :php:
   に由来するものかどうかを調べます。
 * ``is('ssl')`` リクエストが SSL 経由かどうかを調べます。
 * ``is('flash')`` リクエストに Flash の User-Agent があるかどうかを調べます。
-* ``is('requested')`` リクエストに、値が１のクエリーパラメーター 「requested」があるかどうかを調べます。
 * ``is('json')`` リクエストに 「json」 の拡張子を持ち 「application/json」
   MIME タイプを受付けるかどうかを調べます。
 * ``is('xml')`` リクエストが 「xml」拡張子を持ち、「application/xml」または「text/xml」
