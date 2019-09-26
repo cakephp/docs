@@ -10,6 +10,12 @@ To upgrade to 3.9.x run the following composer command:
 
     php composer.phar require --update-with-dependencies "cakephp/cakephp:3.9.*"
 
+Deprecations
+============
+
+* ``ConsoleIo::info()``, ``success()``,  ``warning()`` and ``error()`` will no
+  longer accept ``null`` values in the ``message`` parameter in 4.0.
+
 New Features
 ============
 
