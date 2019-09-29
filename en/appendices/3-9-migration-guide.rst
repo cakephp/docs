@@ -15,6 +15,9 @@ Deprecations
 
 * ``ConsoleIo::info()``, ``success()``,  ``warning()`` and ``error()`` will no
   longer accept ``null`` values in the ``message`` parameter in 4.0.
+* Using a comma separated string for ``$fixtures`` in test cases is deprecated.
+  Instead use an array, or implement the new ``getFixtures()`` method on your
+  test case classes.
 
 New Features
 ============
@@ -46,6 +49,12 @@ ORM
 * ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been added for removing many
   entities at once including callbacks. The entities are removed within a transaction.
 * ``TableLocator::clear()`` now resets the internal ``options`` array.
+
+TestSuite
+---------
+
+* ``TestCase::getFixtures()`` was added. This method lets you generate your
+  fixture list using application specific logic if necessary.
 
 Utility
 -------
