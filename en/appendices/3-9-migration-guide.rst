@@ -67,3 +67,9 @@ Validation
 * The 'empty' field detection in ``Validator`` now considers
   ``UploadedFileInterface`` objects that have ``UPLOAD_ERR_NO_FILE`` as their
   error code to be empty.
+
+View
+----
+
+* ``FormHelper`` had the ``selectedClass`` template variable added. This template
+  key controls the class name used when a radio or checkbox is selected.
