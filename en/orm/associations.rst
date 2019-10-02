@@ -204,10 +204,10 @@ If you want to break different addresses into multiple associations, you can do 
 
 Possible keys for hasOne association arrays include:
 
-- **className**: the class name of the table being associated to the current
+- **className**: The class name of the table being associated to the current
   model. If you're defining a 'User hasOne Address' relationship, the className
   key should equal 'Addresses'.
-- **foreignKey**: the name of the foreign key found in the other table. This is
+- **foreignKey**: The name of the foreign key found in the other table. This is
   especially handy if you need to define multiple hasOne relationships. The
   default value for this key is the underscored, singular name of the current
   model, suffixed with '\_id'. In the example above it would default to
@@ -215,9 +215,9 @@ Possible keys for hasOne association arrays include:
 - **bindingKey**: The name of the column in the current table, that will be used
   for matching the ``foreignKey``. If not specified, the primary key (for
   example the id column of the ``Users`` table) will be used.
-- **conditions**: an array of find() compatible conditions such as
+- **conditions**: An array of find() compatible conditions such as
   ``['Addresses.primary' => true]``
-- **joinType**: the type of the join to use in the SQL query, default
+- **joinType**: The type of the join to use in the SQL query, default
   is LEFT. You can use INNER if your hasOne association is always present.
 - **dependent**: When the dependent key is set to ``true``, and an entity is
   deleted, the associated model records are also deleted. In this case we set it
@@ -301,19 +301,19 @@ We can also define a more specific relationship using the setters::
 
 Possible keys for belongsTo association arrays include:
 
-- **className**: the class name of the model being associated to the current
+- **className**: The class name of the model being associated to the current
   model. If you're defining a 'Profile belongsTo User' relationship, the
   className key should equal 'Users'.
-- **foreignKey**: the name of the foreign key found in the current table. This
+- **foreignKey**: The name of the foreign key found in the current table. This
   is especially handy if you need to define multiple belongsTo relationships to
   the same model. The default value for this key is the underscored, singular
   name of the other model, suffixed with ``_id``.
 - **bindingKey**: The name of the column in the other table, that will be used
   for matching the ``foreignKey``. If not specified, the primary key (for
   example the id column of the ``Users`` table) will be used.
-- **conditions**: an array of find() compatible conditions or SQL strings such
+- **conditions**: An array of find() compatible conditions or SQL strings such
   as ``['Users.active' => true]``
-- **joinType**: the type of the join to use in the SQL query, default is LEFT
+- **joinType**: The type of the join to use in the SQL query, default is LEFT
   which may not fit your needs in all situations, INNER may be helpful when you
   want everything from your main and associated models or nothing at all.
 - **propertyName**: The property name that should be filled with data from the
@@ -415,10 +415,10 @@ table and ``bindingKey`` values refers to the **articles** table.
 
 Possible keys for hasMany association arrays include:
 
-- **className**: the class name of the model being associated to
+- **className**: The class name of the model being associated to
   the current model. If you're defining a 'User hasMany Comment'
   relationship, the className key should equal 'Comments'.
-- **foreignKey**: the name of the foreign key found in the other
+- **foreignKey**: The name of the foreign key found in the other
   table. This is especially handy if you need to define multiple
   hasMany relationships. The default value for this key is the
   underscored, singular name of the actual model, suffixed with
@@ -428,7 +428,7 @@ Possible keys for hasMany association arrays include:
   example the id column of the ``Articles`` table) will be used.
 - **conditions**: an array of find() compatible conditions or SQL
   strings such as ``['Comments.visible' => true]``
-- **sort**: an array of find() compatible order clauses or SQL
+- **sort**: An array of find() compatible order clauses or SQL
   strings such as ``['Comments.created' => 'ASC']``
 - **dependent**: When dependent is set to ``true``, recursive model
   deletion is possible. In this example, Comment records will be
@@ -560,7 +560,7 @@ We can also define a more specific relationship using configuration::
 
 Possible keys for belongsToMany association arrays include:
 
-- **className**: the class name of the model being associated to
+- **className**: The class name of the model being associated to
   the current model. If you're defining a 'Article belongsToMany Tag'
   relationship, the className key should equal 'Tags'.
 - **joinTable**: The name of the join table used in this
@@ -578,7 +578,7 @@ Possible keys for belongsToMany association arrays include:
   model found on the join model, or list in case of composite foreign keys.
   The default value for this key is the underscored, singular name of
   the target model, suffixed with '\_id'.
-- **conditions**: an array of ``find()`` compatible conditions.  If you have
+- **conditions**: An array of ``find()`` compatible conditions.  If you have
   conditions on an associated table, you should use a 'through' model, and
   define the necessary belongsTo associations on it.
 - **sort**: an array of find() compatible order clauses.
