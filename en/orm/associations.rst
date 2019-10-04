@@ -61,7 +61,7 @@ You can also use arrays to customize your associations::
        'propertyName' => 'person'
    ]);
 
-Arrays, however, do not offer the typehinting and autocomplete benefit, the fluent interface does.
+However, arrays do not offer the typehinting and autocomplete benefits that the fluent interface does.
 
 The same table can be used multiple times to define different types of
 associations. For example consider a case where you want to separate
@@ -127,12 +127,12 @@ the values will be treated as association aliases.
 HasOne Associations
 ===================
 
-Let's set up a Users Table with a hasOne relationship to an Addresses Table.
+Let's set up a Users table with a hasOne relationship to the Addresses table.
 
 First, your database tables need to be keyed correctly. For a hasOne
 relationship to work, one table has to contain a foreign key that points to a
-record in the other. In this case the addresses table will contain a field
-called ``user_id``. The basic pattern is:
+record in the other table. In this case, the Addresses table will contain a field
+called 'user_id'. The basic pattern is:
 
 **hasOne:** the *other* model contains the foreign key.
 
@@ -146,12 +146,12 @@ Doctors hasOne Mentors mentors.doctor\_id
 
 .. note::
 
-    It is not mandatory to follow CakePHP conventions, you can override the use
-    of any foreignKey in your associations definitions. Nevertheless sticking
+    It is not mandatory to follow CakePHP conventions, you can override the name
+    of any ``foreignKey`` in your associations definitions. Nevertheless, sticking
     to conventions will make your code less repetitive, easier to read and to
     maintain.
 
-If we had the ``UsersTable`` and ``AddressesTable`` classes made we could make
+Once you create the ``UsersTable`` and ``AddressesTable`` classes, you can make
 the association with the following code::
 
     class UsersTable extends Table
@@ -200,25 +200,25 @@ If you want to break different addresses into multiple associations, you can do 
 
 .. note::
 
-    If you have multiple hasOne associations with the same columns in the conditions, like ``label``, you need to use the table alias before column name as shown above.
+    If a column is shared by multiple hasOne associations, you must qualify it with the association alias.
+    In the above example, the 'label' column is qualified with the 'HomeAddress' and 'WorkAddress' aliases.
 
 Possible keys for hasOne association arrays include:
 
-- **className**: The class name of the table being associated to the current
-  model. If you're defining a 'User hasOne Address' relationship, the className
-  key should equal 'Addresses'.
-- **foreignKey**: The name of the foreign key found in the other table. This is
-  especially handy if you need to define multiple hasOne relationships. The
-  default value for this key is the underscored, singular name of the current
-  model, suffixed with '\_id'. In the example above it would default to
-  'user\_id'.
-- **bindingKey**: The name of the column in the current table, that will be used
-  for matching the ``foreignKey``. If not specified, the primary key (for
-  example the id column of the ``Users`` table) will be used.
+- **className**: The class name of the other table. This is the same name used
+  when getting an instance of the table. In the 'Users hasOne Addresses' example,
+  it should be 'Addresses'. The default value is the name of the association.
+- **foreignKey**: The name of the foreign key column in the other table. The
+  default value is the underscored, singular name of the current model,
+  suffixed with '\_id' such as 'user\_id' in the above example.
+- **bindingKey**: The name of the column in the current table used to match the
+  ``foreignKey``.  The default value is the primary key of the current table
+  such as 'id' of `Users` in the above example.
 - **conditions**: An array of find() compatible conditions such as
   ``['Addresses.primary' => true]``
-- **joinType**: The type of the join to use in the SQL query, default
-  is LEFT. You can use INNER if your hasOne association is always present.
+- **joinType**: The type of the join used in the SQL query. Accepted values are
+  'LEFT' and 'INNER'. You can use 'INNER' to get results only where the
+  association is set. The default value is 'LEFT'.
 - **dependent**: When the dependent key is set to ``true``, and an entity is
   deleted, the associated model records are also deleted. In this case we set it
   to ``true`` so that deleting a User will also delete her associated Address.
@@ -229,8 +229,9 @@ Possible keys for hasOne association arrays include:
 - **propertyName**: The property name that should be filled with data from the
   associated table into the source table results. By default this is the
   underscored & singular name of the association so ``address`` in our example.
-- **strategy**: Defines the query strategy to use. Defaults to 'join'. The other
-  valid value is 'select', which utilizes a separate query instead.
+- **strategy**: The query strategy used to load matching record from the other table.
+  Accepted values are 'join' and 'select'. Using 'select' will generate a separate query.
+  The default is 'join'.
 - **finder**: The finder method to use when loading associated records.
 
 Once this association has been defined, find operations on the Users table can
