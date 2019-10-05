@@ -107,6 +107,8 @@ Component
 * ``Cake\Controller\Component\PagingComponent`` now sets paging params info as
    request attribute instead of request param. Hence you should now use
   ``$request->getAttribute('paging')`` instead of ``$request->getParam('paging')``.
+* The ``requireSecure`` behavior of ``SecurityComponent`` was removed. Instead
+  you should use the :ref:`https-enforcer-middleware`.
 
 Database
 --------
@@ -351,6 +353,8 @@ Http
   if the response status code is 2xx.
 * ``CspMiddleware`` was added to make defining Content Security Policy headers
   simpler.
+* ``HttpsEnforcerMiddleware`` was added. This replaced the ``requireSecure``
+  feature of ``SecurityComponent``.
 
 Mailer
 ------
