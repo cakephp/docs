@@ -33,6 +33,12 @@ Console
 
 * ``ConsoleIo::abort()`` was added.
 
+Database
+--------
+
+* ``Driver::newTableSchema()`` was added. This hook method lets you customize
+  which the class used for schema metadata.
+
 Datasource
 ----------
 
