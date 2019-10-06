@@ -449,7 +449,7 @@ an option. You can also define your own parsers::
 
 .. _https-enforcer-middleware:
 
-HTTPs Enforcer Middleware
+HTTPS Enforcer Middleware
 =========================
 
 If you want your application to only be available via HTTPS connections you can
