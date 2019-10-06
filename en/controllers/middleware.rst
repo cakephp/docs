@@ -457,21 +457,19 @@ use the ``HttpsEnforcerMiddleware``::
 
     use Cake\Http\Middleware\HttpsEnforcerMiddleware;
 
-    // GET requests will be automatically redirect to HTTPS if they
-    // are created with HTTP.
+    // Always raise an exception and never redirect.
     $https = new HttpsMiddleware([
-        'redirect' => true,
+        'redirect' => false,
     ]);
 
-    // Send a 301 status code when redirecting
+    // Send a 302 status code when redirecting
     $https = new HttpsMiddleware([
         'redirect' => true,
-        'statusCode' => 301,
+        'statusCode' => 302,
     ]);
 
     // Send additional headers in the redirect response.
     $https = new HttpsMiddleware([
-        'redirect' => true,
         'headers' => ['X-Https-Upgrade', => true],
     ]);
 
