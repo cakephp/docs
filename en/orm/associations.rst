@@ -353,15 +353,15 @@ convention:
 
 **hasMany:** the *other* model contains the foreign key.
 
-========================== ===================
+========================== ====================
 Relation                   Schema
-========================== ===================
+========================== ====================
 Articles hasMany Comments  Comments.article\_id
--------------------------- -------------------
+-------------------------- --------------------
 Products hasMany Options   Options.product\_id
--------------------------- -------------------
+-------------------------- --------------------
 Doctors hasMany Patients   Patients.doctor\_id
-========================== ===================
+========================== ====================
 
 We can define the hasMany association in our Articles model as follows::
 
