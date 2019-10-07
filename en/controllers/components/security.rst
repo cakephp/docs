@@ -85,32 +85,8 @@ The ``$type`` parameter can have the following values:
 Restrict Actions to SSL
 =======================
 
-.. php:method:: requireSecure()
+This functionality was removed into :ref:`https-enforcer-middleware`.
 
-    Sets the actions that require a SSL-secured request. Takes any
-    number of arguments. Can be called with no arguments to force all
-    actions to require a SSL-secured.
-
-.. php:method:: requireAuth()
-
-    Sets the actions that require a valid Security Component generated
-    token. Takes any number of arguments. Can be called with no
-    arguments to force all actions to require a valid authentication.
-
-Restricting Cross Controller Communication
-==========================================
-
-allowedControllers
-    A list of controllers which can send requests
-    to this controller.
-    This can be used to control cross controller requests.
-allowedActions
-    A list of actions which are allowed to send requests
-    to this controller's actions.
-    This can be used to control cross controller requests.
-
-These configuration options allow you to restrict cross controller
-communication.
 
 Form Tampering Prevention
 =========================
@@ -148,9 +124,8 @@ validatePost
 Usage
 =====
 
-Using the security component is generally done in the controller's
-``beforeFilter()``. You would specify the security restrictions you
-want and the Security Component will enforce them on its startup::
+Configuring the security component is generally done in the controller's
+``initialize`` or ``beforeFilter()`` callbacks::
 
     namespace App\Controller;
 
@@ -169,51 +144,14 @@ want and the Security Component will enforce them on its startup::
         {
             parent::beforeFilter($event);
 
-            if ($this->request->getParam('admin')) {
-                $this->Security->requireSecure();
+            if ($this->request->getParam('prefix') === 'admin') {
+                $this->Security->setConfig('validatePost', false);
             }
         }
     }
 
-The above example would force all actions that had admin routing to
-require secure SSL requests::
-
-    namespace App\Controller;
-
-    use App\Controller\AppController;
-    use Cake\Event\EventInterface;
-
-    class WidgetsController extends AppController
-    {
-        public function initialize(): void
-        {
-            parent::initialize();
-            $this->loadComponent('Security', ['blackHoleCallback' => 'forceSSL']);
-        }
-
-        public function beforeFilter(EventInterface $event)
-        {
-            parent::beforeFilter($event);
-
-            if ($this->request->getParam('admin')) {
-                $this->Security->requireSecure();
-            }
-        }
-
-        public function forceSSL($error = '', SecurityException $exception = null)
-        {
-            if ($exception instanceof SecurityException && $exception->getType() === 'secure') {
-                return $this->redirect('https://' . env('SERVER_NAME') . Router::url($this->request->getRequestTarget()));
-            }
-
-            throw $exception;
-        }
-    }
-
-This example would force all actions that had admin routing to require secure
-SSL requests. When the request is black holed, it will call the nominated
-``forceSSL()`` callback which will redirect non-secure requests to secure
-requests automatically.
+The above example would disable form tampering prevention for admin prefixed
+routes.
 
 .. _security-csrf:
 
@@ -226,14 +164,12 @@ and sometimes submit data requests using image tags or resources on other
 domains. To enable CSRF protection features use the
 :ref:`csrf-middleware`.
 
-Disabling Security Component for Specific Actions
-=================================================
+Disabling Form Tampering for Specific Actions
+=============================================
 
-There may be cases where you want to disable all security checks for an action
-(ex. AJAX requests).  You may "unlock" these actions by listing them in
-``$this->Security->unlockedActions`` in your ``beforeFilter()``. The
-``unlockedActions`` property will **not** affect other features of
-``SecurityComponent``::
+There may be cases where you want to disable form tampering prevention for an
+action (ex. AJAX requests).  You may "unlock" these actions by listing them in
+``$this->Security->unlockedActions`` in your ``beforeFilter()``::
 
     namespace App\Controller;
 

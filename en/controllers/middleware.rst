@@ -41,6 +41,7 @@ CakePHP provides several middleware to handle common tasks in web applications:
   incoming URL and assign routing parameters to the request.
 * ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` enables automatic language
   switching from the ``Accept-Language`` header sent by the browser.
+* ``Cake\Http\Middleware\HttpsEnforcerMiddleware`` requires HTTPS to be used.
 * ``Cake\Http\Middleware\SecurityHeadersMiddleware`` makes it easy to add
   security related headers like ``X-Frame-Options`` to responses.
 * ``Cake\Http\Middleware\EncryptedCookieMiddleware`` gives you the ability to
@@ -264,7 +265,7 @@ your application's middleware stack::
         ->noOpen()
         ->noSniff();
 
-    $middlwareQueue->add($securityHeaders);
+    $middlewareQueue->add($securityHeaders);
 
 Content Security Policy Header Middleware
 =========================================
@@ -446,6 +447,40 @@ an option. You can also define your own parsers::
         return Csv::parse($body);
     });
 
+.. _https-enforcer-middleware:
+
+HTTPS Enforcer Middleware
+=========================
+
+If you want your application to only be available via HTTPS connections you can
+use the ``HttpsEnforcerMiddleware``::
+
+    use Cake\Http\Middleware\HttpsEnforcerMiddleware;
+
+    // Always raise an exception and never redirect.
+    $https = new HttpsMiddleware([
+        'redirect' => false,
+    ]);
+
+    // Send a 302 status code when redirecting
+    $https = new HttpsMiddleware([
+        'redirect' => true,
+        'statusCode' => 302,
+    ]);
+
+    // Send additional headers in the redirect response.
+    $https = new HttpsMiddleware([
+        'headers' => ['X-Https-Upgrade', => true],
+    ]);
+
+    // Disable HTTPs enforcement when ``debug`` is on.
+    $https = new HttpsMiddleware([
+        'disableOnDebug' => true,
+    ]);
+
+If a non-HTTPs request is received that doesn't use GET
+a ``BadRequestException`` will be raised.
+
 .. meta::
     :title lang=en: Http Middleware
-    :keywords lang=en: http, middleware, psr-7, request, response, wsgi, application, baseapplication
+    :keywords lang=en: http, middleware, psr-7, request, response, wsgi, application, baseapplication, https

@@ -35,6 +35,8 @@ Component
 * ``AuthComponent`` and related classes have been deprecated and will be removed
   in 5.0.0. You should use the authentication and authorization libs mentioned
   above instead.
+* The ``requireSecure`` behavior of ``SecurityComponent`` is deprecated. Instead
+  you should use the :ref:`https-enforcer-middleware`.
 
 Filesystem
 ----------
@@ -351,6 +353,8 @@ Http
   if the response status code is 2xx.
 * ``CspMiddleware`` was added to make defining Content Security Policy headers
   simpler.
+* ``HttpsEnforcerMiddleware`` was added. This replaced the ``requireSecure``
+  feature of ``SecurityComponent``.
 
 Mailer
 ------
