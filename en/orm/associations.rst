@@ -213,7 +213,7 @@ Possible keys for hasOne association arrays include:
   suffixed with '\_id' such as 'user\_id' in the above example.
 - **bindingKey**: The name of the column in the current table used to match the
   ``foreignKey``.  The default value is the primary key of the current table
-  such as 'id' of `Users` in the above example.
+  such as 'id' of Users in the above example.
 - **conditions**: An array of find() compatible conditions such as
   ``['Addresses.primary' => true]``
 - **joinType**: The type of the join used in the SQL query. Accepted values are
@@ -275,7 +275,7 @@ Mentors belongsTo Doctors mentors.doctor\_id
 
 .. tip::
 
-    If a Table contains a foreign key, it belongs to the other Table.
+    If a table contains a foreign key, it belongs to the other table.
 
 We can define the belongsTo association in our Addresses table as follows::
 
@@ -302,26 +302,26 @@ We can also define a more specific relationship using the setters::
 
 Possible keys for belongsTo association arrays include:
 
-- **className**: The class name of the model being associated to the current
-  model. If you're defining a 'Profile belongsTo User' relationship, the
-  className key should equal 'Users'.
-- **foreignKey**: The name of the foreign key found in the current table. This
-  is especially handy if you need to define multiple belongsTo relationships to
-  the same model. The default value for this key is the underscored, singular
-  name of the other model, suffixed with ``_id``.
-- **bindingKey**: The name of the column in the other table, that will be used
-  for matching the ``foreignKey``. If not specified, the primary key (for
-  example the id column of the ``Users`` table) will be used.
+- **className**: The class name of the other table. This is the same name used
+  when getting an instance of the table. In the 'Addresses belongsTo Users' example,
+  it should be 'Users'. The default value is the name of the association.
+- **foreignKey**: The name of the foreign key column in the current table. The
+  default value is the underscored, singular name of the other model,
+  suffixed with '\_id' such as 'user\_id' in the above example.
+- **bindingKey**: The name of the column in the other table used to match the
+  ``foreignKey``.  The default value is the primary key of the other table
+  such as 'id' of Users in the above example.
 - **conditions**: An array of find() compatible conditions or SQL strings such
   as ``['Users.active' => true]``
-- **joinType**: The type of the join to use in the SQL query, default is LEFT
-  which may not fit your needs in all situations, INNER may be helpful when you
-  want everything from your main and associated models or nothing at all.
+- **joinType**: The type of the join used in the SQL query. Accepted values are
+  'LEFT' and 'INNER'. You can use 'INNER' to get results only where the
+  association is set. The default value is 'LEFT'.
 - **propertyName**: The property name that should be filled with data from the
   associated table into the source table results. By default this is the
   underscored & singular name of the association so ``user`` in our example.
-- **strategy**: Defines the query strategy to use. Defaults to 'join'. The other
-  valid value is 'select', which utilizes a separate query instead.
+- **strategy**: The query strategy used to load matching record from the other table.
+  Accepted values are 'join' and 'select'. Using 'select' will generate a separate query.
+  The default is 'join'.
 - **finder**: The finder method to use when loading associated records.
 
 Once this association has been defined, find operations on the Addresses table can
@@ -333,7 +333,7 @@ contain the User record if it exists::
         echo $address->user->username;
     }
 
-The above would emit SQL that is similar to:
+The above would output SQL similar to:
 
 .. code-block:: sql
 
@@ -344,7 +344,7 @@ The above would emit SQL that is similar to:
 HasMany Associations
 ====================
 
-An example of a hasMany association is "Article hasMany Comments". Defining this
+An example of a hasMany association is "Articles hasMany Comments". Defining this
 association will allow us to fetch an article's comments when the article is
 loaded.
 
@@ -353,15 +353,15 @@ convention:
 
 **hasMany:** the *other* model contains the foreign key.
 
-========================== ===================
+========================== ====================
 Relation                   Schema
-========================== ===================
-Article hasMany Comment    Comment.article\_id
--------------------------- -------------------
-Product hasMany Option     Option.product\_id
--------------------------- -------------------
-Doctor hasMany Patient     Patient.doctor\_id
-========================== ===================
+========================== ====================
+Articles hasMany Comments  Comments.article\_id
+-------------------------- --------------------
+Products hasMany Options   Options.product\_id
+-------------------------- --------------------
+Doctors hasMany Patients   Patients.doctor\_id
+========================== ====================
 
 We can define the hasMany association in our Articles model as follows::
 
@@ -388,7 +388,7 @@ We can also define a more specific relationship using the setters::
 Sometimes you may want to configure composite keys in your associations::
 
     // Within ArticlesTable::initialize() call
-    $this->hasMany('Reviews')
+    $this->hasMany('Comments')
         ->setForeignKey([
             'article_id',
             'article_hash'
@@ -397,11 +397,11 @@ Sometimes you may want to configure composite keys in your associations::
 Relying on the example above, we have passed an array containing the desired
 composite keys to ``setForeignKey()``. By default the ``bindingKey`` would be
 automatically defined as ``id`` and ``hash`` respectively, but let's assume that
-you need to specify different binding fields than the defaults, you can setup it
+you need to specify different binding fields than the defaults. You can setup it
 manually with ``setBindingKey()``::
 
     // Within ArticlesTable::initialize() call
-    $this->hasMany('Reviews')
+    $this->hasMany('Comments')
         ->setForeignKey([
             'article_id',
             'article_hash'
@@ -411,22 +411,20 @@ manually with ``setBindingKey()``::
             'whatever_hash'
         ]);
 
-It is important to note that ``foreignKey`` values refers to the **reviews**
-table and ``bindingKey`` values refers to the **articles** table.
+Like hasOne associations, ``foreignKey`` is in the other (Comments)
+table and ``bindingKey`` is in the current (Articles) table.
 
 Possible keys for hasMany association arrays include:
 
-- **className**: The class name of the model being associated to
-  the current model. If you're defining a 'User hasMany Comment'
-  relationship, the className key should equal 'Comments'.
-- **foreignKey**: The name of the foreign key found in the other
-  table. This is especially handy if you need to define multiple
-  hasMany relationships. The default value for this key is the
-  underscored, singular name of the actual model, suffixed with
-  '\_id'.
-- **bindingKey**: The name of the column in the current table, that will be used
-  for matching the ``foreignKey``. If not specified, the primary key (for
-  example the id column of the ``Articles`` table) will be used.
+- **className**: The class name of the other table. This is the same name used
+  when getting an instance of the table. In the 'Articles hasMany Comments' example,
+  it should be 'Comments'. The default value is the name of the association.
+- **foreignKey**: The name of the foreign key column in the other table. The
+  default value is the underscored, singular name of the current model,
+  suffixed with '\_id' such as 'article\_id' in the above example.
+- **bindingKey**: The name of the column in the current table used to match the
+  ``foreignKey``.  The default value is the primary key of the current table
+  such as 'id' of Articles in the above example.
 - **conditions**: an array of find() compatible conditions or SQL
   strings such as ``['Comments.visible' => true]``
 - **sort**: An array of find() compatible order clauses or SQL
@@ -459,7 +457,7 @@ can contain the Comment records if they exist::
         echo $article->comments[0]->text;
     }
 
-The above would emit SQL that is similar to:
+The above would output SQL similar to:
 
 .. code-block:: sql
 
@@ -517,14 +515,14 @@ table consists of ``article_id`` and ``tag_id``.
 **belongsToMany** requires a separate join table that includes both *model*
 names.
 
-============================ ================================================================
-Relationship                 Join Table Fields
-============================ ================================================================
-Article belongsToMany Tag    articles_tags.id, articles_tags.tag_id, articles_tags.article_id
----------------------------- ----------------------------------------------------------------
-Patient belongsToMany Doctor doctors_patients.id, doctors_patients.doctor_id,
-                             doctors_patients.patient_id.
-============================ ================================================================
+============================== ================================================================
+Relationship                   Join Table Fields
+============================== ================================================================
+Articles belongsToMany Tags    articles_tags.id, articles_tags.tag_id, articles_tags.article_id
+------------------------------ ----------------------------------------------------------------
+Patients belongsToMany Doctors doctors_patients.id, doctors_patients.doctor_id,
+                               doctors_patients.patient_id.
+============================== ================================================================
 
 We can define the belongsToMany association in both our models as follows::
 
@@ -561,9 +559,9 @@ We can also define a more specific relationship using configuration::
 
 Possible keys for belongsToMany association arrays include:
 
-- **className**: The class name of the model being associated to
-  the current model. If you're defining a 'Article belongsToMany Tag'
-  relationship, the className key should equal 'Tags'.
+- **className**: The class name of the other table. This is the same name used
+  when getting an instance of the table. In the 'Articles belongsToMany Tags'
+  example, it should be 'Tags'. The default value is the name of the association.
 - **joinTable**: The name of the join table used in this
   association (if the current table doesn't adhere to the naming
   convention for belongsToMany join tables). By default this table
@@ -616,7 +614,7 @@ contain the Tag records if they exist::
         echo $article->tags[0]->text;
     }
 
-The above would emit SQL that is similar to:
+The above would output SQL similar to:
 
 .. code-block:: sql
 
