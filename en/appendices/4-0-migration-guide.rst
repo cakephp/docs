@@ -35,6 +35,8 @@ Component
 * ``AuthComponent`` and related classes have been deprecated and will be removed
   in 5.0.0. You should use the authentication and authorization libs mentioned
   above instead.
+* The ``requireSecure`` behavior of ``SecurityComponent`` is deprecated. Instead
+  you should use the :ref:`https-enforcer-middleware`.
 
 Filesystem
 ----------
@@ -107,8 +109,6 @@ Component
 * ``Cake\Controller\Component\PagingComponent`` now sets paging params info as
    request attribute instead of request param. Hence you should now use
   ``$request->getAttribute('paging')`` instead of ``$request->getParam('paging')``.
-* The ``requireSecure`` behavior of ``SecurityComponent`` was removed. Instead
-  you should use the :ref:`https-enforcer-middleware`.
 
 Database
 --------
