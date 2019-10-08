@@ -392,12 +392,16 @@ like::
         public function middleware($middleware)
         {
             // Add middleware here.
+            $middleware = parent::middleware($middleware);
+            
             return $middleware;
         }
 
         public function console($commands)
         {
             // Add console commands here.
+            $commands = parent::console($commands);
+            
             return $commands;
         }
 
