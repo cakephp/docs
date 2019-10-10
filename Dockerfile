@@ -11,11 +11,16 @@ RUN apt-get update && apt-get install -y \
     texlive-fonts-recommended \
     texlive-lang-all \
     latexmk \
+    openjdk-8-jdk \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt /tmp/
 RUN pip install -r /tmp/requirements.txt
+
+ADD https://github.com/w3c/epubcheck/releases/download/v4.2.2/epubcheck-4.2.2.zip /epubcheck/epubcheck.zip
+RUN unzip /epubcheck/epubcheck.zip -d /epubcheck \
+  && mv /epubcheck/epubcheck-4.2.2/* /epubcheck
 
 WORKDIR /data
 VOLUME "/data"
