@@ -2,15 +2,16 @@ Contenu
 #######
 
 .. toctree::
-   :hidden:
+    :hidden:
 
-   index
-   topics
-   bake
-   bake/usage
-   chronos
-   debug-kit
-   elasticsearch
+    index
+    topics
+    bake
+    bake/usage
+    chronos
+    debug-kit
+    elasticsearch
+    migrations
 
 
 .. toctree::
@@ -82,7 +83,7 @@ Contenu
     Bake <https://book.cakephp.org/bake/1.x/fr/>
     Chronos <https://book.cakephp.org/chronos/1.x/fr/>
     Debug Kit <https://book.cakephp.org/debugkit/3.x/fr/>
-    migrations
+    Migrations <https://book.cakephp.org/migrations/2.x/fr/>
     Elasticsearch <https://book.cakephp.org/elasticsearch/2.x/fr/>
     upgrade-tool
 

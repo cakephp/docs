@@ -143,7 +143,7 @@ Engine Options
 Each engine accepts the following options:
 
 * ``duration`` Specify how long items in this cache configuration last.
-  Specified as a ``strototime()`` compatible expression.
+  Specified as a ``strtotime()`` compatible expression.
 * ``groups`` List of groups or 'tags' associated to every key stored in this
   config.  handy for deleting a complete group from cache.
 * ``prefix`` Prepended to all entries. Good for when you need to share

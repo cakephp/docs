@@ -292,9 +292,15 @@ When the above data is converted into entities, you will have 4 tags. The first
 two will be new objects, and the second two will be references to existing
 records.
 
-When converting belongsToMany data, you can disable the new entity creation, by
-using the ``onlyIds`` option. When enabled, this option restricts belongsToMany
-marshalling to only use the ``_ids`` key and ignore all other data.
+When converting belongsToMany data, you can disable entity creation, by
+using the ``onlyIds`` option::
+
+    $result = $articles->patchEntity($entity, $data, [
+        'associated' => ['Tags' => ['onlyIds' => true]],
+    ]);
+
+When used, this option restricts belongsToMany association marshalling to only
+use the ``_ids`` data.
 
 .. versionadded:: 3.1.0
     The ``onlyIds`` option was added in 3.1.0
@@ -1180,6 +1186,34 @@ As this internally perfoms a :php:meth:`Cake\\ORM\\Table::save()` call, all
 corresponding save events will be triggered.
 
 .. versionadded:: 3.4.1
+
+Find or Create an Entity
+========================
+
+.. php:method:: findOrCreate($search, $callback = null, $options = [])
+
+Find an existing record based on ``$search`` or create a new record using the
+properties in ``$search`` and calling the optional ``$callback``. This method is
+ideal in scenarios where you need to reduce the chance of duplicate records::
+
+    $record = $table->findOrCreate(
+        ['email' => 'bobbi@example.com'],
+        function ($entity) use ($otherData) {
+            // Only called when a new record is created.
+            $entity->name = $otherData['name'];
+        }
+    );
+
+If your find conditions require custom order, associations or conditions, then
+the ``$search`` parameter can be a callable or ``Query`` object. If you use
+a callable, it should take a ``Query`` as its argument.
+
+The returned entity will have been saved if it was a new record. The supported
+options for this method are:
+
+* ``atomic`` Should the find and save operation be done inside a transaction.
+* ``defaults`` Set to ``false`` to not set ``$search`` properties into the
+  created entity.
 
 Saving Multiple Entities
 ========================

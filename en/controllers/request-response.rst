@@ -323,10 +323,12 @@ conditions, as well as inspect other application specific request criteria::
 
 You can also extend the request detectors that are available, by using
 :php:meth:`Cake\\Http\\ServerRequest::addDetector()` to create new kinds of
-detectors. There are four different types of detectors that you can create:
+detectors. There are different types of detectors that you can create:
 
 * Environment value comparison - Compares a value fetched from :php:func:`env()`
   for equality with the provided value.
+* Header value comparison - If the specified header exists with the specified
+  value, or if the callable returns true.
 * Pattern value comparison - Pattern value comparison allows you to compare a
   value fetched from :php:func:`env()` to a regular expression.
 * Option based comparison -  Option based comparisons use a list of options to
@@ -358,6 +360,21 @@ Some examples would be::
         'options' => ['192.168.0.101', '192.168.0.100']
     ]);
 
+
+    // Add a header detector with value comparison
+    $this->request->addDetector('fancy', [
+        'env' => 'CLIENT_IP',
+        'header' => ['X-Fancy' => 1]
+    ]);
+
+    // Add a header detector with callable comparison
+    $this->request->addDetector('fancy', [
+        'env' => 'CLIENT_IP',
+        'header' => ['X-Fancy' => function ($value, $header) {
+            return in_array($value, ['1', '0', 'yes', 'no'], true);
+        }]
+    ]);
+
     // Add a callback detector. Must be a valid callable.
     $this->request->addDetector(
         'awesome',
@@ -366,19 +383,16 @@ Some examples would be::
         }
     );
 
-    // Add a detector that uses additional arguments. As of 3.3.0
+    // Add a detector that uses multiple condition types
+    // If any type matches the check passes.
     $this->request->addDetector(
-        'controller',
-        function ($request, $name) {
-            return $request->getParam('controller') === $name;
-        }
+        'csv',
+        [
+            'accept' => ['text/csv'],
+            'param' => '_ext',
+            'value' => 'csv',
+        ]
     );
-
-``Request`` also includes methods like
-:php:meth:`Cake\\Http\\ServerRequest::domain()`,
-:php:meth:`Cake\\Http\\ServerRequest::subdomains()` and
-:php:meth:`Cake\\Http\\ServerRequest::host()` to help applications with subdomains,
-have a slightly easier life.
 
 There are several built-in detectors that you can use:
 
@@ -402,6 +416,13 @@ There are several built-in detectors that you can use:
 
 .. versionadded:: 3.3.0
     Detectors can take additional parameters as of 3.3.0.
+
+
+``ServerRequest`` also includes methods like
+:php:meth:`Cake\\Http\\ServerRequest::domain()`,
+:php:meth:`Cake\\Http\\ServerRequest::subdomains()` and
+:php:meth:`Cake\\Http\\ServerRequest::host()` to make applications that use
+subdomains simpler.
 
 Session Data
 ------------
@@ -959,10 +980,17 @@ To take advantage of this header, you must either call the
     public function index()
     {
         $articles = $this->Articles->find('all');
-        $response = $this->response->withEtag($this->Articles->generateHash($articles));
+
+        // Simple checksum of the article contents.
+        // You should use a more efficient implementation
+        // in a real world application.
+        $checksum = md5(json_encode($articles));
+
+        $response = $this->response->withEtag($checksum);
         if ($response->checkNotModified($this->request)) {
             return $response;
         }
+
         $this->response = $response;
         // ...
     }
