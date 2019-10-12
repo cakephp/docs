@@ -22,7 +22,7 @@ possiblement anonymes des changements d'états internes.
 Les écouteurs (listener) dans le modèle observateur (Observer pattern) peuvent
 s'abonner à de tels événements et choisir d'agir sur eux, modifier l'état du
 sujet ou simplement créer des fichiers de logs. Si vous avez utilisé JavaScript
-dans le passé, il y a de fortes chances que vous soyez déjà familier avec la 
+dans le passé, il y a de fortes chances que vous soyez déjà familier avec la
 programmation événementielle.
 
 CakePHP émule plusieurs aspects sur la façon dont les événements sont déclenchés
@@ -47,7 +47,7 @@ mail à l'utilisateur ou décrémenter les articles depuis le stock, c'est votre
 souhait de traiter tout cela séparément dans un autre plugin ou dans le code de
 l'application. Typiquement, quand vous n'utilisez pas directement le modèle
 observateur (observer pattern) vous feriez cela en attachant des behaviors à la
-volée à vos models, et peut être quelques components aux controllers. Faire 
+volée à vos models, et peut être quelques components aux controllers. Faire
 comme ceci représente des difficultés la plupart du temps, parce qu'il va falloir
 le code nécessaire pour charger ces behaviors ou pour les attacher aux controllers
 de votre plugin.
@@ -265,7 +265,10 @@ et écouter seulement l'événement dont vous avez réellement besoin::
     // Si envoi d'emails
     use Cake\Mailer\Email;
 
+    // Prior to 3.6.0
     TableRegistry::get('ThirdPartyPlugin.Feedbacks')
+
+    TableRegistry::getTableLocator()->get('ThirdPartyPlugin.Feedbacks')
         ->eventManager()
         ->on('Model.afterSave', function($event, $entity)
         {

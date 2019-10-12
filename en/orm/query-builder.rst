@@ -22,7 +22,11 @@ Query builder that does not include ORM features, if necessary. See the
 :ref:`database-queries` section for more information::
 
     use Cake\ORM\TableRegistry;
+
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // Start a new query.
     $query = $articles->find();
@@ -41,7 +45,10 @@ Selecting Rows From A Table
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $query = TableRegistry::get('Articles')->find();
+
+    $query = TableRegistry::getTableLocator()->get('Articles')->find();
 
     foreach ($query as $article) {
         debug($article->title);
@@ -334,28 +341,33 @@ portable::
 
 A number of commonly used functions can be created with the ``func()`` method:
 
-- ``rand()`` Generate a random value between 0 and 1 via SQL.
-- ``sum()`` Calculate a sum. The arguments will be treated as literal values.
-- ``avg()`` Calculate an average. The arguments will be treated as literal
-  values.
-- ``min()`` Calculate the min of a column. The arguments will be treated as
-  literal values.
-- ``max()`` Calculate the max of a column. The arguments will be treated as
-  literal values.
-- ``count()`` Calculate the count. The arguments will be treated as literal
-  values.
-- ``concat()`` Concatenate two values together. The arguments are treated as
-  bound parameters unless marked as literal.
-- ``coalesce()`` Coalesce values. The arguments are treated as bound parameters
-  unless marked as literal.
-- ``dateDiff()`` Get the difference between two dates/times. The arguments are
-  treated as bound parameters unless marked as literal.
-- ``now()`` Take either 'time' or 'date' as an argument allowing you to get
-  either the current time, or current date.
-- ``extract()`` Returns the specified date part from the SQL expression.
-- ``dateAdd()`` Add the time unit to the date expression.
-- ``dayOfWeek()`` Returns a FunctionExpression representing a call to SQL
-  WEEKDAY function.
+``rand()``
+    Generate a random value between 0 and 1 via SQL.
+``sum()``
+    Calculate a sum. `Assumes arguments are literal values.`
+``avg()``
+    Calculate an average. `Assumes arguments are literal values.`
+``min()``
+    Calculate the min of a column. `Assumes arguments are literal values.`
+``max()``
+    Calculate the max of a column. `Assumes arguments are literal values.`
+``count()``
+    Calculate the count. `Assumes arguments are literal values.`
+``concat()``
+    Concatenate two values together. `Assumes arguments are bound parameters.`
+``coalesce()``
+    Coalesce values. `Assumes arguments are bound parameters.`
+``dateDiff()``
+    Get the difference between two dates/times. `Assumes arguments are bound parameters.`
+``now()``
+    Defaults to returning date and time, but accepts 'time' or 'date' to return only
+    those values.
+``extract()``
+    Returns the specified date part from the SQL expression.
+``dateAdd()``
+    Add the time unit to the date expression.
+``dayOfWeek()``
+    Returns a FunctionExpression representing a call to SQL WEEKDAY function.
 
 When providing arguments for SQL functions, there are two kinds of parameters
 you can use, literal arguments and bound parameters. Identifier/Literal parameters allow
@@ -368,23 +380,40 @@ safely add user data to SQL functions. For example::
         ' - CAT: ',
         'Categories.name' => 'identifier',
         ' - Age: ',
-        '(DATEDIFF(NOW(), Articles.created))' => 'literal',
+        $query->func()->dateDiff(
+            'NOW()' => 'literal',
+            'Articles.created' => 'identifier'
+        )
     ]);
     $query->select(['link_title' => $concat]);
 
-By making arguments with a value of ``literal``, the ORM will know that
-the key should be treated as a literal SQL value. By making arguments with
-a value of ``identifier``, the ORM will know that the key should be treated
-as a field identifier. The above would generate the following SQL on MySQL::
+Both ``literal`` and ``identifier`` arguments allow you to reference other columns
+and SQL literals while ``identifier`` will be appropriately quoted if auto-quoting
+is enabled.  If not marked as literal or identifier, arguments will be bound
+parameters allowing you to safely pass user data to the function.
 
-    SELECT CONCAT(Articles.title, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created))) FROM articles;
+The above example generates something like this in MYSQL.
 
-The ``:c0`` value will have the ``' - CAT:'`` text bound when the query is
-executed.
+.. code-block:: mysql
 
-In addition to the above functions, the ``func()`` method can be used to create
-any generic SQL function such as ``year``, ``date_format``, ``convert``, etc.
-For example::
+    SELECT CONCAT(
+        Articles.title,
+        :c0,
+        Categories.name,
+        :c1,
+        (DATEDIFF(NOW(), Articles.created))
+    ) FROM articles;
+
+The ``:c0`` argument will have ``' - CAT:'`` text bound when the query is
+executed. The ``dateDiff`` expression was translated to the appropriate SQL.
+
+Custom Functions
+^^^^^^^^^^^^^^^^
+
+If ``func()`` does not already wrap the SQL function you need, you can call
+it directly through ``func()`` and still safely pass arguments and user data
+as described. Make sure you pass the appropriate argument type for custom
+functions or they will be treated as bound parameters::
 
     $query = $articles->find();
     $year = $query->func()->year([
@@ -399,22 +428,16 @@ For example::
         'timeCreated' => $time
     ]);
 
-Would result in::
+These custom function would generate something like this in MYSQL:
 
-    SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
+.. code-block:: mysql
 
-You should remember to use the function builder whenever you need to put
-untrusted data into SQL functions or stored procedures::
+    SELECT YEAR(created) as yearCreated,
+           DATE_FORMAT(created, '%H:%i') as timeCreated
+    FROM articles;
 
-    // Use a stored procedure
-    $query = $articles->find();
-    $lev = $query->func()->levenshtein([$search, 'LOWER(title)' => 'literal']);
-    $query->where(function (QueryExpression $exp) use ($lev) {
-        return $exp->between($lev, 0, $tolerance);
-    });
-
-    // Generated SQL would be
-    WHERE levenshtein(:c0, lower(street)) BETWEEN :c1 AND :c2
+.. note::
+    Use ``func()`` to pass untrusted user data to any SQL function.
 
 Aggregates - Group and Having
 -----------------------------
@@ -438,7 +461,9 @@ for implementing ``if ... then ... else`` logic inside your SQL. This can be use
 for reporting on data where you need to conditionally sum or count data, or where you
 need to specific data based on a condition.
 
-If we wished to know how many published articles are in our database, we could use the following SQL::
+If we wished to know how many published articles are in our database, we could use the following SQL:
+
+.. code-block:: sql
 
     SELECT
     COUNT(CASE WHEN published = 'Y' THEN 1 END) AS number_published,
@@ -604,16 +629,18 @@ expression builder to build more complex conditions without arrays. For example:
 
     $query = $articles->find()->where(function ($exp, $query) {
         // Use add() to add multiple conditions for the same field.
-        $author = $exp->or_(['author_id' => 3])->add(['author_id' => 2]);
-        $published = $exp->and_(['published' => true, 'view_count' => 10]);
+        $author = $query->newExpr()->or_(['author_id' => 3])->add(['author_id' => 2]);
+        $published = $query->newExpr()->and_(['published' => true, 'view_count' => 10]);
 
         return $exp->or_([
             'promoted' => true,
-            $exp->and_([$author, $published])
+            $query->newExpr()->and_([$author, $published])
         ]);
     });
 
-The above generates SQL similar to::
+The above generates SQL similar to:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -649,7 +676,9 @@ be::
 
 Since we started off using ``where()``, we don't need to call ``and_()``, as
 that happens implicitly. The above shows a few new condition
-methods being combined with ``AND``. The resulting SQL would look like::
+methods being combined with ``AND``. The resulting SQL would look like:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -672,7 +701,9 @@ following::
                 ->gte('view_count', 10);
         });
 
-Which would generate the SQL similar to::
+Which would generate the SQL similar to:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -706,7 +737,9 @@ You can negate sub-expressions using ``not()``::
                 ->lte('view_count', 10);
         });
 
-Which will generate the following SQL looking like::
+Which will generate the following SQL looking like:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -726,7 +759,9 @@ It is also possible to build expressions using SQL functions::
                 ->eq('published', true);
         });
 
-Which will generate the following SQL looking like::
+Which will generate the following SQL looking like:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles

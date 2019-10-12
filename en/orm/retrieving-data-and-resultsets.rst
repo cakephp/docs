@@ -367,17 +367,13 @@ would do the following::
 
     class ArticlesTable extends Table
     {
-
         public function findOwnedBy(Query $query, array $options)
         {
             $user = $options['user'];
             return $query->where(['author_id' => $user->id]);
         }
-
     }
 
-    // In a controller or table method.
-    $articles = TableRegistry::get('Articles');
     $query = $articles->find('ownedBy', ['user' => $userEntity]);
 
 Finder methods can modify the query as required, or use the ``$options`` to
@@ -385,8 +381,6 @@ customize the finder operation with relevant application logic. You can also
 'stack' finders, allowing you to express complex queries effortlessly. Assuming
 you have both the 'published' and 'recent' finders, you could do the following::
 
-    // In a controller or table method.
-    $articles = TableRegistry::get('Articles');
     $query = $articles->find('published')->find('recent');
 
 While all the examples so far have shown finder methods on table classes, finder
@@ -417,12 +411,6 @@ find a user by username you could do::
     // The following two calls are equal.
     $query = $this->Users->findByUsername('joebob');
     $query = $this->Users->findAllByUsername('joebob');
-
-    // In a table method
-    $users = TableRegistry::get('Users');
-    // The following two calls are equal.
-    $query = $users->findByUsername('joebob');
-    $query = $users->findAllByUsername('joebob');
 
 When using dynamic finders you can constrain on multiple fields::
 
@@ -981,7 +969,6 @@ do. For example, you can extract a list of unique tags on a collection of
 articles by running::
 
     // In a controller or table method.
-    $articles = TableRegistry::get('Articles');
     $query = $articles->find()->contain(['Tags']);
 
     $reducer = function ($output, $value) {
@@ -1003,7 +990,6 @@ Some other examples of the collection methods being used with result sets are::
     });
 
     // Create an associative array from result properties
-    $articles = TableRegistry::get('Articles');
     $results = $articles->find()->contain(['Authors'])->all();
 
     $authorList = $results->combine('id', 'author.name');

@@ -321,7 +321,9 @@ belongsTo アソシエーションの配列で可能なキーは以下の通り�
         echo $address->user->username;
     }
 
-上記は次のような SQL を実行します。 ::
+上記は次のような SQL を実行します。
+
+.. code-block:: sql
 
     SELECT * FROM addresses LEFT JOIN users ON addresses.user_id = users.id;
 
@@ -437,12 +439,16 @@ hasMany アソシエーションの配列で可能なキーは以下の通りで
         echo $article->comments[0]->text;
     }
 
-上記は次のような SQL を実行します。 ::
+上記は次のような SQL を実行します。
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM comments WHERE article_id IN (1, 2, 3, 4, 5);
 
-サブクエリーのストラテジーが使われた時は、次のような SQL が生成されます。 ::
+サブクエリーのストラテジーが使われた時は、次のような SQL が生成されます。
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM comments WHERE article_id IN (SELECT id FROM articles);
@@ -583,7 +589,9 @@ belongsToMany アソシエーションの配列で可能なキーは以下の通
         echo $article->tags[0]->text;
     }
 
-上記は次のような SQL を実行します。 ::
+上記は次のような SQL を実行します。
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM tags
@@ -592,7 +600,9 @@ belongsToMany アソシエーションの配列で可能なキーは以下の通
       AND article_id IN (1, 2, 3, 4, 5)
     );
 
-サブクエリーのストラテジーが使われた時は、次のような SQL が生成されます。 ::
+サブクエリーのストラテジーが使われた時は、次のような SQL が生成されます。
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM tags

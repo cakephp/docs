@@ -2,10 +2,17 @@
 ############
 
 .. toctree::
-   :hidden:
+    :hidden:
 
-   index
-   topics
+    index
+    topics
+    chronos
+    debug-kit
+    elasticsearch
+    bake
+    bake/development
+    bake/usage
+    migrations
 
 .. toctree::
     :maxdepth: 3
@@ -35,8 +42,6 @@
     :maxdepth: 3
     :caption: 一般的なトピック
 
-    controllers/components/authentication
-    bake
     core-libraries/caching
     console-and-shells
     development/debugging
@@ -75,12 +80,13 @@
     :maxdepth: 3
     :caption: プラグイン
 
-    authorization <https://book.cakephp.org/authorization/>
-    authentication <https://book.cakephp.org/authentication/>
-    chronos
-    debug-kit
-    migrations
-    elasticsearch
+    Authorization <https://book.cakephp.org/authorization/>
+    Authentication <https://book.cakephp.org/authentication/>
+    Bake <https://book.cakephp.org/bake/1.x/ja/>
+    Chronos <https://book.cakephp.org/chronos/1.x/ja/>
+    Debug Kit <https://book.cakephp.org/debugkit/3.x/ja/>
+    Migrations <https://book.cakephp.org/migrations/2.x/ja/>
+    Elasticsearch <https://book.cakephp.org/elasticsearch/2.x/ja/>
     upgrade-tool
 
 .. toctree::

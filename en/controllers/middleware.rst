@@ -384,7 +384,30 @@ The available configuration options are:
 
 When enabled, you can access the current CSRF token on the request object::
 
-    $token = $this->request->getParam('_csrfToken');
+    $token = $this->request->getAttribute('_csrfToken');
+
+You can use the whitelisting callback feature for more fine grained control over
+URLs for which CSRF token check should be done::
+
+    // in src/Application.php
+    use Cake\Http\Middleware\CsrfProtectionMiddleware;
+
+    public function middleware($middlewareQueue) {
+        $csrf = new CsrfProtectionMiddleware();
+
+        // Token check will be skipped when callback returns `true`.
+        $csrf->whitelistCallback(function ($request) {
+            // Skip token check for API URLs.
+            if ($request->getParam('prefix') === 'api') {
+                return true;
+            }
+        });
+
+        // Ensure routing middleware is added to the queue before CSRF protection middleware.
+        $middlewareQueue->add($csrf);
+
+        return $middlewareQueue;
+    }
 
 .. note::
 

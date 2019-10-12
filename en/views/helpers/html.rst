@@ -308,6 +308,17 @@ and also wanted to include **webroot/img/Blog.icon.png**, you would::
 
     echo $this->Html->image('Blog.icon.png', ['plugin' => false]);
 
+If you would like the prefix of the URL to not be ``/img``, you can override this setting by specifying the prefix in the ``$options`` array ::
+
+    echo $this->Html->image("logo.png", ['pathPrefix' => '']);
+
+Will output:
+
+.. code-block:: html
+
+    <img src="logo.jpg" alt="" />
+
+
 Creating Links
 --------------
 

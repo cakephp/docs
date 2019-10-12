@@ -3,7 +3,7 @@ CakePHP 개요
 
 CakePHP는 웹을 쉽게 개발 할 수 있도록 도와주는 프레임워크 입니다.
 이 개요의 목표는 CakePHP의 일반적인 개념을 소개하고 이러한 개념이 어떻게 구현되는지에 대한
-간단한 개요를 제공하는 것 입니다. 
+간단한 개요를 제공하는 것 입니다.
 
 프로젝트를 시작하려면 :doc:`튜토리얼부터 시작
 </tutorials-and-examples/cms/installation>` 하거나 :doc:`도큐멘트 </topics>` 를 참고해주시기 바랍니다.
@@ -20,7 +20,7 @@ CakePHP가 제공하는 :doc:`규약 </intro/conventions>` 에 따르면 불필�
 
 모델 계층은 비즈니스 로직을 구현하는 애플리케이션의 일부를 나타냅니다.
 데이터를 검색하여 애플리케이션에 맞는 형식으로 변환하거나 처리, 검증(*validating*), 연결(*associating*)등
-데이터 처리와 관련된 작업을 실행하는 곳 입니다. 
+데이터 처리와 관련된 작업을 실행하는 곳 입니다.
 
 SNS의 경우 모델 계층은 사용자 저장, 친구 저장, 사용자 사진 저장 및 검색, 새 친구 찾기 등과 같은 작업을 처리합니다.
 여기서 모델 오브젝트는 '친구(*Friend*)', '사용자(*User*)', '댓글(*Comment*)', '사진(*Photo*)'을 생각해 볼 수 있습니다.
@@ -28,20 +28,26 @@ SNS의 경우 모델 계층은 사용자 저장, 친구 저장, 사용자 사진
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $users = TableRegistry::get('Users');
+
+    $users = TableRegistry::getTableLocator()->get('Users');
     $query = $users->find();
     foreach ($query as $row) {
         echo $row->username;
     }
 
-데이터를 가지고 작업하기 전에 코드가 간단하다는 것을 확인 할 수 있습니다. 
+데이터를 가지고 작업하기 전에 코드가 간단하다는 것을 확인 할 수 있습니다.
 이러한 CakePHP만의 규약으로 아직 정의하지 않은 테이블과 엔티티 클래스의 목적을 위한 스탠다스 클래스를 사용하게 되어 있습니다.
 
 새로운 사용자를 만들어서 검증(*validating*)한 후 저장한다면 아래와 같습니다. ::
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $users = TableRegistry::get('Users');
+
+    $users = TableRegistry::getTableLocator()->get('Users');
     $user = $users->newEntity(['email' => 'mark@example.com']);
     $users->save($user);
 

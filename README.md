@@ -23,28 +23,6 @@ Docker will let you create a container with all packages needed to build the
 docs. You need to have docker installed, see the [official docs of
 docker](https://docs.docker.com/mac/started/) for more information.
 
-### Use the image on DockerHub ###
-
-The easiest way is to use the image already hosted on [DockerHub](https://hub.docker.com/r/cakephpfr/docs/).
-
-You can directly run the following commands:
-
-    # To build the html
-    cd /path/to/your/local/docs
-    docker run -it --rm -v $(pwd):/data cakephpfr/docs:light make html
-
-    # To build the epub
-    cd /path/to/your/local/docs
-    docker run -it --rm -v $(pwd):/data cakephpfr/docs make epub
-
-    # To build the latex
-    cd /path/to/your/local/docs
-    docker run -it --rm -v $(pwd):/data cakephpfr/docs make latex
-
-    # To build the pdf
-    cd /path/to/your/local/docs
-    docker run -it --rm -v $(pwd):/data cakephpfr/docs make pdf
-
 ### Build the image locally ###
 
 There is a Dockerfile included at the root of this repository. You can build
@@ -106,14 +84,7 @@ Build the Documentation Manually
 
 ### Installing the needed Packages ###
 
-To build the documentation you'll need the following for linux/OS X:
-
-* Make
-* Python
-* Sphinx 1.4.5
-* PhpDomain for sphinx >=0.2.0
-
-You can install dependencies using:
+To build the documentation you'll need to install dependencies using:
 
     pip install -r requirements.txt
 

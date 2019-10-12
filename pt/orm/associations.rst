@@ -179,13 +179,15 @@ Uma vez que as associações foram definidas, as operações de find na tabela d
         echo $user->address->street;
     }
 
-Abaixo emitirá um SQL similar a::
+Abaixo emitirá um SQL similar a:
+
+.. code-block:: sql
 
     SELECT * FROM users INNER JOIN addresses ON addresses.user_id = users.id;
 
 .. _belongs-to-associations:
 
-Associações BelongsTo 
+Associações BelongsTo
 ======================
 
 Agora que nós temos acessoaos registros de endereço através da tabela usuários, vamos criar a associação belongsTo em endereços a fim de ter acesso aos registros relacionados a usuário. A associação belongsTo é um complemento natural a associações do tipo hasOne e
@@ -249,7 +251,9 @@ Uma vez que esta associação é definida, operações to tipo dina para a tabel
         echo $address->user->username;
     }
 
-Abaixo emite um SQL que é similar a::
+Abaixo emite um SQL que é similar a:
+
+.. code-block:: sql
 
     SELECT * FROM addresses LEFT JOIN users ON addresses.user_id = users.id;
 
@@ -365,13 +369,17 @@ pode conter os registros de comentários se eles existem::
         echo $article->comments[0]->text;
     }
 
-O anterior emitiria SQL que é semelhante ao::
+O anterior emitiria SQL que é semelhante ao:
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM comments WHERE article_id IN (1, 2, 3, 4, 5);
 
 Quando a estratégia de subconsulta é usada, SQL semelhante ao seguinte será
-gerado::
+gerado:
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM comments WHERE article_id IN (SELECT id FROM articles);
@@ -518,7 +526,9 @@ conter os registros de tags se eles existirem::
         echo $article->tags[0]->text;
     }
 
-O anterior emitiria SQL que é semelhante ao::
+O anterior emitiria SQL que é semelhante ao:
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM tags
@@ -528,7 +538,9 @@ O anterior emitiria SQL que é semelhante ao::
     );
 
 Quando a estratégia de subconsulta é usada, SQL semelhante ao seguinte será
-gerado::
+gerado:
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM tags

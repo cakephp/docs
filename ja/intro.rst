@@ -31,7 +31,10 @@ CakePHP は基礎的な構造をクラス名、ファイル名、DB のテーブ
 
     use Cake\ORM\TableRegistry;
 
+    // 3.6.0 より前
     $users = TableRegistry::get('Users');
+
+    $users = TableRegistry::getTableLocator()->get('Users');
     $query = $users->find();
     foreach ($query as $row) {
         echo $row->username;
@@ -45,7 +48,10 @@ CakePHP は基礎的な構造をクラス名、ファイル名、DB のテーブ
 
     use Cake\ORM\TableRegistry;
 
+    // 3.6.0 より前
     $users = TableRegistry::get('Users');
+
+    $users = TableRegistry::getTableLocator()->get('Users');
     $user = $users->newEntity(['email' => 'mark@example.com']);
     $users->save($user);
 
@@ -113,7 +119,7 @@ CakePHP のリクエストサイクル
    :alt: Flow diagram showing a typical CakePHP request
 
 典型的な CakePHP のリクエストサイクルはユーザーがアプリケーション内でページまたはリソースにリクエストを
-投げるところから始まります。高位のそれぞれのリクエストは以下のステップで動きします:
+投げるところから始まります。高位のそれぞれのリクエストは以下のステップで動きします。
 
 #. ウェブサーバーが **webroot/index.php** へのリクエストを制御するルールを書き換えます。
 #. あなたのアプリケーションがロードされ、 ``HttpServer`` にひも付きます。
@@ -131,7 +137,7 @@ CakePHP のリクエストサイクル
 さっそく始めましょう
 ====================
 
-この文章があなたの興味を惹くことを願っています。CakePHP には他にもとてもいい特徴があります。:
+この文章があなたの興味を惹くことを願っています。CakePHP には他にもとてもいい特徴があります。
 
 * Memcached, Redis や他のバックエンドと統合された :doc:`キャッシュ </core-libraries/caching>`
   フレームワーク。
@@ -140,7 +146,7 @@ CakePHP のリクエストサイクル
 
 次の明白なステップは :doc:`download CakePHP </installation>` で,
 :doc:`チュートリアルとなにかすごいものを作る
-</tutorials-and-examples/cms/installation>` を読んで下さい。.
+</tutorials-and-examples/cms/installation>` を読んで下さい。
 
 付録
 ====

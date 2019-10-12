@@ -368,7 +368,10 @@ fineder メソッドは、あなたが作成したい finder の名前が ``Foo`
     }
 
     // コントローラーやテーブルのメソッド内で
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find('ownedBy', ['user' => $userEntity]);
 
 Finder メソッドはクエリーを必要応じて変更したり、 ``$options`` を使うことで関連するアプリケーションの
@@ -377,7 +380,10 @@ Finder の 'stack' (重ね呼び) もまた、複雑なクエリーを難なく�
 'published' と 'recent' の両方の Finder を持っているとすると、次のようになります。 ::
 
     // コントローラーやテーブルのメソッド内で
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find('published')->find('recent');
 
 ここまではいずれも、テーブルクラスの Finder メソッドを例に見てきましたが、Finder メソッドは
@@ -409,7 +415,10 @@ CakePHP の ORM は動的に構築する Finder メソッドを提供します�
     $query = $this->Users->findAllByUsername('joebob');
 
     // テーブルメソッドの中
+    // Prior to 3.6.0
     $users = TableRegistry::get('Users');
+
+    $users = TableRegistry::getTableLocator()->get('Users');
     // 下記の２つは同じ
     $query = $users->findByUsername('joebob');
     $query = $users->findAllByUsername('joebob');
@@ -941,7 +950,10 @@ serialize が簡単にできるだけでなく、結果セットは 'Collection'
 使えます。たとえば、記事 (Article) のコレクションにあるタグ (Tag) をユニークに取り出すことができます。 ::
 
     // コントローラーやテーブルのメソッド内で
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find()->contain(['Tags']);
 
     $reducer = function ($output, $value) {
@@ -963,7 +975,10 @@ serialize が簡単にできるだけでなく、結果セットは 'Collection'
     });
 
     // 結果のプロパティーから連想配列を作成する
+    // Prior to 3.6.0
     $articles = TableRegistry::get('Articles');
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $results = $articles->find()->contain(['Authors'])->all();
 
     $authorList = $results->combine('id', 'author.name');

@@ -109,6 +109,113 @@ Any keys that do not exist will return ``null``::
     $foo = $this->request->getData('Value.that.does.not.exist');
     // $foo == null
 
+.. _request-file-uploads:
+
+File Uploads
+------------
+
+Uploaded files can be accessed through the request body data, using the :php:meth:`Cake\\Http\\ServerRequest::getData()`
+method described above. For example, a file from an input element with a name attribute of ``MyModel[attachment]``, can
+be accessed like this::
+
+    $attachment = $this->request->getData('MyModel.attachment');
+
+By default file uploads are represented in the request data as arrays, with a normalized structure that remains the same
+even for nested inputs/names, which is different from how PHP represents them in the ``$_FILES`` superglobal (refer to
+`the PHP manual <https://www.php.net/manual/en/features.file-upload.php>`__ for more information), ie the
+``$attachment`` value would look something like this::
+
+    [
+        'name' => 'attachment.txt',
+        'type' => 'text/plain',
+        'size' => 123,
+        'tmp_name' => '/tmp/hfz6dbn.tmp'
+        'error' => 0
+    ]
+
+Alternatively it's possible to have CakePHP provide the uploads in the request data as objects that implement
+`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__. In order to
+enable this behavior, set the configuration value ``App.uploadedFilesAsObjects`` to ``true``, for example in your
+``config/app.php`` file::
+
+    return [
+        // ...
+        'App' => [
+            // ...
+            'uploadedFilesAsObjects' => true,
+        ],
+        // ...
+    ];
+
+In the above example, ``$attachment`` would then hold an object, in the current implementation it would by default be an
+instance of ``\Zend\Diactoros\UploadedFile``.
+
+.. versionadded:: 3.9.0
+    Support for uploaded files as objects in the request data was added in version 3.9.0
+
+Furthermore uploaded files can be accessed as objects separately from the request data via the
+:php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` and
+:php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()` methods. These methods will always return objects,
+irrespectively of the ``App.uploadedFilesAsObjects`` configuration.
+
+.. php:method:: getUploadedFile($path)
+
+Returns the uploaded file at a specific path. The path uses the same dot syntax as the
+:php:meth:`Cake\\Http\\ServerRequest::getData()` method::
+
+    $attachment = $this->request->getUploadedFile('MyModel.attachment');
+
+Unlike :php:meth:`Cake\\Http\\ServerRequest::getData()`, :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` would
+only return data when an actual file upload exists for the given path, if there is regular, non-file request body data
+present at the given path, then this method will return ``null``, just like it would for any non-existent path.
+
+.. php:method:: getUploadedFiles()
+
+Returns all uploaded files in a normalized array structure. For the above example with the file input name of
+``MyModel[attachment]``, the structure would look like::
+
+    [
+        'MyModel' => [
+            'attachment' => object(Zend\Diactoros\UploadedFile) {
+                // ...
+            }
+        ]
+    ]
+
+.. php:method:: withUploadedFiles(array $files)
+
+This method sets the uploaded files of the request object, it accepts an array of objects that implement
+`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__. It will
+replace all possibly existing uploaded files.
+
+    $files = [
+        'MyModel' => [
+            'attachment' => new \Zend\Diactoros\UploadedFile(
+                $streamOrFile,
+                $size,
+                $errorStatus,
+                $clientFilename,
+                $clientMediaType
+            ),
+            'anotherAttachment' => new \Zend\Diactoros\UploadedFile(
+                '/tmp/hfz6dbn.tmp',
+                123,
+                \UPLOAD_ERR_OK,
+                'attachment.txt',
+                'text/plain'
+            ),
+        ],
+    ];
+
+    $this->request = $this->request->withUploadedFiles($files);
+
+.. note::
+
+    Uploaded files that have been added to the request via this method, will *not* be available in the request body
+    data, ie you cannot retrieve them via :php:meth:`Cake\\Http\\ServerRequest::getData()`! If you need them in the
+    request data (too), then you have to set them via :php:meth:`Cake\\Http\\ServerRequest::withData()` or
+    :php:meth:`Cake\\Http\\ServerRequest::withParsedBody()`.
+
 PUT, PATCH or DELETE Data
 -------------------------
 
@@ -199,10 +306,12 @@ conditions, as well as inspect other application specific request criteria::
 
 You can also extend the request detectors that are available, by using
 :php:meth:`Cake\\Http\\ServerRequest::addDetector()` to create new kinds of
-detectors. There are four different types of detectors that you can create:
+detectors. There are different types of detectors that you can create:
 
 * Environment value comparison - Compares a value fetched from :php:func:`env()`
   for equality with the provided value.
+* Header value comparison - If the specified header exists with the specified
+  value, or if the callable returns true.
 * Pattern value comparison - Pattern value comparison allows you to compare a
   value fetched from :php:func:`env()` to a regular expression.
 * Option based comparison -  Option based comparisons use a list of options to
@@ -234,6 +343,21 @@ Some examples would be::
         'options' => ['192.168.0.101', '192.168.0.100']
     ]);
 
+
+    // Add a header detector with value comparison
+    $this->request->addDetector('fancy', [
+        'env' => 'CLIENT_IP',
+        'header' => ['X-Fancy' => 1]
+    ]);
+
+    // Add a header detector with callable comparison
+    $this->request->addDetector('fancy', [
+        'env' => 'CLIENT_IP',
+        'header' => ['X-Fancy' => function ($value, $header) {
+            return in_array($value, ['1', '0', 'yes', 'no'], true);
+        }]
+    ]);
+
     // Add a callback detector. Must be a valid callable.
     $this->request->addDetector(
         'awesome',
@@ -244,17 +368,13 @@ Some examples would be::
 
     // Add a detector that uses additional arguments.
     $this->request->addDetector(
-        'controller',
-        function ($request, $name) {
-            return $request->getParam('controller') === $name;
-        }
+        'csv',
+        [
+            'accept' => ['text/csv'],
+            'param' => '_ext',
+            'value' => 'csv',
+        ]
     );
-
-``Request`` also includes methods like
-:php:meth:`Cake\\Http\\ServerRequest::domain()`,
-:php:meth:`Cake\\Http\\ServerRequest::subdomains()` and
-:php:meth:`Cake\\Http\\ServerRequest::host()` to help applications with subdomains,
-have a slightly easier life.
 
 There are several built-in detectors that you can use:
 
@@ -273,6 +393,12 @@ There are several built-in detectors that you can use:
   accept 'application/json' mimetype.
 * ``is('xml')`` Check to see whether the request has 'xml' extension and accept
   'application/xml' or 'text/xml' mimetype.
+
+``ServerRequest`` also includes methods like
+:php:meth:`Cake\\Http\\ServerRequest::domain()`,
+:php:meth:`Cake\\Http\\ServerRequest::subdomains()` and
+:php:meth:`Cake\\Http\\ServerRequest::host()` to make applications that use
+subdomains simpler.
 
 Session Data
 ------------
@@ -812,10 +938,17 @@ To take advantage of this header, you must either call the
     public function index()
     {
         $articles = $this->Articles->find('all');
-        $response = $this->response->withEtag($this->Articles->generateHash($articles));
+
+        // Simple checksum of the article contents.
+        // You should use a more efficient implementation
+        // in a real world application.
+        $checksum = md5(json_encode($articles));
+
+        $response = $this->response->withEtag($checksum);
         if ($response->checkNotModified($this->request)) {
             return $response;
         }
+
         $this->response = $response;
         // ...
     }

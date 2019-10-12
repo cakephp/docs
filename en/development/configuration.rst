@@ -7,19 +7,28 @@ to configure a few things like your database credentials.
 Additionally, there are optional configuration options that allow you to swap
 out default values & implementations with ones tailored to your application.
 
-.. index:: app.php, app.php.default
+.. index:: app.php, app_local.example.php
 
 .. index:: configuration
 
 Configuring your Application
 ============================
 
+<<<<<<< HEAD
 Configuration is generally stored in either PHP or INI files, and loaded during
 the application bootstrap. CakePHP comes with one configuration file by default,
 but if required you can add additional configuration files and load them in
 your application's bootstrap code. :php:class:`Cake\\Core\\Configure` is used
 for global configuration, and classes like ``Cache`` provide ``setConfig()``
 methods to make configuration simple and transparent.
+
+The application skeleton features a **config/app.php** file which should contain
+configuration that doesn't vary across the various environments your application
+is deployed in. The **config/app_local.php** file should contain the
+configuration data that varies between environments and shouldn't be checked
+into version control. Both of these files reference environment variables
+through the ``env()`` function that enables configuration values to set though
+the server environment.
 
 Loading Additional Configuration Files
 --------------------------------------
@@ -35,10 +44,41 @@ configuration into multiple files. After creating each of the files in your
     Configure::load('app', 'default', false);
     Configure::load('other_config', 'default');
 
-You can also use additional configuration files to provide environment specific
-overrides. Each file loaded after **app.php** can redefine previously declared
-values allowing you to customize configuration for development or staging
+.. _environment-variables:
+
+Environment Variables
+=====================
+
+Many modern cloud providers, like Heroku, let you define environment
+variables for configuration data. You can configure your CakePHP through
+environment variables in the `12factor app style <http://12factor.net/>`_.
+Environment variables allow your application to require less state making your
+application easier to manage when it is deployed across a number of
 environments.
+
+As you can see in your **app.php**, the ``env()`` function is used to read
+configuration from the environment, and build the application configuration.
+CakePHP uses :term:`DSN` strings for databases, logs, email transports and cache
+configurations allowing you to easily vary these libraries in each environment.
+
+For local development, CakePHP leverages `dotenv
+<https://github.com/josegonzalez/php-dotenv>`_ to allow easy local development using
+environment variables. You will see a ``config/.env.example`` in your
+application. By copying this file into ``config/.env`` and customizing the
+values you can configure your application.
+
+You should avoid committing the ``config/.env`` file to your repository and
+instead use the ``config/.env.example`` as a template with placeholder values so
+everyone on your team knows what environment variables are in use and what
+should go in each one.
+
+Once your environment variables have been set, you can use ``env()`` to read
+data from the environment::
+
+    $debug = env('APP_DEBUG', false);
+
+The second value passed to the env function is the default value. This value
+will be used if no environment variable exists for the given key.
 
 General Configuration
 ---------------------
@@ -81,7 +121,7 @@ App.wwwRoot
 App.fullBaseUrl
     The fully qualified domain name (including protocol) to your application's
     root. This is used when generating absolute URLs. By default this value
-    is generated using the $_SERVER environment. However, you should define it
+    is generated using the ``$_SERVER`` environment. However, you should define it
     manually to optimize performance or if you are concerned about people
     manipulating the ``Host`` header.
     In a CLI context (from shells) the `fullBaseUrl` cannot be read from $_SERVER,
@@ -100,6 +140,15 @@ App.paths
     Configure paths for non class based resources. Supports the
     ``plugins``, ``templates``, ``locales`` subkeys, which allow the definition
     of paths for plugins, view templates and locale files respectively.
+App.uploadedFilesAsObjects
+    Defines whether uploaded files are being represented as objects (``true``),
+    or arrays (``false``). This option is being treated as disabled by default.
+    See the :ref:`File Uploads section <request-file-uploads>` in the Request &
+    Response Objects chapter for more information.
+
+    .. versionadded:: 3.9.0
+        Support for uploaded files as objects in the request data was added in
+        version 3.9.0
 Security.salt
     A random string used in hashing. This value is also used as the
     HMAC salt when doing symetric encryption.
@@ -122,14 +171,15 @@ Asset.cacheTime
 Using a CDN
 -----------
 
-To use a CDN for loading your static assets, change ``App.imageBaseUrl``, ``App.cssBaseUrl``, 
-``App.jsBaseUrl`` to point the CDN URI, for example: ``https://mycdn.example.com/`` 
-(note the trailing ``/``).
+To use a CDN for loading your static assets, change ``App.imageBaseUrl``,
+``App.cssBaseUrl``, ``App.jsBaseUrl`` to point the CDN URI, for example:
+``https://mycdn.example.com/`` (note the trailing ``/``).
 
-All images, scripts and styles loaded via HtmlHelper will prepend the absolute CDN path, matching 
-the same relative path used in the application. Please note there is a specific use case when using
-plugin based assets: plugins will not use the plugin's prefix when absolute ``...BaseUrl`` URI is used, for example 
-By default:
+All images, scripts and styles loaded via HtmlHelper will prepend the absolute
+CDN path, matching the same relative path used in the application. Please note
+there is a specific use case when using plugin based assets: plugins will not
+use the plugin's prefix when absolute ``...BaseUrl`` URI is used, for example By
+default:
 
 * ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``test_plugin/logo.png`` 
 
@@ -238,42 +288,6 @@ Inflection Configuration
 ========================
 
 See the :ref:`inflection-configuration` docs for more information.
-
-.. _environment-variables:
-
-Environment Variables
-=====================
-
-Many modern cloud providers, like Heroku, let you define environment
-variables for configuration data. You can configure your CakePHP through
-environment variables in the `12factor app style <http://12factor.net/>`_.
-Environment variables allow your application to require less state making your
-application easier to manage when it is deployed across a number of
-environments.
-
-As you can see in your **app.php**, the ``env()`` function is used to read
-configuration from the environment, and build the application configuration.
-CakePHP uses :term:`DSN` strings for databases, logs, email transports and cache
-configurations allowing you to easily vary these libraries in each environment.
-
-For local development, CakePHP leverages `dotenv
-<https://github.com/josegonzalez/php-dotenv>`_ to allow easy local development using
-environment variables. You will see a ``config/.env.default`` in your
-application. By copying this file into ``config/.env`` and customizing the
-values you can configure your application.
-
-You should avoid committing the ``config/.env`` file to your repository and
-instead use the ``config/.env.default`` as a template with placeholder values so
-everyone on your team knows what environment variables are in use and what
-should go in each one.
-
-Once your environment variables have been set, you can use ``env()`` to read
-data from the environment::
-
-    $debug = env('APP_DEBUG', false);
-
-The second value passed to the env function is the default value. This value
-will be used if no environment variable exists for the given key.
 
 Configure Class
 ===============

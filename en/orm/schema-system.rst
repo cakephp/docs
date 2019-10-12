@@ -121,7 +121,9 @@ platform::
     ]);
 
 In the above example the ``id`` column would generate the following SQL in
-MySQL::
+MySQL:
+
+.. code-block:: mysql
 
     CREATE TABLE `posts` (
         `id` INTEGER AUTO_INCREMENT,

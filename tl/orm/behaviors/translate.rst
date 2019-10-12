@@ -85,7 +85,7 @@ In order to use the behavior, you need to create a ``i18n`` table with the
 correct schema. Currently the only way of loading the ``i18n`` table is by
 manually running the following SQL script in your database:
 
-.. code-block:: sql
+.. code-block:: mysql
 
     CREATE TABLE i18n (
         id int NOT NULL auto_increment,

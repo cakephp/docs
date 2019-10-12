@@ -39,7 +39,10 @@ poderiamos fazer::
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $users = TableRegistry::get('Users');
+
+    $users = TableRegistry::getTableLocator()->get('Users');
     $query = $users->find();
     foreach ($query as $row) {
         echo $row->username;
@@ -54,7 +57,10 @@ assim::
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $users = TableRegistry::get('Users');
+
+    $users = TableRegistry::getTableLocator()->get('Users');
     $user = $users->newEntity(['email' => 'mark@example.com']);
     $users->save($user);
 

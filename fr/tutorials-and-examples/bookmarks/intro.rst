@@ -116,7 +116,9 @@ Ensuite, configurons la base de données pour notre application de bookmarking.
 Si vous ne l'avez pas déjà fait, créez une base de données vide que nous
 allons utiliser dans ce tutoriel, avec un nom de votre choix, par exemple
 ``cake_bookmarks``. Vous pouvez exécuter le SQL suivant pour créer les
-tables nécessaires::
+tables nécessaires:
+
+.. code-block:: mysql
 
     CREATE TABLE users (
         id INT AUTO_INCREMENT PRIMARY KEY,

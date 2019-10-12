@@ -265,7 +265,7 @@ pages in the paged data set.
 
     .. code-block:: html
 
-        <li class="prev disabled"><span>&lt;&lt; previous</span></li>
+        <li class="prev disabled"><a href="" onclick="return false;">&lt;&lt; previous</a></li>
 
     To change the templates used by this method see :ref:`paginator-templates`.
 
