@@ -349,9 +349,12 @@ Error
 Http
 ----
 
-* CakePHP now supports the `PSR-15: HTTP Server Request Handlers <https://www.php-fig.org/psr/psr-15/>`__ specification.
-  As a consequence the middlewares now implement ``Psr\Http\Server\MiddlewareInterface``.
-  CakePHP 3.x style invokable double pass middlewares are still supported for backwards compatibility.
+*  You can use ``cakephp/http`` without including the entire framework.
+* CakePHP now supports the `PSR-15: HTTP Server Request Handlers
+  <https://www.php-fig.org/psr/psr-15/>`__ specification.  As a consequence the
+  middlewares now implement ``Psr\Http\Server\MiddlewareInterface``.  CakePHP
+  3.x style invokable double pass middlewares are still supported for backwards
+  compatibility.
 * ``Cake\Http\Client`` now follows `PSR-18: HTTP Client <https://www.php-fig.org/psr/psr-18/>`__ specifications.
 * ``Cake\Http\Client\Response::isSuccess()`` was added. This method returns true
   if the response status code is 2xx.
