@@ -284,7 +284,7 @@ Helper
   text and HTML attributes by default. A new option ``escapeTitle`` has been
   added to allow controlling escaping the title separately from other HTML
   attributes.
-* ``Cake\View\Helper\SecureFieldTokenTrait`` has been removed. It's form token
+* ``Cake\View\Helper\SecureFieldTokenTrait`` has been removed. Its form token
   data building functionality is now included in the internal class ``FormProtector``.
 
 Miscellaneous

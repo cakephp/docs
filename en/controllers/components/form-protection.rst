@@ -153,7 +153,7 @@ works::
         $this->FormProtection->setConfig(
             'validationFailureCallback',
             function (BadRequestException $exception) {
-                // You are either return a response instance or throw the exception
+                // You can either return a response instance or throw the exception
                 // received as argument.
             }
         );
