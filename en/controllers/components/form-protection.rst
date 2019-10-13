@@ -22,13 +22,8 @@ in your ``initialize()`` method.
     :php:meth:`~Cake\\View\\Helper\\FormHelper::create()` and
     :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`).  Dynamically altering
     the fields that are submitted in a POST request (e.g.  disabling, deleting
-    or creating new fields via JavaScript) is likely to cause the request to be
-    send to the blackhole callback.
-
-    You should always verify the HTTP method being used before executing to avoid
-    side-effects. You should :ref:`check the HTTP method <check-the-request>` or
-    use :php:meth:`Cake\\Http\\ServerRequest::allowMethod()` to ensure the correct
-    HTTP method is used.
+    or creating new fields via JavaScript) is likely to cause the form token
+    validation to fail.
 
 Form tampering prevention
 =========================
@@ -81,6 +76,8 @@ validationFailureCallback
 
 Disabling form tampering checks
 ===============================
+
+::
 
     namespace App\Controller;
 
