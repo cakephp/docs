@@ -35,8 +35,9 @@ Component
 * ``AuthComponent`` and related classes have been deprecated and will be removed
   in 5.0.0. You should use the authentication and authorization libs mentioned
   above instead.
-* The ``requireSecure`` behavior of ``SecurityComponent`` is deprecated. Instead
-  you should use the :ref:`https-enforcer-middleware`.
+* ``SecurityComponent`` is deprecated. Instead use the ``FormProtectionComponent``
+  for form tampering protection and the :ref:`https-enforcer-middleware` for
+  ``requireSecure`` feature.
 
 Filesystem
 ----------
@@ -283,6 +284,8 @@ Helper
   text and HTML attributes by default. A new option ``escapeTitle`` has been
   added to allow controlling escaping the title separately from other HTML
   attributes.
+* ``Cake\View\Helper\SecureFieldTokenTrait`` has been removed. Its form token
+  data building functionality is now included in the internal class ``FormProtector``.
 
 Miscellaneous
 -------------
