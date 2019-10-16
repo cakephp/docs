@@ -283,10 +283,10 @@ are several built-in styles, and you can create more. The built-in ones are
 * ``comment`` Additional text. Blue text.
 * ``question`` Text that is a question, added automatically by shell.
 
-You can create additional styles using ``$io->styles()``. To declare a
+You can create additional styles using ``$io->setStyle()``. To declare a
 new output style you could do::
 
-    $io->styles('flashy', ['text' => 'magenta', 'blink' => true]);
+    $io->setStyle('flashy', ['text' => 'magenta', 'blink' => true]);
 
 This would then allow you to use a ``<flashy>`` tag in your shell output, and if
 ansi colours are enabled, the following would be rendered as blinking magenta

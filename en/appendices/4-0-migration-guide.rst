@@ -29,6 +29,7 @@ Deprecations
 The following is a list of deprecated methods, properties and behaviors. These
 features will continue to function in 4.x and will be removed in 5.0.0.
 
+
 Component
 ---------
 
@@ -100,6 +101,12 @@ Controller
 * Controller method name matching when invoking actions is now case sensitive.
   For example if your controller method is ``forgotPassword()`` then using string
   ``forgotpassword`` in URL will not match as action name.
+
+Console
+-------
+
+* ``ConsoleIo::styles()`` has been split into a ``getStyle()`` and
+  ``setStyle()``.
 
 Component
 ---------
