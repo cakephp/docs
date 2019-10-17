@@ -166,6 +166,17 @@ commands::
 The above command, will fetch a user by username and display the information
 stored in the database.
 
+If you want to switch the database connection to a different source, which could be 
+for example come from a command argument you could use ``ConnectionManager::alias()``, like::
+
+    //...
+    public function execute(Arguments $args, ConsoleIo $io) 
+    {
+        ConnectionManager::alias('mySource', 'default');
+    }
+
+
+
 Exit Codes and Stopping Execution
 =================================
 
