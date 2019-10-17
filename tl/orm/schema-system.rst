@@ -223,7 +223,8 @@ You can use it to get the list of tables or reflect tables into
     $db = ConnectionManager::get('default');
 
     // Create a schema collection.
-    $collection = $db->schemaCollection();
+    // Prior to 3.4 use $db->schemaCollection()
+    $collection = $db->getSchemaCollection();
 
     // Get the table names
     $tables = $collection->listTables();
