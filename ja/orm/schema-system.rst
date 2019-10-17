@@ -216,7 +216,8 @@ SQL クエリーのリストです。いくつかのプラットフォームで�
     $db = ConnectionManager::get('default');
 
     // スキーマコレクションの作成
-    $collection = $db->schemaCollection();
+    // Prior to 3.6 use $db->schemaCollection()
+    $collection = $db->getSchemaCollection();
 
     // テーブル名の取得
     $tables = $collection->listTables();

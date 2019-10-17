@@ -232,7 +232,8 @@ habituelle de la classe ressemble à::
     $db = ConnectionManager::get('default');
 
     // Crée une collection de schéma.
-    $collection = $db->schemaCollection();
+    // Prior to 3.6 use $db->schemaCollection()
+    $collection = $db->getSchemaCollection();
 
     // Récupère les noms des tables
     $schemaables = $collection->listTables();
