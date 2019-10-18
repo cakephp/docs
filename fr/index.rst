@@ -1,10 +1,10 @@
 Bienvenue
 #########
 
-CakePHP 3 est un framework pour le développement web qui fonctionne avec
+CakePHP 4 est un framework pour le développement web qui fonctionne avec
 **PHP 7.2** (min. PHP |minphpversion|).
 Vous pouvez lire :doc:`CakePHP en un coup d'oeil </intro>` pour avoir une
-introduction aux fondamentaux de CakePHP 3.
+introduction aux fondamentaux de CakePHP 4.
 
 Le livre de cuisine CakePHP est un projet libre et communautaire d'édition de
 la documentation. Remarquez le bouton icone en forme de crayon fixé dans le coin
