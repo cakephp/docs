@@ -106,7 +106,7 @@ Console
 -------
 
 * ``ConsoleIo::styles()`` has been split into a ``getStyle()`` and
-  ``setStyle()``.
+  ``setStyle()``. This also reflects in ``ConsoleOutput``.
 
 Component
 ---------
