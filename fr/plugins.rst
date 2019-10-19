@@ -482,10 +482,8 @@ en utilisant l'habituelle :term:`syntaxe de plugin`::
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6 use TableRegistry::get('ContactManager.Contacts')
     $contacts = TableRegistry::getTableLocator()->get('ContactManager.Contacts');
-
-    // Prior to 3.6.0
-    $contacts = TableRegistry::get('ContactManager.Contacts');
 
 Si vous êtes dans un Controller, vous pouvez aussi utiliser::
 

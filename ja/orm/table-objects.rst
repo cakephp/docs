@@ -105,10 +105,8 @@
     // コントローラーやテーブルのメソッド内で
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
-
-    // 3.6.0 より前
-     $articles = TableRegistry::get('Articles');
 
 TableRegistry クラスはテーブルを作るための様々な依存関係を提供します。
 そして、作成されたすべてのテーブルインスタンスの設定を維持し、リレーションの構築と
@@ -120,15 +118,12 @@ ORM の設定を簡単にしてくれます。詳細は :ref:`table-registry-usa
 正しくロードするために、次のように使用してください。 ::
 
     // プラグインの Table
+    // Prior to 3.6 use TableRegistry::get('PluginName.Articles')
     $articlesTable = TableRegistry::getTableLocator()->get('PluginName.Articles');
 
     // ベンダープレフィックス付きのプラグイン Table
+    // Prior to 3.6 use TableRegistry::get('VendorName/PluginName.Articles')
     $articlesTable = TableRegistry::getTableLocator()->get('VendorName/PluginName.Articles');
-
-
-    // 3.6.0 より前
-    $articlesTable = TableRegistry::get('PluginName.Articles');
-    $articlesTable = TableRegistry::get('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
 

@@ -181,9 +181,7 @@ objet Query; cela sert dans plusieurs cas.
 Il est possible de modifier les requêtes plus tard, après avoir appeler
 ``find``::
 
-    // Prior to 3.6.0
-    $articles = TableRegistry::get('Articles');
-
+    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find();
     $query->where(['author_id' => 1])->order(['title' => 'DESC']);
