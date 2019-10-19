@@ -108,10 +108,8 @@ can do this by using the ``TableRegistry`` class::
     // In a controller or table method.
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
-
-    // Prior to 3.6.0
-    $articles = TableRegistry::get('Articles');
 
 The TableRegistry class provides the various dependencies for constructing
 a table, and maintains a registry of all the constructed table instances making
@@ -124,14 +122,12 @@ being triggered as a default class is used instead of your actual class. To
 correctly load plugin table classes use the following::
 
     // Plugin table
+    // Prior to 3.6 use TableRegistry::get('PluginName.Articles')
     $articlesTable = TableRegistry::getTableLocator()->get('PluginName.Articles');
 
     // Vendor prefixed plugin table
+    // Prior to 3.6 use TableRegistry::get('VendorName/PluginName.Articles')
     $articlesTable = TableRegistry::getTableLocator()->get('VendorName/PluginName.Articles');
-
-    // Prior to 3.6.0
-    $articlesTable = TableRegistry::get('PluginName.Articles');
-    $articlesTable = TableRegistry::get('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
 
