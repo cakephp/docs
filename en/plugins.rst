@@ -393,7 +393,7 @@ like::
         {
             // Add middleware here.
             $middleware = parent::middleware($middleware);
-            
+
             return $middleware;
         }
 
@@ -401,7 +401,7 @@ like::
         {
             // Add console commands here.
             $commands = parent::console($commands);
-            
+
             return $commands;
         }
 
@@ -604,10 +604,8 @@ You can use ``TableRegistry`` to load your plugin tables using the familiar
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6 use TableRegistry::get('ContactManager.Contacts')
     $contacts = TableRegistry::getTableLocator()->get('ContactManager.Contacts');
-
-    // Prior to 3.6.0
-    $contacts = TableRegistry::get('ContactManager.Contacts');
 
 Alternatively, from a controller context, you can use::
 

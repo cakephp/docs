@@ -160,9 +160,7 @@ several purposes.
 
 It is possible to alter queries further, after calling ``find``::
 
-    // Prior to 3.6.0
-    $articles = TableRegistry::get('Articles');
-
+    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find();
     $query->where(['author_id' => 1])->order(['title' => 'DESC']);

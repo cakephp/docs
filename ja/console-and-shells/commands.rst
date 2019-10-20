@@ -331,9 +331,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
             $this->exec('update_table Users');
             $this->assertExitCode(Command::CODE_SUCCESS);
 
-            // Prior to 3.6.0
-            $user = TableRegistry::get('Users')->get(1);
-
+            // Prior to 3.6 use TableRegistry::get('Users')
             $user = TableRegistry::getTableLocator()->get('Users')->get(1);
             $this->assertSame($user->modified->timestamp, $now->timestamp);
 
@@ -414,9 +412,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
         $this->exec('update_table Users', ['y']);
         $this->assertExitCode(Command::CODE_SUCCESS);
 
-        // Prior to 3.6.0
-        $user = TableRegistry::get('Users')->get(1);
-
+        // Prior to 3.6 use TableRegistry::get('Users')
         $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $this->assertSame($user->modified->timestamp, $now->timestamp);
 
@@ -425,9 +421,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     public function testUpdateModifiedUnsure()
     {
-        // Prior to 3.6.0
-        $user = TableRegistry::get('Users')->get(1);
-
+        // Prior to 3.6 use TableRegistry::get('Users')
         $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $original = $user->modified->timestamp;
 
@@ -435,9 +429,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
         $this->assertExitCode(Command::CODE_ERROR);
         $this->assertErrorContains('You need to be sure.');
 
-        // Prior to 3.6.0
-        $user = TableRegistry::get('Users')->get(1);
-
+        // Prior to 3.6 use TableRegistry::get('Users')
         $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $this->assertSame($original, $user->timestamp);
     }

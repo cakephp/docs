@@ -43,9 +43,7 @@ charger des données de la table ``articles``, vous pourriez faire::
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6.0
-    $articles = TableRegistry::get('Articles');
-
+    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
     $query = $articles->find();
@@ -79,10 +77,8 @@ obtenez une référence vers celle-ci en utilisant
     use Cake\ORM\TableRegistry;
 
     // Maintenant $articles est une instance de notre classe ArticlesTable.
+    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
-
-    // Prior to 3.6.0
-    $articles = TableRegistry::get('Articles');
 
 Maintenant que nous avons une classe de table concrète, nous allons
 probablement vouloir utiliser une classe entity concrète. Les classes Entity
@@ -108,9 +104,7 @@ de notre nouvelle classe Article::
     use Cake\ORM\TableRegistry;
 
     // Maintenant une instance de ArticlesTable.
-    // Prior to 3.6.0
-    $articles = TableRegistry::get('Articles');
-
+    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find();
 

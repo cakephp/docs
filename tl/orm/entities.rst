@@ -62,9 +62,7 @@ The preferred way of getting new entities is using the ``newEntity()`` method fr
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6.0
-    $article = TableRegistry::get('Articles')->newEntity();
-
+    // Prior to 3.6 use TableRegistry::get('Articles')
     $article = TableRegistry::getTableLocator()->get('Articles')->newEntity();
 
     $article = TableRegistry::getTableLocator()->get('Articles')->newEntity([
