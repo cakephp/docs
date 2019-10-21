@@ -5,16 +5,20 @@ Roteamento
 
 .. php:class:: Router
 
-O roteamento fornece ferramentas que mapeiam URLs para ações do controlador. Ao definir rotas, você pode separar como o aplicativo é implementado e como os URLs são estruturadas.
+O roteamento fornece ferramentas que mapeiam URLs para ações do controlador. Ao definir rotas, você pode separar como o aplicativo 
+é implementado e como os URLs são estruturadas.
 
-O roteamento no CakePHP também abrange a idéia de roteamento reverso, onde uma matriz de parâmetros pode ser transformada em uma string de URL. Ao usar o roteamento reverso, você pode redimensionar a estrutura de URL do seu aplicativo sem precisar atualizar todo o seu código.
+O roteamento no CakePHP também abrange a idéia de roteamento reverso, onde uma matriz de parâmetros pode ser transformada em uma 
+string de URL. Ao usar o roteamento reverso, você pode redimensionar a estrutura de URL do seu aplicativo sem precisar atualizar 
+todo o seu código.
 
 .. index:: routes.php
 
 Tour Rápido
 ===========
 
-Esta seção ensinará a você, como exemplo, os usos mais comuns do CakePHP Router. Normalmente, você deseja exibir algo como uma página de destino e adicionar isso ao seu arquivo **routes.php**::
+Esta seção ensinará a você, como exemplo, os usos mais comuns do CakePHP Router. Normalmente, você deseja exibir algo como uma 
+página de destino e adicionar isso ao seu arquivo **routes.php**::
 
     use Cake\Routing\Router;
 
@@ -26,13 +30,18 @@ Esta seção ensinará a você, como exemplo, os usos mais comuns do CakePHP Rou
     // Usando o método estático.
     Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
-O ``Router`` fornece duas interfaces para conectar rotas. O método estático é uma interface compatível com versões anteriores, enquanto os construtores com escopo oferecem uma sintaxe mais concisa ao criar várias rotas e melhor desempenho.
+O ``Router`` fornece duas interfaces para conectar rotas. O método estático é uma interface compatível com versões anteriores, 
+enquanto os construtores com escopo oferecem uma sintaxe mais concisa ao criar várias rotas e melhor desempenho.
 
-Isso executará o método de índice no ``ArticlesController`` quando a página inicial do seu site for visitada. Às vezes, você precisa de rotas dinâmicas que aceitem vários parâmetros; esse seria o caso, por exemplo, de uma rota para visualizar o conteúdo de um artigo::
+Isso executará o método de índice no ``ArticlesController`` quando a página inicial do seu site for visitada. Às vezes, você 
+precisa de rotas dinâmicas que aceitem vários parâmetros; esse seria o caso, por exemplo, de uma rota para visualizar o conteúdo 
+de um artigo::
 
     $routes->connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
 
-A rota acima aceitará qualquer URL semelhante a ``/articles/15`` e invocará o método ``view (15)`` no ``ArticlesController``. Porém, isso não impedirá que as pessoas tentem acessar URLs semelhantes a ``/articles/foobar``. Se desejar, você pode restringir alguns parâmetros para estar em conformidade com uma expressão regular::
+A rota acima aceitará qualquer URL semelhante a ``/articles/15`` e invocará o método ``view (15)`` no ``ArticlesController``. 
+Porém, isso não impedirá que as pessoas tentem acessar URLs semelhantes a ``/articles/foobar``. Se desejar, você pode restringir 
+alguns parâmetros para estar em conformidade com uma expressão regular::
 
     $routes->connect(
         '/articles/:id',
@@ -48,7 +57,10 @@ A rota acima aceitará qualquer URL semelhante a ``/articles/15`` e invocará o 
         ['id' => '\d+', 'pass' => ['id']]
     )
 
-O exemplo anterior alterou o marcador de estrelas por um novo espaço reservado para ``:id``. O uso de espaços reservados nos permite validar partes da URL; nesse caso, usamos a expressão regular ``\d+`` para que apenas os dígitos correspondam. Finalmente, pedimos ao roteador para tratar o espaço reservado ``id`` como um argumento de função para o método ``view()`` especificando a opção ``pass``. Mais sobre o uso dessa opção posteriormente.
+O exemplo anterior alterou o marcador de estrelas por um novo espaço reservado para ``:id``. O uso de espaços reservados nos 
+permite validar partes da URL; nesse caso, usamos a expressão regular ``\d+`` para que apenas os dígitos correspondam. 
+Finalmente, pedimos ao roteador para tratar o espaço reservado ``id`` como um argumento de função para o método ``view()``
+especificando a opção ``pass``. Mais sobre o uso dessa opção posteriormente.
 
 O roteador do CakePHP também pode reverter as rotas de correspondência. Isso significa que, a partir de uma matriz que contém parâmetros correspondentes, é capaz de gerar uma string de URL::
 
@@ -677,26 +689,24 @@ Para restringir extensões a escopos específicos, você pode defini-las usando 
         $routes->setExtensions(['json', 'xml']);
     });
 
-This will enable the named extensions for all routes that are being connected in
-that scope **after** the ``setExtensions()`` call, including those that are being
-connected in nested scopes. Similar to the global :php:meth:`Router::extensions()`
-method, any routes connected prior to the call will not inherit the extensions.
+
+Isso habilitará as extensões nomeadas para todas as rotas que estão sendo conectadas esse escopo 
+**após** a chamada de ``setExtensions()``, incluindo aqueles que estão sendo conectado em escopos 
+aninhados. Semelhante ao método global :php:meth:`Router::extensions()`, 
+quaisquer rotas conectadas antes da chamada não herdarão as extensões.
 
 .. note::
+    
+    A configuração das extensões deve ser a primeira coisa que você faz em um escopo, pois as extensões 
+    serão aplicadas apenas às rotas conectadas **depois** que as extensões forem definidas.
 
-    Setting the extensions should be the first thing you do in a scope, as the
-    extensions will only be applied to routes connected **after** the extensions
-    are set.
+    Lembre-se também de que escopos reabertos **não** herdarão extensões definidas em escopos abertos anteriormente.
 
-    Also be aware that re-opened scopes will **not** inherit extensions defined in
-    previously opened scopes.
-
-By using extensions, you tell the router to remove any matching file extensions,
-and then parse what remains. If you want to create a URL such as
-/page/title-of-page.html you would create your route using::
+Ao usar extensões, você diz ao roteador para remover as extensões de arquivo correspondentes e analisar o que resta. 
+Se você deseja criar uma URL como /page/title-of-page.html, crie sua rota usando::
 
     Router::scope('/page', function ($routes) {
-        // Prior to 3.5.0 use `extensions()`
+        // Antes de 3.5.0 use `extensions()`
         $routes->setExtensions(['json', 'xml', 'html']);
         $routes->connect(
             '/:title',
@@ -704,30 +714,28 @@ and then parse what remains. If you want to create a URL such as
         )->setPass(['title']);
     });
 
-Then to create links which map back to the routes simply use::
+Para criar links que mapeiam de volta para as rotas, basta usar::
 
     $this->Html->link(
         'Link title',
         ['controller' => 'Pages', 'action' => 'view', 'title' => 'super-article', '_ext' => 'html']
     );
 
-File extensions are used by :doc:`/controllers/components/request-handling`
-to do automatic view switching based on content types.
+As extensões de arquivo são usadas por :doc:`/controllers/components/request-handling` para fazer a troca 
+automática de exibição com base nos tipos de conteúdo.
 
 .. _connecting-scoped-middleware:
 
-Connecting Scoped Middleware
-----------------------------
+Conectando Middleware com Escopo
+--------------------------------
 
-While Middleware can be applied to your entire application, applying middleware
-to specific routing scopes offers more flexibility, as you can apply middleware
-only where it is needed allowing your middleware to not concern itself with
-how/where it is being applied.
+Embora o Middleware possa ser aplicado a todo o aplicativo, a aplicação do middleware a escopos de roteamento 
+específicos oferece mais flexibilidade, pois você pode aplicar o middleware apenas onde for necessário, permitindo 
+que o middleware não se preocupe com como/onde está sendo aplicado.
 
-Before middleware can be applied to a scope, it needs to be
-registered into the route collection::
+Antes que o middleware possa ser aplicado a um escopo, ele precisa ser registrado na coleção de rotas::
 
-    // in config/routes.php
+    // Em config/routes.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
     use Cake\Http\Middleware\EncryptedCookieMiddleware;
 
@@ -736,17 +744,15 @@ registered into the route collection::
         $routes->registerMiddleware('cookies', new EncryptedCookieMiddleware());
     });
 
-Once registered, scoped middleware can be applied to specific
-scopes::
+Uma vez registrado, o middleware com escopo definido pode ser aplicado a escopos específicos::
 
     $routes->scope('/cms', function ($routes) {
-        // Enable CSRF & cookies middleware
+        // Habilita os middlewares de CSRF & cookies
         $routes->applyMiddleware('csrf', 'cookies');
         $routes->get('/articles/:action/*', ['controller' => 'Articles'])
     });
 
-In situations where you have nested scopes, inner scopes will inherit the
-middleware applied in the containing scope::
+Nas situações em que você tem escopos aninhados, os escopos internos herdarão o middleware aplicado no escopo que o contém::
 
     $routes->scope('/api', function ($routes) {
         $routes->applyMiddleware('ratelimit', 'auth.api');
@@ -756,56 +762,56 @@ middleware applied in the containing scope::
         });
     });
 
-In the above example, the routes defined in ``/v1`` will have 'ratelimit',
-'auth.api', and 'v1compat' middleware applied. If you re-open a scope, the
-middleware applied to routes in each scope will be isolated::
+No exemplo acima, as rotas definidas em ``/v1`` terão os middlewares 'ratelimit', 'auth.api' e 'v1compat' aplicados. 
+Se você reabrir um escopo, o middleware aplicado às rotas em cada escopo será isolado::
 
     $routes->scope('/blog', function ($routes) {
         $routes->applyMiddleware('auth');
-        // Connect the authenticated actions for the blog here.
+        // Conecte as ações autenticadas para o blog aqui.
     });
     $routes->scope('/blog', function ($routes) {
-        // Connect the public actions for the blog here.
+        // Conecte as ações públicas para o blog aqui.
     });
 
-In the above example, the two uses of the ``/blog`` scope do not share
-middleware. However, both of these scopes will inherit middleware defined in
-their enclosing scopes.
+No exemplo acima, os dois usos do escopo ``/blog`` não compartilham middleware. No entanto, esses dois escopos 
+herdarão o middleware definido em seus escopos anexos.
 
-Grouping Middleware
--------------------
+Agrupando Middlewares
+---------------------
 
-To help keep your route code :abbr:`DRY (Do not Repeat Yourself)` middleware can
-be combined into groups. Once combined groups can be applied like middleware
-can::
+Para ajudar a manter o seu código de rota :abbr:`DRY (Do not Repeat Yourself)` o middleware pode ser combinado em grupos. 
+Uma vez que grupos combinados podem ser aplicados, como o middleware::
 
     $routes->registerMiddleware('cookie', new EncryptedCookieMiddleware());
     $routes->registerMiddleware('auth', new AuthenticationMiddleware());
     $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
     $routes->middlewareGroup('web', ['cookie', 'auth', 'csrf']);
 
-    // Apply the group
+    // Aplica o grupo
     $routes->applyMiddleware('web');
 
 .. versionadded:: 3.5.0
-    Scoped middleware & middleware groups were added in 3.5.0
+    Grupos de middleware e middleware com escopo foram adicionados na 3.5.0
 
 .. _resource-routes:
 
 Criando rotas RESTful
 =====================
 
-O controle de rotas facilita a geração de rotas RESTful para seus controllers. Repousante as rotas são úteis quando você está criando pontos finais da API para sua aplicação. E se queríamos permitir acesso REST a um controlador de receita, faríamos algo como esta::
+O controle de rotas facilita a geração de rotas RESTful para seus controllers. Repousante as rotas são úteis quando você 
+está criando pontos finais da API para sua aplicação. E se queríamos permitir acesso REST a um controlador de receita, 
+faríamos algo como esta::
 
     // no arquivo config/routes.php...
 
     Router::scope('/', function ($routes) {
-        // anteriora versao 3.5.0 usar `extensions()`
+        // anterior a versao 3.5.0 usar `extensions()`
         $routes->setExtensions(['json']);
         $routes->resources('Recipes');
     });
 
-A primeira linha configura uma série de rotas padrão para REST fácil acesso onde o método especifica o formato de resultado desejado (por exemplo, xml,json, rss). Essas rotas são sensíveis ao método de solicitação HTTP.
+A primeira linha configura uma série de rotas padrão para REST, de fácil acesso onde o método especifica o formato de resultado 
+desejado (por exemplo, xml, json, rss). Essas rotas são sensíveis ao método de solicitação HTTP.
 
 =========== ===================== ==============================
 HTTP format URL.format            Controller action invoked
@@ -823,20 +829,21 @@ PATCH       /recipes/123.format   RecipesController::edit(123)
 DELETE      /recipes/123.format   RecipesController::delete(123)
 =========== ===================== ==============================
 
-A classe CakePHP Router usa uma série de indicadores diferentes para detectar o método HTTP que está sendo usado. Aqui estão em ordem de preferência:
+A classe CakePHP Router usa uma série de indicadores diferentes para detectar o método HTTP que está sendo usado. 
+Aqui estão em ordem de preferência:
 
-#. O \_method POST variable
-#. O X\_HTTP\_METHOD\_OVERRIDE
-#. O REQUEST\_METHOD header
+#. A váriavel ``_method`` POST
+#. O ``X_HTTP_METHOD_OVERRIDE``
+#. O cabeçalho ``REQUEST_METHOD``
 
-O \_method POST variável é útil na utilização de um navegador como um cliente REST (ou qualquer outra coisa que possa fazer POST). Basta definir o valor do \_method para o nome do método de solicitação HTTP que você deseja emular.
+A váriavel ``_method`` POST é útil na quando há um navegador como cliente REST (ou qualquer outra coisa que possa fazer POST). 
+Basta definir o valor do ``\_method`` para o nome do método de solicitação HTTP que você deseja emular.
 
-Creating Nested Resource Routes
--------------------------------
+Criando rotas de recursos aninhados
+-----------------------------------
 
-Once you have connected resources in a scope, you can connect routes for
-sub-resources as well. Sub-resource routes will be prepended by the original
-resource name and a id parameter. For example::
+Depois de conectar recursos em um escopo, você também pode conectar rotas para sub-recursos. As rotas de sub-recursos serão 
+precedidas pelo nome do recurso original e um parâmetro ``id``. Por exemplo::
 
     Router::scope('/api', function ($routes) {
         $routes->resources('Articles', function ($routes) {
@@ -844,19 +851,17 @@ resource name and a id parameter. For example::
         });
     });
 
-Will generate resource routes for both ``articles`` and ``comments``. The
-comments routes will look like::
+Irá gerar rotas de recursos para ``articles`` e ``comments``. As rotas de comentários terão a aparência de::
 
     /api/articles/:article_id/comments
     /api/articles/:article_id/comments/:id
 
-You can get the ``article_id`` in ``CommentsController`` by::
+Você pode obter o ``article_id`` em ``CommentsController`` por::
 
     $this->request->getParam('article_id');
 
-By default resource routes map to the same prefix as the containing scope. If
-you have both nested and non-nested resource controllers you can use a different
-controller in each context by using prefixes::
+Por padrão, as rotas de recursos são mapeadas para o mesmo prefixo que o escopo que contém. Se você tiver controladores 
+de recursos aninhados e não aninhados, poderá usar um controlador diferente em cada contexto usando prefixos::
 
     Router::scope('/api', function ($routes) {
         $routes->resources('Articles', function ($routes) {
@@ -864,50 +869,48 @@ controller in each context by using prefixes::
         });
     });
 
-The above would map the 'Comments' resource to the
-``App\Controller\Articles\CommentsController``. Having separate controllers lets
-you keep your controller logic simpler. The prefixes created this way are
-compatible with :ref:`prefix-routing`.
+A descrição acima mapeia o recurso 'Comments' para ``App\Controller\Articles\CommentsController``. Ter controladores 
+separados permite manter a lógica do controlador mais simples. Os prefixos criados dessa maneira são compatíveis com 
+:ref:`prefix-routing`.
 
 .. note::
 
-    While you can nest resources as deeply as you require, it is not recommended
-    to nest more than 2 resources together.
+    Embora você possa aninhar recursos tão profundamente quanto necessário, não é recomendável 
+    aninhar mais de 2 recursos juntos.
 
 .. versionadded:: 3.3
-    The ``prefix`` option was added to ``resources()`` in 3.3.
+    A opção ``prefix`` foi adicionada a ``resources()`` na versão 3.3.
 
-Limiting the Routes Created
----------------------------
+Limitando as rotas criadas
+--------------------------
 
-By default CakePHP will connect 6 routes for each resource. If you'd like to
-only connect specific resource routes you can use the ``only`` option::
+Por padrão, o CakePHP conectará seis rotas para cada recurso. Se você deseja conectar apenas rotas de recursos 
+específicos, use a opção ``only``::
 
     $routes->resources('Articles', [
         'only' => ['index', 'view']
     ]);
 
-Would create read only resource routes. The route names are ``create``,
-``update``, ``view``, ``index``, and ``delete``.
+Criaria rotas de recurso somente leitura. Os nomes das rotas são ``create``, 
+``update``, ``view``, ``index`` e ``delete``
 
-Changing the Controller Actions Used
-------------------------------------
+Alterando as ações usadas no controlador
+----------------------------------------
 
-You may need to change the controller action names that are used when connecting
-routes. For example, if your ``edit()`` action is called ``put()`` you can
-use the ``actions`` key to rename the actions used::
+Pode ser necessário alterar os nomes de ação do controlador usados ao conectar rotas. Por exemplo, 
+se sua ação ``edit()`` é chamada ``put()``, você pode usar a chave ``actions`` para renomear as ações usadas::
 
     $routes->resources('Articles', [
         'actions' => ['update' => 'put', 'create' => 'add']
     ]);
 
-The above would use ``put()`` for the ``edit()`` action, and ``add()``
-instead of ``create()``.
+O exemplo acima usaria ``put()`` para a ação ``edit()`` e ``add()``
+em vez de ``create()``.
 
-Mapping Additional Resource Routes
-----------------------------------
+Mapeando rotas de recursos adicionais
+-------------------------------------
 
-You can map additional resource methods using the ``map`` option::
+Você pode mapear métodos de recursos adicionais usando a opção ``map``::
 
      $routes->resources('Articles', [
         'map' => [
@@ -917,12 +920,11 @@ You can map additional resource methods using the ``map`` option::
             ]
         ]
      ]);
-     // This would connect /articles/deleteAll
+     // Isso conectaria a /articles/deleteAll
 
-In addition to the default routes, this would also connect a route for
-`/articles/delete_all`. By default the path segment will match the key name. You
-can use the 'path' key inside the resource definition to customize the path
-name::
+Além das rotas padrão, isso também conectaria uma rota para `/articles/delete_all`. Por padrão, o 
+segmento do caminho corresponderá ao nome da chave. Você pode usar a chave 'path' dentro da definição 
+de recurso para personalizar o nome do caminho::
 
     $routes->resources('Articles', [
         'map' => [
@@ -933,18 +935,17 @@ name::
             ],
         ]
     ]);
-    // This would connect /articles/update_many
+    // Isso conectaria a /articles/update_many
 
-If you define 'only' and 'map', make sure that your mapped methods are also in
-the 'only' list.
+Se você definir 'only' e 'map', verifique se seus métodos mapeados também estão na lista 'only'.
 
 .. _custom-rest-routing:
 
-Custom Route Classes for Resource Routes
-----------------------------------------
+Classes de rota personalizadas para rotas de recursos
+-----------------------------------------------------
 
-You can provide ``connectOptions`` key in the ``$options`` array for
-``resources()`` to provide custom setting used by ``connect()``::
+Você pode fornecer a chave ``connectOptions`` na matriz ``$options`` para ``resources()`` para 
+fornecer configurações personalizadas usadas por ``connect()``::
 
     Router::scope('/', function ($routes) {
         $routes->resources('Books', [
@@ -954,14 +955,13 @@ You can provide ``connectOptions`` key in the ``$options`` array for
         ];
     });
 
-URL Inflection for Resource Routes
-----------------------------------
+Inflexão de URL para rotas de recursos
+--------------------------------------
 
-By default, multi-worded controllers' URL fragments are the underscored
-form of the controller's name. E.g., ``BlogPostsController``'s URL fragment
-would be **/blog_posts**.
+Por padrão, os fragmentos de URL dos controladores com várias palavras são a forma sublinhada do nome do 
+controlador. Por exemplo, fragmento de URL do ``BlogPostsController`` seria **/blog_posts**.
 
-You can specify an alternative inflection type using the ``inflect`` option::
+Você pode especificar um tipo de inflexão alternativo usando a opção ``inflect``:
 
     Router::scope('/', function ($routes) {
         $routes->resources('BlogPosts', [
@@ -969,48 +969,44 @@ You can specify an alternative inflection type using the ``inflect`` option::
         ]);
     });
 
-The above will generate URLs styled like: **/blog-posts**.
+O exemplo acima irá gerar URLs com estilo semelhantes a: **/blog-posts**.
 
 .. note::
+    
+    A partir do CakePHP 3.1, o esqueleto oficial do aplicativo usa ``DashedRoute`` como sua classe de 
+    rota padrão. Recomenda-se o uso da opção ``'inflect' => 'dasherize'`` ao conectar rotas de recursos 
+    para garantir a consistência da URL
 
-    As of CakePHP 3.1 the official app skeleton uses ``DashedRoute`` as its
-    default route class. Using the ``'inflect' => 'dasherize'`` option when
-    connecting resource routes is recommended for URL consistency.
+Alterando o elemento de caminho
+-------------------------------
 
-Changing the Path Element
--------------------------
-
-By default resource routes use an inflected form of the resource name for the
-URL segment. You can set a custom URL segment with the ``path`` option::
+Por padrão, as rotas de recursos usam um formulário flexionado do nome do recurso para o segmento de URL. 
+Você pode definir um segmento de URL personalizado com a opção ``path``::
 
     Router::scope('/', function ($routes) {
         $routes->resources('BlogPosts', ['path' => 'posts']);
     });
 
 .. versionadded:: 3.5.0
-    The ``path`` option was added in 3.5.0
+    A opção ``path`` foi adicionada na 3.5.0
 
 .. index:: passed arguments
 .. _passed-arguments:
 
-Passed Arguments
-================
+Passando Argumentos
+===================
 
-Passed arguments are additional arguments or path segments that are
-used when making a request. They are often used to pass parameters
-to your controller methods. ::
+Os argumentos passados são argumentos adicionais ou segmentos de caminho que são usados ao fazer uma solicitação. Eles são
+frequentemente usados para passar parâmetros para os métodos do seu controlador::
 
-    http://localhost/calendars/view/recent/mark
+     http://localhost/calendars/view/recent/mark
 
-In the above example, both ``recent`` and ``mark`` are passed arguments to
-``CalendarsController::view()``. Passed arguments are given to your controllers
-in three ways. First as arguments to the action method called, and secondly they
-are available in ``$this->request->getParam('pass')`` as a numerically indexed
-array. When using custom routes you can force particular parameters to go into
-the passed arguments as well.
+No exemplo acima, os argumentos ``recent`` e ``mark`` são passados para ``CalendarsController::view()``. Os argumentos passados 
+são fornecidos aos seus controladores de três maneiras. Primeiro, como argumentos para o método de ação chamado, segundo, eles 
+estão disponíveis em ``$this->request->getParam('pass')`` como uma matriz numerada indexada. Ao usar rotas personalizadas, você 
+pode forçar parâmetros específicos para entrar e os argumentos passados também.
 
-If you were to visit the previously mentioned URL, and you
-had a controller action that looked like::
+Se você visitar o URL mencionado anteriormente, e teve uma ação de controlador que se parecia com::
 
     class CalendarsController extends AppController
     {
@@ -1020,7 +1016,7 @@ had a controller action that looked like::
         }
     }
 
-You would get the following output::
+Você obteria a seguinte saída::
 
     Array
     (
@@ -1028,13 +1024,13 @@ You would get the following output::
         [1] => mark
     )
 
-This same data is also available at ``$this->request->getParam('pass')`` in your
-controllers, views, and helpers.  The values in the pass array are numerically
-indexed based on the order they appear in the called URL::
+Esses mesmos dados também estão disponíveis em ``$this->request->getParam('pass')`` em seus controladores, 
+views e auxiliares. Os valores na matriz de ``pass`` são indexados numericamente com base na ordem em que 
+aparecem no URL chamado::
 
     debug($this->request->getParam('pass'));
 
-Either of the above would output::
+Qualquer um dos itens acima produziria::
 
     Array
     (
@@ -1042,42 +1038,38 @@ Either of the above would output::
         [1] => mark
     )
 
-When generating URLs, using a :term:`routing array` you add passed
-arguments as values without string keys in the array::
+Ao gerar URLs, usando a :term: `routing array`, você adiciona argumentos 
+passados como valores sem chaves de string na matriz::
 
     ['controller' => 'Articles', 'action' => 'view', 5]
 
-Since ``5`` has a numeric key, it is treated as a passed argument.
+Como ``5`` tem uma chave numérica, ela é tratada como um argumento passado.
 
-Generating URLs
-===============
+Gerando URLs
+============
 
 .. php:staticmethod:: url($url = null, $full = false)
 
-Generating URLs or Reverse routing is a feature in CakePHP that is used to
-allow you to change your URL structure without having to modify all your
-code. By using :term:`routing arrays <routing array>` to define your URLs, you
-can later configure routes and the generated URLs will automatically update.
+Gerar URLs ou roteamento reverso é um recurso do CakePHP que é usado para permitir que você altere sua estrutura de 
+URLs sem precisar modificar todo o seu código. Usando :term:`routing arrays <routing array>` para definir seus URLs, 
+você poderá configurar rotas posteriormente e os URLs gerados serão atualizados automaticamente.
 
-If you create URLs using strings like::
+Se você criar URLs usando strings como::
 
     $this->Html->link('View', '/articles/view/' . $id);
 
-And then later decide that ``/articles`` should really be called
-'posts' instead, you would have to go through your entire
-application renaming URLs. However, if you defined your link like::
+E depois decida que ``/articles`` deve realmente ser chamado de 'posts', você precisará passar por 
+todo o aplicativo renomeando URLs. No entanto, se você definiu seu link como::
 
     $this->Html->link(
         'View',
         ['controller' => 'Articles', 'action' => 'view', $id]
     );
 
-Then when you decided to change your URLs, you could do so by defining a
-route. This would change both the incoming URL mapping, as well as the
-generated URLs.
+Então, quando você decidiu alterar seus URLs, pode fazê-lo definindo uma rota. Isso alteraria o mapeamento de URLs 
+recebidos, bem como os URLs gerados.
 
-When using array URLs, you can define both query string parameters and
-document fragments using special keys::
+Ao usar URLs de matriz, você pode definir parâmetros de sequência de consulta e fragmentos de documento usando chaves especiais::
 
     Router::url([
         'controller' => 'Articles',
@@ -1086,91 +1078,78 @@ document fragments using special keys::
         '#' => 'top'
     ]);
 
-    // Will generate a URL like.
+    // Irá gerar uma URL como.
     /articles/index?page=1#top
 
-Router will also convert any unknown parameters in a routing array to
-querystring parameters.  The ``?`` is offered for backwards compatibility with
-older versions of CakePHP.
+O roteador também converterá quaisquer parâmetros desconhecidos em uma matriz de roteamento em parâmetros de querystring. 
+O ``?`` É oferecido para compatibilidade com versões anteriores do CakePHP.
 
-You can also use any of the special route elements when generating URLs:
+Você também pode usar qualquer um dos elementos de rota especiais ao gerar URLs:
 
-* ``_ext`` Used for :ref:`file-extensions` routing.
-* ``_base`` Set to ``false`` to remove the base path from the generated URL. If
-  your application is not in the root directory, this can be used to generate
-  URLs that are 'cake relative'.
-* ``_scheme``  Set to create links on different schemes like ``webcal`` or
-  ``ftp``. Defaults to the current scheme.
-* ``_host`` Set the host to use for the link.  Defaults to the current host.
-* ``_port`` Set the port if you need to create links on non-standard ports.
-* ``_method`` Define the HTTP verb the URL is for.
-* ``_full``  If ``true`` the ``FULL_BASE_URL`` constant will be prepended to
-  generated URLs.
-* ``_ssl`` Set to ``true`` to convert the generated URL to https or ``false``
-  to force http.
-* ``_name`` Name of route. If you have setup named routes, you can use this key
-  to specify it.
+* ``_ext`` Usado para :ref:`file-extensions` roteamento.
+* ``_base`` define como ``false`` para remover o caminho base da URL gerada. 
+Se seu aplicativo não estiver no diretório raiz, isso poderá ser usado para 
+gerar URLs que são 'relativos ao cake'.
+* ``_scheme`` Configure para criar links em diferentes esquemas, como ``webcal`` ou ``ftp``. O padrão é o esquema atual.
+* ``_host`` Defina o host a ser usado para o link. O padrão é o host atual.
+* ``_port`` Defina a porta se precisar criar links em portas não padrão.
+* ``_method`` Defina o verbo HTTP para o qual a URL é.
+* ``_full`` Se ``true``, a constante ``FULL_BASE_URL`` será anexada aos URLs gerados.
+* ``_ssl`` Defina como ``true`` para converter o URL gerado em https ou ``false`` para forçar http.
+* ``_name`` Nome da rota. Se você configurou rotas nomeadas, poderá usar esta chave para especificá-la.
 
 .. _redirect-routing:
 
-Redirect Routing
-================
+Rotas de redirecionamento
+=========================
 
-Redirect routing allows you to issue HTTP status 30x redirects for
-incoming routes, and point them at different URLs. This is useful
-when you want to inform client applications that a resource has moved
-and you don't want to expose two URLs for the same content.
+O roteamento de redirecionamento permite emitir redirecionamentos de status HTTP 30x para rotas de entrada e 
+apontá-los para URLs diferentes. Isso é útil quando você deseja informar aos aplicativos clientes que um recurso 
+foi movido e não deseja expor dois URLs para o mesmo conteúdo.
 
-Redirection routes are different from normal routes as they perform an actual
-header redirection if a match is found. The redirection can occur to
-a destination within your application or an outside location::
+As rotas de redirecionamento são diferentes das rotas normais, pois executam um redirecionamento de cabeçalho real se 
+uma correspondência for encontrada. O redirecionamento pode ocorrer para um destino dentro do seu aplicativo ou para 
+um local externo::
 
     Router::scope('/', function ($routes) {
         $routes->redirect(
             '/home/*',
             ['controller' => 'Articles', 'action' => 'view'],
             ['persist' => true]
-            // Or ['persist'=>['id']] for default routing where the
-            // view action expects $id as an argument.
+            // Ou ['persist' => ['id']] para roteamento padrão em que 
+            // a ação de exibição espera o $id como argumento.
         );
     })
 
-Redirects ``/home/*`` to ``/articles/view`` and passes the parameters to
-``/articles/view``. Using an array as the redirect destination allows
-you to use other routes to define where a URL string should be
-redirected to. You can redirect to external locations using
-string URLs as the destination::
+Redireciona ``/home/*`` para ``/articles/view`` e passa os parâmetros para ``/articles/view``. O uso de uma 
+matriz como destino de redirecionamento permite usar outras rotas para definir para onde uma string de URL 
+deve ser redirecionada. Você pode redirecionar para locais externos usando URLs de string como destino::
 
     Router::scope('/', function ($routes) {
         $routes->redirect('/articles/*', 'http://google.com', ['status' => 302]);
     });
 
-This would redirect ``/articles/*`` to ``http://google.com`` with a
-HTTP status of 302.
+Isso redirecionaria ``/articles/*`` para ``http://google.com`` com um status HTTP 302.
 
 .. _custom-route-classes:
 
-Custom Route Classes
-====================
+Classes de rota personalizadas
+==============================
 
-Custom route classes allow you to extend and change how individual routes parse
-requests and handle reverse routing. Route classes have a few conventions:
+As classes de rota personalizadas permitem estender e alterar como rotas individuais analisam solicitações e 
+manipulam o roteamento reverso. As classes de rota têm algumas convenções:
 
-* Route classes are expected to be found in the ``Routing\\Route`` namespace of
-  your application or plugin.
-* Route classes should extend :php:class:`Cake\\Routing\\Route`.
-* Route classes should implement one or both of ``match()`` and/or ``parse()``.
+* As classes de rota devem ser encontradas no espaço de nome ``Routing\\Route`` do seu aplicativo ou plugin.
+* As classes de rota devem estender :php:class:`Cake\\Routing\\Route`.
+* As classes de rota devem implementar os métodos ``match()`` e/ou ``parse()``.
 
-The ``parse()`` method is used to parse an incoming URL. It should generate an
-array of request parameters that can be resolved into a controller & action.
-Return ``false`` from this method to indicate a match failure.
+O método ``parse()`` é usado para analisar uma URL recebida. Ele deve gerar uma matriz de parâmetros de solicitação 
+que podem ser resolvidos em um controlador e ação. Retorne ``false`` deste método para indicar uma falha na correspondência.
 
-The ``match()`` method is used to match an array of URL parameters and create a
-string URL. If the URL parameters do not match the route ``false`` should be
-returned.
+O método ``match()`` é usado para corresponder a uma matriz de parâmetros de URL e criar uma URL de string. Se os 
+parâmetros de URL não corresponderem à rota, ``false`` deve ser retornado.
 
-You can use a custom route class when making a route by using the ``routeClass``
-option::
+Você pode usar uma classe de rota personalizada ao fazer uma rota usando a opção ``routeClass``::
 
     $routes->connect(
          '/:slug',
@@ -1178,9 +1157,9 @@ option::
          ['routeClass' => 'SlugRoute']
     );
 
-    // Or by setting the routeClass in your scope.
+    // Ou configurando o routeClass no seu escopo.
     $routes->scope('/', function ($routes) {
-        //Prior to 3.5.0 use `routeClass()`
+        // Antes de 3.5.0 use `routeClass()`
         $routes->setRouteClass('SlugRoute');
         $routes->connect(
              '/:slug',
@@ -1188,29 +1167,27 @@ option::
         );
     });
 
-This route would create an instance of ``SlugRoute`` and allow you
-to implement custom parameter handling. You can use plugin route classes using
-standard :term:`sintaxe plugin`.
+Esta rota criaria uma instância de ``SlugRoute`` e permitiria a você implementar a manipulação de parâmetros 
+personalizados. Você pode usar as classes de rota do plugin usando standard:term:`sintaxe plugin`.
 
-Default Route Class
--------------------
+Classe de rota padrão
+---------------------
 
 .. php:staticmethod:: defaultRouteClass($routeClass = null)
 
-If you want to use an alternate route class for all your routes besides the
-default ``Route``, you can do so by calling ``Router::defaultRouteClass()``
-before setting up any routes and avoid having to specify the ``routeClass``
-option for each route. For example using::
+Se você deseja usar uma classe de rota alternativa para todas as suas rotas além do padrão ``Route``, 
+pode fazê-lo chamando ``Router::defaultRouteClass()`` antes de configurar qualquer rota e evitar especificar 
+a opção ``routeClass`` para cada rota. Por exemplo, usando::
 
     use Cake\Routing\Route\InflectedRoute;
 
     Router::defaultRouteClass(InflectedRoute::class);
 
-will cause all routes connected after this to use the ``InflectedRoute`` route class.
-Calling the method without an argument will return current default route class.
+fará com que todas as rotas conectadas depois disso usem a classe de rota ``InflectedRoute``. Chamar o método 
+sem um argumento retornará a classe de rota padrão atual.
 
-Fallbacks Method
-----------------
+Método de fallbacks
+-------------------
 
 .. php:method:: fallbacks($routeClass = null)
 
@@ -1218,13 +1195,19 @@ The fallbacks method is a simple shortcut for defining default routes. The
 method uses the passed routing class for the defined rules or if no class is
 provided the class returned by ``Router::defaultRouteClass()`` is used.
 
-Calling fallbacks like so::
+Calling fallbacks like so
+
+O método de fallbacks é um atalho simples para definir rotas padrão. O método usa a classe de roteamento 
+passada para as regras definidas ou, se nenhuma classe for fornecida, a classe retornada por 
+``Router::defaultRouteClass()`` será usada.
+
+Chamando fallbacks assim::
 
     use Cake\Routing\Route\DashedRoute;
 
     $routes->fallbacks(DashedRoute::class);
 
-Is equivalent to the following explicit calls::
+É equivalente às seguintes chamadas explícitas::
 
     use Cake\Routing\Route\DashedRoute;
 
@@ -1232,26 +1215,24 @@ Is equivalent to the following explicit calls::
     $routes->connect('/:controller/:action/*', [], ['routeClass' => DashedRoute::class]);
 
 .. note::
+    
+    O uso da classe de rota padrão (``Route``) com fallbacks ou qualquer rota 
+    com elementos de rota ``:plugin`` e/ou ``:controller`` resultará em uma URL inconsistente
 
-    Using the default route class (``Route``) with fallbacks, or any route
-    with ``:plugin`` and/or ``:controller`` route elements will result in
-    inconsistent URL case.
+Criando parâmetros de URL persistentes
+======================================
 
-Creating Persistent URL Parameters
-==================================
+Você pode se conectar ao processo de geração de URL usando as funções de filtro de URL. As funções de filtro são 
+chamadas *antes* dos URLs corresponderem às rotas, permitindo preparar os URLs antes do roteamento.
 
-You can hook into the URL generation process using URL filter functions. Filter
-functions are called *before* the URLs are matched against the routes, this
-allows you to prepare URLs before routing.
+As funções de filtro de retorno de chamada devem esperar os seguintes parâmetros:
 
-Callback filter functions should expect the following parameters:
+- ``$params`` Os parâmetros de URL que estão sendo processados.
+- ``$request`` A solicitação atual.
 
-- ``$params`` The URL parameters being processed.
-- ``$request`` The current request.
+A função de filtro de URL deve *sempre* retornar os parâmetros, mesmo que não seja modificada.
 
-The URL filter function should *always* return the parameters even if unmodified.
-
-URL filters allow you to implement features like persistent parameters::
+Os filtros de URL permitem implementar recursos como parâmetros persistentes::
 
     Router::addUrlFilter(function ($params, $request) {
         if ($request->getParam('lang') && !isset($params['lang'])) {
@@ -1260,10 +1241,9 @@ URL filters allow you to implement features like persistent parameters::
         return $params;
     });
 
-Filter functions are applied in the order they are connected.
+As funções de filtro são aplicadas na ordem em que estão conectadas.
 
-Another use case is changing a certain route on runtime (plugin routes for
-example)::
+Outro caso de uso está mudando uma determinada rota no tempo de execução (rotas de plug-in, por exemplo)::
 
     Router::addUrlFilter(function ($params, $request) {
         if (empty($params['plugin']) || $params['plugin'] !== 'MyPlugin' || empty($params['controller'])) {
@@ -1278,24 +1258,22 @@ example)::
         return $params;
     });
 
-This will alter the following route::
+Isso alterará a seguinte rota::
 
     Router::url(['plugin' => 'MyPlugin', 'controller' => 'Languages', 'action' => 'view', 'es']);
 
-into this::
+nisso::
 
     Router::url(['plugin' => 'MyPlugin', 'controller' => 'Locations', 'action' => 'index', 'language' => 'es']);
 
-Handling Named Parameters in URLs
-=================================
+Manipulando parâmetros nomeados em URLs
+=======================================
 
-Although named parameters were removed in CakePHP 3.0, applications may have
-published URLs containing them.  You can continue to accept URLs containing
-named parameters.
+Embora os parâmetros nomeados tenham sido removidos no CakePHP 3.0, os aplicativos podem ter URLs publicados que os 
+contêm. Você pode continuar aceitando URLs contendo parâmetros nomeados.
 
-In your controller's ``beforeFilter()`` method you can call
-``parseNamedParams()`` to extract any named parameters from the passed
-arguments::
+No método ``beforeFilter()`` do seu controlador, você pode chamar ``parseNamedParams()`` para extrair 
+qualquer parâmetro nomeado dos argumentos passados::
 
     public function beforeFilter(Event $event)
     {
@@ -1303,9 +1281,9 @@ arguments::
         Router::parseNamedParams($this->request);
     }
 
-This will populate ``$this->request->getParam('named')`` with any named parameters
-found in the passed arguments.  Any passed argument that was interpreted as a
-named parameter, will be removed from the list of passed arguments.
+Isso preencherá ``$this->request->getParam('named')`` com quaisquer parâmetros nomeados encontrados nos 
+argumentos passados. Qualquer argumento passado que foi interpretado como um parâmetro nomeado será removido da 
+lista de argumentos passados.
 
 .. toctree::
     :glob:
