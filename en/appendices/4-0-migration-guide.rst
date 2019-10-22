@@ -192,6 +192,8 @@ Http
 * The default value of ``App.mergeFilesAsObjects`` is now ``true``. If your
   application uses file uploads you can set this flag to ``false`` to retain
   compatibility with the behavior in 3.x.
+* The keys of array returned by ``Cake\Http\Response::getCookie()`` have changed.
+  ``expire`` is changed to ``expires`` and ``httpOnly`` to ``httponly``.
 
 I18n
 ----
