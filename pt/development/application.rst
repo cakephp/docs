@@ -28,13 +28,9 @@ O uso da classe Application e do HTTP Middleware em um aplicativo existente requ
 #. Crie uma classe ``Application``. Veja a seção :ref:`using-middleware`
     acima para saber como fazer isso. Ou copie o exemplo no `app skeleton 
     <https://github.com/cakephp/app/tree/master/src/Application.php>`__.
-#. Crie **config/requirements.php** se não existir e adicione o conteúdo de
-   `app skeleton <https://github.com/cakephp/app/blob/master/config/requirements.php>`__.
-#. Adicione a ``_cake_routes_`` uma definição de cache em **config/app.php**, se ainda
-  não estiver lá.
-#. Atualize **config/bootstrap.php** e **config/bootstrap_cli.php**
-   de acordo com `app_skeleton
-   <https://github.com/cakephp/app/tree/master/config/bootstrap.php>`__,
+#. Crie **config/requirements.php** se não existir e adicione o conteúdo de `app skeleton <https://github.com/cakephp/app/blob/master/config/requirements.php>`__.
+#. Adicione a ``cake_routes`` uma definição de cache em **config/app.php**, se ainda não estiver lá.
+#. Atualize **config/bootstrap.php** e **config/bootstrap_cli.php** de acordo com `app_skeleton <https://github.com/cakephp/app/tree/master/config/bootstrap.php>`__,
    tomando cuidado para preservar quaisquer adições e alterações específicas de seu aplicativo. 
    As atualizações do bootstrap.php incluem:
    * Desabilitando o cache ``_cake_routes_`` em modo de desenvolvimento
