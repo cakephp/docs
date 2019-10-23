@@ -20,64 +20,57 @@ personalizar o tratamento de erros para o seu aplicativo. As seguintes opções 
 * ``skipLog`` - array - Uma matriz de nomes de classes de exceção que não devem ser registrados. Isso é útil para remover NotFoundExceptions ou outras mensagens de log comuns, mas desinteressantes.
 * ``extraFatalErrorMemory`` - int - Defina como o número de megabytes para aumentar o limite de memória quando um erro fatal for encontrado. Isso permite que o espaço sobrando complete o registro ou o tratamento de erros.
 
-By default, PHP errors are displayed when ``debug`` is ``true``, and logged
-when debug is ``false``. The fatal error handler will be called independent
-of ``debug`` level or ``errorLevel`` configuration, but the result will be
-different based on ``debug`` level. The default behavior for fatal errors is
-show a page to internal server error (``debug`` disabled) or a page with the
-message, file and line (``debug`` enabled).
+
+Por padrão, os erros do PHP são exibidos quando ``debug`` é ``true`` e registrados quando o 
+debug é ``false``. O manipulador de erro fatal será chamado independente da configuração do 
+nível ``debug`` ou ``errorLevel``, mas o resultado será diferente com base no nível de ``debug``. 
+O comportamento padrão para erros fatais é mostrar uma página para o erro interno do servidor 
+(``debug`` desativado) ou uma página com a mensagem, arquivo e linha (``debug`` ativada).
 
 .. note::
 
-    If you use a custom error handler, the supported options will
-    depend on your handler.
+    Se você usar um manipulador de erros personalizado, as opções suportadas dependerão do seu manipulador.
 
 .. php:class:: ExceptionRenderer(Exception $exception)
 
-Changing Exception Handling
-===========================
+Alterando o tratamento de exceções
+==================================
 
-Exception handling offers several ways to tailor how exceptions are handled.  Each
-approach gives you different amounts of control over the exception handling
-process.
+O tratamento de exceções oferece várias maneiras de personalizar como as exceções são tratadas. Cada 
+abordagem fornece diferentes quantidades de controle sobre o processo de tratamento de exceções.
 
-#. *Customize the error templates* This allows you to change the rendered view
-   templates as you would any other template in your application.
-#. *Customize the ErrorController* This allows you to control how exception
-   pages are rendered.
-#. *Customize the ExceptionRenderer* This allows you to control how exception
-   pages and logging are performed.
-#. *Create & register your own error handler* This gives you complete
-   control over how errors & exceptions are handled, logged and rendered.
+#. *Customize o template de error* Isso permite alterar os modelos de exibição renderizados como faria com qualquer outro modelo em seu aplicativo.
+#. *Customize o ErrorController* Isso permite que você controle como as páginas de exceção são renderizadas.
+#. *Customize o ExceptionRenderer* Isso permite que você controle como as páginas de exceção e o log são executados.
+#. *Crie e registre seu próprio manipulador de erros* Isso fornece controle total sobre como os erros e exceções são tratados, registrados e renderizados.
 
 .. _error-views:
 
-Customize Error Templates
-=========================
+Customizando Templates de Erro
+==============================
 
-The default error handler renders all uncaught exceptions your application
-raises with the help of ``Cake\Error\ExceptionRenderer``, and your application's
-``ErrorController``.
+O manipulador de erros padrão renderiza todas as exceções não capturadas que seu aplicativo gera com a 
+ajuda de ``Cake\Error\ExceptionRenderer`` e o ``ErrorController`` do seu aplicativo.
 
-The error page views are located at **src/Template/Error/**. By default all 4xx errors
-use the **error400.ctp** template, and all 5xx errors use the **error500.ctp**. Your
-error templates will have the following variables available:
+As visualizações da página de erro estão localizadas em **src/Template/Error/**. Por padrão, 
+todos os erros 4xx usam o modelo **error400.ctp** e todos os erros 5xx usam o **error500.ctp**. 
+Seus modelos de erro terão as seguintes variáveis disponíveis:
 
-* ``message`` The exception message.
-* ``code`` The exception code.
-* ``url`` The request URL.
-* ``error`` The exception object.
+* ``message`` A mensagem da exceção.
+* ``code`` O código da exceção.
+* ``url`` A URL requisitada.
+* ``error`` O objeto da exceção.
 
-In debug mode if your error extends ``Cake\Core\Exception\Exception`` the
-data returned by ``getAttributes()`` will be exposed as view variables as well.
+No modo de depuração, se o erro estender ``Cake\Core\Exception\Exception``, os dados retornados 
+por ``getAttributes()`` serão expostos como variáveis de exibição também.
 
 .. note::
-    You will need to set ``debug`` to false, to see your **error404** and
-    **error500** templates. In debug mode, you'll see CakePHP's development
-    error page.
+    
+    Você precisará definir ``debug`` para false, para ver seus modelos **error404** e **error500**. 
+    No modo de depuração, você verá a página de erro de desenvolvimento do CakePHP.
 
-Customize the Error Page Layout
--------------------------------
+Personalizar o layout da página de erro
+---------------------------------------
 
 By default error templates use **src/Template/Layout/error.ctp** for a layout.
 You can use the ``layout`` property to pick a different layout::
