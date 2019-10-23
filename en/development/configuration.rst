@@ -14,7 +14,6 @@ out default values & implementations with ones tailored to your application.
 Configuring your Application
 ============================
 
-<<<<<<< HEAD
 Configuration is generally stored in either PHP or INI files, and loaded during
 the application bootstrap. CakePHP comes with one configuration file by default,
 but if required you can add additional configuration files and load them in
@@ -145,10 +144,6 @@ App.uploadedFilesAsObjects
     or arrays (``false``). This option is being treated as disabled by default.
     See the :ref:`File Uploads section <request-file-uploads>` in the Request &
     Response Objects chapter for more information.
-
-    .. versionadded:: 3.9.0
-        Support for uploaded files as objects in the request data was added in
-        version 3.9.0
 Security.salt
     A random string used in hashing. This value is also used as the
     HMAC salt when doing symetric encryption.
@@ -160,7 +155,6 @@ Asset.timestamp
     - (bool) ``false`` - Doesn't do anything (default)
     - (bool) ``true`` - Appends the timestamp when debug is ``true``
     - (string) 'force' - Always appends the timestamp.
-
 Asset.cacheTime
     Sets the asset cache time. This determines the http header ``Cache-Control``'s
     ``max-age``, and the http header's ``Expire``'s time for assets.

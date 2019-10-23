@@ -321,14 +321,14 @@ Console
 * Command classes can implement the ``defaultName()`` method to overwrite the
   conventions based CLI name.
 
-Table
------
+Core
+----
 
-* ``Table::newEmptyEntity()`` has been added to create a new and empty entity
-  object.  This does not trigger any field validation. The entity can be
-  persisted without validation error as an empty record. ``Table::newEntity()``
-  now requires an array as input and enforces validation to prevent accidental
-  saves without validation being triggered.
+* ``InstanceConfigTrait::getConfigOrFail()`` and 
+  ``StaticConfigTrait::getConfigOrFail()`` were added. Like other ``orFail`` 
+  methods these methods will raise an exception when the requested key doesn't
+  exist or has a ``null`` value.
+
 
 Database
 --------
@@ -391,6 +391,12 @@ ORM
 * ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been
   added for removing many entities at once including callbacks. The entities are
   removed transaction safe.
+* ``Table::newEmptyEntity()`` has been added to create a new and empty entity
+  object.  This does not trigger any field validation. The entity can be
+  persisted without validation error as an empty record. ``Table::newEntity()``
+  now requires an array as input and enforces validation to prevent accidental
+  saves without validation being triggered.
+
 
 Routing
 -------
