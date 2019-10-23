@@ -371,6 +371,7 @@ Http
   simpler.
 * ``HttpsEnforcerMiddleware`` was added. This replaced the ``requireSecure``
   feature of ``SecurityComponent``.
+* Cookies now support the ``SameSite`` attribute.
 
 Mailer
 ------
