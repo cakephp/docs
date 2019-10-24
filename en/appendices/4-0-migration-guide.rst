@@ -213,11 +213,10 @@ Mailer
 ORM
 ---
 
-* Conditions that have null values must explicitly use the ``IS`` operator now.
-  In previous versions using ``['name' => null]`` would generate SQL like
-  ``name = NULL`` which always matches 0 rows. This situation will now raise an
-  exception. You will need to update your where clauses to use
-  ``['name IS' => null]`` instead.
+* Using condition like ``['name' => null]`` for ``Query::where()`` will now raise an exception.
+  In 3.x it would generate condition like ``name = NULL`` in SQL which will
+  always matches 0 rows, thus returning incorrect results. When comparing with ``null`` 
+  you must use the ``IS`` operator like ``['name IS' => null]``.
 
 Router
 ------
