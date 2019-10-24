@@ -215,7 +215,7 @@ ORM
 
 * Using condition like ``['name' => null]`` for ``Query::where()`` will now raise an exception.
   In 3.x it would generate condition like ``name = NULL`` in SQL which will
-  always matches 0 rows, thus returning incorrect results. When comparing with ``null` 
+  always matches 0 rows, thus returning incorrect results. When comparing with ``null`` 
   you must use the ``IS`` operator like ``['name IS' => null]``.
 
 Router
