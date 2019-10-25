@@ -38,4 +38,4 @@ COPY --from=builder /data/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Move built site into place
 RUN mkdir -p /usr/share/nginx/html/ \
- && mv /data/website /usr/share/nginx/html/3.0
+ && mv /data/website /usr/share/nginx/html/3
