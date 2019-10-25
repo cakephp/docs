@@ -46,3 +46,12 @@ ORM
 
 * ``Entity::isNew()`` をセッターとして使うことは非推奨です。代わりに ``setNew()`` を使用してください。
 * ``Entity::unsetProperty()`` は、他のメソッドに合わせて ``Entity::unset()`` に名前が変更されました。
+
+View
+----
+
+* ``JsonView``の特殊なビュー変数 ``_serialize`` 、 ``_jsonOptions`` および ``_jsonp`` は非推奨になりました。
+  代わりに、 ``viewBuilder()->setOption($optionName, $optionValue)`` を、それらのオプションを設定するために使用してください。
+* ``XmlView`` の特殊なビュー変数 ``_serialize`` 、 ``_rootNode`` および ``_xmlOptions`` は非推奨になりました。
+  代わりに、 ``viewBuilder()->setOption($optionName, $optionValue)`` を、それらのオプションを設定するために使用してください。
+* ``HtmlHelper::tableHeaders()`` は、ネストされたリストとして定義される属性を持つヘッダーセルを優先するようになりました。
