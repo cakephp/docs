@@ -211,8 +211,8 @@ la création d'articles. Commencez par créer une action ``add()`` dans le
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
 
-                // Hardcoding the user_id is temporary, and will be removed later
-                // when we build authentication out.
+                // L'écriture de 'user_id' en dur est temporaire et
+                // sera supprimé quand nous aurons mis en place l'authentification.
                 $article->user_id = 1;
 
                 if ($this->Articles->save($article)) {
@@ -233,7 +233,7 @@ la création d'articles. Commencez par créer une action ``add()`` dans le
 
 Voici ce que l'action ``add()`` fait :
 
-* Si la méthode HTTP de la requête est un POST, cela tentera de sauvergarder les données
+* Si la méthode HTTP de la requête est un POST, cela tentera de sauvegarder les données
   en utilisant le model Articles.
 * Si pour une quelconque raison la sauvegarde ne se fait pas, cela rendra juste la view.
   Cela nous donne ainsi une chance de montrer les erreurs de validation ou d'autres
