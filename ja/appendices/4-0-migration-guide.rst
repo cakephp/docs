@@ -55,3 +55,41 @@ View
 * ``XmlView`` の特殊なビュー変数 ``_serialize`` 、 ``_rootNode`` および ``_xmlOptions`` は非推奨になりました。
   代わりに、 ``viewBuilder()->setOption($optionName, $optionValue)`` を、それらのオプションを設定するために使用してください。
 * ``HtmlHelper::tableHeaders()`` は、ネストされたリストとして定義される属性を持つヘッダーセルを優先するようになりました。
+  例: ``['Title', ['class' => 'special']]``
+
+Mailer
+-----
+
+* ``Cake\Mailer\Email`` クラスは非推奨になります。代わりに、 ``Cake\Mailer\Mailer`` を使用してください。
+
+App
+---
+
+* ``App::path()`` の2番目の引数 ``$plugin`` は非推奨です。プラグインパス用には、代わりに、
+  ``\Cake\Core\Plugin::classPath()/templatePath()`` を使用してください。
+
+破壊的変更
+==========
+
+非推奨機能の削除に加えて、破壊的変更が行われました。
+
+Cache
+-----
+
+* ``Cake\Cache\CacheEngine::gc()`` とこのメソッドのすべての実装が削除されました。
+  このメソッドは、ほとんどのキャッシュドライバーでノーオペレーションであり、ファイルキャッシュでのみ使用されていました。
+
+Controller
+----------
+
+* ``Cake\Controller\Controller::referer()`` は、デフォルトで ``local`` パラメーターを、
+  false ではなく true に設定します。
+  これにより、デフォルトでアプリケーションのドメインに制限されるため、リファラルヘッダーの使用がより安全になります。
+* アクションの呼び出し時のコントローラーメソッド名のマッチングで、大文字と小文字が区別されるようになりました。
+  たとえば、コントローラーメソッドが ``forgotPassword()`` の場合、 URL で文字列 ``forgotpassword``
+  を使用すると、アクション名としてマッチしません。
+
+Console
+-------
+
+* ``ConsoleIo::styles()`` は ``getStyle()`` と ``setStyle()`` に分割されました。これは ``ConsoleOutput`` にも影響します。
