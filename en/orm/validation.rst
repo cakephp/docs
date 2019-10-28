@@ -429,6 +429,29 @@ Note that ``validCount`` returns ``false`` if the property is not countable or d
     // The save operation will fail if tags is null.
     $rules->add($rules->validCount('tags', 0, '<=', 'You must not have any tags'));
 
+Association Link Constraint Rule
+--------------------------------
+
+The ``LinkConstraint`` lets you emulate SQL constraints in databases that don't
+support them. This rule enables you to check if an association does or does not
+have related records depending on the mode used::
+
+    // Ensure that each comment is linked to an Article during updates.
+    $rules->update($rules->isLinkedTo(
+        'Articles',
+        'article',
+        'Requires an article'
+    ));
+
+    // Ensure that an article has no linked comments during delete.
+    $rules->delete($rules->isNotLinkedTo(
+        'Comments',
+        'comments',
+        'Must have zero comments before deletion.'
+    ));
+
+.. versionadded:: 4.0.0
+
 Using Entity Methods as Rules
 -----------------------------
 

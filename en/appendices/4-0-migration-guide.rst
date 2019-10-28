@@ -395,6 +395,9 @@ ORM
   persisted without validation error as an empty record. ``Table::newEntity()``
   now requires an array as input and enforces validation to prevent accidental
   saves without validation being triggered.
+* ``Cake\ORM\RulesChecker::isLinkedTo()`` and ``isNotLinkedTo()`` were added.
+  These new application rules allow you to ensure an association has or doesn't
+  have related records.
 
 
 Routing
