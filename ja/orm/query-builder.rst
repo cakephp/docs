@@ -23,9 +23,7 @@ SQL インジェクション攻撃から守っています。
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6.0
-    $articles = TableRegistry::get('Articles');
-
+    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // 新しいクエリーを始めます。
@@ -44,9 +42,7 @@ SQL インジェクション攻撃から守っています。
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6.0
-    $query = TableRegistry::get('Articles')->find();
-
+    // Prior to 3.6 use TableRegistry::get('Articles')
     $query = TableRegistry::getTableLocator()->get('Articles')->find();
 
     foreach ($query as $article) {

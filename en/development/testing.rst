@@ -1312,7 +1312,7 @@ make testing responses much simpler. Some examples are::
     // Assert partial response content
     $this->assertResponseContains('You won!');
     $this->assertResponseNotContains('You lost!');
-    
+
     // Assert file sent back
     $this->assertFileResponse('/absolute/path/to/file.ext');
 
@@ -1760,9 +1760,7 @@ directories you can use the following: ``plugin.vendorName/pluginName.folderName
 Before you can use fixtures you should ensure you have the :ref:`fixture
 listener <fixture-phpunit-configuration>` configured in your ``phpunit.xml``
 file. You should also ensure that your fixtures are loadable. Ensure the
-following is present in your **composer.json** file:
-
-.. code-block:: json
+following is present in your **composer.json** file::
 
     "autoload-dev": {
         "psr-4": {

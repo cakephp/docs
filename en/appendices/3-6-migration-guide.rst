@@ -61,6 +61,9 @@ features will continue to function until 4.0.0 after which they will be removed.
   ``setMap()`` instead.
 * Passing ``$className`` as object to ``Cake\Database\Type::map()`` is deprecated. Use
   ``set()`` instead.
+* ``Cake\Routing\Dispatcher`` is deprecated. You should upgrade to :ref:`new
+  HTTP stack <adding-http-stack>`.
+
 
 Several classes were *renamed*. Their old names will continue to work until 4.0,
 but will emit deprecation warnings:

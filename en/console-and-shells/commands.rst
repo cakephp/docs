@@ -370,9 +370,7 @@ Modify your test case to the following snippet of code::
             $this->exec('update_table Users');
             $this->assertExitCode(Command::CODE_SUCCESS);
 
-            // Prior to 3.6.0
-            $user = TableRegistry::get('Users')->get(1);
-
+            // Prior to 3.6 use TableRegistry::get('Users')
             $user = TableRegistry::getTableLocator()->get('Users')->get(1);
             $this->assertSame($user->modified->timestamp, $now->timestamp);
 
@@ -455,9 +453,7 @@ incorrect response. Remove the ``testUpdateModified`` method and, add the follow
         $this->exec('update_table Users', ['y']);
         $this->assertExitCode(Command::CODE_SUCCESS);
 
-        // Prior to 3.6.0
-        $user = TableRegistry::get('Users')->get(1);
-
+        // Prior to 3.6 use TableRegistry::get('Users')
         $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $this->assertSame($user->modified->timestamp, $now->timestamp);
 
@@ -466,9 +462,7 @@ incorrect response. Remove the ``testUpdateModified`` method and, add the follow
 
     public function testUpdateModifiedUnsure()
     {
-        // Prior to 3.6.0
-        $user = TableRegistry::get('Users')->get(1);
-
+        // Prior to 3.6 use TableRegistry::get('Users')
         $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $original = $user->modified->timestamp;
 
@@ -476,9 +470,7 @@ incorrect response. Remove the ``testUpdateModified`` method and, add the follow
         $this->assertExitCode(Command::CODE_ERROR);
         $this->assertErrorContains('You need to be sure.');
 
-        // Prior to 3.6.0
-        $user = TableRegistry::get('Users')->get(1);
-
+        // Prior to 3.6 use TableRegistry::get('Users')
         $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $this->assertSame($original, $user->timestamp);
     }

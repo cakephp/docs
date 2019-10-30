@@ -746,10 +746,9 @@ now looks like this::
         public function setUp()
         {
             parent::setUp();
-            $this->Articles = TableRegistry::getTableLocator()->get('Articles');
 
-            // Prior to 3.6.0
-            $this->Articles = TableRegistry::get('Articles');
+            // Prior to 3.6 use TableRegistry::get('Articles')
+            $this->Articles = TableRegistry::getTableLocator()->get('Articles');
         }
 
         public function testFindPublished()
@@ -897,9 +896,7 @@ Create a file named **ArticlesControllerTest.php** in your
             $this->post('/articles', $data);
             $this->assertResponseSuccess();
 
-            // Prior to 3.6.0
-            $articles = TableRegistry::get('Articles');
-
+            // Prior to 3.6 use TableRegistry::get('Articles')
             $articles = TableRegistry::getTableLocator()->get('Articles');
             $query = $articles->find()->where(['title' => $data['title']]);
             $this->assertEquals(1, $query->count());
@@ -1454,9 +1451,7 @@ snippet of code::
             $this->exec('my_console update_modified Users');
             $this->assertExitCode(Shell::CODE_SUCCESS);
 
-            // Prior to 3.6.0
-            $user = TableRegistry::get('Users')->get(1);
-
+            // Prior to 3.6 use TableRegistry::get('Users')
             $user = TableRegistry::getTableLocator()->get('Users')->get(1);
             $this->assertSame($user->modified->timestamp, $now->timestamp);
 
@@ -1856,10 +1851,9 @@ the event data::
         public function setUp()
         {
             parent::setUp();
-            $this->Orders = TableRegistry::getTableLocator()->get('Orders');
 
-            // Prior to 3.6.0
-            $this->Orders = TableRegistry::get('Orders');
+            // Prior to 3.6 use TableRegistry::get('Orders')
+            $this->Orders = TableRegistry::getTableLocator()->get('Orders');
 
             // enable event tracking
             $this->Orders->eventManager()->setEventList(new EventList());

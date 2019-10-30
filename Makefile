@@ -15,6 +15,8 @@ PDF_LANGS = en es fr pt
 
 DEST = website
 
+EPUB_ARGS =
+
 # Dependencies to perform before running other builds.
 # Clone the en/Makefile everywhere.
 SPHINX_DEPENDENCIES = $(foreach lang, $(LANGS), $(lang)/Makefile)
@@ -69,6 +71,9 @@ populate-index-%: $(SPHINX_DEPENDENCIES)
 rebuild-index-%: $(SPHINX_DEPENDENCIES)
 	curl -XDELETE $(ES_HOST)/documentation/3-0-$*
 	php scripts/populate_search_index.php $* $(ES_HOST)
+
+epub-check-%: build/epub/$*
+	java -jar /epubcheck/epubcheck.jar build/epub/$*/CakePHP.epub $(EPUB_ARGS)
 
 website-dirs:
 	# Make the directory if its not there already.

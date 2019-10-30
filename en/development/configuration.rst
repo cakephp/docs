@@ -83,6 +83,9 @@ will be used if no environment variable exists for the given key.
 
 .. versionchanged:: 3.5.0
     dotenv library support was added to the application skeleton.
+    
+.. versionchanged:: 3.5.1
+    dotenv library support is now opt in. You must uncomment the appropriate block of code in ``config/bootstrap.php``
 
 General Configuration
 ---------------------
