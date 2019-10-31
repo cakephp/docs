@@ -9,7 +9,7 @@ online in HTML, PDF and EPUB formats at https://book.cakephp.org.
 
 Contributing to the documentation is pretty simple. Please read the
 documentation on contributing to the documentation over on [the
-cookbook](https://book.cakephp.org/3.0/en/contributing/documentation.html) for
+cookbook](https://book.cakephp.org/3/en/contributing/documentation.html) for
 help. You can read all of the documentation within as its just in plain text
 files, marked up with ReST text formatting.
 
@@ -122,7 +122,7 @@ Contributing translations requires that you make a new directory using the two
 letter name for your language. As content is translated, directories mirroring
 the English content should be created with localized content. For more info,
 please,
-[click here](https://book.cakephp.org/3.0/en/contributing/documentation.html#new-translation-language).
+[click here](https://book.cakephp.org/3/en/contributing/documentation.html#new-translation-language).
 
 Making Search Work Locally
 --------------------------
