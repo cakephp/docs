@@ -114,6 +114,9 @@ Component
 * ``Cake\Controller\Component\RequestHandlerComponent`` now sets ``isAjax`` as a
   request attribute instead of request param. Hence you should now use
   ``$request->getAttribute('isAjax')`` instead of ``$request->getParam('isAjax')``.
+* The request body parsing features of ``RequestHandlerComponent`` have been
+  removed and now emit a deprecation warning. You should use the
+  :ref:`body-parser-middleware` instead.
 * ``Cake\Controller\Component\PagingComponent`` now sets paging params info as
    request attribute instead of request param. Hence you should now use
   ``$request->getAttribute('paging')`` instead of ``$request->getParam('paging')``.
@@ -217,6 +220,9 @@ ORM
   In 3.x it would generate condition like ``name = NULL`` in SQL which will
   always matches 0 rows, thus returning incorrect results. When comparing with ``null`` 
   you must use the ``IS`` operator like ``['name IS' => null]``.
+* Stopping the ``Model.beforeSave`` event with a non-false, non-entity result
+  will now raise an exception. This change ensures that ``Table::save()`` always
+  returns an entity or false.
 
 Router
 ------
