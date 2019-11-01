@@ -111,6 +111,10 @@ Console
 Component
 ---------
 
+* The input data parsing feature of ``RequestHandlerComponent`` which for e.g.
+  allowed parsing JSON/XML input into request data array has been removed. You should
+  instead use the ``Cake\Http\Middleware\BodyParserMiddleware`` in your application
+  if you need input data parsing.
 * ``Cake\Controller\Component\RequestHandlerComponent`` now sets ``isAjax`` as a
   request attribute instead of request param. Hence you should now use
   ``$request->getAttribute('isAjax')`` instead of ``$request->getParam('isAjax')``.
