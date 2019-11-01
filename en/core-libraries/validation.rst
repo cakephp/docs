@@ -26,6 +26,7 @@ they are attached to. Creating a validator is simple::
 
 Once created, you can start defining sets of rules for the fields you want to
 validate::
+
     // Prior to 3.7 you must use allowEmpty() or notEmpty().
     $validator
         ->requirePresence('title')
