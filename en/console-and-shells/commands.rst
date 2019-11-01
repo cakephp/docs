@@ -18,6 +18,7 @@ Let's create our first Command. For this example, we'll create a
 simple Hello world command. In your application's **src/Command** directory create
 **HelloCommand.php**. Put the following code inside it::
 
+    <?php
     namespace App\Command;
 
     use Cake\Console\Arguments;
@@ -47,6 +48,7 @@ You should see the following output::
 Our ``execute()`` method isn't very interesting let's read some input from the
 command line::
 
+    <?php
     namespace App\Command;
 
     use Cake\Console\Arguments;
@@ -129,6 +131,7 @@ commands.  You can load models in commands, just as you would in a controller
 using ``loadModel()``. The loaded models are set as properties attached to your
 commands::
 
+    <?php
     namespace App\Command;
 
     use Cake\Console\Arguments;
