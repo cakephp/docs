@@ -560,4 +560,4 @@ qui utilisera du JavaScript pour faire une requête POST et supprimer notre arti
     effective de l'article.
 
 Maintenant que nous avons un minimum de gestion sur nos articles, il est temps
-de créer des actions basiques pour nos tables Tags et Users.
+de créer des actions basiques pour nos tables :doc:`Tags et Users <tags-and-users>`.
