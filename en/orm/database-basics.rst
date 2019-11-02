@@ -394,6 +394,18 @@ then you can use this method to specify your database's timezone. This timezone
 will then used when converting PHP objects to database's datetime string and
 vice versa.
 
+.. php:class:: Type\DateTimeFractionalType
+
+Can be used to map datetime columns that contain microseconds such as
+``DATETIME(6)`` in MySQL. To use this type you need to add it as a mapped type::
+
+    // in confib/bootstrap.php
+    use Cake\Database\TypeFactory;
+    use Cake\Database\Type\DateTimeFractionalType;
+
+    // Overwrite the default datetime type with a more precise one.
+    TypeFactory::map('datetime', DateTimeFractionalType::class);
+
 .. _adding-custom-database-types:
 
 Adding Custom Types

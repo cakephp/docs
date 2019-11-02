@@ -356,6 +356,10 @@ Database
   ``Cake\Datasource\FixtureInterface``. This interface should be
   implemented by fixture implementations that support constraints, which from
   our experience is generally relational databases.
+* A new type class ``DateTimeFractionalType`` has been added for datetime types
+  with microsecond precision. You can opt into using this type by adding it to
+  the ``TypeFactory`` as the default ``datetime`` type or re-mapping individual
+  columns.
 
 Error
 -----
@@ -421,6 +425,11 @@ TestSuite
 ---------
 
 * ``TestSuite\EmailTrait::assertMailContainsAttachment()`` was added.
+
+Validation
+----------
+
+* ``Validation::dateTime()`` now accepts values with microseconds.
 
 View
 ----
