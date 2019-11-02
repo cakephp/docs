@@ -103,7 +103,7 @@ Getting Instances of a Table Class
 ----------------------------------
 
 Before you can query a table, you'll need to get an instance of the table. You
-can do this by using the ``TableRegistry`` class::
+can do this by using the ``TableLocator`` class::
 
     // In a controller or table method.
     use Cake\ORM\TableRegistry;
@@ -111,10 +111,10 @@ can do this by using the ``TableRegistry`` class::
     // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
-The TableRegistry class provides the various dependencies for constructing
+``TableLocator`` provides the various dependencies for constructing
 a table, and maintains a registry of all the constructed table instances making
 it easier to build relations and configure the ORM. See
-:ref:`table-registry-usage` for more information.
+:ref:`table-locator-usage` for more information.
 
 If your table class is in a plugin, be sure to use the correct name for your
 table class. Failing to do so can result in validation rules, or callbacks not
@@ -128,6 +128,11 @@ correctly load plugin table classes use the following::
     // Vendor prefixed plugin table
     // Prior to 3.6 use TableRegistry::get('VendorName/PluginName.Articles')
     $articlesTable = TableRegistry::getTableLocator()->get('VendorName/PluginName.Articles');
+
+.. deprecated:: 3.6.0
+    The static methods on ``TableRegistry`` have been replaced by
+    ``TableLocator``. You can get the TableLocator from TableRegistry using
+    ``TableRegistry::getTableLocator()``.
 
 .. _table-callbacks:
 
@@ -441,11 +446,12 @@ tables use which connections. This is the ``defaultConnectionName()`` method::
     The ``defaultConnectionName()`` method **must** be static.
 
 .. _table-registry-usage:
+.. _table-locator-usage:
 
-Using the TableRegistry
+Using the TableLocator
 =======================
 
-.. php:class:: TableRegistry
+.. php:class:: TableLocator
 
 As we've seen earlier, the TableRegistry class provides an easy way to use
 factory/registry for accessing your applications table instances. It provides a
@@ -454,11 +460,12 @@ few other useful features as well.
 Configuring Table Objects
 -------------------------
 
-.. php:staticmethod:: get($alias, $config)
+.. php:method:: get($alias, $config)
 
 When loading tables from the registry you can customize their dependencies, or
 use mock objects by providing an ``$options`` array::
 
+    // Prior to 3.6 use TableRegistry::get()
     $articles = TableRegistry::getTableLocator()->get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
         'table' => 'my_articles',
@@ -478,11 +485,12 @@ string values but objects. The connection will take an object of
     If your table also does additional configuration in its ``initialize()`` method,
     those values will overwrite the ones provided to the registry.
 
-You can also pre-configure the registry using the ``config()`` method.
+You can also pre-configure the registry using ``TableLocator::setConfig()``.
 Configuration data is stored *per alias*, and can be overridden by an object's
 ``initialize()`` method::
 
-    TableRegistry::config('Users', ['table' => 'my_users']);
+    // Prior to 3.6 use TableRegistry::setConfig()
+    TableRegistry::getTableLocator()->setConfig('Users', ['table' => 'my_users']);
 
 .. note::
 
@@ -490,20 +498,16 @@ Configuration data is stored *per alias*, and can be overridden by an object's
     access that alias. Doing it after the registry is populated will have no
     effect.
 
-.. note::
-
-    Static API of `Cake\ORM\TableRegistry` has been deprecated in 3.6.0.
-    Use a table locator directly instead.
-
 Flushing the Registry
 ---------------------
 
-.. php:staticmethod:: clear()
+.. php:method:: clear()
 
 During test cases you may want to flush the registry. Doing so is often useful
 when you are using mock objects, or modifying a table's dependencies::
 
-    TableRegistry::clear();
+    // Prior to 3.6 use TableRegistry::clear()
+    TableRegistry::getTableLocator()->clear();
 
 Configuring the Namespace to Locate ORM classes
 -----------------------------------------------
