@@ -733,8 +733,10 @@ When using nesting, you need to chain them together::
 This would link to a controller with the namespace ``App\\Controller\\Admin\\MyPrefix`` and the file path
 ``src/Controller/Admin/MyPrefix/TodoItemsController.php``.
 
-Note: The prefix is always under_scored here, even if the route is dashed.
-The route itself will do the inflection if necessary.
+.. note::
+
+    The prefix is always under_scored here, even if the routing result is dashed.
+    The route itself will do the inflection if necessary.
 
 Plugin Routing
 --------------
