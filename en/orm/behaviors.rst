@@ -76,7 +76,6 @@ friendly URLs::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->addBehavior('Sluggable');
@@ -162,7 +161,7 @@ behavior should now look like::
             'replacement' => '-',
         ];
 
-        public function slug(Entity $entity)
+        public function slug(EntityInterface $entity)
         {
             $config = $this->config();
             $value = $entity->get($config['field']);
@@ -189,10 +188,13 @@ To prevent the saving from continuing simply stop event propagation in your call
     {
         if (...) {
             $event->stopPropagation();
+            $event->setResult(false);
             return;
         }
         $this->slug($entity);
     }
+
+Alternatively, you can return false from the callback. This has the same effect as stopping event propagation.
 
 Defining Finders
 ----------------
