@@ -723,7 +723,7 @@ URL array::
         ['prefix' => 'admin', 'controller' => 'TodoItems', 'action' => 'create']
     );
 
-When using nesting, you need to chain them together:
+When using nesting, you need to chain them together::
 
     echo $this->Html->link(
         'New todo',
