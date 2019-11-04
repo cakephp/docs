@@ -326,7 +326,7 @@ The event is not triggered if a transaction is started before calling delete.
 
 Stopping Table Events
 ---------------------
-To prevent the saving from continuing simply stop event propagation in your callback::
+To prevent the save from continuing, simply stop event propagation in your callback::
 
     public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
     {

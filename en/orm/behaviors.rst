@@ -182,7 +182,7 @@ The above code shows a few interesting features of behaviors:
 - Behaviors can define a default configuration property. This property is merged
   with the overrides when a behavior is attached to the table.
 
-To prevent the saving from continuing simply stop event propagation in your callback::
+To prevent the save from continuing, simply stop event propagation in your callback::
 
     public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
     {
