@@ -60,7 +60,6 @@ associations or defining some additional methods we would add the following to
 
     class ArticlesTable extends Table
     {
-
     }
 
 Table classes use the CamelCased version of the table name with the ``Table``
@@ -84,7 +83,6 @@ following to **src/Model/Entity/Article.php** after the ``<?php`` opening tag::
 
     class Article extends Entity
     {
-
     }
 
 Entities use the singular CamelCase version of the table name as their class

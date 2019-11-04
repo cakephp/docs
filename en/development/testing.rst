@@ -177,12 +177,10 @@ we'll start with the following::
     {
         public function setUp()
         {
-
         }
 
         public function testBar()
         {
-
         }
     }
 
@@ -1481,9 +1479,8 @@ correctly by the ``adjust()`` method in our component. We create the file
 
     class PagematronComponentTest extends TestCase
     {
-
-        public $component = null;
-        public $controller = null;
+        protected $component;
+        protected $controller;
 
         public function setUp()
         {

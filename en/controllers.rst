@@ -66,13 +66,11 @@ is invoked at the end of a Controller's constructor for this kind of use::
 
     class AppController extends Controller
     {
-
         public function initialize()
         {
             // Always enable the CSRF component.
             $this->loadComponent('Csrf');
         }
-
     }
 
 In addition to the ``initialize()`` method, the older ``$components`` property

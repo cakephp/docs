@@ -45,7 +45,6 @@ method::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->setTable('my_table');
@@ -53,7 +52,6 @@ method::
             // Prior to 3.4.0
             $this->table('my_table');
         }
-
     }
 
 No inflection conventions will be applied when specifying a table. By convention

@@ -46,7 +46,6 @@ the client and its request.
 
         class ArticlesController extends AppController
         {
-
             public function initialize()
             {
                 parent::initialize();

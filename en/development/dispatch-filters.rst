@@ -114,7 +114,6 @@ page. First, create the file. Its contents should look like::
 
     class TrackingCookieFilter extends DispatcherFilter
     {
-
         public function beforeDispatch(Event $event)
         {
             $request = $event->getData('request');
@@ -165,7 +164,6 @@ page, in our case it would be anything served from the ``PagesController``::
 
     class HttpCacheFilter extends DispatcherFilter
     {
-
         public function afterDispatch(Event $event)
         {
             $request = $event->getData('request');

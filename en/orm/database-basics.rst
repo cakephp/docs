@@ -411,7 +411,6 @@ we could make the following type class::
 
     class JsonType extends Type
     {
-
         public function toPHP($value, Driver $driver)
         {
             if ($value === null) {
@@ -440,7 +439,6 @@ we could make the following type class::
             }
             return PDO::PARAM_STR;
         }
-
     }
 
 By default the ``toStatement()`` method will treat values as strings which will
@@ -463,13 +461,11 @@ your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
 
     class WidgetsTable extends Table
     {
-
         protected function _initializeSchema(TableSchema $schema)
         {
             $schema->columnType('widget_prefs', 'json');
             return $schema;
         }
-
     }
 
 .. _mapping-custom-datatypes-to-sql-expressions:

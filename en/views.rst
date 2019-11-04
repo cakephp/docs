@@ -51,13 +51,11 @@ is invoked at the end of a View’s constructor for this kind of use:
 
     class AppView extends View
     {
-
         public function initialize()
         {
             // Always enable the MyUtils Helper
             $this->loadHelper('MyUtils');
         }
-
     }
 
 .. _view-templates:
@@ -450,7 +448,7 @@ The ``content`` block contains the contents of the rendered view.
 You can set the ``title`` block content from inside your view file::
 
     $this->assign('title', 'View Active Users');
-    
+
 Empty values for the ``title`` block will be automatically replaced with a
 representation of the current template path, such as ``'Admin/Articles'``.
 

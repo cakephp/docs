@@ -102,7 +102,6 @@ attribute values or modify the behavior of a helper::
 
     class AwesomeHelper extends Helper
     {
-
         // initialize() hook is available since 3.2. For prior versions you can
         // override the constructor if required.
         public function initialize(array $config)
@@ -133,7 +132,6 @@ your helper requires. For example::
 
     class AwesomeHelper extends Helper
     {
-
         use StringTemplateTrait;
 
         protected $_defaultConfig = [
@@ -331,7 +329,6 @@ If you would like to access a View variable inside a helper, you can use
 
     class AwesomeHelper extends Helper
     {
-
         public $helpers = ['Html'];
 
         public function someMethod()
