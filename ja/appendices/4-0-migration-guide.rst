@@ -93,3 +93,14 @@ Console
 -------
 
 * ``ConsoleIo::styles()`` は ``getStyle()`` と ``setStyle()`` に分割されました。これは ``ConsoleOutput`` にも影響します。
+
+Component
+---------
+
+* ``Cake\Controller\Component\RequestHandlerComponent`` は、リクエストパラメーターではなくリクエスト属性として、
+  ``isAjax`` を設定するようになりました。したがって、 ``$request->getParam('isAjax')`` の代わりに
+  ``$request->getAttribute('isAjax')`` を使用する必要があります。
+* ``Cake\Controller\Component\PagingComponent`` は、リクエストパラメーターではなくリクエスト属性として、
+  ページングパラメーター情報を設定するようになりました。したがって、 ``$request->getParam('paging')`` の代わりに、
+  ``$request->getAttribute('paging')`` を使用する必要があります。
+
