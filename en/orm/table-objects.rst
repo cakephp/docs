@@ -189,6 +189,7 @@ which implements ``EventListenerInterface``::
                 'Model.initialize' => 'initializeEvent',
             );
         }
+
         public function initializeEvent($event)
         {
             $table = $event->getSubject();
@@ -275,7 +276,6 @@ beforeSave
 The ``Model.beforeSave`` event is fired before each entity is saved. Stopping
 this event will abort the save operation. When the event is stopped the result
 of the event will be returned.
-How to stop an event is documented :ref:`here <stopping-events>`.
 
 afterSave
 ---------
@@ -303,7 +303,6 @@ beforeDelete
 The ``Model.beforeDelete`` event is fired before an entity is deleted. By
 stopping this event you will abort the delete operation. When the event is stopped the result
 of the event will be returned.
-How to stop an event is documented :ref:`here <stopping-events>`.
 
 afterDelete
 -----------
@@ -322,6 +321,22 @@ delete operation is wrapped has been is committed. It's also triggered for non
 atomic deletes where database operations are implicitly committed. The event is
 triggered only for the primary table on which ``delete()`` is directly called.
 The event is not triggered if a transaction is started before calling delete.
+
+Stopping Table Events
+---------------------
+To prevent the save from continuing, simply stop event propagation in your callback::
+
+    public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
+    {
+        if (...) {
+            $event->stopPropagation();
+            $event->setResult(false);
+            return;
+        }
+        ...
+    }
+
+Alternatively, you can return false from the callback. This has the same effect as stopping event propagation.
 
 Callback priorities
 -------------------
