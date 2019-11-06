@@ -189,7 +189,7 @@ avec tous les noms d'événements que la classe gérera.
 Pour en revenir à notre exemple précédent, imaginons que nous avons une classe
 UserStatistic responsable du calcul d'information utiles et de la compilation
 de statistiques dans le site global. Ce serait naturel de passer une instance
-de cette classe comme un callback, au lien d'implémenter une fonction statique
+de cette classe comme un callback, au lieu d'implémenter une fonction statique
 personnalisé ou la conversion de n'importe quel autre contournement
 pour déclencher les méthodes de cette classe. Un écouteur (listener)
 ``UserStatistics`` est créé comme ci-dessous::
