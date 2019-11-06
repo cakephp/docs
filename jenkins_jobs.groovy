@@ -187,3 +187,16 @@ job('Book - Rebuild 3.x search index') {
     shell('make rebuild-index ES_HOST="$ELASTICSEARCH_URL"')
   }
 }
+
+job('Book - Rebuild 4.x search index') {
+  description('Rebuild the 4.x search index. Will result in temporary unavailability of search as index is rebuilt.')
+  scm {
+    github(REPO_NAME, '4.x')
+  }
+  logRotator {
+    daysToKeep(30)
+  }
+  steps {
+    shell('make rebuild-index ES_HOST="$ELASTICSEARCH_URL"')
+  }
+}
