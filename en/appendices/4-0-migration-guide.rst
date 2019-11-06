@@ -222,7 +222,7 @@ ORM
 
 * Using condition like ``['name' => null]`` for ``Query::where()`` will now raise an exception.
   In 3.x it would generate condition like ``name = NULL`` in SQL which will
-  always matches 0 rows, thus returning incorrect results. When comparing with ``null`` 
+  always matches 0 rows, thus returning incorrect results. When comparing with ``null``
   you must use the ``IS`` operator like ``['name IS' => null]``.
 * Stopping the ``Model.beforeSave`` event with a non-false, non-entity result
   will now raise an exception. This change ensures that ``Table::save()`` always
@@ -260,6 +260,8 @@ Utility
   Instead you must enable ``readFile`` to read local files.
 * ``Hash::sort()`` now accepts the ``SORT_ASC`` and ``SORT_DESC`` constants in
   the direction parameter.
+* ``Inflector::pluralize()`` now inflects ``index`` to ``indexes`` instead of ``indices``.
+  This reflects the technical usage of this plural in the core as well as the ecosystem.
 
 View
 ----
@@ -333,8 +335,8 @@ Console
 Core
 ----
 
-* ``InstanceConfigTrait::getConfigOrFail()`` and 
-  ``StaticConfigTrait::getConfigOrFail()`` were added. Like other ``orFail`` 
+* ``InstanceConfigTrait::getConfigOrFail()`` and
+  ``StaticConfigTrait::getConfigOrFail()`` were added. Like other ``orFail``
   methods these methods will raise an exception when the requested key doesn't
   exist or has a ``null`` value.
 
