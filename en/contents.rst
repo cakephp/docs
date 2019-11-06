@@ -86,7 +86,7 @@ Contents
     Chronos <https://book.cakephp.org/chronos/>
     Debug Kit <https://book.cakephp.org/debugkit/>
     Migrations <https://book.cakephp.org/migrations/>
-    Elasticsearch <https://book.cakephp.org/elasticsearch/2.x/en/>
+    Elasticsearch <https://book.cakephp.org/elasticsearch/2/en/>
     upgrade-tool
 
 .. toctree::
