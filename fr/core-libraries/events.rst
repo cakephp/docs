@@ -201,7 +201,7 @@ pour déclencher les méthodes de cette classe. Un écouteur (listener)
 
         public function implementedEvents() {
             return array(
-                'Model.Order.afterPlace' => 'updateBuyStatistic',
+                'Model.Order.afterPlace' => 'updateBuyStatistic'
             );
         }
 
