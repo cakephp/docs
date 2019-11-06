@@ -82,11 +82,11 @@
 
     Authorization <https://book.cakephp.org/authorization/>
     Authentication <https://book.cakephp.org/authentication/>
-    Bake <https://book.cakephp.org/bake/1.x/ja/>
-    Chronos <https://book.cakephp.org/chronos/1.x/ja/>
-    Debug Kit <https://book.cakephp.org/debugkit/3.x/ja/>
-    Migrations <https://book.cakephp.org/migrations/2.x/ja/>
-    Elasticsearch <https://book.cakephp.org/elasticsearch/2.x/ja/>
+    Bake <https://book.cakephp.org/bake/1/ja/>
+    Chronos <https://book.cakephp.org/chronos/1/ja/>
+    Debug Kit <https://book.cakephp.org/debugkit/3/ja/>
+    Migrations <https://book.cakephp.org/migrations/2/ja/>
+    Elasticsearch <https://book.cakephp.org/elasticsearch/2/ja/>
     upgrade-tool
 
 .. toctree::

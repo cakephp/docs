@@ -77,9 +77,9 @@ Contenidos
     :maxdepth: 3
     :caption: Plugins
 
-    Bake <https://book.cakephp.org/bake/1.x/es/>
+    Bake <https://book.cakephp.org/bake/2/es/>
     Chronos <https://book.cakephp.org/chronos/>
-    Debug Kit <https://book.cakephp.org/debugkit/>
+    Debug Kit <https://book.cakephp.org/debugkit/4/es/>
     migrations
     elasticsearch
     upgrade-tool
