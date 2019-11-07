@@ -29,12 +29,16 @@ Deprecations
 The following is a list of deprecated methods, properties and behaviors. These
 features will continue to function in 4.x and will be removed in 5.0.0.
 
+
 Component
 ---------
 
 * ``AuthComponent`` and related classes have been deprecated and will be removed
   in 5.0.0. You should use the authentication and authorization libs mentioned
   above instead.
+* ``SecurityComponent`` is deprecated. Instead use the ``FormProtectionComponent``
+  for form tampering protection and the :ref:`https-enforcer-middleware` for
+  ``requireSecure`` feature.
 
 Filesystem
 ----------
@@ -97,6 +101,29 @@ Controller
 * Controller method name matching when invoking actions is now case sensitive.
   For example if your controller method is ``forgotPassword()`` then using string
   ``forgotpassword`` in URL will not match as action name.
+
+Console
+-------
+
+* ``ConsoleIo::styles()`` has been split into a ``getStyle()`` and
+  ``setStyle()``. This also reflects in ``ConsoleOutput``.
+
+Component
+---------
+
+* The input data parsing feature of ``RequestHandlerComponent`` which for e.g.
+  allowed parsing JSON/XML input into request data array has been removed. You should
+  instead use the ``Cake\Http\Middleware\BodyParserMiddleware`` in your application
+  if you need input data parsing.
+* ``Cake\Controller\Component\RequestHandlerComponent`` now sets ``isAjax`` as a
+  request attribute instead of request param. Hence you should now use
+  ``$request->getAttribute('isAjax')`` instead of ``$request->getParam('isAjax')``.
+* The request body parsing features of ``RequestHandlerComponent`` have been
+  removed and now emit a deprecation warning. You should use the
+  :ref:`body-parser-middleware` instead.
+* ``Cake\Controller\Component\PagingComponent`` now sets paging params info as
+   request attribute instead of request param. Hence you should now use
+  ``$request->getAttribute('paging')`` instead of ``$request->getParam('paging')``.
 
 Database
 --------
@@ -174,6 +201,8 @@ Http
 * The default value of ``App.mergeFilesAsObjects`` is now ``true``. If your
   application uses file uploads you can set this flag to ``false`` to retain
   compatibility with the behavior in 3.x.
+* The keys of array returned by ``Cake\Http\Response::getCookie()`` have changed.
+  ``expire`` is changed to ``expires`` and ``httpOnly`` to ``httponly``.
 
 I18n
 ----
@@ -193,11 +222,13 @@ Mailer
 ORM
 ---
 
-* Conditions that have null values must explicitly use the ``IS`` operator now.
-  In previous versions using ``['name' => null]`` would generate SQL like
-  ``name = NULL`` which always matches 0 rows. This situation will now raise an
-  exception. You will need to update your where clauses to use
-  ``['name IS' => null]`` instead.
+* Using condition like ``['name' => null]`` for ``Query::where()`` will now raise an exception.
+  In 3.x it would generate condition like ``name = NULL`` in SQL which will
+  always matches 0 rows, thus returning incorrect results. When comparing with ``null`` 
+  you must use the ``IS`` operator like ``['name IS' => null]``.
+* Stopping the ``Model.beforeSave`` event with a non-false, non-entity result
+  will now raise an exception. This change ensures that ``Table::save()`` always
+  returns an entity or false.
 
 Router
 ------
@@ -208,6 +239,11 @@ Router
 * ``Router::plugin()`` and ``Router::prefix()`` now use plugin/prefix name in
   dasherized form in URL by default. You can retain underscored from (or any other
   custom path) by using ``'path'`` key in ``$options`` argument.
+* ``Router`` maintains reference to only a single instance of request now instead
+  of a stack of requests. ``Router::pushRequest()``, ``Router::setRequestInfo()``
+  and ``Router::setRequestContext()`` have been removed, use ``Router::setRequest()``
+  instead. ``Router::popRequest()`` has been removed. ``Router::getRequest()``
+  no longer has a ``$current`` argument.
 
 TestSuite
 ---------
@@ -266,11 +302,15 @@ Helper
   message for methods which have the ``confirm`` option.
 * ``Cake\View\Helper\FormHelper::button()`` now HTML entity encodes the button
   text and HTML attributes by default. A new option ``escapeTitle`` has been
-  added to allow controlling escaping the title separately from other HTML attributes.
+  added to allow controlling escaping the title separately from other HTML
+  attributes.
+* ``Cake\View\Helper\SecureFieldTokenTrait`` has been removed. Its form token
+  data building functionality is now included in the internal class ``FormProtector``.
 
 Miscellaneous
 -------------
-
+* Your app's ``config/bootstrap.php`` should now contain a call to ``Router::fullBaseUrl()``.
+  Consult the lastest skeleton app's ``bootstrap.php`` and update accordingly.
 * ``App::path()`` now uses ``$type`` ``templates`` instead of ``Template`` to
   get templates path. Similarly ``locales`` is used instead of ``Locale`` to
   get path to locales folder.
@@ -292,13 +332,14 @@ Console
 * Command classes can implement the ``defaultName()`` method to overwrite the
   conventions based CLI name.
 
-Table
------
+Core
+----
 
-* ``Table::newEmptyEntity()`` has been added to create a new and empty entity object.
-  This does not trigger any field validation. The entity can be persisted without validation
-  error as an empty record. ``Table::newEntity()`` now requires an array as input and enforces
-  validation to prevent accidental saves without validation being triggered.
+* ``InstanceConfigTrait::getConfigOrFail()`` and 
+  ``StaticConfigTrait::getConfigOrFail()`` were added. Like other ``orFail`` 
+  methods these methods will raise an exception when the requested key doesn't
+  exist or has a ``null`` value.
+
 
 Database
 --------
@@ -327,6 +368,11 @@ ORM
   with the specific entity that failed in case of an error. The entities are saved transaction safe.
 * ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been added for removing many
   entities at once including callbacks. The entities are removed transaction safe.
+* A new type class ``DateTimeFractionalType`` has been added for datetime types
+  with microsecond precision. You can opt into using this type by adding it to
+  the ``TypeFactory`` as the default ``datetime`` type or re-mapping individual
+  columns.
+
 
 Error
 -----
@@ -338,26 +384,65 @@ Error
 Http
 ----
 
-* CakePHP now supports the `PSR-15: HTTP Server Request Handlers <https://www.php-fig.org/psr/psr-15/>`__ specification.
-  As a consequence the middlewares now implement ``Psr\Http\Server\MiddlewareInterface``.
-  CakePHP 3.x style invokable double pass middlewares are still supported for backwards compatibility.
+*  You can use ``cakephp/http`` without including the entire framework.
+* CakePHP now supports the `PSR-15: HTTP Server Request Handlers
+  <https://www.php-fig.org/psr/psr-15/>`__ specification.  As a consequence the
+  middlewares now implement ``Psr\Http\Server\MiddlewareInterface``.  CakePHP
+  3.x style invokable double pass middlewares are still supported for backwards
+  compatibility.
 * ``Cake\Http\Client`` now follows `PSR-18: HTTP Client <https://www.php-fig.org/psr/psr-18/>`__ specifications.
 * ``Cake\Http\Client\Response::isSuccess()`` was added. This method returns true
   if the response status code is 2xx.
-* ``CspMiddleware`` was added to make defining Content Security Policy headers simpler.
+* ``CspMiddleware`` was added to make defining Content Security Policy headers
+  simpler.
+* ``HttpsEnforcerMiddleware`` was added. This replaced the ``requireSecure``
+  feature of ``SecurityComponent``.
+* Cookies now support the ``SameSite`` attribute.
 
 Mailer
 ------
 
-* Email message generation responsibility has now been transferred to ``Cake\Mailer\Renderer``.
-  This is mainly an architectural change and doesn't impact how
-  ``Email`` class is used. The only difference is that you now need to use ``Email::setViewVars()``
-  instead of ``Email::set()`` to set template variables.
+* Email message generation responsibility has now been transferred to
+  ``Cake\Mailer\Renderer``.  This is mainly an architectural change and doesn't
+  impact how ``Email`` class is used. The only difference is that you now need
+  to use ``Email::setViewVars()`` instead of ``Email::set()`` to set template
+  variables.
+
+ORM
+---
+
+* ``Table::saveManyOrFail()`` method has been added that will throw
+  ``PersistenceFailedException`` with the specific entity that failed in case of
+  an error. The entities are saved transaction safe.
+* ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been
+  added for removing many entities at once including callbacks. The entities are
+  removed transaction safe.
+* ``Table::newEmptyEntity()`` has been added to create a new and empty entity
+  object.  This does not trigger any field validation. The entity can be
+  persisted without validation error as an empty record. ``Table::newEntity()``
+  now requires an array as input and enforces validation to prevent accidental
+  saves without validation being triggered.
+* ``Cake\ORM\RulesChecker::isLinkedTo()`` and ``isNotLinkedTo()`` were added.
+  These new application rules allow you to ensure an association has or doesn't
+  have related records.
+
+
+Routing
+-------
+
+* ``Cake\Routing\Asset`` was added. This class exposes asset URL generation in
+  a static interface similar to ``Router::url()``. See :ref:`asset-routing` for
+  more information.
 
 TestSuite
 ---------
 
 * ``TestSuite\EmailTrait::assertMailContainsAttachment()`` was added.
+
+Validation
+----------
+
+* ``Validation::dateTime()`` now accepts values with microseconds.
 
 View
 ----
@@ -367,4 +452,6 @@ View
   ``autoSetCustomValidity`` class configuration option.
 * ``FormHelper`` now generates native HTML5 input tags for datetime fields.
   Check the :ref:`Form Helper <create-datetime-controls>` page for more details.
-  If you need to retain the former markup, a shimmed FormHelper can be found in `Shim plugin <https://github.com/dereuromark/cakephp-shim>`__ with the old behavior/generation (4.x branch).
+  If you need to retain the former markup, a shimmed FormHelper can be found in
+  `Shim plugin <https://github.com/dereuromark/cakephp-shim>`__ with the old
+  behavior/generation (4.x branch).

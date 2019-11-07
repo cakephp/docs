@@ -67,7 +67,7 @@ populate-index-%: $(SPHINX_DEPENDENCIES)
 	php scripts/populate_search_index.php $* $(ES_HOST)
 
 rebuild-index-%: $(SPHINX_DEPENDENCIES)
-	curl -XDELETE $(ES_HOST)/documentation/3-0-$*
+	curl -XDELETE $(ES_HOST)/documentation/4-0-$*
 	php scripts/populate_search_index.php $* $(ES_HOST)
 
 website-dirs:

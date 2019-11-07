@@ -414,7 +414,7 @@ Configuring Table Objects
 When loading tables from the registry you can customize their dependencies, or
 use mock objects by providing an ``$options`` array::
 
-    $articles = TableRegistry::get('Articles', [
+    $articles = TableRegistry::getTableLocator()->get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
         'table' => 'my_articles',
         'connection' => $connectionObject,

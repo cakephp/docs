@@ -150,7 +150,7 @@ appliation::
 
     // In Application::bootstrap()
     use ContactManager\Plugin as ContactManagerPlugin;
-    
+
     // Disable routes for the ContactManager plugin
     $this->addPlugin(ContactManagerPlugin::class, ['routes' => false]);
 
@@ -159,7 +159,7 @@ classes::
 
     // In Application::bootstrap()
     use ContactManager\Plugin as ContactManagerPlugin;
-    
+
     // Use the disable/enable to configure hooks.
     $plugin = new ContactManagerPlugin();
 
@@ -298,12 +298,16 @@ like::
         public function middleware($middleware)
         {
             // Add middleware here.
+            $middleware = parent::middleware($middleware);
+            
             return $middleware;
         }
 
         public function console($commands)
         {
             // Add console commands here.
+            $commands = parent::console($commands);
+            
             return $commands;
         }
 

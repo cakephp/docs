@@ -53,7 +53,10 @@ hierarchical data in::
 Once added, you can let CakePHP build the internal structure if the table is
 already holding some rows::
 
+    // Prior to 3.6.0
     $categories = TableRegistry::get('Categories');
+
+    $categories = TableRegistry::getTableLocator()->get('Categories');
     $categories->recover();
 
 You can verify it works by getting any row from the table and asking for the
@@ -134,7 +137,7 @@ An example of all options in use is::
         'valuePath' => 'id',
         'spacer' => ' '
     ]);
-    
+
 An example using closure::
 
     $query = $categories->find('treeList', [

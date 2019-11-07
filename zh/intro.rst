@@ -29,7 +29,10 @@ CakePHP提供的基本构造包括class名，文件名，数据库table名。尽
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $users = TableRegistry::get('Users');
+
+    $users = TableRegistry::getTableLocator()->get('Users');
     $query = $users->find();
     foreach ($query as $row) {
         echo $row->username;
@@ -42,7 +45,10 @@ CakePHP提供的基本构造包括class名，文件名，数据库table名。尽
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6.0
     $users = TableRegistry::get('Users');
+
+    $users = TableRegistry::getTableLocator()->get('Users');
     $user = $users->newEntity(['email' => 'mark@example.com']);
     $users->save($user);
 

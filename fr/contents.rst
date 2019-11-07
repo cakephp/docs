@@ -2,10 +2,17 @@ Contenu
 #######
 
 .. toctree::
-   :hidden:
+    :hidden:
 
-   index
-   topics
+    index
+    topics
+    bake
+    bake/usage
+    chronos
+    debug-kit
+    elasticsearch
+    migrations
+
 
 .. toctree::
     :maxdepth: 3
@@ -35,7 +42,6 @@ Contenu
     :caption: Généralités
 
     controllers/components/authentication
-    bake
     core-libraries/caching
     console-and-shells
     development/debugging
@@ -74,10 +80,11 @@ Contenu
     :maxdepth: 3
     :caption: Plugins
 
-    chronos
-    debug-kit
-    migrations
-    elasticsearch
+    Bake <https://book.cakephp.org/bake/1/fr/>
+    Chronos <https://book.cakephp.org/chronos/1/fr/>
+    Debug Kit <https://book.cakephp.org/debugkit/3/fr/>
+    Migrations <https://book.cakephp.org/migrations/2/fr/>
+    Elasticsearch <https://book.cakephp.org/elasticsearch/2/fr/>
     upgrade-tool
 
 .. toctree::

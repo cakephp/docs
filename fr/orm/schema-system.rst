@@ -127,7 +127,9 @@ selon la plateforme de la base de données::
     ]);
 
 Dans l'exemple ci-dessus, la colonne ``id`` générerait le SQL suivant dans
-MySQL::
+MySQL:
+
+.. code-block:: mysql
 
     CREATE TABLE `posts` (
         `id` INTEGER AUTO_INCREMENT,

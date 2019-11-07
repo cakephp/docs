@@ -429,6 +429,30 @@ Note that ``validCount`` returns ``false`` if the property is not countable or d
     // The save operation will fail if tags is null.
     $rules->add($rules->validCount('tags', 0, '<=', 'You must not have any tags'));
 
+Association Link Constraint Rule
+--------------------------------
+
+The ``LinkConstraint`` lets you emulate SQL constraints in databases that don't
+support them, or when you want to provide more user friendly error messages when
+constraints would fail. This rule enables you to check if an association does or does not
+have related records depending on the mode used::
+
+    // Ensure that each comment is linked to an Article during updates.
+    $rules->addUpdate($rules->isLinkedTo(
+        'Articles',
+        'article',
+        'Requires an article'
+    ));
+
+    // Ensure that an article has no linked comments during delete.
+    $rules->addDelete($rules->isNotLinkedTo(
+        'Comments',
+        'comments',
+        'Must have zero comments before deletion.'
+    ));
+
+.. versionadded:: 4.0.0
+
 Using Entity Methods as Rules
 -----------------------------
 
@@ -585,7 +609,10 @@ In the above example, we'll use a 'custom' validator, which is defined using the
 
     public function validationCustomName($validator)
     {
-        $validator->add(...);
+        $validator->add(
+            // ...
+        );
+        
         return $validator;
     }
 
@@ -600,7 +627,8 @@ from any request::
             'message' => 'Passwords are not equal',
         ]);
 
-        ...
+        // ...
+
         return $validator;
     }
 
@@ -621,6 +649,7 @@ Application rules as explained above will be checked whenever ``save()`` or
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique('email'));
+
         return $rules;
     }
 
@@ -638,12 +667,14 @@ for data transitions generated inside your application::
             if($order->shipping_mode !== 'free'){
                 return true;
             }
+
             return $order->price >= 100;
         };
         $rules->add($check, [
             'errorField' => 'shipping_mode',
             'message' => 'No free shipping for orders under 100!'
         ]);
+
         return $rules;
     }
 
@@ -662,11 +693,13 @@ come up when running a CLI script that directly sets properties on entities::
     // In src/Model/Table/UsersTable.php
     public function validationDefault(Validator $validator)
     {
-        $validator->add('email', 'valid', [
+        $validator->add('email', 'valid_email', [
             'rule' => 'email',
             'message' => 'Invalid email'
         ]);
-        ...
+
+        // ...
+        
         return $validator;
     }
 
@@ -682,7 +715,7 @@ come up when running a CLI script that directly sets properties on entities::
             return empty($errors);
         });
 
-        ...
+        // ...
 
         return $rules;
     }

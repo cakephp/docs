@@ -853,8 +853,8 @@ In the above example, both the ``Actions`` and ``Controller`` will get the
 settings defined for the 'all' key. Any settings passed to a specific
 authorization object will override the matching key in the 'all' key.
 
-If an authenticated user tries to go to a URL he's not authorized to access,
-he's redirected back to the referrer. If you do not want such redirection
+If an authenticated user tries to go to a URL they are not authorized to access,
+they will be redirected back to the referrer. If you do not want such redirection
 (mostly needed when using stateless authentication adapter) you can set config
 option ``unauthorizedRedirect`` to ``false``. This causes ``AuthComponent``
 to throw a ``ForbiddenException`` instead of redirecting.

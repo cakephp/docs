@@ -20,7 +20,7 @@ contribute any additions, deletions, or corrections to the documentation.
     EPUB, you can now read it on more devices, as well as offline.
 
     - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
-    - `EPUB <../_downloads/en/CakePHPCookbook.epub>`_
+    - `EPUB <../_downloads/en/CakePHP.epub>`_
     - `Original Source <http://github.com/cakephp/docs>`_
 
 Getting Help

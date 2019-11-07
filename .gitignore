@@ -9,6 +9,7 @@ build/*
 /nbproject
 .idea
 .project
+.vscode
 
 # OS generated files #
 ######################

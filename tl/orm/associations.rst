@@ -217,7 +217,9 @@ contain the Address record if it exists::
         echo $user->address->street;
     }
 
-The above would emit SQL that is similar to::
+The above would emit SQL that is similar to:
+
+.. code-block:: sql
 
     SELECT * FROM users INNER JOIN addresses ON addresses.user_id = users.id;
 
@@ -305,7 +307,9 @@ contain the User record if it exists::
         echo $address->user->username;
     }
 
-The above would emit SQL that is similar to::
+The above would emit SQL that is similar to:
+
+.. code-block:: sql
 
     SELECT * FROM addresses LEFT JOIN users ON addresses.user_id = users.id;
 
@@ -429,13 +433,17 @@ can contain the Comment records if they exist::
         echo $article->comments[0]->text;
     }
 
-The above would emit SQL that is similar to::
+The above would emit SQL that is similar to:
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM comments WHERE article_id IN (1, 2, 3, 4, 5);
 
 When the subquery strategy is used, SQL similar to the following will be
-generated::
+generated:
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM comments WHERE article_id IN (SELECT id FROM articles);
@@ -582,7 +590,9 @@ contain the Tag records if they exist::
         echo $article->tags[0]->text;
     }
 
-The above would emit SQL that is similar to::
+The above would emit SQL that is similar to:
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM tags
@@ -592,7 +602,9 @@ The above would emit SQL that is similar to::
     );
 
 When the subquery strategy is used, SQL similar to the following will be
-generated::
+generated:
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM tags

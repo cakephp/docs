@@ -1276,6 +1276,53 @@ You can also use any of the special route elements when generating URLs:
 * ``_name`` Name of route. If you have setup named routes, you can use this key
   to specify it.
 
+.. _asset-routing:
+
+Generating Asset URLs
+=====================
+
+The ``Asset`` class provides methods for generating URLs to your application's
+css, javascript, images and other static asset files::
+
+    use Cake\Routing\Asset;
+
+    // Generate a URL to APP/webroot/js/app.js
+    $js = Asset::scriptUrl('app.js');
+
+    // Generate a URL to APP/webroot/css/app.css
+    $css = Asset::cssUrl('app.css');
+
+    // Generate a URL to APP/webroot/image/logo.png
+    $img = Asset::imageUrl('logo.png');
+
+    // Generate a URL to APP/webroot/files/upload/photo.png
+    $file = Asset::url('files/upload/photo.png');
+
+The above methods also accept an array of options as their second parameter:
+
+* ``fullBase`` Append the full URL with domain name.
+* ``pathPrefix`` Path prefix for relative URLs.
+* ``plugin``` You can provide ``false``` to prevent paths from being treated as
+  a plugin asset.
+* ``timestamp`` Overrides the value of ``Asset.timestamp`` in Configure.  Set to
+  ``false`` to skip timestamp generation.  Set to ``true`` to apply timestamps
+  when debug is true. Set to ``'force'`` to always enable timestamping
+  regardless of debug value.
+
+::
+
+    // Generates http://example.org/img/logo.png
+    $img = Asset::url('logo.png', ['fullBase' => true]);
+
+    // Generates /img/logo.png?1568563625
+    // Where the timestamp is the last modified time of the file.
+    $img = Asset::url('logo.png', ['timestamp' => true]);
+
+To generate asset URLs for files in plugins use :term:`plugin syntax`::
+
+    // Generates `/debug_kit/img/cake.png`
+    $img = Asset::imageUrl('DebugKit.cake.png');
+
 .. _redirect-routing:
 
 Redirect Routing

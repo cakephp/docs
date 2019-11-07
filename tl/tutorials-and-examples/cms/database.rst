@@ -5,7 +5,9 @@ Now that we have CakePHP installed, let's set up the database for our :abbr:`CMS
 (Content Management System)` application. If you haven't already done so, create
 an empty database for use in this tutorial, with a name of your choice, e.g.
 ``cake_cms``. You can execute the following SQL to create the necessary
-tables::
+tables:
+
+.. code-block:: mysql
 
     USE cake_cms;
 
@@ -48,7 +50,7 @@ tables::
 
     INSERT INTO users (email, password, created, modified)
     VALUES
-    ('cakephp@example.com', 'sekret', NOW(), NOW());
+    ('cakephp@example.com', 'secret', NOW(), NOW());
 
     INSERT INTO articles (user_id, title, slug, body, published, created, modified)
     VALUES

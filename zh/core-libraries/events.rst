@@ -190,7 +190,7 @@ CakePHP事件会触发事件管理器。在各表、视图、控制器中使用 
     // 如果发送邮件
     use Cake\Mailer\Email;
 
-    TableRegistry::get('ThirdPartyPlugin.Feedbacks')
+    TableRegistry::getTableLocator()->get('ThirdPartyPlugin.Feedbacks')
         ->eventManager()
         ->on('Model.afterSave', function($event, $entity)
         {

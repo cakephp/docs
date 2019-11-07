@@ -139,7 +139,7 @@ like::
             'persistent' => false,
             'host' => 'localhost',
             'username' => 'my_app',
-            'password' => 'sekret',
+            'password' => 'secret',
             'database' => 'my_app',
             'encoding' => 'utf8mb4',
             'timezone' => 'UTC',
@@ -161,7 +161,7 @@ would be::
         'persistent' => false,
         'host' => 'localhost',
         'username' => 'my_app',
-        'password' => 'sekret',
+        'password' => 'secret',
         'database' => 'my_app',
         'encoding' => 'utf8mb4',
         'timezone' => 'UTC',
@@ -394,6 +394,18 @@ If your database server's timezone does not match your application's PHP timezon
 then you can use this method to specify your database's timezone. This timezone
 will then used when converting PHP objects to database's datetime string and
 vice versa.
+
+.. php:class:: Type\DateTimeFractionalType
+
+Can be used to map datetime columns that contain microseconds such as
+``DATETIME(6)`` in MySQL. To use this type you need to add it as a mapped type::
+
+    // in confib/bootstrap.php
+    use Cake\Database\TypeFactory;
+    use Cake\Database\Type\DateTimeFractionalType;
+
+    // Overwrite the default datetime type with a more precise one.
+    TypeFactory::map('datetime', DateTimeFractionalType::class);
 
 .. _adding-custom-database-types:
 
@@ -898,7 +910,7 @@ If you are using a legacy schema that requires identifier quoting you can enable
 it using the ``quoteIdentifiers`` setting in your
 :ref:`database-configuration`. You can also enable this feature at runtime::
 
-    $conn->driver()->autoQuoting(true);
+    $conn->getDriver()->enableAutoQuoting();
 
 When enabled, identifier quoting will cause additional query traversal that
 converts all identifiers into ``IdentifierExpression`` objects.

@@ -128,6 +128,9 @@ However, you want to allow caching for non-AJAX requests. The
 following would accomplish that::
 
         if ($this->request->is('ajax')) {
+            $this->response = $this->response->withDisabledCache();
+
+            // Prior to 3.4.0
             $this->response->disableCache();
         }
         // Continue Controller action
@@ -135,43 +138,8 @@ following would accomplish that::
 Automatically Decoding Request Data
 ===================================
 
-Add a request data decoder. The handler should contain a callback, and any
-additional arguments for the callback. The callback should return
-an array of data contained in the request input. For example adding a CSV
-handler could look like::
-
-    class ArticlesController extends AppController
-    {
-        public function initialize(): void
-        {
-            parent::initialize();
-            $parser = function ($data) {
-                $rows = str_getcsv($data, "\n");
-                foreach ($rows as &$row) {
-                    $row = str_getcsv($row, ',');
-                }
-                return $rows;
-            };
-            $this->loadComponent('RequestHandler', [
-                'inputTypeMap' => [
-                    'csv' => [$parser]
-                ]
-            ]);
-        }
-    }
-
-You can use any `callable <http://php.net/callback>`_ for the handling function.
-You can also pass additional arguments to the callback, this is useful for
-callbacks like ``json_decode``::
-
-    $this->RequestHandler->setConfig('inputTypeMap.json', ['json_decode', true]);
-
-The above will make ``$this->request->getData()`` an array of the JSON input data,
-without the additional ``true`` you'd get a set of ``stdClass`` objects.
-
-.. versionchanged:: 3.6.0
-    You should prefer using :ref:`body-parser-middleware` instead of
-    RequestHandlerComponent.
+This feature has been removed from ``RequestHandlerComponent`` in 4.0. You
+should use :ref:`body-parser-middleware` instead.
 
 Checking Content-Type Preferences
 =================================

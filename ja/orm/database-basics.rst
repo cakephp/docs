@@ -137,7 +137,7 @@ Delete 文の実行
             'persistent' => false,
             'host' => 'localhost',
             'username' => 'my_app',
-            'password' => 'sekret',
+            'password' => 'secret',
             'database' => 'my_app',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
@@ -158,7 +158,7 @@ Delete 文の実行
         'persistent' => false,
         'host' => 'localhost',
         'username' => 'my_app',
-        'password' => 'sekret',
+        'password' => 'secret',
         'database' => 'my_app',
         'encoding' => 'utf8',
         'timezone' => 'UTC',
@@ -169,7 +169,7 @@ Delete 文の実行
 これは、環境変数や :term:`PaaS` 環境で作業する時に便利です。::
 
     ConnectionManager::config('default', [
-        'url' => 'mysql://my_app:sekret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
+        'url' => 'mysql://my_app:secret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
     ]);
 
 DSN 文字列を使用するときには、クエリー文字列引数として追加のパラメーターやオプションを
@@ -879,7 +879,7 @@ Web リクエストの時に便利です。 ::
 引用符を使うことができます。
 また、実行時にこの機能を有効にすることもできます。 ::
 
-    $conn->driver()->autoQuoting(true);
+    $conn->getDriver()->enableAutoQuoting();
 
 有効にすると、引用識別子は 全ての識別子を ``IdentifierExpression`` オブジェクトに
 変換するトラバーサルが発生する原因になります。

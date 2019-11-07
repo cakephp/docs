@@ -75,9 +75,11 @@ Tmp 디렉토리 권한
 다음 블로그에서 사용하는 기초적인 데이터베이스를 설치합시다.
 데이터베이스를 아직 작성하지 않은면이 튜토리얼에서 사용할 데이터베이스를 작성해야합니다.
 이 페이지에서 게시물을 저장하기위한 테이블을 하나 만듭니다.
-다음 SQL 데이터베이스에서 실행하겠습니다. ::
+다음 SQL 데이터베이스에서 실행하겠습니다.
 
-    /* posts 테이블 작성 */
+.. code-block:: mysql
+
+    # posts 테이블 작성
     CREATE TABLE posts (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(50),
@@ -86,13 +88,13 @@ Tmp 디렉토리 권한
         modified DATETIME DEFAULT NULL
     );
 
-    /* 테스트로 쓸 기사를 insert함 */
+    # 테스트로 쓸 기사를 insert함
     INSERT INTO posts (title,body,created)
-        VALUES (‘제목', ‘기사본문 입니다.', NOW());
+        VALUES ('제목', '기사본문 입니다.', NOW());
     INSERT INTO posts (title,body,created)
-        VALUES (‘다른 제목', ‘본문을 씁니다.', NOW());
+        VALUES ('다른 제목', '본문을 씁니다.', NOW());
     INSERT INTO posts (title,body,created)
-        VALUES (‘또 다른 제목', ‘다른 본문을 쓸 수 있습니다.', NOW());
+        VALUES ('또 다른 제목', '다른 본문을 쓸 수 있습니다.', NOW());
 
 테이블 이름과 필드 이름은 완벽하지 않을 수 있습니다. CakePHP의 데이터베이스 명명 규약 및
 클래스의 명명 (:doc:`/getting-started/cakephp-conventions` 을 참고)을 준수하면 문제없이 사용할 수 있습니다.

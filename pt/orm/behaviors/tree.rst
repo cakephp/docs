@@ -41,7 +41,10 @@ Você ativa o comportamento da árvore, adicionando-o a tabela que deseja armaze
 
 Uma vez adicionado, você pode deixar o CakePHP construir a estrutura interna se a tabela já estiver pronta::
 
+    // Prior to 3.6.0
     $categories = TableRegistry::get('Categories');
+
+    $categories = TableRegistry::getTableLocator()->get('Categories');
     $categories->recover();
 
 Você pode verificar se funciona, obtendo qualquer linha da tabela e pedindo a contagem de descendentes que ela tem::

@@ -46,6 +46,7 @@ controller might look something like this::
 
         public function add()
         {
+            $this->request->allowMethod(['post', 'put']);
             $recipe = $this->Recipes->newEntity($this->request->getData());
             if ($this->Recipes->save($recipe)) {
                 $message = 'Saved';
@@ -61,14 +62,13 @@ controller might look something like this::
 
         public function edit($id)
         {
+            $this->request->allowMethod(['patch', 'post', 'put']);
             $recipe = $this->Recipes->get($id);
-            if ($this->request->is(['post', 'put'])) {
-                $recipe = $this->Recipes->patchEntity($recipe, $this->request->getData());
-                if ($this->Recipes->save($recipe)) {
-                    $message = 'Saved';
-                } else {
-                    $message = 'Error';
-                }
+            $recipe = $this->Recipes->patchEntity($recipe, $this->request->getData());
+            if ($this->Recipes->save($recipe)) {
+                $message = 'Saved';
+            } else {
+                $message = 'Error';
             }
             $this->set([
                 'message' => $message,
@@ -79,6 +79,7 @@ controller might look something like this::
 
         public function delete($id)
         {
+            $this->request->allowMethod(['delete']);
             $recipe = $this->Recipes->get($id);
             $message = 'Deleted';
             if (!$this->Recipes->delete($recipe)) {

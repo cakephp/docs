@@ -20,7 +20,7 @@ CakePHP 3 это фреймворк для веб-разработки рабо�
     EPUB, и вы можете читать ее на других устройствах офлайн.
 
     - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
-    - `EPUB <../_downloads/en/CakePHPCookbook.epub>`_
+    - `EPUB <../_downloads/ru/CakePHP.epub>`_
     - `Оригинальный источник GitHub <http://github.com/cakephp/docs>`_
 
 Получение помощи

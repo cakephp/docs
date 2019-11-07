@@ -121,7 +121,9 @@ plataforma de banco de dados::
         'columns' => ['id']
     ]);
 
-No exemplo abaixo a coluna ``id`` geraria o seguinte SQL em MySQL::
+No exemplo abaixo a coluna ``id`` geraria o seguinte SQL em MySQL:
+
+.. code-block:: mysql
 
     CREATE TABLE `posts` (
         `id` INTEGER AUTO_INCREMENT,
