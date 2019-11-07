@@ -7,7 +7,7 @@ O website oficial do CakePHP
 `https://cakephp.org <https://cakephp.org>`_
 
 O website oficial do CakePHP é sempre um ótimo lugar para visitar. Ele
-provê links para ferramentas comunmente utilizadas por desenvolvedores,
+provê links para ferramentas comumente utilizadas por desenvolvedores,
 screencasts, oportunidades de doação e downloads.
 
 O Cookbook
@@ -89,10 +89,6 @@ Onde conseguir ajuda em sua língua
 Francês
 -------
 - `Comunidade CakePHP francesa <http://cakephp-fr.org>`_
-
-Português brasileiro
---------------------
-- `Comunidade CakePHP brasileira <http://cakephp-br.org>`_
 
 .. meta::
     :title lang=pt: Onde conseguir ajuda
