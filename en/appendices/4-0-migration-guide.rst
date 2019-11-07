@@ -153,6 +153,8 @@ Database
   you will need to update your code.
 * The internals of ``Cake\Database\Schema\CacheCollection`` and ``Cake\Database\SchemaCache``
   have changed. If you extend these classes you will need to update your code.
+* The ORM now maps ``CHAR`` columns to the new ``char`` type instead of
+  ``string``.
 
 Datasources
 -----------
@@ -356,10 +358,21 @@ Database
   ``Cake\Datasource\FixtureInterface``. This interface should be
   implemented by fixture implementations that support constraints, which from
   our experience is generally relational databases.
+* The ``char`` abstract type was added. This type handles fixed length string
+  columns.
+
+ORM
+---
+
+* ``Table::saveManyOrFail()`` method has been added that will throw ``PersistenceFailedException``
+  with the specific entity that failed in case of an error. The entities are saved transaction safe.
+* ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been added for removing many
+  entities at once including callbacks. The entities are removed transaction safe.
 * A new type class ``DateTimeFractionalType`` has been added for datetime types
   with microsecond precision. You can opt into using this type by adding it to
   the ``TypeFactory`` as the default ``datetime`` type or re-mapping individual
   columns.
+
 
 Error
 -----

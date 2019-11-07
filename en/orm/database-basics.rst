@@ -321,8 +321,9 @@ the same names for similar data types, CakePHP provides a set of abstracted
 data types for use with the database layer. The types CakePHP supports are:
 
 string
-    Generally backed by ``CHAR`` or ``VARCHAR`` columns. Using the ``fixed`` option
-    will force a CHAR column. In SQL Server, ``NCHAR`` and ``NVARCHAR`` types are used.
+    Maps to ``VARCHAR`` type. In SQL Server the ``NVARCHAR`` types are used.
+char
+    Maps to ``CHAR`` type. In SQL Server the ``NCHAR`` type is used.
 text
     Maps to ``TEXT`` types.
 uuid
