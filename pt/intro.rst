@@ -17,7 +17,7 @@ Convenções Sobre Configuração
 O CakePHP provê uma estrutura organizacional básica que cobre nomenclaturas de
 classes, nomenclaturas de arquivos, nomenclaturas de banco de dados, e outras
 convenções. Apesar das convenções levarem algum tempo para serem assimiladas,
-ao seguí-las o CakePHP evita configuração desnecessário e cria uma estrutura de
+ao seguí-las o CakePHP evita configurações desnecessárias e cria uma estrutura de
 aplicação uniforme que faz trabalhar com vários projetos uma tarefa suave. O
 :doc:`capítulo de convenções</intro/conventions>` cobre as variadas convenções
 que o CakePHP utiliza.
@@ -69,7 +69,7 @@ para produzir qualquer interface de apresentação que a sua aplicação possa
 precisar.
 
 Por exemplo, a view pode usar dados da model para renderizar uma página HTML que
-os conhtenha, ou um resultado formatado como XML::
+os contenha, ou um resultado formatado como XML::
 
     // No arquivo view, nós renderizaremos um 'elemento' para cada usuário.
     <?php foreach ($users as $user): ?>
@@ -98,7 +98,7 @@ Um controller pode ser visto como um gerente que certifica-se que todos os
 recursos necessários para completar uma tarefa sejam delegados aos trabalhadores
 corretos. Ele aguarda por petições dos clientes, checa suas validades de acordo
 com autenticação ou regras de autorização, delega requisições ou processamento
-de dados da camada Model, selecciona o tipo de dados de apresentação que os
+de dados da camada Model, seleciona o tipo de dados de apresentação que os
 clientes estão aceitando, e finalmente delega o processo de renderização para a
 camada View. Um exemplo de controller para registro de usuário seria::
 
