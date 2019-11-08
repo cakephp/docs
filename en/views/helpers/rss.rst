@@ -16,11 +16,12 @@ Creating an RSS Feed with the RssHelper
 This example assumes you have a Articles Controller, Articles Table and an
 Article Entity already created and want to make an alternative view for RSS.
 
-Creating an XML/RSS version of ``articles/index`` is a snap with CakePHP.
+Creating an XML/RSS version of your Articles index action is a snap with CakePHP.
 After a few simple steps you can simply append the desired extension .rss to
-``articles/index`` making your URL ``articles/index.rss``. Before we jump too
-far ahead trying to get our webservice up and running we need to do a few
-things. First extensions parsing needs to be activated, this is done in
+``articles`` making your URL ``articles.rss``. This will work with the index
+action included as well so ``articles/index`` would become ``articles/index.rss``
+Before we jump too far ahead trying to get our webservice up and running we need
+to do a few things. First extensions parsing needs to be activated, this is done in
 **config/routes.php**::
 
     Router::extensions('rss');
@@ -29,8 +30,8 @@ In the call above we've activated the .rss extension. When using
 :php:meth:`Cake\\Routing\\Router::extensions()` you can pass a string or an
 array of extensions as first argument. This will activate each
 extension/content-type for use in your application. Now when the address
-``articles/index.rss`` is requested you will get an XML version of
-your ``articles/index``. However, first we need to edit the controller to
+``articles.rss`` is requested you will get an XML version of
+your ``articles`` index action. However, first we need to edit the controller to
 add in the rss-specific code.
 
 Controller Code
@@ -45,7 +46,7 @@ It is a good idea to add RequestHandler to your ArticlesController's
         $this->loadComponent('RequestHandler');
     }
 
-Before we can make an RSS version of our ``articles/index`` we need to get a few
+Before we can make an RSS version of our ``articles`` index action we need to get a few
 things in order. It may be tempting to put the channel metadata in the
 controller action and pass it to your view using the
 :php:meth:`Cake\\Controller\\Controller::set()` method but this is
@@ -55,7 +56,7 @@ the RSS feed and the data for the HTML view you can use the
 :php:meth:`Cake\\Controller\\Component\\RequestHandler::isRss()` method,
 otherwise your controller can stay the same::
 
-    // Modify the Posts Controller action that corresponds to
+    // Modify the Articles Controller action that corresponds to
     // the action which deliver the rss feed, which is the
     // Index action in our example.
 
@@ -105,15 +106,15 @@ it's doing a lot of lifting for us. We haven't set ``$documentData`` or
 can pass variables back to the layout. Which is where our ``$channelData``
 array will come from setting all of the meta data for our feed.
 
-Next up is view file for my articles/index. Much like the layout file
-we created, we need to create a **src/Template/Posts/rss/** directory and
+Next up is view file for my articles index action. Much like the layout file
+we created, we need to create a **src/Template/Articles/rss/** directory and
 create a new **index.ctp** inside that folder. The contents of the file
 are below.
 
 View
 ----
 
-Our view, located at **src/Template/Posts/rss/index.ctp**, begins by setting the
+Our view, located at **src/Template/Articles/rss/index.ctp**, begins by setting the
 ``$documentData`` and ``$channelData`` variables for the layout, these contain
 all the metadata for our RSS feed. This is done by using the
 :php:meth:`Cake\\View\\View::set()` method which is analogous to the
@@ -121,9 +122,9 @@ all the metadata for our RSS feed. This is done by using the
 passing the channel's metadata back to the layout::
 
     $this->set('channelData', [
-        'title' => __("Most Recent Posts"),
+        'title' => __("Most Recent Articles"),
         'link' => $this->Url->build('/', true),
-        'description' => __("Most recent posts."),
+        'description' => __("Most recent articles."),
         'language' => 'en-us'
     ]);
 
@@ -184,7 +185,7 @@ body of your blog. In the code above we used ``strip_tags()`` and
 as they could cause validation errors. Once we have set up the data for the
 feed, we can then use the :php:meth:`RssHelper::item()` method to create the XML
 in RSS format. Once you have all this setup, you can test your RSS feed by going
-to your site ``/posts/index.rss`` and you will see your new feed. It is always
+to your site ``/articles.rss`` and you will see your new feed. It is always
 important that you validate your RSS feed before making it live. This can be
 done by visiting sites that validate the XML such as Feed Validator or the w3c
 site at http://validator.w3.org/feed/.
