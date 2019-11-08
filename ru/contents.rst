@@ -82,7 +82,7 @@
     Bake <https://book.cakephp.org/bake/2/ru/>
     Chronos <https://book.cakephp.org/chronos/2/>
     Debug kit <https://book.cakephp.org/debugkit/4>
-    Migrations <https://book.cakephp.org/migrations/2>
+    Migrations <https://book.cakephp.org/migrations/3/ru/>
     elasticsearch
     upgrade-tool
 
