@@ -55,7 +55,7 @@ the RSS feed and the data for the HTML view you can use the
 :php:meth:`Cake\\Controller\\Component\\RequestHandler::isRss()` method,
 otherwise your controller can stay the same::
 
-    // Modify the Posts Controller action that corresponds to
+    // Modify the Articles Controller action that corresponds to
     // the action which deliver the rss feed, which is the
     // Index action in our example.
 
@@ -106,14 +106,14 @@ can pass variables back to the layout. Which is where our ``$channelData``
 array will come from setting all of the meta data for our feed.
 
 Next up is view file for my articles/index. Much like the layout file
-we created, we need to create a **src/Template/Posts/rss/** directory and
+we created, we need to create a **src/Template/Articles/rss/** directory and
 create a new **index.ctp** inside that folder. The contents of the file
 are below.
 
 View
 ----
 
-Our view, located at **src/Template/Posts/rss/index.ctp**, begins by setting the
+Our view, located at **src/Template/Articles/rss/index.ctp**, begins by setting the
 ``$documentData`` and ``$channelData`` variables for the layout, these contain
 all the metadata for our RSS feed. This is done by using the
 :php:meth:`Cake\\View\\View::set()` method which is analogous to the
@@ -121,9 +121,9 @@ all the metadata for our RSS feed. This is done by using the
 passing the channel's metadata back to the layout::
 
     $this->set('channelData', [
-        'title' => __("Most Recent Posts"),
+        'title' => __("Most Recent Articles"),
         'link' => $this->Url->build('/', true),
-        'description' => __("Most recent posts."),
+        'description' => __("Most recent articles."),
         'language' => 'en-us'
     ]);
 
@@ -184,7 +184,7 @@ body of your blog. In the code above we used ``strip_tags()`` and
 as they could cause validation errors. Once we have set up the data for the
 feed, we can then use the :php:meth:`RssHelper::item()` method to create the XML
 in RSS format. Once you have all this setup, you can test your RSS feed by going
-to your site ``/posts/index.rss`` and you will see your new feed. It is always
+to your site ``/articles/index.rss`` and you will see your new feed. It is always
 important that you validate your RSS feed before making it live. This can be
 done by visiting sites that validate the XML such as Feed Validator or the w3c
 site at http://validator.w3.org/feed/.
