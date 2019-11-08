@@ -858,18 +858,18 @@ in one way or another. In general, CakePHP prefers using arrays for
 expressing any conditions that need to be put after the WHERE clause
 in any SQL query.
 
-Using arrays is clearer and easier to read, and also makes it very
-easy to build queries. This syntax also breaks out the elements of
-your query (fields, values, operators, etc.) into discrete,
-manipulatable parts. This allows CakePHP to generate the most
-efficient query possible, ensure proper SQL syntax, and properly
-escape each individual part of the query. Using the array syntax
+Using arrays is clearer and easier to read, and also makes it very easy to build
+queries. This syntax also breaks out the elements of your query (fields, values,
+operators, etc.) into discrete, manipulatable parts. This allows CakePHP to
+generate the most efficient query possible, ensure proper SQL syntax, and
+properly escape each individual part of the query. Using associated array syntax
 also enables CakePHP to secure your queries against any SQL injection attack.
 
 .. warning::
 
-    CakePHP only escapes the array values. You should **never** put user data
-    into the keys. Doing so will make you vulnerable to SQL injections.
+    CakePHP only escapes the associated array values. You should **never** put
+    user data into the keys, or put user data into numerically indexexed arrays.
+    Doing so will make you vulnerable to SQL injections.
 
 At its most basic, an array-based query looks like this::
 

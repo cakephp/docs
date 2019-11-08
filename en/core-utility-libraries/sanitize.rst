@@ -25,6 +25,7 @@ situations it is best to use a dedicated library like `HTML Purifier
 SQL Escaping
 ============
 
-CakePHP handles SQL escaping on all parameters to :php:meth:`Model::find()` and
-:php:meth:`Model::save()`. In the rare case you need to construct SQL by hand
-using user input you should use :ref:`prepared-statements`.
+CakePHP handles SQL escaping on associated array values provided to
+:php:meth:`Model::find()` and :php:meth:`Model::save()`. In the rare case you
+need to construct SQL by hand using user input you should use
+:ref:`prepared-statements`.
