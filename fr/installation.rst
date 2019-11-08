@@ -91,7 +91,7 @@ Pour ceci vous pouvez lancer la commande suivante :
 
 .. code-block:: bash
 
-    php composer.phar create-project --prefer-dist cakephp/app my_app_name
+    php composer create-project --prefer-dist cakephp/app my_app_name
 
 Ou si Composer est installé globalement :
 
