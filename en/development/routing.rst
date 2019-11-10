@@ -165,7 +165,7 @@ as a destination string. A few examples of route targets are::
     // Array target to a prefixed plugin controller
     $routes->connect(
         '/admin/cms/articles',
-        ['prefix' => 'admin', 'plugin' => 'Cms', 'controller' => 'Articles', 'action' => 'index']
+        ['prefix' => 'Admin', 'plugin' => 'Cms', 'controller' => 'Articles', 'action' => 'index']
     );
     $routes->connect('/admin/cms/articles', 'Cms.Admin/Articles::index');
 
@@ -595,7 +595,7 @@ can be enabled by using the ``prefix`` scope method::
 
     Router::prefix('admin', function ($routes) {
         // All routes here will be prefixed with `/admin`
-        // And have the prefix => admin route element added.
+        // And have the prefix => Admin route element added.
         $routes->fallbacks(DashedRoute::class);
     });
 
@@ -614,7 +614,7 @@ following route::
     Router::prefix('admin', function ($routes) {
         // Because you are in the admin scope,
         // you do not need to include the /admin prefix
-        // or the admin route element.
+        // or the Admin route element.
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
     });
 
@@ -648,7 +648,7 @@ When defining prefixes, you can nest multiple prefixes if necessary::
 
 The above would create a route template like ``/manager/admin/{controller}``.
 The connected route would have the ``prefix`` route element set to
-``manager/admin``.
+``Manager/Admin``.
 
 The current prefix will be available from the controller methods through
 ``$this->request->getParam('prefix')``
@@ -659,7 +659,7 @@ build this link using the HTML helper::
     // Go into a prefixed route.
     echo $this->Html->link(
         'Manage articles',
-        ['prefix' => 'manager', 'controller' => 'Articles', 'action' => 'add']
+        ['prefix' => 'Manager', 'controller' => 'Articles', 'action' => 'add']
     );
 
     // Leave a prefix

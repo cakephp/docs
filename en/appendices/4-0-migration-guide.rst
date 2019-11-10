@@ -233,6 +233,10 @@ ORM
 Router
 ------
 
+* Routing prefixes created through ``Router::prefix()`` and
+  ``$routes->prefix()``` are now CamelCased instead of under_scored. Instead of
+  ``my_admin``, you need to use ``MyAdmin``. This change normalizes prefixes
+  with other routing parameters and removes inflection overhead.
 * ``RouteBuilder::resources()`` now inflects resource names to dasherized form
   instead of underscored by default in URLs. You can retain underscored
   inflection by using ``'inflect' => 'underscore'`` in ``$options`` argument.

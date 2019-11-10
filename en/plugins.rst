@@ -560,7 +560,7 @@ Creating this file would allow you to override
 
 If the plugin implements a routing prefix, you must include the routing prefix
 in your application template overrides. For example, if the 'ContactManager'
-plugin implemented an 'admin' prefix the overridng path would be::
+plugin implemented an 'Admin' prefix the overridng path would be::
 
     templates/plugin/ContactManager/Admin/ContactManager/index.php
 
