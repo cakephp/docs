@@ -1181,11 +1181,11 @@ name::
             'updateAll' => [
                 'action' => 'updateAll',
                 'method' => 'DELETE',
-                'path' => '/update_many'
+                'path' => '/update-many'
             ],
         ]
     ]);
-    // This would connect /articles/update_many
+    // This would connect /articles/update-many
 
 If you define 'only' and 'map', make sure that your mapped methods are also in
 the 'only' list.
