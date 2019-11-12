@@ -359,8 +359,12 @@ date
     class.
 datetime
     See :ref:`datetime-type`.
+datetimefractional
+    See :ref:`datetime-type`.
 timestamp
     Maps to the ``TIMESTAMP`` type.
+timestampfractional
+    Maps to the ``TIMESTAMP(N)`` type.
 time
     Maps to a ``TIME`` type in all databases.
 json
@@ -381,7 +385,7 @@ handles, and generate file handles when reading data.
 DateTime Type
 -------------
 
-.. php:class:: Type\DateTimeType
+.. php:class:: DateTimeType
 
 Maps to a native ``DATETIME`` column type. In PostgreSQL, and SQL Server
 this turns into a ``TIMESTAMP`` type. The default return value of this column
@@ -395,7 +399,7 @@ then you can use this method to specify your database's timezone. This timezone
 will then used when converting PHP objects to database's datetime string and
 vice versa.
 
-.. php:class:: Type\DateTimeFractionalType
+.. php:class:: DateTimeFractionalType
 
 Can be used to map datetime columns that contain microseconds such as
 ``DATETIME(6)`` in MySQL. To use this type you need to add it as a mapped type::
