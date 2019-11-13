@@ -408,6 +408,8 @@ date
     date
 datetime, timestamp
     datetime-local
+datetimefractional, timestampfractional
+    datetime-local
 time
     time
 month

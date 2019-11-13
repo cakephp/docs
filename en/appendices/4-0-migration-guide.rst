@@ -69,7 +69,7 @@ View
   defined as a nested list. e.g ``['Title', ['class' => 'special']]``.
 
 Mailer
------
+------
 
 * The ``Cake\Mailer\Email`` class has been deprecated. Use ``Cake\Mailer\Mailer``
   instead.
@@ -122,7 +122,7 @@ Component
   removed and now emit a deprecation warning. You should use the
   :ref:`body-parser-middleware` instead.
 * ``Cake\Controller\Component\PagingComponent`` now sets paging params info as
-   request attribute instead of request param. Hence you should now use
+  request attribute instead of request param. Hence you should now use
   ``$request->getAttribute('paging')`` instead of ``$request->getParam('paging')``.
 
 Database
@@ -153,8 +153,21 @@ Database
   you will need to update your code.
 * The internals of ``Cake\Database\Schema\CacheCollection`` and ``Cake\Database\SchemaCache``
   have changed. If you extend these classes you will need to update your code.
-* The ORM now maps ``CHAR`` columns to the new ``char`` type instead of
+* The database schemas now map ``CHAR`` columns to the new ``char`` type instead of
   ``string``.
+* The MySQL and PostgreSQL database schemas now map timestamp types that support
+  fractional seconds to the new abstract fractional types.
+
+  * **MySQL**
+
+    #. ``DATETIME(1-6)`` => ``datetimefractional``
+    #. ``TIMESTAMP(1-6)`` => ``timestampfractional``
+
+  * **PostgreSQL**
+
+    #. ``TIMESTAMP`` => ``timestampfractional``
+    #. ``TIMESTAMP(1-6)`` => ``timestampfractional``
+
 
 Datasources
 -----------
@@ -362,6 +375,8 @@ Database
   our experience is generally relational databases.
 * The ``char`` abstract type was added. This type handles fixed length string
   columns.
+* The ``datetimefractional`` and ``timestampfractional`` abstract types were added.
+  These types handle timestamps with fractional seconds.
 
 ORM
 ---
@@ -373,7 +388,8 @@ ORM
 * A new type class ``DateTimeFractionalType`` has been added for datetime types
   with microsecond precision. You can opt into using this type by adding it to
   the ``TypeFactory`` as the default ``datetime`` type or re-mapping individual
-  columns.
+  columns. See the Database migration notes for how this type is automatically
+  mapped to database types.
 
 
 Error
@@ -457,3 +473,7 @@ View
   If you need to retain the former markup, a shimmed FormHelper can be found in
   `Shim plugin <https://github.com/dereuromark/cakephp-shim>`__ with the old
   behavior/generation (4.x branch).
+* ``FormHelper`` now sets the default step size to seconds for ``datetime``
+  widgets with a time component.  The default is milliseconds if the field
+  is from the new ``datetimefractional`` or ``timestampfractional`` database
+  types.
