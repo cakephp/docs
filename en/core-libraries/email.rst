@@ -535,6 +535,11 @@ following::
         }
     }
 
+.. deprecated:: 3.4.0
+    Use ``viewBuilder()->setTemplate()`` instead of ``template()``. Use
+    ``viewBuilder()->setLayout()`` instead of the layout argument of
+    ``template()``. Use ``viewBuilder()->setTheme()`` instead of ``theme()``.
+
 In our example we have created two methods, one for sending a welcome email, and
 another for sending a password reset email. Each of these methods expect a user
 ``Entity`` and utilizes its properties for configuring each email.
