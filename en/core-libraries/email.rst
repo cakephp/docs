@@ -453,7 +453,7 @@ Sending Messages Quickly
 ========================
 
 Sometimes you need a quick way to fire off an email, and you don't necessarily
-want do setup a bunch of configuration ahead of time.
+want to setup a bunch of configuration ahead of time.
 :php:meth:`Cake\\Mailer\\Email::deliver()` is intended for that purpose.
 
 You can create your configuration using
