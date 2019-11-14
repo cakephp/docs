@@ -991,7 +991,7 @@ checked::
             }
 
             // Only admins can access admin functions
-            if ($this->request->getParam('prefix') === 'admin') {
+            if ($this->request->getParam('prefix') === 'Admin') {
                 return (bool)($user['role'] === 'admin');
             }
 

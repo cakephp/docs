@@ -97,7 +97,7 @@ Disabling form tampering checks
         {
             parent::beforeFilter($event);
 
-            if ($this->request->getParam('prefix') === 'admin') {
+            if ($this->request->getParam('prefix') === 'Admin') {
                 $this->Security->setConfig('validate', false);
             }
         }
