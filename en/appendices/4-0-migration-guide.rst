@@ -5,11 +5,8 @@ CakePHP 4.0 contains breaking changes, and is not backwards compatible with 3.x
 releases. Before attempting to upgrade to 4.0, first upgrade to 3.8 and resolve
 all deprecation warnings.
 
-To upgrade to 4.0.x run the following composer command:
-
-.. code-block:: bash
-
-    php composer.phar require --update-with-dependencies "cakephp/cakephp:4.0.*"
+Refer to the :doc:`/appendicies/4-0-upgrade-guide` for step by step instructions
+on how to upgrade to 4.0.
 
 Deprecated Features Removed
 ===========================
