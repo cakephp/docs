@@ -15,9 +15,11 @@ plugins emit.
 Use the Upgrade Tool
 ====================
 
-Because CakePHP 4 adopts strict mode and uses more typehinting there are many
-backwards incompatible changes concerning method signatures, and file renames.
-To help expedite fixing these tedious changes there is an upgrade CLI tool::
+Because CakePHP 4 adopts strict mode and uses more typehinting, there are many
+backwards incompatible changes concerning method signatures and file renames.
+To help expedite fixing these tedious changes there is an upgrade CLI tool:
+
+.. code-block:: bash
 
     # Install the upgrade tool
     git clone git://github.com/cakephp/upgrade
@@ -26,7 +28,9 @@ To help expedite fixing these tedious changes there is an upgrade CLI tool::
     composer install --no-dev
 
 With the upgrade tool installed you can now run it on your application or
-plugin::
+plugin:
+
+.. code-block:: bash
 
     cd ~/code/upgrade
 
@@ -39,23 +43,25 @@ plugin::
 Once you've renamed your template and locale files, make sure you update
 ``App.paths.locales`` and ``App.paths.templates`` paths to be correct.
 
-Next use the ``rector`` command to automatically fix several deprecated
-& removed APIs::
+Applying Rector Refactorings
+----------------------------
+
+Next use the ``rector`` command to automatically fix many deprecated CakePHP and
+PHPUnit method calls. It is important to apply rector **before** you upgrade
+your dependencies::
 
     bin/cake rector --rules phpunit80 <path/to/app>
     bin/cake rector --rules cakephp40 <path/to/app>
 
-
-.. note::
-    It is important to apply rector **before** you upgrade your dependencies.
-
 Update CakePHP Dependency
 =========================
 
-To upgrade CakePHP run the following composer command:
+After applying rector refactorings, upgrade CakePHP and PHPUnit with the following
+composer commands:
 
 .. code-block:: bash
 
+    php composer.phar require --update-with-dependencies "phpunit/phpunit:^8.0"
     php composer.phar require --update-with-dependencies "cakephp/cakephp:4.0.*"
 
 
