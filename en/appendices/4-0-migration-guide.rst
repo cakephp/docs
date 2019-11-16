@@ -382,19 +382,6 @@ Database
 * The ``datetimefractional`` and ``timestampfractional`` abstract types were added.
   These types handle timestamps with fractional seconds.
 
-ORM
----
-
-* ``Table::saveManyOrFail()`` method has been added that will throw ``PersistenceFailedException``
-  with the specific entity that failed in case of an error. The entities are saved transaction safe.
-* ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been added for removing many
-  entities at once including callbacks. The entities are removed transaction safe.
-* A new type class ``DateTimeFractionalType`` has been added for datetime types
-  with microsecond precision. You can opt into using this type by adding it to
-  the ``TypeFactory`` as the default ``datetime`` type or re-mapping individual
-  columns. See the Database migration notes for how this type is automatically
-  mapped to database types.
-
 
 Error
 -----
@@ -421,6 +408,11 @@ Http
   feature of ``SecurityComponent``.
 * Cookies now support the ``SameSite`` attribute.
 
+I18n
+----
+* ``Date`` and ``FrozenDate`` now respect the time zone parameter for
+  various factory helpers like ``today('Asia/Tokyo')``.
+
 Mailer
 ------
 
@@ -433,12 +425,10 @@ Mailer
 ORM
 ---
 
-* ``Table::saveManyOrFail()`` method has been added that will throw
-  ``PersistenceFailedException`` with the specific entity that failed in case of
-  an error. The entities are saved transaction safe.
-* ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been
-  added for removing many entities at once including callbacks. The entities are
-  removed transaction safe.
+* ``Table::saveManyOrFail()`` method has been added that will throw ``PersistenceFailedException``
+  with the specific entity that failed in case of an error. The entities are saved transaction safe.
+* ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been added for removing many
+  entities at once including callbacks. The entities are removed transaction safe.
 * ``Table::newEmptyEntity()`` has been added to create a new and empty entity
   object.  This does not trigger any field validation. The entity can be
   persisted without validation error as an empty record. ``Table::newEntity()``
@@ -447,6 +437,11 @@ ORM
 * ``Cake\ORM\RulesChecker::isLinkedTo()`` and ``isNotLinkedTo()`` were added.
   These new application rules allow you to ensure an association has or doesn't
   have related records.
+* A new type class ``DateTimeFractionalType`` has been added for datetime types
+  with microsecond precision. You can opt into using this type by adding it to
+  the ``TypeFactory`` as the default ``datetime`` type or re-mapping individual
+  columns. See the Database migration notes for how this type is automatically
+  mapped to database types.
 
 
 Routing
