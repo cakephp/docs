@@ -38,7 +38,7 @@ plugin:
     bin/cake upgrade file_rename locales <path/to/app>
 
     # Rename template files
-    bin/cake upgrade file_rename locales <path/to/app>
+    bin/cake upgrade file_rename templates <path/to/app>
 
 Once you've renamed your template and locale files, make sure you update
 ``App.paths.locales`` and ``App.paths.templates`` paths to be correct.
