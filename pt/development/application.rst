@@ -1,15 +1,14 @@
 Aplicação
 #########
 
-O ``Application`` é o coração do seu aplicativo. Controla como seu aplicativo está configurado e quais plugins, 
-middleware, comandos e rotas de console estão incluídos.
+O ``Application`` é o coração do seu aplicativo. Ele controla como seu aplicativo está configurado e quais plugins, 
+middleware, rotas e comandos de console estão incluídos.
 
-Você pode encontrar sua classe ``Application`` em **src/Application.php**. Por padrão, ele será bem fino e definirá apenas 
+Você pode encontrar sua classe ``Application`` em **src/Application.php**. Por padrão, ele será bem simples e definirá apenas 
 alguns padrões. :doc:`/controllers/middleware`. Os aplicativos podem definir os seguintes métodos de gancho:
 
-* ``bootstrap`` usado para carregar :doc:`configuration files</development/configuration>`, 
-  define constantes e outras funções globais.
-  Por padrão, isso inclui **config/bootstrap.php**. Este é o lugar ideal para
+* ``bootstrap`` usado para carregar :doc:`arquivos de configuração</development/configuration>`, 
+  define constantes e outras funções globais. Por padrão, isso inclui **config/bootstrap.php**. Este é o lugar ideal para
   carregar :doc:`/plugins` e :doc:`ouvintes de eventos </core-libraries/events>`.
 * ``routes`` usado para carregar :doc:`routes </development/routing>`. Por padrão isso inclui **config/routes.php**.
 * ``middleware`` usado para adicionar :doc:`middleware </controllers/middleware>` em sua aplicação.
@@ -21,9 +20,9 @@ alguns padrões. :doc:`/controllers/middleware`. Os aplicativos podem definir os
 Adicionando a nova pilha HTTP a um aplicativo existente
 =======================================================
 
-O uso da classe Application e do HTTP Middleware em um aplicativo existente requer algumas alterações no seu código.
+O uso da classe ``Application`` e do HTTP Middleware em um aplicativo existente requer algumas alterações no seu código.
 
-#. Primeiro atualize seu **webroot/index.php**. Copie o conteúdo do arquivo de `app
+#. Primeiro atualize seu arquivo **webroot/index.php**. Copie e cole o conteúdo do arquivo de `app
    skeleton <https://github.com/cakephp/app/tree/master/webroot/index.php>`__.
 #. Crie uma classe ``Application``. Veja a seção :ref:`using-middleware`
     acima para saber como fazer isso. Ou copie o exemplo no `app skeleton 
@@ -43,10 +42,10 @@ O uso da classe Application e do HTTP Middleware em um aplicativo existente requ
 #. Se você estiver usando o ``CsrfProtectionMiddleware`` certifique-se de remover
    ``CsrfComponent`` de seus controladores.
 
-Após a conclusão dessas etapas, você estará pronto para começar a reimplementar qualquer filtro de envio de 
+Após a conclusão dessas etapas, você estará pronto para começar a reimplementar qualquer filtro de 
 aplicativo/plug-in como middleware HTTP.
 
-Se você estiver executando testes, também precisará atualizar seu 
+Se você estiver executando testes, também precisará atualizar seu arquivo 
 **tests/bootstrap.php** copiando o conteúdo do arquivo de `app skeleton
 <https://github.com/cakephp/app/tree/master/tests/bootstrap.php>`_.
 
