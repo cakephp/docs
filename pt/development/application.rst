@@ -29,14 +29,15 @@ O uso da classe ``Application`` e do HTTP Middleware em um aplicativo existente 
     <https://github.com/cakephp/app/tree/master/src/Application.php>`__.
 #. Crie **config/requirements.php** se não existir e adicione o conteúdo de `app skeleton <https://github.com/cakephp/app/blob/master/config/requirements.php>`__.
 #. Adicione a ``cake_routes`` uma definição de cache em **config/app.php**, se ainda não estiver lá.
-#. Atualize **config/bootstrap.php** e **config/bootstrap_cli.php** de acordo com `app_skeleton <https://github.com/cakephp/app/tree/master/config/bootstrap.php>`__,
+#. Atualize o arquivo **config/bootstrap.php** e **config/bootstrap_cli.php** de acordo com `app_skeleton <https://github.com/cakephp/app/tree/master/config/bootstrap.php>`__,
    tomando cuidado para preservar quaisquer adições e alterações específicas de seu aplicativo. 
    As atualizações do bootstrap.php incluem:
-   * Desabilitando o cache ``_cake_routes_`` em modo de desenvolvimento
-   * Removendo a seção de requerimentos (agora em **config/requirements.php**)
-   * Removendo o carregamento do plugin DebugKit (agora em **src/Application.php**)
-   * Removendo a importação de **autoload.php** (agora em **webroot/index.php**)
-   * Removendo a referencia ``DispatcherFactory``
+   
+   * Desabilitar o cache ``_cake_routes_`` em modo de desenvolvimento
+   * Remover a seção de requerimentos (agora em **config/requirements.php**)
+   * Remover o carregamento do plugin DebugKit (agora em **src/Application.php**)
+   * Remover a importação de **autoload.php** (agora em **webroot/index.php**)
+   * Remover a referência ``DispatcherFactory``
 #. Atualize o conteúdo dos arquivos em **bin** . Substitua os arquivos pelas versões do `app skeleton
    <https://github.com/cakephp/app/tree/master/bin>`__.
 #. Se você estiver usando o ``CsrfProtectionMiddleware`` certifique-se de remover
