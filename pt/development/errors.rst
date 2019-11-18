@@ -15,7 +15,7 @@ personalizar o tratamento de erros para o seu aplicativo. As seguintes opções 
 
 * ``errorLevel`` - int - O nível de erros que você está interessado em capturar. Use as constantes de erro embutidas no PHP e máscaras de bits para selecionar o nível de erro no qual você precisa. Você pode configurá-lo como ``E_ALL ^ E_USER_DEPRECATED`` para desativar os avisos de depreciação.
 * ``trace`` - bool - Inclua rastreamentos de pilha para erros nos arquivos de log. Rastreamentos de pilha serão incluídos no log após cada erro. Isso é útil para descobrir onde/quando os erros estão sendo gerados
-* ``exceptionRenderer`` - string - A classe responsável por renderizar exceções não capturadas. Se você escolher uma classe personalizada, coloque o arquivo dessa classe em ** src/Error**. Esta classe precisa implementar o método ``render()``.
+* ``exceptionRenderer`` - string - A classe responsável por renderizar exceções não capturadas. Se você escolher uma classe personalizada, coloque o arquivo dessa classe em **src/Error**. Esta classe precisa implementar o método ``render()``.
 * ``log`` - bool - Quando ``true``, as exceções + seus rastreamentos de pilha serão registrados em :php:class:`Cake\\Log\\Log`
 * ``skipLog`` - array - Uma matriz de nomes de classes de exceção que não devem ser registrados. Isso é útil para remover NotFoundExceptions ou outras mensagens de log comuns, mas desinteressantes.
 * ``extraFatalErrorMemory`` - int - Defina como o número de megabytes para aumentar o limite de memória quando um erro fatal for encontrado. Isso permite que o espaço sobrando complete o registro ou o tratamento de erros.
