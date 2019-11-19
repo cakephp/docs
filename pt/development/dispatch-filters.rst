@@ -80,11 +80,6 @@ Quanto maior a prioridade, mais tarde esse filtro será chamado.
 Aplicação condicional de filtros
 --------------------------------
 
-If you don't want to run a filter on every request, you can use conditions to
-only apply it some of the time. You can apply conditions using the ``for`` and
-``when`` options. The ``for`` option lets you match on URL substrings, while the
-``when`` option allows you to run a callable::
-
 Se você não deseja executar um filtro em todas as solicitações, poderá usar condições 
 para aplicá-lo apenas algumas vezes. Você pode aplicar condições usando as opções ``for`` 
 e ``when``. A opção ``for`` permite que você combine com substrings de URL, enquanto a 
@@ -183,20 +178,6 @@ no nosso caso, seria qualquer coisa exibida no ``PagesController``::
 
     // Em seu bootstrap.php
     DispatcherFactory::add('HttpCache', ['for' => '/pages'])
-
-This filter will send a expiration header to 1 day in the future for
-all responses produced by the pages controller. You could of course do the same
-in the controller, this is just an example of what could be done with filters.
-For instance, instead of altering the response, you could cache it using
-:php:class:`Cake\\Cache\\Cache` and serve the response from the ``beforeDispatch()``
-callback.
-
-While powerful, dispatcher filters have the potential to make your application
-more difficult to maintain. Filters are an extremely powerful tool when used
-wisely and adding response handlers for each URL in your app is not a good use for
-them. Keep in mind that not everything needs to be a filter; `Controllers` and
-`Components` are usually a more accurate choice for adding any request handling
-code to your app.
 
 Esse filtro enviará um cabeçalho de expiração para 1 dia no futuro para todas as 
 respostas produzidas pelo controlador de páginas. É claro que você poderia fazer 
