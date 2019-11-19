@@ -74,7 +74,7 @@ Mailer
 App
 ---
 * ``App::path()`` has been deprecated for class paths.
-  Use ``\Cake\Core\App::classPath()`` instead..
+  Use ``\Cake\Core\App::classPath()`` instead.
 
 Breaking Changes
 ================
