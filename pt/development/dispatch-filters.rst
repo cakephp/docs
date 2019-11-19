@@ -83,7 +83,7 @@ Aplicação condicional de filtros
 Se você não deseja executar um filtro em todas as solicitações, poderá usar condições 
 para aplicá-lo apenas algumas vezes. Você pode aplicar condições usando as opções ``for`` 
 e ``when``. A opção ``for`` permite que você combine com substrings de URL, enquanto a 
-opção ``when`` permite executar uma chamada:
+opção ``when`` permite executar uma chamada::
 
     // Só é executado em solicitações iniciadas com `/blog`
     DispatcherFactory::add('BlogHeader', ['for' => '/blog']);
@@ -129,7 +129,7 @@ página de destino. Primeiro, crie o arquivo e seu conteúdo deve se parecer com
     }
 
 Salve este arquivo em **src/Routing/Filter/TrackingCookieFilter.php**. Como você pode 
-ver, como outras classes no CakePHP, os filtros do dispatcher têm algumas convenções:
+ver, como outras classes no CakePHP, os filtros do dispatcher têm algumas convenções::
 
 * Os nomes das classes terminam em ``Filter``.
 * As classes estão no espaço de nome ``Routing\Filter``. Por exemplo,
