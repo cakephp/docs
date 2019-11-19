@@ -73,8 +73,8 @@ Mailer
 
 App
 ---
-* The 2nd argument ``$plugin`` of ``App::path()`` is deprecated.
-  Use ``\Cake\Core\Plugin::classPath()/templatePath()`` instead for plugin paths.
+* ``App::path()`` has been deprecated for class paths.
+  Use ``\Cake\Core\App::classPath()`` instead..
 
 Breaking Changes
 ================
