@@ -10,7 +10,7 @@ O uso de ``$_SESSION`` geralmente é evitado no CakePHP, e o uso das classes Ses
 .. _session-configuration:
 
 Configuração da Sessão
-=====================
+======================
 
 A configuração da sessão é geralmente definida em ``/config/app.php``. As opções disponíveis são:
 
@@ -53,14 +53,9 @@ persista em todos os subdomínios, você pode::
         ]
     ]);
 
-By default PHP sets the session cookie to expire as soon as the browser is
-closed, regardless of the configured ``Session.timeout`` value. The cookie
-timeout is controlled by the ``session.cookie_lifetime`` ini value and can be
-configured using::
-
 Por padrão, o PHP define o cookie da sessão para expirar assim que o navegador é fechado, 
 independentemente do valor configurado ``Session.timeout``. O tempo limite do cookie é 
-controlado pelo valor ini ``session.cookie_lifetime`` e pode ser configurado usando:
+controlado pelo valor ini ``session.cookie_lifetime`` e pode ser configurado usando::
 
     Configure::write('Session', [
         'defaults' => 'php',
@@ -87,8 +82,8 @@ Manipuladores de sessão e configuração incorporados
 
 O CakePHP vem com várias configurações de sessão embutidas. Você pode usá-los 
 como base para a configuração da sessão ou criar uma solução totalmente personalizada. 
-Para usar padrões, basta definir a tecla 'padrões' como o nome do padrão que você deseja 
-usar. Você pode substituir qualquer subconjunto declarando-o na sua configuração da sessão::
+Para usar padrões, basta definir a chave 'defaults' como o nome do padrão que você deseja 
+usar. Você pode substituir qualquer subconjunto declarando-o na sua configuração de sessão::
 
     Configure::write('Session', [
         'defaults' => 'php'
@@ -115,18 +110,9 @@ sessão 'php'. As configurações internas são:
 Manipuladores de Sessão
 -----------------------
 
-Session handlers can also be defined in the session config array.  By defining
-the 'handler.engine' config key, you can name the class name, or provide
-a handler instance.  The class/object must implement the
-native PHP ``SessionHandlerInterface``. Implementing this interface will allow
-``Session`` to automatically map the methods for the handler. Both the core
-Cache and Database session handlers use this method for saving sessions.
-Additional settings for the handler should be placed inside the handler array.
-You can then read those values out from inside your handler::
-
 Os manipuladores de sessão também podem ser definidos na matriz de configuração 
 da sessão. Ao definir a chave de configuração 'handler.engine', você pode nomear 
-o nome da classe ou fornecer uma instância do manipulador. A classe/objeto deve 
+a classe ou fornecer uma instância do manipulador. A classe/objeto deve 
 implementar o PHP nativo ``SessionHandlerInterface``. A implementação dessa 
 interface permitirá que a ``Session`` mapeie automaticamente os métodos para 
 o manipulador. Os principais manipuladores de sessão do Cache e do Banco de 
@@ -141,9 +127,9 @@ de dentro do seu manipulador::
         ]
     ]
 
-A tabela acima mostra como você pode configurar o manipulador de sessões do banco de 
+A amostra acima, exemplifica como você pode configurar o manipulador de sessões do banco de 
 dados com um modelo de aplicativo. Ao usar nomes de classe como seu handler.engine, 
-o CakePHP espera encontrar sua classe no espaço de nome ``Http\Session``. Por exemplo, 
+o CakePHP espera encontrar sua classe no namespace ``Http\Session``. Por exemplo, 
 se você tiver uma classe ``AppSessionHandler``, o arquivo deve ser 
 **src/Http/Session/AppSessionHandler.php** e o nome da classe deve ser ``App\Http\Session\AppSessionHandler``. 
 Você também pode usar manipuladores de sessão de plugins internos. Configurando o 
@@ -157,13 +143,13 @@ mecanismo para ``MyPlugin.PluginSessionHandler``.
 Sessões de Banco de Dados
 -------------------------
 
-Se você precisar usar um banco de dados para armazenar os dados da sessão, configure da seguinte maneira:
+Se você precisar usar um banco de dados para armazenar os dados da sessão, configure da seguinte maneira::
 
     'Session' => [
         'defaults' => 'database'
     ]
 
-Essa configuração requer uma tabela de banco de dados, com este esquema ::
+Essa configuração requer uma tabela de banco de dados, com este esquema::
 
   CREATE TABLE `sessions` (
     `id` char(40) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
@@ -174,9 +160,10 @@ Essa configuração requer uma tabela de banco de dados, com este esquema ::
     PRIMARY KEY (`id`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-You can find a copy of the schema for the sessions table in the `application skeleton <https://github.com/cakephp/app>`_ in ``config/schema/sessions.sql``.
+Você pode encontrar uma cópia do esquema para a tabela de sessões no `esqueleto do aplicativo <https://github.com/cakephp/app>`_ 
+em ``config/schema/sessions.sql``.
 
-You can also use your own ``Table`` class to handle the saving of the sessions::
+Você também pode usar sua própria classe ``Tabela`` para lidar com o salvamento das sessões::
 
     'Session' => [
         'defaults' => 'database',
@@ -186,19 +173,18 @@ You can also use your own ``Table`` class to handle the saving of the sessions::
         ]
     ]
 
-The above will tell Session to use the built-in 'database' defaults, and
-specify that a Table called ``CustomSessions`` will be the delegate for saving
-session information to the database.
+O comando acima instruirá a Sessão a usar os padrões internos do 'banco de dados' e especificará que 
+uma Tabela chamada ``CustomSessions`` será a escolhida para salvar as informações da sessão no banco de dados.
 
-Cache Sessions
---------------
+Sessões de Cache
+----------------
 
-The Cache class can be used to store sessions as well. This allows you to store
-sessions in a cache like APCu, or Memcached. There are some caveats to
-using cache sessions, in that if you exhaust the cache space, sessions will
-start to expire as records are evicted.
+A classe Cache também pode ser usada para armazenar sessões. Isso permite que você armazene 
+sessões em um cache como APCu ou Memcached. Existem algumas ressalvas no uso de sessões de 
+cache, pois se você esgotar o espaço em cache, as sessões começarão a expirar à medida que 
+os registros forem despejados.
 
-To use Cache based sessions you can configure you Session config like::
+Para usar sessões baseadas em cache, você pode configurar sua configuração de sessão como::
 
     Configure::write('Session', [
         'defaults' => 'cache',
@@ -207,19 +193,19 @@ To use Cache based sessions you can configure you Session config like::
         ]
     ]);
 
-This will configure Session to use the ``CacheSession`` class as the
-delegate for saving the sessions. You can use the 'config' key which cache
-configuration to use. The default cache configuration is ``'default'``.
+Isso configurará a Session para usar a classe ``CacheSession`` como o delegado para 
+salvar as sessões. Você pode usar a chave 'config' para configuração de uso do cache. 
+A configuração padrão do cache é ``'default'``.
 
-Setting ini directives
-======================
+Definindo diretivas ini
+=======================
 
-The built-in defaults attempt to provide a common base for session
-configuration. You may need to tweak specific ini flags as well. CakePHP
-exposes the ability to customize the ini settings for both default
-configurations, as well as custom ones. The ``ini`` key in the session settings,
-allows you to specify individual configuration values. For example you can use
-it to control settings like ``session.gc_divisor``::
+Os padrões internos tentam fornecer uma base comum para a configuração da sessão. 
+Pode ser necessário ajustar também sinalizadores ini específicos. O CakePHP expõe 
+a capacidade de personalizar as configurações ini para as configurações padrão e 
+personalizadas. A chave ``ini`` nas configurações da sessão permite especificar 
+valores de configuração individuais. Por exemplo, você pode usá-lo para controlar 
+configurações como ``session.gc_divisor``::
 
     Configure::write('Session', [
         'defaults' => 'php',
@@ -231,17 +217,16 @@ it to control settings like ``session.gc_divisor``::
         ]
     ]);
 
-Creating a Custom Session Handler
-=================================
+Criando um manipulador de sessão personalizado
+==============================================
 
-Creating a custom session handler is straightforward in CakePHP. In this
-example we'll create a session handler that stores sessions both in the Cache
-(APC) and the database. This gives us the best of fast IO of APC,
-without having to worry about sessions evaporating when the cache fills up.
+Criar um manipulador de sessão personalizado é simples no CakePHP. Neste exemplo, 
+criaremos um manipulador de sessão que armazena sessões no cache (APC) e no banco 
+de dados. Isso nos dá o melhor das E/S rápidas da APC, sem a necessidade de se 
+preocupar com a evaporação das sessões quando o cache ficar cheio.
 
-First we'll need to create our custom class and put it in
-**src/Http/Session/ComboSession.php**. The class should look
-something like::
+Primeiro, precisamos criar nossa classe personalizada e colocá-la em **src/Http/Session/ComboSession.php**. 
+A classe deve se parecer com::
 
     namespace App\Http\Session;
 
@@ -259,7 +244,7 @@ something like::
             parent::__construct();
         }
 
-        // Read data from the session.
+        // Lê dados da sessão.
         public function read($id)
         {
             $result = Cache::read($id, $this->cacheKey);
@@ -269,33 +254,32 @@ something like::
             return parent::read($id);
         }
 
-        // Write data into the session.
+        // Gravar dados na sessão.
         public function write($id, $data)
         {
             Cache::write($id, $data, $this->cacheKey);
             return parent::write($id, $data);
         }
 
-        // Destroy a session.
+        // Apaga uma sessão.
         public function destroy($id)
         {
             Cache::delete($id, $this->cacheKey);
             return parent::destroy($id);
         }
 
-        // Removes expired sessions.
+        // Remove sessões expiradas.
         public function gc($expires = null)
         {
             return Cache::gc($this->cacheKey) && parent::gc($expires);
         }
     }
 
-Our class extends the built-in ``DatabaseSession`` so we don't have to duplicate
-all of its logic and behavior. We wrap each operation with
-a :php:class:`Cake\\Cache\\Cache` operation. This lets us fetch sessions from
-the fast cache, and not have to worry about what happens when we fill the cache.
-Using this session handler is also easy. In your **app.php** make the session
-block look like the following::
+Nossa classe estende o ``DatabaseSession`` interno, para que não tenhamos que duplicar 
+toda a sua lógica e comportamento. Envolvemos cada operação com uma operação :php:class:`Cake\\Cache\\Cache`. 
+Isso nos permite buscar sessões no cache rápido e não ter que nos preocupar com o que acontece quando o 
+cache é preenchido. Usar este manipulador de sessões também é fácil. No seu **app.php**,
+faça com que o bloco de sessões esteja como o seguinte::
 
     'Session' => [
         'defaults' => 'database',
@@ -305,23 +289,22 @@ block look like the following::
             'cache' => 'apc'
         ]
     ],
-    // Make sure to add a apc cache config
+    // Certifique-se de adicionar uma configuração de cache apc
     'Cache' => [
         'apc' => ['engine' => 'Apc']
     ]
 
-Now our application will start using our custom session handler for reading and
-writing session data.
+Agora, nosso aplicativo começará a usar nosso manipulador de sessão personalizado para ler e gravar dados da sessão.
 
 .. php:class:: Session
 
 .. _accessing-session-object:
 
-Accessing the Session Object
+Acessando o Objeto de Sessão
 ============================
 
-You can access the session data any place you have access to a request object.
-This means the session is accessible from:
+Você pode acessar os dados da sessão em qualquer lugar em que tenha acesso a um objeto de solicitação. 
+Isso significa que a sessão é acessível em:
 
 * Controllers
 * Views
@@ -333,31 +316,34 @@ In addition to the basic session object, you can also use the
 :php:class:`Cake\\View\\Helper\\SessionHelper` to interact with the session in
 your views. A basic example of session usage would be::
 
-    // Prior to 3.6.0 use session() instead.
+Além do objeto básico da sessão, você também pode usar o
+:php:class:`Cake\\View\\Helper\\SessionHelper` para interagir com a 
+sessão nas suas visualizações. Um exemplo básico de uso da sessão seria:
+
+    // Antes da versão 3.6.0, use session()
     $name = $this->getRequest()->getSession()->read('User.name');
 
-    // If you are accessing the session multiple times,
-    // you will probably want a local variable.
+    // Se você estiver acessando a sessão várias vezes, 
+    // provavelmente desejará uma variável local.
     $session = $this->getRequest()->getSession();
     $name = $session->read('User.name');
 
-Reading & Writing Session Data
-==============================
+Leitura e gravação de dados da sessão
+=====================================
 
 .. php:method:: read($key)
 
-You can read values from the session using :php:meth:`Hash::extract()`
-compatible syntax::
+Você pode ler valores da sessão usando :php:meth:`Hash::extract()`::
 
     $session->read('Config.language');
 
 .. php:method:: write($key, $value)
 
-``$key`` should be the dot separated path you wish to write ``$value`` to::
+``$key`` deve ser o caminho separado por pontos que você deseja escrever ``$value`` para:
 
     $session->write('Config.language', 'en');
 
-You may also specify one or multiple hashes like so::
+Você também pode especificar um ou vários hashes assim::
 
     $session->write([
       'Config.theme' => 'blue',
@@ -366,51 +352,50 @@ You may also specify one or multiple hashes like so::
 
 .. php:method:: delete($key)
 
-When you need to delete data from the session, you can use ``delete()``::
+Quando você precisar excluir dados da sessão, poderá usar ``delete()``::
 
     $session->delete('Some.value');
 
 .. php:staticmethod:: consume($key)
 
-When you need to read and delete data from the session, you can use
-``consume()``::
+Quando você precisar ler e excluir dados da sessão, poderá usar ``consume()``::
 
     $session->consume('Some.value');
 
 .. php:method:: check($key)
 
-If you want to see if data exists in the session, you can use ``check()``::
+Se você deseja ver se existem dados na sessão, você pode usar ``check()``::
 
     if ($session->check('Config.language')) {
-        // Config.language exists and is not null.
+        // Config.language exists existe e não é nulo.
     }
 
-Destroying the Session
-======================
+Destruindo a Sessão
+===================
 
 .. php:method:: destroy()
 
-Destroying the session is useful when users log out. To destroy a session, use
-the ``destroy()`` method::
+Destruir a sessão é útil quando os usuários efetuam logout. Para destruir uma 
+sessão, use o método ``destroy()``::
 
     $session->destroy();
 
-Destroying a session will remove all serverside data in the session, but will
-**not** remove the session cookie.
+Destruir uma sessão removerá todos os dados do servidor na sessão, 
+mas **não** removerá o cookie da sessão.
 
-Rotating Session Identifiers
-============================
+Identificadores de Sessão Rotativos
+===================================
 
 .. php:method:: renew()
 
-While ``AuthComponent`` automatically renews the session id when users login and
-logout, you may need to rotate the session id's manually. To do this use the
-``renew()`` method::
+Embora o ``AuthComponent`` renove automaticamente o ID da sessão quando os usuários 
+se conectam e se desconectam, pode ser necessário girar os IDs da sessão manualmente. 
+Para fazer isso, use o método ``renew()``::
 
     $session->renew();
 
-Flash Messages
-==============
+Mensagens em Flash
+==================
 
 Flash messages are small messages displayed to end users once. They are often
 used to present error messages, or confirm that actions took place successfully.
@@ -419,6 +404,16 @@ To set and display flash messages you should use
 :doc:`/controllers/components/flash` and
 :doc:`/views/helpers/flash`
 
+Mensagens em Flash são pequenas mensagens exibidas para os usuários finais uma vez. 
+Eles são frequentemente usados para apresentar mensagens de erro ou confirmar que as 
+ações foram realizadas com êxito.
+
+Para definir e exibir mensagens em flash, você deve usar :doc:`/controllers/components/flash` 
+e :doc:`/views/helpers/flash`
+
 .. meta::
-    :title lang=en: Sessions
-    :keywords lang=en: session defaults,session classes,utility features,session timeout,session ids,persistent data,session key,session cookie,session data,last session,core database,security level,useragent,security reasons,session id,attr,countdown,regeneration,sessions,config
+    :title lang=pt: Sessões
+    :keywords lang=pt: sessões padrão, classes de sessão, recursos utilitários, encerramento de sessão,
+    ids de sessão, persistência de dados, chave de sessão, cookie de sessão, dados de sessão,
+    última sessão, core do banco de dados, nível de segurança, useragent, razões de segurança, id de sessão, 
+    attr, countdown, regeneração, sessions, config
