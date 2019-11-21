@@ -322,6 +322,8 @@ Helper
   attributes.
 * ``Cake\View\Helper\SecureFieldTokenTrait`` has been removed. Its form token
   data building functionality is now included in the internal class ``FormProtector``.
+* ``HtmlHelper::docType()`` method has been removed. HTML4 and XHTML are now
+  defunct and doctype for HTML5 is pretty short and easy to type out directly.
 
 Miscellaneous
 -------------
