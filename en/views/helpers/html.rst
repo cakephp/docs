@@ -159,16 +159,16 @@ icon     image/x-icon
     // icon is downloaded by both newer and older browsers
     // which require different rel attribute values.
     <link
-        href="/subdir/favicon.ico" 
-        type="image/x-icon" 
+        href="/subdir/favicon.ico"
+        type="image/x-icon"
         rel="icon"
     />
     <link
-        href="/subdir/favicon.ico" 
-        type="image/x-icon" 
+        href="/subdir/favicon.ico"
+        type="image/x-icon"
         rel="shortcut icon"
     />
-    
+
     <?= $this->Html->meta(
         'Comments',
         '/comments/index.rss',
@@ -214,44 +214,6 @@ In addition to making predefined meta tags, you can create link elements::
 
 Any attributes provided to meta() when called this way will be added to the
 generated link tag.
-
-Creating DOCTYPE
-----------------
-
-.. php:method:: docType(string $type = 'html5')
-
-Returns a (X)HTML DOCTYPE (document type declaration). Supply the document
-type according to the following table:
-
-+--------------------------+----------------------------------+
-| type                     | translated value                 |
-+==========================+==================================+
-| html4-strict             | HTML 4.01 Strict                 |
-+--------------------------+----------------------------------+
-| html4-trans              | HTML 4.01 Transitional           |
-+--------------------------+----------------------------------+
-| html4-frame              | HTML 4.01 Frameset               |
-+--------------------------+----------------------------------+
-| html5 (default)          | HTML5                            |
-+--------------------------+----------------------------------+
-| xhtml-strict             | XHTML 1.0 Strict                 |
-+--------------------------+----------------------------------+
-| xhtml-trans              | XHTML 1.0 Transitional           |
-+--------------------------+----------------------------------+
-| xhtml-frame              | XHTML 1.0 Frameset               |
-+--------------------------+----------------------------------+
-| xhtml11                  | XHTML 1.1                        |
-+--------------------------+----------------------------------+
-
-::
-
-    echo $this->Html->docType();
-    // Outputs: <!DOCTYPE html>
-
-    echo $this->Html->docType('html4-trans');
-    // Outputs:
-    // <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    //    "http://www.w3.org/TR/html4/loose.dtd">
 
 Linking to Images
 -----------------
