@@ -152,7 +152,9 @@ Database
   have changed. If you extend these classes you will need to update your code.
 * The database schemas now map ``CHAR`` columns to the new ``char`` type instead of
   ``string``.
-* The MySQL and PostgreSQL database schemas now map timestamp types that support
+* SqlServer datetime columns now map to 'datetime' types instead of 'timestamp' to match
+  names.
+* The MySQL, PostgreSQL and SqlServer database schemas now map columns that support
   fractional seconds to the new abstract fractional types.
 
   * **MySQL**
@@ -165,6 +167,11 @@ Database
     #. ``TIMESTAMP`` => ``timestampfractional``
     #. ``TIMESTAMP(1-6)`` => ``timestampfractional``
 
+  * **SqlServer**
+
+    #. ``DATETIME`` => ``datetimefractional``
+    #. ``DATETIME2`` => ``datetimefractional``
+    #. ``DATETIME2(1-7) => ``datetimefractional``
 
 Datasources
 -----------
@@ -383,6 +390,7 @@ Database
   columns.
 * The ``datetimefractional`` and ``timestampfractional`` abstract types were added.
   These types handle timestamps with fractional seconds.
+* SqlServer schemas now support default values with functions in them like SYSDATETIME().
 
 
 Error
