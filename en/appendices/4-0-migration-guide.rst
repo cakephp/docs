@@ -322,6 +322,9 @@ Helper
   attributes.
 * ``Cake\View\Helper\SecureFieldTokenTrait`` has been removed. Its form token
   data building functionality is now included in the internal class ``FormProtector``.
+* The ``safe`` option for ``HtmlHelper::scriptBlock()`` and ``HtmlHelper::scriptStart()``
+  has been removed. When enabled it generated ``CDATA`` tags which are only required
+  for XHTML which is now defunct.
 
 Miscellaneous
 -------------
