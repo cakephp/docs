@@ -116,23 +116,21 @@ respeito aos testes:
 #. Os nomes desses arquivos devem terminar em **Test.php** em vez de apenas em .php.
 #. As classes que contêm testes devem se estender das classes ``Cake\TestSuite\TestCase``,
    ``Cake\TestSuite\IntegrationTestCase`` ou ``\PHPUnit\Framework\TestCase``.
-#. Like other classnames, the test case classnames should match the filename.
-   **RouterTest.php** should contain ``class RouterTest extends TestCase``.
-#. The name of any method containing a test (i.e. containing an
-   assertion) should begin with ``test``, as in ``testPublished()``.
-   You can also use the ``@test`` annotation to mark methods as test methods.
+#. Como outros nomes de classe, os nomes de classe do caso de teste devem corresponder 
+   ao nome do arquivo. **RouterTest.php** deve conter ``classe RouterTest extends TestCase``.
+#. O nome de qualquer método que contenha um teste (ou seja, que contenha uma asserção) deve 
+   começar com ``test``, como em ``testPublished()``. Você também pode usar a anotação 
+   ``@test`` para marcar métodos como métodos de teste.
 
 .. versionadded:: 3.4.1
-    Support for PHPUnit 6 was addded. If you're using a PHPUnit version lower
-    than 5.7.0, your tests classes should either extends CakePHP's classes or
-    ``PHPUnit_Framework_TestCase``.
+    Suporte para PHPUnit 6 foi adicionado. Se você estiver usando uma versão do PHPUnit menor que 
+    5.7.0, suas classes de teste devem estender as classes CakePHP ou ``PHPUnit_Framework_TestCase``.
 
-Creating Your First Test Case
-=============================
+Criando seu Primeiro Caso de Teste
+==================================
 
-In the following example, we'll create a test case for a very simple helper
-method. The helper we're going to test will be formatting progress bar HTML.
-Our helper looks like::
+No exemplo a seguir, criaremos um caso de teste para um método auxiliar muito simples. O auxiliar 
+que vamos testar estará formatando a barra de progresso HTML. Nosso ajudante se parece com::
 
     namespace App\View\Helper;
 
@@ -150,10 +148,10 @@ Our helper looks like::
         }
     }
 
-This is a very simple example, but it will be useful to show how you can create
-a simple test case. After creating and saving our helper, we'll create the test
-case file in **tests/TestCase/View/Helper/ProgressHelperTest.php**. In that file
-we'll start with the following::
+Este é um exemplo muito simples, mas será útil mostrar como você pode criar um caso 
+de teste simples. Após criar e salvar nosso auxiliar, criaremos o arquivo de caso de 
+teste em **tests/TestCase/View/Helper/ProgressHelperTest.php**. Nesse arquivo
+começaremos com o seguinte::
 
     namespace App\Test\TestCase\View\Helper;
 
