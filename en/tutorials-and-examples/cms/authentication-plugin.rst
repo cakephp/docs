@@ -283,6 +283,6 @@ Now that users can log in, we'll want to limit users to only edit articles that
 they created. We'll do this using the Authorization Plugin in the next chapter.
 
 Continue to
-:doc:`Authorization </tutorials-and-examples/cms/authorization-plugin.rst>` to
+:doc:`Authorization </tutorials-and-examples/cms/authorization-plugin>` to
 learn about authorization and restrict the users to be only allowed to edit their
 own articles.
