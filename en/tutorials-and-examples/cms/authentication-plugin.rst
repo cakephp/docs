@@ -29,7 +29,7 @@ record are put on the ``Entity`` class.
 For example, password hashing is done on the individual record, so we'll
 implement this behavior on the entity object. Because we want to hash the
 password each time it is set, we'll use a mutator/setter method. CakePHP will
-call convention based setter methods any time a property is set in one of your
+call a convention based setter method any time a property is set in one of your
 entities. Let's add a setter for the password. In **src/Model/Entity/User.php**
 add the following::
 
