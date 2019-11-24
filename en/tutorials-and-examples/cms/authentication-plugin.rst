@@ -75,7 +75,7 @@ bcrypt for all new applications to keep your security standards high.
 Installing Authentication Plugin
 ================================
 
-Use composer to install the Authentication Plugin
+Use composer to install the Authentication Plugin::
 
     composer require cakephp/authentication:^2.0
 
