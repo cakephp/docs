@@ -100,7 +100,7 @@ the authentication process happens before your controller layer, checking if the
 is authenticated (based in the configuration you provided) and injecting the user and
 the authentication results in the request for further reference.
 
-In you Application class add the following code
+In you Application class add the following code::
 
     // src/Application.php
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
