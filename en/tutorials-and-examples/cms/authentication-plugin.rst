@@ -86,7 +86,7 @@ Now it's time to configure the Authentication Plugin.
 The Plugin will handle the authentication process using 3 different classes:
 
 * ``Application`` will use the Authentication Middleware and provide an
-AuthenticationService, holding all the configuration we want to define how are
+  AuthenticationService, holding all the configuration we want to define how are
 we going to check the credentials, and where to find them.
 * ``AuthenticationService`` will be a utility class to allow you configure the
 authentication process.
