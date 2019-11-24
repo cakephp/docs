@@ -247,7 +247,6 @@ configuration in AppController::
     If you don't have a user with a hashed password yet, comment the
     ``loadComponent('Authentication.Authentication')`` line in your AppController
     and go to ``/users/add`` to create a new user picking email and password.
-    You've just hacked your own app.
     Make sure to uncomment the lines we just temporarily commented!
 
 Try it out! Before logging in, visit ``/articles/add``. Since this action is not
