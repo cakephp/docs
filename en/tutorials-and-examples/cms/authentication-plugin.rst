@@ -212,7 +212,7 @@ Add the template logic for your login action
 
     // in /templates/Users/login.php
     <div class="users form">
-        <?= $this->Flash->render('auth') ?>
+        <?= $this->Flash->render() ?>
         <?= $this->Form->create() ?>
         <fieldset>
             <legend><?= __('Please enter your username and password') ?></legend>
