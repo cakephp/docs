@@ -265,7 +265,7 @@ Enabling Registrations
 
 If you aren't logged in and you try to visit **/users/add** you will be
 redirected to the login page. We should fix that as we want to allow people to
-sign up for our application. In the ``UsersController`` fix the following line:
+sign up for our application. In the ``UsersController`` fix the following line::
 
         $this->Authentication->addUnauthenticatedActions(['login', 'add']);
 
