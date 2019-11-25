@@ -1,8 +1,11 @@
 CMS Tutorial - Authentication using cakephp/authentication
 ##########################################################
 
-CakePHP now supports Authentication and Authorization features using the
-core plugins cakephp/authentication and cakephp/authorization.
+CakePHP now supports authentication and authorization features using the
+core plugins:
+
+* :doc:`cakephp/authentication </authentication>` 
+* :doc:`cakephp/authorization </authorization>` 
 
 In this tutorial we are going to ensure passwords are stored securely in
 our database, we are going to provide a working login page, and apply some
@@ -62,7 +65,8 @@ You can edit the default user that was created during
 you should see a hashed password instead of the original value on the list or
 view pages. CakePHP hashes passwords with `bcrypt
 <http://codahale.com/how-to-safely-store-a-password/>`_ by default. We recommend
-bcrypt for all new applications to keep your security standards high.
+bcrypt for all new applications to keep your security standards high. Note this 
+is the `recommended password hash algorithm for PHP <https://www.php.net/manual/en/function.password-hash.php>`_ too.
 
 .. note::
 
@@ -76,6 +80,8 @@ Installing Authentication Plugin
 ================================
 
 Use composer to install the Authentication Plugin::
+
+.. code-block:: bash
 
     composer require cakephp/authentication:^2.0
 
@@ -143,7 +149,7 @@ In your Application class, add the following code::
         return $authenticationService;
     }
 
-In you AppController class add the following code
+In you AppController class add the following code::
 
     // src/Controller/AppController.php
     public function initialize(): void
@@ -165,10 +171,10 @@ The authentication result will be injected in a request attribute named
 All your pages will be restricted as the ``AuthenticationComponent`` is checking the
 result on every request. When it fails to find any authenticated user, it'll redirect the
 user to the ``/users/login`` page.
-Note at this point, the site won't work as we don't have a login page yet...
-If you visit your site, you'll get an "infinite redirect loop" so let's fix that...
+Note at this point, the site won't work as we don't have a login page yet.
+If you visit your site, you'll get an "infinite redirect loop" so let's fix that.
 
-In your UsersController, add the following code
+In your UsersController, add the following code::
 
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
@@ -198,17 +204,7 @@ In your UsersController, add the following code
         }
     }
 
-    public function logout()
-    {
-        $result = $this->Authentication->getResult();
-        // regardless of POST or GET, redirect if user is logged in
-        if ($result->isValid()) {
-            $this->Authentication->logout();
-            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
-        }
-    }
-
-Add the template logic for your login action
+Add the template logic for your login action::
 
     // in /templates/Users/login.php
     <div class="users form">
@@ -256,8 +252,20 @@ successfully, CakePHP will automatically redirect you back to ``/articles/add``.
 Logout
 ======
 
-Note we've added the logout action previously. Now you can visit
-``/users/logout`` to log out. You should then be sent to the login page.
+Add the logout action to the UsersController class::
+
+    public function logout()
+    {
+        $result = $this->Authentication->getResult();
+        // regardless of POST or GET, redirect if user is logged in
+        if ($result->isValid()) {
+            $this->Authentication->logout();
+            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+        }
+    }
+
+Now you can visit ``/users/logout`` to log out. You should then be sent to the login 
+page.
 
 Enabling Registrations
 ======================
