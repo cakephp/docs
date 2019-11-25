@@ -230,7 +230,7 @@ picked previously when creating your user, you'll be redirected
 successfully after login.
 
 We need to add a couple more details to configure our application.
-we want all ``view`` and ``index`` pages "public" so we'll add this specific
+We want all ``view`` and ``index`` pages "public" so we'll add this specific
 configuration in AppController::
 
     // in src/Controller/AppController.php
