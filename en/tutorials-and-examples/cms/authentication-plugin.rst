@@ -9,7 +9,7 @@ our database, we are going to provide a working login page, and apply some
 basic access control to the article creation & editing experiences.
 
 We will assume you have created the ``Controller``, ``Table``, ``Entity`` and
-templates for the ``users`` table in your database, you can do this manually
+templates for the ``users`` table in your database. You can do this manually
 like you did before for the ArticlesController, or you can use the bake shell
 to generate the classes for you using ``bin/cake bake all users``.
 
