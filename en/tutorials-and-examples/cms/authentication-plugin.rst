@@ -21,7 +21,7 @@ the passwords are stored in plain text. This is really bad from a security point
 of view, so lets fix that.
 
 This is also a good time to talk about the model layer in CakePHP. In CakePHP,
-we separate the methods that operate on a collection of objects, and a single
+we use different classes to operate on collections of records and single records.
 object into different classes. Methods that operate on the collection of
 entities are put in the ``Table`` class, while features belonging to a single
 record are put on the ``Entity`` class.
