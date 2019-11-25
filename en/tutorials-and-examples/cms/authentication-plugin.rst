@@ -155,7 +155,7 @@ In you AppController class add the following code
         $this->loadComponent('Authentication.Authentication');
 
 Now, on every request, the AuthenticationMiddleware will inspect
-the request session to look for an authenticated user, and if we are in /users/login
+the request session to look for an authenticated user. If we are loading the /users/login
 page, it'll inspect also the posted form data (if any) to extract the credentials.
 By default the credentials will be extracted from the ``username`` and ``password``
 fields in the request data.
