@@ -16,7 +16,7 @@ to generate the classes for you using ``bin/cake bake all users``.
 Adding Password Hashing
 -----------------------
 
-If you were to create/update a user at this point in time, you might notice that
+If you create or update a user with this setup, you might notice that
 the passwords are stored in plain text. This is really bad from a security point
 of view, so lets fix that.
 
