@@ -249,7 +249,7 @@ configuration in AppController::
     and go to ``/users/add`` to create a new user picking email and password.
     Make sure to uncomment the lines we just temporarily commented!
 
-Try it out! Before logging in, visit ``/articles/add``. Since this action is not
+Try it out by visiting ``/articles/add`` before logging in! Since this action is not
 allowed, you will be redirected to the login page. After logging in
 successfully, CakePHP will automatically redirect you back to ``/articles/add``.
 
