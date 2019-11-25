@@ -172,11 +172,10 @@ começaremos com o seguinte::
         }
     }
 
-We'll flesh out this skeleton in a minute. We've added two methods to start
-with. First is ``setUp()``. This method is called before every *test* method
-in a test case class. Setup methods should initialize the objects needed for the
-test, and do any configuration needed. In our setup method we'll add the
-following::
+Vamos preparar esse esqueleto em um minuto. Adicionamos dois métodos para começar. Primeiro é ``setUp()``. 
+Este método é chamado antes de cada método *test* em uma classe de caso de teste. Os métodos de instalação 
+devem inicializar os objetos necessários para o teste e fazer qualquer configuração necessária. No nosso método 
+de configuração, adicionaremos o seguinte::
 
     public function setUp()
     {
@@ -185,13 +184,12 @@ following::
         $this->Progress = new ProgressHelper($View);
     }
 
-Calling the parent method is important in test cases, as ``TestCase::setUp()``
-does a number things like backing up the values in
-:php:class:`~Cake\\Core\\Configure` and, storing the paths in
-:php:class:`~Cake\\Core\\App`.
+A chamada do método pai é importante nos casos de teste, pois ``TestCase::setUp()`` 
+faz várias coisas, como fazer backup dos valores em :php:class:`~Cake\\Core\\Configure` e, 
+armazenar os caminhos em :php:class:`~Cake\\Core\\App`.
 
-Next, we'll fill out the test method. We'll use some assertions to ensure that
-our code creates the output we expect::
+Em seguida, preencheremos o método de teste. Usaremos algumas asserções para garantir que 
+nosso código crie a saída que esperamos::
 
     public function testBar()
     {
@@ -203,69 +201,69 @@ our code creates the output we expect::
         $this->assertContains('width: 33%', $result);
     }
 
-The above test is a simple one but shows the potential benefit of using test
-cases. We use ``assertContains()`` to ensure that our helper is returning a
-string that contains the content we expect. If the result did not contain the
-expected content the test would fail, and we would know that our code is
-incorrect.
+O teste acima é simples, mas mostra o benefício potencial do uso de casos de teste. 
+Usamos ``assertContains()`` para garantir que nosso assistente retorne uma string 
+que contenha o conteúdo que esperamos. Se o resultado não contiver o conteúdo esperado, 
+o teste falhará e saberemos que nosso código está incorreto.
 
-By using test cases you can describe the relationship between a set of
-known inputs and their expected output. This helps you be more confident of the
-code you're writing as you can ensure that the code you wrote fulfills the
-expectations and assertions your tests make. Additionally because tests are
-code, they are easy to re-run whenever you make a change. This helps prevent
-the creation of new bugs.
+Usando casos de teste, você pode descrever o relacionamento entre um conjunto de entradas 
+conhecidas e sua saída esperada. Isso ajuda você a ter mais confiança no código que está 
+escrevendo, pois pode garantir que o código que você escreveu atenda às expectativas e 
+afirmações feitas pelos seus testes. Além disso, como os testes são de código, eles são 
+fáceis de executar novamente sempre que você faz uma alteração. Isso ajuda a impedir a 
+criação de novos bugs.
 
 .. note::
-
-    EventManager is refreshed for each test method. This means that when running
-    multiple tests at once, you will lose your event listeners that were
-    registered in config/bootstrap.php as the bootstrap is only executed once.
+    
+    O EventManager é atualizado para cada método de teste. Isso significa que, 
+    ao executar vários testes ao mesmo tempo, você perderá seus ouvintes de 
+    eventos que foram registrados no config/bootstrap.php, pois o bootstrap 
+    é executado apenas uma vez.
 
 .. _running-tests:
 
-Running Tests
-=============
+Executando Testes
+=================
 
-Once you have PHPUnit installed and some test cases written, you'll want to run
-the test cases very frequently. It's a good idea to run tests before committing
-any changes to help ensure you haven't broken anything.
+Depois de instalar o PHPUnit e escrever alguns casos de teste, você deverá executá-los com muita 
+frequência. É uma boa ideia executar testes antes de confirmar quaisquer alterações para ajudar 
+a garantir que você não tenha quebrado nada.
 
-By using ``phpunit`` you can run your application tests. To run your
-application's tests you can simply run:
+Ao usar o ``phpunit``, você pode executar os testes do aplicativo. Para executar os testes do seu 
+aplicativo, você pode simplesmente executar:
 
 .. code-block:: bash
 
-    # composer installs
+    # instalado pelo Composer
     $ vendor/bin/phpunit
 
-    # phar file
+    # arquivo phar 
     php phpunit.phar
 
-If you have cloned the `CakePHP source from GitHub <https://github.com/cakephp/cakephp>`__
-and wish to run CakePHP's unit-tests don't forget to execute the following ``Composer``
-command prior to running ``phpunit`` so that any dependencies are installed:
+Se você clonou o código-fonte `CakePHP do GitHub <https://github.com/cakephp/cakephp>` __ e deseja 
+executar os testes de unidade do CakePHP, não se esqueça de executar o seguinte comando ``Composer`` 
+antes de executar ``phpunit`` para que todas as dependências sejam instaladas:
 
 .. code-block:: bash
 
     $ composer install
 
-From your application's root directory. To run tests for a plugin that is part
-of your application source, first ``cd`` into the plugin directory, then use
-``phpunit`` command that matches how you installed phpunit:
+No diretório raiz do seu aplicativo. Para executar testes para um plug-in que faz parte da fonte do 
+aplicativo, primeiro execute ``cd`` para o diretório do plug-in, depois use o comando ``phpunit`` que 
+corresponde à maneira como você instalou o phpunit:
 
 .. code-block:: bash
 
     cd plugins
 
-    # Using composer installed phpunit
+    # Usando o phpunit instalado pelo compositor
     ../vendor/bin/phpunit
 
-    # Using phar file
+    # Usando o arquivo phar
     php ../phpunit.phar
 
-To run tests on a standalone plugin, you should first install the project in
-a separate directory and install its dependencies:
+Para executar testes em um plug-in independente, você deve primeiro instalar o projeto 
+em um diretório separado e instalar suas dependências:
 
 .. code-block:: bash
 
@@ -274,52 +272,49 @@ a separate directory and install its dependencies:
     php ~/composer.phar install
     php ~/phpunit.phar
 
-Filtering Test Cases
---------------------
+Filtrando Casos de Teste
+------------------------
 
-When you have larger test cases, you will often want to run a subset of the test
-methods when you are trying to work on a single failing case. With the
-CLI runner you can use an option to filter test methods:
+Quando você tem casos de teste maiores, geralmente deseja executar um subconjunto 
+dos métodos de teste ao tentar trabalhar em um único caso com falha. Com o corredor 
+da CLI, você pode usar uma opção para filtrar os métodos de teste:
 
 .. code-block:: bash
 
     $ phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
 
-The filter parameter is used as a case-sensitive regular expression for
-filtering which test methods to run.
+O parâmetro filter é usado como uma expressão regular com distinção entre maiúsculas e minúsculas para
+filtrar quais métodos de teste executar.
 
-Generating Code Coverage
-------------------------
+Gerando Cobertura de Código
+---------------------------
 
-You can generate code coverage reports from the command line using PHPUnit's
-built-in code coverage tools. PHPUnit will generate a set of static HTML files
-containing the coverage results. You can generate coverage for a test case by
-doing the following:
+Você pode gerar relatórios de amostras de código a partir da linha de comando usando as 
+ferramentas internas de cobertura de código do PHPUnit. O PHPUnit irá gerar um conjunto de 
+arquivos HTML estáticos contendo os resultados da cobertura. Você pode gerar cobertura para 
+um caso de teste, fazendo o seguinte:
 
 .. code-block:: bash
 
     $ phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 
-This will put the coverage results in your application's webroot directory. You
-should be able to view the results by going to
-``http://localhost/your_app/coverage``.
+Isso colocará os resultados da cobertura no diretório webroot do seu aplicativo. 
+Você deve conseguir visualizar os resultados acessando ``http://localhost/your_app/coverage``.
 
-If you are using PHP 5.6.0 or greater, you can use ``phpdbg``
-to generate coverage instead of xdebug. ``phpdbg`` is generally faster at
-generating coverage:
+Se você estiver usando o PHP 5.6.0 ou superior, poderá usar o ``phpdbg`` para gerar cobertura 
+em vez do xdebug. O ``phpdbg`` geralmente é mais rápido na geração de cobertura:
 
 .. code-block:: bash
 
     $ phpdbg -qrr phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 
-Combining Test Suites for Plugins
----------------------------------
+Combinando Conjuntos de Testes para Plug-ins
+--------------------------------------------
 
-Often times your application will be composed of several plugins. In these
-situations it can be pretty tedious to run tests for each plugin. You can make
-running tests for each of the plugins that compose your application by adding
-additional ``<testsuite>`` sections to your application's **phpunit.xml.dist**
-file:
+Muitas vezes, seu aplicativo será composto de vários plugins. Nessas situações, 
+pode ser bastante entediante executar testes para cada plug-in. Você pode fazer 
+testes em execução para cada um dos plugins que compõem seu aplicativo adicionando 
+seções adicionais ``<testsuite>`` ao arquivo **phpunit.xml.dist** do seu aplicativo:
 
 .. code-block:: xml
 
@@ -328,18 +323,18 @@ file:
             <directory>./tests/TestCase/</directory>
         </testsuite>
 
-        <!-- Add your plugin suites -->
+        <!-- Adicione seus pacotes de plugins -->
         <testsuite name="forum">
             <directory>./plugins/Forum/tests/TestCase/</directory>
         </testsuite>
     </testsuites>
 
-Any additional test suites added to the ``<testsuites>`` element will
-automatically be run when you use ``phpunit``.
+Quaisquer suítes de teste adicionais vinculados ao elemento ``<testsuites>`` serão 
+executados automaticamente quando você usar ``phpunit``.
 
-If you are using ``<testsuites>`` to use fixtures from plugins that you have
-installed with composer, the plugin's ``composer.json`` file should add the
-fixture namespace to the autoload section. Example::
+Se você estiver usando ``<testsuites>`` para usar acessórios de plug-ins que você 
+instalou com o composer, o arquivo ``composer.json`` do plugin deve adicionar o 
+espaço para nome do fixture à seção de carregamento automático. Exemplo::
 
     "autoload-dev": {
         "psr-4": {
@@ -347,65 +342,64 @@ fixture namespace to the autoload section. Example::
         }
     },
 
-Test Case Lifecycle Callbacks
-=============================
+Retornos de Chamada do Ciclo de Cida do Caso de Teste
+=====================================================
 
-Test cases have a number of lifecycle callbacks you can use when doing testing:
+Os casos de teste têm vários retornos de chamada do ciclo de vida que você pode usar ao fazer o teste:
 
-* ``setUp`` is called before every test method. Should be used to create the
-  objects that are going to be tested, and initialize any data for the test.
-  Always remember to call ``parent::setUp()``
-* ``tearDown`` is called after every test method. Should be used to cleanup after
-  the test is complete. Always remember to call ``parent::tearDown()``.
-* ``setupBeforeClass`` is called once before test methods in a case are started.
-  This method must be *static*.
-* ``tearDownAfterClass`` is called once after test methods in a case are started.
-  This method must be *static*.
+* ``setUp`` é chamado antes de cada método de teste. Deve ser usado para criar os objetos que serão 
+  testados e inicializar quaisquer dados para o teste. Lembre-se sempre de chamar ``parent::setUp()``
+* ``tearDown`` é chamado após cada método de teste. Deve ser usado para limpeza após a conclusão do 
+  teste. Lembre-se sempre de chamar ``parent::tearDown()``.
+* ``setupBeforeClass`` é chamado uma vez antes do início dos métodos de teste em um caso. 
+  Este método deve ser *estático*.
+* ``tearDownAfterClass`` é chamado uma vez depois que os métodos de teste em um caso são iniciados. 
+  Este método deve ser *estático*.
 
 .. _test-fixtures:
 
 Fixtures
 ========
 
-When testing code that depends on models and the database, one can use
-**fixtures** as a way to generate temporary data tables loaded with sample data
-that can be used by the test. The benefit of using fixtures is that your test
-has no chance of disrupting live application data. In addition, you can begin
-testing your code prior to actually developing live content for an application.
+Ao testar o código que depende dos modelos e do banco de dados, pode-se usar **fixtures** 
+como uma maneira de gerar tabelas de dados temporárias carregadas com dados de amostra que 
+podem ser usados pelo teste. O benefício do uso de fixtures é que seu teste não tem chance 
+de interromper os dados do aplicativo ao vivo. Além disso, você pode começar a testar seu 
+código antes de realmente desenvolver conteúdo ao vivo para um aplicativo.
 
-CakePHP uses the connection named ``test`` in your **config/app.php**
-configuration file. If this connection is not usable, an exception will be
-raised and you will not be able to use database fixtures.
+O CakePHP usa a conexão chamada ``test`` no seu arquivo de configuração **config/app.php**. 
+Se essa conexão não for utilizável, uma exceção será gerada e você não poderá usar fixtures 
+de banco de dados.
 
-CakePHP performs the following during the course of a fixture based
-test case:
+O CakePHP executa o seguinte durante o curso de uma fixture no caso de teste:
 
-#. Creates tables for each of the fixtures needed.
-#. Populates tables with data, if data is provided in fixture.
-#. Runs test methods.
-#. Empties the fixture tables.
-#. Removes fixture tables from database.
+#. Cria tabelas para cada um dos fixtures necessários.
+#. Preenche tabelas com dados, se os dados forem fornecidos no fixture.
+#. Executa métodos de teste.
+#. Esvazia as tabelas de fixtures.
+#. Remove tabelas de fixtures do banco de dados.
 
-Test Connections
-----------------
 
-By default CakePHP will alias each connection in your application. Each
-connection defined in your application's bootstrap that does not start with
-``test_`` will have a ``test_`` prefixed alias created. Aliasing connections
-ensures, you don't accidentally use the wrong connection in test cases.
-Connection aliasing is transparent to the rest of your application. For example
-if you use the 'default' connection, instead you will get the ``test``
-connection in test cases. If you use the 'replica' connection, the test suite
-will attempt to use 'test_replica'.
-
-Creating Fixtures
+Conexões de Teste
 -----------------
 
-When creating a fixture you will mainly define two things: how the table is
-created (which fields are part of the table), and which records will be
-initially populated to the table. Let's create our first fixture, that will be
-used to test our own Article model. Create a file named **ArticlesFixture.php**
-in your **tests/Fixture** directory, with the following content::
+Por padrão, o CakePHP fará o pseudônimo de cada conexão em sua aplicação. Cada 
+conexão definida no bootstrap do seu aplicativo que não inicia com ``test`` terá 
+um alias prefixado criado com ``test``. As conexões com aliasing garantem que você 
+não use acidentalmente a conexão errada nos casos de teste. O alias de conexão é 
+transparente para o restante do seu aplicativo. Por exemplo, se você usar a conexão 
+'padrão', receberá a conexão ``test`` nos casos de teste. Se você usar a conexão 'replica', 
+o conjunto de testes tentará usar 'test_replica'.
+
+Criando Fixtures
+----------------
+
+Ao criar um dispositivo elétrico, você definirá principalmente duas coisas: como 
+a tabela é criada (quais campos fazem parte da tabela) e quais registros serão 
+preenchidos inicialmente na tabela. Vamos criar nosso primeiro fixture, que 
+será usado para testar nosso próprio modelo de artigo. Crie um arquivo chamado 
+**ArticlesFixture.php** no seu diretório **tests/Fixture**, com o seguinte 
+conteúdo:
 
     namespace App\Test\Fixture;
 
@@ -413,7 +407,8 @@ in your **tests/Fixture** directory, with the following content::
 
     class ArticlesFixture extends TestFixture
     {
-          // Optional. Set this property to load fixtures to a different test datasource
+          // Opcional. Configure esta propriedade para carregar dispositivos 
+          // elétricos em uma fonte de dados de teste diferente
           public $connection = 'test';
 
           public $fields = [
@@ -454,66 +449,65 @@ in your **tests/Fixture** directory, with the following content::
 
 .. note::
 
-    It is recommended to not manually add values to auto incremental columns,
-    as it interferes with the sequence generation in PostgreSQL and SQLServer.
+    Recomenda-se não adicionar valores manualmente a colunas incrementais automáticas, 
+    pois isso interfere na geração de sequência no PostgreSQL e SQLServer.
 
-The ``$connection`` property defines the datasource of which the fixture will
-use.  If your application uses multiple datasources, you should make the
-fixtures match the model's datasources but prefixed with ``test_``.
-For example if your model uses the ``mydb`` datasource, your fixture should use
-the ``test_mydb`` datasource. If the ``test_mydb`` connection doesn't exist,
-your models will use the default ``test`` datasource. Fixture datasources must
-be prefixed with ``test`` to reduce the possibility of accidentally truncating
-all your application's data when running tests.
+A propriedade ``$connection`` define a fonte de dados que a fixture usará. Se seu 
+aplicativo usa várias fontes de dados, você deve fazer com que as fixtures 
+correspondam às fontes de dados do modelo, mas prefixados com ``test``. Por exemplo, 
+se o seu modelo usa a fonte de dados ``mydb``, sua fixture deve usar a fonte de dados 
+``test_mydb``. Se a conexão ``test_mydb`` não existir, seus modelos usarão a fonte de 
+dados ``test`` padrão. As fontes de dados da fixture devem ser prefixadas com ``test`` 
+para reduzir a possibilidade de truncar acidentalmente todos os dados do seu aplicativo 
+ao executar testes.
 
-We use ``$fields`` to specify which fields will be part of this table, and how
-they are defined. The format used to define these fields is the same used with
-:php:class:`Cake\\Database\\Schema\\Table`. The keys available for table
-definition are:
+Usamos ``$fields`` para especificar quais campos farão parte desta tabela e como eles são 
+definidos. O formato usado para definir esses campos é o mesmo usado com :php:class:`Cake\\Database\\Schema\\Table`. 
+As chaves disponíveis para definição da tabela são:
 
 type
-    CakePHP internal data type. Currently supported:
+    Tipo de dados interno do CakePHP. Atualmente suportado:
 
-    - ``string``: maps to ``VARCHAR`` or ``CHAR``
-    - ``uuid``: maps to ``UUID``
-    - ``text``: maps to ``TEXT``
-    - ``integer``: maps to ``INT``
-    - ``biginteger``: maps to ``BIGINTEGER``
-    - ``decimal``: maps to ``DECIMAL``
-    - ``float``: maps to ``FLOAT``
-    - ``datetime``: maps to ``DATETIME``
-    - ``timestamp``: maps to ``TIMESTAMP``
-    - ``time``: maps to ``TIME``
-    - ``date``: maps to ``DATE``
-    - ``binary``: maps to ``BLOB``
+    - ``string``: mapeia para ``VARCHAR`` ou ``CHAR``
+    - ``uuid``: mapeia para ``UUID``
+    - ``text``: mapeia para ``TEXT``
+    - ``integer``: mapeia para ``INT``
+    - ``biginteger``: mapeia para ``BIGINTEGER``
+    - ``decimal``: mapeia para ``DECIMAL``
+    - ``float``: mapeia para ``FLOAT``
+    - ``datetime``: mapeia para ``DATETIME``
+    - ``timestamp``: mapeia para ``TIMESTAMP``
+    - ``time``: mapeia para ``TIME``
+    - ``date``: mapeia para ``DATE``
+    - ``binary``: mapeia para ``BLOB``
 fixed
-    Used with string types to create CHAR columns in platforms that support
-    them.
+    Usado com tipos de sequência para criar colunas CHAR em plataformas que as 
+    suportam.
 length
-    Set to the specific length the field should take.
+    Defina para o comprimento específico que o campo deve ter.
 precision
-    Set the number of decimal places used on float & decimal fields.
+   Defina o número de casas decimais usadas nos campos flutuante e decimal.
 null
-    Set to either ``true`` (to allow NULLs) or ``false`` (to disallow NULLs).
+   Defina como ``true`` (para permitir NULLs) ou ``false`` (para desabilitar NULLs).
 default
-    Default value the field takes.
+    Valor padrão que o campo assume.
 
-We can define a set of records that will be populated after the fixture table is
-created. The format is fairly straight forward, ``$records`` is an array of
-records. Each item in ``$records`` should be a single row. Inside each row,
-should be an associative array of the columns and values for the row. Just keep
-in mind that each record in the $records array must have a key for **every**
-field specified in the ``$fields`` array. If a field for a particular record
-needs to have a ``null`` value, just specify the value of that key as ``null``.
+Podemos definir um conjunto de registros que serão preenchidos após a criação da 
+tabela de fixtures. O formato é bastante simples, ``$records`` é uma matriz de 
+registros. Cada item em ``$records`` deve ser uma única linha. Dentro de cada linha, 
+deve haver uma matriz associativa das colunas e valores para a linha. Lembre-se de que 
+cada registro na matriz $records deve ter uma chave para **todos** os campos especificados 
+na matriz ``$fields``. Se um campo para um registro específico precisar ter um valor 
+``null``, basta especificar o valor dessa chave como ``null``.
 
-Dynamic Data and Fixtures
--------------------------
+Dados Dinâmicos e Fixtures
+--------------------------
 
-Since records for a fixture are declared as a class property, you cannot use
-functions or other dynamic data to define fixtures. To solve this problem, you
-can define ``$records`` in the ``init()`` function of your fixture. For example
-if you wanted all the created and modified timestamps to reflect today's date
-you could do the following::
+Como os registros de uma fixture são declarados como uma propriedade de classe, 
+você não pode usar funções ou outros dados dinâmicos para definir fixtures. 
+Para resolver esse problema, você pode definir ``$records`` na função ``init()`` de sua 
+fixture. Por exemplo, se você quiser que todos os carimbos de data e hora criados e modificados 
+reflitam a data de hoje, faça o seguinte:
 
     namespace App\Test\Fixture;
 
@@ -548,28 +542,28 @@ you could do the following::
         }
     }
 
-When overriding ``init()`` remember to always call ``parent::init()``.
+Ao substituir ``init()`` lembre-se de sempre chamar ``parent::init()``.
 
-Importing Table Information
----------------------------
+Importando Informações da Tabela
+--------------------------------
 
-Defining the schema in fixture files can be really handy when creating plugins
-or libraries or if you are creating an application that needs to be portable
-between database vendors. Redefining the schema in fixtures can become difficult
-to maintain in larger applications. Because of this CakePHP provides the ability
-to import the schema from an existing connection and use the reflected table
-definition to create the table definition used in the test suite.
+Definir o esquema nos arquivos de fixture pode ser realmente útil ao criar plug-ins 
+ou bibliotecas se você estiver criando um aplicativo que precise ser portátil entre 
+os fornecedores de banco de dados. Redefinir o esquema em acessórios pode se tornar 
+difícil de manter em aplicativos maiores. Devido a isso, o CakePHP fornece a capacidade 
+de importar o esquema de uma conexão existente e usar a definição de tabela refletida para 
+criar a definição de tabela usada no conjunto de testes.
 
-Let's start with an example. Assuming you have a table named articles available
-in your application, change the example fixture given in the previous section
-(**tests/Fixture/ArticlesFixture.php**) to::
+Vamos começar com um exemplo. Supondo que você tenha uma tabela com os artigos disponíveis 
+no seu aplicativo, altere o exemplo de dispositivo fornecido na seção anterior 
+(**tests/Fixture/ArticlesFixture.php**) para::
 
     class ArticlesFixture extends TestFixture
     {
         public $import = ['table' => 'articles'];
     }
 
-If you want to use a different connection use::
+Se você deseja usar uma conexão diferente, use::
 
     class ArticlesFixture extends TestFixture
     {
@@ -578,19 +572,18 @@ If you want to use a different connection use::
 
 .. versionadded:: 3.1.7
 
-Usually, you have a Table class along with your fixture, as well. You can also
-use that to retrieve the table name::
+Normalmente, você também tem uma classe de tabela com sua fixture. Você também pode usar isso para 
+recuperar o nome da tabela::
 
     class ArticlesFixture extends TestFixture
     {
         public $import = ['model' => 'Articles'];
     }
 
-Since this uses ``TableRegistry::getTableLocator()->get()``, it also supports plugin syntax.
+Como isso usa ``TableRegistry::getTableLocator()->get()``, ele também suporta a sintaxe do plugin.
 
-You can naturally import your table definition from an existing model/table, but
-have your records defined directly on the fixture as it was shown on previous
-section. For example::
+Naturalmente, você pode importar sua definição de tabela de um modelo/tabela existente, mas ter 
+seus registros definidos diretamente no aparelho, como foi mostrado na seção anterior. Por exemplo::
 
     class ArticlesFixture extends TestFixture
     {
@@ -620,26 +613,26 @@ section. For example::
         ];
     }
 
-Finally, it's possible to not load/create any schema in a fixture. This is useful if you
-already have a test database setup with all the empty tables created. By
-defining neither ``$fields`` nor ``$import``, a fixture will only insert its
-records and truncate the records on each test method.
+Finalizando, não é possível carregar/criar nenhum esquema em uma fixture. Isso é útil se 
+você já tiver uma configuração de banco de dados de teste com todas as tabelas vazias criadas. 
+Ao não definir ``$fields`` nem ``$import``, um equipamento apenas inserirá seus registros e 
+truncará os registros em cada método de teste.
 
-Loading Fixtures in your Test Cases
------------------------------------
+Carregando Fixtures em seus Casos de Teste
+------------------------------------------
 
-After you've created your fixtures, you'll want to use them in your test cases.
-In each test case you should load the fixtures you will need. You should load a
-fixture for every model that will have a query run against it. To load fixtures
-you define the ``$fixtures`` property in your model::
+Depois de criar suas fixtures, convém usá-los em seus casos de teste. Em cada 
+caso de teste, você deve carregar as fixtures necessárias. Você deve carregar 
+uma fixture para cada modelo que terá uma consulta executada nele. Para carregar a fixture, 
+defina a propriedade ``$fixtures`` no seu modelo::
 
     class ArticlesTest extends TestCase
     {
         public $fixtures = ['app.Articles', 'app.Comments'];
     }
 
-The above will load the Article and Comment fixtures from the application's
-Fixture directory. You can also load fixtures from CakePHP core, or plugins::
+O item acima carregará os fixtures de Article e Coment do 
+diretório fixture do aplicativo. Você também pode carregar fixture do core do CakePHP ou plugins:
 
     class ArticlesTest extends TestCase
     {
@@ -650,12 +643,11 @@ Fixture directory. You can also load fixtures from CakePHP core, or plugins::
         ];
     }
 
-Using the ``core`` prefix will load fixtures from CakePHP, and using a plugin
-name as the prefix, will load the fixture from the named plugin.
+Usar o prefixo ``core`` carregará fixtures do CakePHP e, usando o nome de um plugin 
+como prefixo, carregará o fixture do plugin nomeado.
 
-You can control when your fixtures are loaded by setting
-:php:attr:`Cake\\TestSuite\\TestCase::$autoFixtures` to ``false`` and later load
-them using :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
+Você pode controlar quando seus fixtures são carregados configurando :php:attr:`Cake\\TestSuite\\TestCase::$autoFixtures` 
+para ``false`` e carregá-los posteriormente usando :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
 
     class ArticlesTest extends TestCase
     {
@@ -668,21 +660,20 @@ them using :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
         }
     }
 
-You can load fixtures in subdirectories. Using multiple directories can make it
-easier to organize your fixtures if you have a larger application. To load
-fixtures in subdirectories, simply include the subdirectory name in the fixture
-name::
+Você pode carregar fixtures em subdiretórios. O uso de vários diretórios pode 
+facilitar a organização de suas fixtures, se você tiver um aplicativo maior. 
+Para carregar fixtures em subdiretórios, basta incluir o nome do subdiretório 
+no nome do fixtures::
 
     class ArticlesTest extends CakeTestCase
     {
         public $fixtures = ['app.Blog/Articles', 'app.Blog/Comments'];
     }
 
-In the above example, both fixtures would be loaded from
-``tests/Fixture/Blog/``.
+No exemplo acima, ambos os aparelhos seriam carregados a partir de ``tests/Fixture/Blog/``.
 
-Testing Table Classes
-=====================
+Classes de Tabela de Teste
+==========================
 
 Let's say we already have our Articles Table class defined in
 **src/Model/Table/ArticlesTable.php**, and it looks like::
