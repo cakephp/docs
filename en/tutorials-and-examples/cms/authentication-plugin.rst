@@ -96,7 +96,7 @@ credentials and process them to check if the user is authenticated.
 
 If you remember, we used :doc:`AuthComponent </controllers/components/authentication>`
 before to handle all these steps. Now the logic is divided into specific classes and
-the authentication process happens before your controller layer, checking if the user
+the authentication process happens before your controller layer. First it checks if the user
 is authenticated (based in the configuration you provided) and injecting the user and
 the authentication results in the request for further reference.
 
