@@ -154,7 +154,7 @@ In you AppController class add the following code
         // add this like to check authentication result and lock your site
         $this->loadComponent('Authentication.Authentication');
 
-After adding this code, on every request, the AuthenticationMiddleware will inspect
+Now, on every request, the AuthenticationMiddleware will inspect
 the request session to look for an authenticated user, and if we are in /users/login
 page, it'll inspect also the posted form data (if any) to extract the credentials.
 By default the credentials will be extracted from the ``username`` and ``password``
