@@ -98,7 +98,7 @@ If you remember, we used :doc:`AuthComponent </controllers/components/authentica
 before to handle all these steps. Now the logic is divided into specific classes and
 the authentication process happens before your controller layer. First it checks if the user
 is authenticated (based in the configuration you provided) and injecting the user and
-the authentication results in the request for further reference.
+the authentication results into the request for further reference.
 
 In you Application class add the following code::
 
