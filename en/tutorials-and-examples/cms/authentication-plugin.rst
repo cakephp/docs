@@ -229,7 +229,7 @@ to the ``/users/login`` page and entering the email and password you
 picked previously when creating your user, you'll be redirected
 successfully after login.
 
-We need to add a couple more details to configure our application,
+We need to add a couple more details to configure our application.
 we want all ``view`` and ``index`` pages "public" so we'll add this specific
 configuration in AppController::
 
