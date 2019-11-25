@@ -226,7 +226,7 @@ Add the template logic for your login action
 Now login page will allow us to correctly login into the application.
 Test it by requesting any page of your site and after being redirected
 to the ``/users/login`` page and entering the email and password you
-picked previously when creating your user, you'll be redirected
+picked previously when creating your user. You should be redirected
 successfully after login.
 
 We need to add a couple more details to configure our application.
