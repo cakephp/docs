@@ -54,7 +54,7 @@ add the following::
     }
 
 Now, point your browser to **http://localhost:8765/users** to see a list of users.
-Remember you'll need to have your local server running, start a standalone PHP
+Remember you'll need to have your local server running. Start a standalone PHP
 server using ``bin/cake server``
 
 You can edit the default user that was created during
