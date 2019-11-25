@@ -162,7 +162,7 @@ fields in the request data.
 The authentication result will be injected in a request attribute named
 ``authentication``. You can inspect the result at any time using
 ``$this->request->getAttribute('authentication')`` from your controller actions.
-All your pages will be locked, as the ``AuthenticationComponent`` is checking the
+All your pages will be restricted as the ``AuthenticationComponent`` is checking the
 result on every request, and not finding any authenticated user, it'll redirect the
 user to the ``/users/login`` page.
 Note at this point, the site won't work as we don't have a login page yet...
