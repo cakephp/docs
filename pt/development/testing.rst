@@ -407,8 +407,8 @@ conteúdo:
 
     class ArticlesFixture extends TestFixture
     {
-          // Opcional. Configure esta propriedade para carregar dispositivos 
-          // elétricos em uma fonte de dados de teste diferente
+          // Opcional. Configure esta propriedade para carregar fixtures 
+          // em uma fonte de dados de teste diferente
           public $connection = 'test';
 
           public $fields = [
@@ -675,8 +675,8 @@ No exemplo acima, ambos os aparelhos seriam carregados a partir de ``tests/Fixtu
 Classes de Tabela de Teste
 ==========================
 
-Let's say we already have our Articles Table class defined in
-**src/Model/Table/ArticlesTable.php**, and it looks like::
+Digamos que já temos nossa classe de tabela de artigos definida em
+**src/Model/Table/ArticlesTable.php** e se parece com::
 
     namespace App\Model\Table;
 
@@ -694,9 +694,9 @@ Let's say we already have our Articles Table class defined in
         }
     }
 
-We now want to set up a test that will test this table class. Let's now create
-a file named **ArticlesTableTest.php** in your **tests/TestCase/Model/Table** directory,
-with the following contents::
+Agora, queremos configurar um teste que verifique esta classe de tabela. Vamos 
+agora criar um arquivo chamado **ArticlesTableTest.php** no seu diretório **tests/TestCase/Model/Table**, 
+com o seguinte conteúdo::
 
     namespace App\Test\TestCase\Model\Table;
 
@@ -709,16 +709,15 @@ with the following contents::
         public $fixtures = ['app.Articles'];
     }
 
-In our test cases' variable ``$fixtures`` we define the set of fixtures that
-we'll use. You should remember to include all the fixtures that will have
-queries run against them.
+Na variável de nossos casos de teste ``$fixtures``, definimos o conjunto de 
+fixtures que usaremos. Lembre-se de incluir todas as fixtures que terão consultas 
+executadas em comparação a eles.
 
-Creating a Test Method
-----------------------
+Criando um Método de Teste
+--------------------------
 
-Let's now add a method to test the function ``published()`` in the Articles
-table. Edit the file **tests/TestCase/Model/Table/ArticlesTableTest.php** so it
-now looks like this::
+Vamos agora adicionar um método para testar a função ``publish()`` na tabela Articles. 
+Edite o arquivo **tests/TestCase/Model/Table/ArticlesTableTest.php** para que agora fique assim::
 
     namespace App\Test\TestCase\Model\Table;
 
@@ -751,20 +750,20 @@ now looks like this::
         }
     }
 
-You can see we have added a method called ``testFindPublished()``. We start by
-creating an instance of our ``ArticlesTable`` class, and then run our
-``find('published')`` method. In ``$expected`` we set what we expect should be
-the proper result (that we know since we have defined which records are
-initially populated to the article table.) We test that the result equals our
-expectation by using the ``assertEquals()`` method. See the :ref:`running-tests`
-section for more information on how to run your test case.
+Você pode ver que adicionamos um método chamado ``testFindPublished()``. Começamos 
+criando uma instância da classe ``ArticlesTable`` e, em seguida, executamos o método 
+``find('Published')``. Em ``$expected``, definimos o que esperamos que seja o resultado 
+adequado (que sabemos desde que definimos quais registros são preenchidos inicialmente na 
+tabela de artigos). Testamos que o resultado é igual à nossa expectativa usando o método 
+``assertEquals()``. Veja a seção :ref:`running-tests` para obter mais informações sobre como 
+executar seu caso de teste.
 
-Mocking Model Methods
----------------------
+Métodos Mocks de Modelo
+------------------------
 
-There will be times you'll want to mock methods on models when testing them. You
-should use ``getMockForModel`` to create testing mocks of table classes. It
-avoids issues with reflected properties that normal mocks have::
+Haverá momentos em que você desejará burlar métodos nos modelos ao testá-los. Você 
+deve usar ``getMockForModel`` para criar simulações de teste de classes de tabela. 
+Isso evita problemas com propriedades refletidas que as burlações (mocking) normais possuem::
 
     public function testSendingEmails()
     {
@@ -776,33 +775,32 @@ avoids issues with reflected properties that normal mocks have::
         $model->verifyEmail('test@example.com');
     }
 
-In your ``tearDown()`` method be sure to remove the mock with::
+No método ``tearDown()``, remova o mock com::
 
     TableRegistry::clear();
 
 .. _integration-testing:
 
-Controller Integration Testing
-==============================
+Teste de Integração do Controlador
+==================================
 
-While you can test controller classes in a similar fashion to Helpers, Models,
-and Components, CakePHP offers a specialized ``IntegrationTestTrait`` trait.
-Using this trait in your controller test cases allows you to
-test controllers from a high level.
+Embora você possa testar as classes de controladores de maneira semelhante aos Helpers, 
+Models e Components, o CakePHP oferece uma trait especializada de nome ``IntegrationTestTrait``. 
+O uso dessa trait nos casos de teste do controlador permite realizar testes de alto nível.
 
 .. versionadded:: 3.7.0
 
-    The ``IntegrationTestCase`` class was moved into the ``IntegrationTestTrait`` trait.
+    A classe ``IntegrationTestCase`` foi movida para a trait ``IntegrationTestTrait``.
 
-If you are unfamiliar with integration testing, it is a testing approach that
-makes it easy to test multiple units in concert. The integration testing
-features in CakePHP simulate an HTTP request being handled by your application.
-For example, testing your controller will also exercise any components, models
-and helpers that would be involved in handling a given request. This gives you a
-more high level test of your application and all its working parts.
+Se você não está familiarizado com o teste de integração, o teste de integração é uma abordagem
+que facilita a verificação de várias unidades em conjunto. Os recursos de teste de integração 
+no CakePHP simulam uma solicitação HTTP sendo tratada pelo seu aplicativo. Por exemplo, testar 
+seu controlador também exercitará quaisquer componentes, modelos e auxiliares envolvidos no 
+processamento de uma determinada solicitação. Isso oferece um teste de alto nível da sua aplicação 
+e de todas as suas partes de trabalho.
 
-Say you have a typical ArticlesController, and its corresponding model. The
-controller code looks like::
+Digamos que você tenha um ArticlesController típico e seu modelo correspondente. O código do 
+controlador se parece com::
 
     namespace App\Controller;
 
@@ -836,8 +834,8 @@ controller code looks like::
         }
     }
 
-Create a file named **ArticlesControllerTest.php** in your
-**tests/TestCase/Controller** directory and put the following inside::
+Crie um arquivo chamado **ArticlesControllerTest.php** em seu
+diretório **tests/TestCase/Controller** e coloque o seguinte dentro::
 
     namespace App\Test\TestCase\Controller;
 
@@ -856,7 +854,7 @@ Create a file named **ArticlesControllerTest.php** in your
             $this->get('/articles');
 
             $this->assertResponseOk();
-            // More asserts.
+            // Mais asserts.
         }
 
         public function testIndexQueryData()
@@ -864,7 +862,7 @@ Create a file named **ArticlesControllerTest.php** in your
             $this->get('/articles?page=1');
 
             $this->assertResponseOk();
-            // More asserts.
+            // Mais asserts.
         }
 
         public function testIndexShort()
@@ -873,7 +871,7 @@ Create a file named **ArticlesControllerTest.php** in your
 
             $this->assertResponseOk();
             $this->assertResponseContains('Articles');
-            // More asserts.
+            // Mais asserts.
         }
 
         public function testIndexPostData()
@@ -894,60 +892,60 @@ Create a file named **ArticlesControllerTest.php** in your
         }
     }
 
-This example shows a few of the request sending methods and a few of the
-assertions that ``IntegrationTestTrait`` provides. Before you can do any
-assertions you'll need to dispatch a request. You can use one of the following
-methods to send a request:
+Este exemplo mostra alguns dos métodos de envio de solicitação e algumas das 
+asserções que o ``IntegrationTestTrait`` fornece. Antes de fazer qualquer 
+afirmação, você precisará enviar uma solicitação. Você pode usar um dos seguintes 
+métodos para enviar uma solicitação:
 
-* ``get()`` Sends a GET request.
-* ``post()`` Sends a POST request.
-* ``put()`` Sends a PUT request.
-* ``delete()`` Sends a DELETE request.
-* ``patch()`` Sends a PATCH request.
-* ``options()`` Sends an OPTIONS request.
-* ``head()`` Sends a HEAD request.
+* ``get()`` Envia uma solicitação GET.
+* ``post()`` Envia uma solicitação POST.
+* ``put()`` Envia uma solicitação PUT.
+* ``delete()`` Envia uma solicitação DELETE.
+* ``patch()`` Envia uma solicitação PATCH.
+* ``options()`` Envia uma solicitação OPTIONS.
+* ``head()`` Envia uma solicitação HEAD.
 
-All of the methods except ``get()`` and ``delete()`` accept a second parameter
-that allows you to send a request body. After dispatching a request you can use
-the various assertions provided by ``IntegrationTestTrait`` or PHPUnit to
-ensure your request had the correct side-effects.
+Todos os métodos, exceto ``get()`` e ``delete()``, aceitam um segundo parâmetro que 
+permite enviar um corpo de solicitação. Depois de enviar uma solicitação, você pode 
+usar as várias asserções fornecidas por ``IntegrationTestTrait`` ou PHPUnit para 
+garantir que sua solicitação tenha os efeitos colaterais corretos.
 
 .. versionadded:: 3.5.0
-    ``options()`` and ``head()`` were added in 3.5.0.
+    ``options()`` e ``head()`` foram adicionados no 3.5.0.
 
-Setting up the Request
-----------------------
+Configurando a Solicitação
+--------------------------
 
-The ``IntegrationTestTrait`` trait comes with a number of helpers to make it easy
-to configure the requests you will send to your application under test::
+A trait ``IntegrationTestTrait`` vem com vários métodos auxiliares para facilitar a 
+configuração das solicitações que você enviará ao seu aplicativo em teste::
 
-    // Set cookies
+    // Configura cookies
     $this->cookie('name', 'Uncle Bob');
 
-    // Set session data
+    // Defina um valor na sessão
     $this->session(['Auth.User.id' => 1]);
 
-    // Configure headers
+    // Configura cabeçalhos
     $this->configRequest([
         'headers' => ['Accept' => 'application/json']
     ]);
 
-The state set by these helper methods is reset in the ``tearDown()`` method.
+O estado definido por esses métodos auxiliares é redefinido no método ``tearDown()``.
 
 .. _testing-authentication:
 
-Testing Actions That Require Authentication
--------------------------------------------
+Testando Ações que Exigem Autenticação
+--------------------------------------
 
-If you are using ``AuthComponent`` you will need to stub out the session data
-that AuthComponent uses to validate a user's identity. You can use helper
-methods in ``IntegrationTestTrait`` to do this. Assuming you had an
-``ArticlesController`` that contained an add method, and that add method
-required authentication, you could write the following tests::
+Se você estiver usando ``AuthComponent``, precisará remover os dados da sessão que o 
+AuthComponent usa para validar a identidade de um usuário. Você pode usar métodos 
+auxiliares em ``IntegrationTestTrait`` para fazer isso. Supondo que você tivesse um 
+``ArticlesController`` que continha um método add e que exigisse autenticação com o 
+método add, você poderia escrever os seguintes testes::
 
     public function testAddUnauthenticatedFails()
     {
-        // No session data set.
+        // Nenhum conjunto de dados da sessão.
         $this->get('/articles/add');
 
         $this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
@@ -955,33 +953,33 @@ required authentication, you could write the following tests::
 
     public function testAddAuthenticated()
     {
-        // Set session data
+        // Define dados da sessão
         $this->session([
             'Auth' => [
                 'User' => [
                     'id' => 1,
                     'username' => 'testing',
-                    // other keys.
+                    // outras chaves
                 ]
             ]
         ]);
         $this->get('/articles/add');
 
         $this->assertResponseOk();
-        // Other assertions.
+        // Outras asserts.
     }
 
-Testing Stateless Authentication and APIs
------------------------------------------
+Testando Autenticação Stateless e APIs
+--------------------------------------
 
-To test APIs that use stateless authentication, such as Basic authentication,
-you can configure the request to inject environment conditions or headers that
-simulate actual authentication request headers.
+Para testar APIs que usam autenticação sem estado, como autenticação Básica, você 
+pode configurar a solicitação para injetar condições do ambiente ou cabeçalhos que 
+simulam cabeçalhos de solicitação de autenticação reais.
 
-When testing Basic or Digest Authentication, you can add the environment
-variables that `PHP creates <http://php.net/manual/en/features.http-auth.php>`_
-automatically. These environment variables used in the authentication adapter
-outlined in :ref:`basic-authentication`::
+Ao testar a autenticação Básica ou Digest, você pode adicionar as variáveis de 
+ambiente que o `PHP cria <http://php.net/manual/en/features.http-auth.php>` 
+automaticamente. Essas variáveis de ambiente usadas no adaptador de autenticação 
+descritas em :ref:`basic-authentication`::
 
     public function testBasicAuthentication()
     {
@@ -996,8 +994,8 @@ outlined in :ref:`basic-authentication`::
         $this->assertResponseOk();
     }
 
-If you are testing other forms of authentication, such as OAuth2, you can set
-the Authorization header directly::
+Se você estiver testando outras formas de autenticação, como OAuth2, poderá definir o 
+cabeçalho de Autorização diretamente::
 
     public function testOauthToken()
     {
@@ -1011,15 +1009,15 @@ the Authorization header directly::
         $this->assertResponseOk();
     }
 
-The headers key in ``configRequest()`` can be used to configure any additional
-HTTP headers needed for an action.
+A chave de cabeçalhos em ``configRequest()`` pode ser usada para configurar 
+qualquer cabeçalho HTTP adicional necessário para uma ação.
 
-Testing Actions Protected by CsrfComponent or SecurityComponent
+Testando Ações Protegidas por CsrfComponent ou SecurityComponent
 ---------------------------------------------------------------
 
-When testing actions protected by either SecurityComponent or CsrfComponent you
-can enable automatic token generation to ensure your tests won't fail due to
-token mismatches::
+Ao testar ações protegidas por SecurityComponent ou CsrfComponent, você pode ativar 
+a geração automática de token para garantir que seus testes não falhem devido a 
+incompatibilidades de token::
 
     public function testAdd()
     {
@@ -1028,120 +1026,121 @@ token mismatches::
         $this->post('/posts/add', ['title' => 'Exciting news!']);
     }
 
-It is also important to enable debug in tests that use tokens to prevent the
-SecurityComponent from thinking the debug token is being used in a non-debug
-environment. When testing with other methods like ``requireSecure()`` you
-can use ``configRequest()`` to set the correct environment variables::
+Também é importante habilitar a depuração em testes que usam tokens para impedir 
+que o SecurityComponent pense que o token de depuração está sendo usado em um 
+ambiente sem depuração. Ao testar com outros métodos como ``requireSecure()``, 
+você pode usar ``configRequest()`` para definir as variáveis de ambiente corretas::
 
-    // Fake out SSL connections.
+    // Falsificar conexões SSL.
     $this->configRequest([
         'environment' => ['HTTPS' => 'on']
     ]);
 
 .. versionadded:: 3.1.2
-    The ``enableCsrfToken()`` and ``enableSecurityToken()`` methods were added
-    in 3.1.2
+    Os métodos ``enableCsrfToken()`` e ``enableSecurityToken()`` foram adicionados no 3.1.2
 
-Integration Testing PSR-7 Middleware
+Teste de Integração PSR-7 Middleware
 ------------------------------------
 
-Integration testing can also be used to test your entire PSR-7 application and
-:doc:`/controllers/middleware`. By default ``IntegrationTestTrait`` will
-auto-detect the presence of an ``App\Application`` class and automatically
-enable integration testing of your Application. You can toggle this behavior
-with the ``useHttpServer()`` method::
+O teste de integração também pode ser usado para testar todo o aplicativo PSR-7 e
+:doc:`/controllers/middleware`. Por padrão, o ``IntegrationTestTrait`` detecta 
+automaticamente a presença de uma classe ``App\Application`` e habilita automaticamente 
+o teste de integração do seu aplicativo. Você pode alternar esse comportamento com o 
+método ``useHttpServer()``::
 
     public function setUp()
     {
-        // Enable PSR-7 integration testing.
+        // Ative o teste de integração PSR-7.
         $this->useHttpServer(true);
 
-        // Disable PSR-7 integration testing.
+        // Desative o teste de integração PSR-7.
         $this->useHttpServer(false);
     }
 
-You can customize the application class name used, and the constructor
-arguments, by using the ``configApplication()`` method::
+Você pode personalizar o nome da classe do aplicativo usado e os 
+argumentos do construtor, usando o método ``configApplication()``::
 
     public function setUp()
     {
         $this->configApplication('App\App', [CONFIG]);
     }
 
-After enabling the PSR-7 mode, and possibly configuring your application class,
-you can use the remaining ``IntegrationTestTrait`` features as normal.
+Depois de ativar o modo PSR-7 e, possivelmente, configurar sua classe de 
+aplicativo, você pode usar os recursos restantes do ``IntegrationTestTrait`` 
+normalmente.
 
-You should also take care to try and use :ref:`application-bootstrap` to load
-any plugins containing events/routes. Doing so will ensure that your
-events/routes are connected for each test case. Alternatively if you wish to
-load plugins manually in a test you can use the ``loadPlugins()`` method.
+Você também deve tentar usar :ref:`application-bootstrap` para carregar qualquer 
+plug-in que contenha eventos/rotas. Isso garantirá que seus eventos/rotas 
+estejam conectados para cada caso de teste. Como alternativa, se você deseja carregar 
+plug-ins manualmente em um teste, pode usar o método ``loadPlugins()``.
 
 .. versionadded:: 3.3.0
-    PSR-7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
+    O Middleware PSR-7 e o método ``useHttpServer()`` foram adicionados no 3.3.0.
 
-Testing with Encrypted Cookies
-------------------------------
+Testando com Cookies Criptografados
+-----------------------------------
 
-If you use the :php:class:`Cake\\Controller\\Component\\CookieComponent` in your
-controllers, your cookies are likely encrypted. As of 3.1.7, CakePHP provides
-helper methods for interacting with encrypted cookies in your test cases::
+Se você usar :php:class:`Cake\\Controller\\Component\\CookieComponent` 
+em seus controladores, é provável que seus cookies sejam criptografados. 
+A partir do 3.1.7, o CakePHP fornece métodos auxiliares para interagir 
+com cookies criptografados nos seus casos de teste::
 
-    // Set a cookie using AES and the default key.
+    // Defina um cookie usando o AES e a chave padrão.
     $this->cookieEncrypted('my_cookie', 'Some secret values');
 
-    // Assume this action modifies the cookie.
+    // Suponha que esta ação modifique o cookie.
     $this->get('/bookmarks/index');
 
     $this->assertCookieEncrypted('An updated value', 'my_cookie');
 
 .. versionadded:: 3.1.7
 
-    ``assertCookieEncrypted`` and ``cookieEncrypted`` were added in 3.1.7.
+    ``assertCookieEncrypted`` e ``cookieEncrypted`` foi adicionado 3.1.7.
 
-Testing Flash Messages
-----------------------
+Testando Mensagens Flash
+------------------------
 
-If you want to assert the presence of flash messages in the session and not the
-rendered HTML, you can use ``enableRetainFlashMessages()`` in your tests to
-retain flash messages in the session so you can write assertions::
+Se você deseja testar a presença de mensagens flash na sessão e não o HTML 
+renderizado, pode usar ``enableRetainFlashMessages()`` em seus testes 
+para reter mensagens flash na sessão, para poder escrever as assertions::
 
     $this->enableRetainFlashMessages();
     $this->get('/bookmarks/delete/9999');
 
     $this->assertSession('That bookmark does not exist', 'Flash.flash.0.message');
 
-As of 3.7.0 there are additional test helpers for flash messages::
+A partir da versão 3.7.0, existem auxiliares de teste adicionais para mensagens flash::
 
     $this->enableRetainFlashMessages();
     $this->get('/bookmarks/delete/9999');
 
-    // Assert a flash message in the 'flash' key.
+    // Coloque uma mensagem flash na chave 'flash'.
     $this->assertFlashMessage('Bookmark deleted', 'flash');
 
-    // Assert the second flash message, also  in the 'flash' key.
+    // Afirme a segunda mensagem flash, também na chave 'flash'.
     $this->assertFlashMessageAt(1, 'Bookmark really deleted');
 
-    // Assert a flash message in the 'auth' key at the first position
+    // Afirme uma mensagem flash na chave 'auth' na primeira posição
     $this->assertFlashMessageAt(0, 'You are not allowed to enter this dungeon!', 'auth');
 
-    // Assert a flash messages uses the error element
+    // Afirmar que uma mensagem flash usa o elemento error
     $this->assertFlashElement('Flash/error');
 
-    // Assert the second flash message element
+    // Afirme o segundo elemento de mensagem flash
     $this->assertFlashElementAt(1, 'Flash/error');
 
 .. versionadded:: 3.4.7
-    ``enableRetainFlashMessages()`` was added in 3.4.7
+    ``enableRetainFlashMessages()`` foi adicionado em 3.4.7
 
 .. versionadded:: 3.7.0
-    Flash message assertions were added.
+    Asserções de mensagens em Flash foram adicionadas.
 
-Testing a JSON Responding Controller
-------------------------------------
+Testando um Controlador Com Resposta em JSON
+--------------------------------------------
 
-JSON is a friendly and common format to use when building a web service.
-Testing the endpoints of your web service is very simple with CakePHP. Let us
-begin with a simple example controller that responds in JSON::
+JSON é um formato amigável e comum a ser usado ao criar um serviço da web. 
+Testar os pontos finais do seu serviço da web é muito simples com o CakePHP. 
+Vamos começar com um exemplo simples de controlador que responde em JSON::
 
     class MarkersController extends AppController
     {
