@@ -115,17 +115,17 @@ In your Application class, add the following code::
             // ... other middleware added before
             ->add(new RoutingMiddleware($this))
             // add Authentication after RoutingMiddleware
-            ->add(new \Authentication\Middleware\AuthenticationMiddleware($this->configAuth(), [
-                'unauthenticatedRedirect' => '/users/login',
-                'queryParam' => 'redirect',
-            ]));
+            ->add(new \Authentication\Middleware\AuthenticationMiddleware($this->configAuth()));
 
         return $middlewareQueue;
     }
 
     protected function configAuth(): \Authentication\AuthenticationService
     {
-        $authenticationService = new \Authentication\AuthenticationService();
+        $authenticationService = new \Authentication\AuthenticationService([
+            'unauthenticatedRedirect' => '/users/login',
+            'queryParam' => 'redirect',
+        ]);
 
         // Load identifiers, ensure we check email and password fields
         $authenticationService->loadIdentifier('Authentication.Password', [
