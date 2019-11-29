@@ -175,7 +175,7 @@ Database
 
 * PostgreSQL schema now map columns that support time zones to the new abstract
   time zone types. Specifying (0) precision does not change the type mapping like
-  it does with regular frectional types above.
+  it does with regular fractional types above.
 
   * **PostgreSQL**
 
@@ -402,7 +402,7 @@ Database
 * The ``datetimefractional`` and ``timestampfractional`` abstract types were added.
   These types handle column data types with fractional seconds.
 * SqlServer schemas now support default values with functions in them like SYSDATETIME().
-* The ``datetimetimezone`` and ``timestmaptimezone`` abstract types were added.
+* The ``datetimetimezone`` and ``timestamptimezone`` abstract types were added.
   These types handle column data types with time zone support.
 
 Error
