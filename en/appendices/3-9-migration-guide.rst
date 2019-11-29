@@ -18,6 +18,7 @@ Deprecations
 * Using a comma separated string for ``$fixtures`` in test cases is deprecated.
   Instead use an array, or implement the new ``getFixtures()`` method on your
   test case classes.
+* ``Validator::errors()`` was renamed to ``Validator::validate()``.
 
 New Features
 ============

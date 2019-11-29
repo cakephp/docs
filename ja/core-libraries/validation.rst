@@ -128,7 +128,7 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
         ->lengthBetween('username', [4, 8]);
 
 バリデータメソッドの完全なセットについては、 `Validator API ドキュメント
-<https://api.cakephp.org/3.x/class-Cake.Validation.Validator.html>`_ 
+<https://api.cakephp.org/3.x/class-Cake.Validation.Validator.html>`_
 をご覧ください。
 
 .. versionadded:: 3.2
@@ -439,8 +439,9 @@ Localized プラグインは、バリデーションのための国の２文字�
     // ネストされたバリデーターをつなげる
     $validator->addNestedMany('comments', $commentValidator);
 
+    // Prior to 3.9 use $validator->errors()
     // ネストされたバリデーターからのエラーを含むすべてのエラーを取得する
-    $validator->errors($data);
+    $validator->validate($data);
 
 ``addNested()`` を用いることで、1:1 の関係を構築することができ、 ``addNestedMany()``
 を用いることで 1:N の関係を築くことができます。両方のメソッドを用いることにより、
@@ -506,7 +507,8 @@ Localized プラグインは、バリデーションのための国の２文字�
         ->requirePresence('comment')
         ->notEmpty('comment', 'コメントが必要です。');
 
-    $errors = $validator->errors($this->request->getData());
+    // Prior to 3.9 use $validator->errors()
+    $errors = $validator->validate($this->request->getData());
     if (empty($errors)) {
         // email を送る。
     }
@@ -523,7 +525,8 @@ Localized プラグインは、バリデーションのための国の２文字�
 適用されますが、 'update' を実行する際のルールを適用したい場合は、
 以下のことが可能となります。 ::
 
-    $errors = $validator->errors($this->request->getData(), false);
+    // Prior to 3.9 use $validator->errors()
+    $errors = $validator->validate($this->request->getData(), false);
     if (empty($errors)) {
         // email を送る。
     }
