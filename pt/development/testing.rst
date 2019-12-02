@@ -1285,12 +1285,6 @@ que tornam as respostas de teste muito mais simples. Alguns exemplos são::
     // Verifique o tipo de conteúdo
     $this->assertContentType('application/json');
 
-In addition to the above assertion methods, you can also use all of the
-assertions in `TestSuite
-<https://api.cakephp.org/3.x/class-Cake.TestSuite.TestCase.html>`_ and those
-found in `PHPUnit
-<https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
-
 Além dos métodos de asserção acima, você também pode usar todas as asserções no `TestSuite
 <https://api.cakephp.org/3.x/class-Cake.TestSuite.TestCase.html>` e 
 os encontrados em `PHPUnit <https://phpunit.de/manual/current/en/appendixes. assertions.html>`.
@@ -1533,15 +1527,6 @@ Agora criamos nossos testes::
         }
     }
 
-Here, we call ``usd()`` with different parameters and tell the test suite to
-check if the returned values are equal to what is expected.
-
-Save this and execute the test. You should see a green bar and messaging
-indicating 1 pass and 4 assertions.
-
-When you are testing a Helper which uses other helpers, be sure to mock the
-View clases ``loadHelpers`` method.
-
 Aqui, chamamos ``usd()`` com parâmetros diferentes e dizemos ao conjunto 
 de testes para verificar se os valores retornados são iguais ao esperado.
 
@@ -1655,11 +1640,6 @@ Veja :ref:`email-testing` para obter informações sobre o teste de email.
 Criando Suítes de Teste
 =======================
 
-If you want several of your tests to run at the same time, you can create a test
-suite. A test suite is composed of several test cases.  You can either create
-test suites in your application's **phpunit.xml** file. A simple example
-would be:
-
 Se você deseja que vários de seus testes sejam executados ao mesmo tempo, é possível 
 criar um conjunto de testes. Um conjunto de testes é composto por vários casos de teste. 
 Você pode criar suítes de teste no arquivo **phpunit.xml** do seu aplicativo. Um exemplo 
@@ -1709,15 +1689,15 @@ prefixar os dispositivos de seu plugin com ``plugin.Blog.BlogPosts``::
         }
     }
 
-If you want to use plugin fixtures in the app tests you can
-reference them using ``plugin.pluginName.fixtureName`` syntax in the
-``$fixtures`` array. Additionally if you use vendor plugin name or fixture
-directories you can use the following: ``plugin.vendorName/pluginName.folderName/fixtureName``.
+Se você deseja usar fixtures de plug-in nos testes do aplicativo, pode referenciá-los usando a 
+sintaxe ``plugin.pluginName.fixtureName`` na matriz ``$fixtures``. Além disso, se você usar o 
+nome do plugin do fornecedor ou os diretórios do equipamento, poderá usar o seguinte: 
+``plugin.vendorName/pluginName.folderName/fixtureName``.
 
-Before you can use fixtures you should double check that your ``phpunit.xml``
-contains the fixture listener::
+Antes de usar os equipamentos, verifique novamente se o seu ``phpunit.xml`` 
+contém o ouvinte do equipamento::
 
-    <!-- Setup a listener for fixtures -->
+    <!-- Configurar um ouvinte para fixtures -->
     <listeners>
         <listener
         class="\Cake\TestSuite\Fixture\FixtureInjector">
@@ -1727,8 +1707,8 @@ contains the fixture listener::
         </listener>
     </listeners>
 
-You should also ensure that your fixtures are loadable. Ensure the following is
-present in your **composer.json** file::
+Você também deve garantir que suas fixtures sejam carregáveis. Verifique se o 
+seguinte arquivo está presente em seu arquivo **composer.json**::
 
     "autoload-dev": {
         "psr-4": {
@@ -1738,22 +1718,21 @@ present in your **composer.json** file::
 
 .. note::
 
-    Remember to run ``composer.phar dumpautoload`` when adding new autoload
-    mappings.
+    Lembre-se de executar o ``composer.phar dumpautoload`` ao adicionar novos 
+    mapeamentos de carregamento automático.
 
-Generating Tests with Bake
+Gerando Testes com o Bake
 ==========================
 
-If you use :doc:`bake </bake/usage>` to
-generate scaffolding, it will also generate test stubs. If you need to
-re-generate test case skeletons, or if you want to generate test skeletons for
-code you wrote, you can use ``bake``:
+Se você usar :doc:`bake </bake/use>` para gerar scaffolding, ele também gerará stubs 
+de teste. Se você precisar gerar novamente esqueletos de casos de teste ou se desejar 
+gerar esqueletos de teste para o código que escreveu, poderá usar o ``bake``:
 
 .. code-block:: bash
 
     bin/cake bake test <type> <name>
 
-``<type>`` should be one of:
+``<type>`` deve ser um dos:
 
 #. Entity
 #. Table
@@ -1769,34 +1748,34 @@ code you wrote, you can use ``bake``:
 #. Mailer
 #. Command
 
-While ``<name>`` should be the name of the object you want to bake a test
-skeleton for.
+``<name>`` deve ser o nome do objeto para o qual você deseja criar um esqueleto de teste.
 
-Integration with Jenkins
-========================
+Integração com Jenkins
+======================
 
-`Jenkins <http://jenkins-ci.org>`_ is a continuous integration server, that can
-help you automate the running of your test cases. This helps ensure that all
-your tests stay passing and your application is always ready.
+O `Jenkins <http://jenkins-ci.org>`_ é um servidor de integração contínua, que 
+pode ajudá-lo a automatizar a execução dos seus casos de teste. Isso ajuda a 
+garantir que todos os seus testes permaneçam aprovados e seu aplicativo esteja 
+sempre pronto.
 
-Integrating a CakePHP application with Jenkins is fairly straightforward. The
-following assumes you've already installed Jenkins on \*nix system, and are able
-to administer it. You also know how to create jobs, and run builds. If you are
-unsure of any of these, refer to the `Jenkins documentation <http://jenkins-ci.org/>`_ .
+A integração de um aplicativo CakePHP com o Jenkins é bastante direta. O seguinte 
+pressupõe que você já instalou o Jenkins no sistema \*nix e pode administrá-lo. 
+Você também sabe como criar jobs e executar builds. Se você não tiver certeza 
+disso, consulte a `documentação de Jenkins <http://jenkins-ci.org/>`.
 
-Create a Job
-------------
+Criando um Trabalho
+-------------------
 
-Start off by creating a job for your application, and connect your repository
-so that jenkins can access your code.
+Comece criando um trabalho para seu aplicativo e conecte seu repositório para 
+que jenkins possa acessar seu código.
 
-Add Test Database Config
-------------------------
+Adicionar Configuração do Banco de Dados de Teste
+-------------------------------------------------
 
-Using a separate database just for Jenkins is generally a good idea, as it stops
-bleed through and avoids a number of basic problems. Once you've created a new
-database in a database server that jenkins can access (usually localhost). Add
-a *shell script step* to the build that contains the following:
+Usar um banco de dados separado apenas para Jenkins geralmente é uma boa idéia, 
+pois evita vários problemas básicos. Depois de criar um novo banco de dados em 
+um servidor de banco de dados que jenkins pode acessar (geralmente localhost). 
+Adicione um *shell script* à compilação que contém o seguinte:
 
 .. code-block:: bash
 
@@ -1816,49 +1795,50 @@ a *shell script step* to the build that contains the following:
     ];
     CONFIG
 
-Then uncomment the following line in your **config/bootstrap.php** file::
+Descomente a seguinte linha no seu arquivo **config/bootstrap.php**::
 
     //Configure::load('app_local', 'default');
 
-By creating an **app_local.php** file, you have an easy way to define
-configuration specific to Jenkins. You can use this same configuration file to
-override any other configuration files you need on Jenkins.
+Ao criar um arquivo **app_local.php **, você tem uma maneira fácil de definir 
+configurações específicas do Jenkins. Você pode usar esse mesmo arquivo de 
+configuração para substituir qualquer outro arquivo de configuração necessário 
+no Jenkins.
 
-It's often a good idea to drop and re-create the database before each build as
-well. This insulates you from chained failures, where one broken build causes
-others to fail. Add another *shell script step* to the build that contains the
-following:
+Geralmente, é uma boa ideia eliminar e recriar o banco de dados antes de cada 
+compilação também. Isso o isola de falhas encadeadas, onde uma construção quebrada 
+faz com que outras falhem. Adicione outra etapa do *shell script* à compilação que 
+contém o seguinte:
 
 .. code-block:: bash
 
     mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
 
-Add your Tests
---------------
+Adicione seus Testes
+--------------------
 
-Add another *shell script step* to your build. In this step install your
-dependencies and run the tests for your application. Creating a junit log file,
-or clover coverage is often a nice bonus, as it gives you a nice graphical view
-of your testing results:
+Adicione outra etapa do *shell script* à sua compilação. Nesta etapa, instale 
+suas dependências e execute os testes para seu aplicativo. Criar um arquivo de 
+log junit ou cobertura de código geralmente é um bom bônus, pois fornece uma 
+boa visualização gráfica dos resultados dos testes:
 
 .. code-block:: bash
 
-    # Download Composer if it is missing.
+    # Faça o download do Composer, se estiver faltando.
     test -f 'composer.phar' || curl -sS https://getcomposer.org/installer | php
-    # Install dependencies
+    # Instale dependências
     php composer.phar install
     vendor/bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
 
-If you use clover coverage, or the junit results, make sure to configure those
-in Jenkins as well. Failing to configure those steps will mean you won't see the
-results.
+Se você usar a cobertura de código ou os resultados do JUnit, certifique-se de configurar 
+também o Jenkins. Não configurar essas etapas significa que você não verá os resultados.
 
-Run a Build
------------
+Executando uma Build
+--------------------
 
-You should be able to run a build now. Check the console output and make any
-necessary changes to get a passing build.
+Agora você deve poder executar uma compilação. Verifique a saída do console e 
+faça as alterações necessárias para obter uma compilação de aprovação.
 
 .. meta::
-    :title lang=en: Testing
-    :keywords lang=en: phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration
+    :title lang=pt-br: Testando
+    :keywords lang=pt-br: phpunit,teste banco de dados, configuraçãode de banco de dados,teste de banco de dados,teste publico,
+    teste framework,executando um,configuração de teste,padrão de fato,pear,runners,array,banco de dados,cakephp,php,integração
