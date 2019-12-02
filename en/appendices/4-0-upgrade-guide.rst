@@ -50,8 +50,8 @@ Next use the ``rector`` command to automatically fix many deprecated CakePHP and
 PHPUnit method calls. It is important to apply rector **before** you upgrade
 your dependencies::
 
-    bin/cake upgrade rector --rules phpunit80 <path/to/app>
-    bin/cake upgrade rector --rules cakephp40 <path/to/app>
+    bin/cake upgrade rector --rules phpunit80 <path/to/app/tests>
+    bin/cake upgrade rector --rules cakephp40 <path/to/app/src>
 
 Update CakePHP Dependency
 =========================
