@@ -1160,8 +1160,8 @@ Vamos começar com um exemplo simples de controlador que responde em JSON::
         }
     }
 
-Now we create the file **tests/TestCase/Controller/MarkersControllerTest.php**
-and make sure our web service is returning the proper response::
+Agora, criamos o arquivo **tests/TestCase/Controller/MarkersControllerTest.php** e 
+garantimos que nosso serviço da Web retorne a resposta adequada::
 
     class MarkersControllerTest extends IntegrationTestCase
     {
@@ -1183,16 +1183,16 @@ and make sure our web service is returning the proper response::
         }
     }
 
-We use the ``JSON_PRETTY_PRINT`` option as CakePHP's built in JsonView will use
-that option when ``debug`` is enabled.
+Nós usamos a opção ``JSON_PRETTY_PRINT``, pois o CakePHP 
+embutido no JsonView usará essa opção quando ``debug`` estiver ativado.
 
-Disabling Error Handling Middleware in Tests
---------------------------------------------
+Desabilitando o Tratamento de Erros de Middlewares nos Testes
+-------------------------------------------------------------
 
-When debugging tests that are failing because your application is encountering
-errors it can be helpful to temporarily disable the error handling middleware to
-allow the underlying error to bubble up. You can use
-``disableErrorHandlerMiddleware()`` to do this::
+Ao depurar testes que estão falhando porque seu aplicativo está encontrando erros, 
+pode ser útil desativar temporariamente o middleware de manipulação de erros para 
+permitir que o erro subjacente seja exibido. Você pode usar o método ``disableErrorHandlerMiddleware()`` 
+para fazer isso::
 
     public function testGetMissing()
     {
@@ -1201,88 +1201,88 @@ allow the underlying error to bubble up. You can use
         $this->assertResponseCode(404);
     }
 
-In the above example, the test would fail and the underlying exception message
-and stack trace would be displayed instead of the rendered error page being
-checked.
+No exemplo acima, o teste falharia e a mensagem de exceção subjacente e o 
+rastreamento da pilha seriam exibidos em vez da verificação da página de erro 
+renderizada.
 
 .. versionadded:: 3.5.0
 
-Assertion methods
+Métodos Assertion
 -----------------
 
-The ``IntegrationTestTrait`` trait provides a number of assertion methods that
-make testing responses much simpler. Some examples are::
+A característica ``IntegrationTestTrait`` fornece vários métodos de asserção 
+que tornam as respostas de teste muito mais simples. Alguns exemplos são::
 
-    // Check for a 2xx response code
+    // Verifica se o código da resposta é 2xx
     $this->assertResponseOk();
 
-    // Check for a 2xx/3xx response code
+    // Verifica se o código de resposta é 2xx/3xx
     $this->assertResponseSuccess();
 
-    // Check for a 4xx response code
+    // Verifica se o código de resposta é 4xx
     $this->assertResponseError();
 
-    // Check for a 5xx response code
+    // Verifica se o código de resposta 5xx
     $this->assertResponseFailure();
 
-    // Check for a specific response code, e.g. 200
+    // Verifica se a resposta tem um código específico, exemplo: 200
     $this->assertResponseCode(200);
 
-    // Check the Location header
+    // Verifica o cabeçalho do local
     $this->assertRedirect(['controller' => 'Articles', 'action' => 'index']);
 
-    // Check that no Location header has been set
+    // Verifica se nenhum cabeçalho de redirecionamento foi definido
     $this->assertNoRedirect();
 
-    // Check a part of the Location header
+    // Verifique uma parte do cabeçalho Location
     $this->assertRedirectContains('/articles/edit/');
 
-    // Added in 3.7.0
+    // Adicionado em 3.7.0
     $this->assertRedirectNotContains('/articles/edit/');
 
-    // Assert not empty response content
+    // Verifica se conteúdo de resposta não está vazio
     $this->assertResponseNotEmpty();
 
-    // Assert empty response content
+    // Verifica conteúdo de resposta vazio
     $this->assertResponseEmpty();
 
-    // Assert response content
+    // Afirmar conteúdo de resposta
     $this->assertResponseEquals('Yeah!');
 
-    // Assert response content doesn't equal
+    // Afirmar que o conteúdo da resposta não é igual ao especifícado
     $this->assertResponseNotEquals('No!');
 
-    // Assert partial response content
+    // Afirmar conteúdo de resposta parcialmente
     $this->assertResponseContains('You won!');
     $this->assertResponseNotContains('You lost!');
     
-    // Assert file sent back
+    // Afirmar arquivo enviado de volta
     $this->assertFileResponse('/absolute/path/to/file.ext');
 
-    // Assert layout
+    // Afirmar layout
     $this->assertLayout('default');
 
-    // Assert which template was rendered (if any)
+    // Afirme qual modelo foi renderizado (se houver)
     $this->assertTemplate('index');
 
-    // Assert data in the session
+    // Afirmar dados na sessão
     $this->assertSession(1, 'Auth.User.id');
 
-    // Assert response header.
+    // Afirmar cabeçalho de resposta.
     $this->assertHeader('Content-Type', 'application/json');
     $this->assertHeaderContains('Content-Type', 'html');
 
-    // Added in 3.7.0
+    // Adicionado em 3.7.0
     $this->assertHeaderNotContains('Content-Type', 'xml');
 
-    // Assert view variables
+    // Afirmar variáveis de exibição
     $user =  $this->viewVariable('user');
     $this->assertEquals('jose', $user->username);
 
-    // Assert cookies in the response
+    // Afirmar cookies na resposta
     $this->assertCookie('1', 'thingid');
 
-    // Check the content type
+    // Verifique o tipo de conteúdo
     $this->assertContentType('application/json');
 
 In addition to the above assertion methods, you can also use all of the
@@ -1291,15 +1291,19 @@ assertions in `TestSuite
 found in `PHPUnit
 <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
 
-Comparing test results to a file
---------------------------------
+Além dos métodos de asserção acima, você também pode usar todas as asserções no `TestSuite
+<https://api.cakephp.org/3.x/class-Cake.TestSuite.TestCase.html>` e 
+os encontrados em `PHPUnit <https://phpunit.de/manual/current/en/appendixes. assertions.html>`.
 
-For some types of test, it may be easier to compare the result of a test to the
-contents of a file - for example, when testing the rendered output of a view.
-The ``StringCompareTrait`` adds a simple assert method for this purpose.
+Comparando Resultados de Teste com um Arquivo
+---------------------------------------------
 
-Usage involves using the trait, setting the comparison base path and calling
-``assertSameAsFile``::
+Para alguns tipos de teste, pode ser mais fácil comparar o resultado de um teste 
+com o conteúdo de um arquivo - por exemplo, ao testar a saída renderizada de uma visualização.
+O ``StringCompareTrait`` adiciona um método de declaração simples para essa finalidade.
+
+O uso envolve o uso da característica, definindo o caminho base de comparação e 
+chamando ``assertSameAsFile``::
 
     use Cake\TestSuite\StringCompareTrait;
     use Cake\TestSuite\TestCase;
@@ -1321,12 +1325,11 @@ Usage involves using the trait, setting the comparison base path and calling
         }
     }
 
-The above example will compare ``$result`` to the contents of the file
-``APP/tests/comparisons/example.php``.
+O exemplo acima comparará ``$result`` com o conteúdo do arquivo ``APP/tests/comparisons/example.php``.
 
-A mechanism is provided to write/update test files, by setting the environment
-variable ``UPDATE_TEST_COMPARISON_FILES``, which will create and/or update test
-comparison files as they are referenced:
+Um mecanismo é fornecido para gravar/atualizar arquivos de teste, configurando 
+a variável de ambiente ``UPDATE_TEST_COMPARISON_FILES``, que criará e/ou atualizará os 
+arquivos de comparação de testes à medida que forem referenciados:
 
 .. code-block:: bash
 
@@ -1348,31 +1351,30 @@ comparison files as they are referenced:
     #   modified:   tests/comparisons/example.php
 
 
-Console Integration Testing
-===========================
+Teste de Integração de Console
+==============================
 
-See :ref:`console-integration-testing` for information on testing shells and
-commands.
+Veja :ref:`console-integration-testing` para obter informações sobre testes de shells e comandos.
 
+Testando Views
+==============
 
-Testing Views
-=============
+Geralmente a maioria dos aplicativos não testa diretamente seu código HTML. 
+Fazer isso geralmente resulta em conjuntos de testes frágeis e difíceis de 
+manter, com tendência a serem quebrados. Ao escrever testes funcionais usando 
+:php:class:`IntegrationTestTrait`, você pode inspecionar o conteúdo da 
+visualização renderizada configurando a opção` `return`` para 'view'. Embora 
+seja possível testar o conteúdo da visualização usando ``IntegrationTestTrait``, 
+um teste de integração/visualização mais robusto e sustentável pode ser realizado 
+usando ferramentas como `Selenium webdriver <http://seleniumhq.org>`.
 
-Generally most applications will not directly test their HTML code. Doing so is
-often results in fragile, difficult to maintain test suites that are prone to
-breaking. When writing functional tests using :php:class:`IntegrationTestTrait`
-you can inspect the rendered view content by setting the ``return`` option to
-'view'. While it is possible to test view content using ``IntegrationTestTrait``,
-a more robust and maintainable integration/view testing can be accomplished
-using tools like `Selenium webdriver <http://seleniumhq.org>`_.
+Testando Componentes
+====================
 
-Testing Components
-==================
-
-Let's pretend we have a component called PagematronComponent in our application.
-This component helps us set the pagination limit value across all the
-controllers that use it. Here is our example component located in
-**src/Controller/Component/PagematronComponent.php**::
+Vamos fingir que temos um componente chamado PagematronComponent em nosso aplicativo.
+Esse componente nos ajuda a definir o valor limite de paginação em todos os 
+controladores que o utilizam. Aqui está o nosso exemplo de componente localizado 
+em **src/Controller/Component/PagematronComponent.php**::
 
     class PagematronComponent extends Component
     {
@@ -1381,7 +1383,7 @@ controllers that use it. Here is our example component located in
         public function setController($controller)
         {
             $this->controller = $controller;
-            // Make sure the controller is using pagination
+            // Verifique se o controlador está usando paginação
             if (!isset($this->controller->paginate)) {
                 $this->controller->paginate = [];
             }
@@ -1408,9 +1410,9 @@ controllers that use it. Here is our example component located in
         }
     }
 
-Now we can write tests to ensure our paginate ``limit`` parameter is being set
-correctly by the ``adjust()`` method in our component. We create the file
-**tests/TestCase/Controller/Component/PagematronComponentTest.php**::
+Agora podemos escrever testes para garantir que nosso parâmetro paginado ``limit`` 
+esteja sendo definido corretamente pelo método ``Adjust()`` em nosso componente. 
+Criamos o arquivo **tests/TestCase/Controller/Component/PagematronComponentTest.php**::
 
     namespace App\Test\TestCase\Controller\Component;
 
@@ -1431,7 +1433,7 @@ correctly by the ``adjust()`` method in our component. We create the file
         public function setUp()
         {
             parent::setUp();
-            // Setup our component and fake test controller
+            // Configure nosso componente e o controlador de teste fake
             $request = new ServerRequest();
             $response = new Response();
             $this->controller = $this->getMockBuilder('Cake\Controller\Controller')
@@ -1446,7 +1448,7 @@ correctly by the ``adjust()`` method in our component. We create the file
 
         public function testAdjust()
         {
-            // Test our adjust method with different parameter settings
+            // Teste nosso método de ajuste com diferentes configurações de parâmetros
             $this->component->adjust();
             $this->assertEquals(20, $this->controller->paginate['limit']);
 
@@ -1460,20 +1462,20 @@ correctly by the ``adjust()`` method in our component. We create the file
         public function tearDown()
         {
             parent::tearDown();
-            // Clean up after we're done
+            // Limpar depois que terminarmos
             unset($this->component, $this->controller);
         }
     }
 
-Testing Helpers
-===============
+Testando Ajudantes
+==================
 
-Since a decent amount of logic resides in Helper classes, it's
-important to make sure those classes are covered by test cases.
+Como uma quantidade decente de lógica reside nas classes Helper, é importante 
+garantir que essas classes sejam cobertas por casos de teste.
 
-First we create an example helper to test. The ``CurrencyRendererHelper`` will
-help us display currencies in our views and for simplicity only has one method
-``usd()``::
+Primeiro, criamos um exemplo de auxiliar para testar. O ``CurrencyRendererHelper`` 
+nos ajudará a exibir moedas em nossos pontos de vista e, por simplicidade, só possui 
+um método ``usd()``::
 
     // src/View/Helper/CurrencyRendererHelper.php
     namespace App\View\Helper;
@@ -1488,10 +1490,11 @@ help us display currencies in our views and for simplicity only has one method
         }
     }
 
-Here we set the decimal places to 2, decimal separator to dot, thousands
-separator to comma, and prefix the formatted number with 'USD' string.
+Aqui, definimos as casas decimais como 2, separador decimal para ponto, 
+separador de milhares para vírgula e prefixamos o número formatado com a 
+string 'USD'.
 
-Now we create our tests::
+Agora criamos nossos testes::
 
     // tests/TestCase/View/Helper/CurrencyRendererHelperTest.php
 
@@ -1505,7 +1508,7 @@ Now we create our tests::
     {
         public $helper = null;
 
-        // Here we instantiate our helper
+        // Aqui instanciamos nosso ajudante
         public function setUp()
         {
             parent::setUp();
@@ -1513,16 +1516,16 @@ Now we create our tests::
             $this->helper = new CurrencyRendererHelper($View);
         }
 
-        // Testing the usd() function
+        // Testando a função usd()
         public function testUsd()
         {
             $this->assertEquals('USD 5.30', $this->helper->usd(5.30));
 
-            // We should always have 2 decimal digits
+            // Devemos sempre ter 2 dígitos decimais
             $this->assertEquals('USD 1.00', $this->helper->usd(1));
             $this->assertEquals('USD 2.05', $this->helper->usd(2.05));
 
-            // Testing the thousands separator
+            // Testando o separador de milhares
             $this->assertEquals(
               'USD 12,000.70',
               $this->helper->usd(12000.70)
@@ -1539,25 +1542,33 @@ indicating 1 pass and 4 assertions.
 When you are testing a Helper which uses other helpers, be sure to mock the
 View clases ``loadHelpers`` method.
 
+Aqui, chamamos ``usd()`` com parâmetros diferentes e dizemos ao conjunto 
+de testes para verificar se os valores retornados são iguais ao esperado.
+
+Salve isso e execute o teste. Você deverá ver uma barra verde e mensagens 
+indicando 1 passe e 4 asserções.
+
+Quando você estiver testando um Helper que use outros helpers, "mock" o método 
+``loadHelpers`` da classe View.
+
 .. _testing-events:
 
-Testing Events
-==============
+Testando Eventos
+================
 
-The :doc:`/core-libraries/events` is a great way to decouple your application
-code, but sometimes when testing, you tend to test the results of events in the
-test cases that execute those events. This is an additional form of coupling
-that can be removed by using ``assertEventFired`` and ``assertEventFiredWith``
-instead.
+O :doc:`/core-libraries/events` é uma ótima maneira de desacoplar o código do 
+aplicativo, mas às vezes ao testar, você tende a testar os resultados dos eventos 
+nos casos de teste que os executam. Esta é uma forma adicional de acoplamento que 
+pode ser removida usando ``assertEventFired`` e ``assertEventFiredWith``.
 
-Expanding on the Orders example, say we have the following tables::
+Expandindo no exemplo Orders, digamos que temos as seguintes tabelas::
 
     class OrdersTable extends Table
     {
         public function place($order)
         {
             if ($this->save($order)) {
-                // moved cart removal to CartsTable
+                // remoção de carrinho movido para CartsTable
                 $event = new Event('Model.Order.afterPlace', $this, [
                     'order' => $order
                 ]);
@@ -1585,12 +1596,12 @@ Expanding on the Orders example, say we have the following tables::
     }
 
 .. note::
-    To assert that events are fired, you must first enable
-    :ref:`tracking-events` on the event manager you wish to assert against.
+    Para afirmar que os eventos foram disparados, você deve primeiro 
+    ativar :ref:`tracking-events` no gerenciador de eventos que deseja reivindicar.
 
-To test the ``OrdersTable`` above, we enable tracking in ``setUp()`` then assert
-that the event was fired, and assert that the ``$order`` entity was passed in
-the event data::
+Para testar o ``OrdersTable`` acima, habilitamos o rastreamento em ``setUp()``, 
+depois afirmamos que o evento foi disparado e afirmamos que a entidade ``$order`` 
+foi passada nos dados do evento::
 
     namespace App\Test\TestCase\Model\Table;
 
@@ -1607,7 +1618,7 @@ the event data::
         {
             parent::setUp();
             $this->Orders = TableRegistry::getTableLocator()->get('Orders');
-            // enable event tracking
+            // ativar o rastreamento de eventos
             $this->Orders->getEventManager()->setEventList(new EventList());
         }
 
@@ -1626,29 +1637,33 @@ the event data::
         }
     }
 
-By default, the global ``EventManager`` is used for assertions, so testing
-global events does not require passing the event manager::
+Por padrão, o global ``EventManager`` é usado para asserções, portanto, testar 
+eventos globais não requer a aprovação do gerenciador de eventos::
 
     $this->assertEventFired('My.Global.Event');
     $this->assertEventFiredWith('My.Global.Event', 'user', 1);
 
 .. versionadded:: 3.2.11
 
-    Event tracking, ``assertEventFired()``, and ``assertEventFiredWith`` were
-    added.
+    O rastreamento de eventos, ``assertEventFired()`` e ``assertEventFiredWith`` foram adicionados.
 
-Testing Email
-=============
+Testando Email
+==============
 
-See :ref:`email-testing` for information on testing email.
+Veja :ref:`email-testing` para obter informações sobre o teste de email.
 
-Creating Test Suites
-====================
+Criando Suítes de Teste
+=======================
 
 If you want several of your tests to run at the same time, you can create a test
 suite. A test suite is composed of several test cases.  You can either create
 test suites in your application's **phpunit.xml** file. A simple example
 would be:
+
+Se você deseja que vários de seus testes sejam executados ao mesmo tempo, é possível 
+criar um conjunto de testes. Um conjunto de testes é composto por vários casos de teste. 
+Você pode criar suítes de teste no arquivo **phpunit.xml** do seu aplicativo. Um exemplo 
+simples seria:
 
 .. code-block:: xml
 
@@ -1660,11 +1675,10 @@ would be:
       </testsuite>
     </testsuites>
 
-Creating Tests for Plugins
-==========================
+Criando Testes para Plugins
+===========================
 
-Tests for plugins are created in their own directory inside the plugins
-folder. ::
+Os testes para plugins são criados em seu próprio diretório, dentro da pasta plugins.::
 
     /src
     /plugins
@@ -1673,11 +1687,11 @@ folder. ::
                 /TestCase
                 /Fixture
 
-They work just like normal tests but you have to remember to use the naming
-conventions for plugins when importing classes. This is an example of a testcase
-for the ``BlogPost`` model from the plugins chapter of this manual. A difference
-from other tests is in the first line where 'Blog.BlogPost' is imported. You
-also need to prefix your plugin fixtures with ``plugin.Blog.BlogPosts``::
+Eles funcionam como testes normais, mas você deve se lembrar de usar as convenções de 
+nomenclatura para plug-ins ao importar classes. Este é um exemplo de uma caixa de teste 
+para o modelo ``BlogPost`` do capítulo de plugins deste manual. A diferença de outros 
+testes está na primeira linha em que 'Blog.BlogPost' é importado. Você também precisa 
+prefixar os dispositivos de seu plugin com ``plugin.Blog.BlogPosts``::
 
     namespace Blog\Test\TestCase\Model\Table;
 
@@ -1686,12 +1700,12 @@ also need to prefix your plugin fixtures with ``plugin.Blog.BlogPosts``::
 
     class BlogPostsTableTest extends TestCase
     {
-        // Plugin fixtures located in /plugins/Blog/tests/Fixture/
+        // Acessórios para plug-ins localizados em /plugins/Blog/tests/Fixture/
         public $fixtures = ['plugin.Blog.BlogPosts'];
 
         public function testSomething()
         {
-            // Test something.
+            // Teste alguma coisa.
         }
     }
 
