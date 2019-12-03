@@ -1287,7 +1287,7 @@ que tornam as respostas de teste muito mais simples. Alguns exemplos são::
 
 Além dos métodos de asserção acima, você também pode usar todas as asserções no `TestSuite
 <https://api.cakephp.org/3.x/class-Cake.TestSuite.TestCase.html>`__ e 
-os encontrados em `PHPUnit <https://phpunit.de/manual/current/en/appendixes. assertions.html>`.
+os encontrados em `PHPUnit <https://phpunit.de/manual/current/en/appendixes. assertions.html>`__.
 
 Comparando Resultados de Teste com um Arquivo
 ---------------------------------------------
