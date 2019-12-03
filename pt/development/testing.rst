@@ -632,7 +632,7 @@ defina a propriedade ``$fixtures`` no seu modelo::
     }
 
 O item acima carregará os fixtures de Article e Coment do 
-diretório fixture do aplicativo. Você também pode carregar fixture do core do CakePHP ou plugins:
+diretório fixture do aplicativo. Você também pode carregar fixture do core do CakePHP ou plugins::
 
     class ArticlesTest extends TestCase
     {
