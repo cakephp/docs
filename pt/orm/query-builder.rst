@@ -42,7 +42,7 @@ criada usando o sistema de convenções::
 Selecionando Linhas de uma Tabela
 ---------------------------------
 
-::
+.. code-block::
 
     use Cake\ORM\TableRegistry;
 
