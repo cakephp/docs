@@ -1013,7 +1013,7 @@ A chave de cabeçalhos em ``configRequest()`` pode ser usada para configurar
 qualquer cabeçalho HTTP adicional necessário para uma ação.
 
 Testando Ações Protegidas por CsrfComponent ou SecurityComponent
----------------------------------------------------------------
+----------------------------------------------------------------
 
 Ao testar ações protegidas por SecurityComponent ou CsrfComponent, você pode ativar 
 a geração automática de token para garantir que seus testes não falhem devido a 
