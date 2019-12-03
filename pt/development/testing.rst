@@ -1360,7 +1360,7 @@ manter, com tendência a serem quebrados. Ao escrever testes funcionais usando
 visualização renderizada configurando a opção` `return`` para 'view'. Embora 
 seja possível testar o conteúdo da visualização usando ``IntegrationTestTrait``, 
 um teste de integração/visualização mais robusto e sustentável pode ser realizado 
-usando ferramentas como `Selenium webdriver <http://seleniumhq.org>`.
+usando ferramentas como `Selenium webdriver <http://seleniumhq.org>`__.
 
 Testando Componentes
 ====================
