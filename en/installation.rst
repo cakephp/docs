@@ -30,6 +30,14 @@ engines:
     All built-in drivers require PDO. You should make sure you have the correct
     PDO extensions installed.
 
+.. warning:
+
+    CakePHP 2.x is EOL and in maintenance mode (critical bugfixes only).
+    As such, not all PHP 7.1+ functionality will be updated anymore. Some deprecations are
+    better silenced (``E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED``).
+    It is also recommended to run PHP 5.6 as minimum for your applications. Previous PHP
+    versions are so outdated and EOL, that they provide also an immense security risk.
+
 License
 =======
 
