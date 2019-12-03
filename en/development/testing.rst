@@ -504,7 +504,8 @@ definition are:
 type
     CakePHP internal data type. Currently supported:
 
-    - ``string``: maps to ``VARCHAR`` or ``CHAR``
+    - ``string``: maps to ``VARCHAR``
+    - ``char``: maps to ``CHAR``
     - ``uuid``: maps to ``UUID``
     - ``text``: maps to ``TEXT``
     - ``integer``: maps to ``INT``
@@ -512,13 +513,13 @@ type
     - ``decimal``: maps to ``DECIMAL``
     - ``float``: maps to ``FLOAT``
     - ``datetime``: maps to ``DATETIME``
+    - ``datetimefractional``: maps to ``DATETIME(6)`` or ``TIMESTAMP``
+    - ``timestamp``: maps to ``TIMESTAMP``
+    - ``timestampfractional``: maps to ``TIMESTAMP(6)`` or ``TIMESTAMP``
     - ``timestamp``: maps to ``TIMESTAMP``
     - ``time``: maps to ``TIME``
     - ``date``: maps to ``DATE``
     - ``binary``: maps to ``BLOB``
-fixed
-    Used with string types to create CHAR columns in platforms that support
-    them.
 length
     Set to the specific length the field should take.
 precision
