@@ -136,7 +136,7 @@ Você pode usar o método ``first()`` para obter o primeiro resultado na consult
 Obtendo uma Lista de Valores de uma Coluna
 ------------------------------------------
 
-::
+.. code-block::
 
     // Use o método extract() da biblioteca de coleções
     // Isso executa a consulta também
