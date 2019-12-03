@@ -1286,7 +1286,7 @@ que tornam as respostas de teste muito mais simples. Alguns exemplos são::
     $this->assertContentType('application/json');
 
 Além dos métodos de asserção acima, você também pode usar todas as asserções no `TestSuite
-<https://api.cakephp.org/3.x/class-Cake.TestSuite.TestCase.html>` e 
+<https://api.cakephp.org/3.x/class-Cake.TestSuite.TestCase.html>`__ e 
 os encontrados em `PHPUnit <https://phpunit.de/manual/current/en/appendixes. assertions.html>`.
 
 Comparando Resultados de Teste com um Arquivo
