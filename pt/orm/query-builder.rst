@@ -1115,71 +1115,71 @@ CakePHP que chama o método ``count()``::
     });
     $query->count(); // Retorna 100000
 
-In the example above, when the pagination component calls the count method, it
-will receive the estimated hard-coded number of rows.
+No exemplo acima, quando o componente de paginação chamar o método count, 
+ele receberá o número estimado de linhas codificadas
 
 .. _caching-query-results:
 
-Caching Loaded Results
-----------------------
+Cache de Resultados Carregados
+------------------------------
 
-When fetching entities that don't change often you may want to cache the
-results. The ``Query`` class makes this simple::
+Ao buscar entidades que não mudam com frequência, convém armazenar em 
+cache os resultados. A classe ``Query`` torna isso simples::
 
     $query->cache('recent_articles');
 
-Will enable caching on the query's result set. If only one argument is provided
-to ``cache()`` then the 'default' cache configuration will be used. You can
-control which caching configuration is used with the second parameter::
+Ativará o cache no conjunto de resultados da consulta. Se apenas um argumento 
+for fornecido para ``cache()``, a configuração de cache 'padrão' será usada. 
+Você pode controlar qual configuração de armazenamento em cache é usada com o 
+segundo parâmetro::
 
-    // String config name.
+    // Nome da configuração.
     $query->cache('recent_articles', 'dbResults');
 
-    // Instance of CacheEngine
+    // Instância de CacheEngine
     $query->cache('recent_articles', $memcache);
 
-In addition to supporting static keys, the ``cache()`` method accepts a function
-to generate the key. The function you give it will receive the query as an
-argument. You can then read aspects of the query to dynamically generate the
-cache key::
+Além de suportar chaves estáticas, o método ``cache()`` aceita uma função 
+para gerar a chave. A função que você fornecer receberá a consulta como argumento. 
+Você pode ler aspectos da consulta para gerar dinamicamente a chave de cache::
 
-    // Generate a key based on a simple checksum
-    // of the query's where clause
+    // Gere uma chave com base em uma soma de verificação simples
+    // da cláusula where da consulta
     $query->cache(function ($q) {
         return 'articles-' . md5(serialize($q->clause('where')));
     });
 
-The cache method makes it simple to add cached results to your custom finders or
-through event listeners.
+O método de cache simplifica a adição de resultados em cache aos seus finders 
+personalizados ou através dos ouvintes de eventos.
 
-When the results for a cached query are fetched the following happens:
+Quando os resultados de uma consulta em cache são buscados, acontece o seguinte:
 
-1. The ``Model.beforeFind`` event is triggered.
-2. If the query has results set, those will be returned.
-3. The cache key will be resolved and cache data will be read. If the cache data
-   is not empty, those results will be returned.
-4. If the cache misses, the query will be executed and a new ``ResultSet`` will be
-   created. This ``ResultSet`` will be written to the cache and returned.
+1. O evento ``Model.beforeFind`` é acionado.
+2. Se a consulta tiver resultados definidos, eles serão retornados.
+3. A chave do cache será resolvida e os dados do cache serão lidos. 
+   Se os dados do cache não estiverem vazios, esses resultados serão retornados.
+4. Se o cache falhar, a consulta será executada e um novo ``ResultSet`` será criado. 
+   Este ``ResultSet`` será gravado no cache e retornado.
 
 .. note::
 
-    You cannot cache a streaming query result.
+    Você não pode armazenar em cache um resultado de consulta de streaming.
 
-Loading Associations
-====================
+Carregando Associações
+======================
 
-The builder can help you retrieve data from multiple tables at the same time
-with the minimum amount of queries possible. To be able to fetch associated
-data, you first need to setup associations between the tables as described in
-the :doc:`/orm/associations` section. This technique of combining queries
-to fetch associated data from other tables is called **eager loading**.
+O construtor pode ajudá-lo a recuperar dados de várias tabelas ao mesmo tempo 
+com a quantidade mínima de consultas possível. Para poder buscar dados associados, 
+primeiro você precisa configurar associações entre as tabelas, conforme descrito 
+na seção :doc:`/orm/associations`. Essa técnica de combinar consultas para buscar 
+dados associados de outras tabelas é chamada **carregamento rápido**.
 
 .. include:: ./retrieving-data-and-resultsets.rst
     :start-after: start-contain
     :end-before: end-contain
 
-Filtering by Associated Data
-----------------------------
+Filtrando por Dados Aassociados
+-------------------------------
 
 .. include:: ./retrieving-data-and-resultsets.rst
     :start-after: start-filtering
@@ -1187,11 +1187,12 @@ Filtering by Associated Data
 
 .. _adding-joins:
 
-Adding Joins
-------------
 
-In addition to loading related data with ``contain()``, you can also add
-additional joins with the query builder::
+Adicionando Junções
+-------------------
+
+Além de carregar dados relacionados com ``contains()``, você também 
+pode adicionar junções adicionais com o construtor de consultas::
 
     $query = $articles->find()
         ->join([
@@ -1201,8 +1202,8 @@ additional joins with the query builder::
             'conditions' => 'c.article_id = articles.id',
         ]);
 
-You can append multiple joins at the same time by passing an associative array
-with multiple joins::
+Você pode anexar várias junções ao mesmo tempo passando uma matriz 
+associativa com várias junções::
 
     $query = $articles->find()
         ->join([
@@ -1218,8 +1219,8 @@ with multiple joins::
             ]
         ]);
 
-As seen above, when adding joins the alias can be the outer array key. Join
-conditions can also be expressed as an array of conditions::
+Como visto acima, ao adicionar junções, o alias pode ser a chave da matriz externa. 
+As condições de junção também podem ser expressas como uma matriz de condições::
 
     $query = $articles->find()
         ->join([
@@ -1234,19 +1235,19 @@ conditions can also be expressed as an array of conditions::
             ],
         ], ['c.created' => 'datetime', 'c.moderated' => 'boolean']);
 
-When creating joins by hand and using array based conditions, you need to
-provide the datatypes for each column in the join conditions. By providing
-datatypes for the join conditions, the ORM can correctly convert data types into
-SQL. In addition to ``join()`` you can use ``rightJoin()``, ``leftJoin()`` and
-``innerJoin()`` to create joins::
+Ao criar junções manualmente e usar condições baseadas em matriz, é necessário 
+fornecer os tipos de dados para cada coluna nas condições de junção. Ao fornecer 
+tipos de dados para as condições de junção, o ORM pode converter corretamente os 
+tipos de dados em SQL. Além de ``join()``, você pode usar ``rightJoin()``, 
+``leftJoin()`` e ``innerJoin()`` para criar junções::
 
-    // Join with an alias and string conditions
+    // Join com um alias e condições de string
     $query = $articles->find();
     $query->leftJoin(
         ['Authors' => 'authors'],
         ['Authors.id = Articles.author_id']);
 
-    // Join with an alias, array conditions, and types
+    // Join com um alias, matriz de condições e tipos
     $query = $articles->find();
     $query->innerJoin(
         ['Authors' => 'authors'],
@@ -1257,8 +1258,9 @@ SQL. In addition to ``join()`` you can use ``rightJoin()``, ``leftJoin()`` and
         ],
         ['Authors.promoted' => 'boolean', 'Authors.created' => 'datetime']);
 
-It should be noted that if you set the ``quoteIdentifiers`` option to ``true`` when
-defining your ``Connection``, join conditions between table fields should be set as follow::
+Deve-se observar que, se você definir a opção ``quoteIdentifiers`` como 
+``true`` ao definir sua ``Conexão``, as condições de junção entre os campos da 
+tabela deverão ser definidas da seguinte forma::
 
     $query = $articles->find()
         ->join([
@@ -1271,14 +1273,14 @@ defining your ``Connection``, join conditions between table fields should be set
             ],
         ]);
 
-This ensures that all of your identifiers will be quoted across the Query, avoiding errors with
-some database Drivers (PostgreSQL notably)
+Isso garante que todos os seus identificadores sejam citados em toda a consulta, evitando 
+erros com alguns drivers de banco de dados (notavelmente no PostgreSQL)
 
-Inserting Data
-==============
+Inserindo Dados
+===============
 
-Unlike earlier examples, you should not use ``find()`` to create insert queries.
-Instead, create a new ``Query`` object using ``query()``::
+Diferente dos exemplos anteriores, você não deve usar ``find()`` para 
+criar consultas de inserção. Em vez disso, crie um novo objeto ``Query`` usando ``query()``::
 
     $query = $articles->query();
     $query->insert(['title', 'body'])
@@ -1288,8 +1290,8 @@ Instead, create a new ``Query`` object using ``query()``::
         ])
         ->execute();
 
-To insert multiple rows with only one query, you can chain the ``values()``
-method as many times as you need::
+Para inserir várias linhas com apenas uma consulta, você pode encadear o método 
+``values()`` quantas vezes for necessário::
 
     $query = $articles->query();
     $query->insert(['title', 'body'])
@@ -1303,10 +1305,9 @@ method as many times as you need::
         ])
         ->execute();
 
-Generally, it is easier to insert data using entities and
-:php:meth:`~Cake\\ORM\\Table::save()`. By composing a ``SELECT`` and
-``INSERT`` query together, you can create ``INSERT INTO ... SELECT`` style
-queries::
+Geralmente, é mais fácil inserir dados usando entidades e
+:php:meth:`~Cake\\ORM\\Table::save()`. Ao compor uma consulta ``SELECT`` e ``INSERT`` juntas, 
+você pode criar consultas de estilo  ``INSERT INTO ... SELECT``
 
     $select = $articles->find()
         ->select(['title', 'body', 'published'])
@@ -1317,18 +1318,17 @@ queries::
         ->values($select)
         ->execute();
 
-.. note::
-    Inserting records with the query builder will not trigger events such as
-    ``Model.afterSave``. Instead you should use the :doc:`ORM to save
-    data </orm/saving-data>`.
+.. note::    
+    A inserção de registros com o construtor de consultas não acionará eventos 
+    como ``Model.afterSave``. Em vez disso, você deve usar o :doc:`ORM para salvar dados </orm/saving-data>`.
 
 .. _query-builder-updating-data:
 
-Updating Data
-=============
+Atualizando Dados
+=================
 
-As with insert queries, you should not use ``find()`` to create update queries.
-Instead, create new a ``Query`` object using ``query()``::
+Como nas consultas de inserção, você não deve usar ``find()`` para criar consultas 
+de atualização. Em vez disso, crie um novo objeto ``Query`` usando ``query()``::
 
     $query = $articles->query();
     $query->update()
@@ -1336,19 +1336,19 @@ Instead, create new a ``Query`` object using ``query()``::
         ->where(['id' => $id])
         ->execute();
 
-Generally, it is easier to update data using entities and
+Geralmente, é mais fácil atualizar dados usando entidades e
 :php:meth:`~Cake\\ORM\\Table::patchEntity()`.
 
 .. note::
-    Updating records with the query builder will not trigger events such as
-    ``Model.afterSave``. Instead you should use the :doc:`ORM to save
-    data </orm/saving-data>`.
+    A atualização de registros com o construtor de consultas não acionará 
+    eventos como `` Model.afterSave``. Em vez disso, você deve usar o :doc:`ORM 
+    para salvar os dados </orm/saving-data>`.
 
-Deleting Data
-=============
+Apagando Dados
+==============
 
-As with insert queries, you should not use ``find()`` to create delete queries.
-Instead, create new a query object using ``query()``::
+Como nas consultas de inserção, você não deve usar ``find()`` para criar consultas 
+de exclusão. Em vez disso, crie um novo objeto de consulta usando ``query()``::
 
     $query = $articles->query();
     $query->delete()
@@ -1358,59 +1358,60 @@ Instead, create new a query object using ``query()``::
 Generally, it is easier to delete data using entities and
 :php:meth:`~Cake\\ORM\\Table::delete()`.
 
-SQL Injection Prevention
-========================
+Geralmente, é mais fácil excluir dados usando entidades 
+e :php:meth:`~Cake\\ORM\\Table::delete()`.
 
-While the ORM and database abstraction layers prevent most SQL injections
-issues, it is still possible to leave yourself vulnerable through improper use.
+Prevenção de SQL Injection
+==========================
 
-When using condition arrays, the key/left-hand side as well as single value
-entries must not contain user data::
+Embora as camadas de abstração do ORM e do banco de dados evitem a maioria dos 
+problemas de injeção de SQL, ainda é possível deixar-se vulnerável por uso inadequado.
+
+Ao usar matrizes de condições, a chave/lado esquerdo e as entradas de valor único 
+não devem conter dados do usuário::
 
     $query->where([
-        // Data on the key/left-hand side is unsafe, as it will be
-        // inserted into the generated query as-is
+        // Os dados no lado esquerdo/chave não são seguros, pois serão
+        // inserido na consulta gerada como está
         $userData => $value,
 
-        // The same applies to single value entries, they are not
-        // safe to use with user data in any form
+        // O mesmo se aplica às entradas de valor único, elas não são
+        // seguras para usar com os dados do usuário de qualquer forma
         $userData,
         "MATCH (comment) AGAINST ($userData)",
         'created < NOW() - ' . $userData
     ]);
 
-When using the expression builder, column names must not contain user data::
+Ao usar o construtor de expressões, os nomes das colunas não 
+devem conter dados do usuário::
 
     $query->where(function (QueryExpression $exp) use ($userData, $values) {
-        // Column names in all expressions are not safe.
+        // Os nomes de colunas em todas as expressões não são seguras.
         return $exp->in($userData, $values);
     });
 
-When building function expressions, function names should never contain user
-data::
+Ao criar expressões de função, os nomes de funções nunca devem conter dados do usuário::
 
-    // Not safe.
+    // Não é seguro.
     $query->func()->{$userData}($arg1);
 
-    // Also not safe to use an array of
-    // user data in a function expression
+    // Também não é seguro usar uma matriz de
+    // dados do usuário em uma expressão de função
     $query->func()->coalesce($userData);
 
-Raw expressions are never safe::
+Expressões brutas nunca são seguras::
 
     $expr = $query->newExpr()->add($userData);
     $query->select(['two' => $expr]);
 
-Binding values
---------------
+Valores de Ligação
+------------------
 
-It is possible to protect against many unsafe situations by using bindings.
-Similar to :ref:`binding values to prepared statements <database-basics-binding-values>`,
-values can be bound to queries using the :php:meth:`Cake\\Database\\Query::bind()`
-method.
+É possível proteger contra muitas situações inseguras usando ligações. 
+Semelhante a :ref:`vinculando valores a instruções preparadas <database-basics-binding-values>`, 
+os valores podem ser vinculados a consultas usando o método :php:meth:`Cake\\Database\\Query::bind()`
 
-The following example would be a safe variant of the unsafe, SQL injection prone
-example given above::
+O exemplo a seguir seria uma variante segura do exemplo inseguro, propenso a injeção de SQL, dado acima::
 
     $query
         ->where([
@@ -1422,20 +1423,19 @@ example given above::
 
 .. note::
 
-    Unlike :php:meth:`Cake\\Database\\StatementInterface::bindValue()`,
-    ``Query::bind()`` requires to pass the named placeholders including the
-    colon!
+    Ao contrário de :php:meth:`Cake\\Database\\StatementInterface::bindValue()`, ``Query::bind()`` 
+    requer passar os espaços reservados nomeados, incluindo os dois pontos!
 
-More Complex Queries
-====================
+Mais Consultas Complexas
+========================
 
-The query builder is capable of building complex queries like ``UNION`` queries
-and sub-queries.
+O construtor de consultas é capaz de criar consultas complexas, 
+como consultas e subconsultas ``UNION``.
 
 Unions
 ------
 
-Unions are created by composing one or more select queries together::
+As Unions são criadas compondo uma ou mais consultas selecionadas juntas::
 
     $inReview = $articles->find()
         ->where(['need_review' => true]);
@@ -1445,7 +1445,7 @@ Unions are created by composing one or more select queries together::
 
     $unpublished->union($inReview);
 
-You can create ``UNION ALL`` queries using the ``unionAll()`` method::
+Você pode criar consultas ``UNION ALL`` usando o método ``unionAll()``::
 
     $inReview = $articles->find()
         ->where(['need_review' => true]);
@@ -1455,14 +1455,14 @@ You can create ``UNION ALL`` queries using the ``unionAll()`` method::
 
     $unpublished->unionAll($inReview);
 
-Subqueries
-----------
+Subconsultas
+------------
 
-Subqueries are a powerful feature in relational databases and building them in
-CakePHP is fairly intuitive. By composing queries together, you can make
-subqueries::
+As subconsultas são um recurso poderoso nos bancos de dados relacionais e 
+sua criação no CakePHP é bastante intuitiva. Ao compor consultas em conjunto, 
+você pode criar subconsultas::
 
-    // Prior to 3.6.0 use association() instead.
+    // Antes da versão 3.6.0, use o association().
     $matchingComment = $articles->getAssociation('Comments')->find()
         ->select(['article_id'])
         ->distinct()
@@ -1474,25 +1474,27 @@ subqueries::
 Subqueries are accepted anywhere a query expression can be used. For example, in
 the ``select()`` and ``join()`` methods.
 
-Adding Locking Statements
--------------------------
+Subconsultas são aceitas em qualquer lugar em que uma expressão de consulta possa 
+ser usada. Por exemplo, nos métodos ``select()`` e ``join()``
 
-Most relational database vendors support taking out locks when doing select
-operations. You can use the ``epilog()`` method for this::
+Adicionando Instruções de Bloqueio
+----------------------------------
 
-    // In MySQL
+A maioria dos fornecedores de bancos de dados relacionais suporta a remoção 
+de bloqueios ao executar operações selecionadas. Você pode usar o método 
+``epilog()`` para este::
+
+    // Em MySQL
     $query->epilog('FOR UPDATE');
 
-The ``epilog()`` method allows you to append raw SQL to the end of queries. You
-should never put raw user data into ``epilog()``.
+O método ``epilog()`` permite anexar SQL bruto ao final das consultas. 
+Você nunca deve colocar dados brutos do usuário em ``epilog()``
 
-Executing Complex Queries
--------------------------
+Executando Consultas Complexas
+------------------------------
 
-While the query builder makes it easy to build most queries, very complex
-queries can be tedious and complicated to build. You may want to :ref:`execute
-the desired SQL directly <running-select-statements>`.
+Embora o construtor de consultas facilite a criação da maioria das consultas, consultas muito complexas 
+podem ser entediantes e complicadas. Você pode :ref:`executar o SQL desejado diretamente <running-select-statements>`.
 
-Executing SQL directly allows you to fine tune the query that will be run.
-However, doing so doesn't let you use ``contain`` or other higher level ORM
-features.
+A execução direta do SQL permite ajustar a consulta que será executada. No entanto, isso 
+não permite que você use ``contains`` ou outros recursos ORM de nível superior.
