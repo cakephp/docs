@@ -253,7 +253,7 @@ standard error page, you can override it::
 
         public function handleFatalError($code, $description, $file, $line)
         {
-            return 'A fatal error has happened';
+            echo 'A fatal error has happened';
         }
     }
 

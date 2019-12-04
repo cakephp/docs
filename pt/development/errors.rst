@@ -1,7 +1,7 @@
 Erros & Exceções
 ##########################
 
-Os aplicativos CakePHP vêm com a configuração de tratamento de erros e exceções para você. Os erros do PHP 
+Os aplicativos CakePHP vêm com a configuração de tratamento de erros e exceções para você. Os erros do PHP
 são capturados e exibidos ou registrados. Exceções não capturadas são renderizadas em páginas de erro automaticamente.
 
 .. _error-configuration:
@@ -9,8 +9,8 @@ são capturados e exibidos ou registrados. Exceções não capturadas são rende
 Configurações de Erro & Exceções
 ================================
 
-A configuração do erro é feita no arquivo **config/app.php** do seu aplicativo. Por padrão, o CakePHP usa 
-``Cake\Error\ErrorHandler`` para lidar com erros e exceções do PHP por padrão. A configuração de erro permite 
+A configuração do erro é feita no arquivo **config/app.php** do seu aplicativo. Por padrão, o CakePHP usa
+``Cake\Error\ErrorHandler`` para lidar com erros e exceções do PHP por padrão. A configuração de erro permite
 personalizar o tratamento de erros para o seu aplicativo. As seguintes opções são suportadas:
 
 * ``errorLevel`` - int - O nível de erros que você está interessado em capturar. Use as constantes de erro embutidas no PHP e máscaras de bits para selecionar o nível de erro no qual você precisa. Você pode configurá-lo como ``E_ALL ^ E_USER_DEPRECATED`` para desativar os avisos de depreciação.
@@ -21,10 +21,10 @@ personalizar o tratamento de erros para o seu aplicativo. As seguintes opções 
 * ``extraFatalErrorMemory`` - int - Defina como o número de megabytes para aumentar o limite de memória quando um erro fatal for encontrado. Isso permite que o espaço sobrando complete o registro ou o tratamento de erros.
 
 
-Por padrão, os erros do PHP são exibidos quando ``debug`` é ``true`` e registrados quando o 
-debug é ``false``. O manipulador de erro fatal será chamado independente da configuração do 
-nível ``debug`` ou ``errorLevel``, mas o resultado será diferente com base no nível de ``debug``. 
-O comportamento padrão para erros fatais é mostrar uma página para o erro interno do servidor 
+Por padrão, os erros do PHP são exibidos quando ``debug`` é ``true`` e registrados quando o
+debug é ``false``. O manipulador de erro fatal será chamado independente da configuração do
+nível ``debug`` ou ``errorLevel``, mas o resultado será diferente com base no nível de ``debug``.
+O comportamento padrão para erros fatais é mostrar uma página para o erro interno do servidor
 (``debug`` desativado) ou uma página com a mensagem, arquivo e linha (``debug`` ativada).
 
 .. note::
@@ -36,7 +36,7 @@ O comportamento padrão para erros fatais é mostrar uma página para o erro int
 Alterando o tratamento de exceções
 ==================================
 
-O tratamento de exceções oferece várias maneiras de personalizar como as exceções são tratadas. Cada 
+O tratamento de exceções oferece várias maneiras de personalizar como as exceções são tratadas. Cada
 abordagem fornece diferentes quantidades de controle sobre o processo de tratamento de exceções.
 
 #. *Customize o template de error* Isso permite alterar os modelos de exibição renderizados como faria com qualquer outro modelo em seu aplicativo.
@@ -49,11 +49,11 @@ abordagem fornece diferentes quantidades de controle sobre o processo de tratame
 Customizando Templates de Erro
 ==============================
 
-O manipulador de erros padrão renderiza todas as exceções não capturadas que seu aplicativo gera com a 
+O manipulador de erros padrão renderiza todas as exceções não capturadas que seu aplicativo gera com a
 ajuda de ``Cake\Error\ExceptionRenderer`` e o ``ErrorController`` do seu aplicativo.
 
-As visualizações da página de erro estão localizadas em **src/Template/Error/**. Por padrão, 
-todos os erros 4xx usam o modelo **error400.ctp** e todos os erros 5xx usam o **error500.ctp**. 
+As visualizações da página de erro estão localizadas em **src/Template/Error/**. Por padrão,
+todos os erros 4xx usam o modelo **error400.ctp** e todos os erros 5xx usam o **error500.ctp**.
 Seus modelos de erro terão as seguintes variáveis disponíveis:
 
 * ``message`` A mensagem da exceção.
@@ -61,12 +61,12 @@ Seus modelos de erro terão as seguintes variáveis disponíveis:
 * ``url`` A URL requisitada.
 * ``error`` O objeto da exceção.
 
-No modo de depuração, se o erro estender ``Cake\Core\Exception\Exception``, os dados retornados 
+No modo de depuração, se o erro estender ``Cake\Core\Exception\Exception``, os dados retornados
 por ``getAttributes()`` serão expostos como variáveis de exibição também.
 
 .. note::
-    
-    Você precisará definir ``debug`` para false, para ver seus modelos **error404** e **error500**. 
+
+    Você precisará definir ``debug`` para false, para ver seus modelos **error404** e **error500**.
     No modo de depuração, você verá a página de erro de desenvolvimento do CakePHP.
 
 Personalizar o layout da página de erro
@@ -271,7 +271,7 @@ standard error page, you can override it::
 
         public function handleFatalError($code, $description, $file, $line)
         {
-            return 'A fatal error has happened';
+            echo 'A fatal error has happened';
         }
     }
 

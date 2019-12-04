@@ -118,7 +118,7 @@ la surcharger comme ceci::
 
         public function handleFatalError($code, $description, $file, $line)
         {
-            return 'Une erreur fatale est survenue';
+            echo 'Une erreur fatale est survenue';
         }
     }
 
