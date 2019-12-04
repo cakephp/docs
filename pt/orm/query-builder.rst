@@ -146,7 +146,7 @@ Obtendo uma Lista de Valores de uma Coluna
         echo $title;
     }
 
-You can also get a key-value list out of a query result::
+Você também pode obter uma lista de valores-chave de um resultado da consulta::
 
     $list = $articles->find('list');
 
@@ -154,65 +154,65 @@ You can also get a key-value list out of a query result::
         echo "$id : $title"
     }
 
-For more information on how to customize the fields used for populating the list
-refer to :ref:`table-find-list` section.
+Para obter mais informações sobre como personalizar os campos usados para preencher a lista, 
+consulte seção :ref:`table-find-list`.
 
-Queries Are Collection Objects
-------------------------------
+As Consultas são Objetos de Coleção
+-----------------------------------
 
-Once you get familiar with the Query object methods, it is strongly encouraged
-that you visit the :doc:`Collection </core-libraries/collections>` section to
-improve your skills in efficiently traversing the data. In short, it is
-important to remember that anything you can call on a Collection object, you
-can also do in a Query object::
+Depois de se familiarizar com os métodos do objeto Query, é altamente recomendável 
+que você visite a seção :doc:`Coleção </ core-libraries / collections>` para 
+melhorar suas habilidades em percorrer os dados com eficiência. Em resumo, é 
+importante lembrar que qualquer coisa que você possa chamar em um objeto Collection, 
+você também pode fazer em um objeto Query::
 
-    // Use the combine() method from the collections library
-    // This is equivalent to find('list')
+    // Use o método combine() da biblioteca de coleções, 
+    // isto é equivalente a find('list')
     $keyValueList = $articles->find()->combine('id', 'title');
 
-    // An advanced example
+    // Um exemplo avançado
     $results = $articles->find()
         ->where(['id >' => 1])
         ->order(['title' => 'DESC'])
-        ->map(function ($row) { // map() is a collection method, it executes the query
+        ->map(function ($row) { // map() é um método de coleção, ele executa a consulta
             $row->trimmedTitle = trim($row->title);
             return $row;
         })
-        ->combine('id', 'trimmedTitle') // combine() is another collection method
-        ->toArray(); // Also a collections library method
+        ->combine('id', 'trimmedTitle') // combine() é outro método de coleção
+        ->toArray(); // Também um método dA biblioteca de coleções
 
     foreach ($results as $id => $trimmedTitle) {
         echo "$id : $trimmedTitle";
     }
 
-Queries Are Lazily Evaluated
-----------------------------
+As consultas são Avaliadas Preguiçosamente
+------------------------------------------
 
-Query objects are lazily evaluated. This means a query is not executed until one
-of the following things occur:
+Objetos de consulta são avaliados preguiçosamente. Isso significa que uma consulta 
+não é executada até que ocorra uma das seguintes coisas:
 
-- The query is iterated with ``foreach()``.
-- The query's ``execute()`` method is called. This will return the underlying
-  statement object, and is to be used with insert/update/delete queries.
-- The query's ``first()`` method is called. This will return the first result in the set
-  built by ``SELECT`` (it adds ``LIMIT 1`` to the query).
-- The query's ``all()`` method is called. This will return the result set and
-  can only be used with ``SELECT`` statements.
-- The query's ``toList()`` or ``toArray()`` method is called.
+- A consulta é iterada com ``foreach()``.
+- O método ``execute()`` da consulta é chamado. Isso retornará o objeto subjacente
+   de instrução e deve ser usado com consultas de inserção/atualização/exclusão.
+- O método ``first()`` da consulta é chamado. Isso retornará o primeiro resultado no conjunto
+   construído por ``SELECT`` (ele adiciona `` LIMIT 1`` à consulta).
+- O método ``all()`` da consulta é chamado. Isso retornará o conjunto de resultados e
+   só pode ser usado com instruções ``SELECT``.
+- O método ``toList()`` ou ``toArray()`` da consulta é chamado.
 
-Until one of these conditions are met, the query can be modified without additional
-SQL being sent to the database. It also means that if a Query hasn't been
-evaluated, no SQL is ever sent to the database. Once executed, modifying and
-re-evaluating a query will result in additional SQL being run.
+Até que uma dessas condições seja atendida, a consulta pode ser modificada sem 
+que SQL adicional seja enviado ao banco de dados. Isso também significa que, se 
+uma consulta não tiver sido realizada, nenhum SQL é enviado ao banco de dados. 
+Uma vez executada, modificar e reavaliar uma consulta resultará na execução de SQL adicional.
 
-If you want to take a look at what SQL CakePHP is generating, you can turn
-database :ref:`query logging <database-query-logging>` on.
+Se você quiser dar uma olhada no que o SQL CakePHP está gerando, você pode ativar o 
+banco de dados :ref:`query logging <database-query-logging>`.
 
-Selecting Data
-==============
+Selecionando Dados
+==================
 
-CakePHP makes building ``SELECT`` queries simple. To limit the fields fetched,
-you can use the ``select()`` method::
+O CakePHP simplifica a construção de consultas ``SELECT``. Para limitar os campos 
+buscados, você pode usar o método ``select()``::
 
     $query = $articles->find();
     $query->select(['id', 'title', 'body']);
@@ -220,62 +220,60 @@ you can use the ``select()`` method::
         debug($row->title);
     }
 
-You can set aliases for fields by providing fields as an associative array::
+Você pode definir aliases para campos fornecendo campos como uma matriz associativa::
 
-    // Results in SELECT id AS pk, title AS aliased_title, body ...
+    // Resultados do SELECT id AS pk, title AS aliased_title, body ...
     $query = $articles->find();
     $query->select(['pk' => 'id', 'aliased_title' => 'title', 'body']);
 
-To select distinct fields, you can use the ``distinct()`` method::
+Para selecionar campos distintos, você pode usar o método ``distinct()``::
 
-    // Results in SELECT DISTINCT country FROM ...
+    // Resultados em SELECT DISTINCT country FROM ...
     $query = $articles->find();
     $query->select(['country'])
         ->distinct(['country']);
 
-To set some basic conditions you can use the ``where()`` method::
+Para definir algumas condições básicas, você pode usar o método ``where()``::
 
-    // Conditions are combined with AND
+    // As condições são combinadas com AND
     $query = $articles->find();
     $query->where(['title' => 'First Post', 'published' => true]);
 
-    // You can call where() multiple times
+    // Você pode chamar where() várias vezes
     $query = $articles->find();
     $query->where(['title' => 'First Post'])
         ->where(['published' => true]);
 
-You can also pass an anonymous function to the ``where()`` method. The passed
-anonymous function will receive an instance of
-``\Cake\Database\Expression\QueryExpression`` as its first argument, and
-``\Cake\ORM\Query`` as its second::
+Você também pode passar uma função anônima para o método ``where()``. 
+A função anônima transmitida receberá uma instância de ``\Cake\Database\Expression\QueryExpression`` 
+como seu primeiro argumento e ``\Cake\ORM\Query`` como seu segundo argumento::
 
     $query = $articles->find();
     $query->where(function (QueryExpression $exp, Query $q) {
         return $exp->eq('published', true);
     });
 
-See the :ref:`advanced-query-conditions` section to find out how to construct
-more complex ``WHERE`` conditions. To apply ordering, you can use the ``order``
-method::
+Veja a seção :ref:`advanced-query-conditions` para descobrir como construir 
+condições mais complexas com ``WHERE``. Para aplicar ordenamentos, você pode usar o método ``order``::
 
     $query = $articles->find()
         ->order(['title' => 'ASC', 'id' => 'ASC']);
 
-When calling ``order()`` multiple times on a query, multiple clauses will be appended.
-However, when using finders you may sometimes need to overwrite the ``ORDER BY``.
-Set the second parameter of ``order()`` (as well as ``orderAsc()`` or ``orderDesc()``) to
-``Query::OVERWRITE`` or to ``true``::
+Ao chamar ``order()`` várias vezes em uma consulta, várias cláusulas serão anexadas. 
+No entanto, ao usar finders, às vezes você pode sobrescrever o ``ORDER BY``. 
+Defina o segundo parâmetro de ``order()`` (assim como ``orderAsc()`` ou 
+``orderDesc()``) como ``Query::OVERWRITE`` ou como ``true``::
 
     $query = $articles->find()
         ->order(['title' => 'ASC']);
-    // Later, overwrite the ORDER BY clause instead of appending to it.
+    // Posteriormente, substitua a cláusula ORDER BY em vez de anexá-la.
     $query = $articles->find()
         ->order(['created' => 'DESC'], Query::OVERWRITE);
 
 .. versionadded:: 3.0.12
 
-    In addition to ``order``, the ``orderAsc`` and ``orderDesc`` methods can be
-    used when you need to sort on complex expressions::
+    Além de ``order``, os métodos ``orderAsc`` e `` orderDesc`` podem ser usados quando 
+    você precisa organizar expressões complexas::
 
         $query = $articles->find();
         $concat = $query->func()->concat([
@@ -284,113 +282,112 @@ Set the second parameter of ``order()`` (as well as ``orderAsc()`` or ``orderDes
         ]);
         $query->orderAsc($concat);
 
-To limit the number of rows or set the row offset you can use the ``limit()``
-and ``page()`` methods::
+Para limitar o número de linhas ou definir o deslocamento da linha, você 
+pode usar os métodos ``limit()`` e ``page()``::
 
-    // Fetch rows 50 to 100
+    // Busca linhas de 50 para 100
     $query = $articles->find()
         ->limit(50)
         ->page(2);
 
-As you can see from the examples above, all the methods that modify the query
-provide a fluent interface, allowing you to build a query through chained method
-calls.
+Como você pode ver nos exemplos acima, todos os métodos que modificam a consulta 
+fornecem uma interface fluente, permitindo que você crie uma consulta por meio de 
+chamadas de método em cadeia.
 
-Selecting Specific Fields
--------------------------
+Selecionando Campos Específicos
+-------------------------------
 
-By default a query will select all fields from a table, the exception is when you
-call the ``select()`` function yourself and pass certain fields::
+Por padrão, uma consulta seleciona todos os campos de uma tabela, a exceção é 
+quando você chama a função ``select()`` e passa determinados campos::
 
-    // Only select id and title from the articles table
+    // Selecione apenas ID e título da tabela de artigos
     $articles->find()->select(['id', 'title']);
 
-If you wish to still select all fields from a table after having called
-``select($fields)``, you can pass the table instance to ``select()`` for this
-purpose::
+Se você ainda deseja selecionar todos os campos de uma tabela depois de chamar 
+``select($fields)``, pode passar a instância da tabela para ``select()`` 
+para esse propósito::
 
-    // Only all fields from the articles table including
-    // a calculated slug field.
+    // Seleciona todos os campos da tabela de artigos, 
+    // incluindo um campo slug calculado.
     $query = $articlesTable->find();
     $query
         ->select(['slug' => $query->func()->concat(['title' => 'identifier', '-', 'id' => 'identifier'])])
         ->select($articlesTable); // Select all fields from articles
 
 .. versionadded:: 3.1
-    Passing a table object to select() was added in 3.1.
+    Passar um objeto de tabela para select () foi adicionado em 3.1.
 
-If you want to select all but a few fields on a table, you can use
-``selectAllExcept()``::
+Se você desejar selecionar todos os campos, exceto alguns, em uma tabela, pode usar ``selectAllExcept()``::
 
     $query = $articlesTable->find();
 
-    // Get all fields except the published field.
+    // Obtenha todos os campos, exceto o campo publicado.
     $query->selectAllExcept($articlesTable, ['published']);
 
-You can also pass an ``Association`` object when working with contained
-associations.
+Você também pode passar um objeto ``Association`` ao trabalhar com associações embutidas.
 
 .. versionadded:: 3.6.0
-    The ``selectAllExcept()`` method was added.
+    O método ``selectAllExcept()`` foi adicionado.
 
 .. _using-sql-functions:
 
-Using SQL Functions
--------------------
+Usando Funções SQL
+------------------
 
-CakePHP's ORM offers abstraction for some commonly used SQL functions. Using the
-abstraction allows the ORM to select the platform specific implementation of the
-function you want. For example, ``concat`` is implemented differently in MySQL,
-PostgreSQL and SQL Server. Using the abstraction allows your code to be
-portable::
+O ORM do CakePHP oferece abstração para algumas funções SQL comumente usadas. O 
+uso da abstração permite que o ORM selecione a implementação específica da 
+plataforma da função desejada. Por exemplo, ``concat`` é implementado de maneira 
+diferente no MySQL, PostgreSQL e SQL Server. O uso da abstração permite que seu 
+código seja portátil::
 
-    // Results in SELECT COUNT(*) count FROM ...
+    // Resultados em SELECT COUNT(*) count FROM...
     $query = $articles->find();
     $query->select(['count' => $query->func()->count('*')]);
 
-A number of commonly used functions can be created with the ``func()`` method:
+Várias funções comumente usadas podem ser criadas com o método ``func()``:
 
 ``rand()``
-    Generate a random value between 0 and 1 via SQL.
+    Gere um valor aleatório entre 0 e 1 via SQL.
 ``sum()``
-    Calculate a sum. `Assumes arguments are literal values.`
+    Calcular uma soma. `Assume que argumentos são valores literais.`
 ``avg()``
-    Calculate an average. `Assumes arguments are literal values.`
+    Calcule uma média. `Assume que argumentos são valores literais.`
 ``min()``
-    Calculate the min of a column. `Assumes arguments are literal values.`
+    Calcule o mínimo de uma coluna. `Assume que argumentos são valores literais.`
 ``max()``
-    Calculate the max of a column. `Assumes arguments are literal values.`
+    Calcule o máximo de uma coluna. `Assume que argumentos são valores literais.`
 ``count()``
-    Calculate the count. `Assumes arguments are literal values.`
+    Calcule a contagem. `Assume que argumentos são valores literais.`
 ``concat()``
-    Concatenate two values together. `Assumes arguments are bound parameters.`
+    Concatene dois valores juntos. `Assume que os argumentos são parâmetros vinculados.`
 ``coalesce()``
-    Coalesce values. `Assumes arguments are bound parameters.`
+    Agrupar valores. `Assume que os argumentos são parâmetros vinculados.`
 ``dateDiff()``
-    Get the difference between two dates/times. `Assumes arguments are bound parameters.`
+    Obtenha a diferença entre duas datas/horas. `Assume que os argumentos são parâmetros vinculados.`
 ``now()``
-    Defaults to returning date and time, but accepts 'time' or 'date' to return only
-    those values.
+    O padrão é retornar data e hora, mas aceita 'time' ou 'date' para retornar apenas 
+    esses valores.
 ``extract()``
-    Returns the specified date part from the SQL expression.
+    Retorna a parte da data especificada da expressão SQL.
 ``dateAdd()``
-    Add the time unit to the date expression.
+    Adicione a unidade de tempo à expressão de data.
 ``dayOfWeek()``
-    Returns a FunctionExpression representing a call to SQL WEEKDAY function.
+    Retorna uma FunctionExpression representando uma chamada para a função SQL WEEKDAY.
 
 .. versionadded:: 3.1
 
-    ``extract()``, ``dateAdd()`` and ``dayOfWeek()`` methods have been added.
+    Os métodos ``extract()``, ``dateAdd()`` e ``dayOfWeek()`` foram adicionados.
 
 .. versionadded:: 3.7
 
-    ``rand()`` was added.
+    ``rand()`` foi adicionado.
 
-Function Arguments
-^^^^^^^^^^^^^^^^^^
+Argumentos de Função
+^^^^^^^^^^^^^^^^^^^^
 
-SQL functions called through ``func()`` can accept SQL identifiers, literal values,
-bound parameters or other ``ExpressionInterface`` instances as arguments::
+Funções SQL chamadas através de ``func()`` podem aceitar identificadores 
+SQL, valores literais, parâmetros vinculados ou outras instâncias ``ExpressionInterface`` 
+como argumentos::
 
     $query = $articles->find()->innerJoinWith('Categories');
     $concat = $query->func()->concat([
@@ -405,12 +402,13 @@ bound parameters or other ``ExpressionInterface`` instances as arguments::
     ]);
     $query->select(['link_title' => $concat]);
 
-Both ``literal`` and ``identifier`` arguments allow you to reference other columns
-and SQL literals while ``identifier`` will be appropriately quoted if auto-quoting
-is enabled.  If not marked as literal or identifier, arguments will be bound
-parameters allowing you to safely pass user data to the function.
+Os argumentos ``literal`` e ``identifier`` permitem que você faça referência a outras 
+colunas e literais SQL enquanto ``identifier`` será adequadamente citado se a citação 
+automática estiver ativada. Se não marcado como literal ou identificador, os argumentos 
+serão parâmetros vinculados, permitindo que você passe com segurança os dados do usuário 
+para a função.
 
-The above example generates something like this in MYSQL.
+O exemplo acima gera algo parecido com isto no MYSQL.
 
 .. code-block:: mysql
 
@@ -422,16 +420,17 @@ The above example generates something like this in MYSQL.
         (DATEDIFF(NOW(), Articles.created))
     ) FROM articles;
 
-The ``:c0`` argument will have ``' - CAT:'`` text bound when the query is
-executed. The ``dateDiff`` expression was translated to the appropriate SQL.
+O argumento ``:c0`` terá o texto ``' - CAT:'`` quando a consulta for 
+executada. A expressão ``dateDiff`` foi traduzida para o SQL apropriado.
 
-Custom Functions
-^^^^^^^^^^^^^^^^
+Funções Customizadas
+^^^^^^^^^^^^^^^^^^^^
 
-If ``func()`` does not already wrap the SQL function you need, you can call
-it directly through ``func()`` and still safely pass arguments and user data
-as described. Make sure you pass the appropriate argument type for custom
-functions or they will be treated as bound parameters::
+Se ``func()`` ainda não envolver a função SQL que você precisa, você poderá 
+chamá-la diretamente através de ``func()`` e ainda assim passar com segurança 
+argumentos e dados do usuário, conforme descrito. Certifique-se de passar o tipo 
+de argumento apropriado para funções personalizadas ou elas serão tratadas como 
+parâmetros associados::
 
     $query = $articles->find();
     $year = $query->func()->year([
@@ -446,7 +445,7 @@ functions or they will be treated as bound parameters::
         'timeCreated' => $time
     ]);
 
-These custom function would generate something like this in MYSQL:
+Essa função personalizada geraria algo parecido com isto no MYSQL:
 
 .. code-block:: mysql
 
@@ -455,10 +454,10 @@ These custom function would generate something like this in MYSQL:
     FROM articles;
 
 .. note::
-    Use ``func()`` to pass untrusted user data to any SQL function.
+    Use ``func()`` para passar dados não confiáveis do usuário para qualquer função SQL.
 
-Aggregates - Group and Having
------------------------------
+Agregadores - Group e Having
+----------------------------
 
 When using aggregate functions like ``count`` and ``sum`` you may want to use
 ``group by`` and ``having`` clauses::
