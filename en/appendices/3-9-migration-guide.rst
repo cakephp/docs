@@ -67,6 +67,8 @@ Utility
 -------
 
 * ``Hash::sort()`` now accepts the ``SORT_ASC`` and ``SORT_DESC`` constants in the direction parameter.
+* ``Text::uuid`` now uses ``random_int()`` with PHP 5.6 insted of ``mt_rand()``.
+  This adds a dependency on paragonie/random_compat which implements it for PHP 5.6.
 
 Validation
 ----------
