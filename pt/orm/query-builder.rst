@@ -17,7 +17,7 @@ O Objeto Query
 ==============
 
 A maneira mais fácil de criar um objeto ``Consulta`` é usar ``find()`` 
-de um objeto ``Tabela``. Este método retornará uma consulta incompleta pronta 
+de um objeto ``Table``. Este método retornará uma consulta incompleta pronta 
 para ser modificada. Também é possível usar o objeto de conexão de uma tabela 
 para acessar o construtor Query de nível inferior que não inclui recursos ORM, 
 se necessário. Consulte a seção :ref:`database-queries` para obter mais informações::
@@ -161,7 +161,7 @@ As Consultas são Objetos de Coleção
 -----------------------------------
 
 Depois de se familiarizar com os métodos do objeto Query, é altamente recomendável 
-que você visite a seção :doc:`Coleção </ core-libraries / collections>` para 
+que você visite a seção :doc:`Coleção </core-libraries/collections>` para 
 melhorar suas habilidades em percorrer os dados com eficiência. Em resumo, é 
 importante lembrar que qualquer coisa que você possa chamar em um objeto Collection, 
 você também pode fazer em um objeto Query::
@@ -185,7 +185,7 @@ você também pode fazer em um objeto Query::
         echo "$id : $trimmedTitle";
     }
 
-As consultas são Avaliadas Preguiçosamente
+As Consultas são Avaliadas Preguiçosamente
 ------------------------------------------
 
 Objetos de consulta são avaliados preguiçosamente. Isso significa que uma consulta 
