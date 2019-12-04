@@ -239,6 +239,9 @@ Mailer
 ORM
 ---
 
+* ``Table::newEntity()`` now requires an array as input and enforces validation to prevent
+  accidental saves without validation being triggered. This means you must use
+  ``Table::newEmptyEntity()`` to create entities without input.
 * Using condition like ``['name' => null]`` for ``Query::where()`` will now raise an exception.
   In 3.x it would generate condition like ``name = NULL`` in SQL which will
   always matches 0 rows, thus returning incorrect results. When comparing with ``null``
@@ -441,9 +444,7 @@ ORM
   entities at once including callbacks. The entities are removed transaction safe.
 * ``Table::newEmptyEntity()`` has been added to create a new and empty entity
   object.  This does not trigger any field validation. The entity can be
-  persisted without validation error as an empty record. ``Table::newEntity()``
-  now requires an array as input and enforces validation to prevent accidental
-  saves without validation being triggered.
+  persisted without validation error as an empty record.
 * ``Cake\ORM\RulesChecker::isLinkedTo()`` and ``isNotLinkedTo()`` were added.
   These new application rules allow you to ensure an association has or doesn't
   have related records.
