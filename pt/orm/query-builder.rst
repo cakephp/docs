@@ -459,8 +459,8 @@ Essa função personalizada geraria algo parecido com isto no MYSQL:
 Agregadores - Group e Having
 ----------------------------
 
-When using aggregate functions like ``count`` and ``sum`` you may want to use
-``group by`` and ``having`` clauses::
+Ao usar funções agregadas como ``count`` e ``sum``, você pode usar as cláusulas 
+``group by`` e ``having``::
 
     $query = $articles->find();
     $query->select([
@@ -470,15 +470,16 @@ When using aggregate functions like ``count`` and ``sum`` you may want to use
     ->group('published_date')
     ->having(['count >' => 3]);
 
-Case statements
----------------
+Declarações de Caso
+-------------------
 
-The ORM also offers the SQL ``case`` expression. The ``case`` expression allows
-for implementing ``if ... then ... else`` logic inside your SQL. This can be useful
-for reporting on data where you need to conditionally sum or count data, or where you
-need to specific data based on a condition.
+O ORM também oferece a expressão SQL ``case``. A expressão ``case`` permite 
+implementar a lógica ``if... then... else`` dentro do seu SQL. Isso pode ser útil
+para gerar relatórios sobre dados nos quais você precisa somar ou contar condicionalmente 
+ou onde precisa de dados específicos com base em uma condição.
 
-If we wished to know how many published articles are in our database, we could use the following SQL:
+Se desejassemos saber quantos artigos publicados estão em nosso banco de dados, poderíamos 
+usar o seguinte SQL:
 
 .. code-block:: sql
 
@@ -487,7 +488,7 @@ If we wished to know how many published articles are in our database, we could u
     COUNT(CASE WHEN published = 'N' THEN 1 END) AS number_unpublished
     FROM articles
 
-To do this with the query builder, we'd use the following code::
+Para fazer isso com o construtor de consultas, usaríamos o seguinte código::
 
     $query = $articles->find();
     $publishedCase = $query->newExpr()
@@ -508,11 +509,11 @@ To do this with the query builder, we'd use the following code::
         'number_unpublished' => $query->func()->count($unpublishedCase)
     ]);
 
-The ``addCase`` function can also chain together multiple statements to create
-``if .. then .. [elseif .. then .. ] [ .. else ]`` logic inside your SQL.
+A função ``addCase`` também pode encadear várias instruções para criar 
+``if .. then .. [elseif .. then ..] [.. else] `` lógica dentro de seu SQL
 
-If we wanted to classify cities into SMALL, MEDIUM, or LARGE based on population
-size, we could do the following::
+Se quisermos classificar as cidades em SMALL, MEDIUM ou LARGE, com base no 
+tamanho da população, poderíamos fazer o seguinte::
 
     $query = $cities->find()
         ->where(function (QueryExpression $exp, Query $q) {
@@ -522,8 +523,8 @@ size, we could do the following::
                     $q->newExpr()->between('population', 100000, 999000),
                     $q->newExpr()->gte('population', 999001),
                 ],
-                ['SMALL',  'MEDIUM', 'LARGE'], # values matching conditions
-                ['string', 'string', 'string'] # type of each value
+                ['SMALL',  'MEDIUM', 'LARGE'], # valores que correspondem às condições
+                ['string', 'string', 'string'] # tipo de cada valor
             );
         });
     # WHERE CASE
@@ -532,8 +533,8 @@ size, we could do the following::
     #   WHEN population >= 999001 THEN 'LARGE'
     #   END
 
-Any time there are fewer case conditions than values, ``addCase`` will
-automatically produce an ``if .. then .. else`` statement::
+Sempre que houver menos condições de casos que valores, ``addCase`` produzirá 
+automaticamente uma declaração `` if .. then .. else``::
 
     $query = $cities->find()
         ->where(function (QueryExpression $exp, Query $q) {
@@ -548,19 +549,20 @@ automatically produce an ``if .. then .. else`` statement::
     # WHERE CASE
     #   WHEN population = 0 THEN 'DESERTED' ELSE 'INHABITED' END
 
-Getting Arrays Instead of Entities
-----------------------------------
+Obtendo Matrizes em Vez de Entidades
+------------------------------------
 
-While ORMs and object result sets are powerful, creating entities is sometimes
-unnecessary. For example, when accessing aggregated data, building an Entity may
-not make sense. The process of converting the database results to entities is
-called hydration. If you wish to disable this process you can do this::
+Embora os ORMs e os conjuntos de resultados de objetos sejam poderosos, às vezes 
+a criação de entidades é desnecessária. Por exemplo, ao acessar dados agregados, 
+a construção de uma Entidade pode não fazer sentido. O processo de conversão dos 
+resultados do banco de dados em entidades é chamado de hidratação. Se você deseja 
+desativar esse processo, você pode fazer isso::
 
     $query = $articles->find();
-    $query->enableHydration(false); // Results as arrays instead of entities
-    $result = $query->toList(); // Execute the query and return the array
+    $query->enableHydration(false); // Resultados como matrizes em vez de entidades
+    $result = $query->toList(); // Execute a consulta e retorne a matriz
 
-After executing those lines, your result should look similar to this::
+Depois de executar essas linhas, seu resultado deve ser semelhante a este::
 
     [
         ['id' => 1, 'title' => 'First Article', 'body' => 'Article 1 body' ...],
@@ -570,17 +572,18 @@ After executing those lines, your result should look similar to this::
 
 .. _format-results:
 
-Adding Calculated Fields
-------------------------
+Adicionando Campos Calculados
+-----------------------------
 
-After your queries, you may need to do some post-processing. If you need to add
-a few calculated fields or derived data, you can use the ``formatResults()``
-method. This is a lightweight way to map over the result sets. If you need more
-control over the process, or want to reduce results you should use
-the :ref:`Map/Reduce <map-reduce>` feature instead. If you were querying a list
-of people, you could calculate their age with a result formatter::
+Após suas consultas, talvez seja necessário fazer um pós-processamento. Se 
+você precisar adicionar alguns campos calculados ou dados derivados, poderá 
+usar o método ``formatResults()``. Essa é uma maneira leve de mapear os 
+conjuntos de resultados. Se você precisar de mais controle sobre o processo, 
+ou desejar reduzir os resultados, use o recurso :ref:`Map/Reduce<map-reduce>`. 
+Se você estava consultando uma lista de pessoas, poderia calcular a idade delas com 
+um formatador de resultados::
 
-    // Assuming we have built the fields, conditions and containments.
+    // Supondo que construímos os campos, condições e contenções.
     $query->formatResults(function (\Cake\Collection\CollectionInterface $results) {
         return $results->map(function ($row) {
             $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
@@ -588,19 +591,19 @@ of people, you could calculate their age with a result formatter::
         });
     });
 
-As you can see in the example above, formatting callbacks will get a
-``ResultSetDecorator`` as their first argument. The second argument will be
-the Query instance the formatter was attached to. The ``$results`` argument can
-be traversed and modified as necessary.
+Como você pode ver no exemplo acima, a formatação de retornos de chamada receberá 
+um ``ResultSetDecorator`` como seu primeiro argumento. O segundo argumento será a 
+instância de consulta à qual o formatador foi anexado. O argumento ``$results`` 
+pode ser percorrido e modificado conforme necessário.
 
-Result formatters are required to return an iterator object, which will be used
-as the return value for the query. Formatter functions are applied after all the
-Map/Reduce routines have been executed. Result formatters can be applied from
-within contained associations as well. CakePHP will ensure that your formatters
-are properly scoped. For example, doing the following would work as you may
-expect::
+Os formatadores de resultados são necessários para retornar um objeto iterador, que 
+será usado como o valor de retorno para a consulta. As funções do formatador são 
+aplicadas após a execução de todas as rotinas de Mapa/Redução. Os formatadores de 
+resultados também podem ser aplicados a partir de associações contidas. O CakePHP 
+garantirá que seus formatadores tenham um escopo adequado. Por exemplo, fazer o seguinte 
+funcionaria conforme o esperado::
 
-    // In a method in the Articles table
+    // Em um método na tabela Artigos
     $query->contain(['Authors' => function ($q) {
         return $q->formatResults(function (\Cake\Collection\CollectionInterface $authors) {
             return $authors->map(function ($author) {
@@ -610,25 +613,25 @@ expect::
         });
     }]);
 
-    // Get results
+    // Obtem os resultados
     $results = $query->all();
 
-    // Outputs 29
+    // Saída 29
     echo $results->first()->author->age;
 
-As seen above, the formatters attached to associated query builders are scoped
-to operate only on the data in the association. CakePHP will ensure that
-computed values are inserted into the correct entity.
+Como visto acima, os formatadores anexados aos criadores de consultas associados têm 
+o escopo definido para operar apenas nos dados da associação. O CakePHP garantirá que 
+os valores computados sejam inseridos na entidade correta.
 
 .. _advanced-query-conditions:
 
-Advanced Conditions
+Condições Avançadas
 ===================
 
-The query builder makes it simple to build complex ``where`` clauses.
-Grouped conditions can be expressed by providing combining ``where()`` and
-expression objects. For simple queries, you can build conditions using
-an array of conditions::
+O construtor de consultas simplifica a criação de cláusulas complexas ``where``. 
+As condições agrupadas podem ser expressas fornecendo objetos ``where()`` e 
+expressões. Para consultas simples, você pode criar condições usando uma matriz 
+de condições::
 
     $query = $articles->find()
         ->where([
@@ -636,16 +639,17 @@ an array of conditions::
             'OR' => [['view_count' => 2], ['view_count' => 3]],
         ]);
 
-The above would generate SQL like::
+O exemplo acima geraria SQL como::
 
     SELECT * FROM articles WHERE author_id = 3 AND (view_count = 2 OR view_count = 3)
 
-If you'd prefer to avoid deeply nested arrays, you can use the callback form of
-``where()`` to build your queries. The callback form allows you to use the
-expression builder to build more complex conditions without arrays. For example::
+Se você preferir evitar matrizes profundamente aninhadas, use a chamada de retorno
+``where()`` para criar suas consultas. O formulário de retorno de chamada 
+permite que você use o construtor de expressões para criar condições mais complexas 
+sem matrizes. Por exemplo::
 
     $query = $articles->find()->where(function ($exp, $query) {
-        // Use add() to add multiple conditions for the same field.
+        // Use add() para adicionar várias condições para o mesmo campo.
         $author = $query->newExpr()->or_(['author_id' => 3])->add(['author_id' => 2]);
         $published = $query->newExpr()->and_(['published' => true, 'view_count' => 10]);
 
@@ -655,7 +659,7 @@ expression builder to build more complex conditions without arrays. For example:
         ]);
     });
 
-The above generates SQL similar to:
+O exemplo acima irá gerar SQL semelhante a:
 
 .. code-block:: sql
 
@@ -670,17 +674,16 @@ The above generates SQL similar to:
         OR promoted = 1
     )
 
-The expression object that is passed into ``where()`` functions has two kinds of
-methods. The first type of methods are **combinators**. The ``and_()`` and
-``or_()`` methods create new expression objects that change **how** conditions
-are combined. The second type of methods are **conditions**. Conditions are
-added into an expression where they are combined with the current combinator.
+O objeto de expressão que é passado para as funções ``where()`` possui dois tipos 
+de métodos. O primeiro tipo de método são **combinadores**. Os métodos ``and_()`` e ``or_()`` 
+criam novos objetos de expressão que mudam **como** as condições são combinadas. O 
+segundo tipo de métodos são **condições**. As condições são adicionadas a uma expressão 
+em que são alinhadas com o combinador atual.
 
-For example, calling ``$exp->and_(...)`` will create a new ``Expression`` object
-that combines all conditions it contains with ``AND``. While ``$exp->or_()``
-will create a new ``Expression`` object that combines all conditions added to it
-with ``OR``. An example of adding conditions with an ``Expression`` object would
-be::
+Por exemplo, chamar ``$exp->and_(...)`` criará um novo objeto ``Expression`` que 
+combina todas as condições que ele contém com ``AND``. Enquanto ``$exp->or_()`` criará 
+um novo objeto ``Expression`` que combina todas as condições adicionadas a ele
+com ``OR``. Um exemplo de adição de condições com um objeto ``Expression`` seria::
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
@@ -691,9 +694,9 @@ be::
                 ->gt('view_count', 10);
         });
 
-Since we started off using ``where()``, we don't need to call ``and_()``, as
-that happens implicitly. The above shows a few new condition
-methods being combined with ``AND``. The resulting SQL would look like:
+Desde que começamos a usar ``where()``, não precisamos chamar ``and_()``, 
+pois isso acontece implicitamente. A descrição acima mostra alguns métodos 
+de condição novos combinados com ``AND``. O SQL resultante seria semelhante:
 
 .. code-block:: sql
 
@@ -706,13 +709,11 @@ methods being combined with ``AND``. The resulting SQL would look like:
     AND view_count > 10)
 
 .. deprecated:: 3.5.0
-    As of 3.5.0 the ``orWhere()`` method is deprecated. This method creates
-    hard to predict SQL based on the current query state.
-    Use ``where()`` instead as it has more predictable and easier
-    to understand behavior.
+    A partir da versão 3.5.0, o método ``orWhere()`` está obsoleto. 
+    Este método é difícil prever o SQL com base no estado atual da consulta. 
+    Use ``where()`` para ter um comportamento mais previsível e mais fácil de entender
 
-However, if we wanted to use both ``AND`` & ``OR`` conditions we could do the
-following::
+No entanto, se quisermos usar as condições ``AND`` e ``OR``, poderíamos fazer o seguinte::
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
@@ -724,7 +725,7 @@ following::
                 ->gte('view_count', 10);
         });
 
-Which would generate the SQL similar to:
+O que geraria o SQL semelhante a:
 
 .. code-block:: sql
 
@@ -735,8 +736,8 @@ Which would generate the SQL similar to:
     AND published = 1
     AND view_count >= 10)
 
-The ``or_()`` and ``and_()`` methods also allow you to use functions as their
-parameters. This is often easier to read than method chaining::
+Os métodos ``or_()`` e ``and_()`` também permitem usar funções como parâmetros. 
+Muitas vezes, é mais fácil ler do que encadear métodos::
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
@@ -749,7 +750,7 @@ parameters. This is often easier to read than method chaining::
                 ->lte('view_count', 10);
         });
 
-You can negate sub-expressions using ``not()``::
+Você pode negar sub-expressões usando ``not()``::
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
@@ -760,7 +761,7 @@ You can negate sub-expressions using ``not()``::
                 ->lte('view_count', 10);
         });
 
-Which will generate the following SQL looking like:
+O que gerará o seguinte SQL:
 
 .. code-block:: sql
 
@@ -770,7 +771,7 @@ Which will generate the following SQL looking like:
     NOT (author_id = 2 OR author_id = 5)
     AND view_count <= 10)
 
-It is also possible to build expressions using SQL functions::
+Também é possível construir expressões usando as funções SQL::
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp, Query $q) {
@@ -782,7 +783,7 @@ It is also possible to build expressions using SQL functions::
                 ->eq('published', true);
         });
 
-Which will generate the following SQL looking like:
+O que gerará o seguinte SQL:
 
 .. code-block:: sql
 
@@ -793,10 +794,9 @@ Which will generate the following SQL looking like:
     AND published = 1
     )
 
-When using the expression objects you can use the following methods to create
-conditions:
+Ao usar os objetos de expressão, você pode usar os seguintes métodos para criar condições:
 
-- ``eq()`` Creates an equality condition::
+- ``eq()`` Cria uma condição de igualdade::
 
     $query = $cities->find()
         ->where(function (QueryExpression $exp, Query $q) {
@@ -804,7 +804,7 @@ conditions:
         });
     # WHERE population = 10000
 
-- ``notEq()`` Creates an inequality condition::
+- ``notEq()`` Cria uma condição de desigualdade::
 
     $query = $cities->find()
         ->where(function (QueryExpression $exp, Query $q) {
@@ -812,7 +812,7 @@ conditions:
         });
     # WHERE population != 10000
 
-- ``like()`` Creates a condition using the ``LIKE`` operator::
+- ``like()`` Cria uma condição usando o operador ``LIKE``::
 
     $query = $cities->find()
         ->where(function (QueryExpression $exp, Query $q) {
@@ -820,7 +820,7 @@ conditions:
         });
     # WHERE name LIKE "%A%"
 
-- ``notLike()`` Creates a negated ``LIKE`` condition::
+- ``notLike()`` Cria uma condição ``LIKE`` negada::
 
     $query = $cities->find()
         ->where(function (QueryExpression $exp, Query $q) {
@@ -828,7 +828,7 @@ conditions:
         });
     # WHERE name NOT LIKE "%A%"
 
-- ``in()`` Create a condition using ``IN``::
+- ``in()`` Cria uma condição usando ``IN``::
 
     $query = $cities->find()
         ->where(function (QueryExpression $exp, Query $q) {
@@ -836,7 +836,7 @@ conditions:
         });
     # WHERE country_id IN ('AFG', 'USA', 'EST')
 
-- ``notIn()`` Create a negated condition using ``IN``::
+- ``notIn()`` Crie uma condição negada usando ``IN``::
 
     $query = $cities->find()
         ->where(function (QueryExpression $exp, Query $q) {
@@ -844,7 +844,7 @@ conditions:
         });
     # WHERE country_id NOT IN ('AFG', 'USA', 'EST')
 
-- ``gt()`` Create a ``>`` condition::
+- ``gt()`` Cria uma condição ``>``::
 
     $query = $cities->find()
         ->where(function (QueryExpression $exp, Query $q) {
@@ -852,7 +852,7 @@ conditions:
         });
     # WHERE population > 10000
 
-- ``gte()`` Create a ``>=`` condition::
+- ``gte()`` Cria uma condição ``>=``::
 
     $query = $cities->find()
         ->where(function (QueryExpression $exp, Query $q) {
@@ -860,7 +860,7 @@ conditions:
         });
     # WHERE population >= 10000
 
-- ``lt()`` Create a ``<`` condition::
+- ``lt()`` Cria uma condição ``<``::
 
     $query = $cities->find()
         ->where(function (QueryExpression $exp, Query $q) {
@@ -868,7 +868,7 @@ conditions:
         });
     # WHERE population < 10000
 
-- ``lte()`` Create a ``<=`` condition::
+- ``lte()`` Cria uma condição ``<=``::
 
     $query = $cities->find()
         ->where(function (QueryExpression $exp, Query $q) {
@@ -876,7 +876,7 @@ conditions:
         });
     # WHERE population <= 10000
 
-- ``isNull()`` Create an ``IS NULL`` condition::
+- ``isNull()`` Cria uma condição ``IS NULL``::
 
     $query = $cities->find()
         ->where(function (QueryExpression $exp, Query $q) {
@@ -884,7 +884,7 @@ conditions:
         });
     # WHERE (population) IS NULL
 
-- ``isNotNull()`` Create a negated ``IS NULL`` condition::
+- ``isNotNull()`` Cria uma condição negada ``IS NULL``::
 
     $query = $cities->find()
         ->where(function (QueryExpression $exp, Query $q) {
@@ -892,7 +892,7 @@ conditions:
         });
     # WHERE (population) IS NOT NULL
 
-- ``between()`` Create a ``BETWEEN`` condition::
+- ``between()`` Cria uma condição ``BETWEEN``::
 
     $query = $cities->find()
         ->where(function (QueryExpression $exp, Query $q) {
@@ -900,7 +900,7 @@ conditions:
         });
     # WHERE population BETWEEN 999 AND 5000000,
 
-- ``exists()`` Create a condition using ``EXISTS``::
+- ``exists()`` Cria uma condição usando ``EXISTS``::
 
     $subquery = $cities->find()
         ->select(['id'])
@@ -915,7 +915,7 @@ conditions:
         });
     # WHERE EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
 
-- ``notExists()`` Create a negated condition using ``EXISTS``::
+- ``notExists()`` Cria uma condição negada usando ``EXISTS``::
 
     $subquery = $cities->find()
         ->select(['id'])
@@ -930,24 +930,24 @@ conditions:
         });
     # WHERE NOT EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
 
-In situations when you can't get, or don't want to use the builder methods to
-create the conditions you want you can also use snippets of SQL in where
-clauses::
+Em situações em que você não pode obter ou não deseja usar os métodos do 
+construtor para criar as condições desejadas, também pode usar trechos de 
+SQL nas cláusulas where::
 
-    // Compare two fields to each other
+    // Compare dois campos entre si
     $query->where(['Categories.parent_id != Parents.id']);
 
 .. warning::
 
-    The field names used in expressions, and SQL snippets should **never**
-    contain untrusted content.  See the :ref:`using-sql-functions` section for
-    how to safely include unsafe data into function calls.
+    Os nomes dos campos usados nas expressões e os snippets SQL nunca **devem** 
+    conter conteúdo não confiável. Veja a seção :ref:`using-sql-functions` para 
+    saber como incluir com segurança dados inseguros nas chamadas de função.
 
-Using Identifiers in Expressions
---------------------------------
+Usando Identificadores em Expressões
+------------------------------------
 
-When you need to reference a column or SQL identifier in your queries you can
-use the ``identifier()`` method::
+Quando você precisar fazer referência a uma coluna ou identificador SQL em 
+suas consultas, poderá usar o método ``identifier()``::
 
     $query = $countries->find();
     $query->select([
@@ -959,102 +959,101 @@ use the ``identifier()`` method::
 
 .. warning::
 
-    To prevent SQL injections, Identifier expressions should never have
-    untrusted data passed into them.
+    Para evitar injeções de SQL, as expressões Identifier nunca devem 
+    ter dados não confiáveis passados para elas.
 
 .. versionadded:: 3.6.0
 
-    ``Query::identifier()`` was added in 3.6.0
+    ``Query::identifier()`` foi adicionado em 3.6.0
 
-Automatically Creating IN Clauses
----------------------------------
+Criando Cláusulas IN Automaticamente
+------------------------------------
 
-When building queries using the ORM, you will generally not have to indicate the
-data types of the columns you are interacting with, as CakePHP can infer the
-types based on the schema data. If in your queries you'd like CakePHP to
-automatically convert equality to ``IN`` comparisons, you'll need to indicate
-the column data type::
+Ao criar consultas usando o ORM, geralmente você não precisará indicar os tipos 
+de dados das colunas com as quais está interagindo, pois o CakePHP pode inferir 
+os tipos com base nos dados do esquema. Se em suas consultas você deseja que o 
+CakePHP converta automaticamente a igualdade em comparações ``IN``, será necessário 
+indicar o tipo de dados da coluna::
 
     $query = $articles->find()
         ->where(['id' => $ids], ['id' => 'integer[]']);
 
-    // Or include IN to automatically cast to an array.
+    // Ou inclua IN para converter automaticamente em uma matriz.
     $query = $articles->find()
         ->where(['id IN' => $ids]);
 
-The above will automatically create ``id IN (...)`` instead of ``id = ?``. This
-can be useful when you do not know whether you will get a scalar or array of
-parameters. The ``[]`` suffix on any data type name indicates to the query
-builder that you want the data handled as an array. If the data is not an array,
-it will first be cast to an array. After that, each value in the array will
-be cast using the :ref:`type system <database-data-types>`. This works with
-complex types as well. For example, you could take a list of DateTime objects
-using::
+O exemplo acima criará automaticamente ``id IN (...)`` em vez de ``id = ?``. 
+Isso pode ser útil quando você não sabe se receberá um valor escalar ou matriz de 
+parâmetros. O sufixo ``[]`` em qualquer nome de tipo de dados indica para 
+o construtor de consultas que você deseja que os dados sejam tratados como 
+uma matriz. Se os dados não forem uma matriz, eles serão convertidos em uma 
+matriz. Depois disso, cada valor na matriz será convertido usando o :ref:`type system <database-data-types>`. 
+Isso funciona com tipos complexos também. Por exemplo, você pode pegar uma 
+lista de objetos DateTime usando::
 
     $query = $articles->find()
         ->where(['post_date' => $dates], ['post_date' => 'date[]']);
 
-Automatic IS NULL Creation
---------------------------
+Criação Automática de IS NULL
+-----------------------------
 
-When a condition value is expected to be ``null`` or any other value, you can
-use the ``IS`` operator to automatically create the correct expression::
+Quando se espera que um valor de condição seja ``null`` ou qualquer outro valor, 
+você pode usar o operador ``IS`` para criar automaticamente a expressão correta::
 
     $query = $categories->find()
         ->where(['parent_id IS' => $parentId]);
 
-The above will create ``parent_id` = :c1`` or ``parent_id IS NULL`` depending on
-the type of ``$parentId``
+O exemplo acima criará ``parent_id` =: c1`` ou ``parent_id IS NULL``, dependendo do 
+tipo de ``$parentId``
 
-Automatic IS NOT NULL Creation
-------------------------------
+Criação Automática de IS NOT NULL
+---------------------------------
 
-When a condition value is expected not to be ``null`` or any other value, you
-can use the ``IS NOT`` operator to automatically create the correct expression::
+Quando se espera que um valor de condição não seja ``null`` ou qualquer outro valor, 
+você pode usar o operador ``IS NOT`` para criar automaticamente a expressão correta::
 
     $query = $categories->find()
         ->where(['parent_id IS NOT' => $parentId]);
 
-The above will create ``parent_id` != :c1`` or ``parent_id IS NOT NULL``
-depending on the type of ``$parentId``
+O exemplo acima criará ``parent_id` != :c1`` ou ``parent_id IS NOT NULL``, 
+dependendo do tipo de ``$parentId``
 
+Expressões Nativas
+------------------
 
-Raw Expressions
----------------
-
-When you cannot construct the SQL you need using the query builder, you can use
-expression objects to add snippets of SQL to your queries::
+Quando você não pode construir o SQL necessário usando o construtor de consultas, 
+pode usar objetos de expressão para adicionar trechos de SQL às suas consultas::
 
     $query = $articles->find();
     $expr = $query->newExpr()->add('1 + 1');
     $query->select(['two' => $expr]);
 
-``Expression`` objects can be used with any query builder methods like
-``where()``, ``limit()``, ``group()``, ``select()`` and many other methods.
+``Expression`` objetos podem ser usados com qualquer método do construtor de consultas, como
+``where()``, ``limit()``, ``group()``, ``select()`` e muitos outros métodos.
 
 .. warning::
 
-    Using expression objects leaves you vulnerable to SQL injection. You should
-    never use untrusted data into expressions.
+    O uso de objetos de expressão deixa você vulnerável à injeção de SQL. Você nunca 
+    deve usar dados não confiáveis em expressões.
 
-Getting Results
-===============
+Obtendo Resultados
+==================
 
-Once you've made your query, you'll want to retrieve rows from it. There are
-a few ways of doing this::
+Depois de fazer sua consulta, você precisará recuperar linhas dela. Existem algumas 
+maneiras de fazer isso::
 
-    // Iterate the query
+    // Iterar a consulta
     foreach ($query as $row) {
-        // Do stuff.
+        // Fazer algumas coisas.
     }
 
-    // Get the results
+    // Obtêm os resultados
     $results = $query->all();
 
-You can use :doc:`any of the collection </core-libraries/collections>` methods
-on your query objects to pre-process or transform the results::
+Você pode usar :doc:`qualquer um dos métodos de coleção </core-libraries/collections>` 
+nos objetos de consulta para pré-processar ou transformar os resultados::
 
-    // Use one of the collection methods.
+    // Use um dos métodos de coleção.
     $ids = $query->map(function ($row) {
         return $row->id;
     });
@@ -1063,38 +1062,37 @@ on your query objects to pre-process or transform the results::
         return $max->age;
     });
 
-You can use ``first`` or ``firstOrFail`` to retrieve a single record. These
-methods will alter the query adding a ``LIMIT 1`` clause::
+Você pode usar ``first`` ou ``firstOrFail`` para recuperar um único 
+registro. Esses métodos alterarão a consulta adicionando uma cláusula ``LIMIT 1``::
 
-    // Get just the first row
+    // Obtenha apenas a primeira linha
     $row = $query->first();
 
-    // Get the first row or an exception.
+    // Obtenha a primeira linha ou uma exceção.
     $row = $query->firstOrFail();
 
 .. _query-count:
 
-Returning the Total Count of Records
-------------------------------------
+Retornando a Contagem Total de Registros
+----------------------------------------
 
-Using a single query object, it is possible to obtain the total number of rows
-found for a set of conditions::
+Usando um único objeto de consulta, é possível obter o número total de linhas 
+encontradas para um conjunto de condições::
 
     $total = $articles->find()->where(['is_active' => true])->count();
 
-The ``count()`` method will ignore the ``limit``, ``offset`` and ``page``
-clauses, thus the following will return the same result::
+O método ``count()`` ignorará as cláusulas ``limit``, ``offset`` e ``page``, 
+portanto, o seguinte retornará o mesmo resultado::
 
     $total = $articles->find()->where(['is_active' => true])->limit(10)->count();
 
-This is useful when you need to know the total result set size in advance,
-without having to construct another ``Query`` object. Likewise, all result
-formatting and map-reduce routines are ignored when using the ``count()``
-method.
+Isso é útil quando você precisa conhecer o tamanho total do conjunto de resultados 
+com antecedência, sem precisar construir outro objeto ``Query``. Da mesma forma, 
+todas as rotinas de formatação e redução de mapa são ignoradas ao usar o método ``count()``.
 
-Moreover, it is possible to return the total count for a query containing group
-by clauses without having to rewrite the query in any way. For example, consider
-this query for retrieving article ids and their comments count::
+Além disso, é possível retornar a contagem total de uma consulta contendo cláusulas de grupo
+sem precisar reescrever a consulta de nenhuma maneira. Por exemplo, considere 
+esta consulta para recuperar IDs de artigos e contagem de seus comentários::
 
     $query = $articles->find();
     $query->select(['Articles.id', $query->func()->count('Comments.id')])
@@ -1102,22 +1100,20 @@ this query for retrieving article ids and their comments count::
         ->group(['Articles.id']);
     $total = $query->count();
 
-After counting, the query can still be used for fetching the associated
-records::
+Após a contagem, a consulta ainda pode ser usada para buscar os registros associados::
 
     $list = $query->all();
 
-Sometimes, you may want to provide an alternate method for counting the total
-records of a query. One common use case for this is providing
-a cached value or an estimate of the total rows, or to alter the query to remove
-expensive unneeded parts such as left joins. This becomes particularly handy
-when using the CakePHP built-in pagination system which calls the ``count()``
-method::
+Às vezes, convém fornecer um método alternativo para contar o total de registros de 
+uma consulta. Um caso de uso comum para isso é fornecer um valor em cache ou uma 
+estimativa do total de linhas ou alterar a consulta para remover partes desnecessariamente 
+caras, como left joins. Isso se torna particularmente útil ao usar o sistema de paginação do
+CakePHP que chama o método ``count()``::
 
     $query = $query->where(['is_active' => true])->counter(function ($query) {
         return 100000;
     });
-    $query->count(); // Returns 100000
+    $query->count(); // Retorna 100000
 
 In the example above, when the pagination component calls the count method, it
 will receive the estimated hard-coded number of rows.
