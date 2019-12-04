@@ -315,7 +315,7 @@ para esse propósito::
         ->select($articlesTable); // Select all fields from articles
 
 .. versionadded:: 3.1
-    Passar um objeto de tabela para select () foi adicionado em 3.1.
+    Passar um objeto de tabela para select() foi adicionado em 3.1.
 
 Se você desejar selecionar todos os campos, exceto alguns, em uma tabela, pode usar ``selectAllExcept()``::
 
