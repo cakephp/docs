@@ -57,9 +57,9 @@ bcrypt for all new applications.
 
 .. note::
 
-    Create a hashed password for at least one of the user accounts now! 
+    Create a hashed password for at least one of the user accounts now!
     It will be needed in the next steps.
-    
+
 
 Adding Login
 ============
@@ -105,7 +105,7 @@ AuthComponent in our AppController::
             // continues to work. Also enable the read only actions.
             $this->Auth->allow(['display', 'view', 'index']);
         }
-        
+
     }
 
 We've just told CakePHP that we want to load the ``Auth``
@@ -299,7 +299,7 @@ logged in user. Replace your add action with the following::
 
     public function add()
     {
-        $article = $this->Articles->newEntity();
+        $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
 

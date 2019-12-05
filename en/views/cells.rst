@@ -27,11 +27,9 @@ Its contents should look like::
 
     class InboxCell extends Cell
     {
-
         public function display()
         {
         }
-
     }
 
 Save this file into **src/View/Cell/InboxCell.php**. As you can see, like other

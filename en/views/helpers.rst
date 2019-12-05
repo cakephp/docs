@@ -128,7 +128,6 @@ your helper requires. For example::
 
     class AwesomeHelper extends Helper
     {
-
         use StringTemplateTrait;
 
         protected $_defaultConfig = [

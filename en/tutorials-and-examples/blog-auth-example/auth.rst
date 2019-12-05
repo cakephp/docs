@@ -65,7 +65,6 @@ with CakePHP::
 
     class UsersController extends AppController
     {
-
         public function beforeFilter(EventInterface $event)
         {
             parent::beforeFilter($event);
@@ -85,7 +84,7 @@ with CakePHP::
 
         public function add()
         {
-            $user = $this->Users->newEntity();
+            $user = $this->Users->newEmptyEntity();
             if ($this->request->is('post')) {
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
@@ -96,7 +95,6 @@ with CakePHP::
             }
             $this->set('user', $user);
         }
-
     }
 
 In the same way we created the views for our articles by using the code
@@ -309,7 +307,7 @@ currently logged in user as a reference for the created article::
 
     public function add()
     {
-        $article = $this->Articles->newEntity();
+        $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             // Added this line
