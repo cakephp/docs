@@ -32,7 +32,6 @@ add the following::
 
     class User extends Entity
     {
-
         // Code from bake.
 
         // Add this method

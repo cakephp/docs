@@ -583,7 +583,6 @@ database, the easiest way is to use a setter function in your User entity::
 
     class User extends Entity
     {
-
         // ...
 
         protected function _setPassword($password)
@@ -619,7 +618,6 @@ In order to use a different password hasher, you need to create the class in
 
     class LegacyPasswordHasher extends AbstractPasswordHasher
     {
-
         public function hash($password)
         {
             return sha1($password);
