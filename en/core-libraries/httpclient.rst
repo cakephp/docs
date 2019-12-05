@@ -68,7 +68,7 @@ The filehandle will be read until its end; it will not be rewound before being r
 
     For compatibility reasons, earlier versions of CakePHP will treat strings
     beginning with ``@`` as local or remote file paths. This functionality was
-    deprecated in CakePHP 3.0.5 and was removed in a 3.7.
+    deprecated in CakePHP 3.0.5 and was removed in 3.7.
 
 Building Multipart Request Bodies by Hand
 -----------------------------------------
