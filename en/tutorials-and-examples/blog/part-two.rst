@@ -211,7 +211,6 @@ you are very sneaky. Otherwise, we'll create it in the
 
     class ArticlesController extends AppController
     {
-
         public function index()
         {
              $this->set('articles', $this->Articles->find('all'));

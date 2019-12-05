@@ -37,7 +37,6 @@ validating any user data::
 
     class UsersTable extends Table
     {
-
         public function validationDefault(Validator $validator)
         {
             return $validator
@@ -227,7 +226,6 @@ entity file and add the following::
 
     class User extends Entity
     {
-
         // Make all fields mass assignable except for primary key field "id".
         protected $_accessible = [
             '*' => true,

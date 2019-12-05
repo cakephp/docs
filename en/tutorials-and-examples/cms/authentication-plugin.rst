@@ -4,8 +4,8 @@ CMS Tutorial - Authentication using cakephp/authentication
 CakePHP now supports authentication and authorization features using the
 core plugins:
 
-* :doc:`cakephp/authentication </authentication>` 
-* :doc:`cakephp/authorization </authorization>` 
+* :doc:`cakephp/authentication </authentication>`
+* :doc:`cakephp/authorization </authorization>`
 
 In this tutorial we are going to ensure passwords are stored securely in
 our database, we are going to provide a working login page, and apply some
@@ -44,7 +44,6 @@ add the following::
 
     class User extends Entity
     {
-
         // Code from bake.
 
         // Add this method
@@ -65,16 +64,16 @@ You can edit the default user that was created during
 you should see a hashed password instead of the original value on the list or
 view pages. CakePHP hashes passwords with `bcrypt
 <http://codahale.com/how-to-safely-store-a-password/>`_ by default. We recommend
-bcrypt for all new applications to keep your security standards high. Note this 
+bcrypt for all new applications to keep your security standards high. Note this
 is the `recommended password hash algorithm for PHP <https://www.php.net/manual/en/function.password-hash.php>`_ too.
 
 .. note::
 
-    Create a hashed password for at least one of the user accounts now! 
+    Create a hashed password for at least one of the user accounts now!
     It will be needed in the next steps.
     After updating the password, you'll see a long string stored in the password column.
     Note bcrypt will generate a different hash even for the same password saved twice.
-    
+
 
 Installing Authentication Plugin
 ================================
@@ -264,7 +263,7 @@ Add the logout action to the UsersController class::
         }
     }
 
-Now you can visit ``/users/logout`` to log out. You should then be sent to the login 
+Now you can visit ``/users/logout`` to log out. You should then be sent to the login
 page.
 
 Enabling Registrations

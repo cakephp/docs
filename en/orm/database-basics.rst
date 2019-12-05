@@ -441,7 +441,6 @@ we could make the following type class::
 
     class JsonType extends Type
     {
-
         public function toPHP($value, Driver $driver)
         {
             if ($value === null) {
@@ -490,7 +489,6 @@ your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
 
     class WidgetsTable extends Table
     {
-
         protected function _initializeSchema(TableSchema $schema)
         {
             $schema->columnType('widget_prefs', 'json');

@@ -65,7 +65,6 @@ case for a cell. In the class we just made, add the following::
 
     class InboxCell extends Cell
     {
-
         public function display()
         {
             $this->loadModel('Messages');

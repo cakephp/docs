@@ -169,12 +169,10 @@ we'll start with the following::
     {
         public function setUp()
         {
-
         }
 
         public function testBar()
         {
-
         }
     }
 
@@ -1267,7 +1265,7 @@ make testing responses much simpler. Some examples are::
     // Assert partial response content
     $this->assertResponseContains('You won!');
     $this->assertResponseNotContains('You lost!');
-    
+
     // Assert file sent back
     $this->assertFileResponse('/absolute/path/to/file.ext');
 
@@ -1436,7 +1434,6 @@ correctly by the ``adjust()`` method in our component. We create the file
 
     class PagematronComponentTest extends TestCase
     {
-
         public $component = null;
         public $controller = null;
 

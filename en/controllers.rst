@@ -66,7 +66,6 @@ is invoked at the end of a Controller's constructor for this kind of use::
 
     class AppController extends Controller
     {
-
         public function initialize(): void
         {
             // Always enable the CSRF component.
