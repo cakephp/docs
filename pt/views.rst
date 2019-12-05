@@ -643,15 +643,6 @@ Para *elements* dentro de uma subpasta de um plugin
 
     echo $this->element('Contacts.sidebar/helpbox');
 
-Requisitando *Elements* do App
-------------------------------
-
-Se você está dentro de um arquivos de template de um plugin e quer renderizar um *element* residido em sua aplicação principal ou outro plugin, use o seguinte::
-
-  echo $this->element('some_global_element', [], ['plugin' => false]);
-  // or...
-  echo $this->element('some_global_element', ['localVar' => $someData], ['plugin' => false]);
-
 *Routing prefix* e *Elements*
 -----------------------------
 
