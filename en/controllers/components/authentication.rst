@@ -1071,7 +1071,7 @@ only the configuration option::
 
     $this->Auth->getConfig('loginAction');
 
-    $this->redirect($this->Auth->getConfig('loginAction'));
+    return $this->redirect($this->Auth->getConfig('loginAction'));
 
 This is useful if you want to redirect a user to the ``login`` route for example.
 Without a parameter, the full configuration will be returned.

@@ -28,7 +28,7 @@ passing it to the ``save()`` method in the ``Table`` class::
     $articlesTable = TableRegistry::get('Articles');
 
     $articlesTable = TableRegistry::getTableLocator()->get('Articles');
-    $article = $articlesTable->newEntity();
+    $article = $articlesTable->newEmptyEntity();
 
     $article->title = 'A New Article';
     $article->body = 'This is the body of the article';
@@ -70,7 +70,7 @@ By default the ``save()`` method will also save one level of associations::
     $articlesTable = TableRegistry::getTableLocator()->get('Articles');
     $author = $articlesTable->Authors->findByUserName('mark')->first();
 
-    $article = $articlesTable->newEntity();
+    $article = $articlesTable->newEmptyEntity();
     $article->title = 'An article by mark';
     $article->author = $author;
 
@@ -81,14 +81,14 @@ By default the ``save()`` method will also save one level of associations::
 
 The ``save()`` method is also able to create new records for associations::
 
-    $firstComment = $articlesTable->Comments->newEntity();
+    $firstComment = $articlesTable->Comments->newEmptyEntity();
     $firstComment->body = 'The CakePHP features are outstanding';
 
-    $secondComment = $articlesTable->Comments->newEntity();
+    $secondComment = $articlesTable->Comments->newEmptyEntity();
     $secondComment->body = 'CakePHP performance is terrific!';
 
     $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
-    $tag2 = $articlesTable->Tags->newEntity();
+    $tag2 = $articlesTable->Tags->newEmptyEntity();
     $tag2->name = 'awesome';
 
     $article = $articlesTable->get(12);
@@ -105,7 +105,7 @@ Another way of accomplishing the same thing is by using the ``link()``
 method in the association::
 
     $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
-    $tag2 = $articlesTable->Tags->newEntity();
+    $tag2 = $articlesTable->Tags->newEmptyEntity();
     $tag2->name = 'awesome';
 
     $articlesTable->Tags->link($article, [$tag1, $tag2]);

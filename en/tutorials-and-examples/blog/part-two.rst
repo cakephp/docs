@@ -86,7 +86,6 @@ articles. The code for that action would look like this::
 
     class ArticlesController extends AppController
     {
-
         public function index()
         {
             $articles = $this->Articles->find('all');
@@ -272,7 +271,6 @@ First, start by creating an ``add()`` action in the
 
     class ArticlesController extends AppController
     {
-
         public function initialize(): void
         {
             parent::initialize();
@@ -293,7 +291,7 @@ First, start by creating an ``add()`` action in the
 
         public function add()
         {
-            $article = $this->Articles->newEntity();
+            $article = $this->Articles->newEmptyEntity();
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
