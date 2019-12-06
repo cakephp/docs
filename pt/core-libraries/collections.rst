@@ -411,10 +411,9 @@ ajudará você a criar um único resultado de todos os elementos em uma coleçã
         return $accumulated + $orderLine->price;
     }, 0);
 
-In the above example, ``$totalPrice`` will be the sum of all single prices
-contained in the collection. Note the second argument for the ``reduce()``
-function takes the initial value for the reduce operation you are
-performing::
+No exemplo acima, ``$totalPrice`` será a soma de todos os preços únicos 
+contidos na coleção. Observe o segundo argumento para a função ``reduce()`` 
+leva o valor inicial para a operação de redução que você está executando::
 
     $allTags = $collection->reduce(function ($accumulated, $article) {
         return array_merge($accumulated, $article->tags);
@@ -422,17 +421,17 @@ performing::
 
 .. php:method:: min(string|callable $callback, $type = SORT_NUMERIC)
 
-To extract the minimum value for a collection based on a property, just use the
-``min()`` function. This will return the full element from the collection and
-not just the smallest value found::
+Para extrair o valor mínimo de uma coleção com base em uma propriedade, basta 
+usar a função ``min()``. Isso retornará o elemento completo da coleção e não 
+apenas o menor valor encontrado::
 
     $collection = new Collection($people);
     $youngest = $collection->min('age');
 
     echo $youngest->name;
 
-You are also able to express the property to compare by providing a path or a
-callback function::
+Você também pode expressar a propriedade para comparar, fornecendo um caminho 
+ou uma função de retorno de chamada::
 
     $collection = new Collection($people);
     $personYoungestChild = $collection->min(function ($person) {
@@ -443,8 +442,8 @@ callback function::
 
 .. php:method:: max(string|callable $callback, $type = SORT_NUMERIC)
 
-The same can be applied to the ``max()`` function, which will return a single
-element from the collection having the highest property value::
+O mesmo pode ser aplicado à função ``max()``, que retornará um único 
+elemento da coleção com o maior valor de propriedade::
 
     $collection = new Collection($people);
     $oldest = $collection->max('age');
@@ -457,8 +456,8 @@ element from the collection having the highest property value::
 
 .. php:method:: sumOf(string|callable $callback)
 
-Finally, the ``sumOf()`` method will return the sum of a property of all
-elements::
+Finalmente, o método ``sumOf()`` retornará a soma de uma propriedade de 
+todos os elementos::
 
     $collection = new Collection($people);
     $sumOfAges =  $collection->sumOf('age');
@@ -471,24 +470,23 @@ elements::
 
 .. php:method:: avg($matcher = null)
 
-Calculate the average value of the elements in the collection. Optionally
-provide a matcher path, or function to extract values to generate the average
-for::
+Calcule o valor médio dos elementos na coleção. Opcionalmente, forneça um 
+caminho correspondente ou função para extrair valores e gerar a média::
 
     $items = [
        ['invoice' => ['total' => 100]],
        ['invoice' => ['total' => 200]],
     ];
 
-    // Average: 150
+    // Média: 150
     $average = (new Collection($items))->avg('invoice.total');
 
 .. versionadded:: 3.5.0
 
 .. php:method:: median($matcher = null)
 
-Calculate the median value of a set of elements. Optionally provide a matcher
-path, or function to extract values to generate the median for::
+Calcule o valor mediano de um conjunto de elementos. Opcionalmente, forneça 
+um caminho correspondente ou função para extrair valores e gerar a mediana::
 
     $items = [
       ['invoice' => ['total' => 400]],
@@ -503,13 +501,13 @@ path, or function to extract values to generate the median for::
 
 .. versionadded:: 3.5.0
 
-Grouping and Counting
----------------------
+Agrupamento e Contagem
+----------------------
 
 .. php:method:: groupBy($callback)
 
-Collection values can be grouped by different keys in a new collection when they
-share the same value for a property::
+Os valores da coleção podem ser agrupados por chaves diferentes em uma 
+nova coleção quando eles compartilham o mesmo valor para uma propriedade::
 
     $students = [
         ['name' => 'Mark', 'grade' => 9],
@@ -520,7 +518,7 @@ share the same value for a property::
     $collection = new Collection($students);
     $studentsByGrade = $collection->groupBy('grade');
 
-    // Result will look like this when converted to array:
+    // O resultado ficará assim quando convertido em array:
     [
       10 => [
         ['name' => 'Andrew', 'grade' => 10],
@@ -532,8 +530,9 @@ share the same value for a property::
       ]
     ]
 
-As usual, it is possible to provide either a dot-separated path for nested
-properties or your own callback function to generate the groups dynamically::
+Como de costume, é possível fornecer um caminho separado por pontos para 
+propriedades aninhadas ou sua própria função de retorno de chamada para 
+gerar os grupos dinamicamente::
 
     $commentsByUserId = $comments->groupBy('user.id');
 
@@ -543,34 +542,34 @@ properties or your own callback function to generate the groups dynamically::
 
 .. php:method:: countBy($callback)
 
-If you only wish to know the number of occurrences per group, you can do so by
-using the ``countBy()`` method. It takes the same arguments as ``groupBy`` so it
-should be already familiar to you::
+Se você deseja apenas saber o número de ocorrências por grupo, 
+pode fazê-lo usando o método ``countBy()``. Ele usa os mesmos 
+argumentos de ``groupBy``, portanto já deve ser familiar para você::
 
     $classResults = $students->countBy(function ($student) {
         return $student->grade > 6 ? 'approved' : 'denied';
     });
 
-    // Result could look like this when converted to array:
+    // O resultado pode ficar assim quando convertido em array:
     ['approved' => 70, 'denied' => 20]
 
 .. php:method:: indexBy($callback)
 
-There will be certain cases where you know an element is unique for the property
-you want to group by. If you wish a single result per group, you can use the
-function ``indexBy()``::
+Em certos casos, você sabe que um elemento é exclusivo para a propriedade 
+que você deseja agrupar. Se você deseja um único resultado por grupo, 
+pode usar a função ``indexBy()``::
 
     $usersById = $users->indexBy('id');
 
-    // When converted to array result could look like
+    // Quando convertido em resultado da matriz pode parecer
     [
         1 => 'markstory',
         3 => 'jose_zap',
         4 => 'jrbasso'
     ]
 
-As with the ``groupBy()`` function you can also use a property path or
-a callback::
+Assim como na função ``groupBy()``, você também pode usar um caminho de 
+propriedade ou um retorno de chamada::
 
     $articlesByAuthorId = $articles->indexBy('author.id');
 
@@ -580,22 +579,22 @@ a callback::
 
 .. php:method:: zip($elements)
 
-The elements of different collections can be grouped together using the
-``zip()`` method. It will return a new collection containing an array grouping
-the elements from each collection that are placed at the same position::
+Os elementos de diferentes coleções podem ser agrupados usando o método 
+``zip()``. Ele retornará uma nova coleção que contém uma matriz que 
+agrupa os elementos de cada coleção que são colocados na mesma posição::
 
     $odds = new Collection([1, 3, 5]);
     $pairs = new Collection([2, 4, 6]);
     $combined = $odds->zip($pairs)->toList(); // [[1, 2], [3, 4], [5, 6]]
 
-You can also zip multiple collections at once::
+Você também pode compactar várias coleções de uma vez::
 
     $years = new Collection([2013, 2014, 2015, 2016]);
     $salaries = [1000, 1500, 2000, 2300];
     $increments = [0, 500, 500, 300];
 
     $rows = $years->zip($salaries, $increments)->toList();
-    // Returns:
+    // Retornos:
     [
         [2013, 1000, 0],
         [2014, 1500, 500],
@@ -603,8 +602,8 @@ You can also zip multiple collections at once::
         [2016, 2300, 300]
     ]
 
-As you can already see, the ``zip()`` method is very useful for transposing
-multidimensional arrays::
+Como você já pode ver, o método ``zip()`` é muito útil para transpor 
+matrizes multidimensionais::
 
     $data = [
         2014 => ['jan' => 100, 'feb' => 200],
@@ -612,90 +611,91 @@ multidimensional arrays::
         2016 => ['jan' => 400, 'feb' => 600],
     ]
 
-    // Getting jan and feb data together
+    // Reunindo dados de janeiro e fevereiro
 
     $firstYear = new Collection(array_shift($data));
     $firstYear->zip($data[0], $data[1])->toList();
 
-    // Or $firstYear->zip(...$data) in PHP >= 5.6
+    // Ou $firstYear->zip(...$data) in PHP >= 5.6
 
-    // Returns
+    // Retornos
     [
         [100, 300, 400],
         [200, 500, 600]
     ]
 
-Sorting
-=======
+Classificação
+=============
 
 .. php:method:: sortBy($callback)
 
-Collection values can be sorted in ascending or descending order based on
-a column or custom function. To create a new sorted collection out of the values
-of another one, you can use ``sortBy``::
+Os valores da coleção podem ser classificados em ordem crescente ou 
+decrescente com base em uma coluna ou função personalizada. Para criar 
+uma nova coleção classificada a partir dos valores de outra, você pode 
+usar ``sortBy``::
 
     $collection = new Collection($people);
     $sorted = $collection->sortBy('age');
 
-As seen above, you can sort by passing the name of a column or property that
-is present in the collection values. You are also able to specify a property
-path instead using the dot notation. The next example will sort articles by
-their author's name::
+Como visto acima, você pode classificar passando o nome de uma coluna ou 
+propriedade presente nos valores da coleção. Você também pode especificar 
+um caminho de propriedade usando a notação de ponto. O próximo exemplo 
+classificará os artigos pelo nome do autor::
 
     $collection = new Collection($articles);
     $sorted = $collection->sortBy('author.name');
 
-The ``sortBy()`` method is flexible enough to let you specify an extractor
-function that will let you dynamically select the value to use for comparing two
-different values in the collection::
+O método ``sortBy()`` é flexível o suficiente para permitir que você 
+especifique uma função extrator que permitirá selecionar dinamicamente o 
+valor a ser usado para comparar dois valores diferentes na coleção::
 
     $collection = new Collection($articles);
     $sorted = $collection->sortBy(function ($article) {
         return $article->author->name . '-' . $article->title;
     });
 
-In order to specify in which direction the collection should be sorted, you need
-to provide either ``SORT_ASC`` or ``SORT_DESC`` as the second parameter for
-sorting in ascending or descending direction respectively. By default,
-collections are sorted in descending direction::
+Para especificar em qual direção a coleção deve ser classificada, é necessário 
+fornecer ``SORT_ASC`` ou ``SORT_DESC`` como o segundo parâmetro para classificar 
+na direção ascendente ou descendente, respectivamente. Por padrão, as coleções são 
+classificadas na direção descendente::
 
     $collection = new Collection($people);
     $sorted = $collection->sortBy('age', SORT_ASC);
 
-Sometimes you will need to specify which type of data you are trying to compare
-so that you get consistent results. For this purpose, you should supply a third
-argument in the ``sortBy()`` function with one of the following constants:
+Às vezes, você precisará especificar que tipo de dados você está tentando comparar 
+para obter resultados consistentes. Para esse propósito, você deve fornecer um 
+terceiro argumento na função ``sortBy()`` com uma das seguintes constantes:
 
-- **SORT_NUMERIC**: For comparing numbers
-- **SORT_STRING**: For comparing string values
-- **SORT_NATURAL**: For sorting string containing numbers and you'd like those
-  numbers to be order in a natural way. For example: showing "10" after "2".
-- **SORT_LOCALE_STRING**: For comparing strings based on the current locale.
+- **SORT_NUMERIC**: Para comparar números
+- **SORT_STRING**: Para comparar valores strings
+- **SORT_NATURAL**: Para classificar sequência contendo números e preferir
+que esses números sejam ordenados de maneira natural. Por exemplo: mostrando "10" depois de "2".
+- **SORT_LOCALE_STRING**: Para comparar seqüências de caracteres com base na localidade atual.
 
-By default, ``SORT_NUMERIC`` is used::
+Por padrão, ``SORT_NUMERIC`` é usado::
 
     $collection = new Collection($articles);
     $sorted = $collection->sortBy('title', SORT_ASC, SORT_NATURAL);
 
 .. warning::
 
-    It is often expensive to iterate sorted collections more than once. If you
-    plan to do so, consider converting the collection to an array or simply use
-    the ``compile()`` method on it.
+    Muitas vezes, é caro iterar coleções ordenadas mais de uma vez. Se você planeja 
+    fazer isso, considere converter a coleção em uma matriz ou simplesmente use o 
+    método ``compile()`` nela.
 
-Working with Tree Data
-======================
+Trabalhando com Árvore de Dados
+===============================
 
 .. php:method:: nest($idPath, $parentPath)
 
-Not all data is meant to be represented in a linear way. Collections make it
-easier to construct and flatten hierarchical or nested structures. Creating
-a nested structure where children are grouped by a parent identifier property is
-easy with the ``nest()`` method.
+Nem todos os dados devem ser representados de maneira linear. As coleções 
+facilitam a construção e o nivelamento de estruturas hierárquicas ou aninhadas. 
+Criar uma estrutura aninhada na qual os filhos são agrupados por uma propriedade 
+de identificador pai é fácil com o método ``nest()``.
 
-Two parameters are required for this function. The first one is the property
-representing the item identifier. The second parameter is the name of the
-property representing the identifier for the parent item::
+Dois parâmetros são necessários para esta função. O primeiro é a propriedade que 
+representa o identificador do item. O segundo parâmetro é o nome da propriedade 
+que representa o identificador para o item pai::
 
     $collection = new Collection([
         ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
@@ -707,7 +707,7 @@ property representing the identifier for the parent item::
     ]);
 
     $collection->nest('id', 'parent_id')->toList();
-    // Returns
+    // Retornos
     [
         [
             'id' => 1,
@@ -729,24 +729,23 @@ property representing the identifier for the parent item::
         ]
     ];
 
-Children elements are nested inside the ``children`` property inside each of the
-items in the collection. This type of data representation is helpful for
-rendering menus or traversing elements up to certain level in the tree.
+Os elementos filhos são aninhados dentro da propriedade ``children`` dentro de 
+cada um dos itens da coleção. Esse tipo de representação de dados é útil para 
+renderizar menus ou cruzar elementos até um determinado nível na árvore.
 
 .. php:method:: listNested($dir = 'desc', $nestingKey = 'children')
 
-The inverse of ``nest()`` is ``listNested()``. This method allows you to flatten
-a tree structure back into a linear structure. It takes two parameters; the
-first one is the traversing mode (asc, desc or leaves), and the second one is
-the name of the property containing the children for each element in the
-collection.
+O inverso de ``nest()`` é ``listNested()``. Este método permite nivelar 
+uma estrutura de árvore novamente em uma estrutura linear. São necessários dois 
+parâmetros; o primeiro é o modo de deslocamento (asc, desc ou folhas) e o segundo 
+é o nome da propriedade que contém os filhos de cada elemento da coleção.
 
-Taking the input the nested collection built in the previous example, we can
-flatten it::
+Tomando a entrada da coleção aninhada criada no exemplo anterior, podemos deixar 
+esta nivelada::
 
     $nested->listNested()->toList();
 
-    // Returns
+    // Retornos
     [
         ['id' => 1, 'parent_id' => null, 'name' => 'Birds', 'children' => [...]],
         ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
@@ -756,32 +755,32 @@ flatten it::
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
     ]
 
-By default, the tree is traversed from the root to the leaves. You can also
-instruct it to only return the leaf elements in the tree::
+Por padrão, a árvore é atravessada da raiz para as folhas. Você também pode 
+instruí-lo a retornar apenas os elementos da folha na árvore::
 
     $nested->listNested()->toList();
 
-    // Returns
+    // Retornos
     [
         ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
         ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
     ]
 
-Once you have converted a tree into a nested list, you can use the ``printer()``
-method to configure how the list output should be formatted::
+Depois de converter uma árvore em uma lista aninhada, você pode usar o método 
+``printer()`` para configurar como a saída da lista deve ser formatada::
 
     $nested->listNested()->printer('name', 'id', '--')->toArray();
 
-    // Returns
+    // Retornos
     [
         3 => 'Eagle',
         4 => 'Seagull',
         5 -> '--Clown Fish',
     ]
 
-The ``printer()`` method also lets you use a callback to generate the keys and
-or values::
+O método ``printer()`` também permite usar um retorno de chamada para gerar 
+as chaves e ou valores::
 
     $nested->listNested()->printer(
         function ($el) {
@@ -792,48 +791,48 @@ or values::
         }
     );
 
-Other Methods
-=============
+Outros Métodos
+==============
 
 .. php:method:: isEmpty()
 
-Allows you to see if a collection contains any elements::
+Permite que você veja se uma coleção contém algum elemento::
 
     $collection = new Collection([]);
-    // Returns true
+    // Retorna true
     $collection->isEmpty();
 
     $collection = new Collection([1]);
-    // Returns false
+    // Retorna false
     $collection->isEmpty();
 
 .. php:method:: contains($value)
 
-Collections allow you to quickly check if they contain one particular
-value: by using the ``contains()`` method::
+As coleções permitem que você verifique rapidamente se elas contêm um valor 
+específico usando o método ``contains()``::
 
     $items = ['a' => 1, 'b' => 2, 'c' => 3];
     $collection = new Collection($items);
     $hasThree = $collection->contains(3);
 
-Comparisons are performed using the ``===`` operator. If you wish to do looser
-comparison types you can use the ``some()`` method.
+As comparações são realizadas usando o operador ``===``. Se você deseja fazer 
+tipos de comparação mais flexíveis, pode usar o método ``some()``.
 
 .. php:method:: shuffle()
 
-Sometimes you may wish to show a collection of values in a random order. In
-order to create a new collection that will return each value in a randomized
-position, use the ``shuffle``::
+Às vezes, você pode querer mostrar uma coleção de valores em uma ordem aleatória. 
+Para criar uma nova coleção que retornará cada valor em uma posição aleatória, 
+use o método ``shuffle``::
 
     $collection = new Collection(['a' => 1, 'b' => 2, 'c' => 3]);
 
-    // This could return [2, 3, 1]
+    // Isso poderá retornar [2, 3, 1]
     $collection->shuffle()->toList();
 
 .. php:method:: transpose()
 
-When you transpose a collection, you get a new collection containing a row made
-of the each of the original columns::
+Ao transpor uma coleção, você obtém uma nova coleção contendo uma linha composta 
+por cada uma das colunas originais::
 
      $items = [
         ['Products', '2012', '2013', '2014'],
@@ -843,7 +842,7 @@ of the each of the original columns::
      ]
      $transpose = (new Collection($items))->transpose()->toList();
 
-     // Returns
+     // Retornos
      [
          ['Products', 'Product A', 'Product B', 'Product C'],
          ['2012', '200', '300', '400'],
@@ -854,25 +853,25 @@ of the each of the original columns::
 .. versionadded:: 3.3.0
     ``Collection::transpose()`` was added in 3.3.0.
 
-Withdrawing Elements
+Retirando Elementos
 --------------------
 
 .. php:method:: sample(int $size)
 
-Shuffling a collection is often useful when doing quick statistical analysis.
-Another common operation when doing this sort of task is withdrawing a few
-random values out of a collection so that more tests can be performed on those.
-For example, if you wanted to select 5 random users to which you'd like to apply
-some A/B tests to, you can use the ``sample()`` function::
+Baralhar uma coleção geralmente é útil ao fazer análises estatísticas rápidas. 
+Outra operação comum ao executar esse tipo de tarefa é retirar alguns valores 
+aleatórios de uma coleção, para que mais testes possam ser realizados. Por exemplo, 
+se você quiser selecionar 5 usuários aleatórios aos quais deseja aplicar alguns 
+testes A/B, poderá usar a função ``sample()``::
 
     $collection = new Collection($people);
 
-    // Withdraw maximum 20 random users from this collection
+    // Retire no máximo 20 usuários aleatórios desta coleção
     $testSubjects = $collection->sample(20);
 
-``sample()`` will take at most the number of values you specify in the first
-argument. If there are not enough elements in the collection to satisfy the
-sample, the full collection in a random order is returned.
+``sample()`` terá no máximo o número de valores que você especificar no primeiro 
+argumento. Se não houver elementos suficientes na coleção para satisfazer a amostra, 
+a coleção completa em uma ordem aleatória será retornada.
 
 .. php:method:: take(int $size, int $from)
 
