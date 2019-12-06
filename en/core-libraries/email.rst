@@ -591,7 +591,7 @@ event is fired::
     // attach to Users event manager
     $this->Users->getEventManager()->on($this->getMailer('User'));
 
-.. note:
+.. note::
 
     For information on how to register event listener objects,
     please refer to the :ref:`registering-event-listeners` documentation.
