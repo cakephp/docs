@@ -411,6 +411,18 @@ Can be used to map datetime columns that contain microseconds such as
     // Overwrite the default datetime type with a more precise one.
     TypeFactory::map('datetime', DateTimeFractionalType::class);
 
+.. php:class:: DateTimeTimezoneType
+
+Can be used to map datetime columns that contain time zones such as
+``TIMESTAMPTZ`` in PostgreSQL. To use this type you need to add it as a mapped type::
+
+    // in confib/bootstrap.php
+    use Cake\Database\TypeFactory;
+    use Cake\Database\Type\DateTimeTimezoneType;
+
+    // Overwrite the default datetime type with a more precise one.
+    TypeFactory::map('datetime', DateTimeTimezoneType::class);
+
 .. _adding-custom-database-types:
 
 Adding Custom Types

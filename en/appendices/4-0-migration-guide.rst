@@ -173,6 +173,17 @@ Database
     #. ``DATETIME2`` => ``datetimefractional``
     #. ``DATETIME2(1-7) => ``datetimefractional``
 
+* PostgreSQL schema now map columns that support time zones to the new abstract
+  time zone types. Specifying (0) precision does not change the type mapping like
+  it does with regular fractional types above.
+
+  * **PostgreSQL**
+
+    #. ``TIMESTAMPTZ`` => ``timestamptimezone``
+    #. ``TIMESTAMPTZ(0-6)`` => ``timestamptimezone``
+    #. ``TIMESTAMP WITH TIME ZONE`` => ``timestamptimezone``
+    #. ``TIMESTAMP(0-6) WITH TIME ZONE`` => ``timestamptimezone``
+
 Datasources
 -----------
 
@@ -392,9 +403,10 @@ Database
 * The ``char`` abstract type was added. This type handles fixed length string
   columns.
 * The ``datetimefractional`` and ``timestampfractional`` abstract types were added.
-  These types handle timestamps with fractional seconds.
+  These types handle column data types with fractional seconds.
 * SqlServer schemas now support default values with functions in them like SYSDATETIME().
-
+* The ``datetimetimezone`` and ``timestamptimezone`` abstract types were added.
+  These types handle column data types with time zone support.
 
 Error
 -----
@@ -450,6 +462,11 @@ ORM
   have related records.
 * A new type class ``DateTimeFractionalType`` has been added for datetime types
   with microsecond precision. You can opt into using this type by adding it to
+  the ``TypeFactory`` as the default ``datetime`` type or re-mapping individual
+  columns. See the Database migration notes for how this type is automatically
+  mapped to database types.
+* A new type class ``DateTimeTimezoneType`` has been added for datetime types
+  with time zone support. You can opt into using this type by adding it to
   the ``TypeFactory`` as the default ``datetime`` type or re-mapping individual
   columns. See the Database migration notes for how this type is automatically
   mapped to database types.
