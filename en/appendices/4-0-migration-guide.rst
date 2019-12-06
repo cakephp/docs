@@ -173,7 +173,7 @@ Database
     #. ``DATETIME2`` => ``datetimefractional``
     #. ``DATETIME2(1-7) => ``datetimefractional``
 
-* PostgreSQL schema now map columns that support time zones to the new abstract
+* PostgreSQL schema now maps columns that support time zones to the new abstract
   time zone types. Specifying (0) precision does not change the type mapping like
   it does with regular fractional types above.
 
