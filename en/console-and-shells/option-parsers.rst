@@ -131,11 +131,11 @@ When creating options you can use the following options to define the behavior
 of the option:
 
 * ``short`` - The single letter variant for this option, leave undefined for
-   none.
+  none.
 * ``help`` - Help text for this option. Used when generating help for the
-   option.
+  option.
 * ``default`` - The default value for this option. If not defined the default
-   will be ``true``.
+  will be ``true``.
 * ``boolean`` - The option uses no value, it's just a boolean switch.
   Defaults to ``false``.
 * ``choices`` - An array of valid choices for this option. If left empty all
