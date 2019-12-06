@@ -102,44 +102,44 @@ que está sendo aplicada a cada objeto na coleção original::
     // $result contém ['a' => 2, 'b' => 4, 'c' => 6];
     $result = $new->toArray();
 
-The ``map()`` method will create a new iterator which lazily creates
-the resulting items when iterated.
+O método ``map()`` criará um novo iterador, fazendo isso preguiçosamente 
+com os itens resultantes quando iterado.
 
 .. php:method:: extract($matcher)
 
-One of the most common uses for a ``map()`` function is to extract a single
-column from a collection. If you are looking to build a list of elements
-containing the values for a particular property, you can use the ``extract()``
-method::
+Um dos usos mais comuns para uma função ``map()`` é extrair uma única coluna de uma coleção. 
+Se você deseja criar uma lista de elementos contendo os valores de uma propriedade específica, 
+pode usar o método ``extract()``::
 
     $collection = new Collection($people);
     $names = $collection->extract('name');
 
-    // $result contains ['mark', 'jose', 'barbara'];
+    // $result contêm ['mark', 'jose', 'barbara'];
     $result = $names->toList();
 
-As with many other functions in the collection class, you are allowed to specify
-a dot-separated path for extracting columns. This example will return
-a collection containing the author names from a list of articles::
+Como em muitas outras funções da classe de coleção, você pode especificar 
+um caminho separado por pontos para extrair colunas. Este exemplo retornará 
+uma coleção que contém os nomes dos autores de uma lista de artigos::
 
     $collection = new Collection($articles);
     $names = $collection->extract('author.name');
 
-    // $result contains ['Maria', 'Stacy', 'Larry'];
+    // $result contêm ['Maria', 'Stacy', 'Larry'];
     $result = $names->toList();
 
-Finally, if the property you are looking after cannot be expressed as a path,
-you can use a callback function to return it::
+Por fim, se a propriedade que você está procurando não pode ser expressa 
+como um caminho, você pode usar uma função de retorno de chamada para retorná-la::
 
     $collection = new Collection($articles);
     $names = $collection->extract(function ($article) {
         return $article->author->name . ', ' . $article->author->last_name;
     });
 
-Often, the properties you need to extract a common key present in multiple
-arrays or objects that are deeply nested inside other structures. For those
-cases you can use the ``{*}`` matcher in the path key. This matcher is often
-helpful when matching HasMany and BelongsToMany association data::
+Frequentemente, as propriedades necessárias para extrair uma chave comum 
+presente em várias matrizes ou objetos profundamente aninhados dentro de 
+outras estruturas. Para esses casos, você pode usar o combinador ``{*}`` 
+na chave do caminho. Esse correspondente geralmente é útil ao combinar dados 
+da associação HasMany e BelongsToMany::
 
     $data = [
         [
@@ -161,20 +161,22 @@ helpful when matching HasMany and BelongsToMany association data::
 
     $numbers = (new Collection($data))->extract('phone_numbers.{*}.number');
     $numbers->toList();
-    // Returns ['number-1', 'number-2', 'number-3', 'number-4', 'number-5']
+    // Retorna ['number-1', 'number-2', 'number-3', 'number-4', 'number-5']
 
-This last example uses ``toList()`` unlike other examples, which is important
-when we're getting results with possibly duplicate keys. By using ``toList()``
-we'll be guaranteed to get all values even if there are duplicate keys.
+Este último exemplo usa ``toList()`` diferente de outros exemplos, o que é 
+importante quando estamos obtendo resultados com chaves possivelmente duplicadas. 
+Ao usar ``toList()``, garantimos a obtenção de todos os valores, mesmo que haja 
+chaves duplicadas.
 
-Unlike :php:meth:`Cake\\Utility\\Hash::extract()` this method only supports the
-``{*}`` wildcard. All other wildcard and attributes matchers are not supported.
+Ao contrário de :php:meth:`Cake\\Utility\\Hash::extract()` este método suporta 
+apenas o curinga ``{*}``. Todos os outros correspondentes de curinga e atributos 
+não são suportados.
 
 .. php:method:: combine($keyPath, $valuePath, $groupPath = null)
 
-Collections allow you to create a new collection made from keys and values in
-an existing collection. Both the key and value paths can be specified with
-dot notation paths::
+Coleções permitem que você crie uma nova coleção feita de chaves e valores em 
+uma coleção existente. Os caminhos de chave e valor podem ser especificados 
+com caminhos de notação de ponto::
 
     $items = [
         ['id' => 1, 'name' => 'foo', 'parent' => 'a'],
@@ -183,26 +185,27 @@ dot notation paths::
     ];
     $combined = (new Collection($items))->combine('id', 'name');
 
-    // Result will look like this when converted to array
+    // O resultado ficará assim quando convertido em array
     [
         1 => 'foo',
         2 => 'bar',
         3 => 'baz',
     ];
 
-You can also optionally use a ``groupPath`` to group results based on a path::
+Você também pode usar opcionalmente um ``groupPath`` para agrupar resultados com 
+base em um caminho::
 
     $combined = (new Collection($items))->combine('id', 'name', 'parent');
 
-    // Result will look like this when converted to array
+    // O resultado ficará assim quando convertido em array
     [
         'a' => [1 => 'foo', 3 => 'baz'],
         'b' => [2 => 'bar']
     ];
 
-Finally you can use *closures* to build keys/values/groups paths dynamically,
-for example when working with entities and dates (converted to ``Cake/Time``
-instances by the ORM) you may want to group results by date::
+Por fim, você pode usar *closures* para criar caminhos de chaves/valores/grupos dinamicamente, 
+por exemplo, ao trabalhar com entidades e datas (convertidas em instâncias ``Cake/Time`` pelo ORM), 
+você pode agrupar os resultados por data
 
     $combined = (new Collection($entities))->combine(
         'id',
@@ -210,7 +213,7 @@ instances by the ORM) you may want to group results by date::
         function ($entity) { return $entity->date->toDateString(); }
     );
 
-    // Result will look like this when converted to array
+    // O resultado ficará assim quando convertido em array
     [
         'date string like 2015-05-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
         'date string like 2015-06-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
@@ -218,50 +221,51 @@ instances by the ORM) you may want to group results by date::
 
 .. php:method:: stopWhen(callable $c)
 
-You can stop the iteration at any point using the ``stopWhen()`` method. Calling
-it in a collection will create a new one that will stop yielding results if the
-passed callable returns true for one of the elements::
+Você pode parar a iteração a qualquer momento usando o método ``stopWhen()``. 
+A chamada em uma coleção criará uma nova que deixará de produzir resultados se a 
+chamada passável retornar verdadeira para um dos elementos::
 
     $items = [10, 20, 50, 1, 2];
     $collection = new Collection($items);
 
     $new = $collection->stopWhen(function ($value, $key) {
-        // Stop on the first value bigger than 30
+        // Pare no primeiro valor maior que 30
         return $value > 30;
     });
 
-    // $result contains [10, 20];
+    // $result contêm [10, 20];
     $result = $new->toList();
 
 .. php:method:: unfold(callable $c)
 
-Sometimes the internal items of a collection will contain arrays or iterators
-with more items. If you wish to flatten the internal structure to iterate once
-over all elements you can use the ``unfold()`` method. It will create a new
-collection that will yield every single element nested in the collection::
+Às vezes, os itens internos de uma coleção contêm matrizes ou iteradores com mais 
+itens. Se você deseja nivelar a estrutura interna para iterar uma vez todos os 
+elementos, pode usar o método ``unfold()``. Ele criará uma nova coleção que 
+produzirá todos os elementos aninhados na coleção::
 
     $items = [[1, 2, 3], [4, 5]];
     $collection = new Collection($items);
     $new = $collection->unfold();
 
-    // $result contains [1, 2, 3, 4, 5];
+    // $result contêm [1, 2, 3, 4, 5];
     $result = $new->toList();
 
-When passing a callable to ``unfold()`` you can control what elements will be
-unfolded from each item in the original collection. This is useful for returning
-data from paginated services::
+Ao passar uma chamada para ``unfold()``, você pode controlar quais elementos 
+serão desdobramentos de cada item da coleção original. Isso é útil para 
+retornar dados de serviços paginados::
 
     $pages = [1, 2, 3, 4];
     $collection = new Collection($pages);
     $items = $collection->unfold(function ($page, $key) {
-        // An imaginary web service that returns a page of results
+        // Um serviço da web imaginário que retorna uma página de resultados
         return MyService::fetchPage($page)->toList();
     });
 
     $allPagesItems = $items->toList();
 
-If you are using PHP 5.5+, you can use the ``yield`` keyword inside ``unfold()``
-to return as many elements for each item in the collection as you may need::
+Se você estiver usando o PHP 5.5 ou superior, poderá usar a palavra-chave 
+``yield`` dentro de ``unfold()`` para retornar quantos elementos para cada 
+item da coleção você precisar::
 
     $oddNumbers = [1, 3, 5, 7];
     $collection = new Collection($oddNumbers);
@@ -270,39 +274,39 @@ to return as many elements for each item in the collection as you may need::
         yield $oddNumber + 1;
     });
 
-    // $result contains [1, 2, 3, 4, 5, 6, 7, 8];
+    // $result contêm [1, 2, 3, 4, 5, 6, 7, 8];
     $result = $new->toList();
 
 .. php:method:: chunk($chunkSize)
 
-When dealing with large amounts of items in a collection, it may make sense to
-process the elements in batches instead of one by one. For splitting
-a collection into multiple arrays of a certain size, you can use the ``chunk()``
-function::
+Ao lidar com grandes quantidades de itens em uma coleção, pode fazer 
+sentido processar os elementos em lotes, em vez de um por um. Para 
+dividir uma coleção em várias matrizes de um determinado tamanho, 
+você pode usar a função ``chunk()``::
 
     $items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
     $collection = new Collection($items);
     $chunked = $collection->chunk(2);
     $chunked->toList(); // [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11]]
 
-The ``chunk`` function is particularly useful when doing batch processing, for
-example with a database result::
+A função ``chunk`` é particularmente útil ao realizar o processamento em lote, 
+por exemplo, com um resultado no banco de dados::
 
     $collection = new Collection($articles);
     $collection->map(function ($article) {
-            // Change a property in the article
+            // Alterar uma propriedade no artigo
             $article->property = 'changed';
         })
         ->chunk(20)
         ->each(function ($batch) {
-            myBulkSave($batch); // This function will be called for each batch
+            myBulkSave($batch); // Esta função será chamada para cada lote
         });
 
 .. php:method:: chunkWithKeys($chunkSize)
 
-Much like :php:meth:`chunk()`, ``chunkWithKeys()`` allows you to slice up
-a collection into smaller batches but with keys preserved. This is useful when
-chunking associative arrays::
+Muito parecido com :php:meth:`chunk()`, ``chunkWithKeys()`` permite dividir uma 
+coleção em lotes menores, mas com as chaves preservadas. Isso é útil ao agrupar 
+matrizes associativas::
 
     $collection = new Collection([
         'a' => 1,
@@ -311,7 +315,7 @@ chunking associative arrays::
         'd' => [4, 5]
     ]);
     $chunked = $collection->chunkWithKeys(2)->toList();
-    // Creates
+    // Cria
     [
         ['a' => 1, 'b' => 2],
         ['c' => 3, 'd' => [4, 5]]
@@ -320,14 +324,15 @@ chunking associative arrays::
 .. versionadded:: 3.4.0
     ``chunkWithKeys()`` was added in 3.4.0
 
-Filtering
+Filtragem
 =========
 
 .. php:method:: filter(callable $c)
 
-Collections make it easy to filter and create new collections based on
-the result of callback functions. You can use ``filter()`` to create a new
-collection of elements matching a criteria callback::
+As coleções facilitam a filtragem e a criação de novas coleções com base no 
+resultado das funções de retorno de chamada. Você pode usar ``filter()`` 
+para criar uma nova coleção de elementos que correspondem a um retorno de 
+chamada com critério::
 
     $collection = new Collection($people);
     $ladies = $collection->filter(function ($person, $key) {
@@ -339,8 +344,8 @@ collection of elements matching a criteria callback::
 
 .. php:method:: reject(callable $c)
 
-The inverse of ``filter()`` is ``reject()``. This method does a negative filter,
-removing elements that match the filter function::
+O inverso de ``filter()`` é ``reject()``. Este método cria um filtro 
+negativo, removendo elementos que correspondem à função de filtro::
 
     $collection = new Collection($people);
     $ladies = $collection->reject(function ($person, $key) {
@@ -349,8 +354,9 @@ removing elements that match the filter function::
 
 .. php:method:: every(callable $c)
 
-You can do truth tests with filter functions. To see if every element in
-a collection matches a test you can use ``every()``::
+Você pode fazer testes de verdade com funções de filtro. Para ver se 
+todos os elementos de uma coleção correspondem a um teste, você pode 
+usar ``every()``::
 
     $collection = new Collection($people);
     $allYoungPeople = $collection->every(function ($person) {
@@ -359,8 +365,8 @@ a collection matches a test you can use ``every()``::
 
 .. php:method:: some(callable $c)
 
-You can see if the collection contains at least one element matching a filter
-function using the ``some()`` method::
+Você pode ver se a coleção contém pelo menos um elemento correspondente a 
+uma função de filtro usando o método ``some()``::
 
     $collection = new Collection($people);
     $hasYoungPeople = $collection->some(function ($person) {
@@ -369,17 +375,18 @@ function using the ``some()`` method::
 
 .. php:method:: match(array $conditions)
 
-If you need to extract a new collection containing only the elements that
-contain a given set of properties, you should use the ``match()`` method::
+Se você precisar extrair uma nova coleção contendo apenas os elementos que 
+contêm um determinado conjunto de propriedades, use o método ``match()``::
 
     $collection = new Collection($comments);
     $commentsFromMark = $collection->match(['user.name' => 'Mark']);
 
 .. php:method:: firstMatch(array $conditions)
 
-The property name can be a dot-separated path. You can traverse into nested
-entities and match the values they contain. When you only need the first
-matching element from a collection, you can use ``firstMatch()``::
+O nome da propriedade pode ser um caminho separado por pontos. Você pode 
+atravessar para entidades aninhadas e corresponder aos valores que elas 
+contêm. Quando você só precisa do primeiro elemento correspondente de uma 
+coleção, pode usar ``firstMatch()``::
 
     $collection = new Collection($comments);
     $comment = $collection->firstMatch([
@@ -387,19 +394,18 @@ matching element from a collection, you can use ``firstMatch()``::
         'active' => true
     ]);
 
-As you can see from the above, both ``match()`` and ``firstMatch()`` allow you
-to provide multiple conditions to match on. In addition, the conditions can be
-for different paths, allowing you to express complex conditions to match
-against.
+Como você pode ver acima, ambos ``match()`` e ``firstMatch()`` permitem 
+fornecer várias condições para a correspondência. Além disso, as condições podem 
+ser para caminhos diferentes, permitindo expressar condições complexas para 
+comparação.
 
-Aggregation
-===========
+Agregação
+=========
 
 .. php:method:: reduce(callable $c)
 
-The counterpart of a ``map()`` operation is usually a ``reduce``. This
-function will help you build a single result out of all the elements in a
-collection::
+A contraparte de uma operação ``map()`` geralmente é uma ``reduce``. Esta função 
+ajudará você a criar um único resultado de todos os elementos em uma coleção::
 
     $totalPrice = $collection->reduce(function ($accumulated, $orderLine) {
         return $accumulated + $orderLine->price;
