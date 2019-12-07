@@ -18,6 +18,7 @@ Deprecations
 * Using a comma separated string for ``$fixtures`` in test cases is deprecated.
   Instead use an array, or implement the new ``getFixtures()`` method on your
   test case classes.
+* ``Validator::errors()`` was renamed to ``Validator::validate()``.
 
 New Features
 ============
@@ -66,6 +67,8 @@ Utility
 -------
 
 * ``Hash::sort()`` now accepts the ``SORT_ASC`` and ``SORT_DESC`` constants in the direction parameter.
+* ``Text::uuid`` now uses ``random_int()`` with PHP 5.6 insted of ``mt_rand()``.
+  This adds a dependency on paragonie/random_compat which implements it for PHP 5.6.
 
 Validation
 ----------

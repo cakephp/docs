@@ -693,7 +693,8 @@ CLI スクリプトを走らせる時に起こり得るでしょう。 ::
         $rules->add(function($entity) {
             $data = $entity->extract($this->schema()->columns(), true);
             $validator = $this->validator('default');
-            $errors = $validator->errors($data, $entity->isNew());
+            // Prior to 3.9 use $validator->errors()
+            $errors = $validator->validate($data, $entity->isNew());
             $entity->errors($errors);
 
             return empty($errors);

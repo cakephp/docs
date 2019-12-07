@@ -397,8 +397,9 @@ To validate the comments you would use a nested validator::
     // Connect the nested validators.
     $validator->addNestedMany('comments', $commentValidator);
 
+    // Prior to 3.9 use $validator->errors()
     // Get all errors including those from nested validators.
-    $validator->errors($data);
+    $validator->validate($data);
 
 You can create 1:1 'relationships' with ``addNested()`` and 1:N 'relationships'
 with ``addNestedMany()``. With both methods, the nested validator's errors will
