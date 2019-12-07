@@ -205,7 +205,7 @@ base em um caminho::
 
 Por fim, você pode usar *closures* para criar caminhos de chaves/valores/grupos dinamicamente, 
 por exemplo, ao trabalhar com entidades e datas (convertidas em instâncias ``Cake/Time`` pelo ORM), 
-você pode agrupar os resultados por data
+você pode agrupar os resultados por data::
 
     $combined = (new Collection($entities))->combine(
         'id',
