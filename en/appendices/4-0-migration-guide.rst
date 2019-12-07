@@ -386,8 +386,10 @@ Core
 Database
 --------
 
-* If your database's timezone does not match PHP timezone then you can use the
-  ``DateTime::setTimezone()`` method. See :ref:`datetime-type` for details.
+* If your database's timezone does not match PHP timezone then you can use
+  ``DateTime::setDatabaseTimezone()``. See :ref:`datetime-type` for details.
+* ``DateTime::setKeepDatabaseTimezone()`` allows you to keep the database time zone
+  in the DateTime objects created by queries.
 * ``Cake\Database\Log\LoggedQuery`` now implements ``JsonSerializable``.
 * ``Cake\Database\Connection`` now allows using any PSR-3 logger. As a result
   those using the standalone database package are no longer forced to use
