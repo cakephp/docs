@@ -854,7 +854,7 @@ por cada uma das colunas originais::
     ``Collection::transpose()`` was added in 3.3.0.
 
 Retirando Elementos
---------------------
+-------------------
 
 .. php:method:: sample(int $size)
 
