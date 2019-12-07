@@ -127,7 +127,7 @@ when a field can or cannot be empty:
 * ``update`` The field can be empty when validating an **update**
   operation.
 * A callback that returns ``true`` or ``false`` to indicate whether a field is
-  required or not. See the :ref:`conditional-validation` section for examples on
+  allowed to be empty. See the :ref:`conditional-validation` section for examples on
   how to use this parameter.
 
 An example of these methods in action is::
