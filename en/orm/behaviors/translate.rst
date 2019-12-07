@@ -128,7 +128,6 @@ class::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
@@ -150,7 +149,6 @@ for each different table::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->addBehavior('Translate', [
@@ -256,7 +254,6 @@ If this is undesired, you can ignore translations which are empty using the
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->addBehavior('Translate', [

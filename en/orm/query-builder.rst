@@ -648,12 +648,12 @@ For example::
 
     $query = $articles->find()->where(function (QueryExpression $exp, Query $query) {
         // Use add() to add multiple conditions for the same field.
-        $author = $query->newExpr()->or_(['author_id' => 3])->add(['author_id' => 2]);
-        $published = $query->newExpr()->and_(['published' => true, 'view_count' => 10]);
+        $author = $query->newExpr()->or(['author_id' => 3])->add(['author_id' => 2]);
+        $published = $query->newExpr()->and(['published' => true, 'view_count' => 10]);
 
-        return $exp->or_([
+        return $exp->or([
             'promoted' => true,
-            $query->newExpr()->and_([$author, $published])
+            $query->newExpr()->and([$author, $published])
         ]);
     });
 
@@ -679,14 +679,14 @@ Combinators
     These create new ``QueryExpression`` objects and set how the conditions added
     to that expression are joined together.
 
-    - ``and_()`` creates new expression objects that joins all conditions with ``AND``.
-    - ``or_()``  creates new expression objects that joins all conditions with ``OR``.
+    - ``and()`` creates new expression objects that joins all conditions with ``AND``.
+    - ``or()``  creates new expression objects that joins all conditions with ``OR``.
 
 Conditions
     These are added to the expression and automatically joined together
     depending on which combinator was used.
 
-The ``QueryExpression`` passed to the callback function defaults to ``and_()``::
+The ``QueryExpression`` passed to the callback function defaults to ``and()``::
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
@@ -715,7 +715,7 @@ You can build an expression with multiple **combinators** by using the ``add`` c
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
-            $orConditions = $exp->or_(['author_id' => 2])
+            $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
                 ->add($orConditions)
@@ -741,7 +741,7 @@ the method chaining::
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
-            $orConditions = $exp->or_(function (QueryExpression $or) {
+            $orConditions = $exp->or(function (QueryExpression $or) {
                 return $or->eq('author_id', 2)
                     ->eq('author_id', 5);
             });
@@ -754,7 +754,7 @@ You can negate sub-expressions using ``not()``::
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
-            $orConditions = $exp->or_(['author_id' => 2])
+            $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
                 ->not($orConditions)

@@ -167,6 +167,8 @@ methods will let you re-use your queries and make testing easier.
 By default queries and result sets will return :doc:`/orm/entities` objects. You
 can retrieve basic arrays by disabling hydration::
 
+    $query->disableHydration();
+    // Prior to 3.7.0
     $query->enableHydration(false);
     // Prior to 3.4.0
     $query->hydrate(false);
@@ -237,7 +239,6 @@ a table::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->setDisplayField('title');
@@ -964,6 +965,8 @@ set multiple times, or cache and iterate the results. If you need work with
 a data set that does not fit into memory you can disable buffering on the query
 to stream results::
 
+    $query->disableBufferedResults();
+    // Prior to 3.7.0
     $query->enableBufferedResults(false);
     // Prior to 3.4.0
     $query->bufferResults(false);
@@ -1182,7 +1185,7 @@ Finally, we put everything together::
     $wordCount = $articles->find()
         ->where(['published' => true])
         ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
-        ->enableHydration(false) // Prior to 3.4.0 use hydrate(false)
+        ->disableHydration() // Prior to 3.7.0 use enableHydration(false). Prior to 3.4.0 use hydrate(false)
         ->mapReduce($mapper, $reducer)
         ->toArray();
 
@@ -1242,7 +1245,7 @@ of followers per user::
 And we supply our functions to a query::
 
     $fakeFriends = $friends->find()
-        ->enableHydration(false) // Prior to 3.4.0 use hydrate(false)
+        ->disableHydration() // Prior to 3.7.0 use enableHydration(false). Prior to 3.4.0 use hydrate(false)
         ->mapReduce($mapper, $reducer)
         ->toArray();
 

@@ -12,7 +12,6 @@ use the ``Time`` class::
 
     class UsersController extends AppController
     {
-
         public function initialize()
         {
             parent::initialize();

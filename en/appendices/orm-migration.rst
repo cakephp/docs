@@ -233,7 +233,6 @@ finder methods in 3.0::
 
     class ArticlesTable
     {
-
         public function findPopular(Query $query, array $options)
         {
             return $query->where(['times_viewed' > 1000]);
@@ -395,7 +394,6 @@ code, interact with the same API when manipulating associations::
 
     class ReviewsTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->belongsTo('Movies');
@@ -403,7 +401,6 @@ code, interact with the same API when manipulating associations::
             $this->hasMany('Comments')
             $this->belongsToMany('Tags')
         }
-
     }
 
 As you can see from the example above each of the association types uses
@@ -436,7 +433,6 @@ to have multiple sets of rules::
 
     class ReviewsTable extends Table
     {
-
         public function validationDefault(Validator $validator)
         {
             $validator->requirePresence('body')
@@ -450,7 +446,6 @@ to have multiple sets of rules::
 
             return $validator;
         }
-
     }
 
 You can define as many validation methods as you need. Each method should be
@@ -562,7 +557,6 @@ a constructor::
 
     class SluggableBehavior extends Behavior
     {
-
         protected $_table;
 
         public function __construct(Table $table, array $config)
@@ -570,7 +564,6 @@ a constructor::
             parent::__construct($table, $config);
             $this->_table = $table;
         }
-
     }
 
 Mixin Methods Signature Changes

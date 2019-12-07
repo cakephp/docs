@@ -27,9 +27,10 @@ they are attached to. Creating a validator is simple::
 Once created, you can start defining sets of rules for the fields you want to
 validate::
 
+    // Prior to 3.7 you must use allowEmpty() or notEmpty().
     $validator
         ->requirePresence('title')
-        ->notEmpty('title', 'Please fill this field')
+        ->notEmptyString('title', 'Please fill this field')
         ->add('title', [
             'length' => [
                 'rule' => ['minLength', 10],
@@ -115,7 +116,7 @@ of data:
 
 You can also use ``notEmpty()`` to mark a field invalid if any 'empty' value is
 used. In general, it is recommended that you do not use ``notEmpty()`` and use more
-specific validators instead.
+specific validators instead: ``notEmptyString()``, ``notEmptyArray()``, ``notEmptyFile()``, ``notEmptyDate()``, ``notEmptyTime()``, ``notEmptyDateTime()``.
 
 The ``allowEmpty*`` methods support a mode parameter that allows you to control
 when a field can or cannot be empty:

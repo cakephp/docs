@@ -213,14 +213,12 @@ a locations table you may want to create one tree per country::
 
     class LocationsTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->addBehavior('Tree', [
                 'scope' => ['country_name' => 'Brazil']
             ]);
         }
-
     }
 
 In the previous example, all tree operations will be scoped to only the rows

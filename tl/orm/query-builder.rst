@@ -648,7 +648,7 @@ you can compose conditions together with the expression objects::
     $query = $articles->find()
         ->where(['title LIKE' => '%First%'])
         ->andWhere(function ($exp) {
-            return $exp->or_([
+            return $exp->or([
                 'author_id' => 2,
                 'is_highlighted' => true
             ]);
@@ -667,13 +667,13 @@ The above would create SQL like:
     )
 
 The expression object that is passed into ``where()`` functions has two kinds of
-methods. The first type of methods are **combinators**. The ``and_()`` and
-``or_()`` methods create new expression objects that change **how** conditions
+methods. The first type of methods are **combinators**. The ``and()`` and
+``or()`` methods create new expression objects that change **how** conditions
 are combined. The second type of methods are **conditions**. Conditions are
 added into an expression where they are combined with the current combinator.
 
-For example, calling ``$exp->and_(...)`` will create a new ``Expression`` object
-that combines all conditions it contains with ``AND``. While ``$exp->or_()``
+For example, calling ``$exp->and(...)`` will create a new ``Expression`` object
+that combines all conditions it contains with ``AND``. While ``$exp->or()``
 will create a new ``Expression`` object that combines all conditions added to it
 with ``OR``. An example of adding conditions with an ``Expression`` object would
 be::
@@ -687,7 +687,7 @@ be::
                 ->gt('view_count', 10);
         });
 
-Since we started off using ``where()``, we don't need to call ``and_()``, as
+Since we started off using ``where()``, we don't need to call ``and()``, as
 that happens implicitly. The above shows a few new condition
 methods being combined with ``AND``. The resulting SQL would look like:
 
@@ -712,7 +712,7 @@ following::
 
     $query = $articles->find()
         ->where(function ($exp) {
-            $orConditions = $exp->or_(['author_id' => 2])
+            $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
                 ->add($orConditions)
@@ -731,12 +731,12 @@ Which would generate the SQL similar to:
     AND published = 1
     AND view_count >= 10)
 
-The ``or_()`` and ``and_()`` methods also allow you to use functions as their
+The ``or()`` and ``and()`` methods also allow you to use functions as their
 parameters. This is often easier to read than method chaining::
 
     $query = $articles->find()
         ->where(function ($exp) {
-            $orConditions = $exp->or_(function ($or) {
+            $orConditions = $exp->or(function ($or) {
                 return $or->eq('author_id', 2)
                     ->eq('author_id', 5);
             });
@@ -749,7 +749,7 @@ You can negate sub-expressions using ``not()``::
 
     $query = $articles->find()
         ->where(function ($exp) {
-            $orConditions = $exp->or_(['author_id' => 2])
+            $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
                 ->not($orConditions)

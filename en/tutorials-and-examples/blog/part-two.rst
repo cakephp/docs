@@ -86,7 +86,6 @@ articles. The code for that action would look like this::
 
     class ArticlesController extends AppController
     {
-
         public function index()
         {
             $articles = $this->Articles->find('all');
@@ -212,7 +211,6 @@ you are very sneaky. Otherwise, we'll create it in the
 
     class ArticlesController extends AppController
     {
-
         public function index()
         {
              $this->set('articles', $this->Articles->find('all'));
@@ -272,7 +270,6 @@ First, start by creating an ``add()`` action in the
 
     class ArticlesController extends AppController
     {
-
         public function initialize()
         {
             parent::initialize();

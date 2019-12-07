@@ -342,7 +342,6 @@ it::
 
     class ArticlesController extends AppController
     {
-
         // ...
 
         public function add()

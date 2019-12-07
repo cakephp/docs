@@ -80,11 +80,11 @@ Contenu
     :maxdepth: 3
     :caption: Plugins
 
-    Bake <https://book.cakephp.org/bake/1.x/fr/>
-    Chronos <https://book.cakephp.org/chronos/1.x/fr/>
-    Debug Kit <https://book.cakephp.org/debugkit/3.x/fr/>
-    Migrations <https://book.cakephp.org/migrations/2.x/fr/>
-    Elasticsearch <https://book.cakephp.org/elasticsearch/2.x/fr/>
+    Bake <https://book.cakephp.org/bake/1/fr/>
+    Chronos <https://book.cakephp.org/chronos/1/fr/>
+    Debug Kit <https://book.cakephp.org/debugkit/3/fr/>
+    Migrations <https://book.cakephp.org/migrations/2/fr/>
+    Elasticsearch <https://book.cakephp.org/elasticsearch/2/fr/>
     upgrade-tool
 
 .. toctree::

@@ -177,12 +177,10 @@ we'll start with the following::
     {
         public function setUp()
         {
-
         }
 
         public function testBar()
         {
-
         }
     }
 
@@ -677,6 +675,15 @@ you define the ``$fixtures`` property in your model::
         public $fixtures = ['app.Articles', 'app.Comments'];
     }
 
+.. note::
+    You can also override ``TestCase::getFixtures()`` instead of defining
+    the ``$fixtures`` property::
+    
+        public function getFixtures() 
+        { 
+            return ['app.Articles', 'app.Comments'];
+        }
+        
 The above will load the Article and Comment fixtures from the application's
 Fixture directory. You can also load fixtures from CakePHP core, or plugins::
 
@@ -1481,9 +1488,8 @@ correctly by the ``adjust()`` method in our component. We create the file
 
     class PagematronComponentTest extends TestCase
     {
-
-        public $component = null;
-        public $controller = null;
+        protected $component;
+        protected $controller;
 
         public function setUp()
         {

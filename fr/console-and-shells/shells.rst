@@ -6,13 +6,12 @@ Shells
 .. php:class:: Shell
 
 .. deprecated:: 3.6.0
-    Shells are deprecated as of 3.6.0, but will not be removed until 5.x.
-    Use :doc:`/console-and-shells/commands` instead.
+    Les shells sont dépréciés depuis la version 3.6.0, mais ne sera pas retiré avant la version 5.x.
 
-Creating a Shell
-================
+Créer un Shell
+==============
 
-Let's create a shell for use in the Console. For this example, we'll create a
+Créons un shell for use in the Console. For this example, we'll create a
 simple Hello world shell. In your application's **src/Shell** directory create
 **HelloShell.php**. Put the following code inside it::
 
@@ -113,6 +112,7 @@ will call this method when the task is invoked. A task class looks like::
     {
         public function main()
         {
+
         }
     }
 
@@ -182,6 +182,7 @@ properties attached to your shell::
 
     class UserShell extends Shell
     {
+
         public function initialize()
         {
             parent::initialize();

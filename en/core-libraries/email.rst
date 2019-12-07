@@ -453,7 +453,7 @@ Sending Messages Quickly
 ========================
 
 Sometimes you need a quick way to fire off an email, and you don't necessarily
-want do setup a bunch of configuration ahead of time.
+want to setup a bunch of configuration ahead of time.
 :php:meth:`Cake\\Mailer\\Email::deliver()` is intended for that purpose.
 
 You can create your configuration using
@@ -584,10 +584,17 @@ instructions. For example, we could add the following to our ``UserMailer``::
         }
     }
 
-The mailer object could now be registered as an event listener, and the
-``onRegistration()`` method would be invoked every time the ``Model.afterSave``
-event would be fired. For information on how to register event listener objects,
-please refer to the :ref:`registering-event-listeners` documentation.
+You can now register the mailer as an event listener and the
+``onRegistration()`` method will be invoked every time the ``Model.afterSave``
+event is fired::
+
+    // attach to Users event manager
+    $this->Users->getEventManager()->on($this->getMailer('User'));
+
+.. note::
+
+    For information on how to register event listener objects,
+    please refer to the :ref:`registering-event-listeners` documentation.
 
 .. _email-testing:
 
@@ -598,8 +605,8 @@ To test email, add ``Cake\TestSuite\EmailTrait`` to your test case.
 The ``EmailTrait`` provides your test case with a collection of assertions
 that you can perform on any emails sent by the application.
 
-Adding the ``EmailTrait`` to your test case will replace all of your application's 
-email transports with the ``Cake\TestSuite\TestEmailTransport``. This transport 
+Adding the ``EmailTrait`` to your test case will replace all of your application's
+email transports with the ``Cake\TestSuite\TestEmailTransport``. This transport
 intercepts emails instead of sending them, and allows you to assert against them.
 
 Add the trait to your test case to start testing emails::

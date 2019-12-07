@@ -2801,7 +2801,6 @@ could do the following::
 
     class AutocompleteWidget implements WidgetInterface
     {
-
         protected $_templates;
 
         public function __construct($templates)

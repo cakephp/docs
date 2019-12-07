@@ -37,7 +37,6 @@ validating any user data::
 
     class UsersTable extends Table
     {
-
         public function validationDefault(Validator $validator)
         {
             return $validator
@@ -65,15 +64,14 @@ with CakePHP::
 
     class UsersController extends AppController
     {
-
         public function beforeFilter(Event $event)
         {
             parent::beforeFilter($event);
             $this->Auth->allow('add');
         }
 
-         public function index()
-         {
+        public function index()
+        {
             $this->set('users', $this->Users->find('all'));
         }
 
@@ -97,7 +95,6 @@ with CakePHP::
             }
             $this->set('user', $user);
         }
-
     }
 
 In the same way we created the views for our articles by using the code
@@ -230,7 +227,6 @@ entity file and add the following::
 
     class User extends Entity
     {
-
         // Make all fields mass assignable except for primary key field "id".
         protected $_accessible = [
             '*' => true,

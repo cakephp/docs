@@ -92,7 +92,7 @@ and ReallyBigPeople são todos exemplos convencionais de models.
 Os nomes de Tables correspondentes aos models do CakePHP são pluralizadas e
 separadas por sublinhado. As tables sublinhadas para os models mencionados acima
 seriam ``people``,  ``big_people``, e ``really_big_people``,
-respectively.
+respectivamente.
 
 Você pode utilizar a biblioteca utility :php:class:`Cake\\Utility\\Inflector`
 para checar o singular/plural de palavras. Veja o

@@ -27,7 +27,6 @@ a simple contact form would look like::
 
     class ContactForm extends Form
     {
-
         protected function _buildSchema(Schema $schema)
         {
             return $schema->addField('name', 'string')

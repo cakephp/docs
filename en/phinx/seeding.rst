@@ -44,7 +44,6 @@ It is based on a skeleton template::
          */
         public function run()
         {
-
         }
     }
 
