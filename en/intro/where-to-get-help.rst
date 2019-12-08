@@ -86,11 +86,6 @@ enable existing users of stackoverflow to find your questions.
 Where to get Help in your Language
 ==================================
 
-Brazilian Portuguese
---------------------
-
-- `Brazilian CakePHP Community <http://cakephp-br.org>`_
-
 Danish
 ------
 
