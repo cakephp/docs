@@ -45,7 +45,6 @@ method::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config): void
         {
             $this->setTable('my_table');

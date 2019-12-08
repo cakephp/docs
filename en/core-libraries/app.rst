@@ -31,10 +31,22 @@ When resolving classes, the ``App`` namespace will be tried, and if the
 class does not exist the ``Cake`` namespace will be attempted. If both
 class names do not exist, ``false`` will be returned.
 
+Finding Paths to Resources
+==========================
+
+.. php:staticmethod:: path(string $package, ?string $plugin = null)
+
+The method returns paths set using ``App.paths`` app config::
+
+    // Get the templates path set using ``App.paths.templates`` app config.
+    App::path('templates');
+
+The same way you can retrieve paths for ``locales``, ``plugins``.
+
 Finding Paths to Namespaces
 ===========================
 
-.. php:staticmethod:: path(string $package, string $plugin = null)
+.. php:staticmethod:: classPath(string $package, ?string $plugin = null)
 
 Used to get locations for paths based on conventions::
 
@@ -43,14 +55,9 @@ Used to get locations for paths based on conventions::
 
 This can be done for all namespaces that are part of your application.
 
-``App::path()`` will only return the default path, and will not be able to
+``App::classPath()`` will only return the default path, and will not be able to
 provide any information about additional paths the autoloader is configured
 for.
-
-The method can also return paths set using ``App.paths`` app config::
-
-    // Get the templates path set using ``App.paths.templates`` app config.
-    App::path('templates');
 
 .. php:staticmethod:: core(string $package)
 
@@ -62,7 +69,7 @@ Used for finding the path to a package inside CakePHP::
 Locating Plugins
 ================
 
-.. php:staticmethod:: Plugin::path(string $plugin)
+.. php:staticmethod:: path(string $plugin)
 
 Plugins can be located with Plugin. Using ``Plugin::path('DebugKit');``
 for example, will give you the full path to the DebugKit plugin::

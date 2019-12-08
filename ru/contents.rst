@@ -79,10 +79,10 @@
     :maxdepth: 3
     :caption: Плагины
 
-    Bake <https://book.cakephp.org/bake/1.x/ru/>
-    Chronos <https://book.cakephp.org/chronos/1.x/>
-    Debug kit <https://book.cakephp.org/debugkit/1.x>
-    Migrations <https://book.cakephp.org/migrations/2.x>
+    Bake <https://book.cakephp.org/bake/2/ru/>
+    Chronos <https://book.cakephp.org/chronos/2/>
+    Debug kit <https://book.cakephp.org/debugkit/4>
+    Migrations <https://book.cakephp.org/migrations/3/ru/>
     elasticsearch
     upgrade-tool
 

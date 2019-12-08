@@ -97,7 +97,6 @@ class::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config): void
         {
             // By default Eav strategy will be used.
@@ -298,7 +297,6 @@ If this is undesired, you can ignore translations which are empty using the
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [

@@ -1,4 +1,4 @@
 Migrations
 ##########
 
-このページは `移動しました <https://book.cakephp.org/migrations/2.x/ja/>`__ 。
+このページは `移動しました <https://book.cakephp.org/migrations/3/ja/>`__ 。

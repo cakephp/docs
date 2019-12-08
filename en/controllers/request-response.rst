@@ -1023,14 +1023,17 @@ object::
     use DateTime;
 
     // Add a cookie
-    $this->response = $this->response->withCookie(new Cookie(
+    $this->response = $this->response->withCookie(Cookie::create(
         'remember_me',
         'yes',
-        new DateTime('+1 year'), // expiration time
-        '/', // path
-        '', // domain
-        false, // secure
-        true // httponly
+        // All keys are optional
+        [
+            'expires' => new DateTime('+1 year'),
+            'path' => '',
+            'domain' => '',
+            'secure' => false,
+            'http' => false,
+        ]
     ]);
 
 See the :ref:`creating-cookies` section for how to use the cookie object. You

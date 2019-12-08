@@ -408,6 +408,8 @@ date
     date
 datetime, timestamp
     datetime-local
+datetimefractional, timestampfractional
+    datetime-local
 time
     time
 month
@@ -2452,7 +2454,6 @@ could do the following::
 
     class AutocompleteWidget implements WidgetInterface
     {
-
         protected $_templates;
 
         public function __construct($templates)

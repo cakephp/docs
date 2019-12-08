@@ -37,7 +37,6 @@ validating any user data::
 
     class UsersTable extends Table
     {
-
         public function validationDefault(Validator $validator)
         {
             return $validator
@@ -65,7 +64,6 @@ with CakePHP::
 
     class UsersController extends AppController
     {
-
         public function beforeFilter(EventInterface $event)
         {
             parent::beforeFilter($event);
@@ -85,7 +83,7 @@ with CakePHP::
 
         public function add()
         {
-            $user = $this->Users->newEntity();
+            $user = $this->Users->newEmptyEntity();
             if ($this->request->is('post')) {
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
@@ -96,7 +94,6 @@ with CakePHP::
             }
             $this->set('user', $user);
         }
-
     }
 
 In the same way we created the views for our articles by using the code
@@ -229,7 +226,6 @@ entity file and add the following::
 
     class User extends Entity
     {
-
         // Make all fields mass assignable except for primary key field "id".
         protected $_accessible = [
             '*' => true,
@@ -309,7 +305,7 @@ currently logged in user as a reference for the created article::
 
     public function add()
     {
-        $article = $this->Articles->newEntity();
+        $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             // Added this line

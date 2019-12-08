@@ -27,11 +27,9 @@ Its contents should look like::
 
     class InboxCell extends Cell
     {
-
         public function display()
         {
         }
-
     }
 
 Save this file into **src/View/Cell/InboxCell.php**. As you can see, like other
@@ -67,7 +65,6 @@ case for a cell. In the class we just made, add the following::
 
     class InboxCell extends Cell
     {
-
         public function display()
         {
             $this->loadModel('Messages');

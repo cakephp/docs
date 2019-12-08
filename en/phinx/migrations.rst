@@ -59,7 +59,6 @@ Phinx automatically creates a skeleton migration file with a single method::
          */
         public function change()
         {
-
         }
     }
 
@@ -104,7 +103,6 @@ down automatically for you. For example::
          */
         public function up()
         {
-
         }
 
         /**
@@ -112,7 +110,6 @@ down automatically for you. For example::
          */
         public function down()
         {
-
         }
     }
 
@@ -187,7 +184,6 @@ Queries can be executed with the ``execute()`` and ``query()`` methods. The
          */
         public function down()
         {
-
         }
     }
 
@@ -253,7 +249,6 @@ Both methods accept raw SQL as their only parameter::
          */
         public function down()
         {
-
         }
     }
 
@@ -345,7 +340,6 @@ your database migration::
          */
         public function down()
         {
-
         }
     }
 
@@ -396,7 +390,6 @@ store a collection of users::
          */
         public function down()
         {
-
         }
     }
 
@@ -441,7 +434,6 @@ create a primary key using two columns instead::
          */
         public function down()
         {
-
         }
     }
 
@@ -471,7 +463,6 @@ To simply change the name of the primary key, we need to override the default
          */
         public function down()
         {
-
         }
     }
 
@@ -512,7 +503,6 @@ value::
          */
         public function down()
         {
-
         }
     }
 
@@ -572,7 +562,6 @@ method::
          */
         public function down()
         {
-
         }
     }
 
@@ -1028,7 +1017,6 @@ Options`_ for allowed values::
          */
         public function down()
         {
-
         }
     }
 
@@ -1060,7 +1048,6 @@ table object::
          */
         public function down()
         {
-
         }
     }
 
@@ -1091,7 +1078,6 @@ using the ``name`` parameter::
          */
         public function down()
         {
-
         }
     }
 
@@ -1141,7 +1127,6 @@ call this method for each index::
          */
         public function down()
         {
-
         }
     }
 
@@ -1178,7 +1163,6 @@ Let's add a foreign key to an example table::
          */
         public function down()
         {
-
         }
     }
 
@@ -1217,7 +1201,6 @@ a combined key::
          */
         public function down()
         {
-
         }
     }
 
@@ -1246,7 +1229,6 @@ is supported as of Phinx version 0.6.5::
          */
         public function down()
         {
-
         }
     }
 
@@ -1275,7 +1257,6 @@ We can also easily check if a foreign key exists::
          */
         public function down()
         {
-
         }
     }
 
@@ -1301,6 +1282,5 @@ Finally, to delete a foreign key, use the ``dropForeignKey`` method::
          */
         public function down()
         {
-
         }
     }

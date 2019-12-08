@@ -1,4 +1,4 @@
 Миграции
 ########
 
-эта страница `переехала <https://book.cakephp.org/migrations/2.x/ru/>`__.
+эта страница `переехала <https://book.cakephp.org/migrations/3/ru/>`__.

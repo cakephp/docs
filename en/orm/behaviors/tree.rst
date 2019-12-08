@@ -213,7 +213,6 @@ a locations table you may want to create one tree per country::
 
     class LocationsTable extends Table
     {
-
         public function initialize(array $config): void
         {
             $this->addBehavior('Tree', [

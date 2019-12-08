@@ -57,15 +57,12 @@ to store in them::
         'created' => new DateTime('now')
     ]);
 
-The preferred way of getting new entities is using the ``newEntity()`` method from the
+The preferred way of getting new entities is using the ``newEmptyEntity()`` method from the
 ``Table`` objects::
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6.0
-    $article = TableRegistry::get('Articles')->newEntity();
-
-    $article = TableRegistry::getTableLocator()->get('Articles')->newEntity();
+    $article = TableRegistry::getTableLocator()->get('Articles')->newEmptyEntity();
 
     $article = TableRegistry::getTableLocator()->get('Articles')->newEntity([
         'id' => 1,

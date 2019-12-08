@@ -583,7 +583,6 @@ database, the easiest way is to use a setter function in your User entity::
 
     class User extends Entity
     {
-
         // ...
 
         protected function _setPassword($password)
@@ -619,7 +618,6 @@ In order to use a different password hasher, you need to create the class in
 
     class LegacyPasswordHasher extends AbstractPasswordHasher
     {
-
         public function hash($password)
         {
             return sha1($password);
@@ -991,7 +989,7 @@ checked::
             }
 
             // Only admins can access admin functions
-            if ($this->request->getParam('prefix') === 'admin') {
+            if ($this->request->getParam('prefix') === 'Admin') {
                 return (bool)($user['role'] === 'admin');
             }
 
@@ -1071,7 +1069,7 @@ only the configuration option::
 
     $this->Auth->getConfig('loginAction');
 
-    $this->redirect($this->Auth->getConfig('loginAction'));
+    return $this->redirect($this->Auth->getConfig('loginAction'));
 
 This is useful if you want to redirect a user to the ``login`` route for example.
 Without a parameter, the full configuration will be returned.
