@@ -32,8 +32,6 @@ plugin:
 
 .. code-block:: bash
 
-    cd ~/code/upgrade
-
     # Rename locale files
     bin/cake upgrade file_rename locales <path/to/app>
 
