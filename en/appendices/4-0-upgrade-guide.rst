@@ -19,6 +19,13 @@ Because CakePHP 4 adopts strict mode and uses more typehinting, there are many
 backwards incompatible changes concerning method signatures and file renames.
 To help expedite fixing these tedious changes there is an upgrade CLI tool:
 
+
+.. warning::
+    The upgrade tool is intended to be run **before** you update your
+    application's dependencies to 4.0. The rector based tasks will not run
+    correctly if your application already has its dependencies updated to 4.x or
+    PHPUnit8.
+
 .. code-block:: bash
 
     # Install the upgrade tool
