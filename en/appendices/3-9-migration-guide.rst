@@ -48,6 +48,15 @@ Datasource
   ``count()`` query. If you only use 'next' and 'previous' navigation in
   your pagination controls this class can be a good solution.
 
+I18n
+----
+
+* ``Number::FORMAT_CURRENCY_ACCOUNTING`` was added.
+* ``Number::CURRENCY_ACCOUNTING`` was added.
+* ``Number::getDefaultCurrencyFormat()`` and
+  ``Number::setDefaultCurrencyFormat()`` were added. These methods let you
+  define the formatting style for currency values.
+
 ORM
 ---
 
