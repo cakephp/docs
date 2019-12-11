@@ -23,7 +23,7 @@ O CakePHP emula vários desses aspectos de quando objetos são engatilhados e
 gerenciados em bibliotecas populares de JavaScript, como jQuery. Na implementação
 do CakePHP um evento é disparado para todos os listeners (ouvintes). O objeto event
 tem as informações do evento e a habilidade de parar a propagação de um evento em
-qualquer ponto do evento. Listeners podem se registrar ou delegar essa tarefa
+qualquer ponto do evento. Ouvintes podem se registrar ou delegar essa tarefa
 para outros objetos e tem a chance de alterar o estado do evento em si pelo
 resto dos callbacks.
 
@@ -98,10 +98,10 @@ Gerenciador de Eventos Global
 
 Adicionado aos gerenciadores de evento no nível da instância, o CakePHP provê um
 gerenciador de evento global, que permite ouvir a qualquer evento disparado pela
-aplicação. isso é útil quando anexar Listeners a uma instancia pode ser incômodo ou
+aplicação. isso é útil quando anexar Ouvintes a uma instancia pode ser incômodo ou
 difícil. O gerenciador de eventos global é um singleton de
-:php:class:`Cake\\Event\\EventManager`. Listeners anexados ao gerenciador de eventos
-global são executados antes dos Listeners de instâncias com a mesma prioridade.
+:php:class:`Cake\\Event\\EventManager`. Ouvintes anexados ao gerenciador de eventos
+global são executados antes dos Ouvintes de instâncias com a mesma prioridade.
 você pode acessar o gerenciador de eventos glocal utilizando o metodo estático::
 
     // Em qualquer arquivo de configuração ou arquivo que seja executado *antes* do evento
@@ -118,8 +118,8 @@ que é anexada globalmente, desse modo, evitando bugs, lembre-se que com a
 flexibilidade de um gerenciador de evento global, uma certa complexidade é adicionada.
 
 O metodo :php:meth:`Cake\\Event\\EventManager::dispatch()` aceita o objeto do evento
-como um argumento, e notifica a todos os Listener e Callbacks parando esse objeto
-adiante. Os Listeners vão lidar com toda a lógica extra ligada ao evento
+como um argumento, e notifica a todos os Ouvintes e Callbacks parando esse objeto
+adiante. Os Ouvintes vão lidar com toda a lógica extra ligada ao evento
 ``afterPlace``, você pode, enviar emails, atualizar estatísticas do
 usuário em objetos separados, ou também delegar isso para tarefas offline que você
 possa precisar.
