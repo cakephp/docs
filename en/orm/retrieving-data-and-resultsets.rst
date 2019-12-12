@@ -859,7 +859,7 @@ the default 'join' strategy and 'INNER' ``joinType`` can be changed to
         ]
     ]);
 
-This can be useful when you need you need to add conditions that don't
+This can be useful when you need to add conditions that don't
 work well in a join.  This also makes it possible to query tables
 that are not allowed in joins such as separate databases.
 
