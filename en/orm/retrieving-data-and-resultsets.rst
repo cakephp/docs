@@ -585,8 +585,8 @@ notation::
         }
     ]);
 
-In the above example, you'll still get articles even if the author doesn't have
-a published profile. To only get articles written by authors with a published profile use
+In the above example, you'll still get authors even if they don't have
+a published profile. To only get authors with a published profile use
 :ref:`matching() <filtering-by-associated-data>`. If you have defined custom
 finders in your associations, you can use them inside ``contain()``::
 
