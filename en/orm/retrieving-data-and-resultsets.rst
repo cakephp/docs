@@ -598,7 +598,7 @@ finders in your associations, you can use them inside ``contain()``::
 
 .. note::
 
-    With ``BelongsTo`` and `HasOne`` associations only ``select`` and ``where`` clauses
+    With ``BelongsTo`` and ``HasOne`` associations only ``select`` and ``where`` clauses
     are valid in the ``contain()`` query.  With ``HasMany`` and ``BelongsToMany`` all
     clauses such as ``order()`` are valid.
 
@@ -864,7 +864,7 @@ work well in a join.  This also makes it possible to query tables
 that are not allowed in joins such as separate databases.
 
 Usually, you set the strategy for an association when defining it
-in ``Table::initialize()`, but you can permanently change the strategy manually::
+in ``Table::initialize()``, but you can permanently change the strategy manually::
 
     $articles->Comments->setStrategy('select');
 
