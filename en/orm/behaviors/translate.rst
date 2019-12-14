@@ -72,7 +72,7 @@ Shadow Table Strategy
 =====================
 
 Let's assume we have an ``articles`` table and we want it's ``title`` and ``body``
-fields to be translated. For that we create a shadow table ``articles_translations``::
+fields to be translated. For that we create a shadow table ``articles_translations``:
 
 .. code-block:: sql
 
