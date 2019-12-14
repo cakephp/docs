@@ -23,9 +23,7 @@ Query builder that does not include ORM features, if necessary. See the
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6.0
-    $articles = TableRegistry::get('Articles');
-
+    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // Start a new query.
@@ -45,9 +43,7 @@ Selecting Rows From A Table
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6.0
-    $query = TableRegistry::get('Articles')->find();
-
+    // Prior to 3.6 use TableRegistry::get('Articles')
     $query = TableRegistry::getTableLocator()->get('Articles')->find();
 
     foreach ($query as $article) {
@@ -623,16 +619,22 @@ The above would generate SQL like::
 
     SELECT * FROM articles WHERE author_id = 3 AND (view_count = 2 OR view_count = 3)
 
-If you'd prefer to avoid deeply nested arrays, you can use the callback form of
-``where()`` to build your queries. The callback form allows you to use the
-expression builder to build more complex conditions without arrays. For example::
+.. deprecated:: 3.5.0
+    ``Query::orWhere()`` creates hard to predict SQL based on the current query state.
+    Use ``Query::where()`` instead as it has more predictable and easier
+    to understand behavior.
 
-    $query = $articles->find()->where(function ($exp, $query) {
+If you'd prefer to avoid deeply nested arrays, you can use the callback form of
+``where()`` to build your queries. The callback accepts a QueryExpression which allows
+you to use the expression builder interface to build more complex conditions without arrays.
+For example::
+
+    $query = $articles->find()->where(function (QueryExpression $exp, Query $query) {
         // Use add() to add multiple conditions for the same field.
-        $author = $query->newExpr()->or_(['author_id' => 3])->add(['author_id' => 2]);
+        $author = $query->newExpr()->or(['author_id' => 3])->add(['author_id' => 2]);
         $published = $query->newExpr()->and(['published' => true, 'view_count' => 10]);
 
-        return $exp->or_([
+        return $exp->or([
             'promoted' => true,
             $query->newExpr()->and([$author, $published])
         ]);
@@ -653,17 +655,21 @@ The above generates SQL similar to:
         OR promoted = 1
     )
 
-The expression object that is passed into ``where()`` functions has two kinds of
-methods. The first type of methods are **combinators**. The ``and()`` and
-``or()`` methods create new expression objects that change **how** conditions
-are combined. The second type of methods are **conditions**. Conditions are
-added into an expression where they are combined with the current combinator.
+The ``QueryExpression`` passed to the callback allows you to use both
+**combinators** and **conditions** to build the full expression.
 
-For example, calling ``$exp->and(...)`` will create a new ``Expression`` object
-that combines all conditions it contains with ``AND``. While ``$exp->or()``
-will create a new ``Expression`` object that combines all conditions added to it
-with ``OR``. An example of adding conditions with an ``Expression`` object would
-be::
+Combinators
+    These create new ``QueryExpression`` objects and set how the conditions added
+    to that expression are joined together.
+
+    - ``and()`` creates new expression objects that joins all conditions with ``AND``.
+    - ``or()``  creates new expression objects that joins all conditions with ``OR``.
+
+Conditions
+    These are added to the expression and automatically joined together
+    depending on which combinator was used.
+
+The ``QueryExpression`` passed to the callback function defaults to ``and()``::
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
@@ -708,16 +714,18 @@ Which would generate the SQL similar to:
     SELECT *
     FROM articles
     WHERE (
-    (author_id = 2 OR author_id = 5)
-    AND published = 1
-    AND view_count >= 10)
+        (author_id = 2 OR author_id = 5)
+        AND published = 1
+        AND view_count >= 10
+    )
 
-The ``or()`` and ``and()`` methods also allow you to use functions as their
-parameters. This is often easier to read than method chaining::
+The **combinators**  also allow you pass in a callback which takes
+the new expression object as a parameter if you want to separate
+the method chaining::
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
-            $orConditions = $exp->or(function ($or) {
+            $orConditions = $exp->or(function (QueryExpression $or) {
                 return $or->eq('author_id', 2)
                     ->eq('author_id', 5);
             });
@@ -744,8 +752,9 @@ Which will generate the following SQL looking like:
     SELECT *
     FROM articles
     WHERE (
-    NOT (author_id = 2 OR author_id = 5)
-    AND view_count <= 10)
+        NOT (author_id = 2 OR author_id = 5)
+        AND view_count <= 10
+    )
 
 It is also possible to build expressions using SQL functions::
 
@@ -766,8 +775,8 @@ Which will generate the following SQL looking like:
     SELECT *
     FROM articles
     WHERE (
-    YEAR(created) >= 2014
-    AND published = 1
+        YEAR(created) >= 2014
+        AND published = 1
     )
 
 When using the expression objects you can use the following methods to create

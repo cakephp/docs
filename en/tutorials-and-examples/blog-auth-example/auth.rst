@@ -70,8 +70,8 @@ with CakePHP::
             $this->Auth->allow('add');
         }
 
-         public function index()
-         {
+        public function index()
+        {
             $this->set('users', $this->Users->find('all'));
         }
 

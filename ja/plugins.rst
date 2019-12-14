@@ -577,10 +577,8 @@ bake で作っていないプラグインなら、クラスを自動的に読み
 
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6 use TableRegistry::get('ContactManager.Contacts')
     $contacts = TableRegistry::getTableLocator()->get('ContactManager.Contacts');
-
-    // Prior to 3.6.0
-    $contacts = TableRegistry::get('ContactManager.Contacts');
 
 あるいは、コントローラーの処理の中で以下のように使用できます。 ::
 

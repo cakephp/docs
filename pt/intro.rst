@@ -37,9 +37,7 @@ poderíamos fazer::
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6.0
-    $users = TableRegistry::get('Users');
-
+    // Prior to 3.6 use TableRegistry::get('Users')
     $users = TableRegistry::getTableLocator()->get('Users');
     $query = $users->find();
     foreach ($query as $row) {
@@ -55,9 +53,7 @@ assim::
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6.0
-    $users = TableRegistry::get('Users');
-
+    // Prior to 3.6 use TableRegistry::get('Users')
     $users = TableRegistry::getTableLocator()->get('Users');
     $user = $users->newEntity(['email' => 'mark@example.com']);
     $users->save($user);
@@ -97,8 +93,8 @@ renderizar uma resposta com o auxílio de ambas as camadas, Model e View.
 
 Um controller pode ser visto como um gerente que certifica-se de que todos os
 recursos necessários para completar uma tarefa sejam delegados aos trabalhadores
-corretos. Ele aguarda por petições dos clientes, valida os dados de acordo
-com a autenticação ou regras de autorização, delega requisições ou processamento
+corretos. Ele aguarda por petições dos clientes, checa suas validades de acordo
+com autenticação ou regras de autorização, delega requisições ou processamento
 de dados da camada Model, seleciona o tipo de dados de apresentação que os
 clientes estão aceitando, e finalmente delega o processo de renderização para a
 camada View. Um exemplo de controller para registro de usuário seria::

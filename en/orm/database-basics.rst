@@ -246,9 +246,9 @@ flags
     by the driver you are using.
 cacheMetadata
     Either boolean ``true``, or a string containing the cache configuration to
-    store meta data in. Having metadata caching disable is not advised and can
-    result in very poor performance. See the :ref:`database-metadata-cache`
-    section for more information.
+    store meta data in. Having metadata caching disabled by setting it to ``false``
+    is not advised and can result in very poor performance. See the
+    :ref:`database-metadata-cache` section for more information.
 mask
     Set the permissions on the generated database file. (Only supported by SQLite)
 
@@ -481,7 +481,6 @@ we could make the following type class::
             }
             return PDO::PARAM_STR;
         }
-
     }
 
 By default the ``toStatement()`` method will treat values as strings which will
@@ -503,10 +502,10 @@ your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
     {
         protected function _initializeSchema(TableSchema $schema)
         {
-            $schema->columnType('widget_prefs', 'json');
+            // Prior to 3.5.0 use columnType()
+            $schema->setColumnType('widget_prefs', 'json');
             return $schema;
         }
-
     }
 
 .. _mapping-custom-datatypes-to-sql-expressions:

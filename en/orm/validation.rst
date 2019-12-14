@@ -612,7 +612,7 @@ In the above example, we'll use a 'custom' validator, which is defined using the
         $validator->add(
             // ...
         );
-        
+
         return $validator;
     }
 
@@ -699,7 +699,7 @@ come up when running a CLI script that directly sets properties on entities::
         ]);
 
         // ...
-        
+
         return $validator;
     }
 
@@ -709,7 +709,8 @@ come up when running a CLI script that directly sets properties on entities::
         $rules->add(function($entity) {
             $data = $entity->extract($this->schema()->columns(), true);
             $validator = $this->validator('default');
-            $errors = $validator->errors($data, $entity->isNew());
+            // Prior to 3.9 use $validator->errors()
+            $errors = $validator->validate($data, $entity->isNew());
             $entity->errors($errors);
 
             return empty($errors);

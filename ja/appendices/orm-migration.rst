@@ -150,9 +150,7 @@ Query オブジェクトを返すということです。これにはいくつ�
 
 ``find`` を呼び出した後、さらにクエリーを変更することができます。 ::
 
-    // Prior to 3.6.0
-    $articles = TableRegistry::get('Articles');
-
+    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find();
     $query->where(['author_id' => 1])->order(['title' => 'DESC']);

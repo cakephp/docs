@@ -909,7 +909,7 @@ To rename a column, access an instance of the Table object then call the
         {
             $table = $this->table('users');
             $table->renameColumn('bio', 'biography')
-               ->update();
+                ->update();
         }
 
         /**
@@ -919,7 +919,7 @@ To rename a column, access an instance of the Table object then call the
         {
             $table = $this->table('users');
             $table->renameColumn('biography', 'bio')
-               ->update();
+                ->update();
         }
     }
 
@@ -941,7 +941,7 @@ When adding a column you can dictate its position using the ``after`` option::
         {
             $table = $this->table('users');
             $table->addColumn('city', 'string', ['after' => 'email'])
-                  ->update();
+                ->update();
         }
     }
 
@@ -963,7 +963,7 @@ To drop a column, use the ``removeColumn()`` method::
         {
             $table = $this->table('users');
             $table->removeColumn('short_name')
-                  ->save();
+                ->save();
         }
     }
 
@@ -985,7 +985,7 @@ You can limit the maximum length of a column by using the ``limit`` option::
         {
             $table = $this->table('tags');
             $table->addColumn('short_name', 'string', ['limit' => 30])
-                  ->update();
+                ->update();
         }
     }
 
@@ -1009,7 +1009,7 @@ Options`_ for allowed values::
         {
             $users = $this->table('users');
             $users->changeColumn('email', 'string', ['limit' => 255])
-                  ->save();
+                ->save();
         }
 
         /**
@@ -1039,8 +1039,8 @@ table object::
         {
             $table = $this->table('users');
             $table->addColumn('city', 'string')
-                  ->addIndex(['city'])
-                  ->save();
+                ->addIndex(['city'])
+                ->save();
         }
 
         /**
@@ -1069,8 +1069,8 @@ using the ``name`` parameter::
         {
             $table = $this->table('users');
             $table->addColumn('email', 'string')
-                  ->addIndex(['email'], ['unique' => true, 'name' => 'idx_users_email'])
-                  ->save();
+                ->addIndex(['email'], ['unique' => true, 'name' => 'idx_users_email'])
+                ->save();
         }
 
         /**
@@ -1094,8 +1094,8 @@ before 5.6 you must ensure the table uses the ``MyISAM`` engine::
         {
             $table = $this->table('users', ['engine' => 'MyISAM']);
             $table->addColumn('email', 'string')
-                  ->addIndex('email', ['type' => 'fulltext'])
-                  ->create();
+                ->addIndex('email', ['type' => 'fulltext'])
+                ->create();
         }
     }
 
@@ -1115,11 +1115,11 @@ call this method for each index::
         {
             $table = $this->table('users');
             $table->removeIndex(['email'])
-                  ->save();
+                ->save();
 
             // alternatively, you can delete an index by its name, ie:
             $table->removeIndexByName('idx_users_email')
-                  ->save();
+                ->save();
         }
 
         /**
@@ -1149,12 +1149,12 @@ Let's add a foreign key to an example table::
         {
             $table = $this->table('tags');
             $table->addColumn('tag_name', 'string')
-                  ->save();
+                ->save();
 
             $refTable = $this->table('tag_relationships');
             $refTable->addColumn('tag_id', 'integer')
-                     ->addForeignKey('tag_id', 'tags', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
-                     ->save();
+                ->addForeignKey('tag_id', 'tags', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
+                ->save();
 
         }
 
@@ -1187,13 +1187,13 @@ a combined key::
         {
             $table = $this->table('follower_events');
             $table->addColumn('user_id', 'integer')
-                  ->addColumn('follower_id', 'integer')
-                  ->addColumn('event_id', 'integer')
-                  ->addForeignKey(['user_id', 'follower_id'],
-                                  'followers',
-                                  ['user_id', 'follower_id'],
-                                  ['delete'=> 'NO_ACTION', 'update'=> 'NO_ACTION', 'constraint' => 'user_follower_id'])
-                  ->save();
+                ->addColumn('follower_id', 'integer')
+                ->addColumn('event_id', 'integer')
+                ->addForeignKey(['user_id', 'follower_id'],
+                    'followers',
+                    ['user_id', 'follower_id'],
+                    ['delete'=> 'NO_ACTION', 'update'=> 'NO_ACTION', 'constraint' => 'user_follower_id'])
+                ->save();
         }
 
         /**
@@ -1220,8 +1220,8 @@ is supported as of Phinx version 0.6.5::
         {
             $table = $this->table('your_table');
             $table->addForeignKey('foreign_id', 'reference_table', ['id'],
-                                ['constraint'=>'your_foreign_key_name']);
-                  ->save();
+                    ['constraint'=>'your_foreign_key_name']);
+                ->save();
         }
 
         /**

@@ -71,7 +71,6 @@ case for a cell. In the class we just made, add the following::
             $unread = $this->Messages->find('unread');
             $this->set('unread_count', $unread->count());
         }
-
     }
 
 Because Cells use the ``ModelAwareTrait`` and ``ViewVarsTrait``, they behave

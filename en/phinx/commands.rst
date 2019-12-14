@@ -315,9 +315,9 @@ If you use a memory database, you'll need to give Phinx a specific PDO instance.
         use Symfony\Component\Console\Input\StringInput;
         use Symfony\Component\Console\Output\NullOutput;
 
-        class DatabaseTestCase extends TestCase {
-
-            public function setUp ()
+        class DatabaseTestCase extends TestCase
+        {
+            public function setUp()
             {
                 $pdo = new PDO('sqlite::memory:', null, null, [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
@@ -335,5 +335,4 @@ If you use a memory database, you'll need to give Phinx a specific PDO instance.
                 $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
                 $this->pdo = $pdo;
             }
-
         }

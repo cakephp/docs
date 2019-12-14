@@ -167,6 +167,8 @@ methods will let you re-use your queries and make testing easier.
 By default queries and result sets will return :doc:`/orm/entities` objects. You
 can retrieve basic arrays by disabling hydration::
 
+    $query->disableHydration();
+    // Prior to 3.7.0
     $query->enableHydration(false);
     $query->hydrate(false);
 
@@ -712,22 +714,16 @@ association properties in your results.
 Using innerJoinWith
 -------------------
 
-Using the ``matching()`` function, as we saw already, will create an ``INNER
-JOIN`` with the specified association and will also load the fields into the
-result set.
-
-There may be cases where you want to use ``matching()`` but are not interested
-in loading the fields into the result set. For this purpose, you can use
-``innerJoinWith()``::
+Sometimes you need to match specific associated data but without actually
+loading the matching records like ``matching()``. You can create just the
+``INNER JOIN`` that ``matching()`` uses with ``innerJoinWith()``::
 
     $query = $articles->find();
     $query->innerJoinWith('Tags', function ($q) {
         return $q->where(['Tags.name' => 'CakePHP']);
     });
 
-The ``innerJoinWith()`` method works the same as ``matching()``, that
-means that you can use dot notation to join deeply nested
-associations::
+``innerJoinWith()`` allows you to the same parameters and dot notation::
 
     $query = $products->find()->innerJoinWith(
         'Shops.Cities.Countries', function ($q) {
@@ -735,19 +731,36 @@ associations::
         }
     );
 
-Again, the only difference is that no additional columns will be added to the
-result set, and no ``_matchingData`` property will be set.
-However, it is possible to combine ``innerJoinWith()`` and ``contain()`` when you need to filter by associate data and you want also to retrieve associate fields too (following the same filter)::
+You can combine ``innerJoinWith()`` and ``contain()`` with the same association
+when you want to match specific records and load the associated data together.
+The example below matches Articles that have specific Tags and loads the same Tags::
 
     $filter = ['Tags.name' => 'CakePHP'];
     $query = $articles->find()
-    	->distinct($articles)
-        ->contain('Tags', function (\Cake\ORM\Query $q) use ($filter) {
+        ->distinct($articles)
+        ->contain('Tags', function (Query $q) use ($filter) {
             return $q->where($filter);
         })
-    	->innerJoinWith('Tags', function (\Cake\ORM\Query $q) use ($filter) {
+        ->innerJoinWith('Tags', function (Query $q) use ($filter) {
             return $q->where($filter);
         });
+
+.. note::
+    If you use ``innerJoinWith()`` and want to ``select()`` fields from that association,
+    you need to use an alias for the field::
+
+        $query
+            ->select(['country_name' => 'Countries.name'])
+            ->innerJoinWith('Countries');
+
+    If you don't use an alias, you will see the data in ``_matchingData`` as described
+    by ``matching()`` above.  This is an edge case from ``matching()`` not knowing you
+    manually selected the field.
+
+.. warning::
+    You should not combine ``innerJoinWith()`` and ``matching()`` with the same association.
+    This will produce multiple ``INNER JOIN`` statements and might not create the query you
+    expected.
 
 Using notMatching
 -----------------
@@ -930,6 +943,8 @@ set multiple times, or cache and iterate the results. If you need work with
 a data set that does not fit into memory you can disable buffering on the query
 to stream results::
 
+    $query->disableBufferedResults();
+    // Prior to 3.7.0
     $query->enableBufferedResults(false);
 
 Turning buffering off has a few caveats:
@@ -1143,7 +1158,7 @@ Finally, we put everything together::
     $wordCount = $articles->find()
         ->where(['published' => true])
         ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
-        ->enableHydrate(false)
+        ->disableHydration()
         ->mapReduce($mapper, $reducer)
         ->toArray();
 
@@ -1203,7 +1218,7 @@ of followers per user::
 And we supply our functions to a query::
 
     $fakeFriends = $friends->find()
-        ->enableHydrate(false)
+        ->disableHydration()
         ->mapReduce($mapper, $reducer)
         ->toArray();
 

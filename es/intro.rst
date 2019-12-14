@@ -39,9 +39,7 @@ tabla ``usuarios`` podríamos hacer lo siguiente::
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6.0
-    $usuarios = TableRegistry::get('Usuarios');
-
+    // Prior to 3.6 use TableRegistry::get('Usuarios')
     $usuarios = TableRegistry::getTableLocator()->get('Usuarios');
     $query = $usuarios->find();
     foreach ($query as $row) {
@@ -57,9 +55,7 @@ algo como::
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6.0
-    $usuarios = TableRegistry::get('Usuarios');
-
+    // Prior to 3.6 use TableRegistry::get('Usuarios')
     $usuarios = TableRegistry::getTableLocator()->get('Usuarios');
     $usuario = $usuarios->newEntity(['email' => 'mark@example.com']);
     $usuarios->save($usuario);

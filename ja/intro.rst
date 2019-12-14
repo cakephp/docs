@@ -31,9 +31,7 @@ CakePHP は基礎的な構造をクラス名、ファイル名、DB のテーブ
 
     use Cake\ORM\TableRegistry;
 
-    // 3.6.0 より前
-    $users = TableRegistry::get('Users');
-
+    // Prior to 3.6 use TableRegistry::get('Users')
     $users = TableRegistry::getTableLocator()->get('Users');
     $query = $users->find();
     foreach ($query as $row) {
@@ -48,9 +46,7 @@ CakePHP は基礎的な構造をクラス名、ファイル名、DB のテーブ
 
     use Cake\ORM\TableRegistry;
 
-    // 3.6.0 より前
-    $users = TableRegistry::get('Users');
-
+    // Prior to 3.6 use TableRegistry::get('Users')
     $users = TableRegistry::getTableLocator()->get('Users');
     $user = $users->newEntity(['email' => 'mark@example.com']);
     $users->save($user);

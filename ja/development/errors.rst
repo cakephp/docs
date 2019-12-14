@@ -241,7 +241,7 @@ ErrorController クラスの変更
 
         public function handleFatalError($code, $description, $file, $line)
         {
-            return '致命的エラーが発生しました';
+            echo '致命的エラーが発生しました';
         }
     }
 

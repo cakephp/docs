@@ -219,7 +219,6 @@ a locations table you may want to create one tree per country::
                 'scope' => ['country_name' => 'Brazil']
             ]);
         }
-
     }
 
 In the previous example, all tree operations will be scoped to only the rows

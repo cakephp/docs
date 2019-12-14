@@ -114,7 +114,8 @@ instance de la table. Vous pouvez faire ceci en utilisant la classe
     // Dans un controller ou dans une méthode de table.
     use Cake\ORM\TableRegistry;
 
-    $articles = TableRegistry::get('Articles');
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
 La classe TableRegistry fournit les divers dépendances pour construire la table,
 et maintient un registre de toutes les instances de table construites,
@@ -128,10 +129,12 @@ une classe par défaut est utilisée à la place de votre classe souhaitée. Pou
 charger correctement les classes table de votre plugin, utilisez ce qui suit::
 
     // Table de plugin
-    $articlesTable = TableRegistry::get('PluginName.Articles');
+    // Prior to 3.6 use TableRegistry::get('PluginName.Articles')
+    $articlesTable = TableRegistry::getTableLocator()->get('PluginName.Articles');
 
     // Table de plugin préfixé par Vendor
-    $articlesTable = TableRegistry::get('VendorName/PluginName.Articles');
+    // Prior to 3.6 use TableRegistry::get('VendorName/PluginName.Articles')
+    $articlesTable = TableRegistry::getTableLocator()->get('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
 
