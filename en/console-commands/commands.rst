@@ -218,9 +218,6 @@ You can pass any desired exit code into ``abort()``.
     on most Unix systems (``man sysexits``), or the ``System Error Codes`` help
     page in Windows.
 
-.. versionadded:: 3.9.0
-    ``ConsoleIo::abort()`` was added.
-
 Calling other Commands
 ======================
 
@@ -233,10 +230,6 @@ You may need to call other commands from your command. You can use
     // Can pass an instance of the command if it has constructor args
     $command = new OtherCommand($otherArgs);
     $this->executeCommand($command, ['--verbose', 'deploy']);
-
-
-.. versionadded:: 3.8.0
-    ``executeCommand()`` was added.
 
 .. _console-integration-testing:
 
@@ -374,7 +367,6 @@ Modify your test case to the following snippet of code::
             $this->exec('update_table Users');
             $this->assertExitCode(Command::CODE_SUCCESS);
 
-            // Prior to 3.6 use TableRegistry::get('Users')
             $user = TableRegistry::getTableLocator()->get('Users')->get(1);
             $this->assertSame($user->modified->timestamp, $now->timestamp);
 
@@ -457,7 +449,6 @@ incorrect response. Remove the ``testUpdateModified`` method and, add the follow
         $this->exec('update_table Users', ['y']);
         $this->assertExitCode(Command::CODE_SUCCESS);
 
-        // Prior to 3.6 use TableRegistry::get('Users')
         $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $this->assertSame($user->modified->timestamp, $now->timestamp);
 
@@ -466,7 +457,6 @@ incorrect response. Remove the ``testUpdateModified`` method and, add the follow
 
     public function testUpdateModifiedUnsure()
     {
-        // Prior to 3.6 use TableRegistry::get('Users')
         $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $original = $user->modified->timestamp;
 
@@ -474,7 +464,6 @@ incorrect response. Remove the ``testUpdateModified`` method and, add the follow
         $this->assertExitCode(Command::CODE_ERROR);
         $this->assertErrorContains('You need to be sure.');
 
-        // Prior to 3.6 use TableRegistry::get('Users')
         $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $this->assertSame($original, $user->timestamp);
     }

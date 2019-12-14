@@ -27,7 +27,6 @@ they are attached to. Creating a validator is simple::
 Once created, you can start defining sets of rules for the fields you want to
 validate::
 
-    // Prior to 3.7 you must use allowEmpty() or notEmpty().
     $validator
         ->requirePresence('title')
         ->notEmptyString('title', 'Please fill this field')
@@ -462,7 +461,6 @@ To validate the comments you would use a nested validator::
     // Connect the nested validators.
     $validator->addNestedMany('comments', $commentValidator);
 
-    // Prior to 3.9 use $validator->errors()
     // Get all errors including those from nested validators.
     $validator->validate($data);
 
@@ -526,7 +524,6 @@ sending an email you could do the following::
         ->requirePresence('comment')
         ->notEmpty('comment', 'You need to give a comment.');
 
-    // Prior to 3.9 use $validator->errors()
     $errors = $validator->validate($this->request->getData());
     if (empty($errors)) {
         // Send an email.
@@ -544,7 +541,6 @@ be returned per field. By default the ``errors()`` method applies rules for
 the 'create' mode. If you'd like to apply 'update' rules you can do the
 following::
 
-    // Prior to 3.9 use $validator->errors()
     $errors = $validator->validate($this->request->getData(), false);
     if (empty($errors)) {
         // Send an email.

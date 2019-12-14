@@ -368,13 +368,9 @@ method::
 
     // Make user_id accessible.
     $article->setAccess('user_id', true);
-    // Prior to 3.5
-    $article->accessible('user_id', true);
 
     // Make title guarded.
     $article->setAccess('title', false);
-    // Prior to 3.5
-    $article->accessible('title', false);
 
 .. note::
 
@@ -529,8 +525,6 @@ field that should be exposed::
 This list can be modified at runtime using the ``setVirtual()`` method::
 
     $user->setVirtual(['full_name', 'is_admin']);
-    // Prior to 3.5
-    $user->virtualProperties(['full_name', 'is_admin']);
 
 Hiding Fields
 -------------
@@ -552,8 +546,6 @@ hidden::
 This list can be modified at runtime using the ``setHidden()`` method::
 
     $user->setHidden(['password', 'recovery_question']);
-    // Prior to 3.5
-    $user->hiddenProperties(['password', 'recovery_question']);
 
 Storing Complex Types
 =====================

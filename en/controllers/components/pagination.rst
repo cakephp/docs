@@ -169,9 +169,6 @@ not do a count query::
 When using the ``SimplePaginator`` you will not be able to generate page
 numbers, counter data, links to the last page, or total record count controls.
 
-.. versionadded:: 3.9.0
-    SimplePaginator was added.
-
 Using the PaginatorComponent Directly
 =====================================
 

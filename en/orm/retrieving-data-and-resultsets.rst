@@ -168,9 +168,6 @@ By default queries and result sets will return :doc:`/orm/entities` objects. You
 can retrieve basic arrays by disabling hydration::
 
     $query->disableHydration();
-    // Prior to 3.7.0
-    $query->enableHydration(false);
-    $query->hydrate(false);
 
     // $data is ResultSet that contains array data.
     $data = $query->all();
@@ -944,8 +941,6 @@ a data set that does not fit into memory you can disable buffering on the query
 to stream results::
 
     $query->disableBufferedResults();
-    // Prior to 3.7.0
-    $query->enableBufferedResults(false);
 
 Turning buffering off has a few caveats:
 

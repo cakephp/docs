@@ -24,7 +24,6 @@ passing it to the ``save()`` method in the ``Table`` class::
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articlesTable = TableRegistry::getTableLocator()->get('Articles');
     $article = $articlesTable->newEmptyEntity();
 
@@ -44,7 +43,6 @@ that purpose::
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articlesTable = TableRegistry::getTableLocator()->get('Articles');
     $article = $articlesTable->get(12); // Return article with id 12
 
@@ -60,7 +58,6 @@ Saving With Associations
 
 By default the ``save()`` method will also save one level of associations::
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articlesTable = TableRegistry::getTableLocator()->get('Articles');
     $author = $articlesTable->Authors->findByUserName('mark')->first();
 
@@ -134,7 +131,6 @@ one or many entities from request data. You can convert a single entity using::
 
     // In a controller
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // Validate and convert to an Entity object
@@ -174,7 +170,6 @@ associations should be marshalled::
 
     // In a controller
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // New entity with nested associations
@@ -189,7 +184,6 @@ should be marshalled. Alternatively, you can use dot notation for brevity::
 
     // In a controller
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // New entity with nested associations using dot notation
@@ -208,7 +202,6 @@ change the validation set to be used per association::
 
     // In a controller
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // Bypass validation on Tags association and
@@ -333,7 +326,6 @@ When creating forms that create/update multiple records at once you can use
 
     // In a controller.
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
     $entities = $articles->newEntities($this->request->getData());
 
@@ -380,7 +372,6 @@ keep ids of associated entities::
 
     // In a controller
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
     $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
@@ -415,7 +406,6 @@ persisted. You can merge an array of raw data into an existing entity using the
 
     // In a controller.
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->getData());
@@ -431,7 +421,6 @@ patching an entity, pass the ``validate`` option as follows::
 
     // In a controller.
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $data, ['validate' => false]);
@@ -555,7 +544,6 @@ delete for those not in the list::
 
     // In a controller.
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $comments = TableRegistry::getTableLocator()->get('Comments');
     $present = (new Collection($entity->comments))->extract('id')->filter()->toList();
     $comments->deleteAll([
@@ -573,7 +561,6 @@ the original entities array will be removed and not present in the result::
 
     // In a controller.
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
     $list = $articles->find('popular')->toList();
     $patched = $articles->patchEntities($list, $this->request->getData());
@@ -710,7 +697,6 @@ using ``newEntity()`` for passing into ``save()``. For example::
 
     // In a controller
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->newEntity($this->request->getData());
     if ($articles->save($article)) {
@@ -728,7 +714,6 @@ and the entity has a primary key value, an 'exists' query will be issued. The
 Once you've loaded some entities you'll probably want to modify them and update
 your database. This is a pretty simple exercise in CakePHP::
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->find('all')->where(['id' => 2])->first();
 
@@ -829,7 +814,6 @@ If you are building or modifying association data after building your entities
 you will have to mark the association property as modified with ``setDirty()``::
 
     $company->author->name = 'Master Chef';
-    // Prior to 3.5 use dirty()
     $company->setDirty('author', true);
 
 Saving BelongsTo Associations
@@ -847,7 +831,6 @@ the singular, :ref:`underscored <inflector-methods-summary>` version of the asso
         ]
     ];
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Users']
@@ -870,7 +853,6 @@ singular, :ref:`underscored <inflector-methods-summary>` version of the associat
         ]
     ];
 
-    // Prior to 3.6 use TableRegistry::get('Users')
     $users = TableRegistry::getTableLocator()->get('Users');
     $user = $users->newEntity($data, [
         'associated' => ['Profiles']
@@ -892,7 +874,6 @@ plural, :ref:`underscored <inflector-methods-summary>` version of the associatio
         ]
     ];
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Comments']
@@ -918,7 +899,6 @@ the association property as 'dirty'. This lets the ORM know that the association
 property has to be persisted::
 
     $article->comments[] = $comment;
-    // Prior to 3.5 use dirty()
     $article->setDirty('comments', true);
 
 Without the call to ``setDirty()`` the updated comments will not be saved.
@@ -946,7 +926,6 @@ the plural, :ref:`underscored <inflector-methods-summary>` version of the associ
         ]
     ];
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Tags']
@@ -980,7 +959,6 @@ an existing association you should always mark the association property as
 persisted::
 
     $article->tags[] = $tag;
-    // Prior to 3.5 use dirty()
     $article->setDirty('tags', true);
 
 Without the call to ``setDirty()`` the updated tags will not be saved.
@@ -1185,7 +1163,6 @@ be an array of entities created using ``newEntities()`` / ``patchEntities()``.
         ],
     ];
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
     $entities = $articles->newEntities($data);
     $result = $articles->saveMany($entities);

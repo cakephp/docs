@@ -23,7 +23,6 @@ Query builder that does not include ORM features, if necessary. See the
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // Start a new query.
@@ -43,7 +42,6 @@ Selecting Rows From A Table
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $query = TableRegistry::getTableLocator()->get('Articles')->find();
 
     foreach ($query as $article) {

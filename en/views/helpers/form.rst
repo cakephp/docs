@@ -1239,10 +1239,6 @@ Will output:
 If the ``label`` key is used on an option, the attributes in
 ``$attributes['label']`` will be ignored.
 
-
-.. versionchanged:: 3.8.0
-   The ``label`` key in complex options was added.
-
 .. _create-select-picker:
 
 Creating Select Pickers

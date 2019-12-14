@@ -502,7 +502,6 @@ your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
     {
         protected function _initializeSchema(TableSchema $schema)
         {
-            // Prior to 3.5.0 use columnType()
             $schema->setColumnType('widget_prefs', 'json');
             return $schema;
         }

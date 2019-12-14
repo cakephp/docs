@@ -97,7 +97,6 @@ can do this by using the ``TableLocator`` class::
     // In a controller or table method.
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
 ``TableLocator`` provides the various dependencies for constructing
@@ -111,11 +110,9 @@ being triggered as a default class is used instead of your actual class. To
 correctly load plugin table classes use the following::
 
     // Plugin table
-    // Prior to 3.6 use TableRegistry::get('PluginName.Articles')
     $articlesTable = TableRegistry::getTableLocator()->get('PluginName.Articles');
 
     // Vendor prefixed plugin table
-    // Prior to 3.6 use TableRegistry::get('VendorName/PluginName.Articles')
     $articlesTable = TableRegistry::getTableLocator()->get('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
@@ -464,7 +461,6 @@ Configuring Table Objects
 When loading tables from the registry you can customize their dependencies, or
 use mock objects by providing an ``$options`` array::
 
-    // Prior to 3.6 use TableRegistry::get()
     $articles = TableRegistry::getTableLocator()->get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
         'table' => 'my_articles',
@@ -504,7 +500,6 @@ Flushing the Registry
 During test cases you may want to flush the registry. Doing so is often useful
 when you are using mock objects, or modifying a table's dependencies::
 
-    // Prior to 3.6 use TableRegistry::clear()
     TableRegistry::getTableLocator()->clear();
 
 Configuring the Namespace to Locate ORM classes
