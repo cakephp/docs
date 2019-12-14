@@ -246,9 +246,9 @@ flags
     by the driver you are using.
 cacheMetadata
     Either boolean ``true``, or a string containing the cache configuration to
-    store meta data in. Having metadata caching disable is not advised and can
-    result in very poor performance. See the :ref:`database-metadata-cache`
-    section for more information.
+    store meta data in. Having metadata caching disabled by setting it to ``false``
+    is not advised and can result in very poor performance. See the
+    :ref:`database-metadata-cache` section for more information.
 mask
     Set the permissions on the generated database file. (Only supported by SQLite)
 
