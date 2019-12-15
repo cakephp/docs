@@ -569,11 +569,10 @@ This also works for pagination at the Controller level::
         }
     ];
 
-.. note::
+.. warning::
 
-    When you limit the fields that are fetched from an association, you **must**
-    ensure that the foreign key columns are selected. Failing to select foreign
-    key fields will cause associated data to not be present in the final result.
+    If the results are missing association entities, make sure the foreign key columns
+    are selected in the query.  Without the foreign keys, the ORM cannot find matching rows.
 
 It is also possible to restrict deeply-nested associations using the dot
 notation::
@@ -598,14 +597,17 @@ finders in your associations, you can use them inside ``contain()``::
 
 .. note::
 
-    For ``BelongsTo`` and ``HasOne`` associations only the ``where`` and
-    ``select`` clauses are used when loading the associated records. For the
-    rest of the association types you can use every clause that the query object
-    provides.
+    With ``BelongsTo`` and ``HasOne`` associations only ``select`` and ``where`` clauses
+    are valid in the ``contain()`` query.  With ``HasMany`` and ``BelongsToMany`` all
+    clauses such as ``order()`` are valid.
 
-If you need full control over the query that is generated, you can tell ``contain()``
-to not append the ``foreignKey`` constraints to the generated query. In that
-case you should use an array passing ``foreignKey`` and ``queryBuilder``::
+You can control more than just the query clauses used by ``contain()``.  If you pass an array
+with the association, you can override the ``foreignKey``, ``joinType`` and ``strategy``.
+See the ref:`associations` for details on the default value and options for each
+association type.
+
+You can pass ``false`` as the new ``foreignKey`` to disable foreign key constraints entirely.
+Use the ``queryBuilder`` option to customize the query when using an array::
 
     $query = $articles->find()->contain([
         'Authors' => [
@@ -854,41 +856,27 @@ result set.
 Changing Fetching Strategies
 ============================
 
-As you may know already, ``belongsTo`` and ``hasOne`` associations are loaded
-using a ``JOIN`` in the main finder query. While this improves query and
-fetching speed and allows for creating more expressive conditions when
-retrieving data, this may be a problem when you want to apply certain clauses to
-the finder query for the association, such as ``order()`` or ``limit()``.
+As mentioned in ref:`contain-conditions`, you can customize the ``strategy``
+used by an association in a ``contain()``.
 
-For example, if you wanted to get the first comment of an article as an
-association::
-
-   $articles->hasOne('FirstComment', [
-        'className' => 'Comments',
-        'foreignKey' => 'article_id'
-   ]);
-
-In order to correctly fetch the data from this association, we will need to tell
-the query to use the ``select`` strategy, since we want order by a particular
-column::
+If you look at ``BelongsTo`` and ``HasOne`` ref:`associations` options,
+the default 'join' strategy and 'INNER' ``joinType`` can be changed to
+'select'::
 
     $query = $articles->find()->contain([
-        'FirstComment' => [
+        'Comments' => [
             'strategy' => 'select',
-            'queryBuilder' => function ($q) {
-                return $q->order(['FirstComment.created' =>'ASC'])->limit(1);
-            }
         ]
     ]);
 
-Dynamically changing the strategy in this way will only apply to a specific
-query. If you want to make the strategy change permanent you can do::
+This can be useful when you need to add conditions that don't
+work well in a join.  This also makes it possible to query tables
+that are not allowed in joins such as separate databases.
 
-    $articles->FirstComment->setStrategy('select');
+Usually, you set the strategy for an association when defining it
+in ``Table::initialize()``, but you can permanently change the strategy manually::
 
-Using the ``select`` strategy is also a great way of making associations with
-tables in another database, since it would not be possible to fetch records
-using ``joins``.
+    $articles->Comments->setStrategy('select');
 
 Fetching With The Subquery Strategy
 -----------------------------------
@@ -912,10 +900,6 @@ can greatly improve the query and fetching time in some databases, in
 particular it will allow to fetch big chunks of data at the same time in
 databases that limit the amount of bound parameters per query, such as
 **Microsoft SQL Server**.
-
-You can also make the strategy permanent for the association by doing::
-
-    $articles->Comments->setStrategy('subquery');
 
 Lazy Loading Associations
 =========================
