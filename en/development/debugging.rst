@@ -51,8 +51,12 @@ Using the Debugger Class
 
 .. php:class:: Debugger
 
-To use the debugger, first ensure that ``Configure::read('debug')`` is
-set to ``true``.
+To use the debugger, in your app/Config.php file, ensure that ``Configure::read('debug')`` is set to ``true``.
+
+    Production Mode: set false. No error messages, errors, or warnings shown. Flash messages redirect.
+
+    Development Mode: set true. Errors and warnings shown, model caches refreshed, halted flash messages, full debug messages and SQL output.
+
 
 Outputting Values
 =================
