@@ -113,18 +113,6 @@ Each time you run ``php composer.phar update`` you will receive patch
 releases for this minor version. You can instead change this to ``^4.0`` to
 also receive the latest stable minor releases of the ``4.x`` branch.
 
-If you want to stay up to date with the latest unreleased changes in CakePHP,
-designate **dev-master** as the package version in your application's
-**composer.json**::
-
-    "require": {
-        "cakephp/cakephp": "dev-master"
-    }
-
-Be aware that this is not recommended, as your application can break when the
-next major version is released. Additionally, composer does not cache
-development branches, so it slows down consecutive composer installs/updates.
-
 Installation using Oven
 -----------------------
 
