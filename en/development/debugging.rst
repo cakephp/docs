@@ -55,7 +55,7 @@ Using the Debugger Class
 To use the debugger, first ensure that ``Configure::read('debug')`` is
 set to ``true``.
 
-Also you can set `debug` in config/app.php file, ensure that ``'debug' => filter_var(env('DEBUG', true), FILTER_VALIDATE_BOOLEAN),`` is set to ``true``.
+You can use ``filter_var(env('DEBUG', true), FILTER_VALIDATE_BOOLEAN),`` in **config/app.php** file to ensure that ``debug`` is a boolean.
 
 
 Outputting Values
