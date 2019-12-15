@@ -54,7 +54,7 @@ Usage
 Configuring the security component is generally done in the controller's
 ``initialize()`` or ``beforeFilter()`` callbacks
 
-Available options are::
+Available options are:
 
 validate
     Set to ``false`` to completely skip the validation of POST

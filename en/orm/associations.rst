@@ -425,7 +425,7 @@ Possible keys for hasMany association arrays include:
   ``foreignKey``.  The default value is the primary key of the current table
   such as 'id' of Articles in the above example.
 - **conditions**: an array of find() compatible conditions or SQL
-  strings such as ``['Comments.visible' => true]``. It is recommended to 
+  strings such as ``['Comments.visible' => true]``. It is recommended to
   use the ``finder`` option instead.
 - **sort**: an array of find() compatible order clauses or SQL
   strings such as ``['Comments.created' => 'ASC']``
@@ -575,7 +575,7 @@ Possible keys for belongsToMany association arrays include:
   the target model, suffixed with '\_id'.
 - **conditions**: An array of ``find()`` compatible conditions.  If you have
   conditions on an associated table, you should use a 'through' model, and
-  define the necessary belongsTo associations on it. It is recommended to 
+  define the necessary belongsTo associations on it. It is recommended to
   use the ``finder`` option instead.
 - **sort**: an array of find() compatible order clauses.
 - **dependent**: When the dependent key is set to ``false``, and an entity is
@@ -699,6 +699,7 @@ The CoursesMemberships join table uniquely identifies a given Student's
 participation on a Course in addition to extra meta-information.
 
 .. _association-finder:
+
 Using Association Finders
 -------------------------
 

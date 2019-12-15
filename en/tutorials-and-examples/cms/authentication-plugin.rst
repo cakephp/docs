@@ -4,8 +4,8 @@ CMS Tutorial - Authentication using cakephp/authentication
 CakePHP now supports authentication and authorization features using the
 core plugins:
 
-* :doc:`cakephp/authentication </authentication>`
-* :doc:`cakephp/authorization </authorization>`
+* `cakephp/authentication <https://book.cakephp.org/authorization>`_
+* `cakephp/authorization <https://book.cakephp.org/authentication>`_
 
 In this tutorial we are going to ensure passwords are stored securely in
 our database, we are going to provide a working login page, and apply some
@@ -92,12 +92,12 @@ The Plugin will handle the authentication process using 3 different classes:
 
 * ``Application`` will use the Authentication Middleware and provide an
   AuthenticationService, holding all the configuration we want to define how are
-we going to check the credentials, and where to find them.
+  we going to check the credentials, and where to find them.
 * ``AuthenticationService`` will be a utility class to allow you configure the
-authentication process.
+  authentication process.
 * ``AuthenticationMiddleware`` will be executed as part of the middleware queue,
-this is before your Controllers are processed by the framework, and will pick the
-credentials and process them to check if the user is authenticated.
+  this is before your Controllers are processed by the framework, and will pick the
+  credentials and process them to check if the user is authenticated.
 
 If you remember, we used :doc:`AuthComponent </controllers/components/authentication>`
 before to handle all these steps. Now the logic is divided into specific classes and
@@ -287,8 +287,3 @@ Coming next:  Article Access
 
 Now that users can log in, we'll want to limit users to only edit articles that
 they created. We'll do this using the Authorization Plugin in the next chapter.
-
-Continue to
-:doc:`Authorization </tutorials-and-examples/cms/authorization-plugin>` to
-learn about authorization and restrict the users to be only allowed to edit their
-own articles.

@@ -183,7 +183,7 @@ Returns all uploaded files in a normalized array structure. For the above exampl
 
 This method sets the uploaded files of the request object, it accepts an array of objects that implement
 `\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__. It will
-replace all possibly existing uploaded files.
+replace all possibly existing uploaded files::
 
     $files = [
         'MyModel' => [
