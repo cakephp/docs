@@ -58,12 +58,6 @@ set to ``true``.
 Also you can set `debug` in config/app.php file, ensure that ``'debug' => filter_var(env('DEBUG', true), FILTER_VALIDATE_BOOLEAN),`` is set to ``true``.
 
 
-    Production Mode: set false. No error messages, errors, or warnings shown. Flash messages redirect.
-
-    Development Mode: set true. Errors and warnings shown, model caches refreshed, halted flash messages, full debug messages and SQL output.
-
-
-
 Outputting Values
 =================
 
