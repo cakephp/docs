@@ -72,7 +72,7 @@ Shadow Table Strategy
 =====================
 
 Let's assume we have an ``articles`` table and we want it's ``title`` and ``body``
-fields to be translated. For that we create a shadow table ``articles_translations``::
+fields to be translated. For that we create a shadow table ``articles_translations``:
 
 .. code-block:: sql
 
@@ -124,6 +124,20 @@ as::
 For shadow table strategy specifying the ``fields`` key is optional as the
 behavior can infer the fields from the shadow table columns.
 
+By default the locale specified in ``App.defaultLocale`` config is used as default
+locale for the ``TranslateBehavior``. You can override that by setting ``defaultLocale``
+config of the behavior::
+
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config): void
+        {
+            $this->addBehavior('Translate', [
+                'defaultLocale' => 'en_GB',
+            ]);
+        }
+    }
+    
 
 Quick tour
 ==========
