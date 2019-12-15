@@ -21,7 +21,7 @@ Conteúdo
 
     intro
     quickstart
-    appendices/3-x-migration-guide
+    appendices/4-x-migration-guide
     tutorials-and-examples
     contributing
 
@@ -86,7 +86,6 @@ Conteúdo
     Debug Kit <https://book.cakephp.org/debugkit/3/pt/>
     Migrations <https://book.cakephp.org/migrations/3/pt/>
     Elasticsearch <https://book.cakephp.org/elasticsearch/2/pt/>
-    upgrade-tool
 
 .. toctree::
     :maxdepth: 3

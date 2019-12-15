@@ -1,8 +1,8 @@
-3.0 Migration Guide
-###################
+4.0 Migration Guide
+#####################
 
 .. note::
-    The documentation is not currently supported in Chinese language for this
+    The documentation is not currently supported in Tagolog language for this
     page.
 
     Please feel free to send us a pull request on
