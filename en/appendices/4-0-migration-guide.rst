@@ -50,6 +50,7 @@ ORM
 * Using ``Entity::isNew()`` as a setter is deprecated. Use ``setNew()`` instead.
 * ``Entity::unsetProperty()`` has been renamed to ``Entity::unset()`` to match
   the other methods.
+* ``TableSchemaInterface::primaryKey()`` has been renamed to ``TableSchemaInterface::getPrimaryKey()``.
 
 View
 ----
@@ -64,6 +65,7 @@ View
   ``viewBuilder()->setOption($optionName, $optionValue)`` to set these options.
 * ``HtmlHelper::tableHeaders()`` now prefers header cells with attributes to be
   defined as a nested list. e.g ``['Title', ['class' => 'special']]``.
+* ``ContextInterface::primaryKey()`` has been renamed to ``ContextInterface::getPrimaryKey()``.
 
 Mailer
 ------
