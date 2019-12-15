@@ -51,7 +51,8 @@ Using the Debugger Class
 
 .. php:class:: Debugger
 
-To use the debugger, in your app/Config.php file, ensure that ``Configure::read('debug')`` is set to ``true``.
+To use the debugger, in your app/Config.php file, ensure that ``'debug' => filter_var(env('DEBUG', true), FILTER_VALIDATE_BOOLEAN),`` is set to ``true``.
+
 
     Production Mode: set false. No error messages, errors, or warnings shown. Flash messages redirect.
 
