@@ -27,13 +27,6 @@ To paginate a query we first need to load the ``PaginatorComponent``::
 
     class ArticlesController extends AppController
     {
-        public $paginate = [
-            'limit' => 25,
-            'order' => [
-                'Articles.title' => 'asc'
-            ]
-        ];
-
         public function initialize(): void
         {
             parent::initialize();
@@ -70,12 +63,6 @@ from the URL::
                 'Articles.title' => 'asc'
             ]
         ];
-
-        public function initialize(): void
-        {
-            parent::initialize();
-            $this->loadComponent('Paginator');
-        }
     }
 
 .. tip::
@@ -136,16 +123,12 @@ as a key in the ``$paginate`` property::
         ];
     }
 
-The values of the ``Articles`` and ``Authors`` keys could contain all the properties
-that a model/key less ``$paginate`` array could.
+The values of the ``Articles`` and ``Authors`` keys could contain all the
+properties that a basic ``$paginate`` array would.
 
-Once the ``$paginate`` property has been defined, we can use the
-:php:meth:`~Cake\\Controller\\Controller::paginate()` method to create the
-pagination data, and add the ``PaginatorHelper`` if it hasn't already been
-added. The controller's paginate method will return the result set of the
-paginated query, and set pagination metadata to the request. You can access the
-pagination metadata at ``$this->request->getAttribute('paging')``. A more complete
-example of using ``paginate()`` would be::
+Once you have used ``paginate()`` to create results. The controller's request
+will be updated with paging parameters. You can access the pagination metadata
+at ``$this->request->getParam('paging')``.
 
 Simple Pagination
 =================
