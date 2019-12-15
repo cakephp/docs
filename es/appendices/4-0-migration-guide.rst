@@ -1,5 +1,5 @@
-Upgrade Tool
-############
+4.0 Migration Guide
+###################
 
 .. note::
     La documentación no es compatible actualmente con el idioma español en esta página.
@@ -9,3 +9,7 @@ Upgrade Tool
 
     Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
     para obtener información sobre el tema de esta página.
+
+.. meta::
+    :title lang=es: CakePHP Development Process
+    :keywords lang=es: maintenance branch,community interaction,community feature,necessary feature,stable release,ticket system,advanced feature,power users,feature set,chat irc,leading edge,router,new features,members,attempt,development branches,branch development

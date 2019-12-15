@@ -1,4 +1,4 @@
-3.5 Migration Guide
+4.0 Migration Guide
 ###################
 
 .. note::

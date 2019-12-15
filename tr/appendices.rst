@@ -8,13 +8,13 @@ Appendices
 
     Bu sayfanın konusu hakkındaki İngilizce kaynağa erişmek için üst taraftaki seçim menüsünü kullanabilirsiniz.
 
-3.x Migration Guide
+4.x Migration Guide
 ===================
 
 .. toctree::
     :maxdepth: 1
 
-    appendices/3-x-migration-guide
+    appendices/4-0-migration-guide
 
 General Information
 ===================

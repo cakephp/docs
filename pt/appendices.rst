@@ -4,13 +4,13 @@ Apêndices
 Os apêndices contêm informações sobre os novos recursos
 introduzidos em cada versão e a forma de executar a migração entre versões.
 
-Guia de Migração para a versão 3.x
+Guia de Migração para a versão 4.x
 ==================================
 
 .. toctree::
     :maxdepth: 1
 
-    appendices/3-x-migration-guide
+    appendices/4-0-migration-guide
 
 Informações Gerais
 ==================

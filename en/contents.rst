@@ -88,7 +88,6 @@ Contents
     Debug Kit <https://book.cakephp.org/debugkit/4/>
     Migrations <https://book.cakephp.org/migrations/3/>
     Elasticsearch <https://book.cakephp.org/elasticsearch/2/en/>
-    upgrade-tool
 
 .. toctree::
     :maxdepth: 3

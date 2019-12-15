@@ -15,13 +15,13 @@ Appendices
 Appendices contain information regarding the new features
 introduced in each version and the migration path between versions.
 
-3.x Migration Guide
+4.x Migration Guide
 ===================
 
 .. toctree::
     :maxdepth: 1
 
-    appendices/3-x-migration-guide
+    appendices/4-0-migration-guide
 
 General Information
 ===================

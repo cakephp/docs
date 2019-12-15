@@ -19,7 +19,7 @@
 
     intro
     quickstart
-    appendices/3-x-migration-guide
+    appendices/4-0-migration-guide
     tutorials-and-examples
     contributing
 
@@ -84,7 +84,6 @@
     Debug kit <https://book.cakephp.org/debugkit/4>
     Migrations <https://book.cakephp.org/migrations/3/ru/>
     elasticsearch
-    upgrade-tool
 
 .. toctree::
     :maxdepth: 3
