@@ -12,6 +12,12 @@ enable deprecation warnings::
 Then, incrementally fix the deprecation warnings your application and its
 plugins emit.
 
+Upgrade to PHP 7.2
+==================
+
+CakePHP 4.0 will require **PHP 7.2**. Upgrading PHP before updating CakePHP is
+recommended to reduce risk.
+
 Use the Upgrade Tool
 ====================
 
