@@ -135,7 +135,7 @@ correspondant à son action. Par exemple, le fichier de vue pour l'action
 
 La couche vue de CakePHP peut être constituée d'un certain nombre de parties
 différentes. Chaque partie a différents usages qui seront présentés dans ce
-chapitre :
+chapitre:
 
 - **templates**: Les templates sont la partie de la page qui est unique pour l'action
   lancée. Elles sont la substance de la réponse de votre application.

@@ -434,7 +434,7 @@ IIS7 (Windows hosts)
 -----------------------
 
 IIS7은 기본적으로 .htaccess 파일을 지원하지 않습니다. 이를 추가 할 수있는 있지만, CakePHP고유의 재작성을 사용하도록 IIS에 htaccess로 규칙을 가져올 수 있습니다. 
-이것을하려면 다음의 단계를 진행해 주시기 바랍니다. :
+이것을하려면 다음의 단계를 진행해 주시기 바랍니다.:
 
 #. URL `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ 을 설치하기
    위해 `Microsoft의 Web Platform Installer

@@ -34,7 +34,7 @@ Exigences
 
 Techniquement, un moteur de base de données n'est pas nécessaire, mais nous
 imaginons que la plupart des applications vont en utiliser un. CakePHP
-supporte une diversité de moteurs de stockage de données :
+supporte une diversité de moteurs de stockage de données:
 
 -  MySQL (5.5.3 ou supérieur)
 -  MariaDB (5.5 ou supérieur)
@@ -50,7 +50,7 @@ supporte une diversité de moteurs de stockage de données :
 Installer CakePHP
 =================
 
-Avant de commencer, vous devez vous assurer que votre version de PHP est à jour :
+Avant de commencer, vous devez vous assurer que votre version de PHP est à jour:
 
 .. code-block:: bash
 
@@ -71,7 +71,7 @@ dépendances comme méthode officielle supportée pour l'installation.
      `documentation officielle de Composer <https://getcomposer.org/download/>`_
      et suivez les instructions pour installer Composer.
   #. Exécutez la commande suivante pour déplacer composer.phar vers un
-     répertoire qui est dans votre path : ::
+     répertoire qui est dans votre path::
 
          mv composer.phar /usr/local/bin/composer
 
@@ -87,13 +87,13 @@ Créer un Projet CakePHP
 
 Maintenant que vous avez téléchargé et installé Composer, imaginons que vous
 souhaitiez créer une nouvelle application CakePHP dans le dossier my_app_name.
-Pour ceci vous pouvez lancer la commande suivante :
+Pour ceci vous pouvez lancer la commande suivante:
 
 .. code-block:: bash
 
     php composer.phar create-project --prefer-dist cakephp/app my_app_name
 
-Ou si Composer est installé globalement :
+Ou si Composer est installé globalement:
 
 .. code-block:: bash
 
@@ -119,7 +119,7 @@ pour pouvoir l'utiliser.
 Rester à jour avec les derniers changements de CakePHP
 ------------------------------------------------------
 
-Par défaut le **composer.json** de l'application ressemble à cela : ::
+Par défaut le **composer.json** de l'application ressemble à cela::
 
     "require": {
         "cakephp/cakephp": "3.8.*"
@@ -132,7 +132,7 @@ mineures stables de la branche 3.x.
 
 Si vous voulez rester à jour avec les derniers changements non stables de
 CakePHP, vous pouvez changer la version en ``dev-master`` le
-**composer.json** de votre application : ::
+**composer.json** de votre application::
 
     "require": {
         "cakephp/cakephp": "dev-master"
@@ -184,7 +184,7 @@ sous-répertoires doivent être accessibles en écriture à la fois pour le serv
 web et pour l'utilisateur des lignes de commande. Sur un système UNIX, si
 votre utilisateur du serveur web est différent de l'utilisateur des lignes
 de commande, vous pouvez lancer les commandes suivantes, une seule fois,
-dans votre projet pour vous assurer que les permissions sont bien configurées :
+dans votre projet pour vous assurer que les permissions sont bien configurées:
 
 .. code-block:: bash
 
@@ -196,7 +196,7 @@ dans votre projet pour vous assurer que les permissions sont bien configurées :
 
 Si vous souhaitez utiliser les outils de la console CakePHP, vous devez vous
 assurer que le fichier ``bin/cake`` (ou ``bin/cake.php``) est exécutable. Sur
-\*nix ou macOS, vous pouvez simplement exécuter la commande suivante :
+\*nix ou macOS, vous pouvez simplement exécuter la commande suivante:
 
 .. code-block:: bash
 
@@ -209,7 +209,7 @@ documentation de votre environnement virtualisé pour savoir comment procéder).
 
 Si, pour une quelconque raison, vous ne pouvez pas changer les permissions du
 fichier ``bin/cake``, vous pouvez lancer la console CakePHP avec la commande
-suivante :
+suivante:
 
 .. code-block:: bash
 
@@ -221,7 +221,7 @@ Serveur de Développement
 Une installation de développement est la méthode la plus rapide pour lancer
 CakePHP. Dans cet exemple, nous utiliserons la console de CakePHP pour exécuter
 le serveur web PHP intégré qui va rendre votre application disponible sur
-**http://host:port**. A partir du répertoire de l'application, lancez :
+**http://host:port**. A partir du répertoire de l'application, lancez:
 
 .. code-block:: bash
 
@@ -232,7 +232,7 @@ application sur **http://localhost:8765/**.
 
 Si vous avez quelque chose qui rentre en conflit avec **localhost** ou le
 port 8765, vous pouvez dire à la console CakePHP de démarrer le serveur web
-sur un hôte et/ou un port spécifique utilisant les arguments suivants :
+sur un hôte et/ou un port spécifique utilisant les arguments suivants:
 
 .. code-block:: bash
 
@@ -265,14 +265,14 @@ Production
 Une installation de production est une façon plus flexible de lancer CakePHP.
 Utiliser cette méthode permet à tout un domaine d'agir comme une seule
 application CakePHP. Cet exemple vous aidera à installer CakePHP n'importe où
-dans votre système de fichiers et à le rendre disponible à l'adresse :
+dans votre système de fichiers et à le rendre disponible à l'adresse:
 http://www.exemple.com. Notez que cette installation demande d'avoir les
 droits pour modifier le ``DocumentRoot`` sur le serveur web Apache.
 
 Après avoir installé votre application en utilisant une des méthodes ci-dessus
 dans un répertoire de votre choix, nous considérerons que vous avez choisi
 le répertoire /cake_install, votre installation de production devrait
-ressembler à quelque chose comme ceci dans votre système de fichiers : ::
+ressembler à quelque chose comme ceci dans votre système de fichiers::
 
     /cake_install/
         bin/
@@ -293,7 +293,7 @@ ressembler à quelque chose comme ceci dans votre système de fichiers : ::
         README.md
 
 Les développeurs utilisant Apache devront définir la directive
-``DocumentRoot`` pour le domaine à :
+``DocumentRoot`` pour le domaine à:
 
 .. code-block:: apacheconf
 
@@ -338,7 +338,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
 #. Assurez-vous que l'utilisation des fichiers .htaccess est permise et que
    AllowOverride est défini à All pour le bon DocumentRoot. Vous devriez voir
-   quelque chose comme :
+   quelque chose comme:
 
    .. code-block:: apacheconf
 
@@ -357,7 +357,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
        </Directory>
 
 #. Assurez-vous que vous avez chargé correctement mod\_rewrite. Vous devriez
-   voir quelque chose comme :
+   voir quelque chose comme:
 
    .. code-block:: apacheconf
 
@@ -381,7 +381,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    décompressée correctement, en vérifiant les fichiers.htaccess.
 
    Le répertoire app de CakePHP (sera copié dans le répertoire supérieur de
-   votre application par bake) :
+   votre application par bake):
 
    .. code-block:: apacheconf
 
@@ -392,7 +392,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
        </IfModule>
 
    Le répertoire webroot de CakePHP (sera copié dans la racine web de votre
-   application par bake) :
+   application par bake):
 
    .. code-block:: apacheconf
 
@@ -407,7 +407,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    Ubuntu, éditez le fichier **/etc/apache2/sites-available/default**
    (l'endroit dépend de la distribution). Dans ce fichier, assurez-vous
    que ``AllowOverride None`` a été changé en ``AllowOverride All``,
-   donc vous avez :
+   donc vous avez:
 
    .. code-block:: apacheconf
 
@@ -435,7 +435,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    utilise (.htaccess, webroot/.htaccess).
 
    Ceci peut être ajouté dans la même section que la directive RewriteEngine,
-   par exemple, votre fichier .htaccess dans webroot ressemblerait à :
+   par exemple, votre fichier .htaccess dans webroot ressemblerait à:
 
    .. code-block:: apacheconf
 
@@ -453,7 +453,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
 #. (Facultatif) Pour améliorer la configuration de production, vous devez
    empêcher les ressources invalides d'être analysées par CakePHP. Modifiez
-   votre .htaccess dans webroot pour quelque chose comme :
+   votre .htaccess dans webroot pour quelque chose comme:
 
    .. code-block:: apacheconf
 
@@ -469,7 +469,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    et affichera à la place la page 404 de votre serveur web.
 
    De plus, vous pouvez créer une page HTML 404 correspondante, ou utiliser la
-   page 404 de CakePHP intégrée en ajoutant une directive ``ErrorDocument`` :
+   page 404 de CakePHP intégrée en ajoutant une directive ``ErrorDocument``:
 
    .. code-block:: apacheconf
 
@@ -484,7 +484,7 @@ le site. Ceci se trouve généralement dans
 ``/etc/nginx/sites-available/your_virtual_host_conf_file``. En fonction de votre
 configuration, vous devrez modifier ceci, mais au minimum, vous aurez besoin de
 PHP fonctionnant comme une instance FastCGI. La configuration suivante redirige
-la requête vers ``webroot/index.php`` :
+la requête vers ``webroot/index.php``:
 
 .. code-block:: nginx
 
@@ -492,7 +492,7 @@ la requête vers ``webroot/index.php`` :
         try_files $uri $uri/ /index.php?$args;
     }
 
-Un exemple de la directive server est le suivant :
+Un exemple de la directive server est le suivant:
 
 .. code-block:: nginx
 
@@ -530,7 +530,7 @@ Un exemple de la directive server est le suivant :
 
 .. note::
     Les configurations récentes de PHP-FPM sont configurées pour écouter le
-    socket unix php-fpm au lieu du port TCP 9000 sur l'adresse 127.0.0.0.1. 
+    socket unix php-fpm au lieu du port TCP 9000 sur l'adresse 127.0.0.0.1.
     Si vous avez des erreurs 502 bad gateway avec la configuration ci-dessus,
     essayez de mettre à jour ``fastcgi_pass`` pour utiliser le socket unix
     (ex: fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;) au lieu du port
@@ -542,7 +542,7 @@ IIS7 (serveurs Windows)
 IIS7 ne supporte pas nativement les fichiers .htaccess. Bien qu'il existe des
 add-ons qui peuvent ajouter ce support, vous pouvez également importer des
 règles htaccess dans IIS pour utiliser les réécritures natives de CakePHP.
-Pour ce faire, suivez les étapes suivantes :
+Pour ce faire, suivez les étapes suivantes:
 
 #. Utilisez `l'installeur de la plateforme Web de Microsoft
    <http://www.microsoft.com/web/downloads/platform.aspx>`_ pour installer
@@ -593,7 +593,7 @@ Je ne peux pas utiliser la réécriture d'URL
 Si vous ne voulez pas ou ne pouvez pas obtenir mod\_rewrite (ou un autre
 module compatible) sur votre serveur, vous devrez utiliser les belles URLs
 intégrées à CakePHP. Dans **config/app.php**, décommentez la ligne qui
-ressemble à : ::
+ressemble à::
 
     'App' => [
         // ...

@@ -29,7 +29,7 @@ Les Middlewares dans CakePHP
 ============================
 
 CakePHP fournit nativement plusieurs middlewares pour gérer des cas classiques
-d'une application web :
+d'une application web:
 
 * ``Cake\Error\Middleware\ErrorHandlerMiddleware`` capture les exceptions à
   partir du middleware encapsulé et affiche un page d'erreur en utilisant le
@@ -188,7 +188,7 @@ avec l'URI demandé ::
 Enfin, vous pouvez interagir avec les 'attributs' d'une requête. CakePHP
 les attributs pour transporter des paramètres spécifiques de requête du
 framework. Il y a certains attributs important dans n'importe qu'elle requête
-gérée par CakePHP :
+gérée par CakePHP:
 
 * ``base`` contient le répertoire de base de votre application s'il existe.
 * ``webroot`` contient le répertoire webroot de votre application.
@@ -213,7 +213,7 @@ résultats de n'importe quelle methode setter. Par exemple ::
     // assigné à une variable.
     $response->withHeader('Content-Type', 'application/json');
 
-    // Utilisation correcte :
+    // Utilisation correcte:
     $newResponse = $response->withHeader('Content-Type', 'application/json');
 
 Le plus souvent vous assignerez les en-têtes et corps de reponse sur les
@@ -235,16 +235,16 @@ Un Middleware peut soit être implémenté en tant que fonctions anonymes
 (Closures), soit en tant que classes appelables. Tandis que les Closures sont
 adaptées pour les petites tâches elles rendent les tests plus complexes, et
 peuvent créer une classe ``Application`` complexe. Les classes Middleware dans
-CakePhp ont quelques conventions :
+CakePhp ont quelques conventions:
 
 * Les fichiers de classe Middleware doivent être placés dans
   **src/Middleware**. Par exemple : **src/Middleware/CorsMiddleware.php**
-* Les classes Middleware doivent avoir ``Middleware`` en suffixe. Par exemple :
+* Les classes Middleware doivent avoir ``Middleware`` en suffixe. Par exemple:
   ``LinkMiddleware``.
 * Les Middleware requièrent l'implémentation du protocole middleware.
 
 Bien que pas (encore) une interface formelle, Middleware a une soft-interface
-ou 'protocole'. Ce dernier est tel que :
+ou 'protocole'. Ce dernier est tel que:
 
 #. Middleware doit implémenter ``__invoke($request, $response, $next)``.
 #. Middleware doit rendre un objet implémentant la ``ResponseInterface`` PSR-7.
@@ -303,7 +303,7 @@ Ajouter des Headers de Sécurité
 
 La couche ``SecurityHeaderMiddleware`` facilite l'ajout de headers liés à la
 sécurité à votre application. Une fois configuré, le middleware peut ajouter
-les headers suivants aux réponses :
+les headers suivants aux réponses:
 
 * ``X-Content-Type-Options``
 * ``X-Download-Options``
@@ -380,7 +380,7 @@ stack de middlewares::
     $middlewareQueue->add($csrf);
 
 Des options peuvent être passées au constructor du middleware.
-Les options utilisables sont :
+Les options utilisables sont:
 
 - ``cookieName`` Le nom du cookie à envoyer. Défaut à ``csrfToken``.
 - ``expiry`` La durée de vie du token CSRF. Défaut à la durée de vie du navigateur.

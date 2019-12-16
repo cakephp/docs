@@ -74,7 +74,7 @@ entrée.
 Vous pouvez lui passer un tableau d'options pour avoir plus de contrôle sur le
 slug retourné. Le paramètre ``$options`` peut aussi être une chaîne de
 caractères, auquel cas il sera utilisé comme caractère de remplacement. Les
-options supporté sont :
+options supporté sont:
 
 * ``replacement`` La chaîne de remplacement, le défaut étant '-'.
 * ``transliteratorId`` Un identifiant translitérateur valide.

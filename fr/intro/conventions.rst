@@ -139,7 +139,7 @@ Le schéma classique est
 En utilisant les conventions CakePHP dans le nommage des différentes parties
 de votre application, vous gagnerez des fonctionnalités sans les tracas et les
 affres de la configuration. Voici un exemple récapitulant les conventions
-abordées :
+abordées:
 
 -  Nom de la table de la base de données: "articles"
 -  Classe Table: ``ArticlesTable`` se trouvant dans

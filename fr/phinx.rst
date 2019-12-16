@@ -23,7 +23,7 @@ données.
 Objectifs
 =========
 
-Phinx a été développé avec les objectifs suivants en tête :
+Phinx a été développé avec les objectifs suivants en tête:
 
 * Être portable entre les principaux moteurs de base de données.
 * Être indépendant de tout framework PHP.

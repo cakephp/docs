@@ -91,7 +91,7 @@ pour l'appel d'une méthode particulière::
 Noms de Templates
 -----------------
 
-PaginatorHelper utilise les templates suivants :
+PaginatorHelper utilise les templates suivants:
 
 - ``nextActive`` L'état activé pour un lien généré par next().
 - ``nextDisabled`` L'état désactivé pour next().

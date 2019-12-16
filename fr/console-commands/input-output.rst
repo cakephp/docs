@@ -11,7 +11,7 @@ Helpers (Assistants) de commande
 ================================
 
 Les Helpers (Assistants) de commande sont accessibles et utilisables depuis
-n'importe quelle commande, shell ou tâche : ::
+n'importe quelle commande, shell ou tâche::
 
     // Affiche des données en tant que tableau.
     $io->helper('Table')->output($data);
@@ -20,7 +20,8 @@ n'importe quelle commande, shell ou tâche : ::
     $io->helper('Plugin.HelperName')->output($data);
 
 Vous pouvez aussi récupérer les instances des Helpers et appeler n'importe
-quelle méthode publique dessus : ::
+quelle méthode publique dessus::
+
     // Récupérer et utiliser le ProgressHelper.
     $progress = $io->helper('Progress');
     $progress->increment(10);
@@ -33,7 +34,7 @@ Alors que CakePHP est fourni avec quelques helpers de commande, vous pouvez
 en créer d'autres dans votre application ou vos plugins. À titre d'exemple,
 nous allons créer un helper simple pour générer des titres élégants.
 Créez d'abord le fichier **src/Command/Helper/HeadingHelper.php** et mettez
-ce qui suit dedans : ::
+ce qui suit dedans::
 
     <?php
     namespace App\Command\Helper;
@@ -51,7 +52,8 @@ ce qui suit dedans : ::
     }
 
 Nous pouvons alors utiliser ce nouvel Helper dans l'une de nos commandes
-shell en l'appelant : ::
+shell en l'appelant::
+
     // Avec ### de chaque coté
     $this->helper('Heading')->output(['It works!']);
 
@@ -63,9 +65,10 @@ tableau de paramètres. Cependant, comme les Console Helper sont des classes
 vanilla, ils implémentent des méthodes suplémentaires qui prennent n'importe
 quelle forme d'arguments.
 
-.. note : ::
-Les Helpers peuvent aussi être placés dans ``src/Shell/Helper`` pour des
-raisons de retro-compatibilité.
+.. note::
+
+    Les Helpers peuvent aussi être placés dans ``src/Shell/Helper`` pour des
+    raisons de retro-compatibilité.
 
 Les Helpers inclus
 ==================
@@ -74,7 +77,7 @@ L'Helper Table
 --------------
 
 Le TableHelper aide à faire des tableaux d'art ASCII bien formatés.
-L'utiliser est assez simple : ::
+L'utiliser est assez simple::
 
         $data = [
             ['Header 1', 'Header', 'Long Header'],
@@ -95,7 +98,7 @@ L'Helper Progress
 -----------------
 
 Le ProgressHelper peut être utilisé de deux façons. Le mode simple vous permet
-de fournir un callback qui est appelé jusqu'à ce que l'avancement soit complet : ::
+de fournir un callback qui est appelé jusqu'à ce que l'avancement soit complet::
 
     $io->helper('Progress')->output(['callback' => function ($progress) {
         // Faire des choses ici.
@@ -104,7 +107,7 @@ de fournir un callback qui est appelé jusqu'à ce que l'avancement soit complet
     }]);
 
 Vous pouvez contrôler davantage la barre de progression en fournissant
-des options supplémentaires :
+des options supplémentaires:
 
 - ``total`` Le nombre total d'éléments dans la barre de progression. La valeur
   par défaut est 100.
@@ -112,7 +115,7 @@ des options supplémentaires :
 - ``callback`` Le callback qui sera appelé dans une boucle pour faire avancer la
   barre de progression.
 
-Voici un exemple de toutes les options utilisées : ::
+Voici un exemple de toutes les options utilisées::
 
     $io->helper('Progress')->output([
         'total' => 10,
@@ -124,7 +127,7 @@ Voici un exemple de toutes les options utilisées : ::
     ]);
 
 Le ProgressHelper peut aussi être utilisé manuellement pour incrementer et
-réafficher la barre de progression quand nécessaire : ::
+réafficher la barre de progression quand nécessaire::
 
     $progress = $io->helper('Progress');
     $progress->init([
@@ -142,7 +145,7 @@ Récuperer l'entrée utilisateur
 .. php:method:: ask($question, $choices = null, $default = null)
 
 Lorsque vous créez des applications de console interactive, vous devez obtenir
-les entrées de l'utilisateur. CakePHP fournit un moyen facile de le faire : ::
+les entrées de l'utilisateur. CakePHP fournit un moyen facile de le faire::
 
     // Get arbitrary text from the user.
     $color = $io->ask('What color do you like?');
@@ -160,7 +163,7 @@ Créer des fichiers
 Créer des fichiers est souvent une part importante de beaucoup de commandes
 console qui permettent d'automatiser le développement et le déploiement.
 la méthode ``createFile()`` donne une interface simple pour créer des fichiers,
-avec une confirmation interactive : ::
+avec une confirmation interactive::
 
     // Create a file with confirmation on overwrite
     $io->createFile('bower.json', $stuff);
@@ -175,7 +178,7 @@ Créer une sortie
 .. php:method:err($message, $newlines)
 
 Écrire dans ``stdout`` et ``stderr`` est une autre opération de routine
-facilitée par CakePHP : ::
+facilitée par CakePHP::
 
     // Écrire dans stdout
     $io->out('Normal message');
@@ -184,7 +187,7 @@ facilitée par CakePHP : ::
     $io->err('Error message');
 
 En plus des méthodes de sortie vanilla, CakePHP fournit des méthodes
-qui stylisent la sortie avec les couleurs ANSI appropriées : ::
+qui stylisent la sortie avec les couleurs ANSI appropriées::
 
     // Texte vert dans stdout
     $io->success('Success message');
@@ -210,7 +213,7 @@ It also provides two convenience methods regarding the output level::
     $io->quiet('Quiet message');
 
 Vous pouvez également créer des lignes vierges ou tracer
-des lignes de tirets : ::
+des lignes de tirets::
 
     // Affiche 2 ligne vides
     $io->out($this->nl(2));
@@ -219,7 +222,7 @@ des lignes de tirets : ::
     $io->hr();
 
 Finalement, vous pouvez mettre à jour la ligne de texte actuelle
-à l'écran : ::
+à l'écran::
 
     $io->out('Counting down');
     $io->out('10', 0);
@@ -228,9 +231,10 @@ Finalement, vous pouvez mettre à jour la ligne de texte actuelle
         $io->overwrite($i, 0, 2);
     }
 
-.. note : ::
-Il est important de se rappeler que vous ne pouvez pas ecraser le texte une
-fois qu'une nouvelle ligne a été affichée.
+.. note::
+
+    Il est important de se rappeler que vous ne pouvez pas ecraser le texte une
+    fois qu'une nouvelle ligne a été affichée.
 
 .. _shell-output-level:
 
@@ -242,7 +246,7 @@ Par exemple, lors de l'exécution d'une tâche cron, la plupart des sorties ne s
 pas nécessaires. Vous pouvez utiliser les niveaux de sortie pour baliser
 l'affichage de manière appropriée. L'utilisateur de l'interpréteur de commandes
 peut alors décider du niveau de détail qui l'intéresse en sélectionnant le bon
-indicateur lors de l'appel de la commande. Il y a 3 niveaux :
+indicateur lors de l'appel de la commande. Il y a 3 niveaux:
 
 * ``QUIET`` - Seulement les informations absolument importantes devraient être
   marquées en sortie silencieuse.
@@ -250,7 +254,7 @@ indicateur lors de l'appel de la commande. Il y a 3 niveaux :
 * ``VERBOSE`` - Notez ainsi les messages qui peuvent être trop verbeux pour un
   usage régulier, mais utile pour du débogage en ``VERBOSE``.
 
-Vous pouvez marquer la sortie comme ceci : ::
+Vous pouvez marquer la sortie comme ceci::
 
     // Apparaitra à tous les niveaux.
     $io->out('Quiet message', 1, ConsoleIo::QUIET);
@@ -284,7 +288,7 @@ Le style de sortie se fait en incluant des balises; tout comme le HTML, dans
 votre sortie. Ces balises seront remplacées par la bonne séquence de code ANSI,
 ou supprimées si vous êtes sur une console qui ne supporte pas les codes ANSI.
 Il existe plusieurs styles intégrés, et vous pouvez en créer d'autres. Ceux qui
-sont intégrés sont :
+sont intégrés sont:
 
 * ``success`` Messages de succès. Texte vert.
 * ``error`` Messages d'erreur. Texte rouge.
@@ -294,7 +298,7 @@ sont intégrés sont :
 * ``question`` Texte qui est une question, ajouté automatiquement par le shell.
 
 Vous pouvez créer des styles supplémentaires en utilisant ``$io->styles()``. Pour
-déclarer un nouveau style de sortie, vous pouvez faire : ::
+déclarer un nouveau style de sortie, vous pouvez faire::
 
     $io->styles('flashy', ['text' => 'magenta', 'blink' => true]);
 
@@ -303,7 +307,7 @@ shell, et si les couleurs ANSI sont activées, ce qui suit serait affiché comme
 texte magenta clignotant
 ``$this->out('<flashy>Whoooa</flashy> Something went wrong');``. Lors de la
 définition des styles, vous pouvez utiliser les couleurs suivantes pour les
-attributs ``text`` et ``background`` :
+attributs ``text`` et ``background``:
 
 * black
 * blue
@@ -330,7 +334,7 @@ Désactiver la colorisation
 ==========================
 
 Bien que la colorisation soit très jolie, il peut arriver que vous souhaitiez la
-désactiver, ou la forcer à s'activer : ::
+désactiver, ou la forcer à s'activer::
 
     $io->outputAs(ConsoleOutput::RAW);
 

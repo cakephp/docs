@@ -24,7 +24,7 @@ requête de données utilise. Par défaut la requête est assignée à
 ``$this->request``, et est disponible dans les Controllers, Cells, Vues et
 Helpers. Vous pouvez aussi y accéder dans les Components en utilisant la
 référence du controller. Certaines des tâches incluses que ``ServerRequest``
-permet sont les suivantes :
+permet sont les suivantes:
 
 * Transformer les tableaux GET, POST, et FILES en structures de données avec
   lesquelles vous êtes familiers.
@@ -279,7 +279,7 @@ Quelques exemples seraient::
 et :php:meth:`Cake\\Http\\ServerRequest::host()` qui facilitent la vie des
 applications avec sous-domaines.
 
-Il y a plusieurs détecteurs intégrés que vous pouvez utiliser :
+Il y a plusieurs détecteurs intégrés que vous pouvez utiliser:
 
 * ``is('get')`` Vérifie si la requête courante est un GET.
 * ``is('put')`` Vérifie si la requête courante est un PUT.

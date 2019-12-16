@@ -8,7 +8,7 @@ main. Cette fois, nous allons utiliser :doc:`/bake` pour créer la base de notre
 code. Bake est un outil :abbr:`CLI (Command Line Interface)` de génération de
 code qui se base sur les conventions de CakePHP pour créer des applications
 :abbr:`CRUD (Create, Read, Update, Delete)` basique très rapidement. Nous allons
-utiliser ``bake`` pour créer le code relatif à la gestion d'utilisateurs :
+utiliser ``bake`` pour créer le code relatif à la gestion d'utilisateurs:
 
 .. code-block:: bash
 
@@ -18,7 +18,7 @@ utiliser ``bake`` pour créer le code relatif à la gestion d'utilisateurs :
     bin/cake bake controller users
     bin/cake bake template users
 
-Ces 3 commandes vont générer :
+Ces 3 commandes vont générer:
 
 * Les fichiers de Table, Entity, et Fixture.
 * Le Controller
@@ -34,7 +34,7 @@ Ajouter un système de Tags aux Articles
 Il serait utile et pratique d'avoir, pour notre application :abbr:`CMS`, un moyen
 de catégoriser notre contenu. Nous allons donc utiliser des tags pour permettre aux
 utilisateurs d'ajouter des catégories et des labels à leurs contenus. Une fois de plus,
-nous allons utiliser ``bake`` pour générer rapidement un code de base :
+nous allons utiliser ``bake`` pour générer rapidement un code de base:
 
 .. code-block:: bash
 

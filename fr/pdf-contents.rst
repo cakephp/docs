@@ -8,7 +8,7 @@ Contenu
 
     intro
     quickstart
-    appendices/3-0-migration-guide
+    appendices/4-0-migration-guide
     tutorials-and-examples
     contributing
 
@@ -23,7 +23,7 @@ Contenu
     controllers/components/authentication
     core-libraries/caching
     bake
-    console-and-shells
+    console-commands
     development/debugging
     deployment
     core-libraries/email
