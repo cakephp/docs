@@ -39,6 +39,7 @@ To help expedite fixing these tedious changes there is an upgrade CLI tool:
     cd upgrade
     git checkout 4.x
     composer install --no-dev
+    cd ..
 
 With the upgrade tool installed you can now run it on your application or
 plugin:
@@ -46,10 +47,10 @@ plugin:
 .. code-block:: bash
 
     # Rename locale files
-    bin/cake upgrade file_rename locales <path/to/app>
+    upgrade/bin/cake upgrade file_rename locales <path/to/app>
 
     # Rename template files
-    bin/cake upgrade file_rename templates <path/to/app>
+    upgrade/bin/cake upgrade file_rename templates <path/to/app>
 
 Once you've renamed your template and locale files, make sure you update
 ``App.paths.locales`` and ``App.paths.templates`` paths to be correct.
