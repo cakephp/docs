@@ -7,10 +7,19 @@ conventions, you get free functionality, and you liberate yourself from the
 maintenance nightmare of tracking config files. Conventions also make for a very
 uniform development experience, allowing other developers to jump in and help.
 
+.. note::
+
+    CamelCase is the practice of writing compound words or phrases so that each word or abbreviation in the middle of the sentence begins with an uppercase letter.
+
+    PascalCase is the practice of writing compound words or phrases so that each word or abbreviation begins with an uppercase letter.
+
+    Both do not use spaces or punctuation.
+
+
 Controller Conventions
 ======================
 
-Controller class names are plural, PascalCased, and end in ``Controller``.
+Controller class names are plural, PascalCase, and end in ``Controller``.
 ``UsersController`` and ``ArticleCategoriesController`` are both examples of
 conventional controller names.
 
@@ -35,10 +44,10 @@ When you create links using ``this->Html->link()``, you can use the following
 conventions for the url array::
 
     $this->Html->link('link-title', [
-        'prefix' => 'MyPrefix' // PascalCased
-        'plugin' => 'MyPlugin', // PascalCased
-        'controller' => 'ControllerName', // PascalCased
-        'action' => 'actionName' // camelBacked
+        'prefix' => 'MyPrefix' // PascalCase
+        'plugin' => 'MyPlugin', // PascalCase
+        'controller' => 'ControllerName', // PascalCase
+        'action' => 'actionName' // camelCase
     ]
 
 For more information on CakePHP URLs and parameter handling, see
@@ -82,7 +91,7 @@ respectively.
 Field/Column names with two or more words are underscored: ``first_name``.
 
 Foreign keys in hasMany, belongsTo/hasOne relationships are recognized by
-default as the (singular) name of the related table followed by ``_id``. So if
+default as the singular name of the related table followed by ``_id``. So if
 Users hasMany Articles, the ``articles`` table will refer to the ``users``
 table via a ``user_id`` foreign key. For a table like ``article_categories``
 whose name contains multiple words, the foreign key would be
@@ -99,15 +108,15 @@ use UUID columns. CakePHP will create UUID values automatically using
 (:php:meth:`Cake\\Utility\\Text::uuid()`) whenever you save new records using
 the ``Table::save()`` method.
 
-Model Conventions
-=================
+Behaviors, Components, Libs and Models Conventions
+==================================================
 
-Table class names are plural, PascalCased and end in ``Table``. ``UsersTable``,
+Table class names are plural, PascalCase and end in ``Table``. ``UsersTable``,
 ``ArticleCategoriesTable``, and ``UserFavoritePagesTable`` are all examples of
 table class names matching the ``users``, ``article_categories`` and
 ``user_favorite_pages`` tables respectively.
 
-Entity class names are singular PascalCased and have no suffix. ``User``,
+Entity class names are singular PascalCase and have no suffix. ``User``,
 ``ArticleCategory``, and ``UserFavoritePage`` are all examples of entity names
 matching the ``users``, ``article_categories`` and ``user_favorite_pages``
 tables respectively.
@@ -131,6 +140,13 @@ The basic pattern is
     rules. See the documentation about :doc:`/core-libraries/inflector` for more
     information.
 
+Helpers
+=======
+
+Helper class files should be put in src/View/Helper. For example: src/View/Helper/LinkHelper.php
+Helper classes should be suffixed with Helper, in PascalCase. For example: "LinkHelper", filename: "link.php", and "GoogleHelper" filename: "google.php".
+When referencing helper class names you should omit the Helper suffix. For example: $this->loadHelper('Link') or $this->loadHelper('Google');
+
 Plugins Conventions
 ===================
 
@@ -150,6 +166,22 @@ and dashes as separator::
 See `awesome list recommendations
 <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/CONTRIBUTING.md#tips-for-creating-cakephp-plugins>`__
 for details.
+
+Constants
+=========
+
+Always keep the same pattern, as a suggestion, in capital letters and underlines:
+"MIN_USER_AGE", "MY_CONSTANT_PERSONAL".
+
+Variables
+=========
+
+Always use the same pattern throughout the camelCase application as in $userComment, $total, $countPerson.
+
+The first letter is uppercase if the variable represents an object:
+$File = new File();
+$GeoPlugin = new GeoPluginLib();
+
 
 Summarized
 ==========
