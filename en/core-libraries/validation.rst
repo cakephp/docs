@@ -29,7 +29,7 @@ validate::
 
     $validator
         ->requirePresence('title')
-        ->notEmpty('title', 'Please fill this field')
+        ->notEmptyString('title', 'Please fill this field')
         ->add('title', [
             'length' => [
                 'rule' => ['minLength', 10],
@@ -112,9 +112,9 @@ of data:
 
 You can also use ``notEmpty()`` to mark a field invalid if any 'empty' value is
 used. In general, it is recommended that you do not use ``notEmpty()`` and use more
-specific validators instead.
+specific validators instead: ``notEmptyString()``, ``notEmptyArray()``, ``notEmptyFile()``, ``notEmptyDate()``, ``notEmptyTime()``, ``notEmptyDateTime()``.
 
-The ``allowEmpty*`` methods support a mode parameter that allows you to control
+The ``allowEmpty*`` methods support a ``when`` parameter that allows you to control
 when a field can or cannot be empty:
 
 * ``false`` The field is not allowed to be empty.
@@ -122,6 +122,9 @@ when a field can or cannot be empty:
   operation.
 * ``update`` The field can be empty when validating an **update**
   operation.
+* A callback that returns ``true`` or ``false`` to indicate whether a field is
+  allowed to be empty. See the :ref:`conditional-validation` section for examples on
+  how to use this parameter.
 
 An example of these methods in action is::
 
@@ -248,6 +251,8 @@ overwritten by the ones returned from the validation rule method::
         'message' => 'Generic error message used when `false` is returned'
     ]);
 
+.. _conditional-validation:
+
 Conditional Validation
 ----------------------
 
@@ -267,9 +272,8 @@ not a particular rule should be applied::
     ]);
 
 You can access the other submitted field values using the ``$context['data']``
-array.
-The above example will make the rule for 'picture' optional depending on whether
-the value for ``show_profile_picture`` is empty. You could also use the
+array.  The above example will make the rule for 'picture' optional depending on
+whether the value for ``show_profile_picture`` is empty. You could also use the
 ``uploadedFile`` validation rule to create optional file upload inputs::
 
     $validator->add('picture', 'file', [
@@ -308,7 +312,16 @@ conditions only::
 
 This would require the ``full_name`` field to be present only in case the user
 wants to create a subscription, while the ``email`` field would always be
-required, since it would also be needed when canceling a subscription.
+required.
+
+The ``$context`` parameter passed to custom conditional callbacks contains the
+following keys:
+
+* ``data`` The data being validated.
+* ``newRecord`` a boolean indicating whether a new or existing record is being
+  validated.
+* ``field`` The current field being validated.
+* ``providers`` The validation providers attached to the current validator.
 
 
 Marking Rules as the Last to Run
@@ -449,7 +462,7 @@ To validate the comments you would use a nested validator::
     $validator->addNestedMany('comments', $commentValidator);
 
     // Get all errors including those from nested validators.
-    $validator->errors($data);
+    $validator->validate($data);
 
 You can create 1:1 'relationships' with ``addNested()`` and 1:N 'relationships'
 with ``addNestedMany()``. With both methods, the nested validator's errors will
@@ -511,7 +524,7 @@ sending an email you could do the following::
         ->requirePresence('comment')
         ->notEmpty('comment', 'You need to give a comment.');
 
-    $errors = $validator->errors($this->request->getData());
+    $errors = $validator->validate($this->request->getData());
     if (empty($errors)) {
         // Send an email.
     }
@@ -528,7 +541,7 @@ be returned per field. By default the ``errors()`` method applies rules for
 the 'create' mode. If you'd like to apply 'update' rules you can do the
 following::
 
-    $errors = $validator->errors($this->request->getData(), false);
+    $errors = $validator->validate($this->request->getData(), false);
     if (empty($errors)) {
         // Send an email.
     }

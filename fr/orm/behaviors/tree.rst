@@ -56,9 +56,7 @@ les données hiérarchisées dans::
 Une fois ajoutées, vous pouvez laisser CakePHP construire la structure interne
 si la table contient déjà quelques lignes::
 
-    // Prior to 3.6.0
-    $categories = TableRegistry::get('Categories');
-
+    // Prior to 3.6 use TableRegistry::get('Categories')
     $categories = TableRegistry::getTableLocator()->get('Categories');
     $categories->recover();
 

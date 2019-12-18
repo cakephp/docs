@@ -437,7 +437,7 @@ CakePHP の既定のレイアウトは **src/Template/Layout/default.ctp** に�
 ``title`` ブロックの内容をビューファイルから設定することができます。 ::
 
     $this->assign('title', 'アクティブユーザー表示');
-    
+
 ``title`` ブロックが空の値の場合、自動的に ``'Admin/Articles'`` のような
 現在のテンプレートパスの表現に置き換えられます。
 
@@ -642,16 +642,6 @@ CakePHP は element() に何も渡されなかった場合、この設定を使�
 以下を使ってください。 ::
 
     echo $this->element('Contacts.sidebar/helpbox');
-
-App のエレメントの要求
-----------------------
-
-もしプラグインのテンプレートファイル内で、このプラグインや他のプラグインではなく、
-メインのアプリケーションに存在するエレメントを描画したい場合、次のようにします。 ::
-
-  echo $this->element('some_global_element', [], ['plugin' => false]);
-  // または...
-  echo $this->element('some_global_element', ['localVar' => $someData], ['plugin' => false]);
 
 ルーティングプレフィックスとエレメント
 --------------------------------------

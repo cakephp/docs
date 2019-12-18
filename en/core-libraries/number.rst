@@ -96,8 +96,14 @@ output. The following options are available:
 |                     | with the international currency code.              |
 +---------------------+----------------------------------------------------+
 
-If $currency value is ``null``, the default currency will be retrieved from
-:php:meth:`Cake\\I18n\\Number::defaultCurrency()`
+If ``$currency`` value is ``null``, the default currency will be retrieved from
+:php:meth:`Cake\\I18n\\Number::defaultCurrency()`. To format currencies in an
+accounting format you should set the currency format::
+
+    Number::setDefaultCurrencyFormat(Number::FORMAT_CURRENCY_ACCOUNTING);
+
+.. versionadded:: 3.9.0
+    Formatting currency as accounting values was added.
 
 Setting the Default Currency
 ============================

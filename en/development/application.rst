@@ -42,6 +42,7 @@ your controllers. As you'll see in the :doc:`/controllers` and :doc:`/views`
 sections there are better ways you add custom logic to your application.
 
 .. _application-bootstrap:
+
 Application::bootstrap()
 ------------------------
 

@@ -133,6 +133,7 @@ The basic pattern is
 
 Plugins Conventions
 ===================
+
 It is useful to prefix a CakePHP plugin with "cakephp-" in the package name.
 This makes the name semantically related on the framework it depends on.
 

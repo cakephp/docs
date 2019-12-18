@@ -15,6 +15,7 @@ Let's create our first Command. For this example, we'll create a
 simple Hello world command. In your application's **src/Command** directory create
 **HelloCommand.php**. Put the following code inside it::
 
+    <?php
     namespace App\Command;
 
     use Cake\Console\Arguments;
@@ -44,6 +45,7 @@ You should see the following output::
 Our ``execute()`` method isn't very interesting let's read some input from the
 command line::
 
+    <?php
     namespace App\Command;
 
     use Cake\Console\Arguments;
@@ -141,6 +143,7 @@ commands.  You can load models in commands, just as you would in a controller
 using ``loadModel()``. The loaded models are set as properties attached to your
 commands::
 
+    <?php
     namespace App\Command;
 
     use Cake\Console\Arguments;
@@ -215,9 +218,6 @@ You can pass any desired exit code into ``abort()``.
     on most Unix systems (``man sysexits``), or the ``System Error Codes`` help
     page in Windows.
 
-.. versionadded:: 3.9.0
-    ``ConsoleIo::abort()`` was added.
-
 Calling other Commands
 ======================
 
@@ -230,10 +230,6 @@ You may need to call other commands from your command. You can use
     // Can pass an instance of the command if it has constructor args
     $command = new OtherCommand($otherArgs);
     $this->executeCommand($command, ['--verbose', 'deploy']);
-
-
-.. versionadded:: 3.8.0
-    ``executeCommand()`` was added.
 
 .. _console-integration-testing:
 
@@ -371,9 +367,6 @@ Modify your test case to the following snippet of code::
             $this->exec('update_table Users');
             $this->assertExitCode(Command::CODE_SUCCESS);
 
-            // Prior to 3.6.0
-            $user = TableRegistry::get('Users')->get(1);
-
             $user = TableRegistry::getTableLocator()->get('Users')->get(1);
             $this->assertSame($user->modified->timestamp, $now->timestamp);
 
@@ -456,9 +449,6 @@ incorrect response. Remove the ``testUpdateModified`` method and, add the follow
         $this->exec('update_table Users', ['y']);
         $this->assertExitCode(Command::CODE_SUCCESS);
 
-        // Prior to 3.6.0
-        $user = TableRegistry::get('Users')->get(1);
-
         $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $this->assertSame($user->modified->timestamp, $now->timestamp);
 
@@ -467,18 +457,12 @@ incorrect response. Remove the ``testUpdateModified`` method and, add the follow
 
     public function testUpdateModifiedUnsure()
     {
-        // Prior to 3.6.0
-        $user = TableRegistry::get('Users')->get(1);
-
         $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $original = $user->modified->timestamp;
 
         $this->exec('my_console best_framework', ['n']);
         $this->assertExitCode(Command::CODE_ERROR);
         $this->assertErrorContains('You need to be sure.');
-
-        // Prior to 3.6.0
-        $user = TableRegistry::get('Users')->get(1);
 
         $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $this->assertSame($original, $user->timestamp);

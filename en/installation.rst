@@ -4,8 +4,8 @@ Installation
 CakePHP has a few system requirements:
 
 - HTTP Server. For example: Apache. Having mod\_rewrite is preferred, but
-  by no means required. You can also use nginx, or Microsoft IIS if you prefer.
-- PHP |minphpversion| or greater (including PHP 7.3).
+  by no means required. You can also use nginx, or Microsoft IIS if you prefer
+- PHP |minphpversion| or greater 
 - mbstring PHP extension
 - intl PHP extension
 - simplexml PHP extension
@@ -112,18 +112,6 @@ By default this is what your application **composer.json** looks like::
 Each time you run ``php composer.phar update`` you will receive patch
 releases for this minor version. You can instead change this to ``^4.0`` to
 also receive the latest stable minor releases of the ``4.x`` branch.
-
-If you want to stay up to date with the latest unreleased changes in CakePHP,
-designate **dev-master** as the package version in your application's
-**composer.json**::
-
-    "require": {
-        "cakephp/cakephp": "dev-master"
-    }
-
-Be aware that this is not recommended, as your application can break when the
-next major version is released. Additionally, composer does not cache
-development branches, so it slows down consecutive composer installs/updates.
 
 Installation using Oven
 -----------------------

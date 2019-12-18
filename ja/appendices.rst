@@ -10,7 +10,7 @@
 .. toctree::
     :maxdepth: 1
 
-    appendices/3-x-migration-guide
+    appendices/4-0-migration-guide
 
 一般的な情報
 ===============

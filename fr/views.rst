@@ -699,17 +699,6 @@ Pour les elements dans le sous-dossier d'un plugin
 
     echo $this->element('Contacts.sidebar/helpbox');
 
-Elements Requêtés à partir de App
----------------------------------
-
-Si vous êtes dans un fichier de template d'un plugin et que vous souhaitez
-rendre un element résidant dans votre application principale plutôt que dans
-ce plugin ou un element d'un autre plugin, utilisez ce qui suit::
-
-    echo $this->element('some_global_element', [], ['plugin' => false]);
-    // ou...
-    echo $this->element('some_global_element', ['localVar' => $someData], ['plugin' => false]);
-
 Préfix de Routing et Elements
 -----------------------------
 

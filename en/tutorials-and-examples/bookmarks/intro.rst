@@ -245,7 +245,6 @@ add the following::
 
     class User extends Entity
     {
-
         // Code from bake.
 
         protected function _setPassword($value)

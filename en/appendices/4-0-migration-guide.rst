@@ -5,11 +5,8 @@ CakePHP 4.0 contains breaking changes, and is not backwards compatible with 3.x
 releases. Before attempting to upgrade to 4.0, first upgrade to 3.8 and resolve
 all deprecation warnings.
 
-To upgrade to 4.0.x run the following composer command:
-
-.. code-block:: bash
-
-    php composer.phar require --update-with-dependencies "cakephp/cakephp:4.0.*"
+Refer to the :doc:`/appendices/4-0-upgrade-guide` for step by step instructions
+on how to upgrade to 4.0.
 
 Deprecated Features Removed
 ===========================
@@ -53,6 +50,7 @@ ORM
 * Using ``Entity::isNew()`` as a setter is deprecated. Use ``setNew()`` instead.
 * ``Entity::unsetProperty()`` has been renamed to ``Entity::unset()`` to match
   the other methods.
+* ``TableSchemaInterface::primaryKey()`` has been renamed to ``TableSchemaInterface::getPrimaryKey()``.
 
 View
 ----
@@ -67,17 +65,18 @@ View
   ``viewBuilder()->setOption($optionName, $optionValue)`` to set these options.
 * ``HtmlHelper::tableHeaders()`` now prefers header cells with attributes to be
   defined as a nested list. e.g ``['Title', ['class' => 'special']]``.
+* ``ContextInterface::primaryKey()`` has been renamed to ``ContextInterface::getPrimaryKey()``.
 
 Mailer
------
+------
 
 * The ``Cake\Mailer\Email`` class has been deprecated. Use ``Cake\Mailer\Mailer``
   instead.
 
 App
 ---
-* The 2nd argument ``$plugin`` of ``App::path()`` is deprecated.
-  Use ``\Cake\Core\Plugin::classPath()/templatePath()`` instead for plugin paths.
+* ``App::path()`` has been deprecated for class paths.
+  Use ``\Cake\Core\App::classPath()`` instead.
 
 Breaking Changes
 ================
@@ -111,11 +110,18 @@ Console
 Component
 ---------
 
+* The input data parsing feature of ``RequestHandlerComponent`` which for e.g.
+  allowed parsing JSON/XML input into request data array has been removed. You should
+  instead use the ``Cake\Http\Middleware\BodyParserMiddleware`` in your application
+  if you need input data parsing.
 * ``Cake\Controller\Component\RequestHandlerComponent`` now sets ``isAjax`` as a
   request attribute instead of request param. Hence you should now use
   ``$request->getAttribute('isAjax')`` instead of ``$request->getParam('isAjax')``.
+* The request body parsing features of ``RequestHandlerComponent`` have been
+  removed and now emit a deprecation warning. You should use the
+  :ref:`body-parser-middleware` instead.
 * ``Cake\Controller\Component\PagingComponent`` now sets paging params info as
-   request attribute instead of request param. Hence you should now use
+  request attribute instead of request param. Hence you should now use
   ``$request->getAttribute('paging')`` instead of ``$request->getParam('paging')``.
 
 Database
@@ -146,6 +152,39 @@ Database
   you will need to update your code.
 * The internals of ``Cake\Database\Schema\CacheCollection`` and ``Cake\Database\SchemaCache``
   have changed. If you extend these classes you will need to update your code.
+* The database schemas now map ``CHAR`` columns to the new ``char`` type instead of
+  ``string``.
+* SqlServer datetime columns now map to 'datetime' types instead of 'timestamp' to match
+  names.
+* The MySQL, PostgreSQL and SqlServer database schemas now map columns that support
+  fractional seconds to the new abstract fractional types.
+
+  * **MySQL**
+
+    #. ``DATETIME(1-6)`` => ``datetimefractional``
+    #. ``TIMESTAMP(1-6)`` => ``timestampfractional``
+
+  * **PostgreSQL**
+
+    #. ``TIMESTAMP`` => ``timestampfractional``
+    #. ``TIMESTAMP(1-6)`` => ``timestampfractional``
+
+  * **SqlServer**
+
+    #. ``DATETIME`` => ``datetimefractional``
+    #. ``DATETIME2`` => ``datetimefractional``
+    #. ``DATETIME2(1-7) => ``datetimefractional``
+
+* PostgreSQL schema now maps columns that support time zones to the new abstract
+  time zone types. Specifying (0) precision does not change the type mapping like
+  it does with regular fractional types above.
+
+  * **PostgreSQL**
+
+    #. ``TIMESTAMPTZ`` => ``timestamptimezone``
+    #. ``TIMESTAMPTZ(0-6)`` => ``timestamptimezone``
+    #. ``TIMESTAMP WITH TIME ZONE`` => ``timestamptimezone``
+    #. ``TIMESTAMP(0-6) WITH TIME ZONE`` => ``timestamptimezone``
 
 Datasources
 -----------
@@ -213,14 +252,24 @@ Mailer
 ORM
 ---
 
+* ``Table::newEntity()`` now requires an array as input and enforces validation to prevent
+  accidental saves without validation being triggered. This means you must use
+  ``Table::newEmptyEntity()`` to create entities without input.
 * Using condition like ``['name' => null]`` for ``Query::where()`` will now raise an exception.
   In 3.x it would generate condition like ``name = NULL`` in SQL which will
-  always matches 0 rows, thus returning incorrect results. When comparing with ``null`` 
+  always matches 0 rows, thus returning incorrect results. When comparing with ``null``
   you must use the ``IS`` operator like ``['name IS' => null]``.
+* Stopping the ``Model.beforeSave`` event with a non-false, non-entity result
+  will now raise an exception. This change ensures that ``Table::save()`` always
+  returns an entity or false.
 
 Router
 ------
 
+* Routing prefixes created through ``Router::prefix()`` and
+  ``$routes->prefix()``` are now CamelCased instead of under_scored. Instead of
+  ``my_admin``, you need to use ``MyAdmin``. This change normalizes prefixes
+  with other routing parameters and removes inflection overhead.
 * ``RouteBuilder::resources()`` now inflects resource names to dasherized form
   instead of underscored by default in URLs. You can retain underscored
   inflection by using ``'inflect' => 'underscore'`` in ``$options`` argument.
@@ -250,6 +299,8 @@ Utility
   Instead you must enable ``readFile`` to read local files.
 * ``Hash::sort()`` now accepts the ``SORT_ASC`` and ``SORT_DESC`` constants in
   the direction parameter.
+* ``Inflector::pluralize()`` now inflects ``index`` to ``indexes`` instead of ``indices``.
+  This reflects the technical usage of this plural in the core as well as the ecosystem.
 
 View
 ----
@@ -294,6 +345,11 @@ Helper
   attributes.
 * ``Cake\View\Helper\SecureFieldTokenTrait`` has been removed. Its form token
   data building functionality is now included in the internal class ``FormProtector``.
+* ``HtmlHelper::docType()`` method has been removed. HTML4 and XHTML are now
+  defunct and doctype for HTML5 is pretty short and easy to type out directly.
+* The ``safe`` option for ``HtmlHelper::scriptBlock()`` and ``HtmlHelper::scriptStart()``
+  has been removed. When enabled it generated ``CDATA`` tags which are only required
+  for XHTML which is now defunct.
 
 Miscellaneous
 -------------
@@ -323,8 +379,8 @@ Console
 Core
 ----
 
-* ``InstanceConfigTrait::getConfigOrFail()`` and 
-  ``StaticConfigTrait::getConfigOrFail()`` were added. Like other ``orFail`` 
+* ``InstanceConfigTrait::getConfigOrFail()`` and
+  ``StaticConfigTrait::getConfigOrFail()`` were added. Like other ``orFail``
   methods these methods will raise an exception when the requested key doesn't
   exist or has a ``null`` value.
 
@@ -332,8 +388,10 @@ Core
 Database
 --------
 
-* If your database's timezone does not match PHP timezone then you can use the
-  ``DateTime::setTimezone()`` method. See :ref:`datetime-type` for details.
+* If your database's timezone does not match PHP timezone then you can use
+  ``DateTime::setDatabaseTimezone()``. See :ref:`datetime-type` for details.
+* ``DateTime::setKeepDatabaseTimezone()`` allows you to keep the database time zone
+  in the DateTime objects created by queries.
 * ``Cake\Database\Log\LoggedQuery`` now implements ``JsonSerializable``.
 * ``Cake\Database\Connection`` now allows using any PSR-3 logger. As a result
   those using the standalone database package are no longer forced to use
@@ -346,6 +404,13 @@ Database
   ``Cake\Datasource\FixtureInterface``. This interface should be
   implemented by fixture implementations that support constraints, which from
   our experience is generally relational databases.
+* The ``char`` abstract type was added. This type handles fixed length string
+  columns.
+* The ``datetimefractional`` and ``timestampfractional`` abstract types were added.
+  These types handle column data types with fractional seconds.
+* SqlServer schemas now support default values with functions in them like SYSDATETIME().
+* The ``datetimetimezone`` and ``timestamptimezone`` abstract types were added.
+  These types handle column data types with time zone support.
 
 Error
 -----
@@ -372,6 +437,11 @@ Http
   feature of ``SecurityComponent``.
 * Cookies now support the ``SameSite`` attribute.
 
+I18n
+----
+* ``Date`` and ``FrozenDate`` now respect the time zone parameter for
+  various factory helpers like ``today('Asia/Tokyo')``.
+
 Mailer
 ------
 
@@ -384,17 +454,26 @@ Mailer
 ORM
 ---
 
-* ``Table::saveManyOrFail()`` method has been added that will throw
-  ``PersistenceFailedException`` with the specific entity that failed in case of
-  an error. The entities are saved transaction safe.
-* ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been
-  added for removing many entities at once including callbacks. The entities are
-  removed transaction safe.
+* ``Table::saveManyOrFail()`` method has been added that will throw ``PersistenceFailedException``
+  with the specific entity that failed in case of an error. The entities are saved transaction safe.
+* ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been added for removing many
+  entities at once including callbacks. The entities are removed transaction safe.
 * ``Table::newEmptyEntity()`` has been added to create a new and empty entity
   object.  This does not trigger any field validation. The entity can be
-  persisted without validation error as an empty record. ``Table::newEntity()``
-  now requires an array as input and enforces validation to prevent accidental
-  saves without validation being triggered.
+  persisted without validation error as an empty record.
+* ``Cake\ORM\RulesChecker::isLinkedTo()`` and ``isNotLinkedTo()`` were added.
+  These new application rules allow you to ensure an association has or doesn't
+  have related records.
+* A new type class ``DateTimeFractionalType`` has been added for datetime types
+  with microsecond precision. You can opt into using this type by adding it to
+  the ``TypeFactory`` as the default ``datetime`` type or re-mapping individual
+  columns. See the Database migration notes for how this type is automatically
+  mapped to database types.
+* A new type class ``DateTimeTimezoneType`` has been added for datetime types
+  with time zone support. You can opt into using this type by adding it to
+  the ``TypeFactory`` as the default ``datetime`` type or re-mapping individual
+  columns. See the Database migration notes for how this type is automatically
+  mapped to database types.
 
 
 Routing
@@ -409,6 +488,11 @@ TestSuite
 
 * ``TestSuite\EmailTrait::assertMailContainsAttachment()`` was added.
 
+Validation
+----------
+
+* ``Validation::dateTime()`` now accepts values with microseconds.
+
 View
 ----
 
@@ -420,3 +504,7 @@ View
   If you need to retain the former markup, a shimmed FormHelper can be found in
   `Shim plugin <https://github.com/dereuromark/cakephp-shim>`__ with the old
   behavior/generation (4.x branch).
+* ``FormHelper`` now sets the default step size to seconds for ``datetime``
+  widgets with a time component.  The default is milliseconds if the field
+  is from the new ``datetimefractional`` or ``timestampfractional`` database
+  types.

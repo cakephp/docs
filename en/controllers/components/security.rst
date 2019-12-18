@@ -144,7 +144,7 @@ Configuring the security component is generally done in the controller's
         {
             parent::beforeFilter($event);
 
-            if ($this->request->getParam('prefix') === 'admin') {
+            if ($this->request->getParam('prefix') === 'Admin') {
                 $this->Security->setConfig('validatePost', false);
             }
         }

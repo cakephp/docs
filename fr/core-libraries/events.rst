@@ -265,9 +265,7 @@ et écouter seulement l'événement dont vous avez réellement besoin::
     // Si envoi d'emails
     use Cake\Mailer\Email;
 
-    // Prior to 3.6.0
-    TableRegistry::get('ThirdPartyPlugin.Feedbacks')
-
+    // Prior to 3.6 use TableRegistry::get('ThirdPartyPlugin.Feedbacks')
     TableRegistry::getTableLocator()->get('ThirdPartyPlugin.Feedbacks')
         ->eventManager()
         ->on('Model.afterSave', function($event, $entity)

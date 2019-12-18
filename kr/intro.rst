@@ -28,9 +28,7 @@ SNS의 경우 모델 계층은 사용자 저장, 친구 저장, 사용자 사진
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6.0
-    $users = TableRegistry::get('Users');
-
+    // Prior to 3.6 use TableRegistry::get('Users')
     $users = TableRegistry::getTableLocator()->get('Users');
     $query = $users->find();
     foreach ($query as $row) {
@@ -44,9 +42,7 @@ SNS의 경우 모델 계층은 사용자 저장, 친구 저장, 사용자 사진
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6.0
-    $users = TableRegistry::get('Users');
-
+    // Prior to 3.6 use TableRegistry::get('Users')
     $users = TableRegistry::getTableLocator()->get('Users');
     $user = $users->newEntity(['email' => 'mark@example.com']);
     $users->save($user);

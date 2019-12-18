@@ -180,7 +180,6 @@ to be created. Start by creating an ``add()`` action in the
 
     class ArticlesController extends AppController
     {
-
         public function initialize(): void
         {
             parent::initialize();

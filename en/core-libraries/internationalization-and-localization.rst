@@ -441,7 +441,6 @@ class::
 
     class YamlFileParser
     {
-
         public function parse($file)
         {
             return yaml_parse_file($file);

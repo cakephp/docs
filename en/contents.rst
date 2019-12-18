@@ -21,6 +21,7 @@ Contents
     intro
     quickstart
     appendices/4-0-migration-guide
+    appendices/4-0-upgrade-guide
     tutorials-and-examples
     contributing
 
@@ -80,14 +81,13 @@ Contents
     :maxdepth: 3
     :caption: Plugins
 
-    Authorization <https://book.cakephp.org/authorization/2.x/>
-    Authentication <https://book.cakephp.org/authentication/2.x/>
-    Bake <https://book.cakephp.org/bake/2.x/>
-    Chronos <https://book.cakephp.org/chronos/>
-    Debug Kit <https://book.cakephp.org/debugkit/4.x/>
-    Migrations <https://book.cakephp.org/migrations/2.x/>
-    Elasticsearch <https://book.cakephp.org/elasticsearch/2.x/en/>
-    upgrade-tool
+    Authorization <https://book.cakephp.org/authorization/2/>
+    Authentication <https://book.cakephp.org/authentication/2/>
+    Bake <https://book.cakephp.org/bake/2/>
+    Chronos <https://book.cakephp.org/chronos/2/>
+    Debug Kit <https://book.cakephp.org/debugkit/4/>
+    Migrations <https://book.cakephp.org/migrations/3/>
+    Elasticsearch <https://book.cakephp.org/elasticsearch/2/en/>
 
 .. toctree::
     :maxdepth: 3

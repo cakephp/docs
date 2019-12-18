@@ -12,7 +12,7 @@ Exigences
 
 - Un serveur HTTP. Par exemple: Apache. mod\_rewrite est préférable, mais en
   aucun cas nécessaire.
-- PHP |minphpversion| ou plus (y compris PHP 7.2)
+- PHP |minphpversion| ou plus (y compris PHP 7.3)
 - L'extension PHP mbstring
 - L'extension PHP intl
 - L'extension PHP simplexml
@@ -122,12 +122,12 @@ Rester à jour avec les derniers changements de CakePHP
 Par défaut le **composer.json** de l'application ressemble à cela : ::
 
     "require": {
-        "cakephp/cakephp": "3.6.*"
+        "cakephp/cakephp": "3.8.*"
     }
 
 A chaque fois que vous exécutez ``php composer.phar update``, vous recevrez
 des correctifs pour cette version mineure. Vous pouvez cependant modifier la
-version de CakePHP en ``^3.6`` pour recevoir également les dernières versions
+version de CakePHP en ``^3.8`` pour recevoir également les dernières versions
 mineures stables de la branche 3.x.
 
 Si vous voulez rester à jour avec les derniers changements non stables de

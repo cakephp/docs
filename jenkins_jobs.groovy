@@ -25,7 +25,7 @@ rm -rf /tmp/book-VERSION-$GIT_COMMIT
 job('Book - Deploy 3.x') {
   description('Deploy the 3.x book when changes are pushed.')
   scm {
-    github(REPO_NAME, '3.0')
+    github(REPO_NAME, '3.x')
   }
   triggers {
     scm('H/5 * * * *')
@@ -94,7 +94,7 @@ job('Book - Deploy 4.0') {
 job('Book - Deploy 2.x') {
   description('Deploy the 2.x book when changes are pushed.')
   scm {
-    github(REPO_NAME, 'master')
+    github(REPO_NAME, '2.x')
   }
   triggers {
     scm('H/5 * * * *')
@@ -165,7 +165,7 @@ job('Book - Deploy 1.1') {
 job('Book - Rebuild 2.x search index') {
   description('Rebuild the 2.x search index. Will result in temporary unavailability of search as index is rebuilt.')
   scm {
-    github(REPO_NAME, 'master')
+    github(REPO_NAME, '2.x')
   }
   logRotator {
     daysToKeep(30)
@@ -178,7 +178,20 @@ job('Book - Rebuild 2.x search index') {
 job('Book - Rebuild 3.x search index') {
   description('Rebuild the 3.x search index. Will result in temporary unavailability of search as index is rebuilt.')
   scm {
-    github(REPO_NAME, '3.0')
+    github(REPO_NAME, '3.x')
+  }
+  logRotator {
+    daysToKeep(30)
+  }
+  steps {
+    shell('make rebuild-index ES_HOST="$ELASTICSEARCH_URL"')
+  }
+}
+
+job('Book - Rebuild 4.x search index') {
+  description('Rebuild the 4.x search index. Will result in temporary unavailability of search as index is rebuilt.')
+  scm {
+    github(REPO_NAME, '4.x')
   }
   logRotator {
     daysToKeep(30)

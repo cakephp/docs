@@ -274,7 +274,7 @@ CakePHP 애플리케이션에 엑세스할 수 있게 됩니다.
 다음으로 CakePHP의 동작을 확인해 봅시다. 사용자가 선택한 방법에 따라 브라우저 `http://example.com/ <http://example.com/>`_  또는 `http://localhost:8765/ <http://localhost:8765/>`_ 를 열어봅니다.
 그다음 CakePHP의 기본 홈 화면에서 데이터베이스의 연결상태를 표시하는 메시지를 확인합니다.
 
-축하합니다! 이것으로 `CakePHP 애플리케이션작성의 첫번째 준비 <https://book.cakephp.org/3.0/kr/quickstart.html>`_ 를 마쳤습니다.
+축하합니다! 이것으로 `CakePHP 애플리케이션작성의 첫번째 준비 <https://book.cakephp.org/3/kr/quickstart.html>`_ 를 마쳤습니다.
 
 .. _url-rewriting:
 

@@ -23,9 +23,7 @@ SQL インジェクション攻撃から守っています。
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6.0
-    $articles = TableRegistry::get('Articles');
-
+    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // 新しいクエリーを始めます。
@@ -44,9 +42,7 @@ SQL インジェクション攻撃から守っています。
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6.0
-    $query = TableRegistry::get('Articles')->find();
-
+    // Prior to 3.6 use TableRegistry::get('Articles')
     $query = TableRegistry::getTableLocator()->get('Articles')->find();
 
     foreach ($query as $article) {
@@ -608,12 +604,12 @@ CakePHP は計算された値が正しい Entity にセットされることを�
 
     $query = $articles->find()->where(function ($exp, $query) {
         // 同一フィールドに複数条件を追加するために add() を使用
-        $author = $exp->or_(['author_id' => 3])->add(['author_id' => 2]);
-        $published = $exp->and_(['published' => true, 'view_count' => 10]);
+        $author = $exp->or(['author_id' => 3])->add(['author_id' => 2]);
+        $published = $exp->and(['published' => true, 'view_count' => 10]);
 
-        return $exp->or_([
+        return $exp->or([
             'promoted' => true,
-            $exp->and_([$author, $published])
+            $exp->and([$author, $published])
         ]);
     });
 
@@ -633,12 +629,12 @@ CakePHP は計算された値が正しい Entity にセットされることを�
     )
 
 ``where()`` 関数に渡される Expression オブジェクトには２種類のメソッドがあります。
-１種類目のメソッドは **結合子** (and や or) です。 ``and_()`` と ``or_()`` メソッドは条件が
+１種類目のメソッドは **結合子** (and や or) です。 ``and()`` と ``or()`` メソッドは条件が
 **どう** 結合されるかが変更された新しい Expression オブジェクトを作成します。２種類目のメソッドは
 **条件** です。条件は、現在の結合子を使って結合され、Expression オブジェクトに追加されます。
 
-たとえば、 ``$exp->and_(...)`` を呼ぶと、そこに含まれるすべての条件が ``AND`` で結合された、
-新しい ``Expression`` オブジェクトが作成されます。 ``$exp->or_()`` の場合は 、
+たとえば、 ``$exp->and(...)`` を呼ぶと、そこに含まれるすべての条件が ``AND`` で結合された、
+新しい ``Expression`` オブジェクトが作成されます。 ``$exp->or()`` の場合は 、
 そこに含まれるすべての条件が ``OR`` で結合された、新しい ``Expression`` オブジェクトが作成されます。
 ``Expression`` object で条件を追加する例は次のようになります。 ::
 
@@ -651,7 +647,7 @@ CakePHP は計算された値が正しい Entity にセットされることを�
                 ->gt('view_count', 10);
         });
 
-``where()`` を使い始めた場合、 ``and_()`` は暗黙的に選ばれているため、それを呼ぶ必要はありません。
+``where()`` を使い始めた場合、 ``and()`` は暗黙的に選ばれているため、それを呼ぶ必要はありません。
 上記の例では新たな条件がいくつか ``AND`` で結合されています。結果の SQL は次のようになります。
 
 .. code-block:: sql
@@ -673,7 +669,7 @@ CakePHP は計算された値が正しい Entity にセットされることを�
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
-            $orConditions = $exp->or_(['author_id' => 2])
+            $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
                 ->add($orConditions)
@@ -692,12 +688,12 @@ CakePHP は計算された値が正しい Entity にセットされることを�
     AND published = 1
     AND view_count >= 10)
 
-``or_()`` と ``and_()`` メソッドはまた、それらの引数に関数も渡せるようになっています。
+``or()`` と ``and()`` メソッドはまた、それらの引数に関数も渡せるようになっています。
 これはメソッドをチェーンさせる際に可読性を上げられることが良く有ります。 ::
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
-            $orConditions = $exp->or_(function ($or) {
+            $orConditions = $exp->or(function ($or) {
                 return $or->eq('author_id', 2)
                     ->eq('author_id', 5);
             });
@@ -710,7 +706,7 @@ CakePHP は計算された値が正しい Entity にセットされることを�
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
-            $orConditions = $exp->or_(['author_id' => 2])
+            $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
                 ->not($orConditions)

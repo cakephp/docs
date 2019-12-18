@@ -111,10 +111,8 @@
     // В контроллере и методе.
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
-
-    // До 3.6.0
-    $articles = TableRegistry::get('Articles');
 
 Класс ``TableRegistry`` предоставляет различные зависимости для построения
 таблицы и ведёт реестр всех созданных экземпляров таблиц, что упрощает
@@ -126,14 +124,12 @@
 допустить, следуйте следующим примерам::
 
     // Таблица плагина
+    // Prior to 3.6 use TableRegistry::get('PluginName.Articles')
     $articlesTable = TableRegistry::getTableLocator()->get('PluginName.Articles');
 
     // Таблица плагина с префиксом vendor'а
+    // Prior to 3.6 use TableRegistry::get('VendorName/PluginName.Articles')
     $articlesTable = TableRegistry::getTableLocator()->get('VendorName/PluginName.Articles');
-
-    // До 3.6.0
-    $articlesTable = TableRegistry::get('PluginName.Articles');
-    $articlesTable = TableRegistry::get('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
 

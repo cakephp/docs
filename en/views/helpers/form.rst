@@ -408,6 +408,8 @@ date
     date
 datetime, timestamp
     datetime-local
+datetimefractional, timestampfractional
+    datetime-local
 time
     time
 month
@@ -1236,10 +1238,6 @@ Will output:
 
 If the ``label`` key is used on an option, the attributes in
 ``$attributes['label']`` will be ignored.
-
-
-.. versionchanged:: 3.8.0
-   The ``label`` key in complex options was added.
 
 .. _create-select-picker:
 
@@ -2452,7 +2450,6 @@ could do the following::
 
     class AutocompleteWidget implements WidgetInterface
     {
-
         protected $_templates;
 
         public function __construct($templates)

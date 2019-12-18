@@ -12,7 +12,6 @@ use the ``FrozenTime`` class::
 
     class UsersController extends AppController
     {
-
         public function initialize(): void
         {
             parent::initialize();

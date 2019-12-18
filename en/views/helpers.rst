@@ -128,7 +128,6 @@ your helper requires. For example::
 
     class AwesomeHelper extends Helper
     {
-
         use StringTemplateTrait;
 
         protected $_defaultConfig = [
@@ -326,7 +325,6 @@ If you would like to access a View variable inside a helper, you can use
 
     class AwesomeHelper extends Helper
     {
-
         public $helpers = ['Html'];
 
         public function someMethod()

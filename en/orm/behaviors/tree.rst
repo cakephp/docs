@@ -53,9 +53,6 @@ hierarchical data in::
 Once added, you can let CakePHP build the internal structure if the table is
 already holding some rows::
 
-    // Prior to 3.6.0
-    $categories = TableRegistry::get('Categories');
-
     $categories = TableRegistry::getTableLocator()->get('Categories');
     $categories->recover();
 
@@ -213,14 +210,12 @@ a locations table you may want to create one tree per country::
 
     class LocationsTable extends Table
     {
-
         public function initialize(array $config): void
         {
             $this->addBehavior('Tree', [
                 'scope' => ['country_name' => 'Brazil']
             ]);
         }
-
     }
 
 In the previous example, all tree operations will be scoped to only the rows

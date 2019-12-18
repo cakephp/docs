@@ -45,12 +45,10 @@ method::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config): void
         {
             $this->setTable('my_table');
         }
-
     }
 
 No inflection conventions will be applied when specifying a table. By convention
@@ -94,17 +92,17 @@ Getting Instances of a Table Class
 ----------------------------------
 
 Before you can query a table, you'll need to get an instance of the table. You
-can do this by using the ``TableRegistry`` class::
+can do this by using the ``TableLocator`` class::
 
     // In a controller or table method.
     use Cake\ORM\TableRegistry;
 
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
-The TableRegistry class provides the various dependencies for constructing
+``TableLocator`` provides the various dependencies for constructing
 a table, and maintains a registry of all the constructed table instances making
 it easier to build relations and configure the ORM. See
-:ref:`table-registry-usage` for more information.
+:ref:`table-locator-usage` for more information.
 
 If your table class is in a plugin, be sure to use the correct name for your
 table class. Failing to do so can result in validation rules, or callbacks not
@@ -174,6 +172,7 @@ which implements ``EventListenerInterface``::
                 'Model.initialize' => 'initializeEvent',
             );
         }
+
         public function initializeEvent($event): void
         {
             $table = $event->getSubject();
@@ -260,7 +259,6 @@ beforeSave
 The ``Model.beforeSave`` event is fired before each entity is saved. Stopping
 this event will abort the save operation. When the event is stopped the result
 of the event will be returned.
-How to stop an event is documented :ref:`here <stopping-events>`.
 
 afterSave
 ---------
@@ -288,7 +286,6 @@ beforeDelete
 The ``Model.beforeDelete`` event is fired before an entity is deleted. By
 stopping this event you will abort the delete operation. When the event is stopped the result
 of the event will be returned.
-How to stop an event is documented :ref:`here <stopping-events>`.
 
 afterDelete
 -----------
@@ -307,6 +304,22 @@ delete operation is wrapped has been is committed. It's also triggered for non
 atomic deletes where database operations are implicitly committed. The event is
 triggered only for the primary table on which ``delete()`` is directly called.
 The event is not triggered if a transaction is started before calling delete.
+
+Stopping Table Events
+---------------------
+To prevent the save from continuing, simply stop event propagation in your callback::
+
+    public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
+    {
+        if (...) {
+            $event->stopPropagation();
+            $event->setResult(false);
+            return;
+        }
+        ...
+    }
+
+Alternatively, you can return false from the callback. This has the same effect as stopping event propagation.
 
 Callback priorities
 -------------------
@@ -429,11 +442,12 @@ tables use which connections. This is the ``defaultConnectionName()`` method::
     The ``defaultConnectionName()`` method **must** be static.
 
 .. _table-registry-usage:
+.. _table-locator-usage:
 
-Using the TableRegistry
+Using the TableLocator
 =======================
 
-.. php:class:: TableRegistry
+.. php:class:: TableLocator
 
 As we've seen earlier, the TableRegistry class provides an easy way to use
 factory/registry for accessing your applications table instances. It provides a
@@ -442,7 +456,7 @@ few other useful features as well.
 Configuring Table Objects
 -------------------------
 
-.. php:staticmethod:: get($alias, $config)
+.. php:method:: get($alias, $config)
 
 When loading tables from the registry you can customize their dependencies, or
 use mock objects by providing an ``$options`` array::
@@ -478,20 +492,15 @@ Configuration data is stored *per alias*, and can be overridden by an object's
     access that alias. Doing it after the registry is populated will have no
     effect.
 
-.. note::
-
-    Static API of `Cake\ORM\TableRegistry` has been deprecated in 3.6.0.
-    Use a table locator directly instead.
-
 Flushing the Registry
 ---------------------
 
-.. php:staticmethod:: clear()
+.. php:method:: clear()
 
 During test cases you may want to flush the registry. Doing so is often useful
 when you are using mock objects, or modifying a table's dependencies::
 
-    TableRegistry::clear();
+    TableRegistry::getTableLocator()->clear();
 
 Configuring the Namespace to Locate ORM classes
 -----------------------------------------------

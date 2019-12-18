@@ -246,9 +246,9 @@ flags
     by the driver you are using.
 cacheMetadata
     Either boolean ``true``, or a string containing the cache configuration to
-    store meta data in. Having metadata caching disable is not advised and can
-    result in very poor performance. See the :ref:`database-metadata-cache`
-    section for more information.
+    store meta data in. Having metadata caching disabled by setting it to ``false``
+    is not advised and can result in very poor performance. See the
+    :ref:`database-metadata-cache` section for more information.
 mask
     Set the permissions on the generated database file. (Only supported by SQLite)
 
@@ -321,8 +321,9 @@ the same names for similar data types, CakePHP provides a set of abstracted
 data types for use with the database layer. The types CakePHP supports are:
 
 string
-    Generally backed by ``CHAR`` or ``VARCHAR`` columns. Using the ``fixed`` option
-    will force a CHAR column. In SQL Server, ``NCHAR`` and ``NVARCHAR`` types are used.
+    Maps to ``VARCHAR`` type. In SQL Server the ``NVARCHAR`` types are used.
+char
+    Maps to ``CHAR`` type. In SQL Server the ``NCHAR`` type is used.
 text
     Maps to ``TEXT`` types.
 uuid
@@ -358,8 +359,12 @@ date
     class.
 datetime
     See :ref:`datetime-type`.
+datetimefractional
+    See :ref:`datetime-type`.
 timestamp
     Maps to the ``TIMESTAMP`` type.
+timestampfractional
+    Maps to the ``TIMESTAMP(N)`` type.
 time
     Maps to a ``TIME`` type in all databases.
 json
@@ -380,7 +385,7 @@ handles, and generate file handles when reading data.
 DateTime Type
 -------------
 
-.. php:class:: Type\DateTimeType
+.. php:class:: DateTimeType
 
 Maps to a native ``DATETIME`` column type. In PostgreSQL, and SQL Server
 this turns into a ``TIMESTAMP`` type. The default return value of this column
@@ -393,6 +398,30 @@ If your database server's timezone does not match your application's PHP timezon
 then you can use this method to specify your database's timezone. This timezone
 will then used when converting PHP objects to database's datetime string and
 vice versa.
+
+.. php:class:: DateTimeFractionalType
+
+Can be used to map datetime columns that contain microseconds such as
+``DATETIME(6)`` in MySQL. To use this type you need to add it as a mapped type::
+
+    // in confib/bootstrap.php
+    use Cake\Database\TypeFactory;
+    use Cake\Database\Type\DateTimeFractionalType;
+
+    // Overwrite the default datetime type with a more precise one.
+    TypeFactory::map('datetime', DateTimeFractionalType::class);
+
+.. php:class:: DateTimeTimezoneType
+
+Can be used to map datetime columns that contain time zones such as
+``TIMESTAMPTZ`` in PostgreSQL. To use this type you need to add it as a mapped type::
+
+    // in confib/bootstrap.php
+    use Cake\Database\TypeFactory;
+    use Cake\Database\Type\DateTimeTimezoneType;
+
+    // Overwrite the default datetime type with a more precise one.
+    TypeFactory::map('datetime', DateTimeTimezoneType::class);
 
 .. _adding-custom-database-types:
 
@@ -424,7 +453,6 @@ we could make the following type class::
 
     class JsonType extends Type
     {
-
         public function toPHP($value, Driver $driver)
         {
             if ($value === null) {
@@ -453,7 +481,6 @@ we could make the following type class::
             }
             return PDO::PARAM_STR;
         }
-
     }
 
 By default the ``toStatement()`` method will treat values as strings which will
@@ -473,13 +500,11 @@ your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
 
     class WidgetsTable extends Table
     {
-
         protected function _initializeSchema(TableSchema $schema)
         {
-            $schema->columnType('widget_prefs', 'json');
+            $schema->setColumnType('widget_prefs', 'json');
             return $schema;
         }
-
     }
 
 .. _mapping-custom-datatypes-to-sql-expressions:

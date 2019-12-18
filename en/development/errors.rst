@@ -117,7 +117,7 @@ life-cycle events. By modifying this class you can control which components are
 used and which templates are rendered.
 
 If your application uses :ref:`routing-prefixes` you can create custom error
-controllers for each routing prefix. For example, if you had an ``admin``
+controllers for each routing prefix. For example, if you had an ``Admin``
 prefix. You could create the following class::
 
     namespace App\Controller\Admin;
@@ -292,7 +292,7 @@ standard error page, you can override it::
 
         public function handleFatalError($code, $description, $file, $line)
         {
-            return 'A fatal error has happened';
+            echo 'A fatal error has happened';
         }
     }
 

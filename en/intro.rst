@@ -37,9 +37,6 @@ The model objects can be thought of as "Friend", "User", "Comment", or
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6.0
-    $users = TableRegistry::get('Users');
-
     $users = TableRegistry::getTableLocator()->get('Users');
     $query = $users->find();
     foreach ($query as $row) {
@@ -54,9 +51,6 @@ If we wanted to make a new user and save it (with validation) we would do
 something like::
 
     use Cake\ORM\TableRegistry;
-
-    // Prior to 3.6.0
-    $users = TableRegistry::get('Users');
 
     $users = TableRegistry::getTableLocator()->get('Users');
     $user = $users->newEntity(['email' => 'mark@example.com']);
@@ -102,7 +96,7 @@ controller would be::
 
     public function add()
     {
-        $user = $this->Users->newEntity();
+        $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user, ['validate' => 'registration'])) {

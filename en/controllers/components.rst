@@ -253,7 +253,6 @@ way you include them in controllers - using the ``$components`` var::
 
     class ExistingComponent extends Component
     {
-
         public function foo()
         {
             // ...

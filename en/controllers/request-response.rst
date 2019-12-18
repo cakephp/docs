@@ -150,9 +150,6 @@ enable this behavior, set the configuration value ``App.uploadedFilesAsObjects``
 In the above example, ``$attachment`` would then hold an object, in the current implementation it would by default be an
 instance of ``\Zend\Diactoros\UploadedFile``.
 
-.. versionadded:: 3.9.0
-    Support for uploaded files as objects in the request data was added in version 3.9.0
-
 Furthermore uploaded files can be accessed as objects separately from the request data via the
 :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` and
 :php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()` methods. These methods will always return objects,
@@ -186,7 +183,7 @@ Returns all uploaded files in a normalized array structure. For the above exampl
 
 This method sets the uploaded files of the request object, it accepts an array of objects that implement
 `\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__. It will
-replace all possibly existing uploaded files.
+replace all possibly existing uploaded files::
 
     $files = [
         'MyModel' => [
