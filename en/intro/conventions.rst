@@ -171,7 +171,7 @@ Constants
 =========
 
 Always keep the same pattern, as a suggestion, in capital letters and underlines:
-"MIN_USER_AGE", "MY_CONSTANT_PERSONAL".
+``MIN_USER_AGE``, ``MY_CONSTANT_PERSONAL``.
 
 Variables
 =========
