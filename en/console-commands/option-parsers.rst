@@ -138,6 +138,8 @@ of the option:
   will be ``true``.
 * ``boolean`` - The option uses no value, it's just a boolean switch.
   Defaults to ``false``.
+* ``multiple`` - The option can be provided multiple times. The parsed option
+  will be an array of values when this option is enabled.
 * ``choices`` - An array of valid choices for this option. If left empty all
   values are valid. An exception will be raised when parse() encounters an
   invalid value.
