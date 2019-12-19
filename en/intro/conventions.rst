@@ -9,7 +9,7 @@ uniform development experience, allowing other developers to jump in and help.
 
 .. note::
 
-    CamelCase is the practice of writing compound words or phrases so that each word or abbreviation in the middle of the sentence begins with an uppercase letter.
+    Camel case is the practice of writing compound words or phrases so that each word other than the first begins with an uppercase letter. E.g. ``redApple``
 
     PascalCase is the practice of writing compound words or phrases so that each word or abbreviation begins with an uppercase letter.
 
