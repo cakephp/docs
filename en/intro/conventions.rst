@@ -143,7 +143,7 @@ The basic pattern is
 Helpers
 =======
 
-Helper class files should be put in src/View/Helper. For example: src/View/Helper/LinkHelper.php
+Helper class files should be put in **src/View/Helper**. For example: **src/View/Helper/LinkHelper.php**
 Helper classes should be suffixed with Helper, in PascalCase. For example: ``LinkHelper`` would be in a file named **LinkHelper.php**, and ``GoogleHelper`` would be in a file named **GoogleHelper.php**.
 When referencing helper class names you should omit the Helper suffix. For example: $this->loadHelper('Link') or $this->loadHelper('Google');
 
