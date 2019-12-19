@@ -51,7 +51,7 @@ in the **cms** directory of the current working directory:
 If you downloaded and ran the `Composer Windows Installer
 <https://getcomposer.org/Composer-Setup.exe>`_, then type the following line in
 your terminal from your installation directory (ie.
-C:\\wamp\\www\\dev\\cakephp3):
+C:\\wamp\\www\\dev\\cakephp):
 
 .. code-block:: bash
 
