@@ -170,7 +170,7 @@ for details.
 Constants
 =========
 
-Always keep the same pattern, as a suggestion, in capital letters and underlines:
+Always keep the same pattern, as a suggestion, in capital letters and underscore:
 ``MIN_USER_AGE``, ``MY_CONSTANT_PERSONAL``.
 
 Variables
