@@ -174,7 +174,7 @@ rendered as HTML attributes::
         ]
     );
 
-    // Based on the default template, this will render the following HTML :
+    // Based on the default template, this will render the following HTML:
     <li class="products-crumb" data-foo="bar">
         <a href="/products/index" class="inner-products-crumb" id="the-products-crumb">Products</a>
     </li>

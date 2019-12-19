@@ -85,7 +85,7 @@ Les dossiers de traduction peuvent être composées d'un code à deux ou trois l
 de la langue ou du nom de la locale, par exemple ``fr_FR``, ``es_AR``,
 ``da_DK``, qui contient en même temps la langue et le pays où elle est parlée.
 
-Un fichier de traduction pourrait ressembler à ceci :
+Un fichier de traduction pourrait ressembler à ceci:
 
 .. code-block:: pot
 

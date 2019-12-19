@@ -108,14 +108,14 @@ pour définir des arguments. Nous pouvons aussi définir des options. Par exempl
         $io->out("Hello {$name}.");
     }
 
-Consultez la section :doc:`/console-and-shells/option-parsers` pour plus d'information.
+Consultez la section :doc:`/console-commands/option-parsers` pour plus d'information.
 
 Créer une Sortie
 ================
 
 Les commands fournissent une instance ``ConsoleIo`` quand elles sont exécutées. Cet objet vous permet
 d'intéragir avec ``stdout``, ``stderr`` et de créer des fichiers. Consultez la section
-:doc:`/console-and-shells/input-output` pour plus d'information.
+:doc:`/console-commands/input-output` pour plus d'information.
 
 Utiliser les Models dans les Commands
 =====================================

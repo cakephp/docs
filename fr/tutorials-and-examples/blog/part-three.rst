@@ -380,7 +380,7 @@ lorsque l'on va le créer ou le modifier::
 Modifier les Templates des Articles
 ===================================
 
-Le fichier **add** des articles devrait ressembler à ceci :
+Le fichier **add** des articles devrait ressembler à ceci:
 
 .. code-block:: php
 

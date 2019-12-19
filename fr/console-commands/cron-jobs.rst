@@ -36,7 +36,7 @@ pourrait ne pas fonctionner. Vous pouvez à la place utiliser
     ``register_argc_argv = 1`` dans votre php.ini. Si vous ne pouvez pas
     changer register_argc_argv de manière globale, vous pouvez préciser à la
     tâche cron d'utiliser votre propre configuration en la spécifiant via le
-    paramètre ``-d register_argc_argv=1``. Exemple :
+    paramètre ``-d register_argc_argv=1``. Exemple:
     ``php -d register_argc_argv=1 /full/path/to/root/bin/cake.php myshell myparam``.
 
 .. meta::

@@ -90,7 +90,7 @@ Suppressions strictes
 .. php:method:: deleteOrFail($entity, $options = [])
 
 Utiliser cette méthode lancera une :php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException`
-si :
+si:
 
 * l'entity est _new_ (si elle n'a jamais été persistée)
 * l'entity n'a pas de valeur pour sa clé primaire

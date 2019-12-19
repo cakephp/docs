@@ -59,7 +59,7 @@ Retourne::
 
     --help -h --verbose -v --quiet -q --everything --connection -c --force -f --plugin -p --prefix --theme -t
 
-Vous pouvez passer un autre argument représentant une sous-commande du shell :
+Vous pouvez passer un autre argument représentant une sous-commande du shell:
 cela vous retournera les options spécifiques à cette sous-commande.
 
 Activer l'autocomplétion Bash pour la console CakePHP
@@ -78,7 +78,7 @@ Sauvegardez le fichier et rédémarrez la console.
 .. note::
 
     Si vous utilisez MacOS X, vous pouvez installer la librairie
-    **bash-completion** en utilisant **homebrew** avec la commande suivante :
+    **bash-completion** en utilisant **homebrew** avec la commande suivante:
     ``brew install bash-completion``. Le répertoire cible du fichier **cake**
     devra être **/usr/local/etc/bash_completion.d/**.
 

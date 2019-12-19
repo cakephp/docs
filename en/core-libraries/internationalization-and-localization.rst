@@ -592,7 +592,7 @@ Parsing Localized Datetime Data
 
 When accepting localized data from the request, it is nice to accept datetime
 information in a user's localized format. In a controller, or
-:doc:`/development/middleware` you can configure the Date, Time, and
+:doc:`/controllers/middleware` you can configure the Date, Time, and
 DateTime types to parse localized formats::
 
     use Cake\Database\Type;

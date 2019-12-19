@@ -327,7 +327,7 @@ application. Vous pourrez voir les résultats en allant à
 
 Si vous utilisez PHP 5.6.0 (ou supérieur), vous pouvez utilisez `phpdbg <http://phpdbg.com/>`__
 pour générer la couverture des résultats à la place de xdebug. ``phpdbg`` est
-généralement plus rapide dans la génération des rapports de couverture :
+généralement plus rapide dans la génération des rapports de couverture:
 
 .. code-block:: bash
 

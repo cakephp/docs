@@ -14,7 +14,7 @@ Créer un fil d'Ariane
 =====================
 
 Vous pouvez ajouter un élément à la liste en utilisant la méthode ``add()``.
-Elle accepte trois arguments :
+Elle accepte trois arguments:
 
 - ``title`` La chaîne affichée comme titre de l'élément.
 - ``url`` Une chaîne ou un tableau de paramètres qui sera passé au :doc:`/views/helpers/url`
@@ -87,14 +87,14 @@ Affichage simple
 
 Après avoir ajouté un élément à la liste, vous pouvez facilement l'afficher
 avec la méthode ``render()``.
-Cette méthode accepte deux tableaux comme arguments :
+Cette méthode accepte deux tableaux comme arguments:
 
 - ``$attributes`` : Un tableau d'attributs qui seront appliqués au template
   ``wrapper``. Cela vous donne lapossibilité d'ajouter des attributs au tag
   HTML utilisé. Il accepte également la clé ``templateVars`` ce qui vous permet
   d'insérer des variables de template personnalisées dans le template.
 - ``$separator`` : Un tableau d'attributs pour le template ``separator``.
-  Voici les propriétés disponibles :
+  Voici les propriétés disponibles:
 
   - ``separator`` La chaîne qui sera utilisée comme séparateur
   - ``innerAttrs`` Pour fournir des attributs dans le cas où votre séparateur
@@ -181,7 +181,7 @@ comme attributs HTML::
         ]
     );
 
-    // En se basant sur le template par défaut, la chaîne suivante sera affichée :
+    // En se basant sur le template par défaut, la chaîne suivante sera affichée:
     <li class="products-crumb" data-foo="bar">
         <a href="/products/index" class="inner-products-crumb" id="the-products-crumb">Produits</a>
     </li>

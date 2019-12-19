@@ -30,7 +30,7 @@ Configuration des Components
 ============================
 
 De nombreux components du cœur nécessitent une configuration. Quelques
-exemples :
+exemples:
 :doc:`/controllers/components/authentication` et
 :doc:`/controllers/components/cookie`.
 La configuration pour ces components, et pour les components en général, se fait

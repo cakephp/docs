@@ -231,7 +231,7 @@ la création d'articles. Commencez par créer une action ``add()`` dans le
     où vous avez besoin de l'utiliser. Il est souvent conseillé de le charger
     directement dans le ``AppController``.
 
-Voici ce que l'action ``add()`` fait :
+Voici ce que l'action ``add()`` fait:
 
 * Si la méthode HTTP de la requête est un POST, cela tentera de sauvegarder les données
   en utilisant le model Articles.
@@ -269,7 +269,7 @@ vous pouvez spécifier une URL.
 Création du Template Add
 ========================
 
-Voici le code de notre template de la view "add" :
+Voici le code de notre template de la view "add":
 
 .. code-block:: php
 
@@ -285,7 +285,7 @@ Voici le code de notre template de la view "add" :
     ?>
 
 Nous utilisons le FormHelper pour générer l'ouverture du form HTML.
-Voici le HTML que ``$this->Form->create()`` génère :
+Voici le HTML que ``$this->Form->create()`` génère:
 
 .. code-block:: html
 
@@ -380,7 +380,7 @@ les erreurs de validation en fonction du résultat de l'opération de sauvegarde
 Création du template Edit
 =========================
 
-Le template edit devra ressembler à ceci :
+Le template edit devra ressembler à ceci:
 
 .. code-block:: php
 
@@ -400,7 +400,7 @@ Ce template affiche le formulaire de modification (avec les valeurs déjà rempl
 ainsi que les messages d'erreurs de validation.
 
 Vous pouvez maintenant mettre à jour notre view index avec les liens pour modifier
-les articles :
+les articles:
 
 .. code-block:: php
 
@@ -512,7 +512,7 @@ que votre application aurait besoin de générer.
 Puisque nous exécutons seulement de la logique et redirigeons directement sur une
 autre action, cette action n'a pas de template. Vous devez ensuite mettre à jour
 votre template index pour ajouter les liens qui permettront de supprimer les
-articles :
+articles:
 
 .. code-block:: php
 
@@ -560,4 +560,4 @@ qui utilisera du JavaScript pour faire une requête POST et supprimer notre arti
     effective de l'article.
 
 Maintenant que nous avons un minimum de gestion sur nos articles, il est temps
-de créer des actions basiques pour nos tables :doc:`Tags et Users <tags-and-users>`.
+de créer des actions basiques pour nos tables :doc:`Tags et Users </tutorials-and-examples/cms/tags-and-users>`.

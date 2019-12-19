@@ -43,7 +43,7 @@ Contenu
 
     controllers/components/authentication
     core-libraries/caching
-    console-and-shells
+    console-commands
     development/debugging
     deployment
     core-libraries/email

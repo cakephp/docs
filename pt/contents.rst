@@ -21,7 +21,7 @@ Conteúdo
 
     intro
     quickstart
-    appendices/4-x-migration-guide
+    appendices/4-0-migration-guide
     tutorials-and-examples
     contributing
 

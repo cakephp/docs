@@ -254,7 +254,7 @@ définition de routes pour des verbes HTTP spécifiques::
 Les méthodes ci-dessus *mappent* la même URL à des actions différentes en fonction
 du verbe HTTP utilisé. Les requêtes GET pointeront sur l'action 'view' tandis que les
 requêtes PUT pointeront sur l'action 'update'. Ces méthodes sont disponibles pour les
-verbes :
+verbes:
 
 * GET
 * POST

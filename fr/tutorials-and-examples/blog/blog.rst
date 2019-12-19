@@ -6,7 +6,7 @@ de blog. Nous récupérerons et installerons CakePHP, créerons et configurerons
 une base de données et ajouterons suffisamment de logique applicative pour
 lister, ajouter, éditer et supprimer des articles.
 
-Voici ce dont vous aurez besoin :
+Voici ce dont vous aurez besoin:
 
 #. Un serveur web fonctionnel. Nous supposerons que vous utilisez Apache,
    bien que les instructions pour utiliser d'autres serveurs doivent

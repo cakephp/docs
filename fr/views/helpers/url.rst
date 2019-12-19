@@ -70,7 +70,7 @@ URL utilisant une route labellisée::
 
     echo $this->Url->build(['_name' => 'produit-page', 'slug' => 'i-m-slug']);
 
-    // Il faut que la route soit configurée comme suit :
+    // Il faut que la route soit configurée comme suit:
     // $router->connect(
     //     '/produits/:slug',
     //     [
