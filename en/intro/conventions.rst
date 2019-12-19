@@ -13,7 +13,7 @@ uniform development experience, allowing other developers to jump in and help.
 
     PascalCase is the practice of writing compound words or phrases so that each word or abbreviation begins with an uppercase letter.
 
-    Both do not use spaces or punctuation.
+    Both camel case and pascal case do not use spaces or punctuation.
 
 
 Controller Conventions
