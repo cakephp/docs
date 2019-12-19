@@ -116,7 +116,7 @@ as::
         public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
-                'strategyClass' => \Cake\ORM\Behavior\Translate\ShadowTableStrategy,
+                'strategyClass' => \Cake\ORM\Behavior\Translate\ShadowTableStrategy::class,
             ]);
         }
     }
