@@ -176,7 +176,7 @@ Always keep the same pattern, as a suggestion, in capital letters and underscore
 Variables
 =========
 
-Always use the same pattern throughout the camelCase application as in $userComment, $total, $countPerson.
+Always use the same pattern throughout the camelCase application as in ``$userComment``, ``$total``, ``$countPerson``.
 
 The first letter is uppercase if the variable represents an object:
 $File = new File();
