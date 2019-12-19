@@ -41,7 +41,7 @@ cURL がインストールされていたら、以下のように実行するの
 
 Composer をグローバルにすでに設定している場合は、以下のようにタイプすることもできます。 ::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app blog
+    composer create-project --prefer-dist cakephp/app blog
 
 Composer を使うメリットは、 正しいファイルパーミッションの設定や、 **config/app.php**
 ファイルの作成などのような、重要なセットアップを自動的に完全にしてくれることです。

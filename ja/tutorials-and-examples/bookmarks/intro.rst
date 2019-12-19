@@ -47,7 +47,7 @@ cURL がインストールされていたら、以下のように実行するの
 をダウンロードして実行した場合、インストールディレクトリー (例えば、 C:\\wamp\\www\\dev\\cakephp3)
 からターミナルに以下の行をタイプしてください。 ::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app bookmarker
+    composer create-project --prefer-dist cakephp/app bookmarker
 
 Composer を使うメリットは、 正しいファイルパーミッションの設定や、 **config/app.php**
 ファイルの作成などのように、自動的に完全なセットアップをしてくれることです。

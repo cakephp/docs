@@ -52,7 +52,7 @@ siguiente linea en tu terminal desde el directorio de instalación.
 
 .. code-block:: bash
 
-    composer self-update && composer create-project --prefer-dist cakephp/app cms
+    composer create-project --prefer-dist cakephp/app cms
 
 La ventaja de usar "Composer" es que completará automáticamente algunas tareas
 de configuración importantes, como configurar los permisos de archivo correctos

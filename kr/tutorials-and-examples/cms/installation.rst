@@ -46,7 +46,7 @@ Composer는 터미널이나 명령 행 인터페이스(CLI)에서 CakePHP를 간
 
 .. code-block:: bash
 
-    composer self-update && composer create-project --prefer-dist cakephp/app cms
+    composer create-project --prefer-dist cakephp/app cms
 
 Composer의 장점은 올바른 파일권한이나 설정, **config/app.php** 파일작성등 이러한 것 들을 자동으로 생성해 줍니다.
 

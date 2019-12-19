@@ -91,7 +91,7 @@ CakePHP の新しいアプリケーションを作成してください。下記
 
 .. code-block:: bash
 
-    composer self-update && composer create-project --prefer-dist cakephp/app my_app_name
+    composer create-project --prefer-dist cakephp/app my_app_name
 
 一度 Composer がアプリケーションの雛形とコアライブラリーをダウンロードしたら、
 インストールした CakePHP アプリケーションを Composer から操作できるように

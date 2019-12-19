@@ -45,7 +45,7 @@ Composer Вы с легкостью установите фреймворк че
 
 В том случае, если Composer установлен глобально, можно ввести следующее::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app blog
+    composer create-project --prefer-dist cakephp/app blog
 
 Преимущество при использовании Composer заключается в том, что он
 автоматически произведет все необходимые настройки по правам доступа и создаст

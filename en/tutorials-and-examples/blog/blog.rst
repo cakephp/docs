@@ -43,7 +43,7 @@ in the directory that you wish to use it with. For this example we will be using
 
 In case you've already got composer installed globally, you may instead type::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app blog
+    composer create-project --prefer-dist cakephp/app blog
 
 The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and

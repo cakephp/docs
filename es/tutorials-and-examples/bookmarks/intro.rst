@@ -37,7 +37,7 @@ Después sencillamente escribe la siguiente línea en tu terminal desde tu direc
 
 Si descargaste y ejecutaste el `Instalador Windows de Composer <https://getcomposer.org/Composer-Setup.exe>`_, entonces escribe la siguiente línea en tu terminal desde tu directorio de instalación (ie. C:\\wamp\\www\\dev\\cakephp3)::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app bookmarker
+    composer create-project --prefer-dist cakephp/app bookmarker
 
 La ventaja de utilizar Composer es que automáticamente realizará algunas tareas importantes como configurar correctamente el archivo de permisos y crear tu archivo **config/app.php**.
 

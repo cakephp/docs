@@ -87,7 +87,7 @@ CakePHP의 새로운 애플리케이션을 아래의 composer 명령어를 실�
 
 .. code-block:: bash
 
-    composer self-update && composer create-project --prefer-dist cakephp/app my_app_name
+    composer create-project --prefer-dist cakephp/app my_app_name
 
 한 번 Composer가 애플리케이션의 양식과 코어 라이브러리를 다운로드 하면
 설치한 CakePHP 애플리케이션을 Composer로 조작 가능하도록 해두어야 합니다.

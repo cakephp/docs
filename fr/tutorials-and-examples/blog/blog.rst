@@ -47,7 +47,7 @@ dans le répertoire que vous souhaitez utiliser. Pour l'exemple nous utiliserons
 Dans le cas où vous avez déjà composer installé globalement, vous devrez plutôt
 taper::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app blog
+    composer create-project --prefer-dist cakephp/app blog
 
 L'avantage d'utiliser Composer est qu'il va automatiquement réaliser certaines
 tâches de configurations importantes, comme configurer les bonnes permissions

@@ -53,7 +53,7 @@ Si vous avez téléchargé et exécuté l'`installeur Windows de Composer
 votre terminal à partir de votre répertoire d'installation. (par exemple
 C:\\wamp\\www\\dev\\cakephp3)::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app bookmarker
+    composer create-project --prefer-dist cakephp/app bookmarker
 
 L'avantage d'utiliser Composer est qu'il va automatiquement faire des tâches
 de configuration importantes, comme de définir les bonnes permissions de

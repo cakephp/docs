@@ -95,7 +95,7 @@ Or if Composer is installed globally:
 
 .. code-block:: bash
 
-    composer self-update && composer create-project --prefer-dist cakephp/app my_app_name
+    composer create-project --prefer-dist cakephp/app my_app_name
 
 Once Composer finishes downloading the application skeleton and the core CakePHP
 library, you should have a functioning CakePHP application installed via

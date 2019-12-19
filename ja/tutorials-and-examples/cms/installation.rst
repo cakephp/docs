@@ -50,7 +50,7 @@ cURL がインストールされていたら、次のように実行するのが
 
 .. code-block:: bash
 
-    composer self-update && composer create-project --prefer-dist cakephp/app cms
+    composer create-project --prefer-dist cakephp/app cms
 
 Composer を使うメリットは、 正しいファイルパーミッションの設定や、 **config/app.php**
 ファイルの作成などのように、自動的に完全なセットアップをしてくれることです。

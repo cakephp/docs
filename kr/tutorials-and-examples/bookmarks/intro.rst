@@ -47,7 +47,7 @@ cURL이 설치되어 있으면, 다음과 같이 실행하는 것이 쉽습니�
 를 다운로드하여 실행하면 설치 디렉토리 (예 : C : \\ wamp \\ www \\ dev \\ cakephp3)
 에서 터미널에 다음 줄을 입력합니다. ::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app bookmarker
+    composer create-project --prefer-dist cakephp/app bookmarker
 
 Composer를 사용하는 메리트는 올바른 파일 권한 설정, **config/app.php**
 파일의 작성 등과 같이 자동으로 전체 설치를 해주는 것입니다.

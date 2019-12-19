@@ -55,7 +55,7 @@ C:\\wamp\\www\\dev\\cakephp3):
 
 .. code-block:: bash
 
-    composer self-update && composer create-project --prefer-dist cakephp/app cms
+    composer create-project --prefer-dist cakephp/app cms
 
 The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and

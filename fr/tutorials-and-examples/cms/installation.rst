@@ -53,7 +53,7 @@ votre terminal depuis le dossier d'installation (par exemple C:\\wamp\\www\\dev\
 
 .. code-block:: bash
 
-    composer self-update && composer create-project --prefer-dist cakephp/app cms
+    composer create-project --prefer-dist cakephp/app cms
 
 Utiliser Composer a l'avantage d'exécuter automatiquement certaines tâches
 importantes d'installation, comme définir les bonnes permissions sur les dossiers
