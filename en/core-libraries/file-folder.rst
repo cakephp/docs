@@ -9,7 +9,7 @@ related tasks.
 
 .. deprecated:: 4.0
     The ``File`` and ``Folder`` classes will be removed in 5.0.
-    One can case use SPL classes like `SplFileInfo` or `SplFileObject` and iterator 
+    One can use SPL classes like `SplFileInfo` or `SplFileObject` and iterator 
     classes like `RecursiveDirectoryIterator`, `RecursiveRegexIterator` etc. instead.
 
 Basic Usage
