@@ -39,14 +39,14 @@ Composer는 터미널이나 명령 행 인터페이스(CLI)에서 CakePHP를 간
 
 .. code-block:: bash
 
-    php composer.phar create-project --prefer-dist cakephp/app cms
+    php composer.phar create-project --prefer-dist cakephp/app:^3.8 cms
 
 만약에 `Composer Windows Installer <https://getcomposer.org/Composer-Setup.exe>`_
 를 다운로드 한 경우 설치 디렉토리(예: c:\Wamp\www\dev\cakephp3)에서 터미널에 다음을 입력합니다.
 
 .. code-block:: bash
 
-    composer self-update && composer create-project --prefer-dist cakephp/app cms
+    composer self-update && composer create-project --prefer-dist cakephp/app:^3.8 cms
 
 Composer의 장점은 올바른 파일권한이나 설정, **config/app.php** 파일작성등 이러한 것 들을 자동으로 생성해 줍니다.
 

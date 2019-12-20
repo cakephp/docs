@@ -42,13 +42,13 @@ indirebilirsiniz.
 CakePHP iskeleti basitçe oluşturup kurmak için terminalizine **bookmarker**
 komut satırını çalıştırınız::
 
-    php composer.phar create-project --prefer-dist cakephp/app bookmarker
+    php composer.phar create-project --prefer-dist cakephp/app:^3.8 bookmarker
 
 Eğer `Composer Windows Installer <https://getcomposer.org/Composer-Setup.exe>`_
 'i indirip kurduysanız, o zaman kurulum klasöründe belirtilen komudu yazarak
 devam edebilirsiniz. (Örnek kurulum klasörü C:\\wamp\\www\\dev\\cakephp3)::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app bookmarker
+    composer self-update && composer create-project --prefer-dist cakephp/app:^3.8 bookmarker
 
 Composer'i kullanmanın avantajı bir takım işlemleri sizin için otomatik yapıyor
 olmasıdır. Mesela dosya yetki izinleri ve **config/app.php** dosyasını sizin
