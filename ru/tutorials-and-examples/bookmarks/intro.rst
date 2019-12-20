@@ -44,7 +44,7 @@ Composer Вы с легкостью установите фреймворк че
 установочной папки, чтобы развернуть базовую структуру приложения CakePHP
 в папку **bookmarker**::
 
-    php composer.phar create-project --prefer-dist cakephp/app bookmarker
+    php composer.phar create-project --prefer-dist cakephp/app:^3.8 bookmarker
 
 Преимущество при использовании Composer заключается в том, что он
 автоматически произведет все необходимые настройки по правам доступа и создаст
