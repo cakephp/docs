@@ -4,8 +4,8 @@ CMS Tutorial - Authentication using cakephp/authentication
 CakePHP now supports authentication and authorization features using the
 core plugins:
 
-* `cakephp/authentication <https://book.cakephp.org/authorization>`_
-* `cakephp/authorization <https://book.cakephp.org/authentication>`_
+* `cakephp/authentication <https://book.cakephp.org/authentication>`_
+* `cakephp/authorization <https://book.cakephp.org/authorization>`_
 
 In this tutorial we are going to ensure passwords are stored securely in
 our database, we are going to provide a working login page, and apply some
