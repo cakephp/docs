@@ -2,7 +2,7 @@
 # Inspired by the Makefile used by bazaar.
 # http://bazaar.launchpad.net/~bzr-pqm/bzr/2.3/
 
-PYTHON = python
+PYTHON = python3
 ES_HOST =
 
 .PHONY: all clean html latexpdf epub htmlhelp website website-dirs rebuild-index
@@ -22,7 +22,7 @@ EPUB_ARGS =
 SPHINX_DEPENDENCIES = $(foreach lang, $(LANGS), $(lang)/Makefile)
 
 # Get path to theme directory to build static assets.
-THEME_DIR = $(shell python -c 'import os, cakephpsphinx; print(os.path.abspath(os.path.dirname(cakephpsphinx.__file__)))')
+THEME_DIR = $(shell python3 -c 'import os, cakephpsphinx; print(os.path.abspath(os.path.dirname(cakephpsphinx.__file__)))')
 
 # Copy-paste the English Makefile everywhere it's needed (if non existing).
 %/Makefile: en/Makefile
@@ -63,7 +63,7 @@ pdf-%: $(SPHINX_DEPENDENCIES)
 	cd $* && make latexpdf LANG=$*
 
 server-%: $(SPHINX_DEPENDENCIES)
-	cd build/html/$* && python -m SimpleHTTPServer
+	cd build/html/$* && python3 -m SimpleHTTPServer
 
 populate-index-%: $(SPHINX_DEPENDENCIES)
 	php scripts/populate_search_index.php $* $(ES_HOST)

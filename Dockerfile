@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 LABEL Description="This image is used to create an environment to contribute to the cakephp/docs"
 
 RUN apt-get update && apt-get install -y \
-    python-pip \
+    python3-pip \
     texlive-latex-recommended \
     texlive-latex-extra \
     texlive-fonts-recommended \
@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
   && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt /tmp/
-RUN pip install -r /tmp/requirements.txt
+RUN pip3 install -r /tmp/requirements.txt
 
 ADD https://github.com/w3c/epubcheck/releases/download/v4.2.2/epubcheck-4.2.2.zip /epubcheck/epubcheck.zip
 RUN unzip /epubcheck/epubcheck.zip -d /epubcheck \
