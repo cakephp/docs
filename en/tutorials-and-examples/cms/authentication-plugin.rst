@@ -184,7 +184,7 @@ In your UsersController, add the following code::
         $this->Authentication->addUnauthenticatedActions(['login']);
     }
 
-    public function login() {
+    public function login()
         $this->request->allowMethod(['get', 'post']);
         $result = $this->Authentication->getResult();
         // regardless of POST or GET, redirect if user is logged in
@@ -266,6 +266,37 @@ Add the logout action to the UsersController class::
 
 Now you can visit ``/users/logout`` to log out. You should then be sent to the login
 page.
+
+
+Customizing Login / Logout
+=========================
+
+You can also customize your login and logout screen very easily in CakePHP. 
+Add 'logout' as in the example below:
+
+    // in src/Controller/AppController.php
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        // for all controllers in our application, make index and view
+        // actions public, skipping the authentication check
+        $this->Authentication->addUnauthenticatedActions(['index', 'view', 'logout');
+    }
+
+Add in the login action to the UsersController class::
+
+    public function login()
+    {
+        // Set the layout
+        $this->viewBuilder()->setLayout('default_login');
+        ...
+    }
+  
+You can copy the file 'layout/default.php' to 'layout/default_login.php' and change it or you can create your own custom file.
+Follow the same procedure to change the logout screen if desired.
+
+More informations:: https://book.cakephp.org/4/en/views.html#layouts
+  
 
 Enabling Registrations
 ======================
