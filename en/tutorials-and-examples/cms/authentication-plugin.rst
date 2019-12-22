@@ -82,7 +82,7 @@ Use composer to install the Authentication Plugin::
 
 .. code-block:: bash
 
-    composer require cakephp/authentication:^2.0
+    composer require cakephp/authentication
 
 Adding Login
 ============
