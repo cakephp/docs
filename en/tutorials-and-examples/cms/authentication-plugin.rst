@@ -39,7 +39,7 @@ add the following::
     <?php
     namespace App\Model\Entity;
 
-    use Authentication\PasswordHasher\DefaultPasswordHasher; // Add this line
+    use Cake\Auth\DefaultPasswordHasher; // Add this line
     use Cake\ORM\Entity;
 
     class User extends Entity
