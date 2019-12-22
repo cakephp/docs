@@ -184,7 +184,7 @@ In your UsersController, add the following code::
         $this->Authentication->addUnauthenticatedActions(['login']);
     }
 
-    public function login()
+    public function login() {
         $this->request->allowMethod(['get', 'post']);
         $result = $this->Authentication->getResult();
         // regardless of POST or GET, redirect if user is logged in
