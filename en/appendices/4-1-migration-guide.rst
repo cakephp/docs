@@ -12,9 +12,19 @@ Database
 
 * ``TableSchema::getPrimary()`` was deprecated. Use ``getPrimaryKey()`` instead.
 
-
 View
 ----
 
 * ``Form/ContextInteface::primaryKey()`` was deprecated. Use ``getPrimaryKey()``
   instead.
+
+
+New Features
+============
+
+Log
+---
+
+* Log messages can now contain ``{foo}`` style placeholders. These placeholders
+  will be replaced by values from the ``$context`` parameter if available.
+
