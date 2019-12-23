@@ -2,7 +2,7 @@
 # Inspired by the Makefile used by bazaar.
 # http://bazaar.launchpad.net/~bzr-pqm/bzr/2.3/
 
-PYTHON = python
+PYTHON = python3
 ES_HOST =
 
 .PHONY: all clean html latexpdf epub htmlhelp website website-dirs rebuild-index
@@ -17,16 +17,8 @@ DEST = website
 
 EPUB_ARGS =
 
-# Dependencies to perform before running other builds.
-# Clone the en/Makefile everywhere.
-SPHINX_DEPENDENCIES = $(foreach lang, $(LANGS), $(lang)/Makefile)
-
 # Get path to theme directory to build static assets.
-THEME_DIR = $(shell python -c 'import os, cakephpsphinx; print os.path.abspath(os.path.dirname(cakephpsphinx.__file__))')
-
-# Copy-paste the English Makefile everywhere it's needed (if non existing).
-%/Makefile: en/Makefile
-	cp -n $< $@
+THEME_DIR = $(shell python3 -c 'import os, cakephpsphinx; print(os.path.abspath(os.path.dirname(cakephpsphinx.__file__)))')
 
 #
 # The various formats the documentation can be created in.
@@ -45,30 +37,30 @@ rebuild-index: $(foreach lang, $(LANGS), rebuild-index-$(lang))
 
 
 # Make the HTML version of the documentation with correctly nested language folders.
-html-%: $(SPHINX_DEPENDENCIES)
-	cd $* && make html LANG=$*
+html-%:
+	cd $* && make html
 	make build/html/$*/_static/css/app.css
 	make build/html/$*/_static/app.js
 
-htmlhelp-%: $(SPHINX_DEPENDENCIES)
-	cd $* && make htmlhelp LANG=$*
+htmlhelp-%:
+	cd $* && make htmlhelp
 
-epub-%: $(SPHINX_DEPENDENCIES)
-	cd $* && make epub LANG=$*
+epub-%:
+	cd $* && make epub
 
-latex-%: $(SPHINX_DEPENDENCIES)
-	cd $* && make latex LANG=$*
+latex-%:
+	cd $* && make latex
 
-pdf-%: $(SPHINX_DEPENDENCIES)
-	cd $* && make latexpdf LANG=$*
+pdf-%:
+	cd $* && make latexpdf
 
-server-%: $(SPHINX_DEPENDENCIES)
-	cd build/html/$* && python -m SimpleHTTPServer
+server-%:
+	cd build/html/$* && python3 -m SimpleHTTPServer
 
-populate-index-%: $(SPHINX_DEPENDENCIES)
+populate-index-%:
 	php scripts/populate_search_index.php $* $(ES_HOST)
 
-rebuild-index-%: $(SPHINX_DEPENDENCIES)
+rebuild-index-%:
 	curl -XDELETE $(ES_HOST)/documentation/3-0-$*
 	php scripts/populate_search_index.php $* $(ES_HOST)
 
