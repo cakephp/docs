@@ -50,7 +50,7 @@ Agora você pode tentar obter sua entidade novamente::
     $article = $this->Articles->get(12);
     echo $article->title; // Echo em 'Un Artículo', yay pedaço de bolo!
 
-O trabalho com várias traduções pode ser feito usando uma característica 
+O trabalho com várias traduções pode ser feito usando uma trait 
 especial na sua classe Entity::
 
     use Cake\ORM\Behavior\Translate\TranslateTrait;
@@ -113,15 +113,14 @@ abreviação de idioma com código de área `UN M.49 <https://en.wikipedia.org/w
     Assim, é consistente e a alternância do idioma funciona de forma idêntica para 
     ambos, o ``Translate Behaviour`` e ``Internationalization and Localization``.
 
-So it's recommended to use either the two letter ISO code of the language like
-``en``, ``fr``, ``de`` or the full locale name such as ``fr_FR``, ``es_AR``,
-``da_DK`` which contains both the language and the country where it is spoken.
+Portanto, é recomendável usar o código ISO de duas letras do idioma como ``en``, ``fr``, 
+``de`` ou o nome completo da localidade, como ``fr_FR``, ``es_AR`` , ``da_DK``, que 
+contém o idioma e o país em que é falado.
 
-Attaching the Translate Behavior to Your Tables
-===============================================
+Anexando o Comportamento da Conversão às suas Tabelas
+=====================================================
 
-Attaching the behavior can be done in the ``initialize()`` method in your Table
-class::
+Anexar o comportamento pode ser feito no método ``initialize()`` na sua classe Table::
 
     class ArticlesTable extends Table
     {
@@ -132,18 +131,17 @@ class::
         }
     }
 
-The first thing to note is that you are required to pass the ``fields`` key in
-the configuration array. This list of fields is needed to tell the behavior what
-columns will be able to store translations.
+A primeira coisa a observar é que você deve passar a chave ``fields`` na matriz de configuração. 
+Essa lista de campos é necessária para informar ao comportamento quais colunas serão capazes de 
+armazenar traduções.
 
-Using a Separate Translations Table
------------------------------------
+Usando uma Tabela de Traduções Separada
+---------------------------------------
 
-If you wish to use a table other than ``i18n`` for translating a particular
-repository, you can specify the name of the table class name for your custom
-table in the behavior's configuration. This is common when you have multiple
-tables to translate and you want a cleaner separation of the data that is stored
-for each different table::
+Se você deseja usar uma tabela diferente de ``i18n`` para converter um repositório específico, 
+pode especificar o nome da classe da tabela para sua tabela personalizada na configuração 
+do comportamento. Isso é comum quando você tem várias tabelas para traduzir e deseja uma separação 
+mais limpa dos dados armazenados para cada tabela diferente::
 
     class ArticlesTable extends Table
     {
@@ -157,59 +155,59 @@ for each different table::
         }
     }
 
-You need to make sure that any custom table you use has the columns ``field``,
-``foreign_key``, ``locale`` and ``model``.
+Você precisa ter certeza de que qualquer tabela personalizada usada tenha as colunas 
+``field``, ``foreign_key``, ``locale`` e ``model``.
 
-Reading Translated Content
-==========================
+Lendo Conteúdo Traduzido
+========================
 
-As shown above you can use the ``setLocale()`` method to choose the active
-translation for entities that are loaded::
+Como mostrado acima, você pode usar o método ``setLocale()`` para escolher a tradução 
+ativa para entidades que são carregadas::
 
-    // Load I18n core functions at the beginning of your Controller:
+    // Carregue as funções principais do I18n no início do seu Controller:
     use Cake\I18n\I18n;
 
-    // Then you can change the language in your action:
+    // Depois, você pode alterar o idioma em sua ação:
     I18n::setLocale('es');
     $this->loadModel('Articles');
 
-    // All entities in results will contain spanish translation
+    // Todas as entidades nos resultados conterão tradução para o espanhol
     $results = $this->Articles->find()->all();
 
-This method works with any finder in your tables. For example, you can
-use TranslateBehavior with ``find('list')``::
+Este método funciona com qualquer localizador em suas tabelas. Por exemplo, você 
+pode usar o TranslateBehavior com ``find('list')``::
 
     I18n::setLocale('es');
     $data = $this->Articles->find('list')->toArray();
 
-    // Data will contain
+    // Os dados conterão
     [1 => 'Mi primer artículo', 2 => 'El segundo artículo', 15 => 'Otro articulo' ...]
 
-Retrieve All Translations For An Entity
----------------------------------------
+Recuperar Todas as Traduções para uma Entidade
+----------------------------------------------
 
-When building interfaces for updating translated content, it is often helpful to
-show one or more translation(s) at the same time. You can use the
-``translations`` finder for this::
+Ao criar interfaces para atualizar o conteúdo traduzido, geralmente é útil mostrar 
+uma ou mais traduções ao mesmo tempo. Você pode usar o localizador de ``traduções`` 
+para isso::
 
-    // Find the first article with all corresponding translations
+    // Encontre o primeiro artigo com todas as traduções correspondentes
     $article = $this->Articles->find('translations')->first();
 
-In the example above you will get a list of entities back that have a
-``_translations`` property set. This property will contain a list of translation
-data entities. For example the following properties would be accessible::
+No exemplo acima, você receberá uma lista de entidades que possuem um conjunto de 
+propriedades ``_translations``. Esta propriedade conterá uma lista de entidades 
+de dados de conversão. Por exemplo, as seguintes propriedades estariam acessíveis::
 
-    // Outputs 'en'
+    // Saídas 'en'
     echo $article->_translations['en']->locale;
 
-    // Outputs 'title'
+    // Saídas 'title'
     echo $article->_translations['en']->field;
 
-    // Outputs 'My awesome post!'
+    // Saídas 'My awesome post!'
     echo $article->_translations['en']->body;
 
-A more elegant way for dealing with this data is by adding a trait to the entity
-class that is used for your table::
+Uma maneira mais elegante de lidar com esses dados é adicionando uma trait 
+à classe de entidade usada para sua tabela::
 
     use Cake\ORM\Behavior\Translate\TranslateTrait;
     use Cake\ORM\Entity;
@@ -219,20 +217,19 @@ class that is used for your table::
         use TranslateTrait;
     }
 
-This trait contains a single method called ``translation``, which lets you
-access or create new translation entities on the fly::
+Essa trait contém um único método chamado ``translation``, que permite acessar 
+ou criar novas entidades de tradução em tempo real::
 
-    // Outputs 'title'
+    // Saída de 'title'
     echo $article->translation('en')->title;
 
-    // Adds a new translation data entity to the article
+    // Adiciona uma nova entidade de dados de tradução ao artigo
     $article->translation('de')->title = 'Wunderbar';
 
-Limiting the Translations to be Retrieved
------------------------------------------
+Limitando as Traduções a serem Recuperadas
+------------------------------------------
 
-You can limit the languages that are fetched from the database for a particular
-set of records::
+Você pode limitar os idiomas buscados no banco de dados para um conjunto específico de registros::
 
     $results = $this->Articles->find('translations', [
         'locales' => ['en', 'es']
@@ -241,15 +238,15 @@ set of records::
     $spanishTranslation = $article->translation('es');
     $englishTranslation = $article->translation('en');
 
-Preventing Retrieval of Empty Translations
-------------------------------------------
+Impedindo a Recuperação de Traduções Vazias
+-------------------------------------------
 
-Translation records can contain any string, if a record has been translated
-and stored as an empty string ('') the translate behavior will take and use
-this to overwrite the original field value.
+Os registros de tradução podem conter qualquer sequência, se um registro tiver sido traduzido e 
+armazenado como uma sequência vazia (''), o comportamento da conversão será usado e o substituirá 
+pelo valor do campo original.
 
-If this is undesired, you can ignore translations which are empty using the
-``allowEmptyTranslations`` config key::
+Se isso for indesejável, você pode ignorar as traduções vazias usando a chave de configuração 
+``allowEmptyTranslations``::
 
     class ArticlesTable extends Table
     {
@@ -263,13 +260,12 @@ If this is undesired, you can ignore translations which are empty using the
         }
     }
 
-The above would only load translated data that had content.
+O exemplo acima carregaria apenas os dados traduzidos que tenham conteúdo.
 
-Retrieving All Translations For Associations
---------------------------------------------
+Recuperando Todas as Traduções para Associações
+-----------------------------------------------
 
-It is also possible to find translations for any association in a single find
-operation::
+Também é possível encontrar traduções para qualquer associação em uma única operação de localização::
 
     $article = $this->Articles->find('translations')->contain([
         'Categories' => function ($query) {
@@ -277,70 +273,70 @@ operation::
         }
     ])->first();
 
-    // Outputs 'Programación'
+    // Saídas 'Programación'
     echo $article->categories[0]->translation('es')->name;
 
-This assumes that ``Categories`` has the TranslateBehavior attached to it. It
-simply uses the query builder function for the ``contain`` clause to use the
-``translations`` custom finder in the association.
+Isso pressupõe que ``Categories`` tem o TranslateBehavior associado. Simplesmente
+use a função de construtor de consultas ``contain`` para usar o 
+find personalizado ``translator`` na associação.
 
 .. _retrieving-one-language-without-using-i18n-locale:
 
-Retrieving one language without using I18n::setLocale
------------------------------------------------------
+Recuperando um Idioma Sem Usar I18n::SetLocale
+----------------------------------------------
 
-calling ``I18n::setLocale('es');`` changes the default locale for all translated
-finds, there may be times you wish to retrieve translated content without
-modifying the application's state. For these scenarios use the behavior's
-``setLocale()`` method::
+chamando ``I18n::setLocale('es');`` altera a localidade padrão para todas as descobertas 
+traduzidas, pode haver momentos em que você deseja recuperar o conteúdo traduzido sem 
+modificar o estado do aplicativo. Para esses cenários, use o método ``setLocale()`` 
+do comportamento::
 
-    I18n::setLocale('en'); // reset for illustration
+    I18n::setLocale('en'); // redefinir para ilustração
 
     $this->loadModel('Articles');
 
-    // specific locale. Use locale() prior to 3.6
+    // localidade específica. Use locale () anterior à 3.6
     $this->Articles->setLocale('es');
 
     $article = $this->Articles->get(12);
     echo $article->title; // Echoes 'Un Artículo', yay piece of cake!
 
-Note that this only changes the locale of the Articles table, it would not
-affect the language of associated data. To affect associated data it's necessary
-to call the method on each table, for example::
+Observe que isso altera apenas a localidade da tabela Articles, isso não afetaria o idioma dos 
+dados associados. Para afetar os dados associados, é necessário chamar o método em cada 
+tabela, por exemplo::
 
-    I18n::setLocale('en'); // reset for illustration
+    I18n::setLocale('en'); // Reseta para ilustração
 
     $this->loadModel('Articles');
-    // Use locale() prior to 3.6
+    // Use locale() anterior à 3.6
     $this->Articles->setLocale('es');
     $this->Articles->Categories->setLocale('es');
 
     $data = $this->Articles->find('all', ['contain' => ['Categories']]);
 
-This example also assumes that ``Categories`` has the TranslateBehavior attached
-to it.
+Este exemplo também pressupõe que ``Categories`` tem o TranslateBehavior associado.
 
-Querying Translated Fields
---------------------------
+Consultando Campos Traduzidos
+-----------------------------
 
-TranslateBehavior does not substitute find conditions by default. You need to use
-``translationField()`` method to compose find conditions on translated fields::
+TranslateBehavior não substitui as condições de localização por padrão. Você 
+precisa usar o método ``translationField()`` para compor as condições de localização nos 
+campos traduzidos::
 
-    // Use locale() prior to 3.6
+    // Use locale() anterior à 3.6
     $this->Articles->setLocale('es');
     $data = $this->Articles->find()->where([
         $this->Articles->translationField('title') => 'Otro Título'
     ]);
 
-Saving in Another Language
-==========================
+Salvando em Outro Idioma
+========================
 
-The philosophy behind the TranslateBehavior is that you have an entity
-representing the default language, and multiple translations that can override
-certain fields in such entity. Keeping this in mind, you can intuitively save
-translations for any given entity. For example, given the following setup::
+A filosofia por trás do TranslateBehavior é que você tem uma entidade que representa o 
+idioma padrão e várias traduções que podem substituir determinados campos nessa entidade. 
+Tendo isso em mente, você pode salvar intuitivamente traduções para qualquer entidade. 
+Por exemplo, dada a seguinte configuração::
 
-    // in src/Model/Table/ArticlesTable.php
+    // Em src/Model/Table/ArticlesTable.php
     class ArticlesTable extends Table
     {
         public function initialize(array $config)
@@ -349,13 +345,13 @@ translations for any given entity. For example, given the following setup::
         }
     }
 
-    // in src/Model/Entity/Article.php
+    // Em src/Model/Entity/Article.php
     class Article extends Entity
     {
         use TranslateTrait;
     }
 
-    // In a Controller
+    // Em um Controller
     $this->loadModel('Articles');
     $article = new Article([
         'title' => 'My First Article',
@@ -365,52 +361,49 @@ translations for any given entity. For example, given the following setup::
 
     $this->Articles->save($article);
 
-So, after you save your first article, you can now save a translation for it,
-there are a couple ways to do it. The first one is setting the language directly
-into the entity::
+Portanto, depois de salvar seu primeiro artigo, você pode salvar uma tradução para ele, 
+existem algumas maneiras de fazê-lo. O primeiro é definir o idioma diretamente na entidade::
 
     $article->_locale = 'es';
     $article->title = 'Mi primer Artículo';
 
     $this->Articles->save($article);
 
-After the entity has been saved, the translated field will be persisted as well,
-one thing to note is that values from the default language that were not
-overridden will be preserved::
+Depois que a entidade tiver sido salva, o campo traduzido também será mantido. Um valor 
+a ser observado é que os valores do idioma padrão que não foram substituídos serão 
+preservados::
 
-    // Outputs 'This is the content'
+    // Saídas 'Este é o conteúdo'
     echo $article->body;
 
-    // Outputs 'Mi primer Artículo'
+    // Saídas 'Mi primer Artículo'
     echo $article->title;
 
-Once you override the value, the translation for that field will be saved and
-can be retrieved as usual::
+Depois de substituir o valor, a conversão para esse campo será salva e poderá ser recuperada como 
+de costume::
 
     $article->body = 'El contendio';
     $this->Articles->save($article);
 
-The second way to use for saving entities in another language is to set the
-default language directly to the table::
+A segunda maneira de usar para salvar entidades em outro idioma é definir o idioma padrão 
+diretamente para a tabela::
 
     $article->title = 'Mi Primer Artículo';
 
-    // Use locale() prior to 3.6
+    // Use locale() anterior à 3.6
     $this->Articles->setLocale('es');
     $this->Articles->save($article);
 
-Setting the language directly in the table is useful when you need to both
-retrieve and save entities for the same language or when you need to save
-multiple entities at once.
+Definir o idioma diretamente na tabela é útil quando você precisa recuperar e salvar entidades 
+para o mesmo idioma ou quando você precisa salvar várias entidades ao mesmo tempo.
 
 .. _saving-multiple-translations:
 
-Saving Multiple Translations
-============================
+Salvando Várias Traduções
+=========================
 
-It is a common requirement to be able to add or edit multiple translations to
-any database record at the same time. This can be done using the
-``TranslateTrait``::
+É um requisito comum poder adicionar ou editar várias traduções em qualquer registro do banco de 
+dados ao mesmo tempo. Isso pode ser feito usando o ``TranslateTrait``::
 
     use Cake\ORM\Behavior\Translate\TranslateTrait;
     use Cake\ORM\Entity;
@@ -420,7 +413,7 @@ any database record at the same time. This can be done using the
         use TranslateTrait;
     }
 
-Now, You can populate translations before saving them::
+Agora, você pode preencher as traduções antes de salvá-las::
 
     $translations = [
         'fr' => ['title' => "Un article"],
@@ -433,10 +426,10 @@ Now, You can populate translations before saving them::
 
     $this->Articles->save($article);
 
-As of 3.3.0, working with multiple translations has been streamlined. You can
-create form controls for your translated fields::
+A partir do 3.3.0, o trabalho com várias traduções foi simplificado. Você pode criar controles de 
+formulário para seus campos traduzidos::
 
-    // In a view template.
+    // Em um template.
     <?= $this->Form->create($article); ?>
     <fieldset>
         <legend>French</legend>
@@ -449,21 +442,21 @@ create form controls for your translated fields::
         <?= $this->Form->control('_translations.es.body'); ?>
     </fieldset>
 
-In your controller, you can marshal the data as normal::
+No seu controlador, você pode organizar os dados normalmente::
 
     $article = $this->Articles->newEntity($this->request->getData());
     $this->Articles->save($article);
 
-This will result in your article, the french and spanish translations all being
-persisted. You'll need to remember to add ``_translations`` into the
-``$_accessible`` fields of your entity as well.
+Isso resultará no seu artigo, que todas as traduções em francês e espanhol serão mantidas.
+Você precisará se lembrar de adicionar ``_translations`` aos campos ``$ _accessible`` 
+da sua entidade também.
 
-Validating Translated Entities
+Validando Entidades Traduzidas
 ------------------------------
 
-When attaching ``TranslateBehavior`` to a model, you can define the validator
-that should be used when translation records are created/modified by the
-behavior during ``newEntity()`` or ``patchEntity()``::
+Ao anexar ``TranslateBehavior`` a um modelo, você pode definir o validador que deve ser 
+usado quando os registros de conversão são criados/modificados pelo comportamento durante 
+``newEntity()`` ou ``patchEntity()``::
 
     class ArticlesTable extends Table
     {
@@ -476,9 +469,8 @@ behavior during ``newEntity()`` or ``patchEntity()``::
         }
     }
 
-The above will use the validator created by ``validationTranslated`` to
-validated translated entities.
+O texto acima usará o validador criado por ``validationTranslated`` para entidades traduzidas validadas.
 
 .. versionadded:: 3.3.0
-    Validating translated entities, and streamlined translation saving was added
-    in 3.3.0
+    A validação de entidades traduzidas e o salvamento simplificado da tradução foram adicionados 
+    no 3.3.0
