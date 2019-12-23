@@ -272,7 +272,7 @@ Customizing Login / Logout
 =========================
 
 You can also customize your login and logout screen very easily in CakePHP. 
-Add 'logout' as in the example below:
+Add 'logout' as in the example below::
 
     // in src/Controller/AppController.php
     public function beforeFilter(\Cake\Event\EventInterface $event)
