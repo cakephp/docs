@@ -280,7 +280,7 @@ Add 'logout' as in the example below::
         parent::beforeFilter($event);
         // for all controllers in our application, make index and view
         // actions public, skipping the authentication check
-        $this->Authentication->addUnauthenticatedActions(['index', 'view', 'logout');
+        $this->Authentication->addUnauthenticatedActions(['index', 'view', 'logout']);
     }
 
 Add in the login action to the UsersController class::
