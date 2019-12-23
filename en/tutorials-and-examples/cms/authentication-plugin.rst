@@ -292,7 +292,7 @@ Add in the login action to the UsersController class::
         ...
     }
   
-You can copy the file 'layout/default.php' to 'layout/default_login.php' and change it or you can create your own custom file.
+You can copy the file **layout/default.php** to **layout/default_login.php** and change it or you can create your own custom file.
 Follow the same procedure to change the logout screen if desired.
 
 See :ref:`view-layouts`
