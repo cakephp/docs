@@ -145,7 +145,6 @@ mais limpa dos dados armazenados para cada tabela diferente::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->addBehavior('Translate', [
@@ -250,7 +249,6 @@ Se isso for indesejável, você pode ignorar as traduções vazias usando a chav
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config)
         {
             $this->addBehavior('Translate', [
