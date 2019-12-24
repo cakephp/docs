@@ -119,12 +119,6 @@ com ``true``, o valor de retorno atualizará o contador do item associado *anter
     Por exemplo, para "Comentários pertence a artigos", é necessário adicionar o 
     comportamento do CounterCache ao ``CommentsTable`` para gerar ``comment_count`` 
     para a tabela Articles.
-
-    It is possible though to make this work for ``belongsToMany`` associations.
-    You need to enable the CounterCache behavior in a custom ``through`` table
-    configured in association options and set the ``cascadeCallbacks`` configuration
-    option to true. See how to configure a custom join table
-    :ref:`using-the-through-option`.
     
     É possível, no entanto, fazer isso funcionar para associações ``belongsToMany``. 
     Você precisa habilitar o comportamento do CounterCache em uma tabela personalizada 
