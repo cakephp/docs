@@ -84,7 +84,7 @@ Para usar o comportamento, você precisa criar uma tabela ``i18n`` com o
 esquema correto. Atualmente, a única maneira de carregar a tabela ``i18n`` 
 é executando manualmente o seguinte script SQL no seu banco de dados:
 
-.. code-block:: sql
+.. code-block:: mysql
 
     CREATE TABLE i18n (
         id int NOT NULL auto_increment,
