@@ -5,7 +5,7 @@ CakePHP has a few system requirements:
 
 - HTTP Server. For example: Apache. Having mod\_rewrite is preferred, but
   by no means required. You can also use nginx, or Microsoft IIS if you prefer.
-- PHP |minphpversion| or greater (including PHP 7.3).
+- PHP |minphpversion| or greater (including PHP 7.4).
 - mbstring PHP extension
 - intl PHP extension
 - simplexml PHP extension
@@ -82,7 +82,7 @@ command :
 
 .. code-block:: bash
 
-    composer create-project --prefer-dist cakephp/app my_app_name
+    composer create-project --prefer-dist cakephp/app:^3.8 my_app_name
 
 Once Composer finishes downloading the application skeleton and the core CakePHP
 library, you should have a functioning CakePHP application installed via

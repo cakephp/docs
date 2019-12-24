@@ -31,11 +31,11 @@ version_list = [
 ]
 
 # Languages available.
-languages = ['en', 'pt_BR', 'es', 'ja', 'fr', 'zh', 'tr', 'ru']
+languages = ['en', 'pt_BR', 'es', 'ja', 'fr', 'zh_CN', 'tr', 'ru']
 
 # The GitHub branch name for this version of the docs
 # for edit links to point at.
-branch = '3.0'
+branch = '3.x'
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = []

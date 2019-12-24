@@ -45,7 +45,7 @@ d'application CakePHP dans le dossier **cms** du dossier courant :
 
 .. code-block:: bash
 
-    php composer.phar create-project --prefer-dist cakephp/app cms
+    php composer.phar create-project --prefer-dist cakephp/app:^3.8 cms
 
 Si vous avez téléchargé et utilisé `l'Installer de Composer pour Windows
 <https://getcomposer.org/Composer-Setup.exe>`_, tapez la commande suivante dans
@@ -53,7 +53,7 @@ votre terminal depuis le dossier d'installation (par exemple C:\\wamp\\www\\dev\
 
 .. code-block:: bash
 
-    composer self-update && composer create-project --prefer-dist cakephp/app cms
+    composer self-update && composer create-project --prefer-dist cakephp/app:^3.8 cms
 
 Utiliser Composer a l'avantage d'exécuter automatiquement certaines tâches
 importantes d'installation, comme définir les bonnes permissions sur les dossiers
