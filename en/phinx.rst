@@ -1,4 +1,4 @@
 Phinx Migrations
 ################
 
-This page has `moved <https://book.cakephp.org/phinx/0/en/>`__.
+This page has `moved <https://book.cakephp.org/phinx/>`__.
