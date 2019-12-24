@@ -12,6 +12,7 @@ Contenu
     debug-kit
     elasticsearch
     migrations
+    phinx
 
 
 .. toctree::
@@ -97,7 +98,7 @@ Contenu
     :maxdepth: 3
     :caption: Phinx
 
-    phinx
+    Phinx <https://book.cakephp.org/phinx/0/fr/>
 
 .. todolist::
 

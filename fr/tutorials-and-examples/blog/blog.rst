@@ -42,12 +42,12 @@ répertoire d'installation pour installer le squelette d'application de CakePHP
 dans le répertoire que vous souhaitez utiliser. Pour l'exemple nous utiliserons
 "blog", mais vous pouvez utiliser le nom que vous souhaitez::
 
-    php composer.phar create-project --prefer-dist cakephp/app blog
+    php composer.phar create-project --prefer-dist cakephp/app:^4.0 blog
 
 Dans le cas où vous avez déjà composer installé globalement, vous devrez plutôt
 taper::
 
-    composer create-project --prefer-dist cakephp/app blog
+    composer self-update && composer create-project --prefer-dist cakephp/app:^4.0 blog
 
 L'avantage d'utiliser Composer est qu'il va automatiquement réaliser certaines
 tâches de configurations importantes, comme configurer les bonnes permissions

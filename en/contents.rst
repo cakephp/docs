@@ -13,6 +13,7 @@ Contents
    bake/development
    bake/usage
    migrations
+   phinx
 
 .. toctree::
     :maxdepth: 3
@@ -100,7 +101,7 @@ Contents
     :maxdepth: 3
     :caption: Phinx
 
-    phinx
+    Phinx <https://book.cakephp.org/phinx/0/en/>
 
 .. todolist::
 

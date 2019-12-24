@@ -87,13 +87,13 @@ CakePHP использует мендежер зависимостей PHP `Comp
 
 .. code-block:: bash
 
-    php composer.phar create-project --prefer-dist cakephp/app my_app_name
+    php composer.phar create-project --prefer-dist cakephp/app:^4.0 my_app_name
 
 Или если Composer установлен глобально:
 
 .. code-block:: bash
 
-    composer create-project --prefer-dist cakephp/app my_app_name
+    composer self-update && composer create-project --prefer-dist cakephp/app:^4.0 my_app_name
 
 Как только Composer закончит скачивание каркаса приложения и библиотеки ядра
 CakePHP, у вас должно появиться полностью работоспособное приложение CakePHP.
