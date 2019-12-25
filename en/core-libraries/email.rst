@@ -159,7 +159,8 @@ application. Mailer views can also use layouts and elements just like normal vie
                 ->setTo('bob@example.com')
                 ->setFrom('app@domain.com')
                 ->viewBuilder()
-                    ->setTemplate('welcome', 'fancy');
+                    ->setTemplate('welcome')
+                    ->setLayout('fancy');
 
     $mailer->deliver();
 
@@ -173,7 +174,8 @@ send multipart templated email messages as well::
                 ->setTo('bob@example.com')
                 ->setFrom('app@domain.com')
                 ->viewBuilder()
-                    ->setTemplate('welcome', 'fancy');
+                    ->setTemplate('welcome')
+                    >setLayout('fancy');
 
     $mailer->deliver();
 
