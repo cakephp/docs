@@ -175,7 +175,7 @@ send multipart templated email messages as well::
                 ->setFrom('app@domain.com')
                 ->viewBuilder()
                     ->setTemplate('welcome')
-                    >setLayout('fancy');
+                    ->setLayout('fancy');
 
     $mailer->deliver();
 
@@ -558,7 +558,7 @@ For e.g.::
 
     $message = new \Cake\Mailer\Message();
     $message
-        ->setForm('admin@cakephp.org')
+        ->setFrom('admin@cakephp.org')
         ->setTo('user@foo.com')
         ->setBody($render->render());
 
