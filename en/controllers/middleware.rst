@@ -173,7 +173,7 @@ creating their own response. We can see both options in our simple middleware::
         public function process(
             ServerRequestInterface $request,
             RequestHandlerInterface $handler
-        ): ResponseInterface 
+        ): ResponseInterface
         {
             // Calling $handler->handle() delegates control to the *next* middleware
             // In your application's queue.
@@ -385,7 +385,7 @@ The available configuration options are:
 
 When enabled, you can access the current CSRF token on the request object::
 
-    $token = $this->request->getAttribute('_csrfToken');
+    $token = $this->request->getAttribute('csrfToken');
 
 You can use the whitelisting callback feature for more fine grained control over
 URLs for which CSRF token check should be done::
@@ -437,7 +437,31 @@ a special ``X-CSRF-Token`` header. Using a header often makes it easier to
 integrate a CSRF token with JavaScript heavy applications, or XML/JSON based API
 endpoints.
 
-The CSRF Token can be obtained via the Cookie ``csrfToken``.
+The CSRF Token can be obtained in JavaScript via the Cookie ``csrfToken``, or in PHP
+via the request object attribute named ``csrfToken``. Using the cookie might be easier
+when your JavaScript code resides in files separate from the CakePHP view templates,
+and when you already have functionality for parsing cookies via JavaScript.
+
+If you have separate JavaScript files but don't want to deal with handling cookies,
+you could for example set the token in a global JavaScript variable in your layout, by
+defining a script block like this::
+
+    echo $this->Html->scriptBlock(sprintf(
+        'var csrfToken = %s;',
+        json_encode($this->request->getAttribute('csrfToken'))
+    ));
+
+You can then access the token as ``csrfToken`` or ``window.csrfToken`` in any script
+file that is loaded after this script block.
+
+Another alternative would be to put the token in a custom meta tag like this::
+
+    echo $this->Html->meta('csrfToken', $this->request->getAttribute('csrfToken'));
+
+which could then be accessed in your scripts by looking for the ``meta`` element with
+the name ``csrfToken``, which could be as simple as this when using jQuery::
+
+    var csrfToken = $('meta[name="csrfToken"]').attr('content');
 
 
 .. _body-parser-middleware:
