@@ -12,6 +12,12 @@ Database
 
 * ``TableSchema::getPrimary()`` was deprecated. Use ``getPrimaryKey()`` instead.
 
+ORM
+---
+
+* ``QueryExpression::or_()`` and ``QueryExpression::and_()`` have been
+  deprecated. Use ``or()`` and ``and()`` instead.
+
 View
 ----
 
