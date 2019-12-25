@@ -644,4 +644,4 @@ The ``Cake\TestSuite\EmailTrait`` trait provides the following assertions::
 
 .. meta::
     :title lang=en: Email
-    :keywords lang=en: sending mail,email sender,envelope sender,php class,database configuration,sending emails,meth,shells,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models
+    :keywords lang=en: sending mail,email sender,envelope sender,php class,database configuration,sending emails,shells,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models
