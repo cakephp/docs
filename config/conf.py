@@ -31,7 +31,7 @@ version_list = [
 ]
 
 # Languages available.
-languages = ['en', 'pt_BR', 'es', 'ja', 'fr', 'zh', 'tr', 'ru']
+languages = ['en', 'pt_BR', 'es', 'ja', 'fr', 'zh_CN', 'tr', 'ru']
 
 # The GitHub branch name for this version of the docs
 # for edit links to point at.
@@ -105,5 +105,6 @@ epub_exclude_files = [
 epub_tocdepth = 2
 
 rst_epilog = """
-.. |minphpversion| replace:: 7.2.0
+.. |phpversion| replace:: **7.4**
+.. |minphpversion| replace:: 7.2
 """

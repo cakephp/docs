@@ -159,7 +159,8 @@ application. Mailer views can also use layouts and elements just like normal vie
                 ->setTo('bob@example.com')
                 ->setFrom('app@domain.com')
                 ->viewBuilder()
-                    ->setTemplate('welcome', 'fancy');
+                    ->setTemplate('welcome')
+                    ->setLayout('fancy');
 
     $mailer->deliver();
 
@@ -173,7 +174,8 @@ send multipart templated email messages as well::
                 ->setTo('bob@example.com')
                 ->setFrom('app@domain.com')
                 ->viewBuilder()
-                    ->setTemplate('welcome', 'fancy');
+                    ->setTemplate('welcome')
+                    ->setLayout('fancy');
 
     $mailer->deliver();
 
@@ -556,7 +558,7 @@ For e.g.::
 
     $message = new \Cake\Mailer\Message();
     $message
-        ->setForm('admin@cakephp.org')
+        ->setFrom('admin@cakephp.org')
         ->setTo('user@foo.com')
         ->setBody($render->render());
 
@@ -642,4 +644,4 @@ The ``Cake\TestSuite\EmailTrait`` trait provides the following assertions::
 
 .. meta::
     :title lang=en: Email
-    :keywords lang=en: sending mail,email sender,envelope sender,php class,database configuration,sending emails,meth,shells,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models
+    :keywords lang=en: sending mail,email sender,envelope sender,php class,database configuration,sending emails,shells,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models

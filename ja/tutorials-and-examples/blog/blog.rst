@@ -37,11 +37,11 @@ cURL がインストールされていたら、以下のように実行するの
 インストールディレクトリーからターミナルに以下の行をシンプルにタイプしてください。
 この例では、"blog" を使用しますが、他のものに自由に変更できます。 ::
 
-    php composer.phar create-project --prefer-dist cakephp/app blog
+    php composer.phar create-project --prefer-dist cakephp/app:^4.0 blog
 
 Composer をグローバルにすでに設定している場合は、以下のようにタイプすることもできます。 ::
 
-    composer create-project --prefer-dist cakephp/app blog
+    composer self-update && composer create-project --prefer-dist cakephp/app:^4.0 blog
 
 Composer を使うメリットは、 正しいファイルパーミッションの設定や、 **config/app.php**
 ファイルの作成などのような、重要なセットアップを自動的に完全にしてくれることです。

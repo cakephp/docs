@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 LABEL Description="This image is used to create deployable images for book.cakephp.org"
 
 RUN apt-get update && apt-get install -y \
-    python-pip \
+    python3-pip \
     texlive-latex-recommended \
     texlive-latex-extra \
     texlive-fonts-recommended \
@@ -21,7 +21,7 @@ RUN apt-get update \
 
 COPY requirements.txt /tmp/
 
-RUN pip install -r /tmp/requirements.txt
+RUN pip3 install -r /tmp/requirements.txt
 
 WORKDIR /data
 

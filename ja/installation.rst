@@ -10,7 +10,7 @@ CakePHP は nginx や lighttpd や Microsoft IIS のような様々なウェブ�
 ============
 
 - HTTP サーバー。例: Apache。mod\_rewrite が推奨されますが、必須ではありません。
-- PHP |minphpversion| 以上 (PHP 7.2 も含む)
+- PHP |minphpversion| 以上 (PHP |phpversion| も含む)
 - mbstring PHP 拡張
 - intl PHP 拡張
 - simplexml PHP 拡張
@@ -85,13 +85,13 @@ CakePHP の新しいアプリケーションを作成してください。下記
 
 .. code-block:: bash
 
-    php composer.phar create-project --prefer-dist cakephp/app my_app_name
+    php composer.phar create-project --prefer-dist cakephp/app:^4.0 my_app_name
 
 または Composer にパスが通っているのであれば下記のコマンドも使えます。
 
 .. code-block:: bash
 
-    composer create-project --prefer-dist cakephp/app my_app_name
+    composer self-update && composer create-project --prefer-dist cakephp/app:^4.0 my_app_name
 
 一度 Composer がアプリケーションの雛形とコアライブラリーをダウンロードしたら、
 インストールした CakePHP アプリケーションを Composer から操作できるように

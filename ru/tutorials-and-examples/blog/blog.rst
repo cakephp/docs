@@ -41,11 +41,11 @@ Composer Вы с легкостью установите фреймворк че
 примера мы будем использовать папку "blog", но Вы можете назвать ее так,
 как Вам будет удобно.::
 
-    php composer.phar create-project --prefer-dist cakephp/app blog
+    php composer.phar create-project --prefer-dist cakephp/app:^4.0 blog
 
 В том случае, если Composer установлен глобально, можно ввести следующее::
 
-    composer create-project --prefer-dist cakephp/app blog
+    composer self-update && composer create-project --prefer-dist cakephp/app:^4.0 blog
 
 Преимущество при использовании Composer заключается в том, что он
 автоматически произведет все необходимые настройки по правам доступа и создаст

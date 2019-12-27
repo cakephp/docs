@@ -12,7 +12,7 @@ Exigences
 
 - Un serveur HTTP. Par exemple: Apache. mod\_rewrite est préférable, mais en
   aucun cas nécessaire.
-- PHP |minphpversion| ou plus (y compris PHP 7.3)
+- PHP |minphpversion| ou plus (y compris PHP |phpversion|)
 - L'extension PHP mbstring
 - L'extension PHP intl
 - L'extension PHP simplexml
@@ -91,13 +91,13 @@ Pour ceci vous pouvez lancer la commande suivante:
 
 .. code-block:: bash
 
-    php composer.phar create-project --prefer-dist cakephp/app my_app_name
+    php composer.phar create-project --prefer-dist cakephp/app:^4.0 my_app_name
 
 Ou si Composer est installé globalement:
 
 .. code-block:: bash
 
-    composer create-project --prefer-dist cakephp/app my_app_name
+    composer self-update && composer create-project --prefer-dist cakephp/app:^4.0 my_app_name
 
 Une fois que Composer finit le téléchargement du squelette de l'application et
 du cœur de la librairie de CakePHP, vous devriez avoir une application CakePHP
@@ -127,7 +127,7 @@ Par défaut le **composer.json** de l'application ressemble à cela::
 
 A chaque fois que vous exécutez ``php composer.phar update``, vous recevrez
 des correctifs pour cette version mineure. Vous pouvez cependant modifier la
-version de CakePHP en ``^3.8`` pour recevoir également les dernières versions
+version de CakePHP en ``^4.0`` pour recevoir également les dernières versions
 mineures stables de la branche 3.x.
 
 Si vous voulez rester à jour avec les derniers changements non stables de
