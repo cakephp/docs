@@ -1,8 +1,8 @@
 ようこそ
 ########
 
-CakePHP は、 **PHP 7.3** (最小は PHP |minphpversion|) 上で動作するウェブ開発フレームワークです。
-CakePHP の基礎に入門するには :doc:`CakePHP 概要 </intro>` を読んでください。
+CakePHP 3 は、 PHP |phpversion| (最小は PHP |minphpversion|) 上で動作するウェブ開発フレームワークです。
+CakePHP 3 の基礎に入門するには :doc:`CakePHP 概要 </intro>` を読んでください。
 
 CakePHP クックブックは、オープンに開発されている、コミュニティーで編集可能なドキュメントのプロジェクトです。
 ドキュメンテーションの品質、正当性、正確性の高さを維持することを期待しています。
