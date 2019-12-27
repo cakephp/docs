@@ -1,9 +1,8 @@
 Bienvenido
 ##########
 
-CakePHP 3 es un ``framework`` de desarrollo web que funciona con **PHP 7.2**
-(min. PHP |minphpversion|). Puedes leer :doc:`CakePHP de un Vistazo </intro>`
-para introducirte en los fundamentos de CakePHP 3.
+CakePHP 3 es un ``framework`` de desarrollo web que funciona con PHP |phpversion| (min. PHP |minphpversion|).
+Puedes leer :doc:`CakePHP de un Vistazo </intro>` para introducirte en los fundamentos de CakePHP 3.
 
 El manual de CakePHP (``Cookbook``) es un proyecto de documentación abierto,
 editable y mantenido por la comunidad. Fíjate en el icono del lápiz anclado en

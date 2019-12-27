@@ -103,3 +103,8 @@ epub_exclude_files = [
 
 # The depth of the table of contents in toc.ncx.
 epub_tocdepth = 2
+
+rst_epilog = """
+.. |phpversion| replace:: **7.4**
+.. |minphpversion| replace:: 5.6
+"""
