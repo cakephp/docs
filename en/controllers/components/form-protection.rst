@@ -98,7 +98,7 @@ Disabling form tampering checks
             parent::beforeFilter($event);
 
             if ($this->request->getParam('prefix') === 'Admin') {
-                $this->Security->setConfig('validate', false);
+                $this->FormProtection->setConfig('validate', false);
             }
         }
     }
@@ -123,14 +123,14 @@ action (ex. AJAX requests).  You may "unlock" these actions by listing them in
         public function initialize(): void
         {
             parent::initialize();
-            $this->loadComponent('Security');
+            $this->loadComponent('FormProtection');
         }
 
         public function beforeFilter(EventInterface $event)
         {
             parent::beforeFilter($event);
 
-            $this->Security->setConfig('unlockedActions', ['edit']);
+            $this->FormProtection->setConfig('unlockedActions', ['edit']);
         }
     }
 
