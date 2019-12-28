@@ -612,7 +612,7 @@ The default parsing format is the same as the default string format.
 Automatically Choosing the Locale Based on Request Data
 =======================================================
 
-By using the ``LocaleSelectorFilter`` in your application, CakePHP will
+By using the ``LocaleSelectorMiddleware`` in your application, CakePHP will
 automatically set the locale based on the current user::
 
     // in src/Application.php
@@ -630,7 +630,7 @@ automatically set the locale based on the current user::
     // Restrict the locales to only en_US, fr_FR
     DispatcherFactory::add('LocaleSelector', ['locales' => ['en_US', 'fr_FR']]);
 
-The ``LocaleSelectorFilter`` will use the ``Accept-Language`` header to
+The ``LocaleSelectorMiddleware`` will use the ``Accept-Language`` header to
 automatically set the user's preferred locale. You can use the locale list
 option to restrict which locales will automatically be used.
 
