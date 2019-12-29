@@ -25,13 +25,6 @@ This will add the following to your **src/Application.php**::
     // In the bootstrap method add:
     $this->addPlugin('MyPlugin');
 
-If you are loading a plugin that only provides CLI tools - like bake - you can
-update your ``bootstrap_cli.php`` with:
-
-.. code-block:: bash
-
-    bin/cake plugin load --cli MyPlugin
-    bin/cake plugin unload --cli MyPlugin
 
 Unloading Plugins
 -----------------

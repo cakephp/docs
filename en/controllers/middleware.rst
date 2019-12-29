@@ -505,23 +505,23 @@ use the ``HttpsEnforcerMiddleware``::
     use Cake\Http\Middleware\HttpsEnforcerMiddleware;
 
     // Always raise an exception and never redirect.
-    $https = new HttpsMiddleware([
+    $https = new HttpsEnforcerMiddleware([
         'redirect' => false,
     ]);
 
     // Send a 302 status code when redirecting
-    $https = new HttpsMiddleware([
+    $https = new HttpsEnforcerMiddleware([
         'redirect' => true,
         'statusCode' => 302,
     ]);
 
     // Send additional headers in the redirect response.
-    $https = new HttpsMiddleware([
+    $https = new HttpsEnforcerMiddleware([
         'headers' => ['X-Https-Upgrade', => true],
     ]);
 
     // Disable HTTPs enforcement when ``debug`` is on.
-    $https = new HttpsMiddleware([
+    $https = new HttpsEnforcerMiddleware([
         'disableOnDebug' => true,
     ]);
 
