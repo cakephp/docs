@@ -72,7 +72,7 @@ everyone on your team knows what environment variables are in use and what
 should go in each one.
 
 Before being able to use the ``env()`` syntax, you will need to uncomment 
-the code block on line 59-65 in ``config/bootstrap.php``.
+related code block in ``config/bootstrap.php``.
 
 Once your environment variables have been set, you can use ``env()`` to read
 data from the environment::
