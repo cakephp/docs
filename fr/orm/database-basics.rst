@@ -600,7 +600,7 @@ faire correspondre les données dans cet objet et les expressions SQL::
         }
     }
 
-La classe ci-dessus fait quelques éléments intéressants :
+La classe ci-dessus fait quelques éléments intéressants:
 
 * La méthode ``toPHP`` se charge du parsing des résulats de la requête SQL dans un objet 'value'.
 * La méthode ``marshal`` se charge de convertir, comme celles données dans la requête, dans notre objet 'value'.

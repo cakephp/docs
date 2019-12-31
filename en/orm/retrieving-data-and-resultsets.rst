@@ -736,7 +736,7 @@ The example below matches Articles that have specific Tags and loads the same Ta
 
     $filter = ['Tags.name' => 'CakePHP'];
     $query = $articles->find()
-        ->distinct($articles)
+        ->distinct($articles->getPrimaryKey())
         ->contain('Tags', function (Query $q) use ($filter) {
             return $q->where($filter);
         })

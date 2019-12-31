@@ -47,7 +47,7 @@ Model
 Shell
     Contient les commandes de la console et les tasks de la console pour votre
     application. Pour plus d'informations, regardez la section
-    :doc:`/console-and-shells`.
+    :doc:`/console-commands/shells`.
 Template
     Les fichiers de présentation se trouvent ici: elements, pages d'erreur,
     les layouts, et les fichiers de template de vue.

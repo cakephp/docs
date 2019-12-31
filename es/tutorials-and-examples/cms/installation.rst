@@ -45,14 +45,14 @@ directorio "cms" del directorio de trabajo actual:
 
 .. code-block:: bash
 
-    php composer.phar create-project --prefer-dist cakephp/app cms
+    php composer.phar create-project --prefer-dist cakephp/app:^4.0 cms
 
 Si descargaste y ejecutaste el instalador de Windows de "Composer", escribí la
 siguiente linea en tu terminal desde el directorio de instalación.
 
 .. code-block:: bash
 
-    composer self-update && composer create-project --prefer-dist cakephp/app cms
+    composer self-update && composer create-project --prefer-dist cakephp/app:^4.0 cms
 
 La ventaja de usar "Composer" es que completará automáticamente algunas tareas
 de configuración importantes, como configurar los permisos de archivo correctos

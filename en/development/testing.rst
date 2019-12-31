@@ -668,12 +668,12 @@ you define the ``$fixtures`` property in your model::
 .. note::
     You can also override ``TestCase::getFixtures()`` instead of defining
     the ``$fixtures`` property::
-    
-        public function getFixtures() 
-        { 
+
+        public function getFixtures()
+        {
             return ['app.Articles', 'app.Comments'];
         }
-        
+
 The above will load the Article and Comment fixtures from the application's
 Fixture directory. You can also load fixtures from CakePHP core, or plugins::
 
@@ -1118,7 +1118,7 @@ load plugins manually in a test you can use the ``loadPlugins()`` method.
 Testing with Encrypted Cookies
 ------------------------------
 
-If you use the :ref:`encrypted-cookie-middleware:` in your
+If you use the :ref:`encrypted-cookie-middleware` in your
 application, there are helper methods for setting encrypted cookies in your
 test cases::
 

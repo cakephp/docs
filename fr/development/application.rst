@@ -8,7 +8,7 @@ de console et routes sont inclus.
 Vous pouvez trouver votre classe ``Application`` dans **src/Application.php**.
 Par défaut il sera assez petit et ne définira que quelques valeurs par défaut.
 :doc:`/controllers/middleware`. Les applications peuvent définir les
-methodes de hook suivantes :
+methodes de hook suivantes:
 
 * ``bootstrap`` Utilisé pour chargé les :doc:`fichiers de configuration
   </development/configuration>`, définir des constantes et d'autres fonctions

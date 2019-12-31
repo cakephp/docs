@@ -4,20 +4,30 @@ CMS Tutorial - Authentication using cakephp/authentication
 CakePHP now supports authentication and authorization features using the
 core plugins:
 
-* `cakephp/authentication <https://book.cakephp.org/authorization>`_
-* `cakephp/authorization <https://book.cakephp.org/authentication>`_
+* `cakephp/authentication <https://book.cakephp.org/authentication>`_
+* `cakephp/authorization <https://book.cakephp.org/authorization>`_
 
 In this tutorial we are going to ensure passwords are stored securely in
 our database, we are going to provide a working login page, and apply some
 basic access control to the article creation & editing experiences.
 
+Installing Authentication Plugin
+================================
+
+Use composer to install the Authentication Plugin::
+
+.. code-block:: bash
+
+    composer require cakephp/authentication:^2.0
+
+
+Adding Password Hashing
+-----------------------
+
 We will assume you have created the ``Controller``, ``Table``, ``Entity`` and
 templates for the ``users`` table in your database. You can do this manually
 like you did before for the ArticlesController, or you can use the bake shell
 to generate the classes for you using ``bin/cake bake all users``.
-
-Adding Password Hashing
------------------------
 
 If you create or update a user with this setup, you might notice that
 the passwords are stored in plain text. This is really bad from a security point
@@ -74,15 +84,6 @@ is the `recommended password hash algorithm for PHP <https://www.php.net/manual/
     After updating the password, you'll see a long string stored in the password column.
     Note bcrypt will generate a different hash even for the same password saved twice.
 
-
-Installing Authentication Plugin
-================================
-
-Use composer to install the Authentication Plugin::
-
-.. code-block:: bash
-
-    composer require cakephp/authentication:^2.0
 
 Adding Login
 ============
@@ -183,7 +184,7 @@ In your UsersController, add the following code::
         $this->Authentication->addUnauthenticatedActions(['login']);
     }
 
-    public function login()
+    public function login() {
         $this->request->allowMethod(['get', 'post']);
         $result = $this->Authentication->getResult();
         // regardless of POST or GET, redirect if user is logged in

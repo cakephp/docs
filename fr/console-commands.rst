@@ -6,7 +6,7 @@ Console Commands
 In addition to a web framework, CakePHP also provides a console framework for
 creating command line tools & applications. Console applications are ideal for
 handling a variety of background & maintenance tasks that leverage your existing
-application configuration, models, plugins and domain logic.
+application configuratino, models, plugins and domain logic.
 
 CakePHP provides several console tools for interacting with CakePHP features
 like i18n and routing that enable you to introspect your application and
@@ -15,7 +15,7 @@ generate related files.
 The CakePHP Console
 ===================
 
-The CakePHP Console uses a dispatcher-type system to load commands, parse
+The CakePHP Console uses a dispatcher-type system to load a commands, parse
 their arguments and invoke the correct command. While the examples below use
 bash the CakePHP console is compatible with any \*nix shell and windows.
 

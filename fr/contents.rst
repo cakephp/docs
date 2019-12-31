@@ -12,6 +12,7 @@ Contenu
     debug-kit
     elasticsearch
     migrations
+    phinx
 
 
 .. toctree::
@@ -43,7 +44,7 @@ Contenu
 
     controllers/components/authentication
     core-libraries/caching
-    console-and-shells
+    console-commands
     development/debugging
     deployment
     core-libraries/email
@@ -97,7 +98,7 @@ Contenu
     :maxdepth: 3
     :caption: Phinx
 
-    phinx
+    Phinx <https://book.cakephp.org/phinx/0/fr/>
 
 .. todolist::
 

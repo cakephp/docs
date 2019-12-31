@@ -527,7 +527,7 @@ CakePHP déterminera si un ``save()`` doit générer une insertion un article ou
 la mise à jour d'un article existant.
 
 Vous pouvez maintenant mettre à jour votre vue index avec des liens pour
-éditer des articles :
+éditer des articles:
 
 .. code-block:: php
 
@@ -596,7 +596,7 @@ rencontrer.
 Etant donné que nous exécutons juste un peu de logique et de redirection,
 cette action n'a pas de vue. Vous voudrez peut-être mettre à jour votre vue
 index avec des liens pour permettre aux utilisateurs de supprimer des
-articles, ainsi :
+articles, ainsi:
 
 .. code-block:: php
 

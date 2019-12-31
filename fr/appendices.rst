@@ -10,7 +10,7 @@ introduites dans chaque version et le chemin de migration entre les versions.
 .. toctree::
     :maxdepth: 1
 
-    appendices/4-x-migration-guide
+    appendices/4-0-migration-guide
 
 Informations générales
 ======================

@@ -171,7 +171,6 @@ Database
 
   * **SqlServer**
 
-    #. ``DATETIME`` => ``datetimefractional``
     #. ``DATETIME2`` => ``datetimefractional``
     #. ``DATETIME2(1-7) => ``datetimefractional``
 

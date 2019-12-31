@@ -13,7 +13,7 @@ Defining an OptionParser
 Commands and Shells provide a ``buildOptionParser($parser)`` hook method that
 you can use to define the options and arguments for your commands::
 
-    public function buildOptionParser($parser)
+    protected function buildOptionParser($parser)
     {
         // Define your options and arguments.
 
@@ -131,11 +131,11 @@ When creating options you can use the following options to define the behavior
 of the option:
 
 * ``short`` - The single letter variant for this option, leave undefined for
-   none.
+  none.
 * ``help`` - Help text for this option. Used when generating help for the
-   option.
+  option.
 * ``default`` - The default value for this option. If not defined the default
-   will be ``true``.
+  will be ``true``.
 * ``boolean`` - The option uses no value, it's just a boolean switch.
   Defaults to ``false``.
 * ``choices`` - An array of valid choices for this option. If left empty all
@@ -157,10 +157,6 @@ to add multiple options at once. ::
 
 As with all the builder methods on ConsoleOptionParser, addOptions can be used
 as part of a fluent method chain.
-
-Option values are stored in the ``$this->params`` array. You can also use the
-convenience method ``$this->param()`` to avoid errors when trying to access
-non-present options.
 
 Validating Options
 ------------------
@@ -358,8 +354,6 @@ in either an array or a string, you can set the value of the description::
 
     // Set multiple lines at once
     $parser->setDescription(['line one', 'line two']);
-    // Prior to 3.4
-    $parser->description(['line one', 'line two']);
 
     // Read the current value
     $parser->getDescription();
@@ -375,58 +369,6 @@ can set the value of the epilog::
 
     // Set multiple lines at once
     $parser->setEpilog(['line one', 'line two']);
-    // Prior to 3.4
-    $parser->epilog(['line one', 'line two']);
 
     // Read the current value
     $parser->getEpilog();
-
-
-Adding Subcommands
-------------------
-
-.. php:method:: addSubcommand($name, $options = [])
-
-Console applications are often made of subcommands, and these subcommands may
-require special option parsing and have their own help. A perfect example of
-this is ``bake``. Bake is made of many separate tasks that all have their own
-help and options. ``ConsoleOptionParser`` allows you to define subcommands and
-provide command specific option parsers so the shell knows how to parse commands
-for its tasks::
-
-    $parser->addSubcommand('model', [
-        'help' => 'Bake a model',
-        'parser' => $this->Model->getOptionParser()
-    ]);
-
-The above is an example of how you could provide help and a specialized option
-parser for a shell's task. By calling the Task's ``getOptionParser()`` we don't
-have to duplicate the option parser generation, or mix concerns in our shell.
-Adding subcommands in this way has two advantages. First, it lets your shell
-document its subcommands in the generated help. It also gives easy access to the
-subcommand help. With the above subcommand created you could call
-``cake myshell --help`` and see the list of subcommands, and also run
-``cake myshell model --help`` to view the help for just the model task.
-
-.. note::
-
-    Once your Shell defines subcommands, all subcommands must be explicitly
-    defined.
-
-When defining a subcommand you can use the following options:
-
-* ``help`` - Help text for the subcommand.
-* ``parser`` - A ConsoleOptionParser for the subcommand. This allows you to
-  create method specific option parsers. When help is generated for a
-  subcommand, if a parser is present it will be used. You can also supply the
-  parser as an array that is compatible with
-  :php:meth:`Cake\\Console\\ConsoleOptionParser::buildFromArray()`
-
-Adding subcommands can be done as part of a fluent method chain.
-
-.. versionchanged:: 3.5.0
-    When adding multi-word subcommands you can now invoke those commands using
-    ``snake_case`` in addition to the camelBacked form.
-
-.. deprecated:: 3.6.0
-    Subcommands are deprecated. Instead use :ref:`nested commands <renaming-commands>`.

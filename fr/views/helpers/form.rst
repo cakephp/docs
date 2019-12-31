@@ -122,11 +122,11 @@ Options for Form Creation
 Le tableau ``$options`` est là où la configuration du formulaire se passe. Ce
 tableau spécial peut contenir un certain nombre de paires de clé-valeur
 différentes qui affectent la façon dont la balise form est générée. Voici les
-valeurs autorisés :
+valeurs autorisés:
 
 * ``'type'`` - Vous permet de choisir le type de formulaire à créer. Si vous ne
   fournissez pas de type, il sera automatiquement détecté en fonction du 'context'
-  du formulaire. Cette option peut prendre une des valeurs suivantes :
+  du formulaire. Cette option peut prendre une des valeurs suivantes:
 
   * ``'get'`` - Définira la ``method`` du formulaire à GET.
   * ``'file'`` - Définira la ``method`` du formulaire à POST et le ``'enctype'``
@@ -192,7 +192,7 @@ définir où le ``FormHelper`` doit aller récupérer les valeurs de ses champs:
         'valueSources' => ['query', 'context']
     ]);
 
-    // Même effet :
+    // Même effet:
     echo $this->Form
         ->setValueSources(['query', 'context'])
         ->create($articles);
@@ -201,7 +201,7 @@ définir où le ``FormHelper`` doit aller récupérer les valeurs de ses champs:
     echo $this->Form->create($article);
     $this->Form->setValueSources('query');
 
-    // Même effet :
+    // Même effet:
     echo $this->Form->create($article, ['valueSources' => 'query']);
 
 Les sources supportées sont ``context``, ``data`` et ``query``. Vous pouvez
@@ -578,7 +578,7 @@ suit va couvrir les options spécifiques de ``FormHelper::control()``.
           'label' => 'The User Alias'
       ]);
 
-  Affiche :
+  Affiche:
 
   .. code-block:: html
 
@@ -593,7 +593,7 @@ suit va couvrir les options spécifiques de ``FormHelper::control()``.
 
       echo $this->Form->control('name', ['label' => false]);
 
-  Affiche :
+  Affiche:
 
   .. code-block:: html
 
@@ -613,7 +613,7 @@ suit va couvrir les options spécifiques de ``FormHelper::control()``.
           ]
       ]);
 
-  Affiche :
+  Affiche:
 
   .. code-block:: html
 
@@ -685,7 +685,7 @@ Options Communes
 
 Beaucoup des différentes méthodes d'input supportent un jeu d'options communes.
 Toutes ses options sont aussi supportées par ``control()``. Pour réduire les
-répétitions, les options communes partagées par toutes les méthodes input sont :
+répétitions, les options communes partagées par toutes les méthodes input sont:
 
 * ``id`` Définir cette clé pour forcer la valeur du DOM id pour cet
   input. Cela remplacera l'``idPrefix`` qui pourrait être fixé.
@@ -848,7 +848,7 @@ généré. Exemple:
 **Options for Textarea**
 
 En plus :ref:`des options générales<general-control-options>`, ``textarea()``
-supporte 2 autres options spécifiques :
+supporte 2 autres options spécifiques:
 
 * ``'escape'`` - Permet de définir si le contenu du ``textarea`` doit être
   échappé ou non. Le défaut est ``true``.
@@ -886,7 +886,7 @@ Vous trouverez ci-dessous les options partagées entre ``select()``,
 ``checkbox()`` et ``radio()`` (les options spécifiques à une seule méthode sont
 décrites dans les sections dédiées à ces méthodes).
 
-* ``value`` Permet de définir ou sélectionner la valeur de l'élément ciblé :
+* ``value`` Permet de définir ou sélectionner la valeur de l'élément ciblé:
 
   * Pour les checkboxes, cela définit l'attribut HTML ``value`` assigné à
     l'input à la valeur que vous définissez.
@@ -954,7 +954,7 @@ décrites dans les sections dédiées à ces méthodes).
   existera même sans valeur spécifiée. Pour les checkboxes, sa valeur vaudra ``0`` ;
   pour les boutons radio, elle sera ``''``.
 
-  Exemple d'un rendu par défaut :
+  Exemple d'un rendu par défaut:
 
   .. code-block:: html
 
@@ -965,7 +965,7 @@ décrites dans les sections dédiées à ces méthodes).
 
       echo $this->Form->checkbox('published', ['hiddenField' => false]);
 
-  Retournera :
+  Retournera:
 
   .. code-block:: html
 
@@ -1158,7 +1158,7 @@ Par exemple::
         ]
     );
 
-Affichera :
+Affichera:
 
 .. code-block:: html
 
@@ -1252,7 +1252,7 @@ Par exemple ::
         'Value 3' => 'Label 3'
     ]);
 
-Affichera :
+Affichera:
 
 .. code-block:: html
 
@@ -1280,7 +1280,7 @@ Par exemple::
     ];
     echo $this->Form->select('field', $options);
 
-Affichera :
+Affichera:
 
 .. code-block:: html
 
@@ -1599,7 +1599,7 @@ le template a cette forme::
 
     {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
 
-Appeler cette méthode sans options générera, par défaut, 5 ``select`` :
+Appeler cette méthode sans options générera, par défaut, 5 ``select``:
 année (4 chiffres), mois (textuelle complète), jour (numérique),
 heure (numérique), minutes (numérique).
 
@@ -1758,7 +1758,7 @@ suivant::
         ],
     ]);
 
-Ce qui générera le code suivant :
+Ce qui générera le code suivant:
 
 .. code-block:: html
 
@@ -1803,7 +1803,7 @@ l'année en cours, vous utiliserez le code suivant::
         'maxYear' => date('Y')
     ]);
 
-Si nous sommes en 2009, nous obtiendrons :
+Si nous sommes en 2009, nous obtiendrons:
 
 .. code-block:: html
 
@@ -2001,7 +2001,7 @@ du label::
     echo $this->Form->label('User.name');
     echo $this->Form->label('User.name', 'Your username');
 
-Affichera :
+Affichera:
 
 .. code-block:: html
 
@@ -2058,7 +2058,7 @@ plusieurs messages d'erreur pour un seul champ.
 
 Exemple::
 
-    // Dans TicketsTable vous avez une règle de validation 'notEmpty' :
+    // Dans TicketsTable vous avez une règle de validation 'notEmpty':
     public function validationDefault(Validator $validator)
     {
         $validator
@@ -2066,7 +2066,7 @@ Exemple::
             ->notEmpty('ticket');
     }
 
-    // Dans Templates/Tickets/add.ctp vous avez :
+    // Dans Templates/Tickets/add.ctp vous avez:
     echo $this->Form->text('ticket');
 
     if ($this->Form->isFieldError('ticket')) {
@@ -2074,7 +2074,7 @@ Exemple::
     }
 
 Si vous soumettez le formulaire sans fournir de valeur pour le champ *Ticket*,
-votre formulaire affichera :
+votre formulaire affichera:
 
 .. code-block:: html
 
@@ -2182,7 +2182,7 @@ Définir
 **Options pour les Button**
 
 * ``$options['type']`` - Définissez cette variable à l'une des trois valeurs
-  suivantes :
+  suivantes:
 
   #. ``'submit'`` - Comme pour la méthode ``$this->Form->submit()``, cela créera
      un bouton de type ``submit``. Notez cependant que ça ne générera pas de ``div``
@@ -2201,7 +2201,7 @@ Par exemple::
     echo $this->Form->button('Reset the Form', ['type' => 'reset']);
     echo $this->Form->button('Submit Form', ['type' => 'submit']);
 
-Affichera :
+Affichera:
 
 .. code-block:: html
 
@@ -2526,7 +2526,7 @@ Créer plusieurs éléments (controls)
 
 * ``$fields`` - Un tableau des champs à générer. Permet de définir des types
   personnalisés, des labels et toutes autres options pour chaque champ.
-* ``$options`` - Optionnel. Un tableau d'options. Les clés supportées sont :
+* ``$options`` - Optionnel. Un tableau d'options. Les clés supportées sont:
 
   #. ``'fieldset'`` - Définir à ``false`` pour désactiver l'ajout d'un ``fieldset``.
      Si vide, le ``fieldset`` sera ajouté. Peut aussi être un tableau de paramètres
@@ -2576,7 +2576,7 @@ Créer les éléments pour une Entity complète
 * ``$fields`` - Optionnel. Un tableau de paramétrages pour les champs qui seront
   générés. Permet de définir des types personnalisés, des labels et toutes autres
   options.
-* ``$options`` - Optionnel. Un tableau d'options. Les clés supportées sont :
+* ``$options`` - Optionnel. Un tableau d'options. Les clés supportées sont:
 
   #. ``'fieldset'`` - Définir à ``false`` pour désactiver l'ajout d'un ``fieldset``.
      Si vide, le ``fieldset`` sera ajouté. Peut aussi être un tableau de paramètres
@@ -2602,7 +2602,7 @@ Créer des Inputs pour les Données Associées
 
 Créer des formulaires pour les données associées est assez simple et est
 étroitement lié aux chemins des données de votre entity. Imaginons les
-relations suivantes :
+relations suivantes:
 
 * Authors HasOne Profiles
 * Authors HasMany Articles

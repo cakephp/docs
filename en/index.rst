@@ -1,7 +1,7 @@
 Welcome
 #######
 
-CakePHP is a web development framework running on **PHP 7.3** (min. PHP |minphpversion|).
+CakePHP 4 is a web development framework running on PHP |phpversion| (min. PHP |minphpversion|).
 Read :doc:`CakePHP at a Glance </intro>` to get an introduction to the
 fundamentals of CakePHP.
 

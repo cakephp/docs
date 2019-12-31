@@ -1237,7 +1237,7 @@ Strict Saving
 .. php:method:: saveOrFail($entity, $options = [])
 
 Utiliser cette méthode lancera une :php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException`
-si :
+si:
 
 * les règles de validation ont échoué
 * l'entity contient des erreurs
