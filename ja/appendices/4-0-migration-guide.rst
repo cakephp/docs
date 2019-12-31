@@ -97,9 +97,14 @@ Console
 Component
 ---------
 
+* JSON/XML 入力をリクエストデーター配列に解析できる ``RequestHandlerComponent`` の入力データ解析機能は、削除されました。
+  入力デー後の解析が必要な場合は、代わりに、アプリケーションで ``Cake\Http\Middleware\BodyParserMiddleware``
+  を使用する必要があります。
 * ``Cake\Controller\Component\RequestHandlerComponent`` は、リクエストパラメーターではなくリクエスト属性として、
   ``isAjax`` を設定するようになりました。したがって、 ``$request->getParam('isAjax')`` の代わりに
   ``$request->getAttribute('isAjax')`` を使用する必要があります。
+* ``RequestHandlerComponent`` の入力データ解析機能は削除され、非推奨の警告を発します。
+  代わりに、 :ref:`body-parser-middleware` を使用する必要があります。
 * ``Cake\Controller\Component\PagingComponent`` は、リクエストパラメーターではなくリクエスト属性として、
   ページングパラメーター情報を設定するようになりました。したがって、 ``$request->getParam('paging')`` の代わりに、
   ``$request->getAttribute('paging')`` を使用する必要があります。
