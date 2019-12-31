@@ -387,7 +387,7 @@ DateTime Type
 
 .. php:class:: DateTimeType
 
-Maps to a native ``DATETIME`` column type. In PostgreSQL, and SQL Server
+Maps to a native ``DATETIME`` column type. In PostgreSQL and SQL Server
 this turns into a ``TIMESTAMP`` type. The default return value of this column
 type is :php:class:`Cake\\I18n\\FrozenTime` which extends the built-in
 ``DateTimeImmutable`` class and `Chronos <https://github.com/cakephp/chronos>`_.
