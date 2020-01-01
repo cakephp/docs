@@ -188,6 +188,7 @@ Datasources
 
 Error
 -----
+
 * The internals of error handler classes ``BaseErrorHandler``, ``ErrorHandler``
   and ``ConsoleErrorHandler`` have changed. If you have extended these classes
   you should update them accordingly.

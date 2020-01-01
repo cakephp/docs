@@ -159,3 +159,21 @@ Database
     #. ``TIMESTAMPTZ(0-6)`` => ``timestamptimezone``
     #. ``TIMESTAMP WITH TIME ZONE`` => ``timestamptimezone``
     #. ``TIMESTAMP(0-6) WITH TIME ZONE`` => ``timestamptimezone``
+
+Datasources
+-----------
+
+* ``ModelAwareTrait::$modelClass`` は protected になりました。
+
+Error
+-----
+
+* エラーハンドラークラス ``BaseErrorHandler`` 、 ``ErrorHandler`` および ``ConsoleErrorHandler`` の内部が変更されました。
+  これらのクラスを拡張した場合は、それに応じて更新する必要があります。
+* ``ErrorHandlerMiddleware`` は、例外レンダラークラス名またはインスタンスではなく、
+  コンストラクター引数として、エラーハンドラークラス名またはインスタンスを受け取るようになりました。
+
+Event
+-----
+
+* 件名のないイベントで ``getSubject()`` を呼び出すと、例外が発生するようになりました。
