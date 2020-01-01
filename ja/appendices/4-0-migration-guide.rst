@@ -97,9 +97,6 @@ Console
 Component
 ---------
 
-* JSON/XML 入力をリクエストデーター配列に解析できる ``RequestHandlerComponent`` の入力データ解析機能は、削除されました。
-  入力デー後の解析が必要な場合は、代わりに、アプリケーションで ``Cake\Http\Middleware\BodyParserMiddleware``
-  を使用する必要があります。
 * ``Cake\Controller\Component\RequestHandlerComponent`` は、リクエストパラメーターではなくリクエスト属性として、
   ``isAjax`` を設定するようになりました。したがって、 ``$request->getParam('isAjax')`` の代わりに
   ``$request->getAttribute('isAjax')`` を使用する必要があります。
