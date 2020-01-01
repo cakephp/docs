@@ -78,8 +78,8 @@ Contenidos
     :caption: Plugins
 
     Bake <https://book.cakephp.org/bake/1/es/>
-    Chronos <https://book.cakephp.org/chronos/>
-    Debug Kit <https://book.cakephp.org/debugkit/>
+    Chronos <https://book.cakephp.org/chronos/1/es/>
+    Debug Kit <https://book.cakephp.org/debugkit/3/es/>
     migrations
     elasticsearch
     upgrade-tool
