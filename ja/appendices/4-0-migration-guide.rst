@@ -106,3 +106,56 @@ Component
   ページングパラメーター情報を設定するようになりました。したがって、 ``$request->getParam('paging')`` の代わりに、
   ``$request->getAttribute('paging')`` を使用する必要があります。
 
+Database
+--------
+
+* ``Cake\Database\TypeInterface`` の型マッピングクラスは ``Type`` を継承しなくなり、
+  ``BatchCastingInterface`` 機能を活用します。
+* ``Cake\Database\Type::map()`` は、セッターとしてのみ機能します。
+  型インスタンスを検査するには ``Type::getMap()`` を使用する必要があります。
+* Date 、 Time 、 Timestamp および Datetime カラムタイプは、デフォルトで不変の時刻オブジェクトを返すようになりました。
+* ``BoolType`` は、空でない文字列値を ``true`` にマーシャリングしたり、空文字列を
+  ``false`` にマーシャリングしなくなりました。代わりに、非ブール文字列値は ``null`` に変換されます。
+* ``DecimalType`` は、浮動小数ではなく文字列を使用して 10 進数値を表すようになりました。
+  浮動小数を使用することで、精度が低下していました。
+* ``JsonType`` は、データベースコンテキストの値を準備するときに ``null`` を保持するようになりました。
+  3.x では、 ``'null'`` を出力します。
+* ``StringType`` は、配列値を、空文字列の代わりに ``null`` にマーシャリングします。
+* ``Cake\Database\Connection::setLogger()`` は ロギングを無効化するために ``null`` を受け入れなくなりました。
+  代わりに、 ``Psr\Log\NullLogger`` のインスタンスを渡して、ロギングを無効にします。
+* ``Database\Log\LoggingStatement`` 、 ``Database\QueryLogger`` および ``Database\Log\LoggedQuery``
+  の内部実装が変更されました。これらのクラスを拡張する場合は、コードを更新する必要があります。
+* ``Cake\Database\Log\LoggingStatement`` 、 ``Cake\Database\QueryLogger`` および ``Cake\Database\Log\LoggedQuery``
+  の内部実装が変更されました。これらのクラスを拡張する場合は、コードを更新する必要があります。
+* ``Cake\Database\Schema\CacheCollection`` と ``Cake\Database\SchemaCache`` の内部実装が変更されました。
+  これらのクラスを拡張する場合は、コードを更新する必要があります。
+* データべーススキーマは、 ``CHAR`` カラムを ``string`` ではなく、新しい ``char`` 型にマッピングするようになりました。
+* SqlServer の datetime カラムは、名前を一致させるために 'timestamp' ではなく 'datetime'
+  型にマップされるようになりました。
+* MySQL 、 PostgreSQL および SqlServer のデータベーススキーマは、少数秒をサポートするカラムを、
+  新しい抽象少数型にマップするようになりました。
+
+  * **MySQL**
+
+    #. ``DATETIME(1-6)`` => ``datetimefractional``
+    #. ``TIMESTAMP(1-6)`` => ``timestampfractional``
+
+  * **PostgreSQL**
+
+    #. ``TIMESTAMP`` => ``timestampfractional``
+    #. ``TIMESTAMP(1-6)`` => ``timestampfractional``
+
+  * **SqlServer**
+
+    #. ``DATETIME2`` => ``datetimefractional``
+    #. ``DATETIME2(1-7) => ``datetimefractional``
+
+* PostgreSQL のスキーマは、タイムゾーンをサポートするカラムを、新しい抽象タイムゾーン型にマップするようになりました。
+  (0) 精度を指定しても、上記の通常の分数型の場合のように、型マッピングは変更されません。
+
+  * **PostgreSQL**
+
+    #. ``TIMESTAMPTZ`` => ``timestamptimezone``
+    #. ``TIMESTAMPTZ(0-6)`` => ``timestamptimezone``
+    #. ``TIMESTAMP WITH TIME ZONE`` => ``timestamptimezone``
+    #. ``TIMESTAMP(0-6) WITH TIME ZONE`` => ``timestamptimezone``
