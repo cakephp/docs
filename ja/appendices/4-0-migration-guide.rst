@@ -200,3 +200,29 @@ Http
   このフラグを ``false`` に設定することで、 3.x の動作との互換性をできます。
 * ``Cake\Http\Response::getCookie()`` によって返される配列キーが変更されました。
   ``expire`` が ``expires`` に、 ``httpOnly`` が ``httponly`` に変わりました。
+
+I18n
+----
+
+* ``Cake\I18n\Date`` や ``Cake\I18n\FrozenDate`` オブジェクトを JSON エンコードすると、
+  以前の形式 ``yyyy-MM-dd'T'HH:mm:ssxxx`` ではなく、 ``yyyy-MM-dd`` 形式で
+  日付部分のみの文字列が生成されるようになりました。
+
+Mailer
+------
+
+* ``Email::set()`` は削除されました。代わりに ``Email::setViewVars()`` を使用してください。
+* ``Email::createView()`` は削除されました。
+* ``Email::viewOptions()`` は削除されました。代わりに
+  ``$email->getRenderer()->viewBuilder()->setOption()`` を使用してください。
+
+ORM
+---
+
+* ``Table::newEntity()`` は、入力として配列を必要とし、検証が実行されずに偶発的な保存がされることを防ぐために、
+  検証を実施します。つまり、入力無しでエンティティーを作成するには、 ``Table::newEmptyEntity()`` を使用する必要があります。
+* ``Query::where()`` に ``['name' => null]`` のような条件を使用すると、例外が発生します。
+  3.x では、 SQL の ``name = NLL`` のような条件のSQLを生成していましたが、これは常に 0 行と一致するため、誤った結果を返します。
+  ``null`` と比較するときは、 ``['name IS' => null]`` のような ``IS`` 演算子を使用する必要があります。
+* false ではなく、エンティティーではない結果で、 ``Model.beforeSave`` イベントを停止すると、例外が発生します。
+  この変更により、 ``Table::save()`` は常にエンティティーまたは false を返します。
