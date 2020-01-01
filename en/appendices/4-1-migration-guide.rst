@@ -13,6 +13,16 @@ Database
 * ``TableSchema::getPrimary()`` was deprecated. Use ``getPrimaryKey()`` instead.
 * The internal schema dialect classes ``MysqlSchema``, ``PostgresSchema``, ``SqliteSchema``
   and ``SqlserverSchema`` internal classes were moved to ``Cake\Database\Dialect``.
+* ``Cake\Database\Schema\BaseSchema`` was renamed to
+  ``Cake\Database\Schema\SchemaDialect`` and marked as internal.
+* ``Cake\Database\Schema\MysqlSchema`` was renamed to
+  ``Cake\Database\Schema\MysqlSchemaDialect`` and marked as internal.
+* ``Cake\Database\Schema\SqliteSchema`` was renamed to
+  ``Cake\Database\Schema\SqliteSchemaDialect`` and marked as internal.
+* ``Cake\Database\Schema\SqlserverSchema`` was renamed to
+  ``Cake\Database\Schema\SqlserverSchemaDialect`` and marked as internal.
+* ``Cake\Database\Schema\PostgresSchema`` was renamed to
+  ``Cake\Database\Schema\PostgresSchemaDialect`` and marked as internal.
 
 ORM
 ---
