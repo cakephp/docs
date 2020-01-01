@@ -177,3 +177,26 @@ Event
 -----
 
 * 件名のないイベントで ``getSubject()`` を呼び出すと、例外が発生するようになりました。
+
+Http
+----
+
+* ``Cake\Http\ServerRequest::referer()`` は、デフォルトで ``local`` パラメーターを false ではなく true に設定します。
+  これにより、リファラーヘッダーはデフォルトでアプリケーションのドメインに制限されるため、リファラーヘッダーの使用がより安全になります。
+* パラメーターが欠落している場合の ``Cake\Http\ServerRequest::getParam()`` のデフォルト値は、
+  ``false`` ではなく ``null`` になりました。
+* ``Cake\Http\Client\Request::body()`` は削除されました。代わりに、 ``getBody()`` か ``withBody()`` を使用してください。
+* ``Cake\Http\Client\Response::isOk()`` は、すべての 2xx および 3xx レスポンスコードに対して、 ``true`` を返すようになりました。
+* ``Cake\Http\Cookie\Cookie::getExpiresTimestamp()`` は、数値を返すようになりました。
+  これにより、 ``setcookie()`` で使用されているものと型が一致します。
+* ``Cake\Http\ServerRequest::referer()`` は、現在のリクエストにリファラーがない場合、 ``null`` を返すようになりました。
+  以前は、 ``/`` を返していました。
+* セッションクッキー名はデフォルトで ``CAKEPHP`` に設定されなくなりました。代わりに、 ``php.ini`` ファイルで定義された、
+  デフォルトのクッキー名が使用されます。``Session.cookie`` 設定オプションを使用してクッキー名を設定できます。
+* ``Cake\Cookie\CookieCollection::get()`` は、存在しないクッキーにアクセスすると、例外を返すようになりました。
+  クッキーの存在をチェックするために ``has()`` を使用してください。
+* ``Cake\Http\ResponseEmitter::emit()`` のシグネチャが変更され、 2 番目の引数がなくなりました。
+* ``App.mergeFilesAsObjects`` のデフォルト値は ``true`` になりました。アプリケーションがファイルアップロードを使用する場合、
+  このフラグを ``false`` に設定することで、 3.x の動作との互換性をできます。
+* ``Cake\Http\Response::getCookie()`` によって返される配列キーが変更されました。
+  ``expire`` が ``expires`` に、 ``httpOnly`` が ``httponly`` に変わりました。
