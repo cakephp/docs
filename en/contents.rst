@@ -81,12 +81,12 @@ Contents
     :maxdepth: 3
     :caption: Plugins
 
-    Authorization <https://book.cakephp.org/authorization/>
-    Authentication <https://book.cakephp.org/authentication/>
-    Bake <https://book.cakephp.org/bake/>
-    Chronos <https://book.cakephp.org/chronos/>
-    Debug Kit <https://book.cakephp.org/debugkit/>
-    Migrations <https://book.cakephp.org/migrations/>
+    Authorization <https://book.cakephp.org/authorization/1/en/>
+    Authentication <https://book.cakephp.org/authentication/1/en/>
+    Bake <https://book.cakephp.org/bake/1/en/>
+    Chronos <https://book.cakephp.org/chronos/1/en/>
+    Debug Kit <https://book.cakephp.org/debugkit/3/en/>
+    Migrations <https://book.cakephp.org/migrations/2/en/>
     Elasticsearch <https://book.cakephp.org/elasticsearch/2/en/>
     upgrade-tool
 
