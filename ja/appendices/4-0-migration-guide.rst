@@ -226,3 +226,36 @@ ORM
   ``null`` と比較するときは、 ``['name IS' => null]`` のような ``IS`` 演算子を使用する必要があります。
 * false ではなく、エンティティーではない結果で、 ``Model.beforeSave`` イベントを停止すると、例外が発生します。
   この変更により、 ``Table::save()`` は常にエンティティーまたは false を返します。
+
+Router
+------
+
+* ``Router::prefix()`` および ``$routes->prefix()`` で生成されたルーティングプレフィックスは、
+  アンダースコアーではなく、キャメルケースになりました。``my_admin`` の代わりに、 ``MyAdmnin`` を使用する必要があります。
+  この変更により、プレフィックスが他のルーティングパラメーターで正規化され、語尾変化のオーバーヘッドが削除されます。
+* ``RouteBuilder::resources()`` は、 URL でデフォルトで下線が引かれる代わりに、リソース名をダッシュ形式に反映します。
+  ``$options`` 引数で、 ``'inflect'' => 'underscore'`` を使用することで、下線付きの変化形を保持できます。
+* ``Router::plugin()`` および ``Router::prefix()`` は、デフォルトで URL のダッシュ形式のプラグイン/プレフィックス名を
+  使用するようになりました。``$options`` 引数で、 ``'path'`` キーを使用して、下線（または他のカスタムパス）を保持できます。
+* ``Router`` は、リクエストのスタックではなく、リクエストの単一インスタンスのみへの参照を維持します。
+  ``Router::pushRequest()`` 、 ``Router::setRequestInfo()`` および ``Router::setRequestContext()`` は削除されました。
+  代わりに、 ``Router::setRequest()`` を使用してください。
+  ``Router::popRequest()`` は削除されました。``Router::getRequest()`` には、 ``$current`` 引数がなくなりました。
+
+TestSuite
+---------
+
+* ``Cake\TestSuite\TestCase::$fixtures`` は、コンマ区切りの文字列にすることができなくなりました。配列でなければなりません。
+
+Utility
+-------
+
+* ``Cake\Utility\Xml::fromArray()`` は ``$options`` パラメーターの配列を必要とします。
+* ``Cake\Filesystem\Folder::copy($to, array $options = [])`` および
+  ``Cake\Filesystem\Folder::move($to, array $options = [])`` には、
+  最初の引数として抽出されたターゲットパスがあります。
+* ``Xml::build()`` の ``readFile`` オプションは、デフォルトで true ではなくなりました。
+  代わりに、ローカルファイルを読み取るために、 ``readFile`` を有効にする必要があります。
+* ``Hash::sort()`` は、方向パラメーターで ``SORT_ASC`` および ``SORT_DESC`` 定数を受け入れるようになりました。
+* ``Inflector::pluralize()`` は ``index`` を ``indices`` ではなく ``indexes`` に反映するようになりました。
+  これは、この複数形のコアおよびエコシステムでの技術的な使用を反映しています。
