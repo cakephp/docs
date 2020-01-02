@@ -345,6 +345,12 @@ Helper
 * The ``safe`` option for ``HtmlHelper::scriptBlock()`` and ``HtmlHelper::scriptStart()``
   has been removed. When enabled it generated ``CDATA`` tags which are only required
   for XHTML which is now defunct.
+  
+Log
+---
+* Logging related methods like ``Cake\Log\LogTrait::log()``, ``Cake\Log\Log::write()`` etc.
+  now only accept string for ``$message`` argument. This change was necessary to align the
+  API with `PSR-3 <https://www.php-fig.org/psr/psr-3/>` standard.
 
 Miscellaneous
 -------------
