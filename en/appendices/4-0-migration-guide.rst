@@ -348,9 +348,10 @@ Helper
   
 Log
 ---
+
 * Logging related methods like ``Cake\Log\LogTrait::log()``, ``Cake\Log\Log::write()`` etc.
   now only accept string for ``$message`` argument. This change was necessary to align the
-  API with `PSR-3 <https://www.php-fig.org/psr/psr-3/>__` standard.
+  API with `PSR-3 <https://www.php-fig.org/psr/psr-3/>`__ standard.
 
 Miscellaneous
 -------------

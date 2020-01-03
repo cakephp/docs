@@ -305,6 +305,13 @@ Helper
 * ``HtmlHelper::scriptBlock()`` および ``HtmlHelper::scriptStart()`` の ``safe`` オプションが削除されました。
   有効にすると、現在無効になっている XHTML のみに必要な ``CDATA`` タグを生成します。
 
+Log
+---
+
+* ``Cake\Log\LogTrait::log()`` および ``Cake\Log\Log::write()`` などのログ関連メソッドは、
+  ``$message`` 引数に文字列のみを受け入れるようになりました。
+  この変更は、 API を `PSR-3 <https://www.php-fig.org/psr/psr-3/>`__ 標準に合わせるために必要でした。
+
 その他
 ------
 
