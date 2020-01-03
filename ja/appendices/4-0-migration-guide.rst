@@ -318,3 +318,19 @@ Helper
 * CakePHP にバンドルされていた ``cacert.pem`` ファイルは、
   `composer/ca-bundle <https://packagist.org/packages/composer/ca-bundle>__` への依存関係に
   置き換えられました。
+
+
+新機能
+======
+
+Console
+-------
+
+* コマンドクラスは、 ``defaultName()`` メソッドを実装して、慣習に基づいた CLI 名を上書きできます。
+
+Core
+----
+
+* ``InstanceConfigTrait::getConfigOrFail()`` および ``StaticConfigTrait::getConfigOrFail()`` が追加されました。
+  他の ``orFail`` メソッドと同様に、これらのメソッドは要求されたキーが存在しないか
+  ``null`` 値を持っている場合に例外を発生させます。

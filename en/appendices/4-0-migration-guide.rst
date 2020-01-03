@@ -382,7 +382,6 @@ Core
   methods these methods will raise an exception when the requested key doesn't
   exist or has a ``null`` value.
 
-
 Database
 --------
 
