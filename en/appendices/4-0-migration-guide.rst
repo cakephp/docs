@@ -350,9 +350,10 @@ Helper
 
 Miscellaneous
 -------------
+
 * Your app's ``config/bootstrap.php`` should now contain a call to ``Router::fullBaseUrl()``.
-  Consult the lastest skeleton app's ``bootstrap.php`` and update accordingly.
-* ``App::path()`` now uses ``$type`` ``templates`` instead of ``Template`` to
+  Consult the latest skeleton app's ``bootstrap.php`` and update accordingly.
+* ``App::path()`` now uses ``$type`` and ``templates`` instead of ``Template`` to
   get templates path. Similarly ``locales`` is used instead of ``Locale`` to
   get path to locales folder.
 * ``ObjectRegistry::get()`` now throws exception if object with provided name is not loaded.

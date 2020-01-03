@@ -280,3 +280,41 @@ View
 * ``Cake\View\View`` は、 ``render()`` が複数回呼び出された場合、 ``null`` を返す代わりに再描画します。
 * 定数 ``View::NAME_ELEMENT`` と ``View::NAME_LAYOUT`` は削除されました。
   ``View::TYPE_ELEMENT`` と ``View::TYPE_LAYOUT`` が使用できます。
+
+Helper
+------
+
+* ``Cake\View\Helper\PaginatorHelper::hasPage()`` の引数が逆になっています。
+  これにより、 'model' が第 2 引数である他のページネーターメソッドとの一貫性が保たれます。
+* ``Cake\View\Helper\UrlHelper::build()`` は第 2 引数にブール値を受け入れなくなりました。
+  代わりに、 ``['fullBase' => true]`` を使用しなければなりません。
+* コンテキスト無しでフォームを作成するには、 ``FormHelper::create()`` の最初の引数として、
+  ``null`` のみを使用する必要があります。コンテキストを推測できない他の値を渡すと、例外がスローされます。
+* ``Cake\View\Helper\FormHelper`` および ``Cake\View\Helper\HtmlHelper`` は、 HTML データ属性
+  ``data-confirm-message`` を使用して、 ``confirm``オプションをもつメソッドの確認メッセージを保持するようになりました。
+* ``Cake\View\Helper\FormHelper::button()`` は、 HTML エンティティーがデフォルトで、ボタンテキストと
+  HTML 属性 をエンコードするようになりました。新しいオプション ``escapeTitle`` が追加され、
+  他の HTML 属性とは別にタイトルのエスケープを制御できるようになりました。
+* ``Cake\View\Helper\SecureFieldTokenTrait`` が削除されました。
+  そのフォームトークンデータ構築機能は、内部クラス ``FormProtector`` に含まれるようになりました。
+* ``HtmlHelper::docType()`` メソッドが削除されました。HTML4 および XHTML は廃止され、
+  HTML5 の doctype は非常に短く、直接入力するのが簡単です。
+* ``HtmlHelper::scriptBlock()`` および ``HtmlHelper::scriptStart()`` の ``safe`` オプションが削除されました。
+  有効にすると、現在無効になっている XHTML のみに必要な ``CDATA`` タグを生成します。
+
+その他
+------
+
+* アプリケーションの ``config/bootstrap.php`` には、 ``Router::fullBaseUrl()`` への呼び出しを含めてください。
+  最新のスケルトンアプリケーションの ``bootstrap.php`` を参照し、それに応じて更新します。
+* ``App::path()`` は、 ``Template`` の代わりに ``$type`` および ``templates`` を使用して、
+  テンプレートへのパスを取得します。同様にロケールフォルダーのパスを取得するには、 ``Locale`` の代わりに
+  ``locales`` を使用します。
+* ``ObjectRegistry::get()`` は、指定された名前のオブジェクトがロードされていない場合、例外をスローするようになりました。
+  ``ObjectRegistry::has()`` を使用して、オブジェクトがレジストリーに存在することを確認する必要があります。
+  マジックゲッター ``ObjectRegistry::__get()`` は、指定された名前のオブジェクトがロードされない場合、
+  引き続き ``null`` を返します。
+* ロケールファイルは、 ``src/Locale`` から ``resources/locales`` に移動しました。
+* CakePHP にバンドルされていた ``cacert.pem`` ファイルは、
+  `composer/ca-bundle <https://packagist.org/packages/composer/ca-bundle>__` への依存関係に
+  置き換えられました。
