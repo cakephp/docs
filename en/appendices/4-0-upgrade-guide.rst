@@ -74,5 +74,3 @@ composer commands:
 
     php composer.phar require --update-with-dependencies "phpunit/phpunit:^8.0"
     php composer.phar require --update-with-dependencies "cakephp/cakephp:4.0.*"
-
-

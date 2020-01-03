@@ -56,12 +56,10 @@ View
 ----
 
 * The ``_serialize``, ``_jsonOptions`` and ``_jsonp`` special view variables of
-  ``JsonView`` are
-  now deprecated. Instead you should use
+  ``JsonView`` are now deprecated. Instead you should use
   ``viewBuilder()->setOption($optionName, $optionValue)`` to set these options.
 * The ``_serialize``, ``_rootNode`` and ``_xmlOptions`` special view variables of
-  ``XmlView`` are
-  now deprecated. Instead you should use
+  ``XmlView`` are now deprecated. Instead you should use
   ``viewBuilder()->setOption($optionName, $optionValue)`` to set these options.
 * ``HtmlHelper::tableHeaders()`` now prefers header cells with attributes to be
   defined as a nested list. e.g ``['Title', ['class' => 'special']]``.
@@ -188,6 +186,7 @@ Datasources
 
 Error
 -----
+
 * The internals of error handler classes ``BaseErrorHandler``, ``ErrorHandler``
   and ``ConsoleErrorHandler`` have changed. If you have extended these classes
   you should update them accordingly.
@@ -262,7 +261,7 @@ Router
 ------
 
 * Routing prefixes created through ``Router::prefix()`` and
-  ``$routes->prefix()``` are now CamelCased instead of under_scored. Instead of
+  ``$routes->prefix()`` are now CamelCased instead of under_scored. Instead of
   ``my_admin``, you need to use ``MyAdmin``. This change normalizes prefixes
   with other routing parameters and removes inflection overhead.
 * ``RouteBuilder::resources()`` now inflects resource names to dasherized form
@@ -285,6 +284,7 @@ TestSuite
 
 Utility
 -------
+
 * ``Cake\Utility\Xml::fromArray()`` now requires an array for the ``$options``
   parameter.
 * ``Cake\Filesystem\Folder::copy($to, array $options = [])`` and
@@ -348,15 +348,17 @@ Helper
   
 Log
 ---
+
 * Logging related methods like ``Cake\Log\LogTrait::log()``, ``Cake\Log\Log::write()`` etc.
   now only accept string for ``$message`` argument. This change was necessary to align the
-  API with `PSR-3 <https://www.php-fig.org/psr/psr-3/>__` standard.
+  API with `PSR-3 <https://www.php-fig.org/psr/psr-3/>`__ standard.
 
 Miscellaneous
 -------------
+
 * Your app's ``config/bootstrap.php`` should now contain a call to ``Router::fullBaseUrl()``.
-  Consult the lastest skeleton app's ``bootstrap.php`` and update accordingly.
-* ``App::path()`` now uses ``$type`` ``templates`` instead of ``Template`` to
+  Consult the latest skeleton app's ``bootstrap.php`` and update accordingly.
+* ``App::path()`` now uses ``$type`` and ``templates`` instead of ``Template`` to
   get templates path. Similarly ``locales`` is used instead of ``Locale`` to
   get path to locales folder.
 * ``ObjectRegistry::get()`` now throws exception if object with provided name is not loaded.
@@ -365,7 +367,7 @@ Miscellaneous
   with given name is not loaded.
 * Locale files have been moved from ``src/Locale`` to ``resources/locales``.
 * The ``cacert.pem`` file that was bundled in CakePHP has been replaced by
-  a dependency on `composer/ca-bundle <https://packagist.org/packages/composer/ca-bundle>__`.
+  a dependency on `composer/ca-bundle <https://packagist.org/packages/composer/ca-bundle>`__.
 
 
 New Features
@@ -384,7 +386,6 @@ Core
   ``StaticConfigTrait::getConfigOrFail()`` were added. Like other ``orFail``
   methods these methods will raise an exception when the requested key doesn't
   exist or has a ``null`` value.
-
 
 Database
 --------
@@ -423,10 +424,10 @@ Error
 Http
 ----
 
-*  You can use ``cakephp/http`` without including the entire framework.
+* You can use ``cakephp/http`` without including the entire framework.
 * CakePHP now supports the `PSR-15: HTTP Server Request Handlers
-  <https://www.php-fig.org/psr/psr-15/>`__ specification.  As a consequence the
-  middlewares now implement ``Psr\Http\Server\MiddlewareInterface``.  CakePHP
+  <https://www.php-fig.org/psr/psr-15/>`__ specification. As a consequence the
+  middlewares now implement ``Psr\Http\Server\MiddlewareInterface``. CakePHP
   3.x style invokable double pass middlewares are still supported for backwards
   compatibility.
 * ``Cake\Http\Client`` now follows `PSR-18: HTTP Client <https://www.php-fig.org/psr/psr-18/>`__ specifications.
@@ -440,6 +441,7 @@ Http
 
 I18n
 ----
+
 * ``Date`` and ``FrozenDate`` now respect the time zone parameter for
   various factory helpers like ``today('Asia/Tokyo')``.
 
@@ -460,7 +462,7 @@ ORM
 * ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been added for removing many
   entities at once including callbacks. The entities are removed transaction safe.
 * ``Table::newEmptyEntity()`` has been added to create a new and empty entity
-  object.  This does not trigger any field validation. The entity can be
+  object. This does not trigger any field validation. The entity can be
   persisted without validation error as an empty record.
 * ``Cake\ORM\RulesChecker::isLinkedTo()`` and ``isNotLinkedTo()`` were added.
   These new application rules allow you to ensure an association has or doesn't
@@ -506,6 +508,6 @@ View
   `Shim plugin <https://github.com/dereuromark/cakephp-shim>`__ with the old
   behavior/generation (4.x branch).
 * ``FormHelper`` now sets the default step size to seconds for ``datetime``
-  widgets with a time component.  The default is milliseconds if the field
+  widgets with a time component. The default is milliseconds if the field
   is from the new ``datetimefractional`` or ``timestampfractional`` database
   types.
