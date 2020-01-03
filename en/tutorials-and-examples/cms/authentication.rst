@@ -10,7 +10,7 @@ basic access control to the article creation & editing experiences.
 Installing Authentication Plugin
 ================================
 
-Use composer to install the Authentication Plugin::
+Use composer to install the Authentication Plugin:
 
 .. code-block:: bash
 
@@ -20,7 +20,7 @@ Use composer to install the Authentication Plugin::
 Adding Password Hashing
 -----------------------
 
-We will assume you have created the ``Controller``, ``Table``, ``Entity`` and
+You need to have created the ``Controller``, ``Table``, ``Entity`` and
 templates for the ``users`` table in your database. You can do this manually
 like you did before for the ArticlesController, or you can use the bake shell
 to generate the classes for you using ``bin/cake bake all users``.
@@ -70,8 +70,8 @@ You can edit the default user that was created during
 you should see a hashed password instead of the original value on the list or
 view pages. CakePHP hashes passwords with `bcrypt
 <http://codahale.com/how-to-safely-store-a-password/>`_ by default. We recommend
-bcrypt for all new applications to keep your security standards high. Note this
-is the `recommended password hash algorithm for PHP <https://www.php.net/manual/en/function.password-hash.php>`_ too.
+bcrypt for all new applications to keep your security standards high. This
+is the `recommended password hash algorithm for PHP <https://www.php.net/manual/en/function.password-hash.php>`_.
 
 .. note::
 
@@ -189,7 +189,7 @@ In your UsersController, add the following code::
             $redirect = $this->request->getQuery('redirect', [
                 'controller' => 'Pages',
                 'action' => 'display',
-                'home'
+                'home',
             ]);
 
             return $this->redirect($redirect);
@@ -216,13 +216,13 @@ Add the template logic for your login action::
     </div>
 
 Now login page will allow us to correctly login into the application.
-Test it by requesting any page of your site and after being redirected
-to the ``/users/login`` page and entering the email and password you
+Test it by requesting any page of your site. After being redirected
+to the ``/users/login`` page, enter the email and password you
 picked previously when creating your user. You should be redirected
 successfully after login.
 
 We need to add a couple more details to configure our application.
-We want all ``view`` and ``index`` pages "public" so we'll add this specific
+We want all ``view`` and ``index`` pages accessible without logging in so we'll add this specific
 configuration in AppController::
 
     // in src/Controller/AppController.php
