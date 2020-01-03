@@ -17,8 +17,8 @@ CakePHP 4.0 には、重大な変更が含まれており、3.x リリースと�
 認証機能がスタンドアロンのプラグイン `Authentication
 <https://github.com/cakephp/authentication>`__ および
 `Authorization <https://github.com/cakephp/authorization>`__ に分割されました。
-以前の RssHelper は、同様の機能を持つスタンドアロンの `Feed plugin
-<https://github.com/dereuromark/cakephp-feed>`__ として見つけることができます。
+以前の RssHelper については、同様の機能を持つスタンドアロンの `Feed plugin
+<https://github.com/dereuromark/cakephp-feed>`__ をご覧ください。
 
 非推奨
 ======
