@@ -359,3 +359,41 @@ Database
 * SqlServer スキーマは、 SYSDATETIME() などの関数を含むデフォルト値をサポートするようになりました。
 * 抽象型 ``datetimetimezone`` および ``timestamptimezone`` が追加されました。
   このタイプは、タイムゾーンをサポートするカラムデータ型を処理します。
+
+Error
+-----
+
+* 接頭辞付きのコントローラーアクションによってエラーが発生した場合、
+  ``ErrorController`` は接頭辞付きのエラーテンプレートがある場合は、それを利用します。
+  この動作は ``debug`` がオフの場合にのみ適用されます。
+
+Http
+----
+
+* フレームワーク全体を含めずに ``cakephp/http`` を使用できます。
+* CakePHP は `PSR-15: HTTP Server Request Handlers
+  <https://www.php-fig.org/psr/psr-15/>`__ の仕様をサポートするようになりました。
+  結果としてミドルウェアは ``Psr\Http\Server\MiddlewareInterface`` を実装するようになりました。
+  CakePHP 3.x スタイルの呼び出し可能なダブルパスミドルウェアは、後方互換性のために引き続きサポートされています。
+* ``Cake\Http\Client`` は `PSR-18: HTTP Client <https://www.php-fig.org/psr/psr-18/>`__
+  の仕様に準拠するようになりました。
+* ``Cake\Http\Client\Response::isSuccess()`` が追加されました。このメソッドは、
+  レスポンスステータスコードが 2xx の場合 true を返します。
+* ``CspMiddleware`` が追加され、コンテンツセキュリティポリシーヘッダーの定義がより簡単になりました。
+* ``HttpsEnforcerMiddleware`` が追加されました。これにより ``SecureComponent`` の ``requireSecure`` 機能が
+  置き換えられました。
+* Cookie は``SameSite`` 属性をサポートするようになりました。
+
+I18n
+----
+
+* ``Date`` および ``FrozenDate`` は、 ``today('Asia/Tokyo')`` のようなさまざまなファクトリーヘルパーの
+  タイムゾーンパラメーターを尊重するようになりました。
+
+Mailer
+------
+
+* メールメッセージ生成の責務は ``Cake\Mailer\Renderer`` に移されました。
+  これは主にアーキテクチャーの変更であり、 ``Email`` クラスの使用方法には影響しません。
+  唯一の違いは、テンプレート変数を設定するために ``Email::set()`` の代わりに ``Email::setViewVars()``
+  を使用する必要があることです。

@@ -419,10 +419,10 @@ Error
 Http
 ----
 
-*  You can use ``cakephp/http`` without including the entire framework.
+* You can use ``cakephp/http`` without including the entire framework.
 * CakePHP now supports the `PSR-15: HTTP Server Request Handlers
-  <https://www.php-fig.org/psr/psr-15/>`__ specification.  As a consequence the
-  middlewares now implement ``Psr\Http\Server\MiddlewareInterface``.  CakePHP
+  <https://www.php-fig.org/psr/psr-15/>`__ specification. As a consequence the
+  middlewares now implement ``Psr\Http\Server\MiddlewareInterface``. CakePHP
   3.x style invokable double pass middlewares are still supported for backwards
   compatibility.
 * ``Cake\Http\Client`` now follows `PSR-18: HTTP Client <https://www.php-fig.org/psr/psr-18/>`__ specifications.
@@ -436,6 +436,7 @@ Http
 
 I18n
 ----
+
 * ``Date`` and ``FrozenDate`` now respect the time zone parameter for
   various factory helpers like ``today('Asia/Tokyo')``.
 
