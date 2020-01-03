@@ -60,7 +60,7 @@ View
 * ``ContextInterface::primaryKey()`` は ``ContextInterface::getPrimaryKey()`` に名前が変更されました。
 
 Mailer
------
+------
 
 * ``Cake\Mailer\Email`` クラスは非推奨になります。代わりに、 ``Cake\Mailer\Mailer`` を使用してください。
 
@@ -293,7 +293,7 @@ Helper
 * コンテキスト無しでフォームを作成するには、 ``FormHelper::create()`` の最初の引数として、
   ``null`` のみを使用する必要があります。コンテキストを推測できない他の値を渡すと、例外がスローされます。
 * ``Cake\View\Helper\FormHelper`` および ``Cake\View\Helper\HtmlHelper`` は、 HTML データ属性
-  ``data-confirm-message`` を使用して、 ``confirm``オプションをもつメソッドの確認メッセージを保持するようになりました。
+  ``data-confirm-message`` を使用して、 ``confirm`` オプションを持つメソッドの確認メッセージを保持するようになりました。
 * ``Cake\View\Helper\FormHelper::button()`` は、 HTML エンティティーがデフォルトで、ボタンテキストと
   HTML 属性 をエンコードするようになりました。新しいオプション ``escapeTitle`` が追加され、
   他の HTML 属性とは別にタイトルのエスケープを制御できるようになりました。
