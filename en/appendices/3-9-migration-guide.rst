@@ -48,6 +48,11 @@ Datasource
   ``count()`` query. If you only use 'next' and 'previous' navigation in
   your pagination controls this class can be a good solution.
 
+Http
+----
+
+* ``Cake\Http\Client\Response::isSuccess()`` was backported from 4.0
+
 I18n
 ----
 
