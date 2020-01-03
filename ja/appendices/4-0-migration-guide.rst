@@ -46,15 +46,15 @@ ORM
 
 * ``Entity::isNew()`` をセッターとして使うことは非推奨です。代わりに ``setNew()`` を使用してください。
 * ``Entity::unsetProperty()`` は、他のメソッドに合わせて ``Entity::unset()`` に名前が変更されました。
-* ``TableSchemaInterface::primaryKey() は ``TableSchemaInterface::getPrimaryKey()``
+* ``TableSchemaInterface::primaryKey()`` は ``TableSchemaInterface::getPrimaryKey()``
   に名前が変更されました。
 
 View
 ----
 
-* ``JsonView``の特殊なビュー変数 ``_serialize`` 、 ``_jsonOptions`` および ``_jsonp`` は非推奨になりました。
+* ``JsonView`` の特別なビュー変数 ``_serialize`` 、 ``_jsonOptions`` および ``_jsonp`` は非推奨になりました。
   代わりに、 ``viewBuilder()->setOption($optionName, $optionValue)`` を、それらのオプションを設定するために使用してください。
-* ``XmlView`` の特殊なビュー変数 ``_serialize`` 、 ``_rootNode`` および ``_xmlOptions`` は非推奨になりました。
+* ``XmlView`` の特別なビュー変数 ``_serialize`` 、 ``_rootNode`` および ``_xmlOptions`` は非推奨になりました。
   代わりに、 ``viewBuilder()->setOption($optionName, $optionValue)`` を、それらのオプションを設定するために使用してください。
 * ``HtmlHelper::tableHeaders()`` は、ネストされたリストとして定義される属性を持つヘッダーセルを優先するようになりました。
   例: ``['Title', ['class' => 'special']]``
@@ -103,7 +103,7 @@ Component
 * ``Cake\Controller\Component\RequestHandlerComponent`` は、リクエストパラメーターではなくリクエスト属性として、
   ``isAjax`` を設定するようになりました。したがって、 ``$request->getParam('isAjax')`` の代わりに
   ``$request->getAttribute('isAjax')`` を使用する必要があります。
-* ``RequestHandlerComponent`` の入力データ解析機能は削除され、非推奨の警告を発します。
+* ``RequestHandlerComponent`` の入力データー解析機能は削除され、非推奨の警告を発します。
   代わりに、 :ref:`body-parser-middleware` を使用する必要があります。
 * ``Cake\Controller\Component\PagingComponent`` は、リクエストパラメーターではなくリクエスト属性として、
   ページングパラメーター情報を設定するようになりました。したがって、 ``$request->getParam('paging')`` の代わりに、
@@ -319,8 +319,8 @@ Helper
   引き続き ``null`` を返します。
 * ロケールファイルは、 ``src/Locale`` から ``resources/locales`` に移動しました。
 * CakePHP にバンドルされていた ``cacert.pem`` ファイルは、
-  `composer/ca-bundle <https://packagist.org/packages/composer/ca-bundle>__` への依存関係に
-  置き換えられました。
+  `composer/ca-bundle <https://packagist.org/packages/composer/ca-bundle>__`
+  への依存関係に置き換えられました。
 
 
 新機能
@@ -348,13 +348,13 @@ Database
 * ``Cake\Database\Log\LoggedQuery`` は ``JsonSerializable`` を実装するようになりました。
 * ``Cake\Database\Connection`` で PSR-3 のロガーを使用できるようになりました。
   その結果、スタンドアロンのデータベースパッケージを使用しているユーザーは、
-  ロギングに ``cakephp/log`` パッケージを使用することが強制されなくなりました。
+  ロギングに ``cakephp/log`` パッケージを使用することを強制されなくなりました。
 * ``Cake\Database\Connection`` で PSR-16 のキャッシャー を使用できるようになりました。
   その結果、スタンドアロンのデータベースパッケージを使用しているユーザーは、
-  キャッシングに ``cakephp/cache`` パッケージを使用することが強制されなくなりました。
+  キャッシングに ``cakephp/cache`` パッケージを使用することを強制されなくなりました。
   新しいメソッド ``Cake\Database\Connection::setCache()`` および ``Cake\Database\Connection::getCache()`` が追加されました。
 * ``Cake\Databases\ConstraintsInterface`` が ``Cake\Datasource\FixtureInterface`` から抽出されました。
-  このインターフェースは、制約をサポートするフィクスチャ実装によって実装する必要があります。
+  このインターフェースは、制約をサポートするフィクスチャー実装によって実装する必要があります。
   これは、私たちの経験からは一般にリレーショナルデータベースです。
 * 抽象型 ``char`` が追加されました。このタイプは、固定長の文字列カラムを処理します。
 * 抽象型 ``datetimefractional`` および ``timestampfractional`` が追加されました。
@@ -385,7 +385,7 @@ Http
 * ``CspMiddleware`` が追加され、コンテンツセキュリティポリシーヘッダーの定義がより簡単になりました。
 * ``HttpsEnforcerMiddleware`` が追加されました。これにより ``SecureComponent`` の ``requireSecure`` 機能が
   置き換えられました。
-* Cookie は``SameSite`` 属性をサポートするようになりました。
+* Cookie は ``SameSite`` 属性をサポートするようになりました。
 
 I18n
 ----
