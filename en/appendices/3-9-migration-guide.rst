@@ -52,6 +52,7 @@ Http
 ----
 
 * ``Cake\Http\Client\Response::isSuccess()`` was backported from 4.0
+* ``Cake\Http\Middleware\CspMiddleware`` was backported from 4.0
 
 I18n
 ----
