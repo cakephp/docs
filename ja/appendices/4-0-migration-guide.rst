@@ -334,3 +334,28 @@ Core
 * ``InstanceConfigTrait::getConfigOrFail()`` および ``StaticConfigTrait::getConfigOrFail()`` が追加されました。
   他の ``orFail`` メソッドと同様に、これらのメソッドは要求されたキーが存在しないか
   ``null`` 値を持っている場合に例外を発生させます。
+
+Database
+--------
+
+* データベースのタイムゾーンが PHP のタイムゾーンと一致しない場合は、 ``DateTime::setDatabaseTimezone()`` を使用できます。
+  詳しくは、 :ref:`datetime-type` をご覧ください。
+* ``DateTime::setKeepDatabaseTimezone()`` により、クエリーによって生成された DateTime オブジェクトに、
+  データベースのタイムゾーンを保持できます。
+* ``Cake\Database\Log\LoggedQuery`` は ``JsonSerializable`` を実装するようになりました。
+* ``Cake\Database\Connection`` で PSR-3 のロガーを使用できるようになりました。
+  その結果、スタンドアロンのデータベースパッケージを使用しているユーザーは、
+  ロギングに ``cakephp/log`` パッケージを使用することが強制されなくなりました。
+* ``Cake\Database\Connection`` で PSR-16 のキャッシャー を使用できるようになりました。
+  その結果、スタンドアロンのデータベースパッケージを使用しているユーザーは、
+  キャッシングに ``cakephp/cache`` パッケージを使用することが強制されなくなりました。
+  新しいメソッド ``Cake\Database\Connection::setCache()`` および ``Cake\Database\Connection::getCache()`` が追加されました。
+* ``Cake\Databases\ConstraintsInterface`` が ``Cake\Datasource\FixtureInterface`` から抽出されました。
+  このインターフェースは、制約をサポートするフィクスチャ実装によって実装する必要があります。
+  これは、私たちの経験からは一般にリレーショナルデータベースです。
+* 抽象型 ``char`` が追加されました。このタイプは、固定長の文字列カラムを処理します。
+* 抽象型 ``datetimefractional`` および ``timestampfractional`` が追加されました。
+  このタイプは、秒の小数部を持つカラムデータ型を処理します。
+* SqlServer スキーマは、 SYSDATETIME() などの関数を含むデフォルト値をサポートするようになりました。
+* 抽象型 ``datetimetimezone`` および ``timestamptimezone`` が追加されました。
+  このタイプは、タイムゾーンをサポートするカラムデータ型を処理します。
