@@ -259,3 +259,24 @@ Utility
 * ``Hash::sort()`` は、方向パラメーターで ``SORT_ASC`` および ``SORT_DESC`` 定数を受け入れるようになりました。
 * ``Inflector::pluralize()`` は ``index`` を ``indices`` ではなく ``indexes`` に反映するようになりました。
   これは、この複数形のコアおよびエコシステムでの技術的な使用を反映しています。
+
+View
+----
+
+* テンプレートは、 app や plugin ルート上の ``src/Template/`` から ``templates/`` フォルダーへ移動されました。
+  この変更により、 ``src`` フォルダーには、 composer のオートローダーを介して
+  オートロードされるクラスを持つファイルのみが含まれるようになりました。
+* ``Cell`` 、 ``Element`` 、 ``Email`` および ``Plugin`` といった特別なテンプレートフォルダーは、
+  それぞれ小文字の ``cell`` 、 ``element`` 、 ``email`` および ``plugin`` に名前が変更されました。
+  これにより、特別なフォルダーとアプリケーションのコントローラー名に対応する ``CamelCase`` 形式のフォルダーを
+  視覚的に区別しやすくなります。
+* テンプレートの拡張子も、 ``.ctp`` から ``.php`` に変更されました。
+  特別な拡張子は、実際の利点を提供せず、代わりに、 ``.ctp`` 拡張子を持つファイルを PHP ファイルとして認識するように
+  エディターや IDE を設定する必要がありました。
+* ``ViewBuilder::setLayout()`` または ``View::setLayout()`` の引数として ``false`` を使用して、
+  ``View::$layout`` プロパティを ``false`` に設定することはできなくなりました。
+  代わりに、 ``ViewBuilder::disableAutoLayout()`` や ``View::disableAutoLayout()`` を使用して、
+  レイアウトなしでビューテンプレートを描画します。
+* ``Cake\View\View`` は、 ``render()`` が複数回呼び出された場合、 ``null`` を返す代わりに再描画します。
+* 定数 ``View::NAME_ELEMENT`` と ``View::NAME_LAYOUT`` は削除されました。
+  ``View::TYPE_ELEMENT`` と ``View::TYPE_LAYOUT`` が使用できます。
