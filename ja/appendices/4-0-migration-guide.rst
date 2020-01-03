@@ -397,3 +397,56 @@ Mailer
   これは主にアーキテクチャーの変更であり、 ``Email`` クラスの使用方法には影響しません。
   唯一の違いは、テンプレート変数を設定するために ``Email::set()`` の代わりに ``Email::setViewVars()``
   を使用する必要があることです。
+
+ORM
+---
+
+* ``Table::saveManyOrFail()`` メソッドが追加され、エラーの場合に失敗した特定のエンティティーで
+  ``PersistenceFailedException`` をスローします。
+* コールバックを含む多くのエンティティーを一度に削除するための ``Table::deleteMany()``
+  および ``Table::deleteManyOrFail()`` メソッドが追加されました。
+  エンティティーはトランザクションセーフで削除されます。
+* 新しい空のエンティティーオブジェクトを作成するために ``Table::newEmptyEntity()`` が追加されました。
+  これはフィールドバリデーションをトリガーしません。
+  エンティティは、空のレコードとして検証エラーなしで永続化できます。
+* ``Cake\ORM\RulesChecker::isLinkedTo()`` および ``isNotLinkedTo()`` が追加されました。
+  これらの新しいアプリケーションルールを使用すると、関連付けがあるかもしくは関連レコードがあるかどうかを確認できます。
+* 新しい型クラス ``DateTimeFractionalType`` がマイクロ秒精度の日付型として追加されました。
+  この型をデフォルトの ``datetime`` 型として ``TypeFactory`` に追加するか、個々のカラムに再マッピングすることで、
+  この型の使用を選択できます。このタイプをデータベースタイプに自動的にマッピングする方法については、
+  Database migration notes を参照してください。
+* タイムゾーンをサポートする日時型に、新しい型クラス ``DateTimeTimezoneType`` が追加されました。
+  この型をデフォルトの ``datetime`` 型として ``TypeFactory`` に追加するか、個々のカラムに再マッピングすることで、
+  この型の使用を選択できます。このタイプをデータベースタイプに自動的にマッピングする方法については、
+  Database migration notes を参照してください。
+
+Routing
+-------
+
+* ``Cake\Routing\Asset`` が追加されました。このクラスは、 ``Router::url()`` と同等の静的インターフェースで、
+  アセットURL生成を公開します。詳しくは :ref:`asset-routing` をご覧ください。
+
+TestSuite
+---------
+
+* ``TestSite\EmailTrait::assertMailContainsAttachment()`` が追加されました。
+
+Validation
+----------
+
+* ``Validation::dateTime()`` がマイクロ秒を含む値を受け入れるようになりました。
+
+View
+----
+
+* ``FormHelper`` は、エンティティーの ORM テーブルクラスで "notEmpty" とマークされたフィールドの
+  HTML5 検証メッセージを生成するようになりました。この機能は ``autoSetCustomValidity``
+  クラス設定オプションで切り替えることができます。
+* ``FormHelper`` は、日時フィールドのネイティブ HTML5 入力タグを生成するようになりました。
+  詳しくは、 :ref:`Form Helper <create-datetime-controls>` ページを参照してください。
+  以前のマークアップを保持する必要がある場合は、シム化された FormHelper が
+  `Shim plugin <https://github.com/dereuromark/cakephp-shim>`__ にあり、
+  古い動作・生成が含まれています（4.x ブランチ）。
+* ``FormHelper`` は、時間コンポーネントを持つ ``datetime`` ウィジェットのデフォルトのステップサイズを
+  秒に設定するようになりました。フィールドが新しい ``datetimefractional`` もしくは ``timestampfractional``
+  データベースタイプからのものである場合、デフォルトはミリ秒です。

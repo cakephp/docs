@@ -457,7 +457,7 @@ ORM
 * ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been added for removing many
   entities at once including callbacks. The entities are removed transaction safe.
 * ``Table::newEmptyEntity()`` has been added to create a new and empty entity
-  object.  This does not trigger any field validation. The entity can be
+  object. This does not trigger any field validation. The entity can be
   persisted without validation error as an empty record.
 * ``Cake\ORM\RulesChecker::isLinkedTo()`` and ``isNotLinkedTo()`` were added.
   These new application rules allow you to ensure an association has or doesn't
@@ -503,6 +503,6 @@ View
   `Shim plugin <https://github.com/dereuromark/cakephp-shim>`__ with the old
   behavior/generation (4.x branch).
 * ``FormHelper`` now sets the default step size to seconds for ``datetime``
-  widgets with a time component.  The default is milliseconds if the field
+  widgets with a time component. The default is milliseconds if the field
   is from the new ``datetimefractional`` or ``timestampfractional`` database
   types.
