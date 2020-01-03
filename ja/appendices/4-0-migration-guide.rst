@@ -319,7 +319,7 @@ Helper
   引き続き ``null`` を返します。
 * ロケールファイルは、 ``src/Locale`` から ``resources/locales`` に移動しました。
 * CakePHP にバンドルされていた ``cacert.pem`` ファイルは、
-  `composer/ca-bundle <https://packagist.org/packages/composer/ca-bundle>__`
+  `composer/ca-bundle <https://packagist.org/packages/composer/ca-bundle>`__
   への依存関係に置き換えられました。
 
 
