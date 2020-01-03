@@ -6,9 +6,8 @@ CakePHP 4.0 には、重大な変更が含まれており、3.x リリースと�
 
 4.0.x にアップグレードするには、次の composer コマンドを実行してください。
 
-.. code-block:: bash
-
-    php composer.phar require --update-with-dependencies "cakephp/cakephp:4.0.*"
+4.0 にアップグレードする方法の段階的な手順については、
+:doc:`/appendices/4-0-upgrade-guide` を参照してください。
 
 非推奨機能の削除
 ================
@@ -46,6 +45,8 @@ ORM
 
 * ``Entity::isNew()`` をセッターとして使うことは非推奨です。代わりに ``setNew()`` を使用してください。
 * ``Entity::unsetProperty()`` は、他のメソッドに合わせて ``Entity::unset()`` に名前が変更されました。
+* ``TableSchemaInterface::primaryKey() は ``TableSchemaInterface::getPrimaryKey()``
+  に名前が変更されました。
 
 View
 ----
@@ -56,6 +57,7 @@ View
   代わりに、 ``viewBuilder()->setOption($optionName, $optionValue)`` を、それらのオプションを設定するために使用してください。
 * ``HtmlHelper::tableHeaders()`` は、ネストされたリストとして定義される属性を持つヘッダーセルを優先するようになりました。
   例: ``['Title', ['class' => 'special']]``
+* ``ContextInterface::primaryKey()`` は ``ContextInterface::getPrimaryKey()`` に名前が変更されました。
 
 Mailer
 -----
@@ -65,8 +67,8 @@ Mailer
 App
 ---
 
-* ``App::path()`` の2番目の引数 ``$plugin`` は非推奨です。プラグインパス用には、代わりに、
-  ``\Cake\Core\Plugin::classPath()/templatePath()`` を使用してください。
+* ``App::path()`` はクラスパスでは非推奨になりました。
+  代わりに ``\Cake\Core\App::classPath()`` を使用してください。
 
 破壊的変更
 ==========
@@ -76,7 +78,7 @@ App
 Cache
 -----
 
-* ``Cake\Cache\CacheEngine::gc()`` とこのメソッドのすべての実装が削除されました。
+* ``Cake\Cache\CacheEngine::gc()`` と、このメソッドのすべての実装が削除されました。
   このメソッドは、ほとんどのキャッシュドライバーでノーオペレーションであり、ファイルキャッシュでのみ使用されていました。
 
 Controller
@@ -92,7 +94,7 @@ Controller
 Console
 -------
 
-* ``ConsoleIo::styles()`` は ``getStyle()`` と ``setStyle()`` に分割されました。これは ``ConsoleOutput`` にも影響します。
+* ``ConsoleIo::styles()`` は ``getStyle()`` および ``setStyle()`` に分割されました。これは ``ConsoleOutput`` にも影響します。
 
 Component
 ---------
@@ -127,7 +129,7 @@ Database
   の内部実装が変更されました。これらのクラスを拡張する場合は、コードを更新する必要があります。
 * ``Cake\Database\Log\LoggingStatement`` 、 ``Cake\Database\QueryLogger`` および ``Cake\Database\Log\LoggedQuery``
   の内部実装が変更されました。これらのクラスを拡張する場合は、コードを更新する必要があります。
-* ``Cake\Database\Schema\CacheCollection`` と ``Cake\Database\SchemaCache`` の内部実装が変更されました。
+* ``Cake\Database\Schema\CacheCollection`` および ``Cake\Database\SchemaCache`` の内部実装が変更されました。
   これらのクラスを拡張する場合は、コードを更新する必要があります。
 * データべーススキーマは、 ``CHAR`` カラムを ``string`` ではなく、新しい ``char`` 型にマッピングするようになりました。
 * SqlServer の datetime カラムは、名前を一致させるために 'timestamp' ではなく 'datetime'
