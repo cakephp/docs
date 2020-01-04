@@ -258,7 +258,7 @@ ORM
   returns an entity or false.
 * Table will now throw an exception when aliases generated for the table name and column
   would be truncated by the database. This warns the user before hidden errors occur when
-  cakephp cannot match the alias in the result.
+  CakePHP cannot match the alias in the result.
 
 Router
 ------
