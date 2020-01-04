@@ -256,6 +256,9 @@ ORM
 * Stopping the ``Model.beforeSave`` event with a non-false, non-entity result
   will now raise an exception. This change ensures that ``Table::save()`` always
   returns an entity or false.
+* Table will now throw an exception when aliases generated for the table name and column
+  would be truncated by the database. This warns the user before hidden errors occur when
+  CakePHP cannot match the alias in the result.
 
 Router
 ------
