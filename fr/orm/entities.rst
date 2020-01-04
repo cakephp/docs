@@ -205,8 +205,8 @@ nom complet::
 
         protected function _getFullName()
         {
-            return $this->_properties['first_name'] . '  ' .
-                $this->_properties['last_name'];
+            return $this->_fields['first_name'] . '  ' .
+                $this->_fields['last_name'];
         }
 
     }
