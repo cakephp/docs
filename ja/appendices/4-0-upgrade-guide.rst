@@ -2,9 +2,9 @@
 ########################
 
 4.0 にアップグレードする前に、まず 3.8 にアップグレードしたことを確認してください。
-次に、非推奨の警告を有効にします。
+次に、非推奨の警告を有効にします。 ::
 
-    // in config/app.php
+    // config/app.php の中で
     'Error' => [
         'errorLevel' => E_ALL ^ E_USER_DEPRECATED,
     ]
@@ -22,7 +22,7 @@ PHP をアップグレードすることを推奨します。
 
 CakePHP 4 は、 strict モードを採用し、多くのタイプヒントを使用するため、
 メソッドシグネチャおよびファイル名の変更に関する後方互換性のない変更が多数あります。
-これらの退屈な変更を迅速に修正するために、アップグレード CLI ツールがあります。:
+これらの退屈な変更を迅速に修正するために、アップグレード CLI ツールがあります。
 
 .. warning::
     アップグレードツールは、アプリケーションの依存関係を 4.0 に更新する **前**
@@ -37,7 +37,7 @@ CakePHP 4 は、 strict モードを採用し、多くのタイプヒントを�
     git checkout 4.x
     composer install --no-dev
 
-アップグレードツールをインストールすると、アプリケーションまたはプラグインで実行できるようになります。:
+アップグレードツールをインストールすると、アプリケーションまたはプラグインで実行できるようになります。
 
 .. code-block:: bash
 
@@ -54,7 +54,7 @@ Rector によるリファクタリングを適用する
 ---------------------------------------
 
 次に、 ``rector`` コマンドを使用して、非推奨となった多くの CakePHP および PHPUnit のメソッド呼び出しを
-自動的に修正します。依存関係をアップグレードする **前** に、 rector を適用することが重要です。::
+自動的に修正します。依存関係をアップグレードする **前** に、 rector を適用することが重要です。 ::
 
     bin/cake upgrade rector --rules phpunit80 <path/to/app/tests>
     bin/cake upgrade rector --rules cakephp40 <path/to/app/src>
@@ -62,7 +62,8 @@ Rector によるリファクタリングを適用する
 CakePHP の依存関係をアップデートする
 ====================================
 
-Refactor によるリファクタリングを適用した後、下記の composer コマンドを使用して CakePHP と PHPUnit をアップデートします。:
+Refactor によるリファクタリングを適用した後、下記の composer コマンドを使用して CakePHP と PHPUnit をアップデートします。
+
 .. code-block:: bash
 
     php composer.phar require --update-with-dependencies "phpunit/phpunit:^8.0"
