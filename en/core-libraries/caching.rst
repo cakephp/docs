@@ -398,18 +398,15 @@ save multiple network connections when using Memcached::
 Clearing Cached Data
 ====================
 
-.. php:staticmethod:: clear($check, $config = 'default')
+.. php:staticmethod:: clear($config = 'default')
 
 Destroy all cached values for a cache configuration. In engines like: Apcu,
 Memcached, and Wincache, the cache configuration's prefix is used to remove
 cache entries. Make sure that different cache configurations have different
 prefixes::
 
-    // Will only clear expired keys.
-    Cache::clear(true);
-
     // Will clear all keys.
-    Cache::clear(false);
+    Cache::clear();
 
 .. note::
 
