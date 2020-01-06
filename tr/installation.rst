@@ -53,11 +53,11 @@ talimatlerı bulabilirsiniz.
 Şimdi Composer'i indirip kurduğunuza göre, taze bir CakePHP uygulamasını şu
 komutları çalıştırarak elde edebilirsiniz::
 
-    php composer.phar create-project --prefer-dist cakephp/app:^4.0 [app_name]
+    php composer.phar create-project --prefer-dist cakephp/app:4.* [app_name]
 
 Eğer composer tüm sistemde yüklü ise::
 
-    composer create-project --prefer-dist cakephp/app:^4.0 [app_name]
+    composer create-project --prefer-dist cakephp/app:4.* [app_name]
 
 Composer uygulama iskeletini ve çekirdek CakePHP kütüphanesini indirdiğinde,
 elinizde Composer ile yüklenmiş çalışan bir CakePHP uygulaması olacaktır.
