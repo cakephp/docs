@@ -3,9 +3,9 @@ CMS Tutorial - Authentication
 
 Now that our CMS has users, we can enable them to login using the
 `cakephp/authentication <https://book.cakephp.org/authentication/2>`__
-plugin. We are going to ensure passwords are stored securely in
-our database, we are going to provide a working login page, and apply some
-basic access control to the article creation & editing experiences.
+plugin. We'll start off by ensurin passwords are stored securely in
+our database. Then we are going to provide a working login and logout, and
+enable new users to register.
 
 Installing Authentication Plugin
 ================================
@@ -23,7 +23,11 @@ Adding Password Hashing
 You need to have created the ``Controller``, ``Table``, ``Entity`` and
 templates for the ``users`` table in your database. You can do this manually
 like you did before for the ArticlesController, or you can use the bake shell
-to generate the classes for you using ``bin/cake bake all users``.
+to generate the classes for you using: 
+
+.. code-block:: bash
+
+    bin/cake bake all users
 
 If you create or update a user with this setup, you might notice that
 the passwords are stored in plain text. This is really bad from a security point
