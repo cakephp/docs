@@ -36,7 +36,7 @@
 
 .. code-block:: bash
 
-    php composer.phar create-project --prefer-dist cakephp/app:^4.0 cms
+    php composer.phar create-project --prefer-dist cakephp/app:4.* cms
 
 
 如果你是下载使用的 `Composer Windows Installer
@@ -44,7 +44,7 @@
 
 .. code-block:: bash
 
-    composer self-update && composer create-project --prefer-dist cakephp/app:^4.0 cms
+    composer self-update && composer create-project --prefer-dist cakephp/app:4.* cms
 
 使用 Composer 的优势是它会自动完成一些重要的设置任务，比如建立合适的文件权限以及建立配置文件
  **config/app.php**。
