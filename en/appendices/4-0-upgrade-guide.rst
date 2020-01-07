@@ -52,7 +52,7 @@ plugin:
     bin/cake upgrade file_rename templates <path/to/app>
 
 Once you've renamed your template and locale files, make sure you update
-``App.paths.locales`` and ``App.paths.templates`` paths to be correct.
+``App.paths.locales`` and ``App.paths.templates`` (in ``/config/app.php``) paths to be correct.
 
 Applying Rector Refactorings
 ----------------------------
