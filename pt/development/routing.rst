@@ -472,9 +472,10 @@ o método de escopo ``prefix``::
 
     use Cake\Routing\Route\DashedRoute;
 
-    Router::prefix('admin', function ($routes) {
-        // Todas as rotas aqui serão prefixadas com `/ admin`
-        // e terão o elemento de rota prefix => admin adicionado.
+    Router::prefix('Admin', function ($routes) {
+        // Todas as rotas aqui serão prefixadas com `/admin`. Também
+        // será adicionado o elemento de rota `'prefix' => 'Admin'`,
+        // que será necessário ao gerar URLs para essas rotas
         $routes->fallbacks(DashedRoute::class);
     });
 
@@ -488,7 +489,7 @@ de visualização usado seria **src/Template/Admin/Users/edit.ctp**.
 
 Você pode mapear a URL /admin para sua ação ``index()`` do controlador de páginas usando a seguinte rota::
 
-    Router::prefix('admin', function ($routes) {
+    Router::prefix('Admin', function ($routes) {
         // Como você está no escopo do administrador,
         // não é necessário incluir o prefixo /admin
         // ou o elemento de rota do administrador.
@@ -497,16 +498,26 @@ Você pode mapear a URL /admin para sua ação ``index()`` do controlador de pá
 
 Ao criar rotas de prefixo, você pode definir parâmetros de rota adicionais usando o argumento ``$options``::
 
-    Router::prefix('admin', ['param' => 'value'], function ($routes) {
+    Router::prefix('Admin', ['param' => 'value'], function ($routes) {
         // As rotas conectadas aqui são prefixadas com '/admin' e
         // têm a chave de roteamento 'param' definida.
+        $routes->connect('/:controller');
+    });
+
+Os prefixos de várias palavras são convertidos por padrão usando inflexão dasherize,
+ou seja, ``MyPrefix`` seria mapeado para ``my-prefix`` na URL. Certifique-se de definir
+um caminho para esses prefixos se você quiser usar um formato diferente, como por
+exemplo, sublinhado::
+
+    Router::prefix('MyPrefix', ['path' => '/my_prefix'], function (RouteBuilder $routes) {
+        // As rotas conectadas aqui são prefixadas com '/my_prefix'
         $routes->connect('/:controller');
     });
 
 Você também pode definir prefixos dentro dos escopos de plugins::
 
     Router::plugin('DebugKit', function ($routes) {
-        $routes->prefix('admin', function ($routes) {
+        $routes->prefix('Admin', function ($routes) {
             $routes->connect('/:controller');
         });
     });
@@ -516,25 +527,26 @@ conectada teria os elementos de rota ``plugin`` e ``prefix`` definidos.
 
 Ao definir prefixos, você pode aninhar vários prefixos, se necessário::
 
-    Router::prefix('manager', function ($routes) {
-        $routes->prefix('admin', function ($routes) {
-            $routes->connect('/:controller');
+    Router::prefix('Manager', function ($routes) {
+        $routes->prefix('Admin', function ($routes) {
+            $routes->connect('/:controller/:action');
         });
     });
 
-O exemplo acima, criaria um modelo de rota como ``/manager/admin/:controller``. A rota
-conectada teria o elemento de rota ``prefix`` configurado como ``manager/admin``.
+O exemplo acima, criaria um modelo de rota como ``/manager/admin/:controller/:action``.
+A rota conectada teria o elemento de rota ``prefix`` configurado como ``Manager/Admin``.
 
 O prefixo atual estará disponível nos métodos do controlador através de
 ``$this->request->getParam('prefix')``.
 
-Ao usar rotas de prefixo, é importante definir a opção de prefixo. Veja como criar
-esse link usando o HTML Helper::
+Ao usar rotas de prefixo, é importante definir a opção ``prefix`` e usar o mesmo
+formato de camelo que é usado no método ``prefix()``. Veja como criar esse link
+usando o HTML Helper::
 
     // Entre em uma rota prefixada.
     echo $this->Html->link(
         'Manage articles',
-        ['prefix' => 'manager', 'controller' => 'Articles', 'action' => 'add']
+        ['prefix' => 'Manager/Admin', 'controller' => 'Articles', 'action' => 'add']
     );
 
     // Deixe um prefixo
@@ -548,6 +560,32 @@ esse link usando o HTML Helper::
     Você deve conectar rotas de prefixo *antes* de conectar rotas de fallback.
 
 .. index:: plugin routing
+
+Criando links para rotas de prefixo
+-----------------------------------
+
+Você pode criar links que apontam para um prefixo, adicionando a chave de prefixo
+à sua matriz de URL::
+
+    echo $this->Html->link(
+        'New admin todo',
+        ['prefix' => 'Admin', 'controller' => 'TodoItems', 'action' => 'create']
+    );
+
+Ao usar o aninhamento, você precisa encadeá-los::
+
+    echo $this->Html->link(
+        'New todo',
+        ['prefix' => 'Admin/MyPrefix', 'controller' => 'TodoItems', 'action' => 'create']
+    );
+
+Isso vincularia a um controlador com o namespace ``App\\Controller\\Admin\\MyPrefix``
+e o caminho do arquivo ``src/Controller/Admin/MyPrefix/TodoItemsController.php``.
+
+.. note::
+
+    O prefixo é sempre camel case aqui, mesmo que o resultado do roteamento seja
+    tracejado. A própria rota fará a inflexão, se necessário.
 
 Roteamento de Plugins
 ---------------------
@@ -573,7 +611,7 @@ Ao criar escopos de plug-in, você pode personalizar o caminho usando a opção 
 
 Ao usar escopos, você pode aninhar escopos de plug-ins dentro de escopos de prefixo::
 
-    Router::prefix('admin', function ($routes) {
+    Router::prefix('Admin', function ($routes) {
         $routes->plugin('DebugKit', function ($routes) {
             $routes->connect('/:controller');
         });
@@ -896,7 +934,7 @@ de recursos aninhados e não aninhados, poderá usar um controlador diferente em
 
     Router::scope('/api', function ($routes) {
         $routes->resources('Articles', function ($routes) {
-            $routes->resources('Comments', ['prefix' => 'articles']);
+            $routes->resources('Comments', ['prefix' => 'Articles']);
         });
     });
 

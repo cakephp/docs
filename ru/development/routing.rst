@@ -585,9 +585,10 @@ CakePHP какое ожидать имя контроллера.
 
     use Cake\Routing\Route\DashedRoute;
 
-    Router::prefix('admin', function (RouteBuilder $routes) {
-        // Все маршруты здесь будут иметь префикс `/admin`,
-        // и добавлять элемент prefix => admin маршрутизации.
+    Router::prefix('Admin', function (RouteBuilder $routes) {
+        // Все маршруты здесь будут иметь префикс `/admin`. Также будет
+        // добавлен элемент маршрута `'prefix' => 'Admin'`, который
+        // потребуется при создании URL-адресов для этих маршрутов.
         $routes->fallbacks(DashedRoute::class);
     });
 
@@ -604,7 +605,7 @@ CakePHP какое ожидать имя контроллера.
 Вы можете сопоставить URL ``/admin`` с вашим экшеном ``index()`` контроллера страниц,
 используя следующий маршрут::
 
-    Router::prefix('admin', function (RouteBuilder $routes) {
+    Router::prefix('Admin', function (RouteBuilder $routes) {
         // Поскольку вы находитесь в области администрирования,
         // вам не нужно включать префикс /admin или элемент маршрута admin.
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
@@ -613,16 +614,26 @@ CakePHP какое ожидать имя контроллера.
 При создании префиксных маршрутов вы можете установить дополнительные параметры
 маршрута с помощью аргумента ``$options``::
 
-    Router::prefix('admin', ['param' => 'value'], function ($routes) {
+    Router::prefix('Admin', ['param' => 'value'], function ($routes) {
         // Маршруты, связанные здесь, имеют
         // префикс '/admin' и имеют набор ключей 'param'.
+        $routes->connect('/:controller');
+    });
+
+Префиксы, состоящие из нескольких слов, по умолчанию преобразуются с использованием
+перегиба тире, то есть ``MyPrefix`` будет сопоставлен с ``my-prefix`` в URL.
+Обязательно укажите путь для таких префиксов если вы хотите использовать другой формат,
+например, подчеркивание::
+
+    Router::prefix('MyPrefix', ['path' => '/my_prefix'], function (RouteBuilder $routes) {
+        // Маршруты, связанные здесь, начинаются с префикса '/my_prefix'
         $routes->connect('/:controller');
     });
 
 Вы также можете определить префиксы внутри областей плагинов::
 
     Router::plugin('DebugKit', function ($routes) {
-        $routes->prefix('admin', function ($routes) {
+        $routes->prefix('Admin', function ($routes) {
             $routes->connect('/:controller');
         });
     });
@@ -632,24 +643,25 @@ CakePHP какое ожидать имя контроллера.
 
 При определении префиксов вы можете, при необходимости, вложить несколько префиксов::
 
-    Router::prefix('manager', function ($routes) {
-        $routes->prefix('admin', function ($routes) {
-            $routes->connect('/:controller');
+    Router::prefix('Manager', function ($routes) {
+        $routes->prefix('Admin', function ($routes) {
+            $routes->connect('/:controller/:action');
         });
     });
 
-Вышеизложенное создало бы шаблон маршрута, например ``/manager/admin/:controller``.
-Связанный маршрут будет иметь элемент маршрута ``prefix``, заданный ``manager/admin``.
+Вышеизложенное создало бы шаблон маршрута, например ``/manager/admin/:controller/:action``.
+Связанный маршрут будет иметь элемент маршрута ``prefix``, заданный ``Manager/Admin``.
 
 Текущий префикс будет доступен из методов контроллера через ``$this->request->getParam('prefix')``.
 
-При использовании префиксных маршрутов важно установить префиксную опцию. Вот как построить
-эту ссылку с помощью HTML-помощника::
+При использовании префиксных маршрутов важно установить опцию ``prefix`` и использовать
+тот же формат, что и в случае с верблюдом, который используется в методе ``prefix()``.
+Вот как построить эту ссылку с помощью HTML-помощника::
 
     // Перейдите в префиксный маршрут.
     echo $this->Html->link(
         'Manage articles',
-        ['prefix' => 'manager', 'controller' => 'Articles', 'action' => 'add']
+        ['prefix' => 'Manager/Admin', 'controller' => 'Articles', 'action' => 'add']
     );
 
     // Оставить префикс
@@ -663,6 +675,32 @@ CakePHP какое ожидать имя контроллера.
     Вы должны подключить префиксные маршруты **до** подключения резервных маршрутов.
 
 .. index:: plugin routing
+
+Создание ссылок на префиксные маршруты
+--------------------------------------
+
+Вы можете создавать ссылки, которые указывают на префикс, добавив ключ префикса
+в ваш массив URL::
+
+    echo $this->Html->link(
+        'New admin todo',
+        ['prefix' => 'Admin', 'controller' => 'TodoItems', 'action' => 'create']
+    );
+
+При использовании вложения вам нужно связать их вместе::
+
+    echo $this->Html->link(
+        'New todo',
+        ['prefix' => 'Admin/MyPrefix', 'controller' => 'TodoItems', 'action' => 'create']
+    );
+
+Это связывало бы контроллер с пространством имен ``App\\Controller\\Admin\\MyPrefix``
+и путем к файлу ``src/Controller/Admin/MyPrefix/TodoItemsController.php``.
+
+.. note::
+
+    Префикс здесь всегда указывается верблюжьим, даже если результат маршрутизации
+    пунктирный. Сам маршрут будет делать перегиб в случае необходимости.
 
 Маршрутизация плагинов
 ----------------------
@@ -690,7 +728,7 @@ CakePHP какое ожидать имя контроллера.
 При использовании областей видимости вы можете вставлять области плагинов в
 области префикса::
 
-    Router::prefix('admin', function ($routes) {
+    Router::prefix('Admin', function ($routes) {
         $routes->plugin('DebugKit', function ($routes) {
             $routes->connect('/:controller');
         });
@@ -1037,7 +1075,7 @@ DELETE      /recipes/123.format   RecipesController::delete(123)
 
     Router::scope('/api', function ($routes) {
         $routes->resources('Articles', function ($routes) {
-            $routes->resources('Comments', ['prefix' => 'articles']);
+            $routes->resources('Comments', ['prefix' => 'Articles']);
         });
     });
 

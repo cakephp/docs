@@ -594,9 +594,10 @@ can be enabled by using the ``prefix`` scope method::
 
     use Cake\Routing\Route\DashedRoute;
 
-    Router::prefix('admin', function (RouteBuilder $routes) {
-        // All routes here will be prefixed with `/admin`
-        // And have the prefix => Admin route element added.
+    Router::prefix('Admin', function (RouteBuilder $routes) {
+        // All routes here will be prefixed with `/admin`, and
+        // have the `'prefix' => 'Admin'` route element added that
+        // will be required when generating URLs for these routes
         $routes->fallbacks(DashedRoute::class);
     });
 
@@ -612,7 +613,7 @@ The view file used would be **templates/Admin/Users/edit.php**
 You can map the URL /admin to your ``index()`` action of pages controller using
 following route::
 
-    Router::prefix('admin', function (RouteBuilder $routes) {
+    Router::prefix('Admin', function (RouteBuilder $routes) {
         // Because you are in the admin scope,
         // you do not need to include the /admin prefix
         // or the Admin route element.
@@ -622,23 +623,25 @@ following route::
 When creating prefix routes, you can set additional route parameters using
 the ``$options`` argument::
 
-    Router::prefix('admin', ['param' => 'value'], function (RouteBuilder $routes) {
+    Router::prefix('Admin', ['param' => 'value'], function (RouteBuilder $routes) {
         // Routes connected here are prefixed with '/admin' and
         // have the 'param' routing key set.
         $routes->connect('/{controller}');
     });
 
-Make sure to set a path for multi word prefixes to keep the desired inflection::
+Multi word prefixes are by default converted using dasherize inflection, ie ``MyPrefix``
+would be mapped to ``my-prefix`` in the URL. Make sure to set a path for such prefixes
+if you want to use a different format like for example underscoring::
 
-    Router::prefix('my_prefix', ['path' => '/my-prefix'], function (RouteBuilder $routes) {
-        // Routes connected here are prefixed with '/my-prefix'
-        $routes->connect('/:controller');
+    Router::prefix('MyPrefix', ['path' => '/my_prefix'], function (RouteBuilder $routes) {
+        // Routes connected here are prefixed with '/my_prefix'
+        $routes->connect('/{controller}');
     });
 
 You can define prefixes inside plugin scopes as well::
 
     Router::plugin('DebugKit', function (RouteBuilder $routes) {
-        $routes->prefix('admin', function (RouteBuilder $routes) {
+        $routes->prefix('Admin', function (RouteBuilder $routes) {
             $routes->connect('/{controller}');
         });
     });
@@ -648,26 +651,27 @@ The connected route would have the ``plugin`` and ``prefix`` route elements set.
 
 When defining prefixes, you can nest multiple prefixes if necessary::
 
-    Router::prefix('manager', function (RouteBuilder $routes) {
-        $routes->prefix('admin', function (RouteBuilder $routes) {
-            $routes->connect('/{controller}');
+    Router::prefix('Manager', function (RouteBuilder $routes) {
+        $routes->prefix('Admin', function (RouteBuilder $routes) {
+            $routes->connect('/{controller}/{action}');
         });
     });
 
-The above would create a route template like ``/manager/admin/{controller}``.
+The above would create a route template like ``/manager/admin/{controller}/{action}``.
 The connected route would have the ``prefix`` route element set to
 ``Manager/Admin``.
 
 The current prefix will be available from the controller methods through
 ``$this->request->getParam('prefix')``
 
-When using prefix routes it's important to set the prefix option. Here's how to
-build this link using the HTML helper::
+When using prefix routes it's important to set the ``prefix`` option, and to
+use the same camel cased format that is used in the ``prefix()`` method. Here's
+how to build this link using the HTML helper::
 
     // Go into a prefixed route.
     echo $this->Html->link(
         'Manage articles',
-        ['prefix' => 'Manager', 'controller' => 'Articles', 'action' => 'add']
+        ['prefix' => 'Manager/Admin', 'controller' => 'Articles', 'action' => 'add']
     );
 
     // Leave a prefix
@@ -690,14 +694,14 @@ URL array::
 
     echo $this->Html->link(
         'New admin todo',
-        ['prefix' => 'admin', 'controller' => 'TodoItems', 'action' => 'create']
+        ['prefix' => 'Admin', 'controller' => 'TodoItems', 'action' => 'create']
     );
 
 When using nesting, you need to chain them together::
 
     echo $this->Html->link(
         'New todo',
-        ['prefix' => 'admin/my_prefix', 'controller' => 'TodoItems', 'action' => 'create']
+        ['prefix' => 'Admin/MyPrefix', 'controller' => 'TodoItems', 'action' => 'create']
     );
 
 This would link to a controller with the namespace ``App\\Controller\\Admin\\MyPrefix`` and the file path
@@ -705,7 +709,7 @@ This would link to a controller with the namespace ``App\\Controller\\Admin\\MyP
 
 .. note::
 
-    The prefix is always under_scored here, even if the routing result is dashed.
+    The prefix is always camel cased here, even if the routing result is dashed.
     The route itself will do the inflection if necessary.
 
 Plugin Routing
@@ -733,7 +737,7 @@ When creating plugin scopes, you can customize the path element used with the
 
 When using scopes you can nest plugin scopes within prefix scopes::
 
-    Router::prefix('admin', function (RouteBuilder $routes) {
+    Router::prefix('Admin', function (RouteBuilder $routes) {
         $routes->plugin('DebugKit', function (RouteBuilder $routes) {
             $routes->connect('/{controller}');
         });
@@ -1071,7 +1075,7 @@ controller in each context by using prefixes::
 
     Router::scope('/api', function (RouteBuilder $routes) {
         $routes->resources('Articles', function (RouteBuilder $routes) {
-            $routes->resources('Comments', ['prefix' => 'articles']);
+            $routes->resources('Comments', ['prefix' => 'Articles']);
         });
     });
 
