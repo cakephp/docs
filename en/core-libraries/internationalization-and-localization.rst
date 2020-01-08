@@ -484,7 +484,7 @@ any language from an external service::
 
     I18n::config('default', function ($domain, $locale) {
         $locale = Locale::parseLocale($locale);
-        $language = $locale['language'];
+        $lang = $locale['language'];
         $messages = file_get_contents("http://example.com/translations/$lang.json");
 
         return new Package(
