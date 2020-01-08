@@ -82,11 +82,11 @@
     :maxdepth: 3
     :caption: プラグイン
 
-    Authorization <https://book.cakephp.org/authorization/>
-    Authentication <https://book.cakephp.org/authentication/>
-    Bake <https://book.cakephp.org/bake/1/ja/>
-    Chronos <https://book.cakephp.org/chronos/1/ja/>
-    Debug Kit <https://book.cakephp.org/debugkit/3/ja/>
+    Authorization <https://book.cakephp.org/authorization/2/>
+    Authentication <https://book.cakephp.org/authentication/2/>
+    Bake <https://book.cakephp.org/bake/2/ja/>
+    Chronos <https://book.cakephp.org/chronos/2/ja/>
+    Debug Kit <https://book.cakephp.org/debugkit/4/ja/>
     Migrations <https://book.cakephp.org/migrations/3/ja/>
     Elasticsearch <https://book.cakephp.org/elasticsearch/2/ja/>
 
