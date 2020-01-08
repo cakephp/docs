@@ -707,6 +707,32 @@ helper HTML::
 
 .. index:: plugin routing
 
+Création de liens vers des routes de préfixe
+--------------------------------------------
+
+Vous pouvez créer des liens qui pointent vers un préfixe, en ajoutant la clé
+de préfixe à votre tableau d'URL::
+
+    echo $this->Html->link(
+        'New admin todo',
+        ['prefix' => 'Admin', 'controller' => 'TodoItems', 'action' => 'create']
+    );
+
+Lorsque vous utilisez l'imbrication, vous devez les chaîner ensemble::
+
+    echo $this->Html->link(
+        'New todo',
+        ['prefix' => 'Admin/MyPrefix', 'controller' => 'TodoItems', 'action' => 'create']
+    );
+
+Cela serait lié à un contrôleur avec l'espace de noms ``App\\Controller\\Admin\\MyPrefix``
+et le chemin de fichier ``src/Controller/Admin/MyPrefix/TodoItemsController.php``.
+
+.. note::
+
+    Le préfixe est toujours encadré de chameau ici, même si le résultat du routage est en
+    pointillés. La route elle-même fera l'inflexion si nécessaire.
+
 Routing des Plugins
 -------------------
 

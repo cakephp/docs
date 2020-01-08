@@ -671,6 +671,32 @@ how to build this link using the HTML helper::
 
 .. index:: plugin routing
 
+Creating Links to Prefix Routes
+-------------------------------
+
+You can create links that point to a prefix, by adding the prefix key to your
+URL array::
+
+    echo $this->Html->link(
+        'New admin todo',
+        ['prefix' => 'Admin', 'controller' => 'TodoItems', 'action' => 'create']
+    );
+
+When using nesting, you need to chain them together::
+
+    echo $this->Html->link(
+        'New todo',
+        ['prefix' => 'Admin/MyPrefix', 'controller' => 'TodoItems', 'action' => 'create']
+    );
+
+This would link to a controller with the namespace ``App\\Controller\\Admin\\MyPrefix`` and the file path
+``src/Controller/Admin/MyPrefix/TodoItemsController.php``.
+
+.. note::
+
+    The prefix is always camel cased here, even if the routing result is dashed.
+    The route itself will do the inflection if necessary.
+
 Plugin Routing
 --------------
 

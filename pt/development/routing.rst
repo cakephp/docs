@@ -561,6 +561,32 @@ usando o HTML Helper::
 
 .. index:: plugin routing
 
+Criando links para rotas de prefixo
+-----------------------------------
+
+Você pode criar links que apontam para um prefixo, adicionando a chave de prefixo
+à sua matriz de URL::
+
+    echo $this->Html->link(
+        'New admin todo',
+        ['prefix' => 'Admin', 'controller' => 'TodoItems', 'action' => 'create']
+    );
+
+Ao usar o aninhamento, você precisa encadeá-los::
+
+    echo $this->Html->link(
+        'New todo',
+        ['prefix' => 'Admin/MyPrefix', 'controller' => 'TodoItems', 'action' => 'create']
+    );
+
+Isso vincularia a um controlador com o namespace ``App\\Controller\\Admin\\MyPrefix``
+e o caminho do arquivo ``src/Controller/Admin/MyPrefix/TodoItemsController.php``.
+
+.. note::
+
+    O prefixo é sempre camel case aqui, mesmo que o resultado do roteamento seja
+    tracejado. A própria rota fará a inflexão, se necessário.
+
 Roteamento de Plugins
 ---------------------
 

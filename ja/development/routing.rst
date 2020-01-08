@@ -690,6 +690,31 @@ CakePHP では、プレフィックスルーティングは,  ``prefix`` スコ�
 
 .. index:: plugin routing
 
+プレフィックスルートへのリンクの作成
+--------------------------------
+
+プレフィックスキーをURL配列に追加することで、プレフィックスを指すリンクを作成できます::
+
+    echo $this->Html->link(
+        'New admin todo',
+        ['prefix' => 'Admin', 'controller' => 'TodoItems', 'action' => 'create']
+    );
+
+ネストを使用するときは、それらを連結する必要があります::
+
+    echo $this->Html->link(
+        'New todo',
+        ['prefix' => 'Admin/MyPrefix', 'controller' => 'TodoItems', 'action' => 'create']
+    );
+
+これは、名前空間 ```App\\Controller\\Admin\\MyPrefix`` およびファイルパス
+``src/Controller/Admin/MyPrefix/TodoItemsController.php`` を持つコントローラーにリンクします。
+
+.. note::
+
+    ルーティング結果が破線であっても、プレフィックスは常にここで大文字に変換されます。
+    必要に応じて、ルート自体が屈折を行います。
+
 プラグインのルーティング
 ------------------------
 
