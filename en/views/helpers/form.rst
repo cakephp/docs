@@ -676,6 +676,13 @@ as well as HTML attributes. This subsection will cover the options specific to
   nestedWidgets or set it to an array of attributes to be provided to the
   ``label`` tag.
 
+* ``$options['readonly']`` - Set the field to ``readonly`` in form.
+
+  E.g. ::
+
+      echo $this->Form->control('name', ['readonly' => true]);                                        
+
+
 Generating Specific Types of Controls
 =====================================
 
