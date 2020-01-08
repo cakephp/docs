@@ -162,7 +162,7 @@ URL が特定されたら、一致したときにどのような動作をする�
     // プレフィックス付きのプラグインコントローラーへの配列ターゲット
     $routes->connect(
         '/admin/cms/articles',
-        ['prefix' => 'admin', 'plugin' => 'Cms', 'controller' => 'Articles', 'action' => 'index']
+        ['prefix' => 'Admin', 'plugin' => 'Cms', 'controller' => 'Articles', 'action' => 'index']
     );
     // プレフィックス付きのプラグインコントローラーへの文字列ターゲット。3.6.0 以上が必要
     $routes->connect('/admin/cms/articles', 'Cms.Admin/Articles::index');
@@ -600,9 +600,10 @@ CakePHP では、プレフィックスルーティングは,  ``prefix`` スコ�
 
     use Cake\Routing\Route\DashedRoute;
 
-    Router::prefix('admin', function ($routes) {
-        // この全てのルートは `/admin` によってプレフィックスされます。
-        // そのために、 prefix => admin をルート要素として追加します。
+    Router::prefix('Admin', function ($routes) {
+        // ここのすべてのルートには、 `/admin` というプレフィックスが付きます。
+        // また、 `'prefix' => 'Admin'` ルート要素が追加されます。
+        // これは、これらのルートのURLを生成するときに必要になります
         $routes->fallbacks(DashedRoute::class);
     });
 
@@ -618,7 +619,7 @@ CakePHP では、プレフィックスルーティングは,  ``prefix`` スコ�
 /admin へのアクセスを pages コントローラーの ``index()`` アクションに
 以下のルートを使ってマップします。 ::
 
-    Router::prefix('admin', function ($routes) {
+    Router::prefix('Admin', function ($routes) {
         // admin スコープの中なので、/admin プレフィックスや、
         // admin ルート要素を含める必要はありません。
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
@@ -627,16 +628,25 @@ CakePHP では、プレフィックスルーティングは,  ``prefix`` スコ�
 プレフィックスルートを作成するときに、 ``$options`` 引数で、追加のルートのパラメーターを
 設定できます。 ::
 
-    Router::prefix('admin', ['param' => 'value'], function ($routes) {
+    Router::prefix('Admin', ['param' => 'value'], function ($routes) {
         // ここで接続されているルートは '/admin' でプレフィックスされており、
         // 'param' ルーティングキーを持っています。
+        $routes->connect('/:controller');
+    });
+
+マルチワードのプレフィックスはデフォルトでダッシュの屈折を使用して変換されます。つまり、
+``MyPrefix`` はURLの ``my-prefix`` にマッピングされます。
+アンダースコアなどの別の形式を使用する場合は、このようなプレフィックスのパスを必ず設定してください::
+
+    Router::prefix('MyPrefix', ['path' => '/my_prefix'], function (RouteBuilder $routes) {
+        // ここに接続されているルートには、 ``/my_prefix`` というプレフィックスが付きます
         $routes->connect('/:controller');
     });
 
 このようにプラグインスコープの中で、プレフィックスを定義できます。 ::
 
     Router::plugin('DebugKit', function ($routes) {
-        $routes->prefix('admin', function ($routes) {
+        $routes->prefix('Admin', function ($routes) {
             $routes->connect('/:controller');
         });
     });
@@ -646,25 +656,26 @@ CakePHP では、プレフィックスルーティングは,  ``prefix`` スコ�
 
 プレフィックスを定義したときに、必要ならば複数のプレフィックスをネストできます。 ::
 
-    Router::prefix('manager', function ($routes) {
-        $routes->prefix('admin', function ($routes) {
-            $routes->connect('/:controller');
+    Router::prefix('Manager', function ($routes) {
+        $routes->prefix('Admin', function ($routes) {
+            $routes->connect('/:controller/:action');
         });
     });
 
-上記のコードは、 ``/manager/admin/:controller`` のようなルートテンプレートを生成します。
-接続されたルートは ``prefix`` というルート要素を ``manager/admin`` に設定します。
+上記のコードは、 ``/manager/admin/:controller/:action`` のようなルートテンプレートを生成します。
+接続されたルートは ``prefix`` というルート要素を ``Manager/Admin`` に設定します。
 
 現在のプレフィックスはコントローラーのメソッドから ``$this->request->getParam('prefix')``
 を通して利用可能です。
 
-プレフィックスルーティングを使っているときは、prefix オプションを設定することが重要です。
-以下は、リンクを HTML ヘルパーで作る方法です。 ::
+プレフィックスルートを使用する場合、 ``prefix`` オプションを設定し、 ``prefix()``
+メソッドで使用されるのと同じキャメルケース形式を使用することが重要です。
+以下は、リンクを HTML ヘルパーで作る方法です。::
 
     // プレフィックスルーティングする
     echo $this->Html->link(
         'Manage articles',
-        ['prefix' => 'manager', 'controller' => 'Articles', 'action' => 'add']
+        ['prefix' => 'Manager/Admin', 'controller' => 'Articles', 'action' => 'add']
     );
 
     // プレフィックスルーティングをやめる
@@ -703,7 +714,7 @@ CakePHP では、プレフィックスルーティングは,  ``prefix`` スコ�
 
 スコープを使うときに、プレフィックススコープ内でプラグインスコープをネストできます。 ::
 
-    Router::prefix('admin', function ($routes) {
+    Router::prefix('Admin', function ($routes) {
         $routes->plugin('DebugKit', function ($routes) {
             $routes->connect('/:controller');
         });
@@ -1041,7 +1052,7 @@ DELETE      /recipes/123.format   RecipesController::delete(123)
 
     Router::scope('/api', function ($routes) {
         $routes->resources('Articles', function ($routes) {
-            $routes->resources('Comments', ['prefix' => 'articles']);
+            $routes->resources('Comments', ['prefix' => 'Articles']);
         });
     });
 
