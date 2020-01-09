@@ -30,7 +30,8 @@ options are:
   config. This combined with ``Session.handler`` replace the custom session
   handling features of previous versions
 
-* ``Session.cookie`` - The name of the cookie to use. Defaults to 'CAKEPHP'.
+* ``Session.cookie`` - The name of the cookie to use. Defaults to value set for
+  ``session.name`` php.ini config.
 
 * ``Session.cookiePath`` - The url path for which session cookie is set. Maps to
   the ``session.cookie_path`` php.ini config. Defaults to base path of app.
@@ -45,6 +46,17 @@ this::
         'defaults' => 'php',
         'ini' => [
             'session.cookie_secure' => false
+        ]
+    ]);
+
+As of v4.0 CakePHP also sets the `SameSite <https://www.owasp.org/index.php/SameSite>`__ attribute to ``Lax``
+by default for session cookies, which helps protect against CSRF attacks.
+You can change the default value by setting ``session.cookie_samesite`` php.ini config::
+
+    Configure::write('Session', [
+        'defaults' => 'php',
+        'ini' => [
+            'session.cookie_samesite' => 'Strict'
         ]
     ]);
 

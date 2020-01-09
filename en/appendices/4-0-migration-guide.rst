@@ -215,9 +215,6 @@ Http
   This makes it type match the one used in ``setcookie()``.
 * ``Cake\Http\ServerRequest::referer()`` now returns ``null`` when the current
   request has no referer. Previously it would return ``/``.
-* The Session cookie name is no longer set to ``CAKEPHP`` by default. Instead
-  the default cookie name defined in your ``php.ini`` file is used. You can use
-  the ``Session.cookie`` configuration option to set the cookie name.
 * ``Cake\Cookie\CookieCollection::get()`` now throws an exception when accessing
   a cookie that doesn't exist. Use ``has()`` to check for cookie existence.
 * The signature of ``Cake\Http\ResponseEmitter::emit()`` has changed, it no longer
@@ -227,6 +224,14 @@ Http
   compatibility with the behavior in 3.x.
 * The keys of array returned by ``Cake\Http\Response::getCookie()`` have changed.
   ``expire`` is changed to ``expires`` and ``httpOnly`` to ``httponly``.
+
+Http\Session
+------------
+* The Session cookie name is no longer set to ``CAKEPHP`` by default. Instead
+  the default cookie name defined in your ``php.ini`` file is used. You can use
+  the ``Session.cookie`` configuration option to set the cookie name.
+* Session cookies now have ``SameSite`` attribute set to ``Lax`` by default.
+  Check :ref:`session-configuration` section for more info.
 
 I18n
 ----
@@ -348,7 +353,7 @@ Helper
 * The ``safe`` option for ``HtmlHelper::scriptBlock()`` and ``HtmlHelper::scriptStart()``
   has been removed. When enabled it generated ``CDATA`` tags which are only required
   for XHTML which is now defunct.
-  
+
 Log
 ---
 
