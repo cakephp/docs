@@ -46,7 +46,7 @@ Once you have the scaffold code created, create a few sample tags by going to
 
 Now that we have a Tags table, we can create an association between Articles and
 Tags. We can do so by adding the following to the ``initialize`` method on the
-ArticlesTable::
+**ArticlesTable**::
 
     public function initialize(array $config): void
     {
