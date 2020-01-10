@@ -114,9 +114,9 @@ Component
 * The request body parsing features of ``RequestHandlerComponent`` have been
   removed and now emit a deprecation warning. You should use the
   :ref:`body-parser-middleware` instead.
-* ``Cake\Controller\Component\PagingComponent`` now sets paging params info as
+* ``Cake\Controller\Component\PaginatorComponent`` now sets paging params info as
   request attribute instead of request param. Hence you should now use
-  ``$request->getAttribute('paging')`` instead of ``$request->getParam('paging')``.
+  ``$request->getAttribute('page')`` instead of ``$request->getParam('page')``.
 
 Database
 --------
