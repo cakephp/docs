@@ -116,7 +116,7 @@ Component
   :ref:`body-parser-middleware` instead.
 * ``Cake\Controller\Component\PaginatorComponent`` now sets paging params info as
   request attribute instead of request param. Hence you should now use
-  ``$request->getAttribute('page')`` instead of ``$request->getParam('page')``.
+  ``$request->getAttribute('paging')`` instead of ``$request->getParam('paging')``.
 
 Database
 --------
