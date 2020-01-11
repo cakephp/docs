@@ -105,7 +105,7 @@ Component
   ``$request->getAttribute('isAjax')`` を使用する必要があります。
 * ``RequestHandlerComponent`` の入力データ解析機能は削除され、非推奨の警告を発します。
   代わりに、 :ref:`body-parser-middleware` を使用する必要があります。
-* ``Cake\Controller\Component\PagingComponent`` は、リクエストパラメーターではなくリクエスト属性として、
+* ``Cake\Controller\Component\PaginatorComponent`` は、リクエストパラメーターではなくリクエスト属性として、
   ページングパラメーター情報を設定するようになりました。したがって、 ``$request->getParam('paging')`` の代わりに、
   ``$request->getAttribute('paging')`` を使用する必要があります。
 
