@@ -227,6 +227,7 @@ Http
 
 Http\Session
 ------------
+
 * The Session cookie name is no longer set to ``CAKEPHP`` by default. Instead
   the default cookie name defined in your ``php.ini`` file is used. You can use
   the ``Session.cookie`` configuration option to set the cookie name.
