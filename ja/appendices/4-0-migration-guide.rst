@@ -105,7 +105,7 @@ Component
   ``$request->getAttribute('isAjax')`` を使用する必要があります。
 * ``RequestHandlerComponent`` の入力データ解析機能は削除され、非推奨の警告を発します。
   代わりに、 :ref:`body-parser-middleware` を使用する必要があります。
-* ``Cake\Controller\Component\PagingComponent`` は、リクエストパラメーターではなくリクエスト属性として、
+* ``Cake\Controller\Component\PaginatorComponent`` は、リクエストパラメーターではなくリクエスト属性として、
   ページングパラメーター情報を設定するようになりました。したがって、 ``$request->getParam('paging')`` の代わりに、
   ``$request->getAttribute('paging')`` を使用する必要があります。
 
@@ -194,8 +194,6 @@ Http
   これにより、 ``setcookie()`` で使用されているものと型が一致します。
 * ``Cake\Http\ServerRequest::referer()`` は、現在のリクエストにリファラーがない場合、 ``null`` を返すようになりました。
   以前は、 ``/`` を返していました。
-* セッションクッキー名はデフォルトで ``CAKEPHP`` に設定されなくなりました。代わりに、 ``php.ini`` ファイルで定義された、
-  デフォルトのクッキー名が使用されます。``Session.cookie`` 設定オプションを使用してクッキー名を設定できます。
 * ``Cake\Cookie\CookieCollection::get()`` は、存在しないクッキーにアクセスすると、例外を返すようになりました。
   クッキーの存在をチェックするために ``has()`` を使用してください。
 * ``Cake\Http\ResponseEmitter::emit()`` のシグネチャが変更され、 2 番目の引数がなくなりました。
@@ -203,6 +201,14 @@ Http
   このフラグを ``false`` に設定することで、 3.x の動作との互換性をできます。
 * ``Cake\Http\Response::getCookie()`` によって返される配列キーが変更されました。
   ``expire`` が ``expires`` に、 ``httpOnly`` が ``httponly`` に変わりました。
+
+Http\Session
+------------
+
+* セッションクッキー名は、デフォルトで ``CAKEPHP`` に設定されなくなりました。代わりに、 ``php.ini`` ファイルで定義された、
+  デフォルトのクッキー名が使用されます。``Session.cookie`` 設定オプションを使用してクッキー名を設定できます。
+* セッションクッキーは、デフォルトで ``SameSite`` 属性が ``Lax`` に設定されるようになります。
+  詳細については、 :ref:`session-configuration` セクションを確認してください。
 
 I18n
 ----

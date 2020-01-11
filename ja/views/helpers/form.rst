@@ -631,6 +631,12 @@ HTML 属性を受け付けます。以下は ``FormHelper::control()`` で特有
 * ``$options['labelOptions']`` - これを ``false`` に設定すると nestedWidgets
   の周りのラベルを無効にします。または、 ``label`` タグに提供される属性の配列を設定します。
 
+* ``$options['readOnly']`` - フォームにて、フィールドを ``readOnly`` に設定します。
+
+  例::
+
+      echo $this->Form->control('name', ['readonly' => true]);
+
 コントロールの特定のタイプを生成
 ================================
 

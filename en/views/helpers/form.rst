@@ -680,8 +680,7 @@ as well as HTML attributes. This subsection will cover the options specific to
 
   E.g. ::
 
-      echo $this->Form->control('name', ['readonly' => true]);                                        
-
+      echo $this->Form->control('name', ['readonly' => true]);
 
 Generating Specific Types of Controls
 =====================================
