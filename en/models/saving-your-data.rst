@@ -94,7 +94,8 @@ Featured above, this method saves array-formatted data. The second
 parameter allows you to sidestep validation, and the third allows
 you to supply a list of model fields to be saved. For added
 security, you can limit the saved fields to those listed in
-``$fieldList``.
+``$fieldList``. When using a ``fieldList`` the primary key will be included in
+the ``fieldList`` automatically.
 
 .. note::
 
