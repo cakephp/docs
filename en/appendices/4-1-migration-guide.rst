@@ -22,6 +22,12 @@ Database
 * ``Cake\Database\Schema\PostgresSchema`` was renamed to
   ``Cake\Database\Schema\PostgresSchemaDialect`` and marked as internal.
 
+Form
+----
+
+* ``Form::schema()`` has been deprecated. Use ``Form::getSchema()`` or
+  ``Form::setSchema()`` instead.
+
 ORM
 ---
 
