@@ -197,7 +197,10 @@ style output with appropriate ANSI colours::
     // Yellow text on stderr
     $io->warning('Warning text');
 
-It also provides two convenience methods regarding the output level::
+Color formatting will automatically be disabled if ``posix_isatty`` returns
+true, or if the ``NO_COLOR`` environment variable is set.
+
+``ConsoleIo`` provides two convenience methods regarding the output level::
 
     // Would only appear when verbose output is enabled (-v)
     $io->verbose('Verbose message');

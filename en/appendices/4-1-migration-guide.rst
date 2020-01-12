@@ -38,6 +38,13 @@ View
 New Features
 ============
 
+Console
+-------
+
+* When the ``NO_COLOR`` environment variable is set all output will not include
+  ANSI escape codes for colours. See `no-color.org <https://no-color.org/>`__
+  for more information.
+
 Log
 ---
 
