@@ -230,7 +230,7 @@ JSONP レスポンスの返すことが出来ます。これに ``true`` を設�
             }
 
             // ビューに出力形式をセット
-            $this->viewBuilder()->className($formats[$format]);
+            $this->viewBuilder()->setClassName($formats[$format]);
 
             // データを取得
             $videos = $this->Videos->find('latest');

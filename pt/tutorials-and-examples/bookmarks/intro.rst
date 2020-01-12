@@ -36,7 +36,7 @@ Em seguida, basta digitar a seguinte linha no seu terminal a partir do diretóri
 onde se localiza o arquivo ``composer.phar`` para instalar o esqueleto de
 aplicações do CakePHP no diretório ``bookmarker``. ::
 
-    php composer.phar create-project --prefer-dist cakephp/app:^4.0 bookmarker
+    php composer.phar create-project --prefer-dist cakephp/app:4.* bookmarker
 
 A vantagem de usar Composer é que ele irá completar automaticamente um conjunto
 importante de tarefas, como configurar as permissões de arquivo e criar a sua

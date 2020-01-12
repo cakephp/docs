@@ -609,9 +609,10 @@ la clé ``prefix`` avec un appel de ``Router::connect()``::
 
     use Cake\Routing\Route\DashedRoute;
 
-    Router::prefix('admin', function ($routes) {
-        // Toutes les routes ici seront préfixées avec `/admin` et auront
-        // l'élément de route prefix => admin ajouté.
+    Router::prefix('Admin', function ($routes) {
+        // Toutes les routes ici seront préfixées avec `/admin`, et
+        // l'élément de route `'prefix' => 'Admin'` sera ajouté qui
+        // sera requis lors de la génération d'URL pour ces routes
         $routes->fallbacks(DashedRoute::class);
     });
 
@@ -628,7 +629,7 @@ Le fichier de vue utilisé serait **src/Template/Admin/Users/edit.ctp**.
 Vous pouvez faire correspondre l'URL /admin à votre action ``index()``
 du controller Pages en utilisant la route suivante::
 
-    Router::prefix('admin', function ($routes) {
+    Router::prefix('Admin', function ($routes) {
         // Parce que vous êtes dans le scope admin, vous n'avez pas besoin
         // d'inclure le prefix /admin ou l'élément de route admin.
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
@@ -637,16 +638,27 @@ du controller Pages en utilisant la route suivante::
 Quand vous créez des routes préfixées, vous pouvez définir des paramètres de
 route supplémentaires en utilisant l'argument ``$options``::
 
-    Router::prefix('admin', ['param' => 'value'], function ($routes) {
+    Router::prefix('Admin', ['param' => 'value'], function ($routes) {
         // Routes connectées ici sont préfixées par '/admin' et
         // ont la clé 'param' de routing définie.
+        $routes->connect('/:controller');
+    });
+
+Les préfixes de plusieurs mots sont par défaut convertis en utilisant une
+flexion en pointeur, c'est-à-dire que ``MyPrefix`` serait mappé sur
+``my-prefix`` dans l'URL. Assurez-vous de définir un chemin d'accès pour ces
+préfixes si vous souhaitez utiliser un format différent comme par exemple le
+soulignement::
+
+    Router::prefix('MyPrefix', ['path' => '/my_prefix'], function (RouteBuilder $routes) {
+        // Les routes connectées ici sont préfixées par '/my_prefix'
         $routes->connect('/:controller');
     });
 
 Vous pouvez aussi définir les préfixes dans les scopes de plugin::
 
     Router::plugin('DebugKit', function ($routes) {
-        $routes->prefix('admin', function ($routes) {
+        $routes->prefix('Admin', function ($routes) {
             $routes->connect('/:controller');
         });
     });
@@ -658,26 +670,28 @@ route ``plugin`` et ``prefix`` définis.
 Quand vous définissez des préfixes, vous pouvez imbriquer plusieurs préfixes
 si besoin::
 
-    Router::prefix('manager', function ($routes) {
-        $routes->prefix('admin', function ($routes) {
-            $routes->connect('/:controller');
+    Router::prefix('Manager', function ($routes) {
+        $routes->prefix('Admin', function ($routes) {
+            $routes->connect('/:controller/:action');
         });
     });
 
 Ce qui est au-dessus va créer un template de route de type
-``/manager/admin/:controller``. La route connectée aura l'élément de
-route ``prefix`` défini à ``manager/admin``.
+``/manager/admin/:controller/:action``. La route connectée aura l'élément de
+route ``prefix`` défini à ``Manager/Admin``.
 
 Le préfixe actuel sera disponible à partir des méthodes du controller avec
 ``$this->request->getParam('prefix')``
 
 Quand vous utilisez les routes préfixées, il est important de définir l'option
-prefix. Voici comment construire ce lien en utilisant le helper HTML::
+``prefix``, et d'utiliser le même format de boîtier de chameau que celui utilisé
+dans la méthode `prefix ()`. Voici comment construire ce lien en utilisant le
+helper HTML::
 
     // Aller vers une route préfixée.
     echo $this->Html->link(
         'Manage articles',
-        ['prefix' => 'manager', 'controller' => 'Articles', 'action' => 'add']
+        ['prefix' => 'Manager/Admin', 'controller' => 'Articles', 'action' => 'add']
     );
 
     // Enlever un prefix
@@ -692,6 +706,32 @@ prefix. Voici comment construire ce lien en utilisant le helper HTML::
     fallback.
 
 .. index:: plugin routing
+
+Création de liens vers des routes de préfixe
+--------------------------------------------
+
+Vous pouvez créer des liens qui pointent vers un préfixe, en ajoutant la clé
+de préfixe à votre tableau d'URL::
+
+    echo $this->Html->link(
+        'New admin todo',
+        ['prefix' => 'Admin', 'controller' => 'TodoItems', 'action' => 'create']
+    );
+
+Lorsque vous utilisez l'imbrication, vous devez les chaîner ensemble::
+
+    echo $this->Html->link(
+        'New todo',
+        ['prefix' => 'Admin/MyPrefix', 'controller' => 'TodoItems', 'action' => 'create']
+    );
+
+Cela serait lié à un contrôleur avec l'espace de noms ``App\\Controller\\Admin\\MyPrefix``
+et le chemin de fichier ``src/Controller/Admin/MyPrefix/TodoItemsController.php``.
+
+.. note::
+
+    Le préfixe est toujours encadré de chameau ici, même si le résultat du routage est en
+    pointillés. La route elle-même fera l'inflexion si nécessaire.
 
 Routing des Plugins
 -------------------
@@ -719,7 +759,7 @@ l'élément avec l'option ``path``::
 Lors de l'utilisation des scopes, vous pouvez imbriquer un scope de plugin dans
 un scope de prefix::
 
-    Router::prefix('admin', function ($routes) {
+    Router::prefix('Admin', function ($routes) {
         $routes->plugin('DebugKit', function ($routes) {
             $routes->connect('/:controller');
         });
@@ -1056,7 +1096,7 @@ controller in each context by using prefixes::
 
     Router::scope('/api', function ($routes) {
         $routes->resources('Articles', function ($routes) {
-            $routes->resources('Comments', ['prefix' => 'articles']);
+            $routes->resources('Comments', ['prefix' => 'Articles']);
         });
     });
 

@@ -423,8 +423,7 @@ Logging Trait
 .. php:method:: log($msg, $level = LOG_ERR)
 
     Log a message to the logs.  By default messages are logged as
-    ERROR messages.  If ``$msg`` isn't a string it will be converted with
-    ``print_r`` before being logged.
+    ERROR messages.
 
 Using Monolog
 =============

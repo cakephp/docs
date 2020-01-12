@@ -97,7 +97,7 @@ CMS チュートリアル - データベース作成
 
 .. note::
 
-    CakePHP のデフォルト設定ファイルの複製は **config/app.default.php** にあります。
+    app フォルダーに **config/app_local.php** がある場合、 app.php の設定を上書きします。
 
 最初のモデルの作成
 ========================
