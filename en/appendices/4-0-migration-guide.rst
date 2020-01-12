@@ -265,6 +265,9 @@ ORM
 * Table will now throw an exception when aliases generated for the table name and column
   would be truncated by the database. This warns the user before hidden errors occur when
   CakePHP cannot match the alias in the result.
+* ``TableLocator::get()`` and ``TableRegistry::get()`` now expect that alias
+  names are always **CamelCased** by your code. Passing incorrectly cased
+  aliases will result in table and entity classes not being loaded correctly.
 
 Router
 ------
