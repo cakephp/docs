@@ -112,8 +112,7 @@ Component
   request attribute instead of request param. Hence you should now use
   ``$request->getAttribute('isAjax')`` instead of ``$request->getParam('isAjax')``.
 * The request body parsing features of ``RequestHandlerComponent`` have been
-  removed and now emit a deprecation warning. You should use the
-  :ref:`body-parser-middleware` instead.
+  removed. You should use the :ref:`body-parser-middleware` instead.
 * ``Cake\Controller\Component\PaginatorComponent`` now sets paging params info as
   request attribute instead of request param. Hence you should now use
   ``$request->getAttribute('paging')`` instead of ``$request->getParam('paging')``.
