@@ -96,7 +96,12 @@ Class loading can take a big share of your application's processing time.
 In order to avoid this problem, it is recommended that you run this command in
 your production server once the application is deployed::
 
-    php composer.phar dumpautoload -o
+    php composer.phar dump-autoload -o
+
+.. warning::
+
+    Do not combine this with ``-a``/``--classmap-authoritative``, as this breaks class aliases. Instead, you can use the `mentioned
+option 2b <https://getcomposer.org/doc/articles/autoloader-optimization.md#optimization-level-2-b-apcu-cache>`_. instead using ``--apcu`` as additional optimization if APCu is installed.
 
 Since handling static assets, such as images, JavaScript and CSS files of
 plugins, through the ``Dispatcher`` is incredibly inefficient, it is strongly
