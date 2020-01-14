@@ -100,8 +100,10 @@ your production server once the application is deployed::
 
 .. warning::
 
-    Do not combine this with ``-a``/``--classmap-authoritative``, as this breaks class aliases. Instead, you can use the `mentioned
-option 2b <https://getcomposer.org/doc/articles/autoloader-optimization.md#optimization-level-2-b-apcu-cache>`_. instead using ``--apcu`` as additional optimization if APCu is installed.
+    If you are using deprecated class names in your project or plugins, don't
+    combine this with ``-a``/``--classmap-authoritative``. This breaks the class aliases.
+    Instead, you can use the `mentioned option 2b <https://getcomposer.org/doc/articles/autoloader-optimization.md#optimization-level-2-b-apcu-cache>`_ instead
+    using ``--apcu`` as additional optimization if APCu is installed.
 
 Since handling static assets, such as images, JavaScript and CSS files of
 plugins, through the ``Dispatcher`` is incredibly inefficient, it is strongly
