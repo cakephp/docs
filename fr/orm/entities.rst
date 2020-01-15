@@ -119,7 +119,7 @@ case du nom du champ.
 
 .. php:method:: get($field)
 
-Ils reçoivent la valeur basique stockée dans le tableau ``_properties`` pour
+Ils reçoivent la valeur basique stockée dans le tableau ``_fields`` pour
 seul argument.
 Les accesseurs seront utilisés lors de la sauvegarde des entities. Faites donc
 attention lorsque vous définissez des méthodes qui formatent les données car ce

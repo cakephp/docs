@@ -326,8 +326,8 @@ articles，因为往下我们将加入使用标签搜索 articles 的功能。
 
     protected function _getTagString()
     {
-        if (isset($this->_properties['tag_string'])) {
-            return $this->_properties['tag_string'];
+        if (isset($this->_fields['tag_string'])) {
+            return $this->_fields['tag_string'];
         }
         if (empty($this->tags)) {
             return '';

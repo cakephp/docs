@@ -114,7 +114,7 @@ do campo.
 
 .. php:method:: get($field)
 
-Eles recebem o valor básico armazenado no array ``_properties`` como seu
+Eles recebem o valor básico armazenado no array ``_fields`` como seu
 único argumento. Acessadores serão usadas ao salvar entidades, então seja
 cuidadoso ao definir métodos que formatam dados, já que os dados formatados
 serão persistido. Por exemplo::
@@ -191,8 +191,8 @@ não existem. Por exemplo, se sua tabela users tem ``first_name`` e
 
         protected function _getFullName()
         {
-            return $this->_properties['first_name'] . '  ' .
-                $this->_properties['last_name'];
+            return $this->_fields['first_name'] . '  ' .
+                $this->_fields['last_name'];
         }
 
     }
