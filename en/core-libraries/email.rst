@@ -444,7 +444,7 @@ is useful for debugging. Configuring transports allows you to keep configuration
 data out of your application code and makes deployment simpler as you can simply
 change the configuration data. An example transport configuration looks like::
 
-    // In app/config.php
+    // In config/app.php
     'EmailTransport' => [
         // Sample Mail configuration
         'default' => [
