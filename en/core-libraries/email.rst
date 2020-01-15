@@ -58,19 +58,17 @@ original sender using the Sender header. You can do so using ``setSender()``::
 Configuration
 =============
 
-Configuration for ``Mailer`` defaults is created using ``setConfig()`` and
-``TransportFactory::setConfig()``. You should put your mailer profiles in the
-**config/app.php** file.  The **config/app.default.php** file is an
-example of this file. It is not required to define email configuration in
-**config/app.php**. ``Mailer`` can be used without it and use the respective
-methods to set all configurations separately or load an array of configs.
-
-By defining profiles and transports, you can keep your application code free of
+Mailer profiles and email transport settings are defined in your application's
+configuration files. The ``Email`` and ``EmailTransport`` keys define mailer
+profiles and email transport configurations respectively. During application
+bootstrap configuration settings are passed from ``Configure`` into the
+``Mailer`` and ``TransportFactory`` classes using ``setConfig()``. By defining
+profiles and transports, you can keep your application code free of
 configuration data, and avoid duplication that makes maintenance and deployment
 more difficult.
 
-To load a predefined configuration, you can use the ``setProfile()`` method or pass it
-to the constructor of ``Mailer``::
+To load a predefined configuration, you can use the ``setProfile()`` method or
+pass it to the constructor of ``Mailer``::
 
     $mailer = new Mailer();
     $mailer->setProfile('default');
@@ -446,14 +444,29 @@ is useful for debugging. Configuring transports allows you to keep configuration
 data out of your application code and makes deployment simpler as you can simply
 change the configuration data. An example transport configuration looks like::
 
+    // In config/app.php
+    'EmailTransport' => [
+        // Sample Mail configuration
+        'default' => [
+            'className' => 'Mail',
+        ],
+        // Sample SMTP configuration
+        'gmail' => [
+            'host' => 'smtp.gmail.com',
+            'port' => 587,
+            'username' => 'my@gmail.com',
+            'password' => 'secret',
+            'className' => 'Smtp',
+            'tls' => true
+        ]
+    ],
+
+Transports can also be configured at runtime using
+``TransportFactory::setConfig()``::
+
     use Cake\Mailer\TransportFactory;
 
-    // Sample Mail configuration
-    TransportFactory::setConfig('default', [
-        'className' => 'Mail'
-    ]);
-
-    // Sample SMTP configuration.
+    // Define an STMP transport
     TransportFactory::setConfig('gmail', [
         'host' => 'ssl://smtp.gmail.com',
         'port' => 465,

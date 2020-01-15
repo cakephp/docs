@@ -24,8 +24,8 @@ methods to make configuration simple and transparent.
 The application skeleton features a **config/app.php** file which should contain
 configuration that doesn't vary across the various environments your application
 is deployed in. The **config/app_local.php** file should contain the
-configuration data that varies between environments and shouldn't be checked
-into version control. Both of these files reference environment variables
+configuration data that varies between environments and should be managed by
+configuration management, or your deployment tooling. Both of these files reference environment variables
 through the ``env()`` function that enables configuration values to set though
 the server environment.
 
