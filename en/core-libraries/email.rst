@@ -620,8 +620,8 @@ registers. We want to check that the subject and body contain the user's name::
     public function testName()
     {
         $user = new User([
-            'name' => 'Alice Alittea', 'email' =>
-            'alice@example.org'
+            'name' => 'Alice Alittea',
+            'email' => 'alice@example.org',
         ]);
         $mailer = new WelcomeMailer();
         $mailer->send('welcome', [$user]);
