@@ -583,26 +583,52 @@ using ``Message::setBodyText()`` and ``Message::setBodyHtml()`` methods.
 
 .. _email-testing:
 
-Testing Mailer
-==============
+Testing Mailers
+===============
 
-To test email, add ``Cake\TestSuite\EmailTrait`` to your test case.
-The ``MailerTrait`` provides your test case with a collection of assertions
-that you can perform on any emails sent by the application.
+To test mailers, add ``Cake\TestSuite\EmailTrait`` to your test case.
+The ``MailerTrait`` uses PHPUnit hooks to replace your application's email transports
+with a proxy that intercepts email messages and allows you to do assertions
+on the mail that would be delivered.
 
-Adding the ``EmailTrait`` to your test case will replace all of your application's
-email transports with the ``Cake\TestSuite\TestMailerTransport``. This transport
-intercepts emails instead of sending them, and allows you to assert against them.
+Add the trait to your test case to start testing emails, and load routes if your
+emails need to generate URLs::
 
-Add the trait to your test case to start testing emails::
+    namespace App\Test\TestCase\Mailer;
 
-    namespace App\Test\TestCase;
+    use App\Mailer\WelcomeMailer;
+    use App\Model\Entity\User;
 
     use Cake\TestSuite\EmailTrait;
+    use Cake\TestSuite\TestCase;
 
-    class MyTestCase extends TestCase
+    class WelcomeMailerTestCase extends TestCase
     {
         use EmailTrait;
+
+        public function setUp(): void
+        {
+            parent::setUp();
+            $this->loadRoutes();
+        }
+    }
+
+Let's assume we have a mailer that delivers welcome emails when a new user
+registers. We want to check that the subject and body contain the user's name::
+
+    // in our WelcomeMailerTestCase class.
+    public function testName()
+    {
+        $user = new User([
+            'name' => 'Alice Alittea',
+            'email' => 'alice@example.org',
+        ]);
+        $mailer = new WelcomeMailer();
+        $mailer->send('welcome', [$user]);
+
+        $this->assertMailSentTo($user->email);
+        $this->assertMailContainsText('Hi ' . $user->name);
+        $this->assertMailContainsText('Welcome to CakePHP!');
     }
 
 Assertion methods
