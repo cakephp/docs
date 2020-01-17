@@ -120,10 +120,46 @@ be accessed like this::
 
     $attachment = $this->request->getData('MyModel.attachment');
 
-By default file uploads are represented in the request data as arrays, with a normalized structure that remains the same
-even for nested inputs/names, which is different from how PHP represents them in the ``$_FILES`` superglobal (refer to
-`the PHP manual <https://www.php.net/manual/en/features.file-upload.php>`__ for more information), ie the
-``$attachment`` value would look something like this::
+By default file uploads are represented in the request data as objects that implement
+`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__. In the current
+implementation, the ``$attachment`` variable in the above example would by default hold an instance of
+``\Laminas\Diactoros\UploadedFile``.
+
+Accessing the uploaded file details is fairly simple, here's how you can obtain the same data as provided by the old
+style file upload array::
+
+    $name = $attachment->getClientFilename();
+    $type = $attachment->getClientMediaType();
+    $size = $attachment->getSize();
+    $tmpName = $attachment->getStream()->getMetadata('uri');
+    $error = $attachment->getError();
+
+Moving the uploaded file from its temporary location to the desired target location, doesn't require manually accessing
+the temporary file, instead it can be easily done by using the objects ``moveTo()`` method::
+
+    $attachment->moveTo($targetPath);
+
+In an HTTP environment, the ``moveTo()`` method will automatically validate whether the file is an actual uploaded file,
+and throw an exception in case necessary. In an CLI environment, where the concept of uploading files doesn't exist, it
+will allow to move the file that you've referenced irrespective of its origins, which makes testing file uploads really
+easy.
+
+In order to switch back to using file upload arrays instead, set the configuration value ``App.uploadedFilesAsObjects``
+to ``false``, for example in your ``config/app.php`` file::
+
+    return [
+        // ...
+        'App' => [
+            // ...
+            'uploadedFilesAsObjects' => false,
+        ],
+        // ...
+    ];
+
+With the option disabled, the file uploads are represented in the request data as arrays, with a normalized structure
+that remains the same even for nested inputs/names, which is different from how PHP represents them in the ``$_FILES``
+superglobal (refer to `the PHP manual <https://www.php.net/manual/en/features.file-upload.php>`__ for more information),
+ie the ``$attachment`` value would look something like this::
 
     [
         'name' => 'attachment.txt',
@@ -133,27 +169,12 @@ even for nested inputs/names, which is different from how PHP represents them in
         'error' => 0
     ]
 
-Alternatively it's possible to have CakePHP provide the uploads in the request data as objects that implement
-`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__. In order to
-enable this behavior, set the configuration value ``App.uploadedFilesAsObjects`` to ``true``, for example in your
-``config/app.php`` file::
+.. tip::
 
-    return [
-        // ...
-        'App' => [
-            // ...
-            'uploadedFilesAsObjects' => true,
-        ],
-        // ...
-    ];
-
-In the above example, ``$attachment`` would then hold an object, in the current implementation it would by default be an
-instance of ``\Zend\Diactoros\UploadedFile``.
-
-Furthermore uploaded files can be accessed as objects separately from the request data via the
-:php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` and
-:php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()` methods. These methods will always return objects,
-irrespectively of the ``App.uploadedFilesAsObjects`` configuration.
+    Uploaded files can also be accessed as objects separately from the request data via the
+    :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` and
+    :php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()` methods. These methods will always return objects,
+    irrespectively of the ``App.uploadedFilesAsObjects`` configuration.
 
 .. php:method:: getUploadedFile($path)
 
@@ -173,7 +194,7 @@ Returns all uploaded files in a normalized array structure. For the above exampl
 
     [
         'MyModel' => [
-            'attachment' => object(Zend\Diactoros\UploadedFile) {
+            'attachment' => object(Laminas\Diactoros\UploadedFile) {
                 // ...
             }
         ]
@@ -187,14 +208,14 @@ replace all possibly existing uploaded files::
 
     $files = [
         'MyModel' => [
-            'attachment' => new \Zend\Diactoros\UploadedFile(
+            'attachment' => new \Laminas\Diactoros\UploadedFile(
                 $streamOrFile,
                 $size,
                 $errorStatus,
                 $clientFilename,
                 $clientMediaType
             ),
-            'anotherAttachment' => new \Zend\Diactoros\UploadedFile(
+            'anotherAttachment' => new \Laminas\Diactoros\UploadedFile(
                 '/tmp/hfz6dbn.tmp',
                 123,
                 \UPLOAD_ERR_OK,
