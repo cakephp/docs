@@ -82,7 +82,7 @@ Security API
     .. versionadded:: 2.5
 
     .. versionadded:: 2.10.8
-        Set ``Security.useOpenSsl`` to use OpenSSL instead of the deprecated ``mcrpyt`` extension.
+        Set ``Security.useOpenSsl`` to use OpenSSL instead of the deprecated ``mcrypt`` extension.
 
 .. php:staticmethod:: decrypt($cipher, $key, $hmacSalt = null)
 
@@ -107,7 +107,7 @@ Security API
     .. versionadded:: 2.5
 
     .. versionadded:: 2.10.8
-        Set ``Security.useOpenSsl`` to use OpenSSL instead of the deprecated ``mcrpyt`` extension.
+        Set ``Security.useOpenSsl`` to use OpenSSL instead of the deprecated ``mcrypt`` extension.
 
 .. php:staticmethod:: hash( $string, $type = NULL, $salt = false )
 
