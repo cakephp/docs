@@ -2181,7 +2181,7 @@ Définir
 
 **Options pour les Button**
 
-* ``$options['type']`` - Définissez cette variable à l'une des trois valeurs
+* ``'type'`` - Définissez cette variable à l'une des trois valeurs
   suivantes:
 
   #. ``'submit'`` - Comme pour la méthode ``$this->Form->submit()``, cela créera
@@ -2190,9 +2190,15 @@ Définir
   #. ``'reset'`` - Crée un bouton "reset" (remise à zéro) pour le formulairere.
   #. ``'button'`` - Crée un bouton standard.
 
-* ``$options['escape']`` - Booléen. Si cette option est définie à ``true``, le
+* ``'escapeTitle'`` - Booléen. Si cette option est définie à ``true``, le
   contenu HTML de la valeur fournie pour ``$title`` sera échappé. Défaut à
-  ``false``.
+  ``true``.
+
+* ``'escape'`` - Boolean. S'il est défini sur ``true``, il codera en HTML
+  les attributs HTML générés pour le bouton. Défaut à ``true``.
+
+* ``'confirm'`` - Le message de confirmation à afficher lors du clic sur le lien.
+  Défaut à ``null``.
 
 Par exemple::
 
@@ -2210,12 +2216,12 @@ Affichera:
     <button type="reset">Reset the Form</button>
     <button type="submit">Submit Form</button>
 
-Exemple en utilisant l'option ``escape``::
+Exemple en utilisant l'option ``escapeTitle``::
 
-    // Va afficher le HTML echappé.
+    // Rendra le code HTML sans échappement.
     echo $this->Form->button('<em>Submit Form</em>', [
         'type' => 'submit',
-        'escape' => true
+        'escapeTitle' => false,
     ]);
 
 Fermer le Formulaire
