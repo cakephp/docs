@@ -2194,7 +2194,7 @@ Définir
   contenu HTML de la valeur fournie pour ``$title`` sera échappé. Défaut à
   ``true``.
 
-* ``'escape'`` - Boolean. S'il est défini sur ``true``, il codera en HTML
+* ``'escape'`` - Boolean. S'il est défini sur ``true``, il codera en HTML tous
   les attributs HTML générés pour le bouton. Défaut à ``true``.
 
 * ``'confirm'`` - Le message de confirmation à afficher lors du clic sur le lien.

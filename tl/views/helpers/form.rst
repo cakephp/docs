@@ -2206,7 +2206,7 @@ of ``'button'``.
   the value provided inside ``$title``. Defaults to ``true``.
 
 * ``'escape'`` - Boolean. If set to ``true`` it will HTML encode
-  the the HTML attributes generated for the button. Defaults to ``true``.
+  all the HTML attributes generated for the button. Defaults to ``true``.
 
 * ``'confirm'`` - The confirmation message to display on click. Defaults to
   ``null``.
