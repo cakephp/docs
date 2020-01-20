@@ -64,8 +64,8 @@ rename commands that are exposed::
     // in src/Application.php
     namespace App;
 
-    use App\Shell\UserShell;
-    use App\Shell\VersionShell;
+    use App\Command\UserCommand;
+    use App\Command\VersionCommand;
     use Cake\Http\BaseApplication;
 
     class Application extends BaseApplication
