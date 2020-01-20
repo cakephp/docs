@@ -6,7 +6,7 @@ enable deprecation warnings::
 
     // in config/app.php
     'Error' => [
-        'errorLevel' => E_ALL ^ E_USER_DEPRECATED,
+        'errorLevel' => E_ALL,
     ]
 
 Then, incrementally fix the deprecation warnings your application and its
