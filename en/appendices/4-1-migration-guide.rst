@@ -40,6 +40,14 @@ View
 * ``Form/ContextInteface::primaryKey()`` was deprecated. Use ``getPrimaryKey()``
   instead.
 
+Breaking Changes
+================
+
+Database
+--------
+
+* MySQL: The display widths for integers now are ignored except for ``TINYINT(1)`` which
+  still maps to boolean type. Display widths are deprecated in MySQL 8.
 
 New Features
 ============
@@ -56,4 +64,3 @@ Log
 
 * Log messages can now contain ``{foo}`` style placeholders. These placeholders
   will be replaced by values from the ``$context`` parameter if available.
-
