@@ -40,6 +40,14 @@ View
 * ``Form/ContextInteface::primaryKey()`` was deprecated. Use ``getPrimaryKey()``
   instead.
 
+Breaking Changes
+================
+
+Database
+--------
+
+* MySQL: The display widths for integers now are ignored except for ``TINYINT(1)`` which
+  still maps to boolean type. Display widths are deprecated in mysql 8.
 
 New Features
 ============
