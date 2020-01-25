@@ -322,7 +322,7 @@ By using the second parameter you can define a status code for your redirect::
     return $this->redirect('/order/confirm', 301);
 
     // Do a 303 (see other)
-    return $this->redirect('/order/confirm', 301);
+    return $this->redirect('/order/confirm', 303);
 
 See the :ref:`redirect-component-events` section for how to redirect out of
 a life-cycle handler.

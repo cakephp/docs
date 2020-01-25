@@ -315,8 +315,8 @@ To redirect from within a component callback method you can use the following::
 
     public function beforeFilter(EventInterface $event)
     {
-      $event->stopPropagation();
-      return $this->getController()->redirect('/');
+        $event->stopPropagation();
+        return $this->getController()->redirect('/');
     }
 
 By stopping the event you let CakePHP know that you don't want any other
