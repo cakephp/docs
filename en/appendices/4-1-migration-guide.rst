@@ -64,3 +64,11 @@ Log
 
 * Log messages can now contain ``{foo}`` style placeholders. These placeholders
   will be replaced by values from the ``$context`` parameter if available.
+
+TestSuite
+---------
+
+* ``FixtureManager::unload()`` no longer truncates tables at the *end* of a test
+  whilst fixtures are unloaded. Tables will still be truncated during fixture
+  setup. You should see faster test suite runs as fewer truncation operations
+  are being done.
