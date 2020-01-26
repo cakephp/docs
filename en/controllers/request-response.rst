@@ -112,6 +112,9 @@ For non-existent names the ``$default`` value will be returned::
     $foo = $this->request->getData('value.that.does.not.exist');
     // $foo == null
 
+You can also use :ref:`body-parser-middleware` to parse request body of different
+content types into an array, so that it's accessible through ``ServerRequest::getData()``.
+
 .. _request-file-uploads:
 
 File Uploads
