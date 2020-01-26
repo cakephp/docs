@@ -173,8 +173,8 @@ A FormHelper's values sources define where its rendered elements, such as
 input-tags, receive their values from.
 
 By default FormHelper draws its values from the 'context'.  The default
-contexts, such as ``EntityContext``, will fetch data from the current entity, or
-from ``$request->getData()``.
+contexts, such as ``EntityContext``, will fetch data from ``$request->getData()``
+or from the current entity.
 
 If however, you are building a form that needs to read from the query string,
 you can use ``valueSource()`` to change where ``FormHelper`` reads data input
