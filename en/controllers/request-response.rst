@@ -97,17 +97,23 @@ Request Body Data
 
 .. php:method:: getData($name, $default = null)
 
-All POST data can be accessed using
-:php:meth:`Cake\\Http\\ServerRequest::getData()`.  Any form data that
-contains a ``data`` prefix will have that data prefix removed. For example::
+All POST data normally available through PHP's ``$_POST`` global variable can be 
+accessed using :php:meth:`Cake\\Http\\ServerRequest::getData()`. For example::
 
-    // An input with a name attribute equal to 'MyModel[title]' is accessible at
-    $title = $this->request->getData('MyModel.title');
+    // An input with a name attribute equal to 'title' is accessible at
+    $title = $this->request->getData('title');
 
-Any keys that do not exist will return ``null``::
+You can use a dot separated names to access nested data. For example::
 
-    $foo = $this->request->getData('Value.that.does.not.exist');
+    $value = $this->request->getData('address.street_name');
+
+For non-existent names the ``$default`` value will be returned::
+
+    $foo = $this->request->getData('value.that.does.not.exist');
     // $foo == null
+
+You can also use :ref:`body-parser-middleware` to parse request body of different
+content types into an array, so that it's accessible through ``ServerRequest::getData()``.
 
 .. _request-file-uploads:
 
@@ -115,13 +121,19 @@ File Uploads
 ------------
 
 Uploaded files can be accessed through the request body data, using the :php:meth:`Cake\\Http\\ServerRequest::getData()`
-method described above. For example, a file from an input element with a name attribute of ``MyModel[attachment]``, can
+method described above. For example, a file from an input element with a name attribute of ``attachment``, can
 be accessed like this::
 
-    $attachment = $this->request->getData('MyModel.attachment');
+    $attachment = $this->request->getData('attachment');
 
-By default file uploads are represented in the request data as arrays, with a normalized structure that remains the same
-even for nested inputs/names, which is different from how PHP represents them in the ``$_FILES`` superglobal (refer to
+By default file uploads are represented in the request data as objects that implement
+`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__.
+In the above example, ``$attachment`` would hold an object, in the current implementation it would by default be an
+instance of ``\Zend\Diactoros\UploadedFile``.
+
+Alternatively it's possible to have CakePHP provide the uploads in the request data with a normalized 
+structure that remains the same even for nested inputs/names, which is different from how PHP represents 
+them in the ``$_FILES`` superglobal (refer to
 `the PHP manual <https://www.php.net/manual/en/features.file-upload.php>`__ for more information), ie the
 ``$attachment`` value would look something like this::
 
@@ -132,23 +144,18 @@ even for nested inputs/names, which is different from how PHP represents them in
         'tmp_name' => '/tmp/hfz6dbn.tmp'
         'error' => 0
     ]
-
-Alternatively it's possible to have CakePHP provide the uploads in the request data as objects that implement
-`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__. In order to
-enable this behavior, set the configuration value ``App.uploadedFilesAsObjects`` to ``true``, for example in your
+    
+In order to enable this behavior, set the configuration value ``App.uploadedFilesAsObjects`` to ``false``, for example in your
 ``config/app.php`` file::
 
     return [
         // ...
         'App' => [
             // ...
-            'uploadedFilesAsObjects' => true,
+            'uploadedFilesAsObjects' => false,
         ],
         // ...
     ];
-
-In the above example, ``$attachment`` would then hold an object, in the current implementation it would by default be an
-instance of ``\Zend\Diactoros\UploadedFile``.
 
 Furthermore uploaded files can be accessed as objects separately from the request data via the
 :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` and
@@ -160,7 +167,7 @@ irrespectively of the ``App.uploadedFilesAsObjects`` configuration.
 Returns the uploaded file at a specific path. The path uses the same dot syntax as the
 :php:meth:`Cake\\Http\\ServerRequest::getData()` method::
 
-    $attachment = $this->request->getUploadedFile('MyModel.attachment');
+    $attachment = $this->request->getUploadedFile('attachment');
 
 Unlike :php:meth:`Cake\\Http\\ServerRequest::getData()`, :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` would
 only return data when an actual file upload exists for the given path, if there is regular, non-file request body data
@@ -169,14 +176,12 @@ present at the given path, then this method will return ``null``, just like it w
 .. php:method:: getUploadedFiles()
 
 Returns all uploaded files in a normalized array structure. For the above example with the file input name of
-``MyModel[attachment]``, the structure would look like::
+``attachment``, the structure would look like::
 
     [
-        'MyModel' => [
-            'attachment' => object(Zend\Diactoros\UploadedFile) {
-                // ...
-            }
-        ]
+          'attachment' => object(Zend\Diactoros\UploadedFile) {
+              // ...
+          }
     ]
 
 .. php:method:: withUploadedFiles(array $files)
