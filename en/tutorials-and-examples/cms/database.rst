@@ -55,8 +55,8 @@ necessary tables::
     VALUES
     (1, 'First Post', 'first-post', 'This is the first post.', 1, NOW(), NOW());
 
-If you are using PostgreSQL, another popular choice among open source databases,
-after connecting to ``cake_cms`` database, you can execute the following SQL instead::
+If you are using PostgreSQL, connecting to ``cake_cms`` database and execute the
+following SQL instead::
 
     CREATE TABLE users (
         id SERIAL PRIMARY KEY,
