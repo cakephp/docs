@@ -167,11 +167,11 @@ we'll start with the following::
 
     class ProgressHelperTest extends TestCase
     {
-        public function setUp()
+        public function setUp(): void
         {
         }
 
-        public function testBar()
+        public function testBar(): void
         {
         }
     }
@@ -182,7 +182,7 @@ in a test case class. Setup methods should initialize the objects needed for the
 test, and do any configuration needed. In our setup method we'll add the
 following::
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $View = new View();
@@ -197,7 +197,7 @@ does a number things like backing up the values in
 Next, we'll fill out the test method. We'll use some assertions to ensure that
 our code creates the output we expect::
 
-    public function testBar()
+    public function testBar(): void
     {
         $result = $this->Progress->bar(90);
         $this->assertContains('width: 90%', $result);
@@ -562,7 +562,7 @@ you could do the following::
             ]
         ];
 
-        public function init()
+        public function init(): void
         {
             $this->records = [
                 [
@@ -669,7 +669,7 @@ you define the ``$fixtures`` property in your model::
     You can also override ``TestCase::getFixtures()`` instead of defining
     the ``$fixtures`` property::
 
-        public function getFixtures()
+        public function getFixtures(): array
         {
             return ['app.Articles', 'app.Comments'];
         }
@@ -698,7 +698,7 @@ them using :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
         public $fixtures = ['app.Articles', 'app.Comments'];
         public $autoFixtures = false;
 
-        public function testMyFunction()
+        public function testMyFunction(): void
         {
             $this->loadFixtures('Articles', 'Comments');
         }
@@ -730,7 +730,7 @@ Let's say we already have our Articles Table class defined in
 
     class ArticlesTable extends Table
     {
-        public function findPublished(Query $query, array $options)
+        public function findPublished(Query $query, array $options): Query
         {
             $query->where([
                 $this->alias() . '.published' => 1
@@ -775,13 +775,13 @@ now looks like this::
     {
         public $fixtures = ['app.Articles'];
 
-        public function setUp()
+        public function setUp(): void
         {
             parent::setUp();
             $this->Articles = TableRegistry::getTableLocator()->get('Articles');
         }
 
-        public function testFindPublished()
+        public function testFindPublished(): void
         {
             $query = $this->Articles->find('published');
             $this->assertInstanceOf('Cake\ORM\Query', $query);
@@ -811,7 +811,7 @@ There will be times you'll want to mock methods on models when testing them. You
 should use ``getMockForModel`` to create testing mocks of table classes. It
 avoids issues with reflected properties that normal mocks have::
 
-    public function testSendingEmails()
+    public function testSendingEmails(): void
     {
         $model = $this->getMockForModel('EmailVerification', ['send']);
         $model->expects($this->once())
@@ -892,7 +892,7 @@ Create a file named **ArticlesControllerTest.php** in your
 
         public $fixtures = ['app.Articles'];
 
-        public function testIndex()
+        public function testIndex(): void
         {
             $this->get('/articles');
 
@@ -900,7 +900,7 @@ Create a file named **ArticlesControllerTest.php** in your
             // More asserts.
         }
 
-        public function testIndexQueryData()
+        public function testIndexQueryData(): void
         {
             $this->get('/articles?page=1');
 
@@ -908,7 +908,7 @@ Create a file named **ArticlesControllerTest.php** in your
             // More asserts.
         }
 
-        public function testIndexShort()
+        public function testIndexShort(): void
         {
             $this->get('/articles/index/short');
 
@@ -917,7 +917,7 @@ Create a file named **ArticlesControllerTest.php** in your
             // More asserts.
         }
 
-        public function testIndexPostData()
+        public function testIndexPostData(): void
         {
             $data = [
                 'user_id' => 1,
@@ -983,7 +983,7 @@ methods in ``IntegrationTestTrait`` to do this. Assuming you had an
 ``ArticlesController`` that contained an add method, and that add method
 required authentication, you could write the following tests::
 
-    public function testAddUnauthenticatedFails()
+    public function testAddUnauthenticatedFails(): void
     {
         // No session data set.
         $this->get('/articles/add');
@@ -991,7 +991,7 @@ required authentication, you could write the following tests::
         $this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
     }
 
-    public function testAddAuthenticated()
+    public function testAddAuthenticated(): void
     {
         // Set session data
         $this->session([
@@ -1021,7 +1021,7 @@ variables that `PHP creates <http://php.net/manual/en/features.http-auth.php>`_
 automatically. These environment variables used in the authentication adapter
 outlined in :ref:`basic-authentication`::
 
-    public function testBasicAuthentication()
+    public function testBasicAuthentication(): void
     {
         $this->configRequest([
             'environment' => [
@@ -1037,7 +1037,7 @@ outlined in :ref:`basic-authentication`::
 If you are testing other forms of authentication, such as OAuth2, you can set
 the Authorization header directly::
 
-    public function testOauthToken()
+    public function testOauthToken(): void
     {
         $this->configRequest([
             'headers' => [
@@ -1059,7 +1059,7 @@ When testing actions protected by either SecurityComponent or CsrfComponent you
 can enable automatic token generation to ensure your tests won't fail due to
 token mismatches::
 
-    public function testAdd()
+    public function testAdd(): void
     {
         $this->enableCsrfToken();
         $this->enableSecurityToken();
@@ -1090,7 +1090,7 @@ auto-detect the presence of an ``App\Application`` class and automatically
 enable integration testing of your Application. You can toggle this behavior
 with the ``useHttpServer()`` method::
 
-    public function setUp()
+    public function setUp(): void
     {
         // Enable PSR-7 integration testing.
         $this->useHttpServer(true);
@@ -1102,7 +1102,7 @@ with the ``useHttpServer()`` method::
 You can customize the application class name used, and the constructor
 arguments, by using the ``configApplication()`` method::
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->configApplication('App\App', [CONFIG]);
     }
@@ -1186,7 +1186,7 @@ and make sure our web service is returning the proper response::
 
     class MarkersControllerTest extends IntegrationTestCase
     {
-        public function testGet()
+        public function testGet(): void
         {
             $this->configRequest([
                 'headers' => ['Accept' => 'application/json']
@@ -1215,7 +1215,7 @@ errors it can be helpful to temporarily disable the error handling middleware to
 allow the underlying error to bubble up. You can use
 ``disableErrorHandlerMiddleware()`` to do this::
 
-    public function testGetMissing()
+    public function testGetMissing(): void
     {
         $this->disableErrorHandlerMiddleware();
         $this->get('/markers/not-there');
@@ -1327,13 +1327,13 @@ Usage involves using the trait, setting the comparison base path and calling
     {
         use StringCompareTrait;
 
-        public function setUp()
+        public function setUp(): void
         {
             $this->_compareBasePath = APP . 'tests' . DS . 'comparisons' . DS;
             parent::setUp();
         }
 
-        public function testExample()
+        public function testExample(): void
         {
             $result = ...;
             $this->assertSameAsFile('example.php', $result);
@@ -1411,7 +1411,7 @@ controllers that use it. Here is our example component located in
             $this->setController($event->getSubject());
         }
 
-        public function adjust($length = 'short')
+        public function adjust($length = 'short'): void
         {
             switch ($length) {
                 case 'long':
@@ -1446,7 +1446,7 @@ correctly by the ``adjust()`` method in our component. We create the file
         protected $component;
         protected $controller;
 
-        public function setUp()
+        public function setUp(): void
         {
             parent::setUp();
             // Setup our component and fake test controller
@@ -1462,7 +1462,7 @@ correctly by the ``adjust()`` method in our component. We create the file
             $this->component->startup($event);
         }
 
-        public function testAdjust()
+        public function testAdjust(): void
         {
             // Test our adjust method with different parameter settings
             $this->component->adjust();
@@ -1475,7 +1475,7 @@ correctly by the ``adjust()`` method in our component. We create the file
             $this->assertEquals(100, $this->controller->paginate['limit']);
         }
 
-        public function tearDown()
+        public function tearDown(): void
         {
             parent::tearDown();
             // Clean up after we're done
@@ -1500,7 +1500,7 @@ help us display currencies in our views and for simplicity only has one method
 
     class CurrencyRendererHelper extends Helper
     {
-        public function usd($amount)
+        public function usd($amount): string
         {
             return 'USD ' . number_format($amount, 2, '.', ',');
         }
@@ -1524,7 +1524,7 @@ Now we create our tests::
         public $helper = null;
 
         // Here we instantiate our helper
-        public function setUp()
+        public function setUp(): void
         {
             parent::setUp();
             $View = new View();
@@ -1532,7 +1532,7 @@ Now we create our tests::
         }
 
         // Testing the usd() function
-        public function testUsd()
+        public function testUsd(): void
         {
             $this->assertEquals('USD 5.30', $this->helper->usd(5.30));
 
@@ -1572,7 +1572,7 @@ Expanding on the Orders example, say we have the following tables::
 
     class OrdersTable extends Table
     {
-        public function place($order)
+        public function place($order): bool
         {
             if ($this->save($order)) {
                 // moved cart removal to CartsTable
@@ -1588,14 +1588,14 @@ Expanding on the Orders example, say we have the following tables::
 
     class CartsTable extends Table
     {
-        public function implementedEvents()
+        public function implementedEvents(): array
         {
             return [
                 'Model.Order.afterPlace' => 'removeFromCart'
             ];
         }
 
-        public function removeFromCart(EventInterface $event)
+        public function removeFromCart(EventInterface $event): void
         {
             $order = $event->getData('order');
             $this->delete($order->cart_id);
@@ -1621,7 +1621,7 @@ the event data::
     {
         public $fixtures = ['app.Orders'];
 
-        public function setUp()
+        public function setUp(): void
         {
             parent::setUp();
             $this->Orders = TableRegistry::getTableLocator()->get('Orders');
@@ -1629,7 +1629,7 @@ the event data::
             $this->Orders->getEventManager()->setEventList(new EventList());
         }
 
-        public function testPlace()
+        public function testPlace(): void
         {
             $order = new Order([
                 'user_id' => 1,
@@ -1702,7 +1702,7 @@ also need to prefix your plugin fixtures with ``plugin.Blog.BlogPosts``::
         // Plugin fixtures located in /plugins/Blog/tests/Fixture/
         public $fixtures = ['plugin.Blog.BlogPosts'];
 
-        public function testSomething()
+        public function testSomething(): void
         {
             // Test something.
         }
