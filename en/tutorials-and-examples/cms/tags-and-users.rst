@@ -153,7 +153,7 @@ Ideally, we'd have a URL that looks like
 find all the articles that have the 'funny', 'cat' or 'gifs' tags. Before we
 can implement this, we'll add a new route. Your **config/routes.php** should
 look like::
-    
+
     <?php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
     use Cake\Routing\RouteBuilder;
@@ -371,9 +371,9 @@ With the entity updated we can add a new control for our tags. In
 replace the existing ``tags._ids`` control with the following::
 
     echo $this->Form->control('tag_string', ['type' => 'text']);
-    
+
 We'll also need to update the article view template. In
-**src/Template/Articles/view.php** add the line as shown::
+**templates/Articles/view.php** add the line as shown::
 
     <!-- File: templates/Articles/view.php -->
 
@@ -443,8 +443,8 @@ scenarios where you are creating entities on the fly with ease.
 Auto-populating the Tag String
 ==============================
 
-Before we finish up, we'll need a mechanism that will load the associated tags 
-(if any) whenever we load an article. 
+Before we finish up, we'll need a mechanism that will load the associated tags
+(if any) whenever we load an article.
 
 In your **src/Model/Table/ArticlesTable.php**, change::
 
@@ -459,10 +459,10 @@ In your **src/Model/Table/ArticlesTable.php**, change::
     }
 
 This will tell the Articles table model that there is a join table associated
-with tags.  The 'dependent' option tells the table to delete any associated 
+with tags.  The 'dependent' option tells the table to delete any associated
 records from the join table if an article is deleted.
 
-Lastly, update the findBySlug() method calls in 
+Lastly, update the findBySlug() method calls in
 **src/Controller/ArticlesController.php**::
 
     public function edit($slug)
@@ -472,7 +472,7 @@ Lastly, update the findBySlug() method calls in
             ->firstOrFail();
     ...
     }
-    
+
     public function view($slug = null)
     {
         // Update this line
@@ -481,7 +481,7 @@ Lastly, update the findBySlug() method calls in
         $this->set(compact('article'));
     }
 
-The contain() method tells the ArticlesTable object to also populate the Tags 
+The contain() method tells the ArticlesTable object to also populate the Tags
 association when the article is loaded.  Now when tag_string is called for an
 Article entity, there will be data present to create the string!
 
