@@ -27,27 +27,22 @@ a simple contact form would look like::
 
     class ContactForm extends Form
     {
-        protected function _buildSchema(Schema $schema)
+        protected function _buildSchema(Schema $schema): Schema
         {
             return $schema->addField('name', 'string')
                 ->addField('email', ['type' => 'string'])
                 ->addField('body', ['type' => 'text']);
         }
 
-        protected function validationDefault(Validator $validator)
+        public function validationDefault(Validator $validator): Validator
         {
-            $validator->add('name', 'length', [
-                    'rule' => ['minLength', 10],
-                    'message' => 'A name is required'
-                ])->add('email', 'format', [
-                    'rule' => 'email',
-                    'message' => 'A valid email address is required',
-                ]);
+            $validator->minLength('name', 10)
+                ->email('email');
 
             return $validator;
         }
 
-        protected function _execute(array $data)
+        protected function _execute(array $data): bool
         {
             // Send an email.
             return true;
