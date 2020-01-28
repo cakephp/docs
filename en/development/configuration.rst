@@ -141,7 +141,7 @@ App.paths
     of paths for plugins, view templates and locale files respectively.
 App.uploadedFilesAsObjects
     Defines whether uploaded files are being represented as objects (``true``),
-    or arrays (``false``). This option is being treated as disabled by default.
+    or arrays (``false``). This option is being treated as enabled by default.
     See the :ref:`File Uploads section <request-file-uploads>` in the Request &
     Response Objects chapter for more information.
 Security.salt
@@ -175,7 +175,7 @@ there is a specific use case when using plugin based assets: plugins will not
 use the plugin's prefix when absolute ``...BaseUrl`` URI is used, for example By
 default:
 
-* ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``test_plugin/logo.png`` 
+* ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``test_plugin/logo.png``
 
 If you set ``App.imageBaseUrl`` to ``https://mycdn.example.com/``:
 
