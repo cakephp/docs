@@ -145,6 +145,9 @@ Database
   you will need to update your code.
 * The internals of ``Cake\Database\Schema\CacheCollection`` and ``Cake\Database\SchemaCache``
   have changed. If you extend these classes you will need to update your code.
+* ``Cake\Database\QueryCompiler`` now quotes aliases in ``SELECT`` clause only when
+  auto-quoting is enabled. Quoting is retained for Postgres to avoid identifiers
+  being auto-casted to lowercase.
 * The database schemas now map ``CHAR`` columns to the new ``char`` type instead of
   ``string``.
 * SqlServer datetime columns now map to 'datetime' types instead of 'timestamp' to match

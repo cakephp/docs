@@ -284,4 +284,4 @@ user editing, viewing or listing in this tutorial, but that is an exercise you
 can complete on your own.
 
 Now that users can log in, we'll want to limit users to only edit articles that
-they created by :doc:`applying authorization policies <./authoriztion>`.
+they created by :doc:`applying authorization policies <./authorization>`.

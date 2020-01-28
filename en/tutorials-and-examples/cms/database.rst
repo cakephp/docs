@@ -4,8 +4,9 @@ CMS Tutorial - Creating the Database
 Now that we have CakePHP installed, let's set up the database for our :abbr:`CMS
 (Content Management System)` application. If you haven't already done so, create
 an empty database for use in this tutorial, with a name of your choice, e.g.
-``cake_cms``. You can execute the following SQL to create the necessary
-tables::
+``cake_cms``.
+If you are using MySQL/MariaDB, you can execute the following SQL to create the
+necessary tables::
 
     USE cake_cms;
 
@@ -52,7 +53,56 @@ tables::
 
     INSERT INTO articles (user_id, title, slug, body, published, created, modified)
     VALUES
-    (1, 'First Post', 'first-post', 'This is the first post.', 1, now(), now());
+    (1, 'First Post', 'first-post', 'This is the first post.', 1, NOW(), NOW());
+
+If you are using PostgreSQL, connecting to ``cake_cms`` database and execute the
+following SQL instead::
+
+    CREATE TABLE users (
+        id SERIAL PRIMARY KEY,
+        email VARCHAR(255) NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        created TIMESTAMP,
+        modified TIMESTAMP
+    );
+
+    CREATE TABLE articles (
+        id SERIAL PRIMARY KEY,
+        user_id INT NOT NULL,
+        title VARCHAR(255) NOT NULL,
+        slug VARCHAR(191) NOT NULL,
+        body TEXT,
+        published BOOLEAN DEFAULT FALSE,
+        created TIMESTAMP,
+        modified TIMESTAMP,
+        UNIQUE (slug),
+        FOREIGN KEY (user_id) REFERENCES users(id)
+    );
+
+    CREATE TABLE tags (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(191),
+        created TIMESTAMP,
+        modified TIMESTAMP,
+        UNIQUE (title)
+    );
+
+    CREATE TABLE articles_tags (
+        article_id INT NOT NULL,
+        tag_id INT NOT NULL,
+        PRIMARY KEY (article_id, tag_id),
+        FOREIGN KEY (tag_id) REFERENCES tags(id),
+        FOREIGN KEY (article_id) REFERENCES articles(id)
+    );
+
+    INSERT INTO users (email, password, created, modified)
+    VALUES
+    ('cakephp@example.com', 'secret', NOW(), NOW());
+
+    INSERT INTO articles (user_id, title, slug, body, published, created, modified)
+    VALUES
+    (1, 'First Post', 'first-post', 'This is the first post.', TRUE, NOW(), NOW());
+
 
 You may have noticed that the ``articles_tags`` table used a composite primary
 key. CakePHP supports composite primary keys almost everywhere allowing you to
@@ -79,12 +129,14 @@ might look something like the following::
         'Datasources' => [
             'default' => [
                 'className' => 'Cake\Database\Connection',
+                // Replace Mysql with Postgres if you are using PostgreSQL
                 'driver' => 'Cake\Database\Driver\Mysql',
                 'persistent' => false,
                 'host' => 'localhost',
                 'username' => 'cakephp',
                 'password' => 'AngelF00dC4k3~',
                 'database' => 'cake_cms',
+                // Comment out the line below if you are using PostgreSQL
                 'encoding' => 'utf8mb4',
                 'timezone' => 'UTC',
                 'cacheMetadata' => true,

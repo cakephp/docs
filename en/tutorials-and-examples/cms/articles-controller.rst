@@ -347,7 +347,6 @@ now. Add the following action to your ``ArticlesController``::
     {
         $article = $this->Articles
             ->findBySlug($slug)
-            ->contain('Tags') // load associated Tags
             ->firstOrFail();
 
         if ($this->request->is(['post', 'put'])) {
