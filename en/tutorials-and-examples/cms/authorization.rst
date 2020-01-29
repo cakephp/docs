@@ -37,7 +37,7 @@ Add the ``AuthorizationProviderInterface`` to the implemented interfaces on your
 Then add the following to your ``middleware()`` method::
 
     // Add authorization **after** authentication
-    $middleware->add(new AuthorizationMiddleware($this));
+    $middlewareQueue->add(new AuthorizationMiddleware($this));
 
 The ``AuthorizationMiddleware`` will call a hook method on your application when
 it starts handling the request. This hook method allows your application to
