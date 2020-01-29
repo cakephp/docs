@@ -40,7 +40,7 @@ View
 * ``Form/ContextInteface::primaryKey()`` was deprecated. Use ``getPrimaryKey()``
   instead.
 
-Breaking Changes
+Behavior Changes
 ================
 
 Database
@@ -48,6 +48,14 @@ Database
 
 * MySQL: The display widths for integers now are ignored except for ``TINYINT(1)`` which
   still maps to boolean type. Display widths are deprecated in MySQL 8.
+
+Http
+----
+
+* Uploaded file normalization has been moved from ``ServerRequest`` to
+  ``ServerRequestFactory``. This could impact your tests if you are creating
+  request objects that use nested file upload arrays. Tests using
+  ``IntegrationTestCaseTrait`` should not need to change.
 
 New Features
 ============
