@@ -81,6 +81,7 @@ going to be our logged in user, and our **resources** are our ORM entities and
 queries. Lets use bake to generate a basic policy:
 
 .. code-block:: bash
+
     bin/cake bake policy --type entity Article
 
 This will generate an empty policy class for our ``Article`` entity. You can
