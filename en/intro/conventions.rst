@@ -178,7 +178,7 @@ by creating classes and files that you'd need to create anyway.
 | DB         | articles                          | articles_categories                   | Tables names are plural and underscored.                               |
 |            |                                   |                                       | Field/Column names with two or more words are underscored: first_name  |     
 +------------+-----------------------------------+---------------------------------------+------------------------------------------------------------------------+
-| File       | ArticlesController.php            | ArticlesCategoriesController          |                                                                        |
+| File       | ArticlesController.php            | ArticlesCategoriesController.php      |                                                                        |
 +------------+-----------------------------------+---------------------------------------+------------------------------------------------------------------------+
 | Class      | ArticlesController                | ArticlesCategoriesController          |                                                                        |
 +------------+-----------------------------------+---------------------------------------+------------------------------------------------------------------------+
