@@ -120,7 +120,7 @@ underscored form. The ``viewAll()`` function of the ``ArticlesController`` class
 will look for a view template in **templates/Articles/view_all.php**.
 
 The basic pattern is
-**templates/Controller/underscored_function_name.php**.
+**src/Controller/underscored_function_name.php**.
 
 .. note::
 
