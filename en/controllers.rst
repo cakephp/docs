@@ -199,9 +199,9 @@ theme that will be used when rendering the view, you can use the
 properties of the view before it is created::
 
     $this->viewBuilder()
-        ->helpers(['MyCustom'])
-        ->theme('Modern')
-        ->className('Modern.Admin');
+        ->setHelpers(['MyCustom'])
+        ->setTheme('Modern')
+        ->setClassName('Modern.Admin');
 
 The above shows how you can load custom helpers, set the theme and use a custom
 view class.
