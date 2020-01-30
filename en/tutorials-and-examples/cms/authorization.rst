@@ -78,7 +78,15 @@ The Authorization plugin models authorization and permissions as Policy classes.
 These classes implement the logic to check whether or not a **identity** is
 allowed to **perform an action** on a given **resource**. Our **identity** is
 going to be our logged in user, and our **resources** are our ORM entities and
-queries. Lets use bake to generate a basic policy:
+queries. Lets use bake to generate a basic policy. In **src/Application.php** 
+add the following in the ``bootstrap()`` method::
+
+.. code-block:: bash
+
+    // Add this after you load the **Authentication** plugin
+    $this->addPlugin('Authorization');
+
+Now we can run this shell command::
 
 .. code-block:: bash
 
