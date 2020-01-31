@@ -32,7 +32,9 @@ imports::
 
 Add the ``AuthorizationProviderInterface`` to the implemented interfaces on your application::
 
-    class Application extends BaseApplication implements AuthorizationServiceProviderInterface
+    class Application extends BaseApplication
+        implements AuthenticationServiceProviderInterface,
+        AuthorizationServiceProviderInterface
 
 Then add the following to your ``middleware()`` method::
 
@@ -168,7 +170,8 @@ name::
 Lastly add the following to the ``tags``, ``view``, and ``index`` methods on the
 ``ArticlesController``::
 
-    // View and index are public methods and don't require authorization checks.
+    // View, index and tags actions are public methods 
+    // and don't require authorization checks.
     $this->Authorization->skipAuthorization();
 
 Fixing the Add & Edit Actions

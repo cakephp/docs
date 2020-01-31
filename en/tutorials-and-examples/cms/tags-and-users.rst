@@ -394,7 +394,7 @@ data from the request into our entity. We can use a ``beforeSave()`` hook method
 to parse the tag string and find/build the related entities. Add the following
 to **src/Model/Table/ArticlesTable.php**::
 
-    public function beforeSave($event, $entity, $options)
+    public function beforeSave(EventInterface $event, $entity, $options)
     {
         if ($entity->tag_string) {
             $entity->tags = $this->_buildTags($entity->tag_string);
@@ -471,7 +471,9 @@ Lastly, update the findBySlug() method calls in
     public function edit($slug)
     {
         // Update this line
-        $article = $this->Articles->findBySlug($slug)->contain(['Tags'])
+        $article = $this->Articles
+            ->findBySlug($slug)
+            ->contain('Tags')
             ->firstOrFail();
     ...
     }
@@ -479,13 +481,15 @@ Lastly, update the findBySlug() method calls in
     public function view($slug = null)
     {
         // Update this line
-        $article = $this->Articles->findBySlug($slug)->contain(['Tags'])
+        $article = $this->Articles
+            ->findBySlug($slug)
+            ->contain('Tags')
             ->firstOrFail();
         $this->set(compact('article'));
     }
 
-The contain() method tells the ArticlesTable object to also populate the Tags
-association when the article is loaded.  Now when tag_string is called for an
-Article entity, there will be data present to create the string!
+The ``contain()`` method tells the ``ArticlesTable`` object to also populate the
+Tags association when the article is loaded. Now when tag_string is called for
+an Article entity, there will be data present to create the string!
 
 Next we'll be adding :doc:`authentication </tutorials-and-examples/cms/authentication>`.

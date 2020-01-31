@@ -106,7 +106,23 @@ the authentication process happens before your controller layer. First it checks
 is authenticated (based in the configuration you provided) and injects the user and
 the authentication results into the request for further reference.
 
-In your Application class, add the following code::
+In **src/Application.php**, add the following imports::
+
+    // In src/Application.php add the following imports
+    use Authentication\AuthenticationService;
+    use Authentication\AuthenticationServiceInterface;
+    use Authentication\AuthenticationServiceProviderInterface;
+    use Authentication\Middleware\AuthenticationMiddleware;
+    use Psr\Http\Message\ServerRequestInterface;
+
+Then implement the authentication interface on your application class::
+
+    // in src/Application.php
+    class Application extends BaseApplication
+        implements AuthenticationServiceProviderInterface
+    {
+
+Then add the following::
 
     // src/Application.php
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
@@ -115,14 +131,14 @@ In your Application class, add the following code::
             // ... other middleware added before
             ->add(new RoutingMiddleware($this))
             // add Authentication after RoutingMiddleware
-            ->add(new \Authentication\Middleware\AuthenticationMiddleware($this->configAuth()));
+            ->add(new AuthenticationMiddleware($this));
 
         return $middlewareQueue;
     }
 
-    protected function configAuth(): \Authentication\AuthenticationService
+    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
     {
-        $authenticationService = new \Authentication\AuthenticationService([
+        $authenticationService = new AuthenticationService([
             'unauthenticatedRedirect' => '/users/login',
             'queryParam' => 'redirect',
         ]);
@@ -157,7 +173,8 @@ In you AppController class add the following code::
         parent::initialize();
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        // add this like to check authentication result and lock your site
+
+        // Add this line to check authentication result and lock your site
         $this->loadComponent('Authentication.Authentication');
 
 Now, on every request, the AuthenticationMiddleware will inspect
@@ -179,7 +196,7 @@ In your UsersController, add the following code::
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        // configure the login action to don't require authentication, preventing
+        // Configure the login action to don't require authentication, preventing
         // the infinite redirect loop issue
         $this->Authentication->addUnauthenticatedActions(['login']);
     }
@@ -189,11 +206,10 @@ In your UsersController, add the following code::
         $result = $this->Authentication->getResult();
         // regardless of POST or GET, redirect if user is logged in
         if ($result->isValid()) {
-            // redirect to /pages/home after login success
+            // redirect to /articles after login success
             $redirect = $this->request->getQuery('redirect', [
-                'controller' => 'Pages',
-                'action' => 'display',
-                'home',
+                'controller' => 'Articles',
+                'action' => 'index',
             ]);
 
             return $this->redirect($redirect);
@@ -209,6 +225,7 @@ Add the template logic for your login action::
     <!-- in /templates/Users/login.php -->
     <div class="users form">
         <?= $this->Flash->render() ?>
+        <h3>Login</h3>
         <?= $this->Form->create() ?>
         <fieldset>
             <legend><?= __('Please enter your username and password') ?></legend>
@@ -254,8 +271,9 @@ successfully, CakePHP will automatically redirect you back to ``/articles/add``.
 Logout
 ======
 
-Add the logout action to the UsersController class::
+Add the logout action to the ``UsersController`` class::
 
+    // in src/Controller/UsersController.php
     public function logout()
     {
         $result = $this->Authentication->getResult();
