@@ -22,7 +22,7 @@ If any validation rules fail, the returned entity will contain errors. The
 fields with errors will not be present in the returned entity::
 
     $article = $articles->newEntity($this->request->getData());
-    if ($article->errors()) {
+    if ($article->getErrors()) {
         // Entity failed validation.
     }
 
@@ -336,9 +336,9 @@ message as options::
         'message' => 'This invoice cannot be moved to that status.'
     ]);
 
-The error will be visible when calling the ``errors()`` method on the entity::
+The error will be visible when calling the ``getErrors()`` method on the entity::
 
-    $entity->errors(); // Contains the domain rules error messages
+    $entity->getErrors(); // Contains the domain rules error messages
 
 Creating Unique Field Rules
 ---------------------------
@@ -710,7 +710,7 @@ come up when running a CLI script that directly sets properties on entities::
             $data = $entity->extract($this->schema()->columns(), true);
             $validator = $this->validator('default');
             $errors = $validator->validate($data, $entity->isNew());
-            $entity->errors($errors);
+            $entity->setErrors($errors);
 
             return empty($errors);
         });
@@ -725,10 +725,10 @@ was added::
 
     $userEntity->email = 'not an email!!!';
     $usersTable->save($userEntity);
-    $userEntity->errors('email'); // Invalid email
+    $userEntity->getError('email'); // Invalid email
 
 The same result can be expected when using ``newEntity()`` or
 ``patchEntity()``::
 
     $userEntity = $usersTable->newEntity(['email' => 'not an email!!']);
-    $userEntity->errors('email'); // Invalid email
+    $userEntity->getError('email'); // Invalid email
