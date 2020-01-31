@@ -64,8 +64,8 @@ Updating Articles to Enable Tagging
 Now that our application has tags, we need to enable users to tag their
 articles. First, update the ``add`` action to look like::
 
+    <?php
     // in src/Controller/ArticlesController.php
-
     namespace App\Controller;
 
     use App\Controller\AppController;

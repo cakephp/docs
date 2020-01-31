@@ -88,6 +88,7 @@ This will generate an empty policy class for our ``Article`` entity. You can
 find the generated policy in **src/Policy/ArticlePolicy.php**. Next update the
 policy to look like the following::
 
+    <?php
     namespace TestApp\Policy;
 
     use App\Model\Entity\Article;

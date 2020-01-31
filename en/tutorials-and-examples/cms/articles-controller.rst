@@ -172,8 +172,8 @@ With the basic read views created, we need to make it possible for new articles
 to be created. Start by creating an ``add()`` action in the
 ``ArticlesController``. Our controller should now look like::
 
+    <?php
     // src/Controller/ArticlesController.php
-
     namespace App\Controller;
 
     use App\Controller\AppController;
@@ -312,6 +312,7 @@ creating a slug attribute, and the column is ``NOT NULL``. Slug values are
 typically a URL-safe version of an article's title. We can use the
 :ref:`beforeSave() callback <table-callbacks>` of the ORM to populate our slug::
 
+    <?php
     // in src/Model/Table/ArticlesTable.php
     namespace App\Model\Table;
 
@@ -475,6 +476,8 @@ Next, let's make a way for users to delete articles. Start with a
 ``delete()`` action in the ``ArticlesController``::
 
     // src/Controller/ArticlesController.php
+
+    // Add the following method.
 
     public function delete($slug)
     {
