@@ -77,7 +77,7 @@ Database Conventions
 
 Table names corresponding to CakePHP models are plural and underscored. For
 example ``users``, ``article_categories``, and ``user_favorite_pages``
-respectively.
+respectively. Table name whose name contains multiple words should be singular_plural: article_categories and accordingly whole column. 
 
 Field/Column names with two or more words are underscored: ``first_name``.
 
@@ -158,7 +158,7 @@ By naming the pieces of your application using CakePHP conventions, you gain
 functionality without the hassle and maintenance tethers of configuration.
 Here's a final example that ties the conventions together:
 
--  Database table: "articles"
+-  Database table: "articles", "article_categories"
 -  Table class: ``ArticlesTable``, found at **src/Model/Table/ArticlesTable.php**
 -  Entity class: ``Article``, found at **src/Model/Entity/Article.php**
 -  Controller class: ``ArticlesController``, found at
@@ -172,38 +172,40 @@ automatically tied to the 'articles' table in the database), and renders to a
 file. None of these relationships have been configured by any means other than
 by creating classes and files that you'd need to create anyway.
 
-+------------+-----------------------------------+---------------------------------------+------------------------------------------------------------------------+
-| Example    | articles                          | articles_categories                   |                                                                        |
-+------------+-----------------------------------+---------------------------------------+------------------------------------------------------------------------+
-| DB         | articles                          | articles_categories                   | Tables names are plural and underscored.                               |
-|            |                                   |                                       | Field/Column names with two or more words are underscored: first_name  |     
-+------------+-----------------------------------+---------------------------------------+------------------------------------------------------------------------+
-| File       | ArticlesController.php            | ArticlesCategoriesController.php      |                                                                        |
-+------------+-----------------------------------+---------------------------------------+------------------------------------------------------------------------+
-| Class      | ArticlesController                | ArticlesCategoriesController          |                                                                        |
-+------------+-----------------------------------+---------------------------------------+------------------------------------------------------------------------+
-| Controller | ArticlesController                | ArticlesCategoriesController          | Plural, PascalCased, end in Controller                                 |
-+------------+-----------------------------------+---------------------------------------+------------------------------------------------------------------------+
-| Table      | ArticlesTable.php                 | ArticlesCategoriesTable.php           | Table class names are plural, PascalCased and end in Table             |
-+------------+-----------------------------------+---------------------------------------+------------------------------------------------------------------------+
-| Entity     | Articles.php                      | ArticlesCategories.php                | Entity class names are singular PascalCased and have no suffix         |
-+------------+-----------------------------------+---------------------------------------+------------------------------------------------------------------------+
-| Behavior   | ArticlesBehavior.php              | ArticlesCategoriesBehavior.php        |                                                                        |
-+------------+-----------------------------------+---------------------------------------+------------------------------------------------------------------------+
-| View       | ArticlesView.php                  | ArticlesCategoriesView.php            | View template files are named after the controller functions they      |
-|            |                                   |                                       | display, in an underscored form                                        |
-+------------+-----------------------------------+---------------------------------------+------------------------------------------------------------------------+
-| Helper     | ArticlesHelper.php                | ArticlesCategoriesHelper.php          |                                                                        |
-+------------+-----------------------------------+---------------------------------------+------------------------------------------------------------------------+
-| Component  | ArticlesComponent.php             | ArticlesCategoriesComponent.php       |                                                                        |
-+------------+-----------------------------------+---------------------------------------+------------------------------------------------------------------------+
-| Plugin     | Bad: cakephp/articles             | cakephp/articles-categories           | Useful to prefix a CakePHP plugin with “cakephp-” in the package name. |
-|            | Good: your-name/cakephp-articles  | your-name/cakephp-articles-categories | Do not use the CakePHP namespace (cakephp) as vendor name as this is   |
-|            |                                   |                                       | reserved to CakePHP owned plugins. The convention is to use lowercase  |
-|            |                                   |                                       | letters and dashes as separator.                                       |
-+------------+-----------------------------------+---------------------------------------+------------------------------------------------------------------------+
-| Each file would be located in the appropriate folder/namespace in your app folder.                                                                              |
-+------------+-----------------------------------+---------------------------------------+------------------------------------------------------------------------+
++------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
+| Example    | articles                          | articles_categories                   |                                                                          |
++------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
+| DB         | articles                          | articles_categories                   | Table names corresponding to CakePHP models are plural and underscored.  |
+|            |                                   |                                       | Table name whose name contains multiple words should be singular_plural: |
+|            |                                   |                                       | article_categories and accordingly whole column.                         |
+|            |                                   |                                       | Field/Column names with two or more words are underscored: first_name.   |     
++------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
+| File       | ArticlesController.php            | ArticlesCategoriesController.php      |                                                                          |
++------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
+| Class      | ArticlesController                | ArticlesCategoriesController          |                                                                          |
++------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
+| Controller | ArticlesController                | ArticlesCategoriesController          | Plural, PascalCased, end in Controller                                   |
++------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
+| Table      | ArticlesTable.php                 | ArticlesCategoriesTable.php           | Table class names are plural, PascalCased and end in Table               |
++------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
+| Entity     | Articles.php                      | ArticlesCategories.php                | Entity class names are singular, PascalCased: Article and ArticleCategory|
++------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
+| Behavior   | ArticlesBehavior.php              | ArticlesCategoriesBehavior.php        |                                                                          |
++------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
+| View       | ArticlesView.php                  | ArticlesCategoriesView.php            | View template files are named after the controller functions they        |
+|            |                                   |                                       | display, in an underscored form                                          |
++------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
+| Helper     | ArticlesHelper.php                | ArticlesCategoriesHelper.php          |                                                                          |
++------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
+| Component  | ArticlesComponent.php             | ArticlesCategoriesComponent.php       |                                                                          |
++------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
+| Plugin     | Bad: cakephp/articles             | cakephp/articles-categories           | Useful to prefix a CakePHP plugin with “cakephp-” in the package name.   |
+|            | Good: your-name/cakephp-articles  | your-name/cakephp-articles-categories | Do not use the CakePHP namespace (cakephp) as vendor name as this is     |
+|            |                                   |                                       | reserved to CakePHP owned plugins. The convention is to use lowercase    |
+|            |                                   |                                       | letters and dashes as separator.                                         |
++------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
+| Each file would be located in the appropriate folder/namespace in your app folder.                                                                                |
++------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
 
 
   
