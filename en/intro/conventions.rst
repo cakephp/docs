@@ -182,13 +182,13 @@ by creating classes and files that you'd need to create anyway.
 +------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
 | File       | ArticlesController.php            | ArticlesCategoriesController.php      |                                                                          |
 +------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
-| Class      | ArticlesController                | ArticlesCategoriesController          |                                                                          |
-+------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
-| Controller | ArticlesController                | ArticlesCategoriesController          | Plural, PascalCased, end in Controller                                   |
-+------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
 | Table      | ArticlesTable.php                 | ArticlesCategoriesTable.php           | Table class names are plural, PascalCased and end in Table               |
 +------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
 | Entity     | Articles.php                      | ArticlesCategories.php                | Entity class names are singular, PascalCased: Article and ArticleCategory|
++------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
+| Class      | ArticlesController                | ArticlesCategoriesController          |                                                                          |
++------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
+| Controller | ArticlesController                | ArticlesCategoriesController          | Plural, PascalCased, end in Controller                                   |
 +------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
 | Behavior   | ArticlesBehavior.php              | ArticlesCategoriesBehavior.php        |                                                                          |
 +------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
@@ -207,6 +207,26 @@ by creating classes and files that you'd need to create anyway.
 | Each file would be located in the appropriate folder/namespace in your app folder.                                                                                |
 +------------+-----------------------------------+---------------------------------------+--------------------------------------------------------------------------+
 
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                                       Database Conventions                                                                                        |
++-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| Foreign keys    | Relationships are recognized by default as the (singular) name of the related table followed by ``_id``.                                        |
+| hasMany         | Users hasMany Articles, ``articles`` table will refer to the ``users`` table via a ``user_id`` foreign key.                                     |
+| belongsTo/      |                                                                                                                                                 |
+| hasOne          |                                                                                                                                                 |
+| BelongsToMany   |                                                                                                                                                 |
++-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| Multiple Words  | ``article_categories`` whose name contains multiple words, the foreign key would be ``article_category_id``.                                    |
++-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| Auto Increment  | In addition to using an auto-incrementing integer as primary keys, you can also use UUID columns.                                               |
+|                 | CakePHP will create UUID values automatically using (:php:meth:`Cake\\Utility\\Text::uuid()`)                                                   |
+|			      | whenever you save new records using the ``Table::save()`` method.                                                                               |
++-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| Join tables     | Should be named after the model tables they will join or the bake command won't work, arranged in alphabetical                                  |
+|                 | order (``articles_tags`` rather than ``tags_articles``).                                                                                        |
+|                 | Additional columns on the junction table you should create a separate entity/table class for that table.                                        |
++-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
 
   
 Now that you've been introduced to CakePHP's fundamentals, you might try a run
