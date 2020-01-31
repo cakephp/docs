@@ -14,6 +14,7 @@ users code:
 
     cd /path/to/our/app
 
+    # You can overwrite any existing files.
     bin/cake bake model users
     bin/cake bake controller users
     bin/cake bake template users
@@ -170,14 +171,16 @@ look like::
         $routes->applyMiddleware('csrf');
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
         $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
+
+        // Add this
+        // New route we're adding for our tagged action.
+        // The trailing `*` tells CakePHP that this action has
+        // passed parameters.
+        $routes->scope('/articles', function (RouteBuilder $routes) {
+            $routes->connect('/tagged/*', ['controller' => 'Articles', 'action' => 'tags']);
+        });
+
         $routes->fallbacks(DashedRoute::class);
-    });
-    // Add this
-    // New route we're adding for our tagged action.
-    // The trailing `*` tells CakePHP that this action has
-    // passed parameters.
-    Router::scope('/articles', function (RouteBuilder $routes) {
-        $routes->connect('/tagged/*', ['controller' => 'Articles', 'action' => 'tags']);
     });
 
 The above defines a new 'route' which connects the **/articles/tagged/** path,
@@ -281,9 +284,9 @@ Creating the View
 
 Now if you visit the **/articles/tagged** URL again, CakePHP will show a new error
 letting you know that you have not made a view file. Next, let's build the
-view file for our ``tags()`` action. In **templates/Articles/tags.php**
-put the following content::
+view file for our ``tags()`` action:: 
 
+    <!-- In templates/Articles/tags.php -->
     <h1>
         Articles tagged with
         <?= $this->Text->toList(h($tags), 'or') ?>

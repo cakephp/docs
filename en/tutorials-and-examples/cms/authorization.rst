@@ -89,7 +89,7 @@ find the generated policy in **src/Policy/ArticlePolicy.php**. Next update the
 policy to look like the following::
 
     <?php
-    namespace TestApp\Policy;
+    namespace App\Policy;
 
     use App\Model\Entity\Article;
     use Authorization\IdentityInterface;
@@ -200,7 +200,8 @@ logged in user. Replace your add action with the following::
             }
             $this->Flash->error(__('Unable to add your article.'));
         }
-        $this->set('article', $article);
+        $tags = $this->Articles->Tags->find('list');
+        $this->set(compact('article', 'tags'));
     }
 
 Next we'll update the ``edit`` action. Replace the edit method with the following::
@@ -226,7 +227,8 @@ Next we'll update the ``edit`` action. Replace the edit method with the followin
             }
             $this->Flash->error(__('Unable to update your article.'));
         }
-        $this->set('article', $article);
+        $tags = $this->Articles->Tags->find('list');
+        $this->set(compact('article', 'tags'));
     }
 
 Here we're modifying which properties can be mass-assigned, via the options

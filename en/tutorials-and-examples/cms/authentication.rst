@@ -206,7 +206,7 @@ In your UsersController, add the following code::
 
 Add the template logic for your login action::
 
-    // in /templates/Users/login.php
+    <!-- in /templates/Users/login.php -->
     <div class="users form">
         <?= $this->Flash->render() ?>
         <?= $this->Form->create() ?>
@@ -217,6 +217,8 @@ Add the template logic for your login action::
         </fieldset>
         <?= $this->Form->submit(__('Login')); ?>
         <?= $this->Form->end() ?>
+
+        <?= $this->Html->link("Add User", ['action' => 'add']) ?>
     </div>
 
 Now login page will allow us to correctly login into the application.
@@ -274,6 +276,7 @@ If you try to visit **/users/add** without being logged in, you will be
 redirected to the login page. We should fix that as we want to allow people to
 sign up for our application. In the ``UsersController`` fix the following line::
 
+    // Add to the beforeFilter method of UsersController
     $this->Authentication->addUnauthenticatedActions(['login', 'add']);
 
 The above tells ``AuthenticationComponent`` that the ``add()`` action of the
