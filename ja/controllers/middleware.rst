@@ -490,4 +490,4 @@ GETを使用しない非HTTPSリクエストを受信した場合、``BadRequest
 
 .. meta::
     :title lang=ja: Http ミドルウェア
-    :keywords lang=ja: http, ミドルウェア, psr-7, リクエスト, レスポンス, wsgi, アプリケーション, baseapplication
+    :keywords lang=ja: http, ミドルウェア, psr-7, リクエスト, レスポンス, wsgi, アプリケーション, baseapplication, https
