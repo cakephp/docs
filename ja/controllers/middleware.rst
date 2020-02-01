@@ -378,7 +378,7 @@ CSRF 保護は、ミドルウェアスタックに ``CsrfProtectionMiddleware`` 
 .. note::
 
     次のアプローチの両方を一緒に使用することはできません。1つだけを選択する必要があります。
-    両方のアプローチを併用すると、すべての `PUT` および `POST` リクエストでCSRFトークンの不一致エラーが発生します。
+    両方のアプローチを併用すると、すべての `PUT` および `POST` リクエストで CSRF トークンの不一致エラーが発生します。
 
 ``CsrfProtectionMiddleware`` をアプリケーションミドルウェアスタックに適用することにより、
 アプリケーションのすべてのアクションを保護します。 ::
@@ -432,7 +432,7 @@ CSRF 保護は、ミドルウェアスタックに ``CsrfProtectionMiddleware`` 
     $token = $this->request->getAttribute('csrfToken');
 
 ホワイトリストコールバック機能を使用して、
-CSRFトークンチェックを実行するURLをより詳細に制御できます。 ::
+CSRF トークンチェックを実行する URL をより詳細に制御できます。 ::
 
     // in src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
@@ -448,7 +448,7 @@ CSRFトークンチェックを実行するURLをより詳細に制御できま�
             }
         });
 
-        // ルーティングミドルウェアがCSRF保護ミドルウェアより先にキューに追加されていることを確認してください。
+        // ルーティングミドルウェアが CSRF 保護ミドルウェアより先にキューに追加されていることを確認してください。
         $middlewareQueue->add($csrf);
 
         return $middlewareQueue;
@@ -456,8 +456,8 @@ CSRFトークンチェックを実行するURLをより詳細に制御できま�
 
 .. note::
 
-    Cookie/セッションを使用してステートフルリクエストを処理するURLにのみCSRF保護ミドルウェアを適用する必要があります。
-    ステートレスリクエスト(例えばAPI開発時)はCSRFの影響を受けないため、これらのURLにミドルウェアを適用する必要はありません。
+    Cookie/セッションを使用してステートフルリクエストを処理する URL にのみ CSRF 保護ミドルウェアを適用する必要があります。
+    ステートレスリクエスト(例えば API 開発時)は CSRF の影響を受けないため、これらの URL にミドルウェアを適用する必要はありません。
 
 FormHelper との統合
 -------------------
@@ -479,29 +479,30 @@ CSRF トークンを送信することができます。ヘッダーを使用す
 アプリケーションや XML/JSON ベースの API エンドポイントに CSRF トークンを簡単に
 統合することができます。
 
-The CSRF Token can be obtained in JavaScript via the Cookie ``csrfToken``, or in PHP
-via the request object attribute named ``csrfToken``. Using the cookie might be easier
-when your JavaScript code resides in files separate from the CakePHP view templates,
-and when you already have functionality for parsing cookies via JavaScript.
+CSRF トークンは、JavaScript で Cookie の ``csrfToken`` を介して取得するか、
+PHPで ``csrfToken`` という名前のリクエストオブジェクト属性を介して取得できます。
+JavaScript コードが CakePHP ビューテンプレートとは別のファイルにある場合、
+および JavaScript を介して Cookie を解析する機能を既に持っている場合は、
+Cookie を使用する方が簡単です。
 
-If you have separate JavaScript files but don't want to deal with handling cookies,
-you could for example set the token in a global JavaScript variable in your layout, by
-defining a script block like this::
+JavaScript ファイルが別のファイルにあるものの、Cookie の処理を扱いたくない場合、
+たとえば、次のようなスクリプトブロックを定義することにより、
+レイアウトのグローバル JavaScript 変数にトークンを設定できます。 ::
 
     echo $this->Html->scriptBlock(sprintf(
         'var csrfToken = %s;',
         json_encode($this->request->getAttribute('csrfToken'))
     ));
 
-You can then access the token as ``csrfToken`` or ``window.csrfToken`` in any script
-file that is loaded after this script block.
+このスクリプトブロックの後に読み込まれる任意のスクリプトファイル内で、
+``csrfToken`` または ``window.csrfToken`` としてトークンにアクセスできます。
 
-Another alternative would be to put the token in a custom meta tag like this::
+別の代替方法は、次のようなカスタムメタタグにトークンを配置することです。 ::
 
     echo $this->Html->meta('csrfToken', $this->request->getAttribute('csrfToken'));
 
-which could then be accessed in your scripts by looking for the ``meta`` element with
-the name ``csrfToken``, which could be as simple as this when using jQuery::
+次に、 ``csrfToken`` という名前の ``meta`` 要素を探すことで、
+jQuery を使用した場合と同じくらい簡単にスクリプト内でアクセスできます。
 
     var csrfToken = $('meta[name="csrfToken"]').attr('content');
 
