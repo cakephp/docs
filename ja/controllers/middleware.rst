@@ -425,6 +425,69 @@ CSRF トークンを送信することができます。ヘッダーを使用す
 
 CSRF トークンは、クッキーの ``csrfToken`` で取得されます。
 
+.. _body-parser-middleware:
+
+ボディパーサミドルウェア
+======================
+
+アプリケーションが JSON、XML、またはその他のエンコードされたリクエストボディを受け入れる場合、
+``BodyParserMiddleware`` を使用すると、それらのリクエストを配列にデコードして、
+``$request->getParsedData()`` および ``$request->getData()`` で利用可能です。
+デフォルトでは ``json`` ボディのみがパースされますが、オプションでXMLパースを有効にすることができます。
+独自のパーサーを定義することもできます。
+
+    use Cake\Http\Middleware\BodyParserMiddleware;
+
+    // JSONのみがパースされます。
+    $bodies = new BodyParserMiddleware();
+
+    // XMLパースを有効にする
+    $bodies = new BodyParserMiddleware(['xml' => true]);
+
+    // JSONパースを無効にする
+    $bodies = new BodyParserMiddleware(['json' => false]);
+
+    // content-type ヘッダーの値にマッチする独自のパーサを
+    // それらをパース可能な callabe に追加します。
+    $bodies = new BodyParserMiddleware();
+    $bodies->addParser(['text/csv'], function ($body, $request) {
+        // Use a CSV parsing library.
+        return Csv::parse($body);
+    });
+
+.. _https-enforcer-middleware:
+
+HTTPS Enforcer Middleware
+=========================
+
+HTTPS接続経由の場合にのみアプリケーションを使用できるようにしたい場合、
+``HttpsEnforcerMiddleware`` を利用することができます。
+
+    use Cake\Http\Middleware\HttpsEnforcerMiddleware;
+
+    // 常に例外を発生させ、リダイレクトしません。
+    $https = new HttpsEnforcerMiddleware([
+        'redirect' => false,
+    ]);
+
+    // リダイレクト時にステータスコード302を送信します。
+    $https = new HttpsEnforcerMiddleware([
+        'redirect' => true,
+        'statusCode' => 302,
+    ]);
+
+    // リダイレクトレスポンスで追加のヘッダーを送信します。
+    $https = new HttpsEnforcerMiddleware([
+        'headers' => ['X-Https-Upgrade', => true],
+    ]);
+
+    // ``debug`` がオンの場合、HTTPSの強制を無効にします。
+    $https = new HttpsEnforcerMiddleware([
+        'disableOnDebug' => true,
+    ]);
+
+GETを使用しない非HTTPSリクエストを受信した場合、``BadRequestException`` が発生します。
+
 .. meta::
     :title lang=ja: Http ミドルウェア
     :keywords lang=ja: http, ミドルウェア, psr-7, リクエスト, レスポンス, wsgi, アプリケーション, baseapplication
