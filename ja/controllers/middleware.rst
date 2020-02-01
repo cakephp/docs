@@ -375,15 +375,13 @@ CakePHP の以前のバージョンの ``CookieComponent`` と後方互換性が
 CSRF 保護は、ミドルウェアスタックに ``CsrfProtectionMiddleware`` を適用することにより、
 アプリケーション全体または特定のスコープに適用できます。 ::
 
-
 .. note::
 
-    You cannot use both of the following approaches together, you must choose
-    only one.  If you use both approaches together, a CSRF token mismatch error
-    will occur on every `PUT` and `POST` request
+    次のアプローチの両方を一緒に使用することはできません。1つだけを選択する必要があります。
+    両方のアプローチを併用すると、すべての `PUT` および `POST` リクエストでCSRFトークンの不一致エラーが発生します。
 
-By applying the ``CsrfProtectionMiddleware`` to your Application middleware
-stack you protect all the actions in application::
+``CsrfProtectionMiddleware`` をアプリケーションミドルウェアスタックに適用することにより、
+アプリケーションのすべてのアクションを保護します。 ::
 
     // in src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
@@ -398,8 +396,8 @@ stack you protect all the actions in application::
         return $middlwareQueue;
     }
 
-By applying the ``CsrfProtectionMiddleware`` to routing scopes, you can include
-or exclude specific route groups::
+``CsrfProtectionMiddleware`` をルーティングスコープに適用することにより、
+特定のルートグループを含めたり除外したりできます。 ::
 
     // in src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
@@ -433,8 +431,8 @@ or exclude specific route groups::
 
     $token = $this->request->getAttribute('csrfToken');
 
-You can use the whitelisting callback feature for more fine grained control over
-URLs for which CSRF token check should be done::
+ホワイトリストコールバック機能を使用して、
+CSRFトークンチェックを実行するURLをより詳細に制御できます。 ::
 
     // in src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
@@ -442,7 +440,7 @@ URLs for which CSRF token check should be done::
     public function middleware($middlewareQueue) {
         $csrf = new CsrfProtectionMiddleware();
 
-        // Token check will be skipped when callback returns `true`.
+        // コールバックが `true` を返す場合、トークンのチェックはスキップされます。
         $csrf->whitelistCallback(function ($request) {
             // Skip token check for API URLs.
             if ($request->getParam('prefix') === 'Api') {
@@ -450,7 +448,7 @@ URLs for which CSRF token check should be done::
             }
         });
 
-        // Ensure routing middleware is added to the queue before CSRF protection middleware.
+        // ルーティングミドルウェアがCSRF保護ミドルウェアより先にキューに追加されていることを確認してください。
         $middlewareQueue->add($csrf);
 
         return $middlewareQueue;
@@ -458,9 +456,8 @@ URLs for which CSRF token check should be done::
 
 .. note::
 
-    You should apply the CSRF protection middleware only for URLs which handle stateful
-    requests using cookies/session. Stateless requests, for e.g. when developing an API,
-    are not affected by CSRF so the middleware does not need to be applied for those URLs.
+    Cookie/セッションを使用してステートフルリクエストを処理するURLにのみCSRF保護ミドルウェアを適用する必要があります。
+    ステートレスリクエスト(例えばAPI開発時)はCSRFの影響を受けないため、これらのURLにミドルウェアを適用する必要はありません。
 
 FormHelper との統合
 -------------------
