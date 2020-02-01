@@ -375,14 +375,47 @@ CakePHP の以前のバージョンの ``CookieComponent`` と後方互換性が
 CSRF 保護は、ミドルウェアスタックに ``CsrfProtectionMiddleware`` を適用することにより、
 アプリケーション全体または特定のスコープに適用できます。 ::
 
+
+.. note::
+
+    You cannot use both of the following approaches together, you must choose
+    only one.  If you use both approaches together, a CSRF token mismatch error
+    will occur on every `PUT` and `POST` request
+
+By applying the ``CsrfProtectionMiddleware`` to your Application middleware
+stack you protect all the actions in application::
+
+    // in src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
 
-    $options = [
-        // ...
-    ];
-    $csrf = new CsrfProtectionMiddleware($options);
+    public function middleware($middlwareQueue) {
+        $options = [
+            // ...
+        ];
+        $csrf = new CsrfProtectionMiddleware($options);
 
-    $middlewareQueue->add($csrf);
+        $middlwareQueue->add($csrf);
+        return $middlwareQueue;
+    }
+
+By applying the ``CsrfProtectionMiddleware`` to routing scopes, you can include
+or exclude specific route groups::
+
+    // in src/Application.php
+    use Cake\Http\Middleware\CsrfProtectionMiddleware;
+
+    public function routes($routes) {
+        $options = [
+            // ...
+        ];
+        $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware($options));
+        parent::routes($routes);
+    }
+
+    // in config/routes.php
+    Router::scope('/', function (RouteBuilder $routes) {
+        $routes->applyMiddleware('csrf');
+    });
 
 オプションは、ミドルウェアのコンストラクタに渡すことができます。
 利用可能な設定オプションは次の通りです。
@@ -398,10 +431,36 @@ CSRF 保護は、ミドルウェアスタックに ``CsrfProtectionMiddleware`` 
 
 有効にすると、リクエストオブジェクトの現在の CSRF トークンにアクセスできます。 ::
 
-    $token = $this->request->getParam('_csrfToken');
+    $token = $this->request->getAttribute('csrfToken');
 
-.. versionadded:: 3.5.0
-    ``CsrfProtectionMiddleware`` は 3.5.0 で追加されました。
+You can use the whitelisting callback feature for more fine grained control over
+URLs for which CSRF token check should be done::
+
+    // in src/Application.php
+    use Cake\Http\Middleware\CsrfProtectionMiddleware;
+
+    public function middleware($middlewareQueue) {
+        $csrf = new CsrfProtectionMiddleware();
+
+        // Token check will be skipped when callback returns `true`.
+        $csrf->whitelistCallback(function ($request) {
+            // Skip token check for API URLs.
+            if ($request->getParam('prefix') === 'Api') {
+                return true;
+            }
+        });
+
+        // Ensure routing middleware is added to the queue before CSRF protection middleware.
+        $middlewareQueue->add($csrf);
+
+        return $middlewareQueue;
+    }
+
+.. note::
+
+    You should apply the CSRF protection middleware only for URLs which handle stateful
+    requests using cookies/session. Stateless requests, for e.g. when developing an API,
+    are not affected by CSRF so the middleware does not need to be applied for those URLs.
 
 FormHelper との統合
 -------------------
@@ -423,7 +482,31 @@ CSRF トークンを送信することができます。ヘッダーを使用す
 アプリケーションや XML/JSON ベースの API エンドポイントに CSRF トークンを簡単に
 統合することができます。
 
-CSRF トークンは、クッキーの ``csrfToken`` で取得されます。
+The CSRF Token can be obtained in JavaScript via the Cookie ``csrfToken``, or in PHP
+via the request object attribute named ``csrfToken``. Using the cookie might be easier
+when your JavaScript code resides in files separate from the CakePHP view templates,
+and when you already have functionality for parsing cookies via JavaScript.
+
+If you have separate JavaScript files but don't want to deal with handling cookies,
+you could for example set the token in a global JavaScript variable in your layout, by
+defining a script block like this::
+
+    echo $this->Html->scriptBlock(sprintf(
+        'var csrfToken = %s;',
+        json_encode($this->request->getAttribute('csrfToken'))
+    ));
+
+You can then access the token as ``csrfToken`` or ``window.csrfToken`` in any script
+file that is loaded after this script block.
+
+Another alternative would be to put the token in a custom meta tag like this::
+
+    echo $this->Html->meta('csrfToken', $this->request->getAttribute('csrfToken'));
+
+which could then be accessed in your scripts by looking for the ``meta`` element with
+the name ``csrfToken``, which could be as simple as this when using jQuery::
+
+    var csrfToken = $('meta[name="csrfToken"]').attr('content');
 
 .. meta::
     :title lang=ja: Http ミドルウェア
