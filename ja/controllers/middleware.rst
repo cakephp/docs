@@ -373,16 +373,47 @@ CakePHP の以前のバージョンの ``CookieComponent`` と後方互換性が
 ========================================================
 
 CSRF 保護は、ミドルウェアスタックに ``CsrfProtectionMiddleware`` を適用することにより、
-アプリケーション全体または特定のスコープに適用できます。 ::
+アプリケーション全体または特定のスコープに適用できます。
 
+.. note::
+
+    次のアプローチの両方を一緒に使用することはできません。1つだけを選択する必要があります。
+    両方のアプローチを併用すると、すべての `PUT` および `POST` リクエストで CSRF トークンの不一致エラーが発生します。
+
+``CsrfProtectionMiddleware`` をアプリケーションミドルウェアスタックに適用することにより、
+アプリケーションのすべてのアクションを保護します。 ::
+
+    // in src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
 
-    $options = [
-        // ...
-    ];
-    $csrf = new CsrfProtectionMiddleware($options);
+    public function middleware($middlwareQueue) {
+        $options = [
+            // ...
+        ];
+        $csrf = new CsrfProtectionMiddleware($options);
 
-    $middlewareQueue->add($csrf);
+        $middlwareQueue->add($csrf);
+        return $middlwareQueue;
+    }
+
+``CsrfProtectionMiddleware`` をルーティングスコープに適用することにより、
+特定のルートグループを含めたり除外したりできます。 ::
+
+    // in src/Application.php
+    use Cake\Http\Middleware\CsrfProtectionMiddleware;
+
+    public function routes($routes) {
+        $options = [
+            // ...
+        ];
+        $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware($options));
+        parent::routes($routes);
+    }
+
+    // in config/routes.php
+    Router::scope('/', function (RouteBuilder $routes) {
+        $routes->applyMiddleware('csrf');
+    });
 
 オプションは、ミドルウェアのコンストラクタに渡すことができます。
 利用可能な設定オプションは次の通りです。
@@ -398,10 +429,35 @@ CSRF 保護は、ミドルウェアスタックに ``CsrfProtectionMiddleware`` 
 
 有効にすると、リクエストオブジェクトの現在の CSRF トークンにアクセスできます。 ::
 
-    $token = $this->request->getParam('_csrfToken');
+    $token = $this->request->getAttribute('csrfToken');
 
-.. versionadded:: 3.5.0
-    ``CsrfProtectionMiddleware`` は 3.5.0 で追加されました。
+ホワイトリストコールバック機能を使用して、
+CSRF トークンチェックを実行する URL をより詳細に制御できます。 ::
+
+    // in src/Application.php
+    use Cake\Http\Middleware\CsrfProtectionMiddleware;
+
+    public function middleware($middlewareQueue) {
+        $csrf = new CsrfProtectionMiddleware();
+
+        // コールバックが `true` を返す場合、トークンのチェックはスキップされます。
+        $csrf->whitelistCallback(function ($request) {
+            // Skip token check for API URLs.
+            if ($request->getParam('prefix') === 'Api') {
+                return true;
+            }
+        });
+
+        // ルーティングミドルウェアが CSRF 保護ミドルウェアより先にキューに追加されていることを確認してください。
+        $middlewareQueue->add($csrf);
+
+        return $middlewareQueue;
+    }
+
+.. note::
+
+    Cookie/セッションを使用してステートフルリクエストを処理する URL にのみ CSRF 保護ミドルウェアを適用する必要があります。
+    ステートレスリクエスト(例えば API 開発時)は CSRF の影響を受けないため、これらの URL にミドルウェアを適用する必要はありません。
 
 FormHelper との統合
 -------------------
@@ -423,7 +479,32 @@ CSRF トークンを送信することができます。ヘッダーを使用す
 アプリケーションや XML/JSON ベースの API エンドポイントに CSRF トークンを簡単に
 統合することができます。
 
-CSRF トークンは、クッキーの ``csrfToken`` で取得されます。
+CSRF トークンは、JavaScript で Cookie の ``csrfToken`` を介して取得するか、
+PHPで ``csrfToken`` という名前のリクエストオブジェクト属性を介して取得できます。
+JavaScript コードが CakePHP ビューテンプレートとは別のファイルにある場合、
+および JavaScript を介して Cookie を解析する機能を既に持っている場合は、
+Cookie を使用する方が簡単です。
+
+JavaScript ファイルが別のファイルにあるものの、Cookie の処理を扱いたくない場合、
+たとえば、次のようなスクリプトブロックを定義することにより、
+レイアウトのグローバル JavaScript 変数にトークンを設定できます。 ::
+
+    echo $this->Html->scriptBlock(sprintf(
+        'var csrfToken = %s;',
+        json_encode($this->request->getAttribute('csrfToken'))
+    ));
+
+このスクリプトブロックの後に読み込まれる任意のスクリプトファイル内で、
+``csrfToken`` または ``window.csrfToken`` としてトークンにアクセスできます。
+
+別の代替方法は、次のようなカスタムメタタグにトークンを配置することです。 ::
+
+    echo $this->Html->meta('csrfToken', $this->request->getAttribute('csrfToken'));
+
+次に、 ``csrfToken`` という名前の ``meta`` 要素を探すことで、
+jQuery を使用した場合と同じくらい簡単にスクリプト内でアクセスできます。
+
+    var csrfToken = $('meta[name="csrfToken"]').attr('content');
 
 .. _body-parser-middleware:
 
