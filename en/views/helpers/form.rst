@@ -2769,7 +2769,29 @@ a multiple select input for belongs to many associations::
         'multiple' => true,
         'options' => $tagList,
     ]);
+If you need to save additional data into the join table, the structure of the submitted data should look like (suppose you have Article belongsToMany Tags and wish to add status_id in the join table):
+    $data = [
+        'tags' => [
+            [
+                'id' => 1,
+                '_joinData' => [
+                    'status_id' => 1
+                ]
+            ],
+            [
+                'id' => 2,
+                '_joinData' => [
+                    'status_id' => 5
+                ]
+            ]
+        ]
+    ];
 
+    $user = $this->Articles->patchEntity($user, $data, [
+        'associated' => [
+            'Tags._joinData'
+        ]
+    ]);
 
 Adding Custom Widgets
 =====================
