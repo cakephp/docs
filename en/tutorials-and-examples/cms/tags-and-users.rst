@@ -14,6 +14,7 @@ users code:
 
     cd /path/to/our/app
 
+    # You can overwrite any existing files.
     bin/cake bake model users
     bin/cake bake controller users
     bin/cake bake template users
@@ -64,8 +65,8 @@ Updating Articles to Enable Tagging
 Now that our application has tags, we need to enable users to tag their
 articles. First, update the ``add`` action to look like::
 
+    <?php
     // in src/Controller/ArticlesController.php
-
     namespace App\Controller;
 
     use App\Controller\AppController;
@@ -170,14 +171,16 @@ look like::
         $routes->applyMiddleware('csrf');
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
         $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
+
+        // Add this
+        // New route we're adding for our tagged action.
+        // The trailing `*` tells CakePHP that this action has
+        // passed parameters.
+        $routes->scope('/articles', function (RouteBuilder $routes) {
+            $routes->connect('/tagged/*', ['controller' => 'Articles', 'action' => 'tags']);
+        });
+
         $routes->fallbacks(DashedRoute::class);
-    });
-    // Add this
-    // New route we're adding for our tagged action.
-    // The trailing `*` tells CakePHP that this action has
-    // passed parameters.
-    Router::scope('/articles', function (RouteBuilder $routes) {
-        $routes->connect('/tagged/*', ['controller' => 'Articles', 'action' => 'tags']);
     });
 
 The above defines a new 'route' which connects the **/articles/tagged/** path,
@@ -281,9 +284,9 @@ Creating the View
 
 Now if you visit the **/articles/tagged** URL again, CakePHP will show a new error
 letting you know that you have not made a view file. Next, let's build the
-view file for our ``tags()`` action. In **templates/Articles/tags.php**
-put the following content::
+view file for our ``tags()`` action:: 
 
+    <!-- In templates/Articles/tags.php -->
     <h1>
         Articles tagged with
         <?= $this->Text->toList(h($tags), 'or') ?>
@@ -391,7 +394,7 @@ data from the request into our entity. We can use a ``beforeSave()`` hook method
 to parse the tag string and find/build the related entities. Add the following
 to **src/Model/Table/ArticlesTable.php**::
 
-    public function beforeSave($event, $entity, $options)
+    public function beforeSave(EventInterface $event, $entity, $options)
     {
         if ($entity->tag_string) {
             $entity->tags = $this->_buildTags($entity->tag_string);
@@ -468,7 +471,9 @@ Lastly, update the findBySlug() method calls in
     public function edit($slug)
     {
         // Update this line
-        $article = $this->Articles->findBySlug($slug)->contain(['Tags'])
+        $article = $this->Articles
+            ->findBySlug($slug)
+            ->contain('Tags')
             ->firstOrFail();
     ...
     }
@@ -476,13 +481,15 @@ Lastly, update the findBySlug() method calls in
     public function view($slug = null)
     {
         // Update this line
-        $article = $this->Articles->findBySlug($slug)->contain(['Tags'])
+        $article = $this->Articles
+            ->findBySlug($slug)
+            ->contain('Tags')
             ->firstOrFail();
         $this->set(compact('article'));
     }
 
-The contain() method tells the ArticlesTable object to also populate the Tags
-association when the article is loaded.  Now when tag_string is called for an
-Article entity, there will be data present to create the string!
+The ``contain()`` method tells the ``ArticlesTable`` object to also populate the
+Tags association when the article is loaded. Now when tag_string is called for
+an Article entity, there will be data present to create the string!
 
 Next we'll be adding :doc:`authentication </tutorials-and-examples/cms/authentication>`.

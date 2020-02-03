@@ -6,7 +6,9 @@ Now that we have CakePHP installed, let's set up the database for our :abbr:`CMS
 an empty database for use in this tutorial, with a name of your choice, e.g.
 ``cake_cms``.
 If you are using MySQL/MariaDB, you can execute the following SQL to create the
-necessary tables::
+necessary tables:
+
+.. code-block:: SQL
 
     USE cake_cms;
 
@@ -56,7 +58,9 @@ necessary tables::
     (1, 'First Post', 'first-post', 'This is the first post.', 1, NOW(), NOW());
 
 If you are using PostgreSQL, connecting to ``cake_cms`` database and execute the
-following SQL instead::
+following SQL instead:
+
+.. code-block:: SQL
 
     CREATE TABLE users (
         id SERIAL PRIMARY KEY,
