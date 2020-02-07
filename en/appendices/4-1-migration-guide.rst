@@ -60,6 +60,11 @@ Http
 New Features
 ============
 
+Datasource
+----------
+
+* ``EntityInterface::getAccessible()`` has been added.
+
 Console
 -------
 
