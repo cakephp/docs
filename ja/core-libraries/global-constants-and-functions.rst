@@ -146,7 +146,7 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 .. php:function:: pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)
 
     ドット記法されたプラグイン名をプラグインとクラス名に分離します。
-    ``$name`` にドットが含まれない場合、インデクスが 0 の箇所は ``null`` になります。
+    ``$name`` にドットが含まれない場合、インデックスが 0 の箇所は ``null`` になります。
 
     一般に ``list($plugin, $name) = pluginSplit('Users.User');`` のように使われます。
 
