@@ -266,11 +266,11 @@ paths for these resources. In your **config/app.php** you can set these variable
                     '/path/to/other/plugins/'
                 ],
                 'templates' => [
-                    ROOT . 'templates' . DS,
-                    ROOT . 'templates2' . DS
+                    ROOT . DS . 'templates' . DS,
+                    ROOT . DS . 'templates2' . DS
                 ],
                 'locales' => [
-                    ROOT . 'resources' . DS . 'locales' . DS
+                    ROOT . DS . 'resources' . DS . 'locales' . DS
                 ]
             ]
         ]
