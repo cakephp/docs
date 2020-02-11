@@ -106,17 +106,6 @@ attribute values or modify the behavior of a helper::
         }
     }
 
-Options can be specified when declaring helpers in controller as shown::
-
-    namespace App\Controller;
-
-    use App\Controller\AppController;
-
-    class AwesomeController extends AppController
-    {
-        public $helpers = ['Awesome' => ['option1' => 'value1']];
-    }
-
 By default all configuration options will be merged with the ``$_defaultConfig``
 property. This property should define the default values of any configuration
 your helper requires. For example::
