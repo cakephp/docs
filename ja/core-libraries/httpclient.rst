@@ -365,10 +365,7 @@ Response オブジェクトは、レスポンスデータを検査するため�
 文字列としてレスポンスボディー全体を読み込みます。 ::
 
     // 文字列としてレスポンス全体を読み込み
-    $response->body();
-
-    // プロパティーとして
-    $response->body;
+    $response->getStringBody();
 
 また、レスポンスのストリームオブジェクトにアクセスし、そのメソッドを使用することができます。 ::
 
@@ -392,12 +389,12 @@ JSON は配列にデコードされ、XML データは、 ``SimpleXMLElement`` �
     // 何らかの XML を取得
     $http = new Client();
     $response = $http->get('http://example.com/test.xml');
-    $xml = $response->xml;
+    $xml = $response->getXml();
 
     // 何らかの JSON を取得
     $http = new Client();
     $response = $http->get('http://example.com/test.json');
-    $json = $response->json;
+    $json = $response->getJson();
 
 デコードされたレスポンスデータはそれを複数回アクセスし、レスポンスオブジェクトに格納されても、
 何も追加コストはかかりません。
