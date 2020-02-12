@@ -23,7 +23,7 @@ the best bug report possible:
 * **Don't**: Please don't use the ticket system to ask support questions. Both the support channel on the
   `CakePHP Slack workspace <https://cakesf.herokuapp.com>`__ and the #cakephp IRC channel on `Freenode <https://webchat.freenode.net>`__ have many
   developers available to help answer your questions. Also have a look at
-  `Stack Overflow <https://stackoverflow.com/questions/tagged/cakephp>`__ or the `official CakePHP forum <discourse.cakephp.org>`__.
+  `Stack Overflow <https://stackoverflow.com/questions/tagged/cakephp>`__ or the `official CakePHP forum <https://discourse.cakephp.org>`__.
 
 Reporting Security Issues
 =========================

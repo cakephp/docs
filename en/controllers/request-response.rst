@@ -97,17 +97,23 @@ Request Body Data
 
 .. php:method:: getData($name, $default = null)
 
-All POST data can be accessed using
-:php:meth:`Cake\\Http\\ServerRequest::getData()`.  Any form data that
-contains a ``data`` prefix will have that data prefix removed. For example::
+All POST data normally available through PHP's ``$_POST`` global variable can be 
+accessed using :php:meth:`Cake\\Http\\ServerRequest::getData()`. For example::
 
-    // An input with a name attribute equal to 'MyModel[title]' is accessible at
-    $title = $this->request->getData('MyModel.title');
+    // An input with a name attribute equal to 'title' is accessible at
+    $title = $this->request->getData('title');
 
-Any keys that do not exist will return ``null``::
+You can use a dot separated names to access nested data. For example::
 
-    $foo = $this->request->getData('Value.that.does.not.exist');
+    $value = $this->request->getData('address.street_name');
+
+For non-existent names the ``$default`` value will be returned::
+
+    $foo = $this->request->getData('value.that.does.not.exist');
     // $foo == null
+
+You can also use :ref:`body-parser-middleware` to parse request body of different
+content types into an array, so that it's accessible through ``ServerRequest::getData()``.
 
 .. _request-file-uploads:
 
@@ -115,15 +121,56 @@ File Uploads
 ------------
 
 Uploaded files can be accessed through the request body data, using the :php:meth:`Cake\\Http\\ServerRequest::getData()`
-method described above. For example, a file from an input element with a name attribute of ``MyModel[attachment]``, can
+method described above. For example, a file from an input element with a name attribute of ``attachment``, can
 be accessed like this::
 
-    $attachment = $this->request->getData('MyModel.attachment');
+    $attachment = $this->request->getData('attachment');
 
-By default file uploads are represented in the request data as arrays, with a normalized structure that remains the same
-even for nested inputs/names, which is different from how PHP represents them in the ``$_FILES`` superglobal (refer to
-`the PHP manual <https://www.php.net/manual/en/features.file-upload.php>`__ for more information), ie the
-``$attachment`` value would look something like this::
+By default file uploads are represented in the request data as objects that implement
+`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__.
+In the above example, ``$attachment`` would hold an object, in the current implementation it would by default be an
+instance of ``\Zend\Diactoros\UploadedFile``.
+
+By default file uploads are represented in the request data as objects that implement
+`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__. In the current
+implementation, the ``$attachment`` variable in the above example would by default hold an instance of
+``\Laminas\Diactoros\UploadedFile``.
+
+Accessing the uploaded file details is fairly simple, here's how you can obtain the same data as provided by the old
+style file upload array::
+
+    $name = $attachment->getClientFilename();
+    $type = $attachment->getClientMediaType();
+    $size = $attachment->getSize();
+    $tmpName = $attachment->getStream()->getMetadata('uri');
+    $error = $attachment->getError();
+
+Moving the uploaded file from its temporary location to the desired target location, doesn't require manually accessing
+the temporary file, instead it can be easily done by using the objects ``moveTo()`` method::
+
+    $attachment->moveTo($targetPath);
+
+In an HTTP environment, the ``moveTo()`` method will automatically validate whether the file is an actual uploaded file,
+and throw an exception in case necessary. In an CLI environment, where the concept of uploading files doesn't exist, it
+will allow to move the file that you've referenced irrespective of its origins, which makes testing file uploads really
+easy.
+
+In order to switch back to using file upload arrays instead, set the configuration value ``App.uploadedFilesAsObjects``
+to ``false``, for example in your ``config/app.php`` file::
+
+    return [
+        // ...
+        'App' => [
+            // ...
+            'uploadedFilesAsObjects' => false,
+        ],
+        // ...
+    ];
+
+With the option disabled, the file uploads are represented in the request data as arrays, with a normalized structure
+that remains the same even for nested inputs/names, which is different from how PHP represents them in the ``$_FILES``
+superglobal (refer to `the PHP manual <https://www.php.net/manual/en/features.file-upload.php>`__ for more information),
+ie the ``$attachment`` value would look something like this::
 
     [
         'name' => 'attachment.txt',
@@ -133,34 +180,20 @@ even for nested inputs/names, which is different from how PHP represents them in
         'error' => 0
     ]
 
-Alternatively it's possible to have CakePHP provide the uploads in the request data as objects that implement
-`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__. In order to
-enable this behavior, set the configuration value ``App.uploadedFilesAsObjects`` to ``true``, for example in your
-``config/app.php`` file::
+.. tip::
 
-    return [
-        // ...
-        'App' => [
-            // ...
-            'uploadedFilesAsObjects' => true,
-        ],
-        // ...
-    ];
+    Uploaded files can also be accessed as objects separately from the request data via the
+    :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` and
+    :php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()` methods. These methods will always return objects,
+    irrespectively of the ``App.uploadedFilesAsObjects`` configuration.
 
-In the above example, ``$attachment`` would then hold an object, in the current implementation it would by default be an
-instance of ``\Zend\Diactoros\UploadedFile``.
-
-Furthermore uploaded files can be accessed as objects separately from the request data via the
-:php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` and
-:php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()` methods. These methods will always return objects,
-irrespectively of the ``App.uploadedFilesAsObjects`` configuration.
 
 .. php:method:: getUploadedFile($path)
 
 Returns the uploaded file at a specific path. The path uses the same dot syntax as the
 :php:meth:`Cake\\Http\\ServerRequest::getData()` method::
 
-    $attachment = $this->request->getUploadedFile('MyModel.attachment');
+    $attachment = $this->request->getUploadedFile('attachment');
 
 Unlike :php:meth:`Cake\\Http\\ServerRequest::getData()`, :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` would
 only return data when an actual file upload exists for the given path, if there is regular, non-file request body data
@@ -169,14 +202,12 @@ present at the given path, then this method will return ``null``, just like it w
 .. php:method:: getUploadedFiles()
 
 Returns all uploaded files in a normalized array structure. For the above example with the file input name of
-``MyModel[attachment]``, the structure would look like::
+``attachment``, the structure would look like::
 
     [
-        'MyModel' => [
-            'attachment' => object(Zend\Diactoros\UploadedFile) {
-                // ...
-            }
-        ]
+          'attachment' => object(Zend\Diactoros\UploadedFile) {
+              // ...
+          }
     ]
 
 .. php:method:: withUploadedFiles(array $files)
@@ -187,14 +218,14 @@ replace all possibly existing uploaded files::
 
     $files = [
         'MyModel' => [
-            'attachment' => new \Zend\Diactoros\UploadedFile(
+            'attachment' => new \Laminas\Diactoros\UploadedFile(
                 $streamOrFile,
                 $size,
                 $errorStatus,
                 $clientFilename,
                 $clientMediaType
             ),
-            'anotherAttachment' => new \Zend\Diactoros\UploadedFile(
+            'anotherAttachment' => new \Laminas\Diactoros\UploadedFile(
                 '/tmp/hfz6dbn.tmp',
                 123,
                 \UPLOAD_ERR_OK,

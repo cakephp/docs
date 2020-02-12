@@ -2193,7 +2193,7 @@ of ``'button'``.
 
 **Options for Button**
 
-* ``$options['type']`` - You can set this to one of the following three
+* ``'type'`` - You can set this to one of the following three
   possible values:
 
   #. ``'submit'`` - Similarly to the ``$this->Form->submit()`` method it will
@@ -2202,8 +2202,14 @@ of ``'button'``.
   #. ``'reset'`` - Creates a form reset button.
   #. ``'button'`` - Creates a standard push button.
 
-* ``$options['escape']`` - Boolean. If set to ``true`` it will HTML encode
-  the value provided inside ``$title``. Defaults to ``false``.
+* ``'escapeTitle'`` - Boolean. If set to ``true`` it will HTML encode
+  the value provided inside ``$title``. Defaults to ``true``.
+
+* ``'escape'`` - Boolean. If set to ``true`` it will HTML encode
+  all the HTML attributes generated for the button. Defaults to ``true``.
+
+* ``'confirm'`` - The confirmation message to display on click. Defaults to
+  ``null``.
 
 For example::
 
@@ -2221,12 +2227,12 @@ Will output:
     <button type="reset">Reset the Form</button>
     <button type="submit">Submit Form</button>
 
-Example of use of the ``'escape'`` option::
+Example of use of the ``'escapeTitle'`` option::
 
-    // Will render escaped HTML.
+    // Will render unescaped HTML.
     echo $this->Form->button('<em>Submit Form</em>', [
         'type' => 'submit',
-        'escape' => true
+        'escapeTitle' => false,
     ]);
 
 Closing the Form

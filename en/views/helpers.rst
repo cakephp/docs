@@ -83,7 +83,7 @@ You can also use your controller's ``beforeRender`` method to load helpers::
         public function beforeRender(EventInterface $event)
         {
             parent::beforeRender($event);
-            $this->viewBuilder()->helpers(['MyHelper']);
+            $this->viewBuilder()->setHelpers(['MyHelper']);
         }
     }
 
@@ -104,17 +104,6 @@ attribute values or modify the behavior of a helper::
         {
             debug($config);
         }
-    }
-
-Options can be specified when declaring helpers in controller as shown::
-
-    namespace App\Controller;
-
-    use App\Controller\AppController;
-
-    class AwesomeController extends AppController
-    {
-        public $helpers = ['Awesome' => ['option1' => 'value1']];
     }
 
 By default all configuration options will be merged with the ``$_defaultConfig``

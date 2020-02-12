@@ -112,8 +112,7 @@ Component
   request attribute instead of request param. Hence you should now use
   ``$request->getAttribute('isAjax')`` instead of ``$request->getParam('isAjax')``.
 * The request body parsing features of ``RequestHandlerComponent`` have been
-  removed and now emit a deprecation warning. You should use the
-  :ref:`body-parser-middleware` instead.
+  removed. You should use the :ref:`body-parser-middleware` instead.
 * ``Cake\Controller\Component\PaginatorComponent`` now sets paging params info as
   request attribute instead of request param. Hence you should now use
   ``$request->getAttribute('paging')`` instead of ``$request->getParam('paging')``.
@@ -146,6 +145,9 @@ Database
   you will need to update your code.
 * The internals of ``Cake\Database\Schema\CacheCollection`` and ``Cake\Database\SchemaCache``
   have changed. If you extend these classes you will need to update your code.
+* ``Cake\Database\QueryCompiler`` now quotes aliases in ``SELECT`` clause only when
+  auto-quoting is enabled. Quoting is retained for Postgres to avoid identifiers
+  being auto-casted to lowercase.
 * The database schemas now map ``CHAR`` columns to the new ``char`` type instead of
   ``string``.
 * SqlServer datetime columns now map to 'datetime' types instead of 'timestamp' to match
@@ -265,6 +267,9 @@ ORM
 * Table will now throw an exception when aliases generated for the table name and column
   would be truncated by the database. This warns the user before hidden errors occur when
   CakePHP cannot match the alias in the result.
+* ``TableLocator::get()`` and ``TableRegistry::get()`` now expect that alias
+  names are always **CamelCased** by your code. Passing incorrectly cased
+  aliases will result in table and entity classes not being loaded correctly.
 
 Router
 ------

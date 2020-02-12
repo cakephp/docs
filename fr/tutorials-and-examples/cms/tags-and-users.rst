@@ -361,8 +361,8 @@ entity, nous ajoutons un champ virtuel / pré-calculé pour l'entity. Dans
 
     protected function _getTagString()
     {
-        if (isset($this->_properties['tag_string'])) {
-            return $this->_properties['tag_string'];
+        if (isset($this->_fields['tag_string'])) {
+            return $this->_fields['tag_string'];
         }
         if (empty($this->tags)) {
             return '';

@@ -58,19 +58,17 @@ original sender using the Sender header. You can do so using ``setSender()``::
 Configuration
 =============
 
-Configuration for ``Mailer`` defaults is created using ``setConfig()`` and
-``TransportFactory::setConfig()``. You should put your mailer profiles in the
-**config/app.php** file.  The **config/app.default.php** file is an
-example of this file. It is not required to define email configuration in
-**config/app.php**. ``Mailer`` can be used without it and use the respective
-methods to set all configurations separately or load an array of configs.
-
-By defining profiles and transports, you can keep your application code free of
+Mailer profiles and email transport settings are defined in your application's
+configuration files. The ``Email`` and ``EmailTransport`` keys define mailer
+profiles and email transport configurations respectively. During application
+bootstrap configuration settings are passed from ``Configure`` into the
+``Mailer`` and ``TransportFactory`` classes using ``setConfig()``. By defining
+profiles and transports, you can keep your application code free of
 configuration data, and avoid duplication that makes maintenance and deployment
 more difficult.
 
-To load a predefined configuration, you can use the ``setProfile()`` method or pass it
-to the constructor of ``Mailer``::
+To load a predefined configuration, you can use the ``setProfile()`` method or
+pass it to the constructor of ``Mailer``::
 
     $mailer = new Mailer();
     $mailer->setProfile('default');
@@ -446,14 +444,29 @@ is useful for debugging. Configuring transports allows you to keep configuration
 data out of your application code and makes deployment simpler as you can simply
 change the configuration data. An example transport configuration looks like::
 
+    // In config/app.php
+    'EmailTransport' => [
+        // Sample Mail configuration
+        'default' => [
+            'className' => 'Mail',
+        ],
+        // Sample SMTP configuration
+        'gmail' => [
+            'host' => 'smtp.gmail.com',
+            'port' => 587,
+            'username' => 'my@gmail.com',
+            'password' => 'secret',
+            'className' => 'Smtp',
+            'tls' => true
+        ]
+    ],
+
+Transports can also be configured at runtime using
+``TransportFactory::setConfig()``::
+
     use Cake\Mailer\TransportFactory;
 
-    // Sample Mail configuration
-    TransportFactory::setConfig('default', [
-        'className' => 'Mail'
-    ]);
-
-    // Sample SMTP configuration.
+    // Define an STMP transport
     TransportFactory::setConfig('gmail', [
         'host' => 'ssl://smtp.gmail.com',
         'port' => 465,
@@ -570,26 +583,52 @@ using ``Message::setBodyText()`` and ``Message::setBodyHtml()`` methods.
 
 .. _email-testing:
 
-Testing Mailer
-==============
+Testing Mailers
+===============
 
-To test email, add ``Cake\TestSuite\EmailTrait`` to your test case.
-The ``MailerTrait`` provides your test case with a collection of assertions
-that you can perform on any emails sent by the application.
+To test mailers, add ``Cake\TestSuite\EmailTrait`` to your test case.
+The ``MailerTrait`` uses PHPUnit hooks to replace your application's email transports
+with a proxy that intercepts email messages and allows you to do assertions
+on the mail that would be delivered.
 
-Adding the ``EmailTrait`` to your test case will replace all of your application's
-email transports with the ``Cake\TestSuite\TestMailerTransport``. This transport
-intercepts emails instead of sending them, and allows you to assert against them.
+Add the trait to your test case to start testing emails, and load routes if your
+emails need to generate URLs::
 
-Add the trait to your test case to start testing emails::
+    namespace App\Test\TestCase\Mailer;
 
-    namespace App\Test\TestCase;
+    use App\Mailer\WelcomeMailer;
+    use App\Model\Entity\User;
 
     use Cake\TestSuite\EmailTrait;
+    use Cake\TestSuite\TestCase;
 
-    class MyTestCase extends TestCase
+    class WelcomeMailerTestCase extends TestCase
     {
         use EmailTrait;
+
+        public function setUp(): void
+        {
+            parent::setUp();
+            $this->loadRoutes();
+        }
+    }
+
+Let's assume we have a mailer that delivers welcome emails when a new user
+registers. We want to check that the subject and body contain the user's name::
+
+    // in our WelcomeMailerTestCase class.
+    public function testName()
+    {
+        $user = new User([
+            'name' => 'Alice Alittea',
+            'email' => 'alice@example.org',
+        ]);
+        $mailer = new WelcomeMailer();
+        $mailer->send('welcome', [$user]);
+
+        $this->assertMailSentTo($user->email);
+        $this->assertMailContainsText('Hi ' . $user->name);
+        $this->assertMailContainsText('Welcome to CakePHP!');
     }
 
 Assertion methods

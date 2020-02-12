@@ -181,15 +181,12 @@ CakePHP の規約に従うと、手動でビューを描画したり生成した
 このビルダーは、ビューが作成される前にビューのプロパティーを設定するために使われます。 ::
 
     $this->viewBuilder()
-        ->helpers(['MyCustom'])
-        ->theme('Modern')
-        ->className('Modern.Admin');
+        ->setHelpers(['MyCustom'])
+        ->setTheme('Modern')
+        ->setClassName('Modern.Admin');
 
 上記は、どのようにしてカスタムヘルパーを読み込み、テーマを設定し、
 カスタムビュークラスを使用できるかを示しています。
-
-.. versionadded:: 3.1
-    ViewBuilder は 3.1 で追加されました
 
 ビューの描画
 ------------

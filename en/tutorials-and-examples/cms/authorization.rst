@@ -14,6 +14,10 @@ Use composer to install the Auhorization Plugin:
 
     composer require cakephp/authorization:^2.0
 
+Load the plugin by adding the following statement to the ``bootstrap()`` method in **src/Application.php**::
+
+    $this->addPlugin('Authorization');
+
 Enabling the Authorization Plugin
 =================================
 
@@ -32,19 +36,21 @@ imports::
 
 Add the ``AuthorizationProviderInterface`` to the implemented interfaces on your application::
 
-    class Application extends BaseApplication implements AuthorizationServiceProviderInterface
+    class Application extends BaseApplication
+        implements AuthenticationServiceProviderInterface,
+        AuthorizationServiceProviderInterface
 
 Then add the following to your ``middleware()`` method::
 
     // Add authorization **after** authentication
-    $middleware->add(new AuthorizationMiddleware($this));
+    $middlewareQueue->add(new AuthorizationMiddleware($this));
 
 The ``AuthorizationMiddleware`` will call a hook method on your application when
 it starts handling the request. This hook method allows your application to
 define the ``AuthorizationService`` it wants to use. Add the following method your
 **src/Application.php**::
 
-    public function getAuthorizationService(ServerRequestInterface $request, ResponseInterface $response)
+    public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface
     {
         $resolver = new OrmResolver();
 
@@ -81,13 +87,15 @@ going to be our logged in user, and our **resources** are our ORM entities and
 queries. Lets use bake to generate a basic policy:
 
 .. code-block:: bash
+
     bin/cake bake policy --type entity Article
 
 This will generate an empty policy class for our ``Article`` entity. You can
 find the generated policy in **src/Policy/ArticlePolicy.php**. Next update the
 policy to look like the following::
 
-    namespace TestApp\Policy;
+    <?php
+    namespace App\Policy;
 
     use App\Model\Entity\Article;
     use Authorization\IdentityInterface;
@@ -166,7 +174,8 @@ name::
 Lastly add the following to the ``tags``, ``view``, and ``index`` methods on the
 ``ArticlesController``::
 
-    // View and index are public methods and don't require authorization checks.
+    // View, index and tags actions are public methods 
+    // and don't require authorization checks.
     $this->Authorization->skipAuthorization();
 
 Fixing the Add & Edit Actions
@@ -198,7 +207,8 @@ logged in user. Replace your add action with the following::
             }
             $this->Flash->error(__('Unable to add your article.'));
         }
-        $this->set('article', $article);
+        $tags = $this->Articles->Tags->find('list');
+        $this->set(compact('article', 'tags'));
     }
 
 Next we'll update the ``edit`` action. Replace the edit method with the following::
@@ -224,7 +234,8 @@ Next we'll update the ``edit`` action. Replace the edit method with the followin
             }
             $this->Flash->error(__('Unable to update your article.'));
         }
-        $this->set('article', $article);
+        $tags = $this->Articles->Tags->find('list');
+        $this->set(compact('article', 'tags'));
     }
 
 Here we're modifying which properties can be mass-assigned, via the options

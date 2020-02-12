@@ -341,7 +341,7 @@ ContactManager plugin routes, put the following into
     use Cake\Routing\Route\DashedRoute;
     use Cake\Routing\Router;
 
-    Router:{plugin}(
+    Router::plugin(
         'ContactManager',
         ['path' => '/contact-manager'],
         function ($routes) {

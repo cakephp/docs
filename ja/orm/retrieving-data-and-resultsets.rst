@@ -289,8 +289,8 @@ join でつながっている関連テーブルからリストのデータを生
     // Authors の中で、エンティティーは displayFild として使用するために仮想フィールドを作成
     protected function _getLabel()
     {
-        return $this->_properties['first_name'] . ' ' . $this->_properties['last_name']
-          . ' / ' . __('User ID %s', $this->_properties['user_id']);
+        return $this->_fields['first_name'] . ' ' . $this->_fields['last_name']
+          . ' / ' . __('User ID %s', $this->_fields['user_id']);
     }
 
 この例は、Author エンティティーの ``_getLabel()``

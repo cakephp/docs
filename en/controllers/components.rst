@@ -270,12 +270,7 @@ Accessing a Component's Controller
 From within a Component you can access the current controller through the
 registry::
 
-    $controller = $this->_registry->getController();
-
-You can access the controller in any callback method from the event
-object::
-
-    $controller = $event->getSubject();
+    $controller = $this->getController();
 
 Component Callbacks
 ===================
@@ -310,6 +305,23 @@ augment the request cycle.
     returns ``false`` the controller will not continue on to redirect the
     request. The $url, and $response parameters allow you to inspect and modify
     the location or any other headers in the response.
+
+.. _redirect-component-events:
+
+Using Redirects in Component Events
+===================================
+
+To redirect from within a component callback method you can use the following::
+
+    public function beforeFilter(EventInterface $event)
+    {
+        $event->stopPropagation();
+        return $this->getController()->redirect('/');
+    }
+
+By stopping the event you let CakePHP know that you don't want any other
+component callbacks to run, and that the controller should not handle the action
+any further.
 
 .. meta::
     :title lang=en: Components
