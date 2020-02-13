@@ -57,7 +57,7 @@ To use the debugger, first ensure that ``Configure::read('debug')`` is set to
 FILTER_VALIDATE_BOOLEAN),`` in **config/app.php** file to ensure that ``debug``
 is a boolean.
 
-The following configuration options in your **config/app.php** to change how
+The following configuration options can be set in **config/app.php** to change how
 ``Debugger`` behaves:
 
 - ``Debugger.editor`` Choose the which editor URL format you want to use.
