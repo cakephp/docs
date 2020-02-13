@@ -184,7 +184,7 @@ Editor Integration
 ==================
 
 Exception and error pages can contain URLs that directly open in your editor or
-IDE. CakePHP ships with URL formats for several popular editors and you can add
+IDE. CakePHP ships with URL formats for several popular editors, and you can add
 additional editor formats if required during application bootstrap::
 
     // Generate links for vscode.
