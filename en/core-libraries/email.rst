@@ -241,15 +241,13 @@ You can attach files to email messages as well. There are a few
 different formats depending on what kind of files you have, and how
 you want the filenames to appear in the recipient's mail client:
 
-1. String: ``$mailer->setAttachments('/full/file/path/file.png')`` will attach this
-   file with the name file.png.
-2. Array: ``$mailer->setAttachments(['/full/file/path/file.png'])`` will have
+1. Array: ``$mailer->setAttachments(['/full/file/path/file.png'])`` will have
    the same behavior as using a string.
-3. Array with key:
+2. Array with key:
    ``$mailer->setAttachments(['photo.png' => '/full/some_hash.png'])`` will
    attach some_hash.png with the name photo.png. The recipient will see
    photo.png, not some_hash.png.
-4. Nested arrays::
+3. Nested arrays::
 
     $mailer->setAttachments([
         'photo.png' => [
@@ -263,14 +261,14 @@ you want the filenames to appear in the recipient's mail client:
    Content ID (when set the content ID the attachment is transformed to inline).
    The mimetype and contentId are optional in this form.
 
-   4.1. When you are using the ``contentId``, you can use the file in the HTML
+   3.1. When you are using the ``contentId``, you can use the file in the HTML
    body like ``<img src="cid:my-content-id">``.
 
-   4.2. You can use the ``contentDisposition`` option to disable the
+   3.2. You can use the ``contentDisposition`` option to disable the
    ``Content-Disposition`` header for an attachment. This is useful when
    sending ical invites to clients using outlook.
 
-   4.3 Instead of the ``file`` option you can provide the file contents as
+   3.3 Instead of the ``file`` option you can provide the file contents as
    a string using the ``data`` option. This allows you to attach files without
    needing file paths to them.
 
