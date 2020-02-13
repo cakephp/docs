@@ -80,7 +80,7 @@ Error
   only dumped once and have reference ids to the full value. This greatly
   simplifies output for cyclic structures.
 * ``Debugger::addEditor()`` and ``Debugger::setEditor()`` have been added. These
-  methods let you add additional editor formats, and set your preferred editor
+  methods let you add additional editor formats and set your preferred editor
   respectively.
 * The ``Debugger.editor`` configure value has been added. This value is used as
   the preferred editor link format.
