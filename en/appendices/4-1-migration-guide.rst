@@ -72,6 +72,19 @@ Console
   ANSI escape codes for colours. See `no-color.org <https://no-color.org/>`__
   for more information.
 
+Error
+-----
+
+* ``debug()`` and ``Debugger::printVar()`` now emit HTML in web contexts, and
+  ANSI styled output in CLI contexts. Output of cyclic structures and repeated objects
+  is much simpler. Cyclic objects are only dumped once and use reference ids to
+  point back to the full value.
+* ``Debugger::addEditor()`` and ``Debugger::setEditor()`` have been added. These
+  methods let you add additional editor formats and set your preferred editor
+  respectively.
+* The ``Debugger.editor`` configure value has been added. This value is used as
+  the preferred editor link format.
+
 Log
 ---
 
