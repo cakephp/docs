@@ -884,15 +884,6 @@ conditions:
         });
     # WHERE population BETWEEN 999 AND 5000000,
 
-Via manual value binding you can pretty much create anything you like. It should however be noted that whenever possible, you should use expressions instead, as they are easier to port, which happens out of the box for quite a few expressions already::
-
-    $query = $cities->find()
-        ->where([
-            'start_date BETWEEN :start AND :end'
-        ])
-        ->bind(':start', '2014-01-01', 'date')
-        ->bind(':end',   '2014-12-31', 'date');
-
 - ``exists()`` Create a condition using ``EXISTS``::
 
     $subquery = $cities->find()
@@ -923,6 +914,17 @@ Via manual value binding you can pretty much create anything you like. It should
         });
     # WHERE NOT EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
 
+Expression objects should cover many commonly used functions and expressions. If
+you find yourself unable to create the required conditions with expressions you
+can may be able to use ``bind()`` to manually bind parameters into conditions::
+
+    $query = $cities->find()
+        ->where([
+            'start_date BETWEEN :start AND :end'
+        ])
+        ->bind(':start', '2014-01-01', 'date')
+        ->bind(':end',   '2014-12-31', 'date');
+
 In situations when you can't get, or don't want to use the builder methods to
 create the conditions you want you can also use snippets of SQL in where
 clauses::
@@ -933,8 +935,9 @@ clauses::
 .. warning::
 
     The field names used in expressions, and SQL snippets should **never**
-    contain untrusted content.  See the :ref:`using-sql-functions` section for
-    how to safely include unsafe data into function calls.
+    contain untrusted content as you will create SQL Injection vectors. See the
+    :ref:`using-sql-functions` section for how to safely include unsafe data
+    into function calls.
 
 Using Identifiers in Expressions
 --------------------------------
