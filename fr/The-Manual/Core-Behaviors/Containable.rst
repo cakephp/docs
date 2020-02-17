@@ -10,7 +10,7 @@ application. La class vous aidera aussi a chercher et filtrer vos
 données pour vos utilisateurs d'une façon propre et consistante.
 
 Pour utiliser le nouveau comportement, vous pouvez l'ajouter à la
-propriété $actAs de votre modèle :
+propriété $actsAs de votre modèle :
 
 ::
 
