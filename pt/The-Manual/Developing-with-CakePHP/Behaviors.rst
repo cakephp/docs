@@ -37,7 +37,7 @@ padrão no CakePHP e como criar os nossos próprios behaviors.
 Usando Behaviors
 ================
 
-Behaviors são anexados ao modelos através da variável ``$actAs`` na
+Behaviors são anexados ao modelos através da variável ``$actsAs`` na
 classe model
 
 ::
