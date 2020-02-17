@@ -884,6 +884,15 @@ conditions:
         });
     # WHERE population BETWEEN 999 AND 5000000,
 
+Via manual value binding you can pretty much create anything you like. It should however be noted that whenever possible, you should use expressions instead, as they are easier to port, which happens out of the box for quite a few expressions already::
+
+    $query = $cities->find()
+        ->where([
+            'start_date BETWEEN :start AND :end'
+        ])
+        ->bind(':start', '2014-01-01', 'date')
+        ->bind(':end',   '2014-12-31', 'date');
+
 - ``exists()`` Create a condition using ``EXISTS``::
 
     $subquery = $cities->find()
