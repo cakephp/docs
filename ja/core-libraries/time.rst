@@ -128,7 +128,7 @@ PHP のビルトインの ``DateTime`` クラスで提供されているメソ�
 このメソッドは、オブジェクトを json 形式に変換するときに使われる
 デフォルトのフォーマットをセットします。 ::
 
-    Time::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // 可変の DataTime 用
+    Time::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // 可変の DateTime 用
     FrozenTime::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // 不変の DateTime 用
     Date::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // 可変の Date 用
     FrozenDate::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // 不変の Date 用
