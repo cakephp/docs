@@ -99,8 +99,9 @@ Contents
 
 .. toctree::
     :maxdepth: 3
-    :caption: Phinx
+    :caption: Standalone Packages
 
+    standalone-packages
     Phinx <https://book.cakephp.org/phinx/0/en/>
 
 .. todolist::
