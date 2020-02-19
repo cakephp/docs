@@ -255,10 +255,6 @@ d'event, vous pouvez définir des champs supplémentaires, des conditions, des
 joins ou des formateurs de résultat. Ces options/fonctionnalités seront copiées
 dans la requête racine.
 
-Vous pouvez utiliser ce callback pour restreindre les opérations find basées
-sur le rôle de l'utilisateur, ou prendre des décisions de mise en cache basées
-sur le chargement courant.
-
 Dans les versions précédentes de CakePHP, il y avait un callback ``afterFind``,
 ceci a été remplacé par les fonctionnalités de :ref:`map-reduce` et les
 constructeurs d'entity.

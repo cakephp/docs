@@ -242,9 +242,6 @@ a dummy query will be provided. In your event listener you can set additional
 fields, conditions, joins or result formatters. These options/features will be
 copied onto the root query.
 
-You might use this callback to restrict find operations based on a user's role,
-or make caching decisions based on the current load.
-
 In previous versions of CakePHP there was an ``afterFind`` callback, this has
 been replaced with the :ref:`map-reduce` features and entity constructors.
 
