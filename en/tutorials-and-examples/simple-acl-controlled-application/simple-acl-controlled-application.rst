@@ -177,7 +177,8 @@ site controlled with Auth and Acl, we will set them up in
                     'Actions' => array('actionPath' => 'controllers')
                 )
             ),
-            'Session'
+            'Session',
+            'Flash'
         );
         public $helpers = array('Html', 'Form', 'Session');
 
