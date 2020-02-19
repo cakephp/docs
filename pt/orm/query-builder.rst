@@ -1154,12 +1154,12 @@ personalizados ou através dos ouvintes de eventos.
 
 Quando os resultados de uma consulta em cache são buscados, acontece o seguinte:
 
-1. O evento ``Model.beforeFind`` é acionado.
-2. Se a consulta tiver resultados definidos, eles serão retornados.
-3. A chave do cache será resolvida e os dados do cache serão lidos.
+1. Se a consulta tiver resultados definidos, eles serão retornados.
+2. A chave do cache será resolvida e os dados do cache serão lidos.
    Se os dados do cache não estiverem vazios, esses resultados serão retornados.
-4. Se o cache falhar, a consulta será executada e um novo ``ResultSet`` será criado.
-   Este ``ResultSet`` será gravado no cache e retornado.
+3. Se o cache falhar, a consulta será executada, o evento ``Model.beforeFind``
+   será acionado e um novo ``ResultSet`` será criado. Este ``ResultSet`` será
+   gravado no cache e retornado.
 
 .. note::
 

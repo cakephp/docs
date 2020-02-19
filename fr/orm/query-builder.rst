@@ -1180,13 +1180,12 @@ personnalisés ou à travers des écouteurs d'évènement.
 Quand les résultats pour une requête mise en cache sont récupérés, ce qui suit
 va arriver:
 
-1. L'évènement ``Model.beforeFind`` est déclenché.
-2. Si la requête a des ensembles de résultats, ceux-ci vont être retournés.
-3. La clé du cache va être déterminée et les données du cache vont être lues.
+1. Si la requête a des ensembles de résultats, ceux-ci vont être retournés.
+2. La clé du cache va être déterminée et les données du cache vont être lues.
    Si les données du cache sont vides, ces résultats vont être retournés.
-4. Si le cache n'est pas présent, la requête sera exécutée et un nouveau
-   ``ResultSet`` sera créé. Ce ``ResultSet`` sera écrit dans le cache et sera
-   retourné.
+3. Si le cache manque, la requête sera exécutée, l'événement ``Model.beforeFind``
+   sera déclenché, et un nouveau ``ResultSet`` sera créé. Ce ``ResultSet``
+   sera écrit dans le cache et retourné.
 
 .. note::
 

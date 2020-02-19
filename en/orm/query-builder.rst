@@ -1150,12 +1150,12 @@ through event listeners.
 
 When the results for a cached query are fetched the following happens:
 
-1. The ``Model.beforeFind`` event is triggered.
-2. If the query has results set, those will be returned.
-3. The cache key will be resolved and cache data will be read. If the cache data
+1. If the query has results set, those will be returned.
+2. The cache key will be resolved and cache data will be read. If the cache data
    is not empty, those results will be returned.
-4. If the cache misses, the query will be executed and a new ``ResultSet`` will be
-   created. This ``ResultSet`` will be written to the cache and returned.
+3. If the cache misses, the query will be executed, the ``Model.beforeFind`` event
+   will be triggered, and a new ``ResultSet`` will be created. This
+   ``ResultSet`` will be written to the cache and returned.
 
 .. note::
 
