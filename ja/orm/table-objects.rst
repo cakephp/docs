@@ -208,8 +208,28 @@ beforeFind
 
 .. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, $primary)
 
-``Model.beforeFind`` イベントは各 find 操作の前に発行されます。イベントを止めて戻り値を返すことで
-find を完全にバイパスできます。 $query インスタンスに対してなされた全ての変更は find 処理の間
+``Model.beforeFind`` イベントは各 find 操作の前に発行されます。
+
+``Model.beforeFind`` イベントは、各検索操作の前に発生します。
+イベントを停止し、クエリにカスタム結果セットを渡すことにより、検索操作を完全にバイパスできます。::
+
+    public function beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
+    {
+        if (/* ... */) {
+            $event->stopPropagation();
+            $query->setResult(new \Cake\Datasource\ResultSetDecorator([]));
+
+            return;
+        }
+        // ...
+    }
+
+この例では、関連するテーブルまたはそのアタッチされたビヘイビアーで ``beforeFind``イベントはトリガーされません。
+ただし、振る舞いイベントは通常、デフォルトの優先順位が与えられているため、以前に呼び出されます。
+クエリは ``Query::setResult()`` を介して渡された空の結果セットを返します。
+
+イベントを止めて戻り値を返すことで find を完全にバイパスできます。 ``$query``
+インスタンスに対してなされた全ての変更は find 処理の間
 維持されます。 ``$primary`` パラメーターは、これがルートクエリーなのか、それともアソシエーションの
 クエリーなのかを示します。クエリーに含まれる全てのアソシエーションで ``Model.beforeFind``
 イベントが呼ばれます。 JOIN を使うアソシエーションに対しては、ダミーのクエリーが渡されます。

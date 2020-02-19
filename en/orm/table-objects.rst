@@ -202,8 +202,26 @@ beforeFind
 .. php:method:: beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
 
 The ``Model.beforeFind`` event is fired before each find operation. By stopping
-the event and supplying a return value you can bypass the find operation
-entirely. Any changes done to the $query instance will be retained for the rest
+the event, and feeding the query with a custom result set, you can bypass the find
+operation entirely::
+
+    public function beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
+    {
+        if (/* ... */) {
+            $event->stopPropagation();
+            $query->setResult(new \Cake\Datasource\ResultSetDecorator([]));
+
+            return;
+        }
+        // ...
+    }
+
+In this example, no further ``beforeFind`` events will be triggered on the
+related table or its attached behaviors (though behavior events are usually
+invoked earlier given their default priorities), and the query will return
+the empty result set that was passed via ``Query::setResult()``.
+
+Any changes done to the ``$query`` instance will be retained for the rest
 of the find. The ``$primary`` parameter indicates whether or not this is the root
 query, or an associated query. All associations participating in a query will
 have a ``Model.beforeFind`` event triggered. For associations that use joins,
