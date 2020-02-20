@@ -251,7 +251,8 @@ no ``$config`` is specified, default will be used. ``Cache::write()``
 can store any type of object and is ideal for storing results of
 model finds::
 
-    if (is_null($posts = Cache::read('posts'))) {
+    $posts = Cache::read('posts');
+    if ($posts === null) {
         $posts = $someService->getAllPosts();
         Cache::write('posts', $posts);
     }
@@ -314,13 +315,13 @@ Reading From a Cache
 ``$key`` from the ``$config``. If ``$config`` is null the default
 config will be used. ``Cache::read()`` will return the cached value
 if it is a valid cache or ``null`` if the cache has expired or
-doesn't exist. Use php functions ``is_null()`` or ``isset()``
-to check if ``Cache::read()`` was successful.
+doesn't exist. Use strict comparison operators ``===`` or ``!==``
+to check the success of the ``Cache::read()`` operation.
 
 For example::
 
     $cloud = Cache::read('cloud');
-    if (isset($cloud)) {
+    if ($cloud !== null) {
         return $cloud;
     }
 
@@ -337,9 +338,9 @@ specify it in ``Cache::read()`` and ``Cache::write()`` calls as below::
 
     // Read key "cloud", but from short configuration instead of default
     $cloud = Cache::read('cloud', 'short');
-    if (is_null($cloud)) {
+    if ($cloud === null) {
         // Generate cloud data
-        // Assign data to $cloud variable
+        // ...
 
         // Store data in cache, using short cache configuration instead of default
         Cache::write('cloud', $cloud, 'short');
