@@ -264,7 +264,7 @@ CakePHP は、以下の一覧にあるようないくつかのデータベース
 これで、使い慣れたモデルのメソッドを使ってリモートソースから
 データを取り出せるようになります::
 
-    // Get all messages from 'Some Person'
+    // 'Some Person' から全てのメッセージを取得
     $messages = $this->MyModel->find('all', array(
         'conditions' => array('name' => 'Some Person'),
     ));
