@@ -55,7 +55,7 @@ command line::
 
     class HelloCommand extends Command
     {
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser->addArgument('name', [
                 'help' => 'What is your name'
@@ -103,7 +103,7 @@ method to define arguments. We can also define options. For example, we could
 add a ``yell`` option to our ``HelloCommand``::
 
     // ...
-    protected function buildOptionParser(ConsoleOptionParser $parser)
+    protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser
             ->addArgument('name', [
@@ -156,7 +156,7 @@ commands::
         // Base Command will load the Users model with this property defined.
         public $modelClass = 'Users';
 
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser
                 ->addArgument('name', [
@@ -257,7 +257,7 @@ Let's start with a very simple command, located in
 
     class UpdateTableCommand extends Command
     {
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser->setDescription('My cool console app');
 
@@ -306,7 +306,7 @@ adding more logic to our command::
 
     class UpdateTableCommand extends Command
     {
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser
                 ->setDescription('My cool console app')
@@ -404,7 +404,7 @@ Update the command class to the following::
 
     class UpdateTableCommand extends Command
     {
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser
                 ->setDescription('My cool console app')
