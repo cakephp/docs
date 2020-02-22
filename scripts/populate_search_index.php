@@ -11,6 +11,11 @@ define('ES_DEFAULT_HOST', 'https://ci.cakephp.org:9200');
 define('ES_INDEX', 'documentation');
 define('CAKEPHP_VERSION', '3-0');
 
+// file exclusion patterns
+const FILE_EXCLUSIONS = [
+    '/404\.rst$/',
+];
+
 /**
  * The main function
  *
@@ -32,13 +37,24 @@ function main($argv)
     } else {
         define('ES_HOST', ES_DEFAULT_HOST);
     }
-    
+
     $directory = new RecursiveDirectoryIterator($lang);
     $recurser = new RecursiveIteratorIterator($directory);
     $matcher = new RegexIterator($recurser, '/\.rst/');
 
     foreach ($matcher as $file) {
-        updateIndex($lang, $file);
+        $skip = false;
+        foreach (FILE_EXCLUSIONS as $exclusion) {
+            if (preg_match($exclusion, $file) === 1) {
+                echo "\nSkipping $file\n";
+                $skip = true;
+                break;
+            }
+        }
+
+        if (!$skip) {
+            updateIndex($lang, $file);
+        }
     }
 
     echo "\nIndex update complete\n";

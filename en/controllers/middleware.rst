@@ -547,7 +547,7 @@ Body Parser Middleware
 
 If your application accepts JSON, XML or other encoded request bodies, the
 ``BodyParserMiddleware`` will let you decode those requests into an array that
-is available via ``$request->getParsedData()`` and ``$request->getData()``. By
+is available via ``$request->getParsedBody()`` and ``$request->getData()``. By
 default only ``json`` bodies will be parsed, but XML parsing can be enabled with
 an option. You can also define your own parsers::
 
@@ -565,7 +565,7 @@ an option. You can also define your own parsers::
     // Add your own parser matching content-type header values
     // to the callable that can parse them.
     $bodies = new BodyParserMiddleware();
-    $bodies->addParser(['text/csv'], function ($body, $request) {
+    $bodies->addParser(['text/csv'], function ($body) {
         // Use a CSV parsing library.
         return Csv::parse($body);
     });

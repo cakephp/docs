@@ -83,7 +83,7 @@ will be used if no environment variable exists for the given key.
 
 .. versionchanged:: 3.5.0
     dotenv library support was added to the application skeleton.
-    
+
 .. versionchanged:: 3.5.1
     dotenv library support is now opt in. You must uncomment the appropriate block of code in ``config/bootstrap.php``
 
@@ -104,7 +104,7 @@ App.namespace
         When changing the namespace in your configuration, you will also
         need to update your **composer.json** file to use this namespace
         as well. Additionally, create a new autoloader by running
-        ``php composer.phar dumpautoload``.
+        ``php composer.phar dump-autoload``.
 
 .. _core-configuration-baseurl:
 
@@ -191,7 +191,7 @@ there is a specific use case when using plugin based assets: plugins will not
 use the plugin's prefix when absolute ``...BaseUrl`` URI is used, for example By
 default:
 
-* ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``test_plugin/logo.png`` 
+* ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``test_plugin/logo.png``
 
 If you set ``App.imageBaseUrl`` to ``https://mycdn.example.com/``:
 

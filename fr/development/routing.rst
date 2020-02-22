@@ -452,7 +452,7 @@ fluide pour la configurer. Ces méthodes remplacent la majorité des clés du pa
     ])
 
     // Autorise également l'extension JSON
-    ->setExtenions(['json'])
+    ->setExtensions(['json'])
 
     // Définit 'lang' pour être un paramètre persistant
     ->setPersist(['lang']);
