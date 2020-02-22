@@ -914,6 +914,17 @@ conditions:
         });
     # WHERE NOT EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
 
+Expression objects should cover many commonly used functions and expressions. If
+you find yourself unable to create the required conditions with expressions you
+can may be able to use ``bind()`` to manually bind parameters into conditions::
+
+    $query = $cities->find()
+        ->where([
+            'start_date BETWEEN :start AND :end'
+        ])
+        ->bind(':start', '2014-01-01', 'date')
+        ->bind(':end',   '2014-12-31', 'date');
+
 In situations when you can't get, or don't want to use the builder methods to
 create the conditions you want you can also use snippets of SQL in where
 clauses::
@@ -924,8 +935,9 @@ clauses::
 .. warning::
 
     The field names used in expressions, and SQL snippets should **never**
-    contain untrusted content.  See the :ref:`using-sql-functions` section for
-    how to safely include unsafe data into function calls.
+    contain untrusted content as you will create SQL Injection vectors. See the
+    :ref:`using-sql-functions` section for how to safely include unsafe data
+    into function calls.
 
 Using Identifiers in Expressions
 --------------------------------
@@ -1138,12 +1150,12 @@ through event listeners.
 
 When the results for a cached query are fetched the following happens:
 
-1. The ``Model.beforeFind`` event is triggered.
-2. If the query has results set, those will be returned.
-3. The cache key will be resolved and cache data will be read. If the cache data
+1. If the query has results set, those will be returned.
+2. The cache key will be resolved and cache data will be read. If the cache data
    is not empty, those results will be returned.
-4. If the cache misses, the query will be executed and a new ``ResultSet`` will be
-   created. This ``ResultSet`` will be written to the cache and returned.
+3. If the cache misses, the query will be executed, the ``Model.beforeFind`` event
+   will be triggered, and a new ``ResultSet`` will be created. This
+   ``ResultSet`` will be written to the cache and returned.
 
 .. note::
 

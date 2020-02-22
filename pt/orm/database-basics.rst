@@ -567,7 +567,7 @@ personalizado à nossa classe table <saving-complex-types>`.
 
 .. _immutable-datetime-mapping:
 
-Habilitando Objetos DataTime Imutáveis
+Habilitando Objetos DateTime Imutáveis
 --------------------------------------
 
 .. versionadded:: 3.2

@@ -226,19 +226,34 @@ beforeFind
 .. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, $primary)
 
 L'event ``Model.beforeFind`` est lancé avant chaque opération find. En
-stoppant l'event et en fournissant une valeur de retour, vous pouvez
-outrepasser entièrement l'opération find. Tout changement fait à l'instance
-$query sera retenu pour le reste du find. Le paramètre ``$primary`` indique
-si oui ou non ceci est la requête racine ou une requête associée. Toutes les
-associations participant à une requête vont avoir un event
-``Model.beforeFind`` déclenché. Pour les associations qui utilisent les joins,
-une requête factice sera fournie. Dans votre écouteur d'event, vous pouvez
-définir des champs supplémentaires, des conditions, des joins ou des formateurs
-de résultat. Ces options/fonctionnalités seront copiées dans la requête racine.
+arrêtant l'événement et en alimentant la requête avec un jeu de résultats
+personnalisé, vous pouvez ignorer complètement l'opération de recherche::
 
-Vous pouvez utiliser ce callback pour restreindre les opérations find basées
-sur le rôle de l'utilisateur, ou prendre des décisions de mise en cache basées
-sur le chargement courant.
+    public function beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
+    {
+        if (/* ... */) {
+            $event->stopPropagation();
+            $query->setResult(new \Cake\Datasource\ResultSetDecorator([]));
+
+            return;
+        }
+        // ...
+    }
+
+Dans cet exemple, aucun autre événement ``beforeFind`` ne sera déclenché sur
+la table associée ou ses comportements attachés (bien que les événements de
+comportement soient généralement appelés plus tôt compte tenu de leurs
+priorités par défaut), et la requête renverra le jeu de résultats vide qui a
+été transmis via ``Query::setResult()``.
+
+Tout changement fait à l'instance ``$query`` sera retenu pour le reste du find.
+Le paramètre ``$primary`` indique si oui ou non ceci est la requête racine ou
+une requête associée. Toutes les associations participant à une requête vont
+avoir un event ``Model.beforeFind`` déclenché. Pour les associations qui
+utilisent les joins, une requête factice sera fournie. Dans votre écouteur
+d'event, vous pouvez définir des champs supplémentaires, des conditions, des
+joins ou des formateurs de résultat. Ces options/fonctionnalités seront copiées
+dans la requête racine.
 
 Dans les versions précédentes de CakePHP, il y avait un callback ``afterFind``,
 ceci a été remplacé par les fonctionnalités de :ref:`map-reduce` et les

@@ -400,10 +400,10 @@ SQL 関数に渡す引数には、リテラルの引数と、バインドパラ�
 
     SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
 
-安全ではないデータを、 SQL 関数やストアドプロシージャに渡す必要がある際には必ず、
+安全ではないデータを、 SQL 関数やストアードプロシージャーに渡す必要がある際には必ず、
 関数ビルダーを使うということを覚えておいてください。 ::
 
-    // ストアドプロシージャを使う
+    // ストアードプロシージャーを使う
     $query = $articles->find();
     $lev = $query->func()->levenshtein([$search, 'LOWER(title)' => 'literal']);
     $query->where(function (QueryExpression $exp) use ($lev) {
@@ -1098,12 +1098,12 @@ CakePHP のページネーション (pagination) システムでは ``count()`` 
 
 キャッシュ設定されたクエリーが結果を返すときには次のようなことが起こります:
 
-1. ``Model.beforeFind`` イベントがトリガーされます。
-2. クエリーが結果セットを保持しているなら、それを返します。
-3. キャッシュキーを解決して、キャッシュデータを読みす。
+1. クエリーが結果セットを保持しているなら、それを返します。
+2. キャッシュキーを解決して、キャッシュデータを読みす。
    キャッシュデータが空でなければ、その結果を返します。
-4. キャッシュが無いなら、クエリーが実行され、新しい ``ResultSet`` が作成されます。
-   この ``ResultSet`` をキャッシュに登録し、返します。
+3. キャッシュが見つからない場合、クエリが実行され、 ``Model.beforeFind``
+   イベントがトリガーされ、新しい ``ResultSet`` が作成されます。
+   この ``ResultSet`` はキャッシュに書き込まれ、返されます。
 
 .. note::
 

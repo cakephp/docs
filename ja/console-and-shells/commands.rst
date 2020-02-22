@@ -53,7 +53,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     class HelloCommand extends Command
     {
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser->addArgument('name', [
                 'help' => 'What is your name'
@@ -86,7 +86,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 追加することができます。 ::
 
     // ...
-    protected function buildOptionParser(ConsoleOptionParser $parser)
+    protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser
             ->addArgument('name', [
@@ -134,13 +134,13 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     class UserCommand extends Command
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadModel('Users');
         }
 
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser
                 ->addArgument('name', [
@@ -221,7 +221,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     class UpdateTableCommand extends Command
     {
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser->setDescription('My cool console app');
 
@@ -243,7 +243,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
     {
         use ConsoleIntegrationTestTrait;
 
-        public function setUp()
+        public function setUp(): void
         {
             parent::setUp();
             $this->useCommandRunner();
@@ -270,7 +270,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     class UpdateTableCommand extends Command
     {
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser
                 ->setDescription('My cool console app')
@@ -368,7 +368,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     class UpdateTableCommand extends Command
     {
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser
                 ->setDescription('My cool console app')
