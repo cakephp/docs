@@ -342,9 +342,12 @@ Add the logout action to the ``UsersController`` class::
         }
     }
 
-Now you can visit ``/users/logout`` to log out. You should then be sent to the login
-page. You now have a simple blog that allows authenticated users to create or
-edit articles and allows unauthenticated users to view articles and tags.
+Now you can visit ``/users/logout`` to log out. You should then be sent to the
+login page. If you've made it this far, congratulations, you now have a simple
+blog that:
+
+* Allows authenticated users to create and edit articles.
+* Allows unauthenticated users to view articles and tags.
 
 Suggested Follow-up Reading
 ---------------------------
