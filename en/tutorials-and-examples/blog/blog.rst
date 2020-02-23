@@ -156,12 +156,12 @@ that CakePHP can successfully connect to the database.
     Remember that you'll need to have PDO, and pdo_mysql enabled in
     your php.ini.
 
-Optional Configuration
+Other Configurations
 ======================
 
 There are a few other items that can be configured. Most developers
-complete these laundry-list items, but they're not required for
-this tutorial. One is defining a custom string (or "salt") for use
+complete these laundry-list items, although they are not required for
+this tutorial, you should still do them. One is defining a custom string (or "salt") for use
 in security hashes. The second is defining a custom number (or
 "seed") for use in encryption.
 
