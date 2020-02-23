@@ -123,7 +123,7 @@ install the Authentication Plugin:
 Adding Password Hashing
 =======================
 
-Next we'll add password hashing to, and create our ``User`` entity.  Create the
+Next, we'll create the ``User`` entity and add password hashing.  Create the
 **src/Model/Entity/User.php** entity file and add the following::
 
     // src/Model/Entity/User.php
@@ -258,7 +258,7 @@ All your pages will be restricted as the ``AuthenticationComponent`` is checking
 the result on every request. When it fails to find any authenticated user, it'll
 redirect the user to the ``/users/login`` page.  Note at this point, the site
 won't work as we don't have a login page yet.  If you visit your site, you'll
-get an "infinite redirect loop" so let's fix that.
+get an "infinite redirect loop".  So, let's fix that!
 
 In your ``UsersController``, add the following code::
 
