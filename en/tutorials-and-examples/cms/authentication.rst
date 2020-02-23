@@ -115,7 +115,7 @@ In **src/Application.php**, add the following imports::
     use Authentication\Middleware\AuthenticationMiddleware;
     use Psr\Http\Message\ServerRequestInterface;
 
-Then implement the authentication interface on your application class::
+Then implement the authentication interface on your ``Application`` class::
 
     // in src/Application.php
     class Application extends BaseApplication
@@ -165,7 +165,7 @@ Then add the following::
         return $authenticationService;
     }
 
-In you AppController class add the following code::
+In you ``AppController`` class add the following code::
 
     // src/Controller/AppController.php
     public function initialize(): void
@@ -177,8 +177,8 @@ In you AppController class add the following code::
         // Add this line to check authentication result and lock your site
         $this->loadComponent('Authentication.Authentication');
 
-Now, on every request, the AuthenticationMiddleware will inspect
-the request session to look for an authenticated user. If we are loading the /users/login
+Now, on every request, the ``AuthenticationMiddleware`` will inspect
+the request session to look for an authenticated user. If we are loading the ``/users/login``
 page, it'll inspect also the posted form data (if any) to extract the credentials.
 By default the credentials will be extracted from the ``username`` and ``password``
 fields in the request data.
@@ -191,12 +191,12 @@ user to the ``/users/login`` page.
 Note at this point, the site won't work as we don't have a login page yet.
 If you visit your site, you'll get an "infinite redirect loop" so let's fix that.
 
-In your UsersController, add the following code::
+In your ``UsersController``, add the following code::
 
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        // Configure the login action to don't require authentication, preventing
+        // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
         $this->Authentication->addUnauthenticatedActions(['login']);
     }
