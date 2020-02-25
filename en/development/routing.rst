@@ -1036,7 +1036,9 @@ DELETE      /recipes/123.format   RecipesController::delete(123)
 
 .. note::
 
-    The default for pattern for resource IDs only matches integers or UUIDs. If your IDs are different you will have to supply a regular expression pattern via the  ``id`` option. E.g. ``$builder->resources('Recipes', ['id' => '.*'])``. 
+    The default for pattern for resource IDs only matches integers or UUIDs. 
+    If your IDs are different you will have to supply a regular expression pattern 
+    via the  ``id`` option. E.g. ``$builder->resources('Recipes', ['id' => '.*'])``. 
      
 The HTTP method being used is detected from a few different sources.
 The sources in order of preference are:
