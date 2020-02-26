@@ -168,9 +168,9 @@ which implements ``EventListenerInterface``::
     {
         public function implementedEvents()
         {
-            return array(
+            return [
                 'Model.initialize' => 'initializeEvent',
-            );
+            ];
         }
 
         public function initializeEvent($event): void
