@@ -143,92 +143,95 @@ Para acessar todas as variáveis de ambiente em uma solicitação, use ``getServ
 Dados XML ou JSON
 -----------------
 
-Applications employing :doc:`/development/rest` often exchange data in
-non-URL-encoded post bodies. You can read input data in any format using
-:php:meth:`~Cake\\Http\\ServerRequest::input()`. By providing a decoding function,
-you can receive the content in a deserialized format::
+Os aplicativos que empregam :doc:`/development/rest` geralmente trocam dados em 
+corpos de postagem não codificados em URL. Você pode ler dados de entrada em 
+qualquer formato usando :php:meth:`~Cake\\Http\\ServerRequest::input()`. Ao 
+fornecer uma função de decodificação, você pode receber o conteúdo em um 
+formato desserializado::
 
-    // Get JSON encoded data submitted to a PUT/POST action
+    // Obter dados codificados em JSON enviados para uma ação PUT/POST
     $jsonData = $this->request->input('json_decode');
 
-Some deserializing methods require additional parameters when called, such as
-the 'as array' parameter on ``json_decode``. If you want XML converted into a
-DOMDocument object, :php:meth:`~Cake\\Http\\ServerRequest::input()` supports
-passing in additional parameters as well::
+Alguns métodos de desserialização requerem parâmetros adicionais quando chamados, 
+como o parâmetro 'as array' em ``json_decode``. Se você deseja que o XML seja 
+convertido em um objeto DOMDocument, :php:meth:`~Cake\\Http\\ServerRequest::input()` 
+também suporta a passagem de parâmetros adicionais::
 
-    // Get XML encoded data submitted to a PUT/POST action
+    // Obter dados codificados em XML enviados para uma ação PUT/POST
     $data = $this->request->input('Cake\Utility\Xml::build', ['return' => 'domdocument']);
 
-Path Information
-----------------
+Informações de Caminho
+----------------------
 
-The request object also provides useful information about the paths in your
-application. The ``base`` and ``webroot`` attributes are useful for
-generating URLs, and determining whether or not your application is in a
-subdirectory. The attributes you can use are::
+O objeto de solicitação também fornece informações úteis sobre os caminhos 
+em seu aplicativo. Os atributos ``base`` e ``webroot`` são úteis para 
+gerar URLs e determinar se seu aplicativo está ou não em um subdiretório. 
+Os atributos que você pode usar são::
 
-    // Assume the current request URL is /subdir/articles/edit/1?page=1
+    // Suponha que o URL da solicitação atual seja /subdir/articles/edit/1?page=1
 
-    // Holds /subdir/articles/edit/1?page=1
+    // Possui /subdir/articles/edit/1?page=1
     $here = $request->getRequestTarget();
 
-    // Holds /subdir
+    // Possui /subdir
     $base = $request->getAttribute('base');
 
-    // Holds /subdir/
+    // Possui /subdir/
     $base = $request->getAttribute('webroot');
 
 .. _check-the-request:
 
-Checking Request Conditions
----------------------------
+Verificando as Condições da Solicitação
+---------------------------------------
 
 .. php:method:: is($type, $args...)
 
-The request object provides an easy way to inspect certain conditions in a given
-request. By using the ``is()`` method you can check a number of common
-conditions, as well as inspect other application specific request criteria::
+O objeto de solicitação fornece uma maneira fácil de inspecionar determinadas 
+condições em uma determinada solicitação. Usando o método ``is()``, você 
+pode verificar várias condições comuns, bem como inspecionar outros critérios 
+de solicitação específicos do aplicativo::
 
     $isPost = $this->request->is('post');
 
-You can also extend the request detectors that are available, by using
-:php:meth:`Cake\\Http\\ServerRequest::addDetector()` to create new kinds of
-detectors. There are four different types of detectors that you can create:
+Você também pode estender os detectores de solicitação disponíveis, usando 
+:php:meth:`Cake\\Http\\ServerRequest::addDetector()` para criar 
+novos tipos de detectores. Existem quatro tipos diferentes de detectores 
+que você pode criar:
 
-* Environment value comparison - Compares a value fetched from :php:func:`env()`
-  for equality with the provided value.
-* Pattern value comparison - Pattern value comparison allows you to compare a
-  value fetched from :php:func:`env()` to a regular expression.
-* Option based comparison -  Option based comparisons use a list of options to
-  create a regular expression. Subsequent calls to add an already defined
-  options detector will merge the options.
-* Callback detectors - Callback detectors allow you to provide a 'callback' type
-  to handle the check. The callback will receive the request object as its only
-  parameter.
+* Comparação de valores do ambiente - Compara um valor obtido de :php:func:`env()` 
+  para igualdade com o valor fornecido.
+* Comparação de valores padrão - A comparação de valores padrão permite comparar 
+  um valor obtido de :php:func:`env()` com uma expressão regular.
+* Comparação baseada em opção - Comparações baseadas em opção usam uma lista de 
+  opções para criar uma expressão regular. As chamadas subseqüentes para adicionar 
+  um detector de opções já definido mesclarão as opções.
+* Detectores de retorno de chamada - Os detectores de retorno de chamada permitem 
+  que você forneça um tipo de 'callback' para lidar com a verificação. 
+  O retorno de chamada receberá o objeto de solicitação como seu único parâmetro.
 
 .. php:method:: addDetector($name, $options)
 
-Some examples would be::
+Alguns exemplos seriam::
 
-    // Add an environment detector.
+    // Adicione um detector de ambiente.
     $this->request->addDetector(
         'post',
         ['env' => 'REQUEST_METHOD', 'value' => 'POST']
     );
 
-    // Add a pattern value detector.
+    // Adicione um detector de valor padrão.
     $this->request->addDetector(
         'iphone',
         ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i']
     );
 
-    // Add an option detector
+    // Adicione um detector de opção
     $this->request->addDetector('internalIp', [
         'env' => 'CLIENT_IP',
         'options' => ['192.168.0.101', '192.168.0.100']
     ]);
 
-    // Add a callback detector. Must be a valid callable.
+    // Adicione um detector de callback. Deve ser uma chamada válida.
     $this->request->addDetector(
         'awesome',
         function ($request) {
@@ -236,7 +239,7 @@ Some examples would be::
         }
     );
 
-    // Add a detector that uses additional arguments.
+    // Adicione um detector que use argumentos adicionais.
     $this->request->addDetector(
         'controller',
         function ($request, $name) {
@@ -244,31 +247,31 @@ Some examples would be::
         }
     );
 
-``Request`` also includes methods like
+``Request`` também inclui métodos como
 :php:meth:`Cake\\Http\\ServerRequest::domain()`,
-:php:meth:`Cake\\Http\\ServerRequest::subdomains()` and
-:php:meth:`Cake\\Http\\ServerRequest::host()` to help applications with subdomains,
-have a slightly easier life.
+:php:meth:`Cake\\Http\\ServerRequest::subdomains()` e
+:php:meth:`Cake\\Http\\ServerRequest::host()` para ajudar aplicativos com subdomínios,
+tenha uma vida um pouco mais fácil.
 
-There are several built-in detectors that you can use:
+Existem vários detectores embutidos que você pode usar:
 
-* ``is('get')`` Check to see whether the current request is a GET.
-* ``is('put')`` Check to see whether the current request is a PUT.
-* ``is('patch')`` Check to see whether the current request is a PATCH.
-* ``is('post')`` Check to see whether the current request is a POST.
-* ``is('delete')`` Check to see whether the current request is a DELETE.
-* ``is('head')`` Check to see whether the current request is HEAD.
-* ``is('options')`` Check to see whether the current request is OPTIONS.
-* ``is('ajax')`` Check to see whether the current request came with
+* ``is('get')`` Verifique se a solicitação atual é um GET.
+* ``is('put')`` Verifique se a solicitação atual é um PUT.
+* ``is('patch')`` Verifique se a solicitação atual é um PATCH.
+* ``is('post')`` Verifique se a solicitação atual é um POST.
+* ``is('delete')`` Verifique se a solicitação atual é um DELETE.
+* ``is('head')`` Verifique se a solicitação atual é HEAD.
+* ``is('options')`` Verifique se a solicitação atual é OPTIONS.
+* ``is('ajax')`` Verifique se a solicitação atual veio com
   X-Requested-With = XMLHttpRequest.
-* ``is('ssl')`` Check to see whether the request is via SSL.
-* ``is('flash')`` Check to see whether the request has a User-Agent of Flash.
-* ``is('requested')`` Check to see whether the request has a query param
-  'requested' with value 1.
-* ``is('json')`` Check to see whether the request has 'json' extension and
-  accept 'application/json' mimetype.
-* ``is('xml')`` Check to see whether the request has 'xml' extension and accept
-  'application/xml' or 'text/xml' mimetype.
+* ``is('ssl')`` Verifique se a solicitação é via SSL.
+* ``is('flash')`` Verifique se a solicitação possui um User-Agent de Flash.
+* ``is('requested')`` Verifique se a solicitação possui um parâmetro de consulta
+   'solicitado' com o valor 1.
+* ``is('json')`` Verifique se a solicitação possui extensão 'json' e
+   aceite mimetype 'application/json'.
+* ``is('xml')`` Verifique se a solicitação possui extensão 'xml' e aceite
+   mimetype 'application/xml' ou 'text/xml'.
 
 Session Data
 ------------
