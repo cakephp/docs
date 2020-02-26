@@ -105,3 +105,9 @@ TestSuite
   whilst fixtures are unloaded. Tables will still be truncated during fixture
   setup. You should see faster test suite runs as fewer truncation operations
   are being done.
+
+View
+----
+
+* Added ``TextHelper::slug()``. This method delegates to
+  ``Cake\Utility\Text::slug()``.
