@@ -75,7 +75,7 @@ CakePHP はそちらを使用します。
 po ファイルは、短いメッセージの翻訳には便利ですが、長い文章やページ全体を翻訳したい場合、
 他の方法で実装することを検討してください。例えば、 ::
 
-    // App Controller Code.
+    // App Controller のコード
     public function beforeFilter() {
         $locale = Configure::read('Config.language');
         if ($locale && file_exists(APP . 'View' . DS . $locale . DS . $this->viewPath . DS . $this->view . $this->ext)) {
@@ -86,7 +86,7 @@ po ファイルは、短いメッセージの翻訳には便利ですが、長�
 
 または、 ::
 
-    // View code
+    // View のコード
     echo $this->element(Configure::read('Config.language') . '/tos');
 
 .. _lc-time:
