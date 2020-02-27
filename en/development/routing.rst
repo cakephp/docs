@@ -1460,12 +1460,12 @@ requests and handle reverse routing. Route classes have a few conventions:
 
 * Route classes are expected to be found in the ``Routing\\Route`` namespace of
   your application or plugin.
-* Route classes should extend :php:class:`Cake\\Routing\\Route`.
+* Route classes should extend :php:class:`Cake\\Routing\\Route\\Route`.
 * Route classes should implement one or both of ``match()`` and/or ``parse()``.
 
 The ``parse()`` method is used to parse an incoming URL. It should generate an
 array of request parameters that can be resolved into a controller & action.
-Return ``false`` from this method to indicate a match failure.
+Return ``null`` from this method to indicate a match failure.
 
 The ``match()`` method is used to match an array of URL parameters and create a
 string URL. If the URL parameters do not match the route ``false`` should be
