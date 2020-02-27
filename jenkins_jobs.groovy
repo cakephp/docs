@@ -18,7 +18,7 @@ git branch -D master || true
 git checkout -b master
 
 git remote rm dokku || true
-git remote add dokku dokku@sites.cakephp.org:book-VERSION
+git remote add dokku dokku@apps.cakephp.org:book-VERSION
 git push -fv dokku master
 rm -rf /tmp/book-VERSION-$GIT_COMMIT
 '''
