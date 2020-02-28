@@ -273,150 +273,151 @@ Existem vários detectores embutidos que você pode usar:
 * ``is('xml')`` Verifique se a solicitação possui extensão 'xml' e aceite
    mimetype 'application/xml' ou 'text/xml'.
 
-Session Data
-------------
+Dados da sessão
+---------------
 
-To access the session for a given request use the ``getSession()`` method or use the ``session`` attribute::
+Para acessar a sessão para uma determinada solicitação, use o método ``getSession()`` ou use o atributo ``session``::
 
     $session = $this->request->getSession();
     $session = $this->request->getAttribute('session');
 
     $userName = $session->read('Auth.User.name');
 
-For more information, see the :doc:`/development/sessions` documentation for how
-to use the session object.
+Para obter mais informações, consulte a documentação :doc:`/development/sessions` 
+para saber como usar o objeto de sessão.
 
-Host and Domain Name
---------------------
+Host e Nome de Domínio
+----------------------
 
 .. php:method:: domain($tldLength = 1)
 
-Returns the domain name your application is running on::
+Retorna o nome de domínio em que seu aplicativo está sendo executado::
 
     // Prints 'example.org'
     echo $request->domain();
 
 .. php:method:: subdomains($tldLength = 1)
 
-Returns the subdomains your application is running on as an array::
+Retorna os subdomínios em que seu aplicativo está sendo executado como uma matriz::
 
-    // Returns ['my', 'dev'] for 'my.dev.example.org'
+    // Retorna ['my', 'dev'] para 'my.dev.example.org'
     $subdomains = $request->subdomains();
 
 .. php:method:: host()
 
-Returns the host your application is on::
+Retorna o host em que seu aplicativo está::
 
-    // Prints 'my.dev.example.org'
+    // Exibe 'my.dev.example.org'
     echo $request->host();
 
-Reading the HTTP Method
------------------------
+Lendo o método HTTP
+-------------------
 
 .. php:method:: getMethod()
 
-Returns the HTTP method the request was made with::
+Retorna o método HTTP com o qual a solicitação foi feita::
 
-    // Output POST
+    // Saída POST
     echo $request->getMethod();
 
-Restricting Which HTTP method an Action Accepts
------------------------------------------------
+Restringindo Qual Método HTTP Uma Ação Aceita
+---------------------------------------------
 
 .. php:method:: allowMethod($methods)
 
-Set allowed HTTP methods. If not matched, will throw
-``MethodNotAllowedException``. The 405 response will include the required
-``Allow`` header with the passed methods::
+Defina métodos HTTP permitidos. Se não corresponder, lançará ``MethodNotAllowedException``. 
+A resposta 405 incluirá o cabeçalho ``Allow`` necessário com os métodos passados::
 
     public function delete()
     {
-        // Only accept POST and DELETE requests
+        // Aceite apenas solicitações POST e DELETE
         $this->request->allowMethod(['post', 'delete']);
         ...
     }
 
-Reading HTTP Headers
---------------------
+Lendo Cabeçalhos HTTP
+---------------------
 
-Allows you to access any of the ``HTTP_*`` headers that were used
-for the request. For example::
+Permite acessar qualquer um dos cabeçalhos ``HTTP_*`` 
+que foram usados para a solicitação. Por exemplo::
 
-    // Get the header as a string
+    // Obter o cabeçalho como uma string
     $userAgent = $this->request->getHeaderLine('User-Agent');
 
-    // Get an array of all values.
+    // Obtenha uma matriz de todos os valores.
     $acceptHeader = $this->request->getHeader('Accept');
 
-    // Check if a header exists
+    // Verifique se existe um cabeçalho
     $hasAcceptHeader = $this->request->hasHeader('Accept');
 
-While some apache installs don't make the ``Authorization`` header accessible,
-CakePHP will make it available through apache specific methods as required.
+Enquanto algumas instalações do apache não tornam o cabeçalho ``Authorization`` 
+acessível, o CakePHP o torna disponível através de métodos específicos do apache, 
+conforme necessário.
 
 .. php:method:: referer($local = true)
 
-Returns the referring address for the request.
+Retorna o endereço de referência para a solicitação.
 
 .. php:method:: clientIp()
 
-Returns the current visitor's IP address.
+Retorna o endereço IP do visitante atual.
 
-Trusting Proxy Headers
-----------------------
+Confiando em Cabeçalhos de Proxy
+--------------------------------
 
-If your application is behind a load balancer or running on a cloud service, you
-will often get the load balancer host, port and scheme in your requests. Often
-load balancers will also send ``HTTP-X-Forwarded-*`` headers with the original
-values. The forwarded headers will not be used by CakePHP out of the box. To
-have the request object use these headers set the ``trustProxy`` property to
-``true``::
+Se o seu aplicativo estiver atrás de um balanceador de carga ou em execução em 
+um serviço de nuvem, geralmente você receberá o host, a porta e o esquema do 
+balanceador de carga em suas solicitações. Freqüentemente, os balanceadores de 
+carga também enviam cabeçalhos ``HTTP-X-Forwarded-*`` com os valores originais. 
+Os cabeçalhos encaminhados não serão usados pelo CakePHP imediatamente. Para 
+que o objeto de solicitação use esses cabeçalhos, defina a propriedade ``trustProxy`` 
+como ``true``::
 
     $this->request->trustProxy = true;
 
-    // These methods will now use the proxied headers.
+    // Esses métodos agora usarão os cabeçalhos com proxy.
     $port = $this->request->port();
     $host = $this->request->host();
     $scheme = $this->request->scheme();
     $clientIp = $this->request->clientIp();
 
-Once proxies are trusted the ``clientIp()`` method will use the *last* IP
-address in the ``X-Forwarded-For`` header. If your application is behind
-multiple proxies, you can use ``setTrustedProxies()`` to define the IP addresses
-of proxies in your control::
+Uma vez que os proxies são confiáveis, o método ``clientIp()`` usará o *último* 
+endereço IP no cabeçalho ``X-Forwarded-For``. Se o seu aplicativo estiver protegido 
+por vários proxies, você poderá usar ``setTrustedProxies()`` para definir os 
+endereços IP dos proxies em seu controle::
 
     $request->setTrustedProxies(['127.1.1.1', '127.8.1.3']);
 
-After proxies are trusted ``clientIp()`` will use the first IP address in the
-``X-Forwarded-For`` header providing it is the only value that isn't from a trusted
-proxy.
+Depois que os proxies forem confiáveis, o ``clientIp()`` usará o primeiro endereço 
+IP no cabeçalho ``X-Forwarded-For``, desde que seja o único valor que não seja de um 
+proxy confiável.
 
-Checking Accept Headers
------------------------
+Verificando Aceitar Cabeçalhos
+------------------------------
 
 .. php:method:: accepts($type = null)
 
-Find out which content types the client accepts, or check whether it accepts a
-particular type of content.
+Descubra quais tipos de conteúdo o cliente aceita ou verifique se 
+ele aceita um tipo específico de conteúdo.
 
-Get all types::
+Obter todos os tipos::
 
     $accepts = $this->request->accepts();
 
-Check for a single type::
+Verifique se há um único tipo::
 
     $acceptsJson = $this->request->accepts('application/json');
 
 .. php:method:: acceptLanguage($language = null)
 
-Get all the languages accepted by the client,
-or check whether a specific language is accepted.
+Obtenha todos os idiomas aceitos pelo cliente,
+ou verifique se um idioma específico é aceito.
 
-Get the list of accepted languages::
+Obter a lista de idiomas aceitos::
 
     $acceptsLanguages = $this->request->acceptLanguage();
 
-Check whether a specific language is accepted::
+Verifique se um idioma específico é aceito::
 
     $acceptsSpanish = $this->request->acceptLanguage('es-es');
 
@@ -425,43 +426,42 @@ Check whether a specific language is accepted::
 Cookies
 -------
 
-Request cookies can be read through a number of methods::
+Os cookies de solicitação podem ser lidos através de vários métodos::
 
-    // Get the cookie value, or null if the cookie is missing.
+    // Obtem o valor de um cookie, ou nulo se o cookie não existir.
     $rememberMe = $this->request->getCookie('remember_me');
 
-    // Read the value, or get the default of 0
+    // Leia o valor ou obtenha o padrão 0
     $rememberMe = $this->request->getCookie('remember_me', 0);
 
-    // Get all cookies as an hash
+    // Obter todos os cookies como um hash
     $cookies = $this->request->getCookieParams();
 
-    // Get a CookieCollection instance
+    // Obter uma instância CookieCollection
     $cookies = $this->request->getCookieCollection()
 
-See the :php:class:`Cake\\Http\\Cookie\\CookieCollection` documentation for how
-to work with cookie collection.
+Consulte a documentação :php:class:`Cake\\Http\\Cookie\\CookieCollection` 
+para saber como trabalhar com a coleção de cookies.
 
+Arquivos Enviados
+-----------------
 
-Uploaded Files
---------------
+Solicitações expõem os dados do arquivo carregado em ``getData()`` 
+como matrizes e como objetos ``UploadedFileInterface`` por ``getUploadedFiles()``::
 
-Requests expose the uploaded file data in ``getData()`` as
-arrays, and as ``UploadedFileInterface`` objects by ``getUploadedFiles()``::
-
-    // Get a list of UploadedFile objects
+    // Obter uma lista de objetos UploadedFile
     $files = $request->getUploadedFiles();
 
-    // Read the file data.
+    // Leia os dados do arquivo.
     $files[0]->getStream();
     $files[0]->getSize();
     $files[0]->getClientFileName();
 
-    // Move the file.
+    // Move o arquivo.
     $files[0]->moveTo($targetPath);
 
-Manipulating URIs
------------------
+Manipulando URIs
+----------------
 
 Requests contain a URI object, which contains methods for interacting with the
 requested URI::
