@@ -875,15 +875,12 @@ o conteúdo da resposta e envia o cabeçalho `304 Not Modified`::
 Configurando Cookies
 ====================
 
-Cookies can be added to response using either an array or a :php:class:`Cake\\Http\\Cookie\\Cookie`
-object
-
-Os cookies podem ser adicionados à resposta usando um array ou um objeto: php: class: `Cake \\ Http \\ Cookie \\ Cookie`::
+Os cookies podem ser adicionados à resposta usando um array ou um objeto :php:class:`Cake\\Http\\Cookie\\Cookie`::
 
     use Cake\Http\Cookie\Cookie;
     use DateTime;
 
-    // Add a cookie
+    // Adiciona um cookie
     $this->response = $this->response->withCookie(new Cookie(
         'remember_me',
         'yes',
@@ -894,20 +891,20 @@ Os cookies podem ser adicionados à resposta usando um array ou um objeto: php: 
         true // httponly
     ]);
 
-See the :ref:`creating-cookies` section for how to use the cookie object. You
-can use ``withExpiredCookie()`` to send an expired cookie in the response. This
-will make the browser remove its local cookie::
+Veja a seção :ref:`created-cookies` para saber como usar o objeto cookie. 
+Você pode usar ``withExpiredCookie()`` para enviar um cookie expirado na 
+resposta. Isso fará com que o navegador remova seu cookie local::
 
     $this->response = $this->response->withExpiredCookie('remember_me');
 
 .. _cors-headers:
 
-Setting Cross Origin Request Headers (CORS)
-===========================================
+Definindo Cabeçalho de Solicitação de Origem Cruzada (CORS)
+===========================================================
 
-The ``cors()`` method is used to define `HTTP Access Control
-<https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS>`__
-related headers with a fluent interface::
+O método ``cors()`` é usado para definir o `HTTP Access Control
+<https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS>`__,
+são cabeçalhos relacionados com uma interface fluente::
 
     $this->response = $this->response->cors($this->request)
         ->allowOrigin(['*.cakephp.org'])
@@ -918,29 +915,28 @@ related headers with a fluent interface::
         ->maxAge(300)
         ->build();
 
-CORS related headers will only be applied to the response if the following
-criteria are met:
+Os cabeçalhos relacionados ao CORS somente serão aplicados à resposta se os seguintes 
+critérios forem atendidos:
 
-#. The request has an ``Origin`` header.
-#. The request's ``Origin`` value matches one of the allowed Origin values.
+#. A solicitação possui um cabeçalho ``Origin``.
+#. O valor ``Origem`` da solicitação corresponde a um dos valores de Origin permitidos.
 
-Common Mistakes with Immutable Responses
-========================================
+Erros Comuns com Respostas Imutáveis
+====================================
 
-Response objects offer a number of methods that treat
-responses as immutable objects. Immutable objects help prevent difficult to
-track accidental side-effects, and reduce mistakes caused by method calls caused
-by refactoring that change ordering. While they offer a number of benefits,
-immutable objects can take some getting used to. Any method that starts with
-``with`` operates on the response in an immutable fashion, and will **always**
-return a **new** instance. Forgetting to retain the modified instance is the most
-frequent mistake people make when working with immutable objects::
+Os objetos de resposta oferecem vários métodos que tratam as respostas como objetos 
+imutáveis. Objetos imutáveis ajudam a evitar efeitos colaterais acidentais difíceis 
+de controlar e reduzem os erros causados por chamadas de método causadas pela refatoração 
+dessa ordem de alteração. Embora ofereçam vários benefícios, objetos imutáveis podem levar 
+algum tempo para se acostumar. Qualquer método que comece com ``with`` opera a resposta de 
+maneira imutável e **sempre** retorna uma **nova** instância. Esquecer de manter a instância 
+modificada é o erro mais frequente que as pessoas cometem ao trabalhar com objetos imutáveis::
 
     $this->response->withHeader('X-CakePHP', 'yes!');
 
-In the above code, the response will be lacking the ``X-CakePHP`` header, as the
-return value of the ``withHeader()`` method was not retained. To correct the
-above code you would write::
+No código acima, a resposta não terá o cabeçalho ``X-CakePHP``, pois o valor de 
+retorno do método ``withHeader()`` não foi mantido. Para corrigir o código acima, 
+você escreveria::
 
     $this->response = $this->response->withHeader('X-CakePHP', 'yes!');
 
@@ -951,34 +947,34 @@ Cookie Collections
 
 .. php:class:: CookieCollection
 
-``CookieCollection`` objects are accessible from the request and response objects.
-They let you interact with groups of cookies using immutable patterns, which
-allow the immutability of the request and response to be preserved.
+Os objetos ``CookieCollection`` são acessíveis a partir dos objetos de solicitação 
+e resposta. Eles permitem que você interaja com grupos de cookies usando padrões 
+imutáveis, que permitem preservar a imutabilidade da solicitação e resposta.
 
 .. _creating-cookies:
 
-Creating Cookies
-----------------
+Criando Cookies
+---------------
 
 .. php:class:: Cookie
 
-``Cookie`` objects can be defined through constructor objects, or by using the
-fluent interface that follows immutable patterns::
+Os objetos ``Cookie`` podem ser definidos por meio de objetos construtores ou usando 
+a interface fluente que segue padrões imutáveis::
 
     use Cake\Http\Cookie\Cookie;
 
-    // All arguments in the constructor
+    // Todos os argumentos no construtor
     $cookie = new Cookie(
-        'remember_me', // name
+        'remember_me', // nome
         1, // value
-        new DateTime('+1 year'), // expiration time, if applicable
-        '/', // path, if applicable
-        'example.com', // domain, if applicable
-        false, // secure only?
-        true // http only ?
+        new DateTime('+1 year'), // prazo de validade, se aplicável
+        '/', // caminho, se aplicável
+        'example.com', // doomínio, se aplicável
+        false, // somente seguro?
+        true // somente HTTP?
     );
 
-    // Using the builder methods
+    // Usando os métodos do construtor
     $cookie = (new Cookie('remember_me'))
         ->withValue('1')
         ->withExpiry(new DateTime('+1 year'))
@@ -987,64 +983,63 @@ fluent interface that follows immutable patterns::
         ->withSecure(false)
         ->withHttpOnly(true);
 
-Once you have created a cookie, you can add it to a new or existing
-``CookieCollection``::
+Depois de criar um cookie, você pode adicioná-lo a um ``CookieCollection`` 
+novo ou existente::
 
     use Cake\Http\Cookie\CookieCollection;
 
-    // Create a new collection
+    // Crie uma nova coleção
     $cookies = new CookieCollection([$cookie]);
 
-    // Add to an existing collection
+    // Adicionar a uma coleção existente
     $cookies = $cookies->add($cookie);
 
-    // Remove a cookie by name
+    // Remover um cookie pelo nome
     $cookies = $cookies->remove('remember_me');
 
 .. note::
-    Remember that collections are immutable and adding cookies into, or removing
-    cookies from a collection, creates a *new* collection object.
+    Lembre-se de que as coleções são imutáveis e a adição de cookies ou a remoção 
+    de cookies de uma coleção cria um *novo* objeto de coleção.
 
-Cookie objects can be added to responses::
+Objetos de cookie podem ser adicionados às respostas::
 
-    // Add one cookie
+    // Adiciona um cookie
     $response = $this->response->withCookie($cookie);
 
-    // Replace the entire cookie collection
+    // Substitui inteiramente uma coleção de cookie
     $response = $this->response->withCookieCollection($cookies);
 
-Cookies set to responses can be encrypted using the
+Os cookies definidos como respostas podem ser criptografados usando o 
 :ref:`encrypted-cookie-middleware`.
 
-Reading Cookies
----------------
+Lendo Cookies
+-------------
 
-Once you have a ``CookieCollection`` instance, you can access the cookies it
-contains::
+Depois de ter uma instância ``CookieCollection``, você pode acessar os cookies que ela contém::
 
-    // Check if a cookie exists
+    // Verifica se o cookie existe
     $cookies->has('remember_me');
 
-    // Get the number of cookies in the collection
+    // Obter o número de cookies na coleção
     count($cookies);
 
-    // Get a cookie instance
+    // Obter uma instância de cookie
     $cookie = $cookies->get('remember_me');
 
-Once you have a ``Cookie`` object you can interact with it's state and modify
-it. Keep in mind that cookies are immutable, so you'll need to update the
-collection if you modify a cookie::
+Depois de ter um objeto ``Cookie``, você pode interagir com seu estado e modificá-lo. 
+Lembre-se de que os cookies são imutáveis, portanto, você precisará atualizar a coleção 
+se modificar um cookie::
 
-    // Get the value
+    // Obtenha o valor
     $value = $cookie->getValue()
 
-    // Access data inside a JSON value
+    // Acessar dados dentro de um valor JSON
     $id = $cookie->read('User.id');
 
-    // Check state
+    // Verifica o estado
     $cookie->isHttpOnly();
     $cookie->isSecure();
 
 .. meta::
-    :title lang=en: Request and Response objects
-    :keywords lang=en: request controller,request parameters,array indexes,purpose index,response objects,domain information,request object,request data,interrogating,params,parameters,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp,PSR-7,immutable
+    :title lang=pt: Objectos de requisição e resposta
+    :keywords lang=pt: controlador de solicitação, parâmetros de solicitação, índices de arrays, índice de finalidade, objetos de resposta, informações de domínio, objeto de solicitação, dados de solicitação, interrogação, parâmetros, versões anteriores, introspecção, dispatcher, rota, estruturas de dados, matrizes, endereço IP, migração, índices, cakephp, PSR-7, imutável
