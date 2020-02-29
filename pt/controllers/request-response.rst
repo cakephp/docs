@@ -21,8 +21,8 @@ vários recursos para interrogar e interagir com os dados da solicitação. Em c
 solicitação, uma requisição é criada e depois passada por referência às várias camadas 
 de um aplicativo que usam dados da solicitação. Por padrão, a solicitação é atribuída 
 a ``$this->request`` e está disponível em Controllers, Cells, Views e Helpers. Você 
-também pode acessá-lo em Components usando a referência do controlador. 
-Algumas das tarefas que o ``ServerRequest`` executa incluem:
+também pode acessá-lo em Components usando a referência do controlador. Algumas das 
+tarefas que o ``ServerRequest`` executa incluem:
 
 * Processar as matrizes GET, POST e FILES nas estruturas de dados que você conhece.
 * Fornecer introspecção do ambiente referente à solicitação. Informações como os 
@@ -72,7 +72,7 @@ Os parâmetros em URL podem ser lidos usando o método ``getQuery()``::
 
 Você pode acessar diretamente a propriedade query, ou pode usar o método ``getQuery()`` 
 para ler a matriz de consultas de URL de maneira livre de erros. Quaisquer chaves que 
-não existem retornarão ``null``::
+não existirem retornarão ``null``::
 
     $foo = $this->request->getQuery('value_that_does_not_exist');
     // $foo === null
@@ -121,8 +121,8 @@ argumentos para ``input()``::
 
     $jsonData = $this->request->input('json_decode');
 
-Variáveis de Ambiente (De $_SERVER e $_ENV)
--------------------------------------------
+Variáveis de Ambiente ($_SERVER e $_ENV)
+----------------------------------------
 
 .. php:method:: env($key, $value = null)
 
@@ -153,7 +153,7 @@ formato desserializado::
     $jsonData = $this->request->input('json_decode');
 
 Alguns métodos de desserialização requerem parâmetros adicionais quando chamados, 
-como o parâmetro 'as array' em ``json_decode``. Se você deseja que o XML seja 
+como o parâmetro 'as array' em ``json_decode``. Se você desejar que o XML seja 
 convertido em um objeto DOMDocument, :php:meth:`~Cake\\Http\\ServerRequest::input()` 
 também suporta a passagem de parâmetros adicionais::
 
@@ -273,7 +273,7 @@ Existem vários detectores embutidos que você pode usar:
 * ``is('xml')`` Verifique se a solicitação possui extensão 'xml' e aceite
    mimetype 'application/xml' ou 'text/xml'.
 
-Dados da sessão
+Dados da Sessão
 ---------------
 
 Para acessar a sessão para uma determinada solicitação, use o método ``getSession()`` ou use o atributo ``session``::
