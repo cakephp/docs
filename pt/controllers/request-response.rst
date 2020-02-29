@@ -463,13 +463,12 @@ como matrizes e como objetos ``UploadedFileInterface`` por ``getUploadedFiles()`
 Manipulando URIs
 ----------------
 
-Requests contain a URI object, which contains methods for interacting with the
-requested URI::
+Requisições contêm um objeto URI, que tem métodos para interagir com o URI solicitado::
 
-    // Get the URI
+    // Obtem o URI
     $uri = $request->getUri();
 
-    // Read data out of the URI.
+    // Leia dados fora do URI.
     $path = $uri->getPath();
     $query = $uri->getQuery();
     $host = $uri->getHost();
@@ -477,188 +476,186 @@ requested URI::
 
 .. index:: $this->response
 
-Response
+Resposta
 ========
 
 .. php:class:: Response
 
-:php:class:`Cake\\Http\\Response` is the default response class in CakePHP.
-It encapsulates a number of features and functionality for generating HTTP
-responses in your application. It also assists in testing, as it can be
-mocked/stubbed allowing you to inspect headers that will be sent.
-Like :php:class:`Cake\\Http\\ServerRequest`, :php:class:`Cake\\Http\\Response`
-consolidates a number of methods previously found on :php:class:`Controller`,
-:php:class:`RequestHandlerComponent` and :php:class:`Dispatcher`. The old
-methods are deprecated in favour of using :php:class:`Cake\\Http\\Response`.
+:php:class:`Cake\\Http\\Response` é a classe de resposta padrão no CakePHP. 
+Ele encapsula vários recursos e funcionalidades para gerar respostas HTTP em 
+seu aplicativo. Também auxilia nos testes, pois pode ser simulado/esboçado, 
+permitindo que você inspecione os cabeçalhos que serão enviados. Como 
+:php:class:`Cake\\Http\\ServerRequest`, :php:class:`Cake\\Http\\Response` 
+consolida uma série de métodos encontrados anteriormente em :php:class:`Controller`, 
+:php:class:`RequestHandlerComponent` e :php:class:`Dispatcher`. Os métodos 
+antigos são preteridos no uso de :php:class:`Cake\\Http\\Response`.
 
-``Response`` provides an interface to wrap the common response-related
-tasks such as:
+``Response`` fornece uma interface para agrupar tarefas comuns 
+relacionadas à resposta, como:
 
-* Sending headers for redirects.
-* Sending content type headers.
-* Sending any header.
-* Sending the response body.
+* Enviar cabeçalhos para redirecionamentos.
+* Enviar cabeçalhos de tipo de conteúdo.
+* Enviar qualquer cabeçalho.
+* Enviar o corpo da resposta.
 
-Dealing with Content Types
---------------------------
+Lidando com Tipos de Conteúdo
+-----------------------------
 
 .. php:method:: withType($contentType = null)
 
-You can control the Content-Type of your application's responses with
-:php:meth:`Cake\\Http\\Response::withType()`. If your application needs to deal
-with content types that are not built into Response, you can map them with
-``type()`` as well::
+Você pode controlar o tipo de conteúdo das respostas do seu aplicativo com
+:php:meth:`Cake\\Http\\Response::withType()`. Se seu aplicativo precisar 
+lidar com tipos de conteúdo que não estão embutidos no Response, você pode 
+mapeá-los com ``type()`` também::
 
-    // Add a vCard type
+    // Adiciona um tipo de vCard
     $this->response->type(['vcf' => 'text/v-card']);
 
-    // Set the response Content-Type to vcard.
+    // Defina a resposta Content-Type como vcard
     $this->response = $this->response->withType('vcf');
 
-Usually, you'll want to map additional content types in your controller's
-:php:meth:`~Controller::beforeFilter()` callback, so you can leverage the
-automatic view switching features of :php:class:`RequestHandlerComponent` if you
-are using it.
+Normalmente, você deseja mapear tipos de conteúdo adicionais no retorno de 
+chamada do seu controlador :php:meth:`~Controller::beforeFilter()`, 
+para poder aproveitar os recursos de troca automática de exibição de 
+:php:class:`RequestHandlerComponent` se você está usando.
 
 .. _cake-response-file:
 
-Sending Files
--------------
+Enviando Arquivos
+-----------------
 
 .. php:method:: withFile($path, $options = [])
 
-There are times when you want to send files as responses for your requests.
-You can accomplish that by using :php:meth:`Cake\\Http\\Response::withFile()`::
+Há momentos em que você deseja enviar arquivos como respostas para suas 
+solicitações. Você pode fazer isso usando :php:meth:`Cake\\Http\\Response::withFile()`::
 
     public function sendFile($id)
     {
         $file = $this->Attachments->getFile($id);
         $response = $this->response->withFile($file['path']);
-        // Return the response to prevent controller from trying to render
-        // a view.
+        // Retorna a resposta para impedir que o controlador tente renderizar
+        // uma view.
         return $response;
     }
 
-As shown in the above example, you must pass the file path to the method.
-CakePHP will send a proper content type header if it's a known file type listed
-in `Cake\\Http\\Response::$_mimeTypes`. You can add new types prior to calling
-:php:meth:`Cake\\Http\\Response::withFile()` by using the
-:php:meth:`Cake\\Http\\Response::withType()` method.
+Como mostrado no exemplo acima, você deve passar o caminho do arquivo para o 
+método. O CakePHP enviará um cabeçalho de tipo de conteúdo adequado se for um 
+tipo de arquivo conhecido listado em `Cake\\Http\\Response::$_mimeTypes`. 
+Você pode adicionar novos tipos antes de chamar :php:meth:`Cake\\Http\\Response::withFile()` 
+usando o método :php:meth:`Cake\\Http\\Response::withType()`.
 
-If you want, you can also force a file to be downloaded instead of displayed in
-the browser by specifying the options::
+Se desejar, você também pode forçar o download de um arquivo em vez de ser 
+exibido no navegador, especificando as opções::
 
     $response = $this->response->withFile(
         $file['path'],
         ['download' => true, 'name' => 'foo']
     );
 
-The supported options are:
+As opções suportadas são:
 
 name
-    The name allows you to specify an alternate file name to be sent to
-    the user.
+    O nome permite especificar um nome de arquivo alternativo a ser enviado 
+    ao usuário.
 download
-    A boolean value indicating whether headers should be set to force
+    Um valor booleano indicando se os cabeçalhos devem ser definidos para forçar o
     download.
 
-Sending a String as File
-------------------------
+Enviando uma String como Arquivo
+--------------------------------
 
-You can respond with a file that does not exist on the disk, such as a pdf or an
-ics generated on the fly from a string::
+Você pode responder com um arquivo que não existe no disco, como um pdf ou um ics 
+gerado on-line a partir de uma string::
 
     public function sendIcs()
     {
         $icsString = $this->Calendars->generateIcs();
         $response = $this->response;
 
-        // Inject string content into response body
+        // Injetar conteúdo da string no corpo da resposta
         $response = $response->withStringBody($icsString);
 
         $response = $response->withType('ics');
 
-        // Optionally force file download
+        // Opcionalmente, obriga o download do arquivo
         $response = $response->withDownload('filename_for_download.ics');
 
-        // Return response object to prevent controller from trying to render
-        // a view.
+        // Retorne o objeto de resposta para impedir que o controlador tente renderizar 
+        // uma view.
         return $response;
     }
 
-Callbacks can also return the body as a string::
+Os retornos de chamada também podem retornar o corpo como uma sequência::
 
     $path = '/some/file.png';
     $this->response->body(function () use ($path) {
         return file_get_contents($path);
     });
 
-Setting Headers
----------------
+Definindo Cabeçalhos
+--------------------
 
 .. php:method:: withHeader($header, $value)
 
-Setting headers is done with the :php:meth:`Cake\\Http\\Response::withHeader()`
-method. Like all of the PSR-7 interface methods, this method returns a *new*
-instance with the new header::
+A configuração dos cabeçalhos é feita com o método :php:meth:`Cake\\Http\\Response::withHeader()`. 
+Como todos os métodos de interface PSR-7, esse método retorna uma instância *new* com o novo cabeçalho::
 
-    // Add/replace a header
+    // Adicionar/substituir um cabeçalho
     $response = $response->withHeader('X-Extra', 'My header');
 
-    // Set multiple headers
+    // Define vários cabeçalhos
     $response = $response->withHeader('X-Extra', 'My header')
         ->withHeader('Location', 'http://example.com');
 
-    // Append a value to an existing header
+    // Anexa um valor a um cabeçalho existente
     $response = $response->withAddedHeader('Set-Cookie', 'remember_me=1');
 
-Headers are not sent when set. Instead, they are held until the response is
-emitted by ``Cake\Http\Server``.
+Os cabeçalhos não são enviados quando definidos. Em vez disso, eles são mantidos 
+até que a resposta seja emitida por ``Cake\Http\Server``.
 
-You can now use the convenience method
-:php:meth:`Cake\\Http\\Response::withLocation()` to directly set or get the
-redirect location header.
+Agora você pode usar o método conveniente :php:meth:`Cake\\Http\\Response::withLocation()` 
+para definir diretamente ou obter o cabeçalho do local de redirecionamento.
 
-Setting the Body
-----------------
+Definindo o Corpo
+-----------------
 
 .. php:method:: withStringBody($string)
 
-To set a string as the response body, do the following::
+Para definir uma sequência como o corpo da resposta, faça o seguinte::
 
-    // Set a string into the body
+    // Define uma string no corpo da resposta
     $response = $response->withStringBody('My Body');
 
-    // If you want a json response
+    // Se você deseja enviar uma resposta em JSON
     $response = $response->withType('application/json')
         ->withStringBody(json_encode(['Foo' => 'bar']));
 
 .. php:method:: withBody($body)
 
-To set the response body, use the ``withBody()`` method, which is provided by the
+Para definir o corpo da resposta, use o método ``withBody()``, fornecido pelo
 :php:class:`Zend\\Diactoros\\MessageTrait`::
 
     $response = $response->withBody($stream);
 
-Be sure that ``$stream`` is a :php:class:`Psr\\Http\\Message\\StreamInterface` object.
-See below on how to create a new stream.
+Certifique-se de que ``$stream`` seja um objeto :php:class:`Psr\\Http\\Message\\StreamInterface`. 
+Veja abaixo como criar um novo fluxo.
 
-You can also stream responses from files using :php:class:`Zend\\Diactoros\\Stream` streams::
+Você também pode transmitir respostas de arquivos usando :php:class:`Zend\\Diactoros\\Stream` streams::
 
-    // To stream from a file
+    // Para transmitir a partir de um arquivo
     use Zend\Diactoros\Stream;
 
     $stream = new Stream('/path/to/file', 'rb');
     $response = $response->withBody($stream);
 
-You can also stream responses from a callback using the ``CallbackStream``. This
-is useful when you have resources like images, CSV files or PDFs you need to
-stream to the client::
+Você também pode transmitir respostas de um retorno de chamada usando o 
+``CallbackStream``. Isso é útil quando você possui recursos como imagens, 
+arquivos CSV ou PDFs que precisam ser transmitidos para o cliente::
 
-    // Streaming from a callback
+    // Streaming a partir de um retorno de chamada
     use Cake\Http\CallbackStream;
 
-    // Create an image.
+    // Cria uma imagem
     $img = imagecreate(100, 100);
     // ...
 
@@ -667,146 +664,143 @@ stream to the client::
     });
     $response = $response->withBody($stream);
 
-Setting the Character Set
--------------------------
+Definindo o Conjunto de Caracteres
+----------------------------------
 
 .. php:method:: withCharset($charset)
 
-Sets the charset that will be used in the response::
+Define o conjunto de caracteres que será usado na resposta::
 
     $this->response = $this->response->withCharset('UTF-8');
 
-Interacting with Browser Caching
---------------------------------
+Interagindo com o Cache do Navegador
+------------------------------------
 
 .. php:method:: withDisabledCache()
 
-You sometimes need to force browsers not to cache the results of a controller
-action. :php:meth:`Cake\\Http\\Response::withDisabledCache()` is intended for just
-that::
+Às vezes, você precisa forçar os navegadores a não armazenar em cache os resultados 
+de uma ação do controlador. :php:meth:`Cake\\Http\\Response::withDisabledCache()` 
+é destinado apenas para isso::
 
     public function index()
     {
-        // Disable caching
+        // Desabilita o caching
         $this->response = $this->response->withDisabledCache();
     }
 
 .. warning::
 
-    Disabling caching from SSL domains while trying to send
-    files to Internet Explorer can result in errors.
+    Desativando o armazenamento em cache de domínios SSL 
+    ao tentar enviar arquivos no Internet Explorer podem resultar em erros.
 
 .. php:method:: withCache($since, $time = '+1 day')
 
-You can also tell clients that you want them to cache responses. By using
-:php:meth:`Cake\\Http\\Response::withCache()`::
+Você também pode dizer aos clientes que deseja que eles armazenem respostas em cache. 
+Usando :php:meth:`Cake\\Http\\Response::withCache()`::
 
     public function index()
     {
-        // Enable caching
+        // Habilita o caching
         $this->response = $this->response->withCache('-1 minute', '+5 days');
     }
 
-The above would tell clients to cache the resulting response for 5 days,
-hopefully speeding up your visitors' experience.
-The ``withCache()`` method sets the ``Last-Modified`` value to the first
-argument. ``Expires`` header and the ``max-age`` directive are set based on the
-second parameter. Cache-Control's ``public`` directive is set as well.
+O exposto acima informava aos clientes para armazenar em cache a resposta 
+resultante por 5 dias, acelerando a experiência dos visitantes. O método ``withCache()`` 
+define o valor ``Last-Modified`` para o primeiro argumento. O cabeçalho ``Expires`` e 
+a diretiva ``max-age`` são configurados com base no segundo parâmetro. A diretiva 
+``public`` do Cache-Control também é definida.
 
 .. _cake-response-caching:
 
-Fine Tuning HTTP Cache
-----------------------
+Ajuste Fino de Cache HTTP
+-------------------------
 
-One of the best and easiest ways of speeding up your application is to use HTTP
-cache. Under this caching model, you are only required to help clients decide if
-they should use a cached copy of the response by setting a few headers such as
-modified time and response entity tag.
+Uma das melhores e mais fáceis maneiras de acelerar seu aplicativo é usar o cache HTTP. 
+Sob esse modelo de armazenamento em cache, você só precisa ajudar os clientes a decidir 
+se devem usar uma cópia em cache da resposta, definindo alguns cabeçalhos, como tempo 
+modificado e tag da entidade de resposta.
 
-Rather than forcing you to code the logic for caching and for invalidating
-(refreshing) it once the data has changed, HTTP uses two models, expiration and
-validation, which usually are much simpler to use.
+Em vez de forçar você a codificar a lógica para armazenar em cache e invalidá-la 
+(atualizando) depois que os dados forem alterados, o HTTP usa dois modelos, expiração 
+e validação, que geralmente são muito mais simples de usar.
 
-Apart from using :php:meth:`Cake\\Http\\Response::withCache()`, you can also use
-many other methods to fine-tune HTTP cache headers to take advantage of browser
-or reverse proxy caching.
+Além de usar :php:meth:`Cake\\Http\\Response::withCache()`, você também pode usar 
+muitos outros métodos para ajustar os cabeçalhos de cache HTTP para tirar proveito 
+do cache do navegador ou do proxy reverso.
 
-The Cache Control Header
-~~~~~~~~~~~~~~~~~~~~~~~~
+O cabeçalho para Controle de Cache
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: withSharable($public, $time = null)
 
-Used under the expiration model, this header contains multiple indicators that
-can change the way browsers or proxies use the cached content. A
-``Cache-Control`` header can look like this::
+Usado como modelo de expiração, esse cabeçalho contém vários indicadores que podem 
+alterar a maneira como navegadores ou proxies usam o conteúdo em cache. Um 
+cabeçalho ``Cache-Control`` pode ser assim::
 
     Cache-Control: private, max-age=3600, must-revalidate
 
-``Response`` class helps you set this header with some utility methods that will
-produce a final valid ``Cache-Control`` header. The first is the
-``withSharable()`` method, which indicates whether a response is to be
-considered sharable across different users or clients. This method actually
-controls the ``public`` or ``private`` part of this header.  Setting a response
-as private indicates that all or part of it is intended for a single user. To
-take advantage of shared caches, the control directive must be set as public.
+A classe ``Response`` ajuda a definir esse cabeçalho com alguns métodos utilitários 
+que produzirão um cabeçalho final ``Cache-Control`` válido. O primeiro é o método 
+``withSharable()``, que indica se uma resposta deve ser considerada compartilhável 
+entre diferentes usuários ou clientes. Este método realmente controla a parte ``public`` 
+ou ``private`` deste cabeçalho. Definir uma resposta como privada indica que a totalidade 
+ou parte dela é destinada a um único usuário. Para tirar proveito dos caches compartilhados, 
+a diretiva de controle deve ser definida como pública.
 
-The second parameter of this method is used to specify a ``max-age`` for the
-cache, which is the number of seconds after which the response is no longer
-considered fresh::
+O segundo parâmetro desse método é usado para especificar uma ``idade máxima`` para o cache, 
+que é o número de segundos após os quais a resposta não é mais considerada nova::
 
     public function view()
     {
         // ...
-        // Set the Cache-Control as public for 3600 seconds
+        // Define o controle de cache como público por 3600 segundos
         $this->response = $this->response->withSharable(true, 3600);
     }
 
     public function my_data()
     {
         // ...
-        // Set the Cache-Control as private for 3600 seconds
+        // Define o Cache-Control como privado por 3600 segundos
         $this->response = $this->response->withSharable(false, 3600);
     }
 
-``Response`` exposes separate methods for setting each of the directives in
-the ``Cache-Control`` header.
+``Response`` expõe métodos separados para definir cada uma das diretivas no 
+cabeçalho ``Cache-Control``.
 
-The Expiration Header
-~~~~~~~~~~~~~~~~~~~~~
+O Cabeçalho de Expiração
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: withExpires($time)
 
-You can set the ``Expires`` header to a date and time after which the response
-is no longer considered fresh. This header can be set using the
-``withExpires()`` method::
+Você pode definir o cabeçalho ``Expires`` para uma data e hora após a qual a 
+resposta não é mais considerada nova. Esse cabeçalho pode ser definido usando 
+o método ``withExpires()``::
 
     public function view()
     {
         $this->response = $this->response->withExpires('+5 days');
     }
 
-This method also accepts a :php:class:`DateTime` instance or any string that can
-be parsed by the :php:class:`DateTime` class.
+Este método também aceita uma instância :php:class:`DateTime` ou qualquer string 
+que possa ser analisada pela classe :php:class:`DateTime`.
 
-The Etag Header
-~~~~~~~~~~~~~~~
+O Cabeçalho Etag
+~~~~~~~~~~~~~~~~
 
 .. php:method:: withEtag($tag, $weak = false)
 
-Cache validation in HTTP is often used when content is constantly changing, and
-asks the application to only generate the response contents if the cache is no
-longer fresh. Under this model, the client continues to store pages in the
-cache, but it asks the application every time
-whether the resource has changed, instead of using it directly.
-This is commonly used with static resources such as images and other assets.
+A validação de cache no HTTP é frequentemente usada quando o conteúdo está em 
+constante mudança e solicita ao aplicativo que gere apenas o conteúdo da resposta 
+se o cache não estiver mais atualizado. Sob esse modelo, o cliente continua a armazenar 
+páginas no cache, mas pergunta sempre ao aplicativo se o recurso foi alterado, em vez de 
+usá-lo diretamente. Isso é comumente usado com recursos estáticos, como imagens e outros assets.
 
-The ``withEtag()`` method (called entity tag) is a string
-that uniquely identifies the requested resource, as a checksum does for a file,
-in order to determine whether it matches a cached resource.
+O método ``withEtag()`` (chamado tag de entidade) é uma string que identifica exclusivamente 
+o recurso solicitado, como a soma de verificação de um arquivo, para determinar se ele 
+corresponde a um recurso em cache.
 
-To take advantage of this header, you must either call the
-``checkNotModified()`` method manually or include the
-:doc:`/controllers/components/request-handling` in your controller::
+Para tirar proveito desse cabeçalho, você deve chamar o método ``checkNotModified()`` 
+manualmente ou incluir o seguinte :doc:`/controllers/components/request-handling` no seu controlador::
 
     public function index()
     {
@@ -821,22 +815,22 @@ To take advantage of this header, you must either call the
 
 .. note::
 
-    Most proxy users should probably consider using the Last Modified Header
-    instead of Etags for performance and compatibility reasons.
+    A maioria dos usuários proxy provavelmente deve considerar o uso do Último 
+    Cabeçalho Modificado em vez de Etags por motivos de desempenho e compatibilidade.
 
-The Last Modified Header
-~~~~~~~~~~~~~~~~~~~~~~~~
+O Último Cabeçalho Modificado
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: withModified($time)
 
-Also, under the HTTP cache validation model, you can set the ``Last-Modified``
-header to indicate the date and time at which the resource was modified for the
-last time. Setting this header helps CakePHP tell caching clients whether the
-response was modified or not based on their cache.
+Além disso, no modelo de validação de cache HTTP, você pode definir o cabeçalho 
+``Last-Modified`` para indicar a data e a hora em que o recurso foi modificado 
+pela última vez. Definir este cabeçalho ajuda o CakePHP a informar aos clientes 
+de armazenamento em cache se a resposta foi modificada ou não com base em seu cache.
 
-To take advantage of this header, you must either call the
-``checkNotModified()`` method manually or include the
-:doc:`/controllers/components/request-handling` in your controller::
+Para tirar proveito desse cabeçalho, você deve chamar o método ``checkNotModified()`` 
+manualmente ou incluir o seguinte :doc:`/controllers/components/request-handling` 
+no seu controlador::
 
     public function view()
     {
@@ -849,41 +843,42 @@ To take advantage of this header, you must either call the
         // ...
     }
 
-The Vary Header
-~~~~~~~~~~~~~~~
+O Cabeçalho Vary
+~~~~~~~~~~~~~~~~
 
 .. php:method:: withVary($header)
 
-In some cases, you might want to serve different content using the same URL.
-This is often the case if you have a multilingual page or respond with different
-HTML depending on the browser. Under such circumstances you can use the ``Vary``
-header::
+Em alguns casos, convém veicular conteúdo diferente usando o mesmo URL. Geralmente, 
+esse é o caso se você tiver uma página multilíngue ou responder com HTML diferente, 
+dependendo do navegador. Nessas circunstâncias, você pode usar o cabeçalho ``Vary``::
 
     $response = $this->response->withVary('User-Agent');
     $response = $this->response->withVary('Accept-Encoding', 'User-Agent');
     $response = $this->response->withVary('Accept-Language');
 
-Sending Not-Modified Responses
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Enviando Respostas Não Modificadas
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: checkNotModified(Request $request)
 
-Compares the cache headers for the request object with the cache header from the
-response and determines whether it can still be considered fresh. If so, deletes
-the response content, and sends the `304 Not Modified` header::
+Compara os cabeçalhos de cache do objeto de solicitação com o cabeçalho de cache 
+da resposta e determina se ele ainda pode ser considerado novo. Nesse caso, exclui 
+o conteúdo da resposta e envia o cabeçalho `304 Not Modified`::
 
-    // In a controller action.
+    // Em um método do controlador.
     if ($this->response->checkNotModified($this->request)) {
         return $this->response;
     }
 
 .. _response-cookies:
 
-Setting Cookies
-===============
+Configurando Cookies
+====================
 
 Cookies can be added to response using either an array or a :php:class:`Cake\\Http\\Cookie\\Cookie`
-object::
+object
+
+Os cookies podem ser adicionados à resposta usando um array ou um objeto: php: class: `Cake \\ Http \\ Cookie \\ Cookie`::
 
     use Cake\Http\Cookie\Cookie;
     use DateTime;
