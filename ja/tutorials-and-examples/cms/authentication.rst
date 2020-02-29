@@ -1,11 +1,29 @@
 CMS チュートリアル - 認証
 #########################
 
-CMS にはユーザーがいますので、ログインできるようにし、
-記事の作成と編集の経験に基本的なアクセス制御を適用する必要があります。
+CMS にはユーザーがいますので、
+`cakephp/authentication <https://book.cakephp.org/authentication/2>`__ プラグインを使用してログインできるようにします。
+まず、パスワードがデータベースに安全に保存されるようにします。
+次に、ログインとログアウト機能を提供し、新規ユーザーを登録できるようにします。
+
+認証プラグインのインストール
+================================
+
+composer を使用して認証プラグインをインストール:
+
+.. code-block:: bash
+
+    composer require cakephp/authentication:^2.0
 
 パスワードハッシュ化の追加
 --------------------------
+
+データベースの ``users`` テーブル用に ``Controller``, ``Table``, ``Entity`` および テンプレートを作成する必要があります。
+ArticlesController と同様に、手動、もしくは bake シェルを使用してこれらのクラスを生成することができます。: 
+
+.. code-block:: bash
+
+    bin/cake bake all users
 
 もしこの時点でユーザーを作成・更新していたとしたら、パスワードが平文で保存されることに気付いたかもしれません。
 これは、セキュリティの観点から本当に悪いことですので、修正しましょう。
@@ -24,314 +42,251 @@ CMS にはユーザーがいますので、ログインできるようにし、
     <?php
     namespace App\Model\Entity;
 
-    use Cake\Auth\DefaultPasswordHasher; // この行を追加
+    use Authentication\PasswordHasher\DefaultPasswordHasher; // この行を追加
     use Cake\ORM\Entity;
 
     class User extends Entity
     {
+        // bake で生成されたコード
 
-        // bake のコード
-
-        // このメソッドの追加
-        protected function _setPassword($value)
+        // このメソッドを追加
+        protected function _setPassword(string $password) : ?string
         {
-            if (strlen($value)) {
-                $hasher = new DefaultPasswordHasher();
-
-                return $hasher->hash($value);
+            if (strlen($password) > 0) {
+                return (new DefaultPasswordHasher())->hash($password);
             }
         }
     }
 
-ここで、ブラウザーで **http://localhost:8765/users** にアクセスしてユーザーのリストを
-見てください。 :doc:`インストール <installation>` 中に作成されたデフォルトユーザーを
-編集することができます。ユーザーのパスワードを変更すると、リストやビューページでは
-元の値の代わりにハッシュ化されたパスワードが表示されます。CakePHP は、デフォルトでは
-`bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_ を使って
-パスワードをハッシュ化します。既存のデータベースを使用している場合は SHA-1 または MD5 を
-使用することもできますが、すべての新しいアプリケーションに対して bcrypt を推奨します。
+次に、ブラウザで **http://localhost:8765/users** にアクセスし、ユーザー一覧を表示します。
+ローカルサーバーを実行する必要があることに注意してください。
+``bin/cake server`` を使用して standalone PHP server を起動します。
+
+:doc:`Installation <installation>` で作成したデフォルトユーザーを編集する事が出来ます。
+ユーザーのパスワードを変更すると、一覧画面または詳細画面に元の値の代わりにハッシュ化されたパスワードが表示されます。
+
+CakePHP はデフォルトでは `bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_ でパスワードをハッシュ化します。
+
+セキュリティ基準を高く保つために、すべての新しいアプリケーションに bcrypt を使用することを推奨します。
+bcrypt は `PHPの推奨パスワードハッシュアルゴリズム <https://www.php.net/manual/en/function.password-hash.php>`_ です。
+
+.. note::
+
+    少なくとも1つのユーザーアカウントのハッシュ化されたパスワードを今すぐ作成してください！
+    次のステップで必要になります。
+    パスワードを更新すると、パスワードカラムに長い文字列が保存されます。
+    注意: 同じパスワードを2回保存した場合でも、bcrypt は異なるハッシュを生成します。
+
 
 ログインの追加
 ==============
 
-CakePHP での認証は、 :doc:`/controllers/components` によって処理されます。コンポーネントは、
-特定の機能やコンセプトに関連するコントローラーコードの再利用可能なかたまりを作成する方法と
-考えることができます。コンポーネントは、コントローラーのイベントライフサイクルにフックし、
-その方法でアプリケーションとやりとりすることができます。まず、 :doc:`AuthComponent
-</controllers/components/authentication>` をアプリケーションに追加します。
-create、update、delete メソッドで認証が必要なので、AuthComponent を AppController
-に追加します。 ::
+次に、認証プラグインを設定します。
+プラグインは、3つの異なるクラスを使用して認証プロセスを処理します。:
 
-    // src/Controller/AppController.php の中で
-    namespace App\Controller;
+* ``Application`` は Authentication Middleware を使用して AuthenticationService を提供し、
+  credentials のチェック方法と credentials を見つける場所を定義する為のすべての設定を保持します。
+* ``AuthenticationService`` は認証プロセスを設定できるユーティリティクラスになります。
+* ``AuthenticationMiddleware`` はミドルウェアキューの一部として実行され、
+  コントローラーがフレームワークによって処理される前に、credentials を選り出して処理し、
+  ユーザーが認証されているかどうかチェックします。
 
-    use Cake\Controller\Controller;
+覚えているかもしれませんが、
+以前は、これらすべてのステップを処理するために :doc:`AuthComponent </controllers/components/authentication>` を使用していました。
+現在では、ロジックは特定のクラスに分割され、認証プロセスはコントローラーレイヤーの前に行われます。
+ユーザーが(指定した構成に基づいて)認証されたかどうか確認し、ユーザーと認証結果をリクエストに挿入し、参照できるようにします。
 
-    class AppController extends Controller
+**src/Application.php** に次の imports を追加します::
+
+    // src/Application.php に次の imports を追加します
+    use Authentication\AuthenticationService;
+    use Authentication\AuthenticationServiceInterface;
+    use Authentication\AuthenticationServiceProviderInterface;
+    use Authentication\Middleware\AuthenticationMiddleware;
+    use Psr\Http\Message\ServerRequestInterface;
+
+次に ``Application`` クラスに認証インターフェースを実装します::
+
+    // in src/Application.php
+    class Application extends BaseApplication
+        implements AuthenticationServiceProviderInterface
     {
-        public function initialize()
-        {
-            // 既存のコード
 
-            $this->loadComponent('Auth', [
-                'authenticate' => [
-                    'Form' => [
-                        'fields' => [
-                            'username' => 'email',
-                            'password' => 'password'
-                        ]
-                    ]
-                ],
-                'loginAction' => [
-                    'controller' => 'Users',
-                    'action' => 'login'
-                ],
-                // コントローラーで isAuthorized を使用します
-                'authorize' => ['Controller'],
-                // 未認証の場合、直前のページに戻します
-                'unauthorizedRedirect' => $this->referer()
+次に以下を追加します::
+
+    // src/Application.php
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+    {
+        $middlewareQueue
+            // ... 前に追加された他のミドルウェア
+            ->add(new RoutingMiddleware($this))
+            // RoutingMiddleware の後に認証を追加
+            ->add(new AuthenticationMiddleware($this));
+
+        return $middlewareQueue;
+    }
+
+    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
+    {
+        $authenticationService = new AuthenticationService([
+            'unauthenticatedRedirect' => '/users/login',
+            'queryParam' => 'redirect',
+        ]);
+
+        // identifiers を読み込み、email と password のフィールドを確認します
+        $authenticationService->loadIdentifier('Authentication.Password', [
+            'fields' => [
+                'username' => 'email',
+                'password' => 'password',
+            ]
+        ]);
+
+        //  authenticatorsをロードしたら, 最初にセッションが必要です
+        $authenticationService->loadAuthenticator('Authentication.Session');
+        // 入力した email と password をチェックする為のフォームデータを設定します
+        $authenticationService->loadAuthenticator('Authentication.Form', [
+            'fields' => [
+                'username' => 'email',
+                'password' => 'password',
+            ],
+            'loginUrl' => '/users/login',
+        ]);
+
+        return $authenticationService;
+    }
+
+``AppController`` クラスに次のコードを追加します::
+
+    // src/Controller/AppController.php
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->loadComponent('RequestHandler');
+        $this->loadComponent('Flash');
+
+        // 認証結果を確認し、サイトのロックを行うために次の行を追加します
+        $this->loadComponent('Authentication.Authentication');
+
+リクエスト毎に ``AuthenticationMiddleware`` はリクエストされたセッションを検査し、認証されたユーザーを探します。
+``/users/login`` ページを読み込む場合、
+POSTされたフォームデータ(存在する場合)も検査し、credentials を抽出します。
+デフォルトでは credentials はリクエストデータの ``username`` and ``password`` から抽出されます。
+認証結果は、``authentication`` という名前でリクエスト属性に挿入されます。
+コントローラーアクションで ``$this->request->getAttribute('authentication')`` を使用し、いつでも結果を調べることができます。
+``AuthenticationComponent`` がリクエストごとに結果をチェックしているため、すべてのページが制限されます。
+認証されたユーザーが見つからない場合、ユーザーを ``/users/login`` ページにリダイレクトします。
+注意: この時点では、ログインページがまだないため、サイトは機能しません。
+サイトにアクセスすると "infinite redirect loop" が発生するので、修正しましょう。
+
+``UsersController`` に次のコードを追加します::
+
+    public function beforeFilter(\Cake\Event\EventInterしますe $event)
+    {
+        parent::beforeFilter($event);
+        // 認証を必要としないログインアクションを構成し、
+        // 無限リダイレクトループの問題を防ぎます
+        $this->Authentication->addUnauthenticatedActions(['login']);
+    }
+
+    public function login() {
+        $this->request->allowMethod(['get', 'post']);
+        $result = $this->Authentication->getResult();
+        // POST, GET を問わず、ユーザーがログインしている場合はリダイレクトします
+        if ($result->isValid()) {
+            // redirect to /articles after login success
+            $redirect = $this->request->getQuery('redirect', [
+                'controller' => 'Articles',
+                'action' => 'index',
             ]);
 
-            // display アクションを許可して、PagesController が引き続き
-            // 動作するようにします。また、読み取り専用のアクションを有効にします。
-            $this->Auth->allow(['display', 'view', 'index']);
+            return $this->redirect($redirect);
+        }
+        // ユーザーが submit 後、認証失敗した場合は、エラーを表示します
+        if ($this->request->is('post') && !$result->isValid()) {
+            $this->Flash->error(__('Invalid username or password'));
         }
     }
 
-CakePHP に ``Auth`` コンポーネントをロードするように指示しました。users テーブルは
-ユーザー名として ``email`` を使用するので、AuthComponent の設定をカスタマイズしました。
-今、 ``/articles/add`` のような保護された URL に行くと、 **/users/login** に
-リダイレクトされます。これはまだコードを書いていないので、エラーページを表示します。
-login アクションを作成しましょう。 ::
+ログインアクション用のテンプレートロジックを追加します::
 
-    // src/Controller/UsersController.php の中で
-    public function login()
+    <!-- in /templates/Users/login.php -->
+    <div class="users form">
+        <?= $this->Flash->render() ?>
+        <h3>Login</h3>
+        <?= $this->Form->create() ?>
+        <fieldset>
+            <legend><?= __('Please enter your username and password') ?></legend>
+            <?= $this->Form->control('email', ['required' => true]) ?>
+            <?= $this->Form->control('password', ['required' => true]) ?>
+        </fieldset>
+        <?= $this->Form->submit(__('Login')); ?>
+        <?= $this->Form->end() ?>
+
+        <?= $this->Html->link("Add User", ['action' => 'add']) ?>
+    </div>
+
+これで、ログインページでアプリケーションに正しくログインできるようになります。
+サイトの任意ページをリクエストしてテストします。
+``/users/login`` ページにリダイレクトしたら、ユーザー作成時に入力した電子メールとパスワードを入力します。
+ログイン後、正常にリダイレクトされるはずです。
+
+さらにいくつかの詳細をアプリケーションに追加する必要があります。
+We want all ``view`` and ``index`` pages accessible without logging in so we'll add this specific configuration in AppController::
+
+ログインせずにすべての ``view`` 及び ``index`` ページにアクセスできるようにするため、特定の設定を AppController に追加します。::
+
+    // in src/Controller/AppController.php
+    public function beforeFilter(\Cake\Event\EventInterface $event)
     {
-        if ($this->request->is('post')) {
-            $user = $this->Auth->identify();
-            if ($user) {
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
-            }
-            $this->Flash->error('ユーザー名またはパスワードが不正です。');
-        }
+        parent::beforeFilter($event);
+        // アプリケーション内のすべてのコントローラーの index と view アクションをパブリックにし、認証チェックをスキップします
+        $this->Authentication->addUnauthenticatedActions(['index', 'view']);
     }
-
-そして **src/Template/Users/login.ctp** に次を追加してください。 ::
-
-    <h1>ログイン</h1>
-    <?= $this->Form->create() ?>
-    <?= $this->Form->control('email') ?>
-    <?= $this->Form->control('password') ?>
-    <?= $this->Form->button('ログイン') ?>
-    <?= $this->Form->end() ?>
-
-シンプルなログインフォームが完成したので、ハッシュ化されたパスワードを持つユーザーで
-ログインできるはずです。
 
 .. note::
 
-    もし、ハッシュ化されたパスワードを持つユーザーがいない場合、
-    ``loadComponent('Auth')`` ブロックと ``$this->Auth->allow()`` 呼び出しを
-    コメントにしてください。その後、ユーザーのパスワードを保存して編集します。
-    ユーザーの新しいパスワードを保存した後、一時的にコメントした行を元に戻してください。
+    ハッシュ化されたパスワードを持つユーザーがまだいない場合、
+    AppController の ``loadComponent('Authentication.Authentication')`` 行をコメントアウトし、
+    ``/users/add`` に移動して、email と password を入力する新規ユーザーを作成します。
+    一時的にコメントした行のコメントを外してください！
 
-さぁやってみましょう！ログインする前に ``/articles/add`` にアクセスしてください。
-この操作は許可されていないため、ログインページにリダイレクトされます。
+ログインする前に ``/articles/add`` にアクセスして試してください!
+このアクションは許可されていないため、ログインページにリダイレクトされます。
 ログインに成功すると、CakePHP は自動的に ``/articles/add`` にリダイレクトします。
 
-ログアウトの追加
+ログアウト
 ================
 
-ユーザーがログインできるようになったので、おそらくログアウトする方法を提供したいと思うでしょう。
-もう一度、 ``UsersController`` に次のコードを追加してください。 ::
+logout アクションを ``UsersController`` に追加します。::
 
-    public function initialize()
-    {
-        parent::initialize();
-        $this->Auth->allow(['logout']);
-    }
-
+    // in src/Controller/UsersController.php
     public function logout()
     {
-        $this->Flash->success('ログアウトしました。');
-        return $this->redirect($this->Auth->logout());
+        $result = $this->Authentication->getResult();
+        // POST, GET を問わず、ユーザーがログインしている場合はリダイレクトします
+        if ($result->isValid()) {
+            $this->Authentication->logout();
+            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+        }
     }
 
-このコードは、認証を必要としないアクションのリストに ``logout`` アクションを追加し、
-logout メソッドを実装します。ログアウトのために ``/users/logout`` にアクセスできます。
-その時、ログインページへ送られます。
+これで ``/users/logout`` にアクセスしてログアウトできます。
+その後、ログインページに移動します。
 
 ユーザー登録の有効化
 ====================
 
 ログインせずに **/users/add** にアクセスしようとすると、ログインページにリダイレクトされます。
-人々がアプリケーションにサインアップできるようにしたいので、修正する必要があります。
-``UsersController`` に以下を追加してください。 ::
+ユーザーがアプリケーションにサインアップできるようにしたいので、これを修正する必要があります。
+``UsersController`` の次の行を修正します::
 
-    public function initialize()
-    {
-        parent::initialize();
-        // 許可アクションリストに 'add' アクションを追加
-        $this->Auth->allow(['logout', 'add']);
-    }
+    // UsersController の beforeFilter メソッドに追加します
+    $this->Authentication->addUnauthenticatedActions(['login', 'add']);
 
-上記の例は、 ``AuthComponent`` に、 ``UsersController`` の ``add()`` アクションが
-認証や認可を必要と *しない* ことを伝えています。 **Users/add.ctp** をクリーンアップし、
-誤解を招くリンクを削除することに時間をかけたり、次のセクションに進みたいでしょう。
-このチュートリアルでは、ユーザーの編集、表示、リスト作成は行いませんが、それはあなた自身で
-行うことができる練習です。
+上記は ``AuthenticationComponent`` に ``UsersController`` の ``add()`` アクションが認証または認可を必要と *しない* ことを伝えます。
+時間をかけて **Users/add.php** をクリーンアップし誤解を招くリンクを削除してもよいですし、
+もしくは次のセクションに進んでください。
+このチュートリアルでは、ユーザーによる編集、表示、一覧表示は行いませんが、これは自分自身で行うことができる演習です。
 
-記事へのアクセスの制限
-======================
+ユーザーがログインできるようになったので、 :doc:`認可ポリシーの適用 <./authorization>` でユーザーが作成した記事のみを編集できるように制限します。
 
-ユーザーはログインできるようになったので、作成した記事のみを編集するようにユーザーを
-制限したいと考えています。 'authorization' アダプターを使用してこれを行います。
-私たちの要件は基本的なものなので、 ``ArticlesController`` にコントローラーフックメソッドを
-使うことができます。しかし、これを行う前に、アプリケーションがアクションを許可する方法を
-「AuthComponent」に伝えたいと思うでしょう。 ``AppController`` を更新して次を追加してください。 ::
-
-    public function isAuthorized($user)
-    {
-        // デフォルトでは、アクセスを拒否します。
-        return false;
-    }
-
-次に、 ``AuthComponent`` にコントローラーのフックメソッドを使用して認可を行いたいことを伝えます。
-``AppController::initialize()`` メソッドは次のようになります。 ::
-
-        public function initialize()
-        {
-            // 既存のコード
-
-            $this->loadComponent('Flash');
-            $this->loadComponent('Auth', [
-                // この行を追加しました
-                'authorize'=> 'Controller',
-                'authenticate' => [
-                    'Form' => [
-                        'fields' => [
-                            'username' => 'email',
-                            'password' => 'password'
-                        ]
-                    ]
-                ],
-                'loginAction' => [
-                    'controller' => 'Users',
-                    'action' => 'login'
-                ],
-                 // 未認証の場合、直前のページに戻します
-                'unauthorizedRedirect' => $this->referer()
-            ]);
-
-            // display アクションを許可して、PagesController が引き続き
-            // 動作するようにします。また、読み取り専用のアクションを有効にします。
-            $this->Auth->allow(['display', 'view', 'index']);
-        }
-
-デフォルトではアクセスを拒否し、意味のある場所で段階的にアクセスを許可します。
-まず、記事の認可ロジックを追加します。 ``ArticlesController`` に以下を追加してください。 ::
-
-    public function isAuthorized($user)
-    {
-        $action = $this->request->getParam('action');
-        // add および tags アクションは、常にログインしているユーザーに許可されます。
-        if (in_array($action, ['add', 'tags'])) {
-            return true;
-        }
-
-        // 他のすべてのアクションにはスラッグが必要です。
-        $slug = $this->request->getParam('pass.0');
-        if (!$slug) {
-            return false;
-        }
-
-        // 記事が現在のユーザーに属していることを確認します。
-        $article = $this->Articles->findBySlug($slug)->first();
-
-        return $article->user_id === $user['id'];
-    }
-
-あなたに属していない記事を編集または削除しようとすると、元のページにリダイレクトされるはずです。
-エラーメッセージが表示されない場合は、レイアウトに以下を追加します。 ::
-
-    // src/Template/Layout/default.ctp の中で
-    <?= $this->Flash->render() ?>
-
-次に、 **src/Controller/ArticlesController.php** の ``initialize()`` に以下を追加して、
-未認証のユーザーに許可されたアクションに ``tags`` アクションを追加してください。 ::
-
-    $this->Auth->allow(['tags']);
-
-上記は非常に単純ですが、柔軟性のある認証ロジックを構築するために、現在のユーザーと
-リクエストデータを組み合わせたより複雑なロジックを構築する方法を示しています。
-
-add と edit アクションの修正
-==============================
-
-edit アクションへのアクセスをブロックしていますが、編集中の記事の
-``user_id`` 属性を変更することはできます。次に、これらの問題を解決します。
-最初は ``add`` アクションです。
-
-記事を作成するときに、 ``user_id`` を現在ログインしているユーザーに修正したいと考えています。
-add アクションを次のように置き換えます。 ::
-
-    // src/Controller/ArticlesController.php の中で
-
-    public function add()
-    {
-        $article = $this->Articles->newEntity();
-        if ($this->request->is('post')) {
-            $article = $this->Articles->patchEntity($article, $this->request->getData());
-
-            // 変更: セッションから user_id をセット
-            $article->user_id = $this->Auth->user('id');
-
-            if ($this->Articles->save($article)) {
-                $this->Flash->success(__('Your article has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('Unable to add your article.'));
-        }
-        $this->set('article', $article);
-    }
-
-次は ``edit`` アクションを更新します。edit メソッドを次のように置き換えます。 ::
-
-    // src/Controller/ArticlesController.php の中で
-
-    public function edit($slug)
-    {
-        $article = $this->Articles
-            ->findBySlug($slug)
-            ->contain('Tags') // 関連づけられた Tags を読み込む
-            ->firstOrFail();
-
-        if ($this->request->is(['post', 'put'])) {
-            $this->Articles->patchEntity($article, $this->request->getData(), [
-                // 追加: user_id の更新を無効化
-                'accessibleFields' => ['user_id' => false]
-            ]);
-            if ($this->Articles->save($article)) {
-                $this->Flash->success(__('Your article has been updated.'));
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('Unable to update your article.'));
-        }
-        $this->set('article', $article);
-    }
-
-ここでは、 ``patchEntity()`` のオプションを使って、どのプロパティーを一括代入できるかを変更しています。
-詳しい情報は、 :ref:`changing-accessible-fields` セクションをご覧ください。
-**src/Templates/Articles/edit.ctp** から必要のなくなった ``user_id`` コントロールを
-削除してください。
-
-できあがり
-===========
-
-ユーザーがログインしたり、記事を投稿したり、タグ付けしたり、投稿された記事をタグで検索したり、
-記事への基本的なアクセス制御を適用したりできるシンプルな CMS アプリケーションを構築しました。
-また、FormHelper と ORM の機能を活用して、UX のいくつかの改良点を追加しました。
-
-CakePHP の探検にお時間をいただきありがとうございます。
-次は、 :doc:`/orm` についてもっと学んだり、 :doc:`/topics` を調べてみてください。
