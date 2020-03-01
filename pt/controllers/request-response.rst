@@ -97,7 +97,7 @@ Por exemplo::
     // Uma entrada com um atributo de nome igual a 'MyModel [title]' está acessível em
     $title = $this->request->getData('MyModel.title');
 
-Quaisquer chaves que não existem retornarão ``null``:
+Quaisquer chaves que não existem retornarão ``null``::
 
     $foo = $this->request->getData('Value.that.does.not.exist');
     // $foo == null
