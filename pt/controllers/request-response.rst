@@ -30,7 +30,8 @@ tarefas que o ``ServerRequest`` executa incluem:
   no servidor em que seu aplicativo está sendo executado.
 * Fornecendo acesso a parâmetros de solicitação, como índices de matriz e propriedades de objetos.
 
-O objeto de solicitação do CakePHP implementa a `PSR-7 ServerRequestInterface <http://www.php-fig.org/psr/psr-7/> `_ 
+O objeto de solicitação do CakePHP implementa a `PSR-7
+ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ 
 facilitando o uso de bibliotecas de fora do CakePHP.
 
 Parâmetros de Requsição
