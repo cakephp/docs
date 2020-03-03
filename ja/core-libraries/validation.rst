@@ -128,9 +128,6 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
 <https://api.cakephp.org/3.x/class-Cake.Validation.Validator.html>`_
 をご覧ください。
 
-.. versionadded:: 3.2
-    ルール構築のメソッドは 3.2.0 で追加されました。
-
 .. _custom-validation-rules:
 
 カスタムバリデーションルールの使用
