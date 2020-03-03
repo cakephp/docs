@@ -675,9 +675,8 @@ CLI スクリプトを走らせる時に起こり得るでしょう。 ::
         $rules->add(function($entity) {
             $data = $entity->extract($this->schema()->columns(), true);
             $validator = $this->getValidator('default');
-            // Prior to 3.9 use $validator->errors()
             $errors = $validator->validate($data, $entity->isNew());
-            $entity->errors($errors);
+            $entity->setErrors($errors);
 
             return empty($errors);
         });
@@ -691,9 +690,9 @@ CLI スクリプトを走らせる時に起こり得るでしょう。 ::
 
     $userEntity->email = 'not an email!!!';
     $usersTable->save($userEntity);
-    $userEntity->errors('email'); // 無効なメールアドレスです
+    $userEntity->getError('email'); // 無効なメールアドレスです
 
 同じ結果が ``newEntity()`` や ``patchEntity()`` を使う時にも期待できます。 ::
 
     $userEntity = $usersTable->newEntity(['email' => 'not an email!!']);
-    $userEntity->errors('email'); // 無効なメールアドレスです
+    $userEntity->getError('email'); // 無効なメールアドレスです
