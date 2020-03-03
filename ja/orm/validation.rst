@@ -111,14 +111,8 @@ CakePHP ではデータの検証には二つの段階があります:
         public function validationUpdate($validator)
         {
             $validator
-                ->add('title', 'notEmpty', [
-                    'rule' => 'notEmpty',
-                    'message' => __('タイトルを設定してください'),
-                ])
-                ->add('body', 'notEmpty', [
-                    'rule' => 'notEmpty',
-                    'message' => __('本文は必須です')
-                ]);
+                ->notEmptyString('title', __('タイトルを設定してください'))
+                ->notEmptyString('body', __('本文は必須です'));
             return $validator;
         }
     }
