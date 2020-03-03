@@ -247,9 +247,6 @@ CakePHP ではデータの検証には二つの段階があります:
 
     $hardenedValidator = $usersTable->validator('hardened');
 
-.. deprecated:: 3.5.0
-    ``validator()`` は非推奨です。代わりに ``getValidator()`` を使用してください。
-
 既定のバリデータクラス
 ======================
 
@@ -411,9 +408,6 @@ CakePHP は、エンティティーが保存される前に適用される「ル
         ['allowMultipleNulls' => false]
     ));
 
-.. versionadded:: 3.3.0
-    ``allowNullableNulls`` と ``allowMultipleNulls`` オプションが追加されました。
-
 アソシエーションカウントルール
 ------------------------------
 
@@ -438,9 +432,6 @@ CakePHP は、エンティティーが保存される前に適用される「ル
 
     // もし tags が null の場合、保存操作は失敗します。
     $rules->add($rules->validCount('tags', 0, '<=', 'タグを持つことはできません'));
-
-.. versionadded:: 3.3.0
-    ``validCount()`` メソッドは、3.3.0 で追加されました。
 
 エンティティーメソッドをルールとして使用
 ----------------------------------------
