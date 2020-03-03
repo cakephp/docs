@@ -434,18 +434,18 @@ CakePHP は、エンティティーが保存される前に適用される「ル
 制約が失敗したときにユーザーフレンドリーなエラーメッセージを提供したい場合に使用できます。
 このルールを使用すると、アソシエーションが関連レコードを持っているかどうかを確認できます。　::
 
-    // Ensure that each comment is linked to an Article during updates.
+    // 更新時に各コメントが記事にリンクされていることを確認してください。
     $rules->addUpdate($rules->isLinkedTo(
         'Articles',
         'article',
-        'Requires an article'
+        '記事が必要です。'
     ));
 
-    // Ensure that an article has no linked comments during delete.
+    // 削除時に記事にリンクされたコメントがないことを確認してください。
     $rules->addDelete($rules->isNotLinkedTo(
         'Comments',
         'comments',
-        'Must have zero comments before deletion.'
+        '削除する前にコメントを付けないでください。'
     ));
 
 .. versionadded:: 4.0.0
