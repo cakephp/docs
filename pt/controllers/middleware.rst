@@ -116,10 +116,10 @@ middleware a conjuntos específicos de rotas usando
 Adicionando Middleware a partir de Plugins
 ------------------------------------------
 
-Plugins can use their ``middleware`` hook method to apply any middleware they
-have to the application's middleware queue::
+Os plug-ins podem usar seu método de gancho ``middleware`` para aplicar qualquer 
+middleware que eles tenham à fila de middleware do aplicativo::
 
-    // in plugins/ContactManager/src/Plugin.php
+    // Em plugins/ContactManager/src/Plugin.php
     namespace ContactManager;
 
     use Cake\Core\BasePlugin;
@@ -136,13 +136,14 @@ have to the application's middleware queue::
         }
     }
 
-Creating Middleware
-===================
+Criando Middleware
+==================
 
-Middleware can either be implemented as anonymous functions (Closures), or classes
-which extend ``Psr\Http\Server\MiddlewareInterface``. While Closures are suitable
-for smaller tasks they make testing harder, and can create a complicated
-``Application`` class. Middleware classes in CakePHP have a few conventions:
+O middleware pode ser implementado como funções anônimas (Closures) ou classes que 
+estendem ``Psr\Http\Server\MiddlewareInterface``. Embora os Closures sejam 
+adequados para tarefas menores, eles tornam os testes mais difíceis e podem criar 
+uma classe ``Application`` complicada. As classes de middleware no CakePHP têm 
+algumas convenções:
 
 * Middleware class files should be put in **src/Middleware**. For example:
   **src/Middleware/CorsMiddleware.php**
