@@ -237,9 +237,9 @@ CakePHP ではデータの検証には二つの段階があります:
 テーブルクラスにバリデーションセットを作成した後は、
 名前を指定して結果のオブジェクトを取得できるようになります。 ::
 
-    $defaultValidator = $usersTable->validator('default');
+    $defaultValidator = $usersTable->getValidator('default');
 
-    $hardenedValidator = $usersTable->validator('hardened');
+    $hardenedValidator = $usersTable->getValidator('hardened');
 
 既定のバリデータクラス
 ======================
@@ -674,7 +674,7 @@ CLI スクリプトを走らせる時に起こり得るでしょう。 ::
         // アプリケーションルールの追加
         $rules->add(function($entity) {
             $data = $entity->extract($this->schema()->columns(), true);
-            $validator = $this->validator('default');
+            $validator = $this->getValidator('default');
             // Prior to 3.9 use $validator->errors()
             $errors = $validator->validate($data, $entity->isNew());
             $entity->errors($errors);
