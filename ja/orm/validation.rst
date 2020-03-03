@@ -427,6 +427,32 @@ CakePHP は、エンティティーが保存される前に適用される「ル
     // もし tags が null の場合、保存操作は失敗します。
     $rules->add($rules->validCount('tags', 0, '<=', 'タグを持つことはできません'));
 
+アソシエーションリンクの制約ルール
+------------------------------
+
+``LinkConstraint`` はデータベースがサポートしないSQL制約をエミュレートしたり、
+制約が失敗したときにユーザーフレンドリーなエラーメッセージを提供したい場合に使用できます。
+このルールを使用すると、アソシエーションが関連レコードがあるかどうかを確認できます。　::
+
+    // Ensure that each comment is linked to an Article during updates.
+    $rules->addUpdate($rules->isLinkedTo(
+        'Articles',
+        'article',
+        'Requires an article'
+    ));
+
+    // Ensure that an article has no linked comments during delete.
+    $rules->addDelete($rules->isNotLinkedTo(
+        'Comments',
+        'comments',
+        'Must have zero comments before deletion.'
+    ));
+
+.. versionadded:: 4.0.0
+
+    4.0.0 で追加されました。
+
+
 エンティティーメソッドをルールとして使用
 ----------------------------------------
 
