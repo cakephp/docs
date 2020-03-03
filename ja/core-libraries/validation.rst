@@ -117,7 +117,7 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
 
     $validator->allowEmptyDateTime('published')
         ->allowEmptyString('title', 'タイトルは空にできません', false)
-        ->allowEmptyString('body', '中身は空にできません', 'update')
+        ->allowEmptyString('body', '本文は空にできません', 'update')
         ->allowEmptyFile('header_image', 'update');
         ->allowEmptyDateTime('posted', 'update');
 
