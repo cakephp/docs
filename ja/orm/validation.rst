@@ -445,7 +445,7 @@ CakePHP は、エンティティーが保存される前に適用される「ル
     $rules->addDelete($rules->isNotLinkedTo(
         'Comments',
         'comments',
-        '削除する前にコメントを付けないでください。'
+        '削除する前にコメントがない状態にしてください。'
     ));
 
 .. versionadded:: 4.0.0
