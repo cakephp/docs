@@ -432,7 +432,7 @@ CakePHP は、エンティティーが保存される前に適用される「ル
 
 ``LinkConstraint`` はデータベースがサポートしないSQL制約をエミュレートしたり、
 制約が失敗したときにユーザーフレンドリーなエラーメッセージを提供したい場合に使用できます。
-このルールを使用すると、アソシエーションが関連レコードがあるかどうかを確認できます。　::
+このルールを使用すると、アソシエーションが関連レコードを持っているかどうかを確認できます。　::
 
     // Ensure that each comment is linked to an Article during updates.
     $rules->addUpdate($rules->isLinkedTo(
