@@ -253,12 +253,12 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
         'rule' => ['uploadedFile', ['optional' => true]],
     ]);
 
-``allowEmpty()``, ``notEmpty()`` 及び ``requirePresence()`` メソッドは、
+``allowEmpty*``, ``notEmpty()`` 及び ``requirePresence()`` メソッドは、
 最後に引数としてコールバック関数を受け付けることができます。もしこれがあれば、
 ルールが適用されるべきか否かをコールバック関数が決めます。例えば、以下のように、
 フィールド値が空のままでも許容される時もあります。 ::
 
-    $validator->allowEmpty('tax', function ($context) {
+    $validator->allowEmptyString('tax', function ($context) {
         return !$context['data']['is_taxable'];
     });
 
@@ -285,10 +285,12 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
 これは、申し込みを作成したいユーザーの場合のみ ``full_name`` フィールドの存在を求め、
 ``email`` フィールドは常に要求されます。申し込みをキャンセルした時にも必要とされます。
 
-.. versionadded:: 3.1.1
-    ``requirePresence()`` の callable 対応は、 3.1.1 で追加されました。
+条件付きのカスタムコールバックに渡される``$context``パラメータには、以下のキーが含まれます。
 
-
+* ``data`` バリデートされるデータ
+* ``newRecord`` 新規または既存のレコードが存在しているかどうかを示すブール値
+* ``field`` バリデートされるフィールド
+* ``providers`` バリデーターに添付されるバリデーションプロバイダー
 
 最後に適用されるルールとして設定する
 ------------------------------------
