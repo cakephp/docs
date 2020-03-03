@@ -71,10 +71,10 @@ CakePHP ではデータの検証には二つの段階があります:
         {
             $validator
                 ->requirePresence('title', 'create')
-                ->notEmpty('title');
+                ->notEmptyString('title');
 
             $validator
-                ->allowEmpty('link')
+                ->allowEmptyString('link')
                 ->add('link', 'valid-url', ['rule' => 'url']);
 
             ...
@@ -167,8 +167,8 @@ CakePHP ではデータの検証には二つの段階があります:
 
     public function validationDefault(Validator $validator)
     {
-        $validator->notEmpty('username');
-        $validator->notEmpty('password');
+        $validator->notEmptyString('username');
+        $validator->notEmptyString('password');
         $validator->add('email', 'valid-email', ['rule' => 'email']);
         ...
 
