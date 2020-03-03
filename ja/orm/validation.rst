@@ -23,12 +23,9 @@ CakePHP ではデータの検証には二つの段階があります:
 エラーのあるフィールドは返されたエンティティーには含まれません。 ::
 
     $article = $articles->newEntity($this->request->getData());
-    if ($article->errors()) {
+    if ($article->getErrors()) {
         // エンティティー検証失敗。
     }
-
-.. versionadded:: 3.4.0
-    ``getErrors()`` 関数は追加されました。
 
 バリデーションが有効になっている状態でエンティティーを構築すると、次のことが起こります:
 
