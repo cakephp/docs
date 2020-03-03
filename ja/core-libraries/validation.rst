@@ -28,14 +28,14 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
 
     $validator
         ->requirePresence('title')
-        ->notEmpty('title', 'このフィールドに入力してください')
+        ->notEmptyString('title', 'このフィールドに入力してください')
         ->add('title', [
             'length' => [
                 'rule' => ['minLength', 10],
                 'message' => 'タイトルは 10 文字以上必要です',
             ]
         ])
-        ->allowEmpty('published')
+        ->allowEmptyDateTime('published')
         ->add('published', 'boolean', [
             'rule' => 'boolean'
         ])
