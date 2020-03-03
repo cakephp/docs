@@ -505,7 +505,6 @@ Localized プラグインは、バリデーションのための国の２文字�
         ->requirePresence('comment')
         ->notEmpty('comment', 'コメントが必要です。');
 
-    // Prior to 3.9 use $validator->errors()
     $errors = $validator->validate($this->request->getData());
     if (empty($errors)) {
         // email を送る。
