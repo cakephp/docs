@@ -23,7 +23,7 @@ será localizado e terá sua ação invocada ou uma exceção será gerada geran
 O middleware faz parte da nova pilha HTTP no CakePHP que aproveita as interfaces de solicitação e 
 resposta PSR-7. O CakePHP também suporta o padrão PSR-15 para manipuladores de solicitações de 
 servidor, para que você possa usar qualquer middleware compatível com PSR-15 disponível em 
-`The Packagist <https://packagist.org>`__.
+`The Packagist <https://packagist.org>`_.
 
 Middleware em CakePHP
 =====================
