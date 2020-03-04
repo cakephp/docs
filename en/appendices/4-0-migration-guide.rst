@@ -414,8 +414,8 @@ Database
   the ``cakephp/log`` package for logging.
 * ``Cake\Database\Connection`` now allows using any PSR-16 cacher. As a result
   those using the standalone database package are no longer forced to use
-  the ``cakephp/cache`` package for caching. New methods ``Cake\Database\Connection::setCache()``
-  and ``Cake\Database\Connection::getCache()`` have been added.
+  the ``cakephp/cache`` package for caching. New methods ``Cake\Database\Connection::setCacher()``
+  and ``Cake\Database\Connection::getCacher()`` have been added.
 * ``Cake\Database\ConstraintsInterface`` was extracted from
   ``Cake\Datasource\FixtureInterface``. This interface should be
   implemented by fixture implementations that support constraints, which from
