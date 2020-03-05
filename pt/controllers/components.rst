@@ -220,8 +220,6 @@ Nesse caso, você pode incluir outros componentes no seu componente
 exatamente da mesma maneira que os inclui nos controladores - usando o
 atributo ``$components``::
 
-
-
     // src/Controller/Component/CustomComponent.php
     namespace App\Controller\Component;
 
