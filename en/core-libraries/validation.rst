@@ -95,7 +95,7 @@ Allowing Empty Fields
 
 Validators offer several methods to control which fields accept empty values and
 which empty values are accepted and not forwarded to other validation rules for
-the named field. CakePHP provides empty value support for six different shapes
+the named field. CakePHP provides empty value support for different shapes
 of data:
 
 #. ``allowEmptyString()`` Should be used when you want to only accept
