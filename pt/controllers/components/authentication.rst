@@ -201,14 +201,15 @@ Identificando Usuários e Efetuando Login
 
 .. php:method:: identify()
 
-You need to manually call ``$this->Auth->identify()`` to identify the user using
-credentials provided in request. Then use ``$this->Auth->setUser()``
-to log the user in, i.e., save user info to session.
+Você precisa chamar manualmente ``$this->Auth->identity()`` para 
+identificar o usuário usando as credenciais fornecidas na solicitação. 
+Em seguida, use ``$this->Auth->setUser()`` para conectar o usuário, 
+ou seja, salve as informações do usuário na sessão.
 
-When authenticating users, attached authentication objects are checked
-in the order they are attached. Once one of the objects can identify
-the user, no other objects are checked. A sample login function for
-working with a login form could look like::
+Ao autenticar usuários, os objetos de autenticação anexados são verificados 
+na ordem em que estão. Depois que um dos objetos pode identificar o 
+usuário, nenhum outro objeto é verificado. Uma função de login como exemplo para 
+trabalhar com um formulário de login pode se parecer com::
 
     public function login()
     {
@@ -223,77 +224,76 @@ working with a login form could look like::
         }
     }
 
-The above code will attempt to first identify a user by using the POST data.
-If successful we set the user info to the session so that it persists across requests
-and then redirect to either the last page they were visiting or a URL specified in the
-``loginRedirect`` config. If the login is unsuccessful, a flash message is set.
+O código acima tentará primeiro identificar um usuário usando os dados do POST. 
+Se for bem-sucedido, definimos as informações do usuário para a sessão, para que 
+elas persistam nas solicitações e, em seguida, redirecionamos para a última página 
+que eles estavam visitando ou para uma URL especificada na configuração ``loginRedirect``. 
+Se o logon não for bem-sucedido, uma mensagem flash será definida.
 
 .. warning::
 
-    ``$this->Auth->setUser($data)`` will log the user in with whatever data is
-    passed to the method. It won't actually check the credentials against an
-    authentication class.
+    ``$this->Auth->setUser($data)`` registrará o usuário com todos os dados 
+    passados para o método. Na verdade, ele não verifica as credenciais em 
+    uma classe de autenticação.
 
-Redirecting Users After Login
------------------------------
+Redirecionando Usuários após o Login
+------------------------------------
 
 .. php:method:: redirectUrl
 
-After logging a user in, you'll generally want to redirect them back to where
-they came from. Pass a URL in to set the destination a user should be redirected
-to after logging in.
+Depois de fazer o login de um usuário, você geralmente desejará redirecioná-lo 
+de volta para onde eles vieram. Passe um URL para definir o destino ao qual um 
+usuário deve ser redirecionado após o login.
 
-If no parameter is passed, the returned URL will use the following rules:
+Se nenhum parâmetro for passado, a URL retornada usará as seguintes regras:
 
-- Returns the normalized URL from the ``redirect`` query string value if it is
-  present and for the same domain the current app is running on.
-- If there is no query string/session value and there is a config with
-  ``loginRedirect``, the ``loginRedirect`` value is returned.
-- If there is no redirect value and no ``loginRedirect``, ``/`` is returned.
+- Retorna a URL normalizada do valor da string de consulta ``redirect``, 
+  se estiver presente e no mesmo domínio em que o aplicativo atual estiver sendo executado.
+- Se não houver um valor de string/sessão de consulta e houver uma configuração com 
+  ``loginRedirect``, o valor ``loginRedirect`` será retornado.
+- Se não houver valor de redirecionamento e nenhum ``loginRedirect``, ``/`` será retornado.
 
-Creating Stateless Authentication Systems
------------------------------------------
+Criando Sistemas de Autenticação sem Estado
+-------------------------------------------
 
-Basic and digest are stateless authentication schemes and don't require an
-initial POST or a form. If using only basic/digest authenticators you don't
-require a login action in your controller. Stateless authentication will
-re-verify the user's credentials on each request, this creates a small amount of
-additional overhead, but allows clients to login without using cookies and
-makes AuthComponent more suitable for building APIs.
+Basic e Digest são esquemas de autenticação sem estado e não requerem um POST 
+ou um formulário inicial. Se você estiver usando apenas autenticadores basic/digest, 
+não precisará de uma ação de login no seu controlador. A autenticação sem estado 
+verificará novamente as credenciais do usuário em cada solicitação, isso cria uma 
+pequena quantidade de sobrecarga adicional, mas permite que os clientes efetuem login 
+sem usar cookies e torna o AuthComponent mais adequado para a criação de APIs.
 
-For stateless authenticators, the ``storage`` config should be set to ``Memory``
-so that AuthComponent does not use a session to store user record. You may also
-want to set config ``unauthorizedRedirect`` to ``false`` so that AuthComponent
-throws a ``ForbiddenException`` instead of the default behavior of redirecting to
-referrer.
+Para autenticadores sem estado, a configuração `` storage`` deve ser definida como 
+``Memory`` para que o AuthComponent não use uma sessão para armazenar o registro do 
+usuário. Você também pode querer configurar config ``unauthorizedRedirect`` para 
+``false``, para que AuthComponent gere uma ``ForbiddenException`` em vez do comportamento 
+padrão de redirecionar para o referenciador.
 
-The ``unauthorizedRedirect`` option only applies to authenticated users. When
-a user is not yet authenticated and you do not want the user to be redirected,
-you will need to load one or more stateless authenticators, like ``Basic`` or
-``Digest``.
+A opção ``unauthorizedRedirect`` se aplica apenas a usuários autenticados. Quando um usuário 
+ainda não está autenticado e você não deseja que ele seja redirecionado, será necessário 
+carregar um ou mais autenticadores sem estado, como ``Basic`` ou ``Digest``.
 
-Authentication objects can implement a ``getUser()`` method that can be used to
-support user login systems that don't rely on cookies. A typical getUser method
-looks at the request/environment and uses the information there to confirm the
-identity of the user. HTTP Basic authentication for example uses
-``$_SERVER['PHP_AUTH_USER']`` and ``$_SERVER['PHP_AUTH_PW']`` for the username
-and password fields.
+Objetos de autenticação podem implementar um método ``getUser()`` que pode ser usado para 
+oferecer suporte a sistemas de login de usuário que não dependem de cookies. Um método 
+getUser típico examina a solicitação/ambiente e usa as informações para confirmar a 
+identidade do usuário. A autenticação HTTP Basic, por exemplo, usa ``$_SERVER['PHP_AUTH_USER']`` 
+e ``$_SERVER['PHP_AUTH_PW']`` para os campos de nome de usuário e senha.
 
 .. note::
 
-    In case authentication does not work like expected, check if queries
-    are executed at all (see ``BaseAuthenticate::_query($username)``).
-    In case no queries are executed check if ``$_SERVER['PHP_AUTH_USER']``
-    and ``$_SERVER['PHP_AUTH_PW']`` do get populated by the webserver.
-    If you are using Apache with FastCGI-PHP you might need to add this line
-    to your **.htaccess** file in webroot::
+    Caso a autenticação não funcione como o esperado, verifique se as consultas são executadas 
+    (consulte ``BaseAuthenticate::_query($username)``). Caso nenhuma consulta seja executada, 
+    verifique se ``$_SERVER['PHP_AUTH_USER']`` e ``$_SERVER['PHP_AUTH_PW']`` são preenchidos 
+    pelo servidor web. Se você estiver usando o Apache com FastCGI-PHP, poderá ser necessário 
+    adicionar esta linha ao seu arquivo **.htaccess** no webroot::
 
         RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
 
-On each request, these values, ``PHP_AUTH_USER`` and ``PHP_AUTH_PW``, are used to
-re-identify the user and ensure they are the valid user. As with authentication
-object's ``authenticate()`` method, the ``getUser()`` method should return
-an array of user information on the success or ``false`` on failure. ::
+Em cada solicitação, esses valores, ``PHP_AUTH_USER`` e ``PHP_AUTH_PW``, são usados 
+para identificar novamente o usuário e garantir que ele seja o usuário válido. Assim 
+como no método ``authenticate()`` do objeto de autenticação, o método ``getUser()`` 
+deve retornar uma matriz de informações do usuário sobre o sucesso ou ``false`` em 
+caso de falha. ::
 
     public function getUser(ServerRequest $request)
     {
