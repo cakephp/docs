@@ -3,121 +3,111 @@ AuthComponent
 
 .. php:class:: AuthComponent(ComponentCollection $collection, array $config = [])
 
-Identifying, authenticating, and authorizing users is a common part of
-almost every web application. In CakePHP AuthComponent provides a
-pluggable way to do these tasks. AuthComponent allows you to combine
-authentication objects and authorization objects to create flexible
-ways of identifying and checking user authorization.
-
+Identificar, autenticar e autorizar usuários é uma parte comum de 
+quase todos os aplicativos da web. No CakePHP, o AuthComponent fornece 
+uma maneira conectável de executar essas tarefas. AuthComponent permite 
+combinar objetos de autenticação e objetos de autorização para criar maneiras 
+flexíveis de identificar e verificar a autorização do usuário.
 
 .. deprecated:: 4.0.0
-    The AuthComponent is deprecated as of 4.0.0 and will be replaced by the
-    `authorization <https://book.cakephp.org/authorization/>`__
-    and `authentication <https://book.cakephp.org/authentication/>`__ plugins.
+    O AuthComponent está obsoleto a partir da versão 4.0.0 e será 
+    substituído pelos plugins `authorization <https://book.cakephp.org/authorization/>`__ e `authentication <https://book.cakephp.org/authentication/>`__ .
 
 .. _authentication-objects:
 
-Suggested Reading Before Continuing
-===================================
+Sugestão de Leitura Antes de Continuar
+======================================
 
-Configuring authentication requires several steps including defining
-a users table, creating a model, controller & views, etc.
+A configuração da autenticação requer várias etapas, incluindo a definição de uma 
+tabela de usuários, a criação de um modelo, controlador e visualizações, etc.
 
-This is all covered step by step in the
-:doc:`CMS Tutorial </tutorials-and-examples/cms/authentication>`.
+Tudo isso é abordado passo a passo em :doc:`CMS Tutorial </tutorials-and-examples/cms/authentication>`.
 
-If you are looking for existing authentication and/or authorization solutions
-for CakePHP, have a look at the
-`Authentication and Authorization <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/README.md#authentication-and-authorization>`_ section of the Awesome CakePHP list.
+Se você está procurando soluções de autenticação e/ou autorização existentes para o CakePHP, 
+consulte a seção `Authentication and Authorization <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/README.md#authentication-and-authorization>`_ da lista Awesome CakePHP.
 
-Authentication
-==============
+Autenticação
+============
 
-Authentication is the process of identifying users by provided
-credentials and ensuring that users are who they say they are.
-Generally, this is done through a username and password, that are checked
-against a known list of users. In CakePHP, there are several built-in
-ways of authenticating users stored in your application.
+Autenticação é o processo de identificar usuários pelas credenciais fornecidas 
+e garantir que os usuários sejam quem eles dizem que são. Geralmente, isso é 
+feito através de um nome de usuário e senha, que são verificados em uma lista 
+conhecida de usuários. No CakePHP, existem várias maneiras internas de autenticar 
+usuários armazenados no seu aplicativo.
 
-* ``FormAuthenticate`` allows you to authenticate users based on form POST
-  data. Usually, this is a login form that users enter information into.
-* ``BasicAuthenticate`` allows you to authenticate users using Basic HTTP
-  authentication.
-* ``DigestAuthenticate`` allows you to authenticate users using Digest
-  HTTP authentication.
+* ``FormAuthenticate`` permite autenticar usuários com base nos dados do formulário POST. 
+  Geralmente, este é um formulário de login no qual os usuários inserem informações.
+* ``BasicAuthenticate`` permite autenticar usuários usando a autenticação HTTP básica.
+* ``DigestAuthenticate`` permite autenticar usuários usando o Digest
+   Autenticação HTTP.
 
-By default ``AuthComponent`` uses ``FormAuthenticate``.
+Por padrão, ``AuthComponent`` usa ``FormAuthenticate``.
 
-Choosing an Authentication Type
--------------------------------
+Escolhendo um Tipo de Autenticação
+----------------------------------
 
-Generally, you'll want to offer form based authentication. It is the easiest for
-users using a web-browser to use. If you are building an API or webservice, you
-may want to consider basic authentication or digest authentication. The key
-differences between digest and basic authentication are mostly related to how
-passwords are handled. In basic authentication, the username and password are
-transmitted as plain-text to the server. This makes basic authentication
-un-suitable for applications without SSL, as you would end up exposing sensitive
-passwords. Digest authentication uses a digest hash of the username, password,
-and a few other details. This makes digest authentication more appropriate for
-applications without SSL encryption.
+Geralmente, você deseja oferecer autenticação baseada em formulário. É o mais fácil para os 
+usuários que usam um navegador da web. Se você estiver criando uma API ou serviço da web, 
+convém considerar a autenticação básica ou digerir a autenticação. As principais diferenças 
+entre Digest e autenticação básica estão relacionadas principalmente à maneira como as senhas 
+são tratadas. Na autenticação básica, o nome de usuário e a senha são transmitidos como texto 
+sem formatação para o servidor. Isso torna a autenticação básica inadequada para aplicativos 
+sem SSL, pois você acabaria expondo senhas confidenciais. A autenticação Digest usa um hash de 
+resumo do nome de usuário, senha e alguns outros detalhes. Isso torna a autenticação Digest mais 
+apropriada para aplicativos sem criptografia SSL.
 
-You can also use authentication systems like OpenID as well; however, OpenID is
-not part of CakePHP core.
+Você também pode usar sistemas de autenticação como o OpenID também; no entanto, o OpenID 
+não faz parte do núcleo do CakePHP.
 
-Configuring Authentication Handlers
------------------------------------
+Configurando Manipuladores de Autenticação
+------------------------------------------
 
-You configure authentication handlers using the ``authenticate`` config.
-You can configure one or many handlers for authentication. Using
-multiple handlers allows you to support different ways of logging users
-in. When logging users in, authentication handlers are checked in the
-order they are declared. Once one handler is able to identify the user,
-no other handlers will be checked. Conversely, you can halt all
-authentication by throwing an exception. You will need to catch any
-thrown exceptions and handle them as needed.
+Você configura manipuladores de autenticação usando a configuração ``authenticate``. 
+Você pode configurar um ou muitos manipuladores para autenticação. O uso de vários manipuladores 
+permite oferecer suporte a diferentes maneiras de efetuar logon nos usuários. Ao efetuar logon 
+nos usuários, os manipuladores de autenticação são verificados na ordem em que são declarados. 
+Quando um manipulador conseguir identificar o usuário, nenhum outro manipulador será verificado. 
+Por outro lado, você pode interromper toda a autenticação lançando uma exceção. Você precisará 
+capturar todas as exceções lançadas e manipulá-las conforme necessário.
 
-You can configure authentication handlers in your controller's
-``beforeFilter()`` or ``initialize()`` methods. You can pass
-configuration information into each authentication object using an
-array::
+Você pode configurar manipuladores de autenticação nos métodos ``beforeFilter()`` ou 
+``initialize()`` do seu controlador. Você pode passar informações de configuração para 
+cada objeto de autenticação usando uma matriz::
 
-    // Simple setup
+    // Configuração simples
     $this->Auth->setConfig('authenticate', ['Form']);
 
-    // Pass settings in
+    // Passando as configurações
     $this->Auth->setConfig('authenticate', [
         'Basic' => ['userModel' => 'Members'],
         'Form' => ['userModel' => 'Members']
     ]);
 
-In the second example, you'll notice that we had to declare the
-``userModel`` key twice. To help you keep your code DRY, you can use the
-``all`` key. This special key allows you to set settings that are passed
-to every attached object. The ``all`` key is also exposed as
-``AuthComponent::ALL``::
+No segundo exemplo, você notará que tivemos que declarar a chave 
+``userModel`` duas vezes. Para ajudá-lo a manter seu código DRY, você pode usar a 
+chave ``all``. Essa chave especial permite definir configurações que são passadas 
+para todos os objetos anexados. A chave ``all`` também é exposta como ``AuthComponent::ALL``::
 
-    // Pass settings in using 'all'
+    // Passando configurações usando 'all'
     $this->Auth->setConfig('authenticate', [
         AuthComponent::ALL => ['userModel' => 'Members'],
         'Basic',
         'Form'
     ]);
 
-In the above example, both ``Form`` and ``Basic`` will get the settings
-defined for the 'all' key. Any settings passed to a specific
-authentication object will override the matching key in the 'all' key.
-The core authentication objects support the following configuration
-keys.
+No exemplo acima, ``Form`` e ``Basic`` obterão as configurações
+definido para a chave 'all'. Quaisquer configurações passadas para 
+um objeto de autenticação específico substituirão a chave correspondente 
+na chave 'all'. Os objetos de autenticação principal suportam as seguintes 
+chaves de configuração.
 
-- ``fields`` The fields to use to identify a user by. You can use keys
-  ``username`` and ``password`` to specify your username and password fields
-  respectively.
-- ``userModel`` The model name of the users table; defaults to Users.
-- ``finder`` The finder method to use to fetch a user record. Defaults to 'all'.
-- ``passwordHasher`` Password hasher class; Defaults to ``Default``.
+- ``fields`` Os campos a serem usados para identificar um usuário. Você pode usar as chaves 
+  ``username`` e ``password`` para especificar seus campos de nome de usuário e senha, respectivamente.
+- ``userModel`` O nome do modelo da tabela users; o padrão é Users.
+- ``finder``O método finder a ser usado para buscar um registro do usuário. O padrão é 'all'.
+- ``passwordHasher`` Classe de hasher de senha; O padrão é ``Default``.
 
-To configure different fields for user in your ``initialize()`` method::
+Para configurar campos diferentes para o usuário no seu método ``initialize()``::
 
     public function initialize(): void
     {
@@ -131,10 +121,10 @@ To configure different fields for user in your ``initialize()`` method::
         ]);
     }
 
-Do not put other ``Auth`` configuration keys, such as ``authError``, ``loginAction``, etc.,
-within the ``authenticate`` or ``Form`` element. They should be at the same level as
-the authenticate key. The setup above with other Auth configuration
-should look like::
+Não coloque outras chaves de configuração ``Auth``, como ``authError``, ``loginAction``, etc., 
+dentro do elemento ``authenticate`` ou ``Form``. Eles devem estar no mesmo nível da chave de 
+autenticação. A configuração acima com outro exemplo de configuração para autenticação deve 
+se parecer com::
 
     public function initialize(): void
     {
@@ -155,32 +145,30 @@ should look like::
         ]);
     }
 
-In addition to the common configuration, Basic authentication supports
-the following keys:
+Além da configuração comum, a autenticação básica suporta as seguintes chaves:
 
-- ``realm`` The realm being authenticated. Defaults to ``env('SERVER_NAME')``.
+- ``realm`` O domínio a ser autenticado. O padrão é ``env('SERVER_NAME')``.
 
-In addition to the common configuration Digest authentication supports
-the following keys:
+Além da configuração comum, a autenticação Digest suporta as seguintes 
+chaves:
 
-- ``realm`` The realm authentication is for. Defaults to the servername.
-- ``nonce`` A nonce used for authentication. Defaults to ``uniqid()``.
-- ``qop`` Defaults to auth; no other values are supported at this time.
-- ``opaque`` A string that must be returned unchanged by clients. Defaults
-  to ``md5($config['realm'])``.
+- ``realm`` Para autenticação de domínio. O padrão é o nome do servidor.
+- ``nonce`` Um nonce usado para autenticação. O padrão é ``uniqid()``.
+- ``qop`` O padrão é auth; nenhum outro valor é suportado no momento.
+- ``opaque`` Uma sequência que deve ser retornada inalterada pelos clientes. O padrão é ``md5($config['realm']))``.
 
 .. note::
-    To find the user record, the database is queried only using the username.
-    The password check is done in PHP. This is necessary because hashing
-    algorithms like bcrypt (which is used by default) generate a new hash
-    each time, even for the same string and you can't just do simple string
-    comparison in SQL to check if the password matches.
+    Para encontrar o registro do usuário, o banco de dados é consultado apenas 
+    usando o nome de usuário. A verificação da senha é feita em PHP. Isso é necessário 
+    porque algoritmos de hash como bcrypt (que é usado por padrão) geram um novo hash a 
+    cada vez, mesmo para a mesma string e você não pode simplesmente fazer uma comparação 
+    simples de strings no SQL para verificar se a senha corresponde.
 
-Customizing Find Query
-----------------------
+Personalizando a Consulta de Localização
+----------------------------------------
 
-You can customize the query used to fetch the user record using the ``finder``
-option in authenticate class config::
+Você pode personalizar a consulta usada para buscar o registro do usuário usando a opção 
+``finder`` na opção de autenticação da classe::
 
     public function initialize(): void
     {
@@ -194,10 +182,10 @@ option in authenticate class config::
         ]);
     }
 
-This will require your ``UsersTable`` to have finder method ``findAuth()``.
-In the example shown below the query is modified to fetch only required fields
-and add a condition. You must ensure that you select the fields you need to
-authenticate a user, such as ``username`` and ``password``::
+Isso exigirá que seu ``UsersTable`` tenha o método localizador ``findAuth()``. 
+No exemplo mostrado abaixo, a consulta é modificada para buscar apenas os campos 
+obrigatórios e adicionar uma condição. Você deve garantir que você selecione os 
+campos necessários para autenticar um usuário, como ``username`` e ``password``::
 
     public function findAuth(\Cake\ORM\Query $query, array $options)
     {
@@ -208,8 +196,8 @@ authenticate a user, such as ``username`` and ``password``::
         return $query;
     }
 
-Identifying Users and Logging Them In
--------------------------------------
+Identificando Usuários e Efetuando Login
+----------------------------------------
 
 .. php:method:: identify()
 
