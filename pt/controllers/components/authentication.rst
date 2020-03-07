@@ -507,53 +507,54 @@ incluindo-os na matriz de autenticação do ``AuthComponent``::
     ]);
 
 .. note::
-    Note that when using simple notation there's no 'Authenticate' word when
-    initiating the authentication object. Instead, if using namespaces, you'll
-    need to set the full namespace of the class, including the 'Authenticate' word.
+    Observe que, ao usar notação simples, não há palavra 'Authenticate' ao iniciar o 
+    objeto de autenticação. Em vez disso, se você estiver usando namespace, precisará
+    definir o namespace completo da classe, incluindo a palavra 'Authenticate'.
 
-Handling Unauthenticated Requests
----------------------------------
+Manipulando Solicitações Não Autenticadas
+-----------------------------------------
 
-When an unauthenticated user tries to access a protected page first the
-``unauthenticated()`` method of the last authenticator in the chain is called.
-The authenticate object can handle sending response or redirection by returning
-a response object to indicate no further action is necessary. Due to this, the
-order in which you specify the authentication provider in ``authenticate``
-config matters.
+Quando um usuário não autenticado tenta acessar uma página protegida primeiro, 
+o método ``unauthenticated()`` do último autenticador da cadeia é chamado. 
+O objeto de autenticação pode lidar com o envio de resposta ou redirecionamento 
+retornando um objeto de resposta para indicar que nenhuma ação adicional é necessária. 
+Devido a isso, é importante a ordem na qual você especifica o provedor de autenticação
+na configuração ``authenticate``.
 
-If authenticator returns null, ``AuthComponent`` redirects user to the login action.
-If it's an AJAX request and config ``ajaxLogin`` is specified that element
-is rendered else a 403 HTTP status code is returned.
+Se o autenticador retornar nulo, ``AuthComponent`` redirecionará o usuário para a 
+ação de login. Se for uma solicitação AJAX e a configuração ``ajaxLogin`` for 
+especificada, esse elemento será renderizado, caso contrário, um código de status 
+HTTP 403 será retornado.
 
-Displaying Auth Related Flash Messages
---------------------------------------
+Exibindo Mensagens Flash Relacionadas à Autenticação
+----------------------------------------------------
 
-In order to display the session error messages that Auth generates, you
-need to add the following code to your layout. Add the following two
-lines to the **templates/Layout/default.php** file in the body section::
+Para exibir as mensagens de erro da sessão que o Auth gera, você precisa 
+adicionar o seguinte código ao seu layout. Adicione as duas linhas a seguir 
+ao arquivo **templates/Layout/default.php** na seção body::
 
     echo $this->Flash->render();
 
-You can customize the error messages and flash settings ``AuthComponent``
-uses. Using ``flash`` config you can configure the parameters
-``AuthComponent`` uses for setting flash messages. The available keys are
+Você pode personalizar as mensagens de erro e as configurações do flash que o 
+``AuthComponent`` usa. Usando a configuração ``flash``, você pode configurar 
+os parâmetros que o ``AuthComponent`` usa para definir mensagens em flash. 
+As chaves disponíveis são
 
-- ``key`` - The key to use, defaults to 'default'.
-- ``element`` - The element name to use for rendering, defaults to null.
-- ``params`` - The array of additional parameters to use, defaults to ``[]``.
+- ``key`` - A chave a ser usada é padronizada como 'default'.
+- ``element`` - O nome do elemento a ser usado para renderização, o padrão é null.
+- ``params`` - A matriz de parâmetros adicionais a serem usados, o padrão é ``[] ``.
 
-In addition to the flash message settings you can customize other error
-messages ``AuthComponent`` uses. In your controller's ``beforeFilter()``, or
-component settings you can use ``authError`` to customize the error used
-for when authorization fails::
+Além das configurações de mensagens flash, você pode personalizar outras 
+mensagens de erro que o ``AuthComponent`` usa. Nas configurações ``beforeFilter()``
+do seu controlador ou componente, você pode usar ``authError`` para personalizar 
+o erro usado quando a autorização falha::
 
     $this->Auth->setConfig('authError', "Woopsie, you are not authorized to access this area.");
 
-Sometimes, you want to display the authorization error only after
-the user has already logged-in. You can suppress this message by setting
-its value to boolean ``false``.
+Às vezes, você deseja exibir o erro de autorização somente após o usuário já estar conectado. 
+Você pode suprimir esta mensagem definindo seu valor como booleano ``false``.
 
-In your controller's ``beforeFilter()`` or component settings::
+Nas configurações ``beforeFilter()`` ou no componente do seu controlador::
 
     if (!$this->Auth->user()) {
         $this->Auth->setConfig('authError', false);
@@ -561,11 +562,12 @@ In your controller's ``beforeFilter()`` or component settings::
 
 .. _hashing-passwords:
 
-Hashing Passwords
+Hashing de Senhas
 -----------------
 
-You are responsible for hashing the passwords before they are persisted to the
-database, the easiest way is to use a setter function in your User entity::
+Você é responsável por fazer o hash das senhas antes que elas persistam no 
+banco de dados, a maneira mais fácil é usar uma função setter na sua entidade 
+User::
 
     namespace App\Model\Entity;
 
@@ -590,6 +592,8 @@ database, the easiest way is to use a setter function in your User entity::
 ``AuthComponent`` is configured by default to use the ``DefaultPasswordHasher``
 when validating user credentials so no additional configuration is required in
 order to authenticate users.
+
+``AuthComponent`` é configurado por padrão para usar o `` DefaultPasswordHasher`` ao validar credenciais do usuário, portanto, nenhuma configuração adicional é necessária para autenticar usuários.
 
 ``DefaultPasswordHasher`` uses the bcrypt hashing algorithm internally, which
 is one of the stronger password hashing solutions used in the industry. While it
