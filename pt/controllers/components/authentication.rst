@@ -306,24 +306,24 @@ caso de falha. ::
         return $this->_findUser($username, $pass);
     }
 
-The above is how you could implement the getUser method for HTTP basic
-authentication. The ``_findUser()`` method is part of ``BaseAuthenticate``
-and identifies a user based on a username and password.
+A seguir, é apresentado como você pode implementar o método getUser para 
+autenticação HTTP básica. O método ``_findUser()`` faz parte de ``BaseAuthenticate`` 
+e identifica um usuário com base em um nome de usuário e senha.
 
 .. _basic-authentication:
 
-Using Basic Authentication
+Usando Autenticação Básica
 --------------------------
 
-Basic authentication allows you to create a stateless authentication that can be
-used in intranet applications or for simple API scenarios. Basic authentication
-credentials will be rechecked on each request.
+A autenticação básica permite criar uma autenticação sem estado que pode 
+ser usada em aplicativos de intranet ou em cenários simples da API. As 
+credenciais de autenticação básica serão verificadas novamente em cada solicitação.
 
 .. warning::
-    Basic authentication transmits credentials in plain-text. You should use
-    HTTPS when using Basic authentication.
+    A autenticação básica transmite credenciais em texto sem formatação. 
+    Você deve usar HTTPS ao usar a autenticação básica.
 
-To use basic authentication, you'll need to configure AuthComponent::
+Para usar a autenticação básica, você precisará configurar o AuthComponent::
 
     $this->loadComponent('Auth', [
         'authenticate' => [
@@ -336,14 +336,15 @@ To use basic authentication, you'll need to configure AuthComponent::
         'unauthorizedRedirect' => false
     ]);
 
-Here we're using username + API key as our fields and use the Users model.
+Aqui, usamos o nome de usuário + chave da API como nossos campos e usamos o modelo Usuários.
 
-Creating API Keys for Basic Authentication
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Criando Chaves de API para Autenticação Básica
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Because basic HTTP sends credentials in plain-text, it is unwise to have users
-send their login password. Instead, an opaque API key is generally used. You can
-generate these API tokens randomly using libraries from CakePHP::
+Como o HTTP básico envia credenciais em texto sem formatação, não é aconselhável 
+que os usuários enviem sua senha de login. Em vez disso, geralmente é usada uma 
+chave de API. Você pode gerar esses tokens de API aleatoriamente usando bibliotecas 
+do CakePHP::
 
     namespace App\Model\Table;
 
@@ -362,33 +363,33 @@ generate these API tokens randomly using libraries from CakePHP::
             if ($entity->isNew()) {
                 $hasher = new DefaultPasswordHasher();
 
-                // Generate an API 'token'
+                // Gera uma API 'token'
                 $entity->api_key_plain = Security::hash(Security::randomBytes(32), 'sha256', false);
 
-                // Bcrypt the token so BasicAuthenticate can check
-                // it during login.
+                // Criptografe o token para que BasicAuthenticate 
+                // possa verificá-lo durante o login.
                 $entity->api_key = $hasher->hash($entity->api_key_plain);
             }
             return true;
         }
     }
 
-The above generates a random hash for each user as they are saved. The above
-code assumes you have two columns ``api_key`` - to store the hashed API key, and
-``api_key_plain`` - to the plaintext version of the API key, so we can display
-it to the user later on. Using a key instead of a password means that even over
-plain HTTP, your users can use an opaque token instead of their original
-password. It is also wise to include logic allowing API keys to be regenerated
-at a user's request.
+O exemplo acima gera um hash aleatório para cada usuário conforme eles são salvos. 
+O código acima assume que você tem duas colunas ``api_key`` - para armazenar a chave 
+da API hash e ``api_key_plain`` - para a versão em texto sem formatação da chave da 
+API, para que possamos exibi-la ao usuário posteriormente. Usar uma chave em vez de 
+uma senha significa que, mesmo em HTTP simples, seus usuários podem usar um token simples 
+em vez da senha original. Também é aconselhável incluir lógica que permita que as chaves 
+da API sejam regeneradas a pedido de um usuário.
 
-Using Digest Authentication
----------------------------
+Usando Autenticação Digest
+--------------------------
 
-Digest authentication offers an improved security model over basic
-authentication, as the user's credentials are never sent in the request header.
-Instead, a hash is sent.
+A autenticação Digest oferece um modelo de segurança aprimorado em relação à 
+autenticação básica, pois as credenciais do usuário nunca são enviadas no cabeçalho 
+da solicitação. Em vez disso, um hash é enviado.
 
-To use digest authentication, you'll need to configure ``AuthComponent``::
+Para usar a autenticação Digest, você precisará configurar o ``AuthComponent``::
 
     $this->loadComponent('Auth', [
         'authenticate' => [
@@ -401,18 +402,18 @@ To use digest authentication, you'll need to configure ``AuthComponent``::
         'unauthorizedRedirect' => false
     ]);
 
-Here we're using username + digest_hash as our fields and use the Users model.
+Aqui, estamos usando o nome de usuário + digest_hash como nossos campos e também
+usamos o modelo Users.
 
-Hashing Passwords For Digest Authentication
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Hashing de Senhas para Autenticação Digest
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Because Digest authentication requires a password hashed in the format
-defined by the RFC, in order to correctly hash a password for use with
-Digest authentication you should use the special password hashing
-function on ``DigestAuthenticate``. If you are going to be combining
-digest authentication with any other authentication strategies, it's also
-recommended that you store the digest password in a separate column,
-from the normal password hash::
+Como a autenticação Digest requer um hash de senha no formato definido pelo 
+RFC, para hash corretamente uma senha para uso com a autenticação Digest, 
+você deve usar a função de hash de senha especial em ``DigestAuthenticate``. 
+Se você combinar a autenticação digest com outras estratégias de autenticação, 
+também é recomendável que você armazene a senha digest em uma coluna separada, 
+a partir do hash da senha normal::
 
     namespace App\Model\Table;
 
@@ -426,7 +427,7 @@ from the normal password hash::
         {
             $entity = $event->getData('entity');
 
-            // Make a password for digest auth.
+            // Fazendo a senha para autenticação digest
             $entity->digest_hash = DigestAuthenticate::password(
                 $entity->username,
                 $entity->plain_password,
@@ -436,23 +437,24 @@ from the normal password hash::
         }
     }
 
-Passwords for digest authentication need a bit more information than
-other password hashes, based on the RFC for digest authentication.
+As senhas para autenticação Digest precisam de um pouco mais de informações do 
+que outros hashes de senha, com base no RFC para autenticação Digest.
 
 .. note::
 
-    The third parameter of ``DigestAuthenticate::password()`` must match the
-    'realm' config value defined when DigestAuthentication was configured
-    in ``AuthComponent::$authenticate``. This defaults to ``env('SCRIPT_NAME')``.
-    You may wish to use a static string if you want consistent hashes in multiple environments.
+    O terceiro parâmetro de ``DigestAuthenticate::password()`` deve 
+    corresponder ao valor de configuração 'realm' definido quando 
+    DigestAuthentication foi configurado em ``AuthComponent::$authenticate``. 
+    O padrão é ``env('SCRIPT_NAME')``. Você pode usar uma string estática se 
+    desejar hashes consistentes em vários ambientes.
 
-Creating Custom Authentication Objects
---------------------------------------
+Criando Objetos de Autenticação Personalizados
+----------------------------------------------
 
-Because authentication objects are pluggable, you can create custom
-authentication objects in your application or plugins. If for example,
-you wanted to create an OpenID authentication object. In
-**src/Auth/OpenidAuthenticate.php** you could put the following::
+Como os objetos de autenticação são conectáveis, você pode criar objetos 
+de autenticação personalizados em seu aplicativo ou plug-in. Se, por exemplo,
+você desejasse criar um objeto de autenticação OpenID. Em **src/Auth/OpenidAuthenticate.php**, 
+você pode colocar o seguinte::
 
     namespace App\Auth;
 
@@ -464,25 +466,26 @@ you wanted to create an OpenID authentication object. In
     {
         public function authenticate(ServerRequest $request, Response $response)
         {
-            // Do things for OpenID here.
-            // Return an array of user if they could authenticate the user,
-            // return false if not.
+            // Faça coisas para o OpenID aqui. 
+            // Retorne uma matriz do usuário se eles puderem autenticar o usuário, 
+            // retorne false se não.
         }
     }
 
-Authentication objects should return ``false`` if they cannot identify the
-user and an array of user information if they can. It's not required
-that you extend ``BaseAuthenticate``, only that your authentication object
-implements ``Cake\Event\EventListenerInterface``. The ``BaseAuthenticate`` class
-provides a number of helpful methods that are commonly used. You can
-also implement a ``getUser()`` method if your authentication object needs
-to support stateless or cookie-less authentication. See the sections on
-basic and digest authentication below for more information.
+Os objetos de autenticação devem retornar ``false`` se não puderem identificar 
+o usuário e uma matriz de informações do usuário, se puderem. Não é necessário 
+que você estenda ``BaseAuthenticate``, apenas que seu objeto de autenticação 
+implemente ``Cake\Event\EventListenerInterface``. A classe ``BaseAuthenticate`` 
+fornece vários métodos úteis que são comumente usados. Você também pode implementar 
+um método ``getUser()`` se o seu objeto de autenticação precisar suportar 
+autenticação sem estado ou sem cookie. Consulte as seções sobre autenticação 
+básica e digest abaixo para obter mais informações.
 
-``AuthComponent`` triggers two events, ``Auth.afterIdentify`` and ``Auth.logout``,
-after a user has been identified and before a user is logged out respectively.
-You can set callback functions for these events by returning a mapping array
-from ``implementedEvents()`` method of your authenticate class::
+``AuthComponent`` dispara dois eventos, ``Auth.afterIdentify`` e ``Auth.logout``, 
+depois que um usuário é identificado e antes que o usuário seja desconectado, 
+respectivamente. Você pode definir funções de retorno de chamada para esses eventos 
+retornando uma matriz de mapeamento do método ``managedEvents()`` da sua classe de 
+autenticação::
 
     public function implementedEvents()
     {
@@ -492,11 +495,11 @@ from ``implementedEvents()`` method of your authenticate class::
         ];
     }
 
-Using Custom Authentication Objects
------------------------------------
+Usando Objetos de Autenticação Personalizados
+---------------------------------------------
 
-Once you've created your custom authentication objects, you can use them
-by including them in ``AuthComponent``'s authenticate array::
+Depois de criar seus objetos de autenticação personalizados, você pode usá-los 
+incluindo-os na matriz de autenticação do ``AuthComponent``::
 
     $this->Auth->setConfig('authenticate', [
         'Openid', // app authentication object.
