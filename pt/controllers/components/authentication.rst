@@ -589,24 +589,25 @@ User::
         // ...
     }
 
-``AuthComponent`` is configured by default to use the ``DefaultPasswordHasher``
-when validating user credentials so no additional configuration is required in
-order to authenticate users.
+``AuthComponent`` é configurado por padrão para usar o ``DefaultPasswordHasher`` 
+ao validar credenciais do usuário, portanto, nenhuma configuração adicional é 
+necessária para autenticar usuários.
 
-``AuthComponent`` é configurado por padrão para usar o `` DefaultPasswordHasher`` ao validar credenciais do usuário, portanto, nenhuma configuração adicional é necessária para autenticar usuários.
+``AuthComponent`` é configurado como padrão para usar o ``DefaultPasswordHasher`` 
+para validar credenciais do usuário, portanto, nenhuma configuração adicional é 
+necessária para autenticação de usuários.
 
-``DefaultPasswordHasher`` uses the bcrypt hashing algorithm internally, which
-is one of the stronger password hashing solutions used in the industry. While it
-is recommended that you use this password hasher class, the case may be that you
-are managing a database of users whose password was hashed differently.
+O ``DefaultPasswordHasher`` usa o algoritmo de hash bcrypt internamente, que é 
+uma das soluções mais fortes de hash de senha usadas no setor. Embora seja 
+recomendável usar essa classe de hasher de senha, pode ser que você esteja 
+gerenciando um banco de dados de usuários cuja senha foi usada um tipo de hash diferente.
 
-Creating Custom Password Hasher Classes
----------------------------------------
+Criando Classes Personalizadas de Hasher de Senha
+-------------------------------------------------
 
-In order to use a different password hasher, you need to create the class in
-**src/Auth/LegacyPasswordHasher.php** and implement the
-``hash()`` and ``check()`` methods. This class needs to extend the
-``AbstractPasswordHasher`` class::
+Para usar um hasher de senha diferente, você precisa criar a classe em 
+**src/Auth/LegacyPasswordHasher.php** e implementar os métodos ``hash()`` 
+e ``check()``. Esta classe precisa estender a classe ``AbstractPasswordHasher``::
 
     namespace App\Auth;
 
@@ -626,8 +627,8 @@ In order to use a different password hasher, you need to create the class in
         }
     }
 
-Then you are required to configure the ``AuthComponent`` to use your own password
-hasher::
+Em seguida, você deve configurar o ``AuthComponent`` para usar o seu hasher de senha
+customizado::
 
     public function initialize(): void
     {
@@ -643,17 +644,17 @@ hasher::
         ]);
     }
 
-Supporting legacy systems is a good idea, but it is even better to keep your
-database with the latest security advancements. The following section will
-explain how to migrate from one hashing algorithm to CakePHP's default.
+Oferecer suporte a sistemas legados é uma boa idéia, mas é ainda melhor manter seu 
+banco de dados com os mais recentes avanços de segurança. A seção a seguir explica 
+como migrar de um algoritmo de hash para o padrão do CakePHP.
 
-Changing Hashing Algorithms
----------------------------
+Alterando Algoritmos de Hash
+----------------------------
 
-CakePHP provides a clean way to migrate your users' passwords from one algorithm
-to another, this is achieved through the ``FallbackPasswordHasher`` class.
-Assuming you are migrating your app from CakePHP 2.x which uses ``sha1`` password hashes, you
-can configure the ``AuthComponent`` as follows::
+O CakePHP fornece uma maneira limpa de migrar as senhas de seus usuários de um 
+algoritmo para outro, isso é alcançado através da classe ``FallbackPasswordHasher``. 
+Supondo que você esteja migrando seu aplicativo do CakePHP 2.x que usa hashes de 
+senha ``sha1``, você pode configurar o ``AuthComponent`` da seguinte forma::
 
     public function initialize(): void
     {
@@ -673,15 +674,14 @@ can configure the ``AuthComponent`` as follows::
         ]);
     }
 
-The first name appearing in the ``hashers`` key indicates which of the classes
-is the preferred one, but it will fallback to the others in the list if the
-check was unsuccessful.
+O primeiro nome que aparece na chave ``hashers`` indica qual das classes é a 
+preferida, mas retornará para as outras na lista se a verificação não tiver êxito.
 
-When using the ``WeakPasswordHasher`` you will need to
-set the ``Security.salt`` configure the value to ensure passwords are salted.
+Ao usar o ``WeakPasswordHasher``, você precisará definir o ``Security.salt`` 
+para configurar o valor para garantir que as senhas sejam transformadas.
 
-In order to update old users' passwords on the fly, you can change the login
-function accordingly::
+Para atualizar as senhas de usuários antigos rapidamente, você pode alterar 
+a função de login de acordo::
 
     public function login()
     {
@@ -700,18 +700,18 @@ function accordingly::
         }
     }
 
-As you can see we are just setting the plain password again so the setter
-function in the entity will hash the password as shown in the previous example and
-then save the entity.
+Como você pode ver, estamos apenas definindo a senha simples novamente, 
+para que a função setter na entidade faça hash na senha, como mostrado no 
+exemplo anterior, e salve a entidade.
 
-Manually Logging Users In
--------------------------
+Logon Manual de Usuários
+------------------------
 
 .. php:method:: setUser(array $user)
 
-Sometimes the need arises where you need to manually log a user in, such
-as just after they registered for your application. You can do this by
-calling ``$this->Auth->setUser()`` with the user data you want to 'login'::
+Às vezes, surge a necessidade de fazer o login manual de um usuário, como 
+logo após ele se registrar no seu aplicativo. Você pode fazer isso chamando 
+``$this->Auth->setUser()`` com os dados do usuário que deseja 'logar'::
 
     public function register()
     {
@@ -727,141 +727,138 @@ calling ``$this->Auth->setUser()`` with the user data you want to 'login'::
 
 .. warning::
 
-    Be sure to manually add the new User id to the array passed to the ``setUser()``
-    method. Otherwise, you won't have the user id available.
+    Certifique-se de adicionar manualmente o novo ID do usuário à matriz 
+    passada para o método ``setUser()``. Caso contrário, você não terá o ID 
+    do usuário disponível.
 
-Accessing the Logged In User
-----------------------------
+Acessando o Usuário Conectado
+-----------------------------
 
 .. php:method:: user($key = null)
 
-Once a user is logged in, you will often need some particular
-information about the current user. You can access the currently logged
-in user using ``AuthComponent::user()``::
+Depois que um usuário está logado, muitas vezes você precisará de algumas 
+informações específicas sobre o usuário atual. Você pode acessar o usuário 
+conectado no momento usando ``AuthComponent::user()``::
 
-    // From inside a controller or other component.
+    // De dentro de um controlador ou outro componente.
     $this->Auth->user('id');
 
-If the current user is not logged in or the key doesn't exist, null will
-be returned.
+Se o usuário atual não estiver conectado ou a chave não existir, o valor nulo 
+será retornado.
 
-Logging Users Out
------------------
+Logout de Usuários
+------------------
 
 .. php:method:: logout()
 
-Eventually, you'll want a quick way to de-authenticate someone and
-redirect them to where they need to go. This method is also useful if
-you want to provide a 'Log me out' link inside a members' area of your
-application::
+Eventualmente, você desejará uma maneira rápida de autenticar alguém e redirecioná-lo 
+para onde ele precisa ir. Esse método também é útil se você deseja fornecer um link 
+'Desconectar-se' dentro da área de um membro do seu aplicativo::
 
     public function logout()
     {
         return $this->redirect($this->Auth->logout());
     }
 
-Logging out users that logged in with Digest or Basic auth is difficult
-to accomplish for all clients. Most browsers will retain credentials
-for the duration they are still open. Some clients can be forced to
-logout by sending a 401 status code. Changing the authentication realm
-is another solution that works for some clients.
+É difícil realizar logoff de usuários que efetuaram logon com autenticação 
+Digest ou Basic para todos os clientes. A maioria dos navegadores retém 
+credenciais pelo período em que ainda estão abertos. Alguns clientes podem 
+ser forçados a sair, enviando um código de status 401. Alterar o domínio de 
+autenticação é outra solução que funciona para alguns clientes.
 
-Deciding When to run Authentication
------------------------------------
+Decidindo Quando Executar a Autenticação
+----------------------------------------
 
-In some cases you may want to use ``$this->Auth->user()`` in the
-``beforeFilter()`` method. This is achievable by using the
-``checkAuthIn`` config key. The following changes which event for which initial
-authentication checks should be done::
+Em alguns casos, você pode querer usar ``$this->Auth->user()`` no método 
+``beforeFilter()``. Isso é possível usando a chave de configuração ``checkAuthIn``. 
+As alterações a seguir, para o qual as verificações de autenticação 
+inicial devem ser feitas::
 
-    //Set up AuthComponent to authenticate in initialize()
+    // Configure AuthComponent para autenticar em initialize ()
     $this->Auth->setConfig('checkAuthIn', 'Controller.initialize');
 
-Default value for ``checkAuthIn`` is ``'Controller.startup'`` - but by using
-``'Controller.initialize'`` initial authentication is done before ``beforeFilter()``
-method.
+O valor padrão para ``checkAuthIn`` é ``'Controller.startup'``, mas usando a 
+autenticação inicial ``'Controller.initialize'`` é feita antes do método ``beforeFilter()``.
 
 .. _authorization-objects:
 
-Authorization
-=============
+Autorização
+===========
 
-Authorization is the process of ensuring that an
-identified/authenticated user is allowed to access the resources they
-are requesting. If enabled ``AuthComponent`` can automatically check
-authorization handlers and ensure that logged in users are allowed to
-access the resources they are requesting. There are several built-in
-authorization handlers and you can create custom ones for your
-application or as part of a plugin.
+Autorização é o processo de garantir que um usuário identificado/autenticado 
+tenha permissão para acessar os recursos que está solicitando. Se ativado, o 
+``AuthComponent`` pode verificar automaticamente os manipuladores de autorização 
+e garantir que os usuários conectados tenham permissão para acessar os recursos 
+que estão solicitando. Existem vários manipuladores de autorização internos e você 
+pode criar personalizações para o seu aplicativo ou como parte de um plug-in.
 
-- ``ControllerAuthorize`` Calls ``isAuthorized()`` on the active controller,
-  and uses the return of that to authorize a user. This is often the most
-  simple way to authorize users.
+- ``ControllerAuthorize`` Chama ``isAuthorized()`` no controlador ativo e 
+  usa o retorno para autorizar um usuário. Geralmente, é a maneira mais 
+  simples de autorizar usuários.
 
 .. note::
 
-    The ``ActionsAuthorize`` & ``CrudAuthorize`` adapter available in CakePHP
-    2.x have now been moved to a separate plugin `cakephp/acl <https://github.com/cakephp/acl>`_.
+    O adaptador ``ActionsAuthorize`` e ``CrudAuthorize`` disponível no CakePHP 2.x 
+    foram agora movidos para um plugin separado `cakephp/acl <https://github.com/cakephp/acl>`_.
 
-Configuring Authorization Handlers
-----------------------------------
+Configurando Manipuladores de Autorização
+-----------------------------------------
 
-You configure authorization handlers using the ``authorize`` config key.
-You can configure one or many handlers for authorization. Using
-multiple handlers allows you to support different ways of checking
-authorization. When authorization handlers are checked, they will be
-called in the order they are declared. Handlers should return ``false``, if
-they are unable to check authorization, or the check has failed.
-Handlers should return ``true`` if they were able to check authorization
-successfully. Handlers will be called in sequence until one passes. If
-all checks fail, the user will be redirected to the page they came from.
-Additionally, you can halt all authorization by throwing an exception.
-You will need to catch any thrown exceptions and handle them.
+Você configura manipuladores de autorização usando a chave de configuração 
+``authorize``. Você pode configurar um ou muitos manipuladores para autorização. 
+O uso de vários manipuladores permite oferecer suporte a diferentes maneiras de 
+verificar a autorização. Quando os manipuladores de autorização são verificados, 
+eles serão chamados na ordem em que são declarados. Os manipuladores devem retornar 
+``false``, se não conseguirem verificar a autorização ou se a verificação falhar. 
+Os manipuladores devem retornar ``true`` se puderem verificar a autorização com 
+êxito. Os manipuladores serão chamados em sequência até que um passe. Se todas as 
+verificações falharem, o usuário será redirecionado para a página de onde veio. Além 
+disso, você pode interromper toda a autorização lançando uma exceção. Você precisará 
+capturar todas as exceções lançadas e lidar com elas.
 
-You can configure authorization handlers in your controller's
-``beforeFilter()`` or ``initialize()`` methods. You can pass
-configuration information into each authorization object, using an
-array::
+Você pode configurar manipuladores de autorização nos métodos ``beforeFilter()`` ou 
+``initialize()`` do seu controlador. Você pode passar informações de configuração 
+para cada objeto de autorização, usando uma matriz::
 
-    // Basic setup
+    // Configuração básica
     $this->Auth->setConfig('authorize', ['Controller']);
 
-    // Pass settings in
+    // Passando configurações
     $this->Auth->setConfig('authorize', [
         'Actions' => ['actionPath' => 'controllers/'],
         'Controller'
     ]);
 
-Much like ``authenticate``, ``authorize``, helps you
-keep your code DRY, by using the ``all`` key. This special key allows you
-to set settings that are passed to every attached object. The ``all`` key
-is also exposed as ``AuthComponent::ALL``::
+Assim como ``authenticate``, ``authorize``, ajuda a manter seu código DRY, 
+usando a chave ``all``. Essa chave especial permite definir configurações 
+que são passadas para todos os objetos anexados. A chave ``all`` também é 
+exposta como ``AuthComponent::ALL``::
 
-    // Pass settings in using 'all'
+    // Passando as configurações usando 'all'
     $this->Auth->setConfig('authorize', [
         AuthComponent::ALL => ['actionPath' => 'controllers/'],
         'Actions',
         'Controller'
     ]);
 
-In the above example, both the ``Actions`` and ``Controller`` will get the
-settings defined for the 'all' key. Any settings passed to a specific
-authorization object will override the matching key in the 'all' key.
+No exemplo acima, as ações ``Actions`` e `` Controller`` receberão as 
+configurações definidas para a chave 'all'. Quaisquer configurações 
+passadas para um objeto de autorização específico substituirão a chave 
+correspondente na chave 'all'.
 
-If an authenticated user tries to go to a URL he's not authorized to access,
-he's redirected back to the referrer. If you do not want such redirection
-(mostly needed when using stateless authentication adapter) you can set config
-option ``unauthorizedRedirect`` to ``false``. This causes ``AuthComponent``
-to throw a ``ForbiddenException`` instead of redirecting.
+Se um usuário autenticado tentar acessar uma URL que ele não está autorizado 
+a acessar, ele será redirecionado de volta ao referenciador. Se você não desejar 
+esse redirecionamento (principalmente necessário ao usar o adaptador de autenticação 
+sem estado), defina a opção de configuração ``unauthorizedRedirect`` para ``false``. 
+Isso faz com que o ``AuthComponent`` gere uma ``ForbiddenException`` em vez de redirecionar.
 
-Creating Custom Authorize Objects
----------------------------------
+Criando Objetos de Autorização Personalizados
+---------------------------------------------
 
-Because authorize objects are pluggable, you can create custom authorize
-objects in your application or plugins. If for example, you wanted to
-create an LDAP authorize object. In
-**src/Auth/LdapAuthorize.php** you could put the
-following::
+Como os objetos de autorização são conectáveis, você pode criar objetos 
+de autorização personalizados em seu aplicativo ou plug-in. Se, por exemplo, 
+você desejasse criar um objeto de autorização LDAP. Em **src/Auth/LdapAuthorize.php**, 
+você pode colocar o seguinte::
 
     namespace App\Auth;
 
@@ -872,29 +869,29 @@ following::
     {
         public function authorize($user, ServerRequest $request)
         {
-            // Do things for ldap here.
+            // Faça coisas para o LDAP aqui.
         }
     }
 
-Authorize objects should return ``false`` if the user is denied access, or
-if the object is unable to perform a check. If the object is able to
-verify the user's access, ``true`` should be returned. It's not required
-that you extend ``BaseAuthorize``, only that your authorize object
-implements an ``authorize()`` method. The ``BaseAuthorize`` class provides
-a number of helpful methods that are commonly used.
+Os objetos de autorização devem retornar ``false`` se o acesso do usuário 
+for negado ou se o objeto não puder executar uma verificação. Se o objeto 
+puder verificar o acesso do usuário, ``true`` deve ser retornado. Não é 
+necessário que você estenda ``BaseAuthorize``, apenas que seu objeto de 
+autorização implemente um método ``authorize()``. A classe ``BaseAuthorize`` 
+fornece vários métodos úteis que são comumente usados.
 
-Using Custom Authorize Objects
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Usando Objetos de Autorização Personalizados
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Once you've created your custom authorize object, you can use them by
-including them in your ``AuthComponent``'s authorize array::
+Depois de criar seu objeto de autorização personalizado, você pode usá-lo 
+incluindo-o na matriz de autorização do ``AuthComponent``::
 
     $this->Auth->setConfig('authorize', [
-        'Ldap', // app authorize object.
-        'AuthBag.Combo', // plugin authorize object.
+        'Ldap', // objeto de autorização do aplicativo.
+        'AuthBag.Combo', // plugin autoriza objeto.
     ]);
 
-Using No Authorization
+Usando Sem Autorização
 ----------------------
 
 If you'd like to not use any of the built-in authorization objects and
@@ -909,24 +906,24 @@ Making Actions Public
 
 .. php:method:: allow($actions = null)
 
-There are often times controller actions that you wish to remain
-entirely public or that don't require users to be logged in.
-``AuthComponent`` is pessimistic and defaults to denying access. You can
-mark actions as public actions by using ``AuthComponent::allow()``. By
-marking actions as public, ``AuthComponent`` will not check for a logged in
-user nor will authorize objects to be checked::
+Muitas vezes, há ações do controlador que você deseja manter totalmente 
+públicas ou que não exigem que os usuários façam login. ``AuthComponent`` 
+é pessimista no padrão para negar acesso. Você pode marcar métodos como métodos
+públicos usando ``AuthComponent::allow()``. Ao marcar ações como públicas, o 
+``AuthComponent`` não procurará um usuário conectado nem autorizará a verificação 
+de objetos::
 
-    // Allow all actions
+    // Permitir todas as ações
     $this->Auth->allow();
 
-    // Allow only the index action.
+    // Permitir apenas a ação index.
     $this->Auth->allow('index');
 
-    // Allow only the view and index actions.
+    // Permitir apenas as ações de view e index.
     $this->Auth->allow(['view', 'index']);
 
-By calling it empty you allow all actions to be public.
-For a single action, you can provide the action name as a string. Otherwise, use an array.
+Ao chamá-lo de vazio, você permite que todas as ações sejam públicas. Para uma única 
+ação, você pode fornecer o nome da ação como uma sequência. Caso contrário, use uma matriz.
 
 .. note::
 
