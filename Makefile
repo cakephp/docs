@@ -58,7 +58,7 @@ server-%:
 	cd build/html/$* && python3 -m SimpleHTTPServer
 
 populate-index-%:
-	php scripts/populate_search_index.php $* $(ES_HOST)
+	php scripts/populate_search_index.php --compat --lang="$*" --host="$(ES_HOST)"
 
 rebuild-index-%:
 	curl -XDELETE $(ES_HOST)/documentation/4-0-$*
