@@ -73,7 +73,7 @@ The ``hash()`` method supports the following hashing strategies:
 - sha1
 - sha256
 
-And any other hash algorithmn that PHP's ``hash()`` function supports.
+And any other hash algorithm that PHP's ``hash()`` function supports.
 
 .. warning::
 
