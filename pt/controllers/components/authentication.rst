@@ -1045,32 +1045,33 @@ unauthorizedRedirect
     ou '/'. Se definido como ``false``, uma exceção ForbiddenException é 
     lançada em vez de redirecionar.
 storage
-    Storage class to use for persisting user record. When using stateless
-    authenticator you should set this to ``Memory``. Defaults to ``Session``.
-    You can pass config options to storage class using array format. For e.g. to
-    use a custom session key you can set ``storage`` to ``['className' => 'Session', 'key' => 'Auth.Admin']``.
+    Classe de armazenamento a ser usada para o registro persistente do usuário. 
+    Ao usar o autenticador sem estado, defina-o como ``Memory``. O padrão é ``Session``. 
+    Você pode passar as opções de configuração para a classe de armazenamento usando o 
+    formato de matriz. Por ex. Para usar uma chave de sessão personalizada, 
+    você pode definir ``storage`` como ``['className' => 'Session', 'key' => 'Auth.Admin']``.
 checkAuthIn
-    Name of the event in which initial auth checks should be done. Defaults
-    to ``Controller.startup``. You can set it to ``Controller.initialize``
-    if you want the check to be done before controller's ``beforeFilter()``
-    method is run.
+    Nome do evento no qual as verificações de autenticação iniciais devem ser 
+    feitas. O padrão é ``Controller.startup``. Você pode configurá-lo para 
+    ``Controller.initialize`` se você quiser que a verificação seja feita antes 
+    que o método ``beforeFilter()`` do controlador seja executado.
 
-You can get current configuration values by calling ``$this->Auth->getConfig()``::
-only the configuration option::
+Você pode obter os valores atuais da configuração chamando ``$this->Auth->getConfig()``:: 
+apenas a opção de configuração::
 
     $this->Auth->getConfig('loginAction');
 
     $this->redirect($this->Auth->getConfig('loginAction'));
 
-This is useful if you want to redirect a user to the ``login`` route for example.
-Without a parameter, the full configuration will be returned.
+Isso é útil se você deseja redirecionar um usuário para a rota ``login``, por exemplo. 
+Sem um parâmetro, a configuração completa será retornada.
 
-Testing Actions Protected By AuthComponent
-==========================================
+Testando Ações Protegidas por AuthComponent
+===========================================
 
-See the :ref:`testing-authentication` section for tips on how to test controller
-actions that are protected by ``AuthComponent``.
+Veja a seção :ref:`testing-authentication` para obter dicas sobre como testar 
+ações do controlador protegidas por ``AuthComponent``.
 
 .. meta::
-    :title lang=en: Authentication
-    :keywords lang=en: authentication handlers,array php,basic authentication,web application,different ways,credentials,exceptions,cakephp,logging
+    :title lang=pt: Autenticação
+    :keywords lang=pt: manipuladores de autenticação, array php, autenticação básica, aplicativo da web, maneiras diferentes, credenciais, exceções, cakephp, logging
