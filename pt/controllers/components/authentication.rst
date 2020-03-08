@@ -894,15 +894,15 @@ incluindo-o na matriz de autorização do ``AuthComponent``::
 Usando Sem Autorização
 ----------------------
 
-If you'd like to not use any of the built-in authorization objects and
-want to handle things entirely outside of ``AuthComponent``, you can set
-``$this->Auth->setConfig('authorize', false);``. By default ``AuthComponent``
-starts off with ``authorize`` set to ``false``. If you don't use an
-authorization scheme, make sure to check authorization yourself in your
-controller's ``beforeFilter()`` or with another component.
+Se você não quiser usar nenhum dos objetos de autorização internos e quiser 
+lidar com coisas totalmente fora de ``AuthComponent``, poderá definir 
+``$this->Auth->setConfig('authorize', false);``. Por padrão, ``AuthComponent`` 
+começa com ``authorize`` definido como ``false``. Se você não usar um esquema 
+de autorização, verifique você mesmo a autorização no ``beforeFilter()`` do 
+seu controlador ou com outro componente.
 
-Making Actions Public
----------------------
+Tornando Métodos Públicos
+-------------------------
 
 .. php:method:: allow($actions = null)
 
@@ -927,43 +927,43 @@ ação, você pode fornecer o nome da ação como uma sequência. Caso contrári
 
 .. note::
 
-    You should not add the "login" action of your ``UsersController`` to allow list.
-    Doing so would cause problems with the normal functioning of ``AuthComponent``.
+    Você não deve adicionar a ação "login" do seu ``UsersController`` na lista de permissões. 
+    Fazer isso causaria problemas com o funcionamento normal de ``AuthComponent``.
 
-Making Actions Require Authorization
-------------------------------------
+Fazendo Métodos Exigir Autorização
+----------------------------------
 
 .. php:method:: deny($actions = null)
 
-By default all actions require authorization. However, after making actions
-public you want to revoke the public access. You can do so using
-``AuthComponent::deny()``::
+Por padrão, todas as ações requerem autorização. No entanto, depois de tornar 
+os métodos públicos, você deseje revogar o acesso público. 
+Você pode fazer isso usando ``AuthComponent::deny()``::
 
-    // Deny all actions.
+    // Negar todas as ações.
     $this->Auth->deny();
 
-    // Deny one action
+    // Negar uma ação
     $this->Auth->deny('add');
 
-    // Deny a group of actions.
+    // Nega um grupo de ações.
     $this->Auth->deny(['add', 'edit']);
 
-By calling it empty you deny all actions.
-For a single action, you can provide the action name as a string. Otherwise, use an array.
+Ao chamá-lo de vazio, você nega todas as ações. Para um único método, 
+você pode fornecer o nome da ação como uma sequência. Caso contrário, use uma matriz.
 
-Using ControllerAuthorize
--------------------------
+Usando ControllerAuthorize
+--------------------------
 
-ControllerAuthorize allows you to handle authorization checks in a
-controller callback. This is ideal when you have very simple
-authorization or you need to use a combination of models and components
-to do your authorization and don't want to create a custom authorize
-object.
+ControllerAuthorize permite manipular verificações de autorização em um 
+retorno de chamada do controlador. Isso é ideal quando você possui uma 
+autorização muito simples ou precisa usar uma combinação de modelos e 
+componentes para fazer sua autorização e não deseja criar um objeto de 
+autorização personalizado.
 
-The callback is always called ``isAuthorized()`` and it should return a
-boolean as to whether or not the user is allowed to access resources in
-the request. The callback is passed the active user so it can be
-checked::
+O retorno de chamada é sempre chamado de ``isAuthorized()`` e deve 
+retornar um valor booleano para permitir ou não ao usuário acessar 
+recursos na solicitação. O retorno de chamada é passado ao usuário 
+ativo para que possa ser verificado::
 
     class AppController extends Controller
     {
@@ -977,76 +977,73 @@ checked::
 
         public function isAuthorized($user = null)
         {
-            // Any registered user can access public functions
+            // Qualquer usuário registrado pode acessar funções públicas
             if (!$this->request->getParam('prefix')) {
                 return true;
             }
 
-            // Only admins can access admin functions
+            // Somente administradores podem acessar funções administrativas
             if ($this->request->getParam('prefix') === 'admin') {
                 return (bool)($user['role'] === 'admin');
             }
 
-            // Default deny
+            // Negação padrão
             return false;
         }
     }
 
-The above callback would provide a very simple authorization system
-where only users with role = admin could access actions that were in
-the admin prefix.
+O retorno de chamada acima forneceria um sistema de autorização muito simples, 
+no qual apenas usuários com role = admin poderiam acessar ações que estavam no 
+prefixo do administrador.
 
-Configuration options
-=====================
+Opções de configuração
+======================
 
-The following settings can all be defined either in your controller's
-``initialize()`` method or using ``$this->Auth->setConfig()`` in your ``beforeFilter()``:
+Todas as configurações a seguir podem ser definidas no método ``initialize()`` do seu 
+controlador ou usando ``$this->Auth->setConfig()`` no seu ``beforeFilter()``::
 
 ajaxLogin
-    The name of an optional view element to render when an AJAX request is made
-    with an invalid or expired session.
+    O nome de um elemento de exibição opcional a ser renderizado quando uma 
+    solicitação AJAX é feita com uma sessão inválida ou expirada.
 allowedActions
-    Controller actions for which user validation is not required.
+    Ações do controlador para as quais a validação do usuário não é necessária.
 authenticate
-    Set to an array of Authentication objects you want to use when
-    logging users in. There are several core authentication objects;
-    see the section on :ref:`authentication-objects`.
+    Defina como uma matriz de objetos de autenticação que você deseja 
+    usar ao fazer logon de usuários. Existem vários objetos de autenticação 
+    principais; veja a seção :ref:`authentication-objects`.
 authError
-    Error to display when user attempts to access an object or action to which
-    they do not have access.
-
-    You can suppress authError message from being displayed by setting this
-    value to boolean ``false``.
+    Erro para exibir quando o usuário tenta acessar um objeto ou ação ao qual não tem acesso.
+    
+    Você pode impedir que a mensagem authError seja exibida definindo esse valor como 
+    booleano ``false``.
 authorize
-    Set to an array of Authorization objects you want to use when
-    authorizing users on each request; see the section on
-    :ref:`authorization-objects`.
+    Defina como uma matriz de objetos de Autorização que você deseja 
+    usar ao autorizar usuários em cada solicitação; veja a seção :ref:`authorization-objects`.
 flash
-    Settings to use when Auth needs to do a flash message with
-    ``FlashComponent::set()``.
-    Available keys are:
-
-    - ``element`` - The element to use; defaults to 'default'.
-    - ``key`` - The key to use; defaults to 'auth'.
-    - ``params`` - The array of additional parameters to use; defaults to '[]'.
-
+    Configurações a serem usadas quando o Auth precisar enviar 
+    uma mensagem flash com ``FlashComponent::set()``. 
+    
+    As chaves disponíveis são:
+    - ``element`` - O elemento a ser usado; o padrão é 'default'.
+    - ``key`` - A chave para usar; o padrão é 'auth'.
+    - ``params`` - A matriz de parâmetros adicionais a serem usados; o padrão é '[]'.
 loginAction
-    A URL (defined as a string or array) to the controller action that handles
-    logins. Defaults to ``/users/login``.
+    Uma URL (definida como uma sequência ou matriz) para a ação do controlador 
+    que lida com logins. O padrão é ``/users/login``.
 loginRedirect
-    The URL (defined as a string or array) to the controller action users
-    should be redirected to after logging in. This value will be ignored if the
-    user has an ``Auth.redirect`` value in their session.
+    A URL (definida como uma sequência ou matriz) para os usuários da 
+    ação do controlador deve ser redirecionada após o login. Esse valor 
+    será ignorado se o usuário tiver um valor ``Auth.redirect`` em sua sessão.
 logoutRedirect
-    The default action to redirect to after the user is logged out. While
-    ``AuthComponent`` does not handle post-logout redirection, a redirect URL will
-    be returned from :php:meth:`AuthComponent::logout()`. Defaults to
-    ``loginAction``.
+    A ação padrão a ser redirecionada após o logout do usuário. Enquanto 
+    ``AuthComponent`` não lida com o redirecionamento pós-logout, uma URL 
+    de redirecionamento será retornada de :php:meth:`AuthComponent::logout()`. 
+    O padrão é ``loginAction``.
 unauthorizedRedirect
-    Controls handling of unauthorized access. By default unauthorized user is
-    redirected to the referrer URL or ``loginAction`` or '/'.
-    If set to ``false``, a ForbiddenException exception is thrown instead of
-    redirecting.
+    Controla a manipulação do acesso não autorizado. Por padrão, o usuário não 
+    autorizado é redirecionado para o URL do referenciador ``loginAction`` 
+    ou '/'. Se definido como ``false``, uma exceção ForbiddenException é 
+    lançada em vez de redirecionar.
 storage
     Storage class to use for persisting user record. When using stateless
     authenticator you should set this to ``Memory``. Defaults to ``Session``.
