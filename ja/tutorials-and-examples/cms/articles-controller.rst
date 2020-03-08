@@ -68,14 +68,14 @@ CakePHP のビューテンプレートは、アプリケーションのレイア
 アプリケーションは、複数のレイアウトを持つことができ、それらを切り替えることができますが、
 今回はデフォルトのレイアウトを使用しましょう。
 
-CakePHP のテンプレートファイルは、 **src/Template** の中で
+CakePHP のテンプレートファイルは、 **templates** の中で
 対応するコントローラーの名前をつけたフォルダーの中に保存されます。
 今回の場合、 'Articles' という名前のフォルダーを作成する必要があります。
 あなたのアプリケーションに以下のコードを追加してください。
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp -->
+    <!-- File: templates/Articles/index.php -->
 
     <h1>記事一覧</h1>
     <table>
