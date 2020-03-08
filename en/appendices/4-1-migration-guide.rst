@@ -111,3 +111,9 @@ View
 
 * Added ``TextHelper::slug()``. This method delegates to
   ``Cake\Utility\Text::slug()``.
+
+Utility
+-------
+
+* ``Hash::combine()`` now accepts ``null`` for the ``$keyPath`` parameter.
+  Providing null will result in a numerically indexed output array.
