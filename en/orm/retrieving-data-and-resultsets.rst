@@ -365,14 +365,13 @@ would do the following::
 
     class ArticlesTable extends Table
     {
-        public function findOwnedBy(Query $query, array $options)
+        public function findPublished(Query $query, array $options)
         {
-            $user = $options['user'];
-            return $query->where(['author_id' => $user->id]);
+            return $query->where(['published' => true]);
         }
     }
 
-    $query = $articles->find('ownedBy', ['user' => $userEntity]);
+    $query = $articles->find('published');
 
 Finder methods can modify the query as required, or use the ``$options`` to
 customize the finder operation with relevant application logic. You can also
