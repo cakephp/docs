@@ -67,7 +67,7 @@ Um exemplo de uso dessas opções::
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>
 
-Note that the parameter ``element`` will be always overridden while using
+Observe que o parâmetro ``element`` sempre será substituído ao usar
 
 Observe que o parâmetro ``element`` sempre será substituído ao usar ``__call()``. 
 Para recuperar um elemento específico de um plugin, você deve definir o parâmetro 
