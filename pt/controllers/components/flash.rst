@@ -5,53 +5,51 @@ Flash
 
 .. php:class:: FlashComponent(ComponentCollection $collection, array $config = [])
 
-FlashComponent provides a way to set one-time notification messages to be
-displayed after processing a form or acknowledging data. CakePHP refers to these
-messages as "flash messages". FlashComponent writes flash messages to
-``$_SESSION``, to be rendered in a View using
+O FlashComponent fornece uma maneira de definir as mensagens de notificação únicas 
+a serem exibidas após o processamento de um formulário ou o reconhecimento de dados. 
+CakePHP refere-se a essas mensagens como "mensagens flash". O FlashComponent grava 
+mensagens flash em ``$_SESSION``, para serem renderizadas em uma View usando 
 :doc:`FlashHelper </views/helpers/flash>`.
 
-Setting Flash Messages
-======================
+Configurando Mensagens em Flash
+===============================
 
-FlashComponent provides two ways to set flash messages: its ``__call()`` magic
-method and its ``set()`` method.  To furnish your application with verbosity,
-FlashComponent's ``__call()`` magic method allows you use a method name that
-maps to an element located under the **templates/element/Flash** directory.
-By convention, camelcased methods will map to the lowercased and underscored
-element name::
+O FlashComponent fornece duas maneiras de definir mensagens em flash: seu método 
+mágico ``__call()`` e seu método ``set()``. Para fornecer detalhes ao seu aplicativo, 
+o método mágico ``__call()`` do FlashComponent permite que você use um nome de método 
+que mapeie para um elemento localizado no diretório **templates/element/Flash**. Por 
+convenção, os métodos camelcased serão mapeados para o nome do elemento em minúsculas 
+e sublinhado::
 
-    // Uses templates/element/Flash/success.php
+    // Usa templates/element/Flash/success.php
     $this->Flash->success('This was successful');
 
-    // Uses templates/element/Flash/great_success.php
+    // Usa templates/element/Flash/great_success.php
     $this->Flash->greatSuccess('This was greatly successful');
 
-Alternatively, to set a plain-text message without rendering an element, you can
-use the ``set()`` method::
+Como alternativa, para definir uma mensagem de texto sem processar um elemento, 
+você pode usar o método ``set()``::
 
     $this->Flash->set('This is a message');
 
-Flash messages are appended to an array internally. Successive calls to
-``set()`` or ``__call()`` with the same key will append the messages in the
-``$_SESSION``. If you want to overwrite existing messages when setting a flash
-message, set the ``clear`` option to ``true`` when configuring the Component.
+Mensagens em Flash são anexadas a uma matriz internamente. Chamadas sucessivas 
+para ``set()`` ou ``__call()`` com a mesma chave anexarão as mensagens em 
+``$_SESSION``. Se você deseja sobrescrever as mensagens existentes ao definir 
+uma mensagem flash, defina a opção ``clear`` como ``true`` ao configurar o 
+componente.
 
-FlashComponent's ``__call()`` and ``set()`` methods optionally take a second
-parameter, an array of options:
+Os métodos ``__call()`` e ``set()`` do FlashComponent recebem opcionalmente um 
+segundo parâmetro, uma matriz de opções:
 
-* ``key`` Defaults to 'flash'. The array key found under the ``Flash`` key in
-  the session.
-* ``element`` Defaults to ``null``, but will automatically be set when using the
-  ``__call()`` magic method. The element name to use for rendering.
-* ``params`` An optional array of keys/values to make available as variables
-  within an element.
-* ``clear`` expects a ``bool`` and allows you to delete all messages in the
-  current stack and start a new one.
+* ``key`` O padrão é 'flash'. A chave da matriz encontrada sob a chave ``Flash`` na sessão.
+* ``element`` O padrão é ``null``, mas será automaticamente definido ao usar o método mágico 
+``__call()``. O nome do elemento a ser usado para renderização.
+* ``params`` Uma matriz opcional de chaves/valores para disponibilizar como variáveis dentro de um elemento.
+* ``clear`` espera um ``bool`` e permite excluir todas as mensagens da pilha atual e iniciar uma nova.
 
-An example of using these options::
+Um exemplo de uso dessas opções::
 
-    // In your Controller
+    // Em seu Controller
     $this->Flash->success('The user has been saved', [
         'key' => 'positive',
         'clear' => true,
@@ -61,43 +59,43 @@ An example of using these options::
         ]
     ]);
 
-    // In your View
+    // Em sua View
     <?= $this->Flash->render('positive') ?>
 
-    <!-- In templates/element/Flash/success.php -->
+    <!-- Em templates/element/Flash/success.php -->
     <div id="flash-<?= h($key) ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>
 
 Note that the parameter ``element`` will be always overridden while using
-``__call()``. In order to retrieve a specific element from a plugin, you should
-set the ``plugin`` parameter. For example::
 
-    // In your Controller
+Observe que o parâmetro ``element`` sempre será substituído ao usar ``__call()``. 
+Para recuperar um elemento específico de um plugin, você deve definir o parâmetro 
+``plugin``. Por exemplo::
+
+    // Em seu Controller
     $this->Flash->warning('My message', ['plugin' => 'PluginName']);
 
-The code above will use the **warning.php** element under
-**plugins/PluginName/templates/element/Flash** for rendering the flash
-message.
+O código acima usará o elemento **warning.php** em 
+**plugins/PluginName/templates/element/Flash** para renderizar a mensagem flash.
 
 .. note::
 
-    By default, CakePHP escapes the content in flash messages to prevent cross
-    site scripting. User data in your flash messages will be HTML encoded and
-    safe to be printed. If you want to include HTML in your flash messages, you
-    need to pass the ``escape`` option and adjust your flash message templates
-    to allow disabling escaping when the escape option is passed.
+    Por padrão, o CakePHP escapa o conteúdo das mensagens em flash para evitar 
+    scripts entre sites. Os dados do usuário em suas mensagens flash serão codificados 
+    em HTML e seguros para serem impressos. Se você deseja incluir HTML em suas mensagens 
+    em flash, é necessário passar a opção ``escape`` e ajustar seus modelos de mensagens 
+    em flash para permitir desativar a fuga quando a opção de escape é aprovada.
 
-HTML in Flash Messages
-======================
+HTML Em Mensagens Flash
+=======================
 
-It is possible to output HTML in flash messages by using the ``'escape'`` option
-key::
+É possível gerar HTML em mensagens flash usando a chave de opção ``'escape'``::
 
     $this->Flash->info(sprintf('<b>%s</b> %s', h($highlight), h($message)), ['escape' => false]);
 
-Make sure that you escape the input manually, then. In the above example
-``$highlight`` and ``$message`` are non-HTML input and therefore escaped.
+Certifique-se de escapar da entrada manualmente, então. No exemplo acima, ``$highlights`` e 
+``$message`` são entradas não HTML e, portanto, escapam.
 
-For more information about rendering your flash messages, please refer to the
-:doc:`FlashHelper </views/helpers/flash>` section.
+Para obter mais informações sobre como renderizar suas mensagens em flash, consulte a 
+seção :doc:`FlashHelper </views/helpers/flash>`.
