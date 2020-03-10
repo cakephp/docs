@@ -269,14 +269,6 @@ Quaisquer solicitações que tentem classificar campos que não estão na lista 
 Limitar o Número Máximo de Linhas por Página
 ============================================
 
-The number of results that are fetched per page is exposed to the user as the
-``limit`` parameter. It is generally undesirable to allow users to fetch all
-rows in a paginated set. The ``maxLimit`` option asserts that no one can set
-this limit too high from the outside. By default CakePHP limits the maximum
-number of rows that can be fetched to 100. If this default is not appropriate
-for your application, you can adjust it as part of the pagination options, for
-example reducing it to ``10``
-
 O número de resultados que são buscados por página é exposto ao usuário como o 
 parâmetro ``limit``. Geralmente, é indesejável permitir que os usuários busquem 
 todas as linhas em um conjunto paginado. A opção ``maxLimit`` afirma que ninguém 
