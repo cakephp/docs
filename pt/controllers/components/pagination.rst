@@ -199,17 +199,17 @@ para paginar tags e artigos ao mesmo tempo::
 
     /dashboard?article[page]=1&tag[page]=3
 
-See the :ref:`paginator-helper-multiple` section for how to generate scoped HTML
-elements and URLs for pagination.
+Veja a seção :ref:`paginator-helper-multiple` para saber como gerar elementos HTML 
+com escopo e URLs para paginação.
 
-Paginating the Same Model multiple Times
-----------------------------------------
+Paginando o Mesmo Modelo Várias Vezes
+-------------------------------------
 
-To paginate the same model multiple times within a single controller action you
-need to define an alias for the model. See :ref:`table-registry-usage` for 
-additional details on how to use the table registry::
+Para paginar o mesmo modelo várias vezes em uma única ação do controlador, é 
+necessário definir um alias para o modelo. Consulte :ref:`table-registry-usage` 
+para obter detalhes adicionais sobre como usar o registro da tabela::
 
-    // In a controller action
+    // Em um método do controlador
     $this->paginate = [
         'ArticlesTable' => [
             'scope' => 'published_articles',
@@ -227,7 +227,7 @@ additional details on how to use the table registry::
         ],
     ];
     
-    // Register an additional table object to allow differentiating in pagination component
+    // Registre um objeto de tabela adicional para permitir a diferenciação no componente de paginação
     TableRegistry::getTableLocator()->setConfig('UnpublishedArticles', [
         'className' => 'App\Model\Table\ArticlesTable',
         'table' => 'articles',
@@ -248,15 +248,15 @@ additional details on how to use the table registry::
 
 .. _control-which-fields-used-for-ordering:
 
-Control which Fields Used for Ordering
-======================================
+Controlar Quais Campos Usados para Ordenamento
+==============================================
 
-By default sorting can be done on any non-virtual column a table has. This is
-sometimes undesirable as it allows users to sort on un-indexed columns that can
-be expensive to order by. You can set the whitelist of fields that can be sorted
-using the ``sortWhitelist`` option. This option is required when you want to
-sort on any associated data, or computed fields that may be part of your
-pagination query::
+Por padrão, a classificação pode ser feita em qualquer coluna não virtual que uma 
+tabela tenha. Às vezes, isso é indesejável, pois permite que os usuários classifiquem 
+em colunas não indexadas que podem ser caras de solicitar. Você pode definir a lista de 
+permissões dos campos que podem ser classificados usando a opção ``sortWhitelist``. Essa 
+opção é necessária quando você deseja classificar os dados associados ou os campos computados 
+que podem fazer parte da sua consulta de paginação::
 
     public $paginate = [
         'sortWhitelist' => [
@@ -264,11 +264,10 @@ pagination query::
         ]
     ];
 
-Any requests that attempt to sort on fields not in the whitelist will be
-ignored.
+Quaisquer solicitações que tentem classificar campos que não estão na lista de permissões serão ignoradas.
 
-Limit the Maximum Number of Rows per Page
-=========================================
+Limitar o Número Máximo de Linhas por Página
+============================================
 
 The number of results that are fetched per page is exposed to the user as the
 ``limit`` parameter. It is generally undesirable to allow users to fetch all
@@ -276,10 +275,18 @@ rows in a paginated set. The ``maxLimit`` option asserts that no one can set
 this limit too high from the outside. By default CakePHP limits the maximum
 number of rows that can be fetched to 100. If this default is not appropriate
 for your application, you can adjust it as part of the pagination options, for
-example reducing it to ``10``::
+example reducing it to ``10``
+
+O número de resultados que são buscados por página é exposto ao usuário como o 
+parâmetro ``limit``. Geralmente, é indesejável permitir que os usuários busquem 
+todas as linhas em um conjunto paginado. A opção ``maxLimit`` afirma que ninguém 
+pode definir esse limite muito alto do lado de fora. Por padrão, o CakePHP limita 
+o número máximo de linhas que podem ser buscadas para 100. Se esse padrão não for 
+apropriado para a sua aplicação, você poderá ajustá-lo como parte das opções de paginação, 
+por exemplo, reduzindo-o para ``10``::
 
     public $paginate = [
-        // Other keys here.
+        // Outras chaves aqui.
         'maxLimit' => 10
     ];
 
@@ -287,10 +294,15 @@ If the request's limit param is greater than this value, it will be reduced to
 the ``maxLimit`` value.
 
 Joining Additional Associations
+
+Outras chaves aqui. Se o parâmetro de limite da solicitação for maior que esse valor, 
+ele será reduzido ao valor ``maxLimit``.
+
+Juntando Associações Adicionais
 ===============================
 
-Additional associations can be loaded to the paginated table by using the
-``contain`` parameter::
+Associações adicionais podem ser carregadas na tabela paginada usando o 
+parâmetro ``contains``::
 
     public function index()
     {
@@ -301,15 +313,14 @@ Additional associations can be loaded to the paginated table by using the
         $this->set('articles', $this->paginate($this->Articles));
     }
 
-Out of Range Page Requests
-==========================
+Solicitações de Página Fora do Intervalo
+========================================
 
-The PaginatorComponent will throw a ``NotFoundException`` when trying to
-access a non-existent page, i.e. page number requested is greater than total
-page count.
+O PaginatorComponent lançará uma ``NotFoundException`` ao tentar acessar uma página 
+inexistente, ou seja, o número da página solicitada é maior que a contagem total de páginas.
 
-So you could either let the normal error page be rendered or use a try catch
-block and take appropriate action when a ``NotFoundException`` is caught::
+Portanto, você pode permitir que a página de erro normal seja renderizada ou usar um 
+bloco try catch e executar a ação apropriada quando um ``NotFoundException`` for capturado::
 
     use Cake\Http\Exception\NotFoundException;
 
@@ -318,17 +329,17 @@ block and take appropriate action when a ``NotFoundException`` is caught::
         try {
             $this->paginate();
         } catch (NotFoundException $e) {
-            // Do something here like redirecting to first or last page.
-            // $this->request->getParam('paging') will give you required info.
+            // Faça algo aqui como redirecionar para a primeira ou a última página. 
+            // $this->request->getParam('paging') fornecerá as informações necessárias.
         }
     }
 
-Pagination in the View
-======================
+Paginação na View
+=================
 
-Check the :php:class:`~Cake\\View\\Helper\\PaginatorHelper` documentation for
-how to create links for pagination navigation.
+Verifique a documentação :php:class:`~Cake\\View\\Helper\\PaginatorHelper` 
+para saber como criar links para navegação de paginação.
 
 .. meta::
-    :title lang=en: Pagination
-    :keywords lang=en: order array,query conditions,php class,web applications,headaches,obstacles,complexity,programmers,parameters,paginate,designers,cakephp,satisfaction,developers
+    :title lang=pt: Paginação
+    :keywords lang=pt: matriz de pedidos, condições de consulta, classe php, aplicativos web, dores de cabeça, obstáculos, complexidade, programadores, parâmetros, paginar, designers, cakephp, satisfação, desenvolvedores
