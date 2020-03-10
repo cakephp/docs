@@ -1,5 +1,5 @@
-Pagination
-##########
+Paginação
+#########
 
 .. php:namespace:: Cake\Controller\Component
 
