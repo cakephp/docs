@@ -290,12 +290,7 @@ por exemplo, reduzindo-o para ``10``::
         'maxLimit' => 10
     ];
 
-If the request's limit param is greater than this value, it will be reduced to
-the ``maxLimit`` value.
-
-Joining Additional Associations
-
-Outras chaves aqui. Se o parâmetro de limite da solicitação for maior que esse valor, 
+Se o parâmetro de limite da solicitação for maior que esse valor, 
 ele será reduzido ao valor ``maxLimit``.
 
 Juntando Associações Adicionais
