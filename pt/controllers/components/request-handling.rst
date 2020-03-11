@@ -1,23 +1,23 @@
-Request Handling
-################
+Request Handler (Tratamento de Requisições)
+###########################################
 
 .. php:class:: RequestHandlerComponent(ComponentCollection $collection, array $config = [])
 
-The Request Handler component is used in CakePHP to obtain additional
-information about the HTTP requests that are made to your application. You can
-use it to see what content types clients prefer, automatically parse request
-input, define how content types map to view classes or template paths.
+O componente Request Handler é usado no CakePHP para obter informações adicionais 
+sobre as solicitações HTTP feitas para sua aplicação. Você pode usá-lo para ver quais 
+tipos de conteúdo os clientes preferem, analisar automaticamente a entrada da solicitação, 
+definir como os tipos de conteúdo são mapeados para exibir classes ou caminhos de modelo.
 
-By default RequestHandler will automatically detect AJAX requests based on the
-``X-Requested-With`` HTTP header that many JavaScript libraries use. When used
-in conjunction with :php:meth:`Cake\\Routing\\Router::extensions()`,
-RequestHandler will automatically switch the layout and template files to those
-that match non-HTML media types. Furthermore, if a helper with the same name as
-the requested extension exists, it will be added to the Controllers Helper
-array. Lastly, if XML/JSON data is POST'ed to your Controllers, it will be
-parsed into an array which is assigned to ``$this->request->getData()``, and can then
-be accessed as you would standard POST data. In order to make use of
-RequestHandler it must be included in your ``initialize()`` method::
+Por padrão, o RequestHandler detectará automaticamente solicitações AJAX com base no 
+cabeçalho HTTP ``X-Requested-With`` que muitas bibliotecas JavaScript usam. Quando usado 
+em conjunto com :php:meth:`Cake\\Routing\\Router::extensions()`, o RequestHandler muda 
+automaticamente os arquivos de layout e modelo para aqueles que correspondem aos tipos 
+de mídia não HTML. Além disso, se existir um auxiliar com o mesmo nome que a extensão 
+solicitada, ele será adicionado à matriz Auxiliar de Controladores. Por fim, se os 
+dados XML/JSON forem enviados para seus controladores, eles serão analisados em 
+uma matriz atribuída a ``$this->request->getData()`` e, e pode ser acessado como 
+faria com os dados POST padrão. Para fazer uso do RequestHandler, ele deve ser incluído no 
+seu método ``initialize()``::
 
     class WidgetsController extends AppController
     {
@@ -27,22 +27,22 @@ RequestHandler it must be included in your ``initialize()`` method::
             $this->loadComponent('RequestHandler');
         }
 
-        // Rest of controller
+        // Resto do controller
     }
 
-Obtaining Request Information
-=============================
+Obtenção de Informações de Solicitação
+======================================
 
-Request Handler has several methods that provide information about
-the client and its request.
+O manipulador de solicitações possui vários métodos que fornecem informações sobre o 
+cliente e sua solicitação.
 
 .. php:method:: accepts($type = null)
 
-    $type can be a string, or an array, or null. If a string, ``accepts()``
-    will return ``true`` if the client accepts the content type. If an
-    array is specified, ``accepts()`` return ``true`` if any one of the content
-    types is accepted by the client. If null returns an array of the
-    content-types that the client accepts. For example::
+    $type pode ser uma string, uma matriz ou nulo. Se uma string, ``accept()`` 
+    retornará ``true`` se o cliente aceitar o tipo de conteúdo. Se uma matriz 
+    for especificada, ``accept()`` retorna ``true`` se qualquer um dos tipos de 
+    conteúdo for aceito pelo cliente. Se null, retorna uma matriz dos tipos de 
+    conteúdo que o cliente aceita. Por exemplo::
 
         class ArticlesController extends AppController
         {
@@ -56,38 +56,37 @@ the client and its request.
             public function beforeFilter(EventInterface $event)
             {
                 if ($this->RequestHandler->accepts('html')) {
-                    // Execute code only if client accepts an HTML (text/html)
-                    // response.
+                    // Execute o código apenas se o cliente aceitar uma resposta 
+                    // HTML (text/html).
                 } elseif ($this->RequestHandler->accepts('xml')) {
-                    // Execute XML-only code
+                    // Executar código somente XML
                 }
                 if ($this->RequestHandler->accepts(['xml', 'rss', 'atom'])) {
-                    // Executes if the client accepts any of the above: XML, RSS
-                    // or Atom.
+                    // Executa se o cliente aceita qualquer um dos itens acima: XML, RSS 
+                    // ou Atom.
                 }
             }
         }
 
-Other request 'type' detection methods include:
+Outros métodos de detecção de 'type' de solicitação incluem:
 
 .. php:method:: isXml()
 
-    Returns ``true`` if the current request accepts XML as a response.
+   Retorna ``true`` se a solicitação atual aceitar XML como resposta.
 
 .. php:method:: isRss()
 
-    Returns ``true`` if the current request accepts RSS as a response.
+    Retorna ``true`` se a solicitação atual aceitar RSS como resposta.
 
 .. php:method:: isAtom()
 
-    Returns ``true`` if the current call accepts an Atom response, false
-    otherwise.
+    Retorna ``true`` se a chamada atual aceitar uma resposta Atom, caso contrário, false.
 
 .. php:method:: isMobile()
 
-    Returns ``true`` if user agent string matches a mobile web browser, or
-    if the client accepts WAP content. The supported Mobile User Agent
-    strings are:
+    Retorna ``true`` se a sequência do agente do usuário corresponder a um 
+    navegador da Web móvel ou se o cliente aceitar conteúdo WAP. As sequências 
+    suportadas do Mobile User Agent são:
 
     -  Android
     -  AvantGo
@@ -118,27 +117,28 @@ Other request 'type' detection methods include:
 
 .. php:method:: isWap()
 
-    Returns ``true`` if the client accepts WAP content.
+    Retorna ``true`` se o cliente aceitar conteúdo WAP.
 
-All of the above request detection methods can be used in a similar
-fashion to filter functionality intended for specific content
-types. For example when responding to AJAX requests, you often will
-want to disable browser caching, and change the debug level.
-However, you want to allow caching for non-AJAX requests. The
-following would accomplish that::
+Todos os métodos de detecção de solicitação acima podem ser usados de 
+maneira semelhante para filtrar a funcionalidade destinada a tipos de 
+conteúdo específicos. Por exemplo, ao responder a solicitações AJAX, 
+geralmente você deseja desativar o cache do navegador e alterar o nível 
+de depuração. No entanto, você deseja permitir o armazenamento em cache 
+para solicitações não-AJAX. O seguinte exemplo faria isso::
 
         if ($this->request->is('ajax')) {
             $this->response->disableCache();
         }
-        // Continue Controller action
+        // Continua ação do controlador
 
-Automatically Decoding Request Data
-===================================
+Decodificação Automática de Dados de Solicitação
+================================================
 
-Add a request data decoder. The handler should contain a callback, and any
-additional arguments for the callback. The callback should return
-an array of data contained in the request input. For example adding a CSV
-handler could look like::
+Adicione um decodificador de dados de solicitação. O manipulador deve conter 
+um retorno de chamada e quaisquer argumentos adicionais para o retorno de 
+chamada. O retorno de chamada deve retornar uma matriz de dados contidos na 
+entrada da solicitação. Por exemplo, adicionar um manipulador de CSV pode 
+parecer::
 
     class ArticlesController extends AppController
     {
@@ -160,84 +160,84 @@ handler could look like::
         }
     }
 
-You can use any `callable <http://php.net/callback>`_ for the handling function.
-You can also pass additional arguments to the callback, this is useful for
-callbacks like ``json_decode``::
+Você pode usar qualquer `callable <http://php.net/callback>`_ para a função 
+de manipulação. Você também pode passar argumentos adicionais para o retorno de 
+chamada, isso é útil para retornos de chamada como ``json_decode``::
 
     $this->RequestHandler->setConfig('inputTypeMap.json', ['json_decode', true]);
 
-The above will make ``$this->request->getData()`` an array of the JSON input data,
-without the additional ``true`` you'd get a set of ``stdClass`` objects.
+O exemplo acima tornará ``$this->request->getData()`` uma matriz dos dados de entrada JSON, 
+sem o ``true`` adicional, você obteria um conjunto de objetos ``stdClass``.
 
 .. versionchanged:: 3.6.0
-    You should prefer using :ref:`body-parser-middleware` instead of
+    Você deve preferir usar :ref:`body-parser-middleware` em vez de 
     RequestHandlerComponent.
 
-Checking Content-Type Preferences
-=================================
+VerificandoPreferências de Tipo de Conteúdo
+===========================================
 
 .. php:method:: prefers($type = null)
 
-Determines which content-types the client prefers. If no parameter
-is given the most likely content type is returned. If $type is an
-array the first type the client accepts will be returned.
-Preference is determined primarily by the file extension parsed by
-Router if one has been provided, and secondly by the list of
-content-types in ``HTTP_ACCEPT``::
+Determina quais tipos de conteúdo o cliente prefere. Se nenhum parâmetro 
+for fornecido, o tipo de conteúdo mais provável será retornado. Se $type
+for uma matriz, o primeiro tipo aceito pelo cliente será retornado. A 
+preferência é determinada principalmente pela extensão do arquivo analisada 
+pelo roteador, se houver, e por uma lista de tipos de conteúdo em ``HTTP_ACCEPT``::
 
     $this->RequestHandler->prefers('json');
 
-Responding To Requests
-======================
+Respondendo a Solicitações
+==========================
 
 .. php:method:: renderAs($controller, $type)
 
-Change the render mode of a controller to the specified type. Will
-also append the appropriate helper to the controller's helper array
-if available and not already in the array::
+Altere o modo de renderização de um controlador para o tipo especificado. 
+Também anexará o auxiliar apropriado à matriz auxiliar do controlador, se 
+disponível e ainda não estiver na matriz::
 
-    // Force the controller to render an xml response.
+    // Force o controlador a renderizar uma resposta xml.
     $this->RequestHandler->renderAs($this, 'xml');
 
-This method will also attempt to add a helper that matches your current content
-type. For example if you render as ``rss``, the ``RssHelper`` will be added.
+Este método também tentará adicionar um auxiliar que corresponda ao seu tipo de 
+conteúdo atual. Por exemplo, se você renderizar como ``rss``, o ``RssHelper`` 
+será adicionado.
 
 .. php:method:: respondAs($type, $options)
 
-Sets the response header based on content-type map names. This method lets you
-set a number of response properties at once::
+Define o cabeçalho da resposta com base nos nomes do mapa do tipo de conteúdo. 
+Este método permite definir várias propriedades de resposta de uma só vez::
 
     $this->RequestHandler->respondAs('xml', [
-        // Force download
+        // Força o download
         'attachment' => true,
         'charset' => 'UTF-8'
     ]);
 
 .. php:method:: responseType()
 
-Returns the current response type Content-type header or null if one has yet to
-be set.
+Retorna o tipo de resposta atual com o Cabeçalho do tipo de conteúdo ou nulo se 
+ainda não tiver sido definido.
 
-Taking Advantage of HTTP Cache Validation
-=========================================
+Aproveitando a Validação de Cache HTTP
+======================================
 
-The HTTP cache validation model is one of the processes used for cache
-gateways, also known as reverse proxies, to determine if they can serve a
-stored copy of a response to the client. Under this model, you mostly save
-bandwidth, but when used correctly you can also save some CPU processing,
-reducing this way response times.
+O modelo de validação de cache HTTP é um dos processos usados para gateways de cache, 
+também conhecidos como proxies reversos, para determinar se eles podem servir uma cópia 
+armazenada de uma resposta ao cliente. Sob esse modelo, você economiza principalmente 
+largura de banda, mas, quando usado corretamente. Também é possível economizar algum 
+processamento da CPU, reduzindo assim os tempos de resposta.
 
-Enabling the RequestHandlerComponent in your controller automatically activates
-a check done before rendering the view. This check compares the response object
-against the original request to determine whether the response was not modified
-since the last time the client asked for it.
+A ativação do RequestHandlerComponent no seu controlador ativa automaticamente uma 
+verificação feita antes de renderizar a exibição. Essa verificação compara o objeto de 
+resposta com a solicitação original para determinar se a resposta não foi modificada 
+desde a última vez que o cliente solicitou.
 
-If response is evaluated as not modified, then the view rendering process is
-stopped, saving processing time, saving bandwidth and no content is returned to
-the client. The response status code is then set to ``304 Not Modified``.
+Se a resposta for avaliada como não modificada, o processo de renderização da visualização 
+será interrompido, economizando tempo de processamento, economizando largura de banda e nenhum 
+conteúdo será retornado ao cliente. O código de status da resposta é então definido como ``304 Not Modified``.
 
-You can opt-out this automatic checking by setting the ``checkHttpCache``
-setting to ``false``::
+Você pode desativar essa verificação automática definindo a configuração ``checkHttpCache`` 
+como ``false``::
 
     public function initialize(): void
     {
@@ -247,14 +247,14 @@ setting to ``false``::
         ]);
     }
 
-Using Custom ViewClasses
-========================
+Usando ViewClasses Customizadas
+===============================
 
-When using JsonView/XmlView you might want to override the default serialization
-with a custom View class, or add View classes for other types.
+Ao usar o JsonView/XmlView, você pode substituir a serialização padrão por uma 
+classe View personalizada ou adicionar classes View para outros tipos.
 
-You can map existing and new types to your custom classes. You can also set this
-automatically by using the ``viewClassMap`` setting::
+Você pode mapear tipos novos e existentes para suas classes personalizadas. Você 
+também pode definir isso automaticamente usando a configuração ``viewClassMap``::
 
     public function initialize(): void
     {
@@ -269,5 +269,5 @@ automatically by using the ``viewClassMap`` setting::
     }
 
 .. meta::
-    :title lang=en: Request Handling
-    :keywords lang=en: handler component,javascript libraries,public components,null returns,model data,request data,content types,file extensions,ajax,meth,content type,array,conjunction,cakephp,insight,php
+    :title lang=pt: Request Handling
+    :keywords lang=pt: componente manipulador, bibliotecas javascript, componentes públicos, retornos nulos, dados do modelo, dados de solicitação, tipos de conteúdo, extensões de arquivo, ajax, meth, tipo de conteúdo, matriz, conjunção, cakephp, insight, php
