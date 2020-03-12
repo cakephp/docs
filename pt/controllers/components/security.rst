@@ -128,23 +128,21 @@ estrutura e comparar o hash.
     Nem impedirá que as opções de rádio sejam adicionadas/alteradas.
 
 unlockedFields
-    Set to a list of form fields to exclude from POST validation. Fields can be
-    unlocked either in the Component, or with
-    :php:meth:`FormHelper::unlockField()`. Fields that have been unlocked are
-    not required to be part of the POST and hidden unlocked fields do not have
-    their values checked.
+    Defina para uma lista de campos de formulário a serem excluídos da validação 
+    do POST. Os campos podem ser desbloqueados no Component ou com :php:meth:`FormHelper::unlockField()`. 
+    Os campos que foram desbloqueados não precisam fazer parte do POST e os 
+    campos desbloqueados ocultos não têm seus valores verificados.
 
 validatePost
-    Set to ``false`` to completely skip the validation of POST
-    requests, essentially turning off form validation.
+    Defina como ``false`` para ignorar completamente a validação 
+    de solicitações POST, essencialmente desativando a validação de formulário.
 
+Uso
+===
 
-Usage
-=====
-
-Using the security component is generally done in the controller's
-``beforeFilter()``. You would specify the security restrictions you
-want and the Security Component will enforce them on its startup::
+Geralmente, o uso do componente de segurança é feito no ``beforeFilter()`` do 
+controlador. Você especificaria as restrições de segurança que deseja e o 
+Componente de Segurança as aplicará em sua inicialização::
 
     namespace App\Controller;
 
@@ -169,8 +167,8 @@ want and the Security Component will enforce them on its startup::
         }
     }
 
-The above example would force all actions that had admin routing to
-require secure SSL requests::
+O exemplo acima forçaria todas as ações que tinham roteamento de 
+administrador a exigir solicitações SSL seguras::
 
     namespace App\Controller;
 
@@ -204,30 +202,28 @@ require secure SSL requests::
         }
     }
 
-This example would force all actions that had admin routing to require secure
-SSL requests. When the request is black holed, it will call the nominated
-``forceSSL()`` callback which will redirect non-secure requests to secure
-requests automatically.
+Este exemplo forçaria todas as ações que tinham roteamento de administrador a 
+exigir solicitações SSL seguras. Quando a solicitação é ocultada em preto, ele 
+chama o retorno de chamada ``forceSSL()``, que redirecionará solicitações não 
+seguras para proteger solicitações automaticamente.
 
 .. _security-csrf:
 
-CSRF Protection
-===============
+Proteção CSRF
+=============
 
-CSRF or Cross Site Request Forgery is a common vulnerability in web
-applications. It allows an attacker to capture and replay a previous request,
-and sometimes submit data requests using image tags or resources on other
-domains. To enable CSRF protection features use the
-:ref:`csrf-middleware`.
+CSRF ou falsificação de solicitação entre sites é uma vulnerabilidade comum em 
+aplicativos da web. Ele permite que um invasor capture e reproduza uma solicitação 
+anterior e, às vezes, envie solicitações de dados usando tags ou recursos de imagem 
+em outros domínios. Para habilitar os recursos de proteção CSRF, use :ref:`csrf-middleware`.
 
-Disabling Security Component for Specific Actions
-=================================================
+Desabilitando o Componente de Segurança para Ações Específicas
+==============================================================
 
-There may be cases where you want to disable all security checks for an action
-(ex. AJAX requests).  You may "unlock" these actions by listing them in
-``$this->Security->unlockedActions`` in your ``beforeFilter()``. The
-``unlockedActions`` property will **not** affect other features of
-``SecurityComponent``::
+Pode haver casos em que você deseja desativar todas as verificações de 
+segurança de uma ação (por exemplo, solicitações AJAX). Você pode "desbloquear" 
+essas ações listando-as em ``$this->Security->unlockedActions`` em seu ``beforeFilter()``. 
+A propriedade ``unlockedActions`` **não** afeta outros recursos do ``SecurityComponent``::
 
     namespace App\Controller;
 
@@ -250,8 +246,8 @@ There may be cases where you want to disable all security checks for an action
         }
     }
 
-This example would disable all security checks for the edit action.
+Este exemplo desabilitaria todas as verificações de segurança da ação de edição.
 
 .. meta::
-    :title lang=en: Security
-    :keywords lang=en: configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class,disable security,unlockActions
+    :title lang=pt: Segurança
+    :keywords lang=pt: parâmetros configuráveis, componente de segurança, parâmetros de configuração, solicitação inválida, recursos de proteção, segurança mais rígida, holing, classe php, meth, erro 404, período de inatividade, csrf, matriz, envio, classe de segurança, desativar segurança, unlockActions
