@@ -1,59 +1,57 @@
-Segurança
-#########
+Security (Segurança)
+####################
 
 .. php:class:: SecurityComponent(ComponentCollection $collection, array $config = [])
 
-The Security Component creates an easy way to integrate tighter
-security in your application. It provides methods for various tasks like:
+O componente de segurança cria uma maneira fácil de integrar maior segurança ao 
+seu aplicativo. Ele fornece métodos para várias tarefas, como:
 
-* Restricting which HTTP methods your application accepts.
-* Form tampering protection
-* Requiring that SSL be used.
-* Limiting cross controller communication.
+* Restringindo quais métodos HTTP seu aplicativo aceita.
+* Proteção contra violação de formulário
+* Exigindo que o SSL seja usado.
+* Limitar a comunicação entre controladores.
 
-Like all components it is configured through several configurable parameters.
-All of these properties can be set directly or through setter methods of the
-same name in your controller's ``beforeFilter()``.
+Como todos os componentes, ele é ajustado através de vários parâmetros configuráveis. 
+Todas essas propriedades podem ser definidas diretamente ou através de métodos setter 
+com o mesmo nome no ``beforeFilter()`` do seu controlador.
 
-By using the Security Component you automatically get form tampering protection.
-Hidden token fields will automatically be inserted into forms and checked by the
-Security component.
+Ao usar o componente de segurança, você obtém automaticamente proteção 
+contra violação de formulários. Os campos de token oculto são inseridos 
+automaticamente nos formulários e verificados pelo componente Security.
 
-If you are using Security component's form protection features and
-other components that process form data in their ``startup()``
-callbacks, be sure to place Security Component before those
-components in your ``initialize()`` method.
+Se você estiver usando os recursos de proteção de formulário do componente 
+Security e outros componentes que processam dados do formulário em seus 
+retornos de chamada ``startup()``, certifique-se de colocar o Componente 
+de Segurança antes desses componentes no método ``initialize()``.
 
 .. note::
 
-    When using the Security Component you **must** use the FormHelper to create
-    your forms. In addition, you must **not** override any of the fields' "name"
-    attributes. The Security Component looks for certain indicators that are
-    created and managed by the FormHelper (especially those created in
-    :php:meth:`~Cake\\View\\Helper\\FormHelper::create()` and
-    :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`).  Dynamically altering
-    the fields that are submitted in a POST request (e.g.  disabling, deleting
-    or creating new fields via JavaScript) is likely to cause the request to be
-    send to the blackhole callback.
+    Ao usar o componente de segurança, você deve usar o FormHelper para criar seus 
+    formulários. Além disso, você não deve substituir nenhum dos atributos "name" dos 
+    campos. O componente de segurança procura determinados indicadores criados e 
+    gerenciados pelo FormHelper (especialmente aqueles criados em 
+    :php:meth:`~Cake\\View\\Helper\\FormHelper::create()` e :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`). 
+    Alterar dinamicamente os campos que são enviados em uma solicitação POST (por exemplo, 
+    desativar, excluir ou criar novos campos via JavaScript) provavelmente fará com 
+    que a solicitação seja enviada como retorno a um blackhole.
+    
+    Você sempre deve verificar o método HTTP que está sendo usado antes da execução 
+    para evitar efeitos colaterais. Você deve :ref:`check the HTTP method <check-the-request>` 
+    ou usar :php:meth:`Cake\\Http\\ServerRequest::allowMethod()` para garantir que 
+    o método HTTP correto seja usado.
 
-    You should always verify the HTTP method being used before executing to avoid
-    side-effects. You should :ref:`check the HTTP method <check-the-request>` or
-    use :php:meth:`Cake\\Http\\ServerRequest::allowMethod()` to ensure the correct
-    HTTP method is used.
-
-Handling Blackhole Callbacks
-============================
+Como Lidar com Retornos de Chamada Blackhole
+============================================
 
 .. php:method:: blackHole(Controller $controller, string $error = '', ?SecurityException $exception = null)
 
-If an action is restricted by the Security Component it is
-'black-holed' as an invalid request which will result in a 400 error
-by default. You can configure this behavior by setting the
-``blackHoleCallback`` configuration option to a callback function
-in the controller.
+Se uma ação for restringida pelo Componente de Segurança, ela será 'ocultada em preto' 
+como uma solicitação inválida que resultará em um erro 400 por padrão. Você pode configurar 
+esse comportamento definindo a opção de configuração ``blackHoleCallback`` como uma função 
+de retorno de chamada no controlador.
 
-By configuring a callback method you can customize how the blackhole process
-works::
+Ao configurar um método de retorno de chamada, você pode personalizar como o processo do 
+blackhole funciona::
 
     public function beforeFilter(EventInterface $event)
     {
@@ -65,73 +63,69 @@ works::
     public function blackhole($type, SecurityException $exception)
     {
         if ($exception->getMessage() === 'Request is not SSL and the action is required to be secure') {
-            // Reword the exception message with a translatable string.
+            // Reescreva a mensagem de exceção com uma sequência traduzível.
             $exception->setMessage(__('Please access the requested page through HTTPS'));
         }
         
-        // Re-throw the conditionally reworded exception.
+        // Lance novamente a exceção reformulada condicionalmente.
         throw $exception;
 
-        // Alternatively, handle the error, e.g. set a flash message &
-        // redirect to HTTPS version of the requested page.
+        // Como alternativa, lide com o erro, ex.: defina uma mensagem flash e 
+        // redirecione para a versão HTTPS da página solicitada.
     }
 
-The ``$type`` parameter can have the following values:
+O parâmetro ``$type`` pode ter os seguintes valores:
 
-* 'auth' Indicates a form validation error, or a controller/action mismatch
-  error.
-* 'secure' Indicates an SSL method restriction failure.
+* 'auth' Indica um erro de validação do formulário ou um erro de incompatibilidade de controlador/ação.
+* 'secure' Indica uma falha de restrição do método SSL.
 
-Restrict Actions to SSL
+Restringir Ações ao SSL
 =======================
 
 .. php:method:: requireSecure()
 
-    Sets the actions that require a SSL-secured request. Takes any
-    number of arguments. Can be called with no arguments to force all
-    actions to require a SSL-secured.
+    Define as ações que requerem uma solicitação protegida por SSL. 
+    Leva qualquer número de argumentos. Pode ser chamado sem argumentos 
+    para forçar todas as ações a exigir um SSL protegido.
 
 .. php:method:: requireAuth()
 
-    Sets the actions that require a valid Security Component generated
-    token. Takes any number of arguments. Can be called with no
-    arguments to force all actions to require a valid authentication.
-
-Restricting Cross Controller Communication
-==========================================
+    Define as ações que requerem um token válido gerado pelo Componente de segurança. 
+    Leva qualquer número de argumentos. Pode ser chamado sem argumentos para forçar 
+    todas as ações a exigir uma autenticação válida.
+    
+Restringindo a Comunicação entre Controladores
+==============================================
 
 allowedControllers
-    A list of controllers which can send requests
-    to this controller.
-    This can be used to control cross controller requests.
+    Uma lista de controladores que podem enviar solicitações para esse controlador.
+    Isso pode ser usado para controlar solicitações entre controladores.
 allowedActions
-    A list of actions which are allowed to send requests
-    to this controller's actions.
-    This can be used to control cross controller requests.
+    Uma lista de ações que têm permissão para enviar solicitações para as ações deste controlador.
+    Isso pode ser usado para controlar solicitações entre controladores.
 
-These configuration options allow you to restrict cross controller
-communication.
+Essas opções de configuração permitem restringir a comunicação entre controladores.
 
-Form Tampering Prevention
-=========================
+Prevenção de Adulteração de Formulários
+=======================================
 
-By default the ``SecurityComponent`` prevents users from tampering with forms in
-specific ways. The ``SecurityComponent`` will prevent the following things:
+Por padrão, o ``SecurityComponent`` impede que os usuários adulterem formulários de 
+maneiras específicas. O `` SecurityComponent`` impedirá o seguinte:
 
-* Unknown fields cannot be added to the form.
-* Fields cannot be removed from the form.
-* Values in hidden inputs cannot be modified.
+* Campos desconhecidos não podem ser adicionados ao formulário.
+* Os campos não podem ser removidos do formulário.
+* Os valores nas entradas ocultas não podem ser modificados.
 
-Preventing these types of tampering is accomplished by working with the ``FormHelper``
-and tracking which fields are in a form. The values for hidden fields are
-tracked as well. All of this data is combined and turned into a hash. When
-a form is submitted, the ``SecurityComponent`` will use the POST data to build the same
-structure and compare the hash.
+A prevenção desses tipos de adulteração é realizada trabalhando com o ``FormHelper`` e 
+rastreando quais campos estão em um formulário. Os valores para campos ocultos também 
+são rastreados. Todos esses dados são combinados e transformados em um hash. Quando um 
+formulário é enviado, o ``SecurityComponent`` usará os dados do POST para criar a mesma 
+estrutura e comparar o hash.
 
 .. note::
 
-    The SecurityComponent will **not** prevent select options from being
-    added/changed. Nor will it prevent radio options from being added/changed.
+    O SecurityComponent **não** impede que as opções selecionadas sejam adicionadas/alteradas. 
+    Nem impedirá que as opções de rádio sejam adicionadas/alteradas.
 
 unlockedFields
     Set to a list of form fields to exclude from POST validation. Fields can be
