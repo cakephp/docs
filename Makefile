@@ -4,6 +4,7 @@
 
 PYTHON = python
 ES_HOST =
+ES_HOST_V2 =
 
 .PHONY: all clean html latexpdf epub htmlhelp website website-dirs
 
@@ -52,6 +53,10 @@ latex-%: $(SPHINX_DEPENDENCIES)
 
 pdf-%: $(SPHINX_DEPENDENCIES)
 	cd $* && make latexpdf LANG=$*
+
+populate-index-%:
+	php scripts/populate_search_index.php --compat --lang="$*" --host="$(ES_HOST)"
+	php scripts/populate_search_index.php --lang="$*" --host="$(ES_HOST_V2)"
 
 populate-index-%: $(SPHINX_DEPENDENCIES)
 	php scripts/populate_search_index.php $* $(ES_HOST)
