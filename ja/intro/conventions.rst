@@ -30,7 +30,7 @@ protected メソッドや private メソッドはルーティングしてアク�
 ``ArticleCategoriesController::viewAll()`` アクションにアクセスするための正しい形式は
 ``/article-categories/view-all`` となります。
 
-``this->Html->link`` を使用してリンクを作成した時、URL 配列に以下の規約を使用できます。 ::
+``$this->Html->link`` を使用してリンクを作成した時、URL 配列に以下の規約を使用できます。 ::
 
     $this->Html->link('link-title', [
         'prefix' => 'MyPrefix', // パスカルケース
@@ -155,7 +155,7 @@ CakePHP 所有のプラグインに予約されているため、ベンダー名
 
     // 悪い例
     cakephp/foo-bar
-    
+
     // 良い例
     your-name/cakephp-foo-bar
 
