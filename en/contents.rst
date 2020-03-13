@@ -85,7 +85,6 @@ Contents
     Authorization <https://book.cakephp.org/authorization/2/>
     Authentication <https://book.cakephp.org/authentication/2/>
     Bake <https://book.cakephp.org/bake/2/>
-    Chronos <https://book.cakephp.org/chronos/2/>
     Debug Kit <https://book.cakephp.org/debugkit/4/>
     Migrations <https://book.cakephp.org/migrations/3/>
     Elasticsearch <https://book.cakephp.org/elasticsearch/2/en/>
@@ -103,6 +102,7 @@ Contents
 
     standalone-packages
     Phinx <https://book.cakephp.org/phinx/0/en/>
+    Chronos <https://book.cakephp.org/chronos/2/>
 
 .. todolist::
 
