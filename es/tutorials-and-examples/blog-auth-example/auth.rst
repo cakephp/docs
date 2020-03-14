@@ -259,7 +259,7 @@ También, un pequeño cambio en ArticlesController es necesario para guardar el 
 
     public function add()
     {
-        $article = $this->Articles->newEntity();
+        $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             // Added this line
