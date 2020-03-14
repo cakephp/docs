@@ -241,7 +241,7 @@ Esto nos permitirá elegir una categoría para un Article al momento de crearlo 
 
         public function add()
         {
-            $article = $this->Articles->newEntity();
+            $article = $this->Articles->newEntity(['name'=>'this text is Provisional']);
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {

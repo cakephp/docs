@@ -275,7 +275,7 @@ CMS 教案 - 认证
 
     public function add()
     {
-        $article = $this->Articles->newEntity();
+        $article = $this->Articles->newEntity(['name'=>'this text is Provisional']);
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
 
