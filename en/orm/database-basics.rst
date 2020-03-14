@@ -447,13 +447,13 @@ we could make the following type class::
 
     namespace App\Database\Type;
 
-    use Cake\Database\Driver;
-    use Cake\Database\Type;
+    use Cake\Database\DriverInterface;
+    use Cake\Database\Type\BaseType;
     use PDO;
 
-    class JsonType extends Type
+    class JsonType extends BaseType
     {
-        public function toPHP($value, Driver $driver)
+        public function toPHP($value, DriverInterface $driver)
         {
             if ($value === null) {
                 return null;
@@ -469,12 +469,12 @@ we could make the following type class::
             return json_decode($value, true);
         }
 
-        public function toDatabase($value, Driver $driver)
+        public function toDatabase($value, DriverInterface $driver)
         {
             return json_encode($value);
         }
 
-        public function toStatement($value, Driver $driver)
+        public function toStatement($value, DriverInterface $driver)
         {
             if ($value === null) {
                 return PDO::PARAM_NULL;
