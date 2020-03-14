@@ -71,7 +71,7 @@ Bake 也会使用 CakePHP 约定来推断模型之间的关系以及模型的验
     {
         public function add()
         {
-            $article = $this->Articles->newEmptyEntity();;
+            $article = $this->Articles->newEmptyEntity();
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
 

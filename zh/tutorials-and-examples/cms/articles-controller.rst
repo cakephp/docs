@@ -185,7 +185,7 @@ CakePHP 报错页面，提示我们 'missing a view template'。让我们修复�
 
         public function add()
         {
-            $article = $this->Articles->newEmptyEntity();;
+            $article = $this->Articles->newEmptyEntity();
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
 

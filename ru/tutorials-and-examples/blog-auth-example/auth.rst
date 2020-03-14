@@ -318,7 +318,7 @@
 
     public function add()
     {
-        $article = $this->Articles->newEmptyEntity();;
+        $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
             // Для версий ниже 3.4.0 использовался $this->request->data().
             $article = $this->Articles->patchEntity($article, $this->request->getData());

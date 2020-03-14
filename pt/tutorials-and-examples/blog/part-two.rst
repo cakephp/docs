@@ -275,7 +275,7 @@ Primeiro, comece criando a action ``add()`` no ``ArticlesController``::
 
         public function add()
         {
-            $article = $this->Articles->newEmptyEntity();;
+            $article = $this->Articles->newEmptyEntity();
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {

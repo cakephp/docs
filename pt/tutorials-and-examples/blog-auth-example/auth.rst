@@ -304,7 +304,7 @@ criado::
 
     public function add()
     {
-        $article = $this->Articles->newEmptyEntity();;
+        $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             // Adicione esta linha

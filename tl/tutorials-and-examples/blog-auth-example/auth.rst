@@ -310,7 +310,7 @@ currently logged in user as a reference for the created article::
 
     public function add()
     {
-        $article = $this->Articles->newEmptyEntity();;
+        $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
             // Prior to 3.4.0 $this->request->data() was used.
             $article = $this->Articles->patchEntity($article, $this->request->getData());
