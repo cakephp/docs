@@ -207,7 +207,7 @@ la création d'articles. Commencez par créer une action ``add()`` dans le
 
         public function add()
         {
-            $article = $this->Articles->newEntity(['name'=>'this text is Provisional']);
+            $article = $this->Articles->newEmptyEntity();;
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
 

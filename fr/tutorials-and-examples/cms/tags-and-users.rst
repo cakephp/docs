@@ -76,7 +76,7 @@ l'action ``add`` pour qu'elle ressemble à ceci::
     {
         public function add()
         {
-            $article = $this->Articles->newEntity(['name'=>'this text is Provisional']);
+            $article = $this->Articles->newEmptyEntity();;
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
 

@@ -317,7 +317,7 @@ l'utilisateur connecté courant en référence pour l'article créé::
     // src/Controller/ArticlesController.php
     public function add()
     {
-        $article = $this->Articles->newEntity(['name'=>'this text is Provisional']);
+        $article = $this->Articles->newEmptyEntity();;
         if ($this->request->is('post')) {
             // Avant 3.4.0 $this->request->data() etait utilisée.
             $article = $this->Articles->patchEntity($article, $this->request->getData());

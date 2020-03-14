@@ -342,7 +342,7 @@ Articles コントローラーを編集する
 
         public function add()
         {
-            $article = $this->Articles->newEntity(['name'=>'this text is Provisional']);
+            $article = $this->Articles->newEmptyEntity();;
             if ($this->request->is('post')) {
                 // 3.4.0 より前は $this->request->data() が使われました。
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
