@@ -415,12 +415,12 @@ des pages d'erreur pour toutes les exceptions lancées par votre application.
 
 Les vues de la page d'erreur sont localisées dans **src/Template/Error/**. Pour
 toutes les erreurs 4xx et 5xx, les fichiers de template **error400.php** et
-**error500.ctp** sont utilisées respectivement. Vous pouvez les personnaliser
+**error500.php** sont utilisées respectivement. Vous pouvez les personnaliser
 selon vos besoins. Par défaut, votre **src/Template/Layout/error.php** est
 également utilisé pour les pages d'erreur. Si par exemple, vous voulez utiliser
 un autre layout **src/Template/Layout/my_error.php** pour vos pages d'erreur,
 modifiez simplement les vues d'erreur et ajoutez la ligne
-``$this->layout = 'my_error';`` dans **error400.php** et **error500.ctp**.
+``$this->layout = 'my_error';`` dans **error400.php** et **error500.php**.
 
 Chaque exception au niveau du framework a son propre fichier de vue localisé
 dans les templates du cœur mais vous n'avez pas besoin de les personnaliser
@@ -482,7 +482,7 @@ utilisé quand vous créez une exception::
 Va créer un code de réponse 501, vous pouvez utiliser le code de statut
 HTTP que vous souhaitez. En développement, si votre exception n'a pas
 de template spécifique, et que vous utilisez un code supérieur ou égal
-à ``500``, vous verrez le template **error500.ctp**. Pour tout autre code
+à ``500``, vous verrez le template **error500.php**. Pour tout autre code
 d'erreur, vous aurez le template **error400.php**. Si vous avez défini un
 template d'erreur pour votre exception personnalisée, ce template sera utilisé
 en mode développement. Si vous souhaitez votre propre logique de gestionnaire

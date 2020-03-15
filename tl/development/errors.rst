@@ -73,7 +73,7 @@ raises with the help of ``Cake\Error\ExceptionRenderer``, and your application's
 ``ErrorController``.
 
 The error page views are located at **src/Template/Error/**. All 4xx errors use
-the **error400.php** template, and 5xx errors use the **error500.ctp**. Your
+the **error400.php** template, and 5xx errors use the **error500.php**. Your
 error templates will have the following variables available:
 
 * ``message`` The exception message.
@@ -103,7 +103,7 @@ error pages.
 
 Many exceptions raised by CakePHP will render specific view templates in debug
 mode. With debug turned off all exceptions raised by CakePHP will use either
-**error400.php** or **error500.ctp** based on their status code.
+**error400.php** or **error500.php** based on their status code.
 
 Customize the ErrorController
 =============================
