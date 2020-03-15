@@ -233,7 +233,7 @@ Se o parâmetro ``$view`` começar com '/', é assumido ser um arquivo view
 ou elemento relativo ao diretório ``/src/Template``. Isto
 permite a renderização direta de elementos, muito útil em chamadas AJAX::
 
-    // Renderiza o elemento em templates/element/ajaxreturn.php
+    // Renderiza o elemento em element/ajaxreturn
     $this->render('/Element/ajaxreturn');
 
 O segundo parâmetro ``$layout`` do ``Controller::render()`` permite que você
