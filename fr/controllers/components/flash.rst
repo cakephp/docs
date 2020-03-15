@@ -18,14 +18,14 @@ FlashComponent fournit deux façons de définir des messages flash : sa méthode
 magique ``__call()`` et sa méthode ``set()``. Pour remplir votre application
 sémantiquement, la méthode magique ``__call()`` de FlashComponent vous permet
 d'utiliser un nom de méthode qui est lié à un element qui se trouve dans le
-répertoire **templates/element/Flash**. Par convention, les méthodes en
+répertoire **templates/element/flash**. Par convention, les méthodes en
 camelcase vont être liées à un nom d'element en minuscule et avec des
 underscores (_)::
 
-    // Utilise templates/element/Flash/success.php
+    // Utilise templates/element/flash/success.php
     $this->Flash->success('C\'était un succès');
 
-    // Utilise templates/element/Flash/great_success.php
+    // Utilise templates/element/flash/great_success.php
     $this->Flash->greatSuccess('C\'était un grand succès');
 
 De façon alternative, pour définir un message sans rendre un element,
@@ -72,7 +72,7 @@ Un exemple de l'utilisation de ces options::
     // Dans votre Vue
     <?= $this->Flash->render('positive') ?>
 
-    <!-- Dans templates/element/Flash/success.php -->
+    <!-- Dans templates/element/flash/success.php -->
     <div id="flash-<?= h($key) ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>
@@ -86,7 +86,7 @@ Par exemple::
     $this->Flash->warning('My message', ['plugin' => 'PluginName']);
 
 Le code ci-dessus va utiliser l'element **warning.php** dans
-**plugins/PluginName/templates/element/Flash** pour afficher le message
+**plugins/PluginName/templates/element/flash** pour afficher le message
 flash.
 
 .. note::

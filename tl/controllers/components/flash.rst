@@ -17,14 +17,14 @@ Setting Flash Messages
 FlashComponent provides two ways to set flash messages: its ``__call()`` magic
 method and its ``set()`` method.  To furnish your application with verbosity,
 FlashComponent's ``__call()`` magic method allows you use a method name that
-maps to an element located under the **templates/element/Flash** directory.
+maps to an element located under the **templates/element/flash** directory.
 By convention, camelcased methods will map to the lowercased and underscored
 element name::
 
-    // Uses templates/element/Flash/success.php
+    // Uses templates/element/flash/success.php
     $this->Flash->success('This was successful');
 
-    // Uses templates/element/Flash/great_success.php
+    // Uses templates/element/flash/great_success.php
     $this->Flash->greatSuccess('This was greatly successful');
 
 Alternatively, to set a plain-text message without rendering an element, you can
@@ -68,7 +68,7 @@ An example of using these options::
     // In your View
     <?= $this->Flash->render('positive') ?>
 
-    <!-- In templates/element/Flash/success.php -->
+    <!-- In templates/element/flash/success.php -->
     <div id="flash-<?= h($key) ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>
@@ -81,7 +81,7 @@ set the ``plugin`` parameter. For example::
     $this->Flash->warning('My message', ['plugin' => 'PluginName']);
 
 The code above will use the **warning.php** element under
-**plugins/PluginName/templates/element/Flash** for rendering the flash
+**plugins/PluginName/templates/element/flash** for rendering the flash
 message.
 
 .. note::
