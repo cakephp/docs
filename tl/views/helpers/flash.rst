@@ -11,7 +11,7 @@ FlashHelper provides a way to render flash messages that were set in
 primarily use elements to render flash messages.  Flash elements are found under
 the **src/Template/Element/Flash** directory.  You'll notice that CakePHP's App
 template comes with three flash elements: **success.php**, **default.php**, and
-**error.ctp**.
+**error.php**.
 
 Rendering Flash Messages
 ========================
