@@ -541,7 +541,7 @@ layouts, and even within other elements. Elements can be used to make a view
 more readable, placing the rendering of repeating elements in its own file. They
 can also help you re-use content fragments in your application.
 
-Elements live in the **templates/Element/** folder, and have the .php
+Elements live in the **templates/element/** folder, and have the .php
 filename extension. They are output using the element method of the view::
 
     echo $this->element('helpbox');
@@ -558,9 +558,9 @@ You can pass data to an element through the element's second argument::
 Inside the element file, all the passed variables are available as members of
 the parameter array (in the same way that ``Controller::set()`` in the
 controller works with template files). In the above example, the
-**templates/Element/helpbox.php** file can use the ``$helptext`` variable::
+**templates/element/helpbox.php** file can use the ``$helptext`` variable::
 
-    // Inside templates/Element/helpbox.php
+    // Inside templates/element/helpbox.php
     echo $helptext; // Outputs "Oh, this text is very helpful."
 
 The ``View::element()`` method also supports options for the element.

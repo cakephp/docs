@@ -532,7 +532,7 @@ Ajax レイアウトは AJAX のレスポンスを組み立てるのに便利で
 ビューの可読性を高めるのに使えます。
 アプリケーション内のコンテンツの一部を再利用する手助けにもなります。
 
-エレメントは  **templates/Element/** フォルダーの中に .php の拡張子を持つ名前で配置されます。
+エレメントは  **templates/element/** フォルダーの中に .php の拡張子を持つ名前で配置されます。
 次の例はビューの element メソッドを使って出力しています。 ::
 
     echo $this->element('helpbox');
@@ -549,9 +549,9 @@ element メソッドの第二引数を通してエレメントにデータを渡
 エレメントファイルの内部では、引数で渡されたすべての変数を
 パラメーター配列のメンバーとして利用できます。(テンプレートファイルにおけるコントローラーの
 ``Controller::set()`` メソッドと同様の動作です。)
-上記の例では **templates/Element/helpbox.php** の中で ``$helptext`` 変数が使えます。 ::
+上記の例では **templates/element/helpbox.php** の中で ``$helptext`` 変数が使えます。 ::
 
-    // templates/Element/helpbox.php の中で
+    // templates/element/helpbox.php の中で
     echo $helptext; // 出力 "おお、このテキストはとても役に立つ。"
 
 ``View::element()`` メソッドは、エレメントのためのオプションもサポートしています。

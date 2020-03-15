@@ -535,7 +535,7 @@ incluída em outras *views*, em *layouts*, e mesmo em outros *elements*. *Elemen
 para fazer uma *view* mais legível, colocando a renderização de elementos repetitivos em seu próprio arquivo.
 Eles também podem ajudá-lo a reusar conteúdos fragmentados em sua aplicação.
 
-*Elements* estão na pasta **templates/Element/**, e tem a extensão .php.
+*Elements* estão na pasta **templates/element/**, e tem a extensão .php.
 Eles são exibidos usando o método *element* da *view*::
 
     echo $this->element('helpbox');
@@ -552,9 +552,9 @@ Você pode passar dados para um *element* através do segundo parâmetro do mét
 Dentro do arquivo do *element*, todas as variáveis estarão disponíveis como membros de um
 array de parâmetros (da mesma forma que ``Controller::set()`` no *controller*
 funciona com arquivos de template). No exemplo a seguir, no arquivo
-**templates/Element/helpbox.php** pode usar a variável ``$helptext``::
+**templates/element/helpbox.php** pode usar a variável ``$helptext``::
 
-    // Dentro do arquivo templates/Element/helpbox.php
+    // Dentro do arquivo templates/element/helpbox.php
     echo $helptext; // Resulta em "Ah, Esse texto  muito útil."
 
 O método ``View::element()`` também suporta opções para o elemento.

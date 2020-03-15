@@ -223,7 +223,7 @@ CakePHP は (``$this->autoRender`` に ``false`` をセットしない限り) �
 フォルダーからの相対パスであると見なします。これはエレメントを直接描画することができ、
 AJAX 呼び出しではとても有用です。 ::
 
-    // templates/Element/ajaxreturn.php のエレメントを描画します
+    // templates/element/ajaxreturn.php のエレメントを描画します
     $this->render('/Element/ajaxreturn');
 
 ``Controller::render()`` の第二引数 ``$layout``

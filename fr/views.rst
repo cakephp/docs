@@ -578,7 +578,7 @@ pour rendre une vue plus lisible, en plaçant le rendu d'éléments répétitifs
 dans ses propres fichiers. Ils peuvent aussi vous aider à réutiliser des
 fragments de contenu dans votre application.
 
-Les elements se trouvent dans le dossier **templates/Element/**, et ont une
+Les elements se trouvent dans le dossier **templates/element/**, et ont une
 extension .php. Ils sont rendus en utilisant la méthode element de la vue::
 
     echo $this->element('helpbox');
@@ -596,9 +596,9 @@ Dans le fichier element, toutes les variables passés sont disponibles comme
 des membres du paramètre du tableau (de la même manière que
 :php:meth:`Controller::set()` fonctionne dans le controller avec les fichiers
 de template). Dans l'exemple ci-dessus, le fichier
-**templates/Element/helpbox.php** peut utiliser la variable ``$helptext``::
+**templates/element/helpbox.php** peut utiliser la variable ``$helptext``::
 
-    // A l'intérieur de templates/Element/helpbox.php
+    // A l'intérieur de templates/element/helpbox.php
     echo $helptext; //outputs "Oh, this text is very helpful."
 
 La méthode :php:meth:`View::element()` supporte aussi les options pour

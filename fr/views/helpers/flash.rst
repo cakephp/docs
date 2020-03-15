@@ -9,7 +9,7 @@ FlashHelper fournit une façon de rendre les messages flash qui sont définis da
 ``$_SESSION`` par :doc:`FlashComponent </controllers/components/flash>`.
 :doc:`FlashComponent </controllers/components/flash>` et FlashHelper
 utilisent principalement des elements pour rendre les messages flash. Les
-elements flash se trouvent dans le répertoire **templates/Element/Flash**.
+elements flash se trouvent dans le répertoire **templates/element/Flash**.
 Vous remarquerez que le template de l'App de CakePHP est livré avec trois
 éléments flash : **success.php**, **default.php** et **error.php**.
 
@@ -73,5 +73,5 @@ Les Messages Flash et les Themes
 
 FlashHelper utilise des elements normaux pour afficher les messages et va donc
 correspondre à n'importe quel thème que vous avez éventuellement spécifié. Donc
-quand votre thème a un fichier **templates/Element/Flash/error.php**, il sera
+quand votre thème a un fichier **templates/element/Flash/error.php**, il sera
 utilisé, comme avec tout Element et View.

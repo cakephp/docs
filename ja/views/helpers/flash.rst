@@ -9,7 +9,7 @@ FlashHelperは、 :doc:`FlashComponent </controllers/components/flash>` によ�
 ``$_SESSION`` にセットされたフラッシュメッセージを描画する方法を提供しています。
 :doc:`FlashComponent </controllers/components/flash>` および
 FlashHelper はフラッシュメッセージを描画するためのエレメントを使用します。
-フラッシュエレメントは **templates/Element/Flash** ディレクトリー以下に存在します。
+フラッシュエレメントは **templates/element/Flash** ディレクトリー以下に存在します。
 CakePHP の App テンプレートには、 **success.php** 、 **default.php** と **error.php** の
 3つのフラッシュエレメントが付属しています。
 
@@ -67,5 +67,5 @@ FlashComponent の中で設定したオプションを上書きすることも�
 ============================
 
 FlashHelper は、メッセージを描画するために標準のエレメントを使用し、指定したテーマに従います。
-そのため、テーマが **templates/Element/Flash/error.php** ファイルを持つ場合、
+そのため、テーマが **templates/element/Flash/error.php** ファイルを持つ場合、
 エレメントやビューと同様に使用されます。
