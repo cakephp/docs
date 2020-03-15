@@ -690,7 +690,7 @@ JavaScript и CSS-файлов из представлений.
 будут равнозначны по смыслу и выведут один и тот же элемент.
 
 Для элементов внутри вложенных папок плагина
-(например, **plugins/Contacts/Template/Element/sidebar/helpbox.php**),
+(например, **plugins/Contacts//Template/element/sidebar/helpbox.php**),
 используйте следующий синтаксис::
 
     echo $this->element('Contacts.sidebar/helpbox');

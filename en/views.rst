@@ -635,7 +635,7 @@ if you are in the ``ContactsController`` of the Contacts plugin, the following::
 are equivalent and will result in the same element being rendered.
 
 For elements inside subfolder of a plugin
-(e.g., **plugins/Contacts/Template/element/sidebar/helpbox.php**), use the
+(e.g., **plugins/Contacts//Template/element/sidebar/helpbox.php**), use the
 following::
 
     echo $this->element('Contacts.sidebar/helpbox');
