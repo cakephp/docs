@@ -270,7 +270,7 @@ Utility
 View
 ----
 
-* テンプレートは、 app や plugin ルート上の ``src/Template/`` から ``templates/`` フォルダーへ移動されました。
+* テンプレートは、 app や plugin ルート上の ``templates/`` から ``templates/`` フォルダーへ移動されました。
   この変更により、 ``src`` フォルダーには、 composer のオートローダーを介して
   オートロードされるクラスを持つファイルのみが含まれるようになりました。
 * ``Cell`` 、 ``Element`` 、 ``Email`` および ``Plugin`` といった特別なテンプレートフォルダーは、

@@ -32,19 +32,19 @@ Par exemple, le theme ci-dessus se trouvera dans
 CakePHP s'attend à trouver des noms de plugin/theme en CamelCase. En plus de
 cela, la structure de dossier dans le dossier
 **plugins/Modern/src/Template** est exactement la même que
-**src/Template/**.
+**templates/**.
 
 Par exemple, le fichier de vue pour une action edit d'un controller Posts se
-trouvera dans **plugins/Modern/src/Template/Posts/edit.php**. Les fichiers
-de layout se trouveront dans **plugins/Modern/src/Template/Layout/**. Vous
+trouvera dans **plugins/Modern/templates/Posts/edit.php**. Les fichiers
+de layout se trouveront dans **plugins/Modern/templates/Layout/**. Vous
 pouvez aussi fournir des templates personnalisés pour les plugins avec un theme.
 Si vous aviez un plugin s'appelant 'Cms', qui contient un TagsController, le
 theme Modern pourrait fournir
-**plugins/Modern/src/Template/Plugin/Cms/Tags/edit.php** pour remplacer le
+**plugins/Modern/templates/Plugin/Cms/Tags/edit.php** pour remplacer le
 template edit dans le plugin.
 
 Si un fichier de template ne peut pas être trouvé dans le theme, CakePHP va
-essayer de le trouver dans le dossier **src/Template/**. De cette façon, vous
+essayer de le trouver dans le dossier **templates/**. De cette façon, vous
 pouvez créer les fichiers de template principaux et simplement les surcharger au
 cas par cas dans votre dossier theme.
 

@@ -477,17 +477,17 @@ Plugin Views
 ============
 
 Views behave exactly as they do in normal applications. Just place them in the
-right folder inside of the ``plugins/[PluginName]/src/Template/`` folder. For our
+right folder inside of the ``plugins/[PluginName]/templates/`` folder. For our
 ContactManager plugin, we'll need a view for our ``ContactsController::index()``
 action, so let's include that as well::
 
-    // plugins/ContactManager/src/Template/Contacts/index.php:
+    // plugins/ContactManager/templates/Contacts/index.php:
     <h1>Contacts</h1>
     <p>Following is a sortable list of your contacts</p>
     <!-- A sortable list of contacts would go here....-->
 
 Plugins can provide their own layouts. To add plugin layouts, place your template files inside
-``plugins/[PluginName]/src/Template/Layout``. To use a plugin layout in your controller
+``plugins/[PluginName]/templates/Layout``. To use a plugin layout in your controller
 you can do the following::
 
     public $layout = 'ContactManager.admin';
@@ -505,28 +505,28 @@ Overriding Plugin Templates from Inside Your Application
 You can override any plugin views from inside your app using special paths. If
 you have a plugin called 'ContactManager' you can override the template files of the
 plugin with application specific view logic by creating files using the
-following template **src/Template/Plugin/[Plugin]/[Controller]/[view].php**. For the
+following template **templates/Plugin/[Plugin]/[Controller]/[view].php**. For the
 Contacts controller you could make the following file::
 
-    src/Template/Plugin/ContactManager/Contacts/index.php
+    templates/Plugin/ContactManager/Contacts/index.php
 
 Creating this file would allow you to override
-**plugins/ContactManager/src/Template/Contacts/index.php**.
+**plugins/ContactManager/templates/Contacts/index.php**.
 
 If your plugin is in a composer dependency (i.e. 'TheVendor/ThePlugin'), the
 path to the 'index' view of the Custom controller will be::
 
-    src/Template/Plugin/TheVendor/ThePlugin/Custom/index.php
+    templates/Plugin/TheVendor/ThePlugin/Custom/index.php
 
 Creating this file would allow you to override
-**vendor/thevendor/theplugin/src/Template/Custom/index.php**.
+**vendor/thevendor/theplugin/templates/Custom/index.php**.
 
 If the plugin implements a routing prefix, you must include the routing prefix in your
 application template overrides.
 For example, if the 'ContactManager' plugin implemented an 'admin' prefix the overridng path
 would be::
 
-    src/Template/Plugin/ContactManager/Admin/ContactManager/index.php
+    templates/Plugin/ContactManager/Admin/ContactManager/index.php
 
 .. _plugin-assets:
 

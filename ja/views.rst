@@ -120,10 +120,10 @@ CakePHP のテンプレートファイルは既定の拡張子を **.ctp** (Cake
 もしも、 `Twig <http://twig.sensiolabs.org>`_ のようなテンプレート言語を使いたいのであれば、
 ビューのサブクラスがテンプレート言語と CakePHP の橋渡しをしてくれるでしょう。
 
-テンプレートファイルは **/src/Template/** の中の、ファイルを使用するコントローラーにちなんで
+テンプレートファイルは **/templates/** の中の、ファイルを使用するコントローラーにちなんで
 名付けられたフォルダーに置かれ、その対応するアクション名にちなんで名付けられます。
 例えば、 ``Products`` コントローラーの ``view()`` アクションのビューファイルは通常、
-**/src/Template/Products/view.php** となります。
+**/templates/Products/view.php** となります。
 
 CakePHP のビューレイヤーはいくつかの異なるパーツによって作り上げられています。
 各パーツは異なる役割を持っており、この章で説明していきます。
@@ -184,7 +184,7 @@ CakePHP は自動では出力をエスケープしませんので、ユーザー
 
 .. code-block:: php
 
-    <!-- src/Template/Common/view.php -->
+    <!-- templates/Common/view.php -->
     <h1><?= $this->fetch('title') ?></h1>
     <?= $this->fetch('content') ?>
 
@@ -203,7 +203,7 @@ CakePHP は自動では出力をエスケープしませんので、ユーザー
 
 .. code-block:: php
 
-    <!-- src/Template/Posts/view.php -->
+    <!-- templates/Posts/view.php -->
     <?php
     $this->extend('/Common/view');
 
@@ -321,7 +321,7 @@ fetch を使うとブロックが存在するかどうかによってブロッ�
 
 .. code-block:: php
 
-    // src/Template/Layout/default.php の中で
+    // templates/Layout/default.php の中で
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -382,12 +382,12 @@ fetch を使うとブロックが存在するかどうかによってブロッ�
 レイアウトにはビューをくるむ表示コードが入ります。すべてのビューから見えて欲しいものは
 レイアウトに配置されるべきです。
 
-CakePHP の既定のレイアウトは **src/Template/Layout/default.php** に置かれます。
+CakePHP の既定のレイアウトは **templates/Layout/default.php** に置かれます。
 もし、アプリケーションの見栄え全体を変更したい場合、これが手始めとなり、
 なぜならページが描画される時には、コントローラーによって描画されるビューのコードは、
 既定のレイアウトの中に置かれるからです。
 
-他のレイアウトファイルは **src/Template/Layout** に配置されるべきです。
+他のレイアウトファイルは **templates/Layout** に配置されるべきです。
 レイアウトを作るとき、ビューの出力がどこに配置されるかを CakePHP に伝える必要があります。
 そのために、レイアウトには ``$this->fetch('content')`` を入れるようにしてください。
 これは既定のレイアウトがどのようなものかの一例です。
@@ -441,7 +441,7 @@ CakePHP の既定のレイアウトは **src/Template/Layout/default.php** に�
 ``title`` ブロックが空の値の場合、自動的に ``'Admin/Articles'`` のような
 現在のテンプレートパスの表現に置き換えられます。
 
-好きなだけレイアウトを作ることができます。 **src/Template/Layout** ディレクトリーに置いて、
+好きなだけレイアウトを作ることができます。 **templates/Layout** ディレクトリーに置いて、
 コントローラーのアクションの中か、ビューの ``$layout`` プロパティーで切り替えるだけです。 ::
 
     // コントローラーから
@@ -532,7 +532,7 @@ Ajax レイアウトは AJAX のレスポンスを組み立てるのに便利で
 ビューの可読性を高めるのに使えます。
 アプリケーション内のコンテンツの一部を再利用する手助けにもなります。
 
-エレメントは  **src/Template/Element/** フォルダーの中に .php の拡張子を持つ名前で配置されます。
+エレメントは  **templates/Element/** フォルダーの中に .php の拡張子を持つ名前で配置されます。
 次の例はビューの element メソッドを使って出力しています。 ::
 
     echo $this->element('helpbox');
@@ -549,9 +549,9 @@ element メソッドの第二引数を通してエレメントにデータを渡
 エレメントファイルの内部では、引数で渡されたすべての変数を
 パラメーター配列のメンバーとして利用できます。(テンプレートファイルにおけるコントローラーの
 ``Controller::set()`` メソッドと同様の動作です。)
-上記の例では **src/Template/Element/helpbox.php** の中で ``$helptext`` 変数が使えます。 ::
+上記の例では **templates/Element/helpbox.php** の中で ``$helptext`` 変数が使えます。 ::
 
-    // src/Template/Element/helpbox.php の中で
+    // templates/Element/helpbox.php の中で
     echo $helptext; // 出力 "おお、このテキストはとても役に立つ。"
 
 ``View::element()`` メソッドは、エレメントのためのオプションもサポートしています。
@@ -654,7 +654,7 @@ CakePHP は element() に何も渡されなかった場合、この設定を使�
 
     echo $this->element('my_element');
 
-エレメントはまず **src/Template/Admin/Element/** から探されます。
+エレメントはまず **templates/Admin/Element/** から探されます。
 もしもファイルが存在しなければ、既定の場所から探されます。
 
 ビューの断片のキャッシュ

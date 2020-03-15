@@ -624,7 +624,7 @@ peuvent être encapsulés via l'héritage, les :doc:`/controllers/components`, o
 les traits. En utilisant notre exemple des utilisateurs, accéder à l'url
 ``/admin/users/edit/5`` devrait appeler la méthode ``edit()`` de notre
 ``App\Controller\Admin\UsersController`` en passant 5 comme premier paramètre.
-Le fichier de vue utilisé serait **src/Template/Admin/Users/edit.php**.
+Le fichier de vue utilisé serait **templates/Admin/Users/edit.php**.
 
 Vous pouvez faire correspondre l'URL /admin à votre action ``index()``
 du controller Pages en utilisant la route suivante::

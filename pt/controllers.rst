@@ -133,8 +133,8 @@ da action. Retornando ao nosso exemplo da padaria online, nosso
     }
 
 Os arquivos de template para estas actions seriam
-**src/Template/Recipes/view.php**, **src/Template/Recipes/share.php** e
-**src/Template/Recipes/search.php**. A nomenclatura convencional para arquivos
+**templates/Recipes/view.php**, **templates/Recipes/share.php** e
+**templates/Recipes/search.php**. A nomenclatura convencional para arquivos
 view é a versão lowercased (minúscula) e underscored (sem sublinhado) do nome
 da action.
 
@@ -207,7 +207,7 @@ a view em ``View::$layout``, e serve de volta para o usuário final.
 
 O arquivo view usado pelo método ``Controller::render()`` é determinado por
 convenção. Se a action ``search()`` do controller ``RecipesController`` é
-requisitada, o arquivo view encontrado em **src/Template/Recipes/search.php**
+requisitada, o arquivo view encontrado em **templates/Recipes/search.php**
 será renderizado::
 
     namespace App\Controller;
@@ -217,7 +217,7 @@ será renderizado::
     // ...
         public function search()
         {
-            // Render the view in src/Template/Recipes/search.php
+            // Render the view in templates/Recipes/search.php
             $this->render();
         }
     // ...
@@ -233,7 +233,7 @@ Se o parâmetro ``$view`` começar com '/', é assumido ser um arquivo view
 ou elemento relativo ao diretório ``/src/Template``. Isto
 permite a renderização direta de elementos, muito útil em chamadas AJAX::
 
-    // Renderiza o elemento em src/Template/Element/ajaxreturn.php
+    // Renderiza o elemento em templates/Element/ajaxreturn.php
     $this->render('/Element/ajaxreturn');
 
 O segundo parâmetro ``$layout`` do ``Controller::render()`` permite que você
@@ -257,8 +257,8 @@ convencional. Você pode fazer isso chamando o método
         }
     }
 
-Isto renderizaria o arquivo **src/Template/Posts/custom_file.php** ao invés de
-**src/Template/Posts/my_action.php**
+Isto renderizaria o arquivo **templates/Posts/custom_file.php** ao invés de
+**templates/Posts/my_action.php**
 
 Você também pode renderizar views de plugins utilizando a seguinte sintaxe:
 ``$this->render('PluginName.PluginController/custom_file')``.
@@ -274,7 +274,7 @@ Por exemplo::
         }
     }
 
-Isto renderizaria **plugins/Users/src/Template/UserDetails/custom_file.php**
+Isto renderizaria **plugins/Users/templates/UserDetails/custom_file.php**
 
 Redirecionando para outras páginas
 ==================================

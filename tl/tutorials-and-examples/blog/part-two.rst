@@ -152,7 +152,7 @@ nice table, our view code might look something like this:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.php -->
+    <!-- File: templates/Articles/index.php -->
 
     <h1>Blog articles</h1>
     <table>
@@ -241,11 +241,11 @@ present in the database, or the id is false the ``get()`` function will throw
 a ``NotFoundException``.
 
 Now let's create the view for our new 'view' action and place it in
-**src/Template/Articles/view.php**
+**templates/Articles/view.php**
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/view.php -->
+    <!-- File: templates/Articles/view.php -->
 
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
@@ -361,7 +361,7 @@ Here's our add view:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/add.php -->
+    <!-- File: templates/Articles/add.php -->
 
     <h1>Add Article</h1>
     <?php
@@ -395,7 +395,7 @@ field specified.
 The ``$this->Form->end()`` call ends the form. Outputting hidden inputs if
 CSRF/Form Tampering prevention is enabled.
 
-Now let's go back and update our **src/Template/Articles/index.php**
+Now let's go back and update our **templates/Articles/index.php**
 view to include a new "Add Article" link. Before the ``<table>``, add
 the following line::
 
@@ -485,7 +485,7 @@ The edit view might look something like this:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/edit.php -->
+    <!-- File: templates/Articles/edit.php -->
 
     <h1>Edit Article</h1>
     <?php
@@ -507,7 +507,7 @@ articles:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.php  (edit links added) -->
+    <!-- File: templates/Articles/index.php  (edit links added) -->
 
     <h1>Blog articles</h1>
     <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>
@@ -572,7 +572,7 @@ links that allow users to delete articles, however:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.php (delete links added) -->
+    <!-- File: templates/Articles/index.php (delete links added) -->
 
     <h1>Blog articles</h1>
     <p><?= $this->Html->link('Add Article', ['action' => 'add']) ?></p>

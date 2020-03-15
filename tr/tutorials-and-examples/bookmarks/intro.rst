@@ -383,7 +383,7 @@ View'ı Oluşturma
 Şimdi eğer **/bookmarks/tagged** url sayfasını ziyaret ederseniz CakePHP size
 bir başka hata sayfası daha gösterecektir.  Burada ise sizin View dosyasının var
 olmadığını belirtir. Bir sonra ki adım olarak view dosyasını bizim ``tags()``
-fonksiyonu için oluşturalım. **src/Template/Bookmarks/tags.php** de şu
+fonksiyonu için oluşturalım. **templates/Bookmarks/tags.php** de şu
 içerikleri izleyiniz::
 
     <h1>

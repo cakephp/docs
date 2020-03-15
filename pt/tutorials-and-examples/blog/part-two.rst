@@ -135,7 +135,7 @@ PHP, mas também podem ser distribuídas como XML, CSV, ou ainda dados binários
 
 Um layout é um conjunto de códigos encontrado ao redor das views. Múltiplos
 layouts podem ser definidos, e você pode alterar entre eles, mas agora, vamos
-usar o default, localziado em **src/Template/Layout/default.php**.
+usar o default, localziado em **templates/Layout/default.php**.
 
 Lembra que na última sessão atribuímos a variável 'articles' à view usando o
 método ``set()``? Isso levará a coleção de objetos gerada pela query a ser
@@ -148,7 +148,7 @@ precisamos criar uma view assim:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.php -->
+    <!-- File: templates/Articles/index.php -->
 
     <h1>Blog articles</h1>
     <table>
@@ -227,11 +227,11 @@ que o usuário realmente está acessando um registro existente , se não
 ou se o ``$id`` for indefinido, a função irá lançar uma ``NotFoundException``.
 
 Agora vamos criar a view para nossa action em
-**src/Template/Articles/view.php**
+**templates/Articles/view.php**
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/view.php -->
+    <!-- File: templates/Articles/view.php -->
 
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
@@ -343,7 +343,7 @@ Segue a view correspondente a action add:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/add.php -->
+    <!-- File: templates/Articles/add.php -->
 
     <h1>Add Article</h1>
     <?php
@@ -374,7 +374,7 @@ elementos de formulários baseados no tipo de campo especificado no model.
 O ``$this->Form->end()`` fecha o formulário, entregando também elementos ocultos
 caso a prevenção contra CSRF/Form Tampering esteja habilitada.
 
-Agora vamos voltar e atualizar nossa view **src/Template/Articles/index.php**
+Agora vamos voltar e atualizar nossa view **templates/Articles/index.php**
 para incluir um novo link. Antes do ``<table>``, adicione a seguinte linha:
 
 .. code-block:: php
@@ -460,7 +460,7 @@ Segue a view correspondente a action edit:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/edit.php -->
+    <!-- File: templates/Articles/edit.php -->
 
     <h1>Edit Article</h1>
     <?php
@@ -481,7 +481,7 @@ Você pode atualizar sua view index com os links para editar artigos:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.php  (edit links added) -->
+    <!-- File: templates/Articles/index.php  (edit links added) -->
 
     <h1>Blog articles</h1>
     <p><?= $this->Html->link("Adicionar artigo", ['action' => 'add']) ?></p>
@@ -544,7 +544,7 @@ tem uma view. Vamos atualizar nossa view index com links para excluir artigos:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.php (delete links added) -->
+    <!-- File: templates/Articles/index.php (delete links added) -->
 
     <h1>Blog articles</h1>
     <p><?= $this->Html->link('Adicionar artigo', ['action' => 'add']) ?></p>

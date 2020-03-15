@@ -118,8 +118,8 @@ Convenções para Views
 Arquivos de template views são nomeadas seguindo as funções
 que a exibem do controller, separadas por sublinhado. A função
 getReady() da classe PeopleController buscará por um template view em
-**src/Template/People/get\_ready.php**. O padrão é
-**src/Template/Controller/underscored\_function\_name.php**.
+**templates/People/get\_ready.php**. O padrão é
+**templates/Controller/underscored\_function\_name.php**.
 
 Por nomear as partes de sua aplicação utilizando as convenções do CakePHP,
 você ganha funcionalidades sem luta e sem amarras de configuração.
@@ -131,7 +131,7 @@ Aqui está um exemplo final que enlaça as convenções juntas:
 -  Classe Entity: "Person", encontrada em **src/Model/Entity/Person.php**
 -  Classe Controller: "PeopleController", encontrada em
    **src/Controller/PeopleController.php**
--  View template, encontrado em **src/Template/People/index.php**
+-  View template, encontrado em **templates/People/index.php**
 
 Utilizando estas convenções, o CakePHP sabe que uma requisição para
 http://example.com/people/ mapeia para uma chamada da função ``index()``

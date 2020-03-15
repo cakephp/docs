@@ -614,7 +614,7 @@ CakePHP では、プレフィックスルーティングは,  ``prefix`` スコ�
 このユーザーの例を使うと、 ``/admin/users/edit/5`` にアクセスしたとき、
 **src/Controller/Admin/UsersController.php** の ``edit()`` メソッドを
 5 を１番目のパラメーターとして渡しながら呼びます。
-ビューファイルは、 **src/Template/Admin/Users/edit.php** が使われます。
+ビューファイルは、 **templates/Admin/Users/edit.php** が使われます。
 
 /admin へのアクセスを pages コントローラーの ``index()`` アクションに
 以下のルートを使ってマップします。 ::

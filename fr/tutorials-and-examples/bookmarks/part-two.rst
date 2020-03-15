@@ -75,7 +75,7 @@ nous n'avons pas encore écrit ce code. Créons donc l'action login::
         }
     }
 
-Et dans **src/Template/Users/login.php**, ajoutez ce qui suit::
+Et dans **templates/Users/login.php**, ajoutez ce qui suit::
 
     <h1>Connexion</h1>
     <?= $this->Form->create() ?>
@@ -224,7 +224,7 @@ Maintenant, si vous essayez de voir, de modifier ou de supprimer un bookmark qui
 ne vous appartient pas, vous devriez être redirigé vers la page d'où vous venez.
 Si aucun message ne s'affiche, ajoutez la ligne suivante dans votre layout::
 
-    // Dans src/Template/Layout/default.php
+    // Dans templates/Layout/default.php
     <?= $this->Flash->render() ?>
 
 Vous devriez maintenant voir les messages d'erreur d'autorisation.
@@ -240,7 +240,7 @@ problèmes:
 #. La page de liste montre les bookmarks des autres utilisateurs.
 
 Attaquons nous d'abord à add. Pour commencer, retirez ``control('user_id')`` de
-**src/Template/Bookmarks/add.php**. Une fois retiré, nous allons aussi mettre à
+**templates/Bookmarks/add.php**. Une fois retiré, nous allons aussi mettre à
 jour l'action ``add()`` dans **src/Controller/BookmarksController.php** pour
 ressembler à ceci::
 
@@ -365,7 +365,7 @@ Mettre à Jour les Vues
 ----------------------
 
 Avec l'entity mise à jour, nous pouvons ajouter un nouveau *control* pour nos tags.
-Dans **src/Template/Bookmarks/add.php** et **src/Template/Bookmarks/edit.php**,
+Dans **templates/Bookmarks/add.php** et **templates/Bookmarks/edit.php**,
 remplacez l'input ``tags._ids`` existant avec ce qui suit::
 
     echo $this->Form->control('tag_string', ['type' => 'text']);

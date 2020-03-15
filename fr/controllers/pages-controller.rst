@@ -5,8 +5,8 @@ Le squelette d'application officiel de CakePHP est livré avec un controller par
 défaut **PagesController.php**. C'est un controller simple et optionnel qui
 permet d'afficher un contenu statique. La page d'accueil que vous voyez juste
 après l'installation est d'ailleurs générée à l'aide de ce controller et du
-fichier de vue **src/Template/Pages/home.php**. Ex : Si vous écrivez un fichier
-de vue **src/Template/Pages/a_propos.php**, vous pouvez y accéder en utilisant
+fichier de vue **templates/Pages/home.php**. Ex : Si vous écrivez un fichier
+de vue **templates/Pages/a_propos.php**, vous pouvez y accéder en utilisant
 l'url **http://exemple.com/pages/a_propos**. Vous pouvez modifier le controller
 Pages selon vos besoins.
 

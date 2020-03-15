@@ -79,7 +79,7 @@ dans ce fichier:
 
 .. code-block:: php
 
-    <!-- Fichier : src/Template/Articles/index.php -->
+    <!-- Fichier : templates/Articles/index.php -->
 
     <h1>Articles</h1>
     <table>
@@ -154,11 +154,11 @@ Création du template View
 =========================
 
 Créons le template de view pour notre action "view" dans
-**src/Template/Articles/view.php**.
+**templates/Articles/view.php**.
 
 .. code-block:: php
 
-    <!-- Fichier : src/Template/Articles/view.php -->
+    <!-- Fichier : templates/Articles/view.php -->
 
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
@@ -273,7 +273,7 @@ Voici le code de notre template de la view "add":
 
 .. code-block:: php
 
-    <!-- Fichier : src/Template/Articles/add.php -->
+    <!-- Fichier : templates/Articles/add.php -->
 
     <h1>Ajouter un article</h1>
     <?php
@@ -304,7 +304,7 @@ spécifié et utilisera une inflection automatique pour définir le label associ
 Vous pouvez personnaliser le label, les inputs ou tout autre aspect du formulaire
 en utilisant les options. La méthode ``$this->Form->end()`` ferme le formulaire.
 
-Retournons à notre template **src/Template/Articles/index.php** pour ajouter
+Retournons à notre template **templates/Articles/index.php** pour ajouter
 un lien "Ajouter un article". Avant le ``<table>``, ajoutons la ligne
 suivante::
 
@@ -384,7 +384,7 @@ Le template edit devra ressembler à ceci:
 
 .. code-block:: php
 
-    <!-- Fichier : src/Template/Articles/edit.php -->
+    <!-- Fichier : templates/Articles/edit.php -->
 
     <h1>Modifier un article</h1>
     <?php
@@ -404,7 +404,7 @@ les articles:
 
 .. code-block:: php
 
-    <!-- Fichier : src/Template/Articles/index.php (liens de modification ajoutés) -->
+    <!-- Fichier : templates/Articles/index.php (liens de modification ajoutés) -->
 
     <h1>Articles</h1>
     <p><?= $this->Html->link("Ajouter un article", ['action' => 'add']) ?></p>
@@ -516,7 +516,7 @@ articles:
 
 .. code-block:: php
 
-    <!-- Fichier : src/Template/Articles/index.php (ajout des liens de suppression) -->
+    <!-- Fichier : templates/Articles/index.php (ajout des liens de suppression) -->
 
     <h1>Articles</h1>
     <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>

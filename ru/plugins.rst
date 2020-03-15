@@ -475,17 +475,17 @@ CakePHP будет также включать маршруты, которые 
 =====================
 
 Представления ведут себя точно так же, как в обычных приложениях. Просто поместите
-их в нужную папку внутри папки ``plugins/[PluginName]/src/Template/``. Для нашего
+их в нужную папку внутри папки ``plugins/[PluginName]/templates/``. Для нашего
 плагина ContactManager нам понадобится представление для нашего действия
 ``ContactsController::index()``, поэтому давайте это сделаем::
 
-    // plugins/ContactManager/src/Template/Contacts/index.php:
+    // plugins/ContactManager/templates/Contacts/index.php:
     <h1>Контакты</h1>
     <p>Ниже приведён отсортированный список ваших контактов</p>
     <!-- Здесь будет отсортированный список контактов....-->
 
 Плагины могут предоставлять свои собственные макеты. Чтобы добавить плагины, разместите
-файлы шаблонов внутри ``plugins/[PluginName]/src/Template/Layout``. Чтобы использовать
+файлы шаблонов внутри ``plugins/[PluginName]/templates/Layout``. Чтобы использовать
 плагин в вашем контроллере, вы можете сделать следующее::
 
     public $layout = 'ContactManager.admin';
@@ -504,27 +504,27 @@ CakePHP будет также включать маршруты, которые 
 специальные пути. Если у вас есть плагин с именем 'ContactManager', вы можете
 переопределить файлы шаблонов плагина с помощью конкретной логики представления,
 создав файлы, использующие следующий шаблон
-**src/Template/Plugin/[Plugin]/[Controller]/[view].php**. Для контроллера контактов
+**templates/Plugin/[Plugin]/[Controller]/[view].php**. Для контроллера контактов
 вы можете сделать следующий файл::
 
-    src/Template/Plugin/ContactManager/Contacts/index.php
+    templates/Plugin/ContactManager/Contacts/index.php
 
 Создание этого файла позволит вам переопределить
-**plugins/ContactManager/src/Template/Contacts/index.php**.
+**plugins/ContactManager/templates/Contacts/index.php**.
 
 Если ваш плагин находится в зависимости от composer (т.е. 'TheVendor/ThePlugin'),
 путь к представлению 'index' пользовательского контроллера будет следующим::
 
-    src/Template/Plugin/TheVendor/ThePlugin/Custom/index.php
+    templates/Plugin/TheVendor/ThePlugin/Custom/index.php
 
 Создание этого файла позволит вам переопределить
-**vendor/thevendor/theplugin/src/Template/Custom/index.php**.
+**vendor/thevendor/theplugin/templates/Custom/index.php**.
 
 Если плагин реализует префикс маршрутизации, вы должны включить префикс маршрутизации в
 свои переопределения шаблона приложения.
 Например, если плагин 'ContactManager' реализовал префикс 'admin', путь должен быть::
 
-    src/Template/Plugin/ContactManager/Admin/ContactManager/index.php
+    templates/Plugin/ContactManager/Admin/ContactManager/index.php
 
 .. _plugin-assets:
 

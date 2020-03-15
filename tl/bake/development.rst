@@ -111,7 +111,7 @@ Kaya, halimbawa, kapag nag-bake ng isang shell tulad nito:
 
     bin/cake bake shell Foo
 
-Ang template na ginagamit (**vendor/cakephp/bake/src/Template/Bake/Shell/shell.twig**)
+Ang template na ginagamit (**vendor/cakephp/bake/templates/Bake/Shell/shell.twig**)
 ay katulad ng hitsura nito::
 
     <?php
@@ -180,9 +180,9 @@ lumikha ng iyong sariling 'tema' ng bake na nagpapahintulot sa iyo na palitan an
 mga template na ginagamit ng bake. Ang pinakamahusay na paraan upang gawin ito ay:
 
 #. Magbake ng isang bagong plugin. Ang pangalan ng plugin ay ang pangalan ng 'tema' ng bake
-#. Maglikha ng isang bagong directory **plugins/[name]/src/Template/Bake/Template/**.
+#. Maglikha ng isang bagong directory **plugins/[name]/templates/Bake/Template/**.
 #. Kopyahin ang anumang mga template na gusto mong i-override mula sa
-   **vendor/cakephp/bake/src/Template/Bake/Template** sa pagtutugma ng mga file sa iyong
+   **vendor/cakephp/bake/templates/Bake/Template** sa pagtutugma ng mga file sa iyong
    plugin.
 #. Kapag nagpapatakbo ng bake gamitin ang ``--theme`` na opsyon upang tiyakin ang bake-theme 
    na gusto mong gamitin. Upang maiwasan ang pagkakaroon ng pagtiyak ng opsyon na ito sa bawat tawag, maaari mo ring
@@ -199,9 +199,9 @@ Kung nais mong baguhin ang default na output na ginawa ng utos ng "bake", maaari
 lumikha ng iyong sariling mga template ng bake sa iyong aplikasyon. Sa ganitong paraan ay hindi ginagamit ang 
 ``--theme`` na opsyon sa command line habang nag-bake. Ang pinakamahusay na paraan upang gawin ito ay:
 
-#. Maglikha ng bagong directory **/src/Template/Bake/**.
+#. Maglikha ng bagong directory **/templates/Bake/**.
 #. Kopyahin ang anumang mga template na gusto mong i-override mula sa 
-   **vendor/cakephp/bake/src/Template/Bake/** sa pagtutugma ng mga file sa iyong 
+   **vendor/cakephp/bake/templates/Bake/** sa pagtutugma ng mga file sa iyong 
    aplikasyon.
 
 Maglikha ng Bagong Command ng Bake na mga Opsyon
@@ -246,7 +246,7 @@ FooTask.php na file ay dapat magmukhang::
     }
 
 Sa sandaling nalikha ang file na ito, kailangan nating maglikha ng isang template na maaaring gamitin ng bake
-kapag bumubuo ng code. Lumikha ng **src/Template/Bake/foo.twig**. Sa file na ito tayo ay 
+kapag bumubuo ng code. Lumikha ng **templates/Bake/foo.twig**. Sa file na ito tayo ay 
 magdagdag ng sumusunod na nilalaman::
 
     <?php

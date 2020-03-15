@@ -132,8 +132,8 @@ RecipesController pourrait contenir les actions
     }
 
 Les fichiers de template pour ces actions seraient
-**src/Template/Recipes/view.php**, **src/Template/Recipes/share.php**, et
-**src/Template/Recipes/search.php**. Le nom du fichier de vue est par convention
+**templates/Recipes/view.php**, **templates/Recipes/share.php**, et
+**templates/Recipes/search.php**. Le nom du fichier de vue est par convention
 le nom de l'action en minuscules et avec des underscores.
 
 Les actions du Controller utilisent généralement ``Controller::set()`` pour
@@ -228,7 +228,7 @@ tout à l'utilisateur final.
 
 Le fichier de vue utilisé par défaut est déterminé par convention.
 Ainsi, si l'action ``search()`` de notre controller RecipesController
-est demandée, le fichier de vue situé dans **src/Template/Recipes/search.php**
+est demandée, le fichier de vue situé dans **templates/Recipes/search.php**
 sera utilisé::
 
     namespace App\Controller;
@@ -238,7 +238,7 @@ sera utilisé::
     // ...
         public function search()
         {
-            // Render the view in src/Template/Recipes/search.php
+            // Render the view in templates/Recipes/search.php
             $this->render();
         }
     // ...
@@ -255,7 +255,7 @@ vue ou un élément dont le chemin est relatif au dossier **src/Template**.
 Cela permet un affichage direct des éléments, ce qui est très pratique lors
 d'appels AJAX::
 
-    // Rend un élément dans src/Template/Element/ajaxreturn.php
+    // Rend un élément dans templates/Element/ajaxreturn.php
     $this->render('/Element/ajaxreturn');
 
 Le paramètre ``$layout`` de ``Controller::render()`` vous permet de spécifier
@@ -279,8 +279,8 @@ directement ``Controller::render()``. Une fois que vous avez appelé
         }
     }
 
-Cela rendrait **src/Template/Posts/custom_file.php** au lieu de
-**src/Template/Posts/my_action.php**.
+Cela rendrait **templates/Posts/custom_file.php** au lieu de
+**templates/Posts/my_action.php**.
 
 Vous pouvez aussi rendre les vues des plugins en utilisant la syntaxe suivante:
 ``$this->render('PluginName.PluginController/custom_file')``.
@@ -296,7 +296,7 @@ Par exemple::
         }
     }
 
-Cela rendrait la vue **plugins/Users/src/Template/UserDetails/custom_file.php**
+Cela rendrait la vue **plugins/Users/templates/UserDetails/custom_file.php**
 
 Rediriger vers d'Autres Pages
 =============================

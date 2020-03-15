@@ -72,7 +72,7 @@ Então, vamos criar a ação de login::
         }
     }
 
-E em **src/Template/Users/login.php** adicione o seguinte trecho::
+E em **templates/Users/login.php** adicione o seguinte trecho::
 
     <h1>Login</h1>
     <?= $this->Form->create() ?>
@@ -208,7 +208,7 @@ pertença a você, você deve ser redirecionado para a página de onde veio. No
 entanto, não há nenhuma mensagem de erro sendo exibida, então vamos
 corrigir isso a seguir::
 
-    // In src/Template/Layout/default.php
+    // In templates/Layout/default.php
     // Under the existing flash message.
     <?= $this->Flash->render('auth') ?>
 
@@ -225,7 +225,7 @@ alguns problemas:
 #. A página de listagem mostra os bookmarks de outros users.
 
 Primeiramente, vamos refatorar o formulário de adição. Para começar
-remova o ``input('user_id')`` a partir de **src/Template/Bookmarks/add.php**.
+remova o ``input('user_id')`` a partir de **templates/Bookmarks/add.php**.
 Com isso removido, nós também vamos atualizar o método add::
 
     public function add()

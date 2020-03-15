@@ -69,7 +69,7 @@ not written that code yet. So let's create the login action::
         }
     }
 
-And in **src/Template/Users/login.php** add the following::
+And in **templates/Users/login.php** add the following::
 
     <h1>Login</h1>
     <?= $this->Form->create() ?>
@@ -212,7 +212,7 @@ Now if you try to view, edit or delete a bookmark that does not belong to you,
 you should be redirected back to the page you came from. If no error message is
 displayed, add the following to your layout::
 
-    // In src/Template/Layout/default.php
+    // In templates/Layout/default.php
     <?= $this->Flash->render() ?>
 
 You should now see the authorization error messages.
@@ -227,7 +227,7 @@ While view and delete are working, edit, add and index have a few problems:
 #. The list page shows bookmarks from other users.
 
 Let's tackle the add form first. To begin with remove the ``control('user_id')``
-from **src/Template/Bookmarks/add.php**. With that removed, we'll also update
+from **templates/Bookmarks/add.php**. With that removed, we'll also update
 the ``add()`` action from **src/Controller/BookmarksController.php** to look
 like::
 
@@ -347,7 +347,7 @@ Updating the Views
 ------------------
 
 With the entity updated we can add a new control for our tags. In
-**src/Template/Bookmarks/add.php** and **src/Template/Bookmarks/edit.php**,
+**templates/Bookmarks/add.php** and **templates/Bookmarks/edit.php**,
 replace the existing ``tags._ids`` control with the following::
 
     echo $this->Form->control('tag_string', ['type' => 'text']);

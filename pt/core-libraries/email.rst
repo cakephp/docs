@@ -258,8 +258,8 @@ usar layouts e os elementos assim como vistas normais::
         ->from('app@domain.com')
         ->send();
 
-O acima usaria **src/Template/Email/html/welcome.php** para a vista e
-**src/Template/Layout/E-mail/html/fancy.php** para o layout. Você pode enviar
+O acima usaria **templates/Email/html/welcome.php** para a vista e
+**templates/Layout/E-mail/html/fancy.php** para o layout. Você pode enviar
 mensagens de e-mail com templates de várias partes, veja::
 
     $email = new Email();
@@ -271,10 +271,10 @@ mensagens de e-mail com templates de várias partes, veja::
 
 Este usaria os seguintes arquivos de template:
 
-* **src/Template/Email/text/welcome.php**
-* **src/Template/Layout/Email/text/fancy.php**
-* **src/Template/Email/html/welcome.php**
-* **src/Template/Layout/Email/html/fancy.php**
+* **templates/Email/text/welcome.php**
+* **templates/Layout/Email/text/fancy.php**
+* **templates/Email/html/welcome.php**
+* **templates/Layout/Email/html/fancy.php**
 
 Ao enviar e-mails com templates, você tem a opção de enviar qualquer ``text``,
 ``html`` ou ``both``.
@@ -315,7 +315,7 @@ apropriado usando o método ``Email::theme()``::
 
 Isso permite que você substituir o ``new_comment`` em seu tema, sem modificar o
 plug-in Blog. O arquivo de template precisa ser criado no seguinte caminho:
-**src/Template/Plugin/TestTheme/Blog/Email/text/new_comment.php**.
+**templates/Plugin/TestTheme/Blog/Email/text/new_comment.php**.
 
 Envio de Anexos
 ===============

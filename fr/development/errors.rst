@@ -413,12 +413,12 @@ Exception Renderer
 La classe ExceptionRenderer avec l'aide de ``ErrorController`` s'occupe du rendu
 des pages d'erreur pour toutes les exceptions lancées par votre application.
 
-Les vues de la page d'erreur sont localisées dans **src/Template/Error/**. Pour
+Les vues de la page d'erreur sont localisées dans **templates/Error/**. Pour
 toutes les erreurs 4xx et 5xx, les fichiers de template **error400.php** et
 **error500.php** sont utilisées respectivement. Vous pouvez les personnaliser
-selon vos besoins. Par défaut, votre **src/Template/Layout/error.php** est
+selon vos besoins. Par défaut, votre **templates/Layout/error.php** est
 également utilisé pour les pages d'erreur. Si par exemple, vous voulez utiliser
-un autre layout **src/Template/Layout/my_error.php** pour vos pages d'erreur,
+un autre layout **templates/Layout/my_error.php** pour vos pages d'erreur,
 modifiez simplement les vues d'erreur et ajoutez la ligne
 ``$this->layout = 'my_error';`` dans **error400.php** et **error500.php**.
 
@@ -445,7 +445,7 @@ Si votre application contenait l'exception suivante::
     {};
 
 Vous pourriez fournir de jolies erreurs de développement, en créant
-**src/Template/Error/missing_widget.php**. Quand on est en mode production,
+**templates/Error/missing_widget.php**. Quand on est en mode production,
 l'erreur du dessus serait traitée comme une erreur 500. Le constructeur
 pour :php:exc:`Cake\\Core\\Exception\\Exception` a été étendu, vous autorisant
 à lui passer des données hashées. Ces hashs sont interpolés dans le

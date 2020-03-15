@@ -101,10 +101,10 @@ quais variáveis de exibição ``XmlView`` devem Serializar em XML ou JSON.
 
 Se quisermos modificar os dados antes de serem convertidos em XML ou JSON, não devemos
 definir a variável de exibição `` _serialize`` e, em vez disso, use arquivos de template. Colocamos
-as saidas REST para nosso RecipesController dentro de **src/Template/Recipes/xml**. Nós também podemos usar
+as saidas REST para nosso RecipesController dentro de **templates/Recipes/xml**. Nós também podemos usar
 The :php:class:`Xml` para saída XML rápida e fácil::
 
-    // src/Template/Recipes/xml/index.php
+    // templates/Recipes/xml/index.php
     // Faça alguma formatação e manipulação em
     // the $recipes array.
     $xml = Xml::fromArray(['response' => $recipes]);

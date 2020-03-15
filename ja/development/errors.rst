@@ -67,7 +67,7 @@ CakePHP は PHP エラーと例外の両方を処理するために ``Cake\Error
 デフォルトのエラーハンドラは、 ``Cake\Error\ExceptionRenderer`` とアプリケーションの
 ``ErrorController`` の助けを借りて、アプリケーションで発生した全ての捕捉されない例外を描画します。
 
-エラーページのビューは **src/Template/Error/** に配置されます。デフォルトでは、
+エラーページのビューは **templates/Error/** に配置されます。デフォルトでは、
 すべての 4xx エラーは **error400.php** テンプレートを使い、
 すべての 5xx エラーは **error500.php** を使います。
 エラーテンプレートの変数は次のとおりです。
@@ -87,13 +87,13 @@ CakePHP は PHP エラーと例外の両方を処理するために ``Cake\Error
 エラーページレイアウトのカスタマイズ
 ------------------------------------
 
-デフォルトでは、エラーテンプレートは、レイアウトに **src/Template/Layout/error.php** を使います。
+デフォルトでは、エラーテンプレートは、レイアウトに **templates/Layout/error.php** を使います。
 ``layout`` プロパティーを使って別のレイアウトを選ぶことができます。 ::
 
-    // src/Template/Error/error400.php の中で
+    // templates/Error/error400.php の中で
     $this->layout = 'my_error';
 
-上記は、エラーページのレイアウトとして **src/Template/Layout/my_error.php** を使用します。
+上記は、エラーページのレイアウトとして **templates/Layout/my_error.php** を使用します。
 CakePHP によって引き起こされる多くの例外は、特定のビューテンプレートをデバッグモードで描画します。
 デバッグをオフにすると、CakePHP によって生成されたすべての例外は、ステータスコードに基づいて
 **error400.php** または **error500.php** のいずれかを使用します。
@@ -262,7 +262,7 @@ ErrorController クラスの変更
     {
     }
 
-**src/Template/Error/missing_widget.php** を作ることで、素晴らしい開発用エラーを提供できるでしょう。
+**templates/Error/missing_widget.php** を作ることで、素晴らしい開発用エラーを提供できるでしょう。
 本番モードでは、上記のエラーは 500 エラーとして扱われ、 **error500** テンプレートを使用するでしょう。
 
 例外コードが ``400`` と ``506`` の間にある場合、例外コードは HTTP レスポンスコードとして使用されます。

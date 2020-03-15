@@ -130,7 +130,7 @@ C'est une situation où un fichier de vue est utile::
         }
     }
 
-    // Code de la vue - src/Template/Articles/json/index.php
+    // Code de la vue - templates/Articles/json/index.php
     foreach ($articles as &$article) {
         unset($article->generated_html);
     }

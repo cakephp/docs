@@ -80,9 +80,9 @@ Entity 类名是单数、首字母大写、无后缀的。``User``、``ArticleCa
 视图约定
 ========
 
-视图模板文件使用它对应的控制器方法的名字以下划线形式命名。``ArticlesController`` 类的 ``viewAll()`` 防范将会对应视图模板文件 **src/Template/Articles/view_all.php**。
+视图模板文件使用它对应的控制器方法的名字以下划线形式命名。``ArticlesController`` 类的 ``viewAll()`` 防范将会对应视图模板文件 **templates/Articles/view_all.php**。
 
-基本模式就是：**src/Template/Controller/underscored_function_name.php**。
+基本模式就是：**templates/Controller/underscored_function_name.php**。
 
 .. note::
 
@@ -99,7 +99,7 @@ Entity 类名是单数、首字母大写、无后缀的。``User``、``ArticleCa
 -  Table 类：``ArticlesTable``，在文件 **src/Model/Table/ArticlesTable.php** 中
 -  Entity 类：``Article``，在文件 **src/Model/Entity/Article.php** 中
 -  控制器类：``ArticlesController``，在文件 **src/Controller/ArticlesController.php** 中
--  视图模板，在文件 **src/Template/Articles/index.php** 中
+-  视图模板，在文件 **templates/Articles/index.php** 中
 
 使用这些约定，CakePHP 知道 http://example.com/articles/ 的请求映射到 ArticlesController（Articles 模型自动可用并被绑定到数据库的 articles 表）的 ``index()`` 方法，然后呈现给一个文件。除了通过创建无论如何需要创建的类和文件之外，这些关系都不是通过任何方式配置的。
 

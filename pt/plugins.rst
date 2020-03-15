@@ -467,17 +467,17 @@ Plugin Views
 ============
 
 As views se comportam exatamente como ocorrem em aplicações normais. Basta colocá-los na
-pasta ``plugins/[PluginName]/src/Template/``. Para nós
+pasta ``plugins/[PluginName]/templates/``. Para nós
 o plugin ContactManager, precisamos de uma view para o nosso ``ContactsController::index()``
 action, então incluamos isso também::
 
-    // plugins/ContactManager/src/Template/Contacts/index.php:
+    // plugins/ContactManager/templates/Contacts/index.php:
     <h1>Contacts</h1>
     <p>Following is a sortable list of your contacts</p>
     <!-- A sortable list of contacts would go here....-->
 
 Os plugins podem fornecer seus próprios layouts. Para adicionar layouts em plugins, coloque seus arquivos de template dentro
-``plugins/[PluginName]/src/Template/Layout``. Para usar um layout de plug-in em seu controller
+``plugins/[PluginName]/templates/Layout``. Para usar um layout de plug-in em seu controller
 você pode fazer o seguinte::
 
     public $layout = 'ContactManager.admin';
@@ -495,28 +495,28 @@ Substituindo Templates de plugins do na sua aplicação
 Você pode substituir todas as view do plugin do seu aplicativo usando caminhos especiais. E se
 você tem um plugin chamado 'ContactManager', você pode substituir os arquivos do template do
 plugin com lógica de visualização específica da aplicação criando arquivos usando o seguinte
-template **src/Template/Plugin/[Plugin]/[Controller]/[view].php**. Para o
+template **templates/Plugin/[Plugin]/[Controller]/[view].php**. Para o
 controller Contacts você pode fazer o seguinte arquivo::
 
-    src/Template/Plugin/ContactManager/Contacts/index.php
+    templates/Plugin/ContactManager/Contacts/index.php
 
 Criar este arquivo permitiria que você substituir
-**plugins/ContactManager/src/Template/Contacts/index.php**.
+**plugins/ContactManager/templates/Contacts/index.php**.
 
 Se o seu plugin estiver em uma dependência no composer (ou seja, 'TheVendor/ThePlugin'), o
 caminho para da view 'index' do controller personalizado será::
 
-    src/Template/Plugin/TheVendor/ThePlugin/Custom/index.php
+    templates/Plugin/TheVendor/ThePlugin/Custom/index.php
 
 Criar este arquivo permitiria que você substituir
-**vendor/thevendor/theplugin/src/Template/Custom/index.php**.
+**vendor/thevendor/theplugin/templates/Custom/index.php**.
 
 Se o plugin implementar um prefixo de roteamento, você deve incluir o prefixo de roteamento em seu
 O template para substitui.
 
 Se o plugin 'Contact Manager' implementou um prefixo 'admin', o caminho principal seria::
 
-    src/Template/Plugin/ContactManager/Admin/ContactManager/index.php
+    templates/Plugin/ContactManager/Admin/ContactManager/index.php
 
 .. _plugin-assets:
 

@@ -466,7 +466,7 @@ The generated form and control will automatically submit on change.
 
 .. code-block:: php
 
-    <!-- src/Template/Posts/index.php -->
+    <!-- templates/Posts/index.php -->
     <table>
         <tr>
             <th><?= $this->Paginator->sort('id', 'ID') ?></th>

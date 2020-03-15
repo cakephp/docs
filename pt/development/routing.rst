@@ -485,7 +485,7 @@ mais simples. O comportamento comum aos controladores prefixados e não prefixad
 ser encapsulado usando herança, :doc:`/controllers/components` ou traits. Usando o exemplo
 de nossos usuários, acessar a URL ``/admin/users/edit/5`` chamaria o método ``edit()`` do nosso
 **src/Controller/Admin/UsersController.php** passando 5 como o primeiro parâmetro. O arquivo
-de visualização usado seria **src/Template/Admin/Users/edit.php**.
+de visualização usado seria **templates/Admin/Users/edit.php**.
 
 Você pode mapear a URL /admin para sua ação ``index()`` do controlador de páginas usando a seguinte rota::
 

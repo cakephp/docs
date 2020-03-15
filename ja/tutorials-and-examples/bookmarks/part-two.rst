@@ -67,7 +67,7 @@ AppController に追加しましょう。 ::
         }
     }
 
-さらに **src/Template/Users/login.php** に以下のように追記します。 ::
+さらに **templates/Users/login.php** に以下のように追記します。 ::
 
     <h1>Login</h1>
     <?= $this->Form->create() ?>
@@ -205,7 +205,7 @@ AppController に追加しましょう。 ::
 元のページにリダイレクトされるはずです。もし、エラーメッセージが表示されないなら、
 レイアウトに以下を追加してください。 ::
 
-    // src/Template/Layout/default.php の中で
+    // templates/Layout/default.php の中で
     <?= $this->Flash->render() ?>
 
 これで許可エラーメッセージが表示されるはずです。
@@ -219,7 +219,7 @@ AppController に追加しましょう。 ::
 #. ブックマークを編集するときにユーザーを選べる
 #. 一覧ページに他のユーザーのブックマークが表示される
 
-まず追加のフォームから取り組みましょう。はじめに **src/Template/Bookmarks/add.php** から
+まず追加のフォームから取り組みましょう。はじめに **templates/Bookmarks/add.php** から
 ``control('user_id')`` を削除します。 削除したら、 **src/Controller/BookmarksController.php**
 の ``add()`` アクションを以下のように修正します。 ::
 
@@ -336,7 +336,7 @@ AppController に追加しましょう。 ::
 ----------------
 
 エンティティーを修正するとタグ用の新しいインプットを追加することができます。
-**src/Template/Bookmarks/add.php** と **src/Template/Bookmarks/edit.php** の
+**templates/Bookmarks/add.php** と **templates/Bookmarks/edit.php** の
 すでにある ``tags._ids`` のインプットを以下と置き換えます。 ::
 
     echo $this->Form->control('tag_string', ['type' => 'text']);

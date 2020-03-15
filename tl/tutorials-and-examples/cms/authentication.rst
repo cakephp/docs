@@ -122,7 +122,7 @@ the login action::
         }
     }
 
-And in **src/Template/Users/login.php** add the following::
+And in **templates/Users/login.php** add the following::
 
     <h1>Login</h1>
     <?= $this->Form->create() ?>
@@ -266,7 +266,7 @@ Now if you try to edit or delete an article that does not belong to you,
 you should be redirected back to the page you came from. If no error message is
 displayed, add the following to your layout::
 
-    // In src/Template/Layout/default.php
+    // In templates/Layout/default.php
     <?= $this->Flash->render() ?>
 
 Next you should add the ``tags`` action to the actions allowed for
@@ -337,7 +337,7 @@ Next we'll update the ``edit`` action. Replace the edit method with the followin
 Here we're modifying which properties can be mass-assigned, via the options
 for ``patchEntity()``. See the :ref:`changing-accessible-fields` section for
 more information. Remember to remove the ``user_id`` control from
-**src/Template/Articles/edit.php** as we no longer need it.
+**templates/Articles/edit.php** as we no longer need it.
 
 Wrapping Up
 ===========

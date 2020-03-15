@@ -110,7 +110,7 @@
 
 .. code-block:: php
 
-    <!-- src/Template/Users/add.php -->
+    <!-- templates/Users/add.php -->
 
     <div class="users form">
     <?= $this->Form->create($user) ?>
@@ -258,12 +258,12 @@
 
 Теперь каждый раз пароль, назначенный пользователю, будет хешироваться
 с помощью класса `DefaultPasswordHasher`. Теперь создайте простой шаблон
-файла Вида для функции входа: **src/Template/Users/login.php**
+файла Вида для функции входа: **templates/Users/login.php**
 и добавьте следующие строки:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Users/login.php -->
+    <!-- File: templates/Users/login.php -->
 
     <div class="users form">
     <?= $this->Flash->render() ?>

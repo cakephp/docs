@@ -131,10 +131,10 @@ Conventions des Views
 Les fichiers de template de view sont nommés d'après les fonctions du controller
 qu'elles affichent, sous une forme avec underscores. La fonction ``viewAll()``
 de la classe ``ArticlesController`` cherchera un gabarit de view dans
-**src/Template/Articles/view_all.php**.
+**templates/Articles/view_all.php**.
 
 Le schéma classique est
-**src/Template/Controller/nom_de_fonction_avec_underscore.php**.
+**templates/Controller/nom_de_fonction_avec_underscore.php**.
 
 En utilisant les conventions CakePHP dans le nommage des différentes parties
 de votre application, vous gagnerez des fonctionnalités sans les tracas et les
@@ -147,7 +147,7 @@ abordées:
 -  Classe Entity: ``Article`` se trouvant dans **src/Model/Entity/Article.php**
 -  Classe Controller: ``ArticlesController`` se trouvant dans
    **src/Controller/ArticlesController.php**
--  Template de View se trouvant dans **src/Template/Articles/index.php**
+-  Template de View se trouvant dans **templates/Articles/index.php**
 
 En utilisant ces conventions, CakePHP sait qu'une requête de type
 http://exemple.com/articles/ sera liée à un appel à la fonction ``index()`` du

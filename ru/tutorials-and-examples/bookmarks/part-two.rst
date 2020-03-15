@@ -71,7 +71,7 @@
         }
     }
 
-И в **src/Template/Users/login.php** добавьте следующее::
+И в **templates/Users/login.php** добавьте следующее::
 
     <h1>Вход</h1>
     <?= $this->Form->create() ?>
@@ -218,7 +218,7 @@
 вы пришли. Если вы не увидели сообщения об ошибке, добавьте в ваш лейаут
 следующее::
 
-    // В src/Template/Layout/default.php
+    // В templates/Layout/default.php
     <?= $this->Flash->render() ?>
 
 Теперь вы должны видеть сообщения об ошибках авторизации.
@@ -234,7 +234,7 @@
 #. В списке выводятся закладки всех пользователей.
 
 Давайте для начала разберемся с формой для добавления закладок. Удалите
-``input('user_id')`` из шаблона **src/Template/Bookmarks/add.php**. Также
+``input('user_id')`` из шаблона **templates/Bookmarks/add.php**. Также
 нам нужно обновить экшен ``add()`` в **src/Controller/BookmarksController.php**,
 чтобы он принял следующий вид::
 
@@ -361,8 +361,8 @@ later on.
 ----------------
 
 Теперь после обновления объекта мы можем добавить новое поле ввода для наших
-тегов. В **src/Template/Bookmarks/add.php** и
-**src/Template/Bookmarks/edit.php** замените существующее поле ввода
+тегов. В **templates/Bookmarks/add.php** и
+**templates/Bookmarks/edit.php** замените существующее поле ввода
 ``tags._ids`` следующим::
 
     echo $this->Form->input('tag_string', ['type' => 'text']);

@@ -385,7 +385,7 @@ Creating the View
 
 Now if you visit the **/bookmarks/tagged** URL, CakePHP will show an error
 letting you know that you have not made a view file. Next, let's build the
-view file for our ``tags()`` action. In **src/Template/Bookmarks/tags.php**
+view file for our ``tags()`` action. In **templates/Bookmarks/tags.php**
 put the following content::
 
     <h1>

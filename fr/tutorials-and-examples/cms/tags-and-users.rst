@@ -105,7 +105,7 @@ l'action ``add`` pour qu'elle ressemble à ceci::
 Les lignes de code ajoutées chargent une liste des tags sous forme de tableau associatif
 de la forme ``id => title``. Ce format nous permet de créer un nouvel input de tags dans
 notre template. Ajoutez la ligne suivante dans le bloc PHP avec les autres appels à
-``control()`` dans **src/Template/Articles/add.php**::
+``control()`` dans **templates/Articles/add.php**::
 
     echo $this->Form->control('tags._ids', ['options' => $tags]);
 
@@ -144,7 +144,7 @@ maintenant ressemble à ceci::
 
 Pensez à ajouter le nouveau select multiple qui permet de sélectionner les tags
 comme nous l'avons fait dans le template **add.php** au template
-**src/Template/Articles/edit.php**.
+**templates/Articles/edit.php**.
 
 Trouver des Articles via les Tags
 =================================
@@ -300,7 +300,7 @@ Création de la view
 
 Si vous visitez à nouveau **/articles/tagged**, CakePHP vous affichera une nouvelle
 erreur qui vous fait savoir qu'il manque le fichier de view. Créez le fichier
-**src/Template/Articles/tags.php** et ajoutez le contenu suivant::
+**templates/Articles/tags.php** et ajoutez le contenu suivant::
 
     <h1>
         Articles avec les tags
@@ -382,7 +382,7 @@ Mettre à jour nos View
 
 Maintenant que notre entity est mise à jour, nous pouvons ajouter un nouvel
 élément de contrôle pour nos tags. Dans
-**src/Template/Articles/add.php** et **src/Template/Articles/edit.php**,
+**templates/Articles/add.php** et **templates/Articles/edit.php**,
 remplacez l'élément de contrôle existant ``tags._ids`` avec la déclaration
 suivante::
 

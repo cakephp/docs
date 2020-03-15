@@ -18,15 +18,15 @@ CakePHP ссылается на эти сообщения как «флэш-со
 магический метод ``__call()`` и его метод ``set()``. Чтобы предотвратить
 многословность в приложении, магический метод ``__call()`` компонента
 ``FlashComponent`` позволяет использовать имя метода, которое сопоставляется
-с элементом, расположенным в каталоге **src/Template/Element/Flash**.
+с элементом, расположенным в каталоге **templates/Element/Flash**.
 В соответствии соглашениями, имена методов в верблюжьем регистре будут
 соотносится с именем элемента, написанном в нижнем регистре с разделением слов
 с помощью знака подчеркивания::
 
-    // Использует src/Template/Element/Flash/success.php
+    // Использует templates/Element/Flash/success.php
     $this->Flash->success('This was successful');
 
-    // Использует src/Template/Element/Flash/great_success.php
+    // Использует templates/Element/Flash/great_success.php
     $this->Flash->greatSuccess('This was greatly successful');
 
 В качестве альтернативы вы можете задавать текстовое сообщение без использования
@@ -73,7 +73,7 @@ CakePHP ссылается на эти сообщения как «флэш-со
     // В вашем Виде
     <?= $this->Flash->render('positive') ?>
 
-    <!-- В src/Template/Element/Flash/success.php -->
+    <!-- В templates/Element/Flash/success.php -->
     <div id="flash-<?= h($key) ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>
@@ -86,7 +86,7 @@ CakePHP ссылается на эти сообщения как «флэш-со
     $this->Flash->warning('Мое сообщение', ['plugin' => 'ИмяПлагина']);
 
 Приведенный выше код будет использовать элемент **warning.ctp** находящийся в
-**plugins/PluginName/src/Template/Element/Flash** для вывода флэш-сообщения.
+**plugins/PluginName/templates/Element/Flash** для вывода флэш-сообщения.
 
 .. note::
 

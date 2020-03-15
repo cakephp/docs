@@ -583,7 +583,7 @@ Afficher les Messages Flash de Auth
 
 Pour afficher les messages d'erreur de session que Auth génère, vous devez
 ajouter les lignes de code suivante dans votre layout. Ajoutez les deux lignes
-suivantes au fichier **src/Template/Layouts/default.php** dans la section body::
+suivantes au fichier **templates/Layouts/default.php** dans la section body::
 
     // Seule cette ligne est nécessaire à partir de 3.4.0.
     echo $this->Flash->render();

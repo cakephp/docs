@@ -353,7 +353,7 @@ Ahora si visitas la URL **/bookmarks/tagged**, CakePHP mostrará un error advirt
 
 Siguiente paso, creemos un archivo de vista para nuestro método ``tags()``.
 
-En **src/Template/Bookmarks/tags.php** añade el siguiente código::
+En **templates/Bookmarks/tags.php** añade el siguiente código::
 
     <h1>
         Bookmarks tagged with

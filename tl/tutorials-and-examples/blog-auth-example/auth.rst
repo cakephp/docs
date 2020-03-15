@@ -106,7 +106,7 @@ tutorial, we will show just the add.php:
 
 .. code-block:: php
 
-    <!-- src/Template/Users/add.php -->
+    <!-- templates/Users/add.php -->
 
     <div class="users form">
     <?= $this->Form->create($user) ?>
@@ -251,12 +251,12 @@ entity file and add the following::
 
 Now every time the password property is assigned to the user it will be hashed
 using the ``DefaultPasswordHasher`` class.  We're just missing a template view
-file for the login function. Open up your **src/Template/Users/login.php** file
+file for the login function. Open up your **templates/Users/login.php** file
 and add the following lines:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Users/login.php -->
+    <!-- File: templates/Users/login.php -->
 
     <div class="users form">
     <?= $this->Flash->render() ?>
