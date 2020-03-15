@@ -230,7 +230,7 @@ You can do this using themes::
 This allows you to override the ``new_comment`` template in your theme without
 modifying the Blog plugin. The template file needs to be created in the
 following path:
-**templates/plugin/TestTheme/plugin/Blog/email/text/new_comment.php**.
+**templates/Plugin/TestTheme/Plugin/Blog/email/text/new_comment.php**.
 
 Sending Attachments
 ===================

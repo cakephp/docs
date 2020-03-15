@@ -319,7 +319,7 @@ You can do this using themes by telling Email to use appropriate theme using
 This allows you to override the ``new_comment`` template in your theme without
 modifying the Blog plugin. The template file needs to be created in the
 following path:
-**templates/Plugin/TestTheme/Plugin/Blog/Email/text/new_comment.php**.
+**templates/Plugin/TestTheme/Plugin/Blog/email/text/new_comment.php**.
 
 .. deprecated:: 3.4.0
     Use ``setTemplate()`` instead of ``template()``. Use ``setLayout()`` instead
