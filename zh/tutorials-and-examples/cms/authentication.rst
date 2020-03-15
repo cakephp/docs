@@ -249,7 +249,7 @@ CMS 教案 - 认证
 现在尝试编辑或者删除一个不属于当前用户的 article，页面将会跳转到原始页面。如果你没有看到错误信息，在布局中加入
 以下代码::
 
-    // In templates/Layout/default.php
+    // In templates/layout/default.php
     <?= $this->Flash->render() ?>
 
 接下来我们需要将 ``tags`` 行为让任何人访问，在 **src/Controller/ArticlesController.php** 的 ``initialize()`` 方法

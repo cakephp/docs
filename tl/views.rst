@@ -333,7 +333,7 @@ want to conditionally show headings or other markup:
 
 .. code-block:: php
 
-    // In templates/Layout/default.php
+    // In templates/layout/default.php
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -394,12 +394,12 @@ Layouts
 A layout contains presentation code that wraps around a view. Anything you want
 to see in all of your views should be placed in a layout.
 
-CakePHP's default layout is located at **templates/Layout/default.php**.
+CakePHP's default layout is located at **templates/layout/default.php**.
 If you want to change the overall look of your application, then this is the
 right place to start, because controller-rendered view code is placed inside of
 the default layout when the page is rendered.
 
-Other layout files should be placed in **templates/Layout**. When you create
+Other layout files should be placed in **templates/layout**. When you create
 a layout, you need to tell CakePHP where to place the output of your views. To
 do so, make sure your layout includes a place for ``$this->fetch('content')``
 Here's an example of what a default layout might look like:
@@ -452,7 +452,7 @@ You can set the ``title`` block content from inside your view file::
     $this->assign('title', 'View Active Users');
 
 You can create as many layouts as you wish: just place them in the
-**templates/Layout** directory, and switch between them inside of your
+**templates/layout** directory, and switch between them inside of your
 controller actions using the controller or view's ``$layout`` property::
 
     // From a controller

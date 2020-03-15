@@ -33,7 +33,7 @@ exatamente o mesmo que **templates/**.
 
 Por exemplo, o arquivo de exibição para uma `action` de edição de um ``controller`` de posts residiria
 em **plugins/Modern/templates/Posts/edit.php**. Os arquivos de layout residiriam em
-**plugins/Modern/templates/Layout/**. Você pode fornecer modelos personalizados
+**plugins/Modern/templates/layout/**. Você pode fornecer modelos personalizados
 para plugins com um tema também. Se você tiver um plugin chamado 'Cms', que
 contenha um ``TagsController``, o tema moderno poderia fornecer
 **plugins/Modern/templates/Plugin/Cms/Tags/edit.php** para substituir o template

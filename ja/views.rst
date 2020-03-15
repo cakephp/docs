@@ -321,7 +321,7 @@ fetch を使うとブロックが存在するかどうかによってブロッ�
 
 .. code-block:: php
 
-    // templates/Layout/default.php の中で
+    // templates/layout/default.php の中で
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -382,12 +382,12 @@ fetch を使うとブロックが存在するかどうかによってブロッ�
 レイアウトにはビューをくるむ表示コードが入ります。すべてのビューから見えて欲しいものは
 レイアウトに配置されるべきです。
 
-CakePHP の既定のレイアウトは **templates/Layout/default.php** に置かれます。
+CakePHP の既定のレイアウトは **templates/layout/default.php** に置かれます。
 もし、アプリケーションの見栄え全体を変更したい場合、これが手始めとなり、
 なぜならページが描画される時には、コントローラーによって描画されるビューのコードは、
 既定のレイアウトの中に置かれるからです。
 
-他のレイアウトファイルは **templates/Layout** に配置されるべきです。
+他のレイアウトファイルは **templates/layout** に配置されるべきです。
 レイアウトを作るとき、ビューの出力がどこに配置されるかを CakePHP に伝える必要があります。
 そのために、レイアウトには ``$this->fetch('content')`` を入れるようにしてください。
 これは既定のレイアウトがどのようなものかの一例です。
@@ -441,7 +441,7 @@ CakePHP の既定のレイアウトは **templates/Layout/default.php** に置�
 ``title`` ブロックが空の値の場合、自動的に ``'Admin/Articles'`` のような
 現在のテンプレートパスの表現に置き換えられます。
 
-好きなだけレイアウトを作ることができます。 **templates/Layout** ディレクトリーに置いて、
+好きなだけレイアウトを作ることができます。 **templates/layout** ディレクトリーに置いて、
 コントローラーのアクションの中か、ビューの ``$layout`` プロパティーで切り替えるだけです。 ::
 
     // コントローラーから

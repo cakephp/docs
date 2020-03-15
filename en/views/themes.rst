@@ -27,7 +27,7 @@ exactly the same as **templates/**.
 
 For example, the view file for an edit action of a Posts controller would reside
 at **plugins/Modern/templates/Posts/edit.php**. Layout files would reside in
-**plugins/Modern/templates/Layout/**. You can provide customized templates
+**plugins/Modern/templates/layout/**. You can provide customized templates
 for plugins with a theme as well. If you had a plugin named 'Cms', that
 contained a TagsController, the Modern theme could provide
 **plugins/Modern/templates/Plugin/Cms/Tags/edit.php** to replace the edit

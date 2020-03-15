@@ -331,7 +331,7 @@ titulos ou outras marcações:
 
 .. code-block:: php
 
-    // In templates/Layout/default.php
+    // In templates/layout/default.php
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -390,12 +390,12 @@ O :php:meth:`Cake\\View\\Helper\\HtmlHelper` também lhe permite controlar qual 
 Um layout contém códigos de apresentação que envolvem uma *view*. Qualquer coisa que você quer ver em todas
 as suas *views* deve ser colocada em um *layout*.
 
-O layout default do CakePHP está localizado em **templates/Layout/default.php**.
+O layout default do CakePHP está localizado em **templates/layout/default.php**.
 Se você quer alterar a aparência geral da sua aplicação, então este é o lugar certo para começar,
 porque o código de exibição processado pelo controlador é colocado dentro do
 layout padrão quando a página é processada.
 
-Outros arquivos de *layout* devem estar localizados em **templates/Layout**. Quando você cria
+Outros arquivos de *layout* devem estar localizados em **templates/layout**. Quando você cria
 um *layout*, você precisa dizer para o cakePHP onde colocar o resultado de suas *views*. Para fazer isso,
 tenha certeza que seu *layout* inclui um lugar para ``$this->fetch('content')``.
 Aqui um exemplo do que um layout padrão pode parecer:
@@ -447,7 +447,7 @@ Você pode definir o conteúdo do bloco ``title`` de dentro do seu arquivo da *v
     $this->assign('title', 'Visualizar Usuários Ativos');
 
 Você pode criar quantos layouts você quiser: somente os coloque no diretório
-**templates/Layout**, a troca entre eles dentro das suas ações do *controller* ocorre
+**templates/layout**, a troca entre eles dentro das suas ações do *controller* ocorre
 usando a propriedade do *controller* ou *view* ``$layout``::
 
     // Em um controller

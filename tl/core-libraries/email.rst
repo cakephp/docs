@@ -261,7 +261,7 @@ and elements just like normal views::
         ->send();
 
 The above would use **templates/Email/html/welcome.php** for the view
-and **templates/Layout/Email/html/fancy.php** for the layout. You can
+and **templates/layout/Email/html/fancy.php** for the layout. You can
 send multipart templated email messages as well::
 
     $email = new Email();
@@ -275,9 +275,9 @@ send multipart templated email messages as well::
 This would use the following template files:
 
 * **templates/Email/text/welcome.php**
-* **templates/Layout/Email/text/fancy.php**
+* **templates/layout/Email/text/fancy.php**
 * **templates/Email/html/welcome.php**
-* **templates/Layout/Email/html/fancy.php**
+* **templates/layout/Email/html/fancy.php**
 
 When sending templated emails you have the option of sending either
 ``text``, ``html`` or ``both``.

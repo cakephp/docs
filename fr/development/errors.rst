@@ -416,9 +416,9 @@ des pages d'erreur pour toutes les exceptions lancées par votre application.
 Les vues de la page d'erreur sont localisées dans **templates/Error/**. Pour
 toutes les erreurs 4xx et 5xx, les fichiers de template **error400.php** et
 **error500.php** sont utilisées respectivement. Vous pouvez les personnaliser
-selon vos besoins. Par défaut, votre **templates/Layout/error.php** est
+selon vos besoins. Par défaut, votre **templates/layout/error.php** est
 également utilisé pour les pages d'erreur. Si par exemple, vous voulez utiliser
-un autre layout **templates/Layout/my_error.php** pour vos pages d'erreur,
+un autre layout **templates/layout/my_error.php** pour vos pages d'erreur,
 modifiez simplement les vues d'erreur et ajoutez la ligne
 ``$this->layout = 'my_error';`` dans **error400.php** et **error500.php**.
 

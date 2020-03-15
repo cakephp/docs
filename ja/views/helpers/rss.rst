@@ -81,7 +81,7 @@ ArticlesController の ``initialize()`` メソッドに RequestHandler を加え
 レイアウト
 -----------------------------------
 
-RSS レイアウトはとてもシンプルです。 **templates/Layout/rss/default.php** 内に以下の内容を記述します。
+RSS レイアウトはとてもシンプルです。 **templates/layout/rss/default.php** 内に以下の内容を記述します。
 ::
 
     if (!isset($documentData)) {

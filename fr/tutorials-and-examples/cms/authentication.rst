@@ -278,7 +278,7 @@ Maintenant, si vous essayez de modifier ou supprimer un article qui ne vous
 appartient pas, vous serez redirigé sur la page où vous étiez avant. Si aucun
 message d'erreur n'apparaît, ajoutez ceci à votre layout::
 
-    // Dans templates/Layout/default.php
+    // Dans templates/layout/default.php
     <?= $this->Flash->render() ?>
 
 Bien que le code ci-dessus soit très simple, cela démontre comment vous pouvez

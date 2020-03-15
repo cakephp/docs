@@ -87,13 +87,13 @@ CakePHP は PHP エラーと例外の両方を処理するために ``Cake\Error
 エラーページレイアウトのカスタマイズ
 ------------------------------------
 
-デフォルトでは、エラーテンプレートは、レイアウトに **templates/Layout/error.php** を使います。
+デフォルトでは、エラーテンプレートは、レイアウトに **templates/layout/error.php** を使います。
 ``layout`` プロパティーを使って別のレイアウトを選ぶことができます。 ::
 
     // templates/Error/error400.php の中で
     $this->layout = 'my_error';
 
-上記は、エラーページのレイアウトとして **templates/Layout/my_error.php** を使用します。
+上記は、エラーページのレイアウトとして **templates/layout/my_error.php** を使用します。
 CakePHP によって引き起こされる多くの例外は、特定のビューテンプレートをデバッグモードで描画します。
 デバッグをオフにすると、CakePHP によって生成されたすべての例外は、ステータスコードに基づいて
 **error400.php** または **error500.php** のいずれかを使用します。

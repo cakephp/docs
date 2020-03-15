@@ -224,7 +224,7 @@ Maintenant, si vous essayez de voir, de modifier ou de supprimer un bookmark qui
 ne vous appartient pas, vous devriez être redirigé vers la page d'où vous venez.
 Si aucun message ne s'affiche, ajoutez la ligne suivante dans votre layout::
 
-    // Dans templates/Layout/default.php
+    // Dans templates/layout/default.php
     <?= $this->Flash->render() ?>
 
 Vous devriez maintenant voir les messages d'erreur d'autorisation.

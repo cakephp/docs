@@ -36,7 +36,7 @@ cela, la structure de dossier dans le dossier
 
 Par exemple, le fichier de vue pour une action edit d'un controller Posts se
 trouvera dans **plugins/Modern/templates/Posts/edit.php**. Les fichiers
-de layout se trouveront dans **plugins/Modern/templates/Layout/**. Vous
+de layout se trouveront dans **plugins/Modern/templates/layout/**. Vous
 pouvez aussi fournir des templates personnalisés pour les plugins avec un theme.
 Si vous aviez un plugin s'appelant 'Cms', qui contient un TagsController, le
 theme Modern pourrait fournir

@@ -599,7 +599,7 @@ bake で作っていないプラグインなら、クラスを自動的に読み
 
 プラグインは独自のレイアウトを提供することができます。
 プラグインレイアウトを追加するためには、テンプレートファイルを
-``plugins/[PluginName]/templates/Layout`` に配置します。
+``plugins/[PluginName]/templates/layout`` に配置します。
 プラグインレイアウトをコントローラーで使用するには、下記のようにします。 ::
 
     public $layout = 'ContactManager.admin';

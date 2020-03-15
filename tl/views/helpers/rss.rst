@@ -85,7 +85,7 @@ Layout
 ------
 
 An Rss layout is very simple, put the following contents in
-**templates/Layout/rss/default.php**::
+**templates/layout/rss/default.php**::
 
     if (!isset($documentData)) {
         $documentData = [];

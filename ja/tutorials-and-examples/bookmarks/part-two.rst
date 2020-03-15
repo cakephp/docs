@@ -205,7 +205,7 @@ AppController に追加しましょう。 ::
 元のページにリダイレクトされるはずです。もし、エラーメッセージが表示されないなら、
 レイアウトに以下を追加してください。 ::
 
-    // templates/Layout/default.php の中で
+    // templates/layout/default.php の中で
     <?= $this->Flash->render() ?>
 
 これで許可エラーメッセージが表示されるはずです。

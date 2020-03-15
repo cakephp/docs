@@ -251,7 +251,7 @@ CakePHP は、 :doc:`ビューレイヤー </views>` を使用してメールを
         ->send();
 
 上記は、ビューとして **templates/Email/html/welcome.php** を使用し、
-レイアウトとして **templates/Layout/Email/html/fancy.php** を使用します。
+レイアウトとして **templates/layout/Email/html/fancy.php** を使用します。
 以下のように、マルチパートのテンプレートメールを送信することもできます。 ::
 
     $email = new Email();
@@ -265,9 +265,9 @@ CakePHP は、 :doc:`ビューレイヤー </views>` を使用してメールを
 この例では、次のテンプレートファイルを使用します。
 
 * **templates/Email/text/welcome.php**
-* **templates/Layout/Email/text/fancy.php**
+* **templates/layout/Email/text/fancy.php**
 * **templates/Email/html/welcome.php**
-* **templates/Layout/Email/html/fancy.php**
+* **templates/layout/Email/html/fancy.php**
 
 テンプレートメールを送信する時、 ``text`` 、 ``html`` と ``both`` のうちの
 どれかを送信オプションとして指定します。

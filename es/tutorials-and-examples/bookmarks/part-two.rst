@@ -231,7 +231,7 @@ deberías ser redirigido a la página desde la que accediste.
 
 Si no se muestra ningún mensaje de error añade lo siguiente a tu layout::
 
-    // En templates/Layout/default.php
+    // En templates/layout/default.php
     <?= $this->Flash->render() ?>
 
 Deberías poder ver ahora los mensajes de error de autorización.

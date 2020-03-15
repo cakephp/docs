@@ -355,7 +355,7 @@ en-têtes ou autres balises:
 
 .. code-block:: php
 
-    // dans templates/Layout/default.php
+    // dans templates/layout/default.php
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -420,12 +420,12 @@ Tout ce que vous voulez voir dans toutes vos vues devra être placé dans un
 layout.
 
 Le fichier de layout par défaut de CakePHP est placé dans
-**templates/Layout/default.php**. Si vous voulez changer entièrement le
+**templates/layout/default.php**. Si vous voulez changer entièrement le
 look de votre application, alors c'est le bon endroit pour commencer, parce que
 le code de vue de rendu du controller est placé à l'intérieur du layout par
 défaut quand la page est rendue.
 
-Les autres fichiers de layout devront être placés dans **templates/Layout**.
+Les autres fichiers de layout devront être placés dans **templates/layout**.
 Quand vous créez un layout, vous devez dire à CakePHP où placer
 la sortie pour vos vues. Pour ce faire, assurez-vous que votre layout contienne
 ``$this->fetch('content')``. Voici un exemple de ce à quoi un layout pourrait
@@ -482,7 +482,7 @@ d'un fichier de vue::
     $this->assign('title', $titleContent);
 
 Vous pouvez créer autant de layouts que vous souhaitez: placez les juste dans
-le répertoire **templates/Layout**, et passez de l'un à l'autre depuis les
+le répertoire **templates/layout**, et passez de l'un à l'autre depuis les
 actions de votre controller en utilisant la propriété
 ``$layout`` de votre controller ou de votre vue::
 

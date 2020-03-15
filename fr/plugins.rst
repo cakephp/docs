@@ -504,7 +504,7 @@ incluons ceci aussi::
     <!-- Une liste triable de contacts irait ici....-->
 
 Les Plugins peuvent fournir leurs propres layouts. Ajoutez des layouts de
-plugin, dans ``plugins/[PluginName]/templates/Layout``. Pour utiliser le
+plugin, dans ``plugins/[PluginName]/templates/layout``. Pour utiliser le
 layout d'un plugin dans votre controller, vous pouvez faire ce qui suit::
 
     public $layout = 'ContactManager.admin';

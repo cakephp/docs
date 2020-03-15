@@ -208,7 +208,7 @@ pertença a você, você deve ser redirecionado para a página de onde veio. No
 entanto, não há nenhuma mensagem de erro sendo exibida, então vamos
 corrigir isso a seguir::
 
-    // In templates/Layout/default.php
+    // In templates/layout/default.php
     // Under the existing flash message.
     <?= $this->Flash->render('auth') ?>
 

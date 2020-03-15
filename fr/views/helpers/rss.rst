@@ -91,7 +91,7 @@ Layout
 ------
 
 Un layout Rss est très simple, mettez le contenu suivant dans
-**templates/Layout/rss/default.php**::
+**templates/layout/rss/default.php**::
 
     if (!isset($documentData)) {
         $documentData = [];

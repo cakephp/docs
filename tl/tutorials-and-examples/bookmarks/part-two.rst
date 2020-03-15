@@ -212,7 +212,7 @@ Now if you try to view, edit or delete a bookmark that does not belong to you,
 you should be redirected back to the page you came from. If no error message is
 displayed, add the following to your layout::
 
-    // In templates/Layout/default.php
+    // In templates/layout/default.php
     <?= $this->Flash->render() ?>
 
 You should now see the authorization error messages.
