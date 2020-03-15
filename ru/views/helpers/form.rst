@@ -2010,7 +2010,7 @@ FormHelper предоставляет несколько методов, кот�
             ->notEmpty('ticket');
     }
 
-    // И внутри Templates/Tickets/add.php у вас есть:
+    // И внутри templates/Tickets/add.php у вас есть:
     echo $this->Form->text('ticket');
 
     if ($this->Form->isFieldError('ticket')) {
@@ -2248,7 +2248,7 @@ Submit полезен, когда вам нужен только базовый 
 
 Для примера::
 
-    // В Templates/Tickets/index.php
+    // В templates/Tickets/index.php
     <?= $this->Form->postButton('Delete Record', ['controller' => 'Tickets', 'action' => 'delete', 5]) ?>
 
 Выведет HTML, похожий на:

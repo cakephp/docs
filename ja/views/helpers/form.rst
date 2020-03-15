@@ -2002,7 +2002,7 @@ FormHelper は、フィールドエラーを簡単にチェックしたり、必
             ->notEmpty('ticket');
     }
 
-    // そして、 Templates/Tickets/add.php の中が次のような場合:
+    // そして、 templates/Tickets/add.php の中が次のような場合:
     echo $this->Form->text('ticket');
 
     if ($this->Form->isFieldError('ticket')) {
@@ -2261,7 +2261,7 @@ POST ボタンの作成
 
 例::
 
-    // Templates/Tickets/index.php の中で
+    // templates/Tickets/index.php の中で
     <?= $this->Form->postButton('Delete Record', ['controller' => 'Tickets', 'action' => 'delete', 5]) ?>
 
 出力結果:

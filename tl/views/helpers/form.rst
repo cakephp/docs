@@ -2071,7 +2071,7 @@ Example::
             ->notEmpty('ticket');
     }
 
-    // And inside Templates/Tickets/add.php you have:
+    // And inside templates/Tickets/add.php you have:
     echo $this->Form->text('ticket');
 
     if ($this->Form->isFieldError('ticket')) {
@@ -2314,7 +2314,7 @@ SecurityComponent.
 
 For example::
 
-    // In Templates/Tickets/index.php
+    // In templates/Tickets/index.php
     <?= $this->Form->postButton('Delete Record', ['controller' => 'Tickets', 'action' => 'delete', 5]) ?>
 
 Will output HTML similar to:
