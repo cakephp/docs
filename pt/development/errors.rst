@@ -53,7 +53,7 @@ O manipulador de erros padrão renderiza todas as exceções não capturadas que
 ajuda de ``Cake\Error\ExceptionRenderer`` e o ``ErrorController`` do seu aplicativo.
 
 As visualizações da página de erro estão localizadas em **src/Template/Error/**. Por padrão,
-todos os erros 4xx usam o modelo **error400.ctp** e todos os erros 5xx usam o **error500.ctp**.
+todos os erros 4xx usam o modelo **error400.php** e todos os erros 5xx usam o **error500.ctp**.
 Seus modelos de erro terão as seguintes variáveis disponíveis:
 
 * ``message`` A mensagem da exceção.
@@ -83,7 +83,7 @@ error pages.
 
 Many exceptions raised by CakePHP will render specific view templates in debug
 mode. With debug turned off all exceptions raised by CakePHP will use either
-**error400.ctp** or **error500.ctp** based on their status code.
+**error400.php** or **error500.ctp** based on their status code.
 
 Customize the ErrorController
 =============================
