@@ -36,7 +36,7 @@ FlashComponent::
         'element' => 'success'
     ]);
 
-    // Dans votre View: Va utiliser great_success.ctp au lieu de succcess.ctp
+    // Dans votre View: Va utiliser great_success.php au lieu de succcess.php
     <?= $this->Flash->render('flash', [
         'element' => 'great_success'
     ]);
@@ -73,5 +73,5 @@ Les Messages Flash et les Themes
 
 FlashHelper utilise des elements normaux pour afficher les messages et va donc
 correspondre à n'importe quel thème que vous avez éventuellement spécifié. Donc
-quand votre thème a un fichier **src/Template/Element/Flash/error.ctp**, il sera
+quand votre thème a un fichier **src/Template/Element/Flash/error.php**, il sera
 utilisé, comme avec tout Element et View.

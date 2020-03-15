@@ -114,7 +114,7 @@ RecipesController à l'intérieur de **src/Template/Recipes/xml**. Nous pouvons
 aussi utiliser :php:class:`Xml` pour une sortie XML facile et rapide dans ces
 vues. Voici ce que notre vue index pourrait ressembler à::
 
-    // src/Template/Recipes/xml/index.ctp
+    // src/Template/Recipes/xml/index.php
     // Faire du formatage et de la manipulation sur le tableau
     // $recipes.
     $xml = Xml::fromArray(['response' => $recipes]);

@@ -115,7 +115,7 @@ JSON レスポンスからそれを取り除きたいとします。こういっ
         }
     }
 
-    // ビューのコード - src/Template/Articles/json/index.ctp
+    // ビューのコード - src/Template/Articles/json/index.php
     foreach ($articles as &$article) {
         unset($article->generated_html);
     }

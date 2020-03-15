@@ -322,7 +322,7 @@ Criando a view
 Agora, se você visitar a URL ``/bookmarks/tagged``, o CakePHP irá mostrar um
 erro e deixá-lo saber que você ainda não fez um arquivo view. Em seguida,
 vamos construir o arquivo view para a nossa ação ``tags``. Em
-**src/Template/Bookmarks/tags.ctp** coloque o seguinte conteúdo::
+**src/Template/Bookmarks/tags.php** coloque o seguinte conteúdo::
 
     <h1>
         Bookmarks tagged with

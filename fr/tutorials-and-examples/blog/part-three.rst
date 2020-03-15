@@ -186,8 +186,8 @@ CakePHP.
 .. note::
     Si vous utilisez Windows, pensez à utiliser \\ à la place de /.
 
-Vous devrez modifier ce qui suit dans **src/Template/Categories/add.ctp**
-et **src/Template/Categories/edit.ctp**::
+Vous devrez modifier ce qui suit dans **src/Template/Categories/add.php**
+et **src/Template/Categories/edit.php**::
 
     echo $this->Form->control('parent_id', [
         'options' => $parentCategories,
@@ -292,7 +292,7 @@ catégories dans l'arbre::
         }
     }
 
-Remplacez le contenu existant dans **src/Template/Categories/index.ctp** par
+Remplacez le contenu existant dans **src/Template/Categories/index.php** par
 ceci::
 
     <div class="actions large-2 medium-3 columns">
@@ -384,7 +384,7 @@ Le fichier **add** des articles devrait ressembler à ceci:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/add.ctp -->
+    <!-- File: src/Template/Articles/add.php -->
 
     <h1>Add Article</h1>
     <?php

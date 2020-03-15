@@ -77,7 +77,7 @@ así que hagámoslo ahora::
         }
     }
 
-Y en **src/Template/Users/login.ctp** añade lo siguiente::
+Y en **src/Template/Users/login.php** añade lo siguiente::
 
     <h1>Login</h1>
     <?= $this->Form->create() ?>
@@ -143,7 +143,7 @@ En el controlador ``UsersController`` añade lo siguiente::
 El código anterior le dice a ``AuthComponent`` que la acción ``add()`` no
 necesita autenticación ni autorización.
 
-Tal vez quieras tomarte un tiempo para limpiar **Users/add.ctp** y eliminar los
+Tal vez quieras tomarte un tiempo para limpiar **Users/add.php** y eliminar los
 enlaces erróneos o continuar con el siguiente apartado. No vamos a crear la
 edición de usuarios, consulta o listado en este tutorial así que no funcionará
 el control de ``AuthComponent`` para el acceso a esas acciones del controlador.
@@ -231,7 +231,7 @@ deberías ser redirigido a la página desde la que accediste.
 
 Si no se muestra ningún mensaje de error añade lo siguiente a tu layout::
 
-    // En src/Template/Layout/default.ctp
+    // En src/Template/Layout/default.php
     <?= $this->Flash->render() ?>
 
 Deberías poder ver ahora los mensajes de error de autorización.
@@ -248,7 +248,7 @@ par de problemas:
 
 Abordemos el formulario de añadir favorito primero.
 
-Para empezar elimina ``input('user_id')`` de **src/Template/Bookmarks/add.ctp**.
+Para empezar elimina ``input('user_id')`` de **src/Template/Bookmarks/add.php**.
 
 Con esa parte eliminada actualizaremos la acción ``add()`` de
 **src/Controller/BookmarksController.php** para que luzca así::
@@ -376,7 +376,7 @@ Actualizar las vistas
 ---------------------
 
 Con la entidad actualizada podemos añadir un nuevo campo de entrada para nuestros
-tags. En **src/Template/Bookmarks/add.ctp** y **src/Template/Bookmarks/edit.ctp**,
+tags. En **src/Template/Bookmarks/add.php** y **src/Template/Bookmarks/edit.php**,
 cambia el campo ``tags._ids`` por el siguiente::
 
     echo $this->Form->input('tag_string', ['type' => 'text']);

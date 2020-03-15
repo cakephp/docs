@@ -32,11 +32,11 @@ de que, a estrutura da pasta dentro da pasta **plugins/Modern/src/Template** é
 exatamente o mesmo que **src/Template/**.
 
 Por exemplo, o arquivo de exibição para uma `action` de edição de um ``controller`` de posts residiria
-em **plugins/Modern/src/Template/Posts/edit.ctp**. Os arquivos de layout residiriam em
+em **plugins/Modern/src/Template/Posts/edit.php**. Os arquivos de layout residiriam em
 **plugins/Modern/src/Template/Layout/**. Você pode fornecer modelos personalizados
 para plugins com um tema também. Se você tiver um plugin chamado 'Cms', que
 contenha um ``TagsController``, o tema moderno poderia fornecer
-**plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ctp** para substituir o template
+**plugins/Modern/src/Template/Plugin/Cms/Tags/edit.php** para substituir o template
 da edição no plugin.
 
 Se um arquivo de exibição não puder ser encontrado no tema, o CakePHP tentará localizar a visualização

@@ -32,11 +32,11 @@ that, the folder structure within the **plugins/Modern/src/Template** folder is
 exactly the same as **src/Template/**.
 
 For example, the view file for an edit action of a Posts controller would reside
-at **plugins/Modern/src/Template/Posts/edit.ctp**. Layout files would reside in
+at **plugins/Modern/src/Template/Posts/edit.php**. Layout files would reside in
 **plugins/Modern/src/Template/Layout/**. You can provide customized templates
 for plugins with a theme as well. If you had a plugin named 'Cms', that
 contained a TagsController, the Modern theme could provide
-**plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ctp** to replace the edit
+**plugins/Modern/src/Template/Plugin/Cms/Tags/edit.php** to replace the edit
 template in the plugin.
 
 If a view file can't be found in the theme, CakePHP will try to locate the view

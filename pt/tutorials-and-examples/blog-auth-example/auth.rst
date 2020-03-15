@@ -106,7 +106,7 @@ usuário. Para o propósito deste tutorial, vamos mostrar apenas o add.ctp:
 
 .. code-block:: php
 
-    <!-- src/Template/Users/add.ctp -->
+    <!-- src/Template/Users/add.php -->
 
     <div class="users form">
     <?= $this->Form->create($user) ?>
@@ -245,11 +245,11 @@ e adicione a seguinte trecho::
 
 Agora, a senha criptografada usando a classe ``DefaultPasswordHasher``.
 Está faltando apenas o arquivo para exibição da tela de login.
-Abra o arquivo **src/Template/Users/login.ctp** e adicione as seguintes linhas:
+Abra o arquivo **src/Template/Users/login.php** e adicione as seguintes linhas:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Users/login.ctp -->
+    <!-- File: src/Template/Users/login.php -->
 
     <div class="users form">
     <?= $this->Flash->render('auth') ?>

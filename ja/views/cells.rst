@@ -42,7 +42,7 @@
 
 私たちのセルには空の ``display()`` メソッドを追加しましたが、これはセルを描画する時の
 規約上の既定のメソッドです。この文書の後ろで、他のメソッドの使い方についても扱います。
-さて、ファイル **src/Template/Cell/Inbox/display.ctp** を作成しましょう。
+さて、ファイル **src/Template/Cell/Inbox/display.php** を作成しましょう。
 これは、私たちの新しいセルのためのテンプレートになります。
 
 ``bake`` を使って手早くこのスタブコードを生成することもできます。 ::
@@ -80,7 +80,7 @@
 や ``set()`` メソッドを使うことができます。テンプレートファイルの中に、
 以下を追加します。 ::
 
-    <!-- src/Template/Cell/Inbox/display.ctp -->
+    <!-- src/Template/Cell/Inbox/display.php -->
     <div class="notification-icon">
         未読メッセージが <?= $unread_count ?> 件あります。
     </div>

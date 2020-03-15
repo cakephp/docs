@@ -106,7 +106,7 @@ tutorial, we will show just the add.ctp:
 
 .. code-block:: php
 
-    <!-- src/Template/Users/add.ctp -->
+    <!-- src/Template/Users/add.php -->
 
     <div class="users form">
     <?= $this->Form->create($user) ?>
@@ -251,12 +251,12 @@ entity file and add the following::
 
 Now every time the password property is assigned to the user it will be hashed
 using the ``DefaultPasswordHasher`` class.  We're just missing a template view
-file for the login function. Open up your **src/Template/Users/login.ctp** file
+file for the login function. Open up your **src/Template/Users/login.php** file
 and add the following lines:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Users/login.ctp -->
+    <!-- File: src/Template/Users/login.php -->
 
     <div class="users form">
     <?= $this->Flash->render() ?>

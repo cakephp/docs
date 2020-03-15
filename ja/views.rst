@@ -123,7 +123,7 @@ CakePHP のテンプレートファイルは既定の拡張子を **.ctp** (Cake
 テンプレートファイルは **/src/Template/** の中の、ファイルを使用するコントローラーにちなんで
 名付けられたフォルダーに置かれ、その対応するアクション名にちなんで名付けられます。
 例えば、 ``Products`` コントローラーの ``view()`` アクションのビューファイルは通常、
-**/src/Template/Products/view.ctp** となります。
+**/src/Template/Products/view.php** となります。
 
 CakePHP のビューレイヤーはいくつかの異なるパーツによって作り上げられています。
 各パーツは異なる役割を持っており、この章で説明していきます。
@@ -184,7 +184,7 @@ CakePHP は自動では出力をエスケープしませんので、ユーザー
 
 .. code-block:: php
 
-    <!-- src/Template/Common/view.ctp -->
+    <!-- src/Template/Common/view.php -->
     <h1><?= $this->fetch('title') ?></h1>
     <?= $this->fetch('content') ?>
 
@@ -203,7 +203,7 @@ CakePHP は自動では出力をエスケープしませんので、ユーザー
 
 .. code-block:: php
 
-    <!-- src/Template/Posts/view.ctp -->
+    <!-- src/Template/Posts/view.php -->
     <?php
     $this->extend('/Common/view');
 
@@ -234,7 +234,7 @@ CakePHP は自動では出力をエスケープしませんので、ユーザー
     $this->extend('/Common/view');
     $this->extend('/Common/index');
 
-上記は ``/Common/index.ctp`` が現在のビューの親ビューとして描画される結果になります。
+上記は ``/Common/index.php`` が現在のビューの親ビューとして描画される結果になります。
 
 継承されたビューは好きなだけ入れ子にすることができます。必要に応じて
 各ビューは他のビューを継承することができます。各親ビューは一つ前のビューの内容を
@@ -321,7 +321,7 @@ fetch を使うとブロックが存在するかどうかによってブロッ�
 
 .. code-block:: php
 
-    // src/Template/Layout/default.ctp の中で
+    // src/Template/Layout/default.php の中で
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -382,7 +382,7 @@ fetch を使うとブロックが存在するかどうかによってブロッ�
 レイアウトにはビューをくるむ表示コードが入ります。すべてのビューから見えて欲しいものは
 レイアウトに配置されるべきです。
 
-CakePHP の既定のレイアウトは **src/Template/Layout/default.ctp** に置かれます。
+CakePHP の既定のレイアウトは **src/Template/Layout/default.php** に置かれます。
 もし、アプリケーションの見栄え全体を変更したい場合、これが手始めとなり、
 なぜならページが描画される時には、コントローラーによって描画されるビューのコードは、
 既定のレイアウトの中に置かれるからです。
@@ -532,7 +532,7 @@ Ajax レイアウトは AJAX のレスポンスを組み立てるのに便利で
 ビューの可読性を高めるのに使えます。
 アプリケーション内のコンテンツの一部を再利用する手助けにもなります。
 
-エレメントは  **src/Template/Element/** フォルダーの中に .ctp の拡張子を持つ名前で配置されます。
+エレメントは  **src/Template/Element/** フォルダーの中に .php の拡張子を持つ名前で配置されます。
 次の例はビューの element メソッドを使って出力しています。 ::
 
     echo $this->element('helpbox');
@@ -549,9 +549,9 @@ element メソッドの第二引数を通してエレメントにデータを渡
 エレメントファイルの内部では、引数で渡されたすべての変数を
 パラメーター配列のメンバーとして利用できます。(テンプレートファイルにおけるコントローラーの
 ``Controller::set()`` メソッドと同様の動作です。)
-上記の例では **src/Template/Element/helpbox.ctp** の中で ``$helptext`` 変数が使えます。 ::
+上記の例では **src/Template/Element/helpbox.php** の中で ``$helptext`` 変数が使えます。 ::
 
-    // src/Template/Element/helpbox.ctp の中で
+    // src/Template/Element/helpbox.php の中で
     echo $helptext; // 出力 "おお、このテキストはとても役に立つ。"
 
 ``View::element()`` メソッドは、エレメントのためのオプションもサポートしています。
@@ -638,7 +638,7 @@ CakePHP は element() に何も渡されなかった場合、この設定を使�
 は等価で、描画されるエレメントは同じになります。
 
 プラグインのサブフォルダー中のエレメント
-(例: **plugins/Contacts/Template/Element/sidebar/helpbox.ctp**) については、
+(例: **plugins/Contacts/Template/Element/sidebar/helpbox.php**) については、
 以下を使ってください。 ::
 
     echo $this->element('Contacts.sidebar/helpbox');

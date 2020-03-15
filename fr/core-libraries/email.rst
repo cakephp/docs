@@ -281,8 +281,8 @@ templates normales::
         ->from('app@domain.com')
         ->send();
 
-Ce qui est au-dessus utilise **src/Template/Email/html/welcome.ctp** pour la
-vue, et **src/Template/Layout/Email/html/fancy.ctp** pour le layout. Vous pouvez
+Ce qui est au-dessus utilise **src/Template/Email/html/welcome.php** pour la
+vue, et **src/Template/Layout/Email/html/fancy.php** pour le layout. Vous pouvez
 aussi envoyer des messages email templaté multipart::
 
     $email = new Email();
@@ -295,10 +295,10 @@ aussi envoyer des messages email templaté multipart::
 
 Ceci utiliserait les fichiers de template suivants:
 
-* **src/Template/Email/text/welcome.ctp**
-* **src/Template/Layout/Email/text/fancy.ctp**
-* **src/Template/Email/html/welcome.ctp**
-* **src/Template/Layout/Email/html/fancy.ctp**
+* **src/Template/Email/text/welcome.php**
+* **src/Template/Layout/Email/text/fancy.php**
+* **src/Template/Email/html/welcome.php**
+* **src/Template/Layout/Email/html/fancy.php**
 
 Quand on envoie les emails templatés, vous avez la possibilité d'envoyer soit
 ``text``, ``html`` soit ``both``.
@@ -342,7 +342,7 @@ d'utiliser le bon theme en utilisant la méthode ``Email::theme()``::
 Ceci vous permet de remplacer le template `new_comment` dans votre theme sans
 modifier le plugin Blog. Le fichier de template devra être créé dans le
 chemin suivant:
-**src/Template/Plugin/TestTheme/Plugin/Blog/Email/text/new_comment.ctp**.
+**src/Template/Plugin/TestTheme/Plugin/Blog/Email/text/new_comment.php**.
 
 .. deprecated:: 3.4.0
     Utilisez ``setTemplate()`` à la place de ``template()``. Utilisez

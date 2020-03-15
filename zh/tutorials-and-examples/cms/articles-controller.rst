@@ -64,7 +64,7 @@ CakePHP 的视图模版是插入应用布局中的演示型 PHP 代码。视图�
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp -->
+    <!-- File: src/Template/Articles/index.php -->
 
     <h1>Articles</h1>
     <table>
@@ -133,11 +133,11 @@ CakePHP 报错页面，提示我们 'missing a view template'。让我们修复�
 创建视图模版
 ========================
 
-让我们为 'view' 创建一个视图文件 **src/Template/Articles/view.ctp**
+让我们为 'view' 创建一个视图文件 **src/Template/Articles/view.php**
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/view.ctp -->
+    <!-- File: src/Template/Articles/view.php -->
 
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
@@ -236,7 +236,7 @@ PHP 的 `魔术方法 <http://php.net/manual/en/language.oop5.overloading.php#ob
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/add.ctp -->
+    <!-- File: src/Template/Articles/add.php -->
 
     <h1>Add Article</h1>
     <?php
@@ -262,7 +262,7 @@ PHP 的 `魔术方法 <http://php.net/manual/en/language.oop5.overloading.php#ob
 ``control()`` 将会根据不同的模型领域生产不同的元素，以及使用 inflection 来生成标注文字。你也可以使用选项来定制标注,输入元素以及
 任何其他 form 的属性。 最后 ``$this->Form->end()`` 方法关闭表单.
 
-让我们更新一下  **src/Template/Articles/index.ctp** 视图，添加一个新的 "Add Article" 的衔接。在 ``<table>`` 之前，加入下行
+让我们更新一下  **src/Template/Articles/index.php** 视图，添加一个新的 "Add Article" 的衔接。在 ``<table>`` 之前，加入下行
 代码::
 
     <?= $this->Html->link('Add Article', ['action' => 'add']) ?>
@@ -334,7 +334,7 @@ PHP 的 `魔术方法 <http://php.net/manual/en/language.oop5.overloading.php#ob
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/edit.ctp -->
+    <!-- File: src/Template/Articles/edit.php -->
 
     <h1>Edit Article</h1>
     <?php
@@ -353,7 +353,7 @@ PHP 的 `魔术方法 <http://php.net/manual/en/language.oop5.overloading.php#ob
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp  (edit links added) -->
+    <!-- File: src/Template/Articles/index.php  (edit links added) -->
 
     <h1>Articles</h1>
     <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>
@@ -452,7 +452,7 @@ CakePHP 的验证器很强大也很灵活。它提供了一些常用的规则，
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp  (delete links added) -->
+    <!-- File: src/Template/Articles/index.php  (delete links added) -->
 
     <h1>Articles</h1>
     <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>

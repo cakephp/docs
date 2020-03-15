@@ -479,7 +479,7 @@ CakePHP будет также включать маршруты, которые 
 плагина ContactManager нам понадобится представление для нашего действия
 ``ContactsController::index()``, поэтому давайте это сделаем::
 
-    // plugins/ContactManager/src/Template/Contacts/index.ctp:
+    // plugins/ContactManager/src/Template/Contacts/index.php:
     <h1>Контакты</h1>
     <p>Ниже приведён отсортированный список ваших контактов</p>
     <!-- Здесь будет отсортированный список контактов....-->
@@ -504,27 +504,27 @@ CakePHP будет также включать маршруты, которые 
 специальные пути. Если у вас есть плагин с именем 'ContactManager', вы можете
 переопределить файлы шаблонов плагина с помощью конкретной логики представления,
 создав файлы, использующие следующий шаблон
-**src/Template/Plugin/[Plugin]/[Controller]/[view].ctp**. Для контроллера контактов
+**src/Template/Plugin/[Plugin]/[Controller]/[view].php**. Для контроллера контактов
 вы можете сделать следующий файл::
 
-    src/Template/Plugin/ContactManager/Contacts/index.ctp
+    src/Template/Plugin/ContactManager/Contacts/index.php
 
 Создание этого файла позволит вам переопределить
-**plugins/ContactManager/src/Template/Contacts/index.ctp**.
+**plugins/ContactManager/src/Template/Contacts/index.php**.
 
 Если ваш плагин находится в зависимости от composer (т.е. 'TheVendor/ThePlugin'),
 путь к представлению 'index' пользовательского контроллера будет следующим::
 
-    src/Template/Plugin/TheVendor/ThePlugin/Custom/index.ctp
+    src/Template/Plugin/TheVendor/ThePlugin/Custom/index.php
 
 Создание этого файла позволит вам переопределить
-**vendor/thevendor/theplugin/src/Template/Custom/index.ctp**.
+**vendor/thevendor/theplugin/src/Template/Custom/index.php**.
 
 Если плагин реализует префикс маршрутизации, вы должны включить префикс маршрутизации в
 свои переопределения шаблона приложения.
 Например, если плагин 'ContactManager' реализовал префикс 'admin', путь должен быть::
 
-    src/Template/Plugin/ContactManager/Admin/ContactManager/index.ctp
+    src/Template/Plugin/ContactManager/Admin/ContactManager/index.php
 
 .. _plugin-assets:
 

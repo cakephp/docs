@@ -101,7 +101,7 @@ REST可以帮你有效地向他人提供在你的应用中已创建的逻辑（�
 
 index方法的REST视图的简单的代码::
 
-    // src/Template/Recipes/xml/index.ctp
+    // src/Template/Recipes/xml/index.php
     // Do some formatting and manipulation on
     // the $recipes array.
     $xml = Xml::fromArray(['response' => $recipes]);

@@ -498,7 +498,7 @@ normales. Placez-les juste dans le bon dossier à l'intérieur du dossier
 aurons besoin d'une vue pour notre action ``ContactsController::index()``, ainsi
 incluons ceci aussi::
 
-    // plugins/ContactManager/src/Template/Contacts/index.ctp:
+    // plugins/ContactManager/src/Template/Contacts/index.php:
     <h1>Contacts</h1>
     <p>Ce qui suit est une liste triable de vos contacts</p>
     <!-- Une liste triable de contacts irait ici....-->
@@ -525,21 +525,21 @@ votre app en utilisant des chemins spéciaux. Si vous avez un plugin appelé
 'ContactManager', vous pouvez redéfinir les fichiers de template du plugin avec
 une logique de vue de l'application plus spécifique, en créant des fichiers en
 utilisant le template suivant
-**src/Template/Plugin/[Plugin]/[Controller]/[view].ctp**. Pour le controller
+**src/Template/Plugin/[Plugin]/[Controller]/[view].php**. Pour le controller
 Contacts, vous pouvez faire le fichier suivant::
 
-    src/Template/Plugin/ContactManager/Contacts/index.ctp
+    src/Template/Plugin/ContactManager/Contacts/index.php
 
 Créer ce fichier vous permettra de redéfinir
-**plugins/ContactManager/src/Template/Contacts/index.ctp**.
+**plugins/ContactManager/src/Template/Contacts/index.php**.
 
 Si votre plugin est dans une dépendence de Composer (ex: 'LeVendor/LePlugin), le
 chemin vers la vue 'index' du controlleur Custom sera
 
-    src/Template/Plugin/LeVendor/LePlugin/Custom/index.ctp
+    src/Template/Plugin/LeVendor/LePlugin/Custom/index.php
 
 Créer ce fichier vous permettra de redéfinir
-**vendor/levendor/leplugin/src/Template/Custom/index.ctp**.
+**vendor/levendor/leplugin/src/Template/Custom/index.php**.
 
 Si le plugin implémente un préfixe de routing, vous devez inclure ce préfixe
 dans la surcharge de template de votre application.
@@ -547,7 +547,7 @@ dans la surcharge de template de votre application.
 Si le plugin 'ContactManager' implémente un préfixe 'admin', le chemin de la
 redéfinition sera::
 
-    src/Template/Plugin/ContactManager/Admin/ContactManager/index.ctp
+    src/Template/Plugin/ContactManager/Admin/ContactManager/index.php
 
 .. _plugin-assets:
 

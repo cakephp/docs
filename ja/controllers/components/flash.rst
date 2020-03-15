@@ -20,10 +20,10 @@ FlashComponent は、フラッシュメッセージの設定に２つの方法�
 エレメントをマッピングしたメソッド名を使用することができます。規約により、キャメルケース形式の
 メソッドは、小文字でアンダースコアー区切りのエレメント名に置き換えられます。 ::
 
-    // src/Template/Element/Flash/success.ctp を使用
+    // src/Template/Element/Flash/success.php を使用
     $this->Flash->success('This was successful');
 
-    // src/Template/Element/Flash/great_success.ctp を使用
+    // src/Template/Element/Flash/great_success.php を使用
     $this->Flash->greatSuccess('This was greatly successful');
 
 あるいは、エレメントをレンダリングしないで平文メッセージを設定するためには、
@@ -65,7 +65,7 @@ FlashComponent の ``__call()`` および ``set()`` メソッドは任意に第2
     // ビューの中で
     <?= $this->Flash->render('positive') ?>
 
-    <!-- src/Template/Element/Flash/success.ctp の中で -->
+    <!-- src/Template/Element/Flash/success.php の中で -->
     <div id="flash-<?= h($key) ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>

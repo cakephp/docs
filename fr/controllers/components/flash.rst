@@ -22,10 +22,10 @@ répertoire **src/Template/Element/Flash**. Par convention, les méthodes en
 camelcase vont être liées à un nom d'element en minuscule et avec des
 underscores (_)::
 
-    // Utilise src/Template/Element/Flash/success.ctp
+    // Utilise src/Template/Element/Flash/success.php
     $this->Flash->success('C\'était un succès');
 
-    // Utilise src/Template/Element/Flash/great_success.ctp
+    // Utilise src/Template/Element/Flash/great_success.php
     $this->Flash->greatSuccess('C\'était un grand succès');
 
 De façon alternative, pour définir un message sans rendre un element,
@@ -72,7 +72,7 @@ Un exemple de l'utilisation de ces options::
     // Dans votre Vue
     <?= $this->Flash->render('positive') ?>
 
-    <!-- Dans src/Template/Element/Flash/success.ctp -->
+    <!-- Dans src/Template/Element/Flash/success.php -->
     <div id="flash-<?= h($key) ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>

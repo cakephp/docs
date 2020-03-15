@@ -100,7 +100,7 @@ CakePHP の新しいアプリケーションを作成してください。下記
 
 これでインストールした CakePHP アプリケーションにアクセスして、デフォルトの
 ホームページを見ることができるようになりました。このページの内容を変更するには
-**src/Template/Pages/home.ctp** を編集してください。
+**src/Template/Pages/home.php** を編集してください。
 
 composer によるインストールが推奨されますが、
 `Github <https://github.com/cakephp/cakephp/tags>`__

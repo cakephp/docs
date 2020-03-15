@@ -415,7 +415,7 @@ Créer la Vue
 Maintenant si vous vous rendez à l'url **/bookmarks/tagged**, CakePHP va
 afficher une erreur vous disant que vous n'avez pas de fichier de vue.
 Construisons donc le fichier de vue pour notre action ``tags()``. Dans
-**src/Template/Bookmarks/tags.ctp** mettez le contenu suivant::
+**src/Template/Bookmarks/tags.php** mettez le contenu suivant::
 
     <h1>
         Bookmarks tagged with

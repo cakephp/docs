@@ -34,7 +34,7 @@ FlashComponent の中で設定したオプションを上書きすることも�
         'element' => 'success'
     ]);
 
-    // テンプレートファイルの中で、 success.ctp の代わりに great_success.ctp を使用
+    // テンプレートファイルの中で、 success.php の代わりに great_success.php を使用
     <?= $this->Flash->render('flash', [
         'element' => 'great_success'
     ]);
@@ -67,5 +67,5 @@ FlashComponent の中で設定したオプションを上書きすることも�
 ============================
 
 FlashHelper は、メッセージを描画するために標準のエレメントを使用し、指定したテーマに従います。
-そのため、テーマが **src/Template/Element/Flash/error.ctp** ファイルを持つ場合、
+そのため、テーマが **src/Template/Element/Flash/error.php** ファイルを持つ場合、
 エレメントやビューと同様に使用されます。

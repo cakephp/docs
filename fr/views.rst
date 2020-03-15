@@ -131,7 +131,7 @@ Un fichier de template est stocké dans **src/Template/**, dans un sous-dossier
 portant le nom du controller qui utilise ce fichier. Il a un nom de fichier
 correspondant à son action. Par exemple, le fichier de vue pour l'action
 "view()" du controller Products devra normalement se trouver dans
-**src/Template/Products/view.ctp**.
+**src/Template/Products/view.php**.
 
 La couche vue de CakePHP peut être constituée d'un certain nombre de parties
 différentes. Chaque partie a différents usages qui seront présentés dans ce
@@ -200,7 +200,7 @@ commune pour votre sidebar, et seulement définir les parties qui changent:
 
 .. code-block:: php
 
-    <!-- src/Template/Common/view.ctp -->
+    <!-- src/Template/Common/view.php -->
     <h1><?= $this->fetch('title') ?></h1>
     <?= $this->fetch('content') ?>
 
@@ -220,7 +220,7 @@ données sur notre post. Notre vue pourrait ressembler à ceci:
 
 .. code-block:: php
 
-    <!-- src/Template/Posts/view.ctp -->
+    <!-- src/Template/Posts/view.php -->
     <?php
     $this->extend('/Common/view');
 
@@ -252,7 +252,7 @@ va outrepasser les précédents::
     $this->extend('/Common/view');
     $this->extend('/Common/index');
 
-Le code précédent va définir **/Common/index.ctp** comme étant la vue parente
+Le code précédent va définir **/Common/index.php** comme étant la vue parente
 de la vue actuelle.
 
 Vous pouvez imbriquer les vues autant que vous le voulez et que cela vous est
@@ -355,7 +355,7 @@ en-têtes ou autres balises:
 
 .. code-block:: php
 
-    // dans src/Template/Layout/default.ctp
+    // dans src/Template/Layout/default.php
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -420,7 +420,7 @@ Tout ce que vous voulez voir dans toutes vos vues devra être placé dans un
 layout.
 
 Le fichier de layout par défaut de CakePHP est placé dans
-**src/Template/Layout/default.ctp**. Si vous voulez changer entièrement le
+**src/Template/Layout/default.php**. Si vous voulez changer entièrement le
 look de votre application, alors c'est le bon endroit pour commencer, parce que
 le code de vue de rendu du controller est placé à l'intérieur du layout par
 défaut quand la page est rendue.
@@ -596,9 +596,9 @@ Dans le fichier element, toutes les variables passés sont disponibles comme
 des membres du paramètre du tableau (de la même manière que
 :php:meth:`Controller::set()` fonctionne dans le controller avec les fichiers
 de template). Dans l'exemple ci-dessus, le fichier
-**src/Template/Element/helpbox.ctp** peut utiliser la variable ``$helptext``::
+**src/Template/Element/helpbox.php** peut utiliser la variable ``$helptext``::
 
-    // A l'intérieur de src/Template/Element/helpbox.ctp
+    // A l'intérieur de src/Template/Element/helpbox.php
     echo $helptext; //outputs "Oh, this text is very helpful."
 
 La méthode :php:meth:`View::element()` supporte aussi les options pour
@@ -695,7 +695,7 @@ Contacts::
 Sont équivalents et résulteront à l'affichage du même element.
 
 Pour les elements dans le sous-dossier d'un plugin
-(e.g., **plugins/Contacts/sidebar/helpbox.ctp**), utilisez ce qui suit::
+(e.g., **plugins/Contacts/sidebar/helpbox.php**), utilisez ce qui suit::
 
     echo $this->element('Contacts.sidebar/helpbox');
 

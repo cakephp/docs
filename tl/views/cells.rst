@@ -44,7 +44,7 @@ classes in CakePHP, Cells have a few conventions:
 
 We added an empty ``display()`` method to our cell; this is the conventional
 default method when rendering a cell. We'll cover how to use other methods later
-in the docs. Now, create the file **src/Template/Cell/Inbox/display.ctp**. This
+in the docs. Now, create the file **src/Template/Cell/Inbox/display.php**. This
 will be our template for our new cell.
 
 You can generate this stub code quickly using ``bake``::
@@ -82,7 +82,7 @@ very much like a controller would.  We can use the ``loadModel()`` and ``set()``
 methods just like we would in a controller. In our template file, add the
 following::
 
-    <!-- src/Template/Cell/Inbox/display.ctp -->
+    <!-- src/Template/Cell/Inbox/display.php -->
     <div class="notification-icon">
         You have <?= $unread_count ?> unread messages.
     </div>

@@ -592,7 +592,7 @@ bake で作っていないプラグインなら、クラスを自動的に読み
 我々の ContactManager プラグインでは ``ContactsController::index()`` アクションに
 ビューが必要ですから、このような内容になります。 ::
 
-    // plugins/ContactManager/src/Template/Contacts/index.ctp:
+    // plugins/ContactManager/src/Template/Contacts/index.php:
     <h1>連絡先</h1>
     <p>ソート可能なあなたの連絡先一覧は次のとおりです</p>
     <!-- ソート可能な連絡先一覧はこちら....-->
@@ -616,21 +616,21 @@ bake で作っていないプラグインなら、クラスを自動的に読み
 
 プラグインのビューはあるパスを使って上書きできます。
 仮にあなたが 'ContactManager' という名前のプラグインを持っているとして、
-**src/Template/Plugin/[Plugin]/[Controller]/[view].ctp** というファイルを作って
+**src/Template/Plugin/[Plugin]/[Controller]/[view].php** というファイルを作って
 そこにビューロジックを書いておけば、プラグインのテンプレートファイルを上書きすることができます。
 Contacts コントローラーなら、次のようなファイルを作成します。 ::
 
-    src/Template/Plugin/ContactManager/Contacts/index.ctp
+    src/Template/Plugin/ContactManager/Contacts/index.php
 
-このファイルを作成すると、 **plugins/ContactManager/src/Template/Contacts/index.ctp**
+このファイルを作成すると、 **plugins/ContactManager/src/Template/Contacts/index.php**
 を上書きします。
 
 もし、あなたのプラグインが composer の依存関係の中にある場合 (例えば 'Company/ContactManager')、
 Custom コントローラーの 'index' ビューへのパスは、次の通りです。 ::
 
-    src/Template/Plugin/ContactManager/Contacts/index.ctp
+    src/Template/Plugin/ContactManager/Contacts/index.php
 
-このファイルを作成すると、 **vendor/Company/ContactManager/src/Template/Contacts/index.ctp**
+このファイルを作成すると、 **vendor/Company/ContactManager/src/Template/Contacts/index.php**
 を上書きします。
 
 プラグインがルーティングプレフィックスを実装する場合、上書きする
@@ -638,7 +638,7 @@ Custom コントローラーの 'index' ビューへのパスは、次の通り�
 例えば、 'ContactManager' プラグインが 'admin' プレフィックスを実装する場合、
 上書きするパスは、次の通りです。 ::
 
-    src/Template/Plugin/Company/ContactManager/Admin/Contact/index.ctp
+    src/Template/Plugin/Company/ContactManager/Admin/Contact/index.php
 
 .. _plugin-assets:
 

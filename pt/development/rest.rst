@@ -104,7 +104,7 @@ definir a variável de exibição `` _serialize`` e, em vez disso, use arquivos 
 as saidas REST para nosso RecipesController dentro de **src/Template/Recipes/xml**. Nós também podemos usar
 The :php:class:`Xml` para saída XML rápida e fácil::
 
-    // src/Template/Recipes/xml/index.ctp
+    // src/Template/Recipes/xml/index.php
     // Faça alguma formatação e manipulação em
     // the $recipes array.
     $xml = Xml::fromArray(['response' => $recipes]);

@@ -370,7 +370,7 @@ Finder メソッドは、常に :doc:`/orm/query-builder` オブジェクトと�
 
 **/bookmarks/tagged** の URL にアクセスすると、 CakePHP は、ビューファイルがないことを
 知らせるエラーを表示します。次に、ビューファイルを ``tags()`` アクションのために作りましょう。
-**src/Template/Bookmarks/tags.ctp** に以下の内容を追加します。 ::
+**src/Template/Bookmarks/tags.php** に以下の内容を追加します。 ::
 
     <h1>
         Bookmarks tagged with

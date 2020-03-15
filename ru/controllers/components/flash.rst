@@ -23,10 +23,10 @@ CakePHP ссылается на эти сообщения как «флэш-со
 соотносится с именем элемента, написанном в нижнем регистре с разделением слов
 с помощью знака подчеркивания::
 
-    // Использует src/Template/Element/Flash/success.ctp
+    // Использует src/Template/Element/Flash/success.php
     $this->Flash->success('This was successful');
 
-    // Использует src/Template/Element/Flash/great_success.ctp
+    // Использует src/Template/Element/Flash/great_success.php
     $this->Flash->greatSuccess('This was greatly successful');
 
 В качестве альтернативы вы можете задавать текстовое сообщение без использования
@@ -73,7 +73,7 @@ CakePHP ссылается на эти сообщения как «флэш-со
     // В вашем Виде
     <?= $this->Flash->render('positive') ?>
 
-    <!-- В src/Template/Element/Flash/success.ctp -->
+    <!-- В src/Template/Element/Flash/success.php -->
     <div id="flash-<?= h($key) ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>

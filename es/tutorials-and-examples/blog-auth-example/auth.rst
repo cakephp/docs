@@ -99,7 +99,7 @@ De la misma forma que creamos las vistas para los posts del blog o usando la her
 
 .. code-block:: php
 
-    <!-- src/Template/Users/add.ctp -->
+    <!-- src/Template/Users/add.php -->
 
     <div class="users form">
     <?= $this->Form->create($user) ?>
@@ -219,12 +219,12 @@ Crea el archivo **src/Model/Entity/User.php** y agrega las siguientes lineas::
     }
 
 Ahora cada vez que la propiedad password sea asignada a un usuario, será hasheada usando la clase ``DefaultPasswordHasher``.
-Solamente nos falta un archivo para la vista de la acción login. Abre tu archivo **src/Template/Users/login.ctp** y agrega las siguientes
+Solamente nos falta un archivo para la vista de la acción login. Abre tu archivo **src/Template/Users/login.php** y agrega las siguientes
 lineas:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Users/login.ctp -->
+    <!-- File: src/Template/Users/login.php -->
 
     <div class="users form">
     <?= $this->Flash->render('auth') ?>

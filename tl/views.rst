@@ -127,7 +127,7 @@ templating language and CakePHP.
 Template files are stored in **src/Template/**, in a folder named after the
 controller that uses the files, and named after the action it corresponds to.
 For example, the view file for the ``Products`` controller's ``view()`` action, would
-normally be found in **src/Template/Products/view.ctp**.
+normally be found in **src/Template/Products/view.php**.
 
 The view layer in CakePHP can be made up of a number of different parts. Each
 part has different uses, and will be covered in this chapter:
@@ -192,7 +192,7 @@ parts that change:
 
 .. code-block:: php
 
-    <!-- src/Template/Common/view.ctp -->
+    <!-- src/Template/Common/view.php -->
     <h1><?= $this->fetch('title') ?></h1>
     <?= $this->fetch('content') ?>
 
@@ -211,7 +211,7 @@ uncaptured content from the extending view. Assuming our view file has a
 
 .. code-block:: php
 
-    <!-- src/Template/Posts/view.ctp -->
+    <!-- src/Template/Posts/view.php -->
     <?php
     $this->extend('/Common/view');
 
@@ -243,7 +243,7 @@ view file will override the parent view that will be processed next::
     $this->extend('/Common/view');
     $this->extend('/Common/index');
 
-The above will result in **/Common/index.ctp** being rendered as the parent view
+The above will result in **/Common/index.php** being rendered as the parent view
 to the current view.
 
 You can nest extended views as many times as necessary. Each view can extend
@@ -333,7 +333,7 @@ want to conditionally show headings or other markup:
 
 .. code-block:: php
 
-    // In src/Template/Layout/default.ctp
+    // In src/Template/Layout/default.php
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -394,7 +394,7 @@ Layouts
 A layout contains presentation code that wraps around a view. Anything you want
 to see in all of your views should be placed in a layout.
 
-CakePHP's default layout is located at **src/Template/Layout/default.ctp**.
+CakePHP's default layout is located at **src/Template/Layout/default.php**.
 If you want to change the overall look of your application, then this is the
 right place to start, because controller-rendered view code is placed inside of
 the default layout when the page is rendered.
@@ -541,7 +541,7 @@ layouts, and even within other elements. Elements can be used to make a view
 more readable, placing the rendering of repeating elements in its own file. They
 can also help you re-use content fragments in your application.
 
-Elements live in the **src/Template/Element/** folder, and have the .ctp
+Elements live in the **src/Template/Element/** folder, and have the .php
 filename extension. They are output using the element method of the view::
 
     echo $this->element('helpbox');
@@ -558,9 +558,9 @@ You can pass data to an element through the element's second argument::
 Inside the element file, all the passed variables are available as members of
 the parameter array (in the same way that ``Controller::set()`` in the
 controller works with template files). In the above example, the
-**src/Template/Element/helpbox.ctp** file can use the ``$helptext`` variable::
+**src/Template/Element/helpbox.php** file can use the ``$helptext`` variable::
 
-    // Inside src/Template/Element/helpbox.ctp
+    // Inside src/Template/Element/helpbox.php
     echo $helptext; // Outputs "Oh, this text is very helpful."
 
 The ``View::element()`` method also supports options for the element.
@@ -648,7 +648,7 @@ if you are in the ``ContactsController`` of the Contacts plugin, the following::
 are equivalent and will result in the same element being rendered.
 
 For elements inside subfolder of a plugin
-(e.g., **plugins/Contacts/Template/Element/sidebar/helpbox.ctp**), use the
+(e.g., **plugins/Contacts/Template/Element/sidebar/helpbox.php**), use the
 following::
 
     echo $this->element('Contacts.sidebar/helpbox');

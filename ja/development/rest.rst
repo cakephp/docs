@@ -107,7 +107,7 @@ XML データに変換する前にデータを修正したい場合は、 ``_ser
 このビューファイル内で簡単に素早く XML を出力させることができます。
 下記に index ビューの例を載せます。 ::
 
-    // src/Template/Recipes/xml/index.ctp
+    // src/Template/Recipes/xml/index.php
     // Do some formatting and manipulation on
     // the $recipes array.
     $xml = Xml::fromArray(['response' => $recipes]);

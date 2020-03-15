@@ -48,7 +48,7 @@ conventions:
 Nous avons ajouté une méthode vide ``display()`` à notre cell, c'est la méthode
 conventionnelle par défaut pour le rendu de cell. Nous couvrirons la façon
 d'utiliser les autres méthodes plus tard dans la doc. Maintenant, créons le
-fichier **src/Template/Cell/Inbox/display.ctp**. Ce sera le template pour notre
+fichier **src/Template/Cell/Inbox/display.php**. Ce sera le template pour notre
 nouvelle cell.
 
 Vous pouvez générer ce bout de code rapidement en utilisant ``bake``::
@@ -87,7 +87,7 @@ se comportent un peu comme un controller. Nous pouvons utiliser les méthodes
 ``loadModel()`` et ``set()`` un peu comme nous le ferions dans un controller.
 Dans notre fichier de template, ajoutons ce qui suit::
 
-    <!-- src/Template/Cell/Inbox/display.ctp -->
+    <!-- src/Template/Cell/Inbox/display.php -->
     <div class="notification-icon">
         Vous avez <?= $unread_count ?> messages non lus.
     </div>

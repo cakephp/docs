@@ -32,11 +32,11 @@ CakePHP は plugin/theme の名前にキャメルケースを期待していま�
 全く同じにしてください。
 
 例えば、Posts コントローラーの edit アクションのためのビューファイルは
-**plugins/Modern/src/Template/Posts/edit.ctp** に配置されて、レイアウトファイルは
+**plugins/Modern/src/Template/Posts/edit.php** に配置されて、レイアウトファイルは
 **plugins/Modern/src/Template/Layout/** に配置されます。カスタマイズされた
 テンプレートにプラグイン・テーマを供給することもできます。
 TagsController を含んだ 'Cms' と名付けられたプラグインがある場合、テーマ Modern は
-edit テンプレートを **plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ctp**
+edit テンプレートを **plugins/Modern/src/Template/Plugin/Cms/Tags/edit.php**
 に置き換えます。
 
 テーマの中にビューファイルを見つけられなかった場合、CakePHP はビューファイルを

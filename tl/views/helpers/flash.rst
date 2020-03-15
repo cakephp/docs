@@ -35,7 +35,7 @@ You can also override any of the options that were set in FlashComponent::
         'element' => 'success'
     ]);
 
-    // In your template file: Will use great_success.ctp instead of succcess.ctp
+    // In your template file: Will use great_success.php instead of succcess.php
     <?= $this->Flash->render('flash', [
         'element' => 'great_success'
     ]);
@@ -70,5 +70,5 @@ Flash Messages and Themes
 
 The FlashHelper uses normal elements to render the messages and will therefore
 obey any theme you might have specified. So when your theme has a
-**src/Template/Element/Flash/error.ctp** file it will be used, just as with any
+**src/Template/Element/Flash/error.php** file it will be used, just as with any
 Elements and Views.

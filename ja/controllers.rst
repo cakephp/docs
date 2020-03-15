@@ -117,8 +117,8 @@ RecipesController は ``view()`` 、 ``share()`` 、 ``search()`` アクショ�
         }
     }
 
-これらのアクションのテンプレートファイルは **src/Template/Recipes/view.ctp** 、
-**src/Template/Recipes/share.ctp** 、そして **src/Template/Recipes/search.ctp** になります。
+これらのアクションのテンプレートファイルは **src/Template/Recipes/view.php** 、
+**src/Template/Recipes/share.php** 、そして **src/Template/Recipes/search.php** になります。
 規約に従ったビューのファイル名は、アクション名を小文字にしてアンダースコアーでつないだものです。
 
 通常、コントローラーのアクションは :php:class:`View` クラスがビュー層の描画で使う
@@ -200,7 +200,7 @@ CakePHP の規約に従うと、手動でビューを描画したり生成した
 
 render に使用されるデフォルトのビューファイルは、規約によって決定されます。
 RecipesController の ``search()`` アクションがリクエストされたら、
-**src/Template/Recipes/search.ctp** のビューファイルが描画されます。 ::
+**src/Template/Recipes/search.php** のビューファイルが描画されます。 ::
 
     namespace App\Controller;
 
@@ -209,7 +209,7 @@ RecipesController の ``search()`` アクションがリクエストされたら
     // ...
         public function search()
         {
-            // src/Template/Recipes/search.ctp のビューを描画します
+            // src/Template/Recipes/search.php のビューを描画します
             $this->render();
         }
     // ...
@@ -223,7 +223,7 @@ CakePHP は (``$this->autoRender`` に ``false`` をセットしない限り) �
 フォルダーからの相対パスであると見なします。これはエレメントを直接描画することができ、
 AJAX 呼び出しではとても有用です。 ::
 
-    // src/Template/Element/ajaxreturn.ctp のエレメントを描画します
+    // src/Template/Element/ajaxreturn.php のエレメントを描画します
     $this->render('/Element/ajaxreturn');
 
 ``Controller::render()`` の第二引数 ``$layout``
@@ -246,8 +246,8 @@ AJAX 呼び出しではとても有用です。 ::
         }
     }
 
-これは **src/Template/Posts/my_action.ctp** の代わりに
-**src/Template/Posts/custom_file.ctp** を描画します。
+これは **src/Template/Posts/my_action.php** の代わりに
+**src/Template/Posts/custom_file.php** を描画します。
 
 また、次のような書式で、プラグイン内のビューを描画することもできます。
 ``$this->render('PluginName.PluginController/custom_file')`` 。
@@ -263,7 +263,7 @@ AJAX 呼び出しではとても有用です。 ::
         }
     }
 
-これは **plugins/Users/src/Template/UserDetails/custom_file.ctp** を描画します。
+これは **plugins/Users/src/Template/UserDetails/custom_file.php** を描画します。
 
 他のページへの転送
 ==================

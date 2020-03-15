@@ -32,12 +32,12 @@
 **plugins/Modern/src/Template** аналогична используемой в **src/Template/**.
 
 Например, файл представления для экшена ``edit`` контроллера ``Posts`` будет
-расположен в файле **plugins/Modern/src/Template/Posts/edit.ctp**. Файлы макетов
+расположен в файле **plugins/Modern/src/Template/Posts/edit.php**. Файлы макетов
 будут находиться в **plugins/Modern/src/Template/Layout/**. Вы также можете
 создавать кастомизированные шаблоны для плагинов с помощью тем. Если бы у вас
 был бы плагин под названием 'Cms', который бы содержал контроллер
 ``TagsController``, тема ``Modern`` могла бы предоставить шаблон
-**plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ctp**, заменяющий шаблон
+**plugins/Modern/src/Template/Plugin/Cms/Tags/edit.php**, заменяющий шаблон
 ``edit`` плагина.
 
 Если файл представления не может быть найден внутри темы, CakePHP попытается

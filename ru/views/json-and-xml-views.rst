@@ -136,7 +136,7 @@
         }
     }
 
-    // Код представления - src/Template/Articles/json/index.ctp
+    // Код представления - src/Template/Articles/json/index.php
     foreach ($articles as &$article) {
         unset($article->generated_html);
     }

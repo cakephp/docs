@@ -102,7 +102,7 @@ CakePHP にバンドルされているコード生成ユーティリティを利
 
 .. code-block:: php
 
-    <!-- src/Template/Users/add.ctp -->
+    <!-- src/Template/Users/add.php -->
 
     <div class="users form">
     <?= $this->Form->create($user) ?>
@@ -246,11 +246,11 @@ CakePHP にバンドルされているコード生成ユーティリティを利
 
 これで、パスワードのプロパティーがユーザーにアサインされるたびに、 ``DefaultPasswordHasher``
 クラスを用いてパスワードがハッシュ化されます。ログイン機能のテンプレートビューファイルが足りていません。
-**src/Template/Users/login.ctp** ファイルを開いて、以下を追加してください。
+**src/Template/Users/login.php** ファイルを開いて、以下を追加してください。
 
 .. code-block:: php
 
-    <!-- File: src/Template/Users/login.ctp -->
+    <!-- File: src/Template/Users/login.php -->
 
     <div class="users form">
     <?= $this->Flash->render() ?>

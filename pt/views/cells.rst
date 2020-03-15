@@ -40,7 +40,7 @@ outras classes no CakePHP, *Cells* tem algumas convenções:
 
 Nós adicionamos um método ``display()`` vazio para nossa *cell*; esse é o método padrão
 convencional quando a *cell* é renderizada. Nós vamos abordar o uso de outros métodos
-mais tarde na documentação. Agora, crie o arquivo **src/Template/Cell/Inbox/display.ctp**.
+mais tarde na documentação. Agora, crie o arquivo **src/Template/Cell/Inbox/display.php**.
 Esse será nosso *template* para a nossa nova *cell*.
 
 Vocẽ pode gerar este esboço de código rapidamente usando o ``bake``::
@@ -77,7 +77,7 @@ Porque as *Cells* usam o ``ModelAwareTrait`` e o ``ViewVarsTrait``, Elas tem um 
 muito parecido com um *controller*. Nós podemos usar os métodos ``loadModel()`` e ``set()``
 como faríamos em um *controller*. Em nosso arquivo de *template*, adicione o seguinte::
 
-    <!-- src/Template/Cell/Inbox/display.ctp -->
+    <!-- src/Template/Cell/Inbox/display.php -->
     <div class="notification-icon">
         Você tem <?= $unread_count ?> mensagen não lidas.
     </div>

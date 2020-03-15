@@ -124,7 +124,7 @@ sua linguagem de template e o CakePHP.
 Arquivos de template são armazenados em **src/Template/**, em uma pasta nomeada com o
 nome do *controller*, e com o nome da ação a que corresponde.
 Por exemplo, o arquivo da *View* da ação "view()" do controller *Products*, seria
-normalmente encontrada em **src/Template/Products/view.ctp**.
+normalmente encontrada em **src/Template/Products/view.php**.
 
 A camada *view* do CakePHP pode ser constituida por um número diferente de partes. Cada
 parte tem diferentes usos, e serão abordadas nesse capítulo:
@@ -185,7 +185,7 @@ Você pode evitar repetir a marcação comum para sua barra lateral e apenas def
 
 .. code-block:: php
 
-    <!-- src/Template/Common/view.ctp -->
+    <!-- src/Template/Common/view.php -->
     <h1><?= $this->fetch('title') ?></h1>
     <?= $this->fetch('content') ?>
 
@@ -204,7 +204,7 @@ os dados sobre nosso *post*, a view poderia se parecer com isso:
 
 .. code-block:: php
 
-    <!-- src/Template/Posts/view.ctp -->
+    <!-- src/Template/Posts/view.php -->
     <?php
     $this->extend('/Common/view');
 
@@ -236,7 +236,7 @@ a view pai processada em seguida::
     $this->extend('/Common/view');
     $this->extend('/Common/index');
 
-A view acima irá resultar em **/Common/index.ctp** sendo renderizada como a *view*
+A view acima irá resultar em **/Common/index.php** sendo renderizada como a *view*
 para a view atual.
 
 Você pode aninhar as view estendidas quantas vezes achar necessário. Cada *view* pode extender
@@ -331,7 +331,7 @@ titulos ou outras marcações:
 
 .. code-block:: php
 
-    // In src/Template/Layout/default.ctp
+    // In src/Template/Layout/default.php
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -390,7 +390,7 @@ O :php:meth:`Cake\\View\\Helper\\HtmlHelper` também lhe permite controlar qual 
 Um layout contém códigos de apresentação que envolvem uma *view*. Qualquer coisa que você quer ver em todas
 as suas *views* deve ser colocada em um *layout*.
 
-O layout default do CakePHP está localizado em **src/Template/Layout/default.ctp**.
+O layout default do CakePHP está localizado em **src/Template/Layout/default.php**.
 Se você quer alterar a aparência geral da sua aplicação, então este é o lugar certo para começar,
 porque o código de exibição processado pelo controlador é colocado dentro do
 layout padrão quando a página é processada.
@@ -535,7 +535,7 @@ incluída em outras *views*, em *layouts*, e mesmo em outros *elements*. *Elemen
 para fazer uma *view* mais legível, colocando a renderização de elementos repetitivos em seu próprio arquivo.
 Eles também podem ajudá-lo a reusar conteúdos fragmentados em sua aplicação.
 
-*Elements* estão na pasta **src/Template/Element/**, e tem a extensão .ctp.
+*Elements* estão na pasta **src/Template/Element/**, e tem a extensão .php.
 Eles são exibidos usando o método *element* da *view*::
 
     echo $this->element('helpbox');
@@ -552,9 +552,9 @@ Você pode passar dados para um *element* através do segundo parâmetro do mét
 Dentro do arquivo do *element*, todas as variáveis estarão disponíveis como membros de um
 array de parâmetros (da mesma forma que ``Controller::set()`` no *controller*
 funciona com arquivos de template). No exemplo a seguir, no arquivo
-**src/Template/Element/helpbox.ctp** pode usar a variável ``$helptext``::
+**src/Template/Element/helpbox.php** pode usar a variável ``$helptext``::
 
-    // Dentro do arquivo src/Template/Element/helpbox.ctp
+    // Dentro do arquivo src/Template/Element/helpbox.php
     echo $helptext; // Resulta em "Ah, Esse texto  muito útil."
 
 O método ``View::element()`` também suporta opções para o elemento.
@@ -639,7 +639,7 @@ se você está em ``ContactsController`` do plugin Contacts, terá o seguinte::
 São equivalentes e irá resultar no mesmo elementos sendo renderizado.
 
 Para *elements* dentro de uma subpasta de um plugin
-(e.g., **plugins/Contacts/Template/Element/sidebar/helpbox.ctp**), use o seguinte::
+(e.g., **plugins/Contacts/Template/Element/sidebar/helpbox.php**), use o seguinte::
 
     echo $this->element('Contacts.sidebar/helpbox');
 

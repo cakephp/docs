@@ -21,10 +21,10 @@ maps to an element located under the **src/Template/Element/Flash** directory.
 By convention, camelcased methods will map to the lowercased and underscored
 element name::
 
-    // Uses src/Template/Element/Flash/success.ctp
+    // Uses src/Template/Element/Flash/success.php
     $this->Flash->success('This was successful');
 
-    // Uses src/Template/Element/Flash/great_success.ctp
+    // Uses src/Template/Element/Flash/great_success.php
     $this->Flash->greatSuccess('This was greatly successful');
 
 Alternatively, to set a plain-text message without rendering an element, you can
@@ -68,7 +68,7 @@ An example of using these options::
     // In your View
     <?= $this->Flash->render('positive') ?>
 
-    <!-- In src/Template/Element/Flash/success.ctp -->
+    <!-- In src/Template/Element/Flash/success.php -->
     <div id="flash-<?= h($key) ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>

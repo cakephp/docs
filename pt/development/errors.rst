@@ -72,13 +72,13 @@ por ``getAttributes()`` serão expostos como variáveis de exibição também.
 Personalizar o layout da página de erro
 ---------------------------------------
 
-By default error templates use **src/Template/Layout/error.ctp** for a layout.
+By default error templates use **src/Template/Layout/error.php** for a layout.
 You can use the ``layout`` property to pick a different layout::
 
-    // inside src/Template/Error/error400.ctp
+    // inside src/Template/Error/error400.php
     $this->layout = 'my_error';
 
-The above would use  **src/Template/Layout/my_error.ctp** as the layout for your
+The above would use  **src/Template/Layout/my_error.php** as the layout for your
 error pages.
 
 Many exceptions raised by CakePHP will render specific view templates in debug
@@ -292,7 +292,7 @@ If your application contained the following exception::
     }
 
 You could provide nice development errors, by creating
-**src/Template/Error/missing_widget.ctp**. When in production mode, the above
+**src/Template/Error/missing_widget.php**. When in production mode, the above
 error would be treated as a 500 error and use the **error500** template.
 
 If your exceptions have a code between ``400`` and ``506`` the exception code

@@ -361,7 +361,7 @@ Ao conectar rotas usando :ref:`route-elements`, você pode querer que elementos 
 
 Agora, graças aos recursos de roteamento reverso, você pode passar a matriz de URLs como abaixo e o CakePHP saberá como formar a URL conforme definido nas rotas::
 
-    // view.ctp
+    // view.php
     // Isso retornará um link para /blog/3-CakePHP_Rocks
     echo $this->Html->link('CakePHP Rocks', [
         'controller' => 'Blog',
@@ -485,7 +485,7 @@ mais simples. O comportamento comum aos controladores prefixados e não prefixad
 ser encapsulado usando herança, :doc:`/controllers/components` ou traits. Usando o exemplo
 de nossos usuários, acessar a URL ``/admin/users/edit/5`` chamaria o método ``edit()`` do nosso
 **src/Controller/Admin/UsersController.php** passando 5 como o primeiro parâmetro. O arquivo
-de visualização usado seria **src/Template/Admin/Users/edit.ctp**.
+de visualização usado seria **src/Template/Admin/Users/edit.php**.
 
 Você pode mapear a URL /admin para sua ação ``index()`` do controlador de páginas usando a seguinte rota::
 
