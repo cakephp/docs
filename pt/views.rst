@@ -639,7 +639,7 @@ se você está em ``ContactsController`` do plugin Contacts, terá o seguinte::
 São equivalentes e irá resultar no mesmo elementos sendo renderizado.
 
 Para *elements* dentro de uma subpasta de um plugin
-(e.g., **plugins/Contacts//Template/element/sidebar/helpbox.php**), use o seguinte::
+(e.g., **plugins/Contacts/Template/element/sidebar/helpbox.php**), use o seguinte::
 
     echo $this->element('Contacts.sidebar/helpbox');
 

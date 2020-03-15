@@ -638,7 +638,7 @@ CakePHP は element() に何も渡されなかった場合、この設定を使�
 は等価で、描画されるエレメントは同じになります。
 
 プラグインのサブフォルダー中のエレメント
-(例: **plugins/Contacts//Template/element/sidebar/helpbox.php**) については、
+(例: **plugins/Contacts/Template/element/sidebar/helpbox.php**) については、
 以下を使ってください。 ::
 
     echo $this->element('Contacts.sidebar/helpbox');
