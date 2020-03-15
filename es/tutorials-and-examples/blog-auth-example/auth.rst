@@ -95,7 +95,7 @@ También vamos a crear UsersController; el siguiente contenido fue generado usan
 
     }
 
-De la misma forma que creamos las vistas para los posts del blog o usando la herramienta de generación de código, creamos las vistas. Para los objetivos de este tutorial, mostraremos solamente add.ctp:
+De la misma forma que creamos las vistas para los posts del blog o usando la herramienta de generación de código, creamos las vistas. Para los objetivos de este tutorial, mostraremos solamente add.php:
 
 .. code-block:: php
 

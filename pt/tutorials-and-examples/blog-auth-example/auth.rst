@@ -102,7 +102,7 @@ geração de código ``bake`` fornecido com CakePHP::
 
 Da mesma maneira que criamos as ``views`` para os nossos artigos usando
 a ferramenta de geração de código, podemos implementar as ``views`` do
-usuário. Para o propósito deste tutorial, vamos mostrar apenas o add.ctp:
+usuário. Para o propósito deste tutorial, vamos mostrar apenas o add.php:
 
 .. code-block:: php
 

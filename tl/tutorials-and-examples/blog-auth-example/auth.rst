@@ -102,7 +102,7 @@ with CakePHP::
 
 In the same way we created the views for our articles by using the code
 generation tool, we can implement the user views. For the purpose of this
-tutorial, we will show just the add.ctp:
+tutorial, we will show just the add.php:
 
 .. code-block:: php
 

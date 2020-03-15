@@ -143,7 +143,7 @@ maintenant ressemble à ceci::
     }
 
 Pensez à ajouter le nouveau select multiple qui permet de sélectionner les tags
-comme nous l'avons fait dans le template **add.ctp** au template
+comme nous l'avons fait dans le template **add.php** au template
 **src/Template/Articles/edit.php**.
 
 Trouver des Articles via les Tags

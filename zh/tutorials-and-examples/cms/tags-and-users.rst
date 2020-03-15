@@ -131,7 +131,7 @@ articles，因为往下我们将加入使用标签搜索 articles 的功能。
         $this->set('article', $article);
     }
 
-记住参照 **add.ctp** 来添加多选的 select 选择器至  **src/Template/Articles/edit.php** 模版中。
+记住参照 **add.php** 来添加多选的 select 选择器至  **src/Template/Articles/edit.php** 模版中。
 
 
 使用标签搜寻 articles

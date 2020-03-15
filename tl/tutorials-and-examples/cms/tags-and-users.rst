@@ -138,7 +138,7 @@ edit method should now look like::
         $this->set('article', $article);
     }
 
-Remember to add the new tags multiple select control we added to the **add.ctp**
+Remember to add the new tags multiple select control we added to the **add.php**
 template to the **src/Template/Articles/edit.php** template as well.
 
 Finding Articles By Tags
