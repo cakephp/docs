@@ -281,7 +281,7 @@ templates normales::
         ->from('app@domain.com')
         ->send();
 
-Ce qui est au-dessus utilise **templates/Email/html/welcome.php** pour la
+Ce qui est au-dessus utilise **templates/email/html/welcome.php** pour la
 vue, et **templates/layout/Email/html/fancy.php** pour le layout. Vous pouvez
 aussi envoyer des messages email templaté multipart::
 
@@ -295,9 +295,9 @@ aussi envoyer des messages email templaté multipart::
 
 Ceci utiliserait les fichiers de template suivants:
 
-* **templates/Email/text/welcome.php**
+* **templates/email/text/welcome.php**
 * **templates/layout/Email/text/fancy.php**
-* **templates/Email/html/welcome.php**
+* **templates/email/html/welcome.php**
 * **templates/layout/Email/html/fancy.php**
 
 Quand on envoie les emails templatés, vous avez la possibilité d'envoyer soit

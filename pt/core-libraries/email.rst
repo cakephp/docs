@@ -258,7 +258,7 @@ usar layouts e os elementos assim como vistas normais::
         ->from('app@domain.com')
         ->send();
 
-O acima usaria **templates/Email/html/welcome.php** para a vista e
+O acima usaria **templates/email/html/welcome.php** para a vista e
 **templates/layout/E-mail/html/fancy.php** para o layout. Você pode enviar
 mensagens de e-mail com templates de várias partes, veja::
 
@@ -271,9 +271,9 @@ mensagens de e-mail com templates de várias partes, veja::
 
 Este usaria os seguintes arquivos de template:
 
-* **templates/Email/text/welcome.php**
+* **templates/email/text/welcome.php**
 * **templates/layout/Email/text/fancy.php**
-* **templates/Email/html/welcome.php**
+* **templates/email/html/welcome.php**
 * **templates/layout/Email/html/fancy.php**
 
 Ao enviar e-mails com templates, você tem a opção de enviar qualquer ``text``,

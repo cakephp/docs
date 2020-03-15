@@ -256,7 +256,7 @@ Email
         ->from('app@domain.com')
         ->send();
 
-Вышеизложенное будет использовать **templates/Email/html/welcome.php** для представления и
+Вышеизложенное будет использовать **templates/email/html/welcome.php** для представления и
 **templates/layout/Email/html/fancy.php** для макета(лейаута). Вы также можете отправить
 многостраничные шаблонные сообщения электронной почты::
 
@@ -270,9 +270,9 @@ Email
 
 Это будет использовать следующие файлы шаблонов:
 
-* **templates/Email/text/welcome.php**
+* **templates/email/text/welcome.php**
 * **templates/layout/Email/text/fancy.php**
-* **templates/Email/html/welcome.php**
+* **templates/email/html/welcome.php**
 * **templates/layout/Email/html/fancy.php**
 
 При отправке шаблонных писем у вас есть возможность отправить либо

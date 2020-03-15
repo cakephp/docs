@@ -260,7 +260,7 @@ and elements just like normal views::
         ->from('app@domain.com')
         ->send();
 
-The above would use **templates/Email/html/welcome.php** for the view
+The above would use **templates/email/html/welcome.php** for the view
 and **templates/layout/Email/html/fancy.php** for the layout. You can
 send multipart templated email messages as well::
 
@@ -274,9 +274,9 @@ send multipart templated email messages as well::
 
 This would use the following template files:
 
-* **templates/Email/text/welcome.php**
+* **templates/email/text/welcome.php**
 * **templates/layout/Email/text/fancy.php**
-* **templates/Email/html/welcome.php**
+* **templates/email/html/welcome.php**
 * **templates/layout/Email/html/fancy.php**
 
 When sending templated emails you have the option of sending either
