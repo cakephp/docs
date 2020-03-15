@@ -13,7 +13,7 @@ interação com modelos, lógica de visualização, e lógica de renderizaço. U
 seria o carinho em uma loja online, ou um menu de navegação *data-driven* em um CMS.
 
 Para criar uma *cell*, defina uma classe em **src/View/Cell** e um *template*
-em **templates/Cell/**. Nesse exemplo, nós estaremos fazendo uma *cell* para exibir
+em **templates/cell/**. Nesse exemplo, nós estaremos fazendo uma *cell* para exibir
 o número de mensagens em uma caixa de notificações do usuário. Primeiro, crie o arquivo da
 classe. O seu conteúdo deve se parecer com::
 
@@ -40,7 +40,7 @@ outras classes no CakePHP, *Cells* tem algumas convenções:
 
 Nós adicionamos um método ``display()`` vazio para nossa *cell*; esse é o método padrão
 convencional quando a *cell* é renderizada. Nós vamos abordar o uso de outros métodos
-mais tarde na documentação. Agora, crie o arquivo **templates/Cell/Inbox/display.php**.
+mais tarde na documentação. Agora, crie o arquivo **templates/cell/Inbox/display.php**.
 Esse será nosso *template* para a nossa nova *cell*.
 
 Vocẽ pode gerar este esboço de código rapidamente usando o ``bake``::
@@ -77,7 +77,7 @@ Porque as *Cells* usam o ``ModelAwareTrait`` e o ``ViewVarsTrait``, Elas tem um 
 muito parecido com um *controller*. Nós podemos usar os métodos ``loadModel()`` e ``set()``
 como faríamos em um *controller*. Em nosso arquivo de *template*, adicione o seguinte::
 
-    <!-- templates/Cell/Inbox/display.php -->
+    <!-- templates/cell/Inbox/display.php -->
     <div class="notification-icon">
         Você tem <?= $unread_count ?> mensagen não lidas.
     </div>
