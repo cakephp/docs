@@ -282,7 +282,7 @@ templates normales::
         ->send();
 
 Ce qui est au-dessus utilise **templates/email/html/welcome.php** pour la
-vue, et **templates/layout/Email/html/fancy.php** pour le layout. Vous pouvez
+vue, et **templates/layout/email/html/fancy.php** pour le layout. Vous pouvez
 aussi envoyer des messages email templaté multipart::
 
     $email = new Email();
@@ -296,9 +296,9 @@ aussi envoyer des messages email templaté multipart::
 Ceci utiliserait les fichiers de template suivants:
 
 * **templates/email/text/welcome.php**
-* **templates/layout/Email/text/fancy.php**
+* **templates/layout/email/text/fancy.php**
 * **templates/email/html/welcome.php**
-* **templates/layout/Email/html/fancy.php**
+* **templates/layout/email/html/fancy.php**
 
 Quand on envoie les emails templatés, vous avez la possibilité d'envoyer soit
 ``text``, ``html`` soit ``both``.

@@ -272,9 +272,9 @@ mensagens de e-mail com templates de várias partes, veja::
 Este usaria os seguintes arquivos de template:
 
 * **templates/email/text/welcome.php**
-* **templates/layout/Email/text/fancy.php**
+* **templates/layout/email/text/fancy.php**
 * **templates/email/html/welcome.php**
-* **templates/layout/Email/html/fancy.php**
+* **templates/layout/email/html/fancy.php**
 
 Ao enviar e-mails com templates, você tem a opção de enviar qualquer ``text``,
 ``html`` ou ``both``.

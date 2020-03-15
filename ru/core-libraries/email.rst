@@ -257,7 +257,7 @@ Email
         ->send();
 
 Вышеизложенное будет использовать **templates/email/html/welcome.php** для представления и
-**templates/layout/Email/html/fancy.php** для макета(лейаута). Вы также можете отправить
+**templates/layout/email/html/fancy.php** для макета(лейаута). Вы также можете отправить
 многостраничные шаблонные сообщения электронной почты::
 
     $email = new Email();
@@ -271,9 +271,9 @@ Email
 Это будет использовать следующие файлы шаблонов:
 
 * **templates/email/text/welcome.php**
-* **templates/layout/Email/text/fancy.php**
+* **templates/layout/email/text/fancy.php**
 * **templates/email/html/welcome.php**
-* **templates/layout/Email/html/fancy.php**
+* **templates/layout/email/html/fancy.php**
 
 При отправке шаблонных писем у вас есть возможность отправить либо
 ``text``, ``html`` или ``both``.
