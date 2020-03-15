@@ -442,7 +442,7 @@ pour encoder la sortie en HTML. Vous devez vous rappeler de toujours utiliser
 ``h()`` lorsque vous affichez des données provenant des utilisateurs pour éviter
 les problèmes d'injection HTML.
 
-Le fichier **tags.ctp** que nous venons de créer suit la convention de nommage
+Le fichier **tags.php** que nous venons de créer suit la convention de nommage
 de CakePHP pour un ficher de template de vue. La convention d'avoir le nom
 de template en minuscule et en underscore du nom de l'action du controller.
 

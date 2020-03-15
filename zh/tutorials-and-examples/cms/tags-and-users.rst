@@ -298,7 +298,7 @@ articles，因为往下我们将加入使用标签搜索 articles 的功能。
 我们使用了 :doc:`/views/helpers/html` 和 :doc:`/views/helpers/text` 来帮助生成视图内容。我们
 还使用了 :php:func:`h` 来编码 HTML 内容。``h()`` 能够帮助我们防止 HTML 注入。 
 
-以上创建的 **tags.ctp** 文件遵循 CakePHP 的视图约定。此约定要求视图文件名使用小写字母和下划线格式的控制器
+以上创建的 **tags.php** 文件遵循 CakePHP 的视图约定。此约定要求视图文件名使用小写字母和下划线格式的控制器
 行为名。
 
 我们可以在视图模版中使用 ``$tags`` and ``$articles`` 变量，这是因为当我们在控制器中使用了 ``set()`` 方法

@@ -326,7 +326,7 @@ Nous utilisons également la fonction raccourcie :php:func:`h` pour échapper le
 contenu HTML. Pensez à utiliser ``h()`` quand vous affichez des données pour
 éviter les injections de HTML.
 
-Le fichier **tags.ctp** que nous venons de créer suit les conventions CakePHP
+Le fichier **tags.php** que nous venons de créer suit les conventions CakePHP
 pour les templates de view. La convention est d'utiliser le nom de l'action du
 controller en minuscule et avec un underscore en séparateur.
 

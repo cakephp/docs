@@ -410,7 +410,7 @@ oluşturuyoruz.  Biz aynı zaman da :php:func:`h` kısayol fonksiyonunu kullanar
 HTML encode çıktısını alıyoruz.Kullanıcı verisin de html injeksiyonlarından
 önlemek için her zaman  ``h()`` kullanmayı hatırlayın.
 
-Yeni oluşturduğumuz **tags.ctp** dosyası CakePHP'nin view şablon dosyası
+Yeni oluşturduğumuz **tags.php** dosyası CakePHP'nin view şablon dosyası
 standartlarına bağlıdır.  Bu standartda şablonların düşük karakterli ve alt
 tireli controller fonksiyon isimleri yer alır.
 

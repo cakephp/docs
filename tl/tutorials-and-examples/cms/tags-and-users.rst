@@ -317,7 +317,7 @@ also use the :php:func:`h` shortcut function to HTML encode output. You should
 remember to always use ``h()`` when outputting data to prevent HTML injection
 issues.
 
-The **tags.ctp** file we just created follows the CakePHP conventions for view
+The **tags.php** file we just created follows the CakePHP conventions for view
 template files. The convention is to have the template use the lower case and
 underscored version of the controller action name.
 
