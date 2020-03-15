@@ -68,7 +68,7 @@ quelques exemples de noms de classes et de fichiers:
 -  La classe Behavior (Comportement) ``EspeciallyFunkableBehavior`` devra
    se trouver dans un fichier nommé **EspeciallyFunkableBehavior.php**.
 -  La classe View (Vue) ``SuperSimpleView`` devra se trouver dans un fichier
-   nommé **SuperSimpleView.ctp**.
+   nommé **SuperSimpleView.php**.
 -  La classe Helper (Assistant) ``BestEverHelper`` devra se trouver
    dans un fichier nommé **BestEverHelper.php**.
 

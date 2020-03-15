@@ -80,7 +80,7 @@ set the ``plugin`` parameter. For example::
     // In your Controller
     $this->Flash->warning('My message', ['plugin' => 'PluginName']);
 
-The code above will use the **warning.ctp** element under
+The code above will use the **warning.php** element under
 **plugins/PluginName/templates/Element/Flash** for rendering the flash
 message.
 

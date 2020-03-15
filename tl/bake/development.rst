@@ -160,7 +160,7 @@ At ang resultant ng baked na klase (**src/Shell/FooShell.php**) ay katulad ng hi
 
 .. note::
 
-    Bago ang bersyon na 1.5.0 ang bake ay gumagamit na isang pasadya na er-style na mga tag sa loob ng template ng .ctp na mga file.
+    Bago ang bersyon na 1.5.0 ang bake ay gumagamit na isang pasadya na er-style na mga tag sa loob ng template ng .php na mga file.
 
     * ``<%`` Isang template ng Bake na bukas na tag ng php
     * ``%>`` Isang template ng Bake na sirado na tag ng php

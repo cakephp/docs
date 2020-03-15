@@ -160,7 +160,7 @@ l'afficher. La façon la plus simple pour rendre une cell est de faire une echo:
     <?= $cell ?>
 
 Ceci va afficher le template correspondant à la version en minuscule et avec des
-underscores de notre nom d'action, par exemple **display.ctp**.
+underscores de notre nom d'action, par exemple **display.php**.
 
 Puisque les cells utilisent ``View`` pour afficher les templates, vous pouvez
 charger les cells supplémentaires dans un template de cell si nécessaire.

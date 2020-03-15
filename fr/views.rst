@@ -75,7 +75,7 @@ navigateurs, mais vous pourriez aussi avoir besoin de fournir des données AMF
 à un objet Flash, répondre à une application distante via SOAP ou produire un
 fichier CSV pour un utilisateur.
 
-Les fichiers de template de CakePHP possèdent une extension **.ctp** (CakePHP Template)
+Les fichiers de template de CakePHP possèdent une extension **.php** (CakePHP Template)
 et utilisent la `syntaxe alternative de PHP
 <http://php.net/manual/fr/control-structures.alternative-syntax.php>`_
 pour les structures de contrôle et les sorties. Ces fichiers contiennent la logique nécessaire
@@ -579,7 +579,7 @@ dans ses propres fichiers. Ils peuvent aussi vous aider à réutiliser des
 fragments de contenu dans votre application.
 
 Les elements se trouvent dans le dossier **templates/Element/**, et ont une
-extension .ctp. Ils sont rendus en utilisant la méthode element de la vue::
+extension .php. Ils sont rendus en utilisant la méthode element de la vue::
 
     echo $this->element('helpbox');
 

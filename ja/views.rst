@@ -67,7 +67,7 @@ CakePHP のビューレイヤーは、どのようにユーザーに伝えるか
 HTML/XHTML ドキュメントをブラウザーに返しますが、JSON を介して
 リモートアプリケーションに返答したり、CSV ファイルを出力する必要もあるかもしれません。
 
-CakePHP のテンプレートファイルは既定の拡張子を **.ctp** (CakePHP Template) としており、
+CakePHP のテンプレートファイルは既定の拡張子を **.php** (CakePHP Template) としており、
 制御構造や出力のために `PHP 別の構文
 <http://php.net/manual/ja/control-structures.alternative-syntax.php>`_
 を利用することができます。

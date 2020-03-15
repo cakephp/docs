@@ -107,7 +107,7 @@ array will come from setting all of the meta data for our feed.
 
 Next up is view file for my articles/index. Much like the layout file
 we created, we need to create a **templates/Posts/rss/** directory and
-create a new **index.ctp** inside that folder. The contents of the file
+create a new **index.php** inside that folder. The contents of the file
 are below.
 
 View

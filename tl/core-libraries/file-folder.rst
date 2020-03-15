@@ -19,9 +19,9 @@ Then we can setup a new folder instance::
 
     $dir = new Folder('/path/to/folder');
 
-and search for all *.ctp* files within that folder using regex::
+and search for all *.php* files within that folder using regex::
 
-    $files = $dir->find('.*\.ctp');
+    $files = $dir->find('.*\.php');
 
 Now we can loop through the files and read from or write/append to the contents or
 simply delete the file::

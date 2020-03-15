@@ -68,7 +68,7 @@ A camada *View* do CakePHP é como você pode falar com seus usuários. A maior 
 suas views irão renderizar documentos HTML/XHTML para os browsers, mas você também pode precisar
 responder uma aplicação remota via JSON, ou ter uma saída de um arquivo csv para o usuário.
 
-Os arquivos de *template* CakePHP tem a extensão padrão **.ctp** (CakePHP Template) e utiliza a
+Os arquivos de *template* CakePHP tem a extensão padrão **.php** (CakePHP Template) e utiliza a
 `Sintaxe PHP alternativa <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
 para controlar estruturas e saídas. Esses arquivos contem a lógica necessária para preparar os
 dados recebidos do *controller* para o formato de apresentação que estará pronto para o seu público.

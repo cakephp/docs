@@ -322,9 +322,9 @@ View
   respectively. This provides better visual distinction between special folders
   and the folders corresponding to your app's controller names which are in
   ``CamelCase`` form.
-* The template extension has also been changed from ``.ctp`` to ``.php``.
+* The template extension has also been changed from ``.php`` to ``.php``.
   The special extension provided no real benefit and instead required editors/IDEs
-  to be configured to recognise files with ``.ctp`` extension as PHP files.
+  to be configured to recognise files with ``.php`` extension as PHP files.
 * You can no longer use ``false`` as argument for ``ViewBuilder::setLayout()``
   or ``View::setLayout()`` to set ``View::$layout`` property to ``false``.
   Instead use ``ViewBuilder::disableAutoLayout()`` and ``View::disableAutoLayout()``

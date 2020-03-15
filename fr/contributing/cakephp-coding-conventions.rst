@@ -160,7 +160,7 @@ vérifiée de l'opération pour rendre le code plus clair::
 Fichiers de Template
 --------------------
 
-Dans les fichiers de template (fichiers .ctp) les développeurs devront utiliser
+Dans les fichiers de template (fichiers .php) les développeurs devront utiliser
 les structures de contrôle en mot (keyword control structures).
 Les structures de contrôle en mot sont plus faciles à lire dans des fichiers
 de template complexes. Les structures de contrôle peuvent soit être contenues
@@ -439,7 +439,7 @@ Les Balises PHP
 
 Toujours utiliser les balises longues (``<?php ?>``) plutôt que les balises
 courtes (``<? ?>``). L'echo court doit être utilisé dans les fichiers de
-template (**.ctp**) lorsque cela est nécessaire.
+template (**.php**) lorsque cela est nécessaire.
 
 Echo court
 ----------

@@ -527,7 +527,7 @@ para indicar los varios errores HTTP que tu aplicación pueda generar.
 
 Como estamos ejecutando algunos métodos y luego redirigiendo a otra acción de
 nuestro controlador, no es necesaria ninguna vista (nunca se usa). Lo que si
-querrás es actualizar la vista index.ctp para incluír el ya habitual enlace:
+querrás es actualizar la vista index.php para incluír el ya habitual enlace:
 
 .. code-block:: php
 

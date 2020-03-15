@@ -605,7 +605,7 @@ Para mais informações sobre técnicas avançadas de roteamento, visite
 :ref:`routes-configuration`.
 
 Por padrão, o CakePHP responde a uma requisição pela raíz do seu site usando o
-``PagesController``, ao renderizar uma view chamada **home.ctp**.
+``PagesController``, ao renderizar uma view chamada **home.php**.
 Alternativamente, nós vamos substituir esse comportamento pelo
 ``ArticlesController`` ao criar uma regra de roteamento.
 

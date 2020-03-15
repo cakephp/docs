@@ -146,7 +146,7 @@ para renderizar uma *cell* é dando um *echo*::
     <?= $cell ?>
 
 Isso irá renderizar o *template* correspondente a versão minuscula e separada com underscore do nome da
-nossa action, e.g. **display.ctp**.
+nossa action, e.g. **display.php**.
 
 Porque as *cells* usam ``View`` para renderizar *templates*, você pode carregar *cells* adicionais
 dentro do template da *cell* se necessário.
