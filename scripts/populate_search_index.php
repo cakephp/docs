@@ -10,9 +10,6 @@
 define('ES_DEFAULT_HOST', 'https://ci.cakephp.org:9200');
 define('ES_INDEX', 'cake-docs-20');
 
-// For old index
-define('CAKEPHP_VERSION', '2-10');
-
 // file exclusion patterns
 const FILE_EXCLUSIONS = [
     '/404\.rst$/',
@@ -28,7 +25,7 @@ const FILE_EXCLUSIONS = [
  */
 function main()
 {
-    $options = getopt('', ['host::', 'lang:', 'compat']);
+    $options = getopt('', ['host::', 'lang:']);
     if (empty($options['lang'])) {
         echo "A language to scan is required.\n";
         exit(1);
@@ -40,17 +37,12 @@ function main()
     } else {
         define('ES_HOST', ES_DEFAULT_HOST);
     }
-    if (isset($options['compat'])) {
-        define('OLD_INDEX', true);
-    }
 
     $directory = new RecursiveDirectoryIterator($lang);
     $recurser = new RecursiveIteratorIterator($directory);
     $matcher = new RegexIterator($recurser, '/\.rst/');
 
-    if (!defined('OLD_INDEX')) {
-        setMapping($lang);
-    }
+    setMapping($lang);
 
     foreach ($matcher as $file) {
         $skip = false;
@@ -110,11 +102,7 @@ function updateIndex($lang, $file)
     $id = str_replace('/', '-', $id);
     $id = trim($id, '-');
 
-    if (defined('OLD_INDEX')) {
-        $url = implode('/', array(ES_HOST, 'documentation', CAKEPHP_VERSION . '-' . $lang, $id));
-    } else {
-        $url = implode('/', array(ES_HOST, ES_INDEX . '-' . $lang, '_doc', $id));
-    }
+    $url = implode('/', array(ES_HOST, ES_INDEX . '-' . $lang, '_doc', $id));
 
     $data = json_encode([
         'contents' => $fileData['contents'],

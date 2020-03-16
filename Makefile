@@ -53,7 +53,6 @@ pdf-%:
 	cd $* && make latexpdf
 
 populate-index-%:
-	php scripts/populate_search_index.php --compat --lang="$*" --host="$(ES_HOST)"
 	php scripts/populate_search_index.php --lang="$*" --host="$(ES_HOST_V2)"
 
 rebuild-index-%:
