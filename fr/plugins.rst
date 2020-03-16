@@ -525,10 +525,10 @@ votre app en utilisant des chemins spéciaux. Si vous avez un plugin appelé
 'ContactManager', vous pouvez redéfinir les fichiers de template du plugin avec
 une logique de vue de l'application plus spécifique, en créant des fichiers en
 utilisant le template suivant
-**templates/Plugin/[Plugin]/[Controller]/[view].php**. Pour le controller
+**templates/plugin/[Plugin]/[Controller]/[view].php**. Pour le controller
 Contacts, vous pouvez faire le fichier suivant::
 
-    templates/Plugin/ContactManager/Contacts/index.php
+    templates/plugin/ContactManager/Contacts/index.php
 
 Créer ce fichier vous permettra de redéfinir
 **plugins/ContactManager/templates/Contacts/index.php**.
@@ -536,7 +536,7 @@ Créer ce fichier vous permettra de redéfinir
 Si votre plugin est dans une dépendence de Composer (ex: 'LeVendor/LePlugin), le
 chemin vers la vue 'index' du controlleur Custom sera
 
-    templates/Plugin/LeVendor/LePlugin/Custom/index.php
+    templates/plugin/LeVendor/LePlugin/Custom/index.php
 
 Créer ce fichier vous permettra de redéfinir
 **vendor/levendor/leplugin/templates/Custom/index.php**.
@@ -547,7 +547,7 @@ dans la surcharge de template de votre application.
 Si le plugin 'ContactManager' implémente un préfixe 'admin', le chemin de la
 redéfinition sera::
 
-    templates/Plugin/ContactManager/Admin/ContactManager/index.php
+    templates/plugin/ContactManager/Admin/ContactManager/index.php
 
 .. _plugin-assets:
 

@@ -36,7 +36,7 @@ em **plugins/Modern/templates/Posts/edit.php**. Os arquivos de layout residiriam
 **plugins/Modern/templates/layout/**. Você pode fornecer modelos personalizados
 para plugins com um tema também. Se você tiver um plugin chamado 'Cms', que
 contenha um ``TagsController``, o tema moderno poderia fornecer
-**plugins/Modern/templates/Plugin/Cms/Tags/edit.php** para substituir o template
+**plugins/Modern/templates/plugin/Cms/Tags/edit.php** para substituir o template
 da edição no plugin.
 
 Se um arquivo de exibição não puder ser encontrado no tema, o CakePHP tentará localizar a visualização

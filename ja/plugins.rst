@@ -616,11 +616,11 @@ bake で作っていないプラグインなら、クラスを自動的に読み
 
 プラグインのビューはあるパスを使って上書きできます。
 仮にあなたが 'ContactManager' という名前のプラグインを持っているとして、
-**templates/Plugin/[Plugin]/[Controller]/[view].php** というファイルを作って
+**templates/plugin/[Plugin]/[Controller]/[view].php** というファイルを作って
 そこにビューロジックを書いておけば、プラグインのテンプレートファイルを上書きすることができます。
 Contacts コントローラーなら、次のようなファイルを作成します。 ::
 
-    templates/Plugin/ContactManager/Contacts/index.php
+    templates/plugin/ContactManager/Contacts/index.php
 
 このファイルを作成すると、 **plugins/ContactManager/templates/Contacts/index.php**
 を上書きします。
@@ -628,7 +628,7 @@ Contacts コントローラーなら、次のようなファイルを作成し�
 もし、あなたのプラグインが composer の依存関係の中にある場合 (例えば 'Company/ContactManager')、
 Custom コントローラーの 'index' ビューへのパスは、次の通りです。 ::
 
-    templates/Plugin/ContactManager/Contacts/index.php
+    templates/plugin/ContactManager/Contacts/index.php
 
 このファイルを作成すると、 **vendor/Company/ContactManager/templates/Contacts/index.php**
 を上書きします。
@@ -638,7 +638,7 @@ Custom コントローラーの 'index' ビューへのパスは、次の通り�
 例えば、 'ContactManager' プラグインが 'admin' プレフィックスを実装する場合、
 上書きするパスは、次の通りです。 ::
 
-    templates/Plugin/Company/ContactManager/Admin/Contact/index.php
+    templates/plugin/Company/ContactManager/Admin/Contact/index.php
 
 .. _plugin-assets:
 

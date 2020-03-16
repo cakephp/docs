@@ -504,10 +504,10 @@ CakePHP будет также включать маршруты, которые 
 специальные пути. Если у вас есть плагин с именем 'ContactManager', вы можете
 переопределить файлы шаблонов плагина с помощью конкретной логики представления,
 создав файлы, использующие следующий шаблон
-**templates/Plugin/[Plugin]/[Controller]/[view].php**. Для контроллера контактов
+**templates/plugin/[Plugin]/[Controller]/[view].php**. Для контроллера контактов
 вы можете сделать следующий файл::
 
-    templates/Plugin/ContactManager/Contacts/index.php
+    templates/plugin/ContactManager/Contacts/index.php
 
 Создание этого файла позволит вам переопределить
 **plugins/ContactManager/templates/Contacts/index.php**.
@@ -515,7 +515,7 @@ CakePHP будет также включать маршруты, которые 
 Если ваш плагин находится в зависимости от composer (т.е. 'TheVendor/ThePlugin'),
 путь к представлению 'index' пользовательского контроллера будет следующим::
 
-    templates/Plugin/TheVendor/ThePlugin/Custom/index.php
+    templates/plugin/TheVendor/ThePlugin/Custom/index.php
 
 Создание этого файла позволит вам переопределить
 **vendor/thevendor/theplugin/templates/Custom/index.php**.
@@ -524,7 +524,7 @@ CakePHP будет также включать маршруты, которые 
 свои переопределения шаблона приложения.
 Например, если плагин 'ContactManager' реализовал префикс 'admin', путь должен быть::
 
-    templates/Plugin/ContactManager/Admin/ContactManager/index.php
+    templates/plugin/ContactManager/Admin/ContactManager/index.php
 
 .. _plugin-assets:
 

@@ -495,10 +495,10 @@ Substituindo Templates de plugins do na sua aplicação
 Você pode substituir todas as view do plugin do seu aplicativo usando caminhos especiais. E se
 você tem um plugin chamado 'ContactManager', você pode substituir os arquivos do template do
 plugin com lógica de visualização específica da aplicação criando arquivos usando o seguinte
-template **templates/Plugin/[Plugin]/[Controller]/[view].php**. Para o
+template **templates/plugin/[Plugin]/[Controller]/[view].php**. Para o
 controller Contacts você pode fazer o seguinte arquivo::
 
-    templates/Plugin/ContactManager/Contacts/index.php
+    templates/plugin/ContactManager/Contacts/index.php
 
 Criar este arquivo permitiria que você substituir
 **plugins/ContactManager/templates/Contacts/index.php**.
@@ -506,7 +506,7 @@ Criar este arquivo permitiria que você substituir
 Se o seu plugin estiver em uma dependência no composer (ou seja, 'TheVendor/ThePlugin'), o
 caminho para da view 'index' do controller personalizado será::
 
-    templates/Plugin/TheVendor/ThePlugin/Custom/index.php
+    templates/plugin/TheVendor/ThePlugin/Custom/index.php
 
 Criar este arquivo permitiria que você substituir
 **vendor/thevendor/theplugin/templates/Custom/index.php**.
@@ -516,7 +516,7 @@ O template para substitui.
 
 Se o plugin 'Contact Manager' implementou um prefixo 'admin', o caminho principal seria::
 
-    templates/Plugin/ContactManager/Admin/ContactManager/index.php
+    templates/plugin/ContactManager/Admin/ContactManager/index.php
 
 .. _plugin-assets:
 

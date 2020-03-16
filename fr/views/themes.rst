@@ -40,7 +40,7 @@ de layout se trouveront dans **plugins/Modern/templates/layout/**. Vous
 pouvez aussi fournir des templates personnalisés pour les plugins avec un theme.
 Si vous aviez un plugin s'appelant 'Cms', qui contient un TagsController, le
 theme Modern pourrait fournir
-**plugins/Modern/templates/Plugin/Cms/Tags/edit.php** pour remplacer le
+**plugins/Modern/templates/plugin/Cms/Tags/edit.php** pour remplacer le
 template edit dans le plugin.
 
 Si un fichier de template ne peut pas être trouvé dans le theme, CakePHP va

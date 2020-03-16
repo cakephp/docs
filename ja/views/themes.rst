@@ -36,7 +36,7 @@ CakePHP は plugin/theme の名前にキャメルケースを期待していま�
 **plugins/Modern/templates/layout/** に配置されます。カスタマイズされた
 テンプレートにプラグイン・テーマを供給することもできます。
 TagsController を含んだ 'Cms' と名付けられたプラグインがある場合、テーマ Modern は
-edit テンプレートを **plugins/Modern/templates/Plugin/Cms/Tags/edit.php**
+edit テンプレートを **plugins/Modern/templates/plugin/Cms/Tags/edit.php**
 に置き換えます。
 
 テーマの中にビューファイルを見つけられなかった場合、CakePHP はビューファイルを

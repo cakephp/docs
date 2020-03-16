@@ -315,7 +315,7 @@ apropriado usando o método ``Email::theme()``::
 
 Isso permite que você substituir o ``new_comment`` em seu tema, sem modificar o
 plug-in Blog. O arquivo de template precisa ser criado no seguinte caminho:
-**templates/Plugin/TestTheme/Blog/Email/text/new_comment.php**.
+**templates/plugin/TestTheme/Blog/Email/text/new_comment.php**.
 
 Envio de Anexos
 ===============

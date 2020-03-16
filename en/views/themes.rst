@@ -30,7 +30,7 @@ at **plugins/Modern/templates/Posts/edit.php**. Layout files would reside in
 **plugins/Modern/templates/layout/**. You can provide customized templates
 for plugins with a theme as well. If you had a plugin named 'Cms', that
 contained a TagsController, the Modern theme could provide
-**plugins/Modern/templates/Plugin/Cms/Tags/edit.php** to replace the edit
+**plugins/Modern/templates/plugin/Cms/Tags/edit.php** to replace the edit
 template in the plugin.
 
 If a view file can't be found in the theme, CakePHP will try to locate the view

@@ -505,10 +505,10 @@ Overriding Plugin Templates from Inside Your Application
 You can override any plugin views from inside your app using special paths. If
 you have a plugin called 'ContactManager' you can override the template files of the
 plugin with application specific view logic by creating files using the
-following template **templates/Plugin/[Plugin]/[Controller]/[view].php**. For the
+following template **templates/plugin/[Plugin]/[Controller]/[view].php**. For the
 Contacts controller you could make the following file::
 
-    templates/Plugin/ContactManager/Contacts/index.php
+    templates/plugin/ContactManager/Contacts/index.php
 
 Creating this file would allow you to override
 **plugins/ContactManager/templates/Contacts/index.php**.
@@ -516,7 +516,7 @@ Creating this file would allow you to override
 If your plugin is in a composer dependency (i.e. 'TheVendor/ThePlugin'), the
 path to the 'index' view of the Custom controller will be::
 
-    templates/Plugin/TheVendor/ThePlugin/Custom/index.php
+    templates/plugin/TheVendor/ThePlugin/Custom/index.php
 
 Creating this file would allow you to override
 **vendor/thevendor/theplugin/templates/Custom/index.php**.
@@ -526,7 +526,7 @@ application template overrides.
 For example, if the 'ContactManager' plugin implemented an 'admin' prefix the overridng path
 would be::
 
-    templates/Plugin/ContactManager/Admin/ContactManager/index.php
+    templates/plugin/ContactManager/Admin/ContactManager/index.php
 
 .. _plugin-assets:
 
