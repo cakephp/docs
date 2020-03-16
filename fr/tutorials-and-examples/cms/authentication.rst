@@ -346,7 +346,7 @@ l'action par ceci::
 Ici, nous avons modifier les propriétés qui peuvent être assignées en masse
 via les options de ``patchEntity()``. Référez-vous à la section :ref:`changing-accessible-fields`
 pour plus de détails. Pensez également à retirer l'élément de contrôle de
-``user_id`` sur **src/templates/Articles/edit.php**.
+``user_id`` sur **templates/Articles/edit.php**.
 
 Conclusion
 ==========
