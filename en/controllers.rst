@@ -242,7 +242,7 @@ If ``$view`` starts with '/', it is assumed to be a view or
 element file relative to the **templates** folder. This allows
 direct rendering of elements, very useful in AJAX calls::
 
-    // Render the element in element/ajaxreturn
+    // Render the element in templates/element/ajaxreturn.php
     $this->render('/element/ajaxreturn');
 
 The second parameter ``$layout`` of ``Controller::render()`` allows you to specify the layout
