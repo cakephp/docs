@@ -342,7 +342,7 @@ d'utiliser le bon theme en utilisant la méthode ``Email::theme()``::
 Ceci vous permet de remplacer le template `new_comment` dans votre theme sans
 modifier le plugin Blog. Le fichier de template devra être créé dans le
 chemin suivant:
-**templates/Plugin/TestTheme/Plugin/Blog/email/text/new_comment.php**.
+**templates/plugin/TestTheme/plugin/Blog/email/text/new_comment.php**.
 
 .. deprecated:: 3.4.0
     Utilisez ``setTemplate()`` à la place de ``template()``. Utilisez

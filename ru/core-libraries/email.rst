@@ -314,7 +314,7 @@ Email
 
 Это позволяет вам переопределить шаблон ``new_comment`` в своей теме, не изменяя плагин Blog.
 Файл шаблона должен быть создан по следующему пути:
-**templates/Plugin/TestTheme/Plugin/Blog/email/text/new_comment.php**.
+**templates/plugin/TestTheme/plugin/Blog/email/text/new_comment.php**.
 
 .. deprecated:: 3.4.0
 	Используйте ``setTemplate()`` вместо ``template()``. Используйте ``setLayout()`` вместо
