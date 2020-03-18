@@ -4,7 +4,7 @@ def final REPO_NAME = 'cakephp/docs'
 // job definition use a string 'template' to save duplication
 def final BUILD_STEPS = '''\
 # Rebuild the index.
-make populate-index ES_HOST="$ELASTICSEARCH_URL" ES_HOST_V2="$DOKKU_ELASTICSEARCH_AQUA_URL"
+make populate-index ES_HOST="$DOKKU_ELASTICSEARCH_AQUA_URL" ES_HOST_V2="$DOKKU_ELASTICSEARCH_AQUA_URL"
 
 rm -rf /tmp/book-VERSION-$GIT_COMMIT
 git clone . /tmp/book-VERSION-$GIT_COMMIT
