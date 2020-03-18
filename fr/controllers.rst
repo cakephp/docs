@@ -255,8 +255,8 @@ vue ou un élément dont le chemin est relatif au dossier **src/Template**.
 Cela permet un affichage direct des éléments, ce qui est très pratique lors
 d'appels AJAX::
 
-    // Rend un élément dans element/ajaxreturn
-    $this->render('/Element/ajaxreturn');
+    // Rend un élément dans templates/element/ajaxreturn.php
+    $this->render('/element/ajaxreturn');
 
 Le paramètre ``$layout`` de ``Controller::render()`` vous permet de spécifier
 le layout de la vue qui est rendue.
