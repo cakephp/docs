@@ -410,6 +410,8 @@ like::
             // Add constants, load configuration defaults.
             // By default will load `config/bootstrap.php` in the plugin.
             parent::bootstrap($app);
+            // Load another plugin through this plugin
+            $app->addPlugin(\My\Plugin::class);
         }
 
         public function routes($routes)
