@@ -106,11 +106,11 @@
 Тем же образом, которым мы создадим Вид для нашей статьи с помощью инструмента
 генерации кода (bake), таким же образом мы можем сгенерировать Вид для каждого
 пользователя. Для целей настоящего учебника, мы будем показывать только
-готовый add.ctp:
+готовый add.php:
 
 .. code-block:: php
 
-    <!-- src/Template/Users/add.ctp -->
+    <!-- templates/Users/add.php -->
 
     <div class="users form">
     <?= $this->Form->create($user) ?>
@@ -258,12 +258,12 @@
 
 Теперь каждый раз пароль, назначенный пользователю, будет хешироваться
 с помощью класса `DefaultPasswordHasher`. Теперь создайте простой шаблон
-файла Вида для функции входа: **src/Template/Users/login.ctp**
+файла Вида для функции входа: **templates/Users/login.php**
 и добавьте следующие строки:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Users/login.ctp -->
+    <!-- File: templates/Users/login.php -->
 
     <div class="users form">
     <?= $this->Flash->render() ?>

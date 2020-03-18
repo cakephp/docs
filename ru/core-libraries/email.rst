@@ -256,8 +256,8 @@ Email
         ->from('app@domain.com')
         ->send();
 
-Вышеизложенное будет использовать **src/Template/Email/html/welcome.ctp** для представления и
-**src/Template/Layout/Email/html/fancy.ctp** для макета(лейаута). Вы также можете отправить
+Вышеизложенное будет использовать **templates/email/html/welcome.php** для представления и
+**templates/layout/email/html/fancy.php** для макета(лейаута). Вы также можете отправить
 многостраничные шаблонные сообщения электронной почты::
 
     $email = new Email();
@@ -270,10 +270,10 @@ Email
 
 Это будет использовать следующие файлы шаблонов:
 
-* **src/Template/Email/text/welcome.ctp**
-* **src/Template/Layout/Email/text/fancy.ctp**
-* **src/Template/Email/html/welcome.ctp**
-* **src/Template/Layout/Email/html/fancy.ctp**
+* **templates/email/text/welcome.php**
+* **templates/layout/email/text/fancy.php**
+* **templates/email/html/welcome.php**
+* **templates/layout/email/html/fancy.php**
 
 При отправке шаблонных писем у вас есть возможность отправить либо
 ``text``, ``html`` или ``both``.
@@ -314,7 +314,7 @@ Email
 
 Это позволяет вам переопределить шаблон ``new_comment`` в своей теме, не изменяя плагин Blog.
 Файл шаблона должен быть создан по следующему пути:
-**src/Template/Plugin/TestTheme/Plugin/Blog/Email/text/new_comment.ctp**.
+**templates/plugin/TestTheme/plugin/Blog/email/text/new_comment.php**.
 
 .. deprecated:: 3.4.0
 	Используйте ``setTemplate()`` вместо ``template()``. Используйте ``setLayout()`` вместо

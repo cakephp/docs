@@ -105,7 +105,7 @@ l'action ``add`` pour qu'elle ressemble à ceci::
 Les lignes de code ajoutées chargent une liste des tags sous forme de tableau associatif
 de la forme ``id => title``. Ce format nous permet de créer un nouvel input de tags dans
 notre template. Ajoutez la ligne suivante dans le bloc PHP avec les autres appels à
-``control()`` dans **src/Template/Articles/add.ctp**::
+``control()`` dans **templates/Articles/add.php**::
 
     echo $this->Form->control('tags._ids', ['options' => $tags]);
 
@@ -143,8 +143,8 @@ maintenant ressemble à ceci::
     }
 
 Pensez à ajouter le nouveau select multiple qui permet de sélectionner les tags
-comme nous l'avons fait dans le template **add.ctp** au template
-**src/Template/Articles/edit.ctp**.
+comme nous l'avons fait dans le template **add.php** au template
+**templates/Articles/edit.php**.
 
 Trouver des Articles via les Tags
 =================================
@@ -300,7 +300,7 @@ Création de la view
 
 Si vous visitez à nouveau **/articles/tagged**, CakePHP vous affichera une nouvelle
 erreur qui vous fait savoir qu'il manque le fichier de view. Créez le fichier
-**src/Template/Articles/tags.ctp** et ajoutez le contenu suivant::
+**templates/Articles/tags.php** et ajoutez le contenu suivant::
 
     <h1>
         Articles avec les tags
@@ -326,7 +326,7 @@ Nous utilisons également la fonction raccourcie :php:func:`h` pour échapper le
 contenu HTML. Pensez à utiliser ``h()`` quand vous affichez des données pour
 éviter les injections de HTML.
 
-Le fichier **tags.ctp** que nous venons de créer suit les conventions CakePHP
+Le fichier **tags.php** que nous venons de créer suit les conventions CakePHP
 pour les templates de view. La convention est d'utiliser le nom de l'action du
 controller en minuscule et avec un underscore en séparateur.
 
@@ -382,7 +382,7 @@ Mettre à jour nos View
 
 Maintenant que notre entity est mise à jour, nous pouvons ajouter un nouvel
 élément de contrôle pour nos tags. Dans
-**src/Template/Articles/add.ctp** et **src/Template/Articles/edit.ctp**,
+**templates/Articles/add.php** et **templates/Articles/edit.php**,
 remplacez l'élément de contrôle existant ``tags._ids`` avec la déclaration
 suivante::
 

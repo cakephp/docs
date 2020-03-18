@@ -147,12 +147,12 @@ view テンプレートが見つからないことがわかります。それを
 view テンプレートの作成
 =======================
 
-新しい 'view' アクションのビューを作成し、 **src/Template/Articles/view.ctp**
+新しい 'view' アクションのビューを作成し、 **templates/Articles/view.php**
 に置きましょう。
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/view.ctp -->
+    <!-- File: templates/Articles/view.php -->
 
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
@@ -258,7 +258,7 @@ add テンプレートの作成
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/add.ctp -->
+    <!-- File: templates/Articles/add.php -->
 
     <h1>記事の追加</h1>
     <?php
@@ -290,7 +290,7 @@ URL オプションなしで ``create()`` を呼び出したので、 ``FormHelp
 フォームコントロールのラベル、入力、または、その他の要素をカスタマイズすることができます。
 ``$this->Form->end()`` の呼び出しでフォームを閉じます。
 
-さて、 **src/Template/Articles/index.ctp** ビューを更新して、新しい
+さて、 **templates/Articles/index.php** ビューを更新して、新しい
 「記事の追加」リンクを追加しましょう。 ``<table>`` の前に以下の行を追加してください。 ::
 
     <?= $this->Html->link('記事の追加', ['action' => 'add']) ?>
@@ -364,7 +364,7 @@ edit テンプレートは次のようになります。
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/edit.ctp -->
+    <!-- File: templates/Articles/edit.php -->
 
     <h1>記事の編集</h1>
     <?php
@@ -383,7 +383,7 @@ edit テンプレートは次のようになります。
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp  (編集リンク付き) -->
+    <!-- File: templates/Articles/index.php  (編集リンク付き) -->
 
     <h1>記事一覧</h1>
     <p><?= $this->Html->link("記事の追加", ['action' => 'add']) ?></p>
@@ -489,7 +489,7 @@ index テンプレートを更新するといいでしょう。
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp  (削除リンク付き) -->
+    <!-- File: templates/Articles/index.php  (削除リンク付き) -->
 
     <h1>記事一覧</h1>
     <p><?= $this->Html->link("記事の追加", ['action' => 'add']) ?></p>

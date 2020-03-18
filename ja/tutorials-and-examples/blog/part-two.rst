@@ -143,7 +143,7 @@ CakePHP のビューファイルは、 ``src/Template`` の中の、コントロ
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp -->
+    <!-- File: templates/Articles/index.php -->
 
     <h1>Blog articles</h1>
     <table>
@@ -227,11 +227,11 @@ Articles テーブルに対して ``get()`` を用いるとき、存在するレ
 ``get()`` 関数は ``NotFoundException`` を送出します。
 
 では、新しい「view」アクション用のビューを作って、
-**src/Template/Articles/view.ctp** というファイルで保存しましょう。
+**templates/Articles/view.php** というファイルで保存しましょう。
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/view.ctp -->
+    <!-- File: templates/Articles/view.php -->
 
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
@@ -342,7 +342,7 @@ add のビューは次のようなものになります。
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/add.ctp -->
+    <!-- File: templates/Articles/add.php -->
 
     <h1>Add Article</h1>
     <?php
@@ -374,7 +374,7 @@ POST で送るフォームを構築している、と解釈されます。
 ``$this->Form->end()`` の呼び出しで、フォームの終了部分が出力されます。
 hidden の input 要素の出力においては、CSRF/フォーム改ざん防止が有効です。
 
-さて少し戻って、 ``src/Template/Articles/index.ctp`` のビューで「Add Article」というリンクを
+さて少し戻って、 ``templates/Articles/index.php`` のビューで「Add Article」というリンクを
 新しく表示するように編集しましょう。 ``<table>`` の前に、以下の行を追加してください。 ::
 
     <?= $this->Html->link('Add Article', ['action' => 'add']) ?>
@@ -459,7 +459,7 @@ edit ビューは以下のようになるでしょう。
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/edit.ctp -->
+    <!-- File: templates/Articles/edit.php -->
 
     <h1>Edit Article</h1>
     <?php
@@ -480,7 +480,7 @@ CakePHP は挿入あるいは更新のどちらを生成するかを決定しま
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp  (edit links added) -->
+    <!-- File: templates/Articles/index.php  (edit links added) -->
 
     <h1>Blog articles</h1>
     <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>
@@ -542,7 +542,7 @@ CakePHP は挿入あるいは更新のどちらを生成するかを決定しま
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp (delete links added) -->
+    <!-- File: templates/Articles/index.php (delete links added) -->
 
     <h1>Blog articles</h1>
     <p><?= $this->Html->link('Add Article', ['action' => 'add']) ?></p>

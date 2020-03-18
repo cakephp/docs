@@ -87,7 +87,7 @@ FormHelper は、 *追加* または *編集* のフォームを作成するか�
         $this->set('article', $article);
     }
 
-    // View/Articles/edit.ctp:
+    // View/Articles/edit.php:
     // $article->isNew() は false なので、編集フォームが得られます
     <?= $this->Form->create($article) ?>
 
@@ -2002,7 +2002,7 @@ FormHelper は、フィールドエラーを簡単にチェックしたり、必
             ->notEmpty('ticket');
     }
 
-    // そして、 Templates/Tickets/add.ctp の中が次のような場合:
+    // そして、 templates/Tickets/add.php の中が次のような場合:
     echo $this->Form->text('ticket');
 
     if ($this->Form->isFieldError('ticket')) {
@@ -2261,7 +2261,7 @@ POST ボタンの作成
 
 例::
 
-    // Templates/Tickets/index.ctp の中で
+    // templates/Tickets/index.php の中で
     <?= $this->Form->postButton('Delete Record', ['controller' => 'Tickets', 'action' => 'delete', 5]) ?>
 
 出力結果:

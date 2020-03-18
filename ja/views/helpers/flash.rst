@@ -9,8 +9,8 @@ FlashHelperは、 :doc:`FlashComponent </controllers/components/flash>` によ�
 ``$_SESSION`` にセットされたフラッシュメッセージを描画する方法を提供しています。
 :doc:`FlashComponent </controllers/components/flash>` および
 FlashHelper はフラッシュメッセージを描画するためのエレメントを使用します。
-フラッシュエレメントは **src/Template/Element/Flash** ディレクトリー以下に存在します。
-CakePHP の App テンプレートには、 **success.ctp** 、 **default.ctp** と **error.ctp** の
+フラッシュエレメントは **templates/element/flash** ディレクトリー以下に存在します。
+CakePHP の App テンプレートには、 **success.php** 、 **default.php** と **error.php** の
 3つのフラッシュエレメントが付属しています。
 
 フラッシュメッセージの描画
@@ -34,7 +34,7 @@ FlashComponent の中で設定したオプションを上書きすることも�
         'element' => 'success'
     ]);
 
-    // テンプレートファイルの中で、 success.ctp の代わりに great_success.ctp を使用
+    // テンプレートファイルの中で、 success.php の代わりに great_success.php を使用
     <?= $this->Flash->render('flash', [
         'element' => 'great_success'
     ]);
@@ -59,7 +59,7 @@ FlashComponent の中で設定したオプションを上書きすることも�
 .. versionadded:: 3.0.1
 
 設定したルーティングのプレフィックスがある場合、フラッシュエレメントを
-**src/Template/{Prefix}/Element/Flash** に置きます。
+**templates/{Prefix}/element/flash** に置きます。
 これにより、アプリケーションの各部分に特定のメッセージレイアウトを設定できます。
 例えば、フロントエンドと管理者のセクションで異なるレイアウトを使用する場合です。
 
@@ -67,5 +67,5 @@ FlashComponent の中で設定したオプションを上書きすることも�
 ============================
 
 FlashHelper は、メッセージを描画するために標準のエレメントを使用し、指定したテーマに従います。
-そのため、テーマが **src/Template/Element/Flash/error.ctp** ファイルを持つ場合、
+そのため、テーマが **templates/element/flash/error.php** ファイルを持つ場合、
 エレメントやビューと同様に使用されます。

@@ -98,11 +98,11 @@ CakePHP にバンドルされているコード生成ユーティリティを利
     }
 
 同じように、コード生成ツールで記事のビューを作り、ユーザーのビューを実装することができます。
-このチュートリアルのために、 add.ctp をお見せしましょう。
+このチュートリアルのために、 add.php をお見せしましょう。
 
 .. code-block:: php
 
-    <!-- src/Template/Users/add.ctp -->
+    <!-- templates/Users/add.php -->
 
     <div class="users form">
     <?= $this->Form->create($user) ?>
@@ -246,11 +246,11 @@ CakePHP にバンドルされているコード生成ユーティリティを利
 
 これで、パスワードのプロパティーがユーザーにアサインされるたびに、 ``DefaultPasswordHasher``
 クラスを用いてパスワードがハッシュ化されます。ログイン機能のテンプレートビューファイルが足りていません。
-**src/Template/Users/login.ctp** ファイルを開いて、以下を追加してください。
+**templates/Users/login.php** ファイルを開いて、以下を追加してください。
 
 .. code-block:: php
 
-    <!-- File: src/Template/Users/login.ctp -->
+    <!-- File: templates/Users/login.php -->
 
     <div class="users form">
     <?= $this->Flash->render() ?>

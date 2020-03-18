@@ -136,7 +136,7 @@ ser algo así:
 
 .. code-block:: php
 
-    <!-- File: /src/Template/Articles/index.ctp -->
+    <!-- File: /templates/Articles/index.php -->
 
     <h1>Artículos</h1>
     <table>
@@ -224,11 +224,11 @@ solicitado no esté presente en la base de datos, el método ``get()`` lanzará
 una excepción ``NotFoundException``.
 
 Ahora vamos a definir la vista para esta nueva función 'view' ubicándola en
-**src/Template/Articles/view.ctp**.
+**templates/Articles/view.php**.
 
 .. code-block:: php
 
-    <!-- File: /src/Template/Articles/view.ctp -->
+    <!-- File: /templates/Articles/view.php -->
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
     <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
@@ -329,7 +329,7 @@ He aquí nuestra vista ``add``:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/add.ctp -->
+    <!-- File: templates/Articles/add.php -->
 
     <h1>Añadir Artículo</h1>
     <?php
@@ -363,7 +363,7 @@ campos ocultos si la CSRF/prevención de manipulación de formularios ha sido
 habilitada.
 
 Volvamos atrás un minuto y actualicemos nuestra vista
-**src/Template/Articles/index.ctp** para añadir un enlace de "Añadir Artículo".
+**templates/Articles/index.php** para añadir un enlace de "Añadir Artículo".
 Justo antes del tag <table> añade la siguiente línea::
 
     <?= $this->Html->link(
@@ -446,7 +446,7 @@ La vista sería algo así:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/edit.ctp -->
+    <!-- File: templates/Articles/edit.php -->
 
     <h1>Edit Article</h1>
     <?php
@@ -468,7 +468,7 @@ específicos:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp  (edit links added) -->
+    <!-- File: templates/Articles/index.php  (edit links added) -->
 
     <h1>Artículos</h1>
     <p><?= $this->Html->link("Añadir artículo", ['action' => 'add']) ?></p>
@@ -527,11 +527,11 @@ para indicar los varios errores HTTP que tu aplicación pueda generar.
 
 Como estamos ejecutando algunos métodos y luego redirigiendo a otra acción de
 nuestro controlador, no es necesaria ninguna vista (nunca se usa). Lo que si
-querrás es actualizar la vista index.ctp para incluír el ya habitual enlace:
+querrás es actualizar la vista index.php para incluír el ya habitual enlace:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp -->
+    <!-- File: templates/Articles/index.php -->
 
     <h1>Artículos</h1>
     <p><?= $this->Html->link("Añadir artículo", ['action' => 'add']) ?></p>

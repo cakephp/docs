@@ -104,11 +104,11 @@ classe obtenue grâce à l'utilitaire de génération de code fournis par CakePH
 
 De la même façon, nous avons créé les vues pour nos articles de blog en
 utilisant l'outil de génération de code. Dans
-le cadre de ce tutoriel, nous allons juste montrer le add.ctp:
+le cadre de ce tutoriel, nous allons juste montrer le add.php:
 
 .. code-block:: php
 
-    <!-- src/Template/Users/add.ctp -->
+    <!-- templates/Users/add.php -->
 
     <div class="users form">
     <?= $this->Form->create($user) ?>
@@ -258,11 +258,11 @@ fichier entity dans **src/Model/Entity/User.php** et ajoutons ce qui suit::
 Ainsi, maintenant à chaque fois qu'un utilisateur est sauvegardé, le mot de
 passe est hashé en utilisant la classe ``DefaultPasswordHasher``. Il nous
 manque juste un fichier template de vue pour la fonction de connexion. Ouvrez
-votre fichier **src/Template/Users/login.ctp** et ajoutez les lignes suivantes:
+votre fichier **templates/Users/login.php** et ajoutez les lignes suivantes:
 
 .. code-block:: php
 
-    <!-- src/Template/Users/login.ctp -->
+    <!-- templates/Users/login.php -->
 
     <div class="users form">
     <?= $this->Flash->render() ?>

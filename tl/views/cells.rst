@@ -17,7 +17,7 @@ Creating a Cell
 ===============
 
 To create a cell, define a class in **src/View/Cell** and a template in
-**src/Template/Cell/**. In this example, we'll be making a cell to display the
+**templates/cell/**. In this example, we'll be making a cell to display the
 number of messages in a user's notification inbox. First, create the class file.
 Its contents should look like::
 
@@ -44,7 +44,7 @@ classes in CakePHP, Cells have a few conventions:
 
 We added an empty ``display()`` method to our cell; this is the conventional
 default method when rendering a cell. We'll cover how to use other methods later
-in the docs. Now, create the file **src/Template/Cell/Inbox/display.ctp**. This
+in the docs. Now, create the file **templates/cell/Inbox/display.php**. This
 will be our template for our new cell.
 
 You can generate this stub code quickly using ``bake``::
@@ -82,7 +82,7 @@ very much like a controller would.  We can use the ``loadModel()`` and ``set()``
 methods just like we would in a controller. In our template file, add the
 following::
 
-    <!-- src/Template/Cell/Inbox/display.ctp -->
+    <!-- templates/cell/Inbox/display.php -->
     <div class="notification-icon">
         You have <?= $unread_count ?> unread messages.
     </div>
@@ -151,7 +151,7 @@ easiest way to render a cell is to echo it::
     <?= $cell ?>
 
 This will render the template matching the lowercased and underscored version of
-our action name, e.g. **display.ctp**.
+our action name, e.g. **display.php**.
 
 Because cells use ``View`` to render templates, you can load additional cells
 within a cell template if required.

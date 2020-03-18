@@ -126,7 +126,7 @@ login::
         }
     }
 
-Et dans **src/Template/Users/login.ctp**, ajoutez::
+Et dans **templates/Users/login.php**, ajoutez::
 
     <h1>Login</h1>
     <?= $this->Form->create() ?>
@@ -278,7 +278,7 @@ Maintenant, si vous essayez de modifier ou supprimer un article qui ne vous
 appartient pas, vous serez redirigé sur la page où vous étiez avant. Si aucun
 message d'erreur n'apparaît, ajoutez ceci à votre layout::
 
-    // Dans src/Template/Layout/default.ctp
+    // Dans templates/layout/default.php
     <?= $this->Flash->render() ?>
 
 Bien que le code ci-dessus soit très simple, cela démontre comment vous pouvez
@@ -346,7 +346,7 @@ l'action par ceci::
 Ici, nous avons modifier les propriétés qui peuvent être assignées en masse
 via les options de ``patchEntity()``. Référez-vous à la section :ref:`changing-accessible-fields`
 pour plus de détails. Pensez également à retirer l'élément de contrôle de
-``user_id`` sur **src/Templates/Articles/edit.ctp**.
+``user_id`` sur **templates/Articles/edit.php**.
 
 Conclusion
 ==========

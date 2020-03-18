@@ -112,9 +112,9 @@ Convenciones de Vistas
 
 Los archivos de las plantillas de vistas son nombrados según las
 funciones de controlador que las muestran empleando '_'. La función ``viewAll()``
-de la clase ``ArticlesController`` mostrará la vista **src/Template/Articles/view_all.ctp**.
+de la clase ``ArticlesController`` mostrará la vista **templates/Articles/view_all.php**.
 
-El patrón base es **src/Template/Controller/nombre_funcion.ctp**.
+El patrón base es **templates/Controller/nombre_funcion.php**.
 
 Nombrando los elementos de tu aplicación empleando las convenciones de CakePHP
 ganarás funcionalidad sin los fastidios y ataduras de mantenimiento de la
@@ -127,7 +127,7 @@ Un último ejemplo que enlaza todas las convenciones:
 -  Clase Entidad: ``Article``, ubicada en **src/Model/Entity/Article.php**
 -  Clase Controlador: ``ArticlesController``, ubicada en
    **src/Controller/ArticlesController.php**
--  Plantilla vista, ubicada en **src/Template/Articles/index.ctp**
+-  Plantilla vista, ubicada en **templates/Articles/index.php**
 
 Usando estas convenciones CakePHP redirige una petición a http://example.com/articles/
 a una llamada a la función ``index()`` de la clase ArticlesController,

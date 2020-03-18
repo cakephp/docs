@@ -102,7 +102,7 @@ articles. First, update the ``add`` action to look like::
 
 The added lines load a list of tags as an associative array of ``id => title``.
 This format will let us create a new tag input in our template.
-Add the following to the PHP block of controls in **src/Template/Articles/add.ctp**::
+Add the following to the PHP block of controls in **templates/Articles/add.php**::
 
     echo $this->Form->control('tags._ids', ['options' => $tags]);
 
@@ -138,8 +138,8 @@ edit method should now look like::
         $this->set('article', $article);
     }
 
-Remember to add the new tags multiple select control we added to the **add.ctp**
-template to the **src/Template/Articles/edit.ctp** template as well.
+Remember to add the new tags multiple select control we added to the **add.php**
+template to the **templates/Articles/edit.php** template as well.
 
 Finding Articles By Tags
 ========================
@@ -290,7 +290,7 @@ Creating the View
 
 Now if you visit the **/articles/tagged** URL again, CakePHP will show a new error
 letting you know that you have not made a view file. Next, let's build the
-view file for our ``tags()`` action. In **src/Template/Articles/tags.ctp**
+view file for our ``tags()`` action. In **templates/Articles/tags.php**
 put the following content::
 
     <h1>
@@ -317,7 +317,7 @@ also use the :php:func:`h` shortcut function to HTML encode output. You should
 remember to always use ``h()`` when outputting data to prevent HTML injection
 issues.
 
-The **tags.ctp** file we just created follows the CakePHP conventions for view
+The **tags.php** file we just created follows the CakePHP conventions for view
 template files. The convention is to have the template use the lower case and
 underscored version of the controller action name.
 
@@ -370,7 +370,7 @@ Updating the Views
 ------------------
 
 With the entity updated we can add a new control for our tags. In
-**src/Template/Articles/add.ctp** and **src/Template/Articles/edit.ctp**,
+**templates/Articles/add.php** and **templates/Articles/edit.php**,
 replace the existing ``tags._ids`` control with the following::
 
     echo $this->Form->control('tag_string', ['type' => 'text']);

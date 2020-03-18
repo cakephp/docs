@@ -17,14 +17,14 @@ Configurando Mensagens em Flash
 O FlashComponent fornece duas maneiras de definir mensagens em flash: seu método 
 mágico ``__call()`` e seu método ``set()``. Para fornecer detalhes ao seu aplicativo, 
 o método mágico ``__call()`` do FlashComponent permite que você use um nome de método 
-que mapeie para um elemento localizado no diretório **templates/element/Flash**. Por 
+que mapeie para um elemento localizado no diretório **templates/element/flash**. Por 
 convenção, os métodos camelcased serão mapeados para o nome do elemento em minúsculas 
 e sublinhado::
 
-    // Usa templates/element/Flash/success.php
+    // Usa templates/element/flash/success.php
     $this->Flash->success('This was successful');
 
-    // Usa templates/element/Flash/great_success.php
+    // Usa templates/element/flash/great_success.php
     $this->Flash->greatSuccess('This was greatly successful');
 
 Como alternativa, para definir uma mensagem de texto sem processar um elemento, 
@@ -62,7 +62,7 @@ Um exemplo de uso dessas opções::
     // Em sua View
     <?= $this->Flash->render('positive') ?>
 
-    <!-- Em templates/element/Flash/success.php -->
+    <!-- Em templates/element/flash/success.php -->
     <div id="flash-<?= h($key) ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>
@@ -77,7 +77,7 @@ Para recuperar um elemento específico de um plugin, você deve definir o parâm
     $this->Flash->warning('My message', ['plugin' => 'PluginName']);
 
 O código acima usará o elemento **warning.php** em 
-**plugins/PluginName/templates/element/Flash** para renderizar a mensagem flash.
+**plugins/PluginName/templates/element/flash** para renderizar a mensagem flash.
 
 .. note::
 

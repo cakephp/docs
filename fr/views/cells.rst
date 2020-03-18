@@ -18,7 +18,7 @@ Créer une Cell
 ==============
 
 Pour créer une cell, vous définissez une classe dans **src/View/Cell**, et un
-template dans **src/Template/Cell/**. Dans cet exemple, nous ferons une cell
+template dans **templates/cell/**. Dans cet exemple, nous ferons une cell
 pour afficher le nombre de messages dans la boite de messages de notification de
 l'utilisateur. D'abord, créons le fichier de classe. Son contenu devrait
 ressembler à ceci::
@@ -48,7 +48,7 @@ conventions:
 Nous avons ajouté une méthode vide ``display()`` à notre cell, c'est la méthode
 conventionnelle par défaut pour le rendu de cell. Nous couvrirons la façon
 d'utiliser les autres méthodes plus tard dans la doc. Maintenant, créons le
-fichier **src/Template/Cell/Inbox/display.ctp**. Ce sera le template pour notre
+fichier **templates/cell/Inbox/display.php**. Ce sera le template pour notre
 nouvelle cell.
 
 Vous pouvez générer ce bout de code rapidement en utilisant ``bake``::
@@ -87,7 +87,7 @@ se comportent un peu comme un controller. Nous pouvons utiliser les méthodes
 ``loadModel()`` et ``set()`` un peu comme nous le ferions dans un controller.
 Dans notre fichier de template, ajoutons ce qui suit::
 
-    <!-- src/Template/Cell/Inbox/display.ctp -->
+    <!-- templates/cell/Inbox/display.php -->
     <div class="notification-icon">
         Vous avez <?= $unread_count ?> messages non lus.
     </div>
@@ -160,7 +160,7 @@ l'afficher. La façon la plus simple pour rendre une cell est de faire une echo:
     <?= $cell ?>
 
 Ceci va afficher le template correspondant à la version en minuscule et avec des
-underscores de notre nom d'action, par exemple **display.ctp**.
+underscores de notre nom d'action, par exemple **display.php**.
 
 Puisque les cells utilisent ``View`` pour afficher les templates, vous pouvez
 charger les cells supplémentaires dans un template de cell si nécessaire.

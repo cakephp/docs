@@ -467,7 +467,7 @@ functions::
 Now thanks to the reverse routing capabilities, you can pass in the URL array
 like below and CakePHP will know how to form the URL as defined in the routes::
 
-    // view.ctp
+    // view.php
     // This will return a link to /blog/3-CakePHP_Rocks
     echo $this->Html->link('CakePHP Rocks', [
         'controller' => 'Blog',
@@ -593,7 +593,7 @@ controllers can be encapsulated using inheritance,
 :doc:`/controllers/components`, or traits.  Using our users example, accessing
 the URL ``/admin/users/edit/5`` would call the ``edit()`` method of our
 **src/Controller/Admin/UsersController.php** passing 5 as the first parameter.
-The view file used would be **src/Template/Admin/Users/edit.ctp**
+The view file used would be **templates/Admin/Users/edit.php**
 
 You can map the URL /admin to your ``index()`` action of pages controller using
 following route::

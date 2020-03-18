@@ -75,7 +75,7 @@ navigateurs, mais vous pourriez aussi avoir besoin de fournir des données AMF
 à un objet Flash, répondre à une application distante via SOAP ou produire un
 fichier CSV pour un utilisateur.
 
-Les fichiers de template de CakePHP possèdent une extension **.ctp** (CakePHP Template)
+Les fichiers de template de CakePHP possèdent une extension **.php** (CakePHP Template)
 et utilisent la `syntaxe alternative de PHP
 <http://php.net/manual/fr/control-structures.alternative-syntax.php>`_
 pour les structures de contrôle et les sorties. Ces fichiers contiennent la logique nécessaire
@@ -127,11 +127,11 @@ Un autre exemple utilisant if/elseif/else. Remarquez les doubles points:
 
 Si vous préférez utiliser un langage de template comme `Twig <http://twig.sensiolabs.org>`_, une sous-classe de View va faire le pont entre le langage du template et CakePHP.
 
-Un fichier de template est stocké dans **src/Template/**, dans un sous-dossier
+Un fichier de template est stocké dans **templates/**, dans un sous-dossier
 portant le nom du controller qui utilise ce fichier. Il a un nom de fichier
 correspondant à son action. Par exemple, le fichier de vue pour l'action
 "view()" du controller Products devra normalement se trouver dans
-**src/Template/Products/view.ctp**.
+**templates/Products/view.php**.
 
 La couche vue de CakePHP peut être constituée d'un certain nombre de parties
 différentes. Chaque partie a différents usages qui seront présentés dans ce
@@ -200,7 +200,7 @@ commune pour votre sidebar, et seulement définir les parties qui changent:
 
 .. code-block:: php
 
-    <!-- src/Template/Common/view.ctp -->
+    <!-- templates/Common/view.php -->
     <h1><?= $this->fetch('title') ?></h1>
     <?= $this->fetch('content') ?>
 
@@ -220,7 +220,7 @@ données sur notre post. Notre vue pourrait ressembler à ceci:
 
 .. code-block:: php
 
-    <!-- src/Template/Posts/view.ctp -->
+    <!-- templates/Posts/view.php -->
     <?php
     $this->extend('/Common/view');
 
@@ -252,7 +252,7 @@ va outrepasser les précédents::
     $this->extend('/Common/view');
     $this->extend('/Common/index');
 
-Le code précédent va définir **/Common/index.ctp** comme étant la vue parente
+Le code précédent va définir **/Common/index.php** comme étant la vue parente
 de la vue actuelle.
 
 Vous pouvez imbriquer les vues autant que vous le voulez et que cela vous est
@@ -355,7 +355,7 @@ en-têtes ou autres balises:
 
 .. code-block:: php
 
-    // dans src/Template/Layout/default.ctp
+    // dans templates/layout/default.php
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -420,12 +420,12 @@ Tout ce que vous voulez voir dans toutes vos vues devra être placé dans un
 layout.
 
 Le fichier de layout par défaut de CakePHP est placé dans
-**src/Template/Layout/default.ctp**. Si vous voulez changer entièrement le
+**templates/layout/default.php**. Si vous voulez changer entièrement le
 look de votre application, alors c'est le bon endroit pour commencer, parce que
 le code de vue de rendu du controller est placé à l'intérieur du layout par
 défaut quand la page est rendue.
 
-Les autres fichiers de layout devront être placés dans **src/Template/Layout**.
+Les autres fichiers de layout devront être placés dans **templates/layout**.
 Quand vous créez un layout, vous devez dire à CakePHP où placer
 la sortie pour vos vues. Pour ce faire, assurez-vous que votre layout contienne
 ``$this->fetch('content')``. Voici un exemple de ce à quoi un layout pourrait
@@ -482,7 +482,7 @@ d'un fichier de vue::
     $this->assign('title', $titleContent);
 
 Vous pouvez créer autant de layouts que vous souhaitez: placez les juste dans
-le répertoire **src/Template/Layout**, et passez de l'un à l'autre depuis les
+le répertoire **templates/layout**, et passez de l'un à l'autre depuis les
 actions de votre controller en utilisant la propriété
 ``$layout`` de votre controller ou de votre vue::
 
@@ -578,8 +578,8 @@ pour rendre une vue plus lisible, en plaçant le rendu d'éléments répétitifs
 dans ses propres fichiers. Ils peuvent aussi vous aider à réutiliser des
 fragments de contenu dans votre application.
 
-Les elements se trouvent dans le dossier **src/Template/Element/**, et ont une
-extension .ctp. Ils sont rendus en utilisant la méthode element de la vue::
+Les elements se trouvent dans le dossier **templates/element/**, et ont une
+extension .php. Ils sont rendus en utilisant la méthode element de la vue::
 
     echo $this->element('helpbox');
 
@@ -596,9 +596,9 @@ Dans le fichier element, toutes les variables passés sont disponibles comme
 des membres du paramètre du tableau (de la même manière que
 :php:meth:`Controller::set()` fonctionne dans le controller avec les fichiers
 de template). Dans l'exemple ci-dessus, le fichier
-**src/Template/Element/helpbox.ctp** peut utiliser la variable ``$helptext``::
+**templates/element/helpbox.php** peut utiliser la variable ``$helptext``::
 
-    // A l'intérieur de src/Template/Element/helpbox.ctp
+    // A l'intérieur de templates/element/helpbox.php
     echo $helptext; //outputs "Oh, this text is very helpful."
 
 La méthode :php:meth:`View::element()` supporte aussi les options pour
@@ -695,7 +695,7 @@ Contacts::
 Sont équivalents et résulteront à l'affichage du même element.
 
 Pour les elements dans le sous-dossier d'un plugin
-(e.g., **plugins/Contacts/sidebar/helpbox.ctp**), utilisez ce qui suit::
+(e.g., **plugins/Contacts/sidebar/helpbox.php**), utilisez ce qui suit::
 
     echo $this->element('Contacts.sidebar/helpbox');
 
@@ -712,7 +712,7 @@ appelez::
 
     echo $this->element('my_element');
 
-L'element va d'abord être cherché dans **src/Template/Admin/Element/**. Si un
+L'element va d'abord être cherché dans **templates/Admin/Element/**. Si un
 tel fichier n'existe pas, il sera ensuite cherché dans le chemin par défaut.
 
 Mettre en Cache des Sections de votre View

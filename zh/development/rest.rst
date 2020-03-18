@@ -97,11 +97,11 @@ REST可以帮你有效地向他人提供在你的应用中已创建的逻辑（�
 这个特殊的格式（视图）变量是用来定义哪些视图变量``XmlView``应该被格式化成XML
 
 如果我们想要在数据被转换成XML之前修改它们，我们不应该（不能）定义这个``_serialize``视图变量，而是应该使用模板文件。
-我们把RecipesController的REST视图放在**src/Template/Recipes/xml**内。或者我们也可以使用:php:class:`Xml` 类来简单快速的在这些视图中输些XML。
+我们把RecipesController的REST视图放在**templates/Recipes/xml**内。或者我们也可以使用:php:class:`Xml` 类来简单快速的在这些视图中输些XML。
 
 index方法的REST视图的简单的代码::
 
-    // src/Template/Recipes/xml/index.ctp
+    // templates/Recipes/xml/index.php
     // Do some formatting and manipulation on
     // the $recipes array.
     $xml = Xml::fromArray(['response' => $recipes]);

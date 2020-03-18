@@ -103,11 +103,11 @@ JSON ビューを作成できます。組み込みの :php:class:`XmlView` を�
 
 XML データに変換する前にデータを修正したい場合は、 ``_serialize`` ビュー変数ではなく、
 ビューファイルを使いましょう。RecipesController に対する REST ビューを
-**src/Template/Recipes/xml** 以下に置きます。 :php:class:`Xml` クラスを使えば、
+**templates/Recipes/xml** 以下に置きます。 :php:class:`Xml` クラスを使えば、
 このビューファイル内で簡単に素早く XML を出力させることができます。
 下記に index ビューの例を載せます。 ::
 
-    // src/Template/Recipes/xml/index.ctp
+    // templates/Recipes/xml/index.php
     // Do some formatting and manipulation on
     // the $recipes array.
     $xml = Xml::fromArray(['response' => $recipes]);

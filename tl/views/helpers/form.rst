@@ -94,7 +94,7 @@ do the following::
         $this->set('article', $article);
     }
 
-    // View/Articles/edit.ctp:
+    // View/Articles/edit.php:
     // Since $article->isNew() is false, we will get an edit form
     <?= $this->Form->create($article) ?>
 
@@ -2071,7 +2071,7 @@ Example::
             ->notEmpty('ticket');
     }
 
-    // And inside Templates/Tickets/add.ctp you have:
+    // And inside templates/Tickets/add.php you have:
     echo $this->Form->text('ticket');
 
     if ($this->Form->isFieldError('ticket')) {
@@ -2314,7 +2314,7 @@ SecurityComponent.
 
 For example::
 
-    // In Templates/Tickets/index.ctp
+    // In templates/Tickets/index.php
     <?= $this->Form->postButton('Delete Record', ['controller' => 'Tickets', 'action' => 'delete', 5]) ?>
 
 Will output HTML similar to:

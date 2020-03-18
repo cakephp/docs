@@ -161,7 +161,7 @@ ressembler à quelque chose comme cela:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp -->
+    <!-- File: templates/Articles/index.php -->
 
     <h1>Tous les articles du Blog</h1>
     <table>
@@ -259,11 +259,11 @@ dans la base de données, la fonction ``get()`` va lancer une
 ``NotFoundException``.
 
 Maintenant, créons la vue pour notre nouvelle action 'view' et plaçons-la
-dans **src/Template/Articles/view.ctp**.
+dans **templates/Articles/view.php**.
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/view.ctp -->
+    <!-- File: templates/Articles/view.php -->
 
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
@@ -381,7 +381,7 @@ Voici le code de notre vue "add" (ajout):
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/add.ctp -->
+    <!-- File: templates/Articles/add.php -->
 
     <h1>Ajouter un article</h1>
     <?php
@@ -417,7 +417,7 @@ champs cachés si la protection de falsification de formulaire et/ou CRSF est
 activée.
 
 A présent, revenons en arrière et modifions notre vue
-**src/Template/Articles/index.ctp** pour ajouter un lien "Ajouter un article".
+**templates/Articles/index.php** pour ajouter un lien "Ajouter un article".
 Ajoutez la ligne suivante avant ``<table>``::
 
     <?= $this->Html->link('Ajouter un article', ['action' => 'add']) ?>
@@ -509,7 +509,7 @@ La vue d'édition devrait ressembler à quelque chose comme cela:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/edit.ctp -->
+    <!-- File: templates/Articles/edit.php -->
 
     <h1>Modifier un article</h1>
     <?php
@@ -531,7 +531,7 @@ Vous pouvez maintenant mettre à jour votre vue index avec des liens pour
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp  (liens de modification ajoutés) -->
+    <!-- File: templates/Articles/index.php  (liens de modification ajoutés) -->
 
     <h1>Blog articles</h1>
     <p><?= $this->Html->link("Ajouter un Article", ['action' => 'add']) ?></p>
@@ -600,7 +600,7 @@ articles, ainsi:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp -->
+    <!-- File: templates/Articles/index.php -->
 
     <h1>Blog articles</h1>
     <p><?= $this->Html->link('Ajouter un Article', ['action' => 'add']) ?></p>

@@ -175,7 +175,7 @@ para poder reordenar las categorías en ese árbol::
         }
     }
 
-En **src/Template/Categories/index.ctp** reemplazá el contenido existente por el siguiente::
+En **templates/Categories/index.php** reemplazá el contenido existente por el siguiente::
 
     <div class="actions columns large-2 medium-3">
         <h3><?= __('Actions') ?></h3>
@@ -266,7 +266,7 @@ El template add de Article debería verse similar a esto::
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/add.ctp -->
+    <!-- File: templates/Articles/add.php -->
 
     <h1>Add Article</h1>
     <?php

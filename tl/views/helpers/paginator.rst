@@ -478,7 +478,7 @@ can be integrated into your table column headers:
 
 .. code-block:: php
 
-    <!-- src/Template/Posts/index.ctp -->
+    <!-- templates/Posts/index.php -->
     <table>
         <tr>
             <th><?= $this->Paginator->sort('id', 'ID') ?></th>
