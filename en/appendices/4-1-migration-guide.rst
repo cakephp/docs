@@ -21,6 +21,7 @@ Database
   ``Cake\Database\Schema\SqlserverSchemaDialect`` and marked as internal.
 * ``Cake\Database\Schema\PostgresSchema`` was renamed to
   ``Cake\Database\Schema\PostgresSchemaDialect`` and marked as internal.
+* ``DateTimeType::setTimezone()`` was deprecated. use ``setDatabaseTimezone()`` instead.
 
 Form
 ----
@@ -31,8 +32,8 @@ Form
 Http
 ----
 
-* ``ServerRequest::input()`` is deprecated. Use ``(string)$request->getBody()`` 
-   to get the raw PHP input as string; use ``BodyParserMiddleware`` to parse the 
+* ``ServerRequest::input()`` is deprecated. Use ``(string)$request->getBody()``
+   to get the raw PHP input as string; use ``BodyParserMiddleware`` to parse the
    request body so that it's available as array/object through ``$request->getParsedBody()``
 
 ORM
