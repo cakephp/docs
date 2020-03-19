@@ -31,8 +31,8 @@ Form
 Http
 ----
 
-* ``ServerRequest::input()`` is deprecated. Use ``(string)$request->getBody()`` 
-   to get the raw PHP input as string; use ``BodyParserMiddleware`` to parse the 
+* ``ServerRequest::input()`` is deprecated. Use ``(string)$request->getBody()``
+   to get the raw PHP input as string; use ``BodyParserMiddleware`` to parse the
    request body so that it's available as array/object through ``$request->getParsedBody()``
 
 ORM
@@ -63,6 +63,12 @@ Http
   ``ServerRequestFactory``. This could impact your tests if you are creating
   request objects that use nested file upload arrays. Tests using
   ``IntegrationTestCaseTrait`` should not need to change.
+
+ORM
+---
+
+* BelongsToMany associations now respect the bindingKey set in the junction table's BelongsTo association.
+  Previously, the target table's primary key was always used instead.
 
 New Features
 ============
