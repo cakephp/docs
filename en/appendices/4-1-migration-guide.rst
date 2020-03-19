@@ -69,6 +69,11 @@ ORM
 
 * BelongsToMany associations now respect the bindingKey set in the junction table's BelongsTo association.
   Previously, the target table's primary key was always used instead.
+  
+TestSuite
+---------
+
+* ``TestCase::setAppNamespace()`` now returns the previous app namespace for easier save and restore.
 
 New Features
 ============
@@ -84,6 +89,14 @@ Console
 * When the ``NO_COLOR`` environment variable is set all output will not include
   ANSI escape codes for colours. See `no-color.org <https://no-color.org/>`__
   for more information.
+
+Database
+--------
+
+* ``AggregateExpression`` was added to represent aggregate SQL functions. ``FunctionsBuilder::aggregate()``
+  can be used to wrap new aggregate SQL functions.
+* Window function support was added for any aggregate expression. ``AggregateExpression`` wraps the window
+  expression making it easy to extend any instance with call chaining.
 
 Error
 -----
