@@ -95,13 +95,13 @@ data returned by ``getAttributes()`` will be exposed as view variables as well.
 Customize the Error Page Layout
 -------------------------------
 
-By default error templates use **templates/Layout/error.php** for a layout.
+By default error templates use **templates/layout/error.php** for a layout.
 You can use the ``layout`` property to pick a different layout::
 
     // inside templates/Error/error400.php
     $this->layout = 'my_error';
 
-The above would use  **templates/Layout/my_error.php** as the layout for your
+The above would use  **templates/layout/my_error.php** as the layout for your
 error pages.
 
 Many exceptions raised by CakePHP will render specific view templates in debug

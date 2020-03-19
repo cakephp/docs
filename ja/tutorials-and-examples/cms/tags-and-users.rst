@@ -70,7 +70,7 @@ ArticlesTable の ``initialize`` メソッドに以下を追加することで�
     {
         public function add()
         {
-            $article = $this->Articles->newEntity();
+            $article = $this->Articles->newEmptyEntity();
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
 
@@ -97,7 +97,7 @@ ArticlesTable の ``initialize`` メソッドに以下を追加することで�
 
 追加された行は ``id => title`` の連想配列としてタグのリストを読み込みます。
 この形式で、テンプレートに新しいタグ入力を作成できます。
-**src/Template/Articles/add.ctp** のコントロールの PHP ブロックに以下を追加してください。 ::
+**templates/Articles/add.php** のコントロールの PHP ブロックに以下を追加してください。 ::
 
     echo $this->Form->control('tags._ids', ['options' => $tags]);
 
@@ -131,8 +131,8 @@ edit メソッドは次のようになります。 ::
         $this->set('article', $article);
     }
 
-**add.ctp** テンプレートに追加した新しいタグの複数選択コントロールを
-**src/Template/Articles/edit.ctp** テンプレートに追加することを忘れないでください。
+**add.php** テンプレートに追加した新しいタグの複数選択コントロールを
+**templates/Articles/edit.php** テンプレートに追加することを忘れないでください。
 
 タグによる記事の検索
 ====================
@@ -279,7 +279,7 @@ CakePHP では、コントローラーのアクションをスリムに保ち、
 **/articles/tagged** URL にもう一度アクセスすると、CakePHP は新しいエラーを表示して、
 ビューファイルが作成されていないことを知らせます。
 次は、 ``tags()`` アクションのビューファイルを作成しましょう。
-**src/Template/Articles/tags.ctp** の中に次の内容を入れてください。 ::
+**templates/Articles/tags.php** の中に次の内容を入れてください。 ::
 
     <h1>
         Articles tagged with
@@ -304,7 +304,7 @@ CakePHP では、コントローラーのアクションをスリムに保ち、
 :php:func:`h` ショートカット関数を使用します。HTML インジェクションの問題を防ぐために
 データを出力するときは、常に ``h()`` を使うことを忘れないでください。
 
-先ほど作成した **tags.ctp** ファイルは、ビューテンプレートファイルの CakePHP 規約に従います。
+先ほど作成した **tags.php** ファイルは、ビューテンプレートファイルの CakePHP 規約に従います。
 コントローラーのアクション名を小文字とアンダースコアーに変えたものをテンプレートに使用することが
 規約です。
 
@@ -354,7 +354,7 @@ CakePHP では、コントローラーのアクションをスリムに保ち、
 ------------
 
 エンティティーが更新されると、タグの新しいコントロールを追加できます。
-**src/Template/Articles/add.ctp** と **src/Template/Articles/edit.ctp** の中で、
+**templates/Articles/add.php** と **templates/Articles/edit.php** の中で、
 既存の ``tags._ids`` コントロールを次のものに置き換えてください。 ::
 
     echo $this->Form->control('tag_string', ['type' => 'text']);

@@ -122,7 +122,7 @@ the login action::
         }
     }
 
-And in **src/Template/Users/login.ctp** add the following::
+And in **templates/Users/login.php** add the following::
 
     <h1>Login</h1>
     <?= $this->Form->create() ?>
@@ -184,7 +184,7 @@ sign up for our application. In the ``UsersController`` add the following::
 
 The above tells ``AuthComponent`` that the ``add()`` action of the
 ``UsersController`` does *not* require authentication or authorization. You may
-want to take the time to clean up the **Users/add.ctp** and remove the
+want to take the time to clean up the **Users/add.php** and remove the
 misleading links, or continue on to the next section. We won't be building out
 user editing, viewing or listing in this tutorial, but that is an exercise you
 can complete on your own.
@@ -266,7 +266,7 @@ Now if you try to edit or delete an article that does not belong to you,
 you should be redirected back to the page you came from. If no error message is
 displayed, add the following to your layout::
 
-    // In src/Template/Layout/default.ctp
+    // In templates/layout/default.php
     <?= $this->Flash->render() ?>
 
 Next you should add the ``tags`` action to the actions allowed for
@@ -293,7 +293,7 @@ logged in user. Replace your add action with the following::
 
     public function add()
     {
-        $article = $this->Articles->newEntity();
+        $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
 
@@ -337,7 +337,7 @@ Next we'll update the ``edit`` action. Replace the edit method with the followin
 Here we're modifying which properties can be mass-assigned, via the options
 for ``patchEntity()``. See the :ref:`changing-accessible-fields` section for
 more information. Remember to remove the ``user_id`` control from
-**src/Template/Articles/edit.ctp** as we no longer need it.
+**templates/Articles/edit.php** as we no longer need it.
 
 Wrapping Up
 ===========

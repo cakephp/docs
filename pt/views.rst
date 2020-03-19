@@ -68,7 +68,7 @@ A camada *View* do CakePHP é como você pode falar com seus usuários. A maior 
 suas views irão renderizar documentos HTML/XHTML para os browsers, mas você também pode precisar
 responder uma aplicação remota via JSON, ou ter uma saída de um arquivo csv para o usuário.
 
-Os arquivos de *template* CakePHP tem a extensão padrão **.ctp** (CakePHP Template) e utiliza a
+Os arquivos de *template* CakePHP tem a extensão padrão **.php** (CakePHP Template) e utiliza a
 `Sintaxe PHP alternativa <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
 para controlar estruturas e saídas. Esses arquivos contem a lógica necessária para preparar os
 dados recebidos do *controller* para o formato de apresentação que estará pronto para o seu público.
@@ -121,10 +121,10 @@ Se você preferir usar uma linguagem de template como
 `Twig <http://twig.sensiolabs.org>`_, uma subclasse da *View* irá ligar
 sua linguagem de template e o CakePHP.
 
-Arquivos de template são armazenados em **src/Template/**, em uma pasta nomeada com o
+Arquivos de template são armazenados em **templates/**, em uma pasta nomeada com o
 nome do *controller*, e com o nome da ação a que corresponde.
 Por exemplo, o arquivo da *View* da ação "view()" do controller *Products*, seria
-normalmente encontrada em **src/Template/Products/view.ctp**.
+normalmente encontrada em **templates/Products/view.php**.
 
 A camada *view* do CakePHP pode ser constituida por um número diferente de partes. Cada
 parte tem diferentes usos, e serão abordadas nesse capítulo:
@@ -185,7 +185,7 @@ Você pode evitar repetir a marcação comum para sua barra lateral e apenas def
 
 .. code-block:: php
 
-    <!-- src/Template/Common/view.ctp -->
+    <!-- templates/Common/view.php -->
     <h1><?= $this->fetch('title') ?></h1>
     <?= $this->fetch('content') ?>
 
@@ -204,7 +204,7 @@ os dados sobre nosso *post*, a view poderia se parecer com isso:
 
 .. code-block:: php
 
-    <!-- src/Template/Posts/view.ctp -->
+    <!-- templates/Posts/view.php -->
     <?php
     $this->extend('/Common/view');
 
@@ -236,7 +236,7 @@ a view pai processada em seguida::
     $this->extend('/Common/view');
     $this->extend('/Common/index');
 
-A view acima irá resultar em **/Common/index.ctp** sendo renderizada como a *view*
+A view acima irá resultar em **/Common/index.php** sendo renderizada como a *view*
 para a view atual.
 
 Você pode aninhar as view estendidas quantas vezes achar necessário. Cada *view* pode extender
@@ -331,7 +331,7 @@ titulos ou outras marcações:
 
 .. code-block:: php
 
-    // In src/Template/Layout/default.ctp
+    // In templates/layout/default.php
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -390,12 +390,12 @@ O :php:meth:`Cake\\View\\Helper\\HtmlHelper` também lhe permite controlar qual 
 Um layout contém códigos de apresentação que envolvem uma *view*. Qualquer coisa que você quer ver em todas
 as suas *views* deve ser colocada em um *layout*.
 
-O layout default do CakePHP está localizado em **src/Template/Layout/default.ctp**.
+O layout default do CakePHP está localizado em **templates/layout/default.php**.
 Se você quer alterar a aparência geral da sua aplicação, então este é o lugar certo para começar,
 porque o código de exibição processado pelo controlador é colocado dentro do
 layout padrão quando a página é processada.
 
-Outros arquivos de *layout* devem estar localizados em **src/Template/Layout**. Quando você cria
+Outros arquivos de *layout* devem estar localizados em **templates/layout**. Quando você cria
 um *layout*, você precisa dizer para o cakePHP onde colocar o resultado de suas *views*. Para fazer isso,
 tenha certeza que seu *layout* inclui um lugar para ``$this->fetch('content')``.
 Aqui um exemplo do que um layout padrão pode parecer:
@@ -447,7 +447,7 @@ Você pode definir o conteúdo do bloco ``title`` de dentro do seu arquivo da *v
     $this->assign('title', 'Visualizar Usuários Ativos');
 
 Você pode criar quantos layouts você quiser: somente os coloque no diretório
-**src/Template/Layout**, a troca entre eles dentro das suas ações do *controller* ocorre
+**templates/layout**, a troca entre eles dentro das suas ações do *controller* ocorre
 usando a propriedade do *controller* ou *view* ``$layout``::
 
     // Em um controller
@@ -535,7 +535,7 @@ incluída em outras *views*, em *layouts*, e mesmo em outros *elements*. *Elemen
 para fazer uma *view* mais legível, colocando a renderização de elementos repetitivos em seu próprio arquivo.
 Eles também podem ajudá-lo a reusar conteúdos fragmentados em sua aplicação.
 
-*Elements* estão na pasta **src/Template/Element/**, e tem a extensão .ctp.
+*Elements* estão na pasta **templates/element/**, e tem a extensão .php.
 Eles são exibidos usando o método *element* da *view*::
 
     echo $this->element('helpbox');
@@ -552,9 +552,9 @@ Você pode passar dados para um *element* através do segundo parâmetro do mét
 Dentro do arquivo do *element*, todas as variáveis estarão disponíveis como membros de um
 array de parâmetros (da mesma forma que ``Controller::set()`` no *controller*
 funciona com arquivos de template). No exemplo a seguir, no arquivo
-**src/Template/Element/helpbox.ctp** pode usar a variável ``$helptext``::
+**templates/element/helpbox.php** pode usar a variável ``$helptext``::
 
-    // Dentro do arquivo src/Template/Element/helpbox.ctp
+    // Dentro do arquivo templates/element/helpbox.php
     echo $helptext; // Resulta em "Ah, Esse texto  muito útil."
 
 O método ``View::element()`` também suporta opções para o elemento.
@@ -639,7 +639,7 @@ se você está em ``ContactsController`` do plugin Contacts, terá o seguinte::
 São equivalentes e irá resultar no mesmo elementos sendo renderizado.
 
 Para *elements* dentro de uma subpasta de um plugin
-(e.g., **plugins/Contacts/Template/Element/sidebar/helpbox.ctp**), use o seguinte::
+(e.g., **plugins/Contacts/Template/element/sidebar/helpbox.php**), use o seguinte::
 
     echo $this->element('Contacts.sidebar/helpbox');
 
@@ -654,7 +654,7 @@ Assumindo que você tem um prefixo "Admin" configurado e vocẽ chama::
 
     echo $this->element('my_element');
 
-O primeiro *element* procurado será em **src/Template/Admin/Element/**. Se o arquivo não existir,
+O primeiro *element* procurado será em **templates/Admin/Element/**. Se o arquivo não existir,
 será procurado na localizaço padrão.
 
 Fazendo Cache de Seções da sua *View*

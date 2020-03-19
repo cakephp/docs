@@ -385,7 +385,7 @@ Creating the View
 
 Now if you visit the **/bookmarks/tagged** URL, CakePHP will show an error
 letting you know that you have not made a view file. Next, let's build the
-view file for our ``tags()`` action. In **src/Template/Bookmarks/tags.ctp**
+view file for our ``tags()`` action. In **templates/Bookmarks/tags.php**
 put the following content::
 
     <h1>
@@ -412,7 +412,7 @@ also use the :php:func:`h` shortcut function to HTML encode output. You should
 remember to always use ``h()`` when outputting user data to prevent HTML
 injection issues.
 
-The **tags.ctp** file we just created follows the CakePHP conventions for view
+The **tags.php** file we just created follows the CakePHP conventions for view
 template files. The convention is to have the template use the lower case and
 underscored version of the controller action name.
 

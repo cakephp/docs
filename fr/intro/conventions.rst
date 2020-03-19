@@ -68,7 +68,7 @@ quelques exemples de noms de classes et de fichiers:
 -  La classe Behavior (Comportement) ``EspeciallyFunkableBehavior`` devra
    se trouver dans un fichier nommé **EspeciallyFunkableBehavior.php**.
 -  La classe View (Vue) ``SuperSimpleView`` devra se trouver dans un fichier
-   nommé **SuperSimpleView.ctp**.
+   nommé **SuperSimpleView.php**.
 -  La classe Helper (Assistant) ``BestEverHelper`` devra se trouver
    dans un fichier nommé **BestEverHelper.php**.
 
@@ -131,10 +131,10 @@ Conventions des Views
 Les fichiers de template de view sont nommés d'après les fonctions du controller
 qu'elles affichent, sous une forme avec underscores. La fonction ``viewAll()``
 de la classe ``ArticlesController`` cherchera un gabarit de view dans
-**src/Template/Articles/view_all.ctp**.
+**templates/Articles/view_all.php**.
 
 Le schéma classique est
-**src/Template/Controller/nom_de_fonction_avec_underscore.ctp**.
+**templates/Controller/nom_de_fonction_avec_underscore.php**.
 
 En utilisant les conventions CakePHP dans le nommage des différentes parties
 de votre application, vous gagnerez des fonctionnalités sans les tracas et les
@@ -147,7 +147,7 @@ abordées:
 -  Classe Entity: ``Article`` se trouvant dans **src/Model/Entity/Article.php**
 -  Classe Controller: ``ArticlesController`` se trouvant dans
    **src/Controller/ArticlesController.php**
--  Template de View se trouvant dans **src/Template/Articles/index.ctp**
+-  Template de View se trouvant dans **templates/Articles/index.php**
 
 En utilisant ces conventions, CakePHP sait qu'une requête de type
 http://exemple.com/articles/ sera liée à un appel à la fonction ``index()`` du

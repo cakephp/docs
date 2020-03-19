@@ -177,7 +177,7 @@ bake ツールによって、すぐにすべてのファイルが作成されま
 .. note::
     Windows を利用している場合は / の代わりに \\ を使用してください。
 
-``src/Template/Categories/add.ctp`` および ``src/Template/Categories/edit.ctp``
+``templates/Categories/add.php`` および ``templates/Categories/edit.php``
 を以下のように修正してください。 ::
 
     echo $this->Form->control('parent_id', [
@@ -277,7 +277,7 @@ categories の index テンプレートファイルでは、categories を一覧
         }
     }
 
-``src/Template/Categories/index.ctp`` を以下のように置き換えてください。 ::
+``templates/Categories/index.php`` を以下のように置き換えてください。 ::
 
     <div class="actions large-2 medium-3 columns">
         <h3><?= __('Actions') ?></h3>
@@ -342,7 +342,7 @@ Articles コントローラーを編集する
 
         public function add()
         {
-            $article = $this->Articles->newEntity();
+            $article = $this->Articles->newEmptyEntity();
             if ($this->request->is('post')) {
                 // 3.4.0 より前は $this->request->data() が使われました。
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
@@ -367,7 +367,7 @@ Articles テンプレートを編集する
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/add.ctp -->
+    <!-- File: templates/Articles/add.php -->
 
     <h1>Add Article</h1>
     <?php

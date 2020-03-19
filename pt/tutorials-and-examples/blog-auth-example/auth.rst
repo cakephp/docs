@@ -102,11 +102,11 @@ geração de código ``bake`` fornecido com CakePHP::
 
 Da mesma maneira que criamos as ``views`` para os nossos artigos usando
 a ferramenta de geração de código, podemos implementar as ``views`` do
-usuário. Para o propósito deste tutorial, vamos mostrar apenas o add.ctp:
+usuário. Para o propósito deste tutorial, vamos mostrar apenas o add.php:
 
 .. code-block:: php
 
-    <!-- src/Template/Users/add.ctp -->
+    <!-- templates/Users/add.php -->
 
     <div class="users form">
     <?= $this->Form->create($user) ?>
@@ -245,11 +245,11 @@ e adicione a seguinte trecho::
 
 Agora, a senha criptografada usando a classe ``DefaultPasswordHasher``.
 Está faltando apenas o arquivo para exibição da tela de login.
-Abra o arquivo **src/Template/Users/login.ctp** e adicione as seguintes linhas:
+Abra o arquivo **templates/Users/login.php** e adicione as seguintes linhas:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Users/login.ctp -->
+    <!-- File: templates/Users/login.php -->
 
     <div class="users form">
     <?= $this->Flash->render('auth') ?>
@@ -304,7 +304,7 @@ criado::
 
     public function add()
     {
-        $article = $this->Articles->newEntity();
+        $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             // Adicione esta linha

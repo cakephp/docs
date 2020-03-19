@@ -107,7 +107,7 @@ CMS 教案 - 认证
         }
     }
 
-在 **src/Template/Users/login.ctp**  视图中加入以下::
+在 **templates/Users/login.php**  视图中加入以下::
 
     <h1>Login</h1>
     <?= $this->Form->create() ?>
@@ -168,7 +168,7 @@ CMS 教案 - 认证
     }
 
 以上代码将 ``add()`` 行为列入了 ``AuthComponent`` 组件的白名单中，因此访问此行为将无需要认证或者授权。
-你应该花点时间来清理下 **Users/add.ctp** 视图，比如删除没必要的衔接。此教程将不会加入编辑用户，查看用户以及用户列表
+你应该花点时间来清理下 **Users/add.php** 视图，比如删除没必要的衔接。此教程将不会加入编辑用户，查看用户以及用户列表
 功能，但是你应该尝试自己将他们实现。
 
 
@@ -249,7 +249,7 @@ CMS 教案 - 认证
 现在尝试编辑或者删除一个不属于当前用户的 article，页面将会跳转到原始页面。如果你没有看到错误信息，在布局中加入
 以下代码::
 
-    // In src/Template/Layout/default.ctp
+    // In templates/layout/default.php
     <?= $this->Flash->render() ?>
 
 接下来我们需要将 ``tags`` 行为让任何人访问，在 **src/Controller/ArticlesController.php** 的 ``initialize()`` 方法
@@ -275,7 +275,7 @@ CMS 教案 - 认证
 
     public function add()
     {
-        $article = $this->Articles->newEntity();
+        $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
 

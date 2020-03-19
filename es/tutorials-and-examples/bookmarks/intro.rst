@@ -353,7 +353,7 @@ Ahora si visitas la URL **/bookmarks/tagged**, CakePHP mostrará un error advirt
 
 Siguiente paso, creemos un archivo de vista para nuestro método ``tags()``.
 
-En **src/Template/Bookmarks/tags.ctp** añade el siguiente código::
+En **templates/Bookmarks/tags.php** añade el siguiente código::
 
     <h1>
         Bookmarks tagged with
@@ -377,7 +377,7 @@ En el código de arriba utilizamos los helpers :doc:`/views/helpers/html` y :doc
 
 También utilizamos la función de atajo ``h()`` para salidas de código HTML. Deberías acordarte siempre de utilizar ``h()`` cuando muestres datos del usuario para evitar problemas de inyección HTML.
 
-El archivo **tags.ctp** que acabamos de crear sigue las convenciones de CakePHP para archivos de vistas. La convención es que el nombre del archivo sea una versión en minúsculas y subrayados del nombre de la acción del controlador.
+El archivo **tags.php** que acabamos de crear sigue las convenciones de CakePHP para archivos de vistas. La convención es que el nombre del archivo sea una versión en minúsculas y subrayados del nombre de la acción del controlador.
 
 Puedes observar que hemos podido usar las variables ``$tags`` y ``$bookmarks`` en nuestra vista.
 

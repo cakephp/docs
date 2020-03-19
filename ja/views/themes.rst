@@ -28,19 +28,19 @@ CakePHP のテーマは、テンプレートファイルを供給することに
 例えば、上記のテーマは **plugins/Modern/src/Template** で見つかるでしょう。
 CakePHP は plugin/theme の名前にキャメルケースを期待しています。これは大切な
 ことなので覚えておいてください。
-さらに **plugins/Modern/src/Template** の中のフォルダー構造は **src/Template/** と
+さらに **plugins/Modern/src/Template** の中のフォルダー構造は **templates/** と
 全く同じにしてください。
 
 例えば、Posts コントローラーの edit アクションのためのビューファイルは
-**plugins/Modern/src/Template/Posts/edit.ctp** に配置されて、レイアウトファイルは
-**plugins/Modern/src/Template/Layout/** に配置されます。カスタマイズされた
+**plugins/Modern/templates/Posts/edit.php** に配置されて、レイアウトファイルは
+**plugins/Modern/templates/layout/** に配置されます。カスタマイズされた
 テンプレートにプラグイン・テーマを供給することもできます。
 TagsController を含んだ 'Cms' と名付けられたプラグインがある場合、テーマ Modern は
-edit テンプレートを **plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ctp**
+edit テンプレートを **plugins/Modern/templates/plugin/Cms/Tags/edit.php**
 に置き換えます。
 
 テーマの中にビューファイルを見つけられなかった場合、CakePHP はビューファイルを
-**src/Template/** に配置しようとします。この方法によって、マスターテンプレートファイルを
+**templates/** に配置しようとします。この方法によって、マスターテンプレートファイルを
 作成して、テーマフォルダーには上書きが必要なファイルだけを配置すればよくなります。
 
 テーマがプラグインとしても機能する場合は、 Application の ``bootstrap`` メソッドの中で

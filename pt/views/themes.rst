@@ -29,18 +29,18 @@ Os arquivos de tempalte do tema precisam estar dentro de um plugin com o mesmo n
 o tema acima seria encontrado em **plugins/Modern/src/Template**.
 É importante lembrar que o CakePHP espera o nome do plugin/tema em PascalCase. Além
 de que, a estrutura da pasta dentro da pasta **plugins/Modern/src/Template** é
-exatamente o mesmo que **src/Template/**.
+exatamente o mesmo que **templates/**.
 
 Por exemplo, o arquivo de exibição para uma `action` de edição de um ``controller`` de posts residiria
-em **plugins/Modern/src/Template/Posts/edit.ctp**. Os arquivos de layout residiriam em
-**plugins/Modern/src/Template/Layout/**. Você pode fornecer modelos personalizados
+em **plugins/Modern/templates/Posts/edit.php**. Os arquivos de layout residiriam em
+**plugins/Modern/templates/layout/**. Você pode fornecer modelos personalizados
 para plugins com um tema também. Se você tiver um plugin chamado 'Cms', que
 contenha um ``TagsController``, o tema moderno poderia fornecer
-**plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ctp** para substituir o template
+**plugins/Modern/templates/plugin/Cms/Tags/edit.php** para substituir o template
 da edição no plugin.
 
 Se um arquivo de exibição não puder ser encontrado no tema, o CakePHP tentará localizar a visualização
-arquivo na pasta **src/Template/**. Desta forma, você pode criar arquivos de `template` mestre
+arquivo na pasta **templates/**. Desta forma, você pode criar arquivos de `template` mestre
 e simplesmente substituí-los caso a caso na pasta do seu tema.
 
 `Assets` do Tema

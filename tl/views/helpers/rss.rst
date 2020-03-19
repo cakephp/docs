@@ -85,7 +85,7 @@ Layout
 ------
 
 An Rss layout is very simple, put the following contents in
-**src/Template/Layout/rss/default.ctp**::
+**templates/layout/rss/default.php**::
 
     if (!isset($documentData)) {
         $documentData = [];
@@ -106,14 +106,14 @@ can pass variables back to the layout. Which is where our ``$channelData``
 array will come from setting all of the meta data for our feed.
 
 Next up is view file for my articles/index. Much like the layout file
-we created, we need to create a **src/Template/Posts/rss/** directory and
-create a new **index.ctp** inside that folder. The contents of the file
+we created, we need to create a **templates/Posts/rss/** directory and
+create a new **index.php** inside that folder. The contents of the file
 are below.
 
 View
 ----
 
-Our view, located at **src/Template/Posts/rss/index.ctp**, begins by setting the
+Our view, located at **templates/Posts/rss/index.php**, begins by setting the
 ``$documentData`` and ``$channelData`` variables for the layout, these contain
 all the metadata for our RSS feed. This is done by using the
 :php:meth:`Cake\\View\\View::set()` method which is analogous to the

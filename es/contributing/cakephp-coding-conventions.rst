@@ -151,7 +151,7 @@ pueden utilizarse paréntesis entorno a las condiciones para dar claridad::
 Archivos de plantilla
 ---------------------
 
-En los archivos de plantilla (archivos .ctp) los desarrolladores deben utilizar
+En los archivos de plantilla (archivos .php) los desarrolladores deben utilizar
 estructuras de control ``keyword`` al ser más fáciles de leer en archivos complejos. Las estructuras de control pueden estar dentro de bloques
 de PHP o en etiquetas PHP separadas::
 
@@ -425,7 +425,7 @@ Etiquetas PHP
 Utiliza siempre las etiquetas ``<?php`` y ``?>`` en lugar de ``<?`` y ``?>``.
 
 La sintaxis abreviada de ``echo`` deberá usarse en los archivos de plantilla
-(**.ctp**) donde proceda.
+(**.php**) donde proceda.
 
 Sintaxis abreviada de echo
 --------------------------

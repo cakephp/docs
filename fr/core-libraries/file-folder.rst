@@ -19,10 +19,10 @@ Ensuite nous pouvons configurer une nouvelle instance de dossier::
 
     $dir = new Folder('/path/to/folder');
 
-et chercher tous les fichiers *.ctp* à l'intérieur de ce dossier en utilisant
+et chercher tous les fichiers *.php* à l'intérieur de ce dossier en utilisant
 les regex::
 
-    $files = $dir->find('.*\.ctp');
+    $files = $dir->find('.*\.php');
 
 Maintenant nous pouvons faire une boucle sur les fichiers et les lire,
 écrire/ajouter aux contenus, ou simplement supprimer le fichier::

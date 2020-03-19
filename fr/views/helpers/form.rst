@@ -100,7 +100,7 @@ nous pourrions faire ce qui suit::
         $this->set('article', $article);
     }
 
-    // View/Articles/edit.ctp:
+    // View/Articles/edit.php:
     // Si $article->isNew() est false, nous aurons un formulaire d'édition
     <?= $this->Form->create($article) ?>
 
@@ -2066,7 +2066,7 @@ Exemple::
             ->notEmpty('ticket');
     }
 
-    // Dans Templates/Tickets/add.ctp vous avez:
+    // Dans templates/Tickets/add.php vous avez:
     echo $this->Form->text('ticket');
 
     if ($this->Form->isFieldError('ticket')) {
@@ -2307,7 +2307,7 @@ POST. De plus, par défaut, cela générera des inputs ``hidden`` pour le
 
 Par exemple ::
 
-    // Dans Templates/Tickets/index.ctp
+    // Dans templates/Tickets/index.php
     <?= $this->Form->postButton('Supprimer', ['controller' => 'Tickets', 'action' => 'delete', 5]) ?>
 
 Affichera un HTML similaire à:

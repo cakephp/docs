@@ -161,7 +161,7 @@ the condition check of the ternary for clarity::
 Template Files
 --------------
 
-In template files (.ctp files) developers should use keyword control structures.
+In template files (.php files) developers should use keyword control structures.
 Keyword control structures are easier to read in complex template files. Control
 structures can either be contained in a larger PHP block, or in separate PHP
 tags::
@@ -430,7 +430,7 @@ PHP Tags
 ========
 
 Always use long tags (``<?php ?>``) instead of short tags (``<? ?>``). The short
-echo should be used in template files (**.ctp**) where appropriate.
+echo should be used in template files (**.php**) where appropriate.
 
 Short Echo
 ----------

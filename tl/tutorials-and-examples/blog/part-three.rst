@@ -177,8 +177,8 @@ read if you want re-familiarize yourself with how CakePHP works.
 .. note::
     If you are on Windows remember to use \\ instead of /.
 
-You'll need to edit the following in **src/Template/Categories/add.ctp**
-and **src/Template/Categories/edit.ctp**::
+You'll need to edit the following in **templates/Categories/add.php**
+and **templates/Categories/edit.php**::
 
     echo $this->Form->control('parent_id', [
         'options' => $parentCategories,
@@ -281,7 +281,7 @@ the tree::
         }
     }
 
-In **src/Template/Categories/index.ctp** replace the existing content with::
+In **templates/Categories/index.php** replace the existing content with::
 
     <div class="actions large-2 medium-3 columns">
         <h3><?= __('Actions') ?></h3>
@@ -346,7 +346,7 @@ it::
 
         public function add()
         {
-            $article = $this->Articles->newEntity();
+            $article = $this->Articles->newEmptyEntity();
             if ($this->request->is('post')) {
                 // Prior to 3.4.0 $this->request->data() was used.
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
@@ -372,7 +372,7 @@ The article add file should look something like this:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/add.ctp -->
+    <!-- File: templates/Articles/add.php -->
 
     <h1>Add Article</h1>
     <?php

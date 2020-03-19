@@ -250,8 +250,8 @@ CakePHP は、 :doc:`ビューレイヤー </views>` を使用してメールを
         ->from('app@domain.com')
         ->send();
 
-上記は、ビューとして **src/Template/Email/html/welcome.ctp** を使用し、
-レイアウトとして **src/Template/Layout/Email/html/fancy.ctp** を使用します。
+上記は、ビューとして **templates/email/html/welcome.php** を使用し、
+レイアウトとして **templates/layout/email/html/fancy.php** を使用します。
 以下のように、マルチパートのテンプレートメールを送信することもできます。 ::
 
     $email = new Email();
@@ -264,10 +264,10 @@ CakePHP は、 :doc:`ビューレイヤー </views>` を使用してメールを
 
 この例では、次のテンプレートファイルを使用します。
 
-* **src/Template/Email/text/welcome.ctp**
-* **src/Template/Layout/Email/text/fancy.ctp**
-* **src/Template/Email/html/welcome.ctp**
-* **src/Template/Layout/Email/html/fancy.ctp**
+* **templates/email/text/welcome.php**
+* **templates/layout/email/text/fancy.php**
+* **templates/email/html/welcome.php**
+* **templates/layout/email/html/fancy.php**
 
 テンプレートメールを送信する時、 ``text`` 、 ``html`` と ``both`` のうちの
 どれかを送信オプションとして指定します。
@@ -306,7 +306,7 @@ CakePHP は、 :doc:`ビューレイヤー </views>` を使用してメールを
 
 これは、Blog プラグインを更新せずにあなたのテーマの ``new_comment`` テンプレートで上書きできます。
 テンプレートファイルは、以下のパスで作成する必要があります:
-**src/Template/Plugin/TestTheme/Plugin/Blog/Email/text/new_comment.ctp**
+**templates/plugin/TestTheme/plugin/Blog/email/text/new_comment.php**
 
 .. deprecated:: 3.4.0
     ``template()`` の代わりに ``setTemplate()`` を使用してください。

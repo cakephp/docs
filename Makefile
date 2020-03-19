@@ -4,6 +4,7 @@
 
 PYTHON = python3
 ES_HOST =
+ES_HOST_V2 =
 
 .PHONY: all clean html latexpdf epub htmlhelp website website-dirs rebuild-index
 
@@ -58,7 +59,7 @@ server-%:
 	cd build/html/$* && python3 -m SimpleHTTPServer
 
 populate-index-%:
-	php scripts/populate_search_index.php $* $(ES_HOST)
+	php scripts/populate_search_index.php --lang="$*" --host="$(ES_HOST_V2)"
 
 rebuild-index-%:
 	curl -XDELETE $(ES_HOST)/documentation/4-0-$*

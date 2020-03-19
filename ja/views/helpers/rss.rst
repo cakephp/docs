@@ -81,7 +81,7 @@ ArticlesController の ``initialize()`` メソッドに RequestHandler を加え
 レイアウト
 -----------------------------------
 
-RSS レイアウトはとてもシンプルです。 **src/Template/Layout/rss/default.ctp** 内に以下の内容を記述します。
+RSS レイアウトはとてもシンプルです。 **templates/layout/rss/default.php** 内に以下の内容を記述します。
 ::
 
     if (!isset($documentData)) {
@@ -101,13 +101,13 @@ RSS レイアウトはとてもシンプルです。 **src/Template/Layout/rss/d
 ``$channelData`` 配列がどこにあるかは、フィードのメタデータ全てをセットしてから得られます。
 
 次に articles/index のビューファイルを作成します。
-私たちが作成したレイアウトファイルのように **src/Template/Posts/rss/** ディレクトリーを作成し、
-そのフォルダーの中に **index.ctp** を作成する必要があります。ファイルの内容は以下の通りです。
+私たちが作成したレイアウトファイルのように **templates/Posts/rss/** ディレクトリーを作成し、
+そのフォルダーの中に **index.php** を作成する必要があります。ファイルの内容は以下の通りです。
 
 ビュー
 -----------------------------------
 
-私たちのビューは **src/Template/Posts/rss/index.ctp** に置かれ、レイアウトのための ``$documentData`` と ``$channelData`` 変数を設定を始めます。
+私たちのビューは **templates/Posts/rss/index.php** に置かれ、レイアウトのための ``$documentData`` と ``$channelData`` 変数を設定を始めます。
 これらの変数は、RSS フィードのためのすべてのメタデータを含みます。
 これは、 :php:meth:`Cake\\Controller\\Controller::set()` メソッドと同様の :php:meth:`Cake\\View\\View::set()` メソッドを使って行われます。
 ここでチャンネルのメタデータを渡すとレイアウトに戻ります。

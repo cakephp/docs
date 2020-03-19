@@ -489,7 +489,7 @@ CakePHP には、いくつかの特別な意味を持つルート要素があり
 今、リバースルーティング機能のおかげで、下記のように URL 配列を渡し、
 CakePHP はルートに定義された URL をどのように整えるのかを知ることができます。 ::
 
-    // view.ctp
+    // view.php
     // これは /blog/3-CakePHP_Rocks　へのリンクを返します
     echo $this->Html->link('CakePHP Rocks', [
         'controller' => 'Blog',
@@ -614,7 +614,7 @@ CakePHP では、プレフィックスルーティングは,  ``prefix`` スコ�
 このユーザーの例を使うと、 ``/admin/users/edit/5`` にアクセスしたとき、
 **src/Controller/Admin/UsersController.php** の ``edit()`` メソッドを
 5 を１番目のパラメーターとして渡しながら呼びます。
-ビューファイルは、 **src/Template/Admin/Users/edit.ctp** が使われます。
+ビューファイルは、 **templates/Admin/Users/edit.php** が使われます。
 
 /admin へのアクセスを pages コントローラーの ``index()`` アクションに
 以下のルートを使ってマップします。 ::

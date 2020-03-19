@@ -72,8 +72,8 @@ The default error handler renders all uncaught exceptions your application
 raises with the help of ``Cake\Error\ExceptionRenderer``, and your application's
 ``ErrorController``.
 
-The error page views are located at **src/Template/Error/**. All 4xx errors use
-the **error400.ctp** template, and 5xx errors use the **error500.ctp**. Your
+The error page views are located at **templates/Error/**. All 4xx errors use
+the **error400.php** template, and 5xx errors use the **error500.php**. Your
 error templates will have the following variables available:
 
 * ``message`` The exception message.
@@ -92,18 +92,18 @@ data returned by ``getAttributes()`` will be exposed as view variables as well.
 Customize the Error Page Layout
 -------------------------------
 
-By default error templates use **src/Template/Layout/error.ctp** for a layout.
+By default error templates use **templates/layout/error.php** for a layout.
 You can use the ``layout`` property to pick a different layout::
 
-    // inside src/Template/Error/error400.ctp
+    // inside templates/Error/error400.php
     $this->layout = 'my_error';
 
-The above would use  **src/Template/Layout/my_error.ctp** as the layout for your
+The above would use  **templates/layout/my_error.php** as the layout for your
 error pages.
 
 Many exceptions raised by CakePHP will render specific view templates in debug
 mode. With debug turned off all exceptions raised by CakePHP will use either
-**error400.ctp** or **error500.ctp** based on their status code.
+**error400.php** or **error500.php** based on their status code.
 
 Customize the ErrorController
 =============================
@@ -274,7 +274,7 @@ If your application contained the following exception::
     }
 
 You could provide nice development errors, by creating
-**src/Template/Error/missing_widget.ctp**. When in production mode, the above
+**templates/Error/missing_widget.php**. When in production mode, the above
 error would be treated as a 500 error and use the **error500** template.
 
 If your exceptions have a code between ``400`` and ``506`` the exception code

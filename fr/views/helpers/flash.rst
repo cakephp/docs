@@ -9,9 +9,9 @@ FlashHelper fournit une façon de rendre les messages flash qui sont définis da
 ``$_SESSION`` par :doc:`FlashComponent </controllers/components/flash>`.
 :doc:`FlashComponent </controllers/components/flash>` et FlashHelper
 utilisent principalement des elements pour rendre les messages flash. Les
-elements flash se trouvent dans le répertoire **src/Template/Element/Flash**.
+elements flash se trouvent dans le répertoire **templates/element/flash**.
 Vous remarquerez que le template de l'App de CakePHP est livré avec trois
-éléments flash : **success.ctp**, **default.ctp** et **error.ctp**.
+éléments flash : **success.php**, **default.php** et **error.php**.
 
 Rendre les Messages Flash
 =========================
@@ -36,7 +36,7 @@ FlashComponent::
         'element' => 'success'
     ]);
 
-    // Dans votre View: Va utiliser great_success.ctp au lieu de succcess.ctp
+    // Dans votre View: Va utiliser great_success.php au lieu de succcess.php
     <?= $this->Flash->render('flash', [
         'element' => 'great_success'
     ]);
@@ -63,7 +63,7 @@ Préfixe de Routage et Messages Flash
 .. versionadded:: 3.0.1
 
 Si vous avez configuré un préfixe de Routage, vous pouvez maintenant stocker vos
-elements de messages Flash dans **src/Template/{Prefix}/Element/Flash**. De
+elements de messages Flash dans **templates/{Prefix}/element/flash**. De
 cette manière, vous pouvez avoir des layouts de messages spécifiques en
 fonction des différentes parties de votre application : par exemple, avoir des
 layouts différents pour votre front-end et votre administration.
@@ -73,5 +73,5 @@ Les Messages Flash et les Themes
 
 FlashHelper utilise des elements normaux pour afficher les messages et va donc
 correspondre à n'importe quel thème que vous avez éventuellement spécifié. Donc
-quand votre thème a un fichier **src/Template/Element/Flash/error.ctp**, il sera
+quand votre thème a un fichier **templates/element/flash/error.php**, il sera
 utilisé, comme avec tout Element et View.

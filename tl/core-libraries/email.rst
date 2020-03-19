@@ -260,8 +260,8 @@ and elements just like normal views::
         ->from('app@domain.com')
         ->send();
 
-The above would use **src/Template/Email/html/welcome.ctp** for the view
-and **src/Template/Layout/Email/html/fancy.ctp** for the layout. You can
+The above would use **templates/email/html/welcome.php** for the view
+and **templates/layout/email/html/fancy.php** for the layout. You can
 send multipart templated email messages as well::
 
     $email = new Email();
@@ -274,10 +274,10 @@ send multipart templated email messages as well::
 
 This would use the following template files:
 
-* **src/Template/Email/text/welcome.ctp**
-* **src/Template/Layout/Email/text/fancy.ctp**
-* **src/Template/Email/html/welcome.ctp**
-* **src/Template/Layout/Email/html/fancy.ctp**
+* **templates/email/text/welcome.php**
+* **templates/layout/email/text/fancy.php**
+* **templates/email/html/welcome.php**
+* **templates/layout/email/html/fancy.php**
 
 When sending templated emails you have the option of sending either
 ``text``, ``html`` or ``both``.
@@ -319,7 +319,7 @@ You can do this using themes by telling Email to use appropriate theme using
 This allows you to override the ``new_comment`` template in your theme without
 modifying the Blog plugin. The template file needs to be created in the
 following path:
-**src/Template/Plugin/TestTheme/Plugin/Blog/Email/text/new_comment.ctp**.
+**templates/plugin/TestTheme/plugin/Blog/email/text/new_comment.php**.
 
 .. deprecated:: 3.4.0
     Use ``setTemplate()`` instead of ``template()``. Use ``setLayout()`` instead
