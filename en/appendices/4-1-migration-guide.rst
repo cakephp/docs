@@ -21,6 +21,7 @@ Database
   ``Cake\Database\Schema\SqlserverSchemaDialect`` and marked as internal.
 * ``Cake\Database\Schema\PostgresSchema`` was renamed to
   ``Cake\Database\Schema\PostgresSchemaDialect`` and marked as internal.
+* ``DateTimeType::setTimezone()`` was deprecated. use ``setDatabaseTimezone()`` instead.
 
 Form
 ----
