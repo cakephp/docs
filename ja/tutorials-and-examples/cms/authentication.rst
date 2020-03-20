@@ -180,7 +180,7 @@ POSTされたフォームデータ(存在する場合)も検査し、credentials
 
 ``UsersController`` に次のコードを追加します::
 
-    public function beforeFilter(\Cake\Event\EventInterしますe $event)
+    public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
         // 認証を必要としないログインアクションを構成し、
