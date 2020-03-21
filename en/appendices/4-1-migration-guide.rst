@@ -41,6 +41,8 @@ ORM
 
 * ``QueryExpression::or_()`` and ``QueryExpression::and_()`` have been
   deprecated. Use ``or()`` and ``and()`` instead.
+* ``Table::associations()`` and ``EagerLoader::associations()`` were deprecated. Use
+  ``getAssociations()`` instead.
 
 View
 ----
