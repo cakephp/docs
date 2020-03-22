@@ -71,6 +71,8 @@ ORM
 * ``Table::deleteMany()`` and ``Table::deleteManyOrFail()`` methods have been added for removing many
   entities at once including callbacks. The entities are removed within a transaction.
 * ``TableLocator::clear()`` now resets the internal ``options`` array.
+* BelongsToMany associations now respect the bindingKey set in the junction table's BelongsTo association.
+  Previously, the target table's primary key was always used instead.
 
 TestSuite
 ---------
