@@ -41,8 +41,6 @@ ORM
 
 * ``QueryExpression::or_()`` and ``QueryExpression::and_()`` have been
   deprecated. Use ``or()`` and ``and()`` instead.
-* ``BelongsToMany`` associations will now use the binding key values of their
-  ``through`` table when creating insert & update queries.
 
 View
 ----
@@ -67,6 +65,12 @@ Http
   request objects that use nested file upload arrays. Tests using
   ``IntegrationTestCaseTrait`` should not need to change.
 
+ORM
+---
+
+* BelongsToMany associations now respect the bindingKey set in the junction table's BelongsTo association.
+  Previously, the target table's primary key was always used instead.
+  
 TestSuite
 ---------
 
