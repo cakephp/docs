@@ -41,8 +41,6 @@ ORM
 
 * ``QueryExpression::or_()`` and ``QueryExpression::and_()`` have been
   deprecated. Use ``or()`` and ``and()`` instead.
-* ``BelongsToMany`` associations will now use the binding key values of their
-  ``through`` table when creating insert & update queries.
 
 View
 ----
