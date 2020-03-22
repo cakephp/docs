@@ -21,6 +21,7 @@ Database
   ``Cake\Database\Schema\SqlserverSchemaDialect`` and marked as internal.
 * ``Cake\Database\Schema\PostgresSchema`` was renamed to
   ``Cake\Database\Schema\PostgresSchemaDialect`` and marked as internal.
+* ``DateTimeType::setTimezone()`` was deprecated. use ``setDatabaseTimezone()`` instead.
 
 Form
 ----
@@ -40,6 +41,8 @@ ORM
 
 * ``QueryExpression::or_()`` and ``QueryExpression::and_()`` have been
   deprecated. Use ``or()`` and ``and()`` instead.
+* ``BelongsToMany`` associations will now use the binding key values of their
+  ``through`` table when creating insert & update queries.
 
 View
 ----
