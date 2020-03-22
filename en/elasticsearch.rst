@@ -1,4 +1,4 @@
 ElasticSearch
 #############
 
-This page has `moved <https://book.cakephp.org/elasticsearch/2.x/en/>`__.
+This page has `moved <https://book.cakephp.org/elasticsearch/3/en/>`__.

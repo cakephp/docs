@@ -85,7 +85,7 @@ Contenu
     Chronos <https://book.cakephp.org/chronos/1/fr/>
     Debug Kit <https://book.cakephp.org/debugkit/3/fr/>
     Migrations <https://book.cakephp.org/migrations/3/fr/>
-    Elasticsearch <https://book.cakephp.org/elasticsearch/2/fr/>
+    Elasticsearch <https://book.cakephp.org/elasticsearch/3/fr/>
 
 .. toctree::
     :maxdepth: 3
