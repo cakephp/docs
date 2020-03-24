@@ -152,35 +152,33 @@ action, and finder method to search through articles by tag.
 Ideally, we'd have a URL that looks like
 **http://localhost:8765/articles/tagged/funny/cat/gifs**. This would let us
 find all the articles that have the 'funny', 'cat' or 'gifs' tags. Before we
-can implement this, we'll add a new route. Your **config/routes.php** should
-look like::
+can implement this, we'll add a new route. Your **config/routes.php** (with
+the baked comments removed) should look like::
 
     <?php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
-    use Cake\Routing\RouteBuilder;
-    use Cake\Routing\Router;
     use Cake\Routing\Route\DashedRoute;
-
-    Router::defaultRouteClass(DashedRoute::class);
-
-    Router::scope('/', function (RouteBuilder $routes) {
-        // Register scoped middleware for in scopes.
-        $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware([
-            'httpOnly' => true
+    use Cake\Routing\RouteBuilder;
+    
+    $routes->setRouteClass(DashedRoute::class);
+    
+    $routes->scope('/', function (RouteBuilder $builder) {
+        $builder->registerMiddleware('csrf', new CsrfProtectionMiddleware([
+            'httpOnly' => true,
         ]));
-        $routes->applyMiddleware('csrf');
-        $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
-        $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
-
+        $builder->applyMiddleware('csrf');
+        $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+        $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
+    
         // Add this
         // New route we're adding for our tagged action.
         // The trailing `*` tells CakePHP that this action has
         // passed parameters.
-        $routes->scope('/articles', function (RouteBuilder $routes) {
-            $routes->connect('/tagged/*', ['controller' => 'Articles', 'action' => 'tags']);
+        $builder->scope('/articles', function (RouteBuilder $builder) {
+            $builder->connect('/tagged/*', ['controller' => 'Articles', 'action' => 'tags']);
         });
-
-        $routes->fallbacks(DashedRoute::class);
+    
+        $builder->fallbacks();
     });
 
 The above defines a new 'route' which connects the **/articles/tagged/** path,
