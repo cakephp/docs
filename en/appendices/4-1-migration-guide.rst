@@ -98,6 +98,8 @@ Database
   can be used to wrap new aggregate SQL functions.
 * Window function support was added for any aggregate expression. ``AggregateExpression`` wraps the window
   expression making it easy to extend any instance with call chaining.
+* Postgres and SQLServer now support ``HAVING`` conditions on aggregate
+  functions with aliases.
 
 Error
 -----
