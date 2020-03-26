@@ -117,6 +117,11 @@ content types into an array, so that it's accessible through ``ServerRequest::ge
 
 .. _request-file-uploads:
 
+If you want to access all the data parameters you can use
+``getParsedBody()``::
+
+    $data = $this->request->getParsedBody();
+
 File Uploads
 ------------
 
