@@ -623,7 +623,7 @@ PDO. There are a few different ways you can run queries depending on the type of
 query you need to run and what kind of results you need back. The most basic
 method is ``query()`` which allows you to run already completed SQL queries::
 
-    $stmt = $connection->query('UPDATE articles SET published = 1 WHERE id = 2');
+    $statement = $connection->query('UPDATE articles SET published = 1 WHERE id = 2');
 
 .. php:method:: execute($sql, $params, $types)
 
@@ -631,7 +631,7 @@ The ``query()`` method does not allow for additional parameters. If you need
 additional parameters you should use the ``execute()`` method, which allows for
 placeholders to be used::
 
-    $stmt = $connection->execute(
+    $statement = $connection->execute(
         'UPDATE articles SET published = ? WHERE id = ?',
         [1, 2]
     );
@@ -640,7 +640,7 @@ Without any type hinting information, ``execute`` will assume all placeholders
 are string values. If you need to bind specific types of data, you can use their
 abstract type names when creating a query::
 
-    $stmt = $connection->execute(
+    $statement = $connection->execute(
         'UPDATE articles SET published_date = ? WHERE id = ?',
         [new DateTime('now'), 2],
         ['date', 'integer']
@@ -657,7 +657,7 @@ expressive queries without having to use platform specific SQL::
     $query->update('articles')
         ->set(['published' => true])
         ->where(['id' => 2]);
-    $stmt = $query->execute();
+    $statement = $query->execute();
 
 When using the query builder, no SQL will be sent to the database server until
 the ``execute()`` method is called, or the query is iterated. Iterating a query
@@ -728,14 +728,14 @@ You can create a statement object using ``execute()``, or ``prepare()``. The
 While ``prepare()`` returns an incomplete statement::
 
     // Statements from execute will have values bound to them already.
-    $stmt = $connection->execute(
+    $statement = $connection->execute(
         'SELECT * FROM articles WHERE published = ?',
         [true]
     );
 
     // Statements from prepare will be parameters for placeholders.
     // You need to bind parameters before attempting to execute it.
-    $stmt = $connection->prepare('SELECT * FROM articles WHERE published = ?');
+    $statement = $connection->prepare('SELECT * FROM articles WHERE published = ?');
 
 Once you've prepared a statement you can bind additional data and execute it.
 
@@ -748,36 +748,36 @@ Once you've created a prepared statement, you may need to bind additional data.
 You can bind multiple values at once using the ``bind()`` method, or bind
 individual elements using ``bindValue``::
 
-    $stmt = $connection->prepare(
+    $statement = $connection->prepare(
         'SELECT * FROM articles WHERE published = ? AND created > ?'
     );
 
     // Bind multiple values
-    $stmt->bind(
+    $statement->bind(
         [true, new DateTime('2013-01-01')],
         ['boolean', 'date']
     );
 
     // Bind a single value
-    $stmt->bindValue(1, true, 'boolean');
-    $stmt->bindValue(2, new DateTime('2013-01-01'), 'date');
+    $statement->bindValue(1, true, 'boolean');
+    $statement->bindValue(2, new DateTime('2013-01-01'), 'date');
 
 When creating statements you can also use named array keys instead of
 positional ones::
 
-    $stmt = $connection->prepare(
+    $statement = $connection->prepare(
         'SELECT * FROM articles WHERE published = :published AND created > :created'
     );
 
     // Bind multiple values
-    $stmt->bind(
+    $statement->bind(
         ['published' => true, 'created' => new DateTime('2013-01-01')],
         ['published' => 'boolean', 'created' => 'date']
     );
 
     // Bind a single value
-    $stmt->bindValue('published', true, 'boolean');
-    $stmt->bindValue('created', new DateTime('2013-01-01'), 'date');
+    $statement->bindValue('published', true, 'boolean');
+    $statement->bindValue('created', new DateTime('2013-01-01'), 'date');
 
 .. warning::
 
@@ -791,16 +791,16 @@ rows. Statements should be executed using the ``execute()`` method. Once
 executed, results can be fetched using ``fetch()``, ``fetchAll()`` or iterating
 the statement::
 
-    $stmt->execute();
+    $statement->execute();
 
     // Read one row.
-    $row = $stmt->fetch('assoc');
+    $row = $statement->fetch('assoc');
 
     // Read all rows.
-    $rows = $stmt->fetchAll('assoc');
+    $rows = $statement->fetchAll('assoc');
 
     // Read rows through iteration.
-    foreach ($stmt as $row) {
+    foreach ($statement as $row) {
         // Do work
     }
 
@@ -814,8 +814,8 @@ Getting Row Counts
 
 After executing a statement, you can fetch the number of affected rows::
 
-    $rowCount = count($stmt);
-    $rowCount = $stmt->rowCount();
+    $rowCount = count($statement);
+    $rowCount = $statement->rowCount();
 
 Checking Error Codes
 --------------------
@@ -824,8 +824,8 @@ If your query was not successful, you can get related error information
 using the ``errorCode()`` and ``errorInfo()`` methods. These methods work the
 same way as the ones provided by PDO::
 
-    $code = $stmt->errorCode();
-    $info = $stmt->errorInfo();
+    $code = $statement->errorCode();
+    $info = $statement->errorInfo();
 
 .. todo::
     Possibly document CallbackStatement and BufferedStatement
