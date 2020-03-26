@@ -31,6 +31,7 @@ CakePHP は PHP エラーと例外の両方を処理するために ``Cake\Error
   除外するのに役立ちます。
 * ``extraFatalErrorMemory`` - int - 致命的エラーが起きた時にメモリーの上限を増加させるための
   メガバイト数を設定します。これはログの記録やエラー処理を完了するために猶予を与えます。
+* ``errorLogger`` - \Cake\Error\ErrorLogger - エラーログの記録および未処理の例外を担当するクラス。
 
 エラーハンドラーは既定では、 ``debug`` が ``true`` の時にエラーを表示し、
 ``debug`` が ``false`` の時にエラーをログに記録します。
@@ -104,6 +105,42 @@ ErrorController のカスタマイズ
 ``App\Controller\ErrorController`` クラスは CakePHP の例外レンダリングでエラーページビューを
 描画するために使われ、すべての標準リクエストライフサイクルイベントを受け取ります。
 このクラスを変更することで、どのコンポーネントが使用され、どのテンプレートが描画されるかを制御できます。
+
+アプリケーション内で :ref:`プレフィックスルーティング` を利用している場合は、
+それぞれのルーティングプレフィックスに対してカスタムエラーコントローラーを作成できます。
+例えば、 ``Admin`` プレフィックスの場合は以下のクラスを作成することができます。::
+
+    namespace App\Controller\Admin;
+
+    use App\Controller\AppController;
+    use Cake\Event\EventInterface;
+
+    class ErrorController extends AppController
+    {
+        /**
+         * Initialization hook method.
+         *
+         * @return void
+         */
+        public function initialize(): void
+        {
+            $this->loadComponent('RequestHandler');
+        }
+
+        /**
+         * beforeRender callback.
+         *
+         * @param \Cake\Event\EventInterface $event Event.
+         * @return void
+         */
+        public function beforeRender(EventInterface $event)
+        {
+            $this->viewBuilder()->setTemplatePath('Error');
+        }
+    }
+
+このコントローラーは、プレフィックス付きのコントローラーでエラーが発生したときにのみ利用できます。
+そして、必要に応じてプレフィックス固有のロジック/テンプレートを定義できます。
 
 ExceptionRenderer の変更
 ========================
@@ -325,8 +362,6 @@ HTTP メソッド用のいくつかの例外があります。
 
     403 Forbidden エラーに使われます。
 
-.. versionadded:: 3.1
-
     InvalidCsrfTokenException が追加されました。
 
 .. php:exception:: InvalidCsrfTokenException
@@ -345,19 +380,13 @@ HTTP メソッド用のいくつかの例外があります。
 
     406 Not Acceptable エラーに使われます。
 
-    .. versionadded:: 3.1.7 NotAcceptableException が追加されました。
-
 .. php:exception:: ConflictException
 
     409 Conflict エラーに使われます。
 
-    .. versionadded:: 3.1.7 ConflictException が追加されました。
-
 .. php:exception:: GoneException
 
     410 Gone エラーに使われます。
-
-    .. versionadded:: 3.1.7 GoneException が追加されました。
 
 HTTP 4xx エラーステータスコードの詳細は :rfc:`2616#section-10.4` をご覧ください。
 
@@ -373,14 +402,11 @@ HTTP 4xx エラーステータスコードの詳細は :rfc:`2616#section-10.4` 
 
     503 Service Unavailable エラーに使われます。
 
-    .. versionadded:: 3.1.7 Service Unavailable が追加されました。
-
 HTTP 5xx エラーステータスコードの詳細は :rfc:`2616#section-10.5` をご覧ください。
 
 失敗の状態や HTTP エラーを示すためにあなたのコントローラーからこれらの例外を投げることができます。
 HTTP の例外の使用例はアイテムが見つからなかった場合に 404 ページを描画することでしょう。 ::
 
-    // 3.6 より前は Cake\Network\Exception\NotFoundException を使用
     use Cake\Http\Exception\NotFoundException;
 
     public function view($id = null)
@@ -390,7 +416,7 @@ HTTP の例外の使用例はアイテムが見つからなかった場合に 40
             throw new NotFoundException(__('記事が見つかりません'));
         }
         $this->set('article', $article);
-        $this->set('_serialize', ['article']);
+        $this->viewBuilder()->setOption('serialize', ['article']);
     }
 
 HTTP エラー用の例外を使うことで、あなたのコードを綺麗にし、
@@ -411,7 +437,7 @@ HTTP 関連の例外を投げることができます。例::
             throw new NotFoundException(__('記事が見つかりません'));
         }
         $this->set('article', 'article');
-        $this->set('_serialize', ['article']);
+        $this->viewBuilder()->setOption('serialize', ['article']);
     }
 
 上記は :php:exc:`NotFoundException` をキャッチして処理するための例外ハンドラーを設定するでしょう。
@@ -517,8 +543,6 @@ HTTP 関連の例外を投げることができます。例::
     :php:meth:`Cake\\ORM\\Table::saveOrFail()` や
     :php:meth:`Cake\\ORM\\Table::deleteOrFail()` を使用しましたが、
     エンティティーは、保存/削除されませんでした。
-
-    .. versionadded:: 3.4.1 PersistenceFailedException は追加されました。
 
 .. php:namespace:: Cake\Datasource\Exception
 
