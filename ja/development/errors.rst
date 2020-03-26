@@ -362,8 +362,6 @@ HTTP メソッド用のいくつかの例外があります。
 
     403 Forbidden エラーに使われます。
 
-    InvalidCsrfTokenException が追加されました。
-
 .. php:exception:: InvalidCsrfTokenException
 
     無効な CSRF トークンによって引き起こされた 403 エラーに使われます。
