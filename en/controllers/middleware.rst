@@ -358,7 +358,7 @@ or exclude specific route groups::
     // in src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
 
-    public function routes(RouteBuilder $routes)
+    public function routes(RouteBuilder $routes) : void
     {
         $options = [
             // ...
