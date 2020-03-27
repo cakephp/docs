@@ -188,7 +188,8 @@ POSTされたフォームデータ(存在する場合)も検査し、credentials
         $this->Authentication->addUnauthenticatedActions(['login']);
     }
 
-    public function login() {
+    public function login()
+    {
         $this->request->allowMethod(['get', 'post']);
         $result = $this->Authentication->getResult();
         // POST, GET を問わず、ユーザーがログインしている場合はリダイレクトします
