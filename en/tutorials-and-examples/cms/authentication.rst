@@ -66,7 +66,7 @@ add the following::
 
 Now, point your browser to **http://localhost:8765/users** to see a list of users.
 Remember you'll need to have your local server running. Start a standalone PHP
-server using ``bin/cake server``
+server using ``bin/cake server``.
 
 You can edit the default user that was created during
 :doc:`Installation <installation>`. If you change that user's password,
@@ -102,7 +102,7 @@ The Plugin will handle the authentication process using 3 different classes:
 If you remember, we used :doc:`AuthComponent </controllers/components/authentication>`
 before to handle all these steps. Now the logic is divided into specific classes and
 the authentication process happens before your controller layer. First it checks if the user
-is authenticated (based in the configuration you provided) and injects the user and
+is authenticated (based on the configuration you provided) and injects the user and
 the authentication results into the request for further reference.
 
 In **src/Application.php**, add the following imports::
@@ -178,14 +178,14 @@ In you ``AppController`` class add the following code::
 
 Now, on every request, the ``AuthenticationMiddleware`` will inspect
 the request session to look for an authenticated user. If we are loading the ``/users/login``
-page, it'll inspect also the posted form data (if any) to extract the credentials.
+page, it will also inspect the posted form data (if any) to extract the credentials.
 By default the credentials will be extracted from the ``username`` and ``password``
 fields in the request data.
 The authentication result will be injected in a request attribute named
 ``authentication``. You can inspect the result at any time using
 ``$this->request->getAttribute('authentication')`` from your controller actions.
 All your pages will be restricted as the ``AuthenticationComponent`` is checking the
-result on every request. When it fails to find any authenticated user, it'll redirect the
+result on every request. When it fails to find any authenticated user, it will redirect the
 user to the ``/users/login`` page.
 Note at this point, the site won't work as we don't have a login page yet.
 If you visit your site, you'll get an "infinite redirect loop" so let's fix that.
@@ -200,7 +200,8 @@ In your ``UsersController``, add the following code::
         $this->Authentication->addUnauthenticatedActions(['login']);
     }
 
-    public function login() {
+    public function login()
+    {
         $this->request->allowMethod(['get', 'post']);
         $result = $this->Authentication->getResult();
         // regardless of POST or GET, redirect if user is logged in
