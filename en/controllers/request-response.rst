@@ -115,6 +115,11 @@ For non-existent names the ``$default`` value will be returned::
 You can also use :ref:`body-parser-middleware` to parse request body of different
 content types into an array, so that it's accessible through ``ServerRequest::getData()``.
 
+If you want to access all the data parameters you can use
+``getParsedBody()``::
+
+    $data = $this->request->getParsedBody();
+    
 .. _request-file-uploads:
 
 File Uploads
