@@ -658,7 +658,7 @@ selon le type de résultats que vous souhaitez en retour. La méthode la plus
 basique est ``query()`` qui vous permet de lancer des requêtes SQL déjà
 complètes::
 
-    $stmt = $connection->query('UPDATE posts SET published = 1 WHERE id = 2');
+    $statement = $connection->query('UPDATE posts SET published = 1 WHERE id = 2');
 
 .. php:method:: execute($sql, $params, $types)
 
@@ -666,7 +666,7 @@ La méthode ``query`` n'accepte pas de paramètres supplémentaires. Si vous
 avez besoin de paramètres supplémentaires, vous devrez utiliser la méthode
 ``execute()``, ce qui permet aux placeholders d'être utilisés::
 
-    $stmt = $connection->execute(
+    $statement = $connection->execute(
         'UPDATE posts SET published = ? WHERE id = ?',
         [1, 2]
     );
@@ -676,7 +676,7 @@ placeholders sont des chaînes de valeur. Si vous avez besoin de lier des types
 spécifiques de données, vous pouvez utiliser leur nom de type abstrait lors
 de la création d'une requête::
 
-    $stmt = $connection->execute(
+    $statement = $connection->execute(
         'UPDATE posts SET published_date = ? WHERE id = ?',
         [new DateTime('now'), 2],
         ['date', 'integer']
@@ -694,7 +694,7 @@ avoir à utiliser une plateforme SQL spécifique::
     $query->update('posts')
         ->set(['published' => true])
         ->where(['id' => 2]);
-    $stmt = $query->execute();
+    $statement = $query->execute();
 
 Quand vous utilisez le query builder, aucun SQL ne sera envoyé au serveur
 de base de données jusqu'à ce que la méthode ``execute()`` soit appelée, ou
@@ -770,14 +770,14 @@ fournies en les liant à lui. Alors que ``prepare()`` retourne une requête
 incomplète::
 
     // Les requêtes à partir de execute auront des valeurs leur étant déjà liées.
-    $stmt = $connection->execute(
+    $statement = $connection->execute(
         'SELECT * FROM articles WHERE published = ?',
         [true]
     );
 
     // Les Requêtes à partir de prepare seront des paramètres pour les placeholders.
     // Vous avez besoin de lier les paramètres avant d'essayer de l'exécuter.
-    $stmt = $connection->prepare('SELECT * FROM articles WHERE published = ?');
+    $statement = $connection->prepare('SELECT * FROM articles WHERE published = ?');
 
 Une fois que vous avez préparé une requête, vous pouvez lier les données
 supplémentaires et l'exécuter.
@@ -792,36 +792,36 @@ lier des données supplémentaires. Vous pouvez lier plusieurs valeurs en une
 fois en utilisant la méthode ``bind``, ou lier les éléments individuels
 en utilisant ``bindValue``::
 
-    $stmt = $connection->prepare(
+    $statement = $connection->prepare(
         'SELECT * FROM articles WHERE published = ? AND created > ?'
     );
 
     // Lier plusieurs valeurs
-    $stmt->bind(
+    $statement->bind(
         [true, new DateTime('2013-01-01')],
         ['boolean', 'date']
     );
 
     // Lier une valeur unique
-    $stmt->bindValue(1, true, 'boolean');
-    $stmt->bindValue(2, new DateTime('2013-01-01'), 'date');
+    $statement->bindValue(1, true, 'boolean');
+    $statement->bindValue(2, new DateTime('2013-01-01'), 'date');
 
 Lors de la création de requêtes, vous pouvez aussi utiliser les clés nommées
 de tableau plutôt que des clés de position::
 
-    $stmt = $connection->prepare(
+    $statement = $connection->prepare(
         'SELECT * FROM articles WHERE published = :published AND created > :created'
     );
 
     // Lier plusieurs valeurs
-    $stmt->bind(
+    $statement->bind(
         ['published' => true, 'created' => new DateTime('2013-01-01')],
         ['published' => 'boolean', 'created' => 'date']
     );
 
     // Lier une valeur unique
-    $stmt->bindValue('published', true, 'boolean');
-    $stmt->bindValue('created', new DateTime('2013-01-01'), 'date');
+    $statement->bindValue('published', true, 'boolean');
+    $statement->bindValue('created', new DateTime('2013-01-01'), 'date');
 
 .. warning::
 
@@ -837,16 +837,16 @@ exécutées en utilisant la méthode ``execute()``. Une fois exécutée, les
 résultats peuvent être récupérés en utilisant ``fetch()``, ``fetchAll()`` ou
 en faisant une itération de la requête::
 
-    $stmt->execute();
+    $statement->execute();
 
     // Lire une ligne.
-    $row = $stmt->fetch('assoc');
+    $row = $statement->fetch('assoc');
 
     // Lire toutes les lignes.
-    $rows = $stmt->fetchAll('assoc');
+    $rows = $statement->fetchAll('assoc');
 
     // Lire les lignes en faisant une itération.
-    foreach ($stmt as $row) {
+    foreach ($statement as $row) {
         // Faire quelque chose
     }
 
@@ -862,8 +862,8 @@ Récupérer les Compteurs de Ligne
 Après avoir exécuté une requête, vous pouvez récupérer le nombre de lignes
 affectées::
 
-    $rowCount = count($stmt);
-    $rowCount = $stmt->rowCount();
+    $rowCount = count($statement);
+    $rowCount = $statement->rowCount();
 
 Vérifier les Codes d'Erreur
 ---------------------------
@@ -872,8 +872,8 @@ Si votre requête n'est pas réussie, vous pouvez obtenir des informations liée
 à l'erreur en utilisant les méthodes ``errorCode()`` et ``errorInfo()``. Ces
 méthodes fonctionnent de la même façon que celles fournies par PDO::
 
-    $code = $stmt->errorCode();
-    $info = $stmt->errorInfo();
+    $code = $statement->errorCode();
+    $info = $statement->errorInfo();
 
 .. _database-query-logging:
 

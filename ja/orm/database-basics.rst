@@ -610,14 +610,14 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 いくつかあります。
 もっとも基本的な方法は、完全な SQL クエリーの実行を可能にする ``query()`` です。 ::
 
-    $stmt = $connection->query('UPDATE articles SET published = 1 WHERE id = 2');
+    $statement = $connection->query('UPDATE articles SET published = 1 WHERE id = 2');
 
 .. php:method:: execute($sql, $params, $types)
 
 ``query()`` メソッドは追加パラメーターを受け付けません。もし追加パラメーターが必要なら、
 プレースホルダーを使用可能な ``execute()`` メソッドを使用します。 ::
 
-    $stmt = $connection->execute(
+    $statement = $connection->execute(
         'UPDATE articles SET published = ? WHERE id = ?',
         [1, 2]
     );
@@ -626,7 +626,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 もし特定の型にバインドする必要があるなら、クエリーを生成する時に型名を指定することが
 できます。 ::
 
-    $stmt = $connection->execute(
+    $statement = $connection->execute(
         'UPDATE articles SET published_date = ? WHERE id = ?',
         [new DateTime('now'), 2],
         ['date', 'integer']
@@ -644,7 +644,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
     $query->update('articles')
         ->set(['published' => true])
         ->where(['id' => 2]);
-    $stmt = $query->execute();
+    $statement = $query->execute();
 
 クエリービルダーを使用する場合は、 ``execute()`` メソッドを呼ぶまではサーバーに SQL は
 送信されず、メソッド呼び出し後に順次処理されます。
@@ -717,14 +717,14 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 それに対して ``prepare()`` は不完全なステートメントを返します。 ::
 
     // execute は指定された値でバインドして SQL ステートメントを実行します。
-    $stmt = $connection->execute(
+    $statement = $connection->execute(
         'SELECT * FROM articles WHERE published = ?',
         [true]
     );
 
     // prepare はプレースホルダーのための準備をします。
     // 実行する前にパラメーターをバインドする必要があります。
-    $stmt = $connection->prepare('SELECT * FROM articles WHERE published = ?');
+    $statement = $connection->prepare('SELECT * FROM articles WHERE published = ?');
 
 SQL 文を準備したら、あなたは追加のデータをバインドし、それを実行することができます。
 
@@ -737,36 +737,36 @@ SQL 文を準備したら、あなたは追加のデータをバインドし、�
 あなたは ``bind()`` メソッドを使って一度に複数の値をバインドする事も、
 ``bindValue`` を使って１項目ずつバインドする事もできます。 ::
 
-    $stmt = $connection->prepare(
+    $statement = $connection->prepare(
         'SELECT * FROM articles WHERE published = ? AND created > ?'
     );
 
     // 複数項目のバインド
-    $stmt->bind(
+    $statement->bind(
         [true, new DateTime('2013-01-01')],
         ['boolean', 'date']
     );
 
     // １項目ずつのバインド
-    $stmt->bindValue(1, true, 'boolean');
-    $stmt->bindValue(2, new DateTime('2013-01-01'), 'date');
+    $statement->bindValue(1, true, 'boolean');
+    $statement->bindValue(2, new DateTime('2013-01-01'), 'date');
 
 ステートメントを作成する時には、項目の通し番号ではなく、項目名の配列をキーに
 使用することもできます。 ::
 
-    $stmt = $connection->prepare(
+    $statement = $connection->prepare(
         'SELECT * FROM articles WHERE published = :published AND created > :created'
     );
 
     // 複数項目のバインド
-    $stmt->bind(
+    $statement->bind(
         ['published' => true, 'created' => new DateTime('2013-01-01')],
         ['published' => 'boolean', 'created' => 'date']
     );
 
     // １項目ずつのバインド
-    $stmt->bindValue('published', true, 'boolean');
-    $stmt->bindValue('created', new DateTime('2013-01-01'), 'date');
+    $statement->bindValue('published', true, 'boolean');
+    $statement->bindValue('created', new DateTime('2013-01-01'), 'date');
 
 .. warning::
 
@@ -780,16 +780,16 @@ SQL 文を準備したら、あなたは追加のデータをバインドし、�
 ステートメントは ``execute()`` メソッドで実行します。
 一度実行したら、結果は ``fetch()`` か ``fetchAll()`` を使ってフェッチします。 ::
 
-    $stmt->execute();
+    $statement->execute();
 
     // １行読み込む
-    $row = $stmt->fetch('assoc');
+    $row = $statement->fetch('assoc');
 
     // 全行を読み込む
-    $rows = $stmt->fetchAll('assoc');
+    $rows = $statement->fetchAll('assoc');
 
     // 全行読み込んだ結果を順次処理する
-    foreach ($stmt as $row) {
+    foreach ($statement as $row) {
         // Do work
     }
 
@@ -803,8 +803,8 @@ SQL 文を準備したら、あなたは追加のデータをバインドし、�
 
 ステートメントを実行したら、下記のように対象行数を取得することができます。 ::
 
-    $rowCount = count($stmt);
-    $rowCount = $stmt->rowCount();
+    $rowCount = count($statement);
+    $rowCount = $statement->rowCount();
 
 エラーコードをチェックする
 ---------------------------
@@ -813,8 +813,8 @@ SQL 文を準備したら、あなたは追加のデータをバインドし、�
 メソッドによって取得することができます。
 このメソッドは PDO で提供されているものと同じように動作します。 ::
 
-    $code = $stmt->errorCode();
-    $info = $stmt->errorInfo();
+    $code = $statement->errorCode();
+    $info = $statement->errorInfo();
 
 .. todo::
     Possibly document CallbackStatement and BufferedStatement

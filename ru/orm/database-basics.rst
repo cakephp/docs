@@ -611,14 +611,14 @@ json
 который необходимо выполнить и того какие результаты нужны в ответ.
 Наиболее простой метод - ``query()``, который позволяет запускать уже выполненные SQL запросы::
 
-    $stmt = $connection->query('UPDATE articles SET published = 1 WHERE id = 2');
+    $statement = $connection->query('UPDATE articles SET published = 1 WHERE id = 2');
 
 .. php:method:: execute($sql, $params, $types)
 
 Метод ``query()`` не допускает применение дополнительных параметров. Если нужны дополнительные параметры,
 необходимо использовать метод ``execute()``, который дает возможность использовать шаблон для подстановки::
 
-    $stmt = $connection->execute(
+    $statement = $connection->execute(
         'UPDATE articles SET published = ? WHERE id = ?',
         [1, 2]
     );
@@ -627,7 +627,7 @@ json
 Если необходимо привязать определенные типы данных, можно использовать абстрактные имена типов при
 создании запроса::
 
-    $stmt = $connection->execute(
+    $statement = $connection->execute(
         'UPDATE articles SET published_date = ? WHERE id = ?',
         [new DateTime('now'), 2],
         ['date', 'integer']
@@ -644,7 +644,7 @@ json
     $query->update('articles')
         ->set(['published' => true])
         ->where(['id' => 2]);
-    $stmt = $query->execute();
+    $statement = $query->execute();
 
 При использовании конструктора запросов, ни один SQL запрос не будет послан на сервер
 базы данных до вызова метода ``execute()`` или пока запрос не будет повторён.
@@ -715,14 +715,14 @@ json
 При использовании ``prepare()`` возвращается неполное выражение::
 
     // Выражения execute уже имеют связанные значения.
-    $stmt = $connection->execute(
+    $statement = $connection->execute(
         'SELECT * FROM articles WHERE published = ?',
         [true]
     );
 
     // Выражения из метода prepare будут параметрами полей для подстановки.
     // Необходимо привязать параметры до того как их использовать.
-    $stmt = $connection->prepare('SELECT * FROM articles WHERE published = ?');
+    $statement = $connection->prepare('SELECT * FROM articles WHERE published = ?');
 
 После того как выражение подготовлено, вы можете привязать дополнительные данные и выполнить его.
 
@@ -735,36 +735,36 @@ json
 Можно привязать множество значений сразу, используя метод ``bind()`` или привязать
 отдельные элементы, используя ``bindValue``::
 
-    $stmt = $connection->prepare(
+    $statement = $connection->prepare(
         'SELECT * FROM articles WHERE published = ? AND created > ?'
     );
 
     // Привязка множества значений
-    $stmt->bind(
+    $statement->bind(
         [true, new DateTime('2013-01-01')],
         ['boolean', 'date']
     );
 
     // Привязка одного значения
-    $stmt->bindValue(1, true, 'boolean');
-    $stmt->bindValue(2, new DateTime('2013-01-01'), 'date');
+    $statement->bindValue(1, true, 'boolean');
+    $statement->bindValue(2, new DateTime('2013-01-01'), 'date');
 
 При создании выражений, можно использовать именованные ключи массива вместо
 индексных::
 
-    $stmt = $connection->prepare(
+    $statement = $connection->prepare(
         'SELECT * FROM articles WHERE published = :published AND created > :created'
     );
 
     // Привязка множества значений
-    $stmt->bind(
+    $statement->bind(
         ['published' => true, 'created' => new DateTime('2013-01-01')],
         ['published' => 'boolean', 'created' => 'date']
     );
 
     // Привязка одного значения
-    $stmt->bindValue('published', true, 'boolean');
-    $stmt->bindValue('created', new DateTime('2013-01-01'), 'date');
+    $statement->bindValue('published', true, 'boolean');
+    $statement->bindValue('created', new DateTime('2013-01-01'), 'date');
 
 .. warning::
 
@@ -777,16 +777,16 @@ json
 Выражения должны быть выполнены с использованием метода ``execute()``. После выполнения, результаты
 можно получить, используя ``fetch()``, ``fetchAll()`` или проитерировать выражение::
 
-    $stmt->execute();
+    $statement->execute();
 
     // Прочитать одну строку.
-    $row = $stmt->fetch('assoc');
+    $row = $statement->fetch('assoc');
 
     // Прочитать все строки.
-    $rows = $stmt->fetchAll('assoc');
+    $rows = $statement->fetchAll('assoc');
 
     // Прочитать строки путем итерации.
-    foreach ($stmt as $row) {
+    foreach ($statement as $row) {
         // Выполнить задачу
     }
 
@@ -800,8 +800,8 @@ json
 
 После выполнения выражения, можно получить количество затронутых строк::
 
-    $rowCount = count($stmt);
-    $rowCount = $stmt->rowCount();
+    $rowCount = count($statement);
+    $rowCount = $statement->rowCount();
 
 Коды ошибок
 -----------
@@ -810,8 +810,8 @@ json
 используя методы ``errorCode()`` и ``errorInfo()``. Эти методы работают также, как те, что
 предоставляются PDO::
 
-    $code = $stmt->errorCode();
-    $info = $stmt->errorInfo();
+    $code = $statement->errorCode();
+    $info = $statement->errorInfo();
 
 .. todo::
     Possibly document CallbackStatement and BufferedStatement

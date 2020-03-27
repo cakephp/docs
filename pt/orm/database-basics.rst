@@ -612,7 +612,7 @@ diferentes de executar consultas, dependendo do tipo de consulta que você
 precisa executar e do tipo de resultados que você precisa receber. O método
 mais básico é o ``query()`` que lhe permite executar consultas SQL já prontas::
 
-    $stmt = $connection->query('UPDATE articles SET published = 1 WHERE id = 2');
+    $statement = $connection->query('UPDATE articles SET published = 1 WHERE id = 2');
 
 .. php:method:: execute($sql, $params, $types)
 
@@ -620,7 +620,7 @@ O método ``query()`` não aceita parâmetros adicionais. Se você precisa de
 parâmetros adicionais, você deve usar o método ``execute()``, que permite que
 placeholders sejam usados::
 
-    $stmt = $connection->execute(
+    $statement = $connection->execute(
         'UPDATE articles SET published = ? WHERE id = ?',
         [1, 2]
     );
@@ -629,7 +629,7 @@ Sem qualquer informação de indução de tipo, ``execute`` assumirá que todos 
 placeholders são valores do tipo string. Se você precisa vincular tipos específicos
 de dados, você pode usar seus nomes de tipos abstratos ao criar uma consulta::
 
-    $stmt = $connection->execute(
+    $statement = $connection->execute(
         'UPDATE articles SET published_date = ? WHERE id = ?',
         [new DateTime('now'), 2],
         ['date', 'integer']
@@ -646,7 +646,7 @@ complexas e expressivas sem ter que usar SQL específico de plataforma::
     $query->update('articles')
         ->set(['published' => true])
         ->where(['id' => 2]);
-    $stmt = $query->execute();
+    $statement = $query->execute();
 
 Ao usar o construtor de consulta (*query builder*), nenhum SQL será enviado
 para o servidor do banco de dados até que o método ``execute()`` é chamado ou a
@@ -712,14 +712,14 @@ retorna uma instrução com os valores fornecidos ligados a ela. Enquanto que o 
 uma instrução incompleta::
 
     // Instruções do ``execute`` terão valores já vinculados a eles.
-    $stmt = $connection->execute(
+    $statement = $connection->execute(
         'SELECT * FROM articles WHERE published = ?',
         [true]
     );
 
     // Instruções do ``prepare``serão parâmetros para placeholders.
     // Você precisa vincular os parâmetros antes de executar.
-    $stmt = $connection->prepare('SELECT * FROM articles WHERE published = ?');
+    $statement = $connection->prepare('SELECT * FROM articles WHERE published = ?');
 
 Uma vez que você preparou uma instrução, você pode vincular dados adicionais e executá-lo.
 
@@ -732,34 +732,34 @@ Uma vez que você criou uma instrução preparada, você talvez precise vincular
 Você pode vincular vários valores ao mesmo tempo usando o método ``bind()``, ou vincular elementos
 individuais usando ``bindValue``::
 
-    $stmt = $connection->prepare(
+    $statement = $connection->prepare(
         'SELECT * FROM articles WHERE published = ? AND created > ?'
     );
     // Vincular vários valores
-    $stmt->bind(
+    $statement->bind(
         [true, new DateTime('2013-01-01')],
         ['boolean', 'date']
     );
 
     // Vincular único valor
-    $stmt->bindValue(1, true, 'boolean');
-    $stmt->bindValue(2, new DateTime('2013-01-01'), 'date');
+    $statement->bindValue(1, true, 'boolean');
+    $statement->bindValue(2, new DateTime('2013-01-01'), 'date');
 
 Ao criar instruções, você também pode usar chave de array nomeadas em vez de posicionais::
 
-    $stmt = $connection->prepare(
+    $statement = $connection->prepare(
         'SELECT * FROM articles WHERE published = :published AND created > :created'
     );
 
     // Vincular vários valores
-    $stmt->bind(
+    $statement->bind(
         ['published' => true, 'created' => new DateTime('2013-01-01')],
         ['published' => 'boolean', 'created' => 'date']
     );
 
     // Vincular um valor único
-    $stmt->bindValue('published', true, 'boolean');
-    $stmt->bindValue('created', new DateTime('2013-01-01'), 'date');
+    $statement->bindValue('published', true, 'boolean');
+    $statement->bindValue('created', new DateTime('2013-01-01'), 'date');
 
 .. warning::
 
@@ -773,16 +773,16 @@ linhas. As instruções devem ser executadas usando o método ``execute()``. Uma
 executado, os resultados podem ser obtidos usando ``fetch()``, ``fetchAll()`` ou iterando
 a instrução::
 
-    $stmt->execute();
+    $statement->execute();
 
     // Lê uma linha.
-    $row = $stmt->fetch('assoc');
+    $row = $statement->fetch('assoc');
 
     // Lê todas as linhas.
-    $rows = $stmt->fetchAll('assoc');
+    $rows = $statement->fetchAll('assoc');
 
     // Lê linhas através de iteração.
-    foreach ($stmt as $row) {
+    foreach ($statement as $row) {
         // Do work
     }
 
@@ -796,8 +796,8 @@ Obtendo Contagens de Linha
 
 Depois de executar uma declaração, você pode buscar o número de linhas afetadas::
 
-    $rowCount = count($stmt);
-    $rowCount = $stmt->rowCount();
+    $rowCount = count($statement);
+    $rowCount = $statement->rowCount();
 
 Verificando Códigos de Erro
 ---------------------------
@@ -806,8 +806,8 @@ Se a sua consulta não foi bem sucedida, você pode obter informações de erro 
 usando os métodos ``errorCode()`` e ``errorInfo()``. Estes métodos funcionam da mesma
 maneira que os fornecidos pelo PDO::
 
-    $code = $stmt->errorCode();
-    $info = $stmt->errorInfo();
+    $code = $statement->errorCode();
+    $info = $statement->errorInfo();
 
 .. todo::
     Possibly document CallbackStatement and BufferedStatement
