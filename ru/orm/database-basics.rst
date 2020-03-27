@@ -277,7 +277,7 @@ BigBoxesController, то все вместе будет работать авт�
 
     use Cake\Datasource\ConnectionManager;
 
-    $conn = ConnectionManager::get('default');
+    $connection = ConnectionManager::get('default');
 
 Попытка загрузить соединения, которые не существуют, приведет к вызову исключения.
 
@@ -288,7 +288,7 @@ BigBoxesController, то все вместе будет работать авт�
 файлах конфигурации, во время выполнения приложения::
 
     ConnectionManager::config('my_connection', $config);
-    $conn = ConnectionManager::get('my_connection');
+    $connection = ConnectionManager::get('my_connection');
 
 Смотрите раздел :ref:`database-configuration` для получения дополительной информации по конфигурационным данным,
 используемым при создании соединений.
@@ -611,14 +611,14 @@ json
 который необходимо выполнить и того какие результаты нужны в ответ.
 Наиболее простой метод - ``query()``, который позволяет запускать уже выполненные SQL запросы::
 
-    $stmt = $conn->query('UPDATE articles SET published = 1 WHERE id = 2');
+    $stmt = $connection->query('UPDATE articles SET published = 1 WHERE id = 2');
 
 .. php:method:: execute($sql, $params, $types)
 
 Метод ``query()`` не допускает применение дополнительных параметров. Если нужны дополнительные параметры,
 необходимо использовать метод ``execute()``, который дает возможность использовать шаблон для подстановки::
 
-    $stmt = $conn->execute(
+    $stmt = $connection->execute(
         'UPDATE articles SET published = ? WHERE id = ?',
         [1, 2]
     );
@@ -627,7 +627,7 @@ json
 Если необходимо привязать определенные типы данных, можно использовать абстрактные имена типов при
 создании запроса::
 
-    $stmt = $conn->execute(
+    $stmt = $connection->execute(
         'UPDATE articles SET published_date = ? WHERE id = ?',
         [new DateTime('now'), 2],
         ['date', 'integer']
@@ -640,7 +640,7 @@ json
 использование :doc:`/orm/query-builder`. Данный подход позволяет сконструировать сложные
 и выразительные запросы без использования платформенно-ориентированного SQL::
 
-    $query = $conn->newQuery();
+    $query = $connection->newQuery();
     $query->update('articles')
         ->set(['published' => true])
         ->where(['id' => 2]);
@@ -650,7 +650,7 @@ json
 базы данных до вызова метода ``execute()`` или пока запрос не будет повторён.
 При итерации запроса, сначала он выполняется, а затем его результатирующий набор данных будет проитерирован::
 
-    $query = $conn->newQuery();
+    $query = $connection->newQuery();
     $query->select('*')
         ->from('articles')
         ->where(['published' => true]);
@@ -671,10 +671,10 @@ json
 базы данных. Наиболее простой способ выполнения - используя методы ``begin()``,
 ``commit()`` и ``rollback()``, которые преобразуются в их SQL эквиваленты::
 
-    $conn->begin();
-    $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
-    $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
-    $conn->commit();
+    $connection->begin();
+    $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
+    $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
+    $connection->commit();
 
 .. php:method:: transactional(callable $callback)
 
@@ -682,9 +682,9 @@ json
 метод ``transactional()``, который делает обработку вызовов begin/commit/rollback
 еще проще::
 
-    $conn->transactional(function ($conn) {
-        $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
-        $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
+    $connection->transactional(function ($connection) {
+        $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
+        $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
     });
 
 В дополнение к базовым запросам, вы можете выполнить более сложные запросы, используя
@@ -715,14 +715,14 @@ json
 При использовании ``prepare()`` возвращается неполное выражение::
 
     // Выражения execute уже имеют связанные значения.
-    $stmt = $conn->execute(
+    $stmt = $connection->execute(
         'SELECT * FROM articles WHERE published = ?',
         [true]
     );
 
     // Выражения из метода prepare будут параметрами полей для подстановки.
     // Необходимо привязать параметры до того как их использовать.
-    $stmt = $conn->prepare('SELECT * FROM articles WHERE published = ?');
+    $stmt = $connection->prepare('SELECT * FROM articles WHERE published = ?');
 
 После того как выражение подготовлено, вы можете привязать дополнительные данные и выполнить его.
 
@@ -735,7 +735,7 @@ json
 Можно привязать множество значений сразу, используя метод ``bind()`` или привязать
 отдельные элементы, используя ``bindValue``::
 
-    $stmt = $conn->prepare(
+    $stmt = $connection->prepare(
         'SELECT * FROM articles WHERE published = ? AND created > ?'
     );
 
@@ -752,7 +752,7 @@ json
 При создании выражений, можно использовать именованные ключи массива вместо
 индексных::
 
-    $stmt = $conn->prepare(
+    $stmt = $connection->prepare(
         'SELECT * FROM articles WHERE published = :published AND created > :created'
     );
 
@@ -827,10 +827,10 @@ json
 
     // До 3.7.0 используйте logQueries()
     // Включить логирование.
-    $conn->enableQueryLogging(true);
+    $connection->enableQueryLogging(true);
 
     // Отключить логирование
-    $conn->enableQueryLogging(false);
+    $connection->enableQueryLogging(false);
 
 Когда логирование запросов включено, запросы логируются в :php:class:`Cake\\Log\\Log`,
 используя уровень 'debug' и область действия 'queriesLog'.
@@ -876,7 +876,7 @@ files/syslog может быть полезно при работе с веб-з
 Для унаследованной схемы, в которой требуются кавычки в идентификаторах, можно включить настройку ``quoteIdentifiers``
 в :ref:`database-configuration`. Эта функция включается в том числе и при выполении::
 
-    $conn->getDriver()->enableAutoQuoting();
+    $connection->getDriver()->enableAutoQuoting();
 
 При включенном режиме, использование кавычек в идентификаторах
 

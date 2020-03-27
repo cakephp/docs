@@ -308,7 +308,7 @@ avant, ou retourner la connexion connue existante::
 
     use Cake\Datasource\ConnectionManager;
 
-    $conn = ConnectionManager::get('default');
+    $connection = ConnectionManager::get('default');
 
 La tentative de chargement de connexions qui n'existent pas va lancer une
 exception.
@@ -321,7 +321,7 @@ nouvelles connexions qui ne sont pas défines dans votre fichier de
 configuration::
 
     ConnectionManager::config('my_connection', $config);
-    $conn = ConnectionManager::get('my_connection');
+    $connection = ConnectionManager::get('my_connection');
 
 Consultez le chapitre sur la :ref:`configuration <database-configuration>`
 pour plus d'informations sur les données de configuration utilisées lors de
@@ -658,7 +658,7 @@ selon le type de résultats que vous souhaitez en retour. La méthode la plus
 basique est ``query()`` qui vous permet de lancer des requêtes SQL déjà
 complètes::
 
-    $stmt = $conn->query('UPDATE posts SET published = 1 WHERE id = 2');
+    $stmt = $connection->query('UPDATE posts SET published = 1 WHERE id = 2');
 
 .. php:method:: execute($sql, $params, $types)
 
@@ -666,7 +666,7 @@ La méthode ``query`` n'accepte pas de paramètres supplémentaires. Si vous
 avez besoin de paramètres supplémentaires, vous devrez utiliser la méthode
 ``execute()``, ce qui permet aux placeholders d'être utilisés::
 
-    $stmt = $conn->execute(
+    $stmt = $connection->execute(
         'UPDATE posts SET published = ? WHERE id = ?',
         [1, 2]
     );
@@ -676,7 +676,7 @@ placeholders sont des chaînes de valeur. Si vous avez besoin de lier des types
 spécifiques de données, vous pouvez utiliser leur nom de type abstrait lors
 de la création d'une requête::
 
-    $stmt = $conn->execute(
+    $stmt = $connection->execute(
         'UPDATE posts SET published_date = ? WHERE id = ?',
         [new DateTime('now'), 2],
         ['date', 'integer']
@@ -690,7 +690,7 @@ la plus flexible de créer des requêtes est d'utiliser :doc:`/orm/query-builder
 Cette approche vous permet de construire des requêtes expressives complexes sans
 avoir à utiliser une plateforme SQL spécifique::
 
-    $query = $conn->newQuery();
+    $query = $connection->newQuery();
     $query->update('posts')
         ->set(['published' => true])
         ->where(['id' => 2]);
@@ -701,7 +701,7 @@ de base de données jusqu'à ce que la méthode ``execute()`` soit appelée, ou
 que la requête soit itérée. Itérer une requête va d'abord l'exécuter et ensuite
 démarrer l'itération sur l'ensemble des résultats::
 
-    $query = $conn->newQuery();
+    $query = $connection->newQuery();
     $query->select('*')
         ->from('posts')
         ->where(['published' => true]);
@@ -724,10 +724,10 @@ vous fassiez des transactions de base de données. La façon la plus basique de
 faire des transactions est avec les méthodes ``begin``, ``commit`` et
 ``rollback``, qui correspondent à leurs équivalents SQL::
 
-    $conn->begin();
-    $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
-    $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
-    $conn->commit();
+    $connection->begin();
+    $connection->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
+    $connection->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
+    $connection->commit();
 
 .. php:method:: transactional(callable $callback)
 
@@ -735,9 +735,9 @@ En plus de cette interface, les instances de connexion fournissent aussi la
 méthode ``transactional`` ce qui simplifie la gestion des appels
 begin/commit/rollback::
 
-    $conn->transactional(function ($conn) {
-        $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
-        $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
+    $connection->transactional(function ($connection) {
+        $connection->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
+        $connection->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
     });
 
 En plus des requêtes basiques, vous pouvez exécuter des requêtes plus complexes
@@ -770,14 +770,14 @@ fournies en les liant à lui. Alors que ``prepare()`` retourne une requête
 incomplète::
 
     // Les requêtes à partir de execute auront des valeurs leur étant déjà liées.
-    $stmt = $conn->execute(
+    $stmt = $connection->execute(
         'SELECT * FROM articles WHERE published = ?',
         [true]
     );
 
     // Les Requêtes à partir de prepare seront des paramètres pour les placeholders.
     // Vous avez besoin de lier les paramètres avant d'essayer de l'exécuter.
-    $stmt = $conn->prepare('SELECT * FROM articles WHERE published = ?');
+    $stmt = $connection->prepare('SELECT * FROM articles WHERE published = ?');
 
 Une fois que vous avez préparé une requête, vous pouvez lier les données
 supplémentaires et l'exécuter.
@@ -792,7 +792,7 @@ lier des données supplémentaires. Vous pouvez lier plusieurs valeurs en une
 fois en utilisant la méthode ``bind``, ou lier les éléments individuels
 en utilisant ``bindValue``::
 
-    $stmt = $conn->prepare(
+    $stmt = $connection->prepare(
         'SELECT * FROM articles WHERE published = ? AND created > ?'
     );
 
@@ -809,7 +809,7 @@ en utilisant ``bindValue``::
 Lors de la création de requêtes, vous pouvez aussi utiliser les clés nommées
 de tableau plutôt que des clés de position::
 
-    $stmt = $conn->prepare(
+    $stmt = $connection->prepare(
         'SELECT * FROM articles WHERE published = :published AND created > :created'
     );
 
@@ -885,10 +885,10 @@ connexion en définissant l'option ``log`` à ``true``. Vous pouvez changer le
 log de requête à la volée, en utilisant ``logQueries``::
 
     // Active les logs des requêtes.
-    $conn->logQueries(true);
+    $connection->logQueries(true);
 
     // Stoppe les logs des requêtes
-    $conn->logQueries(false);
+    $connection->logQueries(false);
 
 Quand les logs des requêtes sont activés, les requêtes sont enregistrées dans
 :php:class:`Cake\\Log\\Log` en utilisant le niveau de 'debug', et le scope
@@ -940,7 +940,7 @@ identifiers, vous pouvez l'activer en utilisant le paramètre
 ``quoteIdentifiers`` dans votre :ref:`database-configuration`. Vous pouvez
 aussi activer cette fonctionnalité à la volée::
 
-    $conn->getDriver()->enableAutoQuoting();
+    $connection->getDriver()->enableAutoQuoting();
 
 Quand elle est activée, l'identifier quoting va entrainer des requêtes
 supplémentaires traversales qui convertissent tous les identifiers en objets

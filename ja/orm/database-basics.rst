@@ -280,7 +280,7 @@ BigBoxesTable と、コントローラー BigBoxesController は、全て自動�
 
     use Cake\Datasource\ConnectionManager;
 
-    $conn = ConnectionManager::get('default');
+    $connection = ConnectionManager::get('default');
 
 存在しない接続をロードしようとしたら、例外を throw します。
 
@@ -291,7 +291,7 @@ BigBoxesTable と、コントローラー BigBoxesController は、全て自動�
 コネクションを生成することができます。 ::
 
     ConnectionManager::config('my_connection', $config);
-    $conn = ConnectionManager::get('my_connection');
+    $connection = ConnectionManager::get('my_connection');
 
 コネクション生成時の設定についての詳細は :ref:`database-configuration` を参照してください。
 
@@ -610,14 +610,14 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 いくつかあります。
 もっとも基本的な方法は、完全な SQL クエリーの実行を可能にする ``query()`` です。 ::
 
-    $stmt = $conn->query('UPDATE articles SET published = 1 WHERE id = 2');
+    $stmt = $connection->query('UPDATE articles SET published = 1 WHERE id = 2');
 
 .. php:method:: execute($sql, $params, $types)
 
 ``query()`` メソッドは追加パラメーターを受け付けません。もし追加パラメーターが必要なら、
 プレースホルダーを使用可能な ``execute()`` メソッドを使用します。 ::
 
-    $stmt = $conn->execute(
+    $stmt = $connection->execute(
         'UPDATE articles SET published = ? WHERE id = ?',
         [1, 2]
     );
@@ -626,7 +626,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 もし特定の型にバインドする必要があるなら、クエリーを生成する時に型名を指定することが
 できます。 ::
 
-    $stmt = $conn->execute(
+    $stmt = $connection->execute(
         'UPDATE articles SET published_date = ? WHERE id = ?',
         [new DateTime('now'), 2],
         ['date', 'integer']
@@ -640,7 +640,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 この方法では、プラットフォーム固有の SQL を使用することなく、複雑で表現力豊かなクエリーを
 構築することができます。 ::
 
-    $query = $conn->newQuery();
+    $query = $connection->newQuery();
     $query->update('articles')
         ->set(['published' => true])
         ->where(['id' => 2]);
@@ -650,7 +650,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 送信されず、メソッド呼び出し後に順次処理されます。
 最初に送信してから、順次結果セットを作成します。 ::
 
-    $query = $conn->newQuery();
+    $query = $connection->newQuery();
     $query->select('*')
         ->from('articles')
         ->where(['published' => true]);
@@ -672,19 +672,19 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 トランザクション操作の最も基本的な方法は、SQL構文と同じような ``begin()`` ,
 ``commit()`` , ``rollback()`` を使用するものです。 ::
 
-    $conn->begin();
-    $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
-    $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
-    $conn->commit();
+    $connection->begin();
+    $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
+    $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
+    $connection->commit();
 
 .. php:method:: transactional(callable $callback)
 
 このコネクションインスタンスへのインターフェースに加えて、さらに begin/commit/rollback を
 簡単にハンドリングする ``transactional()`` メソッドが提供されています。 ::
 
-    $conn->transactional(function ($conn) {
-        $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
-        $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
+    $connection->transactional(function ($connection) {
+        $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
+        $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
     });
 
 基本的なクエリーに加えて、 :doc:`/orm/query-builder` または :doc:`/orm/table-objects` の
@@ -717,14 +717,14 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 それに対して ``prepare()`` は不完全なステートメントを返します。 ::
 
     // execute は指定された値でバインドして SQL ステートメントを実行します。
-    $stmt = $conn->execute(
+    $stmt = $connection->execute(
         'SELECT * FROM articles WHERE published = ?',
         [true]
     );
 
     // prepare はプレースホルダーのための準備をします。
     // 実行する前にパラメーターをバインドする必要があります。
-    $stmt = $conn->prepare('SELECT * FROM articles WHERE published = ?');
+    $stmt = $connection->prepare('SELECT * FROM articles WHERE published = ?');
 
 SQL 文を準備したら、あなたは追加のデータをバインドし、それを実行することができます。
 
@@ -737,7 +737,7 @@ SQL 文を準備したら、あなたは追加のデータをバインドし、�
 あなたは ``bind()`` メソッドを使って一度に複数の値をバインドする事も、
 ``bindValue`` を使って１項目ずつバインドする事もできます。 ::
 
-    $stmt = $conn->prepare(
+    $stmt = $connection->prepare(
         'SELECT * FROM articles WHERE published = ? AND created > ?'
     );
 
@@ -754,7 +754,7 @@ SQL 文を準備したら、あなたは追加のデータをバインドし、�
 ステートメントを作成する時には、項目の通し番号ではなく、項目名の配列をキーに
 使用することもできます。 ::
 
-    $stmt = $conn->prepare(
+    $stmt = $connection->prepare(
         'SELECT * FROM articles WHERE published = :published AND created > :created'
     );
 
@@ -829,10 +829,10 @@ SQL 文を準備したら、あなたは追加のデータをバインドし、�
 また、 ``logQueries`` を使って実行中にクエリーログを切り替えることができます。 ::
 
     // クエリーログを有効
-    $conn->logQueries(true);
+    $connection->logQueries(true);
 
     // クエリーログを停止
-    $conn->logQueries(false);
+    $connection->logQueries(false);
 
 クエリーログを有効にしていると、 'debug' レベルで 'queriesLog' スコープで
 :php:class:`Cake\\Log\\Log` にクエリーをログ出力します。
@@ -879,7 +879,7 @@ Web リクエストの時に便利です。 ::
 引用符を使うことができます。
 また、実行時にこの機能を有効にすることもできます。 ::
 
-    $conn->getDriver()->enableAutoQuoting();
+    $connection->getDriver()->enableAutoQuoting();
 
 有効にすると、引用識別子は 全ての識別子を ``IdentifierExpression`` オブジェクトに
 変換するトラバーサルが発生する原因になります。
