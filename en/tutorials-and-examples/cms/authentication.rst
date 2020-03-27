@@ -35,9 +35,8 @@ of view, so lets fix that.
 
 This is also a good time to talk about the model layer in CakePHP. In CakePHP,
 we use different classes to operate on collections of records and single records.
-object into different classes. Methods that operate on the collection of
-entities are put in the ``Table`` class, while features belonging to a single
-record are put on the ``Entity`` class.
+Methods that operate on the collection of entities are put in the ``Table`` class,
+while features belonging to a single record are put on the ``Entity`` class.
 
 For example, password hashing is done on the individual record, so we'll
 implement this behavior on the entity object. Because we want to hash the
