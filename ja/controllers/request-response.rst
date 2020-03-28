@@ -587,6 +587,42 @@ Accept ヘッダーの確認
 クッキーコレクションの操作方法については、 :php:class:`Cake\\Http\\Cookie\\CookieCollection`
 のドキュメントをご覧ください。
 
+アップロードされたファイル
+--------------------------
+
+Requests expose the uploaded file data in ``getData()`` or
+``getUploadedFiles()`` as ``UploadedFileInterface`` objects::
+
+リクエストはアップロードされたファイルのデータを ``getData()`` または ``getUploadedFiles()`` で
+``UploadedFileInterface`` オブジェクトとして公開します。 ::
+
+    // アップロードファイルオブジェクトのリストを取得
+    $files = $request->getUploadedFiles();
+
+    // ファイルデータの読み込み
+    $files[0]->getStream();
+    $files[0]->getSize();
+    $files[0]->getClientFileName();
+
+    // ファイルの移動
+    $files[0]->moveTo($targetPath);
+
+URIの操作
+---------
+
+リクエストは、リクエストされたURIと対話するためのメソッドを含むURIオブジェクトを含みます。 ::
+
+    // URIの取得
+    $uri = $request->getUri();
+
+    // URIからデータを読み出す
+    $path = $uri->getPath();
+    $query = $uri->getQuery();
+    $host = $uri->getHost();
+
+
+.. index:: $this->response
+
 レスポンス
 ==========
 
@@ -622,9 +658,6 @@ Accept ヘッダーの確認
     // レスポンスのコンテンツタイプを vcard に設定
     $this->response = $this->response->withType('vcf');
 
-    // 3.4.0 より前
-    $this->response->type('vcf');
-
 大抵の場合、追加のコンテンツタイプはコントローラーの :php:meth:`~Controller::beforeFilter()`
 コールバックの中で設定したいと思うので、 :php:class:`RequestHandlerComponent` が提供する
 ビューの自動切り替え機能を活用できます。
@@ -647,12 +680,6 @@ Accept ヘッダーの確認
         return $response;
     }
 
-    // 3.4.0 より前
-    $file = $this->Attachments->getFile($id);
-    $this->response->file($file['path']);
-    // レスポンスオブジェクトを返すとコントローラーがビューの描画を中止します
-    return $this->response;
-
 上記の例のようにメソッドにファイルのパスを渡す必要があります。CakePHP は、
 `Cake\\Http\\Response::$_mimeTypes` に登録された、よく知られるファイルタイプであれば
 正しいコンテンツタイプヘッダーを送ります。 :php:meth:`Cake\\Http\\Response::withFile()` を呼ぶ前に
@@ -662,12 +689,6 @@ Accept ヘッダーの確認
 ダウンロードさせることができます。 ::
 
     $response = $this->response->withFile(
-        $file['path'],
-        ['download' => true, 'name' => 'foo']
-    );
-
-    // 3.4.0 より前
-    $this->response->file(
         $file['path'],
         ['download' => true, 'name' => 'foo']
     );
@@ -689,11 +710,8 @@ download
         $icsString = $this->Calendars->generateIcs();
         $response = $this->response;
 
-        // レスポンスのボディーに文字列コンテンツを挿入する (3.4.0 以降)
+        // レスポンスのボディーに文字列コンテンツを挿入する
         $response = $response->withStringBody($icsString);
-
-        // レスポンスのボディーに文字列コンテンツを挿入する (3.4.0 より前)
-        $response->body($icsString);
 
         $response = $response->withType('ics');
 
@@ -703,6 +721,13 @@ download
         // レスポンスオブジェクトを返すとコントローラーがビューの描画を中止します
         return $response;
     }
+
+コールバックはボディーを文字列として返すこともできます。 ::
+
+    $path = '/some/file.png';
+    $this->response->body(function () use ($path) {
+        return file_get_contents($path);
+    });
 
 ヘッダーの設定
 --------------
@@ -722,9 +747,6 @@ download
 
     // 既存のヘッダーに値を追加
     $response = $response->withAddedHeader('Set-Cookie', 'remember_me=1');
-
-    // 3.4.0 より前 - 一つのヘッダーを設定
-    $this->response->header('Location', 'http://example.com');
 
 セットされた際、ヘッダーは送られません。これらのヘッダーは、 ``Cake\Http\Server`` によって
 レスポンスが実際に送られるまで保持されます。
@@ -746,18 +768,12 @@ download
     $response = $response->withType('application/json')
         ->withStringBody(json_encode(['Foo' => 'bar']));
 
-.. versionadded:: 3.4.3
-    ``withStringBody()`` は 3.4.3 で追加されました。
-
 .. php:method:: withBody($body)
 
 ``withBody()`` を使って、 :php:class:`Zend\\Diactoros\\MessageTrait` によって提供される
 レスポンスボディーを設定するには、 ::
 
     $response = $response->withBody($stream);
-
-    // 3.4.0 より前でボディーを設定
-    $this->response->body('My Body');
 
 ``$stream`` が :php:class:`Psr\\Http\\Message\\StreamInterface`
 オブジェクトであることを確認してください。新しいストリームを作成する方法は、以下をご覧ください。
@@ -787,14 +803,6 @@ download
     });
     $response = $response->withBody($stream);
 
-    // 3.4.0 より前では、次のようにストリーミングレスポンスを作成することができます。
-    $file = fopen('/some/file.png', 'r');
-    $this->response->body(function () use ($file) {
-        rewind($file);
-        fpassthru($file);
-        fclose($file);
-    });
-
 文字コードの設定
 ----------------
 
@@ -803,9 +811,6 @@ download
 レスポンスの中で使われる文字コードの種類を設定します。 ::
 
     $this->response = $this->response->withCharset('UTF-8');
-
-    // 3.4.0 より前
-    $this->response->charset('UTF-8');
 
 ブラウザーキャッシュとの対話
 ----------------------------
@@ -819,9 +824,6 @@ download
     {
         // キャッシュの無効化
         $this->response = $this->response->withDisabledCache();
-
-        // 3.4.0 より前
-        $this->response->disableCache();
     }
 
 .. warning::
@@ -941,10 +943,16 @@ HTTP におけるキャッシュの検証はコンテンツが定期的に変化
     public function index()
     {
         $articles = $this->Articles->find('all');
-        $response = $this->response->withEtag($this->Articles->generateHash($articles));
+
+        // 記事内容の単純なチェックサムです
+        // 現実世界のアプリケーションでは、もっと効率的な実装を使用する必要があります
+        $checksum = md5(json_encode($articles));
+
+        $response = $this->response->withEtag($checksum);
         if ($response->checkNotModified($this->request)) {
             return $response;
         }
+
         $this->response = $response;
         // ...
     }
@@ -1012,29 +1020,27 @@ Not-Modified レスポンスの送信
 クッキーは、配列または :php:class:`Cake\Http\Cookie\Cookie` オブジェクトを使って
 レスポンスに追加することができます。 ::
 
-    // イミュータブル API (3.4.0 以上) を使って配列としてクッキーを追加
-    $this->response = $this->response->withCookie('remember_me', [
-        'value' => 'yes',
-        'path' => '/',
-        'httpOnly' => true,
-        'secure' => false,
-        'expire' => strtotime('+1 year')
-    ]);
+    use Cake\Http\Cookie\Cookie;
+    use DateTime;
 
-    // 3.4.0 より前
-    $this->response->cookie('remember', [
-        'value' => 'yes',
-        'path' => '/',
-        'httpOnly' => true,
-        'secure' => false,
-        'expire' => strtotime('+1 year')
+    // クッキーを追加
+    $this->response = $this->response->withCookie(Cookie::create(
+        'remember_me',
+        'yes',
+        // すべてのキーはオプションです
+        [
+            'expires' => new DateTime('+1 year'),
+            'path' => '',
+            'domain' => '',
+            'secure' => false,
+            'http' => false,
+        ]
     ]);
 
 クッキーオブジェクトの使い方は :ref:`creating-cookies` セクションをご覧ください。
 ``withExpiredCookie()`` を使ってレスポンスに期限切れのクッキーを送ることができます。
 これにより、ブラウザはローカルクッキーを削除します。 ::
 
-    // 3.5.0 以降
     $this->response = $this->response->withExpiredCookie('remember_me');
 
 .. _cors-headers:
@@ -1042,11 +1048,11 @@ Not-Modified レスポンスの送信
 クロスオリジンリクエストヘッダー（CORS）の設定
 ==============================================
 
-3.2 から、 `HTTP アクセス制御
+`HTTP アクセス制御
 <https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS>`__ 関連の
 ヘッダーを定義するために、流れるようなインターフェイスの ``cors()`` メソッドが使用できます。 ::
 
-    $this->response->cors($this->request)
+    $this->response = $this->response->cors($this->request)
         ->allowOrigin(['*.cakephp.org'])
         ->allowMethods(['GET', 'POST'])
         ->allowHeaders(['X-CSRF-Token'])
@@ -1057,16 +1063,13 @@ Not-Modified レスポンスの送信
 
 以下の基準が満たされた場合のみ、 CORS 関連ヘッダーはレスポンスに適用されます。
 
-1. リクエストは ``Origin`` ヘッダーがあります。
-2. リクエストの ``Origin`` 値が許可された Origin 値のいずれかと一致します。
-
-.. versionadded:: 3.2
-    ``CorsBuilder`` は 3.2 で追加されました。
+#. リクエストは ``Origin`` ヘッダーがあります。
+#. リクエストの ``Origin`` 値が許可された Origin 値のいずれかと一致します。
 
 不変レスポンスに伴うよくある失敗
 =================================
 
-CakePHP 3.4.0 以降、レスポンスオブジェクトはレスポンスを不変オブジェクトとして扱う
+レスポンスオブジェクトはレスポンスを不変オブジェクトとして扱う
 いくつかのメソッドを提供しています。不変オブジェクトは、偶発的な副作用の追跡を困難になるのを予防し、
 その変更順序のリファクタリングに起因するメソッド呼び出しに起因する間違いを減らします。
 それらは多くの利点を提供しますが、不変オブジェクトには慣れが必要です。
@@ -1143,10 +1146,14 @@ CakePHP 3.4.0 以降、レスポンスオブジェクトはレスポンスを不
     コレクションは不変であり、クッキーを追加したりコレクションからクッキーを削除すると、
     *新規に* コレクションが作成されることに注意してください。
 
-クッキーを ``Response`` オブジェクトに追加するために ``withCookie()``
-メソッドを使ってください。 ::
+レスポンスにクッキーオブジェクトを追加することができます。 ::
 
+    // クッキーを1つ追加
     $response = $this->response->withCookie($cookie);
+
+    // クッキーコレクション全体を置き換える
+    $response = $this->response->withCookieCollection($cookies);
+
 
 レスポンスにセットするクッキーは :ref:`encrypted-cookie-middleware` を使って
 暗号化することができます。
@@ -1178,9 +1185,6 @@ CakePHP 3.4.0 以降、レスポンスオブジェクトはレスポンスを不
     // 状態のチェック
     $cookie->isHttpOnly();
     $cookie->isSecure();
-
-.. versionadded:: 3.5.0
-    ``CookieCollection`` と ``Cookie`` は 3.5.0 で追加されました。
 
 .. meta::
     :title lang=ja: リクエストとレスポンスオブジェクト
