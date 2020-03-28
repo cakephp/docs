@@ -425,9 +425,12 @@ post 形式でデータを交換することがしばしばあります。 :php:
 セッションデータ
 ----------------
 
-特定のリクエストのセッションにアクセスするには、 ``session()`` メソッドを使用します。 ::
+特定のリクエストのセッションにアクセスするには、 ``getSession()`` メソッドか ``session`` 属性を使用します。 ::
 
-    $userName = $this->request->session()->read('Auth.User.name');
+    $session = $this->request->getSession();
+    $session = $this->request->getAttribute('session');
+
+    $userName = $session->read('Auth.User.name');
 
 詳細については、セッションオブジェクトを使用する方法のための :doc:`/development/sessions`
 ドキュメントを参照してください。
@@ -466,9 +469,6 @@ HTTP メソッドの読み込み
     // POST を出力
     echo $request->getMethod();
 
-    // 3.4.0 より前
-    echo $request->method();
-
 アクションが受け入れる HTTP メソッドの制限
 -------------------------------------------
 
@@ -489,7 +489,7 @@ HTTP ヘッダーの読み込み
 -----------------------
 
 リクエストで使われている ``HTTP_*`` ヘッダーにアクセスできます。
-例えば::
+例えば ::
 
     // 文字列としてヘッダーを取得
     $userAgent = $this->request->getHeaderLine('User-Agent');
@@ -499,9 +499,6 @@ HTTP ヘッダーの読み込み
 
     // ヘッダーの存在を確認
     $hasAcceptHeader = $this->request->hasHeader('Accept');
-
-    // 3.4.0 より前
-    $userAgent = $this->request->header('User-Agent');
 
 いくつかの apache インストール環境では、 ``Authorization`` ヘッダーにアクセスできませんが、
 CakePHP は、必要に応じて apache 固有のメソッドを介して利用できるようにします。
@@ -530,6 +527,15 @@ CakePHP は、必要に応じて apache 固有のメソッドを介して利用�
     $host = $this->request->host();
     $scheme = $this->request->scheme();
     $clientIp = $this->request->clientIp();
+
+一度プロキシが信頼されると、 ``clientIp()`` メソッドは ``X-Forwarded-For``
+ヘッダの中の *最後の* IPドレスを使用します。
+もし、アプリケーションが複数のプロキシの背後にある場合は
+``setTrustedProxies()`` を使ってコントロール内のプロキシのIPアドレスを定義することができます。 ::
+
+    $request->setTrustedProxies(['127.1.1.1', '127.8.1.3']);
+
+プロキシが信頼された後は ``clientIp()`` は ``X-Forwarded-For`` ヘッダの最初のIPアドレスを使用します。
 
 Accept ヘッダーの確認
 ---------------------
