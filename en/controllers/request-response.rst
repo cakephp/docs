@@ -132,11 +132,6 @@ be accessed like this::
     $attachment = $this->request->getData('attachment');
 
 By default file uploads are represented in the request data as objects that implement
-`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__.
-In the above example, ``$attachment`` would hold an object, in the current implementation it would by default be an
-instance of ``\Zend\Diactoros\UploadedFile``.
-
-By default file uploads are represented in the request data as objects that implement
 `\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__. In the current
 implementation, the ``$attachment`` variable in the above example would by default hold an instance of
 ``\Laminas\Diactoros\UploadedFile``.
@@ -210,7 +205,7 @@ Returns all uploaded files in a normalized array structure. For the above exampl
 ``attachment``, the structure would look like::
 
     [
-          'attachment' => object(Zend\Diactoros\UploadedFile) {
+          'attachment' => object(Laminas\Diactoros\UploadedFile) {
               // ...
           }
     ]
