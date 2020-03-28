@@ -283,9 +283,6 @@ XML や JSON のリクエストボディーのコンテンツと対話すると�
 
     $env = $this->request->getServerParams();
 
-.. versionadded:: 3.4.0
-    ``getServerParams()`` は、3.4.0 で追加されました。
-
 XML または JSON データ
 ----------------------
 
@@ -322,11 +319,6 @@ post 形式でデータを交換することがしばしばあります。 :php:
 
     // /subdir/ を保持
     $base = $request->getAttribute('webroot');
-
-    // 3.4.0 より前
-    $webroot = $request->webroot;
-    $base = $request->base;
-    $here = $request->here();
 
 .. _check-the-request:
 
@@ -374,6 +366,20 @@ post 形式でデータを交換することがしばしばあります。 :php:
         'options' => ['192.168.0.101', '192.168.0.100']
     ]);
 
+    // header detector を value comparison 付きで追加
+    $this->request->addDetector('fancy', [
+        'env' => 'CLIENT_IP',
+        'header' => ['X-Fancy' => 1]
+    ]);
+
+    // header detector を callable comparison 付きで追加
+    $this->request->addDetector('fancy', [
+        'env' => 'CLIENT_IP',
+        'header' => ['X-Fancy' => function ($value, $header) {
+            return in_array($value, ['1', '0', 'yes', 'no'], true);
+        }]
+    ]);
+
     // callback detector を追加。有効な callable 形式でなければなりません。
     $this->request->addDetector(
         'awesome',
@@ -382,18 +388,15 @@ post 形式でデータを交換することがしばしばあります。 :php:
         }
     );
 
-    // 追加の引数を使用する検出器を追加。3.3.0 以降。
+    // 追加の引数を使用する detector を追加
     $this->request->addDetector(
-        'controller',
-        function ($request, $name) {
-            return $request->getParam('controller') === $name;
-        }
+        'csv',
+        [
+            'accept' => ['text/csv'],
+            'param' => '_ext',
+            'value' => 'csv',
+        ]
     );
-
-``Request`` は、 :php:meth:`Cake\\Http\\ServerRequest::domain()` 、
-:php:meth:`Cake\\Http\\ServerRequest::subdomains()` 、
-:php:meth:`Cake\\Http\\ServerRequest::host()` のようにサブドメインで
-アプリケーションを助けるためのメソッドを含みます。
 
 利用可能な組み込みの検出器は以下の通りです。
 
@@ -413,8 +416,11 @@ post 形式でデータを交換することがしばしばあります。 :php:
 * ``is('xml')`` リクエストが 「xml」拡張子を持ち、「application/xml」または「text/xml」
   MIME タイプを受付けるかどうかを調べます。
 
-.. versionadded:: 3.3.0
-    3.3.0 から検出器は追加のパラメーターが受け取れます。
+``ServerRequest`` は、
+:php:meth:`Cake\\Http\\ServerRequest::domain()` 、
+:php:meth:`Cake\\Http\\ServerRequest::subdomains()` 、
+:php:meth:`Cake\\Http\\ServerRequest::host()`
+のようにサブドメインでアプリケーションを助けるためのメソッドを含みます。
 
 セッションデータ
 ----------------
