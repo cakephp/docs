@@ -110,6 +110,144 @@ For non-existent names the ``$default`` value will be returned::
 
     $data = $this->request->getParsedBody();
 
+ファイルのアップロード
+----------------------
+
+アップロードしたファイルは、上で説明した :php:meth:`Cake\\\Http\ServerRequest::getData()`
+メソッドを使用して、リクエスト内容のデータからアクセスすることができます。
+例えば、name属性が ``attachment`` であるinput要素のファイルは、以下のようにアクセスできます。 ::
+
+
+    $attachment = $this->request->getData('attachment');
+
+
+デフォルトでは、ファイルのアップロードは、リクエストデータの中で、
+`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__
+を実装したオブジェクトとして表現されます。
+上記の例では、 ``$attachment`` がオブジェクトを保持していますが、
+現在の実装では、上記の例の  ``$attachment`` 変数は、
+デフォルトでは ``\LaminasDiactorosUploadedFile`` のインスタンスとなります。
+
+Accessing the uploaded file details is fairly simple, here's how you can obtain the same data as provided by the old
+style file upload array::
+
+アップロードしたファイルへのアクセスは非常に簡単です。
+ここでは、古い形式のファイルアップロード配列で提供されていたことと同じようにデータを取得する方法を説明します。 ::
+
+    $name = $attachment->getClientFilename();
+    $type = $attachment->getClientMediaType();
+    $size = $attachment->getSize();
+    $tmpName = $attachment->getStream()->getMetadata('uri');
+    $error = $attachment->getError();
+
+アップロードされたファイルを一時的な場所から目的の場所に移動させるのに
+手動で一時的なファイルにアクセスする必要はありません。
+代わりに ``moveTo()``メソッドを使用することで簡単に行うことができます。 ::
+
+    $attachment->moveTo($targetPath);
+
+HTTP環境では、 ``moveTo()`` メソッドはファイルが実際にアップロードされたファイルであるかどうかを
+自動的に検証し、必要に応じて例外をスローします。
+アップロードされたファイルという概念自体がないCLI環境では、
+それに関係なくファイルを移動できるので、ファイルアップロードのテストが非常に簡単になります。
+
+ファイルアップロード配列を使用するように戻すには、
+設定値 ``App.uploadedFilesAsObjects`` を ``false`` に設定してください。
+例えば、 ``config/app.php`` で以下のように設定します。 ::
+
+    return [
+        // ...
+        'App' => [
+            // ...
+            'uploadedFilesAsObjects' => false,
+        ],
+        // ...
+    ];
+
+With the option disabled, the file uploads are represented in the request data as arrays,
+with a normalized structure　that remains the same even for nested inputs/names,
+which is different from how PHP represents them in the ``$_FILES`` superglobal (refer to `the PHP manual <https://www.php.net/manual/en/features.file-upload.php>`__ for more information),
+ie the ``$attachment`` value would look something like this::
+
+このオプションを無効にすると、ファイルのアップロードはリクエストデータの中で配列として表現されます。
+それは、ネストされた入力/名前があっても変わらない正規化された構造を持っています。
+これは PHP のスーパーグローバル変数 ``$_FILES`` で表現する方法とは異なります。
+(詳細は `PHPマニュアル <https://www.php.net/manual/en/features.file-upload.php>`__ を参照してください)。
+つまり、 ``$attachment`` の値は次のようになります。 ::
+
+    [
+        'name' => 'attachment.txt',
+        'type' => 'text/plain',
+        'size' => 123,
+        'tmp_name' => '/tmp/hfz6dbn.tmp'
+        'error' => 0
+    ]
+
+.. tip::
+
+    アップロードされたファイルは、リクエストデータとは別のオブジェクトとして
+    :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` と
+    :php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()` メソッドを使用しています。
+    これらのメソッドは ``App.uploadedFilesAsObjects`` の設定に関係なく、常にオブジェクトを返します。
+
+
+.. php:method:: getUploadedFile($path)
+
+アップロードされたファイルの特定のパスで返します。
+パスは :php:meth:`Cake\\Http\\\ServerRequest::getData()` メソッドと同じドット構文を使用します。 ::
+
+    $attachment = $this->request->getUploadedFile('attachment');
+
+:php:meth:`Cake\\Http\\ServerRequest::getData()` と違って、 :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()`
+は、実際にアップロードされたファイルが指定されたパスに存在する場合にのみデータを返します。
+通常であれば、ファイルではないリクエストのbodyデータが指定されたパスに存在する場合、このメソッドは ``null``を返します。
+
+.. php:method:: getUploadedFiles()
+
+アップロードされたすべてのファイルを正規化された配列構造で返します。
+上の例では、ファイルの入力名が ``attachment`` の場合、構造は次のようになります。 ::
+
+    [
+          'attachment' => object(Laminas\Diactoros\UploadedFile) {
+              // ...
+          }
+    ]
+
+.. php:method:: withUploadedFiles(array $files)
+
+このメソッドは、リクエストオブジェクトのアップロードファイルを設定します。
+これは `\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__.
+を実装したオブジェクトの配列を受け付けます。
+これは、既存のアップロードされている可能性のあるすべてのファイルを置き換えます。 ::
+
+    $files = [
+        'MyModel' => [
+            'attachment' => new \Laminas\Diactoros\UploadedFile(
+                $streamOrFile,
+                $size,
+                $errorStatus,
+                $clientFilename,
+                $clientMediaType
+            ),
+            'anotherAttachment' => new \Laminas\Diactoros\UploadedFile(
+                '/tmp/hfz6dbn.tmp',
+                123,
+                \UPLOAD_ERR_OK,
+                'attachment.txt',
+                'text/plain'
+            ),
+        ],
+    ];
+
+    $this->request = $this->request->withUploadedFiles($files);
+
+.. note::
+
+    このメソッドでリクエストに追加したアップロードファイルは、リクエスト本文では利用 *できません*。
+    すなわち、 :php:meth:`Cake\\Http\\ServerRequest::getData()` を経由して受け取ることはできません！
+    リクエストデータに（も）必要な場合は、 :php:meth:`Cake\\Http\\ServerRequest::withData()` か
+    :php:meth:`Cake\\Http\\ServerRequest::withParsedBody()` を経由して設定する必要があります。
+
 PUT、PATCH または DELETE データ
 -------------------------------
 
