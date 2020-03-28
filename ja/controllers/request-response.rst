@@ -39,9 +39,6 @@ CakePHP のリクエストオブジェクトは、入ってきたリクエスト
 
     $controllerName = $this->request->getParam('controller');
 
-    // 3.4.0 より前
-    $controllerName = $this->request->param('controller');
-
 全てのルーティングパラメーターを配列として取得するためには ``getAttribute()`` を使用します。 ::
 
     $params = $this->request->getAttribute('params');
@@ -72,9 +69,6 @@ CakePHP のリクエストオブジェクトは、入ってきたリクエスト
     // URL は /posts/index?page=1&sort=title
     $page = $this->request->getQuery('page');
 
-    // 3.4.0 より前
-    $this->request->query('page');
-
 query プロパティーに直接アクセスするか、エラーが発生しない方法で URL クエリー配列を読むために
 ``getQuery()`` メソッドを使用することができます。キーが存在しない場合、 ``null`` が返ります。 ::
 
@@ -88,24 +82,33 @@ query プロパティーに直接アクセスするか、エラーが発生し�
 
     $query = $this->request->getQueryParams();
 
-.. versionadded:: 3.4.0
-    ``getQueryParams()`` と ``getQuery()`` は 3.4.0 で追加されました。
-
 リクエストのボディーデータ
 --------------------------
 
 .. php:method:: getData($name, $default = null)
 
 すべての POST データは :php:meth:`Cake\\Http\\ServerRequest::getData()` を使ってアクセスされます。
-フォームデータが ``data`` 接頭辞を含んでいる場合、接頭辞は取り除かれるでしょう。例えば::
+フォームデータが ``data`` 接頭辞を含んでいる場合、接頭辞は取り除かれるでしょう。例えば ::
 
     // name 属性が 'MyModel[title]' の入力は次のようにアクセスします。
-    $title = $this->request->getData('MyModel.title');
+    $title = $this->request->getData('title');
 
-キーが存在しない場合、 ``null`` が返ります。 ::
+ドット区切りの名前を使用して、ネストされたデータにアクセスできます。 例えば ::
+
+    $value = $this->request->getData('address.street_name');
+
+For non-existent names the ``$default`` value will be returned::
+存在しない名前の場合は ``$default`` の値が返されます。 ::
 
     $foo = $this->request->getData('Value.that.does.not.exist');
     // $foo == null
+
+また、異なるリクエストのボディをパースするために :ref:`ボディパーサミドルウェア` を使うこともできます。
+これは ``ServerRequest::getData()`` でアクセスできるようにするための配列です。
+
+すべてのデータパラメータにアクセスしたい場合は ``getParsedBody()`` を使うことができます。 ::
+
+    $data = $this->request->getParsedBody();
 
 PUT、PATCH または DELETE データ
 -------------------------------
