@@ -587,11 +587,6 @@ Accept ヘッダーの確認
 クッキーコレクションの操作方法については、 :php:class:`Cake\\Http\\Cookie\\CookieCollection`
 のドキュメントをご覧ください。
 
-.. versionadded:: 3.5.0
-    ``ServerRequest::getCookieCollection()`` は 3.5.0 で追加されました。
-
-.. index:: $this->response
-
 レスポンス
 ==========
 
