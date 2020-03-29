@@ -97,7 +97,6 @@ query プロパティーに直接アクセスするか、エラーが発生し�
 
     $value = $this->request->getData('address.street_name');
 
-For non-existent names the ``$default`` value will be returned::
 存在しない名前の場合は ``$default`` の値が返されます。 ::
 
     $foo = $this->request->getData('Value.that.does.not.exist');
@@ -113,13 +112,11 @@ For non-existent names the ``$default`` value will be returned::
 ファイルのアップロード
 ----------------------
 
-アップロードしたファイルは、上で説明した :php:meth:`Cake\\\Http\ServerRequest::getData()`
+アップロードしたファイルは、上で説明した :php:meth:`Cake\\Http\\ServerRequest::getData()`
 メソッドを使用して、リクエスト内容のデータからアクセスすることができます。
 例えば、name属性が ``attachment`` であるinput要素のファイルは、以下のようにアクセスできます。 ::
 
-
     $attachment = $this->request->getData('attachment');
-
 
 デフォルトでは、ファイルのアップロードは、リクエストデータの中で、
 `\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__
@@ -127,9 +124,6 @@ For non-existent names the ``$default`` value will be returned::
 上記の例では、 ``$attachment`` がオブジェクトを保持していますが、
 現在の実装では、上記の例の  ``$attachment`` 変数は、
 デフォルトでは ``\LaminasDiactorosUploadedFile`` のインスタンスとなります。
-
-Accessing the uploaded file details is fairly simple, here's how you can obtain the same data as provided by the old
-style file upload array::
 
 アップロードしたファイルへのアクセスは非常に簡単です。
 ここでは、古い形式のファイルアップロード配列で提供されていたことと同じようにデータを取得する方法を説明します。 ::
@@ -142,7 +136,7 @@ style file upload array::
 
 アップロードされたファイルを一時的な場所から目的の場所に移動させるのに
 手動で一時的なファイルにアクセスする必要はありません。
-代わりに ``moveTo()``メソッドを使用することで簡単に行うことができます。 ::
+代わりに ``moveTo()`` メソッドを使用することで簡単に行うことができます。 ::
 
     $attachment->moveTo($targetPath);
 
@@ -163,11 +157,6 @@ HTTP環境では、 ``moveTo()`` メソッドはファイルが実際にアッ�
         ],
         // ...
     ];
-
-With the option disabled, the file uploads are represented in the request data as arrays,
-with a normalized structure　that remains the same even for nested inputs/names,
-which is different from how PHP represents them in the ``$_FILES`` superglobal (refer to `the PHP manual <https://www.php.net/manual/en/features.file-upload.php>`__ for more information),
-ie the ``$attachment`` value would look something like this::
 
 このオプションを無効にすると、ファイルのアップロードはリクエストデータの中で配列として表現されます。
 それは、ネストされた入力/名前があっても変わらない正規化された構造を持っています。
@@ -200,7 +189,7 @@ ie the ``$attachment`` value would look something like this::
 
 :php:meth:`Cake\\Http\\ServerRequest::getData()` と違って、 :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()`
 は、実際にアップロードされたファイルが指定されたパスに存在する場合にのみデータを返します。
-通常であれば、ファイルではないリクエストのbodyデータが指定されたパスに存在する場合、このメソッドは ``null``を返します。
+通常であれば、ファイルではないリクエストのbodyデータが指定されたパスに存在する場合、このメソッドは ``null`` を返します。
 
 .. php:method:: getUploadedFiles()
 
@@ -581,17 +570,11 @@ Accept ヘッダーの確認
     // ハッシュとして全てのクッキーを取得
     $cookies = $this->request->getCookieParams();
 
-    // CookieCollection インスタンス (3.5.0 以降) を取得
-    $cookies = $this->request->getCookieCollection()
-
 クッキーコレクションの操作方法については、 :php:class:`Cake\\Http\\Cookie\\CookieCollection`
 のドキュメントをご覧ください。
 
 アップロードされたファイル
 --------------------------
-
-Requests expose the uploaded file data in ``getData()`` or
-``getUploadedFiles()`` as ``UploadedFileInterface`` objects::
 
 リクエストはアップロードされたファイルのデータを ``getData()`` または ``getUploadedFiles()`` で
 ``UploadedFileInterface`` オブジェクトとして公開します。 ::
