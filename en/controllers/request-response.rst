@@ -791,17 +791,17 @@ To set a string as the response body, do the following::
 .. php:method:: withBody($body)
 
 To set the response body, use the ``withBody()`` method, which is provided by the
-:php:class:`Zend\\Diactoros\\MessageTrait`::
+:php:class:`Laminas\\Diactoros\\MessageTrait`::
 
     $response = $response->withBody($stream);
 
 Be sure that ``$stream`` is a :php:class:`Psr\\Http\\Message\\StreamInterface` object.
 See below on how to create a new stream.
 
-You can also stream responses from files using :php:class:`Zend\\Diactoros\\Stream` streams::
+You can also stream responses from files using :php:class:`Laminas\\Diactoros\\Stream` streams::
 
     // To stream from a file
-    use Zend\Diactoros\Stream;
+    use Laminas\Diactoros\Stream;
 
     $stream = new Stream('/path/to/file', 'rb');
     $response = $response->withBody($stream);
