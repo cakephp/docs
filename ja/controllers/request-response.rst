@@ -770,7 +770,7 @@ download
 
 .. php:method:: withBody($body)
 
-``withBody()`` を使って、 :php:class:`Zend\\Diactoros\\MessageTrait` によって提供される
+``withBody()`` を使って、 :php:class:`Laminas\\Diactoros\\MessageTrait` によって提供される
 レスポンスボディーを設定するには、 ::
 
     $response = $response->withBody($stream);
@@ -778,11 +778,11 @@ download
 ``$stream`` が :php:class:`Psr\\Http\\Message\\StreamInterface`
 オブジェクトであることを確認してください。新しいストリームを作成する方法は、以下をご覧ください。
 
-:php:class:`Zend\\Diactoros\\Stream` ストリームを使用して、
+:php:class:`Laminas\\Diactoros\\Stream` ストリームを使用して、
 ファイルからレスポンスをストリーム化することもできます。 ::
 
     // ファイルからのストリーム化
-    use Zend\Diactoros\Stream;
+    use Laminas\Diactoros\Stream;
 
     $stream = new Stream('/path/to/file', 'rb');
     $response = $response->withBody($stream);
