@@ -613,14 +613,11 @@ an array of conditions::
             'OR' => [['view_count' => 2], ['view_count' => 3]],
         ]);
 
-The above would generate SQL like::
+The above would generate SQL like
+
+.. code-block:: sql
 
     SELECT * FROM articles WHERE author_id = 3 AND (view_count = 2 OR view_count = 3)
-
-.. deprecated:: 3.5.0
-    ``Query::orWhere()`` creates hard to predict SQL based on the current query state.
-    Use ``Query::where()`` instead as it has more predictable and easier
-    to understand behavior.
 
 If you'd prefer to avoid deeply nested arrays, you can use the callback form of
 ``where()`` to build your queries. The callback accepts a QueryExpression which allows
