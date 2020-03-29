@@ -23,7 +23,6 @@ SQL インジェクション攻撃から守っています。
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // 新しいクエリーを始めます。
@@ -42,7 +41,6 @@ SQL インジェクション攻撃から守っています。
 
     use Cake\ORM\TableRegistry;
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
     $query = TableRegistry::getTableLocator()->get('Articles')->find();
 
     foreach ($query as $article) {
@@ -260,17 +258,15 @@ CakePHP では ``SELECT`` クエリーを簡単につくれます。取得する
     $query = $articles->find()
         ->order(['created' => 'DESC'], Query::OVERWRITE);
 
-.. versionadded:: 3.0.12
+複合的な式でソートする必要があるなら ``order`` に加えて、 ``orderAsc`` と ``orderDesc``
+メソッドが使えます。 ::
 
-    複合的な式でソートする必要があるなら ``order`` に加えて、 ``orderAsc`` と ``orderDesc``
-    メソッドが使えます。 ::
-
-        $query = $articles->find();
-        $concat = $query->func()->concat([
-            'title' => 'identifier',
-            'synopsis' => 'identifier'
-        ]);
-        $query->orderAsc($concat);
+    $query = $articles->find();
+    $concat = $query->func()->concat([
+        'title' => 'identifier',
+        'synopsis' => 'identifier'
+    ]);
+    $query->orderAsc($concat);
 
 行の数を制限したり、行のオフセットをセットするためには、 ``limit()`` と ``page()``
 メソッドを使うことができます。 ::
@@ -301,9 +297,6 @@ CakePHP では ``SELECT`` クエリーを簡単につくれます。取得する
         ->select(['slug' => $query->func()->concat(['title' => 'identifier', '-', 'id' => 'identifier'])])
         ->select($articlesTable); // articles のすべてのフィールドを選択する
 
-.. versionadded:: 3.1
-    テーブルオブジェクトを select() に渡すのは 3.1 で追加されました。
-
 テーブル上のいくつかのフィールド以外のすべてのフィールドを選択したい場合には
 ``selectAllExcept()`` を使用できます。 ::
 
@@ -313,9 +306,6 @@ CakePHP では ``SELECT`` クエリーを簡単につくれます。取得する
     $query->selectAllExcept($articlesTable, ['published']);
 
 アソシエーションが含まれる場合、 ``Association`` オブジェクトを渡すこともできます。
-
-.. versionadded:: 3.6.0
-    ``selectAllExcept()`` メソッドが追加されました。
 
 .. _using-sql-functions:
 
@@ -333,31 +323,37 @@ CakePHP の ORM では抽象化された馴染み深い SQL 関数をいくつ�
 
 多くのおなじみの関数が ``func()`` メソッドとともに作成できます:
 
-- ``sum()`` 合計を算出します。引数はリテラル値として扱われます。
-- ``avg()`` 平均値を算出します。引数はリテラル値として扱われます。
-- ``min()`` カラムの最小値を算出します。引数はリテラル値として扱われます。
-- ``max()`` カラムの最大値を算出します。引数はリテラル値として扱われます。
-- ``count()`` 件数を算出します。引数はリテラル値として扱われます。
-- ``concat()`` ２つの値を結合します。引数はリテラルだとマークされない限り、
-  バインドパラメーターとして扱われます。
-- ``coalesce()`` Coalesce を算出します。引数はリテラルだとマークされない限り、
-  バインドパラメーターとして扱われます。
-- ``dateDiff()`` ２つの日にち/時間の差を取得します。引数はリテラルだとマークされない限り、
-  バインドパラメーターとして扱われます。
-- ``now()`` 'time' もしくは 'date' を取得します。引数で現在の時刻もしくは日付のどちらを
-  取得するのかを指定できます。
-- ``extract()`` SQL 式から特定の日付部分(年など)を返します。
-- ``dateAdd()`` 日付式に単位時間を追加します。
-- ``dayOfWeek()`` SQL の WEEKDAY 関数を呼ぶ FunctionExpression を返します。
-
-.. versionadded:: 3.1
-
-    ``extract()``、 ``dateAdd()``、 ``dayOfWeek()`` メソッドが追加されました。
+``rand()``
+    0から1の間の乱数をSQLで生成します。
+``sum()``
+    合計を算出します。 `引数はリテラル値として扱われます。`
+``avg()``
+    平均値を算出します。 `引数はリテラル値として扱われます。`
+``min()``
+    カラムの最小値を算出します。 `引数はリテラル値として扱われます。`
+``max()``
+    カラムの最大値を算出します。 `引数はリテラル値として扱われます。`
+``count()``
+    件数を算出します。 `引数はリテラル値として扱われます。`
+``concat()``
+    ２つの値を結合します。 `引数はバインドパラメーターとして扱われます。`
+``coalesce()``
+    Coalesce を算出します。 `引数はバインドパラメーターとして扱われます。`
+``dateDiff()``
+    ２つの日にち/時間の差を取得します。 `引数はバインドパラメーターとして扱われます。`
+``now()``
+    デフォルトでは日付と時刻を返しますが、 'time' または 'date' を指定してこれらの値のみを返すこともできます。
+``extract()``
+    SQL 式から特定の日付部分(年など)を返します。
+``dateAdd()``
+    日付式に単位時間を加算します。
+``dayOfWeek()``
+    SQL の WEEKDAY 関数を呼ぶ FunctionExpression を返します。
 
 SQL 関数に渡す引数には、リテラルの引数と、バインドパラメーターの２種類がありえます。
 識別子やリテラルのパラメーターにより、カラムや他の SQL リテラルを参照できます。
 バインドパラメーターにより、ユーザーデータを SQL 関数へと安全に渡すことができます。
-たとえば::
+たとえば ::
 
     $query = $articles->find()->innerJoinWith('Categories');
     $concat = $query->func()->concat([
@@ -365,21 +361,38 @@ SQL 関数に渡す引数には、リテラルの引数と、バインドパラ�
         ' - CAT: ',
         'Categories.name' => 'identifier',
         ' - Age: ',
-        '(DATEDIFF(NOW(), Articles.created))' => 'literal',
+        $query->func()->dateDiff(
+            'NOW()' => 'literal',
+            'Articles.created' => 'identifier'
+        )
     ]);
     $query->select(['link_title' => $concat]);
 
 ``literal`` の値を伴う引数を作ることで、 ORM はそのキーをリテラルな SQL 値として扱うべきであると
 知ることになります。 ``identifier`` の値を伴う引数を作ることで、ORM は、そのキーがフィールドの
-識別子として扱うべきであると知ることになります。上記では MySQL にて下記の SQL が生成されます。 ::
+識別子として扱うべきであると知ることになります。
 
-    SELECT CONCAT(Articles.title, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created))) FROM articles;
+上記では MySQL にて下記の SQL が生成されます。
+
+.. code-block:: mysql
+
+    SELECT CONCAT(
+        Articles.title,
+        :c0,
+        Categories.name,
+        :c1,
+        (DATEDIFF(NOW(), Articles.created))
+    ) FROM articles;
 
 クエリーが実行される際には、 ``:c0`` という値に ``' - CAT'`` というテキストがバインドされることになります。
+``dateDiff`` 式は適切なSQLに変換されます。
 
-上記の関数に加え、 ``func()`` メソッドは ``year`` 、 ``date_format`` 、 ``convert`` などといった、
-一般的な SQL 関数を構築するのに使います。
-たとえば::
+カスタム関数
+^^^^^^^^^^^^
+
+もし ``func()`` が必要なSQL関数をラップしていない場合は、 ``func()`` を使って直接呼び出すことができ、
+引数やユーザデータを安全に渡すことができます。
+カスタム関数には適切な型の引数を渡すようにしてください。 ::
 
     $query = $articles->find();
     $year = $query->func()->year([
@@ -394,24 +407,16 @@ SQL 関数に渡す引数には、リテラルの引数と、バインドパラ�
         'timeCreated' => $time
     ]);
 
-このようになります。
+これらのカスタム関数は、 MySQL にて下記の SQL を生成します。
 
 .. code-block:: mysql
 
-    SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
+    SELECT YEAR(created) as yearCreated,
+           DATE_FORMAT(created, '%H:%i') as timeCreated
+    FROM articles;
 
-安全ではないデータを、 SQL 関数やストアードプロシージャーに渡す必要がある際には必ず、
-関数ビルダーを使うということを覚えておいてください。 ::
-
-    // ストアードプロシージャーを使う
-    $query = $articles->find();
-    $lev = $query->func()->levenshtein([$search, 'LOWER(title)' => 'literal']);
-    $query->where(function (QueryExpression $exp) use ($lev) {
-        return $exp->between($lev, 0, $tolerance);
-    });
-
-    // 生成される SQL はこうなります
-    WHERE levenshtein(:c0, lower(street)) BETWEEN :c1 AND :c2
+.. note::
+    信頼されていないユーザのデータを任意のSQL関数に渡すには ``func()`` を使ってください。
 
 集約 - Group と Having
 ----------------------
