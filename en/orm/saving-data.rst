@@ -659,7 +659,7 @@ There are two ways of protecting you against this problem. The first one is by
 setting the default columns that can be safely set from a request using the
 :ref:`entities-mass-assignment` feature in the entities.
 
-The second way is by using the ``fieldList`` option when creating or merging
+The second way is by using the ``fields`` option when creating or merging
 data into an entity::
 
     // Contains ['user_id' => 100, 'title' => 'Hacked!'];
@@ -677,7 +677,7 @@ You can also control which properties can be assigned for associations::
     // and the tag name is the only column that can be set
     $entity = $this->patchEntity($entity, $data, [
         'fields' => ['title', 'tags'],
-        'associated' => ['Tags' => ['fieldList' => ['name']]]
+        'associated' => ['Tags' => ['fields' => ['name']]]
     ]);
     $this->save($entity);
 
