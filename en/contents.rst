@@ -87,7 +87,7 @@ Contents
     Bake <https://book.cakephp.org/bake/2/>
     Debug Kit <https://book.cakephp.org/debugkit/4/>
     Migrations <https://book.cakephp.org/migrations/3/>
-    Elasticsearch <https://book.cakephp.org/elasticsearch/2/en/>
+    Elasticsearch <https://book.cakephp.org/elasticsearch/3/en/>
 
 .. toctree::
     :maxdepth: 3

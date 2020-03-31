@@ -62,9 +62,13 @@ configurations allowing you to easily vary these libraries in each environment.
 
 For local development, CakePHP leverages `dotenv
 <https://github.com/josegonzalez/php-dotenv>`_ to allow easy local development using
-environment variables. You will see a ``config/.env.example`` in your
+environment variables. Use composer to require this library and then 
+there is a block of code in ``bootstrap.php`` that needs to be uncommented to harness it.
+
+You will see a ``config/.env.example`` in your
 application. By copying this file into ``config/.env`` and customizing the
 values you can configure your application.
+    
 
 You should avoid committing the ``config/.env`` file to your repository and
 instead use the ``config/.env.example`` as a template with placeholder values so

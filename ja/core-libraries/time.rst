@@ -3,17 +3,16 @@
 
 .. php:namespace:: Cake\I18n
 
-.. php:class:: Time
+.. php:class:: FrozenTime
 
 :php:class:`TimeHelper` の機能を ``View`` の外で使いたい場合は、
-``Time`` クラスを利用してください。 ::
+``FrozenTime`` クラスを利用してください。 ::
 
-    use Cake\I18n\Time;
+    use Cake\I18n\FrozenTime;
 
     class UsersController extends AppController
     {
-
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Auth');
@@ -21,22 +20,17 @@
 
         public function afterLogin()
         {
-            $time = new Time($this->Auth->user('date_of_birth'));
+            $time = new FrozenTime($this->Auth->user('date_of_birth'));
             if ($time->isToday()) {
-                // 誕生日祝いのメッセージでユーザーに挨拶
+                / 誕生日祝いのメッセージでユーザーに挨拶
                 $this->Flash->success(__('Happy birthday to you...'));
             }
         }
     }
 
-内部的には、この ``Time`` ユーティリティを動かすために、CakePHP は
+内部的には、この ``FrozenTime`` ユーティリティを動かすために、CakePHP は
 `Chronos <https://github.com/cakephp/chronos>`_ を利用しています。
-``Chronos`` と ``DateTime`` でできることはなんでも、 ``Time`` と ``Date`` ですることができます。
-
-.. note::
-    3.2.0 以前の CakePHP では `Carbon
-    <https://github.com/briannesbitt/Carbon>`__
-    が使われていました。
+``Chronos`` と ``DateTime`` でできることはなんでも、 ``FrozenTime`` と ``FrozenDate`` ですることができます。
 
 Chronos についてより詳しく知りたい場合は `API ドキュメント
 <https://api.cakephp.org/chronos/1.0/>`_ をご覧ください。
@@ -46,79 +40,74 @@ Chronos についてより詳しく知りたい場合は `API ドキュメント
 Time インスタンスを作成する
 ===========================
 
-``Time`` インスタンスを作成するにはいくつかの方法があります。 ::
+``FrozenTime`` インスタンスを作成するにはいくつかの方法があります。 ::
 
-    use Cake\I18n\Time;
+    use Cake\I18n\FrozenTime;
 
     // 日時文字列から作成
-    $time = Time::createFromFormat(
+    $time = FrozenTime::createFromFormat(
         'Y-m-d H:i:s',
         $datetime,
         'America/New_York'
     );
 
     // タイムスタンプから作成
-    $time = Time::createFromTimestamp($ts);
+    $time = FrozenTime::createFromTimestamp($ts);
 
     // 現在時刻を取得
-    $time = Time::now();
+    $time = FrozenTime::now();
 
-    // あと、 'new' を使用して
-    $time = new Time('2014-01-10 11:11', 'America/New_York');
+    // または 'new' を使用して
+    $time = new FrozenTime('2014-01-10 11:11', 'America/New_York');
 
-    $time = new Time('2 hours ago');
+    $time = new FrozenTime('2 hours ago');
 
-``Time`` クラスのコンストラクターは、内部の PHP クラスである ``Datetime`` が受け取れる、
+``FrozenTime`` クラスのコンストラクターは、内部の PHP クラスである ``DateTimeImmutable`` が受け取れる、
 あらゆるパラメーターを受け取ることができます。数値や数字文字列を渡したとき、
 UNIX タイムスタンプとして解釈されます。
 
 テストケースでは、 ``setTestNow()`` を使うことで ``now()`` をモックアップできます。 ::
 
     // 時間の固定
-    $now = new Time('2014-04-12 12:22:30');
-    Time::setTestNow($now);
+    $now = new FrozenTime('2014-04-12 12:22:30');
+    FrozenTime::setTestNow($now);
 
     // 結果は '2014-04-12 12:22:30'
-    $now = Time::now();
+    $now = FrozenTime::now();
 
     // 結果は '2014-04-12 12:22:30'
-    $now = Time::parse('now');
+    $now = FrozenTime::parse('now');
 
 操作
 ====
 
-いったん作成した後は、セッターメソッドを使用することで ``Time`` インスタンスを操作できます。 ::
+いったん作成した後は、セッターメソッドを使用することで ``FrozenTime`` インスタンスを操作できます。 ::
 
-    $now = Time::now();
+    $now = FrozenTime::now();
     $now->year(2013)
         ->month(10)
         ->day(31);
 
 PHP のビルトインの ``DateTime`` クラスで提供されているメソッドも使用できます。 ::
 
-    $now->setDate(2013, 10, 31);
+    $now = $now->setDate(2013, 10, 31);
 
 日付はコンポーネントの引き算や足し算で編集できます。 ::
 
-    $now = Time::now();
-    $now->subDays(5);
-    $now->addMonth(1);
+    $now = FrozenTime::now();
+    $now = $now->subDays(5)
+        ->addMonth(1);
 
-    // strtotime で使用する文字列
-    $now->modify('+5 days');
+    // strtotime文字列を使用
+    $now = $now->modify('+5 days');
 
 プロパティーにアクセスすることで日付の内部コンポーネントを取得することができます。 ::
 
-    $now = Time::now();
+    $now = FrozenTime::now();
     echo $now->year; // 2014
     echo $now->month; // 5
     echo $now->day; // 10
     echo $now->timezone; // America/New_York
-
-日付を編集する際に、直接これらのプロパティーを指定することもできます。 ::
-
-    $time->year = 2015;
-    $time->timezone = 'Europe/Paris';
 
 フォーマットする
 ================
@@ -180,9 +169,6 @@ http://www.icu-project.org/apiref/icu4c/classSimpleDateFormat.html#details.
 * hebrew
 * coptic
 * ethiopic
-
-.. versionadded:: 3.1
-    グレゴリオ暦以外の暦のサポートは 3.1 で追加されました。
 
 .. note::
    IntlDateFormatter::FULL のような文字列定数のために Intl は ICU ライブラリーを使用します。
@@ -342,8 +328,6 @@ http://www.icu-project.org/apiref/icu4c/classSimpleDateFormat.html#details.
 ====
 
 .. php:class: Date
-
-.. versionadded:: 3.2
 
 CakePHP 内の ``Date`` クラスの実装は、API や :php:class:`Cake\\I18n\\Time` メソッドと同じです。
 ``Time`` と ``Date`` の主要な違いは、 ``Date`` は時刻の成分を記録せず、かつ常に UTC であることです。

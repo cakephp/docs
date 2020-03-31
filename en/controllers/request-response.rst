@@ -115,6 +115,11 @@ For non-existent names the ``$default`` value will be returned::
 You can also use :ref:`body-parser-middleware` to parse request body of different
 content types into an array, so that it's accessible through ``ServerRequest::getData()``.
 
+If you want to access all the data parameters you can use
+``getParsedBody()``::
+
+    $data = $this->request->getParsedBody();
+    
 .. _request-file-uploads:
 
 File Uploads
@@ -125,11 +130,6 @@ method described above. For example, a file from an input element with a name at
 be accessed like this::
 
     $attachment = $this->request->getData('attachment');
-
-By default file uploads are represented in the request data as objects that implement
-`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__.
-In the above example, ``$attachment`` would hold an object, in the current implementation it would by default be an
-instance of ``\Zend\Diactoros\UploadedFile``.
 
 By default file uploads are represented in the request data as objects that implement
 `\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__. In the current
@@ -205,7 +205,7 @@ Returns all uploaded files in a normalized array structure. For the above exampl
 ``attachment``, the structure would look like::
 
     [
-          'attachment' => object(Zend\Diactoros\UploadedFile) {
+          'attachment' => object(Laminas\Diactoros\UploadedFile) {
               // ...
           }
     ]
@@ -791,17 +791,17 @@ To set a string as the response body, do the following::
 .. php:method:: withBody($body)
 
 To set the response body, use the ``withBody()`` method, which is provided by the
-:php:class:`Zend\\Diactoros\\MessageTrait`::
+:php:class:`Laminas\\Diactoros\\MessageTrait`::
 
     $response = $response->withBody($stream);
 
 Be sure that ``$stream`` is a :php:class:`Psr\\Http\\Message\\StreamInterface` object.
 See below on how to create a new stream.
 
-You can also stream responses from files using :php:class:`Zend\\Diactoros\\Stream` streams::
+You can also stream responses from files using :php:class:`Laminas\\Diactoros\\Stream` streams::
 
     // To stream from a file
-    use Zend\Diactoros\Stream;
+    use Laminas\Diactoros\Stream;
 
     $stream = new Stream('/path/to/file', 'rb');
     $response = $response->withBody($stream);

@@ -101,7 +101,7 @@ following configuration keys are used:
 - ``'bcc'``: Mailer or array of blind carbon copy. See ``Mailer::setBcc()``.
 - ``'replyTo'``: Mailer or array to reply the e-mail. See ``Mailer::setReplyTo()``.
 - ``'readReceipt'``: Mailer address or an array of addresses to receive the
-  receipt of read. See ``Mailer::readReceipt()``.
+  receipt of read. See ``Mailer::setReadReceipt()``.
 - ``'returnPath'``: Mailer address or an array of addresses to return if have
   some error. See ``Mailer::setReturnPath()``.
 - ``'messageId'``: Message ID of e-mail. See ``Mailer::setMessageId()``.
@@ -187,7 +187,7 @@ This would use the following template files:
 When sending templated emails you have the option of sending either
 ``text``, ``html`` or ``both``.
 
-You can set all view related config using the view bulder instance got by
+You can set all view related config using the view builder instance got by
 ``Mailer::viewBuilder()`` similar to how you do the same in controller.
 
 You can set view variables with ``Mailer::setViewVars()``::

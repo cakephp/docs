@@ -32,7 +32,6 @@ imports::
     use Authorization\Middleware\AuthorizationMiddleware;
     use Authorization\Policy\OrmResolver;
     use Psr\Http\Message\ResponseInterface;
-    use Psr\Http\Message\ServerRequestInterface;
 
 Add the ``AuthorizationProviderInterface`` to the implemented interfaces on your application::
 
@@ -136,7 +135,7 @@ With our policy created we can start checking authorization in each controller
 action. If we forget to check or skip authorization in an controller action the
 Authorization plugin will raise an exception letting us know we forgot to apply
 authorization. In **src/Controller/ArticlesController.php** add the following to
-the ``add`` and ``edit`` methods::
+the ``add``, ``edit`` and ``delete`` methods::
 
     public function add()
     {

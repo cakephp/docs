@@ -15,8 +15,6 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
     :maxdepth: 1
 
     /controllers/components/authentication
-    /controllers/components/cookie
-    /controllers/components/csrf
     /controllers/components/flash
     /controllers/components/security
     /controllers/components/pagination
@@ -35,14 +33,13 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 
     class PostsController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
-            $this->loadComponent('Auth', [
-                'authorize' => 'Controller',
-                'loginAction' => ['controller' => 'Users', 'action' => 'login']
+            $this->loadComponent('RequestHandler', [
+                'viewClassMap' => ['json' => 'AppJsonView'],
             ]);
-            $this->loadComponent('Cookie', ['expires' => '1 day']);
+            $this->loadComponent('Security', ['blackholeCallback' => 'blackhole']);
         }
 
     }
@@ -51,22 +48,19 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 しばしば、コントローラーの ``beforeFilter()`` メソッドで行われます。
 上記は、次のように表現することもできます。 ::
 
-    public function beforeFilter(Event $event)
+    public function beforeFilter(EventInterface $event)
     {
-        $this->Auth->config('authorize', ['controller']);
-        $this->Auth->config('loginAction', ['controller' => 'Users', 'action' => 'login']);
-
-        $this->Cookie->config('name', 'CookieMonster');
+        $this->RequestHandler->setConfig('viewClassMap', ['rss' => 'MyRssView']);
     }
 
-コンポーネントは、ヘルパーと同じように、コンポーネントのすべての設定データを
-取得および設定するために使用されている ``config()`` メソッドを実装しています。 ::
+コンポーネントは、ヘルパーと同じように、設定データを取得および設定するために使用されている
+``getConfig()`` と ``setConfig()`` メソッドを実装しています。 ::
 
     // 設定データの読み込み
-    $this->Auth->config('loginAction');
+    $this->RequestHandler->getConfig('viewClassMap');
 
     // 設定をセット
-    $this->Csrf->config('cookieName', 'token');
+    $this->Csrf->setConfig('cookieName', 'token');
 
 コンポーネントは、ヘルパーと同じように、``config()`` でアクセス可能な
 ``$_config`` プロパティーを作成するためにコンストラクターの設定で自分の
@@ -134,7 +128,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 
     class PostsController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Flash');
@@ -196,7 +190,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
     // コントローラーの中で
     // 標準の $this->Csrf と同様に
     // 新しいコンポーネントを $this->Math として利用可能にします。
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Math');
@@ -208,7 +202,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 このパラメーターはコンポーネントによって処理することができます。 ::
 
     // コントローラーの中で
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Math', [
@@ -257,7 +251,6 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 
     class ExistingComponent extends Component
     {
-
         public function foo()
         {
             // ...
@@ -275,12 +268,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 コンポーネント内から、_registry を介して現在のコントローラーに
 アクセスすることができます。 ::
 
-    $controller = $this->_registry->getController();
-
-任意のコールバックメソッドではイベントオブジェクトからコントローラーに
-アクセスすることができます。 ::
-
-    $controller = $event->getSubject();
+    $controller = $this->getController();
 
 コンポーネントのコールバック
 ============================
@@ -288,32 +276,46 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 また、コンポーネントは、リクエストサイクルを増強することができる、
 いくつかのリクエストライフサイクルコールバックを提供しています。
 
-.. php:method:: beforeFilter(Event $event)
+.. php:method:: beforeFilter(EventInterface $event)
 
     コントローラーの beforeFilter メソッドの前に呼び出されますが、
     コントローラーのinitialize() メソッドの *後* です。
 
-.. php:method:: startup(Event $event)
+.. php:method:: startup(EventInterface $event)
 
     コントローラーの beforeFilter メソッドの後、コントローラーの現在の
     アクションハンドラの前に呼び出されます。
 
-.. php:method:: beforeRender(Event $event)
+.. php:method:: beforeRender(EventInterface $event)
 
     コントローラーがリクエストされたアクションのロジックを実行した後、
     ビューとレイアウトが描画される前に呼び出されます。
 
-.. php:method:: shutdown(Event $event)
+.. php:method:: shutdown(EventInterface $event)
 
     出力結果がブラウザーに送信される前に呼び出されます。
 
-.. php:method:: beforeRedirect(Event $event, $url, Response $response)
+.. php:method:: beforeRedirect(EventInterface $event, $url, Response $response)
 
     コントローラーの redirect メソッドが呼び出された時に、
     他のアクションより先に呼びだされます。このメソッドが ``false`` を返す時、
     コントローラーはリクエストのリダイレクトを中断します。
     $url と $response パラメーターを使用すると、リダイレクト先やレスポンスの
     任意の他のヘッダーを検査や変更することができます。
+
+コンポーネントイベントでのリダイレクトの使用
+============================================
+
+コンポーネントのコールバックメソッド内からリダイレクトするには、次のようにします。 ::
+
+    public function beforeFilter(EventInterface $event)
+    {
+        $event->stopPropagation();
+        return $this->getController()->redirect('/');
+    }
+
+イベントを停止することで、CakePHPに他のコンポーネントのコールバックを実行させたくないこと、
+そしてコントローラがこれ以上アクションを処理してはいけないことを知らせます。
 
 .. meta::
     :title lang=ja: コンポーネント

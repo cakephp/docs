@@ -196,7 +196,7 @@ Http
   クッキーの存在をチェックするために ``has()`` を使用してください。
 * ``Cake\Http\ResponseEmitter::emit()`` のシグネチャが変更され、 2 番目の引数がなくなりました。
 * ``App.mergeFilesAsObjects`` のデフォルト値は ``true`` になりました。アプリケーションがファイルアップロードを使用する場合、
-  このフラグを ``false`` に設定することで、 3.x の動作との互換性をできます。
+  このフラグを ``false`` に設定することで、 3.x の動作との互換性を維持できます。
 * ``Cake\Http\Response::getCookie()`` によって返される配列キーが変更されました。
   ``expire`` が ``expires`` に、 ``httpOnly`` が ``httponly`` に変わりました。
 
