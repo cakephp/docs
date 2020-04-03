@@ -321,7 +321,26 @@ To redirect from within a component callback method you can use the following::
 
 By stopping the event you let CakePHP know that you don't want any other
 component callbacks to run, and that the controller should not handle the action
-any further.
+any further. As of 4.1.0 you can raise a ``RedirectException`` to signal
+a redirect::
+
+    use Cake\Http\Exception\RedirectException;
+    use Cake\Routing\Router;
+
+    public function beforeFilter(EventInterface $event)
+    {
+        throw new RedirectException(Router::url('/'))
+    }
+
+Raising an exception will halt all other event listeners and create a new
+response that doesn't retain or inherit any of the current response's headers.
+When raising a ``RedirectException`` you can include additional headers::
+
+    throw new RedirectException(Router::url('/'), 302, [
+        'Header-Key' => 'value',
+    ]);
+
+.. versionadded:: 4.1.0
 
 .. meta::
     :title lang=en: Components
