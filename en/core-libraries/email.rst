@@ -152,7 +152,7 @@ The templates for emails reside in a special folder ``templates/email`` of your
 application. Mailer views can also use layouts and elements just like normal views::
 
     $mailer = new Mailer();
-    $mailer = $mailer
+    $mailer
                 ->setEmailFormat('html')
                 ->setTo('bob@example.com')
                 ->setFrom('app@domain.com')
@@ -167,7 +167,7 @@ and **templates/layout/email/html/fancy.php** for the layout. You can
 send multipart templated email messages as well::
 
     $mailer = new Mailer();
-    $mailer = $mailer
+    $mailer
                 ->setEmailFormat('both')
                 ->setTo('bob@example.com')
                 ->setFrom('app@domain.com')
