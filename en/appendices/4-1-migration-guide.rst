@@ -42,6 +42,12 @@ ORM
 * ``QueryExpression::or_()`` and ``QueryExpression::and_()`` have been
   deprecated. Use ``or()`` and ``and()`` instead.
 
+Routing
+-------
+
+* ``Cake\Routing\Exception\RedirectException`` is deprecated. Use
+  ``Cake\Http\Exception\RedirectException`` instead.
+
 View
 ----
 
@@ -70,7 +76,7 @@ ORM
 
 * BelongsToMany associations now respect the bindingKey set in the junction table's BelongsTo association.
   Previously, the target table's primary key was always used instead.
-  
+
 TestSuite
 ---------
 
@@ -113,6 +119,17 @@ Error
   respectively.
 * The ``Debugger.editor`` configure value has been added. This value is used as
   the preferred editor link format.
+* The ``ErrorHandlerMiddleware`` now handles
+  ``Http\Exception\RedirectException`` and converts those exceptions into HTTP
+  redirect responses.
+
+Http
+----
+
+* ``Cake\Http\Exception\RedirectException`` was added. This exception replaces
+  the ``RedirectException`` in the Routing package and can be raised anywhere in
+  your application to signal to the error handling middleware to create
+  a redirect response.
 
 Log
 ---
