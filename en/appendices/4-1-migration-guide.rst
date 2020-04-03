@@ -119,7 +119,7 @@ Error
   respectively.
 * The ``Debugger.editor`` configure value has been added. This value is used as
   the preferred editor link format.
-* The ``ErrorHandlerMiddleware`` now handles
+* ``ErrorHandlerMiddleware`` now handles
   ``Http\Exception\RedirectException`` and converts those exceptions into HTTP
   redirect responses.
 
