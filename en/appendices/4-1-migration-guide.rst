@@ -70,7 +70,7 @@ ORM
 
 * BelongsToMany associations now respect the bindingKey set in the junction table's BelongsTo association.
   Previously, the target table's primary key was always used instead.
-  
+
 TestSuite
 ---------
 
@@ -119,6 +119,12 @@ Log
 
 * Log messages can now contain ``{foo}`` style placeholders. These placeholders
   will be replaced by values from the ``$context`` parameter if available.
+
+ORM
+---
+
+* The ORM now triggers an ``Model.afterMarshal`` event which is triggered after
+  each entity is marshaled from request data.
 
 TestSuite
 ---------
