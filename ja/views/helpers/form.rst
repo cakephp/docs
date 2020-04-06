@@ -2337,7 +2337,7 @@ CakePHP の多くのヘルパーと同じように、FormHelper は、
         'templates' => 'app_form',
     ]);
 
-これは、 **config/app_form.php** の中のタグを読み込みます。
+これは、**config/app_form.php**ファイルを作成し **config/app_form.php** の中のタグを読み込みます。
 このファイルには、名前で索引付けされたテンプレートの配列が含まれている必要があります。 ::
 
     // config/app_form.php の中で
